@@ -229,8 +229,8 @@ glabel L800730F8_4E4F8
 /* 4E558 80073158 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 4E55C 8007315C 0220202D */  daddu     $a0, $s1, $zero
 /* 4E560 80073160 906200AA */  lbu       $v0, 0xaa($v1)
-/* 4E564 80073164 3C05800A */  lui       $a1, %hi(D_8009A650)
-/* 4E568 80073168 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
+/* 4E564 80073164 3C05800A */  lui       $a1, %hi(gOverrideFlags)
+/* 4E568 80073168 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)
 /* 4E56C 8007316C 34420001 */  ori       $v0, $v0, 1
 /* 4E570 80073170 A06200AA */  sb        $v0, 0xaa($v1)
 /* 4E574 80073174 8CA20000 */  lw        $v0, ($a1)

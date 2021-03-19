@@ -54,8 +54,8 @@ glabel func_802B6000_E27F40
 /* E28000 802B60C0 0C03A5D8 */  jal       open_status_menu_long
 /* E28004 802B60C4 00000000 */   nop
 /* E28008 802B60C8 240400E8 */  addiu     $a0, $zero, 0xe8
-/* E2800C 802B60CC 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* E28010 802B60D0 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* E2800C 802B60CC 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* E28010 802B60D0 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* E28014 802B60D4 8C620000 */  lw        $v0, ($v1)
 /* E28018 802B60D8 0000282D */  daddu     $a1, $zero, $zero
 /* E2801C 802B60DC 34420040 */  ori       $v0, $v0, 0x40
@@ -538,8 +538,8 @@ glabel L802B67BC_E286FC
 /* E2871C 802B67DC 3C03FF7F */  lui       $v1, 0xff7f
 /* E28720 802B67E0 3463FFFF */  ori       $v1, $v1, 0xffff
 /* E28724 802B67E4 8E020000 */  lw        $v0, ($s0)
-/* E28728 802B67E8 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* E2872C 802B67EC 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* E28728 802B67E8 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* E2872C 802B67EC 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* E28730 802B67F0 00431024 */  and       $v0, $v0, $v1
 /* E28734 802B67F4 AE020000 */  sw        $v0, ($s0)
 /* E28738 802B67F8 8C820000 */  lw        $v0, ($a0)

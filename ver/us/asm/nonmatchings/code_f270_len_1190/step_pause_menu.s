@@ -34,8 +34,8 @@ glabel step_pause_menu
 /* FDEC 800349EC 3C01800A */  lui       $at, %hi(D_800A0920)
 /* FDF0 800349F0 A0220920 */  sb        $v0, %lo(D_800A0920)($at)
 /* FDF4 800349F4 24020002 */  addiu     $v0, $zero, 2
-/* FDF8 800349F8 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* FDFC 800349FC 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* FDF8 800349F8 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* FDFC 800349FC 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* FE00 80034A00 A2020000 */  sb        $v0, ($s0)
 /* FE04 80034A04 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
 /* FE08 80034A08 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
@@ -129,8 +129,8 @@ glabel step_pause_menu
 /* FF60 80034B60 2484795C */   addiu    $a0, $a0, %lo(D_8007795C)
 /* FF64 80034B64 0C091018 */  jal       pause_init
 /* FF68 80034B68 00000000 */   nop
-/* FF6C 80034B6C 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* FF70 80034B70 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* FF6C 80034B6C 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* FF70 80034B70 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* FF74 80034B74 8C820000 */  lw        $v0, ($a0)
 /* FF78 80034B78 2403FFF7 */  addiu     $v1, $zero, -9
 /* FF7C 80034B7C 00431024 */  and       $v0, $v0, $v1

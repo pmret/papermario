@@ -14,8 +14,8 @@ glabel D_8009839C
 glabel begin_state_title_screen
 /* 121F0 80036DF0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 121F4 80036DF4 AFB20028 */  sw        $s2, 0x28($sp)
-/* 121F8 80036DF8 3C12800A */  lui       $s2, %hi(D_8009A650)
-/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, %lo(D_8009A650)
+/* 121F8 80036DF8 3C12800A */  lui       $s2, %hi(gOverrideFlags)
+/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, %lo(gOverrideFlags)
 /* 12200 80036E00 24020001 */  addiu     $v0, $zero, 1
 /* 12204 80036E04 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 12208 80036E08 AFB10024 */  sw        $s1, 0x24($sp)

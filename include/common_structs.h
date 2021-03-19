@@ -192,7 +192,7 @@ typedef struct PlayerData {
     /* 0x2B4 */ u32 totalCoinsEarned;
     /* 0x2B8 */ s16 idleFrameCounter; /* frames with no inputs, overflows ever ~36 minutes of idling */
     /* 0x2BA */ char unk_2BA[2];
-    /* 0x2BC */ s32 frameCounter; /* increases by 2 per frame */
+    /* 0x2BC */ u32 frameCounter; /* increases by 2 per frame */
     /* 0x2C0 */ s16 quizzesAnswered;
     /* 0x2C2 */ s16 quizzesCorrect;
     /* 0x2C4 */ s32 unk_2C4[12];
@@ -666,7 +666,8 @@ typedef struct BattleStatus {
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
     /* 0x470 */ char unk_470[10];
     /* 0x47A */ u8 currentBattleSection;
-    /* 0x47B */ char unk_47B[21];
+    /* 0x47B */ u8 unk_47B;
+    /* 0x47C */ char unk_47C[20];
 } BattleStatus; // size = 0x490
 
 typedef struct TextureHeader {
@@ -1734,11 +1735,10 @@ typedef struct struct802E4B10 {
 // END ENTITY-SPECIFIC STRUCTS
 
 typedef struct {
-    /* 0x00000 */ Light l1[2];
-    /* 0x00018 */ Light l2[2];
+    /* 0x00000 */ LookAt lookAt[2];
     /* 0x00030 */ Matrix4s camPerspMatrix[8]; // could only be length 4, unsure
-    /* 0x00230 */ s32 mainGfx[0x4100];
-    /* 0x10630 */ s32 smallGfx[0x400]; // used by gfx_task_background
+    /* 0x00230 */ Gfx mainGfx[0x2080];
+    /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 

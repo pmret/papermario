@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_80240038_953FF8);
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024005C_95401C);
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_56/953FC0", func_8024009C_95405C);
 

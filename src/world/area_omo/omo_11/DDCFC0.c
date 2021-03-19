@@ -1,6 +1,6 @@
 #include "omo_11.h"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407AC_DDCFDC);
 

@@ -25,8 +25,8 @@ glabel func_80033BC0
 /* F010 80033C10 2402FFFF */  addiu     $v0, $zero, -1
 /* F014 80033C14 0C017CBC */  jal       nuGfxSetCfb
 /* F018 80033C18 A0C20000 */   sb       $v0, ($a2)
-/* F01C 80033C1C 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* F020 80033C20 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* F01C 80033C1C 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* F020 80033C20 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* F024 80033C24 8C820000 */  lw        $v0, ($a0)
 /* F028 80033C28 2403FFF7 */  addiu     $v1, $zero, -9
 /* F02C 80033C2C 00431024 */  and       $v0, $v0, $v1

@@ -61,7 +61,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0].s = 0;
-        D_8009A650[0] |= 0x10;
+        OVERRIDE_FLAG_SET(0x10);
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
         }
@@ -102,7 +102,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == 1) {
             decrement_status_menu_disabled();
-            D_8009A650[0] &= ~0x10;
+            OVERRIDE_FLAG_UNSET(0x10);
             return ApiStatus_DONE1;
         }
     }
@@ -159,10 +159,10 @@ ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
 
     if (get_variable(script, *script->ptrReadPos) != 0) {
         battleStatus2->unk_92 |= 1;
-        D_8009A650[0] |= 0x80;
+        OVERRIDE_FLAG_SET(0x80);
     } else {
         battleStatus2->unk_92 &= ~1;
-        D_8009A650[0] &= ~0x80;
+        OVERRIDE_FLAG_UNSET(0x80);
     }
 
     return ApiStatus_DONE2;

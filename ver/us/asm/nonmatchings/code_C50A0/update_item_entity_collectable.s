@@ -607,8 +607,8 @@ glabel update_item_entity_collectable
 /* CB20C 80134B0C 30620200 */  andi      $v0, $v1, 0x200
 /* CB210 80134B10 14400010 */  bnez      $v0, .L80134B54
 /* CB214 80134B14 30622000 */   andi     $v0, $v1, 0x2000
-/* CB218 80134B18 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* CB21C 80134B1C 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* CB218 80134B18 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* CB21C 80134B1C 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* CB220 80134B20 30420300 */  andi      $v0, $v0, 0x300
 /* CB224 80134B24 1440000B */  bnez      $v0, .L80134B54
 /* CB228 80134B28 30622000 */   andi     $v0, $v1, 0x2000
@@ -1282,8 +1282,8 @@ glabel update_item_entity_collectable
 .L801354C8:
 /* CBBC8 801354C8 0240202D */  daddu     $a0, $s2, $zero
 .L801354CC:
-/* CBBCC 801354CC 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* CBBD0 801354D0 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* CBBCC 801354CC 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* CBBD0 801354D0 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* CBBD4 801354D4 3C018015 */  lui       $at, %hi(D_801565A8)
 /* CBBD8 801354D8 A42065A8 */  sh        $zero, %lo(D_801565A8)($at)
 /* CBBDC 801354DC 8C430000 */  lw        $v1, ($v0)
@@ -1317,8 +1317,8 @@ glabel update_item_entity_collectable
 /* CBC40 80135540 3C018015 */  lui       $at, %hi(D_801565A4)
 /* CBC44 80135544 A42265A4 */  sh        $v0, %lo(D_801565A4)($at)
 /* CBC48 80135548 2402001C */  addiu     $v0, $zero, 0x1c
-/* CBC4C 8013554C 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* CBC50 80135550 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* CBC4C 8013554C 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* CBC50 80135550 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* CBC54 80135554 A242001B */  sb        $v0, 0x1b($s2)
 /* CBC58 80135558 A240001A */  sb        $zero, 0x1a($s2)
 /* CBC5C 8013555C 8C620000 */  lw        $v0, ($v1)
