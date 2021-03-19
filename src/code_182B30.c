@@ -42,17 +42,53 @@ void func_80254610(Actor* actor) {
     }
 }
 
-INCLUDE_ASM(s32, "code_182B30", enable_partner_blur);
+void enable_partner_blur(void) {
+    enable_actor_blur(gBattleStatus.partnerActor);
+}
 
-INCLUDE_ASM(s32, "code_182B30", disable_partner_blur);
+void disable_partner_blur(void) {
+    disable_actor_blur(gBattleStatus.partnerActor);
+}
 
-INCLUDE_ASM(s32, "code_182B30", reset_partner_blur);
+void reset_partner_blur(void) {
+    reset_actor_blur(gBattleStatus.partnerActor);
+}
 
 void func_802546B0(void) {
     func_80254610(gBattleStatus.partnerActor);
 }
 
+#ifdef NON_MATCHING
+
+void enable_player_blur(void) {
+    Actor* playerActor = gBattleStatus.playerActor;
+    ActorPart* partsTable = playerActor->partsTable;
+    DecorationTable* decorationTable = partsTable->decorationTable;
+    s32 i;
+    u8* new_var;
+
+    decorationTable->effectType = 0;
+    decorationTable->unk_7DB++;
+    playerActor->flags |= 0x10000000;
+    decorationTable->unk_7D8 = 0;
+    decorationTable->unk_7D9 = 0;
+
+    for (i = 0; i < ARRAY_COUNT(decorationTable->posX); i++) {
+        decorationTable->posX[i] = partsTable->currentPos.x;
+        decorationTable->posY[i] = partsTable->currentPos.y;
+        decorationTable->posZ[i] = partsTable->currentPos.z;
+        decorationTable->scale[i] = playerActor->yaw;
+        decorationTable->rotationPivotOffsetX[i] = (s32)(playerActor->rotationPivotOffset.x * playerActor->scalingFactor);
+        decorationTable->rotationPivotOffsetY[i] = (s32)(playerActor->rotationPivotOffset.y * playerActor->scalingFactor);
+
+        decorationTable->rotX[i] = clamp_angle(playerActor->rotation.x) * 0.5f;
+        decorationTable->rotY[i] = clamp_angle(playerActor->rotation.y) * 0.5f;
+        decorationTable->rotZ[i] = clamp_angle(playerActor->rotation.z) * 0.5f;
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_182B30", enable_player_blur);
+#endif
 
 void disable_player_blur(void) {
     DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;
@@ -318,8 +354,13 @@ void func_8025DBC8(void) {
 
 INCLUDE_ASM(s32, "code_182B30", func_8025DBD0);
 
-INCLUDE_ASM(s32, "code_182B30", func_8025DD40);
+void func_8025DD40(ActorPart* actorPart, s32 arg1) {
+    actorPart->decorationTable->unk_8025D160[arg1]->unk_8025D160_2->unk_2C = 5;
+}
 
 INCLUDE_ASM(s32, "code_182B30", func_8025DD60);
 
-INCLUDE_ASM(s32, "code_182B30", func_8025DE88);
+void func_8025DE88(ActorPart* actorPart, s32 arg1) {
+    actorPart->decorationTable->unk_8025D160[arg1]->unk_00 |= 0x10;
+}
+
