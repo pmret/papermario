@@ -274,6 +274,7 @@ void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
 void func_80138D88(s32, s32, s32, s32, f32);
+s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 
 // Dead functions:
 f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2

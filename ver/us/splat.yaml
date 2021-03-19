@@ -2254,14 +2254,14 @@ segments:
     subsections:
     - [0x715850, c]
     - [0x715E50, data]
-  - name: battle/item/fire_flower
+  - name: battle/item/fire_flower/
     type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x716C60, c]
-    - [0x717060, data]
+    - [0x716C60,     c, lib]
+    - [0x717060, .data, lib]
   - name: battle/item/dusty_hammer/
     ld_name: battle_item_dusty_hammer
     type: code
