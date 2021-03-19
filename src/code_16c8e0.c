@@ -215,7 +215,71 @@ INCLUDE_ASM(s32, "code_16c8e0", func_802409F4);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80240AA8);
 
-INCLUDE_ASM(s32, "code_16c8e0", delete_actor);
+//INCLUDE_ASM(s32, "code_16c8e0", delete_actor);
+void delete_actor(Actor *actor) {
+    ActorPart* partsTable;
+    ActorPart* actorPartTemp;
+    BattleStatus* battleStatus;
+    s32 i;
+
+    // TODO hard-coded
+    for (i = 0; i < 2; i++) {
+        remove_actor_decoration(actor, i);
+    }
+    if (actor->idleScript != NULL) {
+        kill_script_by_ID(actor->idleScriptID);
+    }
+    if (actor->onHitScript != NULL) {
+        kill_script_by_ID(actor->onHitID);
+    }
+    if (actor->takeTurnScript != NULL) {
+        kill_script_by_ID(actor->takeTurnID);
+    }
+    func_80266EE8(actor, 0);
+
+    partsTable = actor->partsTable;
+
+    while (partsTable != NULL) {
+        if (!(partsTable->flags & 0x4)) {
+            func_80112328(partsTable->shadow);
+        }
+
+        if (partsTable->idleAnimations != NULL) {
+            func_802DE894(partsTable->unk_84, 0, 0, 0, 0, 0, 0);
+
+            ASSERT(func_802DE5E8(partsTable->unk_84) == 0);
+
+            if (!(partsTable->flags & 0x80000000)) {
+                heap_free(partsTable->movement);
+            }
+
+            if (!(partsTable->flags & 0x2)) {
+                heap_free(partsTable->decorationTable);
+            }
+        }
+        actorPartTemp = partsTable->nextPart;
+        heap_free(partsTable);
+        partsTable = actorPartTemp;
+    }
+
+    func_80112328(actor->shadow);
+    func_800476F4(actor->unk_436);
+    remove_effect(actor->ptrDefuffIcon);
+
+    if (actor->unk_200 != NULL) {
+        actor->unk_200[3][9] = 0;
+    }
+
+    battleStatus = &gBattleStatus;
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        if (battleStatus->enemyActors[i] == actor) {
+            battleStatus->enemyActors[i] = NULL;
+            break;
+        }
+    }
+
+    heap_free(actor);
+}
 
 void delete_player_actor(Actor* player) {
     struct ActorPart* partsTable;
