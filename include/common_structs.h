@@ -91,7 +91,7 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 typedef struct NpcBlurData {
-    /* 0x00 */ char unk_00;
+    /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 unk_01;
     /* 0x02 */ char unk_02[2];
     /* 0x04 */ f32 xpos[20];
@@ -109,7 +109,7 @@ typedef struct Npc {
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
-    /* 0x024 */ char unk_24[4];
+    /* 0x024 */ s32 unk_24;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
@@ -138,7 +138,9 @@ typedef struct Npc {
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
-    /* 0x0AD */ char unk_AD[659];
+    /* 0x0AD */ char unk_AD[3];
+    /* 0x0B0 */ s32 unk_B0;
+    /* 0x0B4 */ char unk_B4[652];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];

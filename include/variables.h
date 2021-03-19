@@ -145,7 +145,9 @@ extern s16 D_800A095E;
 extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
+extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
+
 
 extern UIPanel gUIPanels[64];
 
@@ -208,6 +210,7 @@ extern s32 gStatsMenuIconIDs[12];
 
 
 extern s32 gGameState;
+extern s16 D_8009A604;
 extern s32 D_8009A64C;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
