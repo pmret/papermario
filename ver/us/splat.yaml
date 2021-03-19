@@ -2398,14 +2398,15 @@ segments:
     subsections:
     - [0x726DD0, c]
     - [0x727120, data]
-  - name: battle/item/dizzy_dial
+  - name: battle/item/dizzy_dial/
     type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x727910, c]
-    - [0x727CE0, data]
+    - [0x727910,       c, lib]
+    - [0x727CE0,   .data, lib]
+    - [0x7285D0, .rodata, lib]
   - name: battle/item/please_come_back
     type: code
     start: 0x7285E0

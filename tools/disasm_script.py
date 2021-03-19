@@ -61,6 +61,10 @@ class ScriptDisassembler:
 
         self.done = False
 
+        self.start_pos = self.bytes.tell()
+        self.end_pos = 0
+        self.instructions = 0
+
     def disassemble(self):
         while True:
             opcode = self.read_word()
@@ -75,7 +79,10 @@ class ScriptDisassembler:
 
             self.disassemble_command(opcode, argc, argv)
 
+            self.instructions += 1
+
             if self.done:
+                self.end_pos = self.bytes.tell()
                 return self.prefix + self.out
 
     def write(self, line):
@@ -654,6 +661,12 @@ if __name__ == "__main__":
         f.seek(offset)
 
         try:
-            print(ScriptDSLDisassembler(f).disassemble(), end="")
+            script = ScriptDSLDisassembler(f)
+            script_text = script.disassemble()
+
+            print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos - 4:X} "
+                  f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+            print()
+            print(script_text, end="")
         except UnsupportedScript:
             print(ScriptDisassembler(f).disassemble(), end="")
