@@ -3,7 +3,7 @@
 import sys
 
 _script_lib = None
-def script_lib():
+def script_lib(offset):
     global _script_lib
 
     if not _script_lib:
@@ -39,12 +39,32 @@ def script_lib():
         symbols = Path(repo_root / "ver" / "current" / "symbol_addrs.txt")
         with open(symbols, "r") as file:
             for line in file.readlines():
-                line = line.split(";")[0]
-
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
-                addr = s[1].split(";")[0].split(" ")[0]
-                _script_lib[int(addr, 16)] = name
+                vaddr = int(s[1].split(";")[0].split(" ")[0], 16)
+
+                raddr = "0xFFFFFFFF"
+                if "rom:" in line:
+                    raddr = line.split("rom:",1)[1]
+                    if " " in raddr:
+                        raddr = raddr.split(" ",1)[0]
+                raddr = raddr.strip()
+
+                if vaddr not in _script_lib:
+                    _script_lib[vaddr] = []
+                _script_lib[vaddr].append([int(raddr, 16), name])
+
+        # Sort the symbols for each vram address by the difference 
+        # between their rom address and the offset passed in.
+        # If offset - rom address goes below 0, it's part of the
+        # previous file, so treat it as min priority, same as a default.
+        # After sorting, the first rom address and name should be the best candidate.
+        for k in _script_lib.keys():
+            for i,entry in enumerate(_script_lib[k]):
+                diff = offset - entry[0]
+                entry[0] = 0xFFFFFFFF if diff < 0 else diff
+                _script_lib[k][i][0] = entry[0]
+            _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
 
 class ScriptDisassembler:
@@ -52,7 +72,7 @@ class ScriptDisassembler:
         self.bytes = bytes
         self.script_name = script_name
 
-        self.symbol_map = { **script_lib(), **symbol_map }
+        self.symbol_map = { **script_lib(self.bytes.tell()), **symbol_map }
 
         self.out = ""
         self.prefix = ""
@@ -103,7 +123,7 @@ class ScriptDisassembler:
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -128,8 +148,8 @@ class ScriptDisassembler:
 
     def addr_ref(self, addr):
         if addr in self.symbol_map:
-            return self.symbol_map[addr]
-        return script_lib().get(addr, f"0x{addr:08X}")
+            return self.symbol_map[addr][0][1]
+        return f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
@@ -382,7 +402,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -610,7 +630,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x43:
             addr = argv[0]
             if addr in self.symbol_map:
-                func_name = self.symbol_map[addr]
+                func_name = self.symbol_map[addr][0][1]
 
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
                 self.write_line(f"{func_name}({argv_str});")

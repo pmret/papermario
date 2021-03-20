@@ -2505,14 +2505,14 @@ segments:
     subsections:
     - [0x731300, c]
     - [0x731EA0, data]
-  - name: battle/item/food
+  - name: battle/item/food/
     type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x7330D0, c]
-    - [0x733700, data]
+    - [0x7330D0,     c, lib]
+    - [0x733700, .data, lib]
   - name: battle/move/hammer
     type: code
     start: 0x7345A0

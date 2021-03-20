@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dizzy_dial
 
-void func_8024ECF8();
-void func_80252B3C();
+ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall);
 
 #endif

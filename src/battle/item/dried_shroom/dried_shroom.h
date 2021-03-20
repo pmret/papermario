@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dried_shroom
 
-void func_802D7520();
-void func_802D75D8();
+ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall);
 
 #endif
