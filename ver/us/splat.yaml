@@ -2246,14 +2246,14 @@ segments:
     subsections:
     - [0x714CF0, c]
     - [0x714DC0, data]
-  - name: battle/item/mushroom
+  - name: battle/item/mushroom/
     type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x715850, c]
-    - [0x715E50, data]
+    - [0x715850,     c, lib]
+    - [0x715E50, .data, lib]
   - name: battle/item/fire_flower/
     type: code
     start: 0x716C60
