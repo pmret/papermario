@@ -1,0 +1,12 @@
+.include "macro.inc"
+
+.section .rodata
+
+glabel D_80253030_8FEE50
+.double 0.65
+
+glabel D_80253038_8FEE58
+.double 0.55
+
+glabel jtbl_80253040_8FEE60
+.word L802428B4_8EE6D4, L802428DC_8EE6FC, L8024293C_8EE75C, L80242974_8EE794, L80242990_8EE7B0, 0, 0, 0
