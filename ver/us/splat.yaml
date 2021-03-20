@@ -2386,14 +2386,14 @@ segments:
     subsections:
     - [0x724CE0, c]
     - [0x725210, data]
-  - name: battle/item/hustle_drink
+  - name: battle/item/hustle_drink/
     type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x725F60, c]
-    - [0x726240, data]
+    - [0x725F60,     c, lib]
+    - [0x726240, .data, lib]
   - name: battle/item/stop_watch
     type: code
     start: 0x726DD0
