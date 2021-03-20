@@ -117,7 +117,7 @@ glabel L8024319C_BE694C
 glabel L802431BC_BE696C
 /* BE696C 802431BC 0260202D */  daddu     $a0, $s3, $zero
 /* BE6970 802431C0 0280282D */  daddu     $a1, $s4, $zero
-/* BE6974 802431C4 0C0909A3 */  jal       func_8024268C_BE5E3C
+/* BE6974 802431C4 0C0909A3 */  jal       arn_04_UnkNpcAIFunc21
 /* BE6978 802431C8 0200302D */   daddu    $a2, $s0, $zero
 /* BE697C 802431CC 8E630070 */  lw        $v1, 0x70($s3)
 /* BE6980 802431D0 24020003 */  addiu     $v0, $zero, 3

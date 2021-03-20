@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240340_918EF0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240514_9190C4);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240644_9191F4);
+#include "world/common/UnkNpcAIFunc21.inc.c"
 
 #include "world/common/UnkNpcAIFunc20.inc.c"
 

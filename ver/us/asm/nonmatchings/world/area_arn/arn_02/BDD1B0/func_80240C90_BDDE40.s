@@ -117,7 +117,7 @@ glabel L80240E14_BDDFC4
 glabel L80240E34_BDDFE4
 /* BDDFE4 80240E34 0260202D */  daddu     $a0, $s3, $zero
 /* BDDFE8 80240E38 0280282D */  daddu     $a1, $s4, $zero
-/* BDDFEC 80240E3C 0C0900C1 */  jal       func_80240304_BDD4B4
+/* BDDFEC 80240E3C 0C0900C1 */  jal       arn_02_UnkNpcAIFunc21
 /* BDDFF0 80240E40 0200302D */   daddu    $a2, $s0, $zero
 /* BDDFF4 80240E44 8E630070 */  lw        $v1, 0x70($s3)
 /* BDDFF8 80240E48 24020003 */  addiu     $v0, $zero, 3
