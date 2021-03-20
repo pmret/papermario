@@ -126,7 +126,7 @@ Script N(PlayerGoHome) = SCRIPT({
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, 8341);
             sleep 10;
         }
     }
@@ -137,7 +137,7 @@ Script N(EatItem) = SCRIPT({
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, 8341);
             sleep 10;
         }
     }

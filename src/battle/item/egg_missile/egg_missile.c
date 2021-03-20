@@ -23,7 +23,7 @@ Gfx N(eggmissile1DL)[] = {
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, &N(egg_missile1_pal_png)),
-    gsDPLoadTextureTile_4b(&N(egg_missile1_png), G_IM_FMT_CI, N(egg_missile1_png_width), 0, 0, 0, N(egg_missile1_png_width) - 1, N(egg_missile1_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureTile_4b(&N(egg_missile1_png), G_IM_FMT_CI, N(egg_missile1_png_width), N(egg_missile1_png_height), 0, 0, N(egg_missile1_png_width) - 1, N(egg_missile1_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
     gsSPVertex(N(eggmissileModel), ARRAY_COUNT(N(eggmissileModel)), 0),

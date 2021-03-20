@@ -1,14 +1,14 @@
-#include "dusty_hammer.h"
-#include "battle/item/dusty_hammer/dusty_hammer.png.h"
+#include "insecticide_herb.h"
+#include "battle/item/insecticide_herb/insecticide_herb.png.h"
 
-Vtx N(dustyhammerModel)[] = {
+Vtx N(insecticideherbModel)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
     { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
     { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
     { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
 };
 
-Gfx N(dustyhammerDL)[] = {
+Gfx N(insecticideherbDL)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -19,30 +19,30 @@ Gfx N(dustyhammerDL)[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, &N(dusty_hammer_pal_png)),
-    gsDPLoadTextureTile_4b(&N(dusty_hammer_png), G_IM_FMT_CI, N(dusty_hammer_png_width), N(dusty_hammer_png_height), 0, 0, N(dusty_hammer_png_width) - 1, N(dusty_hammer_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal16(0, &N(insecticide_herb_pal_png)),
+    gsDPLoadTextureTile_4b(&N(insecticide_herb_png), G_IM_FMT_CI, N(insecticide_herb_png_width), N(insecticide_herb_png_height), 0, 0, N(insecticide_herb_png_width) - 1, N(insecticide_herb_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(dustyhammerModel), ARRAY_COUNT(N(dustyhammerModel)), 0),
+    gsSPVertex(N(insecticideherbModel), ARRAY_COUNT(N(insecticideherbModel)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-s32 N(dustyhammerItemModelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(dustyhammerDL)) / sizeof(s32), &N(dustyhammerDL), 0x00000002, 0x00000000,
+s32 N(insecticideherbItemModelCommandList)[] = {
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(insecticideherbDL)) / sizeof(s32), &N(insecticideherbDL), 0x00000002, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x86;
+Script script = SCRIPT({
+    SI_VAR(10) =c 0x87;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     PlaySound(1018);
     sleep 3;
-    func_802D3474(SI_VAR(10), N(dustyhammerItemModelCommandList));
+    func_802D3474(SI_VAR(10), 0x802A1D30);
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
     func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
@@ -69,12 +69,28 @@ Script N(main) = SCRIPT({
     func_802D39FC(SI_VAR(10), 0.80078125);
     SI_VAR(2) += 5;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    GetItemPower(ItemId_DUSTY_HAMMER, SI_VAR(3), SI_VAR(4));
-    ApplyShrinkFromOwner(SI_VAR(3));
-    ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, SI_VAR(3), 32);
-    SI_VAR(0) += 40;
-    SI_VAR(1) += 10;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    SI_VAR(0) -= 10;
+    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    SI_VAR(0) += 20;
+    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    spawn {
+        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        sleep 3;
+        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        sleep 3;
+        N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    }
+    InitTargetIterator();
+    SetGoalToTarget(ActorID_SELF);
+    N(func_802A123C_72A98C)();
     func_802D3624(SI_VAR(10));
+    if (SI_VAR(9) == 0) {
+        ItemDamageEnemy(SI_VAR(0), 0, 0, 0, 32);
+    } else {
+        InitTargetIterator();
+        SetGoalToTarget(ActorID_SELF);
+        N(func_802A1280_72A9D0)();
+    }
     await N(PlayerGoHome);
 });

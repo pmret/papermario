@@ -2437,14 +2437,17 @@ segments:
     - [0x729DF0,     ci4, egg_missile4, 32, 32]
     - [0x729FF0, palette, egg_missile4]
     - [0x72A010,   .data, egg_missile]
-  - name: battle/item/insecticide_herb
+  - name: battle/item/insecticide_herb/
     type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x72A750, c]
-    - [0x72AB70, data]
+    - [0x72A750,       c, lib]
+    - [0x72AB70,   .data, lib]
+    - [0x72B130,     ci4, insecticide_herb, 32, 32]
+    - [0x72B330, palette, insecticide_herb]
+    - [0x72B350,   .data, insecticide_herb]
   - name: battle/item/fright_jar/
     type: code
     start: 0x72B910

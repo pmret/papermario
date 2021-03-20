@@ -155,7 +155,7 @@ Script N(PlayerGoHome) = SCRIPT({
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, 8341);
             sleep 10;
         }
     }
@@ -166,7 +166,7 @@ Script N(EatItem) = SCRIPT({
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, 8341);
             sleep 10;
         }
     }
@@ -193,7 +193,7 @@ Script N(main) = SCRIPT({
     MultiplyByActorScale(SI_VAR(0));
     SI_VAR(3) += SI_VAR(0);
     spawn {
-        GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) -= 10;
         SetActorSpeed(ActorID_PLAYER, 2.0);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
