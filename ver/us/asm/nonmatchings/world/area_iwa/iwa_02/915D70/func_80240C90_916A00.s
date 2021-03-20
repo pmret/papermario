@@ -135,7 +135,7 @@ glabel L80240E54_916BC4
 glabel L80240E74_916BE4
 /* 916BE4 80240E74 0260202D */  daddu     $a0, $s3, $zero
 /* 916BE8 80240E78 0280282D */  daddu     $a1, $s4, $zero
-/* 916BEC 80240E7C 0C09010A */  jal       func_80240428_916198
+/* 916BEC 80240E7C 0C09010A */  jal       iwa_02_UnkNpcAIFunc22
 /* 916BF0 80240E80 0200302D */   daddu    $a2, $s0, $zero
 glabel L80240E84_916BF4
 /* 916BF4 80240E84 0260202D */  daddu     $a0, $s3, $zero

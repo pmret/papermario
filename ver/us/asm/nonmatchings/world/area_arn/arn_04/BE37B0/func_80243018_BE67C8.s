@@ -135,7 +135,7 @@ glabel L802431DC_BE698C
 glabel L802431FC_BE69AC
 /* BE69AC 802431FC 0260202D */  daddu     $a0, $s3, $zero
 /* BE69B0 80243200 0280282D */  daddu     $a1, $s4, $zero
-/* BE69B4 80243204 0C0909EC */  jal       func_802427B0_BE5F60
+/* BE69B4 80243204 0C0909EC */  jal       arn_04_UnkNpcAIFunc22
 /* BE69B8 80243208 0200302D */   daddu    $a2, $s0, $zero
 glabel L8024320C_BE69BC
 /* BE69BC 8024320C 0260202D */  daddu     $a0, $s3, $zero
