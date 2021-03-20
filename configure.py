@@ -153,6 +153,7 @@ async def main():
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
+    parser.add_argument("--depend-on-s", action="store_true", help="Configure dependencies on .s files for c files that include them")
     args = parser.parse_args()
     versions = args.version
 
@@ -558,7 +559,7 @@ async def main():
         status = await shell_status(f"grep -q SCRIPT\( {c_file}")
 
         for version in versions:
-            s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
+            s_glob = None if not args.depend_on_s else "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
             n.build(
                 obj(c_file),
                 "cc_dsl" if status == 0 else "cc",
