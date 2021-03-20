@@ -210,7 +210,7 @@ glabel L802432E8_BE6A98
 glabel L80243300_BE6AB0
 /* BE6AB0 80243300 0260202D */  daddu     $a0, $s3, $zero
 /* BE6AB4 80243304 0280282D */  daddu     $a1, $s4, $zero
-/* BE6AB8 80243308 0C090BBC */  jal       func_80242EF0_BE66A0
+/* BE6AB8 80243308 0C090BBC */  jal       arn_04_UnkNpcAIFunc19
 /* BE6ABC 8024330C 0200302D */   daddu    $a2, $s0, $zero
 glabel L80243310_BE6AC0
 /* BE6AC0 80243310 0260202D */  daddu     $a0, $s3, $zero

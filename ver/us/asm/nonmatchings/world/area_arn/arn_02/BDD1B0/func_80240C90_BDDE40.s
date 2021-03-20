@@ -210,7 +210,7 @@ glabel L80240F60_BDE110
 glabel L80240F78_BDE128
 /* BDE128 80240F78 0260202D */  daddu     $a0, $s3, $zero
 /* BDE12C 80240F7C 0280282D */  daddu     $a1, $s4, $zero
-/* BDE130 80240F80 0C0902DA */  jal       func_80240B68_BDDD18
+/* BDE130 80240F80 0C0902DA */  jal       arn_02_UnkNpcAIFunc19
 /* BDE134 80240F84 0200302D */   daddu    $a2, $s0, $zero
 glabel L80240F88_BDE138
 /* BDE138 80240F88 0260202D */  daddu     $a0, $s3, $zero

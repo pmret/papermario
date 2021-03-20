@@ -210,7 +210,7 @@ glabel L80243224_9128D4
 glabel L8024323C_9128EC
 /* 9128EC 8024323C 0260202D */  daddu     $a0, $s3, $zero
 /* 9128F0 80243240 0280282D */  daddu     $a1, $s4, $zero
-/* 9128F4 80243244 0C090B8B */  jal       func_80242E2C_9124DC
+/* 9128F4 80243244 0C090B8B */  jal       iwa_01_UnkNpcAIFunc19
 /* 9128F8 80243248 0200302D */   daddu    $a2, $s0, $zero
 glabel L8024324C_9128FC
 /* 9128FC 8024324C 0260202D */  daddu     $a0, $s3, $zero
