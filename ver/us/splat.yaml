@@ -2445,14 +2445,14 @@ segments:
     subsections:
     - [0x72A750, c]
     - [0x72AB70, data]
-  - name: battle/item/fright_jar
+  - name: battle/item/fright_jar/
     type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x72B910, c]
-    - [0x72BC60, data]
+    - [0x72B910,     c, lib]
+    - [0x72BC60, .data, lib]
   - name: battle/item/mystery
     type: code
     start: 0x72C5B0

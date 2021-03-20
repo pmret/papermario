@@ -36,3 +36,4 @@ glabel func_802A12D4_72BBE4
 /* 72BC54 802A1344 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 72BC58 802A1348 8FB00010 */  lw        $s0, 0x10($sp)
 /* 72BC5C 802A134C 03E00008 */  jr        $ra
+nop
