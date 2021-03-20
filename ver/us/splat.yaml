@@ -2472,14 +2472,14 @@ segments:
     subsections:
     - [0x72DB70, c]
     - [0x72DE00, data]
-  - name: battle/item/life_shroom
+  - name: battle/item/life_shroom/
     type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x72E530, c]
-    - [0x72EA20, data]
+    - [0x72E530,     c, lib]
+    - [0x72EA20, .data, lib]
   - name: battle/item/coconut/
     ld_name: battle_item_coconut
     type: code

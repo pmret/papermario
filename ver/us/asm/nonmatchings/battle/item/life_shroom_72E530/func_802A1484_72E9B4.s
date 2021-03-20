@@ -31,3 +31,4 @@ glabel func_802A1484_72E9B4
 /* 72EA14 802A14E4 8FB00010 */  lw        $s0, 0x10($sp)
 /* 72EA18 802A14E8 24020002 */  addiu     $v0, $zero, 2
 /* 72EA1C 802A14EC 03E00008 */  jr        $ra
+nop
