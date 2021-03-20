@@ -1689,7 +1689,7 @@ segments:
     - [0x431FB0, .data, goomba]
     - [0x433970, bin]
     - [0x4398A0, .rodata, battles]
-    - [0x439984, bin]
+    - [0x439984, bin] # TODO change
   - name: battle/area_kmr_part_2/
     type: code
     start: 0x439A90
@@ -3387,7 +3387,6 @@ segments:
     - [0x8C7D90, bin] # rodata
     - [0x8C7DB0, bin] # rodata
     - [0x8C7F70, bin] # rodata
-    - [0x8C7F90, bin] # rodata
   - name: world/area_kmr/kmr_03/
     type: code
     overlay: True
@@ -3420,7 +3419,6 @@ segments:
     - [0x8CC35C, bin]
     - [0x8CC4F0, bin]
     - [0x8CE060, bin] # rodata
-    - [0x8CE070, bin] # rodata
   - name: world/area_kmr/kmr_05/
     type: code
     overlay: True
@@ -3434,7 +3432,6 @@ segments:
     - [0x8D0900, bin]
     - [0x8D0940, bin]
     - [0x8D14A0, bin] # rodata
-    - [0x8D1510, bin] # rodata
   - name: world/area_kmr/kmr_06/
     type: code
     overlay: True
@@ -3448,7 +3445,6 @@ segments:
     - [0x8D3AC0, bin]
     - [0x8D3B30, bin]
     - [0x8D3D50, bin] # rodata
-    - [0x8D3DC0, bin] # rodata
   - name: world/area_kmr/kmr_07/
     type: code
     overlay: True
@@ -3459,7 +3455,6 @@ segments:
     - [0x8D4880, bin]
     - [0x8D49A0, bin]
     - [0x8D5C40, bin] # rodata
-    - [0x8D5E00, bin] # rodata
   - name: world/area_kmr/kmr_09/
     type: code
     overlay: True
@@ -3471,7 +3466,6 @@ segments:
     - [0x8D73C0, bin]
     - [0x8D83B0, bin]
     - [0x8D8460, bin] # rodata
-    - [0x8D84D0, bin] # rodata
   - name: world/area_kmr/kmr_10/
     type: code
     overlay: True
@@ -3504,7 +3498,6 @@ segments:
     - [0x8E0190, bin]
     - [0x8EB190, bin] # rodata
     - [0x8EB1B0, bin] # rodata
-    - [0x8EB360, bin] # rodata
   - name: world/area_kmr/kmr_12/
     type: code
     overlay: True
@@ -3544,7 +3537,6 @@ segments:
     - [0x8F9D30, bin]
     - [0x8FEE20, bin] # rodata
     - [0x8FEE50, bin] # rodata
-    - [0x8FEE80, bin] # rodata
   - name: world/area_kmr/kmr_21/
     type: code
     overlay: True
@@ -3555,7 +3547,6 @@ segments:
     - [0x8FEE90, c]
     - [0x8FF160, bin]
     - [0x8FF650, bin] # rodata
-    - [0x8FF670, bin] # rodata
   - name: world/area_kmr/kmr_22/
     type: code
     overlay: True
@@ -3569,7 +3560,6 @@ segments:
     - [0x900A80, bin]
     - [0x9079D0, bin] # rodata
     - [0x907A20, bin] # rodata
-    - [0x907A30, bin] # rodata
   - name: world/area_kmr/kmr_23/
     type: code
     overlay: True
@@ -3580,7 +3570,6 @@ segments:
     - [0x907A40, c]
     - [0x908B00, bin]
     - [0x90B210, bin] # rodata
-    - [0x90B240, bin] # rodata
   - name: world/area_kmr/kmr_24/
     type: code
     overlay: True
@@ -3591,7 +3580,6 @@ segments:
     - [0x90B250, c]
     - [0x90B350, bin]
     - [0x90B6C0, bin] # rodata
-    - [0x90B6D0, bin] # rodata
   - name: world/area_kmr/kmr_30/
     type: code
     overlay: True
@@ -3629,7 +3617,6 @@ segments:
     - [0x915A00, bin] # rodata
     - [0x915A20, bin] # rodata
     - [0x915A40, bin] # rodata
-    - [0x915D70, bin] # rodata
   - name: world/area_iwa/iwa_02/
     type: code
     overlay: True
@@ -3641,7 +3628,6 @@ segments:
     - [0x917170, bin]
     - [0x917220, bin]
     - [0x918AA0, bin] # rodata
-    - [0x918BB0, bin] # rodata
   - name: world/area_iwa/iwa_03/
     type: code
     overlay: True
@@ -3655,7 +3641,6 @@ segments:
     - [0x91B510, bin]
     - [0x91B7D0, bin] # rodata
     - [0x91B7E0, bin] # rodata
-    - [0x91B8E0, bin] # rodata
   - name: world/area_iwa/iwa_04/
     type: code
     overlay: True
@@ -3667,7 +3652,6 @@ segments:
     - [0x91CA50, bin]
     - [0x91CFA0, bin]
     - [0x91E460, bin] # rodata
-    - [0x91E570, bin] # rodata
   - name: world/area_iwa/iwa_10/
     type: code
     overlay: True
@@ -3700,7 +3684,6 @@ segments:
     - [0x926D90, bin]
     - [0x927030, bin]
     - [0x929240, bin] # rodata
-    - [0x929270, bin] # rodata
   - name: world/area_sbk/sbk_00/
     type: code
     overlay: True
@@ -3737,7 +3720,6 @@ segments:
     - [0x92E220, bin]
     - [0x92F830, bin]
     - [0x92F880, bin] # rodata
-    - [0x92F8B0, bin] # rodata
   - name: world/area_sbk/sbk_03/
     type: code
     overlay: True
@@ -3749,7 +3731,6 @@ segments:
     - [0x92F910, bin]
     - [0x92FC20, bin]
     - [0x9304B0, bin] # rodata
-    - [0x9304D0, bin] # rodata
   - name: world/area_sbk/sbk_04/
     type: code
     overlay: True
@@ -3761,7 +3742,6 @@ segments:
     - [0x930530, bin]
     - [0x930840, bin]
     - [0x930CD0, bin] # rodata
-    - [0x930CF0, bin] # rodata
   - name: world/area_sbk/sbk_05/
     type: code
     overlay: True
@@ -3774,7 +3754,6 @@ segments:
     - [0x9310F0, bin]
     - [0x931130, bin]
     - [0x9325A0, bin] # rodata
-    - [0x9325C0, bin] # rodata
   - name: world/area_sbk/sbk_06/
     type: code
     overlay: True
@@ -3797,7 +3776,6 @@ segments:
     - [0x933CC0, bin]
     - [0x933FD0, bin]
     - [0x934020, bin] # rodata
-    - [0x934040, bin] # rodata
   - name: world/area_sbk/sbk_11/
     type: code
     overlay: True
@@ -3841,7 +3819,6 @@ segments:
     - [0x936720, bin]
     - [0x936B20, bin]
     - [0x936CA0, bin] # rodata
-    - [0x936CD0, bin] # rodata
   - name: world/area_sbk/sbk_15/
     type: code
     overlay: True
@@ -3864,7 +3841,6 @@ segments:
     - [0x9377F0, bin]
     - [0x937B00, bin]
     - [0x938570, bin] # rodata
-    - [0x938590, bin] # rodata
   - name: world/area_sbk/sbk_20/
     type: code
     overlay: True
@@ -3877,7 +3853,6 @@ segments:
     - [0x9389F0, bin]
     - [0x938DD0, bin]
     - [0x939540, bin] # rodata
-    - [0x939560, bin] # rodata
   - name: world/area_sbk/sbk_21/
     type: code
     overlay: True
@@ -3908,7 +3883,6 @@ segments:
     - [0x93A7A0, bin]
     - [0x93AB20, bin]
     - [0x93AC00, bin] # rodata
-    - [0x93AC30, bin] # rodata
   - name: world/area_sbk/sbk_24/
     type: code
     overlay: True
@@ -3947,7 +3921,6 @@ segments:
     - [0x93E390, bin]
     - [0x93EB80, bin]
     - [0x93F590, bin] # rodata
-    - [0x93F5B0, bin] # rodata
   - name: world/area_sbk/sbk_30/
     type: code
     overlay: True
@@ -3958,7 +3931,6 @@ segments:
     - [0x940DC0, bin]
     - [0x943E20, bin] # rodata
     - [0x943E50, bin] # rodata
-    - [0x944000, bin] # rodata
   - name: world/area_sbk/sbk_31/
     type: code
     overlay: True
@@ -3990,7 +3962,6 @@ segments:
     - [0x945A10, bin]
     - [0x945BA0, bin]
     - [0x945EA0, bin] # rodata
-    - [0x945ED0, bin] # rodata
   - name: world/area_sbk/sbk_34/
     type: code
     overlay: True
@@ -4037,7 +4008,6 @@ segments:
     - [0x94B800, bin]
     - [0x94BF70, bin]
     - [0x94C020, bin] # rodata
-    - [0x94C040, bin] # rodata
   - name: world/area_sbk/sbk_41/
     type: code
     overlay: True
@@ -4048,7 +4018,6 @@ segments:
     - [0x94C080, bin]
     - [0x94C400, bin]
     - [0x94C4E0, bin] # rodata
-    - [0x94C510, bin] # rodata
   - name: world/area_sbk/sbk_42/
     type: code
     overlay: True
@@ -4105,7 +4074,6 @@ segments:
     - [0x94FA60, bin]
     - [0x950570, bin]
     - [0x9505F0, bin] # rodata
-    - [0x950610, bin] # rodata
   - name: world/area_sbk/sbk_50/
     type: code
     overlay: True
@@ -4115,7 +4083,6 @@ segments:
     - [0x950610, c]
     - [0x950650, bin]
     - [0x950950, bin] # rodata
-    - [0x950970, bin] # rodata
   - name: world/area_sbk/sbk_51/
     type: code
     overlay: True
@@ -4158,7 +4125,6 @@ segments:
     - [0x9525C0, bin]
     - [0x952940, bin]
     - [0x952A20, bin] # rodata
-    - [0x952A50, bin] # rodata
   - name: world/area_sbk/sbk_55/
     type: code
     overlay: True
@@ -4183,7 +4149,6 @@ segments:
     - [0x954FC0, bin]
     - [0x9553F0, bin]
     - [0x9569D0, bin] # rodata
-    - [0x9569F0, bin] # rodata
   - name: world/area_sbk/sbk_60/
     type: code
     overlay: True
@@ -4205,7 +4170,6 @@ segments:
     - [0x956FD0, bin]
     - [0x9572E0, bin]
     - [0x957330, bin] # rodata
-    - [0x957350, bin] # rodata
   - name: world/area_sbk/sbk_62/
     type: code
     overlay: True
@@ -4217,7 +4181,6 @@ segments:
     - [0x9573B0, bin]
     - [0x9576C0, bin]
     - [0x957D50, bin] # rodata
-    - [0x957D70, bin] # rodata
   - name: world/area_sbk/sbk_63/
     type: code
     overlay: True
@@ -4229,7 +4192,6 @@ segments:
     - [0x957DD0, bin]
     - [0x9580E0, bin]
     - [0x958570, bin] # rodata
-    - [0x958590, bin] # rodata
   - name: world/area_sbk/sbk_64/
     type: code
     overlay: True
@@ -4240,7 +4202,6 @@ segments:
     - [0x9585D0, bin]
     - [0x9588E0, bin]
     - [0x958930, bin] # rodata
-    - [0x958950, bin] # rodata
   - name: world/area_sbk/sbk_65/
     type: code
     overlay: True
@@ -4250,7 +4211,6 @@ segments:
     - [0x958950, c]
     - [0x958990, bin]
     - [0x958C90, bin] # rodata
-    - [0x958CB0, bin] # rodata
   - name: world/area_sbk/sbk_66/
     type: code
     overlay: True
@@ -4291,7 +4251,6 @@ segments:
     - [0x968FD0, bin] # rodata
     - [0x969198, bin] # rodata
     - [0x9691B0, bin] # rodata
-    - [0x9691C0, bin] # rodata
   - name: world/area_dro/dro_02/
     type: code
     overlay: True
@@ -4357,7 +4316,6 @@ segments:
     - [0x97D2F0, bin]
     - [0x97DA40, bin] # rodata
     - [0x97DAC0, bin] # rodata
-    - [0x97DAD0, bin] # rodata
   - name: world/area_isk/isk_05/
     type: code
     overlay: True
@@ -4372,7 +4330,6 @@ segments:
     - [0x980980, bin] # rodata
     - [0x9809C8, bin] # rodata
     - [0x980A08, bin] # rodata
-    - [0x980A20, bin] # rodata
   - name: world/area_isk/isk_06/
     type: code
     overlay: True
@@ -4383,7 +4340,6 @@ segments:
     - [0x980D40, bin]
     - [0x982150, bin]
     - [0x982430, bin] # rodata
-    - [0x982440, bin] # rodata
   - name: world/area_isk/isk_07/
     type: code
     overlay: True
@@ -4411,7 +4367,6 @@ segments:
     - [0x985B00, bin]
     - [0x986090, bin]
     - [0x986460, bin] # rodata
-    - [0x9864E0, bin] # rodata
   - name: world/area_isk/isk_09/
     type: code
     overlay: True
@@ -4426,7 +4381,6 @@ segments:
     - [0x987560, bin]
     - [0x988290, bin]
     - [0x988B50, bin] # rodata
-    - [0x988B60, bin] # rodata
   - name: world/area_isk/isk_10/
     type: code
     overlay: True
@@ -4453,7 +4407,6 @@ segments:
     - [0x98B620, bin]
     - [0x98D3C0, bin]
     - [0x98D620, bin] # rodata
-    - [0x98D640, bin] # rodata
   - name: world/area_isk/isk_12/
     type: code
     overlay: True
@@ -4465,7 +4418,6 @@ segments:
     - [0x98DCB0, bin]
     - [0x98ED40, bin]
     - [0x98F7C0, bin] # rodata
-    - [0x98F7E0, bin] # rodata
   - name: world/area_isk/isk_13/
     type: code
     overlay: True
@@ -4479,7 +4431,6 @@ segments:
     - [0x992690, bin] # rodata
     - [0x9926D8, bin] # rodata
     - [0x992718, bin] # rodata
-    - [0x992730, bin] # rodata
   - name: world/area_isk/isk_14/
     type: code
     overlay: True
@@ -4493,7 +4444,6 @@ segments:
     - [0x995150, bin] # rodata
     - [0x995160, bin] # rodata
     - [0x9951A8, bin] # rodata
-    - [0x9951F0, bin] # rodata
   - name: world/area_isk/isk_16/
     type: code
     overlay: True
@@ -4507,7 +4457,6 @@ segments:
     - [0x996C40, bin]
     - [0x997E20, bin]
     - [0x997F40, bin] # rodata
-    - [0x997F70, bin] # rodata
   - name: world/area_isk/isk_18/
     type: code
     overlay: True
@@ -4519,7 +4468,6 @@ segments:
     - [0x998B90, bin]
     - [0x999520, bin]
     - [0x9996D0, bin] # rodata
-    - [0x999740, bin] # rodata
   - name: world/area_isk/isk_19/
     type: code
     overlay: True
@@ -4544,7 +4492,6 @@ segments:
     - [0x99AFB0, bin]
     - [0x99B280, bin]
     - [0x99C970, bin] # rodata
-    - [0x99C990, bin] # rodata
   - name: world/area_trd/trd_01/
     type: code
     overlay: True
@@ -4561,7 +4508,6 @@ segments:
     - [0x9A0DB0, bin] # rodata
     - [0x9A0DD0, bin] # rodata
     - [0x9A0E30, bin] # rodata
-    - [0x9A0FE0, bin] # rodata
   - name: world/area_trd/trd_02/
     type: code
     overlay: True
@@ -4590,7 +4536,6 @@ segments:
     - [0x9A5FF0, bin]
     - [0x9A60F0, bin]
     - [0x9A8380, bin] # rodata
-    - [0x9A83F0, bin] # rodata
   - name: world/area_trd/trd_04/
     type: code
     overlay: True
@@ -4606,7 +4551,6 @@ segments:
     - [0x9AE2B0, bin] # rodata
     - [0x9AE330, bin] # rodata
     - [0x9AE6B8, bin] # rodata
-    - [0x9AE700, bin] # rodata
   - name: world/area_trd/trd_05/
     type: code
     overlay: True
@@ -4620,7 +4564,6 @@ segments:
     - [0x9AF7C0, bin]
     - [0x9AF820, bin]
     - [0x9B1760, bin] # rodata
-    - [0x9B1790, bin] # rodata
   - name: world/area_trd/trd_06/
     type: code
     overlay: True
@@ -4651,7 +4594,6 @@ segments:
     - [0x9BB190, bin] # rodata
     - [0x9BB200, bin] # rodata
     - [0x9BB258, bin] # rodata
-    - [0x9BB2A0, bin] # rodata
   - name: world/area_trd/trd_08/
     type: code
     overlay: True
@@ -4664,7 +4606,6 @@ segments:
     - [0x9BBD50, bin]
     - [0x9BC1A0, bin]
     - [0x9BD650, bin] # rodata
-    - [0x9BD660, bin] # rodata
   - name: world/area_trd/trd_09/
     type: code
     overlay: True
@@ -4679,7 +4620,6 @@ segments:
     - [0x9BDE80, bin]
     - [0x9C24C0, bin]
     - [0x9C28F0, bin] # rodata
-    - [0x9C2910, bin] # rodata
   - name: world/area_trd/trd_10/
     type: code
     overlay: True
@@ -4692,7 +4632,6 @@ segments:
     - [0x9C3A30, bin]
     - [0x9C4FC0, bin]
     - [0x9C53B0, bin] # rodata
-    - [0x9C53E0, bin] # rodata
   - name: world/area_nok/nok_01/
     type: code
     overlay: True
@@ -4711,7 +4650,6 @@ segments:
     - [0x9D5BF0, bin]
     - [0x9D5F80, bin]
     - [0x9D6E60, bin] # rodata
-    - [0x9D7020, bin] # rodata
   - name: world/area_nok/nok_02/
     type: code
     overlay: True
@@ -4747,7 +4685,6 @@ segments:
     - [0x9EC700, bin]
     - [0x9ECBD0, bin]
     - [0x9EDB90, bin] # rodata
-    - [0x9EDBF0, bin] # rodata
   - name: world/area_nok/nok_04/
     type: code
     overlay: True
@@ -4775,7 +4712,6 @@ segments:
     - [0x9F7180, bin]
     - [0x9FA720, bin] # rodata
     - [0x9FA790, bin] # rodata
-    - [0x9FA7F0, bin] # rodata
   - name: world/area_nok/nok_12/
     type: code
     overlay: True
@@ -4795,7 +4731,6 @@ segments:
     - [0x9FFB70, bin]
     - [0xA00250, bin] # rodata
     - [0xA002C0, bin] # rodata
-    - [0xA00600, bin] # rodata
   - name: world/area_nok/nok_13/
     type: code
     overlay: True
@@ -4812,7 +4747,6 @@ segments:
     - [0xA027B0, bin] # rodata
     - [0xA027D0, bin] # rodata
     - [0xA02820, bin] # rodata
-    - [0xA02840, bin] # rodata
   - name: world/area_nok/nok_14/
     type: code
     overlay: True
@@ -4830,7 +4764,6 @@ segments:
     - [0xA06DF0, bin] # rodata
     - [0xA06E60, bin] # rodata
     - [0xA06EB8, bin] # rodata
-    - [0xA06F00, bin] # rodata
   - name: world/area_nok/nok_15/
     type: code
     overlay: True
@@ -4847,7 +4780,6 @@ segments:
     - [0xA0BBF0, bin] # rodata
     - [0xA0BC50, bin] # rodata
     - [0xA0BCA8, bin] # rodata
-    - [0xA0BCF0, bin] # rodata
   - name: world/area_hos/hos_00/
     type: code
     overlay: True
@@ -4867,7 +4799,6 @@ segments:
     - [0xA10820, bin] # rodata
     - [0xA10830, bin] # rodata
     - [0xA10870, bin] # rodata
-    - [0xA10880, bin] # rodata
   - name: world/area_hos/hos_01/
     type: code
     overlay: True
@@ -4899,7 +4830,6 @@ segments:
     - [0xA1ADA0, bin]
     - [0xA1AFF0, bin] # rodata
     - [0xA1B098, bin] # rodata
-    - [0xA1B100, bin] # rodata
   - name: world/area_hos/hos_03/
     type: code
     overlay: True
@@ -4919,7 +4849,6 @@ segments:
     - [0xA26E00, bin]
     - [0xA26E50, bin] # rodata
     - [0xA26E70, bin] # rodata
-    - [0xA26ED0, bin] # rodata
   - name: world/area_hos/hos_04/
     type: code
     overlay: True
@@ -4942,7 +4871,6 @@ segments:
     - [0xA2A1C0, bin] # rodata
     - [0xA2A1E0, bin] # rodata
     - [0xA2A1F8, bin] # rodata
-    - [0xA2A240, bin] # rodata
   - name: world/area_hos/hos_05/
     type: code
     overlay: True
@@ -4963,7 +4891,6 @@ segments:
     - [0xA39410, bin] # rodata
     - [0xA394A0, bin] # rodata
     - [0xA394C0, bin] # rodata
-    - [0xA394E0, bin] # rodata
   - name: world/area_hos/hos_06/
     type: code
     overlay: True
@@ -4980,7 +4907,6 @@ segments:
     - [0xA3C090, bin]
     - [0xA3DAB0, bin]
     - [0xA3F730, bin] # rodata
-    - [0xA3F740, bin] # rodata
   - name: world/area_hos/hos_10/
     type: code
     overlay: True
@@ -4996,7 +4922,6 @@ segments:
     - [0xA42DA0, bin]
     - [0xA43920, bin]
     - [0xA45910, bin] # rodata
-    - [0xA45930, bin] # rodata
   - name: world/area_hos/hos_20/
     type: code
     overlay: True
@@ -5021,7 +4946,6 @@ segments:
     - [0xA47D70, bin]
     - [0xA48500, bin]
     - [0xA48550, bin] # rodata
-    - [0xA485C0, bin] # rodata
   - name: world/area_kpa/kpa_03/
     type: code
     overlay: True
@@ -5037,7 +4961,6 @@ segments:
     - [0xA4BE30, bin] # rodata
     - [0xA4BEA0, bin] # rodata
     - [0xA4BED8, bin] # rodata
-    - [0xA4BF60, bin] # rodata
   - name: world/area_kpa/kpa_04/
     type: code
     overlay: True
@@ -5062,7 +4985,6 @@ segments:
     - [0xA4E710, bin]
     - [0xA4EF30, bin] # rodata
     - [0xA4EF78, bin] # rodata
-    - [0xA4F000, bin] # rodata
   - name: world/area_kpa/kpa_09/
     type: code
     overlay: True
@@ -5076,7 +4998,6 @@ segments:
     - [0xA506D0, bin]
     - [0xA50B90, bin]
     - [0xA517B0, bin] # rodata
-    - [0xA51980, bin] # rodata
   - name: world/area_kpa/kpa_10/
     type: code
     overlay: True
@@ -5087,7 +5008,6 @@ segments:
     - [0xA51C90, bin]
     - [0xA51D90, bin]
     - [0xA528A0, bin] # rodata
-    - [0xA528C0, bin] # rodata
   - name: world/area_kpa/kpa_11/
     type: code
     overlay: True
@@ -5102,7 +5022,6 @@ segments:
     - [0xA53E30, bin]
     - [0xA548D0, bin] # rodata
     - [0xA548F0, bin] # rodata
-    - [0xA54950, bin] # rodata
   - name: world/area_kpa/kpa_12/
     type: code
     overlay: True
@@ -5115,7 +5034,6 @@ segments:
     - [0xA54DC0, bin]
     - [0xA55620, bin]
     - [0xA55F00, bin] # rodata
-    - [0xA55F20, bin] # rodata
   - name: world/area_kpa/kpa_13/
     type: code
     overlay: True
@@ -5129,7 +5047,6 @@ segments:
     - [0xA56BD0, bin]
     - [0xA56CA0, bin]
     - [0xA57490, bin] # rodata
-    - [0xA574B0, bin] # rodata
   - name: world/area_kpa/kpa_14/
     type: code
     overlay: True
@@ -5144,7 +5061,6 @@ segments:
     - [0xA58DB0, bin]
     - [0xA59060, bin]
     - [0xA59370, bin] # rodata
-    - [0xA59390, bin] # rodata
   - name: world/area_kpa/kpa_15/
     type: code
     overlay: True
@@ -5156,7 +5072,6 @@ segments:
     - [0xA59960, bin]
     - [0xA59E30, bin]
     - [0xA5A020, bin] # rodata
-    - [0xA5A030, bin] # rodata
   - name: world/area_kpa/kpa_16/
     type: code
     overlay: True
@@ -5168,7 +5083,6 @@ segments:
     - [0xA5A3D0, bin]
     - [0xA5B180, bin]
     - [0xA5CA10, bin] # rodata
-    - [0xA5CA20, bin] # rodata
   - name: world/area_kpa/kpa_17/
     type: code
     overlay: True
@@ -5211,7 +5125,6 @@ segments:
     - [0xA60040, bin]
     - [0xA60130, bin]
     - [0xA60450, bin] # rodata
-    - [0xA60470, bin] # rodata
   - name: world/area_kpa/kpa_41/
     type: code
     overlay: True
@@ -5221,7 +5134,6 @@ segments:
     - [0xA60470, bin]
     - [0xA60560, bin]
     - [0xA609B0, bin] # rodata
-    - [0xA609D0, bin] # rodata
   - name: world/area_kpa/kpa_50/
     type: code
     overlay: True
@@ -5232,7 +5144,6 @@ segments:
     - [0xA623F0, bin]
     - [0xA624D0, bin]
     - [0xA63E60, bin] # rodata
-    - [0xA64090, bin] # rodata
   - name: world/area_kpa/kpa_51/
     type: code
     overlay: True
@@ -5248,7 +5159,6 @@ segments:
     - [0xA66FE0, bin] # rodata
     - [0xA67018, bin] # rodata
     - [0xA67098, bin] # rodata
-    - [0xA67100, bin] # rodata
   - name: world/area_kpa/kpa_52/
     type: code
     overlay: True
@@ -5263,7 +5173,6 @@ segments:
     - [0xA68B40, bin]
     - [0xA6AAC0, bin] # rodata
     - [0xA6AAE0, bin] # rodata
-    - [0xA6ACA0, bin] # rodata
   - name: world/area_kpa/kpa_53/
     type: code
     overlay: True
@@ -5277,7 +5186,6 @@ segments:
     - [0xA6CA80, bin]
     - [0xA6CAC0, bin] # rodata
     - [0xA6CAF0, bin] # rodata
-    - [0xA6CB00, bin] # rodata
   - name: world/area_kpa/kpa_60/
     type: code
     overlay: True
@@ -5288,7 +5196,6 @@ segments:
     - [0xA6CBE0, c]
     - [0xA6CEF0, bin]
     - [0xA6E3A0, bin] # rodata
-    - [0xA6E3E0, bin] # rodata
   - name: world/area_kpa/kpa_61/
     type: code
     overlay: True
@@ -5304,7 +5211,6 @@ segments:
     - [0xA720A0, bin] # rodata
     - [0xA72110, bin] # rodata
     - [0xA72148, bin] # rodata
-    - [0xA72220, bin] # rodata
   - name: world/area_kpa/kpa_62/
     type: code
     overlay: True
@@ -5340,7 +5246,6 @@ segments:
     - [0xA75440, bin]
     - [0xA75B70, bin]
     - [0xA78450, bin] # rodata
-    - [0xA784C0, bin] # rodata
   - name: world/area_kpa/kpa_81/
     type: code
     overlay: True
@@ -5353,7 +5258,6 @@ segments:
     - [0xA789F0, bin]
     - [0xA79200, bin]
     - [0xA7A4C0, bin] # rodata
-    - [0xA7A500, bin] # rodata
   - name: world/area_kpa/kpa_82/
     type: code
     overlay: True
@@ -5366,7 +5270,6 @@ segments:
     - [0xA7AA10, bin]
     - [0xA7AF80, bin]
     - [0xA83460, bin] # rodata
-    - [0xA83490, bin] # rodata
   - name: world/area_kpa/kpa_83/
     type: code
     overlay: True
@@ -5379,7 +5282,6 @@ segments:
     - [0xA835D0, bin]
     - [0xA83AC0, bin]
     - [0xA86780, bin] # rodata
-    - [0xA867B0, bin] # rodata
   - name: world/area_kpa/kpa_90/
     type: code
     overlay: True
@@ -5403,7 +5305,6 @@ segments:
     - [0xA8C230, bin]
     - [0xA8C470, bin] # rodata
     - [0xA8C480, bin] # rodata
-    - [0xA8C7C0, bin] # rodata
   - name: world/area_kpa/kpa_94/
     type: code
     overlay: True
@@ -5427,7 +5328,6 @@ segments:
     - [0xA8E970, bin]
     - [0xA92470, bin] # rodata
     - [0xA92480, bin] # rodata
-    - [0xA927C0, bin] # rodata
   - name: world/area_kpa/kpa_96/
     type: code
     overlay: True
@@ -5438,7 +5338,6 @@ segments:
     - [0xA927F0, bin]
     - [0xA928B0, bin]
     - [0xA93150, bin] # rodata
-    - [0xA93160, bin] # rodata
   - name: world/area_kpa/kpa_100/
     type: code
     overlay: True
@@ -5450,7 +5349,6 @@ segments:
     - [0xA93270, bin]
     - [0xA933D0, bin]
     - [0xA93410, bin] # rodata
-    - [0xA93440, bin] # rodata
   - name: world/area_kpa/kpa_101/
     type: code
     overlay: True
@@ -5462,7 +5360,6 @@ segments:
     - [0xA93550, bin]
     - [0xA936D0, bin]
     - [0xA93710, bin] # rodata
-    - [0xA93740, bin] # rodata
   - name: world/area_kpa/kpa_102/
     type: code
     overlay: True
@@ -5477,7 +5374,6 @@ segments:
     - [0xA99250, bin] # rodata
     - [0xA99478, bin] # rodata
     - [0xA994B0, bin] # rodata
-    - [0xA99590, bin] # rodata
   - name: world/area_kpa/kpa_111/
     type: code
     overlay: True
@@ -5490,7 +5386,6 @@ segments:
     - [0xA9ACF0, bin]
     - [0xA9C740, bin]
     - [0xA9C7C0, bin] # rodata
-    - [0xA9C990, bin] # rodata
   - name: world/area_kpa/kpa_112/
     type: code
     overlay: True
@@ -5514,7 +5409,6 @@ segments:
     - [0xA9DD00, bin]
     - [0xA9E900, bin] # rodata
     - [0xA9E920, bin] # rodata
-    - [0xA9E980, bin] # rodata
   - name: world/area_kpa/kpa_114/
     type: code
     overlay: True
@@ -5525,7 +5419,6 @@ segments:
     - [0xA9E9D0, bin]
     - [0xA9EAA0, bin]
     - [0xA9ED10, bin] # rodata
-    - [0xA9ED40, bin] # rodata
   - name: world/area_kpa/kpa_115/
     type: code
     overlay: True
@@ -5539,7 +5432,6 @@ segments:
     - [0xAA0B20, bin]
     - [0xAA1D00, bin] # rodata
     - [0xAA1D20, bin] # rodata
-    - [0xAA1EE0, bin] # rodata
   - name: world/area_kpa/kpa_116/
     type: code
     overlay: True
@@ -5558,7 +5450,6 @@ segments:
     - [0xAA2180, bin]
     - [0xAA2240, bin]
     - [0xAA23B0, bin] # rodata
-    - [0xAA23C0, bin] # rodata
   - name: world/area_kpa/kpa_118/
     type: code
     overlay: True
@@ -5578,7 +5469,6 @@ segments:
     - [0xAA2720, bin]
     - [0xAA2760, bin]
     - [0xAA28E0, bin] # rodata
-    - [0xAA28F0, bin] # rodata
   - name: world/area_kpa/kpa_121/
     type: code
     overlay: True
@@ -5667,7 +5557,6 @@ segments:
     - [0xAB2BB0, bin]
     - [0xAB5D40, bin]
     - [0xAB6270, bin] # rodata
-    - [0xAB6290, bin] # rodata
   - name: world/area_osr/osr_03/
     type: code
     overlay: True
@@ -5682,7 +5571,6 @@ segments:
     - [0xAB8350, bin]
     - [0xAB8B10, bin]
     - [0xAB9270, bin] # rodata
-    - [0xAB92B0, bin] # rodata
   - name: world/area_osr/osr_04/
     type: code
     overlay: True
@@ -5693,7 +5581,6 @@ segments:
     - [0xAB9370, bin]
     - [0xAB95D0, bin]
     - [0xABB260, bin] # rodata
-    - [0xABB290, bin] # rodata
   - name: world/area_kkj/kkj_00/
     type: code
     overlay: True
@@ -5708,7 +5595,6 @@ segments:
     - [0xABEF20, bin]
     - [0xAC40D0, bin]
     - [0xAC4FB0, bin] # rodata
-    - [0xAC5170, bin] # rodata
   - name: world/area_kkj/kkj_01/
     type: code
     overlay: True
@@ -5744,7 +5630,6 @@ segments:
     - [0xACA010, bin]
     - [0xACA250, bin]
     - [0xACAB00, bin] # rodata
-    - [0xACAB20, bin] # rodata
   - name: world/area_kkj/kkj_10/
     type: code
     overlay: True
@@ -5845,7 +5730,6 @@ segments:
     - [0xAEB820, bin]
     - [0xAECB30, bin]
     - [0xAED3E0, bin] # rodata
-    - [0xAED410, bin] # rodata
   - name: world/area_kkj/kkj_16/
     type: code
     overlay: True
@@ -5870,7 +5754,6 @@ segments:
     - [0xAF2440, bin]
     - [0xAF2520, bin]
     - [0xAF2C90, bin] # rodata
-    - [0xAF2CA0, bin] # rodata
   - name: world/area_kkj/kkj_18/
     type: code
     overlay: True
@@ -5886,7 +5769,6 @@ segments:
     - [0xAF4BB0, bin]
     - [0xAF7920, bin] # rodata
     - [0xAF7940, bin] # rodata
-    - [0xAF7950, bin] # rodata
   - name: world/area_kkj/kkj_19/
     type: code
     overlay: True
@@ -5901,7 +5783,6 @@ segments:
     - [0xAF9050, bin]
     - [0xAF9460, bin]
     - [0xAFDAF0, bin] # rodata
-    - [0xAFDB40, bin] # rodata
   - name: world/area_kkj/kkj_20/
     type: code
     overlay: True
@@ -5915,7 +5796,6 @@ segments:
     - [0xAFE3C0, bin]
     - [0xAFE610, bin]
     - [0xB02290, bin] # rodata
-    - [0xB022A0, bin] # rodata
   - name: world/area_kkj/kkj_21/
     type: code
     overlay: True
@@ -5924,7 +5804,6 @@ segments:
     subsections:
     - [0xB022A0, bin]
     - [0xB024E0, bin] # rodata
-    - [0xB024F0, bin] # rodata
   - name: world/area_kkj/kkj_22/
     type: code
     overlay: True
@@ -6009,7 +5888,6 @@ segments:
     subsections:
     - [0xB14EA0, bin]
     - [0xB150A0, bin] # rodata
-    - [0xB150B0, bin] # rodata
   - name: world/area_kkj/kkj_29/
     type: code
     overlay: True
@@ -6063,7 +5941,6 @@ segments:
     - [0xB1C270, bin]
     - [0xB1C510, bin]
     - [0xB1C530, bin] # rodata
-    - [0xB1C540, bin] # rodata
   - name: world/area_tst/tst_10/
     type: code
     overlay: True
@@ -6072,7 +5949,6 @@ segments:
     subsections:
     - [0xB1C540, bin]
     - [0xB1CA40, bin] # rodata
-    - [0xB1CA50, bin] # rodata
   - name: world/area_tst/tst_11/
     type: code
     overlay: True
@@ -6082,7 +5958,6 @@ segments:
     - [0xB1CA50, c]
     - [0xB1D1C0, bin]
     - [0xB1D2A0, bin]
-    - [0xB1D2F0, bin]
   - name: world/area_tst/tst_12/
     type: code
     overlay: True
@@ -6090,7 +5965,6 @@ segments:
     vram: 0x80240000
     subsections:
     - [0xB1D2F0, bin]
-    - [0xB1D760, bin]
   - name: world/area_tst/tst_13/
     type: code
     overlay: True
@@ -6100,7 +5974,6 @@ segments:
     - [0xB1D760, c]
     - [0xB1DB20, bin]
     - [0xB20460, bin] # rodata
-    - [0xB20470, bin] # rodata
   - name: world/area_tst/tst_20/
     type: code
     overlay: True
@@ -6123,7 +5996,6 @@ segments:
     - [0xB25E90, bin]
     - [0xB275B0, bin]
     - [0xB27FE0, bin] # rodata
-    - [0xB28030, bin] # rodata
   - name: world/area_jan/jan_01/
     type: code
     overlay: True
@@ -6138,7 +6010,6 @@ segments:
     - [0xB2B430, bin]
     - [0xB2B590, bin]
     - [0xB2C410, bin] # rodata
-    - [0xB2C470, bin] # rodata
   - name: world/area_jan/jan_02/
     type: code
     overlay: True
@@ -6171,7 +6042,6 @@ segments:
     - [0xB43B60, bin]
     - [0xB445A0, bin] # rodata
     - [0xB445C0, bin] # rodata
-    - [0xB44770, bin] # rodata
   - name: world/area_jan/jan_04/
     type: code
     overlay: True
@@ -6197,7 +6067,6 @@ segments:
     - [0xB4A4B0, bin]
     - [0xB4AA20, bin] # rodata
     - [0xB4AA50, bin] # rodata
-    - [0xB4AA70, bin] # rodata
   - name: world/area_jan/jan_05/
     type: code
     overlay: True
@@ -6219,7 +6088,6 @@ segments:
     - [0xB52470, bin] # rodata
     - [0xB524A0, bin] # rodata
     - [0xB524E8, bin] # rodata
-    - [0xB52830, bin] # rodata
   - name: world/area_jan/jan_06/
     type: code
     overlay: True
@@ -6240,7 +6108,6 @@ segments:
     - [0xB586B0, bin]
     - [0xB594C0, bin] # rodata
     - [0xB59528, bin] # rodata
-    - [0xB59870, bin] # rodata
   - name: world/area_jan/jan_07/
     type: code
     overlay: True
@@ -6310,7 +6177,6 @@ segments:
     - [0xB707C0, bin]
     - [0xB70800, bin] # rodata
     - [0xB70810, bin] # rodata
-    - [0xB70860, bin] # rodata
   - name: world/area_jan/jan_11/
     type: code
     overlay: True
@@ -6323,7 +6189,6 @@ segments:
     - [0xB710F0, bin]
     - [0xB728B0, bin]
     - [0xB730A0, bin] # rodata
-    - [0xB730B0, bin] # rodata
   - name: world/area_jan/jan_12/
     type: code
     overlay: True
@@ -6363,7 +6228,6 @@ segments:
     - [0xB7D2C0, bin]
     - [0xB7D8B0, bin] # rodata
     - [0xB7D8D0, bin] # rodata
-    - [0xB7D920, bin] # rodata
   - name: world/area_jan/jan_15/
     type: code
     overlay: True
@@ -6389,7 +6253,6 @@ segments:
     - [0xB82C70, bin]
     - [0xB82CD0, bin]
     - [0xB837A0, bin] # rodata
-    - [0xB837C0, bin] # rodata
   - name: world/area_jan/jan_17/
     type: code
     overlay: True
@@ -6434,7 +6297,6 @@ segments:
     - [0xB8E200, bin]
     - [0xB8FB00, bin] # rodata
     - [0xB8FB20, bin] # rodata
-    - [0xB8FCD0, bin] # rodata
   - name: world/area_jan/jan_23/
     type: code
     overlay: True
@@ -6459,7 +6321,6 @@ segments:
     - [0xB960E0, bin]
     - [0xB97A10, bin] # rodata
     - [0xB97A30, bin] # rodata
-    - [0xB97C00, bin] # rodata
   - name: world/area_mim/mim_02/
     type: code
     overlay: True
@@ -6473,7 +6334,6 @@ segments:
     - [0xB9A390, bin]
     - [0xB9B250, bin]
     - [0xB9B420, bin] # rodata
-    - [0xB9B480, bin] # rodata
   - name: world/area_mim/mim_03/
     type: code
     overlay: True
@@ -6486,7 +6346,6 @@ segments:
     - [0xB9BE30, bin]
     - [0xB9D500, bin]
     - [0xB9D940, bin] # rodata
-    - [0xB9D960, bin] # rodata
   - name: world/area_mim/mim_04/
     type: code
     overlay: True
@@ -6502,7 +6361,6 @@ segments:
     - [0xB9FEA0, bin]
     - [0xBA06C0, bin] # rodata
     - [0xBA06E0, bin] # rodata
-    - [0xBA0730, bin] # rodata
   - name: world/area_mim/mim_05/
     type: code
     overlay: True
@@ -6515,7 +6373,6 @@ segments:
     - [0xBA2210, bin]
     - [0xBA3A80, bin]
     - [0xBA4590, bin] # rodata
-    - [0xBA4780, bin] # rodata
   - name: world/area_mim/mim_06/
     type: code
     overlay: True
@@ -6531,7 +6388,6 @@ segments:
     - [0xBA9170, bin]
     - [0xBA9F10, bin] # rodata
     - [0xBA9F30, bin] # rodata
-    - [0xBAA140, bin] # rodata
   - name: world/area_mim/mim_07/
     type: code
     overlay: True
@@ -6548,7 +6404,6 @@ segments:
     - [0xBABAD0, bin]
     - [0xBAC9C0, bin]
     - [0xBAD8D0, bin] # rodata
-    - [0xBAD940, bin] # rodata
   - name: world/area_mim/mim_08/
     type: code
     overlay: True
@@ -6576,7 +6431,6 @@ segments:
     - [0xBB4180, bin]
     - [0xBB4830, bin]
     - [0xBB5980, bin] # rodata
-    - [0xBB59E0, bin] # rodata
   - name: world/area_mim/mim_10/
     type: code
     overlay: True
@@ -6589,7 +6443,6 @@ segments:
     - [0xBB5EF0, bin]
     - [0xBB61D0, bin]
     - [0xBB7050, bin] # rodata
-    - [0xBB7070, bin] # rodata
   - name: world/area_mim/mim_11/
     type: code
     overlay: True
@@ -6603,7 +6456,6 @@ segments:
     - [0xBBA180, bin]
     - [0xBBA2E0, bin]
     - [0xBBB350, bin] # rodata
-    - [0xBBB380, bin] # rodata
   - name: world/area_mim/mim_12/
     type: code
     overlay: True
@@ -6643,7 +6495,6 @@ segments:
     - [0xBC3DE0, bin]
     - [0xBC3F60, bin]
     - [0xBC4260, bin] # rodata
-    - [0xBC4280, bin] # rodata
   - name: world/area_obk/obk_03/
     type: code
     overlay: True
@@ -6675,7 +6526,6 @@ segments:
     - [0xBCB260, bin]
     - [0xBCB870, bin]
     - [0xBCD030, bin] # rodata
-    - [0xBCD060, bin] # rodata
   - name: world/area_obk/obk_05/
     type: code
     overlay: True
@@ -6699,7 +6549,6 @@ segments:
     - [0xBCE760, bin]
     - [0xBCEAD0, bin]
     - [0xBCEBE0, bin] # rodata
-    - [0xBCEBF0, bin] # rodata
   - name: world/area_obk/obk_07/
     type: code
     overlay: True
@@ -6716,7 +6565,6 @@ segments:
     - [0xBD14F0, bin]
     - [0xBD1C80, bin]
     - [0xBD3860, bin] # rodata
-    - [0xBD3870, bin] # rodata
   - name: world/area_obk/obk_08/
     type: code
     overlay: True
@@ -6732,7 +6580,6 @@ segments:
     - [0xBD64D0, bin]
     - [0xBD6DD0, bin]
     - [0xBDA730, bin] # rodata
-    - [0xBDA7B0, bin] # rodata
   - name: world/area_obk/obk_09/
     type: code
     overlay: True
@@ -6747,7 +6594,6 @@ segments:
     - [0xBDB140, bin]
     - [0xBDCE10, bin]
     - [0xBDD190, bin] # rodata
-    - [0xBDD1B0, bin] # rodata
   - name: world/area_arn/arn_02/
     type: code
     overlay: True
@@ -6759,7 +6605,6 @@ segments:
     - [0xBDE2A0, bin]
     - [0xBDE480, bin]
     - [0xBDEC80, bin] # rodata
-    - [0xBDED90, bin] # rodata
   - name: world/area_arn/arn_03/
     type: code
     overlay: True
@@ -6772,7 +6617,6 @@ segments:
     - [0xBE0950, bin]
     - [0xBE3570, bin]
     - [0xBE35E0, bin] # rodata
-    - [0xBE37B0, bin] # rodata
   - name: world/area_arn/arn_04/
     type: code
     overlay: True
@@ -6786,7 +6630,6 @@ segments:
     - [0xBE77F0, bin]
     - [0xBE78D0, bin] # rodata
     - [0xBE7AD8, bin] # rodata
-    - [0xBE7BE0, bin] # rodata
   - name: world/area_arn/arn_05/
     type: code
     overlay: True
@@ -6798,7 +6641,6 @@ segments:
     - [0xBE9290, bin]
     - [0xBECBE0, bin]
     - [0xBECC20, bin] # rodata
-    - [0xBECDF0, bin] # rodata
   - name: world/area_arn/arn_07/
     type: code
     overlay: True
@@ -6815,7 +6657,6 @@ segments:
     - [0xBF46F0, bin] # rodata
     - [0xBF4730, bin] # rodata
     - [0xBF4740, bin] # rodata
-    - [0xBF47A0, bin] # rodata
   - name: world/area_arn/arn_08/
     type: code
     overlay: True
@@ -6832,7 +6673,6 @@ segments:
     - [0xBF59A0, bin]
     - [0xBF5FF0, bin]
     - [0xBF6040, bin] # rodata
-    - [0xBF6060, bin] # rodata
   - name: world/area_arn/arn_09/
     type: code
     overlay: True
@@ -6867,7 +6707,6 @@ segments:
     - [0xBF7770, bin]
     - [0xBF7D00, bin]
     - [0xBF8780, bin] # rodata
-    - [0xBF8790, bin] # rodata
   - name: world/area_arn/arn_12/
     type: code
     overlay: True
@@ -6900,7 +6739,6 @@ segments:
     - [0xBFA260, bin]
     - [0xBFD800, bin]
     - [0xBFD840, bin] # rodata
-    - [0xBFD880, bin] # rodata
   - name: world/area_dgb/dgb_01/
     type: code
     overlay: True
@@ -6978,7 +6816,6 @@ segments:
     - [0xC3D440, bin]
     - [0xC3D8C0, bin]
     - [0xC3DBE0, bin] # rodata
-    - [0xC3DBF0, bin] # rodata
   - name: world/area_dgb/dgb_07/
     type: code
     overlay: True
@@ -7052,7 +6889,6 @@ segments:
     - [0xC4E2A0, bin]
     - [0xC4E760, bin]
     - [0xC4E950, bin] # rodata
-    - [0xC4E960, bin] # rodata
   - name: world/area_dgb/dgb_13/
     type: code
     overlay: True
@@ -7063,7 +6899,6 @@ segments:
     - [0xC4EA50, bin]
     - [0xC4ECE0, bin]
     - [0xC4F020, bin] # rodata
-    - [0xC4F030, bin] # rodata
   - name: world/area_dgb/dgb_14/
     type: code
     overlay: True
@@ -7124,7 +6959,6 @@ segments:
     - [0xC59620, bin]
     - [0xC59810, bin] # rodata
     - [0xC59820, bin] # rodata
-    - [0xC599D0, bin] # rodata
   - name: world/area_kzn/kzn_01/
     type: code
     overlay: True
@@ -7150,7 +6984,6 @@ segments:
     - [0xC60C30, bin] # rodata
     - [0xC60C98, bin] # rodata
     - [0xC60D00, bin] # rodata
-    - [0xC60D10, bin] # rodata
   - name: world/area_kzn/kzn_03/
     type: code
     overlay: True
@@ -7167,7 +7000,6 @@ segments:
     - [0xC67ED0, bin] # rodata
     - [0xC67F50, bin] # rodata
     - [0xC68120, bin] # rodata
-    - [0xC68130, bin] # rodata
   - name: world/area_kzn/kzn_04/
     type: code
     overlay: True
@@ -7181,7 +7013,6 @@ segments:
     - [0xC69D70, bin]
     - [0xC6A420, bin]
     - [0xC6C0C0, bin] # rodata
-    - [0xC6C0D0, bin] # rodata
   - name: world/area_kzn/kzn_05/
     type: code
     overlay: True
@@ -7203,7 +7034,6 @@ segments:
     - [0xC6D390, bin]
     - [0xC6E300, bin] # rodata
     - [0xC6E320, bin] # rodata
-    - [0xC6E330, bin] # rodata
   - name: world/area_kzn/kzn_07/
     type: code
     overlay: True
@@ -7218,7 +7048,6 @@ segments:
     - [0xC70EC0, bin]
     - [0xC713B0, bin] # rodata
     - [0xC71418, bin] # rodata
-    - [0xC71480, bin] # rodata
   - name: world/area_kzn/kzn_08/
     type: code
     overlay: True
@@ -7246,7 +7075,6 @@ segments:
     - [0xC7A9E0, bin]
     - [0xC7B0D0, bin]
     - [0xC7DF40, bin] # rodata
-    - [0xC7E180, bin] # rodata
   - name: world/area_kzn/kzn_10/
     type: code
     overlay: True
@@ -7258,7 +7086,6 @@ segments:
     - [0xC7E850, bin]
     - [0xC7EE90, bin]
     - [0xC80170, bin] # rodata
-    - [0xC801A0, bin] # rodata
   - name: world/area_kzn/kzn_11/
     type: code
     overlay: True
@@ -7273,7 +7100,6 @@ segments:
     - [0xC83870, bin]
     - [0xC859E0, bin] # rodata
     - [0xC85A48, bin] # rodata
-    - [0xC85AB0, bin] # rodata
   - name: world/area_kzn/kzn_17/
     type: code
     overlay: True
@@ -7313,7 +7139,6 @@ segments:
     - [0xC95E70, bin]
     - [0xC95EF0, bin] # rodata
     - [0xC95F20, bin] # rodata
-    - [0xC95F30, bin] # rodata
   - name: world/area_kzn/kzn_20/
     type: code
     overlay: True
@@ -7390,7 +7215,6 @@ segments:
     - [0xCACAC0, bin]
     - [0xCAD410, bin]
     - [0xCAED20, bin] # rodata
-    - [0xCAED40, bin] # rodata
   - name: world/area_flo/flo_08/
     type: code
     overlay: True
@@ -7420,7 +7244,6 @@ segments:
     - [0xCB7010, bin]
     - [0xCB7880, bin]
     - [0xCB9190, bin] # rodata
-    - [0xCB9200, bin] # rodata
   - name: world/area_flo/flo_10/
     type: code
     overlay: True
@@ -7440,7 +7263,6 @@ segments:
     - [0xCBD270, bin]
     - [0xCBD290, bin]
     - [0xCBDCB0, bin] # rodata
-    - [0xCBDCD0, bin] # rodata
   - name: world/area_flo/flo_11/
     type: code
     overlay: True
@@ -7452,7 +7274,6 @@ segments:
     - [0xCBF790, bin]
     - [0xCC0DC0, bin]
     - [0xCC0E10, bin] # rodata
-    - [0xCC0E30, bin] # rodata
   - name: world/area_flo/flo_12/
     type: code
     overlay: True
@@ -7495,7 +7316,6 @@ segments:
     - [0xCD0240, bin]
     - [0xCD0280, bin]
     - [0xCD0620, bin] # rodata
-    - [0xCD06C0, bin] # rodata
   - name: world/area_flo/flo_15/
     type: code
     overlay: True
@@ -7525,7 +7345,6 @@ segments:
     - [0xCD6330, bin]
     - [0xCD7210, bin] # rodata
     - [0xCD7278, bin] # rodata
-    - [0xCD72E0, bin] # rodata
   - name: world/area_flo/flo_17/
     type: code
     overlay: True
@@ -7579,7 +7398,6 @@ segments:
     - [0xCE73F0, bin]
     - [0xCE7EC0, bin]
     - [0xCEC210, bin] # rodata
-    - [0xCEC240, bin] # rodata
   - name: world/area_flo/flo_22/
     type: code
     overlay: True
@@ -7594,7 +7412,6 @@ segments:
     - [0xCED050, bin]
     - [0xCED7E0, bin]
     - [0xCEE250, bin] # rodata
-    - [0xCEE260, bin] # rodata
   - name: world/area_flo/flo_23/
     type: code
     overlay: True
@@ -7607,7 +7424,6 @@ segments:
     - [0xCEF540, bin]
     - [0xCF0800, bin]
     - [0xCF08D0, bin] # rodata
-    - [0xCF0940, bin] # rodata
   - name: world/area_flo/flo_24/
     type: code
     overlay: True
@@ -7621,7 +7437,6 @@ segments:
     - [0xCF1680, bin]
     - [0xCF2AF0, bin]
     - [0xCF2BB0, bin] # rodata
-    - [0xCF2BD0, bin] # rodata
   - name: world/area_flo/flo_25/
     type: code
     overlay: True
@@ -7638,7 +7453,6 @@ segments:
     - [0xCF7310, bin]
     - [0xCF7AA0, bin] # rodata
     - [0xCF7B08, bin] # rodata
-    - [0xCF7B70, bin] # rodata
   - name: world/area_sam/sam_01/
     type: code
     overlay: True
@@ -7652,7 +7466,6 @@ segments:
     - [0xD01D90, bin]
     - [0xD05460, bin]
     - [0xD05720, bin] # rodata
-    - [0xD05730, bin] # rodata
   - name: world/area_sam/sam_02/
     type: code
     overlay: True
@@ -7668,7 +7481,6 @@ segments:
     - [0xD0C294, bin]
     - [0xD10DA0, bin]
     - [0xD110A0, bin] # rodata
-    - [0xD110C0, bin] # rodata
   - name: world/area_sam/sam_03/
     type: code
     overlay: True
@@ -7680,7 +7492,6 @@ segments:
     - [0xD11A70, bin]
     - [0xD11D40, bin]
     - [0xD13420, bin] # rodata
-    - [0xD135D0, bin] # rodata
   - name: world/area_sam/sam_04/
     type: code
     overlay: True
@@ -7696,7 +7507,6 @@ segments:
     - [0xD16E20, bin]
     - [0xD18720, bin]
     - [0xD187C0, bin] # rodata
-    - [0xD187E0, bin] # rodata
   - name: world/area_sam/sam_05/
     type: code
     overlay: True
@@ -7710,7 +7520,6 @@ segments:
     - [0xD1A900, bin]
     - [0xD1F780, bin]
     - [0xD1FCB0, bin] # rodata
-    - [0xD1FE90, bin] # rodata
   - name: world/area_sam/sam_06/
     type: code
     overlay: True
@@ -7725,7 +7534,6 @@ segments:
     - [0xD2BC50, bin]
     - [0xD2BCC0, bin] # rodata
     - [0xD2BCD0, bin] # rodata
-    - [0xD2BD30, bin] # rodata
   - name: world/area_sam/sam_07/
     type: code
     overlay: True
@@ -7739,7 +7547,6 @@ segments:
     - [0xD2E1F0, bin]
     - [0xD2E9C0, bin]
     - [0xD2FAA0, bin] # rodata
-    - [0xD2FC80, bin] # rodata
   - name: world/area_sam/sam_08/
     type: code
     overlay: True
@@ -7753,7 +7560,6 @@ segments:
     - [0xD31E80, bin]
     - [0xD335E0, bin]
     - [0xD36140, bin] # rodata
-    - [0xD362F0, bin] # rodata
   - name: world/area_sam/sam_09/
     type: code
     overlay: True
@@ -7778,7 +7584,6 @@ segments:
     - [0xD38840, bin]
     - [0xD3A410, bin] # rodata
     - [0xD3A430, bin] # rodata
-    - [0xD3A5D0, bin] # rodata
   - name: world/area_sam/sam_11/
     type: code
     overlay: True
@@ -7797,7 +7602,6 @@ segments:
     - [0xD48C40, bin]
     - [0xD4B9E0, bin] # rodata
     - [0xD4BA00, bin] # rodata
-    - [0xD4BA20, bin] # rodata
   - name: world/area_sam/sam_12/
     type: code
     overlay: True
@@ -7812,7 +7616,6 @@ segments:
     - [0xD4C2A0, bin]
     - [0xD4CF90, bin]
     - [0xD4D030, bin] # rodata
-    - [0xD4D040, bin] # rodata
   - name: world/area_pra/pra_01/
     type: code
     overlay: True
@@ -7826,7 +7629,6 @@ segments:
     - [0xD4EF50, bin]
     - [0xD4FFC0, bin]
     - [0xD4FFD0, bin] # rodata
-    - [0xD4FFF0, bin] # rodata
   - name: world/area_pra/pra_02/
     type: code
     overlay: True
@@ -7840,7 +7642,6 @@ segments:
     - [0xD52A80, bin]
     - [0xD52DE0, bin]
     - [0xD53C80, bin] # rodata
-    - [0xD53CB0, bin] # rodata
   - name: world/area_pra/pra_03/
     type: code
     overlay: True
@@ -7853,7 +7654,6 @@ segments:
     - [0xD53F10, bin]
     - [0xD543C0, bin]
     - [0xD54670, bin] # rodata
-    - [0xD54690, bin] # rodata
   - name: world/area_pra/pra_04/
     type: code
     overlay: True
@@ -7880,7 +7680,6 @@ segments:
     - [0xD56D90, bin]
     - [0xD56E20, bin]
     - [0xD57420, bin] # rodata
-    - [0xD57430, bin] # rodata
   - name: world/area_pra/pra_06/
     type: code
     overlay: True
@@ -7891,7 +7690,6 @@ segments:
     - [0xD58380, bin]
     - [0xD58410, bin]
     - [0xD58860, bin] # rodata
-    - [0xD58890, bin] # rodata
   - name: world/area_pra/pra_09/
     type: code
     overlay: True
@@ -7926,7 +7724,6 @@ segments:
     - [0xD62770, bin]
     - [0xD62B10, bin]
     - [0xD62D00, bin] # rodata
-    - [0xD62D10, bin] # rodata
   - name: world/area_pra/pra_12/
     type: code
     overlay: True
@@ -7937,7 +7734,6 @@ segments:
     - [0xD63F20, bin]
     - [0xD63FB0, bin]
     - [0xD645B0, bin] # rodata
-    - [0xD645E0, bin] # rodata
   - name: world/area_pra/pra_13/
     type: code
     overlay: True
@@ -7962,7 +7758,6 @@ segments:
     - [0xD68F80, bin]
     - [0xD69630, bin]
     - [0xD69800, bin] # rodata
-    - [0xD69810, bin] # rodata
   - name: world/area_pra/pra_15/
     type: code
     overlay: True
@@ -7975,7 +7770,6 @@ segments:
     - [0xD698E0, bin]
     - [0xD69AD0, bin]
     - [0xD69B10, bin] # rodata
-    - [0xD69B20, bin] # rodata
   - name: world/area_pra/pra_16/
     type: code
     overlay: True
@@ -8057,7 +7851,6 @@ segments:
     - [0xD7AC90, bin]
     - [0xD7B080, bin]
     - [0xD7B270, bin] # rodata
-    - [0xD7B2A0, bin] # rodata
   - name: world/area_pra/pra_28/
     type: code
     overlay: True
@@ -8069,7 +7862,6 @@ segments:
     - [0xD7C540, bin]
     - [0xD7C930, bin]
     - [0xD7CB20, bin] # rodata
-    - [0xD7CB50, bin] # rodata
   - name: world/area_pra/pra_29/
     type: code
     overlay: True
@@ -8096,7 +7888,6 @@ segments:
     - [0xD80E20, bin]
     - [0xD81250, bin]
     - [0xD869E0, bin] # rodata
-    - [0xD86A00, bin] # rodata
   - name: world/area_pra/pra_32/
     type: code
     overlay: True
@@ -8108,7 +7899,6 @@ segments:
     - [0xD87240, bin]
     - [0xD87DF0, bin]
     - [0xD896B0, bin] # rodata
-    - [0xD896E0, bin] # rodata
   - name: world/area_pra/pra_33/
     type: code
     overlay: True
@@ -8147,7 +7937,6 @@ segments:
     - [0xD90700, bin]
     - [0xD91030, bin]
     - [0xD91220, bin] # rodata
-    - [0xD91700, bin] # rodata
   - name: world/area_pra/pra_36/
     type: code
     overlay: True
@@ -8158,7 +7947,6 @@ segments:
     - [0xD92650, bin]
     - [0xD926F0, bin]
     - [0xD92F10, bin] # rodata
-    - [0xD92F40, bin] # rodata
   - name: world/area_pra/pra_37/
     type: code
     overlay: True
@@ -8170,7 +7958,6 @@ segments:
     - [0xD94800, bin]
     - [0xD95420, bin] # rodata
     - [0xD95450, bin] # rodata
-    - [0xD955F0, bin] # rodata
   - name: world/area_pra/pra_38/
     type: code
     overlay: True
@@ -8219,7 +8006,6 @@ segments:
     - [0xD9C200, bin]
     - [0xD9D250, bin]
     - [0xD9D330, bin] # rodata
-    - [0xD9D4D0, bin] # rodata
   - name: world/area_omo/omo_02/
     type: code
     overlay: True
@@ -8261,7 +8047,6 @@ segments:
     - [0xDB20B0, bin] # rodata
     - [0xDB2108, bin] # rodata
     - [0xDB22B0, bin] # rodata
-    - [0xDB22C0, bin] # rodata
   - name: world/area_omo/omo_05/
     type: code
     overlay: True
@@ -8288,7 +8073,6 @@ segments:
     - [0xDB9060, bin]
     - [0xDBCFD0, bin]
     - [0xDBD270, bin] # rodata
-    - [0xDBD2B0, bin] # rodata
   - name: world/area_omo/omo_07/
     type: code
     overlay: True
@@ -8307,7 +8091,6 @@ segments:
     - [0xDC3E70, bin] # rodata
     - [0xDC3E80, bin] # rodata
     - [0xDC43C0, bin] # rodata
-    - [0xDC43D0, bin] # rodata
   - name: world/area_omo/omo_08/
     type: code
     overlay: True
@@ -8343,7 +8126,6 @@ segments:
     - [0xDD72F0, bin] # rodata
     - [0xDD7300, bin] # rodata
     - [0xDD79A0, bin] # rodata
-    - [0xDD79B0, bin] # rodata
   - name: world/area_omo/omo_10/
     type: code
     overlay: True
@@ -8356,7 +8138,6 @@ segments:
     - [0xDD8A60, bin]
     - [0xDDC720, bin]
     - [0xDDC7F0, bin] # rodata
-    - [0xDDC830, bin] # rodata
   - name: world/area_omo/omo_11/
     type: code
     overlay: True
@@ -8417,7 +8198,6 @@ segments:
     - [0xDE8F70, bin]
     - [0xDE9670, bin]
     - [0xDEBEA0, bin] # rodata
-    - [0xDEBED0, bin] # rodata
   - name: world/area_omo/omo_16/
     type: code
     overlay: True
@@ -8507,7 +8287,6 @@ segments:
     - [0xE141D0, bin]
     - [0xE15440, bin]
     - [0xE15D10, bin] # rodata
-    - [0xE15D80, bin] # rodata
   - name: world/area_mgm/mgm_02/
     type: code
     overlay: True
@@ -8520,7 +8299,6 @@ segments:
     - [0xE183D0, bin]
     - [0xE1E020, bin]
     - [0xE1E260, bin] # rodata
-    - [0xE1E380, bin] # rodata
   - name: world/area_mgm/mgm_03/
     type: code
     overlay: True
@@ -8528,7 +8306,6 @@ segments:
     vram: 0x80240000
     subsections:
     - [0xE1E380, bin]
-    - [0xE1E460, bin]
   - name: world/area_gv/gv_01/
     type: code
     overlay: True

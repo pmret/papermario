@@ -559,12 +559,12 @@ async def main():
         status = await shell_status(f"grep -q SCRIPT\( {c_file}")
 
         for version in versions:
-            s_glob = None if not args.depend_on_s else "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
+            s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
             n.build(
                 obj(c_file),
                 "cc_dsl" if status == 0 else "cc",
                 c_file,
-                implicit=glob(s_glob),
+                implicit = None if not args.depend_on_s else glob(s_glob),
                 order_only="generated_headers_" + version,
                 variables={ "version": version }
             )
