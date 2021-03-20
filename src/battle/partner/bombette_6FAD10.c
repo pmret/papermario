@@ -137,7 +137,7 @@ ApiStatus func_80238358_6FB068(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[15] = var1;
 
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus func_8023849C_6FB1AC(ScriptInstance* script, s32 isInitialCall) {
@@ -184,7 +184,7 @@ ApiStatus func_8023849C_6FB1AC(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[15] = var1;
 
-    return 2;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus func_80238590_6FB2A0(ScriptInstance* script, s32 isInitialCall) {
@@ -223,5 +223,5 @@ ApiStatus func_80238590_6FB2A0(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[15] = var1;
 
-    return 2;
+    return ApiStatus_DONE2;
 }
