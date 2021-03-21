@@ -13,6 +13,7 @@ options:
   target_path: baserom.z64
   src_path: ../../src
   assets_dir: assets
+  subalign: 8
 segments:
   - name: header
     type: header
@@ -452,7 +453,6 @@ segments:
     - [0x10CC10, bin]
   - [0x10F1B0, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
-  - [0x11A23E, bin]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
   - [0x131340, bin]
@@ -1679,6 +1679,7 @@ segments:
     start: 0x4309A0
     vram: 0x80218000
     overlay: True
+    subalign: 4
     subsections:
     - [0x4309A0, c]
     - [0x431180, c]
@@ -3005,7 +3006,6 @@ segments:
     overlay: True
     start: 0x852170
     vram: 0x80240000
-    subalign: 8
     subsections:
     - [0x852170, c]
     - [0x855560, c]
@@ -3484,7 +3484,6 @@ segments:
     overlay: True
     start: 0x8DA100
     vram: 0x80240000
-    subalign: 8
     subsections:
     - [0x8DA100, c]
     - [0x8DA3A0, c]
@@ -4638,7 +4637,6 @@ segments:
     overlay: True
     start: 0x9C53E0
     vram: 0x80240000
-    subalign: 8
     subsections:
     - [0x9C53E0, c]
     - [0x9C7D10, c]
@@ -4692,7 +4690,6 @@ segments:
     overlay: True
     start: 0x9EDBF0
     vram: 0x80240000
-    subalign: 8
     subsections:
     - [0x9EDBF0, c]
     - [0x9EEA80, c]
@@ -5777,7 +5774,6 @@ segments:
     overlay: True
     start: 0xAF7950
     vram: 0x80240000
-    subalign: 8
     subsections:
     - [0xAF7950, c]
     - [0xAF7C00, c]
@@ -9711,5 +9707,7 @@ segments:
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, PaperMarioMapFS]
-  - [0x27FEE22, bin]
+  - type: bin
+    start: 0x27FEE22
+    subalign: 2
   - [0x2800000]

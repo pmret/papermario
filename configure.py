@@ -27,16 +27,17 @@ def read_splat(splat_config: str, version: str):
     import argparse
     import yaml
     from segtypes.n64.code import N64SegCode
+    from util import options
 
     # Load config
     with open(splat_config) as f:
         config = yaml.safe_load(f.read())
 
-    options = config.get("options")
+    options.initialize(config)
     assert options.get("ld_o_replace_extension", True) == False
 
     # Initialize segments
-    all_segments = split.initialize_segments(options, splat_config, config["segments"])
+    all_segments = split.initialize_segments(splat_config, config["segments"])
 
     objects = set()
     segments = {}
