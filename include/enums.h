@@ -275,10 +275,10 @@ typedef UNK_TYPE SoundID;
 #define SoundId_SHY_GUY_SCREAMS3      0x0000030E
 #define SoundId_TOY_TANK_MOVE1        0x0000030F
 #define SoundId_TOY_TANK_MOVE2        0x00000310
-#define SoundId_GENERAL_WHISTLE       0x00000395
 #define SoundId_MOLE_SURFACE          0x00000321
 #define SoundId_MOLE_DIG              0x00000322
 #define SoundId_MOLE_POP              0x00000323
+#define SoundId_GENERAL_WHISTLE       0x00000395
 #define SoundId_JUMP                  0x000003E2
 #define SoundId_MISS_JUMP             0x000003E3
 #define SoundId_DEATH                 0x000003E5
@@ -292,8 +292,8 @@ typedef UNK_TYPE SoundID;
 #define SoundId_CANNON1               0x00002016
 #define SoundId_CANNON2               0x00002017
 #define SoundId_CANNON3               0x00002018
-#define SoundId_JUMP2                 0x00002081
 #define SoundId_BOMB_BLAST            0x00002076
+#define SoundId_JUMP2                 0x00002081
 #define SoundId_SPELL_CAST1           0x000020D4
 #define SoundId_SPELL_CAST2           0x000020D5
 #define SoundId_SPELL_CAST3           0x000020D6
@@ -710,6 +710,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_GET_UP           0x00010030
 #define PlayerAnim_DUST_OFF         0x00010031
 #define PlayerAnim_THUMBS_UP        0x00010032
+#define PlayerAnim_30008            0x00030008 // TODO
 #define PlayerAnim_8000B            0x0008000B // TODO
 
 typedef UNK_TYPE AmbientSounds;

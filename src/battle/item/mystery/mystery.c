@@ -46,20 +46,20 @@ s32 N(D_802A229C_72D84C)[8] = {
 
 Script N(main) = SCRIPT({
     SI_VAR(10) =c 0x96;
-    await 0x802A1950;
+    await N(UseItemWithEffect);
     spawn {
         sleep 220;
-        PlaySoundAtActor(0, 1011);
+        PlaySoundAtActor(ActorID_PLAYER, 1011);
     }
-    PlaySoundAtActor(0, 872);
+    PlaySoundAtActor(ActorID_PLAYER, 872);
     N(func_802A13E4_72C994)();
     sleep 2;
-    if (SI_VAR(0) != 133) {
+    if (SI_VAR(0) != ItemId_PEBBLE) {
         jump UseMystery;
         return;
     }
     func_802D3474(SI_VAR(10), N(modelCommandList));
-    GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 150;
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetOwnerTarget(0, 0);
@@ -87,5 +87,5 @@ Script N(main) = SCRIPT({
     GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     N(func_802A188C_72CE3C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetBattleFlagBits(32, 1);
-    DispatchDamagePlayerEvent(1, 10);
+    DispatchDamagePlayerEvent(1, Event_HIT);
 });

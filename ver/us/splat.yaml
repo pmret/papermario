@@ -2487,14 +2487,16 @@ segments:
     - [0x72D6C0, palette, mystery]
     - [0x72D6E0,   .data, mystery]
     - [0x72DB50, .rodata, lib]
-  - name: battle/item/repel_gel
+  - name: battle/item/repel_gel/
     type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x72DB70, c]
-    - [0x72DE00, data]
+    - [0x72DB70,     c, lib]
+    - [0x72DE00, .data, lib]
+    - [0x72E3CC, .data, repel_gel]
   - name: battle/item/life_shroom/
     type: code
     start: 0x72E530

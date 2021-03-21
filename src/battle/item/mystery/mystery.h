@@ -18,4 +18,6 @@ s32 N(D_802A229C_72D84C)[8];
 ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall);
 ApiStatus N(func_802A188C_72CE3C)(ScriptInstance *script, s32 isInitialCall);
 
+Script N(UseItemWithEffect);
+
 #endif

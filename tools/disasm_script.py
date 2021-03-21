@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 import sys
+from pathlib import Path
 
 _script_lib = None
 def script_lib(offset):
@@ -9,7 +10,6 @@ def script_lib(offset):
     if not _script_lib:
         _script_lib = {}
 
-        from pathlib import Path
         from os import path
         import re
 
@@ -66,6 +66,85 @@ def script_lib(offset):
                 _script_lib[k][i][0] = entry[0]
             _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
+
+# Grab constants from the include/ folder to save manual work
+constants = {}
+def get_constants():
+    global constants
+
+    constants["ItemId"] = {}
+    constants["AnimId"] = {}
+    constants["ActorId"] = {}
+    constants["Event"] = {}
+
+    include_path = Path(Path(__file__).resolve().parent.parent / "include")
+    enums = Path(include_path / "enums.h").read_text()
+
+    for line in enums.splitlines():
+        if "#define ItemId_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["ItemId"][int(id_, 16)] = name
+
+        elif "#define PlayerAnim_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["AnimId"][int(id_, 16)] = name
+
+        elif "#define ActorID_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["ActorId"][int(id_, 16)] = name
+
+        elif "#define Event_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["Event"][int(id_, 16)] = name
+    return
+
+def fix_args(args, info):
+    new_args = []
+    for i,arg in enumerate(args.split(", ")):
+        if i in info:
+            if "0x" in arg:
+                argNum = int(arg, 16)
+            else:
+                argNum = int(arg, 10)
+            if argNum in constants[info[i]]:
+                new_args.append(f"{constants[info[i]][argNum]}")
+            else:
+                print(f"{argNum:X} was not found within {info[i]} constants, add it.")
+                new_args.append(f"{arg}")
+        else:
+            new_args.append(f"{arg}")
+    return ", ".join(new_args)
+
+def replace_constants(func, args):
+    global constants
+
+    if func == "SetAnimation":                  return fix_args(args, {0:"ActorId", 2:"AnimId"})
+    elif func == "SetJumpAnimations":           return fix_args(args, {0:"ActorId", 2:"AnimId", 3:"AnimId", 4:"AnimId"})
+    elif func == "SetActorJumpGravity":         return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorSpeed":               return fix_args(args, {0:"ActorId"})
+    elif func == "GetActorPos":                 return fix_args(args, {0:"ActorId"})
+    elif func == "SetTargetActor":              return fix_args(args, {0:"ActorId"})
+    elif func == "SetGoalToTarget":             return fix_args(args, {0:"ActorId"})
+    elif func == "SetGoalToHome":               return fix_args(args, {0:"ActorId"})
+    elif func == "GetGoalPos":                  return fix_args(args, {0:"ActorId"})
+    elif func == "PlaySoundAtActor":            return fix_args(args, {0:"ActorId"})
+    elif func == "GetItemPower":                return fix_args(args, {0:"ItemId"})
+    elif func == "UseIdleAnimation":            return fix_args(args, {0:"ActorId"})
+    elif func == "DispatchDamagePlayerEvent":   return fix_args(args, {1:"Event"})
+
+    return args
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
@@ -633,6 +712,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 func_name = self.symbol_map[addr][0][1]
 
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
+                argv_str = replace_constants(func_name, argv_str)
+
                 self.write_line(f"{func_name}({argv_str});")
             else:
                 print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
@@ -680,6 +761,7 @@ if __name__ == "__main__":
     offset = eval(sys.argv[2]) if len(sys.argv) >= 3 else 0
 
     with open(file, "rb") as f:
+        get_constants()
         f.seek(offset)
 
         try:
