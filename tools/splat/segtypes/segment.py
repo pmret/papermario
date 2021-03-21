@@ -38,9 +38,10 @@ def parse_segment_vram(segment):
 
 
 def parse_segment_subalign(segment):
+    default = options.get("subalign", default_subalign)
     if type(segment) is dict:
-        return segment.get("subalign", default_subalign)
-    return default_subalign
+        return segment.get("subalign", default)
+    return default
 
 
 class Segment:
@@ -118,9 +119,7 @@ class Segment:
         replace_ext = options.get("ld_o_replace_extension", True)
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
         vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
-
-        subalign_amt = options.get("subalign", self.subalign)
-        subalign_str = f"SUBALIGN({subalign_amt})"
+        subalign_str = f"SUBALIGN({self.subalign})"
 
         s = (
             f"SPLAT_BEGIN_SEG({sect_name}, 0x{self.rom_start:X}, 0x{vram_or_rom:X}, {subalign_str})\n"
