@@ -5,7 +5,7 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     func_80027088(2);
-    set_transition_stencil_zoom_0(0, (f32) D_800A0932[0]);
+    set_transition_stencil_zoom_0(0, D_800A0932[0]);
 }
 
 void state_init_file_select(void) {
@@ -21,16 +21,16 @@ void state_init_file_select(void) {
     load_model_textures(0, 0, 0);
     cameras[0].mode = 6;
     cameras[0].unk_06 = 1;
-    cameras[0].nearClip = 0x10;
-    cameras[0].farClip = 0x1000;
+    cameras[0].nearClip = 16;
+    cameras[0].farClip = 4096;
     cameras[0].flags |= 2;
     gCurrentCameraID = 0;
     cameras[1].flags |= 2;
     cameras[2].flags |= 2;
     cameras[3].flags |= 2;
     cameras[0].vfov = 25.0f;
-    set_cam_viewport(0, 0xC, 0x1C, 0x128, 0xB8);
-    cameras[0].unk_1E = 0x28;
+    set_cam_viewport(0, 12, 28, 296, 184);
+    cameras[0].unk_1E = 40;
     cameras[0].lookAt_eye[0] = 500.0f;
     cameras[0].lookAt_eye[1] = 1000.0f;
     cameras[0].lookAt_eye[2] = 1500.0f;
@@ -41,7 +41,7 @@ void state_init_file_select(void) {
     cameras[0].unk_54 = 25.0f;
     cameras[0].unk_58 = 25.0f;
     cameras[0].unk_1C = 0;
-    cameras[0].unk_20 = 0x64;
+    cameras[0].unk_20 = 100;
     cameras[0].unk_22 = 0;
     OVERRIDE_FLAG_SET(0x10000);
 }
@@ -72,12 +72,13 @@ void func_80035660(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     D_800A0930 = 0;
+    
     if (func_80244BC4() == 0) {
         set_map_transition_effect(7);
     } else {
         set_map_transition_effect(8);
         OVERRIDE_FLAG_UNSET(0x0010000);
-        set_music_track(0, -1, 0, 0x3E8, 8);
+        set_music_track(0, -1, 0, 1000, 8);
     }
     OVERRIDE_FLAG_UNSET(0x40);
 }

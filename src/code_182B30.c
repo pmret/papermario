@@ -354,12 +354,12 @@ void func_8025DBC8(void) {
 INCLUDE_ASM(s32, "code_182B30", func_8025DBD0);
 
 void func_8025DD40(ActorPart* actorPart, s32 arg1) {
-    actorPart->decorationTable->unk_8025D160[arg1]->unk_0C->unk_2C = 5;
+    actorPart->decorationTable->unk_8B0[arg1]->unk_0C->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "code_182B30", func_8025DD60);
 
 void func_8025DE88(ActorPart* actorPart, s32 arg1) {
-    actorPart->decorationTable->unk_8025D160[arg1]->unk_00 |= 0x10;
+    actorPart->decorationTable->unk_8B0[arg1]->unk_00 |= 0x10;
 }
 
