@@ -63,8 +63,8 @@ Script N(main) = SCRIPT({
     SI_VAR(1) += 150;
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetOwnerTarget(0, 0);
-    SetGoalToTarget(0xFFFFFF81);
-    GetGoalPos(0xFFFFFF81, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ActorID_SELF);
+    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         SI_VAR(0) = 0;
         loop 18 {
@@ -82,9 +82,9 @@ Script N(main) = SCRIPT({
         func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
         func_802D3624(SI_VAR(10));
     }
-    SetTargetActor(0xFFFFFF81, 0);
-    SetGoalToTarget(0xFFFFFF81);
-    GetGoalPos(0xFFFFFF81, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetTargetActor(ActorID_SELF, 0);
+    SetGoalToTarget(ActorID_SELF);
+    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     N(func_802A188C_72CE3C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetBattleFlagBits(32, 1);
     DispatchDamagePlayerEvent(1, 10);

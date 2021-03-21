@@ -2278,14 +2278,16 @@ segments:
     - [0x7181D0,     ci4, dusty_hammer, 32, 32]
     - [0x7183D0, palette, dusty_hammer]
     - [0x7183F0,   .data, dusty_hammer]
-  - name: battle/item/pow_block
+  - name: battle/item/pow_block/
     type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x718850, c]
-    - [0x718BF0, data]
+    - [0x718850,     c, lib]
+    - [0x718BF0, .data, lib]
+    - [0x7191AC, .data, pow_block]
   - name: battle/item/pebble/
     type: code
     start: 0x719970

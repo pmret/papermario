@@ -1,8 +1,7 @@
-#include "dizzy_dial.h"
+#include "pow_block.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1CD4;
-s32* D_802A1CD0;
+MenuIcon* D_802A2120;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -34,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1CD4 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1CD4, iconPosX + 36, iconPosY - 63);
+        D_802A2120 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A2120, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -49,55 +48,59 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1CD4);
+        free_icon(D_802A2120);
     }
 
     return ApiStatus_DONE2;
 }
 
-void func_802A123C_727B4C(void) {
-    func_80138D88(0, 0, 0x140, 0xF0, 160.0f);
+ApiStatus N(func_802A123C_718A8C)(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (player->scalingFactor == 1.0) {
+        s32 var = script->varTable[10];
+        get_entity_by_index(var);
+        collisionStatus->currentCeiling = var | 0x4000;
+        playerStatus->flags |= 2;
+        update_entities();
+        collisionStatus->currentCeiling = -1;
+        playerStatus->flags &= ~2;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
-    Camera *camera = &gCameras[1];
-    f32 a;
+ApiStatus N(func_802A12E4_718B34)(ScriptInstance *script, s32 isInitialCall) {
+    Entity* entity = get_entity_by_index(script->varTable[10]);
 
-    if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+    entity->flags |= 0x20000000;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A1318_718B68)(ScriptInstance *script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    Entity* entity = get_entity_by_index(script->varTable[10]);
+
+    entity->scale.x = player->scalingFactor;
+    entity->scale.y = player->scalingFactor;
+    entity->scale.z = player->scalingFactor;
+    if (player->scalingFactor != 1.0) {
+        entity->position.y -= 10.0f;
     }
 
-    switch(script->functionTemp[0].s) {
-        case 0:
-            script->functionTemp[1].s = 0;
-            script->functionTemp[2].s = 0;
-            play_sound(0x2033);
-            camera->unk_1C = 0;
-            D_802A1CD0 = bind_dynamic_entity_7(NULL, func_802A123C_727B4C);
-            script->functionTemp[0].s = 1;
-        case 1:
-            camera->flags |= 8;
-            a = script->functionTemp[1].s;
-            guRotateF(camera->viewMtxShaking, a, 0.0f, 0.0f, 1.0f);
-            script->functionTemp[1].s = 2.0 * ((1.0 - sin_rad(((script->functionTemp[2].s + 90) * 6.28318f) / 360.0f)) * 360.0);
-            script->functionTemp[2].s++;
-            if (script->functionTemp[2].s <= 90) {
-                return ApiStatus_BLOCK;
-            }
-            camera->unk_1C = 0;
-            camera->flags &= ~8;
-            func_801235C0(D_802A1CD0);
-            return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
+    return ApiStatus_DONE2;
 }
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseCamPreset(69);
         sleep 10;
-
         PlaySoundAtActor(ActorID_PLAYER, 8333);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -105,7 +108,6 @@ Script N(UseItemWithEffect) = SCRIPT({
         SetActorSpeed(ActorID_PLAYER, 4.0);
         SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         PlayerRunToGoal(0);
-
         SI_VAR(1) += 45;
         SI_VAR(3) = SI_VAR(1);
         SI_VAR(3) += 10;
@@ -113,12 +115,9 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(10) = SI_VAR(0);
-
         N(GiveRefund)();
         sleep SI_VAR(0);
-
         sleep 15;
-
         N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
@@ -126,7 +125,6 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlaySoundAtActor(ActorID_PLAYER, 8333);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
-
         SI_VAR(1) += 45;
         SI_VAR(3) = SI_VAR(1);
         SI_VAR(3) += 10;
@@ -134,7 +132,6 @@ Script N(UseItemWithEffect) = SCRIPT({
         PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(10) = SI_VAR(0);
-
         sleep 15;
         RemoveItemEntity(SI_VAR(10));
     }
@@ -161,7 +158,7 @@ Script N(UseItem) = SCRIPT({
 
 Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
-    SetGoalToHome(0);
+    SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);

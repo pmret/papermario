@@ -35,7 +35,7 @@ Script N(main) = SCRIPT({
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
-    SetGoalToTarget(0xFFFFFF81);
+    SetGoalToTarget(ActorID_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;

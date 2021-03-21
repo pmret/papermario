@@ -86,7 +86,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 18;
         SetActorSpeed(ActorID_PLAYER, 4.0);
-        SetGoalPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         PlayerRunToGoal(0);
 
         SI_VAR(1) += 45;
