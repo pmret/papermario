@@ -70,6 +70,11 @@ def write_ldscript(rom_name, repo_path, sections, options):
             )
             f.write("\n    ".join(s.replace("\n", "\n    ") for s in sections)[:-4])
             f.write(
+
+                "    /DISCARD/ :\n"
+                "    {\n"
+                "        *(*);\n"
+                "    }\n"
                 "}\n"
             )
 

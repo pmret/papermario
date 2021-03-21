@@ -226,8 +226,9 @@ class CodeSubsegment(Subsegment):
                 outpath = Path(os.path.join(asm_out_dir, self.name + ".s"))
                 outpath.parent.mkdir(parents=True, exist_ok=True)
 
-                with open(outpath, "w", newline="\n") as f:
-                    f.write("\n".join(out_lines))
+                if self.type == "asm" or not os.path.exists(outpath):
+                    with open(outpath, "w", newline="\n") as f:
+                        f.write("\n".join(out_lines))
 
 class DataSubsegment(Subsegment):
     def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
@@ -580,7 +581,7 @@ class N64SegCode(N64Segment):
 
         return ret
 
-    def get_file_for_addr(self, addr):
+    def get_subsection_for_ram(self, addr):
         for sub in self.subsegments:
             if sub.contains_vram(addr):
                 return sub
@@ -993,16 +994,18 @@ class N64SegCode(N64Segment):
             func_rodata = list({s for s in self.rodata_syms[func] if s.disasm_str})
             func_rodata.sort(key=lambda s:s.vram_start)
 
-            if self.get_file_for_addr(func_rodata[0].vram_start).type != "rodata":
-                out_lines.append(".section .rodata")
+            if len(func_rodata) > 0:
+                sub = self.get_subsection_for_ram(func_rodata[0].vram_start)
+                if sub and sub.type != "rodata":
+                    out_lines.append(".section .rodata")
 
-                for sym in func_rodata:
-                    if sym.disasm_str:
-                        out_lines.extend(sym.disasm_str.replace("\n\n", "\n").split("\n"))
+                    for sym in func_rodata:
+                        if sym.disasm_str:
+                            out_lines.extend(sym.disasm_str.replace("\n\n", "\n").split("\n"))
 
-                out_lines.append("")
-                out_lines.append(".section .text")
-                out_lines.append("")
+                    out_lines.append("")
+                    out_lines.append(".section .text")
+                    out_lines.append("")
 
         out_lines.extend(funcs_text[func][0])
         out_lines.append("")
