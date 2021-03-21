@@ -118,7 +118,9 @@ class Segment:
         replace_ext = options.get("ld_o_replace_extension", True)
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
         vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
-        subalign_str = f"SUBALIGN({self.subalign})"
+
+        subalign_amt = options.get("subalign", self.subalign)q
+        subalign_str = f"SUBALIGN({subalign_amt})"
 
         s = (
             f"SPLAT_BEGIN_SEG({sect_name}, 0x{self.rom_start:X}, 0x{vram_or_rom:X}, {subalign_str})\n"
