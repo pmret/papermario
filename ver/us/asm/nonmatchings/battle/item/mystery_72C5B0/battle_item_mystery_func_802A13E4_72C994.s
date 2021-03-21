@@ -1,6 +1,12 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802A25A0_72DB50
+.word L802A143C_72C9EC, L802A1548_72CAF8, L802A168C_72CC3C, L802A1710_72CCC0, L802A17AC_72CD5C, L802A17CC_72CD7C, 0, 0
+
+.section .text
 glabel func_802A13E4_72C994
 /* 72C994 802A13E4 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 72C998 802A13E8 0080302D */  daddu     $a2, $a0, $zero
@@ -26,8 +32,8 @@ glabel func_802A13E4_72C994
 /* 72C9E4 802A1434 00400008 */  jr        $v0
 /* 72C9E8 802A1438 00000000 */   nop
 glabel L802A143C_72C9EC
-/* 72C9EC 802A143C 3C05802A */  lui       $a1, %hi(func_802A123C_72C7EC)
-/* 72C9F0 802A1440 24A5123C */  addiu     $a1, $a1, %lo(func_802A123C_72C7EC)
+/* 72C9EC 802A143C 3C05802A */  lui       $a1, %hi(battle_item_mystery_func_802A123C_72C7EC)
+/* 72C9F0 802A1440 24A5123C */  addiu     $a1, $a1, %lo(battle_item_mystery_func_802A123C_72C7EC)
 /* 72C9F4 802A1444 0C048C8F */  jal       bind_dynamic_entity_7
 /* 72C9F8 802A1448 0000202D */   daddu    $a0, $zero, $zero
 /* 72C9FC 802A144C 3C01802A */  lui       $at, %hi(D_802A25F8)
@@ -42,8 +48,8 @@ glabel L802A143C_72C9EC
 /* 72CA20 802A1470 3C01802A */  lui       $at, %hi(D_802A25F0)
 /* 72CA24 802A1474 AC2225F0 */  sw        $v0, %lo(D_802A25F0)($at)
 /* 72CA28 802A1478 82430432 */  lb        $v1, 0x432($s2)
-/* 72CA2C 802A147C 3C02802A */  lui       $v0, %hi(D_802A227C_72D82C)
-/* 72CA30 802A1480 2442227C */  addiu     $v0, $v0, %lo(D_802A227C_72D82C)
+/* 72CA2C 802A147C 3C02802A */  lui       $v0, %hi(battle_item_mystery_D_802A227C_72D82C)
+/* 72CA30 802A1480 2442227C */  addiu     $v0, $v0, %lo(battle_item_mystery_D_802A227C_72D82C)
 /* 72CA34 802A1484 18600010 */  blez      $v1, .L802A14C8
 /* 72CA38 802A1488 AE020000 */   sw       $v0, ($s0)
 /* 72CA3C 802A148C 24040001 */  addiu     $a0, $zero, 1
@@ -58,8 +64,8 @@ glabel L802A143C_72C9EC
 /* 72CA60 802A14B0 00000000 */  nop
 /* 72CA64 802A14B4 45020005 */  bc1fl     .L802A14CC
 /* 72CA68 802A14B8 0000802D */   daddu    $s0, $zero, $zero
-/* 72CA6C 802A14BC 3C02802A */  lui       $v0, %hi(D_802A229C_72D84C)
-/* 72CA70 802A14C0 2442229C */  addiu     $v0, $v0, %lo(D_802A229C_72D84C)
+/* 72CA6C 802A14BC 3C02802A */  lui       $v0, %hi(battle_item_mystery_D_802A229C_72D84C)
+/* 72CA70 802A14C0 2442229C */  addiu     $v0, $v0, %lo(battle_item_mystery_D_802A229C_72D84C)
 /* 72CA74 802A14C4 AE020000 */  sw        $v0, ($s0)
 .L802A14C8:
 /* 72CA78 802A14C8 0000802D */  daddu     $s0, $zero, $zero

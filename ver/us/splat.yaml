@@ -2454,16 +2454,20 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x72B910,     c, lib]
-    - [0x72BC60, .data, lib]
-  - name: battle/item/mystery
+    - [0x72B910,       c, lib]
+    - [0x72BC60,   .data, lib]
+  - name: battle/item/mystery/
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x72C5B0, c]
-    - [0x72CF00, data]
+    - [0x72C5B0,       c, lib]
+    - [0x72CF00,   .data, lib]
+    - [0x72D4C0,     ci4, mystery, 32, 32]
+    - [0x72D6C0, palette, mystery]
+    - [0x72D6E0,   .data, mystery]
+    - [0x72DB50, .rodata, lib]
   - name: battle/item/repel_gel
     type: code
     start: 0x72DB70

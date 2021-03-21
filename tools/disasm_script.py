@@ -648,6 +648,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
+        elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
         elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")

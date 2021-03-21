@@ -54,65 +54,44 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//ApiStatus func_802A123C_72C7EC(ScriptInstance* script, s32 isInitialCall);
-//ApiStatus func_802A13E4_72C994(ScriptInstance* script, s32 isInitialCall);
-//ApiStatus func_802A188C_72CE3C(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(s32, "battle/item/mystery_72C5B0", func_802A123C_72C7EC);
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance *script, s32 isInitialCall);
 /*
-s32 func_802A123C_72C7EC(ScriptInstance *script, s32 isInitialCall) {
-    Gfx *temp_v0_2;
-    Gfx *temp_v1_2;
-    MenuIcon *temp_s0;
-    MenuIcon *temp_s0_2;
-    s32 temp_s1;
-    s32 temp_v0;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    s32 temp_v1_3;
-    void *phi_s2;
-    s32 phi_s3;
-    s32 phi_s1;
-    s32 phi_return;
+extern s32 D_802A25E4;
+extern MenuIcon* D_802A25C8;
+extern s32 D_802A25EC;
 
-    temp_v1 = D_802A25E4;
-    temp_v0 = temp_v1 < 6;
-    phi_return = temp_v0;
-    if (temp_v0 != 0) {
-        phi_return = temp_v0;
-        if (temp_v1 > 0) {
+void N(func_802A123C_72C7EC)(void) {
+    s32 i;
+    MenuIcon** ptr;
+    s32 var;
+    s32* var2;
+
+    if (D_802A25E4 < 6) {
+        if (D_802A25E4 > 0) {
             draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-            temp_v0_2 = gMasterGfxPos;
-            temp_v1_2 = temp_v0_2;
-            gMasterGfxPos = temp_v0_2 + 8;
-            temp_v1_2->words.w0 = 0xED1B0168;
-            temp_v1_2->words.w1 = 0x22C1D8;
-            phi_s2 = &D_802A25C8;
-            phi_s3 = 0;
-            phi_s1 = 0;
-loop_3:
-            temp_v0_3 = D_802A25EC;
-            temp_s0 = *phi_s2;
-            temp_s1 = phi_s1 + 1;
-            set_icon_render_pos(temp_s0, 0x7C, phi_s3 - (((MULT_HI(temp_v0_3, 0x51EB851F) >> 5) - (temp_v0_3 >> 0x1F)) - 0x68));
-            draw_icon_2(temp_s0);
-            phi_s2 = phi_s2 + 4;
-            phi_s3 = phi_s3 + 0x1A;
-            phi_s1 = temp_s1;
-            if (temp_s1 < 7) {
-                goto loop_3;
+            
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
+            
+            ptr = &D_802A25C8;
+            for (i = 0; i < 7; i++) {
+                var2 = *ptr;
+                var = (D_802A25EC / 100) - 0x68;
+                ptr++;
+                set_icon_render_pos(var2, 0x7C, (i * 0x1A) - var);
+                draw_icon_2(var2);
             }
-            temp_v1_3 = D_802A25EC;
-            temp_s0_2 = D_802A25C8;
-            set_icon_render_pos(temp_s0_2, 0x7C, (temp_s1 * 0x1A) - (((MULT_HI(temp_v1_3, 0x51EB851F) >> 5) - (temp_v1_3 >> 0x1F)) - 0x68));
-            phi_return = draw_icon_2(temp_s0_2);
+
+            var2 = D_802A25C8;
+            var = (D_802A25EC / 100) - 0x68;
+            set_icon_render_pos(var2, 0x7C, (i * 0x1A) - var);
+            draw_icon_2(var2);
         }
     }
-    return phi_return;
 }
 */
 
-//INCLUDE_ASM(s32, "battle/item/mystery_72C5B0", func_802A13E4_72C994);
-
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance *script, s32 isInitialCall);
+/*
 extern s32 D_802A25E4;
 extern s32 D_802A25E8;
 extern s32 D_802A25EC;
@@ -121,131 +100,171 @@ extern s32 D_802A25F4;
 extern s32 D_802A25F8;
 extern s16** D_802A25FC;
 extern MenuIcon** D_802A25C8;
-
-struct N(tempStc) {
-    s32 iconId;
-    s32 unk_04;
-} N(tempStc);
 extern struct N(tempStc) D_8008A680[100];
 
 ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    f32 t0;
-    f32 t1;
-    s32 i;
-    s32 a;
-    s32 b;
-    s32 c;
-    s32 d;
 
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         D_802A25E4 = 0;
     }
 
     switch (D_802A25E4) {
-        case 0:
+        case 0: {
+            s32* tablePtr;
+            s32 i;
+            f32 t0;
+            f32 t1;
+            MenuIcon* icon;
+            MenuIcon** iconPtr;
+            struct N(tempStc)* ic;
+            StaticItem* itemTable;
+
             D_802A25F8 = bind_dynamic_entity_7(NULL, func_802A123C_72C7EC);
-            D_802A25EC = rand_int(0x4718);
+            D_802A25EC = rand_int(18200);
             D_802A25F0 = 1000;
-            D_802A25FC = N(D_802A227C_72D82C);
+            tablePtr = &D_802A25FC;
+            *tablePtr = N(D_802A227C_72D82C);
+
             if (battleStatus->unk_432 > 0) {
                 func_80137DC0(1, &t0, &t1);
                 if (t1 >= 215.0f) {
-                    D_802A25FC = N(D_802A229C_72D84C);
+                    *tablePtr = N(D_802A229C_72D84C);
                 }
             }
 
-            for (i = 0; i < 7; i++) {
-                StaticItem* item = &gItemTable[*D_802A25FC[i]];
-                MenuIcon* icon = create_icon(&D_8008A680[item->iconID].iconId);
-                D_802A25C8[i] = icon;
+            i = 0;
+            ic = &D_8008A680;
+            itemTable = gItemTable;
+            iconPtr = &D_802A25C8;
+            for (; i < 7; i++, iconPtr++) {
+                icon = create_icon(ic[itemTable[D_802A25FC[i]].iconID].iconId);
+                *iconPtr = icon;
                 set_icon_flags(icon, 0x80);
             }
             D_802A25E4 = 1;
-            break;
+        }
+        break;
 
-        case 1:
-            a = D_802A25EC + D_802A25F0;
-            D_802A25EC = a;
-            if (a / 100 >= 0xB6) {
-                D_802A25EC = a - 0x4718;
+        case 1: {
+            s32* ECptr = &D_802A25EC;
+            s32* F0ptr = &D_802A25F0;
+
+            *ECptr += *F0ptr;
+            if (*ECptr / 100 > 181) {
+                s32* test = ECptr;
+                *test -= 0x4718;
             }
-            if (D_802A25F0 >= 0x191) {
-                b = D_802A25F0 - 10;
+
+            if (*F0ptr > 400) {
+                *F0ptr -= 10;
+            } else if (*F0ptr > 100) {
+                *F0ptr -= 5;
             } else {
-                b = D_802A25F0 - 1;
-                if (D_802A25F0 > 100) {
-                    b = D_802A25F0 - 5;
-                }
+                *F0ptr -= 1;
             }
 
-            D_802A25F0 = b;
             if (D_802A25F0 < 10) {
-                c = D_802A25EC / 100;
-                d = c * (1 / 26);
-                if ((c - d) * 26 < 13) {
-                    if (rand_int(100) < 80 || rand_int(100) >= 60) {
+                D_802A25E8 = D_802A25EC / 100;
+                if (D_802A25E8 % 26 < 13) {
+                    if (rand_int(100) < 80) {
                         D_802A25E4 = 2;
                     } else {
                         D_802A25E4 = 3;
                     }
+                } else if (rand_int(100) < 60) {
+                    D_802A25E4 = 3;
+                } else {
+                    D_802A25E4 = 2;
                 }
             }
-            break;
+        }
+        break;
 
-        case 2:
-            a = D_802A25E8 - ((1 / 26) * 26);
-            b = a + 3;
-            if (b < 0) {
-                b = a + 6;
+        case 2: {
+            s32* E8ptr = &D_802A25E8;
+            s32 a, b, c, d;
+
+            d = *E8ptr % 26;
+            a = d;
+            c = a + 3;
+            if (c < 0) {
+                c = a + 6;
             }
-            c = b >> 2;
-            d = D_802A25E8 - (b / 2);
-            D_802A25E8 = d;
-            D_802A25EC = d * 100;
-            if (c == 0) {
+            d = c >> 2;
+            *E8ptr -= d;
+            D_802A25EC = *E8ptr * 100;
+            if (d == 0) {
                 D_802A25E4 = 4;
             }
-            break;
+        }
+        break;
 
-        case 3:
-            a = D_802A25E8 - ((1 / 26) * 26);
-            if (a != 0) {
-                b = 26 - a;
-                c = b + 3;
-                if (c < 0) {
-                    c = b + 6;
-                }
-                d = D_802A25E8 + (c / 2);
-                D_802A25E8 = d;
-                D_802A25EC = d * 100;
+        case 3: {
+            s32* E8ptr = &D_802A25E8;
+            s32 a, b, c, d;
+
+            d = *E8ptr % 26;
+            if (d == 0) {
+                D_802A25E4 = 4;
+                break;
             }
-            break;
+            a = d;
+            b = 26;
+            b -= a;
+            c = b + 3;
+            if (c < 0) {
+                c = b + 6;
+            }
+            c = c >> 2;
+            *E8ptr += c;
+            D_802A25EC = *E8ptr * 100;
+        }
+        break;
 
-        case 4:
+        case 4: {
             D_802A25F4 = 20;
             D_802A25E4 = 5;
-            break;
+        }
+        break;
 
-        case 5:
-            if (D_802A25F4 == 0) {
-                s16 f = *D_802A25FC[D_802A25E8 * (1 / 26)];
-                battleStatus->selectedItemID = f;
-                script->varTable[0] = f;
-                func_801235C0(D_802A25F8, script);
-                for (i = 0; i < 7; i++) {
-                    free_icon(D_802A25C8[i]);
-                }
-                return ApiStatus_DONE2;
+        case 5: {
+            s32* F4ptr = &D_802A25F4;
+            s32 i;
+            s16 g;
+            MenuIcon** iconPtr;
+
+            if (*F4ptr != 0) {
+                *F4ptr -= 1;
+                break;
             }
-            D_802A25F4--;
-            break;
+            iconPtr = &D_802A25C8;
+            i = D_802A25E8 / 26;
+            g = D_802A25FC[i];
+            battleStatus->selectedItemID = g;
+            script->varTable[0] = g;
+            func_801235C0(D_802A25F8);
+            for (i = 0; i < 7; i++) {
+                free_icon(*iconPtr++);
+            }
+        }
+        return ApiStatus_DONE2;
     }
 
     return ApiStatus_BLOCK;
 }
+*/
 
-INCLUDE_ASM(s32, "battle/item/mystery_72C5B0", func_802A188C_72CE3C);
+ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a = get_variable(script, *args++);
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+ 
+    func_80070190(2, a, b, c, 0, -1.0f, 0, 5);
+
+    return ApiStatus_DONE2;
+}
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
