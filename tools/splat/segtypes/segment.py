@@ -31,10 +31,7 @@ def parse_segment_vram(segment):
     if type(segment) is dict:
         return segment.get("vram", 0)
     else:
-        if len(segment) >= 3 and type(segment[-1]) is int:
-            return segment[-1]
-        else:
-            return 0
+        return 0
 
 
 def parse_segment_subalign(segment):

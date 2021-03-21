@@ -51,3 +51,5 @@ If you wrote a custom extension, options should be imported and statically refer
 `from util import options`
 
 see options.py for more info on how to now get and set options
+
+BREAKING: vram can only be specified on a segment if the segment is defined as a dict in the config
