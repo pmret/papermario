@@ -119,7 +119,7 @@ class Segment:
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
         vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
 
-        subalign_amt = options.get("subalign", self.subalign)q
+        subalign_amt = options.get("subalign", self.subalign)
         subalign_str = f"SUBALIGN({subalign_amt})"
 
         s = (
