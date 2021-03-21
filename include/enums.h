@@ -678,6 +678,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_BEFORE_JUMP      0x00010006
 #define PlayerAnim_MIDAIR_STILL     0x00010007
 #define PlayerAnim_MIDAIR           0x00010008
+#define PlayerAnim_9                0x00010009 // TODO
 #define PlayerAnim_STUNNED_STILL    0x0001000E
 #define PlayerAnim_DEAD_STILL       0x0001000F
 #define PlayerAnim_SPINNING         0x00010011
@@ -709,6 +710,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_GET_UP           0x00010030
 #define PlayerAnim_DUST_OFF         0x00010031
 #define PlayerAnim_THUMBS_UP        0x00010032
+#define PlayerAnim_8000B            0x0008000B // TODO
 
 typedef UNK_TYPE AmbientSounds;
 #define AmbientSounds_SPOOKY     0x00000000

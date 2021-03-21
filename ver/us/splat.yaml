@@ -2424,14 +2424,16 @@ segments:
     - [0x727CE0,   .data, lib]
     - [0x72829C,   .data, dizzy_dial]
     - [0x7285D0, .rodata, lib]
-  - name: battle/item/please_come_back
+  - name: battle/item/please_come_back/
     type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x7285E0, c]
-    - [0x728820, data]
+    - [0x7285E0,     c, lib]
+    - [0x728820, .data, lib]
+    - [0x728DDC, .data, please_come_back]
   - name: battle/item/egg_missile/
     ld_name: battle_item_egg_missile
     type: code

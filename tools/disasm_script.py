@@ -686,7 +686,7 @@ if __name__ == "__main__":
             script = ScriptDSLDisassembler(f)
             script_text = script.disassemble()
 
-            print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos - 4:X} "
+            print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                   f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
             print()
             print(script_text, end="")
