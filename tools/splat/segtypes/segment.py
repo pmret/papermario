@@ -1,5 +1,6 @@
 from pathlib import Path, PurePath
 from util import log
+from util import options
 import re
 import sys
 
@@ -45,14 +46,13 @@ def parse_segment_subalign(segment):
 class Segment:
     require_unique_name = True
 
-    def __init__(self, segment, next_segment, options):
+    def __init__(self, segment, next_segment):
         self.rom_start = parse_segment_start(segment)
         self.rom_end = parse_segment_start(next_segment)
         self.type = parse_segment_type(segment)
         self.name = parse_segment_name(segment, self.__class__)
         self.vram_start = parse_segment_vram(segment)
         self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
-        self.options = options
         self.config = segment
         self.subalign = parse_segment_subalign(segment)
 
@@ -103,7 +103,7 @@ class Segment:
         return out_dir
 
     def should_run(self):
-        return self.type in self.options["modes"] or "all" in self.options["modes"]
+        return options.mode_active(self.type)
 
     def split(self, rom_bytes, base_path):
         pass
@@ -115,7 +115,7 @@ class Segment:
         return (self.config, self.rom_end)
 
     def get_ld_section(self):
-        replace_ext = self.options.get("ld_o_replace_extension", True)
+        replace_ext = options.get("ld_o_replace_extension", True)
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
         vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
         subalign_str = f"SUBALIGN({self.subalign})"
@@ -150,7 +150,7 @@ class Segment:
             path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
             s += f"    {path_cname} = .;\n"
 
-            if subdir == self.options.get("assets_dir"):
+            if subdir == options.get("assets_dir"):
                 path = PurePath(path)
             else:
                 path = PurePath(subdir) / PurePath(path)
@@ -179,7 +179,7 @@ class Segment:
         return []
 
     def log(self, msg):
-        if self.options.get("verbose", False):
+        if options.get("verbose", False):
             log.write(f"{self.type} {self.name}: {msg}")
 
     def warn(self, msg):

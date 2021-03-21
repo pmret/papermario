@@ -1,15 +1,15 @@
 import os
 from segtypes.n64.segment import N64Segment
 from util.color import unpack_color
-from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
+from util import options
 import sys
 
 class N64SegPalette(N64Segment):
     require_unique_name = False
 
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         # palette segments must be named as one of the following:
         #  1) same as the relevant ci4/ci8 segment name (max. 1 palette)
@@ -27,18 +27,18 @@ class N64SegPalette(N64Segment):
 
     def should_run(self):
         return super().should_run() or (
-            "img" in self.options["modes"] or
-            "ci4" in self.options["modes"] or
-            "ci8" in self.options["modes"] or
-            "i4" in self.options["modes"] or
-            "i8" in self.options["modes"] or
-            "ia4" in self.options["modes"] or
-            "ia8" in self.options["modes"] or
-            "ia16" in self.options["modes"]
+            options.mode_active("img") or
+            options.mode_active("ci4") or
+            options.mode_active("ci8") or
+            options.mode_active("i4") or
+            options.mode_active("i8") or
+            options.mode_active("ia4") or
+            options.mode_active("ia8") or
+            options.mode_active("ia16")
         )
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + options.get("assets_dir", "img"), self.name)
         self.path = os.path.join(
             out_dir, os.path.basename(self.name) + ".png")
 
@@ -61,4 +61,4 @@ class N64SegPalette(N64Segment):
     def get_ld_files(self):
         ext = f".{self.type}.png"
 
-        return [(self.options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]
+        return [(options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]

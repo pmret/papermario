@@ -2,10 +2,11 @@ import os
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
 from segtypes.segment import Segment
+from util import options
 
 class N64SegHeader(N64Segment):
     def should_run(self):
-        return N64Segment.should_run(self) or "asm" in self.options["modes"]
+        return N64Segment.should_run(self) or options.mode_active("asm")
 
     @staticmethod
     def get_line(typ, data, comment):
@@ -21,7 +22,7 @@ class N64SegHeader(N64Segment):
     def split(self, rom_bytes, base_path):
         out_dir = Segment.create_split_dir(base_path, "asm")
 
-        encoding = self.options.get("header_encoding", "ASCII")
+        encoding = options.get("header_encoding", "ASCII")
 
         header_lines = []
         header_lines.append(f".section .data, \"a\"\n")
@@ -54,7 +55,6 @@ class N64SegHeader(N64Segment):
 
     def get_ld_files(self):
         return [("asm", f"{self.name}.s", ".data", self.rom_start)]
-
 
     @staticmethod
     def get_default_name(addr):

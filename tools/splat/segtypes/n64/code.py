@@ -1,6 +1,5 @@
 import os
 import re
-import subprocess
 import sys
 from collections import OrderedDict
 from pathlib import Path, PurePath
@@ -13,6 +12,7 @@ from segtypes.n64.palette import N64SegPalette
 from segtypes.n64.segment import N64Segment
 from segtypes.segment import Segment
 from util import floats
+from util import options
 from util.symbol import Symbol
 
 double_mnemonics = ["ldc1", "sdc1"]
@@ -36,10 +36,10 @@ class Subsegment():
     def contains_vram(self, addr):
         return self.vram_start <= addr < self.vram_end
 
-    def get_out_subdir(self, options):
+    def get_out_subdir(self):
         if self.type.startswith("."):
             if self.parent:
-                return self.parent.get_out_subdir(options)
+                return self.parent.get_out_subdir()
             else:
                 return options.get("src_path", "src")
         elif self.type in ["c"]:
@@ -81,20 +81,20 @@ class Subsegment():
             return "pal.png"
         return self.type
 
-    def get_ld_file(self, options):
-        subdir = self.get_out_subdir(options)
+    def get_ld_file(self):
+        subdir = self.get_out_subdir()
         obj_type = self.get_ld_obj_type(".text")
         ext = self.get_ext()
 
         return subdir, f"{self.name}.{ext}", obj_type, self.rom_start
 
-    def should_run(self, options):
-        return self.type in options["modes"] or "all" in options["modes"]
+    def should_run(self):
+        return options.mode_active(self.type)
 
-    def get_generic_out_path(self, base_path, options):
+    def get_generic_out_path(self, base_path):
         return os.path.join(
             base_path,
-            self.get_out_subdir(options),
+            self.get_out_subdir(),
             self.name + "." + self.get_ext()
         )
 
@@ -102,15 +102,15 @@ class Subsegment():
         pass
 
     def scan(self, segment, rom_bytes, base_path):
-        if self.should_run(segment.options) and not self.name.startswith("."):
-            self.scan_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path, segment.options))
+        if self.should_run() and not self.name.startswith("."):
+            self.scan_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path))
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         pass
 
     def split(self, segment, rom_bytes, base_path):
-        if "skip" not in self.args and self.should_run(segment.options) and not self.name.startswith("."):
-            self.split_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path, segment.options))
+        if "skip" not in self.args and self.should_run() and not self.name.startswith("."):
+            self.split_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path))
 
     @staticmethod
     def get_subclass(typ):
@@ -186,7 +186,7 @@ class CodeSubsegment(Subsegment):
     def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
         if not self.rom_start == self.rom_end:
             if self.type == "c":
-                if segment.options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
+                if options.get("do_c_func_detection", True) and os.path.exists(generic_out_path):
                     # TODO run cpp?
                     self.defined_funcs = CodeSubsegment.get_funcs_defined_in_c(generic_out_path)
                     segment.mark_c_funcs_as_defined(self.defined_funcs)
@@ -214,7 +214,7 @@ class CodeSubsegment(Subsegment):
                     if func_name not in self.defined_funcs:
                         segment.create_c_asm_file(self.funcs_text, func, asm_out_dir, self, func_name)
 
-                if not os.path.exists(generic_out_path) and segment.options.get("create_new_c_files", True):
+                if not os.path.exists(generic_out_path) and options.get("create_new_c_files", True):
                     segment.create_c_file(self.funcs_text, self, asm_out_dir, base_path, generic_out_path)
             else:
                 asm_out_dir = Segment.create_split_dir(base_path, "asm")
@@ -261,12 +261,12 @@ class BinSubsegment(Subsegment):
             f.write(rom_bytes[self.rom_start : self.rom_end])
 
 class LinkerSubsegment(Subsegment):
-    def get_ld_file(self, options):
+    def get_ld_file(self):
         return "", self.name, self.type, self.rom_start
 
 class PaletteSubsegment(Subsegment):
-    def should_run(self, options):
-        return super().should_run(options) or "img" in options["modes"]
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
@@ -280,8 +280,8 @@ class PaletteSubsegment(Subsegment):
             segment.palettes[self.image_name].append(self)
 
 class RGBA32Subsegment(Subsegment):
-    def should_run(self, options):
-        return super().should_run(options) or "img" in options["modes"]
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
@@ -357,8 +357,8 @@ class N64SegCode(N64Segment):
 
         return ret
 
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         # TODO Note: These start/end vram options don't really do anything yet
         self.data_vram_start = segment.get("data_vram_start", -1)
@@ -388,7 +388,7 @@ class N64SegCode(N64Segment):
         return f"code_{addr:X}"
 
     def get_ld_files(self):
-        return [sub.get_ld_file(self.options) for sub in self.subsegments]
+        return [sub.get_ld_file() for sub in self.subsegments]
 
     def get_ld_section_name(self):
         path = PurePath(self.name)
@@ -605,7 +605,7 @@ class N64SegCode(N64Segment):
 
     # Determine symbols
     def determine_symbols(self, funcs):
-        hi_lo_max_distance = self.options.get("hi_lo_max_distance", 6)
+        hi_lo_max_distance = options.get("hi_lo_max_distance", 6)
         ret = {}
 
         for func_addr in funcs:
@@ -710,8 +710,8 @@ class N64SegCode(N64Segment):
 
             indent_next = False
 
-            mnemonic_ljust = self.options.get("mnemonic_ljust", 11)
-            rom_addr_padding = self.options.get("rom_address_padding", None)
+            mnemonic_ljust = options.get("mnemonic_ljust", 11)
+            rom_addr_padding = options.get("rom_address_padding", None)
 
             for insn in funcs[func]:
                 insn_addr = insn[0].address
@@ -754,7 +754,7 @@ class N64SegCode(N64Segment):
 
             ret[func] = (func_text, rom_addr)
 
-            if self.options.get("find_file_boundaries"):
+            if options.get("find_file_boundaries"):
                 # If this is not the last function in the file
                 if func != list(funcs.keys())[-1]:
 
@@ -946,7 +946,7 @@ class N64SegCode(N64Segment):
     def get_c_preamble(self):
         ret = []
 
-        preamble = self.options.get("generated_c_preamble", "#include \"common.h\"")
+        preamble = options.get("generated_c_preamble", "#include \"common.h\"")
         ret.append(preamble)
         ret.append("")
 
@@ -985,7 +985,7 @@ class N64SegCode(N64Segment):
                     break
 
     def create_c_asm_file(self, funcs_text, func, out_dir, sub, func_name):
-        if self.options.get("compiler", "IDO") == "GCC":
+        if options.get("compiler", "IDO") == "GCC":
             out_lines = self.get_gcc_inc_header()
         else:
             out_lines = []
@@ -1022,7 +1022,7 @@ class N64SegCode(N64Segment):
 
         for func in funcs_text:
             func_name = self.get_symbol(func, type="func", local_only=True).name
-            if self.options.get("compiler", "IDO") == "GCC":
+            if options.get("compiler", "IDO") == "GCC":
                 c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(sub.name, func_name))
             else:
                 asm_outpath = Path(os.path.join(asm_out_dir, sub.name, func_name + ".s"))
@@ -1044,7 +1044,7 @@ class N64SegCode(N64Segment):
 
         for image_name in self.palettes:
             for sub in self.subsegments:
-                if sub.type in ["ci4", "ci8"] and (sub.should_run(self.options) or "img" in self.options["modes"]) and sub.name == image_name:
+                if sub.type in ["ci4", "ci8"] and (sub.should_run() or options.mode_active("img")) and sub.name == image_name:
                     img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
                     width, height = sub.args
 
@@ -1053,7 +1053,7 @@ class N64SegCode(N64Segment):
 
                         w = png.Writer(width, height, palette=palette.palette)
 
-                        generic_out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path, self.options))
+                        generic_out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path))
                         Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
                         with open(generic_out_path, "wb") as f:
                             w.write_array(f, image)

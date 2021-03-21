@@ -44,3 +44,10 @@ I am also working on adding bss support as well. It should almost be all set, as
 The `out_dir` option specifies a directory relative to the config file. If your config file is in a subdirectory of the main repo, you can set `out_dir: ../`, for example.
 
 The `target_path` option spcifies a path to the binary file to split, relative to the `out_dir`. If your `baserom.z64` is in the top-level of the repo, you can set `target_path: baserom.z64`, for example.
+
+### 0.6.5: Bugfixes, rodata migration, and made options static
+
+If you wrote a custom extension, options should be imported and statically referenced
+`from util import options`
+
+see options.py for more info on how to now get and set options
