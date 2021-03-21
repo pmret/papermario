@@ -9,5 +9,9 @@
 
 ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall);
+
+Script N(UseItemWithEffect);
+Script N(PlayerGoHome);
 
 #endif
