@@ -91,7 +91,7 @@ typedef struct HeapNode {
 } HeapNode; // size = 0x10
 
 typedef struct NpcBlurData {
-    /* 0x00 */ char unk_00;
+    /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 unk_01;
     /* 0x02 */ char unk_02[2];
     /* 0x04 */ f32 xpos[20];
@@ -109,7 +109,7 @@ typedef struct Npc {
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
-    /* 0x024 */ char unk_24[4];
+    /* 0x024 */ s32 unk_24;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
@@ -138,7 +138,9 @@ typedef struct Npc {
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ u8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
-    /* 0x0AD */ char unk_AD[659];
+    /* 0x0AD */ char unk_AD[3];
+    /* 0x0B0 */ s32 unk_B0;
+    /* 0x0B4 */ char unk_B4[652];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -1202,7 +1204,11 @@ typedef struct CollisionStatus {
 typedef struct DecorationTable {
     /* 0x000 */ char unk_00[1729];
     /* 0x6C1 */ s8 unk_6C1;
-    /* 0x6C2 */ char unk_6C2[142];
+    /* 0x6C2 */ char unk_6C2[11];
+    /* 0x6CD */ s8 unk_6CD;
+    /* 0x6CE */ char unk_6CE[6];
+    /* 0x6D4 */ s32* unk_6D4;
+    /* 0x6D8 */ char unk_6D8[120];
     /* 0x750 */ s8 unk_750;
     /* 0x751 */ s8 unk_751;
     /* 0x752 */ s8 unk_752;
@@ -1212,7 +1218,12 @@ typedef struct DecorationTable {
     /* 0x766 */ s8 unk_766;
     /* 0x767 */ s8 unk_767;
     /* 0x768 */ s8 unk_768;
-    /* 0x769 */ char unk_769[114];
+    /* 0x769 */ char unk_769[3];
+    /* 0x76C */ s16 unk_76C[16];
+    /* 0x78C */ char unk_78C[76];
+    /* 0x7D8 */ s8 unk_7D8;
+    /* 0x7D9 */ s8 unk_7D9;
+    /* 0x7DA */ char unk_7DA;
     /* 0x7DB */ s8 unk_7DB;
     /* 0x7DC */ s16 scale[16];
     /* 0x7FC */ s16 posX[16];
@@ -1225,11 +1236,12 @@ typedef struct DecorationTable {
     /* 0x89C */ u8 rotZ[16];
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
-    /* 0x8B0 */ s32* unk_8B0[2];
+    /* 0x8B0 */ struct Temp8025D160* unk_8B0[2];
     /* 0x8B8 */ u8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
-    /* 0x8BD */ char unk_8BD[42];
+    /* 0x8C0 */ s16 unk_8C0[6];
+    /* 0x8BE */ char unk_8BE[30];
 } DecorationTable; // size = 0x8E8
 
 typedef struct Shop {
@@ -1346,7 +1358,7 @@ typedef struct Actor {
     /* 0x197 */ s8 unk_197;
     /* 0x198 */ Vec2b unk_198;
     /* 0x19A */ s8 unk_19A;
-    /* 0x019B */ char unk_19B[1];
+    /* 0x19B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ s8 currentHP;
@@ -1778,5 +1790,23 @@ typedef struct Temp8010EBB0 {
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
 } Temp8010EBB0; // size = 0x360
+
+typedef struct Temp8025D160 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ char unk_04[8];
+    /* 0x0C */ struct Temp8025D160_2* unk_0C;
+} Temp8025D160; // size = 0x10 (?)
+
+typedef struct Temp8025D160_2 {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
+    /* 0x10 */ char unk_10[12];
+    /* 0x1C */ s32 unk_1C;
+    /* 0x20 */ s32 unk_20;
+    /* 0x24 */ char unk_24[8];
+    /* 0x2C */ s32 unk_2C;
+} Temp8025D160_2; // size = 0x30 (?)
 
 #endif

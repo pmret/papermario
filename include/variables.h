@@ -127,6 +127,9 @@ extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
 extern u16 gMapTransitionAlpha;
+extern s8 D_800A0930;
+extern s8 D_800A0931;
+extern s16 D_800A0932[1];
 extern s16 D_800A0942;
 extern s16 D_800A0944;
 extern s16 D_800A0946;
@@ -142,7 +145,9 @@ extern s16 D_800A095E;
 extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
+extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
+
 
 extern UIPanel gUIPanels[64];
 
@@ -205,6 +210,7 @@ extern s32 gStatsMenuIconIDs[12];
 
 
 extern s32 gGameState;
+extern s16 D_8009A604;
 extern s32 D_8009A64C;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
