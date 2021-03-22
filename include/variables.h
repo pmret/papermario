@@ -14,7 +14,7 @@ extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
-extern GameStatus* gGameStatusPtr[1];
+extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
 extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */

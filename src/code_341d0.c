@@ -50,7 +50,7 @@ s32 render_effects(void) {
     curEffectInst = &D_800B4398[0];
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         if ((curEffectInst[i] != NULL) && (curEffectInst[i]->flags & 1) && (curEffectInst[i]->flags & 8)) {
-            if ((*gGameStatusPtr)->isBattle) {
+            if (gGameStatusPtr->isBattle) {
                 if (curEffectInst[i]->flags & 4) {
                     curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
                 }
@@ -121,7 +121,7 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
         effectBp->init(newEffectInst);
     }
 
-    if ((*gGameStatusPtr)->isBattle) {
+    if (gGameStatusPtr->isBattle) {
         newEffectInst->flags |= 4;
     }
     return newEffectInst;

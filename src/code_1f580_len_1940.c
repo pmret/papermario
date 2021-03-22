@@ -46,7 +46,7 @@ ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            make_npcs(get_variable(script, *args++), (*gGameStatusPtr)->mapID, get_variable(script, *args++));
+            make_npcs(get_variable(script, *args++), gGameStatusPtr->mapID, get_variable(script, *args++));
             script->functionTemp[0].s = 1;
             break;
         case 1:

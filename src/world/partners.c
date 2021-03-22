@@ -411,7 +411,7 @@ s32 partner_use_ability(void) {
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if (((*gGameStatusPtr)->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
+        if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
             play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
@@ -442,44 +442,43 @@ s32 partner_can_use_ability(void) {
     return FALSE;
 }
 
-// Stack size issue - something's probably up with these data vars
-#ifdef NON_MATCHING
 void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* temp8010CFD8 = &D_8010CFD8;
-    s32* temp8010CFE8 = &D_8010CFE8;
-    s32 temp_s0;
+    PlayerData* playerData = &gPlayerData;
+    s32 partner = playerData->currentPartner;
 
-    temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
     get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
-    D_8010CFE0 = 1;
-    *temp8010CFE8 = 9;
-    *temp8010CFD8 = temp_s0;
 
-    if ((*gGameStatusPtr)->unk_7D != 0) {
-        D_8010EBB0.unk_00 = 1;
-        (*gGameStatusPtr)->unk_7D = 0;
-    }
+    {
+        s32* a = &D_8010CFD8;
+        s32* b = &D_8010CFE8;
 
-    wPartner = NULL;
-    D_800F833C = playerStatus->position.x;
-    D_800F8340 = playerStatus->position.y;
-    D_800F8344 = playerStatus->position.z;
+        D_8010CFE0 = 1;
+        *b = 9;
+        *a = partner;
 
-    if (*temp8010CFD8 == 0) {
-        *temp8010CFE8 = 1;
-    } else {
-        load_partner_npc();
-        wPartnerNpc->scale.x = 1.0f;
-        wPartnerNpc->scale.y = 1.0f;
-        wPartnerNpc->scale.z = 1.0f;
-        _use_partner_ability();
+        if (gGameStatusPtr->unk_7D != 0) {
+            D_8010EBB0.unk_00 = 1;
+            gGameStatusPtr->unk_7D = 0;
+        }
+
+        wPartner = NULL;
+        D_800F833C = playerStatus->position.x;
+        D_800F8340 = playerStatus->position.y;
+        D_800F8344 = playerStatus->position.z;
+
+        if (*a == 0) {
+            *b = 1;
+        } else {
+            load_partner_npc();
+            wPartnerNpc->scale.x = 1.0f;
+            wPartnerNpc->scale.y = 1.0f;
+            wPartnerNpc->scale.z = 1.0f;
+            _use_partner_ability();
+        }
     }
 }
-#else
-INCLUDE_ASM(s32, "world/partners", partner_reset_data);
-#endif
 
 void partner_initialize_data(void) {
     Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
@@ -597,7 +596,7 @@ void func_800EBB40(Npc *partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
 
-    if ((*gGameStatusPtr)->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
         if (!(playerStatus->animFlags & 0x800)) {
             func_800EBC74(partner);
         }

@@ -12,40 +12,42 @@ ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
 }
 
 s32 GetDemoState(ScriptInstance* script) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->demoState);
+    set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoPressButton(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput |= get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput |= get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoReleaseButton(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall) {
-    (*gGameStatusPtr)->demoButtonInput = get_variable(script, *script->ptrReadPos);
+    gGameStatusPtr->demoButtonInput = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
+    GameStatus** gameStatus = &gGameStatusPtr;
+    s32* thisPos = script->ptrReadPos;
     f32 a;
     f32 b;
-    s32* thisPos = script->ptrReadPos;
 
     a = get_float_variable(script, *thisPos++);
     b = get_float_variable(script, *thisPos++);
 
-    (*gGameStatusPtr)->demoStickX = a * sin_deg(b);
-    (*gGameStatusPtr)->demoStickY = a * cos_deg(b);
+    (*gameStatus)->demoStickX = a * sin_deg(b);
+    (*gameStatus)->demoStickY = a * cos_deg(b);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall) {
+    GameStatus** gameStatus = &gGameStatusPtr;
     f32 x;
     f32 y;
     s32* thisPos = script->ptrReadPos;
@@ -53,8 +55,8 @@ ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall) {
     x = get_float_variable(script, *thisPos++);
     y = get_float_variable(script, *thisPos++);
 
-    (*gGameStatusPtr)->demoStickX = x;
-    (*gGameStatusPtr)->demoStickY = y;
+    (*gameStatus)->demoStickX = x;
+    (*gameStatus)->demoStickY = y;
 
     return ApiStatus_DONE2;
 }

@@ -2333,14 +2333,16 @@ segments:
     - [0x71CCE0,     c, lib]
     - [0x71D010, .data, lib]
     - [0x71D5DC, .data, dried_shroom]
-  - name: battle/item/shooting_star
+  - name: battle/item/shooting_star/
     type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x71D770, c]
-    - [0x71DCC0, data]
+    - [0x71D770,     c, lib]
+    - [0x71DCC0, .data, lib]
+    - [0x71E27C, .data, shooting_star]
   - name: battle/item/sleepy_sheep
     type: code
     start: 0x71E650

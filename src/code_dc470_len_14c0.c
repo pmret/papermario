@@ -27,34 +27,29 @@ void load_map_bg(char* optAssetName) {
 }
 
 void use_default_background_settings(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
     D_801595A0 = 0;
     D_8014F12F = 0;
 
-    gameStatus->unk_15C = 0xB4;
-    gameStatus->enableBackground &= 0xF0;
+    gGameStatusPtr->unk_15C = 0xB4;
+    gGameStatusPtr->enableBackground &= 0xF0;
 }
 
 void read_background_size(BackgroundHeader* bg) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    gameStatus->backgroundMaxW = bg->width;
-    gameStatus->backgroundMaxH = bg->height;
-    gameStatus->backgroundMinW = bg->startX;
-    gameStatus->backgroundMinH = bg->startY;
-    gameStatus->backgroundRaster = bg->raster;
-    gameStatus->backgroundPalette = bg->palette;
-    gameStatus->enableBackground |= 1;
+    gGameStatusPtr->backgroundMaxW = bg->width;
+    gGameStatusPtr->backgroundMaxH = bg->height;
+    gGameStatusPtr->backgroundMinW = bg->startX;
+    gGameStatusPtr->backgroundMinH = bg->startY;
+    gGameStatusPtr->backgroundRaster = bg->raster;
+    gGameStatusPtr->backgroundPalette = bg->palette;
+    gGameStatusPtr->enableBackground |= 1;
 }
 
 void set_background_size(s16 startX, s16 startY, s16 sizeX, s16 sizeY) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    gameStatus->enableBackground &= ~1;
-    gameStatus->backgroundMaxW = startX;
-    gameStatus->backgroundMaxH = startY;
-    gameStatus->backgroundMinW = sizeX;
-    gameStatus->backgroundMinH = sizeY;
+    gGameStatusPtr->enableBackground &= ~1;
+    gGameStatusPtr->backgroundMaxW = startX;
+    gGameStatusPtr->backgroundMaxH = startY;
+    gGameStatusPtr->backgroundMinW = sizeX;
+    gGameStatusPtr->backgroundMinH = sizeY;
 }
 
 u16 blend_background_channel(s32 arg0, s32 arg1, s32 alpha) {

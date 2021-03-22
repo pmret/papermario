@@ -2,22 +2,22 @@
 
 void begin_state_init(void) {
     D_8009A650[0] |= 0x8;
-    (*gGameStatusPtr)->loadMenuState = 3;
+    gGameStatusPtr->loadMenuState = 3;
 }
 
 void step_init_state(void) {
-    GameStatus** gameStatusPtr = gGameStatusPtr;
+    GameStatus** gameStatusPtr = &gGameStatusPtr;
     GameStatus* gameStatus = *gameStatusPtr;
     s32 i;
 
-    if ((*gGameStatusPtr)->loadMenuState != 0) {
-        (*gGameStatusPtr)->loadMenuState--;
+    if (gameStatus->loadMenuState != 0) {
+        gameStatus->loadMenuState--;
         return;
     }
 
     D_8009A650[0] = 0;
     (*gameStatusPtr)->areaID = 0;
-    gameStatus->isBattle = 0;
+    (*gameStatusPtr)->isBattle = 0;
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
@@ -70,10 +70,10 @@ void step_init_state(void) {
     fio_has_valid_backup();
 
     if (D_800D9620 == 0) {
-        (*gGameStatusPtr)->unk_AB = 1;
+        gGameStatusPtr->unk_AB = 1;
         func_8005615C();
     } else {
-        (*gGameStatusPtr)->unk_AB = 0;
+        gGameStatusPtr->unk_AB = 0;
         func_80056180();
     }
 

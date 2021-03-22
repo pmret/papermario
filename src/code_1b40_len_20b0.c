@@ -4,7 +4,8 @@ s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
 GameStatus gGameStatus = {0};
-GameStatus* gGameStatusPtr[1] = { &gGameStatus };
+GameStatus* gGameStatusPtr = &gGameStatus;
+
 s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
@@ -41,9 +42,7 @@ INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_task_background);
 INCLUDE_ASM(s32, "code_1b40_len_20b0", gfx_draw_frame);
 
 void load_engine_data(void) {
-    GameStatus** gameStatusPtrTemp = gGameStatusPtr;
-    GameStatus** gameStatusPtrTemp2 = gGameStatusPtr;
-    GameStatus* gameStatus3;
+    GameStatus** gameStatus;
     s32 i;
 
     dma_copy(&code_code_FEE30_ROM_START, &code_code_FEE30_ROM_END, &code_code_FEE30_VRAM);
@@ -53,20 +52,21 @@ void load_engine_data(void) {
     dma_copy(&code_code_A5DD0_ROM_START, &code_code_A5DD0_ROM_END, &code_code_A5DD0_VRAM);
     dma_copy(&code_code_10CC10_ROM_START, &code_code_10CC10_ROM_END, &code_code_10CC10_VRAM);
 
+    gameStatus = &gGameStatusPtr;
     D_8009A650[0] = 0;
-    (*gGameStatusPtr)->unk_79 = 0;
-    (*gameStatusPtrTemp2)->enableBackground = 0;
-    (*gGameStatusPtr)->musicEnabled = 1;
-    (*gameStatusPtrTemp)->unk_7C = 1;
-    (*gGameStatusPtr)->unk_A8 = -1;
-    (*gGameStatusPtr)->unk_AA = 0;
-    (*gGameStatusPtr)->unk_81 = 0;
-    (*gGameStatusPtr)->unk_82 = -8;
-    (*gGameStatusPtr)->unk_83 = 4;
+    (*gameStatus)->unk_79 = 0;
+    (*gameStatus)->enableBackground = 0;
+    (*gameStatus)->musicEnabled = 1;
+    (*gameStatus)->unk_7C = 1;
+    (*gameStatus)->unk_A8 = -1;
+    (*gameStatus)->unk_AA = 0;
+    (*gameStatus)->unk_81 = 0;
+    (*gameStatus)->unk_82 = -8;
+    (*gameStatus)->unk_83 = 4;
     D_8009A5D8 = 0;
-    (*gGameStatusPtr)->unk_75 = (*gGameStatusPtr)->unk_13C = 0;
+    (*gameStatus)->unk_75 = (*gameStatus)->unk_13C = 0;
     D_80074021 = 5;
-    (*gGameStatusPtr)->saveCount = 0;
+    (*gameStatus)->saveCount = 0;
     fio_init_flash();
     func_80028838();
     general_heap_create();
@@ -101,10 +101,9 @@ void load_engine_data(void) {
     initialize_curtains();
     poll_rumble();
 
-    gameStatus3 = gGameStatusPtr[0];
     for (i = 0; i < 4; i++) {
-        gameStatus3->unk_50[i] = 3;
-        gameStatus3->unk_48[i] = 0xC;
+        (*gameStatus)->unk_50[i] = 3;
+        (*gameStatus)->unk_48[i] = 0xC;
     }
 
     D_8009A650[0] |= 8;

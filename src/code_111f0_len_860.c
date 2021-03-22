@@ -20,8 +20,8 @@ void func_80035E24(void) {
 }
 
 void func_80035E54(void) {
+    GameStatus** gameStatus = &gGameStatusPtr;
     u16* mapTransitonAlpha;
-    GameStatus** gameStatus = gGameStatusPtr; // :/
 
     D_800A0944 = 0;
     D_800A0946 = 4;
@@ -38,25 +38,21 @@ void func_80035E54(void) {
 INCLUDE_ASM(s32, "code_111f0_len_860", func_80035EEC);
 
 void func_800360FC(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    if (gameStatus->loadMenuState == 2) {
+    if (gGameStatusPtr->loadMenuState == 2) {
         draw_status_ui();
     }
 }
 
 void func_80036130(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
     gMapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;
     D_800A0944 = 0x00;
 
-    if (gameStatus->prevArea != gameStatus->areaID) {
-        gameStatus->changedArea = 1;
-        gameStatus->prevArea = gameStatus->areaID;
+    if (gGameStatusPtr->prevArea != gGameStatusPtr->areaID) {
+        gGameStatusPtr->changedArea = 1;
+        gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
     } else {
-        gameStatus->changedArea = 0;
+        gGameStatusPtr->changedArea = 0;
     }
 }
 

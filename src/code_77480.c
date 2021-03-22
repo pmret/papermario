@@ -96,11 +96,10 @@ void update_player(void) {
 
     func_800E0B90();
 
-    gameStatus = *gGameStatusPtr;
-    gameStatus->playerPos.x = playerStatus->position.x;
-    gameStatus->playerPos.y = playerStatus->position.y;
-    gameStatus->playerPos.z = playerStatus->position.z;
-    gameStatus->playerYaw = playerStatus->currentYaw;
+    gGameStatusPtr->playerPos.x = playerStatus->position.x;
+    gGameStatusPtr->playerPos.y = playerStatus->position.y;
+    gGameStatusPtr->playerPos.z = playerStatus->position.z;
+    gGameStatusPtr->playerYaw = playerStatus->currentYaw;
 
     check_input_open_menus();
     if (!(playerStatus->animFlags & 0x1000)) {
@@ -305,10 +304,9 @@ void func_800E01DC(void) {
 }
 
 s32 func_800E0208(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
     s32 ret = 0;
 
-    if (gameStatus->disableScripts && (gameStatus->currentButtons & 0x10)) {
+    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons & 0x10)) {
         if (D_8010EBB0.unk_00 == 0) {
             set_action_state(ActionState_IDLE);
         }
@@ -398,7 +396,7 @@ void func_800E0B14(void) {
 void update_partner_timers(void) {
     PlayerData* playerData = &gPlayerData;
 
-    if (!(*gGameStatusPtr)->isBattle) {
+    if (!gGameStatusPtr->isBattle) {
         s32 i;
 
         for (i = 1; i < ARRAY_COUNT(playerData->unk_2C4); i++) {
@@ -414,7 +412,7 @@ INCLUDE_ASM(s32, "code_77480", func_800E0B90);
 INCLUDE_ASM(s32, "code_77480", get_player_back_anim);
 
 void render_player(void) {
-    if (!(*gGameStatusPtr)->disableScripts) {
+    if (!gGameStatusPtr->disableScripts) {
         render_player_model();
     }
 }
