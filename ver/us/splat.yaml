@@ -233,6 +233,7 @@ segments:
     - [0x4a1f0, c, os/code_4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/code_4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, code_4ac90_len_3910]
+    - [0x4DF30, c]
     - [0x4E5A0, data, code_1000_len_60]
     - [0x4F410, .data, code_1370_len_7d0]
     - [0x4F420, .data, code_1b40_len_20b0]
@@ -1804,7 +1805,7 @@ segments:
     subsections:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
-    - [0x4DA860, bin] # data
+    - [0x4DA860, bin]
     - [0x4E25E0, rodata]
   - name: battle/area_isk_part_1/
     type: code
@@ -8810,6 +8811,8 @@ segments:
   - [0xFAD8F0, bin, SMW_Remix_2F]
   - [0xFADE70, bin, New_Partner_82] # BGM end
   - [0xFAE860, bin] # sfx
+  - [0x1943000, bin] # duplicate of 0x1E00000
+  - [0x1983000, bin]
   - [0x19E09A8, Yay0]
   - [0x19E1390, Yay0]
   - [0x19E1888, Yay0]

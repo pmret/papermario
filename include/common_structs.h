@@ -673,13 +673,22 @@ typedef struct BattleStatus {
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
-    /* 0x45B */ char unk_45B[17];
+    /* 0x45B */ char unk_45B[5];
+    /* 0x460 */ s32 unk_460;
+    /* 0x464 */ s32 unk_464;
+    /* 0x468 */ char unk_468[4];
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
     /* 0x470 */ s32 unk_470;
-    /* 0x474 */ char unk_474[6];
+    /* 0x474 */ s32 unk_474;
+    /* 0x478 */ s8 unk_478;
+    /* 0x479 */ char unk_479;
     /* 0x47A */ u8 currentBattleSection;
     /* 0x47B */ u8 unk_47B;
-    /* 0x47C */ char unk_47C[20];
+    /* 0x47C */ s32 unk_47C;
+    /* 0x480 */ s32 unk_480;
+    /* 0x484 */ s32 unk_484;
+    /* 0x488 */ s32 unk_488;
+    /* 0x48C */ struct BattleList* unk_48C;
 } BattleStatus; // size = 0x490
 
 typedef struct TextureHeader {
