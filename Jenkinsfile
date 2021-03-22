@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "papermario"
+        label 'papermario'
     }
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Report Progress') {
             when {
-                branch 'testjenkins'
+                branch 'master'
             }
             steps {
                 sh 'mkdir reports'
@@ -34,10 +34,10 @@ pipeline {
         }
         stage('Update Progress') {
             agent {
-                label "master"
+                label 'master'
             }
             when {
-                branch 'testjenkins'
+                branch 'master'
             }
             steps {
                 unstash 'reports'
