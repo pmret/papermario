@@ -54,8 +54,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance *script, s32 isInitialCall);
-/*
+#ifdef NON_MATCHING
+
 extern s32 D_802A25E4;
 extern MenuIcon* D_802A25C8;
 extern s32 D_802A25EC;
@@ -88,10 +88,12 @@ void N(func_802A123C_72C7EC)(void) {
         }
     }
 }
-*/
+#else
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance *script, s32 isInitialCall);
+#endif
 
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance *script, s32 isInitialCall);
-/*
+#ifdef NON_MATCHING
+
 extern s32 D_802A25E4;
 extern s32 D_802A25E8;
 extern s32 D_802A25EC;
@@ -253,7 +255,9 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance *script, s32 isInitialCall);
+#endif
 
 ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

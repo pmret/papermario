@@ -1,7 +1,11 @@
-#include "shooting_star.h"
+#include "stone_cap.h"
+
+// D_802A1A60 is pointing to the wrong location for some reason
+
+#ifdef NON_MATCHING
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1EE0;
+MenuIcon* D_802A1A60;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -33,10 +37,10 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1EE0 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1EE0, iconPosX + 36, iconPosY - 63);
+        D_802A1A60 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A1A60, iconPosX + 36, iconPosY - 63);
     }
-
+ 
     script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
@@ -48,99 +52,56 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1EE0);
+        free_icon(D_802A1A60);
     }
 
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
-
-void func_8006FE30(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
-
-ApiStatus N(func_802A123C_71D9AC)(ScriptInstance *script, s32 isInitialCall) {
-    s32 c8 = 200;
-    s32 temp_s1 = 100 + rand_int(c8);
-    s32 temp_s0 = rand_int(40);
-    s32 phi_a0;
-    s32 phi_v0;
-    s32 rand;
-    f32 temp_f20;
-    f32 temp_f22;
-    f32 test;
-
-    if (script->varTable[0] & 3) {
-        rand = rand_int(100);
-        rand += c8;
-        temp_f22 = temp_s1 - rand;
-        rand = rand_int(100);
-        rand -= 50;
-        temp_f20 = temp_s0 - rand;
-        phi_v0 = rand_int(10);
-        phi_a0 = 2;
-    } else {
-        rand = rand_int(100);
-        rand += 200;
-        temp_f22 = temp_s1 - rand;
-        rand = rand_int(100);
-        rand -= 50;
-        temp_f20 = temp_s0 - rand;
-        phi_v0 = rand_int(10);
-        phi_a0 = 3;
-    }
-
-    do {
-        func_8006FE30(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
-        if (temp_f20) {
-            temp_f20 -= rand;
-        }
-    } while (0);
-
-    return ApiStatus_DONE2;
-}
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/shooting_star_71D770", battle_item_shooting_star_func_802A123C_71D9AC, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefund, ScriptInstance *script, s32 isInitialCall)
+INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefundCleanup, ScriptInstance *script, s32 isInitialCall)
 #endif
 
-ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
- 
-    func_80070190(2, a, b, c, 0, -1.0f, 0, 5);
-
-    return ApiStatus_DONE2;
-}
-
-ApiStatus N(func_802A1444_71DBB4)(ScriptInstance *script, s32 isInitialCall) {
-    s32 ret;
+ApiStatus N(func_802A123C_7217DC)(ScriptInstance *script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
+    s32 i;
 
     if (isInitialCall) {
-        func_8011D82C(1);
-        *D_801512F0 = 1;
-        set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 10;
+        script->functionTemp[0].s = 0;
     }
 
-    set_background_color_blend(0, 0, 0, ((10 - script->functionTemp[0].s) * 16) & 240);
-    script->functionTemp[0].s--;
-    do {} while (0);
-    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
-}
+    switch (script->functionTemp[0].s) {
+        case 0:
+            inflict_status(player, 12, script->varTable[0]);
+            player->status = 0;
+            script->functionTemp[1].s = 3;
+            script->functionTemp[0].s = 1;
+            break;
 
-ApiStatus N(func_802A14D4_71DC44)(ScriptInstance *script, s32 isInitialCall) {
-    if (isInitialCall) {
-        script->functionTemp[0].s = 10;
-    }
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 16) & 240);
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == 0) {
-        set_background_color_blend(0, 0, 0, 0);
+        case 1:
+            for (i = 0; i < 10; i++) {
+                f32 x = player->currentPos.x + ((rand_int(20) - 10) * player->scalingFactor);
+                f32 y = player->currentPos.y + ((rand_int(20) + 10) * player->scalingFactor);
+                f32 z = player->currentPos.z + 5.0f;
+                func_80071FF0(0, x, y, z, 1.0f, 25);
+            }
 
-        return ApiStatus_DONE2;
+            if (script->functionTemp[1].s == 0) {
+                BattleStatus* battleStatus2 = &gBattleStatus;
+
+                battleStatus2->flags1 &= ~0x04000000;
+                battleStatus->hustleTurns = 0;
+                battleStatus->itemUsesLeft = 0;
+
+                return ApiStatus_DONE2;
+            }
+
+            script->functionTemp[1].s--;
+            break;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 
@@ -203,7 +164,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+Script N(PlayerGoHome) = SCRIPT({ 
     UseIdleAnimation(ActorID_PLAYER, 0);
     SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);

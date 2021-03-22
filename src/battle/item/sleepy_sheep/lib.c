@@ -54,9 +54,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep_71E650", battle_item_sleepy_sheep_func_802A123C_71E88C, ScriptInstance* script, s32 isInitialCall);
+#ifdef NON_MATCHING
  
-/*
 extern Vec3f D_802A3F88;
 extern s32* D_802A3F58;
 
@@ -205,7 +204,9 @@ ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
+#else
+INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep_71E650", battle_item_sleepy_sheep_func_802A123C_71E88C, ScriptInstance* script, s32 isInitialCall);
+#endif
 
 ApiStatus N(func_802A1740_71ED90)(ScriptInstance *script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
