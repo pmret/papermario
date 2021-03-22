@@ -2315,14 +2315,16 @@ segments:
     subsections:
     - [0x71B1A0, c]
     - [0x71B640, data]
-  - name: battle/item/snowman_doll
+  - name: battle/item/snowman_doll/
     type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x71BE30, c]
-    - [0x71C270, data]
+    - [0x71BE30,     c, lib]
+    - [0x71C270, .data, lib]
+    - [0x71C82C, .data, snowman_doll]
   - name: battle/item/dried_shroom/
     type: code
     start: 0x71CCE0
