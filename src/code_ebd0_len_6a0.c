@@ -13,26 +13,20 @@ extern s32 D_800A0908;
 extern s16** D_800778A0;
 
 void intro_logos_set_fade_alpha(s16 alpha) {
-    GameStatus* gameStatus = gGameStatusPtr;
-
-    gameStatus->bootAlpha = alpha;
+    gGameStatusPtr->bootAlpha = alpha;
 }
 
 void intro_logos_set_fade_color(s16 color) {
-    GameStatus* gameStatus = gGameStatusPtr;
-
-    gameStatus->bootRed = color;
-    gameStatus->bootGreen = color;
-    gameStatus->bootBlue = color;
+    gGameStatusPtr->bootRed = color;
+    gGameStatusPtr->bootGreen = color;
+    gGameStatusPtr->bootBlue = color;
 }
 
 s16 intro_logos_fade_in(s16 subtractAlpha) {
-    GameStatus* gameStatus = gGameStatusPtr;
-
-    if (gameStatus->bootAlpha != 0) {
-        gameStatus->bootAlpha -= subtractAlpha;
-        if (gameStatus->bootAlpha << 16 < 0) {
-            gameStatus->bootAlpha = 0;
+    if (gGameStatusPtr->bootAlpha != 0) {
+        gGameStatusPtr->bootAlpha -= subtractAlpha;
+        if (gGameStatusPtr->bootAlpha << 16 < 0) {
+            gGameStatusPtr->bootAlpha = 0;
         }
     } else {
         return 1;
@@ -41,12 +35,10 @@ s16 intro_logos_fade_in(s16 subtractAlpha) {
 }
 
 s16 intro_logos_fade_out(s16 addAlpha) {
-    GameStatus* gameStatus = gGameStatusPtr;
-
-    if (gameStatus->bootAlpha != 0xFF) {
-        gameStatus->bootAlpha += addAlpha;
-        if ((gameStatus->bootAlpha > 0xFF)) {
-            gameStatus->bootAlpha = 0xFF;
+    if (gGameStatusPtr->bootAlpha != 255) {
+        gGameStatusPtr->bootAlpha += addAlpha;
+        if (gGameStatusPtr->bootAlpha > 255) {
+            gGameStatusPtr->bootAlpha = 255;
         }
     } else {
         return 1;

@@ -305,10 +305,9 @@ void func_800E01DC(void) {
 }
 
 s32 func_800E0208(void) {
-    GameStatus* gameStatus = gGameStatusPtr;
     s32 ret = 0;
 
-    if (gameStatus->disableScripts && (gameStatus->currentButtons & 0x10)) {
+    if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons & 0x10)) {
         if (D_8010EBB0.unk_00 == 0) {
             set_action_state(ActionState_IDLE);
         }

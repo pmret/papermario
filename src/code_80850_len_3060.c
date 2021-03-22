@@ -628,11 +628,10 @@ s32 is_status_menu_visible(void) {
 }
 
 void status_menu_start_blinking_hp(void) {
-    GameStatus* gameStatus = gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
     }
 
@@ -653,11 +652,10 @@ void status_menu_stop_blinking_hp(void) {
 }
 
 void status_menu_start_blinking_fp(void) {
-    GameStatus* gameStatus = gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
     }
 
@@ -677,11 +675,10 @@ void status_menu_stop_blinking_fp(void) {
 }
 
 void status_menu_start_blinking_coins(void) {
-    GameStatus* gameStatus = gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
     }
 
