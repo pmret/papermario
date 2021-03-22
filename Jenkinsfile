@@ -1,13 +1,6 @@
-def agentLabel
-if (BRANCH_NAME == "master") {
-    agentLabel = "master"
-} else {
-    agentLabel = "papermario"
-}
-
 pipeline {
     agent {
-        label agentLabel
+        label "papermario"
     }
 
     stages {
@@ -25,14 +18,34 @@ pipeline {
         }
         stage('Report Progress') {
             when {
-                branch 'master'
+                branch 'testjenkins'
             }
             steps {
-                sh 'python3 progress.py us --csv >> /var/www/papermar.io/html/reports/progress_us.csv'
-                sh 'python3 progress.py us --shield-json > /var/www/papermar.io/html/reports/progress_us_shield.json'
+                sh 'mkdir reports'
 
-                sh 'python3 progress.py jp --csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
-                sh 'python3 progress.py jp --shield-json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
+                sh 'python3 progress.py us --csv >> reports/progress_us.csv'
+                sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
+
+                sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
+                sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
+
+                stash includes: 'reports/*', name: 'reports'
+            }
+        }
+        stage('Update Progress') {
+            agent {
+                label "master"
+            }
+            when {
+                branch 'testjenkins'
+            }
+            steps {
+                unstash 'reports'
+                sh 'cat reports/progress_us.csv >> /var/www/papermar.io/html/reports/progress_us.csv'
+                sh 'cat reports/progress_us_shield.json > /var/www/papermar.io/html/reports/progress_us_shield.json'
+
+                sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
+                sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
             }
         }
     }
