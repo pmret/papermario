@@ -33,11 +33,11 @@ pipeline {
             }
         }
         stage('Update Progress') {
-            agent {
-                label 'master'
-            }
             when {
                 branch 'master'
+            }
+            agent {
+                label 'master'
             }
             steps {
                 unstash 'reports'
