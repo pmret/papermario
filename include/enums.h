@@ -705,6 +705,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_RUN_THINKING     0x00010027
 #define PlayerAnim_QUESTION         0x00010028
 #define PlayerAnim_NOD_YES          0x00010029
+#define PlayerAnim_1002B            0x0001002B // TODO
 #define PlayerAnim_PRAY             0x0001002C
 #define PlayerAnim_CHARRED          0x0001002F
 #define PlayerAnim_GET_UP           0x00010030

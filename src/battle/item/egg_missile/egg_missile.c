@@ -4,14 +4,14 @@
 #include "battle/item/egg_missile/egg_missile3.png.h"
 #include "battle/item/egg_missile/egg_missile4.png.h"
 
-Vtx N(eggmissileModel)[] = {
+Vtx N(model)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
     { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
     { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
     { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
 };
 
-Gfx N(eggmissile1DL)[] = {
+Gfx N(frame1_displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -26,14 +26,14 @@ Gfx N(eggmissile1DL)[] = {
     gsDPLoadTextureTile_4b(&N(egg_missile1_png), G_IM_FMT_CI, N(egg_missile1_png_width), N(egg_missile1_png_height), 0, 0, N(egg_missile1_png_width) - 1, N(egg_missile1_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(eggmissileModel), ARRAY_COUNT(N(eggmissileModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-Gfx N(eggmissile2DL)[] = {
+Gfx N(frame2_displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -48,14 +48,14 @@ Gfx N(eggmissile2DL)[] = {
     gsDPLoadTextureTile_4b(&N(egg_missile2_png), G_IM_FMT_CI, N(egg_missile2_png_width), 0, 0, 0, N(egg_missile2_png_width) - 1, N(egg_missile2_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(eggmissileModel), ARRAY_COUNT(N(eggmissileModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-Gfx N(eggmissile3DL)[] = {
+Gfx N(frame3_displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -70,14 +70,14 @@ Gfx N(eggmissile3DL)[] = {
     gsDPLoadTextureTile_4b(&N(egg_missile3_png), G_IM_FMT_CI, N(egg_missile3_png_width), 0, 0, 0, N(egg_missile3_png_width) - 1, N(egg_missile3_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(eggmissileModel), ARRAY_COUNT(N(eggmissileModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-Gfx N(eggmissile4DL)[] = {
+Gfx N(frame4_displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -92,21 +92,21 @@ Gfx N(eggmissile4DL)[] = {
     gsDPLoadTextureTile_4b(&N(egg_missile4_png), G_IM_FMT_CI, N(egg_missile4_png_width), 0, 0, 0, N(egg_missile4_png_width) - 1, N(egg_missile4_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(eggmissileModel), ARRAY_COUNT(N(eggmissileModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-s32 N(eggmissileItemModelCommandList)[] = {
+s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 
-    0x00000001, 0x00000002, &N(eggmissile1DL), 
-    0x00000001, 0x00000002, &N(eggmissile2DL),
-    0x00000001, 0x00000002, &N(eggmissile3DL),
+    0x00000001, 0x00000002, &N(frame1_displayList), 
+    0x00000001, 0x00000002, &N(frame2_displayList),
+    0x00000001, 0x00000002, &N(frame3_displayList),
     0x00000002, 0x00000000,
     0x00000004, 0x0000000D,
-    0x00000001, sizeof(N(eggmissile4DL)) / sizeof(s32), &N(eggmissile4DL),
+    0x00000001, sizeof(N(frame4_displayList)) / sizeof(s32), &N(frame4_displayList),
     0x00000002, 0x00000000,
 };
 
@@ -118,7 +118,7 @@ Script N(main) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     PlaySound(1018);
     sleep 3;
-    func_802D3474(SI_VAR(10), N(eggmissileItemModelCommandList));
+    func_802D3474(SI_VAR(10), N(modelCommandList));
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 20;
     SI_VAR(1) += 42;

@@ -1,14 +1,14 @@
 #include "dusty_hammer.h"
 #include "battle/item/dusty_hammer/dusty_hammer.png.h"
 
-Vtx N(dustyhammerModel)[] = {
+Vtx N(model)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
     { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
     { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
     { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
 };
 
-Gfx N(dustyhammerDL)[] = {
+Gfx N(displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -23,15 +23,15 @@ Gfx N(dustyhammerDL)[] = {
     gsDPLoadTextureTile_4b(&N(dusty_hammer_png), G_IM_FMT_CI, N(dusty_hammer_png_width), N(dusty_hammer_png_height), 0, 0, N(dusty_hammer_png_width) - 1, N(dusty_hammer_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(dustyhammerModel), ARRAY_COUNT(N(dustyhammerModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-s32 N(dustyhammerItemModelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(dustyhammerDL)) / sizeof(s32), &N(dustyhammerDL), 0x00000002, 0x00000000,
+s32 N(modelCommandList)[] = {
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
@@ -42,7 +42,7 @@ Script N(main) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     PlaySound(1018);
     sleep 3;
-    func_802D3474(SI_VAR(10), N(dustyhammerItemModelCommandList));
+    func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
     func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));

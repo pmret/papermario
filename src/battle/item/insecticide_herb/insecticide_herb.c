@@ -1,14 +1,14 @@
 #include "insecticide_herb.h"
 #include "battle/item/insecticide_herb/insecticide_herb.png.h"
 
-Vtx N(insecticideherbModel)[] = {
+Vtx N(model)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
     { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
     { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
     { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
 };
 
-Gfx N(insecticideherbDL)[] = {
+Gfx N(displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -23,15 +23,15 @@ Gfx N(insecticideherbDL)[] = {
     gsDPLoadTextureTile_4b(&N(insecticide_herb_png), G_IM_FMT_CI, N(insecticide_herb_png_width), N(insecticide_herb_png_height), 0, 0, N(insecticide_herb_png_width) - 1, N(insecticide_herb_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(N(insecticideherbModel), ARRAY_COUNT(N(insecticideherbModel)), 0),
+    gsSPVertex(N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-s32 N(insecticideherbItemModelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(insecticideherbDL)) / sizeof(s32), &N(insecticideherbDL), 0x00000002, 0x00000000,
+s32 N(modelCommandList)[] = {
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
 Script script = SCRIPT({
@@ -42,7 +42,7 @@ Script script = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     PlaySound(1018);
     sleep 3;
-    func_802D3474(SI_VAR(10), 0x802A1D30);
+    func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
     func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));

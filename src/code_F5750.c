@@ -570,7 +570,8 @@ UnkF5750* func_802D4164(s32 index) {
 
 INCLUDE_ASM(s32, "code_F5750", func_802D417C);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D420C);
+void func_802D420C(UnkF5750* arg0);
+INCLUDE_ASM(void, "code_F5750", func_802D420C, UnkF5750* arg0);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D42AC);
 

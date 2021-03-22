@@ -2343,14 +2343,22 @@ segments:
     - [0x71D770,     c, lib]
     - [0x71DCC0, .data, lib]
     - [0x71E27C, .data, shooting_star]
-  - name: battle/item/sleepy_sheep
+  - name: battle/item/sleepy_sheep/
     type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     subsections:
-    - [0x71E650, c]
-    - [0x71EFC0, data]
+    - [0x71E650,       c, lib]
+    - [0x71EFC0,   .data, lib]
+    - [0x71F580,     ci4, sleepy_sheep1, 56, 48]
+    - [0x71FAC0, palette, sleepy_sheep1]
+    - [0x71FAE0,     ci4, sleepy_sheep2, 56, 48]
+    - [0x720020, palette, sleepy_sheep2]
+    - [0x720040,     ci4, sleepy_sheep3, 56, 48]
+    - [0x720580, palette, sleepy_sheep3]
+    - [0x7205A0,   .data, sleepy_sheep]
+    - [0x7214D8, .rodata, lib]
   - name: battle/item/stone_cap
     type: code
     start: 0x7215A0

@@ -111,6 +111,8 @@ def get_constants():
     return
 
 def fix_args(args, info):
+    global constants
+    
     new_args = []
     for i,arg in enumerate(args.split(", ")):
         if i in info:
@@ -128,12 +130,12 @@ def fix_args(args, info):
     return ", ".join(new_args)
 
 def replace_constants(func, args):
-    global constants
-
     if func == "SetAnimation":                  return fix_args(args, {0:"ActorId", 2:"AnimId"})
     elif func == "SetJumpAnimations":           return fix_args(args, {0:"ActorId", 2:"AnimId", 3:"AnimId", 4:"AnimId"})
     elif func == "SetActorJumpGravity":         return fix_args(args, {0:"ActorId"})
     elif func == "SetActorSpeed":               return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorScale":               return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorYaw":                 return fix_args(args, {0:"ActorId"})
     elif func == "GetActorPos":                 return fix_args(args, {0:"ActorId"})
     elif func == "SetTargetActor":              return fix_args(args, {0:"ActorId"})
     elif func == "SetGoalToTarget":             return fix_args(args, {0:"ActorId"})
