@@ -2421,14 +2421,16 @@ segments:
     - [0x725F60,     c, lib]
     - [0x726240, .data, lib]
     - [0x7267FC, .data, hustle_drink]
-  - name: battle/item/stop_watch
+  - name: battle/item/stop_watch/
     type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x726DD0, c]
-    - [0x727120, data]
+    - [0x726DD0,     c, lib]
+    - [0x727120, .data, lib]
+    - [0x7276EC, .data, stop_watch]
   - name: battle/item/dizzy_dial/
     type: code
     start: 0x727910
