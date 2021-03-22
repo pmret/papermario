@@ -103,7 +103,7 @@ void stub_dynamic_entity_delegate(void) {
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", clear_dynamic_entity_list);
 
 void init_dynamic_entity_list(void) {
-    if (!(*gGameStatusPtr)->isBattle) {
+    if (!gGameStatusPtr->isBattle) {
         gCurrentDynamicEntityListPtr = gWorldDynamicEntityList;
     } else {
         gCurrentDynamicEntityListPtr = gBattleDynamicEntityList;

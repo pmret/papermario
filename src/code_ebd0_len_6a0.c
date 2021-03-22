@@ -13,13 +13,13 @@ extern s32 D_800A0908;
 extern s16** D_800778A0;
 
 void intro_logos_set_fade_alpha(s16 alpha) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
 
     gameStatus->bootAlpha = alpha;
 }
 
 void intro_logos_set_fade_color(s16 color) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
 
     gameStatus->bootRed = color;
     gameStatus->bootGreen = color;
@@ -27,7 +27,7 @@ void intro_logos_set_fade_color(s16 color) {
 }
 
 s16 intro_logos_fade_in(s16 subtractAlpha) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0) {
         gameStatus->bootAlpha -= subtractAlpha;
@@ -41,7 +41,7 @@ s16 intro_logos_fade_in(s16 subtractAlpha) {
 }
 
 s16 intro_logos_fade_out(s16 addAlpha) {
-    GameStatus* gameStatus = *gGameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
 
     if (gameStatus->bootAlpha != 0xFF) {
         gameStatus->bootAlpha += addAlpha;
@@ -55,8 +55,10 @@ s16 intro_logos_fade_out(s16 addAlpha) {
 }
 
 void intro_logos_update_fade(void) {
-    set_transition_stencil_zoom_0(0, (*gGameStatusPtr)->bootAlpha);
-    set_transition_stencil_color(0, (*gGameStatusPtr)->bootBlue, (*gGameStatusPtr)->bootGreen, (*gGameStatusPtr)->bootRed);
+    GameStatus** gameStatus = &gGameStatusPtr;
+
+    set_transition_stencil_zoom_0(0, (*gameStatus)->bootAlpha);
+    set_transition_stencil_color(0, (*gameStatus)->bootBlue, (*gameStatus)->bootGreen, (*gameStatus)->bootRed);
 }
 
 void begin_state_battle(void) {
@@ -88,13 +90,13 @@ void step_battle(void) {
             nuContRmbForceStopEnd();
             func_80149838();
             func_8003B1A8();
-            (*gGameStatusPtr)->isBattle = TRUE;
+            gGameStatusPtr->isBattle = TRUE;
             allocate_hit_tables();
             func_8002D160();
             func_802B20B4();
             func_80149670(0);
 
-            gameStatus = *gGameStatusPtr;
+            gameStatus = gGameStatusPtr;
 
             // This part sucks
             if (!(gameStatus->peachFlags & 1)) {

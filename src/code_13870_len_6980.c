@@ -15,7 +15,7 @@ void mtx_ident_mirror_y(Matrix4f* mtx) {
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_npcs);
 
 void init_npc_list(void) {
-    if (!(gGameStatusPtr[0]->isBattle)) {
+    if (!gGameStatusPtr->isBattle) {
         gCurrentNpcListPtr = &gWorldNpcList;
     } else {
         gCurrentNpcListPtr = &gBattleNpcList;
@@ -28,7 +28,7 @@ void init_npc_list(void) {
 void func_8003857C(void) {
     s32 phi_v1 = 0;
     s32 temp_v0 = phi_v1 < 0x40;
-    
+
     while (temp_v0) {
         phi_v1++;
         temp_v0 = phi_v1 < 0x40;
@@ -113,7 +113,7 @@ func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
 void set_npc_sprite(Npc *npc, s32 arg1, s32 arg2) {
     s32 flagsTemp;
-    
+
     ASSERT(((npc->flags & 0x1000000)) || (func_802DE5E8(npc->unk_24) == 0));
     npc->unk_B0 = arg2;
     if (!(npc->flags & 0x1000000)) {
