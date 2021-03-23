@@ -35,7 +35,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script script = SCRIPT({
-    SI_VAR(10) = c 0x87;
+    SI_VAR(10) = c ItemId_INSECTICIDE_HERB;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);

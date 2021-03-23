@@ -25,7 +25,7 @@ s32 N(D_802A2858_732B58)[] = {
 Script N(script6) = SCRIPT({
     GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) == 211) {
-        SI_VAR(10) = c 0xD3;
+        SI_VAR(10) = c ItemId_KOOKY_COOKIE;
         SI_VAR(1) = 0;
         await N(UseItemWithEffect);
         await N(EatItem);
@@ -47,7 +47,7 @@ Script N(script6) = SCRIPT({
         sleep 20;
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
     } else {
-        SI_VAR(10) = c 0xD2;
+        SI_VAR(10) = c ItemId_STRANGE_CAKE;
         SI_VAR(1) = 0;
         await N(UseItemWithEffect);
         await N(EatItem);

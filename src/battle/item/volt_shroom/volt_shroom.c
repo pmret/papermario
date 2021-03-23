@@ -1,7 +1,7 @@
 #include "volt_shroom.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x8B;
+    SI_VAR(10) = c ItemId_VOLT_SHROOM;
     await N(UseItemWithEffect);
     await N(EatItem);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);

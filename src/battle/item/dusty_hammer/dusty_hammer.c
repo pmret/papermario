@@ -35,7 +35,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x86;
+    SI_VAR(10) = c ItemId_DUSTY_HAMMER;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);

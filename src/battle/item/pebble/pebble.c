@@ -35,7 +35,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x85;
+    SI_VAR(10) = c ItemId_PEBBLE;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);

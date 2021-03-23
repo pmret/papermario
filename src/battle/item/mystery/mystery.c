@@ -45,7 +45,7 @@ s32 N(D_802A229C_72D84C)[8] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x96;
+    SI_VAR(10) = c ItemId_MYSTERY;
     await N(UseItemWithEffect);
     spawn {
         sleep 220;

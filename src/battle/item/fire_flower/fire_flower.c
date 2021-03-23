@@ -1,7 +1,7 @@
 #include "fire_flower.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x80;
+    SI_VAR(10) = c ItemId_FIRE_FLOWER;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
     PlaySound(887);

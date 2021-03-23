@@ -100,7 +100,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x8F;
+    SI_VAR(10) = c ItemId_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
     UseCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);

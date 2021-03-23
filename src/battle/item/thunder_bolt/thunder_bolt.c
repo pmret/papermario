@@ -1,7 +1,7 @@
 #include "thunder_bolt.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x84;
+    SI_VAR(10) = c ItemId_THUNDER_BOLT;
     await N(UseItemWithEffect);
     spawn {
         sleep 5;

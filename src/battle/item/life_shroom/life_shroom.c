@@ -83,11 +83,11 @@ Script N(main) = SCRIPT({
     N(func_802A1484_72E9B4)(SI_VAR(10));
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));
-    if (SI_VAR(0) == 256) {
+    if (SI_VAR(0) == ActorID_PARTNER) {
         await N(script6);
         return;
     }
-    SI_VAR(10) = c 0x95;
+    SI_VAR(10) = c ItemId_LIFE_SHROOM;
     SI_VAR(1) = SI_VAR(15);
     await N(UseItemWithEffect);
     await N(EatItem);

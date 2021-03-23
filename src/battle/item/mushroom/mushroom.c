@@ -83,7 +83,7 @@ Script N(main) = SCRIPT({
     N(func_802A15A0_715DF0)(SI_VAR(10));
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));
-    if (SI_VAR(0) == 256) {
+    if (SI_VAR(0) == ActorID_PARTNER) {
         await N(script6);
         return;
     }

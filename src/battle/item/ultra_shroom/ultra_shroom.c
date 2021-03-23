@@ -1,7 +1,7 @@
 #include "ultra_shroom.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x8C;
+    SI_VAR(10) = c ItemId_SUPER_SHROOM;
     await N(UseItemWithEffect);
     AddBattleCamZoom(50);
     MoveBattleCamOver(20);

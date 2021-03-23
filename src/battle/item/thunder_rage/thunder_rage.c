@@ -1,7 +1,7 @@
 #include "thunder_rage.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x82;
+    SI_VAR(10) = c ItemId_THUNDER_RAGE;
     await N(UseItemWithEffect);
     parallel {
         sleep 5;

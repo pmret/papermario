@@ -1,7 +1,7 @@
 #include "hustle_drink.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c 0x91;
+    SI_VAR(10) = c ItemId_HUSTLE_DRINK;
     await N(UseItemWithEffect);
     await N(DrinkItem);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_SQUISH);
