@@ -42,3 +42,4 @@ glabel func_802A123C_72223C
 /* 7222C4 802A12C4 8FB00010 */  lw        $s0, 0x10($sp)
 /* 7222C8 802A12C8 24020002 */  addiu     $v0, $zero, 2
 /* 7222CC 802A12CC 03E00008 */  jr        $ra
+nop

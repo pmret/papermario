@@ -2394,14 +2394,17 @@ segments:
     - [0x721970, .data, lib]
     - [0x721F2C, .data, stone_cap]
     - [0x722000,  .bss, lib]
-  - name: battle/item/tasty_tonic
+  - name: battle/item/tasty_tonic/
     type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x722000, c]
-    - [0x7222D0, data]
+    - [0x722000,     c, lib]
+    - [0x7222D0, .data, lib]
+    - [0x72289C, .data, tasty_tonic]
+    - [0x722B40,  .bss, lib]
   - name: battle/item/thunder_bolt
     type: code
     start: 0x722B40
