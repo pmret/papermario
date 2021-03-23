@@ -1,8 +1,8 @@
 #include "dizzy_dial.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1CD4;
-s32* D_802A1CD0;
+static s32* D_802A1CD0;
+static MenuIcon* D_802A1CD4;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

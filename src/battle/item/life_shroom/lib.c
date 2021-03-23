@@ -1,7 +1,7 @@
 #include "life_shroom.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A21F0;
+static MenuIcon* D_802A21F0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

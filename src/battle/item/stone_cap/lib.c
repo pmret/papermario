@@ -1,10 +1,5 @@
 #include "stone_cap.h"
 
-// D_802A1A60 is pointing to the wrong location for some reason
-
-//#define NON_MATCHING
-//#ifdef NON_MATCHING
-
 extern s32 D_80108A64;
 static MenuIcon* D_802A1A60;
 
@@ -58,12 +53,6 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-
-//#else
-//INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefund, ScriptInstance *script, s32 isInitialCall)
-//INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefundCleanup, ScriptInstance *script, s32 isInitialCall)
-//#endif
-//#undef NON_MATCHING
 
 ApiStatus N(func_802A123C_7217DC)(ScriptInstance *script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

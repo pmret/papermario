@@ -1,7 +1,7 @@
 #include "fire_flower.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A1D70;
+static MenuIcon* D_802A1D70;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

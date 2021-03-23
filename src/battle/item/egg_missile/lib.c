@@ -1,7 +1,7 @@
 #include "egg_missile.h"
 
 extern s32 D_80108A64;
-MenuIcon* D_802A2890;
+static MenuIcon* D_802A2890;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
