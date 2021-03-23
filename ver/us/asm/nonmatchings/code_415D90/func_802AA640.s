@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802ACC38
+.word 0x802AA674, 0x802AA674, 0x802AA674, 0x802AA674, 0x802AA674, 0x802AA67C, 0x802AA67C, 0x802AA67C, 0x802AA67C, 0x00000000
+
+.section .text
+
 glabel func_802AA640
 /* 41F3D0 802AA640 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
 /* 41F3D4 802AA644 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
