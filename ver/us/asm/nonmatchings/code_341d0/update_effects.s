@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel update_effects
-/* 35150 80059D50 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 35154 80059D54 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* 35150 80059D50 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 35154 80059D54 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* 35158 80059D58 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 3515C 80059D5C AFBF0020 */  sw        $ra, 0x20($sp)
 /* 35160 80059D60 AFB3001C */  sw        $s3, 0x1c($sp)

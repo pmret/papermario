@@ -33,10 +33,10 @@ ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
     GameStatus** gameStatus = &gGameStatusPtr;
-    s32* thisPos = script->ptrReadPos;
     f32 a;
     f32 b;
-
+    s32* thisPos = script->ptrReadPos;
+    
     a = get_float_variable(script, *thisPos++);
     b = get_float_variable(script, *thisPos++);
 

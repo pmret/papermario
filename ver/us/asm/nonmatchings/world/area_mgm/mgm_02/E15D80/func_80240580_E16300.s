@@ -3,8 +3,8 @@
 
 glabel func_80240580_E16300
 /* E16300 80240580 3C04FFFB */  lui       $a0, 0xfffb
-/* E16304 80240584 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* E16308 80240588 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* E16304 80240584 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* E16308 80240588 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* E1630C 8024058C 8C620000 */  lw        $v0, ($v1)
 /* E16310 80240590 3484FFFF */  ori       $a0, $a0, 0xffff
 /* E16314 80240594 00441024 */  and       $v0, $v0, $a0

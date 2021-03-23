@@ -20,8 +20,8 @@ glabel func_80039DA4
 /* 151E0 80039DE0 000218C0 */  sll       $v1, $v0, 3
 /* 151E4 80039DE4 00431021 */  addu      $v0, $v0, $v1
 /* 151E8 80039DE8 000210C0 */  sll       $v0, $v0, 3
-/* 151EC 80039DEC 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* 151F0 80039DF0 8C63A650 */  lw        $v1, %lo(D_8009A650)($v1)
+/* 151EC 80039DEC 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* 151F0 80039DF0 8C63A650 */  lw        $v1, %lo(gOverrideFlags)($v1)
 /* 151F4 80039DF4 3063C000 */  andi      $v1, $v1, 0xc000
 /* 151F8 80039DF8 1460006C */  bnez      $v1, .L80039FAC
 /* 151FC 80039DFC 00441021 */   addu     $v0, $v0, $a0

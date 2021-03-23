@@ -7,8 +7,8 @@ glabel func_80240048_7E73E8
 /* 7E73F0 80240050 0080802D */  daddu     $s0, $a0, $zero
 /* 7E73F4 80240054 10A00008 */  beqz      $a1, .L80240078
 /* 7E73F8 80240058 AFBF0014 */   sw       $ra, 0x14($sp)
-/* 7E73FC 8024005C 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* 7E7400 80240060 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* 7E73FC 8024005C 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* 7E7400 80240060 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* 7E7404 80240064 8C620000 */  lw        $v0, ($v1)
 /* 7E7408 80240068 AE000070 */  sw        $zero, 0x70($s0)
 /* 7E740C 8024006C AE000074 */  sw        $zero, 0x74($s0)

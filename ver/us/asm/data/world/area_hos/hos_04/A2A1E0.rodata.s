@@ -1,0 +1,6 @@
+.include "macro.inc"
+
+.section .rodata
+
+glabel jtbl_80243310_A2A1E0
+.word L80240788_A27658, L802407A8_A27678, L802407F8_A276C8, L8024084C_A2771C, L8024087C_A2774C, 0

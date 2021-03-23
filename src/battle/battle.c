@@ -2,22 +2,6 @@
 #include "ld_addrs.h"
 #include "battle.h"
 
-typedef struct BattleArea {
-    /* 0x00 */ char* name; ///< JP debug name.
-    /* 0x04 */ s32 dmaStart;
-    /* 0x08 */ s32 dmaEnd;
-    /* 0x0C */ void* dmaDest;
-    /* 0x10 */ BattleList* battles;
-    /* 0x14 */ StageList* stages;
-    /* 0x18 */ s32 unused_18;
-    /* 0x1C */ void* dmaTable;
-} BattleArea; // size = 0x20
-
-#define AREA(id) \
-    .dmaStart = &code_##id##_ROM_START, \
-    .dmaEnd = &code_##id##_ROM_END, \
-    .dmaDest = &code_##id##_VRAM
-
 const s32 D_80099E40[] = {
     /* 0x75240 */ 0x00010202, 0x03030303, 0x04040404, 0x04040404,
     /* 0x75250 */ 0x05050505, 0x05050505, 0x05050505, 0x05050505,

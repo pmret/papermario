@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D670
+.word L80267EB8_196798, L80267E38_196718, L80267E48_196728, L80267E58_196738, L80267E68_196748, L80267E78_196758, L80267E88_196768, L80267E98_196778, L80267E98_196778, L80267E98_196778, L80267E98_196778, L80267E98_196778
+
+.section .text
+
 glabel start_rumble_type
 /* 1966D4 80267DF4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 1966D8 80267DF8 AFB00010 */  sw        $s0, 0x10($sp)

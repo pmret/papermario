@@ -30,7 +30,9 @@ void func_80035E54(void) {
     *mapTransitonAlpha = 0xFF;
     nuContRmbForceStopEnd();
     func_801382AC(mapTransitonAlpha);
-    D_8009A650[0] |= 8;
+
+    OVERRIDE_FLAG_SET(0x8);
+
     set_variable(0, SI_SAVE_VAR(1), (*gameStatus)->unk_A9);
     D_8009A5D8 = 0;
 }
@@ -44,6 +46,8 @@ void func_800360FC(void) {
 }
 
 void func_80036130(void) {
+    //GameStatus* gameStatus = gGameStatusPtr;
+
     gMapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;
     D_800A0944 = 0x00;

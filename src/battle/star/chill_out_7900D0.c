@@ -21,9 +21,9 @@ ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 func_802A1528_7905F8(ActorPart* actorPart) {
-    actorPart->unk_84 = D_802A2CC0;
-    return 2;
+ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = D_802A2CC0;
+    return ApiStatus_DONE2;
 }
 
 ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {

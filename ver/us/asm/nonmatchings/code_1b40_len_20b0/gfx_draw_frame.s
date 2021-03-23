@@ -8,8 +8,8 @@ glabel gfx_draw_frame
 /* 1F14 80026B14 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
 /* 1F18 80026B18 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
 /* 1F1C 80026B1C AFB00010 */  sw        $s0, 0x10($sp)
-/* 1F20 80026B20 3C10800A */  lui       $s0, %hi(D_8009A650)
-/* 1F24 80026B24 2610A650 */  addiu     $s0, $s0, %lo(D_8009A650)
+/* 1F20 80026B20 3C10800A */  lui       $s0, %hi(gOverrideFlags)
+/* 1F24 80026B24 2610A650 */  addiu     $s0, $s0, %lo(gOverrideFlags)
 /* 1F28 80026B28 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 1F2C 80026B2C AFB10014 */  sw        $s1, 0x14($sp)
 /* 1F30 80026B30 3C018007 */  lui       $at, %hi(gMatrixListPos)
@@ -77,8 +77,8 @@ glabel gfx_draw_frame
 /* 201C 80026C1C 24040001 */   addiu    $a0, $zero, 1
 /* 2020 80026C20 3C100010 */  lui       $s0, 0x10
 .L80026C24:
-/* 2024 80026C24 3C11800A */  lui       $s1, %hi(D_8009A650)
-/* 2028 80026C28 2631A650 */  addiu     $s1, $s1, %lo(D_8009A650)
+/* 2024 80026C24 3C11800A */  lui       $s1, %hi(gOverrideFlags)
+/* 2028 80026C28 2631A650 */  addiu     $s1, $s1, %lo(gOverrideFlags)
 /* 202C 80026C2C 8E220000 */  lw        $v0, ($s1)
 /* 2030 80026C30 36100010 */  ori       $s0, $s0, 0x10
 /* 2034 80026C34 00501024 */  and       $v0, $v0, $s0

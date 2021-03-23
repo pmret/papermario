@@ -29,7 +29,6 @@ void load_map_bg(char* optAssetName) {
 void use_default_background_settings(void) {
     D_801595A0 = 0;
     D_8014F12F = 0;
-
     gGameStatusPtr->unk_15C = 0xB4;
     gGameStatusPtr->enableBackground &= 0xF0;
 }

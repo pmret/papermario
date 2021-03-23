@@ -96,10 +96,11 @@ void update_player(void) {
 
     func_800E0B90();
 
-    gGameStatusPtr->playerPos.x = playerStatus->position.x;
-    gGameStatusPtr->playerPos.y = playerStatus->position.y;
-    gGameStatusPtr->playerPos.z = playerStatus->position.z;
-    gGameStatusPtr->playerYaw = playerStatus->currentYaw;
+    gameStatus = gGameStatusPtr;
+    gameStatus->playerPos.x = playerStatus->position.x;
+    gameStatus->playerPos.y = playerStatus->position.y;
+    gameStatus->playerPos.z = playerStatus->position.z;
+    gameStatus->playerYaw = playerStatus->currentYaw;
 
     check_input_open_menus();
     if (!(playerStatus->animFlags & 0x1000)) {

@@ -1,6 +1,6 @@
 #include "kzn_04.h"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_8024032C_C6845C);
 

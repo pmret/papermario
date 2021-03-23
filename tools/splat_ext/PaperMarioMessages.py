@@ -1,5 +1,6 @@
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
+from util import options
 import re
 
 CHARSET = {
@@ -353,8 +354,8 @@ CHARSET_CREDITS = {
 }
 
 class N64SegPaperMarioMessages(N64Segment):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
         self.files = segment.get("files", []) if type(segment) is dict else []
         self.ids = segment["ids"]
 
@@ -372,7 +373,7 @@ class N64SegPaperMarioMessages(N64Segment):
             section_offsets.append(offset)
             pos += 4
 
-        msg_dir = Path(base_path, self.options["assets_dir"], self.name)
+        msg_dir = Path(base_path, options.get("assets_dir"), self.name)
         msg_dir.mkdir(parents=True, exist_ok=True)
 
         # delete existing files
@@ -433,7 +434,7 @@ class N64SegPaperMarioMessages(N64Segment):
                 f.unlink()
 
     def get_ld_files(self):
-        return [(self.options["assets_dir"], self.name, ".data", self.rom_start)]
+        return [(options.get("assets_dir"), self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

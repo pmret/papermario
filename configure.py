@@ -27,16 +27,17 @@ def read_splat(splat_config: str, version: str):
     import argparse
     import yaml
     from segtypes.n64.code import N64SegCode
+    from util import options
 
     # Load config
     with open(splat_config) as f:
         config = yaml.safe_load(f.read())
 
-    options = config.get("options")
+    options.initialize(config)
     assert options.get("ld_o_replace_extension", True) == False
 
     # Initialize segments
-    all_segments = split.initialize_segments(options, splat_config, config["segments"])
+    all_segments = split.initialize_segments(splat_config, config["segments"])
 
     objects = set()
     segments = {}
@@ -153,6 +154,7 @@ async def main():
     parser.add_argument("--cflags", default="", help="Extra cc/cpp flags")
     parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
+    parser.add_argument("--depend-on-s", action="store_true", help="Configure dependencies on .s files for c files that include them")
     args = parser.parse_args()
     versions = args.version
 
@@ -262,6 +264,9 @@ async def main():
         version = versions[0]
         f.write(f"compiler_command = \"{cpp} -Iver/{version}/build/include -Iinclude -Isrc -DPERMUTER -D _LANGUAGE_C -D _FINALROM -D VERSION={version} -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -D SCRIPT(...)={{}} | {iconv} | tools/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow {args.cflags} -o - | tools/{os_dir}/mips-nintendo-nu64-as -EB -G 0 -\"\n")
         f.write(f"assembler_command = \"{cross}as -march=vr4300 -mabi=32\"\n")
+        f.write("\n")
+        f.write("[preserve_macros]\n")
+        f.write("\"g[DS]P.*\" = \"void\"\n")
 
     # $version
     n.rule("cpp",
@@ -560,7 +565,7 @@ async def main():
                 obj(c_file),
                 "cc_dsl" if status == 0 else "cc",
                 c_file,
-                implicit=glob(s_glob),
+                implicit = None if not args.depend_on_s else glob(s_glob),
                 order_only="generated_headers_" + version,
                 variables={ "version": version }
             )

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D838
+.word L80270814_19F0F4, L80270860_19F140, L802708AC_19F18C, L802708D4_19F1B4, L80270900_19F1E0, 0
+
+.section .text
+
 glabel VanishActor
 /* 19EEF4 80270614 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 19EEF8 80270618 AFB20020 */  sw        $s2, 0x20($sp)

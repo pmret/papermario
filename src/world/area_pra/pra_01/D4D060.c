@@ -29,7 +29,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240D3C_D4DD7C);
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
 
 ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
-    D_8009A650[0] &= ~0x80;
+    OVERRIDE_FLAG_UNSET(0x80);
     return ApiStatus_DONE2;
 }
 

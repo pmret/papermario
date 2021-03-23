@@ -848,7 +848,7 @@ s32 is_ability_active(s32 arg0) {
         local_20[i] = 0;
     }
 
-    if (((*gGameStatusPtr)->unk_7E & 1) == 0) {
+    if ((gGameStatusPtr->unk_7E & 1) == 0) {
         iVar2 = 0;
         iVar7 = 0;
         piVar6 = 0;

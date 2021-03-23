@@ -1,5 +1,10 @@
 #include "common.h"
 
+extern UNK_TYPE D_802EA728;
+extern UNK_TYPE D_802EA760;
+extern StaticEntityData D_802EA7BC;
+extern UNK_TYPE D_802EB3C0;
+
 INCLUDE_ASM(s32, "code_105F90", func_802E4710);
 
 INCLUDE_ASM(s32, "code_105F90", func_802E4730);
@@ -22,10 +27,11 @@ void func_802E4B60(Entity* entity) {
     Entity* someEntity;
 
     entity->unk_3C = func_802E4AEC;
-    entity->alpha = 0xFF;
+    entity->alpha = 255;
     temp_s0 = entity->dataBuf;
     entity->flags |= 0x2000;
     someEntity = get_entity_by_index(temp_s0->unk_00);
+
     if (temp_s0->unk_09 == 0) {
         temp_s0->unk_09 = 1;
         temp_s0->unk_01 = 2;
@@ -70,8 +76,6 @@ void func_802E540C(Entity* entity) {
     func_802E4B10(entity);
 }
 
-extern UNK_TYPE D_802EA728;
-
 void func_802E5428(Entity* entity) {
     func_802E4B60(entity);
     func_80110BCC(entity, &D_802EA728);
@@ -86,23 +90,19 @@ void func_802E548C(Entity* entity) {
     func_802E4E04(entity, 0);
 }
 
-extern UNK_TYPE D_802EA760;
-
 void func_802E54A8(Entity* entity) {
     func_80110BCC(entity, &D_802EA760);
 }
 
-extern UNK_TYPE D_802EB3C0;
-
 void func_802E54CC(Entity* entity) {
-    if ((gPlayerData.partners[1].enabled == 0) && (get_global_flag(0xF8405BE0) == 0)) {
+    if ((!gPlayerData.partners[1].enabled) && get_global_flag(SI_SAVE_FLAG(96)) == 0) {
         UNK_TYPE* ptr = &D_802EB3C0;
         *ptr = 0;
         load_string(0x1D0001, ptr);
         func_80027088(1);
-        D_8009A650[0] |= 0x40;
+        OVERRIDE_FLAG_SET(0x40);
         disable_player_input();
-        set_global_flag(0xF8405BE0);
+        set_global_flag(SI_SAVE_FLAG(96));
         return;
     }
     exec_entity_updatecmd(entity);
@@ -112,31 +112,28 @@ void func_802E555C(Entity* entity) {
     if (D_802EB3C0) {
         exec_entity_updatecmd(entity);
         func_80027088(0);
-        D_8009A650[0] &= ~0x40;
+        OVERRIDE_FLAG_UNSET(0x40);
         enable_player_input();
     }
 }
 
 s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
-    s32 temp_s2;
+    s32 temp_s2 = D_8015C7D0[0];
     Entity* someEntity;
     struct802E4B10* temp_v1;
-    s8 phi_v0;
 
-    temp_s2 = D_8015C7D0[0];
     entity_init_Hammer23Block_normal(entity);
     someEntity = get_entity_by_index(create_entity(data, entity->position.x, entity->position.y, entity->position.z, 0.0f,
                                      0x80000000));
     temp_v1 = someEntity->dataBuf;
     temp_v1->unk_00 = entity->listIndex;
+
     if (temp_s2 == 0) {
         temp_v1->unk_0A = 3;
     } else {
         temp_v1->unk_0A = 6;
     }
 }
-
-extern StaticEntityData D_802EA7BC;
 
 void func_802E5648(Entity* entity) {
     func_802E55A8(entity, &D_802EA7BC);

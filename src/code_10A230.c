@@ -22,17 +22,15 @@ void func_802E89B0(Entity* entity) {
 }
 
 void func_802E89F8(Entity* entity) {
-    s32 temp_v0;
-    struct802E89B0* temp;
+    struct802E89B0* temp = entity->dataBuf;
 
-    temp = entity->dataBuf;
     temp->unk_04--;
     if ((temp->unk_04 != -1) && (temp->unk_08 == 0)) {
         entity->position.y += 2.3125;
-        return;
+    } else {
+        temp->unk_04 = 0;
+        exec_entity_updatecmd(entity);
     }
-    temp->unk_04 = 0;
-    exec_entity_updatecmd(entity);
 }
 
 void func_802E8A58(Entity* entity) {
@@ -44,15 +42,15 @@ void func_802E8A58(Entity* entity) {
                 if (gCollisionStatus.currentFloor > 0) {
                     temp->unk_04 = 1;
                 }
-                return;
+                break;
             case 1:
                 if (gCollisionStatus.currentFloor < 0) {
                     temp->unk_04 = 2;
                 }
-                return;
+                break;
             default:
                 exec_entity_updatecmd(entity);
-                return;
+                break;
         }
     } else {
         exec_entity_updatecmd(entity);
@@ -65,24 +63,22 @@ void func_802E8ADC(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((entity->unk_06 & 1) != 0) {
-        *D_8009A650 |= 0x40;
-        if ((playerStatus->flags & 0x3000) == 0) {
-            s32 phi_v0 = playerStatus->stickAxis[0];
-            s32 temp_a0 = playerStatus->stickAxis[1];
+        OVERRIDE_FLAG_SET(0x40);
 
-            if (phi_v0 < 0) {
-                phi_v0 = -phi_v0;
-            }
+        if (!(playerStatus->flags & 0x3000)) {
+            s32 stickAxis0 = playerStatus->stickAxis[0];
+            s32 stickAxis1 = playerStatus->stickAxis[1];
 
-            if ((phi_v0 != 0) || (temp_a0 != 0)) {
-                if (atan2(0.0f, 0.0f, phi_v0, temp_a0) < 60.0f) {
+            stickAxis0 = abs(stickAxis0);
+
+            if ((stickAxis0 != 0) || (stickAxis1 != 0)) {
+                if (atan2(0.0f, 0.0f, stickAxis0, stickAxis1) < 60.0f) {
                     exec_entity_updatecmd(entity);
-                    return;
                 }
             }
         }
     } else {
-        *D_8009A650 &= ~0x40;
+        OVERRIDE_FLAG_UNSET(0x40);
     }
 }
 #else
@@ -152,7 +148,7 @@ void func_802E8D74(Entity* entity) {
 void func_802E8E10(Entity* entity) {
     Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptStart;
 
-    D_8009A650[0] &= ~0x40;
+    OVERRIDE_FLAG_UNSET(0x40);
     entity->boundScript = triggerScriptStart;
     func_80110678(entity);
 }

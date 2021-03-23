@@ -3,6 +3,7 @@
 import argparse
 import yaml
 from pathlib import PurePath
+from util import options
 
 from split import initialize_segments
 
@@ -14,7 +15,7 @@ def main(config_path):
     with open(config_path) as f:
         config = yaml.safe_load(f.read())
 
-    options = config.get("options")
+    options.initialize(config)
     replace_ext = options.get("ld_o_replace_extension", True)
 
     # Initialize segments

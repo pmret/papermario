@@ -276,27 +276,3 @@ INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072A10);
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072A70);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072AD0);
-
-// FILE SPLIT
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072B30);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072BB0);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072BCC);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", load_battle_section);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", load_battle);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", set_battle_stage);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072CDC);
-
-void func_80072CEC(){
-}
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", func_80072CF4);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", setup_demo_player);
-
-INCLUDE_ASM(s32, "code_4ac90_len_3910", load_demo_battle);

@@ -38,8 +38,8 @@ glabel update_item_entity_temp
 /* CBE44 80135744 00000000 */   nop
 /* CBE48 80135748 0C03BD8A */  jal       func_800EF628
 /* CBE4C 8013574C 00000000 */   nop
-/* CBE50 80135750 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* CBE54 80135754 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* CBE50 80135750 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* CBE54 80135754 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* CBE58 80135758 8C620000 */  lw        $v0, ($v1)
 /* CBE5C 8013575C 24040002 */  addiu     $a0, $zero, 2
 /* CBE60 80135760 34420040 */  ori       $v0, $v0, 0x40
@@ -630,8 +630,8 @@ glabel L80135F94_CC694
 /* CC6B4 80135FB4 00000000 */   nop
 /* CC6B8 80135FB8 0C03BD80 */  jal       func_800EF600
 /* CC6BC 80135FBC 00000000 */   nop
-/* CC6C0 80135FC0 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* CC6C4 80135FC4 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* CC6C0 80135FC0 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* CC6C4 80135FC4 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* CC6C8 80135FC8 8C430000 */  lw        $v1, ($v0)
 /* CC6CC 80135FCC 2404FFBF */  addiu     $a0, $zero, -0x41
 /* CC6D0 80135FD0 00641824 */  and       $v1, $v1, $a0
@@ -863,8 +863,8 @@ glabel L80136310_CCA10
 /* CCA28 80136328 00000000 */   nop
 /* CCA2C 8013632C 0C03BD80 */  jal       func_800EF600
 /* CCA30 80136330 00000000 */   nop
-/* CCA34 80136334 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* CCA38 80136338 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* CCA34 80136334 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* CCA38 80136338 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* CCA3C 8013633C 2405FFBF */  addiu     $a1, $zero, -0x41
 /* CCA40 80136340 8C430000 */  lw        $v1, ($v0)
 /* CCA44 80136344 3C048015 */  lui       $a0, %hi(D_801568E0)

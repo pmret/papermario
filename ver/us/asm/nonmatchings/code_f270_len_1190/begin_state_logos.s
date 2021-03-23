@@ -128,8 +128,8 @@ glabel begin_state_logos
 /* F45C 8003405C 24040001 */   addiu    $a0, $zero, 1
 /* F460 80034060 0C016727 */  jal       clear_effect_data
 /* F464 80034064 00000000 */   nop
-/* F468 80034068 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* F46C 8003406C 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* F468 80034068 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* F46C 8003406C 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* F470 80034070 8C620000 */  lw        $v0, ($v1)
 /* F474 80034074 34420002 */  ori       $v0, $v0, 2
 /* F478 80034078 0C00CE1D */  jal       intro_logos_update_fade

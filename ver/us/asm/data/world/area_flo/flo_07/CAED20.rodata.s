@@ -1,0 +1,6 @@
+.include "macro.inc"
+
+.section .rodata
+
+glabel D_80242B30_CAED20
+.word 0x666C6F5F, 0x32350000, 0x666C6F5F, 0x31300000, 0x666C6F5F, 0x32350000, 0x00000000, 0x00000000

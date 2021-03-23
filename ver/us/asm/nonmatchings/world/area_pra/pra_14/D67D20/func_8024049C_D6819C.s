@@ -17,8 +17,8 @@ glabel func_8024049C_D6819C
 /* D681CC 802404CC 0000202D */   daddu    $a0, $zero, $zero
 /* D681D0 802404D0 8E03013C */  lw        $v1, 0x13c($s0)
 /* D681D4 802404D4 AC620000 */  sw        $v0, ($v1)
-/* D681D8 802404D8 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* D681DC 802404DC 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* D681D8 802404D8 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* D681DC 802404DC 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* D681E0 802404E0 8C620000 */  lw        $v0, ($v1)
 /* D681E4 802404E4 34420080 */  ori       $v0, $v0, 0x80
 /* D681E8 802404E8 AC620000 */  sw        $v0, ($v1)

@@ -94,30 +94,30 @@ ApiStatus MakeOwnerTargetIndex(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "code_1AC760", MakeOwnerTargetIndex);
 #endif
 
-#ifdef NON_MATCHING
+s32 calc_partner_damage_enemy(void);
+
 ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
     Actor* actor;
-    Bytecode* args = script->ptrReadPos;
-    s32 outVar = args[0];
-    s32 enemyID = get_variable(script, args[0]);
+    ActorID actorID = get_variable(script, *args++);
+    s32 outVar;
 
-    if (enemyID == -0x7F) {
-        enemyID = script->owner1.enemyID;
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.enemyID;
     }
 
-    actor = get_actor(enemyID);
+    outVar = *args++;
+    actor = get_actor(actorID);
     battleStatus->flags1 |= 0x20;
+
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage);
+    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage, 0);
     set_variable(script, outVar, hitResult);
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1AC760", func_8027FC90);
-#endif
 
 ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

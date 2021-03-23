@@ -8,7 +8,6 @@ void func_800287F0(void) {
     (*gameStatus)->heldButtons = 0;
     (*gameStatus)->stickX = 0;
     (*gameStatus)->stickY = 0;
-
     (*gameStatus)->prevButtons = 0;
     (*gameStatus)->unk_50[0] = 4;
     (*gameStatus)->unk_48[0] = 15;

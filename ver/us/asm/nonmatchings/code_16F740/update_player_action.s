@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029CAF0
+.word L80246194_174A74, L802461BC_174A9C, L8024619C_174A7C, L802461A4_174A84, L802461CC_174AAC, L802461AC_174A8C, L802461B4_174A94, L802461C4_174AA4
+
+glabel jtbl_8029CB10
+.word L80246310_174BF0, L80246338_174C18, L80246318_174BF8, L80246320_174C00, L80246348_174C28, L80246328_174C08, L80246330_174C10, L80246340_174C20
+
+.section .text
+
 glabel update_player_action
 /* 1743B0 80245AD0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 1743B4 80245AD4 AFB40020 */  sw        $s4, 0x20($sp)

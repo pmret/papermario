@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240034_879C14);
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-#include "world/common/Set8009A650_40.inc.c"
+#include "world/common/SetOverrideFlags_40.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802402FC_879EDC);
 

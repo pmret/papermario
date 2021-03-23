@@ -93,6 +93,8 @@ s32 disable_player_input(void);
 
 void func_80027088(s32);
 
+void get_dpad_input_radial(f32* angle, f32* magnitude);
+
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
@@ -261,7 +263,7 @@ void exec_entity_updatecmd(Entity* entity);
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
-void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount);
+void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void func_80070B50(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_800718D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070BB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);

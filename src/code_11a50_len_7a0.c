@@ -3,6 +3,7 @@
 void begin_state_intro(void) {
     GameStatus** gameStatus = &gGameStatusPtr;
     s8 unk_A8;
+    u8* mystery;
 
     (*gameStatus)->loadMenuState = 0;
 
@@ -27,7 +28,6 @@ void begin_state_intro(void) {
             (*gameStatus)->areaID = 5;
             (*gameStatus)->mapID = 5;
             (*gameStatus)->entryID = 3;
-
             break;
         case 1:
             intro_logos_set_fade_alpha(0);
@@ -45,13 +45,10 @@ void begin_state_intro(void) {
             (*gameStatus)->areaID = 5;
             (*gameStatus)->mapID = 4;
             (*gameStatus)->entryID = 4;
-
             break;
-        default: {
-            u8* mystery;
-
+        default:
             intro_logos_set_fade_alpha(0);
-            intro_logos_set_fade_color(0xD0);
+            intro_logos_set_fade_color(208);
 
             mystery = &D_800779B0;
 
@@ -66,10 +63,10 @@ void begin_state_intro(void) {
             }
 
             D_800A0964 = 3;
-        }
+            break;
     }
 
-    set_transition_stencil_zoom_1(D_800A0963, (f32)D_800A0954);
+    set_transition_stencil_zoom_1(D_800A0963, D_800A0954);
     set_transition_stencil_color(1, D_800A095B, D_800A095D, D_800A095F);
 
     intro_logos_update_fade();
