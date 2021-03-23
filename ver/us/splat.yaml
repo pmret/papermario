@@ -2405,14 +2405,17 @@ segments:
     - [0x7222D0, .data, lib]
     - [0x72289C, .data, tasty_tonic]
     - [0x722B40,  .bss, lib]
-  - name: battle/item/thunder_bolt
+  - name: battle/item/thunder_bolt/
     type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x722B40, c]
-    - [0x722FE0, data]
+    - [0x722B40,     c, lib]
+    - [0x722FE0, .data, lib]
+    - [0x72359C, .data, thunder_bolt]
+    - [0x723780,  .bss, lib]
   - name: battle/item/ultra_shroom
     type: code
     start: 0x723780
