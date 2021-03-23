@@ -7,7 +7,6 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_thunder_bolt
 
-//ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 ApiStatus N(FadeBackgroundToBlack)(ScriptInstance* script, s32 isInitialCall);

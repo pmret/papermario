@@ -1,7 +1,7 @@
-#include "thunder_bolt.h"
+#include "thunder_rage.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A1C40;
+static MenuIcon* D_802A1C90;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -33,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1C40 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1C40, iconPosX + 36, iconPosY - 63);
+        D_802A1C90 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A1C90, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -48,13 +48,31 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1C40);
+        free_icon(D_802A1C90);
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A123C_722D7C)(ScriptInstance* script, s32 isInitialCall) {
+#include "common/FadeBackgroundToBlack.inc.c"
+
+ApiStatus N(func_802A12D4_71B474)(ScriptInstance *script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0].s = 20;
+    }
+
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 254);
+
+    script->functionTemp[0].s--;
+    if (script->functionTemp[0].s == 0) {
+        set_background_color_blend(0, 0, 0, 0);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus N(func_802A1354_71B4F4)(ScriptInstance* script, s32 isInitialCall) {
     Actor* enemyTarget = get_actor(script->owner1.enemyID);
     Actor* actor = get_actor(enemyTarget->targetActorID);
     f32 posY, posX, posZ;
@@ -80,24 +98,6 @@ ApiStatus N(func_802A123C_722D7C)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     return ApiStatus_DONE2;
-}
-
-#include "common/FadeBackgroundToBlack.inc.c"
-
-ApiStatus N(func_802A1420_722F60)(ScriptInstance *script, s32 isInitialCall) {
-    if (isInitialCall) {
-        script->functionTemp[0].s = 20;
-    }
-
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 254);
-
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == 0) {
-        set_background_color_blend(0, 0, 0, 0);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
 }
 
 Script N(UseItemWithEffect) = SCRIPT({
@@ -190,4 +190,3 @@ Script N(DrinkItem) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
     sleep 45;
 });
-

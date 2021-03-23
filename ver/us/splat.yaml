@@ -2325,14 +2325,17 @@ segments:
     subsections:
     - [0x71A7F0, c]
     - [0x71AA70, data]
-  - name: battle/item/thunder_rage
+  - name: battle/item/thunder_rage/
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x71B1A0, c]
-    - [0x71B640, data]
+    - [0x71B1A0,     c, lib]
+    - [0x71B640, .data, lib]
+    - [0x71BBFC, .data, thunder_rage]
+    - [0x71BE30,  .bss, lib]
   - name: battle/item/snowman_doll/
     type: code
     start: 0x71BE30
