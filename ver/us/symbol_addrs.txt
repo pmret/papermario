@@ -17143,7 +17143,6 @@ D_802A18E0 = 0x802A18E0; // type:data
 D_802A19B0 = 0x802A19B0; // type:data
 D_802A19C0 = 0x802A19C0; // type:data
 D_802A1A60 = 0x802A1A60; // type:data
-battle_item_coconut_coconutDL = 0x802A1A60; // type:data
 D_802A1A90 = 0x802A1A90; // type:data
 D_802A1AA0 = 0x802A1AA0; // type:data
 D_802A1AC0 = 0x802A1AC0; // type:data

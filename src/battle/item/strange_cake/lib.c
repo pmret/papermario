@@ -89,7 +89,7 @@ ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 #else
-INCLUDE_ASM(s32, "battle/item/strange_cake_731300", battle_item_strange_cake_func_802A123C_73153C);
+INCLUDE_ASM(ApiStatus, "battle/item/strange_cake_731300", battle_item_strange_cake_func_802A123C_73153C);
 #endif
 
 #ifdef NON_MATCHING

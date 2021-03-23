@@ -2371,6 +2371,7 @@ segments:
     - [0x7215A0,     c, lib]
     - [0x721970, .data, lib]
     - [0x721F2C, .data, stone_cap]
+    #- [0x722000,  .bss, lib, 0]
   - name: battle/item/tasty_tonic
     type: code
     start: 0x722000
@@ -2403,14 +2404,16 @@ segments:
     subsections:
     - [0x724240, c]
     - [0x724570, data]
-  - name: battle/item/super_soda
+  - name: battle/item/super_soda/
     type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x724CE0, c]
-    - [0x725210, data]
+    - [0x724CE0,     c, lib]
+    - [0x725210, .data, lib]
+    - [0x7257CC, .data, super_soda]
   - name: battle/item/hustle_drink/
     type: code
     start: 0x725F60

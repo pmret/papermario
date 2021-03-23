@@ -1,12 +1,7 @@
-#include "stone_cap.h"
-
-// D_802A1A60 is pointing to the wrong location for some reason
-
-//#define NON_MATCHING
-//#ifdef NON_MATCHING
+#include "super_soda.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A1A60;
+MenuIcon* D_802A2280;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -38,10 +33,10 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1A60 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1A60, iconPosX + 36, iconPosY - 63);
+        D_802A2280 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A2280, iconPosX + 36, iconPosY - 63);
     }
- 
+
     script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
@@ -53,59 +48,89 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1A60);
+        free_icon(D_802A2280);
     }
 
     return ApiStatus_DONE2;
 }
 
-//#else
-//INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefund, ScriptInstance *script, s32 isInitialCall)
-//INCLUDE_ASM(ApiStatus, "battle/item/stone_cap_7215A0", battle_item_stone_cap_GiveRefundCleanup, ScriptInstance *script, s32 isInitialCall)
-//#endif
-//#undef NON_MATCHING
+ApiStatus N(func_802A123C_724F1C)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a = get_variable(script, *args++);
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+    ItemEntity* item = get_item_entity(script->varTable[14]);
 
-ApiStatus N(func_802A123C_7217DC)(ScriptInstance *script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    Actor* player = battleStatus->playerActor;
-    s32 i;
+    item->position.x = a;
+    item->position.y = b;
+    item->position.z = c;
 
-    if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-    }
-
-    switch (script->functionTemp[0].s) {
-        case 0:
-            inflict_status(player, 12, script->varTable[0]);
-            player->status = 0;
-            script->functionTemp[1].s = 3;
-            script->functionTemp[0].s = 1;
-            break;
-
-        case 1:
-            for (i = 0; i < 10; i++) {
-                f32 x = player->currentPos.x + ((rand_int(20) - 10) * player->scalingFactor);
-                f32 y = player->currentPos.y + ((rand_int(20) + 10) * player->scalingFactor);
-                f32 z = player->currentPos.z + 5.0f;
-                func_80071FF0(0, x, y, z, 1.0f, 25);
-            }
-
-            if (script->functionTemp[1].s == 0) {
-                BattleStatus* battleStatus2 = &gBattleStatus;
-
-                battleStatus2->flags1 &= ~0x04000000;
-                battleStatus->hustleTurns = 0;
-                battleStatus->itemUsesLeft = 0;
-
-                return ApiStatus_DONE2;
-            }
-
-            script->functionTemp[1].s--;
-            break;
-    }
-
-    return ApiStatus_BLOCK;
+    return ApiStatus_DONE2;
 }
+
+ApiStatus N(func_802A12EC_724FCC)(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partner = battleStatus->partnerActor;
+    Bytecode* args = script->ptrReadPos;
+
+    if (partner->koDuration == 0) {
+        return ApiStatus_DONE2;
+    }
+
+    partner->koDuration -= get_variable(script, *args++);
+    if (partner->koDuration < 0) {
+        partner->koDuration = 0;
+    }
+    if (partner->koDuration > 0) {
+        partner->ptrDefuffIcon->ptrPropertyList[0xF] = partner->koDuration;
+    } else {
+        partner->koStatus = 0;
+        dispatch_event_partner(0x34);
+        partner->ptrDefuffIcon->ptrPropertyList[0xF] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A1378_725058)(ScriptInstance* script, s32 isInitialCall) {
+    s32 arg = get_variable(script, *script->ptrReadPos);
+    Actor* actor = get_actor(arg);
+    s32 id = actor->actorID & 0x700;
+
+    if (actor->debuff != Debuff_END) {
+        actor->debuffDuration = 0;
+        actor->debuff = 0;
+        func_80047898(actor->unk_436);
+    }
+
+    if (actor->koStatus != 0) {
+        actor->koDuration = 0;
+        actor->koStatus = 0;
+        if (id != 0) {
+            if (id == 0x100) {
+                dispatch_event_partner(0x31);
+            }
+        }
+        actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
+    }
+
+    func_8026777C();
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus N(func_802A1418_7250F8)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 a = get_variable(script, *args++);
+    s32 b = get_variable(script, *args++);
+    s32 c = get_variable(script, *args++);
+    s32 d = get_variable(script, *args++);
+
+    func_80071090(1, a, b, c, d);
+    return ApiStatus_DONE2;
+}
+
+#include "common/AddFP.inc.c"
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
@@ -166,7 +191,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({ 
+Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
     SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);
