@@ -1,5 +1,6 @@
 #include "common.h"
 
+extern s32 D_80104A28;
 extern s32 D_80107D48;
 extern s32 D_80107D98;
 extern s32 D_80107CA8;
@@ -26,20 +27,43 @@ extern u8 D_802AD000;
 extern u8 D_802AD001;
 extern s16 D_802AD006;
 extern s16 D_802AD008;
+extern s32* D_802AD010;
+extern s32* D_802AD028;
+extern s32 D_802AD040;
+extern s32 D_802AD044;
+extern s32 D_802AD048;
+extern s32 D_802AD04C;
+extern s32 D_802AD05C;
+extern s32 D_802AD050;
+extern s32 D_802AD054;
+extern s32 D_802AD058;
 extern s8 D_802AD068;
+extern s32 main_menu_numOptions;
+extern s8 D_802AD10F;
+extern u8 battle_menu_moveState;
+extern s16 battle_menu_moveTextColor;
+extern s16 battle_menu_moveTextOpacity;
+extern s32 battle_menu_moveCursorIcon;
+extern s32 battle_menu_moveUpArrowIcon;
+extern s32 battle_menu_moveDownArrowIcon;
+extern s32* battle_menu_moveOptionIconIDs;
+extern s32 battle_menu_moveTitleIcon;
+extern s32* battle_menu_moveOptionCostUnitIconIDs;
 extern s32 D_802AD258;
 extern s32 battle_menu_hasSpiritsMenu;
-extern u8 battle_menu_moveState;
-extern s16 battle_menu_moveTextOpacity;
-extern s32 battle_menu_moveTitleIcon;
-extern u8 D_802AD604;
+extern s32 battle_menu_moveOptionCount;
+extern s8 D_802AD604;
+extern s8 D_802AD605;
+extern s8 D_802AD60B;
 extern s32 D_802AD610;
+extern s8 D_802AD614;
 extern s32 D_802AD618;
 extern s32 D_802AD61C;
 extern s32 D_802AD620;
 extern s32 D_802AD624;
 extern s32 D_802AD628;
 extern s32 D_802AD66C;
+extern s32* D_802AD6C0[];
 
 s16 D_802AB340[] = { 0x001C, 0x0028 };
 
@@ -129,7 +153,26 @@ void func_802A1098(void) {
     D_802AD000 = 30;
 }
 
-INCLUDE_ASM(s32, "code_415D90", func_802A10B8);
+void func_802A10B8(void) {
+    s32 i;
+
+    for (i = 0; i < main_menu_numOptions; i++) {
+        s32* icons1 = &D_802AD010;
+        s32* icons2 = &D_802AD028;
+
+        free_icon(icons1[i]);
+        free_icon(icons2[i]);
+    }
+
+    free_icon(D_802AD040);
+    free_icon(D_802AD044);
+    free_icon(D_802AD048);
+    free_icon(D_802AD04C);
+    free_icon(D_802AD05C);
+    free_icon(D_802AD050);
+    free_icon(D_802AD054);
+    free_icon(D_802AD058);
+}
 
 INCLUDE_ASM(s32, "code_415D90", func_802A11B0);
 
@@ -143,9 +186,84 @@ void func_802A27D0(void) {
 
 INCLUDE_ASM(s32, "code_415D90", func_802A27E4);
 
-INCLUDE_ASM(s32, "code_415D90", func_802A2910);
+void func_802A2910(void) {
+    s32* moveOptionIconIDs;
+    s32* moveOptionCostUnitIconIDs;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_415D90", func_802A2AB8);
+    moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        icon_set_tint(moveOptionIconIDs[i], 255, 255, 255);
+    }
+
+    icon_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+
+    moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        icon_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+    }
+
+    set_menu_icon_script(battle_menu_moveCursorIcon, &D_80104A28);
+    set_window_update(1, 5);
+
+    if (!battle_menu_hasSpiritsMenu) {
+        set_window_update(2, 5);
+        set_window_update(3, 5);
+    } else {
+        set_window_update(4, 5);
+        set_window_update(5, 5);
+    }
+
+    set_window_update(8, 1);
+    battle_menu_moveTextColor = 10;
+    D_802AD10F = 1;
+    battle_menu_moveTextOpacity = 255;
+    battle_menu_moveState = 1;
+}
+
+void func_802A2AB8(void) {
+    s32* moveOptionIconIDs;
+    s32* moveOptionCostUnitIconIDs;
+    s32 i;
+
+    set_window_update(1, 5);
+
+    if (!battle_menu_hasSpiritsMenu) {
+        set_window_update(2, 5);
+        set_window_update(3, 5);
+    } else {
+        set_window_update(4, 5);
+        set_window_update(5, 5);
+    }
+    set_window_update(8, 1);
+
+    moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        icon_set_tint(moveOptionIconIDs[i], 255, 255, 255);
+    }
+
+    icon_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    icon_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+
+    moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        icon_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+    }
+
+    set_menu_icon_script(battle_menu_moveCursorIcon, &D_80104A28);
+    battle_menu_moveTextColor = 10;
+    D_802AD10F = 1;
+    battle_menu_moveState = 20;
+}
 
 void func_802A2C58(void) {
     set_window_update(8, 1);
@@ -204,7 +322,7 @@ void func_802A4534(s32 arg0, s32 arg1, s32 arg2) {
     } else {
         phi_s0 = 0x1D00A0;
     }
-    draw_msg(phi_s0, temp1, temp2 + D_802AB344[get_msg_lines(phi_s0) - 1], 0xFF, 0xF, 0);
+    draw_msg(phi_s0, temp1, temp2 + D_802AB344[get_msg_lines(phi_s0) - 1], 255, 0xF, 0);
 }
 
 INCLUDE_ASM(s32, "code_415D90", func_802A45D8);
@@ -252,6 +370,21 @@ void func_802A56F8(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM(s32, "code_415D90", func_802A5738);
+// void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
+//     s32 id;
+
+//     switch (D_802AD604) {
+//         case -1:
+//         case 1:
+//         case 10:
+//         case 20:
+//         case 30:
+//             if (D_802AD60B != 0) {
+//                 draw_msg(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
+//             }
+//             break;
+//     }
+// }
 
 INCLUDE_ASM(s32, "code_415D90", func_802A57C8);
 
@@ -299,7 +432,6 @@ s32 can_switch_to_player(void) {
     }
 }
 
-//INCLUDE_ASM(s32, "code_415D90", func_802A58D0);
 s32 func_802A58D0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
