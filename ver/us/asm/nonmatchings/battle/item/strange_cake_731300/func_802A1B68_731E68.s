@@ -16,3 +16,4 @@ glabel func_802A1B68_731E68
 /* 731E94 802A1B94 8FB00010 */  lw        $s0, 0x10($sp)
 /* 731E98 802A1B98 24020002 */  addiu     $v0, $zero, 2
 /* 731E9C 802A1B9C 03E00008 */  jr        $ra
+nop

@@ -711,6 +711,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_GET_UP           0x00010030
 #define PlayerAnim_DUST_OFF         0x00010031
 #define PlayerAnim_THUMBS_UP        0x00010032
+#define PlayerAnim_30004            0x00030004 // TODO
 #define PlayerAnim_30008            0x00030008 // TODO
 #define PlayerAnim_30009            0x00030009 // TODO
 #define PlayerAnim_8000B            0x0008000B // TODO

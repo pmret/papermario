@@ -1,6 +1,21 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .data
+
+glabel D_802A2848_732B48
+#.word 0x802A27F8, 0x802A2820, 0x802A27D0, 0x802A27F8
+
+glabel D_802A2858_732B58
+#.short 0x0000, 0x0000, 0x0000, 0x0001, 0x0000, 0x0002, 0x0000, 0x0000, 0x0000, 0x0001,
+
+.section .rodata
+
+glabel jtbl_802A2DB0_7330B0
+.word L802A1434_731734, L802A14D0_7317D0, L802A1614_731914, L802A1698_731998, L802A1734_731A34, L802A1754_731A54, 0, 0
+
+
+.section .text
 glabel func_802A13E4_7316E4
 /* 7316E4 802A13E4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 7316E8 802A13E8 0080302D */  daddu     $a2, $a0, $zero
@@ -264,9 +279,9 @@ glabel L802A1754_731A54
 /* 731AA0 802A17A0 00628023 */  subu      $s0, $v1, $v0
 /* 731AA4 802A17A4 00101080 */  sll       $v0, $s0, 2
 /* 731AA8 802A17A8 0000802D */  daddu     $s0, $zero, $zero
-/* 731AAC 802A17AC 3C01802A */  lui       $at, %hi(D_802A285A_732B5A)
+/* 731AAC 802A17AC 3C01802A */  lui       $at, %hi(D_802A2858_732B58+2)
 /* 731AB0 802A17B0 00220821 */  addu      $at, $at, $v0
-/* 731AB4 802A17B4 9422285A */  lhu       $v0, %lo(D_802A285A_732B5A)($at)
+/* 731AB4 802A17B4 9422285A */  lhu       $v0, %lo(D_802A2858_732B58+2)($at)
 /* 731AB8 802A17B8 3C03800E */  lui       $v1, %hi(gBattleStatus)
 /* 731ABC 802A17BC 2463C070 */  addiu     $v1, $v1, %lo(gBattleStatus)
 /* 731AC0 802A17C0 A462017A */  sh        $v0, 0x17a($v1)
