@@ -1513,7 +1513,7 @@ segments:
     vram: 0x802A1000
     subsections:
     - [0x415D90, c, code_415D90]
-    - [0x4200D0, data]
+    - [0x4200D0, .data, code_415D90]
     - [0x420500, .rodata, code_415D90]
   - type: code
     start: 0x4219F0
