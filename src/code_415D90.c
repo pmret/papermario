@@ -369,22 +369,25 @@ void func_802A56F8(s32 arg0, s32 arg1, s32 arg2) {
     draw_msg(0x1D0043, arg1 + 0xF, arg2 + 2, D_802AD624, 0x33, 1);
 }
 
-INCLUDE_ASM(s32, "code_415D90", func_802A5738);
-// void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
-//     s32 id;
+#ifdef NON_MATCHING
+void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
+    s32 id;
 
-//     switch (D_802AD604) {
-//         case -1:
-//         case 1:
-//         case 10:
-//         case 20:
-//         case 30:
-//             if (D_802AD60B != 0) {
-//                 draw_msg(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
-//             }
-//             break;
-//     }
-// }
+    switch (D_802AD604) {
+        case -1:
+        case 1:
+        case 10:
+        case 20:
+        case 30:
+            if (D_802AD60B != 0) {
+                draw_msg(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
+            }
+            break;
+    }
+}
+#else
+INCLUDE_ASM(s32, "code_415D90", func_802A5738);
+#endif
 
 INCLUDE_ASM(s32, "code_415D90", func_802A57C8);
 
