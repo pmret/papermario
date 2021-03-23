@@ -32,7 +32,8 @@ INCLUDE_ASM(s32, "code_4ac90_len_3910", func_8006FD70);
 
 INCLUDE_ASM(s32, "code_4ac90_len_3910", func_8006FDD0);
 
-INCLUDE_ASM(void, "code_4ac90_len_3910", func_8006FE30, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
+INCLUDE_ASM(void, "code_4ac90_len_3910", func_8006FE30, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+            f32 arg6, f32 arg7);
 
 INCLUDE_ASM(void, "code_4ac90_len_3910", fx_emote, s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
             f32 arg6, s32 arg7, s32* arg8);

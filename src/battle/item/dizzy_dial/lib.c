@@ -60,14 +60,14 @@ void func_802A123C_727B4C(void) {
 }
 
 ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
-    Camera *camera = &gCameras[1];
+    Camera* camera = &gCameras[1];
     f32 a;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
     }
 
-    switch(script->functionTemp[0].s) {
+    switch (script->functionTemp[0].s) {
         case 0:
             script->functionTemp[1].s = 0;
             script->functionTemp[2].s = 0;

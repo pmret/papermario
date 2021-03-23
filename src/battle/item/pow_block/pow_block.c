@@ -1,7 +1,7 @@
 #include "pow_block.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x90;
+    SI_VAR(10) = c 0x90;
     await N(UseItemWithEffect);
     sleep 10;
     MakeEntity(0x802EA2E0, 0xFFFFFFD8, 60, 0, 0, 0x80000000);

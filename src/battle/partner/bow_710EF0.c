@@ -48,11 +48,11 @@ ApiStatus N(IsPartnerImmobile)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == Debuff_FEAR
-        || playerActor->debuff == Debuff_DIZZY
-        || playerActor->debuff == Debuff_PARALYZE
-        || playerActor->debuff == Debuff_SLEEP
-        || playerActor->debuff == Debuff_FROZEN
-        || playerActor->debuff == Debuff_STOP;
+                     || playerActor->debuff == Debuff_DIZZY
+                     || playerActor->debuff == Debuff_PARALYZE
+                     || playerActor->debuff == Debuff_SLEEP
+                     || playerActor->debuff == Debuff_FROZEN
+                     || playerActor->debuff == Debuff_STOP;
 
     if (playerActor->stoneStatus == 12) {
         isImmobile = TRUE;

@@ -54,7 +54,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A123C_71C06C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_71C06C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -74,7 +74,7 @@ ApiStatus N(func_802A13B8_71C1E8)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 254);
-    
+
     script->functionTemp[0].s--;
     if (script->functionTemp[0].s == 0) {
         set_background_color_blend(0, 0, 0, 0);
@@ -143,7 +143,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({ 
+Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
     SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);

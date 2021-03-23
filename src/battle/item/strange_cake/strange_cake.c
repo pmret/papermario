@@ -4,13 +4,13 @@
 #include "battle/item/strange_cake/strange_cake3.png.h"
 
 s32 N(data)[] = {
-    0x00000008, 0x00000005, 0x00000003, 0x00000004, 
-    0x00000002, 0x0000003C, 0x802A2170, 0x802A2370, 
-    0x00000003, 0x00000000, 0x00000008, 0x00000005, 
-    0x00000003, 0x00000004, 0x00000002, 0x0000003C, 
-    0x802A2390, 0x802A2590, 0x00000003, 0x00000000, 
-    0x00000008, 0x00000005, 0x00000003, 0x00000004, 
-    0x00000002, 0x0000003C, 0x802A25B0, 0x802A27B0, 
+    0x00000008, 0x00000005, 0x00000003, 0x00000004,
+    0x00000002, 0x0000003C, 0x802A2170, 0x802A2370,
+    0x00000003, 0x00000000, 0x00000008, 0x00000005,
+    0x00000003, 0x00000004, 0x00000002, 0x0000003C,
+    0x802A2390, 0x802A2590, 0x00000003, 0x00000000,
+    0x00000008, 0x00000005, 0x00000003, 0x00000004,
+    0x00000002, 0x0000003C, 0x802A25B0, 0x802A27B0,
     0x00000003, 0x00000000
 };
 
@@ -25,7 +25,7 @@ s32 N(D_802A2858_732B58)[] = {
 Script N(script6) = SCRIPT({
     GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) == 211) {
-        SI_VAR(10) =c 0xD3;
+        SI_VAR(10) = c 0xD3;
         SI_VAR(1) = 0;
         await N(UseItemWithEffect);
         await N(EatItem);
@@ -47,7 +47,7 @@ Script N(script6) = SCRIPT({
         sleep 20;
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
     } else {
-        SI_VAR(10) =c 0xD2;
+        SI_VAR(10) = c 0xD2;
         SI_VAR(1) = 0;
         await N(UseItemWithEffect);
         await N(EatItem);
@@ -80,7 +80,7 @@ Script N(script7) = SCRIPT({
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
     PlayEffect(87, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-    N(func_802A1AD8_731DD8)(); 
+    N(func_802A1AD8_731DD8)();
     sleep 20;
     ShowMessageBox(16, 60);
     WaitForMessageBoxDone();

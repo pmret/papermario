@@ -58,7 +58,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 void func_8006FE30(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
-ApiStatus N(func_802A123C_71D9AC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     s32 c8 = 200;
     s32 temp_s1 = 100 + rand_int(c8);
     s32 temp_s0 = rand_int(40);
@@ -99,7 +99,8 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/shooting_star_71D770", battle_item_shooting_star_func_802A123C_71D9AC, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/item/shooting_star_71D770", battle_item_shooting_star_func_802A123C_71D9AC,
+            ScriptInstance* script, s32 isInitialCall);
 #endif
 
 ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
@@ -107,13 +108,13 @@ ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
     s32 c = get_variable(script, *args++);
- 
+
     func_80070190(2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1444_71DBB4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1444_71DBB4)(ScriptInstance* script, s32 isInitialCall) {
     s32 ret;
 
     if (isInitialCall) {
@@ -129,7 +130,7 @@ ApiStatus N(func_802A1444_71DBB4)(ScriptInstance *script, s32 isInitialCall) {
     return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A14D4_71DC44)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A14D4_71DC44)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 10;
     }
@@ -140,7 +141,7 @@ ApiStatus N(func_802A14D4_71DC44)(ScriptInstance *script, s32 isInitialCall) {
 
         return ApiStatus_DONE2;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 

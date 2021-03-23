@@ -1,7 +1,7 @@
 #include "electro_pop.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0xCC;
+    SI_VAR(10) = c 0xCC;
     await N(UseItemWithEffect);
     await N(EatItem);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

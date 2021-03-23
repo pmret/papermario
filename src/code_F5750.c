@@ -427,7 +427,7 @@ ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(ScriptInstance *script) {
+ApiStatus func_802D2C40(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;

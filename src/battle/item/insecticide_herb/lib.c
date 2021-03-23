@@ -54,7 +54,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A123C_72A98C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_72A98C)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target = get_actor(enemy->targetActorID);
@@ -64,7 +64,7 @@ ApiStatus N(func_802A123C_72A98C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1280_72A9D0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1280_72A9D0)(ScriptInstance* script, s32 isInitialCall) {
     Actor* enemy = get_actor(script->owner1.enemyID);
     Actor* target;
 
@@ -96,18 +96,18 @@ struct N(temp) {
     struct N(temp2)* unk_0C;
 } N(temp);
 
-ApiStatus N(func_802A12E0_72AA30)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A12E0_72AA30)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 a = get_variable(script, *args++);
     f32 b = get_variable(script, *args++);
     f32 c = get_variable(script, *args++);
     struct N(temp)* effect;
-    
+
     a += rand_int(20) - 10;
     b += rand_int(10) - 5;
 
     effect = (struct N(temp)*)func_80072230(0, a, b, c, 1.0f, 30);
-    
+
     effect->unk_0C->unk_18 = 0xF4;
     effect->unk_0C->unk_1C = 0xF4;
     effect->unk_0C->unk_20 = 0xDC;

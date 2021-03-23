@@ -91,7 +91,7 @@ INCLUDE_ASM(s32, "code_182B30", enable_player_blur);
 
 void disable_player_blur(void) {
     DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;
-    
+
     if (decorationTable->unk_7DB != 0) {
         decorationTable->unk_7DB--;
         if (decorationTable->unk_7DB == 0) {
@@ -103,7 +103,7 @@ void disable_player_blur(void) {
 void func_80254950(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
-    
+
     if (decorationTable->unk_7DB != 0) {
         decorationTable->unk_7DB--;
         if (decorationTable->unk_7DB == 0) {
@@ -115,7 +115,7 @@ void func_80254950(void) {
 
 void func_802549A0(void) {
     DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;
-    
+
     decorationTable->unk_7DB = 0;
     decorationTable->effectType = 20;
 }
@@ -248,7 +248,7 @@ INCLUDE_ASM(s32, "code_182B30", func_8025BAA0);
 
 INCLUDE_ASM(s32, "code_182B30", func_8025C120);
 
-s32 func_8025C840(s32 arg0, ActorPart *arg1) {
+s32 func_8025C840(s32 arg0, ActorPart* arg1) {
 
     if (!(arg1->flags & 2)) {
         switch (arg1->decorationTable->unk_750) {
@@ -263,7 +263,7 @@ s32 func_8025C840(s32 arg0, ActorPart *arg1) {
     return 0;
 }
 
-s32 func_8025C8A0(s32 arg0, ActorPart *arg1) {
+s32 func_8025C8A0(s32 arg0, ActorPart* arg1) {
 
     if (arg1->decorationTable->unk_751 != 0) {
         arg1->decorationTable->unk_751 = 0;
@@ -276,7 +276,7 @@ s32 func_8025C8A0(s32 arg0, ActorPart *arg1) {
 
 INCLUDE_ASM(s32, "code_182B30", func_8025C918);
 
-s32 func_8025CCC8(s32 arg0, ActorPart *arg1) {
+s32 func_8025CCC8(s32 arg0, ActorPart* arg1) {
 
     if (!(arg1->flags & 2)) {
         switch (arg1->decorationTable->unk_764) {
@@ -294,7 +294,7 @@ s32 func_8025CCC8(s32 arg0, ActorPart *arg1) {
 void func_8025CD28(s32 arg0, ActorPart* arg1) {
     DecorationTable* decorationTable = arg1->decorationTable;
 
-    if (decorationTable->unk_765 != 0 ) {
+    if (decorationTable->unk_765 != 0) {
         decorationTable->unk_765 = 0;
     }
     decorationTable->unk_768 = 0;

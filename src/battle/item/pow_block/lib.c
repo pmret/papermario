@@ -74,7 +74,7 @@ ApiStatus N(func_802A123C_718A8C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A12E4_718B34)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A12E4_718B34)(ScriptInstance* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
     entity->flags |= 0x20000000;
@@ -82,7 +82,7 @@ ApiStatus N(func_802A12E4_718B34)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1318_718B68)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1318_718B68)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Entity* entity = get_entity_by_index(script->varTable[10]);

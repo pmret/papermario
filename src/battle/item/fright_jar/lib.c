@@ -56,7 +56,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A12D4_72BBE4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A12D4_72BBE4)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 20;
     }

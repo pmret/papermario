@@ -55,32 +55,32 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
- 
+
 extern Vec3f D_802A3F88;
 extern s32* D_802A3F58;
 
 s32 N(D_802A3E88_7214D8)[] = {
-    0x00000000, 0x00000000, 0x00000000, 
-    0xFFFFFFE2, 0x00000000, 0xFFFFFFCE, 
-    0xFFFFFFE5, 0x00000000, 0x0000001E, 
-    0xFFFFFFBA, 0x00000000, 0xFFFFFFFB, 
-    0xFFFFFF97, 0x00000000, 0x0000001E, 
-    0xFFFFFF92, 0x00000000, 0xFFFFFFCE, 
-    0xFFFFFF6F, 0x00000000, 0xFFFFFFFB, 
-    0xFFFFFF56, 0x00000000, 0xFFFFFFCE, 
-    0xFFFFFF42, 0x00000000, 0xFFFFFFE2, 
+    0x00000000, 0x00000000, 0x00000000,
+    0xFFFFFFE2, 0x00000000, 0xFFFFFFCE,
+    0xFFFFFFE5, 0x00000000, 0x0000001E,
+    0xFFFFFFBA, 0x00000000, 0xFFFFFFFB,
+    0xFFFFFF97, 0x00000000, 0x0000001E,
+    0xFFFFFF92, 0x00000000, 0xFFFFFFCE,
+    0xFFFFFF6F, 0x00000000, 0xFFFFFFFB,
+    0xFFFFFF56, 0x00000000, 0xFFFFFFCE,
+    0xFFFFFF42, 0x00000000, 0xFFFFFFE2,
     0xFFFFFF2E, 0x00000000, 0xFFFFFFF6
 };
 
 f32 N(D_802A3F00_721550)[] = {
-    0x3F800000, 0x3F800000, 0x3F400000, 0x3F800000, 
-    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 
+    0x3F800000, 0x3F800000, 0x3F400000, 0x3F800000,
+    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000,
     0x3F400000, 0x3F400000
 };
 
 s32 N(D_802A3F28_721578)[] = {
-    0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260, 
-    0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0, 
+    0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260,
+    0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0,
     0x802A32E0, 0x802A3260
 };
 
@@ -89,7 +89,7 @@ void func_802D4364(s32, s32, s32, s32);
 void func_802D43AC(s32, f32, f32, f32);
 void func_802D43F4(s32);
 
-ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
     Vec3f vecf;
     s32 flag;
@@ -119,9 +119,9 @@ ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 10; i++) {
                 D_802A3F58_ptr[i] = func_802D420C(D_802A3F28_721578_ptr[i]);
 
-                func_802D4364(D_802A3F58_ptr[i], 
-                              *D_802A3E88_7214D8_ptr1 + D_802A3F88_ptr->x, 
-                              *D_802A3E88_7214D8_ptr2, 
+                func_802D4364(D_802A3F58_ptr[i],
+                              *D_802A3E88_7214D8_ptr1 + D_802A3F88_ptr->x,
+                              *D_802A3E88_7214D8_ptr2,
                               *D_802A3E88_7214D8_ptr3 + D_802A3F88_ptr->z);
                 func_802D43AC(D_802A3F58_ptr[i], N(D_802A3F00_721550)[i], N(D_802A3F00_721550)[i], 1.0f);
                 D_802A3E88_7214D8_ptr1 += i * 3 + 0;
@@ -157,7 +157,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
                 z = *D_802A3E88_7214D8_ptr3 + D_802A3F88.z;
 
                 func_802D4364(D_802A3F58_ptr[i], x, y, z);
-            
+
                 if (flag == 0 && script->functionTemp[1].s == i) {
                     f32 x2, y2;
                     if (gGameStatusPtr->frameCounter % 5 == 0) {
@@ -184,9 +184,9 @@ ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
             }
             if (gGameStatusPtr->frameCounter & 1) {
                 s32 randIdx = rand_int(9);
-                fx_walk_large(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x, 
-                                 N(D_802A3E88_7214D8)[randIdx * 3 + 1], 
-                                 N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
+                fx_walk_large(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
+                              N(D_802A3E88_7214D8)[randIdx * 3 + 1],
+                              N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
             }
             if (D_802A3F88_ptr->x >= 320.0f) {
                 script->functionTemp[0].s = 2;
@@ -205,10 +205,11 @@ ApiStatus func_802A123C_71E88C(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep_71E650", battle_item_sleepy_sheep_func_802A123C_71E88C, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep_71E650", battle_item_sleepy_sheep_func_802A123C_71E88C,
+            ScriptInstance* script, s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802A1740_71ED90)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
@@ -238,7 +239,7 @@ ApiStatus N(func_802A1740_71ED90)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1848_71EE98)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
@@ -331,7 +332,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({ 
+Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ActorID_PLAYER, 0);
     SetGoalToHome(ActorID_PLAYER);
     SetActorSpeed(ActorID_PLAYER, 8.0);

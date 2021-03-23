@@ -29,23 +29,23 @@ Gfx N(displayList)[] = {
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
- 
+
 s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
 s32 N(D_802A227C_72D82C)[8] = {
-    0x0000008A, 0x0000008C, 0x00000080, 0x00000088, 
+    0x0000008A, 0x0000008C, 0x00000080, 0x00000088,
     0x0000009A, 0x00000082, 0x00000085, 0x0000008A
 };
 
 s32 N(D_802A229C_72D84C)[8] = {
-    0x0000008A, 0x0000008C, 0x00000085, 0x00000088, 
+    0x0000008A, 0x0000008C, 0x00000085, 0x00000088,
     0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x96;
+    SI_VAR(10) = c 0x96;
     await N(UseItemWithEffect);
     spawn {
         sleep 220;

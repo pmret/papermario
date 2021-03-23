@@ -69,9 +69,9 @@ ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
     if (D_802A25E4 < 6) {
         if (D_802A25E4 > 0) {
             draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-            
+
             gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
-            
+
             ptr = &D_802A2DF4;
             for (i = 0; i < 7; i++) {
                 var2 = *ptr;
@@ -106,14 +106,14 @@ extern MenuIcon** D_802A25C8;
 s32 N(D_802A2848_732B48)[] = {
     0x802A27F8, 0x802A2820, 0x802A27D0, 0x802A27F8
 };
- 
+
 s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001
 };
 
-ApiStatus N(func_802A13E4_7316E4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
- 
+
     if (isInitialCall) {
         D_802A2DEC = 0;
     }
@@ -132,7 +132,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 5; i++) {
                 s32* B48Ptr = &N(D_802A2848_732B48);
                 s32* B58Ptr = &N(D_802A2858_732B58);
-                MenuIcon* icon = create_icon(*(B48Ptr + *(B58Ptr + i)));
+                MenuIcon* icon = create_icon(*(B48Ptr + * (B58Ptr + i)));
 
                 *(&D_802A2DD8 + i) = icon;
                 set_icon_flags(icon, 0x80);
@@ -249,8 +249,9 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake_731300", battle_item_strange_cake_func_802A13E4_7316E4, ScriptInstance *script, s32 isInitialCall);
-#endif 
+INCLUDE_ASM(ApiStatus, "battle/item/strange_cake_731300", battle_item_strange_cake_func_802A13E4_7316E4,
+            ScriptInstance* script, s32 isInitialCall);
+#endif
 
 ApiStatus N(func_802A1818_731B18)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -306,33 +307,33 @@ ApiStatus N(func_802A1A8C_731D8C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1AD8_731DD8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1AD8_731DD8)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, 0xB, 3);
+    inflict_status(player, Debuff_STATIC, 3);
     player->status = 0;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B14_731E14)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1B14_731E14)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, 0xE, 3);
+    inflict_status(player, Debuff_0xE, 3);
     player->status = 0;
     part->flags |= 0x100;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B68_731E68)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A1B68_731E68)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, 6, 3);
+    inflict_status(player, Debuff_SLEEP, 3);
     player->status = 0;
 
     return ApiStatus_DONE2;

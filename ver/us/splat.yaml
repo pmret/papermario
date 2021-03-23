@@ -2317,14 +2317,17 @@ segments:
     - [0x71A370, palette, pebble]
     - [0x71A390,   .data, pebble]
     - [0x71A7F0,    .bss, lib]
-  - name: battle/item/volt_shroom
+  - name: battle/item/volt_shroom/
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x71A7F0, c]
-    - [0x71AA70, data]
+    - [0x71A7F0,     c, lib]
+    - [0x71AA70, .data, lib]
+    - [0x71B02C, .data, volt_shroom]
+    - [0x71B1A0,  .bss, lib]
   - name: battle/item/thunder_rage/
     type: code
     start: 0x71B1A0

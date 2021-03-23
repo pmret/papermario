@@ -69,9 +69,9 @@ void N(func_802A123C_72C7EC)(void) {
     if (D_802A25E4 < 6) {
         if (D_802A25E4 > 0) {
             draw_box(0, 7, 0x6A, 0x56, 0, 0x24, 0x24, 0xFF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x140, 0xF0, 0);
-            
+
             gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
-            
+
             ptr = &D_802A25C8;
             for (i = 0; i < 7; i++) {
                 var2 = *ptr;
@@ -89,7 +89,8 @@ void N(func_802A123C_72C7EC)(void) {
     }
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
+            s32 isInitialCall);
 #endif
 
 #ifdef NON_MATCHING
@@ -104,7 +105,7 @@ extern s16** D_802A25FC;
 extern MenuIcon** D_802A25C8;
 extern struct N(tempStc) D_8008A680[100];
 
-ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -256,7 +257,8 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
+            s32 isInitialCall);
 #endif
 
 ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
@@ -264,7 +266,7 @@ ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
     s32 c = get_variable(script, *args++);
- 
+
     func_80070190(2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;

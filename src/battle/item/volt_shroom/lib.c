@@ -1,7 +1,7 @@
-#include "stop_watch.h"
+#include "volt_shroom.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A1B40;
+static MenuIcon* D_802A19B0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -33,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1B40 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1B40, iconPosX + 36, iconPosY - 63);
+        D_802A19B0 = create_icon(&D_80108A64);
+        set_icon_render_pos(D_802A19B0, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -48,28 +48,19 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
-        free_icon(D_802A1B40);
+        free_icon(D_802A19B0);
     }
 
     return ApiStatus_DONE2;
 }
 
-#include "common/FadeBackgroundToBlack.inc.c"
+ApiStatus N(func_802A123C_71AA2C)(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* player = battleStatus->playerActor;
 
-ApiStatus N(func_802A12D4_7270A4)(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall) {
-        script->functionTemp[0].s = 20;
-    }
-
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 254);
-
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == 0) {
-        set_background_color_blend(0, 0, 0, 0);
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
+    inflict_status(player, Debuff_STATIC, script->varTable[0]);
+    player->status = 0;
+    return ApiStatus_DONE2;
 }
 
 Script N(UseItemWithEffect) = SCRIPT({

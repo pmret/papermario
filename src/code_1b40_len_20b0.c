@@ -11,7 +11,8 @@ s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
 s32 D_800741A8[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00010000, 0x00000000, 0x00000001,
                      0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-                     0x00000000, 0x00000000, };
+                     0x00000000, 0x00000000,
+                   };
 u16 gMatrixListPos = 0;
 u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
@@ -161,7 +162,8 @@ void gfx_task_background(void) {
     gSPEndDisplayList((*gfx)++);
 
     // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
-    ASSERT((s32)((u32)((*gfx) - (*gDisplayContextPtr)->backgroundGfx) << 3 >> 3) < ARRAY_COUNT((*gDisplayContextPtr)->backgroundGfx));
+    ASSERT((s32)((u32)((*gfx) - (*gDisplayContextPtr)->backgroundGfx) << 3 >> 3) < ARRAY_COUNT((
+                *gDisplayContextPtr)->backgroundGfx));
 
     nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (gMasterGfxPos - gDisplayContext->backgroundGfx) << 3,
                    NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);

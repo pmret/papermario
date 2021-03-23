@@ -56,7 +56,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A12D4_71B474)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802A12D4_71B474)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 20;
     }
@@ -77,7 +77,7 @@ ApiStatus N(func_802A1354_71B4F4)(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor = get_actor(enemyTarget->targetActorID);
     f32 posY, posX, posZ;
     s32 scaleX, scaleY;
-    
+
     if (actor != NULL) {
         play_sound(0x366);
 

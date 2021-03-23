@@ -36,7 +36,7 @@ ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
     f32 a;
     f32 b;
     s32* thisPos = script->ptrReadPos;
-    
+
     a = get_float_variable(script, *thisPos++);
     b = get_float_variable(script, *thisPos++);
 

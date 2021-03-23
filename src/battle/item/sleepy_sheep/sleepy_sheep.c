@@ -30,7 +30,7 @@ Gfx N(frame1_displayList)[] = {
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
-}; 
+};
 
 Gfx N(frame2_displayList)[] = {
     gsDPPipeSync(),
@@ -77,30 +77,30 @@ Gfx N(frame3_displayList)[] = {
 };
 
 s32 N(modelCommandList)[] = {
-    0x00000004, 0x0000000D, 
-    0x00000001, 0x00000002, &N(frame1_displayList), 
-    0x00000001, 0x00000003, &N(frame2_displayList), 
+    0x00000004, 0x0000000D,
+    0x00000001, 0x00000002, &N(frame1_displayList),
+    0x00000001, 0x00000003, &N(frame2_displayList),
     0x00000001, 0x00000002, &N(frame1_displayList),
     0x00000001, 0x00000002, &N(frame3_displayList),
-    0x00000002, 0x00000000, 
+    0x00000002, 0x00000000,
 
-    0x00000004, 0x0000000D, 
-    0x00000001, 0x00000003, &N(frame2_displayList), 
-    0x00000001, 0x00000002, &N(frame1_displayList), 
+    0x00000004, 0x0000000D,
+    0x00000001, 0x00000003, &N(frame2_displayList),
+    0x00000001, 0x00000002, &N(frame1_displayList),
     0x00000001, 0x00000002, &N(frame3_displayList),
     0x00000001, 0x00000002, &N(frame1_displayList),
-    0x00000002, 0x00000000, 
+    0x00000002, 0x00000000,
 
-    0x00000004, 0x0000000D, 
-    0x00000001, 0x00000002, &N(frame1_displayList), 
+    0x00000004, 0x0000000D,
+    0x00000001, 0x00000002, &N(frame1_displayList),
     0x00000001, 0x00000002, &N(frame3_displayList),
     0x00000001, 0x00000002, &N(frame1_displayList),
-    0x00000001, 0x00000003, &N(frame2_displayList), 
-    0x00000002, 0x00000000, 
+    0x00000001, 0x00000003, &N(frame2_displayList),
+    0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x8F;
+    SI_VAR(10) = c 0x8F;
     await N(UseItemWithEffect);
     UseCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
@@ -153,7 +153,7 @@ Script N(main) = SCRIPT({
         sleep 40;
         N(func_802A1740_71ED90)();
         N(func_802A1848_71EE98)();
-    } 
+    }
     UseCamPreset(2);
     MoveBattleCamOver(20);
     sleep 8;

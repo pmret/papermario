@@ -1,7 +1,7 @@
 #include "fright_jar.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x98;
+    SI_VAR(10) = c 0x98;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
     spawn {

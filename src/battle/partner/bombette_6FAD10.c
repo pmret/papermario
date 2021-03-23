@@ -61,9 +61,11 @@ ApiStatus func_80238244_6FAF54(ScriptInstance* script, s32 isInitialCall) {
     add_xz_vec3f(&partnerActorMovement->currentPos, partnerActor->walk.speed, partnerActor->walk.angle);
 
     if (partnerActor->walk.speed < 4.0f) {
-        play_movement_dust_effects(0, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y, partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+        play_movement_dust_effects(0, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
+                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
     } else {
-        play_movement_dust_effects(1, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y, partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+        play_movement_dust_effects(1, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
+                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
     }
 
     partnerActorMovement->speed /= 1.5;
@@ -198,17 +200,13 @@ ApiStatus func_80238590_6FB2A0(ScriptInstance* script, s32 isInitialCall) {
         case 2:
             if (var0 < 36) {
                 var1 = 1;
-            }
-            else if (var0 < 61) {
+            } else if (var0 < 61) {
                 var1 = 3;
-            }
-            else if (var0 < 81) {
+            } else if (var0 < 81) {
                 var1 = 5;
-            }
-            else if (var0 < 100) {
+            } else if (var0 < 100) {
                 var1 = 6;
-            }
-            else {
+            } else {
                 var1 = 7;
             }
             break;

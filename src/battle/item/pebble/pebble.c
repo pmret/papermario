@@ -29,13 +29,13 @@ Gfx N(displayList)[] = {
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
- 
+
 s32 N(modelCommandList)[] = {
     0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x85;
+    SI_VAR(10) = c 0x85;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);

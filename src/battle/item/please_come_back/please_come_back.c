@@ -1,7 +1,7 @@
 #include "please_come_back.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x9A;
+    SI_VAR(10) = c 0x9A;
     await N(UseItemWithEffect);
     SetGoalToHome(0);
     SetJumpAnimations(ActorID_PLAYER, 0, PlayerAnim_MIDAIR_STILL, PlayerAnim_MIDAIR, PlayerAnim_9);

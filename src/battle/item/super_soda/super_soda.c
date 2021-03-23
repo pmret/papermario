@@ -77,7 +77,7 @@ Script N(script6) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c 0x9B;
+    SI_VAR(10) = c 0x9B;
     await N(UseItemWithEffect);
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));
