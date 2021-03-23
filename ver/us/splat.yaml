@@ -2419,14 +2419,17 @@ segments:
     - [0x722FE0, .data, lib]
     - [0x72359C, .data, thunder_bolt]
     - [0x723780,  .bss, lib]
-  - name: battle/item/ultra_shroom
+  - name: battle/item/ultra_shroom/
     type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x723780, c]
-    - [0x723AB0, data]
+    - [0x723780,     c, lib]
+    - [0x723AB0, .data, lib]
+    - [0x72407C, .data, ultra_shroom]
+    - [0x724240,  .bss, lib]
   - name: battle/item/unknown_item
     type: code
     start: 0x724240

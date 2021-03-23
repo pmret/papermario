@@ -16,3 +16,4 @@ glabel func_802A12FC_723A7C
 /* 723AA8 802A1328 A0820002 */   sb       $v0, 2($a0)
 .L802A132C:
 /* 723AAC 802A132C 03E00008 */  jr        $ra
+nop
