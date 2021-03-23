@@ -22,16 +22,12 @@ s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x000000000
 };
 
-Script N(script7);
-Script N(script8);
-Script N(script9);
-
 Script N(script6) = SCRIPT({
     GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) == 211) {
         SI_VAR(10) =c 0xD3;
         SI_VAR(1) = 0;
-        await N(D_802A2848_732B48);
+        await N(UseItemWithEffect);
         await N(EatItem);
         N(func_802A1A8C_731D8C)();
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -53,7 +49,7 @@ Script N(script6) = SCRIPT({
     } else {
         SI_VAR(10) =c 0xD2;
         SI_VAR(1) = 0;
-        await N(D_802A2848_732B48);
+        await N(UseItemWithEffect);
         await N(EatItem);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
     }

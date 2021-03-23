@@ -21,6 +21,9 @@ ApiStatus N(func_802A1B68_731E68)(ScriptInstance *script, s32 isInitialCall);
 Script N(UseItemWithEffect);
 Script N(PlayerGoHome);
 Script N(EatItem);
+Script N(script7);
+Script N(script8);
+Script N(script9);
 
 #endif
  

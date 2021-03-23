@@ -2552,15 +2552,14 @@ segments:
     overlay: True
     subsections:
     - [0x731300,       c, lib]
-    - [0x731EB0,   .data, lib]
+    - [0x731EA0,   .data, lib]
     - [0x732470,     ci4, strange_cake1, 32, 32]
     - [0x732670, palette, strange_cake1]
     - [0x732690,     ci4, strange_cake2, 32, 32]
     - [0x732890, palette, strange_cake2]
     - [0x7328B0,     ci4, strange_cake3, 32, 32]
     - [0x732AB0, palette, strange_cake3]
-    - [0x732AD0,   .data, lib]
-    - [0x732B70,   .data, strange_cake]
+    - [0x732AD0,   .data, strange_cake]
     - [0x7330B0, .rodata, lib]
   - name: battle/item/food/
     type: code
