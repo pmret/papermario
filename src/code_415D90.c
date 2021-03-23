@@ -34,7 +34,12 @@ extern s16 battle_menu_moveTextOpacity;
 extern s32 battle_menu_moveTitleIcon;
 extern u8 D_802AD604;
 extern s32 D_802AD610;
+extern s32 D_802AD618;
+extern s32 D_802AD61C;
+extern s32 D_802AD620;
 extern s32 D_802AD624;
+extern s32 D_802AD628;
+extern s32 D_802AD66C;
 
 s16 D_802AB340[] = { 0x001C, 0x0028 };
 
@@ -209,7 +214,23 @@ void func_802A4718(void) {
     D_802AD604 = 10;
 }
 
-INCLUDE_ASM(s32, "code_415D90", func_802A472C);
+//INCLUDE_ASM(s32, "code_415D90", func_802A472C);
+void func_802A472C(void) {
+    s32* temp = &D_802AD628;
+    s32 i;
+
+    set_window_update(6, 2);
+    set_window_update(7, 2);
+    set_window_update(8, 2);
+
+    for (i = 0; i < D_802AD66C; i++) {
+        free_icon(temp[i]);
+    }
+
+    free_icon(D_802AD618);
+    free_icon(D_802AD61C);
+    free_icon(D_802AD620);
+}
 
 INCLUDE_ASM(s32, "code_415D90", func_802A47E0);
 
@@ -324,7 +345,7 @@ s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
 }
 
-INCLUDE_ASM(s32, "code_415D90", func_802AA0B8);
+INCLUDE_ASM(s32, "code_415D90", func_802AA0B8); // look into m2c bug
 
 void func_802AA640(void) {
     switch (gBattleStatus.battleState) {
