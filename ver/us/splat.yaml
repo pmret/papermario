@@ -2430,14 +2430,17 @@ segments:
     - [0x723AB0, .data, lib]
     - [0x72407C, .data, ultra_shroom]
     - [0x724240,  .bss, lib]
-  - name: battle/item/unknown_item
+  - name: battle/item/unknown_item/
     type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
+    subalign: 4
     subsections:
-    - [0x724240, c]
-    - [0x724570, data]
+    - [0x724240,     c, lib]
+    - [0x724570, .data, lib]
+    - [0x724B3C, .data, unknown_item]
+    - [0x724CE0,  .bss, lib]
   - name: battle/item/super_soda/
     type: code
     start: 0x724CE0
