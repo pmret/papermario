@@ -295,6 +295,30 @@ s32 func_802A9B30(void) {
 INCLUDE_ASM(s32, "code_415D90", func_802A9B44);
 
 INCLUDE_ASM(s32, "code_415D90", func_802AA05C);
+// void func_802AA05C(void) {
+//     switch (gBattleStatus.battleState) {
+//         case 1:
+//             draw_battle_wheel();
+//             break;
+//         case 2:
+//             draw_battle_wheel();
+//             break;
+//         case 3:
+//             draw_battle_wheel();
+//             break;
+//         case 4:
+//             draw_battle_wheel();
+//             break;
+//         case 5:
+//             draw_battle_wheel();
+//             break;
+//         case 6:
+//         case 7:
+//         case 8:
+//         case 9:
+//             break;
+//     }
+// }
 
 s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
@@ -302,7 +326,30 @@ s32 func_802AA0A4(void) {
 
 INCLUDE_ASM(s32, "code_415D90", func_802AA0B8);
 
-INCLUDE_ASM(s32, "code_415D90", func_802AA640);
+void func_802AA640(void) {
+    switch (gBattleStatus.battleState) {
+        case 1:
+            draw_battle_wheel();
+            break;
+        case 2:
+            draw_battle_wheel();
+            break;
+        case 3:
+            draw_battle_wheel();
+            break;
+        case 4:
+            draw_battle_wheel();
+            break;
+        case 5:
+            draw_battle_wheel();
+            break;
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "code_415D90", update_targeting_enemies);
 
