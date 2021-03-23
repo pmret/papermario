@@ -4,6 +4,7 @@ from pathlib import Path
 from util.n64 import Yay0decompress
 from util.color import unpack_color
 from util.iter import iter_in_groups
+from util import options
 import png
 
 
@@ -27,12 +28,12 @@ def parse_palette(data):
 
 
 class N64SegPaperMarioMapFS(N64Segment):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
     def split(self, rom_bytes, base_path):
-        bin_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin"))
-        img_party_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "img") + "/party")
+        bin_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin"))
+        img_party_dir = self.create_split_dir(base_path, options.get("assets_dir", "img") + "/party")
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -53,13 +54,13 @@ class N64SegPaperMarioMapFS(N64Segment):
             elif name.startswith("party_"):
                 path = os.path.join(img_party_dir, "{}.png".format(name))
             elif name.endswith("_hit") or name.endswith("_shape"):
-                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map")
+                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.bin".format(name))
             elif name.endswith("_tex"):
-                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map")
+                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.bin".format(name))
             elif name.endswith("_bg"):
-                map_dir = self.create_split_dir(base_path, self.options.get("assets_dir", "bin") + f"/map")
+                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.png".format(name))
             else:
                 path = os.path.join(bin_dir, "{}.bin".format(name))
@@ -111,7 +112,7 @@ class N64SegPaperMarioMapFS(N64Segment):
 
 
     def get_ld_files(self):
-        return [(self.options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
+        return [(options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
 
 
     @staticmethod

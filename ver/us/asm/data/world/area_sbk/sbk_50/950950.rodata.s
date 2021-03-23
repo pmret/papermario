@@ -1,0 +1,6 @@
+.include "macro.inc"
+
+.section .rodata
+
+glabel D_80240340_950950
+.word 0x73626B5F, 0x35310000, 0x73626B5F, 0x34300000, 0x73626B5F, 0x36300000, 0x00000000, 0x00000000

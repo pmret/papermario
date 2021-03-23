@@ -3,6 +3,7 @@ from pathlib import Path
 from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
 from util.color import unpack_color
+from util import options
 import png
 import xml.etree.ElementTree as ET
 
@@ -250,8 +251,8 @@ class Component:
 class N64SegPaperMarioNpcSprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         if type(segment) is dict and "files" in segment:
             self.files = segment["files"]
@@ -259,7 +260,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
             self.files = DEFAULT_SPRITE_NAMES
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_split_dir(base_path, self.options["assets_dir"] + "/sprite/" + self.name)
+        out_dir = self.create_split_dir(base_path, options.get("assets_dir") + "/sprite/" + self.name)
 
         data = rom_bytes[self.rom_start:self.rom_end]
         pos = 0
@@ -294,7 +295,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
             sprite.write_to_dir(sprite_dir)
 
     def get_ld_files(self):
-        return [(self.options["assets_dir"], "sprite/" + self.name, ".data", self.rom_start)]
+        return [(options.get("assets_dir"), "sprite/" + self.name, ".data", self.rom_start)]
 
     @staticmethod
     def get_default_name(addr):

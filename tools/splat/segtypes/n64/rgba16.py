@@ -1,14 +1,15 @@
 import os
 from segtypes.n64.segment import N64Segment
-from util.n64 import Yay0decompress
 import png
 from math import ceil
+from util import options
 from util.color import unpack_color
+import sys
 
 
 class N64SegRgba16(N64Segment):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         if type(segment) is dict:
             self.width = segment["width"]
@@ -24,7 +25,7 @@ class N64SegRgba16(N64Segment):
         if self.max_length():
             expected_len = int(self.max_length())
             actual_len = self.rom_end - self.rom_start
-            if actual_len > expected_len:
+            if actual_len > expected_len and actual_len - expected_len > self.subalign:
                 print(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
                 sys.exit(1)
 
@@ -50,10 +51,10 @@ class N64SegRgba16(N64Segment):
                 yield x, y, (y * w) + x
 
     def should_run(self):
-        return super().should_run() or "img" in self.options["modes"]
+        return super().should_run() or options.mode_active("img")
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + options.get("assets_dir", "img"), self.name)
         path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]
@@ -81,4 +82,4 @@ class N64SegRgba16(N64Segment):
     def get_ld_files(self):
         ext = f".{self.type}.png"
 
-        return [(self.options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]
+        return [(options.get("assets_dir", "img"), f"{self.name}{ext}", ".data", self.rom_start)]

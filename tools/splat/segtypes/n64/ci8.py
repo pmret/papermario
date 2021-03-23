@@ -1,17 +1,17 @@
 from segtypes.n64.rgba16 import N64SegRgba16
 import png
 import os
-from util.n64 import Yay0decompress
+from util import options
 
 
 class N64SegCi8(N64SegRgba16):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         self.path = None
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + options.get("assets_dir", "img"), self.name)
         self.path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]

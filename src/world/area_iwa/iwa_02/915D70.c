@@ -6,11 +6,11 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240000_915D70);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_802401D4_915F44);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240304_916074);
+#include "world/common/UnkNpcAIFunc21.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_802403A0_916110);
+#include "world/common/UnkNpcAIFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240428_916198);
+#include "world/common/UnkNpcAIFunc22.inc.c"
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_802404D0_916240);
 
@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240984_9166F4);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240A30_9167A0);
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240B68_9168D8);
+#include "world/common/UnkNpcAIFunc19.inc.c"
 
 #include "world/common/UnkNpcAIFunc17.inc.c"
 
