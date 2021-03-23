@@ -299,7 +299,46 @@ s32 can_switch_to_player(void) {
     }
 }
 
-INCLUDE_ASM(s32, "code_415D90", func_802A58D0);
+//INCLUDE_ASM(s32, "code_415D90", func_802A58D0);
+s32 func_802A58D0(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partner = battleStatus->partnerActor;
+    s8 partnerDebuff;
+    s32 ret;
+
+    if (battleStatus->flags2 & 4 || partner == PartnerID_NONE || partner->flags & 0x200000) {
+        return FALSE;
+    }
+
+    partnerDebuff = partner->debuff;
+    ret = partner->koStatus == 0xD;
+
+    if (partnerDebuff == 9) {
+        ret = FALSE;
+    }
+    if (partnerDebuff == 10) {
+        ret = FALSE;
+    }
+    if (partnerDebuff == 6) {
+        ret = TRUE;
+    }
+    if (partnerDebuff == 3) {
+        ret = TRUE;
+    }
+    if (partnerDebuff == 5) {
+        ret = TRUE;
+    }
+    if (partnerDebuff == 7) {
+        ret = TRUE;
+    }
+    if (partnerDebuff == 8) {
+        ret = TRUE;
+    }
+    if (partner->stoneStatus == 0xC) {
+        ret = TRUE;
+    }
+    return !ret;
+}
 
 INCLUDE_ASM(s32, "code_415D90", update_player_menu);
 
