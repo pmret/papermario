@@ -48,9 +48,9 @@ ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     Camera* camera = CURRENT_CAM;
     s8 currentPartner = gPlayerData.currentPartner;
 
-    playerStatus->position.x = (*gGameStatusPtr)->savedPos.x;
-    playerStatus->position.y = (*gGameStatusPtr)->savedPos.y;
-    playerStatus->position.z = (*gGameStatusPtr)->savedPos.z;
+    playerStatus->position.x = gGameStatusPtr->savedPos.x;
+    playerStatus->position.y = gGameStatusPtr->savedPos.y;
+    playerStatus->position.z = gGameStatusPtr->savedPos.z;
 
     if (currentPartner != PartnerID_NONE) {
         Npc* partner = get_npc_unsafe(NpcId_PARTNER);

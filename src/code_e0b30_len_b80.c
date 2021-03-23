@@ -32,11 +32,12 @@ void transition_music_volume_to(s16 volume);
 s32 get_song_variation_override_for_cur_map(SongID songID) {
     u32 i = 0;
     Area* areas = gAreas;
+    GameStatus** gameStatus = &gGameStatusPtr;
     SongID* allowed = gSongsUsingVariationFlag;
 
     for (i = 0; i < ARRAY_COUNT(gSongsUsingVariationFlag); i++) {
         if (allowed[i] == songID) {
-            Map* map = &areas[(*gGameStatusPtr)->areaID].maps[(*gGameStatusPtr)->mapID];
+            Map* map = &areas[(*gameStatus)->areaID].maps[(*gameStatus)->mapID];
 
             return map->songVariation & 1;
         }
@@ -68,16 +69,14 @@ void func_8014A52C(void) {
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A548);
 
 s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    if (gameStatus->demoState != 0) {
+    if (gGameStatusPtr->demoState != 0) {
         return 1;
     } else {
         // TODO: these two lines likely a MUSIC_PLAYER(idx) macro
         MusicPlayer* musicPlayers = gMusicPlayers;
         MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
-        if (!gameStatus->musicEnabled) {
+        if (!gGameStatusPtr->musicEnabled) {
             func_800559C4(musicPlayer->unk_18);
             musicPlayer->flags &= ~1;
 
@@ -120,15 +119,13 @@ s32 set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTi
 }
 
 s32 func_8014A964(s32 playerIndex, SongID songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    if (gameStatus->demoState != 0) {
+    if (gGameStatusPtr->demoState != 0) {
         return 1;
     } else {
         MusicPlayer* musicPlayers = gMusicPlayers;
         MusicPlayer* musicPlayer = &musicPlayers[playerIndex];
 
-        if (!gameStatus->musicEnabled) {
+        if (!gGameStatusPtr->musicEnabled) {
             func_800559C4(musicPlayer->unk_18);
             musicPlayer->flags &= ~1;
 
@@ -269,7 +266,7 @@ INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AD40);
 void func_8014ADA4(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-    if ((*gGameStatusPtr)->demoState == 0) {
+    if (gGameStatusPtr->demoState == 0) {
         musicPlayer->flags |= 8;
         _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
     }
@@ -278,7 +275,7 @@ void func_8014ADA4(void) {
 void func_8014ADF8(SongID songID, s32 variation) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-    if ((*gGameStatusPtr)->demoState == 0) {
+    if (gGameStatusPtr->demoState == 0) {
         musicPlayer->unk_24 = musicPlayer->songID;
         musicPlayer->unk_28 = musicPlayer->variation;
         musicPlayer->unk_2C = musicPlayer->unk_18;
@@ -290,7 +287,7 @@ void func_8014ADF8(SongID songID, s32 variation) {
 void func_8014AE6C(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-    if ((*gGameStatusPtr)->demoState == 0) {
+    if (gGameStatusPtr->demoState == 0) {
         if (OVERRIDE_FLAG_CHECK(0x20000)) {
             OVERRIDE_FLAG_UNSET(0x20000);
         } else {
@@ -304,7 +301,7 @@ void func_8014AE6C(void) {
 void func_8014AEF8(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
-    if ((*gGameStatusPtr)->demoState == 0 && !OVERRIDE_FLAG_CHECK(0x20000)) {
+    if (gGameStatusPtr->demoState == 0 && !OVERRIDE_FLAG_CHECK(0x20000)) {
         func_8005553C(0, 250);
         musicPlayer->unk_24 = musicPlayer->songID;
         musicPlayer->unk_28 = musicPlayer->variation;

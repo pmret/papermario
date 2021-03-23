@@ -1,27 +1,18 @@
 #include "common.h"
 
 void func_800287F0(void) {
-    // TODO: Figure out macros
-    GameStatus* gameStatus;
-    GameStatus* gameStatus2;
+    GameStatus** gameStatus = &gGameStatusPtr;
 
-    gameStatus = *gGameStatusPtr;
-    gameStatus->stickX = 0;
-    gameStatus2 = *gGameStatusPtr;
-    gameStatus->currentButtons = 0;
-    gameStatus->pressedButtons = 0;
-    gameStatus->heldButtons = 0;
-    gameStatus2->stickY = 0;
-
-    // TODO: macro
-    {
-        GameStatus* gameStatus = *gGameStatusPtr;
-        gameStatus->prevButtons = 0;
-        gameStatus->unk_50[0] = 4;
-        gameStatus->unk_48[0] = 15;
-        gameStatus->unk_60 = 0;
-        gameStatus->unk_58 = 0;
-    }
+    (*gameStatus)->currentButtons = 0;
+    (*gameStatus)->pressedButtons = 0;
+    (*gameStatus)->heldButtons = 0;
+    (*gameStatus)->stickX = 0;
+    (*gameStatus)->stickY = 0;
+    (*gameStatus)->prevButtons = 0;
+    (*gameStatus)->unk_50[0] = 4;
+    (*gameStatus)->unk_48[0] = 15;
+    (*gameStatus)->unk_60 = 0;
+    (*gameStatus)->unk_58 = 0;
 }
 
 void func_80028838(void) {

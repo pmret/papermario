@@ -5,11 +5,11 @@ void update_player_input(void) {
     PlayerStatus* playerStatus = ps; // ??? necessary
     s32 inputBufPos = playerStatus->inputBufPos;
 
-    playerStatus->stickAxis[0] = (*gGameStatusPtr)->stickX;
-    playerStatus->stickAxis[1] = (*gGameStatusPtr)->stickY;
-    playerStatus->currentButtons = (*gGameStatusPtr)->currentButtons;
-    playerStatus->pressedButtons = (*gGameStatusPtr)->pressedButtons;
-    playerStatus->heldButtons = (*gGameStatusPtr)->heldButtons;
+    playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
+    playerStatus->stickAxis[1] = gGameStatusPtr->stickY;
+    playerStatus->currentButtons = gGameStatusPtr->currentButtons;
+    playerStatus->pressedButtons = gGameStatusPtr->pressedButtons;
+    playerStatus->heldButtons = gGameStatusPtr->heldButtons;
 
     inputBufPos++;
     if (inputBufPos >= 10) {

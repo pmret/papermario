@@ -278,7 +278,7 @@ PartnerID get_current_partner_id(void) {
 }
 
 void func_800E5098(s32 arg0) {
-    if (((*gGameStatusPtr)->frameCounter % arg0) == 0) {
+    if ((gGameStatusPtr->frameCounter % arg0) == 0) {
         u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
         s32 soundID;
         s32 soundID2;
@@ -534,7 +534,7 @@ void func_800E63A4(s32 arg0) {
         set_action_state(0x19);
     } else {
         playerStatus->animFlags &= ~0x2000;
-        (*gGameStatusPtr)->peachFlags &= ~0x2;
+        gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
         set_action_state(ActionState_IDLE);
@@ -556,17 +556,17 @@ void func_800E6428(void) {
         if (*temp_8010C92C != 0) {
             (*temp_8010C92C)--;
             if (*temp_8010C92C == 0) {
-                if ((*gGameStatusPtr)->peachFlags & 2) {
+                if (gGameStatusPtr->peachFlags & 2) {
                     playerStatus->animFlags |= 0x2000;
-                    (*gGameStatusPtr)->peachFlags |= 2;
+                    gGameStatusPtr->peachFlags |= 2;
 
-                    disguiseNpc = make_disguise_npc((*gGameStatusPtr)->peachDisguise);
+                    disguiseNpc = make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
                         disguiseNpc->flags &= ~0x40000;
                     }
                 }
             }
-        } else if ((*gGameStatusPtr)->peachFlags & 4 && gPlayerStatus.pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & 4 && gPlayerStatus.pressedButtons & B_BUTTON) {
             set_action_state(0x19);
         }
     }

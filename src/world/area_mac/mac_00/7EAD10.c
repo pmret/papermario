@@ -14,8 +14,8 @@ ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    stickX = (*gGameStatusPtr)->stickX;
-    stickY = (*gGameStatusPtr)->stickY;
+    stickX = gGameStatusPtr->stickX;
+    stickY = gGameStatusPtr->stickY;
     if (stickX < 0) {
         stickX = -stickX;
     }

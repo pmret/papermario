@@ -394,7 +394,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     UiStatus* uiStatus = &gUIStatus;
     s32 iconIndex;
 
-    if ((gPlayerData.coins != uiStatus->displayCoins) && (((*gGameStatusPtr)->frameCounter % 3) == 0)) {
+    if ((gPlayerData.coins != uiStatus->displayCoins) && ((gGameStatusPtr->frameCounter % 3) == 0)) {
         play_sound(0x211);
     }
 
@@ -628,11 +628,10 @@ s32 is_status_menu_visible(void) {
 }
 
 void status_menu_start_blinking_hp(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
     }
 
@@ -653,11 +652,10 @@ void status_menu_stop_blinking_hp(void) {
 }
 
 void status_menu_start_blinking_fp(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
     }
 
@@ -677,11 +675,10 @@ void status_menu_stop_blinking_fp(void) {
 }
 
 void status_menu_start_blinking_coins(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
     UiStatus* uiStatus = &gUIStatus;
     UiStatus* uiStatus2 = &gUIStatus;
 
-    if (gameStatus->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
     }
 
@@ -851,7 +848,7 @@ s32 is_ability_active(s32 arg0) {
         local_20[i] = 0;
     }
 
-    if (((*gGameStatusPtr)->unk_7E & 1) == 0) {
+    if ((gGameStatusPtr->unk_7E & 1) == 0) {
         iVar2 = 0;
         iVar7 = 0;
         piVar6 = 0;

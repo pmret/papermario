@@ -411,7 +411,7 @@ s32 partner_use_ability(void) {
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if (((*gGameStatusPtr)->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
+        if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
             play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
@@ -457,9 +457,9 @@ void partner_reset_data(void) {
     *temp8010CFE8 = 9;
     *temp8010CFD8 = temp_s0;
 
-    if ((*gGameStatusPtr)->unk_7D != 0) {
+    if (gGameStatusPtr->unk_7D != 0) {
         D_8010EBB0.unk_00 = 1;
-        (*gGameStatusPtr)->unk_7D = 0;
+        gGameStatusPtr->unk_7D = 0;
     }
 
     wPartner = NULL;
@@ -597,7 +597,7 @@ void func_800EBB40(Npc *partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
 
-    if ((*gGameStatusPtr)->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
         if (!(playerStatus->animFlags & 0x800)) {
             func_800EBC74(partner);
         }
