@@ -8,10 +8,8 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-#ifdef NON_MATCHING
 void clamp_printer_coords(PrintContext* printer, f32 x, f32 y);
 
-// Register allocation issues, otherwise equivalent (?)
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
@@ -47,8 +45,8 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         if ((actor->flags & 0x8000) == 0) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            headY = actor->headOffset.y;
-            headY = headY + actor->currentPos.y + (actor->size.y / 2);
+            f32 tmp = actor->headOffset.y;
+            headY = actor->currentPos.y + tmp + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
@@ -77,7 +75,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
             headY = actor->headOffset.y;
-            headY = headY + actor->currentPos.y + (actor->size.y / 2);
+            headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
@@ -109,9 +107,6 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "code_181810", ActorSpeak);
-#endif
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
