@@ -107,7 +107,7 @@ glabel osSpTaskLoad
 .L80065B8C:
 /* 40F8C 80065B8C 0C018614 */  jal       osWritebackDCache
 /* 40F90 80065B90 24050040 */   addiu    $a1, $zero, 0x40
-/* 40F94 80065B94 0C01B1BC */  jal       osSpSetStatus
+/* 40F94 80065B94 0C01B1BC */  jal       __osSpSetStatus
 /* 40F98 80065B98 24042B00 */   addiu    $a0, $zero, 0x2b00
 /* 40F9C 80065B9C 2410FFFF */  addiu     $s0, $zero, -1
 /* 40FA0 80065BA0 3C040400 */  lui       $a0, 0x400
