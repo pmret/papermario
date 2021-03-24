@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80053974
+glabel snd_initialize_fade
 /* 2ED74 80053974 0080402D */  daddu     $t0, $a0, $zero
 /* 2ED78 80053978 00063400 */  sll       $a2, $a2, 0x10
 /* 2ED7C 8005397C AD060000 */  sw        $a2, ($t0)

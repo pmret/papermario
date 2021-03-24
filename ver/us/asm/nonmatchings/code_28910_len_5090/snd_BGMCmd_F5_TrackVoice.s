@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80050020
+glabel snd_BGMCmd_F5_TrackVoice
 /* 2B420 80050020 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 2B424 80050024 AFB20018 */  sw        $s2, 0x18($sp)
 /* 2B428 80050028 00A0902D */  daddu     $s2, $a1, $zero

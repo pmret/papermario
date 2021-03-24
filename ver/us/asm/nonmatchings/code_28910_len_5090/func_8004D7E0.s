@@ -54,7 +54,7 @@ glabel func_8004D7E0
 .L8004D890:
 /* 28C90 8004D890 24077FFF */  addiu     $a3, $zero, 0x7fff
 .L8004D894:
-/* 28C94 8004D894 0C014E5D */  jal       func_80053974
+/* 28C94 8004D894 0C014E5D */  jal       snd_initialize_fade
 /* 28C98 8004D898 2604002C */   addiu    $a0, $s0, 0x2c
 /* 28C9C 8004D89C 0200202D */  daddu     $a0, $s0, $zero
 /* 28CA0 8004D8A0 24027FFF */  addiu     $v0, $zero, 0x7fff
@@ -142,7 +142,7 @@ glabel func_8004D7E0
 /* 28DC8 8004D9C8 A200021D */  sb        $zero, 0x21d($s0)
 .L8004D9CC:
 /* 28DCC 8004D9CC AE14001C */  sw        $s4, 0x1c($s0)
-/* 28DD0 8004D9D0 0C013976 */  jal       func_8004E5D8
+/* 28DD0 8004D9D0 0C013976 */  jal       snd_initialize_bgm_player
 /* 28DD4 8004D9D4 0200202D */   daddu    $a0, $s0, $zero
 /* 28DD8 8004D9D8 0801367A */  j         .L8004D9E8
 /* 28DDC 8004D9DC 02A0102D */   daddu    $v0, $s5, $zero

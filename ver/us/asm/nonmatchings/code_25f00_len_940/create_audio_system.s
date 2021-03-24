@@ -163,7 +163,7 @@ glabel create_audio_system
 /* 26168 8004AD68 0C015894 */  jal       func_80056250
 /* 2616C 8004AD6C 27A50018 */   addiu    $a1, $sp, 0x18
 /* 26170 8004AD70 8FA40020 */  lw        $a0, 0x20($sp)
-/* 26174 8004AD74 0C014B97 */  jal       func_80052E5C
+/* 26174 8004AD74 0C014B97 */  jal       snd_load_audio_data
 /* 26178 8004AD78 00000000 */   nop
 /* 2617C 8004AD7C 3C10800A */  lui       $s0, %hi(D_800A0F58)
 /* 26180 8004AD80 26100F58 */  addiu     $s0, $s0, %lo(D_800A0F58)

@@ -7,7 +7,7 @@ void func_80052E30(u8 index) {
     temp->unk_45 = 0;
 }
 
-void func_80052E5C(s32 arg0) {
+void snd_load_audio_data(s32 frequency) {
     UnkAl19E0** temp_s4 = &D_8009A5C0;
     UnkAl19E0* temp4;
     s32* temp_v0_2;
@@ -50,8 +50,8 @@ void func_80052E5C(s32 arg0) {
     temp4->unk_54 = alHeapAlloc(alHeap, 1, 0x360);
     temp4->unk_58 = alHeapAlloc(alHeap, 1, 0x200);
     temp4->unk_94 = alHeapAlloc(alHeap, 1, 0x40);
-    temp4->unk_00 = arg0;
-    func_800532F4(temp4->unk_04);
+    temp4->unk_00 = frequency;
+    snd_reset_instrument(temp4->unk_04);
     func_80053370(&temp4->unk_08);
     func_800533A8(&temp4->unk_14);
     func_8005610C();
@@ -139,26 +139,26 @@ void func_80052E5C(s32 arg0) {
     func_80055050(alHeap);
 }
 
-void func_800532F4(UnkAl30* arg0) {
-    arg0->unk_00 = &D_800781D0;
-    arg0->unk_04 = 190;
-    arg0->unk_18 = &D_80078190;
-    arg0->unk_1C = 64;
-    arg0->unk_1E = 4800;
-    arg0->unk_08 = 0;
-    arg0->unk_0C = 0;
-    arg0->unk_10 = 0;
-    arg0->unk_14 = 0;
-    arg0->unk_24 = 0;
-    arg0->unk_25 = 0;
-    arg0->unk_2C = &D_80078544;
-    arg0->unk_26 = 0;
-    arg0->unk_27 = 0;
-    arg0->unk_28 = 0;
-    arg0->unk_29 = 0;
-    arg0->unk_2A = 0;
-    arg0->unk_2B = 0;
-    arg0->unk_20 = 0.5f;
+void snd_reset_instrument(Instrument* instrument) {
+    instrument->wavOffset = &D_800781D0;
+    instrument->wavLength = 190;
+    instrument->predictorOffset = &D_80078190;
+    instrument->unk_1C = 64;
+    instrument->unk_1E = 4800;
+    instrument->loopPredictorOffset = 0;
+    instrument->loopStart = 0;
+    instrument->loopEnd = 0;
+    instrument->loopCount = 0;
+    instrument->skipLoopPredictor = 0;
+    instrument->unk_25 = 0;
+    instrument->unkOffset = &D_80078544;
+    instrument->unk_26 = 0;
+    instrument->unk_27 = 0;
+    instrument->unk_28 = 0;
+    instrument->unk_29 = 0;
+    instrument->unk_2A = 0;
+    instrument->unk_2B = 0;
+    instrument->sampleRate = 0.5f;
 }
 
 void func_80053370(UnkAlC* arg0) {
@@ -183,7 +183,7 @@ void func_800533A8(UnkAl4* arg0) {
 }
 
 
-void func_800533D0(void) {
+void snd_update_sequence_players(void) {
     UnkAl19E0* temp_s2 = D_8009A5C0;
     SoundManager* temp_s1 = D_8009A640;
     UnkAl834* temp_s0 = D_8009A628;
@@ -214,7 +214,7 @@ void func_800533D0(void) {
     if (*t1 == 0) {
         temp_s0_2 = D_8009A5FC;
         if (temp_s0_2->fadeInfo.fadeTime != 0) {
-            func_8004E3A4(temp_s0_2);
+            snd_update_bgm_fade(temp_s0_2);
         }
         if (temp_s0_2->songName != 0) {
             temp_s0_2->unk_18++;
@@ -235,10 +235,10 @@ void func_800533D0(void) {
                 if (temp_s0_3->fadeInfo.fadeTime == 0) {
                     func_8004E444(temp_s0_3);
                 } else {
-                    func_8004E3A4(temp_s0_3);
+                    snd_update_bgm_fade(temp_s0_3);
                 }
             } else if (temp_s0_3->fadeInfo.fadeTime != 0) {
-                func_8004E3A4(temp_s0_3);
+                snd_update_bgm_fade(temp_s0_3);
             }
             if (temp_s0_3->songName != 0) {
                 temp_s0_3->unk_18++;
@@ -366,7 +366,7 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_800538F8);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", func_80053974, UnkAl1* arg0, s32 arg1, s32 arg2, s16 arg3);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_initialize_fade, Fade* fade, s32 time, s32 startValue, s16 endValue);
 
 void func_80053A18(UnkAl1* arg0) {
     arg0->unk_0A = 0;

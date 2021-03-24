@@ -61,7 +61,7 @@ glabel func_8004E4B8
 /* 29978 8004E578 0200202D */   daddu    $a0, $s0, $zero
 /* 2997C 8004E57C 0801396C */  j         .L8004E5B0
 /* 29980 8004E580 3222FFFF */   andi     $v0, $s1, 0xffff
-/* 29984 8004E584 0C013976 */  jal       func_8004E5D8
+/* 29984 8004E584 0C013976 */  jal       snd_initialize_bgm_player
 /* 29988 8004E588 0200202D */   daddu    $a0, $s0, $zero
 /* 2998C 8004E58C 0801396B */  j         .L8004E5AC
 /* 29990 8004E590 0000882D */   daddu    $s1, $zero, $zero

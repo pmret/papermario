@@ -188,18 +188,18 @@ typedef struct UnkAlC {
     /* 0xA */ s8 unk_0A;
 } UnkAlC;
 
-typedef struct UnkAl30 {
-    /* 0x00 */ s32* unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32* unk_18;
+typedef struct Instrument {
+    /* 0x00 */ s32* wavOffset;
+    /* 0x04 */ s32 wavLength;
+    /* 0x08 */ s32 loopPredictorOffset;
+    /* 0x0C */ s32 loopStart;
+    /* 0x10 */ s32 loopEnd;
+    /* 0x14 */ s32 loopCount;
+    /* 0x18 */ s32* predictorOffset;
     /* 0x1C */ s16 unk_1C;
     /* 0x1E */ s16 unk_1E;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s8 unk_24;
+    /* 0x20 */ f32 sampleRate;
+    /* 0x24 */ s8 skipLoopPredictor;
     /* 0x25 */ s8 unk_25;
     /* 0x26 */ s8 unk_26;
     /* 0x27 */ s8 unk_27;
@@ -207,8 +207,8 @@ typedef struct UnkAl30 {
     /* 0x29 */ s8 unk_29;
     /* 0x2A */ s8 unk_2A;
     /* 0x2B */ s8 unk_2B;
-    /* 0x2C */ s32* unk_2C;
-} UnkAl30;
+    /* 0x2C */ s32* unkOffset;
+} Instrument;
 
 typedef struct UnkAl48 { // Track?
     /* 0x00 */ s32 unk_00; // pointer to something
@@ -269,7 +269,7 @@ typedef struct UnkAl19E0Sub3 {
 
 typedef struct UnkAl19E0 {
     /* 0x0000 */ f32 unk_00;
-    /* 0x0004 */ UnkAl30* unk_04;
+    /* 0x0004 */ Instrument* unk_04;
     /* 0x0008 */ UnkAlC unk_08;
     /* 0x0014 */ UnkAl4 unk_14;
     /* 0x001C */ s32 unk_1C;
@@ -330,43 +330,44 @@ typedef struct UnkAl19E0 {
     /* 0x1320 */ UnkAl48 unk_1320[24];
 } UnkAl19E0; // size = 0x19E0
 
-typedef struct UnkAl60 {
-    /* 0x00 */ u32 unk_00;
+typedef struct BGMPlayerTrack {
+    /* 0x00 */ u32 bgmReadPos;
     /* 0x04 */ u32 unk_04;
     /* 0x08 */ char unk_08[0x4];
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ char unk_14[0x4];
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ s32 unk_24[2];
+    /* 0x18 */ s32 subTrackVolume;
+    /* 0x1C */ s32 subTrackVolumeFadeDelta;
+    /* 0x20 */ s32 subTrackVolumeFadeVolume;
+    /* 0x24 */ s32 subTrackVolumeFadeTime;
+    /* 0x28 */ s32 unk_28;
     /* 0x2C */ char unk_2C[0xC];
-    /* 0x38 */ u16 unk_38;
-    /* 0x3A */ s16 unk_3A;
+    /* 0x38 */ u16 segTrackTune;
+    /* 0x3A */ s16 trackTremoloAmount;
     /* 0x3C */ char unk_3C[0x2];
     /* 0x3E */ s16 unk_3E;
-    /* 0x40 */ s8 unk_40;
-    /* 0x41 */ s8 unk_41;
-    /* 0x42 */ s8 unk_42;
-    /* 0x43 */ s8 unk_43;
+    /* 0x40 */ s8 tuneChanged;
+    /* 0x41 */ s8 volumeChanged;
+    /* 0x42 */ s8 panChanged;
+    /* 0x43 */ s8 reverbChanged;
     /* 0x44 */ u16 unk_44;
-    /* 0x46 */ u16 unk_46;
-    /* 0x48 */ u8 unk_48;
-    /* 0x49 */ u8 unk_49;
-    /* 0x4A */ u8 unk_4A;
-    /* 0x4B */ u8 unk_4B;
+    /* 0x46 */ u16 subTrackCoarseTune;
+    /* 0x48 */ u8 subTrackFineTune;
+    /* 0x49 */ u8 segTrackVolume;
+    /* 0x4A */ u8 subTrackPan;
+    /* 0x4B */ u8 subTrackReverb;
     /* 0x4C */ u8 unk_4C;
     /* 0x4D */ char unk_4D[0x8];
-    /* 0x55 */ s8 unk_55;
-    /* 0x56 */ s8 unk_56;
+    /* 0x55 */ s8 trackTremoloSpeed;
+    /* 0x56 */ s8 trackTremoloTime;
     /* 0x57 */ s8 unk_57;
     /* 0x58 */ u8 unk_58;
     /* 0x59 */ char unk_59[0x2];
-    /* 0x5B */ s8 unk_5B;
+    /* 0x5B */ s8 subtrackReverbType;
     /* 0x5C */ u8 unk_5C;
     /* 0x5D */ char unk_5D[0x3];
-} UnkAl60; // size = 0x60;
+} BGMPlayerTrack; // size = 0x60;
 
 typedef struct UnkAl24 {
     /* 0x00 */ char unk_00[0x8];
@@ -461,7 +462,7 @@ typedef struct BGMPlayer {
     /* 0x259 */ s8 unk_259;
     /* 0x25A */ s8 unk_25A;
     /* 0x25B */ s8 unk_25B;
-    /* 0x25C */ UnkAl60 unk_25C[16];
+    /* 0x25C */ BGMPlayerTrack unk_25C[16];
     /* 0x85C */ UnkAl24 unk_85C[24];
 } BGMPlayer; // size = 0xA9C
 
@@ -554,38 +555,38 @@ s32 func_8004DA0C(UNK_TYPE);
 void func_8004DAA8(BGMPlayer*);
 void func_8004DFD4(UnkAl19E0*);
 void func_8004E158(BGMPlayer*, s32, s32, UnkAl19E0*);
-void func_8004E3A4(BGMPlayer*);
+void snd_update_bgm_fade(BGMPlayer*);
 void func_8004E444(BGMPlayer*);
 s16 func_8004E4B8(BGMPlayer*);
-void func_8004FBBC(BGMPlayer*, UnkAl60*);
-s32 func_8004FC08(BGMPlayer*, u32);
-void func_8004FCB4(BGMPlayer*, UnkAl60*);
-void func_8004FCE4(BGMPlayer*, UnkAl60*);
-void func_8004FD04(BGMPlayer*, UnkAl60*);
-void func_8004FD38(BGMPlayer*, UnkAl60*);
-void func_8004FD94(BGMPlayer*, UnkAl60*);
-void func_8004FE10(BGMPlayer*, UnkAl60*);
-void func_8004FE6C(BGMPlayer*, UnkAl60*);
-void func_8004FEB0(BGMPlayer*, UnkAl60*);
-void func_8004FED0(BGMPlayer*, UnkAl60*);
-void func_8004FF3C(BGMPlayer*, UnkAl60*);
-void func_8004FF58(BGMPlayer*, UnkAl60*);
-void func_8004FF70(BGMPlayer*, UnkAl60*);
-void func_8004FF88(BGMPlayer*, UnkAl60*);
-void func_8004FFA8(BGMPlayer*, UnkAl60*);
-void func_8004FFB4(BGMPlayer*, UnkAl60*);
-void func_8004FFC8(BGMPlayer*, UnkAl60*);
-void func_8004FFE4(BGMPlayer*, UnkAl60*);
-void func_8004FFF0(BGMPlayer*, UnkAl60*);
-void func_8004FFFC(BGMPlayer*, UnkAl60*);
-void func_80050004(BGMPlayer*, UnkAl60*);
-void func_80050020(BGMPlayer*, UnkAl60*);
-void func_80050128(BGMPlayer*, UnkAl60*);
-void func_8005015C(BGMPlayer*, UnkAl60*);
-void func_80050184(BGMPlayer*, UnkAl60*);
-void func_800501A8(BGMPlayer*, UnkAl60*);
-void func_800502F0(BGMPlayer*, UnkAl60*);
-void func_80050560(BGMPlayer*, UnkAl60*);
+void snd_BGMCmd_E0_MasterTempo(BGMPlayer*, BGMPlayerTrack*);
+s32 snd_bpm_to_tempo(BGMPlayer*, u32);
+void snd_BGMCmd_E1_MasterVolume(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E2_MasterTranspose(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E3(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E6_MasterEffect(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_E9_SubTrackVolume(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F6_TrackVolumeFade(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_EA_SubTrackPan(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_EB_SubTrackReverb(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_EC_SegTrackVolume(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_ED_SubTrackCoarseTune(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_EE_SubTrackFineTune(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_EF_SegTrackTune(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F0_TrackTremolo(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F1_TrackTremoloSpeed(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F2_TrackTremoloTime(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F3_TrackTremoloStop(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F4(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F5_TrackVoice(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_F7_SubTrackReverbType(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_FD(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_FE(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_FC_Jump(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_FF(BGMPlayer*, BGMPlayerTrack*);
+void snd_BGMCmd_NOP(BGMPlayer*, BGMPlayerTrack*);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
 s32 func_80050C30(u32);
@@ -603,11 +604,11 @@ void func_80052660(UnkAl19E0*);
 void func_80052B44(UnkAl48*);
 void func_80052BF8(UnkAl48*, s32*);
 
-void func_800532F4(UnkAl30*);
+void snd_reset_instrument(Instrument*);
 void func_80053370(UnkAlC*);
 void func_800533A8(UnkAl4*);
 void func_80053654(UnkAl19E0*);
-void func_80053974(UnkAl1*, s32, s32, s16);
+void snd_initialize_fade(Fade*, s32, s32, s16);
 void func_80053A18(UnkAl1*);
 void func_80053A28(UnkAl1*);
 void func_80053A98(u8, u16, s32);
@@ -642,7 +643,7 @@ void func_80056DCC(u8, u8);
 void func_80056EC0(u8, s8);
 void func_80056EE8(u8);
 void func_80056FA4(u8, u8, s32, f32, s16, u8, u8, s32);
-void func_80057224(u8, UnkAl30*);
+void func_80057224(u8, Instrument*);
 void func_80057344(u8, f32);
 void func_8005736C(u8, s16, s32, u8, u8);
 void func_80057548(u8, u8, u8);

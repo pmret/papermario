@@ -8,7 +8,7 @@ glabel jtbl_800988D8
 
 .section .text
 
-glabel func_800502F0
+glabel snd_BGMCmd_FF
 /* 2B6F0 800502F0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 2B6F4 800502F4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 2B6F8 800502F8 0080902D */  daddu     $s2, $a0, $zero
