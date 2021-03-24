@@ -136,7 +136,7 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     return 0;
 }
 
-void func_800494C0(Npc *npc, s32 arg1, s32 arg2) {
+void func_800494C0(Npc* npc, s32 arg1, s32 arg2) {
     Enemy* enemy = get_enemy(npc->npcID);
     s32 value2 = (arg2 & 0xFFFF0000) | 2;
 

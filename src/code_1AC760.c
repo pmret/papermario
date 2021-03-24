@@ -105,7 +105,8 @@ ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
     battleStatus->flags1 |= 0x20;
 
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage, 0);
+    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage,
+                      0);
     set_variable(script, outVar, hitResult);
 
     return ApiStatus_DONE2;

@@ -33,7 +33,8 @@ void func_802E56EC(Entity* entity) {
         Entity* someEntity;
         struct802E3650* temp2;
 
-        temp_s0->unk_12 = create_entity(&D_802EA934, entity->position.x, entity->position.y, entity->position.z, 0.0f, 0x80000000);
+        temp_s0->unk_12 = create_entity(&D_802EA934, entity->position.x, entity->position.y, entity->position.z, 0.0f,
+                                        0x80000000);
         someEntity = get_entity_by_index(temp_s0->unk_12);
         temp2 = someEntity->dataBuf;
         temp2->unk_00 = entity->listIndex;

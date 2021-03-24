@@ -48,7 +48,7 @@ void func_80072CDC(s32 arg0) {
     gBattleStatus.unk_484 = arg0;
 }
 
-void func_80072CEC(f32 arg0, f32 arg1, f32 arg2){
+void func_80072CEC(f32 arg0, f32 arg1, f32 arg2) {
 }
 
 void func_80072CF4(void) {

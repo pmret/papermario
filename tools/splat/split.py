@@ -355,7 +355,7 @@ def main(config_path, out_dir, target_path, modes, verbose, ignore_cache=False):
         log.dot(status=segment.status())
 
     # Write ldscript
-    if options.mode_active("ld"):
+    if options.mode_active("ld") and not options.get("skip_ld"):
         if verbose:
             log.write(f"saving {config['basename']}.ld")
         write_ldscript(config['basename'], out_dir, ld_sections)

@@ -112,7 +112,7 @@ void init_dynamic_entity_list(void) {
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", bind_dynamic_entity_3);
 
-INCLUDE_ASM(s32, "code_b72b0_len_15ed0", bind_dynamic_entity_7, s32* updateFunc, s32* drawFunc);
+INCLUDE_ASM(s32, "code_b72b0_len_15ed0", bind_dynamic_entity_7, s32* updateFunc, void (*drawFunc)(void));
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", bind_dynamic_entity_B);
 

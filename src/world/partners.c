@@ -46,7 +46,7 @@ s32 D_800F7F80[] = {
 s32* D_800F7FA8 = &D_80108068;
 s32 D_800F7FAC = 0x80108090;
 s32 D_800F7FB0[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
-s32 D_800F7FCC[] = { (s32)&D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
+s32 D_800F7FCC[] = { (s32) &D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;
@@ -55,7 +55,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32)&D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 D_800F8024 = 0;
 s32 D_800F8028 = 0;
@@ -403,8 +403,7 @@ s32 partner_use_ability(void) {
 
     if (!is_starting_conversation() &&
         wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
-    {
+        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
         if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
             play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
@@ -581,11 +580,12 @@ INCLUDE_ASM(void, "world/partners", enable_partner_walking, Npc* partner, s32 va
 
 INCLUDE_ASM(void, "world/partners", func_800EBA3C, Npc* partner);
 
-void func_800EBB40(Npc *partner) {
+void func_800EBB40(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
 
-    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0 || temp8010EBB0->unk_02 != 0) {
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0
+        || temp8010EBB0->unk_02 != 0) {
         if (!(playerStatus->animFlags & 0x800)) {
             func_800EBC74(partner);
         }

@@ -427,7 +427,7 @@ ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(ScriptInstance *script) {
+ApiStatus func_802D2C40(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -570,7 +570,8 @@ UnkF5750* func_802D4164(s32 index) {
 
 INCLUDE_ASM(s32, "code_F5750", func_802D417C);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D420C);
+void func_802D420C(UnkF5750* arg0);
+INCLUDE_ASM(void, "code_F5750", func_802D420C, UnkF5750* arg0);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D42AC);
 

@@ -20,8 +20,8 @@ ApiStatus func_802A1518_78D668(ScriptInstance* script, s32 isInitialCall) {
     }
 
     switch (script->functionTemp[0].s) {
-        s32 temp;
-        s32 temp2;
+            s32 temp;
+            s32 temp2;
 
         case 0:
             script->functionTemp[2].s = -80;

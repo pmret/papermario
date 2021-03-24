@@ -111,7 +111,7 @@ void disable_npc_shadow(Npc* npc) {
 
 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
-void set_npc_sprite(Npc *npc, s32 arg1, s32 arg2) {
+void set_npc_sprite(Npc* npc, s32 arg1, s32 arg2) {
     s32 flagsTemp;
 
     ASSERT(((npc->flags & 0x1000000)) || (func_802DE5E8(npc->unk_24) == 0));
@@ -129,7 +129,7 @@ void set_npc_sprite(Npc *npc, s32 arg1, s32 arg2) {
     }
 }
 
-void enable_npc_blur(Npc *npc) {
+void enable_npc_blur(Npc* npc) {
     NpcBlurData* blurData;
     s32 i;
 

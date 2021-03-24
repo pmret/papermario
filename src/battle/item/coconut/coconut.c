@@ -2,14 +2,14 @@
 #include "battle/item/coconut/coconut.png.h"
 
 /// 32x32 square.
-Vtx N(coconutModel)[] = {
+Vtx N(model)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
     { .v = { 15,  -16, 0, FALSE, 1024, 0,    0, 0, 0, 255 } },
     { .v = { 15,  15,  0, FALSE, 1024, 1024, 0, 0, 0, 255 } },
     { .v = { -16, 15,  0, FALSE, 0,    1024, 0, 0, 0, 255 } },
 };
 
-Gfx N(coconutDL)[] = {
+Gfx N(displayList)[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
@@ -20,23 +20,23 @@ Gfx N(coconutDL)[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, &battle_item_coconut_coconut_pal_png),
-    gsDPLoadTextureTile_4b(&battle_item_coconut_coconut_png, G_IM_FMT_CI, battle_item_coconut_coconut_png_width, battle_item_coconut_coconut_png_height, 0, 0, battle_item_coconut_coconut_png_width - 1, battle_item_coconut_coconut_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal16(0, &N(coconut_pal_png)),
+    gsDPLoadTextureTile_4b(&N(coconut_png), G_IM_FMT_CI, N(coconut_png_width), N(coconut_png_height), 0, 0, N(coconut_png_width) - 1, N(coconut_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPVertex(&N(coconutModel), ARRAY_COUNT(N(coconutModel)), 0),
+    gsSPVertex(&N(model), ARRAY_COUNT(N(model)), 0),
     gsSP1Triangle(0, 1, 2, 0),
     gsSP1Triangle(0, 2, 3, 0),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
 };
 
-s32 N(coconutItemModelCommandList)[] = {
-    0x00000004, 0x0000000D, 0x00000001, sizeof(N(coconutDL)) / sizeof(s32), &N(coconutDL), 0x00000002, 0x00000000,
+s32 N(modelCommandList)[] = {
+    0x00000004, 0x0000000D, 0x00000001, sizeof(N(displayList)) / sizeof(s32), &N(displayList), 0x00000002, 0x00000000,
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c ItemId_COCONUT;
+    SI_VAR(10) = c ItemId_COCONUT;
 
     await N(UseItemWithEffect);
 
@@ -47,7 +47,7 @@ Script N(main) = SCRIPT({
     PlaySound(SoundId_THROW);
     sleep 3;
 
-    func_802D3474(SI_VAR(10), N(coconutItemModelCommandList));
+    func_802D3474(SI_VAR(10), N(modelCommandList));
 
     $x = 1.0;
     MultiplyByActorScale($x);

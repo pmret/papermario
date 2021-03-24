@@ -59,7 +59,8 @@ def main():
     output = []
 
     for line in processed_lines:
-        if "__attribute__" not in line and "__asm__" not in line:
+        if ("__attribute__" not in line
+            and "__asm" not in line):
             output.append(line)
 
     with open(os.path.join(root_dir, "ctx.c"), "w", encoding="UTF-8") as f:

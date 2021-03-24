@@ -80,7 +80,7 @@ void func_80243910(void) {
 }
 
 void switch_order(void) {
-    BattleStatus *battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->unk_4D = -1;
     battleStatus->unk_4E = -1;

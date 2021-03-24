@@ -23,8 +23,7 @@ s32 func_800E26C4(void) {
         actionState == ActionState_WALK ||
         actionState == ActionState_RUN ||
         actionState == ActionState_USE_TWEESTER ||
-        actionState == ActionState_SPIN)
-    {
+        actionState == ActionState_SPIN) {
         return 1;
     }
 
@@ -164,7 +163,7 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     return ret;
 }
 #else
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world,s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world, s32 arg0, s32 arg1, f32 arg2);
 #endif
 
 s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ) {
@@ -256,8 +255,7 @@ void check_input_midair_jump(void) {
         !(gPlayerStatus.animFlags & 0x4001) &&
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.decorationList < 0x12 &&
-        gPlayerStatus.pressedButtons & A_BUTTON)
-    {
+        gPlayerStatus.pressedButtons & A_BUTTON) {
         switch (gPlayerData.bootsLevel) {
             case 0:
                 break;
