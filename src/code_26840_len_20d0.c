@@ -1,31 +1,31 @@
 #include "common.h"
 #include "audio.h"
 
-void func_8004B440(UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
+void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
     u32 i;
     s32 c = 0x6A25E;
 
-    arg0->unk_00 = arg3;
-    arg0->unk_34 = 0x4C4B4;
-    arg0->unk_38 = arg0->unk_3C = c;
-    arg0->unk_BC = arg1;
-    arg0->unk_BE = arg2;
+    manager->soundData = arg3;
+    manager->unkCounterStep = 312500;
+    manager->unkCounterMax = manager->unkCounter = c;
+    manager->unk_BC = arg1;
+    manager->unk_BE = arg2;
 
     if (arg4 > 0x10) {
-        arg0->unk_BD = 0x10;
+        manager->sfxPlayerSelector = 0x10;
     } else {
-        arg0->unk_BD = arg4;
+        manager->sfxPlayerSelector = arg4;
     }
 
-    arg0->unk_5C = 0x8000;
-    arg0->unk_B8 = 0x8000;
-    arg0->unk_30 = 0;
-    arg0->unk_60 = 0;
+    manager->unk_5C = 0x8000;
+    manager->unk_B8 = 0x8000;
+    manager->playCounter = 0;
+    manager->unk_60 = 0;
 
-    for (i = 0; i < ARRAY_COUNT(arg0->unk_16C); i++) {
-        UnkAlAC* sub = &arg0->unk_16C[i];
+    for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
+        SoundPlayer* sub = &manager->unk_16C[i];
 
-        sub->unk_00 = 0;
+        sub->counter = 0;
         sub->unk_5C = 0;
         sub->unk_8E = 0;
         sub->unk_90 = 0;
@@ -37,9 +37,9 @@ void func_8004B440(UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
         sub->unk_9E = 0;
         sub->unk_9F = 0;
         sub->unk_99 = 0;
-        sub->unk_78 = 0;
-        sub->unk_79 = 0;
-        sub->unk_7A = 0;
+        sub->locatorB = 0;
+        sub->locatorC = 0;
+        sub->locatorD = 0;
         sub->unk_7B = 0x40;
         sub->unk_7C = 0;
         sub->unk_7D = 0xB0;
@@ -48,114 +48,113 @@ void func_8004B440(UnkAl6CC* arg0, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 arg4) {
     }
 
     for (i = 0; i < 4; i++) {
-        arg0->unk_90[i] = 0;
+        manager->unk_90[i] = 0;
     }
 
     for (i = 0; i < 4; i++) {
-        arg0->unk_A0[i].x = 0;
+        manager->unk_A0[i].x = 0;
     }
 
-    arg0->unk_168 = 0;
-    func_8004BA54(arg0, 0);
-    func_8004B698(arg0);
-    func_80053974(&arg0->unk_40, 0, 0x7FFF, 0x7FFF);
-    func_80053A98(arg0->unk_BE, arg0->unk_40.unk_00.u16, arg0->unk_5C);
-    arg0->unk_8C = 0xFF;
+    manager->unk_168 = 0;
+    func_8004BA54(manager, 0);
+    snd_clear_sfx_queue(manager);
+    func_80053974(&manager->unk_40, 0, 0x7FFF, 0x7FFF);
+    func_80053A98(manager->unk_BE, manager->unk_40.unk_00.u16, manager->unk_5C);
+    manager->unk_8C = 0xFF;
 
-    arg0->unk_64[0] = &D_80078290;
-    arg0->unk_64[1] = &D_800782F8;
-    arg0->unk_64[2] = &D_80078320;
-    arg0->unk_64[3] = &D_80078348;
-    arg0->unk_64[4] = &D_80078348;
-    arg0->unk_64[5] = &D_80078348;
-    arg0->unk_64[6] = &D_80078348;
-    arg0->unk_64[7] = &D_80078348;
+    manager->unk_64[0] = &D_80078290;
+    manager->unk_64[1] = &D_800782F8;
+    manager->unk_64[2] = &D_80078320;
+    manager->unk_64[3] = &D_80078348;
+    manager->unk_64[4] = &D_80078348;
+    manager->unk_64[5] = &D_80078348;
+    manager->unk_64[6] = &D_80078348;
+    manager->unk_64[7] = &D_80078348;
 
-    arg0->unk_84[0] = 0x10;
-    arg0->unk_84[1] = 0x20;
-    arg0->unk_84[2] = 0x20;
-    arg0->unk_84[3] = 0x20;
-    arg0->unk_84[4] = 0x20;
-    arg0->unk_84[5] = 0x30;
-    arg0->unk_84[6] = 0x40;
-    arg0->unk_84[7] = 0x50;
+    manager->unk_84[0] = 0x10;
+    manager->unk_84[1] = 0x20;
+    manager->unk_84[2] = 0x20;
+    manager->unk_84[3] = 0x20;
+    manager->unk_84[4] = 0x20;
+    manager->unk_84[5] = 0x30;
+    manager->unk_84[6] = 0x40;
+    manager->unk_84[7] = 0x50;
 
-    func_8004B9E4(arg0, 0);
+    func_8004B9E4(manager, 0);
 }
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B62C, UnkAl6CC* arg0);
+INCLUDE_ASM(void, "code_26840_len_20d0", snd_load_sfx_groups_from_SEF, SoundManager* manager);
 
-void func_8004B698(UnkAl6CC* arg0) {
+void snd_clear_sfx_queue(SoundManager* manager) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(arg0->unk_C2); i++) {
-        arg0->unk_C2[i].unk_00 = 0;
-        arg0->unk_C2[i].unk_02 = 0;
-        arg0->unk_C2[i].unk_04 = 0;
-        arg0->unk_C2[i].unk_06 = 0;
-        arg0->unk_C2[i].unk_08 = 0;
+    for (i = 0; i < ARRAY_COUNT(manager->unk_C2); i++) {
+        manager->unk_C2[i].soundID = 0;
+        manager->unk_C2[i].upperSoundID = 0;
+        manager->unk_C2[i].volume = 0;
+        manager->unk_C2[i].pitchShift = 0;
+        manager->unk_C2[i].pan = 0;
     }
 
-    arg0->unk_165 = 0;
-    arg0->unk_164 = 0;
-    arg0->unk_163 = 0;
-    arg0->unk_162 = 0;
+    manager->unk_165 = 0;
+    manager->sfxQueueNextPos = 0;
+    manager->sfxQueuePosOffset = 0;
+    manager->unk_162 = 0;
 }
 
-void func_8004B6D8(UnkAl6CC* arg0, s32 arg1, s16 arg2, s16 arg3, u8 arg4) {
-    u8 temp_v1 = arg0->unk_164;
-    s32 temp_v0 = temp_v1 - (u8) arg0->unk_163;
-    u32 temp_t0;
+void snd_enqueue_sfx_event(SoundManager* manager, s32 soundID, s16 volume, s16 pitchShift, u8 pan) {
+    u32 queuePos = manager->sfxQueueNextPos;
+    s32 queueAmt = manager->sfxQueueNextPos - manager->sfxQueuePosOffset;
 
-    if (temp_v0 < 0) {
-        temp_v0 += 0x10;
+    if (queueAmt < 0) {
+        queueAmt += 16;
     }
 
-    if (temp_v0 < 0x10) {
-        temp_t0 = temp_v1;
+    if (queueAmt < 16) {
+        u32 queueNextPos = queuePos;
 
-        arg0->unk_C2[temp_v1].unk_00 = arg1 & 0xBFFF;
-        arg0->unk_C2[temp_v1].unk_02 = (((u32) arg1 >> 0x10) & 0x3FF);
-        arg0->unk_C2[temp_v1].unk_04 = arg2;
-        arg0->unk_C2[temp_v1].unk_06 = arg3;
-        arg0->unk_C2[temp_v1].unk_08 = arg4;
+        manager->unk_C2[queueNextPos].soundID = soundID & 0xBFFF;
+        manager->unk_C2[queueNextPos].upperSoundID = (((u32) soundID >> 0x10) & 0x3FF);
+        manager->unk_C2[queueNextPos].volume = volume;
+        manager->unk_C2[queueNextPos].pitchShift = pitchShift;
+        manager->unk_C2[queueNextPos].pan = pan;
 
-        temp_t0++;
-        if (temp_t0 >= 0x10) {
-            temp_t0 = 0;
+        queueNextPos++;
+        if (queueNextPos >= 16) {
+            queueNextPos = 0;
         }
 
-        arg0->unk_164 = temp_t0;
+        manager->sfxQueueNextPos = queueNextPos;
     }
 }
 
-INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, UnkAl6CC* arg0);
+INCLUDE_ASM(void, "code_26840_len_20d0", func_8004B748, SoundManager* manager);
 
-s32 func_8004B9E4(UnkAl6CC* arg0, s32 arg1) {
+s32 func_8004B9E4(SoundManager* manager, s32 arg1) {
     s32 a1 = (u8) arg1;
 
     if (a1 != 0xF0) {
         if (a1 < 8) {
-            if (arg0->unk_8C != a1) {
-                arg0->unk_8C = a1;
-                arg0->unk_00->unk_40[1].unk_00 = 6;
-                arg0->unk_00->unk_40[1].unk_01 = 1;
-                D_8007F1F8 = arg0->unk_64[a1];
+            if (manager->unk_8C != a1) {
+                manager->unk_8C = a1;
+                manager->soundData->unk_40[1].unk_00 = 6;
+                manager->soundData->unk_40[1].unk_01 = 1;
+                D_8007F1F8 = manager->unk_64[a1];
             }
-            arg0->unk_8D = arg0->unk_84[a1];
+            manager->unk_8D = manager->unk_84[a1];
         } else {
-            arg0->unk_8C = 0xFF;
-            arg0->unk_8D = 0;
+            manager->unk_8C = 0xFF;
+            manager->unk_8D = 0;
         }
     }
-    return arg0->unk_8C;
+    return manager->unk_8C;
 }
 
-void func_8004BA54(UnkAl6CC* arg0, s32 arg1) {
+void func_8004BA54(SoundManager* manager, s32 arg1) {
     if (arg1 == 0) {
-        arg0->unk_C0 = 0;
+        manager->unk_C0 = 0;
     } else if (arg1 == 1) {
-        arg0->unk_C0 = 1;
+        manager->unk_C0 = 1;
     }
 }
 
@@ -169,11 +168,11 @@ INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004C2A4);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004C300);
 
-INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004C358);
+INCLUDE_ASM(void, "code_26840_len_20d0", snd_set_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
 
-INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004C3D4);
+INCLUDE_ASM(void, "code_26840_len_20d0", snd_set_player_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
 
-INCLUDE_ASM(s16, "code_26840_len_20d0", func_8004C444, UnkAl6CC* arg0);
+INCLUDE_ASM(s16, "code_26840_len_20d0", func_8004C444, SoundManager* manager);
 
 INCLUDE_ASM(s32, "code_26840_len_20d0", func_8004C578);
 

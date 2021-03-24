@@ -99,7 +99,7 @@ glabel func_8004C0E4
 .L8004C250:
 /* 27650 8004C250 00A0202D */  daddu     $a0, $a1, $zero
 .L8004C254:
-/* 27654 8004C254 0C0130F5 */  jal       func_8004C3D4
+/* 27654 8004C254 0C0130F5 */  jal       snd_set_player_modifiers
 /* 27658 8004C258 00E0282D */   daddu    $a1, $a3, $zero
 .L8004C25C:
 /* 2765C 8004C25C 8FBF0010 */  lw        $ra, 0x10($sp)

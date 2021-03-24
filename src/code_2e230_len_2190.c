@@ -15,11 +15,11 @@ void func_80052E5C(s32 arg0) {
     u32 i;
     s32 subroutine_arg7[2];
     u8 temp6[4];
-    UnkAlA9C** temp1 = &D_8009A664;
-    UnkAlA9C** temp1_1;
-    UnkAl6CC** temp2 = &D_8009A640;
-    UnkAl6CC** temp2_1;
-    UnkAlA9C** temp3;
+    BGMPlayer** temp1 = &D_8009A664;
+    BGMPlayer** temp1_1;
+    SoundManager** temp2 = &D_8009A640;
+    SoundManager** temp2_1;
+    BGMPlayer** temp3;
     UnkAl48* temp5;
 
     alHeap = D_80078E54->unk_18;
@@ -30,7 +30,7 @@ void func_80052E5C(s32 arg0) {
     D_8009A5CC = alHeapAlloc(alHeap, 1, 0xA9C);
     (*temp2) = alHeapAlloc(alHeap, 1, 0x6CC);
     D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
-    (*temp1)->unk_04 = (*temp2);
+    (*temp1)->soundManager = (*temp2);
     D_8009A628->unk_00 = *(temp_s4);
 
 
@@ -114,7 +114,7 @@ void func_80052E5C(s32 arg0) {
     if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, subroutine_arg7) == 0) {
         al_DmaCopy(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
     }
-    func_8004B62C((*temp2_1));
+    snd_load_sfx_groups_from_SEF((*temp2_1));
     if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
         al_LoadPER(temp4, subroutine_arg7[0]);
     }
@@ -185,10 +185,10 @@ void func_800533A8(UnkAl4* arg0) {
 
 void func_800533D0(void) {
     UnkAl19E0* temp_s2 = D_8009A5C0;
-    UnkAl6CC* temp_s1 = D_8009A640;
+    SoundManager* temp_s1 = D_8009A640;
     UnkAl834* temp_s0 = D_8009A628;
-    UnkAlA9C* temp_s0_2;
-    UnkAlA9C* temp_s0_3;
+    BGMPlayer* temp_s0_2;
+    BGMPlayer* temp_s0_3;
     s32* t1;
 
     func_80053654(temp_s2);
@@ -204,23 +204,23 @@ void func_800533D0(void) {
         func_80053A98(temp_s1->unk_BE, temp_s1->unk_40.unk_00.u16, temp_s1->unk_5C);
     }
 
-    temp_s1->unk_3C -= temp_s1->unk_34;
-    if (temp_s1->unk_3C <= 0) {
-        temp_s1->unk_3C += temp_s1->unk_38;
+    temp_s1->unkCounter -= temp_s1->unkCounterStep;
+    if (temp_s1->unkCounter <= 0) {
+        temp_s1->unkCounter += temp_s1->unkCounterMax;
         temp_s1->unk_BA = func_8004C444(temp_s1);
     }
 
     t1 = &D_80078DB0;
     if (*t1 == 0) {
         temp_s0_2 = D_8009A5FC;
-        if (temp_s0_2->unk_2C.unk_0A != 0) {
+        if (temp_s0_2->fadeInfo.fadeTime != 0) {
             func_8004E3A4(temp_s0_2);
         }
-        if (temp_s0_2->unk_1C != 0) {
+        if (temp_s0_2->songName != 0) {
             temp_s0_2->unk_18++;
         }
 
-        temp_s0_2->unk_10 -= temp_s0_2->unk_08;
+        temp_s0_2->unk_10 -= temp_s0_2->unkFrequency;
         if (temp_s0_2->unk_10 <= 0) {
             temp_s0_2->unk_10 += temp_s0_2->unk_0C;
             temp_s0_2->unk_5C = func_8004E4B8(temp_s0_2);
@@ -230,21 +230,21 @@ void func_800533D0(void) {
                 func_8004DFD4(temp_s2);
             }
             temp_s0_3 = D_8009A664;
-            if (temp_s0_3->unk_2C.unk_1A != 0) {
-                func_80053BA8(&temp_s0_3->unk_2C);
-                if (temp_s0_3->unk_2C.unk_0A == 0) {
+            if (temp_s0_3->unk_46 != 0) {
+                func_80053BA8(&temp_s0_3->fadeInfo);
+                if (temp_s0_3->fadeInfo.fadeTime == 0) {
                     func_8004E444(temp_s0_3);
                 } else {
                     func_8004E3A4(temp_s0_3);
                 }
-            } else if (temp_s0_3->unk_2C.unk_0A != 0) {
+            } else if (temp_s0_3->fadeInfo.fadeTime != 0) {
                 func_8004E3A4(temp_s0_3);
             }
-            if (temp_s0_3->unk_1C != 0) {
+            if (temp_s0_3->songName != 0) {
                 temp_s0_3->unk_18++;
             }
 
-            temp_s0_3->unk_10 -= temp_s0_3->unk_08;
+            temp_s0_3->unk_10 -= temp_s0_3->unkFrequency;
             if (temp_s0_3->unk_10 <= 0) {
                 temp_s0_3->unk_10 += temp_s0_3->unk_0C;
                 temp_s0_3->unk_5C = func_8004E4B8(temp_s0_3);
@@ -256,8 +256,8 @@ void func_800533D0(void) {
 
 void func_800535C0(void) {
     UnkAl19E0* temp_s1 = D_8009A5C0;
-    UnkAlA9C* temp = D_8009A664;
-    UnkAl6CC* temp_s2 = D_8009A640;
+    BGMPlayer* temp = D_8009A664;
+    SoundManager* temp_s2 = D_8009A640;
 
     if (temp_s1->unk_9C != 0) {
         func_8005610C();
@@ -446,7 +446,7 @@ INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053CF8);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053E58);
 
-UnkAlA9C* func_80053F64(s32 arg0) {
+BGMPlayer* func_80053F64(s32 arg0) {
     if (arg0 == 0) {
         return D_8009A5C0->unk_6C[0].unk_0;
     }
@@ -455,7 +455,7 @@ UnkAlA9C* func_80053F64(s32 arg0) {
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053F80);
 
-UnkAlA9C* func_80054248(u8 arg0) {
+BGMPlayer* func_80054248(u8 arg0) {
     switch (arg0) {
         case 1:
             return D_8009A664;

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8004C3D4
+glabel snd_set_player_modifiers
 /* 277D4 8004C3D4 9082009A */  lbu       $v0, 0x9a($a0)
 /* 277D8 8004C3D8 30420004 */  andi      $v0, $v0, 4
 /* 277DC 8004C3DC 10400003 */  beqz      $v0, .L8004C3EC

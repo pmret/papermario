@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8004B62C
+glabel snd_load_sfx_groups_from_SEF
 /* 26A2C 8004B62C 24080008 */  addiu     $t0, $zero, 8
 /* 26A30 8004B630 8C820000 */  lw        $v0, ($a0)
 /* 26A34 8004B634 0000382D */  daddu     $a3, $zero, $zero

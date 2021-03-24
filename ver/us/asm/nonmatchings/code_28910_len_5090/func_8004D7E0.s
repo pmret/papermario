@@ -15,7 +15,7 @@ glabel func_8004D7E0
 /* 28C08 8004D808 8E530010 */  lw        $s3, 0x10($s2)
 /* 28C0C 8004D80C 12800074 */  beqz      $s4, .L8004D9E0
 /* 28C10 8004D810 0000A82D */   daddu    $s5, $zero, $zero
-/* 28C14 8004D814 0C0135E5 */  jal       func_8004D794
+/* 28C14 8004D814 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 28C18 8004D818 0280202D */   daddu    $a0, $s4, $zero
 /* 28C1C 8004D81C 0040802D */  daddu     $s0, $v0, $zero
 /* 28C20 8004D820 52000070 */  beql      $s0, $zero, .L8004D9E4

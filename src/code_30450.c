@@ -22,7 +22,7 @@ void func_80055050(void) {
 
 INCLUDE_ASM(void, "code_30450", func_80055068, u32 arg0);
 
-void func_80055110(UnkAlA9C* arg0) {
+void func_80055110(BGMPlayer* arg0) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
@@ -38,7 +38,7 @@ void func_80055110(UnkAlA9C* arg0) {
 INCLUDE_ASM(s32, "code_30450", func_8005513C);
 
 void func_800551E0(s32 arg0, u8 arg1, s8 arg2) {
-    UnkAl6CC* sym = D_8009A640;
+    SoundManager* sym = D_8009A640;
     s16 a1temp = arg1 * 256;
 
     if (a1temp != 0) {
@@ -49,11 +49,11 @@ void func_800551E0(s32 arg0, u8 arg1, s8 arg2) {
         arg2 = 0x7F;
     }
 
-    func_8004B6D8(sym, arg0, a1temp, 0, arg2);
+    snd_enqueue_sfx_event(sym, arg0, a1temp, 0, arg2);
 }
 
 void func_80055240(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
-    UnkAl6CC* sym = D_8009A640;
+    SoundManager* sym = D_8009A640;
     s16 a1temp = arg1 * 256;
 
     if (a1temp != 0) {
@@ -70,11 +70,11 @@ void func_80055240(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
         arg3 = -0x960;
     }
 
-    func_8004B6D8(sym, arg0, a1temp, arg3, arg2);
+    snd_enqueue_sfx_event(sym, arg0, a1temp, arg3, arg2);
 }
 
 void func_800552D0(s32 arg0, u8 arg1, s8 arg2) {
-    UnkAl6CC* sym = D_8009A640;
+    SoundManager* sym = D_8009A640;
     s16 a1temp = arg1 * 256;
 
     if (a1temp != 0) {
@@ -85,11 +85,11 @@ void func_800552D0(s32 arg0, u8 arg1, s8 arg2) {
         arg2 = 0x7F;
     }
 
-    func_8004B6D8(sym, arg0 | 0x1000, a1temp, 0, arg2);
+    snd_enqueue_sfx_event(sym, arg0 | 0x1000, a1temp, 0, arg2);
 }
 
 void func_80055330(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
-    UnkAl6CC* sym = D_8009A640;
+    SoundManager* sym = D_8009A640;
     s16 a1temp = arg1 * 256;
 
     if (a1temp != 0) {
@@ -106,11 +106,11 @@ void func_80055330(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
         arg3 = -0x960;
     }
 
-    func_8004B6D8(sym, arg0 | 0x1000, a1temp, arg3, arg2);
+    snd_enqueue_sfx_event(sym, arg0 | 0x1000, a1temp, arg3, arg2);
 }
 
 void func_800553C0(s32 arg0) {
-    func_8004B6D8(D_8009A640, arg0 | 0x8000, 0, 0, 0);
+    snd_enqueue_sfx_event(D_8009A640, arg0 | 0x8000, 0, 0, 0);
 }
 
 void func_800553F4(void) {
@@ -118,7 +118,7 @@ void func_800553F4(void) {
 }
 
 void func_80055408(s32 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    func_8004B6D8(D_8009A640, arg0, arg1, arg2, arg3);
+    snd_enqueue_sfx_event(D_8009A640, arg0, arg1, arg2, arg3);
 }
 
 s32 func_80055448(s32 arg0) {

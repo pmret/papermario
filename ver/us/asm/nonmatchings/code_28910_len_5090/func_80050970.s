@@ -18,7 +18,7 @@ glabel func_80050970
 /* 2BDA4 800509A4 0000B82D */  daddu     $s7, $zero, $zero
 /* 2BDA8 800509A8 1040006A */  beqz      $v0, .L80050B54
 /* 2BDAC 800509AC AFA40010 */   sw       $a0, 0x10($sp)
-/* 2BDB0 800509B0 0C0135E5 */  jal       func_8004D794
+/* 2BDB0 800509B0 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 2BDB4 800509B4 0040202D */   daddu    $a0, $v0, $zero
 /* 2BDB8 800509B8 0040882D */  daddu     $s1, $v0, $zero
 /* 2BDBC 800509BC 12200063 */  beqz      $s1, .L80050B4C

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8004C358
+glabel snd_set_modifiers
 /* 27758 8004C358 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 2775C 8004C35C AFB40020 */  sw        $s4, 0x20($sp)
 /* 27760 8004C360 0080A02D */  daddu     $s4, $a0, $zero
@@ -20,7 +20,7 @@ glabel func_8004C358
 /* 27790 8004C390 94820096 */  lhu       $v0, 0x96($a0)
 /* 27794 8004C394 54530004 */  bnel      $v0, $s3, .L8004C3A8
 /* 27798 8004C398 26310001 */   addiu    $s1, $s1, 1
-/* 2779C 8004C39C 0C0130F5 */  jal       func_8004C3D4
+/* 2779C 8004C39C 0C0130F5 */  jal       snd_set_player_modifiers
 /* 277A0 8004C3A0 0240282D */   daddu    $a1, $s2, $zero
 /* 277A4 8004C3A4 26310001 */  addiu     $s1, $s1, 1
 .L8004C3A8:
