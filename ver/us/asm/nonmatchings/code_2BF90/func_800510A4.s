@@ -20,7 +20,7 @@ glabel func_800510A4
 /* 2C4E0 800510E0 0240202D */  daddu     $a0, $s2, $zero
 /* 2C4E4 800510E4 240501E4 */  addiu     $a1, $zero, 0x1e4
 /* 2C4E8 800510E8 AFBF0020 */  sw        $ra, 0x20($sp)
-/* 2C4EC 800510EC 0C0153A4 */  jal       func_80054E90
+/* 2C4EC 800510EC 0C0153A4 */  jal       snd_memset
 /* 2C4F0 800510F0 0000302D */   daddu    $a2, $zero, $zero
 /* 2C4F4 800510F4 AE500000 */  sw        $s0, ($s2)
 /* 2C4F8 800510F8 96030010 */  lhu       $v1, 0x10($s0)

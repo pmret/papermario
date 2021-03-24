@@ -85,7 +85,7 @@ void snd_load_audio_data(s32 frequency) {
         temp5->unk_45 = 0;
     }
 
-    al_LoadINIT(temp4, 0xF00000, alHeap);
+    snd_load_INIT(temp4, 0xF00000, alHeap);
 
     for (i = 0; i < 3; i++) {
         temp4->unk_1310[i] = alHeapAlloc(alHeap, 1, 0x840);
@@ -110,16 +110,16 @@ void snd_load_audio_data(s32 frequency) {
     func_8004B440(*temp2_1, 4, 1, temp4, 0x10);
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
-    al_LoadBKHeaders(temp4, alHeap);
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_0, 0x20, subroutine_arg7) == 0) {
-        al_DmaCopy(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
+    snd_load_BK_headers(temp4, alHeap);
+    if (snd_fetch_SBN_file(temp4->unk_3C->unk_0, 0x20, subroutine_arg7) == 0) {
+        snd_read_rom(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
     }
     snd_load_sfx_groups_from_SEF((*temp2_1));
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
-        al_LoadPER(temp4, subroutine_arg7[0]);
+    if (snd_fetch_SBN_file(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
+        snd_load_PER(temp4, subroutine_arg7[0]);
     }
-    if (al_CopyFileTableEntry(temp4->unk_3C->unk_4, 0x40, subroutine_arg7) == 0) {
-        al_LoadPRG(temp4, subroutine_arg7[0]);
+    if (snd_fetch_SBN_file(temp4->unk_3C->unk_4, 0x40, subroutine_arg7) == 0) {
+        snd_load_PRG(temp4, subroutine_arg7[0]);
     }
 
     temp4->unk_12EC = &temp4->unk_4EC;
@@ -438,11 +438,11 @@ void func_80053BA8(UnkAl1* arg0) {
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053BE8, UnkAl19E0* arg0, s32 arg1, s32 arg2, s32* arg3);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053C58);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_get_sequence_player_and_track);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053CB4);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_get_sequence_player);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053CF8);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_song_files);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80053E58);
 
@@ -468,26 +468,26 @@ BGMPlayer* func_80054248(u8 arg0) {
     }
 }
 
-INCLUDE_ASM(void, "code_2e230_len_2190", al_LoadINIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_load_INIT, UnkAl19E0* arg0, s32 arg1, ALHeap* arg2);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", al_CopyFileTableEntry, u16 arg0, s32 arg1, s32* arg2);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_fetch_SBN_file, u16 arg0, s32 arg1, s32* arg2);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", al_LoadPER, UnkAl19E0* arg0, s32* arg1);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_load_PER, UnkAl19E0* arg0, s32* arg1);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", al_LoadPRG, UnkAl19E0* arg0, s32* arg1);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_load_PRG, UnkAl19E0* arg0, s32* arg1);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_8005465C);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_BGM);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054744);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_get_BK_instruments);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", al_LoadBank);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_BK_to_bank);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_800549F8);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_swizzle_BK_instruments);
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054AA0);
 
-s32 func_80054C4C(s32 arg0, s32 arg1) {
-    al_LoadBank(arg0, D_8009A5C0->unk_1310[arg1], arg1, 1);
+s32 snd_load_BK(s32 arg0, s32 arg1) {
+    snd_load_BK_to_bank(arg0, D_8009A5C0->unk_1310[arg1], arg1, 1);
     return 0;
 }
 
@@ -504,13 +504,13 @@ s32 func_80054D74(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054DA8);
 
-INCLUDE_ASM(void, "code_2e230_len_2190", al_DmaCopy, s32 arg0, s32* arg1, s32 arg2);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_read_rom, s32 arg0, s32* arg1, s32 arg2);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054E90);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_memset);
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", func_80054F48);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_bcopy);
 
-void al_CopyWords(s32* src, s32* dst, s32 num) {
+void snd_copy_words(s32* src, s32* dst, s32 num) {
     num /= 4;
 
     if (num > 0) {

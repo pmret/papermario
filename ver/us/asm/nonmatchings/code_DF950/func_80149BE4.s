@@ -29,7 +29,7 @@ glabel func_80149BE4
 /* E0340 80149C40 00123C00 */  sll       $a3, $s2, 0x10
 /* E0344 80149C44 30A500FF */  andi      $a1, $a1, 0xff
 /* E0348 80149C48 30C600FF */  andi      $a2, $a2, 0xff
-/* E034C 80149C4C 0C0154CC */  jal       func_80055330
+/* E034C 80149C4C 0C0154CC */  jal       snd_adjust_sound_with_shift
 /* E0350 80149C50 00073C03 */   sra      $a3, $a3, 0x10
 .L80149C54:
 /* E0354 80149C54 8FBF001C */  lw        $ra, 0x1c($sp)

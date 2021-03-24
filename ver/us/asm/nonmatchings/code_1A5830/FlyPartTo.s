@@ -211,7 +211,7 @@ glabel FlyPartTo
 /* 1AAB0C 8027C22C 8E4200B0 */  lw        $v0, 0xb0($s2)
 /* 1AAB10 8027C230 144000A2 */  bnez      $v0, .L8027C4BC
 /* 1AAB14 8027C234 24020002 */   addiu    $v0, $zero, 2
-/* 1AAB18 8027C238 0C0154F0 */  jal       func_800553C0
+/* 1AAB18 8027C238 0C0154F0 */  jal       snd_stop_sound
 /* 1AAB1C 8027C23C 00000000 */   nop
 /* 1AAB20 8027C240 0809F12F */  j         .L8027C4BC
 /* 1AAB24 8027C244 24020002 */   addiu    $v0, $zero, 2

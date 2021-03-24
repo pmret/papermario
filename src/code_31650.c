@@ -222,7 +222,7 @@ void* alHeapAlloc(ALHeap* heap, s32 arg1, s32 size) {
     return ret;
 }
 
-void func_80057FD8(u8* src, u8* dst, s32 size) {
+void alCopy(void* src, void* dst, s32 size) {
     s32 i;
     u8* srcIt = src;
     u8* dstIt = dst;

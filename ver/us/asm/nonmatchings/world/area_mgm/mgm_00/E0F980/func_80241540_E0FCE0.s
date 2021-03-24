@@ -26,7 +26,7 @@ glabel L80241588_E0FD28
 /* E0FD30 80241590 00A0302D */  daddu     $a2, $a1, $zero
 /* E0FD34 80241594 24020001 */  addiu     $v0, $zero, 1
 /* E0FD38 80241598 AE000004 */  sw        $zero, 4($s0)
-/* E0FD3C 8024159C 0C015478 */  jal       func_800551E0
+/* E0FD3C 8024159C 0C015478 */  jal       snd_start_sound
 /* E0FD40 802415A0 AE020000 */   sw       $v0, ($s0)
 glabel L802415A4_E0FD44
 /* E0FD44 802415A4 3C054200 */  lui       $a1, 0x4200
@@ -75,7 +75,7 @@ glabel L8024163C_E0FDDC
 /* E0FDE4 80241644 00A0302D */  daddu     $a2, $a1, $zero
 /* E0FDE8 80241648 24020004 */  addiu     $v0, $zero, 4
 /* E0FDEC 8024164C AE000004 */  sw        $zero, 4($s0)
-/* E0FDF0 80241650 0C015478 */  jal       func_800551E0
+/* E0FDF0 80241650 0C015478 */  jal       snd_start_sound
 /* E0FDF4 80241654 AE020000 */   sw       $v0, ($s0)
 glabel L80241658_E0FDF8
 /* E0FDF8 80241658 0000202D */  daddu     $a0, $zero, $zero

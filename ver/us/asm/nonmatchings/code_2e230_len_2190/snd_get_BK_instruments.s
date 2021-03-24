@@ -8,7 +8,7 @@ glabel jtbl_800988F0
 
 .section .text
 
-glabel func_80054744
+glabel snd_get_BK_instruments
 /* 2FB44 80054744 0000182D */  daddu     $v1, $zero, $zero
 /* 2FB48 80054748 3C06800A */  lui       $a2, %hi(D_8009A5C0)
 /* 2FB4C 8005474C 8CC6A5C0 */  lw        $a2, %lo(D_8009A5C0)($a2)

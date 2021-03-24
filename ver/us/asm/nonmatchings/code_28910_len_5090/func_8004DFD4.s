@@ -13,7 +13,7 @@ glabel func_8004DFD4
 /* 293F4 8004DFF4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 293F8 8004DFF8 8E710074 */  lw        $s1, 0x74($s3)
 /* 293FC 8004DFFC 8E640078 */  lw        $a0, 0x78($s3)
-/* 29400 8004E000 0C0153DD */  jal       al_CopyWords
+/* 29400 8004E000 0C0153DD */  jal       snd_copy_words
 /* 29404 8004E004 0220282D */   daddu    $a1, $s1, $zero
 /* 29408 8004E008 8E63007C */  lw        $v1, 0x7c($s3)
 /* 2940C 8004E00C 8E22001C */  lw        $v0, 0x1c($s1)

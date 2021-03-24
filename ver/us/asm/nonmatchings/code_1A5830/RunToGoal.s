@@ -260,7 +260,7 @@ glabel RunToGoal
 /* 1A8B04 8027A224 8E0201A0 */  lw        $v0, 0x1a0($s0)
 /* 1A8B08 8027A228 14400004 */  bnez      $v0, .L8027A23C
 /* 1A8B0C 8027A22C 24020001 */   addiu    $v0, $zero, 1
-/* 1A8B10 8027A230 0C0154F0 */  jal       func_800553C0
+/* 1A8B10 8027A230 0C0154F0 */  jal       snd_stop_sound
 /* 1A8B14 8027A234 00000000 */   nop
 .L8027A238:
 /* 1A8B18 8027A238 24020001 */  addiu     $v0, $zero, 1

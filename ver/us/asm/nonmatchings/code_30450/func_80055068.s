@@ -26,13 +26,13 @@ glabel func_80055068
 /* 304B8 800550B8 00502006 */   srlv     $a0, $s0, $v0
 /* 304BC 800550BC 0000282D */  daddu     $a1, $zero, $zero
 /* 304C0 800550C0 00A0302D */  daddu     $a2, $a1, $zero
-/* 304C4 800550C4 0C015490 */  jal       func_80055240
+/* 304C4 800550C4 0C015490 */  jal       snd_start_sound_with_shift
 /* 304C8 800550C8 00A0382D */   daddu    $a3, $a1, $zero
 /* 304CC 800550CC 08015440 */  j         .L80055100
 /* 304D0 800550D0 00000000 */   nop
 .L800550D4:
 /* 304D4 800550D4 308400FF */  andi      $a0, $a0, 0xff
-/* 304D8 800550D8 0C015635 */  jal       func_800558D4
+/* 304D8 800550D8 0C015635 */  jal       snd_load_song
 /* 304DC 800550DC 0000282D */   daddu    $a1, $zero, $zero
 /* 304E0 800550E0 3C033020 */  lui       $v1, 0x3020
 /* 304E4 800550E4 34632000 */  ori       $v1, $v1, 0x2000

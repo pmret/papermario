@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_LoadBank
+glabel snd_load_BK_to_bank
 /* 2FBC8 800547C8 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 2FBCC 800547CC AFB5006C */  sw        $s5, 0x6c($sp)
 /* 2FBD0 800547D0 0080A82D */  daddu     $s5, $a0, $zero
@@ -24,7 +24,7 @@ glabel al_LoadBank
 /* 2FC14 80054814 AFB60070 */  sw        $s6, 0x70($sp)
 /* 2FC18 80054818 AFB00058 */  sw        $s0, 0x58($sp)
 /* 2FC1C 8005481C 8C560018 */  lw        $s6, 0x18($v0)
-/* 2FC20 80054820 0C015380 */  jal       al_DmaCopy
+/* 2FC20 80054820 0C015380 */  jal       snd_read_rom
 /* 2FC24 80054824 24120001 */   addiu    $s2, $zero, 1
 /* 2FC28 80054828 3263FFFF */  andi      $v1, $s3, 0xffff
 .L8005482C:
@@ -97,10 +97,10 @@ glabel al_LoadBank
 .L80054920:
 /* 2FD20 80054920 02A0202D */  daddu     $a0, $s5, $zero
 /* 2FD24 80054924 0280282D */  daddu     $a1, $s4, $zero
-/* 2FD28 80054928 0C015380 */  jal       al_DmaCopy
+/* 2FD28 80054928 0C015380 */  jal       snd_read_rom
 /* 2FD2C 8005492C 0200302D */   daddu    $a2, $s0, $zero
 /* 2FD30 80054930 03C0202D */  daddu     $a0, $fp, $zero
-/* 2FD34 80054934 0C0151D1 */  jal       func_80054744
+/* 2FD34 80054934 0C0151D1 */  jal       snd_get_BK_instruments
 /* 2FD38 80054938 02E0282D */   daddu    $a1, $s7, $zero
 /* 2FD3C 8005493C 0040802D */  daddu     $s0, $v0, $zero
 /* 2FD40 80054940 0200182D */  daddu     $v1, $s0, $zero
@@ -132,7 +132,7 @@ glabel al_LoadBank
 /* 2FD98 80054998 02A0202D */  daddu     $a0, $s5, $zero
 /* 2FD9C 8005499C 0280282D */  daddu     $a1, $s4, $zero
 /* 2FDA0 800549A0 0200302D */  daddu     $a2, $s0, $zero
-/* 2FDA4 800549A4 0C01527E */  jal       func_800549F8
+/* 2FDA4 800549A4 0C01527E */  jal       snd_swizzle_BK_instruments
 /* 2FDA8 800549A8 24070010 */   addiu    $a3, $zero, 0x10
 /* 2FDAC 800549AC 0801526E */  j         .L800549B8
 /* 2FDB0 800549B0 0000982D */   daddu    $s3, $zero, $zero

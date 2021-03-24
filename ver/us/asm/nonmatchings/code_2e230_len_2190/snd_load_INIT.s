@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_LoadINIT
+glabel snd_load_INIT
 /* 2F6BC 800542BC 27BDFF70 */  addiu     $sp, $sp, -0x90
 /* 2F6C0 800542C0 AFB3007C */  sw        $s3, 0x7c($sp)
 /* 2F6C4 800542C4 0080982D */  daddu     $s3, $a0, $zero
@@ -16,7 +16,7 @@ glabel al_LoadINIT
 /* 2F6E8 800542E8 2675001C */  addiu     $s5, $s3, 0x1c
 /* 2F6EC 800542EC AFBF0088 */  sw        $ra, 0x88($sp)
 /* 2F6F0 800542F0 AFB20078 */  sw        $s2, 0x78($sp)
-/* 2F6F4 800542F4 0C015380 */  jal       al_DmaCopy
+/* 2F6F4 800542F4 0C015380 */  jal       snd_read_rom
 /* 2F6F8 800542F8 AFB00070 */   sw       $s0, 0x70($sp)
 /* 2F6FC 800542FC 0280202D */  daddu     $a0, $s4, $zero
 /* 2F700 80054300 8FB00024 */  lw        $s0, 0x24($sp)
@@ -32,7 +32,7 @@ glabel al_LoadINIT
 /* 2F728 80054328 AE650020 */  sw        $a1, 0x20($s3)
 /* 2F72C 8005432C 8FA40020 */  lw        $a0, 0x20($sp)
 /* 2F730 80054330 0200302D */  daddu     $a2, $s0, $zero
-/* 2F734 80054334 0C015380 */  jal       al_DmaCopy
+/* 2F734 80054334 0C015380 */  jal       snd_read_rom
 /* 2F738 80054338 00442021 */   addu     $a0, $v0, $a0
 /* 2F73C 8005433C 8FA20024 */  lw        $v0, 0x24($sp)
 /* 2F740 80054340 8E650020 */  lw        $a1, 0x20($s3)
@@ -66,7 +66,7 @@ glabel al_LoadINIT
 /* 2F7A8 800543A8 8EB10000 */  lw        $s1, ($s5)
 /* 2F7AC 800543AC 24060020 */  addiu     $a2, $zero, 0x20
 /* 2F7B0 800543B0 02228821 */  addu      $s1, $s1, $v0
-/* 2F7B4 800543B4 0C015380 */  jal       al_DmaCopy
+/* 2F7B4 800543B4 0C015380 */  jal       snd_read_rom
 /* 2F7B8 800543B8 0220202D */   daddu    $a0, $s1, $zero
 /* 2F7BC 800543BC 0280202D */  daddu     $a0, $s4, $zero
 /* 2F7C0 800543C0 24050001 */  addiu     $a1, $zero, 1
@@ -80,7 +80,7 @@ glabel al_LoadINIT
 /* 2F7E0 800543E0 0200202D */  daddu     $a0, $s0, $zero
 /* 2F7E4 800543E4 0040282D */  daddu     $a1, $v0, $zero
 /* 2F7E8 800543E8 0240302D */  daddu     $a2, $s2, $zero
-/* 2F7EC 800543EC 0C015380 */  jal       al_DmaCopy
+/* 2F7EC 800543EC 0C015380 */  jal       snd_read_rom
 /* 2F7F0 800543F0 AE65002C */   sw       $a1, 0x2c($s3)
 /* 2F7F4 800543F4 0280202D */  daddu     $a0, $s4, $zero
 /* 2F7F8 800543F8 24050001 */  addiu     $a1, $zero, 1
@@ -94,7 +94,7 @@ glabel al_LoadINIT
 /* 2F818 80054418 0200202D */  daddu     $a0, $s0, $zero
 /* 2F81C 8005441C 0040282D */  daddu     $a1, $v0, $zero
 /* 2F820 80054420 0240302D */  daddu     $a2, $s2, $zero
-/* 2F824 80054424 0C015380 */  jal       al_DmaCopy
+/* 2F824 80054424 0C015380 */  jal       snd_read_rom
 /* 2F828 80054428 AE65003C */   sw       $a1, 0x3c($s3)
 /* 2F82C 8005442C 97A20058 */  lhu       $v0, 0x58($sp)
 /* 2F830 80054430 02228821 */  addu      $s1, $s1, $v0

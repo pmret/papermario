@@ -69,7 +69,7 @@ glabel func_8004DCB8
 /* 291A8 8004DDA8 00451021 */  addu      $v0, $v0, $a1
 /* 291AC 8004DDAC 0100282D */  daddu     $a1, $t0, $zero
 /* 291B0 8004DDB0 A0430070 */  sb        $v1, 0x70($v0)
-/* 291B4 8004DDB4 0C0153DD */  jal       al_CopyWords
+/* 291B4 8004DDB4 0C0153DD */  jal       snd_copy_words
 /* 291B8 8004DDB8 AE000020 */   sw       $zero, 0x20($s0)
 /* 291BC 8004DDBC 16A00012 */  bnez      $s5, .L8004DE08
 /* 291C0 8004DDC0 0260102D */   daddu    $v0, $s3, $zero

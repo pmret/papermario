@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80053CF8
+glabel snd_load_song_files
 /* 2F0F8 80053CF8 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 2F0FC 80053CFC AFB20028 */  sw        $s2, 0x28($sp)
 /* 2F100 80053D00 3C12800A */  lui       $s2, %hi(D_8009A5C0)
@@ -27,7 +27,7 @@ glabel func_80053CF8
 /* 2F150 80053D50 001610C0 */  sll       $v0, $s6, 3
 /* 2F154 80053D54 0062A021 */  addu      $s4, $v1, $v0
 /* 2F158 80053D58 96840000 */  lhu       $a0, ($s4)
-/* 2F15C 80053D5C 0C01511F */  jal       al_CopyFileTableEntry
+/* 2F15C 80053D5C 0C01511F */  jal       snd_fetch_SBN_file
 /* 2F160 80053D60 03A53021 */   addu     $a2, $sp, $a1
 /* 2F164 80053D64 14400030 */  bnez      $v0, .L80053E28
 /* 2F168 80053D68 00000000 */   nop
@@ -45,7 +45,7 @@ glabel func_80053CF8
 /* 2F198 80053D98 0280882D */  daddu     $s1, $s4, $zero
 /* 2F19C 80053D9C 8FA60014 */  lw        $a2, 0x14($sp)
 /* 2F1A0 80053DA0 8FA40010 */  lw        $a0, 0x10($sp)
-/* 2F1A4 80053DA4 0C015380 */  jal       al_DmaCopy
+/* 2F1A4 80053DA4 0C015380 */  jal       snd_read_rom
 /* 2F1A8 80053DA8 00C23024 */   and      $a2, $a2, $v0
 .L80053DAC:
 /* 2F1AC 80053DAC 96220002 */  lhu       $v0, 2($s1)
@@ -65,7 +65,7 @@ glabel func_80053CF8
 /* 2F1E4 80053DE4 545E0005 */  bnel      $v0, $fp, .L80053DFC
 /* 2F1E8 80053DE8 26100001 */   addiu    $s0, $s0, 1
 /* 2F1EC 80053DEC 0060202D */  daddu     $a0, $v1, $zero
-/* 2F1F0 80053DF0 0C015313 */  jal       func_80054C4C
+/* 2F1F0 80053DF0 0C015313 */  jal       snd_load_BK
 /* 2F1F4 80053DF4 0200282D */   daddu    $a1, $s0, $zero
 /* 2F1F8 80053DF8 26100001 */  addiu     $s0, $s0, 1
 .L80053DFC:

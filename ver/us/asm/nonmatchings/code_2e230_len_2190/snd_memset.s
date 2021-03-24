@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80054E90
+glabel snd_memset
 /* 30290 80054E90 10A0000A */  beqz      $a1, .L80054EBC
 /* 30294 80054E94 28A20400 */   slti     $v0, $a1, 0x400
 /* 30298 80054E98 1040000A */  beqz      $v0, .L80054EC4

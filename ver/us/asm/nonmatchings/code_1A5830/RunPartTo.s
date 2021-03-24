@@ -268,7 +268,7 @@ glabel RunPartTo
 /* 1A9974 8027B094 8E4200A8 */  lw        $v0, 0xa8($s2)
 /* 1A9978 8027B098 14400004 */  bnez      $v0, .L8027B0AC
 /* 1A997C 8027B09C 24020001 */   addiu    $v0, $zero, 1
-/* 1A9980 8027B0A0 0C0154F0 */  jal       func_800553C0
+/* 1A9980 8027B0A0 0C0154F0 */  jal       snd_stop_sound
 /* 1A9984 8027B0A4 00000000 */   nop
 .L8027B0A8:
 /* 1A9988 8027B0A8 24020001 */  addiu     $v0, $zero, 1

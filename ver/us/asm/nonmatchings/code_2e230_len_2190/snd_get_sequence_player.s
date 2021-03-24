@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80053CB4
+glabel snd_get_sequence_player
 /* 2F0B4 80053CB4 24020001 */  addiu     $v0, $zero, 1
 /* 2F0B8 80053CB8 10820009 */  beq       $a0, $v0, .L80053CE0
 /* 2F0BC 80053CBC 00000000 */   nop

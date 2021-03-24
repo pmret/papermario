@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_LoadBKHeaders
+glabel snd_load_BK_headers
 /* 303C0 80054FC0 27BDFE98 */  addiu     $sp, $sp, -0x168
 /* 303C4 80054FC4 0080102D */  daddu     $v0, $a0, $zero
 /* 303C8 80054FC8 27A50018 */  addiu     $a1, $sp, 0x18
@@ -13,7 +13,7 @@ glabel al_LoadBKHeaders
 /* 303E0 80054FE0 AFB00158 */  sw        $s0, 0x158($sp)
 /* 303E4 80054FE4 8C440034 */  lw        $a0, 0x34($v0)
 /* 303E8 80054FE8 8C460038 */  lw        $a2, 0x38($v0)
-/* 303EC 80054FEC 0C015380 */  jal       al_DmaCopy
+/* 303EC 80054FEC 0C015380 */  jal       snd_read_rom
 /* 303F0 80054FF0 00A0802D */   daddu    $s0, $a1, $zero
 .L80054FF4:
 /* 303F4 80054FF4 96020000 */  lhu       $v0, ($s0)
@@ -21,13 +21,13 @@ glabel al_LoadBKHeaders
 /* 303FC 80054FFC 24050030 */   addiu    $a1, $zero, 0x30
 /* 30400 80055000 27A60010 */  addiu     $a2, $sp, 0x10
 /* 30404 80055004 0040202D */  daddu     $a0, $v0, $zero
-/* 30408 80055008 0C01511F */  jal       al_CopyFileTableEntry
+/* 30408 80055008 0C01511F */  jal       snd_fetch_SBN_file
 /* 3040C 8005500C 26310001 */   addiu    $s1, $s1, 1
 /* 30410 80055010 0000282D */  daddu     $a1, $zero, $zero
 /* 30414 80055014 8FA40010 */  lw        $a0, 0x10($sp)
 /* 30418 80055018 92060002 */  lbu       $a2, 2($s0)
 /* 3041C 8005501C 92070003 */  lbu       $a3, 3($s0)
-/* 30420 80055020 0C0151F2 */  jal       al_LoadBank
+/* 30420 80055020 0C0151F2 */  jal       snd_load_BK_to_bank
 /* 30424 80055024 26100004 */   addiu    $s0, $s0, 4
 /* 30428 80055028 2A220050 */  slti      $v0, $s1, 0x50
 /* 3042C 8005502C 1440FFF1 */  bnez      $v0, .L80054FF4

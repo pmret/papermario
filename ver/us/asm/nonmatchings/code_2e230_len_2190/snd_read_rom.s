@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_DmaCopy
+glabel snd_read_rom
 /* 30200 80054E00 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 30204 80054E04 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 30208 80054E08 0080982D */  daddu     $s3, $a0, $zero

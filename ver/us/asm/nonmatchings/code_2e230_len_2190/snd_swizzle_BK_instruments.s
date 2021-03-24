@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_800549F8
+glabel snd_swizzle_BK_instruments
 /* 2FDF8 800549F8 00A0582D */  daddu     $t3, $a1, $zero
 /* 2FDFC 800549FC 3C03800A */  lui       $v1, %hi(D_8009A5C0)
 /* 2FE00 80054A00 8C63A5C0 */  lw        $v1, %lo(D_8009A5C0)($v1)

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_CopyFileTableEntry
+glabel snd_fetch_SBN_file
 /* 2F87C 8005447C 27BDFFF8 */  addiu     $sp, $sp, -8
 /* 2F880 80054480 3C07800A */  lui       $a3, %hi(D_8009A5C0)
 /* 2F884 80054484 8CE7A5C0 */  lw        $a3, %lo(D_8009A5C0)($a3)

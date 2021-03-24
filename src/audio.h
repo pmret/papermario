@@ -538,7 +538,7 @@ extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-void al_LoadBKHeaders(UnkAl19E0* arg0, ALHeap* arg1);
+void snd_load_BK_headers(UnkAl19E0* arg0, ALHeap* arg1);
 
 void func_8004B440(SoundManager*, u8, u8, UnkAl19E0*, u8);
 void snd_load_sfx_groups_from_SEF(SoundManager*);
@@ -654,11 +654,11 @@ void func_80057E5C(u8);
 void func_80057EB0(void);
 void func_80057ED0(s16);
 
-void al_LoadINIT(UnkAl19E0*, s32, ALHeap*);
-s32 al_CopyFileTableEntry(u16, s32, s32*);
-void al_LoadPER(UnkAl19E0*, s32*);
-void al_LoadPRG(UnkAl19E0*, s32*);
-void al_DmaCopy(s32, s32*, s32);
+void snd_load_INIT(UnkAl19E0*, s32, ALHeap*);
+s32 snd_fetch_SBN_file(u16, s32, s32*);
+void snd_load_PER(UnkAl19E0*, s32*);
+void snd_load_PRG(UnkAl19E0*, s32*);
+void snd_read_rom(s32, s32*, s32);
 
 #undef alHeapAlloc
 void* alHeapAlloc(ALHeap *heap, s32 arg1, s32 size);

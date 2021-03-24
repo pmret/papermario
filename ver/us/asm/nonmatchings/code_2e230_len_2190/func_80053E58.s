@@ -18,7 +18,7 @@ glabel func_80053E58
 /* 2F28C 80053E8C 000420C0 */  sll       $a0, $a0, 3
 /* 2F290 80053E90 00448821 */  addu      $s1, $v0, $a0
 /* 2F294 80053E94 96240000 */  lhu       $a0, ($s1)
-/* 2F298 80053E98 0C01511F */  jal       al_CopyFileTableEntry
+/* 2F298 80053E98 0C01511F */  jal       snd_fetch_SBN_file
 /* 2F29C 80053E9C 27A60018 */   addiu    $a2, $sp, 0x18
 /* 2F2A0 80053EA0 0040982D */  daddu     $s3, $v0, $zero
 /* 2F2A4 80053EA4 16600026 */  bnez      $s3, .L80053F40
@@ -32,7 +32,7 @@ glabel func_80053E58
 /* 2F2C4 80053EC4 24150030 */  addiu     $s5, $zero, 0x30
 /* 2F2C8 80053EC8 8FA6001C */  lw        $a2, 0x1c($sp)
 /* 2F2CC 80053ECC 8FA40018 */  lw        $a0, 0x18($sp)
-/* 2F2D0 80053ED0 0C015380 */  jal       al_DmaCopy
+/* 2F2D0 80053ED0 0C015380 */  jal       snd_read_rom
 /* 2F2D4 80053ED4 00C23024 */   and      $a2, $a2, $v0
 .L80053ED8:
 /* 2F2D8 80053ED8 96220002 */  lhu       $v0, 2($s1)
@@ -52,7 +52,7 @@ glabel func_80053E58
 /* 2F310 80053F10 54550006 */  bnel      $v0, $s5, .L80053F2C
 /* 2F314 80053F14 24130066 */   addiu    $s3, $zero, 0x66
 /* 2F318 80053F18 0060202D */  daddu     $a0, $v1, $zero
-/* 2F31C 80053F1C 0C015313 */  jal       func_80054C4C
+/* 2F31C 80053F1C 0C015313 */  jal       snd_load_BK
 /* 2F320 80053F20 0200282D */   daddu    $a1, $s0, $zero
 /* 2F324 80053F24 08014FCC */  j         .L80053F30
 /* 2F328 80053F28 26310002 */   addiu    $s1, $s1, 2
