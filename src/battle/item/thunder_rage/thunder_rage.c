@@ -9,7 +9,7 @@ Script N(main) = SCRIPT({
         MoveBattleCamOver(20);
     }
     N(FadeBackgroundToBlack)();
-    PlaySound(869);
+    PlaySound(SoundId_365);
     sleep 10;
     InitTargetIterator();
 0:

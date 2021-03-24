@@ -4,7 +4,7 @@ Script N(main) = SCRIPT({
     SI_VAR(10) = c ItemId_FIRE_FLOWER;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
-    PlaySound(887);
+    PlaySound(SoundId_377);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_PLANT);
     spawn {
         sleep 50;
@@ -32,9 +32,9 @@ Script N(main) = SCRIPT({
         sleep 25;
         loop 12 {
             sleep 1;
-            PlaySound(8236);
+            PlaySound(SoundId_202C);
             sleep 2;
-            PlaySound(8237);
+            PlaySound(SoundId_202D);
             sleep 1;
         }
     }

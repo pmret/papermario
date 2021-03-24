@@ -66,7 +66,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         UseCamPreset(69); // Nice
         sleep 10;
 
-        PlaySoundAtActor(ActorID_PLAYER, 8333);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         GetActorPos(ActorID_PLAYER, $x, $y, $z);
         $x += 18;
@@ -78,7 +78,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         $effectY = $y;
         $effectY += 10;
         $effectY += 2;
-        PlayEffect(51, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
         SI_VAR(10) = $x;
 
@@ -93,7 +93,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         // No refund.
 
         GetActorPos(ActorID_PLAYER, $x, $y, $z);
-        PlaySoundAtActor(ActorID_PLAYER, 8333);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
 
@@ -101,7 +101,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         $effectY = $y;
         $effectY += 10;
         $effectY += 2;
-        PlayEffect(51, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
         MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
         SI_VAR(10) = $x;
 
@@ -147,7 +147,7 @@ Script N(PlayerGoHome) = SCRIPT({
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 0x2095);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
             sleep 10;
         }
     }
@@ -158,7 +158,7 @@ Script N(EatItem) = SCRIPT({
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(0, 0x2095);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
             sleep 10;
         }
     }

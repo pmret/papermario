@@ -9,8 +9,8 @@ Script N(main) = SCRIPT({
         MoveBattleCamOver(20);
     }
     N(FadeBackgroundToBlack)();
-    PlayEffect(98, 0, 0, 0, 0, 1.0, 200, 0, 0, 0, 0, 0, 0, 0);
-    PlaySoundAtActor(ActorID_PLAYER, 582);
+    PlayEffect(0x62, 0, 0, 0, 0, 1.0, 200, 0, 0, 0, 0, 0, 0, 0);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_246);
     sleep 200;
     UseCamPreset(3);
     MoveBattleCamOver(20);

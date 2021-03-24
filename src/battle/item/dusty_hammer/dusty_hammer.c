@@ -35,12 +35,12 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_DUSTY_HAMMER;
+    SI_VAR(10) =c 0x86;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(1018);
+    PlaySound(SoundId_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;

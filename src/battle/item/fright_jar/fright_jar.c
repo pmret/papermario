@@ -10,18 +10,18 @@ Script N(main) = SCRIPT({
         MoveBattleCamOver(50);
     }
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_CROUCH);
-    PlaySoundAtActor(ActorID_PLAYER, 871);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_367);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 0xFFFFFFD8;
     SI_VAR(1) += 5;
     SI_VAR(3) = 0.7001953125;
     loop 5 {
-        PlayEffect(97, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3), 25, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x61, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3), 25, 0, 0, 0, 0, 0, 0, 0);
         SI_VAR(0) += 5;
         SI_VAR(3) += 0.150390625;
         sleep 7;
     }
-    PlayEffect(97, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.5, 60, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x61, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.5, 60, 0, 0, 0, 0, 0, 0, 0);
     sleep 20;
     loop 4 {
         AddBattleCamZoom(0xFFFFFF9C);

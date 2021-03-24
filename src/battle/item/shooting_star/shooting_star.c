@@ -12,11 +12,11 @@ Script N(main) = SCRIPT({
     spawn {
         SI_VAR(0) = 0;
         loop 10 {
-            PlaySoundAtActor(ActorID_PLAYER, 601);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_259);
             N(func_802A123C_71D9AC)();
             SI_VAR(0) += 1;
             sleep 5;
-            PlaySoundAtActor(ActorID_PLAYER, 602);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_25A);
             N(func_802A123C_71D9AC)();
             SI_VAR(0) += 1;
             sleep 5;
@@ -26,10 +26,10 @@ Script N(main) = SCRIPT({
         SI_VAR(0) = 0;
         sleep 50;
         loop 10 {
-            PlaySoundAtActor(ActorID_PLAYER, 604);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_25C);
             SI_VAR(0) += 1;
             sleep 5;
-            PlaySoundAtActor(ActorID_PLAYER, 605);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_25D);
             SI_VAR(0) += 1;
             sleep 5;
         }
