@@ -51,8 +51,7 @@ ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
 
     if ((target->flags & 0x4000) || (target->flags & flag1) || (target->flags & 0x2000) ||
-        (part->eventFlags & 0x40000) || (part->eventFlags & flag2))
-    {
+        (part->eventFlags & 0x40000) || (part->eventFlags & flag2)) {
         return ApiStatus_DONE2;
     }
 

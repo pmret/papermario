@@ -72,7 +72,7 @@ void func_80035660(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     D_800A0930 = 0;
-    
+
     if (func_80244BC4() == 0) {
         set_map_transition_effect(7);
     } else {

@@ -2,8 +2,23 @@
 #include "ld_addrs.h"
 #include "map.h"
 
+#define ASSET_TABLE_ROM_START 0x1E40000
+#define ASSET_TABLE_HEADER_SIZE 0x20
+#define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
+
+typedef struct {
+    /* 0x00 */ char name[16];
+    /* 0x10 */ u32 offset;
+    /* 0x14 */ u32 compressedLength;
+    /* 0x18 */ u32 decompressedLength;
+} AssetHeader; // size = 0x1C
+
+// bss
+extern MapConfig D_800A41E8; // gMapHeader?
+extern s32 D_800A41E0; // gMapConfig?
+
 void load_world_script_api(void) {
-    dma_copy(&world_script_api_ROM_START, &world_script_api_ROM_END, &world_script_api_VRAM);
+    dma_copy((s32)&world_script_api_ROM_START, (s32)&world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
 // TODO
@@ -24,15 +39,54 @@ static const s32 rodata_73DA0[] = {
 
 INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 
-INCLUDE_ASM(s32, "world/world", get_current_map_config);
+s32 get_current_map_config() {
+    return D_800A41E0;
+}
 
-INCLUDE_ASM(MapConfig*, "world/world", get_current_map_header);
+MapConfig* get_current_map_header() {
+    return &D_800A41E8;
+}
 
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
 
-INCLUDE_ASM(void*, "world/world", load_asset_by_name, char* name, s32* decompressedSize);
+void* load_asset_by_name(char* assetName, s32* decompressedSize) {
+    AssetHeader firstHeader;
+    AssetHeader* assetTableBuffer;
+    AssetHeader* curAsset;
+    void* ret;
+    
+    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    assetTableBuffer = heap_malloc(firstHeader.offset);
+    curAsset = &assetTableBuffer[0];
+    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    while (strcmp(curAsset->name, assetName) != 0) {
+        curAsset++;
+    }
+    *decompressedSize = curAsset->decompressedLength;
+    ret = general_heap_malloc(curAsset->compressedLength);
+    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset, ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    heap_free(assetTableBuffer);
+    return ret;
+}
 
-INCLUDE_ASM(s32, "world/world", get_asset_offset);
+s32 get_asset_offset(char* assetName, s32* compressedSize) {
+    AssetHeader firstHeader;
+    AssetHeader* assetTableBuffer;
+    AssetHeader* curAsset;
+    s32 ret;
+
+    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
+    assetTableBuffer = heap_malloc(firstHeader.offset);
+    curAsset = &assetTableBuffer[0];
+    dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
+    while (strcmp(curAsset->name, assetName) != 0) {
+        curAsset++;
+    }
+    *compressedSize = curAsset->compressedLength;
+    ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
+    heap_free(assetTableBuffer);
+    return ret;
+}
 
 #define AREA(area, jp_name) { ARRAY_COUNT(area##_maps), area##_maps, "area_" #area, jp_name }
 

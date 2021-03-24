@@ -18,11 +18,13 @@ INCLUDE_ASM(s32, "code_77480", collision_check_above);
 
 INCLUDE_ASM(s32, "code_77480", trace_above_player);
 
-INCLUDE_ASM(s32, "code_77480", do_lateral_collision, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4, f32 arg5, f32 arg6);
+INCLUDE_ASM(s32, "code_77480", do_lateral_collision, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4,
+            f32 arg5, f32 arg6);
 
 INCLUDE_ASM(s32, "code_77480", func_800DEE5C);
 
-INCLUDE_ASM(s32, "code_77480", func_800DF15C, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5, s32* arg6);
+INCLUDE_ASM(s32, "code_77480", func_800DF15C, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5,
+            s32* arg6);
 
 void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     f32 temp = (arg2 * arg4) + (arg3 * arg5);
@@ -151,7 +153,8 @@ void func_800DFAAC(void) {
             func_800E4F10();
         }
 
-        if ((playerStatus->actionState != ActionState_ENEMY_FIRST_STRIKE) && (playerStatus->actionState != ActionState_STEP_UP)) {
+        if ((playerStatus->actionState != ActionState_ENEMY_FIRST_STRIKE)
+            && (playerStatus->actionState != ActionState_STEP_UP)) {
             func_800E4744();
         }
     }
@@ -204,8 +207,7 @@ void func_800DFC74(void) {
 s32 func_800DFCF4(void) {
     if (D_8010EBB0.unk_00 == 1 &&
         (D_8010EBB0.unk_03 == 6 || D_8010EBB0.unk_03 == 9 || D_8010EBB0.unk_03 == 7 || D_8010EBB0.unk_03 == 4 ||
-         D_8010EBB0.unk_03 == 8))
-    {
+         D_8010EBB0.unk_03 == 8)) {
         return 0;
     }
     return 1;

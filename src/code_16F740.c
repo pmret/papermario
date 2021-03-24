@@ -80,7 +80,7 @@ void func_80243910(void) {
 }
 
 void switch_order(void) {
-    BattleStatus *battleStatus = &gBattleStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->unk_4D = -1;
     battleStatus->unk_4E = -1;
@@ -187,7 +187,7 @@ void func_80247214(void) {
 // Something weird with using battleStatus twice but in specific ways
 #ifdef NON_MATCHING
 void func_8024721C(void) {
-    BattleStatus *battleStatus;
+    BattleStatus* battleStatus;
     battleStatus = &gBattleStatus;
 
     if (gBattleStatus.battleState == 0) {

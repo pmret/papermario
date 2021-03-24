@@ -1012,7 +1012,7 @@ s32 D_80283524[] = {
 s32 D_8028358C[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
                      &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C,
                      0x00000000,
-};
+                   };
 
 s16 D_802835D0[] = { 0x1C, 0x28 };
 s16 D_802835D4[] = { 0, -2 };
@@ -1173,7 +1173,7 @@ INCLUDE_ASM(s32, "code_190B20", inflict_status);
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Debuff_DAZE);
+            inflict_status(target, Debuff_DAZE, duration);
             play_sound(0x2107);
         } else {
             target->koDuration += duration;

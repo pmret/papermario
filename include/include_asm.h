@@ -10,9 +10,9 @@
    TYPE NAME(ARGS); \
   TYPE __attribute__((naked)) NAME(ARGS) { __asm__( ".include \"ver/"STRINGIFY(VERSION)"/asm/nonmatchings/"FOLDER"/"#NAME".s\"\n.set reorder\n.set at"); }
 #endif
-__asm__( ".include \"include/macro.inc\"\n");
+__asm__(".include \"include/macro.inc\"\n");
 #ifdef MOVE_ADDU
-__asm__( ".include \"include/move_addu.inc\"\n");
+__asm__(".include \"include/move_addu.inc\"\n");
 #endif
 #else
 #define INCLUDE_ASM(TYPE, FOLDER, NAME, ARGS...)

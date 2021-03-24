@@ -48,7 +48,6 @@ s16 intro_logos_fade_out(s16 addAlpha) {
 
 void intro_logos_update_fade(void) {
     GameStatus** gameStatus = &gGameStatusPtr;
-
     set_transition_stencil_zoom_0(0, (*gameStatus)->bootAlpha);
     set_transition_stencil_color(0, (*gameStatus)->bootBlue, (*gameStatus)->bootGreen, (*gameStatus)->bootRed);
 }

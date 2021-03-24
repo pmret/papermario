@@ -249,10 +249,11 @@ class DataSubsegment(Subsegment):
 class BssSubsegment(DataSubsegment):
     def __init__(self, start, end, name, type, vram, args, parent):
         super().__init__(start, end, name, type, vram, args, parent)
-        self.rom_start = 0
+        #self.rom_start = 0
         self.rom_end = 0
-        self.size = self.args[0]
-        self.vram_end = self.vram_start + self.size
+        if type == "bss":
+            self.size = self.args[0]
+            self.vram_end = self.vram_start + self.size
 
 class BinSubsegment(Subsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):

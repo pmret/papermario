@@ -22,14 +22,15 @@ typedef struct StarPowerDesc {
 
 extern StarPowerDesc D_8008F071[];
 
-ApiStatus LoadStarPowerScript(ScriptInstance *script, s32 isInitialCall) {
-    BattleStatus *battleStatus = &gBattleStatus;
-    PlayerData *playerData = &gPlayerData;
+ApiStatus LoadStarPowerScript(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
     s16 selectedItemID;
 
     playerData->specialBarsFilled -= D_8008F071[battleStatus->selectedMoveID].starPoints * 256;
     selectedItemID = battleStatus->selectedItemID;
-    dma_copy((&D_8029C7D0[selectedItemID])->dmaStart, (&D_8029C7D0[selectedItemID])->dmaEnd, (&D_8029C7D0[selectedItemID])->dmaDest);
+    dma_copy((&D_8029C7D0[selectedItemID])->dmaStart, (&D_8029C7D0[selectedItemID])->dmaEnd,
+             (&D_8029C7D0[selectedItemID])->dmaDest);
     script->varTable[0] = (&D_8029C7D0[selectedItemID])->init;
     return ApiStatus_DONE2;
 }

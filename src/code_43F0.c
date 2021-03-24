@@ -269,8 +269,7 @@ f32 clamp_angle(f32 theta) {
 
         if (thetaInt >= 0) {
             thetaInt = -(thetaInt / 360 * 360) + thetaInt;
-        }
-        else {
+        } else {
             thetaInt = -thetaInt;
             thetaInt = (thetaInt / 360 * 360) - thetaInt;
         }
@@ -384,7 +383,8 @@ f32 cos_deg(f32 angle) {
 INCLUDE_ASM(f32, "code_43F0", update_lerp, Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 
 //void func_8002A904(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
-INCLUDE_ASM(void, "code_43F0", func_8002A904, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
+INCLUDE_ASM(void, "code_43F0", func_8002A904, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6,
+            u16 arg7);
 
 INCLUDE_ASM(s32, "code_43F0", func_8002AAC4);
 // void func_8002AAC4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7) {

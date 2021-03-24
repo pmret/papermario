@@ -29,7 +29,7 @@ INCLUDE_ASM(s32, "code_d5a50_len_5fd0", init_menu_icon_list);
 
 INCLUDE_ASM(s32, "code_d5a50_len_5fd0", func_801413F8);
 
-INCLUDE_ASM(s32*, "code_d5a50_len_5fd0", create_icon, s32 iconIndex);
+INCLUDE_ASM(MenuIcon*, "code_d5a50_len_5fd0", create_icon, s32* iconIndex);
 
 INCLUDE_ASM(s32, "code_d5a50_len_5fd0", update_menu_icons);
 
@@ -67,9 +67,9 @@ INCLUDE_ASM(s32, "code_d5a50_len_5fd0", get_menu_icon_script);
 
 INCLUDE_ASM(s32, "code_d5a50_len_5fd0", get_menu_icon);
 
-INCLUDE_ASM(s32, "code_d5a50_len_5fd0", free_icon);
+INCLUDE_ASM(s32, "code_d5a50_len_5fd0", free_icon, MenuIcon* iconIndex);
 
-INCLUDE_ASM(void, "code_d5a50_len_5fd0", set_icon_render_pos, s32 iconIndex, s32 posX, s32 posY);
+INCLUDE_ASM(void, "code_d5a50_len_5fd0", set_icon_render_pos, MenuIcon* iconIndex, s32 posX, s32 posY);
 
 INCLUDE_ASM(s32, "code_d5a50_len_5fd0", get_icon_render_pos);
 
