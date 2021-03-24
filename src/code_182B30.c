@@ -58,7 +58,6 @@ void func_802546B0(void) {
     func_80254610(gBattleStatus.partnerActor);
 }
 
-#ifdef NON_MATCHING
 void enable_player_blur(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     ActorPart* partsTable = playerActor->partsTable;
@@ -80,14 +79,11 @@ void enable_player_blur(void) {
         decorationTable->rotationPivotOffsetX[i] = (s32)(playerActor->rotationPivotOffset.x * playerActor->scalingFactor);
         decorationTable->rotationPivotOffsetY[i] = (s32)(playerActor->rotationPivotOffset.y * playerActor->scalingFactor);
 
-        decorationTable->rotX[i] = clamp_angle(playerActor->rotation.x) * 0.5f;
-        decorationTable->rotY[i] = clamp_angle(playerActor->rotation.y) * 0.5f;
-        decorationTable->rotZ[i] = clamp_angle(playerActor->rotation.z) * 0.5f;
+        *(&decorationTable->rotX[i]) = clamp_angle(playerActor->rotation.x) * 0.5f;
+        *(&decorationTable->rotY[i]) = clamp_angle(playerActor->rotation.y) * 0.5f;
+        *(&decorationTable->rotZ[i]) = clamp_angle(playerActor->rotation.z) * 0.5f;
     }
 }
-#else
-INCLUDE_ASM(s32, "code_182B30", enable_player_blur);
-#endif
 
 void disable_player_blur(void) {
     DecorationTable* decorationTable = gBattleStatus.playerActor->partsTable->decorationTable;

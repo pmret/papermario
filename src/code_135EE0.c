@@ -88,19 +88,10 @@ INCLUDE_ASM(s32, "code_135EE0", func_80243388);
 
 INCLUDE_ASM(s32, "code_135EE0", pause_interp_text_scroll);
 
-// Slight ordering issue with the sign flip at the beginning
-#ifdef NON_MATCHING
 s32 pause_interp_vertical_scroll(s32 deltaBefore) {
     s32 val;
-    s32 s;
-    s32 db;
-
-    db = deltaBefore;
-    if (deltaBefore < 0) {
-        db = -deltaBefore;
-    }
-
-    s = sign(deltaBefore);
+    s32 db = abs(deltaBefore);
+    s32 s = sign(deltaBefore);
 
     if (db >= 16) {
         val = db / 2;
@@ -113,9 +104,6 @@ s32 pause_interp_vertical_scroll(s32 deltaBefore) {
 
     return val * s;
 }
-#else
-INCLUDE_ASM(s32, "code_135EE0", pause_interp_vertical_scroll, s32 deltaBefore);
-#endif
 
 void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
     s32 opacity;
