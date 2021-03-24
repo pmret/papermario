@@ -100,7 +100,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_SLEEPY_SHEEP;
+    SI_VAR(10) =c ItemId_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
     UseCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
@@ -108,7 +108,7 @@ Script N(main) = SCRIPT({
     SetBattleCamZoom(169);
     MoveBattleCamOver(50);
     spawn {
-        PlaySoundAtActor(ActorID_PLAYER, 868);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_364);
         loop 7 {
             StartRumble(2);
             ShakeCam(1, 0, 2, 0.5);
@@ -160,7 +160,7 @@ Script N(main) = SCRIPT({
     SetJumpAnimations(ActorID_PLAYER, 0, PlayerAnim_1002B, PlayerAnim_1002B, PlayerAnim_MIDAIR);
     SetActorJumpGravity(ActorID_PLAYER, 1.80078125);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetGoalPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_80273444(15, 0, 0);
     spawn {
         sleep 5;
@@ -192,7 +192,7 @@ Script N(main) = SCRIPT({
     func_802D3A60(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     GetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlaySoundAtActor(ActorID_PLAYER, 334);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_HIT_BLOCK);
     spawn {
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_SHOCK_STILL);
         SetActorScale(ActorID_PLAYER, 1.2001953125, 0.900390625, 1.0);
@@ -203,20 +203,20 @@ Script N(main) = SCRIPT({
         sleep 1;
         SetActorScale(ActorID_PLAYER, 1.0, 1.0, 1.0);
     }
-    PlayEffect(6, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x6, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 2;
     func_802D39FC(SI_VAR(10), 1.400390625);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 60;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     SI_VAR(0) += 20;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SI_VAR(0) += 10;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlayEffect(6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 5;
     spawn {
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

@@ -40,7 +40,7 @@ Script script = SCRIPT({
     UseCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(1018);
+    PlaySound(SoundId_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;
@@ -69,11 +69,11 @@ Script script = SCRIPT({
     func_802D39FC(SI_VAR(10), 0.80078125);
     SI_VAR(2) += 5;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SI_VAR(0) -= 10;
-    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SI_VAR(0) += 20;
-    PlayEffect(7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     spawn {
         N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         sleep 3;

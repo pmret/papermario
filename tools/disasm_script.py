@@ -71,43 +71,26 @@ def script_lib(offset):
 constants = {}
 def get_constants():
     global constants
-
-    constants["ItemId"] = {}
-    constants["AnimId"] = {}
-    constants["ActorId"] = {}
-    constants["Event"] = {}
+    valid_enums = { "ItemId", "PlayerAnim", "ActorID", "Event", "SoundId" }
+    for enum in valid_enums:
+        constants[enum] = {}
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text()
 
     for line in enums.splitlines():
-        if "#define ItemId_" in line:
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            constants["ItemId"][int(id_, 16)] = name
+        this_enum = ""
+        for enum in valid_enums:
+            if f"#define {enum}_" in line:
+                this_enum = enum
+                break;
 
-        elif "#define PlayerAnim_" in line:
+        if this_enum:
             name = line.split(" ",2)[1]
             id_ = line.split("0x", 1)[1]
             if " " in id_:
                 id_ = id_.split(" ",1)[0]
-            constants["AnimId"][int(id_, 16)] = name
-
-        elif "#define ActorID_" in line:
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            constants["ActorId"][int(id_, 16)] = name
-
-        elif "#define Event_" in line:
-            name = line.split(" ",2)[1]
-            id_ = line.split("0x", 1)[1]
-            if " " in id_:
-                id_ = id_.split(" ",1)[0]
-            constants["Event"][int(id_, 16)] = name
+            constants[this_enum][int(id_, 16)] = name
     return
 
 def fix_args(args, info):
@@ -120,32 +103,60 @@ def fix_args(args, info):
                 argNum = int(arg, 16)
             else:
                 argNum = int(arg, 10)
+
             if argNum in constants[info[i]]:
                 new_args.append(f"{constants[info[i]][argNum]}")
             else:
                 print(f"{argNum:X} was not found within {info[i]} constants, add it.")
+                if info[i] == "SoundId":
+                    # Ethan wanted sound IDs in hex instead, so convert it back
+                    if "0x" not in arg:
+                        argNum = int(arg, 10)
+                        arg = f"0x{argNum:X}"
                 new_args.append(f"{arg}")
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
 
-def replace_constants(func, args):
-    if func == "SetAnimation":                  return fix_args(args, {0:"ActorId", 2:"AnimId"})
-    elif func == "SetJumpAnimations":           return fix_args(args, {0:"ActorId", 2:"AnimId", 3:"AnimId", 4:"AnimId"})
-    elif func == "SetActorJumpGravity":         return fix_args(args, {0:"ActorId"})
-    elif func == "SetActorSpeed":               return fix_args(args, {0:"ActorId"})
-    elif func == "SetActorScale":               return fix_args(args, {0:"ActorId"})
-    elif func == "SetActorYaw":                 return fix_args(args, {0:"ActorId"})
-    elif func == "GetActorPos":                 return fix_args(args, {0:"ActorId"})
-    elif func == "SetTargetActor":              return fix_args(args, {0:"ActorId"})
-    elif func == "SetGoalToTarget":             return fix_args(args, {0:"ActorId"})
-    elif func == "SetGoalToHome":               return fix_args(args, {0:"ActorId"})
-    elif func == "GetGoalPos":                  return fix_args(args, {0:"ActorId"})
-    elif func == "PlaySoundAtActor":            return fix_args(args, {0:"ActorId"})
-    elif func == "GetItemPower":                return fix_args(args, {0:"ItemId"})
-    elif func == "UseIdleAnimation":            return fix_args(args, {0:"ActorId"})
-    elif func == "DispatchDamagePlayerEvent":   return fix_args(args, {1:"Event"})
+replace_funcs = {
+    "DispatchDamagePlayerEvent" :{1:"Event"},
+    "DispatchEvent"             :{0:"ActorID"},
 
+    "ForceHomePos"              :{0:"ActorID"},
+    
+    "GetActorPos"               :{0:"ActorID"},
+    "GetGoalPos"                :{0:"ActorID"},
+    "GetItemPower"              :{0:"ItemId"},
+
+    "JumpToGoal"                :{0:"ActorID"},
+    
+    "PlaySound"                 :{0:"SoundId"},
+    "PlaySoundAtActor"          :{0:"ActorID", 1:"SoundId"},
+    
+    "SetActorJumpGravity"       :{0:"ActorID"},
+    "SetActorSpeed"             :{0:"ActorID"},
+    "SetActorScale"             :{0:"ActorID"},
+    "SetActorYaw"               :{0:"ActorID"},
+    "SetAnimation"              :{0:"ActorID", 2:"PlayerAnim"},
+    "SetGoalPos"                :{0:"ActorID"}
+    "SetGoalToHome"             :{0:"ActorID"},
+    "SetGoalToTarget"           :{0:"ActorID"},
+    "SetJumpAnimations"         :{0:"ActorID", 2:"PlayerAnim", 3:"PlayerAnim", 4:"PlayerAnim"},
+    "SetTargetActor"            :{0:"ActorID"},
+    
+    "UseIdleAnimation"          :{0:"ActorID"},
+
+}
+
+def replace_constants(func, args):
+    global replace_funcs
+    if func in replace_funcs:
+        return fix_args(args, replace_funcs[func])
+    elif func == "PlayEffect":
+        argsZ = args.split(", ")
+        if "0x" not in argsZ[0]:
+            argsZ[0] = f"0x{int(argsZ[0], 10):X}"
+        args = ", ".join(argsZ)
     return args
 
 class ScriptDisassembler:

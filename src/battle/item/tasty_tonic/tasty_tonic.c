@@ -19,7 +19,7 @@ Script N(main) = SCRIPT({
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(2) += 5;
         func_802D75D8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
-        N(func_802A123C_72223C)(0);
+        N(func_802A123C_72223C)(ActorID_PLAYER);
         sleep 20;
     } else {
         GetActorPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -32,7 +32,7 @@ Script N(main) = SCRIPT({
         GetActorPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(2) += 5;
         func_802D75D8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
-        N(func_802A123C_72223C)(256);
+        N(func_802A123C_72223C)(ActorID_PARTNER);
         sleep 20;
     }
     await N(PlayerGoHome);
