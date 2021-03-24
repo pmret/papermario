@@ -167,7 +167,7 @@ Script N(UseItemWithEffect) = SCRIPT({
 
 Script N(UseItem) = SCRIPT({
     UseCamPreset(19);
-    SetBattleCamTarget(0xFFFFFFAB, 1, 0);
+    SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);
     MoveBattleCamOver(30);
