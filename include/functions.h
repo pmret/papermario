@@ -140,8 +140,8 @@ s32 osGetId();
 
 void mem_clear(s8* data, s32 numBytes);
 
-s32* create_icon(s32 iconIndex);
-void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY);
+MenuIcon* create_icon(s32* iconIndex);
+void set_icon_render_pos(MenuIcon* iconIndex, s32 posX, s32 posY);
 
 void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
@@ -207,7 +207,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(s32* updateFunc, s32* drawFunc);
+s32 bind_dynamic_entity_7(s32* updateFunc, void (*drawFunc)(void));
 s32 get_dynamic_entity(s32 arg0);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
@@ -274,6 +274,10 @@ void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
+
+void func_80138D88(s32, s32, s32, s32, f32);
+s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
+void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 // Dead functions:
 f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2

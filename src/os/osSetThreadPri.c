@@ -2,14 +2,14 @@
 
 #include "common.h"
 
- struct __osThreadTail {
+struct __osThreadTail {
     OSThread* next;
     OSPri priority;
 };
 
 struct __osThreadTail __osThreadTail = {0, -1};
-OSThread* __osRunQueue = (OSThread*)&__osThreadTail;
-OSThread* __osActiveQueue = (OSThread*)&__osThreadTail;
+OSThread* __osRunQueue = (OSThread*) &__osThreadTail;
+OSThread* __osActiveQueue = (OSThread*) &__osThreadTail;
 OSThread* __osRunningThread = NULL;
 OSThread* __osFaultedThread = NULL;
 

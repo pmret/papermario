@@ -1,15 +1,15 @@
 #! /usr/bin/python3
 
 import sys
+from pathlib import Path
 
 _script_lib = None
-def script_lib():
+def script_lib(offset):
     global _script_lib
 
     if not _script_lib:
         _script_lib = {}
 
-        from pathlib import Path
         from os import path
         import re
 
@@ -35,23 +35,125 @@ def script_lib():
                             pass
         """
 
-        # symbol_addrs.txt
-        with open(Path(path.dirname(__file__), "symbol_addrs.txt"), "r") as file:
+        repo_root = Path(__file__).resolve().parent.parent
+        symbols = Path(repo_root / "ver" / "current" / "symbol_addrs.txt")
+        with open(symbols, "r") as file:
             for line in file.readlines():
-                line = line.split(";")[0]
-
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
-                addr = s[1].split(";")[0].split(" ")[0]
-                _script_lib[int(addr, 16)] = name
+                vaddr = int(s[1].split(";")[0].split(" ")[0], 16)
 
+                raddr = "0xFFFFFFFF"
+                if "rom:" in line:
+                    raddr = line.split("rom:",1)[1]
+                    if " " in raddr:
+                        raddr = raddr.split(" ",1)[0]
+                raddr = raddr.strip()
+
+                if vaddr not in _script_lib:
+                    _script_lib[vaddr] = []
+                _script_lib[vaddr].append([int(raddr, 16), name])
+
+        # Sort the symbols for each vram address by the difference 
+        # between their rom address and the offset passed in.
+        # If offset - rom address goes below 0, it's part of the
+        # previous file, so treat it as min priority, same as a default.
+        # After sorting, the first rom address and name should be the best candidate.
+        for k in _script_lib.keys():
+            for i,entry in enumerate(_script_lib[k]):
+                diff = offset - entry[0]
+                entry[0] = 0xFFFFFFFF if diff < 0 else diff
+                _script_lib[k][i][0] = entry[0]
+            _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
+
+# Grab constants from the include/ folder to save manual work
+constants = {}
+def get_constants():
+    global constants
+
+    constants["ItemId"] = {}
+    constants["AnimId"] = {}
+    constants["ActorId"] = {}
+    constants["Event"] = {}
+
+    include_path = Path(Path(__file__).resolve().parent.parent / "include")
+    enums = Path(include_path / "enums.h").read_text()
+
+    for line in enums.splitlines():
+        if "#define ItemId_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["ItemId"][int(id_, 16)] = name
+
+        elif "#define PlayerAnim_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["AnimId"][int(id_, 16)] = name
+
+        elif "#define ActorID_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["ActorId"][int(id_, 16)] = name
+
+        elif "#define Event_" in line:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants["Event"][int(id_, 16)] = name
+    return
+
+def fix_args(args, info):
+    global constants
+    
+    new_args = []
+    for i,arg in enumerate(args.split(", ")):
+        if i in info:
+            if "0x" in arg:
+                argNum = int(arg, 16)
+            else:
+                argNum = int(arg, 10)
+            if argNum in constants[info[i]]:
+                new_args.append(f"{constants[info[i]][argNum]}")
+            else:
+                print(f"{argNum:X} was not found within {info[i]} constants, add it.")
+                new_args.append(f"{arg}")
+        else:
+            new_args.append(f"{arg}")
+    return ", ".join(new_args)
+
+def replace_constants(func, args):
+    if func == "SetAnimation":                  return fix_args(args, {0:"ActorId", 2:"AnimId"})
+    elif func == "SetJumpAnimations":           return fix_args(args, {0:"ActorId", 2:"AnimId", 3:"AnimId", 4:"AnimId"})
+    elif func == "SetActorJumpGravity":         return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorSpeed":               return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorScale":               return fix_args(args, {0:"ActorId"})
+    elif func == "SetActorYaw":                 return fix_args(args, {0:"ActorId"})
+    elif func == "GetActorPos":                 return fix_args(args, {0:"ActorId"})
+    elif func == "SetTargetActor":              return fix_args(args, {0:"ActorId"})
+    elif func == "SetGoalToTarget":             return fix_args(args, {0:"ActorId"})
+    elif func == "SetGoalToHome":               return fix_args(args, {0:"ActorId"})
+    elif func == "GetGoalPos":                  return fix_args(args, {0:"ActorId"})
+    elif func == "PlaySoundAtActor":            return fix_args(args, {0:"ActorId"})
+    elif func == "GetItemPower":                return fix_args(args, {0:"ItemId"})
+    elif func == "UseIdleAnimation":            return fix_args(args, {0:"ActorId"})
+    elif func == "DispatchDamagePlayerEvent":   return fix_args(args, {1:"Event"})
+
+    return args
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
         self.bytes = bytes
         self.script_name = script_name
-        self.symbol_map = { **script_lib(), **symbol_map }
+
+        self.symbol_map = { **script_lib(self.bytes.tell()), **symbol_map }
 
         self.out = ""
         self.prefix = ""
@@ -60,6 +162,10 @@ class ScriptDisassembler:
         self.indent_used = False
 
         self.done = False
+
+        self.start_pos = self.bytes.tell()
+        self.end_pos = 0
+        self.instructions = 0
 
     def disassemble(self):
         while True:
@@ -75,7 +181,10 @@ class ScriptDisassembler:
 
             self.disassemble_command(opcode, argc, argv)
 
+            self.instructions += 1
+
             if self.done:
+                self.end_pos = self.bytes.tell()
                 return self.prefix + self.out
 
     def write(self, line):
@@ -95,7 +204,7 @@ class ScriptDisassembler:
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -120,8 +229,8 @@ class ScriptDisassembler:
 
     def addr_ref(self, addr):
         if addr in self.symbol_map:
-            return self.symbol_map[addr]
-        return script_lib().get(addr, f"0x{addr:08X}")
+            return self.symbol_map[addr][0][1]
+        return f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
@@ -374,7 +483,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -602,9 +711,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x43:
             addr = argv[0]
             if addr in self.symbol_map:
-                func_name = self.symbol_map[addr]
+                func_name = self.symbol_map[addr][0][1]
 
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
+                argv_str = replace_constants(func_name, argv_str)
+
                 self.write_line(f"{func_name}({argv_str});")
             else:
                 print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
@@ -620,6 +731,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
+        elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
         elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
@@ -651,9 +763,16 @@ if __name__ == "__main__":
     offset = eval(sys.argv[2]) if len(sys.argv) >= 3 else 0
 
     with open(file, "rb") as f:
+        get_constants()
         f.seek(offset)
 
         try:
-            print(ScriptDSLDisassembler(f).disassemble(), end="")
+            script = ScriptDSLDisassembler(f)
+            script_text = script.disassemble()
+
+            print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                  f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+            print()
+            print(script_text, end="")
         except UnsupportedScript:
             print(ScriptDisassembler(f).disassemble(), end="")

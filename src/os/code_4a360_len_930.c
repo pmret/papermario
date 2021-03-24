@@ -1,6 +1,6 @@
 #include "common.h"
 
-void func_8006EF60(){
+void func_8006EF60() {
 }
 
 INCLUDE_ASM(s32, "os/code_4a360_len_930", osFlashInit);

@@ -27,7 +27,7 @@ ApiStatus func_802A1108_761A28(ScriptInstance* script, s32 isInitialCall) {
     battleStatus2->jumpCharge += 3;
 
     if (battleStatus2->jumpCharge > 99) {
-        (*&battleStatus)->jumpCharge = 99; // TODO: macro?
+        (* &battleStatus)->jumpCharge = 99; // TODO: macro?
     }
 
     battleStatus->hammerCharge = 0;
