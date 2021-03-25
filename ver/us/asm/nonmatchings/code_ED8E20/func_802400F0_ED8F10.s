@@ -1,6 +1,14 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80243170_EDBF90
+.ascii "[%d] dokan get pos  (no=%d)  pos=%d, %d, %d,  dir=%d
+\0\0\0flo_23\0\0flo_12\0\0flo_11\0\0"
+
+.section .text
+
 glabel func_802400F0_ED8F10
 /* ED8F10 802400F0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* ED8F14 802400F4 AFB00020 */  sw        $s0, 0x20($sp)

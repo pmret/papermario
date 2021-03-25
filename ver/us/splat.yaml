@@ -8437,7 +8437,7 @@ segments:
     start: 0xE20110
     vram: 0x802B7000
     subsections:
-    - [0xE20110, c]
+    - [0xE20110, c, code_E20110]
     - [0xE20B30, data]
     - [0xE20DD0, .rodata, code_E20110]
   - type: code
@@ -8461,7 +8461,7 @@ segments:
     start: 0xE225B0
     vram: 0x802B7000
     subsections:
-    - [0xE225B0, c]
+    - [0xE225B0, c, code_E225B0]
     - [0xE22B30, data]
     - [0xE23230, .rodata, code_E225B0]
   - type: code
@@ -8502,7 +8502,7 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE24ED0, c]
+    - [0xE24ED0, c, code_E24ED0]
     - [0xE25C80, data]
     - [0xE25CC0, .rodata, code_E24ED0]
   - type: code
@@ -8510,28 +8510,28 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE25D60, c]
+    - [0xE25D60, c, code_E25D60]
     - [0xE26700, .rodata, code_E25D60]
   - type: code
     start: 0xE26710
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE26710, c]
+    - [0xE26710, c, code_E26710]
     - [0xE26DA0, .rodata, code_E26710]
   - type: code
     start: 0xE26DE0
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE26DE0, c]
+    - [0xE26DE0, c, code_E26DE0]
     - [0xE274C0, .rodata, code_E26DE0]
   - type: code
     start: 0xE27510
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE27510, c]
+    - [0xE27510, c, code_E27510]
     - [0xE27C50, .rodata, code_E27510]
   - type: code
     start: 0xE27C90
@@ -8544,7 +8544,7 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE27F40, c]
+    - [0xE27F40, c, code_E27F40]
     - [0xE28790, .rodata, code_E27F40]
   - type: code
     start: 0xE287F0
@@ -8557,28 +8557,28 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE28A30, c]
+    - [0xE28A30, c, code_E28A30]
     - [0xE29190, .rodata, code_E28A30]
   - type: code
     start: 0xE291A0
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE291A0, c]
+    - [0xE291A0, c, code_E291A0]
     - [0xE29450, .rodata, code_E291A0]
   - type: code
     start: 0xE29470
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE29470, c]
+    - [0xE29470, c, code_E29470]
     - [0xE2A300, .rodata, code_E29470]
   - type: code
     start: 0xE2A340
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE2A340, c]
+    - [0xE2A340, c, code_E2A340]
     - [0xE2A690, data]
     - [0xE2A6A0, .rodata, code_E2A340]
   - type: code
@@ -8586,7 +8586,7 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE2A6B0, c]
+    - [0xE2A6B0, c, code_E2A6B0]
     - [0xE2B420, data]
     - [0xE2B440, .rodata, code_E2A6B0]
   - type: code
@@ -8594,11 +8594,13 @@ segments:
     vram: 0x802BAE00
     overlay: True
     subsections:
-    - [0xE2B530, c]
-    - [0xE2BE40, c]
+    - [0xE2B530, c, code_E2B530]
+    - [0xE2BE40, c, code_E2BE40]
     - [0xE2C930, c]
     - [0xE2D410, data]
     - [0xE2D680, .rodata, code_E2B530]
+    - [0xE2D6D0, .rodata, code_E2BE40]
+    - [0xE2D6F0, .rodata, code_E2C930]
   - type: code
     start: 0xE2D730
     vram: 0x802BAE00
@@ -8609,15 +8611,17 @@ segments:
     - [0xE2EDE0, c]
     - [0xE2EFD0, data]
     - [0xE2F6F0, .rodata, code_E2D730]
+    - [0xE2F740, .rodata, code_E2E5F0]
   - type: code
     start: 0xE2F750
     vram: 0x802BAE00
     overlay: True
     subsections:
-    - [0xE2F750, c]
-    - [0xE307C0, c]
+    - [0xE2F750, c, code_E2F750]
+    - [0xE307C0, c, code_E307C0]
     - [0xE31380, data]
     - [0xE314C0, .rodata, code_E2F750]
+    - [0xE314F0, .rodata, code_E307C0]
   - [0xE31530, bin] # unk data
   - type: code
     start: 0xEA0900
@@ -8625,10 +8629,11 @@ segments:
     overlay: True
     subsections:
     - [0xEA0900, c]
-    - [0xEA0C10, c]
-    - [0xEA36E0, c]
+    - [0xEA0C10, c, code_EA0C10]
+    - [0xEA36E0, c, code_EA36E0]
     - [0xEA3A80, data]
-    - [0xEA6D80, .rodata, code_EA0900]
+    - [0xEA6D70, .rodata, code_EA0C10]
+    - [0xEA6FB0, .rodata, code_EA36E0]
   - type: code
     start: 0xEA6FD0
     vram: 0x80240000
@@ -8668,29 +8673,29 @@ segments:
     overlay: True
     subsections:
     - [0xEB7230, c]
-    - [0xEB7540, c]
+    - [0xEB7540, c, code_EB7540]
     - [0xEB7850, data]
-    - [0xEB8E40, .rodata, code_EB7230]
+    - [0xEB8E40, .rodata, code_EB7540]
   - type: code
     start: 0xEB8E50
     vram: 0x80240000
     overlay: True
     subsections:
     - [0xEB8E50, c]
-    - [0xEB8E90, c]
+    - [0xEB8E90, c, code_EB8E90]
     - [0xEB9D90, c]
     - [0xEBA260, data]
-    - [0xEC2040, .rodata, code_EB8E50]
+    - [0xEC2000, .rodata, code_EB8E90]
   - type: code
     start: 0xEC2200
     vram: 0x80240000
     overlay: True
     subsections:
     - [0xEC2200, c]
-    - [0xEC2240, c]
+    - [0xEC2240, c, code_EC2240]
     - [0xEC2610, c]
     - [0xEC2850, data]
-    - [0xEC7190, .rodata, code_EC2200]
+    - [0xEC7170, .rodata, code_EC2240]
   - type: code
     start: 0xEC71B0
     vram: 0x80240000
@@ -8706,10 +8711,11 @@ segments:
     subsections:
     - [0xEC9D00, c]
     - [0xECAA40, c]
-    - [0xECAA80, c]
+    - [0xECAA80, c, code_ECAA80]
     - [0xECB930, c]
     - [0xECBB70, c]
     - [0xECBC10, data]
+    - [0xECFE60, .rodata, code_ECAA80]
   - type: code
     start: 0xECFFF0
     vram: 0x80240000
@@ -8720,6 +8726,7 @@ segments:
     - [0xED00D0, c]
     - [0xED0310, c]
     - [0xED1840, data]
+    - [0xED41C0, .rodata, code_ED0310]
   - type: code
     start: 0xED4220
     vram: 0x80240000
@@ -8736,8 +8743,9 @@ segments:
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xED8E20, c]
+    - [0xED8E20, c, code_ED8E20]
     - [0xED9170, data]
+    - [0xEDBF90, .rodata, code_ED8E20]
   - type: code
     start: 0xEDBFE0
     vram: 0x80240000
@@ -8752,9 +8760,11 @@ segments:
     overlay: True
     subsections:
     - [0xEDE9C0, c]
-    - [0xEDEA00, c]
-    - [0xEE2040, c]
+    - [0xEDEA00, c, code_EDEA00]
+    - [0xEE2040, c, code_EE2040]
     - [0xEE20E0, data]
+    - [0xEE64B0, .rodata, code_EDEA00]
+    - [0xEE65A0, .rodata, code_EE2040]
   - type: code
     start: 0xEE65B0
     vram: 0x80240000
@@ -8763,7 +8773,7 @@ segments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
-    - [0xEE8970, data]
+    - [0xEE8970, data] # Has rodata followed by a script...but doesn't seem to be a new segment
   - type: code
     start: 0xEED100
     vram: 0x80240000
@@ -8775,6 +8785,7 @@ segments:
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
     - [0xEEFAD0, data]
+    - [0xEF2550, .rodata, code_EEDF50]
   - type: code
     start: 0xEF2610
     vram: 0x80240000
@@ -8782,8 +8793,9 @@ segments:
     subsections:
     - [0xEF2610, c]
     - [0xEF2650, c]
-    - [0xEF2680, c]
+    - [0xEF2680, c, code_EF2680]
     - [0xEF58E0, data]
+    - [0xEF79C0, .rodata, code_EF2680]
   - type: code
     start: 0xEF7A80
     vram: 0x80240000

@@ -13,9 +13,3 @@ glabel D_802B7930_E217E0
 
 glabel D_802B79A8_E21858
 .word 0x802B79C0, 0x00000000
-
-glabel D_802B79B0_E21860
-.double 0.05
-
-glabel D_802B79B8_E21868
-.double 0.55
