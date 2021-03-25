@@ -8681,21 +8681,23 @@ segments:
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xEB8E50, c]
+    - [0xEB8E50, c, code_EB8E50]
     - [0xEB8E90, c, code_EB8E90]
     - [0xEB9D90, c]
     - [0xEBA260, data]
-    - [0xEC2000, .rodata, code_EB8E90]
+    - [0xEC2000, .rodata, code_EB8E50]
+    - [0xEC2040, .rodata, code_EB8E90]
   - type: code
     start: 0xEC2200
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xEC2200, c]
+    - [0xEC2200, c, code_EC2200]
     - [0xEC2240, c, code_EC2240]
     - [0xEC2610, c]
     - [0xEC2850, data]
-    - [0xEC7170, .rodata, code_EC2240]
+    - [0xEC7170, .rodata, code_EC2200]
+    - [0xEC7188, .rodata, code_EC2240]
   - type: code
     start: 0xEC71B0
     vram: 0x80240000
