@@ -255,45 +255,45 @@ void snd_BGMCmd_E2_MasterTranspose(BGMPlayer* player, BGMPlayerTrack* track) {
     player->unk_20C = (s8)player->unk_D4.u8[0] * 100;
 }
 
-void snd_BGMCmd_E3(BGMPlayer* arg0, BGMPlayerTrack* track) {
-    arg0->data->unk_40[arg0->unk_235].unk_00 = arg0->unk_D4.u8[0];
-    arg0->data->unk_40[arg0->unk_235].unk_01 = 1;
+void snd_BGMCmd_E3(BGMPlayer* player, BGMPlayerTrack* track) {
+    player->data->unk_40[player->unk_235].unk_00 = player->unk_D4.u8[0];
+    player->data->unk_40[player->unk_235].unk_01 = 1;
 }
 
-void snd_BGMCmd_E6_MasterEffect(BGMPlayer* arg0, BGMPlayerTrack* track) {
-    u8 unk_D4 = arg0->unk_D4.u8[0];
-    u32 temp_v1 = arg0->unk_4C[unk_D4];
+void snd_BGMCmd_E6_MasterEffect(BGMPlayer* player, BGMPlayerTrack* track) {
+    u8 unk_D4 = player->unk_D4.u8[0];
+    u32 temp_v1 = player->unk_4C[unk_D4];
 
     if ((unk_D4 < 4) && (temp_v1 < 0x80)) {
-        if (arg0->data->unk_40[temp_v1].unk_00 != arg0->unk_D4.u8[1]) {
-            arg0->data->unk_40[temp_v1].unk_00 = arg0->unk_D4.u8[1];
-            arg0->data->unk_40[temp_v1].unk_01 = 1;
+        if (player->data->unk_40[temp_v1].unk_00 != player->unk_D4.u8[1]) {
+            player->data->unk_40[temp_v1].unk_00 = player->unk_D4.u8[1];
+            player->data->unk_40[temp_v1].unk_01 = 1;
         }
-        arg0->unk_224[unk_D4] = arg0->unk_D4.u8[1];
+        player->unk_224[unk_D4] = player->unk_D4.u8[1];
     }
 }
 
-void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* arg0, BGMPlayerTrack* track) {
-    s32 unk_D4 = arg0->unk_D4.u16;
-    s32 temp_a0 = snd_bpm_to_tempo(arg0, arg0->unk_D6.u16);
+void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
+    s32 unk_D4 = player->unk_D4.u16;
+    s32 temp_a0 = snd_bpm_to_tempo(player, player->unk_D6.u16);
     s32 temp_v0;
 
     if (unk_D4 <= 0) {
         unk_D4 = 1;
     }
-    temp_v0 = (temp_a0 - arg0->unk_B0) / unk_D4;
+    temp_v0 = (temp_a0 - player->unk_B0) / unk_D4;
 
-    arg0->unk_BC = unk_D4;
-    arg0->unk_B8 = temp_a0;
-    arg0->unk_B4 = temp_v0;
+    player->unk_BC = unk_D4;
+    player->unk_B8 = temp_a0;
+    player->unk_B4 = temp_v0;
 }
 
-void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* arg0, BGMPlayerTrack* track) {
+void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
     s32 temp_a1;
     s32 temp_a2;
 
-    temp_a1 = arg0->unk_D4.u16;
-    temp_a2 = arg0->unk_D6.u8[0] & 0x7F;
+    temp_a1 = player->unk_D4.u16;
+    temp_a2 = player->unk_D6.u8[0] & 0x7F;
 
     if (temp_a2 != 0) {
         temp_a2 = temp_a2 << 0x18;
@@ -303,15 +303,15 @@ void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* arg0, BGMPlayerTrack* track) {
         temp_a1 = 1;
     }
 
-    arg0->unk_CC = temp_a1;
-    arg0->unk_C8 = temp_a2;
-    arg0->unk_C4 = (temp_a2 - arg0->unk_C0) / temp_a1;
+    player->unk_CC = temp_a1;
+    player->unk_C8 = temp_a2;
+    player->unk_C4 = (temp_a2 - player->unk_C0) / temp_a1;
 }
 
 // Not sure about types
 #ifdef NON_MATCHING
 void snd_BGMCmd_E8_TrackOverridePatch(BGMPlayer* player, UnkAl60* track) {
-    u8 temp_v1 = arg0->unk_D4.u16;
+    u8 temp_v1 = player->unk_D4.u16;
 
     track->unk_44 = temp_v1;
     track->unk_0C = func_80053BE8(player->unk_00, player->unk_D4.u8[0], temp_v1, &track->unk_10);
