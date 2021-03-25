@@ -34,8 +34,6 @@ INCLUDE_ASM(s32, "code_2BF90", func_80051050);
 
 INCLUDE_ASM(s32, "code_2BF90", func_800510A4);
 
-// Something wrong with the switch control flow
-#ifdef NON_MATCHING
 void func_800511BC(UnkAl834* arg0) {
     u32 i;
     s32 j;
@@ -50,44 +48,42 @@ void func_800511BC(UnkAl834* arg0) {
 
     for (j = 0; j < ARRAY_COUNT(arg0->unk_24); j++) {
         UnkAl1E4* temp = &arg0->unk_24[j];
+        s32 var;
 
         if (temp->unk_08 != 0) {
             if (arg0->unk_21 != 0) {
                 func_80051334(arg0, temp);
             }
 
-            switch (temp->unk_24) {
-                case 3:
+            var = temp->unk_24;
+            if (var != 0) {
+                if (var == 3) {
                     temp->unk_24 = 2;
                     func_800522A8(arg0, temp);
                     func_800521E8(arg0, temp);
-                    break;
-                case 1:
+                } else if (temp->unk_24 == 1) {
                     temp->unk_24 = 0;
                     if (temp->unk_28 != 0) {
                         func_80050D50(temp);
                     }
                     func_8005232C(arg0, temp);
-                    break;
-                case 0:
-                    if (temp->unk_28 != 0) {
-                        func_80050D50(temp);
-                    }
-                    if (temp->unk_25 == 2) {
-                        func_800521E8(arg0, temp);
-                        temp->unk_25 = 1;
-                    }
-                    func_80051434(arg0, temp);
-                    break;
+                }
+            } else {
+                if (temp->unk_28 != 0) {
+                    func_80050D50(temp);
+                }
+                if (temp->unk_25 == 2) {
+                    func_800521E8(arg0, temp);
+                    temp->unk_25 = 1;
+                }
+                func_80051434(arg0, temp);
+                var = temp->unk_24;
             }
         }
     }
 
     arg0->unk_21 = 0;
 }
-#else
-INCLUDE_ASM(void, "code_2BF90", func_800511BC, UnkAl834* arg0);
-#endif
 
 INCLUDE_ASM(void, "code_2BF90", func_80051334, UnkAl834* arg0, UnkAl1E4* arg1);
 

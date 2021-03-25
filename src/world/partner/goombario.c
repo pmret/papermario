@@ -26,22 +26,20 @@ INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, ScriptIn
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 
-// Compiler is generating more efficient code than the original asm, using xori and sltiu instead of beq
-#ifdef NON_MATCHING
 s32 world_goombario_can_pause(Npc* partner) {
+    s32 new_var;
+
     if (D_8010EBB0.unk_00) {
         return FALSE;
     }
 
     if ((partner->flags & 0x1800) != 0x1000) {
-        return FALSE;
+        return new_var = 0;
+        do { } while(new_var); // why though
     }
 
     return TRUE;
 }
-#else
-INCLUDE_ASM(s32, "world/partner/goombario", world_goombario_can_pause, Npc* partner);
-#endif
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88

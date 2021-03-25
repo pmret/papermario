@@ -41,8 +41,6 @@ void func_802E14D8(Entity* entity) {
 
 void func_801125E8(f32*, f32*, f32*, f32*, f32*, f32*);
 
-#ifdef NON_MATCHING
-// regalloc issues
 void func_802E153C(Entity* entity) {
     struct802E1400* temp_s1 = entity->dataBuf;
     f32 hitDepth = 10.0f;
@@ -55,16 +53,15 @@ void func_802E153C(Entity* entity) {
     func_801125E8(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
 
     if ((entity->position.y != y) && (entity->position.y > y)) {
-        temp_s1->unk_00.x += 0.5;
-        entity->position.y -= temp_s1->unk_00.x;
+        f32 var = temp_s1->unk_00.x;
+        var += 0.5;
+        temp_s1->unk_00.x = var;
+        entity->position.y -= var;
         if (entity->position.y < y) {
             entity->position.y = y;
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "code_102C80", func_802E153C);
-#endif
 
 void func_802E1614(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;

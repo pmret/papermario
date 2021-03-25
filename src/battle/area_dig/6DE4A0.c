@@ -24,16 +24,15 @@ ApiStatus func_802186E0_6DE4A0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Reordering near the beginning
-#ifdef NON_MATCHING
 ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 6;
-    battleStatus->selectedMoveID = 0x98;
+    do {} while(0);
     battleStatus->selectedItemID = 0;
+    battleStatus->selectedMoveID = 0x98;
     battleStatus->currentTargetListFlags = D_8008FC44;
 
     player_create_target_list(partner);
@@ -44,9 +43,6 @@ ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/area_dig/6DE4A0", func_80218770_6DE530);
-#endif
 
 ApiStatus func_802187F0_6DE5B0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

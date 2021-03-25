@@ -258,22 +258,16 @@ NpcId create_basic_npc(NpcBlueprint* blueprint);
 
 extern s32 D_802C0000;
 
-// Some weird ordering issues, probably a macro at play
-#ifdef NON_MATCHING
 s32 use_consumable(s32 arg0) {
     ScriptInstance* script;
-    s32 temp_s1;
 
-    temp_s1 = gPlayerData.invItems[arg0];
     D_8010CD20 = arg0;
+    arg0 = gPlayerData.invItems[arg0];
     dma_copy(D_800F8010[0], D_800F8010[1], &D_802C0000);
     script = start_script(D_800F8010[2], 1, 0);
-    script->varTable[10] = temp_s1;
+    script->varTable[10] = arg0;
     return script->id;
 }
-#else
-INCLUDE_ASM(s32, "world/partners", use_consumable);
-#endif
 
 void remove_consumable(void) {
     gPlayerData.invItems[D_8010CD20] = 0;
@@ -422,17 +416,12 @@ s32 partner_use_ability(void) {
     return FALSE;
 }
 
-// needless v0 to v1 thing. functionally equivalent
-#ifdef NON_MATCHING
 s32 partner_player_can_pause(void) {
-    if (wPartner == NULL || wPartner->canPlayerPause == NULL || wPartner->canPlayerPause(wPartnerNpc)) {
-        return TRUE;
+    if (wPartner != NULL && wPartner->canPlayerPause != NULL && !wPartner->canPlayerPause(wPartnerNpc)) {
+        return FALSE;
     }
-    return FALSE;
+    return TRUE;
 }
-#else
-INCLUDE_ASM(s32, "world/partners", partner_player_can_pause, void)
-#endif
 
 s32 partner_can_use_ability(void) {
     if (wPartner->canUseAbility != NULL && !wPartner->canUseAbility(wPartnerNpc)) {
@@ -441,17 +430,19 @@ s32 partner_can_use_ability(void) {
     return FALSE;
 }
 
-// Stack size issue - something's probably up with these data vars
-#ifdef NON_MATCHING
 void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* temp8010CFD8 = &D_8010CFD8;
-    s32* temp8010CFE8 = &D_8010CFE8;
+    s32* temp8010CFD8;
+    s32* temp8010CFE8;
     s32 temp_s0;
 
     temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
     get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+
+    temp8010CFD8 = &D_8010CFD8;
+    temp8010CFE8 = &D_8010CFE8;
+
     D_8010CFE0 = 1;
     *temp8010CFE8 = 9;
     *temp8010CFD8 = temp_s0;
@@ -476,9 +467,6 @@ void partner_reset_data(void) {
         _use_partner_ability();
     }
 }
-#else
-INCLUDE_ASM(s32, "world/partners", partner_reset_data);
-#endif
 
 void partner_initialize_data(void) {
     Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
@@ -707,31 +695,32 @@ void func_800EF43C(void) {
 
 INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 
-// Some branching / merging stuff causing issues
+// Saves at the end
 #ifdef NON_MATCHING
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = &gCameras;
+    Camera* cameras2 = cameras;
     f32 yaw;
     s32 ret;
 
     if (playerStatus->unk_90 == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
-            yaw = cameras[0].currentYaw - 90.0f;
             ret = 1;
+            yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
         } else {
-            yaw = cameras[0].currentYaw + 90.0f;
+            yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
             ret = 0;
         }
     } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
-        yaw = cameras[0].currentYaw - 90.0f;
         ret = 1;
+        yaw = clamp_angle(cameras2[0].currentYaw - 90.0f);
     } else {
-        yaw = cameras[0].currentYaw + 90.0f;
+        yaw = clamp_angle(cameras2[0].currentYaw + 90.0f);
         ret = 0;
     }
 
-    playerStatus->targetYaw = clamp_angle(yaw);
+    playerStatus->targetYaw = yaw;
     playerStatus->currentYaw = playerStatus->targetYaw;
     return ret;
 }

@@ -57,8 +57,6 @@ void func_802E8A58(Entity* entity) {
     }
 }
 
-#ifdef NON_MATCHING
-// small regalloc issue
 void func_802E8ADC(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -66,10 +64,8 @@ void func_802E8ADC(Entity* entity) {
         OVERRIDE_FLAG_SET(0x40);
 
         if (!(playerStatus->flags & 0x3000)) {
-            s32 stickAxis0 = playerStatus->stickAxis[0];
+            s32 stickAxis0 = abs(playerStatus->stickAxis[0]);
             s32 stickAxis1 = playerStatus->stickAxis[1];
-
-            stickAxis0 = abs(stickAxis0);
 
             if ((stickAxis0 != 0) || (stickAxis1 != 0)) {
                 if (atan2(0.0f, 0.0f, stickAxis0, stickAxis1) < 60.0f) {
@@ -81,9 +77,6 @@ void func_802E8ADC(Entity* entity) {
         OVERRIDE_FLAG_UNSET(0x40);
     }
 }
-#else
-INCLUDE_ASM(s32, "code_10A230", func_802E8ADC);
-#endif
 
 void func_802E8BC0(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
