@@ -25,9 +25,9 @@ void snd_load_audio_data(s32 frequency) {
     alHeap = D_80078E54->unk_18;
     *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
 
-    (*temp1) = alHeapAlloc(alHeap, 1, 0xA9C);
-    D_8009A5FC = alHeapAlloc(alHeap, 1, 0xA9C);
-    D_8009A5CC = alHeapAlloc(alHeap, 1, 0xA9C);
+    (*temp1) = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+    D_8009A5FC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+    D_8009A5CC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     (*temp2) = alHeapAlloc(alHeap, 1, 0x6CC);
     D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
     (*temp1)->soundManager = (*temp2);
@@ -42,7 +42,7 @@ void snd_load_audio_data(s32 frequency) {
     temp4->unk_68 = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
-        temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, 0xA9C);
+        temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     }
 
     temp4->unk_A0 = alHeapAlloc(alHeap, 1, 0x5200);
