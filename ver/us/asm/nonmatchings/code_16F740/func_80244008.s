@@ -464,7 +464,7 @@ glabel func_80244008
 /* 172F8C 802446AC 0000202D */  daddu     $a0, $zero, $zero
 /* 172F90 802446B0 2405FFFF */  addiu     $a1, $zero, -1
 /* 172F94 802446B4 0080302D */  daddu     $a2, $a0, $zero
-/* 172F98 802446B8 0C052A46 */  jal       set_music_track
+/* 172F98 802446B8 0C052A46 */  jal       bgm_set_song
 /* 172F9C 802446BC 240705DC */   addiu    $a3, $zero, 0x5dc
 /* 172FA0 802446C0 080911B3 */  j         .L802446CC
 /* 172FA4 802446C4 24040020 */   addiu    $a0, $zero, 0x20

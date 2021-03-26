@@ -78,7 +78,7 @@ void func_80035660(void) {
     } else {
         set_map_transition_effect(8);
         OVERRIDE_FLAG_UNSET(0x0010000);
-        set_music_track(0, -1, 0, 1000, 8);
+        bgm_set_song(0, -1, 0, 1000, 8);
     }
     OVERRIDE_FLAG_UNSET(0x40);
 }

@@ -8,7 +8,7 @@ glabel jtbl_80151290
 
 .section .text
 
-glabel func_8014A548
+glabel bgm_update_music_settings
 /* E0C48 8014A548 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* E0C4C 8014A54C AFB1001C */  sw        $s1, 0x1c($sp)
 /* E0C50 8014A550 3C118016 */  lui       $s1, %hi(gMusicPlayers)
@@ -139,7 +139,7 @@ glabel L8014A698_E0D98
 .L8014A710:
 /* E0E10 8014A710 3C048016 */  lui       $a0, %hi(gMusicUnkVolume)
 /* E0E14 8014A714 84849AE0 */  lh        $a0, %lo(gMusicUnkVolume)($a0)
-/* E0E18 8014A718 0C052B21 */  jal       transition_music_volume_to
+/* E0E18 8014A718 0C052B21 */  jal       bgm_set_target_volume
 /* E0E1C 8014A71C 00000000 */   nop
 .L8014A720:
 /* E0E20 8014A720 8E040016 */  lw        $a0, 0x16($s0)
@@ -184,7 +184,7 @@ glabel L8014A7A0_E0EA0
 /* E0EA8 8014A7A8 2A420002 */  slti      $v0, $s2, 2
 /* E0EAC 8014A7AC 1440FF75 */  bnez      $v0, .L8014A584
 /* E0EB0 8014A7B0 26310030 */   addiu    $s1, $s1, 0x30
-/* E0EB4 8014A7B4 0C052B25 */  jal       func_8014AC94
+/* E0EB4 8014A7B4 0C052B25 */  jal       bgm_update_volume
 /* E0EB8 8014A7B8 00000000 */   nop
 /* E0EBC 8014A7BC 8FBF0030 */  lw        $ra, 0x30($sp)
 /* E0EC0 8014A7C0 8FB5002C */  lw        $s5, 0x2c($sp)

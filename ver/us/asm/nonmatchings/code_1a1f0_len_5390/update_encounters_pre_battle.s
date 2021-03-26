@@ -235,10 +235,10 @@ glabel update_encounters_pre_battle
 /* 1CAB4 800416B4 0080282D */   daddu    $a1, $a0, $zero
 /* 1CAB8 800416B8 0000282D */  daddu     $a1, $zero, $zero
 .L800416BC:
-/* 1CABC 800416BC 0C052BE3 */  jal       func_8014AF8C
+/* 1CABC 800416BC 0C052BE3 */  jal       bgm_set_battle_song
 /* 1CAC0 800416C0 00000000 */   nop
 .L800416C4:
-/* 1CAC4 800416C4 0C052BBE */  jal       func_8014AEF8
+/* 1CAC4 800416C4 0C052BBE */  jal       bgm_push_battle_song
 /* 1CAC8 800416C8 00000000 */   nop
 /* 1CACC 800416CC 24020001 */  addiu     $v0, $zero, 1
 /* 1CAD0 800416D0 3C01800A */  lui       $at, %hi(D_8009A654)

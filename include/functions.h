@@ -229,7 +229,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
-s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
 s32 basic_window_update(void);

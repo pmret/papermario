@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8014AC94
+glabel bgm_update_volume
 /* E1394 8014AC94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E1398 8014AC98 3C048015 */  lui       $a0, %hi(D_8014F738)
 /* E139C 8014AC9C 2484F738 */  addiu     $a0, $a0, %lo(D_8014F738)

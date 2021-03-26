@@ -17,7 +17,7 @@ glabel func_80218A98_59F178
 /* 59F1A8 80218AC8 0000202D */  daddu     $a0, $zero, $zero
 /* 59F1AC 80218ACC 2405008B */  addiu     $a1, $zero, 0x8b
 /* 59F1B0 80218AD0 0080302D */  daddu     $a2, $a0, $zero
-/* 59F1B4 80218AD4 0C052A46 */  jal       set_music_track
+/* 59F1B4 80218AD4 0C052A46 */  jal       bgm_set_song
 /* 59F1B8 80218AD8 240701F4 */   addiu    $a3, $zero, 0x1f4
 /* 59F1BC 80218ADC 080862CB */  j         .L80218B2C
 /* 59F1C0 80218AE0 0000102D */   daddu    $v0, $zero, $zero
@@ -30,7 +30,7 @@ glabel func_80218A98_59F178
 /* 59F1D8 80218AF8 080862CB */  j         .L80218B2C
 /* 59F1DC 80218AFC 0000102D */   daddu    $v0, $zero, $zero
 .L80218B00:
-/* 59F1E0 80218B00 0C052B02 */  jal       func_8014AC08
+/* 59F1E0 80218B00 0C052B02 */  jal       bgm_init_music_players
 /* 59F1E4 80218B04 00000000 */   nop
 /* 59F1E8 80218B08 080862CB */  j         .L80218B2C
 /* 59F1EC 80218B0C 0000102D */   daddu    $v0, $zero, $zero
@@ -39,7 +39,7 @@ glabel func_80218A98_59F178
 /* 59F1F4 80218B14 0000202D */  daddu     $a0, $zero, $zero
 /* 59F1F8 80218B18 2405000D */  addiu     $a1, $zero, 0xd
 /* 59F1FC 80218B1C 24060001 */  addiu     $a2, $zero, 1
-/* 59F200 80218B20 0C052A46 */  jal       set_music_track
+/* 59F200 80218B20 0C052A46 */  jal       bgm_set_song
 /* 59F204 80218B24 240701F4 */   addiu    $a3, $zero, 0x1f4
 /* 59F208 80218B28 24020002 */  addiu     $v0, $zero, 2
 .L80218B2C:

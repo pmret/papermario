@@ -156,7 +156,7 @@ glabel func_80245440
 /* 173F58 80245678 0000202D */  daddu     $a0, $zero, $zero
 /* 173F5C 8024567C 2405FFFF */  addiu     $a1, $zero, -1
 /* 173F60 80245680 0080302D */  daddu     $a2, $a0, $zero
-/* 173F64 80245684 0C052A46 */  jal       set_music_track
+/* 173F64 80245684 0C052A46 */  jal       bgm_set_song
 /* 173F68 80245688 240705DC */   addiu    $a3, $zero, 0x5dc
 .L8024568C:
 /* 173F6C 8024568C 0C090464 */  jal       func_80241190

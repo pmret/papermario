@@ -122,7 +122,7 @@ glabel step_pause_menu
 /* FF44 80034B44 AC220924 */  sw        $v0, %lo(D_800A0924)($at)
 /* FF48 80034B48 0C0525FF */  jal       func_801497FC
 /* FF4C 80034B4C 0000202D */   daddu    $a0, $zero, $zero
-/* FF50 80034B50 0C052B17 */  jal       func_8014AC5C
+/* FF50 80034B50 0C052B17 */  jal       bgm_quiet_max_volume
 /* FF54 80034B54 00000000 */   nop
 /* FF58 80034B58 3C048007 */  lui       $a0, %hi(D_8007795C)
 /* FF5C 80034B5C 0C018038 */  jal       nuPiReadRomOverlay

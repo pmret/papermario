@@ -80,7 +80,7 @@ void step_game_loop(void) {
     step_current_game_mode();
     update_entities();
     func_80138198();
-    func_8014A548();
+    bgm_update_music_settings();
     update_ambient_sounds();
     sfx_update_looping_sound_params();
     update_windows();
@@ -223,7 +223,7 @@ void load_engine_data(void) {
     clear_effect_data();
     clear_saved_variables();
     clear_item_entity_data();
-    func_8014A498();
+    bgm_reset_sequence_players();
     reset_ambient_sounds();
     sfx_clear_sounds();
     clear_windows();

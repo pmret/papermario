@@ -80,7 +80,7 @@ glabel L8025E1FC_18CADC
 /* 18CB78 8025E298 2405008B */  addiu     $a1, $zero, 0x8b
 .L8025E29C:
 /* 18CB7C 8025E29C 0080302D */  daddu     $a2, $a0, $zero
-/* 18CB80 8025E2A0 0C052A46 */  jal       set_music_track
+/* 18CB80 8025E2A0 0C052A46 */  jal       bgm_set_song
 /* 18CB84 8025E2A4 240700FA */   addiu    $a3, $zero, 0xfa
 /* 18CB88 8025E2A8 3C01802A */  lui       $at, %hi(D_8029FB84)
 /* 18CB8C 8025E2AC AC20FB84 */  sw        $zero, %lo(D_8029FB84)($at)
@@ -1686,7 +1686,7 @@ glabel L8025F924_18E204
 /* 18E398 8025FAB8 0000202D */  daddu     $a0, $zero, $zero
 /* 18E39C 8025FABC 2405FFFF */  addiu     $a1, $zero, -1
 /* 18E3A0 8025FAC0 0080302D */  daddu     $a2, $a0, $zero
-/* 18E3A4 8025FAC4 0C052A46 */  jal       set_music_track
+/* 18E3A4 8025FAC4 0C052A46 */  jal       bgm_set_song
 /* 18E3A8 8025FAC8 240707D0 */   addiu    $a3, $zero, 0x7d0
 .L8025FACC:
 /* 18E3AC 8025FACC 3C018028 */  lui       $at, %hi(D_80284150)
@@ -1905,7 +1905,7 @@ glabel L8025FD7C_18E65C
 /* 18E6A4 8025FDC4 0000202D */  daddu     $a0, $zero, $zero
 /* 18E6A8 8025FDC8 2405FFFF */  addiu     $a1, $zero, -1
 /* 18E6AC 8025FDCC 0080302D */  daddu     $a2, $a0, $zero
-/* 18E6B0 8025FDD0 0C052A46 */  jal       set_music_track
+/* 18E6B0 8025FDD0 0C052A46 */  jal       bgm_set_song
 /* 18E6B4 8025FDD4 240705DC */   addiu    $a3, $zero, 0x5dc
 /* 18E6B8 8025FDD8 24040001 */  addiu     $a0, $zero, 1
 .L8025FDDC:

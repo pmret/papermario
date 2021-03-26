@@ -55,11 +55,11 @@ void step_init_state(void) {
     clear_item_entity_data();
     clear_saved_variables();
     initialize_collision();
-    func_8014AC08();
+    bgm_init_music_players();
     clear_windows();
     partner_initialize_data();
     sfx_clear_sounds();
-    func_8014A52C();
+    bgm_reset_volume();
     initialize_curtains();
 
     for (i = 0; i < 4; i++) {
