@@ -50,7 +50,7 @@ glabel func_80240600_ECA300
 /* ECA3B4 802406B4 3C013F80 */  lui       $at, 0x3f80
 /* ECA3B8 802406B8 4481B000 */  mtc1      $at, $f22
 /* ECA3BC 802406BC 4480A000 */  mtc1      $zero, $f20
-/* ECA3C0 802406C0 0C0B53A3 */  jal       func_802D4E8C
+/* ECA3C0 802406C0 0C0B53A3 */  jal       dead_get_variable
 /* ECA3C4 802406C4 0240802D */   daddu    $s0, $s2, $zero
 /* ECA3C8 802406C8 0C0462EC */  jal       func_80118BB0
 /* ECA3CC 802406CC 0040202D */   daddu    $a0, $v0, $zero

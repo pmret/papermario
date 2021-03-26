@@ -9,7 +9,7 @@ glabel func_80240428_EB1288
 /* EB1298 80240438 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB129C 8024043C 8E30000C */  lw        $s0, 0xc($s1)
 /* EB12A0 80240440 8E050000 */  lw        $a1, ($s0)
-/* EB12A4 80240444 0C0B53A3 */  jal       func_802D4E8C
+/* EB12A4 80240444 0C0B53A3 */  jal       dead_get_variable
 /* EB12A8 80240448 26100004 */   addiu    $s0, $s0, 4
 /* EB12AC 8024044C 0C00F94D */  jal       func_8003E534
 /* EB12B0 80240450 0040202D */   daddu    $a0, $v0, $zero
@@ -17,7 +17,7 @@ glabel func_80240428_EB1288
 /* EB12B8 80240458 00000000 */   nop
 /* EB12BC 8024045C 8E050000 */  lw        $a1, ($s0)
 /* EB12C0 80240460 844600A8 */  lh        $a2, 0xa8($v0)
-/* EB12C4 80240464 0C0B551A */  jal       func_802D5468
+/* EB12C4 80240464 0C0B551A */  jal       dead_set_variable
 /* EB12C8 80240468 0220202D */   daddu    $a0, $s1, $zero
 .L8024046C:
 /* EB12CC 8024046C 8FBF0018 */  lw        $ra, 0x18($sp)

@@ -13,7 +13,7 @@ void N(DeadUnkNpcAIFunc14)(ScriptInstance* script, NpcAISettings* aiSettings) {
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
-    npc->yaw = func_8002AF70(npc->pos.x, npc->pos.z, D_800FFC90->position.x, D_800FFC90->position.z);
+    npc->yaw = dead_atan2(npc->pos.x, npc->pos.z, D_800FFC90->position.x, D_800FFC90->position.z);
 
     enemy->varTable[2] = 0;
 

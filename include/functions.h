@@ -280,9 +280,15 @@ s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 // Dead functions:
-f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2
 Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
 Npc* func_8003E534(NpcId npcId); // get_npc_safe
-void func_80075170(s32, f32, f32, f32, f32); // func_8006FEF0
+void dead_func_8006FEF0(s32, f32, f32, f32, f32);
+s32 dead_get_variable(ScriptInstance* script, Bytecode var);
+f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
+s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
+f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+
+f32 dead_cos_rad(f32 x);
+f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 #endif

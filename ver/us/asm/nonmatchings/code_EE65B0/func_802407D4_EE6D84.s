@@ -149,7 +149,7 @@ glabel func_802407D4_EE6D84
 /* EE6FB8 80240A08 0000202D */  daddu     $a0, $zero, $zero
 /* EE6FBC 80240A0C 3C05F971 */  lui       $a1, 0xf971
 /* EE6FC0 80240A10 34A588A4 */  ori       $a1, $a1, 0x88a4
-/* EE6FC4 80240A14 0C0B53A3 */  jal       func_802D4E8C
+/* EE6FC4 80240A14 0C0B53A3 */  jal       dead_get_variable
 /* EE6FC8 80240A18 AE020004 */   sw       $v0, 4($s0)
 /* EE6FCC 80240A1C 10400017 */  beqz      $v0, .L80240A7C
 /* EE6FD0 80240A20 00000000 */   nop

@@ -20,7 +20,7 @@ glabel func_802400F0_ED8F10
 /* ED8F2C 8024010C 0200202D */  daddu     $a0, $s0, $zero
 /* ED8F30 80240110 3C05FE36 */  lui       $a1, 0xfe36
 /* ED8F34 80240114 34A53C80 */  ori       $a1, $a1, 0x3c80
-/* ED8F38 80240118 0C0B53A3 */  jal       func_802D4E8C
+/* ED8F38 80240118 0C0B53A3 */  jal       dead_get_variable
 /* ED8F3C 8024011C 0040902D */   daddu    $s2, $v0, $zero
 /* ED8F40 80240120 0200202D */  daddu     $a0, $s0, $zero
 /* ED8F44 80240124 3C05FE36 */  lui       $a1, 0xfe36
@@ -30,7 +30,7 @@ glabel func_802400F0_ED8F10
 /* ED8F54 80240134 C4600000 */  lwc1      $f0, ($v1)
 /* ED8F58 80240138 4600008D */  trunc.w.s $f2, $f0
 /* ED8F5C 8024013C 44061000 */  mfc1      $a2, $f2
-/* ED8F60 80240140 0C0B551A */  jal       func_802D5468
+/* ED8F60 80240140 0C0B551A */  jal       dead_set_variable
 /* ED8F64 80240144 34A53C81 */   ori      $a1, $a1, 0x3c81
 /* ED8F68 80240148 0200202D */  daddu     $a0, $s0, $zero
 /* ED8F6C 8024014C 8E420014 */  lw        $v0, 0x14($s2)
@@ -39,7 +39,7 @@ glabel func_802400F0_ED8F10
 /* ED8F78 80240158 C4400004 */  lwc1      $f0, 4($v0)
 /* ED8F7C 8024015C 4600008D */  trunc.w.s $f2, $f0
 /* ED8F80 80240160 44061000 */  mfc1      $a2, $f2
-/* ED8F84 80240164 0C0B551A */  jal       func_802D5468
+/* ED8F84 80240164 0C0B551A */  jal       dead_set_variable
 /* ED8F88 80240168 34A53C82 */   ori      $a1, $a1, 0x3c82
 /* ED8F8C 8024016C 0200202D */  daddu     $a0, $s0, $zero
 /* ED8F90 80240170 8E420014 */  lw        $v0, 0x14($s2)
@@ -48,7 +48,7 @@ glabel func_802400F0_ED8F10
 /* ED8F9C 8024017C C4400008 */  lwc1      $f0, 8($v0)
 /* ED8FA0 80240180 4600008D */  trunc.w.s $f2, $f0
 /* ED8FA4 80240184 44061000 */  mfc1      $a2, $f2
-/* ED8FA8 80240188 0C0B551A */  jal       func_802D5468
+/* ED8FA8 80240188 0C0B551A */  jal       dead_set_variable
 /* ED8FAC 8024018C 34A53C83 */   ori      $a1, $a1, 0x3c83
 /* ED8FB0 80240190 0200202D */  daddu     $a0, $s0, $zero
 /* ED8FB4 80240194 8E420014 */  lw        $v0, 0x14($s2)
@@ -57,7 +57,7 @@ glabel func_802400F0_ED8F10
 /* ED8FC0 802401A0 C620000C */  lwc1      $f0, 0xc($s1)
 /* ED8FC4 802401A4 4600008D */  trunc.w.s $f2, $f0
 /* ED8FC8 802401A8 44061000 */  mfc1      $a2, $f2
-/* ED8FCC 802401AC 0C0B551A */  jal       func_802D5468
+/* ED8FCC 802401AC 0C0B551A */  jal       dead_set_variable
 /* ED8FD0 802401B0 34A53C84 */   ori      $a1, $a1, 0x3c84
 /* ED8FD4 802401B4 3C028008 */  lui       $v0, %hi(D_80079430)
 /* ED8FD8 802401B8 8C429430 */  lw        $v0, %lo(D_80079430)($v0)

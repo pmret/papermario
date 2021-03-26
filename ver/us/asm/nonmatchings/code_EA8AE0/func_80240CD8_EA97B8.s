@@ -11,29 +11,29 @@ glabel func_80240CD8_EA97B8
 /* EA97D0 80240CF0 AFB00010 */  sw        $s0, 0x10($sp)
 /* EA97D4 80240CF4 8E30000C */  lw        $s0, 0xc($s1)
 /* EA97D8 80240CF8 8E050000 */  lw        $a1, ($s0)
-/* EA97DC 80240CFC 0C0B53A3 */  jal       func_802D4E8C
+/* EA97DC 80240CFC 0C0B53A3 */  jal       dead_get_variable
 /* EA97E0 80240D00 26100004 */   addiu    $s0, $s0, 4
 /* EA97E4 80240D04 8E050000 */  lw        $a1, ($s0)
 /* EA97E8 80240D08 26100004 */  addiu     $s0, $s0, 4
 /* EA97EC 80240D0C 0220202D */  daddu     $a0, $s1, $zero
-/* EA97F0 80240D10 0C0B53A3 */  jal       func_802D4E8C
+/* EA97F0 80240D10 0C0B53A3 */  jal       dead_get_variable
 /* EA97F4 80240D14 0040982D */   daddu    $s3, $v0, $zero
 /* EA97F8 80240D18 8E050000 */  lw        $a1, ($s0)
 /* EA97FC 80240D1C 26100004 */  addiu     $s0, $s0, 4
 /* EA9800 80240D20 0220202D */  daddu     $a0, $s1, $zero
-/* EA9804 80240D24 0C0B53A3 */  jal       func_802D4E8C
+/* EA9804 80240D24 0C0B53A3 */  jal       dead_get_variable
 /* EA9808 80240D28 0040902D */   daddu    $s2, $v0, $zero
 /* EA980C 80240D2C 8E050000 */  lw        $a1, ($s0)
 /* EA9810 80240D30 26100004 */  addiu     $s0, $s0, 4
-/* EA9814 80240D34 0C0B53A3 */  jal       func_802D4E8C
+/* EA9814 80240D34 0C0B53A3 */  jal       dead_get_variable
 /* EA9818 80240D38 0220202D */   daddu    $a0, $s1, $zero
 /* EA981C 80240D3C 8E050000 */  lw        $a1, ($s0)
-/* EA9820 80240D40 0C0B53A3 */  jal       func_802D4E8C
+/* EA9820 80240D40 0C0B53A3 */  jal       dead_get_variable
 /* EA9824 80240D44 0220202D */   daddu    $a0, $s1, $zero
 /* EA9828 80240D48 0000202D */  daddu     $a0, $zero, $zero
 /* EA982C 80240D4C 3C05FD05 */  lui       $a1, 0xfd05
 /* EA9830 80240D50 34A50F80 */  ori       $a1, $a1, 0xf80
-/* EA9834 80240D54 0C0B53A3 */  jal       func_802D4E8C
+/* EA9834 80240D54 0C0B53A3 */  jal       dead_get_variable
 /* EA9838 80240D58 0040802D */   daddu    $s0, $v0, $zero
 /* EA983C 80240D5C 00131900 */  sll       $v1, $s3, 4
 /* EA9840 80240D60 00731823 */  subu      $v1, $v1, $s3

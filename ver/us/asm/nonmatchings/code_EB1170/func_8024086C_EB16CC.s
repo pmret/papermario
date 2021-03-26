@@ -17,7 +17,7 @@ glabel func_8024086C_EB16CC
 /* EB16FC 8024089C 8E30000C */  lw        $s0, 0xc($s1)
 /* EB1700 802408A0 8E160000 */  lw        $s6, ($s0)
 /* EB1704 802408A4 26100004 */  addiu     $s0, $s0, 4
-/* EB1708 802408A8 0C0B53A3 */  jal       func_802D4E8C
+/* EB1708 802408A8 0C0B53A3 */  jal       dead_get_variable
 /* EB170C 802408AC 02C0282D */   daddu    $a1, $s6, $zero
 /* EB1710 802408B0 44820000 */  mtc1      $v0, $f0
 /* EB1714 802408B4 00000000 */  nop
@@ -26,14 +26,14 @@ glabel func_8024086C_EB16CC
 /* EB1720 802408C0 8E140000 */  lw        $s4, ($s0)
 /* EB1724 802408C4 26100004 */  addiu     $s0, $s0, 4
 /* EB1728 802408C8 0220202D */  daddu     $a0, $s1, $zero
-/* EB172C 802408CC 0C0B53A3 */  jal       func_802D4E8C
+/* EB172C 802408CC 0C0B53A3 */  jal       dead_get_variable
 /* EB1730 802408D0 0280282D */   daddu    $a1, $s4, $zero
 /* EB1734 802408D4 0220202D */  daddu     $a0, $s1, $zero
 /* EB1738 802408D8 8E150000 */  lw        $s5, ($s0)
 /* EB173C 802408DC 4482B000 */  mtc1      $v0, $f22
 /* EB1740 802408E0 00000000 */  nop
 /* EB1744 802408E4 4680B5A0 */  cvt.s.w   $f22, $f22
-/* EB1748 802408E8 0C0B53A3 */  jal       func_802D4E8C
+/* EB1748 802408E8 0C0B53A3 */  jal       dead_get_variable
 /* EB174C 802408EC 02A0282D */   daddu    $a1, $s5, $zero
 /* EB1750 802408F0 2404FFFC */  addiu     $a0, $zero, -4
 /* EB1754 802408F4 44820000 */  mtc1      $v0, $f0
@@ -75,18 +75,18 @@ glabel func_8024086C_EB16CC
 /* EB17E4 80240984 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* EB17E8 80240988 4600008D */  trunc.w.s $f2, $f0
 /* EB17EC 8024098C 44061000 */  mfc1      $a2, $f2
-/* EB17F0 80240990 0C0B551A */  jal       func_802D5468
+/* EB17F0 80240990 0C0B551A */  jal       dead_set_variable
 /* EB17F4 80240994 02C0282D */   daddu    $a1, $s6, $zero
 /* EB17F8 80240998 0220202D */  daddu     $a0, $s1, $zero
 /* EB17FC 8024099C 4600B08D */  trunc.w.s $f2, $f22
 /* EB1800 802409A0 44061000 */  mfc1      $a2, $f2
-/* EB1804 802409A4 0C0B551A */  jal       func_802D5468
+/* EB1804 802409A4 0C0B551A */  jal       dead_set_variable
 /* EB1808 802409A8 0280282D */   daddu    $a1, $s4, $zero
 /* EB180C 802409AC 0220202D */  daddu     $a0, $s1, $zero
 /* EB1810 802409B0 C7A00014 */  lwc1      $f0, 0x14($sp)
 /* EB1814 802409B4 4600008D */  trunc.w.s $f2, $f0
 /* EB1818 802409B8 44061000 */  mfc1      $a2, $f2
-/* EB181C 802409BC 0C0B551A */  jal       func_802D5468
+/* EB181C 802409BC 0C0B551A */  jal       dead_set_variable
 /* EB1820 802409C0 02A0282D */   daddu    $a1, $s5, $zero
 /* EB1824 802409C4 8FBF0034 */  lw        $ra, 0x34($sp)
 /* EB1828 802409C8 8FB60030 */  lw        $s6, 0x30($sp)

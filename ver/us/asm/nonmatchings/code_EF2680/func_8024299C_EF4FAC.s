@@ -27,7 +27,7 @@ glabel func_8024299C_EF4FAC
 /* EF4FE8 802429D8 8EA3000C */  lw        $v1, 0xc($s5)
 /* EF4FEC 802429DC 02A0202D */  daddu     $a0, $s5, $zero
 /* EF4FF0 802429E0 8C650000 */  lw        $a1, ($v1)
-/* EF4FF4 802429E4 0C0B53A3 */  jal       func_802D4E8C
+/* EF4FF4 802429E4 0C0B53A3 */  jal       dead_get_variable
 /* EF4FF8 802429E8 0040882D */   daddu    $s1, $v0, $zero
 /* EF4FFC 802429EC AFA00028 */  sw        $zero, 0x28($sp)
 /* EF5000 802429F0 8E4300D0 */  lw        $v1, 0xd0($s2)

@@ -42,7 +42,7 @@ glabel func_80240520_EB7750
 /* EB77C4 80240594 C6400074 */  lwc1      $f0, 0x74($s2)
 /* EB77C8 80240598 46800020 */  cvt.s.w   $f0, $f0
 /* EB77CC 8024059C 46020003 */  div.s     $f0, $f0, $f2
-/* EB77D0 802405A0 0C00AD30 */  jal       func_8002B4C0
+/* EB77D0 802405A0 0C00AD30 */  jal       dead_cos_rad
 /* EB77D4 802405A4 E620005C */   swc1     $f0, 0x5c($s1)
 /* EB77D8 802405A8 3C013F80 */  lui       $at, 0x3f80
 /* EB77DC 802405AC 44811000 */  mtc1      $at, $f2
