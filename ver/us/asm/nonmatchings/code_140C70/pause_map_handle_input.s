@@ -239,7 +239,7 @@ glabel pause_map_handle_input
 /* 141F2C 8024EBEC 30424000 */  andi      $v0, $v0, 0x4000
 /* 141F30 8024EBF0 10400007 */  beqz      $v0, .L8024EC10
 /* 141F34 8024EBF4 2402FFFF */   addiu    $v0, $zero, -1
-/* 141F38 8024EBF8 0C05272D */  jal       play_sound
+/* 141F38 8024EBF8 0C05272D */  jal       sfx_play_sound
 /* 141F3C 8024EBFC 240400CA */   addiu    $a0, $zero, 0xca
 /* 141F40 8024EC00 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 141F44 8024EC04 A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)

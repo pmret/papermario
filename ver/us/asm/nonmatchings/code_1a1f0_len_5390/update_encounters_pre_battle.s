@@ -235,10 +235,10 @@ glabel update_encounters_pre_battle
 /* 1CAB4 800416B4 0080282D */   daddu    $a1, $a0, $zero
 /* 1CAB8 800416B8 0000282D */  daddu     $a1, $zero, $zero
 .L800416BC:
-/* 1CABC 800416BC 0C052BE3 */  jal       func_8014AF8C
+/* 1CABC 800416BC 0C052BE3 */  jal       bgm_set_battle_song
 /* 1CAC0 800416C0 00000000 */   nop
 .L800416C4:
-/* 1CAC4 800416C4 0C052BBE */  jal       func_8014AEF8
+/* 1CAC4 800416C4 0C052BBE */  jal       bgm_push_battle_song
 /* 1CAC8 800416C8 00000000 */   nop
 /* 1CACC 800416CC 24020001 */  addiu     $v0, $zero, 1
 /* 1CAD0 800416D0 3C01800A */  lui       $at, %hi(D_8009A654)
@@ -307,13 +307,13 @@ glabel update_encounters_pre_battle
 /* 1CBB8 800417B8 A2A200A0 */  sb        $v0, 0xa0($s5)
 /* 1CBBC 800417BC A6A300A2 */  sh        $v1, 0xa2($s5)
 .L800417C0:
-/* 1CBC0 800417C0 0C05271B */  jal       stop_sound
+/* 1CBC0 800417C0 0C05271B */  jal       sfx_stop_sound
 /* 1CBC4 800417C4 24042111 */   addiu    $a0, $zero, 0x2111
-/* 1CBC8 800417C8 0C05271B */  jal       stop_sound
+/* 1CBC8 800417C8 0C05271B */  jal       sfx_stop_sound
 /* 1CBCC 800417CC 24042112 */   addiu    $a0, $zero, 0x2112
-/* 1CBD0 800417D0 0C05271B */  jal       stop_sound
+/* 1CBD0 800417D0 0C05271B */  jal       sfx_stop_sound
 /* 1CBD4 800417D4 24042113 */   addiu    $a0, $zero, 0x2113
-/* 1CBD8 800417D8 0C05271B */  jal       stop_sound
+/* 1CBD8 800417D8 0C05271B */  jal       sfx_stop_sound
 /* 1CBDC 800417DC 24042114 */   addiu    $a0, $zero, 0x2114
 /* 1CBE0 800417E0 0C01CB37 */  jal       func_80072CDC
 /* 1CBE4 800417E4 0000202D */   daddu    $a0, $zero, $zero

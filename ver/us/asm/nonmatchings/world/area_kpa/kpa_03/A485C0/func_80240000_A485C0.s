@@ -45,7 +45,7 @@ glabel func_80240000_A485C0
 /* A4865C 8024009C 14400004 */  bnez      $v0, .L802400B0
 /* A48660 802400A0 24020001 */   addiu    $v0, $zero, 1
 /* A48664 802400A4 AE020074 */  sw        $v0, 0x74($s0)
-/* A48668 802400A8 0C05272D */  jal       play_sound
+/* A48668 802400A8 0C05272D */  jal       sfx_play_sound
 /* A4866C 802400AC 24042011 */   addiu    $a0, $zero, 0x2011
 .L802400B0:
 /* A48670 802400B0 8E020070 */  lw        $v0, 0x70($s0)
@@ -67,7 +67,7 @@ glabel func_80240000_A485C0
 /* A486AC 802400EC 284200FF */  slti      $v0, $v0, 0xff
 /* A486B0 802400F0 10400003 */  beqz      $v0, .L80240100
 /* A486B4 802400F4 AE000074 */   sw       $zero, 0x74($s0)
-/* A486B8 802400F8 0C05272D */  jal       play_sound
+/* A486B8 802400F8 0C05272D */  jal       sfx_play_sound
 /* A486BC 802400FC 24042012 */   addiu    $a0, $zero, 0x2012
 .L80240100:
 /* A486C0 80240100 8E020070 */  lw        $v0, 0x70($s0)

@@ -79,7 +79,7 @@ void step_battle(void) {
             *temp800A0900 = -1;
             nuGfxSetCfb(&D_800778A0, 2);
             nuContRmbForceStopEnd();
-            func_80149838();
+            sfx_stop_env_sounds();
             func_8003B1A8();
             gGameStatusPtr->isBattle = TRUE;
             allocate_hit_tables();

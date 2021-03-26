@@ -152,7 +152,7 @@ glabel L802BB398_E2BAC8
 /* E2BB54 802BB424 24630001 */  addiu     $v1, $v1, 1
 /* E2BB58 802BB428 E6000008 */  swc1      $f0, 8($s0)
 /* E2BB5C 802BB42C E602000C */  swc1      $f2, 0xc($s0)
-/* E2BB60 802BB430 0C05272D */  jal       play_sound
+/* E2BB60 802BB430 0C05272D */  jal       sfx_play_sound
 /* E2BB64 802BB434 A2030012 */   sb       $v1, 0x12($s0)
 /* E2BB68 802BB438 080AED75 */  j         .L802BB5D4
 /* E2BB6C 802BB43C 00000000 */   nop
@@ -233,7 +233,7 @@ glabel L802BB4E0_E2BC10
 /* E2BC84 802BB554 A2030011 */  sb        $v1, 0x11($s0)
 /* E2BC88 802BB558 24420001 */  addiu     $v0, $v0, 1
 .L802BB55C:
-/* E2BC8C 802BB55C 0C05272D */  jal       play_sound
+/* E2BC8C 802BB55C 0C05272D */  jal       sfx_play_sound
 /* E2BC90 802BB560 A2020012 */   sb       $v0, 0x12($s0)
 /* E2BC94 802BB564 080AED75 */  j         .L802BB5D4
 /* E2BC98 802BB568 00000000 */   nop

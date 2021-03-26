@@ -6,8 +6,8 @@ Script N(main) = SCRIPT({
     await N(EatItem);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
-    PlayEffect(87, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-    PlaySound(889);
+    PlayEffect(0x57, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+    PlaySound(SoundId_379);
     GetItemPower(ItemId_VOLT_SHROOM, SI_VAR(0), SI_VAR(1));
     N(func_802A123C_7307DC)();
     sleep 40;

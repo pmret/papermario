@@ -594,7 +594,7 @@ glabel L802A6170_41AF00
 /* 41AFA0 802A6210 82C3008B */  lb        $v1, 0x8b($s6)
 /* 41AFA4 802A6214 10620010 */  beq       $v1, $v0, .L802A6258
 /* 41AFA8 802A6218 00000000 */   nop
-/* 41AFAC 802A621C 0C05272D */  jal       play_sound
+/* 41AFAC 802A621C 0C05272D */  jal       sfx_play_sound
 /* 41AFB0 802A6220 2404000F */   addiu    $a0, $zero, 0xf
 /* 41AFB4 802A6224 3C02802B */  lui       $v0, %hi(D_802AD002)
 /* 41AFB8 802A6228 8042D002 */  lb        $v0, %lo(D_802AD002)($v0)
@@ -619,7 +619,7 @@ glabel L802A6170_41AF00
 /* 41B000 802A6270 82C3008B */  lb        $v1, 0x8b($s6)
 /* 41B004 802A6274 106207B3 */  beq       $v1, $v0, L802A8144_41CED4
 /* 41B008 802A6278 00000000 */   nop
-/* 41B00C 802A627C 0C05272D */  jal       play_sound
+/* 41B00C 802A627C 0C05272D */  jal       sfx_play_sound
 /* 41B010 802A6280 2404021D */   addiu    $a0, $zero, 0x21d
 /* 41B014 802A6284 080AA04F */  j         .L802A813C
 /* 41B018 802A6288 24020008 */   addiu    $v0, $zero, 8

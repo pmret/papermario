@@ -245,7 +245,7 @@ glabel func_802BD758_3184A8
 /* 318840 802BDAF0 2442FFFF */   addiu    $v0, $v0, -1
 /* 318844 802BDAF4 3C048000 */  lui       $a0, 0x8000
 /* 318848 802BDAF8 0000282D */  daddu     $a1, $zero, $zero
-/* 31884C 802BDAFC 0C052742 */  jal       play_sound_at_npc
+/* 31884C 802BDAFC 0C052742 */  jal       sfx_play_sound_at_npc
 /* 318850 802BDB00 2406FFFC */   addiu    $a2, $zero, -4
 /* 318854 802BDB04 26240038 */  addiu     $a0, $s1, 0x38
 /* 318858 802BDB08 4480A000 */  mtc1      $zero, $f20
@@ -389,7 +389,7 @@ glabel func_802BD758_3184A8
 /* 318A64 802BDD14 24040141 */  addiu     $a0, $zero, 0x141
 .L802BDD18:
 /* 318A68 802BDD18 0000282D */  daddu     $a1, $zero, $zero
-/* 318A6C 802BDD1C 0C052742 */  jal       play_sound_at_npc
+/* 318A6C 802BDD1C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 318A70 802BDD20 2406FFFC */   addiu    $a2, $zero, -4
 .L802BDD24:
 /* 318A74 802BDD24 8E430074 */  lw        $v1, 0x74($s2)
@@ -477,7 +477,7 @@ glabel func_802BD758_3184A8
 /* 318B94 802BDE44 10400004 */  beqz      $v0, .L802BDE58
 /* 318B98 802BDE48 00000000 */   nop
 /* 318B9C 802BDE4C AC600000 */  sw        $zero, ($v1)
-/* 318BA0 802BDE50 0C05271B */  jal       stop_sound
+/* 318BA0 802BDE50 0C05271B */  jal       sfx_stop_sound
 /* 318BA4 802BDE54 3C048000 */   lui      $a0, 0x8000
 .L802BDE58:
 /* 318BA8 802BDE58 3C108011 */  lui       $s0, %hi(gPlayerData)
@@ -529,7 +529,7 @@ glabel func_802BD758_3184A8
 /* 318C50 802BDF00 24042018 */  addiu     $a0, $zero, 0x2018
 .L802BDF04:
 /* 318C54 802BDF04 0000282D */  daddu     $a1, $zero, $zero
-/* 318C58 802BDF08 0C052742 */  jal       play_sound_at_npc
+/* 318C58 802BDF08 0C052742 */  jal       sfx_play_sound_at_npc
 /* 318C5C 802BDF0C 2406FFFC */   addiu    $a2, $zero, -4
 /* 318C60 802BDF10 0000202D */  daddu     $a0, $zero, $zero
 /* 318C64 802BDF14 0080282D */  daddu     $a1, $a0, $zero
@@ -838,7 +838,7 @@ glabel func_802BD758_3184A8
 /* 3190E4 802BE394 1040004A */  beqz      $v0, .L802BE4C0
 /* 3190E8 802BE398 24020002 */   addiu    $v0, $zero, 2
 /* 3190EC 802BE39C AC600000 */  sw        $zero, ($v1)
-/* 3190F0 802BE3A0 0C05271B */  jal       stop_sound
+/* 3190F0 802BE3A0 0C05271B */  jal       sfx_stop_sound
 /* 3190F4 802BE3A4 3C048000 */   lui      $a0, 0x8000
 /* 3190F8 802BE3A8 080AF930 */  j         .L802BE4C0
 /* 3190FC 802BE3AC 24020002 */   addiu    $v0, $zero, 2
@@ -912,7 +912,7 @@ glabel func_802BD758_3184A8
 /* 3191F8 802BE4A8 10400005 */  beqz      $v0, .L802BE4C0
 /* 3191FC 802BE4AC 24020002 */   addiu    $v0, $zero, 2
 /* 319200 802BE4B0 AC600000 */  sw        $zero, ($v1)
-/* 319204 802BE4B4 0C05271B */  jal       stop_sound
+/* 319204 802BE4B4 0C05271B */  jal       sfx_stop_sound
 /* 319208 802BE4B8 3C048000 */   lui      $a0, 0x8000
 /* 31920C 802BE4BC 24020002 */  addiu     $v0, $zero, 2
 .L802BE4C0:

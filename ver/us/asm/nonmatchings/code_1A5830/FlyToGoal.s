@@ -131,7 +131,7 @@ glabel FlyToGoal
 /* 1AA0C0 8027B7E0 8E0401A4 */  lw        $a0, 0x1a4($s0)
 /* 1AA0C4 8027B7E4 8E060144 */  lw        $a2, 0x144($s0)
 /* 1AA0C8 8027B7E8 8E070148 */  lw        $a3, 0x148($s0)
-/* 1AA0CC 8027B7EC 0C052757 */  jal       play_sound_at_position
+/* 1AA0CC 8027B7EC 0C052757 */  jal       sfx_play_sound_at_position
 /* 1AA0D0 8027B7F0 0000282D */   daddu    $a1, $zero, $zero
 .L8027B7F4:
 /* 1AA0D4 8027B7F4 8E500074 */  lw        $s0, 0x74($s2)
@@ -290,7 +290,7 @@ glabel FlyToGoal
 .L8027BA48:
 /* 1AA328 8027BA48 8E060144 */  lw        $a2, 0x144($s0)
 /* 1AA32C 8027BA4C 8E070148 */  lw        $a3, 0x148($s0)
-/* 1AA330 8027BA50 0C052757 */  jal       play_sound_at_position
+/* 1AA330 8027BA50 0C052757 */  jal       sfx_play_sound_at_position
 /* 1AA334 8027BA54 0000282D */   daddu    $a1, $zero, $zero
 .L8027BA58:
 /* 1AA338 8027BA58 C622000C */  lwc1      $f2, 0xc($s1)

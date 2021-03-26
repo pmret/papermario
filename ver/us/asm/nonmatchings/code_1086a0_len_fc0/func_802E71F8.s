@@ -11,7 +11,7 @@ glabel func_802E71F8
 /* 108A90 802E7210 24030028 */  addiu     $v1, $zero, 0x28
 /* 108A94 802E7214 AC400008 */  sw        $zero, 8($v0)
 /* 108A98 802E7218 A0400005 */  sb        $zero, 5($v0)
-/* 108A9C 802E721C 0C05272D */  jal       play_sound
+/* 108A9C 802E721C 0C05272D */  jal       sfx_play_sound
 /* 108AA0 802E7220 A4430002 */   sh       $v1, 2($v0)
 /* 108AA4 802E7224 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 108AA8 802E7228 03E00008 */  jr        $ra

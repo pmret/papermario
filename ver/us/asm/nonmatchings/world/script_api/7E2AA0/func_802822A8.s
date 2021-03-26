@@ -22,7 +22,7 @@ glabel func_802822A8
 /* 7E316C 802822EC 44071000 */  mfc1      $a3, $f2
 /* 7E3170 802822F0 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* 7E3174 802822F4 0000282D */  daddu     $a1, $zero, $zero
-/* 7E3178 802822F8 0C052757 */  jal       play_sound_at_position
+/* 7E3178 802822F8 0C052757 */  jal       sfx_play_sound_at_position
 /* 7E317C 802822FC E7A00010 */   swc1     $f0, 0x10($sp)
 /* 7E3180 80282300 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 7E3184 80282304 8FB00028 */  lw        $s0, 0x28($sp)

@@ -131,7 +131,7 @@ glabel RunPartTo
 /* 1A9770 8027AE90 8E4400A4 */  lw        $a0, 0xa4($s2)
 /* 1A9774 8027AE94 8E46002C */  lw        $a2, 0x2c($s2)
 /* 1A9778 8027AE98 8E470030 */  lw        $a3, 0x30($s2)
-/* 1A977C 8027AE9C 0C052757 */  jal       play_sound_at_position
+/* 1A977C 8027AE9C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A9780 8027AEA0 0000282D */   daddu    $a1, $zero, $zero
 /* 1A9784 8027AEA4 24020001 */  addiu     $v0, $zero, 1
 .L8027AEA8:
@@ -250,7 +250,7 @@ glabel RunPartTo
 .L8027B054:
 /* 1A9934 8027B054 8E46002C */  lw        $a2, 0x2c($s2)
 /* 1A9938 8027B058 8E470030 */  lw        $a3, 0x30($s2)
-/* 1A993C 8027B05C 0C052757 */  jal       play_sound_at_position
+/* 1A993C 8027B05C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A9940 8027B060 0000282D */   daddu    $a1, $zero, $zero
 .L8027B064:
 /* 1A9944 8027B064 96020038 */  lhu       $v0, 0x38($s0)

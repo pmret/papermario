@@ -206,7 +206,7 @@ glabel update_heroes_start_turn
 /* 170C14 80242334 0C01C70C */  jal       func_80071C30
 /* 170C18 80242338 AFB00014 */   sw       $s0, 0x14($sp)
 /* 170C1C 8024233C 24040299 */  addiu     $a0, $zero, 0x299
-/* 170C20 80242340 0C05272D */  jal       play_sound
+/* 170C20 80242340 0C05272D */  jal       sfx_play_sound
 /* 170C24 80242344 AE6000A0 */   sw       $zero, 0xa0($s3)
 /* 170C28 80242348 24040027 */  addiu     $a0, $zero, 0x27
 /* 170C2C 8024234C 0C093E58 */  jal       show_battle_message
@@ -519,7 +519,7 @@ glabel update_heroes_start_turn
 /* 171078 80242798 82230210 */  lb        $v1, 0x210($s1)
 /* 17107C 8024279C 14620009 */  bne       $v1, $v0, .L802427C4
 /* 171080 802427A0 24040031 */   addiu    $a0, $zero, 0x31
-/* 171084 802427A4 0C05272D */  jal       play_sound
+/* 171084 802427A4 0C05272D */  jal       sfx_play_sound
 /* 171088 802427A8 240400E7 */   addiu    $a0, $zero, 0xe7
 /* 17108C 802427AC 8E230228 */  lw        $v1, 0x228($s1)
 /* 171090 802427B0 8C620000 */  lw        $v0, ($v1)

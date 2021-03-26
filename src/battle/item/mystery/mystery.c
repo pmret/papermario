@@ -49,9 +49,9 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     spawn {
         sleep 220;
-        PlaySoundAtActor(ActorID_PLAYER, 1011);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_3F3);
     }
-    PlaySoundAtActor(ActorID_PLAYER, 872);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_368);
     N(func_802A13E4_72C994)();
     sleep 2;
     if (SI_VAR(0) != ItemId_PEBBLE) {

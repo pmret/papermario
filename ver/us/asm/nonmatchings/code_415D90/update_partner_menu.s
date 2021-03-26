@@ -423,7 +423,7 @@ glabel L802A8780_41D510
 /* 41D56C 802A87DC 00000000 */   nop
 /* 41D570 802A87E0 10400010 */  beqz      $v0, .L802A8824
 /* 41D574 802A87E4 00000000 */   nop
-/* 41D578 802A87E8 0C05272D */  jal       play_sound
+/* 41D578 802A87E8 0C05272D */  jal       sfx_play_sound
 /* 41D57C 802A87EC 2404000F */   addiu    $a0, $zero, 0xf
 /* 41D580 802A87F0 3C02802B */  lui       $v0, %hi(D_802AD002)
 /* 41D584 802A87F4 8042D002 */  lb        $v0, %lo(D_802AD002)($v0)
@@ -439,7 +439,7 @@ glabel L802A8780_41D510
 /* 41D5AC 802A881C 080AA5DD */  j         .L802A9774
 /* 41D5B0 802A8820 00000000 */   nop
 .L802A8824:
-/* 41D5B4 802A8824 0C05272D */  jal       play_sound
+/* 41D5B4 802A8824 0C05272D */  jal       sfx_play_sound
 /* 41D5B8 802A8828 2404021D */   addiu    $a0, $zero, 0x21d
 /* 41D5BC 802A882C 080AA6A9 */  j         .L802A9AA4
 /* 41D5C0 802A8830 24020008 */   addiu    $v0, $zero, 8

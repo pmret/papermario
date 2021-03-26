@@ -62,7 +62,7 @@ glabel func_80241FE4_E17D64
 /* E17E44 802420C4 8E070040 */  lw        $a3, 0x40($s0)
 /* E17E48 802420C8 0C01BECC */  jal       fx_walk_normal
 /* E17E4C 802420CC 24040001 */   addiu    $a0, $zero, 1
-/* E17E50 802420D0 0C05272D */  jal       play_sound
+/* E17E50 802420D0 0C05272D */  jal       sfx_play_sound
 /* E17E54 802420D4 24040283 */   addiu    $a0, $zero, 0x283
 .L802420D8:
 /* E17E58 802420D8 8E020000 */  lw        $v0, ($s0)

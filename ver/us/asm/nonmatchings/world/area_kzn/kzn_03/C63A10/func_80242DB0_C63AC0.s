@@ -35,7 +35,7 @@ glabel func_80242DB0_C63AC0
 /* C63B38 80242E28 00000000 */  nop
 /* C63B3C 80242E2C 46800020 */  cvt.s.w   $f0, $f0
 /* C63B40 80242E30 AE220078 */  sw        $v0, 0x78($s1)
-/* C63B44 80242E34 0C05267B */  jal       func_801499EC
+/* C63B44 80242E34 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C63B48 80242E38 E7A00010 */   swc1     $f0, 0x10($sp)
 .L80242E3C:
 /* C63B4C 80242E3C 8FBF0020 */  lw        $ra, 0x20($sp)

@@ -40,7 +40,7 @@ Script N(main) = SCRIPT({
     UseCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(1018);
+    PlaySound(SoundId_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;

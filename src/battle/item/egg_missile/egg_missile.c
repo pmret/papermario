@@ -116,7 +116,7 @@ Script N(main) = SCRIPT({
     UseCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(1018);
+    PlaySound(SoundId_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -139,7 +139,7 @@ Script N(main) = SCRIPT({
     SI_VAR(2) += 5;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
     func_802D3624(SI_VAR(10));
-    PlaySound(8208);
+    PlaySound(SoundId_2010);
     N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         StartRumble(5);

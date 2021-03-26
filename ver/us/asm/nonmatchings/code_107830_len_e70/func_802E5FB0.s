@@ -42,7 +42,7 @@ glabel func_802E5FB0
 /* 1078C0 802E6040 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1078C4 802E6044 8E060048 */  lw        $a2, 0x48($s0)
 /* 1078C8 802E6048 8E07004C */  lw        $a3, 0x4c($s0)
-/* 1078CC 802E604C 0C052757 */  jal       play_sound_at_position
+/* 1078CC 802E604C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1078D0 802E6050 0000282D */   daddu    $a1, $zero, $zero
 .L802E6054:
 /* 1078D4 802E6054 8FBF001C */  lw        $ra, 0x1c($sp)

@@ -15,7 +15,7 @@ glabel func_8024130C_BCFEFC
 /* BCFF24 80241334 3C058024 */  lui       $a1, %hi(D_80243098_BD1C88)
 /* BCFF28 80241338 00A22821 */  addu      $a1, $a1, $v0
 /* BCFF2C 8024133C 8CA53098 */  lw        $a1, %lo(D_80243098_BD1C88)($a1)
-/* BCFF30 80241340 0C052A46 */  jal       set_music_track
+/* BCFF30 80241340 0C052A46 */  jal       bgm_set_song
 /* BCFF34 80241344 240701F4 */   addiu    $a3, $zero, 0x1f4
 /* BCFF38 80241348 8FBF0018 */  lw        $ra, 0x18($sp)
 /* BCFF3C 8024134C 24020002 */  addiu     $v0, $zero, 2

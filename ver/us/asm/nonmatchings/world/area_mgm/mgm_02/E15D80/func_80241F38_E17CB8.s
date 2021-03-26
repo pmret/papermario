@@ -41,7 +41,7 @@ glabel func_80241F38_E17CB8
 /* E17D34 80241FB4 00441023 */  subu      $v0, $v0, $a0
 /* E17D38 80241FB8 0C03A830 */  jal       add_coins
 /* E17D3C 80241FBC AE020020 */   sw       $v0, 0x20($s0)
-/* E17D40 80241FC0 0C05272D */  jal       play_sound
+/* E17D40 80241FC0 0C05272D */  jal       sfx_play_sound
 /* E17D44 80241FC4 24040211 */   addiu    $a0, $zero, 0x211
 /* E17D48 80241FC8 8E020020 */  lw        $v0, 0x20($s0)
 /* E17D4C 80241FCC 8FBF0014 */  lw        $ra, 0x14($sp)

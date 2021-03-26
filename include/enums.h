@@ -238,6 +238,8 @@ typedef UNK_TYPE Easing;
 #define Easing_COS_IN             0x0000000C
 
 typedef UNK_TYPE SoundID;
+#define SoundId_D                     0x0000000D // TODO
+#define SoundId_E                     0x0000000E // TODO
 #define SoundId_JR_TROOPA_SPLASH      0x00000045
 #define SoundId_JR_TROOPA_SWIM        0x00000046
 #define SoundId_BOO_SPOOK             0x00000047
@@ -266,6 +268,11 @@ typedef UNK_TYPE SoundID;
 #define SoundId_CREAKY_DOOR_CLOSE     0x000001C8
 #define SoundId_METAL_GATE_OPEN       0x000001C9
 #define SoundId_METAL_GATE_CLOSE      0x000001CA
+#define SoundId_246                   0x00000246 // TODO
+#define SoundId_259                   0x00000259 // TODO
+#define SoundId_25A                   0x0000025A // TODO
+#define SoundId_25C                   0x0000025C // TODO
+#define SoundId_25D                   0x0000025D // TODO
 #define SoundId_BOW_SPOOK             0x00000291
 #define SoundId_SMOKE_BURST           0x000002CD
 #define SoundId_DAYZEE_SONG           0x000002D7
@@ -279,6 +286,18 @@ typedef UNK_TYPE SoundID;
 #define SoundId_MOLE_SURFACE          0x00000321
 #define SoundId_MOLE_DIG              0x00000322
 #define SoundId_MOLE_POP              0x00000323
+#define SoundId_361                   0x00000361 // TODO
+#define SoundId_362                   0x00000362 // TODO
+#define SoundId_363                   0x00000363 // TODO
+#define SoundId_364                   0x00000364 // TODO
+#define SoundId_365                   0x00000365 // TODO
+#define SoundId_367                   0x00000367 // TODO
+#define SoundId_368                   0x00000368 // TODO
+#define SoundId_369                   0x00000369 // TODO
+#define SoundId_375                   0x00000375 // TODO
+#define SoundId_376                   0x00000376 // TODO
+#define SoundId_377                   0x00000377 // TODO
+#define SoundId_379                   0x00000379 // TODO
 #define SoundId_GENERAL_WHISTLE       0x00000395
 #define SoundId_OPEN_SHELL            0x000003D4
 #define SoundId_JUMP                  0x000003E2
@@ -286,14 +305,23 @@ typedef UNK_TYPE SoundID;
 #define SoundId_DEATH                 0x000003E5
 #define SoundId_BIG_POWER_UP          0x000003E6
 #define SoundId_MOLE_THROW            0x000003E8
+#define SoundId_3F3                   0x000003F3 // TODO
 #define SoundId_THROW                 0x000003FA
 #define SoundId_BOW_VANISH            0x0000200E
 #define SoundId_BOW_APPEAR            0x0000200F
+#define SoundId_2010                  0x00002010 // TODO
 #define SoundId_CANNON1               0x00002016
 #define SoundId_CANNON2               0x00002017
 #define SoundId_CANNON3               0x00002018
+#define SoundId_202C                  0x0000202C // TODO
+#define SoundId_202D                  0x0000202D // TODO
+#define SoundId_202E                  0x0000202E // TODO
+#define SoundId_2030                  0x00002030 // TODO
 #define SoundId_BOMB_BLAST            0x00002076
 #define SoundId_JUMP2                 0x00002081
+#define SoundId_208D                  0x0000208D // TODO
+#define SoundId_208E                  0x0000208E // TODO
+#define SoundId_2095                  0x00002095 // TODO
 #define SoundId_SPELL_CAST1           0x000020D4
 #define SoundId_SPELL_CAST2           0x000020D5
 #define SoundId_SPELL_CAST3           0x000020D6

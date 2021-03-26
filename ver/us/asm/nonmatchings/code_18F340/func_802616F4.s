@@ -53,7 +53,7 @@ glabel func_802616F4
 /* 190078 80261798 A420FBA4 */  sh        $zero, %lo(D_8029FBA4)($at)
 /* 19007C 8026179C 3C01802A */  lui       $at, %hi(D_8029FB90)
 /* 190080 802617A0 AC22FB90 */  sw        $v0, %lo(D_8029FB90)($at)
-/* 190084 802617A4 0C05272D */  jal       play_sound
+/* 190084 802617A4 0C05272D */  jal       sfx_play_sound
 /* 190088 802617A8 24042074 */   addiu    $a0, $zero, 0x2074
 .L802617AC:
 /* 19008C 802617AC 3C0140C9 */  lui       $at, 0x40c9

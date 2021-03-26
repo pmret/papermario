@@ -14,7 +14,7 @@ Script N(script6) = SCRIPT({
     SetActorYaw(ActorID_PLAYER, 180);
     sleep 10;
     SI_VAR(1) = SI_VAR(15);
-    await 0x802A1834;
+    await N(UseItem);
     SI_VAR(14) = SI_VAR(10);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
     spawn {
@@ -81,8 +81,8 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));
-    if (SI_VAR(0) == 0) {
-        PlaySoundAtActor(ActorID_PLAYER, 8341);
+    if (SI_VAR(0) == ActorID_PLAYER) {
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
         sleep 45;
         GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -102,13 +102,13 @@ Script N(main) = SCRIPT({
         func_802D75D8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
         InitTargetIterator();
         GetOwnerTarget(SI_VAR(0), SI_VAR(1));
-        N(func_802A1378_725058)(0);
+        N(func_802A1378_725058)(ActorID_PLAYER);
         sleep 20;
     } else {
         SI_VAR(11) = 0;
         SI_VAR(12) = 0;
         SI_VAR(15) = 0;
-        await 0x802A1AEC;
+        await N(script6);
     }
     await N(PlayerGoHome);
 });

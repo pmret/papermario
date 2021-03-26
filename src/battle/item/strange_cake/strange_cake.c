@@ -56,9 +56,9 @@ Script N(script6) = SCRIPT({
     sleep 10;
     spawn {
         sleep 220;
-        PlaySoundAtActor(ActorID_PLAYER, 1011);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_3F3);
     }
-    PlaySoundAtActor(ActorID_PLAYER, 872);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_368);
     N(func_802A13E4_7316E4)();
     sleep 2;
     match SI_VAR(0) {
@@ -79,7 +79,7 @@ Script N(script7) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
-    PlayEffect(87, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x57, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
     N(func_802A1AD8_731DD8)();
     sleep 20;
     ShowMessageBox(16, 60);
@@ -90,7 +90,7 @@ Script N(script8) = SCRIPT({
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
-    PlayEffect(51, 6, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x33, 6, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
     N(func_802A1B14_731E14)();
     sleep 20;
     ShowMessageBox(17, 60);

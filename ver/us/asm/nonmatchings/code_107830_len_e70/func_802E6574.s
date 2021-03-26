@@ -63,7 +63,7 @@ glabel func_802E6574
 /* 107EB4 802E6634 00400008 */  jr        $v0
 /* 107EB8 802E6638 00000000 */   nop
 glabel L802E663C_107EBC
-/* 107EBC 802E663C 0C05272D */  jal       play_sound
+/* 107EBC 802E663C 0C05272D */  jal       sfx_play_sound
 /* 107EC0 802E6640 240420AB */   addiu    $a0, $zero, 0x20ab
 /* 107EC4 802E6644 24040001 */  addiu     $a0, $zero, 1
 /* 107EC8 802E6648 3C0142B4 */  lui       $at, 0x42b4
@@ -278,7 +278,7 @@ glabel L802E685C_1080DC
 /* 1081E0 802E6960 E6340068 */  swc1      $f20, 0x68($s1)
 /* 1081E4 802E6964 0C0B2D72 */  jal       exec_ShakeCamX
 /* 1081E8 802E6968 A2020001 */   sb       $v0, 1($s0)
-/* 1081EC 802E696C 0C05272D */  jal       play_sound
+/* 1081EC 802E696C 0C05272D */  jal       sfx_play_sound
 /* 1081F0 802E6970 240420AC */   addiu    $a0, $zero, 0x20ac
 /* 1081F4 802E6974 080B9AB5 */  j         L802E6AD4_108354
 /* 1081F8 802E6978 00000000 */   nop

@@ -8,10 +8,8 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-#ifdef NON_MATCHING
 void clamp_printer_coords(PrintContext* printer, f32 x, f32 y);
 
-// Register allocation issues, otherwise equivalent (?)
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor;
@@ -47,8 +45,8 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         if ((actor->flags & 0x8000) == 0) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
-            headY = actor->headOffset.y;
-            headY = headY + actor->currentPos.y + (actor->size.y / 2);
+            f32 tmp = actor->headOffset.y;
+            headY = actor->currentPos.y + tmp + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
@@ -77,7 +75,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
             headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
         } else {
             headY = actor->headOffset.y;
-            headY = headY + actor->currentPos.y + (actor->size.y / 2);
+            headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
         get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
@@ -109,9 +107,6 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-#else
-INCLUDE_ASM(s32, "code_181810", ActorSpeak);
-#endif
 
 INCLUDE_ASM(s32, "code_181810", EndActorSpeech);
 
@@ -225,7 +220,7 @@ ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -242,7 +237,7 @@ ApiStatus PlaySoundAtPart(ScriptInstance* script, s32 isInitialCall) {
     }
 
     part = get_actor_part(get_actor(actorID), partIndex);
-    play_sound_at_position(soundID, 0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -260,7 +255,7 @@ ApiStatus PlayLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->x[idx] = soundID;
-    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -281,7 +276,7 @@ ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    stop_sound(actor->x[idx]);
+    sfx_stop_sound(actor->x[idx]);
     actor->x[idx] = 0;
     return ApiStatus_DONE2;
 }

@@ -54,7 +54,7 @@ ApiStatus func_80240BD8_8ACB68(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[1].s = get_variable(script, *args);
         npc = get_npc_unsafe(script->functionTemp[1].s);
-        play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
+        sfx_play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
         func_8006FEF0(0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);
         script->functionTemp[0].s = 3;
     }

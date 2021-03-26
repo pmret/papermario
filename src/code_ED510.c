@@ -406,7 +406,7 @@ ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
     f32 n1, n2, n3;
 
     get_model_center_and_size((u16)modelID, &x, &y, &z, &n1, &n2, &n3);
-    play_sound_at_position(soundID, var3, x, y, z);
+    sfx_play_sound_at_position(soundID, var3, x, y, z);
 
     return ApiStatus_DONE2;
 }
@@ -419,7 +419,7 @@ ApiStatus PlaySoundAtCollider(ScriptInstance* script, s32 isInitialCall) {
     f32 x, y, z;
 
     get_collider_center(colliderID, &x, &y, &z);
-    play_sound_at_position(soundID, var3, x, y, z);
+    sfx_play_sound_at_position(soundID, var3, x, y, z);
 
     return ApiStatus_DONE2;
 }

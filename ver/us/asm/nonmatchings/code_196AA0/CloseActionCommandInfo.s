@@ -20,7 +20,7 @@ glabel CloseActionCommandInfo
 /* 197D28 80269448 0000102D */   daddu    $v0, $zero, $zero
 .L8026944C:
 /* 197D2C 8026944C 3C048000 */  lui       $a0, 0x8000
-/* 197D30 80269450 0C05271B */  jal       stop_sound
+/* 197D30 80269450 0C05271B */  jal       sfx_stop_sound
 /* 197D34 80269454 34840041 */   ori      $a0, $a0, 0x41
 /* 197D38 80269458 0C093EC3 */  jal       close_action_command_instruction_popup
 /* 197D3C 8026945C 00000000 */   nop

@@ -8,15 +8,18 @@ INCLUDE_ASM(s32, "code_16F740", func_80240E60);
 
 INCLUDE_ASM(s32, "code_16F740", func_80240FDC);
 
-// Something is up with gBattleStatus.flags2
-#ifdef NON_MATCHING
 void func_80241190(s32 battleState) {
-    gBattleStatus.battleState = 0;
+    s32 flags = gBattleStatus.flags2;
+    if (0) { do { } while (1); }
     gBattleState = battleState;
     gBattleStatus.unk_470 = 1;
+    if (0) { do { } while (1); }
 
-    if (gBattleStatus.flags2 & 0x40) {
-        switch (gBattleState) {
+    gBattleStatus.battleState = 0;
+
+    flags &= 0x40;
+    if (flags) {
+        switch (battleState) {
             case 14:
                 battleState = 16;
                 break;
@@ -33,9 +36,6 @@ void func_80241190(s32 battleState) {
         gBattleState = battleState;
     }
 }
-#else
-INCLUDE_ASM(s32, "code_16F740", func_80241190);
-#endif
 
 INCLUDE_ASM(s32, "code_16F740", begin_battle);
 
@@ -186,13 +186,17 @@ void func_80247214(void) {
 
 // Something weird with using battleStatus twice but in specific ways
 #ifdef NON_MATCHING
+s32 func_80263434(void);
 void func_8024721C(void) {
     BattleStatus* battleStatus;
+    s32 battleState = gBattleStatus.battleState;
+
+    if (0) { do {} while (1); }
     battleStatus = &gBattleStatus;
 
-    if (gBattleStatus.battleState == 0) {
+    if (battleState == 0) {
         battleStatus->flags2 |= 0x4;
-        if (func_80263434() == 0) {
+        if (!func_80263434()) {
             battleStatus->flags1 &= ~0x80000;
             battleStatus->flags2 &= ~0x10;
 

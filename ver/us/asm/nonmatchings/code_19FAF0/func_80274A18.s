@@ -327,7 +327,7 @@ glabel func_80274A18
 /* 1A3758 80274E78 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A375C 80274E7C 8E460144 */  lw        $a2, 0x144($s2)
 /* 1A3760 80274E80 8E470148 */  lw        $a3, 0x148($s2)
-/* 1A3764 80274E84 0C052757 */  jal       play_sound_at_position
+/* 1A3764 80274E84 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A3768 80274E88 0000282D */   daddu    $a1, $zero, $zero
 /* 1A376C 80274E8C 24020001 */  addiu     $v0, $zero, 1
 /* 1A3770 80274E90 AE620070 */  sw        $v0, 0x70($s3)

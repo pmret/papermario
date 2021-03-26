@@ -154,7 +154,7 @@ glabel PlayerRunToGoal
 .L80273E98:
 /* 1A2778 80273E98 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A277C 80273E9C 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A2780 80273EA0 0C052757 */  jal       play_sound_at_position
+/* 1A2780 80273EA0 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A2784 80273EA4 0000282D */   daddu    $a1, $zero, $zero
 .L80273EA8:
 /* 1A2788 80273EA8 96220064 */  lhu       $v0, 0x64($s1)

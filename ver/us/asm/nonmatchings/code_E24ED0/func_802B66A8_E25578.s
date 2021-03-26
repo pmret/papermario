@@ -61,7 +61,7 @@ glabel func_802B66A8_E25578
 /* E2564C 802B677C 0C037FBF */  jal       func_800DFEFC
 /* E25650 802B6780 00000000 */   nop
 /* E25654 802B6784 0200202D */  daddu     $a0, $s0, $zero
-/* E25658 802B6788 0C052736 */  jal       play_sound_at_player
+/* E25658 802B6788 0C052736 */  jal       sfx_play_sound_at_player
 /* E2565C 802B678C 0000282D */   daddu    $a1, $zero, $zero
 /* E25660 802B6790 3C02802B */  lui       $v0, %hi(D_802B6DB0_E25C80)
 /* E25664 802B6794 8C426DB0 */  lw        $v0, %lo(D_802B6DB0_E25C80)($v0)

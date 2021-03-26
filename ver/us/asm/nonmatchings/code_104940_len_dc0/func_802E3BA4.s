@@ -161,7 +161,7 @@ glabel L802E3D84_105604
 /* 105630 802E3DB0 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 105634 802E3DB4 8E260048 */  lw        $a2, 0x48($s1)
 /* 105638 802E3DB8 8E27004C */  lw        $a3, 0x4c($s1)
-/* 10563C 802E3DBC 0C052757 */  jal       play_sound_at_position
+/* 10563C 802E3DBC 0C052757 */  jal       sfx_play_sound_at_position
 /* 105640 802E3DC0 0000282D */   daddu    $a1, $zero, $zero
 /* 105644 802E3DC4 080B8F7A */  j         .L802E3DE8
 /* 105648 802E3DC8 24020001 */   addiu    $v0, $zero, 1

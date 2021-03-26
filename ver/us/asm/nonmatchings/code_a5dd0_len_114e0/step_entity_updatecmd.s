@@ -105,7 +105,7 @@ glabel L8010FD08_A6408
 /* A6428 8010FD28 AE220000 */   sw       $v0, ($s1)
 glabel L8010FD2C_A642C
 /* A642C 8010FD2C 8E040000 */  lw        $a0, ($s0)
-/* A6430 8010FD30 0C05272D */  jal       play_sound
+/* A6430 8010FD30 0C05272D */  jal       sfx_play_sound
 /* A6434 8010FD34 26100004 */   addiu    $s0, $s0, 4
 /* A6438 8010FD38 24040001 */  addiu     $a0, $zero, 1
 /* A643C 8010FD3C 08043F54 */  j         .L8010FD50

@@ -132,7 +132,7 @@ glabel L800EA83C_83CEC
 .L800EA890:
 /* 83D40 800EA890 0C03805E */  jal       disable_player_input
 /* 83D44 800EA894 00000000 */   nop
-/* 83D48 800EA898 0C05272D */  jal       play_sound
+/* 83D48 800EA898 0C05272D */  jal       sfx_play_sound
 /* 83D4C 800EA89C 2404000D */   addiu    $a0, $zero, 0xd
 /* 83D50 800EA8A0 3C108011 */  lui       $s0, %hi(D_8010CFDC)
 /* 83D54 800EA8A4 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)
@@ -177,7 +177,7 @@ glabel L800EA83C_83CEC
 /* 83DEC 800EA93C AC22CFD8 */  sw        $v0, %lo(D_8010CFD8)($at)
 /* 83DF0 800EA940 0C03A974 */  jal       load_partner_npc
 /* 83DF4 800EA944 A2620012 */   sb       $v0, 0x12($s3)
-/* 83DF8 800EA948 0C05272D */  jal       play_sound
+/* 83DF8 800EA948 0C05272D */  jal       sfx_play_sound
 /* 83DFC 800EA94C 2404000E */   addiu    $a0, $zero, 0xe
 /* 83E00 800EA950 3C028011 */  lui       $v0, %hi(wPartner)
 /* 83E04 800EA954 8C42CFEC */  lw        $v0, %lo(wPartner)($v0)
@@ -343,7 +343,7 @@ glabel L800EAB90_84040
 .L800EABB4:
 /* 84064 800EABB4 0C03805E */  jal       disable_player_input
 /* 84068 800EABB8 00000000 */   nop
-/* 8406C 800EABBC 0C05272D */  jal       play_sound
+/* 8406C 800EABBC 0C05272D */  jal       sfx_play_sound
 /* 84070 800EABC0 2404000D */   addiu    $a0, $zero, 0xd
 /* 84074 800EABC4 3C108011 */  lui       $s0, %hi(D_8010CFDC)
 /* 84078 800EABC8 2610CFDC */  addiu     $s0, $s0, %lo(D_8010CFDC)

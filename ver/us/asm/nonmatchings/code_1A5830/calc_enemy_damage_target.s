@@ -422,7 +422,7 @@ glabel calc_enemy_damage_target
 /* 1A630C 80277A2C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6310 80277A30 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6314 80277A34 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6318 80277A38 0C052757 */  jal       play_sound_at_position
+/* 1A6318 80277A38 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A631C 80277A3C 0000282D */   daddu    $a1, $zero, $zero
 /* 1A6320 80277A40 C6200014 */  lwc1      $f0, 0x14($s1)
 /* 1A6324 80277A44 0000202D */  daddu     $a0, $zero, $zero
@@ -985,7 +985,7 @@ glabel calc_enemy_damage_target
 /* 1A6AE8 80278208 8D0401B0 */  lw        $a0, 0x1b0($t0)
 /* 1A6AEC 8027820C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6AF0 80278210 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6AF4 80278214 0C052757 */  jal       play_sound_at_position
+/* 1A6AF4 80278214 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6AF8 80278218 0000282D */   daddu    $a1, $zero, $zero
 .L8027821C:
 /* 1A6AFC 8027821C 8FA80020 */  lw        $t0, 0x20($sp)
@@ -1023,7 +1023,7 @@ glabel calc_enemy_damage_target
 /* 1A6B6C 8027828C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6B70 80278290 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6B74 80278294 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6B78 80278298 0C052757 */  jal       play_sound_at_position
+/* 1A6B78 80278298 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6B7C 8027829C 0000282D */   daddu    $a1, $zero, $zero
 .L802782A0:
 /* 1A6B80 802782A0 8E820190 */  lw        $v0, 0x190($s4)
@@ -1051,7 +1051,7 @@ glabel calc_enemy_damage_target
 /* 1A6BD8 802782F8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6BDC 802782FC 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6BE0 80278300 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6BE4 80278304 0C052757 */  jal       play_sound_at_position
+/* 1A6BE4 80278304 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6BE8 80278308 0000282D */   daddu    $a1, $zero, $zero
 .L8027830C:
 /* 1A6BEC 8027830C 8E820190 */  lw        $v0, 0x190($s4)
@@ -1080,7 +1080,7 @@ glabel calc_enemy_damage_target
 /* 1A6C48 80278368 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6C4C 8027836C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6C50 80278370 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6C54 80278374 0C052757 */  jal       play_sound_at_position
+/* 1A6C54 80278374 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6C58 80278378 0000282D */   daddu    $a1, $zero, $zero
 .L8027837C:
 /* 1A6C5C 8027837C 8E820190 */  lw        $v0, 0x190($s4)
@@ -1109,7 +1109,7 @@ glabel calc_enemy_damage_target
 /* 1A6CB8 802783D8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6CBC 802783DC 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6CC0 802783E0 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6CC4 802783E4 0C052757 */  jal       play_sound_at_position
+/* 1A6CC4 802783E4 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6CC8 802783E8 0000282D */   daddu    $a1, $zero, $zero
 .L802783EC:
 /* 1A6CCC 802783EC 8E820190 */  lw        $v0, 0x190($s4)
@@ -1138,7 +1138,7 @@ glabel calc_enemy_damage_target
 /* 1A6D28 80278448 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6D2C 8027844C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6D30 80278450 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6D34 80278454 0C052757 */  jal       play_sound_at_position
+/* 1A6D34 80278454 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6D38 80278458 0000282D */   daddu    $a1, $zero, $zero
 .L8027845C:
 /* 1A6D3C 8027845C 8E820190 */  lw        $v0, 0x190($s4)
@@ -1167,7 +1167,7 @@ glabel calc_enemy_damage_target
 /* 1A6D98 802784B8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6D9C 802784BC 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6DA0 802784C0 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6DA4 802784C4 0C052757 */  jal       play_sound_at_position
+/* 1A6DA4 802784C4 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6DA8 802784C8 0000282D */   daddu    $a1, $zero, $zero
 .L802784CC:
 /* 1A6DAC 802784CC 8E820190 */  lw        $v0, 0x190($s4)
@@ -1196,7 +1196,7 @@ glabel calc_enemy_damage_target
 /* 1A6E08 80278528 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6E0C 8027852C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6E10 80278530 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6E14 80278534 0C052757 */  jal       play_sound_at_position
+/* 1A6E14 80278534 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6E18 80278538 0000282D */   daddu    $a1, $zero, $zero
 .L8027853C:
 /* 1A6E1C 8027853C 8E820190 */  lw        $v0, 0x190($s4)
@@ -1226,7 +1226,7 @@ glabel calc_enemy_damage_target
 /* 1A6E7C 8027859C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6E80 802785A0 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6E84 802785A4 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6E88 802785A8 0C052757 */  jal       play_sound_at_position
+/* 1A6E88 802785A8 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6E8C 802785AC 0000282D */   daddu    $a1, $zero, $zero
 .L802785B0:
 /* 1A6E90 802785B0 8E820188 */  lw        $v0, 0x188($s4)
@@ -1240,7 +1240,7 @@ glabel calc_enemy_damage_target
 /* 1A6EB0 802785D0 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6EB4 802785D4 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6EB8 802785D8 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6EBC 802785DC 0C052757 */  jal       play_sound_at_position
+/* 1A6EBC 802785DC 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6EC0 802785E0 0000282D */   daddu    $a1, $zero, $zero
 .L802785E4:
 /* 1A6EC4 802785E4 0C099AB7 */  jal       func_80266ADC
@@ -1280,7 +1280,7 @@ glabel calc_enemy_damage_target
 /* 1A6F48 80278668 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A6F4C 8027866C 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A6F50 80278670 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A6F54 80278674 0C052757 */  jal       play_sound_at_position
+/* 1A6F54 80278674 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A6F58 80278678 0000282D */   daddu    $a1, $zero, $zero
 /* 1A6F5C 8027867C 8FA40058 */  lw        $a0, 0x58($sp)
 /* 1A6F60 80278680 0C09451D */  jal       func_80251474

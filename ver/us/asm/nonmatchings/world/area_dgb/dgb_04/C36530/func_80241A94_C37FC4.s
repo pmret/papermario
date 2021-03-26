@@ -29,7 +29,7 @@ glabel func_80241A94_C37FC4
 /* C38024 80241AF4 10400008 */  beqz      $v0, .L80241B18
 /* C38028 80241AF8 00000000 */   nop
 /* C3802C 80241AFC 3C048000 */  lui       $a0, 0x8000
-/* C38030 80241B00 0C05271B */  jal       stop_sound
+/* C38030 80241B00 0C05271B */  jal       sfx_stop_sound
 /* C38034 80241B04 34840011 */   ori      $a0, $a0, 0x11
 /* C38038 80241B08 8E02006C */  lw        $v0, 0x6c($s0)
 /* C3803C 80241B0C 2403EFFF */  addiu     $v1, $zero, -0x1001

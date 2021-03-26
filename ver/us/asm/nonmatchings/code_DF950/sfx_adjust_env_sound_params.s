@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149BE4
+glabel sfx_adjust_env_sound_params
 /* E02E4 80149BE4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E02E8 80149BE8 AFB00010 */  sw        $s0, 0x10($sp)
 /* E02EC 80149BEC 00A0802D */  daddu     $s0, $a1, $zero
@@ -17,7 +17,7 @@ glabel func_80149BE4
 /* E0314 80149C14 00021080 */  sll       $v0, $v0, 2
 /* E0318 80149C18 3C048015 */  lui       $a0, %hi(D_8014F2D0)
 /* E031C 80149C1C 00822021 */  addu      $a0, $a0, $v0
-/* E0320 80149C20 0C052631 */  jal       func_801498C4
+/* E0320 80149C20 0C052631 */  jal       sfx_get_env_sound_instance
 /* E0324 80149C24 8C84F2D0 */   lw       $a0, %lo(D_8014F2D0)($a0)
 /* E0328 80149C28 1040000A */  beqz      $v0, .L80149C54
 /* E032C 80149C2C 00000000 */   nop

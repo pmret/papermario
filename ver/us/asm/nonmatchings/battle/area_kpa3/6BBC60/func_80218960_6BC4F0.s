@@ -81,7 +81,7 @@ glabel func_80218960_6BC4F0
 /* 6BC60C 80218A7C 8E27014C */  lw        $a3, 0x14c($s1)
 /* 6BC610 80218A80 0C0990BC */  jal       play_movement_dust_effects
 /* 6BC614 80218A84 24040002 */   addiu    $a0, $zero, 2
-/* 6BC618 80218A88 0C05272D */  jal       play_sound
+/* 6BC618 80218A88 0C05272D */  jal       sfx_play_sound
 /* 6BC61C 80218A8C 24040148 */   addiu    $a0, $zero, 0x148
 /* 6BC620 80218A90 24020001 */  addiu     $v0, $zero, 1
 .L80218A94:

@@ -126,12 +126,12 @@ glabel L801357A8_CBEA8
 /* CBF84 80135884 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CBF88 80135888 8E260008 */  lw        $a2, 8($s1)
 /* CBF8C 8013588C 8E27000C */  lw        $a3, 0xc($s1)
-/* CBF90 80135890 0C052757 */  jal       play_sound_at_position
+/* CBF90 80135890 0C052757 */  jal       sfx_play_sound_at_position
 /* CBF94 80135894 0000282D */   daddu    $a1, $zero, $zero
 /* CBF98 80135898 0804D62A */  j         .L801358A8
 /* CBF9C 8013589C 00000000 */   nop
 .L801358A0:
-/* CBFA0 801358A0 0C05272D */  jal       play_sound
+/* CBFA0 801358A0 0C05272D */  jal       sfx_play_sound
 /* CBFA4 801358A4 00000000 */   nop
 .L801358A8:
 /* CBFA8 801358A8 86220018 */  lh        $v0, 0x18($s1)

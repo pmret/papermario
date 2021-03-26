@@ -566,7 +566,7 @@ ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    play_sound_at_position(soundID, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(soundID, value2, npc->pos.x, npc->pos.y, npc->pos.z);
     return ApiStatus_DONE2;
 }
 

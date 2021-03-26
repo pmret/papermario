@@ -200,7 +200,7 @@ glabel L802B6244_E26954
 /* E269FC 802B62EC 34420004 */  ori       $v0, $v0, 4
 /* E26A00 802B62F0 24630001 */  addiu     $v1, $v1, 1
 /* E26A04 802B62F4 AE020000 */  sw        $v0, ($s0)
-/* E26A08 802B62F8 0C052736 */  jal       play_sound_at_player
+/* E26A08 802B62F8 0C052736 */  jal       sfx_play_sound_at_player
 /* E26A0C 802B62FC A20300B6 */   sb       $v1, 0xb6($s0)
 .L802B6300:
 /* E26A10 802B6300 8FA20010 */  lw        $v0, 0x10($sp)
@@ -281,7 +281,7 @@ glabel L802B6354_E26A64
 /* E26B2C 802B641C 0C0B2D5B */  jal       exec_ShakeCam1
 /* E26B30 802B6420 24060004 */   addiu    $a2, $zero, 4
 /* E26B34 802B6424 2404014A */  addiu     $a0, $zero, 0x14a
-/* E26B38 802B6428 0C052736 */  jal       play_sound_at_player
+/* E26B38 802B6428 0C052736 */  jal       sfx_play_sound_at_player
 /* E26B3C 802B642C 0000282D */   daddu    $a1, $zero, $zero
 /* E26B40 802B6430 24040100 */  addiu     $a0, $zero, 0x100
 /* E26B44 802B6434 0C00A3C2 */  jal       start_rumble
@@ -341,7 +341,7 @@ glabel L802B6354_E26A64
 /* E26C10 802B6500 0C0B2D5B */  jal       exec_ShakeCam1
 /* E26C14 802B6504 A20200B6 */   sb       $v0, 0xb6($s0)
 /* E26C18 802B6508 2404014A */  addiu     $a0, $zero, 0x14a
-/* E26C1C 802B650C 0C052736 */  jal       play_sound_at_player
+/* E26C1C 802B650C 0C052736 */  jal       sfx_play_sound_at_player
 /* E26C20 802B6510 0000282D */   daddu    $a1, $zero, $zero
 /* E26C24 802B6514 24040100 */  addiu     $a0, $zero, 0x100
 /* E26C28 802B6518 0C00A3C2 */  jal       start_rumble

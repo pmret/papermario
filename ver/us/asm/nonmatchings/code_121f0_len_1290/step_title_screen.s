@@ -111,7 +111,7 @@ glabel L80037204_12604
 /* 12628 80037228 0000202D */  daddu     $a0, $zero, $zero
 /* 1262C 8003722C 2405FFFF */  addiu     $a1, $zero, -1
 /* 12630 80037230 0080302D */  daddu     $a2, $a0, $zero
-/* 12634 80037234 0C052A46 */  jal       set_music_track
+/* 12634 80037234 0C052A46 */  jal       bgm_set_song
 /* 12638 80037238 24070F3C */   addiu    $a3, $zero, 0xf3c
 .L8003723C:
 /* 1263C 8003723C 3C02800A */  lui       $v0, %hi(D_800A0988)
@@ -145,14 +145,14 @@ glabel L80037204_12604
 /* 126A4 800372A4 24020005 */  addiu     $v0, $zero, 5
 /* 126A8 800372A8 3C018007 */  lui       $at, %hi(D_800779C0)
 /* 126AC 800372AC A42279C0 */  sh        $v0, %lo(D_800779C0)($at)
-/* 126B0 800372B0 0C05272D */  jal       play_sound
+/* 126B0 800372B0 0C05272D */  jal       sfx_play_sound
 /* 126B4 800372B4 240400D5 */   addiu    $a0, $zero, 0xd5
 /* 126B8 800372B8 0000202D */  daddu     $a0, $zero, $zero
 /* 126BC 800372BC 24050069 */  addiu     $a1, $zero, 0x69
 /* 126C0 800372C0 0080302D */  daddu     $a2, $a0, $zero
 /* 126C4 800372C4 240701F4 */  addiu     $a3, $zero, 0x1f4
 /* 126C8 800372C8 24020008 */  addiu     $v0, $zero, 8
-/* 126CC 800372CC 0C052A46 */  jal       set_music_track
+/* 126CC 800372CC 0C052A46 */  jal       bgm_set_song
 /* 126D0 800372D0 AFA20010 */   sw       $v0, 0x10($sp)
 /* 126D4 800372D4 0800DD64 */  j         .L80037590
 /* 126D8 800372D8 00000000 */   nop

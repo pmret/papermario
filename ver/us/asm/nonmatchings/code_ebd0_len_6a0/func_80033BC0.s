@@ -32,7 +32,7 @@ glabel func_80033BC0
 /* F02C 80033C2C 00431024 */  and       $v0, $v0, $v1
 /* F030 80033C30 0C018030 */  jal       nuContRmbForceStopEnd
 /* F034 80033C34 AC820000 */   sw       $v0, ($a0)
-/* F038 80033C38 0C05260E */  jal       func_80149838
+/* F038 80033C38 0C05260E */  jal       sfx_stop_env_sounds
 /* F03C 80033C3C 00000000 */   nop
 /* F040 80033C40 0C016AFA */  jal       get_current_map_header
 /* F044 80033C44 00000000 */   nop

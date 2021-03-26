@@ -2997,7 +2997,7 @@ segments:
     start: 0x7E0E80
     vram: 0x80280000
     subsections:
-    - [0x7e0e80, c]
+    - [0x7E0E80, c]
     - [0x7E2AA0, c]
     - [0x7E3700, c]
     - [0x7E4690, c]

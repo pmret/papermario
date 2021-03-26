@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel stop_sound
+glabel sfx_stop_sound
 /* E036C 80149C6C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E0370 80149C70 AFBF0010 */  sw        $ra, 0x10($sp)
 /* E0374 80149C74 0481000A */  bgez      $a0, .L80149CA0

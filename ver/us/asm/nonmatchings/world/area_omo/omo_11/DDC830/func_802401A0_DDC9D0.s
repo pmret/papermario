@@ -45,7 +45,7 @@ glabel func_802401A0_DDC9D0
 /* DDCA70 80240240 44810000 */  mtc1      $at, $f0
 /* DDCA74 80240244 3C148024 */  lui       $s4, %hi(D_80241760_DDDF90)
 /* DDCA78 80240248 26941760 */  addiu     $s4, $s4, %lo(D_80241760_DDDF90)
-/* DDCA7C 8024024C 0C052757 */  jal       play_sound_at_position
+/* DDCA7C 8024024C 0C052757 */  jal       sfx_play_sound_at_position
 /* DDCA80 80240250 E7A00010 */   swc1     $f0, 0x10($sp)
 /* DDCA84 80240254 0C00AB39 */  jal       heap_malloc
 /* DDCA88 80240258 24040210 */   addiu    $a0, $zero, 0x210

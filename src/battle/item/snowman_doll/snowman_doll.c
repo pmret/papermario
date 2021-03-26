@@ -4,7 +4,7 @@ Script N(main) = SCRIPT({
     SI_VAR(10) = c ItemId_SNOWMAN_DOLL;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
-    PlaySoundAtActor(ActorID_PLAYER, 867);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_363);
     spawn {
         loop 45 {
             RandInt(300, SI_VAR(0));
@@ -12,7 +12,7 @@ Script N(main) = SCRIPT({
             SI_VAR(1) = 170;
             RandInt(50, SI_VAR(2));
             SI_VAR(2) -= 25;
-            PlayEffect(14, SI_VAR(0), SI_VAR(1), SI_VAR(2), 60, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0xE, SI_VAR(0), SI_VAR(1), SI_VAR(2), 60, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             sleep 2;
         }
     }
@@ -20,22 +20,22 @@ Script N(main) = SCRIPT({
     UseCamPreset(3);
     MoveBattleCamOver(50);
     sleep 50;
-    PlayEffect(96, 0, 0, 0, 20, 1.0, 160, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x60, 0, 0, 0, 20, 1.0, 160, 0, 0, 0, 0, 0, 0, 0);
     spawn {
         sleep 17;
-        PlaySoundAtActor(ActorID_PLAYER, 8238);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 46;
-        PlaySoundAtActor(ActorID_PLAYER, 8238);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 25;
-        PlaySoundAtActor(ActorID_PLAYER, 8238);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 25;
-        PlaySoundAtActor(ActorID_PLAYER, 8238);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
     }

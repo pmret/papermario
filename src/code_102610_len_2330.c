@@ -80,7 +80,7 @@ void func_802E1298(void) {
 
 void func_802E12F8(void) {
     load_message_to_printer(0x1D0005, D_802EB39C);
-    play_sound(0x10);
+    sfx_play_sound(0x10);
 }
 
 void func_802E1328(Entity* entity) {

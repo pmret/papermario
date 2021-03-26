@@ -7,29 +7,29 @@ Script N(main) = SCRIPT({
     MakeEntity(0x802EA2E0, 0xFFFFFFD8, 60, 0, 0, 0x80000000);
     SI_VAR(10) = SI_VAR(0);
     N(func_802A1318_718B68)();
-    PlayEffect(7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     sleep 20;
     UseCamPreset(2);
     MoveBattleCamOver(20);
     spawn {
         sleep 15;
-        PlaySoundAtActor(ActorID_PLAYER, 334);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_HIT_BLOCK);
         N(func_802A123C_718A8C)();
-        PlayEffect(7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         StartRumble(4);
         ShakeCam(1, 0, 2, 1.0);
         ShakeCam(1, 0, 2, 3.0);
         ShakeCam(1, 0, 2, 6.0);
         ShakeCam(1, 0, 2, 5.0);
         ShakeCam(1, 0, 2, 4.0);
-        PlaySoundAtActor(ActorID_PLAYER, 8240);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_2030);
         ShakeCam(1, 0, 2, 3.0);
         ShakeCam(1, 0, 2, 2.0);
         ShakeCam(1, 0, 2, 1.0);
@@ -39,7 +39,7 @@ Script N(main) = SCRIPT({
     GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 30;
     SetActorSpeed(ActorID_PLAYER, 4.0);
-    SetAnimation(ActorID_PLAYER, 0, 0x10005);
+    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     PlayerRunToGoal(0);
     sleep 5;
@@ -66,10 +66,10 @@ Script N(main) = SCRIPT({
     if (SI_VAR(0) != -1) {
         goto 0;
     }
-    PlayEffect(7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFC4, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(7, 2, 0xFFFFFFBA, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFC4, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, 0xFFFFFFBA, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     N(func_802A12E4_718B34)();
     sleep 30;
     await N(PlayerGoHome);

@@ -263,7 +263,7 @@ void func_802E2EB0(Entity* entity) {
             a2 = &D_0A001218;
             break;
         case 13:
-            play_sound_at_position(0x158, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(0x158, 0, entity->position.x, entity->position.y, entity->position.z);
             a1 = &D_0A003F70;
             a2 = &D_0A002318;
             break;

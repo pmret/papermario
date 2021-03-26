@@ -59,7 +59,7 @@ glabel func_802B6000_E27F40
 /* E28014 802B60D4 8C620000 */  lw        $v0, ($v1)
 /* E28018 802B60D8 0000282D */  daddu     $a1, $zero, $zero
 /* E2801C 802B60DC 34420040 */  ori       $v0, $v0, 0x40
-/* E28020 802B60E0 0C052736 */  jal       play_sound_at_player
+/* E28020 802B60E0 0C052736 */  jal       sfx_play_sound_at_player
 /* E28024 802B60E4 AC620000 */   sw       $v0, ($v1)
 .L802B60E8:
 /* E28028 802B60E8 820300B6 */  lb        $v1, 0xb6($s0)
@@ -482,7 +482,7 @@ glabel L802B666C_E285AC
 /* E2864C 802B670C 94620002 */  lhu       $v0, 2($v1)
 /* E28650 802B6710 0000282D */  daddu     $a1, $zero, $zero
 /* E28654 802B6714 3042FFFD */  andi      $v0, $v0, 0xfffd
-/* E28658 802B6718 0C052736 */  jal       play_sound_at_player
+/* E28658 802B6718 0C052736 */  jal       sfx_play_sound_at_player
 /* E2865C 802B671C A4620002 */   sh       $v0, 2($v1)
 /* E28660 802B6720 3C040008 */  lui       $a0, 8
 /* E28664 802B6724 0C037FDE */  jal       func_800DFF78

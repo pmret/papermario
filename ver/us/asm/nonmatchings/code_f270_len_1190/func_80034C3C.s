@@ -117,7 +117,7 @@ glabel func_80034C3C
 /* 101F0 80034DF0 8C840924 */  lw        $a0, %lo(D_800A0924)($a0)
 /* 101F4 80034DF4 0C0525FF */  jal       func_801497FC
 /* 101F8 80034DF8 00000000 */   nop
-/* 101FC 80034DFC 0C052B1C */  jal       func_8014AC70
+/* 101FC 80034DFC 0C052B1C */  jal       bgm_reset_max_volume
 /* 10200 80034E00 00000000 */   nop
 /* 10204 80034E04 0C0169B0 */  jal       load_world_script_api
 /* 10208 80034E08 00000000 */   nop

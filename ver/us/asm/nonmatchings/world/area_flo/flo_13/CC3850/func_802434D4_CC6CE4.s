@@ -35,7 +35,7 @@ glabel func_802434D4_CC6CE4
 /* CC6D58 80243548 8CA60040 */  lw        $a2, 0x40($a1)
 /* CC6D5C 8024354C C4AC0038 */  lwc1      $f12, 0x38($a1)
 /* CC6D60 80243550 C4AE003C */  lwc1      $f14, 0x3c($a1)
-/* CC6D64 80243554 0C052781 */  jal       func_80149E04
+/* CC6D64 80243554 0C052781 */  jal       sfx_get_spatialized_sound_params
 /* CC6D68 80243558 0200382D */   daddu    $a3, $s0, $zero
 /* CC6D6C 8024355C 0000202D */  daddu     $a0, $zero, $zero
 /* CC6D70 80243560 3C0543FA */  lui       $a1, 0x43fa
@@ -51,7 +51,7 @@ glabel func_802434D4_CC6CE4
 /* CC6D98 80243588 00073C00 */  sll       $a3, $a3, 0x10
 /* CC6D9C 8024358C 92050001 */  lbu       $a1, 1($s0)
 /* CC6DA0 80243590 92260001 */  lbu       $a2, 1($s1)
-/* CC6DA4 80243594 0C0526AE */  jal       _play_sound
+/* CC6DA4 80243594 0C0526AE */  jal       sfx_play_sound_with_params
 /* CC6DA8 80243598 00073C03 */   sra      $a3, $a3, 0x10
 .L8024359C:
 /* CC6DAC 8024359C 8E430070 */  lw        $v1, 0x70($s2)

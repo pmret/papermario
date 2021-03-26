@@ -276,37 +276,44 @@ Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseCamPreset(69);
         sleep 10;
-        PlaySoundAtActor(ActorID_PLAYER, 8333);
+
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
-        GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 18;
+        GetActorPos(ActorID_PLAYER, $x, $y, $z);
+        $x += 18;
         SetActorSpeed(ActorID_PLAYER, 4.0);
-        SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetGoalPos(ActorID_PLAYER, $x, $y, $z);
         PlayerRunToGoal(0);
-        SI_VAR(1) += 45;
-        SI_VAR(3) = SI_VAR(1);
-        SI_VAR(3) += 10;
-        SI_VAR(3) += 2;
-        PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-        SI_VAR(10) = SI_VAR(0);
+
+        $y += 45;
+        $effectY = $y;
+        $effectY += 10;
+        $effectY += 2;
+        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+        SI_VAR(10) = $x;
+
         N(GiveRefund)();
-        sleep SI_VAR(0);
+        sleep $x;
+
         sleep 15;
+
         N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
-        GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        PlaySoundAtActor(ActorID_PLAYER, 8333);
+        GetActorPos(ActorID_PLAYER, $x, $y, $z);
+        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
         SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
         sleep 4;
-        SI_VAR(1) += 45;
-        SI_VAR(3) = SI_VAR(1);
-        SI_VAR(3) += 10;
-        SI_VAR(3) += 2;
-        PlayEffect(51, 1, SI_VAR(0), SI_VAR(3), SI_VAR(2), 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-        SI_VAR(10) = SI_VAR(0);
+
+        $y += 45;
+        $effectY = $y;
+        $effectY += 10;
+        $effectY += 2;
+        PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
+        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+        SI_VAR(10) = $x;
+
         sleep 15;
         RemoveItemEntity(SI_VAR(10));
     }
@@ -314,19 +321,23 @@ Script N(UseItemWithEffect) = SCRIPT({
 
 Script N(UseItem) = SCRIPT({
     UseCamPreset(19);
-    SetBattleCamTarget(0xFFFFFFAB, 1, 0);
+    SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);
     MoveBattleCamOver(30);
     sleep 10;
+
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 45;
-    MakeItemEntity(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
-    SI_VAR(14) = SI_VAR(0);
+    GetActorPos(ActorID_PLAYER, $x, $y, $z);
+    $y += 45;
+    MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
+    SI_VAR(14) = $x;
+
     N(GiveRefund)();
-    sleep SI_VAR(0);
+    sleep $x;
+
     sleep 15;
+
     N(GiveRefundCleanup)();
     RemoveItemEntity(SI_VAR(14));
 });
@@ -337,6 +348,7 @@ Script N(PlayerGoHome) = SCRIPT({
     SetActorSpeed(ActorID_PLAYER, 8.0);
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
     PlayerRunToGoal(0);
+
     SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
     UseIdleAnimation(ActorID_PLAYER, 1);
 });
@@ -344,7 +356,7 @@ Script N(PlayerGoHome) = SCRIPT({
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
             sleep 10;
         }
     }
@@ -355,7 +367,7 @@ Script N(EatItem) = SCRIPT({
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, 8341);
+            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
             sleep 10;
         }
     }

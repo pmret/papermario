@@ -75,7 +75,7 @@ glabel func_80124434
 /* BAC44 80124544 8E040524 */  lw        $a0, 0x524($s0)
 .L80124548:
 /* BAC48 80124548 9206051A */  lbu       $a2, 0x51a($s0)
-/* BAC4C 8012454C 0C0526AE */  jal       _play_sound
+/* BAC4C 8012454C 0C0526AE */  jal       sfx_play_sound_with_params
 /* BAC50 80124550 00073C03 */   sra      $a3, $a3, 0x10
 .L80124554:
 /* BAC54 80124554 8FBF001C */  lw        $ra, 0x1c($sp)

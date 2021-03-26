@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149618
+glabel sfx_clear_sounds
 /* DFD18 80149618 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DFD1C 8014961C AFB00010 */  sw        $s0, 0x10($sp)
 /* DFD20 80149620 3C108016 */  lui       $s0, %hi(D_801598A0)
@@ -18,7 +18,7 @@ glabel func_80149618
 /* DFD4C 8014964C AC309AD0 */  sw        $s0, %lo(D_80159AD0)($at)
 /* DFD50 80149650 0C0525FF */  jal       func_801497FC
 /* DFD54 80149654 0000202D */   daddu    $a0, $zero, $zero
-/* DFD58 80149658 0C052580 */  jal       use_default_door_sounds
+/* DFD58 80149658 0C052580 */  jal       sfx_reset_door_sounds
 /* DFD5C 8014965C 00000000 */   nop
 /* DFD60 80149660 8FBF0014 */  lw        $ra, 0x14($sp)
 /* DFD64 80149664 8FB00010 */  lw        $s0, 0x10($sp)
