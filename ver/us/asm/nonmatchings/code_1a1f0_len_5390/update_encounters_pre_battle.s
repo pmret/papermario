@@ -307,13 +307,13 @@ glabel update_encounters_pre_battle
 /* 1CBB8 800417B8 A2A200A0 */  sb        $v0, 0xa0($s5)
 /* 1CBBC 800417BC A6A300A2 */  sh        $v1, 0xa2($s5)
 .L800417C0:
-/* 1CBC0 800417C0 0C05271B */  jal       stop_sound
+/* 1CBC0 800417C0 0C05271B */  jal       sfx_stop_sound
 /* 1CBC4 800417C4 24042111 */   addiu    $a0, $zero, 0x2111
-/* 1CBC8 800417C8 0C05271B */  jal       stop_sound
+/* 1CBC8 800417C8 0C05271B */  jal       sfx_stop_sound
 /* 1CBCC 800417CC 24042112 */   addiu    $a0, $zero, 0x2112
-/* 1CBD0 800417D0 0C05271B */  jal       stop_sound
+/* 1CBD0 800417D0 0C05271B */  jal       sfx_stop_sound
 /* 1CBD4 800417D4 24042113 */   addiu    $a0, $zero, 0x2113
-/* 1CBD8 800417D8 0C05271B */  jal       stop_sound
+/* 1CBD8 800417D8 0C05271B */  jal       sfx_stop_sound
 /* 1CBDC 800417DC 24042114 */   addiu    $a0, $zero, 0x2114
 /* 1CBE0 800417E0 0C01CB37 */  jal       func_80072CDC
 /* 1CBE4 800417E4 0000202D */   daddu    $a0, $zero, $zero

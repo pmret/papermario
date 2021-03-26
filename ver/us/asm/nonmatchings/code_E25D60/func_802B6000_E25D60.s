@@ -137,7 +137,7 @@ glabel func_802B6000_E25D60
 /* E25F50 802B61F0 AE020030 */  sw        $v0, 0x30($s0)
 .L802B61F4:
 /* E25F54 802B61F4 8E040030 */  lw        $a0, 0x30($s0)
-/* E25F58 802B61F8 0C052736 */  jal       play_sound_at_player
+/* E25F58 802B61F8 0C052736 */  jal       sfx_play_sound_at_player
 /* E25F5C 802B61FC 0000282D */   daddu    $a1, $zero, $zero
 /* E25F60 802B6200 0C037FDE */  jal       func_800DFF78
 /* E25F64 802B6204 0260202D */   daddu    $a0, $s3, $zero
@@ -256,7 +256,7 @@ glabel func_802B6000_E25D60
 /* E2610C 802B63AC 00451024 */  and       $v0, $v0, $a1
 /* E26110 802B63B0 00661824 */  and       $v1, $v1, $a2
 /* E26114 802B63B4 AE220004 */  sw        $v0, 4($s1)
-/* E26118 802B63B8 0C05271B */  jal       stop_sound
+/* E26118 802B63B8 0C05271B */  jal       sfx_stop_sound
 /* E2611C 802B63BC AE230000 */   sw       $v1, ($s1)
 /* E26120 802B63C0 27A40010 */  addiu     $a0, $sp, 0x10
 /* E26124 802B63C4 0C0388C1 */  jal       input_to_move_vector
@@ -357,7 +357,7 @@ glabel func_802B6000_E25D60
 /* E26294 802B6534 00451024 */  and       $v0, $v0, $a1
 /* E26298 802B6538 00661824 */  and       $v1, $v1, $a2
 /* E2629C 802B653C AE220000 */  sw        $v0, ($s1)
-/* E262A0 802B6540 0C05271B */  jal       stop_sound
+/* E262A0 802B6540 0C05271B */  jal       sfx_stop_sound
 /* E262A4 802B6544 AE230004 */   sw       $v1, 4($s1)
 .L802B6548:
 /* E262A8 802B6548 080ADA5B */  j         .L802B696C

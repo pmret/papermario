@@ -51,7 +51,7 @@ glabel func_80240118_90CD58
 /* 90CE04 802401C4 E7A20010 */  swc1      $f2, 0x10($sp)
 /* 90CE08 802401C8 8E260038 */  lw        $a2, 0x38($s1)
 /* 90CE0C 802401CC 44070000 */  mfc1      $a3, $f0
-/* 90CE10 802401D0 0C052757 */  jal       play_sound_at_position
+/* 90CE10 802401D0 0C052757 */  jal       sfx_play_sound_at_position
 /* 90CE14 802401D4 0000282D */   daddu    $a1, $zero, $zero
 /* 90CE18 802401D8 962300A8 */  lhu       $v1, 0xa8($s1)
 /* 90CE1C 802401DC C624003C */  lwc1      $f4, 0x3c($s1)

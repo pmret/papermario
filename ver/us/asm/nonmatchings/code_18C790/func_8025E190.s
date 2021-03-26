@@ -62,7 +62,7 @@ glabel L8025E1FC_18CADC
 /* 18CB34 8025E254 00021080 */  sll       $v0, $v0, 2
 /* 18CB38 8025E258 3C01802A */  lui       $at, %hi(D_8029FB6C)
 /* 18CB3C 8025E25C AC22FB6C */  sw        $v0, %lo(D_8029FB6C)($at)
-/* 18CB40 8025E260 0C05272D */  jal       play_sound
+/* 18CB40 8025E260 0C05272D */  jal       sfx_play_sound
 /* 18CB44 8025E264 240400D4 */   addiu    $a0, $zero, 0xd4
 /* 18CB48 8025E268 82A30010 */  lb        $v1, 0x10($s5)
 /* 18CB4C 8025E26C 83C20078 */  lb        $v0, 0x78($fp)
@@ -187,7 +187,7 @@ glabel L8025E3C8_18CCA8
 /* 18CD0C 8025E42C 00A28023 */  subu      $s0, $a1, $v0
 /* 18CD10 8025E430 1A000003 */  blez      $s0, .L8025E440
 /* 18CD14 8025E434 00000000 */   nop
-/* 18CD18 8025E438 0C05272D */  jal       play_sound
+/* 18CD18 8025E438 0C05272D */  jal       sfx_play_sound
 /* 18CD1C 8025E43C 24040215 */   addiu    $a0, $zero, 0x215
 .L8025E440:
 /* 18CD20 8025E440 92A20010 */  lbu       $v0, 0x10($s5)
@@ -316,7 +316,7 @@ glabel L8025E5C0_18CEA0
 /* 18CEEC 8025E60C 0C00A5CF */  jal       dma_copy
 /* 18CEF0 8025E610 00000000 */   nop
 /* 18CEF4 8025E614 3C048000 */  lui       $a0, 0x8000
-/* 18CEF8 8025E618 0C05272D */  jal       play_sound
+/* 18CEF8 8025E618 0C05272D */  jal       sfx_play_sound
 /* 18CEFC 8025E61C 34840008 */   ori      $a0, $a0, 8
 /* 18CF00 8025E620 24020005 */  addiu     $v0, $zero, 5
 /* 18CF04 8025E624 08097FD0 */  j         .L8025FF40
@@ -1510,14 +1510,14 @@ glabel L8025F824_18E104
 /* 18E124 8025F844 8C22FB60 */  lw        $v0, %lo(D_8029FB60)($at)
 /* 18E128 8025F848 14400007 */  bnez      $v0, .L8025F868
 /* 18E12C 8025F84C 00000000 */   nop
-/* 18E130 8025F850 0C05272D */  jal       play_sound
+/* 18E130 8025F850 0C05272D */  jal       sfx_play_sound
 /* 18E134 8025F854 240400C9 */   addiu    $a0, $zero, 0xc9
-/* 18E138 8025F858 0C05272D */  jal       play_sound
+/* 18E138 8025F858 0C05272D */  jal       sfx_play_sound
 /* 18E13C 8025F85C 24040749 */   addiu    $a0, $zero, 0x749
 /* 18E140 8025F860 08097FD0 */  j         .L8025FF40
 /* 18E144 8025F864 24020009 */   addiu    $v0, $zero, 9
 .L8025F868:
-/* 18E148 8025F868 0C05272D */  jal       play_sound
+/* 18E148 8025F868 0C05272D */  jal       sfx_play_sound
 /* 18E14C 8025F86C 2404021D */   addiu    $a0, $zero, 0x21d
 /* 18E150 8025F870 08097FD0 */  j         .L8025FF40
 /* 18E154 8025F874 2402000F */   addiu    $v0, $zero, 0xf
@@ -1546,7 +1546,7 @@ glabel L8025F824_18E104
 /* 18E19C 8025F8BC 00041603 */  sra       $v0, $a0, 0x18
 /* 18E1A0 8025F8C0 12020004 */  beq       $s0, $v0, .L8025F8D4
 /* 18E1A4 8025F8C4 00000000 */   nop
-/* 18E1A8 8025F8C8 0C05272D */  jal       play_sound
+/* 18E1A8 8025F8C8 0C05272D */  jal       sfx_play_sound
 /* 18E1AC 8025F8CC 240400C7 */   addiu    $a0, $zero, 0xc7
 /* 18E1B0 8025F8D0 A3D00048 */  sb        $s0, 0x48($fp)
 .L8025F8D4:

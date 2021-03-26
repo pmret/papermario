@@ -144,7 +144,7 @@ glabel FallPartTo
 /* 1A9350 8027AA70 8E2400B4 */  lw        $a0, 0xb4($s1)
 /* 1A9354 8027AA74 8E26002C */  lw        $a2, 0x2c($s1)
 /* 1A9358 8027AA78 8E270030 */  lw        $a3, 0x30($s1)
-/* 1A935C 8027AA7C 0C052757 */  jal       play_sound_at_position
+/* 1A935C 8027AA7C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A9360 8027AA80 0000282D */   daddu    $a1, $zero, $zero
 /* 1A9364 8027AA84 24020001 */  addiu     $v0, $zero, 1
 .L8027AA88:

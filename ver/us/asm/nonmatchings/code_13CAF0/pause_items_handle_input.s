@@ -44,13 +44,13 @@ glabel pause_items_handle_input
 /* 13DBAC 8024A86C 24027FFE */  addiu     $v0, $zero, 0x7ffe
 /* 13DBB0 8024A870 14620005 */  bne       $v1, $v0, .L8024A888
 /* 13DBB4 8024A874 24020001 */   addiu    $v0, $zero, 1
-/* 13DBB8 8024A878 0C05272D */  jal       play_sound
+/* 13DBB8 8024A878 0C05272D */  jal       sfx_play_sound
 /* 13DBBC 8024A87C 2404021D */   addiu    $a0, $zero, 0x21d
 /* 13DBC0 8024A880 08092B11 */  j         .L8024AC44
 /* 13DBC4 8024A884 00000000 */   nop
 .L8024A888:
 /* 13DBC8 8024A888 AC820000 */  sw        $v0, ($a0)
-/* 13DBCC 8024A88C 0C05272D */  jal       play_sound
+/* 13DBCC 8024A88C 0C05272D */  jal       sfx_play_sound
 /* 13DBD0 8024A890 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 13DBD4 8024A894 08092B11 */  j         .L8024AC44
 /* 13DBD8 8024A898 00000000 */   nop
@@ -77,7 +77,7 @@ glabel pause_items_handle_input
 /* 13DC24 8024A8E4 8E020000 */  lw        $v0, ($s0)
 /* 13DC28 8024A8E8 106200A0 */  beq       $v1, $v0, .L8024AB6C
 /* 13DC2C 8024A8EC 00000000 */   nop
-/* 13DC30 8024A8F0 0C05272D */  jal       play_sound
+/* 13DC30 8024A8F0 0C05272D */  jal       sfx_play_sound
 /* 13DC34 8024A8F4 240400C8 */   addiu    $a0, $zero, 0xc8
 /* 13DC38 8024A8F8 8E040000 */  lw        $a0, ($s0)
 /* 13DC3C 8024A8FC 0C092937 */  jal       pause_items_load_items
@@ -238,7 +238,7 @@ glabel pause_items_handle_input
 /* 13DE7C 8024AB3C 010A1021 */  addu      $v0, $t0, $t2
 /* 13DE80 8024AB40 10490003 */  beq       $v0, $t1, .L8024AB50
 /* 13DE84 8024AB44 AE020000 */   sw       $v0, ($s0)
-/* 13DE88 8024AB48 0C05272D */  jal       play_sound
+/* 13DE88 8024AB48 0C05272D */  jal       sfx_play_sound
 /* 13DE8C 8024AB4C 240400C7 */   addiu    $a0, $zero, 0xc7
 .L8024AB50:
 /* 13DE90 8024AB50 8E020000 */  lw        $v0, ($s0)
@@ -299,14 +299,14 @@ glabel pause_items_handle_input
 /* 13DF54 8024AC14 8E020000 */  lw        $v0, ($s0)
 /* 13DF58 8024AC18 14400007 */  bnez      $v0, .L8024AC38
 /* 13DF5C 8024AC1C 00000000 */   nop
-/* 13DF60 8024AC20 0C05272D */  jal       play_sound
+/* 13DF60 8024AC20 0C05272D */  jal       sfx_play_sound
 /* 13DF64 8024AC24 240400CA */   addiu    $a0, $zero, 0xca
 /* 13DF68 8024AC28 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 13DF6C 8024AC2C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 /* 13DF70 8024AC30 08092B11 */  j         .L8024AC44
 /* 13DF74 8024AC34 00000000 */   nop
 .L8024AC38:
-/* 13DF78 8024AC38 0C05272D */  jal       play_sound
+/* 13DF78 8024AC38 0C05272D */  jal       sfx_play_sound
 /* 13DF7C 8024AC3C 240400CA */   addiu    $a0, $zero, 0xca
 /* 13DF80 8024AC40 AE000000 */  sw        $zero, ($s0)
 .L8024AC44:

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149E04
+glabel sfx_get_spatialized_sound_params
 /* E0504 80149E04 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* E0508 80149E08 44860000 */  mtc1      $a2, $f0
 /* E050C 80149E0C 8FA3003C */  lw        $v1, 0x3c($sp)
@@ -25,14 +25,14 @@ glabel func_80149E04
 .L80149E54:
 /* E0554 80149E54 44060000 */  mfc1      $a2, $f0
 /* E0558 80149E58 0220382D */  daddu     $a3, $s1, $zero
-/* E055C 80149E5C 0C0527D6 */  jal       func_80149F58
+/* E055C 80149E5C 0C0527D6 */  jal       sfx_compute_spatialized_sound_params_0
 /* E0560 80149E60 AFB20010 */   sw       $s2, 0x10($sp)
 /* E0564 80149E64 080527A7 */  j         .L80149E9C
 /* E0568 80149E68 3C020001 */   lui      $v0, 1
 .L80149E6C:
 /* E056C 80149E6C 44060000 */  mfc1      $a2, $f0
 /* E0570 80149E70 0220382D */  daddu     $a3, $s1, $zero
-/* E0574 80149E74 0C05286D */  jal       func_8014A1B4
+/* E0574 80149E74 0C05286D */  jal       sfx_compute_spatialized_sound_params_1
 /* E0578 80149E78 AFB20010 */   sw       $s2, 0x10($sp)
 /* E057C 80149E7C 080527A7 */  j         .L80149E9C
 /* E0580 80149E80 3C020001 */   lui      $v0, 1
@@ -40,7 +40,7 @@ glabel func_80149E04
 /* E0584 80149E84 44060000 */  mfc1      $a2, $f0
 /* E0588 80149E88 0220382D */  daddu     $a3, $s1, $zero
 /* E058C 80149E8C AFB20010 */  sw        $s2, 0x10($sp)
-/* E0590 80149E90 0C052494 */  jal       func_80149250
+/* E0590 80149E90 0C052494 */  jal       sfx_compute_spatialized_sound_params_2
 /* E0594 80149E94 AFB00014 */   sw       $s0, 0x14($sp)
 /* E0598 80149E98 3C020001 */  lui       $v0, 1
 .L80149E9C:

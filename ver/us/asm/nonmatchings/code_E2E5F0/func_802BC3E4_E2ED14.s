@@ -45,7 +45,7 @@ glabel func_802BC3E4_E2ED14
 /* E2EDB0 802BC480 00000000 */  nop
 /* E2EDB4 802BC484 45000003 */  bc1f      .L802BC494
 /* E2EDB8 802BC488 00000000 */   nop
-/* E2EDBC 802BC48C 0C05272D */  jal       play_sound
+/* E2EDBC 802BC48C 0C05272D */  jal       sfx_play_sound
 /* E2EDC0 802BC490 24040392 */   addiu    $a0, $zero, 0x392
 .L802BC494:
 /* E2EDC4 802BC494 8FBF0014 */  lw        $ra, 0x14($sp)

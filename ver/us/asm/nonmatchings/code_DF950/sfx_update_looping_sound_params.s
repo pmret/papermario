@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149734
+glabel sfx_update_looping_sound_params
 /* DFE34 80149734 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* DFE38 80149738 AFB10024 */  sw        $s1, 0x24($sp)
 /* DFE3C 8014973C 3C118016 */  lui       $s1, %hi(D_80159AD0)
@@ -29,7 +29,7 @@ glabel func_80149734
 /* DFE90 80149790 8E060014 */  lw        $a2, 0x14($s0)
 /* DFE94 80149794 C60C000C */  lwc1      $f12, 0xc($s0)
 /* DFE98 80149798 C60E0010 */  lwc1      $f14, 0x10($s0)
-/* DFE9C 8014979C 0C052781 */  jal       func_80149E04
+/* DFE9C 8014979C 0C052781 */  jal       sfx_get_spatialized_sound_params
 /* DFEA0 801497A0 0280382D */   daddu    $a3, $s4, $zero
 /* DFEA4 801497A4 92820001 */  lbu       $v0, 1($s4)
 /* DFEA8 801497A8 A2020008 */  sb        $v0, 8($s0)

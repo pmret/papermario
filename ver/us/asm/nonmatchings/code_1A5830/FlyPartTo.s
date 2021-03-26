@@ -147,7 +147,7 @@ glabel FlyPartTo
 /* 1AAA1C 8027C13C 8E4400AC */  lw        $a0, 0xac($s2)
 /* 1AAA20 8027C140 8E46002C */  lw        $a2, 0x2c($s2)
 /* 1AAA24 8027C144 8E470030 */  lw        $a3, 0x30($s2)
-/* 1AAA28 8027C148 0C052757 */  jal       play_sound_at_position
+/* 1AAA28 8027C148 0C052757 */  jal       sfx_play_sound_at_position
 /* 1AAA2C 8027C14C 0000282D */   daddu    $a1, $zero, $zero
 /* 1AAA30 8027C150 AE00003C */  sw        $zero, 0x3c($s0)
 .L8027C154:
@@ -293,7 +293,7 @@ glabel FlyPartTo
 .L8027C368:
 /* 1AAC48 8027C368 8E46002C */  lw        $a2, 0x2c($s2)
 /* 1AAC4C 8027C36C 8E470030 */  lw        $a3, 0x30($s2)
-/* 1AAC50 8027C370 0C052757 */  jal       play_sound_at_position
+/* 1AAC50 8027C370 0C052757 */  jal       sfx_play_sound_at_position
 /* 1AAC54 8027C374 0000282D */   daddu    $a1, $zero, $zero
 .L8027C378:
 /* 1AAC58 8027C378 C602000C */  lwc1      $f2, 0xc($s0)

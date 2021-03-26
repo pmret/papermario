@@ -16,7 +16,7 @@ glabel func_80240080_B02900
 /* B0292C 802400AC 44061000 */  mfc1      $a2, $f2
 /* B02930 802400B0 4407A000 */  mfc1      $a3, $f20
 /* B02934 802400B4 0000282D */  daddu     $a1, $zero, $zero
-/* B02938 802400B8 0C05267B */  jal       func_801499EC
+/* B02938 802400B8 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* B0293C 802400BC E7A00010 */   swc1     $f0, 0x10($sp)
 /* B02940 802400C0 4600A10D */  trunc.w.s $f4, $f20
 /* B02944 802400C4 E6040084 */  swc1      $f4, 0x84($s0)

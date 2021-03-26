@@ -430,7 +430,7 @@ glabel L802470F4_1759D4
 /* 1759E4 80247104 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
 /* 1759E8 80247108 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L8024710C:
-/* 1759EC 8024710C 0C05272D */  jal       play_sound
+/* 1759EC 8024710C 0C05272D */  jal       sfx_play_sound
 /* 1759F0 80247110 24042107 */   addiu    $a0, $zero, 0x2107
 /* 1759F4 80247114 0200202D */  daddu     $a0, $s0, $zero
 /* 1759F8 80247118 0C093E58 */  jal       show_battle_message

@@ -23,7 +23,7 @@ glabel phys_player_land
 /* 7C770 800E32C0 00621824 */  and       $v1, $v1, $v0
 /* 7C774 800E32C4 E6000044 */  swc1      $f0, 0x44($s0)
 /* 7C778 800E32C8 E6020048 */  swc1      $f2, 0x48($s0)
-/* 7C77C 800E32CC 0C052736 */  jal       play_sound_at_player
+/* 7C77C 800E32CC 0C052736 */  jal       sfx_play_sound_at_player
 /* 7C780 800E32D0 AE030000 */   sw       $v1, ($s0)
 /* 7C784 800E32D4 3C038016 */  lui       $v1, %hi(gCollisionStatus)
 /* 7C788 800E32D8 2463A550 */  addiu     $v1, $v1, %lo(gCollisionStatus)

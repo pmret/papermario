@@ -45,7 +45,7 @@ glabel func_80240000_DE56B0
 /* DE574C 8024009C 14400004 */  bnez      $v0, .L802400B0
 /* DE5750 802400A0 24020001 */   addiu    $v0, $zero, 1
 /* DE5754 802400A4 AE020074 */  sw        $v0, 0x74($s0)
-/* DE5758 802400A8 0C05272D */  jal       play_sound
+/* DE5758 802400A8 0C05272D */  jal       sfx_play_sound
 /* DE575C 802400AC 24042011 */   addiu    $a0, $zero, 0x2011
 .L802400B0:
 /* DE5760 802400B0 8E020070 */  lw        $v0, 0x70($s0)
@@ -67,7 +67,7 @@ glabel func_80240000_DE56B0
 /* DE579C 802400EC 284200FF */  slti      $v0, $v0, 0xff
 /* DE57A0 802400F0 10400003 */  beqz      $v0, .L80240100
 /* DE57A4 802400F4 AE000074 */   sw       $zero, 0x74($s0)
-/* DE57A8 802400F8 0C05272D */  jal       play_sound
+/* DE57A8 802400F8 0C05272D */  jal       sfx_play_sound
 /* DE57AC 802400FC 24042012 */   addiu    $a0, $zero, 0x2012
 .L80240100:
 /* DE57B0 80240100 8E020070 */  lw        $v0, 0x70($s0)

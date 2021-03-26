@@ -165,7 +165,7 @@ glabel L802B73E8_E21C58
 /* E21CA0 802B7430 00000000 */   nop
 /* E21CA4 802B7434 AC800020 */  sw        $zero, 0x20($a0)
 /* E21CA8 802B7438 2404007D */  addiu     $a0, $zero, 0x7d
-/* E21CAC 802B743C 0C052736 */  jal       play_sound_at_player
+/* E21CAC 802B743C 0C052736 */  jal       sfx_play_sound_at_player
 /* E21CB0 802B7440 0000282D */   daddu    $a1, $zero, $zero
 .L802B7444:
 /* E21CB4 802B7444 8E020000 */  lw        $v0, ($s0)

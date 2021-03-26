@@ -377,7 +377,7 @@ glabel func_80240050_BCD0B0
 /* BCD61C 802405BC 44071000 */  mfc1      $a3, $f2
 /* BCD620 802405C0 C7A00060 */  lwc1      $f0, 0x60($sp)
 /* BCD624 802405C4 0000282D */  daddu     $a1, $zero, $zero
-/* BCD628 802405C8 0C052757 */  jal       play_sound_at_position
+/* BCD628 802405C8 0C052757 */  jal       sfx_play_sound_at_position
 /* BCD62C 802405CC E7A00010 */   swc1     $f0, 0x10($sp)
 /* BCD630 802405D0 08090177 */  j         .L802405DC
 /* BCD634 802405D4 AE500078 */   sw       $s0, 0x78($s2)

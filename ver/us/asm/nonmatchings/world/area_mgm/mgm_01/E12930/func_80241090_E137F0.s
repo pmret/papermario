@@ -70,7 +70,7 @@ glabel func_80241090_E137F0
 /* E138E4 80241184 08090466 */  j         .L80241198
 /* E138E8 80241188 00822021 */   addu     $a0, $a0, $v0
 .L8024118C:
-/* E138EC 8024118C 0C05272D */  jal       play_sound
+/* E138EC 8024118C 0C05272D */  jal       sfx_play_sound
 /* E138F0 80241190 2404021D */   addiu    $a0, $zero, 0x21d
 /* E138F4 80241194 0000202D */  daddu     $a0, $zero, $zero
 .L80241198:

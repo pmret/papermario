@@ -250,7 +250,7 @@ glabel L802A97E4_42ACD4
 /* 42ACF4 802A9804 24A528CC */  addiu     $a1, $a1, %lo(D_802928CC)
 /* 42ACF8 802A9808 0C0511FF */  jal       set_menu_icon_script
 /* 42ACFC 802A980C 00000000 */   nop
-/* 42AD00 802A9810 0C05272D */  jal       play_sound
+/* 42AD00 802A9810 0C05272D */  jal       sfx_play_sound
 /* 42AD04 802A9814 24040233 */   addiu    $a0, $zero, 0x233
 /* 42AD08 802A9818 86230054 */  lh        $v1, 0x54($s1)
 /* 42AD0C 802A981C 24020016 */  addiu     $v0, $zero, 0x16
@@ -262,7 +262,7 @@ glabel L802A97E4_42ACD4
 /* 42AD20 802A9830 24A52874 */  addiu     $a1, $a1, %lo(D_80292874)
 /* 42AD24 802A9834 0C0511FF */  jal       set_menu_icon_script
 /* 42AD28 802A9838 00000000 */   nop
-/* 42AD2C 802A983C 0C05272D */  jal       play_sound
+/* 42AD2C 802A983C 0C05272D */  jal       sfx_play_sound
 /* 42AD30 802A9840 24040233 */   addiu    $a0, $zero, 0x233
 .L802A9844:
 /* 42AD34 802A9844 86230054 */  lh        $v1, 0x54($s1)
@@ -279,7 +279,7 @@ glabel L802A97E4_42ACD4
 /* 42AD60 802A9870 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
 /* 42AD64 802A9874 0C0511FF */  jal       set_menu_icon_script
 /* 42AD68 802A9878 00000000 */   nop
-/* 42AD6C 802A987C 0C05272D */  jal       play_sound
+/* 42AD6C 802A987C 0C05272D */  jal       sfx_play_sound
 /* 42AD70 802A9880 24040234 */   addiu    $a0, $zero, 0x234
 .L802A9884:
 /* 42AD74 802A9884 96220054 */  lhu       $v0, 0x54($s1)
@@ -448,7 +448,7 @@ glabel L802A98A8_42AD98
 /* 42AFBC 802A9ACC 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
 /* 42AFC0 802A9AD0 0C0511FF */  jal       set_menu_icon_script
 /* 42AFC4 802A9AD4 00000000 */   nop
-/* 42AFC8 802A9AD8 0C05272D */  jal       play_sound
+/* 42AFC8 802A9AD8 0C05272D */  jal       sfx_play_sound
 /* 42AFCC 802A9ADC 24040234 */   addiu    $a0, $zero, 0x234
 .L802A9AE0:
 /* 42AFD0 802A9AE0 96220054 */  lhu       $v0, 0x54($s1)
@@ -621,7 +621,7 @@ glabel L802A9B04_42AFF4
 /* 42B224 802A9D34 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
 /* 42B228 802A9D38 0C0511FF */  jal       set_menu_icon_script
 /* 42B22C 802A9D3C 00000000 */   nop
-/* 42B230 802A9D40 0C05272D */  jal       play_sound
+/* 42B230 802A9D40 0C05272D */  jal       sfx_play_sound
 /* 42B234 802A9D44 24040234 */   addiu    $a0, $zero, 0x234
 .L802A9D48:
 /* 42B238 802A9D48 96220054 */  lhu       $v0, 0x54($s1)

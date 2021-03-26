@@ -140,7 +140,7 @@ glabel pause_init
 /* 13759C 8024425C 24040018 */  addiu     $a0, $zero, 0x18
 /* 1375A0 80244260 0C051F9F */  jal       set_window_update
 /* 1375A4 80244264 24050001 */   addiu    $a1, $zero, 1
-/* 1375A8 80244268 0C05272D */  jal       play_sound
+/* 1375A8 80244268 0C05272D */  jal       sfx_play_sound
 /* 1375AC 8024426C 24040009 */   addiu    $a0, $zero, 9
 .L80244270:
 /* 1375B0 80244270 2404002C */  addiu     $a0, $zero, 0x2c

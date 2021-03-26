@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149838
+glabel sfx_stop_env_sounds
 /* DFF38 80149838 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* DFF3C 8014983C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* DFF40 80149840 27BDFFE0 */  addiu     $sp, $sp, -0x20

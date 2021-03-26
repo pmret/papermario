@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149974
+glabel sfx_register_looping_sound_at_position
 /* E0074 80149974 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* E0078 80149978 44861000 */  mtc1      $a2, $f2
 /* E007C 8014997C 44872000 */  mtc1      $a3, $f4
@@ -29,7 +29,7 @@ glabel func_80149974
 /* E00CC 801499CC AC640004 */  sw        $a0, 4($v1)
 /* E00D0 801499D0 34420003 */  ori       $v0, $v0, 3
 /* E00D4 801499D4 AC620000 */  sw        $v0, ($v1)
-/* E00D8 801499D8 0C052757 */  jal       play_sound_at_position
+/* E00D8 801499D8 0C052757 */  jal       sfx_play_sound_at_position
 /* E00DC 801499DC E7A00010 */   swc1     $f0, 0x10($sp)
 /* E00E0 801499E0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E00E4 801499E4 03E00008 */  jr        $ra

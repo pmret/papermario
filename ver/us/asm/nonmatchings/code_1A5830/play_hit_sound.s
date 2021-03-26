@@ -106,7 +106,7 @@ glabel L80277108_1A59E8
 /* 1A5A20 80277140 44060000 */  mfc1      $a2, $f0
 /* 1A5A24 80277144 44071000 */  mfc1      $a3, $f2
 /* 1A5A28 80277148 0000282D */  daddu     $a1, $zero, $zero
-/* 1A5A2C 8027714C 0C052757 */  jal       play_sound_at_position
+/* 1A5A2C 8027714C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A5A30 80277150 E7A40010 */   swc1     $f4, 0x10($sp)
 .L80277154:
 /* 1A5A34 80277154 8FBF0018 */  lw        $ra, 0x18($sp)

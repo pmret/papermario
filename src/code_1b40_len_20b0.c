@@ -82,7 +82,7 @@ void step_game_loop(void) {
     func_80138198();
     func_8014A548();
     update_ambient_sounds();
-    func_80149734();
+    sfx_update_looping_sound_params();
     update_windows();
     update_curtains();
 
@@ -109,7 +109,7 @@ void step_game_loop(void) {
                 temp8009A690 = &D_8009A690;
                 (*temp8009A690)--;
                 if (*temp8009A690 == 0) {
-                    func_80149838();
+                    sfx_stop_env_sounds();
                     set_game_mode(0);
                     OVERRIDE_FLAG_UNSET(0x20);
                 }
@@ -225,7 +225,7 @@ void load_engine_data(void) {
     clear_item_entity_data();
     func_8014A498();
     reset_ambient_sounds();
-    func_80149618();
+    sfx_clear_sounds();
     clear_windows();
     initialize_curtains();
     poll_rumble();

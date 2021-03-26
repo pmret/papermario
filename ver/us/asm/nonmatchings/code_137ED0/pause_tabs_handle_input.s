@@ -119,7 +119,7 @@ glabel pause_tabs_handle_input
 /* 138844 80245504 A483024C */  sh        $v1, 0x24c($a0)
 /* 138848 80245508 82020001 */  lb        $v0, 1($s0)
 /* 13884C 8024550C 240400C8 */  addiu     $a0, $zero, 0xc8
-/* 138850 80245510 0C05272D */  jal       play_sound
+/* 138850 80245510 0C05272D */  jal       sfx_play_sound
 /* 138854 80245514 AE220000 */   sw       $v0, ($s1)
 .L80245518:
 /* 138858 80245518 3C028027 */  lui       $v0, %hi(gPauseMenuPressedButtons)
@@ -141,7 +141,7 @@ glabel pause_tabs_handle_input
 /* 138898 80245558 24020001 */  addiu     $v0, $zero, 1
 /* 13889C 8024555C 14620008 */  bne       $v1, $v0, .L80245580
 /* 1388A0 80245560 00000000 */   nop
-/* 1388A4 80245564 0C05272D */  jal       play_sound
+/* 1388A4 80245564 0C05272D */  jal       sfx_play_sound
 /* 1388A8 80245568 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 1388AC 8024556C 82020001 */  lb        $v0, 1($s0)
 /* 1388B0 80245570 00511021 */  addu      $v0, $v0, $s1

@@ -17,7 +17,7 @@ glabel D_80151268
 
 .section .text
 
-glabel func_80149250
+glabel sfx_compute_spatialized_sound_params_2
 /* DF950 80149250 44860000 */  mtc1      $a2, $f0
 /* DF954 80149254 3C048007 */  lui       $a0, %hi(gCurrentCameraID)
 /* DF958 80149258 8C847410 */  lw        $a0, %lo(gCurrentCameraID)($a0)

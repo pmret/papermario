@@ -295,7 +295,7 @@ glabel L802BD7F0_31B810
 /* 31BAAC 802BDA8C 0000282D */  daddu     $a1, $zero, $zero
 /* 31BAB0 802BDA90 3C01802C */  lui       $at, %hi(D_802BEC60)
 /* 31BAB4 802BDA94 AC20EC60 */  sw        $zero, %lo(D_802BEC60)($at)
-/* 31BAB8 802BDA98 0C052742 */  jal       play_sound_at_npc
+/* 31BAB8 802BDA98 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31BABC 802BDA9C 2406FFFC */   addiu    $a2, $zero, -4
 /* 31BAC0 802BDAA0 24020002 */  addiu     $v0, $zero, 2
 /* 31BAC4 802BDAA4 AEA20070 */  sw        $v0, 0x70($s5)
@@ -465,11 +465,11 @@ glabel L802BDAA8_31BAC8
 /* 31BD40 802BDD20 3C01802C */  lui       $at, %hi(D_802BEC60)
 /* 31BD44 802BDD24 AC20EC60 */  sw        $zero, %lo(D_802BEC60)($at)
 /* 31BD48 802BDD28 34420001 */  ori       $v0, $v0, 1
-/* 31BD4C 802BDD2C 0C052742 */  jal       play_sound_at_npc
+/* 31BD4C 802BDD2C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31BD50 802BDD30 A4620002 */   sh       $v0, 2($v1)
 /* 31BD54 802BDD34 24040284 */  addiu     $a0, $zero, 0x284
 /* 31BD58 802BDD38 0000282D */  daddu     $a1, $zero, $zero
-/* 31BD5C 802BDD3C 0C052742 */  jal       play_sound_at_npc
+/* 31BD5C 802BDD3C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31BD60 802BDD40 2406FFFC */   addiu    $a2, $zero, -4
 /* 31BD64 802BDD44 080AF8E8 */  j         L802BE3A0_31C3C0
 /* 31BD68 802BDD48 00000000 */   nop
@@ -523,7 +523,7 @@ glabel L802BDD4C_31BD6C
 /* 31BE20 802BDE00 14400004 */  bnez      $v0, .L802BDE14
 /* 31BE24 802BDE04 2404010C */   addiu    $a0, $zero, 0x10c
 /* 31BE28 802BDE08 0000282D */  daddu     $a1, $zero, $zero
-/* 31BE2C 802BDE0C 0C052742 */  jal       play_sound_at_npc
+/* 31BE2C 802BDE0C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31BE30 802BDE10 2406FFFC */   addiu    $a2, $zero, -4
 .L802BDE14:
 /* 31BE34 802BDE14 C60C000C */  lwc1      $f12, 0xc($s0)
@@ -553,7 +553,7 @@ glabel L802BDD4C_31BD6C
 /* 31BE94 802BDE74 24040003 */   addiu    $a0, $zero, 3
 /* 31BE98 802BDE78 0000202D */  daddu     $a0, $zero, $zero
 /* 31BE9C 802BDE7C 0080282D */  daddu     $a1, $a0, $zero
-/* 31BEA0 802BDE80 0C052742 */  jal       play_sound_at_npc
+/* 31BEA0 802BDE80 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31BEA4 802BDE84 2406FFFC */   addiu    $a2, $zero, -4
 /* 31BEA8 802BDE88 080AF8E7 */  j         .L802BE39C
 /* 31BEAC 802BDE8C 24020007 */   addiu    $v0, $zero, 7
@@ -684,7 +684,7 @@ glabel L802BDD4C_31BD6C
 /* 31C094 802BE074 1040002F */  beqz      $v0, .L802BE134
 /* 31C098 802BE078 24040286 */   addiu    $a0, $zero, 0x286
 /* 31C09C 802BE07C 0000282D */  daddu     $a1, $zero, $zero
-/* 31C0A0 802BE080 0C052742 */  jal       play_sound_at_npc
+/* 31C0A0 802BE080 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31C0A4 802BE084 2406FFFC */   addiu    $a2, $zero, -4
 /* 31C0A8 802BE088 C60C000C */  lwc1      $f12, 0xc($s0)
 /* 31C0AC 802BE08C 0C00A8BB */  jal       sin_deg
@@ -713,7 +713,7 @@ glabel L802BDD4C_31BD6C
 /* 31C108 802BE0E8 24040003 */   addiu    $a0, $zero, 3
 /* 31C10C 802BE0EC 0000202D */  daddu     $a0, $zero, $zero
 /* 31C110 802BE0F0 0080282D */  daddu     $a1, $a0, $zero
-/* 31C114 802BE0F4 0C052742 */  jal       play_sound_at_npc
+/* 31C114 802BE0F4 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31C118 802BE0F8 2406FFFC */   addiu    $a2, $zero, -4
 /* 31C11C 802BE0FC 24020004 */  addiu     $v0, $zero, 4
 /* 31C120 802BE100 AEA20070 */  sw        $v0, 0x70($s5)
@@ -736,7 +736,7 @@ glabel L802BDD4C_31BD6C
 /* 31C160 802BE140 1462000B */  bne       $v1, $v0, .L802BE170
 /* 31C164 802BE144 0000202D */   daddu    $a0, $zero, $zero
 /* 31C168 802BE148 0080282D */  daddu     $a1, $a0, $zero
-/* 31C16C 802BE14C 0C052742 */  jal       play_sound_at_npc
+/* 31C16C 802BE14C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31C170 802BE150 2406FFFC */   addiu    $a2, $zero, -4
 /* 31C174 802BE154 24020005 */  addiu     $v0, $zero, 5
 /* 31C178 802BE158 AEA20070 */  sw        $v0, 0x70($s5)
@@ -759,7 +759,7 @@ glabel L802BDD4C_31BD6C
 /* 31C1B4 802BE194 2406FFFC */  addiu     $a2, $zero, -4
 /* 31C1B8 802BE198 24020007 */  addiu     $v0, $zero, 7
 /* 31C1BC 802BE19C AEA20070 */  sw        $v0, 0x70($s5)
-/* 31C1C0 802BE1A0 0C052742 */  jal       play_sound_at_npc
+/* 31C1C0 802BE1A0 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31C1C4 802BE1A4 AE000018 */   sw       $zero, 0x18($s0)
 /* 31C1C8 802BE1A8 080AF8E8 */  j         L802BE3A0_31C3C0
 /* 31C1CC 802BE1AC 00000000 */   nop
@@ -1011,7 +1011,7 @@ glabel L802BE3A0_31C3C0
 /* 31C578 802BE558 2406FFFC */  addiu     $a2, $zero, -4
 /* 31C57C 802BE55C E6000038 */  swc1      $f0, 0x38($s0)
 /* 31C580 802BE560 E602003C */  swc1      $f2, 0x3c($s0)
-/* 31C584 802BE564 0C052742 */  jal       play_sound_at_npc
+/* 31C584 802BE564 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31C588 802BE568 E6040040 */   swc1     $f4, 0x40($s0)
 /* 31C58C 802BE56C C60C000C */  lwc1      $f12, 0xc($s0)
 /* 31C590 802BE570 0C00A8BB */  jal       sin_deg
@@ -1145,7 +1145,7 @@ glabel L802BE3A0_31C3C0
 /* 31C77C 802BE75C A2C00000 */  sb        $zero, ($s6)
 /* 31C780 802BE760 AE00001C */  sw        $zero, 0x1c($s0)
 /* 31C784 802BE764 A60200A8 */  sh        $v0, 0xa8($s0)
-/* 31C788 802BE768 0C05271B */  jal       stop_sound
+/* 31C788 802BE768 0C05271B */  jal       sfx_stop_sound
 /* 31C78C 802BE76C AE050028 */   sw       $a1, 0x28($s0)
 /* 31C790 802BE770 0C00EB6B */  jal       disable_npc_blur
 /* 31C794 802BE774 0200202D */   daddu    $a0, $s0, $zero

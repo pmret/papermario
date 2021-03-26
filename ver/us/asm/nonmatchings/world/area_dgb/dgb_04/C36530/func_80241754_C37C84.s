@@ -33,7 +33,7 @@ glabel func_80241754_C37C84
 /* C37CF0 802417C0 E7A00010 */  swc1      $f0, 0x10($sp)
 /* C37CF4 802417C4 8E260038 */  lw        $a2, 0x38($s1)
 /* C37CF8 802417C8 8E27003C */  lw        $a3, 0x3c($s1)
-/* C37CFC 802417CC 0C052757 */  jal       play_sound_at_position
+/* C37CFC 802417CC 0C052757 */  jal       sfx_play_sound_at_position
 /* C37D00 802417D0 24050002 */   addiu    $a1, $zero, 2
 /* C37D04 802417D4 2402000F */  addiu     $v0, $zero, 0xf
 /* C37D08 802417D8 A620008E */  sh        $zero, 0x8e($s1)

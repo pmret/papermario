@@ -109,7 +109,7 @@ glabel FallToGoal
 /* 1A865C 80279D7C 8E0401AC */  lw        $a0, 0x1ac($s0)
 /* 1A8660 80279D80 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A8664 80279D84 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A8668 80279D88 0C052757 */  jal       play_sound_at_position
+/* 1A8668 80279D88 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A866C 80279D8C 0000282D */   daddu    $a1, $zero, $zero
 /* 1A8670 80279D90 24020001 */  addiu     $v0, $zero, 1
 .L80279D94:

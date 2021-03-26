@@ -43,7 +43,7 @@ glabel func_80240CD0_E13430
 /* E134B4 80240D54 AE02000C */   sw       $v0, 0xc($s0)
 /* E134B8 80240D58 8E02000C */  lw        $v0, 0xc($s0)
 /* E134BC 80240D5C 24040211 */  addiu     $a0, $zero, 0x211
-/* E134C0 80240D60 0C05272D */  jal       play_sound
+/* E134C0 80240D60 0C05272D */  jal       sfx_play_sound
 /* E134C4 80240D64 AE020010 */   sw       $v0, 0x10($s0)
 /* E134C8 80240D68 8E02000C */  lw        $v0, 0xc($s0)
 /* E134CC 80240D6C 8FBF0014 */  lw        $ra, 0x14($sp)

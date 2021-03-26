@@ -127,7 +127,7 @@ glabel func_80238E24_700BA4
 /* 700D80 80239000 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 700D84 80239004 8E06000C */  lw        $a2, 0xc($s0)
 /* 700D88 80239008 8E070010 */  lw        $a3, 0x10($s0)
-/* 700D8C 8023900C 0C052757 */  jal       play_sound_at_position
+/* 700D8C 8023900C 0C052757 */  jal       sfx_play_sound_at_position
 /* 700D90 80239010 0000282D */   daddu    $a1, $zero, $zero
 .L80239014:
 /* 700D94 80239014 C602000C */  lwc1      $f2, 0xc($s0)

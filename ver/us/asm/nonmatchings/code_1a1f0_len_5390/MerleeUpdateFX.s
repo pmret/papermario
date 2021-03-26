@@ -53,7 +53,7 @@ glabel MerleeUpdateFX
 /* 1A568 8003F168 A4200BB8 */  sh        $zero, %lo(D_800A0BB8)($at)
 /* 1A56C 8003F16C 3C01800A */  lui       $at, %hi(D_800A0BA0)
 /* 1A570 8003F170 AC220BA0 */  sw        $v0, %lo(D_800A0BA0)($at)
-/* 1A574 8003F174 0C05272D */  jal       play_sound
+/* 1A574 8003F174 0C05272D */  jal       sfx_play_sound
 /* 1A578 8003F178 24042074 */   addiu    $a0, $zero, 0x2074
 .L8003F17C:
 /* 1A57C 8003F17C 3C0140C9 */  lui       $at, 0x40c9

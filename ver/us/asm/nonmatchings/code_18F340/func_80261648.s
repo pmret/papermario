@@ -11,7 +11,7 @@ glabel func_80261648
 /* 18FF40 80261660 AFB10014 */   sw       $s1, 0x14($sp)
 /* 18FF44 80261664 12000004 */  beqz      $s0, .L80261678
 /* 18FF48 80261668 0040882D */   daddu    $s1, $v0, $zero
-/* 18FF4C 8026166C 0C05272D */  jal       play_sound
+/* 18FF4C 8026166C 0C05272D */  jal       sfx_play_sound
 /* 18FF50 80261670 2404024B */   addiu    $a0, $zero, 0x24b
 /* 18FF54 80261674 A22000AC */  sb        $zero, 0xac($s1)
 .L80261678:

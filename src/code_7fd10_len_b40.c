@@ -35,7 +35,7 @@ s32 func_800E6904(void) {
                 }
             } else if (temp_8010EBB0->unk_03 == 8) {
                 if (actionState != ActionState_RIDE) {
-                    play_sound(0x21D);
+                    sfx_play_sound(0x21D);
                 } else {
                     return 1;
                 }
@@ -77,14 +77,14 @@ void check_input_status_menu(void) {
                 open_status_menu_long();
 
                 if (!is_picking_up_item()) {
-                    play_sound(3);
+                    sfx_play_sound(3);
                 }
             }
         } else if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & 8) && func_800E9860()) {
             close_status_menu();
 
             if (!is_picking_up_item()) {
-                play_sound(4);
+                sfx_play_sound(4);
             }
         }
     }

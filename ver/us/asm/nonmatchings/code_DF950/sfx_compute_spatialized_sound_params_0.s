@@ -17,7 +17,7 @@ glabel D_80151288
 
 .section .text
 
-glabel func_80149F58
+glabel sfx_compute_spatialized_sound_params_0
 /* E0658 80149F58 44860000 */  mtc1      $a2, $f0
 /* E065C 80149F5C 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* E0660 80149F60 AFB00030 */  sw        $s0, 0x30($sp)

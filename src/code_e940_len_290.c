@@ -58,7 +58,7 @@ void step_init_state(void) {
     func_8014AC08();
     clear_windows();
     partner_initialize_data();
-    func_80149618();
+    sfx_clear_sounds();
     func_8014A52C();
     initialize_curtains();
 

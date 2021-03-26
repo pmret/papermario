@@ -145,7 +145,7 @@ glabel L80037204_12604
 /* 126A4 800372A4 24020005 */  addiu     $v0, $zero, 5
 /* 126A8 800372A8 3C018007 */  lui       $at, %hi(D_800779C0)
 /* 126AC 800372AC A42279C0 */  sh        $v0, %lo(D_800779C0)($at)
-/* 126B0 800372B0 0C05272D */  jal       play_sound
+/* 126B0 800372B0 0C05272D */  jal       sfx_play_sound
 /* 126B4 800372B4 240400D5 */   addiu    $a0, $zero, 0xd5
 /* 126B8 800372B8 0000202D */  daddu     $a0, $zero, $zero
 /* 126BC 800372BC 24050069 */  addiu     $a1, $zero, 0x69

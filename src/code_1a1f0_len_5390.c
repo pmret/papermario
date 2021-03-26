@@ -79,7 +79,7 @@ ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-0xA);
 
     if (isInitialCall) {
-        play_sound(0x24B);
+        sfx_play_sound(0x24B);
         npc->unk_AC = 0;
     }
 
@@ -165,7 +165,7 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1].s == 15) {
-        play_sound(SoundId_DEATH);
+        sfx_play_sound(SoundId_DEATH);
         func_80070190(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 

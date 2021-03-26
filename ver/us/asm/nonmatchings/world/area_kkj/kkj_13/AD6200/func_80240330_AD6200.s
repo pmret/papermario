@@ -16,7 +16,7 @@ glabel func_80240330_AD6200
 /* AD622C 8024035C 44061000 */  mfc1      $a2, $f2
 /* AD6230 80240360 4407A000 */  mfc1      $a3, $f20
 /* AD6234 80240364 0000282D */  daddu     $a1, $zero, $zero
-/* AD6238 80240368 0C05267B */  jal       func_801499EC
+/* AD6238 80240368 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* AD623C 8024036C E7A00010 */   swc1     $f0, 0x10($sp)
 /* AD6240 80240370 4600A10D */  trunc.w.s $f4, $f20
 /* AD6244 80240374 E6040084 */  swc1      $f4, 0x84($s0)

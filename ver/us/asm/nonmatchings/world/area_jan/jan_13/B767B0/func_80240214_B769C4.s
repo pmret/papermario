@@ -35,7 +35,7 @@ glabel func_80240214_B769C4
 /* B76A3C 8024028C 00000000 */  nop
 /* B76A40 80240290 46800020 */  cvt.s.w   $f0, $f0
 /* B76A44 80240294 AE220078 */  sw        $v0, 0x78($s1)
-/* B76A48 80240298 0C05267B */  jal       func_801499EC
+/* B76A48 80240298 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* B76A4C 8024029C E7A00010 */   swc1     $f0, 0x10($sp)
 .L802402A0:
 /* B76A50 802402A0 8FBF0020 */  lw        $ra, 0x20($sp)

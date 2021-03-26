@@ -22,7 +22,7 @@ glabel func_8026777C
 /* 1960A0 802677C0 8C63000C */  lw        $v1, 0xc($v1)
 /* 1960A4 802677C4 14A00003 */  bnez      $a1, .L802677D4
 /* 1960A8 802677C8 AC62003C */   sw       $v0, 0x3c($v1)
-/* 1960AC 802677CC 0C05272D */  jal       play_sound
+/* 1960AC 802677CC 0C05272D */  jal       sfx_play_sound
 /* 1960B0 802677D0 24042107 */   addiu    $a0, $zero, 0x2107
 .L802677D4:
 /* 1960B4 802677D4 12000012 */  beqz      $s0, .L80267820

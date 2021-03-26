@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8014A1B4
+glabel sfx_compute_spatialized_sound_params_1
 /* E08B4 8014A1B4 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* E08B8 8014A1B8 AFB00030 */  sw        $s0, 0x30($sp)
 /* E08BC 8014A1BC 00E0802D */  daddu     $s0, $a3, $zero

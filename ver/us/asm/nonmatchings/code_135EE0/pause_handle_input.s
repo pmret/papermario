@@ -71,7 +71,7 @@ glabel pause_handle_input
 .L80244520:
 /* 137860 80244520 0C039E1B */  jal       enforce_hpfp_limits
 /* 137864 80244524 00000000 */   nop
-/* 137868 80244528 0C05272D */  jal       play_sound
+/* 137868 80244528 0C05272D */  jal       sfx_play_sound
 /* 13786C 8024452C 240400C6 */   addiu    $a0, $zero, 0xc6
 /* 137870 80244530 0C00CD3C */  jal       set_game_mode
 /* 137874 80244534 2404000B */   addiu    $a0, $zero, 0xb

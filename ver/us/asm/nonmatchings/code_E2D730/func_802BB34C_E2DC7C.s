@@ -4,7 +4,7 @@
 glabel func_802BB34C_E2DC7C
 /* E2DC7C 802BB34C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E2DC80 802BB350 AFBF0010 */  sw        $ra, 0x10($sp)
-/* E2DC84 802BB354 0C05272D */  jal       play_sound
+/* E2DC84 802BB354 0C05272D */  jal       sfx_play_sound
 /* E2DC88 802BB358 24040791 */   addiu    $a0, $zero, 0x791
 /* E2DC8C 802BB35C 24040391 */  addiu     $a0, $zero, 0x391
 /* E2DC90 802BB360 0C05269B */  jal       func_80149A6C

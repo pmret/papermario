@@ -35,7 +35,7 @@ glabel func_802410C4_B85244
 /* B852BC 8024113C 00000000 */  nop
 /* B852C0 80241140 46800020 */  cvt.s.w   $f0, $f0
 /* B852C4 80241144 AE220078 */  sw        $v0, 0x78($s1)
-/* B852C8 80241148 0C05267B */  jal       func_801499EC
+/* B852C8 80241148 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* B852CC 8024114C E7A00010 */   swc1     $f0, 0x10($sp)
 .L80241150:
 /* B852D0 80241150 8FBF0020 */  lw        $ra, 0x20($sp)

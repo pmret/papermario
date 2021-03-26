@@ -71,7 +71,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
         case 0:
             script->functionTemp[1].s = 0;
             script->functionTemp[2].s = 0;
-            play_sound(0x2033);
+            sfx_play_sound(0x2033);
             camera->unk_1C = 0;
             D_802A1CD0 = bind_dynamic_entity_7(NULL, func_802A123C_727B4C);
             script->functionTemp[0].s = 1;

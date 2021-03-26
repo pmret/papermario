@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80149908
+glabel sfx_play_sound_looping
 /* E0008 80149908 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E000C 8014990C 3C038016 */  lui       $v1, %hi(D_80159AD0)
 /* E0010 80149910 8C639AD0 */  lw        $v1, %lo(D_80159AD0)($v1)

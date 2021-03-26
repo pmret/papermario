@@ -145,7 +145,7 @@ glabel L802E4F1C_10679C
 /* 10687C 802E4FFC E6000004 */   swc1     $f0, 4($s0)
 /* 106880 802E5000 0C03A899 */  jal       recover_fp
 /* 106884 802E5004 2404FFFF */   addiu    $a0, $zero, -1
-/* 106888 802E5008 0C05272D */  jal       play_sound
+/* 106888 802E5008 0C05272D */  jal       sfx_play_sound
 /* 10688C 802E500C 24040131 */   addiu    $a0, $zero, 0x131
 /* 106890 802E5010 080B949D */  j         .L802E5274
 /* 106894 802E5014 00000000 */   nop

@@ -101,7 +101,7 @@ ApiStatus PlaySound(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = get_variable(script, *args++);
 
-    play_sound(soundID);
+    sfx_play_sound(soundID);
     return ApiStatus_DONE2;
 }
 
@@ -110,7 +110,7 @@ ApiStatus func_802D617C(ScriptInstance* script, s32 initialCall) {
     s32 soundID = get_variable(script, *args++);
     s32 value2 = get_variable(script, *args++);
 
-    _play_sound(soundID, value2 & 0xFF, 0, 0);
+    sfx_play_sound_with_params(soundID, value2 & 0xFF, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -122,14 +122,14 @@ ApiStatus PlaySoundAt(ScriptInstance* script, s32 isInitialCall) {
     s32 y = get_variable(script, *args++);
     s32 z = get_variable(script, *args++);
 
-    play_sound_at_position(soundID, value2, x, y, z);
+    sfx_play_sound_at_position(soundID, value2, x, y, z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus StopSound(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    stop_sound(get_variable(script, *args++));
+    sfx_stop_sound(get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -162,7 +162,7 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
     f32 y = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
 
-    play_sound_at_position(soundID, value2, x, y, z);
+    sfx_play_sound_at_position(soundID, value2, x, y, z);
     return ApiStatus_DONE2;
 }
 

@@ -5,7 +5,7 @@ glabel func_80149A6C
 /* E016C 80149A6C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E0170 80149A70 AFB00010 */  sw        $s0, 0x10($sp)
 /* E0174 80149A74 AFBF0014 */  sw        $ra, 0x14($sp)
-/* E0178 80149A78 0C052631 */  jal       func_801498C4
+/* E0178 80149A78 0C052631 */  jal       sfx_get_env_sound_instance
 /* E017C 80149A7C 00A0802D */   daddu    $s0, $a1, $zero
 /* E0180 80149A80 0040202D */  daddu     $a0, $v0, $zero
 /* E0184 80149A84 10800008 */  beqz      $a0, .L80149AA8

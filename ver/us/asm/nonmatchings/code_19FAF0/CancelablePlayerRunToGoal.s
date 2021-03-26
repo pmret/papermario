@@ -161,7 +161,7 @@ glabel CancelablePlayerRunToGoal
 .L80274150:
 /* 1A2A30 80274150 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A2A34 80274154 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A2A38 80274158 0C052757 */  jal       play_sound_at_position
+/* 1A2A38 80274158 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A2A3C 8027415C 0000282D */   daddu    $a1, $zero, $zero
 .L80274160:
 /* 1A2A40 80274160 8E62007C */  lw        $v0, 0x7c($s3)

@@ -119,7 +119,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     playerStatus->renderMode = 0xD;
 
     func_802DDFF8(0x10002, 5, 2, 1, 1, 0, 0);
-    play_sound(0x163);
+    sfx_play_sound(0x163);
     disable_player_shadow();
 }
 

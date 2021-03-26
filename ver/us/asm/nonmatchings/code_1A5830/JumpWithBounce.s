@@ -140,7 +140,7 @@ glabel JumpWithBounce
 /* 1A8210 80279930 8E0401AC */  lw        $a0, 0x1ac($s0)
 /* 1A8214 80279934 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A8218 80279938 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A821C 8027993C 0C052757 */  jal       play_sound_at_position
+/* 1A821C 8027993C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A8220 80279940 0000282D */   daddu    $a1, $zero, $zero
 /* 1A8224 80279944 24020001 */  addiu     $v0, $zero, 1
 .L80279948:

@@ -446,7 +446,7 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
 
-    play_sound_at_player(var, var2);
+    sfx_play_sound_at_player(var, var2);
     return ApiStatus_DONE2;
 }
 

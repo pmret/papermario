@@ -405,7 +405,7 @@ s32 partner_use_ability(void) {
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
         if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
-            play_sound(0x21D);
+            sfx_play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
             D_8010CFE8 = 8;

@@ -10,7 +10,7 @@ glabel func_80218A98_59F178
 /* 59F18C 80218AAC 24440001 */  addiu     $a0, $v0, 1
 /* 59F190 80218AB0 10A0000C */  beqz      $a1, .L80218AE4
 /* 59F194 80218AB4 AC640000 */   sw       $a0, ($v1)
-/* 59F198 80218AB8 0C05272D */  jal       play_sound
+/* 59F198 80218AB8 0C05272D */  jal       sfx_play_sound
 /* 59F19C 80218ABC 240400D4 */   addiu    $a0, $zero, 0xd4
 /* 59F1A0 80218AC0 24020008 */  addiu     $v0, $zero, 8
 /* 59F1A4 80218AC4 AFA20010 */  sw        $v0, 0x10($sp)

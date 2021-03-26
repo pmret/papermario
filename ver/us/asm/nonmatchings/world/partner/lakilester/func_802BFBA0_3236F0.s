@@ -106,7 +106,7 @@ glabel func_802BFBA0_3236F0
 .L802BFD24:
 /* 323874 802BFD24 0000282D */  daddu     $a1, $zero, $zero
 .L802BFD28:
-/* 323878 802BFD28 0C052742 */  jal       play_sound_at_npc
+/* 323878 802BFD28 0C052742 */  jal       sfx_play_sound_at_npc
 /* 32387C 802BFD2C 2406FFFC */   addiu    $a2, $zero, -4
 /* 323880 802BFD30 3C020008 */  lui       $v0, 8
 /* 323884 802BFD34 3C014000 */  lui       $at, 0x4000

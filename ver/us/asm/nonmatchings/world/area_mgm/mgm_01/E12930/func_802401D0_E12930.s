@@ -119,7 +119,7 @@ glabel func_802401D0_E12930
 /* E12AD0 80240370 24040211 */  addiu     $a0, $zero, 0x211
 /* E12AD4 80240374 0000282D */  daddu     $a1, $zero, $zero
 /* E12AD8 80240378 24060040 */  addiu     $a2, $zero, 0x40
-/* E12ADC 8024037C 0C0526AE */  jal       _play_sound
+/* E12ADC 8024037C 0C0526AE */  jal       sfx_play_sound_with_params
 /* E12AE0 80240380 24070032 */   addiu    $a3, $zero, 0x32
 .L80240384:
 /* E12AE4 80240384 24060020 */  addiu     $a2, $zero, 0x20

@@ -1013,7 +1013,7 @@ glabel update_item_entity_collectable
 .L801350FC:
 /* CB7FC 801350FC 8E460008 */  lw        $a2, 8($s2)
 /* CB800 80135100 8E47000C */  lw        $a3, 0xc($s2)
-/* CB804 80135104 0C052757 */  jal       play_sound_at_position
+/* CB804 80135104 0C052757 */  jal       sfx_play_sound_at_position
 /* CB808 80135108 0000282D */   daddu    $a1, $zero, $zero
 .L8013510C:
 /* CB80C 8013510C C642000C */  lwc1      $f2, 0xc($s2)
@@ -1139,7 +1139,7 @@ glabel update_item_entity_collectable
 /* CB9C0 801352C0 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CB9C4 801352C4 8E460008 */  lw        $a2, 8($s2)
 /* CB9C8 801352C8 8E47000C */  lw        $a3, 0xc($s2)
-/* CB9CC 801352CC 0C052757 */  jal       play_sound_at_position
+/* CB9CC 801352CC 0C052757 */  jal       sfx_play_sound_at_position
 /* CB9D0 801352D0 0000282D */   daddu    $a1, $zero, $zero
 .L801352D4:
 /* CB9D4 801352D4 92620002 */  lbu       $v0, 2($s3)
@@ -1179,7 +1179,7 @@ glabel update_item_entity_collectable
 /* CBA54 80135354 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CBA58 80135358 8E460008 */  lw        $a2, 8($s2)
 /* CBA5C 8013535C 8E47000C */  lw        $a3, 0xc($s2)
-/* CBA60 80135360 0C052757 */  jal       play_sound_at_position
+/* CBA60 80135360 0C052757 */  jal       sfx_play_sound_at_position
 /* CBA64 80135364 0000282D */   daddu    $a1, $zero, $zero
 .L80135368:
 /* CBA68 80135368 92620005 */  lbu       $v0, 5($s3)
@@ -1199,7 +1199,7 @@ glabel update_item_entity_collectable
 /* CBA98 80135398 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CBA9C 8013539C 8E460008 */  lw        $a2, 8($s2)
 /* CBAA0 801353A0 8E47000C */  lw        $a3, 0xc($s2)
-/* CBAA4 801353A4 0C052757 */  jal       play_sound_at_position
+/* CBAA4 801353A4 0C052757 */  jal       sfx_play_sound_at_position
 /* CBAA8 801353A8 0000282D */   daddu    $a1, $zero, $zero
 /* CBAAC 801353AC 8E850028 */  lw        $a1, 0x28($s4)
 /* CBAB0 801353B0 868200B0 */  lh        $v0, 0xb0($s4)
@@ -1233,7 +1233,7 @@ glabel update_item_entity_collectable
 /* CBB18 80135418 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CBB1C 8013541C 8E460008 */  lw        $a2, 8($s2)
 /* CBB20 80135420 8E47000C */  lw        $a3, 0xc($s2)
-/* CBB24 80135424 0C052757 */  jal       play_sound_at_position
+/* CBB24 80135424 0C052757 */  jal       sfx_play_sound_at_position
 /* CBB28 80135428 0000282D */   daddu    $a1, $zero, $zero
 /* CBB2C 8013542C 3C030001 */  lui       $v1, 1
 /* CBB30 80135430 8E6202B4 */  lw        $v0, 0x2b4($s3)
@@ -1277,7 +1277,7 @@ glabel update_item_entity_collectable
 /* CBBB4 801354B4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* CBBB8 801354B8 8E460008 */  lw        $a2, 8($s2)
 /* CBBBC 801354BC 8E47000C */  lw        $a3, 0xc($s2)
-/* CBBC0 801354C0 0C052757 */  jal       play_sound_at_position
+/* CBBC0 801354C0 0C052757 */  jal       sfx_play_sound_at_position
 /* CBBC4 801354C4 0000282D */   daddu    $a1, $zero, $zero
 .L801354C8:
 /* CBBC8 801354C8 0240202D */  daddu     $a0, $s2, $zero

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel _play_sound
+glabel _sfx_play_sound
 /* E01B8 80149AB8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* E01BC 80149ABC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E01C0 80149AC0 27BDFFE8 */  addiu     $sp, $sp, -0x18
@@ -37,7 +37,7 @@ glabel _play_sound
 /* E0230 80149B30 30A500FF */  andi      $a1, $a1, 0xff
 /* E0234 80149B34 30C600FF */  andi      $a2, $a2, 0xff
 /* E0238 80149B38 00073C00 */  sll       $a3, $a3, 0x10
-/* E023C 80149B3C 0C052642 */  jal       func_80149908
+/* E023C 80149B3C 0C052642 */  jal       sfx_play_sound_looping
 /* E0240 80149B40 00073C03 */   sra      $a3, $a3, 0x10
 /* E0244 80149B44 080526F6 */  j         .L80149BD8
 /* E0248 80149B48 00000000 */   nop

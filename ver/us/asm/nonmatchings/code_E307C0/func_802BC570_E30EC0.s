@@ -36,7 +36,7 @@ glabel L802BC5BC_E30F0C
 /* E30F38 802BC5E8 A2020005 */  sb        $v0, 5($s0)
 /* E30F3C 802BC5EC 90620001 */  lbu       $v0, 1($v1)
 /* E30F40 802BC5F0 24042085 */  addiu     $a0, $zero, 0x2085
-/* E30F44 802BC5F4 0C05272D */  jal       play_sound
+/* E30F44 802BC5F4 0C05272D */  jal       sfx_play_sound
 /* E30F48 802BC5F8 A2020004 */   sb       $v0, 4($s0)
 glabel L802BC5FC_E30F4C
 /* E30F4C 802BC5FC C60C0014 */  lwc1      $f12, 0x14($s0)

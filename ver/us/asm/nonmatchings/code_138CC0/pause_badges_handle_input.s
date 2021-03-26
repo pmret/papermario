@@ -54,13 +54,13 @@ glabel pause_badges_handle_input
 /* 13C4A0 80249160 24027FFE */  addiu     $v0, $zero, 0x7ffe
 /* 13C4A4 80249164 14620005 */  bne       $v1, $v0, .L8024917C
 /* 13C4A8 80249168 24020001 */   addiu    $v0, $zero, 1
-/* 13C4AC 8024916C 0C05272D */  jal       play_sound
+/* 13C4AC 8024916C 0C05272D */  jal       sfx_play_sound
 /* 13C4B0 80249170 2404021D */   addiu    $a0, $zero, 0x21d
 /* 13C4B4 80249174 08092581 */  j         .L80249604
 /* 13C4B8 80249178 00000000 */   nop
 .L8024917C:
 /* 13C4BC 8024917C AC820000 */  sw        $v0, ($a0)
-/* 13C4C0 80249180 0C05272D */  jal       play_sound
+/* 13C4C0 80249180 0C05272D */  jal       sfx_play_sound
 /* 13C4C4 80249184 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 13C4C8 80249188 08092581 */  j         .L80249604
 /* 13C4CC 8024918C 00000000 */   nop
@@ -88,19 +88,19 @@ glabel pause_badges_handle_input
 /* 13C51C 802491DC 08092581 */  j         .L80249604
 /* 13C520 802491E0 00000000 */   nop
 .L802491E4:
-/* 13C524 802491E4 0C05272D */  jal       play_sound
+/* 13C524 802491E4 0C05272D */  jal       sfx_play_sound
 /* 13C528 802491E8 24040006 */   addiu    $a0, $zero, 6
 /* 13C52C 802491EC 0C091CAC */  jal       pause_badges_try_remove
 /* 13C530 802491F0 0220202D */   daddu    $a0, $s1, $zero
 /* 13C534 802491F4 08092581 */  j         .L80249604
 /* 13C538 802491F8 00000000 */   nop
 .L802491FC:
-/* 13C53C 802491FC 0C05272D */  jal       play_sound
+/* 13C53C 802491FC 0C05272D */  jal       sfx_play_sound
 /* 13C540 80249200 2404021D */   addiu    $a0, $zero, 0x21d
 /* 13C544 80249204 08092581 */  j         .L80249604
 /* 13C548 80249208 AE500000 */   sw       $s0, ($s2)
 .L8024920C:
-/* 13C54C 8024920C 0C05272D */  jal       play_sound
+/* 13C54C 8024920C 0C05272D */  jal       sfx_play_sound
 /* 13C550 80249210 24040005 */   addiu    $a0, $zero, 5
 /* 13C554 80249214 08092581 */  j         .L80249604
 /* 13C558 80249218 00000000 */   nop
@@ -137,7 +137,7 @@ glabel pause_badges_handle_input
 /* 13C5C4 80249284 8E020000 */  lw        $v0, ($s0)
 /* 13C5C8 80249288 106200A0 */  beq       $v1, $v0, .L8024950C
 /* 13C5CC 8024928C 00000000 */   nop
-/* 13C5D0 80249290 0C05272D */  jal       play_sound
+/* 13C5D0 80249290 0C05272D */  jal       sfx_play_sound
 /* 13C5D4 80249294 240400C8 */   addiu    $a0, $zero, 0xc8
 /* 13C5D8 80249298 8E040000 */  lw        $a0, ($s0)
 /* 13C5DC 8024929C 0C092363 */  jal       pause_badges_load_badges
@@ -298,7 +298,7 @@ glabel pause_badges_handle_input
 /* 13C81C 802494DC 010A1021 */  addu      $v0, $t0, $t2
 /* 13C820 802494E0 10490003 */  beq       $v0, $t1, .L802494F0
 /* 13C824 802494E4 AE020000 */   sw       $v0, ($s0)
-/* 13C828 802494E8 0C05272D */  jal       play_sound
+/* 13C828 802494E8 0C05272D */  jal       sfx_play_sound
 /* 13C82C 802494EC 240400C7 */   addiu    $a0, $zero, 0xc7
 .L802494F0:
 /* 13C830 802494F0 8E020000 */  lw        $v0, ($s0)
@@ -359,14 +359,14 @@ glabel pause_badges_handle_input
 /* 13C8F4 802495B4 8E020000 */  lw        $v0, ($s0)
 /* 13C8F8 802495B8 14400007 */  bnez      $v0, .L802495D8
 /* 13C8FC 802495BC 00000000 */   nop
-/* 13C900 802495C0 0C05272D */  jal       play_sound
+/* 13C900 802495C0 0C05272D */  jal       sfx_play_sound
 /* 13C904 802495C4 240400CA */   addiu    $a0, $zero, 0xca
 /* 13C908 802495C8 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 13C90C 802495CC A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
 /* 13C910 802495D0 08092581 */  j         .L80249604
 /* 13C914 802495D4 00000000 */   nop
 .L802495D8:
-/* 13C918 802495D8 0C05272D */  jal       play_sound
+/* 13C918 802495D8 0C05272D */  jal       sfx_play_sound
 /* 13C91C 802495DC 240400CA */   addiu    $a0, $zero, 0xca
 /* 13C920 802495E0 0C039E1B */  jal       enforce_hpfp_limits
 /* 13C924 802495E4 AE000000 */   sw       $zero, ($s0)

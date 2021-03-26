@@ -75,7 +75,7 @@ ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
 
         play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z,
                                    partnerActor->yaw);
-        play_sound(0x148);
+        sfx_play_sound(0x148);
 
         return ApiStatus_DONE1;
     }

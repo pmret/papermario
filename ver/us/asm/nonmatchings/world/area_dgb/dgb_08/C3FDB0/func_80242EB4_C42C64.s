@@ -49,7 +49,7 @@ glabel func_80242EB4_C42C64
 /* C42D08 80242F58 E7A00010 */  swc1      $f0, 0x10($sp)
 /* C42D0C 80242F5C 8E260038 */  lw        $a2, 0x38($s1)
 /* C42D10 80242F60 8E27003C */  lw        $a3, 0x3c($s1)
-/* C42D14 80242F64 0C052757 */  jal       play_sound_at_position
+/* C42D14 80242F64 0C052757 */  jal       sfx_play_sound_at_position
 /* C42D18 80242F68 24050002 */   addiu    $a1, $zero, 2
 /* C42D1C 80242F6C 2402000F */  addiu     $v0, $zero, 0xf
 /* C42D20 80242F70 A620008E */  sh        $zero, 0x8e($s1)

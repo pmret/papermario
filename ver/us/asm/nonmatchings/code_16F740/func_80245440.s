@@ -48,7 +48,7 @@ glabel func_80245440
 /* 173DC4 802454E4 24020007 */   addiu    $v0, $zero, 7
 /* 173DC8 802454E8 14620008 */  bne       $v1, $v0, .L8024550C
 /* 173DCC 802454EC 00000000 */   nop
-/* 173DD0 802454F0 0C05272D */  jal       play_sound
+/* 173DD0 802454F0 0C05272D */  jal       sfx_play_sound
 /* 173DD4 802454F4 240400E7 */   addiu    $a0, $zero, 0xe7
 /* 173DD8 802454F8 8E030228 */  lw        $v1, 0x228($s0)
 /* 173DDC 802454FC 8C620000 */  lw        $v0, ($v1)
