@@ -259,6 +259,14 @@ async def main():
         depfile="$out.d",
         deps="gcc")
     n.newline()
+    # KMC gcc crashes if the argument string is too long, so preprocess input separately to minimize arguments
+    # KMC gcc doesn't support input on stdin, so a temp file has to be made for the preprocessor output
+    n.rule("cc_kmc",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Iinclude/PR -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o $out.i && export WINEPATH=tools/kmc/BIN && wine exew32 gcc -O3 -c -G0 -mgp32 -mfp32 -mips3 $out.i -o $out' && {cross}strip $out -N $in",
+        description="dsl $in",
+        depfile="$out.d",
+        deps="gcc")
+    n.newline()
 
     with open("tools/permuter_settings.toml", "w") as f:
         version = versions[0]
@@ -287,7 +295,7 @@ async def main():
     n.newline()
 
     n.rule("as",
-        command="${cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+        command="${cross}as -EB -O0 -G0 -mtune=vr4300 -march=vr4300 -mabi=32 -Iinclude $in -o $out",
         description="assemble $in")
     n.newline()
 
@@ -561,9 +569,10 @@ async def main():
 
         for version in versions:
             s_glob = "ver/" + version + "/" + re.sub("src/", "asm/nonmatchings/", c_file)[:-2] + "/*.s"
+            rule = "cc_kmc" if c_file.startswith("src/ultra/") else ("cc_dsl" if status == 0 else "cc")
             n.build(
                 obj(c_file),
-                "cc_dsl" if status == 0 else "cc",
+                rule,
                 c_file,
                 implicit = None if not args.depend_on_s else glob(s_glob),
                 order_only="generated_headers_" + version,

@@ -107,7 +107,7 @@ segments:
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3bde0, c, os/osCreatePiManager]
     - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
-    - [0x3c1c0, c, os/osEPiReadIo] # MOVE_ADDU
+    - [0x3c1c0, c, ultra/epiread]
     - [0x3c220, c, os/osEPiStartDma] # MOVE_ADDU
     - [0x3c2c0, c, os/osEPiLinkHandle]
     - [0x3c310, c, os/osCartRomInit]
@@ -141,7 +141,7 @@ segments:
     - [0x40c20, c, os/code_40c20_len_1f0]
     - [0x40E00, hasm, os/osGetCount]
     - [0x40E10, c, os/code_40E10]
-    - [0x41050, c, os/osSpTaskYield]
+    - [0x41050, c, ultra/sptaskyield]
     - [0x41070, c, os/osSpTaskYielded]
     - [0x410C0, c, os/osSiRawStartDma]
     - [0x41170, c, os/code_41170_len_f0]
