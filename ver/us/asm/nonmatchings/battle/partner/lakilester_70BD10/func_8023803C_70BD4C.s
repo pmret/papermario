@@ -243,7 +243,7 @@ glabel func_8023803C_70BD4C
 /* 70C0E4 802383D4 44060000 */  mfc1      $a2, $f0
 /* 70C0E8 802383D8 0000282D */  daddu     $a1, $zero, $zero
 /* 70C0EC 802383DC 00C0382D */  daddu     $a3, $a2, $zero
-/* 70C0F0 802383E0 0C052757 */  jal       play_sound_at_position
+/* 70C0F0 802383E0 0C052757 */  jal       sfx_play_sound_at_position
 /* 70C0F4 802383E4 AFA60010 */   sw       $a2, 0x10($sp)
 /* 70C0F8 802383E8 8FA80068 */  lw        $t0, 0x68($sp)
 /* 70C0FC 802383EC 24020002 */  addiu     $v0, $zero, 2
@@ -553,7 +553,7 @@ glabel func_8023803C_70BD4C
 /* 70C568 80238858 00000000 */   nop
 /* 70C56C 8023885C 0C093EB1 */  jal       set_popup_duration
 /* 70C570 80238860 0000202D */   daddu    $a0, $zero, $zero
-/* 70C574 80238864 0C05271B */  jal       stop_sound
+/* 70C574 80238864 0C05271B */  jal       sfx_stop_sound
 /* 70C578 80238868 24040312 */   addiu    $a0, $zero, 0x312
 /* 70C57C 8023886C 0808E28D */  j         .L80238A34
 /* 70C580 80238870 24020002 */   addiu    $v0, $zero, 2

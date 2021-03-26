@@ -16,7 +16,7 @@ glabel func_80242340_E180C0
 .L8024236C:
 /* E180EC 8024236C 0C03A830 */  jal       add_coins
 /* E180F0 80242370 2404FFFF */   addiu    $a0, $zero, -1
-/* E180F4 80242374 0C05272D */  jal       play_sound
+/* E180F4 80242374 0C05272D */  jal       sfx_play_sound
 /* E180F8 80242378 24040211 */   addiu    $a0, $zero, 0x211
 /* E180FC 8024237C 8E030070 */  lw        $v1, 0x70($s0)
 /* E18100 80242380 24630001 */  addiu     $v1, $v1, 1

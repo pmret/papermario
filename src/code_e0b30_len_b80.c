@@ -23,14 +23,14 @@ SongID gSongsUsingVariationFlag[] = { Song_SPECIAL_BATTLE, Song_TUBBA_BLUBBA_BAT
 
 s16 D_8014F738 = 0;
 
-void transition_music_volume_to(s16 volume);
+void bgm_set_target_volume(s16 volume);
 
 /// If the given song ID is present in gSongsUsingVariationFlag, returns the current
 /// map's `songVariation & 1` value. Otherwise, returns -1.
 ///
 /// @see gSongsUsingVariationFlag
 /// @returns -1: no override; 0: override to variation 0; 1 override to variation 1
-s32 get_song_variation_override_for_cur_map(SongID songID) {
+s32 bgm_get_map_default_variation(SongID songID) {
     u32 i = 0;
     Area* areas = gAreas;
     GameStatus** gameStatus = &gGameStatusPtr;
@@ -47,7 +47,7 @@ s32 get_song_variation_override_for_cur_map(SongID songID) {
     return -1;
 }
 
-void func_8014A498(void) {
+void bgm_reset_sequence_players(void) {
     MusicPlayer* src; // TODO: remove this temp when .data section for this file (incl. D_8014F6F0) is set up
     s32 i;
 
@@ -62,14 +62,14 @@ void func_8014A498(void) {
     func_800561A4(8);
 }
 
-void func_8014A52C(void) {
+void bgm_reset_volume(void) {
     gMusicTargetVolume = 8;
     gMusicUnkVolume2 = 8;
 }
 
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014A548);
+INCLUDE_ASM(s32, "code_e0b30_len_b80", bgm_update_music_settings);
 
-s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 _bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
     if (gGameStatusPtr->demoState != 0) {
         return 1;
     } else {
@@ -83,13 +83,13 @@ s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutT
 
             return 1;
         } else {
-            s32 override = get_song_variation_override_for_cur_map(songID);
+            s32 override = bgm_get_map_default_variation(songID);
             if (override >= 0) {
                 variation = override;
             }
 
             if (musicPlayer->songID == songID && musicPlayer->variation == variation) {
-                transition_music_volume_to(volume);
+                bgm_set_target_volume(volume);
 
                 if (musicPlayer->flags & 4) {
                     func_80055B80(musicPlayer->unk_18);
@@ -111,12 +111,12 @@ s32 _set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutT
     }
 }
 
-s32 set_music_track(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
+s32 bgm_set_song(s32 playerIndex, SongID songID, s32 variation, s32 fadeOutTime, s16 volume) {
     MusicPlayer* musicPlayers = gMusicPlayers;
 
     musicPlayers[playerIndex].flags &= ~8;
 
-    return _set_music_track(playerIndex, songID, variation, fadeOutTime, volume);
+    return _bgm_set_song(playerIndex, songID, variation, fadeOutTime, volume);
 }
 
 s32 func_8014A964(s32 playerIndex, SongID songID, s32 variation, s32 fadeInTime, s16 arg4, s16 arg5) {
@@ -132,7 +132,7 @@ s32 func_8014A964(s32 playerIndex, SongID songID, s32 variation, s32 fadeInTime,
 
             return 1;
         } else {
-            s32 defaultVariation = get_song_variation_override_for_cur_map(songID);
+            s32 defaultVariation = bgm_get_map_default_variation(songID);
             if (defaultVariation >= 0) {
                 variation = defaultVariation;
             }
@@ -211,28 +211,28 @@ s32 func_8014ABB4(s32 playerIndex, s16 arg1) {
     return func_80055CC4(musicPlayer->unk_18, arg1);
 }
 
-s32 func_8014AC08(void) {
-    set_music_track(0, -1, 0, 250, 8);
-    set_music_track(1, -1, 0, 250, 8);
+s32 bgm_init_music_players(void) {
+    bgm_set_song(0, -1, 0, 250, 8);
+    bgm_set_song(1, -1, 0, 250, 8);
 
     return 1;
 }
 
-void func_8014AC5C(void) {
+void bgm_quiet_max_volume(void) {
     gMusicUnkVolume2 = 4;
 }
 
-void func_8014AC70(void) {
+void bgm_reset_max_volume(void) {
     gMusicUnkVolume2 = 8;
 }
 
-void transition_music_volume_to(s16 volume) {
+void bgm_set_target_volume(s16 volume) {
     gMusicTargetVolume = volume;
 }
 
 //Data loading shenanigans
 #ifdef NON_MATCHING
-void func_8014AC94(void) {
+void bgm_update_volume(void) {
     s16* currentVolume;
     s16 compareVolume;
     s16 toVolume;
@@ -259,21 +259,21 @@ void func_8014AC94(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AC94);
+INCLUDE_ASM(s32, "code_e0b30_len_b80", bgm_update_volume);
 #endif
 
 INCLUDE_ASM(s32, "code_e0b30_len_b80", func_8014AD40);
 
-void func_8014ADA4(void) {
+void bgm_pop_song(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     if (gGameStatusPtr->demoState == 0) {
         musicPlayer->flags |= 8;
-        _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
+        _bgm_set_song(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
     }
 }
 
-void func_8014ADF8(SongID songID, s32 variation) {
+void bgm_push_song(SongID songID, s32 variation) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     if (gGameStatusPtr->demoState == 0) {
@@ -281,11 +281,11 @@ void func_8014ADF8(SongID songID, s32 variation) {
         musicPlayer->unk_28 = musicPlayer->variation;
         musicPlayer->unk_2C = musicPlayer->unk_18;
         musicPlayer->flags |= 4;
-        set_music_track(0, songID, variation, 500, 8);
+        bgm_set_song(0, songID, variation, 500, 8);
     }
 }
 
-void func_8014AE6C(void) {
+void bgm_pop_battle_song(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     if (gGameStatusPtr->demoState == 0) {
@@ -293,13 +293,13 @@ void func_8014AE6C(void) {
             OVERRIDE_FLAG_UNSET(0x20000);
         } else {
             musicPlayer->flags |= 8;
-            _set_music_track(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
+            _bgm_set_song(0, musicPlayer->unk_24, musicPlayer->unk_28, 0, 8);
             func_80055590(0, 250);
         }
     }
 }
 
-void func_8014AEF8(void) {
+void bgm_push_battle_song(void) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     if (gGameStatusPtr->demoState == 0 && !OVERRIDE_FLAG_CHECK(0x20000)) {
@@ -308,11 +308,11 @@ void func_8014AEF8(void) {
         musicPlayer->unk_28 = musicPlayer->variation;
         musicPlayer->unk_2C = musicPlayer->unk_18;
         musicPlayer->flags |= 4;
-        set_music_track(0, musicPlayer->unk_1C, musicPlayer->unk_20, 500, 8);
+        bgm_set_song(0, musicPlayer->unk_1C, musicPlayer->unk_20, 500, 8);
     }
 }
 
-void func_8014AF8C(s32 arg0, s32 arg1) {
+void bgm_set_battle_song(s32 arg0, s32 arg1) {
     MusicPlayer* musicPlayer = &gMusicPlayers[0];
 
     musicPlayer->unk_1C = arg0;

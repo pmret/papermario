@@ -29,7 +29,7 @@ glabel func_80242EB8_C49A98
 /* C49AF8 80242F18 10400008 */  beqz      $v0, .L80242F3C
 /* C49AFC 80242F1C 00000000 */   nop
 /* C49B00 80242F20 3C048000 */  lui       $a0, 0x8000
-/* C49B04 80242F24 0C05271B */  jal       stop_sound
+/* C49B04 80242F24 0C05271B */  jal       sfx_stop_sound
 /* C49B08 80242F28 34840011 */   ori      $a0, $a0, 0x11
 /* C49B0C 80242F2C 8E02006C */  lw        $v0, 0x6c($s0)
 /* C49B10 80242F30 2403EFFF */  addiu     $v1, $zero, -0x1001

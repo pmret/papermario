@@ -98,7 +98,7 @@ glabel func_802BDDD8_321928
 /* 321A88 802BDF38 0000282D */  daddu     $a1, $zero, $zero
 /* 321A8C 802BDF3C 24060040 */  addiu     $a2, $zero, 0x40
 /* 321A90 802BDF40 00073C00 */  sll       $a3, $a3, 0x10
-/* 321A94 802BDF44 0C0526AE */  jal       _play_sound
+/* 321A94 802BDF44 0C0526AE */  jal       sfx_play_sound_with_params
 /* 321A98 802BDF48 00073C03 */   sra      $a3, $a3, 0x10
 .L802BDF4C:
 /* 321A9C 802BDF4C C6400038 */  lwc1      $f0, 0x38($s2)

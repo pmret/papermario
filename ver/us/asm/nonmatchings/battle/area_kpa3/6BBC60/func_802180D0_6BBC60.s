@@ -293,7 +293,7 @@ glabel func_802180D0_6BBC60
 /* 6BC0B4 80218524 8E260058 */  lw        $a2, 0x58($s1)
 /* 6BC0B8 80218528 0C098F3F */  jal       set_animation
 /* 6BC0BC 8021852C 24050001 */   addiu    $a1, $zero, 1
-/* 6BC0C0 80218530 0C05272D */  jal       play_sound
+/* 6BC0C0 80218530 0C05272D */  jal       sfx_play_sound
 /* 6BC0C4 80218534 24042081 */   addiu    $a0, $zero, 0x2081
 /* 6BC0C8 80218538 24020001 */  addiu     $v0, $zero, 1
 /* 6BC0CC 8021853C AE820070 */  sw        $v0, 0x70($s4)

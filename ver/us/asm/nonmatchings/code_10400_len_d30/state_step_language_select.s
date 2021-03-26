@@ -126,7 +126,7 @@ glabel state_step_language_select
 /* 1078C 8003538C 00021600 */  sll       $v0, $v0, 0x18
 /* 10790 80035390 1440003B */  bnez      $v0, .L80035480
 /* 10794 80035394 2402FFFF */   addiu    $v0, $zero, -1
-/* 10798 80035398 0C05260E */  jal       func_80149838
+/* 10798 80035398 0C05260E */  jal       sfx_stop_env_sounds
 /* 1079C 8003539C A2020000 */   sb       $v0, ($s0)
 /* 107A0 800353A0 0C00EC6A */  jal       func_8003B1A8
 /* 107A4 800353A4 00000000 */   nop

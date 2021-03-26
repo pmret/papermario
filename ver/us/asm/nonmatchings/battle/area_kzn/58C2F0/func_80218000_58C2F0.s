@@ -56,7 +56,7 @@ glabel func_80218000_58C2F0
 /* 58C3B8 802180C8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 58C3BC 802180CC 8E260144 */  lw        $a2, 0x144($s1)
 /* 58C3C0 802180D0 8E270148 */  lw        $a3, 0x148($s1)
-/* 58C3C4 802180D4 0C052757 */  jal       play_sound_at_position
+/* 58C3C4 802180D4 0C052757 */  jal       sfx_play_sound_at_position
 /* 58C3C8 802180D8 0000282D */   daddu    $a1, $zero, $zero
 .L802180DC:
 /* 58C3CC 802180DC 8E420070 */  lw        $v0, 0x70($s2)
@@ -69,7 +69,7 @@ glabel func_80218000_58C2F0
 /* 58C3E8 802180F8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 58C3EC 802180FC 8E260144 */  lw        $a2, 0x144($s1)
 /* 58C3F0 80218100 8E270148 */  lw        $a3, 0x148($s1)
-/* 58C3F4 80218104 0C052757 */  jal       play_sound_at_position
+/* 58C3F4 80218104 0C052757 */  jal       sfx_play_sound_at_position
 /* 58C3F8 80218108 0000282D */   daddu    $a1, $zero, $zero
 /* 58C3FC 8021810C 08086046 */  j         .L80218118
 /* 58C400 80218110 24020002 */   addiu    $v0, $zero, 2

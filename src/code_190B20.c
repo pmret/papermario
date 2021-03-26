@@ -1174,7 +1174,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
             inflict_status(target, Debuff_DAZE, duration);
-            play_sound(0x2107);
+            sfx_play_sound(0x2107);
         } else {
             target->koDuration += duration;
             if (target->koDuration > 9) {
@@ -1448,7 +1448,7 @@ void remove_player_buffs(PlayerBuff buffs) {
         func_80071C30(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->unk_A0 = NULL;
-        play_sound(0x299);
+        sfx_play_sound(0x299);
     }
     if ((buffs & 0x100) && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;

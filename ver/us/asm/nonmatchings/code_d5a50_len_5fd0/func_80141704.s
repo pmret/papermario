@@ -747,7 +747,7 @@ glabel L80142174_D8874
 glabel L801421A4_D88A4
 /* D88A4 801421A4 8E060000 */  lw        $a2, ($s0)
 /* D88A8 801421A8 26100004 */  addiu     $s0, $s0, 4
-/* D88AC 801421AC 0C05272D */  jal       play_sound
+/* D88AC 801421AC 0C05272D */  jal       sfx_play_sound
 /* D88B0 801421B0 00C0202D */   daddu    $a0, $a2, $zero
 /* D88B4 801421B4 24020001 */  addiu     $v0, $zero, 1
 /* D88B8 801421B8 0805087D */  j         .L801421F4

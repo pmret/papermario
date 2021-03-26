@@ -20,7 +20,7 @@ glabel func_80260B70
 /* 18F48C 80260BAC 44072000 */  mfc1      $a3, $f4
 /* 18F490 80260BB0 0C0999FC */  jal       func_802667F0
 /* 18F494 80260BB4 0200282D */   daddu    $a1, $s0, $zero
-/* 18F498 80260BB8 0C05272D */  jal       play_sound
+/* 18F498 80260BB8 0C05272D */  jal       sfx_play_sound
 /* 18F49C 80260BBC 240403FC */   addiu    $a0, $zero, 0x3fc
 /* 18F4A0 80260BC0 AE200084 */  sw        $zero, 0x84($s1)
 /* 18F4A4 80260BC4 92020210 */  lbu       $v0, 0x210($s0)

@@ -192,7 +192,7 @@ glabel update_targeting_enemies
 /* 41F6C4 802AA934 30624000 */  andi      $v0, $v1, 0x4000
 /* 41F6C8 802AA938 10400008 */  beqz      $v0, .L802AA95C
 /* 41F6CC 802AA93C 30628000 */   andi     $v0, $v1, 0x8000
-/* 41F6D0 802AA940 0C05272D */  jal       play_sound
+/* 41F6D0 802AA940 0C05272D */  jal       sfx_play_sound
 /* 41F6D4 802AA944 240400CA */   addiu    $a0, $zero, 0xca
 /* 41F6D8 802AA948 2402000A */  addiu     $v0, $zero, 0xa
 /* 41F6DC 802AA94C 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
@@ -202,7 +202,7 @@ glabel update_targeting_enemies
 .L802AA95C:
 /* 41F6EC 802AA95C 1040000E */  beqz      $v0, .L802AA998
 /* 41F6F0 802AA960 00000000 */   nop
-/* 41F6F4 802AA964 0C05272D */  jal       play_sound
+/* 41F6F4 802AA964 0C05272D */  jal       sfx_play_sound
 /* 41F6F8 802AA968 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 41F6FC 802AA96C 24020008 */  addiu     $v0, $zero, 8
 /* 41F700 802AA970 3C01802B */  lui       $at, %hi(D_802ACC60)
@@ -276,7 +276,7 @@ glabel update_targeting_enemies
 .L802AAA64:
 /* 41F7F4 802AAA64 0C0511FF */  jal       set_menu_icon_script
 /* 41F7F8 802AAA68 00000000 */   nop
-/* 41F7FC 802AAA6C 0C05272D */  jal       play_sound
+/* 41F7FC 802AAA6C 0C05272D */  jal       sfx_play_sound
 /* 41F800 802AAA70 240400C7 */   addiu    $a0, $zero, 0xc7
 .L802AAA74:
 /* 41F804 802AAA74 080AAB2D */  j         .L802AACB4

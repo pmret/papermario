@@ -36,7 +36,7 @@ glabel D_80078464
 .word 0x00000000, 0x00000000, 0x00000000
 
 glabel D_80078470
-.word func_8004FBBC, func_8004FCB4, func_8004FCE4, func_8004FD04, func_8004FD94, func_8004FE10, func_8004FD38, func_80050560, func_8004FE6C, func_8004FEB0, func_8004FF3C, func_8004FF58, func_8004FF70, func_8004FF88, func_8004FFA8, func_8004FFB4, func_8004FFC8, func_8004FFE4, func_8004FFF0, func_8004FFFC, func_80050004, func_80050020, func_8004FED0, func_80050128, func_80050560, func_80050560, func_80050560, func_80050560, func_800501A8, func_8005015C, func_80050184, func_800502F0, 0x02010101, 0x04030200, 0x02010101, 0x01010102, 0x03010100, 0x02010301, 0x00000000, 0x03030303
+.word snd_BGMCmd_E0_MasterTempo, snd_BGMCmd_E1_MasterVolume, snd_BGMCmd_E2_MasterTranspose, snd_BGMCmd_E3, snd_BGMCmd_E4_MasterTempoFade, snd_BGMCmd_E5_MasterVolumeFade, snd_BGMCmd_E6_MasterEffect, snd_BGMCmd_NOP, snd_BGMCmd_E8_TrackOverridePatch, snd_BGMCmd_E9_SubTrackVolume, snd_BGMCmd_EA_SubTrackPan, snd_BGMCmd_EB_SubTrackReverb, snd_BGMCmd_EC_SegTrackVolume, snd_BGMCmd_ED_SubTrackCoarseTune, snd_BGMCmd_EE_SubTrackFineTune, snd_BGMCmd_EF_SegTrackTune, snd_BGMCmd_F0_TrackTremolo, snd_BGMCmd_F1_TrackTremoloSpeed, snd_BGMCmd_F2_TrackTremoloTime, snd_BGMCmd_F3_TrackTremoloStop, snd_BGMCmd_F4, snd_BGMCmd_F5_TrackVoice, snd_BGMCmd_F6_TrackVolumeFade, snd_BGMCmd_F7_SubTrackReverbType, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_NOP, snd_BGMCmd_FC_Jump, snd_BGMCmd_FD, snd_BGMCmd_FE, snd_BGMCmd_FF, 0x02010101, 0x04030200, 0x02010101, 0x01010102, 0x03010100, 0x02010301, 0x00000000, 0x03030303
 
 glabel D_80078510
 .byte 0x30, 0x18, 0x20, 0x28, 0x30, 0x38, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00

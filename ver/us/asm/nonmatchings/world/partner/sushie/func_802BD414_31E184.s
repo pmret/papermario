@@ -724,7 +724,7 @@ glabel func_802BD414_31E184
 /* 31EC50 802BDEE0 24040694 */  addiu     $a0, $zero, 0x694
 /* 31EC54 802BDEE4 0000282D */  daddu     $a1, $zero, $zero
 /* 31EC58 802BDEE8 2406FFFC */  addiu     $a2, $zero, -4
-/* 31EC5C 802BDEEC 0C052742 */  jal       play_sound_at_npc
+/* 31EC5C 802BDEEC 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31EC60 802BDEF0 AE020028 */   sw       $v0, 0x28($s0)
 /* 31EC64 802BDEF4 24020003 */  addiu     $v0, $zero, 3
 /* 31EC68 802BDEF8 3C01802C */  lui       $at, %hi(D_802BFEE4)

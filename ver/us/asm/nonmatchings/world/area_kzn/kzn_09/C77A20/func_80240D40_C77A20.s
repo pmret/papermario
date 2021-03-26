@@ -35,7 +35,7 @@ glabel func_80240D40_C77A20
 /* C77A98 80240DB8 00000000 */  nop
 /* C77A9C 80240DBC 46800020 */  cvt.s.w   $f0, $f0
 /* C77AA0 80240DC0 AE220078 */  sw        $v0, 0x78($s1)
-/* C77AA4 80240DC4 0C05267B */  jal       func_801499EC
+/* C77AA4 80240DC4 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C77AA8 80240DC8 E7A00010 */   swc1     $f0, 0x10($sp)
 .L80240DCC:
 /* C77AAC 80240DCC 8FBF0020 */  lw        $ra, 0x20($sp)

@@ -94,7 +94,7 @@ glabel func_8004DE2C
 /* 29370 8004DF70 080137EC */  j         .L8004DFB0
 /* 29374 8004DF74 24120004 */   addiu    $s2, $zero, 4
 .L8004DF78:
-/* 29378 8004DF78 0C0135E5 */  jal       func_8004D794
+/* 29378 8004DF78 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 2937C 8004DF7C 0280202D */   daddu    $a0, $s4, $zero
 /* 29380 8004DF80 0040802D */  daddu     $s0, $v0, $zero
 /* 29384 8004DF84 1200000B */  beqz      $s0, .L8004DFB4

@@ -70,7 +70,7 @@ glabel step_pause_menu
 /* FE74 80034A74 2610419C */  addiu     $s0, $s0, %lo(gGameStatusPtr)
 /* FE78 80034A78 8E030000 */  lw        $v1, ($s0)
 /* FE7C 80034A7C 9462015C */  lhu       $v0, 0x15c($v1)
-/* FE80 80034A80 0C05260E */  jal       func_80149838
+/* FE80 80034A80 0C05260E */  jal       sfx_stop_env_sounds
 /* FE84 80034A84 A462015E */   sh       $v0, 0x15e($v1)
 /* FE88 80034A88 0C00EC6A */  jal       func_8003B1A8
 /* FE8C 80034A8C 00000000 */   nop
@@ -122,7 +122,7 @@ glabel step_pause_menu
 /* FF44 80034B44 AC220924 */  sw        $v0, %lo(D_800A0924)($at)
 /* FF48 80034B48 0C0525FF */  jal       func_801497FC
 /* FF4C 80034B4C 0000202D */   daddu    $a0, $zero, $zero
-/* FF50 80034B50 0C052B17 */  jal       func_8014AC5C
+/* FF50 80034B50 0C052B17 */  jal       bgm_quiet_max_volume
 /* FF54 80034B54 00000000 */   nop
 /* FF58 80034B58 3C048007 */  lui       $a0, %hi(D_8007795C)
 /* FF5C 80034B5C 0C018038 */  jal       nuPiReadRomOverlay

@@ -103,7 +103,7 @@ glabel func_80243EE0_C75360
 /* C754D8 80244058 14400004 */  bnez      $v0, .L8024406C
 /* C754DC 8024405C 24020001 */   addiu    $v0, $zero, 1
 /* C754E0 80244060 AE020074 */  sw        $v0, 0x74($s0)
-/* C754E4 80244064 0C05272D */  jal       play_sound
+/* C754E4 80244064 0C05272D */  jal       sfx_play_sound
 /* C754E8 80244068 24042011 */   addiu    $a0, $zero, 0x2011
 .L8024406C:
 /* C754EC 8024406C 8E020070 */  lw        $v0, 0x70($s0)
@@ -125,7 +125,7 @@ glabel func_80243EE0_C75360
 /* C75528 802440A8 284200FF */  slti      $v0, $v0, 0xff
 /* C7552C 802440AC 10400003 */  beqz      $v0, .L802440BC
 /* C75530 802440B0 AE000074 */   sw       $zero, 0x74($s0)
-/* C75534 802440B4 0C05272D */  jal       play_sound
+/* C75534 802440B4 0C05272D */  jal       sfx_play_sound
 /* C75538 802440B8 24042012 */   addiu    $a0, $zero, 0x2012
 .L802440BC:
 /* C7553C 802440BC 8E020070 */  lw        $v0, 0x70($s0)

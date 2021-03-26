@@ -20,7 +20,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
             } else {
                 func_800701F0(0, x, y + 20, z);
             }
-            play_sound(8214);
+            sfx_play_sound(8214);
             break;
         case 147:
             if (script->varTable[10] > 0) {
@@ -28,7 +28,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
             } else {
                 func_800701F0(0, x, y + 20, z);
             }
-            play_sound(8215);
+            sfx_play_sound(8215);
             break;
         case 148:
             if (script->varTable[10] > 0) {
@@ -36,11 +36,11 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
             } else {
                 func_800701F0(1, x, y + 20, z);
             }
-            play_sound(8215);
+            sfx_play_sound(8215);
             break;
         default:
             func_800701F0(0, x, y + 20, z);
-            play_sound(8214);
+            sfx_play_sound(8214);
             break;
     }
 

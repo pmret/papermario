@@ -28,7 +28,7 @@ glabel func_80240720_C6EA50
 /* C6EAAC 8024077C E7A00010 */  swc1      $f0, 0x10($sp)
 /* C6EAB0 80240780 8E060048 */  lw        $a2, 0x48($s0)
 /* C6EAB4 80240784 8E07004C */  lw        $a3, 0x4c($s0)
-/* C6EAB8 80240788 0C052757 */  jal       play_sound_at_position
+/* C6EAB8 80240788 0C052757 */  jal       sfx_play_sound_at_position
 /* C6EABC 8024078C 0000282D */   daddu    $a1, $zero, $zero
 .L80240790:
 /* C6EAC0 80240790 8E230070 */  lw        $v1, 0x70($s1)

@@ -155,7 +155,7 @@ glabel update_status_menu
 /* 81790 800E82E0 14400015 */  bnez      $v0, .L800E8338
 /* 81794 800E82E4 24620001 */   addiu    $v0, $v1, 1
 /* 81798 800E82E8 A262003D */  sb        $v0, 0x3d($s3)
-/* 8179C 800E82EC 0C05272D */  jal       play_sound
+/* 8179C 800E82EC 0C05272D */  jal       sfx_play_sound
 /* 817A0 800E82F0 24040213 */   addiu    $a0, $zero, 0x213
 /* 817A4 800E82F4 0803A0CE */  j         .L800E8338
 /* 817A8 800E82F8 00000000 */   nop
@@ -209,7 +209,7 @@ glabel update_status_menu
 /* 81858 800E83A8 14400015 */  bnez      $v0, .L800E8400
 /* 8185C 800E83AC 24620001 */   addiu    $v0, $v1, 1
 /* 81860 800E83B0 A262003E */  sb        $v0, 0x3e($s3)
-/* 81864 800E83B4 0C05272D */  jal       play_sound
+/* 81864 800E83B4 0C05272D */  jal       sfx_play_sound
 /* 81868 800E83B8 24040217 */   addiu    $a0, $zero, 0x217
 /* 8186C 800E83BC 0803A100 */  j         .L800E8400
 /* 81870 800E83C0 00000000 */   nop

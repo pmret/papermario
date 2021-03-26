@@ -22,7 +22,7 @@ glabel func_80242C1C_C497FC
 /* C49840 80242C60 E7A00010 */  swc1      $f0, 0x10($sp)
 /* C49844 80242C64 8E460038 */  lw        $a2, 0x38($s2)
 /* C49848 80242C68 8E47003C */  lw        $a3, 0x3c($s2)
-/* C4984C 80242C6C 0C05267B */  jal       func_801499EC
+/* C4984C 80242C6C 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C49850 80242C70 24050002 */   addiu    $a1, $zero, 2
 /* C49854 80242C74 0220202D */  daddu     $a0, $s1, $zero
 /* C49858 80242C78 24020001 */  addiu     $v0, $zero, 1

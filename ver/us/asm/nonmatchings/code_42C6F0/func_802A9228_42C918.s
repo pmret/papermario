@@ -119,7 +119,7 @@ glabel L802A9354_42CA44
 /* 42CAC0 802A93D0 0200202D */  daddu     $a0, $s0, $zero
 /* 42CAC4 802A93D4 0C05128B */  jal       clear_icon_flags
 /* 42CAC8 802A93D8 24050002 */   addiu    $a1, $zero, 2
-/* 42CACC 802A93DC 0C05272D */  jal       play_sound
+/* 42CACC 802A93DC 0C05272D */  jal       sfx_play_sound
 /* 42CAD0 802A93E0 24040233 */   addiu    $a0, $zero, 0x233
 /* 42CAD4 802A93E4 24020001 */  addiu     $v0, $zero, 1
 /* 42CAD8 802A93E8 A6220070 */  sh        $v0, 0x70($s1)
@@ -236,7 +236,7 @@ glabel L802A93F4_42CAE4
 /* 42CC5C 802A956C 10400005 */  beqz      $v0, .L802A9584
 /* 42CC60 802A9570 2404021D */   addiu    $a0, $zero, 0x21d
 /* 42CC64 802A9574 2402000A */  addiu     $v0, $zero, 0xa
-/* 42CC68 802A9578 0C05272D */  jal       play_sound
+/* 42CC68 802A9578 0C05272D */  jal       sfx_play_sound
 /* 42CC6C 802A957C A6220072 */   sh       $v0, 0x72($s1)
 /* 42CC70 802A9580 A6200070 */  sh        $zero, 0x70($s1)
 .L802A9584:
@@ -292,7 +292,7 @@ glabel L802A93F4_42CAE4
 /* 42CD34 802A9644 2402000B */  addiu     $v0, $zero, 0xb
 /* 42CD38 802A9648 A622004C */  sh        $v0, 0x4c($s1)
 /* 42CD3C 802A964C 24630001 */  addiu     $v1, $v1, 1
-/* 42CD40 802A9650 0C05272D */  jal       play_sound
+/* 42CD40 802A9650 0C05272D */  jal       sfx_play_sound
 /* 42CD44 802A9654 A2E30084 */   sb       $v1, 0x84($s7)
 /* 42CD48 802A9658 080AA5BA */  j         L802A96E8_42CDD8
 /* 42CD4C 802A965C 00000000 */   nop

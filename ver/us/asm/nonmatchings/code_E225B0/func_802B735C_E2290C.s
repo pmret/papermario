@@ -102,7 +102,7 @@ glabel func_802B735C_E2290C
 /* E22A74 802B74C4 24420001 */  addiu     $v0, $v0, 1
 /* E22A78 802B74C8 E480000C */  swc1      $f0, 0xc($a0)
 /* E22A7C 802B74CC AC820024 */  sw        $v0, 0x24($a0)
-/* E22A80 802B74D0 0C052736 */  jal       play_sound_at_player
+/* E22A80 802B74D0 0C052736 */  jal       sfx_play_sound_at_player
 /* E22A84 802B74D4 2404017B */   addiu    $a0, $zero, 0x17b
 /* E22A88 802B74D8 080ADD5A */  j         .L802B7568
 /* E22A8C 802B74DC 00000000 */   nop

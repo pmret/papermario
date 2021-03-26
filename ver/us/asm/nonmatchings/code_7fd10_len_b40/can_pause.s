@@ -98,7 +98,7 @@ glabel can_pause
 /* 7FFEC 800E6B3C 14620004 */  bne       $v1, $v0, .L800E6B50
 /* 7FFF0 800E6B40 0000102D */   daddu    $v0, $zero, $zero
 .L800E6B44:
-/* 7FFF4 800E6B44 0C05272D */  jal       play_sound
+/* 7FFF4 800E6B44 0C05272D */  jal       sfx_play_sound
 /* 7FFF8 800E6B48 2404021D */   addiu    $a0, $zero, 0x21d
 .L800E6B4C:
 /* 7FFFC 800E6B4C 0000102D */  daddu     $v0, $zero, $zero

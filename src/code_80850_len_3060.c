@@ -395,7 +395,7 @@ void coin_counter_draw_content(UNK_TYPE arg0, s32 posX, s32 posY) {
     s32 iconIndex;
 
     if ((gPlayerData.coins != uiStatus->displayCoins) && ((gGameStatusPtr->frameCounter % 3) == 0)) {
-        play_sound(0x211);
+        sfx_play_sound(0x211);
     }
 
     iconIndex = uiStatus->iconIndex10;

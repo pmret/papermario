@@ -216,7 +216,7 @@ glabel pause_spirits_handle_input
 /* 140A9C 8024D75C 92020003 */  lbu       $v0, 3($s0)
 /* 140AA0 8024D760 10470003 */  beq       $v0, $a3, .L8024D770
 /* 140AA4 8024D764 00000000 */   nop
-/* 140AA8 8024D768 0C05272D */  jal       play_sound
+/* 140AA8 8024D768 0C05272D */  jal       sfx_play_sound
 /* 140AAC 8024D76C 240400C7 */   addiu    $a0, $zero, 0xc7
 .L8024D770:
 /* 140AB0 8024D770 3C028027 */  lui       $v0, %hi(gPauseMenuPressedButtons)
@@ -226,7 +226,7 @@ glabel pause_spirits_handle_input
 /* 140AC0 8024D780 00000000 */   nop
 /* 140AC4 8024D784 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 140AC8 8024D788 A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
-/* 140ACC 8024D78C 0C05272D */  jal       play_sound
+/* 140ACC 8024D78C 0C05272D */  jal       sfx_play_sound
 /* 140AD0 8024D790 240400CA */   addiu    $a0, $zero, 0xca
 /* 140AD4 8024D794 080935FC */  j         .L8024D7F0
 /* 140AD8 8024D798 00000000 */   nop

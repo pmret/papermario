@@ -220,7 +220,7 @@ ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -237,7 +237,7 @@ ApiStatus PlaySoundAtPart(ScriptInstance* script, s32 isInitialCall) {
     }
 
     part = get_actor_part(get_actor(actorID), partIndex);
-    play_sound_at_position(soundID, 0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -255,7 +255,7 @@ ApiStatus PlayLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->x[idx] = soundID;
-    play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, 0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -276,7 +276,7 @@ ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    stop_sound(actor->x[idx]);
+    sfx_stop_sound(actor->x[idx]);
     actor->x[idx] = 0;
     return ApiStatus_DONE2;
 }

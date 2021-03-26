@@ -39,7 +39,7 @@ glabel func_802B60B4_E240F4
 /* E24174 802B6134 24042081 */   addiu    $a0, $zero, 0x2081
 /* E24178 802B6138 24042082 */  addiu     $a0, $zero, 0x2082
 .L802B613C:
-/* E2417C 802B613C 0C052736 */  jal       play_sound_at_player
+/* E2417C 802B613C 0C052736 */  jal       sfx_play_sound_at_player
 /* E24180 802B6140 0000282D */   daddu    $a1, $zero, $zero
 .L802B6144:
 /* E24184 802B6144 8E030004 */  lw        $v1, 4($s0)

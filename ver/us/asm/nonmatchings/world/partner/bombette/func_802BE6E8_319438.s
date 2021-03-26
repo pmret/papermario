@@ -96,7 +96,7 @@ glabel func_802BE6E8_319438
 /* 319594 802BE844 10400004 */  beqz      $v0, .L802BE858
 /* 319598 802BE848 00000000 */   nop
 /* 31959C 802BE84C AC600000 */  sw        $zero, ($v1)
-/* 3195A0 802BE850 0C05271B */  jal       stop_sound
+/* 3195A0 802BE850 0C05271B */  jal       sfx_stop_sound
 /* 3195A4 802BE854 3C048000 */   lui      $a0, 0x8000
 .L802BE858:
 /* 3195A8 802BE858 8FBF0020 */  lw        $ra, 0x20($sp)

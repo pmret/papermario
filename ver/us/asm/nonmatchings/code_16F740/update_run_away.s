@@ -215,7 +215,7 @@ glabel update_run_away
 /* 173AF4 80245214 00828023 */  subu      $s0, $a0, $v0
 /* 173AF8 80245218 1A000003 */  blez      $s0, .L80245228
 /* 173AFC 8024521C A2230078 */   sb       $v1, 0x78($s1)
-/* 173B00 80245220 0C05272D */  jal       play_sound
+/* 173B00 80245220 0C05272D */  jal       sfx_play_sound
 /* 173B04 80245224 24040211 */   addiu    $a0, $zero, 0x211
 .L80245228:
 /* 173B08 80245228 92A20010 */  lbu       $v0, 0x10($s5)
@@ -279,7 +279,7 @@ glabel update_run_away
 /* 173BDC 802452FC 0000202D */  daddu     $a0, $zero, $zero
 /* 173BE0 80245300 2405FFFF */  addiu     $a1, $zero, -1
 /* 173BE4 80245304 0080302D */  daddu     $a2, $a0, $zero
-/* 173BE8 80245308 0C052A46 */  jal       set_music_track
+/* 173BE8 80245308 0C052A46 */  jal       bgm_set_song
 /* 173BEC 8024530C 240705DC */   addiu    $a3, $zero, 0x5dc
 .L80245310:
 /* 173BF0 80245310 0C090464 */  jal       func_80241190

@@ -177,7 +177,7 @@ glabel pause_stats_handle_input
 /* 13A144 80246E04 304200FF */  andi      $v0, $v0, 0xff
 /* 13A148 80246E08 10470003 */  beq       $v0, $a3, .L80246E18
 /* 13A14C 80246E0C 00000000 */   nop
-/* 13A150 80246E10 0C05272D */  jal       play_sound
+/* 13A150 80246E10 0C05272D */  jal       sfx_play_sound
 /* 13A154 80246E14 240400C7 */   addiu    $a0, $zero, 0xc7
 .L80246E18:
 /* 13A158 80246E18 3C028011 */  lui       $v0, %hi(gPlayerData)
@@ -277,7 +277,7 @@ glabel pause_stats_handle_input
 /* 13A2A4 80246F64 30634000 */  andi      $v1, $v1, 0x4000
 /* 13A2A8 80246F68 10600005 */  beqz      $v1, .L80246F80
 /* 13A2AC 80246F6C 00000000 */   nop
-/* 13A2B0 80246F70 0C05272D */  jal       play_sound
+/* 13A2B0 80246F70 0C05272D */  jal       sfx_play_sound
 /* 13A2B4 80246F74 240400CA */   addiu    $a0, $zero, 0xca
 /* 13A2B8 80246F78 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 13A2BC 80246F7C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)

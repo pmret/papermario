@@ -148,7 +148,7 @@ glabel L802B6258_E25128
 /* E25128 802B6258 2410205B */  addiu     $s0, $zero, 0x205b
 .L802B625C:
 /* E2512C 802B625C 0200202D */  daddu     $a0, $s0, $zero
-/* E25130 802B6260 0C052736 */  jal       play_sound_at_player
+/* E25130 802B6260 0C052736 */  jal       sfx_play_sound_at_player
 /* E25134 802B6264 0000282D */   daddu    $a1, $zero, $zero
 /* E25138 802B6268 24040100 */  addiu     $a0, $zero, 0x100
 /* E2513C 802B626C 0C00A3C2 */  jal       start_rumble

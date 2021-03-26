@@ -107,7 +107,7 @@ glabel L800E6DD8_80288
 /* 802F0 800E6E40 30420040 */  andi      $v0, $v0, 0x40
 /* 802F4 800E6E44 10400009 */  beqz      $v0, .L800E6E6C
 /* 802F8 800E6E48 00000000 */   nop
-/* 802FC 800E6E4C 0C05272D */  jal       play_sound
+/* 802FC 800E6E4C 0C05272D */  jal       sfx_play_sound
 /* 80300 800E6E50 2404021D */   addiu    $a0, $zero, 0x21d
 /* 80304 800E6E54 3C028011 */  lui       $v0, %hi(D_8010C9C0)
 /* 80308 800E6E58 8442C9C0 */  lh        $v0, %lo(D_8010C9C0)($v0)
@@ -216,7 +216,7 @@ glabel L800E6FC8_80478
 /* 80488 800E6FD8 00000000 */   nop
 /* 8048C 800E6FDC 0C00CD3C */  jal       set_game_mode
 /* 80490 800E6FE0 2404000A */   addiu    $a0, $zero, 0xa
-/* 80494 800E6FE4 0C05272D */  jal       play_sound
+/* 80494 800E6FE4 0C05272D */  jal       sfx_play_sound
 /* 80498 800E6FE8 240400C5 */   addiu    $a0, $zero, 0xc5
 /* 8049C 800E6FEC 2402000A */  addiu     $v0, $zero, 0xa
 /* 804A0 800E6FF0 3C018011 */  lui       $at, %hi(D_8010CCFA)

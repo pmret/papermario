@@ -40,7 +40,7 @@ glabel func_80054AA0
 .L80054B28:
 /* 2FF28 80054B28 27A50018 */  addiu     $a1, $sp, 0x18
 /* 2FF2C 80054B2C 8EC40000 */  lw        $a0, ($s6)
-/* 2FF30 80054B30 0C015380 */  jal       al_DmaCopy
+/* 2FF30 80054B30 0C015380 */  jal       snd_read_rom
 /* 2FF34 80054B34 24060040 */   addiu    $a2, $zero, 0x40
 /* 2FF38 80054B38 96830000 */  lhu       $v1, ($s4)
 /* 2FF3C 80054B3C 2402424B */  addiu     $v0, $zero, 0x424b
@@ -64,11 +64,11 @@ glabel func_80054AA0
 .L80054B80:
 /* 2FF80 80054B80 8EC40000 */  lw        $a0, ($s6)
 /* 2FF84 80054B84 8E860004 */  lw        $a2, 4($s4)
-/* 2FF88 80054B88 0C015380 */  jal       al_DmaCopy
+/* 2FF88 80054B88 0C015380 */  jal       snd_read_rom
 /* 2FF8C 80054B8C 0260282D */   daddu    $a1, $s3, $zero
 /* 2FF90 80054B90 8FA4008C */  lw        $a0, 0x8c($sp)
 /* 2FF94 80054B94 8FA50088 */  lw        $a1, 0x88($sp)
-/* 2FF98 80054B98 0C0151D1 */  jal       func_80054744
+/* 2FF98 80054B98 0C0151D1 */  jal       snd_get_BK_instruments
 /* 2FF9C 80054B9C 0000802D */   daddu    $s0, $zero, $zero
 /* 2FFA0 80054BA0 0040A82D */  daddu     $s5, $v0, $zero
 /* 2FFA4 80054BA4 02A0182D */  daddu     $v1, $s5, $zero
@@ -97,7 +97,7 @@ glabel func_80054AA0
 /* 2FFF0 80054BF0 0260202D */  daddu     $a0, $s3, $zero
 /* 2FFF4 80054BF4 0260282D */  daddu     $a1, $s3, $zero
 /* 2FFF8 80054BF8 02A0302D */  daddu     $a2, $s5, $zero
-/* 2FFFC 80054BFC 0C01527E */  jal       func_800549F8
+/* 2FFFC 80054BFC 0C01527E */  jal       snd_swizzle_BK_instruments
 /* 30000 80054C00 24070010 */   addiu    $a3, $zero, 0x10
 /* 30004 80054C04 08015304 */  j         .L80054C10
 /* 30008 80054C08 0000882D */   daddu    $s1, $zero, $zero

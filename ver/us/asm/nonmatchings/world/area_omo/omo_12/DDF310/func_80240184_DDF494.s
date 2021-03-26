@@ -45,7 +45,7 @@ glabel func_80240184_DDF494
 /* DDF530 80240220 14400004 */  bnez      $v0, .L80240234
 /* DDF534 80240224 24020001 */   addiu    $v0, $zero, 1
 /* DDF538 80240228 AE020074 */  sw        $v0, 0x74($s0)
-/* DDF53C 8024022C 0C05272D */  jal       play_sound
+/* DDF53C 8024022C 0C05272D */  jal       sfx_play_sound
 /* DDF540 80240230 24042011 */   addiu    $a0, $zero, 0x2011
 .L80240234:
 /* DDF544 80240234 8E020070 */  lw        $v0, 0x70($s0)
@@ -67,7 +67,7 @@ glabel func_80240184_DDF494
 /* DDF580 80240270 284200FF */  slti      $v0, $v0, 0xff
 /* DDF584 80240274 10400003 */  beqz      $v0, .L80240284
 /* DDF588 80240278 AE000074 */   sw       $zero, 0x74($s0)
-/* DDF58C 8024027C 0C05272D */  jal       play_sound
+/* DDF58C 8024027C 0C05272D */  jal       sfx_play_sound
 /* DDF590 80240280 24042012 */   addiu    $a0, $zero, 0x2012
 .L80240284:
 /* DDF594 80240284 8E020070 */  lw        $v0, 0x70($s0)

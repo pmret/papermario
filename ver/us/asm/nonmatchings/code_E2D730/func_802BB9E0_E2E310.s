@@ -56,7 +56,7 @@ glabel L802BBA30_E2E360
 /* E2E3D4 802BBAA4 24A50214 */  addiu     $a1, $a1, 0x214
 /* E2E3D8 802BBAA8 0C048052 */  jal       play_model_animation
 /* E2E3DC 802BBAAC 00000000 */   nop
-/* E2E3E0 802BBAB0 0C05272D */  jal       play_sound
+/* E2E3E0 802BBAB0 0C05272D */  jal       sfx_play_sound
 /* E2E3E4 802BBAB4 240400F2 */   addiu    $a0, $zero, 0xf2
 /* E2E3E8 802BBAB8 0C0AEE35 */  jal       func_802BB8D4_E2E204
 /* E2E3EC 802BBABC 0240202D */   daddu    $a0, $s2, $zero

@@ -135,7 +135,7 @@ glabel JumpToGoalSimple2
 /* 1A7EF4 80279614 8E0401AC */  lw        $a0, 0x1ac($s0)
 /* 1A7EF8 80279618 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A7EFC 8027961C 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A7F00 80279620 0C052757 */  jal       play_sound_at_position
+/* 1A7F00 80279620 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A7F04 80279624 0000282D */   daddu    $a1, $zero, $zero
 /* 1A7F08 80279628 24020001 */  addiu     $v0, $zero, 1
 .L8027962C:

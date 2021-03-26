@@ -148,7 +148,7 @@ void func_800494C0(Npc* npc, s32 arg1, s32 arg2) {
         value2 |= 0x20000;
     }
 
-    play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
 }
 
 void func_80049550(ScriptInstance* script, s32 arg1) {

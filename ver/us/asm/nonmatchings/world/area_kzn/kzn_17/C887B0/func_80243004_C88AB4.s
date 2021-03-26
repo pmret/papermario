@@ -32,7 +32,7 @@ glabel func_80243004_C88AB4
 /* C88B20 80243070 00000000 */  nop
 /* C88B24 80243074 46800020 */  cvt.s.w   $f0, $f0
 /* C88B28 80243078 AE220078 */  sw        $v0, 0x78($s1)
-/* C88B2C 8024307C 0C05267B */  jal       func_801499EC
+/* C88B2C 8024307C 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C88B30 80243080 E7A00010 */   swc1     $f0, 0x10($sp)
 /* C88B34 80243084 8FBF0020 */  lw        $ra, 0x20($sp)
 /* C88B38 80243088 8FB1001C */  lw        $s1, 0x1c($sp)

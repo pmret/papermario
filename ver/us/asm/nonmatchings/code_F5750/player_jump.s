@@ -148,7 +148,7 @@ glabel player_jump
 /* F60B4 802D1704 0C037FBF */  jal       func_800DFEFC
 /* F60B8 802D1708 00000000 */   nop
 /* F60BC 802D170C 24042081 */  addiu     $a0, $zero, 0x2081
-/* F60C0 802D1710 0C052736 */  jal       play_sound_at_player
+/* F60C0 802D1710 0C052736 */  jal       sfx_play_sound_at_player
 /* F60C4 802D1714 0000282D */   daddu    $a1, $zero, $zero
 .L802D1718:
 /* F60C8 802D1718 24020001 */  addiu     $v0, $zero, 1

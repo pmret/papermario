@@ -150,7 +150,7 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
         f32 y = (*playerStatus)->position.y + arg1;
         f32 z = (*playerStatus)->position.z;
         s32 hitID = do_lateral_collision(arg0, *playerStatus, &x, &y, &z, 0, angle);
-        
+
         if (hitID >= 0) {
             ret = hitID;
         }
@@ -296,7 +296,7 @@ void func_800E5098(s32 arg0) {
             soundID = soundID2;
         }
 
-        play_sound_at_player(soundID, 0);
+        sfx_play_sound_at_player(soundID, 0);
         *temp_800F7B80 ^= 1;
     }
 }
@@ -412,7 +412,7 @@ void set_action_state(s32 actionState) {
     playerStatus->animFlags &= ~0x10000;
 
     if (unknownStruct[0xC]) {
-        stop_sound(unknownStruct[0xC]);
+        sfx_stop_sound(unknownStruct[0xC]);
     }
 
     if (playerStatus->unk_D8) {

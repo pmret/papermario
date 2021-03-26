@@ -51,7 +51,7 @@ glabel func_800E6904
 /* 7FE60 800E69B0 24020021 */  addiu     $v0, $zero, 0x21
 /* 7FE64 800E69B4 12020004 */  beq       $s0, $v0, .L800E69C8
 /* 7FE68 800E69B8 24020001 */   addiu    $v0, $zero, 1
-/* 7FE6C 800E69BC 0C05272D */  jal       play_sound
+/* 7FE6C 800E69BC 0C05272D */  jal       sfx_play_sound
 /* 7FE70 800E69C0 2404021D */   addiu    $a0, $zero, 0x21d
 .L800E69C4:
 /* 7FE74 800E69C4 0000102D */  daddu     $v0, $zero, $zero

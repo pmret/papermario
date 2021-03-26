@@ -43,7 +43,7 @@ typedef struct Map {
     /* 0x14 */ char* bgName;
     /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
     /* 0x1C */ s16 unk_1C; // Unused?
-    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see get_song_variation_override_for_cur_map
+    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
     /* 0x1F */ s8 flags;
 } Map; // size = 0x20
 
@@ -266,7 +266,7 @@ s32 func_800490B4(s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 Area gAreas[29];
 
 /// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
-/// @see get_song_variation_override_for_cur_map
+/// @see bgm_get_map_default_variation
 extern SongID gSongsUsingVariationFlag[6];
 extern s16 D_8014F738;
 

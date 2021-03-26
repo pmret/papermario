@@ -122,7 +122,7 @@ glabel RunToGoal
 /* 1A8900 8027A020 8E04019C */  lw        $a0, 0x19c($s0)
 /* 1A8904 8027A024 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A8908 8027A028 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A890C 8027A02C 0C052757 */  jal       play_sound_at_position
+/* 1A890C 8027A02C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A8910 8027A030 0000282D */   daddu    $a1, $zero, $zero
 /* 1A8914 8027A034 24020001 */  addiu     $v0, $zero, 1
 .L8027A038:
@@ -242,7 +242,7 @@ glabel RunToGoal
 .L8027A1E4:
 /* 1A8AC4 8027A1E4 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A8AC8 8027A1E8 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A8ACC 8027A1EC 0C052757 */  jal       play_sound_at_position
+/* 1A8ACC 8027A1EC 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A8AD0 8027A1F0 0000282D */   daddu    $a1, $zero, $zero
 .L8027A1F4:
 /* 1A8AD4 8027A1F4 96220064 */  lhu       $v0, 0x64($s1)
@@ -260,7 +260,7 @@ glabel RunToGoal
 /* 1A8B04 8027A224 8E0201A0 */  lw        $v0, 0x1a0($s0)
 /* 1A8B08 8027A228 14400004 */  bnez      $v0, .L8027A23C
 /* 1A8B0C 8027A22C 24020001 */   addiu    $v0, $zero, 1
-/* 1A8B10 8027A230 0C0154F0 */  jal       func_800553C0
+/* 1A8B10 8027A230 0C0154F0 */  jal       snd_stop_sound
 /* 1A8B14 8027A234 00000000 */   nop
 .L8027A238:
 /* 1A8B18 8027A238 24020001 */  addiu     $v0, $zero, 1

@@ -115,7 +115,7 @@ glabel func_802405F0_8AC580
 /* 8AC72C 8024079C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 8AC730 802407A0 8E060038 */  lw        $a2, 0x38($s0)
 /* 8AC734 802407A4 8E07003C */  lw        $a3, 0x3c($s0)
-/* 8AC738 802407A8 0C052757 */  jal       play_sound_at_position
+/* 8AC738 802407A8 0C052757 */  jal       sfx_play_sound_at_position
 /* 8AC73C 802407AC 0000282D */   daddu    $a1, $zero, $zero
 /* 8AC740 802407B0 C602003C */  lwc1      $f2, 0x3c($s0)
 /* 8AC744 802407B4 3C0141A0 */  lui       $at, 0x41a0

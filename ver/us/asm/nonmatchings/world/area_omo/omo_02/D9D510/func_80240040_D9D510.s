@@ -106,7 +106,7 @@ glabel func_80240040_D9D510
 /* D9D690 802401C0 3C0142CC */  lui       $at, 0x42cc
 /* D9D694 802401C4 44810000 */  mtc1      $at, $f0
 /* D9D698 802401C8 0000382D */  daddu     $a3, $zero, $zero
-/* D9D69C 802401CC 0C052757 */  jal       play_sound_at_position
+/* D9D69C 802401CC 0C052757 */  jal       sfx_play_sound_at_position
 /* D9D6A0 802401D0 E7A00010 */   swc1     $f0, 0x10($sp)
 /* D9D6A4 802401D4 E6540004 */  swc1      $f20, 4($s2)
 .L802401D8:

@@ -177,7 +177,7 @@ glabel begin_state_title_screen
 /* 12478 80037078 0080302D */  daddu     $a2, $a0, $zero
 /* 1247C 8003707C 240701F4 */  addiu     $a3, $zero, 0x1f4
 /* 12480 80037080 24020008 */  addiu     $v0, $zero, 8
-/* 12484 80037084 0C052A46 */  jal       set_music_track
+/* 12484 80037084 0C052A46 */  jal       bgm_set_song
 /* 12488 80037088 AFA20010 */   sw       $v0, 0x10($sp)
 /* 1248C 8003708C 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 12490 80037090 8FB20028 */  lw        $s2, 0x28($sp)

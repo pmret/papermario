@@ -73,7 +73,7 @@ glabel func_80240624_BC8484
 /* BC8588 80240728 E7A00010 */  swc1      $f0, 0x10($sp)
 /* BC858C 8024072C 8E060038 */  lw        $a2, 0x38($s0)
 /* BC8590 80240730 8E07003C */  lw        $a3, 0x3c($s0)
-/* BC8594 80240734 0C052757 */  jal       play_sound_at_position
+/* BC8594 80240734 0C052757 */  jal       sfx_play_sound_at_position
 /* BC8598 80240738 0000282D */   daddu    $a1, $zero, $zero
 /* BC859C 8024073C AE740074 */  sw        $s4, 0x74($s3)
 /* BC85A0 80240740 C6000038 */  lwc1      $f0, 0x38($s0)

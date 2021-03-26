@@ -11,7 +11,7 @@ glabel func_802BB314_E2DC44
 /* E2DC5C 802BB32C E7A00010 */  swc1      $f0, 0x10($sp)
 /* E2DC60 802BB330 8C460048 */  lw        $a2, 0x48($v0)
 /* E2DC64 802BB334 8C47004C */  lw        $a3, 0x4c($v0)
-/* E2DC68 802BB338 0C052757 */  jal       play_sound_at_position
+/* E2DC68 802BB338 0C052757 */  jal       sfx_play_sound_at_position
 /* E2DC6C 802BB33C 0000282D */   daddu    $a1, $zero, $zero
 /* E2DC70 802BB340 8FBF0018 */  lw        $ra, 0x18($sp)
 /* E2DC74 802BB344 03E00008 */  jr        $ra

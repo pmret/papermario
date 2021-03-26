@@ -124,7 +124,7 @@ glabel update_encounters_post_battle
 /* 1D4B4 800420B4 A6C000AA */  sh        $zero, 0xaa($s6)
 /* 1D4B8 800420B8 14510003 */  bne       $v0, $s1, .L800420C8
 /* 1D4BC 800420BC A6C000AE */   sh       $zero, 0xae($s6)
-/* 1D4C0 800420C0 0C052B9B */  jal       func_8014AE6C
+/* 1D4C0 800420C0 0C052B9B */  jal       bgm_pop_battle_song
 /* 1D4C4 800420C4 00000000 */   nop
 .L800420C8:
 /* 1D4C8 800420C8 3C03FFFB */  lui       $v1, 0xfffb

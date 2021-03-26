@@ -236,7 +236,7 @@ glabel L8024038C_BBD52C
 /* BBD5A0 80240400 00000000 */  nop
 /* BBD5A4 80240404 45000003 */  bc1f      .L80240414
 /* BBD5A8 80240408 2404009D */   addiu    $a0, $zero, 0x9d
-/* BBD5AC 8024040C 0C052736 */  jal       play_sound_at_player
+/* BBD5AC 8024040C 0C052736 */  jal       sfx_play_sound_at_player
 /* BBD5B0 80240410 0000282D */   daddu    $a1, $zero, $zero
 .L80240414:
 /* BBD5B4 80240414 E6340014 */  swc1      $f20, 0x14($s1)
@@ -257,7 +257,7 @@ glabel L8024038C_BBD52C
 /* BBD5EC 8024044C 3484000F */  ori       $a0, $a0, 0xf
 /* BBD5F0 80240450 E7A00010 */  swc1      $f0, 0x10($sp)
 /* BBD5F4 80240454 8E270010 */  lw        $a3, 0x10($s1)
-/* BBD5F8 80240458 0C052757 */  jal       play_sound_at_position
+/* BBD5F8 80240458 0C052757 */  jal       sfx_play_sound_at_position
 /* BBD5FC 8024045C 0000282D */   daddu    $a1, $zero, $zero
 /* BBD600 80240460 24020001 */  addiu     $v0, $zero, 1
 /* BBD604 80240464 08090123 */  j         .L8024048C
@@ -268,7 +268,7 @@ glabel L8024038C_BBD52C
 /* BBD614 80240474 00000000 */  nop
 /* BBD618 80240478 45000004 */  bc1f      .L8024048C
 /* BBD61C 8024047C 3C048000 */   lui      $a0, 0x8000
-/* BBD620 80240480 0C05271B */  jal       stop_sound
+/* BBD620 80240480 0C05271B */  jal       sfx_stop_sound
 /* BBD624 80240484 3484000F */   ori      $a0, $a0, 0xf
 /* BBD628 80240488 AE800078 */  sw        $zero, 0x78($s4)
 .L8024048C:
@@ -295,7 +295,7 @@ glabel L8024038C_BBD52C
 /* BBD678 802404D8 44071000 */  mfc1      $a3, $f2
 /* BBD67C 802404DC C7A00060 */  lwc1      $f0, 0x60($sp)
 /* BBD680 802404E0 0000282D */  daddu     $a1, $zero, $zero
-/* BBD684 802404E4 0C052757 */  jal       play_sound_at_position
+/* BBD684 802404E4 0C052757 */  jal       sfx_play_sound_at_position
 /* BBD688 802404E8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* BBD68C 802404EC 24020001 */  addiu     $v0, $zero, 1
 /* BBD690 802404F0 08090145 */  j         .L80240514
@@ -305,7 +305,7 @@ glabel L8024038C_BBD52C
 /* BBD69C 802404FC 56020006 */  bnel      $s0, $v0, .L80240518
 /* BBD6A0 80240500 AE900088 */   sw       $s0, 0x88($s4)
 /* BBD6A4 80240504 3C048000 */  lui       $a0, 0x8000
-/* BBD6A8 80240508 0C05271B */  jal       stop_sound
+/* BBD6A8 80240508 0C05271B */  jal       sfx_stop_sound
 /* BBD6AC 8024050C 34840010 */   ori      $a0, $a0, 0x10
 /* BBD6B0 80240510 AE80007C */  sw        $zero, 0x7c($s4)
 .L80240514:

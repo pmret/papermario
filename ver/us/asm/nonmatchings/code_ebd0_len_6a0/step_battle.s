@@ -42,7 +42,7 @@ glabel step_battle
 /* ED70 80033970 A2020000 */   sb       $v0, ($s0)
 /* ED74 80033974 0C018030 */  jal       nuContRmbForceStopEnd
 /* ED78 80033978 00000000 */   nop
-/* ED7C 8003397C 0C05260E */  jal       func_80149838
+/* ED7C 8003397C 0C05260E */  jal       sfx_stop_env_sounds
 /* ED80 80033980 00000000 */   nop
 /* ED84 80033984 0C00EC6A */  jal       func_8003B1A8
 /* ED88 80033988 00000000 */   nop

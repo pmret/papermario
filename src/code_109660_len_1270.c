@@ -64,7 +64,7 @@ s32 func_802E8858(Entity* entity) {
         func_80110BCC(entity, &D_802EAE7C);
         func_80110678(entity);
         exec_entity_updatecmd(entity);
-        play_sound(0x20AE);
+        sfx_play_sound(0x20AE);
     }
 }
 

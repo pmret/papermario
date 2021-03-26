@@ -211,7 +211,7 @@ glabel func_80244710
 /* 1732E8 80244A08 0000202D */  daddu     $a0, $zero, $zero
 /* 1732EC 80244A0C 2405FFFF */  addiu     $a1, $zero, -1
 /* 1732F0 80244A10 0080302D */  daddu     $a2, $a0, $zero
-/* 1732F4 80244A14 0C052A46 */  jal       set_music_track
+/* 1732F4 80244A14 0C052A46 */  jal       bgm_set_song
 /* 1732F8 80244A18 240705DC */   addiu    $a3, $zero, 0x5dc
 .L80244A1C:
 /* 1732FC 80244A1C 0C090464 */  jal       func_80241190

@@ -131,7 +131,7 @@ glabel L802B6174_E29314
 /* E29388 802B61E8 0440002B */  bltz      $v0, L802B6298_E29438
 /* E2938C 802B61EC 46000506 */   mov.s    $f20, $f0
 /* E29390 802B61F0 24040162 */  addiu     $a0, $zero, 0x162
-/* E29394 802B61F4 0C052736 */  jal       play_sound_at_player
+/* E29394 802B61F4 0C052736 */  jal       sfx_play_sound_at_player
 /* E29398 802B61F8 0000282D */   daddu    $a1, $zero, $zero
 /* E2939C 802B61FC 3C040008 */  lui       $a0, 8
 /* E293A0 802B6200 0C037FDE */  jal       func_800DFF78

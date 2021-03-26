@@ -32,7 +32,7 @@ glabel func_8024046C_CCB77C
 /* CCB7E8 802404D8 00000000 */  nop
 /* CCB7EC 802404DC 46800020 */  cvt.s.w   $f0, $f0
 /* CCB7F0 802404E0 AE220078 */  sw        $v0, 0x78($s1)
-/* CCB7F4 802404E4 0C05267B */  jal       func_801499EC
+/* CCB7F4 802404E4 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* CCB7F8 802404E8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* CCB7FC 802404EC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* CCB800 802404F0 8FB1001C */  lw        $s1, 0x1c($sp)

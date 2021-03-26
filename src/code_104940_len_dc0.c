@@ -266,7 +266,7 @@ s32 func_802E3BA4(Entity* entity) {
                 return 1;
             }
             set_entity_updatecmd(entity, &D_802E9E80);
-            play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x16:
         case 0x19:
@@ -281,7 +281,7 @@ s32 func_802E3BA4(Entity* entity) {
                 return 1;
             }
             set_entity_updatecmd(entity, &D_802E9E80);
-            play_sound_at_position(0x150, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(0x150, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x17:
         case 0x1a:
@@ -289,7 +289,7 @@ s32 func_802E3BA4(Entity* entity) {
                 return 1;
             }
             set_entity_updatecmd(entity, &D_802E9E80);
-            play_sound_at_position(0x151, 0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(0x151, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x1b:
         case 0x1c:

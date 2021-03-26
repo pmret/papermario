@@ -86,7 +86,7 @@ glabel func_800E5A2C
 /* 7F008 800E5B58 00431024 */  and       $v0, $v0, $v1
 /* 7F00C 800E5B5C 10800004 */  beqz      $a0, .L800E5B70
 /* 7F010 800E5B60 AE020004 */   sw       $v0, 4($s0)
-/* 7F014 800E5B64 0C05271B */  jal       stop_sound
+/* 7F014 800E5B64 0C05271B */  jal       sfx_stop_sound
 /* 7F018 800E5B68 00000000 */   nop
 .L800E5B6C:
 /* 7F01C 800E5B6C 3C138000 */  lui       $s3, 0x8000

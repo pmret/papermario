@@ -516,7 +516,7 @@ glabel L802461CC_174AAC
 /* 174ABC 802461DC 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
 /* 174AC0 802461E0 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L802461E4:
-/* 174AC4 802461E4 0C05272D */  jal       play_sound
+/* 174AC4 802461E4 0C05272D */  jal       sfx_play_sound
 /* 174AC8 802461E8 24042107 */   addiu    $a0, $zero, 0x2107
 /* 174ACC 802461EC 0200202D */  daddu     $a0, $s0, $zero
 /* 174AD0 802461F0 0C093E58 */  jal       show_battle_message

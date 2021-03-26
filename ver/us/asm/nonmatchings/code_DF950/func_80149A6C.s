@@ -5,7 +5,7 @@ glabel func_80149A6C
 /* E016C 80149A6C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* E0170 80149A70 AFB00010 */  sw        $s0, 0x10($sp)
 /* E0174 80149A74 AFBF0014 */  sw        $ra, 0x14($sp)
-/* E0178 80149A78 0C052631 */  jal       func_801498C4
+/* E0178 80149A78 0C052631 */  jal       sfx_get_env_sound_instance
 /* E017C 80149A7C 00A0802D */   daddu    $s0, $a1, $zero
 /* E0180 80149A80 0040202D */  daddu     $a0, $v0, $zero
 /* E0184 80149A84 10800008 */  beqz      $a0, .L80149AA8
@@ -15,7 +15,7 @@ glabel func_80149A6C
 /* E0194 80149A94 16000004 */  bnez      $s0, .L80149AA8
 /* E0198 80149A98 AC820000 */   sw       $v0, ($a0)
 /* E019C 80149A9C 8C840004 */  lw        $a0, 4($a0)
-/* E01A0 80149AA0 0C0154F0 */  jal       func_800553C0
+/* E01A0 80149AA0 0C0154F0 */  jal       snd_stop_sound
 /* E01A4 80149AA4 00000000 */   nop
 .L80149AA8:
 /* E01A8 80149AA8 8FBF0014 */  lw        $ra, 0x14($sp)
