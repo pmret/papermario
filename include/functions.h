@@ -282,6 +282,8 @@ void func_80070CD0(s32, f32, f32, f32, f32, f32);
 // Dead functions:
 Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
 Npc* func_8003E534(NpcId npcId); // get_npc_safe
+void func_80077BD0(s32, s32, s32, s32, s32, s32);
+
 void dead_func_8006FEF0(s32, f32, f32, f32, f32);
 s32 dead_get_variable(ScriptInstance* script, Bytecode var);
 f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
