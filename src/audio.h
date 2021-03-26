@@ -189,7 +189,7 @@ typedef struct UnkAlC {
 } UnkAlC;
 
 typedef struct Instrument {
-    /* 0x00 */ s32* wavOffset;
+    /* 0x00 */ s32 wavOffset;
     /* 0x04 */ s32 wavLength;
     /* 0x08 */ s32 loopPredictorOffset;
     /* 0x0C */ s32 loopStart;
