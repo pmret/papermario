@@ -5,8 +5,8 @@
 [![Progress (JP)][progress-jp-badge]][progress-jp]
 [![Discord Channel][discord-badge]][discord]
 
-[jenkins]: https://jenkins.zelda64.dev/job/papermario/job/master
-[jenkins-badge]: https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fjenkins.zelda64.dev%2Fjob%2Fpapermario%2Fjob%2Fmaster
+[jenkins]: https://jenkins.deco.mp/job/papermario/job/master
+[jenkins-badge]: https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fjenkins.deco.mp%2Fjob%2Fpapermario%2Fjob%2Fmaster
 
 [progress-us]: https://papermar.io/progress-us
 [progress-us-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_us_shield.json
