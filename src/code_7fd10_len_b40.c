@@ -65,7 +65,7 @@ void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 pressedButtons;
 
-    if (get_variable(NULL, SI_SAVE_VAR(0)) < 0x60) {
+    if (get_variable(NULL, SI_SAVE_VAR(0)) < STORY_EPILOGUE) {
         if (playerStatus->actionState != ActionState_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {

@@ -44,7 +44,7 @@ Script N(Script_80240198) = SCRIPT({
 Script N(Main) = SCRIPT({
     SI_SAVE_VAR(425) = 10;
     SetSpriteShading(-1);
-    if (SI_SAVE_VAR(0) == 0xFFFFFFC1) {
+    if (SI_SAVE_VAR(0) == STORY_CH2_GOT_PULSE_STONE) {
         DisablePulseStone(0);
     }
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -54,7 +54,7 @@ Script N(Main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_80240768));
     await N(MakeEntities);
     N(SpawnSunEffect)();
-    SetMusicTrack(0, 23, 0, 8);
+    SetMusicTrack(0, Song_DRY_DRY_DESERT, 0, 8);
     SI_VAR(0) = N(Script_80240198);
     spawn EnterWalk;
 });

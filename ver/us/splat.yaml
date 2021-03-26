@@ -6728,11 +6728,10 @@ segments:
     start: 0xBDD1B0
     vram: 0x80240000
     subsections:
-    - [0xBDD1B0, c]
-    - [0xBDE190, data]
-    - [0xBDE2A0, data]
-    - [0xBDE480, data]
-    - [0xBDEC80, rodata]
+    - [0xBDD1B0,       c, events]
+    - [0xBDE190,   .data, header]
+    - [0xBDE2A0,   .data, events]
+    - [0xBDEC80, .rodata, events]
   - name: world/area_arn/arn_03/
     type: code
     overlay: True
@@ -9502,6 +9501,7 @@ segments:
     ids:
       - [0x19, 0x03B, kmr_03_tattle]
       - [0x19, 0x040, kmr_12_tattle]
+      - [0x19, 0x0BE, arn_02_tattle]
 
       - [0x1C, 0x000, actor_goomba_tattle]
       - [0x1C, 0x001, actor_spiked_goomba_tattle]

@@ -88,7 +88,7 @@ Script N(Script_8024097C) = SCRIPT({
 Script N(NpcAI_80240B50) = SCRIPT({
 1:
     match SI_SAVE_VAR(0) {
-        == 0xFFFFFF86 {
+        == STORY_CH0_FELL_OFF_CLIFF {
 89:
             N(UnkPositionFunc)(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
             sleep 1;
@@ -127,7 +127,7 @@ Script N(NpcAI_80240B50) = SCRIPT({
             sleep 30;
             SpeakToPlayer(0, 0x9D0008, 0x9D0001, 0, 0xB00A8);
             func_80240000_8C7F90(0, 5);
-            SI_SAVE_VAR(0) = 0xFFFFFF87;
+            SI_SAVE_VAR(0) = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, 0xFFFFFF24, 20, 0xFFFFFFB8);
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
             SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -218,11 +218,11 @@ s32 N(npcGroupList_80241450)[] = {
     0x00000001, N(npcGroup_80241260), 0x00020000, 0x00000000, 0x00000000, 0x00000000,
 };
 
-s32 padding2[] = {0, 0};
+s32 N(padding2)[] = {0, 0};
 
 Script N(Script_80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
-    SI_SAVE_VAR(0) = 0xFFFFFF8B;
+    SI_SAVE_VAR(0) = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
 Script N(Script_802414A8) = SCRIPT({
@@ -238,7 +238,7 @@ Script N(Script_802414C8) = SCRIPT({
 });
 
 Script N(MakeEntities) = SCRIPT({
-    if (SI_SAVE_VAR(0) < 0xFFFFFF8B) {
+    if (SI_SAVE_VAR(0) < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, 0x80000000);
         AssignScript(N(Script_80241470));
     } else {

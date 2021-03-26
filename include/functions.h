@@ -5,6 +5,9 @@
 #include "common_structs.h"
 #include "enums.h"
 
+f32 fabsf(f32 f);
+f32 sqrtf(f32 f);
+f64 sqrt(f64 d);
 
 void nuBoot(void);
 void boot_idle(void);
@@ -155,7 +158,7 @@ void close_status_menu(void);
 void func_800EB168(s32);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
-
+s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
 
 // Pause

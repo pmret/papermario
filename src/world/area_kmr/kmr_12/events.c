@@ -30,13 +30,13 @@ NpcAISettings N(goombaAISettings) = {
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 130.0f,
-    .unk_10 = 0.0f,
+    .unk_10 = { .f = 0.0f },
     .unk_14 = 1,
     .chaseSpeed = 2.5f,
     .unk_1C = 180,
     .unk_20 = 3,
     .chaseRadius = 150.0f,
-    .unk_28 = 0.0f,
+    .unk_28 = { .f = 0.0f },
     .unk_2C = TRUE,
 };
 
@@ -188,7 +188,7 @@ StaticNpc N(goombaNpc) = {
 };
 
 NpcGroupList N(npcGroupList) = {
-    NPC_GROUP(N(goombaNpc), BATTLE_ID(1, 0, 3)),
+    NPC_GROUP(N(goombaNpc), BATTLE_ID(0, 1, 0, 3)),
     {},
 };
 
