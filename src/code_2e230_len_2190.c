@@ -114,7 +114,7 @@ void snd_load_audio_data(s32 frequency) {
     if (snd_fetch_SBN_file(temp4->unk_3C->unk_0, 0x20, subroutine_arg7) == 0) {
         snd_read_rom(subroutine_arg7[0], temp4->unk_A0, subroutine_arg7[1] & 0xFFFFFF);
     }
-    snd_load_sfx_groups_from_SEF((*temp2_1));
+    snd_load_sfx_groups_from_SEF(*temp2_1);
     if (snd_fetch_SBN_file(temp4->unk_3C->unk_2, 0x40, subroutine_arg7) == 0) {
         snd_load_PER(temp4, subroutine_arg7[0]);
     }
@@ -185,10 +185,10 @@ void func_800533A8(UnkAl4* arg0) {
 
 void snd_update_sequence_players(void) {
     UnkAl19E0* temp_s2 = D_8009A5C0;
-    SoundManager* temp_s1 = D_8009A640;
+    SoundManager* manager = D_8009A640;
     UnkAl834* temp_s0 = D_8009A628;
-    BGMPlayer* temp_s0_2;
-    BGMPlayer* temp_s0_3;
+    BGMPlayer* bgmPlayer1;
+    BGMPlayer* bgmPlayer2;
     s32* t1;
 
     func_80053654(temp_s2);
@@ -199,55 +199,55 @@ void snd_update_sequence_players(void) {
         func_800511BC(temp_s0);
     }
 
-    if (temp_s1->unk_40.unk_0A != 0) {
-        func_80053A28(&temp_s1->unk_40);
-        func_80053A98(temp_s1->unk_BE, temp_s1->unk_40.unk_00.u16, temp_s1->unk_5C);
+    if (manager->unk_40.unk_0A != 0) {
+        func_80053A28(&manager->unk_40);
+        func_80053A98(manager->unk_BE, manager->unk_40.unk_00.u16, manager->unk_5C);
     }
 
-    temp_s1->unkCounter -= temp_s1->unkCounterStep;
-    if (temp_s1->unkCounter <= 0) {
-        temp_s1->unkCounter += temp_s1->unkCounterMax;
-        temp_s1->unk_BA = func_8004C444(temp_s1);
+    manager->unkCounter -= manager->unkCounterStep;
+    if (manager->unkCounter <= 0) {
+        manager->unkCounter += manager->unkCounterMax;
+        manager->unk_BA = func_8004C444(manager);
     }
 
     t1 = &D_80078DB0;
     if (*t1 == 0) {
-        temp_s0_2 = D_8009A5FC;
-        if (temp_s0_2->fadeInfo.fadeTime != 0) {
-            snd_update_bgm_fade(temp_s0_2);
+        bgmPlayer1 = D_8009A5FC;
+        if (bgmPlayer1->fadeInfo.fadeTime != 0) {
+            snd_update_bgm_fade(bgmPlayer1);
         }
-        if (temp_s0_2->songName != 0) {
-            temp_s0_2->unk_18++;
+        if (bgmPlayer1->songName != 0) {
+            bgmPlayer1->unk_18++;
         }
 
-        temp_s0_2->unk_10 -= temp_s0_2->unkFrequency;
-        if (temp_s0_2->unk_10 <= 0) {
-            temp_s0_2->unk_10 += temp_s0_2->unk_0C;
-            temp_s0_2->unk_5C = func_8004E4B8(temp_s0_2);
+        bgmPlayer1->unk_10 -= bgmPlayer1->unkFrequency;
+        if (bgmPlayer1->unk_10 <= 0) {
+            bgmPlayer1->unk_10 += bgmPlayer1->unk_0C;
+            bgmPlayer1->unk_5C = func_8004E4B8(bgmPlayer1);
         }
         if (*t1 == 0) {
             if (temp_s2->unk_80 != 0) {
                 func_8004DFD4(temp_s2);
             }
-            temp_s0_3 = D_8009A664;
-            if (temp_s0_3->unk_46 != 0) {
-                func_80053BA8(&temp_s0_3->fadeInfo);
-                if (temp_s0_3->fadeInfo.fadeTime == 0) {
-                    func_8004E444(temp_s0_3);
+            bgmPlayer2 = D_8009A664;
+            if (bgmPlayer2->unk_46 != 0) {
+                func_80053BA8(&bgmPlayer2->fadeInfo);
+                if (bgmPlayer2->fadeInfo.fadeTime == 0) {
+                    func_8004E444(bgmPlayer2);
                 } else {
-                    snd_update_bgm_fade(temp_s0_3);
+                    snd_update_bgm_fade(bgmPlayer2);
                 }
-            } else if (temp_s0_3->fadeInfo.fadeTime != 0) {
-                snd_update_bgm_fade(temp_s0_3);
+            } else if (bgmPlayer2->fadeInfo.fadeTime != 0) {
+                snd_update_bgm_fade(bgmPlayer2);
             }
-            if (temp_s0_3->songName != 0) {
-                temp_s0_3->unk_18++;
+            if (bgmPlayer2->songName != 0) {
+                bgmPlayer2->unk_18++;
             }
 
-            temp_s0_3->unk_10 -= temp_s0_3->unkFrequency;
-            if (temp_s0_3->unk_10 <= 0) {
-                temp_s0_3->unk_10 += temp_s0_3->unk_0C;
-                temp_s0_3->unk_5C = func_8004E4B8(temp_s0_3);
+            bgmPlayer2->unk_10 -= bgmPlayer2->unkFrequency;
+            if (bgmPlayer2->unk_10 <= 0) {
+                bgmPlayer2->unk_10 += bgmPlayer2->unk_0C;
+                bgmPlayer2->unk_5C = func_8004E4B8(bgmPlayer2);
             }
         }
     }
@@ -256,8 +256,8 @@ void snd_update_sequence_players(void) {
 
 void func_800535C0(void) {
     UnkAl19E0* temp_s1 = D_8009A5C0;
-    BGMPlayer* temp = D_8009A664;
-    SoundManager* temp_s2 = D_8009A640;
+    BGMPlayer* player = D_8009A664;
+    SoundManager* manager = D_8009A640;
 
     if (temp_s1->unk_9C != 0) {
         func_8005610C();
@@ -268,10 +268,10 @@ void func_800535C0(void) {
         D_8009A5E8();
     }
 
-    func_8004D510(temp);
-    temp = D_8009A5FC;
-    func_8004D510(temp);
-    func_8004B748(temp_s2);
+    func_8004D510(player);
+    player = D_8009A5FC;
+    func_8004D510(D_8009A5FC);
+    func_8004B748(manager);
 }
 
 void func_80053654(UnkAl19E0* arg0) {
