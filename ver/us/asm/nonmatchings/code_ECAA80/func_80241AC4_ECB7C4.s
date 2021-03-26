@@ -11,21 +11,21 @@ glabel func_80241AC4_ECB7C4
 /* ECB7DC 80241ADC AFB00010 */  sw        $s0, 0x10($sp)
 /* ECB7E0 80241AE0 8E30000C */  lw        $s0, 0xc($s1)
 /* ECB7E4 80241AE4 8E050000 */  lw        $a1, ($s0)
-/* ECB7E8 80241AE8 0C0B53A3 */  jal       func_802D4E8C
+/* ECB7E8 80241AE8 0C0B53A3 */  jal       dead_get_variable
 /* ECB7EC 80241AEC 26100004 */   addiu    $s0, $s0, 4
 /* ECB7F0 80241AF0 8E050000 */  lw        $a1, ($s0)
 /* ECB7F4 80241AF4 26100004 */  addiu     $s0, $s0, 4
 /* ECB7F8 80241AF8 0220202D */  daddu     $a0, $s1, $zero
-/* ECB7FC 80241AFC 0C0B53A3 */  jal       func_802D4E8C
+/* ECB7FC 80241AFC 0C0B53A3 */  jal       dead_get_variable
 /* ECB800 80241B00 0040982D */   daddu    $s3, $v0, $zero
 /* ECB804 80241B04 8E050000 */  lw        $a1, ($s0)
 /* ECB808 80241B08 26100004 */  addiu     $s0, $s0, 4
 /* ECB80C 80241B0C 0220202D */  daddu     $a0, $s1, $zero
-/* ECB810 80241B10 0C0B53A3 */  jal       func_802D4E8C
+/* ECB810 80241B10 0C0B53A3 */  jal       dead_get_variable
 /* ECB814 80241B14 0040902D */   daddu    $s2, $v0, $zero
 /* ECB818 80241B18 0220202D */  daddu     $a0, $s1, $zero
 /* ECB81C 80241B1C 8E050000 */  lw        $a1, ($s0)
-/* ECB820 80241B20 0C0B53A3 */  jal       func_802D4E8C
+/* ECB820 80241B20 0C0B53A3 */  jal       dead_get_variable
 /* ECB824 80241B24 0040882D */   daddu    $s1, $v0, $zero
 /* ECB828 80241B28 0260202D */  daddu     $a0, $s3, $zero
 /* ECB82C 80241B2C 0C04F3E6 */  jal       func_8013CF98

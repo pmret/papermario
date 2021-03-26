@@ -17,55 +17,55 @@ glabel func_80240358_EA8E38
 /* EA8E68 80240388 34A50F81 */  ori       $a1, $a1, 0xf81
 /* EA8E6C 8024038C 0040802D */  daddu     $s0, $v0, $zero
 /* EA8E70 80240390 0200302D */  daddu     $a2, $s0, $zero
-/* EA8E74 80240394 0C0B551A */  jal       func_802D5468
+/* EA8E74 80240394 0C0B551A */  jal       dead_set_variable
 /* EA8E78 80240398 AE500084 */   sw       $s0, 0x84($s2)
 /* EA8E7C 8024039C 8E250000 */  lw        $a1, ($s1)
 /* EA8E80 802403A0 26310004 */  addiu     $s1, $s1, 4
-/* EA8E84 802403A4 0C0B53A3 */  jal       func_802D4E8C
+/* EA8E84 802403A4 0C0B53A3 */  jal       dead_get_variable
 /* EA8E88 802403A8 0240202D */   daddu    $a0, $s2, $zero
 /* EA8E8C 802403AC AE020038 */  sw        $v0, 0x38($s0)
 /* EA8E90 802403B0 8E250000 */  lw        $a1, ($s1)
 /* EA8E94 802403B4 26310004 */  addiu     $s1, $s1, 4
-/* EA8E98 802403B8 0C0B53A3 */  jal       func_802D4E8C
+/* EA8E98 802403B8 0C0B53A3 */  jal       dead_get_variable
 /* EA8E9C 802403BC 0240202D */   daddu    $a0, $s2, $zero
 /* EA8EA0 802403C0 AE02003C */  sw        $v0, 0x3c($s0)
 /* EA8EA4 802403C4 8E250000 */  lw        $a1, ($s1)
 /* EA8EA8 802403C8 26310004 */  addiu     $s1, $s1, 4
-/* EA8EAC 802403CC 0C0B55FF */  jal       func_802D57FC
+/* EA8EAC 802403CC 0C0B55FF */  jal       dead_get_float_variable
 /* EA8EB0 802403D0 0240202D */   daddu    $a0, $s2, $zero
 /* EA8EB4 802403D4 E600000C */  swc1      $f0, 0xc($s0)
 /* EA8EB8 802403D8 8E250000 */  lw        $a1, ($s1)
 /* EA8EBC 802403DC 26310004 */  addiu     $s1, $s1, 4
-/* EA8EC0 802403E0 0C0B55FF */  jal       func_802D57FC
+/* EA8EC0 802403E0 0C0B55FF */  jal       dead_get_float_variable
 /* EA8EC4 802403E4 0240202D */   daddu    $a0, $s2, $zero
 /* EA8EC8 802403E8 E6000010 */  swc1      $f0, 0x10($s0)
 /* EA8ECC 802403EC 8E250000 */  lw        $a1, ($s1)
 /* EA8ED0 802403F0 26310004 */  addiu     $s1, $s1, 4
-/* EA8ED4 802403F4 0C0B55FF */  jal       func_802D57FC
+/* EA8ED4 802403F4 0C0B55FF */  jal       dead_get_float_variable
 /* EA8ED8 802403F8 0240202D */   daddu    $a0, $s2, $zero
 /* EA8EDC 802403FC E6000014 */  swc1      $f0, 0x14($s0)
 /* EA8EE0 80240400 8E250000 */  lw        $a1, ($s1)
 /* EA8EE4 80240404 26310004 */  addiu     $s1, $s1, 4
-/* EA8EE8 80240408 0C0B55FF */  jal       func_802D57FC
+/* EA8EE8 80240408 0C0B55FF */  jal       dead_get_float_variable
 /* EA8EEC 8024040C 0240202D */   daddu    $a0, $s2, $zero
 /* EA8EF0 80240410 E6000018 */  swc1      $f0, 0x18($s0)
 /* EA8EF4 80240414 8E250000 */  lw        $a1, ($s1)
 /* EA8EF8 80240418 26310004 */  addiu     $s1, $s1, 4
-/* EA8EFC 8024041C 0C0B55FF */  jal       func_802D57FC
+/* EA8EFC 8024041C 0C0B55FF */  jal       dead_get_float_variable
 /* EA8F00 80240420 0240202D */   daddu    $a0, $s2, $zero
 /* EA8F04 80240424 E600001C */  swc1      $f0, 0x1c($s0)
 /* EA8F08 80240428 8E250000 */  lw        $a1, ($s1)
 /* EA8F0C 8024042C 26310004 */  addiu     $s1, $s1, 4
-/* EA8F10 80240430 0C0B55FF */  jal       func_802D57FC
+/* EA8F10 80240430 0C0B55FF */  jal       dead_get_float_variable
 /* EA8F14 80240434 0240202D */   daddu    $a0, $s2, $zero
 /* EA8F18 80240438 E6000020 */  swc1      $f0, 0x20($s0)
 /* EA8F1C 8024043C 8E250000 */  lw        $a1, ($s1)
 /* EA8F20 80240440 26310004 */  addiu     $s1, $s1, 4
-/* EA8F24 80240444 0C0B55FF */  jal       func_802D57FC
+/* EA8F24 80240444 0C0B55FF */  jal       dead_get_float_variable
 /* EA8F28 80240448 0240202D */   daddu    $a0, $s2, $zero
 /* EA8F2C 8024044C E6000024 */  swc1      $f0, 0x24($s0)
 /* EA8F30 80240450 8E250000 */  lw        $a1, ($s1)
-/* EA8F34 80240454 0C0B55FF */  jal       func_802D57FC
+/* EA8F34 80240454 0C0B55FF */  jal       dead_get_float_variable
 /* EA8F38 80240458 0240202D */   daddu    $a0, $s2, $zero
 /* EA8F3C 8024045C 3C013F80 */  lui       $at, 0x3f80
 /* EA8F40 80240460 44811000 */  mtc1      $at, $f2

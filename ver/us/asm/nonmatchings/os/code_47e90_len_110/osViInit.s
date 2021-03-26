@@ -35,12 +35,12 @@ glabel osViInit
 .L8006CB08:
 /* 47F08 8006CB08 14620004 */  bne       $v1, $v0, .L8006CB1C
 /* 47F0C 8006CB0C 00000000 */   nop
-/* 47F10 8006CB10 3C028009 */  lui       $v0, %hi(D_80095870)
+/* 47F10 8006CB10 3C028009 */  lui       $v0, %hi(_osViModeMPalLan1)
 /* 47F14 8006CB14 0801B2C9 */  j         .L8006CB24
-/* 47F18 8006CB18 24425870 */   addiu    $v0, $v0, %lo(D_80095870)
+/* 47F18 8006CB18 24425870 */   addiu    $v0, $v0, %lo(_osViModeMPalLan1)
 .L8006CB1C:
-/* 47F1C 8006CB1C 3C028009 */  lui       $v0, %hi(D_80095820)
-/* 47F20 8006CB20 24425820 */  addiu     $v0, $v0, %lo(D_80095820)
+/* 47F1C 8006CB1C 3C028009 */  lui       $v0, %hi(_osViModeNtscLan1)
+/* 47F20 8006CB20 24425820 */  addiu     $v0, $v0, %lo(_osViModeNtscLan1)
 .L8006CB24:
 /* 47F24 8006CB24 3C018009 */  lui       $at, %hi(D_800959A8)
 /* 47F28 8006CB28 AC2259A8 */  sw        $v0, %lo(D_800959A8)($at)

@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_ED4260", func_80240040_ED4260);
+#define NAMESPACE code_ED4260
+
+#include "common/DeadUnk1.inc.c"

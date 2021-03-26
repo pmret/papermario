@@ -5,7 +5,7 @@ glabel func_80240544_ECA244
 /* ECA244 80240544 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* ECA248 80240548 AFBF0018 */  sw        $ra, 0x18($sp)
 /* ECA24C 8024054C 8C82000C */  lw        $v0, 0xc($a0)
-/* ECA250 80240550 0C0B53A3 */  jal       func_802D4E8C
+/* ECA250 80240550 0C0B53A3 */  jal       dead_get_variable
 /* ECA254 80240554 8C450000 */   lw       $a1, ($v0)
 /* ECA258 80240558 0C0462EC */  jal       func_80118BB0
 /* ECA25C 8024055C 0040202D */   daddu    $a0, $v0, $zero

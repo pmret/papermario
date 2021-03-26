@@ -15,13 +15,13 @@ glabel func_802404D0_EFEFD0
 /* EFEFF8 802404F8 4600008D */  trunc.w.s $f2, $f0
 /* EFEFFC 802404FC 44061000 */  mfc1      $a2, $f2
 /* EFF000 80240500 8C450000 */  lw        $a1, ($v0)
-/* EFF004 80240504 0C0B551A */  jal       func_802D5468
+/* EFF004 80240504 0C0B551A */  jal       dead_set_variable
 /* EFF008 80240508 8C510004 */   lw       $s1, 4($v0)
 /* EFF00C 8024050C 0200202D */  daddu     $a0, $s0, $zero
 /* EFF010 80240510 C6400080 */  lwc1      $f0, 0x80($s2)
 /* EFF014 80240514 4600008D */  trunc.w.s $f2, $f0
 /* EFF018 80240518 44061000 */  mfc1      $a2, $f2
-/* EFF01C 8024051C 0C0B551A */  jal       func_802D5468
+/* EFF01C 8024051C 0C0B551A */  jal       dead_set_variable
 /* EFF020 80240520 0220282D */   daddu    $a1, $s1, $zero
 /* EFF024 80240524 8FBF001C */  lw        $ra, 0x1c($sp)
 /* EFF028 80240528 8FB20018 */  lw        $s2, 0x18($sp)

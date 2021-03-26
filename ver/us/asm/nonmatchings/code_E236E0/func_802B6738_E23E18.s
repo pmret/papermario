@@ -126,3 +126,7 @@ glabel func_802B6738_E23E18
 /* E23FD4 802B68F4 8FBF001C */  lw        $ra, 0x1c($sp)
 /* E23FD8 802B68F8 8FB00018 */  lw        $s0, 0x18($sp)
 /* E23FDC 802B68FC 03E00008 */  jr        $ra
+/* E23FE0 802B6900 27BD0020 */   addiu    $sp, $sp, 0x20
+/* E23FE4 802B6904 00000000 */  nop
+/* E23FE8 802B6908 00000000 */  nop
+/* E23FEC 802B690C 00000000 */  nop
