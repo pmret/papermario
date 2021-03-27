@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 s32 func_802B6000_E24920();
 s32 func_802B6288_E23968();

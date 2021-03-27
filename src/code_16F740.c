@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 extern s16 D_802809F6;
 extern s32 D_80280A30;

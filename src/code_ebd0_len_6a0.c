@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include "ld_addrs.h"
 
 void intro_logos_set_fade_alpha(s16 alpha);
 void intro_logos_set_fade_color(s16 color);
