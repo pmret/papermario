@@ -37,14 +37,15 @@ class N64SegRgba16(N64Segment):
     def flip_horizontal(self):
         return self.flip == "both" or self.flip.startswith("h") or self.flip == "x"
 
-    def iter_image_indexes(self, bytes_per_x=1, bytes_per_y=1):
-        w = int(self.width * bytes_per_x)
-        h = int(self.height * bytes_per_y)
+    @staticmethod
+    def iter_image_indexes(width, height, bytes_per_x=1, bytes_per_y=1, flip_h=False, flip_v=False):
+        w = int(width * bytes_per_x)
+        h = int(height * bytes_per_y)
 
         xrange = range(w - ceil(bytes_per_x), -1, -ceil(bytes_per_x)
-                       ) if self.flip_horizontal else range(0, w, ceil(bytes_per_x))
+                       ) if flip_h else range(0, w, ceil(bytes_per_x))
         yrange = range(h - ceil(bytes_per_y), -1, -ceil(bytes_per_y)
-                       ) if self.flip_vertical else range(0, h, ceil(bytes_per_y))
+                       ) if flip_v else range(0, h, ceil(bytes_per_y))
 
         for y in yrange:
             for x in xrange:
@@ -61,17 +62,18 @@ class N64SegRgba16(N64Segment):
 
         w = self.png_writer()
         with open(path, "wb") as f:
-            w.write_array(f, self.parse_image(data))
+            w.write_array(f, self.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical))
 
         self.log(f"Wrote {self.name} to {path}")
 
     def png_writer(self):
         return png.Writer(self.width, self.height, greyscale=False, alpha=True)
 
-    def parse_image(self, data):
+    @staticmethod
+    def parse_image(data, width, height, flip_h=False, flip_v=False):
         img = bytearray()
 
-        for x, y, i in self.iter_image_indexes(2, 1):
+        for x, y, i in N64SegRgba16.iter_image_indexes(width, height, 2, 1, flip_h, flip_v):
             img += bytes(unpack_color(data[i:]))
 
         return img

@@ -16,7 +16,7 @@ class N64SegCi8(N64SegRgba16):
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
-        self.image = self.parse_image(data, self.width, self.height)
+        self.image = self.__class__.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical)
 
     def postsplit(self, segments):
         palettes = [seg for seg in segments if seg.type ==
@@ -51,7 +51,7 @@ class N64SegCi8(N64SegRgba16):
                     f"No unnamed palette for {self.name}; wrote image data to {self.path}")
 
     @staticmethod
-    def parse_image(data, width, height):
+    def parse_image(data, width, height, flip_h=False, flip_v=False):
         return data
 
     def max_length(self):
