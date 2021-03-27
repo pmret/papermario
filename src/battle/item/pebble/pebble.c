@@ -1,4 +1,5 @@
 #include "pebble.h"
+#include "ld_addrs.h"
 #include "battle/item/pebble/pebble.png.h"
 
 Vtx N(model)[] = {

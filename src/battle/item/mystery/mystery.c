@@ -1,4 +1,5 @@
 #include "mystery.h"
+#include "ld_addrs.h"
 #include "battle/item/mystery/mystery.png.h"
 
 Vtx N(model)[] = {

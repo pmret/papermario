@@ -1,4 +1,5 @@
 #include "egg_missile.h"
+#include "ld_addrs.h"
 #include "battle/item/egg_missile/egg_missile1.png.h"
 #include "battle/item/egg_missile/egg_missile2.png.h"
 #include "battle/item/egg_missile/egg_missile3.png.h"

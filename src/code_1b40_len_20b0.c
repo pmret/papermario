@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include "ld_addrs.h"
 
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;

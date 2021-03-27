@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 void func_80200000(void);
 void func_80200080(void);

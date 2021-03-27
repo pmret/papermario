@@ -1,4 +1,5 @@
 #include "insecticide_herb.h"
+#include "ld_addrs.h"
 #include "battle/item/insecticide_herb/insecticide_herb.png.h"
 
 Vtx N(model)[] = {

@@ -1,4 +1,5 @@
 #include "sleepy_sheep.h"
+#include "ld_addrs.h"
 #include "battle/item/sleepy_sheep/sleepy_sheep1.png.h"
 #include "battle/item/sleepy_sheep/sleepy_sheep2.png.h"
 #include "battle/item/sleepy_sheep/sleepy_sheep3.png.h"
