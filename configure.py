@@ -263,7 +263,7 @@ async def main():
     # KMC gcc doesn't support input on stdin, so a temp file has to be made for the preprocessor output
     n.rule("cc_kmc",
         command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Iinclude/PR -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 {args.cflags} -MD -MF $out.d $in -o $out.i && export WINEPATH=tools/kmc/BIN && wine exew32 gcc -O3 -c -G0 -mgp32 -mfp32 -mips3 $out.i -o $out' && {cross}strip $out -N $in",
-        description="dsl $in",
+        description="kmc $in",
         depfile="$out.d",
         deps="gcc")
     n.newline()
