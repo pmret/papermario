@@ -211,7 +211,7 @@ glabel FlyToGoal
 /* 1AA1F8 8027B918 8E0201A8 */  lw        $v0, 0x1a8($s0)
 /* 1AA1FC 8027B91C 1440009F */  bnez      $v0, .L8027BB9C
 /* 1AA200 8027B920 24020002 */   addiu    $v0, $zero, 2
-/* 1AA204 8027B924 0C0154F0 */  jal       func_800553C0
+/* 1AA204 8027B924 0C0154F0 */  jal       snd_stop_sound
 /* 1AA208 8027B928 00000000 */   nop
 /* 1AA20C 8027B92C 0809EEE7 */  j         .L8027BB9C
 /* 1AA210 8027B930 24020002 */   addiu    $v0, $zero, 2

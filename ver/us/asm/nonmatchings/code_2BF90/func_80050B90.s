@@ -13,7 +13,7 @@ glabel func_80050B90
 /* 2BFB0 80050BB0 00C0902D */  daddu     $s2, $a2, $zero
 /* 2BFB4 80050BB4 24050834 */  addiu     $a1, $zero, 0x834
 /* 2BFB8 80050BB8 AFBF0020 */  sw        $ra, 0x20($sp)
-/* 2BFBC 80050BBC 0C0153A4 */  jal       func_80054E90
+/* 2BFBC 80050BBC 0C0153A4 */  jal       snd_memset
 /* 2BFC0 80050BC0 0000302D */   daddu    $a2, $zero, $zero
 /* 2BFC4 80050BC4 0000182D */  daddu     $v1, $zero, $zero
 /* 2BFC8 80050BC8 24060001 */  addiu     $a2, $zero, 1

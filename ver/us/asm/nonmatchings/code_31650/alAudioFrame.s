@@ -66,7 +66,7 @@ glabel alAudioFrame
 /* 31AA0 800566A0 3C1E800A */  lui       $fp, %hi(D_800A3FE8)
 /* 31AA4 800566A4 27DE3FE8 */  addiu     $fp, $fp, %lo(D_800A3FE8)
 .L800566A8:
-/* 31AA8 800566A8 0C014CF4 */  jal       func_800533D0
+/* 31AA8 800566A8 0C014CF4 */  jal       snd_update_sequence_players
 /* 31AAC 800566AC 0000A82D */   daddu    $s5, $zero, $zero
 /* 31AB0 800566B0 3C038008 */  lui       $v1, %hi(D_80078E54)
 /* 31AB4 800566B4 8C638E54 */  lw        $v1, %lo(D_80078E54)($v1)

@@ -30,7 +30,7 @@ glabel sfx_stop_env_sounds
 /* DFF90 80149890 10400004 */  beqz      $v0, .L801498A4
 /* DFF94 80149894 26310001 */   addiu    $s1, $s1, 1
 /* DFF98 80149898 8E040004 */  lw        $a0, 4($s0)
-/* DFF9C 8014989C 0C0154F0 */  jal       func_800553C0
+/* DFF9C 8014989C 0C0154F0 */  jal       snd_stop_sound
 /* DFFA0 801498A0 00000000 */   nop
 .L801498A4:
 /* DFFA4 801498A4 2A22000A */  slti      $v0, $s1, 0xa

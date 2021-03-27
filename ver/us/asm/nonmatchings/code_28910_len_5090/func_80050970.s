@@ -18,7 +18,7 @@ glabel func_80050970
 /* 2BDA4 800509A4 0000B82D */  daddu     $s7, $zero, $zero
 /* 2BDA8 800509A8 1040006A */  beqz      $v0, .L80050B54
 /* 2BDAC 800509AC AFA40010 */   sw       $a0, 0x10($sp)
-/* 2BDB0 800509B0 0C0135E5 */  jal       func_8004D794
+/* 2BDB0 800509B0 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 2BDB4 800509B4 0040202D */   daddu    $a0, $v0, $zero
 /* 2BDB8 800509B8 0040882D */  daddu     $s1, $v0, $zero
 /* 2BDBC 800509BC 12200063 */  beqz      $s1, .L80050B4C
@@ -75,7 +75,7 @@ glabel func_80050970
 .L80050A7C:
 /* 2BE7C 80050A7C 0220202D */  daddu     $a0, $s1, $zero
 /* 2BE80 80050A80 82500018 */  lb        $s0, 0x18($s2)
-/* 2BE84 80050A84 0C013FAC */  jal       func_8004FEB0
+/* 2BE84 80050A84 0C013FAC */  jal       snd_BGMCmd_E9_SubTrackVolume
 /* 2BE88 80050A88 0240282D */   daddu    $a1, $s2, $zero
 /* 2BE8C 80050A8C 0220202D */  daddu     $a0, $s1, $zero
 /* 2BE90 80050A90 080142C8 */  j         .L80050B20
@@ -114,7 +114,7 @@ glabel func_80050970
 .L80050B08:
 /* 2BF08 80050B08 0220202D */  daddu     $a0, $s1, $zero
 /* 2BF0C 80050B0C 82700018 */  lb        $s0, 0x18($s3)
-/* 2BF10 80050B10 0C013FAC */  jal       func_8004FEB0
+/* 2BF10 80050B10 0C013FAC */  jal       snd_BGMCmd_E9_SubTrackVolume
 /* 2BF14 80050B14 0260282D */   daddu    $a1, $s3, $zero
 /* 2BF18 80050B18 0220202D */  daddu     $a0, $s1, $zero
 /* 2BF1C 80050B1C 0260282D */  daddu     $a1, $s3, $zero
@@ -122,7 +122,7 @@ glabel func_80050970
 /* 2BF20 80050B20 24020060 */  addiu     $v0, $zero, 0x60
 /* 2BF24 80050B24 A22000D4 */  sb        $zero, 0xd4($s1)
 /* 2BF28 80050B28 A62200D4 */  sh        $v0, 0xd4($s1)
-/* 2BF2C 80050B2C 0C013FB4 */  jal       func_8004FED0
+/* 2BF2C 80050B2C 0C013FB4 */  jal       snd_BGMCmd_F6_TrackVolumeFade
 /* 2BF30 80050B30 A23000D6 */   sb       $s0, 0xd6($s1)
 .L80050B34:
 /* 2BF34 80050B34 26B50001 */  addiu     $s5, $s5, 1

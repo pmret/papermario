@@ -4,7 +4,9 @@
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then
     echo "Installing packages for Debian or derivative (apt)"
 
-    sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build || exit 1
+    # Add i386 arch for wine32
+    sudo dpkg --add-architecture i386
+    sudo apt install -y git python3 python3-pip python3-setuptools build-essential binutils-mips-linux-gnu zlib1g-dev libyaml-dev ninja-build wine32 || exit 1
     python3 -m pip install -U -r requirements.txt
 
     if [[ $1 == "--extra" ]]; then

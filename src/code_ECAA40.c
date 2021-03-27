@@ -1,3 +1,5 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_ECAA40", func_80240D40_ECAA40);
+#define NAMESPACE code_ECAA40
+
+#include "common/DeadUnk1.inc.c"

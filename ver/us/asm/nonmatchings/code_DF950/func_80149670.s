@@ -36,7 +36,7 @@ glabel func_80149670
 /* DFDE0 801496E0 8E040000 */  lw        $a0, ($s0)
 /* DFDE4 801496E4 92050008 */  lbu       $a1, 8($s0)
 /* DFDE8 801496E8 92060009 */  lbu       $a2, 9($s0)
-/* DFDEC 801496EC 0C015490 */  jal       func_80055240
+/* DFDEC 801496EC 0C015490 */  jal       snd_start_sound_with_shift
 /* DFDF0 801496F0 8607000A */   lh       $a3, 0xa($s0)
 .L801496F4:
 /* DFDF4 801496F4 2610001C */  addiu     $s0, $s0, 0x1c

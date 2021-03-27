@@ -40,7 +40,7 @@ glabel func_80240504_EE6AB4
 /* EE6B40 80240590 00000000 */  nop
 /* EE6B44 80240594 460C1303 */  div.s     $f12, $f2, $f12
 /* EE6B48 80240598 46200020 */  cvt.s.d   $f0, $f0
-/* EE6B4C 8024059C 0C00AD30 */  jal       func_8002B4C0
+/* EE6B4C 8024059C 0C00AD30 */  jal       dead_cos_rad
 /* EE6B50 802405A0 E7A00014 */   swc1     $f0, 0x14($sp)
 /* EE6B54 802405A4 46000021 */  cvt.d.s   $f0, $f0
 /* EE6B58 802405A8 46340002 */  mul.d     $f0, $f0, $f20
@@ -75,7 +75,7 @@ glabel func_80240504_EE6AB4
 /* EE6BCC 8024061C 00000000 */  nop
 /* EE6BD0 80240620 460C1303 */  div.s     $f12, $f2, $f12
 /* EE6BD4 80240624 46200020 */  cvt.s.d   $f0, $f0
-/* EE6BD8 80240628 0C00AD30 */  jal       func_8002B4C0
+/* EE6BD8 80240628 0C00AD30 */  jal       dead_cos_rad
 /* EE6BDC 8024062C E7A00020 */   swc1     $f0, 0x20($sp)
 /* EE6BE0 80240630 46000021 */  cvt.d.s   $f0, $f0
 /* EE6BE4 80240634 46340002 */  mul.d     $f0, $f0, $f20
@@ -115,7 +115,7 @@ glabel func_80240504_EE6AB4
 /* EE6C6C 802406BC 00000000 */  nop
 /* EE6C70 802406C0 460C1303 */  div.s     $f12, $f2, $f12
 /* EE6C74 802406C4 46200020 */  cvt.s.d   $f0, $f0
-/* EE6C78 802406C8 0C00AD30 */  jal       func_8002B4C0
+/* EE6C78 802406C8 0C00AD30 */  jal       dead_cos_rad
 /* EE6C7C 802406CC E7A00030 */   swc1     $f0, 0x30($sp)
 /* EE6C80 802406D0 3C030001 */  lui       $v1, 1
 /* EE6C84 802406D4 46000021 */  cvt.d.s   $f0, $f0

@@ -9,7 +9,7 @@ glabel osSpTaskStartGo
 /* 41028 80065C28 00000000 */   nop
 /* 4102C 80065C2C 1440FFFD */  bnez      $v0, .L80065C24
 /* 41030 80065C30 00000000 */   nop
-/* 41034 80065C34 0C01B1BC */  jal       osSpSetStatus
+/* 41034 80065C34 0C01B1BC */  jal       __osSpSetStatus
 /* 41038 80065C38 24040125 */   addiu    $a0, $zero, 0x125
 /* 4103C 80065C3C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 41040 80065C40 03E00008 */  jr        $ra

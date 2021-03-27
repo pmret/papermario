@@ -13,7 +13,7 @@ glabel func_8004DFD4
 /* 293F4 8004DFF4 AFB00010 */  sw        $s0, 0x10($sp)
 /* 293F8 8004DFF8 8E710074 */  lw        $s1, 0x74($s3)
 /* 293FC 8004DFFC 8E640078 */  lw        $a0, 0x78($s3)
-/* 29400 8004E000 0C0153DD */  jal       al_CopyWords
+/* 29400 8004E000 0C0153DD */  jal       snd_copy_words
 /* 29404 8004E004 0220282D */   daddu    $a1, $s1, $zero
 /* 29408 8004E008 8E63007C */  lw        $v1, 0x7c($s3)
 /* 2940C 8004E00C 8E22001C */  lw        $v0, 0x1c($s1)
@@ -59,7 +59,7 @@ glabel func_8004DFD4
 /* 29498 8004E098 A22200D4 */  sb        $v0, 0xd4($s1)
 /* 2949C 8004E09C 90620224 */  lbu       $v0, 0x224($v1)
 /* 294A0 8004E0A0 0240282D */  daddu     $a1, $s2, $zero
-/* 294A4 8004E0A4 0C013F4E */  jal       func_8004FD38
+/* 294A4 8004E0A4 0C013F4E */  jal       snd_BGMCmd_E6_MasterEffect
 /* 294A8 8004E0A8 A22200D5 */   sb       $v0, 0xd5($s1)
 /* 294AC 8004E0AC 26100001 */  addiu     $s0, $s0, 1
 .L8004E0B0:
@@ -69,7 +69,7 @@ glabel func_8004DFD4
 /* 294BC 8004E0BC 8E650084 */  lw        $a1, 0x84($s3)
 /* 294C0 8004E0C0 8E660088 */  lw        $a2, 0x88($s3)
 /* 294C4 8004E0C4 8E67008C */  lw        $a3, 0x8c($s3)
-/* 294C8 8004E0C8 0C014E5D */  jal       func_80053974
+/* 294C8 8004E0C8 0C014E5D */  jal       snd_initialize_fade
 /* 294CC 8004E0CC 2624002C */   addiu    $a0, $s1, 0x2c
 /* 294D0 8004E0D0 AE600080 */  sw        $zero, 0x80($s3)
 .L8004E0D4:

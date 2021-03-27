@@ -5,7 +5,7 @@ glabel func_802D74C0
 /* FBE70 802D74C0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* FBE74 802D74C4 24E2001E */  addiu     $v0, $a3, 0x1e
 /* FBE78 802D74C8 44820000 */  mtc1      $v0, $f0
-/* FBE7C 802D74CC 00000000 */  nop       
+/* FBE7C 802D74CC 00000000 */  nop
 /* FBE80 802D74D0 46800020 */  cvt.s.w   $f0, $f0
 /* FBE84 802D74D4 000717C2 */  srl       $v0, $a3, 0x1f
 /* FBE88 802D74D8 00E23821 */  addu      $a3, $a3, $v0

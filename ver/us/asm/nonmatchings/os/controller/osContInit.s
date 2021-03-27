@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel osContInit
-/* 3CF80 80061B80 3C028009 */  lui       $v0, %hi(__osContinitialized)
-/* 3CF84 80061B84 8C423DB0 */  lw        $v0, %lo(__osContinitialized)($v0)
+/* 3CF80 80061B80 3C028009 */  lui       $v0, %hi(D_80093DB0)
+/* 3CF84 80061B84 8C423DB0 */  lw        $v0, %lo(D_80093DB0)($v0)
 /* 3CF88 80061B88 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 3CF8C 80061B8C AFB40070 */  sw        $s4, 0x70($sp)
 /* 3CF90 80061B90 0080A021 */  addu      $s4, $a0, $zero
@@ -21,9 +21,9 @@ glabel osContInit
 /* 3CFC0 80061BC0 00001021 */   addu     $v0, $zero, $zero
 .L80061BC4:
 /* 3CFC4 80061BC4 24020001 */  addiu     $v0, $zero, 1
-/* 3CFC8 80061BC8 3C018009 */  lui       $at, %hi(__osContinitialized)
+/* 3CFC8 80061BC8 3C018009 */  lui       $at, %hi(D_80093DB0)
 /* 3CFCC 80061BCC 0C0198A8 */  jal       osGetTime
-/* 3CFD0 80061BD0 AC223DB0 */   sw       $v0, %lo(__osContinitialized)($at)
+/* 3CFD0 80061BD0 AC223DB0 */   sw       $v0, %lo(D_80093DB0)($at)
 /* 3CFD4 80061BD4 00409021 */  addu      $s2, $v0, $zero
 /* 3CFD8 80061BD8 00609821 */  addu      $s3, $v1, $zero
 /* 3CFDC 80061BDC 56400022 */  bnel      $s2, $zero, .L80061C68

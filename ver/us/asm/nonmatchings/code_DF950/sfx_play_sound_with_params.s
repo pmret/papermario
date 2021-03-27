@@ -80,7 +80,7 @@ glabel _sfx_play_sound
 .L80149BC8:
 /* E02C8 80149BC8 30C600FF */  andi      $a2, $a2, 0xff
 /* E02CC 80149BCC 00093C00 */  sll       $a3, $t1, 0x10
-/* E02D0 80149BD0 0C015490 */  jal       func_80055240
+/* E02D0 80149BD0 0C015490 */  jal       snd_start_sound_with_shift
 /* E02D4 80149BD4 00073C03 */   sra      $a3, $a3, 0x10
 .L80149BD8:
 /* E02D8 80149BD8 8FBF0010 */  lw        $ra, 0x10($sp)

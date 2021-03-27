@@ -6,7 +6,7 @@ glabel func_80240000_EA6FD0
 /* EA6FD4 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* EA6FD8 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* EA6FDC 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* EA6FE0 80240010 0C0B53A3 */  jal       func_802D4E8C
+/* EA6FE0 80240010 0C0B53A3 */  jal       dead_get_variable
 /* EA6FE4 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* EA6FE8 80240018 28430027 */  slti      $v1, $v0, 0x27
 /* EA6FEC 8024001C 3C020019 */  lui       $v0, 0x19

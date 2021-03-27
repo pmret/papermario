@@ -115,7 +115,7 @@ glabel L8014A698_E0D98
 /* E0DB4 8014A6B4 080529E8 */  j         L8014A7A0_E0EA0
 /* E0DB8 8014A6B8 A6000000 */   sh       $zero, ($s0)
 .L8014A6BC:
-/* E0DBC 8014A6BC 0C015635 */  jal       func_800558D4
+/* E0DBC 8014A6BC 0C015635 */  jal       snd_load_song
 /* E0DC0 8014A6C0 0240282D */   daddu    $a1, $s2, $zero
 /* E0DC4 8014A6C4 3403FFFF */  ori       $v1, $zero, 0xffff
 /* E0DC8 8014A6C8 0062182B */  sltu      $v1, $v1, $v0

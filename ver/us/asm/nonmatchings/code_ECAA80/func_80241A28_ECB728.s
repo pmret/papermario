@@ -5,7 +5,7 @@ glabel func_80241A28_ECB728
 /* ECB728 80241A28 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* ECB72C 80241A2C AFBF0010 */  sw        $ra, 0x10($sp)
 /* ECB730 80241A30 8C82000C */  lw        $v0, 0xc($a0)
-/* ECB734 80241A34 0C0B53A3 */  jal       func_802D4E8C
+/* ECB734 80241A34 0C0B53A3 */  jal       dead_get_variable
 /* ECB738 80241A38 8C450000 */   lw       $a1, ($v0)
 /* ECB73C 80241A3C 0040182D */  daddu     $v1, $v0, $zero
 /* ECB740 80241A40 10600012 */  beqz      $v1, .L80241A8C

@@ -83,7 +83,7 @@ glabel func_8004EC68
 /* 2A184 8004ED84 10400005 */  beqz      $v0, .L8004ED9C
 /* 2A188 8004ED88 0220102D */   daddu    $v0, $s1, $zero
 /* 2A18C 8004ED8C 0280202D */  daddu     $a0, $s4, $zero
-/* 2A190 8004ED90 0C013FB4 */  jal       func_8004FED0
+/* 2A190 8004ED90 0C013FB4 */  jal       snd_BGMCmd_F6_TrackVolumeFade
 /* 2A194 8004ED94 0200282D */   daddu    $a1, $s0, $zero
 /* 2A198 8004ED98 0220102D */  daddu     $v0, $s1, $zero
 .L8004ED9C:
@@ -113,7 +113,7 @@ glabel func_8004EC68
 /* 2A1F0 8004EDF0 10400005 */  beqz      $v0, .L8004EE08
 /* 2A1F4 8004EDF4 0220102D */   daddu    $v0, $s1, $zero
 /* 2A1F8 8004EDF8 0280202D */  daddu     $a0, $s4, $zero
-/* 2A1FC 8004EDFC 0C013FB4 */  jal       func_8004FED0
+/* 2A1FC 8004EDFC 0C013FB4 */  jal       snd_BGMCmd_F6_TrackVolumeFade
 /* 2A200 8004EE00 0200282D */   daddu    $a1, $s0, $zero
 /* 2A204 8004EE04 0220102D */  daddu     $v0, $s1, $zero
 .L8004EE08:

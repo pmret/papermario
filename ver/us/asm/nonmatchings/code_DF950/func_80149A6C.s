@@ -15,7 +15,7 @@ glabel func_80149A6C
 /* E0194 80149A94 16000004 */  bnez      $s0, .L80149AA8
 /* E0198 80149A98 AC820000 */   sw       $v0, ($a0)
 /* E019C 80149A9C 8C840004 */  lw        $a0, 4($a0)
-/* E01A0 80149AA0 0C0154F0 */  jal       func_800553C0
+/* E01A0 80149AA0 0C0154F0 */  jal       snd_stop_sound
 /* E01A4 80149AA4 00000000 */   nop
 .L80149AA8:
 /* E01A8 80149AA8 8FBF0014 */  lw        $ra, 0x14($sp)

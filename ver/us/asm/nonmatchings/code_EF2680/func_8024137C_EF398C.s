@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802453C8_EF79D8
+.word L802414B4_EF3AC4, L802414C4_EF3AD4, L802414DC_EF3AEC, L802414EC_EF3AFC, L8024156C_EF3B7C, L8024156C_EF3B7C, L8024156C_EF3B7C, L8024156C_EF3B7C, L8024156C_EF3B7C, L8024156C_EF3B7C, L80241504_EF3B14, L80241514_EF3B24, L8024152C_EF3B3C, L80241544_EF3B54, L8024155C_EF3B6C, 0
+
+.section .text
+
 glabel func_8024137C_EF398C
 /* EF398C 8024137C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* EF3990 80241380 AFB50044 */  sw        $s5, 0x44($sp)
@@ -18,7 +25,7 @@ glabel func_8024137C_EF398C
 /* EF39C0 802413B0 00A0882D */   daddu    $s1, $a1, $zero
 /* EF39C4 802413B4 02A0202D */  daddu     $a0, $s5, $zero
 /* EF39C8 802413B8 8E050000 */  lw        $a1, ($s0)
-/* EF39CC 802413BC 0C0B53A3 */  jal       func_802D4E8C
+/* EF39CC 802413BC 0C0B53A3 */  jal       dead_get_variable
 /* EF39D0 802413C0 0040A02D */   daddu    $s4, $v0, $zero
 /* EF39D4 802413C4 AFA00010 */  sw        $zero, 0x10($sp)
 /* EF39D8 802413C8 8E4300D0 */  lw        $v1, 0xd0($s2)

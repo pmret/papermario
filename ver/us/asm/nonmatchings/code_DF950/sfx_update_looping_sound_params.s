@@ -40,7 +40,7 @@ glabel sfx_update_looping_sound_params
 /* DFEB8 801497B8 8607000A */  lh        $a3, 0xa($s0)
 /* DFEBC 801497BC 8E040000 */  lw        $a0, ($s0)
 /* DFEC0 801497C0 92050008 */  lbu       $a1, 8($s0)
-/* DFEC4 801497C4 0C0154CC */  jal       func_80055330
+/* DFEC4 801497C4 0C0154CC */  jal       snd_adjust_sound_with_shift
 /* DFEC8 801497C8 26520001 */   addiu    $s2, $s2, 1
 .L801497CC:
 /* DFECC 801497CC 2610001C */  addiu     $s0, $s0, 0x1c

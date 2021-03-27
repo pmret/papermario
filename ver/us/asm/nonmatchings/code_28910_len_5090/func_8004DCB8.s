@@ -16,7 +16,7 @@ glabel func_8004DCB8
 /* 290E4 8004DCE4 8E540010 */  lw        $s4, 0x10($s2)
 /* 290E8 8004DCE8 12200045 */  beqz      $s1, .L8004DE00
 /* 290EC 8004DCEC 0000982D */   daddu    $s3, $zero, $zero
-/* 290F0 8004DCF0 0C0135E5 */  jal       func_8004D794
+/* 290F0 8004DCF0 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 290F4 8004DCF4 0220202D */   daddu    $a0, $s1, $zero
 /* 290F8 8004DCF8 0040802D */  daddu     $s0, $v0, $zero
 /* 290FC 8004DCFC 52000041 */  beql      $s0, $zero, .L8004DE04
@@ -69,7 +69,7 @@ glabel func_8004DCB8
 /* 291A8 8004DDA8 00451021 */  addu      $v0, $v0, $a1
 /* 291AC 8004DDAC 0100282D */  daddu     $a1, $t0, $zero
 /* 291B0 8004DDB0 A0430070 */  sb        $v1, 0x70($v0)
-/* 291B4 8004DDB4 0C0153DD */  jal       al_CopyWords
+/* 291B4 8004DDB4 0C0153DD */  jal       snd_copy_words
 /* 291B8 8004DDB8 AE000020 */   sw       $zero, 0x20($s0)
 /* 291BC 8004DDBC 16A00012 */  bnez      $s5, .L8004DE08
 /* 291C0 8004DDC0 0260102D */   daddu    $v0, $s3, $zero

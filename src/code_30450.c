@@ -22,7 +22,7 @@ void func_80055050(void) {
 
 INCLUDE_ASM(void, "code_30450", func_80055068, u32 arg0);
 
-void func_80055110(UnkAlA9C* arg0) {
+void func_80055110(BGMPlayer* arg0) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
@@ -37,88 +37,88 @@ void func_80055110(UnkAlA9C* arg0) {
 
 INCLUDE_ASM(s32, "code_30450", func_8005513C);
 
-void func_800551E0(s32 arg0, u8 arg1, s8 arg2) {
-    UnkAl6CC* sym = D_8009A640;
-    s16 a1temp = arg1 * 256;
+void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
+    SoundManager* sym = D_8009A640;
+    s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
         a1temp |= 0xFF;
     }
 
-    if (arg2 < 0) {
-        arg2 = 0x7F;
+    if (pan < 0) {
+        pan = 0x7F;
     }
 
-    func_8004B6D8(sym, arg0, a1temp, 0, arg2);
+    snd_enqueue_sfx_event(sym, soundID, a1temp, 0, pan);
 }
 
-void func_80055240(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
-    UnkAl6CC* sym = D_8009A640;
-    s16 a1temp = arg1 * 256;
+void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
+    SoundManager* sym = D_8009A640;
+    s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
         a1temp |= 0xFF;
     }
 
-    if (arg2 < 0) {
-        arg2 = 0x7F;
+    if (pan < 0) {
+        pan = 0x7F;
     }
 
-    if (arg3 > 0x960) {
-        arg3 = 0x960;
-    } else if (arg3 < -0x960) {
-        arg3 = -0x960;
+    if (pitchShift > 0x960) {
+        pitchShift = 0x960;
+    } else if (pitchShift < -0x960) {
+        pitchShift = -0x960;
     }
 
-    func_8004B6D8(sym, arg0, a1temp, arg3, arg2);
+    snd_enqueue_sfx_event(sym, soundID, a1temp, pitchShift, pan);
 }
 
-void func_800552D0(s32 arg0, u8 arg1, s8 arg2) {
-    UnkAl6CC* sym = D_8009A640;
-    s16 a1temp = arg1 * 256;
+void snd_adjust_sound(s32 soundID, u8 volume, s8 pan) {
+    SoundManager* sym = D_8009A640;
+    s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
         a1temp |= 0xFF;
     }
 
-    if (arg2 < 0) {
-        arg2 = 0x7F;
+    if (pan < 0) {
+        pan = 0x7F;
     }
 
-    func_8004B6D8(sym, arg0 | 0x1000, a1temp, 0, arg2);
+    snd_enqueue_sfx_event(sym, soundID | 0x1000, a1temp, 0, pan);
 }
 
-void func_80055330(s32 arg0, u8 arg1, s8 arg2, s16 arg3) {
-    UnkAl6CC* sym = D_8009A640;
-    s16 a1temp = arg1 * 256;
+void snd_adjust_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
+    SoundManager* sym = D_8009A640;
+    s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
         a1temp |= 0xFF;
     }
 
-    if (arg2 < 0) {
-        arg2 = 0x7F;
+    if (pan < 0) {
+        pan = 0x7F;
     }
 
-    if (arg3 > 0x960) {
-        arg3 = 0x960;
-    } else if (arg3 < -0x960) {
-        arg3 = -0x960;
+    if (pitchShift > 0x960) {
+        pitchShift = 0x960;
+    } else if (pitchShift < -0x960) {
+        pitchShift = -0x960;
     }
 
-    func_8004B6D8(sym, arg0 | 0x1000, a1temp, arg3, arg2);
+    snd_enqueue_sfx_event(sym, soundID | 0x1000, a1temp, pitchShift, pan);
 }
 
-void func_800553C0(s32 arg0) {
-    func_8004B6D8(D_8009A640, arg0 | 0x8000, 0, 0, 0);
+void snd_stop_sound(s32 soundID) {
+    snd_enqueue_sfx_event(D_8009A640, soundID | 0x8000, 0, 0, 0);
 }
 
 void func_800553F4(void) {
     D_8009A640->unk_168 = 1;
 }
 
-void func_80055408(s32 arg0, s16 arg1, s16 arg2, s32 arg3) {
-    func_8004B6D8(D_8009A640, arg0, arg1, arg2, arg3);
+void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
+    snd_enqueue_sfx_event(D_8009A640, soundID, volume, pitchShift, pan);
 }
 
 s32 func_80055448(s32 arg0) {
@@ -278,7 +278,7 @@ s32 func_80055848(s32 arg0) {
     return phi_v1;
 }
 
-INCLUDE_ASM(s32, "code_30450", func_800558D4);
+INCLUDE_ASM(s32, "code_30450", snd_load_song);
 
 INCLUDE_ASM(s32, "code_30450", func_8005591C);
 

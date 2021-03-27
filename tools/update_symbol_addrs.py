@@ -190,6 +190,37 @@ def write_new_symbol_addrs():
 read_ignores()
 scan_map()
 read_symbol_addrs()
+
+# chicken scratch cod to print out new / renamed symbols
+# with open("tools/new_syms.txt") as f:
+#     new_syms = f.readlines()
+
+# new_sym_dict = {}
+# for sym_line in new_syms:
+#     sym_line = sym_line.strip()
+#     if sym_line:
+#         name, rest = sym_line.split(" = ")
+#         vram = int(rest.split(";")[0], 0)
+#         new_sym_dict[vram] = name
+
+# renames = []
+# adds = []
+# for addr in new_sym_dict:
+#     found = False
+#     for thing in symbol_addrs:
+#         if thing[1] == addr and not thing[0].startswith("func_") and not thing[0].startswith("D_"):
+#             if new_sym_dict[addr] != thing[0]:
+#                 renames.append(f"{thing[0]} -> {new_sym_dict[addr]}")
+#             found = True
+#             break
+#     if not found:
+#         adds.append(f"{new_sym_dict[addr]} = {addr:X}")
+
+# for r in renames:
+#     print(r)
+# for a in adds:
+#     print(a)
+
 read_elf()
 reconcile_symbols()
 write_new_symbol_addrs()

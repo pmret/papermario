@@ -1,3 +1,9 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_EC2200", func_80240000_EC2200);
+#define NAMESPACE code_EC2200
+
+const char* ascii_EC7170 = "flo_09";
+const char* ascii_EC7178 = "flo_22";
+const char* ascii_EC7180 = "flo_18";
+
+#include "common/DeadUnk1.inc.c"

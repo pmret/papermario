@@ -19,7 +19,7 @@ glabel func_8004DB4C
 /* 28F84 8004DB84 2C422617 */  sltiu     $v0, $v0, 0x2617
 /* 28F88 8004DB88 50400034 */  beql      $v0, $zero, .L8004DC5C
 /* 28F8C 8004DB8C 24120004 */   addiu    $s2, $zero, 4
-/* 28F90 8004DB90 0C0135E5 */  jal       func_8004D794
+/* 28F90 8004DB90 0C0135E5 */  jal       snd_get_player_with_song_name
 /* 28F94 8004DB94 0200202D */   daddu    $a0, $s0, $zero
 /* 28F98 8004DB98 0040282D */  daddu     $a1, $v0, $zero
 /* 28F9C 8004DB9C 50A0002F */  beql      $a1, $zero, .L8004DC5C
