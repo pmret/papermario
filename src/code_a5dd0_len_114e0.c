@@ -212,7 +212,7 @@ typedef struct GameMode {
     /* 0x14 */ UNK_FUN_PTR(unk_14);
 } GameMode; // size = 0x18
 
-extern GameMode gMainGameState[2];
+extern GameMode gMainGameState[2]; // TODO rename
 
 // regalloc?
 #ifndef NON_MATCHING
@@ -270,15 +270,47 @@ void* _set_game_mode(s32 i, GameMode* arg0) {
     return gameMode;
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112D84);
+void func_80112D84(s32 i, void* arg1) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112DD4);
+    ASSERT(i < 2);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112DFC);
+    gameMode->unk_14 = arg1;
+    gameMode->flags |= 0x20;
+    if (arg1 == NULL) {
+        gameMode->unk_14 = &NOP_state;
+    }
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112E24);
+void func_80112DD4(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112E4C);
+    gameMode->flags |= 4;
+}
+
+void func_80112DFC(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags |= 8;
+}
+
+void func_80112E24(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags &= ~0x1C;
+}
+
+void func_80112E4C(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags &= ~0x0C;
+    gameMode->flags |= 0x10;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", step_current_game_mode);
 
