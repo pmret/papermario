@@ -25,7 +25,7 @@ void begin_state_intro(void) {
             D_800A0964 = 0;
 
             // hos_05 (Star Sanctuary)
-            (*gameStatus)->areaID = 5;
+            (*gameStatus)->areaID = AREA_HOS;
             (*gameStatus)->mapID = 5;
             (*gameStatus)->entryID = 3;
             break;
@@ -42,7 +42,7 @@ void begin_state_intro(void) {
             D_800A0964 = 0;
 
             // hos_04 (Outside the Sanctuary)
-            (*gameStatus)->areaID = 5;
+            (*gameStatus)->areaID = AREA_HOS;
             (*gameStatus)->mapID = 4;
             (*gameStatus)->entryID = 4;
             break;

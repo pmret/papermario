@@ -42,6 +42,7 @@
 #define MAX_SHADOWS 60
 #define MAX_ENTITIES 30
 #define MAX_DYNAMIC_ENTITIES 16
+#define MAX_TEX_PANNERS 16
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f

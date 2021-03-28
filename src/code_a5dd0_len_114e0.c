@@ -1,4 +1,38 @@
 #include "common.h"
+#include "ld_addrs.h"
+
+typedef struct Fog {
+    /* 0x00 */ s32 enabled;
+    /* 0x04 */ s32 r;
+    /* 0x08 */ s32 g;
+    /* 0x0C */ s32 b;
+    /* 0x10 */ s32 a;
+    /* 0x14 */ s32 startDistance;
+    /* 0x18 */ s32 endDistance;
+} Fog; // size = 0x1C
+
+typedef struct RenderTaskEntry {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ struct Model* model;
+    /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
+} RenderTaskEntry; // size = 0x10
+
+typedef Model* SmallModelList[4];
+extern SmallModelList* D_801512E0;
+
+extern s32 D_8015132C;
+extern Fog* wFog;
+
+extern s32 D_801533B0; // num render task entries?
+extern s32 D_801533AC;
+extern s32 D_8014C188[]; // render mode -> distance map?
+extern RenderTaskEntry* D_801533A0[];
+
+extern s32 texPannerMainU[MAX_TEX_PANNERS];
+extern s32 texPannerMainV[MAX_TEX_PANNERS];
+extern s32 texPannerAuxU[MAX_TEX_PANNERS];
+extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
@@ -69,7 +103,15 @@ ShadowList* get_shadow_list(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110678);
 
-INCLUDE_ASM(u32, "code_a5dd0_len_114e0", get_entity_type, s32 arg0);
+u32 get_entity_type(s32 index) {
+    Entity* entity = get_entity_by_index(index);
+
+    if (entity == NULL) {
+        return -1;
+    } else {
+        return entity->staticData->entityType;
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity);
 
@@ -91,7 +133,25 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BCC);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BF8);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", load_area_specific_entity_data);
+#ifdef NON_MATCHING
+#define AREA_SPECIFIC_ENTITY_VRAM &entity_default_VRAM
+#else
+#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
+#endif
+
+void load_area_specific_entity_data(void) {
+    if (D_8015132C == 0) {
+        if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
+            dma_copy(&entity_jan_iwa_ROM_START, &entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
+            dma_copy(&entity_sbk_omo_ROM_START, &entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        } else {
+            dma_copy(&entity_default_ROM_START, &entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        }
+
+        D_8015132C = 1;
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", clear_entity_data);
 
@@ -168,26 +228,141 @@ void NOP_state(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112B98);
 
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(struct GameMode*);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
+} GameMode; // size = 0x18
+
+extern GameMode gMainGameState[2]; // TODO rename
+
+// regalloc?
+#ifndef NON_MATCHING
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_next_game_mode);
+#else
+GameMode* set_next_game_mode(GameMode* arg0) {
+    GameMode* gameMode;
+    s32 i;
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", _set_game_mode);
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
+        gameMode = &gMainGameState[i];
+        if (gameMode->flags == 0) {
+            break;
+        }
+    }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112D84);
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112DD4);
+    gameMode->flags = 1 | 2;
+    gameMode->init = arg0->init;
+    gameMode->unk_08 = arg0->unk_08;
+    gameMode->render = arg0->render;
+    gameMode->unk_0C = NULL;
+    if (gameMode->init == NULL) gameMode->init = &NOP_state;
+    if (gameMode->step == NULL) gameMode->step = &NOP_state;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
+    if (gameMode->render == NULL) gameMode->render = &NOP_state;
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112DFC);
+    gameMode->renderAux = &NOP_state;
+    gameMode->init();
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112E24);
+    return gameMode;
+}
+#endif
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112E4C);
+GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
 
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
+
+    gameMode->flags = 1 | 2;
+    gameMode->init = arg0->init;
+    gameMode->step = arg0->step;
+    gameMode->render = arg0->render;
+    gameMode->unk_0C = NULL;
+    if (gameMode->init == NULL) gameMode->init = &NOP_state;
+    if (gameMode->step == NULL) gameMode->step = &NOP_state;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
+    if (gameMode->render == NULL) gameMode->render = &NOP_state;
+
+    gameMode->renderAux = &NOP_state;
+    gameMode->init();
+
+    return gameMode;
+}
+
+void func_80112D84(s32 i, void (*fn)(void)) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
+
+    gameMode->renderAux = fn;
+    gameMode->flags |= 0x20;
+    if (fn == NULL) {
+        gameMode->renderAux = &NOP_state;
+    }
+}
+
+void func_80112DD4(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags |= 4;
+}
+
+void func_80112DFC(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags |= 8;
+}
+
+void func_80112E24(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags &= ~0x1C;
+}
+
+void func_80112E4C(s32 i) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    gameMode->flags &= ~0x0C;
+    gameMode->flags |= 0x10;
+}
+
+#ifndef NON_MATCHING
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", step_current_game_mode);
+#else
+void step_current_game_mode(void) {
+    GameMode* gameMode;
+    s32 i;
 
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
+        gameMode = &gMainGameState[i];
+        if (gameMode->flags != 0 && !(gameMode->flags & 4) && !(gameMode->flags & 8)) {
+            gameMode->flags &= ~2;
+            gameMode->step(gameMode);
+        }
+    }
+
+    //return i;
+}
+#endif
+
+// similar to step_current_game_mode, but calls unk_0C
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112EEC);
 
+// similar to step_current_game_mode, but calls render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", render_ui);
 
+// calls renderAux and render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112FC4);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", appendGfx_model);
@@ -255,39 +430,108 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B5D0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B660);
 
-INCLUDE_ASM(void, "code_a5dd0_len_114e0", clone_model, u16 srcModelID, u16 newModelID);
+void clone_model(u16 srcModelID, u16 newModelID) {
+    ModelList** modelList = &gCurrentModelListPtr;
+    Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));
+    Model* newModel;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(**modelList); i++) {
+        Model* model = (**modelList)[i];
+
+        if (model == NULL) {
+            break;
+        }
+    }
+
+    (**modelList)[i] = newModel = heap_malloc(sizeof(Model));
+    *newModel = *srcModel;
+    newModel->modelID = newModelID;
+}
 
 INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B950);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BAE8);
+void func_8011BAE8(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", enable_world_fog);
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
+        Model* model = (*gCurrentModelListPtr)[i];
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", disable_world_fog);
+        if (model != NULL) {
+            model->flags &= ~0x0400;
+        }
+    }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_world_fog_dist);
+    for (i = 0; i < ARRAY_COUNT(*D_801512E0); i++) {
+        Model* model = (*D_801512E0)[i];
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_world_fog_color);
+        if (model != NULL) {
+            model->flags &= ~0x0400;
+        }
+    }
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", is_world_fog_enabled);
+void enable_world_fog(void) {
+    wFog->enabled = TRUE;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_world_fog_distance);
+void disable_world_fog(void) {
+    wFog->enabled = FALSE;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_world_fog_color);
+void set_world_fog_dist(s32 start, s32 end) {
+    wFog->startDistance = start;
+    wFog->endDistance = end;
+}
+
+void set_world_fog_color(s32 r, s32 g, s32 b, s32 a) {
+    wFog->r = r;
+    wFog->g = g;
+    wFog->b = b;
+    wFog->a = a;
+}
+
+s32 is_world_fog_enabled(void) {
+    return wFog->enabled;
+}
+
+void get_world_fog_distance(s32* start, s32* end) {
+    Fog** fog = &wFog;
+
+    *start = (*fog)->startDistance;
+    *end = (*fog)->endDistance;
+}
+
+void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
+    Fog** fog = &wFog;
+
+    *r = (*fog)->r;
+    *g = (*fog)->g;
+    *b = (*fog)->b;
+    *a = (*fog)->a;
+}
 
 void set_tex_panner(Model* model, s8 texPannerID) {
     model->texPannerID = texPannerID;
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_main_pan_u);
+void set_main_pan_u(s32 texPannerID, s32 value) {
+    texPannerMainU[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_main_pan_v);
+void set_main_pan_v(s32 texPannerID, s32 value) {
+    texPannerMainV[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_aux_pan_u);
+void set_aux_pan_u(s32 texPannerID, s32 value) {
+    texPannerAuxU[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_aux_pan_v);
+void set_aux_pan_v(s32 texPannerID, s32 value) {
+    texPannerAuxV[texPannerID] = value;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BC7C);
 
@@ -330,8 +574,8 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011CFBC);
 
-void func_8011D72C(Gfx** arg0, s32 treeIndex) {
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex & 0xFFFF));
+void func_8011D72C(Gfx** arg0, u16 treeIndex) {
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
     Model copied = *model;
     Gfx** gfxPos = &gMasterGfxPos;
     Gfx* oldGfxPos;
@@ -362,6 +606,23 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D890);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D8D0);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", queue_render_task);
+RenderTaskEntry* queue_render_task(RenderTask* task) {
+    RenderTaskEntry* entry = D_801533A0[D_801533AC];
+
+    ASSERT(D_801533B0 < 0x100);
+
+    entry = &entry[D_801533B0++];
+
+    entry->unk_00 = 1;
+    if (task->renderMode == 0x2D) {
+        entry->unk_00 = 0x21;
+    }
+
+    entry->model = task->model;
+    entry->fpBuildDL = task->fpBuildDL;
+    entry->unk_04 = D_8014C188[task->renderMode] - task->distance;
+
+    return entry;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D9B8);

@@ -116,7 +116,6 @@ void clear_script_list(void) {
 }
 
 void init_script_list(void) {
-
     if (gGameStatusPtr->isBattle == 0) {
         gCurrentScriptListPtr = &gWorldScriptList;
         gMapVars = gWorldMapVars;
