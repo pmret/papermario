@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
@@ -91,7 +92,25 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BCC);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BF8);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", load_area_specific_entity_data);
+#ifdef NON_MATCHING
+#define AREA_SPECIFIC_ENTITY_VRAM &entity_default_VRAM
+#else
+#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
+#endif
+
+void load_area_specific_entity_data(void) {
+    if (D_8015132C == 0) {
+        if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
+            dma_copy(&entity_jan_iwa_ROM_START, &entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
+            dma_copy(&entity_sbk_omo_ROM_START, &entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        } else {
+            dma_copy(&entity_default_ROM_START, &entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+        }
+
+        D_8015132C = 1;
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", clear_entity_data);
 

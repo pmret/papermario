@@ -738,10 +738,10 @@ typedef struct Model {
     /* 0x14 */ char unk_14[4];
     /* 0x18 */ struct Matrix4s specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ f32 center[3]; /* Created by retype action */
+    /* 0x98 */ f32 center[3];
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ u8 renderMode; /* Created by retype action */
+    /* 0xA6 */ u8 renderMode;
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ u8 unk_A9;
@@ -770,7 +770,7 @@ typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
-    /* 0x010 */ s8* printbuf; /* Created by retype action */
+    /* 0x010 */ s8* printbuf;
     /* 0x014 */ char unk_14[1344];
 } PrintHandle; // size = 0x554
 
@@ -978,7 +978,7 @@ typedef struct GameStatus {
     /* 0x083 */ s8 unk_83;
     /* 0x084 */ s8 unk_84;
     /* 0x085 */ char unk_85;
-    /* 0x086 */ s16 areaID; /* Created by retype action */
+    /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
     /* 0x08C */ s16 mapID;
@@ -1278,7 +1278,7 @@ typedef struct PlayerPathElement {
 
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
-    /* 0x04 */ Vec3f pos; /* Created by retype action */
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ struct Matrix4s* mtx;
@@ -1478,20 +1478,20 @@ typedef struct Crash {
     /* 0x000 */ char unk_00[20];
     /* 0x014 */ s32 threadID;
     /* 0x018 */ char unk_18[12];
-    /* 0x024 */ s64 AT; /* Created by retype action */
-    /* 0x02C */ s64 V0; /* Created by retype action */
-    /* 0x034 */ s64 V1; /* Created by retype action */
-    /* 0x03C */ s64 A0; /* Created by retype action */
-    /* 0x044 */ s64 A1; /* Created by retype action */
-    /* 0x04C */ s64 A2; /* Created by retype action */
+    /* 0x024 */ s64 AT;
+    /* 0x02C */ s64 V0;
+    /* 0x034 */ s64 V1;
+    /* 0x03C */ s64 A0;
+    /* 0x044 */ s64 A1;
+    /* 0x04C */ s64 A2;
     /* 0x054 */ s64 A3;
     /* 0x05C */ char unk_5C[16];
     /* 0x06C */ s32 T2;
     /* 0x070 */ char unk_70[168];
-    /* 0x118 */ s32 SR; /* Created by retype action */
+    /* 0x118 */ s32 SR;
     /* 0x11C */ s32 PC;
     /* 0x120 */ s32 interrupt;
-    /* 0x124 */ s32 VA; /* Created by retype action */
+    /* 0x124 */ s32 VA;
     /* 0x128 */ char unk_128[208];
 } Crash; // size = 0x1F8
 
