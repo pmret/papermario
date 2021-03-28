@@ -26,8 +26,8 @@ if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
     # Upgrade existing packages (note: no --noconfirm)
     sudo pacman -Syu || exit 1
 
-    # Install dependencies (note: multilib must be enabled in /etc/pacman.conf)
-    sudo pacman -S --noconfirm --needed git python python-pip python-setuptools base-devel zlib libyaml ninja wine || exit 1
+    # Install dependencies
+    sudo pacman -S --noconfirm --needed git python python-pip python-setuptools base-devel zlib libyaml ninja || exit 1
     python3 -m pip install -U -r requirements.txt
 
     # Install binutils if required
