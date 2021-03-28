@@ -36,7 +36,7 @@ ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D5EE0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    MusicPlayer* musicPlayers = gMusicPlayers;
+    MusicSettings* musicPlayers = gMusicPlayers;
 
     (&musicPlayers[get_variable(script, *args++)])->flags |= 0x2;
     return ApiStatus_DONE2;

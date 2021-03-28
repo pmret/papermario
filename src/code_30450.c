@@ -390,16 +390,17 @@ INCLUDE_ASM(s32, "code_30450", func_80055C94);
 
 INCLUDE_ASM(s32, "code_30450", func_80055CC4);
 
+s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
 // We need to figure out what currentTrackData is a list of
 #ifdef NON_MATCHING
-s32 func_80055CE8(s32 arg0, s32* arg1, BGMPlayer** player) {
+s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
     UnkAl19E0* temp_a3 = D_8009A5C0;
     s32 ret = 0;
 
-    if (arg0 == temp_a3->currentTrackData[0][2]) {
+    if (songName == temp_a3->currentTrackData[0][2]) {
         *arg1 = temp_a3->currentTrackData[0];
         *player = D_8009A664;
-    } else if (arg0 == temp_a3->currentTrackData[1][2]) {
+    } else if (songName == temp_a3->currentTrackData[1][2]) {
         *arg1 = temp_a3->currentTrackData[1];
         *player = D_8009A5FC;
     } else {
@@ -408,15 +409,15 @@ s32 func_80055CE8(s32 arg0, s32* arg1, BGMPlayer** player) {
     return ret;
 }
 #else
-INCLUDE_ASM(s32, "code_30450", func_80055CE8);
+INCLUDE_ASM(s32, "code_30450", func_80055CE8, s32 songName, s32* arg1, BGMPlayer** player);
 #endif
 
-s32 func_80055D38(s32 arg0, f32 arg1) {
+s32 func_80055D38(s32 songName, f32 arg1) {
     s32 ret;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
     if (ret == 0) {
         func_80050770(bgmPlayer, arg1);
@@ -425,12 +426,12 @@ s32 func_80055D38(s32 arg0, f32 arg1) {
     return ret;
 }
 
-s32 func_80055D8C(s32 arg0, s32 arg1) {
+s32 func_80055D8C(s32 songName, s32 arg1) {
     s32 ret;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
     if (ret == 0) {
         func_80050818(bgmPlayer, arg1);
@@ -439,12 +440,12 @@ s32 func_80055D8C(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 func_80055DDC(s32 arg0, s32 arg1) {
+s32 func_80055DDC(s32 songName, s32 arg1) {
     s32 ret;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
     if (ret == 0) {
         s32* temp_v0 = func_80055EB4(arg1);
@@ -459,12 +460,12 @@ s32 func_80055DDC(s32 arg0, s32 arg1) {
     return ret;
 }
 
-s32 func_80055E48(s32 arg0, s32 arg1) {
+s32 func_80055E48(s32 songName, s32 arg1) {
     s32 ret;
     s32 unkArg1;
     BGMPlayer* bgmPlayer;
 
-    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
 
     if (ret == 0) {
         s32* temp_v0 = func_80055EB4(arg1);

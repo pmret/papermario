@@ -343,7 +343,7 @@ typedef struct StaticEntityData {
     /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
-typedef struct MusicPlayer {
+typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
@@ -352,13 +352,13 @@ typedef struct MusicPlayer {
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 songName;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
-} MusicPlayer; // size = 0x30
+} MusicSettings; // size = 0x30
 
 typedef struct MenuIcon {
     /* 0x00 */ u32 flags;

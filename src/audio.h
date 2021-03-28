@@ -34,6 +34,14 @@ typedef struct UnkAl1 {
     /* 0x1A */ s16 unk_1A;
 } UnkAl1; // size unknown (currently 0x1C)
 
+typedef struct Fade {
+    /* 0x0 */ UnkField currentVolume;
+    /* 0x4 */ s32 fadeStep;
+    /* 0x8 */ s16 endVolume;
+    /* 0xA */ s16 fadeTime;
+    /* 0xC */ UnkFuncAl fpFadeCallback;
+} Fade; // size = 0x10
+
 typedef struct InstrumentCFG { // maybe same as UnkAlC?
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ u8 unk_02;
@@ -382,14 +390,6 @@ typedef struct UnkAl24 {
     /* 0x17 */ u8 unk_17;
 } UnkAl24; // size = 0x18;
 
-typedef struct Fade {
-    /* 0x0 */ UnkField currentVolume;
-    /* 0x4 */ s32 fadeStep;
-    /* 0x8 */ s16 endVolume;
-    /* 0xA */ s16 fadeTime;
-    /* 0xC */ UnkFuncAl fpFadeCallback;
-} Fade; // size = 0x10
-
 typedef struct BGMPlayer {
     /* 0x000 */ UnkAl19E0* data;
     /* 0x004 */ SoundManager* soundManager;
@@ -433,7 +433,7 @@ typedef struct BGMPlayer {
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x98];
     /* 0x204 */ s32 unk_204;
-    /* 0x208 */ s16 unk_208;
+    /* 0x208 */ u16 unk_208;
     /* 0x20A */ u16 unk_20A;
     /* 0x20C */ s16 unk_20C;
     /* 0x20E */ s16 unk_20E;

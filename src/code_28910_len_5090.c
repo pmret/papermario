@@ -442,9 +442,30 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_8005068C);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050770, BGMPlayer* player, f32 arg1);
+void func_80050770(BGMPlayer *player, f32 arg1) {
+    if (arg1 > 2.0) {
+        arg1 = 2.0f;
+    } else if (arg1 < 0.25) {
+        arg1 = 0.25f;
+    }
 
-INCLUDE_ASM(void, "code_28910_len_5090", func_80050818, BGMPlayer* player, s32 arg1);
+    player->unk_D0 = arg1;
+    player->unk_B0 = snd_bpm_to_tempo(player, player->unk_208);
+    player->unkFrequency = player->unk_B0 * 10;
+    player->unk_BC = 0;
+    player->unk_B8 = 0;
+    player->unk_B4 = 0;
+}
+
+void func_80050818(BGMPlayer* player, s32 arg1) {
+    if (arg1 > 1200) {
+        arg1 = 1200;
+    } else if (arg1 < -2400) {
+        arg1 = -2400;
+    }
+
+    player->unk_20E = arg1;
+}
 
 void func_8005083C(BGMPlayer* arg0, s32 arg1, s16 arg2, s8 arg3) {
     BGMPlayerTrack* temp_a1 = &arg0->unk_25C[arg1];

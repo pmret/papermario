@@ -292,8 +292,8 @@ extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicPlayer gMusicPlayers[4];
-extern MusicPlayer D_8014F6F0;
+extern MusicSettings gMusicPlayers[4];
+extern MusicSettings D_8014F6F0;
 
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
