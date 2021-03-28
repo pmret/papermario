@@ -12,6 +12,7 @@ typedef struct Fog {
 } Fog; // size = 0x1C
 
 extern s32 D_8015132C;
+extern Model** D_801512E0; // TODO: array, length 4
 extern Fog* wFog;
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
@@ -293,7 +294,25 @@ INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B950);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BAE8);
+void func_8011BAE8(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
+        Model* model = (*gCurrentModelListPtr)[i];
+
+        if (model != NULL) {
+            model->flags &= ~0x0400;
+        }
+    }
+
+    for (i = 0; i < 4; i++) { // TODO: ARRAY_COUNT(D_801512E0)
+        Model* model = D_801512E0[i];
+
+        if (model != NULL) {
+            model->flags &= ~0x0400;
+        }
+    }
+}
 
 void enable_world_fog(void) {
     wFog->enabled = TRUE;
