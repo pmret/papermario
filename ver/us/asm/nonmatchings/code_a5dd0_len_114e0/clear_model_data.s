@@ -86,8 +86,8 @@ glabel clear_model_data
 /* AC584 80115E84 3C028015 */  lui       $v0, %hi(D_80153248)
 /* AC588 80115E88 24423248 */  addiu     $v0, $v0, %lo(D_80153248)
 .L80115E8C:
-/* AC58C 80115E8C 3C018015 */  lui       $at, %hi(D_80153264)
-/* AC590 80115E90 AC223264 */  sw        $v0, %lo(D_80153264)($at)
+/* AC58C 80115E8C 3C018015 */  lui       $at, %hi(wFog)
+/* AC590 80115E90 AC223264 */  sw        $v0, %lo(wFog)($at)
 /* AC594 80115E94 3C028015 */  lui       $v0, %hi(gCurrentModelListPtr)
 /* AC598 80115E98 8C4212CC */  lw        $v0, %lo(gCurrentModelListPtr)($v0)
 /* AC59C 80115E9C 240400FF */  addiu     $a0, $zero, 0xff
@@ -152,8 +152,8 @@ glabel clear_model_data
 /* AC678 80115F78 3C058015 */  lui       $a1, %hi(D_80153328)
 /* AC67C 80115F7C 24A53328 */  addiu     $a1, $a1, %lo(D_80153328)
 /* AC680 80115F80 A0400000 */  sb        $zero, ($v0)
-/* AC684 80115F84 3C038015 */  lui       $v1, %hi(D_80153264)
-/* AC688 80115F88 8C633264 */  lw        $v1, %lo(D_80153264)($v1)
+/* AC684 80115F84 3C038015 */  lui       $v1, %hi(wFog)
+/* AC688 80115F88 8C633264 */  lw        $v1, %lo(wFog)($v1)
 /* AC68C 80115F8C 2402000A */  addiu     $v0, $zero, 0xa
 /* AC690 80115F90 AC620004 */  sw        $v0, 4($v1)
 /* AC694 80115F94 AC620008 */  sw        $v0, 8($v1)

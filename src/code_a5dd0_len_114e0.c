@@ -1,6 +1,19 @@
 #include "common.h"
 #include "ld_addrs.h"
 
+typedef struct Fog {
+    /* 0x00 */ s32 enabled;
+    /* 0x04 */ s32 r;
+    /* 0x08 */ s32 g;
+    /* 0x0C */ s32 b;
+    /* 0x10 */ s32 a;
+    /* 0x14 */ s32 startDistance;
+    /* 0x18 */ s32 endDistance;
+} Fog; // size = 0x1C
+
+extern s32 D_8015132C;
+extern Fog* wFog;
+
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_shadows);
@@ -282,19 +295,45 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B950);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BAE8);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", enable_world_fog);
+void enable_world_fog(void) {
+    wFog->enabled = TRUE;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", disable_world_fog);
+void disable_world_fog(void) {
+    wFog->enabled = FALSE;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_world_fog_dist);
+void set_world_fog_dist(s32 start, s32 end) {
+    wFog->startDistance = start;
+    wFog->endDistance = end;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_world_fog_color);
+void set_world_fog_color(s32 r, s32 g, s32 b, s32 a) {
+    wFog->r = r;
+    wFog->g = g;
+    wFog->b = b;
+    wFog->a = a;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", is_world_fog_enabled);
+s32 is_world_fog_enabled(void) {
+    return wFog->enabled;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_world_fog_distance);
+void get_world_fog_distance(s32* start, s32* end) {
+    Fog** fog = &wFog;
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_world_fog_color);
+    *start = (*fog)->startDistance;
+    *end = (*fog)->endDistance;
+}
+
+void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
+    Fog** fog = &wFog;
+
+    *r = (*fog)->r;
+    *g = (*fog)->g;
+    *b = (*fog)->b;
+    *a = (*fog)->a;
+}
 
 void set_tex_panner(Model* model, s8 texPannerID) {
     model->texPannerID = texPannerID;
