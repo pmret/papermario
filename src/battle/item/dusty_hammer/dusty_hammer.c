@@ -1,4 +1,5 @@
 #include "dusty_hammer.h"
+#include "ld_addrs.h"
 #include "battle/item/dusty_hammer/dusty_hammer.png.h"
 
 Vtx N(model)[] = {

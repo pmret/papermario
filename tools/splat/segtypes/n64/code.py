@@ -1,5 +1,6 @@
 import os
 import re
+from segtypes.n64.rgba16 import N64SegRgba16
 import sys
 from collections import OrderedDict
 from pathlib import Path, PurePath
@@ -9,6 +10,11 @@ from capstone import *
 from capstone.mips import *
 from segtypes.n64.ci4 import N64SegCi4
 from segtypes.n64.ci8 import N64SegCi8
+from segtypes.n64.i4 import N64SegI4
+from segtypes.n64.i8 import N64SegI8
+from segtypes.n64.ia4 import N64SegIa4
+from segtypes.n64.ia8 import N64SegIa8
+from segtypes.n64.ia16 import N64SegIa16
 from segtypes.n64.palette import N64SegPalette
 from segtypes.n64.segment import N64Segment
 from segtypes.segment import Segment
@@ -127,6 +133,18 @@ class Subsegment():
             return PaletteSubsegment
         elif typ == "rgba32":
             return RGBA32Subsegment
+        elif typ == "rgba16":
+            return RGBA16Subsegment
+        elif typ == "i4":
+            return I4Subsegment
+        elif typ == "i8":
+            return I8Subsegment
+        elif typ == "ia4":
+            return Ia4Subsegment
+        elif typ == "ia8":
+            return Ia8Subsegment
+        elif typ == "ia16":
+            return Ia16Subsegment
         elif typ == "linker":
             return LinkerSubsegment
         else:
@@ -291,6 +309,96 @@ class RGBA32Subsegment(Subsegment):
         image = img_bytes
 
         w = png.Writer(width, height, greyscale=False, alpha=True)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class RGBA16Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegRgba16.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=False, alpha=True)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class I4Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegI4.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=True, alpha=False)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class I8Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegI8.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=True, alpha=False)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class Ia4Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegIa4.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=True, alpha=True)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class Ia8Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegIa8.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=True, alpha=True)
+
+        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(generic_out_path, "wb") as f:
+            w.write_array(f, image)
+
+class Ia16Subsegment(Subsegment):
+    def should_run(self):
+        return super().should_run() or options.mode_active("img")
+
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        width, height = self.args
+        image = N64SegIa16.parse_image(img_bytes, width, height)
+
+        w = png.Writer(width, height, greyscale=True, alpha=True)
 
         Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
         with open(generic_out_path, "wb") as f:

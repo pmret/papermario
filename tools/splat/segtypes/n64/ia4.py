@@ -4,12 +4,13 @@ from math import ceil
 
 class N64SegIa4(N64SegRgba16):
     def png_writer(self):
-        return png.Writer(self.width, self.height, greyscale = True, alpha = True)
+        return png.Writer(self.width, self.height, greyscale=True, alpha=True)
 
-    def parse_image(self, data):
+    @staticmethod
+    def parse_image(data, width, height, flip_h=False, flip_v=False):
         img = bytearray()
 
-        for x, y, i in self.iter_image_indexes(0.5, 1):
+        for x, y, i in N64SegRgba16.iter_image_indexes(width, height, 0.5, 1, flip_h, flip_v):
             b = data[i]
 
             h = (b >> 4) & 0xF

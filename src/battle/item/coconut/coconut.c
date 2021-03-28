@@ -1,4 +1,5 @@
 #include "coconut.h"
+#include "ld_addrs.h"
 #include "battle/item/coconut/coconut.png.h"
 
 /// 32x32 square.

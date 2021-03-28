@@ -1,4 +1,5 @@
 #include "audio.h"
+#include "ld_addrs.h"
 
 void func_80052E30(u8 index) {
     UnkAl48* temp = &D_8009A5C0->unk_1320[index];
