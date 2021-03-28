@@ -208,7 +208,7 @@ typedef struct GameMode {
     /* 0x04 */ void (*init)(void);
     /* 0x08 */ void (*step)(struct GameMode*);
     /* 0x0C */ UNK_FUN_PTR(unk_0C);
-    /* 0x10 */ UNK_FUN_PTR(unk_10);
+    /* 0x10 */ void (*render)(void);
     /* 0x14 */ UNK_FUN_PTR(unk_14);
 } GameMode; // size = 0x18
 
@@ -234,12 +234,12 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     gameMode->flags = 1 | 2;
     gameMode->init = arg0->init;
     gameMode->unk_08 = arg0->unk_08;
-    gameMode->unk_10 = arg0->unk_10;
+    gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
     if (gameMode->init == NULL) gameMode->init= &NOP_state;
     if (gameMode->step == NULL) gameMode->step = &NOP_state;
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->unk_10 == NULL) gameMode->unk_10 = &NOP_state;
+    if (gameMode->render == NULL) gameMode->render = &NOP_state;
 
     gameMode->unk_14 = &NOP_state;
     gameMode->init();
@@ -257,12 +257,12 @@ void* _set_game_mode(s32 i, GameMode* arg0) {
     gameMode->flags = 1 | 2;
     gameMode->init = arg0->init;
     gameMode->step = arg0->step;
-    gameMode->unk_10 = arg0->unk_10;
+    gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
     if (gameMode->init == NULL) gameMode->init = &NOP_state;
     if (gameMode->step == NULL) gameMode->step = &NOP_state;
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->unk_10 == NULL) gameMode->unk_10 = &NOP_state;
+    if (gameMode->render == NULL) gameMode->render = &NOP_state;
 
     gameMode->unk_14 = &NOP_state;
     gameMode->init();
@@ -331,10 +331,13 @@ void step_current_game_mode(void) {
 }
 #endif
 
+// similar to step_current_game_mode, but calls unk_0C
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112EEC);
 
+// similar to step_current_game_mode, but calls render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", render_ui);
 
+// calls unk_14 and render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112FC4);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", appendGfx_model);
