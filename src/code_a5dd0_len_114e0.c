@@ -234,7 +234,7 @@ typedef struct GameMode {
     /* 0x08 */ void (*step)(struct GameMode*);
     /* 0x0C */ UNK_FUN_PTR(unk_0C);
     /* 0x10 */ void (*render)(void);
-    /* 0x14 */ UNK_FUN_PTR(unk_14);
+    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
 } GameMode; // size = 0x18
 
 extern GameMode gMainGameState[2]; // TODO rename
@@ -266,7 +266,7 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
     if (gameMode->render == NULL) gameMode->render = &NOP_state;
 
-    gameMode->unk_14 = &NOP_state;
+    gameMode->renderAux = &NOP_state;
     gameMode->init();
 
     return gameMode;
@@ -289,22 +289,22 @@ void* _set_game_mode(s32 i, GameMode* arg0) {
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
     if (gameMode->render == NULL) gameMode->render = &NOP_state;
 
-    gameMode->unk_14 = &NOP_state;
+    gameMode->renderAux = &NOP_state;
     gameMode->init();
 
     return gameMode;
 }
 
-void func_80112D84(s32 i, void* arg1) {
+void func_80112D84(s32 i, void (*fn)(void)) {
     GameMode* gameModes = &gMainGameState;
     GameMode* gameMode = &gameModes[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
-    gameMode->unk_14 = arg1;
+    gameMode->renderAux = fn;
     gameMode->flags |= 0x20;
-    if (arg1 == NULL) {
-        gameMode->unk_14 = &NOP_state;
+    if (fn == NULL) {
+        gameMode->renderAux = &NOP_state;
     }
 }
 
@@ -362,7 +362,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112EEC);
 // similar to step_current_game_mode, but calls render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", render_ui);
 
-// calls unk_14 and render
+// calls renderAux and render
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112FC4);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", appendGfx_model);
