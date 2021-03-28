@@ -204,9 +204,9 @@ void NOP_state(void) {
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112B98);
 
 typedef struct GameMode {
-    /* 0x00 */ u16 flags; ///< flag 8 skips update call
-    /* 0x04 */ UNK_FUN_PTR(unk_04); ///< init?
-    /* 0x08 */ UNK_FUN_PTR(unk_08); ///< update (e.g. step_world)
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(struct GameMode*);
     /* 0x0C */ UNK_FUN_PTR(unk_0C);
     /* 0x10 */ UNK_FUN_PTR(unk_10);
     /* 0x14 */ UNK_FUN_PTR(unk_14);
@@ -222,27 +222,27 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     GameMode* gameMode;
     s32 i;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
         gameMode = &gMainGameState[i];
         if (gameMode->flags == 0) {
             break;
         }
     }
 
-    ASSERT(i < 2);
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->flags = 1 | 2;
-    gameMode->unk_04 = arg0->unk_04;
+    gameMode->init = arg0->init;
     gameMode->unk_08 = arg0->unk_08;
     gameMode->unk_10 = arg0->unk_10;
     gameMode->unk_0C = NULL;
-    if (gameMode->unk_04 == NULL) gameMode->unk_04 = &NOP_state;
-    if (gameMode->unk_08 == NULL) gameMode->unk_08 = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init= &NOP_state;
+    if (gameMode->step == NULL) gameMode->step = &NOP_state;
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
     if (gameMode->unk_10 == NULL) gameMode->unk_10 = &NOP_state;
 
     gameMode->unk_14 = &NOP_state;
-    gameMode->unk_04();
+    gameMode->init();
 
     return gameMode;
 }
@@ -252,20 +252,20 @@ void* _set_game_mode(s32 i, GameMode* arg0) {
     GameMode* gameModes = &gMainGameState;
     GameMode* gameMode = &gameModes[i];
 
-    ASSERT(i < 2);
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->flags = 1 | 2;
-    gameMode->unk_04 = arg0->unk_04;
-    gameMode->unk_08 = arg0->unk_08;
+    gameMode->init = arg0->init;
+    gameMode->step = arg0->step;
     gameMode->unk_10 = arg0->unk_10;
     gameMode->unk_0C = NULL;
-    if (gameMode->unk_04 == NULL) gameMode->unk_04 = &NOP_state;
-    if (gameMode->unk_08 == NULL) gameMode->unk_08 = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = &NOP_state;
+    if (gameMode->step == NULL) gameMode->step = &NOP_state;
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
     if (gameMode->unk_10 == NULL) gameMode->unk_10 = &NOP_state;
 
     gameMode->unk_14 = &NOP_state;
-    gameMode->unk_04();
+    gameMode->init();
 
     return gameMode;
 }
@@ -274,7 +274,7 @@ void func_80112D84(s32 i, void* arg1) {
     GameMode* gameModes = &gMainGameState;
     GameMode* gameMode = &gameModes[i];
 
-    ASSERT(i < 2);
+    ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->unk_14 = arg1;
     gameMode->flags |= 0x20;
@@ -312,7 +312,24 @@ void func_80112E4C(s32 i) {
     gameMode->flags |= 0x10;
 }
 
+#ifndef NON_MATCHING
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", step_current_game_mode);
+#else
+void step_current_game_mode(void) {
+    GameMode* gameMode;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
+        gameMode = &gMainGameState[i];
+        if (gameMode->flags != 0 && !(gameMode->flags & 4) && !(gameMode->flags & 8)) {
+            gameMode->flags &= ~2;
+            gameMode->step(gameMode);
+        }
+    }
+
+    //return i;
+}
+#endif
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112EEC);
 
