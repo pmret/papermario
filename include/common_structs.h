@@ -300,8 +300,8 @@ typedef struct Entity {
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07[3];
     /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ u8 alpha; /* reported by rain */
-    /* 0x0C */ s16 aabb[3];
+    /* 0x0B */ u8 alpha;
+    /* 0x0C */ Vec3s aabb;
     /* 0x12 */ char unk_12[2];
     /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
