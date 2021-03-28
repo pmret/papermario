@@ -110,7 +110,7 @@ void snd_load_audio_data(s32 frequency) {
     func_8004B440(*temp2_1, 4, 1, temp4, 0x10);
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
-    snd_load_BK_headers(temp4, alHeap);
+    snd_load_BK_headers(temp4);
     if (snd_fetch_SBN_file(temp4->mseqFileList->unk_0, 0x20, subroutine_arg7) == 0) {
         snd_read_rom(subroutine_arg7[0], temp4->dataSEF, subroutine_arg7[1] & 0xFFFFFF);
     }

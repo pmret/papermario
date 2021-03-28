@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80248370_EB0E50
+.double 90.0, 0.0
+
+.section .text
+
 glabel func_80240E2C_EA990C
 /* EA990C 80240E2C 27BDFF70 */  addiu     $sp, $sp, -0x90
 /* EA9910 80240E30 3C038025 */  lui       $v1, %hi(D_80248380)
@@ -38,7 +45,7 @@ glabel func_80240E2C_EA990C
 /* EA998C 80240EAC 0000202D */  daddu     $a0, $zero, $zero
 /* EA9990 80240EB0 3C05FD05 */  lui       $a1, 0xfd05
 /* EA9994 80240EB4 34A50F80 */  ori       $a1, $a1, 0xf80
-/* EA9998 80240EB8 0C0B53A3 */  jal       func_802D4E8C
+/* EA9998 80240EB8 0C0B53A3 */  jal       dead_get_variable
 /* EA999C 80240EBC AFA70030 */   sw       $a3, 0x30($sp)
 /* EA99A0 80240EC0 00502021 */  addu      $a0, $v0, $s0
 /* EA99A4 80240EC4 8FA70030 */  lw        $a3, 0x30($sp)
@@ -161,7 +168,7 @@ glabel func_80240E2C_EA990C
 /* EA9B40 80241060 3C05FD05 */  lui       $a1, 0xfd05
 /* EA9B44 80241064 34A50F80 */  ori       $a1, $a1, 0xf80
 /* EA9B48 80241068 AFA70030 */  sw        $a3, 0x30($sp)
-/* EA9B4C 8024106C 0C0B53A3 */  jal       func_802D4E8C
+/* EA9B4C 8024106C 0C0B53A3 */  jal       dead_get_variable
 /* EA9B50 80241070 AFA80034 */   sw       $t0, 0x34($sp)
 /* EA9B54 80241074 0000882D */  daddu     $s1, $zero, $zero
 /* EA9B58 80241078 8FA90020 */  lw        $t1, 0x20($sp)

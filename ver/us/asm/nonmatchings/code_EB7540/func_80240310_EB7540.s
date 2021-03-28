@@ -13,25 +13,25 @@ glabel func_80240310_EB7540
 /* EB7560 80240330 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* EB7564 80240334 8E30000C */  lw        $s0, 0xc($s1)
 /* EB7568 80240338 8E050000 */  lw        $a1, ($s0)
-/* EB756C 8024033C 0C0B53A3 */  jal       func_802D4E8C
+/* EB756C 8024033C 0C0B53A3 */  jal       dead_get_variable
 /* EB7570 80240340 26100004 */   addiu    $s0, $s0, 4
 /* EB7574 80240344 8E050000 */  lw        $a1, ($s0)
 /* EB7578 80240348 26100004 */  addiu     $s0, $s0, 4
 /* EB757C 8024034C 0220202D */  daddu     $a0, $s1, $zero
-/* EB7580 80240350 0C0B53A3 */  jal       func_802D4E8C
+/* EB7580 80240350 0C0B53A3 */  jal       dead_get_variable
 /* EB7584 80240354 0040902D */   daddu    $s2, $v0, $zero
 /* EB7588 80240358 8E050000 */  lw        $a1, ($s0)
 /* EB758C 8024035C 26100004 */  addiu     $s0, $s0, 4
 /* EB7590 80240360 4482C000 */  mtc1      $v0, $f24
 /* EB7594 80240364 00000000 */  nop
 /* EB7598 80240368 4680C620 */  cvt.s.w   $f24, $f24
-/* EB759C 8024036C 0C0B53A3 */  jal       func_802D4E8C
+/* EB759C 8024036C 0C0B53A3 */  jal       dead_get_variable
 /* EB75A0 80240370 0220202D */   daddu    $a0, $s1, $zero
 /* EB75A4 80240374 8E050000 */  lw        $a1, ($s0)
 /* EB75A8 80240378 4482B000 */  mtc1      $v0, $f22
 /* EB75AC 8024037C 00000000 */  nop
 /* EB75B0 80240380 4680B5A0 */  cvt.s.w   $f22, $f22
-/* EB75B4 80240384 0C0B53A3 */  jal       func_802D4E8C
+/* EB75B4 80240384 0C0B53A3 */  jal       dead_get_variable
 /* EB75B8 80240388 0220202D */   daddu    $a0, $s1, $zero
 /* EB75BC 8024038C 4482A000 */  mtc1      $v0, $f20
 /* EB75C0 80240390 00000000 */  nop

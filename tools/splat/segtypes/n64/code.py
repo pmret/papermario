@@ -8,6 +8,7 @@ import png
 from capstone import *
 from capstone.mips import *
 from segtypes.n64.ci4 import N64SegCi4
+from segtypes.n64.ci8 import N64SegCi8
 from segtypes.n64.palette import N64SegPalette
 from segtypes.n64.segment import N64Segment
 from segtypes.segment import Segment
@@ -1050,7 +1051,10 @@ class N64SegCode(N64Segment):
                     width, height = sub.args
 
                     for palette in self.palettes[sub.name]:
-                        image = N64SegCi4.parse_image(img_bytes, width, height)
+                        if sub.type == "ci4":
+                            image = N64SegCi4.parse_image(img_bytes, width, height)
+                        elif sub.type == "ci8":
+                            image = N64SegCi8.parse_image(img_bytes, width, height)
 
                         w = png.Writer(width, height, palette=palette.palette)
 

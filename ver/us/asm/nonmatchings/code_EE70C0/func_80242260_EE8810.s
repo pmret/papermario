@@ -19,7 +19,7 @@ glabel func_80242260_EE8810
 .L80242294:
 /* EE8844 80242294 8CC50000 */  lw        $a1, ($a2)
 /* EE8848 80242298 3C068024 */  lui       $a2, %hi(D_80244630_EEABE0)
-/* EE884C 8024229C 0C0B551A */  jal       func_802D5468
+/* EE884C 8024229C 0C0B551A */  jal       dead_set_variable
 /* EE8850 802422A0 8CC64630 */   lw       $a2, %lo(D_80244630_EEABE0)($a2)
 /* EE8854 802422A4 24020002 */  addiu     $v0, $zero, 2
 .L802422A8:

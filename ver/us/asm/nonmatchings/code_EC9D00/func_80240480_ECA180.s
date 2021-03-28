@@ -9,7 +9,7 @@ glabel func_80240480_ECA180
 /* ECA190 80240490 AFB00018 */  sw        $s0, 0x18($sp)
 /* ECA194 80240494 8E30000C */  lw        $s0, 0xc($s1)
 /* ECA198 80240498 8E050000 */  lw        $a1, ($s0)
-/* ECA19C 8024049C 0C0B53A3 */  jal       func_802D4E8C
+/* ECA19C 8024049C 0C0B53A3 */  jal       dead_get_variable
 /* ECA1A0 802404A0 26100004 */   addiu    $s0, $s0, 4
 /* ECA1A4 802404A4 0C0462EC */  jal       func_80118BB0
 /* ECA1A8 802404A8 0040202D */   daddu    $a0, $v0, $zero
@@ -30,7 +30,7 @@ glabel func_80240480_ECA180
 /* ECA1E4 802404E4 0000202D */   daddu    $a0, $zero, $zero
 /* ECA1E8 802404E8 0220202D */  daddu     $a0, $s1, $zero
 /* ECA1EC 802404EC 0200282D */  daddu     $a1, $s0, $zero
-/* ECA1F0 802404F0 0C0B551A */  jal       func_802D5468
+/* ECA1F0 802404F0 0C0B551A */  jal       dead_set_variable
 /* ECA1F4 802404F4 0040302D */   daddu    $a2, $v0, $zero
 /* ECA1F8 802404F8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* ECA1FC 802404FC 8FB1001C */  lw        $s1, 0x1c($sp)

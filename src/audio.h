@@ -543,7 +543,7 @@ extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-void snd_load_BK_headers(UnkAl19E0* arg0, ALHeap* arg1);
+void snd_load_BK_headers(UnkAl19E0* arg0);
 
 void func_8004B440(SoundManager*, u8, u8, UnkAl19E0*, u8);
 void snd_load_sfx_groups_from_SEF(SoundManager*);

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802B7C80_E23230
+.word L802B71DC_E2278C, L802B71DC_E2278C, L802B71DC_E2278C, L802B71DC_E2278C, L802B71EC_E2279C, L802B71EC_E2279C, L802B71EC_E2279C, L802B71EC_E2279C, L802B71FC_E227AC, L802B71FC_E227AC, L802B71FC_E227AC, L802B71FC_E227AC
+
+.section .text
+
 glabel func_802B7000_E225B0
 /* E225B0 802B7000 3C028011 */  lui       $v0, %hi(gPlayerStatus+0x4)
 /* E225B4 802B7004 8C42EFCC */  lw        $v0, %lo(gPlayerStatus+0x4)($v0)

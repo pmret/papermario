@@ -201,9 +201,10 @@ extern s16 gItemMenuNumItems;
 extern s32 D_802705D0;
 extern s32 gItemMenuCurrentScrollPos;
 extern s32 gItemMenuTargetScrollPos;
-extern s32 D_802705DC;
+extern u32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
+extern MenuIcon* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats
