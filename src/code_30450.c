@@ -390,15 +390,94 @@ INCLUDE_ASM(s32, "code_30450", func_80055C94);
 
 INCLUDE_ASM(s32, "code_30450", func_80055CC4);
 
+// We need to figure out what currentTrackData is a list of
+#ifdef NON_MATCHING
+s32 func_80055CE8(s32 arg0, s32* arg1, BGMPlayer** player) {
+    UnkAl19E0* temp_a3 = D_8009A5C0;
+    s32 ret = 0;
+
+    if (arg0 == temp_a3->currentTrackData[0][2]) {
+        *arg1 = temp_a3->currentTrackData[0];
+        *player = D_8009A664;
+    } else if (arg0 == temp_a3->currentTrackData[1][2]) {
+        *arg1 = temp_a3->currentTrackData[1];
+        *player = D_8009A5FC;
+    } else {
+        ret = 1;
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "code_30450", func_80055CE8);
+#endif
 
-INCLUDE_ASM(s32, "code_30450", func_80055D38);
+s32 func_80055D38(s32 arg0, f32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
 
-INCLUDE_ASM(s32, "code_30450", func_80055D8C);
+    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
 
-INCLUDE_ASM(s32, "code_30450", func_80055DDC);
+    if (ret == 0) {
+        func_80050770(bgmPlayer, arg1);
+    }
 
-INCLUDE_ASM(s32, "code_30450", func_80055E48);
+    return ret;
+}
+
+s32 func_80055D8C(s32 arg0, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        func_80050818(bgmPlayer, arg1);
+    }
+
+    return ret;
+}
+
+s32 func_80055DDC(s32 arg0, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        s32* temp_v0 = func_80055EB4(arg1);
+
+        if (temp_v0 != NULL) {
+            func_8005087C(bgmPlayer, temp_v0, 1);
+        } else {
+            ret = 11;
+        }
+    }
+
+    return ret;
+}
+
+s32 func_80055E48(s32 arg0, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(arg0, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        s32* temp_v0 = func_80055EB4(arg1);
+
+        if (temp_v0 != NULL) {
+            func_8005087C(bgmPlayer, temp_v0, 0);
+        } else {
+            ret = 11;
+        }
+    }
+
+    return ret;
+}
 
 s32* func_80055EB4(s32 arg0) {
     s32* ret = NULL;

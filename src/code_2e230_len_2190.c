@@ -36,10 +36,10 @@ void snd_load_audio_data(s32 frequency) {
 
     temp4 = *temp_s4;
     temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
-    temp4->unk_5C[0] = &temp_v0_2[0];
-    temp4->unk_5C[1] = &temp_v0_2[0x1400];
-    temp4->unk_5C[2] = &temp_v0_2[0x1C00];
-    temp4->unk_5C[3] = &temp_v0_2[0x1400];
+    temp4->currentTrackData[0] = &temp_v0_2[0];
+    temp4->currentTrackData[1] = &temp_v0_2[0x1400];
+    temp4->currentTrackData[2] = &temp_v0_2[0x1C00];
+    temp4->currentTrackData[3] = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
         temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
@@ -456,15 +456,15 @@ void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackDat
 
     switch (playerIndex) {
         case 0:
-            *outCurrentTrackData = temp_v1->unk_5C[0];
+            *outCurrentTrackData = temp_v1->currentTrackData[0];
             *outPlayer = D_8009A664;
             break;
         case 1:
-            *outCurrentTrackData = temp_v1->unk_5C[1];
+            *outCurrentTrackData = temp_v1->currentTrackData[1];
             *outPlayer = D_8009A5FC;
             break;
         case 2:
-            *outCurrentTrackData = temp_v1->unk_5C[0];
+            *outCurrentTrackData = temp_v1->currentTrackData[0];
             *outPlayer = D_8009A664;
             break;
         default:

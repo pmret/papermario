@@ -8,10 +8,10 @@ INCLUDE_ASM(void, "code_28910_len_5090", func_8004D510, BGMPlayer* arg0);
 BGMPlayer* snd_get_player_with_song_name(s32 songString) {
     UnkAl19E0* temp_v1 = D_8009A664->data;
 
-    if (songString == temp_v1->unk_5C[0][2]) {
+    if (songString == temp_v1->currentTrackData[0][2]) {
         return D_8009A664;
     }
-    if (songString == temp_v1->unk_5C[1][2]) {
+    if (songString == temp_v1->currentTrackData[1][2]) {
         return D_8009A5FC;
     }
     return NULL;
@@ -442,9 +442,9 @@ INCLUDE_ASM(s32, "code_28910_len_5090", func_8005068C);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_80050770);
+INCLUDE_ASM(void, "code_28910_len_5090", func_80050770, BGMPlayer* player, f32 arg1);
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_80050818);
+INCLUDE_ASM(void, "code_28910_len_5090", func_80050818, BGMPlayer* player, s32 arg1);
 
 void func_8005083C(BGMPlayer* arg0, s32 arg1, s16 arg2, s8 arg3) {
     BGMPlayerTrack* temp_a1 = &arg0->unk_25C[arg1];
@@ -456,7 +456,7 @@ void func_8005083C(BGMPlayer* arg0, s32 arg1, s16 arg2, s8 arg3) {
     }
 }
 
-INCLUDE_ASM(s32, "code_28910_len_5090", func_8005087C);
+INCLUDE_ASM(void, "code_28910_len_5090", func_8005087C, BGMPlayer* player, s32* arg1, s32 arg2);
 
 INCLUDE_ASM(s32, "code_28910_len_5090", func_80050888);
 

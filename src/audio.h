@@ -303,7 +303,7 @@ typedef struct UnkAl19E0 {
     /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ s32* dataPER;
     /* 0x0058 */ s32* dataPRG;
-    /* 0x005C */ s32* unk_5C[4];
+    /* 0x005C */ s32* currentTrackData[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
     /* 0x0074 */ char unk_74[0x8];
     /* 0x007C */ s32 unkSongName;
@@ -589,6 +589,9 @@ void snd_BGMCmd_FE(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_FC_Jump(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_FF(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_NOP(BGMPlayer*, BGMPlayerTrack*);
+void func_80050770(BGMPlayer*, f32);
+void func_80050818(BGMPlayer*, s32);
+void func_8005087C(BGMPlayer*, s32*, s32);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
 s32 func_80050C30(u32);
