@@ -11,8 +11,10 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
+typedef Model* SmallModelList[4];
+extern SmallModelList* D_801512E0;
+
 extern s32 D_8015132C;
-extern Model** D_801512E0; // TODO: array, length 4
 extern Fog* wFog;
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
@@ -322,8 +324,8 @@ void func_8011BAE8(void) {
         }
     }
 
-    for (i = 0; i < 4; i++) { // TODO: ARRAY_COUNT(D_801512E0)
-        Model* model = D_801512E0[i];
+    for (i = 0; i < ARRAY_COUNT(*D_801512E0); i++) {
+        Model* model = (*D_801512E0)[i];
 
         if (model != NULL) {
             model->flags &= ~0x0400;
