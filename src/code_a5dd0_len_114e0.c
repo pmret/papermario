@@ -248,7 +248,27 @@ GameMode* set_next_game_mode(GameMode* arg0) {
 }
 #endif
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", _set_game_mode);
+void* _set_game_mode(s32 i, GameMode* arg0) {
+    GameMode* gameModes = &gMainGameState;
+    GameMode* gameMode = &gameModes[i];
+
+    ASSERT(i < 2);
+
+    gameMode->flags = 1 | 2;
+    gameMode->unk_04 = arg0->unk_04;
+    gameMode->unk_08 = arg0->unk_08;
+    gameMode->unk_10 = arg0->unk_10;
+    gameMode->unk_0C = NULL;
+    if (gameMode->unk_04 == NULL) gameMode->unk_04 = &NOP_state;
+    if (gameMode->unk_08 == NULL) gameMode->unk_08 = &NOP_state;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
+    if (gameMode->unk_10 == NULL) gameMode->unk_10 = &NOP_state;
+
+    gameMode->unk_14 = &NOP_state;
+    gameMode->unk_04();
+
+    return gameMode;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80112D84);
 
