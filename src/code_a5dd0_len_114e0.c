@@ -388,8 +388,8 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011CFBC);
 
-void func_8011D72C(Gfx** arg0, s32 treeIndex) {
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex & 0xFFFF));
+void func_8011D72C(Gfx** arg0, u16 treeIndex) {
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
     Model copied = *model;
     Gfx** gfxPos = &gMasterGfxPos;
     Gfx* oldGfxPos;
