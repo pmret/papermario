@@ -288,7 +288,24 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B5D0);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B660);
 
-INCLUDE_ASM(void, "code_a5dd0_len_114e0", clone_model, u16 srcModelID, u16 newModelID);
+void clone_model(u16 srcModelID, u16 newModelID) {
+    ModelList** modelList = &gCurrentModelListPtr;
+    Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));
+    Model* newModel;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(**modelList); i++) {
+        Model* model = (**modelList)[i];
+
+        if (model == NULL) {
+            break;
+        }
+    }
+
+    (**modelList)[i] = newModel = heap_malloc(sizeof(Model));
+    *newModel = *srcModel;
+    newModel->modelID = newModelID;
+}
 
 INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
 
