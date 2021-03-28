@@ -22,7 +22,7 @@ void func_800334E8(void) {
 
 void set_game_mode(s16 idx) {
     D_800A08F0 = idx;
-    _set_game_mode(0, D_80077850[idx]);
+    set_game_mode_slot(0, D_80077850[idx]);
 }
 
 s16 get_game_mode(void) {

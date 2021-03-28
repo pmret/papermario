@@ -261,7 +261,7 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     gameMode->unk_08 = arg0->unk_08;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init= &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = &NOP_state;
     if (gameMode->step == NULL) gameMode->step = &NOP_state;
     if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
     if (gameMode->render == NULL) gameMode->render = &NOP_state;
@@ -273,7 +273,7 @@ GameMode* set_next_game_mode(GameMode* arg0) {
 }
 #endif
 
-void* _set_game_mode(s32 i, GameMode* arg0) {
+GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
     GameMode* gameModes = &gMainGameState;
     GameMode* gameMode = &gameModes[i];
 
