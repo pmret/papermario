@@ -1,16 +1,18 @@
 from segtypes.n64.rgba16 import N64SegRgba16
 import png
 from math import ceil
+from util import iter
 
 class N64SegIa4(N64SegRgba16):
-    def png_writer(self):
-        return png.Writer(self.width, self.height, greyscale=True, alpha=True)
+    @staticmethod
+    def get_writer(width, height):
+        return png.Writer(width, height, greyscale=True, alpha=True)
 
     @staticmethod
     def parse_image(data, width, height, flip_h=False, flip_v=False):
         img = bytearray()
 
-        for x, y, i in N64SegRgba16.iter_image_indexes(width, height, 0.5, 1, flip_h, flip_v):
+        for x, y, i in iter.iter_image_indexes(width, height, 0.5, 1, flip_h, flip_v):
             b = data[i]
 
             h = (b >> 4) & 0xF

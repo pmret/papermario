@@ -19,8 +19,7 @@ class N64SegCi8(N64SegRgba16):
         self.image = self.__class__.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical)
 
     def postsplit(self, segments):
-        palettes = [seg for seg in segments if seg.type ==
-                    "palette" and seg.image_name == self.name]
+        palettes = [seg for seg in segments if seg.type == "palette" and seg.image_name == self.name]
 
         if len(palettes) == 0:
             self.error(f"no palette sibling segment exists\n(hint: add a segment with type 'palette' and name '{self.name}')")
@@ -42,8 +41,7 @@ class N64SegCi8(N64SegRgba16):
 
         # canonical version of image (not palette!) data
         if self.path not in seen_paths:
-            w = png.Writer(self.width, self.height,
-                           palette=palettes[0].palette)
+            w = png.Writer(self.width, self.height, palette=palettes[0].palette)
 
             with open(self.path, "wb") as f:
                 w.write_array(f, self.image)
