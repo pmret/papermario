@@ -1075,7 +1075,7 @@ typedef struct ItemEntityPhysicsData {
 
 typedef struct RenderTask {
     /* 0x00 */ s32 renderMode;
-    /* 0x04 */ s32 dist; /* value between 0 and -10k */
+    /* 0x04 */ s32 distance; /* value between 0 and -10k */
     /* 0x08 */ struct Model* model;
     /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
 } RenderTask; // size = 0x10

@@ -11,11 +11,23 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
+typedef struct RenderTaskEntry {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ struct Model* model;
+    /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
+} RenderTaskEntry; // size = 0x10
+
 typedef Model* SmallModelList[4];
 extern SmallModelList* D_801512E0;
 
 extern s32 D_8015132C;
 extern Fog* wFog;
+
+extern s32 D_801533B0; // num render task entries?
+extern s32 D_801533AC;
+extern s32 D_8014C188[]; // render mode -> distance map?
+extern RenderTaskEntry* D_801533A0[];
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
@@ -573,6 +585,23 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D890);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D8D0);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", queue_render_task);
+RenderTaskEntry* queue_render_task(RenderTask* task) {
+    RenderTaskEntry* entry = D_801533A0[D_801533AC];
+
+    ASSERT(D_801533B0 < 0x100);
+
+    entry = &entry[D_801533B0++];
+
+    entry->unk_00 = 1;
+    if (task->renderMode == 0x2D) {
+        entry->unk_00 = 0x21;
+    }
+
+    entry->model = task->model;
+    entry->fpBuildDL = task->fpBuildDL;
+    entry->unk_04 = D_8014C188[task->renderMode] - task->distance;
+
+    return entry;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011D9B8);
