@@ -1,7 +1,7 @@
 #include "common.h"
 
 extern s16 D_800A08F0;
-extern s32 D_80077850[];
+extern s32 gameModeMap[];
 
 INCLUDE_ASM(s32, "code_d610_len_1330", func_80032210);
 
@@ -22,7 +22,7 @@ void func_800334E8(void) {
 
 void set_game_mode(s16 idx) {
     D_800A08F0 = idx;
-    set_game_mode_slot(0, D_80077850[idx]);
+    set_game_mode_slot(0, gameModeMap[idx]);
 }
 
 s16 get_game_mode(void) {
