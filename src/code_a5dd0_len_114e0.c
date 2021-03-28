@@ -29,6 +29,11 @@ extern s32 D_801533AC;
 extern s32 D_8014C188[]; // render mode -> distance map?
 extern RenderTaskEntry* D_801533A0[];
 
+extern s32 texPannerMainU[MAX_TEX_PANNERS];
+extern s32 texPannerMainV[MAX_TEX_PANNERS];
+extern s32 texPannerAuxU[MAX_TEX_PANNERS];
+extern s32 texPannerAuxV[MAX_TEX_PANNERS];
+
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_shadows);
@@ -504,13 +509,21 @@ void set_tex_panner(Model* model, s8 texPannerID) {
     model->texPannerID = texPannerID;
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_main_pan_u);
+void set_main_pan_u(s32 texPannerID, s32 value) {
+    texPannerMainU[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_main_pan_v);
+void set_main_pan_v(s32 texPannerID, s32 value) {
+    texPannerMainV[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_aux_pan_u);
+void set_aux_pan_u(s32 texPannerID, s32 value) {
+    texPannerAuxU[texPannerID] = value;
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", set_aux_pan_v);
+void set_aux_pan_v(s32 texPannerID, s32 value) {
+    texPannerAuxV[texPannerID] = value;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BC7C);
 
