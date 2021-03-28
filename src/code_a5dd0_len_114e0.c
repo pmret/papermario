@@ -103,7 +103,15 @@ ShadowList* get_shadow_list(void) {
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110678);
 
-INCLUDE_ASM(u32, "code_a5dd0_len_114e0", get_entity_type, s32 arg0);
+u32 get_entity_type(s32 index) {
+    Entity* entity = get_entity_by_index(index);
+
+    if (entity == NULL) {
+        return -1;
+    } else {
+        return entity->staticData->entityType;
+    }
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity);
 

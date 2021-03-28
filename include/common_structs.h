@@ -310,7 +310,7 @@ typedef struct Entity {
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
-    /* 0x38 */ struct StaticEntityData* static_data;
+    /* 0x38 */ struct StaticEntityData* staticData;
     /* 0x3C */ UNK_PTR unk_3C; // pointer to draw func(?)
     /* 0x40 */ void* dataBuf;
     /* 0x44 */ Mtx* vertexData;
@@ -339,7 +339,7 @@ typedef struct StaticEntityData {
     /* 0x14 */ UNK_PTR unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
-    /* 0x20 */ s8 entityType;
+    /* 0x20 */ u8 entityType;
     /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
