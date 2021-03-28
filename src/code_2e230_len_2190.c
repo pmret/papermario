@@ -36,10 +36,10 @@ void snd_load_audio_data(s32 frequency) {
 
     temp4 = *temp_s4;
     temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
-    temp4->unk_5C = &temp_v0_2[0];
-    temp4->unk_60 = &temp_v0_2[0x1400];
-    temp4->unk_64 = &temp_v0_2[0x1C00];
-    temp4->unk_68 = &temp_v0_2[0x1400];
+    temp4->unk_5C[0] = &temp_v0_2[0];
+    temp4->unk_5C[1] = &temp_v0_2[0x1400];
+    temp4->unk_5C[2] = &temp_v0_2[0x1C00];
+    temp4->unk_5C[3] = &temp_v0_2[0x1400];
 
     for (i = 0; i < 1; i++) {
         temp4->unk_6C[i].unk_0 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
@@ -381,10 +381,10 @@ void snd_initialize_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
     fade->fpFadeCallback = NULL;
 }
 
-void func_80053A18(UnkAl1* arg0) {
-    arg0->unk_0A = 0;
-    arg0->unk_04 = 0;
-    arg0->unk_0C = 0;
+void func_80053A18(Fade* fade) {
+    fade->fadeTime = 0;
+    fade->fadeStep = 0;
+    fade->fpFadeCallback = NULL;
 }
 
 void func_80053A28(UnkAl1* arg0) {
@@ -456,15 +456,15 @@ void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackDat
 
     switch (playerIndex) {
         case 0:
-            *outCurrentTrackData = temp_v1->unk_5C;
+            *outCurrentTrackData = temp_v1->unk_5C[0];
             *outPlayer = D_8009A664;
             break;
         case 1:
-            *outCurrentTrackData = temp_v1->unk_60;
+            *outCurrentTrackData = temp_v1->unk_5C[1];
             *outPlayer = D_8009A5FC;
             break;
         case 2:
-            *outCurrentTrackData = temp_v1->unk_5C;
+            *outCurrentTrackData = temp_v1->unk_5C[0];
             *outPlayer = D_8009A664;
             break;
         default:
@@ -525,8 +525,8 @@ INCLUDE_ASM(void, "code_2e230_len_2190", snd_load_PRG, UnkAl19E0* arg0, s32* arg
 
 INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_BGM);
 
-Instruments* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
-    Instruments* ret = NULL;
+InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
+    InstrumentGroup* ret = NULL;
     UnkAl19E0* temp = D_8009A5C0;
 
     // TODO fake match - this multiplying the bankIndex by 16 and then dividing it right after is dumb
@@ -556,9 +556,9 @@ Instruments* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_BK_to_bank);
+INCLUDE_ASM(s32, "code_2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
 
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments instruments, s32 instrumentCount, u8 arg4);
+void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
 // float weirdness
 #ifdef NON_MATCHING
 void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank *bank, Instruments instruments, u32 instrumentCount, u8 arg4) {
@@ -594,7 +594,7 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank *bank, Instruments i
     }
 }
 #else
-INCLUDE_ASM(void, "code_2e230_len_2190", snd_swizzle_BK_instruments, s32 bkFileOffset, SoundBank* bank, Instruments instruments, s32 instrumentCount, u8 arg4);
+INCLUDE_ASM(void, "code_2e230_len_2190", snd_swizzle_BK_instruments, s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
 #endif
 
 

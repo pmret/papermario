@@ -210,7 +210,7 @@ typedef struct Instrument {
     /* 0x2C */ s32 unkOffset;
 } Instrument;
 
-typedef Instrument* Instruments[16];
+typedef Instrument* InstrumentGroup[16];
 
 typedef struct UnkAl48 { // Track?
     /* 0x00 */ s32 unk_00; // pointer to something
@@ -303,10 +303,7 @@ typedef struct UnkAl19E0 {
     /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ s32* dataPER;
     /* 0x0058 */ s32* dataPRG;
-    /* 0x005C */ s32* unk_5C;
-    /* 0x0060 */ s32* unk_60;
-    /* 0x0064 */ s32* unk_64;
-    /* 0x0068 */ s32* unk_68;
+    /* 0x005C */ s32* unk_5C[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
     /* 0x0074 */ char unk_74[0x8];
     /* 0x007C */ s32 unkSongName;
@@ -314,20 +311,20 @@ typedef struct UnkAl19E0 {
     /* 0x0084 */ s32 unkFadeTime;
     /* 0x0088 */ s32 unkFadeStart;
     /* 0x008C */ s32 unkFadeEnd;
-    /* 0x0090 */ s32* unk_90;
+    /* 0x0090 */ s32 unk_90;
     /* 0x0094 */ s32* unk_94;
-    /* 0x0098 */ s32* unk_98;
+    /* 0x0098 */ u32 unk_98;
     /* 0x009C */ s32 unk_9C;
     /* 0x00A0 */ s32* dataSEF;
     /* 0x00A4 */ UnkFuncAl unk_A4[2];
-    /* 0x00AC */ Instruments instrumentGroupX[1];
-    /* 0x00EC */ Instruments instrumentGroup3[16];
-    /* 0x04EC */ Instruments instrumentGroup1[4];
-    /* 0x05EC */ Instruments instrumentGroup2[16];
-    /* 0x09EC */ Instruments instrumentGroup4[16];
-    /* 0x0DEC */ Instruments instrumentGroup5[16];
-    /* 0x11EC */ Instruments instrumentGroup6[4];
-    /* 0x12EC */ Instruments* instrumentGroups[8];
+    /* 0x00AC */ InstrumentGroup instrumentGroupX[1];
+    /* 0x00EC */ InstrumentGroup instrumentGroup3[16];
+    /* 0x04EC */ InstrumentGroup instrumentGroup1[4];
+    /* 0x05EC */ InstrumentGroup instrumentGroup2[16];
+    /* 0x09EC */ InstrumentGroup instrumentGroup4[16];
+    /* 0x0DEC */ InstrumentGroup instrumentGroup5[16];
+    /* 0x11EC */ InstrumentGroup instrumentGroup6[4];
+    /* 0x12EC */ InstrumentGroup* instrumentGroups[8];
     /* 0x130C */ u8 unk_130C;
     /* 0x130D */ char unk_130D[3];
     /* 0x1310 */ s32* banks[3];
@@ -463,10 +460,10 @@ typedef struct BGMPlayer {
     /* 0x235 */ u8 unk_235;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
-    /* 0x258 */ s8 unk_258;
+    /* 0x258 */ u8 unk_258;
     /* 0x259 */ s8 unk_259;
-    /* 0x25A */ s8 unk_25A;
-    /* 0x25B */ s8 unk_25B;
+    /* 0x25A */ u8 unk_25A;
+    /* 0x25B */ u8 unk_25B;
     /* 0x25C */ BGMPlayerTrack unk_25C[16];
     /* 0x85C */ UnkAl24 unk_85C[24];
 } BGMPlayer; // size = 0xA9C
@@ -614,7 +611,7 @@ void func_80053370(UnkAlC*);
 void func_800533A8(InstrumentCFG*);
 void func_80053654(UnkAl19E0*);
 //void snd_initialize_fade(Fade*, s32, s32, s16);
-void func_80053A18(UnkAl1*);
+void func_80053A18(Fade*);
 void func_80053A28(UnkAl1*);
 void func_80053A98(u8, u16, s32);
 void func_80053AEC(UnkAl1*, s16);
