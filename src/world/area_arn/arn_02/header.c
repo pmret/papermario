@@ -15,7 +15,7 @@ MapConfig N(config) = {
 };
 
 Script N(PlayMusic) = SCRIPT({
-    match SI_SAVE_VAR(0) {
+    match STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }

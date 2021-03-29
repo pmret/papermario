@@ -11,7 +11,7 @@ Script N(BindExits) = SCRIPT({
 });
 
 Script N(Main) = SCRIPT({
-    WORLD_LOCATION = 31;
+    WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
