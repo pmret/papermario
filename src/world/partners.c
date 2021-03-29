@@ -46,7 +46,7 @@ s32 D_800F7F80[] = {
 s32* D_800F7FA8 = &D_80108068;
 s32 D_800F7FAC = 0x80108090;
 s32 D_800F7FB0[] = { 0x80108298, 0x801082E8, 0x801082C0, 0x80108310, 0x80108338, 0x80108360, 0x80108388 };
-s32 D_800F7FCC[] = { (s32)&D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
+s32 D_800F7FCC[] = { (s32) &D_801083D8, 0x80108428, 0x80108400, 0x80108450, 0x80108478, 0x801084A0, 0x801084C8 };
 
 s32 D_800F7FE8 = -1;
 s32 D_800F7FEC = 1;
@@ -55,7 +55,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32)&D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 D_800F8024 = 0;
 s32 D_800F8028 = 0;
@@ -63,6 +63,11 @@ s32 D_800F802C = 0;
 f32 D_800F8030 = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 s16 D_800F803A = 0;
+
+extern f32 D_8010CFC0;
+extern s16 D_8010CFC8;
+extern s16 D_8010CFCA;
+extern s16 D_8010CFCE;
 
 WorldPartner wPartners[12] = {
     {}, // None
@@ -253,22 +258,16 @@ NpcId create_basic_npc(NpcBlueprint* blueprint);
 
 extern s32 D_802C0000;
 
-// Some weird ordering issues, probably a macro at play
-#ifdef NON_MATCHING
 s32 use_consumable(s32 arg0) {
     ScriptInstance* script;
-    s32 temp_s1;
 
-    temp_s1 = gPlayerData.invItems[arg0];
     D_8010CD20 = arg0;
+    arg0 = gPlayerData.invItems[arg0];
     dma_copy(D_800F8010[0], D_800F8010[1], &D_802C0000);
     script = start_script(D_800F8010[2], 1, 0);
-    script->varTable[10] = temp_s1;
+    script->varTable[10] = arg0;
     return script->id;
 }
-#else
-INCLUDE_ASM(s32, "world/partners", use_consumable);
-#endif
 
 void remove_consumable(void) {
     gPlayerData.invItems[D_8010CD20] = 0;
@@ -404,10 +403,9 @@ s32 partner_use_ability(void) {
 
     if (!is_starting_conversation() &&
         wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
-    {
-        if (((*gGameStatusPtr)->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
-            play_sound(0x21D);
+        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
+        if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
+            sfx_play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
             D_8010CFE8 = 8;
@@ -418,17 +416,12 @@ s32 partner_use_ability(void) {
     return FALSE;
 }
 
-// needless v0 to v1 thing. functionally equivalent
-#ifdef NON_MATCHING
 s32 partner_player_can_pause(void) {
-    if (wPartner == NULL || wPartner->canPlayerPause == NULL || wPartner->canPlayerPause(wPartnerNpc)) {
-        return TRUE;
+    if (wPartner != NULL && wPartner->canPlayerPause != NULL && !wPartner->canPlayerPause(wPartnerNpc)) {
+        return FALSE;
     }
-    return FALSE;
+    return TRUE;
 }
-#else
-INCLUDE_ASM(s32, "world/partners", partner_player_can_pause, void)
-#endif
 
 s32 partner_can_use_ability(void) {
     if (wPartner->canUseAbility != NULL && !wPartner->canUseAbility(wPartnerNpc)) {
@@ -437,7 +430,43 @@ s32 partner_can_use_ability(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "world/partners", partner_reset_data);
+void partner_reset_data(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32* temp8010CFD8;
+    s32* temp8010CFE8;
+    s32 temp_s0;
+
+    temp_s0 = gPlayerData.currentPartner;
+    mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
+    get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+
+    temp8010CFD8 = &D_8010CFD8;
+    temp8010CFE8 = &D_8010CFE8;
+
+    D_8010CFE0 = 1;
+    *temp8010CFE8 = 9;
+    *temp8010CFD8 = temp_s0;
+
+    if (gGameStatusPtr->unk_7D != 0) {
+        D_8010EBB0.unk_00 = 1;
+        gGameStatusPtr->unk_7D = 0;
+    }
+
+    wPartner = NULL;
+    D_800F833C = playerStatus->position.x;
+    D_800F8340 = playerStatus->position.y;
+    D_800F8344 = playerStatus->position.z;
+
+    if (*temp8010CFD8 == 0) {
+        *temp8010CFE8 = 1;
+    } else {
+        load_partner_npc();
+        wPartnerNpc->scale.x = 1.0f;
+        wPartnerNpc->scale.y = 1.0f;
+        wPartnerNpc->scale.z = 1.0f;
+        _use_partner_ability();
+    }
+}
 
 void partner_initialize_data(void) {
     Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
@@ -551,7 +580,34 @@ INCLUDE_ASM(void, "world/partners", enable_partner_walking, Npc* partner, s32 va
 
 INCLUDE_ASM(void, "world/partners", func_800EBA3C, Npc* partner);
 
-INCLUDE_ASM(void, "world/partners", func_800EBB40, Npc* partner);
+void func_800EBB40(Npc* partner) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0
+        || temp8010EBB0->unk_02 != 0) {
+        if (!(playerStatus->animFlags & 0x800)) {
+            func_800EBC74(partner);
+        }
+        if (temp8010EBB0->unk_0C & 0x6006) {
+            temp8010EBB0->unk_02 = 0;
+        }
+    }
+
+    if (D_8010CFC8 != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {
+        partner->pos.x = playerStatus->position.x;
+        partner->pos.y = playerStatus->position.y;
+        partner->pos.z = playerStatus->position.z;
+        partner->jumpVelocity = 0.0f;
+        partner->jumpScale = 0.0f;
+        partner->flags = partner->flags & ~0x800;
+    }
+
+    func_800EF640(partner);
+    D_800F833C = partner->pos.x;
+    D_800F8340 = partner->pos.y;
+    D_800F8344 = partner->pos.z;
+}
 
 INCLUDE_ASM(s32, "world/partners", func_800EBC74);
 
@@ -562,11 +618,6 @@ INCLUDE_ASM(void, "world/partners", update_player_move_history, Npc* partner);
 INCLUDE_ASM(void, "world/partners", func_800ED5D0, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", func_800ED9F8);
-
-extern f32 D_8010CFC0;
-extern s16 D_8010CFC8;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCE;
 
 s32 func_800EE994(Npc* arg0) {
     arg0->unk_80 = 0x10000;
@@ -644,7 +695,38 @@ void func_800EF43C(void) {
 
 INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 
+// Saves at the end
+#ifdef NON_MATCHING
+s32 func_800EF4E0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* cameras = &gCameras;
+    Camera* cameras2 = cameras;
+    f32 yaw;
+    s32 ret;
+
+    if (playerStatus->unk_90 == 0.0f) {
+        if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
+            ret = 1;
+            yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
+        } else {
+            yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
+            ret = 0;
+        }
+    } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
+        ret = 1;
+        yaw = clamp_angle(cameras2[0].currentYaw - 90.0f);
+    } else {
+        yaw = clamp_angle(cameras2[0].currentYaw + 90.0f);
+        ret = 0;
+    }
+
+    playerStatus->targetYaw = yaw;
+    playerStatus->currentYaw = playerStatus->targetYaw;
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
+#endif
 
 void func_800EF600(void) {
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;

@@ -16,22 +16,22 @@ void* D_802809FC[] = {
 s32 D_80280A30 = 0xFF;
 
 Script BtlPutPartnerAway = SCRIPT({
-    DispatchEvent(256, 62);
+    DispatchEvent(ActorID_PARTNER, 62);
     parallel {
         SI_VAR(0) = 1.0;
         loop 10 {
-            SetActorScale(256, SI_VAR(0), SI_VAR(0), 1.0);
+            SetActorScale(ActorID_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
             SI_VAR(0) -= 0.1005859375;
             sleep 1;
         }
     }
     EnablePartnerBlur();
-    PlaySoundAtActor(0, 14);
-    GetActorPos(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_E);
+    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 25;
-    SetActorJumpGravity(256, 1.0);
-    SetGoalPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    JumpToGoal(256, 10, 0, 0, 1);
+    SetActorJumpGravity(ActorID_PARTNER, 1.0);
+    SetGoalPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    JumpToGoal(ActorID_PARTNER, 10, 0, 0, 1);
     DisablePartnerBlur();
 });
 
@@ -39,22 +39,22 @@ Script BtlBringPartnerOut = SCRIPT({
     parallel {
         SI_VAR(0) = 0.1005859375;
         loop 20 {
-            SetActorScale(256, SI_VAR(0), SI_VAR(0), 1.0);
+            SetActorScale(ActorID_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
             SI_VAR(0) += 0.05078125;
             sleep 1;
         }
-        SetActorScale(256, 1.0, 1.0, 1.0);
+        SetActorScale(ActorID_PARTNER, 1.0, 1.0, 1.0);
     }
-    PlaySoundAtActor(0, 13);
+    PlaySoundAtActor(ActorID_PLAYER, SoundId_D);
     GetGoalPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetActorJumpGravity(256, 1.0);
+    SetActorJumpGravity(ActorID_PARTNER, 1.0);
     if (SI_VAR(1) == 0) {
-        JumpToGoal(256, 20, 0, 0, 1);
+        JumpToGoal(ActorID_PARTNER, 20, 0, 0, 1);
     } else {
-        JumpToGoal(256, 20, 0, 0, 1);
+        JumpToGoal(ActorID_PARTNER, 20, 0, 0, 1);
     }
-    GetActorPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ForceHomePos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    ForceHomePos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 });
 
 s8 D_80280CE0[] = { 0, 0, 0, 0 };
@@ -171,9 +171,15 @@ void get_dpad_input_radial(f32* angle, f32* magnitude) {
     *magnitude = mag;
 }
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8023E104);
+void func_8023E104(void) {
+    D_802809F4 = 1;
+    D_802809F5 = 0;
+}
 
-INCLUDE_ASM(s32, "code_16c8e0", func_8023E11C);
+void func_8023E11C(void) {
+    D_802809F4 = 0;
+    D_802809F5 = 0;
+}
 
 INCLUDE_ASM(s32, "code_16c8e0", initialize_battle);
 
@@ -209,7 +215,70 @@ INCLUDE_ASM(s32, "code_16c8e0", func_802409F4);
 
 INCLUDE_ASM(s32, "code_16c8e0", func_80240AA8);
 
-INCLUDE_ASM(s32, "code_16c8e0", delete_actor);
+void delete_actor(Actor* actor) {
+    ActorPart* partsTable;
+    ActorPart* actorPartTemp;
+    BattleStatus* battleStatus;
+    s32 i;
+
+    // TODO hard-coded
+    for (i = 0; i < 2; i++) {
+        remove_actor_decoration(actor, i);
+    }
+    if (actor->idleScript != NULL) {
+        kill_script_by_ID(actor->idleScriptID);
+    }
+    if (actor->onHitScript != NULL) {
+        kill_script_by_ID(actor->onHitID);
+    }
+    if (actor->takeTurnScript != NULL) {
+        kill_script_by_ID(actor->takeTurnID);
+    }
+    func_80266EE8(actor, 0);
+
+    partsTable = actor->partsTable;
+
+    while (partsTable != NULL) {
+        if (!(partsTable->flags & 0x4)) {
+            func_80112328(partsTable->shadow);
+        }
+
+        if (partsTable->idleAnimations != NULL) {
+            func_802DE894(partsTable->unk_84, 0, 0, 0, 0, 0, 0);
+
+            ASSERT(func_802DE5E8(partsTable->unk_84) == 0);
+
+            if (!(partsTable->flags & 0x80000000)) {
+                heap_free(partsTable->movement);
+            }
+
+            if (!(partsTable->flags & 0x2)) {
+                heap_free(partsTable->decorationTable);
+            }
+        }
+        actorPartTemp = partsTable->nextPart;
+        heap_free(partsTable);
+        partsTable = actorPartTemp;
+    }
+
+    func_80112328(actor->shadow);
+    func_800476F4(actor->unk_436);
+    remove_effect(actor->ptrDefuffIcon);
+
+    if (actor->unk_200 != NULL) {
+        actor->unk_200[3][9] = 0;
+    }
+
+    battleStatus = &gBattleStatus;
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        if (battleStatus->enemyActors[i] == actor) {
+            battleStatus->enemyActors[i] = NULL;
+            break;
+        }
+    }
+
+    heap_free(actor);
+}
 
 void delete_player_actor(Actor* player) {
     struct ActorPart* partsTable;

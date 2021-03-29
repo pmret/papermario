@@ -41,8 +41,8 @@ glabel func_802D663C
 /* FB074 802D66C4 256BA680 */  addiu     $t3, $t3, %lo(D_8008A680)
 /* FB078 802D66C8 240A0001 */  addiu     $t2, $zero, 1
 /* FB07C 802D66CC 0260382D */  daddu     $a3, $s3, $zero
-/* FB080 802D66D0 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* FB084 802D66D4 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* FB080 802D66D0 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* FB084 802D66D4 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* FB088 802D66D8 8C620000 */  lw        $v0, ($v1)
 /* FB08C 802D66DC 0220302D */  daddu     $a2, $s1, $zero
 /* FB090 802D66E0 34420040 */  ori       $v0, $v0, 0x40

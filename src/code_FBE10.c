@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(void, "code_fa4c0_len_3bf0", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
+INCLUDE_ASM(void, "code_FBE10", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
 
-INCLUDE_ASM(void, "code_fa4c0_len_3bf0", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
+INCLUDE_ASM(void, "code_FBE10", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
 
 ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -11,7 +11,7 @@ ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {
     f32 z = get_float_variable(script, *args++);
 
     func_802D7460(x, y, z, get_variable(script, *args++));
-    play_sound_at_position(0x2055, 0, x, y, z);
+    sfx_play_sound_at_position(0x2055, 0, x, y, z);
     return ApiStatus_DONE2;
 }
 
@@ -22,7 +22,7 @@ ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall) {
     f32 z = get_float_variable(script, *args++);
 
     func_802D74C0(x, y, z, get_variable(script, *args++));
-    play_sound_at_position(0x378, 0, x, y, z);
+    sfx_play_sound_at_position(0x378, 0, x, y, z);
     return ApiStatus_DONE2;
 }
 

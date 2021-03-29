@@ -30,8 +30,8 @@ glabel func_80034C3C
 /* 1009C 80034C9C 80C30000 */  lb        $v1, ($a2)
 /* 100A0 80034CA0 14620007 */  bne       $v1, $v0, .L80034CC0
 /* 100A4 80034CA4 00000000 */   nop
-/* 100A8 80034CA8 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* 100AC 80034CAC 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* 100A8 80034CA8 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* 100AC 80034CAC 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* 100B0 80034CB0 8C620000 */  lw        $v0, ($v1)
 /* 100B4 80034CB4 34420008 */  ori       $v0, $v0, 8
 /* 100B8 80034CB8 AC620000 */  sw        $v0, ($v1)
@@ -54,8 +54,8 @@ glabel func_80034C3C
 /* 100F4 80034CF4 A0C20000 */   sb       $v0, ($a2)
 /* 100F8 80034CF8 0C0911C2 */  jal       pause_cleanup
 /* 100FC 80034CFC 00000000 */   nop
-/* 10100 80034D00 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 10104 80034D04 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 10100 80034D00 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 10104 80034D04 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 10108 80034D08 8C820000 */  lw        $v0, ($a0)
 /* 1010C 80034D0C 2403FFF7 */  addiu     $v1, $zero, -9
 /* 10110 80034D10 00431024 */  and       $v0, $v0, $v1
@@ -117,7 +117,7 @@ glabel func_80034C3C
 /* 101F0 80034DF0 8C840924 */  lw        $a0, %lo(D_800A0924)($a0)
 /* 101F4 80034DF4 0C0525FF */  jal       func_801497FC
 /* 101F8 80034DF8 00000000 */   nop
-/* 101FC 80034DFC 0C052B1C */  jal       func_8014AC70
+/* 101FC 80034DFC 0C052B1C */  jal       bgm_reset_max_volume
 /* 10200 80034E00 00000000 */   nop
 /* 10204 80034E04 0C0169B0 */  jal       load_world_script_api
 /* 10208 80034E08 00000000 */   nop

@@ -5,7 +5,7 @@ glabel func_802422B4_EE8864
 /* EE8864 802422B4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EE8868 802422B8 AFBF0010 */  sw        $ra, 0x10($sp)
 /* EE886C 802422BC 8C82000C */  lw        $v0, 0xc($a0)
-/* EE8870 802422C0 0C0B53A3 */  jal       func_802D4E8C
+/* EE8870 802422C0 0C0B53A3 */  jal       dead_get_variable
 /* EE8874 802422C4 8C450000 */   lw       $a1, ($v0)
 /* EE8878 802422C8 3C018024 */  lui       $at, %hi(D_80244630_EEABE0)
 /* EE887C 802422CC AC224630 */  sw        $v0, %lo(D_80244630_EEABE0)($at)

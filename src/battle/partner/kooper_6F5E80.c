@@ -17,9 +17,11 @@ ApiStatus func_80238000_6F5E80(ScriptInstance* script, s32 isInitialCall) {
     add_xz_vec3f(&partnerActorMovement->currentPos, partnerActor->walk.speed, partnerActor->walk.angle);
 
     if (partnerActor->walk.speed < 4.0f) {
-        play_movement_dust_effects(0, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y, partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+        play_movement_dust_effects(0, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
+                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
     } else {
-        play_movement_dust_effects(1, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y, partnerActor->walk.currentPos.z, partnerActor->walk.angle);
+        play_movement_dust_effects(1, partnerActor->walk.currentPos.x, partnerActor->walk.currentPos.y,
+                                   partnerActor->walk.currentPos.z, partnerActor->walk.angle);
     }
 
     partnerActorMovement->speed = partnerActorMovement->speed / 1.5;

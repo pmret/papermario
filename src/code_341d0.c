@@ -4,7 +4,7 @@ typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
 extern TlbMappablePage D_80197000;
-extern EffectTableEntry D_8007F210[135];
+extern EffectTableEntry gEffectTable[135];
 
 #define EFFECT_LOADED 1
 
@@ -50,7 +50,7 @@ s32 render_effects(void) {
     curEffectInst = &D_800B4398[0];
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
         if ((curEffectInst[i] != NULL) && (curEffectInst[i]->flags & 1) && (curEffectInst[i]->flags & 8)) {
-            if ((*gGameStatusPtr)->isBattle) {
+            if (gGameStatusPtr->isBattle) {
                 if (curEffectInst[i]->flags & 4) {
                     curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
                 }
@@ -121,7 +121,7 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
         effectBp->init(newEffectInst);
     }
 
-    if ((*gGameStatusPtr)->isBattle) {
+    if (gGameStatusPtr->isBattle) {
         newEffectInst->flags |= 4;
     }
     return newEffectInst;
@@ -167,7 +167,7 @@ void remove_all_effects(void) {
 }
 
 s32 load_effect(s32 effectIndex) {
-    EffectTableEntry* effectTable = &D_8007F210[0];
+    EffectTableEntry* effectTable = &gEffectTable[0];
     EffectTableEntry* effectEntry;
     Effect* curEffect;
     TlbMappablePage* tlbMappablePages;

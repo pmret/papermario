@@ -373,17 +373,17 @@ ApiStatus GotoMapByID(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetEntryID(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->entryID);
+    set_variable(script, *script->ptrReadPos, gGameStatusPtr->entryID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetMapID(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->mapID);
+    set_variable(script, *script->ptrReadPos, gGameStatusPtr->mapID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetLoadType(ScriptInstance* script, s32 isInitialCall) {
-    set_variable(script, *script->ptrReadPos, (*gGameStatusPtr)->loadType != 0);
+    set_variable(script, *script->ptrReadPos, gGameStatusPtr->loadType != 0);
     return ApiStatus_DONE2;
 }
 
@@ -400,13 +400,13 @@ ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelID = get_variable(script, *args++);
-    SoundId soundID = get_variable(script, *args++);
+    SoundID soundID = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
     f32 x, y, z;
     f32 n1, n2, n3;
 
     get_model_center_and_size((u16)modelID, &x, &y, &z, &n1, &n2, &n3);
-    play_sound_at_position(soundID, var3, x, y, z);
+    sfx_play_sound_at_position(soundID, var3, x, y, z);
 
     return ApiStatus_DONE2;
 }
@@ -414,12 +414,12 @@ ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtCollider(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 colliderID = get_variable(script, *args++);
-    SoundId soundID = get_variable(script, *args++);
+    SoundID soundID = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
     f32 x, y, z;
 
     get_collider_center(colliderID, &x, &y, &z);
-    play_sound_at_position(soundID, var3, x, y, z);
+    sfx_play_sound_at_position(soundID, var3, x, y, z);
 
     return ApiStatus_DONE2;
 }

@@ -47,6 +47,7 @@ script_parser = Lark(r"""
          | "sleep" expr "secs"  -> sleep_secs_stmt
          | "spawn" expr         -> spawn_stmt
          | "await" expr         -> await_stmt
+         | "jump" expr          -> jump_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
          | lhs set_op "f" expr  -> set_float_stmt
@@ -296,6 +297,8 @@ class Compile(Transformer):
         return super().transform(tree)
 
     def c_identifier(self, tree):
+        if tree.children[0].startswith("STORY_"):
+            return f"{tree.children[0]}"
         return f"(Bytecode)(&{tree.children[0]})"
 
     def ESCAPED_STRING(self, str_with_quotes):
@@ -523,6 +526,8 @@ class Compile(Transformer):
         return Cmd("ScriptOpcode_SPAWN_SCRIPT_GET_ID", script, lhs, meta=tree.meta)
     def await_stmt(self, tree):
         return Cmd("ScriptOpcode_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
+    def jump_stmt(self, tree):
+        return Cmd("ScriptOpcode_JUMP", tree.children[0], meta=tree.meta)
 
     def set_stmt(self, tree):
         lhs, opcodes, rhs = tree.children

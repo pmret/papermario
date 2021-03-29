@@ -55,12 +55,12 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
         if (playerStatus->actionState == ActionState_SPIN) {
             playerStatus->animFlags |= 0x40000;
         }
-        D_8009A650[0] |= 0x40;
+        OVERRIDE_FLAG_SET(0x40);
     } else {
         enable_player_input();
         func_800EF600();
         func_800E01DC();
-        D_8009A650[0] &= ~0x40;
+        OVERRIDE_FLAG_UNSET(0x40);
         func_800E983C();
     }
     return ApiStatus_DONE2;
@@ -427,7 +427,7 @@ ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(ScriptInstance *script) {
+ApiStatus func_802D2C40(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -446,8 +446,8 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
 
-    play_sound_at_player(var, var2);
-    return 2;
+    sfx_play_sound_at_player(var, var2);
+    return ApiStatus_DONE2;
 }
 
 INCLUDE_ASM(s32, "code_F5750", func_802D2D30);
@@ -570,7 +570,8 @@ UnkF5750* func_802D4164(s32 index) {
 
 INCLUDE_ASM(s32, "code_F5750", func_802D417C);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D420C);
+void func_802D420C(UnkF5750* arg0);
+INCLUDE_ASM(void, "code_F5750", func_802D420C, UnkF5750* arg0);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D42AC);
 

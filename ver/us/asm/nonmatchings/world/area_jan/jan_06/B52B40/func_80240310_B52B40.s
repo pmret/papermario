@@ -32,7 +32,7 @@ glabel func_80240310_B52B40
 /* B52BAC 8024037C 00000000 */  nop
 /* B52BB0 80240380 46800020 */  cvt.s.w   $f0, $f0
 /* B52BB4 80240384 AE220078 */  sw        $v0, 0x78($s1)
-/* B52BB8 80240388 0C05267B */  jal       func_801499EC
+/* B52BB8 80240388 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* B52BBC 8024038C E7A00010 */   swc1     $f0, 0x10($sp)
 /* B52BC0 80240390 8FBF0020 */  lw        $ra, 0x20($sp)
 /* B52BC4 80240394 8FB1001C */  lw        $s1, 0x1c($sp)

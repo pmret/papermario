@@ -23,6 +23,8 @@ build.ninja
 *.msg.h
 *.bin
 *.o
+*.zip
+baserom.*
 build/
 assets/
 /docs/doxygen/

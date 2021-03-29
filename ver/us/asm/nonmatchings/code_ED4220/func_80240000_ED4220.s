@@ -6,7 +6,7 @@ glabel func_80240000_ED4220
 /* ED4224 80240004 AFBF0010 */  sw        $ra, 0x10($sp)
 /* ED4228 80240008 3C05F5DE */  lui       $a1, 0xf5de
 /* ED422C 8024000C 34A50180 */  ori       $a1, $a1, 0x180
-/* ED4230 80240010 0C0B53A3 */  jal       func_802D4E8C
+/* ED4230 80240010 0C0B53A3 */  jal       dead_get_variable
 /* ED4234 80240014 0000202D */   daddu    $a0, $zero, $zero
 /* ED4238 80240018 28430031 */  slti      $v1, $v0, 0x31
 /* ED423C 8024001C 3C020019 */  lui       $v0, 0x19

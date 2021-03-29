@@ -184,8 +184,8 @@ glabel func_8011D9B8
 .L8011DC3C:
 /* B433C 8011DC3C 3C038015 */  lui       $v1, %hi(D_801533AC)
 /* B4340 8011DC40 8C6333AC */  lw        $v1, %lo(D_801533AC)($v1)
-/* B4344 8011DC44 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* B4348 8011DC48 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* B4344 8011DC44 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* B4348 8011DC48 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* B434C 8011DC4C 3C018015 */  lui       $at, %hi(D_8014B7F0)
 /* B4350 8011DC50 AC35B7F0 */  sw        $s5, %lo(D_8014B7F0)($at)
 /* B4354 8011DC54 00031880 */  sll       $v1, $v1, 2

@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel osCreateMesgQueue
-/* 40980 80065580 3C028009 */  lui       $v0, %hi(D_80094650)
-/* 40984 80065584 24424650 */  addiu     $v0, $v0, %lo(D_80094650)
+/* 40980 80065580 3C028009 */  lui       $v0, %hi(__osThreadTail)
+/* 40984 80065584 24424650 */  addiu     $v0, $v0, %lo(__osThreadTail)
 /* 40988 80065588 AC820000 */  sw        $v0, ($a0)
 /* 4098C 8006558C AC820004 */  sw        $v0, 4($a0)
 /* 40990 80065590 AC800008 */  sw        $zero, 8($a0)

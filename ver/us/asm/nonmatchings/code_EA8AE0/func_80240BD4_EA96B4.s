@@ -12,31 +12,31 @@ glabel func_80240BD4_EA96B4
 /* EA96D0 80240BF0 AFB00010 */  sw        $s0, 0x10($sp)
 /* EA96D4 80240BF4 8E30000C */  lw        $s0, 0xc($s1)
 /* EA96D8 80240BF8 8E050000 */  lw        $a1, ($s0)
-/* EA96DC 80240BFC 0C0B53A3 */  jal       func_802D4E8C
+/* EA96DC 80240BFC 0C0B53A3 */  jal       dead_get_variable
 /* EA96E0 80240C00 26100004 */   addiu    $s0, $s0, 4
 /* EA96E4 80240C04 8E050000 */  lw        $a1, ($s0)
 /* EA96E8 80240C08 26100004 */  addiu     $s0, $s0, 4
 /* EA96EC 80240C0C 0220202D */  daddu     $a0, $s1, $zero
-/* EA96F0 80240C10 0C0B53A3 */  jal       func_802D4E8C
+/* EA96F0 80240C10 0C0B53A3 */  jal       dead_get_variable
 /* EA96F4 80240C14 0040982D */   daddu    $s3, $v0, $zero
 /* EA96F8 80240C18 8E050000 */  lw        $a1, ($s0)
 /* EA96FC 80240C1C 26100004 */  addiu     $s0, $s0, 4
 /* EA9700 80240C20 0220202D */  daddu     $a0, $s1, $zero
-/* EA9704 80240C24 0C0B53A3 */  jal       func_802D4E8C
+/* EA9704 80240C24 0C0B53A3 */  jal       dead_get_variable
 /* EA9708 80240C28 0040902D */   daddu    $s2, $v0, $zero
 /* EA970C 80240C2C 8E050000 */  lw        $a1, ($s0)
 /* EA9710 80240C30 26100004 */  addiu     $s0, $s0, 4
 /* EA9714 80240C34 0220202D */  daddu     $a0, $s1, $zero
-/* EA9718 80240C38 0C0B53A3 */  jal       func_802D4E8C
+/* EA9718 80240C38 0C0B53A3 */  jal       dead_get_variable
 /* EA971C 80240C3C 0040A02D */   daddu    $s4, $v0, $zero
 /* EA9720 80240C40 0220202D */  daddu     $a0, $s1, $zero
 /* EA9724 80240C44 8E050000 */  lw        $a1, ($s0)
-/* EA9728 80240C48 0C0B53A3 */  jal       func_802D4E8C
+/* EA9728 80240C48 0C0B53A3 */  jal       dead_get_variable
 /* EA972C 80240C4C 0040882D */   daddu    $s1, $v0, $zero
 /* EA9730 80240C50 0000202D */  daddu     $a0, $zero, $zero
 /* EA9734 80240C54 3C05FD05 */  lui       $a1, 0xfd05
 /* EA9738 80240C58 34A50F80 */  ori       $a1, $a1, 0xf80
-/* EA973C 80240C5C 0C0B53A3 */  jal       func_802D4E8C
+/* EA973C 80240C5C 0C0B53A3 */  jal       dead_get_variable
 /* EA9740 80240C60 0040802D */   daddu    $s0, $v0, $zero
 /* EA9744 80240C64 00131900 */  sll       $v1, $s3, 4
 /* EA9748 80240C68 00731823 */  subu      $v1, $v1, $s3

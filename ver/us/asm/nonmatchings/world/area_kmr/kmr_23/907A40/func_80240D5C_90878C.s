@@ -9,8 +9,8 @@ glabel func_80240D5C_90878C
 /* 90879C 80240D6C 0C0B1EAF */  jal       get_variable
 /* 9087A0 80240D70 0000202D */   daddu    $a0, $zero, $zero
 /* 9087A4 80240D74 3C05FFEF */  lui       $a1, 0xffef
-/* 9087A8 80240D78 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 9087AC 80240D7C 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 9087A8 80240D78 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 9087AC 80240D7C 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 9087B0 80240D80 A440001E */  sh        $zero, 0x1e($v0)
 /* 9087B4 80240D84 8C830000 */  lw        $v1, ($a0)
 /* 9087B8 80240D88 34A5FFFF */  ori       $a1, $a1, 0xffff

@@ -1,22 +1,22 @@
 from segtypes.n64.rgba16 import N64SegRgba16
 import png
 import os
-from util.n64 import Yay0decompress
+from util import options
 
 
 class N64SegCi8(N64SegRgba16):
-    def __init__(self, segment, next_segment, options):
-        super().__init__(segment, next_segment, options)
+    def __init__(self, segment, next_segment):
+        super().__init__(segment, next_segment)
 
         self.path = None
 
     def split(self, rom_bytes, base_path):
-        out_dir = self.create_parent_dir(base_path + "/" + self.options.get("assets_dir", "img"), self.name)
+        out_dir = self.create_parent_dir(base_path + "/" + options.get("assets_dir", "img"), self.name)
         self.path = os.path.join(out_dir, os.path.basename(self.name) + ".png")
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
-        self.image = self.parse_image(data, self.width, self.height)
+        self.image = self.__class__.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical)
 
     def postsplit(self, segments):
         palettes = [seg for seg in segments if seg.type ==
@@ -51,7 +51,7 @@ class N64SegCi8(N64SegRgba16):
                     f"No unnamed palette for {self.name}; wrote image data to {self.path}")
 
     @staticmethod
-    def parse_image(data, width, height):
+    def parse_image(data, width, height, flip_h=False, flip_v=False):
         return data
 
     def max_length(self):

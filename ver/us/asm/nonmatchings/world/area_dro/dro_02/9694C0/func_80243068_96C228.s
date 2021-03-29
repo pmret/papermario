@@ -7,7 +7,7 @@ glabel func_80243068_96C228
 /* 96C230 80243070 0000282D */  daddu     $a1, $zero, $zero
 /* 96C234 80243074 24060068 */  addiu     $a2, $zero, 0x68
 /* 96C238 80243078 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 96C23C 8024307C 0C0526AE */  jal       _play_sound
+/* 96C23C 8024307C 0C0526AE */  jal       sfx_play_sound_with_params
 /* 96C240 80243080 00A0382D */   daddu    $a3, $a1, $zero
 /* 96C244 80243084 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 96C248 80243088 24020002 */  addiu     $v0, $zero, 2

@@ -14,7 +14,7 @@ glabel func_802BDF08_324858
 /* 32487C 802BDF2C 10400004 */  beqz      $v0, .L802BDF40
 /* 324880 802BDF30 2404200F */   addiu    $a0, $zero, 0x200f
 /* 324884 802BDF34 0000282D */  daddu     $a1, $zero, $zero
-/* 324888 802BDF38 0C052742 */  jal       play_sound_at_npc
+/* 324888 802BDF38 0C052742 */  jal       sfx_play_sound_at_npc
 /* 32488C 802BDF3C 2406FFFC */   addiu    $a2, $zero, -4
 .L802BDF40:
 /* 324890 802BDF40 0C0AF77C */  jal       func_802BDDF0_324740

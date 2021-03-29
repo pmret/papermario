@@ -20,22 +20,22 @@ s32 func_800E6904(void) {
     s32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & 0x100000)) {
-        if (temp_8010EBB0.unk_00 == 0) {
+        if (temp_8010EBB0->unk_00 == 0) {
             if (!(playerStatus->flags & 0x1000)) {
                 if (actionState == ActionState_IDLE || actionState == ActionState_WALK || actionState == ActionState_RUN) {
                     return 1;
                 }
             }
         } else if (partner_player_can_pause()) {
-            if (temp_8010EBB0.unk_03 == 6) {
+            if (temp_8010EBB0->unk_03 == 6) {
                 return 1;
-            } else if (temp_8010EBB0.unk_03 == 9) {
+            } else if (temp_8010EBB0->unk_03 == 9) {
                 if (actionState == ActionState_RIDE) {
                     return 1;
                 }
-            } else if (temp_8010EBB0.unk_03 == 8) {
+            } else if (temp_8010EBB0->unk_03 == 8) {
                 if (actionState != ActionState_RIDE) {
-                    play_sound(0x21D);
+                    sfx_play_sound(0x21D);
                 } else {
                     return 1;
                 }
@@ -65,11 +65,11 @@ void check_input_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 pressedButtons;
 
-    if (get_variable(NULL, SI_SAVE_VAR(0)) < 0x60) {
+    if (get_variable(NULL, SI_SAVE_VAR(0)) < STORY_EPILOGUE) {
         if (playerStatus->actionState != ActionState_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {
-            pressedButtons = (*gGameStatusPtr)->pressedButtons;
+            pressedButtons = gGameStatusPtr->pressedButtons;
         }
 
         if (!is_status_menu_visible()) {
@@ -77,14 +77,14 @@ void check_input_status_menu(void) {
                 open_status_menu_long();
 
                 if (!is_picking_up_item()) {
-                    play_sound(3);
+                    sfx_play_sound(3);
                 }
             }
         } else if (!(playerStatus->currentButtons & Z_TRIG + R_TRIG) && (pressedButtons & 8) && func_800E9860()) {
             close_status_menu();
 
             if (!is_picking_up_item()) {
-                play_sound(4);
+                sfx_play_sound(4);
             }
         }
     }

@@ -104,7 +104,7 @@ glabel func_80240000_DE2490
 /* DE2608 80240178 3C0142BE */  lui       $at, 0x42be
 /* DE260C 8024017C 44810000 */  mtc1      $at, $f0
 /* DE2610 80240180 0000382D */  daddu     $a3, $zero, $zero
-/* DE2614 80240184 0C052757 */  jal       play_sound_at_position
+/* DE2614 80240184 0C052757 */  jal       sfx_play_sound_at_position
 /* DE2618 80240188 E7A00010 */   swc1     $f0, 0x10($sp)
 /* DE261C 8024018C E6540004 */  swc1      $f20, 4($s2)
 .L80240190:

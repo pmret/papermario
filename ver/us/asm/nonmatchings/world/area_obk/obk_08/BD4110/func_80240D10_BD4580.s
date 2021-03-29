@@ -58,7 +58,7 @@ glabel L80240DA4_BD4614
 /* BD464C 80240DDC E7A00010 */  swc1      $f0, 0x10($sp)
 /* BD4650 80240DE0 8E060038 */  lw        $a2, 0x38($s0)
 /* BD4654 80240DE4 8E07003C */  lw        $a3, 0x3c($s0)
-/* BD4658 80240DE8 0C052757 */  jal       play_sound_at_position
+/* BD4658 80240DE8 0C052757 */  jal       sfx_play_sound_at_position
 /* BD465C 80240DEC 0000282D */   daddu    $a1, $zero, $zero
 /* BD4660 80240DF0 24020002 */  addiu     $v0, $zero, 2
 /* BD4664 80240DF4 AE420074 */  sw        $v0, 0x74($s2)

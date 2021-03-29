@@ -73,8 +73,9 @@ ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
     if (partnerActor->currentPos.y < 10.0f) {
         partnerActor->currentPos.y = 10.0f;
 
-        play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z, partnerActor->yaw);
-        play_sound(0x148);
+        play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z,
+                                   partnerActor->yaw);
+        sfx_play_sound(0x148);
 
         return ApiStatus_DONE1;
     }

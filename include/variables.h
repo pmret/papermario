@@ -14,10 +14,10 @@ extern PlayerAnim gPlayerAnimation;
 extern PlayerStatus gPlayerStatus;
 extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
-extern GameStatus* gGameStatusPtr[1];
+extern GameStatus gGameStatus;
+extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
-extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
@@ -98,11 +98,8 @@ extern PrintContext* D_802EB398;
 extern PrintContext* D_802EB39C;
 extern s32 D_802E99DC;
 
-extern f64 D_802EB000;
-extern f64 D_802EB008;
-
 extern Entity* D_802EB3A0;
-extern s32 D_8015C7D0[3];
+extern s32 D_8015C7D0[3]; // not size 3
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
@@ -130,6 +127,9 @@ extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
 extern u16 gMapTransitionAlpha;
+extern s8 D_800A0930;
+extern s8 D_800A0931;
+extern s16 D_800A0932[1];
 extern s16 D_800A0942;
 extern s16 D_800A0944;
 extern s16 D_800A0946;
@@ -145,9 +145,13 @@ extern s16 D_800A095E;
 extern u8 D_800A095F;
 extern s32 D_800A0960;
 extern s32 D_800A0964;
+extern s8 D_800A0B94;
 extern s16 D_800A0BB8;
 
+
 extern UIPanel gUIPanels[64];
+
+extern s32 D_802A3838;
 
 // Pause
 extern s32 gPauseMenuHeldButtons;
@@ -196,9 +200,10 @@ extern s16 gItemMenuNumItems;
 extern s32 D_802705D0;
 extern s32 gItemMenuCurrentScrollPos;
 extern s32 gItemMenuTargetScrollPos;
-extern s32 D_802705DC;
+extern u32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
+extern MenuIcon* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats
@@ -206,7 +211,9 @@ extern s32 gStatsMenuIconIDs[12];
 
 
 extern s32 gGameState;
-extern s32 D_8009A650[1];
+extern s16 D_8009A604;
+extern s32 D_8009A64C;
+extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;
@@ -229,7 +236,7 @@ extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
 extern Temp8010EBB0 D_8010EBB0; // something with partners
-extern Temp8010F250 D_8010F250; // play_sound state struct?
+extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
 // Effects
 extern EffectTableEntry gEffectTable[135];
@@ -291,17 +298,20 @@ extern MusicPlayer D_8014F6F0;
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
 extern s32 D_800B8590;
+extern OSThread* __osActiveQueue;
+extern OSThread* __osRunningThread;
+extern OSThread* __osRunQueue;
+extern OSDevMgr __osPiDevMgr;
 
 // gfx
 extern DisplayContext* gDisplayContext;
 extern Gfx* gMasterGfxPos;
 extern u16 gMatrixListPos;
-extern u16 gCurrentDisplayContextIndex;
+extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
 extern UNK_TYPE D_802EAE7C;
-extern f64 D_802EB370;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
@@ -316,11 +326,9 @@ extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
-extern s32 D_8028358C[];
 
 extern UNK_PTR D_800F7BE8;
 extern UNK_PTR D_800F7BBC;
-extern UNK_PTR D_800F7B94;
 
 extern s32 D_802C05CC;
 

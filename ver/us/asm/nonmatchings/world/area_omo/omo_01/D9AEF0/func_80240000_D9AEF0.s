@@ -97,7 +97,7 @@ glabel func_80240000_D9AEF0
 /* D9B04C 8024015C 3C014320 */  lui       $at, 0x4320
 /* D9B050 80240160 44810000 */  mtc1      $at, $f0
 /* D9B054 80240164 0000382D */  daddu     $a3, $zero, $zero
-/* D9B058 80240168 0C052757 */  jal       play_sound_at_position
+/* D9B058 80240168 0C052757 */  jal       sfx_play_sound_at_position
 /* D9B05C 8024016C E7A00010 */   swc1     $f0, 0x10($sp)
 /* D9B060 80240170 E6540004 */  swc1      $f20, 4($s2)
 .L80240174:

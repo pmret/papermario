@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802B66E0_E274C0
+.word L802B60D0_E26EB0, L802B65CC_E273AC, L802B6208_E26FE8, L802B6278_E27058, L802B631C_E270FC, L802B64DC_E272BC, L802B6568_E27348, L802B6594_E27374, L802B65CC_E273AC, L802B65CC_E273AC, L802B65CC_E273AC, L802B65B4_E27394, L802B65CC_E273AC, 0
+
+glabel D_802B6718_E274F8
+.double 0.54
+
+glabel D_802B6720_E27500
+.double 1.4
+
+glabel D_802B6728_E27508
+.double 360.0
+
+.section .text
+
 glabel func_802B6000_E26DE0
 /* E26DE0 802B6000 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* E26DE4 802B6004 AFB00018 */  sw        $s0, 0x18($sp)
@@ -42,7 +58,7 @@ glabel func_802B6000_E26DE0
 /* E26E74 802B6094 34420200 */  ori       $v0, $v0, 0x200
 /* E26E78 802B6098 34630001 */  ori       $v1, $v1, 1
 /* E26E7C 802B609C AE020000 */  sw        $v0, ($s0)
-/* E26E80 802B60A0 0C052736 */  jal       play_sound_at_player
+/* E26E80 802B60A0 0C052736 */  jal       sfx_play_sound_at_player
 /* E26E84 802B60A4 A4C30002 */   sh       $v1, 2($a2)
 .L802B60A8:
 /* E26E88 802B60A8 820300B6 */  lb        $v1, 0xb6($s0)
@@ -315,7 +331,7 @@ glabel L802B631C_E270FC
 /* E27274 802B6494 0C0B2D5B */  jal       exec_ShakeCam1
 /* E27278 802B6498 A20300B6 */   sb       $v1, 0xb6($s0)
 /* E2727C 802B649C 24040149 */  addiu     $a0, $zero, 0x149
-/* E27280 802B64A0 0C052736 */  jal       play_sound_at_player
+/* E27280 802B64A0 0C052736 */  jal       sfx_play_sound_at_player
 /* E27284 802B64A4 0000282D */   daddu    $a1, $zero, $zero
 /* E27288 802B64A8 24040080 */  addiu     $a0, $zero, 0x80
 /* E2728C 802B64AC 0C00A3C2 */  jal       start_rumble

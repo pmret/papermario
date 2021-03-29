@@ -5,6 +5,9 @@
 #include "common_structs.h"
 #include "enums.h"
 
+f32 fabsf(f32 f);
+f32 sqrtf(f32 f);
+f64 sqrt(f64 d);
 
 void nuBoot(void);
 void boot_idle(void);
@@ -70,6 +73,8 @@ void entity_init_BlueSwitch(Entity* entity);
 void entity_init_HugeBlueSwitch(Entity* entity);
 
 UNK_TYPE func_80072230(s32, f32, f32, f32, f32, s32);
+UNK_TYPE func_80072350(s32, f32, f32, f32, f32, f32, f32, s32, s32);
+void func_800706D0(s32, f32, f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
@@ -86,8 +91,12 @@ s32 do_lateral_collision(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* make_disguise_npc(s32 peachDisguise);
 
 s32 partner_player_can_pause(void);
+s32 disable_player_static_collisions(void);
+s32 disable_player_input(void);
 
 void func_80027088(s32);
+
+void get_dpad_input_radial(f32* angle, f32* magnitude);
 
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
@@ -134,8 +143,8 @@ s32 osGetId();
 
 void mem_clear(s8* data, s32 numBytes);
 
-s32* create_icon(s32 iconIndex);
-void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY);
+MenuIcon* create_icon(s32* iconIndex);
+void set_icon_render_pos(MenuIcon* iconIndex, s32 posX, s32 posY);
 
 void set_curtain_scale_goal(f32 scale);
 void set_curtain_fade(f32 scale);
@@ -149,7 +158,7 @@ void close_status_menu(void);
 void func_800EB168(s32);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
-
+s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
 
 // Pause
@@ -201,7 +210,8 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(s32* updateFunc, s32* drawFunc);
+s32 bind_dynamic_entity_7(s32* updateFunc, void (*drawFunc)(void));
+s32 get_dynamic_entity(s32 arg0);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
@@ -220,9 +230,9 @@ f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by);
 f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
-s32 func_801499EC(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
-s32 play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
-s32 set_music_track(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
+s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
+s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
 s32 basic_window_update(void);
@@ -256,7 +266,7 @@ void exec_entity_updatecmd(Entity* entity);
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
-void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount);
+void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void func_80070B50(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void func_800718D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070BB0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
@@ -268,10 +278,22 @@ void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
+void func_80138D88(s32, s32, s32, s32, f32);
+s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
+void func_80070CD0(s32, f32, f32, f32, f32, f32);
+
 // Dead functions:
-f32 func_8002AF70(f32 startX, f32 startZ, f32 endX, f32 endZ); // atan2
 Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
 Npc* func_8003E534(NpcId npcId); // get_npc_safe
-void func_80075170(s32, f32, f32, f32, f32); // func_8006FEF0
+void func_80077BD0(s32, s32, s32, s32, s32, s32);
+
+void dead_func_8006FEF0(s32, f32, f32, f32, f32);
+s32 dead_get_variable(ScriptInstance* script, Bytecode var);
+f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
+s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
+f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+
+f32 dead_cos_rad(f32 x);
+f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 
 #endif

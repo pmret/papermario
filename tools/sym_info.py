@@ -24,7 +24,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-mymap = os.path.join(root_dir, "ver", "current" "build", "papermario.map")
+mymap = os.path.join(root_dir, "ver", "current", "build", "papermario.map")
 if args.use_expected:
     mymap = os.path.join(root_dir, "ver", "current", "expected", "build", "papermario.map")
 

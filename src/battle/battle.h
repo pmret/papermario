@@ -197,6 +197,24 @@
 #define ACTOR_TYPE_slot_machine_start_dup3 0xD3
 #define ACTOR_TYPE_COUNT 0xD4
 
+#define AREA(id) \
+    .dmaStart = &code_##id##_ROM_START, \
+    .dmaEnd = &code_##id##_ROM_END, \
+    .dmaDest = &code_##id##_VRAM
+
+typedef struct ActorPartDesc {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s8 index;
+    /* 0x05 */ Vec3b posOffset;
+    /* 0x08 */ Vec2b targetOffset;
+    /* 0x0A */ s16 opacity;
+    /* 0x0C */ s32* idleAnimations;
+    /* 0x10 */ s32* defenseTable;
+    /* 0x14 */ s32 eventFlags;
+    /* 0x18 */ s32 elementImmunityFlags;
+    /* 0x1C */ char unk_1C[8];
+} ActorPartDesc; // size = 0x24
+
 typedef struct ActorDesc {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04;
@@ -222,6 +240,16 @@ typedef struct ActorDesc {
     /* 0x26 */ Vec2b statusMessageOffset;
 } ActorDesc; // size = 0x28
 
+typedef struct FormationRow {
+    /* 0x00 */ ActorDesc* actor;
+    /* 0x04 */ s32 position; ///< Home position. May also be a `Vector3*`.
+    /* 0x08 */ s32 priority; ///< Actors with higher priority values take their turn first.
+    /* 0x0C */ s32 var0;
+    /* 0x10 */ s32 var1;
+    /* 0x14 */ s32 var2;
+    /* 0x18 */ s32 var3;
+} Formation[]; // size = 0x1C * n
+
 typedef struct Stage {
     /* 0x00 */ const char* texture;
     /* 0x04 */ const char* shape;
@@ -236,22 +264,6 @@ typedef struct Stage {
 } Stage; // size = 0x28
 
 /// Zero-terminated.
-typedef struct StageListRow {
-    /* 0x00 */ const char* id; ///< Map ID.
-    /* 0x04 */ Stage* stage;
-} StageList[]; // size = 0x08 * n
-
-typedef struct FormationRow {
-    /* 0x00 */ ActorDesc* actor;
-    /* 0x04 */ s32 position; ///< Home position. May also be a `Vector3*`.
-    /* 0x08 */ s32 priority; ///< Actors with higher priority values take their turn first.
-    /* 0x0C */ s32 var0;
-    /* 0x10 */ s32 var1;
-    /* 0x14 */ s32 var2;
-    /* 0x18 */ s32 var3;
-} Formation[]; // size = 0x1C * n
-
-/// Zero-terminated.
 typedef struct Battle {
     /* 0x00 */ const char* name; ///< Debug SJIS name.
     /* 0x04 */ s32 formationSize;
@@ -259,6 +271,25 @@ typedef struct Battle {
     /* 0x0C */ Stage* stage;
     /* 0x10 */ s32 unk_10;
 } BattleList[]; // size = 0x14 * n
+
+/// Zero-terminated.
+typedef struct StageListRow {
+    /* 0x00 */ const char* id; ///< Map ID.
+    /* 0x04 */ Stage* stage;
+} StageList[]; // size = 0x08 * n
+
+typedef struct BattleArea {
+    /* 0x00 */ char* name; ///< JP debug name.
+    /* 0x04 */ s32 dmaStart;
+    /* 0x08 */ s32 dmaEnd;
+    /* 0x0C */ void* dmaDest;
+    /* 0x10 */ BattleList* battles;
+    /* 0x14 */ StageList* stages;
+    /* 0x18 */ s32 unused_18;
+    /* 0x1C */ void* dmaTable;
+} BattleArea; // size = 0x20
+
+extern BattleArea gBattleAreas[0x30];
 
 #define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), formation, stage }
 
@@ -271,24 +302,11 @@ typedef struct {
 
 typedef DefenseTableEntry DefenseTable[];
 
-typedef struct ActorPartDesc {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s8 index;
-    /* 0x05 */ Vec3b posOffset;
-    /* 0x08 */ Vec2b targetOffset;
-    /* 0x0A */ s16 opacity;
-    /* 0x0C */ s32* idleAnimations;
-    /* 0x10 */ s32* defenseTable;
-    /* 0x14 */ s32 eventFlags;
-    /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ char unk_1C[8];
-} ActorPartDesc; // size = 0x24
-
 typedef struct ActorSounds {
-    /* 0x00 */ SoundId walk[2];
-    /* 0x08 */ SoundId fly[2];
-    /* 0x10 */ SoundId jump;
-    /* 0x14 */ SoundId hurt;
+    /* 0x00 */ SoundID walk[2];
+    /* 0x08 */ SoundID fly[2];
+    /* 0x10 */ SoundID jump;
+    /* 0x14 */ SoundID hurt;
     /* 0x18 */ s16 delay[2]; ///< Number of frames to wait between walk/fly sounds. Negative values are in distance.
 } ActorSounds; // size = 0x20
 

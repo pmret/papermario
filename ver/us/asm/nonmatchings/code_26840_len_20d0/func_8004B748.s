@@ -161,7 +161,7 @@ glabel func_8004B748
 /* 26D78 8004B978 30421000 */  andi      $v0, $v0, 0x1000
 /* 26D7C 8004B97C 10400003 */  beqz      $v0, .L8004B98C
 /* 26D80 8004B980 0280202D */   daddu    $a0, $s4, $zero
-/* 26D84 8004B984 0C0130D6 */  jal       func_8004C358
+/* 26D84 8004B984 0C0130D6 */  jal       snd_set_modifiers
 /* 26D88 8004B988 0200282D */   daddu    $a1, $s0, $zero
 .L8004B98C:
 /* 26D8C 8004B98C A6000000 */  sh        $zero, ($s0)

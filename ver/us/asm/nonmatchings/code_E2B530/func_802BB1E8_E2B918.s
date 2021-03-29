@@ -1,6 +1,25 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802BCF50_E2D680
+.word L802BB224_E2B954, L802BB24C_E2B97C, L802BB2CC_E2B9FC, L802BB398_E2BAC8, L802BB440_E2BB70, L802BB468_E2BB98, L802BB4E0_E2BC10, L802BB56C_E2BC9C, L802BB5A0_E2BCD0, 0
+
+glabel D_802BCF78_E2D6A8
+.double 0.2
+
+glabel D_802BCF80_E2D6B0
+.double 0.2
+
+glabel D_802BCF88_E2D6B8
+.double 90.0
+
+glabel D_802BCF90_E2D6C0
+.double 90.0, 0.0
+
+.section .text
+
 glabel func_802BB1E8_E2B918
 /* E2B918 802BB1E8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* E2B91C 802BB1EC AFB1001C */  sw        $s1, 0x1c($sp)
@@ -152,7 +171,7 @@ glabel L802BB398_E2BAC8
 /* E2BB54 802BB424 24630001 */  addiu     $v1, $v1, 1
 /* E2BB58 802BB428 E6000008 */  swc1      $f0, 8($s0)
 /* E2BB5C 802BB42C E602000C */  swc1      $f2, 0xc($s0)
-/* E2BB60 802BB430 0C05272D */  jal       play_sound
+/* E2BB60 802BB430 0C05272D */  jal       sfx_play_sound
 /* E2BB64 802BB434 A2030012 */   sb       $v1, 0x12($s0)
 /* E2BB68 802BB438 080AED75 */  j         .L802BB5D4
 /* E2BB6C 802BB43C 00000000 */   nop
@@ -233,7 +252,7 @@ glabel L802BB4E0_E2BC10
 /* E2BC84 802BB554 A2030011 */  sb        $v1, 0x11($s0)
 /* E2BC88 802BB558 24420001 */  addiu     $v0, $v0, 1
 .L802BB55C:
-/* E2BC8C 802BB55C 0C05272D */  jal       play_sound
+/* E2BC8C 802BB55C 0C05272D */  jal       sfx_play_sound
 /* E2BC90 802BB560 A2020012 */   sb       $v0, 0x12($s0)
 /* E2BC94 802BB564 080AED75 */  j         .L802BB5D4
 /* E2BC98 802BB568 00000000 */   nop

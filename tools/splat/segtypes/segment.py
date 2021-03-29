@@ -1,5 +1,6 @@
 from pathlib import Path, PurePath
 from util import log
+from util import options
 import re
 import sys
 
@@ -30,29 +31,26 @@ def parse_segment_vram(segment):
     if type(segment) is dict:
         return segment.get("vram", 0)
     else:
-        if len(segment) >= 3 and type(segment[-1]) is int:
-            return segment[-1]
-        else:
-            return 0
+        return 0
 
 
 def parse_segment_subalign(segment):
+    default = options.get("subalign", default_subalign)
     if type(segment) is dict:
-        return segment.get("subalign", default_subalign)
-    return default_subalign
+        return segment.get("subalign", default)
+    return default
 
 
 class Segment:
     require_unique_name = True
 
-    def __init__(self, segment, next_segment, options):
+    def __init__(self, segment, next_segment):
         self.rom_start = parse_segment_start(segment)
         self.rom_end = parse_segment_start(next_segment)
         self.type = parse_segment_type(segment)
         self.name = parse_segment_name(segment, self.__class__)
         self.vram_start = parse_segment_vram(segment)
         self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
-        self.options = options
         self.config = segment
         self.subalign = parse_segment_subalign(segment)
 
@@ -103,7 +101,7 @@ class Segment:
         return out_dir
 
     def should_run(self):
-        return self.type in self.options["modes"] or "all" in self.options["modes"]
+        return options.mode_active(self.type)
 
     def split(self, rom_bytes, base_path):
         pass
@@ -115,10 +113,10 @@ class Segment:
         return (self.config, self.rom_end)
 
     def get_ld_section(self):
-        replace_ext = self.options.get("ld_o_replace_extension", True)
+        replace_ext = options.get("ld_o_replace_extension", True)
         sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
         vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
-        subalign_str = "" if self.subalign == default_subalign else f"SUBALIGN({self.subalign})"
+        subalign_str = f"SUBALIGN({self.subalign})"
 
         s = (
             f"SPLAT_BEGIN_SEG({sect_name}, 0x{self.rom_start:X}, 0x{vram_or_rom:X}, {subalign_str})\n"
@@ -127,25 +125,30 @@ class Segment:
         i = 0
         do_next = False
         for subdir, path, obj_type, start in self.get_ld_files():
-            # Hack for non-0x10 alignment START
+            # Manual linker segment creation
+            if obj_type == "linker":
+                s += (
+                    "}\n"
+                    f"SPLAT_BEGIN_SEG({path}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
+                )
+
+            # Create new sections for non-0x10 alignment (hack)
             if start % 0x10 != 0 and i != 0 or do_next:
                 tmp_sect_name = path.replace(".", "_")
                 tmp_sect_name = tmp_sect_name.replace("/", "_")
-                tmp_vram = start - self.rom_start + self.vram_start
                 s += (
                     "}\n"
-                    f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{tmp_vram:X}, {subalign_str})\n"
+                    f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
                 )
                 do_next = False
 
             if start % 0x10 != 0 and i != 0:
                 do_next = True
-            # Hack for non-0x10 alignment END
 
             path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
             s += f"    {path_cname} = .;\n"
 
-            if subdir == self.options.get("assets_dir"):
+            if subdir == options.get("assets_dir"):
                 path = PurePath(path)
             else:
                 path = PurePath(subdir) / PurePath(path)
@@ -156,7 +159,8 @@ class Segment:
 
             path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
 
-            s += f"    BUILD_DIR/{path}({obj_type});\n"
+            if obj_type != "linker":
+                s += f"    BUILD_DIR/{path}({obj_type});\n"
             i += 1
 
         s += (
@@ -173,7 +177,7 @@ class Segment:
         return []
 
     def log(self, msg):
-        if self.options.get("verbose", False):
+        if options.get("verbose", False):
             log.write(f"{self.type} {self.name}: {msg}")
 
     def warn(self, msg):

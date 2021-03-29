@@ -22,7 +22,7 @@ glabel func_802417F8_C37D28
 /* C37D6C 8024183C E7A00010 */  swc1      $f0, 0x10($sp)
 /* C37D70 80241840 8E460038 */  lw        $a2, 0x38($s2)
 /* C37D74 80241844 8E47003C */  lw        $a3, 0x3c($s2)
-/* C37D78 80241848 0C05267B */  jal       func_801499EC
+/* C37D78 80241848 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C37D7C 8024184C 24050002 */   addiu    $a1, $zero, 2
 /* C37D80 80241850 0220202D */  daddu     $a0, $s1, $zero
 /* C37D84 80241854 24020001 */  addiu     $v0, $zero, 1

@@ -1,15 +1,15 @@
 #! /usr/bin/python3
 
 import sys
+from pathlib import Path
 
 _script_lib = None
-def script_lib():
+def script_lib(offset):
     global _script_lib
 
     if not _script_lib:
         _script_lib = {}
 
-        from pathlib import Path
         from os import path
         import re
 
@@ -35,23 +35,170 @@ def script_lib():
                             pass
         """
 
-        # symbol_addrs.txt
-        with open(Path(path.dirname(__file__), "symbol_addrs.txt"), "r") as file:
+        repo_root = Path(__file__).resolve().parent.parent
+        symbols = Path(repo_root / "ver" / "current" / "symbol_addrs.txt")
+        with open(symbols, "r") as file:
             for line in file.readlines():
-                line = line.split(";")[0]
-
                 s = [s.strip() for s in line.split("=", 1)]
                 name = s[0]
-                addr = s[1].split(";")[0].split(" ")[0]
-                _script_lib[int(addr, 16)] = name
+                vaddr = int(s[1].split(";")[0].split(" ")[0], 16)
 
+                raddr = "0xFFFFFFFF"
+                if "rom:" in line:
+                    raddr = line.split("rom:",1)[1]
+                    if " " in raddr:
+                        raddr = raddr.split(" ",1)[0]
+                raddr = raddr.strip()
+
+                if vaddr not in _script_lib:
+                    _script_lib[vaddr] = []
+                _script_lib[vaddr].append([int(raddr, 16), name])
+
+        # Sort the symbols for each vram address by the difference 
+        # between their rom address and the offset passed in.
+        # If offset - rom address goes below 0, it's part of the
+        # previous file, so treat it as min priority, same as a default.
+        # After sorting, the first rom address and name should be the best candidate.
+        for k in _script_lib.keys():
+            for i,entry in enumerate(_script_lib[k]):
+                diff = offset - entry[0]
+                entry[0] = 0xFFFFFFFF if diff < 0 else diff
+                _script_lib[k][i][0] = entry[0]
+            _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
+
+# Grab constants from the include/ folder to save manual work
+constants = {}
+def get_constants():
+    global constants
+    valid_defines = { "ItemId", "PlayerAnim", "ActorID", "Event", "SoundId", "Song" }
+    valid_enums = { "StoryProgress" }
+    for enum in valid_defines:
+        constants[enum] = {}
+    for enum in valid_enums:
+        constants[enum] = {}
+
+    include_path = Path(Path(__file__).resolve().parent.parent / "include")
+    enums = Path(include_path / "enums.h").read_text().splitlines()
+
+    # define stuff
+    for line in enums:
+        this_enum = ""
+        for enum in valid_defines:
+            if f"#define {enum}_" in line:
+                this_enum = enum
+                break;
+
+        if this_enum:
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            constants[this_enum][int(id_, 16)] = name
+
+    # enums
+    for i,line in enumerate(enums):
+        if line.startswith("enum "):
+            enum_name = line.split(" ",1)[1].split(" {",1)[0]
+            if enum_name in valid_enums:
+                constants[enum_name] = {}
+                last_num = 0
+                i += 1
+                while "}" not in enums[i]:
+                    if not enums[i]:
+                        i += 1
+                        continue
+
+                    name = enums[i].strip()
+                    val = last_num+1
+                    if "=" in name:
+                        name, _, val = name.split(" ")
+                        val = int(val[:-1], 0)
+                    else:
+                        name = name[:-1]
+
+                    constants[enum_name][val] = name
+                    i += 1
+                    last_num = val
+
+    return
+
+def fix_args(args, info):
+    global constants
+    
+    new_args = []
+    for i,arg in enumerate(args.split(", ")):
+        if i in info:
+            if "0x" in arg:
+                argNum = int(arg, 16)
+            else:
+                argNum = int(arg, 10)
+
+            if argNum in constants[info[i]]:
+                new_args.append(f"{constants[info[i]][argNum]}")
+            else:
+                print(f"{argNum:X} was not found within {info[i]} constants, add it.")
+                if info[i] == "SoundId":
+                    # Ethan wanted sound IDs in hex instead, so convert it back
+                    if "0x" not in arg:
+                        argNum = int(arg, 10)
+                        arg = f"0x{argNum:X}"
+                new_args.append(f"{arg}")
+        else:
+            new_args.append(f"{arg}")
+    return ", ".join(new_args)
+
+replace_funcs = {
+    "DispatchDamagePlayerEvent" :{1:"Event"},
+    "DispatchEvent"             :{0:"ActorID"},
+
+    "ForceHomePos"              :{0:"ActorID"},
+    
+    "GetActorPos"               :{0:"ActorID"},
+    "GetGoalPos"                :{0:"ActorID"},
+    "GetItemPower"              :{0:"ItemId"},
+
+    "JumpToGoal"                :{0:"ActorID"},
+
+    "MakeEntity"                :{5:"ItemId"},
+    "MakeItemEntity"            :{0:"ItemId"},
+    
+    "PlaySound"                 :{0:"SoundId"},
+    "PlaySoundAtActor"          :{0:"ActorID", 1:"SoundId"},
+    
+    "SetActorJumpGravity"       :{0:"ActorID"},
+    "SetActorSpeed"             :{0:"ActorID"},
+    "SetActorScale"             :{0:"ActorID"},
+    "SetActorYaw"               :{0:"ActorID"},
+    "SetAnimation"              :{0:"ActorID", 2:"PlayerAnim"},
+    "SetGoalPos"                :{0:"ActorID"},
+    "SetGoalToHome"             :{0:"ActorID"},
+    "SetGoalToTarget"           :{0:"ActorID"},
+    "SetJumpAnimations"         :{0:"ActorID", 2:"PlayerAnim", 3:"PlayerAnim", 4:"PlayerAnim"},
+    "SetMusicTrack"             :{1:"Song"},
+    "SetTargetActor"            :{0:"ActorID"},
+    
+    "UseIdleAnimation"          :{0:"ActorID"},
+
+}
+
+def replace_constants(func, args):
+    global replace_funcs
+    if func in replace_funcs:
+        return fix_args(args, replace_funcs[func])
+    elif func == "PlayEffect":
+        argsZ = args.split(", ")
+        if "0x" not in argsZ[0]:
+            argsZ[0] = f"0x{int(argsZ[0], 10):X}"
+        args = ", ".join(argsZ)
+    return args
 
 class ScriptDisassembler:
     def __init__(self, bytes, script_name = "script", symbol_map = {}):
         self.bytes = bytes
         self.script_name = script_name
-        self.symbol_map = { **script_lib(), **symbol_map }
+
+        self.symbol_map = { **script_lib(self.bytes.tell()), **symbol_map }
 
         self.out = ""
         self.prefix = ""
@@ -60,6 +207,10 @@ class ScriptDisassembler:
         self.indent_used = False
 
         self.done = False
+
+        self.start_pos = self.bytes.tell()
+        self.end_pos = 0
+        self.instructions = 0
 
     def disassemble(self):
         while True:
@@ -75,7 +226,10 @@ class ScriptDisassembler:
 
             self.disassemble_command(opcode, argc, argv)
 
+            self.instructions += 1
+
             if self.done:
+                self.end_pos = self.bytes.tell()
                 return self.prefix + self.out
 
     def write(self, line):
@@ -95,7 +249,7 @@ class ScriptDisassembler:
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
@@ -120,8 +274,8 @@ class ScriptDisassembler:
 
     def addr_ref(self, addr):
         if addr in self.symbol_map:
-            return self.symbol_map[addr]
-        return script_lib().get(addr, f"0x{addr:08X}")
+            return self.symbol_map[addr][0][1]
+        return f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
@@ -365,7 +519,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         # MULTI: multi-condition(s)
         # MATCH: match block
         self.case_stack = []
-
+        # stores the variable type the case is switching on
+        self.case_variable = ""
+        self.save_variable = ""
         self.was_multi_case = False
 
     @property
@@ -374,14 +530,16 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
     def var(self, arg):
         if arg in self.symbol_map:
-            return self.symbol_map[arg]
+            return self.symbol_map[arg][0][1]
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
             if v <= -220000000: return str((v + 230000000) / 1024)
             elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
-            elif v <= -160000000: return f"SI_SAVE_VAR({v + 170000000})"
+            elif v <= -160000000: 
+                self.save_variable = f"SI_SAVE_VAR({v + 170000000})"
+                return self.save_variable
             elif v <= -140000000: return f"SI_AREA_VAR({v + 150000000})"
             elif v <= -120000000: return f"SI_SAVE_FLAG({v + 130000000})"
             elif v <= -100000000: return f"SI_AREA_FLAG({v + 110000000})"
@@ -403,6 +561,28 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             return True
         except Exception:
             return False
+
+    def replace_enum(self, var, case=False):
+        varO = self.var(var)
+        if case:
+            self.save_variable = ""
+
+        try:
+            var = int(varO, 0)
+        except Exception:
+            return varO
+
+        if var > 0x10000000:
+            var -= 0x100000000
+
+        if ((case and self.case_variable == "SI_SAVE_VAR(0)") or 
+            (not case and self.save_variable == "SI_SAVE_VAR(0)")):
+            
+            if var in constants["StoryProgress"]:
+                return constants["StoryProgress"][var]
+
+
+        return varO
 
     def disassemble_command(self, opcode, argc, argv):
         # write case block braces
@@ -431,6 +611,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.indent -= 1
             self.write_line("}")
+
+        #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
+        if self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "SI_SAVE_VAR(0)":
+            argv[0] = self.replace_enum(argv[0], case=True)
 
         if opcode == 0x01:
             if self.out.endswith("return;\n"):
@@ -464,22 +648,52 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x08: self.write_line(f"sleep {self.var(argv[0])};")
         elif opcode == 0x09: self.write_line(f"sleep {self.var(argv[0])} secs;")
         elif opcode == 0x0A:
-            self.write_line(f"if ({self.var(argv[0])} == {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} == {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x0B:
-            self.write_line(f"if ({self.var(argv[0])} != {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} != {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x0C:
-            self.write_line(f"if ({self.var(argv[0])} < {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} < {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x0D:
-            self.write_line(f"if ({self.var(argv[0])} > {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} > {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x0E:
-            self.write_line(f"if ({self.var(argv[0])} <= {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} <= {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x0F:
-            self.write_line(f"if ({self.var(argv[0])} >= {self.var(argv[1])}) {{")
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            if varB == "SI_SAVE_VAR(0)":
+                varA = self.replace_enum(argv[0])
+            self.write_line(f"if ({varA} >= {varB}) {{")
+            self.save_variable = ""
             self.indent += 1
         elif opcode == 0x10:
             self.write_line(f"if ({self.var(argv[0])} & {self.var(argv[1])}) {{")
@@ -497,29 +711,31 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x14:
             self.write_line(f"match {self.var(argv[0])} {{")
             self.indent += 1
+            self.case_variable = self.var(argv[0])
             self.case_stack.append("MATCH")
         elif opcode == 0x15:
             self.write_line(f"matchc {self.var(argv[0])} {{")
             self.indent += 1
+            self.case_variable = self.var(argv[0])
             self.case_stack.append("MATCH")
         elif opcode == 0x16:
             self.case_stack.append("CASE")
-            self.write(f"== {self.var(argv[0])}")
+            self.write(f"== {argv[0]}")
         elif opcode == 0x17:
             self.case_stack.append("CASE")
-            self.write(f"!= {self.var(argv[0])}")
+            self.write(f"!= {argv[0]}")
         elif opcode == 0x18:
             self.case_stack.append("CASE")
-            self.write(f"< {self.var(argv[0])}")
+            self.write(f"< {argv[0]}")
         elif opcode == 0x19:
             self.case_stack.append("CASE")
-            self.write(f"> {self.var(argv[0])}")
+            self.write(f"> {argv[0]}")
         elif opcode == 0x1A:
             self.case_stack.append("CASE")
-            self.write(f"<= {self.var(argv[0])}")
+            self.write(f"<= {argv[0]}")
         elif opcode == 0x1B:
             self.case_stack.append("CASE")
-            self.write(f">= {self.var(argv[0])}")
+            self.write(f">= {argv[0]}")
         elif opcode == 0x1C:
             self.case_stack.append("CASE")
             self.write(f"else")
@@ -557,8 +773,13 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             assert self.case_stack.pop() == "MATCH"
 
             self.indent -= 1
+            self.case_variable = ""
             self.write_line("}")
-        elif opcode == 0x24: self.write_line(f"{self.var(argv[0])} = {self.var(argv[1])};")
+        elif opcode == 0x24: 
+            varA = self.replace_enum(argv[0])
+            varB = self.replace_enum(argv[1])
+            self.save_variable = ""
+            self.write_line(f"{varA} = {varB};")
         elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X};")
         elif opcode == 0x26:
             lhs = self.var(argv[1])
@@ -602,9 +823,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x43:
             addr = argv[0]
             if addr in self.symbol_map:
-                func_name = self.symbol_map[addr]
+                func_name = self.symbol_map[addr][0][1]
 
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
+                argv_str = replace_constants(func_name, argv_str)
+
                 self.write_line(f"{func_name}({argv_str});")
             else:
                 print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
@@ -620,6 +843,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
+        elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
         elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
@@ -643,17 +867,44 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             raise UnsupportedScript(f"DSL does not support script opcode 0x{opcode:X}")
 
 if __name__ == "__main__":
-    if len(sys.argv) <= 1:
-        print("usage: ./disasm_script.py <file> [offset]")
-        exit()
+    import argparse
 
-    file = sys.argv[1]
-    offset = eval(sys.argv[2]) if len(sys.argv) >= 3 else 0
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", type=str, help="File to dissassemble from")
+    parser.add_argument("--o", "-o", type=lambda x: int(x, 0), default=0, dest="offset", required=False, help="Offset to start dissassembling from")
+    parser.add_argument("--e", "-e", type=lambda x: int(x, 0), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
 
-    with open(file, "rb") as f:
-        f.seek(offset)
+    args = parser.parse_args()
 
-        try:
-            print(ScriptDSLDisassembler(f).disassemble(), end="")
-        except UnsupportedScript:
-            print(ScriptDisassembler(f).disassemble(), end="")
+    get_constants()
+
+    if args.end > args.offset:
+        with open(args.file, "rb") as f:
+            while args.offset < args.end:
+                f.seek(args.offset)
+
+                script = ScriptDSLDisassembler(f)
+                try:
+                    script_text = script.disassemble()
+                    if script.instructions > 1:
+                        print(f"Valid script found at 0x{args.offset:X}")
+                        args.offset = script.end_pos
+                    else:
+                        args.offset += 4
+                except Exception:
+                    args.offset += 4
+    else:
+        with open(args.file, "rb") as f:
+            f.seek(args.offset)
+
+            script = ScriptDSLDisassembler(f)
+            try:
+                script_text = script.disassemble()
+
+                print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+                print()
+                print(script_text, end="")
+
+            except UnsupportedScript:
+                print(ScriptDisassembler(f).disassemble(), end="")

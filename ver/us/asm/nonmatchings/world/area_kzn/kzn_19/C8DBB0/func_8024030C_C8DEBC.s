@@ -11,7 +11,7 @@ glabel func_8024030C_C8DEBC
 /* C8DED4 80240324 E7A00010 */  swc1      $f0, 0x10($sp)
 /* C8DED8 80240328 8E060000 */  lw        $a2, ($s0)
 /* C8DEDC 8024032C 8E070004 */  lw        $a3, 4($s0)
-/* C8DEE0 80240330 0C05267B */  jal       func_801499EC
+/* C8DEE0 80240330 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* C8DEE4 80240334 0000282D */   daddu    $a1, $zero, $zero
 /* C8DEE8 80240338 86020044 */  lh        $v0, 0x44($s0)
 /* C8DEEC 8024033C 8FBF001C */  lw        $ra, 0x1c($sp)

@@ -32,7 +32,7 @@ glabel func_80050770
 .L800507D8:
 /* 2BBD8 800507D8 96050208 */  lhu       $a1, 0x208($s0)
 /* 2BBDC 800507DC 0200202D */  daddu     $a0, $s0, $zero
-/* 2BBE0 800507E0 0C013F02 */  jal       func_8004FC08
+/* 2BBE0 800507E0 0C013F02 */  jal       snd_bpm_to_tempo
 /* 2BBE4 800507E4 E60400D0 */   swc1     $f4, 0xd0($s0)
 /* 2BBE8 800507E8 00021880 */  sll       $v1, $v0, 2
 /* 2BBEC 800507EC 00621821 */  addu      $v1, $v1, $v0

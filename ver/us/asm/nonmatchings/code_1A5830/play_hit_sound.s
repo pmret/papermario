@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D990
+.word L80277044_1A5924, L8027704C_1A592C, L80277054_1A5934, L80277090_1A5970, L802770CC_1A59AC, L80277108_1A59E8
+
+.section .text
+
 glabel play_hit_sound
 /* 1A58E4 80277004 44850000 */  mtc1      $a1, $f0
 /* 1A58E8 80277008 44861000 */  mtc1      $a2, $f2
@@ -99,7 +106,7 @@ glabel L80277108_1A59E8
 /* 1A5A20 80277140 44060000 */  mfc1      $a2, $f0
 /* 1A5A24 80277144 44071000 */  mfc1      $a3, $f2
 /* 1A5A28 80277148 0000282D */  daddu     $a1, $zero, $zero
-/* 1A5A2C 8027714C 0C052757 */  jal       play_sound_at_position
+/* 1A5A2C 8027714C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A5A30 80277150 E7A40010 */   swc1     $f4, 0x10($sp)
 .L80277154:
 /* 1A5A34 80277154 8FBF0018 */  lw        $ra, 0x18($sp)

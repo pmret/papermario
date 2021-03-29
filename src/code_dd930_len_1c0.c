@@ -9,7 +9,14 @@ typedef struct {
     /* 0xC */ s32 unkC;
 } struct_80147230;
 
-extern struct_80147230 D_8014F140;
+struct_80147230 D_8014F140 = {
+    .fadeFlags = 0,
+    .fadeState = 0,
+    .fadeOutTime = 0,
+    .fadeInTime = -1,
+    .unkC = -1
+};
+
 extern struct_80147230 D_8015C7C0;
 
 void reset_ambient_sounds(void) {
@@ -60,7 +67,7 @@ s32 play_ambient_sounds(s32 fadeInTime, s32 fadeOutTime) {
     struct_80147230* temp1 = &D_8015C7C0;
     struct_80147230* temp2 = &D_8015C7C0;
 
-    if (!(*gGameStatusPtr)->musicEnabled) {
+    if (!gGameStatusPtr->musicEnabled) {
         func_800554A4(temp1->fadeInTime, fadeOutTime);
         temp1->fadeFlags &= ~1;
         return 1;

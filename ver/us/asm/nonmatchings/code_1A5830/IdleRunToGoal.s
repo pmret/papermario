@@ -158,7 +158,7 @@ glabel IdleRunToGoal
 /* 1A8D84 8027A4A4 8E0201A0 */  lw        $v0, 0x1a0($s0)
 /* 1A8D88 8027A4A8 14400004 */  bnez      $v0, .L8027A4BC
 /* 1A8D8C 8027A4AC 24020001 */   addiu    $v0, $zero, 1
-/* 1A8D90 8027A4B0 0C0154F0 */  jal       func_800553C0
+/* 1A8D90 8027A4B0 0C0154F0 */  jal       snd_stop_sound
 /* 1A8D94 8027A4B4 00000000 */   nop
 .L8027A4B8:
 /* 1A8D98 8027A4B8 24020001 */  addiu     $v0, $zero, 1

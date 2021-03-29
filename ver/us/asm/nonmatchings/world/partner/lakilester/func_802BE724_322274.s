@@ -394,7 +394,7 @@ glabel func_802BE724_322274
 /* 32282C 802BECDC 00000000 */   nop
 .L802BECE0:
 /* 322830 802BECE0 0000282D */  daddu     $a1, $zero, $zero
-/* 322834 802BECE4 0C052742 */  jal       play_sound_at_npc
+/* 322834 802BECE4 0C052742 */  jal       sfx_play_sound_at_npc
 /* 322838 802BECE8 2406FFFC */   addiu    $a2, $zero, -4
 /* 32283C 802BECEC 3C040001 */  lui       $a0, 1
 /* 322840 802BECF0 0C037FBF */  jal       func_800DFEFC
@@ -632,7 +632,7 @@ glabel func_802BE724_322274
 /* 322BB4 802BF064 3C03BFFF */   lui      $v1, 0xbfff
 /* 322BB8 802BF068 2404021D */  addiu     $a0, $zero, 0x21d
 /* 322BBC 802BF06C 0000282D */  daddu     $a1, $zero, $zero
-/* 322BC0 802BF070 0C052742 */  jal       play_sound_at_npc
+/* 322BC0 802BF070 0C052742 */  jal       sfx_play_sound_at_npc
 /* 322BC4 802BF074 2406FFFC */   addiu    $a2, $zero, -4
 /* 322BC8 802BF078 3C03BFFF */  lui       $v1, 0xbfff
 .L802BF07C:

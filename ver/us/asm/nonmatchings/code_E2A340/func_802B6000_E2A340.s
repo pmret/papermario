@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802B6360_E2A6A0
+.double 0.6, 0.0
+
+.section .text
+
 glabel func_802B6000_E2A340
 /* E2A340 802B6000 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* E2A344 802B6004 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -59,7 +66,7 @@ glabel func_802B6000_E2A340
 /* E2A418 802B60D8 E4600010 */  swc1      $f0, 0x10($v1)
 /* E2A41C 802B60DC E4620014 */  swc1      $f2, 0x14($v1)
 /* E2A420 802B60E0 E4640018 */  swc1      $f4, 0x18($v1)
-/* E2A424 802B60E4 0C052736 */  jal       play_sound_at_player
+/* E2A424 802B60E4 0C052736 */  jal       sfx_play_sound_at_player
 /* E2A428 802B60E8 AC620000 */   sw       $v0, ($v1)
 .L802B60EC:
 /* E2A42C 802B60EC 822300B6 */  lb        $v1, 0xb6($s1)

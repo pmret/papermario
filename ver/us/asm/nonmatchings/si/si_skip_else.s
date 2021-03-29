@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802DA0F0
+.word 0x802C89C0, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C8988, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C89DC, 0x802C8988, 0x802C89C8, 0x00000000
+
+.section .text
+
 glabel si_skip_else
 /* ED328 802C8978 0000282D */  daddu     $a1, $zero, $zero
 /* ED32C 802C897C 8C840008 */  lw        $a0, 8($a0)

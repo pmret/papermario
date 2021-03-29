@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802B6DF0_E25CC0
+.word L802B6230_E25100, L802B6238_E25108, L802B6240_E25110, L802B6248_E25118, L802B6250_E25120, L802B6258_E25128
+
+.section .text
+
 glabel func_802B6048_E24F18
 /* E24F18 802B6048 27BDFFA8 */  addiu     $sp, $sp, -0x58
 /* E24F1C 802B604C AFB3002C */  sw        $s3, 0x2c($sp)
@@ -148,7 +155,7 @@ glabel L802B6258_E25128
 /* E25128 802B6258 2410205B */  addiu     $s0, $zero, 0x205b
 .L802B625C:
 /* E2512C 802B625C 0200202D */  daddu     $a0, $s0, $zero
-/* E25130 802B6260 0C052736 */  jal       play_sound_at_player
+/* E25130 802B6260 0C052736 */  jal       sfx_play_sound_at_player
 /* E25134 802B6264 0000282D */   daddu    $a1, $zero, $zero
 /* E25138 802B6268 24040100 */  addiu     $a0, $zero, 0x100
 /* E2513C 802B626C 0C00A3C2 */  jal       start_rumble

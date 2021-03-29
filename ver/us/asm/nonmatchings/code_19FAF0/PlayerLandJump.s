@@ -87,7 +87,7 @@ glabel PlayerLandJump
 /* 1A2518 80273C38 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A251C 80273C3C 8E060144 */  lw        $a2, 0x144($s0)
 /* 1A2520 80273C40 8E070148 */  lw        $a3, 0x148($s0)
-/* 1A2524 80273C44 0C052757 */  jal       play_sound_at_position
+/* 1A2524 80273C44 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A2528 80273C48 0000282D */   daddu    $a1, $zero, $zero
 /* 1A252C 80273C4C 24020001 */  addiu     $v0, $zero, 1
 .L80273C50:

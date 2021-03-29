@@ -4,6 +4,237 @@
 #include "ultra64.h"
 #include "types.h"
 
+enum StoryProgress {
+    STORY_INTRO = -128,
+
+    STORY_CH0_WAKE_UP,
+    STORY_CH0_MET_INNKEEPER,
+    STORY_CH0_MET_GOOMPA = -124,
+    STORY_CH0_GATE_CRUSHED,
+    STORY_CH0_FELL_OFF_CLIFF,
+    STORY_CH0_GOOMPA_JOINED_PARTY,
+    STORY_CH0_LOOKING_FOR_HAMMER,
+    STORY_CH0_FOUND_HAMMER,
+    STORY_CH0_DEFEATED_JR_TROOPA,
+    STORY_CH0_LEFT_THE_PLAYGROUND,
+    STORY_CH0_GOOMBARIO_JOINED_PARTY = -115,
+    STORY_CH0_SMASHED_GATE_BLOCK,
+    STORY_CH0_DEFEATED_GOOMBA_BROS,
+    STORY_CH0_DEFEATED_GOOMBA_KING,
+    STORY_CH0_FOUND_GATEHOUSE_SWITCH,
+    STORY_CH0_HIT_GATEHOUSE_SWITCH,
+    STORY_CH0_OPENED_BRIDGE_TO_TOAD_TOWN,
+    STORY_CH0_KAMMY_RETURNED_TO_BOWSER,
+    STORY_CH0_ARRIVED_AT_TOAD_TOWN,
+    STORY_CH0_MET_STAR_SPIRITS,
+    STORY_CH0_BEGAN_PEACH_MISSION,
+    STORY_CH0_TWINK_GAVE_LUCKY_STAR,
+    STORY_CH0_RETURNED_TO_TOAD_TOWN,
+
+    STORY_CH1_SPOKE_WITH_MERLIN,
+    STORY_CH1_TOLD_MERLIN_ABOUT_DARK_TOADS,
+    STORY_CH1_MERLIN_REVEALED_KOOPA_BROS,
+    STORY_CH1_KNOCKED_SWITCH_FROM_TREE,
+    STORY_CH1_MADE_FIRST_BRIDGE,
+    STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE,
+    STORY_CH1_PROMISED_TO_HELP_KOOPER,
+    STORY_CH1_FUZZY_THIEF_LEFT_TOWN,
+    STORY_CH1_FUZZY_THIEF_RAN_AWAY,
+    STORY_CH1_FUZZY_THIEF_HID_IN_TREE,
+    STORY_CH1_KOOPER_JOINED_PARTY,
+    STORY_CH1_MADE_SECOND_BRIDGE,
+    STORY_CH1_ARRIVED_AT_KOOPA_FORTRESS,
+    STORY_CH1_SPOTTED_BY_KOOPA_BROS,
+    STORY_CH1_KOOPA_BROS_HID_KEY,
+    STORY_CH1_DEFEATED_BASEMENT_GUARD,
+    STORY_CH1_LOWERED_FIRST_STAIRS,
+    STORY_CH1_KOOPA_BROS_SET_TRAP,
+    STORY_CH1_MARIO_ACTIVATED_TRAP,
+    STORY_CH1_BOMBETTE_JOINED_PARTY,
+    STORY_CH1_DEFEATED_DUNGEON_GUARDS,
+    STORY_CH1_LOWERED_SECOND_STAIRS,
+    STORY_CH1_RAISED_SUBMERGED_STAIRS,
+    STORY_CH1_KOOPA_BROS_FIRING_BLASTERS,
+    STORY_CH1_DEFEATED_KOOPA_BROS,
+    STORY_CH1_STAR_SPIRIT_RESCUED,
+    STORY_CH1_BEGAN_PEACH_MISSION,
+    STORY_CH1_STAR_SPRIT_DEPARTED,
+    STORY_CH1_DEFEATED_JR_TROOPA,
+    STORY_CH1_RETURNED_TO_TOAD_TOWN,
+
+    STORY_CH2_ARRIVED_AT_MT_RUGGED,
+    STORY_CH2_SPOKE_WITH_PARAKARRY,
+    STORY_CH2_PARAKARRY_JOINED_PARTY,
+    STORY_CH2_ARRIVED_AT_DRY_DRY_DESERT,
+    STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST,
+    STORY_CH2_SHADY_MOUSE_LEFT_SHOP,
+    STORY_CH2_SPOKE_WITH_SHEEK,
+    STORY_CH2_SHADY_MOUSE_ENTERED_SHOP,
+    STORY_CH2_BOUGHT_SECRET_ITEMS,
+    STORY_CH2_GOT_PULSE_STONE,
+    STORY_CH2_UNCOVERED_DRY_DRY_RUINS,
+    STORY_CH2_DRAINED_FIRST_SAND_ROOM,
+    STORY_CH2_DRAINED_SECOND_SAND_ROOM,
+    STORY_CH2_GOT_SUPER_HAMMER,
+    STORY_CH2_DRAINED_THIRD_SAND_ROOM,
+    STORY_CH2_SOLVED_ARTIFACT_PUZZLE,
+    STORY_CH2_DEFEATED_TUTANKOOPA,
+    STORY_CH2_STAR_SPIRIT_RESCUED,
+    STORY_CH2_BEGAN_PEACH_MISSION,
+    STORY_CH2_STAR_SPRIT_DEPARTED,
+
+    STORY_CH3_SAW_BOO_ENTER_FOREST = -51,
+    STORY_CH3_INVITED_TO_BOOS_MANSION,
+    STORY_CH3_ALLOWED_INTO_FOREVER_FOREST,
+    STORY_CH3_ARRIVED_AT_BOOS_MANSION,
+    STORY_CH3_OPENED_BOOS_MANSION_GATE,
+    STORY_CH3_ENTERED_BOOS_MANSION,
+    STORY_CH3_TRIGGERED_DOOR_JUMP_SCARE,
+    STORY_CH3_GOT_RECORD,
+    STORY_CH3_PLAYED_THE_RECORD,
+    STORY_CH3_GOT_WEIGHT,
+    STORY_CH3_WEIGHED_DOWN_CHANDELIER,
+    STORY_CH3_GOT_SUPER_BOOTS,
+    STORY_CH3_HIT_HUGE_BLUE_SWITCH,
+    STORY_CH3_GOT_BOO_PORTRAIT,
+    STORY_CH3_RESTORED_BOO_PORTRAIT,
+    STORY_CH3_BOW_JOINED_PARTY,
+    STORY_CH3_UNLOCKED_GUSTY_GULCH,
+    STORY_CH3_ARRIVED_AT_GHOST_TOWN,
+    STORY_CH3_SAW_TUBBA_EAT_BOO,
+    STORY_CH3_ARRIVED_AT_TUBBAS_MANOR,
+    STORY_CH3_TUBBA_BEGAN_NAPPING = -30,
+    STORY_CH3_TUBBA_WOKE_UP,
+    STORY_CH3_TUBBA_SMASHED_THE_BRIDGES,
+    STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL,
+    STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER,
+    STORY_CH3_ESCAPED_TUBBAS_MANOR,
+    STORY_CH3_UNLOCKED_WINDY_MILL,
+    STORY_CH3_WENT_DOWN_THE_WELL,
+    STORY_CH3_HEART_FLED_FIRST_TUNNEL,
+    STORY_CH3_HEART_FLED_SECOND_TUNNEL = -19,
+    STORY_CH3_HEART_ESCAPED_WELL,
+    STORY_CH3_HEART_ESCAPED_WINDY_MILL,
+    STORY_CH3_DEFEATED_TUBBA_BLUBBA,
+    STORY_CH3_STAR_SPIRIT_RESCUED,
+    STORY_CH3_BEGAN_PEACH_MISSION,
+    STORY_CH3_STAR_SPRIT_DEPARTED,
+
+    STORY_CH4_FRYING_PAN_STOLEN,
+    STORY_CH4_MET_WITH_TWINK,
+    STORY_CH4_FOUND_HIDDEN_DOOR,
+    STORY_CH4_ENTERED_THE_TOY_BOX,
+    STORY_CH4_GOT_STOREROOM_KEY,
+    STORY_CH4_RETURNED_STOREROOM_KEY,
+    STORY_CH4_GOT_TOY_TRAIN,
+    STORY_CH4_RETURNED_TOY_TRAIN,
+    STORY_CH4_GOT_FRYING_PAN,
+    STORY_CH4_GOT_TAYCE_TS_CAKE,
+    STORY_CH4_GAVE_CAKE_TO_GOURMET_GUY,
+    STORY_CH4_PULLED_SWITCH_SWITCH,
+    STORY_CH4_SOLVED_COLOR_PUZZLE,
+    STORY_CH4_DEFEATED_LANTERN_GHOST,
+    STORY_CH4_WATT_JOINED_PARTY,
+    STORY_CH4_OPENED_GENERAL_GUY_ROOM,
+    STORY_CH4_DEFEATED_GENERAL_GUY,
+    STORY_CH4_STAR_SPIRIT_RESCUED,
+    STORY_CH4_BEGAN_PEACH_MISSION,
+    STORY_CH4_STAR_SPRIT_DEPARTED,
+
+    STORY_CH5_WHALE_MOUTH_OPEN,
+    STORY_CH5_ENTERED_WHALE,
+    STORY_CH5_DEFEATED_FUZZIPEDE,
+    STORY_CH5_REACHED_LAVA_LAVA_ISLAND,
+    STORY_CH5_KOLORADO_ESCAPED_FUZZIES,
+    STORY_CH5_KOLORADO_ESCAPED_SPEAR_GUYS,
+    STORY_CH5_YOSHI_CHILDREN_ARE_MISSING,
+    STORY_CH5_SUSHIE_JOINED_PARTY,
+    STORY_CH5_ALL_YOSHI_CHILDREN_RESCUED,
+    STORY_CH5_GOT_JADE_RAVEN,
+    STORY_CH5_MOVED_RAVEN_STATUE,
+    STORY_CH5_DEFEATED_PIRANHAS_MINIBOSS,
+    STORY_CH5_REACHED_RAFAELS_TREE,
+    STORY_CH5_RAFAEL_LEFT_NEST,
+    STORY_CH5_RAFAEL_MOVED_ROOT,
+    STORY_CH5_RAFAEL_WAITING_FOR_MARIO,
+    STORY_CH5_ZIP_LINE_READY,
+    STORY_CH5_ENTERED_MT_LAVA_LAVA,
+    STORY_CH5_KOLORADO_FELL_IN_LAVA,
+    STORY_CH5_LAVA_STREAM_BLOCKED,
+    STORY_CH5_GOT_ULTRA_HAMMER,
+    STORY_CH5_SMASHED_ULTRA_BLOCK,
+    STORY_CH5_KOLORADO_FELL_IN_PIT,
+    STORY_CH5_KOLORADO_AT_DEAD_END,
+    STORY_CH5_HIDDEN_PASSAGE_OPEN,
+    STORY_CH5_KOLORADO_RAN_AHEAD,
+    STORY_CH5_KOLORADO_IN_TREASURE_ROOM,
+    STORY_CH5_DEFEATED_LAVA_PIRANHA,
+    STORY_CH5_MT_LAVA_LAVA_ERUPTING,
+    STORY_CH5_OPENED_ESCAPE_ROUTE,
+    STORY_CH5_BEGAN_PEACH_MISSION,
+    STORY_CH5_STAR_SPRIT_DEPARTED,
+    STORY_CH5_TRADED_VASE_FOR_SEED,
+    STORY_CH5_RETURNED_TO_TOAD_TOWN,
+
+    STORY_CH6_FLOWER_GATE_OPEN,
+    STORY_CH6_ARRIVED_AT_FLOWER_FIELDS,
+    STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES,
+    STORY_CH6_GOT_MAGICAL_BEAN,
+    STORY_CH6_GOT_FERTILE_SOIL,
+    STORY_CH6_GOT_CRYSTAL_BERRY,
+    STORY_CH6_GOT_WATER_STONE,
+    STORY_CH6_FILLED_SPRING_WITH_WATER,
+    STORY_CH6_SPOKE_WITH_THE_SUN,
+    STORY_CH6_LAKILESTER_JOINED_PARTY,
+    STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS,
+    STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE,
+    STORY_CH6_WISTERWOOD_GAVE_HINT,
+    STORY_CH6_GREW_MAGIC_BEANSTALK,
+    STORY_CH6_DEFEATED_HUFF_N_PUFF,
+    STORY_CH6_STAR_SPIRIT_RESCUED,
+    STORY_CH6_BEGAN_PEACH_MISSION,
+    STORY_CH6_STAR_SPRIT_DEPARTED,
+    STORY_CH6_RETURNED_TO_TOAD_TOWN,
+
+    STORY_CH7_INVITED_TO_STARBORN_VALLEY,
+    STORY_CH7_ARRIVED_AT_SHIVER_CITY,
+    STORY_CH7_MAYOR_MURDER_MYSTERY,
+    STORY_CH7_SHATTERED_FROZEN_POND,
+    STORY_CH7_SPOKE_WITH_HERRINGWAY,
+    STORY_CH7_HERRINGWAY_AT_MAYORS_HOUSE,
+    STORY_CH7_MAYOR_MURDER_SOLVED,
+    STORY_CH7_DEFEATED_JR_TROOPA,
+    STORY_CH7_DEFEATED_MONSTAR,
+    STORY_CH7_ARRIVED_AT_STARBORN_VALLEY,
+    STORY_CH7_MERLE_APOLOGIZED,
+    STORY_CH7_GOT_SNOWMAN_SCARF,
+    STORY_CH7_GOT_SNOWMAN_BUCKET,
+    STORY_CH7_UNLOCKED_SHIVER_MOUNTAIN,
+    STORY_CH7_DEFEATED_FIRST_DUPLIGHOST,
+    STORY_CH7_GOT_STAR_STONE,
+    STORY_CH7_RAISED_FROZEN_STAIRS,
+    STORY_CH7_ARRIVED_AT_CRYSTAL_PALACE,
+    STORY_CH7_DEFEATED_MIRROR_DUPLIGHOSTS,
+    STORY_CH7_DEFEATED_BOMBETTE_DUPLIGHOSTS,
+    STORY_CH7_DEFEATED_CLUBBAS,
+    STORY_CH7_DEFEATED_KOOPER_DUPLIGHOSTS,
+    STORY_CH7_EXTENDED_PALACE_BRIDGE,
+    STORY_CH7_FOUND_HIDDEN_ROOM_UNDER_STATUE,
+    STORY_CH7_SOLVED_ALBINO_DINO_PUZZLE,
+    STORY_CH7_DEFEATED_CRYSTAL_KING,
+    STORY_CH7_STAR_SPIRIT_RESCUED,
+    STORY_CH7_BEGAN_PEACH_MISSION,
+    STORY_CH7_STAR_SPRIT_DEPARTED,
+
+    STORY_CH8_OPENED_PATH_TO_STAR_WAY,
+    STORY_CH8_REACHED_STAR_HAVEN,
+    STORY_CH8_STAR_SHIP_ACTIVATED,
+    STORY_CH8_REACHED_BOWSERS_CASTLE = 94,
+    STORY_CH8_REACHED_PEACHS_CASTLE,
+
+    STORY_EPILOGUE,
+};
+
 typedef UNK_TYPE EncounterTriggerFlags;
 #define EncounterTriggerFlags_NONE    0x00000001
 #define EncounterTriggerFlags_JUMP    0x00000002
@@ -237,7 +468,9 @@ typedef UNK_TYPE Easing;
 #define Easing_SIN_OUT            0x0000000B
 #define Easing_COS_IN             0x0000000C
 
-typedef UNK_TYPE SoundId;
+typedef UNK_TYPE SoundID;
+#define SoundId_D                     0x0000000D // TODO
+#define SoundId_E                     0x0000000E // TODO
 #define SoundId_JR_TROOPA_SPLASH      0x00000045
 #define SoundId_JR_TROOPA_SWIM        0x00000046
 #define SoundId_BOO_SPOOK             0x00000047
@@ -266,34 +499,60 @@ typedef UNK_TYPE SoundId;
 #define SoundId_CREAKY_DOOR_CLOSE     0x000001C8
 #define SoundId_METAL_GATE_OPEN       0x000001C9
 #define SoundId_METAL_GATE_CLOSE      0x000001CA
+#define SoundId_246                   0x00000246 // TODO
+#define SoundId_259                   0x00000259 // TODO
+#define SoundId_25A                   0x0000025A // TODO
+#define SoundId_25C                   0x0000025C // TODO
+#define SoundId_25D                   0x0000025D // TODO
 #define SoundId_BOW_SPOOK             0x00000291
 #define SoundId_SMOKE_BURST           0x000002CD
 #define SoundId_DAYZEE_SONG           0x000002D7
 #define SoundId_POWER_UP              0x000002D8
+#define SoundId_CLOSE_SHELL           0x000002FF
 #define SoundId_SHY_GUY_SCREAMS1      0x0000030C
 #define SoundId_SHY_GUY_SCREAMS2      0x0000030D
 #define SoundId_SHY_GUY_SCREAMS3      0x0000030E
 #define SoundId_TOY_TANK_MOVE1        0x0000030F
 #define SoundId_TOY_TANK_MOVE2        0x00000310
-#define SoundId_GENERAL_WHISTLE       0x00000395
 #define SoundId_MOLE_SURFACE          0x00000321
 #define SoundId_MOLE_DIG              0x00000322
 #define SoundId_MOLE_POP              0x00000323
+#define SoundId_361                   0x00000361 // TODO
+#define SoundId_362                   0x00000362 // TODO
+#define SoundId_363                   0x00000363 // TODO
+#define SoundId_364                   0x00000364 // TODO
+#define SoundId_365                   0x00000365 // TODO
+#define SoundId_367                   0x00000367 // TODO
+#define SoundId_368                   0x00000368 // TODO
+#define SoundId_369                   0x00000369 // TODO
+#define SoundId_375                   0x00000375 // TODO
+#define SoundId_376                   0x00000376 // TODO
+#define SoundId_377                   0x00000377 // TODO
+#define SoundId_379                   0x00000379 // TODO
+#define SoundId_GENERAL_WHISTLE       0x00000395
+#define SoundId_OPEN_SHELL            0x000003D4
 #define SoundId_JUMP                  0x000003E2
 #define SoundId_MISS_JUMP             0x000003E3
 #define SoundId_DEATH                 0x000003E5
 #define SoundId_BIG_POWER_UP          0x000003E6
 #define SoundId_MOLE_THROW            0x000003E8
-#define SoundId_CLOSE_SHELL           0x000002FF
-#define SoundId_OPEN_SHELL            0x000003D4
+#define SoundId_3F3                   0x000003F3 // TODO
 #define SoundId_THROW                 0x000003FA
 #define SoundId_BOW_VANISH            0x0000200E
 #define SoundId_BOW_APPEAR            0x0000200F
+#define SoundId_2010                  0x00002010 // TODO
 #define SoundId_CANNON1               0x00002016
 #define SoundId_CANNON2               0x00002017
 #define SoundId_CANNON3               0x00002018
-#define SoundId_JUMP2                 0x00002081
+#define SoundId_202C                  0x0000202C // TODO
+#define SoundId_202D                  0x0000202D // TODO
+#define SoundId_202E                  0x0000202E // TODO
+#define SoundId_2030                  0x00002030 // TODO
 #define SoundId_BOMB_BLAST            0x00002076
+#define SoundId_JUMP2                 0x00002081
+#define SoundId_208D                  0x0000208D // TODO
+#define SoundId_208E                  0x0000208E // TODO
+#define SoundId_2095                  0x00002095 // TODO
 #define SoundId_SPELL_CAST1           0x000020D4
 #define SoundId_SPELL_CAST2           0x000020D5
 #define SoundId_SPELL_CAST3           0x000020D6
@@ -305,7 +564,6 @@ typedef UNK_TYPE Cam;
 #define Cam_BATTLE  0x00000001
 #define Cam_TATTLE  0x00000002
 #define Cam_CAM3    0x00000003
-
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
 
@@ -678,6 +936,7 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_BEFORE_JUMP      0x00010006
 #define PlayerAnim_MIDAIR_STILL     0x00010007
 #define PlayerAnim_MIDAIR           0x00010008
+#define PlayerAnim_9                0x00010009 // TODO
 #define PlayerAnim_STUNNED_STILL    0x0001000E
 #define PlayerAnim_DEAD_STILL       0x0001000F
 #define PlayerAnim_SPINNING         0x00010011
@@ -704,11 +963,16 @@ typedef UNK_TYPE PlayerAnim;
 #define PlayerAnim_RUN_THINKING     0x00010027
 #define PlayerAnim_QUESTION         0x00010028
 #define PlayerAnim_NOD_YES          0x00010029
+#define PlayerAnim_1002B            0x0001002B // TODO
 #define PlayerAnim_PRAY             0x0001002C
 #define PlayerAnim_CHARRED          0x0001002F
 #define PlayerAnim_GET_UP           0x00010030
 #define PlayerAnim_DUST_OFF         0x00010031
 #define PlayerAnim_THUMBS_UP        0x00010032
+#define PlayerAnim_30004            0x00030004 // TODO
+#define PlayerAnim_30008            0x00030008 // TODO
+#define PlayerAnim_30009            0x00030009 // TODO
+#define PlayerAnim_8000B            0x0008000B // TODO
 
 typedef UNK_TYPE AmbientSounds;
 #define AmbientSounds_SPOOKY     0x00000000
@@ -751,13 +1015,12 @@ typedef UNK_TYPE HitResult;
 #define HitResult_MISS              0x00000006
 #define HitResult_HIT_STATIC        0x00000007
 #define HitResult_IMMUNE            0x00000008
-#define HitResult_ED_EXPLODE -1
 
 typedef UNK_TYPE Iter;
 #define Iter_FIRST 0xFFFFFFFF
-#define Iter_LAST  0x0000000A
 #define Iter_NEXT  0x00000000
 #define Iter_PREV  0x00000001
+#define Iter_LAST  0x0000000A
 
 typedef UNK_TYPE ActorSound;
 #define ActorSound_WALK           0x00000000
@@ -772,13 +1035,13 @@ typedef UNK_TYPE Phase;
 #define Phase_FIRST_STRIKE         0x00000001
 #define Phase_RUN_AWAY_START       0x00000003
 #define Phase_RUN_AWAY_RESET       0x00000004
-#define Phase_RUN_AWAY_FAIL        0x00000007
 #define Phase_USE_DEFEND           0x00000006
+#define Phase_RUN_AWAY_FAIL        0x00000007
 #define Phase_USE_LIFE_SHROOM      0x00000008
 #define Phase_PLAYER_BEGIN         0x0000000A
-#define Phase_PLAYER_END           0x0000000D
-#define Phase_ENEMY_BEGIN          0x0000000C
 #define Phase_ENEMY_END            0x0000000B
+#define Phase_ENEMY_BEGIN          0x0000000C
+#define Phase_PLAYER_END           0x0000000D
 #define Phase_MERLEE_ATTACK_BONUS  0x00000014
 #define Phase_MERLEE_DEFENSE_BONUS 0x00000015
 #define Phase_MERLEE_EXP_BONUS     0x00000016
@@ -814,6 +1077,7 @@ typedef s32 ActorID;
 #define ActorID_ENEMY23 0x00000217
 
 typedef UNK_TYPE Element;
+#define Element_END     0x00000000
 #define Element_NORMAL  0x00000001
 #define Element_FIRE    0x00000002
 #define Element_WATER   0x00000003
@@ -827,45 +1091,44 @@ typedef UNK_TYPE Element;
 #define Element_SHOCK   0x0000000C
 #define Element_QUAKE   0x0000000D
 #define Element_THROW   0x0000000F
-#define Element_END     0x00000000
 
 typedef UNK_TYPE Event;
-#define Event_IMMUNE                  0x00000019
 #define Event_HIT_COMBO               0x00000009
 #define Event_HIT                     0x0000000A
-#define Event_DEATH                   0x00000020
-#define Event_FALL_TriggerFlags            0x0000000C
-#define Event_FLIP_TriggerFlags            0x0000000D
-#define Event_EXPLODE_TriggerFlags         0x00000022
 #define Event_SPIN_SMASH_HIT          0x0000000B
-#define Event_SPIN_SMASH_DEATH        0x00000021
+#define Event_FALL_TriggerFlags       0x0000000C
+#define Event_FLIP_TriggerFlags       0x0000000D
+#define Event_BURN_HIT                0x0000000E
 #define Event_SPIN_SMASH_LAUNCH_HIT   0x00000011
+#define Event_STAR_BEAM               0x00000013
 #define Event_SPIN_SMASH_LAUNCH_DEATH 0x00000015
 #define Event_POWER_BOUNCE_HIT        0x00000015
-#define Event_POWER_BOUNCE_DEATH      0x00000028
-#define Event_BURN_HIT                0x0000000E
-#define Event_BURN_DEATH              0x00000024
-#define Event_SHOCK_HIT               0x0000002F
-#define Event_SHOCK_DEATH             0x00000026
-#define Event_BEGIN_AIR_LIFT          0x0000003A
-#define Event_AIR_LIFT_FAILED         0x0000001F
 #define Event_BLOW_AWAY               0x00000016
-#define Event_SCARE_AWAY              0x00000039
-#define Event_UP_AND_AWAY             0x0000003D
-#define Event_STAR_BEAM               0x00000013
-#define Event_RECOVER_STATUS          0x00000031
-#define Event_SWAP_PARTNER            0x0000003F
+#define Event_IMMUNE                  0x00000019
 #define Event_BLOCK                   0x0000001A
-#define Event_SPIKE_CONTACT           0x0000002A
-#define Event_SPIKE_DEATH             0x00000027
 #define Event_SPIKE_TAUNT             0x0000001B
-#define Event_BURN_CONTACT            0x0000002C
 #define Event_BURN_TAUNT              0x0000001C
-#define Event_BEGIN_FIRST_STRIKE      0x00000038
+#define Event_AIR_LIFT_FAILED         0x0000001F
+#define Event_DEATH                   0x00000020
+#define Event_SPIN_SMASH_DEATH        0x00000021
+#define Event_EXPLODE_TriggerFlags    0x00000022
+#define Event_BURN_DEATH              0x00000024
+#define Event_SHOCK_DEATH             0x00000026
+#define Event_SPIKE_DEATH             0x00000027
+#define Event_POWER_BOUNCE_DEATH      0x00000028
+#define Event_SPIKE_CONTACT           0x0000002A
+#define Event_BURN_CONTACT            0x0000002C
+#define Event_SHOCK_HIT               0x0000002F
+#define Event_RECOVER_STATUS          0x00000031
 #define Event_END_FIRST_STRIKE        0x00000035
+#define Event_LUCKY                   0x00000037
+#define Event_BEGIN_FIRST_STRIKE      0x00000038
+#define Event_SCARE_AWAY              0x00000039
+#define Event_BEGIN_AIR_LIFT          0x0000003A
+#define Event_UP_AND_AWAY             0x0000003D
+#define Event_SWAP_PARTNER            0x0000003F
 #define Event_LIFE_SHROOM_PROC        0x00000040
 #define Event_REVIVE                  0x00000041
-#define Event_LUCKY                   0x00000037
 
 typedef UNK_TYPE HitSound;
 #define HitSound_MISS   0x00000000
@@ -876,40 +1139,40 @@ typedef UNK_TYPE HitSound;
 #define HitSound_SHOCK  0x00000005
 
 typedef s8 Debuff;
+#define Debuff_END               0x00000000
 #define Debuff_NORMAL            0x00000001
 #define Debuff_DEFAULT           0x00000002
-#define Debuff_DEFAULT_TURN_MOD  0x0000001F
-#define Debuff_SLEEP             0x00000006
-#define Debuff_SLEEP_TURN_MOD    0x00000020
-#define Debuff_POISON            0x00000009
-#define Debuff_POISON_TURN_MOD   0x00000025
-#define Debuff_FROZEN            0x00000007
-#define Debuff_FROZEN_TURN_MOD   0x00000022
-#define Debuff_DIZZY             0x00000004
-#define Debuff_DIZZY_TURN_MOD    0x00000024
 #define Debuff_FEAR              0x00000003
-#define Debuff_FEAR_TURN_MOD     0x00000023
-#define Debuff_STATIC            0x0000000B
-#define Debuff_STATIC_TURN_MOD   0x00000021
+#define Debuff_DIZZY             0x00000004
 #define Debuff_PARALYZE          0x00000005
-#define Debuff_PARALYZE_TURN_MOD 0x00000026
-#define Debuff_SHRINK            0x0000000A
-#define Debuff_SHRINK_TURN_MOD   0x00000027
+#define Debuff_SLEEP             0x00000006
+#define Debuff_FROZEN            0x00000007
 #define Debuff_STOP              0x00000008
-#define Debuff_STOP_TURN_MOD     0x00000029
+#define Debuff_POISON            0x00000009
+#define Debuff_SHRINK            0x0000000A
+#define Debuff_STATIC            0x0000000B
 #define Debuff_STONE             0x0000000C
 #define Debuff_DAZE              0x0000000D
-#define Debuff_END               0x00000000
+#define Debuff_0xE               0x0000000E // TODO
 #define Debuff_BERSERK           0x00000010
 #define Debuff_TURN_DONE         0x00000012
 #define Debuff_HUSTLE            0x00000019
 #define Debuff_DANGER            0x0000001A
 #define Debuff_THINKING          0x0000001C
 #define Debuff_WEARY             0x0000001D
+#define Debuff_DEFAULT_TURN_MOD  0x0000001F
+#define Debuff_SLEEP_TURN_MOD    0x00000020
+#define Debuff_STATIC_TURN_MOD   0x00000021
+#define Debuff_FROZEN_TURN_MOD   0x00000022
+#define Debuff_FEAR_TURN_MOD     0x00000023
+#define Debuff_DIZZY_TURN_MOD    0x00000024
+#define Debuff_POISON_TURN_MOD   0x00000025
+#define Debuff_PARALYZE_TURN_MOD 0x00000026
+#define Debuff_SHRINK_TURN_MOD   0x00000027
+#define Debuff_STOP_TURN_MOD     0x00000029
 
 typedef UNK_TYPE DoorSwing;
 #define DoorSwing_IN  0x00000001
-#define DoorSwing_OUT -1
 
 typedef UNK_TYPE ItemSpawnMode;
 #define ItemSpawnMode_DECORATION                        0x00000001
@@ -936,41 +1199,41 @@ typedef UNK_TYPE ItemSpawnMode;
 #define ItemSpawnMode_TOSS__SPAWN_ALWAYS__SMALL         0x0000001A
 
 typedef UNK_TYPE Location;
-#define Location_NONE                 0x00000018
-#define Location_TESTING              0x00000017
 #define Location_TOAD_TOWN            0x00000001
-#define Location_PEACH_CASTLE_GROUNDS 0x00000019
-#define Location_SHOOTING_STAR_SUMMIT 0x0000001B
 #define Location_TOAD_TOWN_TUNNELS    0x00000002
+#define Location_KOOPA_BROS_FORTRESS  0x00000007
+#define Location_MT_RUGGED            0x00000008
+#define Location_DRY_DRY_OUTPOST      0x00000009
+#define Location_DRY_DRY_DESERT       0x0000000A
+#define Location_DRY_DRY_RUINS        0x0000000B
+#define Location_FOREVER_FOREST       0x0000000C
+#define Location_BOOS_MANSION         0x0000000D
+#define Location_TUBBAS_MANOR         0x0000000F
+#define Location_SHY_GUYS_TOYBOX      0x00000010
+#define Location_MT_LAVALAVA          0x00000012
+#define Location_CRYSTAL_PALACE       0x00000015
+#define Location_BOWSERS_CASTLE       0x00000016
+#define Location_TESTING              0x00000017
+#define Location_NONE                 0x00000018
+#define Location_PEACH_CASTLE_GROUNDS 0x00000019
+#define Location_PEACHS_CASTLE        0x0000001A
+#define Location_SHOOTING_STAR_SUMMIT 0x0000001B
+#define Location_STAR_WAY             0x0000001C
+#define Location_STAR_HAVEN           0x0000001D
 #define Location_GOOMBA_VILLAGE       0x0000001E
 #define Location_GOOMBA_ROAD          0x0000001F
 #define Location_PLEASANT_PATH        0x00000020
 #define Location_KOOPA_VILLAGE        0x00000021
-#define Location_KOOPA_BROS_FORTRESS  0x00000007
-#define Location_MT_RUGGED            0x00000008
-#define Location_DRY_DRY_DESERT       0x0000000A
-#define Location_DRY_DRY_OUTPOST      0x00000009
-#define Location_DRY_DRY_RUINS        0x0000000B
-#define Location_FOREVER_FOREST       0x0000000C
-#define Location_BOOS_MANSION         0x0000000D
 #define Location_GUSTY_GULCH          0x00000022
-#define Location_TUBBAS_MANOR         0x0000000F
 #define Location_WINDY_MILL           0x00000023
-#define Location_SHY_GUYS_TOYBOX      0x00000010
 #define Location_JADE_JUNGLE          0x00000024
 #define Location_YOSHIS_VILLAGE       0x00000025
-#define Location_MT_LAVALAVA          0x00000012
 #define Location_FLOWER_FIELDS        0x00000026
 #define Location_CLOUDY_CLIMB         0x00000027
 #define Location_SHIVER_CITY          0x00000028
 #define Location_SHIVER_SNOWFIELD     0x00000029
 #define Location_STARBORN_VALLEY      0x0000002A
 #define Location_SHIVER_MOUNTAIN      0x0000002B
-#define Location_CRYSTAL_PALACE       0x00000015
-#define Location_STAR_WAY             0x0000001C
-#define Location_STAR_HAVEN           0x0000001D
-#define Location_BOWSERS_CASTLE       0x00000016
-#define Location_PEACHS_CASTLE        0x0000001A
 #define Location_MARIOS_HOUSE         0x0000002C
 
 typedef UNK_TYPE DoorSounds;
@@ -1017,37 +1280,36 @@ typedef s32 NpcId;
 #define NpcId_PARTNER -4
 
 typedef UNK_TYPE TriggerFlag;
+#define TriggerFlag_WALL_PUSH      0x00000040
 #define TriggerFlag_FLOOR_TOUCH    0x00000080
-#define TriggerFlag_FLOOR_ABOVE    0x00080000
-#define TriggerFlag_FLOOR_INTERACT 0x00000800
+#define TriggerFlag_WALL_INTERACT  0x00000100
 #define TriggerFlag_FLOOR_JUMP     0x00000200
 #define TriggerFlag_WALL_TOUCH     0x00000400
-#define TriggerFlag_WALL_PUSH      0x00000040
-#define TriggerFlag_WALL_INTERACT  0x00000100
+#define TriggerFlag_FLOOR_INTERACT 0x00000800
 #define TriggerFlag_WALL_HAMMER    0x00001000
-#define TriggerFlag_CEILING_TOUCH  0x00040000
-#define TriggerFlag_BOMB           0x00100000
 #define TriggerFlag_SAVE_FLAG_SET  0x00010000
 #define TriggerFlag_AREA_FLAG_SET  0x00020000
+#define TriggerFlag_CEILING_TOUCH  0x00040000
+#define TriggerFlag_FLOOR_ABOVE    0x00080000
+#define TriggerFlag_BOMB           0x00100000
 
 typedef UNK_TYPE Button;
-#define Button_A       0x00008000
-#define Button_B       0x00004000
-#define Button_Z       0x00002000
-#define Button_START   0x00001000
-#define Button_D_UP    0x00000800
-#define Button_D_DOWN  0x00000400
-#define Button_D_LEFT  0x00000200
-#define Button_D_RIGHT 0x00000100
-#define Button_L       0x00000020
-#define Button_R       0x00000010
-#define Button_C_UP    0x00000008
-#define Button_C_DOWN  0x00000004
-#define Button_C_LEFT  0x00000002
 #define Button_C_RIGHT 0x00000001
+#define Button_C_LEFT  0x00000002
+#define Button_C_DOWN  0x00000004
+#define Button_C_UP    0x00000008
+#define Button_R       0x00000010
+#define Button_L       0x00000020
+#define Button_D_RIGHT 0x00000100
+#define Button_D_LEFT  0x00000200
+#define Button_D_DOWN  0x00000400
+#define Button_D_UP    0x00000800
+#define Button_START   0x00001000
+#define Button_Z       0x00002000
+#define Button_B       0x00004000
+#define Button_A       0x00008000
 
 typedef UNK_TYPE PlayerBuff;
-#define PlayerBuff_ALL             0x0FFFFFFF
 #define PlayerBuff_JUMP_CHARGE     0x00000001
 #define PlayerBuff_HAMMER_CHARGE   0x00000002
 #define PlayerBuff_STONE           0x00000008
@@ -1058,6 +1320,7 @@ typedef UNK_TYPE PlayerBuff;
 #define PlayerBuff_TURBO_CHARGE    0x00000100
 #define PlayerBuff_WATER_BLOCK     0x00000200
 #define PlayerBuff_PARTNER_GLOWING 0x00010000
+#define PlayerBuff_ALL             0x0FFFFFFF
 
 typedef UNK_TYPE StatusFlags;
 #define StatusFlags_SLEEP           0x00001000
@@ -1079,22 +1342,22 @@ typedef UNK_TYPE StatusFlags;
 #define StatusFlags_RIGHT_ON        0x40000000
 
 typedef UNK_TYPE DamageType;
-#define DamageType_IGNORE_DEFENSE 0x08000000
-#define DamageType_NO_CONTACT     0x10000000
-#define DamageType_UNBLOCKABLE    0x20000000
-#define DamageType_TriggerFlags_LUCKY  0x80000000
-#define DamageType_FIRE           0x00000002
-#define DamageType_WATER          0x00000004
-#define DamageType_ICE            0x00000008
-#define DamageType_MAGIC          0x00000010
-#define DamageType_ELECTRIC       0x00000020
-#define DamageType_SMASH          0x00000040
-#define DamageType_JUMP           0x00000080
-#define DamageType_COSMIC         0x00000100
-#define DamageType_BLAST          0x00000200
-#define DamageType_POW            0x00000400
-#define DamageType_QUAKE          0x00000800
-#define DamageType_THROW          0x00040000
+#define DamageType_TriggerFlags_LUCKY   0x80000000
+#define DamageType_FIRE                 0x00000002
+#define DamageType_WATER                0x00000004
+#define DamageType_ICE                  0x00000008
+#define DamageType_MAGIC                0x00000010
+#define DamageType_ELECTRIC             0x00000020
+#define DamageType_SMASH                0x00000040
+#define DamageType_JUMP                 0x00000080
+#define DamageType_COSMIC               0x00000100
+#define DamageType_BLAST                0x00000200
+#define DamageType_POW                  0x00000400
+#define DamageType_QUAKE                0x00000800
+#define DamageType_THROW                0x00040000
+#define DamageType_IGNORE_DEFENSE       0x08000000
+#define DamageType_NO_CONTACT           0x10000000
+#define DamageType_UNBLOCKABLE          0x20000000
 
 typedef s8 PartnerID;
 #define PartnerID_NONE       0
@@ -1109,5 +1372,37 @@ typedef s8 PartnerID;
 #define PartnerID_BOW        9
 #define PartnerID_GOOMBARIA  10
 #define PartnerID_TWINK      11
+
+/// @see gAreas
+enum {
+    AREA_KMR,
+    AREA_MAC,
+    AREA_TIK,
+    AREA_KGR,
+    AREA_KKJ,
+    AREA_HOS,
+    AREA_NOK,
+    AREA_TRD,
+    AREA_IWA,
+    AREA_DRO,
+    AREA_SBK,
+    AREA_ISK,
+    AREA_MIM,
+    AREA_OBK,
+    AREA_ARN,
+    AREA_DGB,
+    AREA_OMO,
+    AREA_JAN,
+    AREA_KZN,
+    AREA_FLO,
+    AREA_SAM,
+    AREA_PRA,
+    AREA_KPA,
+    AREA_OSR,
+    AREA_END,
+    AREA_MGM,
+    AREA_GV,
+    AREA_TST,
+};
 
 #endif

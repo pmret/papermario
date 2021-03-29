@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802EB270
+.double 0.01
+
+.section .text
+
 glabel func_802E4C10
 /* 106490 802E4C10 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 106494 802E4C14 AFB10024 */  sw        $s1, 0x24($sp)
@@ -70,8 +77,8 @@ glabel func_802E4C10
 /* 106580 802E4D00 24420001 */  addiu     $v0, $v0, 1
 /* 106584 802E4D04 A2020001 */  sb        $v0, 1($s0)
 .L802E4D08:
-/* 106588 802E4D08 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 10658C 802E4D0C 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* 106588 802E4D08 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 10658C 802E4D0C 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* 106590 802E4D10 14400017 */  bnez      $v0, .L802E4D70
 /* 106594 802E4D14 00000000 */   nop
 /* 106598 802E4D18 92020002 */  lbu       $v0, 2($s0)
@@ -115,8 +122,8 @@ glabel func_802E4C10
 /* 10662C 802E4DAC 34420200 */  ori       $v0, $v0, 0x200
 /* 106630 802E4DB0 0C009C22 */  jal       func_80027088
 /* 106634 802E4DB4 AC620004 */   sw       $v0, 4($v1)
-/* 106638 802E4DB8 3C03800A */  lui       $v1, %hi(D_8009A650)
-/* 10663C 802E4DBC 2463A650 */  addiu     $v1, $v1, %lo(D_8009A650)
+/* 106638 802E4DB8 3C03800A */  lui       $v1, %hi(gOverrideFlags)
+/* 10663C 802E4DBC 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)
 /* 106640 802E4DC0 8C620000 */  lw        $v0, ($v1)
 /* 106644 802E4DC4 34420040 */  ori       $v0, $v0, 0x40
 /* 106648 802E4DC8 AC620000 */  sw        $v0, ($v1)

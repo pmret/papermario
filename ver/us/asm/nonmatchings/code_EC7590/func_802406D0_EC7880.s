@@ -9,7 +9,7 @@ glabel func_802406D0_EC7880
 /* EC7890 802406E0 AFB10014 */  sw        $s1, 0x14($sp)
 /* EC7894 802406E4 8E02000C */  lw        $v0, 0xc($s0)
 /* EC7898 802406E8 8C510000 */  lw        $s1, ($v0)
-/* EC789C 802406EC 0C0B53A3 */  jal       func_802D4E8C
+/* EC789C 802406EC 0C0B53A3 */  jal       dead_get_variable
 /* EC78A0 802406F0 0220282D */   daddu    $a1, $s1, $zero
 /* EC78A4 802406F4 3C03FFF0 */  lui       $v1, 0xfff0
 /* EC78A8 802406F8 3463FFFF */  ori       $v1, $v1, 0xffff
@@ -19,7 +19,7 @@ glabel func_802406D0_EC7880
 /* EC78B8 80240708 3C068009 */  lui       $a2, %hi(D_8008D2C0)
 /* EC78BC 8024070C 00C23021 */  addu      $a2, $a2, $v0
 /* EC78C0 80240710 8CC6D2C0 */  lw        $a2, %lo(D_8008D2C0)($a2)
-/* EC78C4 80240714 0C0B551A */  jal       func_802D5468
+/* EC78C4 80240714 0C0B551A */  jal       dead_set_variable
 /* EC78C8 80240718 0220282D */   daddu    $a1, $s1, $zero
 /* EC78CC 8024071C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* EC78D0 80240720 8FB10014 */  lw        $s1, 0x14($sp)

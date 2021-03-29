@@ -19,7 +19,7 @@ glabel func_802417AC_EAA28C
 .L802417E0:
 /* EAA2C0 802417E0 8CC50000 */  lw        $a1, ($a2)
 /* EAA2C4 802417E4 3C068024 */  lui       $a2, %hi(D_80243DDC_EAC8BC)
-/* EAA2C8 802417E8 0C0B551A */  jal       func_802D5468
+/* EAA2C8 802417E8 0C0B551A */  jal       dead_set_variable
 /* EAA2CC 802417EC 8CC63DDC */   lw       $a2, %lo(D_80243DDC_EAC8BC)($a2)
 /* EAA2D0 802417F0 24020002 */  addiu     $v0, $zero, 2
 .L802417F4:

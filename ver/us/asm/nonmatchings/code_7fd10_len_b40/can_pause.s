@@ -37,8 +37,8 @@ glabel can_pause
 /* 7FF0C 800E6A5C 1440003C */  bnez      $v0, .L800E6B50
 /* 7FF10 800E6A60 0000102D */   daddu    $v0, $zero, $zero
 .L800E6A64:
-/* 7FF14 800E6A64 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 7FF18 800E6A68 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* 7FF14 800E6A64 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 7FF18 800E6A68 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* 7FF1C 800E6A6C 3C030004 */  lui       $v1, 4
 /* 7FF20 800E6A70 00431024 */  and       $v0, $v0, $v1
 /* 7FF24 800E6A74 14400036 */  bnez      $v0, .L800E6B50
@@ -98,7 +98,7 @@ glabel can_pause
 /* 7FFEC 800E6B3C 14620004 */  bne       $v1, $v0, .L800E6B50
 /* 7FFF0 800E6B40 0000102D */   daddu    $v0, $zero, $zero
 .L800E6B44:
-/* 7FFF4 800E6B44 0C05272D */  jal       play_sound
+/* 7FFF4 800E6B44 0C05272D */  jal       sfx_play_sound
 /* 7FFF8 800E6B48 2404021D */   addiu    $a0, $zero, 0x21d
 .L800E6B4C:
 /* 7FFFC 800E6B4C 0000102D */  daddu     $v0, $zero, $zero

@@ -38,7 +38,7 @@ glabel func_802E6064
 /* 107964 802E60E4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 107968 802E60E8 8E060048 */  lw        $a2, 0x48($s0)
 /* 10796C 802E60EC 8E07004C */  lw        $a3, 0x4c($s0)
-/* 107970 802E60F0 0C052757 */  jal       play_sound_at_position
+/* 107970 802E60F0 0C052757 */  jal       sfx_play_sound_at_position
 /* 107974 802E60F4 0000282D */   daddu    $a1, $zero, $zero
 /* 107978 802E60F8 0C03805E */  jal       disable_player_input
 /* 10797C 802E60FC 00000000 */   nop

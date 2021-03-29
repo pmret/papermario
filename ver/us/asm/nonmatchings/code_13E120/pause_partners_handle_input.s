@@ -45,7 +45,7 @@ glabel pause_partners_handle_input
 .L8024C3C8:
 /* 13F708 8024C3C8 1200002B */  beqz      $s0, .L8024C478
 /* 13F70C 8024C3CC 00000000 */   nop
-/* 13F710 8024C3D0 0C05272D */  jal       play_sound
+/* 13F710 8024C3D0 0C05272D */  jal       sfx_play_sound
 /* 13F714 8024C3D4 240400C7 */   addiu    $a0, $zero, 0xc7
 /* 13F718 8024C3D8 3C048027 */  lui       $a0, %hi(D_802706A0)
 /* 13F71C 8024C3DC 248406A0 */  addiu     $a0, $a0, %lo(D_802706A0)
@@ -202,7 +202,7 @@ glabel pause_partners_handle_input
 /* 13F944 8024C604 8C4206A4 */  lw        $v0, %lo(D_802706A4)($v0)
 /* 13F948 8024C608 10510003 */  beq       $v0, $s1, .L8024C618
 /* 13F94C 8024C60C 00000000 */   nop
-/* 13F950 8024C610 0C05272D */  jal       play_sound
+/* 13F950 8024C610 0C05272D */  jal       sfx_play_sound
 /* 13F954 8024C614 240400C7 */   addiu    $a0, $zero, 0xc7
 .L8024C618:
 /* 13F958 8024C618 3C028027 */  lui       $v0, %hi(gPauseMenuPressedButtons)
@@ -216,7 +216,7 @@ glabel pause_partners_handle_input
 /* 13F978 8024C638 14400009 */  bnez      $v0, .L8024C660
 /* 13F97C 8024C63C 24020001 */   addiu    $v0, $zero, 1
 /* 13F980 8024C640 AC620000 */  sw        $v0, ($v1)
-/* 13F984 8024C644 0C05272D */  jal       play_sound
+/* 13F984 8024C644 0C05272D */  jal       sfx_play_sound
 /* 13F988 8024C648 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 13F98C 8024C64C 24040024 */  addiu     $a0, $zero, 0x24
 /* 13F990 8024C650 0C051F9F */  jal       set_window_update
@@ -236,12 +236,12 @@ glabel pause_partners_handle_input
 /* 13F9C4 8024C684 AC600000 */   sw       $zero, ($v1)
 /* 13F9C8 8024C688 3C018027 */  lui       $at, %hi(gPauseMenuCurrentTab)
 /* 13F9CC 8024C68C A02000D4 */  sb        $zero, %lo(gPauseMenuCurrentTab)($at)
-/* 13F9D0 8024C690 0C05272D */  jal       play_sound
+/* 13F9D0 8024C690 0C05272D */  jal       sfx_play_sound
 /* 13F9D4 8024C694 240400CA */   addiu    $a0, $zero, 0xca
 /* 13F9D8 8024C698 080931E4 */  j         .L8024C790
 /* 13F9DC 8024C69C 00000000 */   nop
 .L8024C6A0:
-/* 13F9E0 8024C6A0 0C05272D */  jal       play_sound
+/* 13F9E0 8024C6A0 0C05272D */  jal       sfx_play_sound
 /* 13F9E4 8024C6A4 240400CA */   addiu    $a0, $zero, 0xca
 /* 13F9E8 8024C6A8 24040024 */  addiu     $a0, $zero, 0x24
 /* 13F9EC 8024C6AC 0C051F9F */  jal       set_window_update

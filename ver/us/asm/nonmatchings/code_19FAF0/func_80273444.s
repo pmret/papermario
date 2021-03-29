@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8029D898
+.double 54.9
+
+.section .text
+
 glabel func_80273444
 /* 1A1D24 80273444 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* 1A1D28 80273448 AFB20020 */  sw        $s2, 0x20($sp)
@@ -153,7 +160,7 @@ glabel func_80273444
 /* 1A1F60 80273680 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A1F64 80273684 8E460144 */  lw        $a2, 0x144($s2)
 /* 1A1F68 80273688 8E470148 */  lw        $a3, 0x148($s2)
-/* 1A1F6C 8027368C 0C052757 */  jal       play_sound_at_position
+/* 1A1F6C 8027368C 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A1F70 80273690 0000282D */   daddu    $a1, $zero, $zero
 .L80273694:
 /* 1A1F74 80273694 24020001 */  addiu     $v0, $zero, 1
@@ -275,7 +282,7 @@ glabel func_80273444
 /* 1A2128 80273848 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A212C 8027384C 8E460144 */  lw        $a2, 0x144($s2)
 /* 1A2130 80273850 8E470148 */  lw        $a3, 0x148($s2)
-/* 1A2134 80273854 0C052757 */  jal       play_sound_at_position
+/* 1A2134 80273854 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A2138 80273858 0000282D */   daddu    $a1, $zero, $zero
 .L8027385C:
 /* 1A213C 8027385C 24020001 */  addiu     $v0, $zero, 1

@@ -16,7 +16,7 @@ glabel func_80241510_E13C70
 .L8024153C:
 /* E13C9C 8024153C 0C03A830 */  jal       add_coins
 /* E13CA0 80241540 2404FFFF */   addiu    $a0, $zero, -1
-/* E13CA4 80241544 0C05272D */  jal       play_sound
+/* E13CA4 80241544 0C05272D */  jal       sfx_play_sound
 /* E13CA8 80241548 24040211 */   addiu    $a0, $zero, 0x211
 /* E13CAC 8024154C 8E030070 */  lw        $v1, 0x70($s0)
 /* E13CB0 80241550 24630001 */  addiu     $v1, $v1, 1

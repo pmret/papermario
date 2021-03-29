@@ -67,8 +67,8 @@ glabel state_step_language_select
 /* 106B0 800352B0 A2320000 */   sb       $s2, ($s1)
 .L800352B4:
 /* 106B4 800352B4 24020005 */  addiu     $v0, $zero, 5
-/* 106B8 800352B8 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* 106BC 800352BC 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* 106B8 800352B8 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* 106BC 800352BC 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* 106C0 800352C0 3C01800A */  lui       $at, %hi(D_800A0930)
 /* 106C4 800352C4 A0220930 */  sb        $v0, %lo(D_800A0930)($at)
 /* 106C8 800352C8 8C820000 */  lw        $v0, ($a0)
@@ -97,16 +97,16 @@ glabel state_step_language_select
 /* 10720 80035320 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
 /* 10724 80035324 14620008 */  bne       $v1, $v0, .L80035348
 /* 10728 80035328 24040003 */   addiu    $a0, $zero, 3
-/* 1072C 8003532C 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 10730 80035330 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* 1072C 8003532C 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 10730 80035330 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* 10734 80035334 8C430000 */  lw        $v1, ($v0)
 /* 10738 80035338 2404FFF7 */  addiu     $a0, $zero, -9
 /* 1073C 8003533C 00641824 */  and       $v1, $v1, $a0
 /* 10740 80035340 0800D534 */  j         .L800354D0
 /* 10744 80035344 AC430000 */   sw       $v1, ($v0)
 .L80035348:
-/* 10748 80035348 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* 1074C 8003534C 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* 10748 80035348 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* 1074C 8003534C 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* 10750 80035350 8C430000 */  lw        $v1, ($v0)
 /* 10754 80035354 34630008 */  ori       $v1, $v1, 8
 /* 10758 80035358 0C051FB1 */  jal       set_windows_visible
@@ -126,7 +126,7 @@ glabel state_step_language_select
 /* 1078C 8003538C 00021600 */  sll       $v0, $v0, 0x18
 /* 10790 80035390 1440003B */  bnez      $v0, .L80035480
 /* 10794 80035394 2402FFFF */   addiu    $v0, $zero, -1
-/* 10798 80035398 0C05260E */  jal       func_80149838
+/* 10798 80035398 0C05260E */  jal       sfx_stop_env_sounds
 /* 1079C 8003539C A2020000 */   sb       $v0, ($s0)
 /* 107A0 800353A0 0C00EC6A */  jal       func_8003B1A8
 /* 107A4 800353A4 00000000 */   nop
@@ -176,8 +176,8 @@ glabel state_step_language_select
 /* 10854 80035454 0C091238 */  jal       func_802448E0
 /* 10858 80035458 24040001 */   addiu    $a0, $zero, 1
 /* 1085C 8003545C 240400FF */  addiu     $a0, $zero, 0xff
-/* 10860 80035460 3C06800A */  lui       $a2, %hi(D_8009A650)
-/* 10864 80035464 24C6A650 */  addiu     $a2, $a2, %lo(D_8009A650)
+/* 10860 80035460 3C06800A */  lui       $a2, %hi(gOverrideFlags)
+/* 10864 80035464 24C6A650 */  addiu     $a2, $a2, %lo(gOverrideFlags)
 /* 10868 80035468 2403FFF7 */  addiu     $v1, $zero, -9
 /* 1086C 8003546C 8CC20000 */  lw        $v0, ($a2)
 /* 10870 80035470 3C05437F */  lui       $a1, 0x437f

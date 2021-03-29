@@ -14,8 +14,8 @@ glabel D_8009839C
 glabel begin_state_title_screen
 /* 121F0 80036DF0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 121F4 80036DF4 AFB20028 */  sw        $s2, 0x28($sp)
-/* 121F8 80036DF8 3C12800A */  lui       $s2, %hi(D_8009A650)
-/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, %lo(D_8009A650)
+/* 121F8 80036DF8 3C12800A */  lui       $s2, %hi(gOverrideFlags)
+/* 121FC 80036DFC 2652A650 */  addiu     $s2, $s2, %lo(gOverrideFlags)
 /* 12200 80036E00 24020001 */  addiu     $v0, $zero, 1
 /* 12204 80036E04 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 12208 80036E08 AFB10024 */  sw        $s1, 0x24($sp)
@@ -177,7 +177,7 @@ glabel begin_state_title_screen
 /* 12478 80037078 0080302D */  daddu     $a2, $a0, $zero
 /* 1247C 8003707C 240701F4 */  addiu     $a3, $zero, 0x1f4
 /* 12480 80037080 24020008 */  addiu     $v0, $zero, 8
-/* 12484 80037084 0C052A46 */  jal       set_music_track
+/* 12484 80037084 0C052A46 */  jal       bgm_set_song
 /* 12488 80037088 AFA20010 */   sw       $v0, 0x10($sp)
 /* 1248C 8003708C 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 12490 80037090 8FB20028 */  lw        $s2, 0x28($sp)

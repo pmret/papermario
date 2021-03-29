@@ -18,8 +18,8 @@ glabel step_battle
 /* ED18 80033918 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
 /* ED1C 8003391C 14620089 */  bne       $v1, $v0, .L80033B44
 /* ED20 80033920 2484FFFF */   addiu    $a0, $a0, -1
-/* ED24 80033924 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* ED28 80033928 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* ED24 80033924 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* ED28 80033928 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* ED2C 8003392C 8C430000 */  lw        $v1, ($v0)
 /* ED30 80033930 A2040000 */  sb        $a0, ($s0)
 /* ED34 80033934 34630008 */  ori       $v1, $v1, 8
@@ -42,7 +42,7 @@ glabel step_battle
 /* ED70 80033970 A2020000 */   sb       $v0, ($s0)
 /* ED74 80033974 0C018030 */  jal       nuContRmbForceStopEnd
 /* ED78 80033978 00000000 */   nop
-/* ED7C 8003397C 0C05260E */  jal       func_80149838
+/* ED7C 8003397C 0C05260E */  jal       sfx_stop_env_sounds
 /* ED80 80033980 00000000 */   nop
 /* ED84 80033984 0C00EC6A */  jal       func_8003B1A8
 /* ED88 80033988 00000000 */   nop
@@ -135,8 +135,8 @@ glabel step_battle
 /* EEDC 80033ADC AC220908 */  sw        $v0, %lo(D_800A0908)($at)
 /* EEE0 80033AE0 0C009C22 */  jal       func_80027088
 /* EEE4 80033AE4 0000202D */   daddu    $a0, $zero, $zero
-/* EEE8 80033AE8 3C05800A */  lui       $a1, %hi(D_8009A650)
-/* EEEC 80033AEC 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
+/* EEE8 80033AE8 3C05800A */  lui       $a1, %hi(gOverrideFlags)
+/* EEEC 80033AEC 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)
 /* EEF0 80033AF0 2403FFF7 */  addiu     $v1, $zero, -9
 /* EEF4 80033AF4 8CA20000 */  lw        $v0, ($a1)
 /* EEF8 80033AF8 3C04800A */  lui       $a0, %hi(D_800A0900)

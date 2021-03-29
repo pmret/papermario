@@ -12,27 +12,26 @@ extern s32 D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern s32* D_8009A680;
+extern OSViMode _osViModeNtscLan1;
+extern OSViMode _osViModeMPalLan1;
 
-#ifdef NON_MATCHING
-// Control flow issue w/ PANIC
 void boot_main(void) {
     OSViMode* viMode;
     if (osTvType == OS_TV_NTSC) {
-        viMode = &osViModeTable[OS_TV_NTSC];
+        osViSetMode(&_osViModeNtscLan1);
+        osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
     } else if (osTvType == OS_TV_MPAL) {
-        viMode = &osViModeTable[OS_TV_MPAL];
+        osViSetMode(&_osViModeMPalLan1);
+        osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
     } else {
         PANIC();
     }
 
-    osViSetMode(viMode);
-
-    osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
     nuGfxDisplayOff();
     crash_create_monitor();
     func_80025C60();
     nuGfxInitEX2();
-    (*gGameStatusPtr)->contBitPattern = nuContInit();
+    gGameStatusPtr->contBitPattern = nuContInit();
     func_8002D160();
     func_802B2000();
     func_802B203C();
@@ -47,9 +46,6 @@ void boot_main(void) {
 
     while (TRUE) {}
 }
-#else
-INCLUDE_ASM(void, "code_1370_len_7d0", boot_main, void);
-#endif
 
 void gfxRetrace_Callback(s32 arg0) {
     s32* temp_80073E00 = &D_80073E00;

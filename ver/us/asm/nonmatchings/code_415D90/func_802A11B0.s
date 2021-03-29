@@ -556,12 +556,12 @@ glabel func_802A11B0
 /* 4167AC 802A1A1C 8C22D0D0 */  lw        $v0, %lo(battle_menu_isEnabled)($at)
 /* 4167B0 802A1A20 14450005 */  bne       $v0, $a1, .L802A1A38
 /* 4167B4 802A1A24 00000000 */   nop
-/* 4167B8 802A1A28 0C05272D */  jal       play_sound
+/* 4167B8 802A1A28 0C05272D */  jal       sfx_play_sound
 /* 4167BC 802A1A2C 240400C9 */   addiu    $a0, $zero, 0xc9
 /* 4167C0 802A1A30 080A8708 */  j         .L802A1C20
 /* 4167C4 802A1A34 2402FFFF */   addiu    $v0, $zero, -1
 .L802A1A38:
-/* 4167C8 802A1A38 0C05272D */  jal       play_sound
+/* 4167C8 802A1A38 0C05272D */  jal       sfx_play_sound
 /* 4167CC 802A1A3C 2404021D */   addiu    $a0, $zero, 0x21d
 /* 4167D0 802A1A40 82220000 */  lb        $v0, ($s1)
 /* 4167D4 802A1A44 82430000 */  lb        $v1, ($s2)
@@ -622,7 +622,7 @@ glabel func_802A11B0
 /* 4168A4 802A1B14 24020001 */   addiu    $v0, $zero, 1
 /* 4168A8 802A1B18 3C01802B */  lui       $at, %hi(D_802AD004)
 /* 4168AC 802A1B1C A022D004 */  sb        $v0, %lo(D_802AD004)($at)
-/* 4168B0 802A1B20 0C05272D */  jal       play_sound
+/* 4168B0 802A1B20 0C05272D */  jal       sfx_play_sound
 /* 4168B4 802A1B24 240400C8 */   addiu    $a0, $zero, 0xc8
 /* 4168B8 802A1B28 080A870A */  j         .L802A1C28
 /* 4168BC 802A1B2C 0000102D */   daddu    $v0, $zero, $zero

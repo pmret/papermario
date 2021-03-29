@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029D7C0
+.word L8026F7E4_19E0C4, L8026F7F0_19E0D0, L8026F7FC_19E0DC, L8026F804_19E0E4, L8026F80C_19E0EC, L8026F814_19E0F4
+
+.section .text
+
 glabel SetActorSounds
 /* 19E020 8026F740 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 19E024 8026F744 AFB20018 */  sw        $s2, 0x18($sp)

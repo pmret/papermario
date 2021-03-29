@@ -233,7 +233,7 @@ glabel func_80240310_9BB5B0
 /* 9BB91C 8024067C 8C840F00 */  lw        $a0, %lo(D_80240F00_9BC1A0)($a0)
 /* 9BB920 80240680 8E060004 */  lw        $a2, 4($s0)
 /* 9BB924 80240684 8E070008 */  lw        $a3, 8($s0)
-/* 9BB928 80240688 0C052757 */  jal       play_sound_at_position
+/* 9BB928 80240688 0C052757 */  jal       sfx_play_sound_at_position
 /* 9BB92C 8024068C 0000282D */   daddu    $a1, $zero, $zero
 .L80240690:
 /* 9BB930 80240690 C60C0004 */  lwc1      $f12, 4($s0)
@@ -298,7 +298,7 @@ glabel func_80240310_9BB5B0
 /* 9BBA1C 8024077C 8E67002C */  lw        $a3, 0x2c($s3)
 /* 9BBA20 80240780 C6600030 */  lwc1      $f0, 0x30($s3)
 /* 9BBA24 80240784 0000282D */  daddu     $a1, $zero, $zero
-/* 9BBA28 80240788 0C052757 */  jal       play_sound_at_position
+/* 9BBA28 80240788 0C052757 */  jal       sfx_play_sound_at_position
 /* 9BBA2C 8024078C E7A00010 */   swc1     $f0, 0x10($sp)
 /* 9BBA30 80240790 2402002D */  addiu     $v0, $zero, 0x2d
 /* 9BBA34 80240794 3C01800B */  lui       $at, %hi(gCurrentEncounter+0xA)

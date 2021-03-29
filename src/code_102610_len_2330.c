@@ -41,12 +41,10 @@ void func_802E117C(void) {
 }
 
 void save_game_at_player_position(void) {
-    GameStatus* gameStatus = *gGameStatusPtr;
-
-    gameStatus->savedPos.x = gPlayerStatusPtr->position.x;
-    gameStatus->savedPos.y = gPlayerStatusPtr->position.y;
-    gameStatus->savedPos.z = gPlayerStatusPtr->position.z;
-    fio_save_game(gameStatus->saveSlot);
+    gGameStatusPtr->savedPos.x = gPlayerStatusPtr->position.x;
+    gGameStatusPtr->savedPos.y = gPlayerStatusPtr->position.y;
+    gGameStatusPtr->savedPos.z = gPlayerStatusPtr->position.z;
+    fio_save_game(gGameStatusPtr->saveSlot);
 }
 
 void func_802E1204(Entity* entity) {
@@ -82,7 +80,7 @@ void func_802E1298(void) {
 
 void func_802E12F8(void) {
     load_message_to_printer(0x1D0005, D_802EB39C);
-    play_sound(0x10);
+    sfx_play_sound(0x10);
 }
 
 void func_802E1328(Entity* entity) {

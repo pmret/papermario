@@ -1,19 +1,16 @@
 #include "common.h"
 
 void init_demo_data(void) {
-    GameStatus* gameStatus;
-    GameStatus* gameStatus2;
+    GameStatus** gameStatus = &gGameStatusPtr;
 
-    if ((*gGameStatusPtr)->demoState == 0) {
-        (*gGameStatusPtr)->nextDemoScene = 0;
-        (*gGameStatusPtr)->demoState = 1;
+    if ((*gameStatus)->demoState == 0) {
+        (*gameStatus)->nextDemoScene = 0;
+        (*gameStatus)->demoState = 1;
     }
 
-    gameStatus = *gGameStatusPtr;
-    (*gGameStatusPtr)->demoStickX = 0;
-    gameStatus2 = *gGameStatusPtr;
-    gameStatus->demoButtonInput = 0;
-    gameStatus2->demoStickY = 0;
+    (*gameStatus)->demoButtonInput = 0;
+    (*gameStatus)->demoStickX = 0;
+    (*gameStatus)->demoStickY = 0;
 
     func_80056228();
     set_map_transition_effect(2);

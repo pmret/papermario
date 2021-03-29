@@ -248,7 +248,7 @@ glabel func_802B6820_E256F0
 /* E25A80 802B6BB0 24042115 */   addiu    $a0, $zero, 0x2115
 /* E25A84 802B6BB4 24042116 */  addiu     $a0, $zero, 0x2116
 .L802B6BB8:
-/* E25A88 802B6BB8 0C052736 */  jal       play_sound_at_player
+/* E25A88 802B6BB8 0C052736 */  jal       sfx_play_sound_at_player
 /* E25A8C 802B6BBC 0000282D */   daddu    $a1, $zero, $zero
 /* E25A90 802B6BC0 3C02802B */  lui       $v0, %hi(D_802B6DB0_E25C80)
 /* E25A94 802B6BC4 8C426DB0 */  lw        $v0, %lo(D_802B6DB0_E25C80)($v0)

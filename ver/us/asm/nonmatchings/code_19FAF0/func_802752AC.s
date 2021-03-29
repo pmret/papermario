@@ -1,6 +1,40 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8029D8E8
+.double 0.53
+
+glabel D_8029D8F0
+.double 0.01
+
+glabel D_8029D8F8
+.double 0.53
+
+glabel D_8029D900
+.double 0.01
+
+glabel D_8029D908
+.double 16.5
+
+glabel D_8029D910
+.double 0.53
+
+glabel D_8029D918
+.double 0.01
+
+glabel D_8029D920
+.double 0.53
+
+glabel D_8029D928
+.double 0.01
+
+glabel D_8029D930
+.double 33.0
+
+.section .text
+
 glabel func_802752AC
 /* 1A3B8C 802752AC 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 1A3B90 802752B0 AFB20020 */  sw        $s2, 0x20($sp)
@@ -164,7 +198,7 @@ glabel func_802752AC
 /* 1A3DEC 8027550C E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A3DF0 80275510 8E460144 */  lw        $a2, 0x144($s2)
 /* 1A3DF4 80275514 8E470148 */  lw        $a3, 0x148($s2)
-/* 1A3DF8 80275518 0C052757 */  jal       play_sound_at_position
+/* 1A3DF8 80275518 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A3DFC 8027551C 0000282D */   daddu    $a1, $zero, $zero
 /* 1A3E00 80275520 86030064 */  lh        $v1, 0x64($s0)
 /* 1A3E04 80275524 24020168 */  addiu     $v0, $zero, 0x168
@@ -610,7 +644,7 @@ glabel func_802752AC
 /* 1A4488 80275BA8 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A448C 80275BAC 8E460144 */  lw        $a2, 0x144($s2)
 /* 1A4490 80275BB0 8E470148 */  lw        $a3, 0x148($s2)
-/* 1A4494 80275BB4 0C052757 */  jal       play_sound_at_position
+/* 1A4494 80275BB4 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A4498 80275BB8 0000282D */   daddu    $a1, $zero, $zero
 /* 1A449C 80275BBC 0000202D */  daddu     $a0, $zero, $zero
 /* 1A44A0 80275BC0 8E06005C */  lw        $a2, 0x5c($s0)

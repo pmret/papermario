@@ -2,11 +2,11 @@
 #include "nu/nusys.h"
 
 void nuContPakMgrInit(void) {
-    nuSiCallBackAdd(&nuContCallBack);
+    nuSiCallBackAdd(&nuContPakCallBack);
 }
 
 void nuContPakMgrRemove(void) {
-    nuSiCallBackRemove(&nuContCallBack);
+    nuSiCallBackRemove(&nuContPakCallBack);
 }
 
 s32 contPakOpen(NUSiCommonMesg* mesg) {

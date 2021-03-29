@@ -1,6 +1,31 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80151100
+.double 10.3
+
+glabel D_80151108
+.double 360.0
+
+glabel D_80151110
+.double 11.2
+
+glabel D_80151118
+.double 360.0
+
+glabel D_80151120
+.double 10.8
+
+glabel D_80151128
+.double 360.0
+
+glabel D_80151130
+.double 360.0
+
+.section .text
+
 glabel func_8013EE68
 /* D5568 8013EE68 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* D556C 8013EE6C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

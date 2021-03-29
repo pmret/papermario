@@ -4,8 +4,6 @@ s32 gStaticScriptCounter = 1;
 s32 gIsUpdatingScripts = 0;
 f32 gGlobalTimeSpace = 1.0f;
 
-#ifdef NON_MATCHING
-// regalloc issues.
 void sort_scripts(void) {
     s32 temp_a0;
     s32 temp_a1;
@@ -14,6 +12,7 @@ void sort_scripts(void) {
     ScriptList** currentScriptListPtr;
     s32 i;
     s32 j;
+    s32 x;
     s32 numValidScripts = 0;
     s32* scriptIndexList = gScriptIndexList;
     s32* scriptIdList = gScriptIdList;
@@ -30,14 +29,14 @@ void sort_scripts(void) {
     }
 
     gScriptListCount = numValidScripts;
-    j = numValidScripts;
-    for (i = 0; i < (j - 1); i++) {
+    for (i = 0; i < (x = numValidScripts - 1); i++) {
+        scriptIndexList = gScriptIndexList;
         currentScriptListPtr = &gCurrentScriptListPtr;
         scriptIdList = gScriptIdList;
-        scriptIndexList = gScriptIndexList;
         for (j = i + 1; j < numValidScripts; j++) {
             temp_a1 = scriptIndexList[i];
             temp_a0 = scriptIndexList[j];
+            x = i;
             if ((**currentScriptListPtr)[temp_a1]->priority > (**currentScriptListPtr)[temp_a0]->priority) {
                 scriptIndexList[i] = temp_a0;
                 scriptIndexList[j] = temp_a1;
@@ -48,9 +47,6 @@ void sort_scripts(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "code_e79b0_len_1920", sort_scripts);
-#endif
 
 void find_script_labels(ScriptInstance* script) {
     Bytecode* curLine;
@@ -89,7 +85,7 @@ void find_script_labels(ScriptInstance* script) {
 void clear_script_list(void) {
     s32 i;
 
-    if ((*gGameStatusPtr)->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         gCurrentScriptListPtr = &gWorldScriptList;
         gMapVars = gWorldMapVars;
         gMapFlags = gWorldMapFlags;
@@ -120,8 +116,7 @@ void clear_script_list(void) {
 }
 
 void init_script_list(void) {
-
-    if ((*gGameStatusPtr)->isBattle == 0) {
+    if (gGameStatusPtr->isBattle == 0) {
         gCurrentScriptListPtr = &gWorldScriptList;
         gMapVars = gWorldMapVars;
         gMapFlags = gWorldMapFlags;

@@ -51,10 +51,10 @@ glabel func_802B6000_E24920
 /* E249CC 802B60AC 0C037FBF */  jal       func_800DFEFC
 /* E249D0 802B60B0 00000000 */   nop
 /* E249D4 802B60B4 34048161 */  ori       $a0, $zero, 0x8161
-/* E249D8 802B60B8 0C052736 */  jal       play_sound_at_player
+/* E249D8 802B60B8 0C052736 */  jal       sfx_play_sound_at_player
 /* E249DC 802B60BC 0000282D */   daddu    $a1, $zero, $zero
 /* E249E0 802B60C0 24040148 */  addiu     $a0, $zero, 0x148
-/* E249E4 802B60C4 0C052736 */  jal       play_sound_at_player
+/* E249E4 802B60C4 0C052736 */  jal       sfx_play_sound_at_player
 /* E249E8 802B60C8 0000282D */   daddu    $a1, $zero, $zero
 /* E249EC 802B60CC 96220002 */  lhu       $v0, 2($s1)
 /* E249F0 802B60D0 30424000 */  andi      $v0, $v0, 0x4000

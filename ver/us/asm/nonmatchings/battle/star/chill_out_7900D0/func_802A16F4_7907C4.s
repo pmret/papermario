@@ -121,7 +121,7 @@ glabel func_802A16F4_7907C4
 /* 790984 802A18B4 AFA20014 */  sw        $v0, 0x14($sp)
 /* 790988 802A18B8 0C01C634 */  jal       func_800718D0
 /* 79098C 802A18BC E7A40010 */   swc1     $f4, 0x10($sp)
-/* 790990 802A18C0 0C05272D */  jal       play_sound
+/* 790990 802A18C0 0C05272D */  jal       sfx_play_sound
 /* 790994 802A18C4 24042106 */   addiu    $a0, $zero, 0x2106
 /* 790998 802A18C8 24020002 */  addiu     $v0, $zero, 2
 /* 79099C 802A18CC 24030001 */  addiu     $v1, $zero, 1

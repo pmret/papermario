@@ -1,9 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80150CC8
+.word 0x80132E08, 0x80132E18, 0x80132E18, 0x80132E28, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E28, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E28, 0x80132E30, 0x80132E30, 0x80132E30, 0x80132E28, 0x80132E30, 0x80132E30, 0x80132E28
+
+.section .text
+
 glabel func_80132D94
-/* C9494 80132D94 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* C9498 80132D98 8C42A650 */  lw        $v0, %lo(D_8009A650)($v0)
+/* C9494 80132D94 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* C9498 80132D98 8C42A650 */  lw        $v0, %lo(gOverrideFlags)($v0)
 /* C949C 80132D9C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* C94A0 80132DA0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* C94A4 80132DA4 AFB10014 */  sw        $s1, 0x14($sp)

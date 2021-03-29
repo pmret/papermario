@@ -11,7 +11,7 @@ glabel func_80240000_DE8770
 /* DE8788 80240018 E7A00010 */  swc1      $f0, 0x10($sp)
 /* DE878C 8024001C 8E060000 */  lw        $a2, ($s0)
 /* DE8790 80240020 8E070004 */  lw        $a3, 4($s0)
-/* DE8794 80240024 0C05267B */  jal       func_801499EC
+/* DE8794 80240024 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* DE8798 80240028 0000282D */   daddu    $a1, $zero, $zero
 /* DE879C 8024002C 86020044 */  lh        $v0, 0x44($s0)
 /* DE87A0 80240030 8FBF001C */  lw        $ra, 0x1c($sp)

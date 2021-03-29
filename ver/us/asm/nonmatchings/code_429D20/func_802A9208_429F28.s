@@ -94,7 +94,7 @@ glabel L802A9308_42A028
 /* 42A070 802A9350 00A0382D */  daddu     $a3, $a1, $zero
 /* 42A074 802A9354 A6200044 */  sh        $zero, 0x44($s1)
 /* 42A078 802A9358 A220005C */  sb        $zero, 0x5c($s1)
-/* 42A07C 802A935C 0C0526AE */  jal       _play_sound
+/* 42A07C 802A935C 0C0526AE */  jal       sfx_play_sound_with_params
 /* 42A080 802A9360 A6220054 */   sh       $v0, 0x54($s1)
 /* 42A084 802A9364 2402000B */  addiu     $v0, $zero, 0xb
 /* 42A088 802A9368 A622004C */  sh        $v0, 0x4c($s1)
@@ -208,7 +208,7 @@ glabel L802A936C_42A08C
 /* 42A21C 802A94FC 00023840 */  sll       $a3, $v0, 1
 /* 42A220 802A9500 00E23821 */  addu      $a3, $a3, $v0
 /* 42A224 802A9504 00073880 */  sll       $a3, $a3, 2
-/* 42A228 802A9508 0C0526F9 */  jal       func_80149BE4
+/* 42A228 802A9508 0C0526F9 */  jal       sfx_adjust_env_sound_params
 /* 42A22C 802A950C A2680084 */   sb       $t0, 0x84($s3)
 /* 42A230 802A9510 2A420050 */  slti      $v0, $s2, 0x50
 /* 42A234 802A9514 10400007 */  beqz      $v0, .L802A9534
@@ -267,7 +267,7 @@ glabel L802A936C_42A08C
 /* 42A2F0 802A95D0 0C093EB1 */  jal       set_popup_duration
 /* 42A2F4 802A95D4 0000202D */   daddu    $a0, $zero, $zero
 /* 42A2F8 802A95D8 3C048000 */  lui       $a0, 0x8000
-/* 42A2FC 802A95DC 0C05271B */  jal       stop_sound
+/* 42A2FC 802A95DC 0C05271B */  jal       sfx_stop_sound
 /* 42A300 802A95E0 34840041 */   ori      $a0, $a0, 0x41
 /* 42A304 802A95E4 24020005 */  addiu     $v0, $zero, 5
 /* 42A308 802A95E8 A6220054 */  sh        $v0, 0x54($s1)

@@ -63,6 +63,7 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802823B0);
 
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282414);
 
+// D_80286540 needs to be defined wherever it's meant to be, and this matches
 #ifdef NON_MATCHING
 ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
     Camera* camera;

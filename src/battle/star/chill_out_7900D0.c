@@ -1,44 +1,62 @@
 #include "common.h"
 
+#define NAMESPACE battle_star_chill_out
+
 extern s32 D_802A2CC0;
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1000_7900D0);
+#include "common/UnkStarFuncs.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A10AC_79017C);
-
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A116C_79023C);
-
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1218_7902E8);
-
-#define NAMESPACE battle_star_chill_out
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A137C_79044C);
+#include "common/UnkBackgroundFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1414_7904E4);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1494_790564);
 
-ApiStatus func_802A14E8_7905B8(ScriptInstance* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(100);
-
-    npc->collisionHeight = 32;
-    npc->collisionRadius = 32;
-    return ApiStatus_DONE2;
-}
+#include "common/SetNpcCollision32.inc.c"
 
 ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     D_802A2CC0 = 0;
     return ApiStatus_DONE2;
 }
 
-s32 func_802A1528_7905F8(ActorPart* actorPart) {
-    actorPart->unk_84 = D_802A2CC0;
-    return 2;
+ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = D_802A2CC0;
+    return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A153C_79060C);
+ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {
+    f32 a = rand_int(200) - 25;
+    f32 b = rand_int(120) + 7;
+    f32 c = rand_int(50) - 25;
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A163C_79070C);
+    func_80072230(2, a, b, c, 2.0f, 20);
+
+    a = rand_int(200) - 25;
+    b = rand_int(120) + 7;
+    c = rand_int(50) - 25;
+
+    func_8006FEF0(4, a, b, c, 40.0f);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
+    Actor* actor = get_actor(script->owner1.actorID);
+    Actor* target = get_actor(actor->targetActorID);
+    ActorPart* part = get_actor_part(target, actor->targetPartIndex);
+    s32 flag1 = 0x400000; // these manual flag ones are necessary to match. once we figure out flags, we can add more
+    s32 flag2 = 0x80000;
+
+    script->varTable[0] = 0;
+
+    if ((target->flags & 0x4000) || (target->flags & flag1) || (target->flags & 0x2000) ||
+        (part->eventFlags & 0x40000) || (part->eventFlags & flag2)) {
+        return ApiStatus_DONE2;
+    }
+
+    script->varTable[0] = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A16F4_7907C4);

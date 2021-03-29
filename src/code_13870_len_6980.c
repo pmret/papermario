@@ -14,15 +14,36 @@ void mtx_ident_mirror_y(Matrix4f* mtx) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_npcs);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", init_npc_list);
+void init_npc_list(void) {
+    if (!gGameStatusPtr->isBattle) {
+        gCurrentNpcListPtr = &gWorldNpcList;
+    } else {
+        gCurrentNpcListPtr = &gBattleNpcList;
+    }
+    D_8009A604 = 0;
+    D_800A0B94 = 1;
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003857C);
+//pointless function called by step_game_loop
+void func_8003857C(void) {
+    s32 phi_v1 = 0;
+    s32 temp_v0 = phi_v1 < 0x40;
+
+    while (temp_v0) {
+        phi_v1++;
+        temp_v0 = phi_v1 < 0x40;
+    }
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", _create_npc, NpcBlueprint* blueprint, s32 animList[], s32 skipLoadingAnims);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", create_basic_npc);
+void create_basic_npc(s32* arg0) {
+    _create_npc(arg0, 0, 0);
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", create_standard_npc);
+void create_standard_npc(s32* arg0, s32 arg1) {
+    _create_npc(arg0, arg1, 0);
+}
 
 void create_partner_npc(NpcBlueprint* blueprint) {
     _create_npc(blueprint, NULL, TRUE);
@@ -67,13 +88,66 @@ INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcId npcId);
 
 INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_safe, NpcId npcId);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_shadow);
+void enable_npc_shadow(Npc* npc) {
+    Shadow* shadow;
 
-INCLUDE_ASM(s32, "code_13870_len_6980", disable_npc_shadow);
+    if (!(npc->flags & 0x10)) {
+        shadow = get_shadow_by_index(npc->shadowIndex);
+        shadow->flags &= ~1;
+        npc->flags = npc->flags | 0x10010;
+    }
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", set_npc_sprite);
+void disable_npc_shadow(Npc* npc) {
+    Shadow* shadow;
 
-INCLUDE_ASM(s32, "code_13870_len_6980", enable_npc_blur);
+    if (npc->flags & 0x10) {
+        shadow = get_shadow_by_index(npc->shadowIndex);
+        shadow->flags |= 1;
+        npc->flags &= ~0x10;
+        npc->flags &= ~0x10000;
+    }
+}
+
+func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
+
+void set_npc_sprite(Npc* npc, s32 arg1, s32 arg2) {
+    s32 flagsTemp;
+
+    ASSERT(((npc->flags & 0x1000000)) || (func_802DE5E8(npc->unk_24) == 0));
+    npc->unk_B0 = arg2;
+    if (!(npc->flags & 0x1000000)) {
+        npc->unk_24 = func_802DE0EC(arg1, arg2);
+        ASSERT(!(npc->unk_24 < 0));
+    }
+    flagsTemp = npc->flags;
+    npc->currentAnim = arg1;
+    if (!(flagsTemp & 0x40000000)) {
+        if (!(flagsTemp & 0x1000000)) {
+            func_802DE2AC(npc->unk_24, arg1, npc->animationSpeed);
+        }
+    }
+}
+
+void enable_npc_blur(Npc* npc) {
+    NpcBlurData* blurData;
+    s32 i;
+
+    if (!(npc->flags & 0x100000)) {
+        npc->flags |= 0x100000;
+        blurData = heap_malloc(sizeof(NpcBlurData));
+        npc->blurData = blurData;
+        ASSERT(blurData != NULL);
+        blurData->unk_00 = 0;
+        blurData->unk_01 = 0;
+
+        for (i = 0; i < ARRAY_COUNT(blurData->xpos); i++) {
+            blurData->xpos[i] = npc->pos.x;
+            blurData->ypos[i] = npc->pos.y;
+            blurData->zpos[i] = npc->pos.z;
+        }
+    }
+}
 
 void disable_npc_blur(Npc* npc) {
     if (npc->flags & 0x100000) {

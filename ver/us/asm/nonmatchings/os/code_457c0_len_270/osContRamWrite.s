@@ -28,7 +28,7 @@ glabel osContRamWrite
 /* 4581C 8006A41C 1480005D */  bnez      $a0, .L8006A594
 /* 45820 8006A420 00001021 */   addu     $v0, $zero, $zero
 .L8006A424:
-/* 45824 8006A424 0C019771 */  jal       osSiGetAccess
+/* 45824 8006A424 0C019771 */  jal       __osSiGetAccess
 /* 45828 8006A428 241E0003 */   addiu    $fp, $zero, 3
 /* 4582C 8006A42C 3216FFFF */  andi      $s6, $s0, 0xffff
 /* 45830 8006A430 00108140 */  sll       $s0, $s0, 5
@@ -124,7 +124,7 @@ glabel osContRamWrite
 /* 45980 8006A580 0441FFAD */  bgez      $v0, .L8006A438
 /* 45984 8006A584 26B5FFFF */   addiu    $s5, $s5, -1
 .L8006A588:
-/* 45988 8006A588 0C01978C */  jal       osSiRelAccess
+/* 45988 8006A588 0C01978C */  jal       __osSiRelAccess
 /* 4598C 8006A58C 00000000 */   nop
 /* 45990 8006A590 02201021 */  addu      $v0, $s1, $zero
 .L8006A594:

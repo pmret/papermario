@@ -56,68 +56,61 @@ s32 dispatch_damage_event_partner_1(s32 damageAmount, s32 event, s32 stopMotion)
     return dispatch_damage_event_partner(damageAmount, event, TRUE);
 }
 
-#ifdef NON_MATCHING
 ApiStatus MakeOwnerTargetIndex(ScriptInstance* script, s32 isInitialCall) {
-    s32 temp_v0;
-    s8 targetListLength;
     Bytecode* args = script->ptrReadPos;
-    Bytecode* temp_s0_2;
-    Actor* actor;
+    Actor* actor = get_actor(script->owner1.actorID);
+    s32 numTargets = actor->targetListLength;
+    s8* targetList = &actor->targetIndexList;
+    s32 arg1 = get_variable(script, *args++);
+    s32 arg2 = get_variable(script, *args++);
+    s32 otherArg = *args++;
     SelectableTarget* selectableTarget;
-    s32 temp;
-    s32 outVal;
 
-    temp_s0_2 = *args++;
-    actor = get_actor(script->owner1.actorID);
-    targetListLength = actor->targetListLength;
-    get_variable(script, *args);
-    temp_v0 = get_variable(script, *temp_s0_2);
-    if (targetListLength == 0) {
-        outVal = -1;
+    if (numTargets == 0) {
+        arg2 = -1;
     } else {
-        temp = temp_v0;
-        if (temp_v0 != 0) {
-            temp = temp_v0 - 1;
-            if (temp_v0 >= (s32) targetListLength) {
-                temp = targetListLength - 1;
+        if (arg2 != 0) {
+            if (arg2 >= numTargets) {
+                arg2 = numTargets - 1;
+            } else {
+                arg2--;
             }
         }
-        selectableTarget = &actor->targetData[actor->targetIndexList[temp]];
-        actor->targetActorID = (u16) selectableTarget->actorID;
-        actor->targetPartIndex = ((u8*)&selectableTarget->partID)[1]; // Should access only lower part of byte
-        outVal = temp;
+
+        selectableTarget = &actor->targetData[targetList[arg2]];
+        actor->targetActorID = selectableTarget->actorID;
+        actor->targetPartIndex = selectableTarget->partID;
     }
-    set_variable(script, *temp_s0_2++, outVal);
+    
+    set_variable(script, otherArg, arg2);
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1AC760", MakeOwnerTargetIndex);
-#endif
 
-#ifdef NON_MATCHING
+s32 calc_partner_damage_enemy(void);
+
 ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
     Actor* actor;
-    Bytecode* args = script->ptrReadPos;
-    s32 outVar = args[0];
-    s32 enemyID = get_variable(script, args[0]);
+    ActorID actorID = get_variable(script, *args++);
+    s32 outVar;
 
-    if (enemyID == -0x7F) {
-        enemyID = script->owner1.enemyID;
+    if (actorID == ActorID_SELF) {
+        actorID = script->owner1.enemyID;
     }
 
-    actor = get_actor(enemyID);
+    outVar = *args++;
+    actor = get_actor(actorID);
     battleStatus->flags1 |= 0x20;
+
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage);
+    show_damage_popup(actor->walk.goalPos.x, actor->walk.goalPos.y, actor->walk.goalPos.z, battleStatus->lastAttackDamage,
+                      0);
     set_variable(script, outVar, hitResult);
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "code_1AC760", func_8027FC90);
-#endif
 
 ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

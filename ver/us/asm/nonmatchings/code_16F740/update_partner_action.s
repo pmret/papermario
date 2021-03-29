@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8029CB30
+.word L80246B8C_17546C, L80246FFC_1758DC, L80246C5C_17553C, L80246CFC_1755DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FFC_1758DC, L80246FA0_175880, L80246FD4_1758B4, 0
+
+glabel jtbl_8029CB68
+.word L802470BC_17599C, L802470E4_1759C4, L802470C4_1759A4, L802470CC_1759AC, L802470F4_1759D4, L802470D4_1759B4, L802470DC_1759BC, L802470EC_1759CC
+
+.section .text
+
 glabel update_partner_action
 /* 175414 80246B34 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
 /* 175418 80246B38 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
@@ -420,7 +430,7 @@ glabel L802470F4_1759D4
 /* 1759E4 80247104 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
 /* 1759E8 80247108 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
 .L8024710C:
-/* 1759EC 8024710C 0C05272D */  jal       play_sound
+/* 1759EC 8024710C 0C05272D */  jal       sfx_play_sound
 /* 1759F0 80247110 24042107 */   addiu    $a0, $zero, 0x2107
 /* 1759F4 80247114 0200202D */  daddu     $a0, $s0, $zero
 /* 1759F8 80247118 0C093E58 */  jal       show_battle_message

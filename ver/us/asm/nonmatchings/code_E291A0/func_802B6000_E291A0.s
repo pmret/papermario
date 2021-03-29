@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802B62B0_E29450
+.word L802B607C_E2921C, L802B60F4_E29294, L802B6174_E29314, L802B6228_E293C8, L802B6298_E29438, L802B6250_E293F0, 0, 0
+
+.section .text
+
 glabel func_802B6000_E291A0
 /* E291A0 802B6000 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* E291A4 802B6004 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -13,8 +20,8 @@ glabel func_802B6000_E291A0
 /* E291C0 802B6020 04A1000D */  bgez      $a1, .L802B6058
 /* E291C4 802B6024 3C027FFF */   lui      $v0, 0x7fff
 /* E291C8 802B6028 3442FFFF */  ori       $v0, $v0, 0xffff
-/* E291CC 802B602C 3C04800A */  lui       $a0, %hi(D_8009A650)
-/* E291D0 802B6030 2484A650 */  addiu     $a0, $a0, %lo(D_8009A650)
+/* E291CC 802B602C 3C04800A */  lui       $a0, %hi(gOverrideFlags)
+/* E291D0 802B6030 2484A650 */  addiu     $a0, $a0, %lo(gOverrideFlags)
 /* E291D4 802B6034 8C830000 */  lw        $v1, ($a0)
 /* E291D8 802B6038 00A21024 */  and       $v0, $a1, $v0
 /* E291DC 802B603C AE220000 */  sw        $v0, ($s1)
@@ -131,7 +138,7 @@ glabel L802B6174_E29314
 /* E29388 802B61E8 0440002B */  bltz      $v0, L802B6298_E29438
 /* E2938C 802B61EC 46000506 */   mov.s    $f20, $f0
 /* E29390 802B61F0 24040162 */  addiu     $a0, $zero, 0x162
-/* E29394 802B61F4 0C052736 */  jal       play_sound_at_player
+/* E29394 802B61F4 0C052736 */  jal       sfx_play_sound_at_player
 /* E29398 802B61F8 0000282D */   daddu    $a1, $zero, $zero
 /* E2939C 802B61FC 3C040008 */  lui       $a0, 8
 /* E293A0 802B6200 0C037FDE */  jal       func_800DFF78
@@ -170,8 +177,8 @@ glabel L802B6250_E293F0
 /* E29414 802B6274 00000000 */   nop
 /* E29418 802B6278 0C039769 */  jal       set_action_state
 /* E2941C 802B627C 0000202D */   daddu    $a0, $zero, $zero
-/* E29420 802B6280 3C02800A */  lui       $v0, %hi(D_8009A650)
-/* E29424 802B6284 2442A650 */  addiu     $v0, $v0, %lo(D_8009A650)
+/* E29420 802B6280 3C02800A */  lui       $v0, %hi(gOverrideFlags)
+/* E29424 802B6284 2442A650 */  addiu     $v0, $v0, %lo(gOverrideFlags)
 /* E29428 802B6288 8C430000 */  lw        $v1, ($v0)
 /* E2942C 802B628C 2404FFBF */  addiu     $a0, $zero, -0x41
 /* E29430 802B6290 00641824 */  and       $v1, $v1, $a0

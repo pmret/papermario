@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80150370
+.double 3.8
+
+glabel D_80150378
+.double 122.0
+
+glabel jtbl_80150380
+.word L80123E98_BA598, L80124174_BA874, L80124174_BA874, L80123E50_BA550, L80124174_BA874, L80123F2C_BA62C, L80124174_BA874, L80124174_BA874, L80124174_BA874, L80124174_BA874, L80124018_BA718, L80124174_BA874, L80124174_BA874, L80124174_BA874
+
+.section .text
+
 glabel _update_message
 /* B9F98 80123898 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* B9F9C 8012389C AFB00010 */  sw        $s0, 0x10($sp)
@@ -164,7 +177,7 @@ glabel _update_message
 .L80123AE0:
 /* BA1E0 80123AE0 0000282D */  daddu     $a1, $zero, $zero
 /* BA1E4 80123AE4 00A0302D */  daddu     $a2, $a1, $zero
-/* BA1E8 80123AE8 0C0526AE */  jal       _play_sound
+/* BA1E8 80123AE8 0C0526AE */  jal       sfx_play_sound_with_params
 /* BA1EC 80123AEC 00A0382D */   daddu    $a3, $a1, $zero
 /* BA1F0 80123AF0 08048F72 */  j         .L80123DC8
 /* BA1F4 80123AF4 00000000 */   nop
@@ -236,7 +249,7 @@ glabel _update_message
 /* BA2E8 80123BE8 04420001 */  bltzl     $v0, .L80123BF0
 /* BA2EC 80123BEC 00021023 */   negu     $v0, $v0
 .L80123BF0:
-/* BA2F0 80123BF0 0C0526AE */  jal       _play_sound
+/* BA2F0 80123BF0 0C0526AE */  jal       sfx_play_sound_with_params
 /* BA2F4 80123BF4 A60204C8 */   sh       $v0, 0x4c8($s0)
 /* BA2F8 80123BF8 08048F72 */  j         .L80123DC8
 /* BA2FC 80123BFC 00000000 */   nop
@@ -327,7 +340,7 @@ glabel _update_message
 /* BA438 80123D38 24020001 */  addiu     $v0, $zero, 1
 /* BA43C 80123D3C A20204ED */  sb        $v0, 0x4ed($s0)
 .L80123D40:
-/* BA440 80123D40 0C0526AE */  jal       _play_sound
+/* BA440 80123D40 0C0526AE */  jal       sfx_play_sound_with_params
 /* BA444 80123D44 00000000 */   nop
 .L80123D48:
 /* BA448 80123D48 920304F8 */  lbu       $v1, 0x4f8($s0)

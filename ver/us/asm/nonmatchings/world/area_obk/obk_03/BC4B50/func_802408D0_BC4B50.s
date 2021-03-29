@@ -377,7 +377,7 @@ glabel func_802408D0_BC4B50
 /* BC50BC 80240E3C 44071000 */  mfc1      $a3, $f2
 /* BC50C0 80240E40 C7A00060 */  lwc1      $f0, 0x60($sp)
 /* BC50C4 80240E44 0000282D */  daddu     $a1, $zero, $zero
-/* BC50C8 80240E48 0C052757 */  jal       play_sound_at_position
+/* BC50C8 80240E48 0C052757 */  jal       sfx_play_sound_at_position
 /* BC50CC 80240E4C E7A00010 */   swc1     $f0, 0x10($sp)
 /* BC50D0 80240E50 08090397 */  j         .L80240E5C
 /* BC50D4 80240E54 AE500078 */   sw       $s0, 0x78($s2)

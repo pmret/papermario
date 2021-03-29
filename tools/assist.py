@@ -9,11 +9,11 @@ import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
-asm_dir = root_dir + "asm/nonmatchings/"
+asm_dir = root_dir + "ver/current/asm/nonmatchings/"
 build_dir = root_dir + "build/"
 
 def read_rom():
-    with open("baserom.z64", "rb") as f:
+    with open("ver/current/baserom.z64", "rb") as f:
         return f.read()
 
 

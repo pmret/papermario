@@ -558,7 +558,7 @@ ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcId npcID = get_variable(script, *ptrReadPos++);
-    SoundId soundID = get_variable(script, *ptrReadPos++);
+    SoundID soundID = get_variable(script, *ptrReadPos++);
     s32 value2 = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -566,7 +566,7 @@ ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    play_sound_at_position(soundID, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(soundID, value2, npc->pos.x, npc->pos.y, npc->pos.z);
     return ApiStatus_DONE2;
 }
 

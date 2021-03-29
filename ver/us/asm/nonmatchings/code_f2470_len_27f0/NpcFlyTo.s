@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802DA1E0
+.double 180.0, 0.0
+
+.section .text
+
 glabel NpcFlyTo
 /* F30AC 802CE6FC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* F30B0 802CE700 AFB20020 */  sw        $s2, 0x20($sp)

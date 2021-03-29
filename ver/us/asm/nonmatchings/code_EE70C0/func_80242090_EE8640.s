@@ -18,7 +18,7 @@ glabel func_80242090_EE8640
 /* EE8674 802420C4 8E30000C */  lw        $s0, 0xc($s1)
 /* EE8678 802420C8 8E130000 */  lw        $s3, ($s0)
 /* EE867C 802420CC 26100004 */  addiu     $s0, $s0, 4
-/* EE8680 802420D0 0C0B53A3 */  jal       func_802D4E8C
+/* EE8680 802420D0 0C0B53A3 */  jal       dead_get_variable
 /* EE8684 802420D4 0260282D */   daddu    $a1, $s3, $zero
 /* EE8688 802420D8 4482E000 */  mtc1      $v0, $f28
 /* EE868C 802420DC 00000000 */  nop
@@ -26,14 +26,14 @@ glabel func_80242090_EE8640
 /* EE8694 802420E4 8E140000 */  lw        $s4, ($s0)
 /* EE8698 802420E8 26100004 */  addiu     $s0, $s0, 4
 /* EE869C 802420EC 0220202D */  daddu     $a0, $s1, $zero
-/* EE86A0 802420F0 0C0B53A3 */  jal       func_802D4E8C
+/* EE86A0 802420F0 0C0B53A3 */  jal       dead_get_variable
 /* EE86A4 802420F4 0280282D */   daddu    $a1, $s4, $zero
 /* EE86A8 802420F8 4482D000 */  mtc1      $v0, $f26
 /* EE86AC 802420FC 00000000 */  nop
 /* EE86B0 80242100 4680D6A0 */  cvt.s.w   $f26, $f26
 /* EE86B4 80242104 8E100000 */  lw        $s0, ($s0)
 /* EE86B8 80242108 0220202D */  daddu     $a0, $s1, $zero
-/* EE86BC 8024210C 0C0B53A3 */  jal       func_802D4E8C
+/* EE86BC 8024210C 0C0B53A3 */  jal       dead_get_variable
 /* EE86C0 80242110 0200282D */   daddu    $a1, $s0, $zero
 /* EE86C4 80242114 4482C000 */  mtc1      $v0, $f24
 /* EE86C8 80242118 00000000 */  nop
@@ -94,17 +94,17 @@ glabel func_80242090_EE8640
 /* EE879C 802421EC 0260282D */  daddu     $a1, $s3, $zero
 /* EE87A0 802421F0 4600E18D */  trunc.w.s $f6, $f28
 /* EE87A4 802421F4 44063000 */  mfc1      $a2, $f6
-/* EE87A8 802421F8 0C0B551A */  jal       func_802D5468
+/* EE87A8 802421F8 0C0B551A */  jal       dead_set_variable
 /* EE87AC 802421FC 4600C601 */   sub.s    $f24, $f24, $f0
 /* EE87B0 80242200 0220202D */  daddu     $a0, $s1, $zero
 /* EE87B4 80242204 4600D18D */  trunc.w.s $f6, $f26
 /* EE87B8 80242208 44063000 */  mfc1      $a2, $f6
-/* EE87BC 8024220C 0C0B551A */  jal       func_802D5468
+/* EE87BC 8024220C 0C0B551A */  jal       dead_set_variable
 /* EE87C0 80242210 0280282D */   daddu    $a1, $s4, $zero
 /* EE87C4 80242214 0220202D */  daddu     $a0, $s1, $zero
 /* EE87C8 80242218 4600C18D */  trunc.w.s $f6, $f24
 /* EE87CC 8024221C 44063000 */  mfc1      $a2, $f6
-/* EE87D0 80242220 0C0B551A */  jal       func_802D5468
+/* EE87D0 80242220 0C0B551A */  jal       dead_set_variable
 /* EE87D4 80242224 0200282D */   daddu    $a1, $s0, $zero
 /* EE87D8 80242228 8FBF0024 */  lw        $ra, 0x24($sp)
 /* EE87DC 8024222C 8FB40020 */  lw        $s4, 0x20($sp)

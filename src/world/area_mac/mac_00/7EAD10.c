@@ -4,7 +4,6 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-#ifdef NON_MATCHING
 ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
     s32 stickX;
     s32 stickY;
@@ -14,11 +13,8 @@ ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    stickX = (*gGameStatusPtr)->stickX;
-    stickY = (*gGameStatusPtr)->stickY;
-    if (stickX < 0) {
-        stickX = -stickX;
-    }
+    stickX = abs(gGameStatusPtr->stickX);
+    stickY = gGameStatusPtr->stickY;
 
     if (stickX == 0 && stickY == 0) {
         return ApiStatus_BLOCK;
@@ -31,9 +27,6 @@ ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 1;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EAD10", func_80240034_7EAD44);
-#endif
 
 #include "world/common/GetEntryPos.inc.c"
 

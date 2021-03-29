@@ -25,10 +25,10 @@ glabel load_map_by_IDs
 /* 35B10 8005A710 AFB40048 */  sw        $s4, 0x48($sp)
 /* 35B14 8005A714 0000A02D */  daddu     $s4, $zero, $zero
 /* 35B18 8005A718 AFBF004C */  sw        $ra, 0x4c($sp)
-/* 35B1C 8005A71C 0C05260E */  jal       func_80149838
+/* 35B1C 8005A71C 0C05260E */  jal       sfx_stop_env_sounds
 /* 35B20 8005A720 AFB20040 */   sw       $s2, 0x40($sp)
-/* 35B24 8005A724 3C05800A */  lui       $a1, %hi(D_8009A650)
-/* 35B28 8005A728 24A5A650 */  addiu     $a1, $a1, %lo(D_8009A650)
+/* 35B24 8005A724 3C05800A */  lui       $a1, %hi(gOverrideFlags)
+/* 35B28 8005A728 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)
 /* 35B2C 8005A72C 2402FFBF */  addiu     $v0, $zero, -0x41
 /* 35B30 8005A730 3C128007 */  lui       $s2, %hi(gGameStatusPtr)
 /* 35B34 8005A734 2652419C */  addiu     $s2, $s2, %lo(gGameStatusPtr)
@@ -254,7 +254,7 @@ glabel load_map_by_IDs
 /* 35E78 8005AA78 00822021 */  addu      $a0, $a0, $v0
 /* 35E7C 8005AA7C 0C0525FF */  jal       func_801497FC
 /* 35E80 8005AA80 8C84FF60 */   lw       $a0, %lo(D_8008FF60)($a0)
-/* 35E84 8005AA84 0C052580 */  jal       use_default_door_sounds
+/* 35E84 8005AA84 0C052580 */  jal       sfx_reset_door_sounds
 /* 35E88 8005AA88 00000000 */   nop
 /* 35E8C 8005AA8C 1680000B */  bnez      $s4, .L8005AABC
 /* 35E90 8005AA90 00000000 */   nop

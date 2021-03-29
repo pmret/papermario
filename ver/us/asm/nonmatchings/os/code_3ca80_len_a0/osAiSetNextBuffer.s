@@ -7,12 +7,12 @@ glabel osAiSetNextBuffer
 /* 3CA88 80061688 00808021 */  addu      $s0, $a0, $zero
 /* 3CA8C 8006168C AFB10014 */  sw        $s1, 0x14($sp)
 /* 3CA90 80061690 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 3CA94 80061694 0C01AE14 */  jal       osAiDeviceBusy
+/* 3CA94 80061694 0C01AE14 */  jal       __osAiDeviceBusy
 /* 3CA98 80061698 00A08821 */   addu     $s1, $a1, $zero
 /* 3CA9C 8006169C 14400018 */  bnez      $v0, .L80061700
 /* 3CAA0 800616A0 2402FFFF */   addiu    $v0, $zero, -1
-/* 3CAA4 800616A4 3C028009 */  lui       $v0, %hi(D_80093DA0)
-/* 3CAA8 800616A8 90423DA0 */  lbu       $v0, %lo(D_80093DA0)($v0)
+/* 3CAA4 800616A4 3C028009 */  lui       $v0, %hi(hdwrBugFlag)
+/* 3CAA8 800616A8 90423DA0 */  lbu       $v0, %lo(hdwrBugFlag)($v0)
 /* 3CAAC 800616AC 10400002 */  beqz      $v0, .L800616B8
 /* 3CAB0 800616B0 02002021 */   addu     $a0, $s0, $zero
 /* 3CAB4 800616B4 2484E000 */  addiu     $a0, $a0, -0x2000
@@ -21,12 +21,12 @@ glabel osAiSetNextBuffer
 /* 3CABC 800616BC 30421FFF */  andi      $v0, $v0, 0x1fff
 /* 3CAC0 800616C0 14400004 */  bnez      $v0, .L800616D4
 /* 3CAC4 800616C4 24020001 */   addiu    $v0, $zero, 1
-/* 3CAC8 800616C8 3C018009 */  lui       $at, %hi(D_80093DA0)
+/* 3CAC8 800616C8 3C018009 */  lui       $at, %hi(hdwrBugFlag)
 /* 3CACC 800616CC 080185B7 */  j         .L800616DC
-/* 3CAD0 800616D0 A0223DA0 */   sb       $v0, %lo(D_80093DA0)($at)
+/* 3CAD0 800616D0 A0223DA0 */   sb       $v0, %lo(hdwrBugFlag)($at)
 .L800616D4:
-/* 3CAD4 800616D4 3C018009 */  lui       $at, %hi(D_80093DA0)
-/* 3CAD8 800616D8 A0203DA0 */  sb        $zero, %lo(D_80093DA0)($at)
+/* 3CAD4 800616D4 3C018009 */  lui       $at, %hi(hdwrBugFlag)
+/* 3CAD8 800616D8 A0203DA0 */  sb        $zero, %lo(hdwrBugFlag)($at)
 .L800616DC:
 /* 3CADC 800616DC 0C0187A4 */  jal       osVirtualToPhysical
 /* 3CAE0 800616E0 00000000 */   nop

@@ -11,7 +11,7 @@ glabel func_80240020_D86A20
 /* D86A38 80240038 E7A00010 */  swc1      $f0, 0x10($sp)
 /* D86A3C 8024003C 8E060000 */  lw        $a2, ($s0)
 /* D86A40 80240040 8E070004 */  lw        $a3, 4($s0)
-/* D86A44 80240044 0C05267B */  jal       func_801499EC
+/* D86A44 80240044 0C05267B */  jal       sfx_adjust_env_sound_pos
 /* D86A48 80240048 0000282D */   daddu    $a1, $zero, $zero
 /* D86A4C 8024004C 86020044 */  lh        $v0, 0x44($s0)
 /* D86A50 80240050 8FBF001C */  lw        $ra, 0x1c($sp)

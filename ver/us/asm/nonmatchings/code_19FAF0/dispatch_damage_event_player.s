@@ -85,7 +85,7 @@ glabel dispatch_damage_event_player
 /* 1A1BC4 802732E4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 1A1BC8 802732E8 8E26000C */  lw        $a2, 0xc($s1)
 /* 1A1BCC 802732EC 8E270010 */  lw        $a3, 0x10($s1)
-/* 1A1BD0 802732F0 0C052757 */  jal       play_sound_at_position
+/* 1A1BD0 802732F0 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A1BD4 802732F4 0000282D */   daddu    $a1, $zero, $zero
 /* 1A1BD8 802732F8 24020001 */  addiu     $v0, $zero, 1
 .L802732FC:

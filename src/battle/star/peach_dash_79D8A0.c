@@ -1,22 +1,35 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1000_79D8A0);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A10AC_79D94C);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A116C_79DA0C);
-
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1218_79DAB8);
-
 #define NAMESPACE battle_star_peach_dash
+
+#include "common/UnkStarFuncs.inc.c"
+
 #include "common/FadeBackgroundToBlack.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A137C_79DC1C);
+#include "common/UnkBackgroundFunc2.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1414_79DCB4);
+#include "common/UnkBackgroundFunc.inc.c"
 
 INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1494_79DD34);
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A14E8_79DD88);
+#include "common/SetNpcCollision32.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1518_79DDB8);
+ApiStatus func_802A1518_79DDB8(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    PlayerData* playerData2 = &gPlayerData;
+
+    if (is_ability_active(Ability_DEEP_FOCUS)) {
+        playerData->specialBarsFilled += 128;
+    }
+    if (is_ability_active(Ability_SUPER_FOCUS)) {
+        playerData->specialBarsFilled += 256;
+    }
+
+    playerData->specialBarsFilled += 128;
+
+    if (playerData2->specialBarsFilled >= playerData2->maxStarPower * 256) {
+        playerData2->specialBarsFilled = playerData2->maxStarPower * 256;
+    }
+
+    return ApiStatus_DONE2;
+}

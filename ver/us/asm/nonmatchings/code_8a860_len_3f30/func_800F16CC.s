@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8010C3A0
+.word L800F1718_8ABC8, L800F1734_8ABE4, L800F1718_8ABC8, L800F1718_8ABC8, L800F1734_8ABE4, L800F1718_8ABC8, L800F1718_8ABC8, L800F1718_8ABC8, L800F1718_8ABC8, L800F1718_8ABC8, L800F1768_8AC18, L800F1768_8AC18, L800F1718_8ABC8, L800F1768_8AC18
+
+glabel jtbl_8010C3D8
+.word L800F17C0_8AC70, L800F17D4_8AC84, L800F17C0_8AC70, L800F17C0_8AC70, L800F17D4_8AC84, L800F17C0_8AC70, L800F17C0_8AC70, L800F17C0_8AC70, L800F17C0_8AC70, L800F17C0_8AC70, L800F17E8_8AC98, L800F17E8_8AC98, L800F17C0_8AC70, L800F17E8_8AC98
+
+.section .text
+
 glabel func_800F16CC
 /* 8AB7C 800F16CC 3C028011 */  lui       $v0, %hi(D_8010D68E)
 /* 8AB80 800F16D0 8042D68E */  lb        $v0, %lo(D_8010D68E)($v0)
@@ -37,7 +47,7 @@ glabel L800F1734_8ABE4
 /* 8ABF4 800F1744 0200282D */   daddu    $a1, $s0, $zero
 /* 8ABF8 800F1748 24040002 */  addiu     $a0, $zero, 2
 .L800F174C:
-/* 8ABFC 800F174C 0C05272D */  jal       play_sound
+/* 8ABFC 800F174C 0C05272D */  jal       sfx_play_sound
 /* 8AC00 800F1750 00000000 */   nop
 /* 8AC04 800F1754 24040013 */  addiu     $a0, $zero, 0x13
 /* 8AC08 800F1758 0C051F9F */  jal       set_window_update
@@ -49,7 +59,7 @@ glabel L800F1768_8AC18
 /* 8AC1C 800F176C 24A57474 */  addiu     $a1, $a1, %lo(basic_window_update)
 /* 8AC20 800F1770 0C051F9F */  jal       set_window_update
 /* 8AC24 800F1774 2404000E */   addiu    $a0, $zero, 0xe
-/* 8AC28 800F1778 0C05272D */  jal       play_sound
+/* 8AC28 800F1778 0C05272D */  jal       sfx_play_sound
 /* 8AC2C 800F177C 24040001 */   addiu    $a0, $zero, 1
 .L800F1780:
 /* 8AC30 800F1780 24040015 */  addiu     $a0, $zero, 0x15

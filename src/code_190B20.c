@@ -1004,8 +1004,15 @@ ActorPartDesc bMarioParts[] = {
 };
 
 s32 D_80283524[] = {
-    0x00050000, 0xFFEC002D, 0x0000FFFB, 0x00550000, 0x000A007D, 0x00000019, 0x000A0032, 0xFFEC0032, 0x002DFFFB, 0x005A0032, 0x000A0082, 0x00370019, 0x000F0055, 0xFFEC0037, 0x0050FFFB, 0x005F0055, 0x000A0087, 0x005A0019, 0x000F007D, 0xFFEC0037, 0x0078FFFB, 0x005F007D, 0x000A0087, 0x00820019, 0x00690000, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, D_8028358C, D_8028358C, D_8028358C, D_8028358C, D_8028358C, D_8028358C, D_8028358C, D_8028358C, 0x00000000,
+    0x00050000, 0xFFEC002D, 0x0000FFFB, 0x00550000, 0x000A007D, 0x00000019, 0x000A0032, 0xFFEC0032, 0x002DFFFB,
+    0x005A0032, 0x000A0082, 0x00370019, 0x000F0055, 0xFFEC0037, 0x0050FFFB, 0x005F0055, 0x000A0087, 0x005A0019,
+    0x000F007D, 0xFFEC0037, 0x0078FFFB, 0x005F007D, 0x000A0087, 0x00820019, 0x00690000, 0x00000000
 };
+
+s32 D_8028358C[] = { 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF,
+                     &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C, &D_8028358C,
+                     0x00000000,
+                   };
 
 s16 D_802835D0[] = { 0x1C, 0x28 };
 s16 D_802835D4[] = { 0, -2 };
@@ -1166,8 +1173,8 @@ INCLUDE_ASM(s32, "code_190B20", inflict_status);
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == Debuff_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Debuff_DAZE);
-            play_sound(0x2107);
+            inflict_status(target, Debuff_DAZE, duration);
+            sfx_play_sound(0x2107);
         } else {
             target->koDuration += duration;
             if (target->koDuration > 9) {
@@ -1275,7 +1282,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 
 INCLUDE_ASM(s32, "code_190B20", func_802664DC);
 
-INCLUDE_ASM(void, "code_190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount);
+INCLUDE_ASM(void, "code_190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAmount, s32 arg4);
 
 INCLUDE_ASM(s32, "code_190B20", func_80266684);
 
@@ -1441,7 +1448,7 @@ void remove_player_buffs(PlayerBuff buffs) {
         func_80071C30(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->unk_A0 = NULL;
-        play_sound(0x299);
+        sfx_play_sound(0x299);
     }
     if ((buffs & 0x100) && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;

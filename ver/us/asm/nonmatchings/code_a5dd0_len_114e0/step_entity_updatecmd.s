@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8014F740
+.word L8010FC18_A6318, L8010FC30_A6330, L8010FC50_A6350, L8010FC6C_A636C, L8010FC90_A6390, L8010FCAC_A63AC, L8010FCCC_A63CC, L8010FCE8_A63E8, L8010FD08_A6408, L8010FD2C_A642C
+
+.section .text
+
 glabel step_entity_updatecmd
 /* A62D8 8010FBD8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A62DC 8010FBDC AFB10014 */  sw        $s1, 0x14($sp)
@@ -98,7 +105,7 @@ glabel L8010FD08_A6408
 /* A6428 8010FD28 AE220000 */   sw       $v0, ($s1)
 glabel L8010FD2C_A642C
 /* A642C 8010FD2C 8E040000 */  lw        $a0, ($s0)
-/* A6430 8010FD30 0C05272D */  jal       play_sound
+/* A6430 8010FD30 0C05272D */  jal       sfx_play_sound
 /* A6434 8010FD34 26100004 */   addiu    $s0, $s0, 4
 /* A6438 8010FD38 24040001 */  addiu     $a0, $zero, 1
 /* A643C 8010FD3C 08043F54 */  j         .L8010FD50

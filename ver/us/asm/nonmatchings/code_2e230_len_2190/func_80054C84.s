@@ -10,7 +10,7 @@ glabel func_80054C84
 /* 30098 80054C98 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 3009C 80054C9C AFB00010 */  sw        $s0, 0x10($sp)
 /* 300A0 80054CA0 8C500004 */  lw        $s0, 4($v0)
-/* 300A4 80054CA4 0C0151D1 */  jal       func_80054744
+/* 300A4 80054CA4 0C0151D1 */  jal       snd_get_BK_instruments
 /* 300A8 80054CA8 0060282D */   daddu    $a1, $v1, $zero
 /* 300AC 80054CAC 0040182D */  daddu     $v1, $v0, $zero
 /* 300B0 80054CB0 10600007 */  beqz      $v1, .L80054CD0

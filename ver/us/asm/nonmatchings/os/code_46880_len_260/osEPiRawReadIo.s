@@ -17,9 +17,9 @@ glabel osEPiRawReadIo
 .L8006B59C:
 /* 4699C 8006B59C 90880009 */  lbu       $t0, 9($a0)
 /* 469A0 8006B5A0 00081080 */  sll       $v0, $t0, 2
-/* 469A4 8006B5A4 3C078009 */  lui       $a3, %hi(D_80093D70)
+/* 469A4 8006B5A4 3C078009 */  lui       $a3, %hi(__osCurrentHandle)
 /* 469A8 8006B5A8 00E23821 */  addu      $a3, $a3, $v0
-/* 469AC 8006B5AC 8CE73D70 */  lw        $a3, %lo(D_80093D70)($a3)
+/* 469AC 8006B5AC 8CE73D70 */  lw        $a3, %lo(__osCurrentHandle)($a3)
 /* 469B0 8006B5B0 90820004 */  lbu       $v0, 4($a0)
 /* 469B4 8006B5B4 90E30004 */  lbu       $v1, 4($a3)
 /* 469B8 8006B5B8 1062003F */  beq       $v1, $v0, .L8006B6B8

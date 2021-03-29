@@ -167,7 +167,7 @@ glabel JumpPartTo
 /* 1A903C 8027A75C 8E2400B4 */  lw        $a0, 0xb4($s1)
 /* 1A9040 8027A760 8E26002C */  lw        $a2, 0x2c($s1)
 /* 1A9044 8027A764 8E270030 */  lw        $a3, 0x30($s1)
-/* 1A9048 8027A768 0C052757 */  jal       play_sound_at_position
+/* 1A9048 8027A768 0C052757 */  jal       sfx_play_sound_at_position
 /* 1A904C 8027A76C 0000282D */   daddu    $a1, $zero, $zero
 /* 1A9050 8027A770 24020001 */  addiu     $v0, $zero, 1
 .L8027A774:

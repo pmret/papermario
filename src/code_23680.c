@@ -106,7 +106,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-INCLUDE_ASM(s32, "code_23680", func_800490B4, s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+INCLUDE_ASM(s32, "code_23680", func_800490B4, EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -136,7 +136,7 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     return 0;
 }
 
-void func_800494C0(Npc *npc, s32 arg1, s32 arg2) {
+void func_800494C0(Npc* npc, s32 arg1, s32 arg2) {
     Enemy* enemy = get_enemy(npc->npcID);
     s32 value2 = (arg2 & 0xFFFF0000) | 2;
 
@@ -148,7 +148,7 @@ void func_800494C0(Npc *npc, s32 arg1, s32 arg2) {
         value2 |= 0x20000;
     }
 
-    play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
+    sfx_play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
 }
 
 void func_80049550(ScriptInstance* script, s32 arg1) {

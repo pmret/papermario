@@ -29,7 +29,7 @@ glabel func_802B62CC_E24BEC
 /* E24C4C 802B632C A60000C2 */  sh        $zero, 0xc2($s0)
 /* E24C50 802B6330 AE020000 */  sw        $v0, ($s0)
 /* E24C54 802B6334 E6000044 */  swc1      $f0, 0x44($s0)
-/* E24C58 802B6338 0C052736 */  jal       play_sound_at_player
+/* E24C58 802B6338 0C052736 */  jal       sfx_play_sound_at_player
 /* E24C5C 802B633C E6020048 */   swc1     $f2, 0x48($s0)
 /* E24C60 802B6340 96220002 */  lhu       $v0, 2($s1)
 /* E24C64 802B6344 30424000 */  andi      $v0, $v0, 0x4000

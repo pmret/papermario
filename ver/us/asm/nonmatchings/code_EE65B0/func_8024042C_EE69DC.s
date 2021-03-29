@@ -10,7 +10,7 @@ glabel func_8024042C_EE69DC
 /* EE69F0 80240440 0000202D */  daddu     $a0, $zero, $zero
 /* EE69F4 80240444 3C05FD05 */  lui       $a1, 0xfd05
 /* EE69F8 80240448 34A50F80 */  ori       $a1, $a1, 0xf80
-/* EE69FC 8024044C 0C0B53A3 */  jal       func_802D4E8C
+/* EE69FC 8024044C 0C0B53A3 */  jal       dead_get_variable
 /* EE6A00 80240450 0040802D */   daddu    $s0, $v0, $zero
 /* EE6A04 80240454 AE020000 */  sw        $v0, ($s0)
 /* EE6A08 80240458 8FBF0014 */  lw        $ra, 0x14($sp)

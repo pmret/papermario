@@ -297,7 +297,7 @@ glabel L802BE77C_31F4EC
 /* 31F584 802BE814 0000102D */   daddu    $v0, $zero, $zero
 /* 31F588 802BE818 24042081 */  addiu     $a0, $zero, 0x2081
 /* 31F58C 802BE81C 0000282D */  daddu     $a1, $zero, $zero
-/* 31F590 802BE820 0C052742 */  jal       play_sound_at_npc
+/* 31F590 802BE820 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31F594 802BE824 2406FFFC */   addiu    $a2, $zero, -4
 /* 31F598 802BE828 3C040001 */  lui       $a0, 1
 /* 31F59C 802BE82C 0C037FBF */  jal       func_800DFEFC
@@ -464,7 +464,7 @@ glabel L802BE9E4_31F754
 /* 31F80C 802BEA9C AE420000 */   sw       $v0, ($s2)
 /* 31F810 802BEAA0 24042013 */  addiu     $a0, $zero, 0x2013
 /* 31F814 802BEAA4 0000282D */  daddu     $a1, $zero, $zero
-/* 31F818 802BEAA8 0C052742 */  jal       play_sound_at_npc
+/* 31F818 802BEAA8 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31F81C 802BEAAC 2406FFFC */   addiu    $a2, $zero, -4
 /* 31F820 802BEAB0 C6200038 */  lwc1      $f0, 0x38($s1)
 /* 31F824 802BEAB4 3C014040 */  lui       $at, 0x4040
@@ -545,7 +545,7 @@ glabel L802BEB18_31F888
 /* 31F944 802BEBD4 24042015 */  addiu     $a0, $zero, 0x2015
 .L802BEBD8:
 /* 31F948 802BEBD8 0000282D */  daddu     $a1, $zero, $zero
-/* 31F94C 802BEBDC 0C052742 */  jal       play_sound_at_npc
+/* 31F94C 802BEBDC 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31F950 802BEBE0 2406FFFC */   addiu    $a2, $zero, -4
 .L802BEBE4:
 /* 31F954 802BEBE4 3C01802C */  lui       $at, %hi(D_802BFEF8)
@@ -785,7 +785,7 @@ glabel L802BEB18_31F888
 /* 31FCD0 802BEF60 0000102D */   daddu    $v0, $zero, $zero
 /* 31FCD4 802BEF64 24040294 */  addiu     $a0, $zero, 0x294
 /* 31FCD8 802BEF68 0000282D */  daddu     $a1, $zero, $zero
-/* 31FCDC 802BEF6C 0C052742 */  jal       play_sound_at_npc
+/* 31FCDC 802BEF6C 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31FCE0 802BEF70 2406FFFC */   addiu    $a2, $zero, -4
 /* 31FCE4 802BEF74 080AFD3D */  j         .L802BF4F4
 /* 31FCE8 802BEF78 0000102D */   daddu    $v0, $zero, $zero
@@ -938,7 +938,7 @@ glabel L802BEB18_31F888
 /* 31FF30 802BF1C0 46022100 */  add.s     $f4, $f4, $f2
 /* 31FF34 802BF1C4 2406FFFC */  addiu     $a2, $zero, -4
 /* 31FF38 802BF1C8 E7A00030 */  swc1      $f0, 0x30($sp)
-/* 31FF3C 802BF1CC 0C052742 */  jal       play_sound_at_npc
+/* 31FF3C 802BF1CC 0C052742 */  jal       sfx_play_sound_at_npc
 /* 31FF40 802BF1D0 E624001C */   swc1     $f4, 0x1c($s1)
 /* 31FF44 802BF1D4 3C040001 */  lui       $a0, 1
 /* 31FF48 802BF1D8 0C037FBF */  jal       func_800DFEFC

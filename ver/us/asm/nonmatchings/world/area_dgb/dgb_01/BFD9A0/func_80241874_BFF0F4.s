@@ -49,7 +49,7 @@ glabel func_80241874_BFF0F4
 /* BFF198 80241918 E7A00010 */  swc1      $f0, 0x10($sp)
 /* BFF19C 8024191C 8E260038 */  lw        $a2, 0x38($s1)
 /* BFF1A0 80241920 8E27003C */  lw        $a3, 0x3c($s1)
-/* BFF1A4 80241924 0C052757 */  jal       play_sound_at_position
+/* BFF1A4 80241924 0C052757 */  jal       sfx_play_sound_at_position
 /* BFF1A8 80241928 24050002 */   addiu    $a1, $zero, 2
 /* BFF1AC 8024192C 2402000F */  addiu     $v0, $zero, 0xf
 /* BFF1B0 80241930 A620008E */  sh        $zero, 0x8e($s1)

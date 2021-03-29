@@ -46,7 +46,7 @@ glabel func_802BEA24_31CA44
 /* 31CAE0 802BEAC0 00431024 */  and       $v0, $v0, $v1
 /* 31CAE4 802BEAC4 2403FFBF */  addiu     $v1, $zero, -0x41
 /* 31CAE8 802BEAC8 00431024 */  and       $v0, $v0, $v1
-/* 31CAEC 802BEACC 0C05271B */  jal       stop_sound
+/* 31CAEC 802BEACC 0C05271B */  jal       sfx_stop_sound
 /* 31CAF0 802BEAD0 AE220000 */   sw       $v0, ($s1)
 /* 31CAF4 802BEAD4 0C039769 */  jal       set_action_state
 /* 31CAF8 802BEAD8 0000202D */   daddu    $a0, $zero, $zero

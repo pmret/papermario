@@ -23,8 +23,7 @@ s32 func_800E26C4(void) {
         actionState == ActionState_WALK ||
         actionState == ActionState_RUN ||
         actionState == ActionState_USE_TWEESTER ||
-        actionState == ActionState_SPIN)
-    {
+        actionState == ActionState_SPIN) {
         return 1;
     }
 
@@ -148,9 +147,9 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     for (i = 0; i < 4; i++) {
         PlayerStatus** playerStatus = &gPlayerStatusPtr;
         f32 x = (*playerStatus)->position.x;
-        f32 y = (*playerStatus)->position.y + arg2;
+        f32 y = (*playerStatus)->position.y + arg1;
         f32 z = (*playerStatus)->position.z;
-        s32 hitID = do_lateral_collision(arg2, *playerStatus, &x, &y, &z, 0, angle);
+        s32 hitID = do_lateral_collision(arg0, *playerStatus, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
@@ -164,7 +163,7 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     return ret;
 }
 #else
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world,s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(s32, "code_7bb60_len_41b0", collision_check_player_intersecting_world, s32 arg0, s32 arg1, f32 arg2);
 #endif
 
 s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ) {
@@ -256,8 +255,7 @@ void check_input_midair_jump(void) {
         !(gPlayerStatus.animFlags & 0x4001) &&
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.decorationList < 0x12 &&
-        gPlayerStatus.pressedButtons & A_BUTTON)
-    {
+        gPlayerStatus.pressedButtons & A_BUTTON) {
         switch (gPlayerData.bootsLevel) {
             case 0:
                 break;
@@ -278,7 +276,7 @@ PartnerID get_current_partner_id(void) {
 }
 
 void func_800E5098(s32 arg0) {
-    if (((*gGameStatusPtr)->frameCounter % arg0) == 0) {
+    if ((gGameStatusPtr->frameCounter % arg0) == 0) {
         u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
         s32 soundID;
         s32 soundID2;
@@ -298,7 +296,7 @@ void func_800E5098(s32 arg0) {
             soundID = soundID2;
         }
 
-        play_sound_at_player(soundID, 0);
+        sfx_play_sound_at_player(soundID, 0);
         *temp_800F7B80 ^= 1;
     }
 }
@@ -414,7 +412,7 @@ void set_action_state(s32 actionState) {
     playerStatus->animFlags &= ~0x10000;
 
     if (unknownStruct[0xC]) {
-        stop_sound(unknownStruct[0xC]);
+        sfx_stop_sound(unknownStruct[0xC]);
     }
 
     if (playerStatus->unk_D8) {
@@ -482,42 +480,39 @@ s32 check_input_hammer(void) {
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_jump);
 
-// control flow, temps, blah
-#ifdef NON_MATCHING
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010F250* temp_8010F250 = &D_8010F250;
+    Temp8010F250* temp2 = temp_8010F250;
 
     if (!(playerStatus->flags & 0x5000) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(Ability_SLOW_GO)) {
 
-        s8 actionState = playerStatus->actionState;
+        s32 actionState = playerStatus->actionState;
+        s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
 
-        if ((playerStatus->pressedButtons & Z_TRIG) &&
-            (actionState != 0x21) &&
-            (actionState < 0x22) &&
-            (actionState < 3) &&
-            (actionState >= 0) &&
-            !(playerStatus->animFlags & 0x10000))
-        {
-            set_action_state(ActionState_SPIN);
-            if (temp_8010F250->unk_01 != 0) {
-                if (temp_8010F250->unk_08 == 0) {
-                    if (temp_8010F250->unk_0C == 0) {
-                        playerStatus->prevActionState = ActionState_IDLE;
-                        return;
+        if (actionState != 0x21) {
+            if (actionState < 0x22) {
+                if (actionState < 3) {
+                    if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
+                        if (btnPressed || temp_8010F250->unk_01) {
+                            set_action_state(ActionState_SPIN);
+                            if (temp_8010F250->unk_01 != 0) {
+                                if (temp_8010F250->unk_08 != 0 || temp_8010F250->unk_0C != 0) {
+                                    playerStatus->prevActionState = temp2->unk_07;
+                                } else {
+                                    playerStatus->prevActionState = ActionState_IDLE;
+                                }
+                            }
+                        }
                     }
                 }
-                playerStatus->prevActionState = temp_8010F250->unk_07;
             }
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", check_input_spin);
-#endif
 
 void func_800E636C(s32 arg0) {
     s32 listIndex = D_8010C96C;
@@ -534,7 +529,7 @@ void func_800E63A4(s32 arg0) {
         set_action_state(0x19);
     } else {
         playerStatus->animFlags &= ~0x2000;
-        (*gGameStatusPtr)->peachFlags &= ~0x2;
+        gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
         set_action_state(ActionState_IDLE);
@@ -543,10 +538,9 @@ void func_800E63A4(s32 arg0) {
     }
 }
 
-// PlayerStatus reuse
-#ifdef NON_MATCHING
 void func_800E6428(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = playerStatus;
     s32 actionState = playerStatus->actionState;
     Npc* disguiseNpc;
 
@@ -556,24 +550,22 @@ void func_800E6428(void) {
         if (*temp_8010C92C != 0) {
             (*temp_8010C92C)--;
             if (*temp_8010C92C == 0) {
-                if ((*gGameStatusPtr)->peachFlags & 2) {
+                GameStatus** gameStatus = &gGameStatusPtr;
+                if ((*gameStatus)->peachFlags & 2) {
                     playerStatus->animFlags |= 0x2000;
-                    (*gGameStatusPtr)->peachFlags |= 2;
+                    (*gameStatus)->peachFlags |= 2;
 
-                    disguiseNpc = make_disguise_npc((*gGameStatusPtr)->peachDisguise);
+                    disguiseNpc = make_disguise_npc((*gameStatus)->peachDisguise);
                     if (disguiseNpc != NULL) {
                         disguiseNpc->flags &= ~0x40000;
                     }
                 }
             }
-        } else if ((*gGameStatusPtr)->peachFlags & 4 && gPlayerStatus.pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus2->pressedButtons & B_BUTTON) {
             set_action_state(0x19);
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E6428);
-#endif
 
 void func_800E6500(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

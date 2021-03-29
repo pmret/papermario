@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80151248
+.double 0.01
+
+.section .text
+
 glabel basic_hidden_window_update
 /* DDC74 80147574 3C028016 */  lui       $v0, %hi(gUIPanels)
 /* DDC78 80147578 24429D50 */  addiu     $v0, $v0, %lo(gUIPanels)
