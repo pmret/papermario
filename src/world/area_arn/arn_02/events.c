@@ -6,8 +6,8 @@ Script N(Exit1) = EXIT_WALK_SCRIPT(60, 0, "arn_05", 1);
 Script N(Exit2) = EXIT_WALK_SCRIPT(60, 1, "arn_04", 0);
 
 Script N(BindExits) = SCRIPT({
-    bind N(Exit1) to TriggerFlag_FLOOR_ABOVE 1;
-    bind N(Exit2) to TriggerFlag_FLOOR_ABOVE 6;
+    bind N(Exit1) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(Exit2) to TRIGGER_FLOOR_ABOVE 6;
 });
 
 Script N(Main) = SCRIPT({
@@ -27,13 +27,13 @@ Script N(Main) = SCRIPT({
 s32 N(padding2)[] = { 0, 0, 0 };
 
 Script N(MakeEntities) = SCRIPT({
-    MakeItemEntity(ItemId_DIZZY_DIAL, 0xFFFFFF08, 193, 45, 17, SI_SAVE_FLAG(1005));
-    MakeItemEntity(ItemId_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
-    MakeEntity(0x802EA564, 0xFFFFFEA2, 172, 170, 0, ItemId_COIN, 0x80000000);
+    MakeItemEntity(ITEM_DIZZY_DIAL, 0xFFFFFF08, 193, 45, 17, SI_SAVE_FLAG(1005));
+    MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
+    MakeEntity(0x802EA564, 0xFFFFFEA2, 172, 170, 0, ITEM_COIN, 0x80000000);
     AssignBlockFlag(SI_SAVE_FLAG(1002));
-    MakeEntity(0x802EA564, 225, 265, 30, 0, ItemId_COIN, 0x80000000);
+    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, 0x80000000);
     AssignBlockFlag(SI_SAVE_FLAG(1003));
-    MakeEntity(0x802EA564, 275, 265, 150, 0, ItemId_REPEL_GEL, 0x80000000);
+    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, 0x80000000);
     AssignBlockFlag(SI_SAVE_FLAG(1004));
 });
 
@@ -191,7 +191,7 @@ StaticNpc N(GoombaNPC) = {
     .dropFlags = 0x80,
     .itemDropChance = 20,
     .itemDrops = {
-        { ItemId_DRIED_SHROOM, 10, 0 },
+        { ITEM_DRIED_SHROOM, 10, 0 },
     },
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),

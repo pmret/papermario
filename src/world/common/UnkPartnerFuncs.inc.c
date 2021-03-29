@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(UnkRotatePartner)(ScriptInstance* script, s32 isInitialCall) {
-    Npc* partner = get_npc_unsafe(NpcId_PARTNER);
+    Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
     if (isInitialCall) {
         script->functionTemp[0].s = 60;
@@ -19,7 +19,7 @@ ApiStatus N(UnkRotatePartner)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(UnkMovePartner)(ScriptInstance* script, s32 isInitialCall) {
-    Npc* npc = get_npc_unsafe(NpcId_PARTNER);
+    Npc* npc = get_npc_unsafe(NPC_PARTNER);
 
     if (isInitialCall) {
         script->functionTemp[1].f = get_float_variable(script, SI_VAR(0)) / 60.0f;

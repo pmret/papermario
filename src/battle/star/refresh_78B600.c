@@ -19,7 +19,7 @@ INCLUDE_ASM(s32, "battle/star/refresh_78B600", func_802A1518_78BB18);
 ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor = gBattleStatus.playerActor;
 
-    if (actor->debuff != Debuff_END) {
+    if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         func_80047898(actor->unk_436);

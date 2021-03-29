@@ -17,13 +17,13 @@ MapConfig N(config) = {
 Script N(PlayMusic) = SCRIPT({
     match SI_SAVE_VAR(0) {
         < STORY_CH3_TUBBA_WOKE_UP {
-            SetMusicTrack(0, Song_GUSTY_GULCH, 0, 8);
+            SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SetMusicTrack(0, Song_TUBBA_ESCAPE, 0, 8);
+            SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
         }
         else {
-            SetMusicTrack(0, Song_GUSTY_GULCH, 0, 8);
+            SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }
     }
     PlayAmbientSounds(1);

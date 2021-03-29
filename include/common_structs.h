@@ -278,7 +278,7 @@ typedef struct ScriptInstance {
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
     /* 0x14C */ union {
-        NpcId npcID;
+        NpcID npcID;
         s32 triggerID;
         struct Npc* npc;            ///< For overworld scripts owned by an Npc
         struct Trigger* trigger;
@@ -1402,7 +1402,7 @@ typedef struct Actor {
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
-    /* 0x210 */ Debuff debuff;
+    /* 0x210 */ Status debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ s8 staticDuration;

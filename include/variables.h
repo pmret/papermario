@@ -176,7 +176,7 @@ extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
-extern ItemId gBadgeMenuItemIDs[128];
+extern ItemID gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;

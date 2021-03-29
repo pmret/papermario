@@ -101,7 +101,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) =c ItemId_SLEEPY_SHEEP;
+    SI_VAR(10) =c ITEM_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
     UseCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
@@ -109,7 +109,7 @@ Script N(main) = SCRIPT({
     SetBattleCamZoom(169);
     MoveBattleCamOver(50);
     spawn {
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_364);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_364);
         loop 7 {
             StartRumble(2);
             ShakeCam(1, 0, 2, 0.5);
@@ -130,22 +130,22 @@ Script N(main) = SCRIPT({
         }
     }
     sleep 20;
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 32;
     ShowEmote(0, 2, 0xFFFFFFD3, 20, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
     sleep 30;
-    SetActorYaw(ActorID_PLAYER, 30);
+    SetActorYaw(ACTOR_PLAYER, 30);
     sleep 1;
-    SetActorYaw(ActorID_PLAYER, 60);
+    SetActorYaw(ACTOR_PLAYER, 60);
     sleep 1;
-    SetActorYaw(ActorID_PLAYER, 90);
+    SetActorYaw(ACTOR_PLAYER, 90);
     sleep 1;
-    SetActorYaw(ActorID_PLAYER, 120);
+    SetActorYaw(ACTOR_PLAYER, 120);
     sleep 1;
-    SetActorYaw(ActorID_PLAYER, 150);
+    SetActorYaw(ACTOR_PLAYER, 150);
     sleep 1;
-    SetActorYaw(ActorID_PLAYER, 180);
+    SetActorYaw(ACTOR_PLAYER, 180);
     spawn {
         N(func_802A123C_71E88C)();
     }
@@ -158,24 +158,24 @@ Script N(main) = SCRIPT({
     UseCamPreset(2);
     MoveBattleCamOver(20);
     sleep 8;
-    SetJumpAnimations(ActorID_PLAYER, 0, PlayerAnim_1002B, PlayerAnim_1002B, PlayerAnim_MIDAIR);
-    SetActorJumpGravity(ActorID_PLAYER, 1.80078125);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR);
+    SetActorJumpGravity(ACTOR_PLAYER, 1.80078125);
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_80273444(15, 0, 0);
     spawn {
         sleep 5;
-        SetActorYaw(ActorID_PLAYER, 150);
+        SetActorYaw(ACTOR_PLAYER, 150);
         sleep 1;
-        SetActorYaw(ActorID_PLAYER, 120);
+        SetActorYaw(ACTOR_PLAYER, 120);
         sleep 1;
-        SetActorYaw(ActorID_PLAYER, 90);
+        SetActorYaw(ACTOR_PLAYER, 90);
         sleep 1;
-        SetActorYaw(ActorID_PLAYER, 60);
+        SetActorYaw(ACTOR_PLAYER, 60);
         sleep 1;
-        SetActorYaw(ActorID_PLAYER, 30);
+        SetActorYaw(ACTOR_PLAYER, 30);
         sleep 1;
-        SetActorYaw(ActorID_PLAYER, 0);
+        SetActorYaw(ACTOR_PLAYER, 0);
     }
     sleep 40;
     func_802D3474(SI_VAR(10), N(modelCommandList));
@@ -187,31 +187,31 @@ Script N(main) = SCRIPT({
     func_802D3998(SI_VAR(10), 7.0);
     func_802D39FC(SI_VAR(10), 1.400390625);
     SetOwnerTarget(0, 0);
-    SetGoalToTarget(ActorID_PLAYER);
-    GetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ACTOR_PLAYER);
+    GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 60;
     func_802D3A60(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    GetGoalPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_HIT_BLOCK);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
     spawn {
-        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_SHOCK_STILL);
-        SetActorScale(ActorID_PLAYER, 1.2001953125, 0.900390625, 1.0);
+        SetAnimation(ACTOR_PLAYER, 0, ANIM_SHOCK_STILL);
+        SetActorScale(ACTOR_PLAYER, 1.2001953125, 0.900390625, 1.0);
         sleep 1;
-        SetActorScale(ActorID_PLAYER, 1.30078125, 0.80078125, 1.0);
+        SetActorScale(ACTOR_PLAYER, 1.30078125, 0.80078125, 1.0);
         sleep 3;
-        SetActorScale(ActorID_PLAYER, 1.2001953125, 0.900390625, 1.0);
+        SetActorScale(ACTOR_PLAYER, 1.2001953125, 0.900390625, 1.0);
         sleep 1;
-        SetActorScale(ActorID_PLAYER, 1.0, 1.0, 1.0);
+        SetActorScale(ACTOR_PLAYER, 1.0, 1.0, 1.0);
     }
     PlayEffect(0x6, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 2;
     func_802D39FC(SI_VAR(10), 1.400390625);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 60;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     SI_VAR(0) += 20;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -220,7 +220,7 @@ Script N(main) = SCRIPT({
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 5;
     spawn {
-        GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 270;
         func_802D3A60(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
         func_802D3624(SI_VAR(10));
@@ -230,12 +230,12 @@ Script N(main) = SCRIPT({
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
     }
-    GetItemPower(ItemId_SLEEPY_SHEEP, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_SLEEPY_SHEEP, SI_VAR(0), SI_VAR(1));
     MakeStatusField(SI_VAR(0), 4096, 100, SI_VAR(0));
     func_80252B3C(SI_VAR(0), 0x50000000, SI_VAR(0), 0, 32);
 1:

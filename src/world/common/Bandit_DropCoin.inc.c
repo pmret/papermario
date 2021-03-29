@@ -3,7 +3,7 @@
 
 ApiStatus N(Bandit_DropCoin)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID;
+    NpcID npcID;
     Npc* npc;
     s32 itemEntityIndex;
     s32 areaFlag;

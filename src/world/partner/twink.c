@@ -26,7 +26,7 @@ ApiStatus TwinkUpdate(ScriptInstance* script, s32 isInitialCall) {
 
     update_player_move_history(owner);
     func_800ED5D0(owner);
-    playerData->unk_2F4[PartnerID_TWINK]++;
+    playerData->unk_2F4[PARTNER_TWINK]++;
 
     return ApiStatus_BLOCK;
 }

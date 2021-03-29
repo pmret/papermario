@@ -12,7 +12,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
+    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -22,7 +22,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ItemId_COIN, posX, posY, posZ, 0x17, (i * 3) + 1, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, 0x17, (i * 3) + 1, facingAngleSign, 0);
             add_coins(1);
             facingAngleSign += 30.0f;
         }
@@ -47,7 +47,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(player, Ability_REFUND) && sellValue > 0) {
+    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         free_icon(D_802A2DD0);
     }
 
@@ -280,7 +280,7 @@ ApiStatus N(func_802A18D8_731BD8)(ScriptInstance* script, s32 isInitialCall) {
 #include "common/AddFP.inc.c"
 
 ApiStatus N(func_802A1A40_731D40)(ScriptInstance* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ItemId_KOOKY_COOKIE];
+    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP += item->potencyA;
@@ -294,7 +294,7 @@ ApiStatus N(func_802A1A40_731D40)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A1A8C_731D8C)(ScriptInstance* script, s32 isInitialCall) {
-    StaticItem* item = &gItemTable[ItemId_KOOKY_COOKIE];
+    StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP += item->potencyB;
@@ -311,7 +311,7 @@ ApiStatus N(func_802A1AD8_731DD8)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, Debuff_STATIC, 3);
+    inflict_status(player, STATUS_STATIC, 3);
     player->status = 0;
 
     return ApiStatus_DONE2;
@@ -322,7 +322,7 @@ ApiStatus N(func_802A1B14_731E14)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, Debuff_0xE, 3);
+    inflict_status(player, STATUS_E, 3);
     player->status = 0;
     part->flags |= 0x100;
 
@@ -333,7 +333,7 @@ ApiStatus N(func_802A1B68_731E68)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, Debuff_SLEEP, 3);
+    inflict_status(player, STATUS_SLEEP, 3);
     player->status = 0;
 
     return ApiStatus_DONE2;
@@ -344,12 +344,12 @@ Script N(UseItemWithEffect) = SCRIPT({
         UseCamPreset(69);
         sleep 10;
 
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
-        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
-        GetActorPos(ActorID_PLAYER, $x, $y, $z);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
+        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
+        GetActorPos(ACTOR_PLAYER, $x, $y, $z);
         $x += 18;
-        SetActorSpeed(ActorID_PLAYER, 4.0);
-        SetGoalPos(ActorID_PLAYER, $x, $y, $z);
+        SetActorSpeed(ACTOR_PLAYER, 4.0);
+        SetGoalPos(ACTOR_PLAYER, $x, $y, $z);
         PlayerRunToGoal(0);
 
         $y += 45;
@@ -368,9 +368,9 @@ Script N(UseItemWithEffect) = SCRIPT({
         N(GiveRefundCleanup)();
         RemoveItemEntity(SI_VAR(10));
     } else {
-        GetActorPos(ActorID_PLAYER, $x, $y, $z);
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_208D);
-        SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
+        GetActorPos(ACTOR_PLAYER, $x, $y, $z);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
+        SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
         sleep 4;
 
         $y += 45;
@@ -394,8 +394,8 @@ Script N(UseItem) = SCRIPT({
     MoveBattleCamOver(30);
     sleep 10;
 
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_GOT_ITEM);
-    GetActorPos(ActorID_PLAYER, $x, $y, $z);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
+    GetActorPos(ACTOR_PLAYER, $x, $y, $z);
     $y += 45;
     MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
     SI_VAR(14) = $x;
@@ -410,34 +410,34 @@ Script N(UseItem) = SCRIPT({
 });
 
 Script N(PlayerGoHome) = SCRIPT({
-    UseIdleAnimation(ActorID_PLAYER, 0);
-    SetGoalToHome(ActorID_PLAYER);
-    SetActorSpeed(ActorID_PLAYER, 8.0);
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_RUNNING);
+    UseIdleAnimation(ACTOR_PLAYER, 0);
+    SetGoalToHome(ACTOR_PLAYER);
+    SetActorSpeed(ACTOR_PLAYER, 8.0);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
     PlayerRunToGoal(0);
 
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
-    UseIdleAnimation(ActorID_PLAYER, 1);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
+    UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
 Script N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
             sleep 10;
         }
     }
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_EAT);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_EAT);
     sleep 45;
 });
 
 Script N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_2095);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
             sleep 10;
         }
     }
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_DRINK);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_DRINK);
     sleep 45;
 });

@@ -165,7 +165,7 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1].s == 15) {
-        sfx_play_sound(SoundId_DEATH);
+        sfx_play_sound(SOUND_DEATH);
         func_80070190(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
@@ -202,7 +202,7 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
         if (rand_int(100) < 50) {
             if (playerData->coins != 0) {
                 playerData->coins--;
-                make_item_entity_delayed(ItemId_COIN, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight,
+                make_item_entity_delayed(ITEM_COIN, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight,
                                          playerStatus->position.z, 3, 0, 0);
             }
         }
@@ -280,8 +280,8 @@ void update_encounters_conversation(void) {
             enable_player_input();
             func_800EF600();
 
-            if (playerStatus->actionState == ActionState_CONVERSATION) {
-                set_action_state(ActionState_IDLE);
+            if (playerStatus->actionState == ACTION_STATE_CONVERSATION) {
+                set_action_state(ACTION_STATE_IDLE);
             }
 
             func_800EF3D4(0);

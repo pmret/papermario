@@ -6,8 +6,8 @@ Script N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
 Script N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
 Script N(BindExits) = SCRIPT({
-    bind N(ExitWest) to TriggerFlag_FLOOR_ABOVE 0; // deili1
-    bind N(ExitEast) to TriggerFlag_FLOOR_ABOVE 3; // deili2
+    bind N(ExitWest) to TRIGGER_FLOOR_ABOVE 0; // deili1
+    bind N(ExitEast) to TRIGGER_FLOOR_ABOVE 3; // deili2
 });
 
 Script N(Main) = SCRIPT({
@@ -22,7 +22,7 @@ Script N(Main) = SCRIPT({
     SI_VAR(0) = N(BindExits);
     spawn EnterWalk;
     sleep 1;
-    bind N(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
+    bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
 });
 
 NpcAISettings N(goombaAISettings) = {
@@ -66,10 +66,10 @@ Script N(ReadWestSign) = SCRIPT({
     SI_FLAG(0) = FALSE;
     GetGoomba();
     if (SI_VAR(0) != FALSE) {
-        GetNpcVar(NpcId_GOOMBA, 0, SI_VAR(0));
+        GetNpcVar(NPC_GOOMBA, 0, SI_VAR(0));
         if (SI_VAR(0) == FALSE) {
             // Trigger Goomba to peel off
-            SetNpcVar(NpcId_GOOMBA, 0, TRUE);
+            SetNpcVar(NPC_GOOMBA, 0, TRUE);
             SI_FLAG(0) = TRUE;
             sleep 10;
         }
@@ -87,8 +87,8 @@ Script N(GoombaIdle) = SCRIPT({
     sleep 1;
 
     SetSelfVar(0, FALSE);
-    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, fake_mushroom)); // TODO: work out why palette 0 is used here
-    EnableNpcShadow(NpcId_SELF, FALSE);
+    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, fake_mushroom)); // TODO: work out why palette 0 is used here
+    EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfEnemyFlagBits(0x00000020, TRUE);
 
     // Wait until read_sign sets NPC var 0
@@ -98,51 +98,51 @@ Script N(GoombaIdle) = SCRIPT({
     } until(SI_VAR(0) == FALSE)
 
     // Peel and jump off the sign
-    SetNpcFlagBits(NpcId_SELF, 0x00240000, TRUE);
+    SetNpcFlagBits(NPC_SELF, 0x00240000, TRUE);
     sleep 3;
     SI_VAR(0) = 0.0;
     loop 9 {
         SI_VAR(0) += 10.0;
-        SetNpcRotation(NpcId_SELF, 0, SI_VAR(0), 0);
+        SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, still));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, still));
     loop 9 {
         SI_VAR(0) += 10.0;
-        SetNpcRotation(NpcId_SELF, 0, SI_VAR(0), 0);
+        SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, dizzy));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, dizzy));
     sleep 20;
-    SetNpcAnimation(NpcId_SELF, NPC_ANIM(goomba, normal, idle));
-    PlaySoundAtNpc(NpcId_SELF, 248, 0);
-    func_802CFE2C(NpcId_SELF, 8192);
-    func_802CFD30(NpcId_SELF, 5, 6, 1, 1, 0);
+    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, idle));
+    PlaySoundAtNpc(NPC_SELF, 248, 0);
+    func_802CFE2C(NPC_SELF, 8192);
+    func_802CFD30(NPC_SELF, 5, 6, 1, 1, 0);
     sleep 12;
     sleep 5;
-    PlaySoundAtNpc(NpcId_SELF, 812, 0);
-    EnableNpcShadow(NpcId_SELF, TRUE);
-    SetNpcJumpscale(NpcId_SELF, 0.6005859375);
-    NpcJump0(NpcId_SELF, -35, 0, 30, 23);
-    func_802CFD30(NpcId_SELF, 0, 0, 0, 0, 0);
-    InterpNpcYaw(NpcId_SELF, 90, 0);
-    SetNpcFlagBits(NpcId_SELF, 0x00240000, FALSE);
+    PlaySoundAtNpc(NPC_SELF, 812, 0);
+    EnableNpcShadow(NPC_SELF, TRUE);
+    SetNpcJumpscale(NPC_SELF, 0.6005859375);
+    NpcJump0(NPC_SELF, -35, 0, 30, 23);
+    func_802CFD30(NPC_SELF, 0, 0, 0, 0, 0);
+    InterpNpcYaw(NPC_SELF, 90, 0);
+    SetNpcFlagBits(NPC_SELF, 0x00240000, FALSE);
     SetSelfEnemyFlagBits(0x00000020, FALSE);
     SetSelfEnemyFlagBits(0x40000000, TRUE);
 
     // We're done jumping off; the player can read the sign again
-    bind N(ReadWestSign) to TriggerFlag_WALL_INTERACT 10;
+    bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
 
     // Behave like a normal enemy from now on
-    BindNpcAI(NpcId_SELF, N(GoombaAI));
+    BindNpcAI(NPC_SELF, N(GoombaAI));
 });
 
 Script N(GoombaInit) = SCRIPT({
-    BindNpcIdle(NpcId_SELF, N(GoombaIdle));
+    BindNpcIdle(NPC_SELF, N(GoombaIdle));
 });
 
 StaticNpc N(goombaNpc) = {
-    .id = NpcId_GOOMBA,
+    .id = NPC_GOOMBA,
     .settings = &N(goombaNpcSettings),
     .pos = { -33.0f, 30.0f, -25.0f },
     .flags = 0x00000C00,
@@ -150,7 +150,7 @@ StaticNpc N(goombaNpc) = {
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 5,
-    .itemDrops = { { ItemId_MUSHROOM, 10 } },
+    .itemDrops = { { ITEM_MUSHROOM, 10 } },
     .heartDrops = GENEROUS_WHEN_LOW_HEART_DROPS(2),
     .flowerDrops = GENEROUS_WHEN_LOW_FLOWER_DROPS(2),
     .movement = {

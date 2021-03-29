@@ -23,11 +23,11 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus2 = &gPlayerStatus;
     Npc* partner;
 
-    if (gPlayerData.currentPartner == PartnerID_NONE) {
+    if (gPlayerData.currentPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
 
-    partner = get_npc_unsafe(NpcId_PARTNER);
+    partner = get_npc_unsafe(NPC_PARTNER);
     partner->pos.x = playerStatus->position.x;
     partner->pos.z = playerStatus->position.z;
 
@@ -52,8 +52,8 @@ ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     playerStatus->position.y = gGameStatusPtr->savedPos.y;
     playerStatus->position.z = gGameStatusPtr->savedPos.z;
 
-    if (currentPartner != PartnerID_NONE) {
-        Npc* partner = get_npc_unsafe(NpcId_PARTNER);
+    if (currentPartner != PARTNER_NONE) {
+        Npc* partner = get_npc_unsafe(NPC_PARTNER);
         f32 angle = clamp_angle((playerStatus2->spriteFacingAngle < 180.0f) ? (90.0f) : (-90.0f));
         partner->pos.x = playerStatus2->position.x;
         partner->pos.y = playerStatus2->position.y;

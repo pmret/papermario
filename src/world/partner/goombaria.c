@@ -26,7 +26,7 @@ ApiStatus GoombariaUpdate(ScriptInstance* script, s32 isInitialCall) {
 
     func_800EBA3C(owner);
     func_800EBB40(owner);
-    playerData->unk_2F4[PartnerID_GOOMBARIA]++;
+    playerData->unk_2F4[PARTNER_GOOMBARIA]++;
 
     return ApiStatus_BLOCK;
 }
