@@ -201,7 +201,7 @@ segments:
     - [0x457c0, c, os/code_457c0_len_270]
     - [0x45a30, c, os/code_45a30_len_20]
     - [0x45a50, c, os/code_45a50_len_3a0]
-    - [0x45df0, hasm, os/exceptasm, skip]
+    - [0x45df0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
     - [0x467f0, c, os/code_467f0_len_90]
@@ -240,6 +240,8 @@ segments:
     - [0x4F660, .data, code_42e0_len_1f60]
     - [0x4F670, .data, code_43F0]
     - [0x4F9D0, data, code_6240_len_c00]
+    - [0x52D08, .data, code_f270_len_1190]
+    - [0x52D80, data]
     - [0x53570, .data, code_25f00_len_940]
     - [0x53590, data, code_26840_len_20d0]
     - [0x541B0, .data, code_30450]
@@ -551,9 +553,12 @@ segments:
     - [0x1CC160, .rodata, code_19FAF0]
     - [0x1CC270, .rodata, code_1A5830]
   - [0x1CC310, bin] # icon images and palettes, vram unknown
-  - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
-  - [0x2051B0, rgba16,  title/logo_is, 256, 122]
-  - [0x2131B0, rgba16,  title/logo_nintendo, 256, 48]
+  - type: code
+    start: 0x1FE1B0
+    subsections:
+    - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
+    - [0x2051B0, rgba16,  title/logo_is, 256, 122]
+    - [0x2131B0, rgba16,  title/logo_nintendo, 256, 48]
   - [0x2191B0, ci8,     title/bg_1, 264, 162]
   - [0x2238C0, palette, title/bg_1]
   - [0x223AC0, ci8,     title/bg_2, 264, 162]

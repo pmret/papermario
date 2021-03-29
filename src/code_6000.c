@@ -2,7 +2,6 @@
 
 extern s32 D_80268000;
 extern s32 D_802FB800;
-extern s32 D_803DA800;
 
 HeapNode* general_heap_create(void) {
     return _heap_create(&D_802FB800, 0x54000);

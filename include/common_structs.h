@@ -994,7 +994,8 @@ typedef struct GameStatus {
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ u8 menuCounter;
-    /* 0x0AE */ char unk_AE[8];
+    /* 0x0AE */ s8 bSkipIntro;
+    /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
@@ -1017,7 +1018,7 @@ typedef struct GameStatus {
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ char unk_15E[0x2];
+    /* 0x15E */ u16 unk_15E;
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
