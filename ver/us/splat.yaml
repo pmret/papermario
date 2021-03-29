@@ -557,7 +557,7 @@ segments:
     start: 0x1FE1B0
     subsections:
     - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
-    - [0x2051B0, rgba16,  title/logo_is, 256, 122]
+    - [0x2051B0, rgba16,  title/logo_is, 256, 112]
     - [0x2131B0, rgba16,  title/logo_nintendo, 256, 48]
   - [0x2191B0, ci8,     title/bg_1, 264, 162]
   - [0x2238C0, palette, title/bg_1]
