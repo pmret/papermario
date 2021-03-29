@@ -297,6 +297,8 @@ class Compile(Transformer):
         return super().transform(tree)
 
     def c_identifier(self, tree):
+        if tree.children[0].startswith("STORY_"):
+            return f"{tree.children[0]}"
         return f"(Bytecode)(&{tree.children[0]})"
 
     def ESCAPED_STRING(self, str_with_quotes):

@@ -6,7 +6,7 @@ Script N(Script_80242340) = SCRIPT({
     SetCamDistance(0, 700.0);
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
-    if (SI_SAVE_VAR(0) >= 0xFFFFFF89) {
+    if (SI_SAVE_VAR(0) >= STORY_CH0_FOUND_HAMMER) {
         SetPlayerPos(0, 0xFFFFFC18, 0);
         DisablePlayerInput(1);
         SetPlayerPos(0xFFFFFF20, 20, 0xFFFFFFB0);

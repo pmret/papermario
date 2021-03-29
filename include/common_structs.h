@@ -1704,7 +1704,6 @@ typedef struct struct802E1400 {
     /* 0x03C */ union {
         /*       */     s16 s;
         /*       */     s8 b[2];
-        /*       */
     } unk_3C;
     /* 0x03E */ char unk_3E[0x4D];
     /* 0x08B */ u8 unk_8B[24];

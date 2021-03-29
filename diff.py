@@ -1445,6 +1445,13 @@ class Display:
             header_lines = [header] if header else []
             output = "\n".join(header_lines + diff_lines[args.skip_lines :])
 
+        # Windows Terminal does not handle buffers properly
+        # Janky hack to clear its scrollback buffer until it's fixed
+        clear_proc = subprocess.Popen(
+            ["echo", "-en", "\"\e[3J\""]
+        )
+        clear_proc.wait()
+
         # Pipe the output through 'tail' and only then to less, to ensure the
         # write call doesn't block. ('tail' has to buffer all its input before
         # it starts writing.) This also means we don't have to deal with pipe
