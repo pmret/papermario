@@ -62,7 +62,7 @@ Script N(Main) = SCRIPT({
     SetCamLeadPlayer(0, 0);
     MakeNpcs(0, N(npcGroupList_802407D8));
     N(SpawnSunEffect)();
-    SetMusicTrack(0, Song_DRY_DRY_DESERT, 0, 8);
+    SetMusicTrack(0, SONG_DRY_DRY_DESERT, 0, 8);
     SI_VAR(0) = N(Script_802401F4);
     spawn EnterWalk;
 });

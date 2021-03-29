@@ -17,8 +17,8 @@ MusicPlayer D_8014F6F0 = {
     .unk_2C = 0
 };
 
-SongID gSongsUsingVariationFlag[] = { Song_SPECIAL_BATTLE, Song_TUBBA_BLUBBA_BATTLE, Song_JR_TROOPA_BATTLE,
-                                      Song_YOSHI_KIDS_FOUND, Song_ITEM_UPGRADE, Song_NEW_PARTNER,
+SongID gSongsUsingVariationFlag[] = { SONG_SPECIAL_BATTLE, SONG_TUBBA_BLUBBA_BATTLE, SONG_JR_TROOPA_BATTLE,
+                                      SONG_YOSHI_KIDS_FOUND, SONG_ITEM_UPGRADE, SONG_NEW_PARTNER,
                                     };
 
 s16 D_8014F738 = 0;

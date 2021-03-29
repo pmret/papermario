@@ -21,13 +21,13 @@ s32 func_80276F50(Actor* actor) {
 
 void dispatch_event_general(Actor* actor, Event event) {
     switch (actor->actorID & 0x700) {
-        case ActorID_PLAYER:
+        case ACTOR_PLAYER:
             dispatch_event_player(event);
             break;
-        case ActorID_PARTNER:
+        case ACTOR_PARTNER:
             dispatch_event_partner(event);
             break;
-        case ActorID_ENEMY0:
+        case ACTOR_ENEMY0:
             dispatch_event_actor(actor, event);
             break;
     }
@@ -79,7 +79,7 @@ ApiStatus BindTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 var1;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -92,7 +92,7 @@ ApiStatus PauseTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -105,7 +105,7 @@ ApiStatus ResumeTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -121,7 +121,7 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor;
     ScriptInstance* newScriptContext;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -147,7 +147,7 @@ ApiStatus EnableIdleScript(ScriptInstance* script, s32 isInitialCall) {
     s32 var1;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -177,7 +177,7 @@ ApiStatus BindHandleEvent(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 var1;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -191,7 +191,7 @@ ApiStatus BindNextTurn(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 var1;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -237,7 +237,7 @@ ApiStatus GetLastEvent(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -252,7 +252,7 @@ ApiStatus SetTargetActor(ScriptInstance* script, s32 isInitialCall) {
     s32 targetActorID;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -269,7 +269,7 @@ ApiStatus SetEnemyHP(ScriptInstance* script, s32 isInitialCall) {
     s8 newHP;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -294,7 +294,7 @@ ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
     s32 outVar;
     s32 outVal;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
     outVar = *args++;
@@ -302,10 +302,10 @@ ApiStatus GetActorHP(ScriptInstance* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     switch (actorID & 0x700) {
-        case ActorID_PLAYER:
+        case ACTOR_PLAYER:
             outVal = playerData->curHP;
             break;
-        case ActorID_PARTNER:
+        case ACTOR_PARTNER:
             outVal = 99;
             break;
         default:
@@ -322,7 +322,7 @@ ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -341,7 +341,7 @@ ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
     s32 partIndex;
     s32 var2;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -356,7 +356,7 @@ ApiStatus SetStatusTable(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 var1;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -371,7 +371,7 @@ ApiStatus SetIdleAnimations(ScriptInstance* script, s32 isInitialCall) {
     s32 partIndex;
     s32 var2;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -386,7 +386,7 @@ ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 partIndex;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -411,7 +411,7 @@ ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) 
     s32 hitResults;
     s32 outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -450,7 +450,7 @@ ApiStatus DispatchDamageEvent(ScriptInstance* script, s32 isInitialCall) {
     s32 damageAmount;
     s32 scriptExists;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -469,7 +469,7 @@ ApiStatus DispatchEvent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -480,7 +480,7 @@ ApiStatus DispatchEvent(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_8027D2D8(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *script->ptrReadPos);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -491,7 +491,7 @@ ApiStatus func_8027D2D8(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *script->ptrReadPos);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -507,7 +507,7 @@ ApiStatus SetTargetOffset(ScriptInstance* script, s32 isInitialCall) {
     s32 x;
     s32 y;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -529,7 +529,7 @@ ApiStatus func_8027D434(ScriptInstance* script, s32 isInitialCall) {
     s32 partIndex;
     ActorPart* part;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -547,7 +547,7 @@ ApiStatus func_8027D4C8(ScriptInstance* script, s32 isInitialCall) {
     s32 temp;
     s32 temp2;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -569,7 +569,7 @@ ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
     s32 enable = get_variable(script, *args++);
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -588,7 +588,7 @@ ApiStatus EnableActorBlur(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_8027D628(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *script->ptrReadPos);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -607,7 +607,7 @@ ApiStatus AfflictActor(ScriptInstance* script, s32 isInitialCall) {
     statusTypeKey = get_variable(script, *args++);
     duration = get_variable(script, *args++);
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
     actor = get_actor(actorID);
@@ -640,7 +640,7 @@ ApiStatus func_8027D75C(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar = *args++;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -665,7 +665,7 @@ ApiStatus SetActorSize(ScriptInstance* script, s32 isInitialCall) {
     s32 x = get_variable(script, *args++);
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -689,7 +689,7 @@ ApiStatus GetActorSize(ScriptInstance* script, s32 isInitialCall) {
     s32 outX = *args++;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -706,7 +706,7 @@ ApiStatus GetOriginalActorType(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar = *args++;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -719,7 +719,7 @@ ApiStatus GetCurrentActorType(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar = *args++;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -732,7 +732,7 @@ ApiStatus GetLastDamage(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
     outVar = *args++;
@@ -747,7 +747,7 @@ ApiStatus EnableActorGlow(ScriptInstance* script, s32 isInitialCall) {
     s32 flag;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -795,13 +795,13 @@ ApiStatus CopyStatusEffects(ScriptInstance* script, s32 isInitialCall) {
     Actor* actorFrom;
 
     actorIDFrom = get_variable(script, *args++);
-    if (actorIDFrom == ActorID_SELF) {
+    if (actorIDFrom == ACTOR_SELF) {
         actorIDFrom = script->owner1.actorID;
     }
     actorFrom = get_actor(actorIDFrom);
 
     actorIDTo = get_variable(script, *args++);
-    if (actorIDTo == ActorID_SELF) {
+    if (actorIDTo == ACTOR_SELF) {
         actorIDTo = script->owner1.actorID;
     }
     actorTo = get_actor(actorIDTo);
@@ -824,15 +824,15 @@ ApiStatus ClearStatusEffects(ScriptInstance* script, s32 isInitialCall) {
     s32 flag;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     actor = get_actor(actorID);
 
-    if (actor->debuff != Debuff_END) {
+    if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
-        actor->debuff = Debuff_END;
+        actor->debuff = STATUS_END;
         func_80047898(actor->unk_436);
     }
 

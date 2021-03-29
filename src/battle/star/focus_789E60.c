@@ -27,8 +27,8 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    deepFocusSP = is_ability_active(Ability_DEEP_FOCUS) * 64;
-    superFocusSP = is_ability_active(Ability_SUPER_FOCUS) * 128;
+    deepFocusSP = is_ability_active(ABILITY_DEEP_FOCUS) * 64;
+    superFocusSP = is_ability_active(ABILITY_SUPER_FOCUS) * 128;
 
     add_SP(deepFocusSP + superFocusSP + 128);
 

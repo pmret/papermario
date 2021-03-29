@@ -46,26 +46,26 @@ s32 N(D_802A229C_72D84C)[8] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_MYSTERY;
+    SI_VAR(10) = c ITEM_MYSTERY;
     await N(UseItemWithEffect);
     spawn {
         sleep 220;
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_3F3);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_3F3);
     }
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_368);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_368);
     N(func_802A13E4_72C994)();
     sleep 2;
-    if (SI_VAR(0) != ItemId_PEBBLE) {
+    if (SI_VAR(0) != ITEM_PEBBLE) {
         jump UseMystery;
         return;
     }
     func_802D3474(SI_VAR(10), N(modelCommandList));
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 150;
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetOwnerTarget(0, 0);
-    SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ACTOR_SELF);
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         SI_VAR(0) = 0;
         loop 18 {
@@ -83,10 +83,10 @@ Script N(main) = SCRIPT({
         func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
         func_802D3624(SI_VAR(10));
     }
-    SetTargetActor(ActorID_SELF, 0);
-    SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetTargetActor(ACTOR_SELF, 0);
+    SetGoalToTarget(ACTOR_SELF);
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     N(func_802A188C_72CE3C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetBattleFlagBits(32, 1);
-    DispatchDamagePlayerEvent(1, Event_HIT);
+    DispatchDamagePlayerEvent(1, EVENT_HIT);
 });

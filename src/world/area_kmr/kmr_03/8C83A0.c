@@ -230,9 +230,9 @@ s32 N(triggerCoord_802422A8)[] = {
 
 Script N(Script_802422B8) = SCRIPT({
     SI_VAR(0) = N(searchBushEvent_Bush1);
-    bind N(SearchBush_802417F0) to TriggerFlag_WALL_INTERACT 53;
+    bind N(SearchBush_802417F0) to TRIGGER_WALL_PRESS_A 53;
     SI_VAR(0) = N(shakeTreeEvent_Tree1);
-    bind N(ShakeTree_80241B50) to TriggerFlag_WALL_HAMMER 52;
-    bind N(ShakeTree_80241B50) to TriggerFlag_BOMB N(triggerCoord_802422A8);
+    bind N(ShakeTree_80241B50) to TRIGGER_WALL_HAMMER 52;
+    bind N(ShakeTree_80241B50) to TRIGGER_POINT_BOMB N(triggerCoord_802422A8);
 });
 

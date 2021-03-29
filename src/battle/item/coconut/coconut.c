@@ -37,15 +37,15 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_COCONUT;
+    SI_VAR(10) = c ITEM_COCONUT;
 
     await N(UseItemWithEffect);
 
     UseCamPreset(3);
     MoveBattleCamOver(15);
 
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(SoundId_THROW);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
+    PlaySound(SOUND_THROW);
     sleep 3;
 
     func_802D3474(SI_VAR(10), N(modelCommandList));
@@ -54,7 +54,7 @@ Script N(main) = SCRIPT({
     MultiplyByActorScale($x);
     func_802D38EC(SI_VAR(10), $x, $x, $x);
 
-    GetActorPos(ActorID_PLAYER, $x, $y, $z);
+    GetActorPos(ACTOR_PLAYER, $x, $y, $z);
     SI_VAR(3) = 20;
     SI_VAR(4) = 42;
     SI_VAR(5) = 5;
@@ -65,8 +65,8 @@ Script N(main) = SCRIPT({
     func_802D36E0(SI_VAR(10), $x, $y, $z);
 
     InitTargetIterator();
-    SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, $x, $y, $z);
+    SetGoalToTarget(ACTOR_SELF);
+    GetGoalPos(ACTOR_SELF, $x, $y, $z);
 
     spawn {
         $x = 0;
@@ -81,7 +81,7 @@ Script N(main) = SCRIPT({
     $z += 5;
     func_802D3C58(SI_VAR(10), $x, $y, $z, 18);
 
-    GetItemPower(ItemId_COCONUT, $damage, SI_VAR(4));
+    GetItemPower(ITEM_COCONUT, $damage, SI_VAR(4));
     ApplyShrinkFromOwner($damage);
     ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, $damage, 32);
 

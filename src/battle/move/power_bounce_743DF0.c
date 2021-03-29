@@ -15,7 +15,7 @@ ApiStatus func_802A10E4_743ED4(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[0] = 99;
     powerBounceChance = targetActor->staticActorData->powerBounceChance;
-    if (is_ability_active(Ability_DODGE_MASTER)) {
+    if (is_ability_active(ABILITY_DODGE_MASTER)) {
         powerBounceChance += 7;
     }
 

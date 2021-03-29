@@ -32,7 +32,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         gSpeakingActorIdleAnim = get_variable(script, *args++);
         stringID2 = stringID;
 
-        if (actorID == ActorID_SELF) {
+        if (actorID == ACTOR_SELF) {
             actorID = script->owner1.actorID;
         }
 
@@ -49,7 +49,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
             headY = actor->currentPos.y + tmp + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
-        get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
+        get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         {
             s32* isPrintDone = &gSpeakingActorPrintIsDone;
@@ -78,7 +78,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
             headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
         headZ = actor->currentPos.z + actor->headOffset.z;
-        get_screen_coords(Cam_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
+        get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         printContext = &gSpeakingActorPrintCtx;
         clamp_printer_coords(*printContext, screenX, screenY);
@@ -215,7 +215,7 @@ ApiStatus PlaySoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode soundID = *args++;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -232,7 +232,7 @@ ApiStatus PlaySoundAtPart(ScriptInstance* script, s32 isInitialCall) {
     Bytecode soundID = *args++;
     ActorPart* part;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -249,7 +249,7 @@ ApiStatus PlayLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode soundID = *args++;
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -266,7 +266,7 @@ ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     s32 idx = get_variable(script, *args++);
     Actor* actor;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
@@ -324,7 +324,7 @@ s32 is_actor_hp_bar_visible(Actor* actor) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 flags;
 
-    if (is_ability_active(Ability_PEEKABOO)) {
+    if (is_ability_active(ABILITY_PEEKABOO)) {
         return TRUE;
     }
 
@@ -339,7 +339,7 @@ s32 is_actortype_hpbar_visible(s32 actorType) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 idx;
 
-    if (is_ability_active(Ability_PEEKABOO)) {
+    if (is_ability_active(ABILITY_PEEKABOO)) {
         return TRUE;
     }
 
@@ -392,7 +392,7 @@ ApiStatus ApplyShrinkFromOwner(ScriptInstance* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 amt = get_variable(script, *args);
 
-    if (actor->debuff == Debuff_SHRINK && amt > 0) {
+    if (actor->debuff == STATUS_SHRINK && amt > 0) {
         amt /= 2;
     }
 

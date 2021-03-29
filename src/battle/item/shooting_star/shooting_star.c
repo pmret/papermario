@@ -1,7 +1,7 @@
 #include "shooting_star.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_SHOOTING_STAR;
+    SI_VAR(10) = c ITEM_SHOOTING_STAR;
     await N(UseItemWithEffect);
     spawn {
         sleep 5;
@@ -12,11 +12,11 @@ Script N(main) = SCRIPT({
     spawn {
         SI_VAR(0) = 0;
         loop 10 {
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_259);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_259);
             N(func_802A123C_71D9AC)();
             SI_VAR(0) += 1;
             sleep 5;
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_25A);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25A);
             N(func_802A123C_71D9AC)();
             SI_VAR(0) += 1;
             sleep 5;
@@ -26,10 +26,10 @@ Script N(main) = SCRIPT({
         SI_VAR(0) = 0;
         sleep 50;
         loop 10 {
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_25C);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25C);
             SI_VAR(0) += 1;
             sleep 5;
-            PlaySoundAtActor(ActorID_PLAYER, SoundId_25D);
+            PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_25D);
             SI_VAR(0) += 1;
             sleep 5;
         }
@@ -46,14 +46,14 @@ Script N(main) = SCRIPT({
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
     }
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     N(func_802A1388_71DAF8)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    GetItemPower(ItemId_SHOOTING_STAR, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_SHOOTING_STAR, SI_VAR(0), SI_VAR(1));
     ItemDamageEnemy(SI_VAR(0), 0x38000100, 0, SI_VAR(0), 32);
 1:
     sleep 10;

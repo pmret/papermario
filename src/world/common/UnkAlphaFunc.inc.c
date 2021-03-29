@@ -11,7 +11,7 @@ ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
 
-            if (npc != NULL && npc->flags != 0 && npc->npcID != NpcId_PARTNER && npc->npcID != UNK_ALPHA_FUNC_NPC) {
+            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != UNK_ALPHA_FUNC_NPC) {
                 npc->flags |= 0x800000;
             }
         }

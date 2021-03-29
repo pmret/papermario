@@ -4,7 +4,7 @@
 
 #define NAMESPACE kmr_12
 
-#define NpcId_GOOMBA 0
+#define NPC_GOOMBA 0
 
 #define GetGoomba N(GetGoomba)
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);

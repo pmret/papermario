@@ -20,21 +20,21 @@ HitResult calc_item_check_hit(void) {
 
         if (!(actorPart->eventFlags & 0x20)) {
             if (actor->transStatus == 0xE) {
-                return HitResult_MISS;
+                return HIT_RESULT_MISS;
             }
             if (actor->stoneStatus == 0xC) {
                 sfx_play_sound_at_position(0x10C, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                return HitResult_IMMUNE;
+                return HIT_RESULT_IMMUNE;
             }
             if ((battleStatus->currentAttackElement & 0x80) && (actorPart->eventFlags & 0x10)) {
                 sfx_play_sound_at_position(0xE9, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
-                return HitResult_LANDED_ON_SPIKE;
+                return HIT_RESULT_LANDED_ON_SPIKE;
             }
         } else {
-            return HitResult_MISS;
+            return HIT_RESULT_MISS;
         }
     }
-    return HitResult_HIT;
+    return HIT_RESULT_HIT;
 }
 
 INCLUDE_ASM(s32, "code_17FEB0", calc_item_damage_enemy);

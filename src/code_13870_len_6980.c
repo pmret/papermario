@@ -84,9 +84,9 @@ void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
     npc->pos.z += -speed * cos;
 }
 
-INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcId npcId);
+INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_unsafe, NpcID npcId);
 
-INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_safe, NpcId npcId);
+INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_safe, NpcID npcId);
 
 void enable_npc_shadow(Npc* npc) {
     Shadow* shadow;
@@ -326,6 +326,6 @@ INCLUDE_ASM(s32, "code_13870_len_6980", bind_npc_aux);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", bind_npc_interact);
 
-INCLUDE_ASM(Enemy*, "code_13870_len_6980", get_enemy, NpcId npcId);
+INCLUDE_ASM(Enemy*, "code_13870_len_6980", get_enemy, NpcID npcId);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", get_enemy_safe);

@@ -52,7 +52,7 @@ ApiStatus func_802187F0_6DE5B0(ScriptInstance* script, s32 isInitialCall) {
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 2;
-    battleStatus->selectedItemID = ItemId_THUNDER_RAGE;
+    battleStatus->selectedItemID = ITEM_THUNDER_RAGE;
     selectedItemID = battleStatus->selectedItemID;
     battleStatus->selectedMoveID = 0;
     battleStatus->currentAttackElement = 0;

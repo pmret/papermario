@@ -196,7 +196,7 @@ ApiStatus AddKeyItem(ScriptInstance* script, s32 isInitialCall) {
     s32 itemID = get_variable(script, value);
     s32 i;
 
-    if (itemID == ItemId_FORTRESS_KEY) {
+    if (itemID == ITEM_FORTRESS_KEY) {
         playerData->fortressKeyCount++;
         return ApiStatus_DONE2;
     }
