@@ -1,5 +1,4 @@
 from segtypes.n64.ia4 import N64SegIa4
-from segtypes.n64.rgba16 import N64SegRgba16
 from math import ceil
 from util import iter
 

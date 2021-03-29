@@ -50,7 +50,8 @@ class Segment:
         self.type = parse_segment_type(segment)
         self.name = parse_segment_name(segment, self.__class__)
         self.vram_start = parse_segment_vram(segment)
-        self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
+        self.ld_name_override = segment.get("ld_name") if type(segment) is dict else None
+        self.extract = segment.get("extract") if type(segment) is dict else True
         self.config = segment
         self.subalign = parse_segment_subalign(segment)
 
@@ -101,7 +102,7 @@ class Segment:
         return out_dir
 
     def should_run(self):
-        return options.mode_active(self.type)
+        return self.extract and options.mode_active(self.type)
 
     def split(self, rom_bytes, base_path):
         pass

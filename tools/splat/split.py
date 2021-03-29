@@ -153,7 +153,7 @@ def get_base_segment_class(seg_type, platform):
 
 
 def get_extension_dir(config_path):
-    if not options.is_defined("extensions"):
+    if not options.get("extensions"):
         return None
     return os.path.join(Path(config_path).parent, options.get("extensions"))
 
