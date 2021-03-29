@@ -1,7 +1,7 @@
 #include "stop_watch.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_STOP_WATCH;
+    SI_VAR(10) = c ITEM_STOP_WATCH;
     await N(UseItemWithEffect);
     spawn {
         sleep 5;
@@ -10,18 +10,18 @@ Script N(main) = SCRIPT({
     }
     N(FadeBackgroundToBlack)();
     PlayEffect(0x62, 0, 0, 0, 0, 1.0, 200, 0, 0, 0, 0, 0, 0, 0);
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_246);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_246);
     sleep 200;
     UseCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
     }
-    GetItemPower(ItemId_STOP_WATCH, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_STOP_WATCH, SI_VAR(0), SI_VAR(1));
     MakeStatusField(SI_VAR(0), 0x200000, 100, SI_VAR(0));
     func_80252B3C(SI_VAR(0), 0x50000000, SI_VAR(0), 0, 32);
 1:

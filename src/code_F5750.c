@@ -52,7 +52,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
         func_800EF628();
         close_status_menu();
         func_800E984C();
-        if (playerStatus->actionState == ActionState_SPIN) {
+        if (playerStatus->actionState == ACTION_STATE_SPIN) {
             playerStatus->animFlags |= 0x40000;
         }
         OVERRIDE_FLAG_SET(0x40);

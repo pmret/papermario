@@ -51,7 +51,7 @@ ApiStatus N(AverageTargetParalyzeChance)(ScriptInstance* script, s32 isInitialCa
     for (i = 0; i < partnerActor->targetListLength; i++) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
-        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, Debuff_PARALYZE);
+        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
 
         if (targetActor->transStatus == 14) {
             targetActorDescBaseStatusChance = 0;

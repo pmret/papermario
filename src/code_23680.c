@@ -37,7 +37,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt = 0;
     }
 
-    if (is_ability_active(Ability_PAY_OFF)) {
+    if (is_ability_active(ABILITY_PAY_OFF)) {
         amt += currentEncounter->damageTaken / 2;
     }
 
@@ -45,7 +45,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt *= 3;
     }
 
-    if (is_ability_active(Ability_MONEY_MONEY)) {
+    if (is_ability_active(ABILITY_MONEY_MONEY)) {
         amt *= 2;
     }
 
@@ -106,7 +106,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-INCLUDE_ASM(s32, "code_23680", func_800490B4, s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+INCLUDE_ASM(s32, "code_23680", func_800490B4, EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -1,10 +1,10 @@
 #include "snowman_doll.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_SNOWMAN_DOLL;
+    SI_VAR(10) = c ITEM_SNOWMAN_DOLL;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_363);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_363);
     spawn {
         loop 45 {
             RandInt(300, SI_VAR(0));
@@ -23,19 +23,19 @@ Script N(main) = SCRIPT({
     PlayEffect(0x60, 0, 0, 0, 20, 1.0, 160, 0, 0, 0, 0, 0, 0, 0);
     spawn {
         sleep 17;
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 46;
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 25;
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
         sleep 25;
-        PlaySoundAtActor(ActorID_PLAYER, SoundId_202E);
+        PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_202E);
         StartRumble(9);
         ShakeCam(1, 0, 5, 1.0);
     }
@@ -47,14 +47,14 @@ Script N(main) = SCRIPT({
     sleep 110;
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
     }
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     N(func_802A123C_71C06C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    GetItemPower(ItemId_SNOWMAN_DOLL, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_SNOWMAN_DOLL, SI_VAR(0), SI_VAR(1));
     ItemDamageEnemy(SI_VAR(0), 0x38000008, 0, SI_VAR(0), 32);
     sleep 5;
 1:
@@ -62,7 +62,7 @@ Script N(main) = SCRIPT({
     if (SI_VAR(0) != -1) {
         goto 0;
     }
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_2);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     sleep 30;
     N(func_802A13B8_71C1E8)();
     await N(PlayerGoHome);

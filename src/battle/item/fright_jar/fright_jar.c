@@ -1,7 +1,7 @@
 #include "fright_jar.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_FRIGHT_JAR;
+    SI_VAR(10) = c ITEM_FRIGHT_JAR;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
     spawn {
@@ -9,9 +9,9 @@ Script N(main) = SCRIPT({
         UseCamPreset(2);
         MoveBattleCamOver(50);
     }
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_CROUCH);
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_367);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_CROUCH);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_367);
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 0xFFFFFFD8;
     SI_VAR(1) += 5;
     SI_VAR(3) = 0.7001953125;
@@ -35,7 +35,7 @@ Script N(main) = SCRIPT({
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
@@ -48,7 +48,7 @@ Script N(main) = SCRIPT({
         goto 0;
     }
     sleep 10;
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_WALKING);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_WALKING);
     N(func_802A12D4_72BBE4)();
     sleep 20;
     await N(PlayerGoHome);

@@ -278,7 +278,7 @@ typedef struct ScriptInstance {
         struct Actor* actor; ///< For battle scripts
     } owner1;                ///< Initially -1
     /* 0x14C */ union {
-        NpcId npcID;
+        NpcID npcID;
         s32 triggerID;
         struct Npc* npc;            ///< For overworld scripts owned by an Npc
         struct Trigger* trigger;
@@ -300,8 +300,8 @@ typedef struct Entity {
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07[3];
     /* 0x0A */ u8 unk_0A;
-    /* 0x0B */ u8 alpha; /* reported by rain */
-    /* 0x0C */ s16 aabb[3];
+    /* 0x0B */ u8 alpha;
+    /* 0x0C */ Vec3s aabb;
     /* 0x12 */ char unk_12[2];
     /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
@@ -310,7 +310,7 @@ typedef struct Entity {
     /* 0x24 */ char unk_24[4];
     /* 0x28 */ Bytecode* boundScript;
     /* 0x2C */ char unk_2C[12];
-    /* 0x38 */ struct StaticEntityData* static_data;
+    /* 0x38 */ struct StaticEntityData* staticData;
     /* 0x3C */ UNK_PTR unk_3C; // pointer to draw func(?)
     /* 0x40 */ void* dataBuf;
     /* 0x44 */ Mtx* vertexData;
@@ -339,7 +339,7 @@ typedef struct StaticEntityData {
     /* 0x14 */ UNK_PTR unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
-    /* 0x20 */ s8 entityType;
+    /* 0x20 */ u8 entityType;
     /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
@@ -738,10 +738,10 @@ typedef struct Model {
     /* 0x14 */ char unk_14[4];
     /* 0x18 */ struct Matrix4s specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ f32 center[3]; /* Created by retype action */
+    /* 0x98 */ f32 center[3];
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ u8 renderMode; /* Created by retype action */
+    /* 0xA6 */ u8 renderMode;
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ u8 unk_A9;
@@ -770,7 +770,7 @@ typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
-    /* 0x010 */ s8* printbuf; /* Created by retype action */
+    /* 0x010 */ s8* printbuf;
     /* 0x014 */ char unk_14[1344];
 } PrintHandle; // size = 0x554
 
@@ -978,7 +978,7 @@ typedef struct GameStatus {
     /* 0x083 */ s8 unk_83;
     /* 0x084 */ s8 unk_84;
     /* 0x085 */ char unk_85;
-    /* 0x086 */ s16 areaID; /* Created by retype action */
+    /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
     /* 0x08A */ s16 changedArea; /* (1 = yes) */
     /* 0x08C */ s16 mapID;
@@ -1075,7 +1075,7 @@ typedef struct ItemEntityPhysicsData {
 
 typedef struct RenderTask {
     /* 0x00 */ s32 renderMode;
-    /* 0x04 */ s32 dist; /* value between 0 and -10k */
+    /* 0x04 */ s32 distance; /* value between 0 and -10k */
     /* 0x08 */ struct Model* model;
     /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
 } RenderTask; // size = 0x10
@@ -1278,7 +1278,7 @@ typedef struct PlayerPathElement {
 
 typedef struct AnimatedModel {
     /* 0x00 */ s32 animModelID;
-    /* 0x04 */ Vec3f pos; /* Created by retype action */
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ struct Matrix4s* mtx;
@@ -1402,7 +1402,7 @@ typedef struct Actor {
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
-    /* 0x210 */ Debuff debuff;
+    /* 0x210 */ Status debuff;
     /* 0x211 */ s8 debuffDuration;
     /* 0x212 */ s8 staticStatus; /* 0B = yes */
     /* 0x213 */ s8 staticDuration;
@@ -1478,20 +1478,20 @@ typedef struct Crash {
     /* 0x000 */ char unk_00[20];
     /* 0x014 */ s32 threadID;
     /* 0x018 */ char unk_18[12];
-    /* 0x024 */ s64 AT; /* Created by retype action */
-    /* 0x02C */ s64 V0; /* Created by retype action */
-    /* 0x034 */ s64 V1; /* Created by retype action */
-    /* 0x03C */ s64 A0; /* Created by retype action */
-    /* 0x044 */ s64 A1; /* Created by retype action */
-    /* 0x04C */ s64 A2; /* Created by retype action */
+    /* 0x024 */ s64 AT;
+    /* 0x02C */ s64 V0;
+    /* 0x034 */ s64 V1;
+    /* 0x03C */ s64 A0;
+    /* 0x044 */ s64 A1;
+    /* 0x04C */ s64 A2;
     /* 0x054 */ s64 A3;
     /* 0x05C */ char unk_5C[16];
     /* 0x06C */ s32 T2;
     /* 0x070 */ char unk_70[168];
-    /* 0x118 */ s32 SR; /* Created by retype action */
+    /* 0x118 */ s32 SR;
     /* 0x11C */ s32 PC;
     /* 0x120 */ s32 interrupt;
-    /* 0x124 */ s32 VA; /* Created by retype action */
+    /* 0x124 */ s32 VA;
     /* 0x128 */ char unk_128[208];
 } Crash; // size = 0x1F8
 
@@ -1704,7 +1704,6 @@ typedef struct struct802E1400 {
     /* 0x03C */ union {
         /*       */     s16 s;
         /*       */     s8 b[2];
-        /*       */
     } unk_3C;
     /* 0x03E */ char unk_3E[0x4D];
     /* 0x08B */ u8 unk_8B[24];

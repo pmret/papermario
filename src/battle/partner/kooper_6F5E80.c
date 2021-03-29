@@ -52,7 +52,7 @@ ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall)
     for (i = 0; i < partnerActor->targetListLength; i++) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
-        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, Debuff_DIZZY);
+        targetActorDescBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_DIZZY);
 
         if (targetActor->transStatus == 14) {
             targetActorDescBaseStatusChance = 0;

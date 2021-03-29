@@ -12,8 +12,7 @@ void load_map_bg(char* optAssetName) {
         u32 assetSize;
         char* assetName = optAssetName;
 
-        // StoryProgress check
-        if (get_variable(0, SI_SAVE_VAR(0)) >= 0x35) {
+        if (get_variable(0, SI_SAVE_VAR(0)) >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
             // Use sunny Flower Fields bg rather than cloudy
             if (!strcmp(assetName, gCloudyFlowerFieldsBg)) {
                 assetName = gSunnyFlowerFieldsBg;

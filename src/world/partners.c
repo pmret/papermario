@@ -254,7 +254,7 @@ f32 D_800F833C = 0;
 f32 D_800F8340 = 0;
 f32 D_800F8344 = 0;
 
-NpcId create_basic_npc(NpcBlueprint* blueprint);
+NpcID create_basic_npc(NpcBlueprint* blueprint);
 
 extern s32 D_802C0000;
 
@@ -298,7 +298,7 @@ void load_partner_npc(void) {
     WorldPartner* partnerEntry = &wPartners[D_8010CFD8];
     Npc** partnerNpcPtr = &wPartnerNpc;
     WorldPartner** partner = &wPartner;
-    NpcId npcIndex;
+    NpcID npcIndex;
     NpcBlueprint blueprint;
     NpcBlueprint* blueprintPtr;
 
@@ -316,7 +316,7 @@ void load_partner_npc(void) {
 
     {
         Npc* npc = *partnerNpcPtr;
-        npc->npcID = NpcId_PARTNER;
+        npc->npcID = NPC_PARTNER;
         npc->collisionRadius = 10;
         npc->collisionHeight = 10;
     }
@@ -535,7 +535,7 @@ void partner_handle_after_battle(void) {
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PartnerID_WATT && temp8010EBB0[3] == 6) {
+        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0[3] == 6) {
             gPlayerStatusPtr->animFlags &= ~1;
             gPlayerStatusPtr->animFlags &= ~2;
             temp8010EBB0[3] = 0;

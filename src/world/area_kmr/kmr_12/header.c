@@ -15,10 +15,10 @@ MapConfig N(config) = {
 };
 
 Script N(PlayMusic) = SCRIPT({
-    SetMusicTrack(0, Song_PLEASANT_PATH, 0, 8);
+    SetMusicTrack(0, SONG_PLEASANT_PATH, 0, 8);
 });
 
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = get_enemy_safe(NpcId_GOOMBA);
+    script->varTable[0] = get_enemy_safe(NPC_GOOMBA);
     return ApiStatus_DONE2;
 }

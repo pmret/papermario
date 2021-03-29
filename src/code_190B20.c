@@ -869,108 +869,108 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
 };
 
 s32 bMarioIdleAnims[] = {
-    Debuff_NORMAL, PlayerAnim_WALKING,
-    Debuff_DANGER, PlayerAnim_PANTING,
-    Debuff_STONE, 0x00050001,
-    Debuff_SLEEP, 0x00030004,
-    Debuff_DIZZY, 0x00030006,
-    Debuff_STOP, PlayerAnim_STAND_STILL,
-    Debuff_HUSTLE, PlayerAnim_RUNNING,
-    Debuff_BERSERK, 0x00040028,
-    Debuff_PARALYZE, 0x00030004,
-    Debuff_FROZEN, 0x0001000E,
+    STATUS_NORMAL, ANIM_WALKING,
+    STATUS_DANGER, ANIM_PANTING,
+    STATUS_STONE, 0x00050001,
+    STATUS_SLEEP, 0x00030004,
+    STATUS_DIZZY, 0x00030006,
+    STATUS_STOP, ANIM_STAND_STILL,
+    STATUS_HUSTLE, ANIM_RUNNING,
+    STATUS_BERSERK, 0x00040028,
+    STATUS_PARALYZE, 0x00030004,
+    STATUS_FROZEN, 0x0001000E,
     0xE, 0x00010002,
-    Debuff_TURN_DONE, PlayerAnim_STAND_STILL,
+    STATUS_TURN_DONE, ANIM_STAND_STILL,
     0x13, 0x00040029,
     0x14, 0x0004002A,
     0x15, 0x00030003,
     0x18, 0x00030005,
     0x16, 0x0010001,
-    Debuff_THINKING, PlayerAnim_THINKING,
-    Debuff_WEARY, 0x0001000D,
-    Debuff_END,
+    STATUS_THINKING, ANIM_THINKING,
+    STATUS_WEARY, 0x0001000D,
+    STATUS_END,
 };
 
 s32 bMarioDefendAnims[] = {
-    Debuff_NORMAL, PlayerAnim_CROUCH,
-    Debuff_DANGER, PlayerAnim_PANTING,
-    Debuff_STONE, 0x00050001,
-    Debuff_SLEEP, 0x00030004,
-    Debuff_DIZZY, 0x00030006,
-    Debuff_STOP, PlayerAnim_STAND_STILL,
-    Debuff_HUSTLE, PlayerAnim_CROUCH,
-    Debuff_BERSERK, PlayerAnim_CROUCH,
-    Debuff_PARALYZE, 0x00030004,
-    Debuff_FROZEN, 0x0001000E,
+    STATUS_NORMAL, ANIM_CROUCH,
+    STATUS_DANGER, ANIM_PANTING,
+    STATUS_STONE, 0x00050001,
+    STATUS_SLEEP, 0x00030004,
+    STATUS_DIZZY, 0x00030006,
+    STATUS_STOP, ANIM_STAND_STILL,
+    STATUS_HUSTLE, ANIM_CROUCH,
+    STATUS_BERSERK, ANIM_CROUCH,
+    STATUS_PARALYZE, 0x00030004,
+    STATUS_FROZEN, 0x0001000E,
     0xE, 0x00010002,
-    Debuff_TURN_DONE, PlayerAnim_STAND_STILL,
+    STATUS_TURN_DONE, ANIM_STAND_STILL,
     0x13, 0x00040029,
     0x14, 0x0004002A,
     0x15, 0x00030003,
     0x18, 0x00030005,
     0x16, 0x0010001,
-    Debuff_THINKING, PlayerAnim_THINKING,
-    Debuff_WEARY, 0x0001000D,
-    Debuff_END,
+    STATUS_THINKING, ANIM_THINKING,
+    STATUS_WEARY, 0x0001000D,
+    STATUS_END,
 };
 
 s32 bMarioHideAnims[] = {
-    Debuff_NORMAL, PlayerAnim_CROUCH,
-    Debuff_DANGER, PlayerAnim_PANTING,
-    Debuff_STONE, 0x00050001,
-    Debuff_SLEEP, 0x00030004,
-    Debuff_DIZZY, 0x00030006,
-    Debuff_STOP, PlayerAnim_STAND_STILL,
-    Debuff_HUSTLE, 0x0008000E,
-    Debuff_BERSERK, 0x0008000E,
-    Debuff_PARALYZE, 0x00030004,
-    Debuff_FROZEN, 0x0001000E,
+    STATUS_NORMAL, ANIM_CROUCH,
+    STATUS_DANGER, ANIM_PANTING,
+    STATUS_STONE, 0x00050001,
+    STATUS_SLEEP, 0x00030004,
+    STATUS_DIZZY, 0x00030006,
+    STATUS_STOP, ANIM_STAND_STILL,
+    STATUS_HUSTLE, 0x0008000E,
+    STATUS_BERSERK, 0x0008000E,
+    STATUS_PARALYZE, 0x00030004,
+    STATUS_FROZEN, 0x0001000E,
     0xE, 0x00010002,
-    Debuff_TURN_DONE, PlayerAnim_CROUCH,
+    STATUS_TURN_DONE, ANIM_CROUCH,
     0x13, 0x00040029,
     0x14, 0x0004002A,
     0x15, 0x00030003,
     0x18, 0x00030005,
     0x16, 0x0010001,
-    Debuff_THINKING, PlayerAnim_THINKING,
-    Debuff_WEARY, 0x0001000D,
-    Debuff_END,
+    STATUS_THINKING, ANIM_THINKING,
+    STATUS_WEARY, 0x0001000D,
+    STATUS_END,
 };
 
 s32 bPeachIdleAnims[] = {
-    Debuff_NORMAL, 0x000A0002,
-    Debuff_TURN_DONE, 0x000C0028,
-    Debuff_END,
+    STATUS_NORMAL, 0x000A0002,
+    STATUS_TURN_DONE, 0x000C0028,
+    STATUS_END,
 };
 
 s32 bMarioDefenseTable[] = {
-    Element_NORMAL, 0,
-    Element_END,
+    ELEMENT_NORMAL, 0,
+    ELEMENT_END,
 };
 
 s32 bPlayerStatusTable[] = {
-    Debuff_NORMAL, 100,
-    Debuff_DEFAULT, 100,
-    Debuff_SLEEP, 100,
-    Debuff_POISON, 100,
-    Debuff_FROZEN, 100,
-    Debuff_DIZZY, 100,
-    Debuff_FEAR, 100,
-    Debuff_STATIC, 100,
-    Debuff_PARALYZE, 100,
-    Debuff_SHRINK, 100,
-    Debuff_STOP, 100,
-    Debuff_DEFAULT_TURN_MOD, 0,
-    Debuff_SLEEP_TURN_MOD, 0,
-    Debuff_POISON_TURN_MOD, 0,
-    Debuff_FROZEN_TURN_MOD, 0,
-    Debuff_DIZZY_TURN_MOD, 0,
-    Debuff_FEAR_TURN_MOD, 0,
-    Debuff_STATIC_TURN_MOD, 0,
-    Debuff_PARALYZE_TURN_MOD, 0,
-    Debuff_SHRINK_TURN_MOD, 0,
-    Debuff_STOP_TURN_MOD, 0,
-    Debuff_END,
+    STATUS_NORMAL, 100,
+    STATUS_DEFAULT, 100,
+    STATUS_SLEEP, 100,
+    STATUS_POISON, 100,
+    STATUS_FROZEN, 100,
+    STATUS_DIZZY, 100,
+    STATUS_FEAR, 100,
+    STATUS_STATIC, 100,
+    STATUS_PARALYZE, 100,
+    STATUS_SHRINK, 100,
+    STATUS_STOP, 100,
+    STATUS_DEFAULT_TURN_MOD, 0,
+    STATUS_SLEEP_TURN_MOD, 0,
+    STATUS_POISON_TURN_MOD, 0,
+    STATUS_FROZEN_TURN_MOD, 0,
+    STATUS_DIZZY_TURN_MOD, 0,
+    STATUS_FEAR_TURN_MOD, 0,
+    STATUS_STATIC_TURN_MOD, 0,
+    STATUS_PARALYZE_TURN_MOD, 0,
+    STATUS_SHRINK_TURN_MOD, 0,
+    STATUS_STOP_TURN_MOD, 0,
+    STATUS_END,
 };
 
 ActorDesc bPlayerActorDesc = {
@@ -1149,8 +1149,8 @@ s32 lookup_defense(DefenseTableEntry* defenseTable, Element elementKey) {
     DefenseTableEntry* row;
     s32 normalDefense = 0;
 
-    for (row = defenseTable; row->element != Element_END; row++, defenseTable++) {
-        if (row->element == Element_NORMAL) {
+    for (row = defenseTable; row->element != ELEMENT_END; row++, defenseTable++) {
+        if (row->element == ELEMENT_NORMAL) {
             normalDefense = defenseTable->defense;
         }
 
@@ -1171,9 +1171,9 @@ INCLUDE_ASM(s32, "code_190B20", lookup_status_duration_mod); // exactly (?) the 
 INCLUDE_ASM(s32, "code_190B20", inflict_status);
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == Debuff_DAZE) {
+    if (statusTypeKey == STATUS_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, Debuff_DAZE, duration);
+            inflict_status(target, STATUS_DAZE, duration);
             sfx_play_sound(0x2107);
         } else {
             target->koDuration += duration;
@@ -1192,68 +1192,68 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 
     if (defenseTable != NULL) {
         if (elementFlags & 2) {
-            defense = lookup_defense(defenseTable, Element_FIRE);
+            defense = lookup_defense(defenseTable, ELEMENT_FIRE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 4) {
-            defense = lookup_defense(defenseTable, Element_WATER);
+            defense = lookup_defense(defenseTable, ELEMENT_WATER);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 8) {
-            defense = lookup_defense(defenseTable, Element_ICE);
+            defense = lookup_defense(defenseTable, ELEMENT_ICE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
-        // Element_MYSTERY missing?
+        // ELEMENT_MYSTERY missing?
         if (elementFlags & 0x10) {
-            defense = lookup_defense(defenseTable, Element_MAGIC);
+            defense = lookup_defense(defenseTable, ELEMENT_MAGIC);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x40) {
-            defense = lookup_defense(defenseTable, Element_HAMMER);
+            defense = lookup_defense(defenseTable, ELEMENT_HAMMER);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x80) {
-            defense = lookup_defense(defenseTable, Element_JUMP);
+            defense = lookup_defense(defenseTable, ELEMENT_JUMP);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x100) {
-            defense = lookup_defense(defenseTable, Element_COSMIC);
+            defense = lookup_defense(defenseTable, ELEMENT_COSMIC);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x200) {
-            defense = lookup_defense(defenseTable, Element_BLAST);
+            defense = lookup_defense(defenseTable, ELEMENT_BLAST);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x20) {
-            defense = lookup_defense(defenseTable, Element_SHOCK);
+            defense = lookup_defense(defenseTable, ELEMENT_SHOCK);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x800) {
-            defense = lookup_defense(defenseTable, Element_QUAKE);
+            defense = lookup_defense(defenseTable, ELEMENT_QUAKE);
             if (defense < minDefense) {
                 minDefense = defense;
             }
         }
         if (elementFlags & 0x40000) {
-            defense = lookup_defense(defenseTable, Element_THROW);
+            defense = lookup_defense(defenseTable, ELEMENT_THROW);
             if (defense < minDefense) {
                 minDefense = defense;
             }
@@ -1262,7 +1262,7 @@ s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
 
     // If no element flags were set, fall back to normal defense.
     if (minDefense == 0xFF) {
-        defense = lookup_defense(defenseTable, Element_NORMAL);
+        defense = lookup_defense(defenseTable, ELEMENT_NORMAL);
         if (defense < 0xFF) {
             minDefense = defense;
         }
@@ -1328,7 +1328,7 @@ INCLUDE_ASM(s32, "code_190B20", func_8026709C);
 
 INCLUDE_ASM(s32, "code_190B20", func_802670C8);
 
-void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType) {
+void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType) {
     if ((part->idleAnimations) && !(part->flags & 2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
@@ -1340,7 +1340,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId deco
     }
 }
 
-void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationId decorationType) {
+void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
         if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {

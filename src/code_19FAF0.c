@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "code_19FAF0", dispatch_damage_event_player);
 void dispatch_damage_event_player_0(s32 damageAmount, Event event) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->currentAttackElement = Element_END;
+    battleStatus->currentAttackElement = ELEMENT_END;
     battleStatus->unk_19A = 0;
     dispatch_damage_event_player(damageAmount, event, FALSE);
 }

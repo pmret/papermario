@@ -16,22 +16,22 @@ void* D_802809FC[] = {
 s32 D_80280A30 = 0xFF;
 
 Script BtlPutPartnerAway = SCRIPT({
-    DispatchEvent(ActorID_PARTNER, 62);
+    DispatchEvent(ACTOR_PARTNER, 62);
     parallel {
         SI_VAR(0) = 1.0;
         loop 10 {
-            SetActorScale(ActorID_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
+            SetActorScale(ACTOR_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
             SI_VAR(0) -= 0.1005859375;
             sleep 1;
         }
     }
     EnablePartnerBlur();
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_E);
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_E);
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 25;
-    SetActorJumpGravity(ActorID_PARTNER, 1.0);
-    SetGoalPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    JumpToGoal(ActorID_PARTNER, 10, 0, 0, 1);
+    SetActorJumpGravity(ACTOR_PARTNER, 1.0);
+    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    JumpToGoal(ACTOR_PARTNER, 10, 0, 0, 1);
     DisablePartnerBlur();
 });
 
@@ -39,22 +39,22 @@ Script BtlBringPartnerOut = SCRIPT({
     parallel {
         SI_VAR(0) = 0.1005859375;
         loop 20 {
-            SetActorScale(ActorID_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
+            SetActorScale(ACTOR_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
             SI_VAR(0) += 0.05078125;
             sleep 1;
         }
-        SetActorScale(ActorID_PARTNER, 1.0, 1.0, 1.0);
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
-    PlaySoundAtActor(ActorID_PLAYER, SoundId_D);
+    PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_D);
     GetGoalPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetActorJumpGravity(ActorID_PARTNER, 1.0);
+    SetActorJumpGravity(ACTOR_PARTNER, 1.0);
     if (SI_VAR(1) == 0) {
-        JumpToGoal(ActorID_PARTNER, 20, 0, 0, 1);
+        JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
     } else {
-        JumpToGoal(ActorID_PARTNER, 20, 0, 0, 1);
+        JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
     }
-    GetActorPos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ForceHomePos(ActorID_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    ForceHomePos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 });
 
 s8 D_80280CE0[] = { 0, 0, 0, 0 };
@@ -120,16 +120,16 @@ Script D_80280E54 = SCRIPT({
 });
 
 Script D_80280EB8 = SCRIPT({
-    SetCamPerspective(Cam_BATTLE, 6, 25, 16, 1024);
-    SetCamViewport(Cam_BATTLE, 12, 20, 296, 200);
-    SetCamBGColor(Cam_BATTLE, 0, 0, 0);
-    SetCamEnabled(Cam_BATTLE, TRUE);
+    SetCamPerspective(CAM_BATTLE, 6, 25, 16, 1024);
+    SetCamViewport(CAM_BATTLE, 12, 20, 296, 200);
+    SetCamBGColor(CAM_BATTLE, 0, 0, 0);
+    SetCamEnabled(CAM_BATTLE, TRUE);
     sleep 1;
     func_802D3398();
     func_802CCCB0();
-    func_802CABE8(Cam_BATTLE, 0, 240, 100, 8);
-    func_802CAE50(Cam_BATTLE, -75, 35, 0);
-    BattleCamTargetActor(ActorID_PLAYER);
+    func_802CABE8(CAM_BATTLE, 0, 240, 100, 8);
+    func_802CAE50(CAM_BATTLE, -75, 35, 0);
+    BattleCamTargetActor(ACTOR_PLAYER);
     func_8024CE9C();
 });
 

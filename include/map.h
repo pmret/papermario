@@ -66,13 +66,13 @@ typedef struct NpcAISettings {
     /* 0x04 */ s32 moveTime;
     /* 0x08 */ s32 waitTime;
     /* 0x0C */ f32 alertRadius;
-    /* 0x10 */ s32 unk_10;
+    /* 0x10 */ X32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 chaseSpeed;
     /* 0x1C */ s32 unk_1C; // chase turn step?
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 chaseRadius;
-    /* 0x28 */ f32 unk_28;
+    /* 0x28 */ X32 unk_28;
     /* 0x2C */ s32 unk_2C; // bool
 } NpcAISettings; // size = 0x30
 
@@ -93,7 +93,7 @@ typedef struct NpcSettings {
 } NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {
-    /* 0x00 */ ItemId item;
+    /* 0x00 */ ItemID item;
     /* 0x02 */ s16 weight;
     /* 0x04 */ s16 unk_08;
 } ItemDrop; // size = 0x06
@@ -172,8 +172,8 @@ typedef struct StatDrop {
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
-typedef struct StaticNPC {
-    /* 0x000 */ NpcId id;
+typedef struct StaticNpc {
+    /* 0x000 */ NpcID id;
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
@@ -187,7 +187,6 @@ typedef struct StaticNPC {
     /* 0x09A */ StatDrop flowerDrops[8];
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
-    /* 0x0DE */ char unk_DE[2];
     /* 0x0E0 */ s32 movement[48]; // TODO: type
     /* 0x1A0 */ NpcAnimID animations[16];
     /* 0x1E0 */ char unk_1E0[8];
@@ -195,9 +194,28 @@ typedef struct StaticNPC {
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
+typedef struct EnemyTerritoryThing {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 shape;
+    /* 0x08 */ s32 pointX;
+    /* 0x0C */ s32 pointZ;
+    /* 0x10 */ s32 sizeX;
+    /* 0x14 */ s32 sizeZ;
+    /* 0x18 */ f32 unk_34;
+    /* 0x1C */ s16 unk_1C;
+} EnemyTerritoryThing; // size = 0x20
+
 typedef struct EnemyTerritory {
     /* 0x00 */ Vec3i unk_00;
-    /* 0x0C */ char unk_0C[0x28];
+    /* 0x0C */ char unk_0C[0x8];
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 pointX;
+    /* 0x20 */ s32 pointY;
+    /* 0x24 */ s32 pointZ;
+    /* 0x28 */ s32 sizeX;
+    /* 0x2C */ s32 sizeZ;
+    /* 0x30 */ s32 shape;
     /* 0x34 */ s32 unk_34;
 } EnemyTerritory; // size = ???
 
@@ -257,10 +275,10 @@ typedef struct {
 
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
 
-Enemy* get_enemy(NpcId npcId);
+Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);
 
-s32 func_800490B4(s32 arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
 
 /// Zero-terminated.
 Area gAreas[29];

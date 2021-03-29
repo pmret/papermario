@@ -14,13 +14,13 @@ void N(UnkNpcAIFunc13_2)(ScriptInstance* script, NpcAISettings* aiSettings, s32 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
-    if (aiSettings->unk_10 < fabsf(angleDiff)) {
+    if (aiSettings->unk_10.s < fabsf(angleDiff)) {
         tempAngle = npc->yaw;
 
         if (angleDiff < 0.0f) {
-            tempAngle += -aiSettings->unk_10;
+            tempAngle += -aiSettings->unk_10.s;
         } else {
-            tempAngle += aiSettings->unk_10;
+            tempAngle += aiSettings->unk_10.s;
         }
     }
 

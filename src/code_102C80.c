@@ -7,7 +7,7 @@ void func_802E1400(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
 
     if (entity->unk_06 & 1) {
-        if ((playerStatus->actionState == ActionState_GROUND_POUND) || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND) || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
             exec_entity_updatecmd(entity);
             temp->unk_22 = 8;
         }
@@ -67,8 +67,8 @@ void func_802E1614(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->unk_06 & 1) {
-        if ((playerStatus->actionState == ActionState_GROUND_POUND)
-            || (playerStatus->actionState == ActionState_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
+            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
             exec_entity_updatecmd(entity);
         }
     }
@@ -82,7 +82,7 @@ void func_802E1660(Entity* entity) {
     func_802E153C(entity);
 
     if (entity->unk_06 & 0x40) {
-        if (playerStatus->actionState == ActionState_HAMMER) {
+        if (playerStatus->actionState == ACTION_STATE_HAMMER) {
             if (gPlayerData.hammerLevel < 0) {
                 return;
             }
@@ -97,7 +97,7 @@ void func_802E1660(Entity* entity) {
         }
     }
 
-    if (playerStatus->actionState == ActionState_SPIN_JUMP) {
+    if (playerStatus->actionState == ACTION_STATE_SPIN_JUMP) {
         return;
     }
 

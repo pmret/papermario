@@ -1,7 +1,7 @@
 #include "dizzy_dial.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_DIZZY_DIAL;
+    SI_VAR(10) = c ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
     UseCamPreset(2);
     MoveBattleCamOver(20);
@@ -32,12 +32,12 @@ Script N(main) = SCRIPT({
     }
     InitTargetIterator();
 0:
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
     if (SI_VAR(0) == 6) {
         goto 1;
     }
-    GetItemPower(ItemId_DIZZY_DIAL, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_DIZZY_DIAL, SI_VAR(0), SI_VAR(1));
     MakeStatusField(SI_VAR(0), 0x40000, 100, SI_VAR(0));
     func_80252B3C(SI_VAR(0), 0x50000000, SI_VAR(0), 0, 32);
 1:
