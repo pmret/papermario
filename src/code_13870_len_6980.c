@@ -307,8 +307,8 @@ void func_8003E338(void) {
     s32 i;
     s32 j;
 
-    for (i = ARRAY_COUNT(currentEncounter->enounterList) -1; i >= 0; i--) {
-        currentEncounter->enounterList[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->encounterList); i++) {
+        currentEncounter->encounterList[i] = 0;
     }
 
     currentEncounter->flags = 0;
@@ -320,12 +320,12 @@ void func_8003E338(void) {
     currentEncounter->unk_08 = 0;
     currentEncounter->dropWhackaBump = 0;
     for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
-        for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[0]); j++) {
+        for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
             currentEncounter->defeatFlags[i][j] = 0;
         }
     }
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
         currentEncounter->recentMaps[i] = -1;
     }
 
@@ -340,19 +340,19 @@ void clear_encounter_status(void) {
     s32 i;
     s32 j;
 
-    for (i = 0; i < ARRAY_COUNT(currentEncounter->enounterList); i++) {
-        currentEncounter->enounterList[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->encounterList); i++) {
+        currentEncounter->encounterList[i] = 0;
     }
 
-    if (gGameStatusPtr->changedArea !=0) {
+    if (gGameStatusPtr->changedArea != 0) {
         for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
-            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[0]); j++) {
+            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
                 currentEncounter->defeatFlags[i][j] = 0;
             }
         }
         
-        if (gGameStatusPtr->changedArea !=0) {
-            for (i = 0; i < 2; i++) {
+        if (gGameStatusPtr->changedArea != 0) {
+            for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
                 currentEncounter->recentMaps[i] = -1;
             }
         }
@@ -455,7 +455,7 @@ void make_npcs(s8 flags, s8 mapID, s32* NpcGroupList) {
         }
 
         if (gGameStatusPtr->changedArea != 0) {
-            for (i = 0; i < 2; i++) {
+            for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
                 currentEncounter->recentMaps[i] = -1;
             }
         }

@@ -1597,7 +1597,7 @@ typedef struct EncounterStatus {
     /* 0x021 */ s8 resetMapEncounterFlags;
     /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
-    /* 0x028 */ struct Encounter* enounterList[24];
+    /* 0x028 */ struct Encounter* encounterList[24];
     /* 0x088 */ struct Encounter* currentEncounter;
     /* 0x08C */ struct Enemy* currentEnemy;
     /* 0x090 */ s32 fadeOutAmount;
@@ -1606,8 +1606,8 @@ typedef struct EncounterStatus {
     /* 0x09C */ s32 battleStartCountdown;
     /* 0x0A0 */ char unk_A0[16];
     /* 0x0B0 */ s32 defeatFlags[60][12];
-    /* 0xFB0 */ s16 recentMaps[3];
-    /* 0xFB6 */ char unk_FB6[2];
+    /* 0xFB0 */ s16 recentMaps[2];
+    /* 0xFB4 */ char unk_FB4[4];
 } EncounterStatus; // size = 0xFB8
 
 typedef struct SaveData {
