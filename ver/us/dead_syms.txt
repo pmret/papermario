@@ -1,2 +1,8 @@
 dead_atan2 = 0x8002AF70;
 D_800FFC90 = 0x800FFC90;
+dead_get_variable = 0x802D4E8C;
+dead_set_variable = 0x802D5468;
+dead_get_float_variable = 0x802D57FC;
+dead_cos_rad = 0x8002B4C0;
+dead_set_float_variable = 0x802D5A10;
+dead_func_8006FEF0 = 0x80075170;
