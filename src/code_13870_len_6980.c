@@ -4,12 +4,12 @@
 void NOP_npc_callback(void) {
 }
 
-void mtx_ident_mirror_y(Matrix4f* mtx) {
+void mtx_ident_mirror_y(Matrix4f mtx) {
     guMtxIdentF(*mtx);
-    (*mtx)[0][0] = 1.0f;
-    (*mtx)[1][1] = -1.0f;
-    (*mtx)[2][2] = 1.0f;
-    (*mtx)[3][3] = 1.0f;
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = -1.0f;
+    mtx[2][2] = 1.0f;
+    mtx[3][3] = 1.0f;
 }
 
 INCLUDE_ASM(s32, "code_13870_len_6980", clear_npcs);
