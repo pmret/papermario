@@ -46,7 +46,7 @@ extern s32 D_80210000;
 extern s8 D_802D9D70;
 extern s8 D_802D9D71;
 
-void func_800343A4();
+void appendGfx_intro_logos();
 
 
 extern s8 D_800A0910[];
@@ -224,12 +224,12 @@ INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
     }
 }*/
 
-void func_80034388(void) {
-    func_800343A4();
+void state_drawUI_logos(void) {
+    appendGfx_intro_logos();
 }
 
-INCLUDE_ASM(void, "code_f270_len_1190", func_800343A4);
-// void func_800343A4(void) {
+INCLUDE_ASM(void, "code_f270_len_1190", appendGfx_intro_logos);
+// void appendGfx_intro_logos(void) {
 //     s32 i;
 
 //     gDPPipeSync(gMasterGfxPos++);
@@ -302,7 +302,7 @@ INCLUDE_ASM(void, "code_f270_len_1190", func_800343A4);
 //     }
 // }
 
-void begin_state_pause_menu(void) {
+void state_init_pause(void) {
     D_800A0921 = 0;
     D_800A0922 = 0;
     disable_player_input();
@@ -392,10 +392,10 @@ void state_step_pause(void) {
     }
 }
 
-void func_80034BF4(void) {
+void state_drawUI_pause(void) {
 }
 
-void func_80034BFC(void) {
+void state_init_unpause(void) {
     if (D_800A0922 > 0) {
         D_800A0921 = 0;
     } else {
@@ -404,7 +404,7 @@ void func_80034BFC(void) {
     D_800A0920 = 4;
 }
 
-void state_unpause_step(void) {
+void state_step_unpause(void) {
     s8* temp800A0921 = &D_800A0921;
 
     switch (*temp800A0921) {
@@ -532,5 +532,5 @@ void state_unpause_step(void) {
     }
 }
 
-void func_80034FF0(void) {
+void state_drawUI_unpause(void) {
 }
