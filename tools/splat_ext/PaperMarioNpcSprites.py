@@ -138,8 +138,8 @@ class Sprite:
         SpriteSheet = xml.getroot()
 
         true_max_components = 0
-        self.max_components = int(SpriteSheet.get("a"))
-        self.num_variations = int(SpriteSheet.get("b"))
+        self.max_components = int(SpriteSheet.get("a") or SpriteSheet.get("maxComponents")) # ignored
+        self.num_variations = int(SpriteSheet.get("b") or SpriteSheet.get("paletteGroups"))
 
         for Palette in SpriteSheet.findall("./PaletteList/Palette"):
             if read_images:
@@ -147,11 +147,12 @@ class Sprite:
                 img.preamble(True)
                 palette = img.palette(alpha="force")
 
+                palette = palette[0:16]
                 assert len(palette) == 16
 
                 self.palettes.append(palette)
 
-            self.palette_names.append(Palette.get("src").split(".png")[0])
+            self.palette_names.append(Palette.get("name", Palette.get("src").split(".png")[0]))
 
         for Raster in SpriteSheet.findall("./RasterList/Raster"):
             if read_images:
@@ -193,7 +194,8 @@ class Sprite:
             if len(components) > true_max_components:
                 true_max_components = len(components)
 
-        assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
+        self.max_components = true_max_components
+        #assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
 
         return self
 
