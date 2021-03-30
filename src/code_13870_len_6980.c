@@ -1,6 +1,8 @@
 #include "common.h"
 #include "map.h"
 
+void func_8003E670(void);
+
 void NOP_npc_callback(void) {
 }
 
@@ -288,27 +290,183 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E0D4);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E1D0);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", COPY_set_defeated);
+void COPY_set_defeated(s32 mapID, s32 encounterID) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx = encounterID / 32;
+    s32 encounterShift;
+    s32 flag;
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E338);
+    flag = encounterID % 32;
+    encounterShift = flag;
+    flag = currentEncounter->defeatFlags[mapID][encounterIdx];
+    currentEncounter->defeatFlags[mapID][encounterIdx] = flag | (1 << encounterShift);
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", clear_encounter_status);
+void func_8003E338(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->encounterList); i++) {
+        currentEncounter->encounterList[i] = 0;
+    }
+
+    currentEncounter->flags = 0;
+    currentEncounter->numEncounters = 0;
+    currentEncounter->eFirstStrike = 0;
+    currentEncounter->hitType = 0;
+    currentEncounter->unk_0A = 0;
+    currentEncounter->npcGroupList = 0;
+    currentEncounter->unk_08 = 0;
+    currentEncounter->dropWhackaBump = 0;
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
+        for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
+            currentEncounter->defeatFlags[i][j] = 0;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
+        currentEncounter->recentMaps[i] = -1;
+    }
+
+    func_80045AC0();
+    gGameState = 0;
+    bind_dynamic_entity_3(0, func_8003E670);
+}
+
+void clear_encounter_status(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    GameStatus** gameStatus;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < ARRAY_COUNT(currentEncounter->encounterList); i++) {
+        currentEncounter->encounterList[i] = 0;
+    }
+
+    if (gGameStatusPtr->changedArea != 0) {
+        for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
+            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
+                currentEncounter->defeatFlags[i][j] = 0;
+            }
+        }
+        
+        if (gGameStatusPtr->changedArea != 0) {
+            for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
+                currentEncounter->recentMaps[i] = -1;
+            }
+        }
+    }
+
+    gameStatus = &gGameStatusPtr;
+    currentEncounter->numEncounters = 0;
+    currentEncounter->eFirstStrike = 0;
+    currentEncounter->hitType = 0;
+    currentEncounter->unk_0A = 0;
+    currentEncounter->currentAreaIndex = (*gameStatus)->areaID;
+    currentEncounter->currentMapIndex = (*gameStatus)->mapID;
+    currentEncounter->currentEntryIndex = (*gameStatus)->entryID;
+    currentEncounter->npcGroupList = 0;
+    currentEncounter->unk_08 = 0;
+    currentEncounter->unk_12 = 0;
+    func_80045AC0();
+    gGameState = 0;
+    bind_dynamic_entity_3(0, func_8003E670);
+}
 
 void func_8003E50C(void) {
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E514);
+void func_8003E514(s8 arg0) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    currentEncounter->unk_08 = arg0;
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", update_counters);
+void update_counters(void) {
+    switch (gGameState) {
+        case 0:
+            break;
+        case 1:
+            create_encounters();
+            break;
+        case 2:
+            update_encounters_neutral();
+            break;
+        case 3:
+            update_encounters_pre_battle();
+            break;
+        case 4:
+            update_encounters_conversation();
+            break;
+        case 5:
+            update_encounters_post_battle();
+            break;
+    }
+    update_merlee_messages();
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", draw_encounter_ui);
+void draw_encounter_ui(void) {
+    switch (gGameState) {
+        case 0:
+            break;
+        case 1:
+            init_encounters_ui();
+            break;
+        case 2:
+            draw_encounters_neutral();
+            break;
+        case 3:
+            draw_encounters_pre_battle();
+            break;
+        case 4:
+            draw_encounters_conversation();
+            break;
+        case 5:
+            draw_encounters_post_battle();
+            break;
+    }
+    draw_merlee_messages();
+}
 
-INCLUDE_ASM(s32, "code_13870_len_6980", draw_first_strike_ui);
+void draw_first_strike_ui(void) {
+    if (gGameState != 0) {
+        if (gGameState == 3) {
+            show_first_strike_message();
+        }
+    }
+}
 
 void func_8003E670(void) {
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", make_npcs);
+void make_npcs(s8 flags, s8 mapID, s32* NpcGroupList) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 i;
+    s32 j;
+
+    currentEncounter->resetMapEncounterFlags = flags;
+    currentEncounter->mapID = mapID;
+    currentEncounter->npcGroupList = NpcGroupList;
+    if (gGameStatusPtr->changedArea != 0) {
+        for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
+            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
+                currentEncounter->defeatFlags[i][j] = 0;
+            }
+        }
+
+        if (gGameStatusPtr->changedArea != 0) {
+            for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
+                currentEncounter->recentMaps[i] = -1;
+            }
+        }
+    }
+
+    if (NpcGroupList != NULL) {
+        gGameState = 1;
+        D_8009A678 = 1;
+        D_8009A5D0 = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", kill_encounter);
 
