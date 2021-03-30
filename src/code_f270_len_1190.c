@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "map.h"
+#include "nu/nusys.h"
 
 Gfx D_80077908[] = {
     gsDPPipeSync(),
@@ -20,10 +21,18 @@ s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 
 // TODO the gPauseMenuIconScripts should be DATA_START
 // TODO the gPauseMenuHeldButtons should be BSS_START
-// TODO 80278640 is probably BSS_END?
-s32 D_8007795C[] = { &code_code_135EE0_ROM_START, &code_code_135EE0_ROM_END, &code_code_135EE0_VRAM,
-                     &code_code_135EE0_VRAM, gPauseMenuIconScripts, gPauseMenuIconScripts, &gPauseMenuHeldButtons,
-                     &gPauseMenuHeldButtons, 0x80278640 };
+// TODO 80278640 is BSS_END
+NUPiOverlaySegment D_8007795C = {
+    .romStart = &code_code_135EE0_ROM_START,
+    .romEnd = &code_code_135EE0_ROM_END,
+    .ramStart = &code_code_135EE0_VRAM,
+    .textStart = &code_code_135EE0_VRAM,
+    .textEnd = gPauseMenuIconScripts,
+    .dataStart = gPauseMenuIconScripts,
+    .dataEnd = &gPauseMenuHeldButtons,
+    .bssStart = &gPauseMenuHeldButtons,
+    .bssEnd = 0x80278640
+};
 
 extern s32 D_800A0914;
 extern s32 D_800A0918;
@@ -32,8 +41,6 @@ extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
-
-
 extern s32 D_800D9230;
 extern s32 D_80210000;
 extern s8 D_802D9D70;
@@ -203,7 +210,87 @@ void begin_state_pause_menu(void) {
     set_windows_visible(2);
 }
 
-INCLUDE_ASM(s32, "code_f270_len_1190", step_pause_menu);
+void state_step_pause(void) {
+    s8* temp800A0921 = &D_800A0921;
+    s32 temp800A0921_2 = *temp800A0921;
+    s8* temp800A0920;
+    s8* temp800A0920_2;
+
+    switch (temp800A0921_2) {
+        case 0:
+            update_counters();
+            update_npcs();
+            update_player();
+            update_effects();
+            if (D_8009A658[1] == D_8009A64C) {
+                D_800A0920 = 4;
+                *temp800A0921 = 2;
+                OVERRIDE_FLAG_SET(0x8);
+                gGameStatusPtr->enableBackground &= ~0xF0;
+                gGameStatusPtr->enableBackground |= 0x10;
+
+            }
+            break;
+        case 2:
+            temp800A0920 = &D_800A0920;
+            if (*temp800A0920 >= 0) {
+                GameStatus** gameStatus;
+
+                if (*temp800A0920 != 0) {
+                    (*temp800A0920)--;
+                }
+
+                if (*temp800A0920 == 0) {
+                    *temp800A0920 = -1;
+                    nuGfxSetCfb(&D_80077950, 2);
+                    gameStatus = &gGameStatusPtr;
+                    (*gameStatus)->unk_15E = (*gameStatus)->unk_15C;
+                    sfx_stop_env_sounds();
+                    func_8003B1A8();
+                    (*gameStatus)->isBattle = temp800A0921_2;
+                    allocate_hit_tables();
+                    battle_heap_create();
+                    nuContRmbForceStop();
+                    func_80149670(0);
+                    func_802DD8F8(0);
+                    clear_model_data();
+                    func_80148040();
+                    use_default_background_settings();
+                    clear_entity_models();
+                    func_8011E224();
+                    clear_dynamic_entity_list();
+                    func_801452E8(&code_code_3169F0_VRAM, 0x38000);
+                    func_80141100();
+                    reset_status_menu();
+                    clear_item_entity_data();
+                    clear_script_list();
+                    clear_npcs();
+                    clear_entity_data(0);
+                    clear_trigger_data();
+                    D_800A0924 = func_80149828();
+                    func_801497FC(0);
+                    bgm_quiet_max_volume();
+                    nuPiReadRomOverlay(&D_8007795C);
+                    pause_init();
+                    OVERRIDE_FLAG_UNSET(0x8);
+                }
+
+                if (D_800A0920 >= 0) {
+                    break;
+                }
+            }
+
+            temp800A0920_2 = &D_800A0920;
+            if (*temp800A0920_2 >= -10) {
+                pause_handle_input(0, 0);
+                (*temp800A0920_2)--;
+            } else {
+                pause_handle_input(gGameStatusPtr->pressedButtons, gGameStatusPtr->heldButtons);
+            }
+            D_800A0922 = 0;
+            break;
+    }
+}
 
 void func_80034BF4(void) {
 }

@@ -213,6 +213,7 @@ extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 D_8009A604;
 extern s32 D_8009A64C;
+extern s32* D_8009A658;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
