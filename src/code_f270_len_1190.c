@@ -217,7 +217,7 @@ void func_80034BFC(void) {
     D_800A0920 = 4;
 }
 
-void func_80034C3C(void) {
+void state_unpause_step(void) {
     s8* temp800A0921 = &D_800A0921;
 
     switch (*temp800A0921) {
