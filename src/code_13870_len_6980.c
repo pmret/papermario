@@ -113,40 +113,45 @@ void disable_npc_shadow(Npc* npc) {
 
 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
-void set_npc_sprite(Npc* npc, s32 arg1, s32 arg2) {
+void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
     s32 flagsTemp;
 
-    ASSERT(((npc->flags & 0x1000000)) || (func_802DE5E8(npc->unk_24) == 0));
+    ASSERT((npc->flags & 0x1000000) || func_802DE5E8(npc->unk_24) == 0);
+
     npc->unk_B0 = arg2;
+
     if (!(npc->flags & 0x1000000)) {
-        npc->unk_24 = func_802DE0EC(arg1, arg2);
-        ASSERT(!(npc->unk_24 < 0));
+        npc->unk_24 = func_802DE0EC(anim, arg2);
+        ASSERT(npc->unk_24 >= 0);
     }
+
     flagsTemp = npc->flags;
-    npc->currentAnim = arg1;
+    npc->currentAnim = anim;
+
     if (!(flagsTemp & 0x40000000)) {
         if (!(flagsTemp & 0x1000000)) {
-            func_802DE2AC(npc->unk_24, arg1, npc->animationSpeed);
+            func_802DE2AC(npc->unk_24, anim, npc->animationSpeed);
         }
     }
 }
 
 void enable_npc_blur(Npc* npc) {
-    NpcBlurData* blurData;
+    BlurBuffer* blurBuf;
     s32 i;
 
     if (!(npc->flags & 0x100000)) {
         npc->flags |= 0x100000;
-        blurData = heap_malloc(sizeof(NpcBlurData));
-        npc->blurData = blurData;
-        ASSERT(blurData != NULL);
-        blurData->unk_00 = 0;
-        blurData->unk_01 = 0;
 
-        for (i = 0; i < ARRAY_COUNT(blurData->xpos); i++) {
-            blurData->xpos[i] = npc->pos.x;
-            blurData->ypos[i] = npc->pos.y;
-            blurData->zpos[i] = npc->pos.z;
+        blurBuf = heap_malloc(sizeof(BlurBuffer));
+        npc->blurBuf = blurBuf;
+        ASSERT(blurBuf != NULL);
+        blurBuf->unk_00 = 0;
+        blurBuf->index = 0;
+
+        for (i = 0; i < ARRAY_COUNT(blurBuf->x); i++) {
+            blurBuf->x[i] = npc->pos.x;
+            blurBuf->y[i] = npc->pos.y;
+            blurBuf->z[i] = npc->pos.z;
         }
     }
 }
@@ -154,28 +159,29 @@ void enable_npc_blur(Npc* npc) {
 void disable_npc_blur(Npc* npc) {
     if (npc->flags & 0x100000) {
         npc->flags &= ~0x100000;
-        heap_free(npc->blurData);
-        npc->blurData = NULL;
+
+        heap_free(npc->blurBuf);
+        npc->blurBuf = NULL;
     }
 }
 
 void update_npc_blur(Npc* npc) {
-    NpcBlurData* blurData = npc->blurData;
-    s32 index = blurData->unk_01;
+    BlurBuffer* blurBuf = npc->blurBuf;
+    s32 index = blurBuf->index;
 
-    blurData->xpos[index] = npc->pos.x;
-    blurData->ypos[index] = npc->pos.y;
-    blurData->zpos[index] = npc->pos.z;
+    blurBuf->x[index] = npc->pos.x;
+    blurBuf->y[index] = npc->pos.y;
+    blurBuf->z[index] = npc->pos.z;
 
     index++;
     if (index >= 20) {
         index = 0;
     }
 
-    blurData->unk_01 = index;
+    blurBuf->index = index;
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", appedGfx_npc_blur);
+INCLUDE_ASM(s32, "code_13870_len_6980", appendGfx_npc_blur);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003B184);
 
@@ -290,6 +296,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E0D4);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003E1D0);
 
+/// @see set_defeated
 void COPY_set_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
@@ -300,6 +307,13 @@ void COPY_set_defeated(s32 mapID, s32 encounterID) {
     encounterShift = flag;
     flag = currentEncounter->defeatFlags[mapID][encounterIdx];
     currentEncounter->defeatFlags[mapID][encounterIdx] = flag | (1 << encounterShift);
+
+    // TODO: The below should work but has regalloc issues:
+    /*EncounterStatus *currentEncounter = &gCurrentEncounter;
+    s32 encounterIdx = encounterID / 32;
+    s32 encounterShift = encounterID % 32;
+
+    currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
 void func_8003E338(void) {
@@ -319,6 +333,7 @@ void func_8003E338(void) {
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->dropWhackaBump = 0;
+
     for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
         for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
             currentEncounter->defeatFlags[i][j] = 0;
@@ -344,14 +359,14 @@ void clear_encounter_status(void) {
         currentEncounter->encounterList[i] = 0;
     }
 
-    if (gGameStatusPtr->changedArea != 0) {
+    if (gGameStatusPtr->didAreaChange != 0) {
         for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
             for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
                 currentEncounter->defeatFlags[i][j] = 0;
             }
         }
-        
-        if (gGameStatusPtr->changedArea != 0) {
+
+        if (gGameStatusPtr->didAreaChange != 0) {
             for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
                 currentEncounter->recentMaps[i] = -1;
             }
@@ -369,9 +384,10 @@ void clear_encounter_status(void) {
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->unk_12 = 0;
+
     func_80045AC0();
     gGameState = 0;
-    bind_dynamic_entity_3(0, func_8003E670);
+    bind_dynamic_entity_3(NULL, func_8003E670);
 }
 
 void func_8003E50C(void) {
@@ -402,6 +418,7 @@ void update_counters(void) {
             update_encounters_post_battle();
             break;
     }
+
     update_merlee_messages();
 }
 
@@ -425,6 +442,7 @@ void draw_encounter_ui(void) {
             draw_encounters_post_battle();
             break;
     }
+
     draw_merlee_messages();
 }
 
@@ -439,29 +457,30 @@ void draw_first_strike_ui(void) {
 void func_8003E670(void) {
 }
 
-void make_npcs(s8 flags, s8 mapID, s32* NpcGroupList) {
+void make_npcs(s8 flags, s8 mapID, s32* npcGroupList) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 i;
     s32 j;
 
     currentEncounter->resetMapEncounterFlags = flags;
     currentEncounter->mapID = mapID;
-    currentEncounter->npcGroupList = NpcGroupList;
-    if (gGameStatusPtr->changedArea != 0) {
+    currentEncounter->npcGroupList = npcGroupList;
+
+    if (gGameStatusPtr->didAreaChange) {
         for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
             for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
                 currentEncounter->defeatFlags[i][j] = 0;
             }
         }
 
-        if (gGameStatusPtr->changedArea != 0) {
+        if (gGameStatusPtr->didAreaChange) {
             for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
                 currentEncounter->recentMaps[i] = -1;
             }
         }
     }
 
-    if (NpcGroupList != NULL) {
+    if (npcGroupList != NULL) {
         gGameState = 1;
         D_8009A678 = 1;
         D_8009A5D0 = 0;

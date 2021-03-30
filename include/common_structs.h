@@ -90,14 +90,15 @@ typedef struct HeapNode {
     /* 0x0C */ s32 capacity;
 } HeapNode; // size = 0x10
 
-typedef struct NpcBlurData {
+/// Ring buffer of an NPC's position over the past 20 frames.
+typedef struct BlurBuffer {
     /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ char unk_02[2];
-    /* 0x04 */ f32 xpos[20];
-    /* 0x54 */ f32 ypos[20];
-    /* 0xA4 */ f32 zpos[20];
-} NpcBlurData; // size = 0xF4
+    /* 0x01 */ s8 index; ///< Current blur ring buffer index
+    /* 0x02 */ char unk_02[2]; // padding?
+    /* 0x04 */ f32 x[20];
+    /* 0x54 */ f32 y[20];
+    /* 0xA4 */ f32 z[20];
+} BlurBuffer; // size = 0xF4
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -108,7 +109,7 @@ typedef struct Npc {
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
-    /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
+    /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 unk_24;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
@@ -127,7 +128,7 @@ typedef struct Npc {
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 unk_8C;
-    /* 0x08E */ s16 duration; /* formerly interp_counter */
+    /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
     /* 0x0A2 */ u16 unk_A2;
@@ -980,7 +981,7 @@ typedef struct GameStatus {
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
-    /* 0x08A */ s16 changedArea; /* (1 = yes) */
+    /* 0x08A */ s16 didAreaChange;
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
     /* 0x090 */ u16 unk_90;

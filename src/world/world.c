@@ -54,7 +54,7 @@ void* load_asset_by_name(char* assetName, s32* decompressedSize) {
     AssetHeader* assetTableBuffer;
     AssetHeader* curAsset;
     void* ret;
-    
+
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
