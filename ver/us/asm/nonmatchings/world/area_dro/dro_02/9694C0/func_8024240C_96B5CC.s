@@ -557,8 +557,8 @@ glabel L80242C2C_96BDEC
 /* 96BE14 80242C54 24A70010 */  addiu     $a3, $a1, 0x10
 /* 96BE18 80242C58 C7AA0058 */  lwc1      $f10, 0x58($sp)
 /* 96BE1C 80242C5C C7A80060 */  lwc1      $f8, 0x60($sp)
-/* 96BE20 80242C60 3C018025 */  lui       $at, %hi(gPauseMenuIconScripts)
-/* 96BE24 80242C64 D424EF60 */  ldc1      $f4, %lo(gPauseMenuIconScripts)($at)
+/* 96BE20 80242C60 3C018025 */  lui       $at, %hi(D_8024EF60_978120)
+/* 96BE24 80242C64 D424EF60 */  ldc1      $f4, %lo(D_8024EF60_978120)($at)
 /* 96BE28 80242C68 3C013DCC */  lui       $at, 0x3dcc
 /* 96BE2C 80242C6C 3421CCCD */  ori       $at, $at, 0xcccd
 /* 96BE30 80242C70 44816000 */  mtc1      $at, $f12

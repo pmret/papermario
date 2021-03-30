@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel al_LoadPER
+glabel snd_load_PER
 /* 2F8F8 800544F8 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 2F8FC 800544FC AFB20028 */  sw        $s2, 0x28($sp)
 /* 2F900 80054500 0080902D */  daddu     $s2, $a0, $zero

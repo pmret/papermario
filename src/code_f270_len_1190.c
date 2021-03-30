@@ -51,7 +51,7 @@ void func_800343A4();
 
 extern s8 D_800A0910[];
 
-void begin_state_logos(void) {
+void state_init_logos(void) {
     Camera* cameras = &gCameras;
     GameStatus** gameStatus = &gGameStatusPtr;
     s8* romStart;
