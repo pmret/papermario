@@ -1,9 +1,6 @@
 #include "common.h"
 #include "map.h"
 
-extern s32 D_8009A5D0;
-extern s32 D_8009A678;
-
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
