@@ -603,7 +603,8 @@ enum Cams {
 
 typedef s16 ItemID;
 enum ItemIDs {
-    ITEM_JUMP                   = 1,
+    NO_ITEM,
+    ITEM_JUMP,
     ITEM_SPIN_JUMP,
     ITEM_TORNADO_JUMP,
     ITEM_HAMMER,
