@@ -336,8 +336,7 @@ void func_8003E338(void) {
 
 void clear_encounter_status(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    EncounterStatus* currentEncounterTemp;
-    GameStatus** gameStatusTemp;
+    GameStatus** gameStatus;
     s32 i;
     s32 j;
 
@@ -359,15 +358,14 @@ void clear_encounter_status(void) {
         }
     }
 
-    gameStatusTemp = &gGameStatusPtr;
-    currentEncounterTemp = currentEncounter;
+    gameStatus = &gGameStatusPtr;
     currentEncounter->numEncounters = 0;
     currentEncounter->eFirstStrike = 0;
     currentEncounter->hitType = 0;
-    currentEncounterTemp->unk_0A = 0;
-    currentEncounterTemp->currentAreaIndex = (*gameStatusTemp)->areaID;
-    currentEncounterTemp->currentMapIndex = (*gameStatusTemp)->mapID;
-    currentEncounter->currentEntryIndex = (*gameStatusTemp)->entryID;
+    currentEncounter->unk_0A = 0;
+    currentEncounter->currentAreaIndex = (*gameStatus)->areaID;
+    currentEncounter->currentMapIndex = (*gameStatus)->mapID;
+    currentEncounter->currentEntryIndex = (*gameStatus)->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->unk_12 = 0;
@@ -379,7 +377,7 @@ void clear_encounter_status(void) {
 void func_8003E50C(void) {
 }
 
-void func_8003E514 (s8 arg0) {
+void func_8003E514(s8 arg0) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     currentEncounter->unk_08 = arg0;
 }
@@ -441,17 +439,17 @@ void draw_first_strike_ui(void) {
 void func_8003E670(void) {
 }
 
-void make_npcs(s8 arg0, s8 arg1, s32* arg2) {
+void make_npcs(s8 flags, s8 mapID, s32* NpcGroupList) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 i;
     s32 j;
 
-    currentEncounter->resetMapEncounterFlags = arg0;
-    currentEncounter->mapID = arg1;
-    currentEncounter->npcGroupList = arg2;
+    currentEncounter->resetMapEncounterFlags = flags;
+    currentEncounter->mapID = mapID;
+    currentEncounter->npcGroupList = NpcGroupList;
     if (gGameStatusPtr->changedArea != 0) {
         for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
-            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[0]); j++) {
+            for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
                 currentEncounter->defeatFlags[i][j] = 0;
             }
         }
@@ -463,7 +461,7 @@ void make_npcs(s8 arg0, s8 arg1, s32* arg2) {
         }
     }
 
-    if (arg2 != NULL) {
+    if (NpcGroupList != NULL) {
         gGameState = 1;
         D_8009A678 = 1;
         D_8009A5D0 = 0;
