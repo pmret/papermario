@@ -25,7 +25,7 @@ Script N(Script_802407A8) = SCRIPT({
 });
 
 Script N(Main) = SCRIPT({
-    SI_SAVE_VAR(425) = 30;
+    WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -87,7 +87,7 @@ Script N(Script_8024097C) = SCRIPT({
 
 Script N(NpcAI_80240B50) = SCRIPT({
 1:
-    match SI_SAVE_VAR(0) {
+    match STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
 89:
             N(UnkPositionFunc)(0xFFFFFF8A, 86, 0xFFFFFFBA, 0xFFFFFFF1);
@@ -127,7 +127,7 @@ Script N(NpcAI_80240B50) = SCRIPT({
             sleep 30;
             SpeakToPlayer(0, 0x9D0008, 0x9D0001, 0, 0xB00A8);
             func_80240000_8C7F90(0, 5);
-            SI_SAVE_VAR(0) = STORY_CH0_GOOMPA_JOINED_PARTY;
+            STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, 0xFFFFFF24, 20, 0xFFFFFFB8);
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
             SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -186,7 +186,7 @@ Script N(Init_802411A8) = SCRIPT({
     BindNpcIdle(-1, N(NpcAI_80240B50));
     BindNpcAux(-1, N(Script_8024097C));
     BindNpcHit(-1, N(Hit_80240F64));
-    match SI_SAVE_VAR(0) {
+    match STORY_PROGRESS {
         >= 0xFFFFFF87 {
             SetNpcFlagBits(-1, 512, 0);
             SetNpcFlagBits(-1, 8, 1);
@@ -222,7 +222,7 @@ s32 N(padding2)[] = {0, 0};
 
 Script N(Script_80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
-    SI_SAVE_VAR(0) = STORY_CH0_LEFT_THE_PLAYGROUND;
+    STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
 Script N(Script_802414A8) = SCRIPT({
@@ -238,7 +238,7 @@ Script N(Script_802414C8) = SCRIPT({
 });
 
 Script N(MakeEntities) = SCRIPT({
-    if (SI_SAVE_VAR(0) < STORY_CH0_LEFT_THE_PLAYGROUND) {
+    if (STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, 0x80000000);
         AssignScript(N(Script_80241470));
     } else {

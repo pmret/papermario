@@ -11,7 +11,7 @@ Script N(BindExits) = SCRIPT({
 });
 
 Script N(Main) = SCRIPT({
-    SI_SAVE_VAR(425) = 34;
+    WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
