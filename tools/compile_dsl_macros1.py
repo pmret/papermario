@@ -298,6 +298,7 @@ class Compile(Transformer):
         return super().transform(tree)
 
     def c_identifier(self, tree):
+        eprint(tree.children[0])
         if "_" in tree.children[0] and tree.children[0].isupper():
             return f"{tree.children[0]}"
         return f"(Bytecode)(&{tree.children[0]})"
@@ -668,14 +669,14 @@ def compile_script(s):
 
     return commands
 
-def read_until_closing_paren(f, depth=1, lex_strings=False):
+def read_until_closing_paren(depth=1, lex_strings=False):
     text = ""
 
     in_string = False
     string_escape = False
 
     while True:
-        char = f.read(1)
+        char = stdin.read(1)
 
         if len(char) == 0:
             # EOF
@@ -698,11 +699,11 @@ def read_until_closing_paren(f, depth=1, lex_strings=False):
 
     return text
 
-def read_line(f):
+def read_line():
     line = ""
 
     while True:
-        char = f.read(1)
+        char = stdin.read(1)
 
         if len(char) == 0:
             # EOF
@@ -734,21 +735,9 @@ def gen_line_map(source, source_line_no = 1):
     return output, line_map
 
 # Expects output from C preprocessor on argv
-SINGLE_FILE = False
-import sys
-
 if __name__ == "__main__":
     if DEBUG_OUTPUT is not None:
         DEBUG_OUTPUT = open(DEBUG_OUTPUT, "w")
-        '''
-        while char := stdin.read(1):
-            DEBUG_OUTPUT.write(char)
-        exit()
-        '''
-
-    in_file = stdin
-    if SINGLE_FILE:
-        in_file = open(sys.argv[1], "r")
 
     line_no = 1
     char_no = 1
@@ -758,7 +747,7 @@ if __name__ == "__main__":
     macro_name = "" # captures recent UPPER_CASE identifier
     prev_char = ""
     while not error:
-        char = in_file.read(1)
+        char = stdin.read(1)
 
         if len(char) == 0:
             # EOF
@@ -767,7 +756,7 @@ if __name__ == "__main__":
 
         if char == "#" and (prev_char == "\n" or prev_char == ""):
             # cpp line/file marker
-            line = read_line(in_file)
+            line = read_line()
             line_split = line[1:].split(" ")
 
             line_no = int(line_split[0])
@@ -775,15 +764,11 @@ if __name__ == "__main__":
 
             write("#" + line + "\n")
         elif char == "(":
-            if SINGLE_FILE:
-                filename = sys.argv[1]
-            else:
-                filename = file_info[0][1:-1]
+            filename = file_info[0][1:-1]
 
             # SCRIPT(...)
             if macro_name == "SCRIPT":
-                read_data = read_until_closing_paren(in_file, lex_strings=True)
-                script_source, line_map = gen_line_map(read_data, source_line_no=line_no)
+                script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
 
                 try:
                     commands = compile_script(script_source)

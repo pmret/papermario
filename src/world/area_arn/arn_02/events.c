@@ -24,7 +24,7 @@ Script N(Main) = SCRIPT({
     sleep 1;
 });
 
-s32 N(padding2)[] = { 0, 0, 0 };
+s32 N(padding)[] = { 0, 0, 0 };
 
 Script N(MakeEntities) = SCRIPT({
     MakeItemEntity(ITEM_DIZZY_DIAL, 0xFFFFFF08, 193, 45, 17, SI_SAVE_FLAG(1005));
@@ -88,7 +88,7 @@ NpcAISettings N(cleftAISettings) = {
 };
 
 Script N(CleftAI) = SCRIPT({
-    func_80240C90_BDDE40(N(cleftAISettings), 8);
+    N(func_80240C90_BDDE40)(N(cleftAISettings), 8);
 });
 
 NpcSettings N(cleftNpcSettings) = {
@@ -230,7 +230,7 @@ NpcGroupList N(npcGroupList) = {
 
 // gCameras loading after the offset calculation instead of before
 #ifdef NON_MATCHING 
-s32 func_80240000_BDD1B0(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+s32 N(func_80240000_BDD1B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -261,12 +261,12 @@ s32 func_80240000_BDD1B0(ScriptInstance *script, NpcAISettings *aiSettings, Enem
     return phi_s0;
 }
 #else
-INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240000_BDD1B0, ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape);
+INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", arn_02_func_80240000_BDD1B0, ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape);
 #endif
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 
-void func_802401D4_BDD384(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_802401D4_BDD384)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -291,7 +291,7 @@ void func_802401D4_BDD384(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkNpcAIFunc22.inc.c"
 
-void func_802404D0_BDD680(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_802404D0_BDD680)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -319,7 +319,7 @@ void func_802404D0_BDD680(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
-void func_80240694_BDD844(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240694_BDD844)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
@@ -346,7 +346,7 @@ void func_80240694_BDD844(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     }
 }
 
-void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240834_BDD9E4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -356,10 +356,10 @@ void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->shape, 
-            enemy->territory->pointX, enemy->territory->pointZ, 
-            npc->pos.x, npc->pos.z, enemy->territory->sizeX, 
-            enemy->territory->sizeZ)) {
+    if (is_point_within_region(enemy->territory->wander.unk_30, 
+            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
+            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
+            enemy->territory->wander.detectSizeZ)) {
         phi_s1 = 1;
     }
 
@@ -382,23 +382,23 @@ void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     }
 }
 
-void func_80240984_BDDB34(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240984_BDDB34)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[1];
-        if (enemy->territory->unk_14 < 0) {
+        if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {
-            npc->moveSpeed = enemy->territory->unk_14 / 32767.0;
+            npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
         }
         script->functionTemp[0].s = 0x29;
     }
 }
 
-void func_80240A30_BDDBE0(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240A30_BDDBE0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
@@ -406,11 +406,11 @@ void func_80240A30_BDDBE0(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
         script->functionTemp[0].s = 12;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z) <= npc->moveSpeed) {
+    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->functionTemp[0].s = 50;
     } else if (npc->unk_8C == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
@@ -421,7 +421,7 @@ void func_80240A30_BDDBE0(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
+s32 N(func_80240C90_BDDE40)(ScriptInstance *script, NpcAISettings *aiSettings) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -433,11 +433,11 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
     enemy->varTable[10] = get_variable(script, *args++);
 
     shape.unk_00 = 0;
-    shape.shape = enemy->territory->shape;
-    shape.pointX = enemy->territory->pointX;
-    shape.pointZ = enemy->territory->pointZ;
-    shape.sizeX = enemy->territory->sizeX;
-    shape.sizeZ = enemy->territory->sizeZ;
+    shape.shape = enemy->territory->wander.unk_30;
+    shape.pointX = enemy->territory->wander.detect.x;
+    shape.pointZ = enemy->territory->wander.detect.z;
+    shape.sizeX = enemy->territory->wander.detectSizeX;
+    shape.sizeZ = enemy->territory->wander.detectSizeZ;
     shape.unk_34 = 40.0f;
     shape.unk_1C = 0;
 
@@ -445,7 +445,7 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
         script->functionTemp[0].s = NULL;
         npc->duration = 0;
         npc->flags &= ~0x800;
-        if (enemy->territory->unk_34 == 0) {
+        if (!enemy->territory->wander.isFlying) {
             npc->flags |= 0x200;
             npc->flags &= ~0x8;
             
@@ -462,7 +462,7 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
         enemy->unk_B0 &= ~4;
     }
 
-    if ((u32)script->functionTemp[0].s - 12 < 3 && func_80240000_BDD1B0(script, npcAI, shapePtr)) {
+    if ((u32)script->functionTemp[0].s - 12 < 3 && N(func_80240000_BDD1B0)(script, npcAI, shapePtr)) {
         script->functionTemp[0].s = 20;
     }
 
@@ -470,7 +470,7 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
         case 0:
             N(UnkNpcAIFunc18)(script, npcAI, shapePtr);
         case 1:
-            func_802401D4_BDD384(script, npcAI, shapePtr);
+            N(func_802401D4_BDD384)(script, npcAI, shapePtr);
             if (script->functionTemp[0].s != 2) {
                 return 0;
             }
@@ -487,7 +487,7 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
         case 4:
             N(UnkNpcAIFunc22)(script, npcAI, shapePtr);
         case 5:
-            func_802404D0_BDD680(script, npcAI, shapePtr);
+            N(func_802404D0_BDD680)(script, npcAI, shapePtr);
             return 0;
         case 12:
             func_80049F7C(script, npcAI, shapePtr);
@@ -508,18 +508,18 @@ s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
         case 20:
             N(UnkNpcAIFunc16)(script, npcAI, shapePtr);
         case 21:
-            func_80240694_BDD844(script, npcAI, shapePtr);
+            N(func_80240694_BDD844)(script, npcAI, shapePtr);
             return 0;
         case 22:
-            func_80240834_BDD9E4(script, npcAI, shapePtr);
+            N(func_80240834_BDD9E4)(script, npcAI, shapePtr);
             return 0;
         case 40:
-            func_80240984_BDDB34(script, npcAI, shapePtr);
+            N(func_80240984_BDDB34)(script, npcAI, shapePtr);
             if (script->functionTemp[0].s != 41) {
                 return 0;
             }
         case 41:
-            func_80240A30_BDDBE0(script, npcAI, shapePtr);
+            N(func_80240A30_BDDBE0)(script, npcAI, shapePtr);
             return 0;
         case 50:
             N(UnkNpcAIFunc19)(script, npcAI, shapePtr);
