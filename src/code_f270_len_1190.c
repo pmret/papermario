@@ -122,7 +122,107 @@ void begin_state_logos(void) {
     (*gameStatus)->enableBackground = FALSE;
 }
 
-INCLUDE_ASM(s32, "code_f270_len_1190", step_logos);
+INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
+/*void state_step_logos(void) {
+    if (gGameStatusPtr->bSkipIntro) {
+        if (intro_logos_fade_out(0xA) != 0) {
+            set_curtain_scale(1.0f);
+            set_curtain_fade(0.0f);
+        }
+        set_game_mode(2);
+    } else {
+        switch (gGameStatusPtr->loadMenuState) {
+            GameStatus** gameStatus;
+            case 1:
+                gameStatus = &gGameStatusPtr;
+
+                if ((*gameStatus)->menuCounter == 0) {
+                    intro_logos_set_fade_color(208);
+                    (*gameStatus)->loadMenuState++;
+                    (*gameStatus)->menuCounter--;
+                }
+                break;
+            case 2:
+                if (intro_logos_fade_out(0xA) != 0) {
+                    gGameStatusPtr->loadMenuState++;
+                }
+                break;
+            case 3:
+                if (intro_logos_fade_in(0xA) != 0) {
+                    gameStatus = &gGameStatusPtr;
+                    (*gameStatus)->loadMenuState++;
+                    (*gameStatus)->menuCounter = 40;
+                }
+                break;
+            case 4:
+                gameStatus = &gGameStatusPtr;
+
+                if ((*gameStatus)->menuCounter == 0) {
+                    (*gameStatus)->loadMenuState++;
+                    intro_logos_set_fade_color(208);
+                    (*gameStatus)->menuCounter--;
+                }
+                break;
+            case 5:
+                if (intro_logos_fade_out(0xA) != 0) {
+                    gGameStatusPtr->loadMenuState++;
+                }
+                break;
+            default:
+            case 0:
+                if (intro_logos_fade_in(0xA) != 0) {
+                    gameStatus = &gGameStatusPtr;
+                    (*gameStatus)->loadMenuState++;
+                    (*gameStatus)->menuCounter = 30;
+                    break;
+                }
+                break;
+            case 7:
+                gameStatus = &gGameStatusPtr;
+                if ((*gameStatus)->menuCounter == 0) {
+                    (*gameStatus)->loadMenuState++;
+                    intro_logos_set_fade_color(208);
+                    (*gameStatus)->menuCounter = 30;
+                }
+                (*gameStatus)->menuCounter--;
+                break;
+            case 8:
+                if (gGameStatusPtr->menuCounter == 0) {
+                    gGameStatusPtr->loadMenuState++;
+                    set_curtain_scale_goal(1.0f);
+                    set_curtain_draw_callback(NULL);
+                    set_curtain_fade_goal(0.3f);
+                } else {
+                    gGameStatusPtr->menuCounter--;
+                }
+                break;
+            case 9:
+                if (intro_logos_fade_out(0xA) != 0) {
+                    gameStatus = &gGameStatusPtr;
+                    (*gameStatus)->menuCounter = 15;
+                    (*gameStatus)->loadMenuState++;
+                }
+                break;
+            case 10:
+                if (gGameStatusPtr->menuCounter == 0) {
+                    gGameStatusPtr->loadMenuState++;
+                } else {
+                    gGameStatusPtr->menuCounter--;
+                }
+                break;
+            case 11:
+                heap_free(D_800A0910);
+                *D_800A0910 = 0;
+                intro_logos_set_fade_alpha(255);
+                gGameStatusPtr->unk_A8 = 0;
+                set_game_mode(16);
+                break;
+        }
+        update_npcs();
+        update_cameras();
+        intro_logos_update_fade();
+    }
+}*/
 
 void func_80034388(void) {
     func_800343A4();

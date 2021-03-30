@@ -146,8 +146,10 @@ void mem_clear(s8* data, s32 numBytes);
 MenuIcon* create_icon(s32* iconIndex);
 void set_icon_render_pos(MenuIcon* iconIndex, s32 posX, s32 posY);
 
-void set_curtain_scale_goal(f32 scale);
-void set_curtain_fade(f32 scale);
+void intro_logos_set_fade_color(s16 color);
+void intro_logos_set_fade_alpha(s16 alpha);
+
+void set_game_mode(s16 idx);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
@@ -281,6 +283,22 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void func_80138D88(s32, s32, s32, s32, f32);
 s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
+
+
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
+
+void initialize_curtains(void);
+void update_curtains(void);
+// render_curtains
+void set_curtain_scale_goal(f32 scale);
+void set_curtain_scale(f32 scale);
+void set_curtain_draw_callback(UNK_FUN_PTR(callback));
+void set_curtain_fade_goal(f32 fade);
+void set_curtain_fade(f32 fade);
 
 // Dead functions:
 Npc* func_8003E4BC(NpcID npcId); // get_npc_safe

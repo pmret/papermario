@@ -8,7 +8,7 @@ glabel jtbl_80098290
 
 .section .text
 
-glabel step_logos
+glabel state_step_logos
 /* F4A4 800340A4 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* F4A8 800340A8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* F4AC 800340AC 27BDFFE8 */  addiu     $sp, $sp, -0x18

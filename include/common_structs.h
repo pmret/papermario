@@ -993,7 +993,7 @@ typedef struct GameStatus {
     /* 0x0AA */ s8 unk_AA;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
-    /* 0x0AD */ u8 menuCounter;
+    /* 0x0AD */ s8 menuCounter;
     /* 0x0AE */ s8 bSkipIntro;
     /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
