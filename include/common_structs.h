@@ -1572,40 +1572,44 @@ typedef struct AnimatedModelNode {
 } AnimatedModelNode; // size = 0x2C
 
 typedef struct EncounterStatus {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
-    /* 0x07 */ char unk_07;
-    /* 0x08 */ s8 unk_08;
-    /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
-    /* 0x0A */ char unk_0A;
-    /* 0x0B */ s8 merleeCoinBonus; /* triple coins when != 0 */
-    /* 0x0C */ u8 damageTaken; /* valid after battle */
-    /* 0x0D */ char unk_0D;
-    /* 0x0E */ s16 coinsEarned; /* valid after battle */
-    /* 0x10 */ char unk_10;
-    /* 0x11 */ u8 allowFleeing;
-    /* 0x12 */ s8 unk_12;
-    /* 0x13 */ u8 dropWhackaBump;
-    /* 0x14 */ s32 songID;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x1D */ s8 currentAreaIndex;
-    /* 0x1E */ u8 currentMapIndex;
-    /* 0x1F */ u8 currentEntryIndex;
-    /* 0x20 */ u8 mapID;
-    /* 0x21 */ char unk_21[3];
-    /* 0x24 */ s32* npcGroupList;
-    /* 0x28 */ struct Encounter* enounterList[24];
-    /* 0x88 */ struct Encounter* currentEncounter;
-    /* 0x8C */ struct Enemy* currentEnemy;
-    /* 0x90 */ s32 unk_90;
-    /* 0x94 */ s32 unk_94;
-    /* 0x98 */ s32 unk_98;
-    /* 0x9C */ char unk_9C[20];
-    /* 0xB0 */ s32 defeatFlags[60][12];
-} EncounterStatus; // size = 0xE0
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
+    /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x007 */ char unk_07;
+    /* 0x008 */ s8 unk_08;
+    /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x00A */ char unk_0A;
+    /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
+    /* 0x00C */ u8 damageTaken; /* valid after battle */
+    /* 0x00D */ char unk_0D;
+    /* 0x00E */ s16 coinsEarned; /* valid after battle */
+    /* 0x010 */ char unk_10;
+    /* 0x011 */ u8 allowFleeing;
+    /* 0x012 */ s8 unk_12;
+    /* 0x013 */ u8 dropWhackaBump;
+    /* 0x014 */ s32 songID;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
+    /* 0x01D */ s8 currentAreaIndex;
+    /* 0x01E */ u8 currentMapIndex;
+    /* 0x01F */ u8 currentEntryIndex;
+    /* 0x020 */ u8 mapID;
+    /* 0x021 */ s8 resetMapEncounterFlags;
+    /* 0x022 */ char unk_22[0x2];
+    /* 0x024 */ s32* npcGroupList;
+    /* 0x028 */ struct Encounter* enounterList[24];
+    /* 0x088 */ struct Encounter* currentEncounter;
+    /* 0x08C */ struct Enemy* currentEnemy;
+    /* 0x090 */ s32 fadeOutAmount;
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 fadeOutAccel;
+    /* 0x09C */ s32 battleStartCountdown;
+    /* 0x0A0 */ char unk_A0[16];
+    /* 0x0B0 */ s32 defeatFlags[60][12];
+    /* 0xFB0 */ s16 recentMaps[3];
+    /* 0xFB6 */ char unk_FB6[2];
+} EncounterStatus; // size = 0xFB6
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

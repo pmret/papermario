@@ -225,10 +225,10 @@ INCLUDE_ASM(s32, "code_1a1f0_len_5390", update_encounters_post_battle);
 
 s32 draw_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s32 ret = currentEncounter->unk_98;
+    s32 ret = currentEncounter->fadeOutAccel;
 
     if (ret != 0) {
-        set_transition_stencil_zoom_0(0, currentEncounter->unk_90);
+        set_transition_stencil_zoom_0(0, currentEncounter->fadeOutAmount);
         ret = set_transition_stencil_color(0, 0, 0, 0);
     }
 
