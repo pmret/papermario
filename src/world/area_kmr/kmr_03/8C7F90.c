@@ -7,12 +7,12 @@ Script N(Main);
 ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = &gPlayerData;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     PartnerID partnerID = get_variable(script, *args++);
     Npc* npc = get_npc_safe(npcID);
 
     if (isInitialCall) {
-        if (gPlayerData.currentPartner == PartnerID_NONE) {
+        if (gPlayerData.currentPartner == PARTNER_NONE) {
             script->functionTemp[0].s = 2;
         } else {
             script->functionTemp[0].s = 0;
@@ -39,7 +39,7 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
             script->functionTemp[0].s = 3;
             break;
         case 3:
-            set_npc_yaw(get_npc_safe(NpcId_PARTNER), npc->yaw);
+            set_npc_yaw(get_npc_safe(NPC_PARTNER), npc->yaw);
             npc->flags &= ~4;
             disable_npc_shadow(npc);
             npc->pos.y = -1000.0f;

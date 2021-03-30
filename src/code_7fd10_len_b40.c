@@ -4,7 +4,7 @@ void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (D_8010EBB0.unk_00 != 0 && D_8010EBB0.unk_03 == 9) {
-        Npc* partner = get_npc_unsafe(NpcId_PARTNER);
+        Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->unk_0E, 0);
         func_8003D624(partner, 7, playerStatus->unk_0E, 0, 0, 0, 0);
@@ -22,7 +22,7 @@ s32 func_800E6904(void) {
     if (!(playerStatus->animFlags & 0x100000)) {
         if (temp_8010EBB0->unk_00 == 0) {
             if (!(playerStatus->flags & 0x1000)) {
-                if (actionState == ActionState_IDLE || actionState == ActionState_WALK || actionState == ActionState_RUN) {
+                if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
                     return 1;
                 }
             }
@@ -30,11 +30,11 @@ s32 func_800E6904(void) {
             if (temp_8010EBB0->unk_03 == 6) {
                 return 1;
             } else if (temp_8010EBB0->unk_03 == 9) {
-                if (actionState == ActionState_RIDE) {
+                if (actionState == ACTION_STATE_RIDE) {
                     return 1;
                 }
             } else if (temp_8010EBB0->unk_03 == 8) {
-                if (actionState != ActionState_RIDE) {
+                if (actionState != ACTION_STATE_RIDE) {
                     sfx_play_sound(0x21D);
                 } else {
                     return 1;
@@ -66,7 +66,7 @@ void check_input_status_menu(void) {
     s32 pressedButtons;
 
     if (get_variable(NULL, SI_SAVE_VAR(0)) < STORY_EPILOGUE) {
-        if (playerStatus->actionState != ActionState_RIDE) {
+        if (playerStatus->actionState != ACTION_STATE_RIDE) {
             pressedButtons = playerStatus->pressedButtons;
         } else {
             pressedButtons = gGameStatusPtr->pressedButtons;

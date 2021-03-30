@@ -219,9 +219,9 @@ void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
 
-Npc* get_npc_safe(NpcId npcId);
-Npc* get_npc_unsafe(NpcId npcId);
-Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr);
+Npc* get_npc_safe(NpcID npcId);
+Npc* get_npc_unsafe(NpcID npcId);
+Npc* resolve_npc(ScriptInstance* script, NpcID npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 void disable_npc_blur(Npc* npc);
@@ -246,8 +246,8 @@ void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
 
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 
-void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationId decorationType);
-void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationId decorationType);
+void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType);
+void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType);
 void remove_part_decoration(ActorPart* part, s32 decorationIndex);
 void remove_actor_decoration(Actor* actor, s32 decorationIndex);
 
@@ -283,8 +283,8 @@ s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 // Dead functions:
-Npc* func_8003E4BC(NpcId npcId); // get_npc_safe
-Npc* func_8003E534(NpcId npcId); // get_npc_safe
+Npc* func_8003E4BC(NpcID npcId); // get_npc_safe
+Npc* func_8003E534(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 
 void dead_func_8006FEF0(s32, f32, f32, f32, f32);

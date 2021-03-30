@@ -93,7 +93,7 @@ typedef struct NpcSettings {
 } NpcSettings; // size = 0x2C
 
 typedef struct ItemDrop {
-    /* 0x00 */ ItemId item;
+    /* 0x00 */ ItemID item;
     /* 0x02 */ s16 weight;
     /* 0x04 */ s16 unk_08;
 } ItemDrop; // size = 0x06
@@ -173,7 +173,7 @@ typedef struct StatDrop {
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
 typedef struct StaticNpc {
-    /* 0x000 */ NpcId id;
+    /* 0x000 */ NpcID id;
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
@@ -275,7 +275,7 @@ typedef struct {
 
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
 
-Enemy* get_enemy(NpcId npcId);
+Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);
 
 s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);

@@ -18,7 +18,6 @@ extern GameStatus gGameStatus;
 extern GameStatus* gGameStatusPtr;
 extern s32 gRandSeed;
 extern StaticItem gItemTable[364];
-extern s16 gMainGameState; /* 0 = battle, 1 = pause, 2 = world */
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
@@ -177,7 +176,7 @@ extern u8 gPauseMenuPageScrollInterpEasingLUT[16];
 // Badges
 extern s32 gBadgeMenuCurrentScrollPos;
 extern s32 gBadgeMenuTargetScrollPos;
-extern ItemId gBadgeMenuItemIDs[128];
+extern ItemID gBadgeMenuItemIDs[128];
 extern s32 gBadgeMenuCurrentPage;
 extern PauseItemPage gBadgeMenuPages[20];
 extern s32 gBadgeMenuSelectedIndex;

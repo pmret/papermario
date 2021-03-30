@@ -12,7 +12,7 @@ void dispatch_event_partner(s8 lastEventType) {
     script = start_script(partnerActor->onHitCode, 10, 0x20);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
-    script->owner1.actorID = ActorID_PARTNER;
+    script->owner1.actorID = ACTOR_PARTNER;
 
     if (partnerActor->takeTurnScript != NULL) {
         kill_script_by_ID(partnerActor->takeTurnID);
@@ -35,7 +35,7 @@ void dispatch_event_partner_continue_turn(s8 lastEventType) {
     script = start_script(partnerActor->onHitCode, 10, 0x20);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
-    script->owner1.actorID = ActorID_PARTNER;
+    script->owner1.actorID = ACTOR_PARTNER;
 
     if (onHitScript != NULL) {
         kill_script_by_ID(onHitID);
@@ -96,7 +96,7 @@ ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     s32 outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
 
@@ -117,7 +117,7 @@ ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
     ActorID actorID = get_variable(script, *args++);
     Bytecode* outVar;
 
-    if (actorID == ActorID_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
 

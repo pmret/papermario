@@ -112,22 +112,22 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ItemId_EGG_MISSILE;
+    SI_VAR(10) = c ITEM_EGG_MISSILE;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(SoundId_THROW);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
+    PlaySound(SOUND_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 20;
     SI_VAR(1) += 42;
     SI_VAR(2) += 5;
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     InitTargetIterator();
-    SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ACTOR_SELF);
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         SI_VAR(0) = 0;
         loop 18 {
@@ -140,7 +140,7 @@ Script N(main) = SCRIPT({
     SI_VAR(2) += 5;
     func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
     func_802D3624(SI_VAR(10));
-    PlaySound(SoundId_2010);
+    PlaySound(SOUND_UNKNOWN_2010);
     N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         StartRumble(5);
@@ -149,7 +149,7 @@ Script N(main) = SCRIPT({
         ShakeCam(1, 0, 4, 1.2001953125);
         ShakeCam(1, 0, 2, 0.4501953125);
     }
-    GetItemPower(ItemId_EGG_MISSILE, SI_VAR(0), SI_VAR(1));
+    GetItemPower(ITEM_EGG_MISSILE, SI_VAR(0), SI_VAR(1));
     ItemDamageEnemy(SI_VAR(0), 0x18000202, 0, SI_VAR(0), 32);
     await N(PlayerGoHome);
 });

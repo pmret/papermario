@@ -53,7 +53,7 @@ void update_player(void) {
                 Npc* partner;
 
                 playerStatus->animFlags |= 0x20000004;
-                partner = get_npc_unsafe(NpcId_PARTNER);
+                partner = get_npc_unsafe(NPC_PARTNER);
                 partner->pos.x = playerStatus->lastGoodPosition.x;
                 partner->pos.y = playerStatus->lastGoodPosition.y + playerStatus->colliderHeight;
                 partner->pos.z = playerStatus->lastGoodPosition.z;
@@ -78,7 +78,7 @@ void update_player(void) {
         if (func_800E0208() == 0) {
             collision_main_lateral();
         }
-    } else if (playerStatus->actionState != ActionState_HIT_LAVA) {
+    } else if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
         func_800DFAAC();
     } else {
         func_800DFBE8();
@@ -145,7 +145,7 @@ void func_800DFAAC(void) {
 
     check_input_midair_jump();
 
-    if (playerStatus->actionState != ActionState_SLIDING) {
+    if (playerStatus->actionState != ACTION_STATE_SLIDING) {
         collision_main_lateral();
         func_800E4508();
 
@@ -153,8 +153,8 @@ void func_800DFAAC(void) {
             func_800E4F10();
         }
 
-        if ((playerStatus->actionState != ActionState_ENEMY_FIRST_STRIKE)
-            && (playerStatus->actionState != ActionState_STEP_UP)) {
+        if ((playerStatus->actionState != ACTION_STATE_ENEMY_FIRST_STRIKE)
+            && (playerStatus->actionState != ACTION_STATE_STEP_UP)) {
             func_800E4744();
         }
     }
@@ -311,7 +311,7 @@ s32 func_800E0208(void) {
 
     if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons & 0x10)) {
         if (D_8010EBB0.unk_00 == 0) {
-            set_action_state(ActionState_IDLE);
+            set_action_state(ACTION_STATE_IDLE);
         }
         ret = 1;
     }

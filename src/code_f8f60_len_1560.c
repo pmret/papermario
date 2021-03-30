@@ -45,8 +45,8 @@ ApiStatus RandInt(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus GetAngleBetweenNPCs(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcId aID = get_variable(script, *ptrReadPos++);
-    NpcId bID = get_variable(script, *ptrReadPos++);
+    NpcID aID = get_variable(script, *ptrReadPos++);
+    NpcID bID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* a = resolve_npc(script, aID);
@@ -60,7 +60,7 @@ ApiStatus GetAngleToNPC(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);
@@ -73,7 +73,7 @@ ApiStatus GetAngleToPlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
 
     Npc* npc = resolve_npc(script, npcID);

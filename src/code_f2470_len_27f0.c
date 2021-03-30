@@ -1,8 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-Npc* resolve_npc(ScriptInstance* script, NpcId npcIdOrPtr) {
-    if (npcIdOrPtr == NpcId_SELF) {
+Npc* resolve_npc(ScriptInstance* script, NpcID npcIdOrPtr) {
+    if (npcIdOrPtr == NPC_SELF) {
         return get_npc_safe(script->owner2.npcID);
     } else if (npcIdOrPtr >= -270000000) {
         return get_npc_safe(npcIdOrPtr);
@@ -40,7 +40,7 @@ ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     Bytecode varNPC = *args++;
 
     set_variable(script, varNPC, (s32)get_npc_safe(npcID));
@@ -49,7 +49,7 @@ ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     f32 x = get_variable(script, *args++);
     f32 y = get_variable(script, *args++);
     f32 z = get_variable(script, *args++);
@@ -72,7 +72,7 @@ ApiStatus SetNpcPos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     f32 rotX = get_float_variable(script, *args++);
     f32 rotY = get_float_variable(script, *args++);
     f32 rotZ = get_float_variable(script, *args++);
@@ -90,7 +90,7 @@ ApiStatus SetNpcRotation(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     f32 var1 = get_float_variable(script, *args++);
     Npc* npc;
 
@@ -105,7 +105,7 @@ ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     f32 sizeX = get_float_variable(script, *ptrReadPos++);
     f32 sizeY = get_float_variable(script, *ptrReadPos++);
     f32 sizeZ = get_float_variable(script, *ptrReadPos++);
@@ -123,7 +123,7 @@ ApiStatus SetNpcScale(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 height = get_variable(script, *ptrReadPos++);
     s32 radius = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
@@ -139,7 +139,7 @@ ApiStatus SetNpcCollisionSize(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     f32 speed = get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -153,7 +153,7 @@ ApiStatus SetNpcSpeed(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     f32 jumpScale = get_float_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -167,7 +167,7 @@ ApiStatus SetNpcJumpscale(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 animation = get_variable(script, *ptrReadPos);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -181,7 +181,7 @@ ApiStatus SetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
@@ -195,7 +195,7 @@ ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     f32 animationSpeed = get_float_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -223,7 +223,7 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFlyTo, ScriptInstance* script, s32 is
 
 ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Bytecode outVar = *ptrReadPos++;
     Npc* npc = resolve_npc(script, npcID);
 
@@ -237,7 +237,7 @@ ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
@@ -256,7 +256,7 @@ INCLUDE_ASM(s32, "code_f2470_len_27f0", NpcFaceNpc, ScriptInstance* script, s32 
 
 ApiStatus SetNpcFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     s32 flagBits = *args++;
     s32 enable = get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcID);
@@ -276,7 +276,7 @@ ApiStatus SetNpcFlagBits(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus GetNpcPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *args++);
+    NpcID npcID = get_variable(script, *args++);
     s32 a1 = *args++;
     s32 a2 = *args++;
     s32 a3 = *args++;
@@ -294,7 +294,7 @@ ApiStatus GetNpcPos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CF1B4(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -308,7 +308,7 @@ ApiStatus func_802CF1B4(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcSprite(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -322,7 +322,7 @@ ApiStatus SetNpcSprite(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 enableShadow = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -340,7 +340,7 @@ ApiStatus EnableNpcShadow(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus EnableNpcBlur(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 enableBlur = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
@@ -358,7 +358,7 @@ ApiStatus EnableNpcBlur(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ClearPartnerMoveHistory(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 
     if (npc == NULL) {
@@ -457,7 +457,7 @@ ApiStatus PartnerIsFlying(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
     Bytecode var2 = get_variable(script, *args++);
     Bytecode var3 = get_variable(script, *args++);
@@ -475,7 +475,7 @@ ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode arg1 = *args;
     Npc* npc = resolve_npc(script, npcId);
 
@@ -489,7 +489,7 @@ ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
     Npc* npc = resolve_npc(script, npcId);
 
@@ -503,7 +503,7 @@ ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CFEEC(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
     Bytecode var2 = get_variable(script, *args++);
     Bytecode var3 = get_variable(script, *args++);
@@ -520,7 +520,7 @@ ApiStatus func_802CFEEC(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    NpcId npcId = get_variable(script, *args++);
+    NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
     Bytecode var2 = get_variable(script, *args++);
     Bytecode var3 = get_variable(script, *args++);
@@ -542,7 +542,7 @@ ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 value1 = get_variable(script, *ptrReadPos++);
     s32 value2 = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
@@ -557,7 +557,7 @@ ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     SoundID soundID = get_variable(script, *ptrReadPos++);
     s32 value2 = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
@@ -572,7 +572,7 @@ ApiStatus PlaySoundAtNpc(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D0244(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
-    NpcId npcID = get_variable(script, *ptrReadPos++);
+    NpcID npcID = get_variable(script, *ptrReadPos++);
     u8 renderMode = get_variable(script, *ptrReadPos++);
     Npc* npc = resolve_npc(script, npcID);
 

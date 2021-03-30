@@ -18,10 +18,10 @@ ApiStatus func_802A1518_79DDB8(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     PlayerData* playerData2 = &gPlayerData;
 
-    if (is_ability_active(Ability_DEEP_FOCUS)) {
+    if (is_ability_active(ABILITY_DEEP_FOCUS)) {
         playerData->specialBarsFilled += 128;
     }
-    if (is_ability_active(Ability_SUPER_FOCUS)) {
+    if (is_ability_active(ABILITY_SUPER_FOCUS)) {
         playerData->specialBarsFilled += 256;
     }
 

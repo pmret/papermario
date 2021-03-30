@@ -111,7 +111,7 @@ Script world_goombario_use_ability = SCRIPT({
     }
 
     if (SI_VAR(1) == 0) {
-        SpeakToPlayer(NpcId_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0,
+        SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0,
                       SI_VAR(0));
     }
 

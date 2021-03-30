@@ -36,18 +36,18 @@ s32 N(modelCommandList)[] = {
 };
 
 Script script = SCRIPT({
-    SI_VAR(10) = c ItemId_INSECTICIDE_HERB;
+    SI_VAR(10) = c ITEM_INSECTICIDE_HERB;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
-    SetAnimation(ActorID_PLAYER, 0, PlayerAnim_THROW);
-    PlaySound(SoundId_THROW);
+    SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
+    PlaySound(SOUND_THROW);
     sleep 3;
     func_802D3474(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
     func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
-    GetActorPos(ActorID_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(3) = 20;
     SI_VAR(4) = 42;
     SI_VAR(5) = 5;
@@ -57,8 +57,8 @@ Script script = SCRIPT({
     SI_VAR(2) += SI_VAR(5);
     func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     InitTargetIterator();
-    SetGoalToTarget(ActorID_SELF);
-    GetGoalPos(ActorID_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalToTarget(ACTOR_SELF);
+    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {
         SI_VAR(0) = 0;
         loop 18 {
@@ -83,14 +83,14 @@ Script script = SCRIPT({
         N(func_802A12E0_72AA30)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     }
     InitTargetIterator();
-    SetGoalToTarget(ActorID_SELF);
+    SetGoalToTarget(ACTOR_SELF);
     N(func_802A123C_72A98C)();
     func_802D3624(SI_VAR(10));
     if (SI_VAR(9) == 0) {
         ItemDamageEnemy(SI_VAR(0), 0, 0, 0, 32);
     } else {
         InitTargetIterator();
-        SetGoalToTarget(ActorID_SELF);
+        SetGoalToTarget(ACTOR_SELF);
         N(func_802A1280_72A9D0)();
     }
     await N(PlayerGoHome);

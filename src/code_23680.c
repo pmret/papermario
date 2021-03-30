@@ -37,7 +37,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt = 0;
     }
 
-    if (is_ability_active(Ability_PAY_OFF)) {
+    if (is_ability_active(ABILITY_PAY_OFF)) {
         amt += currentEncounter->damageTaken / 2;
     }
 
@@ -45,7 +45,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt *= 3;
     }
 
-    if (is_ability_active(Ability_MONEY_MONEY)) {
+    if (is_ability_active(ABILITY_MONEY_MONEY)) {
         amt *= 2;
     }
 

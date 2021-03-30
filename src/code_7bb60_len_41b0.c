@@ -19,16 +19,16 @@ s32 func_800E26C4(void) {
     s32 actionState = playerStatus->actionState;
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
-    if (actionState == ActionState_IDLE ||
-        actionState == ActionState_WALK ||
-        actionState == ActionState_RUN ||
-        actionState == ActionState_USE_TWEESTER ||
-        actionState == ActionState_SPIN) {
+    if (actionState == ACTION_STATE_IDLE ||
+        actionState == ACTION_STATE_WALK ||
+        actionState == ACTION_STATE_RUN ||
+        actionState == ACTION_STATE_USE_TWEESTER ||
+        actionState == ACTION_STATE_SPIN) {
         return 1;
     }
 
-    if (actionState == ActionState_RIDE) {
-        if (playerData->currentPartner == PartnerID_LAKILESTER || playerData->currentPartner == PartnerID_BOW) {
+    if (actionState == ACTION_STATE_RIDE) {
+        if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
             if (temp_8010EBB0->unk_00 != 0) {
                 return 1;
             } else {
@@ -59,7 +59,7 @@ void move_player(s32 duration, f32 heading, f32 speed) {
     playerStatus->currentSpeed = speed;
 
     if (!(playerStatus->animFlags & 0x400000)) {
-        set_action_state(speed > playerStatus->walkSpeed ? ActionState_RUN : ActionState_WALK);
+        set_action_state(speed > playerStatus->walkSpeed ? ACTION_STATE_RUN : ACTION_STATE_WALK);
     }
 }
 
@@ -97,7 +97,7 @@ void gravity_use_fall_params(void) {
 void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->actionState != ActionState_7 && playerStatus->actionState != ActionState_BOUNCE) {
+    if (playerStatus->actionState != ACTION_STATE_7 && playerStatus->actionState != ACTION_STATE_BOUNCE) {
         f32* temp;
 
         playerStatus->position.y = func_800E3514(func_800E34D8(), &temp);
@@ -245,8 +245,8 @@ void func_800E4F10(void) {
     playerStatus->position.x = x;
     playerStatus->position.z = z;
 
-    if (tempB != 0 && temp < 0 && playerStatus->actionState != ActionState_18 && playerStatus->currentSpeed != 0.0f) {
-        set_action_state(ActionState_18);
+    if (tempB != 0 && temp < 0 && playerStatus->actionState != ACTION_STATE_18 && playerStatus->currentSpeed != 0.0f) {
+        set_action_state(ACTION_STATE_18);
     }
 }
 
@@ -260,11 +260,11 @@ void check_input_midair_jump(void) {
             case 0:
                 break;
             case 1:
-                set_action_state(ActionState_SPIN_JUMP);
+                set_action_state(ACTION_STATE_SPIN_JUMP);
                 gPlayerStatus.flags |= 8;
                 break;
             case 2:
-                set_action_state(ActionState_ULTRA_JUMP);
+                set_action_state(ACTION_STATE_ULTRA_JUMP);
                 gPlayerStatus.flags |= 8;
                 break;
         }
@@ -286,8 +286,8 @@ void func_800E5098(s32 arg0) {
             soundID = 0x143;
             soundID2 = 0x144;
         } else {
-            soundID = SoundId_STEP1;
-            soundID2 = SoundId_STEP2;
+            soundID = SOUND_STEP1;
+            soundID2 = SOUND_STEP2;
         }
 
         temp_800F7B80 = &D_800F7B80;
@@ -358,7 +358,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->animFlags & 0x4000) {
-        if (actionState < ActionState_CONVERSATION) {
+        if (actionState < ACTION_STATE_CONVERSATION) {
             if (actionState >= 0) {
                 playerStatus->prevActionState = playerStatus->actionState;
                 playerStatus->actionState = actionState;
@@ -368,17 +368,17 @@ void set_action_state(s32 actionState) {
         return;
     }
 
-    if (actionState == ActionState_HIT_HAZARD || actionState == ActionState_HIT_LAVA) {
+    if (actionState == ACTION_STATE_HIT_HAZARD || actionState == ACTION_STATE_HIT_LAVA) {
         PartnerID partner;
 
         if (playerStatus->unk_BF == 3) {
-            actionState = ActionState_HIT_HAZARD;
+            actionState = ACTION_STATE_HIT_HAZARD;
         }
 
         // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
         partner = playerData->currentPartner;
 
-        if (partner == PartnerID_SUSHIE || partner == PartnerID_LAKILESTER || partner == PartnerID_PARAKARRY) {
+        if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (D_8010EBB0.unk_00 != 0) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
@@ -387,24 +387,24 @@ void set_action_state(s32 actionState) {
         }
     }
 
-    if (actionState == ActionState_SLIDING) {
+    if (actionState == ACTION_STATE_SLIDING) {
         playerStatus->flags |= 0x10;
         playerStatus->moveFrames = 0;
         playerStatus->flags &= ~0x4000;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
-    if (actionState == ActionState_USE_TWEESTER) {
-        playerStatus->prevActionState = ActionState_IDLE;
+    if (actionState == ACTION_STATE_USE_TWEESTER) {
+        playerStatus->prevActionState = ACTION_STATE_IDLE;
     }
 
-    if (actionState == ActionState_ENEMY_FIRST_STRIKE) {
+    if (actionState == ACTION_STATE_ENEMY_FIRST_STRIKE) {
         playerStatus->animFlags |= 4;
     }
     playerStatus->actionState = actionState;
     playerStatus->flags |= 0x80000000;
 
-    if (playerStatus->actionState == ActionState_SPIN) {
+    if (playerStatus->actionState == ACTION_STATE_SPIN) {
         return;
     }
 
@@ -425,14 +425,14 @@ void update_locomotion_state(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     do { } while (0); // required to match
 
-    set_action_state((!is_ability_active(Ability_SLOW_GO)
-                      && (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)) ? ActionState_RUN : ActionState_WALK);
+    set_action_state((!is_ability_active(ABILITY_SLOW_GO)
+                      && (SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1]) >= 0xBD2)) ? ACTION_STATE_RUN : ACTION_STATE_WALK);
 }
 
 void start_falling(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    set_action_state(ActionState_FALLING);
+    set_action_state(ACTION_STATE_FALLING);
     playerStatus->gravityIntegrator[0] = 0.1143f;
     playerStatus->gravityIntegrator[1] = -0.2871f;
     playerStatus->gravityIntegrator[2] = -0.1823f;
@@ -442,7 +442,7 @@ void start_falling(void) {
 void start_bounce_a(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    set_action_state(ActionState_BOUNCE);
+    set_action_state(ACTION_STATE_BOUNCE);
     playerStatus->gravityIntegrator[0] = 10.0f;
     playerStatus->gravityIntegrator[1] = -2.0f;
     playerStatus->gravityIntegrator[2] = 0.8f;
@@ -452,7 +452,7 @@ void start_bounce_a(void) {
 void start_bounce_b(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    set_action_state(ActionState_BOUNCE);
+    set_action_state(ACTION_STATE_BOUNCE);
     playerStatus->gravityIntegrator[0] = 8.0f;
     playerStatus->gravityIntegrator[1] = -1.0f;
     playerStatus->gravityIntegrator[2] = 0;
@@ -464,11 +464,11 @@ s32 check_input_hammer(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (playerStatus->pressedButtons & Button_B) {
+    if (playerStatus->pressedButtons & BUTTON_B) {
         if (!(playerStatus->flags & 4)) {
-            if (D_8010EBB0.unk_00 != 1 || playerData->currentPartner != PartnerID_WATT) {
+            if (D_8010EBB0.unk_00 != 1 || playerData->currentPartner != PARTNER_WATT) {
                 if (playerData->hammerLevel != -1) {
-                    set_action_state(ActionState_HAMMER);
+                    set_action_state(ACTION_STATE_HAMMER);
                     return TRUE;
                 }
             }
@@ -488,7 +488,7 @@ void check_input_spin(void) {
     if (!(playerStatus->flags & 0x5000) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
-        !is_ability_active(Ability_SLOW_GO)) {
+        !is_ability_active(ABILITY_SLOW_GO)) {
 
         s32 actionState = playerStatus->actionState;
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
@@ -498,12 +498,12 @@ void check_input_spin(void) {
                 if (actionState < 3) {
                     if (actionState >= 0 && !(playerStatus->animFlags & 0x10000)) {
                         if (btnPressed || temp_8010F250->unk_01) {
-                            set_action_state(ActionState_SPIN);
+                            set_action_state(ACTION_STATE_SPIN);
                             if (temp_8010F250->unk_01 != 0) {
                                 if (temp_8010F250->unk_08 != 0 || temp_8010F250->unk_0C != 0) {
                                     playerStatus->prevActionState = temp2->unk_07;
                                 } else {
-                                    playerStatus->prevActionState = ActionState_IDLE;
+                                    playerStatus->prevActionState = ACTION_STATE_IDLE;
                                 }
                             }
                         }
@@ -532,7 +532,7 @@ void func_800E63A4(s32 arg0) {
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         free_npc_by_index(D_8010C96C);
-        set_action_state(ActionState_IDLE);
+        set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
     }
@@ -544,7 +544,7 @@ void func_800E6428(void) {
     s32 actionState = playerStatus->actionState;
     Npc* disguiseNpc;
 
-    if (actionState == ActionState_IDLE || actionState == ActionState_WALK || actionState == ActionState_RUN) {
+    if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
         s32* temp_8010C92C = &D_8010C92C;
 
         if (*temp_8010C92C != 0) {
