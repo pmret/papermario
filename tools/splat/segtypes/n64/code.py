@@ -1084,8 +1084,8 @@ class N64SegCode(N64Segment):
             func_rodata.sort(key=lambda s:s.vram_start)
 
             if len(func_rodata) > 0:
-                sub = self.get_subsection_for_ram(func_rodata[0].vram_start)
-                if sub and sub.type != "rodata":
+                rsub = self.get_subsection_for_ram(func_rodata[0].vram_start)
+                if rsub and rsub.type != "rodata":
                     out_lines.append(".section .rodata")
 
                     for sym in func_rodata:
