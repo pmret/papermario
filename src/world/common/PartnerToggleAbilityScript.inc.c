@@ -3,7 +3,7 @@
 #include "map.h"
 
 ApiStatus N(PartnerSuspendAbilityScript)(ScriptInstance* script, s32 isInitialCall) {
-    if (gPlayerData.currentPartner == PARTNER_NONE) {
+    if (gPlayerData.currentPartner == NO_PARTNER) {
         return ApiStatus_DONE2;
     }
     partner_suspend_ability_script();

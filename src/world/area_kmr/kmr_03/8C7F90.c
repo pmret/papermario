@@ -12,7 +12,7 @@ ApiStatus func_80240000_8C7F90(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(npcID);
 
     if (isInitialCall) {
-        if (gPlayerData.currentPartner == PARTNER_NONE) {
+        if (gPlayerData.currentPartner == NO_PARTNER) {
             script->functionTemp[0].s = 2;
         } else {
             script->functionTemp[0].s = 0;

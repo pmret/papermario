@@ -170,6 +170,7 @@ s32 find_item(s32 itemID) {
     return i;
 }
 
+/// Bubbles up player inventory items such that all NO_ITEM values are at the bottom.
 void sort_items(void) {
     PlayerData* playerData = &gPlayerData;
     s32 j;

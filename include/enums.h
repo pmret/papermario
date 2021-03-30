@@ -409,19 +409,19 @@ enum SongIDs {
 
 typedef UNK_TYPE Ability;
 enum Abilities {
-    ABILITY_DODGE_MASTER = 0,
+    ABILITY_DODGE_MASTER,
     ABILITY_UNUSED,
     ABILITY_SPIKE_SHIELD,
     ABILITY_FIRST_ATTACK,
-    ABILITY_H_P_PLUS,
+    ABILITY_HP_PLUS,
     ABILITY_DOUBLE_DIP,
     ABILITY_MYSTERY_SCROLL,
     ABILITY_FIRE_SHIELD,
     ABILITY_PRETTY_LUCKY,
-    ABILITY_H_P_DRAIN,
+    ABILITY_HP_DRAIN,
     ABILITY_ALL_OR_NOTHING,
     ABILITY_SLOW_GO,
-    ABILITY_F_P_PLUS,
+    ABILITY_FP_PLUS,
     ABILITY_ICE_POWER,
     ABILITY_FEELING_FINE,
     ABILITY_ATTACK_F_X,
@@ -445,7 +445,7 @@ enum Abilities {
     ABILITY_CLOSE_CALL,
     ABILITY_P_UP_D_DOWN,
     ABILITY_LUCKY_DAY,
-    ABILITY_MEGA_H_P_DRAIN,
+    ABILITY_MEGA_HP_DRAIN,
     ABILITY_P_DOWN_D_UP,
     ABILITY_FLOWER_FANATIC,
     ABILITY_SPEEDY_SPIN,
@@ -469,7 +469,7 @@ enum Abilities {
 
 typedef UNK_TYPE Emote;
 enum Emotes {
-    EMOTE_EXCLAMATION = 0,
+    EMOTE_EXCLAMATION,
     EMOTE_SHOCK,
     EMOTE_QUESTION,
     EMOTE_FRUSTRATION,
@@ -479,7 +479,7 @@ enum Emotes {
 
 typedef UNK_TYPE Easing;
 enum Easings {
-    EASING_LINEAR = 0,
+    EASING_LINEAR,
     EASING_QUADRATIC_IN,
     EASING_CUBIC_IN,
     EASING_QUARTIC_IN,
@@ -593,7 +593,7 @@ enum SoundIDs {
 
 typedef UNK_TYPE Cam;
 enum Cams {
-    CAM_DEFAULT = 0,
+    CAM_DEFAULT,
     CAM_BATTLE,
     CAM_TATTLE,
     CAM_CAM3,
@@ -827,7 +827,7 @@ enum ItemIDs {
     ITEM_POWER_BOUNCE,
     ITEM_SPIKE_SHIELD,
     ITEM_FIRST_ATTACK,
-    ITEM_H_P_PLUS_A,
+    ITEM_HP_PLUS_A,
     ITEM_QUAKE_HAMMER,
     ITEM_DOUBLE_DIP,
     ITEM_MYSTERY_SCROLL,
@@ -841,10 +841,10 @@ enum ItemIDs {
     ITEM_FEELING_FINE,
     ITEM_ATTACK_F_X_A,
     ITEM_ALLOR_NOTHING,
-    ITEM_H_P_DRAIN,
+    ITEM_HP_DRAIN,
     ITEM_JUMP_CHARGE0,
     ITEM_SLOW_GO,
-    ITEM_F_P_PLUS_A,
+    ITEM_FP_PLUS_A,
     ITEM_MEGA_RUSH,
     ITEM_ICE_POWER,
     ITEM_DEFEND_PLUS_A,
@@ -873,7 +873,7 @@ enum ItemIDs {
     ITEM_CLOSE_CALL,
     ITEM_P_UP_D_DOWN,
     ITEM_LUCKY_DAY,
-    ITEM_MEGA_H_P_DRAIN,
+    ITEM_MEGA_HP_DRAIN,
     ITEM_P_DOWN_D_UP,
     ITEM_POWER_QUAKE,
     ITEM_AUTO_MULTIBOUNCE,
@@ -904,8 +904,8 @@ enum ItemIDs {
     ITEM_EARTHQUAKE_JUMP,
     ITEM_DEEP_FOCUS2,
     ITEM_DEEP_FOCUS3,
-    ITEM_H_P_PLUS_B,
-    ITEM_F_P_PLUS_B,
+    ITEM_HP_PLUS_B,
+    ITEM_FP_PLUS_B,
     ITEM_HAPPY_HEART_B,
     ITEM_HAPPY_HEART_X,
     ITEM_FLOWER_SAVER_B,
@@ -926,12 +926,12 @@ enum ItemIDs {
     ITEM_ATTACK_F_X_E,
     ITEM_ATTACK_F_X_C,
     ITEM_ATTACK_F_X_F,
-    ITEM_H_P_PLUS_C,
-    ITEM_H_P_PLUS_X,
-    ITEM_H_P_PLUS_Y,
-    ITEM_F_P_PLUS_C,
-    ITEM_F_P_PLUS_X,
-    ITEM_F_P_PLUS_Y,
+    ITEM_HP_PLUS_C,
+    ITEM_HP_PLUS_X,
+    ITEM_HP_PLUS_Y,
+    ITEM_FP_PLUS_C,
+    ITEM_FP_PLUS_X,
+    ITEM_FP_PLUS_Y,
     ITEM_HEALTHY_HEALTHY,
     ITEM_ATTACK_F_X_F2,
     ITEM_ATTACK_F_X_F3,
@@ -1015,7 +1015,7 @@ enum PlayerAnims {
 
 typedef UNK_TYPE AmbientSound;
 enum AmbientSounds {
-    AMBIENT_SPOOKY      = 0,
+    AMBIENT_SPOOKY,
     AMBIENT_WIND,
     AMBIENT_BEACH,
     AMBIENT_JUNGLE,
@@ -1034,7 +1034,7 @@ enum AmbientSounds {
 
 typedef UNK_TYPE EncounterOutcome;
 enum EncounterOutcomes {
-    OUTCOME_PLAYER_WON  = 0,
+    OUTCOME_PLAYER_WON,
     OUTCOME_PLAYER_LOST,
     OUTCOME_PLAYER_FLED,
     OUTCOME_ENEMY_FLED,
@@ -1074,7 +1074,7 @@ enum Iters {
 
 typedef UNK_TYPE ActorSoundID;
 enum ActorSoundIDs {
-    ACTOR_SOUND_WALK            = 0,
+    ACTOR_SOUND_WALK,
     ACTOR_SOUND_FLY,
     ACTOR_SOUND_JUMP,
     ACTOR_SOUND_HURT,
@@ -1084,7 +1084,7 @@ enum ActorSoundIDs {
 
 typedef UNK_TYPE Phase;
 enum Phases {
-    PHASE_EXECUTE_ACTION        = 0,
+    PHASE_EXECUTE_ACTION,
     PHASE_FIRST_STRIKE,
     PHASE_RUN_AWAY_START        = 3,
     PHASE_RUN_AWAY_RESET,
@@ -1134,7 +1134,7 @@ enum ActorIDs {
 
 typedef UNK_TYPE Element;
 enum Elements {
-    ELEMENT_END         = 0,
+    ELEMENT_END,
     ELEMENT_NORMAL,
     ELEMENT_FIRE,
     ELEMENT_WATER,
@@ -1191,7 +1191,7 @@ enum Events {
 
 typedef UNK_TYPE HitSound;
 enum HitSounds {
-    HIT_SOUND_MISS      = 0,
+    HIT_SOUND_MISS,
     HIT_SOUND_BONES,
     HIT_SOUND_NORMAL,
     HIT_SOUND_FIRE,
@@ -1201,7 +1201,7 @@ enum HitSounds {
 
 typedef s8 Status;
 enum Statuses {
-    STATUS_END                  = 0,
+    STATUS_END,
     STATUS_NORMAL,
     STATUS_DEFAULT,
     STATUS_FEAR,
@@ -1242,7 +1242,7 @@ enum DoorSwings {
 
 typedef UNK_TYPE ItemSpawnMode;
 enum ItemSpawnModes {
-    ITEM_SPAWN_MODE_UNKNOWN_0                           = 0,
+    ITEM_SPAWN_MODE_UNKNOWN_0,
     ITEM_SPAWN_MODE_DECORATION,
     ITEM_SPAWN_MODE_UNKNOWN_2,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS,
@@ -1314,7 +1314,7 @@ enum Locations {
 
 typedef UNK_TYPE DoorSound;
 enum DoorSounds {
-    DOOR_SOUND_BASIC            = 0,
+    DOOR_SOUND_BASIC,
     DOOR_SOUND_METAL,
     DOOR_SOUND_LARGE,
     DOOR_SOUND_CREAKY,
@@ -1325,7 +1325,7 @@ enum DoorSounds {
 
 typedef s8 ActionState;
 enum ActionStates {
-    ACTION_STATE_IDLE                   = 0,
+    ACTION_STATE_IDLE,
     ACTION_STATE_WALK,
     ACTION_STATE_RUN,
     ACTION_STATE_JUMP,
@@ -1337,7 +1337,9 @@ enum ActionStates {
     ACTION_STATE_STEP_DOWN,
     ACTION_STATE_LAND,
     ACTION_STATE_STEP_DOWN_LAND,
-    ACTION_STATE_CONVERSATION,              // This and following states prohibit normal movement.
+
+    // Following action states prohibit movement:
+    ACTION_STATE_CONVERSATION,
     ACTION_STATE_SPIN_JUMP,
     ACTION_STATE_GROUND_POUND,
     ACTION_STATE_ULTRA_JUMP,
@@ -1445,7 +1447,7 @@ enum DamageTypes {
     DAMAGE_TYPE_JUMP            = 0x80,
     DAMAGE_TYPE_COSMIC          = 0x100,
     DAMAGE_TYPE_BLAST           = 0x200,
-    DAMAGE_TYPE_P_O_W           = 0x400,
+    DAMAGE_TYPE_POW             = 0x400,
     DAMAGE_TYPE_QUAKE           = 0x800,
     DAMAGE_TYPE_THROW           = 0x40000,
     DAMAGE_TYPE_IGNORE_DEFENSE  = 0x8000000,
@@ -1456,7 +1458,7 @@ enum DamageTypes {
 
 typedef s8 PartnerID;
 enum PartnerIDs {
-    PARTNER_NONE        = 0,
+    NO_PARTNER,
     PARTNER_GOOMBARIO,
     PARTNER_KOOPER,
     PARTNER_BOMBETTE,
@@ -1472,7 +1474,7 @@ enum PartnerIDs {
 
 /// @see gAreas
 enum Areas {
-    AREA_KMR    = 0,
+    AREA_KMR,
     AREA_MAC,
     AREA_TIK,
     AREA_KGR,
