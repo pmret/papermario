@@ -247,7 +247,7 @@ segments:
     - [0x541B0, .data, code_30450]
     - [0x54250, .data, code_31650]
     - [0x542E0, data]
-    - [0x6B450, .data, world/world]
+    - [0x6B360, .data, world/world]
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]

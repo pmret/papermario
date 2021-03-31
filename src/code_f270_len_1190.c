@@ -34,18 +34,6 @@ NUPiOverlaySegment D_8007795C = {
     .bssEnd = 0x80278640
 };
 
-extern s32 D_800A0914;
-extern s32 D_800A0918;
-extern s32 D_800A091C;
-extern s8 D_800A0920;
-extern s32 D_800A0924;
-extern s8 D_800A0921;
-extern s16 D_800A0922;
-extern s32 D_800D9230;
-extern s32 D_80210000;
-extern s8 D_802D9D70;
-extern s8 D_802D9D71;
-
 void appendGfx_intro_logos();
 
 

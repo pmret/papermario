@@ -155,7 +155,7 @@ class Subsegment():
             sub_class = LinkerSubsegment
         else:
             sub_class = Subsegment
-        
+
         return sub_class(start, end, name, typ, vram, args, parent)
 
 class CodeSubsegment(Subsegment):
@@ -297,7 +297,7 @@ class ImageSubsegment(Subsegment):
         super().__init__(start, end, name, type, vram, args, parent)
         if len(self.args) >= 2:
             self.width, self.height = self.args
-    
+
     def should_run(self):
         return super().should_run() or options.mode_active("img")
 
@@ -306,7 +306,7 @@ class ImageSubsegment(Subsegment):
         image = self.impl_class.parse_image(img_bytes, self.width, self.height, flip_h=False, flip_v=False)
         w = self.impl_class.get_writer(self.width, self.height)
         self.write(generic_out_path, w, image)
-    
+
     def write(self, out_path, writer, image):
         Path(out_path).parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
@@ -323,7 +323,7 @@ class PaletteSubsegment(ImageSubsegment):
             segment.palettes[self.image_name] = [self]
         else:
             segment.palettes[self.image_name].append(self)
-    
+
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         pass
 
@@ -377,17 +377,17 @@ class Ia4Subsegment(ImageSubsegment):
     def __init__(self, start, end, name, type, vram, args, parent):
         super().__init__(start, end, name, type, vram, args, parent)
         self.impl_class = N64SegIa4
-        
+
 class Ia8Subsegment(ImageSubsegment):
     def __init__(self, start, end, name, type, vram, args, parent):
         super().__init__(start, end, name, type, vram, args, parent)
         self.impl_class = N64SegIa8
-        
+
 class Ia16Subsegment(ImageSubsegment):
     def __init__(self, start, end, name, type, vram, args, parent):
         super().__init__(start, end, name, type, vram, args, parent)
         self.impl_class = N64SegIa16
-        
+
 class N64SegCode(N64Segment):
     palettes = {}
 
@@ -518,7 +518,8 @@ class N64SegCode(N64Segment):
         else:
             return None
 
-    def get_symbol(self, addr, type=None, create=False, define=False, reference=False, offsets=False, local_only=False):
+    def get_symbol(self, addr, type=None, create=False, define=False, reference=False, offsets=False, local_only=False,
+                   skip_dead=False):
         ret = None
         rom = None
 
@@ -552,6 +553,9 @@ class N64SegCode(N64Segment):
                 self.ext_symbols[addr].append(ret)
 
         if ret:
+            if skip_dead and ret.dead:
+                return None
+
             if define:
                 ret.defined = True
             if reference:
@@ -653,7 +657,7 @@ class N64SegCode(N64Segment):
                     end_func = True
                     continue
 
-            if i < len(insns) - 1 and self.get_symbol(insns[i + 1].address, local_only=True, type="func"):
+            if i < len(insns) - 1 and self.get_symbol(insns[i + 1].address, local_only=True, type="func", skip_dead=True):
                 end_func = True
 
             if end_func:
@@ -890,7 +894,7 @@ class N64SegCode(N64Segment):
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
-                if sub.contains_vram(symbol.vram_start):
+                if not symbol.dead and sub.contains_vram(symbol.vram_start):
                     ret.append(symbol)
 
         ret.sort(key=lambda s:s.vram_start)

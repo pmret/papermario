@@ -6,6 +6,20 @@
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
+s32 D_8008FF60[] = {0, 1, 2, 3};
+
+// 0x800989A0
+const s32 rodata_73DA0[] = {
+    0x82C882B5, 0x00000000, 0x82A982AD, 0x82B982A2,
+    0x00000000, 0x82B982C1, 0x82AB82E5, 0x82A40000,
+    0x82DE82C9, 0x82E182DE, 0x82C982E1, 0x00000000,
+    0x82D082C6, 0x82E882DA, 0x82AF0000, 0x83748340,
+    0x83438369, 0x838B837B, 0x83808377, 0x83430000,
+    0x83748340, 0x83438369, 0x838B834E, 0x838A8357,
+    0x83430000, 0x82C282A4, 0x82B682E5, 0x82A40000,
+};
+
+
 typedef struct {
     /* 0x00 */ char name[16];
     /* 0x10 */ u32 offset;
@@ -17,27 +31,175 @@ typedef struct {
 extern MapConfig D_800A41E8; // gMapHeader?
 extern s32 D_800A41E0; // gMapConfig?
 
+extern s32 D_800D9668;
+
+s32 strcmp(char*, char*);
+
 void load_world_script_api(void) {
     dma_copy((s32)&world_script_api_ROM_START, (s32)&world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
-// TODO
-static const s32 rodata_73DA0[] = {
-    0x82C882B5, 0x00000000, 0x82A982AD, 0x82B982A2,
-    0x00000000, 0x82B982C1, 0x82AB82E5, 0x82A40000,
-    0x82DE82C9, 0x82E182DE, 0x82C982E1, 0x00000000,
-    0x82D082C6, 0x82E882DA, 0x82AF0000, 0x83748340,
-    0x83438369, 0x838B837B, 0x83808377, 0x83430000,
-    0x83748340, 0x83438369, 0x838B834E, 0x838A8357,
-    0x83430000, 0X82C282A4, 0x82B682E5, 0x82A40000,
-};
+//INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
+void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
+    PlayerStatus* playerStatus;
+    GameStatus** gameStatus;
+    GameStatus** gameStatus2;
+    GameStatus** gameStatus3;
+    s32 initStatus;
+    Map2* map;
+    MapConfig* temp800A41E8;
+    s32* overrideFlags;
+    char texStr[17];
+    s32 decompressedSize;
 
-// These string literals belong to load_map_by_IDs
-// static const char D_80098A10[] = "%s_shape";
-// static const char D_80098A1C[] = "%s_hit";
-// static const char D_80098A24[] = "%s_tex";
+    initStatus = 0;
+    sfx_stop_env_sounds();
+    OVERRIDE_FLAG_UNSET(0x40);
+    OVERRIDE_FLAG_UNSET(0x80);
 
-INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
+    gameStatus = &gGameStatusPtr;
+
+    (*gameStatus)->unk_84 = 0;
+    func_8002D160();
+    func_802B2078();
+    func_8011D890();
+    clear_dynamic_entity_list();
+    clear_script_list();
+
+    switch (loadType) {
+        case 0:
+            clear_area_flags();
+            (*gameStatus)->loadType = 0;
+            break;
+        case 1:
+            fio_deserialize_state();
+            areaID = (*gameStatus)->areaID;
+            mapID = (*gameStatus)->mapID;
+            (*gameStatus)->prevArea = areaID;
+            (*gameStatus)->loadType = 1;
+            break;
+   }
+
+    gGameStatusPtr->mapShop = NULL;
+
+    map = &gAreas[areaID].maps[mapID];
+
+    sprintf(&D_800D9230, "%s_shape", map->id);
+    sprintf(&D_800D91E0, "%s_hit", map->id);
+    strcpy(texStr, map->id);
+    texStr[3] = 0;
+    sprintf(&D_800B0CF0, "%s_tex", texStr);
+
+    D_800A41E0 = map;
+    if (map->bgName != NULL) {
+        strcpy(&D_800D9668, map->bgName);
+   }
+    load_world_script_api();
+
+    if (map->dmaStart != NULL) {
+        dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+   }
+
+    temp800A41E8 = &D_800A41E8;
+    *temp800A41E8 = *map->config;
+
+
+    temp800A41E8 = &D_800A41E8;
+    if (map->init != 0) {
+        initStatus = map->init();
+   }
+
+    if (initStatus == 0) {
+        s32* place = &D_80210000;
+        s32 yay0Asset = load_asset_by_name(&D_800D9230, &decompressedSize);
+
+        decode_yay0(yay0Asset, place);
+        general_heap_free(yay0Asset);
+
+        temp800A41E8->modelTreeRoot = place[0];
+        temp800A41E8->modelNameList = place[2];
+        temp800A41E8->colliderNameList = place[3];
+        temp800A41E8->zoneNameList = place[4];
+   }
+
+    if (map->bgName != NULL) {
+        load_map_bg(&D_800D9668);
+   }
+
+    func_8002D160();
+    func_802B2078();
+    func_80149670(0);
+    clear_dynamic_entity_list();
+    clear_script_list();
+    create_cameras_a();
+    gameStatus2 = &gGameStatusPtr;
+    func_802DD8F8((*gameStatus2)->unk_84);
+    func_8011E224();
+    clear_entity_models();
+    clear_npcs();
+    func_80141100();
+    clear_trigger_data();
+    clear_model_data();
+    func_80148040();
+    use_default_background_settings();
+
+    if ((*gameStatus2)->unk_A8 == -1) {
+        func_80138188();
+   }
+
+    if (initStatus == 0) {
+        initialize_collision();
+        load_hit_asset();
+   }
+
+    func_80072B30();
+    clear_encounter_status();
+    clear_entity_data(1);
+    clear_effect_data();
+    clear_player_status();
+    func_800DFC74();
+    partner_reset_data();
+    clear_printers();
+    clear_item_entity_data();
+
+    playerStatus = &gPlayerStatus;
+    playerStatus->targetYaw = playerStatus->currentYaw;
+
+    func_801497FC(D_8008FF60[map->flagsEnd]);
+    sfx_reset_door_sounds();
+
+    if (initStatus == 0) {
+        s32 thing = get_asset_offset(&D_800B0CF0, &decompressedSize);
+
+        if (temp800A41E8->modelTreeRoot != NULL) {
+            load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
+       }
+   }
+
+    if (temp800A41E8->background != NULL) {
+        read_background_size(temp800A41E8->background);
+   } else {
+        set_background_size(296, 200, 12, 20);
+   }
+
+    gCurrentCameraID = 0;
+    gCameras[0].flags |= 0x2;
+    gCameras[1].flags |= 0x2;
+    gCameras[2].flags |= 0x2;
+    gCameras[3].flags |= 0x2;
+
+    if (gGameStatusPtr->unk_A8 == -1) {
+        set_cam_viewport(0, 12, 20, 296, 200);
+   } else {
+        set_cam_viewport(0, 29, 28, 262, 162);
+   }
+
+    initialize_status_menu();
+    gameStatus3 = &gGameStatusPtr;
+    (*gameStatus3)->unk_90 = 1000;
+    (*gameStatus3)->unk_92 = 1000;
+    (*gameStatus3)->mainScriptID = start_script_in_group(temp800A41E8->main, 0, 0, 0)->id;
+}
 
 s32 get_current_map_config() {
     return D_800A41E0;
@@ -48,20 +210,40 @@ MapConfig* get_current_map_header() {
 }
 
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
+// s32 get_map_IDs_by_name(char* mapName, s16* areaID, s16* mapID) {
+//     Area* areas = &gAreas;
+//     Map* maps;
+//     s32 i = 0;
+//     s32 j;
+
+//     while (areas[i].maps != NULL) {
+//         maps = areas[i].maps;
+//         for (j = 0; j < areas[i].mapCount; j++) {
+//             if (strcmp(maps[j].id, mapName) == 0) {
+//                 *areaID = i;
+//                 *mapID = j;
+//                 return TRUE;
+//            }
+//        }
+//         i++;
+//    }
+
+//     return FALSE;
+// }
 
 void* load_asset_by_name(char* assetName, s32* decompressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
     AssetHeader* curAsset;
     void* ret;
-    
+
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + sizeof(AssetHeader), &firstHeader);
     assetTableBuffer = heap_malloc(firstHeader.offset);
     curAsset = &assetTableBuffer[0];
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-    }
+   }
     *decompressedSize = curAsset->decompressedLength;
     ret = general_heap_malloc(curAsset->compressedLength);
     dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset, ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
@@ -81,7 +263,7 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-    }
+   }
     *compressedSize = curAsset->compressedLength;
     ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
     heap_free(assetTableBuffer);
@@ -105,8 +287,17 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     .dmaEnd = &code_##map##_ROM_END, \
     .dmaDest = &code_##map##_VRAM \
 
+
+// these, along with all the *_maps, almost certainly belong in the next file
+s16 D_8008FF70[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5, 0, 4, 5, 0, 1, 2,
+                     0, 2, 3};
+
+f32 D_8008FFB8[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
+                     0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f,
+                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f };
+
 /// Toad Town
-static Map mac_maps[] = {
+Map mac_maps[] = {
     { MAP_UNSPLIT(machi,  0x802407A0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_00, 0x80243BE0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(mac_01, 0x80246730), .bgName = "nok_bg" },
@@ -118,7 +309,7 @@ static Map mac_maps[] = {
 };
 
 /// Toad Town Tunnels
-static Map tik_maps[] = {
+Map tik_maps[] = {
     { MAP_UNSPLIT(tik_01, 0x80240AE0), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(tik_02, 0x802409B0), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(tik_03, 0x80240B00), .songVariation = 1, .flags = 2 },
@@ -144,14 +335,14 @@ static Map tik_maps[] = {
 };
 
 /// Inside the Whale
-static Map kgr_maps[] = {
+Map kgr_maps[] = {
     { MAP_UNSPLIT(kgr_01, 0x80240540), .flags = 1 },
     { MAP_UNSPLIT(kgr_02, 0x80240790), .flags = 1 },
 };
 
 /// Goomba Region
 #include "area_kmr/kmr.h"
-static Map kmr_maps[] = {
+Map kmr_maps[] = {
     { MAP_UNSPLIT(kmr_00, 0x80240D80), .bgName = "kmr_bg", .flags = 1 },
     { MAP_UNSPLIT(kmr_02, 0x80243AF0), .bgName = "kmr_bg" },
     { MAP_UNSPLIT(kmr_03, 0x80240680), .bgName = "kmr_bg" },
@@ -172,7 +363,7 @@ static Map kmr_maps[] = {
 };
 
 /// Mt. Rugged
-static Map iwa_maps[] = {
+Map iwa_maps[] = {
     { MAP_UNSPLIT(iwa_00, 0x80240310), .bgName = "iwa_bg" },
     { MAP_UNSPLIT(iwa_01, 0x80243320), .bgName = "iwa_bg" },
     { MAP_UNSPLIT(iwa_02, 0x80241140), .bgName = "iwa_bg" },
@@ -183,13 +374,13 @@ static Map iwa_maps[] = {
 };
 
 /// Dry Dry Outpost
-static Map dro_maps[] = {
+Map dro_maps[] = {
     { MAP_UNSPLIT(dro_01, 0x80243B70), .bgName = "sbk_bg" },
     { MAP_UNSPLIT(dro_02, 0x80243AB0), .bgName = "sbk_bg" },
 };
 
 /// Dry Dry Desert
-static Map sbk_maps[] = {
+Map sbk_maps[] = {
     { MAP_UNSPLIT(sbk_00, 0x802400A0), .bgName = "sbk_bg" },
     { MAP_UNSPLIT(sbk_01, 0x802400A0), .bgName = "sbk_bg" },
     { MAP_UNSPLIT(sbk_02, 0x80240C80), .bgName = "sbk_bg" },
@@ -243,7 +434,7 @@ static Map sbk_maps[] = {
 };
 
 /// Dry Dry Ruins
-static Map isk_maps[] = {
+Map isk_maps[] = {
     { MAP_UNSPLIT(isk_01, 0x80240020), .bgName = "sbk3_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(isk_02, 0x80240140), .bgName = "sbk3_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(isk_03, 0x80240030), .songVariation = 1, .flags = 2 },
@@ -264,7 +455,7 @@ static Map isk_maps[] = {
 };
 
 /// Koopa Bros. Fortress
-static Map trd_maps[] = {
+Map trd_maps[] = {
     { MAP_UNSPLIT(trd_00, 0x80240690), .bgName = "nok_bg" },
     { MAP_UNSPLIT(trd_01, 0x80241700), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(trd_02, 0x80241AA0), .songVariation = 1, .flags = 3 },
@@ -279,7 +470,7 @@ static Map trd_maps[] = {
 };
 
 /// Koopa Region
-static Map nok_maps[] = {
+Map nok_maps[] = {
     { MAP_UNSPLIT(nok_01, 0x80242B90), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_02, 0x802445F0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(nok_03, 0x80240E40), .bgName = "nok_bg" },
@@ -292,7 +483,7 @@ static Map nok_maps[] = {
 };
 
 /// Star Region
-static Map hos_maps[] = {
+Map hos_maps[] = {
     { MAP_UNSPLIT(hos_00, 0x80240D50), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(hos_01, 0x80240E40), .bgName = "hos_bg" },
     { MAP_UNSPLIT(hos_02, 0x80242B90), .bgName = "hos_bg" },
@@ -305,7 +496,7 @@ static Map hos_maps[] = {
 };
 
 /// Bowser's Castle
-static Map kpa_maps[] = {
+Map kpa_maps[] = {
     { MAP_UNSPLIT(kpa_01,  0x80240A70), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kpa_03,  0x80241EE0), .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kpa_04,  0x80240190), .songVariation = 1, .flags = 2 },
@@ -359,7 +550,7 @@ static Map kpa_maps[] = {
 };
 
 /// Peach's Castle Grounds
-static Map osr_maps[] = {
+Map osr_maps[] = {
     { MAP_UNSPLIT(osr_00, 0x802407E0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(osr_01, 0x80240B00), .bgName = "nok_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(osr_02, 0x80240170), .bgName = "kpa_bg", .init = (MapInit)0x80240000 },
@@ -369,7 +560,7 @@ static Map osr_maps[] = {
 
 /// Peach's Castle
 /// @bug There are two entries for kkj_26; the latter is unreachable.
-static Map kkj_maps[] = {
+Map kkj_maps[] = {
     { MAP_UNSPLIT(kkj_00, 0x80241030), .bgName = "nok_bg", .songVariation = 1, .flags = 3, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(kkj_01, 0x80240F10), .bgName = "nok_bg", .songVariation = 1, .flags = 3 },
     { MAP_UNSPLIT(kkj_02, 0x80240030), .bgName = "nok_bg", .flags = 2 },
@@ -398,7 +589,7 @@ static Map kkj_maps[] = {
 };
 
 /// Jade Jungle
-static Map jan_maps[] = {
+Map jan_maps[] = {
     { MAP_UNSPLIT(jan_00, 0x80241BD0), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_01, 0x802413F0), .bgName = "yos_bg" },
     { MAP_UNSPLIT(jan_02, 0x80242940), .bgName = "yos_bg" },
@@ -424,7 +615,7 @@ static Map jan_maps[] = {
 };
 
 /// Forever Forest
-static Map mim_maps[] = {
+Map mim_maps[] = {
     { MAP_UNSPLIT(mim_01, 0x80241EF0), .bgName = "obk_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(mim_02, 0x80241220), .bgName = "obk_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(mim_03, 0x80240570), .bgName = "obk_bg", .songVariation = 1, .flags = 2 },
@@ -440,7 +631,7 @@ static Map mim_maps[] = {
 };
 
 /// Boo's Mansion
-static Map obk_maps[] = {
+Map obk_maps[] = {
     { MAP_UNSPLIT(obk_01, 0x802411B0), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(obk_02, 0x802402E0), .bgName = "obk_bg", .songVariation = 1, .flags = 1 },
     { MAP_UNSPLIT(obk_03, 0x80241020), .songVariation = 1, .flags = 1 },
@@ -453,7 +644,7 @@ static Map obk_maps[] = {
 };
 
 /// Gusty Gulch
-static Map arn_maps[] = {
+Map arn_maps[] = {
     { MAP_UNSPLIT(arn_02, 0x80241000), .bgName = "arn_bg" },
     { MAP_UNSPLIT(arn_03, 0x80241740), .bgName = "arn_bg" },
     { MAP_UNSPLIT(arn_04, 0x80243390), .bgName = "arn_bg" },
@@ -468,7 +659,7 @@ static Map arn_maps[] = {
 };
 
 /// Tubba Blubba's Castle
-static Map dgb_maps[] = {
+Map dgb_maps[] = {
     { MAP_UNSPLIT(dgb_00, 0x802400D0), .bgName = "arn_bg", .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(dgb_01, 0x80243460), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(dgb_02, 0x80241470), .songVariation = 1, .flags = 2 },
@@ -491,7 +682,7 @@ static Map dgb_maps[] = {
 };
 
 /// Mt. Lavalava
-static Map kzn_maps[] = {
+Map kzn_maps[] = {
     { MAP_UNSPLIT(kzn_01, 0x80240330), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kzn_02, 0x80242850), .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(kzn_03, 0x802430E0), .songVariation = 1, .flags = 2 },
@@ -512,7 +703,7 @@ static Map kzn_maps[] = {
 };
 
 /// Flower Fields
-static Map flo_maps[] = {
+Map flo_maps[] = {
     { MAP_UNSPLIT(flo_00, 0x80241490), .bgName = "fla_bg" },
     { MAP_UNSPLIT(flo_03, 0x80240660), .bgName = "fla_bg" },
     { MAP_UNSPLIT(flo_07, 0x80240760), .bgName = "fla_bg" },
@@ -536,7 +727,7 @@ static Map flo_maps[] = {
 };
 
 /// Shiver Region
-static Map sam_maps[] = {
+Map sam_maps[] = {
     { MAP_UNSPLIT(sam_01, 0x80241F70), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_02, 0x80241C00), .bgName = "yki_bg" },
     { MAP_UNSPLIT(sam_03, 0x80240940), .bgName = "yki_bg" },
@@ -552,7 +743,7 @@ static Map sam_maps[] = {
 };
 
 /// Crystal Palace
-static Map pra_maps[] = {
+Map pra_maps[] = {
     { MAP_UNSPLIT(pra_01, 0x80241400), .bgName = "yki_bg", .flags = 1, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_02, 0x802416C0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(pra_03, 0x802401E0), .songVariation = 1, .flags = 2, .init = (MapInit)0x80240000 },
@@ -588,7 +779,7 @@ static Map pra_maps[] = {
 };
 
 /// Shy Guy's Toy Box
-static Map omo_maps[] = {
+Map omo_maps[] = {
     { MAP_UNSPLIT(omo_01, 0x80240C40), .bgName = "omo_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(omo_02, 0x80242BD0), .bgName = "omo_bg", .songVariation = 1, .flags = 2 },
     { MAP_UNSPLIT(omo_03, 0x80240900), .bgName = "omo_bg", .songVariation = 1, .flags = 2 },
@@ -609,7 +800,7 @@ static Map omo_maps[] = {
 };
 
 /// Debug
-static Map tst_maps[] = {
+Map tst_maps[] = {
     { MAP_UNSPLIT(tst_01, 0x802400B0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(tst_02, 0x802400B0), .bgName = "nok_bg" },
     { MAP_UNSPLIT(tst_03, 0x802400B0), .bgName = "nok_bg" },
@@ -622,13 +813,13 @@ static Map tst_maps[] = {
 };
 
 /// Credits
-static Map end_maps[] = {
+Map end_maps[] = {
     { MAP_UNSPLIT(end_00, 0x80242B50), .init = (MapInit)0x80240000 },
     { MAP_UNSPLIT(end_01, 0x80243000), .init = (MapInit)0x80240000 },
 };
 
 /// Toad Town Playroom
-static Map mgm_maps[] = {
+Map mgm_maps[] = {
     { MAP_UNSPLIT(mgm_00, 0x80241810) },
     { MAP_UNSPLIT(mgm_01, 0x802417C0) },
     { MAP_UNSPLIT(mgm_02, 0x80242410) },
@@ -636,7 +827,7 @@ static Map mgm_maps[] = {
 };
 
 /// Game Over
-static Map gv_maps[] = {
+Map gv_maps[] = {
     { MAP_UNSPLIT(gv_01, 0x802407D0) },
 };
 
