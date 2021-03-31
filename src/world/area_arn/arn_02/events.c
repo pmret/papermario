@@ -27,13 +27,13 @@ Script N(Main) = SCRIPT({
 s32 N(padding)[] = { 0, 0, 0 };
 
 Script N(MakeEntities) = SCRIPT({
-    MakeItemEntity(ITEM_DIZZY_DIAL, 0xFFFFFF08, 193, 45, 17, SI_SAVE_FLAG(1005));
+    MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
     MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
-    MakeEntity(0x802EA564, 0xFFFFFEA2, 172, 170, 0, ITEM_COIN, 0x80000000);
+    MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(1002));
-    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, 0x80000000);
+    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(1003));
-    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, 0x80000000);
+    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(1004));
 });
 
@@ -112,7 +112,6 @@ StaticNpc N(CleftNPC1) = {
     .settings = &N(cleftNpcSettings),
     .pos = { -196.0f, 130.0f, 104.0f },
     .flags = 0x00000400,
-    .init = NULL,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 0,
@@ -140,8 +139,6 @@ StaticNpc N(CleftNPC1) = {
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
     .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
 };
 
 StaticNpc N(CleftNPC2) = {
@@ -149,10 +146,8 @@ StaticNpc N(CleftNPC2) = {
     .settings = &N(cleftNpcSettings),
     .pos = { 641.0f, 268.0f, 202.0f },
     .flags = 0x00000400,
-    .init = NULL,
     .yaw = 90,
     .dropFlags = 0x80,
-    .itemDropChance = 0,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
@@ -177,8 +172,6 @@ StaticNpc N(CleftNPC2) = {
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
     .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
 };
 
 StaticNpc N(GoombaNPC) = {
@@ -186,7 +179,6 @@ StaticNpc N(GoombaNPC) = {
     .settings = &N(goombaNpcSettings),
     .pos = { 333.0f, 215.0f, 85.0f },
     .flags = 0x00000400,
-    .init = NULL,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
@@ -217,8 +209,6 @@ StaticNpc N(GoombaNPC) = {
         NPC_ANIM(goomba, hyper, run),
     },
     .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
 };
 
 NpcGroupList N(npcGroupList) = {

@@ -1,4 +1,5 @@
 #include "sbk_01.h"
+#include "message_ids.h"
 
 #include "world/common/SpawnSunEffect.inc.c"
 
@@ -17,32 +18,12 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = 0x190061,
+    .tattle = MSG_sbk_01_tattle,
 };
 
-Script N(ExitWalk_802400E0) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 0);
-    spawn ExitWalk;
-    GotoMap("sbk_00", 1);
-    sleep 100;
-});
-
-Script N(ExitWalk_8024013C) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 1);
-    spawn ExitWalk;
-    GotoMap("sbk_02", 0);
-    sleep 100;
-});
-
-Script N(ExitWalk_80240198) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 3);
-    spawn ExitWalk;
-    GotoMap("sbk_11", 2);
-    sleep 100;
-});
+Script N(ExitWalk_802400E0) = EXIT_WALK_SCRIPT(60, 0, "sbk_00", 1);
+Script N(ExitWalk_8024013C) = EXIT_WALK_SCRIPT(60, 1, "sbk_02", 0);
+Script N(ExitWalk_80240198) = EXIT_WALK_SCRIPT(60, 3, "sbk_11", 2);
 
 Script N(Script_802401F4) = SCRIPT({
     bind N(ExitWalk_802400E0) to 524288 7;

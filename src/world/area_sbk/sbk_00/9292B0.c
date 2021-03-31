@@ -63,8 +63,8 @@ s32 N(npcGroupList_80240768)[] = {
 static s32 padding = 0;
 
 Script N(MakeEntities) = SCRIPT({
-    MakeEntity(0x802EA564, 0xFFFFFF1A, 0, 155, 0, 152, 0x80000000);
+    MakeEntity(0x802EA564, -230, 0, 155, 0, 152, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(797));
-    MakeEntity(0x802EA564, 160, 0, 205, 0, 343, 0x80000000);
+    MakeEntity(0x802EA564, 160, 0, 205, 0, 343, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(798));
 });

@@ -133,7 +133,7 @@ Script N(main) = SCRIPT({
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 32;
-    ShowEmote(0, 2, 0xFFFFFFD3, 20, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+    ShowEmote(0, EMOTE_QUESTION, 0xFFFFFFD3, 20, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
     sleep 30;
     SetActorYaw(ACTOR_PLAYER, 30);
     sleep 1;

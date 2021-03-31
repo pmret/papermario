@@ -212,10 +212,10 @@ Script N(Tree1_Callback) = SCRIPT({
     }
     sleep 10;
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(0) < 0xFFFFFFE2) {
-        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53));
+    if (SI_VAR(0) < -30) {
+        MakeItemEntity(ITEM_MUSHROOM, -23, 100, 35, 13, SI_SAVE_FLAG(53));
     } else {
-        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53));
+        MakeItemEntity(ITEM_MUSHROOM, -85, 100, 16, 13, SI_SAVE_FLAG(53));
     }
     SI_MAP_FLAG(10) = 1;
 });

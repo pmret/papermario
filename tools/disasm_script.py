@@ -76,9 +76,10 @@ def get_constants():
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds" }
+        "AmbientSounds", "NpcIDs", "Emotes" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
+    CONSTANTS["NPC_SPRITE"] = {}
 
     [SAVE_VARS.add(x) for x in ["WORLD_LOCATION", "STORY_PROGRESS"]]
 
@@ -86,7 +87,7 @@ def get_constants():
     enums = Path(include_path / "enums.h").read_text().splitlines()
 
     '''
-    # define stuff
+    # defines
     for line in enums:
         this_enum = ""
         for enum in valid_defines:
@@ -120,6 +121,8 @@ def get_constants():
                     if "=" in name:
                         name, val = name.split(" = ")
                         val = int(val[:-1], 0)
+                        if val >= 0x80000000:
+                            val -= 0x100000000
                     else:
                         name = name[:-1]
                     name = name.strip()
@@ -129,79 +132,191 @@ def get_constants():
                     i += 1
                     last_num = val
 
+    # sprites
+    sprite_path = Path(Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc")
+    for file in sprite_path.iterdir():
+        fd = file.read_text()
+        for line in fd.splitlines():
+            if "#define _NPC_SPRITE_" in line:
+                enum = "NPC_SPRITE"
+            elif "#define _NPC_PALETTE_" in line:
+                enum = "NPC_PALETTE"
+            elif "#define _NPC_ANIM_" in line:
+                enum = "NPC_ANIM"
+            else:
+                continue
+
+            name = line.split(" ",2)[1]
+            id_ = line.split("0x", 1)[1]
+            if " " in id_:
+                id_ = id_.split(" ",1)[0]
+            name = name.split(f"_{enum}_", 1)[1]
+            if enum == "NPC_SPRITE":
+                saved_name = name
+                saved_id = id_
+            else:
+                name = name.rsplit(f"{saved_name}_")[1]
+
+            if enum == "NPC_SPRITE":
+                if int(id_, 16) not in CONSTANTS["NPC_SPRITE"]:
+                    CONSTANTS[enum][int(id_, 16)] = {"name":"", "palettes":{}, "anims":{}}
+                CONSTANTS[enum][int(id_, 16)]["name"] = name
+            elif enum == "NPC_PALETTE":
+                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["palettes"][int(id_, 16)] = name
+            elif enum == "NPC_ANIM":
+                CONSTANTS["NPC_SPRITE"][int(saved_id, 16)]["anims"][int(id_, 16)] = name
+
     return
 
-def fix_args(args, info):
+def fix_args(func, args, info):
     global CONSTANTS
     
     new_args = []
     for i,arg in enumerate(args.split(", ")):
-
+        if ((arg == "D_80000000") or
+            (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
+            arg = "0x" + arg[2:]
+        if "0x" in arg and int(arg, 16) > 0x90000000:
+            arg = f"{int(arg, 16) - 0x100000000}"
         if i in info:
             if "_" in arg:
                 new_args.append(f"{arg}")
                 continue
-            if "0x" in arg:
-                argNum = int(arg, 16)
-            else:
-                argNum = int(arg, 10)
+            argNum = int(arg, 0)
 
-            if argNum in CONSTANTS[info[i]]:
+            if info[i] == "Bool":
+                new_args.append(f"{'TRUE' if argNum == True else 'FALSE'}")
+            elif info[i] == "Hex":
+                new_args.append(f"0x{argNum:08X}")
+            elif info[i] == "CustomAnim":
+                sprite  = (argNum & 0xFF0000) >> 16
+                palette = (argNum & 0xFF00)   >> 8
+                anim    = (argNum & 0xFF)     >> 0
+
+                if argNum in CONSTANTS["PlayerAnims"]:
+                    call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                else:
+                    if sprite == 0:
+                        print(f"Sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                    call = "NPC_ANIM("
+                    if sprite in CONSTANTS["NPC_SPRITE"]:
+                        call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
+                        if palette in CONSTANTS["NPC_SPRITE"][sprite]["palettes"]:
+                            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['palettes'][palette]}, "
+                        else:
+                            call += f"0x{palette:02X}, "
+                        if anim in CONSTANTS["NPC_SPRITE"][sprite]["anims"]:
+                            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['anims'][anim]}"
+                        else:
+                            call += f"0x{anim:02X}"
+                        call += ")"
+                    else:
+                        call += f"0x{sprite:02X}, 0x{palette:02X}, 0x{anim:02X})"
+
+                new_args.append(call)
+            elif info[i] == "CustomMsg":
+                type_ = (argNum & 0xFF0000) >> 16
+                num_ =  (argNum & 0xFFFF)   >> 0
+                new_args.append(f"MESSAGE_ID(0x{type_:02X}, 0x{num_:04X})")
+
+            elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
-                print(f"{argNum:X} was not found within {info[i]} constants, add it.")
-                if info[i] == "SoundIDs":
-                    # Ethan wanted sound IDs in hex instead, so convert it back
-                    if "0x" not in arg:
-                        argNum = int(arg, 10)
-                        arg = f"0x{argNum:X}"
-                new_args.append(f"{arg}")
+                print(f"0x{argNum:X} was not found within {info[i]} constants, add it.")
+                #Print the unknowns in hex
+                new_args.append(f"0x{int(arg):X}")
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
 
 replace_funcs = {
+    "AddActorDecoration"        :{0:"ActorIDs"},
     "AddKeyItem"                :{0:"ItemIDs"},
+    "AddGoalPos"                :{0:"ActorIDs"},
+
+    "BattleCamTargetActor"      :{0:"ActorIDs"},
+    "BindNpcAI"                 :{0:"NpcIDs"},
+
+    "DisablePlayerInput"        :{0:"Bool"},
+    "DisablePlayerPhysics"      :{0:"Bool"},
     "DispatchDamagePlayerEvent" :{1:"Events"},
     "DispatchEvent"             :{0:"ActorIDs"},
 
+    "EnableIdleScript"          :{0:"ActorIDs"},
+    "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
+    "EnemyDamageTarget"         :{0:"ActorIDs"},
+    "EnemyTestTarget"           :{0:"ActorIDs"},
+
     "ForceHomePos"              :{0:"ActorIDs"},
+
+    "func_802CFE2C"             :{0:"NpcIDs"},
+    "func_802CFD30"             :{0:"NpcIDs"},
+    "func_802D2520"             :{0:"PlayerAnims"},
     
     "GetActorPos"               :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
+    "GetLastEvent"              :{0:"ActorIDs"},
+    "GetNpcPos"                 :{0:"NpcIDs"},
+
+    "HidePlayerShadow"          :{0:"Bool"},
+    "HPBarToHome"               :{0:"ActorIDs"},
+
+    "InterpNpcYaw"              :{0:"NpcIDs"},
 
     "JumpToGoal"                :{0:"ActorIDs"},
 
-    "MakeEntity"                :{5:"ItemIDs"},
+    "MakeEntity"                :{0:"Hex", 5:"ItemIDs"},
     "MakeItemEntity"            :{0:"ItemIDs"},
+    "ModifyColliderFlags"       :{2:"Hex"},
+
+    "NpcFaceNpc"                :{0:"NpcIDs", 1:"NpcIDs"},
+    "NpcJump0"                  :{0:"NpcIDs"},
+    "NpcMoveTo"                 :{0:"NpcIDs"},
     
     "PlayAmbientSounds"         :{0:"AmbientSounds"},
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
+    "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
     
+    "RemoveActorDecoration"     :{0:"ActorIDs"},
+    "RunToGoal"                 :{0:"ActorIDs"},
+
+    "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
+    "SetActorRotation"          :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
     "SetActorYaw"               :{0:"ActorIDs"},
-    "SetAnimation"              :{0:"ActorIDs", 2:"PlayerAnims"},
+    "SetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
+    "SetAnimationRate"          :{0:"ActorIDs"},
     "SetGoalPos"                :{0:"ActorIDs"},
     "SetGoalToHome"             :{0:"ActorIDs"},
     "SetGoalToTarget"           :{0:"ActorIDs"},
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
+    "SetNpcAnimation"           :{0:"NpcIDs", 1:"CustomAnim"},
+    "SetNpcAux"                 :{0:"NpcIDs"},
+    "SetNpcFlagBits"            :{0:"NpcIDs", 1:"Hex", 2:"Bool"},
+    "SetNpcJumpscale"           :{0:"NpcIDs"},
+    "SetNpcPos"                 :{0:"NpcIDs"},
+    "SetNpcRotation"            :{0:"NpcIDs"},
+    "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
+    "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
+    "SetSelfVar"                :{1:"Bool"},
     "SetTargetActor"            :{0:"ActorIDs"},
+    "ShowEmote"                 :{1:"Emotes"},
+    "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
     
     "UseIdleAnimation"          :{0:"ActorIDs"},
-
 }
 
 def replace_constants(func, args):
     global replace_funcs
 
     if func in replace_funcs:
-        return fix_args(args, replace_funcs[func])
+        return fix_args(func, args, replace_funcs[func])
     elif func == "PlayEffect":
         argsZ = args.split(", ")
         if "0x" not in argsZ[0]:
@@ -233,7 +348,7 @@ class ScriptDisassembler:
             opcode = self.read_word()
             argc = self.read_word()
 
-            print(f"Op {opcode:X}, argc {argc}")
+            #print(f"Op {opcode:X}, argc {argc}")
 
             if opcode > 0xFF or argc > 0xFF:
                 raise Exception(f"script '{self.script_name}' is malformed")
@@ -242,7 +357,7 @@ class ScriptDisassembler:
             for i in range(0, argc):
                 argv.append(self.read_word())
 
-            print(argv)
+            #print(argv)
 
             self.disassemble_command(opcode, argc, argv)
 
@@ -287,8 +402,10 @@ class ScriptDisassembler:
 
         if arg == 0xFFFFFFFF:
             return "-1"
-        elif ((arg & 0xFF000000) == 0x80000000) or arg > 10000:
+        elif (arg & 0xFF000000) == 0x80000000:
             return f"0x{arg:X}"
+        elif arg >= 0x80000000:
+            return f"{arg - 0x100000000}"
         else:
             return f"{arg}"
 
@@ -577,8 +694,10 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         if arg == 0xFFFFFFFF:
             return "-1"
-        elif ((arg & 0xFF000000) == 0x80000000) or arg > 10000:
+        elif (arg & 0xFF000000) == 0x80000000:
             return f"0x{arg:X}"
+        elif arg >= 0x80000000:
+            return f"{arg - 0x100000000}"
         else:
             return f"{arg}"
 
@@ -617,7 +736,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
     def disassemble_command(self, opcode, argc, argv):
         # hacky hacky
-        if opcode == 0x43 and len(argv) > 0 and argv[-1] == 0x80000000:
+        if opcode == 0x43 and len(argv) > 1 and argv[-1] == 0x80000000:
             argv[-1] = "ARGS_END"
 
         # write case block braces
@@ -854,7 +973,6 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             addr = argv[0]
             if addr in self.symbol_map:
                 func_name = self.symbol_map[addr][0][1]
-                print(func_name, argv[1:])
 
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
                 argv_str = replace_constants(func_name, argv_str)

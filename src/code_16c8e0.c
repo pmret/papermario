@@ -46,7 +46,7 @@ Script BtlBringPartnerOut = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_D);
-    GetGoalPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetActorJumpGravity(ACTOR_PARTNER, 1.0);
     if (SI_VAR(1) == 0) {
         JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
