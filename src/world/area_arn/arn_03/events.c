@@ -900,7 +900,7 @@ void N(func_80240158_BDEEE8)(ScriptInstance *script, NpcAISettings *aiSettings, 
         if (script->functionTemp[1].s <= 0) {
             script->functionTemp[1].s = aiSettings->unk_14;
             if (func_800490B4(shape, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
-                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
                 func_800494C0(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
                     script->functionTemp[0].s = 10;
@@ -920,8 +920,8 @@ void N(func_80240158_BDEEE8)(ScriptInstance *script, NpcAISettings *aiSettings, 
             func_8003D660(npc, 1);
         }
         
-        x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
-        z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
+        x = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).x;
+        z = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
@@ -946,7 +946,7 @@ void N(func_802404C0_BDF250)(ScriptInstance *script, NpcAISettings *aiSettings, 
     s32 var;
 
     if ((aiSettings->unk_14 >= 0) && func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
-        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         func_800494C0(npc, 0x2F4, 0x200000);
         if (!(enemy->npcSettings->unk_2A & 1)) {
@@ -1054,7 +1054,7 @@ s32 N(func_80240B94_BDF924)(ScriptInstance *script, NpcAISettings *aiSettings, E
     territory.unk_1C = 0;
 
     if (aiSettings != NULL || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0].s = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~0x800;

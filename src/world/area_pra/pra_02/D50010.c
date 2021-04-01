@@ -31,8 +31,38 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240D3C_D50D2C);
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024114C_D5113C);
+/*
+s32 N(func_8024114C_D5113C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr;
+
+    if (aiSettings != NULL) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+    }
+
+    ptr = &D_80241CCC_BE0A5C;
+    if (*ptr != NULL) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+        set_variable(script, *args, D_80241CD0_BE0A60);
+        return 2;
+    }
+
+    return 0;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411A0_D51190);
+/*
+s32 N(func_802411A0_D51190)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Bytecode* args = script->ptrReadPos;
+    
+    D_80241CD0_BE0A60 = get_variable(script, *args);
+    D_80241CCC_BE0A5C = 1;
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802411D8_D511C8);
 

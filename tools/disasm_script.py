@@ -1036,7 +1036,6 @@ if __name__ == "__main__":
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-            gap_size = 0
             while args.offset < args.end:
                 f.seek(args.offset)
 
@@ -1046,10 +1045,18 @@ if __name__ == "__main__":
 
                     if script.instructions > 1 and "SI_CMD" not in script_text:
                         if gap and first_print:
-                            print(f"========== 0x{args.offset - gap_start:X} byte gap 0x{gap_start:X} - 0x{args.offset:X} ==========")
+                            potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
+                            gap_size = args.offset - gap_start
+                            potential_struct = "Unknown data"
+                            potential_count = 1
+                            for k,v in potential_struct_sizes.items():
+                                if gap_size % v == 0:
+                                    potential_struct = k
+                                    potential_count = gap_size // v
+
+                            print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{args.offset:X} ==========")
                             print()
                             gap = False
-                            gap_size = 0
                         #print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()

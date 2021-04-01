@@ -337,7 +337,7 @@ void N(func_80240158_BE3908)(ScriptInstance *script, NpcAISettings *aiSettings, 
         if (script->functionTemp[1].s <= 0) {
             script->functionTemp[1].s = aiSettings->unk_14;
             if (func_800490B4(shape, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
-                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
                 func_800494C0(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
                     script->functionTemp[0].s = 10;
@@ -357,8 +357,8 @@ void N(func_80240158_BE3908)(ScriptInstance *script, NpcAISettings *aiSettings, 
             func_8003D660(npc, 1);
         }
         
-        x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
-        z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
+        x = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).x;
+        z = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
@@ -740,7 +740,7 @@ void N(func_80241728_BE4ED8)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
     if (enemy->varTable[1] > 0) {
         f32 temp_f22 = (f32)enemy->varTable[1] / 100.0;
-        f32 sinff = sin_deg(enemy->varTable[2]);
+        f32 sin_degrees = sin_deg(enemy->varTable[2]);
         s32 phi_v0;
 
         if (npc->flags & 8) {
@@ -754,9 +754,9 @@ void N(func_80241728_BE4ED8)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
 
         if (phi_v0) {
-            npc->pos.y = posY + temp_f24 + (sinff * temp_f22);
+            npc->pos.y = posY + temp_f24 + (sin_degrees * temp_f22);
         } else {
-            npc->pos.y = temp_f26 + (sinff * temp_f22);
+            npc->pos.y = temp_f26 + (sin_degrees * temp_f22);
         }
 
         enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 10);
@@ -1029,9 +1029,9 @@ void N(func_8024255C_BE5D0C)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[1].s = aiSettings->unk_14;
         if (func_800490B4(shape, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
             npc->currentAnim = enemy->animList[9];
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             func_800494C0(npc, 0x2F4, 0x200000);
-            npc->duration = 0xC;
+            npc->duration = 12;
             script->functionTemp[0].s = 2;
         }
     }
@@ -1054,7 +1054,7 @@ void N(func_80242858_BE6008)(ScriptInstance *script, NpcAISettings *aiSettings, 
     if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
         playerStatus = &gPlayerStatusPtr;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
-        script->functionTemp[0].s = 0xC;
+        script->functionTemp[0].s = 12;
     } else {
         npc->duration--;
         if (npc->duration <= 0) {
@@ -1063,8 +1063,8 @@ void N(func_80242858_BE6008)(ScriptInstance *script, NpcAISettings *aiSettings, 
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
             } else {
-                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &var);
-                npc->duration = 0xF;
+                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+                npc->duration = 15;
                 script->functionTemp[0].s = 0x28;
             }
         }
@@ -1196,7 +1196,7 @@ s32 N(func_80243018_BE67C8)(ScriptInstance *script, NpcAISettings *aiSettings) {
     shape.unk_1C = 0;
 
     if (aiSettings != NULL) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0].s = 0;
         npc->duration = 0;
         npc->flags &= ~0x800;
         if (!enemy->territory->wander.isFlying) {

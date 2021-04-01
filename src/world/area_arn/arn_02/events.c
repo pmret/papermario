@@ -265,9 +265,9 @@ void N(func_802401D4_BDD384)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[1].s = aiSettings->unk_14;
         if (func_800490B4(shape, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
             npc->currentAnim = enemy->animList[9];
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             func_800494C0(npc, 0x2F4, 0x200000);
-            npc->duration = 0xC;
+            npc->duration = 12;
             script->functionTemp[0].s = 2;
         }
     }
@@ -290,7 +290,7 @@ void N(func_802404D0_BDD680)(ScriptInstance *script, NpcAISettings *aiSettings, 
     if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
         playerStatus = &gPlayerStatusPtr;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
-        script->functionTemp[0].s = 0xC;
+        script->functionTemp[0].s = 12;
     } else {
         npc->duration--;
         if (npc->duration <= 0) {
@@ -299,8 +299,8 @@ void N(func_802404D0_BDD680)(ScriptInstance *script, NpcAISettings *aiSettings, 
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
             } else {
-                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &var);
-                npc->duration = 0xF;
+                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+                npc->duration = 15;
                 script->functionTemp[0].s = 0x28;
             }
         }
@@ -432,7 +432,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, NpcAISettings *aiSettings) {
     shape.unk_1C = 0;
 
     if (aiSettings != NULL) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0].s = 0;
         npc->duration = 0;
         npc->flags &= ~0x800;
         if (!enemy->territory->wander.isFlying) {
