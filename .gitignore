@@ -42,6 +42,7 @@ assets/
 /logs
 /out
 dump
+*.backup
 
 /tools/Yay0compress
 /tools/n64crc

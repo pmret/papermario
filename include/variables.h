@@ -272,7 +272,9 @@ extern u32 gBattleMapVars[MAX_MAPVARS];
 extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
+extern s32 D_8009A5D0;
 extern s32 D_8009A5D8;
+extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;

@@ -31,7 +31,7 @@ ApiStatus N(func_802408B4_97BEE4)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (npc->flags & 0x1000) {
-        currentEncounter->enounterList[enemy->encounterIndex]->battle = enemy->varTable[0];
+        currentEncounter->encounterList[enemy->encounterIndex]->battle = enemy->varTable[0];
         return ApiStatus_DONE2;
     }
 

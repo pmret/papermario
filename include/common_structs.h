@@ -1269,8 +1269,8 @@ typedef struct Encounter {
     /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
-    /* 0x4A */ char unk_4A[2];
-} Encounter; // size = 0x4C
+    /* 0x4A */ char unk_4C[0x12];
+} Encounter; // size = 0x5C
 
 typedef struct PlayerPathElement {
     /* 0x00 */ char unk_00[4];
@@ -1579,7 +1579,7 @@ typedef struct EncounterStatus {
     /* 0x007 */ char unk_07;
     /* 0x008 */ s8 unk_08;
     /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
-    /* 0x00A */ char unk_0A;
+    /* 0x00A */ s8 unk_0A;
     /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
@@ -1596,9 +1596,9 @@ typedef struct EncounterStatus {
     /* 0x01F */ u8 currentEntryIndex;
     /* 0x020 */ u8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
-    /* 0x022 */ char unk_22[0x2];
+    /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
-    /* 0x028 */ struct Encounter* enounterList[24];
+    /* 0x028 */ struct Encounter* encounterList[24];
     /* 0x088 */ struct Encounter* currentEncounter;
     /* 0x08C */ struct Enemy* currentEnemy;
     /* 0x090 */ s32 fadeOutAmount;
@@ -1607,9 +1607,9 @@ typedef struct EncounterStatus {
     /* 0x09C */ s32 battleStartCountdown;
     /* 0x0A0 */ char unk_A0[16];
     /* 0x0B0 */ s32 defeatFlags[60][12];
-    /* 0xFB0 */ s16 recentMaps[3];
-    /* 0xFB6 */ char unk_FB6[2];
-} EncounterStatus; // size = 0xFB6
+    /* 0xFB0 */ s16 recentMaps[2];
+    /* 0xFB4 */ char unk_FB4[4];
+} EncounterStatus; // size = 0xFB8
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

@@ -3,7 +3,7 @@
 void fio_serialize_state(void);
 
 s32 get_spirits_rescued(void) {
-    s32 storyProgress = get_variable(NULL, SI_SAVE_VAR(0));
+    s32 storyProgress = get_variable(NULL, STORY_PROGRESS);
     s32 ret = 7;
 
     if (storyProgress < get_variable(NULL, -0x4D)) {
