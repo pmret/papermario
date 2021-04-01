@@ -75,7 +75,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"const char {struct['name']}[] = {string_literal};\n"
         elif struct["type"].startswith("Function"):
             bytes.read(struct["length"])
-            out += f"// function: {name}\n"
+            out += f"s32 {name}();\n"
         elif struct["type"] == "FloatTable":
             out += f"f32 {name}[] = {{"
             for i in range(0, struct["length"], 4):
@@ -118,7 +118,7 @@ def parse_midx(file, prefix = ""):
             if s[0] == "$End": continue
 
             structs.append({
-                "name": prefix + name_struct(s[0]),
+                "name": "N(" + prefix + name_struct(s[0]) + ")",
                 "type": s[1],
                 "start": int(s[2], 16),
                 "vaddr": int(s[3], 16),
@@ -155,6 +155,8 @@ def parse_midx(file, prefix = ""):
 
 def name_struct(s):
     s = s[1:].replace("???", "unk")
+
+    s = s.replace("Function", "func")
 
     """
     # use ThisCase for scripts
