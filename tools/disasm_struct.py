@@ -5,7 +5,7 @@ from struct import unpack_from
 CONSTANTS = {}
 def get_constants():
     global CONSTANTS
-    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
+    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes" }
     for enum in valid_enums:
@@ -327,7 +327,7 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                 elif "tattle" in val["name"]:
                     val["fmt"] = "06X"
                     val["type"] = "hex"
-                
+
                 fmt = val["fmt"]
                 if val["type"] == "float":
                     line += f"{val['data']:{fmt}}f"
@@ -382,7 +382,7 @@ def recurse_check_list(vals):
             if check_list(val, 1):
                 return len(vals) - x
         elif val != 0:
-            return len(vals) - x 
+            return len(vals) - x
     return -1
 
 def get_single_struct_vals(fd, i):
@@ -509,10 +509,10 @@ def MacroReplaceStaticNPC(fd):
 
             indent = len(fd[i].split(".",1)[0]) // 4
             new_line = fd[i].split("{",1)[0] + "{\n"
-            
+
             if not vals:
                 i = x
-                i += 1 
+                i += 1
                 continue
 
             vals += "\n},\n."
@@ -526,7 +526,7 @@ def MacroReplaceStaticNPC(fd):
                 added_item = True
                 item_name = CONSTANTS["ItemIDs"][item[0]]
                 new_line += "    " * (indent+1) + "{ " + item_name + f", {item[1]}, {item[2]}" + " },\n"
-            
+
             if added_item:
                 new_line += "    " * indent + "},"
 
@@ -549,7 +549,7 @@ def MacroReplaceStaticNPC(fd):
             new_line += "    " * indent + "},"
             out.append(new_line)
             i = x
-            
+
         elif ".heartDrops" in fd[i] or ".flowerDrops" in fd[i]:
             vals, x = get_single_struct_vals(fd, i)
 
@@ -627,51 +627,52 @@ def MacroReplaceNpcGroupList(fd):
     out.append(f"    NPC_GROUP(N(D_{vals[1]:X}), BATTLE_ID({(vals[2] & 0xFF000000) >> 24}, {(vals[2] & 0xFF0000) >> 16}, {(vals[2] & 0xFF00) >> 8}, {vals[2] & 0xFF})),")
     return "\n".join(out)
 
-parser = argparse.ArgumentParser()
-parser.add_argument("file", type=str, help="File to decompile struct from")
-parser.add_argument("type", type=str, help="Struct type to decompile")
-parser.add_argument("offset", type=lambda x: int(x, 0), help="Offset to decompile struct from")
-parser.add_argument("--count", "-c", "--c", type=int, default=0, help="Num to try and decompile (NpcGroupList)")
-args = parser.parse_args()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", type=str, help="File to decompile struct from")
+    parser.add_argument("type", type=str, help="Struct type to decompile")
+    parser.add_argument("offset", type=lambda x: int(x, 0), help="Offset to decompile struct from")
+    parser.add_argument("--count", "-c", "--c", type=int, default=0, help="Num to try and decompile (NpcGroupList)")
+    args = parser.parse_args()
 
-get_constants()
-get_structs()
+    get_constants()
+    get_structs()
 
-if args.type not in STRUCTS:
-    print(f"Unknown struct type {args.type}")
-    exit()
+    if args.type not in STRUCTS:
+        print(f"Unknown struct type {args.type}")
+        exit()
 
-'''
-out = [f"{args.type} = " + "{\n"]
-offset = args.offset
-for var in STRUCTS[args.type]:
-    line, offset = output_type(fd, offset, var, 1)
-    out.append(line)
-out.append("};")
-'''
+    '''
+    out = [f"{args.type} = " + "{\n"]
+    offset = args.offset
+    for var in STRUCTS[args.type]:
+        line, offset = output_type(fd, offset, var, 1)
+        out.append(line)
+    out.append("};")
+    '''
 
-if args.count == 0:
-    args.count = 1
+    if args.count == 0:
+        args.count = 1
 
-fd = Path(args.file).resolve().read_bytes()
-offset, out = output_type2(fd, args.count, args.offset, STRUCTS[args.type])
+    fd = Path(args.file).resolve().read_bytes()
+    offset, out = output_type2(fd, args.count, args.offset, STRUCTS[args.type])
 
-for i,entry in enumerate(out):
-    out[i] = "\n".join(entry)
+    for i,entry in enumerate(out):
+        out[i] = "\n".join(entry)
 
-print(f"Script range 0x{args.offset:08X} - 0x{offset:08X}")
-print()
+    print(f"Script range 0x{args.offset:08X} - 0x{offset:08X}")
+    print()
 
-if args.type.lower() == "staticnpc":
-    print(MacroReplaceStaticNPC(out[0]))
-elif args.type.lower() == "npcaisettings":
-    print(out[0])
-elif args.type.lower() == "npcsettings":
-    print(MacroReplaceNpcSettings(out[0]))
-elif args.type.lower() == "npcgrouplist":
-    print("NpcGroupList N(npcGroupList) = {")
-    for i in range(args.count):
-        print(MacroReplaceNpcGroupList(out[i]))
-    print("};")
-else:
-    print(f"Add me type: {args.type}")
+    if args.type.lower() == "staticnpc":
+        print(MacroReplaceStaticNPC(out[0]))
+    elif args.type.lower() == "npcaisettings":
+        print(out[0])
+    elif args.type.lower() == "npcsettings":
+        print(MacroReplaceNpcSettings(out[0]))
+    elif args.type.lower() == "npcgrouplist":
+        print("NpcGroupList N(npcGroupList) = {")
+        for i in range(args.count):
+            print(MacroReplaceNpcGroupList(out[i]))
+        print("};")
+    else:
+        print(f"Add me type: {args.type}")
