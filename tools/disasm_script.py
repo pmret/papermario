@@ -54,7 +54,7 @@ def script_lib(offset):
                     _script_lib[vaddr] = []
                 _script_lib[vaddr].append([int(raddr, 16), name])
 
-        # Sort the symbols for each vram address by the difference 
+        # Sort the symbols for each vram address by the difference
         # between their rom address and the offset passed in.
         # If offset - rom address goes below 0, it's part of the
         # previous file, so treat it as min priority, same as a default.
@@ -131,7 +131,7 @@ def get_constants():
 
 def fix_args(args, info):
     global CONSTANTS
-    
+
     new_args = []
     for i,arg in enumerate(args.split(", ")):
         if i in info:
@@ -159,7 +159,7 @@ replace_funcs = {
     "DispatchEvent"             :{0:"ActorIDs"},
 
     "ForceHomePos"              :{0:"ActorIDs"},
-    
+
     "GetActorPos"               :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
@@ -168,10 +168,10 @@ replace_funcs = {
 
     "MakeEntity"                :{5:"ItemIDs"},
     "MakeItemEntity"            :{0:"ItemIDs"},
-    
+
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
-    
+
     "SetActorJumpGravity"       :{0:"ActorIDs"},
     "SetActorSpeed"             :{0:"ActorIDs"},
     "SetActorScale"             :{0:"ActorIDs"},
@@ -183,7 +183,7 @@ replace_funcs = {
     "SetJumpAnimations"         :{0:"ActorIDs", 2:"PlayerAnims", 3:"PlayerAnims", 4:"PlayerAnims"},
     "SetMusicTrack"             :{1:"SongIDs"},
     "SetTargetActor"            :{0:"ActorIDs"},
-    
+
     "UseIdleAnimation"          :{0:"ActorIDs"},
 
 }
@@ -272,8 +272,8 @@ class ScriptDisassembler:
             elif v <= -40000000: return f"SI_MAP_VAR({v + 50000000})"
             elif v <= -20000000: return f"SI_VAR({v + 30000000})"
 
-        if arg == 0xFFFFFFFF:
-            return "-1"
+        if arg > 0xFFFFF000:
+            return str(~arg + 0xFFFFFFFF)
         elif ((arg & 0xFF000000) == 0x80000000) or arg > 10000:
             return f"0x{arg:X}"
         else:
@@ -285,18 +285,18 @@ class ScriptDisassembler:
         return f"0x{addr:08X}"
 
     def trigger(self, trigger):
-        if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
-        if trigger == 0x00800000: trigger = "TriggerFlag_FLOOR_ABOVE"
-        if trigger == 0x00000800: trigger = "TriggerFlag_FLOOR_INTERACT"
-        if trigger == 0x00000200: trigger = "TriggerFlag_FLOOR_JUMP"
-        if trigger == 0x00000400: trigger = "TriggerFlag_WALL_TOUCH"
-        if trigger == 0x00000040: trigger = "TriggerFlag_WALL_PUSH"
-        if trigger == 0x00000100: trigger = "TriggerFlag_WALL_INTERACT"
-        if trigger == 0x00001000: trigger = "TriggerFlag_WALL_HAMMER"
-        if trigger == 0x00040000: trigger = "TriggerFlag_CEILING_TOUCH"
-        if trigger == 0x00010000: trigger = "TriggerFlag_SAVE_FLAG_SET"
-        if trigger == 0x00020000: trigger = "TriggerFlag_AREA_FLAG_SET"
-        if trigger == 0x00100000: trigger = "TriggerFlag_BOMB"
+        if trigger == 0x00000080: trigger = "TRIGGER_FLOOR_TOUCH"
+        if trigger == 0x00800000: trigger = "TRIGGER_FLOOR_ABOVE"
+        if trigger == 0x00000800: trigger = "TRIGGER_FLOOR_INTERACT"
+        if trigger == 0x00000200: trigger = "TRIGGER_FLOOR_JUMP"
+        if trigger == 0x00000400: trigger = "TRIGGER_WALL_TOUCH"
+        if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
+        if trigger == 0x00000100: trigger = "TRIGGER_WALL_INTERACT"
+        if trigger == 0x00001000: trigger = "TRIGGER_WALL_HAMMER"
+        if trigger == 0x00040000: trigger = "TRIGGER_CEILING_TOUCH"
+        if trigger == 0x00010000: trigger = "TRIGGER_SAVE_FLAG_SET"
+        if trigger == 0x00020000: trigger = "TRIGGER_AREA_FLAG_SET"
+        if trigger == 0x00100000: trigger = "TRIGGER_BOMB"
         return f"0x{trigger:X}" if type(trigger) is int else trigger
 
     def read_word(self):
@@ -544,7 +544,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if v <= -220000000: return str((v + 230000000) / 1024)
             elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
-            elif v <= -160000000: 
+            elif v <= -160000000:
                 if v + 170000000 == 0:
                     self.save_variable = "STORY_PROGRESS"
                 elif v + 170000000 == 425:
@@ -560,8 +560,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             elif v <= -40000000: return f"SI_MAP_VAR({v + 50000000})"
             elif v <= -20000000: return f"SI_VAR({v + 30000000})"
 
-        if arg == 0xFFFFFFFF:
-            return "-1"
+        if arg > 0xFFFFF000:
+            return str(~arg + 0xFFFFFFFF)
         elif ((arg & 0xFF000000) == 0x80000000) or arg > 10000:
             return f"0x{arg:X}"
         else:
@@ -588,11 +588,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             var -= 0x100000000
 
         # put cases for replacing vars here
-        if ((    case and self.case_variable == "STORY_PROGRESS") or 
+        if ((    case and self.case_variable == "STORY_PROGRESS") or
             (not case and self.save_variable == "STORY_PROGRESS")):
             if var in CONSTANTS["StoryProgress"]:
                 return CONSTANTS["StoryProgress"][var]
-        elif ((    case and self.case_variable == "WORLD_LOCATION") or 
+        elif ((    case and self.case_variable == "WORLD_LOCATION") or
               (not case and self.save_variable == "WORLD_LOCATION")):
             if var in CONSTANTS["Locations"]:
                 return CONSTANTS["Locations"][var]
@@ -629,7 +629,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
         # case variables need to be saved ahead of time, since they span many instructions
-        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or 
+        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or
             (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "WORLD_LOCATION")):
             argv[0] = self.replace_enum(argv[0], case=True)
 
@@ -786,7 +786,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.indent -= 1
             self.case_variable = ""
             self.write_line("}")
-        elif opcode == 0x24: 
+        elif opcode == 0x24:
             varA = self.replace_enum(argv[0])
             varB = self.replace_enum(argv[1])
             self.write_line(f"{varA} = {varB};")
