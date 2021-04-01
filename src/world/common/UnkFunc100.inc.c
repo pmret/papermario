@@ -30,7 +30,7 @@ ApiStatus N(UnkFunc100)(ScriptInstance *script, NpcAISettings *aiSettings, Enemy
     if (enemy->territory->patrol.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
     } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0f; //N(UnkFunc100_rodata_1);
+        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0; //N(UnkFunc100_rodata_1);
     }
 
     script->functionTemp[0].s = 1;

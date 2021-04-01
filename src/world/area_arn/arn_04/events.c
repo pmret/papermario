@@ -292,8 +292,6 @@ Script N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, SI_SAVE_FLAG(1019));
 });
 
-#include "world/common/UnkFunc100.inc.c"
-/*
 s32 N(func_80240000_BE37B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -328,7 +326,7 @@ s32 N(func_80240000_BE37B0)(ScriptInstance *script, NpcAISettings *aiSettings, E
     script->functionTemp[0].s = 1;
     return 1;
 }
-*/
+
 void N(func_80240158_BE3908)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -385,7 +383,7 @@ void N(func_802404C0_BE3C70)(ScriptInstance *script, NpcAISettings *aiSettings, 
     s32 var;
 
     if ((aiSettings->unk_14 >= 0) && func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
-        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         func_800494C0(npc, 0x2F4, 0x200000);
         if (!(enemy->npcSettings->unk_2A & 1)) {
@@ -524,7 +522,7 @@ s32 N(func_80240B94_BE4344)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(UnkFunc100)(script, npcAI, territoryPtr);
+            N(func_80240000_BE37B0)(script, npcAI, territoryPtr);
         case 1:
             N(func_80240158_BE3908)(script, npcAI, territoryPtr);
             break;
