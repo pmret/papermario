@@ -1,20 +1,38 @@
 #include "common.h"
+
+//static const f64 N(UnkFunc100_rodata_1) = 32767.0;
  
 ApiStatus N(UnkFunc100)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
+    f32 ret;
+    f32 max;
+    f32 posX;
+    f32 posZ;
+    s32 i;
+    s32 j;
+ 
+    script->functionTemp[1].s = 0;
+    max = 32767.0f;
+    posX = npc->pos.x;
+    posZ = npc->pos.z;
+    script->functionTemp[2].s = 0;
 
-    if (script->functionTemp[1].s <= 0) {
-        script->functionTemp[1].s = aiSettings->unk_14;
-        if (func_800490B4(shape, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
-            npc->currentAnim = enemy->animList[9];
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-            func_800494C0(npc, 0x2F4, 0x200000);
-            npc->duration = 12;
-            script->functionTemp[0].s = 2;
+    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
+        ret = dist2D(posX, posZ, (*(enemy->territory->patrol.points + i)).x, enemy->territory->patrol.points[i].z);
+        if (ret < max) {
+            max = ret;
+            script->functionTemp[2].s = j;
         }
     }
 
-    script->functionTemp[1].s--;
+    npc->currentAnim = enemy->animList[1];
+    if (enemy->territory->patrol.moveSpeedOverride < 0) {
+        npc->moveSpeed = aiSettings->moveSpeed;
+    } else {
+        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0f; //N(UnkFunc100_rodata_1);
+    }
+
+    script->functionTemp[0].s = 1;
+    return 1;
 }

@@ -292,6 +292,8 @@ Script N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, SI_SAVE_FLAG(1019));
 });
 
+#include "world/common/UnkFunc100.inc.c"
+/*
 s32 N(func_80240000_BE37B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -326,7 +328,7 @@ s32 N(func_80240000_BE37B0)(ScriptInstance *script, NpcAISettings *aiSettings, E
     script->functionTemp[0].s = 1;
     return 1;
 }
-
+*/
 void N(func_80240158_BE3908)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -522,7 +524,7 @@ s32 N(func_80240B94_BE4344)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_BE37B0)(script, npcAI, territoryPtr);
+            N(UnkFunc100)(script, npcAI, territoryPtr);
         case 1:
             N(func_80240158_BE3908)(script, npcAI, territoryPtr);
             break;
