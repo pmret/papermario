@@ -41,23 +41,23 @@ void clear_player_data(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
-        playerData->keyItems[i] = NO_ITEM;
+        playerData->keyItems[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
-        playerData->badges[i] = NO_ITEM;
+        playerData->badges[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
-        playerData->invItems[i] = NO_ITEM;
+        playerData->invItems[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-        playerData->equippedBadges[i] = NO_ITEM;
+        playerData->equippedBadges[i] = ITEM_NONE;
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->storedItems); i++) {
-        playerData->storedItems[i] = NO_ITEM;
+        playerData->storedItems[i] = ITEM_NONE;
     }
 
     playerData->otherHitsTaken = 0;
@@ -106,7 +106,7 @@ s32 add_item(s32 itemID) {
     sort_items();
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
-        if (playerData->invItems[i] == NO_ITEM) {
+        if (playerData->invItems[i] == ITEM_NONE) {
             break;
         }
     }
@@ -125,7 +125,7 @@ s32 get_item_count(void) {
     s32 sum = 0;
 
     for (i; i < ARRAY_COUNT(gPlayerData.invItems); i++) {
-        if (playerData->invItems[i] != NO_ITEM) {
+        if (playerData->invItems[i] != ITEM_NONE) {
             sum++;
         }
     }
@@ -170,18 +170,18 @@ s32 find_item(s32 itemID) {
     return i;
 }
 
-/// Bubbles up player inventory items such that all NO_ITEM values are at the bottom.
+/// Bubbles up player inventory items such that all ITEM_NONE values are at the bottom.
 void sort_items(void) {
     PlayerData* playerData = &gPlayerData;
     s32 j;
     s32 i;
 
     for (i = ARRAY_COUNT(playerData->invItems) - 2; i >= 0; i--) {
-        if (playerData->invItems[i] != NO_ITEM) {
+        if (playerData->invItems[i] != ITEM_NONE) {
             for (j = ARRAY_COUNT(playerData->invItems) - 1; i < j; j--) {
-                if (playerData->invItems[j] == NO_ITEM) {
+                if (playerData->invItems[j] == ITEM_NONE) {
                     playerData->invItems[j] = playerData->invItems[i];
-                    playerData->invItems[i] = NO_ITEM;
+                    playerData->invItems[i] = ITEM_NONE;
                     break;
                 }
             }
@@ -199,7 +199,7 @@ s32 add_badge(s32 itemID) {
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
-        if (playerData->badges[i] == NO_ITEM) {
+        if (playerData->badges[i] == ITEM_NONE) {
             break;
         }
     }
@@ -217,7 +217,7 @@ s32 store_item(s32 itemID) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
-        if (playerData->storedItems[i] == NO_ITEM) {
+        if (playerData->storedItems[i] == ITEM_NONE) {
             break;
         }
     }
@@ -237,7 +237,7 @@ s32 get_stored_count(void) {
     s32 sum = 0;
 
     for (i; i < ARRAY_COUNT(gPlayerData.storedItems); i++) {
-        if (playerData->storedItems[i] != NO_ITEM) {
+        if (playerData->storedItems[i] != ITEM_NONE) {
             sum++;
         }
     }

@@ -441,7 +441,7 @@ s32 func_802A58D0(void) {
     s8 partnerDebuff;
     s32 ret;
 
-    if (battleStatus->flags2 & 4 || partner == NO_PARTNER || partner->flags & 0x200000) {
+    if (battleStatus->flags2 & 4 || partner == PARTNER_NONE || partner->flags & 0x200000) {
         return FALSE;
     }
 
