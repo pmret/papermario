@@ -110,25 +110,29 @@ void state_init_logos(void) {
     (*gameStatus)->enableBackground = FALSE;
 }
 
-INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
-/*void state_step_logos(void) {
+//INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
+void state_step_logos(void) {
+    s32 gameModeTemp;
+    s32* temp800A0910;
+
     if (gGameStatusPtr->bSkipIntro) {
         if (intro_logos_fade_out(0xA) != 0) {
             set_curtain_scale(1.0f);
             set_curtain_fade(0.0f);
+            set_game_mode(2);
         }
-        set_game_mode(2);
     } else {
         switch (gGameStatusPtr->loadMenuState) {
             GameStatus** gameStatus;
+
             case 1:
                 gameStatus = &gGameStatusPtr;
 
                 if ((*gameStatus)->menuCounter == 0) {
                     intro_logos_set_fade_color(208);
                     (*gameStatus)->loadMenuState++;
-                    (*gameStatus)->menuCounter--;
                 }
+                (*gameStatus)->menuCounter--;
                 break;
             case 2:
                 if (intro_logos_fade_out(0xA) != 0) {
@@ -137,7 +141,8 @@ INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
                 break;
             case 3:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    gameStatus = &gGameStatusPtr;
+                    GameStatus** gameStatus = &gGameStatusPtr;
+
                     (*gameStatus)->loadMenuState++;
                     (*gameStatus)->menuCounter = 40;
                 }
@@ -148,21 +153,21 @@ INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
                 if ((*gameStatus)->menuCounter == 0) {
                     (*gameStatus)->loadMenuState++;
                     intro_logos_set_fade_color(208);
-                    (*gameStatus)->menuCounter--;
                 }
+                (*gameStatus)->menuCounter--;
                 break;
             case 5:
                 if (intro_logos_fade_out(0xA) != 0) {
                     gGameStatusPtr->loadMenuState++;
                 }
                 break;
-            default:
             case 0:
+            case 6:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    gameStatus = &gGameStatusPtr;
+                    GameStatus** gameStatus = &gGameStatusPtr;
+
                     (*gameStatus)->loadMenuState++;
                     (*gameStatus)->menuCounter = 30;
-                    break;
                 }
                 break;
             case 7:
@@ -186,7 +191,8 @@ INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
                 break;
             case 9:
                 if (intro_logos_fade_out(0xA) != 0) {
-                    gameStatus = &gGameStatusPtr;
+                    GameStatus** gameStatus = &gGameStatusPtr;
+
                     (*gameStatus)->menuCounter = 15;
                     (*gameStatus)->loadMenuState++;
                 }
@@ -199,18 +205,20 @@ INCLUDE_ASM(s32, "code_f270_len_1190", state_step_logos);
                 }
                 break;
             case 11:
-                heap_free(D_800A0910);
-                *D_800A0910 = 0;
+                temp800A0910 = &D_800A0910;
+                heap_free(*temp800A0910);
+                *temp800A0910 = 0;
+
                 intro_logos_set_fade_alpha(255);
                 gGameStatusPtr->unk_A8 = 0;
                 set_game_mode(16);
                 break;
         }
-        update_npcs();
-        update_cameras();
-        intro_logos_update_fade();
     }
-}*/
+    update_npcs();
+    update_cameras();
+    intro_logos_update_fade();
+}
 
 void state_drawUI_logos(void) {
     appendGfx_intro_logos();
