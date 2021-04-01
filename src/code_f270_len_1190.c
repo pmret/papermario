@@ -226,7 +226,7 @@ void state_drawUI_logos(void) {
 
 // all sorts of issues, but I think it's mostly with D_800A0918, 1C, and 14. Those need better types so they can have
 // proper array accesses. the display list macros should mostly be good
-#ifdef NON_MATCHINg
+#ifdef NON_MATCHING
 void appendGfx_intro_logos(void) {
     s32 i;
 
