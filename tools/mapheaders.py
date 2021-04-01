@@ -13,6 +13,10 @@ root_dir = script_dir + "/../"
 src_dir = root_dir + "src/world/"
 asm_dir = root_dir + "ver/current/asm/nonmatchings/world/"
 
+if len(sys.argv) <= 1 or not (sys.argv[1] == "y" or sys.argv[1] == "-y"):
+    print(f"Warning! This script is destructive, pass -y if you really want to run it")
+    exit()
+
 for root, dirs, files in os.walk(src_dir):
     for dir_name in dirs:
         dir_path = os.path.join(root, dir_name)

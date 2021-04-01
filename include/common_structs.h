@@ -136,7 +136,7 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ u8 unk_AB;
+    /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[3];
     /* 0x0B0 */ s32 unk_B0;

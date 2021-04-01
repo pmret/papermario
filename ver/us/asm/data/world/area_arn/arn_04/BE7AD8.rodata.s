@@ -2,11 +2,7 @@
 
 .section .rodata
 
-glabel D_80244328_BE7AD8
-.double 180.0
 
-glabel D_80244330_BE7AE0
-.double 75.0
 
 glabel D_80244338_BE7AE8
 .double 0.85

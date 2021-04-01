@@ -86,7 +86,7 @@ glabel L802422B8_BE5A68
 glabel L802422D0_BE5A80
 /* BE5A80 802422D0 0280202D */  daddu     $a0, $s4, $zero
 /* BE5A84 802422D4 0200282D */  daddu     $a1, $s0, $zero
-/* BE5A88 802422D8 0C09059A */  jal       dup_arn_04_UnkNpcAIFunc1
+/* BE5A88 802422D8 0C09059A */  jal       arn_04_UnkNpcAIFunc1
 /* BE5A8C 802422DC 0260302D */   daddu    $a2, $s3, $zero
 glabel L802422E0_BE5A90
 /* BE5A90 802422E0 0280202D */  daddu     $a0, $s4, $zero

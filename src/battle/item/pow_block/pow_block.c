@@ -4,13 +4,13 @@ Script N(main) = SCRIPT({
     SI_VAR(10) = c ITEM_P_O_W_BLOCK;
     await N(UseItemWithEffect);
     sleep 10;
-    MakeEntity(0x802EA2E0, 0xFFFFFFD8, 60, 0, 0, 0x80000000);
+    MakeEntity(0x802EA2E0, -40, 60, 0, 0, ARGS_END);
     SI_VAR(10) = SI_VAR(0);
     N(func_802A1318_718B68)();
-    PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     sleep 20;
     UseCamPreset(2);
@@ -19,10 +19,10 @@ Script N(main) = SCRIPT({
         sleep 15;
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
         N(func_802A123C_718A8C)();
-        PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, 0xFFFFFFE2, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, 0xFFFFFFD8, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        PlayEffect(0x7, 2, 0xFFFFFFD8, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, -30, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         StartRumble(4);
         ShakeCam(1, 0, 2, 1.0);
         ShakeCam(1, 0, 2, 3.0);
@@ -41,7 +41,7 @@ Script N(main) = SCRIPT({
     SetActorSpeed(ACTOR_PLAYER, 4.0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
     SetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    PlayerRunToGoal(0);
+    PlayerRunToGoal(ACTOR_PLAYER);
     sleep 5;
     SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009);
     SetActorJumpGravity(ACTOR_PLAYER, 0.6005859375);
@@ -66,10 +66,10 @@ Script N(main) = SCRIPT({
     if (SI_VAR(0) != -1) {
         goto 0;
     }
-    PlayEffect(0x7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFC4, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFBA, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    PlayEffect(0x7, 2, 0xFFFFFFBA, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -60, 65, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -70, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    PlayEffect(0x7, 2, -70, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     N(func_802A12E4_718B34)();
     sleep 30;
     await N(PlayerGoHome);

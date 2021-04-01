@@ -213,7 +213,7 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z));
+        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
         script->functionTemp[0].s = 0;
     }
 }

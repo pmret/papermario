@@ -1,17 +1,17 @@
-#include "arn_02.h"
+#include "arn_04.h"
 #include "message_ids.h"
 
 Vec4f N(entryList)[] = {
-    { -585.0f,  60.0f, 150.0f,  90.0f }, 
-    {  880.0f, 320.0f, 150.0f, 270.0f }, 
+    { -585.0,  60.0, 150.0,  90.0 },
+    {  820.0, 285.0, 150.0, 270.0 },
 };
 
 MapConfig N(config) = {
-    .main = N(Main),
+    .main = N(main),
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_arn_02_tattle,
+    .tattle = MSG_arn_04_tattle,
 };
 
 Script N(PlayMusic) = SCRIPT({
