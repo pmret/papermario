@@ -1,11 +1,10 @@
 import os
 from segtypes.n64.segment import N64Segment
 import png
-from math import ceil
+from util import iter
 from util import options
 from util.color import unpack_color
 import sys
-
 
 class N64SegRgba16(N64Segment):
     def __init__(self, segment, next_segment):
@@ -37,20 +36,6 @@ class N64SegRgba16(N64Segment):
     def flip_horizontal(self):
         return self.flip == "both" or self.flip.startswith("h") or self.flip == "x"
 
-    @staticmethod
-    def iter_image_indexes(width, height, bytes_per_x=1, bytes_per_y=1, flip_h=False, flip_v=False):
-        w = int(width * bytes_per_x)
-        h = int(height * bytes_per_y)
-
-        xrange = range(w - ceil(bytes_per_x), -1, -ceil(bytes_per_x)
-                       ) if flip_h else range(0, w, ceil(bytes_per_x))
-        yrange = range(h - ceil(bytes_per_y), -1, -ceil(bytes_per_y)
-                       ) if flip_v else range(0, h, ceil(bytes_per_y))
-
-        for y in yrange:
-            for x in xrange:
-                yield x, y, (y * w) + x
-
     def should_run(self):
         return super().should_run() or options.mode_active("img")
 
@@ -60,20 +45,21 @@ class N64SegRgba16(N64Segment):
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
-        w = self.png_writer()
+        w = self.__class__.get_writer(self.width, self.height)
         with open(path, "wb") as f:
             w.write_array(f, self.parse_image(data, self.width, self.height, self.flip_horizontal, self.flip_vertical))
 
         self.log(f"Wrote {self.name} to {path}")
 
-    def png_writer(self):
-        return png.Writer(self.width, self.height, greyscale=False, alpha=True)
+    @staticmethod
+    def get_writer(width, height):
+        return png.Writer(width, height, greyscale=False, alpha=True)
 
     @staticmethod
     def parse_image(data, width, height, flip_h=False, flip_v=False):
         img = bytearray()
 
-        for x, y, i in N64SegRgba16.iter_image_indexes(width, height, 2, 1, flip_h, flip_v):
+        for x, y, i in iter.iter_image_indexes(width, height, 2, 1, flip_h, flip_v):
             img += bytes(unpack_color(data[i:]))
 
         return img

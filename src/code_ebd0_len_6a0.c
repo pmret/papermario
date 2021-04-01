@@ -8,7 +8,6 @@ s16 intro_logos_fade_in(s16 subtractAlpha);
 s16 intro_logos_fade_out(s16 addAlpha);
 void intro_logos_update_fade(void);
 
-extern s32* D_8009A658;
 extern s32 D_800A0904;
 extern s32 D_800A0908;
 extern s16** D_800778A0;

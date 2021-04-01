@@ -21,12 +21,12 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", update_entity_rendercmd);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", step_entity_rendercmd);
 
-void make_mtx_flipZ(Matrix4f* mtx) {
+void make_mtx_flipZ(Matrix4f mtx) {
     guMtxIdentF(*mtx);
-    (*mtx)[0][0] = 1.0f;
-    (*mtx)[1][1] = 1.0f;
-    (*mtx)[2][2] = -1.0f;
-    (*mtx)[3][3] = 1.0f;
+    mtx[0][0] = 1.0f;
+    mtx[1][1] = 1.0f;
+    mtx[2][2] = -1.0f;
+    mtx[3][3] = 1.0f;
 }
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", appendGfx_entity_model);

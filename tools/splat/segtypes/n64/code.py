@@ -1,5 +1,6 @@
 import os
 import re
+from segtypes.n64.rgba32 import N64SegRgba32
 from segtypes.n64.rgba16 import N64SegRgba16
 import sys
 from collections import OrderedDict
@@ -27,6 +28,7 @@ word_mnemonics = ["addiu", "sw", "lw", "jtbl"]
 float_mnemonics = ["lwc1", "swc1"]
 short_mnemonics = ["addiu", "lh", "sh", "lhu"]
 byte_mnemonics = ["lb", "sb", "lbu"]
+img_types = ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]
 
 class Subsegment():
     def __init__(self, start, end, name, type, vram, args, parent):
@@ -82,7 +84,7 @@ class Subsegment():
             return "s"
         elif self.type == "bin":
             return "bin"
-        elif self.type in ["i4", "i8", "ia4", "ia8", "ia16", "rgba16", "rgba32", "ci4", "ci8"]:
+        elif self.type in img_types:
             return "png"
         elif self.type == "palette":
             return "pal.png"
@@ -120,35 +122,41 @@ class Subsegment():
             self.split_inner(segment, rom_bytes, base_path, self.get_generic_out_path(base_path))
 
     @staticmethod
-    def get_subclass(typ):
+    def create(typ, start, end, name, vram, args, parent):
         if typ in ["data", ".data", "rodata", ".rodata"]:
-            return DataSubsegment
+            sub_class = DataSubsegment
         elif typ in ["bss", ".bss"]:
-            return BssSubsegment
+            sub_class = BssSubsegment
         elif typ == "bin":
-            return BinSubsegment
+            sub_class = BinSubsegment
         elif typ in ["c", "asm", "hasm"]:
-            return CodeSubsegment
+            sub_class = CodeSubsegment
         elif typ == "palette":
-            return PaletteSubsegment
+            sub_class = PaletteSubsegment
         elif typ == "rgba32":
-            return RGBA32Subsegment
+            sub_class = RGBA32Subsegment
         elif typ == "rgba16":
-            return RGBA16Subsegment
+            sub_class = RGBA16Subsegment
+        elif typ == "ci4":
+            sub_class = CI4Subsegment
+        elif typ == "ci8":
+            sub_class = CI8Subsegment
         elif typ == "i4":
-            return I4Subsegment
+            sub_class = I4Subsegment
         elif typ == "i8":
-            return I8Subsegment
+            sub_class = I8Subsegment
         elif typ == "ia4":
-            return Ia4Subsegment
+            sub_class = Ia4Subsegment
         elif typ == "ia8":
-            return Ia8Subsegment
+            sub_class = Ia8Subsegment
         elif typ == "ia16":
-            return Ia16Subsegment
+            sub_class = Ia16Subsegment
         elif typ == "linker":
-            return LinkerSubsegment
+            sub_class = LinkerSubsegment
         else:
-            return Subsegment
+            sub_class = Subsegment
+
+        return sub_class(start, end, name, typ, vram, args, parent)
 
 class CodeSubsegment(Subsegment):
     defined_funcs = set()
@@ -284,11 +292,28 @@ class LinkerSubsegment(Subsegment):
     def get_ld_file(self):
         return "", self.name, self.type, self.rom_start
 
-class PaletteSubsegment(Subsegment):
+class ImageSubsegment(Subsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        if len(self.args) >= 2:
+            self.width, self.height = self.args
+
     def should_run(self):
         return super().should_run() or options.mode_active("img")
 
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        img_bytes = rom_bytes[self.rom_start : self.rom_end]
+        image = self.impl_class.parse_image(img_bytes, self.width, self.height, flip_h=False, flip_v=False)
+        w = self.impl_class.get_writer(self.width, self.height)
+        self.write(generic_out_path, w, image)
+
+    def write(self, out_path, writer, image):
+        Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "wb") as f:
+            writer.write_array(f, image)
+
+class PaletteSubsegment(ImageSubsegment):
+    def scan_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
 
         self.palette = N64SegPalette.parse_palette(img_bytes)
@@ -299,110 +324,69 @@ class PaletteSubsegment(Subsegment):
         else:
             segment.palettes[self.image_name].append(self)
 
-class RGBA32Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
+    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
+        pass
 
+class CI4Subsegment(ImageSubsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = img_bytes
+        image = N64SegCi4.parse_image(img_bytes, self.width, self.height)
 
-        w = png.Writer(width, height, greyscale=False, alpha=True)
+        for image_name in segment.palettes:
+            if self.name == image_name:
+                for palette in segment.palettes[self.name]:
+                    w = png.Writer(self.width, self.height, palette=palette.palette)
+                    out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path))
 
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
+                    self.write(out_path, w, image)
 
-class RGBA16Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
-
+class CI8Subsegment(ImageSubsegment):
     def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
         img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegRgba16.parse_image(img_bytes, width, height)
+        image = N64SegCi8.parse_image(img_bytes, self.width, self.height)
 
-        w = png.Writer(width, height, greyscale=False, alpha=True)
+        for image_name in segment.palettes:
+            if self.name == image_name:
+                for palette in segment.palettes[self.name]:
+                    w = png.Writer(self.width, self.height, palette=palette.palette)
+                    out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path))
 
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
+                    self.write(out_path, w, image)
 
-class I4Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
+class RGBA32Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegRgba32
 
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegI4.parse_image(img_bytes, width, height)
+class RGBA16Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegRgba16
 
-        w = png.Writer(width, height, greyscale=True, alpha=False)
+class I4Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegI4
 
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
+class I8Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegI8
 
-class I8Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
+class Ia4Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegIa4
 
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegI8.parse_image(img_bytes, width, height)
+class Ia8Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegIa8
 
-        w = png.Writer(width, height, greyscale=True, alpha=False)
-
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
-
-class Ia4Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
-
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegIa4.parse_image(img_bytes, width, height)
-
-        w = png.Writer(width, height, greyscale=True, alpha=True)
-
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
-
-class Ia8Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
-
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegIa8.parse_image(img_bytes, width, height)
-
-        w = png.Writer(width, height, greyscale=True, alpha=True)
-
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
-
-class Ia16Subsegment(Subsegment):
-    def should_run(self):
-        return super().should_run() or options.mode_active("img")
-
-    def split_inner(self, segment, rom_bytes, base_path, generic_out_path):
-        img_bytes = rom_bytes[self.rom_start : self.rom_end]
-        width, height = self.args
-        image = N64SegIa16.parse_image(img_bytes, width, height)
-
-        w = png.Writer(width, height, greyscale=True, alpha=True)
-
-        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(generic_out_path, "wb") as f:
-            w.write_array(f, image)
+class Ia16Subsegment(ImageSubsegment):
+    def __init__(self, start, end, name, type, vram, args, parent):
+        super().__init__(start, end, name, type, vram, args, parent)
+        self.impl_class = N64SegIa16
 
 class N64SegCode(N64Segment):
     palettes = {}
@@ -443,22 +427,17 @@ class N64SegCode(N64Segment):
 
             vram = self.rom_to_ram(start)
 
-            subsegment_class = Subsegment.get_subclass(typ)
+            subsegment = Subsegment.create(typ, start, end, name, vram, args, base_segments.get(name, None))
 
             if self.rodata_vram_start == -1 and "rodata" in typ:
                 self.rodata_vram_start = vram
             if self.rodata_vram_end == -1 and "bss" in typ:
                 self.rodata_vram_end = vram
 
-            parent = None
-            if name in base_segments:
-                parent = base_segments[name]
-
-            new_segment = subsegment_class(start, end, name, typ, vram, args, parent)
-            ret.append(new_segment)
+            ret.append(subsegment)
 
             if typ in ["c", "asm", "hasm"]:
-                base_segments[name] = new_segment
+                base_segments[name] = subsegment
 
             prev_start = start
 
@@ -539,7 +518,8 @@ class N64SegCode(N64Segment):
         else:
             return None
 
-    def get_symbol(self, addr, type=None, create=False, define=False, reference=False, offsets=False, local_only=False):
+    def get_symbol(self, addr, type=None, create=False, define=False, reference=False, offsets=False, local_only=False,
+                   skip_dead=False):
         ret = None
         rom = None
 
@@ -573,6 +553,9 @@ class N64SegCode(N64Segment):
                 self.ext_symbols[addr].append(ret)
 
         if ret:
+            if skip_dead and ret.dead:
+                return None
+
             if define:
                 ret.defined = True
             if reference:
@@ -674,7 +657,7 @@ class N64SegCode(N64Segment):
                     end_func = True
                     continue
 
-            if i < len(insns) - 1 and self.get_symbol(insns[i + 1].address, local_only=True, type="func"):
+            if i < len(insns) - 1 and self.get_symbol(insns[i + 1].address, local_only=True, type="func", skip_dead=True):
                 end_func = True
 
             if end_func:
@@ -911,7 +894,7 @@ class N64SegCode(N64Segment):
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
-                if sub.contains_vram(symbol.vram_start):
+                if not symbol.dead and sub.contains_vram(symbol.vram_start):
                     ret.append(symbol)
 
         ret.sort(key=lambda s:s.vram_start)
@@ -1105,8 +1088,8 @@ class N64SegCode(N64Segment):
             func_rodata.sort(key=lambda s:s.vram_start)
 
             if len(func_rodata) > 0:
-                sub = self.get_subsection_for_ram(func_rodata[0].vram_start)
-                if sub and sub.type != "rodata":
+                rsub = self.get_subsection_for_ram(func_rodata[0].vram_start)
+                if rsub and rsub.type != "rodata":
                     out_lines.append(".section .rodata")
 
                     for sym in func_rodata:
@@ -1151,22 +1134,3 @@ class N64SegCode(N64Segment):
 
         for sub in self.subsegments:
             sub.split(self, rom_bytes, base_path)
-
-        for image_name in self.palettes:
-            for sub in self.subsegments:
-                if sub.type in ["ci4", "ci8"] and (sub.should_run() or options.mode_active("img")) and sub.name == image_name:
-                    img_bytes = rom_bytes[sub.rom_start : sub.rom_end]
-                    width, height = sub.args
-
-                    for palette in self.palettes[sub.name]:
-                        if sub.type == "ci4":
-                            image = N64SegCi4.parse_image(img_bytes, width, height)
-                        elif sub.type == "ci8":
-                            image = N64SegCi8.parse_image(img_bytes, width, height)
-
-                        w = png.Writer(width, height, palette=palette.palette)
-
-                        generic_out_path = re.sub(r"\.pal\.png", ".png", palette.get_generic_out_path(base_path))
-                        Path(generic_out_path).parent.mkdir(parents=True, exist_ok=True)
-                        with open(generic_out_path, "wb") as f:
-                            w.write_array(f, image)

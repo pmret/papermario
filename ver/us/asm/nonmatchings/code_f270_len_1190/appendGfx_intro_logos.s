@@ -8,7 +8,7 @@ glabel jtbl_800982C0
 
 .section .text
 
-glabel func_800343A4
+glabel appendGfx_intro_logos
 /* F7A4 800343A4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* F7A8 800343A8 3C05E200 */  lui       $a1, 0xe200
 /* F7AC 800343AC 34A5001C */  ori       $a1, $a1, 0x1c

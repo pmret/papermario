@@ -1,11 +1,11 @@
 #include "common.h"
 #include "map.h"
 
-void N(SomeMatrixOperation)(Matrix4f* mtx, f32 arg1, f32 arg2, f32 arg3) {
+void N(SomeMatrixOperation)(Matrix4f mtx, f32 arg1, f32 arg2, f32 arg3) {
     guMtxIdentF(*mtx);
-    (*mtx)[1][0] = arg1 * arg2;
-    (*mtx)[1][1] = 1.0f;
-    (*mtx)[1][2] = arg1 * arg3;
+    mtx[1][0] = arg1 * arg2;
+    mtx[1][1] = 1.0f;
+    mtx[1][2] = arg1 * arg3;
 }
 
 ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall) {

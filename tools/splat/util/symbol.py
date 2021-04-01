@@ -48,3 +48,4 @@ class Symbol:
         self.given_name = given_name
         self.access_mnemonic = None
         self.disasm_str = None
+        self.dead = False
