@@ -54,7 +54,7 @@ def script_lib(offset):
                     _script_lib[vaddr] = []
                 _script_lib[vaddr].append([int(raddr, 16), name])
 
-        # Sort the symbols for each vram address by the difference 
+        # Sort the symbols for each vram address by the difference
         # between their rom address and the offset passed in.
         # If offset - rom address goes below 0, it's part of the
         # previous file, so treat it as min priority, same as a default.
@@ -224,7 +224,7 @@ def fix_args(func, args, info):
             else:
                 print(f"0x{argNum:X} was not found within {info[i]} constants, add it.")
                 #Print the unknowns in hex
-                new_args.append(f"0x{int(arg):X}")
+                new_args.append(f"0x{int(argNum):X}")
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
@@ -252,7 +252,7 @@ replace_funcs = {
     "func_802CFE2C"             :{0:"NpcIDs"},
     "func_802CFD30"             :{0:"NpcIDs"},
     "func_802D2520"             :{0:"PlayerAnims"},
-    
+
     "GetActorPos"               :{0:"ActorIDs"},
     "GetGoalPos"                :{0:"ActorIDs"},
     "GetItemPower"              :{0:"ItemIDs"},
@@ -273,12 +273,12 @@ replace_funcs = {
     "NpcFaceNpc"                :{0:"NpcIDs", 1:"NpcIDs"},
     "NpcJump0"                  :{0:"NpcIDs"},
     "NpcMoveTo"                 :{0:"NpcIDs"},
-    
+
     "PlayAmbientSounds"         :{0:"AmbientSounds"},
     "PlaySound"                 :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
-    
+
     "RemoveActorDecoration"     :{0:"ActorIDs"},
     "RunToGoal"                 :{0:"ActorIDs"},
 
@@ -308,7 +308,7 @@ replace_funcs = {
     "SetTargetActor"            :{0:"ActorIDs"},
     "ShowEmote"                 :{1:"Emotes"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
-    
+
     "UseIdleAnimation"          :{0:"ActorIDs"},
 }
 
@@ -415,18 +415,18 @@ class ScriptDisassembler:
         return f"0x{addr:08X}"
 
     def trigger(self, trigger):
-        if trigger == 0x00000080: trigger = "TriggerFlag_FLOOR_TOUCH"
-        if trigger == 0x00800000: trigger = "TriggerFlag_FLOOR_ABOVE"
-        if trigger == 0x00000800: trigger = "TriggerFlag_FLOOR_INTERACT"
-        if trigger == 0x00000200: trigger = "TriggerFlag_FLOOR_JUMP"
-        if trigger == 0x00000400: trigger = "TriggerFlag_WALL_TOUCH"
-        if trigger == 0x00000040: trigger = "TriggerFlag_WALL_PUSH"
-        if trigger == 0x00000100: trigger = "TriggerFlag_WALL_INTERACT"
-        if trigger == 0x00001000: trigger = "TriggerFlag_WALL_HAMMER"
-        if trigger == 0x00040000: trigger = "TriggerFlag_CEILING_TOUCH"
-        if trigger == 0x00010000: trigger = "TriggerFlag_SAVE_FLAG_SET"
-        if trigger == 0x00020000: trigger = "TriggerFlag_AREA_FLAG_SET"
-        if trigger == 0x00100000: trigger = "TriggerFlag_BOMB"
+        if trigger == 0x00000080: trigger = "TRIGGER_FLOOR_TOUCH"
+        if trigger == 0x00800000: trigger = "TRIGGER_FLOOR_ABOVE"
+        if trigger == 0x00000800: trigger = "TRIGGER_FLOOR_INTERACT"
+        if trigger == 0x00000200: trigger = "TRIGGER_FLOOR_JUMP"
+        if trigger == 0x00000400: trigger = "TRIGGER_WALL_TOUCH"
+        if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
+        if trigger == 0x00000100: trigger = "TRIGGER_WALL_INTERACT"
+        if trigger == 0x00001000: trigger = "TRIGGER_WALL_HAMMER"
+        if trigger == 0x00040000: trigger = "TRIGGER_CEILING_TOUCH"
+        if trigger == 0x00010000: trigger = "TRIGGER_SAVE_FLAG_SET"
+        if trigger == 0x00020000: trigger = "TRIGGER_AREA_FLAG_SET"
+        if trigger == 0x00100000: trigger = "TRIGGER_BOMB"
         return f"0x{trigger:X}" if type(trigger) is int else trigger
 
     def read_word(self):
@@ -676,7 +676,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if v <= -220000000: return str((v + 230000000) / 1024)
             elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
-            elif v <= -160000000: 
+            elif v <= -160000000:
                 if v + 170000000 == 0:
                     self.save_variable = "STORY_PROGRESS"
                 elif v + 170000000 == 425:
@@ -723,11 +723,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             var -= 0x100000000
 
         # put cases for replacing vars here
-        if ((    case and self.case_variable == "STORY_PROGRESS") or 
+        if ((    case and self.case_variable == "STORY_PROGRESS") or
             (not case and self.save_variable == "STORY_PROGRESS")):
             if var in CONSTANTS["StoryProgress"]:
                 return CONSTANTS["StoryProgress"][var]
-        elif ((    case and self.case_variable == "WORLD_LOCATION") or 
+        elif ((    case and self.case_variable == "WORLD_LOCATION") or
               (not case and self.save_variable == "WORLD_LOCATION")):
             if var in CONSTANTS["Locations"]:
                 return CONSTANTS["Locations"][var]
@@ -925,7 +925,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.indent -= 1
             self.case_variable = ""
             self.write_line("}")
-        elif opcode == 0x24: 
+        elif opcode == 0x24:
             varA = self.replace_enum(argv[0])
             varB = self.replace_enum(argv[1])
             self.write_line(f"{varA} = {varB};")
@@ -1037,7 +1037,6 @@ if __name__ == "__main__":
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-            gap_size = 0
             while args.offset < args.end:
                 f.seek(args.offset)
 
@@ -1047,10 +1046,18 @@ if __name__ == "__main__":
 
                     if script.instructions > 1 and "SI_CMD" not in script_text:
                         if gap and first_print:
-                            print(f"========== 0x{args.offset - gap_start:X} byte gap 0x{gap_start:X} - 0x{args.offset:X} ==========")
+                            potential_struct_sizes = { "StaticNpc": 0x1F0, "NpcAISettings":0x30, "NpcSettings":0x2C, "NpcGroupList":0xC }
+                            gap_size = args.offset - gap_start
+                            potential_struct = "Unknown data"
+                            potential_count = 1
+                            for k,v in potential_struct_sizes.items():
+                                if gap_size % v == 0:
+                                    potential_struct = k
+                                    potential_count = gap_size // v
+
+                            print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{args.offset:X} ==========")
                             print()
                             gap = False
-                            gap_size = 0
                         #print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()

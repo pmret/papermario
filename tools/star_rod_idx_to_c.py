@@ -87,6 +87,8 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             out += f"\n}};\n"
         else: # unknown type of struct
+            if struct["type"] == "Padding":
+                out += "static "
             out += f"s32 {name}[] = {{"
             for i in range(0, struct["length"], 4):
                 if (i % 0x20) == 0:
@@ -95,7 +97,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 word = int.from_bytes(bytes.read(4), byteorder="big")
 
                 if word in symbol_map:
-                    out += f" {symbol_map[word]},"
+                    out += f" {symbol_map[word][0][1]},"
                 else:
                     out += f" 0x{word:08X},"
 
@@ -190,9 +192,11 @@ if __name__ == "__main__":
 
     symbol_map = {}
     for struct in midx:
-        symbol_map[struct["vaddr"]] = struct["name"]
+        symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
 
-    with open(os.path.join(DIR, "../baserom.z64"), "rb") as romfile:
+    disasm_script.get_constants()
+
+    with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
         romfile.seek(eval(args.offset))
         disasm = disassemble(romfile, midx, symbol_map, args.comments, eval(args.offset))
         print(disasm.rstrip())

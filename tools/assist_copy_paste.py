@@ -74,25 +74,37 @@ if function_text == "":
     exit()
 
 for file in files:
+    if not file:
+        continue
     function, file_path, decomp = find_file_path(file)
-    print(function, file_path, decomp)
 
     if not function:
-        print(f"Failed to find {function}")
-    else:
-        file_path = (Path(__file__).parent.parent / file_path).resolve()
-        func_file = file_path.read_text().splitlines()
-        new_func_file = []
-        for i,line in enumerate(func_file):
-            if line:
-                line = line.strip()
-                split_line = line.split(" ")
-                if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2]:
-                    new_func_file.append(line)
-                    new_func_file.append(function_text)
-                else:
-                    new_func_file.append(line)
+        print(f"Failed to find {file}")
+        continue
+
+    print(f"Func:\"{function}\" path:\"{file_path}\" Decomped: {decomp}")
+
+    # don't want to try and replace already-decompiled functions
+    if decomp:
+        continue
+
+    file_path = (Path(__file__).parent.parent / file_path).resolve()
+    func_file = file_path.read_text().splitlines()
+    new_func_file = []
+    for i,line in enumerate(func_file):
+        if line:
+            line = line.strip()
+            split_line = line.split(" ")
+            if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and "/*" not in func_file[i+1]:
+                new_func_file.append(line)
+                temp = function_text.splitlines()
+                temp[1] = temp[1].replace("N()", f"N({function})")
+                new_func_file.append("\n".join(temp))
             else:
                 new_func_file.append(line)
-        print("\n".join(new_func_file))
-        exit()
+        else:
+            new_func_file.append(line)
+
+    #print(f"Altering {file_path}")
+    #print("\n".join(new_func_file))
+    file_path.write_text("\n".join(new_func_file))
