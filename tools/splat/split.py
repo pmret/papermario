@@ -88,10 +88,6 @@ def get_symbol_addrs_path(repo_path):
     return os.path.join(repo_path, options.get("symbol_addrs_path", "symbol_addrs.txt"))
 
 
-def get_undefined_syms_path(repo_path):
-    return os.path.join(repo_path, options.get("undefined_syms_path", "undefined_syms.txt"))
-
-
 def get_undefined_syms_auto_path(repo_path):
     return os.path.join(repo_path, options.get("undefined_syms_auto_path", "undefined_syms_auto.txt"))
 
@@ -104,7 +100,7 @@ def get_cache_path(repo_path):
     return os.path.join(repo_path, options.get("cache_path", ".splat_cache"))
 
 
-def gather_symbols(symbol_addrs_path, undefined_syms_path):
+def gather_symbols(symbol_addrs_path):
     symbols = []
 
     # Manual list of func name / addrs
@@ -139,6 +135,10 @@ def gather_symbols(symbol_addrs_path, undefined_syms_path):
                         if info.startswith("rom:"):
                             rom_addr = int(info.split(":")[1], 0)
                             sym.rom = rom_addr
+                        if info.startswith("dead:"):
+                            sym.dead = True
+                            sym.defined = True
+
                 symbols.append(sym)
     return symbols
 
@@ -153,7 +153,7 @@ def get_base_segment_class(seg_type, platform):
 
 
 def get_extension_dir(config_path):
-    if not options.is_defined("extensions"):
+    if not options.get("extensions"):
         return None
     return os.path.join(Path(config_path).parent, options.get("extensions"))
 
@@ -287,8 +287,7 @@ def main(config_path, out_dir, target_path, modes, verbose, ignore_cache=False):
     Path(out_dir).mkdir(parents=True, exist_ok=True)
 
     symbol_addrs_path = get_symbol_addrs_path(out_dir)
-    undefined_syms_path = get_undefined_syms_path(out_dir)
-    all_symbols = gather_symbols(symbol_addrs_path, undefined_syms_path)
+    all_symbols = gather_symbols(symbol_addrs_path)
     symbol_ranges = [s for s in all_symbols if s.size > 4]
     platform = get_platform()
 
@@ -311,7 +310,7 @@ def main(config_path, out_dir, target_path, modes, verbose, ignore_cache=False):
     all_segments = initialize_segments(config_path, config["segments"])
 
     for segment in all_segments:
-        if platform == "n64" and type(segment) == N64SegCode: # remove special-case sometime
+        if platform == "n64" and type(segment) == N64SegCode: # TODO remove special-case sometime
             segment_symbols, other_symbols = get_segment_symbols(segment, all_symbols, all_segments)
             segment.seg_symbols = segment_symbols
             segment.ext_symbols = other_symbols

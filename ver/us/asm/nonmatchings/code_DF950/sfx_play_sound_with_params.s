@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel _sfx_play_sound
+glabel sfx_play_sound_with_params
 /* E01B8 80149AB8 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* E01BC 80149ABC 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* E01C0 80149AC0 27BDFFE8 */  addiu     $sp, $sp, -0x18

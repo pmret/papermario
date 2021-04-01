@@ -1,4 +1,4 @@
-#include "code_11a50_len_7a0.h"
+#include "common.h"
 
 void begin_state_intro(void) {
     GameStatus** gameStatus = &gGameStatusPtr;

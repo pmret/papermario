@@ -42,9 +42,14 @@ typedef struct Map {
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
     /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
-    /* 0x1C */ s16 unk_1C; // Unused?
-    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-    /* 0x1F */ s8 flags;
+    /* 0x1C */ union {
+        u32 u32;
+        struct {
+            char unk_1C[0x2];
+            s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
+            s8 flags;
+        } bytes;
+    } unk_1C;
 } Map; // size = 0x20
 
 typedef struct Area {

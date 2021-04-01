@@ -1,4 +1,4 @@
-#include "code_6e40_len_500.h"
+#include "common.h"
 
 void initialize_curtains(void) {
     gCurtainDrawCallback = NULL;

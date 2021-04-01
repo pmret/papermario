@@ -128,7 +128,7 @@ void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX
     *outS = ((mtx[0][3] * inX) + (mtx[1][3] * inY) + (mtx[2][3] * inZ) + mtx[3][3]);
 }
 
-void copy_matrix(Matrix4f* src, Matrix4f* dest) {
+void copy_matrix(Matrix4f src, Matrix4f dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 

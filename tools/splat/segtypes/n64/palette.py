@@ -1,9 +1,11 @@
 import os
+import sys
+
 from segtypes.n64.segment import N64Segment
+from util import options
 from util.color import unpack_color
 from util.iter import iter_in_groups
-from util import options
-import sys
+
 
 class N64SegPalette(N64Segment):
     require_unique_name = False
