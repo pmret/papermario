@@ -1,3 +1,5 @@
+#! /usr/bin/python3
+
 from pathlib import Path
 import argparse
 from struct import unpack_from
@@ -112,15 +114,23 @@ def parse_var(line):
 
     #print(f"Parsed {line}")
     if " " in line:
+        if line.startswith("extern "):
+            line = line[len("extern "):]
+        if line.startswith("typedef "):
+            line = line[len("typedef "):]
         if line.startswith("struct "):
-            struct, type_, name = line.split(" ")
-        else:
-            type_, name = line.split(" ")
+            line = line[len("struct "):]
+        if line.startswith("const "):
+            line = line[len("const "):]
+
+        type_, name = line.split(" ")
     else:
         type_ = "function"
         name = line.split("(", 1)[0]
     count = 1
-    if "[" in name:
+    if name.endswith("[]"):
+        count = -1
+    elif "[" in name:
         name, *count = name.split("[")
         counts = 1
         count.reverse()
@@ -146,7 +156,7 @@ def parse_file(filename):
 
             struct_to_add = []
             i += 1
-            while ("} " + f"{supported_name.upper()}") not in fd[i].split(";",1)[0].upper():
+            while not fd[i][0] == "}": # ("} " + f"{supported_name.upper()}") not in fd[i].split(";",1)[0].upper():
                 type_, name, count, ptr = parse_var(fd[i])
 
                 if type_ == None:
@@ -177,6 +187,7 @@ def parse_file(filename):
 
 def get_structs():
     parse_file(Path(Path(__file__).parent.parent / "include" / "map.h"))
+    parse_file(Path(Path(__file__).parent.parent / "src" / "battle" / "battle.h"))
     parse_file(Path(Path(__file__).parent.parent / "include" / "common_structs.h"))
 
 def get_vals(fd, offset, var):
@@ -267,7 +278,7 @@ def get_vals(fd, offset, var):
 def INDENT(depth):
     return f"    " * depth
 
-def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
+def print_data(vals, indent, needs_name, is_array=False, is_struct=False, symbol_map={}):
     out = []
     for val in vals:
         line = ""
@@ -338,10 +349,12 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                 elif val["type"] == "hex":
                     line += f"0x{val['data']:{fmt}}"
                 elif val["type"] == "ptr":
-                   if val["data"] == 0:
-                       line += f"NULL"
-                   else:
-                       line += f"0x{val['data']:{fmt}}"
+                    if val["data"] == 0:
+                        line += f"NULL"
+                    elif val["data"] in symbol_map:
+                        line += "&" + symbol_map[val["data"]][0][1]
+                    else:
+                        line += f"0x{val['data']:{fmt}}"
                 else:
                     line += f"{val['data']}"
 
@@ -365,6 +378,15 @@ def output_type2(fd, count, offset, var):
         out.append("};")
         ultra_out.append(out)
     return offset, ultra_out #"\n".join(out)
+
+def output_single_line(fd, offset, struct_type, symbol_map={}):
+    vals = []
+
+    for var in STRUCTS[struct_type]:
+        tmp, offset = get_vals(fd, offset, var)
+        vals.extend(tmp)
+
+    return offset, "{ " + (" ".join(print_data(vals, 0, True, symbol_map=symbol_map)))[:-1] + " }"
 
 def check_list(vals, depth = 0):
     for x,val in enumerate(vals):
@@ -627,6 +649,10 @@ def MacroReplaceNpcGroupList(fd):
     out.append(f"    NPC_GROUP(N(D_{vals[1]:X}), BATTLE_ID({(vals[2] & 0xFF000000) >> 24}, {(vals[2] & 0xFF0000) >> 16}, {(vals[2] & 0xFF00) >> 8}, {vals[2] & 0xFF})),")
     return "\n".join(out)
 
+def init():
+    get_constants()
+    get_structs()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="File to decompile struct from")
@@ -635,8 +661,7 @@ if __name__ == "__main__":
     parser.add_argument("--count", "-c", "--c", type=int, default=0, help="Num to try and decompile (NpcGroupList)")
     args = parser.parse_args()
 
-    get_constants()
-    get_structs()
+    init()
 
     if args.type not in STRUCTS:
         print(f"Unknown struct type {args.type}")

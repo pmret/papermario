@@ -295,7 +295,7 @@ extern BattleArea gBattleAreas[0x30];
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 
-typedef struct {
+typedef struct DefenseTableEntry {
     Element element;
     s32 defense;
 } DefenseTableEntry;

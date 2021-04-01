@@ -8,6 +8,7 @@ from struct import unpack
 import argparse
 
 import disasm_script
+import disasm_struct
 
 DIR = os.path.dirname(__file__)
 
@@ -86,6 +87,19 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += " %ff," % word
 
             out += f"\n}};\n"
+        elif struct["type"] == "Formation":
+            out += f"Formation {struct['name']} = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                num_read, s = disasm_struct.output_single_line(bytes.read(0x1C), 0, "FormationRow")
+                num_bytes_remaining -= num_read
+
+                s = s.replace(", .var0 = 0, .var1 = 0, .var2 = 0, .var3 = 0", "")
+
+                out += f"    {s},\n"
+
+            out += f"}};\n"
         else: # unknown type of struct
             if struct["type"] == "Padding":
                 out += "static "
@@ -205,6 +219,7 @@ if __name__ == "__main__":
         symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
 
     disasm_script.get_constants()
+    disasm_struct.init()
 
     with open(os.path.join(DIR, "../ver/current/splat.yaml")) as f:
         splat_config = yaml.safe_load(f.read())
