@@ -36,7 +36,7 @@ NUPiOverlaySegment D_8007795C = {
 
 void appendGfx_intro_logos();
 
-
+// bss?
 extern s8 D_800A0910[];
 
 void state_init_logos(void) {
@@ -224,79 +224,87 @@ void state_drawUI_logos(void) {
     appendGfx_intro_logos();
 }
 
+// all sorts of issues, but I think it's mostly with D_800A0918, 1C, and 14. Those need better types so they can have
+// proper array accesses. the display list macros should mostly be good
+#ifdef NON_MATCHINg
+void appendGfx_intro_logos(void) {
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+    gDPSetFillColor(gMasterGfxPos++, 0xE739E739);
+    gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, 239);
+    gDPPipeSync(gMasterGfxPos++);
+
+    switch (gGameStatusPtr->loadMenuState) {
+        case 0:
+        case 1:
+        case 2:
+            gSPDisplayList(gMasterGfxPos++, D_80077908);
+
+            for (i = 0; i < 7; i++) {
+                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, D_800A0918 + (i << 0xC));
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPLoadSync(gMasterGfxPos++);
+                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 508, 60);
+                gDPPipeSync(gMasterGfxPos++);
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_RENDERTILE, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD);
+                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 60);
+                gSPTextureRectangle(gMasterGfxPos++, 384, 256 + i * 64, 896, 320 + i * 64, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPPipeSync(gMasterGfxPos++);
+            }
+            break;
+        case 3:
+        case 4:
+        case 5:
+            gSPDisplayList(gMasterGfxPos++, D_80077908);
+
+            for (i = 0; i < 6; i++) {
+                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A091C + (i << 0xC));
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPLoadSync(gMasterGfxPos++);
+                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
+                gDPPipeSync(gMasterGfxPos++);
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD);
+                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
+                gSPTextureRectangle(gMasterGfxPos++, 128, 356 + i * 32, 1152, 388 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPPipeSync(gMasterGfxPos++);
+            }
+            break;
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            gSPDisplayList(gMasterGfxPos++, D_80077908);
+
+            for (i = 0; i < 14; i++) {
+                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A0914[i] + (i << 0xC));
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                           G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                gDPLoadSync(gMasterGfxPos++);
+                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
+                gDPPipeSync(gMasterGfxPos++);
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD);
+                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
+                gSPTextureRectangle(gMasterGfxPos++, 128, 236 + i * 32, 1152, 268 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPPipeSync(gMasterGfxPos++);
+            }
+            break;
+    }
+}
+#else
 INCLUDE_ASM(void, "code_f270_len_1190", appendGfx_intro_logos);
-// void appendGfx_intro_logos(void) {
-//     s32 i;
-
-//     gDPPipeSync(gMasterGfxPos++);
-//     gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-//     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
-//     gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-//     gDPSetFillColor(gMasterGfxPos++, 0xE739E739);
-//     gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, 239);
-//     gDPPipeSync(gMasterGfxPos++);
-
-//     switch (gGameStatusPtr->loadMenuState) {
-//         case 0:
-//         case 1:
-//         case 2:
-//             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
-//             for (i = 0; i < 7; i++) {
-//                 gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, D_800A0918 + (i << 0xC));
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-//                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-//                 gDPLoadSync(gMasterGfxPos++);
-//                 gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 508, 60);
-//                 gDPPipeSync(gMasterGfxPos++);
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_RENDERTILE, 0,
-//                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-//                            G_TX_NOLOD);
-//                 gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 60);
-//                 gSPTextureRectangle(gMasterGfxPos++, 384, 256 + i * 64, 896, 320 + i * 64, G_TX_RENDERTILE, 0, 0, 1024, 1024);
-//                 gDPPipeSync(gMasterGfxPos++);
-//             }
-//             break;
-//         case 3:
-//         case 4:
-//         case 5:
-//             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
-//             for (i = 0; i < 6; i++) {
-//                 gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A091C + (i << 0xC));
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-//                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-//                 gDPLoadSync(gMasterGfxPos++);
-//                 gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
-//                 gDPPipeSync(gMasterGfxPos++);
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
-//                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-//                            G_TX_NOLOD);
-//                 gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
-//                 gSPTextureRectangle(gMasterGfxPos++, 128, 356 + i * 32, 1152, 388 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
-//                 gDPPipeSync(gMasterGfxPos++);
-//             }
-//             break;
-//         default:
-//             gSPDisplayList(gMasterGfxPos++, D_80077908);
-
-//             for (i = 0; i < 14; i++) {
-//                 gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, D_800A0914 + (i << 0xC));
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-//                            G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-//                 gDPLoadSync(gMasterGfxPos++);
-//                 gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 1020, 28);
-//                 gDPPipeSync(gMasterGfxPos++);
-//                 gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 64, 0x0000, G_TX_RENDERTILE, 0,
-//                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-//                            G_TX_NOLOD);
-//                 gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 1020, 28);
-//                 gSPTextureRectangle(gMasterGfxPos++, 128, 236 + i * 32, 1152, 268 + i * 32, G_TX_RENDERTILE, 0, 0, 1024, 1024);
-//                 gDPPipeSync(gMasterGfxPos++);
-//             }
-//             break;
-//     }
-// }
+#endif
 
 void state_init_pause(void) {
     D_800A0921 = 0;
