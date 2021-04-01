@@ -346,7 +346,7 @@ typedef struct StaticEntityData {
     /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
-typedef struct MusicPlayer {
+typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
@@ -355,13 +355,13 @@ typedef struct MusicPlayer {
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 songName;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
-} MusicPlayer; // size = 0x30
+} MusicSettings; // size = 0x30
 
 typedef struct MenuIcon {
     /* 0x00 */ u32 flags;
@@ -996,8 +996,9 @@ typedef struct GameStatus {
     /* 0x0AA */ s8 unk_AA;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
-    /* 0x0AD */ u8 menuCounter;
-    /* 0x0AE */ char unk_AE[8];
+    /* 0x0AD */ s8 menuCounter;
+    /* 0x0AE */ s8 bSkipIntro;
+    /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
@@ -1020,7 +1021,7 @@ typedef struct GameStatus {
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ char unk_15E[0x2];
+    /* 0x15E */ u16 unk_15E;
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */

@@ -146,8 +146,10 @@ void mem_clear(s8* data, s32 numBytes);
 MenuIcon* create_icon(s32* iconIndex);
 void set_icon_render_pos(MenuIcon* iconIndex, s32 posX, s32 posY);
 
-void set_curtain_scale_goal(f32 scale);
-void set_curtain_fade(f32 scale);
+void intro_logos_set_fade_color(s16 color);
+void intro_logos_set_fade_alpha(s16 alpha);
+
+void set_game_mode(s16 idx);
 
 void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
@@ -233,6 +235,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
+void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
 
 s32 basic_window_update(void);
@@ -263,6 +266,8 @@ void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
 void exec_entity_updatecmd(Entity* entity);
 
+void sfx_reset_door_sounds(void);
+
 void func_802D7460(f32 x, f32 y, f32 z, s32 arg3);
 void func_802D74C0(f32 x, f32 y, f32 z, s32 arg3);
 
@@ -281,6 +286,23 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void func_80138D88(s32, s32, s32, s32, f32);
 s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
+
+void func_802B2078(void);
+
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
+
+void initialize_curtains(void);
+void update_curtains(void);
+// render_curtains
+void set_curtain_scale_goal(f32 scale);
+void set_curtain_scale(f32 scale);
+void set_curtain_draw_callback(UNK_FUN_PTR(callback));
+void set_curtain_fade_goal(f32 fade);
+void set_curtain_fade(f32 fade);
 
 // Dead functions:
 Npc* func_8003E4BC(NpcID npcId); // get_npc_safe

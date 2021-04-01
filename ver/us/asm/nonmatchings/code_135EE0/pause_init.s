@@ -20,8 +20,8 @@ glabel pause_init
 /* 1373DC 8024409C 0000882D */  daddu     $s1, $zero, $zero
 /* 1373E0 802440A0 3C138024 */  lui       $s3, %hi(D_80241ECC)
 /* 1373E4 802440A4 26731ECC */  addiu     $s3, $s3, %lo(D_80241ECC)
-/* 1373E8 802440A8 3C108025 */  lui       $s0, %hi(D_8024EF60)
-/* 1373EC 802440AC 2610EF60 */  addiu     $s0, $s0, %lo(D_8024EF60)
+/* 1373E8 802440A8 3C108025 */  lui       $s0, %hi(gPauseMenuIconScripts)
+/* 1373EC 802440AC 2610EF60 */  addiu     $s0, $s0, %lo(gPauseMenuIconScripts)
 /* 1373F0 802440B0 3C128027 */  lui       $s2, %hi(gPauseMenuCommonIconIDs)
 /* 1373F4 802440B4 265200E8 */  addiu     $s2, $s2, %lo(gPauseMenuCommonIconIDs)
 .L802440B8:
