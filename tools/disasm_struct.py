@@ -352,7 +352,12 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False, symbol
                     if val["data"] == 0:
                         line += f"NULL"
                     elif val["data"] in symbol_map:
-                        line += "&" + symbol_map[val["data"]][0][1]
+                        sym = symbol_map[val["data"]][0][1]
+
+                        if (sym[0] >= '0' and sym[0] <= '9') or sym[0] == '"':
+                            line += sym
+                        else:
+                            line += "&" + sym
                     else:
                         line += f"0x{val['data']:{fmt}}"
                 else:

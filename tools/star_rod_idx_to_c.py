@@ -10,6 +10,8 @@ import argparse
 import disasm_script
 import disasm_struct
 
+import sjis
+
 DIR = os.path.dirname(__file__)
 
 def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
@@ -65,15 +67,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"    .tattle = 0x{tattle:X},\n"
 
             out += f"}};\n"
-        elif struct["type"] == "ASCII":
-            string_data = bytes.read(struct["length"]).decode("ascii")
-
-            # strip null terminator(s)
-            while string_data[-1] == "\0":
-                string_data = string_data[:-1]
-
-            string_literal = json.dumps(string_data)
-            out += f"const char {struct['name']}[] = {string_literal};\n"
+        elif struct["type"] == "ASCII" or struct["type"] == "SJIS":
+            # rodata string hopefully inlined elsewhere
+            bytes.read(struct["length"])
+            out += f"// rodata: {struct['name']}\n"
         elif struct["type"].startswith("Function"):
             bytes.read(struct["length"])
             out += f"s32 {name}();\n"
@@ -122,7 +119,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     # end of data
     return out
 
-def parse_midx(file, prefix = ""):
+def parse_midx(file, prefix="", vram=0x80240000):
     structs = []
 
     for line in file.readlines():
@@ -142,7 +139,7 @@ def parse_midx(file, prefix = ""):
         elif "Missing" in s:
             start = int(s[1], 16)
             end = int(s[2], 16)
-            vaddr = start + 0x80240000
+            vaddr = start + vram
             structs.append({
                 "name": f"{prefix}unk_missing_{vaddr:X}",
                 "type": "Missing",
@@ -154,7 +151,7 @@ def parse_midx(file, prefix = ""):
         elif "Padding" in s:
             start = int(s[1], 16)
             end = int(s[2], 16)
-            vaddr = start + 0x80240000
+            vaddr = start + vram
             structs.append({
                 "name": f"{prefix}pad_{start:X}",
                 "type": "Padding",
@@ -202,9 +199,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    with open(args.idxfile, "r") as f:
-        midx = parse_midx(f)
-
     base, ext = os.path.splitext(os.path.basename(args.idxfile))
     if ext == ".midx":
         map_name = base
@@ -215,8 +209,6 @@ if __name__ == "__main__":
         segment_name = f"battle/{battle_area}/"
 
     symbol_map = {}
-    for struct in midx:
-        symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
 
     disasm_script.get_constants()
     disasm_struct.init()
@@ -228,13 +220,38 @@ if __name__ == "__main__":
         for segment in splat_config["segments"]:
             if isinstance(segment, dict) and segment.get("name") == segment_name:
                 rom_offset = segment["start"]
+                vram = segment["vram"]
                 break
 
     if rom_offset == -1:
         print(f"can't find segment with name '{segment_name}' in splat.yaml")
         exit(1)
 
+    with open(args.idxfile, "r") as f:
+        midx = parse_midx(f, vram=vram)
+
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
+        for struct in midx:
+            romfile.seek(struct["start"] + rom_offset)
+
+            # decode rodata stuff so it can be written inline instead of by pointer (which wouldn't match)
+            if struct["type"] == "ASCII":
+                string_data = romfile.read(struct["length"]).decode("ascii")
+
+                # strip null terminator(s)
+                while string_data[-1] == "\0":
+                    string_data = string_data[:-1]
+
+                string_literal = json.dumps(string_data)
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+            elif struct["type"] == "SJIS":
+                string_data = sjis.decode(romfile.read(struct["length"]))
+
+                string_literal = '"' + string_data + '"'
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+            else:
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
+
         romfile.seek(rom_offset)
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
         print(disasm.rstrip())
