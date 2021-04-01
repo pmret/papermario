@@ -40,7 +40,7 @@ s32 bgm_get_map_default_variation(SongID songID) {
         if (allowed[i] == songID) {
             Map* map = &areas[(*gameStatus)->areaID].maps[(*gameStatus)->mapID];
 
-            return map->songVariation & 1;
+            return map->unk_1C.bytes.songVariation & 1;
         }
     }
 

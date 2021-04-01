@@ -42,24 +42,15 @@ typedef struct Map {
     /* 0x10 */ void* dmaDest;
     /* 0x14 */ char* bgName;
     /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
-    /* 0x1C */ char unk_1C[0x2]; // unused?
-    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-    /* 0x1F */ s8 flags;
+    /* 0x1C */ union {
+               u32 u32;
+               struct {
+                   char unk_1C[0x2];
+                   s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
+                   s8 flags;
+               } bytes;
+    } unk_1C;
 } Map; // size = 0x20
-
-typedef struct Map2 {
-    /* 0x00 */ char* id; ///< @see MAP_ID_MAX_LEN
-    /* 0x04 */ MapConfig* config;
-    /* 0x08 */ void* dmaStart;
-    /* 0x0C */ void* dmaEnd;
-    /* 0x10 */ void* dmaDest;
-    /* 0x14 */ char* bgName;
-    /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
-    /* 0x1C */ char unk_1C[0x2]; // unused?
-    /* 0x1E */ s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-    /* 0x1F */ u32 flags : 6;
-    /* 0x1F */ u32 flagsEnd : 2;
-} Map2; // size = 0x20
 
 typedef struct Area {
     /* 0x00 */ s32 mapCount;
