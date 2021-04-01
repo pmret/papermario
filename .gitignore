@@ -24,6 +24,7 @@ build.ninja
 *.bin
 *.o
 *.zip
+*.i
 baserom.*
 build/
 assets/

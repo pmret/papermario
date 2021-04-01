@@ -184,7 +184,6 @@ def name_struct(s):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Converts split data to C using a Star Rod idx file")
     parser.add_argument("idxfile", help="Input .*idx file from Star Rod dump")
-    parser.add_argument("offset", help="Starting ROM offset")
     parser.add_argument("--comments", action="store_true", help="Write offset/vaddr comments")
 
     args = parser.parse_args()
@@ -192,13 +191,35 @@ if __name__ == "__main__":
     with open(args.idxfile, "r") as f:
         midx = parse_midx(f)
 
+    base, ext = os.path.splitext(os.path.basename(args.idxfile))
+    if ext == ".midx":
+        map_name = base
+        area_name, _ = map_name.split("_")
+        segment_name = f"world/area_{area_name}/{map_name}/"
+    else:
+        battle_area = "_".join(base.lower().split(" ")[1:])
+        segment_name = f"battle/{battle_area}/"
+
     symbol_map = {}
     for struct in midx:
         symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
 
     disasm_script.get_constants()
 
+    with open(os.path.join(DIR, "../ver/current/splat.yaml")) as f:
+        splat_config = yaml.safe_load(f.read())
+
+        rom_offset = -1
+        for segment in splat_config["segments"]:
+            if isinstance(segment, dict) and segment.get("name") == segment_name:
+                rom_offset = segment["start"]
+                break
+
+    if rom_offset == -1:
+        print(f"can't find segment with name '{segment_name}' in splat.yaml")
+        exit(1)
+
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
-        romfile.seek(eval(args.offset))
-        disasm = disassemble(romfile, midx, symbol_map, args.comments, eval(args.offset))
+        romfile.seek(rom_offset)
+        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
         print(disasm.rstrip())
