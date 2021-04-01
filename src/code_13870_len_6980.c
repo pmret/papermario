@@ -359,14 +359,14 @@ void clear_encounter_status(void) {
         currentEncounter->encounterList[i] = 0;
     }
 
-    if (gGameStatusPtr->didAreaChange != 0) {
+    if (gGameStatusPtr->didAreaChange) {
         for (i = 0; i < ARRAY_COUNT(currentEncounter->defeatFlags); i++) {
             for (j = 0; j < ARRAY_COUNT(currentEncounter->defeatFlags[i]); j++) {
                 currentEncounter->defeatFlags[i][j] = 0;
             }
         }
 
-        if (gGameStatusPtr->didAreaChange != 0) {
+        if (gGameStatusPtr->didAreaChange) {
             for (i = 0; i < ARRAY_COUNT(currentEncounter->recentMaps); i++) {
                 currentEncounter->recentMaps[i] = -1;
             }
