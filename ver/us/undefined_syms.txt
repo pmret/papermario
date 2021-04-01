@@ -50,3 +50,5 @@ D_800F7BBC = 0x800F7BBC;
 D_802C05CC = 0x802C05CC;
 _osViModeNtscLan1 = 0x80095820;
 _osViModeMPalLan1 = 0x80095870;
+kzn_20_bss = 0x802442D0;
+code_eb1170_bss = 0x802442D0;

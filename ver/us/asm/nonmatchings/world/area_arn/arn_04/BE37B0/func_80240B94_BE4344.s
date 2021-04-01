@@ -132,7 +132,7 @@ glabel func_80240B94_BE4344
 glabel L80240D78_BE4528
 /* BE4528 80240D78 0280202D */  daddu     $a0, $s4, $zero
 /* BE452C 80240D7C 0260282D */  daddu     $a1, $s3, $zero
-/* BE4530 80240D80 0C090000 */  jal       func_80240000_BE37B0
+/* BE4530 80240D80 0C090000 */  jal       arn_04_func_80240000_BE37B0
 /* BE4534 80240D84 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80240D88_BE4538
 /* BE4538 80240D88 0280202D */  daddu     $a0, $s4, $zero

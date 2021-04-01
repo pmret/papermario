@@ -304,7 +304,7 @@ replace_funcs = {
     "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
-    "SetSelfVar"                :{1:"Bool"},
+    #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
     "ShowEmote"                 :{1:"Emotes"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
@@ -1029,7 +1029,7 @@ if __name__ == "__main__":
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
 
     args = parser.parse_args()
-
+    vram_base = args.vram
     get_constants()
 
     if args.end > args.offset:
@@ -1054,7 +1054,8 @@ if __name__ == "__main__":
                         #print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
-                        script_text = script_text.replace("Script script = SCRIPT({", f"Script N(D_{args.vram:X}_{args.offset:X}) = " + "SCRIPT({")
+                        vram = f"{args.vram:X}_" if vram_base > 0 else f""
+                        script_text = script_text.replace("Script script = SCRIPT({", f"Script N(D_{vram}{args.offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
                         #print(f"Valid script found at 0x{args.offset:X}")

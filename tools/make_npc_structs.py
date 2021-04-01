@@ -7,13 +7,13 @@ def get_constants():
     global CONSTANTS
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds" }
+        "AmbientSounds", "NpcIDs", "Emotes" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
-    enums = Path(include_path / "enums.h").read_text()
+    enums = Path(include_path / "enums.h").read_text().splitlines()
 
     # defines
     '''
@@ -51,6 +51,8 @@ def get_constants():
                     if "=" in name:
                         name, val = name.split(" = ")
                         val = int(val[:-1], 0)
+                        if val >= 0x80000000:
+                            val -= 0x100000000
                     else:
                         name = name[:-1]
                     name = name.strip()
@@ -178,6 +180,8 @@ def get_structs():
     parse_file(Path(Path(__file__).parent.parent / "include" / "common_structs.h"))
 
 def get_vals(fd, offset, var):
+    global STRUCTS
+
     out = []
     arr = []
     for i in range(var["num"]):
@@ -235,10 +239,10 @@ def get_vals(fd, offset, var):
             elif var["type"] == "X32":
                 offset += offset % 4
                 data = unpack_from('>f', fd, offset)[0]
-                type_ = "float"
+                type_ = "Xfloat"
                 fmt = ".01f"
                 if data < -1000.0 or data > 1000.0:
-                    type_ = "int"
+                    type_ = "Xint"
                     fmt = "d"
                     data = unpack_from('>i', fd, offset)[0]
                 offset += 4
@@ -294,6 +298,10 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                     fmt = val2["fmt"]
                     if val2["type"] == "float":
                         line += f"{val2['data']:{fmt}}f"
+                    elif val["type"] == "Xfloat":
+                        line += "{ .f = " + f"{val['data']:{fmt}}f" + " }"
+                    elif val["type"] == "Xint":
+                        line += "{ .s = " + f"{val['data']:{fmt}}" + " }"
                     elif val2["type"] == "hex":
                         line += f"0x{val2['data']:{fmt}}"
                     elif val2["type"] == "ptr":
@@ -323,6 +331,10 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                 fmt = val["fmt"]
                 if val["type"] == "float":
                     line += f"{val['data']:{fmt}}f"
+                elif val["type"] == "Xfloat":
+                    line += "{ .f = " + f"{val['data']:{fmt}}f" + " }"
+                elif val["type"] == "Xint":
+                    line += "{ .s = " + f"{val['data']:{fmt}}" + " }"
                 elif val["type"] == "hex":
                     line += f"0x{val['data']:{fmt}}"
                 elif val["type"] == "ptr":
@@ -405,7 +417,7 @@ def get_single_struct_vals(fd, i):
         vals.extend(a)
     return vals, i
 
-def cull_struct(fd, i):
+def cull_struct(fd, i, entirely=False):
     out = []
     vals = []
     #print(f"Culling Starting at {fd[i]}")
@@ -423,6 +435,8 @@ def cull_struct(fd, i):
 
         out.append(fd[old_i])
         old_i += 1
+        if entirely:
+            x = len(vals)
         for y in range(x):
             out.append(fd[old_i])
             old_i += 1
@@ -442,6 +456,8 @@ def cull_struct(fd, i):
             return None, i
 
         #out.append(prefix)
+        if entirely:
+            x = len(vals)
         temp = ""
         for z,y in enumerate(range(x)):
             if z > 0:
@@ -452,16 +468,21 @@ def cull_struct(fd, i):
     return "\n".join(out), i
 
 def MacroReplaceStaticNPC(fd):
-    structs = { "unk_1C", "movement", "unk_1E0" }
+    structs = { "unk_1C":True, "movement":False, "unk_1E0":True }
     #replace_cull_struct = { "unk_1C", "movement", "unk_1E0" }
     #replace_cull = { "tattle", "extraAnimations", "itemDropChance" }
     fd = fd.splitlines()
     out = []
     i = 0
     while i < len(fd):
-        if any(f".{x}" in fd[i] for x in structs):
+        found = ""
+        for x in structs:
+            if f".{x}" in fd[i]:
+                found = x
+                break;
+        if found:
             # just cull it if possible
-            vals, i = cull_struct(fd, i)
+            vals, i = cull_struct(fd, i, structs[found])
             if vals:
                 out.append(vals)
 
@@ -479,7 +500,7 @@ def MacroReplaceStaticNPC(fd):
                 val = float(val)
             else:
                 val = int(val, 10)
-            if val == 0:
+            if val == 0 and name != "id":
                 i += 1
                 continue
 
@@ -595,7 +616,11 @@ def MacroReplaceNpcGroupList(fd):
             if "NULL" in fd[i]:
                 val = 0
             else:
-                val = int(fd[i].split(" = ",1)[1][:-1], 16)
+                if "0x" in fd[i]:
+                    val = int(fd[i].split(" = ",1)[1][:-1], 16)
+                else:
+                    val = int(fd[i].split(" = ",1)[1][:-1], 10)
+
             vals.append(val)
         i += 1
 
@@ -604,8 +629,8 @@ def MacroReplaceNpcGroupList(fd):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("file", type=str, help="File to decompile struct from")
-parser.add_argument("offset", type=lambda x: int(x, 0), help="Offset to decompile struct from")
 parser.add_argument("type", type=str, help="Struct type to decompile")
+parser.add_argument("offset", type=lambda x: int(x, 0), help="Offset to decompile struct from")
 parser.add_argument("--count", "-c", "--c", type=int, default=0, help="Num to try and decompile (NpcGroupList)")
 args = parser.parse_args()
 

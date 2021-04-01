@@ -108,7 +108,7 @@ glabel L80240E84_91C764
 glabel L80240E94_91C774
 /* 91C774 80240E94 0260202D */  daddu     $a0, $s3, $zero
 /* 91C778 80240E98 0280282D */  daddu     $a1, $s4, $zero
-/* 91C77C 80240E9C 0C090095 */  jal       func_80240254_91BB34
+/* 91C77C 80240E9C 0C090095 */  jal       iwa_04_UnkFunc100
 /* 91C780 80240EA0 0200302D */   daddu    $a2, $s0, $zero
 /* 91C784 80240EA4 8E630070 */  lw        $v1, 0x70($s3)
 /* 91C788 80240EA8 24020002 */  addiu     $v0, $zero, 2
