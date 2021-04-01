@@ -123,11 +123,10 @@ u32 get_entity_type(s32 index) {
 }
 
 void delete_entity(s32 entityIndex) {
-    Entity* entity;
+    Entity* entity = get_entity_by_index(entityIndex);
     Shadow* shadow;
     EntityList** currentEntityListPtrTemp;
 
-    entity = get_entity_by_index(entityIndex);
     if (entity->dataBuf != NULL) {
         heap_free(entity->dataBuf);
     }
@@ -175,17 +174,13 @@ s32 delete_entity_and_unload_data(s32 entityIndex) {
     (**currentEntityListPtrTemp)[entityIndex] = NULL;
 }
 
-//INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011085C);
-s32 func_8011085C(s32 entityIndex) {
-    s32 temp_s0;
-    s32 temp_v0;
-    Shadow* shadow;
+s32 func_8011085C(s32 shadowIndex) {
+    Shadow* shadow = get_shadow_by_index(shadowIndex);
     ShadowList** currentShadowListPtr = &gCurrentShadowListPtr;
 
-    shadow = get_shadow_by_index(entityIndex);
     free_entity_model_by_index(shadow->unk_08);
-    heap_free((**currentShadowListPtr)[entityIndex]);
-    (**currentShadowListPtr)[entityIndex] = NULL;
+    heap_free((**currentShadowListPtr)[shadowIndex]);
+    (**currentShadowListPtr)[shadowIndex] = NULL;
 }
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", entity_get_collision_flags);
