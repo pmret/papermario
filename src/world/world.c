@@ -6,10 +6,10 @@
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
-s32 D_8008FF60[] = {0, 1, 2, 3};
+s32 D_8008FF60[] = { 0, 1, 2, 3 };
 
-// 0x800989A0
-const s32 rodata_73DA0[] = {
+// rodata
+const s32 D_800989A0[] = {
     0x82C882B5, 0x00000000, 0x82A982AD, 0x82B982A2,
     0x00000000, 0x82B982C1, 0x82AB82E5, 0x82A40000,
     0x82DE82C9, 0x82E182DE, 0x82C982E1, 0x00000000,
@@ -19,6 +19,12 @@ const s32 rodata_73DA0[] = {
     0x83430000, 0x82C282A4, 0x82B682E5, 0x82A40000,
 };
 
+// bss
+extern MapConfig D_800A41E8; // gMapHeader?
+extern s32 D_800A41E0; // gMapConfig?
+
+
+extern s32 D_800D9668;
 
 typedef struct {
     /* 0x00 */ char name[16];
@@ -27,19 +33,10 @@ typedef struct {
     /* 0x18 */ u32 decompressedLength;
 } AssetHeader; // size = 0x1C
 
-// bss
-extern MapConfig D_800A41E8; // gMapHeader?
-extern s32 D_800A41E0; // gMapConfig?
-
-extern s32 D_800D9668;
-
-s32 strcmp(char*, char*);
-
 void load_world_script_api(void) {
     dma_copy((s32)&world_script_api_ROM_START, (s32)&world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
-//INCLUDE_ASM(s32, "world/world", load_map_by_IDs);
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     PlayerStatus* playerStatus;
     GameStatus** gameStatus;
@@ -78,7 +75,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
             (*gameStatus)->prevArea = areaID;
             (*gameStatus)->loadType = 1;
             break;
-   }
+    }
 
     gGameStatusPtr->mapShop = NULL;
 
@@ -93,12 +90,12 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     D_800A41E0 = map;
     if (map->bgName != NULL) {
         strcpy(&D_800D9668, map->bgName);
-   }
+    }
     load_world_script_api();
 
     if (map->dmaStart != NULL) {
         dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
-   }
+    }
 
     temp800A41E8 = &D_800A41E8;
     *temp800A41E8 = *map->config;
@@ -107,7 +104,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     temp800A41E8 = &D_800A41E8;
     if (map->init != 0) {
         initStatus = map->init();
-   }
+    }
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
@@ -120,11 +117,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         temp800A41E8->modelNameList = place[2];
         temp800A41E8->colliderNameList = place[3];
         temp800A41E8->zoneNameList = place[4];
-   }
+    }
 
     if (map->bgName != NULL) {
         load_map_bg(&D_800D9668);
-   }
+    }
 
     func_8002D160();
     func_802B2078();
@@ -145,12 +142,12 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if ((*gameStatus2)->unk_A8 == -1) {
         func_80138188();
-   }
+    }
 
     if (initStatus == 0) {
         initialize_collision();
         load_hit_asset();
-   }
+    }
 
     func_80072B30();
     clear_encounter_status();
@@ -174,13 +171,13 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         if (temp800A41E8->modelTreeRoot != NULL) {
             load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
        }
-   }
+    }
 
     if (temp800A41E8->background != NULL) {
         read_background_size(temp800A41E8->background);
-   } else {
+    } else {
         set_background_size(296, 200, 12, 20);
-   }
+    }
 
     gCurrentCameraID = 0;
     gCameras[0].flags |= 0x2;
@@ -190,9 +187,9 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (gGameStatusPtr->unk_A8 == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);
-   } else {
+    } else {
         set_cam_viewport(0, 29, 28, 262, 162);
-   }
+    }
 
     initialize_status_menu();
     gameStatus3 = &gGameStatusPtr;
@@ -209,27 +206,29 @@ MapConfig* get_current_map_header() {
     return &D_800A41E8;
 }
 
+// weirdness with gAreas loading, extra lw
+#ifdef NON_MATCHING
+s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; (gAreas + i)->maps != NULL; i++) {
+        Map* maps = (gAreas + i)->maps;
+
+        for (j = 0; j < (gAreas + i)->mapCount; j++) {
+            if (strcmp(maps[j].id, mapName) == 0) {
+                *areaID = i;
+                *mapID = j;
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}
+#else
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
-// s32 get_map_IDs_by_name(char* mapName, s16* areaID, s16* mapID) {
-//     Area* areas = &gAreas;
-//     Map* maps;
-//     s32 i = 0;
-//     s32 j;
-
-//     while (areas[i].maps != NULL) {
-//         maps = areas[i].maps;
-//         for (j = 0; j < areas[i].mapCount; j++) {
-//             if (strcmp(maps[j].id, mapName) == 0) {
-//                 *areaID = i;
-//                 *mapID = j;
-//                 return TRUE;
-//            }
-//        }
-//         i++;
-//    }
-
-//     return FALSE;
-// }
+#endif
 
 void* load_asset_by_name(char* assetName, s32* decompressedSize) {
     AssetHeader firstHeader;
