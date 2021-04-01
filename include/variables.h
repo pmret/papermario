@@ -311,7 +311,7 @@ extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicSettings gMusicPlayers[4];
+extern MusicSettings gMusicSettings[4];
 extern MusicSettings D_8014F6F0;
 
 // OS

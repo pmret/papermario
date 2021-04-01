@@ -43,12 +43,12 @@ typedef struct Map {
     /* 0x14 */ char* bgName;
     /* 0x18 */ MapInit init; ///< Return TRUE to skip normal asset (shape/hit/bg/tex) loading.
     /* 0x1C */ union {
-               u32 u32;
-               struct {
-                   char unk_1C[0x2];
-                   s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
-                   s8 flags;
-               } bytes;
+        u32 u32;
+        struct {
+            char unk_1C[0x2];
+            s8 songVariation; ///< 0 or 1. @see bgm_get_map_default_variation
+            s8 flags;
+        } bytes;
     } unk_1C;
 } Map; // size = 0x20
 

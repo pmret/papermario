@@ -11,8 +11,8 @@ glabel jtbl_80151290
 glabel bgm_update_music_settings
 /* E0C48 8014A548 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* E0C4C 8014A54C AFB1001C */  sw        $s1, 0x1c($sp)
-/* E0C50 8014A550 3C118016 */  lui       $s1, %hi(gMusicPlayers)
-/* E0C54 8014A554 26319AF0 */  addiu     $s1, $s1, %lo(gMusicPlayers)
+/* E0C50 8014A550 3C118016 */  lui       $s1, %hi(gMusicSettings)
+/* E0C54 8014A554 26319AF0 */  addiu     $s1, $s1, %lo(gMusicSettings)
 /* E0C58 8014A558 AFB20020 */  sw        $s2, 0x20($sp)
 /* E0C5C 8014A55C 0000902D */  daddu     $s2, $zero, $zero
 /* E0C60 8014A560 AFB30024 */  sw        $s3, 0x24($sp)
