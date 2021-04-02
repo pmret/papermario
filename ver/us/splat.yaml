@@ -6830,30 +6830,30 @@ segments:
     start: 0xBF7680
     vram: 0x80240000
     subsections:
-    - [0xBF7680, data]
-    - [0xBF7770, data]
-    - [0xBF7D00, data]
-    - [0xBF8780, rodata]
+    - [0xBF7680,   .data, header]
+    - [0xBF7770,   .data, events]
+    - [0xBF7D00,   .data, events]
+    - [0xBF8780, .rodata, events]
   - name: world/area_arn/arn_12/
     type: code
     overlay: True
     start: 0xBF8790
     vram: 0x80240000
     subsections:
-    - [0xBF8790, data]
-    - [0xBF8890, data]
-    - [0xBF8BB0, data]
-    - [0xBF9400, rodata]
+    - [0xBF8790,   .data, header]
+    - [0xBF8890,   .data, events]
+    - [0xBF8BB0,   .data, events]
+    - [0xBF9400, .rodata, events]
   - name: world/area_arn/arn_13/
     type: code
     overlay: True
     start: 0xBF9410
     vram: 0x80240000
     subsections:
-    - [0xBF9410, data]
-    - [0xBF9510, data]
-    - [0xBF9840, data]
-    - [0xBFA090, rodata]
+    - [0xBF9410,   .data, header]
+    - [0xBF9510,   .data, events]
+    - [0xBF9840,   .data, events]
+    - [0xBFA090, .rodata, events]
   - name: world/area_dgb/dgb_00/
     type: code
     overlay: True
@@ -9513,6 +9513,9 @@ segments:
       - [0x19, 0x00BF, arn_04_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
+      - [0x19, 0x00D6, arn_12_tattle]
+      - [0x19, 0x00D7, arn_13_tattle]
+      - [0x19, 0x00D8, arn_11_tattle]
 
       - [0x1A, 0x00AA, arn_03_Boo0_tattle]
       - [0x1A, 0x00AB, arn_03_Boo1_tattle]

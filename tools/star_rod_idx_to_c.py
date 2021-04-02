@@ -461,18 +461,19 @@ if __name__ == "__main__":
         
         if INCLUDES_NEEDED["forward"]:
             print()
-            print("========== Forward declares needed: ==========\n")
+            print("========== Forward declares: ==========\n")
             for forward in INCLUDES_NEEDED["forward"]:
                 print(forward)
             print()
 
         if INCLUDES_NEEDED["npcs"]:
-            print("========== Includes needed: ==========\n")
+            print("========== Includes needed: ===========\n")
             print(f"#include \"map.h\"")
             for npc in INCLUDES_NEEDED["npcs"]:
                 print(f"#include \"sprite/npc/{npc}.h\"")
             print()
 
+        print("=======================================\n")
         print(disasm.rstrip())
 
         

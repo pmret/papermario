@@ -238,6 +238,7 @@ replace_funcs = {
 
     "BattleCamTargetActor"      :{0:"ActorIDs"},
     "BindNpcAI"                 :{0:"NpcIDs"},
+    "BindNpcDefeat"             :{0:"NpcIDs"},
     "BindNpcIdle"               :{0:"NpcIDs"},
     "BindNpcInteract"           :{0:"NpcIDs"},
 
@@ -319,6 +320,7 @@ replace_funcs = {
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
     "ShowEmote"                 :{0:"Emotes"},
+    "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs"},
@@ -653,7 +655,7 @@ class ScriptDisassembler:
         elif opcode == 0x43:
             args = ["ScriptOpcode_CALL", self.addr_ref(argv[0]), *map(self.var, argv[1:])]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x44: self.write_line(f"SI_CMD(ScriptOpcode_SPAWN, {self.addr_ref(argv[0])}),")
+        elif opcode == 0x44: self.write_line(f"SI_CMD(ScriptOpcode_SPAWN_SCRIPT, {self.addr_ref(argv[0])}),")
         elif opcode == 0x45: self.write_line(f"SI_CMD(ScriptOpcode_SPAWN_GET_ID, {self.addr_ref(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x46: self.write_line(f"SI_CMD(ScriptOpcode_AWAIT_SCRIPT, {self.addr_ref(argv[0])}),")
         elif opcode == 0x47:
