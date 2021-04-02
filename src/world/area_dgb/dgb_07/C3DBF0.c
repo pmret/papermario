@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240A68_C3E658);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240BA0_C3E790);
 /*
-void N(func_80240BA0_C3E790)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240BA0_C3E790)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 

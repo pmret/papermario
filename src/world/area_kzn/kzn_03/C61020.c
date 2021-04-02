@@ -44,7 +44,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024234C_C6305C);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_8024259C_C632AC);
 /*
-s32 N(func_8024259C_C632AC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024259C_C632AC)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;
@@ -75,11 +75,11 @@ s32 N(func_8024259C_C632AC)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_802428E0_C635F0);
 /*
-s32 N(func_802428E0_C635F0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802428E0_C635F0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -98,7 +98,7 @@ s32 N(func_802428E0_C635F0)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_03/C61020", func_80242934_C63644);
 /*
-s32 N(func_80242934_C63644)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242934_C63644)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);

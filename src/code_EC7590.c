@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "code_EC7590", func_80240450_EC7600);
 
 INCLUDE_ASM(s32, "code_EC7590", func_8024061C_EC77CC);
 /*
-s32 N(func_8024061C_EC77CC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024061C_EC77CC)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;

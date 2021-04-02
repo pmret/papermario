@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240780_DB2A40);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240A54_DB2D14);
 /*
-void N(func_80240A54_DB2D14)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240A54_DB2D14)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -49,7 +49,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240C04_DB2EC4);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802412EC_DB35AC);
 /*
-void N(func_802412EC_DB35AC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802412EC_DB35AC)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -119,7 +119,7 @@ void N(func_802412EC_DB35AC)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802416A8_DB3968);
 /*
-void N(func_802416A8_DB3968)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802416A8_DB3968)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -136,7 +136,7 @@ void N(func_802416A8_DB3968)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802418AC_DB3B6C);
 /*
-void N(func_802418AC_DB3B6C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802418AC_DB3B6C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -264,11 +264,11 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80241D60_DB4020);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
 /*
-s32 N(func_80242178_DB4438)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242178_DB4438)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -287,7 +287,7 @@ s32 N(func_80242178_DB4438)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
 /*
-s32 N(func_802421CC_DB448C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802421CC_DB448C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);

@@ -64,17 +64,17 @@ typedef struct {
     /* 0x54 */ struct N(temp)* unk_54;
 } arn_07_struct; // size = 0x58
 
-s32 N(func_80240000_BECDF0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240000_BECDF0)(ScriptInstance* script, s32 isInitialCall) {
     arn_07_struct* ptr = script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
     return ((ptr->unk_44 < 2) == 0) * ApiStatus_DONE2;
 }
 
-s32 N(func_8024004C_BECE3C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024004C_BECE3C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         set_variable(NULL, SI_MAP_VAR(1), ptr);
@@ -99,7 +99,7 @@ s32 N(func_8024004C_BECE3C)(ScriptInstance *script, NpcAISettings *aiSettings, E
     return ApiStatus_DONE2;
 }
 
-s32 N(func_802401AC_BECF9C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 
@@ -195,20 +195,20 @@ s32 N(func_802401AC_BECF9C)(ScriptInstance *script, NpcAISettings *aiSettings, E
             break;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
-s32 N(func_802405BC_BED3AC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405BC_BED3AC)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
 }
 
-s32 N(func_802405FC_BED3EC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         ptr->unk_38 = get_variable(script, *args++);
@@ -226,7 +226,7 @@ s32 N(func_802405FC_BED3EC)(ScriptInstance *script, NpcAISettings *aiSettings, E
     return ApiStatus_DONE2;
 }
 
-s32 N(func_80240708_BED4F8)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240708_BED4F8)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 
@@ -240,7 +240,7 @@ s32 N(func_80240708_BED4F8)(ScriptInstance *script, NpcAISettings *aiSettings, E
     ptr->unk_54->unk_0C->unk_08 = ptr->unk_04;
     ptr->unk_54->unk_0C->unk_0C = ptr->unk_20;
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 s32 N(itemList_80242040)[] = {

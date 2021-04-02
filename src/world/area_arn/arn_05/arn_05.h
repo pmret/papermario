@@ -6,9 +6,9 @@
 ApiStatus func_802D2B50(void);
 ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall);
 
-s32 N(func_8024113C_BE8D1C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape);
-s32 N(func_802412C8_BE8EA8)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape);
-s32 N(func_802412B0_BE8E90)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape);
+ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802412C8_BE8EA8)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall);
  
 Script N(script_Main);
 Script N(script_MakeEntities);

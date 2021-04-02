@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_06/C3D080", func_80240000_C3D080);
 /*
-s32 N(func_80240000_C3D080)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240000_C3D080)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;

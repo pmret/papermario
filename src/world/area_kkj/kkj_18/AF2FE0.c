@@ -6,11 +6,11 @@
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_8024056C_AF320C);
 /*
-s32 N(func_8024056C_AF320C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024056C_AF320C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -29,7 +29,7 @@ s32 N(func_8024056C_AF320C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_18/AF2FE0", func_802405C0_AF3260);
 /*
-s32 N(func_802405C0_AF3260)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405C0_AF3260)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);

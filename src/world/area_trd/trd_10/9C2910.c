@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_80240000_9C2910);
 /*
-s32 N(func_80240000_9C2910)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240000_9C2910)(ScriptInstance* script, s32 isInitialCall) {
     arn_07_struct* ptr = script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
@@ -12,10 +12,10 @@ s32 N(func_80240000_9C2910)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_8024004C_9C295C);
 /*
-s32 N(func_8024004C_9C295C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024004C_9C295C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         set_variable(NULL, SI_MAP_VAR(1), ptr);
@@ -45,7 +45,7 @@ INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_802401AC_9C2ABC);
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_802405BC_9C2ECC);
 /*
-s32 N(func_802405BC_9C2ECC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405BC_9C2ECC)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
@@ -55,10 +55,10 @@ s32 N(func_802405BC_9C2ECC)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_802405FC_9C2F0C);
 /*
-s32 N(func_802405FC_9C2F0C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405FC_9C2F0C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         ptr->unk_38 = get_variable(script, *args++);
@@ -79,7 +79,7 @@ s32 N(func_802405FC_9C2F0C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_80240708_9C3018);
 /*
-s32 N(func_80240708_9C3018)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240708_9C3018)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 

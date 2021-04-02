@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_80240554_A02D94);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_80240994_A031D4);
 /*
-void N(func_80240994_A031D4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240994_A031D4)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -43,7 +43,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_80240B44_A03384);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_8024122C_A03A6C);
 /*
-void N(func_8024122C_A03A6C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_8024122C_A03A6C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -113,7 +113,7 @@ void N(func_8024122C_A03A6C)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_802415E8_A03E28);
 /*
-void N(func_802415E8_A03E28)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802415E8_A03E28)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -130,7 +130,7 @@ void N(func_802415E8_A03E28)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_nok/nok_14/A02A00", func_802417EC_A0402C);
 /*
-void N(func_802417EC_A0402C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802417EC_A0402C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;

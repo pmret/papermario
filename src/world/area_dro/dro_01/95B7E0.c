@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802405E0_95B7E0);
 /*
-s32 N(func_802405E0_95B7E0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802405E0_95B7E0)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     f32 ret;
@@ -42,7 +42,7 @@ s32 N(func_802405E0_95B7E0)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240738_95B938);
 /*
-void N(func_80240738_95B938)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240738_95B938)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, z;
@@ -95,7 +95,7 @@ void N(func_80240738_95B938)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240AA0_95BCA0);
 /*
-void N(func_80240AA0_95BCA0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240AA0_95BCA0)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -128,7 +128,7 @@ void N(func_80240AA0_95BCA0)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240C5C_95BE5C);
 /*
-s32 N(func_80240C5C_95BE5C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240C5C_95BE5C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -155,7 +155,7 @@ s32 N(func_80240C5C_95BE5C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80240F2C_95C12C);
 /*
-s32 N(func_80240F2C_95C12C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240F2C_95C12C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -181,7 +181,7 @@ s32 N(func_80240F2C_95C12C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802410B4_95C2B4);
 /*
-void N(func_802410B4_95C2B4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802410B4_95C2B4)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
@@ -204,7 +204,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241174_95C374);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80241470_95C670);
 /*
-s32 N(func_80241470_95C670)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80241470_95C670)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;
@@ -281,11 +281,11 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802424D4_95D6D4);
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242730_95D930);
 /*
-s32 N(func_80242730_95D930)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242730_95D930)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -304,7 +304,7 @@ s32 N(func_80242730_95D930)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242784_95D984);
 /*
-s32 N(func_80242784_95D984)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242784_95D984)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);

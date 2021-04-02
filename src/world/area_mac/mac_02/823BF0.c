@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240930_823BF0);
 /*
-s32 N(func_80240930_823BF0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240930_823BF0)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     f32 ret;
@@ -42,7 +42,7 @@ s32 N(func_80240930_823BF0)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240A88_823D48);
 /*
-void N(func_80240A88_823D48)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240A88_823D48)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, z;
@@ -95,7 +95,7 @@ void N(func_80240A88_823D48)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240DF0_8240B0);
 /*
-void N(func_80240DF0_8240B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240DF0_8240B0)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -128,7 +128,7 @@ void N(func_80240DF0_8240B0)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240FAC_82426C);
 /*
-s32 N(func_80240FAC_82426C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240FAC_82426C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -155,7 +155,7 @@ s32 N(func_80240FAC_82426C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_8024127C_82453C);
 /*
-s32 N(func_8024127C_82453C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024127C_82453C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -181,7 +181,7 @@ s32 N(func_8024127C_82453C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241404_8246C4);
 /*
-void N(func_80241404_8246C4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80241404_8246C4)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
@@ -204,7 +204,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802414C4_824784);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802417C0_824A80);
 /*
-s32 N(func_802417C0_824A80)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802417C0_824A80)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;
@@ -281,11 +281,11 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242824_825AE4);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242A80_825D40);
 /*
-s32 N(func_80242A80_825D40)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242A80_825D40)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -304,7 +304,7 @@ s32 N(func_80242A80_825D40)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242AD4_825D94);
 /*
-s32 N(func_80242AD4_825D94)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80242AD4_825D94)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);

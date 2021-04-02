@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(NpcJumpFunc2)(ScriptInstance* script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(NpcJumpFunc2)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

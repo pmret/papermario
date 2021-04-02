@@ -1,6 +1,6 @@
 #include "arn_07.h"
 
-s32 N(func_80240800_BED5F0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240800_BED5F0)(ScriptInstance* script, s32 isInitialCall) {
     f32 temp_f0 = get_float_variable(script, SI_VAR(0));
 
     if (temp_f0 >= 360.0) {

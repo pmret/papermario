@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240430_B2C8A0);
 /*
-s32 N(func_80240430_B2C8A0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240430_B2C8A0)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     f32 ret;
@@ -42,7 +42,7 @@ s32 N(func_80240430_B2C8A0)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240588_B2C9F8);
 /*
-void N(func_80240588_B2C9F8)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240588_B2C9F8)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, z;
@@ -95,7 +95,7 @@ void N(func_80240588_B2C9F8)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802408F0_B2CD60);
 /*
-void N(func_802408F0_B2CD60)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_802408F0_B2CD60)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -128,7 +128,7 @@ void N(func_802408F0_B2CD60)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240AAC_B2CF1C);
 /*
-s32 N(func_80240AAC_B2CF1C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240AAC_B2CF1C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -155,7 +155,7 @@ s32 N(func_80240AAC_B2CF1C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240D7C_B2D1EC);
 /*
-s32 N(func_80240D7C_B2D1EC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240D7C_B2D1EC)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -181,7 +181,7 @@ s32 N(func_80240D7C_B2D1EC)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240F04_B2D374);
 /*
-void N(func_80240F04_B2D374)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+void N(func_80240F04_B2D374)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
@@ -208,11 +208,11 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80240FC4_B2D434);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802414EC_B2D95C);
 /*
-s32 N(func_802414EC_B2D95C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802414EC_B2D95C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -231,7 +231,7 @@ s32 N(func_802414EC_B2D95C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241540_B2D9B0);
 /*
-s32 N(func_80241540_B2D9B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80241540_B2D9B0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
@@ -244,7 +244,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241578_B2D9E8);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241614_B2DA84);
 /*
-s32 N(func_80241614_B2DA84)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80241614_B2DA84)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;

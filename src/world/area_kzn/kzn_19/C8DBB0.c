@@ -6,7 +6,7 @@
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_8024030C_C8DEBC);
 /*
-s32 N(func_8024030C_C8DEBC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_8024030C_C8DEBC)(ScriptInstance* script, s32 isInitialCall) {
     arn_07_struct* ptr = script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
@@ -16,10 +16,10 @@ s32 N(func_8024030C_C8DEBC)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240358_C8DF08);
 /*
-s32 N(func_80240358_C8DF08)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240358_C8DF08)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         set_variable(NULL, SI_MAP_VAR(1), ptr);
@@ -49,7 +49,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802404B8_C8E068);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802408C8_C8E478);
 /*
-s32 N(func_802408C8_C8E478)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802408C8_C8E478)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
@@ -59,10 +59,10 @@ s32 N(func_802408C8_C8E478)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240908_C8E4B8);
 /*
-s32 N(func_80240908_C8E4B8)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240908_C8E4B8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
         script->varTable[0] = ptr;
         ptr->unk_38 = get_variable(script, *args++);
@@ -83,7 +83,7 @@ s32 N(func_80240908_C8E4B8)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80240A14_C8E5C4);
 /*
-s32 N(func_80240A14_C8E5C4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80240A14_C8E5C4)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 
@@ -119,7 +119,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_8024140C_C8EFBC);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241468_C8F018);
 /*
-s32 N(func_80241468_C8F018)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80241468_C8F018)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &D_80241C68_BE09F8;
     s32 i;
     s32* test;
@@ -150,11 +150,11 @@ s32 N(func_80241468_C8F018)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802417AC_C8F35C);
 /*
-s32 N(func_802417AC_C8F35C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_802417AC_C8F35C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr;
 
-    if (aiSettings != NULL) {
+    if (isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
     }
@@ -173,7 +173,7 @@ s32 N(func_802417AC_C8F35C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241800_C8F3B0);
 /*
-s32 N(func_80241800_C8F3B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+ApiStatus N(func_80241800_C8F3B0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
