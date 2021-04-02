@@ -44,8 +44,8 @@ script_parser = Lark(r"""
          | "goto" label         -> label_goto
          | "return"             -> return_stmt
          | "break"              -> break_stmt
-         | "break match"        -> break_match_stmt
-         | "break loop"         -> break_loop_stmt
+         | "break" "match"      -> break_match_stmt
+         | "break" "loop"       -> break_loop_stmt
          | "sleep" expr         -> sleep_stmt
          | "sleep" expr "secs"  -> sleep_secs_stmt
          | "spawn" expr         -> spawn_stmt
