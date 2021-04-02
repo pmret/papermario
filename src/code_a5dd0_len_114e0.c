@@ -33,6 +33,7 @@ extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
+extern s32 D_8014AFB0;
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", update_entities);
 
@@ -54,7 +55,9 @@ void func_8010FD98(s32 arg0, s32 alpha) {
     }
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8010FE44);
+void func_8010FE44(s32 arg0) {
+    func_8010FD98(arg0, D_8014AFB0);
+}
 
 void entity_model_set_shadow_color(s32 alpha) {
     gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, 0, TEXEL0, 0, PRIMITIVE, 0);
@@ -101,7 +104,13 @@ ShadowList* get_shadow_list(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110678);
+s32 func_80110678(Npc *npc) {
+    if (npc->currentAnim != 0) {
+        npc->flags |= 0x1000000;
+        return 1;
+    }
+    return 0;
+}
 
 u32 get_entity_type(s32 index) {
     Entity* entity = get_entity_by_index(index);
@@ -113,11 +122,66 @@ u32 get_entity_type(s32 index) {
     }
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity);
+void delete_entity(s32 entityIndex) {
+    Entity* entity = get_entity_by_index(entityIndex);
+    Shadow* shadow;
+    EntityList** currentEntityListPtrTemp;
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", delete_entity_and_unload_data);
+    if (entity->dataBuf != NULL) {
+        heap_free(entity->dataBuf);
+    }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011085C);
+    if (!(entity->flags & 8)) {
+        free_entity_model_by_index(entity->virtualModelIndex);
+    } else {
+        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+    }
+
+    if (entity->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(entity->shadowIndex);
+        shadow->flags |= 0x10000000;
+    }
+
+    currentEntityListPtrTemp = &gCurrentEntityListPtr;
+    heap_free((**currentEntityListPtrTemp)[entityIndex]);
+    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+}
+
+s32 delete_entity_and_unload_data(s32 entityIndex) {
+    Entity* entity;
+    Shadow* shadow;
+    EntityList** currentEntityListPtrTemp;
+
+    entity = get_entity_by_index(entityIndex);
+    if (entity->dataBuf != NULL) {
+        heap_free(entity->dataBuf);
+    }
+
+    if (!(entity->flags & 8)) {
+        free_entity_model_by_index(entity->virtualModelIndex);
+    } else {
+        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+    }
+    func_801117DC(entity->staticData);
+
+    if (entity->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(entity->shadowIndex);
+        shadow->flags |= 0x10000000;
+    }
+
+    currentEntityListPtrTemp = &gCurrentEntityListPtr;
+    heap_free((**currentEntityListPtrTemp)[entityIndex]);
+    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+}
+
+s32 func_8011085C(s32 shadowIndex) {
+    Shadow* shadow = get_shadow_by_index(shadowIndex);
+    ShadowList** currentShadowListPtr = &gCurrentShadowListPtr;
+
+    free_entity_model_by_index(shadow->unk_08);
+    heap_free((**currentShadowListPtr)[shadowIndex]);
+    (**currentShadowListPtr)[shadowIndex] = NULL;
+}
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", entity_get_collision_flags);
 
@@ -129,9 +193,16 @@ s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
 }
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BCC);
+void func_80110BCC(Entity *entity) {
+    if (!(entity->flags & 8)) {
+        func_80122D7C(entity->virtualModelIndex);
+    }
+}
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80110BF8);
+void func_80110BF8(Entity *entity) {
+    entity->unk_07 = 0;
+    entity->flags &= ~0x00010000;
+}
 
 #ifdef NON_MATCHING
 #define AREA_SPECIFIC_ENTITY_VRAM &entity_default_VRAM
@@ -177,6 +248,7 @@ INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_entity, StaticEntityData* data, 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", create_shadow_from_data);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
+
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_80111E9C);
 

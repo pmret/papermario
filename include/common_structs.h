@@ -140,7 +140,9 @@ typedef struct Npc {
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[3];
     /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ char unk_B4[652];
+    /* 0x0B4 */ char unk_B4[72];
+    /* 0x0FC */ s32 unk_FC;
+    /* 0x100 */ char unk_100[576];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -298,7 +300,8 @@ typedef struct Entity {
     /* 0x04 */ u8 listIndex;
     /* 0x05 */ char unk_05;
     /* 0x06 */ u8 unk_06;
-    /* 0x07 */ char unk_07[3];
+    /* 0x07 */ s8 unk_07;
+    /* 0x08 */ char unk_08[2];
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
@@ -1045,7 +1048,9 @@ typedef struct Shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04[2];
     /* 0x06 */ u8 unk_06;
-    /* 0x07 */ char unk_07[9];
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ char unk_0A[6];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ char unk_28[80];
