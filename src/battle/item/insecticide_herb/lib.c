@@ -75,13 +75,18 @@ ApiStatus N(func_802A1280_72A9D0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// This is a duplciate, search for others
 // TODO figure out what this actually is
 // func_80072230 invokes gEffectTable[111]'s entryPoint function
 // that function is currently typed to return void
 // Assume it returns an Effect* and unk_0C is this EffectInstanceData
 // s32 unk_0C;  //? Maybe EffectInstanceData too ?
 struct N(temp2) {
-    char unk_00[0x18];
+    char unk_00[0x8];
+    f32 unk_08;
+    f32 unk_0C;
+    f32 unk_10;
+    char unk_14[0x4];
     s32 unk_18;
     s32 unk_1C;
     s32 unk_20;
@@ -89,6 +94,9 @@ struct N(temp2) {
     s32 unk_28;
     s32 unk_2C;
     s32 unk_30;
+    char unk_34[0x3C];
+    s32 unk_70;
+    s32 unk_74;
 } N(temp2);
 
 struct N(temp) {

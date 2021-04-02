@@ -168,15 +168,15 @@ def get_constants():
 
     return
 
-def fix_args(func, args, info):
+def fix_args(self, func, args, info):
     global CONSTANTS
     
     new_args = []
     for i,arg in enumerate(args.split(", ")):
-        if ((arg == "D_80000000") or
+        if ((arg == "D_80000000") or (arg.startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
             arg = "0x" + arg[2:]
-        if "0x" in arg and int(arg, 16) > 0x90000000:
+        if "0x" in arg and int(arg, 16) >= 0xF0000000:
             arg = f"{int(arg, 16) - 0x100000000}"
         if i in info:
             if "_" in arg:
@@ -210,6 +210,7 @@ def fix_args(func, args, info):
                         else:
                             call += f"0x{anim:02X}"
                         call += ")"
+                        self.INCLUDES_NEEDED["npcs"].add(CONSTANTS['NPC_SPRITE'][sprite]['name'])
                     else:
                         call += f"0x{sprite:02X}, 0x{palette:02X}, 0x{anim:02X})"
 
@@ -222,7 +223,8 @@ def fix_args(func, args, info):
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
-                print(f"0x{argNum:X} was not found within {info[i]} constants, add it.")
+                if not (info[i] == "NpcIDs" and argNum > 0):
+                    print(f"0x{argNum:X} was not found within {info[i]} constants, add it.")
                 #Print the unknowns in hex
                 new_args.append(f"0x{int(argNum):X}")
         else:
@@ -236,6 +238,10 @@ replace_funcs = {
 
     "BattleCamTargetActor"      :{0:"ActorIDs"},
     "BindNpcAI"                 :{0:"NpcIDs"},
+    "BindNpcIdle"               :{0:"NpcIDs"},
+    "BindNpcInteract"           :{0:"NpcIDs"},
+
+    "ContinueSpeech"            :{1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
 
     "DisablePlayerInput"        :{0:"Bool"},
     "DisablePlayerPhysics"      :{0:"Bool"},
@@ -271,15 +277,19 @@ replace_funcs = {
     "ModifyColliderFlags"       :{2:"Hex"},
 
     "NpcFaceNpc"                :{0:"NpcIDs", 1:"NpcIDs"},
+    "NpcFacePlayer"             :{0:"NpcIDs"},
     "NpcJump0"                  :{0:"NpcIDs"},
+    "NpcJump1"                  :{0:"NpcIDs"},
     "NpcMoveTo"                 :{0:"NpcIDs"},
 
     "PlayAmbientSounds"         :{0:"AmbientSounds"},
     "PlaySound"                 :{0:"SoundIDs"},
+    "PlaySoundAt"               :{0:"SoundIDs"},
     "PlaySoundAtActor"          :{0:"ActorIDs", 1:"SoundIDs"},
     "PlaySoundAtNpc"            :{0:"NpcIDs", 1:"SoundIDs"},
 
     "RemoveActorDecoration"     :{0:"ActorIDs"},
+    "RemoveNpc"                 :{0:"NpcIDs"},
     "RunToGoal"                 :{0:"ActorIDs"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
@@ -301,7 +311,9 @@ replace_funcs = {
     "SetNpcJumpscale"           :{0:"NpcIDs"},
     "SetNpcPos"                 :{0:"NpcIDs"},
     "SetNpcRotation"            :{0:"NpcIDs"},
+    "SetNpcScale"               :{0:"NpcIDs"},
     "SetNpcSpeed"               :{0:"NpcIDs"},
+    "SetNpcYaw"                 :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
@@ -312,11 +324,11 @@ replace_funcs = {
     "UseIdleAnimation"          :{0:"ActorIDs"},
 }
 
-def replace_constants(func, args):
+def replace_constants(self, func, args):
     global replace_funcs
 
     if func in replace_funcs:
-        return fix_args(func, args, replace_funcs[func])
+        return fix_args(self, func, args, replace_funcs[func])
     elif func == "PlayEffect":
         argsZ = args.split(", ")
         if "0x" not in argsZ[0]:
@@ -969,6 +981,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x24:
             varA = self.replace_enum(argv[0])
             varB = self.replace_enum(argv[1])
+            if varB.startswith("script_"):
+                varB = "N(" + varB + ")"
             self.write_line(f"{varA} = {varB};")
         elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X};")
         elif opcode == 0x26:
@@ -1020,7 +1034,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 for i,arg in enumerate(argv):
                     argv[i] = self.replace_star_rod_prefix(arg)
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
-                argv_str = replace_constants(func_name, argv_str)
+                argv_str = replace_constants(self, func_name, argv_str)
 
                 self.write_line(f"{func_name}({argv_str});")
             else:

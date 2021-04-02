@@ -16,6 +16,7 @@ INCLUDED["functions"] = set()
 INCLUDES_NEEDED = {}
 INCLUDES_NEEDED["include"] = []
 INCLUDES_NEEDED["forward"] = []
+INCLUDES_NEEDED["npcs"] = set()
 
 def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     global INCLUDES_NEEDED, INCLUDED
@@ -191,11 +192,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                             tmp_out += INDENT + f".{var_name} = "
                             if var_name == "heartDrops":
                                 if round(drops[0][1] / 327.67, 2) == 70 and round(drops[0][3] / 327.67, 2) == 50:
-                                    tmp_out += f"STANDARD_HEART_DROPS({attempts})"
+                                    tmp_out += f"STANDARD_HEART_DROPS({drops[0][2]})"
                                 elif round(drops[0][1] / 327.67, 2) == 80 and round(drops[0][3] / 327.67, 2) == 50:
-                                    tmp_out += f"GENEROUS_HEART_DROPS({attempts})"
+                                    tmp_out += f"GENEROUS_HEART_DROPS({drops[0][2]})"
                                 elif round(drops[0][1] / 327.67, 2) == 80 and round(drops[0][3] / 327.67, 2) == 60:
-                                    tmp_out += f"GENEROUS_WHEN_LOW_HEART_DROPS({attempts})"
+                                    tmp_out += f"GENEROUS_WHEN_LOW_HEART_DROPS({drops[0][2]})"
                                 elif round(drops[0][0] / 327.67, 2) == 100 and round(drops[0][1] / 327.67, 2) == 0 and round(drops[0][2] / 327.67, 2) == 0:
                                     tmp_out += f"NO_DROPS"
                                 else:
@@ -203,11 +204,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                                     exit()
                             else:
                                 if round(drops[0][1] / 327.67, 2) == 50 and round(drops[0][3] / 327.67, 2) == 40:
-                                    tmp_out += f"STANDARD_FLOWER_DROPS({attempts})"
+                                    tmp_out += f"STANDARD_FLOWER_DROPS({drops[0][2]})"
                                 elif round(drops[0][1] / 327.67, 2) == 70 and round(drops[0][3] / 327.67, 2) == 50:
-                                    tmp_out += f"GENEROUS_WHEN_LOW_FLOWER_DROPS({attempts})"
+                                    tmp_out += f"GENEROUS_WHEN_LOW_FLOWER_DROPS({drops[0][2]})"
                                 elif round(drops[0][1] / 327.67, 2) == 40 and round(drops[0][3] / 327.67, 2) == 40:
-                                    tmp_out += f"REDUCED_FLOWER_DROPS({attempts})"
+                                    tmp_out += f"REDUCED_FLOWER_DROPS({drops[0][2]})"
                                 elif round(drops[0][0] / 327.67, 2) == 100 and round(drops[0][1] / 327.67, 2) == 0 and round(drops[0][2] / 327.67, 2) == 0:
                                     tmp_out += f"NO_DROPS"
                                 else:
@@ -243,13 +244,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                                     tmp_out += INDENT + "    " + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
                                 else:
                                     tmp_out += INDENT*2 + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                                INCLUDES_NEEDED["npcs"].add(sprite)
                             i += 4
                         tmp_out += INDENT + f"}},\n"
                         i -= 1
                     elif i == 0x1EC:
                         var = unpack_from(">I", staticNpc, curr_base+i)[0]
                         if not var == 0:
-                            tmp_out += INDENT + f".{var_names[18]} = {var},\n"
+                            tmp_out += INDENT + f".{var_names[18]} = MESSAGE_ID(0x{(var & 0xFF0000) >> 16:02X}, 0x{var & 0xFFFF:04X}),\n"
 
                     i += 1
 
@@ -278,6 +280,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                     anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
                     tmp_out += INDENT + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                    INCLUDES_NEEDED["npcs"].add(sprite)
                 i += 4
             tmp_out += f"}};\n"
             out += tmp_out
@@ -460,7 +463,12 @@ if __name__ == "__main__":
         if INCLUDES_NEEDED["forward"]:
             print()
             print("========== Forward declares needed: ==========\n")
-
             for forward in INCLUDES_NEEDED["forward"]:
                 print(forward)
+            print()
+
+        if INCLUDES_NEEDED["npcs"]:
+            print("========== Includes needed: ==========\n")
+            for npc in INCLUDES_NEEDED["npcs"]:
+                print(f"#include \"sprite/npc/{npc}.h\"")
             print()
