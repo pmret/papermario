@@ -7,6 +7,12 @@
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024030C_91E87C);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024032C_91E89C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240358_91E8C8);
 
@@ -17,6 +23,12 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240410_91E980);
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802404BC_91EA2C);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024070C_91EC7C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_80240738_91ECA8);
 

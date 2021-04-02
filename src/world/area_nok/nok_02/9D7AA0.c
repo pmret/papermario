@@ -149,7 +149,7 @@ s32 N(func_802410FC_9D811C)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
-# include "world/common/NpcJumpFunc.inc.c"
+#include "world/common/NpcJumpFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
@@ -324,6 +324,12 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242F74_9D9F94);
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FB8_9D9FD8);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FE4_9DA004);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243010_9DA030);
 

@@ -97,7 +97,7 @@ Script N(NpcAI_80240B50) = SCRIPT({
             DisablePlayerInput(TRUE);
             SetNpcAux(NPC_PLAYER, 0);
             PlaySoundAtNpc(NPC_PLAYER, 610, 0);
-            ShowEmote(0, EMOTE_EXCLAMATION, 45, 15, 1, 0, 0, 0, 0);
+            ShowEmote(EMOTE_EXCLAMATION, 0, 45, 15, 1, 0, 0, 0, 0);
             sleep 15;
             NpcFacePlayer(-1, 5);
             sleep 10;

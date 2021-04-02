@@ -306,7 +306,7 @@ replace_funcs = {
     "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
-    "ShowEmote"                 :{1:"Emotes"},
+    "ShowEmote"                 :{0:"Emotes"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs"},
@@ -325,11 +325,14 @@ def replace_constants(func, args):
     return args
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {}):
         self.bytes = bytes
         self.script_name = script_name
 
         self.symbol_map = { **script_lib(self.bytes.tell()), **symbol_map }
+        self.romstart = romstart
+        self.INCLUDES_NEEDED = INCLUDES_NEEDED
+        self.INCLUDED = INCLUDED
 
         self.out = ""
         self.prefix = ""
@@ -409,24 +412,60 @@ class ScriptDisassembler:
         else:
             return f"{arg}"
 
+    def replace_star_rod_function_name(self, name):
+        vram = int(name.split("_",1)[1], 16)
+        name = name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}"
+        return name
+
+    def replace_star_rod_prefix(self, addr):
+        if addr in self.symbol_map:
+            name = self.symbol_map[addr][0][1]
+            toReplace = True
+            suffix = ""
+            if name.startswith("function_802"):
+                prefix = "s32 "
+                name = self.replace_star_rod_function_name(name)
+                suffix = "(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape)"
+            elif name.startswith("script_"):
+                prefix = "Script "
+            elif name.startswith("aISettings_"):
+                prefix = "NpcAISettings "
+            elif name.startswith("npcSettings_"):
+                prefix = "NpcSettings "
+            elif name.startswith("npcGroup_"):
+                prefix = "StaticNpc "
+            elif name.startswith("entryList_"):
+                prefix = "Vec4f "
+            elif name.startswith("npcGroupList_"):
+                prefix = "NpcGroupList "
+            else:
+                toReplace = False
+
+            if toReplace:
+                name = "N(" + name + ")"
+                if name not in self.INCLUDED["functions"]:
+                    self.INCLUDES_NEEDED["forward"].append(prefix + name + suffix + ";")
+            return name
+        return addr
+
     def addr_ref(self, addr):
         if addr in self.symbol_map:
-            return self.symbol_map[addr][0][1]
+            return self.replace_star_rod_prefix(addr)
         return f"0x{addr:08X}"
 
     def trigger(self, trigger):
+        if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
         if trigger == 0x00000080: trigger = "TRIGGER_FLOOR_TOUCH"
-        if trigger == 0x00800000: trigger = "TRIGGER_FLOOR_ABOVE"
-        if trigger == 0x00000800: trigger = "TRIGGER_FLOOR_INTERACT"
+        if trigger == 0x00000100: trigger = "TRIGGER_WALL_PRESS_A"
         if trigger == 0x00000200: trigger = "TRIGGER_FLOOR_JUMP"
         if trigger == 0x00000400: trigger = "TRIGGER_WALL_TOUCH"
-        if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
-        if trigger == 0x00000100: trigger = "TRIGGER_WALL_INTERACT"
+        if trigger == 0x00000800: trigger = "TRIGGER_FLOOR_PRESS_A"
         if trigger == 0x00001000: trigger = "TRIGGER_WALL_HAMMER"
-        if trigger == 0x00040000: trigger = "TRIGGER_CEILING_TOUCH"
-        if trigger == 0x00010000: trigger = "TRIGGER_SAVE_FLAG_SET"
+        if trigger == 0x00010000: trigger = "TRIGGER_GAME_FLAG_SET"
         if trigger == 0x00020000: trigger = "TRIGGER_AREA_FLAG_SET"
-        if trigger == 0x00100000: trigger = "TRIGGER_BOMB"
+        if trigger == 0x00040000: trigger = "TRIGGER_CEILING_TOUCH"
+        if trigger == 0x00080000: trigger = "TRIGGER_FLOOR_ABOVE"
+        if trigger == 0x00100000: trigger = "TRIGGER_POINT_BOMB"
         return f"0x{trigger:X}" if type(trigger) is int else trigger
 
     def read_word(self):
@@ -781,6 +820,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.indent -= 1
 
+            self.INCLUDED["functions"].add(self.script_name)
+
             self.prefix_line(f"Script {self.script_name} = SCRIPT({{")
             self.write_line("});")
 
@@ -972,8 +1013,12 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x43:
             addr = argv[0]
             if addr in self.symbol_map:
-                func_name = self.symbol_map[addr][0][1]
+                func_name = self.addr_ref(addr)
+                if func_name.startswith("N("):
+                    self.INCLUDED["functions"].add(func_name)
 
+                for i,arg in enumerate(argv):
+                    argv[i] = self.replace_star_rod_prefix(arg)
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
                 argv_str = replace_constants(func_name, argv_str)
 

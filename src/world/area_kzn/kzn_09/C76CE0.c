@@ -5,6 +5,12 @@
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024001C_C76CFC);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024003C_C76D1C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240068_C76D48);
 
@@ -15,6 +21,12 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240120_C76E00);
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_802401CC_C76EAC);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024041C_C770FC);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_80240448_C77128);
 

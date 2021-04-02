@@ -159,7 +159,7 @@ s32 N(func_8024095C_E0F0FC)(ScriptInstance *script, NpcAISettings *aiSettings, E
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
-# include "world/common/NpcJumpFunc.inc.c"
+#include "world/common/NpcJumpFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 

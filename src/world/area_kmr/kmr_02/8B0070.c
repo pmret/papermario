@@ -95,15 +95,15 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241424_8B1494);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802414D8_8B1548);
 
-# include "world/common/NpcJumpFunc3.inc.c"
+#include "world/common/NpcJumpFunc3.inc.c"
 
-# include "world/common/NpcJumpFunc.inc.c"
+#include "world/common/NpcJumpFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc13_2.inc.c"
 
-# include "world/common/UnkNpcAIFunc11.inc.c"
+#include "world/common/UnkNpcAIFunc11.inc.c"
 
-# include "world/common/UnkNpcAIFunc10.inc.c"
+#include "world/common/UnkNpcAIFunc10.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241964_8B19D4);
 

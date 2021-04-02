@@ -1,0 +1,1351 @@
+#include "arn_05.h"
+#include "sprite/npc/boo.h"
+#include "sprite/npc/world_bow.h"
+#include "sprite/npc/world_tubba.h"
+
+
+
+
+Script N(Exit1) = EXIT_WALK_SCRIPT(60, 0, "arn_03", 1);
+Script N(Exit2) = EXIT_WALK_SCRIPT(60, 1, "arn_02", 0);
+
+Script N(script_802414E8) = SCRIPT({
+    bind N(Exit1) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(Exit2) to TRIGGER_FLOOR_ABOVE 5;
+});
+
+Script N(script_EnterWalk_80241530) = SCRIPT({
+    GetLoadType(SI_VAR(1));
+    if (SI_VAR(1) == 1) {
+        spawn EnterSavePoint;
+        spawn N(script_802414E8);
+        return;
+    }
+    SI_VAR(0) = N(script_802414E8);
+    spawn EnterWalk;
+    sleep 1;
+});
+
+Script N(script_Main) = SCRIPT({
+    WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamEnabled(0, 1);
+    if (STORY_PROGRESS < STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
+        MakeNpcs(0, N(npcGroupList_80244FA4));
+    } else {
+        MakeNpcs(0, N(npcGroupList_80244FC8));
+    }
+    await N(script_MakeEntities);
+    spawn N(script_802441FC);
+    spawn N(script_80241360);
+    spawn N(script_EnterWalk_80241530);
+});
+
+static s32 N(pad_16A8)[] = {
+    0x00000000, 0x00000000,
+};
+
+NpcSettings N(npcSettings_802416B0) = {
+    .height = 90,
+    .radius = 65,
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
+    .level = 13,
+};
+
+NpcAISettings N(aISettings_802416DC) = {
+    .moveSpeed = 1.0f,
+    .moveTime = 25,
+    .waitTime = 30,
+    .alertRadius = 50.0f,
+    .unk_10 = { .f = 50.0f },
+    .unk_14 = 10,
+    .chaseRadius = 100.0f,
+    .unk_28 = { .f = 80.0f },
+    .unk_2C = 1,
+};
+
+Script N(script_NpcAI_8024170C) = SCRIPT({
+    N(func_8024113C_BE8D1C)(N(aISettings_802416DC));
+});
+
+NpcSettings N(npcSettings_8024172C) = {
+    .height = 24,
+    .radius = 24,
+    .ai = &N(script_NpcAI_8024170C),
+    .level = 99,
+};
+
+NpcSettings N(npcSettings_80241758) = {
+    .height = 24,
+    .radius = 24,
+    .level = 99,
+};
+
+Script N(script_Idle_80241784) = SCRIPT({
+
+});
+
+Script N(script_Interact_80241794) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
+            if (SI_AREA_FLAG(6) == 0) {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0092));
+                SI_AREA_FLAG(6) = 1;
+            } else {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0093));
+                SI_AREA_FLAG(6) = 0;
+            }
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0095));
+        }
+        < STORY_CH3_BEGAN_PEACH_MISSION {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0096));
+        }
+        < STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0097));
+        }
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0098));
+        }
+    }
+});
+
+Script N(script_Interact_802418F4) = SCRIPT({
+    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0094));
+});
+
+Script N(script_Interact_80241924) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
+            if (SI_AREA_FLAG(7) == 0) {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0099));
+                SI_AREA_FLAG(7) = 1;
+            } else {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009A));
+                SI_AREA_FLAG(7) = 0;
+            }
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009C));
+        }
+        < STORY_CH3_BEGAN_PEACH_MISSION {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009D));
+        }
+        < STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009E));
+        }
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009F));
+        }
+    }
+});
+
+Script N(script_Interact_80241A84) = SCRIPT({
+    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009B));
+});
+
+Script N(script_Interact_80241AB4) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
+        < STORY_CH3_BEGAN_PEACH_MISSION {}
+        < STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00A9));
+        }
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+            if (SI_SAVE_FLAG(1014) == 1) {
+                if (SI_AREA_FLAG(9) == 1) {
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AE));
+                } else {
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B0));
+                }
+            } else {
+                SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AA));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_9));
+                ContinueSpeech(-1, 9765129, 9765121, 0, 917675);
+                SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_A));
+                ContinueSpeech(-1, 9765130, 9765121, 0, 917676);
+                ShowChoice(1966110);
+                match SI_VAR(0) {
+                    == 0 {
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5));
+                        ContinueSpeech(-1, 9765125, 9765121, 0, 917677);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_1));
+                        SI_SAVE_FLAG(1014) = 1;
+                        SI_AREA_FLAG(9) = 1;
+                    }
+                    == 1 {
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5));
+                        ContinueSpeech(-1, 9765125, 9765121, 0, 917677);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_1));
+                        SI_SAVE_FLAG(1014) = 1;
+                        SI_AREA_FLAG(9) = 1;
+                    }
+                    == 2 {
+                        ContinueSpeech(-1, 9765124, 9765121, 0, 917679);
+                    }
+                }
+            }
+        }
+    }
+});
+
+Script N(script_Interact_80241D88) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
+        < STORY_CH3_BEGAN_PEACH_MISSION {}
+        < STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B1));
+        }
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B2));
+        }
+    }
+});
+
+Script N(script_Interact_80241E28) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
+            if (SI_AREA_FLAG(8) == 0) {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B3));
+                SI_AREA_FLAG(8) = 1;
+            } else {
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B4));
+                SI_AREA_FLAG(8) = 0;
+            }
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B6));
+        }
+        < STORY_CH3_BEGAN_PEACH_MISSION {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B7));
+        }
+        < STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B8));
+        }
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B9));
+        }
+    }
+});
+
+Script N(script_Interact_80241F88) = SCRIPT({
+    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B5));
+});
+
+Script N(script_Init_80241FB8) = SCRIPT({
+    if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
+        BindNpcIdle(-1, N(script_Idle_80241784));
+    }
+    BindNpcInteract(-1, N(script_Interact_80241794));
+});
+
+Script N(script_Init_80242008) = SCRIPT({
+    BindNpcInteract(-1, N(script_Interact_80241924));
+});
+
+Script N(script_Init_8024202C) = SCRIPT({
+    BindNpcInteract(-1, N(script_Interact_80241AB4));
+    match STORY_PROGRESS {
+        < STORY_CH3_SAW_TUBBA_EAT_BOO {
+            SetNpcFlagBits(NPC_SELF, 0x00000100, TRUE);
+        }
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
+            RemoveNpc(-1);
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            SetNpcPos(NPC_SELF, 0, -1000, 0);
+            RemoveNpc(-1);
+        }
+        < STORY_CH3_BEGAN_PEACH_MISSION {
+            SetNpcPos(NPC_SELF, 0, -1000, 0);
+            RemoveNpc(-1);
+        }
+        < STORY_CH5_STAR_SPRIT_DEPARTED {}
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+        }
+    }
+});
+
+Script N(script_Init_8024212C) = SCRIPT({
+    BindNpcInteract(-1, N(script_Interact_80241D88));
+    match STORY_PROGRESS {
+        < STORY_CH3_SAW_TUBBA_EAT_BOO {
+            RemoveNpc(-1);
+        }
+        < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
+            RemoveNpc(-1);
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            RemoveNpc(-1);
+        }
+        < STORY_CH3_BEGAN_PEACH_MISSION {
+            RemoveNpc(-1);
+        }
+        < STORY_CH5_STAR_SPRIT_DEPARTED {}
+        >= STORY_CH5_STAR_SPRIT_DEPARTED {
+        }
+    }
+});
+
+Script N(script_Init_802421EC) = SCRIPT({
+    if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
+        BindNpcIdle(-1, N(script_Idle_80241784));
+    }
+    BindNpcInteract(-1, N(script_Interact_80241E28));
+});
+
+StaticNpc N(npcGroup_8024223C)[] = {
+    {
+        .id = 0,
+        .settings = &N(npcSettings_8024172C),
+        .pos = { 55.0f, 195.0f, 160.0f },
+        .flags = 0x00000D01,
+        .init = &N(script_Init_80241FB8),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .movement = { 2, 55, 10, 160, 75, 10, 160, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 55, 195, 160, 50 },
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+        .tattle = 1704110,
+    },
+    {
+        .id = 1,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 160.0f, 191.0f, 250.0f },
+        .flags = 0x00000D01,
+        .init = &N(script_Init_80242008),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+        .tattle = 1704111,
+    },
+    {
+        .id = 2,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 390.0f, 190.0f, 255.0f },
+        .flags = 0x00000D01,
+        .init = &N(script_Init_8024202C),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+        .tattle = 1704112,
+    },
+    {
+        .id = 3,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 503.0f, 206.0f, 210.0f },
+        .flags = 0x00000D01,
+        .init = &N(script_Init_8024212C),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+        .tattle = 1704113,
+    },
+    {
+        .id = 4,
+        .settings = &N(npcSettings_8024172C),
+        .pos = { 350.0f, 185.0f, 197.0f },
+        .flags = 0x00000D01,
+        .init = &N(script_Init_802421EC),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .movement = { 2, 350, 10, 197, 330, 10, 197, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 350, 185, 197, 50 },
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+        .tattle = 1704114,
+    },
+};
+
+Script N(script_80242BEC) = SCRIPT({
+    loop SI_VAR(0) {
+        PlaySoundAtNpc(0x5, 0x20F6, 0);
+        ShakeCam(0, 0, 10, 0.5);
+        sleep 5;
+    }
+});
+
+Script N(script_80242C50) = SCRIPT({
+    DisablePlayerInput(TRUE);
+    NpcFacePlayer(2, 1);
+    PlaySoundAtNpc(0x2, 0x262, 0);
+    ShowEmote(EMOTE_QUESTION, 0, -45, 20, 1, 0, 0, 0, 0);
+    sleep 20;
+    GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    SI_VAR(0) -= SI_VAR(3);
+    SI_VAR(0) -= 50;
+    SI_VAR(1) -= SI_VAR(4);
+    SI_VAR(2) -= SI_VAR(5);
+    GetNpcPos(0x2, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    SI_VAR(3) -= SI_VAR(0);
+    SI_VAR(4) -= SI_VAR(1);
+    SI_VAR(5) -= SI_VAR(2);
+    NpcMoveTo(0x2, SI_VAR(3), SI_VAR(5), 30);
+    SetCamType(0, 6, 1);
+    SetCamSpeed(0, 5.0);
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetCamDistance(0, 350);
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00A0));
+    PlaySoundAt(8438, 0, 450, 200, 160);
+    ShakeCam(0, 0, 20, 0.80078125);
+    PlaySoundAtNpc(NPC_PLAYER, 0x262, 0);
+    PlaySoundAtNpc(0x1, 0x262, 0);
+    PlaySoundAtNpc(0x2, 0x262, 0);
+    PlaySoundAtNpc(0x4, 0x262, 0);
+    ShowEmote(EMOTE_EXCLAMATION, 0, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(EMOTE_SHOCK, 0, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(EMOTE_QUESTION, 0, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(EMOTE_ELLIPSIS, 0, -45, 20, 1, 0, 0, 0, 0);
+    FadeOutMusic(0, 500);
+    ClearAmbientSounds(250);
+    sleep 20;
+    InterpNpcYaw(0x2, 90, 1);
+    InterpNpcYaw(0x4, 90, 1);
+    sleep 20;
+    PlaySound(SOUND_BOO_APPEAR);
+    SI_VAR(0) = 240.0;
+    loop 20 {
+        SI_VAR(0) -= 12.0;
+        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(0x4, 7, SI_VAR(0), 0, 0, 0);
+        sleep 1;
+    }
+    SetNpcPos(NPC_PLAYER, 420, 300, 220);
+    SetNpcPos(0x1, 460, 250, 210);
+    SetNpcPos(0x4, 0, -1000, 0);
+    EnableNpcShadow(NPC_PLAYER, FALSE);
+    EnableNpcShadow(0x1, FALSE);
+    EnableNpcShadow(0x4, FALSE);
+    PlaySound(SOUND_BOO_VANISH);
+    SI_VAR(0) = 0.0;
+    loop 20 {
+        SI_VAR(0) += 12.0;
+        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+        sleep 1;
+    }
+    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
+    GetCurrentPartnerID(SI_VAR(0));
+    if (SI_VAR(0) != 9) {
+        N(func_802412C8_BE8EA8)(9);
+        spawn {
+            SI_MAP_VAR(0) = 0;
+            ShowMessageAtScreenPos(917666, 160, 40);
+            SI_MAP_VAR(0) = 1;
+        }
+        sleep 50;
+        DisablePartnerAI(0);
+        SetNpcYaw(-4, 90);
+        EnablePartnerAI();
+        loop {
+            sleep 1;
+            if (SI_MAP_VAR(0) == 1) {
+                break;
+            }
+        }
+    }
+    DisablePartnerAI(0);
+    SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bow, Palette_00, Anim_4), NPC_ANIM(world_bow, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00A3));
+    EnablePartnerAI();
+    InterpPlayerYaw(90, 0);
+    sleep 5;
+    N(func_802412B0_BE8E90)();
+    CloseMessage();
+    func_802D2B50();
+    sleep 60;
+    SetMusicTrack(0, SONG_TUBBAS_MANOR, 1, 8);
+    SetCamType(0, 6, 1);
+    SetCamSpeed(0, 90.0);
+    SetCamPitch(0, 17.0, -11.5);
+    SetCamDistance(0, 450);
+    SetCamPosA(0, -40, 206);
+    SetCamPosB(0, 530, 206);
+    SetCamPosC(0, 0, 0);
+    SetPanTarget(0, 426, 190, 194);
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    SetNpcFlagBits(0x5, 0x00000200, TRUE);
+    SetNpcSpeed(0x5, 2.5);
+    SetNpcPos(0x5, 675, 200, 180);
+    NpcFaceNpc(NPC_PLAYER, 0x5, 1);
+    NpcFaceNpc(0x1, 0x5, 1);
+    SetNpcPos(0x2, 272, 190, 214);
+    PlaySoundAtNpc(NPC_PLAYER, 0x262, 0);
+    PlaySoundAtNpc(0x1, 0x262, 0);
+    ShowEmote(EMOTE_EXCLAMATION, 0, 45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(EMOTE_SHOCK, 0, 45, 20, 1, 0, 0, 0, 0);
+    spawn {
+        PlaySound(SOUND_BOO_APPEAR);
+        sleep 20;
+        SI_VAR(0) = 240.0;
+        loop 20 {
+            SI_VAR(0) -= 12.0;
+            func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
+            func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+            sleep 1;
+        }
+        SetNpcPos(NPC_PLAYER, 0, -1000, 0);
+        SetNpcPos(0x1, 0, -1000, 0);
+        sleep 10;
+    }
+    SI_VAR(0) = 4;
+    spawn N(script_80242BEC);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    NpcMoveTo(0x5, 550, 196, 0);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetCamSpeed(0, 4.0);
+    SetCamPitch(0, 17.0, -11.5);
+    SetCamDistance(0, 375);
+    SetCamPosA(0, -40, 206);
+    SetCamPosB(0, 530, 206);
+    SetCamPosC(0, 0, 0);
+    SetPanTarget(0, 426, 190, 194);
+    PanToTarget(0, 0, 1);
+    sleep 30;
+    SI_MAP_VAR(1) = 0;
+    spawn {
+        SI_VAR(0) = 7;
+        spawn N(script_80242BEC);
+        SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+        NpcMoveTo(0x5, 370, 220, 0);
+        GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcMoveTo(0x5, 330, SI_VAR(2), 0);
+        SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+        SI_MAP_VAR(1) = 1;
+    }
+    SetCamSpeed(0, 90.0);
+    SetCamPitch(0, 17.0, -11.5);
+    SetCamDistance(0, 375);
+    SetCamPosA(0, -40, 206);
+    SetCamPosB(0, 530, 206);
+    SetCamPosC(0, 0, 0);
+    SetPanTarget(0, 240, 169, 206);
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A4));
+    sleep 15;
+    loop {
+        sleep 1;
+        if (SI_MAP_VAR(1) == 1) {
+            break;
+        }
+    }
+    NpcFaceNpc(0x2, 0x5, 1);
+    sleep 30;
+    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A5));
+    SetNpcAnimation(0x2, NPC_ANIM(boo, Palette_01, Anim_9));
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1E));
+    SetNpcJumpscale(0x2, 0.0);
+    NpcJump1(2, 265, 206, 212, 3);
+    sleep 20;
+    SpeakToPlayer(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1E), NPC_ANIM(world_tubba, Palette_00, Anim_1E), 5, MESSAGE_ID(0x0E, 0x00A6));
+    SetNpcPos(0x2, 303, 237, 228);
+    SetNpcAnimation(0x2, NPC_ANIM(boo, Palette_01, Anim_6));
+    EnableNpcShadow(0x2, FALSE);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1F));
+    SetCamSpeed(0, 5.0);
+    SetCamPitch(0, 17.0, -17.0);
+    SetCamDistance(0, 250);
+    SetCamPosA(0, -40, 206);
+    SetCamPosB(0, 530, 206);
+    SetCamPosC(0, 0, 0);
+    SetPanTarget(0, 280, 169, 206);
+    PanToTarget(0, 0, 1);
+    spawn {
+        sleep 50;
+        PlaySoundAtNpc(0x5, 0x315, 0);
+    }
+    sleep 40;
+    SetNpcPos(0x2, 0, -1000, 0);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_20));
+    sleep 80;
+    SetCamSpeed(0, 90.0);
+    SetCamPitch(0, 17.0, -11.5);
+    SetCamDistance(0, 375);
+    SetCamPosA(0, -40, 206);
+    SetCamPosB(0, 530, 206);
+    SetCamPosC(0, 0, 0);
+    SetPanTarget(0, 240, 169, 206);
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    sleep 15;
+    SpeakToPlayer(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_21), NPC_ANIM(world_tubba, Palette_00, Anim_6), 5, MESSAGE_ID(0x0E, 0x00A7));
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_21));
+    GetNpcPos(0x5, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SI_VAR(0) += -50;
+    SI_VAR(1) += 50;
+    SI_VAR(2) += 10;
+    PlayEffect(0x6, 1, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10, 0, 0, 0, 0, 0, 0, 0, 0);
+    sleep 20;
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    InterpNpcYaw(0x5, 90, 1);
+    sleep 30;
+    SI_VAR(0) = 7;
+    spawn N(script_80242BEC);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    NpcMoveTo(0x5, 370, 220, 0);
+    NpcMoveTo(0x5, 550, 196, 0);
+    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcPos(0x5, 0, -1000, 0);
+    SetNpcFlagBits(0x5, 0x00000200, FALSE);
+    NpcFacePlayer(0, 3);
+    SetNpcPos(NPC_PLAYER, 55, 195, 160);
+    SetNpcPos(0x1, 160, 191, 250);
+    SetNpcPos(0x4, 350, 185, 197);
+    EnableNpcShadow(NPC_PLAYER, TRUE);
+    EnableNpcShadow(0x1, TRUE);
+    EnableNpcShadow(0x4, TRUE);
+    PlaySound(SOUND_BOO_VANISH);
+    SI_VAR(0) = 0.0;
+    loop 20 {
+        SI_VAR(0) += 12.5;
+        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(0x4, 7, SI_VAR(0), 0, 0, 0);
+        sleep 1;
+    }
+    func_802CFD30(NPC_PLAYER, 0, 0, 0, 0, 0);
+    func_802CFD30(0x1, 0, 0, 0, 0, 0);
+    func_802CFD30(0x4, 0, 0, 0, 0, 0);
+    sleep 10;
+    SetCamType(0, 4, 0);
+    SetCamSpeed(0, 3.0);
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    PanToTarget(0, 0, 0);
+    SpeakToPlayer(0x4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A8));
+    DisablePlayerInput(FALSE);
+});
+
+Script N(script_802441FC) = SCRIPT({
+    if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
+        SetNpcPos(0x2, 330, 184, 240);
+        loop {
+            SI_VAR(10) = 0;
+            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            if (SI_VAR(2) >= 110) {
+                if (SI_VAR(0) >= 220) {
+                    SI_VAR(10) = 1;
+                }
+            }
+            if (SI_VAR(10) == 1) {
+                break;
+            }
+            sleep 1;
+        }
+        func_802D2B6C();
+        await N(script_80242C50);
+        BindNpcInteract(0, N(script_Interact_802418F4));
+        BindNpcInteract(1, N(script_Interact_80241A84));
+        BindNpcInteract(4, N(script_Interact_80241F88));
+        STORY_PROGRESS = STORY_CH3_SAW_TUBBA_EAT_BOO;
+        spawn N(script_80241360);
+    }
+});
+
+Script N(script_Init_80244358) = SCRIPT({
+    if (STORY_PROGRESS >= STORY_CH3_SAW_TUBBA_EAT_BOO) {
+        RemoveNpc(-1);
+    }
+});
+
+NpcAnimID N(extraAnimationList_80244390)[] = {
+    NPC_ANIM(world_tubba, Palette_00, Anim_6),
+    NPC_ANIM(world_tubba, Palette_00, Anim_9),
+    NPC_ANIM(world_tubba, Palette_00, Anim_1E),
+    NPC_ANIM(world_tubba, Palette_00, Anim_1F),
+    NPC_ANIM(world_tubba, Palette_00, Anim_20),
+    NPC_ANIM(world_tubba, Palette_00, Anim_21),
+    ANIM_END,
+};
+
+StaticNpc N(npcGroup_802443AC) = {
+    .id = 5,
+    .settings = &N(npcSettings_802416B0),
+    .pos = { 0.0f, -1000.0f, 0.0f },
+    .flags = 0x00000B01,
+    .init = &N(script_Init_80244358),
+    .yaw = 270,
+    .dropFlags = 0x80,
+    .heartDrops = NO_DROPS,
+    .flowerDrops = NO_DROPS,
+    .animations = {
+        NPC_ANIM(world_tubba, Palette_00, Anim_6),
+        NPC_ANIM(world_tubba, Palette_00, Anim_9),
+        NPC_ANIM(world_tubba, Palette_00, Anim_C),
+        NPC_ANIM(world_tubba, Palette_00, Anim_C),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+    },
+    .extraAnimations = &N(extraAnimationList_80244390),
+};
+
+Script N(script_Idle_8024459C) = SCRIPT({
+    GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SI_VAR(3) = SI_VAR(0);
+    SI_VAR(3) += -60;
+    SI_VAR(4) = SI_VAR(0);
+    SI_VAR(4) += 60;
+    loop {
+        RandInt(5, SI_VAR(5));
+        SI_VAR(6) =f SI_VAR(5);
+        SI_VAR(6) *= 0.1005859375;
+        SI_VAR(6) += 0.80078125;
+        SetNpcSpeed(NPC_SELF, SI_VAR(6));
+        NpcMoveTo(NPC_SELF, SI_VAR(3), SI_VAR(2), 0);
+        RandInt(5, SI_VAR(5));
+        SI_VAR(6) =f SI_VAR(5);
+        SI_VAR(6) *= 0.1005859375;
+        SI_VAR(6) += 0.80078125;
+        SetNpcSpeed(NPC_SELF, SI_VAR(6));
+        NpcMoveTo(NPC_SELF, SI_VAR(4), SI_VAR(2), 0);
+    }
+});
+
+Script N(script_Init_80244704) = SCRIPT({
+    BindNpcIdle(-1, N(script_Idle_8024459C));
+    EnableNpcShadow(NPC_SELF, FALSE);
+});
+
+Script N(script_Init_8024473C) = SCRIPT({
+    BindNpcIdle(-1, N(script_Idle_8024459C));
+    EnableNpcShadow(NPC_SELF, FALSE);
+});
+
+Script N(script_Init_80244774) = SCRIPT({
+    BindNpcIdle(-1, N(script_Idle_8024459C));
+    EnableNpcShadow(NPC_SELF, FALSE);
+});
+
+Script N(script_Init_802447AC) = SCRIPT({
+    BindNpcIdle(-1, N(script_Idle_8024459C));
+    EnableNpcShadow(NPC_SELF, FALSE);
+});
+
+StaticNpc N(npcGroup_802447E4)[] = {
+    {
+        .id = 6,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 36.0f, 277.0f, 140.0f },
+        .flags = 0x00402705,
+        .init = &N(script_Init_80244704),
+        .yaw = 90,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+    },
+    {
+        .id = 7,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 200.0f, 275.0f, 182.0f },
+        .flags = 0x00402705,
+        .init = &N(script_Init_8024473C),
+        .yaw = 90,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+    },
+    {
+        .id = 8,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 379.0f, 300.0f, 192.0f },
+        .flags = 0x00402705,
+        .init = &N(script_Init_80244774),
+        .yaw = 90,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+    },
+    {
+        .id = 9,
+        .settings = &N(npcSettings_80241758),
+        .pos = { 525.0f, 286.0f, 178.0f },
+        .flags = 0x00402705,
+        .init = &N(script_Init_802447AC),
+        .yaw = 90,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_2),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_1),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_0),
+            NPC_ANIM(boo, Palette_01, Anim_A),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM(boo, Palette_01, Anim_3),
+        },
+    },
+};
+
+NpcGroupList N(npcGroupList_80244FA4) = {
+    NPC_GROUP(N(npcGroup_802443AC), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_8024223C), BATTLE_ID(0, 0, 0, 0)),
+    {},
+};
+
+NpcGroupList N(npcGroupList_80244FC8) = {
+    NPC_GROUP(N(npcGroup_802443AC), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_8024223C), BATTLE_ID(0, 0, 0, 0)),
+    NPC_GROUP(N(npcGroup_802447E4), BATTLE_ID(0, 0, 0, 0)),
+    {},
+};
+
+static s32 N(pad_4FF8)[] = {
+    0x00000000, 0x00000000,
+};
+
+Script N(script_MakeEntities) = SCRIPT({
+    MakeEntity(0x802EA7E0, 17, 238, 80, 0, ARGS_END);
+});
+
+s32 N(func_80240000_BE7BE0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc *npc = get_npc_unsafe(enemy->npcID);
+    f32 ret;
+    f32 max;
+    f32 posX;
+    f32 posZ;
+    s32 i;
+    s32 j;
+
+    script->functionTemp[1].s = 0;
+    max = 32767.0f;
+    posX = npc->pos.x;
+    posZ = npc->pos.z;
+    script->functionTemp[2].s = 0;
+
+    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
+        ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
+        if (ret < max) {
+            max = ret;
+            script->functionTemp[2].s = j;
+        }
+    }
+
+    npc->currentAnim = enemy->animList[1];
+    if (enemy->territory->patrol.moveSpeedOverride < 0) {
+        npc->moveSpeed = aiSettings->moveSpeed;
+    } else {
+        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
+    }
+
+    script->functionTemp[0].s = 1;
+    return 1;
+}
+
+void N(func_80240158_BE7D38)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 x, z;
+    s32 var;
+
+    if (aiSettings->unk_14 >= 0) {
+        if (script->functionTemp[1].s <= 0) {
+            script->functionTemp[1].s = aiSettings->unk_14;
+            if (func_800490B4(shape, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
+                fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+                func_800494C0(npc, 0x2F4, 0x200000);
+                if (enemy->npcSettings->unk_2A & 1) {
+                    script->functionTemp[0].s = 10;
+                } else {
+                    script->functionTemp[0].s = 12;
+                }
+                return;
+            }
+        }
+        script->functionTemp[1].s--;
+    }
+
+    if (npc->unk_8C == 0) {
+        if (npc->moveSpeed < 4.0) {
+            func_8003D660(npc, 0);
+        } else {
+            func_8003D660(npc, 1);
+        }
+        
+        x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
+        z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
+        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+        if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
+            script->functionTemp[0].s = 2;
+            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || 
+                (aiSettings->waitTime <= 0) || (script->functionTemp[1].s == 0)) {
+                script->functionTemp[0].s = 4;
+            }
+            if (rand_int(10000) % 100 < aiSettings->moveTime) {
+                script->functionTemp[0].s = 4;
+            }
+        }
+    }
+}
+
+#include "world/common/UnkNpcAIFunc1.inc.c"
+
+void N(func_802404C0_BE80A0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 var;
+
+    if ((aiSettings->unk_14 >= 0) && func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+        fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        func_800494C0(npc, 0x2F4, 0x200000);
+        if (!(enemy->npcSettings->unk_2A & 1)) {
+            script->functionTemp[0].s = 12;
+        } else {
+            script->functionTemp[0].s = 10;
+        }
+    } else if (npc->unk_8C == 0) {
+        npc->duration--;
+        if (npc->duration == 0) {
+            script->functionTemp[1].s--;
+            if (script->functionTemp[1].s != 0) {
+                if (!(enemy->npcSettings->unk_2A & 0x10)) {
+                    npc->yaw = clamp_angle(npc->yaw + 180.0f);
+                }
+                npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
+            } else {
+                script->functionTemp[0].s = 4;
+            }
+        }
+    }
+}
+
+s32 N(func_8024067C_BE825C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    script->functionTemp[2].s++;
+    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
+        script->functionTemp[2].s = 0;
+    }
+    npc->currentAnim = enemy->animList[1];
+    if (enemy->territory->patrol.moveSpeedOverride < 0) {
+        npc->moveSpeed = aiSettings->moveSpeed;
+    } else {
+        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
+    }
+    script->functionTemp[0].s = 1;
+    return 1;
+}
+
+#include "world/common/NpcJumpFunc2.inc.c"
+
+#include "world/common/NpcJumpFunc.inc.c"
+
+#include "world/common/UnkNpcAIFunc13.inc.c"
+
+s32 N(func_8024094C_BE852C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 var;
+
+    if (!func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 1)) {
+        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
+        npc->currentAnim = enemy->animList[0];
+        npc->duration = 25;
+        script->functionTemp[0].s = 14;
+    } else {
+        func_8003D660(npc, 1);
+        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+        if (npc->duration > 0) {
+            npc->duration--;
+        } else {
+            script->functionTemp[0].s = 12;
+        }
+    }
+}
+
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
+
+void N(func_80240AD4_BE86B4)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 i;
+
+    for (i = script->functionTemp[2].s; i < enemy->territory->patrol.numPoints; i++) {
+        if (i[enemy->territory->patrol.points].y <= npc->pos.y) {
+            script->functionTemp[2].s = i;
+            break;
+        }
+    }
+
+    npc->moveSpeed = aiSettings->moveSpeed;
+    npc->currentAnim = enemy->animList[1];
+    script->functionTemp[1].s = 0;
+    script->functionTemp[0].s = 1;
+}
+
+s32 N(func_80240B94_BE8774)(ScriptInstance *script, NpcAISettings *aiSettings) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAI = (NpcAISettings*)get_variable(script, *args++);
+    f32 posX, posY, posZ, posW;
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->patrol.unk_30;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.unk_34 = 65.0f;
+    territory.unk_1C = 0;
+
+    if (aiSettings != NULL || enemy->unk_B0 & 4) {
+        script->functionTemp[0].s = 0;
+        npc->duration = 0;
+        npc->currentAnim = enemy->animList[0];
+        npc->flags &= ~0x800;
+        if (!enemy->territory->patrol.isFlying) {
+            npc->flags = (npc->flags | 0x200) & ~8;
+        } else {
+            npc->flags = (npc->flags & ~0x200) | 8;
+        }
+
+        if (enemy->unk_B0 & 4) {
+            script->functionTemp[0].s = 99;
+            script->functionTemp[1].s = 0;
+            enemy->unk_B0 &= ~4;
+        } else if (enemy->flags & 0x40000000) {
+            script->functionTemp[0].s = 12;
+            enemy->flags &= 0xBFFFFFFF;
+        }
+
+        posX = npc->pos.x;
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
+        posW = 100.0f;
+
+        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+            npc->pos.y = posY;
+        }
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_80240000_BE7BE0)(script, npcAI, territoryPtr);
+        case 1:
+            N(func_80240158_BE7D38)(script, npcAI, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, npcAI, territoryPtr);
+        case 3:
+            N(func_802404C0_BE80A0)(script, npcAI, territoryPtr);
+            break;
+        case 4:
+            N(func_8024067C_BE825C)(script, npcAI, territoryPtr);
+            break;
+        case 10:
+            N(NpcJumpFunc2)(script, npcAI, territoryPtr);
+        case 11:
+            N(NpcJumpFunc)(script, npcAI, territoryPtr);
+            break;
+        case 12:
+            N(UnkNpcAIFunc13)(script, npcAI, territoryPtr);
+        case 13:
+            N(func_8024094C_BE852C)(script, npcAI, territoryPtr);
+            break;
+        case 14:
+            N(UnkNpcDurationFlagFunc)(script, npcAI, territoryPtr);
+            break;
+        case 15:
+            N(func_80240AD4_BE86B4)(script, npcAI, territoryPtr);
+            break;
+        case 99:
+            func_8004A73C(script);
+    }
+
+    return 0;
+}
+
+void N(func_80240E90_BE8A70)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 posX, posY, posZ, posW;
+    f32 temp_f20;
+    f32 temp_f22;
+
+    posX = npc->pos.x;
+    posZ = npc->pos.z;
+    temp_f22 = script->functionTemp[2].s[enemy->territory->patrol.points].x;
+    temp_f20 = script->functionTemp[2].s[enemy->territory->patrol.points].z;
+
+    npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
+    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+
+    posX = npc->pos.x;
+    posY = npc->pos.y + script->functionTemp[2].s[enemy->territory->patrol.points].y;
+    posZ = npc->pos.z;
+    posW = 1000.0f;
+    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    posY += script->functionTemp[2].s[enemy->territory->patrol.points].y;
+    posW = posY - npc->pos.y;
+    if (posW > 2.0) {
+        npc->pos.y += 2.0;
+    } else if (posW < -2.0) {
+        npc->pos.y -= 2.0;
+    } else {
+        npc->pos.y = posY;
+    }
+
+    posW = dist2D(npc->pos.x, npc->pos.z, temp_f22, temp_f20);
+    if (!(posW > npc->moveSpeed)) {
+        script->functionTemp[0].s = 2;
+    }
+}
+
+void N(func_80241068_BE8C48)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration < 0) {
+        script->functionTemp[1].s--;
+        if (script->functionTemp[1].s >= 0) {
+            npc->yaw = clamp_angle(npc->yaw + 180.0f);
+            npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
+        } else {
+            script->functionTemp[0].s = 4;
+            npc->currentAnim = enemy->animList[0];
+        }
+    }
+}
+
+s32 N(func_8024113C_BE8D1C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    Enemy* enemy = script->owner1.enemy;
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAI = (NpcAISettings*)get_variable(script, *args++);
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->patrol.unk_30;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.unk_34 = 100.0f;
+    territory.unk_1C = 0;
+
+    if (aiSettings != NULL) {
+        script->functionTemp[0].s = 0;
+        npc->duration = 0;
+        npc->flags &= ~0x800;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_80240000_BE7BE0)(script, npcAI, territoryPtr);
+        case 1:
+            N(func_80240E90_BE8A70)(script, npcAI, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, npcAI, territoryPtr);
+        case 3:
+            N(func_80241068_BE8C48)(script, npcAI, territoryPtr);
+            break;
+        case 4:
+            N(func_8024067C_BE825C)(script, npcAI, territoryPtr);
+    }
+
+    enemy->varTable[0] = npc->pos.y;
+    return 0;
+}
+
+s32 N(func_802412B0_BE8E90)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    return (gGameStatusPtr->pressedButtons >> 1) & 2;
+}
+
+s32 N(func_802412C8_BE8EA8)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}

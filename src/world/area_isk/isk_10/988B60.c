@@ -5,6 +5,12 @@
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024001C_988B7C);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024003C_988B9C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240068_988BC8);
 
@@ -15,6 +21,12 @@ INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240120_988C80);
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_802401CC_988D2C);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024041C_988F7C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240448_988FA8);
 

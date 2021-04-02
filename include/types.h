@@ -15,5 +15,5 @@ typedef s32 BattleID;
 
 typedef s32 NpcAnimID;
 #define NPC_ANIM(sprite, palette, anim) (((_NPC_SPRITE_##sprite << 16) + (_NPC_PALETTE_##sprite##_##palette << 8) + _NPC_ANIM_##sprite##_##anim))
-
+#define ANIM_END -1
 #endif

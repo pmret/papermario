@@ -6763,11 +6763,11 @@ segments:
     start: 0xBE7BE0
     vram: 0x80240000
     subsections:
-    - [0xBE7BE0, c]
-    - [0xBE8EE0, data]
-    - [0xBE9290, data]
-    - [0xBECBE0, data]
-    - [0xBECC20, rodata]
+    - [0xBE7BE0,      .c, events]
+    - [0xBE8EE0,   .data, header]
+    - [0xBE9290,   .data, events]
+    - [0xBECBE0,   .data, events]
+    - [0xBECC20, .rodata, events]
   - name: world/area_arn/arn_07/
     type: code
     overlay: True
@@ -9507,6 +9507,7 @@ segments:
       - [0x19, 0x0060, sbk_00_tattle]
       - [0x19, 0x0061, sbk_01_tattle]
       - [0x19, 0x00BC, arn_03_tattle]
+      - [0x19, 0x00BD, arn_05_tattle]
       - [0x19, 0x00BE, arn_02_tattle]
       - [0x19, 0x00BF, arn_04_tattle]
 

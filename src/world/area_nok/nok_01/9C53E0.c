@@ -6,15 +6,15 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240000_9C53E0);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802400B4_9C5494);
 
-# include "world/common/NpcJumpFunc3.inc.c"
+#include "world/common/NpcJumpFunc3.inc.c"
 
-# include "world/common/NpcJumpFunc.inc.c"
+#include "world/common/NpcJumpFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc13_2.inc.c"
 
-# include "world/common/UnkNpcAIFunc11.inc.c"
+#include "world/common/UnkNpcAIFunc11.inc.c"
 
-# include "world/common/UnkNpcAIFunc10.inc.c"
+#include "world/common/UnkNpcAIFunc10.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240540_9C5920);
 

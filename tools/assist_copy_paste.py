@@ -34,6 +34,9 @@ def find_file_path(looking_for):
                 x -= 1
                 file_path = map_[x].split(".o",1)[0].split("build/",1)[1].strip()
                 break
+    if file_path:
+        if not "src/world/area_" in file_path:
+            file_path = ""
     return file_name, file_path, decomp
 
 map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
@@ -58,7 +61,7 @@ if "found no matches" in files[0]:
 function_text = ""
 
 function, file_path, decomp = find_file_path(files[0])
-if decomp:
+if decomp and file_path != "":
     file_path = (Path(__file__).parent.parent / file_path).resolve()
     func_file = file_path.read_text().splitlines()
     for i,line in enumerate(func_file):
@@ -87,6 +90,9 @@ for file in files[1:]:
     if not file:
         continue
     function, file_path, decomp = find_file_path(file)
+
+    if file_path == "":
+        continue
 
     if not function:
         print(f"Failed to find {file}")
