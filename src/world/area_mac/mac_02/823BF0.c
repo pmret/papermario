@@ -42,7 +42,7 @@ ApiStatus N(func_80240930_823BF0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240A88_823D48);
 /*
-void N(func_80240A88_823D48)(ScriptInstance* script, s32 isInitialCall) {
+void N(func_80240A88_823D48)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, z;
@@ -95,7 +95,7 @@ void N(func_80240A88_823D48)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80240DF0_8240B0);
 /*
-void N(func_80240DF0_8240B0)(ScriptInstance* script, s32 isInitialCall) {
+void N(func_80240DF0_8240B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -181,7 +181,7 @@ ApiStatus N(func_8024127C_82453C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241404_8246C4);
 /*
-void N(func_80241404_8246C4)(ScriptInstance* script, s32 isInitialCall) {
+void N(func_80241404_8246C4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
