@@ -44,6 +44,8 @@ script_parser = Lark(r"""
          | "goto" label         -> label_goto
          | "return"             -> return_stmt
          | "break"              -> break_stmt
+         | "break match"        -> break_match_stmt
+         | "break loop"         -> break_loop_stmt
          | "sleep" expr         -> sleep_stmt
          | "sleep" expr "secs"  -> sleep_secs_stmt
          | "spawn" expr         -> spawn_stmt
@@ -461,6 +463,12 @@ class Compile(Transformer):
 
     def break_stmt(self, tree):
         return BreakCmd(meta=tree.meta)
+
+    def break_match_stmt(self, tree):
+        return Cmd("ScriptOpcode_BREAK_MATCH", meta=tree.meta)
+
+    def break_loop_stmt(self, tree):
+        return Cmd("ScriptOpcode_BREAK_LOOP", meta=tree.meta)
 
     def set_group(self, tree):
         return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)
