@@ -458,8 +458,7 @@ if __name__ == "__main__":
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
         romfile.seek(eval(args.offset))
         disasm = disassemble(romfile, midx, symbol_map, args.comments, eval(args.offset))
-        print(disasm.rstrip())
-
+        
         if INCLUDES_NEEDED["forward"]:
             print()
             print("========== Forward declares needed: ==========\n")
@@ -469,6 +468,11 @@ if __name__ == "__main__":
 
         if INCLUDES_NEEDED["npcs"]:
             print("========== Includes needed: ==========\n")
+            print(f"#include \"map.h\"")
             for npc in INCLUDES_NEEDED["npcs"]:
                 print(f"#include \"sprite/npc/{npc}.h\"")
             print()
+
+        print(disasm.rstrip())
+
+        

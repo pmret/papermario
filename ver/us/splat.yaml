@@ -6790,29 +6790,29 @@ segments:
     start: 0xBF47A0
     vram: 0x80240000
     subsections:
-    - [0xBF47A0, c]
-    - [0xBF4860, c]
-    - [0xBF4A30, data]
-    - [0xBF4B50, data]
-    - [0xBF5210, data]
-    - [0xBF5340, data]
-    - [0xBF5460, data]
-    - [0xBF59A0, data]
-    - [0xBF5FF0, data]
-    - [0xBF6040, rodata]
+    - [0xBF47A0,      .c, BF47A0]
+    - [0xBF4860,      .c, events]
+    - [0xBF4A30,   .data, header]
+    - [0xBF4B50,   .data, events]
+    - [0xBF5210,   .data, events]
+    - [0xBF5340,   .data, events]
+    - [0xBF5460,   .data, events]
+    - [0xBF59A0,   .data, events]
+    - [0xBF5FF0,   .data, events]
+    - [0xBF6040, .rodata, events]
   - name: world/area_arn/arn_09/
     type: code
     overlay: True
     start: 0xBF6060
     vram: 0x80240000
     subsections:
-    - [0xBF6060, c]
-    - [0xBF60A0, data]
-    - [0xBF61A0, data]
-    - [0xBF6400, data]
-    - [0xBF6530, data]
-    - [0xBF6610, data]
-    - [0xBF69F0, rodata]
+    - [0xBF6060,      .c, events]
+    - [0xBF60A0,   .data, header]
+    - [0xBF61A0,   .data, events]
+    - [0xBF6400,   .data, events]
+    - [0xBF6530,   .data, events]
+    - [0xBF6610,   .data, events]
+    - [0xBF69F0, .rodata, events]
   - name: world/area_arn/arn_10/
     type: code
     overlay: True
@@ -9511,6 +9511,8 @@ segments:
       - [0x19, 0x00BD, arn_05_tattle]
       - [0x19, 0x00BE, arn_02_tattle]
       - [0x19, 0x00BF, arn_04_tattle]
+      - [0x19, 0x00D3, arn_08_tattle]
+      - [0x19, 0x00D4, arn_09_tattle]
 
       - [0x1A, 0x00AA, arn_03_Boo0_tattle]
       - [0x1A, 0x00AB, arn_03_Boo1_tattle]

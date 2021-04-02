@@ -53,7 +53,7 @@ del map_file
 
 files = sys.stdin.read().splitlines()
 
-if "found no matches" in files[0]:
+if not files or "found no matches" in files[0]:
     print(f"Could not find any matching functions")
     exit()
 

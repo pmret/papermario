@@ -435,9 +435,9 @@ class ScriptDisassembler:
             toReplace = True
             suffix = ""
             if name.startswith("function_802"):
-                prefix = "s32 "
+                prefix = "ApiStatus "
                 name = self.replace_star_rod_function_name(name)
-                suffix = "(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *shape)"
+                suffix = "(ScriptInstance *script, s32 isInitialCall)"
             elif name.startswith("script_"):
                 prefix = "Script "
             elif name.startswith("aISettings_"):
@@ -853,7 +853,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x06:
             self.indent -= 1
             self.write_line("}")
-        elif opcode == 0x07: self.write_line(f"break;")
+        elif opcode == 0x07: self.write_line(f"break loop;")
         elif opcode == 0x08: self.write_line(f"sleep {self.var(argv[0])};")
         elif opcode == 0x09: self.write_line(f"sleep {self.var(argv[0])} secs;")
         elif opcode == 0x0A:
@@ -963,7 +963,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.indent -= 1
             self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])}")
             self.indent += 1
-        elif opcode == 0x22: self.write_line("break")
+        elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:
             # close open case if needed
             if self.in_case != "MATCH":
