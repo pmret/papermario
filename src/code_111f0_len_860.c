@@ -51,10 +51,10 @@ void func_80036130(void) {
     D_800A0944 = 0x00;
 
     if (gGameStatusPtr->prevArea != gGameStatusPtr->areaID) {
-        gGameStatusPtr->changedArea = 1;
+        gGameStatusPtr->didAreaChange = TRUE;
         gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
     } else {
-        gGameStatusPtr->changedArea = 0;
+        gGameStatusPtr->didAreaChange = FALSE;
     }
 }
 

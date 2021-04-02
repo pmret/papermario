@@ -8,7 +8,7 @@ glabel D_800984C0
 
 .section .text
 
-glabel appedGfx_npc_blur
+glabel appendGfx_npc_blur
 /* 16238 8003AE38 27BDFF08 */  addiu     $sp, $sp, -0xf8
 /* 1623C 8003AE3C F7BC00E8 */  sdc1      $f28, 0xe8($sp)
 /* 16240 8003AE40 4480E000 */  mtc1      $zero, $f28

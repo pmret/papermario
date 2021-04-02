@@ -6,15 +6,15 @@ Vec4f N(entryList)[] = {
     {  820.0, 285.0, 150.0, 270.0 },
 };
 
-MapConfig N(config) = {
-    .main = N(main),
+MapConfig N(header) = {
+    .main = N(script_Main),
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
     .tattle = MSG_arn_04_tattle,
 };
 
-Script N(PlayMusic) = SCRIPT({
+Script N(script_802433D0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);

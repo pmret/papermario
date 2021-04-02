@@ -3,111 +3,98 @@
 #include "sprite/npc/goomba.h"
 #include "sprite/npc/cleft.h"
 
-Script N(Exit1) = EXIT_WALK_SCRIPT(60, 0, "arn_02", 1);
-Script N(Exit2) = EXIT_WALK_SCRIPT(60, 1, "dgb_00", 0);
+Script N(script_ExitWalk_80243480) = EXIT_WALK_SCRIPT(60, 0, "arn_02", 1);
+Script N(script_ExitWalk_802434DC) = EXIT_WALK_SCRIPT(60, 1, "dgb_00", 0);
 
-Script N(ExitWalk) = SCRIPT({
-    bind N(Exit1) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(Exit2) to TRIGGER_FLOOR_ABOVE 6;
+Script N(script_80243538) = SCRIPT({
+    bind N(script_ExitWalk_80243480) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(script_ExitWalk_802434DC) to TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(main) = SCRIPT({
+Script N(script_Main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    MakeNpcs(0, N(npcGroupList));
-    await N(makeEntities);
-    spawn N(PlayMusic);
-    SI_VAR(0) = N(ExitWalk);
+    MakeNpcs(0, N(npcGroupList_80244000));
+    await N(script_MakeEntities);
+    spawn N(script_802433D0);
+    SI_VAR(0) = N(script_80243538);
     spawn EnterWalk;
     sleep 1;
 });
 
-s32 N(padding1)[] = { 0, 0, 0 };
+static s32 N(pad_3654)[] = {
+    0x00000000, 0x00000000, 0x00000000,
+};
 
-NpcAISettings N(goombaAISettings) = {
+NpcAISettings N(aISettings_80243660) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 130.0f,
-    .unk_10 = { .f = 0.0f },
     .unk_14 = 1,
     .chaseSpeed = 2.5f,
     .unk_1C = 180,
     .unk_20 = 3,
     .chaseRadius = 150.0f,
-    .unk_28 = { .f = 0.0f },
     .unk_2C = 1,
 };
 
-Script N(goombaAI) = SCRIPT({
-    N(func_80240B94_BE4344)(N(goombaAISettings));
+Script N(script_NpcAI_80243690) = SCRIPT({
+    N(func_80240B94_BE4344)(N(aISettings_80243660));
 });
 
-NpcSettings N(goombaSettings) = {
+NpcSettings N(npcSettings_802436B0) = {
     .height = 20,
     .radius = 23,
-    .otherAI = NULL,
-    .onInteract = NULL,
-    .ai = &N(goombaAI),
+    .ai = &N(script_NpcAI_80243690),
     .onHit = EnemyNpcHit,
-    .aux = NULL,
     .onDefeat = EnemyNpcDefeat,
-    .flags = 0x00000000,
     .level = 12,
-    .unk_2A = 0,
 };
 
 f32 N(D_802436DC_BE6E8C)[] = {
-    4.5f, 3.5f, 2.6f, 2.0f, 
-    1.5f, 20.0f, 
+    4.5f, 3.5f, 2.6f, 2.0f, 1.5f, 20.0f,
 };
 
-NpcAISettings N(paragoombaAISettings) = {
+NpcAISettings N(aISettings_802436F4) = {
     .moveSpeed = 1.8f,
     .moveTime = 60,
     .waitTime = 15,
     .alertRadius = 120.0f,
-    .unk_10 = { .f = 0.0f },
     .unk_14 = 3,
     .chaseSpeed = 4.0f,
     .unk_1C = 5,
     .unk_20 = 1,
     .chaseRadius = 150.0f,
-    .unk_28 = { .f = 0.0f },
     .unk_2C = 1,
 };
 
-Script N(paragoombaAI) = SCRIPT({
+Script N(script_NpcAI_80243724) = SCRIPT({
     SetSelfVar(0, 1);
     SetSelfVar(5, -850);
     SetSelfVar(6, 60);
     SetSelfVar(1, 700);
-    N(func_8024219C_BE594C)(N(paragoombaAISettings));
+    N(func_8024219C_BE594C)(N(aISettings_802436F4));
 });
 
-NpcSettings N(paragoombaSettings) = {
+NpcSettings N(npcSettings_80243794) = {
     .height = 18,
     .radius = 20,
-    .otherAI = NULL,
-    .onInteract = NULL,
-    .ai = &N(paragoombaAI),
+    .ai = &N(script_NpcAI_80243724),
     .onHit = EnemyNpcHit,
-    .aux = NULL,
     .onDefeat = EnemyNpcDefeat,
-    .flags = 0x00000000,
     .level = 12,
     .unk_2A = 1,
 };
 
-NpcAISettings N(cleftAISettings) = {
+NpcAISettings N(aISettings_802437C0) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,
     .alertRadius = 120.0f,
-    .unk_10 = { .f = 0.0f },
     .unk_14 = 3,
     .chaseSpeed = 8.5f,
     .unk_1C = 60,
@@ -117,34 +104,28 @@ NpcAISettings N(cleftAISettings) = {
     .unk_2C = 1,
 };
 
-Script N(cleftAI) = SCRIPT({
-    N(func_80243018_BE67C8)(N(cleftAISettings), 8);
+Script N(script_NpcAI_802437F0) = SCRIPT({
+    N(func_80243018_BE67C8)(N(aISettings_802437C0), 8);
 });
 
-NpcSettings N(cleftSettings) = {
+NpcSettings N(npcSettings_80243814) = {
     .height = 24,
     .radius = 24,
-    .otherAI = NULL,
-    .onInteract = NULL,
-    .ai = &N(cleftAI),
+    .ai = &N(script_NpcAI_802437F0),
     .onHit = EnemyNpcHit,
-    .aux = NULL,
     .onDefeat = EnemyNpcDefeat,
-    .flags = 0x00000000,
     .level = 15,
-    .unk_2A = 0,
 };
 
-StaticNpc N(Paragoomba) = {
-    .settings = &N(paragoombaSettings),
+StaticNpc N(npcGroup_80243840) = {
+    .id = 0,
+    .settings = &N(npcSettings_80243794),
     .pos = { -350.0f, 180.0f, 150.0f },
     .flags = 0x00000400,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
-    .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
-    },
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
@@ -167,20 +148,18 @@ StaticNpc N(Paragoomba) = {
         NPC_ANIM(paragoomba, Palette_02, Anim_4),
         NPC_ANIM(paragoomba, Palette_02, Anim_4),
     },
-    .unk_1E0 = { 0, 0, 0, 1, 0, 0, 0, 0 },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-StaticNpc N(Goomba) = {
+StaticNpc N(npcGroup_80243A30) = {
     .id = 1,
-    .settings = &N(goombaSettings),
+    .settings = &N(npcSettings_802436B0),
     .pos = { 360.0f, 208.0f, 100.0f },
     .flags = 0x00000400,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
-    .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
-    },
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,
@@ -203,12 +182,12 @@ StaticNpc N(Goomba) = {
         NPC_ANIM(goomba, hyper, run),
         NPC_ANIM(goomba, hyper, run),
     },
-    .unk_1E0 = { 0, 0, 0, 1, 0, 0, 0, 0 },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-StaticNpc N(Cleft1) = {
+StaticNpc N(npcGroup_80243C20) = {
     .id = 2,
-    .settings = &N(cleftSettings),
+    .settings = &N(npcSettings_80243814),
     .pos = { 150.0f, 177.0f, 160.0f },
     .flags = 0x00000400,
     .yaw = 90,
@@ -236,12 +215,12 @@ StaticNpc N(Cleft1) = {
         NPC_ANIM(cleft, Palette_01, Anim_16),
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
-    .unk_1E0 = { 0, 0, 0, 1, 0, 0, 0, 0 },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-StaticNpc N(Cleft2) = {
+StaticNpc N(npcGroup_80243E10) = {
     .id = 3,
-    .settings = &N(cleftSettings),
+    .settings = &N(npcSettings_80243814),
     .pos = { 550.0f, 230.0f, 125.0f },
     .flags = 0x00000400,
     .yaw = 90,
@@ -269,20 +248,22 @@ StaticNpc N(Cleft2) = {
         NPC_ANIM(cleft, Palette_01, Anim_16),
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
-    .unk_1E0 = { 0, 0, 0, 1, 0, 0, 0, 0 },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-NpcGroupList N(npcGroupList) = {
-    NPC_GROUP(N(Paragoomba), BATTLE_ID(14, 9, 0, 1)),
-    NPC_GROUP(N(Goomba), BATTLE_ID(14, 3, 0, 1)),
-    NPC_GROUP(N(Cleft1), BATTLE_ID(14, 12, 0, 1)),
-    NPC_GROUP(N(Cleft2), BATTLE_ID(14, 14, 0, 1)),
-    {}
+NpcGroupList N(npcGroupList_80244000) = {
+    NPC_GROUP(N(npcGroup_80243840), BATTLE_ID(14, 9, 0, 1)),
+    NPC_GROUP(N(npcGroup_80243A30), BATTLE_ID(14, 3, 0, 1)),
+    NPC_GROUP(N(npcGroup_80243C20), BATTLE_ID(14, 12, 0, 1)),
+    NPC_GROUP(N(npcGroup_80243E10), BATTLE_ID(14, 14, 0, 1)),
+    {},
 };
 
-s32 N(padding2)[] = { 0 };
+static s32 N(pad_403C)[] = {
+    0x00000000,
+};
 
-Script N(makeEntities) = SCRIPT({
+Script N(script_MakeEntities) = SCRIPT({
     MakeEntity(0x802EA564, 450, 285, 120, 0, ITEM_SUPER_SHROOM, ARGS_END);
     AssignBlockFlag(SI_SAVE_FLAG(1008));
     MakeEntity(0x802EA564, 720, 333, 75, 0, ITEM_COIN, ARGS_END);

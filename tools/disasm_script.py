@@ -109,7 +109,7 @@ def get_constants():
             enum_name = line.split(" ",1)[1].split(" {",1)[0]
             if enum_name in valid_enums:
                 CONSTANTS[enum_name] = {}
-                last_num = 0
+                last_num = -1
                 i += 1
                 while "}" not in enums[i]:
                     if not enums[i]:
@@ -439,7 +439,7 @@ class ScriptDisassembler:
             if name.startswith("function_802"):
                 prefix = "ApiStatus "
                 name = self.replace_star_rod_function_name(name)
-                suffix = "(ScriptInstance *script, s32 isInitialCall)"
+                suffix = "(ScriptInstance* script, s32 isInitialCall)"
             elif name.startswith("script_"):
                 prefix = "Script "
             elif name.startswith("aISettings_"):

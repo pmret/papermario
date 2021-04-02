@@ -90,14 +90,15 @@ typedef struct HeapNode {
     /* 0x0C */ s32 capacity;
 } HeapNode; // size = 0x10
 
-typedef struct NpcBlurData {
+/// Ring buffer of an NPC's position over the past 20 frames.
+typedef struct BlurBuffer {
     /* 0x00 */ s8 unk_00;
-    /* 0x01 */ s8 unk_01;
-    /* 0x02 */ char unk_02[2];
-    /* 0x04 */ f32 xpos[20];
-    /* 0x54 */ f32 ypos[20];
-    /* 0xA4 */ f32 zpos[20];
-} NpcBlurData; // size = 0xF4
+    /* 0x01 */ s8 index; ///< Current blur ring buffer index
+    /* 0x02 */ char unk_02[2]; // padding?
+    /* 0x04 */ f32 x[20];
+    /* 0x54 */ f32 y[20];
+    /* 0xA4 */ f32 z[20];
+} BlurBuffer; // size = 0xF4
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -108,7 +109,7 @@ typedef struct Npc {
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
-    /* 0x020 */ struct NpcBlurData* blurData; /* related to movement somehow... */
+    /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 unk_24;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
@@ -127,7 +128,7 @@ typedef struct Npc {
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 unk_8C;
-    /* 0x08E */ s16 duration; /* formerly interp_counter */
+    /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
     /* 0x0A2 */ u16 unk_A2;
@@ -140,7 +141,9 @@ typedef struct Npc {
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[3];
     /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ char unk_B4[652];
+    /* 0x0B4 */ char unk_B4[72];
+    /* 0x0FC */ s32 unk_FC;
+    /* 0x100 */ char unk_100[576];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -298,7 +301,8 @@ typedef struct Entity {
     /* 0x04 */ u8 listIndex;
     /* 0x05 */ char unk_05;
     /* 0x06 */ u8 unk_06;
-    /* 0x07 */ char unk_07[3];
+    /* 0x07 */ s8 unk_07;
+    /* 0x08 */ char unk_08[2];
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
@@ -343,7 +347,7 @@ typedef struct StaticEntityData {
     /* 0x21 */ char unk_21[3];
 } StaticEntityData; // size = 0x24
 
-typedef struct MusicPlayer {
+typedef struct MusicSettings {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 unk_02;
     /* 0x04 */ s32 fadeOutTime;
@@ -352,13 +356,13 @@ typedef struct MusicPlayer {
     /* 0x0E */ s16 unk_0E;
     /* 0x10 */ s32 songID;
     /* 0x14 */ s32 variation;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32 songName;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
-} MusicPlayer; // size = 0x30
+} MusicSettings; // size = 0x30
 
 typedef struct MenuIcon {
     /* 0x00 */ u32 flags;
@@ -980,7 +984,7 @@ typedef struct GameStatus {
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
-    /* 0x08A */ s16 changedArea; /* (1 = yes) */
+    /* 0x08A */ s16 didAreaChange;
     /* 0x08C */ s16 mapID;
     /* 0x08E */ s16 entryID;
     /* 0x090 */ u16 unk_90;
@@ -993,8 +997,9 @@ typedef struct GameStatus {
     /* 0x0AA */ s8 unk_AA;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
-    /* 0x0AD */ u8 menuCounter;
-    /* 0x0AE */ char unk_AE[8];
+    /* 0x0AD */ s8 menuCounter;
+    /* 0x0AE */ s8 bSkipIntro;
+    /* 0x0AF */ char unk_AF[0x7];
     /* 0x0B6 */ s16 bootAlpha;
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
@@ -1017,7 +1022,7 @@ typedef struct GameStatus {
     /* 0x154 */ UNK_PTR backgroundRaster;
     /* 0x158 */ UNK_PTR backgroundPalette;
     /* 0x15C */ s16 unk_15C;
-    /* 0x15E */ char unk_15E[0x2];
+    /* 0x15E */ u16 unk_15E;
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
@@ -1044,7 +1049,9 @@ typedef struct Shadow {
     /* 0x00 */ s32 flags;
     /* 0x04 */ char unk_04[2];
     /* 0x06 */ u8 unk_06;
-    /* 0x07 */ char unk_07[9];
+    /* 0x07 */ char unk_07;
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ char unk_0A[6];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ char unk_28[80];
@@ -1268,8 +1275,8 @@ typedef struct Encounter {
     /* 0x44 */ s16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
-    /* 0x4A */ char unk_4A[2];
-} Encounter; // size = 0x4C
+    /* 0x4A */ char unk_4C[0x12];
+} Encounter; // size = 0x5C
 
 typedef struct PlayerPathElement {
     /* 0x00 */ char unk_00[4];
@@ -1571,40 +1578,44 @@ typedef struct AnimatedModelNode {
 } AnimatedModelNode; // size = 0x2C
 
 typedef struct EncounterStatus {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
-    /* 0x05 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
-    /* 0x06 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
-    /* 0x07 */ char unk_07;
-    /* 0x08 */ s8 unk_08;
-    /* 0x09 */ s8 battleOutcome; /* 0 = won, 1 = lost */
-    /* 0x0A */ char unk_0A;
-    /* 0x0B */ s8 merleeCoinBonus; /* triple coins when != 0 */
-    /* 0x0C */ u8 damageTaken; /* valid after battle */
-    /* 0x0D */ char unk_0D;
-    /* 0x0E */ s16 coinsEarned; /* valid after battle */
-    /* 0x10 */ char unk_10;
-    /* 0x11 */ u8 allowFleeing;
-    /* 0x12 */ s8 unk_12;
-    /* 0x13 */ u8 dropWhackaBump;
-    /* 0x14 */ s32 songID;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s8 numEncounters; /* number of encounters for current map (in list) */
-    /* 0x1D */ s8 currentAreaIndex;
-    /* 0x1E */ u8 currentMapIndex;
-    /* 0x1F */ u8 currentEntryIndex;
-    /* 0x20 */ u8 mapID;
-    /* 0x21 */ char unk_21[3];
-    /* 0x24 */ s32* npcGroupList;
-    /* 0x28 */ struct Encounter* enounterList[24];
-    /* 0x88 */ struct Encounter* currentEncounter;
-    /* 0x8C */ struct Enemy* currentEnemy;
-    /* 0x90 */ s32 unk_90;
-    /* 0x94 */ s32 unk_94;
-    /* 0x98 */ s32 unk_98;
-    /* 0x9C */ char unk_9C[20];
-    /* 0xB0 */ s32 defeatFlags[60][12];
-} EncounterStatus; // size = 0xE0
+    /* 0x000 */ s32 flags;
+    /* 0x004 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
+    /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
+    /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
+    /* 0x007 */ char unk_07;
+    /* 0x008 */ s8 unk_08;
+    /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
+    /* 0x00A */ s8 unk_0A;
+    /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
+    /* 0x00C */ u8 damageTaken; /* valid after battle */
+    /* 0x00D */ char unk_0D;
+    /* 0x00E */ s16 coinsEarned; /* valid after battle */
+    /* 0x010 */ char unk_10;
+    /* 0x011 */ u8 allowFleeing;
+    /* 0x012 */ s8 unk_12;
+    /* 0x013 */ u8 dropWhackaBump;
+    /* 0x014 */ s32 songID;
+    /* 0x018 */ s32 unk_18;
+    /* 0x01C */ s8 numEncounters; /* number of encounters for current map (in list) */
+    /* 0x01D */ s8 currentAreaIndex;
+    /* 0x01E */ u8 currentMapIndex;
+    /* 0x01F */ u8 currentEntryIndex;
+    /* 0x020 */ u8 mapID;
+    /* 0x021 */ s8 resetMapEncounterFlags;
+    /* 0x021 */ char unk_22[2];
+    /* 0x024 */ s32* npcGroupList;
+    /* 0x028 */ struct Encounter* encounterList[24];
+    /* 0x088 */ struct Encounter* currentEncounter;
+    /* 0x08C */ struct Enemy* currentEnemy;
+    /* 0x090 */ s32 fadeOutAmount;
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 fadeOutAccel;
+    /* 0x09C */ s32 battleStartCountdown;
+    /* 0x0A0 */ char unk_A0[16];
+    /* 0x0B0 */ s32 defeatFlags[60][12];
+    /* 0xFB0 */ s16 recentMaps[2];
+    /* 0xFB4 */ char unk_FB4[4];
+} EncounterStatus; // size = 0xFB8
 
 typedef struct SaveData {
     /* 0x0000 */ char magicString[16]; /* "Mario Story 006" string */

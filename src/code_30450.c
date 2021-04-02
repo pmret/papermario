@@ -20,22 +20,81 @@ void func_80055050(void) {
     D_80078DB0 = 0;
 }
 
-INCLUDE_ASM(void, "code_30450", func_80055068, u32 arg0);
+void func_80055068(u32 arg0) {
+    u16 temp_a0 = D_80078DB4;
+    u32 temp_v1 = arg0 & 0xF;
 
-void func_80055110(BGMPlayer* arg0) {
-    s32 i;
+    if (temp_a0 == 1) {
+        switch (temp_v1) {
+            case 2:
+            case 3:
+                break;
+            case 4:
+                snd_start_sound_with_shift(arg0 >> 4, 0, 0, 0);
+                break;
+            case 1:
+                if (temp_v1 == temp_a0) {
+                    s32 filename = snd_load_song((arg0 >> 4) & 0xFF, 0);
 
-    for (i = 0; i < 8; i++) {
-        arg0->unk_238[i] = 0;
+                    if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
+                        func_80055970(filename, (arg0 >> 0xC) & 3);
+                    }
+                }
+                break;
+        }
     }
-
-    arg0->unk_25B = 0;
-    arg0->unk_25A = 0;
-    arg0->unk_259 = 0;
-    arg0->unk_258 = 0;
 }
 
-INCLUDE_ASM(s32, "code_30450", func_8005513C);
+void func_80055110(BGMPlayer* player) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(player->unk_238); i++) {
+        player->unk_238[i] = 0;
+    }
+
+    player->unk_25B = 0;
+    player->unk_25A = 0;
+    player->unk_259 = 0;
+    player->unk_258 = 0;
+}
+
+void func_8005513C(u32 arg0) {
+    BGMPlayer* player = NULL;
+    u32 playerSwitch = arg0 & 0xF;
+
+    if (playerSwitch != 0) {
+        if (playerSwitch == 1) {
+            player = D_8009A664;
+        } else if (playerSwitch == 2) {
+            player = D_8009A5FC;
+        }
+
+        if (player != NULL) {
+            u32 temp;
+
+            if (player->unk_258 < 8) {
+                temp = player->unk_25A;
+
+                player->unk_238[temp] = arg0 >> 4;
+
+                temp++;
+                if (temp >= 8) {
+                    temp = 0;
+                }
+                player->unk_25A = temp;
+
+                player->unk_258++;
+            } else {
+                temp = player->unk_25B + 1;
+
+                if (temp > 99) {
+                    temp = 99;
+                }
+                player->unk_25B = temp;
+            }
+        }
+    }
+}
 
 void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
     SoundManager* sym = D_8009A640;
@@ -278,7 +337,18 @@ s32 func_80055848(s32 arg0) {
     return phi_v1;
 }
 
-INCLUDE_ASM(s32, "code_30450", snd_load_song);
+s32 snd_load_song(s32 songID, s32 playerIndex) {
+    s32* currentTrackData;
+    BGMPlayer* songPlayer;
+
+    snd_get_sequence_player_and_track(playerIndex, &currentTrackData, &songPlayer);
+
+    if (currentTrackData != NULL) {
+        return snd_load_song_files(songID, currentTrackData, songPlayer);
+    } else {
+        return 3;
+    }
+}
 
 INCLUDE_ASM(s32, "code_30450", func_8005591C);
 
@@ -320,18 +390,96 @@ INCLUDE_ASM(s32, "code_30450", func_80055C94);
 
 INCLUDE_ASM(s32, "code_30450", func_80055CC4);
 
-INCLUDE_ASM(s32, "code_30450", func_80055CE8);
-
-INCLUDE_ASM(s32, "code_30450", func_80055D38);
-
-INCLUDE_ASM(s32, "code_30450", func_80055D8C);
-
-INCLUDE_ASM(s32, "code_30450", func_80055DDC);
-
-INCLUDE_ASM(s32, "code_30450", func_80055E48);
-
-// needs rodata
+s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player);
+// We need to figure out what currentTrackData is a list of
 #ifdef NON_MATCHING
+s32 func_80055CE8(s32 songName, s32* arg1, BGMPlayer** player) {
+    UnkAl19E0* temp_a3 = D_8009A5C0;
+    s32 ret = 0;
+
+    if (songName == temp_a3->currentTrackData[0][2]) {
+        *arg1 = temp_a3->currentTrackData[0];
+        *player = D_8009A664;
+    } else if (songName == temp_a3->currentTrackData[1][2]) {
+        *arg1 = temp_a3->currentTrackData[1];
+        *player = D_8009A5FC;
+    } else {
+        ret = 1;
+    }
+    return ret;
+}
+#else
+INCLUDE_ASM(s32, "code_30450", func_80055CE8, s32 songName, s32* arg1, BGMPlayer** player);
+#endif
+
+s32 func_80055D38(s32 songName, f32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        func_80050770(bgmPlayer, arg1);
+    }
+
+    return ret;
+}
+
+s32 func_80055D8C(s32 songName, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        func_80050818(bgmPlayer, arg1);
+    }
+
+    return ret;
+}
+
+s32 func_80055DDC(s32 songName, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        s32* temp_v0 = func_80055EB4(arg1);
+
+        if (temp_v0 != NULL) {
+            func_8005087C(bgmPlayer, temp_v0, 1);
+        } else {
+            ret = 11;
+        }
+    }
+
+    return ret;
+}
+
+s32 func_80055E48(s32 songName, s32 arg1) {
+    s32 ret;
+    s32 unkArg1;
+    BGMPlayer* bgmPlayer;
+
+    ret = func_80055CE8(songName, &unkArg1, &bgmPlayer);
+
+    if (ret == 0) {
+        s32* temp_v0 = func_80055EB4(arg1);
+
+        if (temp_v0 != NULL) {
+            func_8005087C(bgmPlayer, temp_v0, 0);
+        } else {
+            ret = 11;
+        }
+    }
+
+    return ret;
+}
+
 s32* func_80055EB4(s32 arg0) {
     s32* ret = NULL;
 
@@ -364,9 +512,6 @@ s32* func_80055EB4(s32 arg0) {
 
     return ret;
 }
-#else
-INCLUDE_ASM(s32, "code_30450", func_80055EB4);
-#endif
 
 s32 func_80055F58(s32 arg0, u32 arg1, u32 arg2) {
     s32* subroutine_arg4;

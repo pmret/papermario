@@ -2,7 +2,7 @@
 
 .section .data
 
-glabel D_8024EF60
+glabel gPauseMenuIconScripts
 .word D_80241ECC, 0x802427D4, nok_02_UnkMovePartner, 0x80241E00, D_801091E4, D_80108BBC, 0x80108D04, 0x80108D40
 
 glabel D_8024EF80

@@ -3,12 +3,12 @@
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_tubba.h"
 
-Script N(Exit1) = EXIT_WALK_SCRIPT(60, 0, "arn_03", 1);
-Script N(Exit2) = EXIT_WALK_SCRIPT(60, 1, "arn_02", 0);
+Script N(script_ExitWalk_80241430) = EXIT_WALK_SCRIPT(60, 0, "arn_03", 1);
+Script N(script_ExitWalk_8024148C) = EXIT_WALK_SCRIPT(60, 1, "arn_02", 0);
 
 Script N(script_802414E8) = SCRIPT({
-    bind N(Exit1) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(Exit2) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(script_ExitWalk_80241430) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(script_ExitWalk_8024148C) to TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(script_EnterWalk_80241530) = SCRIPT({
@@ -532,7 +532,7 @@ Script N(script_80242C50) = SCRIPT({
         N(func_802412C8_BE8EA8)(9);
         spawn {
             SI_MAP_VAR(0) = 0;
-            ShowMessageAtScreenPos(917666, 160, 40);
+            ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00A2), 160, 40);
             SI_MAP_VAR(0) = 1;
         }
         sleep 50;
@@ -542,7 +542,7 @@ Script N(script_80242C50) = SCRIPT({
         loop {
             sleep 1;
             if (SI_MAP_VAR(0) == 1) {
-                break;
+                break loop;
             }
         }
     }
@@ -629,7 +629,7 @@ Script N(script_80242C50) = SCRIPT({
     loop {
         sleep 1;
         if (SI_MAP_VAR(1) == 1) {
-            break;
+            break loop;
         }
     }
     NpcFaceNpc(0x2, 0x5, 1);
@@ -735,7 +735,7 @@ Script N(script_802441FC) = SCRIPT({
                 }
             }
             if (SI_VAR(10) == 1) {
-                break;
+                break loop;
             }
             sleep 1;
         }

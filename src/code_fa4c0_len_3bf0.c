@@ -36,9 +36,9 @@ ApiStatus FadeInMusic(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D5EE0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    MusicPlayer* musicPlayers = gMusicPlayers;
+    MusicSettings* musicSettings = gMusicSettings;
 
-    (&musicPlayers[get_variable(script, *args++)])->flags |= 0x2;
+    (&musicSettings[get_variable(script, *args++)])->flags |= 0x2;
     return ApiStatus_DONE2;
 }
 
@@ -173,18 +173,18 @@ INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D663C);
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
-    s16* ptrKeyItems = (s16*) &gPlayerData.keyItems;
+    s16* ptrKeyItems = &gPlayerData.keyItems;
 
-    ptrKeyItems[index] = 0;
+    ptrKeyItems[index] = ITEM_NONE;
     return ApiStatus_DONE2;
 }
 
 ApiStatus RemoveItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
-    s16* ptrInvItems = (s16*) &gPlayerData.invItems;
+    s16* ptrInvItems = &gPlayerData.invItems;
 
-    ptrInvItems[index] = 0;
+    ptrInvItems[index] = ITEM_NONE;
     sort_items();
     return ApiStatus_DONE2;
 }
@@ -202,7 +202,7 @@ ApiStatus AddKeyItem(ScriptInstance* script, s32 isInitialCall) {
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
-        if (playerData->keyItems[i] == 0) {
+        if (playerData->keyItems[i] == ITEM_NONE) {
             break;
         }
     }
@@ -319,7 +319,7 @@ ApiStatus RemoveItem(ScriptInstance* script, s32 isInitialCall) {
     if (itemIndex >= 0) {
         // This is `playerData->invItems[i]`, but we have to do weird
         // pointer math to get the output asm to exactly match :/
-        *(playerData->invItems + i) = 0;
+        *(playerData->invItems + i) = ITEM_NONE;
     }
     sort_items();
 
@@ -406,13 +406,13 @@ ApiStatus RemoveBadge(ScriptInstance* script, s32 isInitialCall) {
 
     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
         if (playerData->badges[i] == badge) {
-            playerData->badges[i] = 0;
+            playerData->badges[i] = ITEM_NONE;
         }
     }
 
     for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
         if (playerData->equippedBadges[i] == badge) {
-            playerData->equippedBadges[i] = 0;
+            playerData->equippedBadges[i] = ITEM_NONE;
         }
     }
     return ApiStatus_DONE2;

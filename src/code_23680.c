@@ -73,7 +73,7 @@ s32 func_80048F0C(void) {
     s32 j;
 
     for (i = 0; i < currentEncounter->numEncounters; i++) {
-        Encounter* encounter = currentEncounter->enounterList[i];
+        Encounter* encounter = currentEncounter->encounterList[i];
 
         if (encounter != NULL) {
             for (j = 0; j < encounter->count; j++) {

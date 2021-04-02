@@ -11,7 +11,7 @@ glabel jtbl_8024EF20_9780E0
 glabel D_8024EF58_978118
 .double 0.1
 
-glabel gPauseMenuIconScripts
+glabel D_8024EF60_978120
 .double 0.1
 
 glabel D_8024EF68_978128

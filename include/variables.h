@@ -213,11 +213,26 @@ extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 D_8009A604;
 extern s32 D_8009A64C;
+extern s32* D_8009A658;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;
 extern u16 D_8009A6A6;
+
+extern s32* D_800A0914;
+extern s32* D_800A0918;
+extern s32* D_800A091C;
+extern s8 D_800A0920;
+extern s32 D_800A0924;
+extern s8 D_800A0921;
+extern s16 D_800A0922;
+extern s32 D_800B0CF0;
+extern s32 D_800D91E0;
+extern s32 D_800D9230;
+extern s32* D_80210000;
+extern s8 D_802D9D70;
+extern s8 D_802D9D71;
 
 extern s16 gCurrentDoorSoundsSet;
 
@@ -257,12 +272,17 @@ extern u32 gBattleMapVars[MAX_MAPVARS];
 extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
+extern s32 D_8009A5D0;
 extern s32 D_8009A5D8;
+extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
 extern s32 D_8009A5D8;
 extern u8 D_800A0963;
+
+extern s32 D_8009A5D0;
+extern s32 D_8009A678;
 
 extern UNK_TYPE D_802EB3B0;
 extern UNK_TYPE D_00000094;
@@ -291,8 +311,8 @@ extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicPlayer gMusicPlayers[4];
-extern MusicPlayer D_8014F6F0;
+extern MusicSettings gMusicSettings[4];
+extern MusicSettings D_8014F6F0;
 
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
@@ -331,6 +351,9 @@ extern UNK_PTR D_800F7BE8;
 extern UNK_PTR D_800F7BBC;
 
 extern s32 D_802C05CC;
+
+// Heap?
+extern s32 D_803DA800;
 
 // Dead code
 extern PlayerStatus* D_800FFC90; // gPlayerStatusPtr
