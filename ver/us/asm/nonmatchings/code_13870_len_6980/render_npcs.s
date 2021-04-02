@@ -149,8 +149,8 @@ glabel render_npcs
 /* 15DEC 8003A9EC 4600018D */  trunc.w.s $f6, $f0
 /* 15DF0 8003A9F0 E6260004 */  swc1      $f6, 4($s1)
 /* 15DF4 8003A9F4 0220202D */  daddu     $a0, $s1, $zero
-/* 15DF8 8003A9F8 3C028004 */  lui       $v0, %hi(appedGfx_npc_blur)
-/* 15DFC 8003A9FC 2442AE38 */  addiu     $v0, $v0, %lo(appedGfx_npc_blur)
+/* 15DF8 8003A9F8 3C028004 */  lui       $v0, %hi(appendGfx_npc_blur)
+/* 15DFC 8003A9FC 2442AE38 */  addiu     $v0, $v0, %lo(appendGfx_npc_blur)
 /* 15E00 8003AA00 AE22000C */  sw        $v0, 0xc($s1)
 /* 15E04 8003AA04 24020011 */  addiu     $v0, $zero, 0x11
 /* 15E08 8003AA08 AE300008 */  sw        $s0, 8($s1)
