@@ -50,6 +50,29 @@ INCLUDE_ASM(s32, "code_EA0C10", func_802425B0_EA2EB0);
 INCLUDE_ASM(s32, "code_EA0C10", func_80242608_EA2F08);
 
 INCLUDE_ASM(s32, "code_EA0C10", func_8024267C_EA2F7C);
+/*
+ApiStatus N(func_8024267C_EA2F7C)(ScriptInstance* script, s32 isInitialCall) {
+    s32** ptr = &D_80241C68_BE09F8;
+    s32 i;
+    s32* test;
+
+    if (*ptr == NULL) {
+        i = heap_malloc(16 * sizeof(s32));
+        *ptr = i;
+        for (i = 0, test = *ptr; i < 16; i++) {
+            *test++ = script->varTable[i];
+        }
+    } else {
+        for (i = 0, test = *ptr; i < 16; i++) {
+            script->varTable[i] = *test++;
+        }
+        ptr = &D_80241C68_BE09F8;
+        heap_free(*ptr);
+        *ptr = NULL;
+    }
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "code_EA0C10", func_80242730_EA3030);
 
@@ -58,8 +81,38 @@ INCLUDE_ASM(s32, "code_EA0C10", func_80242794_EA3094);
 INCLUDE_ASM(s32, "code_EA0C10", func_802427F0_EA30F0);
 
 INCLUDE_ASM(s32, "code_EA0C10", func_802429C0_EA32C0);
+/*
+ApiStatus N(func_802429C0_EA32C0)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr;
+
+    if (isInitialCall) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+    }
+
+    ptr = &D_80241CCC_BE0A5C;
+    if (*ptr != NULL) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+        set_variable(script, *args, D_80241CD0_BE0A60);
+        return 2;
+    }
+
+    return 0;
+}
+*/
 
 INCLUDE_ASM(s32, "code_EA0C10", func_80242A14_EA3314);
+/*
+ApiStatus N(func_80242A14_EA3314)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    D_80241CD0_BE0A60 = get_variable(script, *args);
+    D_80241CCC_BE0A5C = 1;
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "code_EA0C10", func_80242A4C_EA334C);
 

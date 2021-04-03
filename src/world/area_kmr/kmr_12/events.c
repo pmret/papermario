@@ -201,13 +201,13 @@ Script N(ReadEastSign) = SCRIPT({
     group 0;
 
     func_802D5830(1);
-    DisablePlayerInput(1);
+    DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MSG_kmr_12_sign_to_fortress, 160, 40);
-    DisablePlayerInput(0);
+    DisablePlayerInput(FALSE);
     func_802D5830(0);
 });
 
 Script N(MakeEntities) = SCRIPT({
-    MakeEntity(0x802EAFDC, 436, 0, -42, 0, 0x80000000);
+    MakeEntity(0x802EAFDC, 436, 0, -42, 0, MAKE_ENTITY_END);
     AssignScript(N(ReadEastSign));
 });

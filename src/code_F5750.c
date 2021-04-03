@@ -352,7 +352,7 @@ ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall) {
     return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D2520);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D2520, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
     s32 temp = *script->ptrReadPos;

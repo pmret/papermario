@@ -7,6 +7,12 @@ INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240310_8866D0);
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_8024069C_886A5C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_802406BC_886A7C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_802406E8_886AA8);
 
@@ -17,6 +23,12 @@ INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_802407A0_886B60);
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_8024084C_886C0C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240A9C_886E5C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240AC8_886E88);
 

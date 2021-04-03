@@ -5,6 +5,12 @@
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_8024001C_CAED5C);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_8024003C_CAED7C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_80240068_CAEDA8);
 
@@ -15,6 +21,12 @@ INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_80240120_CAEE60);
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_802401CC_CAEF0C);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_8024041C_CAF15C);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_08/CAED40", func_80240448_CAF188);
 

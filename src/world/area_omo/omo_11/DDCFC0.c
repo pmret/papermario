@@ -5,6 +5,12 @@
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407AC_DDCFDC);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407CC_DDCFFC);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802407F8_DDD028);
 
@@ -15,6 +21,12 @@ INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_802408B0_DDD0E0);
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_8024095C_DDD18C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240BAC_DDD3DC);
+/*
+s) {
+    func_800EB168(get_variable(script, *script->ptrReadPos));
+    return 2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240BD8_DDD408);
 

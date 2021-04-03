@@ -3,7 +3,7 @@
 #include "world/common/SomeMatrixOperations.inc.c"
 
 // *INDENT-OFF*
-Script N(SearchBush_802417F0) = {
+Script N(searchBush_802417F0) = {
     SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
     SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
     SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(5), SI_VAR(15), SI_VAR(7)),
@@ -66,8 +66,10 @@ Script N(SearchBush_802417F0) = {
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
+// *INDENT-ON*
 
-Script N(ShakeTree_80241B50) = {
+// *INDENT-OFF*
+Script N(shakeTree_80241B50) = {
     SI_CMD(ScriptOpcode_SET_TIMESCALE, SI_FIXED(2.0)),
     SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
     SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
@@ -203,7 +205,7 @@ s32 N(treeEffectVectors_Tree1)[] = {
     0x00000002, 0xFFFFFFB0, 0x00000082, 0x00000012, 0x0000001C, 0x00000082, 0x00000027,
 };
 
-Script N(Tree1_Callback) = SCRIPT({
+Script N(tree1_Callback) = SCRIPT({
     if (SI_SAVE_FLAG(53) == 1) {
         return;
     }
@@ -212,27 +214,27 @@ Script N(Tree1_Callback) = SCRIPT({
     }
     sleep 10;
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(0) < 0xFFFFFFE2) {
-        MakeItemEntity(138, 0xFFFFFFE9, 100, 35, 13, SI_SAVE_FLAG(53));
+    if (SI_VAR(0) < -30) {
+        MakeItemEntity(ITEM_MUSHROOM, -23, 100, 35, 13, SI_SAVE_FLAG(53));
     } else {
-        MakeItemEntity(138, 0xFFFFFFAB, 100, 16, 13, SI_SAVE_FLAG(53));
+        MakeItemEntity(ITEM_MUSHROOM, -85, 100, 16, 13, SI_SAVE_FLAG(53));
     }
     SI_MAP_FLAG(10) = 1;
 });
 
 s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), 0x00000000, N(treeEffectVectors_Tree1), N(Tree1_Callback),
+    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), 0x00000000, N(treeEffectVectors_Tree1), N(tree1_Callback),
 };
 
 s32 N(triggerCoord_802422A8)[] = {
     0xC2280000, 0x00000000, 0xC1500000, 0x00000000,
 };
 
-Script N(Script_802422B8) = SCRIPT({
+Script N(802422B8) = SCRIPT({
     SI_VAR(0) = N(searchBushEvent_Bush1);
-    bind N(SearchBush_802417F0) to TRIGGER_WALL_PRESS_A 53;
+    bind N(searchBush_802417F0) to TRIGGER_WALL_PRESS_A 53;
     SI_VAR(0) = N(shakeTreeEvent_Tree1);
-    bind N(ShakeTree_80241B50) to TRIGGER_WALL_HAMMER 52;
-    bind N(ShakeTree_80241B50) to TRIGGER_POINT_BOMB N(triggerCoord_802422A8);
+    bind N(shakeTree_80241B50) to TRIGGER_WALL_HAMMER 52;
+    bind N(shakeTree_80241B50) to TRIGGER_POINT_BOMB N(triggerCoord_802422A8);
 });
 

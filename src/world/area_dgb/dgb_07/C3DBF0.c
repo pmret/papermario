@@ -23,6 +23,23 @@ INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_802409C0_C3E5B0);
 INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240A68_C3E658);
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240BA0_C3E790);
+/*
+void N(func_80240BA0_C3E790)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc *npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration <= 0) {
+        npc->currentAnim = enemy->animList[1];
+        if (enemy->territory->wander.moveSpeedOverride < 0) {
+            npc->moveSpeed = aiSettings->moveSpeed;
+        } else {
+            npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
+        }
+        script->functionTemp[0].s = 0x29;
+    }
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_07/C3DBF0", func_80240C4C_C3E83C);
 

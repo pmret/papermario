@@ -2,120 +2,104 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 
-Script N(Exit1) = EXIT_WALK_SCRIPT(60, 0, "arn_05", 1);
-Script N(Exit2) = EXIT_WALK_SCRIPT(60, 1, "arn_04", 0);
+Script N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
-Script N(BindExits) = SCRIPT({
-    bind N(Exit1) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(Exit2) to TRIGGER_FLOOR_ABOVE 6;
+Script N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+
+Script N(802411A8) = SCRIPT({
+    bind N(exitWalk_802410F0) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024114C) to TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    MakeNpcs(0, N(npcGroupList));
-    await N(MakeEntities);
-    spawn N(PlayMusic);
-    SI_VAR(0) = N(BindExits);
+    MakeNpcs(0, N(npcGroupList_80241A9C));
+    await N(makeEntities);
+    spawn N(80241040);
+    SI_VAR(0) = N(802411A8);
     spawn EnterWalk;
     sleep 1;
 });
 
-s32 N(padding2)[] = { 0, 0, 0 };
+static s32 N(pad_12C4)[] = {
+    0x00000000, 0x00000000, 0x00000000,
+};
 
-Script N(MakeEntities) = SCRIPT({
-    MakeItemEntity(ITEM_DIZZY_DIAL, 0xFFFFFF08, 193, 45, 17, SI_SAVE_FLAG(1005));
+Script N(makeEntities) = SCRIPT({
+    MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
     MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
-    MakeEntity(0x802EA564, 0xFFFFFEA2, 172, 170, 0, ITEM_COIN, 0x80000000);
+    MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1002));
-    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, 0x80000000);
+    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1003));
-    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, 0x80000000);
+    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1004));
 });
 
-NpcAISettings N(goombaAISettings) = {
-    .moveSpeed = 1.8f, 
-    .moveTime = 40, 
-    .waitTime = 15, 
-    .alertRadius = 150.0f, 
-    .unk_10 = { .f = 0.0f }, 
-    .unk_14 = 2, 
-    .chaseSpeed = 3.3f, 
-    .unk_1C = 70, 
-    .unk_20 = 1, 
-    .chaseRadius = 180.0f, 
-    .unk_28 = { .f = 0.0f }, 
-    .unk_2C = TRUE,
+NpcAISettings N(npcAISettings_802413D0) = {
+    .moveSpeed = 1.8f,
+    .moveTime = 40,
+    .waitTime = 15,
+    .alertRadius = 150.0f,
+    .unk_14 = 2,
+    .chaseSpeed = 3.3f,
+    .unk_1C = 70,
+    .unk_20 = 1,
+    .chaseRadius = 180.0f,
+    .unk_2C = 1,
 };
 
-Script N(GoombaAI) = SCRIPT({
-    DoBasicAI(N(goombaAISettings));
+Script N(npcAI_80241400) = SCRIPT({
+    DoBasicAI(N(npcAISettings_802413D0));
 });
 
-NpcSettings N(goombaNpcSettings) = {
-    .unk_00 = { 0x00, 0x00, 0x00, 0x00 }, 
+NpcSettings N(npcSettings_80241420) = {
     .height = 20,
-    .radius = 23, 
-    .otherAI = NULL, 
-    .onInteract = NULL,
-    .ai = N(GoombaAI),
-    .onHit = EnemyNpcHit, 
-    .aux = NULL, 
-    .onDefeat = EnemyNpcDefeat, 
-    .flags = 0x00000000, 
-    .unk_24 = { 0x00, 0x00, 0x00, 0x00 }, 
+    .radius = 23,
+    .ai = &N(npcAI_80241400),
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
     .level = 12,
-    .unk_2A = 0x0000,
 };
 
-NpcAISettings N(cleftAISettings) = {
-    .moveSpeed = 1.0f, 
-    .moveTime = 30, 
-    .waitTime = 30, 
-    .alertRadius = 120.0f, 
-    .unk_10 = { .f = 0.0f }, 
-    .unk_14 = 3, 
-    .chaseSpeed = 8.5f, 
-    .unk_1C = 60, 
-    .unk_20 = 3, 
-    .chaseRadius = 100.0f, 
-    .unk_28 = { .f = 60.0f }, 
-    .unk_2C = TRUE,
+NpcAISettings N(npcAISettings_8024144C) = {
+    .moveSpeed = 1.0f,
+    .moveTime = 30,
+    .waitTime = 30,
+    .alertRadius = 120.0f,
+    .unk_14 = 3,
+    .chaseSpeed = 8.5f,
+    .unk_1C = 60,
+    .unk_20 = 3,
+    .chaseRadius = 100.0f,
+    .unk_28 = { .f = 60.0f },
+    .unk_2C = 1,
 };
 
-Script N(CleftAI) = SCRIPT({
-    func_80240C90_BDDE40(N(cleftAISettings), 8);
+Script N(npcAI_8024147C) = SCRIPT({
+    N(func_80240C90_BDDE40)(N(npcAISettings_8024144C), 8);
 });
 
-NpcSettings N(cleftNpcSettings) = {
-    .unk_00 = { 0x00, 0x00, 0x00, 0x00 }, 
+NpcSettings N(npcSettings_802414A0) = {
     .height = 24,
-    .radius = 24, 
-    .otherAI = NULL, 
-    .onInteract = NULL,
-    .ai = N(CleftAI),
-    .onHit = EnemyNpcHit, 
-    .aux = NULL, 
-    .onDefeat = EnemyNpcDefeat, 
-    .flags = 0x00000000, 
-    .unk_24 = { 0x00, 0x00, 0x00, 0x00 }, 
+    .radius = 24,
+    .ai = &N(npcAI_8024147C),
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
     .level = 15,
-    .unk_2A = 0x0000,
 };
 
-StaticNpc N(CleftNPC1) = {
+StaticNpc N(npcGroup_802414CC) = {
     .id = 0,
-    .settings = &N(cleftNpcSettings),
+    .settings = &N(npcSettings_802414A0),
     .pos = { -196.0f, 130.0f, 104.0f },
-    .flags = 0x00000400,
-    .init = NULL,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
-    .itemDropChance = 0,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
@@ -139,20 +123,16 @@ StaticNpc N(CleftNPC1) = {
         NPC_ANIM(cleft, Palette_01, Anim_16),
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
-    .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-StaticNpc N(CleftNPC2) = {
+StaticNpc N(npcGroup_802416BC) = {
     .id = 1,
-    .settings = &N(cleftNpcSettings),
+    .settings = &N(npcSettings_802414A0),
     .pos = { 641.0f, 268.0f, 202.0f },
-    .flags = 0x00000400,
-    .init = NULL,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
-    .itemDropChance = 0,
     .heartDrops = STANDARD_HEART_DROPS(3),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .minCoinBonus = 1,
@@ -176,26 +156,20 @@ StaticNpc N(CleftNPC2) = {
         NPC_ANIM(cleft, Palette_01, Anim_16),
         NPC_ANIM(cleft, Palette_01, Anim_0),
     },
-    .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-StaticNpc N(GoombaNPC) = {
+StaticNpc N(npcGroup_802418AC) = {
     .id = 2,
-    .settings = &N(goombaNpcSettings),
+    .settings = &N(npcSettings_80241420),
     .pos = { 333.0f, 215.0f, 85.0f },
-    .flags = 0x00000400,
-    .init = NULL,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
-    .itemDrops = {
         { ITEM_DRIED_SHROOM, 10, 0 },
-    },
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
-    .minCoinBonus = 0,
     .maxCoinBonus = 2,
     .movement = { 333, 215, 85, 40, 30, -32767, 1, 360, 215, 150, 120, 137, 1 },
     .animations = {
@@ -216,21 +190,19 @@ StaticNpc N(GoombaNPC) = {
         NPC_ANIM(goomba, hyper, run),
         NPC_ANIM(goomba, hyper, run),
     },
-    .unk_1E0 = { 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0 },
-    .extraAnimations = NULL,
-    .tattle = 0,
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-NpcGroupList N(npcGroupList) = {
-    NPC_GROUP(N(CleftNPC1), BATTLE_ID(14, 10, 0, 1)),
-    NPC_GROUP(N(CleftNPC2), BATTLE_ID(14, 13, 0, 1)),
-    NPC_GROUP(N(GoombaNPC), BATTLE_ID(14,  3, 0, 1)),
+NpcGroupList N(npcGroupList_80241A9C) = {
+    NPC_GROUP(N(npcGroup_802414CC), BATTLE_ID(14, 10, 0, 1)),
+    NPC_GROUP(N(npcGroup_802416BC), BATTLE_ID(14, 13, 0, 1)),
+    NPC_GROUP(N(npcGroup_802418AC), BATTLE_ID(14, 3, 0, 1)),
     {},
 };
 
 // gCameras loading after the offset calculation instead of before
 #ifdef NON_MATCHING 
-s32 func_80240000_BDD1B0(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -261,23 +233,23 @@ s32 func_80240000_BDD1B0(ScriptInstance *script, NpcAISettings *aiSettings, Enem
     return phi_s0;
 }
 #else
-INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", func_80240000_BDD1B0, ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape);
+INCLUDE_ASM(s32, "world/area_arn/arn_02/BDD1B0", arn_02_func_80240000_BDD1B0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 
-void func_802401D4_BDD384(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
     if (script->functionTemp[1].s <= 0) {
         script->functionTemp[1].s = aiSettings->unk_14;
-        if (func_800490B4(shape, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
+        if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
             npc->currentAnim = enemy->animList[9];
-            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+            fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             func_800494C0(npc, 0x2F4, 0x200000);
-            npc->duration = 0xC;
+            npc->duration = 12;
             script->functionTemp[0].s = 2;
         }
     }
@@ -291,16 +263,16 @@ void func_802401D4_BDD384(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkNpcAIFunc22.inc.c"
 
-void func_802404D0_BDD680(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_802404D0_BDD680)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
         playerStatus = &gPlayerStatusPtr;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
-        script->functionTemp[0].s = 0xC;
+        script->functionTemp[0].s = 12;
     } else {
         npc->duration--;
         if (npc->duration <= 0) {
@@ -309,8 +281,8 @@ void func_802404D0_BDD680(ScriptInstance *script, NpcAISettings *aiSettings, Ene
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
                 npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
             } else {
-                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &var);
-                npc->duration = 0xF;
+                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+                npc->duration = 15;
                 script->functionTemp[0].s = 0x28;
             }
         }
@@ -319,7 +291,7 @@ void func_802404D0_BDD680(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
-void func_80240694_BDD844(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
@@ -346,7 +318,7 @@ void func_80240694_BDD844(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     }
 }
 
-void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240834_BDD9E4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
@@ -356,10 +328,10 @@ void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->shape, 
-            enemy->territory->pointX, enemy->territory->pointZ, 
-            npc->pos.x, npc->pos.z, enemy->territory->sizeX, 
-            enemy->territory->sizeZ)) {
+    if (is_point_within_region(enemy->territory->wander.detectShape, 
+            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
+            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
+            enemy->territory->wander.detectSizeZ)) {
         phi_s1 = 1;
     }
 
@@ -382,35 +354,35 @@ void func_80240834_BDD9E4(ScriptInstance *script, NpcAISettings *aiSettings, Ene
     }
 }
 
-void func_80240984_BDDB34(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[1];
-        if (enemy->territory->unk_14 < 0) {
+        if (enemy->territory->wander.moveSpeedOverride < 0) {
             npc->moveSpeed = aiSettings->moveSpeed;
         } else {
-            npc->moveSpeed = enemy->territory->unk_14 / 32767.0;
+            npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
         }
         script->functionTemp[0].s = 0x29;
     }
 }
 
-void func_80240A30_BDDBE0(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing* shape) {
+void N(func_80240A30_BDDBE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
 
-    if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
         script->functionTemp[0].s = 12;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z) <= npc->moveSpeed) {
+    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->functionTemp[0].s = 50;
     } else if (npc->unk_8C == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
@@ -421,117 +393,113 @@ void func_80240A30_BDDBE0(ScriptInstance *script, NpcAISettings *aiSettings, Ene
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-s32 func_80240C90_BDDE40(ScriptInstance *script, NpcAISettings *aiSettings) {
+s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* npcAI = (NpcAISettings*)get_variable(script, *args++);
-    EnemyTerritoryThing shape;
-    EnemyTerritoryThing* shapePtr = &shape;
-    u32 var;
+    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
 
     enemy->varTable[10] = get_variable(script, *args++);
 
-    shape.unk_00 = 0;
-    shape.shape = enemy->territory->shape;
-    shape.pointX = enemy->territory->pointX;
-    shape.pointZ = enemy->territory->pointZ;
-    shape.sizeX = enemy->territory->sizeX;
-    shape.sizeZ = enemy->territory->sizeZ;
-    shape.unk_34 = 40.0f;
-    shape.unk_1C = 0;
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 40.0f;
+    territory.unk_1C = 0;
 
-    if (aiSettings != NULL) {
-        script->functionTemp[0].s = NULL;
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
         npc->duration = 0;
         npc->flags &= ~0x800;
-        if (enemy->territory->unk_34 == 0) {
-            npc->flags |= 0x200;
-            npc->flags &= ~0x8;
-            
+        if (!enemy->territory->wander.isFlying) {
+            npc->flags = (npc->flags | 0x200) & ~0x8;
         } else {
-            npc->flags &= ~0x200;
-            npc->flags |= 0x8;
+            npc->flags = (npc->flags & ~0x200) | 0x8;
         }
     }
 
     if (enemy->unk_B0 & 4) { 
         if (enemy->unk_B4 != 0) {
-            return 0;
+            return ApiStatus_BLOCK;
         }
         enemy->unk_B0 &= ~4;
     }
 
-    if ((u32)script->functionTemp[0].s - 12 < 3 && func_80240000_BDD1B0(script, npcAI, shapePtr)) {
+    if ((u32)script->functionTemp[0].s - 12 < 3 && N(func_80240000_BDD1B0)(script, npcAISettings, territoryPtr)) {
         script->functionTemp[0].s = 20;
     }
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(UnkNpcAIFunc18)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc18)(script, npcAISettings, territoryPtr);
         case 1:
-            func_802401D4_BDD384(script, npcAI, shapePtr);
+            N(func_802401D4_BDD384)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 2) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 2:
-            N(UnkNpcAIFunc21)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc21)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 3) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 3:
-            N(UnkNpcAIFunc20)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc20)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 4) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 4:
-            N(UnkNpcAIFunc22)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc22)(script, npcAISettings, territoryPtr);
         case 5:
-            func_802404D0_BDD680(script, npcAI, shapePtr);
-            return 0;
+            N(func_802404D0_BDD680)(script, npcAISettings, territoryPtr);
+            return ApiStatus_BLOCK;
         case 12:
-            func_80049F7C(script, npcAI, shapePtr);
+            func_80049F7C(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 13) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 13:
-            func_8004A124(script, npcAI, shapePtr);
+            func_8004A124(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 14) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 14:
             npc->duration--;
             if (npc->duration == 0) {
                 script->functionTemp[0].s = 40;
             }
-            return 0;
+            return ApiStatus_BLOCK;
         case 20:
-            N(UnkNpcAIFunc16)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc16)(script, npcAISettings, territoryPtr);
         case 21:
-            func_80240694_BDD844(script, npcAI, shapePtr);
-            return 0;
+            N(func_80240694_BDD844)(script, npcAISettings, territoryPtr);
+            return ApiStatus_BLOCK;
         case 22:
-            func_80240834_BDD9E4(script, npcAI, shapePtr);
-            return 0;
+            N(func_80240834_BDD9E4)(script, npcAISettings, territoryPtr);
+            return ApiStatus_BLOCK;
         case 40:
-            func_80240984_BDDB34(script, npcAI, shapePtr);
+            N(func_80240984_BDDB34)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 41) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 41:
-            func_80240A30_BDDBE0(script, npcAI, shapePtr);
-            return 0;
+            N(func_80240A30_BDDBE0)(script, npcAISettings, territoryPtr);
+            return ApiStatus_BLOCK;
         case 50:
-            N(UnkNpcAIFunc19)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc19)(script, npcAISettings, territoryPtr);
         case 51:
-            N(UnkNpcAIFunc17)(script, npcAI, shapePtr);
+            N(UnkNpcAIFunc17)(script, npcAISettings, territoryPtr);
             if (script->functionTemp[0].s != 52) {
-                return 0;
+                return ApiStatus_BLOCK;
             }
         case 52:
-            N(UnkDurationCheck)(script, npcAI, shapePtr);
-            return 0;
+            N(UnkDurationCheck)(script, npcAISettings, territoryPtr);
+            return ApiStatus_BLOCK;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }

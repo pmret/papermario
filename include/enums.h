@@ -1504,4 +1504,28 @@ enum Areas {
     AREA_TST,
 };
 
+enum NpcFlags {
+    NPC_FLAG_PASSIVE           = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_4                 = 0x00000004,
+    NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
+    NPC_FLAG_10                = 0x00000010, // TODO (shadow-related?)
+    NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
+    NPC_FLAG_80                = 0x00000080, // TODO
+    NPC_FLAG_100               = 0x00000100, // TODO
+    NPC_FLAG_200               = 0x00000200, // TODO (enable gravity?)
+    NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
+    NPC_FLAG_IGNORE_HEIGHT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_NO_PROJECT_SHADOW = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
+    NPC_FLAG_4000              = 0x00004000,
+    NPC_FLAG_8000              = 0x00008000,
+    NPC_FLAG_10000             = 0x00010000,
+    NPC_FLAG_INVISIBLE         = 0x00020000, ///< Invisible sprite (shadow and particles still render) (TODO: possibly causes loading of player sprites instead?)
+    NPC_FLAG_40000             = 0x00040000,
+    NPC_FLAG_200000            = 0x00200000,
+    NPC_FLAG_400000            = 0x00400000,
+    NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_40000000          = 0x40000000,
+    NPC_FLAG_80000000          = 0x80000000,
+};
+
 #endif
