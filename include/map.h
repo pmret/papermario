@@ -217,11 +217,11 @@ typedef struct {
     /* 0x0C */ s32 wanderSizeX;
     /* 0x10 */ s32 wanderSizeZ;
     /* 0x14 */ s32 moveSpeedOverride;
-    /* 0x18 */ enum TerritoryShape wanderShape; // 0 if WanderCircle, 1 otherwise
+    /* 0x18 */ enum TerritoryShape wanderShape;
     /* 0x1C */ Vec3i detect;
     /* 0x28 */ s32 detectSizeX;
     /* 0x2C */ s32 detectSizeZ;
-    /* 0x30 */ enum TerritoryShape detectShape; // 0 if DetectCircle, 1 otherwise
+    /* 0x30 */ enum TerritoryShape detectShape;
     /* 0x34 */ s32 isFlying;
 } EnemyTerritoryWander; // size = 0x38
 
@@ -232,7 +232,7 @@ typedef struct {
     /* 0x80 */ Vec3i detect;
     /* 0x8C */ s32 detectSizeX;
     /* 0x90 */ s32 detectSizeZ;
-    /* 0x94 */ enum TerritoryShape detectShape; // 0 if DetectCircle, 1 otherwise
+    /* 0x94 */ enum TerritoryShape detectShape;
     /* 0x98 */ s32 isFlying;
 } EnemyTerritoryPatrol; // size = 0x9C
 

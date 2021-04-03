@@ -179,6 +179,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                                         if val in disasm_script.CONSTANTS["NpcFlags"]:
                                             enabled.append(disasm_script.CONSTANTS["NpcFlags"][val])
                                         else:
+                                            print(f"NpcFlag 0x{val:08X} missing from NpcFlag enums!")
                                             enabled.append(f"0x{val:08X}")
                                 if not enabled:
                                     enabled.append(0)
