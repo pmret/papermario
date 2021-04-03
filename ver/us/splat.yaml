@@ -453,7 +453,7 @@ segments:
     start: 0x10CC10
     vram: 0x802EB3D0
     subsections:
-    - [0x10CC10, bin]
+    - [0x10CC10, data]
   - [0x10F1B0, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
@@ -540,8 +540,7 @@ segments:
     - [0x1AF230, c]
     - [0x1AF2D0, .data, code_16c8e0]
     - [0x1AF8A0, .data, code_190B20]
-    #- [0x1B21E0, bin] # begins with image
-    - [0x1B21E0, data, code_1AF2D0]
+    - [0x1B21E0, data, code_1AF2D0] # begins with image?
     - [0x1CB240, .rodata, code_16c8e0]
     - [0x1CB368, .rodata, code_16F740]
     - [0x1CB4E0, .rodata, code_1776B0]
@@ -7894,7 +7893,11 @@ segments:
     - [0xC047F0, data]
     - [0xC20C70, rodata]
     - [0xC20CF8, rodata]
-  - [0xC20F40, bin]
+  - type: code
+    start: 0xC20F40
+    vram: 0x80200000
+    subsections:
+    - [0xC20F40, bin] # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
   - name: world/area_dgb/dgb_02/
     type: code
     overlay: True
