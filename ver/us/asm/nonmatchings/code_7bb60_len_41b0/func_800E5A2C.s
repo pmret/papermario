@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_800E5A2C
+glabel phys_update_action_state
 /* 7EEDC 800E5A2C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 7EEE0 800E5A30 3C04800B */  lui       $a0, %hi(gCameras)
 /* 7EEE4 800E5A34 24841D80 */  addiu     $a0, $a0, %lo(gCameras)

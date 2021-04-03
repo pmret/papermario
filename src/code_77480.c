@@ -4,7 +4,7 @@ extern s32 D_8010C920;
 extern s32 D_8010C93C;
 extern s32 D_8010C940;
 extern s32 D_8010C950;
-extern s32 D_8010C958;
+extern UNK_FUN_PTR(D_8010C958);
 
 void func_800E0514(void);
 
@@ -74,7 +74,7 @@ void update_player(void) {
     func_800DFFCC();
 
     if (playerStatus->flags & 0x1000) {
-        func_800E5A2C();
+        phys_update_action_state();
         if (func_800E0208() == 0) {
             collision_main_lateral();
         }
@@ -129,7 +129,7 @@ void func_800DFAAC(void) {
     s32 flags;
 
     check_input_use_partner();
-    func_800E5A2C();
+    phys_update_action_state();
 
     if (!(playerStatus->flags & 8)) {
         if (playerStatus->flags & 2) {
@@ -171,7 +171,7 @@ void func_800DFAAC(void) {
 }
 
 void func_800DFBE8(void) {
-    func_800E5A2C();
+    phys_update_action_state();
     collision_main_lateral();
     func_800E4BB8();
 
@@ -386,13 +386,13 @@ INCLUDE_ASM(s32, "code_77480", func_800E06D8);
 INCLUDE_ASM(s32, "code_77480", check_for_interactables);
 
 void func_800E0AD0(void) {
-    if ((gPlayerStatusPtr->animFlags & 0x10) && (D_8010C958 != 0)) {
+    if (gPlayerStatusPtr->animFlags & 0x10 && D_8010C958 != NULL) {
         func_802B71E8_E202F8();
     }
 }
 
 void func_800E0B14(void) {
-    D_8010C958 = 0;
+    D_8010C958 = NULL;
     gPlayerStatusPtr->animFlags &= ~0x10;
 }
 

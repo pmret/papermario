@@ -1,9 +1,11 @@
 #include "common.h"
 #include "world/partners.h"
+#include "world/actions.h"
 
 f32 func_800E34D8(void);
 f32 func_800E3514(f32, f32*);
 
+extern s32 D_8010C924;
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
@@ -343,7 +345,80 @@ INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5938);
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E59A0);
 
-INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5A2C);
+void phys_update_action_state(void) {
+    Camera* camera = &gCameras[0]; // TODO: is this a reference to gCameras or to gCameras[0]? need signature of func_800E5C78
+    Temp8010EBB0* mystery2 = &D_8010EBB0;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Temp8010F250* mystery = &D_8010F250;
+    s32 flag;
+
+    if (!(playerStatus->flags & 0x40000)) {
+        playerStatus->flags &= ~0x20000000;
+    }
+
+    if (playerStatus->animFlags & 0x1000) {
+        return func_800E5C78(camera);
+    }
+
+    if (playerStatus->unk_C5 != 0) {
+        playerStatus->unk_C5--;
+        if (playerStatus->unk_C5 == 0) {
+            camera->moveFlags |= 4;
+        }
+    }
+
+    if (playerStatus->decorationList != 0) {
+        if (playerStatus->gravityIntegrator[0] <= 0.0f) {
+            if (D_800F7B90 > 0.0f) {
+                playerStatus->unk_C2 = playerStatus->decorationList;
+            }
+        }
+        D_800F7B90 = playerStatus->gravityIntegrator[0];
+    }
+
+    func_800E24F8(camera);
+
+    if (mystery->unk_00 != 0) {
+        mystery->unk_00--;
+        if (mystery->unk_00 == 0) {
+            playerStatus->animFlags &= ~0x00010000;
+            if (mystery->unk_30 != NULL) {
+                sfx_stop_sound(mystery->unk_30);
+            }
+        }
+    }
+
+    flag = 0x80000000;
+
+    do {
+        Action* actions = D_800F7C8C;
+        void** curDmaStart = &D_8010C924;
+        s32 action = playerStatus->actionState;
+
+        if (action == ACTION_STATE_IDLE || action == ACTION_STATE_WALK || action == ACTION_STATE_RUN) {
+            s32 phi_v1 = FALSE;
+            if (!(playerStatus->flags & 0x2000)) {
+                phi_v1 = check_conversation_trigger();
+            }
+
+            if (mystery2->unk_00 == 0 && !(playerStatus->flags & 0x20) && phi_v1) {
+                set_action_state(ACTION_STATE_CONVERSATION);
+            }
+
+            check_input_spin();
+        }
+
+        if (playerStatus->flags & flag) {
+            void* dmaStart = actions[playerStatus->actionState].dmaStart;
+            if (dmaStart != NULL && dmaStart != *curDmaStart) {
+                *curDmaStart = dmaStart;
+                dma_copy(dmaStart, actions[playerStatus->actionState].dmaEnd, (void *)0x802B6000); // TODO: ld addr
+            }
+        }
+
+        actions[playerStatus->actionState].init();
+    } while (playerStatus->flags & flag);
+}
 
 INCLUDE_ASM(s32, "code_7bb60_len_41b0", func_800E5C78);
 

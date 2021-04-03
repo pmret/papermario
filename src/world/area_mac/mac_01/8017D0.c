@@ -75,7 +75,7 @@ void N(func_802411D8_801A58)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             func_8003D660(npc, 1);
         }
-        
+
         x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
         z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
@@ -83,7 +83,7 @@ void N(func_802411D8_801A58)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
             script->functionTemp[0].s = 2;
             script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || 
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) ||
                 (aiSettings->waitTime <= 0) || (script->functionTemp[1].s == 0)) {
                 script->functionTemp[0].s = 4;
             }
@@ -356,7 +356,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
 /*
 ApiStatus N(func_80243D28_8045A8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return 2;
@@ -434,11 +434,11 @@ void func_802454B4_805D34(void) {
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
-    set_parter_tether_distance(20.0f);
+    set_partner_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
     return ApiStatus_DONE2;
 }

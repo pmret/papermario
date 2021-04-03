@@ -1552,7 +1552,8 @@ typedef struct PlayerStatus {
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;
     /* 0x0C2 */ s16 unk_C2;
-    /* 0x0C4 */ char unk_C4[2];
+    /* 0x0C4 */ char unk_C4;
+    /* 0x0C5 */ s8 unk_C5;
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
@@ -1793,6 +1794,8 @@ typedef struct Temp8010F250 {
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ SoundID unk_30;
 } Temp8010F250;
 
 typedef struct Temp8010EBB0 {

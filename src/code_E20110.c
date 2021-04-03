@@ -2,7 +2,7 @@
 
 #define NAMESPACE code_E20110
 
-extern s32 D_8010C958;
+extern UNK_FUN_PTR(D_8010C958);
 
 #include "common/UnkAngleFunc1.inc.c"
 
@@ -19,9 +19,9 @@ INCLUDE_ASM(s32, "code_E20110", func_802B7728_E20838);
 void func_802B79C8_E20AD8(void) {
     func_802B75E8_E206F8();
     gPlayerStatusPtr->unk_C6 = -1;
-    D_8010C958 = 0;
+    D_8010C958 = NULL;
     gPlayerStatusPtr->unk_C8 = NULL;
     gPlayerStatusPtr->animFlags &= ~0x10;
     func_800EF3D4(0);
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
 }
