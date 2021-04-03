@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 #include "world/partners.h"
 #include "world/actions.h"
 
@@ -412,7 +413,12 @@ void phys_update_action_state(void) {
             void* dmaStart = actions[playerStatus->actionState].dmaStart;
             if (dmaStart != NULL && dmaStart != *curDmaStart) {
                 *curDmaStart = dmaStart;
-                dma_copy(dmaStart, actions[playerStatus->actionState].dmaEnd, (void *)0x802B6000); // TODO: ld addr
+
+                #ifdef NON_MATCHING
+                    dma_copy(dmaStart, actions[playerStatus->actionState].dmaEnd, world_action_idle_VRAM);
+                #else
+                    dma_copy(dmaStart, actions[playerStatus->actionState].dmaEnd, (void*)0x802B6000);
+                #endif
             }
         }
 

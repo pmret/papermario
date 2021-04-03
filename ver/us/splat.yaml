@@ -9484,12 +9484,14 @@ segments:
     - [0xE22B30, data]
     - [0xE23230, .rodata, code_E225B0]
   - type: code
+    name: world/action/idle
+    ld_name: world_action_idle
     start: 0xE23260
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE23260, c]
-    - [0xE23690, data]
+    - [0xE23260, c, world/action/idle]
+    - [0xE23690, data, world/action/idle]
   - type: code
     start: 0xE236E0
     vram: 0x802B6000
