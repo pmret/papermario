@@ -1,7 +1,7 @@
 #include "arn_11.h"
 #include "sprite/npc/tubbas_heart.h"
 
-Script N(script_802400F0) = SCRIPT({
+Script N(802400F0) = SCRIPT({
     SetCamType(0, 6, 1);
     SetCamSpeed(0, 3.0);
     UseSettingsFrom(0, 60, 30, 0);
@@ -12,7 +12,7 @@ Script N(script_802400F0) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-Script N(script_802401BC) = SCRIPT({
+Script N(802401BC) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 30;
     SetPlayerSpeed(3.0);
@@ -47,7 +47,7 @@ Script N(script_802401BC) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(script_ExitSingleDoor_80240428) = SCRIPT({
+Script N(exitSingleDoor_80240428) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -60,26 +60,26 @@ Script N(script_ExitSingleDoor_80240428) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_802404CC) = SCRIPT({
-    bind N(script_ExitSingleDoor_80240428) to TRIGGER_WALL_PRESS_A 2;
+Script N(802404CC) = SCRIPT({
+    bind N(exitSingleDoor_80240428) to TRIGGER_WALL_PRESS_A 2;
 });
 
-Script N(script_EnterSingleDoor_802404F8) = SCRIPT({
+Script N(enterSingleDoor_802404F8) = SCRIPT({
     DisablePlayerInput(TRUE);
     SI_VAR(2) = 0;
     SI_VAR(3) = -1;
     await EnterSingleDoor;
-    spawn N(script_802404CC);
+    spawn N(802404CC);
     if (STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         sleep 10;
-        spawn N(script_802400F0);
-        spawn N(script_802401BC);
+        spawn N(802400F0);
+        spawn N(802401BC);
         sleep 1;
     }
     DisablePlayerInput(FALSE);
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524290);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -87,8 +87,8 @@ Script N(script_Main) = SCRIPT({
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
     MakeNpcs(0, N(npcGroupList_802410DC));
-    spawn N(script_80240050);
-    spawn N(script_EnterSingleDoor_802404F8);
+    spawn N(80240050);
+    spawn N(enterSingleDoor_802404F8);
     sleep 1;
 });
 
@@ -96,23 +96,23 @@ static s32 N(pad_674)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(script_80240680) = SCRIPT({
+Script N(80240680) = SCRIPT({
 
 });
 
-Script N(script_80240690) = SCRIPT({
+Script N(80240690) = SCRIPT({
 
 });
 
 NpcSettings N(npcSettings_802406A0) = {
     .height = 24,
     .radius = 24,
-    .otherAI = &N(script_80240680),
-    .onDefeat = &N(script_80240690),
+    .otherAI = &N(80240680),
+    .onDefeat = &N(80240690),
     .level = 13,
 };
 
-Script N(script_Idle_802406CC) = SCRIPT({
+Script N(idle_802406CC) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         if (SI_VAR(0) != 0) {
@@ -134,7 +134,7 @@ Script N(script_Idle_802406CC) = SCRIPT({
     StartBossBattle(11);
 });
 
-Script N(script_8024081C) = SCRIPT({
+Script N(8024081C) = SCRIPT({
     sleep 15;
     PlaySoundAtCollider(2, 449, 0);
     MakeLerp(0, 80, 10, 0);
@@ -148,7 +148,7 @@ Script N(script_8024081C) = SCRIPT({
     }
 });
 
-Script N(script_802408D8) = SCRIPT({
+Script N(802408D8) = SCRIPT({
     MakeLerp(80, 0, 10, 0);
     loop {
         UpdateLerp();
@@ -167,9 +167,8 @@ s32 N(intTable_80240988)[] = {
     0x00000000, 0x00000000, 0xFFFFD8F0, 0x00000000, 0x00000000,
 };
 
-// Unable to use DSL: DSL does not support script opcode 0x30
 // *INDENT-OFF*
-Script N(script_Defeat_802409DC) = {
+Script N(defeat_802409DC) = {
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
         SI_CMD(ScriptOpcode_CALL, SetCamType, 0, 6, 1),
         SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
@@ -211,7 +210,7 @@ Script N(script_Defeat_802409DC) = {
         SI_CMD(ScriptOpcode_CALL, NpcJump0, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
     SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(script_8024081C)),
+    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(8024081C)),
     SI_CMD(ScriptOpcode_LOOP, 0),
         SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
         SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), -10000),
@@ -221,7 +220,7 @@ Script N(script_Defeat_802409DC) = {
         SI_CMD(ScriptOpcode_CALL, NpcJump0, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
     SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(script_802408D8)),
+    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(802408D8)),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
     SI_CMD(ScriptOpcode_CALL, SetCamType, 0, 6, 1),
     SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
@@ -238,13 +237,13 @@ Script N(script_Defeat_802409DC) = {
 };
 // *INDENT-ON*
 
-Script N(script_Init_80240E70) = SCRIPT({
+Script N(init_80240E70) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
         SetSelfVar(0, 0);
-        BindNpcIdle(NPC_SELF, N(script_Idle_802406CC));
-        BindNpcDefeat(NPC_SELF, N(script_Defeat_802409DC));
+        BindNpcIdle(NPC_SELF, N(idle_802406CC));
+        BindNpcDefeat(NPC_SELF, N(defeat_802409DC));
     }
 });
 
@@ -252,8 +251,8 @@ StaticNpc N(npcGroup_80240EEC) = {
     .id = 0,
     .settings = &N(npcSettings_802406A0),
     .pos = { 119.0f, 60.0f, 0.0f },
-    .flags = 0x00040B05,
-    .init = &N(script_Init_80240E70),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_IGNORE_HEIGHT | 0x00040000,
+    .init = &N(init_80240E70),
     .yaw = 270,
     .dropFlags = 0x80,
     .heartDrops = NO_DROPS,

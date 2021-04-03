@@ -3,27 +3,28 @@
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_tubba.h"
 
-Script N(script_ExitWalk_80241430) = EXIT_WALK_SCRIPT(60, 0, "arn_03", 1);
-Script N(script_ExitWalk_8024148C) = EXIT_WALK_SCRIPT(60, 1, "arn_02", 0);
+Script N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
 
-Script N(script_802414E8) = SCRIPT({
-    bind N(script_ExitWalk_80241430) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(script_ExitWalk_8024148C) to TRIGGER_FLOOR_ABOVE 5;
+Script N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
+
+Script N(802414E8) = SCRIPT({
+    bind N(exitWalk_80241430) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024148C) to TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(script_EnterWalk_80241530) = SCRIPT({
+Script N(enterWalk_80241530) = SCRIPT({
     GetLoadType(SI_VAR(1));
     if (SI_VAR(1) == 1) {
         spawn EnterSavePoint;
-        spawn N(script_802414E8);
+        spawn N(802414E8);
         return;
     }
-    SI_VAR(0) = N(script_802414E8);
+    SI_VAR(0) = N(802414E8);
     spawn EnterWalk;
     sleep 1;
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -34,10 +35,10 @@ Script N(script_Main) = SCRIPT({
     } else {
         MakeNpcs(0, N(npcGroupList_80244FC8));
     }
-    await N(script_MakeEntities);
-    spawn N(script_802441FC);
-    spawn N(script_80241360);
-    spawn N(script_EnterWalk_80241530);
+    await N(makeEntities);
+    spawn N(802441FC);
+    spawn N(80241360);
+    spawn N(enterWalk_80241530);
 });
 
 static s32 N(pad_16A8)[] = {
@@ -52,7 +53,7 @@ NpcSettings N(npcSettings_802416B0) = {
     .level = 13,
 };
 
-NpcAISettings N(aISettings_802416DC) = {
+NpcAISettings N(npcAISettings_802416DC) = {
     .moveSpeed = 1.0f,
     .moveTime = 25,
     .waitTime = 30,
@@ -64,14 +65,14 @@ NpcAISettings N(aISettings_802416DC) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_8024170C) = SCRIPT({
-    N(func_8024113C_BE8D1C)(N(aISettings_802416DC));
+Script N(npcAI_8024170C) = SCRIPT({
+    N(func_8024113C_BE8D1C)(N(npcAISettings_802416DC));
 });
 
 NpcSettings N(npcSettings_8024172C) = {
     .height = 24,
     .radius = 24,
-    .ai = &N(script_NpcAI_8024170C),
+    .ai = &N(npcAI_8024170C),
     .level = 99,
 };
 
@@ -81,11 +82,11 @@ NpcSettings N(npcSettings_80241758) = {
     .level = 99,
 };
 
-Script N(script_Idle_80241784) = SCRIPT({
+Script N(idle_80241784) = SCRIPT({
 
 });
 
-Script N(script_Interact_80241794) = SCRIPT({
+Script N(interact_80241794) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(6) == 0) {
@@ -111,11 +112,11 @@ Script N(script_Interact_80241794) = SCRIPT({
     }
 });
 
-Script N(script_Interact_802418F4) = SCRIPT({
+Script N(interact_802418F4) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0094));
 });
 
-Script N(script_Interact_80241924) = SCRIPT({
+Script N(interact_80241924) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(7) == 0) {
@@ -141,11 +142,11 @@ Script N(script_Interact_80241924) = SCRIPT({
     }
 });
 
-Script N(script_Interact_80241A84) = SCRIPT({
+Script N(interact_80241A84) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009B));
 });
 
-Script N(script_Interact_80241AB4) = SCRIPT({
+Script N(interact_80241AB4) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
@@ -192,7 +193,7 @@ Script N(script_Interact_80241AB4) = SCRIPT({
     }
 });
 
-Script N(script_Interact_80241D88) = SCRIPT({
+Script N(interact_80241D88) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
@@ -206,7 +207,7 @@ Script N(script_Interact_80241D88) = SCRIPT({
     }
 });
 
-Script N(script_Interact_80241E28) = SCRIPT({
+Script N(interact_80241E28) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(8) == 0) {
@@ -232,23 +233,23 @@ Script N(script_Interact_80241E28) = SCRIPT({
     }
 });
 
-Script N(script_Interact_80241F88) = SCRIPT({
+Script N(interact_80241F88) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B5));
 });
 
-Script N(script_Init_80241FB8) = SCRIPT({
+Script N(init_80241FB8) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
-        BindNpcIdle(NPC_SELF, N(script_Idle_80241784));
+        BindNpcIdle(NPC_SELF, N(idle_80241784));
     }
-    BindNpcInteract(NPC_SELF, N(script_Interact_80241794));
+    BindNpcInteract(NPC_SELF, N(interact_80241794));
 });
 
-Script N(script_Init_80242008) = SCRIPT({
-    BindNpcInteract(NPC_SELF, N(script_Interact_80241924));
+Script N(init_80242008) = SCRIPT({
+    BindNpcInteract(NPC_SELF, N(interact_80241924));
 });
 
-Script N(script_Init_8024202C) = SCRIPT({
-    BindNpcInteract(NPC_SELF, N(script_Interact_80241AB4));
+Script N(init_8024202C) = SCRIPT({
+    BindNpcInteract(NPC_SELF, N(interact_80241AB4));
     match STORY_PROGRESS {
         < STORY_CH3_SAW_TUBBA_EAT_BOO {
             SetNpcFlagBits(NPC_SELF, 0x00000100, TRUE);
@@ -270,8 +271,8 @@ Script N(script_Init_8024202C) = SCRIPT({
     }
 });
 
-Script N(script_Init_8024212C) = SCRIPT({
-    BindNpcInteract(NPC_SELF, N(script_Interact_80241D88));
+Script N(init_8024212C) = SCRIPT({
+    BindNpcInteract(NPC_SELF, N(interact_80241D88));
     match STORY_PROGRESS {
         < STORY_CH3_SAW_TUBBA_EAT_BOO {
             RemoveNpc(NPC_SELF);
@@ -291,11 +292,11 @@ Script N(script_Init_8024212C) = SCRIPT({
     }
 });
 
-Script N(script_Init_802421EC) = SCRIPT({
+Script N(init_802421EC) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
-        BindNpcIdle(NPC_SELF, N(script_Idle_80241784));
+        BindNpcIdle(NPC_SELF, N(idle_80241784));
     }
-    BindNpcInteract(NPC_SELF, N(script_Interact_80241E28));
+    BindNpcInteract(NPC_SELF, N(interact_80241E28));
 });
 
 StaticNpc N(npcGroup_8024223C)[] = {
@@ -303,8 +304,8 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = 0,
         .settings = &N(npcSettings_8024172C),
         .pos = { 55.0f, 195.0f, 160.0f },
-        .flags = 0x00000D01,
-        .init = &N(script_Init_80241FB8),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_80241FB8),
         .yaw = 270,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -334,8 +335,8 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = 1,
         .settings = &N(npcSettings_80241758),
         .pos = { 160.0f, 191.0f, 250.0f },
-        .flags = 0x00000D01,
-        .init = &N(script_Init_80242008),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_80242008),
         .yaw = 270,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -364,8 +365,8 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = 2,
         .settings = &N(npcSettings_80241758),
         .pos = { 390.0f, 190.0f, 255.0f },
-        .flags = 0x00000D01,
-        .init = &N(script_Init_8024202C),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_8024202C),
         .yaw = 270,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -394,8 +395,8 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = 3,
         .settings = &N(npcSettings_80241758),
         .pos = { 503.0f, 206.0f, 210.0f },
-        .flags = 0x00000D01,
-        .init = &N(script_Init_8024212C),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_8024212C),
         .yaw = 270,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -424,8 +425,8 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .id = 4,
         .settings = &N(npcSettings_8024172C),
         .pos = { 350.0f, 185.0f, 197.0f },
-        .flags = 0x00000D01,
-        .init = &N(script_Init_802421EC),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_802421EC),
         .yaw = 270,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -453,7 +454,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
     },
 };
 
-Script N(script_80242BEC) = SCRIPT({
+Script N(80242BEC) = SCRIPT({
     loop SI_VAR(0) {
         PlaySoundAtNpc(0x5, 0x20F6, 0);
         ShakeCam(0, 0, 10, 0.5);
@@ -461,11 +462,11 @@ Script N(script_80242BEC) = SCRIPT({
     }
 });
 
-Script N(script_80242C50) = SCRIPT({
+Script N(80242C50) = SCRIPT({
     DisablePlayerInput(TRUE);
     NpcFacePlayer(0x2, 1);
     PlaySoundAtNpc(0x2, 0x262, 0);
-    ShowEmote(EMOTE_QUESTION, 0, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     sleep 20;
     GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
@@ -493,10 +494,10 @@ Script N(script_80242C50) = SCRIPT({
     PlaySoundAtNpc(0x1, 0x262, 0);
     PlaySoundAtNpc(0x2, 0x262, 0);
     PlaySoundAtNpc(0x4, 0x262, 0);
-    ShowEmote(EMOTE_EXCLAMATION, 0, -45, 20, 1, 0, 0, 0, 0);
-    ShowEmote(EMOTE_SHOCK, 0, -45, 20, 1, 0, 0, 0, 0);
-    ShowEmote(EMOTE_QUESTION, 0, -45, 20, 1, 0, 0, 0, 0);
-    ShowEmote(EMOTE_ELLIPSIS, 0, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(0, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(1, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(4, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     FadeOutMusic(0, 500);
     ClearAmbientSounds(250);
     sleep 20;
@@ -574,8 +575,8 @@ Script N(script_80242C50) = SCRIPT({
     SetNpcPos(0x2, 272, 190, 214);
     PlaySoundAtNpc(NPC_PLAYER, 0x262, 0);
     PlaySoundAtNpc(0x1, 0x262, 0);
-    ShowEmote(EMOTE_EXCLAMATION, 0, 45, 20, 1, 0, 0, 0, 0);
-    ShowEmote(EMOTE_SHOCK, 0, 45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(0, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
+    ShowEmote(1, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     spawn {
         PlaySound(SOUND_BOO_APPEAR);
         sleep 20;
@@ -591,7 +592,7 @@ Script N(script_80242C50) = SCRIPT({
         sleep 10;
     }
     SI_VAR(0) = 4;
-    spawn N(script_80242BEC);
+    spawn N(80242BEC);
     SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
     NpcMoveTo(0x5, 550, 196, 0);
     SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
@@ -607,7 +608,7 @@ Script N(script_80242C50) = SCRIPT({
     SI_MAP_VAR(1) = 0;
     spawn {
         SI_VAR(0) = 7;
-        spawn N(script_80242BEC);
+        spawn N(80242BEC);
         SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
         NpcMoveTo(0x5, 370, 220, 0);
         GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -684,7 +685,7 @@ Script N(script_80242C50) = SCRIPT({
     InterpNpcYaw(0x5, 90, 1);
     sleep 30;
     SI_VAR(0) = 7;
-    spawn N(script_80242BEC);
+    spawn N(80242BEC);
     SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
     NpcMoveTo(0x5, 370, 220, 0);
     NpcMoveTo(0x5, 550, 196, 0);
@@ -723,7 +724,7 @@ Script N(script_80242C50) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(script_802441FC) = SCRIPT({
+Script N(802441FC) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
         SetNpcPos(0x2, 330, 184, 240);
         loop {
@@ -740,16 +741,16 @@ Script N(script_802441FC) = SCRIPT({
             sleep 1;
         }
         func_802D2B6C();
-        await N(script_80242C50);
-        BindNpcInteract(NPC_PLAYER, N(script_Interact_802418F4));
-        BindNpcInteract(0x1, N(script_Interact_80241A84));
-        BindNpcInteract(0x4, N(script_Interact_80241F88));
+        await N(80242C50);
+        BindNpcInteract(NPC_PLAYER, N(interact_802418F4));
+        BindNpcInteract(0x1, N(interact_80241A84));
+        BindNpcInteract(0x4, N(interact_80241F88));
         STORY_PROGRESS = STORY_CH3_SAW_TUBBA_EAT_BOO;
-        spawn N(script_80241360);
+        spawn N(80241360);
     }
 });
 
-Script N(script_Init_80244358) = SCRIPT({
+Script N(init_80244358) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH3_SAW_TUBBA_EAT_BOO) {
         RemoveNpc(NPC_SELF);
     }
@@ -769,8 +770,8 @@ StaticNpc N(npcGroup_802443AC) = {
     .id = 5,
     .settings = &N(npcSettings_802416B0),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = 0x00000B01,
-    .init = &N(script_Init_80244358),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_IGNORE_HEIGHT,
+    .init = &N(init_80244358),
     .yaw = 270,
     .dropFlags = 0x80,
     .heartDrops = NO_DROPS,
@@ -796,7 +797,7 @@ StaticNpc N(npcGroup_802443AC) = {
     .extraAnimations = &N(extraAnimationList_80244390),
 };
 
-Script N(script_Idle_8024459C) = SCRIPT({
+Script N(idle_8024459C) = SCRIPT({
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(3) = SI_VAR(0);
     SI_VAR(3) += -60;
@@ -818,23 +819,23 @@ Script N(script_Idle_8024459C) = SCRIPT({
     }
 });
 
-Script N(script_Init_80244704) = SCRIPT({
-    BindNpcIdle(NPC_SELF, N(script_Idle_8024459C));
+Script N(init_80244704) = SCRIPT({
+    BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(script_Init_8024473C) = SCRIPT({
-    BindNpcIdle(NPC_SELF, N(script_Idle_8024459C));
+Script N(init_8024473C) = SCRIPT({
+    BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(script_Init_80244774) = SCRIPT({
-    BindNpcIdle(NPC_SELF, N(script_Idle_8024459C));
+Script N(init_80244774) = SCRIPT({
+    BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(script_Init_802447AC) = SCRIPT({
-    BindNpcIdle(NPC_SELF, N(script_Idle_8024459C));
+Script N(init_802447AC) = SCRIPT({
+    BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
@@ -843,8 +844,8 @@ StaticNpc N(npcGroup_802447E4)[] = {
         .id = 6,
         .settings = &N(npcSettings_80241758),
         .pos = { 36.0f, 277.0f, 140.0f },
-        .flags = 0x00402705,
-        .init = &N(script_Init_80244704),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+        .init = &N(init_80244704),
         .yaw = 90,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -872,8 +873,8 @@ StaticNpc N(npcGroup_802447E4)[] = {
         .id = 7,
         .settings = &N(npcSettings_80241758),
         .pos = { 200.0f, 275.0f, 182.0f },
-        .flags = 0x00402705,
-        .init = &N(script_Init_8024473C),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+        .init = &N(init_8024473C),
         .yaw = 90,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -901,8 +902,8 @@ StaticNpc N(npcGroup_802447E4)[] = {
         .id = 8,
         .settings = &N(npcSettings_80241758),
         .pos = { 379.0f, 300.0f, 192.0f },
-        .flags = 0x00402705,
-        .init = &N(script_Init_80244774),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+        .init = &N(init_80244774),
         .yaw = 90,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -930,8 +931,8 @@ StaticNpc N(npcGroup_802447E4)[] = {
         .id = 9,
         .settings = &N(npcSettings_80241758),
         .pos = { 525.0f, 286.0f, 178.0f },
-        .flags = 0x00402705,
-        .init = &N(script_Init_802447AC),
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
+        .init = &N(init_802447AC),
         .yaw = 90,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -974,8 +975,8 @@ static s32 N(pad_4FF8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(script_MakeEntities) = SCRIPT({
-    MakeEntity(0x802EA7E0, 17, 238, 80, 0, ARGS_END);
+Script N(makeEntities) = SCRIPT({
+    MakeEntity(0x802EA7E0, 17, 238, 80, 0, MAKE_ENTITY_END);
 });
 
 void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -1166,7 +1167,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ, posW;
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.unk_30;
+    territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
@@ -1303,7 +1304,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
     NpcAISettings* aiSettings = (NpcAISettings*)get_variable(script, *args++);
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.unk_30;
+    territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;

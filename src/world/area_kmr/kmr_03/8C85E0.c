@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-Script N(Script_80242340) = SCRIPT({
+Script N(80242340) = SCRIPT({
     UseSettingsFrom(0, -270, 20, -80);
     SetPanTarget(0, -270, 20, -80);
     SetCamDistance(0, 700.0);
@@ -43,7 +43,7 @@ Script N(Script_80242340) = SCRIPT({
     SetPlayerAnimation(ANIM_10002);
     SetPlayerPos(-224, 120, -80);
     InterpPlayerYaw(90, 0);
-0: // TODO: this is a do..while
+0:
     sleep 1;
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += -2;
@@ -58,7 +58,7 @@ Script N(Script_80242340) = SCRIPT({
         SetCamSpeed(0, 0.2001953125);
         PanToTarget(0, 0, 1);
     }
-    func_802D286C(0x2800);
+    func_802D286C(10240);
     func_802D2520(ANIM_10002, 5, 5, 1, 1, 0);
     sleep 100;
     WaitForCam(0, 1.0);

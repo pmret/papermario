@@ -2,7 +2,7 @@
 #include "sprite/npc/tubbas_heart.h"
 #include "sprite/npc/goomba.h"
 
-Script N(script_ExitSingleDoor_80240100) = SCRIPT({
+Script N(exitSingleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -15,7 +15,7 @@ Script N(script_ExitSingleDoor_80240100) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_ExitSingleDoor_802401A4) = SCRIPT({
+Script N(exitSingleDoor_802401A4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 1;
@@ -28,30 +28,30 @@ Script N(script_ExitSingleDoor_802401A4) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_80240248) = SCRIPT({
-    bind N(script_ExitSingleDoor_80240100) to TRIGGER_WALL_PRESS_A 6;
-    bind N(script_ExitSingleDoor_802401A4) to TRIGGER_WALL_PRESS_A 11;
+Script N(80240248) = SCRIPT({
+    bind N(exitSingleDoor_80240100) to TRIGGER_WALL_PRESS_A 6;
+    bind N(exitSingleDoor_802401A4) to TRIGGER_WALL_PRESS_A 11;
 });
 
-Script N(script_EnterSingleDoor_80240290) = SCRIPT({
+Script N(enterSingleDoor_80240290) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
             SI_VAR(2) = 0;
             SI_VAR(3) = -1;
             await EnterSingleDoor;
-            spawn N(script_80240248);
+            spawn N(80240248);
         }
         == 1 {
             SI_VAR(2) = 2;
             SI_VAR(3) = 1;
             await EnterSingleDoor;
-            spawn N(script_80240248);
+            spawn N(80240248);
         }
     }
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524289);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -59,9 +59,9 @@ Script N(script_Main) = SCRIPT({
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
     MakeNpcs(0, N(npcGroupList_80240BB8));
-    await N(script_MakeEntities);
-    spawn N(script_80240060);
-    spawn N(script_EnterSingleDoor_80240290);
+    await N(makeEntities);
+    spawn N(80240060);
+    spawn N(enterSingleDoor_80240290);
     sleep 1;
 });
 
@@ -69,23 +69,23 @@ static s32 N(pad_424)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(script_80240430) = SCRIPT({
+Script N(80240430) = SCRIPT({
 
 });
 
-Script N(script_80240440) = SCRIPT({
+Script N(80240440) = SCRIPT({
 
 });
 
 NpcSettings N(npcSettings_80240450) = {
     .height = 24,
     .radius = 24,
-    .otherAI = &N(script_80240430),
-    .onDefeat = &N(script_80240440),
+    .otherAI = &N(80240430),
+    .onDefeat = &N(80240440),
     .level = 13,
 };
 
-NpcAISettings N(aISettings_8024047C) = {
+NpcAISettings N(npcAISettings_8024047C) = {
     .moveSpeed = 1.8f,
     .moveTime = 40,
     .waitTime = 15,
@@ -98,20 +98,20 @@ NpcAISettings N(aISettings_8024047C) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_802404AC) = SCRIPT({
-    DoBasicAI(N(aISettings_8024047C));
+Script N(npcAI_802404AC) = SCRIPT({
+    DoBasicAI(N(npcAISettings_8024047C));
 });
 
 NpcSettings N(npcSettings_802404CC) = {
     .height = 20,
     .radius = 23,
-    .ai = &N(script_NpcAI_802404AC),
+    .ai = &N(npcAI_802404AC),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 12,
 };
 
-Script N(script_Idle_802404F8) = SCRIPT({
+Script N(idle_802404F8) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
     SetNpcJumpscale(NPC_SELF, 3.0);
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -137,25 +137,25 @@ Script N(script_Idle_802404F8) = SCRIPT({
     STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
 });
 
-Script N(script_Defeat_802406F4) = SCRIPT({
+Script N(defeat_802406F4) = SCRIPT({
     SI_SAVE_FLAG(1016) = 1;
     DoNpcDefeat();
 });
 
-Script N(script_Init_80240720) = SCRIPT({
-    BindNpcIdle(NPC_SELF, N(script_Idle_802404F8));
+Script N(init_80240720) = SCRIPT({
+    BindNpcIdle(NPC_SELF, N(idle_802404F8));
     if (STORY_PROGRESS != STORY_UNUSED_FFFFFFEC) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(script_Init_8024076C) = SCRIPT({
+Script N(init_8024076C) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
         if (SI_SAVE_FLAG(1016) == 1) {
             RemoveNpc(NPC_SELF);
             return;
         }
-        BindNpcDefeat(NPC_SELF, N(script_Defeat_802406F4));
+        BindNpcDefeat(NPC_SELF, N(defeat_802406F4));
     }
 });
 
@@ -163,8 +163,8 @@ StaticNpc N(npcGroup_802407D8) = {
     .id = 0,
     .settings = &N(npcSettings_80240450),
     .pos = { 80.0f, 50.0f, 0.0f },
-    .flags = 0x00000D05,
-    .init = &N(script_Init_80240720),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .init = &N(init_80240720),
     .yaw = 270,
     .dropFlags = 0x80,
     .heartDrops = NO_DROPS,
@@ -192,8 +192,8 @@ StaticNpc N(npcGroup_802407D8) = {
 StaticNpc N(npcGroup_802409C8) = {
     .id = 1,
     .settings = &N(npcSettings_802404CC),
-    .flags = 0x00000C00,
-    .init = &N(script_Init_8024076C),
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .init = &N(init_8024076C),
     .yaw = 270,
     .dropFlags = 0x80,
     .itemDropChance = 20,
@@ -233,13 +233,13 @@ static s32 N(pad_BDC)[] = {
     0x00000000,
 };
 
-Script N(script_80240BE0) = SCRIPT({
+Script N(80240BE0) = SCRIPT({
     DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x0182), 160, 40);
     DisablePlayerInput(FALSE);
 });
 
-Script N(script_MakeEntities) = SCRIPT({
-    MakeEntity(0x802EAFDC, 200, 0, -40, 0, ARGS_END);
-    AssignScript(N(script_80240BE0));
+Script N(makeEntities) = SCRIPT({
+    MakeEntity(0x802EAFDC, 200, 0, -40, 0, MAKE_ENTITY_END);
+    AssignScript(N(80240BE0));
 });

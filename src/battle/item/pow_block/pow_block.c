@@ -4,7 +4,7 @@ Script N(main) = SCRIPT({
     SI_VAR(10) = c ITEM_P_O_W_BLOCK;
     await N(UseItemWithEffect);
     sleep 10;
-    MakeEntity(0x802EA2E0, -40, 60, 0, 0, ARGS_END);
+    MakeEntity(0x802EA2E0, -40, 60, 0, 0, MAKE_ENTITY_END);
     SI_VAR(10) = SI_VAR(0);
     N(func_802A1318_718B68)();
     PlayEffect(0x7, 2, -40, 60, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);

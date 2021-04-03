@@ -3,7 +3,7 @@
 
 extern s32 D_000001E4;
 
-Script N(script_80240140) = SCRIPT({
+Script N(80240140) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -17,11 +17,11 @@ Script N(script_80240140) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_802401F4) = SCRIPT({
-    bind N(script_80240140) to TRIGGER_WALL_PRESS_A 5;
+Script N(802401F4) = SCRIPT({
+    bind N(80240140) to TRIGGER_WALL_PRESS_A 5;
 });
 
-Script N(script_80240220) = SCRIPT({
+Script N(80240220) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -29,15 +29,15 @@ Script N(script_80240220) = SCRIPT({
             SI_VAR(4) = 1;
             SI_VAR(3) = 1;
             await 0x80285E24;
-            spawn N(script_802401F4);
+            spawn N(802401F4);
         }
         == 1 {
-            spawn N(script_802401F4);
+            spawn N(802401F4);
         }
     }
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524288);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -45,17 +45,17 @@ Script N(script_Main) = SCRIPT({
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
     MakeNpcs(0, N(npcGroupList_80240974));
-    await N(script_MakeEntities);
-    spawn N(script_80240220);
-    spawn N(script_802404D0);
-    spawn N(script_802400A0);
+    await N(makeEntities);
+    spawn N(80240220);
+    spawn N(802404D0);
+    spawn N(802400A0);
 });
 
 static s32 N(pad_398)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(script_802403A0) = SCRIPT({
+Script N(802403A0) = SCRIPT({
     if (SI_AREA_FLAG(1) == 1) {
         return;
     }
@@ -72,16 +72,16 @@ Script N(script_802403A0) = SCRIPT({
     DisablePlayerPhysics(FALSE);
 });
 
-Script N(script_MakeEntities) = SCRIPT({
-    MakeEntity(0x802EAA30, 0, 0, 0, 0, ARGS_END);
-    AssignScript(N(script_802403A0));
+Script N(makeEntities) = SCRIPT({
+    MakeEntity(0x802EAA30, 0, 0, 0, 0, MAKE_ENTITY_END);
+    AssignScript(N(802403A0));
 });
 
 static s32 N(pad_4CC)[] = {
     0x00000000,
 };
 
-Script N(script_802404D0) = SCRIPT({
+Script N(802404D0) = SCRIPT({
     if (SI_AREA_FLAG(1) == 0) {
         return;
     }
@@ -101,23 +101,23 @@ static s32 N(pad_5A8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(script_802405B0) = SCRIPT({
+Script N(802405B0) = SCRIPT({
 
 });
 
-Script N(script_802405C0) = SCRIPT({
+Script N(802405C0) = SCRIPT({
 
 });
 
 NpcSettings N(npcSettings_802405D0) = {
     .height = 24,
     .radius = 24,
-    .otherAI = &N(script_802405B0),
-    .onDefeat = &N(script_802405C0),
+    .otherAI = &N(802405B0),
+    .onDefeat = &N(802405C0),
     .level = 13,
 };
 
-Script N(script_Idle_802405FC) = SCRIPT({
+Script N(idle_802405FC) = SCRIPT({
     EnableNpcShadow(NPC_SELF, FALSE);
     SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
     SetNpcJumpscale(NPC_SELF, 2.5);
@@ -133,11 +133,11 @@ Script N(script_Idle_802405FC) = SCRIPT({
     STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WELL;
 });
 
-Script N(script_Init_80240730) = SCRIPT({
+Script N(init_80240730) = SCRIPT({
     if (STORY_PROGRESS != STORY_CH3_HEART_FLED_SECOND_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
-        BindNpcIdle(NPC_SELF, N(script_Idle_802405FC));
+        BindNpcIdle(NPC_SELF, N(idle_802405FC));
     }
 });
 
@@ -145,8 +145,8 @@ StaticNpc N(npcGroup_80240784) = {
     .id = 0,
     .settings = &N(npcSettings_802405D0),
     .pos = { 0.0f, 25.0f, 0.0f },
-    .flags = 0x00000D05,
-    .init = &N(script_Init_80240730),
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .init = &N(init_80240730),
     .yaw = 270,
     .dropFlags = 0x80,
     .heartDrops = NO_DROPS,

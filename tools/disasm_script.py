@@ -76,7 +76,7 @@ def get_constants():
 
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds", "NpcIDs", "Emotes" }
+        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
@@ -116,7 +116,10 @@ def get_constants():
                         i += 1
                         continue
 
-                    name = enums[i].strip()
+                    if "//" in enums[i]:
+                        name = enums[i].split("//",1)[0].strip()
+                    else:
+                        name = enums[i].strip()
                     val = last_num+1
                     if "=" in name:
                         name, val = name.split(" = ")
@@ -319,7 +322,7 @@ replace_funcs = {
     "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
-    "ShowEmote"                 :{0:"Emotes"},
+    "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
 
@@ -436,13 +439,13 @@ class ScriptDisassembler:
             name = self.symbol_map[addr][0][1]
             toReplace = True
             suffix = ""
-            if name.startswith("function_802"):
+            if name.startswith("N(func_"):
                 prefix = "ApiStatus "
-                name = self.replace_star_rod_function_name(name)
+                name = self.replace_star_rod_function_name(name[2:-1])
                 suffix = "(ScriptInstance* script, s32 isInitialCall)"
-            elif name.startswith("script_"):
+            elif name.startswith("802"):
                 prefix = "Script "
-            elif name.startswith("aISettings_"):
+            elif name.startswith("npcAISettings_"):
                 prefix = "NpcAISettings "
             elif name.startswith("npcSettings_"):
                 prefix = "NpcSettings "
@@ -721,7 +724,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
     def var(self, arg):
         if arg in self.symbol_map:
             return self.symbol_map[arg][0][1]
-        elif type(arg) is str and "_" in arg:
+        elif type(arg) is str:
             return arg
 
         v = arg - 2**32 # convert to s32
@@ -790,7 +793,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
     def disassemble_command(self, opcode, argc, argv):
         # hacky hacky
         if opcode == 0x43 and len(argv) > 1 and argv[-1] == 0x80000000:
-            argv[-1] = "ARGS_END"
+            argv[-1] = "MAKE_ENTITY_END"
 
         # write case block braces
         if self.in_case == "CASE" or self.in_case == "MULTI":

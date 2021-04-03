@@ -1,22 +1,22 @@
 #include "arn_07.h"
 #include "message_ids.h"
 
-Vec4f N(entryList)[] = {
+EntryList N(entryList) = {
     {    0.0f, 20.0f, -147.0f, 180.0f },
     {  485.0f,  0.0f,    0.0f, 270.0f },
     { -488.0f,  0.0f,    0.0f,  90.0f },
     {  194.0f,  0.0f,    0.0f,   0.0f },
 };
 
-MapConfig N(header) = {
-    .main = N(script_Main),
+MapConfig N(config) = {
+    .main = N(main),
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
     .tattle = MSG_arn_07_tattle,
 };
 
-Script N(script_80241F10) = SCRIPT({
+Script N(80241F10) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);

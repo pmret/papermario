@@ -105,7 +105,7 @@ void N(func_80240834_9165A4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.unk_30, 
+    if (is_point_within_region(enemy->territory->wander.detectShape, 
             enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
             npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
             enemy->territory->wander.detectSizeZ)) {

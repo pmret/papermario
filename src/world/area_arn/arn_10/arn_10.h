@@ -1,9 +1,10 @@
 #include "common.h"
 #include "map.h"
+#include "../arn.h"
 
 #define NAMESPACE arn_10
 
-Script N(script_Main);
-Script N(script_80240060);
+Script N(main);
+Script N(80240060);
 NpcGroupList N(npcGroupList_80240BB8);
-Script N(script_MakeEntities);
+Script N(makeEntities);

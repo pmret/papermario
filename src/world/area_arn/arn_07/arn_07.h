@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "../arn.h"
 
 #define NAMESPACE arn_07
 
@@ -19,20 +20,16 @@ ApiStatus N(SetEntityFlags100000)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241C5C_BEEA4C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus PostChapter3StatUpdate(ScriptInstance* script, s32 isInitialCall);
 
-Script N(script_Main);
-Script N(script_80241F10);
-Script N(script_80243790);
-Script N(script_802439B0);
+Script N(main);
+Script N(80241F10);
+Script N(80243790);
+Script N(802439B0);
 NpcGroupList N(npcGroupList_802478B8);
 NpcGroupList N(npcGroupList_8024787C);
 NpcGroupList N(npcGroupList_802478E8);
 NpcGroupList N(npcGroupList_802478B8);
-Script N(script_MakeEntities);
-Script N(script_80243790);
-Script N(script_802437AC);
-// Script N(script_ExitWalk_80242978);
-// Script N(script_ExitWalk_802429D4);
-Script N(script_ExitSingleDoor_802428D4);
-// Script N(itemList_80242040);
-Script N(script_80242048);
-// Script N(script_80242498);
+Script N(makeEntities);
+Script N(80243790);
+Script N(802437AC);
+Script N(exitSingleDoor_802428D4);
+Script N(80242048);

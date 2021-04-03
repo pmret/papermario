@@ -244,10 +244,11 @@ ApiStatus N(func_80240708_BED4F8)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 s32 N(itemList_80242040)[] = {
-    ITEM_MYSTICAL_KEY, ITEM_NONE
+    ITEM_MYSTICAL_KEY,
+    ITEM_NONE,
 };
 
-Script N(script_80242048) = SCRIPT({
+Script N(80242048) = SCRIPT({
     FadeOutMusic(0, 1000);
     SI_VAR(0) = 0;
     if (SI_VAR(0) == 0) {
@@ -314,7 +315,7 @@ Script N(script_80242048) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_80242498) = SCRIPT({
+Script N(80242498) = SCRIPT({
     SI_VAR(0) = 1;
     if (SI_VAR(0) == 0) {
         DisablePlayerInput(TRUE);
@@ -380,7 +381,7 @@ Script N(script_80242498) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_ExitSingleDoor_802428D4) = SCRIPT({
+Script N(exitSingleDoor_802428D4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -393,23 +394,11 @@ Script N(script_ExitSingleDoor_802428D4) = SCRIPT({
     sleep 100;
 });
 
-Script N(script_ExitWalk_80242978) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 1);
-    spawn ExitWalk;
-    GotoMap("arn_03", 0);
-    sleep 100;
-});
+Script N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
 
-Script N(script_ExitWalk_802429D4) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 2);
-    spawn ExitWalk;
-    GotoMap("mim_12", 1);
-    sleep 100;
-});
+Script N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
 
-Script N(script_80242A30) = SCRIPT({
+Script N(80242A30) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     SetPlayerPos(-28, 0, -333);
@@ -442,7 +431,7 @@ Script N(script_80242A30) = SCRIPT({
             sleep 1;
             GetNpcVar(0, 0, SI_VAR(0));
             if (SI_VAR(0) == 1) {
-                break;
+                break loop;
             }
         }
         SetNpcVar(0, 0, 2);
@@ -454,7 +443,7 @@ Script N(script_80242A30) = SCRIPT({
             RotateModel(29, SI_VAR(0), 0, -1, 0);
             sleep 1;
             if (SI_VAR(1) == 0) {
-                break;
+                break loop;
             }
         }
         PlaySoundAtCollider(10, 450, 0);
@@ -465,7 +454,7 @@ Script N(script_80242A30) = SCRIPT({
     loop {
         GetNpcVar(0, 0, SI_VAR(0));
         if (SI_VAR(0) == 2) {
-            break;
+            break loop;
         }
         sleep 1;
     }
@@ -505,7 +494,7 @@ Script N(script_80242A30) = SCRIPT({
             RotateModel(29, SI_VAR(0), 0, -1, 0);
             sleep 1;
             if (SI_VAR(1) == 0) {
-                break;
+                break loop;
             }
         }
     }
@@ -531,7 +520,7 @@ Script N(script_80242A30) = SCRIPT({
             RotateModel(29, SI_VAR(0), 0, -1, 0);
             sleep 1;
             if (SI_VAR(1) == 0) {
-                break;
+                break loop;
             }
         }
         PlaySoundAtCollider(10, 450, 0);
@@ -544,53 +533,52 @@ Script N(script_80242A30) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-// Unable to use DSL: DSL does not support script opcode 0x4E
 // *INDENT-OFF*
-Script N(script_802433C8) = {
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(script_ExitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(script_ExitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0),
+Script N(802433C8) = {
+    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0),
+    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0),
     SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), -24),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(script_802439B0), TRIGGER_WALL_PRESS_A, 16384, N(itemList_80242040), 0, 1),
+        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802439B0), TRIGGER_WALL_PRESS_A, 16384, N(itemList_80242040), 0, 1),
     SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(script_ExitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0),
+        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0),
     SI_CMD(ScriptOpcode_END_IF),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
 // *INDENT-ON*
 
-Script N(script_EnterWalk_8024346C) = SCRIPT({
+Script N(enterWalk_8024346C) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
             if (STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
-                await N(script_80242A30);
-                spawn N(script_802433C8);
+                await N(80242A30);
+                spawn N(802433C8);
             } else {
                 SI_VAR(2) = 29;
                 SI_VAR(3) = 1;
                 await EnterSingleDoor;
-                spawn N(script_802433C8);
+                spawn N(802433C8);
             }
         }
         == 1 {
-            SI_VAR(0) = N(script_802433C8);
+            SI_VAR(0) = N(802433C8);
             spawn EnterWalk;
             sleep 1;
         }
         == 2 {
-            SI_VAR(0) = N(script_802433C8);
+            SI_VAR(0) = N(802433C8);
             spawn EnterWalk;
             sleep 1;
         }
         == 3 {
-            spawn N(script_802433C8);
+            spawn N(802433C8);
             sleep 1;
         }
     }
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -612,17 +600,17 @@ Script N(script_Main) = SCRIPT({
             MakeNpcs(0, N(npcGroupList_802478B8));
         }
     }
-    await N(script_MakeEntities);
+    await N(makeEntities);
     if (STORY_PROGRESS == STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
-        spawn N(script_80242498);
+        spawn N(80242498);
     }
-    spawn N(script_EnterWalk_8024346C);
+    spawn N(enterWalk_8024346C);
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 3) {
         sleep 65;
     }
-    spawn N(script_80243790);
-    spawn N(script_80241F10);
+    spawn N(80243790);
+    spawn N(80241F10);
     UseDoorSounds(0);
     SetCamSpeed(0, 0.30078125);
 });

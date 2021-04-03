@@ -2,24 +2,25 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 
-Script N(script_ExitWalk_802410F0) = EXIT_WALK_SCRIPT(60, 0, "arn_05", 1);
-Script N(script_ExitWalk_8024114C) = EXIT_WALK_SCRIPT(60, 1, "arn_04", 0);
+Script N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
-Script N(script_802411A8) = SCRIPT({
-    bind N(script_ExitWalk_802410F0) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(script_ExitWalk_8024114C) to TRIGGER_FLOOR_ABOVE 6;
+Script N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+
+Script N(802411A8) = SCRIPT({
+    bind N(exitWalk_802410F0) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024114C) to TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
     MakeNpcs(0, N(npcGroupList_80241A9C));
-    await N(script_MakeEntities);
-    spawn N(script_80241040);
-    SI_VAR(0) = N(script_802411A8);
+    await N(makeEntities);
+    spawn N(80241040);
+    SI_VAR(0) = N(802411A8);
     spawn EnterWalk;
     sleep 1;
 });
@@ -28,18 +29,18 @@ static s32 N(pad_12C4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(script_MakeEntities) = SCRIPT({
+Script N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
     MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
-    MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, ARGS_END);
+    MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1002));
-    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, ARGS_END);
+    MakeEntity(0x802EA564, 225, 265, 30, 0, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1003));
-    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, ARGS_END);
+    MakeEntity(0x802EA564, 275, 265, 150, 0, ITEM_REPEL_GEL, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1004));
 });
 
-NpcAISettings N(aISettings_802413D0) = {
+NpcAISettings N(npcAISettings_802413D0) = {
     .moveSpeed = 1.8f,
     .moveTime = 40,
     .waitTime = 15,
@@ -52,20 +53,20 @@ NpcAISettings N(aISettings_802413D0) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_80241400) = SCRIPT({
-    DoBasicAI(N(aISettings_802413D0));
+Script N(npcAI_80241400) = SCRIPT({
+    DoBasicAI(N(npcAISettings_802413D0));
 });
 
 NpcSettings N(npcSettings_80241420) = {
     .height = 20,
     .radius = 23,
-    .ai = &N(script_NpcAI_80241400),
+    .ai = &N(npcAI_80241400),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 12,
 };
 
-NpcAISettings N(aISettings_8024144C) = {
+NpcAISettings N(npcAISettings_8024144C) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,
@@ -79,14 +80,14 @@ NpcAISettings N(aISettings_8024144C) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_8024147C) = SCRIPT({
-    N(func_80240C90_BDDE40)(N(aISettings_8024144C), 8);
+Script N(npcAI_8024147C) = SCRIPT({
+    N(func_80240C90_BDDE40)(N(npcAISettings_8024144C), 8);
 });
 
 NpcSettings N(npcSettings_802414A0) = {
     .height = 24,
     .radius = 24,
-    .ai = &N(script_NpcAI_8024147C),
+    .ai = &N(npcAI_8024147C),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 15,
@@ -96,7 +97,7 @@ StaticNpc N(npcGroup_802414CC) = {
     .id = 0,
     .settings = &N(npcSettings_802414A0),
     .pos = { -196.0f, 130.0f, 104.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -129,7 +130,7 @@ StaticNpc N(npcGroup_802416BC) = {
     .id = 1,
     .settings = &N(npcSettings_802414A0),
     .pos = { 641.0f, 268.0f, 202.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -162,7 +163,7 @@ StaticNpc N(npcGroup_802418AC) = {
     .id = 2,
     .settings = &N(npcSettings_80241420),
     .pos = { 333.0f, 215.0f, 85.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
@@ -327,7 +328,7 @@ void N(func_80240834_BDD9E4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.unk_30, 
+    if (is_point_within_region(enemy->territory->wander.detectShape, 
             enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
             npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
             enemy->territory->wander.detectSizeZ)) {
@@ -403,7 +404,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
     enemy->varTable[10] = get_variable(script, *args++);
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.unk_30;
+    territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;

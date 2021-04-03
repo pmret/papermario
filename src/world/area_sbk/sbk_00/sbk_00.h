@@ -3,4 +3,4 @@
 
 #define NAMESPACE sbk_00
 
-Script N(MakeEntities);
+Script N(makeEntities);

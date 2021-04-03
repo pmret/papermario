@@ -9,7 +9,7 @@
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
 
-typedef Vec4f EntryList[0];
+typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
 typedef struct MapConfig {
@@ -199,9 +199,11 @@ typedef struct StaticNpc {
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
+enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
+
 typedef struct {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 shape;
+    /* 0x04 */ enum TerritoryShape shape;
     /* 0x08 */ s32 pointX;
     /* 0x0C */ s32 pointZ;
     /* 0x10 */ s32 sizeX;
@@ -215,11 +217,11 @@ typedef struct {
     /* 0x0C */ s32 wanderSizeX;
     /* 0x10 */ s32 wanderSizeZ;
     /* 0x14 */ s32 moveSpeedOverride;
-    /* 0x18 */ s32 unk_18; // 0 if WanderCircle, 1 otherwise
+    /* 0x18 */ enum TerritoryShape wanderShape; // 0 if WanderCircle, 1 otherwise
     /* 0x1C */ Vec3i detect;
     /* 0x28 */ s32 detectSizeX;
     /* 0x2C */ s32 detectSizeZ;
-    /* 0x30 */ s32 unk_30; // 0 if DetectCircle, 1 otherwise
+    /* 0x30 */ enum TerritoryShape detectShape; // 0 if DetectCircle, 1 otherwise
     /* 0x34 */ s32 isFlying;
 } EnemyTerritoryWander; // size = 0x38
 
@@ -230,7 +232,7 @@ typedef struct {
     /* 0x80 */ Vec3i detect;
     /* 0x8C */ s32 detectSizeX;
     /* 0x90 */ s32 detectSizeZ;
-    /* 0x94 */ s32 unk_30; // 0 if DetectCircle, 1 otherwise
+    /* 0x94 */ enum TerritoryShape detectShape; // 0 if DetectCircle, 1 otherwise
     /* 0x98 */ s32 isFlying;
 } EnemyTerritoryPatrol; // size = 0x9C
 

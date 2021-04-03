@@ -75,7 +75,7 @@ ApiStatus N(func_802A1280_72A9D0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// This is a duplciate, search for others
+// This is a duplicate, search for others
 // TODO figure out what this actually is
 // func_80072230 invokes gEffectTable[111]'s entryPoint function
 // that function is currently typed to return void

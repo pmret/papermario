@@ -10529,11 +10529,6 @@ segments:
       - [0x19, 0x00D7, arn_13_tattle]
       - [0x19, 0x00D8, arn_11_tattle]
 
-      - [0x1A, 0x00AA, arn_03_Boo0_tattle]
-      - [0x1A, 0x00AB, arn_03_Boo1_tattle]
-      - [0x1A, 0x00AC, arn_03_Boo2_tattle]
-      - [0x1A, 0x00AD, arn_03_Boo3_tattle]
-
       - [0x1C, 0x0000, actor_goomba_tattle]
       - [0x1C, 0x0001, actor_spiked_goomba_tattle]
       - [0x1C, 0x0002, actor_paragoomba_tattle]

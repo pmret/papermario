@@ -3,24 +3,25 @@
 #include "sprite/npc/goomba.h"
 #include "sprite/npc/cleft.h"
 
-Script N(script_ExitWalk_80243480) = EXIT_WALK_SCRIPT(60, 0, "arn_02", 1);
-Script N(script_ExitWalk_802434DC) = EXIT_WALK_SCRIPT(60, 1, "dgb_00", 0);
+Script N(exitWalk_80243480) = EXIT_WALK_SCRIPT(60,  0, "arn_02",  1);
 
-Script N(script_80243538) = SCRIPT({
-    bind N(script_ExitWalk_80243480) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(script_ExitWalk_802434DC) to TRIGGER_FLOOR_ABOVE 6;
+Script N(exitWalk_802434DC) = EXIT_WALK_SCRIPT(60,  1, "dgb_00",  0);
+
+Script N(80243538) = SCRIPT({
+    bind N(exitWalk_80243480) to TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_802434DC) to TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(script_Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
     MakeNpcs(0, N(npcGroupList_80244000));
-    await N(script_MakeEntities);
-    spawn N(script_802433D0);
-    SI_VAR(0) = N(script_80243538);
+    await N(makeEntities);
+    spawn N(802433D0);
+    SI_VAR(0) = N(80243538);
     spawn EnterWalk;
     sleep 1;
 });
@@ -29,7 +30,7 @@ static s32 N(pad_3654)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-NpcAISettings N(aISettings_80243660) = {
+NpcAISettings N(npcAISettings_80243660) = {
     .moveSpeed = 1.5f,
     .moveTime = 30,
     .waitTime = 30,
@@ -42,24 +43,25 @@ NpcAISettings N(aISettings_80243660) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_80243690) = SCRIPT({
-    N(func_80240B94_BE4344)(N(aISettings_80243660));
+Script N(npcAI_80243690) = SCRIPT({
+    N(func_80240B94_BE4344)(N(npcAISettings_80243660));
 });
 
 NpcSettings N(npcSettings_802436B0) = {
     .height = 20,
     .radius = 23,
-    .ai = &N(script_NpcAI_80243690),
+    .ai = &N(npcAI_80243690),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 12,
 };
 
 f32 N(D_802436DC_BE6E8C)[] = {
-    4.5f, 3.5f, 2.6f, 2.0f, 1.5f, 20.0f,
+     4.5f, 3.5f, 2.6f, 2.0f,
+     1.5f, 20.0f,
 };
 
-NpcAISettings N(aISettings_802436F4) = {
+NpcAISettings N(npcAISettings_802436F4) = {
     .moveSpeed = 1.8f,
     .moveTime = 60,
     .waitTime = 15,
@@ -72,25 +74,25 @@ NpcAISettings N(aISettings_802436F4) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_80243724) = SCRIPT({
+Script N(npcAI_80243724) = SCRIPT({
     SetSelfVar(0, 1);
     SetSelfVar(5, -850);
     SetSelfVar(6, 60);
     SetSelfVar(1, 700);
-    N(func_8024219C_BE594C)(N(aISettings_802436F4));
+    N(func_8024219C_BE594C)(N(npcAISettings_802436F4));
 });
 
 NpcSettings N(npcSettings_80243794) = {
     .height = 18,
     .radius = 20,
-    .ai = &N(script_NpcAI_80243724),
+    .ai = &N(npcAI_80243724),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 12,
     .unk_2A = 1,
 };
 
-NpcAISettings N(aISettings_802437C0) = {
+NpcAISettings N(npcAISettings_802437C0) = {
     .moveSpeed = 1.0f,
     .moveTime = 30,
     .waitTime = 30,
@@ -104,14 +106,14 @@ NpcAISettings N(aISettings_802437C0) = {
     .unk_2C = 1,
 };
 
-Script N(script_NpcAI_802437F0) = SCRIPT({
-    N(func_80243018_BE67C8)(N(aISettings_802437C0), 8);
+Script N(npcAI_802437F0) = SCRIPT({
+    N(func_80243018_BE67C8)(N(npcAISettings_802437C0), 8);
 });
 
 NpcSettings N(npcSettings_80243814) = {
     .height = 24,
     .radius = 24,
-    .ai = &N(script_NpcAI_802437F0),
+    .ai = &N(npcAI_802437F0),
     .onHit = EnemyNpcHit,
     .onDefeat = EnemyNpcDefeat,
     .level = 15,
@@ -121,7 +123,7 @@ StaticNpc N(npcGroup_80243840) = {
     .id = 0,
     .settings = &N(npcSettings_80243794),
     .pos = { -350.0f, 180.0f, 150.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
@@ -155,7 +157,7 @@ StaticNpc N(npcGroup_80243A30) = {
     .id = 1,
     .settings = &N(npcSettings_802436B0),
     .pos = { 360.0f, 208.0f, 100.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .itemDropChance = 20,
@@ -189,7 +191,7 @@ StaticNpc N(npcGroup_80243C20) = {
     .id = 2,
     .settings = &N(npcSettings_80243814),
     .pos = { 150.0f, 177.0f, 160.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -222,7 +224,7 @@ StaticNpc N(npcGroup_80243E10) = {
     .id = 3,
     .settings = &N(npcSettings_80243814),
     .pos = { 550.0f, 230.0f, 125.0f },
-    .flags = 0x00000400,
+    .flags = NPC_FLAG_LOCK_ANIMS,
     .yaw = 90,
     .dropFlags = 0x80,
     .heartDrops = STANDARD_HEART_DROPS(3),
@@ -263,12 +265,12 @@ static s32 N(pad_403C)[] = {
     0x00000000,
 };
 
-Script N(script_MakeEntities) = SCRIPT({
-    MakeEntity(0x802EA564, 450, 285, 120, 0, ITEM_SUPER_SHROOM, ARGS_END);
+Script N(makeEntities) = SCRIPT({
+    MakeEntity(0x802EA564, 450, 285, 120, 0, ITEM_SUPER_SHROOM, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1008));
-    MakeEntity(0x802EA564, 720, 333, 75, 0, ITEM_COIN, ARGS_END);
+    MakeEntity(0x802EA564, 720, 333, 75, 0, ITEM_COIN, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1009));
-    MakeEntity(0x802EA0E8, 600, 290, 200, 0, ARGS_END);
+    MakeEntity(0x802EA0E8, 600, 290, 200, 0, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1010));
     MakeItemEntity(ITEM_STAR_PIECE, 540, 230, 13, 17, SI_SAVE_FLAG(1019));
 });
@@ -461,7 +463,7 @@ ApiStatus N(func_80240B94_BE4344)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ, posW;
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.unk_30;
+    territory.shape = enemy->territory->patrol.detectShape;
     territory.pointX = enemy->territory->patrol.detect.x;
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
@@ -540,7 +542,7 @@ void N(func_80240E90_BE4640)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.unk_18, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape, 
             enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
             npc->pos.x, npc->pos.z, 
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
@@ -669,7 +671,7 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.unk_18, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape, 
             enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
             npc->pos.x, npc->pos.z, 
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
@@ -911,7 +913,7 @@ ApiStatus N(func_8024219C_BE594C)(ScriptInstance* script, s32 isInitialCall) {
     NpcAISettings* aiSettings = get_variable(script, *args);
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.unk_30;
+    territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
@@ -1089,7 +1091,7 @@ void N(func_80242BBC_BE636C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.unk_30, 
+    if (is_point_within_region(enemy->territory->wander.detectShape, 
             enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
             npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
             enemy->territory->wander.detectSizeZ)) {
@@ -1166,7 +1168,7 @@ ApiStatus N(func_80243018_BE67C8)(ScriptInstance* script, s32 isInitialCall) {
     enemy->varTable[10] = get_variable(script, *args++);
 
     territory.unk_00 = 0;
-    territory.shape = enemy->territory->wander.unk_30;
+    territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detect.x;
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;

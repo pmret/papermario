@@ -208,6 +208,6 @@ Script N(ReadEastSign) = SCRIPT({
 });
 
 Script N(MakeEntities) = SCRIPT({
-    MakeEntity(0x802EAFDC, 436, 0, -42, 0, ARGS_END);
+    MakeEntity(0x802EAFDC, 436, 0, -42, 0, MAKE_ENTITY_END);
     AssignScript(N(ReadEastSign));
 });
