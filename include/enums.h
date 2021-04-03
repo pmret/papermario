@@ -1520,6 +1520,7 @@ enum NpcFlags {
     NPC_FLAG_8000              = 0x00008000,
     NPC_FLAG_10000             = 0x00010000,
     NPC_FLAG_INVISIBLE         = 0x00020000, ///< Invisible sprite (shadow and particles still render) (TODO: possibly causes loading of player sprites instead?)
+    NPC_FLAG_40000             = 0x00040000,
     NPC_FLAG_200000            = 0x00200000,
     NPC_FLAG_400000            = 0x00400000,
     NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
