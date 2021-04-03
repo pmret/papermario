@@ -79,9 +79,14 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
     return 1;
 }
 
-extern const char D_80097D30[];
-//const char D_80097D30[] = "File:%s Line:%d  %s \n\0\0\0";
-void func_80025F44(char* arg0, char* file, s32 line, char* arg3) {
-    func_80025CFC(D_80097D30, file, line, arg0);
+// Nop issue with the rodata string
+#ifdef NON_MATCHING
+void func_80025F44(char* arg0, char* file, s32 line) {
+    func_80025CFC("File:%s Line:%d  %s \n", file, line, arg0);
     PANIC();
 }
+#else
+INCLUDE_ASM(void, "code_1060_len_310", func_80025F44, char* arg0, char* file, s32 line);
+#endif
+
+
