@@ -26,14 +26,15 @@ void init_npc_list(void) {
     D_800A0B94 = 1;
 }
 
-//pointless function called by step_game_loop
-void func_8003857C(void) {
-    s32 phi_v1 = 0;
-    s32 temp_v0 = phi_v1 < 0x40;
+/// Pointless function called by step_game_loop(). This almost certainly used to be a for loop over NPCs, but
+/// the loop body was removed.
+void npc_iter_nop(void) {
+    s32 i = 0;
+    s32 cond = i < ARRAY_COUNT(*gCurrentNpcListPtr);
 
-    while (temp_v0) {
-        phi_v1++;
-        temp_v0 = phi_v1 < 0x40;
+    while (cond) {
+        i++;
+        cond = i < ARRAY_COUNT(*gCurrentNpcListPtr);
     }
 }
 
@@ -258,7 +259,8 @@ void disable_npc_shadow(Npc* npc) {
     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
         shadow->flags |= 1;
-        npc->flags &= ~(NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
+        npc->flags &= ~NPC_FLAG_HAS_SHADOW;
+        npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }
 }
 
