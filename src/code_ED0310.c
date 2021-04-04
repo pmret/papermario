@@ -9,9 +9,9 @@ void N(func_80240320_ED0310)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.unk_18, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.unk_18,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
@@ -87,7 +87,7 @@ void N(func_80240BB8_ED0BA8)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if ((npc->unk_8C == 0) && (npc->duration <= 0)) {
+    if ((npc->turnAroundYawAdjustment == 0) && (npc->duration <= 0)) {
         script->functionTemp[1].s--;
         if (script->functionTemp[1].s > 0) {
             if (!(enemy->npcSettings->unk_2A & 0x10)) {
@@ -146,8 +146,8 @@ void N(func_80241178_ED1168)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->unk_07 = 0;
         if (!(npc->flags & 8)) {
             posX = npc->pos.x;
-            posY = npc->pos.y; 
-            posZ = npc->pos.z; 
+            posY = npc->pos.y;
+            posZ = npc->pos.z;
             posW = 1000.0f;
             phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
         } else {
@@ -190,8 +190,8 @@ void N(func_80241178_ED1168)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         posX = npc->pos.x;
-        posY = npc->pos.y + npc->collisionHeight; 
-        posZ = npc->pos.z; 
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
         posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
         if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {

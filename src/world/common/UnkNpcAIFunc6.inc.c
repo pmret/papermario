@@ -6,7 +6,7 @@ void N(UnkNpcAIFunc6)(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     enemy->varTable[0] = 1;
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         enemy->varTable[0] = 2;
         npc->duration = enemy->varTable[1];
         npc->currentAnim = enemy->animList[8];

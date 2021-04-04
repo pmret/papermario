@@ -83,13 +83,13 @@ void N(func_80240778_B35348)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[1].s--;
     }
 
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         if (npc->moveSpeed < 4.0) {
             func_8003D660(npc, 0);
         } else {
             func_8003D660(npc, 1);
         }
-        
+
         x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
         z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
@@ -97,7 +97,7 @@ void N(func_80240778_B35348)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
             script->functionTemp[0].s = 2;
             script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || 
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) ||
                 (aiSettings->waitTime <= 0) || (script->functionTemp[1].s == 0)) {
                 script->functionTemp[0].s = 4;
             }
@@ -127,7 +127,7 @@ void N(func_80240AE0_B356B0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             script->functionTemp[0].s = 10;
         }
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration == 0) {
             script->functionTemp[1].s--;
@@ -271,7 +271,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A2C_B365FC);
 /*
 ApiStatus N(func_80241A2C_B365FC)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return 2;

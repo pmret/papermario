@@ -125,7 +125,7 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
             f32 f1 = npc->pos.x;
             f32 f2 = npc->pos.z;
 
-            add_vec2D_polar(&f1, &f2, arg3, 270.0f - npc->unk_34);
+            add_vec2D_polar(&f1, &f2, arg3, 270.0f - npc->renderYaw);
 
             if (dist2D(f1, f2, playerStatus->position.x, playerStatus->position.z) <= arg2) {
                 return 1;

@@ -145,9 +145,9 @@ void N(func_80242AF8_9121A8)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.detectShape, 
-            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
-            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
+    if (is_point_within_region(enemy->territory->wander.detectShape,
+            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z,
+            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX,
             enemy->territory->wander.detectSizeZ)) {
         phi_s1 = 1;
     }
@@ -156,7 +156,7 @@ void N(func_80242AF8_9121A8)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y;
     posZ = npc->pos.z;
 
-    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ, 
+    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ,
             1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
         phi_s1 = 1;
     }
@@ -204,7 +204,7 @@ void N(func_80242CF4_9123A4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->functionTemp[0].s = 50;
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }

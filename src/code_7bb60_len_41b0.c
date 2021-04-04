@@ -655,7 +655,7 @@ void func_800E6500(void) {
         Npc* npc = get_npc_by_index(D_8010C96C);
 
         if (npc->flags & 0x40000) {
-            npc->unk_34 = playerStatus->spriteFacingAngle;
+            npc->renderYaw = playerStatus->spriteFacingAngle;
         } else {
             npc->yaw = playerStatus->targetYaw;
         }

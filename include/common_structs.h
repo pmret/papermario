@@ -100,6 +100,8 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
+typedef s32 Palette16[16]; // size = 0x40
+
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -110,14 +112,14 @@ typedef struct Npc {
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
-    /* 0x024 */ s32 unk_24;
+    /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
-    /* 0x034 */ f32 unk_34; // some angle?
+    /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
-    /* 0x050 */ f32 unk_50;
+    /* 0x050 */ f32 rotationVerticalPivotOffset;
     /* 0x054 */ Vec3f scale;
     /* 0x060 */ Vec3f moveToPos;
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
@@ -128,7 +130,7 @@ typedef struct Npc {
     /* 0x086 */ u16 unk_86;
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
-    /* 0x08C */ s16 unk_8C;
+    /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
@@ -139,12 +141,26 @@ typedef struct Npc {
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ s8 unk_AB;
-    /* 0x0AC */ u8 unk_AC;
-    /* 0x0AD */ char unk_AD[3];
-    /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ char unk_B4[72];
-    /* 0x0FC */ s32 unk_FC;
-    /* 0x100 */ char unk_100[576];
+    /* 0x0AC */ u8 alpha;
+    /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
+    /* 0x0AE */ char unk_AD[2];
+    /* 0x0B0 */ s32** extraAnimList;
+    /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
+    /* 0x0B5 */ char unk_B5[13];
+    /* 0x0C1 */ s8 paletteCount;
+    /* 0x0C2 */ char unk_C2[2];
+    /* 0x0C4 */ UNK_PTR spritePaletteList;
+    /* 0x0C8 */ Palette16 localPaletteData[16];
+    /* 0x2C8 */ Palette16* localPalettes[16];
+    /* 0x308 */ char unk_308[0x50];
+    /* 0x318 */ f32 screenSpaceOffset2D[2];
+    /* 0x320 */ f32 verticalStretch;
+    /* 0x324 */ struct EffectInstance* decorations[2];
+    /* 0x32C */ s8 decorationType[2];
+    /* 0x32E */ s8 changedDecoration;
+    /* 0x32F */ char unk_32F;
+    /* 0x330 */ s8 decorationInitialised[2];
+    /* 0x332 */ char unk_332[14];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];

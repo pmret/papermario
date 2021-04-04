@@ -77,13 +77,13 @@ ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         sfx_play_sound(0x24B);
-        npc->unk_AC = 0;
+        npc->alpha = 0;
     }
 
-    npc->unk_AC += 17;
+    npc->alpha += 17;
 
-    if ((u32)(npc->unk_AC & 0xFF) >= 0xFF) {
-        npc->unk_AC = 0xFF;
+    if ((u32)(npc->alpha & 0xFF) >= 0xFF) {
+        npc->alpha = 0xFF;
         return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
@@ -92,9 +92,9 @@ ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-0xA);
 
-    npc->unk_AC -= 17;
-    if (npc->unk_AC == 0) {
-        npc->unk_AC = 0;
+    npc->alpha -= 17;
+    if (npc->alpha == 0) {
+        npc->alpha = 0;
         return ApiStatus_DONE1;
     }
 

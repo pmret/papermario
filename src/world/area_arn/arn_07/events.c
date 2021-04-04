@@ -1300,7 +1300,7 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s4) {
-        if (npc->unk_8C == 0) {
+        if (npc->turnAroundYawAdjustment == 0) {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         } else {
             return;
@@ -1376,7 +1376,7 @@ void N(func_802411E8_BEDFD8)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if ((npc->unk_8C == 0) && (npc->duration <= 0)) {
+    if ((npc->turnAroundYawAdjustment == 0) && (npc->duration <= 0)) {
         script->functionTemp[1].s--;
         if (script->functionTemp[1].s > 0) {
             if (!(enemy->npcSettings->unk_2A & 0x10)) {

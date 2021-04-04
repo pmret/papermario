@@ -130,8 +130,8 @@ void update_npcs(void) {
                     if (!(npc->flags & NPC_FLAG_40000000)) {
                         if (!(npc->flags & NPC_FLAG_1000000)) {
                             if (npc->currentAnim != 0) {
-                                if (npc->unk_24 >= 0) {
-                                    spr_update_sprite(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                                if (npc->spriteInstanceID >= 0) {
+                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
                                 }
                             }
                         }
@@ -179,7 +179,7 @@ void update_npcs(void) {
                                 shadow->position.z = subroutine_arg8;
 
                                 shadow->unk_28.x = subroutine_arg9;
-                                shadow->unk_28.y = npc->unk_34;
+                                shadow->unk_28.y = npc->renderYaw;
                                 shadow->unk_28.z = subroutine_argA;
 
                                 shadow->scale.x *= npc->shadowScale;
@@ -205,13 +205,13 @@ void update_npcs(void) {
                     npc_update_decorations(npc);
 
                     if (!(npc->flags & NPC_FLAG_40000000) && !(npc->flags & NPC_FLAG_1000000)) {
-                        if (npc->unk_24 < 0) {
-                            npc->unk_24++;
+                        if (npc->spriteInstanceID < 0) {
+                            npc->spriteInstanceID++;
 
-                            if (npc->unk_24 == -1) {
-                                npc->unk_24 = func_802DE0EC(npc->currentAnim, npc->unk_B0);
-                                ASSERT(npc->unk_24 >= 0);
-                                spr_update_sprite(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                            if (npc->spriteInstanceID == -1) {
+                                npc->spriteInstanceID = func_802DE0EC(npc->currentAnim, npc->extraAnimList);
+                                ASSERT(npc->spriteInstanceID >= 0);
+                                spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
                             }
                         }
                     }
@@ -267,13 +267,13 @@ void disable_npc_shadow(Npc* npc) {
 void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
     s32 flagsTemp;
 
-    ASSERT((npc->flags & NPC_FLAG_1000000) || func_802DE5E8(npc->unk_24) == 0);
+    ASSERT((npc->flags & NPC_FLAG_1000000) || func_802DE5E8(npc->spriteInstanceID) == 0);
 
-    npc->unk_B0 = arg2;
+    npc->extraAnimList = arg2;
 
     if (!(npc->flags & NPC_FLAG_1000000)) {
-        npc->unk_24 = func_802DE0EC(anim, arg2);
-        ASSERT(npc->unk_24 >= 0);
+        npc->spriteInstanceID = func_802DE0EC(anim, arg2);
+        ASSERT(npc->spriteInstanceID >= 0);
     }
 
     flagsTemp = npc->flags;
@@ -281,7 +281,7 @@ void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
 
     if (!(flagsTemp & 0x40000000)) {
         if (!(flagsTemp & 0x1000000)) {
-            spr_update_sprite(npc->unk_24, anim, npc->animationSpeed);
+            spr_update_sprite(npc->spriteInstanceID, anim, npc->animationSpeed);
         }
     }
 }

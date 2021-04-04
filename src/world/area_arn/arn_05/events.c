@@ -1036,7 +1036,7 @@ void N(func_80240158_BE7D38)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[1].s--;
     }
 
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         if (npc->moveSpeed < 4.0) {
             func_8003D660(npc, 0);
         } else {
@@ -1077,7 +1077,7 @@ void N(func_802404C0_BE80A0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             script->functionTemp[0].s = 10;
         }
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration == 0) {
             script->functionTemp[1].s--;
