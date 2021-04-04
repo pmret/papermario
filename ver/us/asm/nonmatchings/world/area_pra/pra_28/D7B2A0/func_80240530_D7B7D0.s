@@ -17,7 +17,7 @@ glabel func_80240530_D7B7D0
 /* D7B800 80240560 8E0400CC */  lw        $a0, 0xcc($s0)
 /* D7B804 80240564 0C044181 */  jal       get_shadow_by_index
 /* D7B808 80240568 00000000 */   nop
-/* D7B80C 8024056C 0C048B77 */  jal       func_80122DDC
+/* D7B80C 8024056C 0C048B77 */  jal       get_entity_model
 /* D7B810 80240570 84440008 */   lh       $a0, 8($v0)
 /* D7B814 80240574 8E050028 */  lw        $a1, 0x28($s0)
 /* D7B818 80240578 8E070030 */  lw        $a3, 0x30($s0)

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802DE2AC
+glabel spr_update_sprite
 /* 10139C 802DE2AC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 1013A0 802DE2B0 AFB5002C */  sw        $s5, 0x2c($sp)
 /* 1013A4 802DE2B4 0080A82D */  daddu     $s5, $a0, $zero

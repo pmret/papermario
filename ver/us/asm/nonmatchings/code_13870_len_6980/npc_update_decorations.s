@@ -8,7 +8,7 @@ glabel D_800984E0
 
 .section .text
 
-glabel func_8003C444
+glabel npc_update_decorations
 /* 17844 8003C444 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 17848 8003C448 AFB10014 */  sw        $s1, 0x14($sp)
 /* 1784C 8003C44C 0080882D */  daddu     $s1, $a0, $zero

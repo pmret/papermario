@@ -175,7 +175,7 @@ INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DE0C0);
 
 INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DE0EC);
 
-INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DE2AC, s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(void, "code_fee30_len_2d60", spr_update_sprite, s32 spriteInstanceID, NpcAnimID animID, f32 timescale);
 
 INCLUDE_ASM(s32, "code_fee30_len_2d60", func_802DE3D8);
 

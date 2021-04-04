@@ -39,7 +39,7 @@ glabel func_802D31E0
 /* F7C14 802D3264 8E040000 */  lw        $a0, ($s0)
 /* F7C18 802D3268 0482003A */  bltzl     $a0, .L802D3354
 /* F7C1C 802D326C 26520001 */   addiu    $s2, $s2, 1
-/* F7C20 802D3270 0C048B77 */  jal       func_80122DDC
+/* F7C20 802D3270 0C048B77 */  jal       get_entity_model
 /* F7C24 802D3274 00000000 */   nop
 /* F7C28 802D3278 8C420000 */  lw        $v0, ($v0)
 /* F7C2C 802D327C 30420008 */  andi      $v0, $v0, 8

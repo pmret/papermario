@@ -1,6 +1,23 @@
 #include "common.h"
 
-extern s32** gCurrentEntityModelList;
+typedef struct EntityModel {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ u8 renderMode;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
+    /* 0x0C */ f32 timeScale; ///< Default is 1.0
+    /* 0x10 */ s32* cmdListReadPos;
+    /* 0x14 */ Gfx* displayList;
+    /* 0x18 */ Matrix4s transform;
+    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x5C */ Vtx* vertexArray;
+    /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
+    /* 0x64 */ s32 setupGfxCallbackArg0;
+} EntityModel; // size = 0x68
+
+extern EntityModel** gCurrentEntityModelList;
 extern s32 D_80154378; // entity fog enabled
 extern s32 D_8015437C; // entity fog red
 extern s32 D_80154380; // entity fog green
@@ -43,8 +60,8 @@ INCLUDE_ASM(s32, "code_b72b0_len_15ed0", draw_entity_model_extra3);
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", func_80122D7C);
 
-s32 func_80122DDC(s32 arg0) {
-    return gCurrentEntityModelList[arg0 & ~0x800];
+EntityModel* get_entity_model(s32 listIndex) {
+    return gCurrentEntityModelList[listIndex & ~0x800];
 }
 
 INCLUDE_ASM(s32, "code_b72b0_len_15ed0", free_entity_model_by_index);

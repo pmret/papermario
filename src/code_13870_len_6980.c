@@ -60,17 +60,17 @@ Npc* get_npc_by_index(s32 listIndex) {
     return gCurrentNpcListPtr[0][listIndex & ~0x800];
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", npc_do_world_collision);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_do_world_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", npc_do_other_npc_collision);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_do_other_npc_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", npc_do_player_collision);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_do_player_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_80039688);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_do_gravity, Npc* npc);
 
 INCLUDE_ASM(void, "code_13870_len_6980", func_800397E8, Npc* npc, f32 value);
 
-void func_802DE2AC(s32, s32, f32);
+void spr_update_sprite(s32, s32, f32);
 void func_802DDA8C(s32, s32, f32);
 void set_npc_shadow_scale(Shadow*, f32, f32);
 void func_801125E8(
@@ -110,7 +110,7 @@ void update_npcs(void) {
                     npc->flags &= ~(NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_4000);
 
                     npc_do_world_collision(npc);
-                    func_80039688(npc);
+                    npc_do_gravity(npc);
                     func_800397E8(npc, 0.0f);
                     npc_do_player_collision(npc);
                     npc_do_other_npc_collision(npc);
@@ -131,7 +131,7 @@ void update_npcs(void) {
                         if (!(npc->flags & NPC_FLAG_1000000)) {
                             if (npc->currentAnim != 0) {
                                 if (npc->unk_24 >= 0) {
-                                    func_802DE2AC(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                                    spr_update_sprite(npc->unk_24, npc->currentAnim, npc->animationSpeed);
                                 }
                             }
                         }
@@ -140,12 +140,12 @@ void update_npcs(void) {
                     }
                     if ((npc->flags & 0x10) != 0) {
                         Shadow* shadow = get_shadow_by_index(npc->shadowIndex);
-                        s32* shadowModel = func_80122DDC(shadow->unk_08);
+                        EntityModel* shadowModel = get_entity_model(shadow->unk_08);
 
-                        *shadowModel &= ~0x200;
+                        shadowModel->flags &= ~0x200;
 
                         if (npc->flags & NPC_FLAG_INVISIBLE) {
-                            *shadowModel |= 0x200;
+                            shadowModel->flags |= 0x200;
                         }
 
                         if (!(npc->flags & NPC_FLAG_NO_AI)) {
@@ -202,7 +202,7 @@ void update_npcs(void) {
                     npc->colliderPos.y = npc->pos.y;
                     npc->colliderPos.z = npc->pos.z;
 
-                    func_8003C444(npc);
+                    npc_update_decorations(npc);
 
                     if (!(npc->flags & NPC_FLAG_40000000) && !(npc->flags & NPC_FLAG_1000000)) {
                         if (npc->unk_24 < 0) {
@@ -211,7 +211,7 @@ void update_npcs(void) {
                             if (npc->unk_24 == -1) {
                                 npc->unk_24 = func_802DE0EC(npc->currentAnim, npc->unk_B0);
                                 ASSERT(npc->unk_24 >= 0);
-                                func_802DE2AC(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                                spr_update_sprite(npc->unk_24, npc->currentAnim, npc->animationSpeed);
                             }
                         }
                     }
@@ -281,7 +281,7 @@ void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
 
     if (!(flagsTemp & 0x40000000)) {
         if (!(flagsTemp & 0x1000000)) {
-            func_802DE2AC(npc->unk_24, anim, npc->animationSpeed);
+            spr_update_sprite(npc->unk_24, anim, npc->animationSpeed);
         }
     }
 }
@@ -381,7 +381,7 @@ INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C3D8);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C428);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C444);
+INCLUDE_ASM(void, "code_13870_len_6980", npc_update_decorations, Npc* npc);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003C53C);
 

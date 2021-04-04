@@ -69,7 +69,7 @@ glabel update_npcs
 /* 14E20 80039A20 00431024 */  and       $v0, $v0, $v1
 /* 14E24 80039A24 0C00E2BF */  jal       npc_do_world_collision
 /* 14E28 80039A28 AE020000 */   sw       $v0, ($s0)
-/* 14E2C 80039A2C 0C00E5A2 */  jal       func_80039688
+/* 14E2C 80039A2C 0C00E5A2 */  jal       npc_do_gravity
 /* 14E30 80039A30 0200202D */   daddu    $a0, $s0, $zero
 /* 14E34 80039A34 4405A000 */  mfc1      $a1, $f20
 /* 14E38 80039A38 0C00E5FA */  jal       func_800397E8
@@ -121,7 +121,7 @@ glabel update_npcs
 /* 14EE8 80039AE8 8E040024 */  lw        $a0, 0x24($s0)
 /* 14EEC 80039AEC 04800009 */  bltz      $a0, .L80039B14
 /* 14EF0 80039AF0 00000000 */   nop
-/* 14EF4 80039AF4 0C0B78AB */  jal       func_802DE2AC
+/* 14EF4 80039AF4 0C0B78AB */  jal       spr_update_sprite
 /* 14EF8 80039AF8 8E060030 */   lw       $a2, 0x30($s0)
 /* 14EFC 80039AFC 0800E6C5 */  j         .L80039B14
 /* 14F00 80039B00 00000000 */   nop
@@ -138,7 +138,7 @@ glabel update_npcs
 /* 14F24 80039B24 0C044181 */  jal       get_shadow_by_index
 /* 14F28 80039B28 8E040078 */   lw       $a0, 0x78($s0)
 /* 14F2C 80039B2C 84440008 */  lh        $a0, 8($v0)
-/* 14F30 80039B30 0C048B77 */  jal       func_80122DDC
+/* 14F30 80039B30 0C048B77 */  jal       get_entity_model
 /* 14F34 80039B34 0040882D */   daddu    $s1, $v0, $zero
 /* 14F38 80039B38 0040202D */  daddu     $a0, $v0, $zero
 /* 14F3C 80039B3C 8C430000 */  lw        $v1, ($v0)
@@ -261,7 +261,7 @@ glabel update_npcs
 /* 150F4 80039CF4 0200202D */  daddu     $a0, $s0, $zero
 /* 150F8 80039CF8 E600006C */  swc1      $f0, 0x6c($s0)
 /* 150FC 80039CFC E6020070 */  swc1      $f2, 0x70($s0)
-/* 15100 80039D00 0C00F111 */  jal       func_8003C444
+/* 15100 80039D00 0C00F111 */  jal       npc_update_decorations
 /* 15104 80039D04 E6040074 */   swc1     $f4, 0x74($s0)
 /* 15108 80039D08 8E030000 */  lw        $v1, ($s0)
 /* 1510C 80039D0C 3C024000 */  lui       $v0, 0x4000
@@ -290,7 +290,7 @@ glabel update_npcs
 .L80039D64:
 /* 15164 80039D64 8E040024 */  lw        $a0, 0x24($s0)
 /* 15168 80039D68 8E050028 */  lw        $a1, 0x28($s0)
-/* 1516C 80039D6C 0C0B78AB */  jal       func_802DE2AC
+/* 1516C 80039D6C 0C0B78AB */  jal       spr_update_sprite
 /* 15170 80039D70 8E060030 */   lw       $a2, 0x30($s0)
 .L80039D74:
 /* 15174 80039D74 26520001 */  addiu     $s2, $s2, 1
