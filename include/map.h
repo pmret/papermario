@@ -62,8 +62,8 @@ typedef struct Area {
 typedef struct NpcBlueprint {
     /* 0x00 */ s32 flags;
     /* 0x04 */ NpcAnimID initialAnim;
-    /* 0x08 */ UNK_FUN_PTR(onUpdate);
-    /* 0x0C */ UNK_FUN_PTR(onRender);
+    /* 0x08 */ void (*onUpdate)(struct Npc*);
+    /* 0x0C */ void (*onRender)(struct Npc*);
 } NpcBlueprint; // size = 0x10
 
 typedef struct NpcAISettings {

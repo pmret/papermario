@@ -691,7 +691,7 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .id = 1,
         .settings = &N(npcSettings_80243CF0),
         .pos = { 309.0f, 0.0f, 11.0f },
-        .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245090),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -721,7 +721,7 @@ StaticNpc N(npcGroup_80245D0C)[] = {
         .id = 0,
         .settings = &N(npcSettings_80243CC4),
         .pos = { -10.0f, 50.0f, -170.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_40000 | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000,
         .init = &N(init_80245058),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -753,7 +753,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 2,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -783,7 +783,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 3,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -813,7 +813,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 4,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -843,7 +843,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 5,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -873,7 +873,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 6,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -903,7 +903,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
         .id = 7,
         .settings = &N(npcSettings_80243D1C),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
         .init = &N(init_80245104),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -935,7 +935,7 @@ StaticNpc N(npcGroup_80246C8C) = {
     .id = 8,
     .settings = &N(npcSettings_80243D1C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
     .init = &N(init_80245164),
     .yaw = 0,
     .dropFlags = 0x80,
@@ -965,7 +965,7 @@ StaticNpc N(npcGroup_80246E7C) = {
     .id = 9,
     .settings = &N(npcSettings_80243D1C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_200000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_200000,
     .init = &N(init_8024519C),
     .yaw = 0,
     .dropFlags = 0x80,
@@ -1004,7 +1004,7 @@ StaticNpc N(npcGroup_802470BC) = {
     .id = 10,
     .settings = &N(npcSettings_80243C78),
     .pos = { -216.0f, 60.0f, -10.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_8024706C),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -1039,7 +1039,7 @@ StaticNpc N(npcGroup_802472AC) = {
     .id = 11,
     .settings = &N(npcSettings_80243C78),
     .pos = { 0.0f, 60.0f, 150.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_8024706C),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -1074,7 +1074,7 @@ StaticNpc N(npcGroup_8024749C) = {
     .id = 12,
     .settings = &N(npcSettings_80243C78),
     .pos = { 260.0f, 60.0f, 30.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_8024706C),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -1109,7 +1109,7 @@ StaticNpc N(npcGroup_8024768C) = {
     .id = 13,
     .settings = &N(npcSettings_80243D48),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245C9C),
     .yaw = 0,
     .dropFlags = 0x80,
@@ -1160,9 +1160,9 @@ void N(func_80240950_BED740)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
@@ -1233,8 +1233,8 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
             posZ = npc->pos.z;
             posW = 1000.0f;
             func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
-            phi_f4 = posY; 
-            phi_f4 += temp_f26; 
+            phi_f4 = posY;
+            phi_f4 += temp_f26;
             d = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
             test = d;
             npc->pos.y = test;
@@ -1269,7 +1269,7 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (aiSettings->unk_14 >= 0) {
             if (script->functionTemp[1].s <= 0) {
                 script->functionTemp[1].s = aiSettings->unk_14;
-                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && 
+                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
@@ -1288,9 +1288,9 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
@@ -1429,8 +1429,8 @@ void N(func_802417A8_BEE598)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->unk_07 = 0;
         if (!(npc->flags & 8)) {
             posX = npc->pos.x;
-            posY = npc->pos.y; 
-            posZ = npc->pos.z; 
+            posY = npc->pos.y;
+            posZ = npc->pos.z;
             posW = 1000.0f;
             phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
         } else {
@@ -1473,8 +1473,8 @@ void N(func_802417A8_BEE598)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         posX = npc->pos.x;
-        posY = npc->pos.y + npc->collisionHeight; 
-        posZ = npc->pos.z; 
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
         posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
         if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {

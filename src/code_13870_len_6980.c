@@ -67,9 +67,161 @@ INCLUDE_ASM(s32, "code_13870_len_6980", npc_do_player_collision);
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_80039688);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_800397E8);
+INCLUDE_ASM(void, "code_13870_len_6980", func_800397E8, Npc* npc, f32 value);
 
+void func_802DE2AC(s32, s32, f32);
+void func_802DDA8C(s32, s32, f32);
+void set_npc_shadow_scale(Shadow*, f32, f32);
+void func_801125E8(
+    f32*, f32*, f32*,
+    f32*, f32*, f32*,
+    f32, f32, f32,
+    f32
+);
+
+// float magic near func_801125E8
+#ifdef NON_MATCHING
+void update_npcs(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 i;
+
+    playerStatus->animFlags &= ~0x00008000;
+
+    if (!(gOverrideFlags & 0xC00)) {
+        for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+            Npc* npc = (*gCurrentNpcListPtr)[i];
+
+            if (npc != NULL && npc->flags != 0) {
+                if (npc->flags & 0x80000004) {
+                    npc_do_world_collision(npc);
+                    //i = i + 1;
+                } else {
+                    npc->onUpdate(npc);
+
+                    if (npc->flags & NPC_FLAG_8000) {
+                        npc->unk_80 |= NPC_FLAG_40000;
+                    } else {
+                        npc->unk_80 &= ~NPC_FLAG_40000;
+                    }
+
+                    npc->unk_84 = -1;
+                    npc->unk_86 = -1;
+                    npc->flags &= ~(NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_4000);
+
+                    npc_do_world_collision(npc);
+                    func_80039688(npc);
+                    func_800397E8(npc, 0.0f);
+                    npc_do_player_collision(npc);
+                    npc_do_other_npc_collision(npc);
+
+                    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
+                        update_npc_blur(npc);
+                    }
+
+                    if ((npc->pos.y < -2000.0f) && !(npc->flags & NPC_FLAG_ALLOW_FALL_FAR)) {
+                        npc->jumpVelocity = 0.0f;
+                        npc->moveSpeed = 0.0f;
+                        npc->jumpScale = 0.0f;
+                        npc->pos.y = playerStatus->position.y;
+                        npc->flags &= ~NPC_FLAG_NO_Y_MOVEMENT;
+                    }
+
+                    if (!(npc->flags & NPC_FLAG_40000000)) {
+                        if (!(npc->flags & NPC_FLAG_1000000)) {
+                            if (npc->currentAnim != 0) {
+                                if (npc->unk_24 >= 0) {
+                                    func_802DE2AC(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                                }
+                            }
+                        }
+                    } else {
+                        func_802DDA8C(1, npc->currentAnim, npc->animationSpeed);
+                    }
+                    if ((npc->flags & 0x10) != 0) {
+                        Shadow* shadow = get_shadow_by_index(npc->shadowIndex);
+                        s32* shadowModel = func_80122DDC(shadow->unk_08);
+
+                        *shadowModel &= ~0x200;
+
+                        if (npc->flags & NPC_FLAG_INVISIBLE) {
+                            *shadowModel |= 0x200;
+                        }
+
+                        if (!(npc->flags & NPC_FLAG_NO_AI)) {
+                            if (
+                                npc->pos.x != npc->colliderPos.x
+                                || npc->pos.y != npc->colliderPos.y
+                                || npc->pos.z != npc->colliderPos.z
+                                || npc->flags & NPC_FLAG_DIRTY_SHADOW
+                            ) {
+                                f32 subroutine_arg6;
+                                f32 subroutine_arg7;
+                                f32 subroutine_arg8;
+                                f32 subroutine_arg9;
+                                f32 subroutine_argA;
+                                f32 subroutine_argB;
+
+                                // maybe raycast
+                                s32 h = (npc->collisionHeight + (npc->collisionHeight < 0)) / 2;
+                                func_801125E8(
+                                    &subroutine_arg6, &subroutine_arg7, &subroutine_arg8,
+                                    &subroutine_arg9, &subroutine_argA, &subroutine_argB,
+                                    //npc->pos.x, npc->pos.y + (f32) ((s32) ((s16) npc->collisionHeight + ((u32) (npc->collisionHeight << 0x10) >> 0x1F)) >> 1), npc->pos.z,
+                                    npc->pos.x, npc->pos.y + h, npc->pos.z,
+                                    1000.0f
+                                );
+
+                                set_npc_shadow_scale(shadow, subroutine_argB, npc->collisionRadius);
+
+                                shadow->position.x = subroutine_arg6;
+                                shadow->position.y = subroutine_arg7;
+                                shadow->position.z = subroutine_arg8;
+
+                                shadow->unk_28.x = subroutine_arg9;
+                                shadow->unk_28.y = npc->unk_34;
+                                shadow->unk_28.z = subroutine_argA;
+
+                                shadow->scale.x *= npc->shadowScale;
+
+                                npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
+                            }
+                        } else {
+                            if (!(npc->flags & NPC_FLAG_LOCK_ANIMS)) {
+                                shadow->position.x = npc->pos.x;
+                            } else {
+                                shadow->position.x = npc->pos.x;
+                                shadow->position.y = npc->pos.y;
+                            }
+
+                            shadow->position.z = npc->pos.z;
+                        }
+                    }
+
+                    npc->colliderPos.x = npc->pos.x;
+                    npc->colliderPos.y = npc->pos.y;
+                    npc->colliderPos.z = npc->pos.z;
+
+                    func_8003C444(npc);
+
+                    if (!(npc->flags & NPC_FLAG_40000000) && !(npc->flags & NPC_FLAG_1000000)) {
+                        if (npc->unk_24 < 0) {
+                            npc->unk_24++;
+
+                            if (npc->unk_24 == -1) {
+                                npc->unk_24 = func_802DE0EC(npc->currentAnim, npc->unk_B0);
+                                ASSERT(npc->unk_24 >= 0);
+                                func_802DE2AC(npc->unk_24, npc->currentAnim, npc->animationSpeed);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "code_13870_len_6980", update_npcs);
+#endif
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_80039DA4);
 
@@ -93,34 +245,31 @@ INCLUDE_ASM(Npc*, "code_13870_len_6980", get_npc_safe, NpcID npcId);
 void enable_npc_shadow(Npc* npc) {
     Shadow* shadow;
 
-    if (!(npc->flags & 0x10)) {
+    if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
         shadow->flags &= ~1;
-        npc->flags = npc->flags | 0x10010;
+        npc->flags |= NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW;
     }
 }
 
 void disable_npc_shadow(Npc* npc) {
     Shadow* shadow;
 
-    if (npc->flags & 0x10) {
+    if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
         shadow->flags |= 1;
-        npc->flags &= ~0x10;
-        npc->flags &= ~0x10000;
+        npc->flags &= ~(NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
-
-func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
 void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
     s32 flagsTemp;
 
-    ASSERT((npc->flags & 0x1000000) || func_802DE5E8(npc->unk_24) == 0);
+    ASSERT((npc->flags & NPC_FLAG_1000000) || func_802DE5E8(npc->unk_24) == 0);
 
     npc->unk_B0 = arg2;
 
-    if (!(npc->flags & 0x1000000)) {
+    if (!(npc->flags & NPC_FLAG_1000000)) {
         npc->unk_24 = func_802DE0EC(anim, arg2);
         ASSERT(npc->unk_24 >= 0);
     }
@@ -139,8 +288,8 @@ void enable_npc_blur(Npc* npc) {
     BlurBuffer* blurBuf;
     s32 i;
 
-    if (!(npc->flags & 0x100000)) {
-        npc->flags |= 0x100000;
+    if (!(npc->flags & NPC_FLAG_MOTION_BLUR)) {
+        npc->flags |= NPC_FLAG_MOTION_BLUR;
 
         blurBuf = heap_malloc(sizeof(BlurBuffer));
         npc->blurBuf = blurBuf;
@@ -157,8 +306,8 @@ void enable_npc_blur(Npc* npc) {
 }
 
 void disable_npc_blur(Npc* npc) {
-    if (npc->flags & 0x100000) {
-        npc->flags &= ~0x100000;
+    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
+        npc->flags &= ~NPC_FLAG_MOTION_BLUR;
 
         heap_free(npc->blurBuf);
         npc->blurBuf = NULL;

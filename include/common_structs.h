@@ -102,8 +102,8 @@ typedef struct BlurBuffer {
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ UNK_PTR onUpdate; /* run before anything else for this npc in the npc update step */
-    /* 0x008 */ UNK_PTR onRender; /* run after the display list for this npc is built */
+    /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
+    /* 0x008 */ void (*onRender)(struct Npc*); ///< Run after the display list for this NPC is built
     /* 0x00C */ f32 yaw;
     /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
@@ -124,7 +124,8 @@ typedef struct Npc {
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
-    /* 0x084 */ char unk_84[4];
+    /* 0x084 */ u16 unk_84;
+    /* 0x086 */ u16 unk_86;
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 unk_8C;
@@ -1050,11 +1051,12 @@ typedef struct Shadow {
     /* 0x04 */ char unk_04[2];
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
-    /* 0x08 */ s16 unk_08;
+    /* 0x08 */ s16 unk_08; // entity model index?
     /* 0x0A */ char unk_0A[6];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ char unk_28[80];
+    /* 0x28 */ struct Vec3f unk_28;
+    /* 0x34 */ char unk_34[68];
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
