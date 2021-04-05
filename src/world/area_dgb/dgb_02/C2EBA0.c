@@ -421,8 +421,6 @@ NpcGroupList N(npcGroupList_802425C8) = {
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-// NEW NEW
-
 s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;

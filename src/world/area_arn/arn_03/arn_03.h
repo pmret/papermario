@@ -5,8 +5,6 @@
 
 #define NAMESPACE arn_03
 
-void func_802D6420(void);
-void func_802D6954(void);
 void func_802CF56C(void);
 
 ApiStatus N(SomeXYZFuncTodoRename)(ScriptInstance* script, s32 isInitialCall);

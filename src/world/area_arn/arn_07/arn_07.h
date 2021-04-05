@@ -4,8 +4,6 @@
 
 #define NAMESPACE arn_07
 
-void func_802D6420(void);
-void func_802D6954(void);
 void func_802CF56C(void);
 
 ApiStatus N(func_80240000_BECDF0)(ScriptInstance* script, s32 isInitialCall);

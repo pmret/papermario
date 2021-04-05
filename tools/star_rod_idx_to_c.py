@@ -700,9 +700,9 @@ if __name__ == "__main__":
         if INCLUDES_NEEDED["npcs"]:
             print("========== NPCs needed: ===========\n")
             print(f"enum {{")
-            lastnum = 0
+            lastnum = -1
             for i, (k, v) in enumerate(sorted(INCLUDES_NEEDED["npcs"].items())):
-                print(f"    {v}" + (f" = {k}" if (k > 0 and i == 0) or (k != lastnum+1) else "") + ",")
+                print(f"    {v}" + (f" = {k}" if ((k > 0 and i == 0) or (k != lastnum+1)) else "") + ",")
                 lastnum = k
             print(f"}};")
             print()
