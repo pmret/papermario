@@ -80,6 +80,7 @@ def get_constants():
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
+    CONSTANTS["MAP_NPCS"] = {}
 
     [SAVE_VARS.add(x) for x in ["WORLD_LOCATION", "STORY_PROGRESS"]]
 
@@ -171,11 +172,30 @@ def get_constants():
 
     return
 
+def make_anim_macro(self, sprite, palette, anim):
+    call = "NPC_ANIM("
+    if sprite in CONSTANTS["NPC_SPRITE"]:
+        call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
+        if palette in CONSTANTS["NPC_SPRITE"][sprite]["palettes"]:
+            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['palettes'][palette]}, "
+        else:
+            call += f"0x{palette:02X}, "
+        if anim in CONSTANTS["NPC_SPRITE"][sprite]["anims"]:
+            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['anims'][anim]}"
+        else:
+            call += f"0x{anim:02X}"
+        call += ")"
+        self.INCLUDES_NEEDED["sprites"].add(CONSTANTS['NPC_SPRITE'][sprite]['name'])
+    else:
+        call += f"0x{sprite:02X}, 0x{palette:02X}, 0x{anim:02X})"
+    return call
+
 def fix_args(self, func, args, info):
     global CONSTANTS
     
     new_args = []
-    for i,arg in enumerate(args.split(", ")):
+    args = args.split(", ")
+    for i,arg in enumerate(args):
         if ((arg == "D_80000000") or (arg.startswith("D_B")) or
             (i == 0 and func == "MakeEntity" and arg.startswith("D_"))):
             arg = "0x" + arg[2:]
@@ -195,39 +215,48 @@ def fix_args(self, func, args, info):
                 sprite  = (argNum & 0xFF0000) >> 16
                 palette = (argNum & 0xFF00)   >> 8
                 anim    = (argNum & 0xFF)     >> 0
-
-                if argNum in CONSTANTS["PlayerAnims"]:
+                
+                if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
+                elif "SI_" not in args[0] and CONSTANTS["MAP_NPCS"][int(args[0])] == "NPC_PLAYER":
+                    if sprite == 0:
+                        print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                        call = f"0x{argNum:X}"
+                    else:
+                        call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                 else:
                     if sprite == 0:
-                        print(f"Sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
-                    call = "NPC_ANIM("
-                    if sprite in CONSTANTS["NPC_SPRITE"]:
-                        call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
-                        if palette in CONSTANTS["NPC_SPRITE"][sprite]["palettes"]:
-                            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['palettes'][palette]}, "
-                        else:
-                            call += f"0x{palette:02X}, "
-                        if anim in CONSTANTS["NPC_SPRITE"][sprite]["anims"]:
-                            call += f"{CONSTANTS['NPC_SPRITE'][sprite]['anims'][anim]}"
-                        else:
-                            call += f"0x{anim:02X}"
-                        call += ")"
-                        self.INCLUDES_NEEDED["npcs"].add(CONSTANTS['NPC_SPRITE'][sprite]['name'])
+                        print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
+                        call = f"0x{argNum:X}"
                     else:
-                        call += f"0x{sprite:02X}, 0x{palette:02X}, 0x{anim:02X})"
-
+                        call = make_anim_macro(self, sprite, palette, anim)
                 new_args.append(call)
             elif info[i] == "CustomMsg":
                 type_ = (argNum & 0xFF0000) >> 16
                 num_ =  (argNum & 0xFFFF)   >> 0
                 new_args.append(f"MESSAGE_ID(0x{type_:02X}, 0x{num_:04X})")
-
+            elif info[i] == "NpcFlags":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["NpcFlags"]:
+                            enabled.append(CONSTANTS["NpcFlags"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append("((" + " | ".join(enabled) + "))")
+            elif info[i] == "NpcIDs":
+                if argNum >= 0:
+                    new_args.append(CONSTANTS["MAP_NPCS"][argNum])
+                else:
+                    new_args.append(CONSTANTS["NpcIDs"][argNum])
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
                 if not (info[i] == "NpcIDs" and argNum > 0):
-                    print(f"0x{argNum:X} was not found within {info[i]} constants, add it.")
+                    print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
                 #Print the unknowns in hex
                 new_args.append(f"0x{int(argNum):X}")
         else:
@@ -311,7 +340,7 @@ replace_funcs = {
     "SetMusicTrack"             :{1:"SongIDs"},
     "SetNpcAnimation"           :{0:"NpcIDs", 1:"CustomAnim"},
     "SetNpcAux"                 :{0:"NpcIDs"},
-    "SetNpcFlagBits"            :{0:"NpcIDs", 1:"Hex", 2:"Bool"},
+    "SetNpcFlagBits"            :{0:"NpcIDs", 1:"NpcFlags", 2:"Bool"},
     "SetNpcJumpscale"           :{0:"NpcIDs"},
     "SetNpcPos"                 :{0:"NpcIDs"},
     "SetNpcRotation"            :{0:"NpcIDs"},
@@ -319,7 +348,7 @@ replace_funcs = {
     "SetNpcSpeed"               :{0:"NpcIDs"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
-    "SetSelfEnemyFlagBits"      :{0:"Hex", 1:"Bool"},
+    "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
     "ShowEmote"                 :{1:"Emotes"},
@@ -431,7 +460,7 @@ class ScriptDisassembler:
 
     def replace_star_rod_function_name(self, name):
         vram = int(name.split("_",1)[1], 16)
-        name = name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}"
+        name = "N(" + name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}" + ")"
         return name
 
     def replace_star_rod_prefix(self, addr):
@@ -443,25 +472,28 @@ class ScriptDisassembler:
                 prefix = "ApiStatus "
                 name = self.replace_star_rod_function_name(name[2:-1])
                 suffix = "(ScriptInstance* script, s32 isInitialCall)"
-            elif name.startswith("802"):
-                prefix = "Script "
-            elif name.startswith("npcAISettings_"):
+            elif name[2:-1] in self.INCLUDED["includes"]:
+                prefix = "ApiStatus "
+                suffix = "(ScriptInstance* script, s32 isInitialCall)"
+            elif name.startswith("N(npcAISettings_"):
                 prefix = "NpcAISettings "
-            elif name.startswith("npcSettings_"):
+            elif name.startswith("N(npcSettings_"):
                 prefix = "NpcSettings "
-            elif name.startswith("npcGroup_"):
+            elif name.startswith("N(npcGroup_"):
                 prefix = "StaticNpc "
-            elif name.startswith("entryList_"):
-                prefix = "Vec4f "
-            elif name.startswith("npcGroupList_"):
+            elif name.startswith("N(entryList_"):
+                prefix = "EntryList "
+            elif name.startswith("N(npcGroupList_"):
                 prefix = "NpcGroupList "
+            elif name.startswith("N("):
+                prefix = "Script "
             else:
                 toReplace = False
 
             if toReplace:
-                name = "N(" + name + ")"
                 if name not in self.INCLUDED["functions"]:
                     self.INCLUDES_NEEDED["forward"].append(prefix + name + suffix + ";")
+                    self.INCLUDED["functions"].add(name)
             return name
         return addr
 
@@ -1033,9 +1065,6 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             addr = argv[0]
             if addr in self.symbol_map:
                 func_name = self.addr_ref(addr)
-                if func_name.startswith("N("):
-                    self.INCLUDED["functions"].add(func_name)
-
                 for i,arg in enumerate(argv):
                     argv[i] = self.replace_star_rod_prefix(arg)
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
@@ -1045,9 +1074,17 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             else:
                 print(f"script API function {addr:X} is not present in symbol_addrs.txt, please add it")
                 exit(1)
-        elif opcode == 0x44: self.write_line(f"spawn {self.addr_ref(argv[0])};")
+        elif opcode == 0x44:
+            name = self.addr_ref(argv[0])
+            if name.startswith("N("):
+                self.INCLUDED["functions"].add(name)
+            self.write_line(f"spawn {name};")
         elif opcode == 0x45: self.write_line(f"{self.var(argv[1])} = spawn {self.addr_ref(argv[0])};")
-        elif opcode == 0x46: self.write_line(f"await {self.addr_ref(argv[0])};")
+        elif opcode == 0x46:
+            name = self.addr_ref(argv[0])
+            if name.startswith("N("):
+                self.INCLUDED["functions"].add(name)
+            self.write_line(f"await {name};")
         elif opcode == 0x47:
             assert argv[3] == 1
             if argv[4] != 0:

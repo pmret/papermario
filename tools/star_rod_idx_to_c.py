@@ -5,7 +5,9 @@ import os
 import yaml
 import json
 from struct import unpack, unpack_from
+from copy import deepcopy
 import argparse
+from pathlib import Path
 
 import disasm_script
 
@@ -13,10 +15,49 @@ DIR = os.path.dirname(__file__)
 
 INCLUDED = {}
 INCLUDED["functions"] = set()
+INCLUDED["includes"] = set()
 INCLUDES_NEEDED = {}
 INCLUDES_NEEDED["include"] = []
 INCLUDES_NEEDED["forward"] = []
-INCLUDES_NEEDED["npcs"] = set()
+INCLUDES_NEEDED["npcs"] = {}
+INCLUDES_NEEDED["sprites"] = set()
+
+def get_function_list(area_name, map_name, rom_offset):
+    map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
+    i = 0
+    firstFind = False
+    functions = {}
+    while i < len(map_file):
+        if map_file[i].startswith(f" ver/us/build/src/world/area_{area_name}/{map_name}/"):
+            firstFind = True
+            i += 1
+            while not map_file[i].startswith(" .data"):
+                if map_file[i].startswith("  ") and " = ." not in map_file[i]:
+                    line = map_file[i].strip()
+                    vram, *_, func = line.split()
+                    vram = int(vram, 16)
+                    func = func.replace(f"{map_name}_", "")
+                    if func.count("_") == 2:
+                        func = func.rsplit("_",1)[0]
+                    functions[vram] = func
+                i += 1
+        if firstFind:
+            break
+        i += 1
+
+    return functions
+
+def get_include_list(area_name, map_name):
+    include_path = Path(__file__).parent.parent / "src" / "world" / "common"
+    includes = set()
+    for file in include_path.iterdir():
+        if file.is_file() and ".inc.c" in file.parts[-1]:
+            with open(file, "r", encoding="utf8") as f:
+                for line in f:
+                    if (line.startswith("void N(") or line.startswith("ApiStatus N(")) and "{" in line:
+                        func_name = line.split("N(",1)[1].split(")",1)[0]
+                        includes.add(func_name)
+    return includes
 
 def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     global INCLUDES_NEEDED, INCLUDED
@@ -26,13 +67,12 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     main_script_name = None
 
     INDENT = f"    "
+    afterHeader = False
 
     while len(midx) > 0:
         struct = midx.pop(0)
 
         name = struct["name"]
-
-        INCLUDED["functions"].add(name)
 
         if comments:
             out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
@@ -41,7 +81,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
                 name = "N(main)"
+                INCLUDES_NEEDED["forward"].append(f"Script " + name + ";")
                 main_script_name = name
+
+            # For PlayMusic script if using a separate header file
+            #if afterHeader:
+            #    INCLUDES_NEEDED["forward"].append(f"Script " + name + ";")
+            #    afterHeader = False
 
             pos = bytes.tell()
             try_replace = False
@@ -146,7 +192,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             numNpcs = struct['length'] // 0x1F0
             tmp_out = f"StaticNpc {name}" + ("[]" if numNpcs > 1 else "") + f" = {{\n"
 
-            for z in range(struct['length'] // 0x1F0):
+            for z in range(numNpcs):
                 i = 0
                 var_names = ["id", "settings", "pos", "flags", 
                              "init", "unk_1C", "yaw", "dropFlags", 
@@ -162,7 +208,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     if i == 0x0 or i == 0x24:
                         var_name = var_names[0] if i == 0x0 else var_names[6]
                         var = unpack_from(f">i", staticNpc, curr_base+i)[0]
-                        tmp_out += INDENT + f".{var_name} = {var},\n"
+                        if var_name == "id":
+                            tmp_out += INDENT + f".{var_name} = {disasm_script.CONSTANTS['MAP_NPCS'][var]},\n"
+                        else:
+                            tmp_out += INDENT + f".{var_name} = {var},\n"
                     elif i == 0x4 or i == 0x14 or i == 0x18 or i == 0x1E8:
                         var_name = var_names[1] if i == 0x4 else var_names[3] if i == 0x14 else var_names[4] if i == 0x18 else var_names[17]
                         addr = unpack_from(f">I", staticNpc, curr_base+i)[0]
@@ -282,7 +331,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                                     tmp_out += INDENT + "    " + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
                                 else:
                                     tmp_out += INDENT*2 + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
-                                INCLUDES_NEEDED["npcs"].add(sprite)
+                                INCLUDES_NEEDED["sprites"].add(sprite)
                             i += 4
                         tmp_out += INDENT + f"}},\n"
                         i -= 1
@@ -318,7 +367,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                     anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
                     tmp_out += INDENT + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
-                    INCLUDES_NEEDED["npcs"].add(sprite)
+                    INCLUDES_NEEDED["sprites"].add(sprite)
                 i += 4
             tmp_out += f"}};\n"
             out += tmp_out
@@ -369,6 +418,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"    .tattle = 0x{tattle:X},\n"
 
             out += f"}};\n"
+            afterHeader = True
         elif struct["type"] == "ASCII" or struct["type"] == "SJIS":
             # rodata string hopefully inlined elsewhere
             bytes.read(struct["length"])
@@ -429,6 +479,8 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"\n}};\n"
 
         out += "\n"
+        if not struct["type"] == "Function":
+            INCLUDED["functions"].add(name)
 
     # end of data
     return out
@@ -540,22 +592,31 @@ if __name__ == "__main__":
         print(f"can't find segment with name '{segment_name}' in splat.yaml")
         exit(1)
 
+    function_replacements = get_function_list(area_name, map_name, rom_offset)
+    INCLUDED["includes"] = get_include_list(area_name, map_name)
+
     with open(args.idxfile, "r") as f:
         midx = parse_midx(f, vram=vram)
 
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
-        name_fixes = { "script_NpcAI": "npcAI", 
+        name_fixes = { 
+                       "script_NpcAI": "npcAI", 
                        "aISettings": "npcAISettings", 
                        "script_ExitWalk": "exitWalk",
                        "script_MakeEntities": "makeEntities",
-                      }
-
+                     }
+        total_npc_counts = {}
         for struct in midx:
             romfile.seek(struct["start"] + rom_offset)
 
             name = struct["name"]
+            
             if name.startswith("N("):
                 name = name[2:-1]
+
+            if struct['vaddr'] in function_replacements:
+                name = function_replacements[struct['vaddr']]
+
             if name.split("_",1)[0] in name_fixes:
                 name = name_fixes[name.split("_",1)[0]] + "_" + name.rsplit("_",1)[1]
             elif name.startswith("script_"):
@@ -564,7 +625,10 @@ if __name__ == "__main__":
                 name = "main"
             elif "ASCII" in name:
                 name = name.replace("ASCII", "ascii")
-            name = name[0].lower() + name[1:]
+
+            if name not in INCLUDED["includes"]:
+                name = name[0].lower() + name[1:]
+
             name = "N(" + name + ")"
             struct["name"] = name
 
@@ -583,24 +647,61 @@ if __name__ == "__main__":
 
                 string_literal = '"' + string_data + '"'
                 symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+            elif struct["type"] == "NpcGroup":
+                for z in range(struct["length"]//0x1F0):
+                    npc = romfile.read(0x1F0)
+                    npc_id = unpack_from(">I", npc, 0)[0]
+                    if npc_id >= 0:
+                        anim = unpack_from(">I", npc, 0x1A0)[0]
+                        if not anim == 0:
+                            sprite_id =  (anim & 0x00FF0000) >> 16
+                            sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"].upper()
+                            if npc_id not in total_npc_counts:
+                                total_npc_counts[npc_id] = sprite
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
             else:
                 symbol_map[struct["vaddr"]] = [[struct["vaddr"], struct["name"]]]
 
-        romfile.seek(rom_offset)
+        # fix NPC names
+        curr_counts = {}
+        for id_, name in total_npc_counts.items():
+            if sum(x == name for x in total_npc_counts.values()) > 1:
+                if name not in curr_counts:
+                    curr_counts[name] = 0
+                nname = name
+                name = name + f"{curr_counts[name]}"
+                curr_counts[nname] += 1
+            name = f"NPC_{name}"
+            disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
+            INCLUDES_NEEDED["npcs"][id_] = name
+        
+        for id_, name in disasm_script.CONSTANTS["NpcIDs"].items():
+            disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
+
+        romfile.seek(rom_offset, 0)
+
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
         
+        if INCLUDES_NEEDED["sprites"]:
+            print("========== Includes needed: ===========\n")
+            print(f"#include \"map.h\"")
+            for npc in sorted(INCLUDES_NEEDED["sprites"]):
+                print(f"#include \"sprite/npc/{npc}.h\"")
+            print()
+            
         if INCLUDES_NEEDED["forward"]:
             print()
             print("========== Forward declares: ==========\n")
-            for forward in INCLUDES_NEEDED["forward"]:
+            for forward in sorted(INCLUDES_NEEDED["forward"]):
                 print(forward)
             print()
 
         if INCLUDES_NEEDED["npcs"]:
-            print("========== Includes needed: ===========\n")
-            print(f"#include \"map.h\"")
-            for npc in INCLUDES_NEEDED["npcs"]:
-                print(f"#include \"sprite/npc/{npc}.h\"")
+            print("========== NPCs needed: ===========\n")
+            print(f"enum {{")
+            for k, v in sorted(INCLUDES_NEEDED["npcs"].items()):
+                print(f"    {v},")
+            print(f"}};")
             print()
 
         print("=======================================\n")

@@ -49,7 +49,7 @@ void N(func_80240158_A86BA8)(ScriptInstance* script, NpcAISettings* aiSettings, 
     if (aiSettings->unk_14 >= 0) {
         if (script->functionTemp[1].s <= 0) {
             script->functionTemp[1].s = aiSettings->unk_14;
-            if (func_800490B4(shape, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
+            if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                 fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 func_800494C0(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
@@ -98,7 +98,7 @@ void N(func_802404C0_A86F10)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if ((aiSettings->unk_14 >= 0) && func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if ((aiSettings->unk_14 >= 0) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         func_800494C0(npc, 0x2F4, 0x200000);
@@ -158,7 +158,7 @@ ApiStatus N(func_8024094C_A8739C)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (!func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 1)) {
+    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->currentAnim = enemy->animList[0];
         npc->duration = 25;

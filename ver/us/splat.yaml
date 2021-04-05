@@ -7871,27 +7871,45 @@ segments:
     start: 0xBFA0A0
     vram: 0x80240000
     subsections:
-    - [0xBFA0A0, c]
-    - [0xBFA100, c]
-    - [0xBFA150, data]
-    - [0xBFA260, data]
-    - [0xBFD800, data]
-    - [0xBFD840, rodata]
+    - [0xBFA0A0,      .c, BFA0A0]
+    - [0xBFA100,      .c, BFA100]
+    - [0xBFA150,   .data, BFA0A0]
+    - [0xBFA260,   .data, BFA100]
+    - [0xBFD800,   .data, BFA100]
+    - [0xBFD840, .rodata, BFA0A0]
+    - [0xBFD864, .rodata, BFA100]
   - name: world/area_dgb/dgb_01/
     type: code
     overlay: True
     start: 0xBFD880
     vram: 0x80240000
     subsections:
-    - [0xBFD880, c]
-    - [0xBFD8C0, c]
-    - [0xBFD9A0, c]
-    - [0xC00C70, data]
-    - [0xC00DD0, data]
-    - [0xC01770, data]
-    - [0xC047F0, data]
-    - [0xC20C70, rodata]
-    - [0xC20CF8, rodata]
+    - [0xBFD880,       .c, BFD880]
+    - [0xBFD8C0,       .c, BFD8C0]
+    - [0xBFD9A0,       .c, BFD9A0]
+    - [0xC00C70,    .data, BFD9A0]
+    - [0xC00DD0,    .data, BFD9A0]
+    - [0xC01770,    .data, BFD9A0]
+    - [0xC047F0,   rgba16, img0, 64, 32]
+    - [0xC057F0,    .data, data0]
+    - [0xC05870,   rgba16, img1, 64, 32]
+    - [0xC06870,    .data, data1]
+    - [0xC068F0,   rgba16, img2, 32, 32]
+    - [0xC070F0,    .data, data2]
+    - [0xC07170,   rgba16, img3, 16, 32]
+    - [0xC07570,    .data, data3]
+    - [0xC075F0,   rgba16, img4, 16, 32]
+    - [0xC079F0,    .data, data4]
+    - [0xC07A70,   rgba16, img5, 16, 32]
+    - [0xC07E70,    .data, data5]
+    - [0xC07EF0,   rgba16, img6, 32, 32]
+    - [0xC086F0,    .data, data6]
+    - [0xC08770,   rgba16, img7, 32, 32]
+    - [0xC08F70,    .data, data7]
+    - [0xC08FF0,    .data, data]
+    - [0xC20C70,  .rodata, BFD9A0] # dgb_00-18, 1x 32767.0, 2 jump tables
+    - [0xC20D88,  .rodata, BFD9A0] # "dgb_00", 2x 32767.0, jump table
+    - [0xC20F30,  .rodata, BFD9A0] # "dgb_08" only
   - [0xC20F40, bin]
   - name: world/area_dgb/dgb_02/
     type: code
@@ -10522,6 +10540,8 @@ segments:
       - [0x19, 0x00BD, arn_05_tattle]
       - [0x19, 0x00BE, arn_02_tattle]
       - [0x19, 0x00BF, arn_04_tattle]
+      - [0x19, 0x00C0, dgb_00_tattle]
+      - [0x19, 0x00C1, dgb_01_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]

@@ -144,7 +144,7 @@ glabel L802432B4_C00B34
 glabel L802432CC_C00B4C
 /* C00B4C 802432CC 0280202D */  daddu     $a0, $s4, $zero
 /* C00B50 802432D0 0260282D */  daddu     $a1, $s3, $zero
-/* C00B54 802432D4 0C090A4B */  jal       dup_dgb_01_UnkNpcAIFunc1
+/* C00B54 802432D4 0C090A4B */  jal       dgb_01_UnkNpcAIFunc1_copy
 /* C00B58 802432D8 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802432DC_C00B5C
 /* C00B5C 802432DC 0280202D */  daddu     $a0, $s4, $zero

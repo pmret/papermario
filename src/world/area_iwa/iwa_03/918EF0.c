@@ -13,7 +13,7 @@ void N(func_80240514_9190C4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     if (script->functionTemp[1].s <= 0) {
         script->functionTemp[1].s = aiSettings->unk_14;
-        if (func_800490B4(shape, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.s, 0)) {
+        if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
             npc->currentAnim = enemy->animList[9];
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             func_800494C0(npc, 0x2F4, 0x200000);
@@ -40,7 +40,7 @@ void N(func_80240810_9193C0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         playerStatus = &gPlayerStatusPtr;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
         script->functionTemp[0].s = 12;
@@ -158,7 +158,7 @@ void N(func_80240D70_919920)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
 
-    if (func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
         script->functionTemp[0].s = 12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {

@@ -8,6 +8,7 @@
 f32 fabsf(f32 f);
 f32 sqrtf(f32 f);
 f64 sqrt(f64 d);
+f32 cosine(s16 arg0);
 
 void nuBoot(void);
 void boot_idle(void);

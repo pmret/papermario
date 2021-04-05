@@ -5,7 +5,7 @@ void N(UnkNpcAIFunc11)(ScriptInstance* script, NpcAISettings* aiSettings, s32 ar
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    if (func_800490B4(arg2, enemy, aiSettings->chaseSpeed, aiSettings->unk_1C, 1) == 0) {
+    if (func_800490B4(arg2, enemy, aiSettings->chaseSpeed, aiSettings->unk_1C.f, 1) == 0) {
         s32* something;
 
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
