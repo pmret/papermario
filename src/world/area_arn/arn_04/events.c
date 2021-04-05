@@ -964,40 +964,37 @@ ApiStatus N(func_8024219C_BE594C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#ifdef NON_MATCHING
-s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings *aiSettings, EnemyTerritoryThing* territory) {
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM(D_8009A634);
+    Camera* camera = CAM2(D_8009A634);
     f32 phi_f20;
-    s32 phi_s0 = 0;
+    s32 ret = FALSE;
 
     if (func_800493EC(enemy, 0, aiSettings->alertRadius, aiSettings->unk_10.f)) {
-        phi_s0 = 1;
+        ret = TRUE;
     }
-    phi_f20 = 270.0f;
     if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
         phi_f20 = 90.0f;
+    } else {
+        phi_f20 = 270.0f;
     }
 
     playerStatus = &gPlayerStatusPtr;
     if (fabsf(get_clamped_angle_diff(phi_f20, 
             atan2(npc->pos.x, npc->pos.z, 
                   (*playerStatus)->position.x, (*playerStatus)->position.z))) > 75.0) {
-        phi_s0 = 0;
+        ret = FALSE;
     }
     if (fabsf(npc->pos.y - (*playerStatus)->position.y) >= 40.0f) {
-        phi_s0 = 0;
+        ret = FALSE;
     }
     if (D_8010EBB0.unk_03 == 9) {
-        phi_s0 = 0;
+        ret = FALSE;
     }
-    return phi_s0;
+    return ret;
 }
-#else
-INCLUDE_ASM(s32, "world/area_arn/arn_04/BE37B0", arn_04_func_80242388_BE5B38, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-#endif
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 

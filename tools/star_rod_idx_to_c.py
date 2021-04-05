@@ -173,10 +173,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     tmp_out += INDENT + f".{var_names[x]} = {var_f:.01f}f,\n"
                 if not var_i1 == 0:
                     # account for X32
-                    if var_names[x + 1] == "unk_10" or var_names[x + 1] == "unk_28":
-                        ftest = float(unpack_from(">f", npcAISettings, i+4)[0])
-                        if ftest >= -1000.0 and ftest <= 1000:
-                            tmp_out += INDENT + f".{var_names[x + 1]} = {{ .f = {ftest:.01f}f }},\n"
+                    if var_names[x + 1] in ["unk_10", "unk_1C", "unk_28"]:
+                        if var_i1 < -100000 or var_i1 > 100000:
+                            tmp_out += INDENT + f".{var_names[x + 1]} = {{ .f = {unpack_from('>f', npcAISettings, i+4)[0]:.01f}f }},\n"
                         else:
                             tmp_out += INDENT + f".{var_names[x + 1]} = {{ .s = {var_i1} }},\n"
                     else:
@@ -701,8 +700,10 @@ if __name__ == "__main__":
         if INCLUDES_NEEDED["npcs"]:
             print("========== NPCs needed: ===========\n")
             print(f"enum {{")
-            for k, v in sorted(INCLUDES_NEEDED["npcs"].items()):
-                print(f"    {v},")
+            lastnum = 0
+            for i, (k, v) in enumerate(sorted(INCLUDES_NEEDED["npcs"].items())):
+                print(f"    {v}" + (f" = {k}" if (k > 0 and i == 0) or (k != lastnum+1) else "") + ",")
+                lastnum = k
             print(f"}};")
             print()
 

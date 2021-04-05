@@ -914,7 +914,6 @@ ApiStatus N(func_8024142C_BFECAC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-// NEW NEW
 void N(func_80241618_BFEE98)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
