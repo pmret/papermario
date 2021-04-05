@@ -5,7 +5,8 @@ from lark import Lark, exceptions, Tree, Transformer, Visitor, v_args, Token
 from lark.visitors import Discard
 import traceback
 
-DEBUG_OUTPUT = None # "debug.i"
+DEBUG_OUTPUT = "debug.i" # None #
+
 
 
 def eprint(*args, **kwargs):
