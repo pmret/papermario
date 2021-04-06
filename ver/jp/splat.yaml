@@ -4,8 +4,7 @@ options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
-  ld_o_replace_extension: False
-  ld_addrs_header: build/include/ld_addrs.h
+  linker_symbol_header_path: build/include/ld_addrs.h
   extensions: ../../tools/splat_ext
   symbol_addrs_path: symbol_addrs.txt
   platform: n64
