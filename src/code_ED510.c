@@ -324,7 +324,7 @@ INCLUDE_ASM(s32, "code_ED510", ResetFromLava, ScriptInstance* script, s32 isInit
 
 INCLUDE_ASM(s32, "code_ED510", func_802C9FD4);
 
-ApiStatus GetColliderCenter(ScriptInstance* script, s32 initialCall) {
+ApiStatus GetColliderCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 x, y, z;
 
     get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);

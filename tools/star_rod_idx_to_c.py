@@ -74,7 +74,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
         name = struct["name"]
 
-        INCLUDED["functions"].add(name)
+        #INCLUDED["functions"].add(name)
 
         if comments:
             out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"

@@ -627,6 +627,21 @@ void N(func_80242A74_C49654)(ScriptInstance *script, NpcAISettings *aiSettings, 
 */
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242B78_C49758);
+/*
+void N(func_80242B78_C49758)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    do { enemy->varTable[0] |= 0x100; npc->pos.x = gPlayerStatusPtr->position.x; } while (0);
+    npc->pos.z = gPlayerStatusPtr->position.z;
+    if (!(enemy->varTable[0] & 0x1000)) {
+        enemy->varTable[0] |= 0x1000;
+    }
+    sfx_play_sound_at_position(0x80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
+    npc->duration = 0;
+    script->functionTemp[0].s = 15;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242C1C_C497FC);
 /*

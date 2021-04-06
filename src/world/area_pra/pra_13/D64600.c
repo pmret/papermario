@@ -72,7 +72,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241310_D658F0);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
 /*
-s) {
+ApiStatus N() {
     func_800EB168(get_variable(script, *script->ptrReadPos));
     return 2;
 }

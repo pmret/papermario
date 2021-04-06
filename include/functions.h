@@ -104,7 +104,7 @@ void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
 
 void func_80071090(s32, f32, f32, f32, s32);
-void func_80071750(s32, f32, f32, f32, f32, s32);
+Effect* func_80071750(s32, f32, f32, f32, f32, s32);
 void func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 
@@ -204,6 +204,7 @@ s32 rand_int(s32);
 void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
+void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
                      s32 pickupVar);
@@ -323,5 +324,9 @@ void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg
 ApiStatus func_80045900(ScriptInstance* script);
 ApiStatus func_802D6420(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D585C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall);
 
 #endif

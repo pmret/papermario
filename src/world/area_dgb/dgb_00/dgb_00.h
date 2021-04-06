@@ -3,8 +3,6 @@
 
 #define NAMESPACE dgb_00
 
-void func_802CF56C(void);
-
 ApiStatus N(func_80240060_BFA100)(ScriptInstance* script, s32 isInitialCall);
 NpcGroupList N(npcGroupList_802436EC);
 NpcGroupList N(npcGroupList_80243740);

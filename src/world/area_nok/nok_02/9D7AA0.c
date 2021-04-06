@@ -325,7 +325,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FB8_9D9FD8);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FE4_9DA004);
 /*
-s) {
+ApiStatus N() {
     func_800EB168(get_variable(script, *script->ptrReadPos));
     return 2;
 }

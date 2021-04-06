@@ -7942,12 +7942,12 @@ segments:
     start: 0xC36530
     vram: 0x80240000
     subsections:
-    - [0xC36530, c]
-    - [0xC39640, data]
-    - [0xC39740, data]
-    - [0xC39A90, data]
-    - [0xC3A910, rodata]
-    - [0xC3A978, rodata]
+    - [0xC36530,      .c, C36530]
+    - [0xC39640,   .data, C36530]
+    - [0xC39740,   .data, C36530]
+    - [0xC39A90,   .data, C36530]
+    - [0xC3A910, .rodata, C36530]
+    - [0xC3A978, .rodata, C36530]
   - name: world/area_dgb/dgb_05/
     type: code
     overlay: True
@@ -10544,6 +10544,7 @@ segments:
       - [0x19, 0x00C1, dgb_01_tattle]
       - [0x19, 0x00C2, dgb_02_tattle]
       - [0x19, 0x00C3, dgb_03_tattle]
+      - [0x19, 0x00C4, dgb_04_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]
