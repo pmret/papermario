@@ -8,7 +8,7 @@ INCLUDE_ASM(s32, "code_EB9D90", func_802410E4_EB9F34);
 
 INCLUDE_ASM(s32, "code_EB9D90", func_8024121C_EBA06C);
 /*
-A) {
+ApiStatus N(func_8024121C_EBA06C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
     s32 var0 = get_variable(script, a1);

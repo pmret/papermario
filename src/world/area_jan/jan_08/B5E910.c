@@ -12,9 +12,9 @@ ApiStatus N(func_8024067C_B5E92C)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E910", func_8024069C_B5E94C);
 /*
-ApiStatus N() {
+ApiStatus N(func_8024069C_B5E94C)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -59,9 +59,9 @@ INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E910", func_8024082C_B5EADC);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E910", func_80240A7C_B5ED2C);
 /*
-ApiStatus N() {
+ApiStatus N(func_80240A7C_B5ED2C)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

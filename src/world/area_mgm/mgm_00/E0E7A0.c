@@ -46,7 +46,7 @@ ApiStatus N(func_802402E0_E0EA80)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     script->functionTemp[0].s = 1;
-    return 1;
+    return ApiStatus_DONE1;
 }
 */
 
@@ -153,7 +153,7 @@ ApiStatus N(func_8024095C_E0F0FC)(ScriptInstance* script, s32 isInitialCall) {
         npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
     }
     script->functionTemp[0].s = 1;
-    return 1;
+    return ApiStatus_DONE1;
 }
 */
 

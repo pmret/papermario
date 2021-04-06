@@ -21,7 +21,7 @@ ApiStatus N(func_80240720_DCD3F0)(ScriptInstance* script, s32 isInitialCall) {
         heap_free(*ptr);
         *ptr = NULL;
     }
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

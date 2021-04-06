@@ -12,9 +12,9 @@ ApiStatus N(func_8024001C_988B7C)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024003C_988B9C);
 /*
-ApiStatus N() {
+ApiStatus N(func_8024003C_988B9C)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -59,9 +59,9 @@ INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_802401CC_988D2C);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024041C_988F7C);
 /*
-ApiStatus N() {
+ApiStatus N(func_8024041C_988F7C)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

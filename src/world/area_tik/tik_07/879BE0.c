@@ -24,9 +24,9 @@ ApiStatus N(func_802402FC_879EDC)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024031C_879EFC);
 /*
-ApiStatus N() {
+ApiStatus N(func_8024031C_879EFC)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -71,9 +71,9 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802404AC_87A08C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802406FC_87A2DC);
 /*
-ApiStatus N() {
+ApiStatus N(func_802406FC_87A2DC)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

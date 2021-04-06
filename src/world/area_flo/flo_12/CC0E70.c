@@ -24,7 +24,7 @@ ApiStatus N(func_8024027C_CC10AC)(ScriptInstance* script, s32 isInitialCall) {
         heap_free(*ptr);
         *ptr = NULL;
     }
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -50,10 +50,10 @@ ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
         set_variable(script, *args, D_80241CD0_BE0A60);
-        return 2;
+        return ApiStatus_DONE2;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 */
 
@@ -64,7 +64,7 @@ ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall) {
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

@@ -2,9 +2,9 @@
 
 INCLUDE_ASM(s32, "world/area_isk/isk_04/97BF60", func_80240930_97BF60);
 /*
-ApiStatus N() {
+ApiStatus N(func_80240930_97BF60)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

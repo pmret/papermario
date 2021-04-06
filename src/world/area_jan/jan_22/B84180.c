@@ -34,7 +34,7 @@ ApiStatus N(func_80240000_B84180)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     script->functionTemp[0].s = 1;
-    return 1;
+    return ApiStatus_DONE1;
 }
 */
 
@@ -141,7 +141,7 @@ ApiStatus N(func_8024067C_B847FC)(ScriptInstance* script, s32 isInitialCall) {
         npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
     }
     script->functionTemp[0].s = 1;
-    return 1;
+    return ApiStatus_DONE1;
 }
 */
 
@@ -221,7 +221,7 @@ ApiStatus N(func_80240E90_B85010)(ScriptInstance* script, s32 isInitialCall) {
         heap_free(*ptr);
         *ptr = NULL;
     }
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

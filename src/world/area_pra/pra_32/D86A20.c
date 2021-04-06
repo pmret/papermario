@@ -93,7 +93,7 @@ ApiStatus N(func_80240728_D87128)(ScriptInstance* script, s32 isInitialCall) {
     ptr->unk_54->unk_0C->unk_08 = ptr->unk_04;
     ptr->unk_54->unk_0C->unk_0C = ptr->unk_20;
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 */
 
