@@ -359,7 +359,7 @@ class N64SegPaperMarioMessages(N64Segment):
         self.files = segment.get("files", []) if type(segment) is dict else []
         self.ids = segment["ids"]
 
-    def split(self, rom_bytes, base_path):
+    def split(self, rom_bytes):
         data = rom_bytes[self.rom_start: self.rom_end]
 
         section_offsets = []
@@ -373,7 +373,7 @@ class N64SegPaperMarioMessages(N64Segment):
             section_offsets.append(offset)
             pos += 4
 
-        msg_dir = Path(base_path, options.get("assets_dir"), self.name)
+        msg_dir = options.get_asset_path() / self.name
         msg_dir.mkdir(parents=True, exist_ok=True)
 
         # delete existing files
@@ -433,8 +433,11 @@ class N64SegPaperMarioMessages(N64Segment):
             else:
                 f.unlink()
 
-    def get_ld_files(self):
-        return [(options.get("assets_dir"), self.name, ".data", self.rom_start)]
+    def get_linker_entries(self):
+        from segtypes.linker_entry import LinkerEntry
+
+        return [LinkerEntry(self, options.get_asset_path() / f"{self.name}", ".data")]
+
 
     @staticmethod
     def get_default_name(addr):

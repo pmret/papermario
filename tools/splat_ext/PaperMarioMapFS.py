@@ -31,9 +31,14 @@ class N64SegPaperMarioMapFS(N64Segment):
     def __init__(self, segment, next_segment):
         super().__init__(segment, next_segment)
 
-    def split(self, rom_bytes, base_path):
-        bin_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin"))
-        img_party_dir = self.create_split_dir(base_path, options.get("assets_dir", "img") + "/party")
+    def split(self, rom_bytes):
+        bin_dir = options.get_asset_path() / "bin"
+        img_party_dir = options.get_asset_path() / "party"
+        map_dir = options.get_asset_path() / "map"
+
+        bin_dir.mkdir(parents=True, exist_ok=True)
+        img_party_dir.mkdir(parents=True, exist_ok=True)
+        map_dir.mkdir(parents=True, exist_ok=True)
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -54,13 +59,10 @@ class N64SegPaperMarioMapFS(N64Segment):
             elif name.startswith("party_"):
                 path = os.path.join(img_party_dir, "{}.png".format(name))
             elif name.endswith("_hit") or name.endswith("_shape"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.bin".format(name))
             elif name.endswith("_tex"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.bin".format(name))
             elif name.endswith("_bg"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
                 path = os.path.join(map_dir, "{}.png".format(name))
             else:
                 path = os.path.join(bin_dir, "{}.bin".format(name))
@@ -68,10 +70,8 @@ class N64SegPaperMarioMapFS(N64Segment):
             if name == "end_data":
                 break
 
-            bytes = rom_bytes[self.rom_start + 0x20 +
-                                offset: self.rom_start + 0x20 + offset + size]
-
-            Path(path).parent.mkdir(parents=True, exist_ok=True)
+            bytes_start = self.rom_start + 0x20 + offset
+            bytes = rom_bytes[bytes_start : bytes_start + size]
 
             if is_compressed:
                 self.log(f"Decompressing {name}...")
@@ -111,10 +111,12 @@ class N64SegPaperMarioMapFS(N64Segment):
             asset_idx += 1
 
 
-    def get_ld_files(self):
-        return [(options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
+    def get_linker_entries(self):
+        from segtypes.linker_entry import LinkerEntry
+
+        return [LinkerEntry(self, options.get_asset_path() / f"{self.name}.bin", ".data")]
 
 
     @staticmethod
     def get_default_name(addr):
-        return "assets"
+        return "mapfs"

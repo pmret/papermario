@@ -4,15 +4,13 @@ options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
-  ld_o_replace_extension: False
-  ld_addrs_header: build/include/ld_addrs.h
-  extensions: ../../tools/splat_ext
+  extensions_path: ../../tools/splat_ext
   symbol_addrs_path: symbol_addrs.txt
   platform: n64
-  out_dir: .
+  base_dir: .
   target_path: baserom.z64
   src_path: ../../src
-  assets_dir: assets
+  assets_path: assets
   subalign: 8
 segments:
   - name: header
