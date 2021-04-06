@@ -453,7 +453,7 @@ segments:
     start: 0x10CC10
     vram: 0x802EB3D0
     subsections:
-    - [0x10CC10, bin]
+    - [0x10CC10, data]
   - [0x10F1B0, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
@@ -507,12 +507,14 @@ segments:
     vram: 0x80242BA0
     subsections:
     - [0x163400, c]
-    - [0x165490, c]
-    - [0x167570, c]
-    - [0x168590, c]
+    - [0x165490, c, code_165490]
+    - [0x167570, c, code_167570]
+    - [0x168590, c, code_168590]
     - [0x169BE0, c]
     - [0x16A3E0, data]
-    - [0x16C7D0, rodata]
+    - [0x16C7D0, .rodata, code_165490]
+    - [0x16C848, .rodata, code_167570]
+    - [0x16C8C0, .rodata, code_168590]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
@@ -538,8 +540,7 @@ segments:
     - [0x1AF230, c]
     - [0x1AF2D0, .data, code_16c8e0]
     - [0x1AF8A0, .data, code_190B20]
-    #- [0x1B21E0, bin] # begins with image
-    - [0x1B21E0, data, code_1AF2D0]
+    - [0x1B21E0, data, code_1AF2D0] # begins with image?
     - [0x1CB240, .rodata, code_16c8e0]
     - [0x1CB368, .rodata, code_16F740]
     - [0x1CB4E0, .rodata, code_1776B0]
@@ -1629,7 +1630,7 @@ segments:
     subsections:
     - [0x319670, c, world/partner/parakarry]
     - [0x31b000, data]
-    - [0x31B080, rodata]
+    - [0x31B080, .rodata, world/partner/parakarry]
   - type: code
     ld_name: world_partner_kooper
     start: 0x31b120
@@ -1638,7 +1639,7 @@ segments:
     subsections:
     - [0x31b120, c, world/partner/kooper]
     - [0x31cb60, data]
-    - [0x31CBE0, rodata]
+    - [0x31CBE0, .rodata, world/partner/kooper]
   - type: code
     ld_name: world_partner_watt
     start: 0x31cc70
@@ -1655,7 +1656,7 @@ segments:
     subsections:
     - [0x31de70, c, world/partner/sushie]
     - [0x320b20, data]
-    - [0x320BC0, rodata]
+    - [0x320BC0, .rodata, world/partner/sushie]
   - type: code
     ld_name: world_partner_lakilester
     start: 0x320c50
@@ -1672,7 +1673,7 @@ segments:
     subsections:
     - [0x323A50, c, world/partner/bow]
     - [0x324930, data]
-    - [0x3249B0, rodata]
+    - [0x3249B0, .rodata, world/partner/bow]
   - type: code
     ld_name: world_partner_goompa
     start: 0x324a10
@@ -1681,7 +1682,7 @@ segments:
     subsections:
     - [0x324a10, c, world/partner/goompa]
     - [0x324e80, .data, world/partner/goompa]
-    - [0x324F00, rodata, world/partner/goompa] # rodata with single f64 0.8
+    - [0x324F00, .rodata, world/partner/goompa]
   - type: code
     ld_name: world_partner_goombaria
     start: 0x324f10
@@ -2539,8 +2540,8 @@ segments:
     vram: 0x802A9000
     overlay: True
     subsections:
-    - [0x4219F0, c]
-    - [0x421FC0, rodata]
+    - [0x4219F0, c, code_4219F0]
+    - [0x421FC0, .rodata, code_4219F0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -7892,7 +7893,11 @@ segments:
     - [0xC047F0, data]
     - [0xC20C70, rodata]
     - [0xC20CF8, rodata]
-  - [0xC20F40, bin]
+  - type: code
+    start: 0xC20F40
+    vram: 0x80200000
+    subsections:
+    - [0xC20F40, bin] # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
   - name: world/area_dgb/dgb_02/
     type: code
     overlay: True
