@@ -136,6 +136,8 @@ def get_constants():
                     i += 1
                     last_num = val
 
+    print(CONSTANTS["ItemIDs"])
+    #exit()
     # sprites
     sprite_path = Path(Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc")
     for file in sprite_path.iterdir():
@@ -257,8 +259,12 @@ def fix_args(self, func, args, info):
             else:
                 if not (info[i] == "NpcIDs" and argNum > 0):
                     print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
-                #Print the unknowns in hex
-                new_args.append(f"0x{int(argNum):X}")
+                
+                if (info[i] == "ItemIDs" and argNum < 0):
+                    new_args.append(f"{int(argNum)}")
+                else:
+                    #Print the unknowns in hex
+                    new_args.append(f"0x{int(argNum):X}")
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
