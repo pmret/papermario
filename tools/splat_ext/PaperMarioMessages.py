@@ -1,3 +1,4 @@
+import shutil
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
 from util import options
@@ -377,7 +378,7 @@ class N64SegPaperMarioMessages(N64Segment):
         msg_dir.mkdir(parents=True, exist_ok=True)
 
         # delete existing files
-        self.delete_dir_childs(msg_dir)
+        shutil.rmtree(msg_dir)
 
         for i, section_offset in enumerate(section_offsets):
             name = f"{i:02X}"
@@ -424,14 +425,6 @@ class N64SegPaperMarioMessages(N64Segment):
                     self.write_message_markup(data[msg_offset:])
                     self.f.write("\n}\n")
 
-    @staticmethod
-    def delete_dir_childs(path):
-        for f in path.iterdir():
-            if f.is_dir():
-                N64SegPaperMarioMessages.delete_dir_childs(f)
-                f.rmdir()
-            else:
-                f.unlink()
 
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
