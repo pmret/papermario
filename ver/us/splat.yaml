@@ -7967,11 +7967,11 @@ segments:
     start: 0xC3D080
     vram: 0x80240000
     subsections:
-    - [0xC3D080, c]
-    - [0xC3D340, data]
-    - [0xC3D440, data]
-    - [0xC3D8C0, data]
-    - [0xC3DBE0, rodata]
+    - [0xC3D080,      .c, C3D080]
+    - [0xC3D340,   .data, C3D080]
+    - [0xC3D440,   .data, C3D080]
+    - [0xC3D8C0,   .data, C3D080]
+    - [0xC3DBE0, .rodata, C3D080]
   - name: world/area_dgb/dgb_07/
     type: code
     overlay: True
@@ -10546,6 +10546,7 @@ segments:
       - [0x19, 0x00C3, dgb_03_tattle]
       - [0x19, 0x00C4, dgb_04_tattle]
       - [0x19, 0x00C5, dgb_05_tattle]
+      - [0x19, 0x00C6, dgb_06_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]

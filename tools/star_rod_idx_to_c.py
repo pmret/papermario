@@ -686,6 +686,7 @@ if __name__ == "__main__":
         if INCLUDES_NEEDED["sprites"]:
             print("========== Includes needed: ===========\n")
             print(f"#include \"map.h\"")
+            print(f"#include \"message_ids.h\"")
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
                 print(f"#include \"sprite/npc/{npc}.h\"")
             print()

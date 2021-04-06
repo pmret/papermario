@@ -43,7 +43,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_80241008_A3A4E8);
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802410A4_A3A584);
 /*
 ApiStatus N(func_802410A4_A3A584)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &D_80241C68_BE09F8;
+    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
     s32* test;
 
@@ -57,7 +57,7 @@ ApiStatus N(func_802410A4_A3A584)(ScriptInstance* script, s32 isInitialCall) {
         for (i = 0, test = *ptr; i < 16; i++) {
             script->varTable[i] = *test++;
         }
-        ptr = &D_80241C68_BE09F8;
+        ptr = &N(D_80241C68_BE09F8);
         heap_free(*ptr);
         *ptr = NULL;
     }

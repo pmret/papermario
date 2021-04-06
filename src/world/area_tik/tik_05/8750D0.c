@@ -5,7 +5,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240310_8750D0);
 INCLUDE_ASM(s32, "world/area_tik/tik_05/8750D0", func_80240680_875440);
 /*
 ApiStatus N(func_80240680_875440)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &D_80241C68_BE09F8;
+    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
     s32* test;
 
@@ -19,7 +19,7 @@ ApiStatus N(func_80240680_875440)(ScriptInstance* script, s32 isInitialCall) {
         for (i = 0, test = *ptr; i < 16; i++) {
             script->varTable[i] = *test++;
         }
-        ptr = &D_80241C68_BE09F8;
+        ptr = &N(D_80241C68_BE09F8);
         heap_free(*ptr);
         *ptr = NULL;
     }

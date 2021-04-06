@@ -334,7 +334,6 @@ NpcGroupList N(npcGroupList_8024230C) = {
     {},
 };
 
-// NEW
 ApiStatus N(func_80240000_C3AA10)(ScriptInstance *script, s32 isInitialCall) {
     if (gPlayerStatus.position.y >= -210.0f) {
         return ApiStatus_BLOCK;
@@ -342,7 +341,6 @@ ApiStatus N(func_80240000_C3AA10)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// NEW
 ApiStatus N(func_80240030_C3AA40)(ScriptInstance *script, s32 isInitialCall) {
     if (gPlayerStatus.position.y > -270.0f) {
         return ApiStatus_BLOCK;
