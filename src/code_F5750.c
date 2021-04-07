@@ -173,16 +173,16 @@ INCLUDE_ASM(s32, "code_F5750", func_802D1380);
 
 INCLUDE_ASM(s32, "code_F5750", player_jump);
 
-void PlayerJump(ScriptInstance* script, s32 isInitialCall) {
-    player_jump(script, isInitialCall, 0);
+ApiStatus PlayerJump(ScriptInstance* script, s32 isInitialCall) {
+    return player_jump(script, isInitialCall, 0);
 }
 
-void PlayerJump1(ScriptInstance* script, s32 isInitialCall) {
-    player_jump(script, isInitialCall, 1);
+ApiStatus PlayerJump1(ScriptInstance* script, s32 isInitialCall) {
+    return player_jump(script, isInitialCall, 1);
 }
 
-void PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
-    player_jump(script, isInitialCall, 2);
+ApiStatus PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
+    return player_jump(script, isInitialCall, 2);
 }
 
 ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
@@ -309,14 +309,14 @@ ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", UseEntryHeading);
+INCLUDE_ASM(ApiStatus, "code_F5750", UseEntryHeading, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
     gPlayerStatus.flags &= ~0x4000000;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", UseExitHeading);
+INCLUDE_ASM(ApiStatus, "code_F5750", UseExitHeading, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D23F8);
 
@@ -536,25 +536,25 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "code_F5750", func_802D3624);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D3624, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D3674);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D36E0);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D36E0, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D378C);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D3840);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D3840, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D38EC);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D38EC, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D3998);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D39FC);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D39FC, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D3A60);
 
-INCLUDE_ASM(s32, "code_F5750", func_802D3C58);
+INCLUDE_ASM(ApiStatus, "code_F5750", func_802D3C58, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_F5750", func_802D3EB8);
 

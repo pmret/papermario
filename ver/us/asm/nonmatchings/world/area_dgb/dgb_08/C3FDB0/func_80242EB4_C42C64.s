@@ -24,6 +24,7 @@ glabel func_80242EB4_C42C64
 /* C42CAC 80242EFC 30420100 */  andi      $v0, $v0, 0x100
 /* C42CB0 80242F00 1440001D */  bnez      $v0, .L80242F78
 /* C42CB4 80242F04 26100001 */   addiu    $s0, $s0, 1
+nop
 .L80242F08:
 /* C42CB8 80242F08 2A020009 */  slti      $v0, $s0, 9
 /* C42CBC 80242F0C 1440FFF5 */  bnez      $v0, .L80242EE4

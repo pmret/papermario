@@ -531,8 +531,6 @@ ApiStatus N(update_starpoints_display_C2EF5C)(ScriptInstance *script, s32 isInit
     return ApiStatus_BLOCK;
 }
 
-void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
-
 ApiStatus N(func_8024061C_C2F1BC)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);

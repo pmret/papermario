@@ -30,12 +30,12 @@ ApiStatus CheckActionState(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/script_api/7E3700", func_80283240);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", CreatePushBlockGrid);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E3700", CreatePushBlockGrid, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", SetPushBlock);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E3700", SetPushBlock, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", GetPushBlock);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E3700", GetPushBlock, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", GetGridIndexFromPos);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E3700", GetGridIndexFromPos, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/script_api/7E3700", SetPushBlockFallEffect);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E3700", SetPushBlockFallEffect, ScriptInstance* script, s32 isInitialCall);

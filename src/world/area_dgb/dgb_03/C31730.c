@@ -856,8 +856,6 @@ ApiStatus N(func_8024060C_C31AEC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-
 ApiStatus N(func_8024086C_C31D4C)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);

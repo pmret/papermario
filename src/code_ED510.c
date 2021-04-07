@@ -353,7 +353,7 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "code_ED510", set_zone_enabled);
 
-INCLUDE_ASM(s32, "code_ED510", SetZoneEnabled);
+INCLUDE_ASM(ApiStatus, "code_ED510", SetZoneEnabled, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "code_ED510", goto_map);
 

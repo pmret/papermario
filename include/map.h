@@ -8,7 +8,7 @@
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
-
+typedef s32 MessageID;
 typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.

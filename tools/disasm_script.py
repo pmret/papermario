@@ -136,7 +136,6 @@ def get_constants():
                     i += 1
                     last_num = val
 
-    print(CONSTANTS["ItemIDs"])
     #exit()
     # sprites
     sprite_path = Path(Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc")
