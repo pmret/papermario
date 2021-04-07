@@ -1022,6 +1022,7 @@ enum PlayerAnims {
     ANIM_8000B                  = 0x8000B,
     ANIM_80017                  = 0x80017,
     ANIM_8001B                  = 0x8001B,
+    ANIM_8001D                  = 0x8001D,
 };
 
 typedef UNK_TYPE AmbientSound;
