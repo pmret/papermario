@@ -8017,12 +8017,12 @@ segments:
     start: 0xC4C390
     vram: 0x80240000
     subsections:
-    - [0xC4C390, c]
-    - [0xC4C580, data]
-    - [0xC4C680, data]
-    - [0xC4CA00, data]
-    - [0xC4D270, data]
-    - [0xC4D3D0, rodata]
+    - [0xC4C390,      .c, C4C390]
+    - [0xC4C580,   .data, C4C390]
+    - [0xC4C680,   .data, C4C390]
+    - [0xC4CA00,   .data, C4C390]
+    - [0xC4D270,   .data, C4C390]
+    - [0xC4D3D0, .rodata, C4C390]
   - name: world/area_dgb/dgb_11/
     type: code
     overlay: True
@@ -10550,6 +10550,7 @@ segments:
       - [0x19, 0x00C7, dgb_07_tattle]
       - [0x19, 0x00C8, dgb_08_tattle]
       - [0x19, 0x00C9, dgb_09_tattle]
+      - [0x19, 0x00CA, dgb_10_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]

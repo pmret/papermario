@@ -683,13 +683,13 @@ if __name__ == "__main__":
 
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
         
+        print("========== Includes needed: ===========\n")
+        print(f"#include \"map.h\"")
+        print(f"#include \"message_ids.h\"")
         if INCLUDES_NEEDED["sprites"]:
-            print("========== Includes needed: ===========\n")
-            print(f"#include \"map.h\"")
-            print(f"#include \"message_ids.h\"")
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
                 print(f"#include \"sprite/npc/{npc}.h\"")
-            print()
+        print()
             
         if INCLUDES_NEEDED["forward"]:
             print()

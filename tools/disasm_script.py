@@ -686,8 +686,8 @@ class ScriptDisassembler:
             args = ["ScriptOpcode_BUFFER_PEEK_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x3C: self.write_line(f"SI_CMD(ScriptOpcode_USE_ARRAY, {self.var(argv[0])}),")
-        elif opcode == 0x3D: self.write_line(f"SI_CMD(ScriptOpcode_NEW_ARRAY, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x3E: self.write_line(f"SI_CMD(ScriptOpcode_USE_FLAGS, {self.var(argv[0])}),")
+        elif opcode == 0x3D: self.write_line(f"SI_CMD(ScriptOpcode_USE_FLAGS, {self.var(argv[0])}),")
+        elif opcode == 0x3E: self.write_line(f"SI_CMD(ScriptOpcode_NEW_ARRAY, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x3F: self.write_line(f"SI_CMD(ScriptOpcode_AND, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x40: self.write_line(f"SI_CMD(ScriptOpcode_OR, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x41: self.write_line(f"SI_CMD(ScriptOpcode_AND_CONST, {self.var(argv[0])}, 0x{argv[1]:X})")
