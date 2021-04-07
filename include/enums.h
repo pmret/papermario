@@ -540,6 +540,7 @@ enum SoundIDs {
     SOUND_SMOKE_BURST               = 717,
     SOUND_DAYZEE_SONG               = 727,
     SOUND_POWER_UP,
+    SOUND_UNKNOWN_2F1               = 753,
     SOUND_UNKNOWN_2F7               = 759,
     SOUND_CLOSE_SHELL               = 767,
     SOUND_SHY_GUY_SCREAMS1          = 780,
@@ -585,6 +586,8 @@ enum SoundIDs {
     SOUND_UNKNOWN_202E,
     SOUND_UNKNOWN_202F,
     SOUND_UNKNOWN_2030,
+    SOUND_UNKNOWN_2038              = 8248,
+    SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
     SOUND_JUMP_2081                 = 8321,
     SOUND_UNKNOWN_208D              = 8333,
@@ -1020,9 +1023,11 @@ enum PlayerAnims {
     ANIM_80003                  = 0x80003,
     ANIM_80007                  = 0x80007,
     ANIM_8000B                  = 0x8000B,
+    ANIM_8000C,
     ANIM_80017                  = 0x80017,
     ANIM_8001B                  = 0x8001B,
     ANIM_8001D                  = 0x8001D,
+    ANIM_8001E,
 };
 
 typedef UNK_TYPE AmbientSound;

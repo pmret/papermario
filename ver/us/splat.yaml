@@ -8107,14 +8107,14 @@ segments:
     start: 0xC55F40
     vram: 0x80240000
     subsections:
-    - [0xC55F40, c]
-    - [0xC56EF0, c]
-    - [0xC571B0, data]
-    - [0xC572A0, data]
-    - [0xC574C0, data]
-    - [0xC59620, data]
-    - [0xC59810, rodata]
-    - [0xC59820, rodata]
+    - [0xC55F40,      .c, C55F40]
+    - [0xC56EF0,      .c, C56EF0]
+    - [0xC571B0,   .data, C55F40]
+    - [0xC572A0,   .data, C55F40]
+    - [0xC574C0,   .data, C55F40]
+    - [0xC59620,   .data, C55F40]
+    - [0xC59810, .rodata, C55F40]
+    - [0xC59820, .rodata, C55F40]
   - name: world/area_kzn/kzn_01/
     type: code
     overlay: True
@@ -10558,6 +10558,7 @@ segments:
       - [0x19, 0x00CF, dgb_15_tattle]
       - [0x19, 0x00D0, dgb_16_tattle]
       - [0x19, 0x00D1, dgb_17_tattle]
+      - [0x19, 0x00D2, dgb_18_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]

@@ -120,6 +120,6 @@ INCLUDE_ASM(s32, "code_FBE10", func_802D7E08);
 
 INCLUDE_ASM(ApiStatus, "code_FBE10", ShowSleepBubble, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_FBE10", func_802D8248);
+INCLUDE_ASM(ApiStatus, "code_FBE10", func_802D8248, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(ApiStatus, "code_FBE10", PlayEffect, ScriptInstance* script, s32 isInitialCall);
