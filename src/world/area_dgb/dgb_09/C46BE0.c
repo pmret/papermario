@@ -1,4 +1,602 @@
 #include "dgb_09.h"
+#include "message_ids.h"
+#include "sprite/npc/sentinel.h"
+#include "sprite/npc/world_clubba.h"
+
+extern s16 D_8009A634;
+extern Npc* wPartnerNpc;
+
+enum {
+    NPC_WORLD_CLUBBA0,
+    NPC_WORLD_CLUBBA1,
+    NPC_WORLD_CLUBBA2,
+    NPC_WORLD_CLUBBA3,
+    NPC_SENTINEL,
+};
+
+EntryList N(entryList) = {
+    { -567.0f, 0.0f, 180.0f, 90.0f },
+    { 567.0f, 0.0f, 180.0f, 270.0f },
+    { -450.0f, 0.0f, 90.0f, 180.0f },
+    { 300.0f, 0.0f, 90.0f, 180.0f },
+};
+
+MapConfig N(config) = {
+    .main = N(main),
+    .entryList = N(entryList),
+    .entryCount = ENTRY_COUNT(N(entryList)),
+    .tattle = MSG_dgb_09_tattle,
+};
+
+Script N(80243880) = SCRIPT({
+    match STORY_PROGRESS {
+        < STORY_CH3_TUBBA_WOKE_UP {
+            SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
+        }
+        < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
+            SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
+        }
+        else {
+            SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
+        }
+    }
+});
+
+static s32 N(pad_3918)[] = {
+    0x00000000, 0x00000000,
+};
+
+Script N(exitDoubleDoor_80243920) = SCRIPT({
+    group 27;
+    DisablePlayerInput(TRUE);
+    UseDoorSounds(3);
+    SI_VAR(0) = 0;
+    SI_VAR(1) = 5;
+    SI_VAR(2) = 10;
+    SI_VAR(3) = 12;
+    spawn ExitDoubleDoor;
+    sleep 17;
+    GotoMap("dgb_03", 4);
+    sleep 100;
+});
+
+Script N(exitDoubleDoor_802439D4) = SCRIPT({
+    group 27;
+    DisablePlayerInput(TRUE);
+    UseDoorSounds(3);
+    SI_VAR(0) = 1;
+    SI_VAR(1) = 17;
+    SI_VAR(2) = 17;
+    SI_VAR(3) = 15;
+    spawn ExitDoubleDoor;
+    sleep 17;
+    GotoMap("dgb_01", 3);
+    sleep 100;
+});
+
+Script N(exitSingleDoor_80243A88) = SCRIPT({
+    group 27;
+    DisablePlayerInput(TRUE);
+    UseDoorSounds(0);
+    SI_VAR(0) = 2;
+    SI_VAR(1) = 9;
+    SI_VAR(2) = 20;
+    SI_VAR(3) = 1;
+    spawn ExitSingleDoor;
+    sleep 17;
+    GotoMap("dgb_12", 0);
+    sleep 100;
+});
+
+Script N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
+
+Script N(80243B98) = SCRIPT({
+    bind N(exitWalk_80243B3C) to TRIGGER_FLOOR_ABOVE 11;
+});
+
+Script N(enterWalk_80243BC4) = SCRIPT({
+    GetEntryID(SI_VAR(0));
+    match SI_VAR(0) {
+        == 0 {
+            UseDoorSounds(3);
+            SI_VAR(2) = 10;
+            SI_VAR(3) = 12;
+            await EnterDoubleDoor;
+            spawn N(80243B98);
+        }
+        == 1 {
+            UseDoorSounds(3);
+            SI_VAR(2) = 17;
+            SI_VAR(3) = 15;
+            await EnterDoubleDoor;
+            spawn N(80243B98);
+        }
+        == 2 {
+            UseDoorSounds(0);
+            SI_VAR(2) = 20;
+            SI_VAR(3) = 1;
+            await EnterSingleDoor;
+            spawn N(80243B98);
+        }
+        == 3 {
+            SI_VAR(0) = N(80243B98);
+            spawn EnterWalk;
+            sleep 1;
+        }
+    }
+});
+
+Script N(main) = SCRIPT({
+    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamEnabled(0, 1);
+    if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+        MakeNpcs(1, N(npcGroupList_8024533C));
+    }
+    spawn N(80243F6C);
+    bind N(exitDoubleDoor_80243920) to TRIGGER_WALL_PRESS_A 5;
+    bind N(exitDoubleDoor_802439D4) to TRIGGER_WALL_PRESS_A 17;
+    bind N(exitSingleDoor_80243A88) to TRIGGER_WALL_PRESS_A 9;
+    spawn N(80243880);
+    spawn N(enterWalk_80243BC4);
+});
+
+static s32 N(pad_3E4C) = {
+    0x00000000,
+};
+
+s32 N(triggerCoord_80243E50)[] = {
+    0x43960000, 0x00000000, 0x42B00000, 0x00000000,
+};
+
+Script N(80243E60) = SCRIPT({
+    sleep 2;
+    PlayEffect(0x42, 1, 25, 3, 1, 10, 30, 0, 0, 0, 0, 0, 0, 0);
+    loop 10 {
+        EnableModel(29, 0);
+        EnableModel(25, 1);
+        sleep 1;
+        EnableModel(29, 1);
+        EnableModel(25, 0);
+        sleep 1;
+    }
+    ModifyColliderFlags(0, 13, 0x7FFFFE00);
+    SI_SAVE_FLAG(1051) = 1;
+    unbind;
+});
+
+Script N(80243F6C) = SCRIPT({
+    if (SI_SAVE_FLAG(1051) == 0) {
+        bind N(80243E60) to TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
+        EnableModel(29, 0);
+    } else {
+        EnableModel(25, 0);
+        ModifyColliderFlags(0, 13, 0x7FFFFE00);
+    }
+});
+
+static s32 N(pad_3FF8)[] = {
+    0x00000000, 0x00000000,
+};
+
+Script N(80244000) = SCRIPT({
+    GetBattleOutcome(SI_VAR(0));
+    match SI_VAR(0) {
+        == 0 {
+            RemoveNpc(NPC_SELF);
+        }
+        == 2 {
+            SetNpcPos(NPC_SELF, 0, -1000, 0);
+            func_80045900(1);
+        }
+        == 3 {
+            SetEnemyFlagBits(-1, 16, 1);
+            RemoveNpc(NPC_SELF);
+        }
+    }
+});
+
+NpcAnimID N(extraAnimationList_802440BC)[] = {
+    NPC_ANIM(world_clubba, Palette_00, Anim_0),
+    NPC_ANIM(world_clubba, Palette_00, Anim_2),
+    NPC_ANIM(world_clubba, Palette_00, Anim_3),
+    NPC_ANIM(world_clubba, Palette_00, Anim_4),
+    NPC_ANIM(world_clubba, Palette_00, Anim_C),
+    NPC_ANIM(world_clubba, Palette_00, Anim_7),
+    NPC_ANIM(world_clubba, Palette_00, Anim_8),
+    NPC_ANIM(world_clubba, Palette_00, Anim_11),
+    NPC_ANIM(world_clubba, Palette_00, Anim_12),
+    ANIM_END,
+};
+
+NpcAnimID N(extraAnimationList_802440E4)[] = {
+    NPC_ANIM(world_clubba, Palette_00, Anim_0),
+    ANIM_END,
+};
+
+NpcAISettings N(npcAISettings_802440EC) = {
+    .moveSpeed = 1.5f,
+    .moveTime = 120,
+    .waitTime = 30,
+    .alertRadius = 85.0f,
+    .unk_10 = { .f = 65.0f },
+    .unk_14 = 5,
+    .chaseSpeed = 3.5f,
+    .unk_1C = { .s = 90 },
+    .unk_20 = 12,
+    .chaseRadius = 110.0f,
+    .unk_28 = { .f = 90.0f },
+    .unk_2C = 3,
+};
+
+Script N(npcAI_8024411C) = SCRIPT({
+    SetSelfVar(0, 0);
+    SetSelfVar(1, 5);
+    SetSelfVar(2, 8);
+    SetSelfVar(3, 12);
+    N(func_8024061C_C471FC)(N(npcAISettings_802440EC));
+});
+
+NpcSettings N(npcSettings_8024418C) = {
+    .height = 36,
+    .radius = 34,
+    .ai = &N(npcAI_8024411C),
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
+    .level = 13,
+};
+
+NpcAISettings N(npcAISettings_802441B8) = {
+    .moveSpeed = 1.0f,
+    .moveTime = 120,
+    .waitTime = 30,
+    .alertRadius = 100.0f,
+    .unk_10 = { .f = 40.0f },
+    .unk_14 = 10,
+    .chaseSpeed = 3.5f,
+    .unk_1C = { .s = 90 },
+    .unk_20 = 15,
+    .chaseRadius = 200.0f,
+    .unk_28 = { .f = 160.0f },
+    .unk_2C = 1,
+};
+
+Script N(npcAI_802441E8) = SCRIPT({
+    SetSelfVar(0, 0);
+    SetSelfVar(1, 10);
+    SetSelfVar(2, 14);
+    SetSelfVar(3, 18);
+    N(func_802410D4_C47CB4)(N(npcAISettings_802441B8));
+});
+
+NpcSettings N(npcSettings_80244258) = {
+    .height = 36,
+    .radius = 34,
+    .ai = &N(npcAI_802441E8),
+    .onHit = EnemyNpcHit,
+    .onDefeat = EnemyNpcDefeat,
+    .level = 13,
+};
+
+Script N(npcAI_80244284) = SCRIPT({
+    EnableNpcShadow(NPC_SELF, FALSE);
+    SetSelfVar(0, 4);
+    SetSelfVar(1, 32);
+    SetSelfVar(2, 50);
+    SetSelfVar(3, 32);
+    SetSelfVar(4, 3);
+    SetSelfVar(15, 8389);
+    N(update_starpoints_display_C46F9C)();
+});
+
+NpcSettings N(npcSettings_8024432C) = {
+    .height = 14,
+    .radius = 18,
+    .ai = &N(npcAI_80244284),
+    .onDefeat = &N(80244000),
+    .level = 13,
+    .unk_2A = 8,
+};
+
+f32 N(D_80244358_C4AF38)[] = {
+     4.5f, 3.5f, 2.6f, 2.0f,
+     1.5f, 20.0f,
+};
+
+Script N(80244370) = SCRIPT({
+    SetSelfEnemyFlagBits(((0x00100000 | 0x01000000 | 0x02000000 | 0x04000000 | 0x08000000 | 0x10000000 | 0x20000000)), TRUE);
+    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT)), TRUE);
+});
+
+NpcAISettings N(npcAISettings_802443AC) = {
+    .moveSpeed = 1.5f,
+    .moveTime = 90,
+    .waitTime = 30,
+    .alertRadius = 240.0f,
+    .unk_14 = 1,
+    .chaseSpeed = 5.3f,
+    .unk_1C = { .s = 180 },
+    .unk_20 = 1,
+    .chaseRadius = 240.0f,
+    .unk_2C = 1,
+};
+
+const char N(dgb_00_name_hack)[];
+
+Script N(npcAI_802443DC) = SCRIPT({
+    SetSelfVar(0, 0);
+    SetSelfVar(5, -650);
+    SetSelfVar(6, 30);
+    SetSelfVar(1, 600);
+    N(func_80243578_C4A158)(N(npcAISettings_802443AC));
+    DisablePlayerInput(TRUE);
+    sleep 2;
+20:
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_SELF, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    SetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(4), SI_VAR(2));
+    GetPlayerActionState(SI_VAR(0));
+    if (SI_VAR(0) != 0) {
+        sleep 1;
+        goto 20;
+    }
+    DisablePlayerPhysics(TRUE);
+    func_802D2B6C();
+    DisablePartnerAI(0);
+    group 0;
+    func_802D5830(1);
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SI_VAR(1) += 20;
+    SI_VAR(2) += 2;
+    SetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    func_80045838(-1, 759, 0);
+    SetNpcAnimation(NPC_SELF, NPC_ANIM(sentinel, Palette_00, Anim_8));
+    sleep 10;
+    SetPlayerAnimation(ANIM_80017);
+    sleep 10;
+    func_80045838(-1, 1838, 0);
+    spawn {
+        loop 100 {
+            GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            SI_VAR(1) += 1;
+            SetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            SI_VAR(1) += 1;
+            SetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            sleep 1;
+        }
+    }
+    spawn {
+        SetNpcAnimation(NPC_PARTNER, 0x108);
+        GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcJump0(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcJump0(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcJump0(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcJump0(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+    }
+    sleep 30;
+    GotoMap(N(dgb_00_name_hack), 2);
+    sleep 100;
+});
+
+Script N(80244804) = SCRIPT({
+    GetOwnerEncounterTrigger(SI_VAR(0));
+    match SI_VAR(0) {
+        == 1, 2, 4, 6 {
+            GetSelfAnimationFromTable(7, SI_VAR(0));
+            await 0x800936DC;
+        }
+    }
+});
+
+Script N(80244890) = SCRIPT({
+    GetBattleOutcome(SI_VAR(0));
+    match SI_VAR(0) {
+        == 0 {
+            DoNpcDefeat();
+        }
+        == 1 {}
+        == 2 {
+        }
+    }
+});
+
+NpcSettings N(npcSettings_802448F4) = {
+    .height = 38,
+    .radius = 32,
+    .otherAI = &N(80244370),
+    .ai = &N(npcAI_802443DC),
+    .level = 99,
+};
+
+StaticNpc N(npcGroup_80244920)[] = {
+    {
+        .id = NPC_WORLD_CLUBBA0,
+        .settings = &N(npcSettings_8024418C),
+        .pos = { -350.0f, 0.0f, 180.0f },
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .itemDropChance = 5,
+        .itemDrops = {
+                { ITEM_SUPER_SHROOM, 10, 0 },
+        },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 2,
+        .maxCoinBonus = 3,
+        .movement = { -350, 0, 180, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 },
+        .animations = {
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_3),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_11),
+            NPC_ANIM(world_clubba, Palette_00, Anim_12),
+            NPC_ANIM(world_clubba, Palette_00, Anim_7),
+            NPC_ANIM(world_clubba, Palette_00, Anim_8),
+            NPC_ANIM(world_clubba, Palette_00, Anim_1),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+        },
+        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .extraAnimations = &N(extraAnimationList_802440BC),
+    },
+    {
+        .id = NPC_WORLD_CLUBBA1,
+        .settings = &N(npcSettings_8024432C),
+        .pos = { 0.0f, -1000.0f, 0.0f },
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .yaw = 0,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_3),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_11),
+            NPC_ANIM(world_clubba, Palette_00, Anim_12),
+            NPC_ANIM(world_clubba, Palette_00, Anim_7),
+            NPC_ANIM(world_clubba, Palette_00, Anim_8),
+            NPC_ANIM(world_clubba, Palette_00, Anim_1),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+        },
+        .extraAnimations = &N(extraAnimationList_802440E4),
+    },
+};
+
+Script N(init_80244D00) = SCRIPT({
+    GetEntryID(SI_VAR(0));
+    if (SI_VAR(0) == 3) {
+        SetNpcPos(NPC_SELF, 240, 0, 88);
+        InterpNpcYaw(NPC_SELF, 270, 0);
+    }
+});
+
+StaticNpc N(npcGroup_80244D6C)[] = {
+    {
+        .id = NPC_WORLD_CLUBBA2,
+        .settings = &N(npcSettings_80244258),
+        .pos = { 310.0f, 0.0f, 88.0f },
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .init = &N(init_80244D00),
+        .yaw = 270,
+        .dropFlags = 0x80,
+        .itemDropChance = 5,
+        .itemDrops = {
+                { ITEM_SUPER_SHROOM, 10, 0 },
+        },
+        .heartDrops = STANDARD_HEART_DROPS(3),
+        .flowerDrops = STANDARD_FLOWER_DROPS(2),
+        .minCoinBonus = 2,
+        .maxCoinBonus = 3,
+        .movement = { 310, 0, 88, 40, 0, -32767, 0, 0, 0, 50, 600, 250, 1, 1 },
+        .animations = {
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_3),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_11),
+            NPC_ANIM(world_clubba, Palette_00, Anim_12),
+            NPC_ANIM(world_clubba, Palette_00, Anim_7),
+            NPC_ANIM(world_clubba, Palette_00, Anim_8),
+            NPC_ANIM(world_clubba, Palette_00, Anim_1),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+        },
+        .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
+        .extraAnimations = &N(extraAnimationList_802440BC),
+    },
+    {
+        .id = NPC_WORLD_CLUBBA3,
+        .settings = &N(npcSettings_8024432C),
+        .pos = { 0.0f, -1000.0f, 0.0f },
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .yaw = 0,
+        .dropFlags = 0x80,
+        .heartDrops = NO_DROPS,
+        .flowerDrops = NO_DROPS,
+        .animations = {
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_3),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_4),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_C),
+            NPC_ANIM(world_clubba, Palette_00, Anim_11),
+            NPC_ANIM(world_clubba, Palette_00, Anim_12),
+            NPC_ANIM(world_clubba, Palette_00, Anim_7),
+            NPC_ANIM(world_clubba, Palette_00, Anim_8),
+            NPC_ANIM(world_clubba, Palette_00, Anim_1),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+        },
+        .extraAnimations = &N(extraAnimationList_802440E4),
+    },
+};
+
+StaticNpc N(npcGroup_8024514C) = {
+    .id = NPC_SENTINEL,
+    .settings = &N(npcSettings_802448F4),
+    .pos = { -20.0f, 100.0f, 180.0f },
+    .flags = NPC_FLAG_LOCK_ANIMS,
+    .yaw = 90,
+    .dropFlags = 0x80,
+    .heartDrops = NO_DROPS,
+    .flowerDrops = NO_DROPS,
+    .movement = { -20, 100, 180, 40, 0, -32767, 0, -20, 100, 180, 250, 0, 0, 1 },
+    .animations = {
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_2),
+        NPC_ANIM(sentinel, Palette_00, Anim_3),
+        NPC_ANIM(sentinel, Palette_00, Anim_3),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_5),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_8),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM(sentinel, Palette_00, Anim_1),
+    },
+};
+
+NpcGroupList N(npcGroupList_8024533C) = {
+    NPC_GROUP(N(npcGroup_80244920), BATTLE_ID(15, 3, 0, 1)),
+    NPC_GROUP(N(npcGroup_80244D6C), BATTLE_ID(15, 1, 0, 1)),
+    NPC_GROUP(N(npcGroup_8024514C), BATTLE_ID(0, 0, 0, 0)),
+    {},
+};
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
@@ -8,8 +606,6 @@
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240208_C46DE8);
-/*
 s32 N(func_80240208_C46DE8)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
@@ -47,10 +643,7 @@ s32 N(func_80240208_C46DE8)(ScriptInstance *script) {
 
     return ret;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", update_starpoints_display_C46F9C);
-/*
 ApiStatus N(update_starpoints_display_C46F9C)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -122,12 +715,92 @@ ApiStatus N(update_starpoints_display_C46F9C)(ScriptInstance *script, s32 isInit
 
     return ApiStatus_BLOCK;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024061C_C471FC);
+ApiStatus N(func_8024061C_C471FC)(ScriptInstance *script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802408D0_C474B0);
-/*
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 65.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall || (enemy->unk_B0 & 4)) {
+        script->functionTemp[0].s = 0;
+        npc->duration = 0;
+        npc->currentAnim = enemy->animList[0];
+        npc->flags &= ~0x800;
+        if (!enemy->territory->wander.isFlying) {
+            npc->flags = (npc->flags | 0x200) & ~0x8;
+        } else {
+            npc->flags = (npc->flags & ~0x200) | 0x8;
+        }
+        if (enemy->unk_B0 & 4) {
+            script->functionTemp[0].s = 99;
+            script->functionTemp[1].s = 0;
+            enemy->unk_B0 &= ~4;
+        }
+        enemy->varTable[0] = 0;
+    }
+
+    if ((script->functionTemp[0].s < 30) && (enemy->varTable[0] == 0) && N(func_80240208_C46DE8)(script)) {
+        script->functionTemp[0].s = 30;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            func_800495A0(script, npcAISettings, territoryPtr);
+        case 1:
+            func_800496B8(script, npcAISettings, territoryPtr);
+            break;
+        case 2:
+            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
+        case 3:
+            func_80049C04(script, npcAISettings, territoryPtr);
+            break;
+        case 10:
+            func_80049E3C(script, npcAISettings, territoryPtr);
+        case 11:
+            func_80049ECC(script, npcAISettings, territoryPtr);
+            break;
+        case 12:
+            func_80049F7C(script, npcAISettings, territoryPtr);
+        case 13:
+            func_8004A124(script, npcAISettings, territoryPtr);
+            break;
+        case 14:
+            func_8004A3E8(script, npcAISettings, territoryPtr);
+            break;
+        case 30:
+            N(UnkNpcAIFunc6)(script);
+        case 31:
+            N(UnkNpcAIFunc7)(script);
+            if (script->functionTemp[0].s != 32) {
+                break;
+            }
+        case 32:
+            N(UnkNpcAIFunc8)(script);
+            if (script->functionTemp[0].s != 33) {
+                break;
+            }
+        case 33:
+            N(UnkNpcAIFunc5)(script);
+            break;
+        case 99:
+            func_8004A73C(script);
+    }
+
+    return ApiStatus_BLOCK;
+}
+
 void N(func_802408D0_C474B0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -144,10 +817,7 @@ void N(func_802408D0_C474B0)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[0].s = 1;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240958_C47538);
-/*
 void N(func_80240958_C47538)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -203,10 +873,7 @@ void N(func_80240958_C47538)(ScriptInstance *script, NpcAISettings *aiSettings, 
         npc->duration = 0;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240C10_C477F0);
-/*
 void N(func_80240C10_C477F0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -218,10 +885,7 @@ void N(func_80240C10_C477F0)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[0].s = 3;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240C74_C47854);
-/*
 void N(func_80240C74_C47854)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -231,10 +895,7 @@ void N(func_80240C74_C47854)(ScriptInstance *script, NpcAISettings *aiSettings, 
     script->functionTemp[1].s = (rand_int(1000) % 2) + 2;
     script->functionTemp[0].s = 4;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240D1C_C478FC);
-/*
 void N(func_80240D1C_C478FC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -265,10 +926,7 @@ void N(func_80240D1C_C478FC)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240E54_C47A34);
-/*
 void N(func_80240E54_C47A34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -284,10 +942,7 @@ void N(func_80240E54_C47A34)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[0].s = 0x29;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80240F00_C47AE0);
-/*
 void N(func_80240F00_C47AE0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -309,10 +964,7 @@ void N(func_80240F00_C47AE0)(ScriptInstance *script, NpcAISettings *aiSettings, 
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241078_C47C58);
-/*
 void N(func_80241078_C47C58)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
@@ -325,12 +977,111 @@ void N(func_80241078_C47C58)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802410D4_C47CB4);
+ApiStatus N(func_802410D4_C47CB4)(ScriptInstance *script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241424_C48004);
-/*
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 40.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall || (enemy->unk_B0 & 4)) {
+        script->functionTemp[0].s = 0;
+        npc->duration = 30;
+        npc->currentAnim = enemy->animList[10];
+        npc->flags &= ~0x800;
+        enemy->varTable[0] = 0;
+        if (!enemy->territory->wander.isFlying) {
+            npc->flags = (npc->flags | 0x200) & ~0x8;
+        } else {
+            npc->flags = (npc->flags & ~0x200) | 0x8;
+        }
+        if (enemy->unk_B0 & 4) {
+            script->functionTemp[0].s = 99;
+            script->functionTemp[1].s = 40;
+            npc->currentAnim = enemy->animList[0];
+        }
+        enemy->unk_B0 &= ~4;
+    }
+
+    if (((u32)script->functionTemp[0].s - 10 < 20) && (enemy->varTable[0] == 0) && N(func_80240208_C46DE8)(script)) {
+        script->functionTemp[0].s = 30;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_802408D0_C474B0)(script, npcAISettings, territoryPtr);
+            break;
+        case 1:
+            N(func_80240958_C47538)(script, npcAISettings, territoryPtr);
+            break;
+        case 2:
+            N(func_80240C10_C477F0)(script, npcAISettings, territoryPtr);
+            break;
+        case 3:
+            N(func_80240C74_C47854)(script, npcAISettings, territoryPtr);
+            break;
+        case 4:
+            N(func_80240D1C_C478FC)(script, npcAISettings, territoryPtr);
+            break;
+        case 12:
+            func_80049F7C(script, npcAISettings, territoryPtr);
+            if (script->functionTemp[0].s != 13) {
+                break;
+            }
+        case 13:
+            func_8004A124(script, npcAISettings, territoryPtr);
+            break;
+        case 14:
+            func_8004A3E8(script, npcAISettings, territoryPtr);
+            npc->duration = 15;
+            enemy->varTable[7] = 40;
+            script->functionTemp[0].s = 3;
+            break;
+        case 30:
+            N(UnkNpcAIFunc6)(script);
+            if (script->functionTemp[0].s != 31) {
+                break;
+            }
+        case 31:
+            N(UnkNpcAIFunc7)(script);
+            if (script->functionTemp[0].s != 32) {
+                break;
+            }
+        case 32:
+            N(UnkNpcAIFunc8)(script);
+            break;
+        case 33:
+            N(UnkNpcAIFunc5)(script);
+            break;
+        case 40:
+            N(func_80240E54_C47A34)(script, npcAISettings, territoryPtr);
+            if (script->functionTemp[0].s != 41) {
+                break;
+            }
+        case 41:
+            N(func_80240F00_C47AE0)(script, npcAISettings, territoryPtr);
+            break;
+        case 50:
+            N(func_80241078_C47C58)(script, npcAISettings, territoryPtr);
+            break;
+        case 99:
+            func_8004A73C(script);
+    }
+
+    return ApiStatus_BLOCK;
+}
+
 void N(func_80241424_C48004)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -354,14 +1105,153 @@ void N(func_80241424_C48004)(ScriptInstance* script, NpcAISettings* aiSettings, 
     enemy->varTable[4] = npc->pos.y * 100.0;
     script->functionTemp[0].s = 1;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802415D4_C481B4);
+#ifdef NON_MATCHING
+// second func_800DCB7C call
+void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 temp_f24;
+    f32 posX, posY, posZ, posW;
+    s32 var;
+    f32 temp_f0;
+    f32 phi_f4;
+    s32 phi_v0;
+    s32 phi_s4 = 0;
+
+    f32 a = enemy->varTable[7];
+    f32 temp_f2  = a / 100.0;
+    f32 b = enemy->varTable[3];
+    f32 temp_f26 = b / 100.0;
+    f32 c = enemy->varTable[4];
+    f32 temp_f20 = c / 100.0;
+    f32 d = enemy->varTable[1];
+    f32 temp_f22 = d / 100.0;
+
+    enemy->varTable[4] = npc->pos.y * 100.0;
+    temp_f24 = temp_f26 + temp_f2;
+
+    if ((enemy->varTable[0] & 0x11) == 1) {
+        if (npc->flags & 8) {
+            if (temp_f22 < (temp_f24 - npc->pos.y)) {
+                enemy->varTable[0] |= 0x10;
+            }
+        } else {
+            posX = npc->pos.x;
+            posY = npc->pos.y;
+            posZ = npc->pos.z;
+            posW = 1000.0f;
+            func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            if (temp_f22 < (temp_f26 - posW)) {
+                enemy->varTable[0] |= 0x10;
+            }
+        }
+    }
+
+    if ((enemy->varTable[0] & 0x11) == 0x11) {
+        f64 test;
+        if (npc->flags & 8) {
+            phi_f4 = temp_f24;
+            test = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
+            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
+            npc->pos.y = test;
+        } else {
+            posX = npc->pos.x;
+            posY = temp_f20;
+            posZ = npc->pos.z;
+            posW = 1000.0f;
+            func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_f4 = posY;
+            phi_f4 += temp_f26;
+            d = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
+            test = d;
+            npc->pos.y = test;
+            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
+        }
+        //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
+
+        if (fabsf(phi_f4 - npc->pos.y) < 1.0) {
+            npc->pos.y = phi_f4;
+            enemy->varTable[0] &= ~0x10;
+        }
+    } else if (enemy->varTable[1] > 0) {
+        temp_f0 = sin_deg(enemy->varTable[2]);
+        if (npc->flags & 8) {
+            phi_v0 = FALSE;
+        } else {
+            posX = npc->pos.x;
+            posY = npc->pos.y;
+            posZ = npc->pos.z;
+            posW = 1000.0f;
+            phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+        }
+        if (phi_v0) {
+            npc->pos.y = posY + temp_f26 + (temp_f0 * temp_f22);
+        } else {
+            npc->pos.y = temp_f24 + (temp_f0 * temp_f22);
+        }
+        enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 10);
+    }
+
+    if (enemy->varTable[9] <= 0) {
+        if (aiSettings->unk_14 >= 0) {
+            if (script->functionTemp[1].s <= 0) {
+                script->functionTemp[1].s = aiSettings->unk_14;
+                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && 
+                    func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
+                    fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
+                    npc->moveToPos.y = npc->pos.y;
+                    func_800494C0(npc, 0x2F4, 0x200000);
+                    if (enemy->npcSettings->unk_2A & 1) {
+                        script->functionTemp[0].s = 10;
+                    } else {
+                        script->functionTemp[0].s = 12;
+                    }
+                    return;
+                }
+            }
+            script->functionTemp[1].s--;
+        }
+    } else {
+        enemy->varTable[9]--;
+    }
+
+    if (is_point_within_region(enemy->territory->wander.wanderShape, 
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
+            npc->pos.x, npc->pos.z, 
+            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
+        posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
+        if (npc->moveSpeed < posW) {
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
+            phi_s4 = 1;
+        }
+    }
+
+    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s4) {
+        if (npc->unk_8C == 0) {
+            npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+        } else {
+            return;
+        }
+    }
+
+    enemy->varTable[4] = npc->pos.y * 100.0;
+    if (aiSettings->moveTime > 0) {
+        if ((npc->duration <= 0) || (--npc->duration <= 0)) {
+            script->functionTemp[0].s = 2;
+            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1].s < 3)) {
+                script->functionTemp[0].s = 0;
+            }
+        }
+    }
+}
+#else
+INCLUDE_ASM(void, "world/area_dgb/dgb_09/C46BE0", dgb_09_func_802415D4_C481B4, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+#endif
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80241CBC_C4889C);
-/*
 void N(func_80241CBC_C4889C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -426,29 +1316,23 @@ void N(func_80241CBC_C4889C)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
     }
 }
-*/
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242078_C48C58);
-/*
 void N(func_80242078_C48C58)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_80244358_C4AF38)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
 }
-*/
 
 #include "world/common/UnkNpcAIFunc14.inc.c"
 
 #include "world/common/UnkNpcAIFunc3.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024227C_C48E5C);
-/*
 void N(func_8024227C_C48E5C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -535,10 +1419,7 @@ void N(func_8024227C_C48E5C)(ScriptInstance* script, NpcAISettings* aiSettings, 
         npc->jumpVelocity = 0.0f;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024260C_C491EC);
-/*
 void N(func_8024260C_C491EC)(Npc *npc, Enemy *enemy, ScriptInstance *script, NpcAISettings *aiSettings) {
     f32 posX, posY, posZ, posW;
     s32 temp_a1;
@@ -567,12 +1448,67 @@ void N(func_8024260C_C491EC)(Npc *npc, Enemy *enemy, ScriptInstance *script, Npc
     script->functionTemp[1].s = aiSettings->unk_14;
     enemy->unk_B0 |= 0x10;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242730_C49310);
+ApiStatus N(func_80242730_C49310)(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* aiSettings = get_variable(script, *args);
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_8024291C_C494FC);
-/*
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 120.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall) {
+        N(func_8024260C_C491EC)(npc, enemy, script, aiSettings);
+    }
+
+    npc->unk_AB = -2;
+
+    if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B4 != 0) {
+            return ApiStatus_BLOCK;
+        }
+        enemy->unk_B0 &= ~4;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_80241424_C48004)(script, aiSettings, territoryPtr);
+        case 1:
+            N(func_802415D4_C481B4)(script, aiSettings, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+        case 3:
+            N(func_80241CBC_C4889C)(script, aiSettings, territoryPtr);
+            break;
+        case 10:
+            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
+        case 11:
+            N(func_80242078_C48C58)(script, aiSettings, territoryPtr);
+            break;
+        case 12:
+            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
+            break;
+        case 13:
+            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
+            break;
+        case 14:
+            N(func_8024227C_C48E5C)(script, aiSettings, territoryPtr);
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
 void N(func_8024291C_C494FC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -599,10 +1535,7 @@ void N(func_8024291C_C494FC)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[0].s = 13;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242A74_C49654);
-/*
 void N(func_80242A74_C49654)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -624,10 +1557,7 @@ void N(func_80242A74_C49654)(ScriptInstance *script, NpcAISettings *aiSettings, 
     }
 
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242B78_C49758);
-/*
 void N(func_80242B78_C49758)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -641,10 +1571,7 @@ void N(func_80242B78_C49758)(ScriptInstance *script, NpcAISettings *aiSettings, 
     npc->duration = 0;
     script->functionTemp[0].s = 15;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242C1C_C497FC);
-/*
 void N(func_80242C1C_C497FC)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -690,10 +1617,7 @@ void N(func_80242C1C_C497FC)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242EB8_C49A98);
-/*
 void N(func_80242EB8_C49A98)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -708,10 +1632,7 @@ void N(func_80242EB8_C49A98)(ScriptInstance *script, NpcAISettings *aiSettings, 
     npc->duration = 20;
     script->functionTemp[0].s = 17;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80242F70_C49B50);
-/*
 void N(func_80242F70_C49B50)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -734,10 +1655,7 @@ void N(func_80242F70_C49B50)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[0].s = 18;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802430F0_C49CD0);
-/*
 void N(func_802430F0_C49CD0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -747,10 +1665,7 @@ void N(func_802430F0_C49CD0)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[0].s = 30;
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243138_C49D18);
-/*
 void N(func_80243138_C49D18)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -767,10 +1682,7 @@ void N(func_80243138_C49D18)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_802431B8_C49D98);
-/*
 void N(func_802431B8_C49D98)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -782,10 +1694,7 @@ void N(func_802431B8_C49D98)(ScriptInstance *script, NpcAISettings *aiSettings, 
     enemy->varTable[4] = npc->pos.y * 100.0;
     script->functionTemp[1].s = 0x1E;
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243260_C49E40);
-/*
 void N(func_80243260_C49E40)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -829,6 +1738,81 @@ void N(func_80243260_C49E40)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 }
-*/
 
-INCLUDE_ASM(s32, "world/area_dgb/dgb_09/C46BE0", func_80243578_C4A158);
+ApiStatus N(func_80243578_C4A158)(ScriptInstance *script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* aiSettings = get_variable(script, *args);
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 125.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+        N(func_8024260C_C491EC)(npc, enemy, script, aiSettings);
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_80241424_C48004)(script, aiSettings, territoryPtr);
+            func_802DE894(npc->unk_24, 0, 0, 0, 0, 0, 0);
+        case 1:
+            N(func_802415D4_C481B4)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0].s == 12) {
+                npc->duration = 6;
+            }
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+        case 3:
+            N(func_80241CBC_C4889C)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0].s == 12) {
+                npc->duration = 6;
+            }
+            break;
+        case 12:
+            N(func_8024291C_C494FC)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0].s != 13) {
+                break;
+            }
+        case 13:
+            N(func_80242A74_C49654)(script, aiSettings, territoryPtr);
+            break;
+        case 14:
+            N(func_80242B78_C49758)(script, aiSettings, territoryPtr);
+            if (script->functionTemp[0].s != 15) {
+                break;
+            }
+        case 15:
+            N(func_80242C1C_C497FC)(script, aiSettings, territoryPtr);
+            break;
+        case 16:
+            N(func_80242EB8_C49A98)(script, aiSettings, territoryPtr);
+        case 17:
+            N(func_80242F70_C49B50)(script, aiSettings, territoryPtr);
+            break;
+        case 18:
+            N(func_802430F0_C49CD0)(script, aiSettings, territoryPtr);
+            break;
+        case 20:
+            N(func_80243138_C49D18)(script, aiSettings, territoryPtr);
+            break;
+        case 30:
+            N(func_802431B8_C49D98)(script, aiSettings, territoryPtr);
+        case 31:
+            N(func_80243260_C49E40)(script, aiSettings, territoryPtr);
+    }
+
+    return (script->functionTemp[0].s == 100) * ApiStatus_DONE2;
+}
+
+const char N(dgb_00_name_hack)[] = "dgb_00";

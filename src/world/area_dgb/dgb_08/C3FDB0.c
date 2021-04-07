@@ -1898,7 +1898,6 @@ void N(func_80242DB0_C42B60)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 }
 
-// NEW
 void N(func_80242EB4_C42C64)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -2166,7 +2165,6 @@ ApiStatus N(func_802438F0_C436A0)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc1.inc.c"
 
-// NEW
 ApiStatus N(func_80243B98_C43948)(ScriptInstance* script, s32 isInitialCall) {
     if (get_enemy_safe(9) != 0) {
         Enemy* enemy = get_enemy(9);

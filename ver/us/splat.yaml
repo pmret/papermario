@@ -8004,13 +8004,13 @@ segments:
     start: 0xC46BE0
     vram: 0x80240000
     subsections:
-    - [0xC46BE0, c]
-    - [0xC4A3E0, data]
-    - [0xC4A500, data]
-    - [0xC4AA30, data]
-    - [0xC4ABE0, data]
-    - [0xC4BF50, rodata]
-    - [0xC4C2F8, rodata]
+    - [0xC46BE0,      .c, C46BE0]
+    - [0xC4A3E0,   .data, C46BE0]
+    - [0xC4A500,   .data, C46BE0]
+    - [0xC4AA30,   .data, C46BE0]
+    - [0xC4ABE0,   .data, C46BE0]
+    - [0xC4BF50, .rodata, C46BE0]
+    - [0xC4C2F8, .rodata, C46BE0]
   - name: world/area_dgb/dgb_10/
     type: code
     overlay: True
@@ -10549,6 +10549,7 @@ segments:
       - [0x19, 0x00C6, dgb_06_tattle]
       - [0x19, 0x00C7, dgb_07_tattle]
       - [0x19, 0x00C8, dgb_08_tattle]
+      - [0x19, 0x00C9, dgb_09_tattle]
       - [0x19, 0x00D3, arn_08_tattle]
       - [0x19, 0x00D4, arn_09_tattle]
       - [0x19, 0x00D5, arn_10_tattle]

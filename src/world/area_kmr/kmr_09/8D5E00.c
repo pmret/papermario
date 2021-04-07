@@ -241,6 +241,67 @@ void N(func_802411E8_8D6FE8)(Npc *npc, Enemy *enemy, ScriptInstance *script, Npc
 */
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_09/8D5E00", func_8024130C_8D710C);
+/*
+ApiStatus N(func_8024130C_8D710C)(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* aiSettings = get_variable(script, *args);
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_34 = 120.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall) {
+        N(func_802411E8_8D6FE8)(npc, enemy, script, aiSettings);
+    }
+
+    npc->unk_AB = -2;
+
+    if (enemy->unk_B0 & 4) {
+        if (enemy->unk_B4 != 0) {
+            return ApiStatus_BLOCK;
+        }
+        enemy->unk_B0 &= ~4;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            N(func_80240000_8D5E00)(script, aiSettings, territoryPtr);
+        case 1:
+            N(func_802401B0_8D5FB0)(script, aiSettings, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
+        case 3:
+            N(func_80240898_8D6698)(script, aiSettings, territoryPtr);
+            break;
+        case 10:
+            N(UnkNpcAIFunc2)(script, aiSettings, territoryPtr);
+        case 11:
+            N(func_80240C54_8D6A54)(script, aiSettings, territoryPtr);
+            break;
+        case 12:
+            N(UnkNpcAIFunc14)(script, aiSettings, territoryPtr);
+            break;
+        case 13:
+            N(UnkNpcAIFunc3)(script, aiSettings, territoryPtr);
+            break;
+        case 14:
+            N(func_80240E58_8D6C58)(script, aiSettings, territoryPtr);
+            break;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 ApiStatus func_802414F8_8D72F8(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = get_enemy_safe(2);
