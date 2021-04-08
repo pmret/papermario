@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-from typing import List
+from typing import List, Dict, Set
 from pathlib import Path
 import sys
 import ninja_syntax
 
-SUPPORTED_VERSIONS = ["us", "jp"]
+VERSIONS = ["us", "jp"]
 ROOT = Path(__file__).parent.parent.parent
 
 def rm_recursive(path: Path):
@@ -24,11 +24,77 @@ def exec_shell(command: List[str]) -> str:
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
+def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
+    # platform-specific
+    if sys.platform  == "darwin":
+        os_dir = "mac"
+        iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
+    elif sys.platform == "linux":
+        from os import uname
+
+        if uname()[4] == "aarch64":
+            os_dir = "arm"
+        else:
+            os_dir = "linux"
+
+        iconv = "iconv --from UTF-8 --to SHIFT-JIS"
+    else:
+        raise Exception(f"unsupported platform {sys.platform}")
+
+    cross = "mips-linux-gnu-"
+
+    ninja.rule("cc",
+        description="cc($version) $in",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | tools/build/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -o - | tools/build/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cc_dsl",
+        description="cc_dsl($version) $in",
+        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python tools/build/cc_dsl/compile_script.py | {iconv} | tools/build/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -o - | tools/build/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("bin",
+        description="bin $in",
+        command=f"{cross}ld -r -b binary $in -o $out",
+    )
+
+    ninja.rule("as",
+        description="as $in",
+        command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+    )
+
+    ninja.rule("ld",
+        description="link($version) $out",
+        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+    )
+
+    ninja.rule("z64",
+        description="rom $out",
+        command=f"{cross}objcopy $in $out -O binary && tools/build/rom/n64crc $out",
+    )
+
+    ninja.rule("sha1sum",
+        description="check",
+        command=f"sha1sum -c $in && touch $out",
+    )
+
+def write_ninja_for_tools(ninja: ninja_syntax.Writer):
+    ninja.rule("cc_tool",
+        description="cc_tool $in",
+        command=f"cc $in -O3 -o $out",
+    )
+
+    ninja.build("tools/yay0/Yay0compress", "cc_tool", "tools/yay0/Yay0compress.c")
+    ninja.build("tools/rom/n64crc", "cc_tool", "tools/rom/n64crc.c")
+
 class Configure:
-    def __init__(self, version: str, cpp: str):
+    def __init__(self, version: str):
         self.version = version
         self.version_path = ROOT / f"ver/{version}"
-        self.cpp = cpp
         self.linker_entries = None
 
     def split(self, assets: bool, code: bool):
@@ -45,42 +111,97 @@ class Configure:
             None,
             str(self.version_path / "baserom.z64"),
             modes,
-            True, # verbose
-            False,
+            verbose=True,
         )
 
-    def write_ninja(self, ninja: ninja_syntax.Writer):
+    def elf_path(self) -> Path:
+        # TODO: read basename and build_path from splat.yaml
+        return Path(f"build/papermario.{self.version}.elf")
+
+    def rom_path(self) -> Path:
+        return self.elf_path().with_suffix(".z64")
+
+    def rom_ok_path(self) -> Path:
+        return self.elf_path().with_suffix(".ok")
+
+    def linker_script_path(self) -> Path:
+        # TODO: read from splat.yaml
+        return Path(f"ver/{self.version}/papermario.ld")
+
+    def map_path(self) -> Path:
+        return self.elf_path().with_suffix(".map")
+
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_objects: Set[str]) -> Set[str]:
         import segtypes
 
         assert self.linker_entries is not None
 
-        def build(entry, task: str):
+        built_objects = set()
+
+        def build(entry, task: str, version_specific: bool = False, variables: Dict[str, str] = {}):
+            object_path = entry.object_path
+
+            if version_specific:
+                # .ext.o -> .ext.VERSION.o
+                suffixes = object_path.suffixes
+                suffixes.insert(len(suffixes) - 1, "." + self.version)
+                object_path = object_path.with_suffix("").with_suffix("".join(suffixes))
+
+                # rule is now allowed to know what version this is
+                variables["version"] = self.version
+            elif str(object_path) in skip_objects:
+                # No need to rebuild non-version-specific object file.
+                return
+
             ninja.build(
-                str(entry.object_path), # $out
+                str(object_path), # $out
                 task,
                 [str(p) for p in entry.src_paths], # $in
-                variables={
-                    "version": self.version,
-                },
+                variables=variables,
             )
 
+            built_objects.add(str(object_path))
+
+        # Build objects
         for entry in self.linker_entries:
             if isinstance(entry.segment, segtypes.n64.header.N64SegHeader):
                 build(entry, "as")
             elif isinstance(entry.segment, segtypes.n64.code.Subsegment) and entry.segment.type in ["asm", "hasm", "data", "rodata", "bss"]:
                 build(entry, "as")
             elif isinstance(entry.segment, segtypes.n64.code.CodeSubsegment) and entry.segment.type == "c":
-                build(entry, "cc")
+                build(entry, "cc_dsl", version_specific=True) # TODO: don't use dsl for everything
             elif isinstance(entry.segment, segtypes.n64.code.BinSubsegment) or isinstance(entry.segment, segtypes.n64.bin.N64SegBin):
                 build(entry, "bin")
             else:
-                print(f"configure: don't know how to build {entry.segment.__class__.__name__} '{entry.segment.name}'")
+                raise Exception(f"don't know how to build {entry.segment.__class__.__name__} '{entry.segment.name}'")
+
+        # Build elf, z64, ok
+        ninja.build(
+            str(self.elf_path()),
+            "ld",
+            str(self.linker_script_path()),
+            implicit=[str(obj) for obj in built_objects],
+            variables={ "version": self.version, "mapfile": str(self.map_path()) },
+        )
+        ninja.build(
+            str(self.rom_path()),
+            "z64",
+            str(self.elf_path()),
+        )
+        ninja.build(
+            str(self.rom_ok_path()),
+            "sha1sum",
+            f"ver/{self.version}/checksum.sha1",
+            implicit=[str(self.rom_path())],
+        )
+
+        return built_objects
 
 if __name__ == "__main__":
     from argparse import ArgumentParser
 
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
-    parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(SUPPORTED_VERSIONS))
+    parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(VERSIONS))
     parser.add_argument("--cpp", help="GNU C preprocessor command")
     parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
@@ -101,7 +222,7 @@ if __name__ == "__main__":
     else:
         versions = []
 
-        for version in SUPPORTED_VERSIONS:
+        for version in VERSIONS:
             rom = ROOT / f"ver/{version}/baserom.z64"
 
             print(f"configure: looking for baserom {rom}", end="")
@@ -129,12 +250,21 @@ if __name__ == "__main__":
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    # TODO: ninja prelude
+    write_ninja_rules(ninja, args.cpp or "cpp")
+    write_ninja_for_tools(ninja)
+
+    built_objects = set() # tracks non-version-specific objects that have been set to be built
+    all_rom_oks: List[str] = []
 
     for version in versions:
         print(f"configure: configuring version {version}")
 
-        configure = Configure(version, args.cpp)
+        configure = Configure(version)
 
         configure.split(not args.no_splat, False)
-        configure.write_ninja(ninja)
+        built_objects.update(configure.write_ninja(ninja, built_objects))
+
+        all_rom_oks.append(str(configure.rom_ok_path()))
+
+    ninja.build("all", "phony", all_rom_oks)
+    ninja.default("all")
