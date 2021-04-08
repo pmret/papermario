@@ -112,11 +112,11 @@ class Configure:
             str(self.version_path / "baserom.z64"),
             modes,
             verbose=True,
-        )
+        ).entries
 
     def elf_path(self) -> Path:
         # TODO: read basename and build_path from splat.yaml
-        return Path(f"build/papermario.{self.version}.elf")
+        return Path(f"ver/{self.version}/build/papermario.elf")
 
     def rom_path(self) -> Path:
         return self.elf_path().with_suffix(".z64")
@@ -138,42 +138,34 @@ class Configure:
 
         built_objects = set()
 
-        def build(entry, task: str, version_specific: bool = False, variables: Dict[str, str] = {}):
-            object_path = entry.object_path
-
-            if version_specific:
-                # .ext.o -> .ext.VERSION.o
-                suffixes = object_path.suffixes
-                suffixes.insert(len(suffixes) - 1, "." + self.version)
-                object_path = object_path.with_suffix("").with_suffix("".join(suffixes))
-
-                # rule is now allowed to know what version this is
-                variables["version"] = self.version
-            elif str(object_path) in skip_objects:
+        def build(entry, task: str, variables: Dict[str, str] = {}):
+            if str(entry.object_path) in skip_objects:
                 # No need to rebuild non-version-specific object file.
-                return
+                pass
+            else:
+                built_objects.add(str(entry.object_path))
 
-            ninja.build(
-                str(object_path), # $out
-                task,
-                [str(p) for p in entry.src_paths], # $in
-                variables=variables,
-            )
-
-            built_objects.add(str(object_path))
+                ninja.build(
+                    str(entry.object_path), # $out
+                    task,
+                    [str(p) for p in entry.src_paths], # $in
+                    variables={ "version": self.version, **variables },
+                )
 
         # Build objects
         for entry in self.linker_entries:
-            if isinstance(entry.segment, segtypes.n64.header.N64SegHeader):
+            subseg = entry.segment_or_subsegment
+
+            if isinstance(subseg, segtypes.n64.header.N64SegHeader):
                 build(entry, "as")
-            elif isinstance(entry.segment, segtypes.n64.code.Subsegment) and entry.segment.type in ["asm", "hasm", "data", "rodata", "bss"]:
+            elif isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type in ["asm", "hasm", "data", "rodata", "bss"]:
                 build(entry, "as")
-            elif isinstance(entry.segment, segtypes.n64.code.CodeSubsegment) and entry.segment.type == "c":
-                build(entry, "cc_dsl", version_specific=True) # TODO: don't use dsl for everything
-            elif isinstance(entry.segment, segtypes.n64.code.BinSubsegment) or isinstance(entry.segment, segtypes.n64.bin.N64SegBin):
+            elif isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c":
+                build(entry, "cc_dsl") # TODO: don't use dsl for everything
+            elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
                 build(entry, "bin")
             else:
-                raise Exception(f"don't know how to build {entry.segment.__class__.__name__} '{entry.segment.name}'")
+                raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
 
         # Build elf, z64, ok
         ninja.build(
@@ -196,6 +188,18 @@ class Configure:
         )
 
         return built_objects
+
+    def make_current(self, ninja: ninja_syntax.Writer):
+        current = Path("ver/current")
+
+        try:
+            current.unlink()
+        except Exception:
+            pass
+
+        current.symlink_to(self.version)
+
+        ninja.build("ver/current/build/papermario.z64", "phony", str(self.rom_path()))
 
 if __name__ == "__main__":
     from argparse import ArgumentParser
@@ -265,6 +269,8 @@ if __name__ == "__main__":
         built_objects.update(configure.write_ninja(ninja, built_objects))
 
         all_rom_oks.append(str(configure.rom_ok_path()))
+
+    configure.make_current(ninja)
 
     ninja.build("all", "phony", all_rom_oks)
     ninja.default("all")

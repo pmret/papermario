@@ -15,7 +15,7 @@ options:
   src_path: src/jp
   asm_path: ver/jp/asm
   assets_path: ver/jp/assets
-  build_path: build
+  build_path: ver/jp/build
 segments:
   - name: header
     type: header
