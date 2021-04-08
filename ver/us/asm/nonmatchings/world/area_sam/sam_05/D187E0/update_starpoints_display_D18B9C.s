@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel update_starpoints_display_D18B9C
+glabel sam_05_UnkFunc7
 /* D18B9C 802403BC 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* D18BA0 802403C0 AFB40028 */  sw        $s4, 0x28($sp)
 /* D18BA4 802403C4 0080A02D */  daddu     $s4, $a0, $zero

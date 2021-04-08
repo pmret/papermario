@@ -12,30 +12,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", delete_actor_D7F91C);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240C70_D7F9D0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240DBC_D7FB1C);
-/*
-ApiStatus N(func_80240DBC_D7FB1C)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 posX, posY, posZ, posW;
-
-    if (script->varTable[5] == 0) {
-        playerStatus->position.x = script->varTable[0];
-    } else {
-        playerStatus->position.z = script->varTable[0];
-    }
-
-    posX = playerStatus->position.x;
-    posY = playerStatus->position.y + 10.0f;
-    posZ = playerStatus->position.z;
-    posW = 40.0f;
-    func_800DCB7C(0, &posX, &posY, &posZ, &posW);
-    playerStatus->position.x = posX;
-    playerStatus->position.y = posY;
-    playerStatus->position.z = posZ;
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc12.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240E70_D7FBD0);
 
