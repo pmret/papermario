@@ -50,20 +50,7 @@ ApiStatus N(func_80240A9C_886E5C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc19.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240B00_886EC0);
-/*
-ApiStatus N(func_80240B00_886EC0)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
-    s32 entityIdx = get_variable(script, *args++);
-    Entity* entity = get_entity_by_index(entityIdx);
-    s32 si_var = *args++;
-    Effect* effect = func_80071750(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
-
-    set_variable(script, si_var, effect);
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc20.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240B90_886F50);
 /*

@@ -48,20 +48,7 @@ ApiStatus N(func_80240BAC_DDD3DC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc19.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240C10_DDD440);
-/*
-ApiStatus N(func_80240C10_DDD440)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
-    s32 entityIdx = get_variable(script, *args++);
-    Entity* entity = get_entity_by_index(entityIdx);
-    s32 si_var = *args++;
-    Effect* effect = func_80071750(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
-
-    set_variable(script, si_var, effect);
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc20.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240CA0_DDD4D0);
 /*

@@ -1,11 +1,17 @@
 from pathlib import Path
 
-FUNC="""    set_message_string(D_8008EF20[gPlayerData.currentPartner][0], 0);
+FUNC="""    Bytecode *args = script->ptrReadPos;
+    s32 entityIdx = get_variable(script, *args++);
+    Entity* entity = get_entity_by_index(entityIdx);
+    s32 si_var = *args++;
+    Effect* effect = func_80071750(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
+
+    set_variable(script, si_var, effect);
 
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc19"
+NEW_FUNC_NAME = f"UnkFunc20"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
