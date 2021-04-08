@@ -6,6 +6,7 @@ options:
   mnemonic_ljust: 10
   extensions_path: ../../tools/splat_ext
   symbol_addrs_path: symbol_addrs.txt
+  linker_symbol_header_path: build/include/ld_addrs.h
   platform: n64
   base_path: .
   target_path: baserom.z64
