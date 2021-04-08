@@ -1,13 +1,13 @@
 from pathlib import Path
 
-FUNC="""    Entity* entity = get_entity_by_index(get_variable(script, *script->ptrReadPos));
+FUNC="""    Npc *npc = get_npc_safe(-4);
 
-    func_80070BB0(4, entity->position.x, entity->position.y + 12.5f, entity->position.z, 1.0f, 0x4B);
-    
+    func_80070BB0(9, npc->pos.x, npc->pos.y + 12.5f, npc->pos.z, 1.0f, 0x1E);
+
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc21"
+NEW_FUNC_NAME = f"UnkFunc22"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

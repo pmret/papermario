@@ -63,16 +63,7 @@ ApiStatus N(func_80240510_989070)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc21.inc.c"
 
-INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_802405A8_989108);
-/*
-ApiStatus N(func_802405A8_989108)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_safe(-4);
-
-    func_80070BB0(9, npc->pos.x, npc->pos.y + 12.5f, npc->pos.z, 1.0f, 0x1E);
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc22.inc.c"
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240600_989160);
 /*
