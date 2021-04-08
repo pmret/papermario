@@ -2,13 +2,7 @@
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_8024001C_D2FC9C);
-/*
-ApiStatus N(func_8024001C_D2FC9C)(ScriptInstance *script, s32 isInitialCall) {
-    OVERRIDE_FLAG_UNSET(0x40)
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc17.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_8024003C_D2FCBC);
 /*
@@ -18,20 +12,7 @@ ApiStatus N(func_8024003C_D2FCBC)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_80240068_D2FCE8);
-/*
-ApiStatus N(func_80240068_D2FCE8)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    Bytecode* args = script->ptrReadPos;
-    s32 partnerIdx = get_variable(script, *args++);
-    s32 si_var = *args++;
-
-    playerData->partners[partnerIdx].level++;
-    set_variable(script, si_var, playerData->partners[partnerIdx].level);
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc18.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_08/D2FC80", func_802400D4_D2FD54);
 
