@@ -413,21 +413,21 @@ Script N(80242A30) = SCRIPT({
     SetPanTarget(0, 5, 0, -147);
     PanToTarget(0, 0, 1);
     RotateModel(29, 80, 0, -1, 0);
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    SetNpcJumpscale(NPC_PLAYER, 2.5);
-    NpcJump0(NPC_PLAYER, 0, 20, -120, 8);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
+    NpcJump0(NPC_TUBBAS_HEART, 0, 20, -120, 8);
     sleep 1;
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    NpcJump0(NPC_PLAYER, 0, 10, -60, 12);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    NpcJump0(NPC_TUBBAS_HEART, 0, 10, -60, 12);
     sleep 1;
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    NpcJump0(NPC_PLAYER, 0, 0, 0, 12);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    NpcJump0(NPC_TUBBAS_HEART, 0, 0, 0, 12);
     sleep 1;
     SetNpcVar(0, 0, 0);
     spawn {
         loop {
-            PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-            NpcJump0(NPC_PLAYER, 0, 0, 0, 10);
+            PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+            NpcJump0(NPC_TUBBAS_HEART, 0, 0, 0, 10);
             sleep 1;
             GetNpcVar(0, 0, SI_VAR(0));
             if (SI_VAR(0) == 1) {
@@ -448,8 +448,8 @@ Script N(80242A30) = SCRIPT({
         }
         PlaySoundAtCollider(10, 450, 0);
     }
-    NpcFaceNpc(NPC_PLAYER, 0x1, 0);
-    SpeakToPlayer(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_A), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 5, MESSAGE_ID(0x0E, 0x00C7));
+    NpcFaceNpc(NPC_TUBBAS_HEART, NPC_WORLD_TUBBA, 0);
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_A), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 5, MESSAGE_ID(0x0E, 0x00C7));
     SetNpcVar(0, 0, 1);
     loop {
         GetNpcVar(0, 0, SI_VAR(0));
@@ -458,11 +458,11 @@ Script N(80242A30) = SCRIPT({
         }
         sleep 1;
     }
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    NpcJump0(NPC_PLAYER, 75, 0, 10, 12);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    NpcJump0(NPC_TUBBAS_HEART, 75, 0, 10, 12);
     sleep 1;
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    NpcJump0(NPC_PLAYER, 150, 0, 20, 12);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    NpcJump0(NPC_TUBBAS_HEART, 150, 0, 20, 12);
     sleep 1;
     spawn {
         sleep 4;
@@ -474,16 +474,16 @@ Script N(80242A30) = SCRIPT({
         SetCamPosC(0, 0, 0);
         SetPanTarget(0, 65, 0, -137);
         PanToTarget(0, 0, 1);
-        SetNpcAnimation(0x1, NPC_ANIM(world_tubba, Palette_00, Anim_22));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_22));
     }
-    PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-    NpcJump0(NPC_PLAYER, 298, 56, 31, 18);
-    SetNpcPos(NPC_PLAYER, 0, -1000, 0);
-    EnableNpcShadow(NPC_PLAYER, FALSE);
+    PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+    NpcJump0(NPC_TUBBAS_HEART, 298, 56, 31, 18);
+    SetNpcPos(NPC_TUBBAS_HEART, 0, -1000, 0);
+    EnableNpcShadow(NPC_TUBBAS_HEART, FALSE);
     spawn {
-        SetNpcAnimation(0x1, NPC_ANIM(world_tubba, Palette_00, Anim_23));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_23));
         sleep 20;
-        SetNpcAnimation(0x1, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
     }
     sleep 20;
     spawn {
@@ -527,7 +527,7 @@ Script N(80242A30) = SCRIPT({
     }
     PlayerMoveTo(200, 0, 35);
     sleep 5;
-    SpeakToPlayer(0x1, NPC_ANIM(world_tubba, Palette_00, Anim_10), NPC_ANIM(world_tubba, Palette_00, Anim_6), 0, MESSAGE_ID(0x0E, 0x00C8));
+    SpeakToPlayer(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_10), NPC_ANIM(world_tubba, Palette_00, Anim_6), 0, MESSAGE_ID(0x0E, 0x00C8));
     SetNpcVar(1, 0, 1);
     sleep 30;
     DisablePlayerInput(FALSE);

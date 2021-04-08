@@ -8,7 +8,7 @@
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
-
+typedef s32 MessageID;
 typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
@@ -74,7 +74,7 @@ typedef struct NpcAISettings {
     /* 0x10 */ X32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 chaseSpeed;
-    /* 0x1C */ s32 unk_1C; // chase turn step?
+    /* 0x1C */ X32 unk_1C; // chase turn step?
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 chaseRadius;
     /* 0x28 */ X32 unk_28;
@@ -301,7 +301,7 @@ typedef struct {
 Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);
 
-s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
 
 /// Zero-terminated.
 Area gAreas[29];

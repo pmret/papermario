@@ -188,12 +188,12 @@ ApiStatus AddVectorPolar(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4BDC(ScriptInstance* script, s32 isInitialCall) {
     s32* t0 = &script->functionTemp[0].s;
     s32* t1 = &script->functionTemp[1].s;
     s32 t1v;
 
-    if (initialCall) {
+    if (isInitialCall) {
         *t0 = 0;
         *t1 = 0;
     }
@@ -216,12 +216,12 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4C4C(ScriptInstance* script, s32 isInitialCall) {
     s32* t0 = &script->functionTemp[0].s;
     s32* t1 = &script->functionTemp[1].s;
     s32 t1v;
 
-    if (initialCall) {
+    if (isInitialCall) {
         *t0 = 0;
         *t1 = 255;
     }
@@ -243,7 +243,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4CC4(ScriptInstance* script, s32 isInitialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
     if (value < 0) {
         set_transition_stencil_zoom_1(255, -1.0f);
@@ -254,7 +254,7 @@ ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D4D14(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4D14(ScriptInstance* script, s32 isInitialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);
 
     set_transition_stencil_center(0, 0, 0xC, 0x14);
@@ -264,7 +264,7 @@ ApiStatus func_802D4D14(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D4D88(ScriptInstance* script, s32 isInitialCall) {
     set_transition_stencil_zoom_0(0xC, 0);
     return ApiStatus_DONE2;
 }
@@ -389,12 +389,12 @@ ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5830(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D5830(ScriptInstance* script, s32 isInitialCall) {
     func_80027088(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D585C(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D585C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 setMode = get_variable(script,  *ptrReadPos++);
     s32 flags = get_variable(script, *ptrReadPos++);

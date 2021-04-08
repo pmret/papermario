@@ -78,7 +78,7 @@ typedef struct CamPosSettings {
 
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 level;
+    /* 0x01 */ s8 level;
     /* 0x02 */ s16 unk_02[3];
 } PartnerData; // size = 0x08
 

@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "code_fe0b0_len_5a0", SetSpriteShading);
+INCLUDE_ASM(ApiStatus, "code_fe0b0_len_5a0", SetSpriteShading, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
@@ -11,7 +11,7 @@ ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 GetDemoState(ScriptInstance* script) {
+ApiStatus GetDemoState(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
     return ApiStatus_DONE2;
 }

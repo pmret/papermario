@@ -55,7 +55,7 @@ INCLUDE_ASM(s32, "world/script_api/7E0E80", func_802814D0);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", MakeShop);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus MakeShopOwner(ScriptInstance* script, s32 isInitialCall) {
     Shop* mapShop = gGameStatusPtr->mapShop;

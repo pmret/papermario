@@ -2,8 +2,6 @@
 #include "message_ids.h"
 #include "../../partners.h"
 
-Script N(main);
-
 ApiStatus N(func_80240000_8C7F90)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerData* playerData = &gPlayerData;

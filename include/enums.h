@@ -502,6 +502,7 @@ enum SoundIDs {
     SOUND_JR_TROOPA_SPLASH          = 69,
     SOUND_JR_TROOPA_SWIM,
     SOUND_BOO_SPOOK,
+    SOUND_UNKNOWN_B4                = 180,
     SOUND_BOO_VANISH                = 193,
     SOUND_BOO_APPEAR                = 195,
     SOUND_MENU_OPEN                 = 197,
@@ -517,6 +518,7 @@ enum SoundIDs {
     SOUND_LAND                      = 331,
     SOUND_HIT_BLOCK                 = 334,
     SOUND_SEARCH_BUSH               = 339,
+    SOUND_UNKNOWN_162               = 354,
     SOUND_BASIC_DOOR_OPEN           = 449,
     SOUND_BASIC_DOOR_CLOSE,
     SOUND_METAL_DOOR_OPEN,
@@ -532,20 +534,25 @@ enum SoundIDs {
     SOUND_UNKNOWN_25A,
     SOUND_UNKNOWN_25C               = 604,
     SOUND_UNKNOWN_25D,
+    SOUND_UNKNOWN_262               = 610,
     SOUND_BOW_SPOOK                 = 657,
     SOUND_UNUSED_2C1                = 705,
     SOUND_SMOKE_BURST               = 717,
     SOUND_DAYZEE_SONG               = 727,
     SOUND_POWER_UP,
+    SOUND_UNKNOWN_2F1               = 753,
+    SOUND_UNKNOWN_2F7               = 759,
     SOUND_CLOSE_SHELL               = 767,
     SOUND_SHY_GUY_SCREAMS1          = 780,
     SOUND_SHY_GUY_SCREAMS2,
     SOUND_SHY_GUY_SCREAMS3,
     SOUND_TOY_TANK_MOVE1,
     SOUND_TOY_TANK_MOVE2,
+    SOUND_UNKNOWN_315               = 789,
     SOUND_MOLE_SURFACE              = 801,
     SOUND_MOLE_DIG,
     SOUND_MOLE_POP,
+    SOUND_UNKNOWN_32E               = 814,
     SOUND_UNKNOWN_361               = 865,
     SOUND_UNKNOWN_362,
     SOUND_UNKNOWN_363,
@@ -579,6 +586,8 @@ enum SoundIDs {
     SOUND_UNKNOWN_202E,
     SOUND_UNKNOWN_202F,
     SOUND_UNKNOWN_2030,
+    SOUND_UNKNOWN_2038              = 8248,
+    SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
     SOUND_JUMP_2081                 = 8321,
     SOUND_UNKNOWN_208D              = 8333,
@@ -589,6 +598,7 @@ enum SoundIDs {
     SOUND_SPELL_CAST3,
     SOUND_SPELL_CAST4,
     SOUND_SPELL_CAST5,
+    SOUND_UNKNOWN_20F6              = 8438,
 };
 
 typedef UNK_TYPE Cam;
@@ -1010,7 +1020,14 @@ enum PlayerAnims {
     ANIM_30004                  = 0x30004,
     ANIM_30008                  = 0x30008,
     ANIM_30009,
+    ANIM_80003                  = 0x80003,
+    ANIM_80007                  = 0x80007,
     ANIM_8000B                  = 0x8000B,
+    ANIM_8000C,
+    ANIM_80017                  = 0x80017,
+    ANIM_8001B                  = 0x8001B,
+    ANIM_8001D                  = 0x8001D,
+    ANIM_8001E,
 };
 
 typedef UNK_TYPE AmbientSound;
@@ -1362,7 +1379,7 @@ enum ActionStates {
 typedef s32 NpcID;
 enum NpcIDs {
     NPC_SELF         = -1,
-    NPC_PLAYER,
+    NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
 };
 

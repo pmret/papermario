@@ -3,6 +3,19 @@
 #include "sprite/npc/world_bow.h"
 #include "sprite/npc/world_tubba.h"
 
+enum {
+    NPC_BOO0,
+    NPC_BOO1,
+    NPC_BOO2,
+    NPC_BOO3,
+    NPC_BOO4,
+    NPC_WORLD_TUBBA,
+    NPC_BOO5,
+    NPC_BOO6,
+    NPC_BOO7,
+    NPC_BOO8,
+};
+
 Script N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
 
 Script N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
@@ -252,7 +265,7 @@ Script N(init_8024202C) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241AB4));
     match STORY_PROGRESS {
         < STORY_CH3_SAW_TUBBA_EAT_BOO {
-            SetNpcFlagBits(NPC_SELF, 0x00000100, TRUE);
+            SetNpcFlagBits(NPC_SELF, NPC_FLAG_100, TRUE);
         }
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             RemoveNpc(NPC_SELF);
@@ -301,7 +314,7 @@ Script N(init_802421EC) = SCRIPT({
 
 StaticNpc N(npcGroup_8024223C)[] = {
     {
-        .id = 0,
+        .id = NPC_BOO0,
         .settings = &N(npcSettings_8024172C),
         .pos = { 55.0f, 195.0f, 160.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
@@ -332,7 +345,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .tattle = MESSAGE_ID(0x1A, 0x00AE),
     },
     {
-        .id = 1,
+        .id = NPC_BOO1,
         .settings = &N(npcSettings_80241758),
         .pos = { 160.0f, 191.0f, 250.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
@@ -362,7 +375,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .tattle = MESSAGE_ID(0x1A, 0x00AF),
     },
     {
-        .id = 2,
+        .id = NPC_BOO2,
         .settings = &N(npcSettings_80241758),
         .pos = { 390.0f, 190.0f, 255.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
@@ -392,7 +405,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .tattle = MESSAGE_ID(0x1A, 0x00B0),
     },
     {
-        .id = 3,
+        .id = NPC_BOO3,
         .settings = &N(npcSettings_80241758),
         .pos = { 503.0f, 206.0f, 210.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
@@ -422,7 +435,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
         .tattle = MESSAGE_ID(0x1A, 0x00B1),
     },
     {
-        .id = 4,
+        .id = NPC_BOO4,
         .settings = &N(npcSettings_8024172C),
         .pos = { 350.0f, 185.0f, 197.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
@@ -456,7 +469,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
 
 Script N(80242BEC) = SCRIPT({
     loop SI_VAR(0) {
-        PlaySoundAtNpc(0x5, 0x20F6, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
         ShakeCam(0, 0, 10, 0.5);
         sleep 5;
     }
@@ -464,21 +477,21 @@ Script N(80242BEC) = SCRIPT({
 
 Script N(80242C50) = SCRIPT({
     DisablePlayerInput(TRUE);
-    NpcFacePlayer(0x2, 1);
-    PlaySoundAtNpc(0x2, 0x262, 0);
+    NpcFacePlayer(NPC_BOO2, 1);
+    PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
     ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     sleep 20;
-    GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetNpcPos(NPC_BOO2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
     SI_VAR(0) -= SI_VAR(3);
     SI_VAR(0) -= 50;
     SI_VAR(1) -= SI_VAR(4);
     SI_VAR(2) -= SI_VAR(5);
-    GetNpcPos(0x2, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    GetNpcPos(NPC_BOO2, SI_VAR(3), SI_VAR(4), SI_VAR(5));
     SI_VAR(3) -= SI_VAR(0);
     SI_VAR(4) -= SI_VAR(1);
     SI_VAR(5) -= SI_VAR(2);
-    NpcMoveTo(0x2, SI_VAR(3), SI_VAR(5), 30);
+    NpcMoveTo(NPC_BOO2, SI_VAR(3), SI_VAR(5), 30);
     SetCamType(0, 6, 1);
     SetCamSpeed(0, 5.0);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -487,13 +500,13 @@ Script N(80242C50) = SCRIPT({
     SetCamDistance(0, 350);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00A0));
-    PlaySoundAt(0x20F6, 0, 450, 200, 160);
+    SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00A0));
+    PlaySoundAt(SOUND_UNKNOWN_20F6, 0, 450, 200, 160);
     ShakeCam(0, 0, 20, 0.80078125);
-    PlaySoundAtNpc(NPC_PLAYER, 0x262, 0);
-    PlaySoundAtNpc(0x1, 0x262, 0);
-    PlaySoundAtNpc(0x2, 0x262, 0);
-    PlaySoundAtNpc(0x4, 0x262, 0);
+    PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO1, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO4, SOUND_UNKNOWN_262, 0);
     ShowEmote(0, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     ShowEmote(1, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
     ShowEmote(2, EMOTE_EXCLAMATION, -45, 20, 1, 0, 0, 0, 0);
@@ -501,33 +514,33 @@ Script N(80242C50) = SCRIPT({
     FadeOutMusic(0, 500);
     ClearAmbientSounds(250);
     sleep 20;
-    InterpNpcYaw(0x2, 90, 1);
-    InterpNpcYaw(0x4, 90, 1);
+    InterpNpcYaw(NPC_BOO2, 90, 1);
+    InterpNpcYaw(NPC_BOO4, 90, 1);
     sleep 20;
     PlaySound(SOUND_BOO_APPEAR);
     SI_VAR(0) = 240.0;
     loop 20 {
         SI_VAR(0) -= 12.0;
-        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
-        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
-        func_802CFD30(0x4, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO0, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO1, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO4, 7, SI_VAR(0), 0, 0, 0);
         sleep 1;
     }
-    SetNpcPos(NPC_PLAYER, 420, 300, 220);
-    SetNpcPos(0x1, 460, 250, 210);
-    SetNpcPos(0x4, 0, -1000, 0);
-    EnableNpcShadow(NPC_PLAYER, FALSE);
-    EnableNpcShadow(0x1, FALSE);
-    EnableNpcShadow(0x4, FALSE);
+    SetNpcPos(NPC_BOO0, 420, 300, 220);
+    SetNpcPos(NPC_BOO1, 460, 250, 210);
+    SetNpcPos(NPC_BOO4, 0, -1000, 0);
+    EnableNpcShadow(NPC_BOO0, FALSE);
+    EnableNpcShadow(NPC_BOO1, FALSE);
+    EnableNpcShadow(NPC_BOO4, FALSE);
     PlaySound(SOUND_BOO_VANISH);
     SI_VAR(0) = 0.0;
     loop 20 {
         SI_VAR(0) += 12.0;
-        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
-        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO0, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO1, 7, SI_VAR(0), 0, 0, 0);
         sleep 1;
     }
-    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
+    SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != 9) {
         N(func_802412C8_BE8EA8)(9);
@@ -567,14 +580,14 @@ Script N(80242C50) = SCRIPT({
     SetPanTarget(0, 426, 190, 194);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SetNpcFlagBits(0x5, 0x00000200, TRUE);
-    SetNpcSpeed(0x5, 2.5);
-    SetNpcPos(0x5, 675, 200, 180);
-    NpcFaceNpc(NPC_PLAYER, 0x5, 1);
-    NpcFaceNpc(0x1, 0x5, 1);
-    SetNpcPos(0x2, 272, 190, 214);
-    PlaySoundAtNpc(NPC_PLAYER, 0x262, 0);
-    PlaySoundAtNpc(0x1, 0x262, 0);
+    SetNpcFlagBits(NPC_WORLD_TUBBA, NPC_FLAG_200, TRUE);
+    SetNpcSpeed(NPC_WORLD_TUBBA, 2.5);
+    SetNpcPos(NPC_WORLD_TUBBA, 675, 200, 180);
+    NpcFaceNpc(NPC_BOO0, NPC_WORLD_TUBBA, 1);
+    NpcFaceNpc(NPC_BOO1, NPC_WORLD_TUBBA, 1);
+    SetNpcPos(NPC_BOO2, 272, 190, 214);
+    PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
+    PlaySoundAtNpc(NPC_BOO1, SOUND_UNKNOWN_262, 0);
     ShowEmote(0, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     ShowEmote(1, EMOTE_EXCLAMATION, 45, 20, 1, 0, 0, 0, 0);
     spawn {
@@ -583,19 +596,19 @@ Script N(80242C50) = SCRIPT({
         SI_VAR(0) = 240.0;
         loop 20 {
             SI_VAR(0) -= 12.0;
-            func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
-            func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
+            func_802CFD30(NPC_BOO0, 7, SI_VAR(0), 0, 0, 0);
+            func_802CFD30(NPC_BOO1, 7, SI_VAR(0), 0, 0, 0);
             sleep 1;
         }
-        SetNpcPos(NPC_PLAYER, 0, -1000, 0);
-        SetNpcPos(0x1, 0, -1000, 0);
+        SetNpcPos(NPC_BOO0, 0, -1000, 0);
+        SetNpcPos(NPC_BOO1, 0, -1000, 0);
         sleep 10;
     }
     SI_VAR(0) = 4;
     spawn N(80242BEC);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
-    NpcMoveTo(0x5, 550, 196, 0);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    NpcMoveTo(NPC_WORLD_TUBBA, 550, 196, 0);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
     SetCamSpeed(0, 4.0);
     SetCamPitch(0, 17.0, -11.5);
     SetCamDistance(0, 375);
@@ -609,11 +622,11 @@ Script N(80242C50) = SCRIPT({
     spawn {
         SI_VAR(0) = 7;
         spawn N(80242BEC);
-        SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
-        NpcMoveTo(0x5, 370, 220, 0);
-        GetNpcPos(0x2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        NpcMoveTo(0x5, 330, SI_VAR(2), 0);
-        SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+        NpcMoveTo(NPC_WORLD_TUBBA, 370, 220, 0);
+        GetNpcPos(NPC_BOO2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        NpcMoveTo(NPC_WORLD_TUBBA, 330, SI_VAR(2), 0);
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
         SI_MAP_VAR(1) = 1;
     }
     SetCamSpeed(0, 90.0);
@@ -625,7 +638,7 @@ Script N(80242C50) = SCRIPT({
     SetPanTarget(0, 240, 169, 206);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A4));
+    SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A4));
     sleep 15;
     loop {
         sleep 1;
@@ -633,19 +646,19 @@ Script N(80242C50) = SCRIPT({
             break loop;
         }
     }
-    NpcFaceNpc(0x2, 0x5, 1);
+    NpcFaceNpc(NPC_BOO2, NPC_WORLD_TUBBA, 1);
     sleep 30;
-    SpeakToPlayer(0x2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A5));
-    SetNpcAnimation(0x2, NPC_ANIM(boo, Palette_01, Anim_9));
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1E));
-    SetNpcJumpscale(0x2, 0.0);
-    NpcJump1(0x2, 265, 206, 212, 3);
+    SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A5));
+    SetNpcAnimation(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_9));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_1E));
+    SetNpcJumpscale(NPC_BOO2, 0.0);
+    NpcJump1(NPC_BOO2, 265, 206, 212, 3);
     sleep 20;
-    SpeakToPlayer(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1E), NPC_ANIM(world_tubba, Palette_00, Anim_1E), 5, MESSAGE_ID(0x0E, 0x00A6));
-    SetNpcPos(0x2, 303, 237, 228);
-    SetNpcAnimation(0x2, NPC_ANIM(boo, Palette_01, Anim_6));
-    EnableNpcShadow(0x2, FALSE);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_1F));
+    SpeakToPlayer(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_1E), NPC_ANIM(world_tubba, Palette_00, Anim_1E), 5, MESSAGE_ID(0x0E, 0x00A6));
+    SetNpcPos(NPC_BOO2, 303, 237, 228);
+    SetNpcAnimation(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6));
+    EnableNpcShadow(NPC_BOO2, FALSE);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_1F));
     SetCamSpeed(0, 5.0);
     SetCamPitch(0, 17.0, -17.0);
     SetCamDistance(0, 250);
@@ -656,11 +669,11 @@ Script N(80242C50) = SCRIPT({
     PanToTarget(0, 0, 1);
     spawn {
         sleep 50;
-        PlaySoundAtNpc(0x5, 0x315, 0);
+        PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_315, 0);
     }
     sleep 40;
-    SetNpcPos(0x2, 0, -1000, 0);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_20));
+    SetNpcPos(NPC_BOO2, 0, -1000, 0);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_20));
     sleep 80;
     SetCamSpeed(0, 90.0);
     SetCamPitch(0, 17.0, -11.5);
@@ -671,46 +684,46 @@ Script N(80242C50) = SCRIPT({
     SetPanTarget(0, 240, 169, 206);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
     sleep 15;
-    SpeakToPlayer(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_21), NPC_ANIM(world_tubba, Palette_00, Anim_6), 5, MESSAGE_ID(0x0E, 0x00A7));
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_21));
-    GetNpcPos(0x5, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SpeakToPlayer(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_21), NPC_ANIM(world_tubba, Palette_00, Anim_6), 5, MESSAGE_ID(0x0E, 0x00A7));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_21));
+    GetNpcPos(NPC_WORLD_TUBBA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += -50;
     SI_VAR(1) += 50;
     SI_VAR(2) += 10;
     PlayEffect(0x6, 1, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 20;
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
-    InterpNpcYaw(0x5, 90, 1);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    InterpNpcYaw(NPC_WORLD_TUBBA, 90, 1);
     sleep 30;
     SI_VAR(0) = 7;
     spawn N(80242BEC);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_9));
-    NpcMoveTo(0x5, 370, 220, 0);
-    NpcMoveTo(0x5, 550, 196, 0);
-    SetNpcAnimation(0x5, NPC_ANIM(world_tubba, Palette_00, Anim_6));
-    SetNpcPos(0x5, 0, -1000, 0);
-    SetNpcFlagBits(0x5, 0x00000200, FALSE);
-    NpcFacePlayer(NPC_PLAYER, 3);
-    SetNpcPos(NPC_PLAYER, 55, 195, 160);
-    SetNpcPos(0x1, 160, 191, 250);
-    SetNpcPos(0x4, 350, 185, 197);
-    EnableNpcShadow(NPC_PLAYER, TRUE);
-    EnableNpcShadow(0x1, TRUE);
-    EnableNpcShadow(0x4, TRUE);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    NpcMoveTo(NPC_WORLD_TUBBA, 370, 220, 0);
+    NpcMoveTo(NPC_WORLD_TUBBA, 550, 196, 0);
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcPos(NPC_WORLD_TUBBA, 0, -1000, 0);
+    SetNpcFlagBits(NPC_WORLD_TUBBA, NPC_FLAG_200, FALSE);
+    NpcFacePlayer(NPC_BOO0, 3);
+    SetNpcPos(NPC_BOO0, 55, 195, 160);
+    SetNpcPos(NPC_BOO1, 160, 191, 250);
+    SetNpcPos(NPC_BOO4, 350, 185, 197);
+    EnableNpcShadow(NPC_BOO0, TRUE);
+    EnableNpcShadow(NPC_BOO1, TRUE);
+    EnableNpcShadow(NPC_BOO4, TRUE);
     PlaySound(SOUND_BOO_VANISH);
     SI_VAR(0) = 0.0;
     loop 20 {
         SI_VAR(0) += 12.5;
-        func_802CFD30(NPC_PLAYER, 7, SI_VAR(0), 0, 0, 0);
-        func_802CFD30(0x1, 7, SI_VAR(0), 0, 0, 0);
-        func_802CFD30(0x4, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO0, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO1, 7, SI_VAR(0), 0, 0, 0);
+        func_802CFD30(NPC_BOO4, 7, SI_VAR(0), 0, 0, 0);
         sleep 1;
     }
-    func_802CFD30(NPC_PLAYER, 0, 0, 0, 0, 0);
-    func_802CFD30(0x1, 0, 0, 0, 0, 0);
-    func_802CFD30(0x4, 0, 0, 0, 0, 0);
+    func_802CFD30(NPC_BOO0, 0, 0, 0, 0, 0);
+    func_802CFD30(NPC_BOO1, 0, 0, 0, 0, 0);
+    func_802CFD30(NPC_BOO4, 0, 0, 0, 0, 0);
     sleep 10;
     SetCamType(0, 4, 0);
     SetCamSpeed(0, 3.0);
@@ -720,13 +733,13 @@ Script N(80242C50) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    SpeakToPlayer(0x4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A8));
+    SpeakToPlayer(NPC_BOO4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00A8));
     DisablePlayerInput(FALSE);
 });
 
 Script N(802441FC) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
-        SetNpcPos(0x2, 330, 184, 240);
+        SetNpcPos(NPC_BOO2, 330, 184, 240);
         loop {
             SI_VAR(10) = 0;
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -742,9 +755,9 @@ Script N(802441FC) = SCRIPT({
         }
         func_802D2B6C();
         await N(80242C50);
-        BindNpcInteract(NPC_PLAYER, N(interact_802418F4));
-        BindNpcInteract(0x1, N(interact_80241A84));
-        BindNpcInteract(0x4, N(interact_80241F88));
+        BindNpcInteract(NPC_BOO0, N(interact_802418F4));
+        BindNpcInteract(NPC_BOO1, N(interact_80241A84));
+        BindNpcInteract(NPC_BOO4, N(interact_80241F88));
         STORY_PROGRESS = STORY_CH3_SAW_TUBBA_EAT_BOO;
         spawn N(80241360);
     }
@@ -767,7 +780,7 @@ NpcAnimID N(extraAnimationList_80244390)[] = {
 };
 
 StaticNpc N(npcGroup_802443AC) = {
-    .id = 5,
+    .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_802416B0),
     .pos = { 0.0f, -1000.0f, 0.0f },
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_IGNORE_HEIGHT,
@@ -841,7 +854,7 @@ Script N(init_802447AC) = SCRIPT({
 
 StaticNpc N(npcGroup_802447E4)[] = {
     {
-        .id = 6,
+        .id = NPC_BOO5,
         .settings = &N(npcSettings_80241758),
         .pos = { 36.0f, 277.0f, 140.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
@@ -870,7 +883,7 @@ StaticNpc N(npcGroup_802447E4)[] = {
         },
     },
     {
-        .id = 7,
+        .id = NPC_BOO6,
         .settings = &N(npcSettings_80241758),
         .pos = { 200.0f, 275.0f, 182.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
@@ -899,7 +912,7 @@ StaticNpc N(npcGroup_802447E4)[] = {
         },
     },
     {
-        .id = 8,
+        .id = NPC_BOO7,
         .settings = &N(npcSettings_80241758),
         .pos = { 379.0f, 300.0f, 192.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
@@ -928,7 +941,7 @@ StaticNpc N(npcGroup_802447E4)[] = {
         },
     },
     {
-        .id = 9,
+        .id = NPC_BOO8,
         .settings = &N(npcSettings_80241758),
         .pos = { 525.0f, 286.0f, 178.0f },
         .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_400000,
@@ -1022,7 +1035,7 @@ void N(func_80240158_BE7D38)(ScriptInstance* script, NpcAISettings* aiSettings, 
     if (aiSettings->unk_14 >= 0) {
         if (script->functionTemp[1].s <= 0) {
             script->functionTemp[1].s = aiSettings->unk_14;
-            if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.s, 0)) {
+            if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                 fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
                 func_800494C0(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
@@ -1068,7 +1081,7 @@ void N(func_802404C0_BE80A0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if ((aiSettings->unk_14 >= 0) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 0)) {
+    if ((aiSettings->unk_14 >= 0) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         func_800494C0(npc, 0x2F4, 0x200000);
@@ -1121,7 +1134,7 @@ void N(func_8024094C_BE852C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 1)) {
+    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->currentAnim = enemy->animList[0];
         npc->duration = 25;

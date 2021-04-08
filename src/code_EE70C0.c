@@ -72,7 +72,7 @@ void N(func_802413A8_EE7958)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (enemy->varTable[9] <= 0) {
-        if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && func_800490B4(shape, enemy, aiSettings->chaseRadius, aiSettings->unk_28.s, 1)) {
+        if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
             func_800494C0(npc, 0x2F4, 0x200000);
@@ -168,12 +168,12 @@ void N(func_80241968_EE7F18)(ScriptInstance* script, NpcAISettings* aiSettings, 
             npc->duration = 0;
             phi_f20 = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
             temp_f0_2 = get_clamped_angle_diff(npc->yaw, phi_f20);
-            if (aiSettings->unk_1C < fabsf(temp_f0_2)) {
+            if (aiSettings->unk_1C.s < fabsf(temp_f0_2)) {
                 phi_f20 = npc->yaw;
                 if (temp_f0_2 < 0.0f) {
-                    phi_f20 += -aiSettings->unk_1C;
+                    phi_f20 += -aiSettings->unk_1C.s;
                 } else {
-                    phi_f20 += aiSettings->unk_1C;
+                    phi_f20 += aiSettings->unk_1C.s;
                 }
             }
             npc->yaw = clamp_angle(phi_f20);
@@ -264,10 +264,10 @@ ApiStatus N(func_80242260_EE8810)(ScriptInstance* script, s32 isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
         set_variable(script, *args, D_80241CD0_BE0A60);
-        return 2;
+        return ApiStatus_DONE2;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 */
 
@@ -278,7 +278,7 @@ ApiStatus N(func_802422B4_EE8864)(ScriptInstance* script, s32 isInitialCall) {
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

@@ -89,7 +89,7 @@ void func_80127B70(s32 arg0) {
 
 INCLUDE_ASM(s32, "code_B9D60", func_80127BA4);
 
-INCLUDE_ASM(s32, "code_B9D60", func_80127D90);
+INCLUDE_ASM(s32, "code_B9D60", func_80127D90, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 
 void func_8012C2E0(void) {

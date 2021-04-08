@@ -78,7 +78,7 @@ ApiStatus SetMessageImages(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D0C94(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D0C94(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) == 0) {
         OVERRIDE_FLAG_SET(0x10);
     } else {
@@ -96,7 +96,7 @@ ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
+ApiStatus SetMessageValue(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 value = get_variable(script, *ptrReadPos++);
     s32 index = get_variable(script, *ptrReadPos);
