@@ -10,10 +10,10 @@
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/star_storm_78E7D0", func_802A1494_78EC64);
+INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1494_78EC64);
 
 #include "common/SetNpcCollision32.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/star_storm_78E7D0", func_802A1518_78ECE8);
+INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1518_78ECE8);
 
-INCLUDE_ASM(s32, "battle/star/star_storm_78E7D0", func_802A1628_78EDF8);
+INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1628_78EDF8);

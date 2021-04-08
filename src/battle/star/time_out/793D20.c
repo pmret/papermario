@@ -1,6 +1,6 @@
 #include "common.h"
 
-#define NAMESPACE battle_star_smooch
+#define NAMESPACE battle_star_time_out
 
 #include "common/UnkStarFuncs.inc.c"
 
@@ -10,10 +10,6 @@
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A1494_792224);
+INCLUDE_ASM(s32, "battle/star/time_out/793D20", func_802A1494_7941B4);
 
 #include "common/SetNpcCollision32.inc.c"
-
-#include "common/AddHP.inc.c"
-
-INCLUDE_ASM(s32, "battle/star/smooch_791D90", func_802A156C_7922FC);

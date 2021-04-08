@@ -10,7 +10,7 @@
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/focus_789E60", func_802A1494_78A2F4);
+INCLUDE_ASM(s32, "battle/star/focus/789E60", func_802A1494_78A2F4);
 
 #include "common/SetNpcCollision32.inc.c"
 

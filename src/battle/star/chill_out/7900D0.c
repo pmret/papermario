@@ -12,7 +12,7 @@ extern s32 D_802A2CC0;
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A1494_790564);
+INCLUDE_ASM(s32, "battle/star/chill_out/7900D0", func_802A1494_790564);
 
 #include "common/SetNpcCollision32.inc.c"
 
@@ -59,4 +59,4 @@ ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/star/chill_out_7900D0", func_802A16F4_7907C4);
+INCLUDE_ASM(s32, "battle/star/chill_out/7900D0", func_802A16F4_7907C4);

@@ -1,6 +1,6 @@
 #include "common.h"
 
-#define NAMESPACE battle_star_star_beam
+#define NAMESPACE battle_star_peach_beam
 
 #include "common/UnkStarFuncs.inc.c"
 
@@ -10,18 +10,18 @@
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1494_797454);
+INCLUDE_ASM(s32, "battle/star/peach_beam/7997B0", func_802A1494_799C44);
 
 #include "common/SetNpcCollision32.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/star_beam_796FC0", func_802A1518_7974D8);
+INCLUDE_ASM(s32, "battle/star/peach_beam/7997B0", func_802A1518_799CC8);
 
-ApiStatus func_802A2468_798428(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A2468_79AC18(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = D_802A3838;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A247C_79843C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A247C_79AC2C(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 230;
     }
@@ -36,3 +36,5 @@ ApiStatus func_802A247C_79843C(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
+
+// this file is identical in c code to star beam

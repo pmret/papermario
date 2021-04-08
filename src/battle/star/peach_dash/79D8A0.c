@@ -10,7 +10,7 @@
 
 #include "common/UnkBackgroundFunc.inc.c"
 
-INCLUDE_ASM(s32, "battle/star/peach_dash_79D8A0", func_802A1494_79DD34);
+INCLUDE_ASM(s32, "battle/star/peach_dash/79D8A0", func_802A1494_79DD34);
 
 #include "common/SetNpcCollision32.inc.c"
 
