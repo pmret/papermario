@@ -46,6 +46,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     cross = "mips-linux-gnu-"
 
+    ninja.variable("python", sys.executable)
+
     ninja.rule("cc",
         description="cc($version) $in",
         command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | tools/build/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -o - | tools/build/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
@@ -68,6 +70,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     ninja.rule("as",
         description="as $in",
         command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+    )
+
+    ninja.rule("img",
+        description="img($img_type) $in",
+        command=f"tools/build/img/build.py $img_type $in $out $img_flags",
     )
 
     ninja.rule("ld",
@@ -143,10 +150,11 @@ class Configure:
 
         def build(entry, task: str, variables: Dict[str, str] = {}):
             if str(entry.object_path) in skip_objects:
-
                 pass
             else:
                 built_objects.add(str(entry.object_path))
+
+                # TODO: asset src paths
 
                 ninja.build(
                     str(entry.object_path), # $out
@@ -170,6 +178,26 @@ class Configure:
                 build(entry, "bin")
             elif isinstance(subseg, segtypes.n64.Yay0.N64SegYay0):
                 build(entry, "yay0")
+            elif isinstance(subseg, segtypes.n64.img.N64SegImg):
+                flags = ""
+                if subseg.flip_horizontal:
+                    flags += "--flip-x "
+                if subseg.flip_vertical:
+                    flags += "--flip-y "
+                build(entry, "img", variables={
+                    "img_type": subseg.type,
+                    "img_flags": flags,
+                })
+            elif isinstance(subseg, segtypes.n64.palette.N64SegPalette):
+                build(entry, "img", variables={
+                    "img_type": subseg.type,
+                    "img_flags": "",
+                })
+            elif isinstance(subseg, segtypes.n64.code.ImageSubsegment):
+                build(entry, "img", variables={
+                    "img_type": subseg.type,
+                    "img_flags": "",
+                })
             else:
                 raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
 
