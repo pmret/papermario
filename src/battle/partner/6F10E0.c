@@ -35,9 +35,9 @@ ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_802380E4_6F11C4);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_802380E4_6F11C4);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_8023817C_6F125C);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_8023817C_6F125C);
 
 ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -101,15 +101,15 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
 }
 
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_80238BCC_6F1CAC);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_80238BCC_6F1CAC);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_80238E04_6F1EE4);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_80238E04_6F1EE4);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_80238E48_6F1F28);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_80238E48_6F1F28);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_80238E74_6F1F54);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_80238E74_6F1F54);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_80238EDC_6F1FBC);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_80238EDC_6F1FBC);
 
 ApiStatus func_8023903C_6F211C(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -143,7 +143,7 @@ ApiStatus func_802390B0_6F2190(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_goombario_6F10E0", func_802390C8_6F21A8);
+INCLUDE_ASM(s32, "battle/partner/6F10E0", func_802390C8_6F21A8);
 
 ApiStatus func_80239190_6F2270(ScriptInstance* script, s32 isInitialCall) {
     if (D_8023CDA4 == 0) {

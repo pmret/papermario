@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_parakarry_6FFD80", func_80238000_6FFD80);
+INCLUDE_ASM(s32, "battle/partner/6FFD80", func_80238000_6FFD80);
 
 ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -60,9 +60,9 @@ ApiStatus func_80238CE0_700A60(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_parakarry_6FFD80", func_80238E24_700BA4);
+INCLUDE_ASM(s32, "battle/partner/6FFD80", func_80238E24_700BA4);
 
-INCLUDE_ASM(s32, "battle/partner/battle_partner_parakarry_6FFD80", func_802390B4_700E34);
+INCLUDE_ASM(s32, "battle/partner/6FFD80", func_802390B4_700E34);
 
 ApiStatus func_802397C8_701548(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[15] = ((script->varTable[0] * 100) / 2499) + 2;
