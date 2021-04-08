@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80241648_C817E8
+glabel kzn_11_UnkFunc5
 /* C817E8 80241648 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* C817EC 8024164C AFB00028 */  sw        $s0, 0x28($sp)
 /* C817F0 80241650 00A0802D */  daddu     $s0, $a1, $zero

@@ -46,7 +46,7 @@ glabel func_8024231C_9B8C9C
 /* 9B8D40 802423C0 02A0202D */  daddu     $a0, $s5, $zero
 /* 9B8D44 802423C4 0240282D */  daddu     $a1, $s2, $zero
 /* 9B8D48 802423C8 0260302D */  daddu     $a2, $s3, $zero
-/* 9B8D4C 802423CC 0C090733 */  jal       func_80241CCC_9B864C
+/* 9B8D4C 802423CC 0C090733 */  jal       trd_07_UnkFunc5
 /* 9B8D50 802423D0 0200382D */   daddu    $a3, $s0, $zero
 /* 9B8D54 802423D4 86A200A8 */  lh        $v0, 0xa8($s5)
 /* 9B8D58 802423D8 AE42008C */  sw        $v0, 0x8c($s2)
@@ -96,7 +96,7 @@ glabel L80242464_9B8DE4
 glabel L80242474_9B8DF4
 /* 9B8DF4 80242474 0260202D */  daddu     $a0, $s3, $zero
 /* 9B8DF8 80242478 0200282D */  daddu     $a1, $s0, $zero
-/* 9B8DFC 8024247C 0C0904DF */  jal       func_8024137C_9B7CFC
+/* 9B8DFC 8024247C 0C0904DF */  jal       trd_07_UnkFunc4
 /* 9B8E00 80242480 0280302D */   daddu    $a2, $s4, $zero
 /* 9B8E04 80242484 8E630070 */  lw        $v1, 0x70($s3)
 /* 9B8E08 80242488 2402000A */  addiu     $v0, $zero, 0xa
