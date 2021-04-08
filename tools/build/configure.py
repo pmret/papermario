@@ -71,6 +71,8 @@ class Configure:
                 build(entry, "as")
             elif isinstance(entry.segment, segtypes.n64.code.CodeSubsegment) and entry.segment.type == "c":
                 build(entry, "cc")
+            elif isinstance(entry.segment, segtypes.n64.code.BinSubsegment) or isinstance(entry.segment, segtypes.n64.bin.N64SegBin):
+                build(entry, "bin")
             else:
                 print(f"configure: don't know how to build {entry.segment.__class__.__name__} '{entry.segment.name}'")
 
