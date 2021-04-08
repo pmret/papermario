@@ -46,14 +46,7 @@ ApiStatus N(func_80240BAC_DDD3DC)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240BD8_DDD408);
-/*
-ApiStatus N(func_80240BD8_DDD408)(ScriptInstance *script, s32 isInitialCall) {
-    set_message_string(D_8008EF20[gPlayerData.currentPartner][0], 0);
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc19.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240C10_DDD440);
 /*
