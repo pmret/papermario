@@ -114,7 +114,9 @@ class N64SegPaperMarioMapFS(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        return [LinkerEntry(self, options.get_asset_path() / f"{self.name}.bin", ".data")]
+        basepath = options.get_asset_path() / f"{self.name}.bin"
+
+        return [LinkerEntry(self, [basepath], basepath, ".data")]
 
 
     @staticmethod

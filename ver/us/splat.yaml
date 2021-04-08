@@ -17,6 +17,8 @@ options:
   asm_path: ver/us/asm
   assets_path: ver/us/assets
   build_path: ver/us/build
+  undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
+  undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
 segments:
   - name: header
     type: header
