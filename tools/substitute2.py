@@ -1,17 +1,13 @@
 from pathlib import Path
 
-FUNC="""    Bytecode *args = script->ptrReadPos;
-    s32 entityIdx = get_variable(script, *args++);
-    Entity* entity = get_entity_by_index(entityIdx);
-    s32 si_var = *args++;
-    Effect* effect = func_80071750(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
+FUNC="""    Entity* entity = get_entity_by_index(get_variable(script, *script->ptrReadPos));
 
-    set_variable(script, si_var, effect);
-
+    func_80070BB0(4, entity->position.x, entity->position.y + 12.5f, entity->position.z, 1.0f, 0x4B);
+    
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc20"
+NEW_FUNC_NAME = f"UnkFunc21"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

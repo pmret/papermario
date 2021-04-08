@@ -94,16 +94,7 @@ ApiStatus N(func_8024112C_889CFC)(ScriptInstance *script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241160_889D30);
-/*
-ApiStatus N(func_80241160_889D30)(ScriptInstance *script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(get_variable(script, *script->ptrReadPos));
-
-    func_80070BB0(4, entity->position.x, entity->position.y + 12.5f, entity->position.z, 1.0f, 0x4B);
-    
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc21.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_802411C4_889D94);
 /*
