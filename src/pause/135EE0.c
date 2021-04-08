@@ -6,12 +6,12 @@ void pause_set_cursor_opacity(s32 val) {
     gPauseMenuCursorTargetOpacity = val;
 }
 #else
-INCLUDE_ASM(s32, "135EE0", pause_set_cursor_opacity);
+INCLUDE_ASM(s32, "pause/135EE0", pause_set_cursor_opacity);
 #endif
 
-INCLUDE_ASM(s32, "135EE0", func_80242BAC);
+INCLUDE_ASM(s32, "pause/135EE0", func_80242BAC);
 
-INCLUDE_ASM(s32, "135EE0", func_80242D04);
+INCLUDE_ASM(s32, "pause/135EE0", func_80242D04);
 
 // Delay slot issue with gPauseMenuCursorTargetOpacity (needs .data)
 #ifdef NON_MATCHING
@@ -63,30 +63,30 @@ void pause_interp_cursor(void) {
     gPauseMenuCursorTargetOpacity = 255;
 }
 #else
-INCLUDE_ASM(s32, "135EE0", pause_interp_cursor);
+INCLUDE_ASM(s32, "pause/135EE0", pause_interp_cursor);
 #endif
 
-INCLUDE_ASM(s32, "135EE0", func_80242F90);
+INCLUDE_ASM(s32, "pause/135EE0", func_80242F90);
 
-INCLUDE_ASM(s32, "135EE0", func_80242FBC);
+INCLUDE_ASM(s32, "pause/135EE0", func_80242FBC);
 
-INCLUDE_ASM(s32, "135EE0", func_80242FF4);
+INCLUDE_ASM(s32, "pause/135EE0", func_80242FF4);
 
-INCLUDE_ASM(s32, "135EE0", func_80243090);
+INCLUDE_ASM(s32, "pause/135EE0", func_80243090);
 
-INCLUDE_ASM(s32, "135EE0", func_802430E4);
+INCLUDE_ASM(s32, "pause/135EE0", func_802430E4);
 
-INCLUDE_ASM(s32, "135EE0", func_8024313C);
+INCLUDE_ASM(s32, "pause/135EE0", func_8024313C);
 
-INCLUDE_ASM(s32, "135EE0", func_80243188);
+INCLUDE_ASM(s32, "pause/135EE0", func_80243188);
 
-INCLUDE_ASM(s32, "135EE0", func_80243238);
+INCLUDE_ASM(s32, "pause/135EE0", func_80243238);
 
-INCLUDE_ASM(s32, "135EE0", func_802432E8);
+INCLUDE_ASM(s32, "pause/135EE0", func_802432E8);
 
-INCLUDE_ASM(s32, "135EE0", func_80243388);
+INCLUDE_ASM(s32, "pause/135EE0", func_80243388);
 
-INCLUDE_ASM(s32, "135EE0", pause_interp_text_scroll);
+INCLUDE_ASM(s32, "pause/135EE0", pause_interp_text_scroll);
 
 s32 pause_interp_vertical_scroll(s32 deltaBefore) {
     s32 val;
@@ -123,21 +123,21 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
 void func_80243568(void) {
 }
 
-INCLUDE_ASM(s32, "135EE0", pause_textbox_draw_contents);
+INCLUDE_ASM(s32, "pause/135EE0", pause_textbox_draw_contents);
 
-INCLUDE_ASM(s32, "135EE0", pause_tutorial_draw_contents);
+INCLUDE_ASM(s32, "pause/135EE0", pause_tutorial_draw_contents);
 
-INCLUDE_ASM(s32, "135EE0", pause_init);
+INCLUDE_ASM(s32, "pause/135EE0", pause_init);
 
-INCLUDE_ASM(s32, "135EE0", pause_tutorial_input);
+INCLUDE_ASM(s32, "pause/135EE0", pause_tutorial_input);
 
-INCLUDE_ASM(s32, "135EE0", pause_handle_input);
+INCLUDE_ASM(s32, "pause/135EE0", pause_handle_input);
 
-INCLUDE_ASM(s32, "135EE0", pause_cleanup);
+INCLUDE_ASM(s32, "pause/135EE0", pause_cleanup);
 
-INCLUDE_ASM(s32, "135EE0", pause_get_total_equipped_bp_cost);
+INCLUDE_ASM(s32, "pause/135EE0", pause_get_total_equipped_bp_cost);
 
-INCLUDE_ASM(void, "135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
+INCLUDE_ASM(void, "pause/135EE0", pause_draw_rect, s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls,
             s32 ult, s32 dsdx, s32 dtdy);
 
-INCLUDE_ASM(s32, "135EE0", pause_sort_item_list);
+INCLUDE_ASM(s32, "pause/135EE0", pause_sort_item_list);
