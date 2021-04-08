@@ -1,13 +1,52 @@
 from pathlib import Path
 
-FUNC="""    Npc *npc = get_npc_safe(-4);
+FUNC="""    Bytecode *args = script->ptrReadPos;
+    s32 ret = 0;
 
-    func_80070BB0(9, npc->pos.x, npc->pos.y + 12.5f, npc->pos.z, 1.0f, 0x1E);
+    if (isInitialCall) {
+        script->varTable[0] = get_variable(script, *args++);
+        script->varTable[1] = get_variable(script, *args++);
+        script->functionTemp[0].s = 0;
+        script->functionTemp[1].s = 0;
+        set_transition_stencil_color(0, 0xD0, 0xD0, 0xD0);
+    }
 
-    return ApiStatus_DONE2;
+    switch (script->functionTemp[0].s) {
+        case 0:
+            if (script->functionTemp[1].s == 0xFF) {
+                script->functionTemp[0].s = 1;
+                script->functionTemp[2].s = 0;
+            }
+            script->functionTemp[1].s += script->varTable[0];
+            if (script->functionTemp[1].s >= 0x100) {
+                script->functionTemp[1].s = 0xFF;
+            }
+            break;
+
+        case 1:
+            script->functionTemp[2].s++;
+            if (script->functionTemp[2].s >= 2) {
+                script->functionTemp[0].s = 2;
+            }
+            break;
+
+        case 2:
+            if (script->functionTemp[1].s == 0) {
+                ret = 1;
+            }
+            script->functionTemp[1].s -= script->varTable[1];
+            if (script->functionTemp[1].s < 0) {
+                script->functionTemp[1].s = 0;
+            }
+            break;
+    }
+
+    set_transition_stencil_zoom_0(1, script->functionTemp[1].s);
+
+    return ret;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc22"
+NEW_FUNC_NAME = f"UnkFunc23"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
