@@ -143,7 +143,7 @@ class Configure:
 
         def build(entry, task: str, variables: Dict[str, str] = {}):
             if str(entry.object_path) in skip_objects:
-                # No need to rebuild non-version-specific object file.
+
                 pass
             else:
                 built_objects.add(str(entry.object_path))
@@ -164,7 +164,7 @@ class Configure:
                 build(entry, "as")
             elif isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type in ["asm", "hasm", "data", "rodata", "bss"]:
                 build(entry, "as")
-            elif isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c":
+            elif (isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c") or (isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type.startswith(".")):
                 build(entry, "cc_dsl") # TODO: don't use dsl for everything
             elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
                 build(entry, "bin")
