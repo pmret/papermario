@@ -7,10 +7,11 @@ options:
   extensions_path: ../../tools/splat_ext
   symbol_addrs_path: symbol_addrs.txt
   platform: n64
-  base_dir: .
+  base_path: .
   target_path: baserom.z64
   src_path: ../../src
   assets_path: assets
+  ld_script_path: papermario.ld
   subalign: 8
 segments:
   - name: header

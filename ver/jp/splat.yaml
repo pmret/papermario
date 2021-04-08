@@ -4,15 +4,17 @@ options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
-  ld_o_replace_extension: False
-  ld_addrs_header: build/include/ld_addrs.h
-  extensions: ../../tools/splat_ext
-  symbol_addrs_path: symbol_addrs.txt
   platform: n64
-  out_dir: .
-  target_path: baserom.z64
-  src_path: ../../src/jp
-  assets_dir: assets
+
+  base_path: ../..
+  extensions_path: tools/splat_ext
+  target_path: ver/jp/baserom.z64
+  symbol_addrs_path: ver/jp/symbol_addrs.txt
+  ld_script_path: ver/jp/papermario.ld
+  src_path: src/jp
+  asm_path: ver/jp/asm
+  assets_path: ver/jp/assets
+  build_path: ver/jp/build
 segments:
   - name: header
     type: header

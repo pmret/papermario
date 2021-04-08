@@ -26,6 +26,7 @@ build.ninja
 *.zip
 baserom.*
 build/
+!tools/build
 assets/
 /docs/doxygen/
 /include/ld_addrs.h
