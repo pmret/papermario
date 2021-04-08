@@ -301,7 +301,11 @@ class N64SegPaperMarioNpcSprites(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        return [LinkerEntry(self, options.get_asset_path() / "sprite" / f"{self.name}", ".data")]
+        basepath = options.get_asset_path() / "sprite" / f"{self.name}"
+        out_paths = [options.get_asset_path() / "sprite" / self.name / (f["name"] if type(f) is dict else f)
+                     for f in self.files]
+
+        return [LinkerEntry(self, out_paths, basepath, ".data")]
 
 
     @staticmethod

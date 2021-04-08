@@ -377,9 +377,6 @@ class N64SegPaperMarioMessages(N64Segment):
         msg_dir = options.get_asset_path() / self.name
         msg_dir.mkdir(parents=True, exist_ok=True)
 
-        # delete existing files
-        shutil.rmtree(msg_dir)
-
         for i, section_offset in enumerate(section_offsets):
             name = f"{i:02X}"
             if len(self.files) >= i:
@@ -429,7 +426,10 @@ class N64SegPaperMarioMessages(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        return [LinkerEntry(self, options.get_asset_path() / f"{self.name}", ".data")]
+        base_path = options.get_asset_path() / f"{self.name}"
+        out_paths = [base_path / Path(f + ".msg") for f in self.files]
+
+        return [LinkerEntry(self, out_paths, base_path, ".data")]
 
 
     @staticmethod
