@@ -4,16 +4,19 @@ options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
-  extensions_path: ../../tools/splat_ext
-  symbol_addrs_path: symbol_addrs.txt
-  linker_symbol_header_path: build/include/ld_addrs.h
   platform: n64
-  base_path: .
-  target_path: baserom.z64
-  src_path: ../../src
-  assets_path: assets
-  ld_script_path: papermario.ld
   subalign: 8
+
+  base_path: ../..
+  target_path: ver/us/baserom.z64
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: ver/us/symbol_addrs.txt
+  ld_script_path: ver/us/papermario.ld
+  linker_symbol_header_path: ver/us/build/include/ld_addrs.h
+  src_path: src
+  asm_path: ver/us/asm
+  assets_path: ver/us/assets
+  build_path: ver/us/build
 segments:
   - name: header
     type: header
@@ -31,54 +34,54 @@ segments:
     subalign: 4
     subsections:
     - [0x1000, hasm, entry_point]
-    - [0x1060, c, code_1060_len_310]
-    - [0x1370, c, code_1370_len_7d0]
-    - [0x1b40, c, code_1b40_len_20b0]
-    - [0x3bf0, c, code_3bf0_len_6f0]
-    - [0x42e0, c, code_42e0_len_1f60]
+    - [0x1060, c, 1060_len_310]
+    - [0x1370, c, 1370_len_7d0]
+    - [0x1b40, c, 1b40_len_20b0]
+    - [0x3bf0, c, 3bf0_len_6f0]
+    - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
-    - [0x6000, c, code_6000]
-    - [0x6240, c, code_6240_len_c00]
-    - [0x6e40, c, code_6e40_len_500]
-    - [0x7340, c, code_7340_len_b00]
-    - [0x7e40, c, os/nusys/code_7e40_len_3f0]
+    - [0x6000, c, 6000]
+    - [0x6240, c, 6240_len_c00]
+    - [0x6e40, c, 6e40_len_500]
+    - [0x7340, c, 7340_len_b00]
+    - [0x7e40, c, os/nusys/7e40_len_3f0]
     - [0x8230, c, os/nusys/nuSiMgr]
     - [0x8560, c]
     - [0x8800, c]
-    - [0x9d10, c, code_9d10_len_1080]
-    - [0xad90, c, code_ad90_len_2880]
+    - [0x9d10, c, 9d10_len_1080]
+    - [0xad90, c, ad90_len_2880]
     - [0xB0E0, c]
-    - [0xd610, c, code_d610_len_1330]
-    - [0xe940, c, code_e940_len_290]
-    - [0xebd0, c, code_ebd0_len_6a0]
-    - [0xf270, c, code_f270_len_1190]
-    - [0x10400, c, code_10400_len_d30]
-    - [0x11130, c, code_11130_len_c0]
-    - [0x111f0, c, code_111f0_len_860]
-    - [0x11a50, c, code_11a50_len_7a0]
-    - [0x121f0, c, code_121f0_len_1290]
-    - [0x13480, c, code_13480_len_3f0]
-    - [0x13870, c, code_13870_len_6980]
-    - [0x1a1f0, c, code_1a1f0_len_5390]
-    - [0x1f580, c, code_1f580_len_1940]
-    - [0x20ec0, c, code_20ec0_len_5040]
+    - [0xd610, c, d610_len_1330]
+    - [0xe940, c, e940_len_290]
+    - [0xebd0, c, ebd0_len_6a0]
+    - [0xf270, c, f270_len_1190]
+    - [0x10400, c, 10400_len_d30]
+    - [0x11130, c, 11130_len_c0]
+    - [0x111f0, c, 111f0_len_860]
+    - [0x11a50, c, 11a50_len_7a0]
+    - [0x121f0, c, 121f0_len_1290]
+    - [0x13480, c, 13480_len_3f0]
+    - [0x13870, c, 13870_len_6980]
+    - [0x1a1f0, c, 1a1f0_len_5390]
+    - [0x1f580, c, 1f580_len_1940]
+    - [0x20ec0, c, 20ec0_len_5040]
     - [0x23680, c]
     - [0x25AF0, c]
-    - [0x25f00, c, code_25f00_len_940]
-    - [0x26840, c, code_26840_len_20d0]
-    - [0x28910, c, code_28910_len_5090]
+    - [0x25f00, c, 25f00_len_940]
+    - [0x26840, c, 26840_len_20d0]
+    - [0x28910, c, 28910_len_5090]
     - [0x2BF90, c]
-    - [0x2d9a0, c, code_2d9a0_len_890]
-    - [0x2e230, c, code_2e230_len_2190]
-    - [0x303c0, c, code_303c0_len_3e10]
+    - [0x2d9a0, c, 2d9a0_len_890]
+    - [0x2e230, c, 2e230_len_2190]
+    - [0x303c0, c, 303c0_len_3e10]
     - [0x30450, c]
-    - [0x31650, c, code_31650]
+    - [0x31650, c, 31650]
     - [0x33450, c]
-    - [0x341d0, c, code_341d0]
+    - [0x341d0, c, 341d0]
     - [0x35ac0, c, world/world]
-    - [0x362a0, c, code_362a0_len_2f70]
-    - [0x39210, c, code_39210_len_aa0]
-    - [0x39cb0, c, os/code_39cb0_len_100]
+    - [0x362a0, c, 362a0_len_2f70]
+    - [0x39210, c, 39210_len_aa0]
+    - [0x39cb0, c, os/39cb0_len_100]
     - [0x39db0, c, os/nusys/nuSched]
     - [0x3a650, c, os/nusys/nuGfxFuncSet]
     - [0x3a690, c, os/nusys/nuGfxPreNMIFuncSet]
@@ -96,14 +99,14 @@ segments:
     - [0x3b290, c, os/nusys/nuContRmbStart]
     - [0x3b2f0, c, os/nusys/nuContRmbCheck]
     - [0x3b390, c, os/nusys/nuContRmbModeSet]
-    - [0x3b4a0, c, os/nusys/code_3B4A0]
+    - [0x3b4a0, c, os/nusys/3B4A0]
     - [0x3B5F0, c, os/nusys/nuGfxThread]
-    - [0x3b710, c, os/code_3b710_len_40]
-    - [0x3b750, c, os/code_3b750_len_20]
-    - [0x3b770, c, os/code_3b770_len_80]
-    - [0x3b7f0, c, os/code_3b7f0_len_120]
+    - [0x3b710, c, os/3b710_len_40]
+    - [0x3b750, c, os/3b750_len_20]
+    - [0x3b770, c, os/3b770_len_80]
+    - [0x3b7f0, c, os/3b7f0_len_120]
     - [0x3b910, c, os/nuContMgr]
-    - [0x3bd20, c, os/code_3bd20_len_c0]
+    - [0x3bd20, c, os/3bd20_len_c0]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3bde0, c, os/osCreatePiManager]
     - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
@@ -111,141 +114,141 @@ segments:
     - [0x3c220, c, os/osEPiStartDma] # MOVE_ADDU
     - [0x3c2c0, c, os/osEPiLinkHandle]
     - [0x3c310, c, os/osCartRomInit]
-    - [0x3c490, c, os/code_3c490_len_3c0]
-    - [0x3c850, c, os/code_3c850_len_f0]
-    - [0x3c940, c, os/code_3c940_len_140]
-    - [0x3ca80, c, os/code_3ca80_len_a0]
+    - [0x3c490, c, os/3c490_len_3c0]
+    - [0x3c850, c, os/3c850_len_f0]
+    - [0x3c940, c, os/3c940_len_140]
+    - [0x3ca80, c, os/3ca80_len_a0]
     - [0x3CB20, hasm, os/osInvalDCache]
     - [0x3CBD0, hasm, os/osInvalICache]
     - [0x3cc50, hasm, os/osWritebackDCache]
     - [0x3ccd0, hasm, os/osWritebackDCacheAll]
-    - [0x3cd00, c, os/code_3cd00_len_5f0] # MOVE_ADDU
+    - [0x3cd00, c, os/3cd00_len_5f0] # MOVE_ADDU
     - [0x3CF80, c, os/controller]
     - [0x3D290, c, os/osVirtualToPhysical]
-    - [0x3d2f0, c, os/code_3d2f0_len_10]
-    - [0x3d300, c, os/code_3d300_len_30]
+    - [0x3d2f0, c, os/3d2f0_len_10]
+    - [0x3d300, c, os/3d300_len_30]
     - [0x3d330, c, os/guFrustum]
     - [0x3D5B0, c, os/guLookAt]
-    - [0x3dcc0, c, os/code_3dcc0_len_a60]
-    - [0x3e720, c, os/code_3e720_len_5f0]
+    - [0x3dcc0, c, os/3dcc0_len_a60]
+    - [0x3e720, c, os/3e720_len_5f0]
     - [0x3ed10, c, os/guOrtho]
-    - [0x3ef90, c, os/code_3ef90_len_600]
-    - [0x3f310, c, os/code_3f310_len_3c0]
-    - [0x3f6d0, c, os/code_3f6d0_len_320]
+    - [0x3ef90, c, os/3ef90_len_600]
+    - [0x3f310, c, os/3f310_len_3c0]
+    - [0x3f6d0, c, os/3f6d0_len_320]
     - [0x3f9f0, c, os/sins]
-    - [0x3fa50, c, os/code_3fa50_len_f60]
-    - [0x3FEA0, c, os/code_3FEA0] # MOVE_ADDU
+    - [0x3fa50, c, os/3fa50_len_f60]
+    - [0x3FEA0, c, os/3FEA0] # MOVE_ADDU
     - [0x40980, c, os/osCreateMesgQueue]
     - [0x409b0, c, os/osJamMesg]
     - [0x40af0, c, os/osRecvMesg]
-    - [0x40c20, c, os/code_40c20_len_1f0]
+    - [0x40c20, c, os/40c20_len_1f0]
     - [0x40E00, hasm, os/osGetCount]
-    - [0x40E10, c, os/code_40E10]
+    - [0x40E10, c, os/40E10]
     - [0x41050, c, os/osSpTaskYield]
     - [0x41070, c, os/osSpTaskYielded]
     - [0x410C0, c, os/osSiRawStartDma]
-    - [0x41170, c, os/code_41170_len_f0]
+    - [0x41170, c, os/41170_len_f0]
     - [0x41260, c, os/osCreateThread]
     - [0x41330, c, os/osGetThreadPri]
     - [0x41350, c, os/osSetThreadPri] # MOVE_ADDU
-    - [0x41420, c, os/code_41420_len_120]
-    - [0x41540, c, os/code_41540_len_c0]
-    - [0x41600, c, os/code_41600_len_40]
-    - [0x41640, c, os/code_41640_len_50]
-    - [0x41690, c, os/code_41690_len_10]
-    - [0x416a0, c, os/code_416a0_len_90]
-    - [0x41730, c, os/code_41730_len_20]
-    - [0x41750, c, os/code_41750_len_450]
-    - [0x41880, c, os/code_41880]
-    - [0x41ba0, c, os/code_41ba0_len_c0]
-    - [0x41c60, c, os/code_41c60_len_c0]
-    - [0x41d20, c, os/code_41d20_len_40]
-    - [0x41d60, c, os/code_41d60_len_50]
-    - [0x41db0, c, os/code_41db0_len_40]
-    - [0x41df0, c, os/code_41df0_len_40]
-    - [0x41e30, c, os/code_41e30_len_40]
-    - [0x41e70, c, os/code_41e70_len_340]
-    - [0x421b0, c, os/code_421b0_len_60]
-    - [0x42210, c, os/code_42210_len_50]
-    - [0x42260, c, os/code_42260_len_170]
-    - [0x423d0, c, os/code_423d0_len_50]
-    - [0x42420, c, os/code_42420_len_50]
-    - [0x42470, c, os/code_42470_len_310]
-    - [0x42780, c, os/code_42780_len_120]
+    - [0x41420, c, os/41420_len_120]
+    - [0x41540, c, os/41540_len_c0]
+    - [0x41600, c, os/41600_len_40]
+    - [0x41640, c, os/41640_len_50]
+    - [0x41690, c, os/41690_len_10]
+    - [0x416a0, c, os/416a0_len_90]
+    - [0x41730, c, os/41730_len_20]
+    - [0x41750, c, os/41750_len_450]
+    - [0x41880, c, os/41880]
+    - [0x41ba0, c, os/41ba0_len_c0]
+    - [0x41c60, c, os/41c60_len_c0]
+    - [0x41d20, c, os/41d20_len_40]
+    - [0x41d60, c, os/41d60_len_50]
+    - [0x41db0, c, os/41db0_len_40]
+    - [0x41df0, c, os/41df0_len_40]
+    - [0x41e30, c, os/41e30_len_40]
+    - [0x41e70, c, os/41e70_len_340]
+    - [0x421b0, c, os/421b0_len_60]
+    - [0x42210, c, os/42210_len_50]
+    - [0x42260, c, os/42260_len_170]
+    - [0x423d0, c, os/423d0_len_50]
+    - [0x42420, c, os/42420_len_50]
+    - [0x42470, c, os/42470_len_310]
+    - [0x42780, c, os/42780_len_120]
     - [0x427E0, c, os/osViRepeatLine]
     - [0x42840, c, os/guMtxIdent]
     - [0x428a0, c, os/guMtxIdentF]
-    - [0x42900, c, os/code_42900_len_80]
-    - [0x42980, c, os/code_42980_len_80]
-    - [0x42a00, c, os/code_42a00_len_100]
-    - [0x42b00, c, os/code_42b00_len_c0]
-    - [0x42bc0, c, os/code_42bc0_len_60]
-    - [0x42c20, c, os/code_42c20_len_e0]
-    - [0x42d00, c, os/code_42d00_len_60]
-    - [0x42d60, c, os/code_42d60_len_80]
-    - [0x42de0, c, os/code_42de0_len_90]
-    - [0x42e70, c, os/code_42e70_len_390]
+    - [0x42900, c, os/42900_len_80]
+    - [0x42980, c, os/42980_len_80]
+    - [0x42a00, c, os/42a00_len_100]
+    - [0x42b00, c, os/42b00_len_c0]
+    - [0x42bc0, c, os/42bc0_len_60]
+    - [0x42c20, c, os/42c20_len_e0]
+    - [0x42d00, c, os/42d00_len_60]
+    - [0x42d60, c, os/42d60_len_80]
+    - [0x42de0, c, os/42de0_len_90]
+    - [0x42e70, c, os/42e70_len_390]
     - [0x42F20, c, os/guRotate]
-    - [0x43200, c, os/code_43200_len_7c0]
-    - [0x43590, c, os/code_43590]
-    - [0x439c0, c, os/code_439c0_len_220]
-    - [0x43be0, c, os/code_43be0_len_5e0]
-    - [0x441c0, c, os/code_441c0_len_1c0]
-    - [0x44380, c, os/code_44380_len_4e0]
-    - [0x44490, c, os/code_44490]
-    - [0x44860, c, os/code_44860_len_60]
-    - [0x448c0, c, os/code_448c0_len_210]
-    - [0x44ad0, c, os/code_44ad0_len_70]
-    - [0x44b40, c, os/code_44b40_len_a90]
-    - [0x455d0, c, os/code_455d0_len_1f0]
-    - [0x457c0, c, os/code_457c0_len_270]
-    - [0x45a30, c, os/code_45a30_len_20]
-    - [0x45a50, c, os/code_45a50_len_3a0]
+    - [0x43200, c, os/43200_len_7c0]
+    - [0x43590, c, os/43590]
+    - [0x439c0, c, os/439c0_len_220]
+    - [0x43be0, c, os/43be0_len_5e0]
+    - [0x441c0, c, os/441c0_len_1c0]
+    - [0x44380, c, os/44380_len_4e0]
+    - [0x44490, c, os/44490]
+    - [0x44860, c, os/44860_len_60]
+    - [0x448c0, c, os/448c0_len_210]
+    - [0x44ad0, c, os/44ad0_len_70]
+    - [0x44b40, c, os/44b40_len_a90]
+    - [0x455d0, c, os/455d0_len_1f0]
+    - [0x457c0, c, os/457c0_len_270]
+    - [0x45a30, c, os/45a30_len_20]
+    - [0x45a50, c, os/45a50_len_3a0]
     - [0x45df0, hasm, os/exceptasm]
     - [0x46760, hasm, os/__osDisableInt]
     - [0x467D0, hasm, os/__osRestoreInt]
-    - [0x467f0, c, os/code_467f0_len_90]
-    - [0x46880, c, os/code_46880_len_260]
-    - [0x46ae0, c, os/code_46ae0_len_170]
-    - [0x46c50, c, os/code_46c50_len_20]
-    - [0x46c70, c, os/code_46c70_len_e00]
+    - [0x467f0, c, os/467f0_len_90]
+    - [0x46880, c, os/46880_len_260]
+    - [0x46ae0, c, os/46ae0_len_170]
+    - [0x46c50, c, os/46c50_len_20]
+    - [0x46c70, c, os/46c70_len_e00]
     - [0x47A60, hasm, os/__osGetCause]
-    - [0x47a70, c, os/code_47a70_len_10]
-    - [0x47a80, c, os/code_47a80_len_10]
-    - [0x47a90, c, os/code_47a90_len_50]
-    - [0x47ae0, c, os/code_47ae0_len_e0]
-    - [0x47bc0, c, os/code_47bc0_len_50]
-    - [0x47c10, c, os/code_47c10_len_50]
-    - [0x47c60, c, os/code_47c60_len_f0] # MOVE_ADDU
-    - [0x47d50, c, os/code_47d50_len_e0]
-    - [0x47e30, c, os/code_47e30_len_60]
-    - [0x47e90, c, os/code_47e90_len_110]
-    - [0x47fa0, c, os/code_47fa0_len_20]
-    - [0x47fc0, c, os/code_47fc0_len_60]
-    - [0x48020, c, os/code_48020_len_a00]
+    - [0x47a70, c, os/47a70_len_10]
+    - [0x47a80, c, os/47a80_len_10]
+    - [0x47a90, c, os/47a90_len_50]
+    - [0x47ae0, c, os/47ae0_len_e0]
+    - [0x47bc0, c, os/47bc0_len_50]
+    - [0x47c10, c, os/47c10_len_50]
+    - [0x47c60, c, os/47c60_len_f0] # MOVE_ADDU
+    - [0x47d50, c, os/47d50_len_e0]
+    - [0x47e30, c, os/47e30_len_60]
+    - [0x47e90, c, os/47e90_len_110]
+    - [0x47fa0, c, os/47fa0_len_20]
+    - [0x47fc0, c, os/47fc0_len_60]
+    - [0x48020, c, os/48020_len_a00]
     - [0x48a20, c, os/ldiv]
     - [0x48be0, c, os/osSiDeviceBusy]
-    - [0x48c00, c, os/code_48c00_len_5c0]
-    - [0x491c0, c, os/code_491c0_len_f80]
-    - [0x49C70, c, os/code_49C70]
-    - [0x4a140, c, os/code_4a140_len_70]
-    - [0x4a1b0, c, os/code_4a1b0_len_40]
-    - [0x4a1f0, c, os/code_4a1f0_len_170] # yay0 decompression - some or all is hand-written
-    - [0x4a360, c, os/code_4a360_len_930] # osFlash* - IDO O2 -g
-    - [0x4ac90, c, code_4ac90_len_3910]
+    - [0x48c00, c, os/48c00_len_5c0]
+    - [0x491c0, c, os/491c0_len_f80]
+    - [0x49C70, c, os/49C70]
+    - [0x4a140, c, os/4a140_len_70]
+    - [0x4a1b0, c, os/4a1b0_len_40]
+    - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
+    - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
+    - [0x4ac90, c, 4ac90_len_3910]
     - [0x4DF30, c]
-    - [0x4E5A0, data, code_1000_len_60]
-    - [0x4F410, .data, code_1370_len_7d0]
-    - [0x4F420, .data, code_1b40_len_20b0]
-    - [0x4F660, .data, code_42e0_len_1f60]
-    - [0x4F670, .data, code_43F0]
-    - [0x4F9D0, data, code_6240_len_c00]
-    - [0x52D08, .data, code_f270_len_1190]
+    - [0x4E5A0, data, 1000_len_60]
+    - [0x4F410, .data, 1370_len_7d0]
+    - [0x4F420, .data, 1b40_len_20b0]
+    - [0x4F660, .data, 42e0_len_1f60]
+    - [0x4F670, .data, 43F0]
+    - [0x4F9D0, data, 6240_len_c00]
+    - [0x52D08, .data, f270_len_1190]
     - [0x52D80, data]
-    - [0x53570, .data, code_25f00_len_940]
-    - [0x53590, data, code_26840_len_20d0]
-    - [0x541B0, .data, code_30450]
-    - [0x54250, .data, code_31650]
+    - [0x53570, .data, 25f00_len_940]
+    - [0x53590, data, 26840_len_20d0]
+    - [0x541B0, .data, 30450]
+    - [0x54250, .data, 31650]
     - [0x542E0, data]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, data] # has scripts
@@ -255,75 +258,75 @@ segments:
     - [0x6F120, .data, os/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
-    - [0x6F190, .data, os/code_3c850_len_f0]
-    - [0x6F1A0, .data, os/code_3ca80_len_a0]
+    - [0x6F190, .data, os/3c850_len_f0]
+    - [0x6F1A0, .data, os/3ca80_len_a0]
     - [0x6F1B0, .data, os/controller]
-    - [0x6F1C0, .data, os/code_3f310_len_3c0]
-    - [0x6F1D0, .data, os/code_3f6d0_len_320]
+    - [0x6F1C0, .data, os/3f310_len_3c0]
+    - [0x6F1D0, .data, os/3f6d0_len_320]
     - [0x6F1E0, .data, os/sins]
-    - [0x6F9E0, .data, os/code_3FEA0]
-    - [0x6FA30, .data, os/code_40c20_len_1f0]
-    - [0x6FA40, .data, os/code_41170_len_f0]
+    - [0x6F9E0, .data, os/3FEA0]
+    - [0x6FA30, .data, os/40c20_len_1f0]
+    - [0x6FA40, .data, os/41170_len_f0]
     - [0x6FA50, .data, os/osSetThreadPri]
     - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, .rodata, code_1060_len_310]
-    - [0x73148, .rodata, code_1b40_len_20b0]
-    - [0x73160, .rodata, code_43F0]
-    - [0x73200, .rodata, code_6e40_len_500]
-    - [0x73434, .rodata, code_7340_len_b00]
-    - [0x735E0, .rodata, code_8800]
-    - [0x73610, .rodata, code_B0E0]
-    - [0x73680, .rodata, code_d610_len_1330]
-    - [0x73690, .rodata, code_f270_len_1190]
-    - [0x736E8, .rodata, code_10400_len_d30]
-    - [0x73720, .rodata, code_111f0_len_860]
-    - [0x73738, .rodata, code_11a50_len_7a0]
-    - [0x73790, .rodata, code_121f0_len_1290]
-    - [0x73860, .rodata, code_13480_len_3f0]
-    - [0x73880, .rodata, code_13870_len_6980]
-    - [0x739F0, .rodata, code_1a1f0_len_5390]
-    - [0x73AB0, .rodata, code_20ec0_len_5040]
-    - [0x73B10, .rodata, code_23680]
-    - [0x73CC0, .rodata, code_28910_len_5090]
-    - [0x73CF0, .rodata, code_2e230_len_2190]
-    - [0x73D08, .rodata, code_30450]
-    - [0x73D30, .rodata, code_33450]
-    - [0x73D40, .rodata, code_341d0]
+    - [0x73130, .rodata, 1060_len_310]
+    - [0x73148, .rodata, 1b40_len_20b0]
+    - [0x73160, .rodata, 43F0]
+    - [0x73200, .rodata, 6e40_len_500]
+    - [0x73434, .rodata, 7340_len_b00]
+    - [0x735E0, .rodata, 8800]
+    - [0x73610, .rodata, B0E0]
+    - [0x73680, .rodata, d610_len_1330]
+    - [0x73690, .rodata, f270_len_1190]
+    - [0x736E8, .rodata, 10400_len_d30]
+    - [0x73720, .rodata, 111f0_len_860]
+    - [0x73738, .rodata, 11a50_len_7a0]
+    - [0x73790, .rodata, 121f0_len_1290]
+    - [0x73860, .rodata, 13480_len_3f0]
+    - [0x73880, .rodata, 13870_len_6980]
+    - [0x739F0, .rodata, 1a1f0_len_5390]
+    - [0x73AB0, .rodata, 20ec0_len_5040]
+    - [0x73B10, .rodata, 23680]
+    - [0x73CC0, .rodata, 28910_len_5090]
+    - [0x73CF0, .rodata, 2e230_len_2190]
+    - [0x73D08, .rodata, 30450]
+    - [0x73D30, .rodata, 33450]
+    - [0x73D40, .rodata, 341d0]
     - [0x73DA0, .rodata, world/world]
     - [0x74EA0, .rodata, os/osSetIntMask]
-    - [0x74F20, .rodata, os/code_3c490_len_3c0]
-    - [0x74F40, .rodata, os/code_3c940_len_140]
+    - [0x74F20, .rodata, os/3c490_len_3c0]
+    - [0x74F40, .rodata, os/3c940_len_140]
     - [0x74F50, .rodata, os/guLookAt]
-    - [0x74F70, .rodata, os/code_3dcc0_len_a60]
-    - [0x74FA0, .rodata, os/code_3e720_len_5f0]
-    - [0x74FB0, .rodata, os/code_3ef90_len_600]
-    - [0x74FF0, .rodata, os/code_3FEA0]
-    - [0x75170, .rodata, os/code_42470_len_310]
+    - [0x74F70, .rodata, os/3dcc0_len_a60]
+    - [0x74FA0, .rodata, os/3e720_len_5f0]
+    - [0x74FB0, .rodata, os/3ef90_len_600]
+    - [0x74FF0, .rodata, os/3FEA0]
+    - [0x75170, .rodata, os/42470_len_310]
     - [0x75180, .rodata, os/exceptasm]
-    - [0x751D0, .rodata, os/code_46c70_len_e00]
+    - [0x751D0, .rodata, os/46c70_len_e00]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
-    - [0x75240, .bss, os/code_39cb0_len_100, 0x0] # size unknown
+    - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
     vram: 0x800DC500
     subalign: 4
     subsections:
-    - [0x759b0, c, code_759b0_len_61b0]
-    - [0x77480, c, code_77480]
-    - [0x7B440, c, code_7B440]
-    - [0x7bb60, c, code_7bb60_len_41b0]
-    - [0x7fd10, c, code_7fd10_len_b40]
-    - [0x80850, c, code_80850_len_3060]
+    - [0x759b0, c, 759b0_len_61b0]
+    - [0x77480, c, 77480]
+    - [0x7B440, c, 7B440]
+    - [0x7bb60, c, 7bb60_len_41b0]
+    - [0x7fd10, c, 7fd10_len_b40]
+    - [0x80850, c, 80850_len_3060]
     - [0x838b0, c, world/partners]
-    - [0x891b0, c, code_891b0_len_fb0]
-    - [0x8a160, c, code_8a160_len_700]
-    - [0x8a860, c, code_8a860_len_3f30]
-    - [0x8e790, c, code_8e790_len_2850]
-    - [0x90FE0, .data, code_759b0_len_61b0]
+    - [0x891b0, c, 891b0_len_fb0]
+    - [0x8a160, c, 8a160_len_700]
+    - [0x8a860, c, 8a860_len_3f30]
+    - [0x8e790, c, 8e790_len_2850]
+    - [0x90FE0, .data, 759b0_len_61b0]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
     - [0x917F8, data]
@@ -335,120 +338,120 @@ segments:
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, .rodata, code_77480]
-    - [0xA51E0, .rodata, code_7B440]
-    - [0xA5230, .rodata, code_7bb60_len_41b0]
-    - [0xA53E0, .rodata, code_7fd10_len_b40]
-    - [0xA5410, .rodata, code_80850_len_3060]
+    - [0xA5100, .rodata, 77480]
+    - [0xA51E0, .rodata, 7B440]
+    - [0xA5230, .rodata, 7bb60_len_41b0]
+    - [0xA53E0, .rodata, 7fd10_len_b40]
+    - [0xA5410, .rodata, 80850_len_3060]
     - [0xA54F0, .rodata, world/partners]
-    - [0xA5798, .rodata, code_891b0_len_fb0]
-    - [0xA57C0, .rodata, code_8a160_len_700]
-    - [0xA57E0, .rodata, code_8a860_len_3f30]
+    - [0xA5798, .rodata, 891b0_len_fb0]
+    - [0xA57C0, .rodata, 8a160_len_700]
+    - [0xA57E0, .rodata, 8a860_len_3f30]
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
     subsections:
-    - [0xa5dd0, c, code_a5dd0_len_114e0]
-    - [0xB4580, c, code_B4580]
-    - [0xb72b0, c, code_b72b0_len_15ed0]
-    - [0xB9D60, c, code_B9D60]
-    - [0xC50A0, c, code_C50A0]
-    - [0xcd180, c, code_cd180_len_38f0]
-    - [0xCEE40, c, code_CEE40]
-    - [0xd0a70, c, code_d0a70_len_4fe0]
-    - [0xd5a50, c, code_d5a50_len_5fd0]
-    - [0xdba20, c, code_dba20_len_350]
-    - [0xdbd70, c, code_dbd70_len_700]
-    - [0xdc470, c, code_dc470_len_14c0]
-    - [0xdd930, c, code_dd930_len_1c0]
-    - [0xddaf0, c, code_ddaf0_len_c50]
-    - [0xde740, c, code_de740_len_23f0]
-    - [0xDF950, c, code_DF950]
-    - [0xe0b30, c, code_e0b30_len_b80]
-    - [0xE16B0, data, code_a5dd0_len_114e0]
-    - [0xE5510, .data, code_d0a70_len_4fe0]
-    - [0xE56C0, .data, code_d5a50_len_5fd0]
-    - [0xE5820, .data, code_dc470_len_14c0]
-    - [0xE5840, .data, code_dd930_len_1c0]
-    - [0xE5850, .data, code_ddaf0_len_c50]
-    - [0xE59D0, .data, code_DF950]
-    - [0xE5DF0, .data, code_e0b30_len_b80]
-    - [0xE5E40, .rodata, code_a5dd0_len_114e0]
-    - [0xE6560, .rodata, code_B4580]
-    - [0xE67B0, .rodata, code_b72b0_len_15ed0]
-    - [0xE6A70, .rodata, code_B9D60]
-    - [0xE7140, .rodata, code_C50A0]
-    - [0xE75A0, .rodata, code_cd180_len_38f0]
-    - [0xE7680, .rodata, code_CEE40]
-    - [0xE76B0, .rodata, code_d0a70_len_4fe0]
-    - [0xE7840, .rodata, code_d5a50_len_5fd0]
-    - [0xE7920, .rodata, code_dc470_len_14c0]
-    - [0xE7940, .rodata, code_ddaf0_len_c50]
-    - [0xE7950, .rodata, code_DF950]
-    - [0xE7990, .rodata, code_e0b30_len_b80]
+    - [0xa5dd0, c, a5dd0_len_114e0]
+    - [0xB4580, c, B4580]
+    - [0xb72b0, c, b72b0_len_15ed0]
+    - [0xB9D60, c, B9D60]
+    - [0xC50A0, c, C50A0]
+    - [0xcd180, c, cd180_len_38f0]
+    - [0xCEE40, c, CEE40]
+    - [0xd0a70, c, d0a70_len_4fe0]
+    - [0xd5a50, c, d5a50_len_5fd0]
+    - [0xdba20, c, dba20_len_350]
+    - [0xdbd70, c, dbd70_len_700]
+    - [0xdc470, c, dc470_len_14c0]
+    - [0xdd930, c, dd930_len_1c0]
+    - [0xddaf0, c, ddaf0_len_c50]
+    - [0xde740, c, de740_len_23f0]
+    - [0xDF950, c, DF950]
+    - [0xe0b30, c, e0b30_len_b80]
+    - [0xE16B0, data, a5dd0_len_114e0]
+    - [0xE5510, .data, d0a70_len_4fe0]
+    - [0xE56C0, .data, d5a50_len_5fd0]
+    - [0xE5820, .data, dc470_len_14c0]
+    - [0xE5840, .data, dd930_len_1c0]
+    - [0xE5850, .data, ddaf0_len_c50]
+    - [0xE59D0, .data, DF950]
+    - [0xE5DF0, .data, e0b30_len_b80]
+    - [0xE5E40, .rodata, a5dd0_len_114e0]
+    - [0xE6560, .rodata, B4580]
+    - [0xE67B0, .rodata, b72b0_len_15ed0]
+    - [0xE6A70, .rodata, B9D60]
+    - [0xE7140, .rodata, C50A0]
+    - [0xE75A0, .rodata, cd180_len_38f0]
+    - [0xE7680, .rodata, CEE40]
+    - [0xE76B0, .rodata, d0a70_len_4fe0]
+    - [0xE7840, .rodata, d5a50_len_5fd0]
+    - [0xE7920, .rodata, dc470_len_14c0]
+    - [0xE7940, .rodata, ddaf0_len_c50]
+    - [0xE7950, .rodata, DF950]
+    - [0xE7990, .rodata, e0b30_len_b80]
   - type: code
     start: 0xE79B0
     vram: 0x802C3000
     subsections:
-    - [0xe79b0, c, code_e79b0_len_1920]
+    - [0xe79b0, c, e79b0_len_1920]
     - [0xe92d0, c, si]
-    - [0xED510, c, code_ED510]
-    - [0xef070, c, code_ef070_len_3400]
-    - [0xf2470, c, code_f2470_len_27f0]
-    - [0xf4c60, c, code_f4c60_len_4300]
-    - [0xf5750, c, code_F5750]
-    - [0xf8f60, c, code_f8f60_len_1560]
-    - [0xfa4c0, c, code_fa4c0_len_3bf0]
-    - [0xFBE10, c, code_FBE10]
-    - [0xfe0b0, c, code_fe0b0_len_5a0]
-    - [0xFE650, .data, code_e79b0_len_1920]
+    - [0xED510, c, ED510]
+    - [0xef070, c, ef070_len_3400]
+    - [0xf2470, c, f2470_len_27f0]
+    - [0xf4c60, c, f4c60_len_4300]
+    - [0xf5750, c, F5750]
+    - [0xf8f60, c, f8f60_len_1560]
+    - [0xfa4c0, c, fa4c0_len_3bf0]
+    - [0xFBE10, c, FBE10]
+    - [0xfe0b0, c, fe0b0_len_5a0]
+    - [0xFE650, .data, e79b0_len_1920]
     - [0xFE660, data, si]
-    - [0xFE730, .rodata, code_e79b0_len_1920]
+    - [0xFE730, .rodata, e79b0_len_1920]
     - [0xFE748, .rodata, si]
-    - [0xFEB80, .rodata, code_ef070_len_3400]
-    - [0xFEB90, .rodata, code_f2470_len_27f0]
-    - [0xFEBA0, .rodata, code_f4c60_len_4300]
-    - [0xFEBB8, .rodata, code_F5750]
-    - [0xFEC08, .rodata, code_FBE10]
+    - [0xFEB80, .rodata, ef070_len_3400]
+    - [0xFEB90, .rodata, f2470_len_27f0]
+    - [0xFEBA0, .rodata, f4c60_len_4300]
+    - [0xFEBB8, .rodata, F5750]
+    - [0xFEC08, .rodata, FBE10]
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
     subsections:
-    - [0x0fee30, c, code_fee30_len_2d60]
-    - [0x101b90, c, code_101b90_len_8f0]
-    - [0x102480, .data, code_fee30_len_2d60]
+    - [0x0fee30, c, fee30_len_2d60]
+    - [0x101b90, c, 101b90_len_8f0]
+    - [0x102480, .data, fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
     subsections:
-    - [0x102610, c, code_102610_len_2330]
-    - [0x102C80, c, code_102C80]
-    - [0x104730, c, code_104730]
-    - [0x104940, c, code_104940_len_dc0]
-    - [0x105700, c, code_105700_len_2130]
-    - [0x105F90, c, code_105F90]
+    - [0x102610, c, 102610_len_2330]
+    - [0x102C80, c, 102C80]
+    - [0x104730, c, 104730]
+    - [0x104940, c, 104940_len_dc0]
+    - [0x105700, c, 105700_len_2130]
+    - [0x105F90, c, 105F90]
     - [0x106EF0, c]
-    - [0x107830, c, code_107830_len_e70]
-    - [0x1086a0, c, code_1086a0_len_fc0]
-    - [0x109660, c, code_109660_len_1270]
-    - [0x10A230, c, code_10A230]
-    - [0x10A8D0, c, code_10A8D0]
+    - [0x107830, c, 107830_len_e70]
+    - [0x1086a0, c, 1086a0_len_fc0]
+    - [0x109660, c, 109660_len_1270]
+    - [0x10A230, c, 10A230]
+    - [0x10A8D0, c, 10A8D0]
     - [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
     - [0x10AAF0, data]
     #- [0x10AB70, i4,      shadow/10AB70, 32, 32]
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
-    - [0x10AF70, .data, code_104730]
+    - [0x10AF70, .data, 104730]
     - [0x10B610, data]
-    - [0x10C880, .rodata, code_102C80]
-    - [0x10C9E0, .rodata, code_104730]
-    - [0x10CA50, .rodata, code_104940_len_dc0]
-    - [0x10CAF0, .rodata, code_105F90]
-    - [0x10CB30, .rodata, code_107830_len_e70]
-    - [0x10CB70, .rodata, code_1086a0_len_fc0]
-    - [0x10CBD0, .rodata, code_109660_len_1270]
-    - [0x10CC00, .rodata, code_10A230]
+    - [0x10C880, .rodata, 102C80]
+    - [0x10C9E0, .rodata, 104730]
+    - [0x10CA50, .rodata, 104940_len_dc0]
+    - [0x10CAF0, .rodata, 105F90]
+    - [0x10CB30, .rodata, 107830_len_e70]
+    - [0x10CB70, .rodata, 1086a0_len_fc0]
+    - [0x10CBD0, .rodata, 109660_len_1270]
+    - [0x10CC00, .rodata, 10A230]
   - type: code
     start: 0x10CC10
     vram: 0x802EB3D0
@@ -508,52 +511,52 @@ segments:
     vram: 0x80242BA0
     subsections:
     - [0x163400, c]
-    - [0x165490, c, code_165490]
-    - [0x167570, c, code_167570]
-    - [0x168590, c, code_168590]
+    - [0x165490, c, 165490]
+    - [0x167570, c, 167570]
+    - [0x168590, c, 168590]
     - [0x169BE0, c]
     - [0x16A3E0, data]
-    - [0x16C7D0, .rodata, code_165490]
-    - [0x16C848, .rodata, code_167570]
-    - [0x16C8C0, .rodata, code_168590]
+    - [0x16C7D0, .rodata, 165490]
+    - [0x16C848, .rodata, 167570]
+    - [0x16C8C0, .rodata, 168590]
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
     subsections:
-    - [0x16C8E0, c, code_16c8e0]
-    - [0x16F740, c, code_16F740]
-    - [0x1776B0, c, code_1776B0]
-    - [0x17D6A0, c, code_17D6A0]
+    - [0x16C8E0, c, 16c8e0]
+    - [0x16F740, c, 16F740]
+    - [0x1776B0, c, 1776B0]
+    - [0x17D6A0, c, 17D6A0]
     - [0x17FEB0, c]
     - [0x181810, c]
-    - [0x182B30, c, code_182B30]
-    - [0x18C790, c, code_18C790]
-    - [0x18F340, c, code_18F340]
+    - [0x182B30, c, 182B30]
+    - [0x18C790, c, 18C790]
+    - [0x18F340, c, 18F340]
     - [0x190A10, c]
-    - [0x190B20, c, code_190B20]
+    - [0x190B20, c, 190B20]
     - [0x1967B0, c]
-    - [0x196AA0, c, code_196AA0]
-    - [0x197F40, c, code_197F40]
-    - [0x19FAF0, c, code_19FAF0]
-    - [0x1A5830, c, code_1A5830]
+    - [0x196AA0, c, 196AA0]
+    - [0x197F40, c, 197F40]
+    - [0x19FAF0, c, 19FAF0]
+    - [0x1A5830, c, 1A5830]
     - [0x1AC760, c]
     - [0x1AF120, c]
     - [0x1AF230, c]
-    - [0x1AF2D0, .data, code_16c8e0]
-    - [0x1AF8A0, .data, code_190B20]
-    - [0x1B21E0, data, code_1AF2D0] # begins with image?
-    - [0x1CB240, .rodata, code_16c8e0]
-    - [0x1CB368, .rodata, code_16F740]
-    - [0x1CB4E0, .rodata, code_1776B0]
-    - [0x1CB670, .rodata, code_17D6A0]
-    - [0x1CBC30, .rodata, code_182B30]
-    - [0x1CBDD0, .rodata, code_18C790]
-    - [0x1CBE70, .rodata, code_18F340]
-    - [0x1CBE80, .rodata, code_190B20]
-    - [0x1CBF80, .rodata, code_196AA0]
-    - [0x1CC0A0, .rodata, code_197F40]
-    - [0x1CC160, .rodata, code_19FAF0]
-    - [0x1CC270, .rodata, code_1A5830]
+    - [0x1AF2D0, .data, 16c8e0]
+    - [0x1AF8A0, .data, 190B20]
+    - [0x1B21E0, data, 1AF2D0] # begins with image?
+    - [0x1CB240, .rodata, 16c8e0]
+    - [0x1CB368, .rodata, 16F740]
+    - [0x1CB4E0, .rodata, 1776B0]
+    - [0x1CB670, .rodata, 17D6A0]
+    - [0x1CBC30, .rodata, 182B30]
+    - [0x1CBDD0, .rodata, 18C790]
+    - [0x1CBE70, .rodata, 18F340]
+    - [0x1CBE80, .rodata, 190B20]
+    - [0x1CBF80, .rodata, 196AA0]
+    - [0x1CC0A0, .rodata, 197F40]
+    - [0x1CC160, .rodata, 19FAF0]
+    - [0x1CC270, .rodata, 1A5830]
   - [0x1CC310, ci4,     icon/present, 32, 32]
   - [0x1CC510, palette, icon/present]
   - [0x1CC530, ci4,     icon/cake/finished_cake, 32, 32]
@@ -1583,12 +1586,12 @@ segments:
     start: 0x3169F0
     vram: 0x80200000
     subsections:
-    - [0x3169f0, c, code_3169f0]
+    - [0x3169f0, c, 3169f0]
   - type: code
     start: 0x316a70
     vram: 0x80200080
     subsections:
-    - [0x316a70, c, code_316a70]
+    - [0x316a70, c, 316a70]
   - type: code
     start: 0x316C00
     vram: 0x802AE000
@@ -1600,12 +1603,12 @@ segments:
     vram: 0x802AE000
     overlay: True
     subsections:
-    - [0x316d90, c, code_316d90]
+    - [0x316d90, c, 316d90]
   - type: code
     start: 0x316f30
     vram: 0x802B2000
     subsections:
-    - [0x316f30, c, code_316f30]
+    - [0x316f30, c, 316f30]
   - type: code
     dir: world/partner
     name: world_partner_goombario
@@ -2544,16 +2547,16 @@ segments:
     start: 0x415D90
     vram: 0x802A1000
     subsections:
-    - [0x415D90, c, code_415D90]
-    - [0x4200D0, .data, code_415D90]
-    - [0x420500, .rodata, code_415D90]
+    - [0x415D90, c, 415D90]
+    - [0x4200D0, .data, 415D90]
+    - [0x420500, .rodata, 415D90]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
     overlay: True
     subsections:
-    - [0x4219F0, c, code_4219F0]
-    - [0x421FC0, .rodata, code_4219F0]
+    - [0x4219F0, c, 4219F0]
+    - [0x421FC0, .rodata, 4219F0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -9479,33 +9482,33 @@ segments:
     start: 0xE20110
     vram: 0x802B7000
     subsections:
-    - [0xE20110, c, code_E20110]
+    - [0xE20110, c, E20110]
     - [0xE20B30, data]
-    - [0xE20DD0, .rodata, code_E20110]
+    - [0xE20DD0, .rodata, E20110]
   - type: code
     overlay: True
     start: 0xE20EB0
     vram: 0x802B7000
     subsections:
-    - [0xe20eb0, c, code_e20eb0]
+    - [0xe20eb0, c, e20eb0]
     - [0xE215C0, data]
-    - [0xE21860, .rodata, code_e20eb0]
+    - [0xE21860, .rodata, e20eb0]
   - type: code
     overlay: True
     start: 0xE21870
     vram: 0x802B7000
     subsections:
-    - [0xE21870, c, code_E21870]
+    - [0xE21870, c, E21870]
     - [0xE21EB0, data]
-    - [0xE22590, .rodata, code_E21870]
+    - [0xE22590, .rodata, E21870]
   - type: code
     overlay: True
     start: 0xE225B0
     vram: 0x802B7000
     subsections:
-    - [0xE225B0, c, code_E225B0]
+    - [0xE225B0, c, E225B0]
     - [0xE22B30, data]
-    - [0xE23230, .rodata, code_E225B0]
+    - [0xE23230, .rodata, E225B0]
   - type: code
     start: 0xE23260
     vram: 0x802B6000
@@ -9544,37 +9547,37 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE24ED0, c, code_E24ED0]
+    - [0xE24ED0, c, E24ED0]
     - [0xE25C80, data]
-    - [0xE25CC0, .rodata, code_E24ED0]
+    - [0xE25CC0, .rodata, E24ED0]
   - type: code
     start: 0xE25D60
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE25D60, c, code_E25D60]
-    - [0xE26700, .rodata, code_E25D60]
+    - [0xE25D60, c, E25D60]
+    - [0xE26700, .rodata, E25D60]
   - type: code
     start: 0xE26710
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE26710, c, code_E26710]
-    - [0xE26DA0, .rodata, code_E26710]
+    - [0xE26710, c, E26710]
+    - [0xE26DA0, .rodata, E26710]
   - type: code
     start: 0xE26DE0
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE26DE0, c, code_E26DE0]
-    - [0xE274C0, .rodata, code_E26DE0]
+    - [0xE26DE0, c, E26DE0]
+    - [0xE274C0, .rodata, E26DE0]
   - type: code
     start: 0xE27510
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE27510, c, code_E27510]
-    - [0xE27C50, .rodata, code_E27510]
+    - [0xE27510, c, E27510]
+    - [0xE27C50, .rodata, E27510]
   - type: code
     start: 0xE27C90
     vram: 0x802B6000
@@ -9586,8 +9589,8 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE27F40, c, code_E27F40]
-    - [0xE28790, .rodata, code_E27F40]
+    - [0xE27F40, c, E27F40]
+    - [0xE28790, .rodata, E27F40]
   - type: code
     start: 0xE287F0
     vram: 0x802B6000
@@ -9599,51 +9602,51 @@ segments:
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE28A30, c, code_E28A30]
-    - [0xE29190, .rodata, code_E28A30]
+    - [0xE28A30, c, E28A30]
+    - [0xE29190, .rodata, E28A30]
   - type: code
     start: 0xE291A0
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE291A0, c, code_E291A0]
-    - [0xE29450, .rodata, code_E291A0]
+    - [0xE291A0, c, E291A0]
+    - [0xE29450, .rodata, E291A0]
   - type: code
     start: 0xE29470
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE29470, c, code_E29470]
-    - [0xE2A300, .rodata, code_E29470]
+    - [0xE29470, c, E29470]
+    - [0xE2A300, .rodata, E29470]
   - type: code
     start: 0xE2A340
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE2A340, c, code_E2A340]
+    - [0xE2A340, c, E2A340]
     - [0xE2A690, data]
-    - [0xE2A6A0, .rodata, code_E2A340]
+    - [0xE2A6A0, .rodata, E2A340]
   - type: code
     start: 0xE2A6B0
     vram: 0x802B6000
     overlay: True
     subsections:
-    - [0xE2A6B0, c, code_E2A6B0]
+    - [0xE2A6B0, c, E2A6B0]
     - [0xE2B420, data]
-    - [0xE2B440, .rodata, code_E2A6B0]
+    - [0xE2B440, .rodata, E2A6B0]
   - type: code
     dir: entity/default
     start: 0xE2B530
     vram: 0x802BAE00
     overlay: True
     subsections:
-    - [0xE2B530, c, code_E2B530]
-    - [0xE2BE40, c, code_E2BE40]
+    - [0xE2B530, c, E2B530]
+    - [0xE2BE40, c, E2BE40]
     - [0xE2C930, c]
     - [0xE2D410, data]
-    - [0xE2D680, .rodata, code_E2B530]
-    - [0xE2D6D0, .rodata, code_E2BE40]
-    - [0xE2D6F0, .rodata, code_E2C930]
+    - [0xE2D680, .rodata, E2B530]
+    - [0xE2D6D0, .rodata, E2BE40]
+    - [0xE2D6F0, .rodata, E2C930]
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
@@ -9654,19 +9657,19 @@ segments:
     - [0xE2E5F0, c]
     - [0xE2EDE0, c]
     - [0xE2EFD0, data]
-    - [0xE2F6F0, .rodata, code_E2D730]
-    - [0xE2F740, .rodata, code_E2E5F0]
+    - [0xE2F6F0, .rodata, E2D730]
+    - [0xE2F740, .rodata, E2E5F0]
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
     vram: 0x802BAE00
     overlay: True
     subsections:
-    - [0xE2F750, c, code_E2F750]
-    - [0xE307C0, c, code_E307C0]
+    - [0xE2F750, c, E2F750]
+    - [0xE307C0, c, E307C0]
     - [0xE31380, data]
-    - [0xE314C0, .rodata, code_E2F750]
-    - [0xE314F0, .rodata, code_E307C0]
+    - [0xE314C0, .rodata, E2F750]
+    - [0xE314F0, .rodata, E307C0]
   - [0xE31530, bin] # unk data
   - type: code
     start: 0xEA0900
@@ -9674,11 +9677,11 @@ segments:
     overlay: True
     subsections:
     - [0xEA0900, c]
-    - [0xEA0C10, c, code_EA0C10]
-    - [0xEA36E0, c, code_EA36E0]
+    - [0xEA0C10, c, EA0C10]
+    - [0xEA36E0, c, EA36E0]
     - [0xEA3A80, data]
-    - [0xEA6D70, .rodata, code_EA0C10]
-    - [0xEA6FB0, .rodata, code_EA36E0]
+    - [0xEA6D70, .rodata, EA0C10]
+    - [0xEA6FB0, .rodata, EA36E0]
   - type: code
     start: 0xEA6FD0
     vram: 0x80240000
@@ -9695,7 +9698,7 @@ segments:
     subsections:
     - [0xEA8AE0, c]
     - [0xEAA810, data]
-    - [0xEB0E20, .rodata, code_EA8AE0]
+    - [0xEB0E20, .rodata, EA8AE0]
   - type: code
     start: 0xEB0E60
     vram: 0x80240000
@@ -9718,31 +9721,31 @@ segments:
     overlay: True
     subsections:
     - [0xEB7230, c]
-    - [0xEB7540, c, code_EB7540]
+    - [0xEB7540, c, EB7540]
     - [0xEB7850, data]
-    - [0xEB8E40, .rodata, code_EB7540]
+    - [0xEB8E40, .rodata, EB7540]
   - type: code
     start: 0xEB8E50
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xEB8E50, c, code_EB8E50]
-    - [0xEB8E90, c, code_EB8E90]
+    - [0xEB8E50, c, EB8E50]
+    - [0xEB8E90, c, EB8E90]
     - [0xEB9D90, c]
     - [0xEBA260, data]
-    - [0xEC2000, .rodata, code_EB8E50]
-    - [0xEC2040, .rodata, code_EB8E90]
+    - [0xEC2000, .rodata, EB8E50]
+    - [0xEC2040, .rodata, EB8E90]
   - type: code
     start: 0xEC2200
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xEC2200, c, code_EC2200]
-    - [0xEC2240, c, code_EC2240]
+    - [0xEC2200, c, EC2200]
+    - [0xEC2240, c, EC2240]
     - [0xEC2610, c]
     - [0xEC2850, data]
-    - [0xEC7170, .rodata, code_EC2200]
-    - [0xEC7188, .rodata, code_EC2240]
+    - [0xEC7170, .rodata, EC2200]
+    - [0xEC7188, .rodata, EC2240]
   - type: code
     start: 0xEC71B0
     vram: 0x80240000
@@ -9758,11 +9761,11 @@ segments:
     subsections:
     - [0xEC9D00, c]
     - [0xECAA40, c]
-    - [0xECAA80, c, code_ECAA80]
+    - [0xECAA80, c, ECAA80]
     - [0xECB930, c]
     - [0xECBB70, c]
     - [0xECBC10, data]
-    - [0xECFE60, .rodata, code_ECAA80]
+    - [0xECFE60, .rodata, ECAA80]
   - type: code
     start: 0xECFFF0
     vram: 0x80240000
@@ -9773,7 +9776,7 @@ segments:
     - [0xED00D0, c]
     - [0xED0310, c]
     - [0xED1840, data]
-    - [0xED41C0, .rodata, code_ED0310]
+    - [0xED41C0, .rodata, ED0310]
   - type: code
     start: 0xED4220
     vram: 0x80240000
@@ -9790,9 +9793,9 @@ segments:
     vram: 0x80240000
     overlay: True
     subsections:
-    - [0xED8E20, c, code_ED8E20]
+    - [0xED8E20, c, ED8E20]
     - [0xED9170, data]
-    - [0xEDBF90, .rodata, code_ED8E20]
+    - [0xEDBF90, .rodata, ED8E20]
   - type: code
     start: 0xEDBFE0
     vram: 0x80240000
@@ -9807,11 +9810,11 @@ segments:
     overlay: True
     subsections:
     - [0xEDE9C0, c]
-    - [0xEDEA00, c, code_EDEA00]
-    - [0xEE2040, c, code_EE2040]
+    - [0xEDEA00, c, EDEA00]
+    - [0xEE2040, c, EE2040]
     - [0xEE20E0, data]
-    - [0xEE64B0, .rodata, code_EDEA00]
-    - [0xEE65A0, .rodata, code_EE2040]
+    - [0xEE64B0, .rodata, EDEA00]
+    - [0xEE65A0, .rodata, EE2040]
   - type: code
     start: 0xEE65B0
     vram: 0x80240000
@@ -9832,7 +9835,7 @@ segments:
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
     - [0xEEFAD0, data]
-    - [0xEF2550, .rodata, code_EEDF50]
+    - [0xEF2550, .rodata, EEDF50]
   - type: code
     start: 0xEF2610
     vram: 0x80240000
@@ -9840,9 +9843,9 @@ segments:
     subsections:
     - [0xEF2610, c]
     - [0xEF2650, c]
-    - [0xEF2680, c, code_EF2680]
+    - [0xEF2680, c, EF2680]
     - [0xEF58E0, data]
-    - [0xEF79C0, .rodata, code_EF2680]
+    - [0xEF79C0, .rodata, EF2680]
   - type: code
     start: 0xEF7A80
     vram: 0x80240000
