@@ -8,6 +8,9 @@ import ninja_syntax
 VERSIONS = ["us", "jp"]
 ROOT = Path(__file__).parent.parent.parent
 
+YAY0_COMPRESS_TOOL = "tools/build/yay0/Yay0compress"
+CRC_TOOL = "tools/build/rom/n64crc"
+
 def rm_recursive(path: Path):
     if path.exists():
         if path.is_dir():
@@ -88,8 +91,8 @@ def write_ninja_for_tools(ninja: ninja_syntax.Writer):
         command=f"cc $in -O3 -o $out",
     )
 
-    ninja.build("tools/yay0/Yay0compress", "cc_tool", "tools/yay0/Yay0compress.c")
-    ninja.build("tools/rom/n64crc", "cc_tool", "tools/rom/n64crc.c")
+    ninja.build(YAY0_COMPRESS_TOOL, "cc_tool", "tools/build/yay0/Yay0compress.c")
+    ninja.build(CRC_TOOL, "cc_tool", "tools/build/rom/n64crc.c")
 
 class Configure:
     def __init__(self, version: str):
@@ -150,6 +153,7 @@ class Configure:
                     task,
                     [str(p) for p in entry.src_paths], # $in
                     variables={ "version": self.version, **variables },
+                    implicit=[YAY0_COMPRESS_TOOL],
                 )
 
         # Build objects
@@ -164,6 +168,8 @@ class Configure:
                 build(entry, "cc_dsl") # TODO: don't use dsl for everything
             elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
                 build(entry, "bin")
+            elif isinstance(subseg, segtypes.n64.Yay0.N64SegYay0):
+                build(entry, "yay0")
             else:
                 raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
 
@@ -179,6 +185,7 @@ class Configure:
             str(self.rom_path()),
             "z64",
             str(self.elf_path()),
+            implicit=[CRC_TOOL],
         )
         ninja.build(
             str(self.rom_ok_path()),
