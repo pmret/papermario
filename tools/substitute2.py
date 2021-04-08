@@ -1,52 +1,14 @@
 from pathlib import Path
 
-FUNC="""    Bytecode *args = script->ptrReadPos;
-    s32 ret = 0;
-
-    if (isInitialCall) {
-        script->varTable[0] = get_variable(script, *args++);
-        script->varTable[1] = get_variable(script, *args++);
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 0;
-        set_transition_stencil_color(0, 0xD0, 0xD0, 0xD0);
+FUNC="""    script->varTable[0] = 0;
+    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
+        script->varTable[0] = 1;
     }
 
-    switch (script->functionTemp[0].s) {
-        case 0:
-            if (script->functionTemp[1].s == 0xFF) {
-                script->functionTemp[0].s = 1;
-                script->functionTemp[2].s = 0;
-            }
-            script->functionTemp[1].s += script->varTable[0];
-            if (script->functionTemp[1].s >= 0x100) {
-                script->functionTemp[1].s = 0xFF;
-            }
-            break;
-
-        case 1:
-            script->functionTemp[2].s++;
-            if (script->functionTemp[2].s >= 2) {
-                script->functionTemp[0].s = 2;
-            }
-            break;
-
-        case 2:
-            if (script->functionTemp[1].s == 0) {
-                ret = 1;
-            }
-            script->functionTemp[1].s -= script->varTable[1];
-            if (script->functionTemp[1].s < 0) {
-                script->functionTemp[1].s = 0;
-            }
-            break;
-    }
-
-    set_transition_stencil_zoom_0(1, script->functionTemp[1].s);
-
-    return ret;
+    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc23"
+NEW_FUNC_NAME = f"UnkFunc24"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

@@ -199,16 +199,6 @@ ApiStatus N(func_802406E0_CD2510)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240DE8_CD2C18);
-/*
-ApiStatus N(func_80240DE8_CD2C18)(ScriptInstance *script, s32 isInitialCall) {
-    script->varTable[0] = 0;
-    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
-        script->varTable[0] = 1;
-    }
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc24.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_16/CD1F10", func_80240E18_CD2C48);
