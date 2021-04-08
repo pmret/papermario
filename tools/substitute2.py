@@ -1,27 +1,23 @@
 from pathlib import Path
 
-FUNC="""    PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 posX, posY, posZ, posW;
+FUNC="""    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    s32 i;
 
-    if (script->varTable[5] == 0) {
-        playerStatus->position.x = script->varTable[0];
-    } else {
-        playerStatus->position.z = script->varTable[0];
+    for (i = script->functionTemp[2].s; i < enemy->territory->patrol.numPoints; i++) {
+        if (i[enemy->territory->patrol.points].y <= npc->pos.y) {
+            script->functionTemp[2].s = i;
+            break;
+        }
     }
 
-    posX = playerStatus->position.x;
-    posY = playerStatus->position.y + 10.0f;
-    posZ = playerStatus->position.z;
-    posW = 40.0f;
-    func_800DCB7C(0, &posX, &posY, &posZ, &posW);
-    playerStatus->position.x = posX;
-    playerStatus->position.y = posY;
-    playerStatus->position.z = posZ;
-
-    return ApiStatus_DONE2;
+    npc->moveSpeed = aiSettings->moveSpeed;
+    npc->currentAnim = enemy->animList[1];
+    script->functionTemp[1].s = 0;
+    script->functionTemp[0].s = 1;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc12"
+NEW_FUNC_NAME = f"UnkFunc16"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
