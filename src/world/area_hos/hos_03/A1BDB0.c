@@ -180,7 +180,7 @@ INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242804_A1D904);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242A1C_A1DB1C);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80242B90_A1DC90);
 

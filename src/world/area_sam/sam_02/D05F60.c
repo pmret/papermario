@@ -61,7 +61,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240E8C_D065BC);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_802410A4_D067D4);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", begin_battle_D06948);
 

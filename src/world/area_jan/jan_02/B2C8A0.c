@@ -245,7 +245,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241974_B2DDE4);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241B8C_B2DFFC);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_80241D00_B2E170);
 

@@ -41,7 +41,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240660_969820);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_80240878_969A38);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_02/9694C0", func_802409EC_969BAC);
 

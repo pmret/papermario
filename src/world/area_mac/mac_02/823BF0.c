@@ -205,7 +205,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241B20_824DE0);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241D38_824FF8);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80241EAC_82516C);
 

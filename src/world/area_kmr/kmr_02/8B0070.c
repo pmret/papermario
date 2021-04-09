@@ -57,7 +57,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802406F0_8B0760);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240908_8B0978);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80240A7C_8B0AEC);
 

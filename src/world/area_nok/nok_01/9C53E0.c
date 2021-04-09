@@ -81,7 +81,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802410C8_9C64A8);
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802412E0_9C66C0);
+#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241454_9C6834);
 

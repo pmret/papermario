@@ -1135,7 +1135,7 @@ Script N(802468F8) = {
     SI_CMD(ScriptOpcode_CALL, N(func_80241DF8_95CFF8)),
     SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802452AC)),
     SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(802455F4)),
-    SI_CMD(ScriptOpcode_CALL, N(func_802419E8_95CBE8)),
+    SI_CMD(ScriptOpcode_CALL, N(UnkFunc29)),
     SI_CMD(ScriptOpcode_CALL, N(Set80151310_0)),
     SI_CMD(ScriptOpcode_SET, SI_SAVE_FLAG(1793), 0),
     SI_CMD(ScriptOpcode_RETURN),
@@ -2233,21 +2233,33 @@ NpcGroupList N(npcGroupList_8024B47C) = {
 };
 
 s32 N(intTable_8024B4A0)[] = {
-    0x00270049, 0x0027004A, 0x0027004B, 0x0027004C, 0x0027004D, 0x0027004E, 0x0027004F, 0x00270050,
-    0x00270051, 0x00270052, 0x00270053, 0x00270054, 0x00270055, 0x00270056, 0x00270057, 0x00270058,
-    0x00270059, 0x0027005A, 0x0027005B, 0x0027005C, 0x0027005D, 0x0027005E, 0x0027005F,
+    MESSAGE_ID(0x27, 0x0049), MESSAGE_ID(0x27, 0x004A), MESSAGE_ID(0x27, 0x004B), MESSAGE_ID(0x27, 0x004C), 
+    MESSAGE_ID(0x27, 0x004D), MESSAGE_ID(0x27, 0x004E), MESSAGE_ID(0x27, 0x004F), MESSAGE_ID(0x27, 0x0050),
+    MESSAGE_ID(0x27, 0x0051), MESSAGE_ID(0x27, 0x0052), MESSAGE_ID(0x27, 0x0053), MESSAGE_ID(0x27, 0x0054), 
+    MESSAGE_ID(0x27, 0x0055), MESSAGE_ID(0x27, 0x0056), MESSAGE_ID(0x27, 0x0057), MESSAGE_ID(0x27, 0x0058),
+    MESSAGE_ID(0x27, 0x0059), MESSAGE_ID(0x27, 0x005A), MESSAGE_ID(0x27, 0x005B), MESSAGE_ID(0x27, 0x005C), 
+    MESSAGE_ID(0x27, 0x005D), MESSAGE_ID(0x27, 0x005E), MESSAGE_ID(0x27, 0x005F),
 };
 
-s32 N(shopInventory_8024B4FC)[] = {
-    0x00000084, 0x00000005, 0x00240003, 0x00000086, 0x00000002, 0x00240005, 0x000000A4, 0x00000005,
-    0x00240016, 0x0000008D, 0x00000002, 0x0024000D, 0x000000A7, 0x00000003, 0x0024001D, 0x0000008A,
-    0x00000003, 0x00240009, 0x00000000, 0x00000000, 0x00000000,
+N(shopInventory) N(shopInventory_8024B4FC)[] = {
+    { ITEM_THUNDER_BOLT,    5, MESSAGE_ID(0x24, 0x0003) }, 
+    { ITEM_DUSTY_HAMMER,    2, MESSAGE_ID(0x24, 0x0005) }, 
+    { ITEM_HONEY_SYRUP,     5, MESSAGE_ID(0x24, 0x0016) }, 
+    { ITEM_DRIED_SHROOM,    2, MESSAGE_ID(0x24, 0x000D) }, 
+    { ITEM_DRIED_PASTA,     3, MESSAGE_ID(0x24, 0x001D) }, 
+    { ITEM_MUSHROOM,        3, MESSAGE_ID(0x24, 0x0009) }, 
+    {},
 };
 
-s32 N(shopPriceList_8024B550)[] = {
-    0x00000081, 0x0000000C, 0x00000000, 0x000000AD, 0x0000000A, 0x00000000, 0x000000AF, 0x0000000A,
-    0x00000000, 0x00000089, 0x00000005, 0x00000000, 0x0000009B, 0x00000006, 0x00000000, 0x000000BF,
-    0x0000000F, 0x00000000, 0x000000A7, 0x00000002, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+N(shopPrice) N(shopPriceList_8024B550)[] = {
+    { ITEM_SNOWMAN_DOLL,    12, 0x00000000 }, 
+    { ITEM_MELON,           10, 0x00000000 }, 
+    { ITEM_ICED_POTATO,     10, 0x00000000 }, 
+    { ITEM_TASTY_TONIC,      5, 0x00000000 }, 
+    { ITEM_SUPER_SODA,       6, 0x00000000 }, 
+    { ITEM_SPECIAL_SHAKE,   15, 0x00000000 }, 
+    { ITEM_DRIED_PASTA,      2, 0x00000000 }, 
+    {},
 };
 
 s32 N(D_8024B5B0_9667B0) = {
@@ -3303,48 +3315,7 @@ ApiStatus N(func_802417D0_95C9D0)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
-ApiStatus N(func_802419E8_95CBE8)(ScriptInstance *script, s32 isInitialCall) {
-    s32 i;
-
-    if (isInitialCall) {
-        set_background_color_blend(0, 0, 0, 0xFF);
-        script->functionTemp[0].s = 0xFF;
-        script->functionTemp[1].s = 0;
-    }
-
-    script->functionTemp[0].s -= 8;
-    if (script->functionTemp[0].s < 0) {
-        script->functionTemp[0].s = 0;
-    }
-
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
-    if ((script->functionTemp[0].s == 0) && (script->functionTemp[1].s == 0)) {
-        script->functionTemp[1].s = 1;
-    } else if (script->functionTemp[1].s == 1) {
-        func_8011D82C(0);
-        *D_801512F0 = 0;
-
-        for (i = 0; i < 64; i++) {
-            Npc* npc = get_npc_by_index(i);
-            if (npc != NULL && npc->flags != 0) {
-                if (npc->npcID != -4 && npc->npcID != 10) {
-                    npc->flags &= 0xFF7FFFFF;
-                }
-            }
-        }
-
-        for (i = 0; i < 256; i++) {
-            Entity* entity = get_item_entity(i);
-            if (entity != NULL && (entity->flags & 0x10)) {
-                entity->flags &= 0xF7FFFFFF;
-            }
-        }
-
-        return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkFunc29.inc.c"
 
 ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
@@ -3369,10 +3340,9 @@ ApiStatus N(func_80241BE0_95CDE0)(ScriptInstance *script, s32 isInitialCall) {
 
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
+
         *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-
         D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-
         D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;

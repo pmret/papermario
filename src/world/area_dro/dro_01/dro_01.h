@@ -3,6 +3,18 @@
 
 #define NAMESPACE dro_01
 
+typedef struct {
+    u32 itemID;
+    u32 buyPrice;
+    u32 descriptionID;
+} N(shopInventory);
+
+typedef struct {
+    u32 itemID;
+    u32 sellPrice;
+    u32 unk_08;
+} N(shopPrice);
+
 s32 N(D_8024B5B0_9667B0);
 
 ApiStatus N(GetCamVfov)(ScriptInstance* script, s32 isInitialCall);
@@ -31,7 +43,7 @@ ApiStatus N(UnkFunc26)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802415AC_95C7AC)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802417D0_95C9D0)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802419E8_95CBE8)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241BE0_95CDE0)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance* script, s32 isInitialCall);
@@ -71,9 +83,9 @@ Script N(8024CDA0);
 Script N(8024DD78);
 Script N(main);
 Script N(makeEntities);
-Script N(shopInventory_8024B4FC);
+N(shopInventory) N(shopInventory_8024B4FC)[];
 Script N(shopItemPositions_8024BA68);
 Script N(shopOwnerNPC_8024BA80);
-Script N(shopPriceList_8024B550);
+N(shopPrice) N(shopPriceList_8024B550)[];
 Script N(unk_80248088);
 Script N(unk_8024884C);
