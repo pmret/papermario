@@ -216,6 +216,10 @@ def fix_args(self, func, args, info):
                 sprite  = (argNum & 0xFF0000) >> 16
                 palette = (argNum & 0xFF00)   >> 8
                 anim    = (argNum & 0xFF)     >> 0
+
+                if argNum not in CONSTANTS["MAP_NPCS"]:
+                    new_args.append(f"0x{argNum:X}")
+                    continue
                 
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
@@ -249,6 +253,10 @@ def fix_args(self, func, args, info):
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
             elif info[i] == "NpcIDs":
+                if argNum not in CONSTANTS["MAP_NPCS"]:
+                    new_args.append(f"0x{argNum:X}")
+                    continue
+
                 if argNum >= 0:
                     new_args.append(CONSTANTS["MAP_NPCS"][argNum])
                 else:
@@ -291,6 +299,7 @@ replace_funcs = {
     "EnemyDamageTarget"         :{0:"ActorIDs"},
     "EnemyTestTarget"           :{0:"ActorIDs"},
 
+    "FindKeyItem"               :{0:"ItemIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
     "func_802CFE2C"             :{0:"NpcIDs"},
@@ -1133,20 +1142,32 @@ if __name__ == "__main__":
     parser.add_argument("offset", type=lambda x: int(x, 16), default=0, help="Offset to start dissassembling from")
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
+    parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
 
     args = parser.parse_args()
     vram_base = args.vram
     get_constants()
+
+    INCLUDED = {}
+    INCLUDED["functions"] = set()
+    INCLUDED["includes"] = set()
+    INCLUDES_NEEDED = {}
+    INCLUDES_NEEDED["include"] = []
+    INCLUDES_NEEDED["forward"] = []
+    INCLUDES_NEEDED["npcs"] = {}
+    INCLUDES_NEEDED["sprites"] = set()
 
     if args.end > args.offset:
         # Search the given memory range and report scripts
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
+            
+
             while args.offset < args.end:
                 f.seek(args.offset)
 
-                script = ScriptDSLDisassembler(f)
+                script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
 
@@ -1192,15 +1213,19 @@ if __name__ == "__main__":
 
             f.seek(args.offset)
 
-            script = ScriptDSLDisassembler(f)
-            try:
-                script_text = script.disassemble()
+            script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
-                print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
-                      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
-                print()
-                print(script_text, end="")
+            if args.si:
+                print(ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
+            else:
+                try:
+                    script_text = script.disassemble()
 
-            except UnsupportedScript:
-                f.seek(args.offset)
-                print(ScriptDisassembler(f).disassemble(), end="")
+                    print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                          f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+                    print()
+                    print(script_text, end="")
+
+                except UnsupportedScript:
+                    f.seek(args.offset)
+                    print(ScriptDisassembler(f).disassemble(), end="")

@@ -75,7 +75,7 @@ typedef enum ScriptOpcode {
     ScriptOpcode_OR_CONST, ///< Args: container, value to bitwise OR with
     ScriptOpcode_CALL, ///< Args: *function, ...
     ScriptOpcode_SPAWN_SCRIPT, ///< Args: Script*
-    ScriptOpcode_SPAWN_SCRIPT_GET_ID, ///< Args: Script*, container
+    ScriptOpcode_SPAWN_GET_ID, ///< Args: Script*, container
     ScriptOpcode_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: Script*
     ScriptOpcode_BIND_TRIGGER, ///< Args: Script*, trigger flags, s32 target, 1, Trigger*
     ScriptOpcode_UNBIND, ///< Unbinds any triggers bound to this script.

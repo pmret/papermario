@@ -3,8 +3,8 @@
 
 glabel func_802403E0_8CACE0
 /* 8CACE0 802403E0 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 8CACE4 802403E4 3C048024 */  lui       $a0, %hi(dup_dro_01_GetCurrentCameraYawClamped180)
-/* 8CACE8 802403E8 24843770 */  addiu     $a0, $a0, %lo(dup_dro_01_GetCurrentCameraYawClamped180)
+/* 8CACE4 802403E4 3C048024 */  lui       $a0, %hi(broken_kmr_04_function_addr)
+/* 8CACE8 802403E8 24843770 */  addiu     $a0, $a0, %lo(broken_kmr_04_function_addr)
 /* 8CACEC 802403EC 3C028024 */  lui       $v0, %hi(D_80241BF0_8CC4F0)
 /* 8CACF0 802403F0 24421BF0 */  addiu     $v0, $v0, %lo(D_80241BF0_8CC4F0)
 /* 8CACF4 802403F4 AFBF0010 */  sw        $ra, 0x10($sp)

@@ -134,7 +134,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     var_names = ["unk_00", "unk_24"]
                     data = unpack_from(">4B", npcSettings, i)
                     if not sum(data) == 0:
-                        tmp_out += INDENT + f".{var_names[0] if i == 0 else var_names[1]} = {{ " + ", ".join(f"{x:02X}" for x in unk_00) + f" }},\n"
+                        tmp_out += INDENT + f".{var_names[0] if i == 0 else var_names[1]} = {{ " + ", ".join(f"0x{x:02X}" for x in data) + f" }},\n"
                 elif i == 0x4 or i == 0x28:
                     var_names = ["height", "radius", "level", "unk_2A"]
                     for x,var in enumerate(unpack_from(">2h", npcSettings, i)):

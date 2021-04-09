@@ -5,35 +5,9 @@
 void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
-// This is a duplicate, search for others
-// TODO figure out what this actually is
-// func_800729B0 invokes gEffectTable[131]'s entryPoint function
-// that function is currently typed to return void
-// Assume it returns an Effect* and unk_0C is this EffectInstanceData:
-// s32 unk_0C;  //? Maybe EffectInstanceData too ?
-struct N(temp2) {
-    char unk_00[0x4];
-    f32 unk_04;
-    f32 unk_08;
-    f32 unk_0C;
-    f32 unk_10;
-    char unk_14[0x4];
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    f32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
-    s32 unk_30;
-    s8 unk_34;
-    char unk_38[0x38];
-    s32 unk_70;
-    s32 unk_74;
-} N(temp2);
-
 struct N(temp) {
     char unk_00[0xC];
-    struct N(temp2)* unk_0C;
+    EffectInstanceDataThing* unk_0C;
 } N(temp);
 
 typedef struct {
@@ -132,7 +106,7 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
                 ptr->unk_54 = func_800726B0(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
-                ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
+                *((s8*)ptr->unk_54->unk_0C + 0x34) = ptr->unk_38;
                 ptr->unk_54->unk_0C->unk_20 = 0;
                 ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
                 ptr->unk_44 = 3;
@@ -188,7 +162,7 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
             ptr->unk_2C = clamp_angle(ptr->unk_2C + ptr->unk_30);
 
         case 2:
-            ptr->unk_54->unk_0C->unk_24 = ptr->unk_2C;
+            ptr->unk_54->unk_0C->unk_24.f = ptr->unk_2C;
             ptr->unk_54->unk_0C->unk_04 = ptr->unk_18;
             ptr->unk_54->unk_0C->unk_08 = ptr->unk_04;
             ptr->unk_54->unk_0C->unk_0C = ptr->unk_20;
@@ -217,7 +191,7 @@ ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_20 = get_float_variable(script, *args++);
         ptr->unk_28 = get_float_variable(script, *args++);
         ptr->unk_54 = func_800726B0(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
-        ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
+        *((s8*)ptr->unk_54->unk_0C + 0x34) = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;
         ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
         ptr->unk_4C = 0x10E;

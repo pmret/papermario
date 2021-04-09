@@ -5379,18 +5379,19 @@ segments:
     start: 0x95B200
     vram: 0x80240000
     subsections:
-    - [0x95B200, c]
-    - [0x95B7E0, c]
-    - [0x95E660, c]
-    - [0x95E7A0, c]
-    - [0x95ECC0, data]
-    - [0x960210, data]
-    - [0x966CA0, data]
-    - [0x967780, data]
-    - [0x9685C0, data]
-    - [0x968FD0, rodata]
-    - [0x969198, rodata]
-    - [0x9691B0, rodata]
+    - [0x95B200,      .c, 95B200]
+    - [0x95B7E0,      .c, 95B7E0]
+    - [0x95E660,      .c, 95E660]
+    - [0x95E7A0,      .c, 95E7A0]
+    - [0x95ECC0,   .data, 95B7E0]
+    - [0x960210,   .data, 95B7E0]
+    - [0x966CA0,   .data, 95B7E0]
+    - [0x967780,   .data, 95B7E0]
+    - [0x9685C0,   .data, 95B7E0]
+    - [0x968FD0, .rodata, 95B7E0]
+    - [0x969198, .rodata, 95B7E0]
+    - [0x9691B0, .rodata, 95B7E0]
+    - [0x9691C0,    .bss, 95B7E0]
   - name: world/area_dro/dro_02/
     type: code
     overlay: True
@@ -10540,6 +10541,7 @@ segments:
       - [0x19, 0x0040, kmr_12_tattle]
       - [0x19, 0x0060, sbk_00_tattle]
       - [0x19, 0x0061, sbk_01_tattle]
+      - [0x19, 0x0093, dro_01_tattle]
       - [0x19, 0x00BB, arn_07_tattle]
       - [0x19, 0x00BC, arn_03_tattle]
       - [0x19, 0x00BD, arn_05_tattle]

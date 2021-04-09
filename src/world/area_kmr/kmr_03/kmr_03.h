@@ -4,9 +4,6 @@
 
 #define NAMESPACE kmr_03
 
-ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall);
-
 ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240000_8C7F90)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall);

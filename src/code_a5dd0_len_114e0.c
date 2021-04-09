@@ -523,7 +523,7 @@ void clone_model(u16 srcModelID, u16 newModelID) {
 
 INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011B7C0, u16 arg0, s32 arg1, s32 arg2);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011B950);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011B950, u16 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8011BAE8(void) {
     s32 i;
@@ -620,11 +620,11 @@ INCLUDE_ASM(void, "code_a5dd0_len_114e0", set_background_color_blend, u8 r, u8 g
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", get_background_color_blend);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BEB4);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011BEB4, u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BF14);
 
-INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BF98);
+INCLUDE_ASM(void, "code_a5dd0_len_114e0", func_8011BF98, u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7);
 
 INCLUDE_ASM(s32, "code_a5dd0_len_114e0", func_8011BFD4);
 

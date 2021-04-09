@@ -828,6 +828,35 @@ typedef struct EffectBlueprint {
     /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
+// TODO figure out what this actually is
+// func_800715D0 invokes gEffectTable[78]'s entryPoint function
+// func_80072230 invokes gEffectTable[111]'s entryPoint function
+// func_800729B0 invokes gEffectTable[131]'s entryPoint function
+// These functions are currently typed to return void
+// Assume they return an Effect*, and this struct is accessed at unk_0C,
+// but this struct differs from EffectInstanceData
+// Search for "struct N(temp)" for examples
+typedef struct {
+    char unk_00[0x4];
+    f32 unk_04;
+    f32 unk_08;
+    f32 unk_0C;
+    f32 unk_10;
+    char unk_14[0x4];
+    s32 unk_18;
+    s32 unk_1C;
+    s32 unk_20;
+    X32 unk_24;
+    s32 unk_28;
+    s32 unk_2C;
+    s32 unk_30;
+    s32 unk_34;
+    s32 unk_38;
+    char unk_3C[0x34];
+    s32 unk_70;
+    s32 unk_74;
+} EffectInstanceDataThing;
+
 typedef struct Effect {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;

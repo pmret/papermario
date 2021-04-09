@@ -19,6 +19,7 @@ void osCleanupThread(void);
 
 void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
+f32 signF(f32 val);
 
 s32 heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
@@ -333,6 +334,7 @@ ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
-
+ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall);
 
 #endif

@@ -263,7 +263,7 @@ ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall);
 ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall);
-
+ApiStatus IsPlayerOnValidFloor(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall);
 ApiStatus IsStartingConversation(ScriptInstance* script, s32 isInitialCall);
@@ -277,6 +277,9 @@ ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D39FC(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D3C58(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D2884(ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetNpcSprite(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall);
 
 extern Script EnemyNpcHit;
 extern Script EnemyNpcDefeat;
