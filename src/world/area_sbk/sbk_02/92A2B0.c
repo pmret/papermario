@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A2B0", func_80240000_92A2B0);
 
-INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A2B0", func_80240040_92A2F0);
+#include "world/common/UnkFunc27.inc.c"
 
 #include "world/common/UnkFunc26.inc.c"
 

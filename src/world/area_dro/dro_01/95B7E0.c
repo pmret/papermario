@@ -372,8 +372,8 @@ Script N(80244A70) = SCRIPT({
     SetPanTarget(0, 175, 0, -201);
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
-    N(func_802402E0_95B4E0)(2, 0, 3);
-    N(func_802402E0_95B4E0)(1, -1, 3);
+    N(UnkFunc27)(2, 0, 3);
+    N(UnkFunc27)(1, -1, 3);
     N(UnkFunc26)(3, 44, 32, 177, 0, 0, 0, 0, 0, 0);
     DisablePlayerInput(TRUE);
     spawn {

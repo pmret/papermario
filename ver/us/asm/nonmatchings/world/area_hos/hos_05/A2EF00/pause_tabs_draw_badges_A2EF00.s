@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel pause_tabs_draw_badges_A2EF00
+glabel hos_05_UnkFunc27
 /* A2EF00 80244CC0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A2EF04 80244CC4 AFB10014 */  sw        $s1, 0x14($sp)
 /* A2EF08 80244CC8 0080882D */  daddu     $s1, $a0, $zero
