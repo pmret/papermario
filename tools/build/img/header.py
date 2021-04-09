@@ -18,7 +18,7 @@ if __name__ == "__main__":
     if cname.startswith("src_"):
         cname = cname[4:]
     elif cname.startswith("assets_"):
-        cname = cname[7:]
+        cname = "_".join(cname.split("_")[2:])
 
     with open(outfile, "w") as f:
         f.write("// Generated file, do not edit.\n")

@@ -274,17 +274,17 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 #define MAP(map) \
     .id = #map, \
     .config = &map##_config, \
-    .dmaStart = &code_##map##_ROM_START, \
-    .dmaEnd = &code_##map##_ROM_END, \
-    .dmaDest = &code_##map##_VRAM \
+    .dmaStart = map##_ROM_START, \
+    .dmaEnd = map##_ROM_END, \
+    .dmaDest = map##_VRAM \
 
 // Should be removed once the data section containing .init and .config of all maps have been disassembled
 #define MAP_UNSPLIT(map, configVRAM) \
     .id = #map, \
     .config = (MapConfig*)(configVRAM), \
-    .dmaStart = &code_##map##_ROM_START, \
-    .dmaEnd = &code_##map##_ROM_END, \
-    .dmaDest = &code_##map##_VRAM \
+    .dmaStart = map##_ROM_START, \
+    .dmaEnd = map##_ROM_END, \
+    .dmaDest = map##_VRAM \
 
 
 // these, along with all the *_maps, almost certainly belong in the next file

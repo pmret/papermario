@@ -2,7 +2,7 @@
 
 #include "common.h"
 
-INCLUDE_ASM(s32, "os/code_47c60_len_f0", osContAddressCrc);
+INCLUDE_ASM(s32, "os/47c60_len_f0", osContAddressCrc);
 
 u8 osContDataCrc(u8* data) {
     s32 ret;

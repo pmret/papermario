@@ -94,7 +94,7 @@ void switch_order(void) {
     battleStatus->unk_62 = -1;
     battleStatus->unk_63 = -1;
 
-    dma_copy(&code_code_415D90_ROM_START, &code_code_415D90_ROM_END, &code_code_415D90_VRAM);
+    dma_copy(_415D90_ROM_START, _415D90_ROM_END, _415D90_VRAM);
 
     // TODO Needed to match
     if (0) { s32 new_var; do { } while (new_var); }

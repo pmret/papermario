@@ -14,8 +14,9 @@ options:
   linker_symbol_header_path: ver/jp/build/include/ld_addrs.h
   src_path: src/jp
   asm_path: ver/jp/asm
-  assets_path: ver/jp/assets
+  asset_paths: [assets/jp]
   build_path: ver/jp/build
+  cache_path: ver/jp/.splat_cache
   undefined_funcs_auto_path: ver/jp/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
 segments:

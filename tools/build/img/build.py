@@ -2,7 +2,6 @@
 
 from sys import argv, stderr
 from math import floor, ceil
-from itertools import zip_longest
 from glob import glob
 import png
 
@@ -34,6 +33,7 @@ def rgb_to_intensity(r, g, b):
     return round(r * 0.2126 + g * 0.7152 + 0.0722 * b)
 
 def iter_in_groups(iterable, n, fillvalue=None):
+    from itertools import zip_longest
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 

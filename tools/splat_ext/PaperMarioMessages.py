@@ -4,6 +4,9 @@ from pathlib import Path
 from util import options
 import re
 
+import pylibyaml
+import yaml
+
 CHARSET = {
     0x00: "[note]",
     0x01: "!",
@@ -358,7 +361,9 @@ class N64SegPaperMarioMessages(N64Segment):
     def __init__(self, segment, next_segment):
         super().__init__(segment, next_segment)
         self.files = segment.get("files", []) if type(segment) is dict else []
-        self.ids = segment["ids"]
+
+        with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
+            self.msg_names = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
     def split(self, rom_bytes):
         data = rom_bytes[self.rom_start: self.rom_end]
@@ -403,13 +408,8 @@ class N64SegPaperMarioMessages(N64Segment):
                         self.f.write("\n")
 
                     msg_name = None
-                    for d in self.ids:
+                    for d in self.msg_names:
                         section, index, goodname = d[:3]
-
-                        if len(d) > 3:
-                            # these will actually do something in the future
-                            context = d[3]
-                            assert context in ["battle_popup", "action_command"]
 
                         if i == section and j == index:
                             msg_name = goodname
@@ -480,3 +480,6 @@ class N64SegPaperMarioMessages(N64Segment):
             self.root_charset = CHARSET_CREDITS
         elif markup == "[font:normal]":
             self.root_charset = CHARSET
+
+    def cache(self):
+        return (self.config, self.rom_end, self.msg_names)

@@ -1,11 +1,28 @@
 #! /usr/bin/python3
 
+from math import floor, ceil
 from sys import argv, path
 from pathlib import Path
-import os
-path.append(os.path.join(os.path.dirname(__file__), "splat"))
-from splat_ext.PaperMarioNpcSprites import Sprite
-from img.build import pack_color, iter_in_groups
+path.append(str(Path(__file__).parent.parent.parent / "splat"))
+path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
+from PaperMarioNpcSprites import Sprite
+
+def pack_color(r, g, b, a):
+    r = floor(31 * (r / 255))
+    g = floor(31 * (g / 255))
+    b = floor(31 * (b / 255))
+
+    s = round(a / 0xFF)
+    s |= (r & 0x1F) << 11
+    s |= (g & 0x1F) << 6
+    s |= (b & 0x1F) << 1
+
+    return s
+
+def iter_in_groups(iterable, n, fillvalue=None):
+    from itertools import zip_longest
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
 
 if __name__ == "__main__":
     if len(argv) != 3:

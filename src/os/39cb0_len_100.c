@@ -32,5 +32,5 @@ void boot_idle(void) {
     }
 }
 #else
-INCLUDE_ASM(void, "os/code_39cb0_len_100", boot_idle, void);
+INCLUDE_ASM(void, "os/39cb0_len_100", boot_idle, void);
 #endif

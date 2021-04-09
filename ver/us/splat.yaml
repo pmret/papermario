@@ -15,8 +15,9 @@ options:
   linker_symbol_header_path: ver/us/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/us/asm
-  assets_path: ver/us/assets
+  asset_paths: [assets/us]
   build_path: ver/us/build
+  cache_path: ver/us/.splat_cache
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
 segments:
@@ -1566,12 +1567,13 @@ segments:
   - [0x1FE150, palette, icon/small_star_point/small_star_point_7]
   - [0x1FE170, ci4,     icon/small_star_point/small_star_point_8, 8, 8]
   - [0x1FE190, palette, icon/small_star_point/small_star_point_8]
-  - type: code
+  - dir: logos
+    type: code
     start: 0x1FE1B0
     subsections:
-    - [0x1FE1B0, rgba16,  title/logo_n64, 128, 112]
-    - [0x2051B0, rgba16,  title/logo_is, 256, 112]
-    - [0x2131B0, rgba16,  title/logo_nintendo, 256, 48]
+    - [0x1FE1B0, rgba16,  logo_n64, 128, 112]
+    - [0x2051B0, rgba16,  logo_is, 256, 112]
+    - [0x2131B0, rgba16,  logo_nintendo, 256, 48]
   - [0x2191B0, ci8,     title/bg_1, 264, 162]
   - [0x2238C0, palette, title/bg_1]
   - [0x223AC0, ci8,     title/bg_2, 264, 162]
@@ -3251,7 +3253,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsections:
-    - [0x6FAD10, c]
+    - [0x6FAD10, bin] # FIXME: this should be c but it isnt split
     - [0x6FB350, data]
   - name: battle_partner_parakarry
     dir: battle/partner
@@ -4046,7 +4048,8 @@ segments:
     - [0x7E4690, c]
     - [0x7E4D00, data]
     - [0x7E7380, .rodata, 7E2AA0]
-  - dir: world/area_mac/machi
+  - name: machi
+    dir: world/area_mac/machi
     type: code
     overlay: True
     start: 0x7E73A0
@@ -4060,7 +4063,8 @@ segments:
     - [0x7EA340, data]
     - [0x7EAA50, data]
     - [0x7EACD8, rodata]
-  - dir: world/area_mac/mac_00
+  - name: mac_00
+    dir: world/area_mac/mac_00
     type: code
     overlay: True
     start: 0x7EAD10
@@ -4083,7 +4087,8 @@ segments:
     - [0x8000B0, data]
     - [0x8006A0, rodata]
     - [0x8006D0, rodata]
-  - dir: world/area_mac/mac_01
+  - name: mac_01
+    dir: world/area_mac/mac_01
     type: code
     overlay: True
     start: 0x800880
@@ -4104,7 +4109,8 @@ segments:
     - [0x822100, data]
     - [0x822460, data]
     - [0x822F30, rodata]
-  - dir: world/area_mac/mac_02
+  - name: mac_02
+    dir: world/area_mac/mac_02
     type: code
     overlay: True
     start: 0x8232C0
@@ -4122,7 +4128,8 @@ segments:
     - [0x828F10, data]
     - [0x8313E0, data]
     - [0x831490, rodata]
-  - dir: world/area_mac/mac_03
+  - name: mac_03
+    dir: world/area_mac/mac_03
     type: code
     overlay: True
     start: 0x831800
@@ -4140,7 +4147,8 @@ segments:
     - [0x83F6C0, data]
     - [0x8404A0, data]
     - [0x842BB0, rodata]
-  - dir: world/area_mac/mac_04
+  - name: mac_04
+    dir: world/area_mac/mac_04
     type: code
     overlay: True
     start: 0x842BD0
@@ -4164,7 +4172,8 @@ segments:
     - [0x8520A0, data]
     - [0x852120, rodata]
     - [0x852150, rodata]
-  - dir: world/area_mac/mac_05
+  - name: mac_05
+    dir: world/area_mac/mac_05
     type: code
     overlay: True
     start: 0x852170
@@ -4183,7 +4192,8 @@ segments:
     - [0x864910, rodata]
     - [0x864AE0, rodata]
     - [0x864B20, rodata]
-  - dir: world/area_mac/mac_06
+  - name: mac_06
+    dir: world/area_mac/mac_06
     type: code
     overlay: True
     start: 0x864B40
@@ -4197,7 +4207,8 @@ segments:
     - [0x867EF0, data]
     - [0x869450, rodata]
     - [0x869490, rodata]
-  - dir: world/area_tik/tik_01
+  - name: tik_01
+    dir: world/area_tik/tik_01
     type: code
     overlay: True
     start: 0x8694B0
@@ -4211,7 +4222,8 @@ segments:
     - [0x86B350, data]
     - [0x86BC00, data]
     - [0x86C710, rodata]
-  - dir: world/area_tik/tik_02
+  - name: tik_02
+    dir: world/area_tik/tik_02
     type: code
     overlay: True
     start: 0x86C740
@@ -4225,7 +4237,8 @@ segments:
     - [0x86D800, data]
     - [0x86E2C0, data]
     - [0x86EAF0, rodata]
-  - dir: world/area_tik/tik_03
+  - name: tik_03
+    dir: world/area_tik/tik_03
     type: code
     overlay: True
     start: 0x86EB00
@@ -4240,7 +4253,8 @@ segments:
     - [0x871730, data]
     - [0x8717F0, data]
     - [0x871A10, rodata]
-  - dir: world/area_tik/tik_04
+  - name: tik_04
+    dir: world/area_tik/tik_04
     type: code
     overlay: True
     start: 0x871A30
@@ -4254,7 +4268,8 @@ segments:
     - [0x8742C0, data]
     - [0x8746E0, data]
     - [0x874DA0, rodata]
-  - dir: world/area_tik/tik_05
+  - name: tik_05
+    dir: world/area_tik/tik_05
     type: code
     overlay: True
     start: 0x874DC0
@@ -4268,7 +4283,8 @@ segments:
     - [0x8765C0, data]
     - [0x876A50, data]
     - [0x876ED0, rodata]
-  - dir: world/area_tik/tik_06
+  - name: tik_06
+    dir: world/area_tik/tik_06
     type: code
     overlay: True
     start: 0x876EE0
@@ -4281,7 +4297,8 @@ segments:
     - [0x878F90, data]
     - [0x879860, data]
     - [0x879BB0, rodata]
-  - dir: world/area_tik/tik_07
+  - name: tik_07
+    dir: world/area_tik/tik_07
     type: code
     overlay: True
     start: 0x879BE0
@@ -4295,7 +4312,8 @@ segments:
     - [0x87E590, data]
     - [0x87E890, data]
     - [0x87ED80, rodata]
-  - dir: world/area_tik/tik_08
+  - name: tik_08
+    dir: world/area_tik/tik_08
     type: code
     overlay: True
     start: 0x87EDF0
@@ -4309,7 +4327,8 @@ segments:
     - [0x881770, data]
     - [0x8819D0, data]
     - [0x8821A0, rodata]
-  - dir: world/area_tik/tik_09
+  - name: tik_09
+    dir: world/area_tik/tik_09
     type: code
     overlay: True
     start: 0x8821C0
@@ -4324,7 +4343,8 @@ segments:
     - [0x885A80, data]
     - [0x886340, rodata]
     - [0x886360, rodata]
-  - dir: world/area_tik/tik_10
+  - name: tik_10
+    dir: world/area_tik/tik_10
     type: code
     overlay: True
     start: 0x8863C0
@@ -4337,7 +4357,8 @@ segments:
     - [0x887B20, data]
     - [0x8883F0, data]
     - [0x888BC0, rodata]
-  - dir: world/area_tik/tik_12
+  - name: tik_12
+    dir: world/area_tik/tik_12
     type: code
     overlay: True
     start: 0x888BD0
@@ -4352,7 +4373,8 @@ segments:
     - [0x88C810, data]
     - [0x88D590, rodata]
     - [0x88D5A0, rodata]
-  - dir: world/area_tik/tik_14
+  - name: tik_14
+    dir: world/area_tik/tik_14
     type: code
     overlay: True
     start: 0x88D600
@@ -4365,7 +4387,8 @@ segments:
     - [0x88F180, data]
     - [0x88FA30, data]
     - [0x88FB90, rodata]
-  - dir: world/area_tik/tik_15
+  - name: tik_15
+    dir: world/area_tik/tik_15
     type: code
     overlay: True
     start: 0x88FBA0
@@ -4378,7 +4401,8 @@ segments:
     - [0x891890, data]
     - [0x8922A0, data]
     - [0x892A10, rodata]
-  - dir: world/area_tik/tik_17
+  - name: tik_17
+    dir: world/area_tik/tik_17
     type: code
     overlay: True
     start: 0x892A20
@@ -4391,7 +4415,8 @@ segments:
     - [0x893E40, data]
     - [0x8944F0, data]
     - [0x8956C0, rodata]
-  - dir: world/area_tik/tik_18
+  - name: tik_18
+    dir: world/area_tik/tik_18
     type: code
     overlay: True
     start: 0x8956E0
@@ -4404,7 +4429,8 @@ segments:
     - [0x896CA0, data]
     - [0x897450, data]
     - [0x8975D0, rodata]
-  - dir: world/area_tik/tik_19
+  - name: tik_19
+    dir: world/area_tik/tik_19
     type: code
     overlay: True
     start: 0x8975E0
@@ -4416,7 +4442,8 @@ segments:
     - [0x898990, data]
     - [0x899C90, data]
     - [0x89A340, rodata]
-  - dir: world/area_tik/tik_20
+  - name: tik_20
+    dir: world/area_tik/tik_20
     type: code
     overlay: True
     start: 0x89A350
@@ -4429,7 +4456,8 @@ segments:
     - [0x89D200, data]
     - [0x89D720, rodata]
     - [0x89D740, rodata]
-  - dir: world/area_tik/tik_21
+  - name: tik_21
+    dir: world/area_tik/tik_21
     type: code
     overlay: True
     start: 0x89D7A0
@@ -4440,7 +4468,8 @@ segments:
     - [0x89E1A0, data]
     - [0x89FD70, data]
     - [0x89FEA0, rodata]
-  - dir: world/area_tik/tik_22
+  - name: tik_22
+    dir: world/area_tik/tik_22
     type: code
     overlay: True
     start: 0x89FEC0
@@ -4451,7 +4480,8 @@ segments:
     - [0x8A0870, data]
     - [0x8A0930, data]
     - [0x8A23C0, rodata]
-  - dir: world/area_tik/tik_23
+  - name: tik_23
+    dir: world/area_tik/tik_23
     type: code
     overlay: True
     start: 0x8A23D0
@@ -4463,7 +4493,8 @@ segments:
     - [0x8A35A0, data]
     - [0x8A5340, data]
     - [0x8A5A10, rodata]
-  - dir: world/area_tik/tik_24
+  - name: tik_24
+    dir: world/area_tik/tik_24
     type: code
     overlay: True
     start: 0x8A5A80
@@ -4478,7 +4509,8 @@ segments:
     - [0x8A7A20, data]
     - [0x8A7EF0, rodata]
     - [0x8A7F20, rodata]
-  - dir: world/area_tik/tik_25
+  - name: tik_25
+    dir: world/area_tik/tik_25
     type: code
     overlay: True
     start: 0x8A7F80
@@ -4490,7 +4522,8 @@ segments:
     - [0x8A8800, data]
     - [0x8A93D0, data]
     - [0x8A9A00, rodata]
-  - dir: world/area_kgr/kgr_01
+  - name: kgr_01
+    dir: world/area_kgr/kgr_01
     type: code
     overlay: True
     start: 0x8A9A10
@@ -4502,7 +4535,8 @@ segments:
     - [0x8AA1D0, data]
     - [0x8AA310, data]
     - [0x8AA430, rodata]
-  - dir: world/area_kgr/kgr_02
+  - name: kgr_02
+    dir: world/area_kgr/kgr_02
     type: code
     overlay: True
     start: 0x8AA450
@@ -4515,7 +4549,8 @@ segments:
     - [0x8AADC0, data]
     - [0x8ABE60, data]
     - [0x8ABF80, rodata]
-  - dir: world/area_kmr/kmr_00
+  - name: kmr_00
+    dir: world/area_kmr/kmr_00
     type: code
     overlay: True
     start: 0x8ABF90
@@ -4528,7 +4563,8 @@ segments:
     - [0x8AEC40, data]
     - [0x8B0010, data]
     - [0x8B0060, rodata]
-  - dir: world/area_kmr/kmr_02
+  - name: kmr_02
+    dir: world/area_kmr/kmr_02
     type: code
     overlay: True
     start: 0x8B0070
@@ -4550,7 +4586,8 @@ segments:
     - [0x8C7D90, rodata]
     - [0x8C7DB0, rodata]
     - [0x8C7F70, rodata]
-  - dir: world/area_kmr/kmr_03
+  - name: kmr_03
+    dir: world/area_kmr/kmr_03
     type: code
     overlay: True
     start: 0x8C7F90
@@ -4568,7 +4605,8 @@ segments:
     - [0x8C9780, .data, 8C83A0]
     - [0x8CA2D0, .data, 8C85E0]
     - [0x8CA8F0, .rodata, 8C8140]
-  - dir: world/area_kmr/kmr_04
+  - name: kmr_04
+    dir: world/area_kmr/kmr_04
     type: code
     overlay: True
     start: 0x8CA900
@@ -4582,7 +4620,8 @@ segments:
     # - [0x8CC35C, data]
     - [0x8CC4F0, data]
     - [0x8CE060, rodata]
-  - dir: world/area_kmr/kmr_05
+  - name: kmr_05
+    dir: world/area_kmr/kmr_05
     type: code
     overlay: True
     start: 0x8CE070
@@ -4595,7 +4634,8 @@ segments:
     - [0x8D0900, data]
     - [0x8D0940, data]
     - [0x8D14A0, rodata]
-  - dir: world/area_kmr/kmr_06
+  - name: kmr_06
+    dir: world/area_kmr/kmr_06
     type: code
     overlay: True
     start: 0x8D1510
@@ -4608,7 +4648,8 @@ segments:
     - [0x8D3AC0, data]
     - [0x8D3B30, data]
     - [0x8D3D50, rodata]
-  - dir: world/area_kmr/kmr_07
+  - name: kmr_07
+    dir: world/area_kmr/kmr_07
     type: code
     overlay: True
     start: 0x8D3DC0
@@ -4618,7 +4659,8 @@ segments:
     - [0x8D4880, data]
     - [0x8D49A0, data]
     - [0x8D5C40, rodata]
-  - dir: world/area_kmr/kmr_09
+  - name: kmr_09
+    dir: world/area_kmr/kmr_09
     type: code
     overlay: True
     start: 0x8D5E00
@@ -4629,7 +4671,8 @@ segments:
     - [0x8D73C0, data]
     - [0x8D83B0, data]
     - [0x8D8460, rodata]
-  - dir: world/area_kmr/kmr_10
+  - name: kmr_10
+    dir: world/area_kmr/kmr_10
     type: code
     overlay: True
     start: 0x8D84D0
@@ -4642,7 +4685,8 @@ segments:
     - [0x8D8E60, data]
     - [0x8D90F0, data]
     - [0x8DA0F0, rodata]
-  - dir: world/area_kmr/kmr_11
+  - name: kmr_11
+    dir: world/area_kmr/kmr_11
     type: code
     overlay: True
     start: 0x8DA100
@@ -4661,7 +4705,8 @@ segments:
     - [0x8E0190, data]
     - [0x8EB190, rodata]
     - [0x8EB1B0, rodata]
-  - dir: world/area_kmr/kmr_12
+  - name: kmr_12
+    dir: world/area_kmr/kmr_12
     type: code
     overlay: True
     start: 0x8EB360
@@ -4671,7 +4716,8 @@ segments:
     - [0x8EB390, .data, header]
     - [0x8EB420, .data, events]
     - [0x8EBE10, .rodata, events]
-  - dir: world/area_kmr/kmr_20
+  - name: kmr_20
+    dir: world/area_kmr/kmr_20
     type: code
     overlay: True
     start: 0x8EBE20
@@ -4700,7 +4746,8 @@ segments:
     - [0x8F9D30, data]
     - [0x8FEE20, rodata]
     - [0x8FEE50, rodata]
-  - dir: world/area_kmr/kmr_21
+  - name: kmr_21
+    dir: world/area_kmr/kmr_21
     type: code
     overlay: True
     start: 0x8FEE80
@@ -4710,7 +4757,8 @@ segments:
     - [0x8FEE90, c]
     - [0x8FF160, data]
     - [0x8FF650, rodata]
-  - dir: world/area_kmr/kmr_22
+  - name: kmr_22
+    dir: world/area_kmr/kmr_22
     type: code
     overlay: True
     start: 0x8FF670
@@ -4723,7 +4771,8 @@ segments:
     - [0x900A80, data]
     - [0x9079D0, rodata]
     - [0x907A20, rodata]
-  - dir: world/area_kmr/kmr_23
+  - name: kmr_23
+    dir: world/area_kmr/kmr_23
     type: code
     overlay: True
     start: 0x907A30
@@ -4733,7 +4782,8 @@ segments:
     - [0x907A40, c]
     - [0x908B00, data]
     - [0x90B210, rodata]
-  - dir: world/area_kmr/kmr_24
+  - name: kmr_24
+    dir: world/area_kmr/kmr_24
     type: code
     overlay: True
     start: 0x90B240
@@ -4743,7 +4793,8 @@ segments:
     - [0x90B250, c]
     - [0x90B350, data]
     - [0x90B6C0, rodata]
-  - dir: world/area_kmr/kmr_30
+  - name: kmr_30
+    dir: world/area_kmr/kmr_30
     type: code
     overlay: True
     start: 0x90B6D0
@@ -4754,7 +4805,8 @@ segments:
     - [0x90BBB0, data]
     - [0x90BDB0, data]
     - [0x90BFF0, data]
-  - dir: world/area_iwa/iwa_00
+  - name: iwa_00
+    dir: world/area_iwa/iwa_00
     type: code
     overlay: True
     start: 0x90CC40
@@ -4764,7 +4816,8 @@ segments:
     - [0x90CEF0, c]
     - [0x90CF20, data]
     - [0x90F6A0, rodata]
-  - dir: world/area_iwa/iwa_01
+  - name: iwa_01
+    dir: world/area_iwa/iwa_01
     type: code
     overlay: True
     start: 0x90F6B0
@@ -4780,7 +4833,8 @@ segments:
     - [0x915A00, rodata]
     - [0x915A20, rodata]
     - [0x915A40, rodata]
-  - dir: world/area_iwa/iwa_02
+  - name: iwa_02
+    dir: world/area_iwa/iwa_02
     type: code
     overlay: True
     start: 0x915D70
@@ -4791,7 +4845,8 @@ segments:
     - [0x917170, data]
     - [0x917220, data]
     - [0x918AA0, rodata]
-  - dir: world/area_iwa/iwa_03
+  - name: iwa_03
+    dir: world/area_iwa/iwa_03
     type: code
     overlay: True
     start: 0x918BB0
@@ -4804,7 +4859,8 @@ segments:
     - [0x91B510, data]
     - [0x91B7D0, rodata]
     - [0x91B7E0, rodata]
-  - dir: world/area_iwa/iwa_04
+  - name: iwa_04
+    dir: world/area_iwa/iwa_04
     type: code
     overlay: True
     start: 0x91B8E0
@@ -4815,7 +4871,8 @@ segments:
     - [0x91CA50, data]
     - [0x91CFA0, data]
     - [0x91E460, rodata]
-  - dir: world/area_iwa/iwa_10
+  - name: iwa_10
+    dir: world/area_iwa/iwa_10
     type: code
     overlay: True
     start: 0x91E570
@@ -4834,7 +4891,8 @@ segments:
     - [0x923FD0, data]
     - [0x9247B0, data]
     - [0x9269D0, rodata]
-  - dir: world/area_iwa/iwa_11
+  - name: iwa_11
+    dir: world/area_iwa/iwa_11
     type: code
     overlay: True
     start: 0x9269F0
@@ -4847,7 +4905,8 @@ segments:
     - [0x926D90, data]
     - [0x927030, data]
     - [0x929240, rodata]
-  - dir: world/area_sbk/sbk_00
+  - name: sbk_00
+    dir: world/area_sbk/sbk_00
     type: code
     overlay: True
     start: 0x929270
@@ -4858,7 +4917,8 @@ segments:
     - [0x9292D0, .data, "929270"]
     - [0x929A00, .data, 9292B0]
     - [0x929A80, .rodata, "929270"]
-  - dir: world/area_sbk/sbk_01
+  - name: sbk_01
+    dir: world/area_sbk/sbk_01
     type: code
     overlay: True
     start: 0x929A90
@@ -4869,7 +4929,8 @@ segments:
     - [0x929AF0, .data, 929A90]
     - [0x929E00, .data, 929AD0]
     - [0x92A290, .rodata, 929A90]
-  - dir: world/area_sbk/sbk_02
+  - name: sbk_02
+    dir: world/area_sbk/sbk_02
     type: code
     overlay: True
     start: 0x92A2B0
@@ -4883,7 +4944,8 @@ segments:
     - [0x92E220, data]
     - [0x92F830, data]
     - [0x92F880, rodata]
-  - dir: world/area_sbk/sbk_03
+  - name: sbk_03
+    dir: world/area_sbk/sbk_03
     type: code
     overlay: True
     start: 0x92F8B0
@@ -4894,7 +4956,8 @@ segments:
     - [0x92F910, data]
     - [0x92FC20, data]
     - [0x9304B0, rodata]
-  - dir: world/area_sbk/sbk_04
+  - name: sbk_04
+    dir: world/area_sbk/sbk_04
     type: code
     overlay: True
     start: 0x9304D0
@@ -4905,7 +4968,8 @@ segments:
     - [0x930530, data]
     - [0x930840, data]
     - [0x930CD0, rodata]
-  - dir: world/area_sbk/sbk_05
+  - name: sbk_05
+    dir: world/area_sbk/sbk_05
     type: code
     overlay: True
     start: 0x930CF0
@@ -4917,7 +4981,8 @@ segments:
     - [0x9310F0, data]
     - [0x931130, data]
     - [0x9325A0, rodata]
-  - dir: world/area_sbk/sbk_06
+  - name: sbk_06
+    dir: world/area_sbk/sbk_06
     type: code
     overlay: True
     start: 0x9325C0
@@ -4929,7 +4994,8 @@ segments:
     - [0x932BF0, data]
     - [0x933160, data]
     - [0x933C70, rodata]
-  - dir: world/area_sbk/sbk_10
+  - name: sbk_10
+    dir: world/area_sbk/sbk_10
     type: code
     overlay: True
     start: 0x933C80
@@ -4939,7 +5005,8 @@ segments:
     - [0x933CC0, data]
     - [0x933FD0, data]
     - [0x934020, rodata]
-  - dir: world/area_sbk/sbk_11
+  - name: sbk_11
+    dir: world/area_sbk/sbk_11
     type: code
     overlay: True
     start: 0x934040
@@ -4950,7 +5017,8 @@ segments:
     - [0x9341A0, data]
     - [0x934530, data]
     - [0x934D20, rodata]
-  - dir: world/area_sbk/sbk_12
+  - name: sbk_12
+    dir: world/area_sbk/sbk_12
     type: code
     overlay: True
     start: 0x934D40
@@ -4961,7 +5029,8 @@ segments:
     - [0x934DA0, data]
     - [0x935130, data]
     - [0x9357C0, rodata]
-  - dir: world/area_sbk/sbk_13
+  - name: sbk_13
+    dir: world/area_sbk/sbk_13
     type: code
     overlay: True
     start: 0x9357E0
@@ -4972,7 +5041,8 @@ segments:
     - [0x935940, data]
     - [0x935CD0, data]
     - [0x9366C0, rodata]
-  - dir: world/area_sbk/sbk_14
+  - name: sbk_14
+    dir: world/area_sbk/sbk_14
     type: code
     overlay: True
     start: 0x9366E0
@@ -4982,7 +5052,8 @@ segments:
     - [0x936720, data]
     - [0x936B20, data]
     - [0x936CA0, rodata]
-  - dir: world/area_sbk/sbk_15
+  - name: sbk_15
+    dir: world/area_sbk/sbk_15
     type: code
     overlay: True
     start: 0x936CD0
@@ -4993,7 +5064,8 @@ segments:
     - [0x936D30, data]
     - [0x9370C0, data]
     - [0x937550, rodata]
-  - dir: world/area_sbk/sbk_16
+  - name: sbk_16
+    dir: world/area_sbk/sbk_16
     type: code
     overlay: True
     start: 0x937570
@@ -5004,7 +5076,8 @@ segments:
     - [0x9377F0, data]
     - [0x937B00, data]
     - [0x938570, rodata]
-  - dir: world/area_sbk/sbk_20
+  - name: sbk_20
+    dir: world/area_sbk/sbk_20
     type: code
     overlay: True
     start: 0x938590
@@ -5016,7 +5089,8 @@ segments:
     - [0x9389F0, data]
     - [0x938DD0, data]
     - [0x939540, rodata]
-  - dir: world/area_sbk/sbk_21
+  - name: sbk_21
+    dir: world/area_sbk/sbk_21
     type: code
     overlay: True
     start: 0x939560
@@ -5025,7 +5099,8 @@ segments:
     - [0x939560, c]
     - [0x9395A0, data]
     - [0x939910, rodata]
-  - dir: world/area_sbk/sbk_22
+  - name: sbk_22
+    dir: world/area_sbk/sbk_22
     type: code
     overlay: True
     start: 0x939930
@@ -5036,7 +5111,8 @@ segments:
     - [0x939A90, data]
     - [0x93A610, data]
     - [0x93A740, rodata]
-  - dir: world/area_sbk/sbk_23
+  - name: sbk_23
+    dir: world/area_sbk/sbk_23
     type: code
     overlay: True
     start: 0x93A760
@@ -5046,7 +5122,8 @@ segments:
     - [0x93A7A0, data]
     - [0x93AB20, data]
     - [0x93AC00, rodata]
-  - dir: world/area_sbk/sbk_24
+  - name: sbk_24
+    dir: world/area_sbk/sbk_24
     type: code
     overlay: True
     start: 0x93AC30
@@ -5058,7 +5135,8 @@ segments:
     - [0x93B3C0, data]
     - [0x93B770, data]
     - [0x93C260, rodata]
-  - dir: world/area_sbk/sbk_25
+  - name: sbk_25
+    dir: world/area_sbk/sbk_25
     type: code
     overlay: True
     start: 0x93C280
@@ -5071,7 +5149,8 @@ segments:
     - [0x93D110, data]
     - [0x93DB80, data]
     - [0x93DCB0, rodata]
-  - dir: world/area_sbk/sbk_26
+  - name: sbk_26
+    dir: world/area_sbk/sbk_26
     type: code
     overlay: True
     start: 0x93DCD0
@@ -5084,7 +5163,8 @@ segments:
     - [0x93E390, data]
     - [0x93EB80, data]
     - [0x93F590, rodata]
-  - dir: world/area_sbk/sbk_30
+  - name: sbk_30
+    dir: world/area_sbk/sbk_30
     type: code
     overlay: True
     start: 0x93F5B0
@@ -5094,7 +5174,8 @@ segments:
     - [0x940DC0, data]
     - [0x943E20, rodata]
     - [0x943E50, rodata]
-  - dir: world/area_sbk/sbk_31
+  - name: sbk_31
+    dir: world/area_sbk/sbk_31
     type: code
     overlay: True
     start: 0x944000
@@ -5105,7 +5186,8 @@ segments:
     - [0x944140, data]
     - [0x9444D0, data]
     - [0x944A40, rodata]
-  - dir: world/area_sbk/sbk_32
+  - name: sbk_32
+    dir: world/area_sbk/sbk_32
     type: code
     overlay: True
     start: 0x944A60
@@ -5115,7 +5197,8 @@ segments:
     - [0x944AA0, c]
     - [0x944BC0, data]
     - [0x9459B0, rodata]
-  - dir: world/area_sbk/sbk_33
+  - name: sbk_33
+    dir: world/area_sbk/sbk_33
     type: code
     overlay: True
     start: 0x9459D0
@@ -5125,7 +5208,8 @@ segments:
     - [0x945A10, data]
     - [0x945BA0, data]
     - [0x945EA0, rodata]
-  - dir: world/area_sbk/sbk_34
+  - name: sbk_34
+    dir: world/area_sbk/sbk_34
     type: code
     overlay: True
     start: 0x945ED0
@@ -5137,7 +5221,8 @@ segments:
     - [0x9468B0, data]
     - [0x947C80, data]
     - [0x948690, rodata]
-  - dir: world/area_sbk/sbk_35
+  - name: sbk_35
+    dir: world/area_sbk/sbk_35
     type: code
     overlay: True
     start: 0x9486B0
@@ -5148,7 +5233,8 @@ segments:
     - [0x948A30, data]
     - [0x949330, data]
     - [0x949E40, rodata]
-  - dir: world/area_sbk/sbk_36
+  - name: sbk_36
+    dir: world/area_sbk/sbk_36
     type: code
     overlay: True
     start: 0x949E60
@@ -5159,7 +5245,8 @@ segments:
     - [0x94A0E0, data]
     - [0x94A470, data]
     - [0x94B380, rodata]
-  - dir: world/area_sbk/sbk_40
+  - name: sbk_40
+    dir: world/area_sbk/sbk_40
     type: code
     overlay: True
     start: 0x94B3A0
@@ -5171,7 +5258,8 @@ segments:
     - [0x94B800, data]
     - [0x94BF70, data]
     - [0x94C020, rodata]
-  - dir: world/area_sbk/sbk_41
+  - name: sbk_41
+    dir: world/area_sbk/sbk_41
     type: code
     overlay: True
     start: 0x94C040
@@ -5181,7 +5269,8 @@ segments:
     - [0x94C080, data]
     - [0x94C400, data]
     - [0x94C4E0, rodata]
-  - dir: world/area_sbk/sbk_42
+  - name: sbk_42
+    dir: world/area_sbk/sbk_42
     type: code
     overlay: True
     start: 0x94C510
@@ -5192,7 +5281,8 @@ segments:
     - [0x94C650, data]
     - [0x94C9E0, data]
     - [0x94D150, rodata]
-  - dir: world/area_sbk/sbk_43
+  - name: sbk_43
+    dir: world/area_sbk/sbk_43
     type: code
     overlay: True
     start: 0x94D170
@@ -5202,7 +5292,8 @@ segments:
     - [0x94D1B0, data]
     - [0x94D530, data]
     - [0x94D580, rodata]
-  - dir: world/area_sbk/sbk_44
+  - name: sbk_44
+    dir: world/area_sbk/sbk_44
     type: code
     overlay: True
     start: 0x94D5A0
@@ -5213,7 +5304,8 @@ segments:
     - [0x94D700, data]
     - [0x94DA90, data]
     - [0x94E480, rodata]
-  - dir: world/area_sbk/sbk_45
+  - name: sbk_45
+    dir: world/area_sbk/sbk_45
     type: code
     overlay: True
     start: 0x94E4A0
@@ -5223,7 +5315,8 @@ segments:
     - [0x94E4E0, data]
     - [0x94E8E0, data]
     - [0x94E980, rodata]
-  - dir: world/area_sbk/sbk_46
+  - name: sbk_46
+    dir: world/area_sbk/sbk_46
     type: code
     overlay: True
     start: 0x94E9A0
@@ -5237,7 +5330,8 @@ segments:
     - [0x94FA60, data]
     - [0x950570, data]
     - [0x9505F0, rodata]
-  - dir: world/area_sbk/sbk_50
+  - name: sbk_50
+    dir: world/area_sbk/sbk_50
     type: code
     overlay: True
     start: 0x950610
@@ -5246,7 +5340,8 @@ segments:
     - [0x950610, c]
     - [0x950650, data]
     - [0x950950, rodata]
-  - dir: world/area_sbk/sbk_51
+  - name: sbk_51
+    dir: world/area_sbk/sbk_51
     type: code
     overlay: True
     start: 0x950970
@@ -5257,7 +5352,8 @@ segments:
     - [0x950AD0, data]
     - [0x950E60, data]
     - [0x951650, rodata]
-  - dir: world/area_sbk/sbk_52
+  - name: sbk_52
+    dir: world/area_sbk/sbk_52
     type: code
     overlay: True
     start: 0x951670
@@ -5267,7 +5363,8 @@ segments:
     - [0x9516B0, data]
     - [0x951A30, data]
     - [0x951AC0, rodata]
-  - dir: world/area_sbk/sbk_53
+  - name: sbk_53
+    dir: world/area_sbk/sbk_53
     type: code
     overlay: True
     start: 0x951AE0
@@ -5278,7 +5375,8 @@ segments:
     - [0x951B40, data]
     - [0x951ED0, data]
     - [0x952560, rodata]
-  - dir: world/area_sbk/sbk_54
+  - name: sbk_54
+    dir: world/area_sbk/sbk_54
     type: code
     overlay: True
     start: 0x952580
@@ -5288,7 +5386,8 @@ segments:
     - [0x9525C0, data]
     - [0x952940, data]
     - [0x952A20, rodata]
-  - dir: world/area_sbk/sbk_55
+  - name: sbk_55
+    dir: world/area_sbk/sbk_55
     type: code
     overlay: True
     start: 0x952A50
@@ -5301,7 +5400,8 @@ segments:
     - [0x953090, data]
     - [0x953520, data]
     - [0x953FA0, rodata]
-  - dir: world/area_sbk/sbk_56
+  - name: sbk_56
+    dir: world/area_sbk/sbk_56
     type: code
     overlay: True
     start: 0x953FC0
@@ -5312,7 +5412,8 @@ segments:
     - [0x954FC0, data]
     - [0x9553F0, data]
     - [0x9569D0, rodata]
-  - dir: world/area_sbk/sbk_60
+  - name: sbk_60
+    dir: world/area_sbk/sbk_60
     type: code
     overlay: True
     start: 0x9569F0
@@ -5323,7 +5424,8 @@ segments:
     - [0x956A50, data]
     - [0x956CF0, data]
     - [0x956F80, rodata]
-  - dir: world/area_sbk/sbk_61
+  - name: sbk_61
+    dir: world/area_sbk/sbk_61
     type: code
     overlay: True
     start: 0x956F90
@@ -5333,7 +5435,8 @@ segments:
     - [0x956FD0, data]
     - [0x9572E0, data]
     - [0x957330, rodata]
-  - dir: world/area_sbk/sbk_62
+  - name: sbk_62
+    dir: world/area_sbk/sbk_62
     type: code
     overlay: True
     start: 0x957350
@@ -5344,7 +5447,8 @@ segments:
     - [0x9573B0, data]
     - [0x9576C0, data]
     - [0x957D50, rodata]
-  - dir: world/area_sbk/sbk_63
+  - name: sbk_63
+    dir: world/area_sbk/sbk_63
     type: code
     overlay: True
     start: 0x957D70
@@ -5355,7 +5459,8 @@ segments:
     - [0x957DD0, data]
     - [0x9580E0, data]
     - [0x958570, rodata]
-  - dir: world/area_sbk/sbk_64
+  - name: sbk_64
+    dir: world/area_sbk/sbk_64
     type: code
     overlay: True
     start: 0x958590
@@ -5365,7 +5470,8 @@ segments:
     - [0x9585D0, data]
     - [0x9588E0, data]
     - [0x958930, rodata]
-  - dir: world/area_sbk/sbk_65
+  - name: sbk_65
+    dir: world/area_sbk/sbk_65
     type: code
     overlay: True
     start: 0x958950
@@ -5374,7 +5480,8 @@ segments:
     - [0x958950, c]
     - [0x958990, data]
     - [0x958C90, rodata]
-  - dir: world/area_sbk/sbk_66
+  - name: sbk_66
+    dir: world/area_sbk/sbk_66
     type: code
     overlay: True
     start: 0x958CB0
@@ -5387,7 +5494,8 @@ segments:
     - [0x95A240, data]
     - [0x95AD50, data]
     - [0x95AEA0, rodata]
-  - dir: world/area_sbk/sbk_99
+  - name: sbk_99
+    dir: world/area_sbk/sbk_99
     type: code
     overlay: True
     start: 0x95AEB0
@@ -5396,7 +5504,8 @@ segments:
     - [0x95AEB0, data]
     - [0x95B190, data]
     - [0x95B1F0, rodata]
-  - dir: world/area_dro/dro_01
+  - name: dro_01
+    dir: world/area_dro/dro_01
     type: code
     overlay: True
     start: 0x95B200
@@ -5414,7 +5523,8 @@ segments:
     - [0x968FD0, rodata]
     - [0x969198, rodata]
     - [0x9691B0, rodata]
-  - dir: world/area_dro/dro_02
+  - name: dro_02
+    dir: world/area_dro/dro_02
     type: code
     overlay: True
     start: 0x9691C0
@@ -5428,7 +5538,8 @@ segments:
     - [0x96D380, data]
     - [0x96DFA0, data]
     - [0x9780D0, rodata]
-  - dir: world/area_isk/isk_01
+  - name: isk_01
+    dir: world/area_isk/isk_01
     type: code
     overlay: True
     start: 0x978140
@@ -5438,7 +5549,8 @@ segments:
     - [0x978360, data]
     - [0x9785C0, data]
     - [0x978700, rodata]
-  - dir: world/area_isk/isk_02
+  - name: isk_02
+    dir: world/area_isk/isk_02
     type: code
     overlay: True
     start: 0x978710
@@ -5453,7 +5565,8 @@ segments:
     - [0x979390, data]
     - [0x9793F0, data]
     - [0x979E40, rodata]
-  - dir: world/area_isk/isk_03
+  - name: isk_03
+    dir: world/area_isk/isk_03
     type: code
     overlay: True
     start: 0x979E50
@@ -5463,7 +5576,8 @@ segments:
     - [0x97A210, data]
     - [0x97B340, data]
     - [0x97B620, rodata]
-  - dir: world/area_isk/isk_04
+  - name: isk_04
+    dir: world/area_isk/isk_04
     type: code
     overlay: True
     start: 0x97B630
@@ -5479,7 +5593,8 @@ segments:
     - [0x97D2F0, data]
     - [0x97DA40, rodata]
     - [0x97DAC0, rodata]
-  - dir: world/area_isk/isk_05
+  - name: isk_05
+    dir: world/area_isk/isk_05
     type: code
     overlay: True
     start: 0x97DAD0
@@ -5493,7 +5608,8 @@ segments:
     - [0x980980, rodata]
     - [0x9809C8, rodata]
     - [0x980A08, rodata]
-  - dir: world/area_isk/isk_06
+  - name: isk_06
+    dir: world/area_isk/isk_06
     type: code
     overlay: True
     start: 0x980A20
@@ -5503,7 +5619,8 @@ segments:
     - [0x980D40, data]
     - [0x982150, data]
     - [0x982430, rodata]
-  - dir: world/area_isk/isk_07
+  - name: isk_07
+    dir: world/area_isk/isk_07
     type: code
     overlay: True
     start: 0x982440
@@ -5519,7 +5636,8 @@ segments:
     - [0x984390, data]
     - [0x9845D0, data]
     - [0x984E20, rodata]
-  - dir: world/area_isk/isk_08
+  - name: isk_08
+    dir: world/area_isk/isk_08
     type: code
     overlay: True
     start: 0x984E30
@@ -5530,7 +5648,8 @@ segments:
     - [0x985B00, data]
     - [0x986090, data]
     - [0x986460, rodata]
-  - dir: world/area_isk/isk_09
+  - name: isk_09
+    dir: world/area_isk/isk_09
     type: code
     overlay: True
     start: 0x9864E0
@@ -5544,7 +5663,8 @@ segments:
     - [0x987560, data]
     - [0x988290, data]
     - [0x988B50, rodata]
-  - dir: world/area_isk/isk_10
+  - name: isk_10
+    dir: world/area_isk/isk_10
     type: code
     overlay: True
     start: 0x988B60
@@ -5555,7 +5675,8 @@ segments:
     - [0x98A580, data]
     - [0x98A9E0, rodata]
     - [0x98AA00, rodata]
-  - dir: world/area_isk/isk_11
+  - name: isk_11
+    dir: world/area_isk/isk_11
     type: code
     overlay: True
     start: 0x98AA10
@@ -5570,7 +5691,8 @@ segments:
     - [0x98B620, data]
     - [0x98D3C0, data]
     - [0x98D620, rodata]
-  - dir: world/area_isk/isk_12
+  - name: isk_12
+    dir: world/area_isk/isk_12
     type: code
     overlay: True
     start: 0x98D640
@@ -5581,7 +5703,8 @@ segments:
     - [0x98DCB0, data]
     - [0x98ED40, data]
     - [0x98F7C0, rodata]
-  - dir: world/area_isk/isk_13
+  - name: isk_13
+    dir: world/area_isk/isk_13
     type: code
     overlay: True
     start: 0x98F7E0
@@ -5594,7 +5717,8 @@ segments:
     - [0x992690, rodata]
     - [0x9926D8, rodata]
     - [0x992718, rodata]
-  - dir: world/area_isk/isk_14
+  - name: isk_14
+    dir: world/area_isk/isk_14
     type: code
     overlay: True
     start: 0x992730
@@ -5607,7 +5731,8 @@ segments:
     - [0x995150, rodata]
     - [0x995160, rodata]
     - [0x9951A8, rodata]
-  - dir: world/area_isk/isk_16
+  - name: isk_16
+    dir: world/area_isk/isk_16
     type: code
     overlay: True
     start: 0x9951F0
@@ -5620,7 +5745,8 @@ segments:
     - [0x996C40, data]
     - [0x997E20, data]
     - [0x997F40, rodata]
-  - dir: world/area_isk/isk_18
+  - name: isk_18
+    dir: world/area_isk/isk_18
     type: code
     overlay: True
     start: 0x997F70
@@ -5631,7 +5757,8 @@ segments:
     - [0x998B90, data]
     - [0x999520, data]
     - [0x9996D0, rodata]
-  - dir: world/area_isk/isk_19
+  - name: isk_19
+    dir: world/area_isk/isk_19
     type: code
     overlay: True
     start: 0x999740
@@ -5641,7 +5768,8 @@ segments:
     - [0x999960, data]
     - [0x999BA0, data]
     - [0x999C60, rodata]
-  - dir: world/area_trd/trd_00
+  - name: trd_00
+    dir: world/area_trd/trd_00
     type: code
     overlay: True
     start: 0x999C70
@@ -5655,7 +5783,8 @@ segments:
     - [0x99AFB0, data]
     - [0x99B280, data]
     - [0x99C970, rodata]
-  - dir: world/area_trd/trd_01
+  - name: trd_01
+    dir: world/area_trd/trd_01
     type: code
     overlay: True
     start: 0x99C990
@@ -5671,7 +5800,8 @@ segments:
     - [0x9A0DB0, rodata]
     - [0x9A0DD0, rodata]
     - [0x9A0E30, rodata]
-  - dir: world/area_trd/trd_02
+  - name: trd_02
+    dir: world/area_trd/trd_02
     type: code
     overlay: True
     start: 0x9A0FE0
@@ -5685,7 +5815,8 @@ segments:
     - [0x9A3AB0, data]
     - [0x9A42B0, rodata]
     - [0x9A4320, rodata]
-  - dir: world/area_trd/trd_03
+  - name: trd_03
+    dir: world/area_trd/trd_03
     type: code
     overlay: True
     start: 0x9A4650
@@ -5699,7 +5830,8 @@ segments:
     - [0x9A5FF0, data]
     - [0x9A60F0, data]
     - [0x9A8380, rodata]
-  - dir: world/area_trd/trd_04
+  - name: trd_04
+    dir: world/area_trd/trd_04
     type: code
     overlay: True
     start: 0x9A83F0
@@ -5714,7 +5846,8 @@ segments:
     - [0x9AE2B0, rodata]
     - [0x9AE330, rodata]
     - [0x9AE6B8, rodata]
-  - dir: world/area_trd/trd_05
+  - name: trd_05
+    dir: world/area_trd/trd_05
     type: code
     overlay: True
     start: 0x9AE700
@@ -5727,7 +5860,8 @@ segments:
     - [0x9AF7C0, data]
     - [0x9AF820, data]
     - [0x9B1760, rodata]
-  - dir: world/area_trd/trd_06
+  - name: trd_06
+    dir: world/area_trd/trd_06
     type: code
     overlay: True
     start: 0x9B1790
@@ -5742,7 +5876,8 @@ segments:
     - [0x9B5FC0, data]
     - [0x9B6940, rodata]
     - [0x9B6950, rodata]
-  - dir: world/area_trd/trd_07
+  - name: trd_07
+    dir: world/area_trd/trd_07
     type: code
     overlay: True
     start: 0x9B6980
@@ -5757,7 +5892,8 @@ segments:
     - [0x9BB190, rodata]
     - [0x9BB200, rodata]
     - [0x9BB258, rodata]
-  - dir: world/area_trd/trd_08
+  - name: trd_08
+    dir: world/area_trd/trd_08
     type: code
     overlay: True
     start: 0x9BB2A0
@@ -5769,7 +5905,8 @@ segments:
     - [0x9BBD50, data]
     - [0x9BC1A0, data]
     - [0x9BD650, rodata]
-  - dir: world/area_trd/trd_09
+  - name: trd_09
+    dir: world/area_trd/trd_09
     type: code
     overlay: True
     start: 0x9BD660
@@ -5783,7 +5920,8 @@ segments:
     - [0x9BDE80, data]
     - [0x9C24C0, data]
     - [0x9C28F0, rodata]
-  - dir: world/area_trd/trd_10
+  - name: trd_10
+    dir: world/area_trd/trd_10
     type: code
     overlay: True
     start: 0x9C2910
@@ -5795,7 +5933,8 @@ segments:
     - [0x9C3A30, data]
     - [0x9C4FC0, data]
     - [0x9C53B0, rodata]
-  - dir: world/area_nok/nok_01
+  - name: nok_01
+    dir: world/area_nok/nok_01
     type: code
     overlay: True
     start: 0x9C53E0
@@ -5813,7 +5952,8 @@ segments:
     - [0x9D5BF0, data]
     - [0x9D5F80, data]
     - [0x9D6E60, rodata]
-  - dir: world/area_nok/nok_02
+  - name: nok_02
+    dir: world/area_nok/nok_02
     type: code
     overlay: True
     start: 0x9D7020
@@ -5837,7 +5977,8 @@ segments:
     - [0x9EB3D0, data]
     - [0x9EB620, rodata]
     - [0x9EB640, rodata]
-  - dir: world/area_nok/nok_03
+  - name: nok_03
+    dir: world/area_nok/nok_03
     type: code
     overlay: True
     start: 0x9EB7F0
@@ -5848,7 +5989,8 @@ segments:
     - [0x9EC700, data]
     - [0x9ECBD0, data]
     - [0x9EDB90, rodata]
-  - dir: world/area_nok/nok_04
+  - name: nok_04
+    dir: world/area_nok/nok_04
     type: code
     overlay: True
     start: 0x9EDBF0
@@ -5863,7 +6005,8 @@ segments:
     - [0x9F4A00, rodata]
     - [0x9F4A10, rodata]
     - [0x9F4A30, rodata]
-  - dir: world/area_nok/nok_11
+  - name: nok_11
+    dir: world/area_nok/nok_11
     type: code
     overlay: True
     start: 0x9F4A40
@@ -5875,7 +6018,8 @@ segments:
     - [0x9F7180, data]
     - [0x9FA720, rodata]
     - [0x9FA790, rodata]
-  - dir: world/area_nok/nok_12
+  - name: nok_12
+    dir: world/area_nok/nok_12
     type: code
     overlay: True
     start: 0x9FA7F0
@@ -5894,7 +6038,8 @@ segments:
     - [0x9FFB70, data]
     - [0xA00250, rodata]
     - [0xA002C0, rodata]
-  - dir: world/area_nok/nok_13
+  - name: nok_13
+    dir: world/area_nok/nok_13
     type: code
     overlay: True
     start: 0xA00600
@@ -5910,7 +6055,8 @@ segments:
     - [0xA027B0, rodata]
     - [0xA027D0, rodata]
     - [0xA02820, rodata]
-  - dir: world/area_nok/nok_14
+  - name: nok_14
+    dir: world/area_nok/nok_14
     type: code
     overlay: True
     start: 0xA02840
@@ -5927,7 +6073,8 @@ segments:
     - [0xA06DF0, rodata]
     - [0xA06E60, rodata]
     - [0xA06EB8, rodata]
-  - dir: world/area_nok/nok_15
+  - name: nok_15
+    dir: world/area_nok/nok_15
     type: code
     overlay: True
     start: 0xA06F00
@@ -5943,7 +6090,8 @@ segments:
     - [0xA0BBF0, rodata]
     - [0xA0BC50, rodata]
     - [0xA0BCA8, rodata]
-  - dir: world/area_hos/hos_00
+  - name: hos_00
+    dir: world/area_hos/hos_00
     type: code
     overlay: True
     start: 0xA0BCF0
@@ -5962,7 +6110,8 @@ segments:
     - [0xA10820, rodata]
     - [0xA10830, rodata]
     - [0xA10870, rodata]
-  - dir: world/area_hos/hos_01
+  - name: hos_01
+    dir: world/area_hos/hos_01
     type: code
     overlay: True
     start: 0xA10880
@@ -5977,7 +6126,8 @@ segments:
     - [0xA15860, data]
     - [0xA158D0, data]
     - [0xA161F0, rodata]
-  - dir: world/area_hos/hos_02
+  - name: hos_02
+    dir: world/area_hos/hos_02
     type: code
     overlay: True
     start: 0xA16220
@@ -5993,7 +6143,8 @@ segments:
     - [0xA1ADA0, data]
     - [0xA1AFF0, rodata]
     - [0xA1B098, rodata]
-  - dir: world/area_hos/hos_03
+  - name: hos_03
+    dir: world/area_hos/hos_03
     type: code
     overlay: True
     start: 0xA1B100
@@ -6012,7 +6163,8 @@ segments:
     - [0xA26E00, data]
     - [0xA26E50, rodata]
     - [0xA26E70, rodata]
-  - dir: world/area_hos/hos_04
+  - name: hos_04
+    dir: world/area_hos/hos_04
     type: code
     overlay: True
     start: 0xA26ED0
@@ -6034,7 +6186,8 @@ segments:
     - [0xA2A1C0, rodata]
     - [0xA2A1E0, rodata]
     - [0xA2A1F8, rodata]
-  - dir: world/area_hos/hos_05
+  - name: hos_05
+    dir: world/area_hos/hos_05
     type: code
     overlay: True
     start: 0xA2A240
@@ -6054,7 +6207,8 @@ segments:
     - [0xA39410, rodata]
     - [0xA394A0, rodata]
     - [0xA394C0, rodata]
-  - dir: world/area_hos/hos_06
+  - name: hos_06
+    dir: world/area_hos/hos_06
     type: code
     overlay: True
     start: 0xA394E0
@@ -6070,7 +6224,8 @@ segments:
     - [0xA3C090, data]
     - [0xA3DAB0, data]
     - [0xA3F730, rodata]
-  - dir: world/area_hos/hos_10
+  - name: hos_10
+    dir: world/area_hos/hos_10
     type: code
     overlay: True
     start: 0xA3F740
@@ -6085,7 +6240,8 @@ segments:
     - [0xA42DA0, data]
     - [0xA43920, data]
     - [0xA45910, rodata]
-  - dir: world/area_hos/hos_20
+  - name: hos_20
+    dir: world/area_hos/hos_20
     type: code
     overlay: True
     start: 0xA45930
@@ -6096,7 +6252,8 @@ segments:
     - [0xA45C90, data]
     - [0xA46350, data]
     - [0xA46F40, rodata]
-  - dir: world/area_kpa/kpa_01
+  - name: kpa_01
+    dir: world/area_kpa/kpa_01
     type: code
     overlay: True
     start: 0xA46F60
@@ -6109,7 +6266,8 @@ segments:
     - [0xA47D70, data]
     - [0xA48500, data]
     - [0xA48550, rodata]
-  - dir: world/area_kpa/kpa_03
+  - name: kpa_03
+    dir: world/area_kpa/kpa_03
     type: code
     overlay: True
     start: 0xA485C0
@@ -6124,7 +6282,8 @@ segments:
     - [0xA4BE30, rodata]
     - [0xA4BEA0, rodata]
     - [0xA4BED8, rodata]
-  - dir: world/area_kpa/kpa_04
+  - name: kpa_04
+    dir: world/area_kpa/kpa_04
     type: code
     overlay: True
     start: 0xA4BF60
@@ -6134,7 +6293,8 @@ segments:
     - [0xA4C0D0, data]
     - [0xA4C1A0, data]
     - [0xA4CA10, rodata]
-  - dir: world/area_kpa/kpa_08
+  - name: kpa_08
+    dir: world/area_kpa/kpa_08
     type: code
     overlay: True
     start: 0xA4CA20
@@ -6148,7 +6308,8 @@ segments:
     - [0xA4E710, data]
     - [0xA4EF30, rodata]
     - [0xA4EF78, rodata]
-  - dir: world/area_kpa/kpa_09
+  - name: kpa_09
+    dir: world/area_kpa/kpa_09
     type: code
     overlay: True
     start: 0xA4F000
@@ -6161,7 +6322,8 @@ segments:
     - [0xA506D0, data]
     - [0xA50B90, data]
     - [0xA517B0, rodata]
-  - dir: world/area_kpa/kpa_10
+  - name: kpa_10
+    dir: world/area_kpa/kpa_10
     type: code
     overlay: True
     start: 0xA51980
@@ -6171,7 +6333,8 @@ segments:
     - [0xA51C90, data]
     - [0xA51D90, data]
     - [0xA528A0, rodata]
-  - dir: world/area_kpa/kpa_11
+  - name: kpa_11
+    dir: world/area_kpa/kpa_11
     type: code
     overlay: True
     start: 0xA528C0
@@ -6185,7 +6348,8 @@ segments:
     - [0xA53E30, data]
     - [0xA548D0, rodata]
     - [0xA548F0, rodata]
-  - dir: world/area_kpa/kpa_12
+  - name: kpa_12
+    dir: world/area_kpa/kpa_12
     type: code
     overlay: True
     start: 0xA54950
@@ -6197,7 +6361,8 @@ segments:
     - [0xA54DC0, data]
     - [0xA55620, data]
     - [0xA55F00, rodata]
-  - dir: world/area_kpa/kpa_13
+  - name: kpa_13
+    dir: world/area_kpa/kpa_13
     type: code
     overlay: True
     start: 0xA55F20
@@ -6210,7 +6375,8 @@ segments:
     - [0xA56BD0, data]
     - [0xA56CA0, data]
     - [0xA57490, rodata]
-  - dir: world/area_kpa/kpa_14
+  - name: kpa_14
+    dir: world/area_kpa/kpa_14
     type: code
     overlay: True
     start: 0xA574B0
@@ -6224,7 +6390,8 @@ segments:
     - [0xA58DB0, data]
     - [0xA59060, data]
     - [0xA59370, rodata]
-  - dir: world/area_kpa/kpa_15
+  - name: kpa_15
+    dir: world/area_kpa/kpa_15
     type: code
     overlay: True
     start: 0xA59390
@@ -6235,7 +6402,8 @@ segments:
     - [0xA59960, data]
     - [0xA59E30, data]
     - [0xA5A020, rodata]
-  - dir: world/area_kpa/kpa_16
+  - name: kpa_16
+    dir: world/area_kpa/kpa_16
     type: code
     overlay: True
     start: 0xA5A030
@@ -6246,7 +6414,8 @@ segments:
     - [0xA5A3D0, data]
     - [0xA5B180, data]
     - [0xA5CA10, rodata]
-  - dir: world/area_kpa/kpa_17
+  - name: kpa_17
+    dir: world/area_kpa/kpa_17
     type: code
     overlay: True
     start: 0xA5CA20
@@ -6257,7 +6426,8 @@ segments:
     - [0xA5CBD0, data]
     - [0xA5CE90, data]
     - [0xA5E0B0, rodata]
-  - dir: world/area_kpa/kpa_32
+  - name: kpa_32
+    dir: world/area_kpa/kpa_32
     type: code
     overlay: True
     start: 0xA5E0C0
@@ -6268,7 +6438,8 @@ segments:
     - [0xA5E4C0, data]
     - [0xA5E500, data]
     - [0xA5F060, rodata]
-  - dir: world/area_kpa/kpa_33
+  - name: kpa_33
+    dir: world/area_kpa/kpa_33
     type: code
     overlay: True
     start: 0xA5F080
@@ -6279,7 +6450,8 @@ segments:
     - [0xA5F480, data]
     - [0xA5F4C0, data]
     - [0xA60020, rodata]
-  - dir: world/area_kpa/kpa_40
+  - name: kpa_40
+    dir: world/area_kpa/kpa_40
     type: code
     overlay: True
     start: 0xA60040
@@ -6288,7 +6460,8 @@ segments:
     - [0xA60040, data]
     - [0xA60130, data]
     - [0xA60450, rodata]
-  - dir: world/area_kpa/kpa_41
+  - name: kpa_41
+    dir: world/area_kpa/kpa_41
     type: code
     overlay: True
     start: 0xA60470
@@ -6297,7 +6470,8 @@ segments:
     - [0xA60470, data]
     - [0xA60560, data]
     - [0xA609B0, rodata]
-  - dir: world/area_kpa/kpa_50
+  - name: kpa_50
+    dir: world/area_kpa/kpa_50
     type: code
     overlay: True
     start: 0xA609D0
@@ -6307,7 +6481,8 @@ segments:
     - [0xA623F0, data]
     - [0xA624D0, data]
     - [0xA63E60, rodata]
-  - dir: world/area_kpa/kpa_51
+  - name: kpa_51
+    dir: world/area_kpa/kpa_51
     type: code
     overlay: True
     start: 0xA64090
@@ -6322,7 +6497,8 @@ segments:
     - [0xA66FE0, rodata]
     - [0xA67018, rodata]
     - [0xA67098, rodata]
-  - dir: world/area_kpa/kpa_52
+  - name: kpa_52
+    dir: world/area_kpa/kpa_52
     type: code
     overlay: True
     start: 0xA67100
@@ -6336,7 +6512,8 @@ segments:
     - [0xA68B40, data]
     - [0xA6AAC0, rodata]
     - [0xA6AAE0, rodata]
-  - dir: world/area_kpa/kpa_53
+  - name: kpa_53
+    dir: world/area_kpa/kpa_53
     type: code
     overlay: True
     start: 0xA6ACA0
@@ -6349,7 +6526,8 @@ segments:
     - [0xA6CA80, data]
     - [0xA6CAC0, rodata]
     - [0xA6CAF0, rodata]
-  - dir: world/area_kpa/kpa_60
+  - name: kpa_60
+    dir: world/area_kpa/kpa_60
     type: code
     overlay: True
     start: 0xA6CB00
@@ -6359,7 +6537,8 @@ segments:
     - [0xA6CBE0, c]
     - [0xA6CEF0, data]
     - [0xA6E3A0, rodata]
-  - dir: world/area_kpa/kpa_61
+  - name: kpa_61
+    dir: world/area_kpa/kpa_61
     type: code
     overlay: True
     start: 0xA6E3E0
@@ -6374,7 +6553,8 @@ segments:
     - [0xA720A0, rodata]
     - [0xA72110, rodata]
     - [0xA72148, rodata]
-  - dir: world/area_kpa/kpa_62
+  - name: kpa_62
+    dir: world/area_kpa/kpa_62
     type: code
     overlay: True
     start: 0xA72220
@@ -6385,7 +6565,8 @@ segments:
     - [0xA72610, data]
     - [0xA72740, data]
     - [0xA73590, rodata]
-  - dir: world/area_kpa/kpa_63
+  - name: kpa_63
+    dir: world/area_kpa/kpa_63
     type: code
     overlay: True
     start: 0xA735B0
@@ -6397,7 +6578,8 @@ segments:
     - [0xA73920, data]
     - [0xA73D30, data]
     - [0xA74860, rodata]
-  - dir: world/area_kpa/kpa_70
+  - name: kpa_70
+    dir: world/area_kpa/kpa_70
     type: code
     overlay: True
     start: 0xA74870
@@ -6409,7 +6591,8 @@ segments:
     - [0xA75440, data]
     - [0xA75B70, data]
     - [0xA78450, rodata]
-  - dir: world/area_kpa/kpa_81
+  - name: kpa_81
+    dir: world/area_kpa/kpa_81
     type: code
     overlay: True
     start: 0xA784C0
@@ -6421,7 +6604,8 @@ segments:
     - [0xA789F0, data]
     - [0xA79200, data]
     - [0xA7A4C0, rodata]
-  - dir: world/area_kpa/kpa_82
+  - name: kpa_82
+    dir: world/area_kpa/kpa_82
     type: code
     overlay: True
     start: 0xA7A500
@@ -6433,7 +6617,8 @@ segments:
     - [0xA7AA10, data]
     - [0xA7AF80, data]
     - [0xA83460, rodata]
-  - dir: world/area_kpa/kpa_83
+  - name: kpa_83
+    dir: world/area_kpa/kpa_83
     type: code
     overlay: True
     start: 0xA83490
@@ -6445,7 +6630,8 @@ segments:
     - [0xA835D0, data]
     - [0xA83AC0, data]
     - [0xA86780, rodata]
-  - dir: world/area_kpa/kpa_90
+  - name: kpa_90
+    dir: world/area_kpa/kpa_90
     type: code
     overlay: True
     start: 0xA867B0
@@ -6454,7 +6640,8 @@ segments:
     - [0xA867B0, data]
     - [0xA86880, data]
     - [0xA86A40, rodata]
-  - dir: world/area_kpa/kpa_91
+  - name: kpa_91
+    dir: world/area_kpa/kpa_91
     type: code
     overlay: True
     start: 0xA86A50
@@ -6468,7 +6655,8 @@ segments:
     - [0xA8C230, data]
     - [0xA8C470, rodata]
     - [0xA8C480, rodata]
-  - dir: world/area_kpa/kpa_94
+  - name: kpa_94
+    dir: world/area_kpa/kpa_94
     type: code
     overlay: True
     start: 0xA8C7C0
@@ -6477,7 +6665,8 @@ segments:
     - [0xA8C7C0, data]
     - [0xA8C890, data]
     - [0xA8CA70, rodata]
-  - dir: world/area_kpa/kpa_95
+  - name: kpa_95
+    dir: world/area_kpa/kpa_95
     type: code
     overlay: True
     start: 0xA8CA80
@@ -6491,7 +6680,8 @@ segments:
     - [0xA8E970, data]
     - [0xA92470, rodata]
     - [0xA92480, rodata]
-  - dir: world/area_kpa/kpa_96
+  - name: kpa_96
+    dir: world/area_kpa/kpa_96
     type: code
     overlay: True
     start: 0xA927C0
@@ -6501,7 +6691,8 @@ segments:
     - [0xA927F0, data]
     - [0xA928B0, data]
     - [0xA93150, rodata]
-  - dir: world/area_kpa/kpa_100
+  - name: kpa_100
+    dir: world/area_kpa/kpa_100
     type: code
     overlay: True
     start: 0xA93160
@@ -6512,7 +6703,8 @@ segments:
     - [0xA93270, data]
     - [0xA933D0, data]
     - [0xA93410, rodata]
-  - dir: world/area_kpa/kpa_101
+  - name: kpa_101
+    dir: world/area_kpa/kpa_101
     type: code
     overlay: True
     start: 0xA93440
@@ -6523,7 +6715,8 @@ segments:
     - [0xA93550, data]
     - [0xA936D0, data]
     - [0xA93710, rodata]
-  - dir: world/area_kpa/kpa_102
+  - name: kpa_102
+    dir: world/area_kpa/kpa_102
     type: code
     overlay: True
     start: 0xA93740
@@ -6537,7 +6730,8 @@ segments:
     - [0xA99250, rodata]
     - [0xA99478, rodata]
     - [0xA994B0, rodata]
-  - dir: world/area_kpa/kpa_111
+  - name: kpa_111
+    dir: world/area_kpa/kpa_111
     type: code
     overlay: True
     start: 0xA99590
@@ -6549,7 +6743,8 @@ segments:
     - [0xA9ACF0, data]
     - [0xA9C740, data]
     - [0xA9C7C0, rodata]
-  - dir: world/area_kpa/kpa_112
+  - name: kpa_112
+    dir: world/area_kpa/kpa_112
     type: code
     overlay: True
     start: 0xA9C990
@@ -6558,7 +6753,8 @@ segments:
     - [0xA9C990, data]
     - [0xA9CA60, data]
     - [0xA9CC20, rodata]
-  - dir: world/area_kpa/kpa_113
+  - name: kpa_113
+    dir: world/area_kpa/kpa_113
     type: code
     overlay: True
     start: 0xA9CC30
@@ -6572,7 +6768,8 @@ segments:
     - [0xA9DD00, data]
     - [0xA9E900, rodata]
     - [0xA9E920, rodata]
-  - dir: world/area_kpa/kpa_114
+  - name: kpa_114
+    dir: world/area_kpa/kpa_114
     type: code
     overlay: True
     start: 0xA9E980
@@ -6582,7 +6779,8 @@ segments:
     - [0xA9E9D0, data]
     - [0xA9EAA0, data]
     - [0xA9ED10, rodata]
-  - dir: world/area_kpa/kpa_115
+  - name: kpa_115
+    dir: world/area_kpa/kpa_115
     type: code
     overlay: True
     start: 0xA9ED40
@@ -6595,7 +6793,8 @@ segments:
     - [0xAA0B20, data]
     - [0xAA1D00, rodata]
     - [0xAA1D20, rodata]
-  - dir: world/area_kpa/kpa_116
+  - name: kpa_116
+    dir: world/area_kpa/kpa_116
     type: code
     overlay: True
     start: 0xAA1EE0
@@ -6604,7 +6803,8 @@ segments:
     - [0xAA1EE0, data]
     - [0xAA1FB0, data]
     - [0xAA2170, rodata]
-  - dir: world/area_kpa/kpa_117
+  - name: kpa_117
+    dir: world/area_kpa/kpa_117
     type: code
     overlay: True
     start: 0xAA2180
@@ -6613,7 +6813,8 @@ segments:
     - [0xAA2180, data]
     - [0xAA2240, data]
     - [0xAA23B0, rodata]
-  - dir: world/area_kpa/kpa_118
+  - name: kpa_118
+    dir: world/area_kpa/kpa_118
     type: code
     overlay: True
     start: 0xAA23C0
@@ -6622,7 +6823,8 @@ segments:
     - [0xAA23C0, data]
     - [0xAA2490, data]
     - [0xAA2650, rodata]
-  - dir: world/area_kpa/kpa_119
+  - name: kpa_119
+    dir: world/area_kpa/kpa_119
     type: code
     overlay: True
     start: 0xAA2660
@@ -6632,7 +6834,8 @@ segments:
     - [0xAA2720, data]
     - [0xAA2760, data]
     - [0xAA28E0, rodata]
-  - dir: world/area_kpa/kpa_121
+  - name: kpa_121
+    dir: world/area_kpa/kpa_121
     type: code
     overlay: True
     start: 0xAA28F0
@@ -6641,7 +6844,8 @@ segments:
     - [0xAA28F0, data]
     - [0xAA29C0, data]
     - [0xAA2D10, rodata]
-  - dir: world/area_kpa/kpa_130
+  - name: kpa_130
+    dir: world/area_kpa/kpa_130
     type: code
     overlay: True
     start: 0xAA2D20
@@ -6652,7 +6856,8 @@ segments:
     - [0xAA3530, data]
     - [0xAA3870, data]
     - [0xAA7460, rodata]
-  - dir: world/area_kpa/kpa_133
+  - name: kpa_133
+    dir: world/area_kpa/kpa_133
     type: code
     overlay: True
     start: 0xAA7480
@@ -6666,7 +6871,8 @@ segments:
     - [0xAA8C70, data]
     - [0xAA8F10, data]
     - [0xAA8F90, rodata]
-  - dir: world/area_kpa/kpa_134
+  - name: kpa_134
+    dir: world/area_kpa/kpa_134
     type: code
     overlay: True
     start: 0xAA8FA0
@@ -6681,7 +6887,8 @@ segments:
     - [0xAABF00, data]
     - [0xAAC3B0, data]
     - [0xAAC820, rodata]
-  - dir: world/area_osr/osr_00
+  - name: osr_00
+    dir: world/area_osr/osr_00
     type: code
     overlay: True
     start: 0xAAC830
@@ -6692,7 +6899,8 @@ segments:
     - [0xAACFC0, data]
     - [0xAAD790, data]
     - [0xAAFFD0, rodata]
-  - dir: world/area_osr/osr_01
+  - name: osr_01
+    dir: world/area_osr/osr_01
     type: code
     overlay: True
     start: 0xAAFFF0
@@ -6705,7 +6913,8 @@ segments:
     - [0xAB0C10, data]
     - [0xAB1150, data]
     - [0xAB2150, rodata]
-  - dir: world/area_osr/osr_02
+  - name: osr_02
+    dir: world/area_osr/osr_02
     type: code
     overlay: True
     start: 0xAB2170
@@ -6720,7 +6929,8 @@ segments:
     - [0xAB2BB0, data]
     - [0xAB5D40, data]
     - [0xAB6270, rodata]
-  - dir: world/area_osr/osr_03
+  - name: osr_03
+    dir: world/area_osr/osr_03
     type: code
     overlay: True
     start: 0xAB6290
@@ -6734,7 +6944,8 @@ segments:
     - [0xAB8350, data]
     - [0xAB8B10, data]
     - [0xAB9270, rodata]
-  - dir: world/area_osr/osr_04
+  - name: osr_04
+    dir: world/area_osr/osr_04
     type: code
     overlay: True
     start: 0xAB92B0
@@ -6744,7 +6955,8 @@ segments:
     - [0xAB9370, data]
     - [0xAB95D0, data]
     - [0xABB260, rodata]
-  - dir: world/area_kkj/kkj_00
+  - name: kkj_00
+    dir: world/area_kkj/kkj_00
     type: code
     overlay: True
     start: 0xABB290
@@ -6758,7 +6970,8 @@ segments:
     - [0xABEF20, data]
     - [0xAC40D0, data]
     - [0xAC4FB0, rodata]
-  - dir: world/area_kkj/kkj_01
+  - name: kkj_01
+    dir: world/area_kkj/kkj_01
     type: code
     overlay: True
     start: 0xAC5170
@@ -6770,7 +6983,8 @@ segments:
     - [0xAC67E0, data]
     - [0xAC8B60, rodata]
     - [0xAC8B80, rodata]
-  - dir: world/area_kkj/kkj_02
+  - name: kkj_02
+    dir: world/area_kkj/kkj_02
     type: code
     overlay: True
     start: 0xAC8D20
@@ -6780,7 +6994,8 @@ segments:
     - [0xAC8E40, data]
     - [0xAC9160, data]
     - [0xAC9700, rodata]
-  - dir: world/area_kkj/kkj_03
+  - name: kkj_03
+    dir: world/area_kkj/kkj_03
     type: code
     overlay: True
     start: 0xAC9710
@@ -6793,7 +7008,8 @@ segments:
     - [0xACA010, data]
     - [0xACA250, data]
     - [0xACAB00, rodata]
-  - dir: world/area_kkj/kkj_10
+  - name: kkj_10
+    dir: world/area_kkj/kkj_10
     type: code
     overlay: True
     start: 0xACAB20
@@ -6807,7 +7023,8 @@ segments:
     - [0xACC510, data]
     - [0xACC700, data]
     - [0xACE0D0, rodata]
-  - dir: world/area_kkj/kkj_11
+  - name: kkj_11
+    dir: world/area_kkj/kkj_11
     type: code
     overlay: True
     start: 0xACE140
@@ -6823,7 +7040,8 @@ segments:
     - [0xAD02E0, data]
     - [0xAD27F0, data]
     - [0xAD4010, rodata]
-  - dir: world/area_kkj/kkj_12
+  - name: kkj_12
+    dir: world/area_kkj/kkj_12
     type: code
     overlay: True
     start: 0xAD4090
@@ -6833,7 +7051,8 @@ segments:
     - [0xAD4100, c]
     - [0xAD4940, data]
     - [0xAD5EA0, rodata]
-  - dir: world/area_kkj/kkj_13
+  - name: kkj_13
+    dir: world/area_kkj/kkj_13
     type: code
     overlay: True
     start: 0xAD5ED0
@@ -6849,7 +7068,8 @@ segments:
     - [0xAD8650, data]
     - [0xAD9460, data]
     - [0xADAE60, rodata]
-  - dir: world/area_kkj/kkj_14
+  - name: kkj_14
+    dir: world/area_kkj/kkj_14
     type: code
     overlay: True
     start: 0xADAEA0
@@ -6872,7 +7092,8 @@ segments:
     - [0xAE3610, data]
     - [0xAE3850, data]
     - [0xAE5550, rodata]
-  - dir: world/area_kkj/kkj_15
+  - name: kkj_15
+    dir: world/area_kkj/kkj_15
     type: code
     overlay: True
     start: 0xAE5590
@@ -6893,7 +7114,8 @@ segments:
     - [0xAEB820, data]
     - [0xAECB30, data]
     - [0xAED3E0, rodata]
-  - dir: world/area_kkj/kkj_16
+  - name: kkj_16
+    dir: world/area_kkj/kkj_16
     type: code
     overlay: True
     start: 0xAED410
@@ -6906,7 +7128,8 @@ segments:
     - [0xAF09D0, data]
     - [0xAF1B10, data]
     - [0xAF1C10, rodata]
-  - dir: world/area_kkj/kkj_17
+  - name: kkj_17
+    dir: world/area_kkj/kkj_17
     type: code
     overlay: True
     start: 0xAF1C60
@@ -6917,7 +7140,8 @@ segments:
     - [0xAF2440, data]
     - [0xAF2520, data]
     - [0xAF2C90, rodata]
-  - dir: world/area_kkj/kkj_18
+  - name: kkj_18
+    dir: world/area_kkj/kkj_18
     type: code
     overlay: True
     start: 0xAF2CA0
@@ -6932,7 +7156,8 @@ segments:
     - [0xAF4BB0, data]
     - [0xAF7920, rodata]
     - [0xAF7940, rodata]
-  - dir: world/area_kkj/kkj_19
+  - name: kkj_19
+    dir: world/area_kkj/kkj_19
     type: code
     overlay: True
     start: 0xAF7950
@@ -6946,7 +7171,8 @@ segments:
     - [0xAF9050, data]
     - [0xAF9460, data]
     - [0xAFDAF0, rodata]
-  - dir: world/area_kkj/kkj_20
+  - name: kkj_20
+    dir: world/area_kkj/kkj_20
     type: code
     overlay: True
     start: 0xAFDB40
@@ -6959,7 +7185,8 @@ segments:
     - [0xAFE3C0, data]
     - [0xAFE610, data]
     - [0xB02290, rodata]
-  - dir: world/area_kkj/kkj_21
+  - name: kkj_21
+    dir: world/area_kkj/kkj_21
     type: code
     overlay: True
     start: 0xB022A0
@@ -6967,7 +7194,8 @@ segments:
     subsections:
     - [0xB022A0, data]
     - [0xB024E0, rodata]
-  - dir: world/area_kkj/kkj_22
+  - name: kkj_22
+    dir: world/area_kkj/kkj_22
     type: code
     overlay: True
     start: 0xB024F0
@@ -6976,7 +7204,8 @@ segments:
     - [0xB024F0, data]
     - [0xB025A0, data]
     - [0xB02870, rodata]
-  - dir: world/area_kkj/kkj_23
+  - name: kkj_23
+    dir: world/area_kkj/kkj_23
     type: code
     overlay: True
     start: 0xB02880
@@ -6992,7 +7221,8 @@ segments:
     - [0xB04FB0, data]
     - [0xB06530, rodata]
     - [0xB06550, rodata]
-  - dir: world/area_kkj/kkj_24
+  - name: kkj_24
+    dir: world/area_kkj/kkj_24
     type: code
     overlay: True
     start: 0xB06570
@@ -7003,7 +7233,8 @@ segments:
     - [0xB06640, data]
     - [0xB069B0, data]
     - [0xB069F0, rodata]
-  - dir: world/area_kkj/kkj_25
+  - name: kkj_25
+    dir: world/area_kkj/kkj_25
     type: code
     overlay: True
     start: 0xB06A00
@@ -7020,7 +7251,8 @@ segments:
     - [0xB0E3A0, data]
     - [0xB0F280, data]
     - [0xB13100, rodata]
-  - dir: world/area_kkj/kkj_26
+  - name: kkj_26
+    dir: world/area_kkj/kkj_26
     type: code
     overlay: True
     start: 0xB13120
@@ -7031,7 +7263,8 @@ segments:
     - [0xB13500, data]
     - [0xB13A40, data]
     - [0xB13D50, rodata]
-  - dir: world/area_kkj/kkj_27
+  - name: kkj_27
+    dir: world/area_kkj/kkj_27
     type: code
     overlay: True
     start: 0xB13D70
@@ -7043,7 +7276,8 @@ segments:
     - [0xB14340, data]
     - [0xB143E0, data]
     - [0xB14E90, rodata]
-  - dir: world/area_kkj/kkj_28
+  - name: kkj_28
+    dir: world/area_kkj/kkj_28
     type: code
     overlay: True
     start: 0xB14EA0
@@ -7051,7 +7285,8 @@ segments:
     subsections:
     - [0xB14EA0, data]
     - [0xB150A0, rodata]
-  - dir: world/area_kkj/kkj_29
+  - name: kkj_29
+    dir: world/area_kkj/kkj_29
     type: code
     overlay: True
     start: 0xB150B0
@@ -7063,7 +7298,8 @@ segments:
     - [0xB15410, data]
     - [0xB15DA0, data]
     - [0xB1A8F0, rodata]
-  - dir: world/area_tst/tst_01
+  - name: tst_01
+    dir: world/area_tst/tst_01
     type: code
     overlay: True
     start: 0xB1A900
@@ -7072,7 +7308,8 @@ segments:
     - [0xB1A900, data]
     - [0xB1AB20, data]
     - [0xB1AC20, rodata]
-  - dir: world/area_tst/tst_02
+  - name: tst_02
+    dir: world/area_tst/tst_02
     type: code
     overlay: True
     start: 0xB1AC30
@@ -7081,7 +7318,8 @@ segments:
     - [0xB1AC30, data]
     - [0xB1AE50, data]
     - [0xB1AF70, rodata]
-  - dir: world/area_tst/tst_03
+  - name: tst_03
+    dir: world/area_tst/tst_03
     type: code
     overlay: True
     start: 0xB1AF80
@@ -7090,7 +7328,8 @@ segments:
     - [0xB1AF80, data]
     - [0xB1B240, data]
     - [0xB1B560, rodata]
-  - dir: world/area_tst/tst_04
+  - name: tst_04
+    dir: world/area_tst/tst_04
     type: code
     overlay: True
     start: 0xB1B570
@@ -7104,7 +7343,8 @@ segments:
     - [0xB1C270, data]
     - [0xB1C510, data]
     - [0xB1C530, rodata]
-  - dir: world/area_tst/tst_10
+  - name: tst_10
+    dir: world/area_tst/tst_10
     type: code
     overlay: True
     start: 0xB1C540
@@ -7112,7 +7352,8 @@ segments:
     subsections:
     - [0xB1C540, data]
     - [0xB1CA40, rodata]
-  - dir: world/area_tst/tst_11
+  - name: tst_11
+    dir: world/area_tst/tst_11
     type: code
     overlay: True
     start: 0xB1CA50
@@ -7121,14 +7362,16 @@ segments:
     - [0xB1CA50, c]
     - [0xB1D1C0, data]
     - [0xB1D2A0, data]
-  - dir: world/area_tst/tst_12
+  - name: tst_12
+    dir: world/area_tst/tst_12
     type: code
     overlay: True
     start: 0xB1D2F0
     vram: 0x80240000
     subsections:
     - [0xB1D2F0, data]
-  - dir: world/area_tst/tst_13
+  - name: tst_13
+    dir: world/area_tst/tst_13
     type: code
     overlay: True
     start: 0xB1D760
@@ -7137,14 +7380,16 @@ segments:
     - [0xB1D760, c]
     - [0xB1DB20, data]
     - [0xB20460, rodata]
-  - dir: world/area_tst/tst_20
+  - name: tst_20
+    dir: world/area_tst/tst_20
     type: code
     overlay: True
     start: 0xB20470
     vram: 0x80240000
     subsections:
     - [0xB20470, data]
-  - dir: world/area_jan/jan_00
+  - name: jan_00
+    dir: world/area_jan/jan_00
     type: code
     overlay: True
     start: 0xB20540
@@ -7159,7 +7404,8 @@ segments:
     - [0xB25E90, data]
     - [0xB275B0, data]
     - [0xB27FE0, rodata]
-  - dir: world/area_jan/jan_01
+  - name: jan_01
+    dir: world/area_jan/jan_01
     type: code
     overlay: True
     start: 0xB28030
@@ -7173,7 +7419,8 @@ segments:
     - [0xB2B430, data]
     - [0xB2B590, data]
     - [0xB2C410, rodata]
-  - dir: world/area_jan/jan_02
+  - name: jan_02
+    dir: world/area_jan/jan_02
     type: code
     overlay: True
     start: 0xB2C470
@@ -7189,7 +7436,8 @@ segments:
     - [0xB33E00, data]
     - [0xB33E50, data]
     - [0xB34A20, rodata]
-  - dir: world/area_jan/jan_03
+  - name: jan_03
+    dir: world/area_jan/jan_03
     type: code
     overlay: True
     start: 0xB34BD0
@@ -7205,7 +7453,8 @@ segments:
     - [0xB43B60, data]
     - [0xB445A0, rodata]
     - [0xB445C0, rodata]
-  - dir: world/area_jan/jan_04
+  - name: jan_04
+    dir: world/area_jan/jan_04
     type: code
     overlay: True
     start: 0xB44770
@@ -7230,7 +7479,8 @@ segments:
     - [0xB4A4B0, data]
     - [0xB4AA20, rodata]
     - [0xB4AA50, rodata]
-  - dir: world/area_jan/jan_05
+  - name: jan_05
+    dir: world/area_jan/jan_05
     type: code
     overlay: True
     start: 0xB4AA70
@@ -7251,7 +7501,8 @@ segments:
     - [0xB52470, rodata]
     - [0xB524A0, rodata]
     - [0xB524E8, rodata]
-  - dir: world/area_jan/jan_06
+  - name: jan_06
+    dir: world/area_jan/jan_06
     type: code
     overlay: True
     start: 0xB52830
@@ -7271,7 +7522,8 @@ segments:
     - [0xB586B0, data]
     - [0xB594C0, rodata]
     - [0xB59528, rodata]
-  - dir: world/area_jan/jan_07
+  - name: jan_07
+    dir: world/area_jan/jan_07
     type: code
     overlay: True
     start: 0xB59870
@@ -7287,7 +7539,8 @@ segments:
     - [0xB5D490, data]
     - [0xB5DF60, rodata]
     - [0xB5DF70, rodata]
-  - dir: world/area_jan/jan_08
+  - name: jan_08
+    dir: world/area_jan/jan_08
     type: code
     overlay: True
     start: 0xB5E2B0
@@ -7306,7 +7559,8 @@ segments:
     - [0xB65740, rodata]
     - [0xB65760, rodata]
     - [0xB65770, rodata]
-  - dir: world/area_jan/jan_09
+  - name: jan_09
+    dir: world/area_jan/jan_09
     type: code
     overlay: True
     start: 0xB65AB0
@@ -7322,7 +7576,8 @@ segments:
     - [0xB6BFB0, data]
     - [0xB6C020, rodata]
     - [0xB6C050, rodata]
-  - dir: world/area_jan/jan_10
+  - name: jan_10
+    dir: world/area_jan/jan_10
     type: code
     overlay: True
     start: 0xB6C390
@@ -7340,7 +7595,8 @@ segments:
     - [0xB707C0, data]
     - [0xB70800, rodata]
     - [0xB70810, rodata]
-  - dir: world/area_jan/jan_11
+  - name: jan_11
+    dir: world/area_jan/jan_11
     type: code
     overlay: True
     start: 0xB70860
@@ -7352,7 +7608,8 @@ segments:
     - [0xB710F0, data]
     - [0xB728B0, data]
     - [0xB730A0, rodata]
-  - dir: world/area_jan/jan_12
+  - name: jan_12
+    dir: world/area_jan/jan_12
     type: code
     overlay: True
     start: 0xB730B0
@@ -7365,7 +7622,8 @@ segments:
     - [0xB75D30, data]
     - [0xB76450, rodata]
     - [0xB76470, rodata]
-  - dir: world/area_jan/jan_13
+  - name: jan_13
+    dir: world/area_jan/jan_13
     type: code
     overlay: True
     start: 0xB767B0
@@ -7377,7 +7635,8 @@ segments:
     - [0xB794C0, data]
     - [0xB79FA0, data]
     - [0xB7A020, rodata]
-  - dir: world/area_jan/jan_14
+  - name: jan_14
+    dir: world/area_jan/jan_14
     type: code
     overlay: True
     start: 0xB7A050
@@ -7391,7 +7650,8 @@ segments:
     - [0xB7D2C0, data]
     - [0xB7D8B0, rodata]
     - [0xB7D8D0, rodata]
-  - dir: world/area_jan/jan_15
+  - name: jan_15
+    dir: world/area_jan/jan_15
     type: code
     overlay: True
     start: 0xB7D920
@@ -7404,7 +7664,8 @@ segments:
     - [0xB7F4A0, data]
     - [0xB7FF80, data]
     - [0xB7FFF0, rodata]
-  - dir: world/area_jan/jan_16
+  - name: jan_16
+    dir: world/area_jan/jan_16
     type: code
     overlay: True
     start: 0xB80000
@@ -7416,7 +7677,8 @@ segments:
     - [0xB82C70, data]
     - [0xB82CD0, data]
     - [0xB837A0, rodata]
-  - dir: world/area_jan/jan_17
+  - name: jan_17
+    dir: world/area_jan/jan_17
     type: code
     overlay: True
     start: 0xB837C0
@@ -7427,7 +7689,8 @@ segments:
     - [0xB838C0, data]
     - [0xB83B20, data]
     - [0xB83B80, rodata]
-  - dir: world/area_jan/jan_18
+  - name: jan_18
+    dir: world/area_jan/jan_18
     type: code
     overlay: True
     start: 0xB83B90
@@ -7436,7 +7699,8 @@ segments:
     - [0xB83B90, data]
     - [0xB83E10, data]
     - [0xB83E50, rodata]
-  - dir: world/area_jan/jan_19
+  - name: jan_19
+    dir: world/area_jan/jan_19
     type: code
     overlay: True
     start: 0xB83E60
@@ -7446,7 +7710,8 @@ segments:
     - [0xB83E80, data]
     - [0xB84110, data]
     - [0xB84170, rodata]
-  - dir: world/area_jan/jan_22
+  - name: jan_22
+    dir: world/area_jan/jan_22
     type: code
     overlay: True
     start: 0xB84180
@@ -7460,7 +7725,8 @@ segments:
     - [0xB8E200, data]
     - [0xB8FB00, rodata]
     - [0xB8FB20, rodata]
-  - dir: world/area_jan/jan_23
+  - name: jan_23
+    dir: world/area_jan/jan_23
     type: code
     overlay: True
     start: 0xB8FCD0
@@ -7469,7 +7735,8 @@ segments:
     - [0xB8FCD0, data]
     - [0xB903A0, data]
     - [0xB93430, rodata]
-  - dir: world/area_mim/mim_01
+  - name: mim_01
+    dir: world/area_mim/mim_01
     type: code
     overlay: True
     start: 0xB93440
@@ -7484,7 +7751,8 @@ segments:
     - [0xB960E0, data]
     - [0xB97A10, rodata]
     - [0xB97A30, rodata]
-  - dir: world/area_mim/mim_02
+  - name: mim_02
+    dir: world/area_mim/mim_02
     type: code
     overlay: True
     start: 0xB97C00
@@ -7497,7 +7765,8 @@ segments:
     - [0xB9A390, data]
     - [0xB9B250, data]
     - [0xB9B420, rodata]
-  - dir: world/area_mim/mim_03
+  - name: mim_03
+    dir: world/area_mim/mim_03
     type: code
     overlay: True
     start: 0xB9B480
@@ -7509,7 +7778,8 @@ segments:
     - [0xB9BE30, data]
     - [0xB9D500, data]
     - [0xB9D940, rodata]
-  - dir: world/area_mim/mim_04
+  - name: mim_04
+    dir: world/area_mim/mim_04
     type: code
     overlay: True
     start: 0xB9D960
@@ -7524,7 +7794,8 @@ segments:
     - [0xB9FEA0, data]
     - [0xBA06C0, rodata]
     - [0xBA06E0, rodata]
-  - dir: world/area_mim/mim_05
+  - name: mim_05
+    dir: world/area_mim/mim_05
     type: code
     overlay: True
     start: 0xBA0730
@@ -7536,7 +7807,8 @@ segments:
     - [0xBA2210, data]
     - [0xBA3A80, data]
     - [0xBA4590, rodata]
-  - dir: world/area_mim/mim_06
+  - name: mim_06
+    dir: world/area_mim/mim_06
     type: code
     overlay: True
     start: 0xBA4780
@@ -7551,7 +7823,8 @@ segments:
     - [0xBA9170, data]
     - [0xBA9F10, rodata]
     - [0xBA9F30, rodata]
-  - dir: world/area_mim/mim_07
+  - name: mim_07
+    dir: world/area_mim/mim_07
     type: code
     overlay: True
     start: 0xBAA140
@@ -7567,7 +7840,8 @@ segments:
     - [0xBABAD0, data]
     - [0xBAC9C0, data]
     - [0xBAD8D0, rodata]
-  - dir: world/area_mim/mim_08
+  - name: mim_08
+    dir: world/area_mim/mim_08
     type: code
     overlay: True
     start: 0xBAD940
@@ -7581,7 +7855,8 @@ segments:
     - [0xBB1D00, data]
     - [0xBB2BD0, rodata]
     - [0xBB2C38, rodata]
-  - dir: world/area_mim/mim_09
+  - name: mim_09
+    dir: world/area_mim/mim_09
     type: code
     overlay: True
     start: 0xBB2E00
@@ -7594,7 +7869,8 @@ segments:
     - [0xBB4180, data]
     - [0xBB4830, data]
     - [0xBB5980, rodata]
-  - dir: world/area_mim/mim_10
+  - name: mim_10
+    dir: world/area_mim/mim_10
     type: code
     overlay: True
     start: 0xBB59E0
@@ -7606,7 +7882,8 @@ segments:
     - [0xBB5EF0, data]
     - [0xBB61D0, data]
     - [0xBB7050, rodata]
-  - dir: world/area_mim/mim_11
+  - name: mim_11
+    dir: world/area_mim/mim_11
     type: code
     overlay: True
     start: 0xBB7070
@@ -7619,7 +7896,8 @@ segments:
     - [0xBBA180, data]
     - [0xBBA2E0, data]
     - [0xBBB350, rodata]
-  - dir: world/area_mim/mim_12
+  - name: mim_12
+    dir: world/area_mim/mim_12
     type: code
     overlay: True
     start: 0xBBB380
@@ -7631,7 +7909,8 @@ segments:
     - [0xBBBE60, data]
     - [0xBBC2B0, data]
     - [0xBBD190, rodata]
-  - dir: world/area_obk/obk_01
+  - name: obk_01
+    dir: world/area_obk/obk_01
     type: code
     overlay: True
     start: 0xBBD1A0
@@ -7644,7 +7923,8 @@ segments:
     - [0xBC0100, data]
     - [0xBC11A0, data]
     - [0xBC2A30, rodata]
-  - dir: world/area_obk/obk_02
+  - name: obk_02
+    dir: world/area_obk/obk_02
     type: code
     overlay: True
     start: 0xBC2A90
@@ -7658,7 +7938,8 @@ segments:
     - [0xBC3DE0, data]
     - [0xBC3F60, data]
     - [0xBC4260, rodata]
-  - dir: world/area_obk/obk_03
+  - name: obk_03
+    dir: world/area_obk/obk_03
     type: code
     overlay: True
     start: 0xBC4280
@@ -7675,7 +7956,8 @@ segments:
     - [0xBC7120, data]
     - [0xBC7DE0, data]
     - [0xBC7E40, rodata]
-  - dir: world/area_obk/obk_04
+  - name: obk_04
+    dir: world/area_obk/obk_04
     type: code
     overlay: True
     start: 0xBC7E60
@@ -7689,7 +7971,8 @@ segments:
     - [0xBCB260, data]
     - [0xBCB870, data]
     - [0xBCD030, rodata]
-  - dir: world/area_obk/obk_05
+  - name: obk_05
+    dir: world/area_obk/obk_05
     type: code
     overlay: True
     start: 0xBCD060
@@ -7702,7 +7985,8 @@ segments:
     - [0xBCDFF0, data]
     - [0xBCE040, data]
     - [0xBCE680, rodata]
-  - dir: world/area_obk/obk_06
+  - name: obk_06
+    dir: world/area_obk/obk_06
     type: code
     overlay: True
     start: 0xBCE690
@@ -7712,7 +7996,8 @@ segments:
     - [0xBCE760, data]
     - [0xBCEAD0, data]
     - [0xBCEBE0, rodata]
-  - dir: world/area_obk/obk_07
+  - name: obk_07
+    dir: world/area_obk/obk_07
     type: code
     overlay: True
     start: 0xBCEBF0
@@ -7728,7 +8013,8 @@ segments:
     - [0xBD14F0, data]
     - [0xBD1C80, data]
     - [0xBD3860, rodata]
-  - dir: world/area_obk/obk_08
+  - name: obk_08
+    dir: world/area_obk/obk_08
     type: code
     overlay: True
     start: 0xBD3870
@@ -7743,7 +8029,8 @@ segments:
     - [0xBD64D0, data]
     - [0xBD6DD0, data]
     - [0xBDA730, rodata]
-  - dir: world/area_obk/obk_09
+  - name: obk_09
+    dir: world/area_obk/obk_09
     type: code
     overlay: True
     start: 0xBDA7B0
@@ -7757,7 +8044,8 @@ segments:
     - [0xBDB140, data]
     - [0xBDCE10, data]
     - [0xBDD190, rodata]
-  - dir: world/area_arn/arn_02
+  - name: arn_02
+    dir: world/area_arn/arn_02
     type: code
     overlay: True
     start: 0xBDD1B0
@@ -7767,7 +8055,8 @@ segments:
     - [0xBDE190,   .data, header]
     - [0xBDE2A0,   .data, events]
     - [0xBDEC80, .rodata, events]
-  - dir: world/area_arn/arn_03
+  - name: arn_03
+    dir: world/area_arn/arn_03
     type: code
     overlay: True
     start: 0xBDED90
@@ -7779,7 +8068,8 @@ segments:
     - [0xBE0950, data]
     - [0xBE3570, data]
     - [0xBE35E0, rodata]
-  - dir: world/area_arn/arn_04
+  - name: arn_04
+    dir: world/area_arn/arn_04
     type: code
     overlay: True
     start: 0xBE37B0
@@ -7792,7 +8082,8 @@ segments:
     - [0xBE77F0, data]
     - [0xBE78D0, rodata]
     - [0xBE7AD8, rodata]
-  - dir: world/area_arn/arn_05
+  - name: arn_05
+    dir: world/area_arn/arn_05
     type: code
     overlay: True
     start: 0xBE7BE0
@@ -7803,7 +8094,8 @@ segments:
     - [0xBE9290, data]
     - [0xBECBE0, data]
     - [0xBECC20, rodata]
-  - dir: world/area_arn/arn_07
+  - name: arn_07
+    dir: world/area_arn/arn_07
     type: code
     overlay: True
     start: 0xBECDF0
@@ -7819,7 +8111,8 @@ segments:
     - [0xBF46F0, rodata]
     - [0xBF4730, rodata]
     - [0xBF4740, rodata]
-  - dir: world/area_arn/arn_08
+  - name: arn_08
+    dir: world/area_arn/arn_08
     type: code
     overlay: True
     start: 0xBF47A0
@@ -7835,7 +8128,8 @@ segments:
     - [0xBF59A0, data]
     - [0xBF5FF0, data]
     - [0xBF6040, rodata]
-  - dir: world/area_arn/arn_09
+  - name: arn_09
+    dir: world/area_arn/arn_09
     type: code
     overlay: True
     start: 0xBF6060
@@ -7848,7 +8142,8 @@ segments:
     - [0xBF6530, data]
     - [0xBF6610, data]
     - [0xBF69F0, rodata]
-  - dir: world/area_arn/arn_10
+  - name: arn_10
+    dir: world/area_arn/arn_10
     type: code
     overlay: True
     start: 0xBF6A00
@@ -7859,7 +8154,8 @@ segments:
     - [0xBF6E30, data]
     - [0xBF75E0, data]
     - [0xBF7670, rodata]
-  - dir: world/area_arn/arn_11
+  - name: arn_11
+    dir: world/area_arn/arn_11
     type: code
     overlay: True
     start: 0xBF7680
@@ -7869,7 +8165,8 @@ segments:
     - [0xBF7770, data]
     - [0xBF7D00, data]
     - [0xBF8780, rodata]
-  - dir: world/area_arn/arn_12
+  - name: arn_12
+    dir: world/area_arn/arn_12
     type: code
     overlay: True
     start: 0xBF8790
@@ -7879,7 +8176,8 @@ segments:
     - [0xBF8890, data]
     - [0xBF8BB0, data]
     - [0xBF9400, rodata]
-  - dir: world/area_arn/arn_13
+  - name: arn_13
+    dir: world/area_arn/arn_13
     type: code
     overlay: True
     start: 0xBF9410
@@ -7889,7 +8187,8 @@ segments:
     - [0xBF9510, data]
     - [0xBF9840, data]
     - [0xBFA090, rodata]
-  - dir: world/area_dgb/dgb_00
+  - name: dgb_00
+    dir: world/area_dgb/dgb_00
     type: code
     overlay: True
     start: 0xBFA0A0
@@ -7901,7 +8200,8 @@ segments:
     - [0xBFA260, data]
     - [0xBFD800, data]
     - [0xBFD840, rodata]
-  - dir: world/area_dgb/dgb_01
+  - name: dgb_01
+    dir: world/area_dgb/dgb_01
     type: code
     overlay: True
     start: 0xBFD880
@@ -7921,7 +8221,8 @@ segments:
     vram: 0x80200000
     subsections:
     - [0xC20F40, bin] # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
-  - dir: world/area_dgb/dgb_02
+  - name: dgb_02
+    dir: world/area_dgb/dgb_02
     type: code
     overlay: True
     start: 0xC2EBA0
@@ -7932,7 +8233,8 @@ segments:
     - [0xC300F0, data]
     - [0xC30650, data]
     - [0xC31190, rodata]
-  - dir: world/area_dgb/dgb_03
+  - name: dgb_03
+    dir: world/area_dgb/dgb_03
     type: code
     overlay: True
     start: 0xC314E0
@@ -7946,7 +8248,8 @@ segments:
     - [0xC34C20, data]
     - [0xC34E50, data]
     - [0xC35EA0, rodata]
-  - dir: world/area_dgb/dgb_04
+  - name: dgb_04
+    dir: world/area_dgb/dgb_04
     type: code
     overlay: True
     start: 0xC36530
@@ -7958,7 +8261,8 @@ segments:
     - [0xC39A90, data]
     - [0xC3A910, rodata]
     - [0xC3A978, rodata]
-  - dir: world/area_dgb/dgb_05
+  - name: dgb_05
+    dir: world/area_dgb/dgb_05
     type: code
     overlay: True
     start: 0xC3AA10
@@ -7971,7 +8275,8 @@ segments:
     - [0xC3C280, data]
     - [0xC3C2D0, data]
     - [0xC3CD40, rodata]
-  - dir: world/area_dgb/dgb_06
+  - name: dgb_06
+    dir: world/area_dgb/dgb_06
     type: code
     overlay: True
     start: 0xC3D080
@@ -7982,7 +8287,8 @@ segments:
     - [0xC3D440, data]
     - [0xC3D8C0, data]
     - [0xC3DBE0, rodata]
-  - dir: world/area_dgb/dgb_07
+  - name: dgb_07
+    dir: world/area_dgb/dgb_07
     type: code
     overlay: True
     start: 0xC3DBF0
@@ -7994,7 +8300,8 @@ segments:
     - [0xC3F3E0, data]
     - [0xC3FA70, rodata]
     - [0xC3FA80, rodata]
-  - dir: world/area_dgb/dgb_08
+  - name: dgb_08
+    dir: world/area_dgb/dgb_08
     type: code
     overlay: True
     start: 0xC3FDB0
@@ -8008,7 +8315,8 @@ segments:
     - [0xC467A0, rodata]
     - [0xC467B0, rodata]
     - [0xC46B40, rodata]
-  - dir: world/area_dgb/dgb_09
+  - name: dgb_09
+    dir: world/area_dgb/dgb_09
     type: code
     overlay: True
     start: 0xC46BE0
@@ -8021,7 +8329,8 @@ segments:
     - [0xC4ABE0, data]
     - [0xC4BF50, rodata]
     - [0xC4C2F8, rodata]
-  - dir: world/area_dgb/dgb_10
+  - name: dgb_10
+    dir: world/area_dgb/dgb_10
     type: code
     overlay: True
     start: 0xC4C390
@@ -8033,7 +8342,8 @@ segments:
     - [0xC4CA00, data]
     - [0xC4D270, data]
     - [0xC4D3D0, rodata]
-  - dir: world/area_dgb/dgb_11
+  - name: dgb_11
+    dir: world/area_dgb/dgb_11
     type: code
     overlay: True
     start: 0xC4D3E0
@@ -8044,7 +8354,8 @@ segments:
     - [0xC4D550, data]
     - [0xC4D950, data]
     - [0xC4DEE0, rodata]
-  - dir: world/area_dgb/dgb_12
+  - name: dgb_12
+    dir: world/area_dgb/dgb_12
     type: code
     overlay: True
     start: 0xC4DEF0
@@ -8055,7 +8366,8 @@ segments:
     - [0xC4E2A0, data]
     - [0xC4E760, data]
     - [0xC4E950, rodata]
-  - dir: world/area_dgb/dgb_13
+  - name: dgb_13
+    dir: world/area_dgb/dgb_13
     type: code
     overlay: True
     start: 0xC4E960
@@ -8065,7 +8377,8 @@ segments:
     - [0xC4EA50, data]
     - [0xC4ECE0, data]
     - [0xC4F020, rodata]
-  - dir: world/area_dgb/dgb_14
+  - name: dgb_14
+    dir: world/area_dgb/dgb_14
     type: code
     overlay: True
     start: 0xC4F030
@@ -8075,7 +8388,8 @@ segments:
     - [0xC4F130, data]
     - [0xC4F4B0, data]
     - [0xC4F500, rodata]
-  - dir: world/area_dgb/dgb_15
+  - name: dgb_15
+    dir: world/area_dgb/dgb_15
     type: code
     overlay: True
     start: 0xC4F510
@@ -8089,7 +8403,8 @@ segments:
     - [0xC51FE0, data]
     - [0xC521E0, rodata]
     - [0xC52200, rodata]
-  - dir: world/area_dgb/dgb_16
+  - name: dgb_16
+    dir: world/area_dgb/dgb_16
     type: code
     overlay: True
     start: 0xC52540
@@ -8102,7 +8417,8 @@ segments:
     - [0xC53D00, data]
     - [0xC55720, rodata]
     - [0xC55730, rodata]
-  - dir: world/area_dgb/dgb_17
+  - name: dgb_17
+    dir: world/area_dgb/dgb_17
     type: code
     overlay: True
     start: 0xC55A60
@@ -8111,7 +8427,8 @@ segments:
     - [0xC55A60, data]
     - [0xC55B60, data]
     - [0xC55F30, rodata]
-  - dir: world/area_dgb/dgb_18
+  - name: dgb_18
+    dir: world/area_dgb/dgb_18
     type: code
     overlay: True
     start: 0xC55F40
@@ -8125,7 +8442,8 @@ segments:
     - [0xC59620, data]
     - [0xC59810, rodata]
     - [0xC59820, rodata]
-  - dir: world/area_kzn/kzn_01
+  - name: kzn_01
+    dir: world/area_kzn/kzn_01
     type: code
     overlay: True
     start: 0xC599D0
@@ -8134,7 +8452,8 @@ segments:
     - [0xC599D0, c]
     - [0xC59CE0, data]
     - [0xC5A730, rodata]
-  - dir: world/area_kzn/kzn_02
+  - name: kzn_02
+    dir: world/area_kzn/kzn_02
     type: code
     overlay: True
     start: 0xC5A740
@@ -8150,7 +8469,8 @@ segments:
     - [0xC60C30, rodata]
     - [0xC60C98, rodata]
     - [0xC60D00, rodata]
-  - dir: world/area_kzn/kzn_03
+  - name: kzn_03
+    dir: world/area_kzn/kzn_03
     type: code
     overlay: True
     start: 0xC60D10
@@ -8166,7 +8486,8 @@ segments:
     - [0xC67ED0, rodata]
     - [0xC67F50, rodata]
     - [0xC68120, rodata]
-  - dir: world/area_kzn/kzn_04
+  - name: kzn_04
+    dir: world/area_kzn/kzn_04
     type: code
     overlay: True
     start: 0xC68130
@@ -8179,7 +8500,8 @@ segments:
     - [0xC69D70, data]
     - [0xC6A420, data]
     - [0xC6C0C0, rodata]
-  - dir: world/area_kzn/kzn_05
+  - name: kzn_05
+    dir: world/area_kzn/kzn_05
     type: code
     overlay: True
     start: 0xC6C0D0
@@ -8188,7 +8510,8 @@ segments:
     - [0xC6C0D0, c]
     - [0xC6C3E0, data]
     - [0xC6C910, rodata]
-  - dir: world/area_kzn/kzn_06
+  - name: kzn_06
+    dir: world/area_kzn/kzn_06
     type: code
     overlay: True
     start: 0xC6C920
@@ -8200,7 +8523,8 @@ segments:
     - [0xC6D390, data]
     - [0xC6E300, rodata]
     - [0xC6E320, rodata]
-  - dir: world/area_kzn/kzn_07
+  - name: kzn_07
+    dir: world/area_kzn/kzn_07
     type: code
     overlay: True
     start: 0xC6E330
@@ -8214,7 +8538,8 @@ segments:
     - [0xC70EC0, data]
     - [0xC713B0, rodata]
     - [0xC71418, rodata]
-  - dir: world/area_kzn/kzn_08
+  - name: kzn_08
+    dir: world/area_kzn/kzn_08
     type: code
     overlay: True
     start: 0xC71480
@@ -8228,7 +8553,8 @@ segments:
     - [0xC76A50, rodata]
     - [0xC76AB8, rodata]
     - [0xC76B18, rodata]
-  - dir: world/area_kzn/kzn_09
+  - name: kzn_09
+    dir: world/area_kzn/kzn_09
     type: code
     overlay: True
     start: 0xC76CE0
@@ -8241,7 +8567,8 @@ segments:
     - [0xC7A9E0, data]
     - [0xC7B0D0, data]
     - [0xC7DF40, rodata]
-  - dir: world/area_kzn/kzn_10
+  - name: kzn_10
+    dir: world/area_kzn/kzn_10
     type: code
     overlay: True
     start: 0xC7E180
@@ -8252,7 +8579,8 @@ segments:
     - [0xC7E850, data]
     - [0xC7EE90, data]
     - [0xC80170, rodata]
-  - dir: world/area_kzn/kzn_11
+  - name: kzn_11
+    dir: world/area_kzn/kzn_11
     type: code
     overlay: True
     start: 0xC801A0
@@ -8266,7 +8594,8 @@ segments:
     - [0xC83870, data]
     - [0xC859E0, rodata]
     - [0xC85A48, rodata]
-  - dir: world/area_kzn/kzn_17
+  - name: kzn_17
+    dir: world/area_kzn/kzn_17
     type: code
     overlay: True
     start: 0xC85AB0
@@ -8279,7 +8608,8 @@ segments:
     - [0xC89450, data]
     - [0xC8BE40, rodata]
     - [0xC8C080, rodata]
-  - dir: world/area_kzn/kzn_18
+  - name: kzn_18
+    dir: world/area_kzn/kzn_18
     type: code
     overlay: True
     start: 0xC8C0A0
@@ -8290,7 +8620,8 @@ segments:
     - [0xC8C3F0, c]
     - [0xC8C460, data]
     - [0xC8DBA0, rodata]
-  - dir: world/area_kzn/kzn_19
+  - name: kzn_19
+    dir: world/area_kzn/kzn_19
     type: code
     overlay: True
     start: 0xC8DBB0
@@ -8305,7 +8636,8 @@ segments:
     - [0xC95E70, data]
     - [0xC95EF0, rodata]
     - [0xC95F20, rodata]
-  - dir: world/area_kzn/kzn_20
+  - name: kzn_20
+    dir: world/area_kzn/kzn_20
     type: code
     overlay: True
     start: 0xC95F30
@@ -8316,7 +8648,8 @@ segments:
     - [0xC969F0, data]
     - [0xC97600, data]
     - [0xC9A1F0, rodata]
-  - dir: world/area_kzn/kzn_22
+  - name: kzn_22
+    dir: world/area_kzn/kzn_22
     type: code
     overlay: True
     start: 0xC9A200
@@ -8328,7 +8661,8 @@ segments:
     - [0xC9A650, data]
     - [0xC9B120, data]
     - [0xC9C2F0, rodata]
-  - dir: world/area_kzn/kzn_23
+  - name: kzn_23
+    dir: world/area_kzn/kzn_23
     type: code
     overlay: True
     start: 0xC9C300
@@ -8340,7 +8674,8 @@ segments:
     - [0xC9C9B0, data]
     - [0xC9D020, data]
     - [0xC9DF10, rodata]
-  - dir: world/area_flo/flo_00
+  - name: flo_00
+    dir: world/area_flo/flo_00
     type: code
     overlay: True
     start: 0xC9DF20
@@ -8357,7 +8692,8 @@ segments:
     - [0xCA70A0, rodata]
     - [0xCA70E0, rodata]
     - [0xCA7290, rodata]
-  - dir: world/area_flo/flo_03
+  - name: flo_03
+    dir: world/area_flo/flo_03
     type: code
     overlay: True
     start: 0xCA72A0
@@ -8369,7 +8705,8 @@ segments:
     - [0xCA8150, data]
     - [0xCAC170, data]
     - [0xCAC1D0, rodata]
-  - dir: world/area_flo/flo_07
+  - name: flo_07
+    dir: world/area_flo/flo_07
     type: code
     overlay: True
     start: 0xCAC1F0
@@ -8381,7 +8718,8 @@ segments:
     - [0xCACAC0, data]
     - [0xCAD410, data]
     - [0xCAED20, rodata]
-  - dir: world/area_flo/flo_08
+  - name: flo_08
+    dir: world/area_flo/flo_08
     type: code
     overlay: True
     start: 0xCAED40
@@ -8396,7 +8734,8 @@ segments:
     - [0xCB3C80, data]
     - [0xCB46D0, data]
     - [0xCB4E60, rodata]
-  - dir: world/area_flo/flo_09
+  - name: flo_09
+    dir: world/area_flo/flo_09
     type: code
     overlay: True
     start: 0xCB5000
@@ -8410,7 +8749,8 @@ segments:
     - [0xCB7010, data]
     - [0xCB7880, data]
     - [0xCB9190, rodata]
-  - dir: world/area_flo/flo_10
+  - name: flo_10
+    dir: world/area_flo/flo_10
     type: code
     overlay: True
     start: 0xCB9200
@@ -8429,7 +8769,8 @@ segments:
     - [0xCBD270, data]
     - [0xCBD290, data]
     - [0xCBDCB0, rodata]
-  - dir: world/area_flo/flo_11
+  - name: flo_11
+    dir: world/area_flo/flo_11
     type: code
     overlay: True
     start: 0xCBDCD0
@@ -8440,7 +8781,8 @@ segments:
     - [0xCBF790, data]
     - [0xCC0DC0, data]
     - [0xCC0E10, rodata]
-  - dir: world/area_flo/flo_12
+  - name: flo_12
+    dir: world/area_flo/flo_12
     type: code
     overlay: True
     start: 0xCC0E30
@@ -8452,7 +8794,8 @@ segments:
     - [0xCC16A0, data]
     - [0xCC1C60, data]
     - [0xCC3800, rodata]
-  - dir: world/area_flo/flo_13
+  - name: flo_13
+    dir: world/area_flo/flo_13
     type: code
     overlay: True
     start: 0xCC3810
@@ -8467,7 +8810,8 @@ segments:
     - [0xCCB230, rodata]
     - [0xCCB298, rodata]
     - [0xCCB2F8, rodata]
-  - dir: world/area_flo/flo_14
+  - name: flo_14
+    dir: world/area_flo/flo_14
     type: code
     overlay: True
     start: 0xCCB310
@@ -8482,7 +8826,8 @@ segments:
     - [0xCD0240, data]
     - [0xCD0280, data]
     - [0xCD0620, rodata]
-  - dir: world/area_flo/flo_15
+  - name: flo_15
+    dir: world/area_flo/flo_15
     type: code
     overlay: True
     start: 0xCD06C0
@@ -8494,7 +8839,8 @@ segments:
     - [0xCD19A0, data]
     - [0xCD1A20, data]
     - [0xCD1E20, rodata]
-  - dir: world/area_flo/flo_16
+  - name: flo_16
+    dir: world/area_flo/flo_16
     type: code
     overlay: True
     start: 0xCD1E30
@@ -8511,7 +8857,8 @@ segments:
     - [0xCD6330, data]
     - [0xCD7210, rodata]
     - [0xCD7278, rodata]
-  - dir: world/area_flo/flo_17
+  - name: flo_17
+    dir: world/area_flo/flo_17
     type: code
     overlay: True
     start: 0xCD72E0
@@ -8526,7 +8873,8 @@ segments:
     - [0xCDC5D0, rodata]
     - [0xCDC638, rodata]
     - [0xCDC698, rodata]
-  - dir: world/area_flo/flo_18
+  - name: flo_18
+    dir: world/area_flo/flo_18
     type: code
     overlay: True
     start: 0xCDC6A0
@@ -8540,7 +8888,8 @@ segments:
     - [0xCDD530, data]
     - [0xCE2D60, data]
     - [0xCE36E0, rodata]
-  - dir: world/area_flo/flo_19
+  - name: flo_19
+    dir: world/area_flo/flo_19
     type: code
     overlay: True
     start: 0xCE36F0
@@ -8553,7 +8902,8 @@ segments:
     - [0xCE4740, data]
     - [0xCE5160, data]
     - [0xCE66F0, rodata]
-  - dir: world/area_flo/flo_21
+  - name: flo_21
+    dir: world/area_flo/flo_21
     type: code
     overlay: True
     start: 0xCE6700
@@ -8564,7 +8914,8 @@ segments:
     - [0xCE73F0, data]
     - [0xCE7EC0, data]
     - [0xCEC210, rodata]
-  - dir: world/area_flo/flo_22
+  - name: flo_22
+    dir: world/area_flo/flo_22
     type: code
     overlay: True
     start: 0xCEC240
@@ -8578,7 +8929,8 @@ segments:
     - [0xCED050, data]
     - [0xCED7E0, data]
     - [0xCEE250, rodata]
-  - dir: world/area_flo/flo_23
+  - name: flo_23
+    dir: world/area_flo/flo_23
     type: code
     overlay: True
     start: 0xCEE260
@@ -8590,7 +8942,8 @@ segments:
     - [0xCEF540, data]
     - [0xCF0800, data]
     - [0xCF08D0, rodata]
-  - dir: world/area_flo/flo_24
+  - name: flo_24
+    dir: world/area_flo/flo_24
     type: code
     overlay: True
     start: 0xCF0940
@@ -8603,7 +8956,8 @@ segments:
     - [0xCF1680, data]
     - [0xCF2AF0, data]
     - [0xCF2BB0, rodata]
-  - dir: world/area_flo/flo_25
+  - name: flo_25
+    dir: world/area_flo/flo_25
     type: code
     overlay: True
     start: 0xCF2BD0
@@ -8619,7 +8973,8 @@ segments:
     - [0xCF7310, data]
     - [0xCF7AA0, rodata]
     - [0xCF7B08, rodata]
-  - dir: world/area_sam/sam_01
+  - name: sam_01
+    dir: world/area_sam/sam_01
     type: code
     overlay: True
     start: 0xCF7B70
@@ -8632,7 +8987,8 @@ segments:
     - [0xD01D90, data]
     - [0xD05460, data]
     - [0xD05720, rodata]
-  - dir: world/area_sam/sam_02
+  - name: sam_02
+    dir: world/area_sam/sam_02
     type: code
     overlay: True
     start: 0xD05730
@@ -8647,7 +9003,8 @@ segments:
     #- [0xD0C294, data]
     - [0xD10DA0, data]
     - [0xD110A0, rodata]
-  - dir: world/area_sam/sam_03
+  - name: sam_03
+    dir: world/area_sam/sam_03
     type: code
     overlay: True
     start: 0xD110C0
@@ -8658,7 +9015,8 @@ segments:
     - [0xD11A70, data]
     - [0xD11D40, data]
     - [0xD13420, rodata]
-  - dir: world/area_sam/sam_04
+  - name: sam_04
+    dir: world/area_sam/sam_04
     type: code
     overlay: True
     start: 0xD135D0
@@ -8673,7 +9031,8 @@ segments:
     - [0xD16E20, data]
     - [0xD18720, data]
     - [0xD187C0, rodata]
-  - dir: world/area_sam/sam_05
+  - name: sam_05
+    dir: world/area_sam/sam_05
     type: code
     overlay: True
     start: 0xD187E0
@@ -8686,7 +9045,8 @@ segments:
     - [0xD1A900, data]
     - [0xD1F780, data]
     - [0xD1FCB0, rodata]
-  - dir: world/area_sam/sam_06
+  - name: sam_06
+    dir: world/area_sam/sam_06
     type: code
     overlay: True
     start: 0xD1FE90
@@ -8700,7 +9060,8 @@ segments:
     - [0xD2BC50, data]
     - [0xD2BCC0, rodata]
     - [0xD2BCD0, rodata]
-  - dir: world/area_sam/sam_07
+  - name: sam_07
+    dir: world/area_sam/sam_07
     type: code
     overlay: True
     start: 0xD2BD30
@@ -8713,7 +9074,8 @@ segments:
     - [0xD2E1F0, data]
     - [0xD2E9C0, data]
     - [0xD2FAA0, rodata]
-  - dir: world/area_sam/sam_08
+  - name: sam_08
+    dir: world/area_sam/sam_08
     type: code
     overlay: True
     start: 0xD2FC80
@@ -8726,7 +9088,8 @@ segments:
     - [0xD31E80, data]
     - [0xD335E0, data]
     - [0xD36140, rodata]
-  - dir: world/area_sam/sam_09
+  - name: sam_09
+    dir: world/area_sam/sam_09
     type: code
     overlay: True
     start: 0xD362F0
@@ -8737,7 +9100,8 @@ segments:
     - [0xD36780, data]
     - [0xD369A0, data]
     - [0xD377F0, rodata]
-  - dir: world/area_sam/sam_10
+  - name: sam_10
+    dir: world/area_sam/sam_10
     type: code
     overlay: True
     start: 0xD37800
@@ -8750,7 +9114,8 @@ segments:
     - [0xD38840, data]
     - [0xD3A410, rodata]
     - [0xD3A430, rodata]
-  - dir: world/area_sam/sam_11
+  - name: sam_11
+    dir: world/area_sam/sam_11
     type: code
     overlay: True
     start: 0xD3A5D0
@@ -8768,7 +9133,8 @@ segments:
     - [0xD48C40, data]
     - [0xD4B9E0, rodata]
     - [0xD4BA00, rodata]
-  - dir: world/area_sam/sam_12
+  - name: sam_12
+    dir: world/area_sam/sam_12
     type: code
     overlay: True
     start: 0xD4BA20
@@ -8782,7 +9148,8 @@ segments:
     - [0xD4C2A0, data]
     - [0xD4CF90, data]
     - [0xD4D030, rodata]
-  - dir: world/area_pra/pra_01
+  - name: pra_01
+    dir: world/area_pra/pra_01
     type: code
     overlay: True
     start: 0xD4D040
@@ -8795,7 +9162,8 @@ segments:
     - [0xD4EF50, data]
     - [0xD4FFC0, data]
     - [0xD4FFD0, rodata]
-  - dir: world/area_pra/pra_02
+  - name: pra_02
+    dir: world/area_pra/pra_02
     type: code
     overlay: True
     start: 0xD4FFF0
@@ -8808,7 +9176,8 @@ segments:
     - [0xD52A80, data]
     - [0xD52DE0, data]
     - [0xD53C80, rodata]
-  - dir: world/area_pra/pra_03
+  - name: pra_03
+    dir: world/area_pra/pra_03
     type: code
     overlay: True
     start: 0xD53CB0
@@ -8820,7 +9189,8 @@ segments:
     - [0xD53F10, data]
     - [0xD543C0, data]
     - [0xD54670, rodata]
-  - dir: world/area_pra/pra_04
+  - name: pra_04
+    dir: world/area_pra/pra_04
     type: code
     overlay: True
     start: 0xD54690
@@ -8835,7 +9205,8 @@ segments:
     - [0xD55840, data]
     - [0xD55B40, rodata]
     - [0xD55B60, rodata]
-  - dir: world/area_pra/pra_05
+  - name: pra_05
+    dir: world/area_pra/pra_05
     type: code
     overlay: True
     start: 0xD55BB0
@@ -8846,7 +9217,8 @@ segments:
     - [0xD56D90, data]
     - [0xD56E20, data]
     - [0xD57420, rodata]
-  - dir: world/area_pra/pra_06
+  - name: pra_06
+    dir: world/area_pra/pra_06
     type: code
     overlay: True
     start: 0xD57430
@@ -8856,7 +9228,8 @@ segments:
     - [0xD58380, data]
     - [0xD58410, data]
     - [0xD58860, rodata]
-  - dir: world/area_pra/pra_09
+  - name: pra_09
+    dir: world/area_pra/pra_09
     type: code
     overlay: True
     start: 0xD58890
@@ -8867,7 +9240,8 @@ segments:
     - [0xD59EE0, data]
     - [0xD59F80, data]
     - [0xD5F2A0, rodata]
-  - dir: world/area_pra/pra_10
+  - name: pra_10
+    dir: world/area_pra/pra_10
     type: code
     overlay: True
     start: 0xD5F2B0
@@ -8878,7 +9252,8 @@ segments:
     - [0xD60960, data]
     - [0xD60A00, data]
     - [0xD614A0, rodata]
-  - dir: world/area_pra/pra_11
+  - name: pra_11
+    dir: world/area_pra/pra_11
     type: code
     overlay: True
     start: 0xD61500
@@ -8890,7 +9265,8 @@ segments:
     - [0xD62770, data]
     - [0xD62B10, data]
     - [0xD62D00, rodata]
-  - dir: world/area_pra/pra_12
+  - name: pra_12
+    dir: world/area_pra/pra_12
     type: code
     overlay: True
     start: 0xD62D10
@@ -8900,7 +9276,8 @@ segments:
     - [0xD63F20, data]
     - [0xD63FB0, data]
     - [0xD645B0, rodata]
-  - dir: world/area_pra/pra_13
+  - name: pra_13
+    dir: world/area_pra/pra_13
     type: code
     overlay: True
     start: 0xD645E0
@@ -8912,7 +9289,8 @@ segments:
     - [0xD65C70, data]
     - [0xD66880, data]
     - [0xD67CF0, rodata]
-  - dir: world/area_pra/pra_14
+  - name: pra_14
+    dir: world/area_pra/pra_14
     type: code
     overlay: True
     start: 0xD67D00
@@ -8924,7 +9302,8 @@ segments:
     - [0xD68F80, data]
     - [0xD69630, data]
     - [0xD69800, rodata]
-  - dir: world/area_pra/pra_15
+  - name: pra_15
+    dir: world/area_pra/pra_15
     type: code
     overlay: True
     start: 0xD69810
@@ -8936,7 +9315,8 @@ segments:
     - [0xD698E0, data]
     - [0xD69AD0, data]
     - [0xD69B10, rodata]
-  - dir: world/area_pra/pra_16
+  - name: pra_16
+    dir: world/area_pra/pra_16
     type: code
     overlay: True
     start: 0xD69B20
@@ -8947,7 +9327,8 @@ segments:
     - [0xD6AA40, data]
     - [0xD6AAF0, data]
     - [0xD6B610, rodata]
-  - dir: world/area_pra/pra_18
+  - name: pra_18
+    dir: world/area_pra/pra_18
     type: code
     overlay: True
     start: 0xD6B620
@@ -8959,7 +9340,8 @@ segments:
     - [0xD6C5F0, data]
     - [0xD6CF60, data]
     - [0xD6E9A0, rodata]
-  - dir: world/area_pra/pra_19
+  - name: pra_19
+    dir: world/area_pra/pra_19
     type: code
     overlay: True
     start: 0xD6E9B0
@@ -8971,7 +9353,8 @@ segments:
     - [0xD70400, data]
     - [0xD70A70, data]
     - [0xD76390, rodata]
-  - dir: world/area_pra/pra_20
+  - name: pra_20
+    dir: world/area_pra/pra_20
     type: code
     overlay: True
     start: 0xD763A0
@@ -8982,7 +9365,8 @@ segments:
     - [0xD772C0, data]
     - [0xD77390, data]
     - [0xD77F00, rodata]
-  - dir: world/area_pra/pra_21
+  - name: pra_21
+    dir: world/area_pra/pra_21
     type: code
     overlay: True
     start: 0xD77F20
@@ -8994,7 +9378,8 @@ segments:
     - [0xD780E0, data]
     - [0xD78540, data]
     - [0xD78870, rodata]
-  - dir: world/area_pra/pra_22
+  - name: pra_22
+    dir: world/area_pra/pra_22
     type: code
     overlay: True
     start: 0xD78880
@@ -9006,7 +9391,8 @@ segments:
     - [0xD78BF0, data]
     - [0xD796B0, data]
     - [0xD799E0, rodata]
-  - dir: world/area_pra/pra_27
+  - name: pra_27
+    dir: world/area_pra/pra_27
     type: code
     overlay: True
     start: 0xD799F0
@@ -9017,7 +9403,8 @@ segments:
     - [0xD7AC90, data]
     - [0xD7B080, data]
     - [0xD7B270, rodata]
-  - dir: world/area_pra/pra_28
+  - name: pra_28
+    dir: world/area_pra/pra_28
     type: code
     overlay: True
     start: 0xD7B2A0
@@ -9028,7 +9415,8 @@ segments:
     - [0xD7C540, data]
     - [0xD7C930, data]
     - [0xD7CB20, rodata]
-  - dir: world/area_pra/pra_29
+  - name: pra_29
+    dir: world/area_pra/pra_29
     type: code
     overlay: True
     start: 0xD7CB50
@@ -9040,7 +9428,8 @@ segments:
     - [0xD7DE90, data]
     - [0xD7E9B0, data]
     - [0xD7ED50, rodata]
-  - dir: world/area_pra/pra_31
+  - name: pra_31
+    dir: world/area_pra/pra_31
     type: code
     overlay: True
     start: 0xD7ED60
@@ -9054,7 +9443,8 @@ segments:
     - [0xD80E20, data]
     - [0xD81250, data]
     - [0xD869E0, rodata]
-  - dir: world/area_pra/pra_32
+  - name: pra_32
+    dir: world/area_pra/pra_32
     type: code
     overlay: True
     start: 0xD86A00
@@ -9065,7 +9455,8 @@ segments:
     - [0xD87240, data]
     - [0xD87DF0, data]
     - [0xD896B0, rodata]
-  - dir: world/area_pra/pra_33
+  - name: pra_33
+    dir: world/area_pra/pra_33
     type: code
     overlay: True
     start: 0xD896E0
@@ -9077,7 +9468,8 @@ segments:
     - [0xD8A820, data]
     - [0xD8B060, data]
     - [0xD8B3A0, rodata]
-  - dir: world/area_pra/pra_34
+  - name: pra_34
+    dir: world/area_pra/pra_34
     type: code
     overlay: True
     start: 0xD8B3B0
@@ -9089,7 +9481,8 @@ segments:
     - [0xD8C470, data]
     - [0xD8D130, data]
     - [0xD8D240, rodata]
-  - dir: world/area_pra/pra_35
+  - name: pra_35
+    dir: world/area_pra/pra_35
     type: code
     overlay: True
     start: 0xD8D250
@@ -9103,7 +9496,8 @@ segments:
     - [0xD90700, data]
     - [0xD91030, data]
     - [0xD91220, rodata]
-  - dir: world/area_pra/pra_36
+  - name: pra_36
+    dir: world/area_pra/pra_36
     type: code
     overlay: True
     start: 0xD91700
@@ -9113,7 +9507,8 @@ segments:
     - [0xD92650, data]
     - [0xD926F0, data]
     - [0xD92F10, rodata]
-  - dir: world/area_pra/pra_37
+  - name: pra_37
+    dir: world/area_pra/pra_37
     type: code
     overlay: True
     start: 0xD92F40
@@ -9124,7 +9519,8 @@ segments:
     - [0xD94800, data]
     - [0xD95420, rodata]
     - [0xD95450, rodata]
-  - dir: world/area_pra/pra_38
+  - name: pra_38
+    dir: world/area_pra/pra_38
     type: code
     overlay: True
     start: 0xD955F0
@@ -9135,7 +9531,8 @@ segments:
     - [0xD96D70, data]
     - [0xD97810, rodata]
     - [0xD97840, rodata]
-  - dir: world/area_pra/pra_39
+  - name: pra_39
+    dir: world/area_pra/pra_39
     type: code
     overlay: True
     start: 0xD97890
@@ -9146,7 +9543,8 @@ segments:
     - [0xD99010, data]
     - [0xD99930, rodata]
     - [0xD99960, rodata]
-  - dir: world/area_pra/pra_40
+  - name: pra_40
+    dir: world/area_pra/pra_40
     type: code
     overlay: True
     start: 0xD999B0
@@ -9158,7 +9556,8 @@ segments:
     - [0xD9A970, data]
     - [0xD9AE80, data]
     - [0xD9AEE0, rodata]
-  - dir: world/area_omo/omo_01
+  - name: omo_01
+    dir: world/area_omo/omo_01
     type: code
     overlay: True
     start: 0xD9AEF0
@@ -9172,7 +9571,8 @@ segments:
     - [0xD9C200, data]
     - [0xD9D250, data]
     - [0xD9D330, rodata]
-  - dir: world/area_omo/omo_02
+  - name: omo_02
+    dir: world/area_omo/omo_02
     type: code
     overlay: True
     start: 0xD9D4D0
@@ -9187,7 +9587,8 @@ segments:
     - [0xDA0A50, data]
     - [0xDA1CD0, data]
     - [0xDA4D30, rodata]
-  - dir: world/area_omo/omo_03
+  - name: omo_03
+    dir: world/area_omo/omo_03
     type: code
     overlay: True
     start: 0xDA5240
@@ -9199,7 +9600,8 @@ segments:
     - [0xDA6050, data]
     - [0xDA8190, data]
     - [0xDAD3B0, rodata]
-  - dir: world/area_omo/omo_04
+  - name: omo_04
+    dir: world/area_omo/omo_04
     type: code
     overlay: True
     start: 0xDAD400
@@ -9213,7 +9615,8 @@ segments:
     - [0xDB20B0, rodata]
     - [0xDB2108, rodata]
     - [0xDB22B0, rodata]
-  - dir: world/area_omo/omo_05
+  - name: omo_05
+    dir: world/area_omo/omo_05
     type: code
     overlay: True
     start: 0xDB22C0
@@ -9226,7 +9629,8 @@ segments:
     - [0xDB7560, rodata]
     - [0xDB7570, rodata]
     - [0xDB7908, rodata]
-  - dir: world/area_omo/omo_06
+  - name: omo_06
+    dir: world/area_omo/omo_06
     type: code
     overlay: True
     start: 0xDB7910
@@ -9239,7 +9643,8 @@ segments:
     - [0xDB9060, data]
     - [0xDBCFD0, data]
     - [0xDBD270, rodata]
-  - dir: world/area_omo/omo_07
+  - name: omo_07
+    dir: world/area_omo/omo_07
     type: code
     overlay: True
     start: 0xDBD2B0
@@ -9257,7 +9662,8 @@ segments:
     - [0xDC3E70, rodata]
     - [0xDC3E80, rodata]
     - [0xDC43C0, rodata]
-  - dir: world/area_omo/omo_08
+  - name: omo_08
+    dir: world/area_omo/omo_08
     type: code
     overlay: True
     start: 0xDC43D0
@@ -9270,7 +9676,8 @@ segments:
     - [0xDC8100, data]
     - [0xDCBA10, data]
     - [0xDCCB00, rodata]
-  - dir: world/area_omo/omo_09
+  - name: omo_09
+    dir: world/area_omo/omo_09
     type: code
     overlay: True
     start: 0xDCCCD0
@@ -9292,7 +9699,8 @@ segments:
     - [0xDD72F0, rodata]
     - [0xDD7300, rodata]
     - [0xDD79A0, rodata]
-  - dir: world/area_omo/omo_10
+  - name: omo_10
+    dir: world/area_omo/omo_10
     type: code
     overlay: True
     start: 0xDD79B0
@@ -9304,7 +9712,8 @@ segments:
     - [0xDD8A60, data]
     - [0xDDC720, data]
     - [0xDDC7F0, rodata]
-  - dir: world/area_omo/omo_11
+  - name: omo_11
+    dir: world/area_omo/omo_11
     type: code
     overlay: True
     start: 0xDDC830
@@ -9316,7 +9725,8 @@ segments:
     - [0xDDDD90, data]
     - [0xDDEE80, data]
     - [0xDDF300, rodata]
-  - dir: world/area_omo/omo_12
+  - name: omo_12
+    dir: world/area_omo/omo_12
     type: code
     overlay: True
     start: 0xDDF310
@@ -9328,7 +9738,8 @@ segments:
     - [0xDDF960, data]
     - [0xDDFB60, data]
     - [0xDE2470, rodata]
-  - dir: world/area_omo/omo_13
+  - name: omo_13
+    dir: world/area_omo/omo_13
     type: code
     overlay: True
     start: 0xDE2490
@@ -9342,7 +9753,8 @@ segments:
     - [0xDE3F70, data]
     - [0xDE5100, data]
     - [0xDE5360, rodata]
-  - dir: world/area_omo/omo_14
+  - name: omo_14
+    dir: world/area_omo/omo_14
     type: code
     overlay: True
     start: 0xDE56B0
@@ -9354,7 +9766,8 @@ segments:
     - [0xDE5D00, data]
     - [0xDE5FA0, data]
     - [0xDE8760, rodata]
-  - dir: world/area_omo/omo_15
+  - name: omo_15
+    dir: world/area_omo/omo_15
     type: code
     overlay: True
     start: 0xDE8770
@@ -9364,7 +9777,8 @@ segments:
     - [0xDE8F70, data]
     - [0xDE9670, data]
     - [0xDEBEA0, rodata]
-  - dir: world/area_omo/omo_16
+  - name: omo_16
+    dir: world/area_omo/omo_16
     type: code
     overlay: True
     start: 0xDEBED0
@@ -9375,7 +9789,8 @@ segments:
     - [0xDEC600, data]
     - [0xDEEC30, data]
     - [0xDEEE80, rodata]
-  - dir: world/area_omo/omo_17
+  - name: omo_17
+    dir: world/area_omo/omo_17
     type: code
     overlay: True
     start: 0xDEEEA0
@@ -9392,7 +9807,8 @@ segments:
     - [0xDF6470, rodata]
     - [0xDF64B0, rodata]
     - [0xDF6848, rodata]
-  - dir: world/area_end/end_00
+  - name: end_00
+    dir: world/area_end/end_00
     type: code
     overlay: True
     start: 0xDF6A00
@@ -9409,7 +9825,8 @@ segments:
     - [0xE04180, data]
     - [0xE052C0, data]
     - [0xE05300, rodata]
-  - dir: world/area_end/end_01
+  - name: end_01
+    dir: world/area_end/end_01
     type: code
     overlay: True
     start: 0xE05360
@@ -9427,7 +9844,8 @@ segments:
     - [0xE0D510, data]
     - [0xE0E700, data]
     - [0xE0E740, rodata]
-  - dir: world/area_mgm/mgm_00
+  - name: mgm_00
+    dir: world/area_mgm/mgm_00
     type: code
     overlay: True
     start: 0xE0E7A0
@@ -9440,7 +9858,8 @@ segments:
     - [0xE123E0, data]
     - [0xE12570, rodata]
     - [0xE12590, rodata]
-  - dir: world/area_mgm/mgm_01
+  - name: mgm_01
+    dir: world/area_mgm/mgm_01
     type: code
     overlay: True
     start: 0xE12760
@@ -9452,7 +9871,8 @@ segments:
     - [0xE141D0, data]
     - [0xE15440, data]
     - [0xE15D10, rodata]
-  - dir: world/area_mgm/mgm_02
+  - name: mgm_02
+    dir: world/area_mgm/mgm_02
     type: code
     overlay: True
     start: 0xE15D80
@@ -9464,14 +9884,16 @@ segments:
     - [0xE183D0, data]
     - [0xE1E020, data]
     - [0xE1E260, rodata]
-  - dir: world/area_mgm/mgm_03
+  - name: mgm_03
+    dir: world/area_mgm/mgm_03
     type: code
     overlay: True
     start: 0xE1E380
     vram: 0x80240000
     subsections:
     - [0xE1E380, data]
-  - dir: world/area_gv/gv_01
+  - name: gv_01
+    dir: world/area_gv/gv_01
     type: code
     overlay: True
     start: 0xE1E460
@@ -10025,179 +10447,12 @@ segments:
   - [0x19E62A0, Yay0]
   - start: 0x19E67B8
     type: PaperMarioNpcSprites
+    dir: sprite
+    name: npc
     files:
-      - name: world_goombario
-        frames:
-          - walk1
-          - still
-          - walk2
-          - pain
-          - headbonk
-          - still_copy1
-          - still_copy2
-          - jump
-          - talk1
-          - talk2
-          - jump_copy
-          - fall
-          - happy1
-          - happy2
-          - read_paper
-        palettes:
-          - normal
-          - green
-          - inactive
-          - yellow
-          - gray
-        animations:
-          - still
-          - idle
-          - walk
-          - run
-          - jump
-          - fall
-          - headbonk # centered at 0,0,0 rather than at base of sprite
-          - pain
-          - talk
-          - celebrate
-          - read_paper
-      - name: world_kooper
-        frames:
-          - walk1
-          - walk2
-          - walk3
-          - idle1
-          - idle2
-          - idle3
-          - idle4
-          - shell1
-          - shell2
-          - shell3
-          - shell4
-          - shell5
-          - shell6
-          - shell7
-          - shell8
-          - pain1
-          - pain2
-          - shell_start1
-          - shell_start2
-          - shell_start3
-          - talk
-          - talk_wave1
-          - talk_wave2
-          - happy1
-          - happy2
-          - happy3
-          - happy4
-          - jump
-          - fall
-          - read_paper
-          - talk_sad1
-          - talk_sad2
-        palettes:
-          - normal
-          - green
-          - inactive
-          - yellow
-          - gray
-        animations:
-          - still
-          - happy_still
-          - sad_still
-          - idle
-          - walk
-          - walk_fast
-          - jump
-          - fall
-          - shell_still1
-          - shell_spin
-          - shell_start
-          - shell_end
-          - pain
-          - talk
-          - talk_wave
-          - anim_0f
-          - celebrate
-          - celebrate_loop
-          - shell_still2
-          - read_paper
-      - name: world_bombette
-        frames:
-          - still
-          - walk1
-          - walk2
-          - walk3
-          - walk4
-          - idle1
-          - idle2
-          - idle3
-          - idle4
-          - jump
-          - fall
-          - key_fall
-          - still_lit
-          - walk_lit1
-          - walk_lit2
-          - walk_lit3
-          - charge_lit
-          - pain1
-          - pain2
-          - frame_13
-          - happy1
-          - happy2
-          - happy3
-          - happy4
-          - happy5
-          - happy_jump
-          - happy_fall
-          - lit_fuse1
-          - lit_fuse2
-          - lit_fuse3
-          - lit_fuse4
-          - lit_fuse5
-          - lit_fuse6
-          - key1
-          - key2
-          - key3
-          - key4
-          - key5
-          - key6
-          - key7
-          - key8
-        palettes:
-          - normal
-          - fuse
-          - red
-          - green
-          - fuse2
-          - black
-          - inactive
-          - purple
-          - black2
-          - yellow
-          - fuse3
-          - black3
-          - gray
-        animations:
-          - still
-          - happy
-          - still_lit
-          - idle
-          - happy_idle
-          - walk
-          - walk_lit
-          - walk_fast
-          - walk_fast_lit
-          - jump
-          - fall
-          - happy_jump
-          - happy_fall
-          - pain
-          - idle_fast
-          - celebrate
-          - lit_charge
-          - anim_11
+      - world_goombario
+      - world_kooper
+      - world_bombette
       - world_parakarry
       - world_bow
       - world_watt
@@ -10232,68 +10487,7 @@ segments:
       - spiked_para_jr_troopa
       - mage_jr_troopa
       - para_jr_troopa
-      - name: goomba
-        frames:
-          - still
-          - lean_left
-          - lean_right
-          - pain1
-          - pain2
-          - jump
-          - open_mouth
-          - open_mouth_wide
-          - sleep
-          - dizzy1
-          - dizzy2
-          - dizzy3
-          - dizzy4
-          - burn_pain1
-          - burn_pain2
-          - burn_dead
-          - tense
-          - fake_plant
-          - fake_mushroom
-          - electrocute
-        palettes:
-          - normal
-          - red # unused
-          - hyper
-          - blue # unused
-          - gloomba
-          - poisoned
-          - poisoned
-          - poisoned
-          - poisoned
-          - poisoned
-          - unk_purple_status
-          - unk_purple_status
-          - unk_purple_status
-          - unk_purple_status
-          - unk_purple_status
-          - electrified
-          - electrified
-          - electrified
-          - electrified
-          - electrified
-          - burnt
-          - fake_mushroom
-          - fake_plant
-        animations:
-          - still
-          - idle
-          - walk
-          - run
-          - headbonk # centered at 0,0,0 rather than at base of sprite
-          - pain
-          - dead
-          - dizzy
-          - asleep
-          - burn_pain
-          - burn_dead
-          - pre_headbonk # centered at 0,0,0 rather than at base of sprite
-          - fake_plant
-          - fake_mushroom
-          - electrocute
+      - goomba
       - spiked_goomba
       - paragoomba
       - koopa_troopa
@@ -10540,374 +10734,1044 @@ segments:
       - 2C_quiz_questions
       - 2D_quiz_options
       - 2E_credits
-    ids:
-      - [0x19, 0x03B, kmr_03_tattle]
-      - [0x19, 0x040, kmr_12_tattle]
-      - [0x19, 0x0BE, arn_02_tattle]
-
-      - [0x1C, 0x000, actor_goomba_tattle]
-      - [0x1C, 0x001, actor_spiked_goomba_tattle]
-      - [0x1C, 0x002, actor_paragoomba_tattle]
-      - [0x1C, 0x003, actor_red_goomba_boss_tattle]
-      - [0x1C, 0x004, actor_blue_goomba_boss_tattle]
-      - [0x1C, 0x005, actor_goomba_king_tattle]
-      - [0x1C, 0x006, actor_goomnut_tree_tattle]
-      - [0x1C, 0x007, actor_koopa_troopa_tattle]
-      - [0x1C, 0x008, actor_paratroopa_tattle]
-      - [0x1C, 0x009, actor_fuzzy_tattle]
-      - [0x1C, 0x00A, actor_bob_omb_tattle]
-      - [0x1C, 0x00B, actor_bullet_bill_tattle]
-      - [0x1C, 0x00C, actor_bill_blaster_tattle]
-      - [0x1C, 0x00D, actor_fake_bowser_tattle]
-      - [0x1C, 0x00E, actor_red_ninjakoopa_tattle]
-      - [0x1C, 0x00F, actor_blue_ninjakoopa_tattle]
-      - [0x1C, 0x010, actor_yellow_ninjakoopa_tattle]
-      - [0x1C, 0x011, actor_green_ninjakoopa_tattle]
-      - [0x1C, 0x012, actor_koopa_bros_tattle]
-      - [0x1C, 0x013, actor_jr_troopa1_tattle]
-      - [0x1C, 0x014, actor_monty_mole_tattle]
-      - [0x1C, 0x015, actor_cleft_tattle]
-      - [0x1C, 0x016, actor_pokey_tattle]
-      - [0x1C, 0x017, actor_bandit_tattle]
-      - [0x1C, 0x018, actor_pokey_mummy_tattle]
-      - [0x1C, 0x019, actor_buzzy_beetle_tattle]
-      - [0x1C, 0x01A, actor_swooper_tattle]
-      - [0x1C, 0x01B, actor_buzzar_tattle]
-      - [0x1C, 0x01C, actor_tutankoopa_tattle]
-      - [0x1C, 0x01D, actor_chomp_tattle]
-      - [0x1C, 0x01E, actor_stone_chomp_tattle]
-      - [0x1C, 0x01F, actor_piranha_plant_tattle]
-      - [0x1C, 0x020, actor_forest_fuzzy_tattle]
-      - [0x1C, 0x021, actor_hyper_goomba_tattle]
-      - [0x1C, 0x022, actor_hyper_paragoomba_tattle]
-      - [0x1C, 0x023, actor_hyper_cleft_tattle]
-      - [0x1C, 0x024, actor_clubba_tattle]
-      - [0x1C, 0x025, actor_tubba_blubba_invincible_tattle]
-      - [0x1C, 0x026, actor_tubba_heart_tattle]
-      - [0x1C, 0x027, actor_tubba_blubba_tattle]
-      - [0x1C, 0x028, actor_jr_troopa2_tattle]
-      - [0x1C, 0x029, actor_shy_guy_tattle]
-      - [0x1C, 0x02A, actor_groove_guy_tattle]
-      - [0x1C, 0x02B, actor_spy_guy_tattle]
-      - [0x1C, 0x02C, actor_pyro_guy_tattle]
-      - [0x1C, 0x02D, actor_sky_guy_tattle]
-      - [0x1C, 0x02E, actor_medi_guy_tattle]
-      - [0x1C, 0x02F, actor_anti_guy_tattle]
-      - [0x1C, 0x030, actor_big_lantern_ghost_tattle]
-      - [0x1C, 0x031, actor_general_guy_tattle]
-      - [0x1C, 0x032, actor_shy_squad_tattle]
-      - [0x1C, 0x033, actor_shy_stack_tattle]
-      - [0x1C, 0x034, actor_stilt_guy_tattle]
-      - [0x1C, 0x035, actor_hurt_plant_tattle]
-      - [0x1C, 0x036, actor_m_bush_tattle]
-      - [0x1C, 0x037, actor_jungle_fuzzy_tattle]
-      - [0x1C, 0x038, actor_spear_guy_tattle]
-      - [0x1C, 0x039, actor_putrid_piranha_tattle]
-      - [0x1C, 0x03A, actor_lava_bubble_tattle]
-      - [0x1C, 0x03B, actor_spike_top_tattle]
-      - [0x1C, 0x03C, actor_lava_piranha_phase_1_tattle]
-      - [0x1C, 0x03D, actor_lava_piranha_phase_2_tattle]
-      - [0x1C, 0x03E, actor_lava_bud_phase_1_tattle]
-      - [0x1C, 0x03F, actor_lava_bud_phase_2_tattle]
-      - [0x1C, 0x040, actor_petit_piranha_tattle]
-      - [0x1C, 0x041, actor_jr_troopa3_tattle]
-      - [0x1C, 0x042, actor_lakitu_tattle]
-      - [0x1C, 0x043, actor_spiny_tattle]
-      - [0x1C, 0x044, actor_bzzap_tattle]
-      - [0x1C, 0x045, actor_crazee_dayzee_tattle]
-      - [0x1C, 0x046, actor_amazy_dayzee_tattle]
-      - [0x1C, 0x047, actor_monty_mole_boss_tattle]
-      - [0x1C, 0x048, actor_spike_tattle]
-      - [0x1C, 0x049, actor_ruff_puff_tattle]
-      - [0x1C, 0x04A, actor_huff_n_puff_tattle]
-      - [0x1C, 0x04B, actor_tuff_puff_tattle]
-      - [0x1C, 0x04C, actor_jr_troopa4_tattle]
-      - [0x1C, 0x04D, actor_gulpit_tattle]
-      - [0x1C, 0x04E, actor_gulpit_rocks_tattle]
-      - [0x1C, 0x04F, actor_monstar_tattle]
-      - [0x1C, 0x050, actor_frost_piranha_tattle]
-      - [0x1C, 0x051, actor_white_clubba_tattle]
-      - [0x1C, 0x052, actor_duplighost_tattle]
-      - [0x1C, 0x053, actor_ghost_watt_tattle]
-      - [0x1C, 0x054, actor_ghost_kooper_tattle]
-      - [0x1C, 0x055, actor_ghost_goombario_tattle]
-      - [0x1C, 0x056, actor_ghost_sushie_tattle]
-      - [0x1C, 0x057, actor_ghost_lakilester_tattle]
-      - [0x1C, 0x058, actor_ghost_parakarry_tattle]
-      - [0x1C, 0x059, actor_ghost_bombette_tattle]
-      - [0x1C, 0x05A, actor_ghost_bow_tattle]
-      - [0x1C, 0x05B, actor_albino_dino_tattle]
-      - [0x1C, 0x05C, actor_swoopula_tattle]
-      - [0x1C, 0x05D, actor_crystal_king_tattle]
-      - [0x1C, 0x05E, actor_crystal_clone_tattle]
-      - [0x1C, 0x05F, actor_crystal_bit_tattle]
-      - [0x1C, 0x060, actor_ember_tattle]
-      - [0x1C, 0x061, actor_dry_bones_tattle]
-      - [0x1C, 0x062, actor_bony_beetle_tattle]
-      - [0x1C, 0x063, actor_magikoopa_tattle]
-      - [0x1C, 0x064, actor_magiclone_tattle]
-      - [0x1C, 0x065, actor_magikoopa_dup_tattle]
-      - [0x1C, 0x066, actor_magiclone_dup_tattle]
-      - [0x1C, 0x067, actor_koopatrol_tattle]
-      - [0x1C, 0x068, actor_hammer_bros_tattle]
-      - [0x1C, 0x069, actor_bombshell_bill_tattle]
-      - [0x1C, 0x06A, actor_bombshell_blaster_tattle]
-      - [0x1C, 0x06B, actor_jr_troopa5_tattle]
-      - [0x1C, 0x06C, actor_bowser_phase_1_tattle]
-      - [0x1C, 0x06D, actor_bowser_phase_2_tattle]
-      - [0x1C, 0x06E, actor_bowser_phase_3_tattle]
-      - [0x1C, 0x06F, actor_kent_c_koopa_tattle]
-      - [0x1C, 0x070, actor_blooper_tattle]
-      - [0x1C, 0x071, actor_electro_blooper_tattle]
-      - [0x1C, 0x072, actor_super_blooper_tattle]
-      - [0x1C, 0x073, actor_blooper_baby_tattle]
-      - [0x1C, 0x074, actor_the_master_1_tattle]
-      - [0x1C, 0x075, actor_the_master_2_tattle]
-      - [0x1C, 0x076, actor_the_master_3_tattle]
-      - [0x1C, 0x077, actor_chan_tattle]
-      - [0x1C, 0x078, actor_lee_tattle]
-      - [0x1C, 0x079, actor_gloomba_tattle]
-      - [0x1C, 0x07A, actor_paragloomba_tattle]
-      - [0x1C, 0x07B, actor_spiked_gloomba_tattle]
-      - [0x1C, 0x07C, actor_dark_koopa_tattle]
-      - [0x1C, 0x07D, actor_dark_paratroopa_tattle]
-      - [0x1C, 0x07E, actor_red_magikoopa_tattle]
-      - [0x1C, 0x07F, actor_flying_red_magikoopa_tattle]
-      - [0x1C, 0x080, actor_green_magikoopa_tattle]
-      - [0x1C, 0x081, actor_flying_green_magikoopa_tattle]
-      - [0x1C, 0x082, actor_yellow_magikoopa_tattle]
-      - [0x1C, 0x083, actor_flying_yellow_magikoopa_tattle]
-      - [0x1C, 0x084, actor_gray_magikoopa_tattle]
-      - [0x1C, 0x085, actor_flying_gray_magikoopa_tattle]
-      - [0x1C, 0x086, actor_flying_white_magikoopa_tattle]
-      - [0x1C, 0x087, actor_white_magikoopa_tattle]
-      - [0x1C, 0x088, actor_magikoopa_boss_tattle]
-      - [0x1C, 0x089, actor_magikoopa_boss_dup_tattle]
-      - [0x1C, 0x08A, actor_lee_watt_tattle]
-      - [0x1C, 0x08B, actor_lee_kooper_tattle]
-      - [0x1C, 0x08C, actor_lee_goombario_tattle]
-      - [0x1C, 0x08D, actor_lee_sushie_tattle]
-      - [0x1C, 0x08E, actor_lee_lakilester_tattle]
-      - [0x1C, 0x08F, actor_lee_parakarry_tattle]
-      - [0x1C, 0x090, actor_lee_bombette_tattle]
-      - [0x1C, 0x091, actor_lee_bow_tattle]
-      - [0x1C, 0x092, actor_mario_tattle]
-      - [0x1C, 0x093, actor_slot_machine_start_tattle]
-      - [0x1C, 0x094, actor_slot_machine_stop_tattle]
-      - [0x1C, 0x095, actor_whacka_tattle]
-
-      - [0x1D, 0x007, party_goombario]
-      - [0x1D, 0x008, party_kooper]
-      - [0x1D, 0x009, party_bombette]
-      - [0x1D, 0x00A, party_parakarry]
-      - [0x1D, 0x00B, party_goompa]
-      - [0x1D, 0x00C, party_watt]
-      - [0x1D, 0x00D, party_sushie]
-      - [0x1D, 0x00E, party_lakilester]
-      - [0x1D, 0x00F, party_bow]
-      - [0x1D, 0x010, party_goombaria]
-      - [0x1D, 0x011, party_twink]
-      - [0x1D, 0x012, party_peach]
-      - [0x1D, 0x013, party_mario]
-
-      - [0x1D, 0x071, merlee_increase_atk, battle_popup]
-      - [0x1D, 0x072, merlee_increase_dmg, battle_popup]
-      - [0x1D, 0x073, merlee_increase_star_points, battle_popup]
-      - [0x1D, 0x074, merlee_increase_coins, battle_popup]
-      - [0x1D, 0x075, merlee_end, battle_popup]
-      - [0x1D, 0x076, charge_hammer, battle_popup]
-      - [0x1D, 0x077, charge_hammer_more, battle_popup]
-      - [0x1D, 0x078, charge_jump, battle_popup]
-      - [0x1D, 0x079, charge_jump_more, battle_popup]
-      - [0x1D, 0x07A, charge_max, battle_popup]
-      - [0x1D, 0x07B, enemy_missed, battle_popup]
-      - [0x1D, 0x07C, partner_dazed, battle_popup]
-      - [0x1D, 0x07D, charge_goombario, battle_popup]
-      - [0x1D, 0x07E, charge_goombario_more, battle_popup]
-      - [0x1D, 0x07F, star_energy_increased, battle_popup]
-      - [0x1D, 0x080, star_energy_filled, battle_popup]
-      - [0x1D, 0x081, star_energy_max, battle_popup]
-      - [0x1D, 0x082, atk_up_n, battle_popup]
-      - [0x1D, 0x083, def_up_n, battle_popup]
-
-      - [0x1D, 0x086, enemy_transparent, battle_popup]
-      - [0x1D, 0x087, enemy_electric_charge, battle_popup]
-
-      - [0x1D, 0x088, player_dazed, battle_popup]
-      - [0x1D, 0x089, player_poisoned, battle_popup]
-      - [0x1D, 0x08A, player_frozen, battle_popup]
-      - [0x1D, 0x08B, player_slept, battle_popup]
-      - [0x1D, 0x08C, player_shrunk, battle_popup]
-      - [0x1D, 0x08D, player_paralyzed, battle_popup]
-      - [0x1D, 0x08E, player_electrified, battle_popup]
-      - [0x1D, 0x08F, player_transparent, battle_popup]
-      - [0x1D, 0x090, enemy_dazed, battle_popup]
-      - [0x1D, 0x091, enemy_poisoned, battle_popup]
-      - [0x1D, 0x092, enemy_frozen, battle_popup]
-      - [0x1D, 0x093, enemy_slept, battle_popup]
-      - [0x1D, 0x094, enemy_shrunk, battle_popup]
-      - [0x1D, 0x095, enemy_paralyzed, battle_popup]
-      - [0x1D, 0x096, enemy_electrified, battle_popup]
-      - [0x1D, 0x097, enemy_cannot_move, battle_popup]
-      - [0x1D, 0x098, water_block_active, battle_popup]
-      - [0x1D, 0x099, water_block_end, battle_popup]
-      - [0x1D, 0x09A, cloud_nine_active, battle_popup]
-      - [0x1D, 0x09B, cloud_nine_end, battle_popup]
-      - [0x1D, 0x09B, cloud_nine_end, battle_popup]
-      - [0x1D, 0x09C, atk_up_active, battle_popup]
-      - [0x1D, 0x09D, atk_up_end, battle_popup]
-      - [0x1D, 0x09E, enemy_atk_down, battle_popup]
-
-      - [0x1D, 0x0AF, action_cmd_jump, action_command]
-      - [0x1D, 0x0B0, action_cmd_hammer, action_command]
-
-      - [0x1D, 0x0C0, no_target_jump, battle_popup]
-      - [0x1D, 0x0C1, no_target_hammer, battle_popup]
-      - [0x1D, 0x0C2, no_battle_items, battle_popup]
-
-      - [0x1D, 0x0C6, hammer_disabled, battle_popup]
-      - [0x1D, 0x0C7, jump_disabled, battle_popup]
-      - [0x1D, 0x0C8, items_disabled, battle_popup]
-      - [0x1D, 0x0C9, no_switch_used_turn, battle_popup]
-      - [0x1D, 0x0CA, no_switch_dazed, battle_popup]
-
-      - [0x1D, 0x167, kmr_12_sign_trap]
-      - [0x1D, 0x168, kmr_12_sign_to_fortress]
-
-      - [0x29, 0x000, actor_goomba]
-      - [0x29, 0x001, actor_spiked_goomba]
-      - [0x29, 0x002, actor_paragoomba]
-      - [0x29, 0x003, actor_red_goomba_boss]
-      - [0x29, 0x004, actor_blue_goomba_boss]
-      - [0x29, 0x005, actor_goomba_king]
-      - [0x29, 0x006, actor_goomnut_tree]
-      - [0x29, 0x007, actor_koopa_troopa]
-      - [0x29, 0x008, actor_paratroopa]
-      - [0x29, 0x009, actor_fuzzy]
-      - [0x29, 0x00A, actor_bob_omb]
-      - [0x29, 0x00B, actor_bullet_bill]
-      - [0x29, 0x00C, actor_bill_blaster]
-      - [0x29, 0x00D, actor_fake_bowser]
-      - [0x29, 0x00E, actor_red_ninjakoopa]
-      - [0x29, 0x00F, actor_blue_ninjakoopa]
-      - [0x29, 0x010, actor_yellow_ninjakoopa]
-      - [0x29, 0x011, actor_green_ninjakoopa]
-      - [0x29, 0x012, actor_koopa_bros]
-      - [0x29, 0x013, actor_jr_troopa]
-      - [0x29, 0x014, actor_monty_mole]
-      - [0x29, 0x015, actor_cleft]
-      - [0x29, 0x016, actor_pokey]
-      - [0x29, 0x017, actor_bandit]
-      - [0x29, 0x018, actor_pokey_mummy]
-      - [0x29, 0x019, actor_buzzy_beetle]
-      - [0x29, 0x01A, actor_swooper]
-      - [0x29, 0x01B, actor_buzzar]
-      - [0x29, 0x01C, actor_tutankoopa]
-      - [0x29, 0x01D, actor_chomp]
-      - [0x29, 0x01E, actor_stone_chomp]
-      - [0x29, 0x01F, actor_piranha_plant]
-      - [0x29, 0x020, actor_forest_fuzzy]
-      - [0x29, 0x021, actor_hyper_goomba]
-      - [0x29, 0x022, actor_hyper_paragoomba]
-      - [0x29, 0x023, actor_hyper_cleft]
-      - [0x29, 0x024, actor_clubba]
-      - [0x29, 0x025, actor_tubba_blubba]
-      - [0x29, 0x026, actor_tubba_heart]
-      - [0x29, 0x027, actor_shy_guy]
-      - [0x29, 0x028, actor_groove_guy]
-      - [0x29, 0x029, actor_spy_guy]
-      - [0x29, 0x02A, actor_pyro_guy]
-      - [0x29, 0x02B, actor_sky_guy]
-      - [0x29, 0x02C, actor_medi_guy]
-      - [0x29, 0x02D, actor_anti_guy]
-      - [0x29, 0x02E, actor_big_lantern_ghost]
-      - [0x29, 0x02F, actor_general_guy]
-      - [0x29, 0x030, actor_shy_squad]
-      - [0x29, 0x031, actor_shy_stack]
-      - [0x29, 0x032, actor_stilt_guy]
-      - [0x29, 0x033, actor_hurt_plant]
-      - [0x29, 0x034, actor_m_bush]
-      - [0x29, 0x035, actor_jungle_fuzzy]
-      - [0x29, 0x036, actor_spear_guy]
-      - [0x29, 0x037, actor_putrid_piranha]
-      - [0x29, 0x038, actor_lava_bubble]
-      - [0x29, 0x039, actor_spike_top]
-      - [0x29, 0x03A, actor_lava_piranha]
-      - [0x29, 0x03B, actor_lava_bud]
-      - [0x29, 0x03C, actor_petit_piranha]
-      - [0x29, 0x03D, actor_lakitu]
-      - [0x29, 0x03E, actor_spiny]
-      - [0x29, 0x03F, actor_bzzap]
-      - [0x29, 0x040, actor_crazee_dayzee]
-      - [0x29, 0x041, actor_amazy_dayzee]
-      - [0x29, 0x042, actor_monty_mole_boss]
-      - [0x29, 0x043, actor_spike]
-      - [0x29, 0x044, actor_ruff_puff]
-      - [0x29, 0x045, actor_huff_n_puff]
-      - [0x29, 0x046, actor_tuff_puff]
-      - [0x29, 0x047, actor_gulpit]
-      - [0x29, 0x048, actor_gulpit_rocks]
-      - [0x29, 0x049, actor_monstar]
-      - [0x29, 0x04A, actor_frost_piranha]
-      - [0x29, 0x04B, actor_white_clubba]
-      - [0x29, 0x04C, actor_duplighost]
-      - [0x29, 0x04D, actor_ghost_watt]
-      - [0x29, 0x04E, actor_ghost_kooper]
-      - [0x29, 0x04F, actor_ghost_goombario]
-      - [0x29, 0x050, actor_ghost_sushie]
-      - [0x29, 0x051, actor_ghost_lakilester]
-      - [0x29, 0x052, actor_ghost_parakarry]
-      - [0x29, 0x053, actor_ghost_bombette]
-      - [0x29, 0x054, actor_ghost_bow]
-      - [0x29, 0x055, actor_albino_dino]
-      - [0x29, 0x056, actor_swoopula]
-      - [0x29, 0x057, actor_crystal_king]
-      - [0x29, 0x058, actor_crystal_bit]
-      - [0x29, 0x059, actor_ember]
-      - [0x29, 0x05A, actor_dry_bones]
-      - [0x29, 0x05B, actor_bony_beetle]
-      - [0x29, 0x05C, actor_magikoopa]
-      - [0x29, 0x05D, actor_koopatrol]
-      - [0x29, 0x05E, actor_hammer_bros]
-      - [0x29, 0x05F, actor_bombshell_bill]
-      - [0x29, 0x060, actor_bombshell_blaster]
-      - [0x29, 0x061, actor_bowser]
-      - [0x29, 0x062, actor_kammy_koopa]
-      - [0x29, 0x063, actor_kent_c_koopa]
-      - [0x29, 0x064, actor_blooper]
-      - [0x29, 0x065, actor_electro_blooper]
-      - [0x29, 0x066, actor_super_blooper]
-      - [0x29, 0x067, actor_blooper_baby]
-      - [0x29, 0x068, actor_the_master]
-      - [0x29, 0x069, actor_chan]
-      - [0x29, 0x06A, actor_lee]
-      - [0x29, 0x06B, actor_gloomba]
-      - [0x29, 0x06C, actor_paragloomba]
-      - [0x29, 0x06D, actor_spiked_gloomba]
-      - [0x29, 0x06E, actor_dark_koopa]
-      - [0x29, 0x06F, actor_dark_paratroopa]
-      - [0x29, 0x070, actor_red_magikoopa]
-      - [0x29, 0x071, actor_green_magikoopa]
-      - [0x29, 0x072, actor_yellow_magikoopa]
-      - [0x29, 0x073, actor_gray_magikoopa]
-      - [0x29, 0x074, actor_white_magikoopa]
-      - [0x29, 0x075, actor_mario]
-      - [0x29, 0x076, actor_slot_machine_start]
-      - [0x29, 0x077, actor_slot_machine_stop]
-      - [0x29, 0x078, actor_whacka]
-      - [0x29, 0x079, actor_general_guy_dup]
-      - [0x29, 0x07A, actor_bulb]
-      - [0x29, 0x07B, actor_shy_squad_dup]
-      - [0x29, 0x07C, actor_fuzzipede]
-      - [0x29, 0x07D, actor_monty_hole]
-      - [0x29, 0x07E, actor_balloon]
-      - [0x29, 0x07F, actor_lantern]
-      - [0x29, 0x080, actor_aqua_fuzzy]
-      - [0x29, 0x081, actor_red_goomba]
-      - [0x29, 0x082, actor_red_paragoomba]
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
-  - [0x1E40000, PaperMarioMapFS]
+  - name: mapfs
+    type: PaperMarioMapFS
+    start: 0x1E40000
+    files:
+      - dro_01_hit
+      - dro_02_shape
+      - dro_02_hit
+      - hos_00_shape
+      - hos_00_hit
+      - hos_01_shape
+      - hos_01_hit
+      - hos_02_shape
+      - hos_02_hit
+      - hos_03_shape
+      - hos_03_hit
+      - hos_04_shape
+      - hos_04_hit
+      - hos_05_shape
+      - hos_05_hit
+      - hos_06_shape
+      - hos_06_hit
+      - hos_10_shape
+      - hos_10_hit
+      - hos_20_shape
+      - hos_20_hit
+      - isk_01_shape
+      - isk_01_hit
+      - isk_02_shape
+      - isk_02_hit
+      - isk_03_shape
+      - isk_03_hit
+      - isk_04_shape
+      - isk_04_hit
+      - isk_05_shape
+      - isk_05_hit
+      - isk_06_shape
+      - isk_06_hit
+      - isk_07_shape
+      - isk_07_hit
+      - isk_08_shape
+      - isk_08_hit
+      - isk_09_shape
+      - isk_09_hit
+      - isk_10_shape
+      - isk_10_hit
+      - isk_11_shape
+      - isk_11_hit
+      - isk_12_shape
+      - isk_12_hit
+      - isk_13_shape
+      - isk_13_hit
+      - isk_14_shape
+      - isk_14_hit
+      - isk_16_shape
+      - isk_16_hit
+      - isk_18_shape
+      - isk_18_hit
+      - isk_19_shape
+      - isk_19_hit
+      - iwa_00_shape
+      - iwa_00_hit
+      - iwa_01_shape
+      - iwa_01_hit
+      - iwa_02_shape
+      - iwa_02_hit
+      - iwa_03_shape
+      - iwa_03_hit
+      - iwa_04_shape
+      - iwa_04_hit
+      - iwa_10_shape
+      - iwa_10_hit
+      - iwa_11_shape
+      - iwa_11_hit
+      - osr_00_shape
+      - osr_00_hit
+      - osr_01_shape
+      - osr_01_hit
+      - osr_02_shape
+      - osr_02_hit
+      - osr_03_shape
+      - osr_03_hit
+      - kkj_00_shape
+      - kkj_00_hit
+      - kkj_01_shape
+      - kkj_01_hit
+      - kkj_02_shape
+      - kkj_02_hit
+      - kkj_03_shape
+      - kkj_03_hit
+      - kkj_10_shape
+      - kkj_10_hit
+      - kkj_11_shape
+      - kkj_11_hit
+      - kkj_12_shape
+      - kkj_12_hit
+      - kkj_13_shape
+      - kkj_13_hit
+      - kkj_14_shape
+      - kkj_14_hit
+      - kkj_15_shape
+      - kkj_15_hit
+      - kkj_16_shape
+      - kkj_16_hit
+      - kkj_17_shape
+      - kkj_17_hit
+      - kkj_18_shape
+      - kkj_18_hit
+      - kkj_19_shape
+      - kkj_19_hit
+      - kkj_20_shape
+      - kkj_20_hit
+      - kkj_21_shape
+      - kkj_21_hit
+      - kkj_22_shape
+      - kkj_22_hit
+      - kkj_23_shape
+      - kkj_23_hit
+      - kkj_24_shape
+      - kkj_24_hit
+      - kkj_25_shape
+      - kkj_25_hit
+      - kkj_26_shape
+      - kkj_26_hit
+      - kkj_27_shape
+      - kkj_27_hit
+      - kkj_28_shape
+      - kkj_28_hit
+      - kkj_29_shape
+      - kkj_29_hit
+      - kmr_00_shape
+      - kmr_00_hit
+      - kmr_02_shape
+      - kmr_02_hit
+      - kmr_03_shape
+      - kmr_03_hit
+      - kmr_04_shape
+      - kmr_04_hit
+      - kmr_05_shape
+      - kmr_05_hit
+      - kmr_06_shape
+      - kmr_06_hit
+      - kmr_07_shape
+      - kmr_07_hit
+      - kmr_09_shape
+      - kmr_09_hit
+      - kmr_10_shape
+      - kmr_10_hit
+      - kmr_11_shape
+      - kmr_11_hit
+      - kmr_12_shape
+      - kmr_12_hit
+      - kmr_20_shape
+      - kmr_20_hit
+      - kmr_30_shape
+      - kmr_30_hit
+      - kpa_01_shape
+      - kpa_01_hit
+      - kpa_03_shape
+      - kpa_03_hit
+      - kpa_04_shape
+      - kpa_04_hit
+      - kpa_08_shape
+      - kpa_08_hit
+      - kpa_09_shape
+      - kpa_09_hit
+      - kpa_10_shape
+      - kpa_10_hit
+      - kpa_11_shape
+      - kpa_11_hit
+      - kpa_12_shape
+      - kpa_12_hit
+      - kpa_13_shape
+      - kpa_13_hit
+      - kpa_14_shape
+      - kpa_14_hit
+      - kpa_15_shape
+      - kpa_15_hit
+      - kpa_16_shape
+      - kpa_16_hit
+      - kpa_17_shape
+      - kpa_17_hit
+      - kpa_32_shape
+      - kpa_32_hit
+      - kpa_33_shape
+      - kpa_33_hit
+      - kpa_40_shape
+      - kpa_40_hit
+      - kpa_41_shape
+      - kpa_41_hit
+      - kpa_50_shape
+      - kpa_50_hit
+      - kpa_52_shape
+      - kpa_52_hit
+      - kpa_60_shape
+      - kpa_60_hit
+      - kpa_61_shape
+      - kpa_61_hit
+      - kpa_62_shape
+      - kpa_62_hit
+      - kpa_63_shape
+      - kpa_63_hit
+      - kpa_70_shape
+      - kpa_70_hit
+      - kpa_80_shape
+      - kpa_80_hit
+      - kpa_90_shape
+      - kpa_90_hit
+      - kpa_91_shape
+      - kpa_91_hit
+      - kpa_94_shape
+      - kpa_94_hit
+      - kpa_95_shape
+      - kpa_95_hit
+      - kpa_96_shape
+      - kpa_96_hit
+      - kpa_102_shape
+      - kpa_102_hit
+      - kpa_111_shape
+      - kpa_111_hit
+      - kpa_112_shape
+      - kpa_112_hit
+      - kpa_113_shape
+      - kpa_113_hit
+      - kpa_115_shape
+      - kpa_115_hit
+      - kpa_116_shape
+      - kpa_116_hit
+      - kpa_117_shape
+      - kpa_117_hit
+      - kpa_118_shape
+      - kpa_118_hit
+      - kpa_119_shape
+      - kpa_119_hit
+      - kpa_121_shape
+      - kpa_121_hit
+      - kpa_130_shape
+      - kpa_130_hit
+      - kpa_133_shape
+      - kpa_133_hit
+      - kpa_134_shape
+      - kpa_134_hit
+      - machi_shape
+      - machi_hit
+      - mac_00_shape
+      - mac_00_hit
+      - mac_01_shape
+      - mac_01_hit
+      - mac_02_shape
+      - mac_02_hit
+      - mac_03_shape
+      - mac_03_hit
+      - mac_04_shape
+      - mac_04_hit
+      - mac_05_shape
+      - mac_05_hit
+      - mac_06_shape
+      - mac_06_hit
+      - tik_01_shape
+      - tik_01_hit
+      - tik_02_shape
+      - tik_02_hit
+      - tik_03_shape
+      - tik_03_hit
+      - tik_04_shape
+      - tik_04_hit
+      - tik_05_shape
+      - tik_05_hit
+      - tik_06_shape
+      - tik_06_hit
+      - tik_07_shape
+      - tik_07_hit
+      - tik_08_shape
+      - tik_08_hit
+      - tik_09_shape
+      - tik_09_hit
+      - tik_10_shape
+      - tik_10_hit
+      - tik_12_shape
+      - tik_12_hit
+      - tik_14_shape
+      - tik_14_hit
+      - tik_15_shape
+      - tik_15_hit
+      - tik_17_shape
+      - tik_17_hit
+      - tik_18_shape
+      - tik_18_hit
+      - tik_19_shape
+      - tik_19_hit
+      - tik_20_shape
+      - tik_20_hit
+      - tik_21_shape
+      - tik_21_hit
+      - tik_22_shape
+      - tik_22_hit
+      - tik_23_shape
+      - tik_23_hit
+      - tik_25_shape
+      - tik_25_hit
+      - kgr_01_shape
+      - kgr_01_hit
+      - kgr_02_shape
+      - kgr_02_hit
+      - nok_01_shape
+      - nok_01_hit
+      - nok_02_shape
+      - nok_02_hit
+      - nok_03_shape
+      - nok_03_hit
+      - nok_04_shape
+      - nok_04_hit
+      - nok_11_shape
+      - nok_11_hit
+      - nok_12_shape
+      - nok_12_hit
+      - nok_13_shape
+      - nok_13_hit
+      - nok_14_shape
+      - nok_14_hit
+      - nok_15_shape
+      - nok_15_hit
+      - sbk_00_shape
+      - sbk_00_hit
+      - sbk_01_shape
+      - sbk_01_hit
+      - sbk_02_shape
+      - sbk_02_hit
+      - sbk_03_shape
+      - sbk_03_hit
+      - sbk_04_shape
+      - sbk_04_hit
+      - sbk_05_shape
+      - sbk_05_hit
+      - sbk_06_shape
+      - sbk_06_hit
+      - sbk_10_shape
+      - sbk_10_hit
+      - sbk_11_shape
+      - sbk_11_hit
+      - sbk_12_shape
+      - sbk_12_hit
+      - sbk_13_shape
+      - sbk_13_hit
+      - sbk_14_shape
+      - sbk_14_hit
+      - sbk_15_shape
+      - sbk_15_hit
+      - sbk_16_shape
+      - sbk_16_hit
+      - sbk_20_shape
+      - sbk_20_hit
+      - sbk_21_shape
+      - sbk_21_hit
+      - sbk_22_shape
+      - sbk_22_hit
+      - sbk_23_shape
+      - sbk_23_hit
+      - sbk_24_shape
+      - sbk_24_hit
+      - sbk_25_shape
+      - sbk_25_hit
+      - sbk_26_shape
+      - sbk_26_hit
+      - sbk_30_shape
+      - sbk_30_hit
+      - sbk_31_shape
+      - sbk_31_hit
+      - sbk_32_shape
+      - sbk_32_hit
+      - sbk_33_shape
+      - sbk_33_hit
+      - sbk_34_shape
+      - sbk_34_hit
+      - sbk_35_shape
+      - sbk_35_hit
+      - sbk_36_shape
+      - sbk_36_hit
+      - sbk_40_shape
+      - sbk_40_hit
+      - sbk_41_shape
+      - sbk_41_hit
+      - sbk_42_shape
+      - sbk_42_hit
+      - sbk_43_shape
+      - sbk_43_hit
+      - sbk_44_shape
+      - sbk_44_hit
+      - sbk_45_shape
+      - sbk_45_hit
+      - sbk_46_shape
+      - sbk_46_hit
+      - sbk_50_shape
+      - sbk_50_hit
+      - sbk_51_shape
+      - sbk_51_hit
+      - sbk_52_shape
+      - sbk_52_hit
+      - sbk_53_shape
+      - sbk_53_hit
+      - sbk_54_shape
+      - sbk_54_hit
+      - sbk_55_shape
+      - sbk_55_hit
+      - sbk_56_shape
+      - sbk_56_hit
+      - sbk_60_shape
+      - sbk_60_hit
+      - sbk_61_shape
+      - sbk_61_hit
+      - sbk_62_shape
+      - sbk_62_hit
+      - sbk_63_shape
+      - sbk_63_hit
+      - sbk_64_shape
+      - sbk_64_hit
+      - sbk_65_shape
+      - sbk_65_hit
+      - sbk_66_shape
+      - sbk_66_hit
+      - sbk_99_shape
+      - sbk_99_hit
+      - trd_00_shape
+      - trd_00_hit
+      - trd_01_shape
+      - trd_01_hit
+      - trd_02_shape
+      - trd_02_hit
+      - trd_03_shape
+      - trd_03_hit
+      - trd_04_shape
+      - trd_04_hit
+      - trd_05_shape
+      - trd_05_hit
+      - trd_06_shape
+      - trd_06_hit
+      - trd_07_shape
+      - trd_07_hit
+      - trd_08_shape
+      - trd_08_hit
+      - trd_09_shape
+      - trd_09_hit
+      - trd_10_shape
+      - trd_10_hit
+      - tst_01_shape
+      - tst_01_hit
+      - tst_02_shape
+      - tst_02_hit
+      - tst_03_shape
+      - tst_03_hit
+      - tst_04_shape
+      - tst_04_hit
+      - tst_10_shape
+      - tst_10_hit
+      - tst_11_shape
+      - tst_11_hit
+      - tst_12_shape
+      - tst_12_hit
+      - tst_13_shape
+      - tst_13_hit
+      - tst_20_shape
+      - tst_20_hit
+      - jan_00_shape
+      - jan_00_hit
+      - jan_01_shape
+      - jan_01_hit
+      - jan_02_shape
+      - jan_02_hit
+      - jan_03_shape
+      - jan_03_hit
+      - jan_04_shape
+      - jan_04_hit
+      - jan_05_shape
+      - jan_05_hit
+      - jan_06_shape
+      - jan_06_hit
+      - jan_07_shape
+      - jan_07_hit
+      - jan_08_shape
+      - jan_08_hit
+      - jan_09_shape
+      - jan_09_hit
+      - jan_10_shape
+      - jan_10_hit
+      - jan_11_shape
+      - jan_11_hit
+      - jan_12_shape
+      - jan_12_hit
+      - jan_13_shape
+      - jan_13_hit
+      - jan_14_shape
+      - jan_14_hit
+      - jan_15_shape
+      - jan_15_hit
+      - jan_16_shape
+      - jan_16_hit
+      - jan_17_shape
+      - jan_17_hit
+      - jan_18_shape
+      - jan_18_hit
+      - jan_19_shape
+      - jan_19_hit
+      - jan_22_shape
+      - jan_22_hit
+      - jan_23_shape
+      - jan_23_hit
+      - mim_01_shape
+      - mim_01_hit
+      - mim_02_shape
+      - mim_02_hit
+      - mim_03_shape
+      - mim_03_hit
+      - mim_04_shape
+      - mim_04_hit
+      - mim_05_shape
+      - mim_05_hit
+      - mim_06_shape
+      - mim_06_hit
+      - mim_07_shape
+      - mim_07_hit
+      - mim_08_shape
+      - mim_08_hit
+      - mim_09_shape
+      - mim_09_hit
+      - mim_10_shape
+      - mim_10_hit
+      - mim_11_shape
+      - mim_11_hit
+      - mim_12_shape
+      - mim_12_hit
+      - obk_01_shape
+      - obk_01_hit
+      - obk_02_shape
+      - obk_02_hit
+      - obk_03_shape
+      - obk_03_hit
+      - obk_04_shape
+      - obk_04_hit
+      - obk_05_shape
+      - obk_05_hit
+      - obk_06_shape
+      - obk_06_hit
+      - obk_07_shape
+      - obk_07_hit
+      - obk_08_shape
+      - obk_08_hit
+      - obk_09_shape
+      - obk_09_hit
+      - arn_02_shape
+      - arn_02_hit
+      - arn_03_shape
+      - arn_03_hit
+      - arn_04_shape
+      - arn_04_hit
+      - arn_05_shape
+      - arn_05_hit
+      - arn_07_shape
+      - arn_07_hit
+      - arn_08_shape
+      - arn_08_hit
+      - arn_09_shape
+      - arn_09_hit
+      - arn_10_shape
+      - arn_10_hit
+      - arn_11_shape
+      - arn_11_hit
+      - arn_12_shape
+      - arn_12_hit
+      - arn_13_shape
+      - arn_13_hit
+      - arn_20_shape
+      - arn_20_hit
+      - dgb_01_shape
+      - dgb_01_hit
+      - dgb_02_shape
+      - dgb_02_hit
+      - dgb_03_shape
+      - dgb_03_hit
+      - dgb_04_shape
+      - dgb_04_hit
+      - dgb_05_shape
+      - dgb_05_hit
+      - dgb_06_shape
+      - dgb_06_hit
+      - dgb_07_shape
+      - dgb_07_hit
+      - dgb_08_shape
+      - dgb_08_hit
+      - dgb_09_shape
+      - dgb_09_hit
+      - dgb_10_shape
+      - dgb_10_hit
+      - dgb_11_shape
+      - dgb_11_hit
+      - dgb_12_shape
+      - dgb_12_hit
+      - dgb_13_shape
+      - dgb_13_hit
+      - dgb_14_shape
+      - dgb_14_hit
+      - dgb_15_shape
+      - dgb_15_hit
+      - dgb_16_shape
+      - dgb_16_hit
+      - dgb_17_shape
+      - dgb_17_hit
+      - dgb_18_shape
+      - dgb_18_hit
+      - kzn_01_shape
+      - kzn_01_hit
+      - kzn_02_shape
+      - kzn_02_hit
+      - kzn_03_shape
+      - kzn_03_hit
+      - kzn_04_shape
+      - kzn_04_hit
+      - kzn_05_shape
+      - kzn_05_hit
+      - kzn_06_shape
+      - kzn_06_hit
+      - kzn_07_shape
+      - kzn_07_hit
+      - kzn_08_shape
+      - kzn_08_hit
+      - kzn_09_shape
+      - kzn_09_hit
+      - kzn_10_shape
+      - kzn_10_hit
+      - kzn_11_shape
+      - kzn_11_hit
+      - kzn_17_shape
+      - kzn_17_hit
+      - kzn_18_shape
+      - kzn_18_hit
+      - kzn_19_shape
+      - kzn_19_hit
+      - kzn_20_shape
+      - kzn_20_hit
+      - kzn_22_shape
+      - kzn_22_hit
+      - kzn_23_shape
+      - kzn_23_hit
+      - flo_00_shape
+      - flo_00_hit
+      - flo_03_shape
+      - flo_03_hit
+      - flo_07_shape
+      - flo_07_hit
+      - flo_08_shape
+      - flo_08_hit
+      - flo_09_shape
+      - flo_09_hit
+      - flo_10_shape
+      - flo_10_hit
+      - flo_11_shape
+      - flo_11_hit
+      - flo_12_shape
+      - flo_12_hit
+      - flo_13_shape
+      - flo_13_hit
+      - flo_14_shape
+      - flo_14_hit
+      - flo_15_shape
+      - flo_15_hit
+      - flo_16_shape
+      - flo_16_hit
+      - flo_17_shape
+      - flo_17_hit
+      - flo_18_shape
+      - flo_18_hit
+      - flo_19_shape
+      - flo_19_hit
+      - flo_21_shape
+      - flo_21_hit
+      - flo_22_shape
+      - flo_22_hit
+      - flo_23_shape
+      - flo_23_hit
+      - flo_24_shape
+      - flo_24_hit
+      - flo_25_shape
+      - flo_25_hit
+      - sam_01_shape
+      - sam_01_hit
+      - sam_02_shape
+      - sam_02_hit
+      - sam_03_shape
+      - sam_03_hit
+      - sam_04_shape
+      - sam_04_hit
+      - sam_05_shape
+      - sam_05_hit
+      - sam_06_shape
+      - sam_06_hit
+      - sam_07_shape
+      - sam_07_hit
+      - sam_08_shape
+      - sam_08_hit
+      - sam_09_shape
+      - sam_09_hit
+      - sam_10_shape
+      - sam_10_hit
+      - sam_11_shape
+      - sam_11_hit
+      - sam_12_shape
+      - sam_12_hit
+      - pra_01_shape
+      - pra_01_hit
+      - pra_02_shape
+      - pra_02_hit
+      - pra_03_shape
+      - pra_03_hit
+      - pra_04_shape
+      - pra_04_hit
+      - pra_05_shape
+      - pra_05_hit
+      - pra_09_shape
+      - pra_09_hit
+      - pra_10_shape
+      - pra_10_hit
+      - pra_11_shape
+      - pra_11_hit
+      - pra_13_shape
+      - pra_13_hit
+      - pra_14_shape
+      - pra_14_hit
+      - pra_15_shape
+      - pra_15_hit
+      - pra_16_shape
+      - pra_16_hit
+      - pra_18_shape
+      - pra_18_hit
+      - pra_19_shape
+      - pra_19_hit
+      - pra_20_shape
+      - pra_20_hit
+      - pra_21_shape
+      - pra_21_hit
+      - pra_22_shape
+      - pra_22_hit
+      - pra_29_shape
+      - pra_29_hit
+      - pra_31_shape
+      - pra_31_hit
+      - pra_32_shape
+      - pra_32_hit
+      - pra_33_shape
+      - pra_33_hit
+      - pra_34_shape
+      - pra_34_hit
+      - pra_35_shape
+      - pra_35_hit
+      - pra_40_shape
+      - pra_40_hit
+      - omo_01_shape
+      - omo_01_hit
+      - omo_02_shape
+      - omo_02_hit
+      - omo_03_shape
+      - omo_03_hit
+      - omo_04_shape
+      - omo_04_hit
+      - omo_05_shape
+      - omo_05_hit
+      - omo_06_shape
+      - omo_06_hit
+      - omo_07_shape
+      - omo_07_hit
+      - omo_08_shape
+      - omo_08_hit
+      - omo_09_shape
+      - omo_09_hit
+      - omo_10_shape
+      - omo_10_hit
+      - omo_11_shape
+      - omo_11_hit
+      - omo_12_shape
+      - omo_12_hit
+      - omo_13_shape
+      - omo_13_hit
+      - omo_14_shape
+      - omo_14_hit
+      - omo_15_shape
+      - omo_15_hit
+      - omo_16_shape
+      - omo_16_hit
+      - omo_17_shape
+      - omo_17_hit
+      - end_00_shape
+      - end_00_hit
+      - end_01_shape
+      - end_01_hit
+      - mgm_00_shape
+      - mgm_00_hit
+      - mgm_01_shape
+      - mgm_01_hit
+      - mgm_02_shape
+      - mgm_02_hit
+      - mgm_03_shape
+      - mgm_03_hit
+      - gv_01_shape
+      - gv_01_hit
+      - kmr_bt03_shape
+      - kmr_bt03_hit
+      - kmr_bt04_shape
+      - kmr_bt04_hit
+      - kmr_bt05_shape
+      - kmr_bt05_hit
+      - kmr_bt06_shape
+      - kmr_bt06_hit
+      - nok_bt01_shape
+      - nok_bt01_hit
+      - nok_bt02_shape
+      - nok_bt02_hit
+      - nok_bt03_shape
+      - nok_bt03_hit
+      - nok_bt04_shape
+      - nok_bt04_hit
+      - trd_bt00_shape
+      - trd_bt00_hit
+      - trd_bt01_shape
+      - trd_bt01_hit
+      - trd_bt02_shape
+      - trd_bt02_hit
+      - trd_bt03_shape
+      - trd_bt03_hit
+      - trd_bt04_shape
+      - trd_bt04_hit
+      - trd_bt05_shape
+      - trd_bt05_hit
+      - iwa_bt01_shape
+      - iwa_bt01_hit
+      - iwa_bt02_shape
+      - iwa_bt02_hit
+      - sbk_bt02_shape
+      - sbk_bt02_hit
+      - isk_bt01_shape
+      - isk_bt01_hit
+      - isk_bt02_shape
+      - isk_bt02_hit
+      - isk_bt03_shape
+      - isk_bt03_hit
+      - isk_bt04_shape
+      - isk_bt04_hit
+      - isk_bt05_shape
+      - isk_bt05_hit
+      - isk_bt06_shape
+      - isk_bt06_hit
+      - isk_bt07_shape
+      - isk_bt07_hit
+      - isk_bt08_shape
+      - isk_bt08_hit
+      - arn_bt01_shape
+      - arn_bt01_hit
+      - arn_bt02_shape
+      - arn_bt02_hit
+      - arn_bt03_shape
+      - arn_bt03_hit
+      - arn_bt04_shape
+      - arn_bt04_hit
+      - arn_bt05_shape
+      - arn_bt05_hit
+      - arn_bt06_shape
+      - arn_bt06_hit
+      - dgb_bt01_shape
+      - dgb_bt01_hit
+      - dgb_bt02_shape
+      - dgb_bt02_hit
+      - dgb_bt03_shape
+      - dgb_bt03_hit
+      - dgb_bt04_shape
+      - dgb_bt04_hit
+      - dgb_bt05_shape
+      - dgb_bt05_hit
+      - mim_bt01_shape
+      - mim_bt01_hit
+      - omo_bt01_shape
+      - omo_bt01_hit
+      - omo_bt02_shape
+      - omo_bt02_hit
+      - omo_bt03_shape
+      - omo_bt03_hit
+      - omo_bt04_shape
+      - omo_bt04_hit
+      - omo_bt05_shape
+      - omo_bt05_hit
+      - omo_bt06_shape
+      - omo_bt06_hit
+      - omo_bt07_shape
+      - omo_bt07_hit
+      - kgr_bt01_shape
+      - kgr_bt01_hit
+      - flo_bt01_shape
+      - flo_bt01_hit
+      - flo_bt02_shape
+      - flo_bt02_hit
+      - flo_bt03_shape
+      - flo_bt03_hit
+      - flo_bt04_shape
+      - flo_bt04_hit
+      - flo_bt05_shape
+      - flo_bt05_hit
+      - flo_bt06_shape
+      - flo_bt06_hit
+      - jan_bt00_shape
+      - jan_bt00_hit
+      - jan_bt01_shape
+      - jan_bt01_hit
+      - jan_bt02_shape
+      - jan_bt02_hit
+      - jan_bt03_shape
+      - jan_bt03_hit
+      - jan_bt04_shape
+      - jan_bt04_hit
+      - kzn_bt01_shape
+      - kzn_bt01_hit
+      - kzn_bt02_shape
+      - kzn_bt02_hit
+      - kzn_bt04_shape
+      - kzn_bt04_hit
+      - kzn_bt05_shape
+      - kzn_bt05_hit
+      - sam_bt01_shape
+      - sam_bt01_hit
+      - sam_bt02_shape
+      - sam_bt02_hit
+      - sam_bt03_shape
+      - sam_bt03_hit
+      - sam_bt04_shape
+      - sam_bt04_hit
+      - tik_bt01_shape
+      - tik_bt01_hit
+      - tik_bt02_shape
+      - tik_bt02_hit
+      - tik_bt03_shape
+      - tik_bt03_hit
+      - tik_bt04_shape
+      - tik_bt04_hit
+      - tik_bt05_shape
+      - tik_bt05_hit
+      - pra_bt01_shape
+      - pra_bt01_hit
+      - pra_bt02_shape
+      - pra_bt02_hit
+      - pra_bt03_shape
+      - pra_bt03_hit
+      - pra_bt04_shape
+      - pra_bt04_hit
+      - mac_bt01_shape
+      - mac_bt01_hit
+      - mac_bt02_shape
+      - mac_bt02_hit
+      - kpa_bt01_shape
+      - kpa_bt01_hit
+      - kpa_bt02_shape
+      - kpa_bt02_hit
+      - kpa_bt03_shape
+      - kpa_bt03_hit
+      - kpa_bt04_shape
+      - kpa_bt04_hit
+      - kpa_bt05_shape
+      - kpa_bt05_hit
+      - kpa_bt07_shape
+      - kpa_bt07_hit
+      - kpa_bt08_shape
+      - kpa_bt08_hit
+      - kpa_bt09_shape
+      - kpa_bt09_hit
+      - kpa_bt11_shape
+      - kpa_bt11_hit
+      - kpa_bt13_shape
+      - kpa_bt13_hit
+      - kpa_bt14_shape
+      - kpa_bt14_hit
+      - hos_bt01_shape
+      - hos_bt01_hit
+      - hos_bt02_shape
+      - hos_bt02_hit
+      - kkj_bt01_shape
+      - kkj_bt01_hit
+      - kkj_bt02_shape
+      - kkj_bt02_hit
+      - mac_tex
+      - tik_tex
+      - kgr_tex
+      - kmr_tex
+      - iwa_tex
+      - sbk_tex
+      - dro_tex
+      - isk_tex
+      - trd_tex
+      - nok_tex
+      - hos_tex
+      - kpa_tex
+      - osr_tex
+      - kkj_tex
+      - tst_tex
+      - jan_tex
+      - mim_tex
+      - obk_tex
+      - arn_tex
+      - dgb_tex
+      - kzn_tex
+      - flo_tex
+      - sam_tex
+      - pra_tex
+      - omo_tex
+      - end_tex
+      - mgm_tex
+      - gv__tex
+      - kmr_bg
+      - nok_bg
+      - sbk_bg
+      - sbk3_bg
+      - iwa_bg
+      - hos_bg
+      - arn_bg
+      - obk_bg
+      - omo_bg
+      - yos_bg
+      - jan_bg
+      - fla_bg
+      - flb_bg
+      - sra_bg
+      - yki_bg
+      - sam_bg
+      - kpa_bg
+      - title_bg
+      - title_data
+      - party_kurio
+      - party_kameki
+      - party_pinki
+      - party_pareta
+      - party_resa
+      - party_akari
+      - party_opuku
+      - party_pokopi
   - type: bin
     start: 0x27FEE22
     subalign: 2

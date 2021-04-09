@@ -8,9 +8,9 @@ s32 proutSprintf();
 char spaces[] = "                                ";
 char zeroes[] = "00000000000000000000000000000000";
 
-INCLUDE_ASM(s32, "os/code_3FEA0", _Printf);
+INCLUDE_ASM(s32, "os/3FEA0", _Printf);
 
-INCLUDE_ASM(s32, "os/code_3FEA0", _Putfld);
+INCLUDE_ASM(s32, "os/3FEA0", _Putfld);
 
 int sprintf(char* s, const char* fmt, ...) {
     s32 ret;
@@ -28,4 +28,4 @@ int sprintf(char* s, const char* fmt, ...) {
 }
 
 
-INCLUDE_ASM(s32, "os/code_3FEA0", proutSprintf);
+INCLUDE_ASM(s32, "os/3FEA0", proutSprintf);

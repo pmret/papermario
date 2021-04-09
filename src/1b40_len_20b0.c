@@ -176,12 +176,12 @@ void load_engine_data(void) {
     GameStatus** gameStatus = &gGameStatusPtr;
     s32 i;
 
-    dma_copy(&code_code_FEE30_ROM_START, &code_code_FEE30_ROM_END, &code_code_FEE30_VRAM);
-    dma_copy(&code_code_759B0_ROM_START, &code_code_759B0_ROM_END, &code_code_759B0_VRAM);
-    dma_copy(&code_code_E79B0_ROM_START, &code_code_E79B0_ROM_END, &code_code_E79B0_VRAM);
-    dma_copy(&code_code_102610_ROM_START, &code_code_102610_ROM_END, &code_code_102610_VRAM);
-    dma_copy(&code_code_A5DD0_ROM_START, &code_code_A5DD0_ROM_END, &code_code_A5DD0_VRAM);
-    dma_copy(&code_code_10CC10_ROM_START, &code_code_10CC10_ROM_END, &code_code_10CC10_VRAM);
+    dma_copy(FEE30_ROM_START, FEE30_ROM_END, FEE30_VRAM);
+    dma_copy(_759B0_ROM_START, _759B0_ROM_END, _759B0_VRAM);
+    dma_copy(E79B0_ROM_START, E79B0_ROM_END, E79B0_VRAM);
+    dma_copy(_102610_ROM_START, _102610_ROM_END, _102610_VRAM);
+    dma_copy(A5DD0_ROM_START, A5DD0_ROM_END, A5DD0_VRAM);
+    dma_copy(_10CC10_ROM_START, _10CC10_ROM_END, _10CC10_VRAM);
 
     gOverrideFlags = 0;
     (*gameStatus)->unk_79 = 0;

@@ -23,10 +23,10 @@ s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 // TODO the gPauseMenuHeldButtons should be BSS_START
 // TODO 80278640 is BSS_END
 NUPiOverlaySegment D_8007795C = {
-    .romStart = &code_code_135EE0_ROM_START,
-    .romEnd = &code_code_135EE0_ROM_END,
-    .ramStart = &code_code_135EE0_VRAM,
-    .textStart = &code_code_135EE0_VRAM,
+    .romStart = pause_ROM_START,
+    .romEnd = pause_ROM_END,
+    .ramStart = pause_VRAM,
+    .textStart = pause_VRAM,
     .textEnd = gPauseMenuIconScripts,
     .dataStart = gPauseMenuIconScripts,
     .dataEnd = &gPauseMenuHeldButtons,
@@ -54,8 +54,8 @@ void state_init_logos(void) {
     intro_logos_set_fade_alpha(255);
     intro_logos_set_fade_color(0);
 
-    romEnd = &code_code_1FE1B0_ROM_END;
-    romStart = &code_code_1FE1B0_ROM_START;
+    romEnd = logos_ROM_END;
+    romStart = logos_ROM_START;
     logoRam = heap_malloc(romEnd - romStart);
 
     temp_800A0910 = &D_800A0910;
@@ -363,7 +363,7 @@ void state_step_pause(void) {
                     clear_entity_models();
                     func_8011E224();
                     clear_dynamic_entity_list();
-                    func_801452E8(&code_code_3169F0_VRAM, 0x38000);
+                    func_801452E8(_3169F0_VRAM, 0x38000);
                     func_80141100();
                     reset_status_menu();
                     clear_item_entity_data();

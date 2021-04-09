@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-from typing import List, Dict, Set
+from typing import List, Dict, Set, Union
 from pathlib import Path
 import sys
 import ninja_syntax
+from glob import glob
 
 VERSIONS = ["us", "jp"]
 ROOT = Path(__file__).parent.parent.parent
-
-YAY0_COMPRESS_TOOL = "tools/build/yay0/Yay0compress"
-CRC_TOOL = "tools/build/rom/n64crc"
+BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
+YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
+CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 def rm_recursive(path: Path):
     if path.exists():
@@ -48,16 +49,31 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.variable("python", sys.executable)
 
+    ninja.rule("ld",
+        description="link($version) $out",
+        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+    )
+
+    ninja.rule("z64",
+        description="rom $out",
+        command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
+    )
+
+    ninja.rule("sha1sum",
+        description="check",
+        command=f"sha1sum -c $in && touch $out",
+    )
+
     ninja.rule("cc",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | tools/build/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -o - | tools/build/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -w -Wuninitialized -Wshadow -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python tools/build/cc_dsl/compile_script.py | {iconv} | tools/build/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -o - | tools/build/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -w -Wuninitialized -Wshadow -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -74,22 +90,47 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("img",
         description="img($img_type) $in",
-        command=f"tools/build/img/build.py $img_type $in $out $img_flags",
+        command=f"$python {BUILD_TOOLS}/img/build.py $img_type $in $out $img_flags",
     )
 
-    ninja.rule("ld",
-        description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+    ninja.rule("img_header",
+        description="img_header $in",
+        command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
     )
 
-    ninja.rule("z64",
-        description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary && tools/build/rom/n64crc $out",
+    ninja.rule("yay0",
+        description="yay0 $in",
+        command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
     )
 
-    ninja.rule("sha1sum",
-        description="check",
-        command=f"sha1sum -c $in && touch $out",
+    ninja.rule("sprite",
+        description="sprite $sprite_name",
+        command=f"$python {BUILD_TOOLS}/sprites/sprite.py $out $sprite_dir",
+    )
+
+    ninja.rule("sprite_combine",
+        description="sprite_combine $in",
+        command=f"$python {BUILD_TOOLS}/sprites/combine.py $out $in",
+    )
+
+    ninja.rule("sprite_header",
+        description="sprite_header $sprite_name",
+        command=f"$python {BUILD_TOOLS}/sprites/header.py $out $sprite_dir $sprite_id",
+    )
+
+    ninja.rule("msg",
+        description="msg $in",
+        command=f"$python {BUILD_TOOLS}/msg/parse_compile.py $in $out",
+    )
+
+    ninja.rule("msg_combine",
+        description="msg_combine $out",
+        command=f"$python {BUILD_TOOLS}/msg/combine.py $out $in",
+    )
+
+    ninja.rule("mapfs",
+        description="mapfs $out",
+        command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
     )
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
@@ -98,8 +139,8 @@ def write_ninja_for_tools(ninja: ninja_syntax.Writer):
         command=f"cc $in -O3 -o $out",
     )
 
-    ninja.build(YAY0_COMPRESS_TOOL, "cc_tool", "tools/build/yay0/Yay0compress.c")
-    ninja.build(CRC_TOOL, "cc_tool", "tools/build/rom/n64crc.c")
+    ninja.build(YAY0_COMPRESS_TOOL, "cc_tool", f"{BUILD_TOOLS}/yay0/Yay0compress.c")
+    ninja.build(CRC_TOOL, "cc_tool", f"{BUILD_TOOLS}/rom/n64crc.c")
 
 class Configure:
     def __init__(self, version: str):
@@ -121,8 +162,11 @@ class Configure:
             None,
             str(self.version_path / "baserom.z64"),
             modes,
-            verbose=True,
+            verbose=False,
         ).entries
+
+    def build_path(self) -> Path:
+        return Path(f"ver/{self.version}/build")
 
     def elf_path(self) -> Path:
         # TODO: read basename and build_path from splat.yaml
@@ -141,27 +185,64 @@ class Configure:
     def map_path(self) -> Path:
         return self.elf_path().with_suffix(".map")
 
-    def write_ninja(self, ninja: ninja_syntax.Writer, skip_objects: Set[str]) -> Set[str]:
+    def resolve_src_paths(self, src_paths: List[Path]) -> List[str]:
+        out = []
+
+        for path in src_paths:
+            if path.parents[0] == "assets":
+                # TODO resolve asset
+                pass
+
+            if path.is_dir():
+                out.extend(glob(str(path) + "/**/*", recursive=True))
+            else:
+                out.append(str(path))
+
+        return out
+
+    def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
 
         assert self.linker_entries is not None
 
         built_objects = set()
+        generated_headers = []
 
-        def build(entry, task: str, variables: Dict[str, str] = {}):
-            if str(entry.object_path) in skip_objects:
-                pass
-            else:
-                built_objects.add(str(entry.object_path))
+        def build(object_paths: Union[Path, List[Path]], src_paths: List[Path], task: str, variables: Dict[str, str] = {}):
+            if not isinstance(object_paths, list):
+                object_paths = [object_paths]
 
-                # TODO: asset src paths
+            object_strs = [str(obj) for obj in object_paths]
+            needs_build = False
+
+            for object_path in object_paths:
+                if object_path.suffixes[-1] == ".o":
+                    built_objects.add(str(object_path))
+                elif object_path.suffixes[-1] == ".h":
+                    generated_headers.append(str(object_path))
+
+                # don't rebuild objects if we've already seen all of them
+                if not str(object_path) in skip_outputs:
+                    needs_build = True
+
+            if needs_build:
+                skip_outputs.update(object_strs)
+
+                implicit = []
+                order_only = []
+
+                if task == "yay0":
+                    implicit.append(YAY0_COMPRESS_TOOL)
+                elif task == "cc" or task == "cc_dsl":
+                    order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
-                    str(entry.object_path), # $out
+                    object_strs, # $out
                     task,
-                    [str(p) for p in entry.src_paths], # $in
+                    self.resolve_src_paths(src_paths), # $in
                     variables={ "version": self.version, **variables },
-                    implicit=[YAY0_COMPRESS_TOOL],
+                    implicit=implicit,
+                    order_only=order_only,
                 )
 
         # Build objects
@@ -169,35 +250,120 @@ class Configure:
             subseg = entry.segment_or_subsegment
 
             if isinstance(subseg, segtypes.n64.header.N64SegHeader):
-                build(entry, "as")
+                build(entry.object_path, entry.src_paths, "as")
             elif isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type in ["asm", "hasm", "data", "rodata", "bss"]:
-                build(entry, "as")
+                build(entry.object_path, entry.src_paths, "as")
             elif (isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c") or (isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type.startswith(".")):
-                build(entry, "cc_dsl") # TODO: don't use dsl for everything
+                build(entry.object_path, entry.src_paths, "cc_dsl") # TODO: don't use dsl for everything
             elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
-                build(entry, "bin")
+                build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(subseg, segtypes.n64.Yay0.N64SegYay0):
-                build(entry, "yay0")
+                compressed_path = entry.object_path.with_suffix("") # remove .o
+                build(compressed_path, entry.src_paths, "yay0")
+                build(entry.object_path, [compressed_path], "bin")
             elif isinstance(subseg, segtypes.n64.img.N64SegImg):
                 flags = ""
                 if subseg.flip_horizontal:
                     flags += "--flip-x "
                 if subseg.flip_vertical:
                     flags += "--flip-y "
-                build(entry, "img", variables={
+
+                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
                     "img_type": subseg.type,
                     "img_flags": flags,
                 })
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+
+                build(self.build_path() / "include" / subseg.dir / (subseg.name + ".png.h"), entry.src_paths, "img_header")
             elif isinstance(subseg, segtypes.n64.palette.N64SegPalette):
-                build(entry, "img", variables={
+                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
                     "img_type": subseg.type,
                     "img_flags": "",
                 })
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif isinstance(subseg, segtypes.n64.code.ImageSubsegment):
-                build(entry, "img", variables={
+                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
                     "img_type": subseg.type,
                     "img_flags": "",
                 })
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+
+                if subseg.type != "palette":
+                    build(self.build_path() / "include" / subseg.dir / (subseg.name + ".png.h"), entry.src_paths, "img_header")
+            elif subseg.type == "PaperMarioNpcSprites":
+                sprite_bins = []
+
+                for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
+                    sprite_name = sprite_dir.name
+
+                    bin_path = entry.object_path.with_suffix("") / (sprite_name + ".bin")
+                    sprite_bins.append(bin_path)
+
+                    variables = {
+                        "sprite_id": sprite_id,
+                        "sprite_name": sprite_name,
+                        "sprite_dir": str(sprite_dir),
+                    }
+
+                    build(bin_path, [sprite_dir], "sprite", variables=variables)
+                    build(
+                        self.build_path() / "include" / subseg.dir / subseg.name / (sprite_name + ".h"),
+                        [sprite_dir],
+                        "sprite_header",
+                        variables=variables,
+                    )
+
+                build(entry.object_path.with_suffix(".bin"), sprite_bins, "sprite_combine")
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+            elif subseg.type == "PaperMarioMessages":
+                msg_bins = []
+
+                for section_idx, msg_path in enumerate(entry.src_paths):
+                    bin_path = entry.object_path.with_suffix("") / f"{section_idx:02X}.bin"
+                    msg_bins.append(bin_path)
+                    build(bin_path, [msg_path], "msg")
+
+                build([
+                    entry.object_path.with_suffix(".bin"),
+                    self.build_path() / "include" / "message_ids.h",
+                ], msg_bins, "msg_combine")
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+            elif subseg.type == "PaperMarioMapFS":
+                bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
+
+                for path in entry.src_paths:
+                    bin_path = entry.object_path.with_suffix("") / f"{path.name}.bin"
+
+                    if path.name.startswith("party_"):
+                        compress = True
+                        build(bin_path, [path], "img", variables={
+                            "img_type": "party",
+                            "img_flags": "",
+                        })
+                    elif path.name.endswith("_bg"):
+                        compress = True
+                        build(bin_path, [path], "img", variables={
+                            "img_type": "bg",
+                            "img_flags": "",
+                        })
+                    elif path.name.endswith("_tex"):
+                        compress = False
+                    else:
+                        compress = True
+                        bin_path = path
+
+                    if compress:
+                        yay0_path = bin_path.with_suffix(".Yay0")
+                        build(yay0_path, [bin_path], "yay0")
+                    else:
+                        yay0_path = bin_path
+
+                    bin_yay0s.append(bin_path)
+                    bin_yay0s.append(yay0_path)
+
+                # combine
+                build(entry.object_path.with_suffix(".bin"), bin_yay0s, "mapfs")
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             else:
                 raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
 
@@ -222,7 +388,7 @@ class Configure:
             implicit=[str(self.rom_path())],
         )
 
-        return built_objects
+        ninja.build("generated_headers_" + self.version, "phony", generated_headers)
 
     def make_current(self, ninja: ninja_syntax.Writer):
         current = Path("ver/current")
@@ -246,6 +412,8 @@ if __name__ == "__main__":
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
     args = parser.parse_args()
+
+    exec_shell(["make", "-C", str(ROOT / args.splat)])
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in shell("cpp --version"):
@@ -277,9 +445,12 @@ if __name__ == "__main__":
             exit(1)
 
     if args.clean:
+        print("configure: cleaning...")
+
         exec_shell(["ninja", "-t", "clean"])
 
         for version in versions:
+            rm_recursive(ROOT / f"assets/{version}")
             rm_recursive(ROOT / f"ver/{version}/assets")
             rm_recursive(ROOT / f"ver/{version}/build")
             rm_recursive(ROOT / f"ver/{version}/.splat_cache")
@@ -292,7 +463,7 @@ if __name__ == "__main__":
     write_ninja_rules(ninja, args.cpp or "cpp")
     write_ninja_for_tools(ninja)
 
-    built_objects = set() # tracks non-version-specific objects that have been set to be built
+    skip_files = set()
     all_rom_oks: List[str] = []
 
     for version in versions:
@@ -301,7 +472,7 @@ if __name__ == "__main__":
         configure = Configure(version)
 
         configure.split(not args.no_splat, False)
-        built_objects.update(configure.write_ninja(ninja, built_objects))
+        configure.write_ninja(ninja, skip_files)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
