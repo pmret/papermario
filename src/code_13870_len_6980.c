@@ -270,22 +270,33 @@ void func_8003CFA0(void) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CFA8);
 
-Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 minDistance) {
+/// Finds the closest NPC to a given point within a radius. Ignores Y position.
+///
+/// NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are ignored.
+/// See also func_8003D0C4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be set.
+///
+/// @param x        X position
+/// @param y        Y position (unused)
+/// @param z        Z position
+/// @param radius   No NPCs further than this distance will be considered
+///
+/// @returns NULL if not found
+Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius) {
     Npc* closestNpc = NULL;
-    f32 closestDistance = minDistance;
-    f32 minDistance2 = minDistance;
+    f32 closestDist = radius;
+    f32 maxDist = radius;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_4000000)) {
+        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_SIMPLE_XZ_HITBOX)) {
             if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
-                if (distance <= minDistance2) {
-                    if (distance < closestDistance) {
-                        closestDistance = distance;
+                if (distance <= maxDist) {
+                    if (distance < closestDist) {
+                        closestDist = distance;
                         closestNpc = npc;
                     }
                 }
@@ -296,7 +307,41 @@ Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 minDistance) {
     return closestNpc;
 }
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003D0C4);
+/// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
+///
+/// Only NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are considered.
+/// See also func_8003CFB4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be unset.
+///
+/// @param x        X position
+/// @param y        Y position (unused)
+/// @param z        Z position
+/// @param radius   No NPCs further than this distance will be considered
+/// @returns NULL if not found
+Npc* func_8003D0C4(f32 x, f32 y, f32 z, f32 radius) {
+    Npc* closestNpc = NULL;
+    f32 closestDist = radius;
+    f32 maxDist = radius;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+        Npc* npc = (*gCurrentNpcListPtr)[i];
+
+        if (npc != NULL && npc->flags != 0 && (npc->flags & NPC_FLAG_SIMPLE_XZ_HITBOX)) {
+            if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
+                f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
+
+                if (distance <= maxDist) {
+                    if (distance < closestDist) {
+                        closestDist = distance;
+                        closestNpc = npc;
+                    }
+                }
+            }
+        }
+    }
+
+    return closestNpc;
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003D1D4);
 
