@@ -50,7 +50,7 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240B4C_AF849C);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240B8C_AF84DC);
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240BE4_AF8534);
+#include "world/common/UnkFunc30.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240C10_AF8560);
 

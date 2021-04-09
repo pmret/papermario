@@ -222,20 +222,146 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242270_802AF0);
 #include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802425FC_802E7C);
+/*
+ApiStatus N(func_802425FC_802E7C)(ScriptInstance *script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    u16 quizzesAnswered = gPlayerData.quizzesAnswered;
+
+    if (quizzesAnswered < 0x3E7) {
+        playerData->quizzesAnswered++;
+    }
+
+    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
+        script->varTable[0] = 1;
+        playerData->quizzesCorrect++;
+    } else {
+        script->varTable[0] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242680_802F00);
+/*
+ApiStatus N(func_80242680_802F00)(ScriptInstance *script, s32 isInitialCall) {
+    EffectInstanceDataThing* effectPtr;
+
+    if (isInitialCall) {
+        Effect** effect = &D_8024DFE0;
+
+        *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+
+        effectPtr = (*effect)->unk_0C;
+        effectPtr->unk_18 = 0;
+        effectPtr->unk_20 = 0;
+        effectPtr->unk_24.s = 0;
+        effectPtr->unk_28 = 0;
+        effectPtr->unk_1C = 0;
+    }
+
+    effectPtr = D_8024DFE0->unk_0C;
+
+    effectPtr->unk_20 += 10;
+    effectPtr->unk_28 += 10;
+    effectPtr->unk_24.s += 10;
+    effectPtr->unk_18 += 10;
+    effectPtr->unk_1C += 10;
+    if (effectPtr->unk_18 >= 255) {
+        effectPtr->unk_18 = 255;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242898_803118);
+/*
+ApiStatus N(func_80242898_803118)(ScriptInstance *script, s32 isInitialCall) {
+    EffectInstanceDataThing* effectPtr;
+
+    if (isInitialCall) {
+        D_8024DFE4->flags |= 0x10;
+        D_8024DFE8->flags |= 0x10;
+    }
+
+    effectPtr = D_8024DFE0->unk_0C;
+    effectPtr->unk_18 -= 10;
+    effectPtr->unk_20 -= 10;
+    effectPtr->unk_24.s -= 10;
+    effectPtr->unk_28 -= 10;
+    effectPtr->unk_1C -= 10;
+
+    if (effectPtr->unk_18 <= 0) {
+        effectPtr->unk_18 = 0;
+        remove_effect(D_8024DFE0, effectPtr);
+        func_801235C0(D_8024DFC0);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_8024294C_8031CC);
+/*
+ApiStatus N(func_8024294C_8031CC)(ScriptInstance *script, s32 isInitialCall) {
+    D_8024DFE0->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242980_803200);
+/*
+ApiStatus N(func_80242980_803200)(ScriptInstance *script, s32 isInitialCall) {
+    s32 var = get_variable(script, *script->ptrReadPos);
+    EffectInstanceDataThing* effectPtr = D_8024DFE0->unk_0C;
+
+    switch (var) {
+        case 0:
+            effectPtr->unk_38 = 0xC0;
+            break;
+        case 1:
+            effectPtr->unk_38 = 0x80;
+            break;
+        case 2:
+            effectPtr->unk_38 = 0x40;
+            break;
+        default:
+            effectPtr->unk_38 = 0;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A00_803280);
+/*
+ApiStatus N(func_80242A00_803280)(ScriptInstance *script, s32 isInitialCall) {
+    D_8024DFE8->unk_0C->unk_1C = 0;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A18_803298);
+/*
+ApiStatus N(func_80242A18_803298)(ScriptInstance *script, s32 isInitialCall) {
+    D_8024DFE8->unk_0C->unk_1C = 1;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
+/*
+ApiStatus N(func_80242A34_8032B4)(ScriptInstance *script, s32 isInitialCall) {
+    D_8024DFE8->unk_0C->unk_1C = 2;
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/GetGameStatus75.inc.c"
 
@@ -250,8 +376,25 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242A34_8032B4);
 #include "world/common/UnkPartnerFuncs.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F08_803788);
+/*
+void N(func_80242F08_803788)(void) {
+    s32 var = get_variable(NULL, D_8024DFD8);
+
+    if (var == 1) {
+        func_80071690(0, 0, 0, 0);
+    } else if (var == 2) {
+        func_80071690(1, 0, 0, 0);
+    }
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
+/*
+ApiStatus N(func_80242F74_8037F4)(ScriptInstance *script, s32 isInitialCall) {
+    D_8024DFC0 = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242FA4_803824);
 
@@ -334,8 +477,23 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
 #include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80244078_8048F8);
+/*
+ApiStatus N(func_80244078_8048F8)(ScriptInstance *script, s32 isInitialCall) {
+    Npc *npc = get_npc_unsafe(script->varTable[2]);
+
+    D_8024E1B4 = npc->currentAnim;
+    npc->currentAnim = script->varTable[4];
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802440BC_80493C);
+/*
+ApiStatus N(func_802440BC_80493C)(ScriptInstance *script, s32 isInitialCall) {
+    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/GetPlayerCoins.inc.c"
 

@@ -213,7 +213,22 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242244_D220D4);
 #include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_802424C8_D22358);
+/*
+ApiStatus N(func_802424C8_D22358)(ScriptInstance *script, s32 isInitialCall) {
+    Npc *npc = get_npc_unsafe(script->varTable[2]);
+
+    D_8024E1B4 = npc->currentAnim;
+    npc->currentAnim = script->varTable[4];
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_8024250C_D2239C);
+/*
+ApiStatus N(func_8024250C_D2239C)(ScriptInstance *script, s32 isInitialCall) {
+    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242538_D223C8);

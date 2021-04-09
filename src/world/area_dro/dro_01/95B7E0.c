@@ -1461,7 +1461,7 @@ Script N(init_802484E0) = SCRIPT({
 
 Script N(80248504) = SCRIPT({
     loop {
-        N(func_8024309C_95E29C)(SI_VAR(0));
+        N(UnkFunc30)(SI_VAR(0));
         if (SI_VAR(0) == 8) {
             break loop;
         }
@@ -3664,12 +3664,7 @@ ApiStatus N(func_80243084_95E284)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024309C_95E29C)(ScriptInstance *script, s32 isInitialCall) {
-    CollisionStatus* collisionStatus = &gCollisionStatus;
-
-    set_variable(script, *script->ptrReadPos, collisionStatus->currentFloor);
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc30.inc.c"
 
 void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;

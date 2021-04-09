@@ -35,7 +35,12 @@ ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240710_A57BC0);
+ApiStatus N(UnkFunc30)(ScriptInstance *script, s32 isInitialCall) {
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+
+    set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_8024073C_A57BEC);
 
