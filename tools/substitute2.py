@@ -1,27 +1,33 @@
 from pathlib import Path
 
-FUNC="""    CollisionStatus* collisionStatus = &gCollisionStatus;
-    s32 stickX, stickY;
+FUNC="""    Bytecode *args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    s32 var4 = get_variable(script, *args++);
+    s32 var5 = get_variable(script, *args++);
+    s32 var6 = get_variable(script, *args++);
+    s32 var7 = get_variable(script, *args++);
+    s32 var8 = get_variable(script, *args++);
+    s32 var9 = get_variable(script, *args++);
+    s32 var10 = get_variable(script, *args++);
 
-    if (collisionStatus->currentFloor != script->varTable[11]) {
-        script->varTable[0] = 0;
-        return ApiStatus_DONE2;
+    switch (var1) {
+        case 1:
+            set_background_color_blend(var2, var3, var4, var5);
+            break;
+        case 2:
+            func_8011BEB4(var2, var3, var4, var5, var6, var7, var8, var9, var10);
+            break;
+        case 3:
+            func_8011BF98(var2, var3, var4, var5, var6, var7);
+            break;
     }
 
-    stickX = abs(gGameStatusPtr->stickX);
-    stickY = gGameStatusPtr->stickY;
-
-    if ((stickX != 0) || (stickY != 0)) {
-        if (atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {
-            script->varTable[0] = 1;
-            return ApiStatus_DONE2;
-        }
-    }
-
-    return ApiStatus_BLOCK;
+    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc25"
+NEW_FUNC_NAME = f"UnkFunc26"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

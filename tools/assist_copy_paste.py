@@ -114,7 +114,7 @@ for file in files[1:]:
             stripped_line = line.strip()
             split_line = stripped_line.split(" ")
 
-            if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and i+1 < len(func_file) and "/*" not in func_file[i+1]:
+            if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and ((i+1 < len(func_file) and "/*" not in func_file[i+1]) or (i+1 == len(func_file))):
                 new_func_file.append(stripped_line)
                 temp = function_text.splitlines()
                 temp[1] = temp[1].replace("N()", f"N({function})")
@@ -127,6 +127,11 @@ for file in files[1:]:
         else:
             new_func_file.append(line)
 
+    if new_func_file[-1] != "":
+        new_func_file.append("")
+
+    #print("===========")
     #print(f"Altering {file_path}")
     #print("\n".join(new_func_file))
+    #print("===========")
     file_path.write_text("\n".join(new_func_file))

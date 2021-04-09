@@ -374,7 +374,7 @@ Script N(80244A70) = SCRIPT({
     PanToTarget(0, 0, 1);
     N(func_802402E0_95B4E0)(2, 0, 3);
     N(func_802402E0_95B4E0)(1, -1, 3);
-    N(func_80240404_95B604)(3, 44, 32, 177, 0, 0, 0, 0, 0, 0);
+    N(UnkFunc26)(3, 44, 32, 177, 0, 0, 0, 0, 0, 0);
     DisablePlayerInput(TRUE);
     spawn {
         ShakeCam(0, 0, 300, 0.2001953125);
