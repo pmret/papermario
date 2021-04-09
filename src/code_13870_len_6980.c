@@ -111,7 +111,7 @@ void disable_npc_shadow(Npc* npc) {
     }
 }
 
-func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
+s32 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
 void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
     s32 flagsTemp;
@@ -270,7 +270,31 @@ void func_8003CFA0(void) {
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CFA8);
 
-INCLUDE_ASM(s32, "code_13870_len_6980", func_8003CFB4);
+Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 minDistance) {
+    Npc* closestNpc = NULL;
+    f32 closestDistance = minDistance;
+    f32 minDistance2 = minDistance;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+        Npc* npc = (*gCurrentNpcListPtr)[i];
+
+        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_4000000)) {
+            if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
+                f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
+
+                if (distance <= minDistance2) {
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closestNpc = npc;
+                    }
+                }
+            }
+        }
+    }
+
+    return closestNpc;
+}
 
 INCLUDE_ASM(s32, "code_13870_len_6980", func_8003D0C4);
 
