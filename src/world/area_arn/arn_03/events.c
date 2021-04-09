@@ -987,46 +987,11 @@ void N(func_8024067C_BDF40C)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
-void N(func_8024094C_BDF6DC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
-
-    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
-        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        npc->currentAnim = enemy->animList[0];
-        npc->duration = 25;
-        script->functionTemp[0].s = 14;
-    } else {
-        func_8003D660(npc, 1);
-        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-        if (npc->duration > 0) {
-            npc->duration--;
-        } else {
-            script->functionTemp[0].s = 12;
-        }
-    }
-}
+#include "world/common/UnkFunc15.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
-void N(func_80240AD4_BDF864)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 i;
-
-    for (i = script->functionTemp[2].s; i < enemy->territory->patrol.numPoints; i++) {
-        if (i[enemy->territory->patrol.points].y <= npc->pos.y) {
-            script->functionTemp[2].s = i;
-            break;
-        }
-    }
-
-    npc->moveSpeed = aiSettings->moveSpeed;
-    npc->currentAnim = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkFunc16.inc.c"
 
 ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -1098,13 +1063,13 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
         case 12:
             N(UnkNpcAIFunc13)(script, npcAISettings, territoryPtr);
         case 13:
-            N(func_8024094C_BDF6DC)(script, npcAISettings, territoryPtr);
+            N(UnkFunc15)(script, npcAISettings, territoryPtr);
             break;
         case 14:
             N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
             break;
         case 15:
-            N(func_80240AD4_BDF864)(script, npcAISettings, territoryPtr);
+            N(UnkFunc16)(script, npcAISettings, territoryPtr);
             break;
         case 99:
             func_8004A73C(script);

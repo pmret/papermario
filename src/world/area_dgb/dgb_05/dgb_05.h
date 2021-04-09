@@ -5,7 +5,7 @@
 
 ApiStatus N(func_80240000_C3AA10)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240030_C3AA40)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_8024041C_C3AE2C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240E80_C3B890)(ScriptInstance* script, s32 isInitialCall);
 
 NpcGroupList N(npcGroupList_8024230C);

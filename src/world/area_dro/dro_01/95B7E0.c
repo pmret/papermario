@@ -32,7 +32,6 @@ typedef struct N(Unk_Struct_1) {
     s32 unk_38;
 } N(Unk_Struct_1);
 
-
 typedef struct {
     s32 unk_00;
     s32 unk_04;
@@ -239,7 +238,7 @@ Script N(80243F84) = SCRIPT({
 });
 
 Script N(80244374) = SCRIPT({
-    N(func_80240034_95B234)();
+    N(UnkFunc25)();
     if (SI_VAR(0) == 0) {
         return;
     }
@@ -2697,7 +2696,7 @@ Script N(8024C8D4) = SCRIPT({
 });
 
 Script N(8024CCC4) = SCRIPT({
-    N(func_802435D4_95E7D4)();
+    N(dup_UnkFunc25)();
     if (SI_VAR(0) == 0) {
         return;
     }

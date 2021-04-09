@@ -34,9 +34,8 @@ def find_file_path(looking_for):
                 x -= 1
                 file_path = map_[x].split(".o",1)[0].split("build/",1)[1].strip()
                 break
-    if file_path:
-        if not "src/world/area_" in file_path:
-            file_path = ""
+    if not "src/world/area_" in file_path:
+        file_path = ""
     return file_name, file_path, decomp
 
 map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()

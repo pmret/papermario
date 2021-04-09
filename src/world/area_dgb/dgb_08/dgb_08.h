@@ -5,7 +5,7 @@
 
 ApiStatus N(UnkFunc1)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240B94_C40944)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_8024124C_C40FFC)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802414AC_C4125C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802438F0_C436A0)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243B98_C43948)(ScriptInstance* script, s32 isInitialCall);
