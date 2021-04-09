@@ -60,7 +60,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     )
 
     ninja.rule("sha1sum",
-        description="check",
+        description="check $in",
         command=f"sha1sum -c $in && touch $out",
     )
 
