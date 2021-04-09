@@ -1,50 +1,13 @@
 from pathlib import Path
 
-FUNC="""    Bytecode *args = script->ptrReadPos;
-    s32 testS2 = get_variable(script, *args++);
-    s32 testS0 = get_variable(script, *args++);
-    s32 testS1 = get_variable(script, *args++);
-    s32* temp_s0_3 = testS0;
-    s32 temp_s1 = testS1;
-    s32 temp_s2 = testS2;
+FUNC="""    Camera* camera = CAM2(D_8009A634);
 
-    if (temp_s0_3 == -1) {
-        func_8011D82C(temp_s1);
-        return ApiStatus_DONE2;
+    if (*((s32*)script->labelPositions[0]) & 1) {
+        clamp_angle(-camera->currentYaw);
     }
-
-    switch (temp_s2) {
-        case 0:
-            temp_s2 = 0xFFFF;
-            while (TRUE) {
-                if (*temp_s0_3 == temp_s2) {
-                    break;
-                }
-                func_8011BC7C(get_model_from_list_index(get_model_list_index_from_tree_index(*temp_s0_3)), -1, temp_s1);
-                temp_s0_3++;
-            };
-            break;
-
-        case 1:
-            temp_s2 = 0xFFFF;
-            while (TRUE) {
-                if (*temp_s0_3 == temp_s2) {
-                    break;
-                }
-                func_8011B950(*temp_s0_3, -1, temp_s1, 0);
-                temp_s0_3++;
-            };
-            break;
-
-        case 2:
-            *D_801512F0 = temp_s1;
-            break;
-        
-    }
-    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc27"
+NEW_FUNC_NAME = f"UnkFunc28"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

@@ -3285,12 +3285,12 @@ ApiStatus N(func_802415AC_95C7AC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(func_8024183C_95CA3C)(ScriptInstance *script, s32 isInitialCall);
+void N(UnkFunc28)(ScriptInstance *script, s32 isInitialCall);
 
 ApiStatus N(func_802417D0_95C9D0)(ScriptInstance *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->owner2.npcID);
 
-    npc->onRender = N(func_8024183C_95CA3C);
+    npc->onRender = N(UnkFunc28);
     npc->blurBuf = heap_malloc(8);
     *((s32*)npc->blurBuf) = 0;
 
@@ -3299,13 +3299,7 @@ ApiStatus N(func_802417D0_95C9D0)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 
-void N(func_8024183C_95CA3C)(ScriptInstance *script, s32 isInitialCall) {
-    Camera* camera = CAM2(D_8009A634);
-
-    if (*((s32*)script->labelPositions[0]) & 1) {
-        clamp_angle(-camera->currentYaw);
-    }
-}
+#include "world/common/UnkFunc28.inc.c"
 
 #include "world/common/UnkAlphaFunc.inc.c"
 

@@ -201,7 +201,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241C70_9D8C90);
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241CDC_9D8CFC);
+#include "world/common/UnkFunc28.inc.c"
 
 #include "world/common/UnkAlphaFunc.inc.c"
 

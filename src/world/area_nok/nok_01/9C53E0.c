@@ -77,7 +77,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802410C8_9C64A8);
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241134_9C6514);
+#include "world/common/UnkFunc28.inc.c"
 
 #include "world/common/UnkAlphaFunc.inc.c"
 

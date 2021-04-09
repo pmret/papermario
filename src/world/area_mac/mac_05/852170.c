@@ -209,7 +209,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241680_8537F0);
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_802416EC_85385C);
+#include "world/common/UnkFunc28.inc.c"
 
 #include "world/common/UnkAlphaFunc.inc.c"
 

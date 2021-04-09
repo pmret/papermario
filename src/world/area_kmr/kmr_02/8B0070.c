@@ -53,7 +53,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802406F0_8B0760);
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024075C_8B07CC);
+#include "world/common/UnkFunc28.inc.c"
 
 #include "world/common/UnkAlphaFunc.inc.c"
 
