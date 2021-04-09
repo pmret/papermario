@@ -1,5 +1,4 @@
 from segtypes.n64.segment import N64Segment
-from pathlib import Path
 from util.n64 import Yay0decompress
 from util.color import unpack_color
 from util.iter import iter_in_groups
@@ -98,7 +97,7 @@ class N64SegPaperMarioMapFS(N64Segment):
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(bytes, ".".join(path.split(".")[:-1]) + ".alt.png", header_offset=0x10)
+                    write_bg_png(bytes, fs_dir / f"{name}.alt.png", header_offset=0x10)
             else:
                 with open(path, "wb") as f:
                     f.write(bytes)
