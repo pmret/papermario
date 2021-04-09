@@ -14,6 +14,22 @@ extern s16 D_8009A634;
 extern s16 D_8014C290;
 extern s16 D_8014C294;
 
+enum {
+    NPC_MOUSER0,
+    NPC_DRYITE0,
+    NPC_DRYITE1,
+    NPC_DRYITE2,
+    NPC_DRYITE3,
+    NPC_ARTIST_TOAD,
+    NPC_MOUSER1,
+    NPC_THREE_SISTERS0,
+    NPC_THREE_SISTERS1,
+    NPC_THREE_SISTERS2,
+    NPC_CHUCK_QUIZMO,
+    NPC_DRYITE4,
+    NPC_DRYITE5,
+};
+
 typedef struct N(Unk_Struct_1) {
     s32 unk_00;
     s32 unk_04;
@@ -42,22 +58,6 @@ typedef struct {
 } N(Unk_Struct_2);
 
 void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1);
-
-enum {
-    NPC_MOUSER0,
-    NPC_DRYITE0,
-    NPC_DRYITE1,
-    NPC_DRYITE2,
-    NPC_DRYITE3,
-    NPC_ARTIST_TOAD,
-    NPC_MOUSER1,
-    NPC_THREE_SISTERS0,
-    NPC_THREE_SISTERS1,
-    NPC_THREE_SISTERS2,
-    NPC_CHUCK_QUIZMO,
-    NPC_DRYITE4,
-    NPC_DRYITE5,
-};
 
 Script N(80248504);
 void func_80071690(s32, f32, f32, f32);
@@ -527,9 +527,10 @@ NpcSettings N(npcSettings_80245160) = {
     .level = 99,
 };
 
-s32 N(unk_missing_8024518C)[] = {
-    0x00000000, 0x00170013, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00630000,
+NpcSettings N(npcSettings_8024518C) = {
+    .height = 23,
+    .radius = 19,
+    .level = 99,
 };
 
 s32 N(D_802451B8_9603B8) = {
@@ -563,11 +564,11 @@ typedef struct {
 } N(quizReqStruct);
 
 N(quizReqStruct) N(quizRequirements)[] = {
-    { 0xFFFFFF94, 0x00000000 }, { 0xFFFFFFB4, 0x0000000A }, 
-    { 0xFFFFFFCA, 0x00000014 }, { 0xFFFFFFF2, 0x0000001E },
-    { 0x00000006, 0x00000025 }, { 0x00000027, 0x0000002C }, 
-    { 0x0000003A, 0x00000034 }, { 0x00000058, 0x0000003C },
-    { 0x00000060, 0x00000040 }, { 0x00000000, 0x00000040 },
+    { -108, 0 }, { -76, 10 }, 
+    { -54, 20 }, { -14, 30 },
+    {   6, 37 }, {  39, 44 }, 
+    {  58, 52 }, {  88, 60 },
+    {  96, 64 }, {   0, 64 },
 };
 
 Script N(802452AC) = SCRIPT({
@@ -1148,7 +1149,7 @@ Script N(80247628) = SCRIPT({
         return;
     }
     SetNpcFlagBits(NPC_SELF, ((0x01000000)), FALSE);
-    SetNpcSprite(-1, 11468801);
+    SetNpcSprite(-1, 0xAF0001);
     N(func_802417D0_95C9D0)();
 });
 
@@ -1191,9 +1192,17 @@ NpcSettings N(npcSettings_80247788) = {
     .level = 99,
 };
 
-s32 N(unk_missing_802477B4)[] = {
-    0x00AF0001, 0x0023001C, N(80247628), N(8024769C), N(80247768), 0x00000000, N(8024771C), 0x00000000,
-    0x00000C01, 0x00000000, 0x00630010,
+NpcSettings N(npcSettings_802477B4) = {
+    .unk_00 = { 0x00, 0xAF, 0x00, 0x01 },
+    .height = 35,
+    .radius = 28,
+    .otherAI = &N(80247628),
+    .onInteract = &N(8024769C),
+    .ai = &N(80247768),
+    .aux = &N(8024771C),
+    .flags = 0x00000C01,
+    .level = 99,
+    .unk_2A = 16,
 };
 
 s32 N(D_802477E0_9629E0) = {

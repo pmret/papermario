@@ -360,6 +360,7 @@ replace_funcs = {
     "SetNpcRotation"            :{0:"NpcIDs"},
     "SetNpcScale"               :{0:"NpcIDs"},
     "SetNpcSpeed"               :{0:"NpcIDs"},
+    "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
