@@ -3253,7 +3253,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsections:
-    - [0x6FAD10, bin] # FIXME: this should be c but it isnt split
+    - [0x6FAD10, c]
     - [0x6FB350, data]
   - name: battle_partner_parakarry
     dir: battle/partner

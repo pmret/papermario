@@ -155,7 +155,7 @@ class Configure:
         if assets:
             modes.extend(["bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites"])
         if code:
-            modes.extend(["code"])
+            modes.extend(["code", "c", "data", "rodata"])
 
         self.linker_entries = split.main(
             str(self.version_path / "splat.yaml"),
@@ -408,9 +408,10 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(VERSIONS))
     parser.add_argument("--cpp", help="GNU C preprocessor command")
-    parser.add_argument("--no-splat", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
     parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
+    parser.add_argument("--split-code", action="store_true", help="Re-split code segments to asm files")
+    parser.add_argument("--no-split-assets", action="store_true", help="Don't split assets from the baserom(s)")
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -471,7 +472,7 @@ if __name__ == "__main__":
 
         configure = Configure(version)
 
-        configure.split(not args.no_splat, False)
+        configure.split(not args.no_split_assets, args.split_code)
         configure.write_ninja(ninja, skip_files)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
