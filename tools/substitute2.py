@@ -1,14 +1,27 @@
 from pathlib import Path
 
-FUNC="""    script->varTable[0] = 0;
-    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
-        script->varTable[0] = 1;
+FUNC="""    CollisionStatus* collisionStatus = &gCollisionStatus;
+    s32 stickX, stickY;
+
+    if (collisionStatus->currentFloor != script->varTable[11]) {
+        script->varTable[0] = 0;
+        return ApiStatus_DONE2;
     }
 
-    return ApiStatus_DONE2;
+    stickX = abs(gGameStatusPtr->stickX);
+    stickY = gGameStatusPtr->stickY;
+
+    if ((stickX != 0) || (stickY != 0)) {
+        if (atan2(0.0f, 0.0f, stickX, stickY) < 60.0f) {
+            script->varTable[0] = 1;
+            return ApiStatus_DONE2;
+        }
+    }
+
+    return ApiStatus_BLOCK;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc24"
+NEW_FUNC_NAME = f"UnkFunc25"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
