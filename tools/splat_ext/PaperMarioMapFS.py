@@ -112,5 +112,5 @@ class N64SegPaperMarioMapFS(N64Segment):
         return [LinkerEntry(
             self,
             [fs_dir / add_file_ext(name) for name in self.files],
-            fs_dir.with_suffix(".bin"), ".data"),
+            fs_dir.with_suffix(".dat"), ".data"),
         ]

@@ -291,13 +291,14 @@ class Configure:
                 if subseg.type != "palette":
                     build(self.build_path() / "include" / subseg.dir / (subseg.name + ".png.h"), entry.src_paths, "img_header")
             elif subseg.type == "PaperMarioNpcSprites":
-                sprite_bins = []
+                sprite_yay0s = []
 
                 for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
                     sprite_name = sprite_dir.name
 
                     bin_path = entry.object_path.with_suffix("") / (sprite_name + ".bin")
-                    sprite_bins.append(bin_path)
+                    yay0_path = bin_path.with_suffix(".Yay0")
+                    sprite_yay0s.append(yay0_path)
 
                     variables = {
                         "sprite_id": sprite_id,
@@ -306,6 +307,7 @@ class Configure:
                     }
 
                     build(bin_path, [sprite_dir], "sprite", variables=variables)
+                    build(yay0_path, [bin_path], "yay0")
                     build(
                         self.build_path() / "include" / subseg.dir / subseg.name / (sprite_name + ".h"),
                         [sprite_dir],
@@ -313,7 +315,7 @@ class Configure:
                         variables=variables,
                     )
 
-                build(entry.object_path.with_suffix(".bin"), sprite_bins, "sprite_combine")
+                build(entry.object_path.with_suffix(".bin"), sprite_yay0s, "sprite_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif subseg.type == "PaperMarioMessages":
                 msg_bins = []
@@ -332,22 +334,24 @@ class Configure:
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
 
                 for path in entry.src_paths:
-                    bin_path = entry.object_path.with_suffix("") / f"{path.name}.bin"
+                    name = path.stem
+                    bin_path = entry.object_path.with_suffix("").with_suffix("") / f"{name}.bin"
 
-                    if path.name.startswith("party_"):
+                    if name.startswith("party_"):
                         compress = True
                         build(bin_path, [path], "img", variables={
                             "img_type": "party",
                             "img_flags": "",
                         })
-                    elif path.name.endswith("_bg"):
+                    elif name.endswith("_bg"):
                         compress = True
                         build(bin_path, [path], "img", variables={
                             "img_type": "bg",
                             "img_flags": "",
                         })
-                    elif path.name.endswith("_tex"):
+                    elif name.endswith("_tex"):
                         compress = False
+                        bin_path = path
                     else:
                         compress = True
                         bin_path = path
@@ -362,8 +366,8 @@ class Configure:
                     bin_yay0s.append(yay0_path)
 
                 # combine
-                build(entry.object_path.with_suffix(".bin"), bin_yay0s, "mapfs")
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             else:
                 raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
 
@@ -466,18 +470,22 @@ if __name__ == "__main__":
 
     skip_files = set()
     all_rom_oks: List[str] = []
+    first_configure = None
 
     for version in versions:
         print(f"configure: configuring version {version}")
 
         configure = Configure(version)
 
+        if not first_configure:
+            first_configure = configure
+
         configure.split(not args.no_split_assets, args.split_code)
         configure.write_ninja(ninja, skip_files)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
-    configure.make_current(ninja)
+    first_configure.make_current(ninja)
 
     ninja.build("all", "phony", all_rom_oks)
     ninja.default("all")
