@@ -19,6 +19,7 @@
 #define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
 #define CAM(id) (&gCameras[id])
+#define CAM2(id) ({ Camera* c = gCameras; &c[id]; })
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
 #define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])
 

@@ -86,7 +86,7 @@ Script N(UseItemWithEffect) = SCRIPT({
         $x += 18;
         SetActorSpeed(ACTOR_PLAYER, 4.0);
         SetGoalPos(ACTOR_PLAYER, $x, $y, $z);
-        PlayerRunToGoal(0);
+        PlayerRunToGoal(ACTOR_PLAYER);
 
         $y += 45;
         $effectY = $y;
@@ -150,7 +150,7 @@ Script N(PlayerGoHome) = SCRIPT({
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
-    PlayerRunToGoal(0);
+    PlayerRunToGoal(ACTOR_PLAYER);
 
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     UseIdleAnimation(ACTOR_PLAYER, 1);

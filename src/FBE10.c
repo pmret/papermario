@@ -118,8 +118,8 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "FBE10", func_802D7E08);
 
-INCLUDE_ASM(s32, "FBE10", ShowSleepBubble);
+INCLUDE_ASM(ApiStatus, "FBE10", ShowSleepBubble, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "FBE10", func_802D8248);
+INCLUDE_ASM(ApiStatus, "FBE10", func_802D8248, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "FBE10", PlayEffect);
+INCLUDE_ASM(ApiStatus, "FBE10", PlayEffect, ScriptInstance* script, s32 isInitialCall);

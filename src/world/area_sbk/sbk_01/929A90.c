@@ -1,11 +1,12 @@
 #include "sbk_01.h"
+#include "message_ids.h"
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-Script N(Main);
-s32 N(npcGroupList_802407D8)[];
+Script N(main);
+NpcGroupList N(npcGroupList_802407D8);
 
-Vec4f N(entryList)[] = {
+EntryList N(entryList) = {
     { -475.0f, 0.0f, 0.0f, 90.0f },
     { 475.0f, 0.0f, 0.0f, 270.0f },
     { 0.0f, 0.0f, -475.0f, 180.0f },
@@ -13,44 +14,26 @@ Vec4f N(entryList)[] = {
 };
 
 MapConfig N(config) = {
-    .main = N(Main),
+    .main = N(main),
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = 0x190061,
+    .tattle = MSG_sbk_01_tattle,
 };
 
-Script N(ExitWalk_802400E0) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 0);
-    spawn ExitWalk;
-    GotoMap("sbk_00", 1);
-    sleep 100;
+Script N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);
+
+Script N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  1, "sbk_02",  0);
+
+Script N(exitWalk_80240198) = EXIT_WALK_SCRIPT(60,  3, "sbk_11",  2);
+
+Script N(802401F4) = SCRIPT({
+    bind N(exitWalk_802400E0) to TRIGGER_FLOOR_ABOVE 7;
+    bind N(exitWalk_8024013C) to TRIGGER_FLOOR_ABOVE 3;
+    bind N(exitWalk_80240198) to TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(ExitWalk_8024013C) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 1);
-    spawn ExitWalk;
-    GotoMap("sbk_02", 0);
-    sleep 100;
-});
-
-Script N(ExitWalk_80240198) = SCRIPT({
-    group 27;
-    UseExitHeading(60, 3);
-    spawn ExitWalk;
-    GotoMap("sbk_11", 2);
-    sleep 100;
-});
-
-Script N(Script_802401F4) = SCRIPT({
-    bind N(ExitWalk_802400E0) to 524288 7;
-    bind N(ExitWalk_8024013C) to 524288 3;
-    bind N(ExitWalk_80240198) to 524288 5;
-});
-
-Script N(Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
     SetSpriteShading(-1);
     if (STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
@@ -63,6 +46,6 @@ Script N(Main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_802407D8));
     N(SpawnSunEffect)();
     SetMusicTrack(0, SONG_DRY_DRY_DESERT, 0, 8);
-    SI_VAR(0) = N(Script_802401F4);
+    SI_VAR(0) = N(802401F4);
     spawn EnterWalk;
 });

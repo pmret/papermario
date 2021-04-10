@@ -1,8 +1,8 @@
 #include "kpa_113.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_113/A9CC70", func_80240040_A9CC70);
+#include "world/common/UnkFunc11.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_113/A9CC70", func_802400FC_A9CD2C);
+#include "world/common/UnkFunc12.inc.c"
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
