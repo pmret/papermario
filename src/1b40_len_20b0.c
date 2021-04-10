@@ -72,7 +72,7 @@ void step_game_loop(void) {
     }
 
     func_8011BAE8();
-    func_8003857C();
+    npc_iter_no_op();
     update_dynamic_entities();
     update_triggers();
     update_scripts();

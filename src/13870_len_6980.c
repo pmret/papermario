@@ -26,14 +26,14 @@ void init_npc_list(void) {
     D_800A0B94 = 1;
 }
 
-//pointless function called by step_game_loop
-void func_8003857C(void) {
-    s32 phi_v1 = 0;
-    s32 temp_v0 = phi_v1 < 0x40;
+/// Iterates over the NPC list, doing absolutely nothing.
+/// Presumably did something once upon a time but got commented out.
+void npc_iter_no_op(void) {
+    s32 i;
 
-    while (temp_v0) {
-        phi_v1++;
-        temp_v0 = phi_v1 < 0x40;
+    for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+        // Needed to avoid loop optimization.
+        do {} while (FALSE);
     }
 }
 
