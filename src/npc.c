@@ -268,7 +268,7 @@ void func_8003CFA0(void) {
 
 INCLUDE_ASM(s32, "npc", func_8003CFA8);
 
-Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius) {
+Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius) {
     Npc* closestNpc = NULL;
     f32 closestDist = radius;
     f32 maxDist = radius;
@@ -294,7 +294,7 @@ Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius) {
     return closestNpc;
 }
 
-Npc* func_8003D0C4(f32 x, f32 y, f32 z, f32 radius) {
+Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius) {
     Npc* closestNpc = NULL;
     f32 closestDist = radius;
     f32 maxDist = radius;

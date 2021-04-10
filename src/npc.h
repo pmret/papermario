@@ -145,7 +145,7 @@ s32 func_8003CFA8();
 /// Finds the closest NPC to a given point within a radius. Ignores Y position.
 ///
 /// NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are ignored.
-/// See also func_8003D0C4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be set.
+/// See also npc_find_near_simple(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be set.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -153,12 +153,12 @@ s32 func_8003CFA8();
 /// @param radius   No NPCs further than this distance will be considered
 ///
 /// @returns NULL if there are no NPCs within radius
-Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius);
+Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius);
 
 /// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
 ///
 /// Only NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are considered.
-/// See also func_8003CFB4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be unset.
+/// See also npc_find_near(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be unset.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -166,7 +166,7 @@ Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius);
 /// @param radius   No NPCs further than this distance will be considered
 ///
 /// @returns NULL if there are no NPCs within radius
-Npc* func_8003D0C4(f32 x, f32 y, f32 z, f32 radius);
+Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius);
 
 s32 func_8003D1D4();
 

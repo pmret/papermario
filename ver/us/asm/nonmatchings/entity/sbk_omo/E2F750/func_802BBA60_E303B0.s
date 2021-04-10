@@ -185,7 +185,7 @@ glabel func_802BBA60_E303B0
 /* E30630 802BBCE0 C62C0048 */  lwc1      $f12, 0x48($s1)
 /* E30634 802BBCE4 C62E004C */  lwc1      $f14, 0x4c($s1)
 /* E30638 802BBCE8 8E260050 */  lw        $a2, 0x50($s1)
-/* E3063C 802BBCEC 0C00F431 */  jal       func_8003D0C4
+/* E3063C 802BBCEC 0C00F431 */  jal       npc_find_near_simple
 /* E30640 802BBCF0 3C074248 */   lui      $a3, 0x4248
 /* E30644 802BBCF4 10400007 */  beqz      $v0, .L802BBD14
 /* E30648 802BBCF8 3C030400 */   lui      $v1, 0x400

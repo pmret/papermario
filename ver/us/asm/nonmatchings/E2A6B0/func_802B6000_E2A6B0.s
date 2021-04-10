@@ -26,7 +26,7 @@ glabel func_802B6000_E2A6B0
 /* E2A700 802B6050 C62C0028 */  lwc1      $f12, 0x28($s1)
 /* E2A704 802B6054 C62E002C */  lwc1      $f14, 0x2c($s1)
 /* E2A708 802B6058 8E260030 */  lw        $a2, 0x30($s1)
-/* E2A70C 802B605C 0C00F3ED */  jal       func_8003CFB4
+/* E2A70C 802B605C 0C00F3ED */  jal       npc_find_near
 /* E2A710 802B6060 3C0742C8 */   lui      $a3, 0x42c8
 /* E2A714 802B6064 0040802D */  daddu     $s0, $v0, $zero
 /* E2A718 802B6068 12000026 */  beqz      $s0, .L802B6104
