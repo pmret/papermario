@@ -1541,6 +1541,7 @@ enum NpcFlags {
     NPC_FLAG_200000            = 0x00200000,
     NPC_FLAG_400000            = 0x00400000,
     NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_SIMPLE_XZ_HITBOX  = 0x04000000, ///< Perform only a single lateral collision test during motion.
     NPC_FLAG_40000000          = 0x40000000,
     NPC_FLAG_80000000          = 0x80000000,
 };
