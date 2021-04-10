@@ -39,7 +39,7 @@ glabel make_disguise_npc
 /* 7FAB0 800E6600 3C05800F */  lui       $a1, %hi(D_800F7C7C)
 /* 7FAB4 800E6604 00A32821 */  addu      $a1, $a1, $v1
 /* 7FAB8 800E6608 8CA57C7C */  lw        $a1, %lo(D_800F7C7C)($a1)
-/* 7FABC 800E660C 0C00E219 */  jal       create_standard_npc
+/* 7FABC 800E660C 0C00E219 */  jal       npc_create_standard
 /* 7FAC0 800E6610 00C0202D */   daddu    $a0, $a2, $zero
 /* 7FAC4 800E6614 0040202D */  daddu     $a0, $v0, $zero
 /* 7FAC8 800E6618 3C018011 */  lui       $at, %hi(D_8010C96C)

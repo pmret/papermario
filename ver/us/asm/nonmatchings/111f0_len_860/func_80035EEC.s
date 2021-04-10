@@ -79,7 +79,7 @@ glabel func_80035EEC
 .L80036000:
 /* 11400 80036000 0C00F949 */  jal       update_counters
 /* 11404 80036004 00000000 */   nop
-/* 11408 80036008 0C00E64C */  jal       update_npcs
+/* 11408 80036008 0C00E64C */  jal       npc_list_update
 /* 1140C 8003600C 00000000 */   nop
 /* 11410 80036010 0C037DD0 */  jal       update_player
 /* 11414 80036014 00000000 */   nop
@@ -112,7 +112,7 @@ glabel func_80035EEC
 /* 11478 80036078 0800D83B */  j         .L800360EC
 /* 1147C 8003607C A6030000 */   sh       $v1, ($s0)
 .L80036080:
-/* 11480 80036080 0C00E64C */  jal       update_npcs
+/* 11480 80036080 0C00E64C */  jal       npc_list_update
 /* 11484 80036084 00000000 */   nop
 /* 11488 80036088 0C037DD0 */  jal       update_player
 /* 1148C 8003608C 00000000 */   nop

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel free_npc
+glabel npc_free
 /* 13DCC 800389CC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 13DD0 800389D0 AFB10014 */  sw        $s1, 0x14($sp)
 /* 13DD4 800389D4 0080882D */  daddu     $s1, $a0, $zero

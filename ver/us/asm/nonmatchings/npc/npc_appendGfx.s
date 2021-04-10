@@ -23,7 +23,7 @@ glabel D_800984A8
 
 .section .text
 
-glabel appendGfx_npc
+glabel npc_appendGfx
 /* 153D0 80039FD0 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 153D4 80039FD4 AFB1009C */  sw        $s1, 0x9c($sp)
 /* 153D8 80039FD8 AFBF00A0 */  sw        $ra, 0xa0($sp)
@@ -48,7 +48,7 @@ glabel appendGfx_npc
 /* 15424 8003A024 30420080 */  andi      $v0, $v0, 0x80
 /* 15428 8003A028 10400007 */  beqz      $v0, .L8003A048
 /* 1542C 8003A02C 27B00058 */   addiu    $s0, $sp, 0x58
-/* 15430 8003A030 0C00E11E */  jal       mtx_ident_mirror_y
+/* 15430 8003A030 0C00E11E */  jal       npc_mtx_ident_mirror_y
 /* 15434 8003A034 0200202D */   daddu    $a0, $s0, $zero
 /* 15438 8003A038 0200202D */  daddu     $a0, $s0, $zero
 /* 1543C 8003A03C 27A50018 */  addiu     $a1, $sp, 0x18
@@ -280,7 +280,7 @@ glabel appendGfx_npc
 /* 15794 8003A394 30420080 */  andi      $v0, $v0, 0x80
 /* 15798 8003A398 10400007 */  beqz      $v0, .L8003A3B8
 /* 1579C 8003A39C 27B00058 */   addiu    $s0, $sp, 0x58
-/* 157A0 8003A3A0 0C00E11E */  jal       mtx_ident_mirror_y
+/* 157A0 8003A3A0 0C00E11E */  jal       npc_mtx_ident_mirror_y
 /* 157A4 8003A3A4 0200202D */   daddu    $a0, $s0, $zero
 /* 157A8 8003A3A8 0200202D */  daddu     $a0, $s0, $zero
 /* 157AC 8003A3AC 27A50018 */  addiu     $a1, $sp, 0x18
@@ -429,7 +429,7 @@ glabel appendGfx_npc
 /* 159CC 8003A5CC 0C019E40 */  jal       guTranslateF
 /* 159D0 8003A5D0 27A40018 */   addiu    $a0, $sp, 0x18
 /* 159D4 8003A5D4 27B00058 */  addiu     $s0, $sp, 0x58
-/* 159D8 8003A5D8 0C00E11E */  jal       mtx_ident_mirror_y
+/* 159D8 8003A5D8 0C00E11E */  jal       npc_mtx_ident_mirror_y
 /* 159DC 8003A5DC 0200202D */   daddu    $a0, $s0, $zero
 /* 159E0 8003A5E0 0200202D */  daddu     $a0, $s0, $zero
 /* 159E4 8003A5E4 27A50018 */  addiu     $a1, $sp, 0x18

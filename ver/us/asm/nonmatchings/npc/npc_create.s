@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel _create_npc
+glabel npc_create
 /* 13998 80038598 3C03800A */  lui       $v1, %hi(gCurrentNpcListPtr)
 /* 1399C 8003859C 8C630B90 */  lw        $v1, %lo(gCurrentNpcListPtr)($v1)
 /* 139A0 800385A0 27BDFFD8 */  addiu     $sp, $sp, -0x28
@@ -127,15 +127,15 @@ glabel _create_npc
 /* 13B60 80038760 8E420008 */  lw        $v0, 8($s2)
 /* 13B64 80038764 14400004 */  bnez      $v0, .L80038778
 /* 13B68 80038768 AE020004 */   sw       $v0, 4($s0)
-/* 13B6C 8003876C 3C028004 */  lui       $v0, %hi(NOP_npc_callback)
-/* 13B70 80038770 24428470 */  addiu     $v0, $v0, %lo(NOP_npc_callback)
+/* 13B6C 8003876C 3C028004 */  lui       $v0, %hi(npc_callback_no_op)
+/* 13B70 80038770 24428470 */  addiu     $v0, $v0, %lo(npc_callback_no_op)
 /* 13B74 80038774 AE020004 */  sw        $v0, 4($s0)
 .L80038778:
 /* 13B78 80038778 8E42000C */  lw        $v0, 0xc($s2)
 /* 13B7C 8003877C 14400004 */  bnez      $v0, .L80038790
 /* 13B80 80038780 AE020008 */   sw       $v0, 8($s0)
-/* 13B84 80038784 3C028004 */  lui       $v0, %hi(NOP_npc_callback)
-/* 13B88 80038788 24428470 */  addiu     $v0, $v0, %lo(NOP_npc_callback)
+/* 13B84 80038784 3C028004 */  lui       $v0, %hi(npc_callback_no_op)
+/* 13B88 80038788 24428470 */  addiu     $v0, $v0, %lo(npc_callback_no_op)
 /* 13B8C 8003878C AE020008 */  sw        $v0, 8($s0)
 .L80038790:
 /* 13B90 80038790 16800015 */  bnez      $s4, .L800387E8

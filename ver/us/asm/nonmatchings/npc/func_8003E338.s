@@ -47,8 +47,8 @@ glabel func_8003E338
 /* 197D0 8003E3D0 2442FFFE */   addiu    $v0, $v0, -2
 /* 197D4 8003E3D4 0C0116B0 */  jal       func_80045AC0
 /* 197D8 8003E3D8 00000000 */   nop
-/* 197DC 8003E3DC 3C058004 */  lui       $a1, %hi(func_8003E670)
-/* 197E0 8003E3E0 24A5E670 */  addiu     $a1, $a1, %lo(func_8003E670)
+/* 197DC 8003E3DC 3C058004 */  lui       $a1, %hi(npc_dyn_entity_draw_no_op)
+/* 197E0 8003E3E0 24A5E670 */  addiu     $a1, $a1, %lo(npc_dyn_entity_draw_no_op)
 /* 197E4 8003E3E4 3C01800A */  lui       $at, %hi(gGameState)
 /* 197E8 8003E3E8 AC20A600 */  sw        $zero, %lo(gGameState)($at)
 /* 197EC 8003E3EC 0C048C56 */  jal       bind_dynamic_entity_3

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel update_npcs
+glabel npc_list_update
 /* 14D30 80039930 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* 14D34 80039934 3C02FFFF */  lui       $v0, 0xffff
 /* 14D38 80039938 34427FFF */  ori       $v0, $v0, 0x7fff
@@ -69,7 +69,7 @@ glabel update_npcs
 /* 14E20 80039A20 00431024 */  and       $v0, $v0, $v1
 /* 14E24 80039A24 0C00E2BF */  jal       npc_do_world_collision
 /* 14E28 80039A28 AE020000 */   sw       $v0, ($s0)
-/* 14E2C 80039A2C 0C00E5A2 */  jal       func_80039688
+/* 14E2C 80039A2C 0C00E5A2 */  jal       npc_do_gravity
 /* 14E30 80039A30 0200202D */   daddu    $a0, $s0, $zero
 /* 14E34 80039A34 4405A000 */  mfc1      $a1, $f20
 /* 14E38 80039A38 0C00E5FA */  jal       func_800397E8

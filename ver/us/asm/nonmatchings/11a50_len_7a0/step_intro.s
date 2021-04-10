@@ -219,7 +219,7 @@ glabel L80036AA0_11EA0
 /* 11F60 80036B60 00000000 */   nop
 /* 11F64 80036B64 0C037F14 */  jal       clear_player_status
 /* 11F68 80036B68 00000000 */   nop
-/* 11F6C 80036B6C 0C00E12F */  jal       clear_npcs
+/* 11F6C 80036B6C 0C00E12F */  jal       npc_list_clear
 /* 11F70 80036B70 00000000 */   nop
 /* 11F74 80036B74 0C039CE8 */  jal       clear_player_data
 /* 11F78 80036B78 00000000 */   nop
@@ -307,7 +307,7 @@ glabel L80036C40_12040
 /* 120B0 80036CB0 AC830000 */   sw       $v1, ($a0)
 /* 120B4 80036CB4 0C00F949 */  jal       update_counters
 /* 120B8 80036CB8 00000000 */   nop
-/* 120BC 80036CBC 0C00E64C */  jal       update_npcs
+/* 120BC 80036CBC 0C00E64C */  jal       npc_list_update
 /* 120C0 80036CC0 00000000 */   nop
 /* 120C4 80036CC4 0C016754 */  jal       update_effects
 /* 120C8 80036CC8 00000000 */   nop
@@ -330,7 +330,7 @@ glabel L80036D04_12104
 /* 12108 80036D08 00000000 */   nop
 /* 1210C 80036D0C 0C00B500 */  jal       update_cameras
 /* 12110 80036D10 00000000 */   nop
-/* 12114 80036D14 0C00E64C */  jal       update_npcs
+/* 12114 80036D14 0C00E64C */  jal       npc_list_update
 /* 12118 80036D18 00000000 */   nop
 /* 1211C 80036D1C 3C04800A */  lui       $a0, %hi(D_800A0954)
 /* 12120 80036D20 24840954 */  addiu     $a0, $a0, %lo(D_800A0954)

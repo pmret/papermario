@@ -1,12 +1,13 @@
 #include "common.h"
 #include "map.h"
+#include "npc.h"
 
-void func_8003E670(void);
+s32 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
-void NOP_npc_callback(void) {
+void npc_callback_no_op(void) {
 }
 
-void mtx_ident_mirror_y(Matrix4f mtx) {
+void npc_mtx_ident_mirror_y(Matrix4f mtx) {
     guMtxIdentF(*mtx);
     mtx[0][0] = 1.0f;
     mtx[1][1] = -1.0f;
@@ -14,20 +15,19 @@ void mtx_ident_mirror_y(Matrix4f mtx) {
     mtx[3][3] = 1.0f;
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", clear_npcs);
+INCLUDE_ASM(void, "npc", npc_list_clear, void);
 
-void init_npc_list(void) {
+void npc_list_update_current(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentNpcListPtr = &gWorldNpcList;
     } else {
         gCurrentNpcListPtr = &gBattleNpcList;
     }
+
     D_8009A604 = 0;
     D_800A0B94 = 1;
 }
 
-/// Iterates over the NPC list, doing absolutely nothing.
-/// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void) {
     s32 i;
 
@@ -37,45 +37,45 @@ void npc_iter_no_op(void) {
     }
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", _create_npc, NpcBlueprint* blueprint, s32 animList[], s32 skipLoadingAnims);
+INCLUDE_ASM(void, "npc", npc_create, NpcBlueprint* blueprint, NpcAnimID animList[], s32 skipLoadingAnims);
 
-void create_basic_npc(s32* arg0) {
-    _create_npc(arg0, 0, 0);
+void npc_create_basic(NpcBlueprint* blueprint) {
+    npc_create(blueprint, NULL, FALSE);
 }
 
-void create_standard_npc(s32* arg0, s32 arg1) {
-    _create_npc(arg0, arg1, 0);
+void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID animList[]) {
+    npc_create(blueprint, animList, FALSE);
 }
 
-void create_partner_npc(NpcBlueprint* blueprint) {
-    _create_npc(blueprint, NULL, TRUE);
+void npc_create_partner(NpcBlueprint* blueprint) {
+    npc_create(blueprint, NULL, TRUE);
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", free_npc_by_index);
+INCLUDE_ASM(void, "npc", npc_free_by_index, s32 listIndex);
 
-INCLUDE_ASM(s32, "13870_len_6980", free_npc);
+INCLUDE_ASM(void, "npc", npc_free, Npc* npc);
 
 Npc* get_npc_by_index(s32 listIndex) {
-    return gCurrentNpcListPtr[0][listIndex & ~0x800];
+    return (*gCurrentNpcListPtr)[listIndex & ~0x800];
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", npc_do_world_collision);
+INCLUDE_ASM(void, "npc", npc_do_world_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", npc_do_other_npc_collision);
+INCLUDE_ASM(void, "npc", npc_do_other_npc_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", npc_do_player_collision);
+INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_80039688);
+INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_800397E8);
+INCLUDE_ASM(s32, "npc", func_800397E8);
 
-INCLUDE_ASM(s32, "13870_len_6980", update_npcs);
+INCLUDE_ASM(void, "npc", npc_list_update, void);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_80039DA4);
+INCLUDE_ASM(s32, "npc", func_80039DA4);
 
-INCLUDE_ASM(s32, "13870_len_6980", appendGfx_npc);
+INCLUDE_ASM(void, "npc", npc_appendGfx, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", render_npcs);
+INCLUDE_ASM(void, "npc", npc_list_render, void);
 
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
     f32 angle = (yaw * TAU) / 360.0f;
@@ -86,9 +86,9 @@ void npc_move_heading(Npc* npc, f32 speed, f32 yaw) {
     npc->pos.z += -speed * cos;
 }
 
-INCLUDE_ASM(Npc*, "13870_len_6980", get_npc_unsafe, NpcID npcId);
+INCLUDE_ASM(Npc*, "npc", get_npc_unsafe, NpcID npcID);
 
-INCLUDE_ASM(Npc*, "13870_len_6980", get_npc_safe, NpcID npcId);
+INCLUDE_ASM(Npc*, "npc", get_npc_safe, NpcID npcID);
 
 void enable_npc_shadow(Npc* npc) {
     Shadow* shadow;
@@ -110,8 +110,6 @@ void disable_npc_shadow(Npc* npc) {
         npc->flags &= ~0x10000;
     }
 }
-
-func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
 
 void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
     s32 flagsTemp;
@@ -181,21 +179,21 @@ void update_npc_blur(Npc* npc) {
     blurBuf->index = index;
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", appendGfx_npc_blur);
+INCLUDE_ASM(void, "npc", appendGfx_npc_blur, Npc* npc);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B184);
+INCLUDE_ASM(s32, "npc", func_8003B184);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B198);
+INCLUDE_ASM(s32, "npc", func_8003B198);
 
 void func_8003B1A8(void) {
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B1B0);
+INCLUDE_ASM(s32, "npc", func_8003B1B0);
 
-void set_npc_yaw(Npc* npc, f32 angle) {
-    npc->yaw = angle;
+void set_npc_yaw(Npc* npc, f32 yaw) {
+    npc->yaw = yaw;
 
-    if (get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, angle) >= 0.0f) {
+    if (get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, yaw) >= 0.0f) {
         npc->yawCamOffset = 180;
         npc->isFacingAway = TRUE;
     } else {
@@ -204,37 +202,37 @@ void set_npc_yaw(Npc* npc, f32 angle) {
     }
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B3D0);
+INCLUDE_ASM(s32, "npc", func_8003B3D0);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B3F8);
+INCLUDE_ASM(s32, "npc", func_8003B3F8);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B420);
+INCLUDE_ASM(s32, "npc", func_8003B420);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B44C);
+INCLUDE_ASM(s32, "npc", func_8003B44C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B464);
+INCLUDE_ASM(s32, "npc", func_8003B464);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B47C);
+INCLUDE_ASM(s32, "npc", func_8003B47C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B500);
+INCLUDE_ASM(s32, "npc", func_8003B500);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B5B4);
+INCLUDE_ASM(s32, "npc", func_8003B5B4);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003B96C);
+INCLUDE_ASM(s32, "npc", func_8003B96C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003BA60);
+INCLUDE_ASM(s32, "npc", func_8003BA60);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003BED8);
+INCLUDE_ASM(s32, "npc", func_8003BED8);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C3D8);
+INCLUDE_ASM(s32, "npc", func_8003C3D8);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C428);
+INCLUDE_ASM(s32, "npc", func_8003C428);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C444);
+INCLUDE_ASM(s32, "npc", func_8003C444);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C53C);
+INCLUDE_ASM(s32, "npc", func_8003C53C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C61C);
+INCLUDE_ASM(s32, "npc", func_8003C61C);
 
 void func_8003C658(void) {
 }
@@ -242,45 +240,34 @@ void func_8003C658(void) {
 void func_8003C660(void) {
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C668);
+INCLUDE_ASM(s32, "npc", func_8003C668);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C78C);
+INCLUDE_ASM(s32, "npc", func_8003C78C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C7A8);
+INCLUDE_ASM(s32, "npc", func_8003C7A8);
 
 void func_8003C8AC(void) {
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C8B4);
+INCLUDE_ASM(s32, "npc", func_8003C8B4);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C984);
+INCLUDE_ASM(s32, "npc", func_8003C984);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003C9A8);
+INCLUDE_ASM(s32, "npc", func_8003C9A8);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003CB20);
+INCLUDE_ASM(s32, "npc", func_8003CB20);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003CB44);
+INCLUDE_ASM(s32, "npc", func_8003CB44);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003CC8C);
+INCLUDE_ASM(s32, "npc", func_8003CC8C);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003CCB0);
+INCLUDE_ASM(s32, "npc", func_8003CCB0);
 
 void func_8003CFA0(void) {
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003CFA8);
+INCLUDE_ASM(s32, "npc", func_8003CFA8);
 
-/// Finds the closest NPC to a given point within a radius. Ignores Y position.
-///
-/// NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are ignored.
-/// See also func_8003D0C4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be set.
-///
-/// @param x        X position
-/// @param y        Y position (unused)
-/// @param z        Z position
-/// @param radius   No NPCs further than this distance will be considered
-///
-/// @returns NULL if not found
 Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius) {
     Npc* closestNpc = NULL;
     f32 closestDist = radius;
@@ -307,16 +294,6 @@ Npc* func_8003CFB4(f32 x, f32 y, f32 z, f32 radius) {
     return closestNpc;
 }
 
-/// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
-///
-/// Only NPCs with NPC_FLAG_SIMPLE_XZ_HITBOX set are considered.
-/// See also func_8003CFB4(), which requires that NPC_FLAG_SIMPLE_XZ_HITBOX be unset.
-///
-/// @param x        X position
-/// @param y        Y position (unused)
-/// @param z        Z position
-/// @param radius   No NPCs further than this distance will be considered
-/// @returns NULL if not found
 Npc* func_8003D0C4(f32 x, f32 y, f32 z, f32 radius) {
     Npc* closestNpc = NULL;
     f32 closestDist = radius;
@@ -343,29 +320,28 @@ Npc* func_8003D0C4(f32 x, f32 y, f32 z, f32 radius) {
     return closestNpc;
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D1D4);
+INCLUDE_ASM(s32, "npc", func_8003D1D4);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D2F8);
+INCLUDE_ASM(s32, "npc", func_8003D2F8);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D3BC);
+INCLUDE_ASM(s32, "npc", func_8003D3BC);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D624);
+INCLUDE_ASM(s32, "npc", func_8003D624);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D660);
+INCLUDE_ASM(s32, "npc", func_8003D660);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003D788);
+INCLUDE_ASM(s32, "npc", func_8003D788);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003DA38);
+INCLUDE_ASM(s32, "npc", func_8003DA38);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003DC38);
+INCLUDE_ASM(s32, "npc", func_8003DC38);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003DFA0);
+INCLUDE_ASM(s32, "npc", func_8003DFA0);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003E0D4);
+INCLUDE_ASM(s32, "npc", func_8003E0D4);
 
-INCLUDE_ASM(s32, "13870_len_6980", func_8003E1D0);
+INCLUDE_ASM(s32, "npc", func_8003E1D0);
 
-/// @see set_defeated
 void COPY_set_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
@@ -415,7 +391,7 @@ void func_8003E338(void) {
 
     func_80045AC0();
     gGameState = 0;
-    bind_dynamic_entity_3(0, func_8003E670);
+    bind_dynamic_entity_3(0, npc_dyn_entity_draw_no_op);
 }
 
 void clear_encounter_status(void) {
@@ -456,7 +432,7 @@ void clear_encounter_status(void) {
 
     func_80045AC0();
     gGameState = 0;
-    bind_dynamic_entity_3(NULL, func_8003E670);
+    bind_dynamic_entity_3(NULL, npc_dyn_entity_draw_no_op);
 }
 
 void func_8003E50C(void) {
@@ -523,7 +499,7 @@ void draw_first_strike_ui(void) {
     }
 }
 
-void func_8003E670(void) {
+void npc_dyn_entity_draw_no_op(void) {
 }
 
 void make_npcs(s8 flags, s8 mapID, s32* npcGroupList) {
@@ -556,22 +532,22 @@ void make_npcs(s8 flags, s8 mapID, s32* npcGroupList) {
     }
 }
 
-INCLUDE_ASM(s32, "13870_len_6980", kill_encounter);
+INCLUDE_ASM(s32, "npc", kill_encounter);
 
-INCLUDE_ASM(s32, "13870_len_6980", kill_enemy);
+INCLUDE_ASM(s32, "npc", kill_enemy);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_enemy_ai);
+INCLUDE_ASM(s32, "npc", bind_enemy_ai);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_enemy_aux);
+INCLUDE_ASM(s32, "npc", bind_enemy_aux);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_enemy_interact);
+INCLUDE_ASM(s32, "npc", bind_enemy_interact);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_npc_ai);
+INCLUDE_ASM(s32, "npc", bind_npc_ai);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_npc_aux);
+INCLUDE_ASM(s32, "npc", bind_npc_aux);
 
-INCLUDE_ASM(s32, "13870_len_6980", bind_npc_interact);
+INCLUDE_ASM(s32, "npc", bind_npc_interact);
 
-INCLUDE_ASM(Enemy*, "13870_len_6980", get_enemy, NpcID npcId);
+INCLUDE_ASM(Enemy*, "npc", get_enemy, NpcID npcId);
 
-INCLUDE_ASM(s32, "13870_len_6980", get_enemy_safe);
+INCLUDE_ASM(s32, "npc", get_enemy_safe);

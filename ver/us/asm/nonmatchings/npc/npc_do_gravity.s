@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80039688
+glabel npc_do_gravity
 /* 14A88 80039688 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 14A8C 8003968C AFB00030 */  sw        $s0, 0x30($sp)
 /* 14A90 80039690 0080802D */  daddu     $s0, $a0, $zero

@@ -115,7 +115,7 @@ void step_battle(void) {
             reset_status_menu();
             clear_item_entity_data();
             clear_script_list();
-            clear_npcs();
+            npc_list_clear();
             clear_entity_data(1);
             clear_trigger_data();
             dma_copy(&code_code_16C8E0_ROM_START, &code_code_16C8E0_ROM_END, &code_code_16C8E0_VRAM);
@@ -136,7 +136,7 @@ void step_battle(void) {
 
     update_counters();
     update_battle_state();
-    update_npcs();
+    npc_list_update();
     update_item_entities();
     update_effects();
     func_80116674();

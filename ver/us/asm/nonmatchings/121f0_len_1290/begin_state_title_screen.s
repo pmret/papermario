@@ -143,7 +143,7 @@ glabel begin_state_title_screen
 /* 123F0 80036FF0 00000000 */   nop
 /* 123F4 80036FF4 0C0482EC */  jal       clear_entity_models
 /* 123F8 80036FF8 00000000 */   nop
-/* 123FC 80036FFC 0C00E12F */  jal       clear_npcs
+/* 123FC 80036FFC 0C00E12F */  jal       npc_list_clear
 /* 12400 80037000 00000000 */   nop
 /* 12404 80037004 0C050440 */  jal       func_80141100
 /* 12408 80037008 00000000 */   nop

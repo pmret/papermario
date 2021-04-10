@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel clear_npcs
+glabel npc_list_clear
 /* 138BC 800384BC 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 138C0 800384C0 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 138C4 800384C4 80420070 */  lb        $v0, 0x70($v0)

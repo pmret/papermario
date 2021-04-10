@@ -24,7 +24,7 @@ glabel func_8003617C
 /* 115AC 800361AC 00400008 */  jr        $v0
 /* 115B0 800361B0 00000000 */   nop
 glabel L800361B4_115B4
-/* 115B4 800361B4 0C00E64C */  jal       update_npcs
+/* 115B4 800361B4 0C00E64C */  jal       npc_list_update
 /* 115B8 800361B8 00000000 */   nop
 /* 115BC 800361BC 0C037DD0 */  jal       update_player
 /* 115C0 800361C0 00000000 */   nop
@@ -113,7 +113,7 @@ glabel L80036244_11644
 glabel L800362F8_116F8
 /* 116F8 800362F8 0C00F949 */  jal       update_counters
 /* 116FC 800362FC 00000000 */   nop
-/* 11700 80036300 0C00E64C */  jal       update_npcs
+/* 11700 80036300 0C00E64C */  jal       npc_list_update
 /* 11704 80036304 00000000 */   nop
 /* 11708 80036308 0C037DD0 */  jal       update_player
 /* 1170C 8003630C 00000000 */   nop
@@ -146,7 +146,7 @@ glabel L800362F8_116F8
 /* 11774 80036374 0800D8FA */  j         .L800363E8
 /* 11778 80036378 A4C30000 */   sh       $v1, ($a2)
 glabel L8003637C_1177C
-/* 1177C 8003637C 0C00E64C */  jal       update_npcs
+/* 1177C 8003637C 0C00E64C */  jal       npc_list_update
 /* 11780 80036380 00000000 */   nop
 /* 11784 80036384 0C037DD0 */  jal       update_player
 /* 11788 80036388 00000000 */   nop

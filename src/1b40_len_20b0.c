@@ -214,7 +214,7 @@ void load_engine_data(void) {
     clear_character_set();
     clear_printers();
     func_80112B98();
-    clear_npcs();
+    npc_list_clear();
     func_80141100();
     clear_trigger_data();
     clear_entity_data(0);

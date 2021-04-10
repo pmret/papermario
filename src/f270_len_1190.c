@@ -100,7 +100,7 @@ void state_init_logos(void) {
     func_802DD8F8(0);
     func_8011E224();
     clear_entity_models();
-    clear_npcs();
+    npc_list_clear();
     func_80141100();
     use_default_background_settings();
     clear_entity_data(1);
@@ -215,7 +215,7 @@ void state_step_logos(void) {
                 break;
         }
     }
-    update_npcs();
+    npc_list_update();
     update_cameras();
     intro_logos_update_fade();
 }
@@ -323,7 +323,7 @@ void state_step_pause(void) {
     switch (temp800A0921_2) {
         case 0:
             update_counters();
-            update_npcs();
+            npc_list_update();
             update_player();
             update_effects();
             if (D_8009A658[1] == D_8009A64C) {
@@ -368,7 +368,7 @@ void state_step_pause(void) {
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
-                    clear_npcs();
+                    npc_list_clear();
                     clear_entity_data(0);
                     clear_trigger_data();
                     D_800A0924 = func_80149828();
@@ -460,7 +460,7 @@ void state_step_unpause(void) {
                         init_menu_icon_list();
                         init_item_entity_list();
                         init_script_list();
-                        init_npc_list();
+                        npc_list_update_current();
                         func_80110E58();
                         init_trigger_list();
                         func_801497FC(D_800A0924);
@@ -495,7 +495,7 @@ void state_step_unpause(void) {
                         D_802D9D71 = D_802D9D70 + 1;
 
                         update_counters();
-                        update_npcs();
+                        npc_list_update();
                         update_player();
                         update_effects();
 
@@ -510,7 +510,7 @@ void state_step_unpause(void) {
             break;
         case 3:
             update_counters();
-            update_npcs();
+            npc_list_update();
             update_player();
             update_effects();
 
@@ -527,7 +527,7 @@ void state_step_unpause(void) {
         case 4:
             func_80027088(0);
             update_counters();
-            update_npcs();
+            npc_list_update();
             update_player();
             update_effects();
             enable_player_input();

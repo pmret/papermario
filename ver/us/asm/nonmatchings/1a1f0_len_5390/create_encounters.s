@@ -267,12 +267,12 @@ glabel create_encounters
 /* 1EE74 80043A74 14400006 */  bnez      $v0, .L80043A90
 /* 1EE78 80043A78 00000000 */   nop
 /* 1EE7C 80043A7C 8E4501C4 */  lw        $a1, 0x1c4($s2)
-/* 1EE80 80043A80 0C00E219 */  jal       create_standard_npc
+/* 1EE80 80043A80 0C00E219 */  jal       npc_create_standard
 /* 1EE84 80043A84 03C0202D */   daddu    $a0, $fp, $zero
 /* 1EE88 80043A88 08010EA6 */  j         .L80043A98
 /* 1EE8C 80043A8C 00000000 */   nop
 .L80043A90:
-/* 1EE90 80043A90 0C00E220 */  jal       create_partner_npc
+/* 1EE90 80043A90 0C00E220 */  jal       npc_create_partner
 /* 1EE94 80043A94 03C0202D */   daddu    $a0, $fp, $zero
 .L80043A98:
 /* 1EE98 80043A98 0C00E2B7 */  jal       get_npc_by_index

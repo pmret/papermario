@@ -11,7 +11,7 @@ glabel D_800984B8
 
 .section .text
 
-glabel render_npcs
+glabel npc_list_render
 /* 15BF0 8003A7F0 27BDFF78 */  addiu     $sp, $sp, -0x88
 /* 15BF4 8003A7F4 F7BA0080 */  sdc1      $f26, 0x80($sp)
 /* 15BF8 8003A7F8 3C01459C */  lui       $at, 0x459c
@@ -112,8 +112,8 @@ glabel render_npcs
 /* 15D64 8003A964 4600A007 */  neg.s     $f0, $f20
 /* 15D68 8003A968 4600018D */  trunc.w.s $f6, $f0
 /* 15D6C 8003A96C E6260004 */  swc1      $f6, 4($s1)
-/* 15D70 8003A970 3C028004 */  lui       $v0, %hi(appendGfx_npc)
-/* 15D74 8003A974 24429FD0 */  addiu     $v0, $v0, %lo(appendGfx_npc)
+/* 15D70 8003A970 3C028004 */  lui       $v0, %hi(npc_appendGfx)
+/* 15D74 8003A974 24429FD0 */  addiu     $v0, $v0, %lo(npc_appendGfx)
 /* 15D78 8003A978 AE300008 */  sw        $s0, 8($s1)
 /* 15D7C 8003A97C AE22000C */  sw        $v0, 0xc($s1)
 /* 15D80 8003A980 820200AA */  lb        $v0, 0xaa($s0)

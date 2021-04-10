@@ -473,7 +473,7 @@ glabel L802B66BC_E2AD6C
 /* E2AE74 802B67C4 A082007E */  sb        $v0, 0x7e($a0)
 /* E2AE78 802B67C8 3C048011 */  lui       $a0, %hi(D_8010C96C)
 /* E2AE7C 802B67CC 8C84C96C */  lw        $a0, %lo(D_8010C96C)($a0)
-/* E2AE80 802B67D0 0C00E228 */  jal       free_npc_by_index
+/* E2AE80 802B67D0 0C00E228 */  jal       npc_free_by_index
 /* E2AE84 802B67D4 A220000C */   sb       $zero, 0xc($s1)
 /* E2AE88 802B67D8 24020037 */  addiu     $v0, $zero, 0x37
 /* E2AE8C 802B67DC A62200B0 */  sh        $v0, 0xb0($s1)

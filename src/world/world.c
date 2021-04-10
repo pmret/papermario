@@ -133,7 +133,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     func_802DD8F8((*gameStatus2)->unk_84);
     func_8011E224();
     clear_entity_models();
-    clear_npcs();
+    npc_list_clear();
     func_80141100();
     clear_trigger_data();
     clear_model_data();
