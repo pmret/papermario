@@ -4088,9 +4088,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-ApiStatus N(func_80243778_96C938)(ScriptInstance *script, s32 isInitialCall) {
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc36.inc.c"
 
 #include "world/common/SetManyVars.inc.c"
 

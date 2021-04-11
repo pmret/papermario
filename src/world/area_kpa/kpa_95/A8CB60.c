@@ -192,4 +192,4 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802418FC_A8E37C);
+#include "world/common/UnkFunc36.inc.c"

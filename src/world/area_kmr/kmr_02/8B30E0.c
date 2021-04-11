@@ -18,4 +18,4 @@
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243364_8B33D4);
+#include "world/common/UnkFunc36.inc.c"

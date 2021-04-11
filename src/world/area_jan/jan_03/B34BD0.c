@@ -202,7 +202,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802417A4_B36374);
+#include "world/common/UnkFunc36.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
