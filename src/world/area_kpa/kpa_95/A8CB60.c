@@ -186,7 +186,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_80241304_A8DD84);
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_802417C8_A8E248);
+#include "world/common/UnkFunc34.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_95/A8CB60", func_8024181C_A8E29C);
 

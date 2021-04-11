@@ -14,7 +14,7 @@
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_802409F0_D06120);
+#include "world/common/UnkFunc34.inc.c"
 
 INCLUDE_ASM(s32, "world/area_sam/sam_02/D05F60", func_80240A44_D06174);
 

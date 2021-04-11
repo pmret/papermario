@@ -2020,7 +2020,7 @@ Script N(interact_8024ADE4) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     SI_VAR(10) = SI_VAR(2);
     SI_VAR(11) = SI_VAR(3);
-    N(func_80243644_96C804)();
+    N(UnkFunc34)();
     if (SI_VAR(1) == 0) {
         SI_VAR(8) = SI_VAR(0);
     }
@@ -4073,8 +4073,6 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
-// NEW TILL INC
-
 #include "world/common/UnkFunc32.inc.c"
 
 #include "world/common/UnkFunc33.inc.c"
@@ -4084,23 +4082,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
 // NEW TILL INC
-ApiStatus N(func_80243644_96C804)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = ({ PlayerData* p = &gPlayerData; p; });
-
-    script->varTable[1] = 0;
-    if (playerData->curMaxHP != playerData->curHP) {
-        return ApiStatus_DONE2;
-    }
-    if (playerData->curMaxFP != playerData->curFP) {
-        return ApiStatus_DONE2;
-    }
-    if (playerData->specialBarsFilled != playerData->maxStarPower * 256) {
-        return ApiStatus_DONE2;
-    }
-    script->varTable[1] = 1;
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc34.inc.c"
 
 ApiStatus N(func_80243698_96C858)(ScriptInstance *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

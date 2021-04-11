@@ -1,14 +1,23 @@
 from pathlib import Path
 
-FUNC="""    Bytecode* args = script->ptrReadPos;
-    s32 camIdx = get_variable(script, *args++);
+FUNC="""    PlayerData* playerData = ({ PlayerData* p = &gPlayerData; p; });
 
-    CAM2(camIdx)->vfov = get_variable(script, *args++);
+    script->varTable[1] = 0;
+    if (playerData->curMaxHP != playerData->curHP) {
+        return ApiStatus_DONE2;
+    }
+    if (playerData->curMaxFP != playerData->curFP) {
+        return ApiStatus_DONE2;
+    }
+    if (playerData->specialBarsFilled != playerData->maxStarPower * 256) {
+        return ApiStatus_DONE2;
+    }
+    script->varTable[1] = 1;
 
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc33"
+NEW_FUNC_NAME = f"UnkFunc34"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

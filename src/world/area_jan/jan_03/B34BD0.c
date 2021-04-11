@@ -196,7 +196,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241670_B36240);
+#include "world/common/UnkFunc34.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802416C4_B36294);
 

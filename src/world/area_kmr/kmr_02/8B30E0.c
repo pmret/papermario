@@ -12,7 +12,7 @@
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243230_8B32A0);
+#include "world/common/UnkFunc34.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B30E0", func_80243284_8B32F4);
 
