@@ -1150,7 +1150,7 @@ Script N(80247628) = SCRIPT({
     }
     SetNpcFlagBits(NPC_SELF, ((0x01000000)), FALSE);
     SetNpcSprite(-1, 0xAF0001);
-    N(func_802417D0_95C9D0)();
+    N(UnkFunc31)();
 });
 
 Script N(8024769C) = {
@@ -3299,15 +3299,7 @@ ApiStatus N(func_802415AC_95C7AC)(ScriptInstance *script, s32 isInitialCall) {
 
 void N(UnkFunc28)(ScriptInstance *script, s32 isInitialCall);
 
-ApiStatus N(func_802417D0_95C9D0)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->owner2.npcID);
-
-    npc->onRender = N(UnkFunc28);
-    npc->blurBuf = heap_malloc(8);
-    *((s32*)npc->blurBuf) = 0;
-
-    return ApiStatus_DONE1;
-}
+#include "world/common/UnkFunc31.inc.c"
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 

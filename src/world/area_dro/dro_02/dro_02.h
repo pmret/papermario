@@ -25,7 +25,7 @@ ApiStatus N(UnkRotatePartner)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkRotatePlayer)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkYawFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024043C_9695FC)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_80240660_969820)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc31)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802409EC_969BAC)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall);

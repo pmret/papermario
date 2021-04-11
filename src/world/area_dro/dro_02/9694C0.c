@@ -1048,7 +1048,7 @@ Script N(80247250) = SCRIPT({
     }
     SetNpcFlagBits(NPC_SELF, ((0x01000000)), FALSE);
     SetNpcSprite(-1, 0x00AF0001);
-    N(func_80240660_969820)();
+    N(UnkFunc31)();
 });
 
 Script N(802472C4) = {
@@ -1723,7 +1723,7 @@ s32 N(D_80248DD8_971F98)[] = {
     0x00000000, 0x00000000, 0x001201C7, 0x14564BFF, 0x00000000, 0x00000000, 0x000001C7, 0x321567FF,
 };
 
-// vertexes but vtxdis ignores the flag entirely, but it's set here
+// vertexes but vtxdis ignores the flag entirely, and it's set here
 s32 N(D_802490F8_9722B8)[] = {
     0xFE6F008C, 0xFE14FE4D, 0x008CFE21, 0xFE5300C8, 0xFE29FE75, 0x00BEFE1B, 0xFE39008C, 0xFE3FFE3F,
     0x00BEFE47, 0xFE1C008C, 0xFE49FE22, 0x00C8FE51, 0xFE0C008C, 0xFE64FE12, 0x00BEFE6C, 0xFDE6008C,
@@ -3129,7 +3129,6 @@ ApiStatus N(func_80240300_9694C0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/Set80151310.inc.c"
 
-// NEW 2
 ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
     u16 phi_s0 = get_variable(script, SI_SAVE_FLAG(1768));
@@ -3187,17 +3186,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(UnkFunc28)(ScriptInstance *script, s32 isInitialCall);
-
-ApiStatus N(func_80240660_969820)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->owner2.npcID);
-
-    npc->onRender = N(UnkFunc28);
-    npc->blurBuf = heap_malloc(8);
-    *((s32*)npc->blurBuf) = 0;
-
-    return ApiStatus_DONE1;
-}
+#include "world/common/UnkFunc31.inc.c"
 
 #include "world/common/GetNpcUnsafeOwner2.inc.c"
 

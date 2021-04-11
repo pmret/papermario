@@ -1,12 +1,15 @@
 from pathlib import Path
 
-FUNC="""    CollisionStatus* collisionStatus = &gCollisionStatus;
+FUNC="""    Npc *npc = get_npc_unsafe(script->owner2.npcID);
 
-    set_variable(script, *script->ptrReadPos, collisionStatus->currentFloor);
-    return ApiStatus_DONE2;
+    npc->onRender = N(UnkFunc28);
+    npc->blurBuf = heap_malloc(8);
+    *((s32*)npc->blurBuf) = 0;
+
+    return ApiStatus_DONE1;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc30"
+NEW_FUNC_NAME = f"UnkFunc31"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
