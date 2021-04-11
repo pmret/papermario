@@ -190,7 +190,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241574_B36144);
+#include "world/common/UnkFunc33.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 

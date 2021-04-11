@@ -2690,7 +2690,7 @@ Script N(8024D494) = SCRIPT({
     PlayerMoveTo(-179, -198, 0);
     spawn {
         sleep 15;
-        N(func_80243548_96C708)(0, 40);
+        N(UnkFunc33)(0, 40);
         SetCamType(0, 4, 0);
         SetCamPitch(0, 95, -61);
         SetCamDistance(0, 108);
@@ -2713,7 +2713,7 @@ Script N(8024D494) = SCRIPT({
     sleep 20;
     spawn {
         sleep 81;
-        N(func_80243548_96C708)(0, 25);
+        N(UnkFunc33)(0, 25);
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         sleep 1;
@@ -4077,14 +4077,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 
 #include "world/common/UnkFunc32.inc.c"
 
-ApiStatus N(func_80243548_96C708)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 camIdx = get_variable(script, *args++);
-
-    CAM2(camIdx)->vfov = get_variable(script, *args++);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc33.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 

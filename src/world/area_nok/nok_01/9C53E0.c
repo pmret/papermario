@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802407F4_9C5BD4);
 
 #include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240B30_9C5F10);
+#include "world/common/UnkFunc33.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 

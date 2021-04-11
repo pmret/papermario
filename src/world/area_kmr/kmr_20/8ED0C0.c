@@ -6,7 +6,7 @@
 
 #include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241364_8ED184);
+#include "world/common/UnkFunc33.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 

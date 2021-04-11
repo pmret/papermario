@@ -474,7 +474,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243870_8040F0);
+#include "world/common/UnkFunc33.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
