@@ -1,23 +1,15 @@
 from pathlib import Path
 
-FUNC="""    PlayerData* playerData = ({ PlayerData* p = &gPlayerData; p; });
+FUNC="""    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
-    script->varTable[1] = 0;
-    if (playerData->curMaxHP != playerData->curHP) {
-        return ApiStatus_DONE2;
-    }
-    if (playerData->curMaxFP != playerData->curFP) {
-        return ApiStatus_DONE2;
-    }
-    if (playerData->specialBarsFilled != playerData->maxStarPower * 256) {
-        return ApiStatus_DONE2;
-    }
-    script->varTable[1] = 1;
-
+    set_transition_stencil_color(0, var1, var2, var3);
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc34"
+NEW_FUNC_NAME = f"UnkFunc35"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

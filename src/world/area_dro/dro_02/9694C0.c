@@ -2012,7 +2012,7 @@ Script N(8024AC8C) = SCRIPT({
 });
 
 Script N(interact_8024ADE4) = SCRIPT({
-    N(func_80243698_96C858)(0, 0, 0);
+    N(UnkFunc35)(0, 0, 0);
     await N(8024D434);
     if (SI_VAR(0) == 0) {
         return;
@@ -4084,15 +4084,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 // NEW TILL INC
 #include "world/common/UnkFunc34.inc.c"
 
-ApiStatus N(func_80243698_96C858)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-
-    set_transition_stencil_color(0, var1, var2, var3);
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc35.inc.c"
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 

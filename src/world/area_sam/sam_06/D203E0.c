@@ -248,7 +248,7 @@ ApiStatus N(func_80241EB4_D21D44)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc34.inc.c"
 
-INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80242164_D21FF4);
+#include "world/common/UnkFunc35.inc.c"
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 

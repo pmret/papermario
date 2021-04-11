@@ -482,7 +482,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/UnkFunc34.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802439C0_804240);
+#include "world/common/UnkFunc35.inc.c"
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
