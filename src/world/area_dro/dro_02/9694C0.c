@@ -4081,7 +4081,6 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-// NEW TILL INC
 #include "world/common/UnkFunc34.inc.c"
 
 #include "world/common/UnkFunc35.inc.c"
