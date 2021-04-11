@@ -366,6 +366,7 @@ replace_funcs = {
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
+    "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},

@@ -60,10 +60,6 @@ typedef struct {
 void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1);
 
 Script N(80248504);
-void func_80071690(s32, f32, f32, f32);
-Effect* func_800715D0(s32, f32, f32, f32);
-Effect* func_80071810(s32, f32, f32, f32);
-Effect* func_80072890(s32, f32, f32, f32, f32, s32);
 
 typedef struct {
     /* 0x00 */ s32 flags;
@@ -76,13 +72,17 @@ typedef struct {
     /* 0x1C */ void* unk_1C;
 } N(temp);
 
-s32 D_8024DFC0;
-s32 D_8024DFD8;
-N(temp)* D_8024DFE0;
-N(temp)* D_8024DFE4;
-N(temp)* D_8024DFE8;
-s32 D_8024DFF0[0x70];
-s32 D_8024E1B4;
+static s32 N(D_8024DFC0);
+static s8 N(pad_D_8024DFC4)[0x10];
+static s32 N(D_8024DFD8);
+static s8 N(pad_D_8024DFDC)[0x4];
+static N(temp)* N(D_8024DFE0);
+static N(temp)* N(D_8024DFE4);
+static N(temp)* N(D_8024DFE8);
+static s8 N(pad_D_8024DFEC)[0x4];
+static s32 N(D_8024DFF0)[0x70];
+static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
+static s32 N(D_8024E1B4);
 
 EntryList N(entryList) = {
     { -342.0f, 0.0f, 316.0f, 45.0f },
@@ -465,7 +465,7 @@ Script N(main) = SCRIPT({
     spawn N(8024DD78);
 });
 
-static s32 N(pad_5004)[] = {
+s32 N(pad_5004)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
@@ -1239,7 +1239,7 @@ Script N(802477E8) = SCRIPT({
 
 Script N(8024792C) = {
     SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802477E8), 0x10, 0, D_8024DFF0, 0, 1),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802477E8), 0x10, 0, N(D_8024DFF0), 0, 1),
     SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
@@ -1307,7 +1307,7 @@ Script N(80247D20) = {
     SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(11)),
     SI_CMD(ScriptOpcode_SET, SI_VAR(1), SI_VAR(2)),
     SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802479FC), 0x10, 0, D_8024DFF0, 0, 1),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802479FC), 0x10, 0, N(D_8024DFF0), 0, 1),
     SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
@@ -2398,7 +2398,7 @@ s32 N(shopOwnerNPC_8024BA80)[] = {
     0x00000006, 0x00940101, 0x00940105, N(8024B894), 0x00000000, 0x00000000, N(intTable_8024B4A0),
 };
 
-static s32 N(pad_BA9C) = {
+s32 N(pad_BA9C) = {
     0x00000000,
 };
 
@@ -2597,7 +2597,7 @@ Script N(8024C4C8) = SCRIPT({
     SetGroupEnabled(82, 0);
 });
 
-static s32 N(pad_C574)[] = {
+s32 N(pad_C574)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
@@ -2849,7 +2849,7 @@ Script N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAF80, 430, 0, -120, 0, ITEM_SPIN_JUMP, N(8024D2B0), 1939, MAKE_ENTITY_END);
 });
 
-static s32 N(pad_D3BC) = {
+s32 N(pad_D3BC) = {
     0x00000000,
 };
 
@@ -3321,7 +3321,7 @@ ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
-    if (quizzesAnswered < 0x3E7) {
+    if (quizzesAnswered < 999) {
         playerData->quizzesAnswered++;
     }
 
@@ -3339,11 +3339,11 @@ ApiStatus N(func_80241BE0_95CDE0)(ScriptInstance *script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        Effect** effect = &D_8024DFE0;
+        Effect** effect = &N(D_8024DFE0);
 
         *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        N(D_8024DFE4) = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        N(D_8024DFE8) = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -3353,7 +3353,7 @@ ApiStatus N(func_80241BE0_95CDE0)(ScriptInstance *script, s32 isInitialCall) {
         effectPtr->unk_1C = 0;
     }
 
-    effectPtr = D_8024DFE0->unk_0C;
+    effectPtr = N(D_8024DFE0)->unk_0C;
 
     effectPtr->unk_20 += 10;
     effectPtr->unk_28 += 10;
@@ -3372,11 +3372,11 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance *script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        D_8024DFE4->flags |= 0x10;
-        D_8024DFE8->flags |= 0x10;
+        N(D_8024DFE4)->flags |= 0x10;
+        N(D_8024DFE8)->flags |= 0x10;
     }
 
-    effectPtr = D_8024DFE0->unk_0C;
+    effectPtr = N(D_8024DFE0)->unk_0C;
     effectPtr->unk_18 -= 10;
     effectPtr->unk_20 -= 10;
     effectPtr->unk_24.s -= 10;
@@ -3385,8 +3385,8 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance *script, s32 isInitialCall) {
 
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
-        remove_effect(D_8024DFE0, effectPtr);
-        func_801235C0(D_8024DFC0);
+        remove_effect(N(D_8024DFE0), effectPtr);
+        func_801235C0(N(D_8024DFC0));
         return ApiStatus_DONE2;
     }
 
@@ -3394,13 +3394,13 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance *script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80241EAC_95D0AC)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFE0->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
+    N(D_8024DFE0)->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241EE0_95D0E0)(ScriptInstance *script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = D_8024DFE0->unk_0C;
+    EffectInstanceDataThing* effectPtr = N(D_8024DFE0)->unk_0C;
 
     switch (var) {
         case 0:
@@ -3421,17 +3421,17 @@ ApiStatus N(func_80241EE0_95D0E0)(ScriptInstance *script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80241F60_95D160)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFE8->unk_0C->unk_1C = 0;
+    N(D_8024DFE8)->unk_0C->unk_1C = 0;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241F78_95D178)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFE8->unk_0C->unk_1C = 1;
+    N(D_8024DFE8)->unk_0C->unk_1C = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241F94_95D194)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFE8->unk_0C->unk_1C = 2;
+    N(D_8024DFE8)->unk_0C->unk_1C = 2;
     return ApiStatus_DONE2;
 }
 
@@ -3448,7 +3448,7 @@ ApiStatus N(func_80241F94_95D194)(ScriptInstance *script, s32 isInitialCall) {
 #include "world/common/UnkPartnerFuncs.inc.c"
 
 void N(func_80242468_95D668)(void) {
-    s32 var = get_variable(NULL, D_8024DFD8);
+    s32 var = get_variable(NULL, N(D_8024DFD8));
 
     if (var == 1) {
         func_80071690(0, 0, 0, 0);
@@ -3458,7 +3458,7 @@ void N(func_80242468_95D668)(void) {
 }
 
 ApiStatus N(func_802424D4_95D6D4)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    N(D_8024DFC0) = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 
@@ -3504,13 +3504,13 @@ ApiStatus N(func_802427BC_95D9BC)(ScriptInstance *script, s32 isInitialCall) {
     i = 0;
     if (ptr != NULL) {
         for (; *ptr != 0; i++) {
-            *(D_8024DFF0 + i) = *ptr++;
+            *(N(D_8024DFF0) + i) = *ptr++;
         }
-        D_8024DFF0[i] = 0;
+        N(D_8024DFF0)[i] = 0;
     } else {
         for (; i < 0x70; i++) {
-            *(D_8024DFF0 + i) = i + 16;
-            D_8024DFF0[0x70] = 0;
+            *(N(D_8024DFF0) + i) = i + 16;
+            N(D_8024DFF0)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
@@ -3647,13 +3647,13 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance *script, s32 isInitialCall) {
 ApiStatus N(func_80243014_95E214)(ScriptInstance *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
-    D_8024E1B4 = npc->currentAnim;
+    N(D_8024E1B4) = npc->currentAnim;
     npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80243058_95E258)(ScriptInstance *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
+    get_npc_unsafe(script->varTable[2])->currentAnim = N(D_8024E1B4);
     return ApiStatus_DONE2;
 }
 

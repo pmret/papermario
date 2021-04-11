@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "code_cd180_len_38f0", _render_transition_stencil);
 
-INCLUDE_ASM(void, "code_cd180_len_38f0", set_transition_stencil_zoom_0, s32 arg0, f32 arg1);
+INCLUDE_ASM(void, "code_cd180_len_38f0", set_transition_stencil_zoom_0, u8 arg0, f32 arg1);
 
 INCLUDE_ASM(void, "code_cd180_len_38f0", set_transition_stencil_zoom_1, s32 arg0, f32 arg1);
 

@@ -168,7 +168,7 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "code_fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "code_fa4c0_len_3bf0", func_802D663C);
+INCLUDE_ASM(ApiStatus, "code_fa4c0_len_3bf0", func_802D663C, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

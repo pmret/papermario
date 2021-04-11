@@ -107,8 +107,12 @@ void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
 
 void func_80071090(s32, f32, f32, f32, s32);
 Effect* func_80071750(s32, f32, f32, f32, f32, s32);
-void func_800720B0(s32, f32, f32, f32, f32, s32);
+Effect* func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
+Effect* func_800715D0(s32, f32, f32, f32);
+Effect* func_80071810(s32, f32, f32, f32);
+Effect* func_80072890(s32, f32, f32, f32, f32, s32);
+void func_80071690(s32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
@@ -197,7 +201,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_anim_mesh(s32 arg0);
-void set_transition_stencil_zoom_0(s32, f32);
+void set_transition_stencil_zoom_0(u8, f32);
 void set_transition_stencil_zoom_1(s32, f32);
 void func_80137DC0(s32, f32*, f32*);
 s32 set_transition_stencil_color(s32, u8, u8, u8);

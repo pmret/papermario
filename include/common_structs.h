@@ -828,6 +828,10 @@ typedef struct EffectBlueprint {
     /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
+typedef struct {
+    char unk_00[0x38];
+    f32 unk_38[4];
+} EffectUnkStruct1;
 // TODO figure out what this actually is
 // func_800715D0 invokes gEffectTable[78]'s entryPoint function
 // func_80072230 invokes gEffectTable[111]'s entryPoint function
@@ -852,7 +856,9 @@ typedef struct {
     s32 unk_30;
     s32 unk_34;
     s32 unk_38;
-    char unk_3C[0x34];
+    char unk_3C[0xC];
+    EffectUnkStruct1* unk_48;
+    char unk_4C[0x24];
     s32 unk_70;
     s32 unk_74;
 } EffectInstanceDataThing;
@@ -1695,7 +1701,8 @@ typedef struct {
 } PauseItemPage; // size = 0xC
 
 typedef struct {
-    /* 0x00 */ char unk_00[8];
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ char unk_04[4];
     /* 0x08 */ s8* unk_08;
     /* 0x0C */ void* fpInit;
     /* 0x10 */ void* fpHandleInput;
