@@ -70,6 +70,29 @@ ApiStatus N(func_802406A8_A39B88)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
+/*
+ApiStatus N(func_802406E0_A39BC0)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/SetManyVars.inc.c"
 

@@ -2046,7 +2046,7 @@ Script N(interact_8024ADE4) = SCRIPT({
         MakeLerp(0, 255, 60, 0);
     0:
         UpdateLerp();
-        N(func_802434CC_96C68C)(3, SI_VAR(0));
+        N(UnkFunc32)(3, SI_VAR(0));
         sleep 1;
         if (SI_VAR(1) == 1) {
             goto 0;
@@ -2061,7 +2061,7 @@ Script N(interact_8024ADE4) = SCRIPT({
         MakeLerp(255, 0, 30, 0);
     1:
         UpdateLerp();
-        N(func_802434CC_96C68C)(0, SI_VAR(0));
+        N(UnkFunc32)(0, SI_VAR(0));
         sleep 1;
         if (SI_VAR(1) == 1) {
             goto 1;
@@ -3341,7 +3341,6 @@ ApiStatus N(func_80241364_96A524)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// NEW TILL INC
 ApiStatus N(func_80241394_96A554)(ScriptInstance *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
@@ -3442,27 +3441,27 @@ ApiStatus N(func_802416FC_96A8BC)(ScriptInstance *script, s32 isInitialCall) {
 
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0xF, 1, 1, 0, 0x800);
-    set_variable(script, 0xF4ACD480, ret);
+    set_variable(script, SI_ARRAY(0), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x10, 1, 1, 0, 0x800);
-    set_variable(script, 0xF4ACD481, ret);
+    set_variable(script, SI_ARRAY(1), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x11, 1, 1, 0, 0x800);
-    set_variable(script, 0xF4ACD482, ret);
+    set_variable(script, SI_ARRAY(2), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
-    set_variable(script, 0xF4ACD483, ret);
+    set_variable(script, SI_ARRAY(3), ret);
 
-    set_variable(script, 0xF4ACD487, bind_dynamic_entity_3(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
+    set_variable(script, SI_ARRAY(7), bind_dynamic_entity_3(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241874_96AA34)(ScriptInstance *script, s32 isInitialCall) {
-    func_8013A854(get_variable(script, 0xF4ACD480));
-    func_8013A854(get_variable(script, 0xF4ACD481));
-    func_8013A854(get_variable(script, 0xF4ACD482));
-    func_8013A854(get_variable(script, 0xF4ACD483));
-    func_801235C0(get_variable(script, 0xF4ACD487));
+    func_8013A854(get_variable(script, SI_ARRAY(0)));
+    func_8013A854(get_variable(script, SI_ARRAY(1)));
+    func_8013A854(get_variable(script, SI_ARRAY(2)));
+    func_8013A854(get_variable(script, SI_ARRAY(3)));
+    func_801235C0(get_variable(script, SI_ARRAY(7)));
     return ApiStatus_DONE2;
 }
 
@@ -3542,7 +3541,7 @@ u32 N(func_8024190C_96AACC)(ScriptInstance *script, s32 isInitialCall) {
         
         gSPMatrix(gfx++, gDisplayContext->lookAt[0].l[0].l.col[gMatrixListPos + 0x11630], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-        func_8013AF70(get_variable(N(D_8024EFCC), 0xF4ACD480), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(0)), &subroutine_arg26, 0x30, &subroutine_arg6);
         
         gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
 
@@ -3558,8 +3557,8 @@ u32 N(func_8024190C_96AACC)(ScriptInstance *script, s32 isInitialCall) {
         
         gSPMatrix(gfx++, 0xFFFFFFFF, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-        func_8013AF70(get_variable(N(D_8024EFCC), 0xF4ACD481), &subroutine_arg26, 0x30, &subroutine_arg6);
-        func_8013AF70(get_variable(N(D_8024EFCC), 0xF4ACD482), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(1)), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(2)), &subroutine_arg26, 0x30, &subroutine_arg6);
         
         gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
 
@@ -3571,7 +3570,7 @@ u32 N(func_8024190C_96AACC)(ScriptInstance *script, s32 isInitialCall) {
         gMatrixListPos++;
 
         func_802DE044(&subroutine_arg2C, script->labelIndices[8], script->labelIndices[12]);
-        func_8013AF70(get_variable(N(D_8024EFCC), 0xF4ACD483, subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E /2), subroutine_arg2F / 2, 0xFF), &subroutine_arg26, 0x10, &subroutine_arg6);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E /2), subroutine_arg2F / 2, 0xFF), &subroutine_arg26, 0x10, &subroutine_arg6);
         
         gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
     }
@@ -3588,7 +3587,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg
     f32 sp60[4][4];
     f32 spA0[4][4];
 
-    guPositionF(&spA0, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, 0xF4ACD484), get_variable(*CC_ptr, 0xF4ACD485), get_variable(*CC_ptr, 0xF4ACD486));
+    guPositionF(&spA0, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
     
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
@@ -3611,7 +3610,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
     N(temp)** effect2;
     N(temp)** effect3;
     EffectInstanceDataThing* effectPtr;
-    s32 var = get_variable(N(D_8024EFCC), 0xF4ACD489);
+    s32 var = get_variable(N(D_8024EFCC), SI_ARRAY(9));
     s32 i, j, x;
     f32 subroutine_arg6;
     f32 subroutine_arg7;
@@ -3662,7 +3661,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
     switch (var) {
         case 0:
             N(D_8024EF88) = 0;
-            set_variable(N(D_8024EFCC), 0xF4ACD489, 1);
+            set_variable(N(D_8024EFCC), SI_ARRAY(9), 1);
             ptr = &N(D_8024F010);
             
             ptr->unk_00 = 1;
@@ -3706,7 +3705,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
                 gPlayerStatus.position.y = -1000.0f;
             }
             if ((*ptr2) == 0x14) {
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 2);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 2);
                 (*ptr2) = 0;
             }
             break;
@@ -3731,7 +3730,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             (*ptr3)++;
             if ((*ptr3) == 0xA) {
                 (*ptr3) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 4);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 4);
             }
             break;
 
@@ -3751,7 +3750,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             (*ptr4)++;
             if ((*ptr4) == 0x14) {
                 (*ptr4) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 5);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 5);
                 sfx_play_sound_with_params(0x203, 0, 0x18, 0);
             }
             break;
@@ -3770,7 +3769,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             }
             if ((*ptr5) == 0xA) {
                 (*ptr5) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 6);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 6);
                 sfx_play_sound_with_params(0x203, 0, 0x40, 0);
             }
             break;
@@ -3789,7 +3788,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             }
             if ((*ptr6) == 0xA) {
                 (*ptr6) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 7);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 7);
                 sfx_play_sound_with_params(0x203, 0, 0x68, 0);
             }
             break;
@@ -3808,7 +3807,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             }
             if ((*ptr7) == 0xA) {
                 (*ptr7) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 8);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 8);
             }
             break;
 
@@ -3822,7 +3821,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             (*ptr8)++;
             if ((*ptr8) == 0xA) {
                 (*ptr8) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 9);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 9);
             }
             break;
 
@@ -3842,7 +3841,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             (*ptr9)++;
             if ((*ptr9) == 0xA) {
                 (*ptr9) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 10);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 10);
             }
             break;
 
@@ -3873,7 +3872,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             ptr->unk_10 = 180.0f;
             ptr->unk_2C = 68.0f;
             ptr->unk_34 = 180.0f;
-            set_variable(N(D_8024EFCC), 0xF4ACD489, 0xC);
+            set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xC);
             *gPauseMenuTabs = NULL;
             N(D_8024EF84) = 1.0f;
             func_80242214_96B3D4(1, &subroutine_arg12, &subroutine_arg13, &subroutine_arg14, &subroutine_arg15);
@@ -3936,7 +3935,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
             if (ptr12->unk_2C < -5.0f) {
                 ptr12->unk_2C = -5.0f;
                 (*ptr10) = 0;
-                set_variable(N(D_8024EFCC), 0xF4ACD489, 0xD);
+                set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xD);
                 ptr12->unk_00 = 0;
                 ptr12->unk_24 = 0;
                 func_80242214_96B3D4(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
@@ -3963,16 +3962,16 @@ void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
     f32 sp20[4][4];
     u32 temp_s1;
 
-    guPositionF(&sp20, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, 0xF4ACD484), get_variable(*CC_ptr, 0xF4ACD485), get_variable(*CC_ptr, 0xF4ACD486));
+    guPositionF(&sp20, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
     
     temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[2], &sp20);
     if ((N(D_8024F010)[0].unk_00 == 2) && ((temp_s1 - 1) < 2)) {
-        set_variable(*CC_ptr, 0xF4ACD489, 3);
+        set_variable(*CC_ptr, SI_ARRAY(9), 3);
     }
     if ((N(D_8024F010)[0].unk_00 == 3) && ((temp_s1 - 1) < 2)) {
-        set_variable(N(D_8024EFCC), 0xF4ACD489, 0xB);
+        set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xB);
     }
 }
 
@@ -4018,7 +4017,6 @@ ApiStatus N(func_80243314_96C4D4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// NEW TILL INC
 #ifdef NON_MATCHING
 ApiStatus N(func_8024334C_96C50C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -4077,16 +4075,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5
 
 // NEW TILL INC
 
-ApiStatus N(func_802434CC_96C68C)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-
-    set_transition_stencil_center(0, 0, 0xBE, 0x91);
-    set_transition_stencil_zoom_0(var1, var2);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc32.inc.c"
 
 ApiStatus N(func_80243548_96C708)(ScriptInstance *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

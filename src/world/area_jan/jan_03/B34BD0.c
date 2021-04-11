@@ -188,7 +188,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_802414F8_B360C8);
+#include "world/common/UnkFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241574_B36144);
 
@@ -243,8 +243,54 @@ ApiStatus N(func_80241A2C_B365FC)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241A64_B36634);
+/*
+ApiStatus N(func_80241A64_B36634)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B00_B366D0);
+/*
+ApiStatus N(func_80241B00_B366D0)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80241B9C_B3676C);
 /*

@@ -1,15 +1,16 @@
 from pathlib import Path
 
-FUNC="""    Npc *npc = get_npc_unsafe(script->owner2.npcID);
+FUNC="""    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
 
-    npc->onRender = N(UnkFunc28);
-    npc->blurBuf = heap_malloc(8);
-    *((s32*)npc->blurBuf) = 0;
+    set_transition_stencil_center(0, 0, 0xBE, 0x91);
+    set_transition_stencil_zoom_0(var1, var2);
 
-    return ApiStatus_DONE1;
+    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc31"
+NEW_FUNC_NAME = f"UnkFunc32"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

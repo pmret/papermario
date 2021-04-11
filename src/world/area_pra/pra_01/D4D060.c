@@ -72,8 +72,54 @@ ApiStatus N(func_80241200_D4E240)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
+/*
+ApiStatus N(func_80241238_D4E278)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
+/*
+ApiStatus N(func_802412D4_D4E314)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

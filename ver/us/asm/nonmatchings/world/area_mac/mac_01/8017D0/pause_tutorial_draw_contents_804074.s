@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel pause_tutorial_draw_contents_804074
+glabel mac_01_UnkFunc32
 /* 804074 802437F4 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 804078 802437F8 AFB10014 */  sw        $s1, 0x14($sp)
 /* 80407C 802437FC 0080882D */  daddu     $s1, $a0, $zero

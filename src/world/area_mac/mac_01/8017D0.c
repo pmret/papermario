@@ -472,7 +472,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243740_803FC0);
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", pause_tutorial_draw_contents_804074);
+#include "world/common/UnkFunc32.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243870_8040F0);
 
@@ -529,6 +529,29 @@ ApiStatus N(func_80243D28_8045A8)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D60_8045E0);
+/*
+ApiStatus N(func_80243D60_8045E0)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* temp_v0 = get_variable(script, *args);
+    s32* ptr = temp_v0;
+    s32 i;
+
+    i = 0;
+    if (ptr != NULL) {
+        s32 new_var;
+        for (new_var = ptr[0]; new_var != 0; i++) {
+            *(N(D_8024F080) + i) = ptr[i];
+        }
+        N(D_8024F080)[i] = 0;
+    } else {
+        for (; i < 0x70; i++) {
+            *(N(D_8024F080) + i) = i + 16;
+            N(D_8024F080)[0x70] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/SetManyVars.inc.c"
 
