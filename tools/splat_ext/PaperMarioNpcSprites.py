@@ -72,8 +72,8 @@ class Sprite:
 
     def write_to_dir(self, path):
         SpriteSheet = ET.Element("SpriteSheet", {
-            "a": str(self.max_components),
-            "b": str(self.num_variations),
+            "maxComponents": str(self.max_components),
+            "paletteGroups": str(self.num_variations),
         })
 
         PaletteList = ET.SubElement(SpriteSheet, "PaletteList")
