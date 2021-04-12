@@ -279,20 +279,16 @@ void free_entity_model_by_ref(EntityModel* entityModel) {
 void set_entity_model_flags(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if (entityModel != NULL) {
-        if (entityModel->flags) {
-            entityModel->flags |= newFlags;
-        }
+    if ((entityModel != NULL) && (entityModel->flags)) {
+        entityModel->flags |= newFlags;
     }
 }
 
 void clear_entity_model_flags(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if (entityModel != NULL) {
-        if (entityModel->flags) {
-            entityModel->flags &= ~newFlags;
-        }
+    if ((entityModel != NULL) && entityModel->flags) {
+        entityModel->flags &= ~newFlags;
     }
 }
 
