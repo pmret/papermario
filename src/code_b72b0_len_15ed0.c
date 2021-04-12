@@ -28,14 +28,14 @@ void clear_entity_models(void) {
         (*gCurrentEntityModelList)[i] = NULL;
     }
 
-    D_8015437C = 0xA;
-    D_80154380 = 0xA;
-    D_80154384 = 0xA;
-    D_80154388 = 0xA;
-    D_8015438C = 0x320;
+    D_8015437C = 10;
+    D_80154380 = 10;
+    D_80154384 = 10;
+    D_80154388 = 10;
+    D_8015438C = 800;
     gEntityModelCount = 0;
     D_80154378 = 0;
-    D_80154390 = 0x3E8;
+    D_80154390 = 1000;
 }
 
 void init_entity_models(void) {
@@ -47,14 +47,14 @@ void init_entity_models(void) {
         gCurrentEntityModelList = &gBattleEntityModelList;
     }
 
-    D_8015437C = 0xA;
-    D_80154380 = 0xA;
-    D_80154384 = 0xA;
-    D_80154388 = 0xA;
-    D_8015438C = 0x320;
+    D_8015437C = 10;
+    D_80154380 = 10;
+    D_80154384 = 10;
+    D_80154388 = 10;
+    D_8015438C = 800;
     gEntityModelCount = 0;
     D_80154378 = 0;
-    D_80154390 = 0x3E8;
+    D_80154390 = 1000;
 }
 
 s32 load_entity_model(s32* cmdList) {
@@ -78,7 +78,7 @@ s32 load_entity_model(s32* cmdList) {
     ASSERT(newEntityModel != NULL);
 
     newEntityModel->flags = 0x17;
-    newEntityModel->renderMode = (u8)1;
+    newEntityModel->renderMode = 1;
     newEntityModel->displayList = NULL;
     newEntityModel->cmdListReadPos = cmdList;
     newEntityModel->nextFrameTime = 1.0f;
@@ -146,15 +146,13 @@ void update_entity_rendercmd(s32 idx) {
     if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
         idx &= ~0x800;
         entityModel = (*gCurrentEntityModelList)[idx];
-        if (entityModel != NULL) {
-            if (entityModel->flags) {
-                if (!(entityModel->flags & 0x20)) {
-                    if (!(entityModel->flags & 0x20000)) {
-                        entityModel->flags &= ~0x100;
-                        entityModel->nextFrameTime -= entityModel->timeScale;
-                        if (entityModel->nextFrameTime <= 0.0f) {
-                            while (step_entity_rendercmd(entityModel));
-                        }
+        if ((entityModel != NULL) && (entityModel->flags)) {
+            if (!(entityModel->flags & 0x20)) {
+                if(!(entityModel->flags & 0x20000)) {
+                    entityModel->flags &= ~0x100;
+                    entityModel->nextFrameTime -= entityModel->timeScale;
+                    if (entityModel->nextFrameTime <= 0.0f) {
+                        while (step_entity_rendercmd(entityModel));
                     }
                 }
             }
@@ -230,17 +228,15 @@ void func_80122D7C(s32 idx, u32* arg1) {
     u32* phi_a1;
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if (entityModel != NULL) {
-        if (entityModel->flags) {
-            phi_a1 = arg1;
-            if (arg1 == NULL) {
-                phi_a1 = &D_8014C260;
-            }
-            entityModel->cmdListReadPos = phi_a1;
-            entityModel->cmdListSavedPos = phi_a1;
-            entityModel->nextFrameTime = 1.0f;
-            entityModel->timeScale = 1.0f;
+    if ((entityModel != NULL) && (entityModel->flags)) {
+        phi_a1 = arg1;
+        if (arg1 == NULL) {
+            phi_a1 = &D_8014C260;
         }
+        entityModel->cmdListReadPos = phi_a1;
+        entityModel->cmdListSavedPos = phi_a1;
+        entityModel->nextFrameTime = 1.0f;
+        entityModel->timeScale = 1.0f;
     }
 }
 
@@ -253,18 +249,15 @@ void free_entity_model_by_index(s32 idx) {
     EntityModelList** entityModelList = &gCurrentEntityModelList;
     EntityModel* entityModel = (**entityModelList)[index];
 
-    if (entityModel != NULL) {
-        if (entityModel->flags) {
-            if (entityModel->flags & 0x400) {
-                heap_free(entityModel->displayList);
-            }
-            {
-                s32* modelCount = &gEntityModelCount;
-
-                heap_free((**entityModelList)[index]);
-                (**entityModelList)[index] = NULL;
-                (*modelCount)--;
-            }
+    if ((entityModel != NULL) && (entityModel->flags)) {
+        if (entityModel->flags & 0x400) {
+            heap_free(entityModel->displayList);
+        }
+        {
+            s32* modelCount = &gEntityModelCount;
+            heap_free((**entityModelList)[index]);
+            (**entityModelList)[index] = NULL;
+            (*modelCount)--;
         }
     }
 }
@@ -493,11 +486,9 @@ void render_dynamic_entities(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL) {
-            if (!(entity->flags & 2)) {
-                if (!(entity->flags & 4)) {
-                    entity->draw();
-                }
+        if ((entity != NULL) && !(entity->flags & 2)) {
+            if (!(entity->flags & 4)) {
+                entity->draw();
             }
         }
     }
@@ -508,11 +499,9 @@ void func_801234E0(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL) {
-            if (!(entity->flags & 2)) {
-                if ((entity->flags & 4)) {
-                    entity->draw();
-                }
+        if ((entity != NULL) && !(entity->flags & 2)) {
+            if (entity->flags & 4) {
+                entity->draw();
             }
         }
     }
@@ -523,11 +512,9 @@ void func_80123550(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if (entity != NULL) {
-            if (!(entity->flags & 2)) {
-                if ((entity->flags & 8)) {
-                    entity->draw();
-                }
+        if ((entity != NULL) && !(entity->flags & 2)) {
+            if (entity->flags & 8) {
+                entity->draw();
             }
         }
     }
