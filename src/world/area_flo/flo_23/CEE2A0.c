@@ -5,8 +5,38 @@
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_8024026C_CEE4CC);
+/*
+ApiStatus N(func_8024026C_CEE4CC)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr;
+
+    if (isInitialCall) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+    }
+
+    ptr = &D_80241CCC_BE0A5C;
+    if (*ptr != NULL) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+        set_variable(script, *args, D_80241CD0_BE0A60);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_802402C0_CEE520);
+/*
+ApiStatus N(func_802402C0_CEE520)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    D_80241CD0_BE0A60 = get_variable(script, *args);
+    D_80241CCC_BE0A5C = 1;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_802402F8_CEE558);
 

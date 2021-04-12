@@ -34,7 +34,7 @@ ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    free_npc(npc);
+    npc_free(npc);
     return ApiStatus_DONE2;
 }
 

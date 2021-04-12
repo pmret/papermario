@@ -23,6 +23,7 @@ build.ninja
 *.Yay0
 *.msg.h
 *.bin
+*.i
 *.o
 *.zip
 baserom.*

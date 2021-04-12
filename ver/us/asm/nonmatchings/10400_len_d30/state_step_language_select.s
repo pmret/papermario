@@ -30,7 +30,7 @@ glabel state_step_language_select
 .L80035228:
 /* 10628 80035228 0C037DD0 */  jal       update_player
 /* 1062C 8003522C 00000000 */   nop
-/* 10630 80035230 0C00E64C */  jal       update_npcs
+/* 10630 80035230 0C00E64C */  jal       npc_list_update
 /* 10634 80035234 00000000 */   nop
 /* 10638 80035238 0C00F949 */  jal       update_counters
 /* 1063C 8003523C 00000000 */   nop
@@ -164,7 +164,7 @@ glabel state_step_language_select
 /* 10824 80035424 00000000 */   nop
 /* 10828 80035428 0C0B0C77 */  jal       clear_script_list
 /* 1082C 8003542C 00000000 */   nop
-/* 10830 80035430 0C00E12F */  jal       clear_npcs
+/* 10830 80035430 0C00E12F */  jal       npc_list_clear
 /* 10834 80035434 00000000 */   nop
 /* 10838 80035438 0C04432E */  jal       clear_entity_data
 /* 1083C 8003543C 0000202D */   daddu    $a0, $zero, $zero

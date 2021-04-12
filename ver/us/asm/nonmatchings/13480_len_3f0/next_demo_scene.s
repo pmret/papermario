@@ -133,7 +133,7 @@ glabel L800381C8_135C8
 /* 136C4 800382C4 00000000 */   nop
 /* 136C8 800382C8 0C037F14 */  jal       clear_player_status
 /* 136CC 800382CC 00000000 */   nop
-/* 136D0 800382D0 0C00E12F */  jal       clear_npcs
+/* 136D0 800382D0 0C00E12F */  jal       npc_list_clear
 /* 136D4 800382D4 00000000 */   nop
 /* 136D8 800382D8 0C039CE8 */  jal       clear_player_data
 /* 136DC 800382DC 00000000 */   nop

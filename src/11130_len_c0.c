@@ -6,7 +6,7 @@ void begin_state_world(void) {
 
 void step_world(void) {
     update_counters();
-    update_npcs();
+    npc_list_update();
     update_player();
     update_item_entities();
     update_effects();

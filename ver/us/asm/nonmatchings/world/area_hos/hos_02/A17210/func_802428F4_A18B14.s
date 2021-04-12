@@ -46,7 +46,7 @@ glabel func_802428F4_A18B14
 /* A18BB8 80242998 02A0202D */  daddu     $a0, $s5, $zero
 /* A18BBC 8024299C 0240282D */  daddu     $a1, $s2, $zero
 /* A18BC0 802429A0 0280302D */  daddu     $a2, $s4, $zero
-/* A18BC4 802429A4 0C090876 */  jal       func_802421D8_A183F8
+/* A18BC4 802429A4 0C090876 */  jal       hos_02_UnkFunc5
 /* A18BC8 802429A8 0200382D */   daddu    $a3, $s0, $zero
 /* A18BCC 802429AC AE800070 */  sw        $zero, 0x70($s4)
 .L802429B0:
@@ -92,7 +92,7 @@ glabel L80242A2C_A18C4C
 glabel L80242A3C_A18C5C
 /* A18C5C 80242A3C 0280202D */  daddu     $a0, $s4, $zero
 /* A18C60 80242A40 0200282D */  daddu     $a1, $s0, $zero
-/* A18C64 80242A44 0C090622 */  jal       func_80241888_A17AA8
+/* A18C64 80242A44 0C090622 */  jal       hos_02_UnkFunc4
 /* A18C68 80242A48 0260302D */   daddu    $a2, $s3, $zero
 /* A18C6C 80242A4C 08090AAE */  j         .L80242AB8
 /* A18C70 80242A50 0000102D */   daddu    $v0, $zero, $zero

@@ -254,7 +254,7 @@ f32 D_800F833C = 0;
 f32 D_800F8340 = 0;
 f32 D_800F8344 = 0;
 
-NpcID create_basic_npc(NpcBlueprint* blueprint);
+NpcID npc_create_basic(NpcBlueprint* blueprint);
 
 extern s32 D_802C0000;
 
@@ -310,7 +310,7 @@ void load_partner_npc(void) {
     blueprint.initialAnim = (*partner)->idle;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
-    D_8010CFD0 = npcIndex = create_basic_npc(blueprintPtr);
+    D_8010CFD0 = npcIndex = npc_create_basic(blueprintPtr);
 
     *partnerNpcPtr = get_npc_by_index(npcIndex);
 
@@ -335,7 +335,7 @@ void load_partner_npc(void) {
 }
 
 void func_800EA6A8(void) {
-    free_npc_by_index(D_8010CFD0);
+    npc_free_by_index(D_8010CFD0);
 }
 
 INCLUDE_ASM(s32, "world/partners", _use_partner_ability);

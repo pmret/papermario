@@ -70,7 +70,7 @@ glabel func_8003646C
 .L8003655C:
 /* 1195C 8003655C 0C00F949 */  jal       update_counters
 /* 11960 80036560 00000000 */   nop
-/* 11964 80036564 0C00E64C */  jal       update_npcs
+/* 11964 80036564 0C00E64C */  jal       npc_list_update
 /* 11968 80036568 00000000 */   nop
 /* 1196C 8003656C 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 11970 80036570 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
@@ -107,7 +107,7 @@ glabel func_8003646C
 /* 119E8 800365E8 0C00CD3C */  jal       set_game_mode
 /* 119EC 800365EC 24040004 */   addiu    $a0, $zero, 4
 .L800365F0:
-/* 119F0 800365F0 0C00E64C */  jal       update_npcs
+/* 119F0 800365F0 0C00E64C */  jal       npc_list_update
 /* 119F4 800365F4 00000000 */   nop
 /* 119F8 800365F8 0C037DD0 */  jal       update_player
 /* 119FC 800365FC 00000000 */   nop

@@ -7,6 +7,8 @@ import traceback
 
 DEBUG_OUTPUT = None # "debug.i"
 
+
+
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
 
@@ -43,6 +45,8 @@ script_parser = Lark(r"""
          | "goto" label         -> label_goto
          | "return"             -> return_stmt
          | "break"              -> break_stmt
+         | "break match"        -> break_match_stmt
+         | "break loop"         -> break_loop_stmt
          | "sleep" expr         -> sleep_stmt
          | "sleep" expr "secs"  -> sleep_secs_stmt
          | "spawn" expr         -> spawn_stmt
@@ -461,6 +465,12 @@ class Compile(Transformer):
     def break_stmt(self, tree):
         return BreakCmd(meta=tree.meta)
 
+    def break_match_stmt(self, tree):
+        return Cmd("ScriptOpcode_BREAK_MATCH", meta=tree.meta)
+
+    def break_loop_stmt(self, tree):
+        return Cmd("ScriptOpcode_BREAK_LOOP", meta=tree.meta)
+
     def set_group(self, tree):
         return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)
 
@@ -667,14 +677,14 @@ def compile_script(s):
 
     return commands
 
-def read_until_closing_paren(depth=1, lex_strings=False):
+def read_until_closing_paren(f, depth=1, lex_strings=False):
     text = ""
 
     in_string = False
     string_escape = False
 
     while True:
-        char = stdin.read(1)
+        char = f.read(1)
 
         if len(char) == 0:
             # EOF
@@ -697,11 +707,11 @@ def read_until_closing_paren(depth=1, lex_strings=False):
 
     return text
 
-def read_line():
+def read_line(f):
     line = ""
 
     while True:
-        char = stdin.read(1)
+        char = f.read(1)
 
         if len(char) == 0:
             # EOF
@@ -733,9 +743,21 @@ def gen_line_map(source, source_line_no = 1):
     return output, line_map
 
 # Expects output from C preprocessor on argv
+SINGLE_FILE = False
+import sys
+
 if __name__ == "__main__":
     if DEBUG_OUTPUT is not None:
         DEBUG_OUTPUT = open(DEBUG_OUTPUT, "w")
+        '''
+        while char := stdin.read(1):
+            DEBUG_OUTPUT.write(char)
+        exit()
+        '''
+
+    in_file = stdin
+    if SINGLE_FILE:
+        in_file = open(sys.argv[1], "r")
 
     line_no = 1
     char_no = 1
@@ -745,7 +767,7 @@ if __name__ == "__main__":
     macro_name = "" # captures recent UPPER_CASE identifier
     prev_char = ""
     while not error:
-        char = stdin.read(1)
+        char = in_file.read(1)
 
         if len(char) == 0:
             # EOF
@@ -754,7 +776,7 @@ if __name__ == "__main__":
 
         if char == "#" and (prev_char == "\n" or prev_char == ""):
             # cpp line/file marker
-            line = read_line()
+            line = read_line(in_file)
             line_split = line[1:].split(" ")
 
             line_no = int(line_split[0])
@@ -762,11 +784,15 @@ if __name__ == "__main__":
 
             write("#" + line + "\n")
         elif char == "(":
-            filename = file_info[0][1:-1]
+            if SINGLE_FILE:
+                filename = sys.argv[1]
+            else:
+                filename = file_info[0][1:-1]
 
             # SCRIPT(...)
             if macro_name == "SCRIPT":
-                script_source, line_map = gen_line_map(read_until_closing_paren(lex_strings=True), source_line_no=line_no)
+                read_data = read_until_closing_paren(in_file, lex_strings=True)
+                script_source, line_map = gen_line_map(read_data, source_line_no=line_no)
 
                 try:
                     commands = compile_script(script_source)

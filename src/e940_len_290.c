@@ -47,7 +47,7 @@ void step_init_state(void) {
     clear_entity_data(0);
     clear_transition_stencil();
     clear_player_status();
-    clear_npcs();
+    npc_list_clear();
     clear_player_data();
     func_80072B30();
     func_8003E338();

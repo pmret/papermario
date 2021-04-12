@@ -19,7 +19,7 @@ glabel CreateNpc
 /* F258C 802CDBDC AFA00010 */  sw        $zero, 0x10($sp)
 /* F2590 802CDBE0 AFA20014 */  sw        $v0, 0x14($sp)
 /* F2594 802CDBE4 AFA00018 */  sw        $zero, 0x18($sp)
-/* F2598 802CDBE8 0C00E211 */  jal       create_basic_npc
+/* F2598 802CDBE8 0C00E211 */  jal       npc_create_basic
 /* F259C 802CDBEC AFA0001C */   sw       $zero, 0x1c($sp)
 /* F25A0 802CDBF0 0C00E2B7 */  jal       get_npc_by_index
 /* F25A4 802CDBF4 0040202D */   daddu    $a0, $v0, $zero

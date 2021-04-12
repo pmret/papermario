@@ -133,7 +133,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     func_802DD8F8((*gameStatus2)->unk_84);
     func_8011E224();
     clear_entity_models();
-    clear_npcs();
+    npc_list_clear();
     func_80141100();
     clear_trigger_data();
     clear_model_data();
@@ -643,18 +643,19 @@ Map obk_maps[] = {
 };
 
 /// Gusty Gulch
+#include "area_arn/arn.h"
 Map arn_maps[] = {
-    { MAP_UNSPLIT(arn_02, 0x80241000), .bgName = "arn_bg" },
-    { MAP_UNSPLIT(arn_03, 0x80241740), .bgName = "arn_bg" },
-    { MAP_UNSPLIT(arn_04, 0x80243390), .bgName = "arn_bg" },
-    { MAP_UNSPLIT(arn_05, 0x80241320), .bgName = "arn_bg" },
-    { MAP_UNSPLIT(arn_07, 0x80241ED0), .bgName = "arn_bg" },
-    { MAP_UNSPLIT(arn_08, 0x802402C0), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
-    { MAP_UNSPLIT(arn_09, 0x80240060), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
-    { MAP_UNSPLIT(arn_10, 0x80240020), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
-    { MAP_UNSPLIT(arn_11, 0x80240010), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
-    { MAP_UNSPLIT(arn_12, 0x80240020), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
-    { MAP_UNSPLIT(arn_13, 0x80240020), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_02), .bgName = "arn_bg" },
+    { MAP(arn_03), .bgName = "arn_bg" },
+    { MAP(arn_04), .bgName = "arn_bg" },
+    { MAP(arn_05), .bgName = "arn_bg" },
+    { MAP(arn_07), .bgName = "arn_bg" },
+    { MAP(arn_08), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_09), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_10), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_11), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_12), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
+    { MAP(arn_13), .unk_1C = { .bytes = { .songVariation = 1, .flags = 1 } } },
 };
 
 /// Tubba Blubba's Castle

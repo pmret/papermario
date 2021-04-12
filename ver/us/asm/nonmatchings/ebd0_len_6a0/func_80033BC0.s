@@ -83,7 +83,7 @@ glabel func_80033BC0
 /* F0F8 80033CF8 00000000 */   nop
 /* F0FC 80033CFC 0C0B0CBB */  jal       init_script_list
 /* F100 80033D00 00000000 */   nop
-/* F104 80033D04 0C00E14B */  jal       init_npc_list
+/* F104 80033D04 0C00E14B */  jal       npc_list_update_current
 /* F108 80033D08 00000000 */   nop
 /* F10C 80033D0C 0C044396 */  jal       func_80110E58
 /* F110 80033D10 00000000 */   nop

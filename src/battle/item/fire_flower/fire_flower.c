@@ -24,7 +24,7 @@ Script N(main) = SCRIPT({
         SetActorSpeed(ACTOR_PLAYER, 2.0);
         SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
         SetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        PlayerRunToGoal(0);
+        PlayerRunToGoal(ACTOR_PLAYER);
         SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     }
     spawn {

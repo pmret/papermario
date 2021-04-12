@@ -106,7 +106,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
     }
 }
 
-INCLUDE_ASM(s32, "23680", func_800490B4, EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+INCLUDE_ASM(s32, "23680", func_800490B4, EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
 
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -213,7 +213,7 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->unk_00.x, enemy->territory->unk_00.z));
+        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
         script->functionTemp[0].s = 0;
     }
 }

@@ -531,7 +531,7 @@ void func_800E63A4(s32 arg0) {
         playerStatus->animFlags &= ~0x2000;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
-        free_npc_by_index(D_8010C96C);
+        npc_free_by_index(D_8010C96C);
         set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;

@@ -8,8 +8,8 @@
 // TODO: consider moving Npc here
 
 #define ENTRY_COUNT(entryList) (sizeof(entryList) / sizeof(Vec4f))
-
-typedef Vec4f EntryList[0];
+typedef s32 MessageID;
+typedef Vec4f EntryList[];
 
 /// Fields other than main, entryList, entryCount, background, and tattle are initialised when the map loads.
 typedef struct MapConfig {
@@ -74,7 +74,7 @@ typedef struct NpcAISettings {
     /* 0x10 */ X32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 chaseSpeed;
-    /* 0x1C */ s32 unk_1C; // chase turn step?
+    /* 0x1C */ X32 unk_1C; // chase turn step?
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ f32 chaseRadius;
     /* 0x28 */ X32 unk_28;
@@ -124,7 +124,7 @@ typedef struct StatDrop {
     /* 0x06 */ s16 chancePerAttempt; ///< % chance for a single heart/flower to be dropped from each attempt.
 } StatDrop; // size = 0x08
 
-#define NO_DROPS { F16(100), F16(0), 0, F16(0) }
+#define NO_DROPS { { F16(100), F16(0), 0, F16(0) }, }
 
 #define STANDARD_HEART_DROPS(attempts) { \
     { F16(20), F16(70), attempts, F16(50) }, \
@@ -199,9 +199,11 @@ typedef struct StaticNpc {
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
-typedef struct EnemyTerritoryThing {
+enum TerritoryShape { SHAPE_CYLINDER, SHAPE_RECT };
+
+typedef struct {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 shape;
+    /* 0x04 */ enum TerritoryShape shape;
     /* 0x08 */ s32 pointX;
     /* 0x0C */ s32 pointZ;
     /* 0x10 */ s32 sizeX;
@@ -210,19 +212,35 @@ typedef struct EnemyTerritoryThing {
     /* 0x1C */ s16 unk_1C;
 } EnemyTerritoryThing; // size = 0x20
 
-typedef struct EnemyTerritory {
-    /* 0x00 */ Vec3i unk_00;
-    /* 0x0C */ char unk_0C[0x8];
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ s32 pointX;
-    /* 0x20 */ s32 pointY;
-    /* 0x24 */ s32 pointZ;
-    /* 0x28 */ s32 sizeX;
-    /* 0x2C */ s32 sizeZ;
-    /* 0x30 */ s32 shape;
-    /* 0x34 */ s32 unk_34;
-} EnemyTerritory; // size = ???
+typedef struct {
+    /* 0x00 */ Vec3i point;
+    /* 0x0C */ s32 wanderSizeX;
+    /* 0x10 */ s32 wanderSizeZ;
+    /* 0x14 */ s32 moveSpeedOverride;
+    /* 0x18 */ enum TerritoryShape wanderShape;
+    /* 0x1C */ Vec3i detect;
+    /* 0x28 */ s32 detectSizeX;
+    /* 0x2C */ s32 detectSizeZ;
+    /* 0x30 */ enum TerritoryShape detectShape;
+    /* 0x34 */ s32 isFlying;
+} EnemyTerritoryWander; // size = 0x38
+
+typedef struct {
+    /* 0x00 */ s32 numPoints;
+    /* 0x04 */ Vec3i points[10];
+    /* 0x7C */ s32 moveSpeedOverride;
+    /* 0x80 */ Vec3i detect;
+    /* 0x8C */ s32 detectSizeX;
+    /* 0x90 */ s32 detectSizeZ;
+    /* 0x94 */ enum TerritoryShape detectShape;
+    /* 0x98 */ s32 isFlying;
+} EnemyTerritoryPatrol; // size = 0x9C
+
+typedef union {
+    EnemyTerritoryWander wander;
+    EnemyTerritoryPatrol patrol;
+    char PADDING[0xC0];
+} EnemyTerritory; // size = 0xC0
 
 typedef struct Enemy {
     /* 0x00 */ s32 flags;
@@ -283,7 +301,7 @@ typedef struct {
 Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);
 
-s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, s32 arg3, s32 arg4);
+s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
 
 /// Zero-terminated.
 Area gAreas[29];

@@ -102,7 +102,7 @@ glabel step_battle
 /* EE58 80033A58 00000000 */   nop
 /* EE5C 80033A5C 0C0B0C77 */  jal       clear_script_list
 /* EE60 80033A60 00000000 */   nop
-/* EE64 80033A64 0C00E12F */  jal       clear_npcs
+/* EE64 80033A64 0C00E12F */  jal       npc_list_clear
 /* EE68 80033A68 00000000 */   nop
 /* EE6C 80033A6C 0C04432E */  jal       clear_entity_data
 /* EE70 80033A70 24040001 */   addiu    $a0, $zero, 1
@@ -149,7 +149,7 @@ glabel step_battle
 /* EF10 80033B10 00000000 */   nop
 /* EF14 80033B14 0C08F90E */  jal       update_battle_state
 /* EF18 80033B18 00000000 */   nop
-/* EF1C 80033B1C 0C00E64C */  jal       update_npcs
+/* EF1C 80033B1C 0C00E64C */  jal       npc_list_update
 /* EF20 80033B20 00000000 */   nop
 /* EF24 80033B24 0C04C7BB */  jal       update_item_entities
 /* EF28 80033B28 00000000 */   nop

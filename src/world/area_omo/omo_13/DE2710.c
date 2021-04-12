@@ -21,8 +21,38 @@ INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240A00_DE2E90);
 #include "world/common/SomeXYZFuncTodoRename.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F00_DE3390);
+/*
+ApiStatus N(func_80240F00_DE3390)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr;
+
+    if (isInitialCall) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+    }
+
+    ptr = &D_80241CCC_BE0A5C;
+    if (*ptr != NULL) {
+        ptr = &D_80241CCC_BE0A5C;
+        *ptr = 0;
+        set_variable(script, *args, D_80241CD0_BE0A60);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F54_DE33E4);
+/*
+ApiStatus N(func_80240F54_DE33E4)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    
+    D_80241CD0_BE0A60 = get_variable(script, *args);
+    D_80241CCC_BE0A5C = 1;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_omo/omo_13/DE2710", func_80240F8C_DE341C);
 

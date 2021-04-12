@@ -51,7 +51,7 @@ glabel BringPartnerOut
 /* F401C 802CF66C 0220202D */  daddu     $a0, $s1, $zero
 /* F4020 802CF670 AFA00018 */  sw        $zero, 0x18($sp)
 /* F4024 802CF674 AFA0001C */  sw        $zero, 0x1c($sp)
-/* F4028 802CF678 0C00E211 */  jal       create_basic_npc
+/* F4028 802CF678 0C00E211 */  jal       npc_create_basic
 /* F402C 802CF67C AFA20014 */   sw       $v0, 0x14($sp)
 /* F4030 802CF680 0040202D */  daddu     $a0, $v0, $zero
 /* F4034 802CF684 3C01802E */  lui       $at, %hi(D_802DAE44)

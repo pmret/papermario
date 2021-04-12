@@ -78,7 +78,7 @@ typedef struct CamPosSettings {
 
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 level;
+    /* 0x01 */ s8 level;
     /* 0x02 */ s16 unk_02[3];
 } PartnerData; // size = 0x08
 
@@ -137,7 +137,7 @@ typedef struct Npc {
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
-    /* 0x0AB */ u8 unk_AB;
+    /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ u8 unk_AC;
     /* 0x0AD */ char unk_AD[3];
     /* 0x0B0 */ s32 unk_B0;

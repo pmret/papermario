@@ -158,7 +158,7 @@ glabel L80035814_10C14
 /* 10D2C 8003592C 00000000 */   nop
 /* 10D30 80035930 0C0B0CBB */  jal       init_script_list
 /* 10D34 80035934 00000000 */   nop
-/* 10D38 80035938 0C00E14B */  jal       init_npc_list
+/* 10D38 80035938 0C00E14B */  jal       npc_list_update_current
 /* 10D3C 8003593C 00000000 */   nop
 /* 10D40 80035940 0C044396 */  jal       func_80110E58
 /* 10D44 80035944 00000000 */   nop
@@ -217,7 +217,7 @@ glabel L80035814_10C14
 /* 10E08 80035A08 A0220931 */  sb        $v0, %lo(D_800A0931)($at)
 /* 10E0C 80035A0C 0C037DD0 */  jal       update_player
 /* 10E10 80035A10 00000000 */   nop
-/* 10E14 80035A14 0C00E64C */  jal       update_npcs
+/* 10E14 80035A14 0C00E64C */  jal       npc_list_update
 /* 10E18 80035A18 00000000 */   nop
 /* 10E1C 80035A1C 0C00F949 */  jal       update_counters
 /* 10E20 80035A20 00000000 */   nop
@@ -242,7 +242,7 @@ glabel L80035814_10C14
 glabel L80035A68_10E68
 /* 10E68 80035A68 0C037DD0 */  jal       update_player
 /* 10E6C 80035A6C 00000000 */   nop
-/* 10E70 80035A70 0C00E64C */  jal       update_npcs
+/* 10E70 80035A70 0C00E64C */  jal       npc_list_update
 /* 10E74 80035A74 00000000 */   nop
 /* 10E78 80035A78 0C00F949 */  jal       update_counters
 /* 10E7C 80035A7C 00000000 */   nop
@@ -277,7 +277,7 @@ glabel L80035AE0_10EE0
 /* 10EE4 80035AE4 0000202D */   daddu    $a0, $zero, $zero
 /* 10EE8 80035AE8 0C037DD0 */  jal       update_player
 /* 10EEC 80035AEC 00000000 */   nop
-/* 10EF0 80035AF0 0C00E64C */  jal       update_npcs
+/* 10EF0 80035AF0 0C00E64C */  jal       npc_list_update
 /* 10EF4 80035AF4 00000000 */   nop
 /* 10EF8 80035AF8 0C00F949 */  jal       update_counters
 /* 10EFC 80035AFC 00000000 */   nop

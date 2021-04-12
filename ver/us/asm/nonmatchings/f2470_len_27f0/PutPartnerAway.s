@@ -175,7 +175,7 @@ glabel PutPartnerAway
 /* F45D0 802CFC20 8C228354 */  lw        $v0, %lo(gPartnerAnimations+0xC)($at)
 /* F45D4 802CFC24 E634001C */  swc1      $f20, 0x1c($s1)
 /* F45D8 802CFC28 E620003C */  swc1      $f0, 0x3c($s1)
-/* F45DC 802CFC2C 0C00E228 */  jal       free_npc_by_index
+/* F45DC 802CFC2C 0C00E228 */  jal       npc_free_by_index
 /* F45E0 802CFC30 AE220028 */   sw       $v0, 0x28($s1)
 /* F45E4 802CFC34 0C00EABB */  jal       get_npc_unsafe
 /* F45E8 802CFC38 2404FFFB */   addiu    $a0, $zero, -5

@@ -15,11 +15,13 @@ options:
   linker_symbol_header_path: ver/us/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/us/asm
-  asset_paths: [assets/us]
+  asset_path: assets/us
   build_path: ver/us/build
   cache_path: ver/us/.splat_cache
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
+asset_stack:
+  - us
 segments:
   - name: header
     type: header
@@ -64,7 +66,7 @@ segments:
     - [0x11a50, c, 11a50_len_7a0]
     - [0x121f0, c, 121f0_len_1290]
     - [0x13480, c, 13480_len_3f0]
-    - [0x13870, c, 13870_len_6980]
+    - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
     - [0x1f580, c, 1f580_len_1940]
     - [0x20ec0, c, 20ec0_len_5040]
@@ -288,7 +290,7 @@ segments:
     - [0x73738, .rodata, 11a50_len_7a0]
     - [0x73790, .rodata, 121f0_len_1290]
     - [0x73860, .rodata, 13480_len_3f0]
-    - [0x73880, .rodata, 13870_len_6980]
+    - [0x73880, .rodata, npc]
     - [0x739F0, .rodata, 1a1f0_len_5390]
     - [0x73AB0, .rodata, 20ec0_len_5040]
     - [0x73B10, .rodata, 23680]
@@ -8062,12 +8064,12 @@ segments:
     start: 0xBDED90
     vram: 0x80240000
     subsegments:
-    - [0xBDED90, c]
-    - [0xBE04B0, data]
-    - [0xBE05C0, data]
-    - [0xBE0950, data]
-    - [0xBE3570, data]
-    - [0xBE35E0, rodata]
+    - [0xBDED90,       c, events]
+    - [0xBE04B0,   .data, header]
+    - [0xBE05C0,   .data, events]
+    - [0xBE0950,   .data, events]
+    - [0xBE3570,   .data, events]
+    - [0xBE35E0, .rodata, events]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
@@ -8075,13 +8077,13 @@ segments:
     start: 0xBE37B0
     vram: 0x80240000
     subsegments:
-    - [0xBE37B0, c]
-    - [0xBE6B20, data]
-    - [0xBE6C30, data]
-    - [0xBE6E10, data]
-    - [0xBE77F0, data]
-    - [0xBE78D0, rodata]
-    - [0xBE7AD8, rodata]
+    - [0xBE37B0,       c, events]
+    - [0xBE6B20,   .data, header]
+    - [0xBE6C30,   .data, events]
+    - [0xBE6E10,   .data, events]
+    - [0xBE77F0,   .data, events]
+    - [0xBE78D0, .rodata, events]
+    - [0xBE7AD8, .rodata, events]
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
@@ -8089,11 +8091,11 @@ segments:
     start: 0xBE7BE0
     vram: 0x80240000
     subsegments:
-    - [0xBE7BE0, c]
-    - [0xBE8EE0, data]
-    - [0xBE9290, data]
-    - [0xBECBE0, data]
-    - [0xBECC20, rodata]
+    - [0xBE7BE0,       c, events]
+    - [0xBE8EE0,   .data, header]
+    - [0xBE9290,   .data, events]
+    - [0xBECBE0,   .data, events]
+    - [0xBECC20, .rodata, events]
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
@@ -8101,16 +8103,16 @@ segments:
     start: 0xBECDF0
     vram: 0x80240000
     subsegments:
-    - [0xBECDF0, c]
-    - [0xBED5F0, c]
-    - [0xBED660, c]
-    - [0xBED740, c]
-    - [0xBEEC80, data]
-    - [0xBEEE30, data]
-    - [0xBF0580, data]
-    - [0xBF46F0, rodata]
-    - [0xBF4730, rodata]
-    - [0xBF4740, rodata]
+    - [0xBECDF0,       c, BECDF0]
+    - [0xBED5F0,       c, BED5F0]
+    - [0xBED660,       c, BED660]
+    - [0xBED740,       c, events]
+    - [0xBEEC80,   .data, header]
+    - [0xBEEE30,   .data, BECDF0]
+    - [0xBF0580,   .data, events]
+    - [0xBF46F0, .rodata, BECDF0]
+    - [0xBF4730, .rodata, BED5F0]
+    - [0xBF4740, .rodata, events]
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
@@ -8118,16 +8120,16 @@ segments:
     start: 0xBF47A0
     vram: 0x80240000
     subsegments:
-    - [0xBF47A0, c]
-    - [0xBF4860, c]
-    - [0xBF4A30, data]
-    - [0xBF4B50, data]
-    - [0xBF5210, data]
-    - [0xBF5340, data]
-    - [0xBF5460, data]
-    - [0xBF59A0, data]
-    - [0xBF5FF0, data]
-    - [0xBF6040, rodata]
+    - [0xBF47A0,       c, BF47A0]
+    - [0xBF4860,       c, events]
+    - [0xBF4A30,   .data, header]
+    - [0xBF4B50,   .data, events]
+    - [0xBF5210,   .data, events]
+    - [0xBF5340,   .data, events]
+    - [0xBF5460,   .data, events]
+    - [0xBF59A0,   .data, events]
+    - [0xBF5FF0,   .data, events]
+    - [0xBF6040, .rodata, events]
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
@@ -8135,13 +8137,13 @@ segments:
     start: 0xBF6060
     vram: 0x80240000
     subsegments:
-    - [0xBF6060, c]
-    - [0xBF60A0, data]
-    - [0xBF61A0, data]
-    - [0xBF6400, data]
-    - [0xBF6530, data]
-    - [0xBF6610, data]
-    - [0xBF69F0, rodata]
+    - [0xBF6060,       c, events]
+    - [0xBF60A0,   .data, header]
+    - [0xBF61A0,   .data, events]
+    - [0xBF6400,   .data, events]
+    - [0xBF6530,   .data, events]
+    - [0xBF6610,   .data, events]
+    - [0xBF69F0, .rodata, events]
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
@@ -8149,11 +8151,11 @@ segments:
     start: 0xBF6A00
     vram: 0x80240000
     subsegments:
-    - [0xBF6A00, data]
-    - [0xBF6B00, data]
-    - [0xBF6E30, data]
-    - [0xBF75E0, data]
-    - [0xBF7670, rodata]
+    - [0xBF6A00,   .data, header]
+    - [0xBF6B00,   .data, events]
+    - [0xBF6E30,   .data, events]
+    - [0xBF75E0,   .data, events]
+    - [0xBF7670, .rodata, events]
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
@@ -8161,10 +8163,10 @@ segments:
     start: 0xBF7680
     vram: 0x80240000
     subsegments:
-    - [0xBF7680, data]
-    - [0xBF7770, data]
-    - [0xBF7D00, data]
-    - [0xBF8780, rodata]
+    - [0xBF7680,   .data, header]
+    - [0xBF7770,   .data, events]
+    - [0xBF7D00,   .data, events]
+    - [0xBF8780, .rodata, events]
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
@@ -8172,10 +8174,10 @@ segments:
     start: 0xBF8790
     vram: 0x80240000
     subsegments:
-    - [0xBF8790, data]
-    - [0xBF8890, data]
-    - [0xBF8BB0, data]
-    - [0xBF9400, rodata]
+    - [0xBF8790,   .data, header]
+    - [0xBF8890,   .data, events]
+    - [0xBF8BB0,   .data, events]
+    - [0xBF9400, .rodata, events]
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
@@ -8183,10 +8185,10 @@ segments:
     start: 0xBF9410
     vram: 0x80240000
     subsegments:
-    - [0xBF9410, data]
-    - [0xBF9510, data]
-    - [0xBF9840, data]
-    - [0xBFA090, rodata]
+    - [0xBF9410,   .data, header]
+    - [0xBF9510,   .data, events]
+    - [0xBF9840,   .data, events]
+    - [0xBFA090, .rodata, events]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
@@ -8194,12 +8196,13 @@ segments:
     start: 0xBFA0A0
     vram: 0x80240000
     subsegments:
-    - [0xBFA0A0, c]
-    - [0xBFA100, c]
-    - [0xBFA150, data]
-    - [0xBFA260, data]
-    - [0xBFD800, data]
-    - [0xBFD840, rodata]
+    - [0xBFA0A0,       c, BFA0A0]
+    - [0xBFA100,       c, BFA100]
+    - [0xBFA150,   .data, BFA0A0]
+    - [0xBFA260,   .data, BFA100]
+    - [0xBFD800,   .data, BFA100]
+    - [0xBFD840, .rodata, BFA0A0]
+    - [0xBFD864, .rodata, BFA100]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
@@ -8207,15 +8210,32 @@ segments:
     start: 0xBFD880
     vram: 0x80240000
     subsegments:
-    - [0xBFD880, c]
-    - [0xBFD8C0, c]
-    - [0xBFD9A0, c]
-    - [0xC00C70, data]
-    - [0xC00DD0, data]
-    - [0xC01770, data]
-    - [0xC047F0, data]
-    - [0xC20C70, rodata]
-    - [0xC20CF8, rodata]
+    - [0xBFD880,        c, BFD880]
+    - [0xBFD8C0,        c, BFD8C0]
+    - [0xBFD9A0,        c, BFD9A0]
+    - [0xC00C70,    .data, BFD9A0]
+    - [0xC00DD0,    .data, BFD9A0]
+    - [0xC01770,    .data, BFD9A0]
+    - [0xC047F0,   rgba16, img0, 64, 32]
+    - [0xC057F0,    .data, data0]
+    - [0xC05870,   rgba16, img1, 64, 32]
+    - [0xC06870,    .data, data1]
+    - [0xC068F0,   rgba16, img2, 32, 32]
+    - [0xC070F0,    .data, data2]
+    - [0xC07170,   rgba16, img3, 16, 32]
+    - [0xC07570,    .data, data3]
+    - [0xC075F0,   rgba16, img4, 16, 32]
+    - [0xC079F0,    .data, data4]
+    - [0xC07A70,   rgba16, img5, 16, 32]
+    - [0xC07E70,    .data, data5]
+    - [0xC07EF0,   rgba16, img6, 32, 32]
+    - [0xC086F0,    .data, data6]
+    - [0xC08770,   rgba16, img7, 32, 32]
+    - [0xC08F70,    .data, data7]
+    - [0xC08FF0,    .data, data]
+    - [0xC20C70,  .rodata, BFD9A0] # dgb_00-18, 1x 32767.0, 2 jump tables
+    - [0xC20D88,  .rodata, BFD9A0] # "dgb_00", 2x 32767.0, jump table
+    - [0xC20F30,  .rodata, BFD9A0] # "dgb_08" only
   - type: code
     start: 0xC20F40
     vram: 0x80200000
@@ -8228,11 +8248,11 @@ segments:
     start: 0xC2EBA0
     vram: 0x80240000
     subsegments:
-    - [0xC2EBA0, c]
-    - [0xC2FFD0, data]
-    - [0xC300F0, data]
-    - [0xC30650, data]
-    - [0xC31190, rodata]
+    - [0xC2EBA0,       c, C2EBA0]
+    - [0xC2FFD0,   .data, C2EBA0]
+    - [0xC300F0,   .data, C2EBA0]
+    - [0xC30650,   .data, C2EBA0]
+    - [0xC31190, .rodata, C2EBA0]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
@@ -8240,14 +8260,14 @@ segments:
     start: 0xC314E0
     vram: 0x80240000
     subsegments:
-    - [0xC314E0, c]
-    - [0xC31730, c]
-    - [0xC33CB0, data]
-    - [0xC33DF0, data]
-    - [0xC345C0, data]
-    - [0xC34C20, data]
-    - [0xC34E50, data]
-    - [0xC35EA0, rodata]
+    - [0xC314E0,       c, C314E0]
+    - [0xC31730,       c, C31730]
+    - [0xC33CB0,   .data, C31730]
+    - [0xC33DF0,   .data, C31730]
+    - [0xC345C0,   .data, C31730]
+    - [0xC34C20,   .data, C31730]
+    - [0xC34E50,   .data, C31730]
+    - [0xC35EA0, .rodata, C31730]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
@@ -8255,12 +8275,12 @@ segments:
     start: 0xC36530
     vram: 0x80240000
     subsegments:
-    - [0xC36530, c]
-    - [0xC39640, data]
-    - [0xC39740, data]
-    - [0xC39A90, data]
-    - [0xC3A910, rodata]
-    - [0xC3A978, rodata]
+    - [0xC36530,       c, C36530]
+    - [0xC39640,   .data, C36530]
+    - [0xC39740,   .data, C36530]
+    - [0xC39A90,   .data, C36530]
+    - [0xC3A910, .rodata, C36530]
+    - [0xC3A978, .rodata, C36530]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
@@ -8268,13 +8288,13 @@ segments:
     start: 0xC3AA10
     vram: 0x80240000
     subsegments:
-    - [0xC3AA10, c]
-    - [0xC3BEA0, data]
-    - [0xC3BF90, data]
-    - [0xC3C200, data]
-    - [0xC3C280, data]
-    - [0xC3C2D0, data]
-    - [0xC3CD40, rodata]
+    - [0xC3AA10,       c, C3AA10]
+    - [0xC3BEA0,   .data, C3AA10]
+    - [0xC3BF90,   .data, C3AA10]
+    - [0xC3C200,   .data, C3AA10]
+    - [0xC3C280,   .data, C3AA10]
+    - [0xC3C2D0,   .data, C3AA10]
+    - [0xC3CD40, .rodata, C3AA10]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
@@ -8282,11 +8302,11 @@ segments:
     start: 0xC3D080
     vram: 0x80240000
     subsegments:
-    - [0xC3D080, c]
-    - [0xC3D340, data]
-    - [0xC3D440, data]
-    - [0xC3D8C0, data]
-    - [0xC3DBE0, rodata]
+    - [0xC3D080,       c, C3D080]
+    - [0xC3D340,   .data, C3D080]
+    - [0xC3D440,   .data, C3D080]
+    - [0xC3D8C0,   .data, C3D080]
+    - [0xC3DBE0, .rodata, C3D080]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
@@ -8294,12 +8314,12 @@ segments:
     start: 0xC3DBF0
     vram: 0x80240000
     subsegments:
-    - [0xC3DBF0, c]
-    - [0xC3F020, data]
-    - [0xC3F120, data]
-    - [0xC3F3E0, data]
-    - [0xC3FA70, rodata]
-    - [0xC3FA80, rodata]
+    - [0xC3DBF0,       c, C3DBF0]
+    - [0xC3F020,   .data, C3DBF0]
+    - [0xC3F120,   .data, C3DBF0]
+    - [0xC3F3E0,   .data, C3DBF0]
+    - [0xC3FA70, .rodata, C3DBF0]
+    - [0xC3FA80, .rodata, C3DBF0]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
@@ -8307,14 +8327,14 @@ segments:
     start: 0xC3FDB0
     vram: 0x80240000
     subsegments:
-    - [0xC3FDB0, c]
-    - [0xC43A40, data]
-    - [0xC43B40, data]
-    - [0xC43EB0, data]
-    - [0xC46790, data]
-    - [0xC467A0, rodata]
-    - [0xC467B0, rodata]
-    - [0xC46B40, rodata]
+    - [0xC3FDB0,       c, C3FDB0]
+    - [0xC43A40,   .data, C3FDB0]
+    - [0xC43B40,   .data, C3FDB0]
+    - [0xC43EB0,   .data, C3FDB0]
+    - [0xC46790,   .data, C3FDB0]
+    - [0xC467A0, .rodata, C3FDB0]
+    - [0xC467B0, .rodata, C3FDB0]
+    - [0xC46B40, .rodata, C3FDB0]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
@@ -8322,13 +8342,13 @@ segments:
     start: 0xC46BE0
     vram: 0x80240000
     subsegments:
-    - [0xC46BE0, c]
-    - [0xC4A3E0, data]
-    - [0xC4A500, data]
-    - [0xC4AA30, data]
-    - [0xC4ABE0, data]
-    - [0xC4BF50, rodata]
-    - [0xC4C2F8, rodata]
+    - [0xC46BE0,       c, C46BE0]
+    - [0xC4A3E0,   .data, C46BE0]
+    - [0xC4A500,   .data, C46BE0]
+    - [0xC4AA30,   .data, C46BE0]
+    - [0xC4ABE0,   .data, C46BE0]
+    - [0xC4BF50, .rodata, C46BE0]
+    - [0xC4C2F8, .rodata, C46BE0]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
@@ -8336,12 +8356,12 @@ segments:
     start: 0xC4C390
     vram: 0x80240000
     subsegments:
-    - [0xC4C390, c]
-    - [0xC4C580, data]
-    - [0xC4C680, data]
-    - [0xC4CA00, data]
-    - [0xC4D270, data]
-    - [0xC4D3D0, rodata]
+    - [0xC4C390,       c, C4C390]
+    - [0xC4C580,   .data, C4C390]
+    - [0xC4C680,   .data, C4C390]
+    - [0xC4CA00,   .data, C4C390]
+    - [0xC4D270,   .data, C4C390]
+    - [0xC4D3D0, .rodata, C4C390]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
@@ -8349,11 +8369,11 @@ segments:
     start: 0xC4D3E0
     vram: 0x80240000
     subsegments:
-    - [0xC4D3E0, c]
-    - [0xC4D430, data]
-    - [0xC4D550, data]
-    - [0xC4D950, data]
-    - [0xC4DEE0, rodata]
+    - [0xC4D3E0,       c, C4D3E0]
+    - [0xC4D430,   .data, C4D3E0]
+    - [0xC4D550,   .data, C4D3E0]
+    - [0xC4D950,   .data, C4D3E0]
+    - [0xC4DEE0, .rodata, C4D3E0]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
@@ -8361,11 +8381,11 @@ segments:
     start: 0xC4DEF0
     vram: 0x80240000
     subsegments:
-    - [0xC4DEF0, c]
-    - [0xC4E1B0, data]
-    - [0xC4E2A0, data]
-    - [0xC4E760, data]
-    - [0xC4E950, rodata]
+    - [0xC4DEF0,       c, C4DEF0]
+    - [0xC4E1B0,   .data, C4DEF0]
+    - [0xC4E2A0,   .data, C4DEF0]
+    - [0xC4E760,   .data, C4DEF0]
+    - [0xC4E950, .rodata, C4DEF0]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
@@ -8373,10 +8393,10 @@ segments:
     start: 0xC4E960
     vram: 0x80240000
     subsegments:
-    - [0xC4E960, data]
-    - [0xC4EA50, data]
-    - [0xC4ECE0, data]
-    - [0xC4F020, rodata]
+    - [0xC4E960,   .data, C4E960]
+    - [0xC4EA50,   .data, C4E960]
+    - [0xC4ECE0,   .data, C4E960]
+    - [0xC4F020, .rodata, C4E960]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
@@ -8384,10 +8404,10 @@ segments:
     start: 0xC4F030
     vram: 0x80240000
     subsegments:
-    - [0xC4F030, data]
-    - [0xC4F130, data]
-    - [0xC4F4B0, data]
-    - [0xC4F500, rodata]
+    - [0xC4F030,   .data, C4F030]
+    - [0xC4F130,   .data, C4F030]
+    - [0xC4F4B0,   .data, C4F030]
+    - [0xC4F500, .rodata, C4F030]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
@@ -8395,14 +8415,14 @@ segments:
     start: 0xC4F510
     vram: 0x80240000
     subsegments:
-    - [0xC4F510, c]
-    - [0xC50CA0, c]
-    - [0xC50D80, data]
-    - [0xC50ED0, data]
-    - [0xC513B0, data]
-    - [0xC51FE0, data]
-    - [0xC521E0, rodata]
-    - [0xC52200, rodata]
+    - [0xC4F510,       c, C4F510]
+    - [0xC50CA0,       c, C50CA0]
+    - [0xC50D80,   .data, C4F510]
+    - [0xC50ED0,   .data, C4F510]
+    - [0xC513B0,   .data, C4F510]
+    - [0xC51FE0,   .data, C4F510]
+    - [0xC521E0, .rodata, C4F510]
+    - [0xC52200, .rodata, C4F510]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
@@ -8410,13 +8430,13 @@ segments:
     start: 0xC52540
     vram: 0x80240000
     subsegments:
-    - [0xC52540, c]
-    - [0xC53970, data]
-    - [0xC53A60, data]
-    - [0xC53CC0, data]
-    - [0xC53D00, data]
-    - [0xC55720, rodata]
-    - [0xC55730, rodata]
+    - [0xC52540,       c, C52540]
+    - [0xC53970,   .data, C52540]
+    - [0xC53A60,   .data, C52540]
+    - [0xC53CC0,   .data, C52540]
+    - [0xC53D00,   .data, C52540]
+    - [0xC55720, .rodata, C52540]
+    - [0xC55730, .rodata, C52540]
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
@@ -8424,9 +8444,9 @@ segments:
     start: 0xC55A60
     vram: 0x80240000
     subsegments:
-    - [0xC55A60, data]
-    - [0xC55B60, data]
-    - [0xC55F30, rodata]
+    - [0xC55A60,   .data, C55A60]
+    - [0xC55B60,   .data, C55A60]
+    - [0xC55F30, .rodata, C55A60]
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
@@ -8434,14 +8454,14 @@ segments:
     start: 0xC55F40
     vram: 0x80240000
     subsegments:
-    - [0xC55F40, c]
-    - [0xC56EF0, c]
-    - [0xC571B0, data]
-    - [0xC572A0, data]
-    - [0xC574C0, data]
-    - [0xC59620, data]
-    - [0xC59810, rodata]
-    - [0xC59820, rodata]
+    - [0xC55F40,       c, C55F40]
+    - [0xC56EF0,       c, C56EF0]
+    - [0xC571B0,   .data, C55F40]
+    - [0xC572A0,   .data, C55F40]
+    - [0xC574C0,   .data, C55F40]
+    - [0xC59620,   .data, C55F40]
+    - [0xC59810, .rodata, C55F40]
+    - [0xC59820, .rodata, C55F40]
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code

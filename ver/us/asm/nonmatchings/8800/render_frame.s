@@ -400,7 +400,7 @@ glabel render_frame
 .L8002DD2C:
 /* 912C 8002DD2C 0C03844E */  jal       render_player
 /* 9130 8002DD30 00000000 */   nop
-/* 9134 8002DD34 0C00E9FC */  jal       render_npcs
+/* 9134 8002DD34 0C00E9FC */  jal       npc_list_render
 /* 9138 8002DD38 00000000 */   nop
 /* 913C 8002DD3C 0C048D1C */  jal       render_dynamic_entities
 /* 9140 8002DD40 00000000 */   nop

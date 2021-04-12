@@ -117,6 +117,7 @@ ApiStatus AdjustCam(ScriptInstance* script, s32 isInitialCall);
 ApiStatus ResetCam(ScriptInstance* script, s32 isInitialCall);
 ApiStatus LoadModelAnimation(ScriptInstance* script, s32 isInitialCall);
 ApiStatus PlayModelAnimation(ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetAnimModelPosition(ScriptInstance* script, s32 isInitialCall);
 ApiStatus ChangeModelAnimation(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall);
 ApiStatus GetNpcPointer(ScriptInstance* script, s32 isInitialCall);
@@ -261,6 +262,7 @@ ApiStatus DemoReleaseButton(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall);
+ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CFD30(ScriptInstance* script, s32 isInitialCall);

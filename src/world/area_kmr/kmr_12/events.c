@@ -33,7 +33,7 @@ NpcAISettings N(goombaAISettings) = {
     .unk_10 = { .f = 0.0f },
     .unk_14 = 1,
     .chaseSpeed = 2.5f,
-    .unk_1C = 180,
+    .unk_1C = { .s = 180 },
     .unk_20 = 3,
     .chaseRadius = 150.0f,
     .unk_28 = { .f = 0.0f },
@@ -89,7 +89,7 @@ Script N(GoombaIdle) = SCRIPT({
     SetSelfVar(0, FALSE);
     SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, fake_mushroom)); // TODO: work out why palette 0 is used here
     EnableNpcShadow(NPC_SELF, FALSE);
-    SetSelfEnemyFlagBits(0x00000020, TRUE);
+    SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, TRUE);
 
     // Wait until read_sign sets NPC var 0
     loop {
@@ -98,7 +98,7 @@ Script N(GoombaIdle) = SCRIPT({
     } until(SI_VAR(0) == FALSE)
 
     // Peel and jump off the sign
-    SetNpcFlagBits(NPC_SELF, 0x00240000, TRUE);
+    SetNpcFlagBits(NPC_SELF, 0x240000, TRUE);
     sleep 3;
     SI_VAR(0) = 0.0;
     loop 9 {
@@ -126,9 +126,9 @@ Script N(GoombaIdle) = SCRIPT({
     NpcJump0(NPC_SELF, -35, 0, 30, 23);
     func_802CFD30(NPC_SELF, 0, 0, 0, 0, 0);
     InterpNpcYaw(NPC_SELF, 90, 0);
-    SetNpcFlagBits(NPC_SELF, 0x00240000, FALSE);
-    SetSelfEnemyFlagBits(0x00000020, FALSE);
-    SetSelfEnemyFlagBits(0x40000000, TRUE);
+    SetNpcFlagBits(NPC_SELF, 0x240000, FALSE);
+    SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, FALSE);
+    SetSelfEnemyFlagBits(NPC_FLAG_40000000, TRUE);
 
     // We're done jumping off; the player can read the sign again
     bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
@@ -201,13 +201,13 @@ Script N(ReadEastSign) = SCRIPT({
     group 0;
 
     func_802D5830(1);
-    DisablePlayerInput(1);
+    DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MSG_kmr_12_sign_to_fortress, 160, 40);
-    DisablePlayerInput(0);
+    DisablePlayerInput(FALSE);
     func_802D5830(0);
 });
 
 Script N(MakeEntities) = SCRIPT({
-    MakeEntity(0x802EAFDC, 436, 0, -42, 0, 0x80000000);
+    MakeEntity(0x802EAFDC, 436, 0, -42, 0, MAKE_ENTITY_END);
     AssignScript(N(ReadEastSign));
 });
