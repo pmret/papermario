@@ -36,6 +36,7 @@
 
 #define MAX_ANIMATED_MODELS 16
 #define MAX_ANIMATED_MESHES 16
+#define MAX_ENTITY_MODELS 256
 #define MAX_MODELS 256
 #define MAX_SCRIPTS 128
 #define MAX_NPCS 64
@@ -54,8 +55,7 @@
 { \
     ScriptList** temp = &gCurrentScriptListPtr; \
     s32 *numScripts = &gNumScripts; \
-    new = heap_malloc(sizeof(ScriptInstance)); \
-    (**temp)[index] = new; \
+    (**temp)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
     (*numScripts)++; \
     ASSERT(new != NULL); \
 }
