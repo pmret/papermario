@@ -254,7 +254,13 @@ class Configure:
             elif isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type in ["asm", "hasm", "data", "rodata", "bss"]:
                 build(entry.object_path, entry.src_paths, "as")
             elif (isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c") or (isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type.startswith(".")):
-                build(entry.object_path, entry.src_paths, "cc_dsl") # TODO: don't use dsl for everything
+                task = "cc"
+                with entry.src_paths[0].open() as f:
+                    s = f.read()
+                    if "SCRIPT(" in s or "#pragma SCRIPT" in s:
+                        task = "cc_dsl"
+
+                build(entry.object_path, entry.src_paths, task)
             elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(subseg, segtypes.n64.Yay0.N64SegYay0):
