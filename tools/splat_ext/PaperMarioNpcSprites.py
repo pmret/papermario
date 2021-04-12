@@ -256,8 +256,8 @@ class Component:
 class N64SegPaperMarioNpcSprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, segment, next_segment):
-        super().__init__(segment, next_segment)
+    def __init__(self, segment, rom_start, rom_end):
+        super().__init__(segment, rom_start, rom_end)
 
         self.files = segment["files"]
 

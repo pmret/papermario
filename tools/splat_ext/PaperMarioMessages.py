@@ -358,8 +358,8 @@ CHARSET_CREDITS = {
 }
 
 class N64SegPaperMarioMessages(N64Segment):
-    def __init__(self, segment, next_segment):
-        super().__init__(segment, next_segment)
+    def __init__(self, segment, rom_start, rom_end):
+        super().__init__(segment, rom_start, rom_end)
         self.files = segment.get("files", []) if type(segment) is dict else []
 
         with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
