@@ -247,13 +247,13 @@ class Configure:
 
         # Build objects
         for entry in self.linker_entries:
-            subseg = entry.segment_or_subsegment
+            seg = entry.segment
 
-            if isinstance(subseg, segtypes.n64.header.N64SegHeader):
+            if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type in ["asm", "hasm", "data", "rodata", "bss"]:
+            elif isinstance(seg, segtypes.n64.asm.N64SegAsm) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.out_path()):
                 build(entry.object_path, entry.src_paths, "as")
-            elif (isinstance(subseg, segtypes.n64.code.CodeSubsegment) and subseg.type == "c") or (isinstance(subseg, segtypes.n64.code.Subsegment) and subseg.type.startswith(".")):
+            elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and not seg.out_path()):
                 task = "cc"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
@@ -261,42 +261,33 @@ class Configure:
                         task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)
-            elif isinstance(subseg, segtypes.n64.code.BinSubsegment) or isinstance(subseg, segtypes.n64.bin.N64SegBin):
+            elif isinstance(seg, segtypes.n64.bin.N64SegBin):
                 build(entry.object_path, entry.src_paths, "bin")
-            elif isinstance(subseg, segtypes.n64.Yay0.N64SegYay0):
+            elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
                 compressed_path = entry.object_path.with_suffix("") # remove .o
                 build(compressed_path, entry.src_paths, "yay0")
                 build(entry.object_path, [compressed_path], "bin")
-            elif isinstance(subseg, segtypes.n64.img.N64SegImg):
+            elif isinstance(seg, segtypes.n64.img.N64SegImg):
                 flags = ""
-                if subseg.flip_horizontal:
+                if seg.flip_horizontal:
                     flags += "--flip-x "
-                if subseg.flip_vertical:
+                if seg.flip_vertical:
                     flags += "--flip-y "
 
                 build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
-                    "img_type": subseg.type,
+                    "img_type": seg.type,
                     "img_flags": flags,
                 })
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
 
-                build(self.build_path() / "include" / subseg.dir / (subseg.name + ".png.h"), entry.src_paths, "img_header")
-            elif isinstance(subseg, segtypes.n64.palette.N64SegPalette):
+                build(self.build_path() / "include" / seg.dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
+            elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
-                    "img_type": subseg.type,
+                    "img_type": seg.type,
                     "img_flags": "",
                 })
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif isinstance(subseg, segtypes.n64.code.ImageSubsegment):
-                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
-                    "img_type": subseg.type,
-                    "img_flags": "",
-                })
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-
-                if subseg.type != "palette":
-                    build(self.build_path() / "include" / subseg.dir / (subseg.name + ".png.h"), entry.src_paths, "img_header")
-            elif subseg.type == "PaperMarioNpcSprites":
+            elif seg.type == "PaperMarioNpcSprites":
                 sprite_yay0s = []
 
                 for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
@@ -315,7 +306,7 @@ class Configure:
                     build(bin_path, [sprite_dir], "sprite", variables=variables)
                     build(yay0_path, [bin_path], "yay0")
                     build(
-                        self.build_path() / "include" / subseg.dir / subseg.name / (sprite_name + ".h"),
+                        self.build_path() / "include" / seg.dir / seg.name / (sprite_name + ".h"),
                         [sprite_dir],
                         "sprite_header",
                         variables=variables,
@@ -323,7 +314,7 @@ class Configure:
 
                 build(entry.object_path.with_suffix(".bin"), sprite_yay0s, "sprite_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif subseg.type == "PaperMarioMessages":
+            elif seg.type == "PaperMarioMessages":
                 msg_bins = []
 
                 for section_idx, msg_path in enumerate(entry.src_paths):
@@ -336,7 +327,7 @@ class Configure:
                     self.build_path() / "include" / "message_ids.h",
                 ], msg_bins, "msg_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif subseg.type == "PaperMarioMapFS":
+            elif seg.type == "PaperMarioMapFS":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
 
                 for path in entry.src_paths:
@@ -375,7 +366,7 @@ class Configure:
                 build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             else:
-                raise Exception(f"don't know how to build {subseg.__class__.__name__} '{subseg.name}'")
+                raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
         # Build elf, z64, ok
         ninja.build(
