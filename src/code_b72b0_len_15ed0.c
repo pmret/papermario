@@ -178,7 +178,7 @@ s32 step_entity_rendercmd(EntityModel* entityModel) {
         case 2: // restore saved position
             entityModel->cmdListReadPos = entityModel->cmdListSavedPos;
             return 1;
-        case 3: // nop
+        case 3: // set saved position
             entityModel->cmdListReadPos = entityModel->cmdListSavedPos = curPos;
             return 1;
         case 4: // set render mode
