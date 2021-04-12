@@ -30,14 +30,14 @@ segments:
     type: code
     start: 0x0040
     vram: 0xA4000040
-    subsections:
+    subsegments:
     - [0x0040, asm, boot]
     - [0x0B70, bin, bootcode_font]
   - type: code
     start: 0x1000
     vram: 0x80025C00
     subalign: 4
-    subsections:
+    subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, 1060_len_310]
     - [0x1370, c, 1370_len_7d0]
@@ -319,7 +319,7 @@ segments:
     start: 0x759B0
     vram: 0x800DC500
     subalign: 4
-    subsections:
+    subsegments:
     - [0x759b0, c, 759b0_len_61b0]
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
@@ -355,7 +355,7 @@ segments:
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
-    subsections:
+    subsegments:
     - [0xa5dd0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xb72b0, c, b72b0_len_15ed0]
@@ -397,7 +397,7 @@ segments:
   - type: code
     start: 0xE79B0
     vram: 0x802C3000
-    subsections:
+    subsegments:
     - [0xe79b0, c, e79b0_len_1920]
     - [0xe92d0, c, si]
     - [0xED510, c, ED510]
@@ -421,14 +421,14 @@ segments:
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
-    subsections:
+    subsegments:
     - [0x0fee30, c, fee30_len_2d60]
     - [0x101b90, c, 101b90_len_8f0]
     - [0x102480, .data, fee30_len_2d60]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
-    subsections:
+    subsegments:
     - [0x102610, c, 102610_len_2330]
     - [0x102C80, c, 102C80]
     - [0x104730, c, 104730]
@@ -460,7 +460,7 @@ segments:
   - type: code
     start: 0x10CC10
     vram: 0x802EB3D0
-    subsections:
+    subsegments:
     - [0x10CC10, data]
   - [0x10F1B0, bin]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
@@ -471,7 +471,7 @@ segments:
     dir: pause
     start: 0x135EE0
     vram: 0x80242BA0
-    subsections:
+    subsegments:
     - [0x135EE0, c]
     - [0x137ED0, c]
     - [0x138CC0, c]
@@ -514,7 +514,7 @@ segments:
   - type: code
     start: 0x163400
     vram: 0x80242BA0
-    subsections:
+    subsegments:
     - [0x163400, c]
     - [0x165490, c, 165490]
     - [0x167570, c, 167570]
@@ -527,7 +527,7 @@ segments:
   - type: code
     start: 0x16C8E0
     vram: 0x8023E000
-    subsections:
+    subsegments:
     - [0x16C8E0, c, 16c8e0]
     - [0x16F740, c, 16F740]
     - [0x1776B0, c, 1776B0]
@@ -1572,7 +1572,7 @@ segments:
   - dir: logos
     type: code
     start: 0x1FE1B0
-    subsections:
+    subsegments:
     - [0x1FE1B0, rgba16,  logo_n64, 128, 112]
     - [0x2051B0, rgba16,  logo_is, 256, 112]
     - [0x2131B0, rgba16,  logo_nintendo, 256, 48]
@@ -1591,29 +1591,29 @@ segments:
   - type: code
     start: 0x3169F0
     vram: 0x80200000
-    subsections:
+    subsegments:
     - [0x3169f0, c, 3169f0]
   - type: code
     start: 0x316a70
     vram: 0x80200080
-    subsections:
+    subsegments:
     - [0x316a70, c, 316a70]
   - type: code
     start: 0x316C00
     vram: 0x802AE000
     overlay: True
-    subsections:
+    subsegments:
     - [0x316C00, c]
   - type: code
     start: 0x316D90
     vram: 0x802AE000
     overlay: True
-    subsections:
+    subsegments:
     - [0x316d90, c, 316d90]
   - type: code
     start: 0x316f30
     vram: 0x802B2000
-    subsections:
+    subsegments:
     - [0x316f30, c, 316f30]
   - type: code
     dir: world/partner
@@ -1621,7 +1621,7 @@ segments:
     start: 0x317020
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x317020, c, goombario]
     - [0x317b60, .data, goombario]
     - [0x317DA0, .rodata, goombario]
@@ -1631,7 +1631,7 @@ segments:
     start: 0x317e50
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x317e50, c, bombette]
     - [0x3195d0, data]
   - type: code
@@ -1640,7 +1640,7 @@ segments:
     start: 0x319670
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x319670, c, parakarry]
     - [0x31b000, data]
     - [0x31B080, .rodata, parakarry]
@@ -1650,7 +1650,7 @@ segments:
     start: 0x31b120
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x31b120, c, kooper]
     - [0x31cb60, data]
     - [0x31CBE0, .rodata, kooper]
@@ -1660,7 +1660,7 @@ segments:
     start: 0x31cc70
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x31cc70, c, watt]
     - [0x31ddc0, data]
   - type: code
@@ -1669,7 +1669,7 @@ segments:
     start: 0x31de70
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x31de70, c, sushie]
     - [0x320b20, data]
     - [0x320BC0, .rodata, sushie]
@@ -1679,7 +1679,7 @@ segments:
     start: 0x320c50
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x320c50, c, lakilester]
     - [0x3239b0, data]
   - type: code
@@ -1688,7 +1688,7 @@ segments:
     start: 0x323A50
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x323A50, c, bow]
     - [0x324930, data]
     - [0x3249B0, .rodata, bow]
@@ -1698,7 +1698,7 @@ segments:
     start: 0x324a10
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x324a10, c, goompa]
     - [0x324e80, .data, goompa]
     - [0x324F00, .rodata, goompa]
@@ -1708,7 +1708,7 @@ segments:
     start: 0x324f10
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x324f10, c, goombaria]
     - [0x325000, .data, goombaria]
   - type: code
@@ -1717,20 +1717,20 @@ segments:
     start: 0x325070
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x325070, c, twink]
     - [0x325160, .data, twink]
   - type: code
     start: 0x3251d0
     vram: 0x802BD100
     overlay: True
-    subsections:
+    subsegments:
     - [0x3251d0, c]
     - [0x3255e0, bin]
   - type: code
     start: 0x325ad0
     vram: 0xE0200000
-    subsections:
+    subsegments:
     - [0x325ad0, c]
     - [0x325ee0, c]
     - [0x326160, bin]
@@ -1738,436 +1738,436 @@ segments:
   - type: code
     start: 0x3278f0
     vram: 0xE0002000
-    subsections:
+    subsegments:
     - [0x3278f0, c]
     - [0x328050, bin]
   - type: code
     start: 0x328110
     vram: 0xE000C000
-    subsections:
+    subsegments:
     - [0x328110, c]
     - [0x328d20, bin]
   - [0x328EA0, bin]
   - type: code
     start: 0x32C110
     vram: 0xE000E000
-    subsections:
+    subsegments:
     - [0x32C110, c]
     - [0x32c770, bin]
   - type: code
     start: 0x32C7A0
     vram: 0xE0010000
-    subsections:
+    subsegments:
     - [0x32C7A0, c]
     - [0x32CEB0, bin]
   - type: code
     start: 0x32DD10
     vram: 0xE0012000
-    subsections:
+    subsegments:
     - [0x32DD10, c]
   - type: code
     start: 0x32E490
     vram: 0xE0014000
-    subsections:
+    subsegments:
     - [0x32E490, c]
     - [0x32EC10, bin]
   - type: code
     start: 0x32EE30
     vram: 0xE0016000
-    subsections:
+    subsegments:
     - [0x32EE30, c]
     - [0x32F550, bin]
   - type: code
     start: 0x32F580
     vram: 0xE0018000
-    subsections:
+    subsegments:
     - [0x32F580, c]
   - [0x32fb50, bin] # data/rodata section for above.
   - type: code
     start: 0x32FE30
     vram: 0xE001A000
-    subsections:
+    subsegments:
     - [0x32FE30, c]
     - [0x330440, bin]
   - type: code
     start: 0x330910
     vram: 0xE001C000
-    subsections:
+    subsegments:
     - [0x330910, c]
   - [0x330ef0, bin] # data/rodata section for above.
   - type: code
     start: 0x331940
     vram: 0xE001E000
-    subsections:
+    subsegments:
     - [0x331940, c]
     - [0x332690, bin]
   - [0x3326A0, bin]
   - type: code
     start: 0x333ec0
     vram: 0xE0020000
-    subsections:
+    subsegments:
     - [0x333ec0, c]
     - [0x334b50, bin]
   - [0x334C70, bin]
   - type: code
     start: 0x337240
     vram: 0xE0022000
-    subsections:
+    subsegments:
     - [0x337240, c]
     - [0x337f10, bin]
   - [0x337FC0, bin]
   - type: code
     start: 0x339250
     vram: 0xE0024000
-    subsections:
+    subsegments:
     - [0x339250, c]
     - [0x339f10, bin]
   - [0x339F60, bin]
   - type: code
     start: 0x33B180
     vram: 0xE0026000
-    subsections:
+    subsegments:
     - [0x33B180, c]
     - [0x33bb70, bin]
   - [0x33BBD0, bin]
   - type: code
     start: 0x33CDF0
     vram: 0xE0028000
-    subsections:
+    subsegments:
     - [0x33CDF0, c]
     - [0x33d5d0, bin]
   - [0x33D610, bin]
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000
-    subsections:
+    subsegments:
     - [0x33E8C0, c]
     - [0x33efe0, bin]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
-    subsections:
+    subsegments:
     - [0x33FE80, c]
     - [0x3407c0, bin]
   - [0x340880, bin]
   - type: code
     start: 0x3419E0
     vram: 0xE002E000
-    subsections:
+    subsegments:
     - [0x3419E0, c]
     - [0x342120, bin]
   - type: code
     start: 0x342140
     vram: 0xE0030000
-    subsections:
+    subsegments:
     - [0x342140, c]
     - [0x342fd0, bin]
   - [0x343040, bin]
   - type: code
     start: 0x343680
     vram: 0xE0032000
-    subsections:
+    subsegments:
     - [0x343680, c]
     - [0x343f30, bin]
   - [0x343F70, bin]
   - type: code
     start: 0x344a10
     vram: 0xE0034000
-    subsections:
+    subsegments:
     - [0x344a10, c]
     - [0x345190, bin]
   - [0x3451E0, bin]
   - type: code
     start: 0x3454E0
     vram: 0xE0036000
-    subsections:
+    subsegments:
     - [0x3454E0, c]
     - [0x345b10, bin]
   - [0x345B40, bin]
   - type: code
     start: 0x34DD20
     vram: 0xE0038000
-    subsections:
+    subsegments:
     - [0x34DD20, c]
     - [0x34E710, bin]
   - type: code
     start: 0x34EC80
     vram: 0xE003A000
-    subsections:
+    subsegments:
     - [0x34EC80, c]
     - [0x34f480, bin]
   - type: code
     start: 0x34F4C0
     vram: 0xE003C000
-    subsections:
+    subsegments:
     - [0x34F4C0, c]
     - [0x350160, bin]
   - [0x350220, bin]
   - type: code
     start: 0x352440
     vram: 0xE003E000
-    subsections:
+    subsegments:
     - [0x352440, c]
     - [0x352cb0, bin]
   - [0x352CE0, bin]
   - type: code
     start: 0x353300
     vram: 0xE0040000
-    subsections:
+    subsegments:
     - [0x353300, c]
     - [0x353B40, bin]
   - type: code
     start: 0x3547A0
     vram: 0xE0042000
-    subsections:
+    subsegments:
     - [0x3547A0, c]
     - [0x354F20, bin]
   - type: code
     start: 0x354F60
     vram: 0xE0044000
-    subsections:
+    subsegments:
     - [0x354F60, c]
     - [0x355d10, bin]
   - type: code
     start: 0x355EE0
     vram: 0xE0046000
-    subsections:
+    subsegments:
     - [0x355EE0, c]
     - [0x3564e0, bin]
   - [0x356530, bin]
   - type: code
     start: 0x356980
     vram: 0xE0048000
-    subsections:
+    subsegments:
     - [0x356980, c]
     - [0x357380, bin]
   - [0x3573A0, bin]
   - type: code
     start: 0x3584C0
     vram: 0xE004A000
-    subsections:
+    subsegments:
     - [0x3584C0, c]
     - [0x359320, bin]
   - [0x3593B0, bin]
   - type: code
     start: 0x359F20
     vram: 0xE004C000
-    subsections:
+    subsegments:
     - [0x359F20, c]
     - [0x35A580, bin]
   - type: code
     start: 0x35B9D0
     vram: 0xE004E000
-    subsections:
+    subsegments:
     - [0x35B9D0, c]
     - [0x35bfb0, bin]
   - type: code
     start: 0x35BFD0
     vram: 0xE0050000
-    subsections:
+    subsegments:
     - [0x35BFD0, c]
     - [0x35c530, bin]
   - [0x35C550, bin]
   - type: code
     start: 0x35CA80
     vram: 0xE0052000
-    subsections:
+    subsegments:
     - [0x35CA80, c]
     - [0x35D460, bin]
   - type: code
     start: 0x35DA00
     vram: 0xE0056000
-    subsections:
+    subsegments:
     - [0x35DA00, c]
     - [0x35E8A0, bin]
   - type: code
     start: 0x35E920
     vram: 0xE0058000
-    subsections:
+    subsegments:
     - [0x35E920, c]
     - [0x35F0A0, bin]
   - type: code
     start: 0x3602C0
     vram: 0xE005A000
-    subsections:
+    subsegments:
     - [0x3602C0, c]
     - [0x360a10, bin]
   - [0x360A30, bin]
   - type: code
     start: 0x360F40
     vram: 0xE005C000
-    subsections:
+    subsegments:
     - [0x360F40, c]
     - [0x361640, bin]
   - type: code
     start: 0x3625C0
     vram: 0xE005E000
-    subsections:
+    subsegments:
     - [0x3625C0, c]
     - [0x362C30, bin]
   - type: code
     start: 0x363160
     vram: 0xE0060000
-    subsections:
+    subsegments:
     - [0x363160, c]
     - [0x363890, bin]
   - type: code
     start: 0x364300
     vram: 0xE0062000
-    subsections:
+    subsegments:
     - [0x364300, c]
     - [0x364BC0, bin]
   - type: code
     start: 0x364F10
     vram: 0xE0064000
-    subsections:
+    subsegments:
     - [0x364F10, c]
     - [0x365970, bin]
   - type: code
     start: 0x366030
     vram: 0xE0066000
-    subsections:
+    subsegments:
     - [0x366030, c]
     - [0x366c80, bin]
   - [0x366D60, bin]
   - type: code
     start: 0x36A8D0
     vram: 0xE0068000
-    subsections:
+    subsegments:
     - [0x36A8D0, c]
     - [0x36ae80, bin]
   - [0x36AEE0, bin]
   - type: code
     start: 0x36D020
     vram: 0xE006A000
-    subsections:
+    subsegments:
     - [0x36D020, c]
     - [0x36de10, bin]
   - [0x36DF90, bin]
   - type: code
     start: 0x36E1D0
     vram: 0xE006C000
-    subsections:
+    subsegments:
     - [0x36E1D0, c]
     - [0x36ed30, bin]
   - [0x36ED60, bin]
   - type: code
     start: 0x372790
     vram: 0xE006E000
-    subsections:
+    subsegments:
     - [0x372790, c]
     - [0x373390, bin]
   - [0x3733E0, bin]
   - type: code
     start: 0x3740B0
     vram: 0xE0070000
-    subsections:
+    subsegments:
     - [0x3740B0, c]
     - [0x374d80, bin]
   - type: code
     start: 0x374E50
     vram: 0xE0072000
-    subsections:
+    subsegments:
     - [0x374E50, c]
     - [0x375500, bin]
   - [0x375510, bin]
   - type: code
     start: 0x376460
     vram: 0xE0074000
-    subsections:
+    subsegments:
     - [0x376460, c]
     - [0x376fc0, bin]
   - type: code
     start: 0x377070
     vram: 0xE0076000
-    subsections:
+    subsegments:
     - [0x377070, c]
     - [0x377f00, bin]
   - [0x377F80, bin]
   - type: code
     start: 0x37A3F0
     vram: 0xE0078000
-    subsections:
+    subsegments:
     - [0x37A3F0, c]
     - [0x37acf0, bin]
   - [0x37ADD0, bin]
   - type: code
     start: 0x37C540
     vram: 0xE007A000
-    subsections:
+    subsegments:
     - [0x37C540, c]
     - [0x37D140, bin]
   - type: code
     start: 0x37D490
     vram: 0xE007C000
-    subsections:
+    subsegments:
     - [0x37D490, c]
     - [0x37D9A0, bin]
   - [0x37D9D0, bin]
   - type: code
     start: 0x37F720
     vram: 0xE007E000
-    subsections:
+    subsegments:
     - [0x37F720, c]
     - [0x380350, bin]
   - [0x3803A0, bin]
   - type: code
     start: 0x3812C0
     vram: 0xE0080000
-    subsections:
+    subsegments:
     - [0x3812C0, c]
     - [0x381d80, bin]
   - [0x381E00, bin]
   - type: code
     start: 0x385640
     vram: 0xE0082000
-    subsections:
+    subsegments:
     - [0x385640, c]
     - [0x386340, bin]
   - [0x3863B0, bin]
   - type: code
     start: 0x3889D0
     vram: 0xE0084000
-    subsections:
+    subsegments:
     - [0x3889D0, c]
     - [0x3897e0, bin]
   - type: code
     start: 0x389850
     vram: 0xE0086000
-    subsections:
+    subsegments:
     - [0x389850, c]
     - [0x38a2f0, bin]
   - [0x38A350, bin]
   - type: code
     start: 0x38ADF0
     vram: 0xE0088000
-    subsections:
+    subsegments:
     - [0x38ADF0, c]
     - [0x38bab0, bin]
   - [0x38BBA0, bin]
   - type: code
     start: 0x38C5F0
     vram: 0xE008A000
-    subsections:
+    subsegments:
     - [0x38C5F0, c]
     - [0x38D040, bin]
   - type: code
     start: 0x38DE00
     vram: 0xE008C000
-    subsections:
+    subsegments:
     - [0x38DE00, c]
     - [0x38E8F0, bin]
   - type: code
     start: 0x38EE60
     vram: 0xE008E000
-    subsections:
+    subsegments:
     - [0x38EE60, c]
     - [0x38f6f0, bin]
   - [0x38F710, bin]
   - type: code
     start: 0x38F900
     vram: 0xE0090000
-    subsections:
+    subsegments:
     - [0x38F900, c]
     - [0x390340, bin]
   - [0x3903D0, bin]
@@ -2181,292 +2181,292 @@ segments:
   - type: code
     start: 0x391D30
     vram: 0xE0092000
-    subsections:
+    subsegments:
     - [0x391D30, c]
     - [0x3923c0, bin]
   - [0x392440, bin]
   - type: code
     start: 0x3928D0
     vram: 0xE0094000
-    subsections:
+    subsegments:
     - [0x3928D0, c]
     - [0x393080, bin]
   - [0x3930A0, bin]
   - type: code
     start: 0x394280
     vram: 0xE0096000
-    subsections:
+    subsegments:
     - [0x394280, c]
   - [0x394660, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x395BB0
     vram: 0xE0098000
-    subsections:
+    subsegments:
     - [0x395BB0, c]
     - [0x3960C0, bin]
   - type: code
     start: 0x3965B0
     vram: 0xE009A000
-    subsections:
+    subsegments:
     - [0x3965B0, c]
     - [0x397010, bin]
   - type: code
     start: 0x3981F0
     vram: 0xE009C000
-    subsections:
+    subsegments:
     - [0x3981F0, c]
   - [0x398bc0, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x39FF20
     vram: 0xE009E000
-    subsections:
+    subsegments:
     - [0x39FF20, c]
     - [0x3A0D10, bin]
   - type: code
     start: 0x3A2290
     vram: 0xE00A0000
-    subsections:
+    subsegments:
     - [0x3A2290, c]
   - [0x3a2440, bin] # data/rodata for the above, and some extra unknown data.
   - type: code
     start: 0x3A2990
     vram: 0xE00A2000
-    subsections:
+    subsegments:
     - [0x3A2990, c]
     - [0x3A3360, bin]
   - type: code
     start: 0x3A37E0
     vram: 0xE00A4000
-    subsections:
+    subsegments:
     - [0x3A37E0, c]
     - [0x3a42b0, bin]
   - [0x3A4320, bin]
   - type: code
     start: 0x3A5550
     vram: 0xE00A6000
-    subsections:
+    subsegments:
     - [0x3A5550, c]
     - [0x3A5BE0, bin]
   - type: code
     start: 0x3A70F0
     vram: 0xE00A8000
-    subsections:
+    subsegments:
     - [0x3A70F0, c]
     - [0x3A7710, bin]
   - [0x3A77A0, bin] # split further
   - type: code
     start: 0x3AA920
     vram: 0xE00AA000
-    subsections:
+    subsegments:
     - [0x3AA920, c]
     - [0x3AAFE0, bin]
   - [0x3AB030, bin] # todo split this further
   - type: code
     start: 0x3AEE20
     vram: 0xE00AC000
-    subsections:
+    subsegments:
     - [0x3AEE20, c]
     - [0x3AF5D0, bin]
   - [0x3AF700, bin] # todo split this further
   - type: code
     start: 0x3B2350
     vram: 0xE00AE000
-    subsections:
+    subsegments:
     - [0x3B2350, c]
   - [0x3B2D90, bin] # todo split this further
   - type: code
     start: 0x3B3EB0
     vram: 0xE00B0000
-    subsections:
+    subsegments:
     - [0x3B3EB0, c]
     - [0x3B4690, bin]
   - [0x3B46A0, bin] # todo split this further
   - type: code
     start: 0x3B4790
     vram: 0xE00B2000
-    subsections:
+    subsegments:
     - [0x3B4790, c]
     - [0x3B5330, bin]
   - type: code
     start: 0x3B5CF0
     vram: 0xE00B4000
-    subsections:
+    subsegments:
     - [0x3B5CF0, c]
     - [0x3B69E0, bin]
   - type: code
     start: 0x3B7160
     vram: 0xE00B6000
-    subsections:
+    subsegments:
     - [0x3B7160, c]
     - [0x3B78B0, bin]
   - type: code
     start: 0x3B7B80
     vram: 0xE00B8000
-    subsections:
+    subsegments:
     - [0x3B7B80, c]
     - [0x3B8470, bin]
   - [0x3B8860, bin] # todo split this further
   - type: code
     start: 0x3B8BD0
     vram: 0xE00BA000
-    subsections:
+    subsegments:
     - [0x3B8BD0, c]
     - [0x3B9A50, bin]
   - type: code
     start: 0x3BA030
     vram: 0xE00BC000
-    subsections:
+    subsegments:
     - [0x3BA030, c]
     - [0x3BAC60, bin]
   - [0x3BAEA0, bin] # todo split this further ADD STUFF AFTER HERE
   - type: code
     start: 0x3BBF60
     vram: 0xE00BE000
-    subsections:
+    subsegments:
     - [0x3BBF60, c]
     - [0x3BCA50, bin]
   - type: code
     start: 0x3BCD60
     vram: 0xE00C0000
-    subsections:
+    subsegments:
     - [0x3BCD60, c]
     - [0x3BD770, bin]
   - type: code
     start: 0x3C11D0
     vram: 0xE00C2000
-    subsections:
+    subsegments:
     - [0x3C11D0, c]
     - [0x3C1B60, bin]
   - type: code
     start: 0x3CADF0
     vram: 0xE00C4000
-    subsections:
+    subsegments:
     - [0x3CADF0, c]
     - [0x3CB7C0, bin]
   - type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
-    subsections:
+    subsegments:
     - [0x3CC9E0, c]
     - [0x3CD670, bin]
   - type: code
     start: 0x3CF3A0
     vram: 0xE00C8000
-    subsections:
+    subsegments:
     - [0x3CF3A0, c]
     - [0x3CFAB0, bin]
   - type: code
     start: 0x3D0500
     vram: 0xE00CA000
-    subsections:
+    subsegments:
     - [0x3D0500, c]
     - [0x3D11B0, bin]
   - type: code
     start: 0x3D1690
     vram: 0xE00CC000
-    subsections:
+    subsegments:
     - [0x3D1690, c]
     - [0x3D2460, bin]
   - type: code
     start: 0x3D2AC0
     vram: 0xE00CE000
-    subsections:
+    subsegments:
     - [0x3D2AC0, c]
     - [0x3D3910, bin]
   - type: code
     start: 0x3D3E20
     vram: 0xE00D0000
-    subsections:
+    subsegments:
     - [0x3D3E20, c]
     - [0x3D4930, bin]
   - type: code
     start: 0x3D4970
     vram: 0xE00D2000
-    subsections:
+    subsegments:
     - [0x3D4970, c]
     - [0x3D4E70, bin]
   - type: code
     start: 0x3D5020
     vram: 0xE00D6000
-    subsections:
+    subsegments:
     - [0x3D5020, c]
     - [0x3D5E60, bin]
   - type: code
     start: 0x3D67C0
     vram: 0xE00D8000
-    subsections:
+    subsegments:
     - [0x3D67C0, c]
     - [0x3D6FA0, bin]
   - type: code
     start: 0x3D7240
     vram: 0xE00DA000
-    subsections:
+    subsegments:
     - [0x3D7240, c]
     - [0x3D7740, bin]
   - type: code
     start: 0x3D7A70
     vram: 0xE00DC000
-    subsections:
+    subsegments:
     - [0x3D7A70, c]
     - [0x3D80B0, bin]
   - type: code
     start: 0x3D8720
     vram: 0xE00DE000
-    subsections:
+    subsegments:
     - [0x3D8720, c]
     - [0x3D8F30, bin]
   - type: code
     start: 0x3DB460
     vram: 0xE00E0000
-    subsections:
+    subsegments:
     - [0x3DB460, c]
     - [0x3DBEA0, bin]
   - type: code
     start: 0x3DC310
     vram: 0xE00E2000
-    subsections:
+    subsegments:
     - [0x3DC310, c]
     - [0x3DCD00, bin]
   - type: code
     start: 0x3DE000
     vram: 0xE00E4000
-    subsections:
+    subsegments:
     - [0x3DE000, c]
     - [0x3DED90, bin]
   - type: code
     start: 0x3E0930
     vram: 0xE00E6000
-    subsections:
+    subsegments:
     - [0x3E0930, c]
     - [0x3E11B0, bin]
   - type: code
     start: 0x3E1690
     vram: 0xE00E8000
-    subsections:
+    subsegments:
     - [0x3E1690, c]
     - [0x3E1CC0, bin]
   - type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
-    subsections:
+    subsegments:
     - [0x3E1EE0, c]
     - [0x3E2930, bin]
   - type: code
     start: 0x3E43A0
     vram: 0xE010A000
-    subsections:
+    subsegments:
     - [0x3E43A0, c]
     - [0x3E5060, bin]
   - type: code
     start: 0x3E54C0
     vram: 0xE010C000
-    subsections:
+    subsegments:
     - [0x3E54C0, c]
     - [0x3E5ED0, bin]
   - type: code
     start: 0x3EB4E0
     vram: 0xE010E000
-    subsections:
+    subsegments:
     - [0x3EB4E0, c]
     - [0x3EBC30, bin]
   - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
@@ -2474,85 +2474,85 @@ segments:
   - type: code
     start: 0x3F83F0
     vram: 0xE0110000
-    subsections:
+    subsegments:
     - [0x3F83F0, c]
     - [0x3F8CA0, bin]
   - type: code
     start: 0x3F9E50
     vram: 0xE0112000
-    subsections:
+    subsegments:
     - [0x3F9E50, c]
     - [0x3FA480, bin]
   - type: code
     start: 0x3FEAE0
     vram: 0xE0114000
-    subsections:
+    subsegments:
     - [0x3FEAE0, c]
     - [0x3FF180, bin]
   - type: code
     start: 0x402640
     vram: 0xE0116000
-    subsections:
+    subsegments:
     - [0x402640, c]
     - [0x4032A0, bin]
   - type: code
     start: 0x403400
     vram: 0xE0118000
-    subsections:
+    subsegments:
     - [0x403400, c]
     - [0x403BB0, bin]
   - type: code
     start: 0x404220
     vram: 0xE011A000
-    subsections:
+    subsegments:
     - [0x404220, c]
     - [0x404E40, bin]
   - type: code
     start: 0x406B40
     vram: 0xE011C000
-    subsections:
+    subsegments:
     - [0x406B40, c]
     - [0x407040, bin]
   - type: code
     start: 0x409990
     vram: 0xE011E000
-    subsections:
+    subsegments:
     - [0x409990, c]
     - [0x40A180, bin]
   - type: code
     start: 0x40B3F0
     vram: 0xE0120000
-    subsections:
+    subsegments:
     - [0x40B3F0, c]
     - [0x40BB70, bin]
   - type: code
     start: 0x40C5A0
     vram: 0xE0122000
-    subsections:
+    subsegments:
     - [0x40C5A0, c]
     - [0x40D130, bin]
   - type: code
     start: 0x412730
     vram: 0xE0124000
-    subsections:
+    subsegments:
     - [0x412730, c]
     - [0x412FD0, bin]
   - type: code
     start: 0x413360
     vram: 0xE0126000
-    subsections:
+    subsegments:
     - [0x413360, c]
     - [0x413F20, bin]
   - type: code
     start: 0x414BA0
     vram: 0xE0128000
-    subsections:
+    subsegments:
     - [0x414BA0, c]
     - [0x415020, bin]
   - type: code
     start: 0x415D90
     vram: 0x802A1000
-    subsections:
+    subsegments:
     - [0x415D90, c, 415D90]
     - [0x4200D0, .data, 415D90]
     - [0x420500, .rodata, 415D90]
@@ -2560,161 +2560,161 @@ segments:
     start: 0x4219F0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4219F0, c, 4219F0]
     - [0x421FC0, .rodata, 4219F0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x422000, c]
     - [0x422A90, bin]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x422AD0, c]
     - [0x4233B0, bin]
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4233F0, c]
     - [0x423C30, bin]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x423C70, c]
     - [0x424550, bin]
   - type: code
     start: 0x425590
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x425590, c]
     - [0x425B10, bin]
   - type: code
     start: 0x425B50
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x425B50, c]
     - [0x426130, bin]
   - type: code
     start: 0x426170
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x426170, c]
     - [0x426970, bin]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4269D0, c]
     - [0x427320, bin]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4273B0, c]
     - [0x427A30, bin]
   - type: code
     start: 0x427A70
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x427A70, c]
     - [0x428280, bin]
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4282E0, c]
     - [0x428A30, bin]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x428A70, c]
     - [0x4292C0, bin]
   - type: code
     start: 0x429320
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x429320, c]
     - [0x429C90, bin]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x429D20, c]
     - [0x42A480, bin]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42A4F0, c]
     - [0x42B650, bin]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42C6F0, c]
     - [0x42CEB0, bin]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42CF10, c]
     - [0x42D9B0, bin]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42DA10, c]
     - [0x42E330, bin]
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42E3A0, c]
     - [0x42ED70, bin]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42EE20, c]
     - [0x42F680, bin]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x42F6E0, c]
     - [0x42FFC0, bin]
   - type: code
     start: 0x430020
     vram: 0x802A9000
     overlay: True
-    subsections:
+    subsegments:
     - [0x430020, c]
     - [0x430940, bin]
   - dir: battle/area_kmr_part_1
@@ -2723,7 +2723,7 @@ segments:
     vram: 0x80218000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x4309A0, c]
     - [0x431180, c]
     - [0x4313F0, c]
@@ -2739,7 +2739,7 @@ segments:
     start: 0x439A90
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x439A90, c]
     - [0x43A5A0, c]
     - [0x43A7E0, c]
@@ -2752,7 +2752,7 @@ segments:
     start: 0x447440
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x447440, c]
     - [0x4479A0, c]
     - [0x447C80, c]
@@ -2769,7 +2769,7 @@ segments:
     start: 0x464490
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x464490, c]
     - [0x464560, c]
     - [0x465D90, c]
@@ -2779,7 +2779,7 @@ segments:
     start: 0x47F0B0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x47F0B0, c]
     - [0x47F0D0, c]
     - [0x47F570, c]
@@ -2789,7 +2789,7 @@ segments:
     start: 0x48D1A0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x48D1A0, c]
     - [0x48D700, c]
     - [0x48DA50, c]
@@ -2801,7 +2801,7 @@ segments:
     start: 0x4A10A0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4A10A0, c]
     - [0x4A1190, c]
     - [0x4A12C0, c]
@@ -2811,7 +2811,7 @@ segments:
     start: 0x4B11F0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4B11F0, c]
     - [0x4B15D0, c]
     - [0x4B1D90, c]
@@ -2824,7 +2824,7 @@ segments:
     start: 0x4CF1B0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4CF1B0, c]
     - [0x4CF3D0, bin]
   - dir: battle/area_iwa
@@ -2832,7 +2832,7 @@ segments:
     start: 0x4D01F0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4D01F0, c]
     - [0x4D02B0, c]
     - [0x4D0310, c]
@@ -2844,7 +2844,7 @@ segments:
     start: 0x4DA5E0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
     - [0x4DA860, bin]
@@ -2854,7 +2854,7 @@ segments:
     start: 0x4E2740
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4E2740, c]
     - [0x4E2810, c]
     - [0x4E28E0, c]
@@ -2867,7 +2867,7 @@ segments:
     start: 0x4EF4A0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4EF4A0, c]
     - [0x4EFCF0, c]
     - [0x4EFDC0, c]
@@ -2878,7 +2878,7 @@ segments:
     start: 0x4F7BE0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4F7BE0, c]
     - [0x4F7D50, c]
     - [0x4F7F40, c]
@@ -2888,7 +2888,7 @@ segments:
     start: 0x4FEA50
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x4FEA50, c]
     - [0x4FED30, c]
     - [0x4FF010, c]
@@ -2899,14 +2899,14 @@ segments:
     start: 0x50F020
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x50F020, bin]
   - dir: battle/area_omo
     type: code
     start: 0x5125D0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5125D0, c]
     - [0x5126A0, c]
     - [0x512770, c]
@@ -2926,7 +2926,7 @@ segments:
     start: 0x52B6A0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x52B6A0, c]
     - [0x52B7C0, c]
     - [0x52B9D0, bin]
@@ -2935,7 +2935,7 @@ segments:
     start: 0x543570
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x543570, c]
     - [0x543620, bin]
   - dir: battle/area_omo2_2
@@ -2943,7 +2943,7 @@ segments:
     start: 0x5483E0
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5483E0, c]
     - [0x548500, bin]
   - dir: battle/area_omo2_3
@@ -2951,7 +2951,7 @@ segments:
     start: 0x54CC70
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x54CC70, c]
     - [0x54CCA0, bin]
   - dir: battle/area_omo2_4
@@ -2959,28 +2959,28 @@ segments:
     start: 0x552440
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x552440, bin]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x552BB0, bin]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     overlay: True
-    subsections:
+    subsegments:
     - [0x556C90, bin]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5573E0, c]
     - [0x557A80, c]
     - [0x557AD0, c]
@@ -2993,7 +2993,7 @@ segments:
     start: 0x56E2A0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x56E2A0, c]
     - [0x56E800, c]
     - [0x56EC50, bin]
@@ -3002,7 +3002,7 @@ segments:
     start: 0x573920
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x573920, c]
     - [0x5739F0, c]
     - [0x573AC0, c]
@@ -3014,7 +3014,7 @@ segments:
     start: 0x584940
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x584940, c]
     - [0x584B90, c]
     - [0x585000, bin]
@@ -3023,7 +3023,7 @@ segments:
     start: 0x58C2F0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x58C2F0, c]
     - [0x58C670, c]
     - [0x58C740, c]
@@ -3035,7 +3035,7 @@ segments:
     start: 0x59E6E0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x59E6E0, c]
     - [0x59F420, c]
     - [0x59F4D0, c]
@@ -3045,7 +3045,7 @@ segments:
     start: 0x5B14B0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5B14B0, c]
     - [0x5B16A0, c]
     - [0x5B1A10, c]
@@ -3058,7 +3058,7 @@ segments:
     start: 0x5CE690
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5CE690, c]
     - [0x5CF2D0, c]
     - [0x5CFF00, bin]
@@ -3067,7 +3067,7 @@ segments:
     start: 0x5EC490
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x5EC490, c]
     - [0x5EC560, c]
     - [0x5EC690, c]
@@ -3083,7 +3083,7 @@ segments:
     start: 0x608AB0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x608AB0, c]
     - [0x608CB0, c]
     - [0x609B30, c]
@@ -3095,7 +3095,7 @@ segments:
     start: 0x6186F0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6186F0, c]
     - [0x6187C0, c]
     - [0x618A00, c]
@@ -3108,7 +3108,7 @@ segments:
     start: 0x623BA0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x623BA0, c]
     - [0x6253E0, c]
     - [0x625750, c]
@@ -3118,7 +3118,7 @@ segments:
     start: 0x63D1E0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x63D1E0, c]
     - [0x63D710, c]
     - [0x63D9F0, c]
@@ -3129,7 +3129,7 @@ segments:
     start: 0x648E10
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x648E10, c]
     - [0x649050, c]
     - [0x649480, c]
@@ -3142,7 +3142,7 @@ segments:
     start: 0x660750
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x660750, c]
     - [0x660D20, c]
     - [0x660E10, c]
@@ -3152,7 +3152,7 @@ segments:
     start: 0x669D80
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x669D80, c]
     - [0x66B5B0, c]
     - [0x66B920, c]
@@ -3162,7 +3162,7 @@ segments:
     start: 0x684A30
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x684A30, c]
     - [0x684B00, c]
     - [0x684C30, c]
@@ -3173,7 +3173,7 @@ segments:
     start: 0x69F200
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x69F200, c]
     - [0x69F320, c]
     - [0x6A2B50, c]
@@ -3183,7 +3183,7 @@ segments:
     start: 0x6BBB90
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
     - [0x6BD250, bin]
@@ -3192,7 +3192,7 @@ segments:
     start: 0x6CC070
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6CC070, c]
     - [0x6CC1C0, c]
     - [0x6CC6C0, bin]
@@ -3201,7 +3201,7 @@ segments:
     start: 0x6DBDA0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6DBDA0, c]
     - [0x6DC2F0, c]
     - [0x6DC340, bin]
@@ -3210,7 +3210,7 @@ segments:
     start: 0x6DDDC0
     vram: 0x80218000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6DDDC0, c]
     - [0x6DDE90, c]
     - [0x6DE000, c]
@@ -3228,7 +3228,7 @@ segments:
     start: 0x6F0B30
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6F0B30, data]
   - name: battle_partner_goombario
     dir: battle/partner
@@ -3236,7 +3236,7 @@ segments:
     start: 0x6F10E0
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6F10E0, c]
     - [0x6F2290, data]
   - name: battle_partner_kooper
@@ -3245,7 +3245,7 @@ segments:
     start: 0x6F5E80
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6F5E80, c]
     - [0x6F62B0, data]
   - name: battle_partner_bombette
@@ -3254,7 +3254,7 @@ segments:
     start: 0x6FAD10
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6FAD10, c]
     - [0x6FB350, data]
   - name: battle_partner_parakarry
@@ -3263,7 +3263,7 @@ segments:
     start: 0x6FFD80
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x6FFD80, c]
     - [0x701590, data]
   - name: battle_partner_watt
@@ -3272,7 +3272,7 @@ segments:
     start: 0x703AF0
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x703AF0, c]
     - [0x704A80, data]
   - name: battle_partner_sushie
@@ -3281,7 +3281,7 @@ segments:
     start: 0x707CA0
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x707CA0, c]
     - [0x708B70, data]
   - name: battle_partner_lakilester
@@ -3290,7 +3290,7 @@ segments:
     start: 0x70BD10
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x70BD10, c]
     - [0x70DED0, data]
   - name: battle_partner_bow
@@ -3299,7 +3299,7 @@ segments:
     start: 0x710EF0
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x710EF0, c]
     - [0x7111F0, data]
   - name: battle_partner_twink
@@ -3308,7 +3308,7 @@ segments:
     start: 0x714CF0
     vram: 0x80238000
     overlay: True
-    subsections:
+    subsegments:
     - [0x714CF0, c]
     - [0x714DC0, data]
   - dir: battle/item/mushroom
@@ -3317,7 +3317,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x715850,     c, lib]
     - [0x715E50, .data, lib]
     - [0x71640C, .data, mushroom]
@@ -3328,7 +3328,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x716C60,     c, lib]
     - [0x717060, .data, lib]
     - [0x71761C, .data, fire_flower]
@@ -3338,7 +3338,7 @@ segments:
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7179D0,       c, lib]
     - [0x717C10,   .data, lib]
     - [0x7181D0,     ci4, dusty_hammer, 32, 32]
@@ -3351,7 +3351,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x718850,     c, lib]
     - [0x718BF0, .data, lib]
     - [0x7191AC, .data, pow_block]
@@ -3361,7 +3361,7 @@ segments:
     start: 0x719970
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x719970,       c, lib]
     - [0x719BB0,   .data, lib]
     - [0x71A170,     ci4, pebble, 32, 32]
@@ -3374,7 +3374,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x71A7F0,     c, lib]
     - [0x71AA70, .data, lib]
     - [0x71B02C, .data, volt_shroom]
@@ -3385,7 +3385,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x71B1A0,     c, lib]
     - [0x71B640, .data, lib]
     - [0x71BBFC, .data, thunder_rage]
@@ -3396,7 +3396,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x71BE30,     c, lib]
     - [0x71C270, .data, lib]
     - [0x71C82C, .data, snowman_doll]
@@ -3407,7 +3407,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x71CCE0,     c, lib]
     - [0x71D010, .data, lib]
     - [0x71D5DC, .data, dried_shroom]
@@ -3418,7 +3418,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x71D770,     c, lib]
     - [0x71DCC0, .data, lib]
     - [0x71E27C, .data, shooting_star]
@@ -3428,7 +3428,7 @@ segments:
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x71E650,       c, lib]
     - [0x71EFC0,   .data, lib]
     - [0x71F580,     ci4, sleepy_sheep1, 56, 48]
@@ -3446,7 +3446,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x7215A0,     c, lib]
     - [0x721970, .data, lib]
     - [0x721F2C, .data, stone_cap]
@@ -3457,7 +3457,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x722000,     c, lib]
     - [0x7222D0, .data, lib]
     - [0x72289C, .data, tasty_tonic]
@@ -3468,7 +3468,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x722B40,     c, lib]
     - [0x722FE0, .data, lib]
     - [0x72359C, .data, thunder_bolt]
@@ -3479,7 +3479,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x723780,     c, lib]
     - [0x723AB0, .data, lib]
     - [0x72407C, .data, ultra_shroom]
@@ -3490,7 +3490,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x724240,     c, lib]
     - [0x724570, .data, lib]
     - [0x724B3C, .data, unknown_item]
@@ -3501,7 +3501,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x724CE0,     c, lib]
     - [0x725210, .data, lib]
     - [0x7257CC, .data, super_soda]
@@ -3512,7 +3512,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x725F60,     c, lib]
     - [0x726240, .data, lib]
     - [0x7267FC, .data, hustle_drink]
@@ -3523,7 +3523,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x726DD0,     c, lib]
     - [0x727120, .data, lib]
     - [0x7276EC, .data, stop_watch]
@@ -3534,7 +3534,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x727910,       c, lib]
     - [0x727CE0,   .data, lib]
     - [0x72829C,   .data, dizzy_dial]
@@ -3546,7 +3546,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x7285E0,     c, lib]
     - [0x728820, .data, lib]
     - [0x728DDC, .data, please_come_back]
@@ -3556,7 +3556,7 @@ segments:
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x728EC0,       c, lib]
     - [0x7291D0,   .data, lib]
     - [0x729790,     ci4, egg_missile1, 32, 32]
@@ -3574,7 +3574,7 @@ segments:
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x72A750,       c, lib]
     - [0x72AB70,   .data, lib]
     - [0x72B130,     ci4, insecticide_herb, 32, 32]
@@ -3587,7 +3587,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x72B910,     c, lib]
     - [0x72BC60, .data, lib]
     - [0x72C22C, .data, fright_jar]
@@ -3597,7 +3597,7 @@ segments:
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x72C5B0,       c, lib]
     - [0x72CF00,   .data, lib]
     - [0x72D4C0,     ci4, mystery, 32, 32]
@@ -3611,7 +3611,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x72DB70,     c, lib]
     - [0x72DE00, .data, lib]
     - [0x72E3CC, .data, repel_gel]
@@ -3622,7 +3622,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x72E530,     c, lib]
     - [0x72EA20, .data, lib]
     - [0x72EFEC, .data, life_shroom]
@@ -3632,7 +3632,7 @@ segments:
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x72F720, c,       lib]
     - [0x72F960, .data,   lib]
     - [0x72FF20, ci4,     coconut, 32, 32]
@@ -3645,7 +3645,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x7305A0,     c, lib]
     - [0x730AE0, .data, lib]
     - [0x73109C, .data, electro_pop]
@@ -3655,7 +3655,7 @@ segments:
     start: 0x731300
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x731300,       c, lib]
     - [0x731EA0,   .data, lib]
     - [0x732470,     ci4, strange_cake1, 32, 32]
@@ -3673,7 +3673,7 @@ segments:
     vram: 0x802A1000
     overlay: True
     subalign: 4
-    subsections:
+    subsegments:
     - [0x7330D0,     c, lib]
     - [0x733700, .data, lib]
     - [0x733CBC, .data, food]
@@ -3683,7 +3683,7 @@ segments:
     start: 0x7345A0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7345A0, c]
     - [0x734650, data]
   - dir: battle/move/spin_smash
@@ -3691,7 +3691,7 @@ segments:
     start: 0x737890
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x737890, c]
     - [0x737A20, data]
   - dir: battle/move/quake_hammer
@@ -3699,7 +3699,7 @@ segments:
     start: 0x73AED0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x73AED0, c]
     - [0x73AF80, data]
   - dir: battle/move/jump
@@ -3707,7 +3707,7 @@ segments:
     start: 0x73D860
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x73D860, c]
     - [0x73D9A0, data]
   - dir: battle/move/multibounce
@@ -3715,7 +3715,7 @@ segments:
     start: 0x740CC0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x740CC0, c]
     - [0x740DB0, data]
   - dir: battle/move/power_bounce
@@ -3723,7 +3723,7 @@ segments:
     start: 0x743DF0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x743DF0, c]
     - [0x743FE0, data]
   - dir: battle/move/sleep_stomp
@@ -3731,7 +3731,7 @@ segments:
     start: 0x746E10
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x746E10, c]
     - [0x746F00, data]
   - dir: battle/move/dizzy_stomp
@@ -3739,7 +3739,7 @@ segments:
     start: 0x748DD0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x748DD0, c]
     - [0x748EC0, data]
   - dir: battle/move/d_down_pound
@@ -3747,7 +3747,7 @@ segments:
     start: 0x74AD90
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x74AD90, c]
     - [0x74AF40, data]
   - dir: battle/move/jump_charge_0
@@ -3755,7 +3755,7 @@ segments:
     start: 0x74D570
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x74D570, c]
     - [0x74D850, data]
   - dir: battle/move/hammer_charge_0
@@ -3763,7 +3763,7 @@ segments:
     start: 0x74F130
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x74F130, c]
     - [0x74F3D0, data]
   - dir: battle/move/hammer_throw
@@ -3771,7 +3771,7 @@ segments:
     start: 0x752450
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x752450, c]
     - [0x752500, data]
   - dir: battle/move/mega_quake
@@ -3779,7 +3779,7 @@ segments:
     start: 0x756780
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x756780, c]
     - [0x756900, data]
   - dir: battle/move/hammer_charge_1
@@ -3787,7 +3787,7 @@ segments:
     start: 0x7595B0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7595B0, c]
     - [0x7598D0, data]
   - dir: battle/move/jump_charge_1
@@ -3795,7 +3795,7 @@ segments:
     start: 0x75C980
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x75C980, c]
     - [0x75CCE0, data]
   - dir: battle/move/hammer_charge_2
@@ -3803,7 +3803,7 @@ segments:
     start: 0x75E5D0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x75E5D0, c]
     - [0x75E8F0, data]
   - dir: battle/move/jump_charge_2
@@ -3811,7 +3811,7 @@ segments:
     start: 0x761920
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x761920, c]
     - [0x761C80, data]
   - dir: battle/move/auto_smash
@@ -3819,7 +3819,7 @@ segments:
     start: 0x763540
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x763540, c]
     - [0x7635F0, data]
   - dir: battle/move/auto_jump
@@ -3827,7 +3827,7 @@ segments:
     start: 0x765C20
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x765C20, c]
     - [0x765D10, data]
   - dir: battle/move/power_quake
@@ -3835,7 +3835,7 @@ segments:
     start: 0x767C90
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x767C90, c]
     - [0x767D40, data]
   - dir: battle/move/auto_multibounce
@@ -3843,7 +3843,7 @@ segments:
     start: 0x76A830
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x76A830, c]
     - [0x76A920, data]
   - dir: battle/move/power_jump
@@ -3851,7 +3851,7 @@ segments:
     start: 0x76D760
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x76D760, c]
     - [0x76D850, data]
   - dir: battle/move/super_jump
@@ -3859,7 +3859,7 @@ segments:
     start: 0x76F330
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x76F330, c]
     - [0x76F420, data]
   - dir: battle/move/mega_jump
@@ -3867,7 +3867,7 @@ segments:
     start: 0x770F30
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x770F30, c]
     - [0x771020, data]
   - dir: battle/move/power_smash
@@ -3875,7 +3875,7 @@ segments:
     start: 0x772BA0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x772BA0, c]
     - [0x772C50, data]
   - dir: battle/move/super_smash
@@ -3883,7 +3883,7 @@ segments:
     start: 0x775100
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x775100, c]
     - [0x7751B0, data]
   - dir: battle/move/mega_smash
@@ -3891,7 +3891,7 @@ segments:
     start: 0x777690
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x777690, c]
     - [0x777740, data]
   - dir: battle/move/unknown_move
@@ -3899,7 +3899,7 @@ segments:
     start: 0x779C90
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x779C90, c]
     - [0x779E20, data]
   - dir: battle/move/shrink_smash
@@ -3907,7 +3907,7 @@ segments:
     start: 0x77CB80
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x77CB80, c]
     - [0x77CC30, data]
   - dir: battle/move/shell_crack
@@ -3915,7 +3915,7 @@ segments:
     start: 0x77F240
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x77F240, c]
     - [0x77F3D0, data]
   - dir: battle/move/d_down_jump
@@ -3923,7 +3923,7 @@ segments:
     start: 0x781920
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x781920, c]
     - [0x781AF0, data]
   - dir: battle/move/shrink_stomp
@@ -3931,7 +3931,7 @@ segments:
     start: 0x783BA0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x783BA0, c]
     - [0x783C90, data]
   - dir: battle/move/earthquake_jump
@@ -3939,7 +3939,7 @@ segments:
     start: 0x785B20
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x785B20, c]
     - [0x785C20, data]
   - dir: battle/star/focus
@@ -3947,7 +3947,7 @@ segments:
     start: 0x789E60
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x789E60, c]
     - [0x78A490, data]
   - dir: battle/star/refresh
@@ -3955,7 +3955,7 @@ segments:
     start: 0x78B600
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x78B600, c]
     - [0x78C070, data]
   - dir: battle/star/lullaby
@@ -3963,7 +3963,7 @@ segments:
     start: 0x78D150
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x78D150, c]
     - [0x78D770, data]
   - dir: battle/star/star_storm
@@ -3971,7 +3971,7 @@ segments:
     start: 0x78E7D0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x78E7D0, c]
     - [0x78EEC0, data]
   - dir: battle/star/chill_out
@@ -3979,7 +3979,7 @@ segments:
     start: 0x7900D0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7900D0, c]
     - [0x7909C0, data]
   - dir: battle/star/smooch
@@ -3987,7 +3987,7 @@ segments:
     start: 0x791D90
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x791D90, c]
     - [0x7923C0, data]
   - dir: battle/star/time_out
@@ -3995,7 +3995,7 @@ segments:
     start: 0x793D20
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x793D20, c]
     - [0x794240, data]
   - dir: battle/star/up_and_away
@@ -4003,7 +4003,7 @@ segments:
     start: 0x7952E0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7952E0, c]
     - [0x7959B0, data]
   - dir: battle/star/star_beam
@@ -4011,7 +4011,7 @@ segments:
     start: 0x796FC0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x796FC0, c]
     - [0x7984B0, data]
   - dir: battle/star/peach_beam
@@ -4019,7 +4019,7 @@ segments:
     start: 0x7997B0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x7997B0, c]
     - [0x79ACA0, data]
   - dir: battle/star/peach_focus
@@ -4027,7 +4027,7 @@ segments:
     start: 0x79BFA0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x79BFA0, c]
     - [0x79C4D0, data]
   - dir: battle/star/peach_dash
@@ -4035,7 +4035,7 @@ segments:
     start: 0x79D8A0
     vram: 0x802A1000
     overlay: True
-    subsections:
+    subsegments:
     - [0x79D8A0, c]
     - [0x79DE50, data]
   - [0x79EF40, bin] # todo identify
@@ -4043,7 +4043,7 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
-    subsections:
+    subsegments:
     - [0x7E0E80, c]
     - [0x7E2AA0, c]
     - [0x7E3700, c]
@@ -4056,7 +4056,7 @@ segments:
     overlay: True
     start: 0x7E73A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x7E73A0, c]
     - [0x7E7550, c]
     - [0x7E7850, c]
@@ -4071,7 +4071,7 @@ segments:
     overlay: True
     start: 0x7EAD10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x7EAD10, c]
     - [0x7EB340, c]
     - [0x7ECFD0, c]
@@ -4095,7 +4095,7 @@ segments:
     overlay: True
     start: 0x800880
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x800880, c]
     - [0x800C40, c]
     - [0x801700, c]
@@ -4117,7 +4117,7 @@ segments:
     overlay: True
     start: 0x8232C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8232C0, c]
     - [0x8238B0, c]
     - [0x823970, c]
@@ -4136,7 +4136,7 @@ segments:
     overlay: True
     start: 0x831800
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x831800, c]
     - [0x831B20, c]
     - [0x833500, c]
@@ -4155,7 +4155,7 @@ segments:
     overlay: True
     start: 0x842BD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x842BD0, c]
     - [0x842C20, c]
     - [0x842D90, c]
@@ -4180,7 +4180,7 @@ segments:
     overlay: True
     start: 0x852170
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x852170, c]
     - [0x855560, c]
     - [0x855F20, c]
@@ -4200,7 +4200,7 @@ segments:
     overlay: True
     start: 0x864B40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x864B40, c]
     - [0x865000, c]
     - [0x8659C0, c]
@@ -4215,7 +4215,7 @@ segments:
     overlay: True
     start: 0x8694B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8694B0, c]
     - [0x869AA0, c]
     - [0x869EE0, c]
@@ -4230,7 +4230,7 @@ segments:
     overlay: True
     start: 0x86C740
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x86C740, c]
     - [0x86CA50, c]
     - [0x86CD10, c]
@@ -4245,7 +4245,7 @@ segments:
     overlay: True
     start: 0x86EB00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x86EB00, c]
     - [0x86F0F0, c]
     - [0x86F5D0, data]
@@ -4261,7 +4261,7 @@ segments:
     overlay: True
     start: 0x871A30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x871A30, c]
     - [0x872020, c]
     - [0x8726A0, data]
@@ -4276,7 +4276,7 @@ segments:
     overlay: True
     start: 0x874DC0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x874DC0, c]
     - [0x8750D0, c]
     - [0x875810, data]
@@ -4291,7 +4291,7 @@ segments:
     overlay: True
     start: 0x876EE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x876EE0, c]
     - [0x8774D0, c]
     - [0x877840, data]
@@ -4305,7 +4305,7 @@ segments:
     overlay: True
     start: 0x879BE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x879BE0, c]
     - [0x87AC00, c]
     - [0x87C4D0, data]
@@ -4320,7 +4320,7 @@ segments:
     overlay: True
     start: 0x87EDF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x87EDF0, c]
     - [0x87F3E0, c]
     - [0x87F820, c]
@@ -4335,7 +4335,7 @@ segments:
     overlay: True
     start: 0x8821C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8821C0, c]
     - [0x8827B0, c]
     - [0x882BF0, c]
@@ -4351,7 +4351,7 @@ segments:
     overlay: True
     start: 0x8863C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8863C0, c]
     - [0x8866D0, c]
     - [0x887780, data]
@@ -4365,7 +4365,7 @@ segments:
     overlay: True
     start: 0x888BD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x888BD0, c]
     - [0x8891C0, c]
     - [0x88A530, c]
@@ -4381,7 +4381,7 @@ segments:
     overlay: True
     start: 0x88D600
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x88D600, c]
     - [0x88DBF0, c]
     - [0x88DF60, data]
@@ -4395,7 +4395,7 @@ segments:
     overlay: True
     start: 0x88FBA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x88FBA0, c]
     - [0x890190, c]
     - [0x8906B0, data]
@@ -4409,7 +4409,7 @@ segments:
     overlay: True
     start: 0x892A20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x892A20, c]
     - [0x892A50, c]
     - [0x893790, c]
@@ -4423,7 +4423,7 @@ segments:
     overlay: True
     start: 0x8956E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8956E0, c]
     - [0x8959F0, c]
     - [0x895D90, data]
@@ -4437,7 +4437,7 @@ segments:
     overlay: True
     start: 0x8975E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8975E0, c]
     - [0x897BD0, c]
     - [0x898910, data]
@@ -4450,7 +4450,7 @@ segments:
     overlay: True
     start: 0x89A350
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x89A350, c]
     - [0x89ACB0, c]
     - [0x89B490, data]
@@ -4464,7 +4464,7 @@ segments:
     overlay: True
     start: 0x89D7A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x89D7A0, c]
     - [0x89E100, data]
     - [0x89E1A0, data]
@@ -4476,7 +4476,7 @@ segments:
     overlay: True
     start: 0x89FEC0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x89FEC0, c]
     - [0x89FEF0, c]
     - [0x8A0870, data]
@@ -4488,7 +4488,7 @@ segments:
     overlay: True
     start: 0x8A23D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8A23D0, c]
     - [0x8A2D30, c]
     - [0x8A3510, data]
@@ -4501,7 +4501,7 @@ segments:
     overlay: True
     start: 0x8A5A80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8A5A80, c]
     - [0x8A5AD0, c]
     - [0x8A5DE0, c]
@@ -4517,7 +4517,7 @@ segments:
     overlay: True
     start: 0x8A7F80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8A7F80, c]
     - [0x8A8600, c]
     - [0x8A8740, data]
@@ -4530,7 +4530,7 @@ segments:
     overlay: True
     start: 0x8A9A10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8A9A10, c]
     - [0x8A9B70, c]
     - [0x8A9F30, data]
@@ -4543,7 +4543,7 @@ segments:
     overlay: True
     start: 0x8AA450
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8AA450, c]
     - [0x8AA5B0, c]
     - [0x8AAB80, c]
@@ -4557,7 +4557,7 @@ segments:
     overlay: True
     start: 0x8ABF90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8ABF90, c]
     - [0x8ACD00, data]
     - [0x8ACDB0, data]
@@ -4571,7 +4571,7 @@ segments:
     overlay: True
     start: 0x8B0070
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8B0070, c]
     - [0x8B30E0, c]
     - [0x8B33E0, c]
@@ -4594,7 +4594,7 @@ segments:
     overlay: True
     start: 0x8C7F90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8C7F90, c]
     - [0x8C8140, c]
     - [0x8C82B0, c]
@@ -4613,7 +4613,7 @@ segments:
     overlay: True
     start: 0x8CA900
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8CA900, c]
     - [0x8CA960, c]
     - [0x8CAD70, data]
@@ -4628,7 +4628,7 @@ segments:
     overlay: True
     start: 0x8CE070
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8CE070, c]
     - [0x8CF570, c]
     - [0x8CF7F0, data]
@@ -4642,7 +4642,7 @@ segments:
     overlay: True
     start: 0x8D1510
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8D1510, c]
     - [0x8D2A10, c]
     - [0x8D32B0, data]
@@ -4656,7 +4656,7 @@ segments:
     overlay: True
     start: 0x8D3DC0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8D3DC0, c]
     - [0x8D4880, data]
     - [0x8D49A0, data]
@@ -4667,7 +4667,7 @@ segments:
     overlay: True
     start: 0x8D5E00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8D5E00, c]
     - [0x8D7330, data]
     - [0x8D73C0, data]
@@ -4679,7 +4679,7 @@ segments:
     overlay: True
     start: 0x8D84D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8D84D0, c]
     - [0x8D88A0, c]
     - [0x8D8AE0, data]
@@ -4693,7 +4693,7 @@ segments:
     overlay: True
     start: 0x8DA100
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8DA100, c]
     - [0x8DA3A0, c]
     - [0x8DAFC0, c]
@@ -4713,7 +4713,7 @@ segments:
     overlay: True
     start: 0x8EB360
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8EB360, c, header]
     - [0x8EB390, .data, header]
     - [0x8EB420, .data, events]
@@ -4724,7 +4724,7 @@ segments:
     overlay: True
     start: 0x8EBE20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8EBE20, c]
     - [0x8EBE50, c]
     - [0x8ECBF0, c]
@@ -4754,7 +4754,7 @@ segments:
     overlay: True
     start: 0x8FEE80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8FEE80, c]
     - [0x8FEE90, c]
     - [0x8FF160, data]
@@ -4765,7 +4765,7 @@ segments:
     overlay: True
     start: 0x8FF670
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x8FF670, c]
     - [0x8FF680, c]
     - [0x8FF8B0, c]
@@ -4779,7 +4779,7 @@ segments:
     overlay: True
     start: 0x907A30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x907A30, c]
     - [0x907A40, c]
     - [0x908B00, data]
@@ -4790,7 +4790,7 @@ segments:
     overlay: True
     start: 0x90B240
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x90B240, c]
     - [0x90B250, c]
     - [0x90B350, data]
@@ -4801,7 +4801,7 @@ segments:
     overlay: True
     start: 0x90B6D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x90B6D0, c]
     - [0x90B9E0, c]
     - [0x90BBB0, data]
@@ -4813,7 +4813,7 @@ segments:
     overlay: True
     start: 0x90CC40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x90CC40, c]
     - [0x90CEF0, c]
     - [0x90CF20, data]
@@ -4824,7 +4824,7 @@ segments:
     overlay: True
     start: 0x90F6B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x90F6B0, c]
     - [0x90FBD0, c]
     - [0x912960, c]
@@ -4841,7 +4841,7 @@ segments:
     overlay: True
     start: 0x915D70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x915D70, c]
     - [0x916E70, data]
     - [0x917170, data]
@@ -4853,7 +4853,7 @@ segments:
     overlay: True
     start: 0x918BB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x918BB0, c]
     - [0x918EF0, c]
     - [0x919F00, data]
@@ -4867,7 +4867,7 @@ segments:
     overlay: True
     start: 0x91B8E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x91B8E0, c]
     - [0x91C9C0, data]
     - [0x91CA50, data]
@@ -4879,7 +4879,7 @@ segments:
     overlay: True
     start: 0x91E570
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x91E570, c]
     - [0x91E5B0, c]
     - [0x91E6D0, c]
@@ -4899,7 +4899,7 @@ segments:
     overlay: True
     start: 0x9269F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9269F0, c]
     - [0x926A10, c]
     - [0x926C70, c]
@@ -4913,7 +4913,7 @@ segments:
     overlay: True
     start: 0x929270
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
     - [0x9292D0, .data, "929270"]
@@ -4925,7 +4925,7 @@ segments:
     overlay: True
     start: 0x929A90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x929A90, c]
     - [0x929AD0, c]
     - [0x929AF0, .data, 929A90]
@@ -4937,7 +4937,7 @@ segments:
     overlay: True
     start: 0x92A2B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x92A2B0, c]
     - [0x92A9A0, c]
     - [0x92AEB0, data]
@@ -4952,7 +4952,7 @@ segments:
     overlay: True
     start: 0x92F8B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x92F8B0, c]
     - [0x92F8F0, c]
     - [0x92F910, data]
@@ -4964,7 +4964,7 @@ segments:
     overlay: True
     start: 0x9304D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9304D0, c]
     - [0x930510, c]
     - [0x930530, data]
@@ -4976,7 +4976,7 @@ segments:
     overlay: True
     start: 0x930CF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x930CF0, c]
     - [0x930D30, c]
     - [0x930D50, data]
@@ -4989,7 +4989,7 @@ segments:
     overlay: True
     start: 0x9325C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9325C0, c]
     - [0x932600, c]
     - [0x932940, data]
@@ -5002,7 +5002,7 @@ segments:
     overlay: True
     start: 0x933C80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x933C80, c]
     - [0x933CC0, data]
     - [0x933FD0, data]
@@ -5013,7 +5013,7 @@ segments:
     overlay: True
     start: 0x934040
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x934040, c]
     - [0x934080, c]
     - [0x9341A0, data]
@@ -5025,7 +5025,7 @@ segments:
     overlay: True
     start: 0x934D40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x934D40, c]
     - [0x934D80, c]
     - [0x934DA0, data]
@@ -5037,7 +5037,7 @@ segments:
     overlay: True
     start: 0x9357E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9357E0, c]
     - [0x935820, c]
     - [0x935940, data]
@@ -5049,7 +5049,7 @@ segments:
     overlay: True
     start: 0x9366E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9366E0, c]
     - [0x936720, data]
     - [0x936B20, data]
@@ -5060,7 +5060,7 @@ segments:
     overlay: True
     start: 0x936CD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x936CD0, c]
     - [0x936D10, c]
     - [0x936D30, data]
@@ -5072,7 +5072,7 @@ segments:
     overlay: True
     start: 0x937570
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x937570, c]
     - [0x9375B0, c]
     - [0x9377F0, data]
@@ -5084,7 +5084,7 @@ segments:
     overlay: True
     start: 0x938590
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x938590, c]
     - [0x9385D0, c]
     - [0x9386D0, data]
@@ -5097,7 +5097,7 @@ segments:
     overlay: True
     start: 0x939560
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x939560, c]
     - [0x9395A0, data]
     - [0x939910, rodata]
@@ -5107,7 +5107,7 @@ segments:
     overlay: True
     start: 0x939930
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x939930, c]
     - [0x939970, c]
     - [0x939A90, data]
@@ -5119,7 +5119,7 @@ segments:
     overlay: True
     start: 0x93A760
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x93A760, c]
     - [0x93A7A0, data]
     - [0x93AB20, data]
@@ -5130,7 +5130,7 @@ segments:
     overlay: True
     start: 0x93AC30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x93AC30, c]
     - [0x93AC70, c]
     - [0x93AFB0, data]
@@ -5143,7 +5143,7 @@ segments:
     overlay: True
     start: 0x93C280
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x93C280, c]
     - [0x93C2C0, c]
     - [0x93C600, data]
@@ -5157,7 +5157,7 @@ segments:
     overlay: True
     start: 0x93DCD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x93DCD0, c]
     - [0x93DD10, c]
     - [0x93DE30, c]
@@ -5171,7 +5171,7 @@ segments:
     overlay: True
     start: 0x93F5B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x93F5B0, c]
     - [0x940DC0, data]
     - [0x943E20, rodata]
@@ -5182,7 +5182,7 @@ segments:
     overlay: True
     start: 0x944000
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x944000, c]
     - [0x944040, c]
     - [0x944140, data]
@@ -5194,7 +5194,7 @@ segments:
     overlay: True
     start: 0x944A60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x944A60, c]
     - [0x944AA0, c]
     - [0x944BC0, data]
@@ -5205,7 +5205,7 @@ segments:
     overlay: True
     start: 0x9459D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9459D0, c]
     - [0x945A10, data]
     - [0x945BA0, data]
@@ -5216,7 +5216,7 @@ segments:
     overlay: True
     start: 0x945ED0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x945ED0, c]
     - [0x945F10, c]
     - [0x946670, c]
@@ -5229,7 +5229,7 @@ segments:
     overlay: True
     start: 0x9486B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9486B0, c]
     - [0x9486F0, c]
     - [0x948A30, data]
@@ -5241,7 +5241,7 @@ segments:
     overlay: True
     start: 0x949E60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x949E60, c]
     - [0x949EA0, c]
     - [0x94A0E0, data]
@@ -5253,7 +5253,7 @@ segments:
     overlay: True
     start: 0x94B3A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94B3A0, c]
     - [0x94B3E0, c]
     - [0x94B4E0, data]
@@ -5266,7 +5266,7 @@ segments:
     overlay: True
     start: 0x94C040
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94C040, c]
     - [0x94C080, data]
     - [0x94C400, data]
@@ -5277,7 +5277,7 @@ segments:
     overlay: True
     start: 0x94C510
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94C510, c]
     - [0x94C550, c]
     - [0x94C650, data]
@@ -5289,7 +5289,7 @@ segments:
     overlay: True
     start: 0x94D170
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94D170, c]
     - [0x94D1B0, data]
     - [0x94D530, data]
@@ -5300,7 +5300,7 @@ segments:
     overlay: True
     start: 0x94D5A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94D5A0, c]
     - [0x94D5E0, c]
     - [0x94D700, data]
@@ -5312,7 +5312,7 @@ segments:
     overlay: True
     start: 0x94E4A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94E4A0, c]
     - [0x94E4E0, data]
     - [0x94E8E0, data]
@@ -5323,7 +5323,7 @@ segments:
     overlay: True
     start: 0x94E9A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x94E9A0, c]
     - [0x94E9E0, c]
     - [0x94EB00, c]
@@ -5338,7 +5338,7 @@ segments:
     overlay: True
     start: 0x950610
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x950610, c]
     - [0x950650, data]
     - [0x950950, rodata]
@@ -5348,7 +5348,7 @@ segments:
     overlay: True
     start: 0x950970
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x950970, c]
     - [0x9509B0, c]
     - [0x950AD0, data]
@@ -5360,7 +5360,7 @@ segments:
     overlay: True
     start: 0x951670
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x951670, c]
     - [0x9516B0, data]
     - [0x951A30, data]
@@ -5371,7 +5371,7 @@ segments:
     overlay: True
     start: 0x951AE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x951AE0, c]
     - [0x951B20, c]
     - [0x951B40, data]
@@ -5383,7 +5383,7 @@ segments:
     overlay: True
     start: 0x952580
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x952580, c]
     - [0x9525C0, data]
     - [0x952940, data]
@@ -5394,7 +5394,7 @@ segments:
     overlay: True
     start: 0x952A50
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x952A50, c]
     - [0x952A90, c]
     - [0x952AB0, c]
@@ -5408,7 +5408,7 @@ segments:
     overlay: True
     start: 0x953FC0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x953FC0, c]
     - [0x954D80, c]
     - [0x954FC0, data]
@@ -5420,7 +5420,7 @@ segments:
     overlay: True
     start: 0x9569F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9569F0, c]
     - [0x956A30, c]
     - [0x956A50, data]
@@ -5432,7 +5432,7 @@ segments:
     overlay: True
     start: 0x956F90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x956F90, c]
     - [0x956FD0, data]
     - [0x9572E0, data]
@@ -5443,7 +5443,7 @@ segments:
     overlay: True
     start: 0x957350
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x957350, c]
     - [0x957390, c]
     - [0x9573B0, data]
@@ -5455,7 +5455,7 @@ segments:
     overlay: True
     start: 0x957D70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x957D70, c]
     - [0x957DB0, c]
     - [0x957DD0, data]
@@ -5467,7 +5467,7 @@ segments:
     overlay: True
     start: 0x958590
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x958590, c]
     - [0x9585D0, data]
     - [0x9588E0, data]
@@ -5478,7 +5478,7 @@ segments:
     overlay: True
     start: 0x958950
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x958950, c]
     - [0x958990, data]
     - [0x958C90, rodata]
@@ -5488,7 +5488,7 @@ segments:
     overlay: True
     start: 0x958CB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x958CB0, c]
     - [0x958CF0, c]
     - [0x959030, data]
@@ -5502,7 +5502,7 @@ segments:
     overlay: True
     start: 0x95AEB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x95AEB0, data]
     - [0x95B190, data]
     - [0x95B1F0, rodata]
@@ -5512,7 +5512,7 @@ segments:
     overlay: True
     start: 0x95B200
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x95B200, c]
     - [0x95B7E0, c]
     - [0x95E660, c]
@@ -5531,7 +5531,7 @@ segments:
     overlay: True
     start: 0x9691C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9691C0, c]
     - [0x9694C0, c]
     - [0x96CC30, data]
@@ -5546,7 +5546,7 @@ segments:
     overlay: True
     start: 0x978140
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x978140, data]
     - [0x978360, data]
     - [0x9785C0, data]
@@ -5557,7 +5557,7 @@ segments:
     overlay: True
     start: 0x978710
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x978710, c]
     - [0x978750, c]
     - [0x978800, c]
@@ -5573,7 +5573,7 @@ segments:
     overlay: True
     start: 0x979E50
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x979E50, data]
     - [0x97A210, data]
     - [0x97B340, data]
@@ -5584,7 +5584,7 @@ segments:
     overlay: True
     start: 0x97B630
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x97B630, c]
     - [0x97B670, c]
     - [0x97BF60, c]
@@ -5601,7 +5601,7 @@ segments:
     overlay: True
     start: 0x97DAD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x97DAD0, c]
     - [0x97F990, data]
     - [0x97FCE0, data]
@@ -5616,7 +5616,7 @@ segments:
     overlay: True
     start: 0x980A20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x980A20, data]
     - [0x980D40, data]
     - [0x982150, data]
@@ -5627,7 +5627,7 @@ segments:
     overlay: True
     start: 0x982440
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x982440, c]
     - [0x9824F0, c]
     - [0x982530, c]
@@ -5644,7 +5644,7 @@ segments:
     overlay: True
     start: 0x984E30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x984E30, c]
     - [0x985720, data]
     - [0x985B00, data]
@@ -5656,7 +5656,7 @@ segments:
     overlay: True
     start: 0x9864E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9864E0, c]
     - [0x9867D0, c]
     - [0x986810, data]
@@ -5671,7 +5671,7 @@ segments:
     overlay: True
     start: 0x988B60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x988B60, c]
     - [0x989910, data]
     - [0x98A580, data]
@@ -5683,7 +5683,7 @@ segments:
     overlay: True
     start: 0x98AA10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x98AA10, c]
     - [0x98AAC0, c]
     - [0x98AB30, c]
@@ -5699,7 +5699,7 @@ segments:
     overlay: True
     start: 0x98D640
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x98D640, data]
     - [0x98DA70, data]
     - [0x98DCB0, data]
@@ -5711,7 +5711,7 @@ segments:
     overlay: True
     start: 0x98F7E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x98F7E0, c]
     - [0x991850, data]
     - [0x991A90, data]
@@ -5725,7 +5725,7 @@ segments:
     overlay: True
     start: 0x992730
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x992730, c]
     - [0x994490, data]
     - [0x9946D0, data]
@@ -5739,7 +5739,7 @@ segments:
     overlay: True
     start: 0x9951F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9951F0, c]
     - [0x9959F0, c]
     - [0x995CF0, data]
@@ -5753,7 +5753,7 @@ segments:
     overlay: True
     start: 0x997F70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x997F70, c]
     - [0x998860, data]
     - [0x998B90, data]
@@ -5765,7 +5765,7 @@ segments:
     overlay: True
     start: 0x999740
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x999740, data]
     - [0x999960, data]
     - [0x999BA0, data]
@@ -5776,7 +5776,7 @@ segments:
     overlay: True
     start: 0x999C70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x999C70, c]
     - [0x999F80, c]
     - [0x99A240, c]
@@ -5791,7 +5791,7 @@ segments:
     overlay: True
     start: 0x99C990
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x99C990, c]
     - [0x99CCA0, c]
     - [0x99CD80, c]
@@ -5808,7 +5808,7 @@ segments:
     overlay: True
     start: 0x9A0FE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9A0FE0, c]
     - [0x9A10C0, c]
     - [0x9A2A30, data]
@@ -5823,7 +5823,7 @@ segments:
     overlay: True
     start: 0x9A4650
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9A4650, c]
     - [0x9A46F0, c]
     - [0x9A4ED0, c]
@@ -5838,7 +5838,7 @@ segments:
     overlay: True
     start: 0x9A83F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9A83F0, c]
     - [0x9A8700, c]
     - [0x9A88A0, c]
@@ -5854,7 +5854,7 @@ segments:
     overlay: True
     start: 0x9AE700
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9AE700, c]
     - [0x9AEE20, c]
     - [0x9AEE70, data]
@@ -5868,7 +5868,7 @@ segments:
     overlay: True
     start: 0x9B1790
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9B1790, c]
     - [0x9B1AA0, c]
     - [0x9B2280, c]
@@ -5884,7 +5884,7 @@ segments:
     overlay: True
     start: 0x9B6980
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9B6980, c]
     - [0x9B6C90, c]
     - [0x9B9270, data]
@@ -5900,7 +5900,7 @@ segments:
     overlay: True
     start: 0x9BB2A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9BB2A0, c]
     - [0x9BB5B0, c]
     - [0x9BBCC0, data]
@@ -5913,7 +5913,7 @@ segments:
     overlay: True
     start: 0x9BD660
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9BD660, c]
     - [0x9BD720, c]
     - [0x9BD830, data]
@@ -5928,7 +5928,7 @@ segments:
     overlay: True
     start: 0x9C2910
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9C2910, c]
     - [0x9C3130, c]
     - [0x9C3160, data]
@@ -5941,7 +5941,7 @@ segments:
     overlay: True
     start: 0x9C53E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9C53E0, c]
     - [0x9C7D10, c]
     - [0x9C7F50, data]
@@ -5960,7 +5960,7 @@ segments:
     overlay: True
     start: 0x9D7020
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9D7020, c]
     - [0x9D7770, c]
     - [0x9D7990, c]
@@ -5985,7 +5985,7 @@ segments:
     overlay: True
     start: 0x9EB7F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9EB7F0, c]
     - [0x9EC610, data]
     - [0x9EC700, data]
@@ -5997,7 +5997,7 @@ segments:
     overlay: True
     start: 0x9EDBF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9EDBF0, c]
     - [0x9EEA80, c]
     - [0x9EEB20, data]
@@ -6013,7 +6013,7 @@ segments:
     overlay: True
     start: 0x9F4A40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9F4A40, c]
     - [0x9F6990, data]
     - [0x9F6A50, data]
@@ -6026,7 +6026,7 @@ segments:
     overlay: True
     start: 0x9FA7F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0x9FA7F0, c]
     - [0x9FA970, c]
     - [0x9FAAE0, c]
@@ -6046,7 +6046,7 @@ segments:
     overlay: True
     start: 0xA00600
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA00600, c]
     - [0xA01420, c]
     - [0xA01A90, data]
@@ -6063,7 +6063,7 @@ segments:
     overlay: True
     start: 0xA02840
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA02840, c]
     - [0xA029C0, c]
     - [0xA02A00, c]
@@ -6081,7 +6081,7 @@ segments:
     overlay: True
     start: 0xA06F00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA06F00, c]
     - [0xA09440, c]
     - [0xA09680, data]
@@ -6098,7 +6098,7 @@ segments:
     overlay: True
     start: 0xA0BCF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA0BCF0, c]
     - [0xA0BD40, c]
     - [0xA0C4B0, c]
@@ -6118,7 +6118,7 @@ segments:
     overlay: True
     start: 0xA10880
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA10880, c]
     - [0xA11020, c]
     - [0xA11650, c]
@@ -6134,7 +6134,7 @@ segments:
     overlay: True
     start: 0xA16220
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA16220, c]
     - [0xA171F0, c]
     - [0xA17210, c]
@@ -6151,7 +6151,7 @@ segments:
     overlay: True
     start: 0xA1B100
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA1B100, c]
     - [0xA1B130, c]
     - [0xA1BB70, c]
@@ -6171,7 +6171,7 @@ segments:
     overlay: True
     start: 0xA26ED0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA26ED0, c]
     - [0xA27490, c]
     - [0xA274B0, c]
@@ -6194,7 +6194,7 @@ segments:
     overlay: True
     start: 0xA2A240
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA2A240, c]
     - [0xA2AA70, c]
     - [0xA2AAC0, c]
@@ -6215,7 +6215,7 @@ segments:
     overlay: True
     start: 0xA394E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA394E0, c]
     - [0xA397F0, c]
     - [0xA3A210, c]
@@ -6232,7 +6232,7 @@ segments:
     overlay: True
     start: 0xA3F740
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA3F740, c]
     - [0xA3F760, c]
     - [0xA3FBA0, c]
@@ -6248,7 +6248,7 @@ segments:
     overlay: True
     start: 0xA45930
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA45930, c]
     - [0xA45C40, c]
     - [0xA45C90, data]
@@ -6260,7 +6260,7 @@ segments:
     overlay: True
     start: 0xA46F60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA46F60, c]
     - [0xA470C0, c]
     - [0xA479B0, data]
@@ -6274,7 +6274,7 @@ segments:
     overlay: True
     start: 0xA485C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA485C0, c]
     - [0xA48720, c]
     - [0xA4A410, c]
@@ -6290,7 +6290,7 @@ segments:
     overlay: True
     start: 0xA4BF60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA4BF60, c]
     - [0xA4C0D0, data]
     - [0xA4C1A0, data]
@@ -6301,7 +6301,7 @@ segments:
     overlay: True
     start: 0xA4CA20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA4CA20, c]
     - [0xA4CAC0, c]
     - [0xA4DEC0, data]
@@ -6316,7 +6316,7 @@ segments:
     overlay: True
     start: 0xA4F000
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA4F000, c]
     - [0xA4F0A0, c]
     - [0xA502F0, data]
@@ -6330,7 +6330,7 @@ segments:
     overlay: True
     start: 0xA51980
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA51980, c]
     - [0xA51C90, data]
     - [0xA51D90, data]
@@ -6341,7 +6341,7 @@ segments:
     overlay: True
     start: 0xA528C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA528C0, c]
     - [0xA52BD0, c]
     - [0xA533B0, data]
@@ -6356,7 +6356,7 @@ segments:
     overlay: True
     start: 0xA54950
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA54950, c]
     - [0xA54990, c]
     - [0xA54CA0, c]
@@ -6369,7 +6369,7 @@ segments:
     overlay: True
     start: 0xA55F20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA55F20, c]
     - [0xA55F60, c]
     - [0xA56270, c]
@@ -6383,7 +6383,7 @@ segments:
     overlay: True
     start: 0xA574B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA574B0, c]
     - [0xA574F0, c]
     - [0xA57830, c]
@@ -6398,7 +6398,7 @@ segments:
     overlay: True
     start: 0xA59390
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA59390, c]
     - [0xA596A0, c]
     - [0xA59960, data]
@@ -6410,7 +6410,7 @@ segments:
     overlay: True
     start: 0xA5A030
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA5A030, c]
     - [0xA5A340, c]
     - [0xA5A3D0, data]
@@ -6422,7 +6422,7 @@ segments:
     overlay: True
     start: 0xA5CA20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA5CA20, data]
     - [0xA5CB00, data]
     - [0xA5CBD0, data]
@@ -6434,7 +6434,7 @@ segments:
     overlay: True
     start: 0xA5E0C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA5E0C0, c]
     - [0xA5E3D0, data]
     - [0xA5E4C0, data]
@@ -6446,7 +6446,7 @@ segments:
     overlay: True
     start: 0xA5F080
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA5F080, c]
     - [0xA5F390, data]
     - [0xA5F480, data]
@@ -6458,7 +6458,7 @@ segments:
     overlay: True
     start: 0xA60040
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA60040, data]
     - [0xA60130, data]
     - [0xA60450, rodata]
@@ -6468,7 +6468,7 @@ segments:
     overlay: True
     start: 0xA60470
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA60470, data]
     - [0xA60560, data]
     - [0xA609B0, rodata]
@@ -6478,7 +6478,7 @@ segments:
     overlay: True
     start: 0xA609D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA609D0, c]
     - [0xA623F0, data]
     - [0xA624D0, data]
@@ -6489,7 +6489,7 @@ segments:
     overlay: True
     start: 0xA64090
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA64090, c]
     - [0xA640E0, c]
     - [0xA65CB0, data]
@@ -6505,7 +6505,7 @@ segments:
     overlay: True
     start: 0xA67100
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA67100, c]
     - [0xA671E0, c]
     - [0xA68430, data]
@@ -6520,7 +6520,7 @@ segments:
     overlay: True
     start: 0xA6ACA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA6ACA0, c]
     - [0xA6AE10, data]
     - [0xA6AEE0, data]
@@ -6534,7 +6534,7 @@ segments:
     overlay: True
     start: 0xA6CB00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA6CB00, c]
     - [0xA6CBE0, c]
     - [0xA6CEF0, data]
@@ -6545,7 +6545,7 @@ segments:
     overlay: True
     start: 0xA6E3E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA6E3E0, c]
     - [0xA6E6F0, c]
     - [0xA70720, data]
@@ -6561,7 +6561,7 @@ segments:
     overlay: True
     start: 0xA72220
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA72220, c]
     - [0xA72300, c]
     - [0xA72610, data]
@@ -6573,7 +6573,7 @@ segments:
     overlay: True
     start: 0xA735B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA735B0, c]
     - [0xA73740, data]
     - [0xA738E0, data]
@@ -6586,7 +6586,7 @@ segments:
     overlay: True
     start: 0xA74870
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA74870, c]
     - [0xA74B80, c]
     - [0xA75360, data]
@@ -6599,7 +6599,7 @@ segments:
     overlay: True
     start: 0xA784C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA784C0, c]
     - [0xA78510, c]
     - [0xA78900, data]
@@ -6612,7 +6612,7 @@ segments:
     overlay: True
     start: 0xA7A500
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA7A500, c]
     - [0xA7A550, c]
     - [0xA7A940, data]
@@ -6625,7 +6625,7 @@ segments:
     overlay: True
     start: 0xA83490
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA83490, c]
     - [0xA834E0, c]
     - [0xA83500, data]
@@ -6638,7 +6638,7 @@ segments:
     overlay: True
     start: 0xA867B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA867B0, data]
     - [0xA86880, data]
     - [0xA86A40, rodata]
@@ -6648,7 +6648,7 @@ segments:
     overlay: True
     start: 0xA86A50
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA86A50, c]
     - [0xA88280, c]
     - [0xA88360, data]
@@ -6663,7 +6663,7 @@ segments:
     overlay: True
     start: 0xA8C7C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA8C7C0, data]
     - [0xA8C890, data]
     - [0xA8CA70, rodata]
@@ -6673,7 +6673,7 @@ segments:
     overlay: True
     start: 0xA8CA80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA8CA80, c]
     - [0xA8CB60, c]
     - [0xA8E390, data]
@@ -6688,7 +6688,7 @@ segments:
     overlay: True
     start: 0xA927C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA927C0, c]
     - [0xA927F0, data]
     - [0xA928B0, data]
@@ -6699,7 +6699,7 @@ segments:
     overlay: True
     start: 0xA93160
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA93160, c]
     - [0xA931B0, data]
     - [0xA93270, data]
@@ -6711,7 +6711,7 @@ segments:
     overlay: True
     start: 0xA93440
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA93440, c]
     - [0xA93490, data]
     - [0xA93550, data]
@@ -6723,7 +6723,7 @@ segments:
     overlay: True
     start: 0xA93740
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA93740, c]
     - [0xA93A50, c]
     - [0xA96CD0, data]
@@ -6738,7 +6738,7 @@ segments:
     overlay: True
     start: 0xA99590
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA99590, c]
     - [0xA9A950, data]
     - [0xA9AA20, data]
@@ -6751,7 +6751,7 @@ segments:
     overlay: True
     start: 0xA9C990
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA9C990, data]
     - [0xA9CA60, data]
     - [0xA9CC20, rodata]
@@ -6761,7 +6761,7 @@ segments:
     overlay: True
     start: 0xA9CC30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA9CC30, c]
     - [0xA9CC70, c]
     - [0xA9D6D0, data]
@@ -6776,7 +6776,7 @@ segments:
     overlay: True
     start: 0xA9E980
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA9E980, c]
     - [0xA9E9D0, data]
     - [0xA9EAA0, data]
@@ -6787,7 +6787,7 @@ segments:
     overlay: True
     start: 0xA9ED40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xA9ED40, c]
     - [0xAA0100, data]
     - [0xAA01E0, data]
@@ -6801,7 +6801,7 @@ segments:
     overlay: True
     start: 0xAA1EE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA1EE0, data]
     - [0xAA1FB0, data]
     - [0xAA2170, rodata]
@@ -6811,7 +6811,7 @@ segments:
     overlay: True
     start: 0xAA2180
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA2180, data]
     - [0xAA2240, data]
     - [0xAA23B0, rodata]
@@ -6821,7 +6821,7 @@ segments:
     overlay: True
     start: 0xAA23C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA23C0, data]
     - [0xAA2490, data]
     - [0xAA2650, rodata]
@@ -6831,7 +6831,7 @@ segments:
     overlay: True
     start: 0xAA2660
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA2660, data]
     - [0xAA2720, data]
     - [0xAA2760, data]
@@ -6842,7 +6842,7 @@ segments:
     overlay: True
     start: 0xAA28F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA28F0, data]
     - [0xAA29C0, data]
     - [0xAA2D10, rodata]
@@ -6852,7 +6852,7 @@ segments:
     overlay: True
     start: 0xAA2D20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA2D20, c]
     - [0xAA3460, data]
     - [0xAA3530, data]
@@ -6864,7 +6864,7 @@ segments:
     overlay: True
     start: 0xAA7480
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA7480, c]
     - [0xAA7790, c]
     - [0xAA78F0, data]
@@ -6879,7 +6879,7 @@ segments:
     overlay: True
     start: 0xAA8FA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAA8FA0, c]
     - [0xAA92B0, c]
     - [0xAA94B0, c]
@@ -6895,7 +6895,7 @@ segments:
     overlay: True
     start: 0xAAC830
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAAC830, c]
     - [0xAACBB0, c]
     - [0xAACFC0, data]
@@ -6907,7 +6907,7 @@ segments:
     overlay: True
     start: 0xAAFFF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAAFFF0, c]
     - [0xAB0040, c]
     - [0xAB0350, c]
@@ -6921,7 +6921,7 @@ segments:
     overlay: True
     start: 0xAB2170
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAB2170, c]
     - [0xAB2190, c]
     - [0xAB21D0, c]
@@ -6937,7 +6937,7 @@ segments:
     overlay: True
     start: 0xAB6290
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAB6290, c]
     - [0xAB62B0, c]
     - [0xAB6610, data]
@@ -6952,7 +6952,7 @@ segments:
     overlay: True
     start: 0xAB92B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAB92B0, c]
     - [0xAB9370, data]
     - [0xAB95D0, data]
@@ -6963,7 +6963,7 @@ segments:
     overlay: True
     start: 0xABB290
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xABB290, c]
     - [0xABB340, c]
     - [0xABC250, data]
@@ -6978,7 +6978,7 @@ segments:
     overlay: True
     start: 0xAC5170
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAC5170, c]
     - [0xAC6000, data]
     - [0xAC6140, data]
@@ -6991,7 +6991,7 @@ segments:
     overlay: True
     start: 0xAC8D20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAC8D20, data]
     - [0xAC8E40, data]
     - [0xAC9160, data]
@@ -7002,7 +7002,7 @@ segments:
     overlay: True
     start: 0xAC9710
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAC9710, c]
     - [0xAC9730, c]
     - [0xAC9A40, data]
@@ -7016,7 +7016,7 @@ segments:
     overlay: True
     start: 0xACAB20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xACAB20, c]
     - [0xACAB90, c]
     - [0xACABD0, c]
@@ -7031,7 +7031,7 @@ segments:
     overlay: True
     start: 0xACE140
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xACE140, c]
     - [0xACE1B0, c]
     - [0xACE1F0, c]
@@ -7048,7 +7048,7 @@ segments:
     overlay: True
     start: 0xAD4090
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAD4090, c]
     - [0xAD4100, c]
     - [0xAD4940, data]
@@ -7059,7 +7059,7 @@ segments:
     overlay: True
     start: 0xAD5ED0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAD5ED0, c]
     - [0xAD5EF0, c]
     - [0xAD6200, c]
@@ -7076,7 +7076,7 @@ segments:
     overlay: True
     start: 0xADAEA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xADAEA0, c]
     - [0xADAEF0, c]
     - [0xADB360, data]
@@ -7100,7 +7100,7 @@ segments:
     overlay: True
     start: 0xAE5590
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAE5590, c]
     - [0xAE58D0, c]
     - [0xAE5A90, c]
@@ -7122,7 +7122,7 @@ segments:
     overlay: True
     start: 0xAED410
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAED410, c]
     - [0xAEDC60, c]
     - [0xAEE490, data]
@@ -7136,7 +7136,7 @@ segments:
     overlay: True
     start: 0xAF1C60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAF1C60, c]
     - [0xAF2200, data]
     - [0xAF2440, data]
@@ -7148,7 +7148,7 @@ segments:
     overlay: True
     start: 0xAF2CA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAF2CA0, c]
     - [0xAF2FE0, c]
     - [0xAF34C0, data]
@@ -7164,7 +7164,7 @@ segments:
     overlay: True
     start: 0xAF7950
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAF7950, c]
     - [0xAF7C00, c]
     - [0xAF8660, data]
@@ -7179,7 +7179,7 @@ segments:
     overlay: True
     start: 0xAFDB40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xAFDB40, c]
     - [0xAFDE00, c]
     - [0xAFE130, data]
@@ -7193,7 +7193,7 @@ segments:
     overlay: True
     start: 0xB022A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB022A0, data]
     - [0xB024E0, rodata]
   - name: kkj_22
@@ -7202,7 +7202,7 @@ segments:
     overlay: True
     start: 0xB024F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB024F0, data]
     - [0xB025A0, data]
     - [0xB02870, rodata]
@@ -7212,7 +7212,7 @@ segments:
     overlay: True
     start: 0xB02880
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB02880, c]
     - [0xB028A0, c]
     - [0xB03190, c]
@@ -7229,7 +7229,7 @@ segments:
     overlay: True
     start: 0xB06570
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB06570, c]
     - [0xB06590, data]
     - [0xB06640, data]
@@ -7241,7 +7241,7 @@ segments:
     overlay: True
     start: 0xB06A00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB06A00, c]
     - [0xB06A20, c]
     - [0xB06A50, c]
@@ -7259,7 +7259,7 @@ segments:
     overlay: True
     start: 0xB13120
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB13120, c]
     - [0xB13150, data]
     - [0xB13500, data]
@@ -7271,7 +7271,7 @@ segments:
     overlay: True
     start: 0xB13D70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB13D70, c]
     - [0xB14080, c]
     - [0xB14210, data]
@@ -7284,7 +7284,7 @@ segments:
     overlay: True
     start: 0xB14EA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB14EA0, data]
     - [0xB150A0, rodata]
   - name: kkj_29
@@ -7293,7 +7293,7 @@ segments:
     overlay: True
     start: 0xB150B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB150B0, c]
     - [0xB150E0, c]
     - [0xB15120, data]
@@ -7306,7 +7306,7 @@ segments:
     overlay: True
     start: 0xB1A900
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1A900, data]
     - [0xB1AB20, data]
     - [0xB1AC20, rodata]
@@ -7316,7 +7316,7 @@ segments:
     overlay: True
     start: 0xB1AC30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1AC30, data]
     - [0xB1AE50, data]
     - [0xB1AF70, rodata]
@@ -7326,7 +7326,7 @@ segments:
     overlay: True
     start: 0xB1AF80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1AF80, data]
     - [0xB1B240, data]
     - [0xB1B560, rodata]
@@ -7336,7 +7336,7 @@ segments:
     overlay: True
     start: 0xB1B570
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1B570, c]
     - [0xB1BBD0, c]
     - [0xB1BC00, data]
@@ -7351,7 +7351,7 @@ segments:
     overlay: True
     start: 0xB1C540
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1C540, data]
     - [0xB1CA40, rodata]
   - name: tst_11
@@ -7360,7 +7360,7 @@ segments:
     overlay: True
     start: 0xB1CA50
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1CA50, c]
     - [0xB1D1C0, data]
     - [0xB1D2A0, data]
@@ -7370,7 +7370,7 @@ segments:
     overlay: True
     start: 0xB1D2F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1D2F0, data]
   - name: tst_13
     dir: world/area_tst/tst_13
@@ -7378,7 +7378,7 @@ segments:
     overlay: True
     start: 0xB1D760
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB1D760, c]
     - [0xB1DB20, data]
     - [0xB20460, rodata]
@@ -7388,7 +7388,7 @@ segments:
     overlay: True
     start: 0xB20470
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB20470, data]
   - name: jan_00
     dir: world/area_jan/jan_00
@@ -7396,7 +7396,7 @@ segments:
     overlay: True
     start: 0xB20540
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB20540, c]
     - [0xB216E0, c]
     - [0xB21EA0, c]
@@ -7412,7 +7412,7 @@ segments:
     overlay: True
     start: 0xB28030
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB28030, c]
     - [0xB291C0, c]
     - [0xB29400, data]
@@ -7427,7 +7427,7 @@ segments:
     overlay: True
     start: 0xB2C470
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB2C470, c]
     - [0xB2C4A0, c]
     - [0xB2C8A0, c]
@@ -7444,7 +7444,7 @@ segments:
     overlay: True
     start: 0xB34BD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB34BD0, c]
     - [0xB37B70, c]
     - [0xB37C20, c]
@@ -7461,7 +7461,7 @@ segments:
     overlay: True
     start: 0xB44770
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB44770, c]
     - [0xB447B0, c]
     - [0xB44AC0, c]
@@ -7487,7 +7487,7 @@ segments:
     overlay: True
     start: 0xB4AA70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB4AA70, c]
     - [0xB4AAB0, c]
     - [0xB4ADC0, c]
@@ -7509,7 +7509,7 @@ segments:
     overlay: True
     start: 0xB52830
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB52830, c]
     - [0xB52B40, c]
     - [0xB52BE0, c]
@@ -7530,7 +7530,7 @@ segments:
     overlay: True
     start: 0xB59870
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB59870, c]
     - [0xB5A610, c]
     - [0xB5A850, c]
@@ -7547,7 +7547,7 @@ segments:
     overlay: True
     start: 0xB5E2B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB5E2B0, c]
     - [0xB5E5C0, c]
     - [0xB5E910, c]
@@ -7567,7 +7567,7 @@ segments:
     overlay: True
     start: 0xB65AB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB65AB0, c]
     - [0xB660A0, c]
     - [0xB663F0, c]
@@ -7584,7 +7584,7 @@ segments:
     overlay: True
     start: 0xB6C390
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB6C390, c]
     - [0xB6C6A0, c]
     - [0xB6D4C0, c]
@@ -7603,7 +7603,7 @@ segments:
     overlay: True
     start: 0xB70860
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB70860, c]
     - [0xB71010, c]
     - [0xB71060, data]
@@ -7616,7 +7616,7 @@ segments:
     overlay: True
     start: 0xB730B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB730B0, c]
     - [0xB73570, c]
     - [0xB74310, data]
@@ -7630,7 +7630,7 @@ segments:
     overlay: True
     start: 0xB767B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB767B0, c]
     - [0xB76D80, data]
     - [0xB77000, data]
@@ -7643,7 +7643,7 @@ segments:
     overlay: True
     start: 0xB7A050
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB7A050, c]
     - [0xB7A510, c]
     - [0xB7B330, data]
@@ -7658,7 +7658,7 @@ segments:
     overlay: True
     start: 0xB7D920
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB7D920, c]
     - [0xB7D9E0, c]
     - [0xB7DC20, data]
@@ -7672,7 +7672,7 @@ segments:
     overlay: True
     start: 0xB80000
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB80000, c]
     - [0xB80300, c]
     - [0xB80540, data]
@@ -7685,7 +7685,7 @@ segments:
     overlay: True
     start: 0xB837C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB837C0, c]
     - [0xB837E0, data]
     - [0xB838C0, data]
@@ -7697,7 +7697,7 @@ segments:
     overlay: True
     start: 0xB83B90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB83B90, data]
     - [0xB83E10, data]
     - [0xB83E50, rodata]
@@ -7707,7 +7707,7 @@ segments:
     overlay: True
     start: 0xB83E60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB83E60, c]
     - [0xB83E80, data]
     - [0xB84110, data]
@@ -7718,7 +7718,7 @@ segments:
     overlay: True
     start: 0xB84180
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB84180, c]
     - [0xB851A0, c]
     - [0xB858A0, c]
@@ -7733,7 +7733,7 @@ segments:
     overlay: True
     start: 0xB8FCD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB8FCD0, data]
     - [0xB903A0, data]
     - [0xB93430, rodata]
@@ -7743,7 +7743,7 @@ segments:
     overlay: True
     start: 0xB93440
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB93440, c]
     - [0xB934B0, c]
     - [0xB93940, c]
@@ -7759,7 +7759,7 @@ segments:
     overlay: True
     start: 0xB97C00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB97C00, c]
     - [0xB97C70, c]
     - [0xB98DE0, data]
@@ -7773,7 +7773,7 @@ segments:
     overlay: True
     start: 0xB9B480
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB9B480, c]
     - [0xB9B9B0, data]
     - [0xB9BA70, data]
@@ -7786,7 +7786,7 @@ segments:
     overlay: True
     start: 0xB9D960
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xB9D960, c]
     - [0xB9D9D0, c]
     - [0xB9DB60, c]
@@ -7802,7 +7802,7 @@ segments:
     overlay: True
     start: 0xBA0730
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBA0730, c]
     - [0xBA07A0, c]
     - [0xBA2150, data]
@@ -7815,7 +7815,7 @@ segments:
     overlay: True
     start: 0xBA4780
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBA4780, c]
     - [0xBA47F0, c]
     - [0xBA4CF0, c]
@@ -7831,7 +7831,7 @@ segments:
     overlay: True
     start: 0xBAA140
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBAA140, c]
     - [0xBAA1B0, c]
     - [0xBAA3B0, c]
@@ -7848,7 +7848,7 @@ segments:
     overlay: True
     start: 0xBAD940
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBAD940, c]
     - [0xBB0880, data]
     - [0xBB0940, data]
@@ -7863,7 +7863,7 @@ segments:
     overlay: True
     start: 0xBB2E00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBB2E00, c]
     - [0xBB3CC0, data]
     - [0xBB3D80, data]
@@ -7877,7 +7877,7 @@ segments:
     overlay: True
     start: 0xBB59E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBB59E0, c]
     - [0xBB5B70, data]
     - [0xBB5EB0, data]
@@ -7890,7 +7890,7 @@ segments:
     overlay: True
     start: 0xBB7070
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBB7070, c]
     - [0xBB7940, c]
     - [0xBB79F0, c]
@@ -7904,7 +7904,7 @@ segments:
     overlay: True
     start: 0xBBB380
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBBB380, c]
     - [0xBBB960, data]
     - [0xBBBB90, data]
@@ -7917,7 +7917,7 @@ segments:
     overlay: True
     start: 0xBBD1A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBBD1A0, c]
     - [0xBBD980, c]
     - [0xBBE2E0, data]
@@ -7931,7 +7931,7 @@ segments:
     overlay: True
     start: 0xBC2A90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBC2A90, c]
     - [0xBC2CD0, c]
     - [0xBC2D40, data]
@@ -7946,7 +7946,7 @@ segments:
     overlay: True
     start: 0xBC4280
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBC4280, c]
     - [0xBC43F0, c]
     - [0xBC4B50, c]
@@ -7964,7 +7964,7 @@ segments:
     overlay: True
     start: 0xBC7E60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBC7E60, c]
     - [0xBC7EB0, c]
     - [0xBC8CE0, data]
@@ -7979,7 +7979,7 @@ segments:
     overlay: True
     start: 0xBCD060
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBCD060, c]
     - [0xBCD7D0, c]
     - [0xBCDA40, data]
@@ -7993,7 +7993,7 @@ segments:
     overlay: True
     start: 0xBCE690
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBCE690, data]
     - [0xBCE760, data]
     - [0xBCEAD0, data]
@@ -8004,7 +8004,7 @@ segments:
     overlay: True
     start: 0xBCEBF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBCEBF0, c]
     - [0xBCEEB0, c]
     - [0xBCF0F0, c]
@@ -8021,7 +8021,7 @@ segments:
     overlay: True
     start: 0xBD3870
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBD3870, c]
     - [0xBD40B0, c]
     - [0xBD4110, c]
@@ -8037,7 +8037,7 @@ segments:
     overlay: True
     start: 0xBDA7B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBDA7B0, c]
     - [0xBDA940, c]
     - [0xBDAB00, c]
@@ -8052,7 +8052,7 @@ segments:
     overlay: True
     start: 0xBDD1B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBDD1B0,       c, events]
     - [0xBDE190,   .data, header]
     - [0xBDE2A0,   .data, events]
@@ -8063,7 +8063,7 @@ segments:
     overlay: True
     start: 0xBDED90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBDED90,       c, events]
     - [0xBE04B0,   .data, header]
     - [0xBE05C0,   .data, events]
@@ -8076,7 +8076,7 @@ segments:
     overlay: True
     start: 0xBE37B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBE37B0,       c, events]
     - [0xBE6B20,   .data, header]
     - [0xBE6C30,   .data, events]
@@ -8090,7 +8090,7 @@ segments:
     overlay: True
     start: 0xBE7BE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBE7BE0,       c, events]
     - [0xBE8EE0,   .data, header]
     - [0xBE9290,   .data, events]
@@ -8102,7 +8102,7 @@ segments:
     overlay: True
     start: 0xBECDF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBECDF0,       c, BECDF0]
     - [0xBED5F0,       c, BED5F0]
     - [0xBED660,       c, BED660]
@@ -8119,7 +8119,7 @@ segments:
     overlay: True
     start: 0xBF47A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF47A0,       c, BF47A0]
     - [0xBF4860,       c, events]
     - [0xBF4A30,   .data, header]
@@ -8136,7 +8136,7 @@ segments:
     overlay: True
     start: 0xBF6060
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF6060,       c, events]
     - [0xBF60A0,   .data, header]
     - [0xBF61A0,   .data, events]
@@ -8150,7 +8150,7 @@ segments:
     overlay: True
     start: 0xBF6A00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF6A00,   .data, header]
     - [0xBF6B00,   .data, events]
     - [0xBF6E30,   .data, events]
@@ -8162,7 +8162,7 @@ segments:
     overlay: True
     start: 0xBF7680
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF7680,   .data, header]
     - [0xBF7770,   .data, events]
     - [0xBF7D00,   .data, events]
@@ -8173,7 +8173,7 @@ segments:
     overlay: True
     start: 0xBF8790
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF8790,   .data, header]
     - [0xBF8890,   .data, events]
     - [0xBF8BB0,   .data, events]
@@ -8184,7 +8184,7 @@ segments:
     overlay: True
     start: 0xBF9410
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBF9410,   .data, header]
     - [0xBF9510,   .data, events]
     - [0xBF9840,   .data, events]
@@ -8195,7 +8195,7 @@ segments:
     overlay: True
     start: 0xBFA0A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBFA0A0,       c, BFA0A0]
     - [0xBFA100,       c, BFA100]
     - [0xBFA150,   .data, BFA0A0]
@@ -8209,7 +8209,7 @@ segments:
     overlay: True
     start: 0xBFD880
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xBFD880,        c, BFD880]
     - [0xBFD8C0,        c, BFD8C0]
     - [0xBFD9A0,        c, BFD9A0]
@@ -8239,7 +8239,7 @@ segments:
   - type: code
     start: 0xC20F40
     vram: 0x80200000
-    subsections:
+    subsegments:
     - [0xC20F40, bin] # DMAd at the beginning of tubba blubba's castle (bridge cutscene)
   - name: dgb_02
     dir: world/area_dgb/dgb_02
@@ -8247,7 +8247,7 @@ segments:
     overlay: True
     start: 0xC2EBA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC2EBA0,       c, C2EBA0]
     - [0xC2FFD0,   .data, C2EBA0]
     - [0xC300F0,   .data, C2EBA0]
@@ -8259,7 +8259,7 @@ segments:
     overlay: True
     start: 0xC314E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC314E0,       c, C314E0]
     - [0xC31730,       c, C31730]
     - [0xC33CB0,   .data, C31730]
@@ -8274,7 +8274,7 @@ segments:
     overlay: True
     start: 0xC36530
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC36530,       c, C36530]
     - [0xC39640,   .data, C36530]
     - [0xC39740,   .data, C36530]
@@ -8287,7 +8287,7 @@ segments:
     overlay: True
     start: 0xC3AA10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC3AA10,       c, C3AA10]
     - [0xC3BEA0,   .data, C3AA10]
     - [0xC3BF90,   .data, C3AA10]
@@ -8301,7 +8301,7 @@ segments:
     overlay: True
     start: 0xC3D080
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC3D080,       c, C3D080]
     - [0xC3D340,   .data, C3D080]
     - [0xC3D440,   .data, C3D080]
@@ -8313,7 +8313,7 @@ segments:
     overlay: True
     start: 0xC3DBF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC3DBF0,       c, C3DBF0]
     - [0xC3F020,   .data, C3DBF0]
     - [0xC3F120,   .data, C3DBF0]
@@ -8326,7 +8326,7 @@ segments:
     overlay: True
     start: 0xC3FDB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC3FDB0,       c, C3FDB0]
     - [0xC43A40,   .data, C3FDB0]
     - [0xC43B40,   .data, C3FDB0]
@@ -8341,7 +8341,7 @@ segments:
     overlay: True
     start: 0xC46BE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC46BE0,       c, C46BE0]
     - [0xC4A3E0,   .data, C46BE0]
     - [0xC4A500,   .data, C46BE0]
@@ -8355,7 +8355,7 @@ segments:
     overlay: True
     start: 0xC4C390
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4C390,       c, C4C390]
     - [0xC4C580,   .data, C4C390]
     - [0xC4C680,   .data, C4C390]
@@ -8368,7 +8368,7 @@ segments:
     overlay: True
     start: 0xC4D3E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4D3E0,       c, C4D3E0]
     - [0xC4D430,   .data, C4D3E0]
     - [0xC4D550,   .data, C4D3E0]
@@ -8380,7 +8380,7 @@ segments:
     overlay: True
     start: 0xC4DEF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4DEF0,       c, C4DEF0]
     - [0xC4E1B0,   .data, C4DEF0]
     - [0xC4E2A0,   .data, C4DEF0]
@@ -8392,7 +8392,7 @@ segments:
     overlay: True
     start: 0xC4E960
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4E960,   .data, C4E960]
     - [0xC4EA50,   .data, C4E960]
     - [0xC4ECE0,   .data, C4E960]
@@ -8403,7 +8403,7 @@ segments:
     overlay: True
     start: 0xC4F030
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4F030,   .data, C4F030]
     - [0xC4F130,   .data, C4F030]
     - [0xC4F4B0,   .data, C4F030]
@@ -8414,7 +8414,7 @@ segments:
     overlay: True
     start: 0xC4F510
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC4F510,       c, C4F510]
     - [0xC50CA0,       c, C50CA0]
     - [0xC50D80,   .data, C4F510]
@@ -8429,7 +8429,7 @@ segments:
     overlay: True
     start: 0xC52540
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC52540,       c, C52540]
     - [0xC53970,   .data, C52540]
     - [0xC53A60,   .data, C52540]
@@ -8443,7 +8443,7 @@ segments:
     overlay: True
     start: 0xC55A60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC55A60,   .data, C55A60]
     - [0xC55B60,   .data, C55A60]
     - [0xC55F30, .rodata, C55A60]
@@ -8453,7 +8453,7 @@ segments:
     overlay: True
     start: 0xC55F40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC55F40,       c, C55F40]
     - [0xC56EF0,       c, C56EF0]
     - [0xC571B0,   .data, C55F40]
@@ -8468,7 +8468,7 @@ segments:
     overlay: True
     start: 0xC599D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC599D0, c]
     - [0xC59CE0, data]
     - [0xC5A730, rodata]
@@ -8478,7 +8478,7 @@ segments:
     overlay: True
     start: 0xC5A740
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC5A740, c]
     - [0xC5AA50, c]
     - [0xC5AC20, c]
@@ -8495,7 +8495,7 @@ segments:
     overlay: True
     start: 0xC60D10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC60D10, c]
     - [0xC61020, c]
     - [0xC63A10, c]
@@ -8512,7 +8512,7 @@ segments:
     overlay: True
     start: 0xC68130
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC68130, c]
     - [0xC68440, c]
     - [0xC69180, c]
@@ -8526,7 +8526,7 @@ segments:
     overlay: True
     start: 0xC6C0D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC6C0D0, c]
     - [0xC6C3E0, data]
     - [0xC6C910, rodata]
@@ -8536,7 +8536,7 @@ segments:
     overlay: True
     start: 0xC6C920
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC6C920, c]
     - [0xC6CC30, c]
     - [0xC6CD10, c]
@@ -8549,7 +8549,7 @@ segments:
     overlay: True
     start: 0xC6E330
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC6E330, c]
     - [0xC6EA50, c]
     - [0xC70640, data]
@@ -8564,7 +8564,7 @@ segments:
     overlay: True
     start: 0xC71480
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC71480, c]
     - [0xC71C10, c]
     - [0xC71ED0, c]
@@ -8579,7 +8579,7 @@ segments:
     overlay: True
     start: 0xC76CE0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC76CE0, c]
     - [0xC77A20, c]
     - [0xC77D00, c]
@@ -8593,7 +8593,7 @@ segments:
     overlay: True
     start: 0xC7E180
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC7E180, c]
     - [0xC7E4B0, c]
     - [0xC7E850, data]
@@ -8605,7 +8605,7 @@ segments:
     overlay: True
     start: 0xC801A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC801A0, c]
     - [0xC804B0, c]
     - [0xC80600, c]
@@ -8620,7 +8620,7 @@ segments:
     overlay: True
     start: 0xC85AB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC85AB0, c]
     - [0xC85DC0, c]
     - [0xC887B0, c]
@@ -8634,7 +8634,7 @@ segments:
     overlay: True
     start: 0xC8C0A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC8C0A0, c]
     - [0xC8C0E0, c]
     - [0xC8C3F0, c]
@@ -8646,7 +8646,7 @@ segments:
     overlay: True
     start: 0xC8DBB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC8DBB0, c]
     - [0xC8F8E0, data]
     - [0xC8FA40, data]
@@ -8662,7 +8662,7 @@ segments:
     overlay: True
     start: 0xC95F30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC95F30, c]
     - [0xC96240, c]
     - [0xC969F0, data]
@@ -8674,7 +8674,7 @@ segments:
     overlay: True
     start: 0xC9A200
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC9A200, c]
     - [0xC9A540, c]
     - [0xC9A590, data]
@@ -8687,7 +8687,7 @@ segments:
     overlay: True
     start: 0xC9C300
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC9C300, c]
     - [0xC9C610, c]
     - [0xC9C920, data]
@@ -8700,7 +8700,7 @@ segments:
     overlay: True
     start: 0xC9DF20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xC9DF20, c]
     - [0xC9DF60, c]
     - [0xC9EE30, c]
@@ -8718,7 +8718,7 @@ segments:
     overlay: True
     start: 0xCA72A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCA72A0, c]
     - [0xCA72E0, c]
     - [0xCA78D0, data]
@@ -8731,7 +8731,7 @@ segments:
     overlay: True
     start: 0xCAC1F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCAC1F0, c]
     - [0xCAC5D0, c]
     - [0xCAC930, data]
@@ -8744,7 +8744,7 @@ segments:
     overlay: True
     start: 0xCAED40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCAED40, c]
     - [0xCAFA80, c]
     - [0xCAFAC0, c]
@@ -8760,7 +8760,7 @@ segments:
     overlay: True
     start: 0xCB5000
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCB5000, c]
     - [0xCB5040, c]
     - [0xCB50E0, c]
@@ -8775,7 +8775,7 @@ segments:
     overlay: True
     start: 0xCB9200
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCB9200, c]
     - [0xCB9240, c]
     - [0xCB9280, c]
@@ -8795,7 +8795,7 @@ segments:
     overlay: True
     start: 0xCBDCD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCBDCD0, c]
     - [0xCBDFF0, data]
     - [0xCBF790, data]
@@ -8807,7 +8807,7 @@ segments:
     overlay: True
     start: 0xCC0E30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCC0E30, c]
     - [0xCC0E70, c]
     - [0xCC1520, data]
@@ -8820,7 +8820,7 @@ segments:
     overlay: True
     start: 0xCC3810
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCC3810, c]
     - [0xCC3850, c]
     - [0xCC6DE0, c]
@@ -8836,7 +8836,7 @@ segments:
     overlay: True
     start: 0xCCB310
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCCB310, c]
     - [0xCCBE20, c]
     - [0xCCD670, c]
@@ -8852,7 +8852,7 @@ segments:
     overlay: True
     start: 0xCD06C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCD06C0, data]
     - [0xCD07E0, data]
     - [0xCD09C0, data]
@@ -8865,7 +8865,7 @@ segments:
     overlay: True
     start: 0xCD1E30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCD1E30, c]
     - [0xCD1E70, c]
     - [0xCD1F10, c]
@@ -8883,7 +8883,7 @@ segments:
     overlay: True
     start: 0xCD72E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCD72E0, c]
     - [0xCD7320, c]
     - [0xCD7350, c]
@@ -8899,7 +8899,7 @@ segments:
     overlay: True
     start: 0xCDC6A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCDC6A0, c]
     - [0xCDCBD0, c]
     - [0xCDCC30, c]
@@ -8914,7 +8914,7 @@ segments:
     overlay: True
     start: 0xCE36F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCE36F0, c]
     - [0xCE4030, data]
     - [0xCE41B0, data]
@@ -8928,7 +8928,7 @@ segments:
     overlay: True
     start: 0xCE6700
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCE6700, c]
     - [0xCE7240, c]
     - [0xCE73F0, data]
@@ -8940,7 +8940,7 @@ segments:
     overlay: True
     start: 0xCEC240
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCEC240, c]
     - [0xCEC280, c]
     - [0xCEC290, c]
@@ -8955,7 +8955,7 @@ segments:
     overlay: True
     start: 0xCEE260
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCEE260, c]
     - [0xCEE2A0, c]
     - [0xCEEF30, data]
@@ -8968,7 +8968,7 @@ segments:
     overlay: True
     start: 0xCF0940
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCF0940, c]
     - [0xCF0980, c]
     - [0xCF0BC0, c]
@@ -8982,7 +8982,7 @@ segments:
     overlay: True
     start: 0xCF2BD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCF2BD0, c]
     - [0xCF2C10, c]
     - [0xCF4BC0, c]
@@ -8999,7 +8999,7 @@ segments:
     overlay: True
     start: 0xCF7B70
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xCF7B70, c]
     - [0xCF7E80, c]
     - [0xCF9AC0, data]
@@ -9013,7 +9013,7 @@ segments:
     overlay: True
     start: 0xD05730
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD05730, c]
     - [0xD05F60, c]
     - [0xD072F0, data]
@@ -9029,7 +9029,7 @@ segments:
     overlay: True
     start: 0xD110C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD110C0, c]
     - [0xD119E0, data]
     - [0xD11A70, data]
@@ -9041,7 +9041,7 @@ segments:
     overlay: True
     start: 0xD135D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD135D0, c]
     - [0xD13810, c]
     - [0xD138E0, c]
@@ -9057,7 +9057,7 @@ segments:
     overlay: True
     start: 0xD187E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD187E0, c]
     - [0xD1A520, data]
     - [0xD1A5B0, data]
@@ -9071,7 +9071,7 @@ segments:
     overlay: True
     start: 0xD1FE90
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD1FE90, c]
     - [0xD203E0, c]
     - [0xD224B0, data]
@@ -9086,7 +9086,7 @@ segments:
     overlay: True
     start: 0xD2BD30
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD2BD30, c]
     - [0xD2DD30, data]
     - [0xD2DDC0, data]
@@ -9100,7 +9100,7 @@ segments:
     overlay: True
     start: 0xD2FC80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD2FC80, c]
     - [0xD309C0, c]
     - [0xD31430, data]
@@ -9114,7 +9114,7 @@ segments:
     overlay: True
     start: 0xD362F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD362F0, c]
     - [0xD366F0, data]
     - [0xD36780, data]
@@ -9126,7 +9126,7 @@ segments:
     overlay: True
     start: 0xD37800
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD37800, c]
     - [0xD37BD0, c]
     - [0xD384A0, data]
@@ -9140,7 +9140,7 @@ segments:
     overlay: True
     start: 0xD3A5D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD3A5D0, c]
     - [0xD3A610, c]
     - [0xD3A850, c]
@@ -9159,7 +9159,7 @@ segments:
     overlay: True
     start: 0xD4BA20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD4BA20, c]
     - [0xD4BAB0, c]
     - [0xD4BDC0, data]
@@ -9174,7 +9174,7 @@ segments:
     overlay: True
     start: 0xD4D040
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD4D040, c]
     - [0xD4D060, c]
     - [0xD4E3F0, data]
@@ -9188,7 +9188,7 @@ segments:
     overlay: True
     start: 0xD4FFF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD4FFF0, c]
     - [0xD50010, c]
     - [0xD51650, data]
@@ -9202,7 +9202,7 @@ segments:
     overlay: True
     start: 0xD53CB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD53CB0, c]
     - [0xD53CD0, c]
     - [0xD53E60, data]
@@ -9215,7 +9215,7 @@ segments:
     overlay: True
     start: 0xD54690
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD54690, c]
     - [0xD546B0, c]
     - [0xD54840, c]
@@ -9231,7 +9231,7 @@ segments:
     overlay: True
     start: 0xD55BB0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD55BB0, c]
     - [0xD55BD0, c]
     - [0xD56D90, data]
@@ -9243,7 +9243,7 @@ segments:
     overlay: True
     start: 0xD57430
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD57430, c]
     - [0xD58380, data]
     - [0xD58410, data]
@@ -9254,7 +9254,7 @@ segments:
     overlay: True
     start: 0xD58890
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD58890, c]
     - [0xD588B0, c]
     - [0xD59EE0, data]
@@ -9266,7 +9266,7 @@ segments:
     overlay: True
     start: 0xD5F2B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD5F2B0, c]
     - [0xD5F2D0, c]
     - [0xD60960, data]
@@ -9278,7 +9278,7 @@ segments:
     overlay: True
     start: 0xD61500
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD61500, c]
     - [0xD61520, c]
     - [0xD626E0, data]
@@ -9291,7 +9291,7 @@ segments:
     overlay: True
     start: 0xD62D10
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD62D10, c]
     - [0xD63F20, data]
     - [0xD63FB0, data]
@@ -9302,7 +9302,7 @@ segments:
     overlay: True
     start: 0xD645E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD645E0, c]
     - [0xD64600, c]
     - [0xD65BC0, data]
@@ -9315,7 +9315,7 @@ segments:
     overlay: True
     start: 0xD67D00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD67D00, c]
     - [0xD67D20, c]
     - [0xD68EE0, data]
@@ -9328,7 +9328,7 @@ segments:
     overlay: True
     start: 0xD69810
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD69810, c]
     - [0xD69830, c]
     - [0xD69850, data]
@@ -9341,7 +9341,7 @@ segments:
     overlay: True
     start: 0xD69B20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD69B20, c]
     - [0xD69B40, c]
     - [0xD6AA40, data]
@@ -9353,7 +9353,7 @@ segments:
     overlay: True
     start: 0xD6B620
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD6B620, c]
     - [0xD6B640, c]
     - [0xD6C540, data]
@@ -9366,7 +9366,7 @@ segments:
     overlay: True
     start: 0xD6E9B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD6E9B0, c]
     - [0xD6E9D0, c]
     - [0xD70360, data]
@@ -9379,7 +9379,7 @@ segments:
     overlay: True
     start: 0xD763A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD763A0, c]
     - [0xD763C0, c]
     - [0xD772C0, data]
@@ -9391,7 +9391,7 @@ segments:
     overlay: True
     start: 0xD77F20
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD77F20, c]
     - [0xD77F40, c]
     - [0xD78040, data]
@@ -9404,7 +9404,7 @@ segments:
     overlay: True
     start: 0xD78880
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD78880, c]
     - [0xD788A0, c]
     - [0xD78B50, data]
@@ -9417,7 +9417,7 @@ segments:
     overlay: True
     start: 0xD799F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD799F0, c]
     - [0xD7AC00, data]
     - [0xD7AC90, data]
@@ -9429,7 +9429,7 @@ segments:
     overlay: True
     start: 0xD7B2A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD7B2A0, c]
     - [0xD7C4B0, data]
     - [0xD7C540, data]
@@ -9441,7 +9441,7 @@ segments:
     overlay: True
     start: 0xD7CB50
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD7CB50, c]
     - [0xD7CB70, c]
     - [0xD7DDD0, data]
@@ -9454,7 +9454,7 @@ segments:
     overlay: True
     start: 0xD7ED60
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD7ED60, c]
     - [0xD7ED80, c]
     - [0xD7F270, c]
@@ -9469,7 +9469,7 @@ segments:
     overlay: True
     start: 0xD86A00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD86A00, c]
     - [0xD86A20, c]
     - [0xD87240, data]
@@ -9481,7 +9481,7 @@ segments:
     overlay: True
     start: 0xD896E0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD896E0, c]
     - [0xD89700, c]
     - [0xD8A770, data]
@@ -9494,7 +9494,7 @@ segments:
     overlay: True
     start: 0xD8B3B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD8B3B0, c]
     - [0xD8B3D0, c]
     - [0xD8C3B0, data]
@@ -9507,7 +9507,7 @@ segments:
     overlay: True
     start: 0xD8D250
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD8D250, c]
     - [0xD8D270, c]
     - [0xD8FBA0, c]
@@ -9522,7 +9522,7 @@ segments:
     overlay: True
     start: 0xD91700
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD91700, c]
     - [0xD92650, data]
     - [0xD926F0, data]
@@ -9533,7 +9533,7 @@ segments:
     overlay: True
     start: 0xD92F40
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD92F40, c]
     - [0xD94760, data]
     - [0xD94800, data]
@@ -9545,7 +9545,7 @@ segments:
     overlay: True
     start: 0xD955F0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD955F0, c]
     - [0xD96CD0, data]
     - [0xD96D70, data]
@@ -9557,7 +9557,7 @@ segments:
     overlay: True
     start: 0xD97890
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD97890, c]
     - [0xD98F70, data]
     - [0xD99010, data]
@@ -9569,7 +9569,7 @@ segments:
     overlay: True
     start: 0xD999B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD999B0, c]
     - [0xD999D0, c]
     - [0xD9A8D0, data]
@@ -9582,7 +9582,7 @@ segments:
     overlay: True
     start: 0xD9AEF0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD9AEF0, c]
     - [0xD9B150, c]
     - [0xD9BB20, data]
@@ -9597,7 +9597,7 @@ segments:
     overlay: True
     start: 0xD9D4D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xD9D4D0, c]
     - [0xD9D510, c]
     - [0xDA0080, data]
@@ -9613,7 +9613,7 @@ segments:
     overlay: True
     start: 0xDA5240
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDA5240, c]
     - [0xDA5260, c]
     - [0xDA5AD0, data]
@@ -9626,7 +9626,7 @@ segments:
     overlay: True
     start: 0xDAD400
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDAD400, c]
     - [0xDAF240, c]
     - [0xDAF320, data]
@@ -9641,7 +9641,7 @@ segments:
     overlay: True
     start: 0xDB22C0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDB22C0, c]
     - [0xDB46C0, data]
     - [0xDB4770, data]
@@ -9655,7 +9655,7 @@ segments:
     overlay: True
     start: 0xDB7910
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDB7910, c]
     - [0xDB8180, c]
     - [0xDB8440, data]
@@ -9669,7 +9669,7 @@ segments:
     overlay: True
     start: 0xDBD2B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDBD2B0, c]
     - [0xDC01D0, c]
     - [0xDC04D0, c]
@@ -9688,7 +9688,7 @@ segments:
     overlay: True
     start: 0xDC43D0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDC43D0, c]
     - [0xDC4C40, c]
     - [0xDC51B0, data]
@@ -9702,7 +9702,7 @@ segments:
     overlay: True
     start: 0xDCCCD0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDCCCD0, c]
     - [0xDCCFA0, c]
     - [0xDCD3B0, c]
@@ -9725,7 +9725,7 @@ segments:
     overlay: True
     start: 0xDD79B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDD79B0, c]
     - [0xDD8220, data]
     - [0xDD8640, data]
@@ -9738,7 +9738,7 @@ segments:
     overlay: True
     start: 0xDDC830
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDDC830, c]
     - [0xDDCFC0, c]
     - [0xDDDD00, data]
@@ -9751,7 +9751,7 @@ segments:
     overlay: True
     start: 0xDDF310
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDDF310, c]
     - [0xDDF730, c]
     - [0xDDF7D0, data]
@@ -9764,7 +9764,7 @@ segments:
     overlay: True
     start: 0xDE2490
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDE2490, c]
     - [0xDE2710, c]
     - [0xDE36C0, c]
@@ -9779,7 +9779,7 @@ segments:
     overlay: True
     start: 0xDE56B0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDE56B0, c]
     - [0xDE5810, c]
     - [0xDE5C70, data]
@@ -9792,7 +9792,7 @@ segments:
     overlay: True
     start: 0xDE8770
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDE8770, c]
     - [0xDE8F70, data]
     - [0xDE9670, data]
@@ -9803,7 +9803,7 @@ segments:
     overlay: True
     start: 0xDEBED0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDEBED0, c]
     - [0xDEC4D0, data]
     - [0xDEC600, data]
@@ -9815,7 +9815,7 @@ segments:
     overlay: True
     start: 0xDEEEA0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDEEEA0, c]
     - [0xDEF400, c]
     - [0xDF25B0, data]
@@ -9833,7 +9833,7 @@ segments:
     overlay: True
     start: 0xDF6A00
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xDF6A00, c]
     - [0xDF6A20, c]
     - [0xDF9300, c]
@@ -9851,7 +9851,7 @@ segments:
     overlay: True
     start: 0xE05360
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE05360, c]
     - [0xE05370, c]
     - [0xE05390, c]
@@ -9870,7 +9870,7 @@ segments:
     overlay: True
     start: 0xE0E7A0
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE0E7A0, c]
     - [0xE0F980, c]
     - [0xE0FF60, data]
@@ -9884,7 +9884,7 @@ segments:
     overlay: True
     start: 0xE12760
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE12760, c]
     - [0xE12930, c]
     - [0xE13F10, data]
@@ -9897,7 +9897,7 @@ segments:
     overlay: True
     start: 0xE15D80
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE15D80, c]
     - [0xE18150, c]
     - [0xE18180, data]
@@ -9910,7 +9910,7 @@ segments:
     overlay: True
     start: 0xE1E380
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE1E380, data]
   - name: gv_01
     dir: world/area_gv/gv_01
@@ -9918,14 +9918,14 @@ segments:
     overlay: True
     start: 0xE1E460
     vram: 0x80240000
-    subsections:
+    subsegments:
     - [0xE1E460, c]
     - [0xE1EC20, data]
   - type: code
     overlay: True
     start: 0xE20110
     vram: 0x802B7000
-    subsections:
+    subsegments:
     - [0xE20110, c, E20110]
     - [0xE20B30, data]
     - [0xE20DD0, .rodata, E20110]
@@ -9933,7 +9933,7 @@ segments:
     overlay: True
     start: 0xE20EB0
     vram: 0x802B7000
-    subsections:
+    subsegments:
     - [0xe20eb0, c, e20eb0]
     - [0xE215C0, data]
     - [0xE21860, .rodata, e20eb0]
@@ -9941,7 +9941,7 @@ segments:
     overlay: True
     start: 0xE21870
     vram: 0x802B7000
-    subsections:
+    subsegments:
     - [0xE21870, c, E21870]
     - [0xE21EB0, data]
     - [0xE22590, .rodata, E21870]
@@ -9949,7 +9949,7 @@ segments:
     overlay: True
     start: 0xE225B0
     vram: 0x802B7000
-    subsections:
+    subsegments:
     - [0xE225B0, c, E225B0]
     - [0xE22B30, data]
     - [0xE23230, .rodata, E225B0]
@@ -9957,40 +9957,40 @@ segments:
     start: 0xE23260
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE23260, c]
     - [0xE23690, data]
   - type: code
     start: 0xE236E0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE236E0, c]
     - [0xE23FF0, data]
   - type: code
     start: 0xE24040
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE24040, c]
   - type: code
     start: 0xE245D0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE245D0, c]
     - [0xE248D0, data]
   - type: code
     start: 0xE24920
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE24920, c]
   - type: code
     start: 0xE24ED0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE24ED0, c, E24ED0]
     - [0xE25C80, data]
     - [0xE25CC0, .rodata, E24ED0]
@@ -9998,75 +9998,75 @@ segments:
     start: 0xE25D60
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE25D60, c, E25D60]
     - [0xE26700, .rodata, E25D60]
   - type: code
     start: 0xE26710
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE26710, c, E26710]
     - [0xE26DA0, .rodata, E26710]
   - type: code
     start: 0xE26DE0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE26DE0, c, E26DE0]
     - [0xE274C0, .rodata, E26DE0]
   - type: code
     start: 0xE27510
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE27510, c, E27510]
     - [0xE27C50, .rodata, E27510]
   - type: code
     start: 0xE27C90
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE27C90, c]
   - type: code
     start: 0xE27F40
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE27F40, c, E27F40]
     - [0xE28790, .rodata, E27F40]
   - type: code
     start: 0xE287F0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE287F0, c]
   - type: code
     start: 0xE28A30
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE28A30, c, E28A30]
     - [0xE29190, .rodata, E28A30]
   - type: code
     start: 0xE291A0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE291A0, c, E291A0]
     - [0xE29450, .rodata, E291A0]
   - type: code
     start: 0xE29470
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE29470, c, E29470]
     - [0xE2A300, .rodata, E29470]
   - type: code
     start: 0xE2A340
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE2A340, c, E2A340]
     - [0xE2A690, data]
     - [0xE2A6A0, .rodata, E2A340]
@@ -10074,7 +10074,7 @@ segments:
     start: 0xE2A6B0
     vram: 0x802B6000
     overlay: True
-    subsections:
+    subsegments:
     - [0xE2A6B0, c, E2A6B0]
     - [0xE2B420, data]
     - [0xE2B440, .rodata, E2A6B0]
@@ -10083,7 +10083,7 @@ segments:
     start: 0xE2B530
     vram: 0x802BAE00
     overlay: True
-    subsections:
+    subsegments:
     - [0xE2B530, c, E2B530]
     - [0xE2BE40, c, E2BE40]
     - [0xE2C930, c]
@@ -10096,7 +10096,7 @@ segments:
     start: 0xE2D730
     vram: 0x802BAE00
     overlay: True
-    subsections:
+    subsegments:
     - [0xE2D730, c]
     - [0xE2E5F0, c]
     - [0xE2EDE0, c]
@@ -10108,7 +10108,7 @@ segments:
     start: 0xE2F750
     vram: 0x802BAE00
     overlay: True
-    subsections:
+    subsegments:
     - [0xE2F750, c, E2F750]
     - [0xE307C0, c, E307C0]
     - [0xE31380, data]
@@ -10119,7 +10119,7 @@ segments:
     start: 0xEA0900
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEA0900, c]
     - [0xEA0C10, c, EA0C10]
     - [0xEA36E0, c, EA36E0]
@@ -10130,7 +10130,7 @@ segments:
     start: 0xEA6FD0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEA6FD0, c]
     - [0xEA7010, c]
     - [0xEA7320, c]
@@ -10139,7 +10139,7 @@ segments:
     start: 0xEA8AE0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEA8AE0, c]
     - [0xEAA810, data]
     - [0xEB0E20, .rodata, EA8AE0]
@@ -10147,7 +10147,7 @@ segments:
     start: 0xEB0E60
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEB0E60, c]
     - [0xEB1170, c]
     - [0xEB1920, data]
@@ -10155,7 +10155,7 @@ segments:
     start: 0xEB5130
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEB5130, c]
     - [0xEB5470, c]
     - [0xEB54C0, data]
@@ -10163,7 +10163,7 @@ segments:
     start: 0xEB7230
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEB7230, c]
     - [0xEB7540, c, EB7540]
     - [0xEB7850, data]
@@ -10172,7 +10172,7 @@ segments:
     start: 0xEB8E50
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEB8E50, c, EB8E50]
     - [0xEB8E90, c, EB8E90]
     - [0xEB9D90, c]
@@ -10183,7 +10183,7 @@ segments:
     start: 0xEC2200
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEC2200, c, EC2200]
     - [0xEC2240, c, EC2240]
     - [0xEC2610, c]
@@ -10194,7 +10194,7 @@ segments:
     start: 0xEC71B0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEC71B0, c]
     - [0xEC7590, c]
     - [0xEC78F0, data]
@@ -10202,7 +10202,7 @@ segments:
     start: 0xEC9D00
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEC9D00, c]
     - [0xECAA40, c]
     - [0xECAA80, c, ECAA80]
@@ -10214,7 +10214,7 @@ segments:
     start: 0xECFFF0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xECFFF0, c]
     - [0xED0030, c]
     - [0xED00D0, c]
@@ -10225,7 +10225,7 @@ segments:
     start: 0xED4220
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xED4220, c]
     - [0xED4260, c]
     - [0xED42A0, c]
@@ -10236,7 +10236,7 @@ segments:
     start: 0xED8E20
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xED8E20, c, ED8E20]
     - [0xED9170, data]
     - [0xEDBF90, .rodata, ED8E20]
@@ -10244,7 +10244,7 @@ segments:
     start: 0xEDBFE0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEDBFE0, c]
     - [0xEDC020, c]
     - [0xEDC6D0, data]
@@ -10252,7 +10252,7 @@ segments:
     start: 0xEDE9C0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEDE9C0, c]
     - [0xEDEA00, c, EDEA00]
     - [0xEE2040, c, EE2040]
@@ -10263,7 +10263,7 @@ segments:
     start: 0xEE65B0
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEE65B0, c]
     - [0xEE70C0, c]
     - [0xEE8940, c]
@@ -10272,7 +10272,7 @@ segments:
     start: 0xEED100
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEED100, c]
     - [0xEED140, c]
     - [0xEED1E0, c]
@@ -10284,7 +10284,7 @@ segments:
     start: 0xEF2610
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEF2610, c]
     - [0xEF2650, c]
     - [0xEF2680, c, EF2680]
@@ -10294,7 +10294,7 @@ segments:
     start: 0xEF7A80
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEF7A80, c]
     - [0xEF7FB0, c]
     - [0xEF8010, c]
@@ -10303,7 +10303,7 @@ segments:
     start: 0xEFEB00
     vram: 0x80240000
     overlay: True
-    subsections:
+    subsegments:
     - [0xEFEB00, c]
     - [0xEFF440, bin] # some of this is audio-related and not part of this overlay
   - [0xF007C0, bin, Battle_Fanfare_02] # BGM start

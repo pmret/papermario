@@ -35,8 +35,8 @@ def add_file_ext(name: str) -> str:
         return name + ".bin"
 
 class N64SegPaperMarioMapFS(N64Segment):
-    def __init__(self, segment, next_segment):
-        super().__init__(segment, next_segment)
+    def __init__(self, segment, rom_start, rom_end):
+        super().__init__(segment, rom_start, rom_end)
 
         self.files = segment["files"]
 

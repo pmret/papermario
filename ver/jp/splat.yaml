@@ -31,7 +31,7 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subalign: 8
-    subsections:
+    subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c] # 1060 (identical)
     - [0x1370, c] # 1370
