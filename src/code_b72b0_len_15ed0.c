@@ -68,11 +68,10 @@ s32 load_entity_model(s32* cmdList) {
     }
     ASSERT(i < MAX_ENTITY_MODELS);
 
-    // TODO: wtf?
     {
-        EntityModel** entityModel = (*gCurrentEntityModelList + i);
-        s32* entityModelCount = &gEntityModelCount;
+        s32* entityModelCount;
         (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(EntityModel));
+        entityModelCount = &gEntityModelCount;
         (*entityModelCount)++;
     }
     ASSERT(newEntityModel != NULL);
@@ -108,11 +107,10 @@ s32 ALT_load_entity_model(s32* cmdList) {
     }
     ASSERT(i < MAX_ENTITY_MODELS);
 
-    // TODO: wtf?
     {
-        EntityModel** entityModel = (*gCurrentEntityModelList + i);
-        s32* entityModelCount = &gEntityModelCount;
+        s32* entityModelCount;
         (*gCurrentEntityModelList)[i] = newEntityModel = heap_malloc(sizeof(EntityModel));
+        entityModelCount = &gEntityModelCount;
         (*entityModelCount)++;
     }
 
@@ -146,7 +144,7 @@ void update_entity_rendercmd(s32 idx) {
     if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
         idx &= ~0x800;
         entityModel = (*gCurrentEntityModelList)[idx];
-        if ((entityModel != NULL) && (entityModel->flags)) {
+        if (entityModel != NULL && (entityModel->flags)) {
             if (!(entityModel->flags & 0x20)) {
                 if(!(entityModel->flags & 0x20000)) {
                     entityModel->flags &= ~0x100;
@@ -228,7 +226,7 @@ void func_80122D7C(s32 idx, u32* arg1) {
     u32* phi_a1;
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if ((entityModel != NULL) && (entityModel->flags)) {
+    if (entityModel != NULL && (entityModel->flags)) {
         phi_a1 = arg1;
         if (arg1 == NULL) {
             phi_a1 = &D_8014C260;
@@ -249,7 +247,7 @@ void free_entity_model_by_index(s32 idx) {
     EntityModelList** entityModelList = &gCurrentEntityModelList;
     EntityModel* entityModel = (**entityModelList)[index];
 
-    if ((entityModel != NULL) && (entityModel->flags)) {
+    if (entityModel != NULL && (entityModel->flags)) {
         if (entityModel->flags & 0x400) {
             heap_free(entityModel->displayList);
         }
@@ -279,7 +277,7 @@ void free_entity_model_by_ref(EntityModel* entityModel) {
 void set_entity_model_flags(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if ((entityModel != NULL) && (entityModel->flags)) {
+    if (entityModel != NULL && (entityModel->flags)) {
         entityModel->flags |= newFlags;
     }
 }
@@ -287,7 +285,7 @@ void set_entity_model_flags(s32 idx, s32 newFlags) {
 void clear_entity_model_flags(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if ((entityModel != NULL) && entityModel->flags) {
+    if (entityModel != NULL && entityModel->flags) {
         entityModel->flags &= ~newFlags;
     }
 }
@@ -482,7 +480,7 @@ void render_dynamic_entities(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if ((entity != NULL) && !(entity->flags & 2)) {
+        if (entity != NULL && !(entity->flags & 2)) {
             if (!(entity->flags & 4)) {
                 entity->draw();
             }
@@ -495,7 +493,7 @@ void func_801234E0(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if ((entity != NULL) && !(entity->flags & 2)) {
+        if (entity != NULL && !(entity->flags & 2)) {
             if (entity->flags & 4) {
                 entity->draw();
             }
@@ -508,7 +506,7 @@ void func_80123550(void) {
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
         DynamicEntity* entity = (*gCurrentDynamicEntityListPtr)[i];
-        if ((entity != NULL) && !(entity->flags & 2)) {
+        if (entity != NULL && !(entity->flags & 2)) {
             if (entity->flags & 8) {
                 entity->draw();
             }
