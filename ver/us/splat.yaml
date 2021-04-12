@@ -15,11 +15,13 @@ options:
   linker_symbol_header_path: ver/us/build/include/ld_addrs.h
   src_path: src
   asm_path: ver/us/asm
-  asset_paths: [assets/us]
+  asset_path: assets/us
   build_path: ver/us/build
   cache_path: ver/us/.splat_cache
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
+asset_stack:
+  - us
 segments:
   - name: header
     type: header
