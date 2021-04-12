@@ -70,7 +70,6 @@ class N64SegPaperMarioMapFS(N64Segment):
             bytes = rom_bytes[bytes_start : bytes_start + size]
 
             if is_compressed:
-                self.log(f"Decompressing {name}...")
                 bytes = Yay0decompress.decompress_yay0(bytes)
 
             if name.startswith("party_"):

@@ -153,17 +153,18 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "PaperMarioMapFS", "PaperMarioMessages", "img", "PaperMarioNpcSprites"])
+            modes.extend(["bin", "Yay0", "img", "PaperMarioMapFS", "PaperMarioMessages", "PaperMarioNpcSprites"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
-        self.linker_entries = split.main(
+        split.main(
             str(self.version_path / "splat.yaml"),
             None,
             str(self.version_path / "baserom.z64"),
             modes,
             verbose=False,
-        ).entries
+        )
+        self.linker_entries = split.linker_writer.entries[:]
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
@@ -251,9 +252,9 @@ class Configure:
 
             if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.n64.asm.N64SegAsm) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.out_path()):
+            elif isinstance(seg, segtypes.n64.asm.N64SegAsm) or (isinstance(seg, segtypes.n64.data.N64SegData) and not seg.type[0] == "."):
                 build(entry.object_path, entry.src_paths, "as")
-            elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and not seg.out_path()):
+            elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.type[0] == "."):
                 task = "cc"
                 with entry.src_paths[0].open() as f:
                     s = f.read()

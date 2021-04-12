@@ -398,7 +398,7 @@ class N64SegPaperMarioMessages(N64Segment):
                 msg_offsets.append(offset)
                 pos += 4
 
-            self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
+            #self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
 
             path = msg_dir / Path(name + ".msg")
 

@@ -271,7 +271,7 @@ class N64SegPaperMarioNpcSprites(N64Segment):
         pos = 0
 
         for i, sprite_name in enumerate(self.files):
-            self.log(f"Splitting sprite {sprite_name}...")
+            #self.log(f"Splitting sprite {sprite_name}...")
 
             sprite_dir = out_dir / sprite_name
             sprite_dir.mkdir(parents=True, exist_ok=True)
