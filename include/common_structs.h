@@ -331,7 +331,13 @@ typedef struct Entity {
 
 typedef Entity* EntityList[MAX_ENTITIES];
 
-typedef UNK_TYPE* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
+typedef struct DynamicEntity {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ void (*update)(void);
+    /* 0x08 */ void (*draw)(void);
+} DynamicEntity;
+
+typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
@@ -1827,5 +1833,24 @@ typedef struct Temp8025D160_2 {
     /* 0x24 */ char unk_24[8];
     /* 0x2C */ s32 unk_2C;
 } Temp8025D160_2; // size = 0x30 (?)
+
+typedef struct EntityModel {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ u8 renderMode;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
+    /* 0x0C */ f32 timeScale; ///< Default is 1.0
+    /* 0x10 */ s32* cmdListReadPos;
+    /* 0x14 */ Gfx* displayList;
+    /* 0x18 */ Matrix4s transform;
+    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x5C */ Vtx* vertexArray;
+    /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
+    /* 0x64 */ s32 setupGfxCallbackArg0;
+} EntityModel; // size = 0x68
+
+typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
 
 #endif
