@@ -215,9 +215,9 @@ s32 func_800DFCF4(void) {
 
 INCLUDE_ASM(s32, "77480", func_800DFD48);
 
-void func_800DFEFC(void) {
+void func_800DFEFC(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = func_800DFD48();
+    s32 temp_v0 = func_800DFD48(arg0);
 
     if (temp_v0 != -1) {
         playerStatus->anim = temp_v0;
@@ -234,9 +234,9 @@ void func_800DFF50(s32 arg0) {
     playerStatus->flags &= ~0x10000000;
 }
 
-void func_800DFF78(void) {
+void func_800DFF78(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = func_800DFD48();
+    s32 temp_v0 = func_800DFD48(arg0);
 
     if (temp_v0 != -1) {
         playerStatus->anim = temp_v0;

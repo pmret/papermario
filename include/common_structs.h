@@ -1820,7 +1820,7 @@ typedef struct Temp8010F250 {
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ char unk_10[0x20];
     /* 0x30 */ SoundID unk_30;
-} Temp8010F250;
+} Temp8010F250; // size = 0x34
 
 typedef struct Temp8010EBB0 {
     /* 0x000 */ s8 unk_00;
