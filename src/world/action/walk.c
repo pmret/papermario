@@ -1,4 +1,4 @@
-#include "walk.h"
+#include "common.h"
 
 // walk
 INCLUDE_ASM(void, "world/action/walk", func_802B6000_E236E0, void);

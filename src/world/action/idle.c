@@ -1,4 +1,4 @@
-#include "idle.h"
+#include "common.h"
 
 void input_to_move_vector(f32* angle, f32* magnitude);
 s32 check_input_jump(void);

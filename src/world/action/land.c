@@ -1,4 +1,4 @@
-#include "land.h"
+#include "common.h"
 
 INCLUDE_ASM(void, "world/action/land", func_802B6000_E24920, void);
 

@@ -2,21 +2,16 @@
 #include "ld_addrs.h"
 #include "actions.h"
 
-// Overlays
-#include "action/idle.h"
-#include "action/walk.h"
-#include "action/jump.h"
-#include "action/land.h"
-
+void world_action_idle_update(void);
 void func_802B6000_E24920(void);
 void func_802B6288_E23968(void);
 void func_802B60B4_E240F4(void);
 void func_802B6198_E241D8(void);
 void func_802B6294_E242D4(void);
-void func_802B6060_E27570(void);
 void func_802B6348_E24388(void);
 void func_802B61C0_E24AE0(void);
 void func_802B6638_E29068(void);
+void func_802B6060_E27570(void);
 void func_802B66A8_E25578(void);
 void func_802B6350_E28D80(void);
 void func_802B6508_E28F38(void);
@@ -56,31 +51,31 @@ Action D_800F7C8C[39] = {
     { func_802B6348_E24388, world_action_jump_ROM_START, world_action_jump_ROM_END, TRUE },
     { func_802B6000_E24920, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
     { func_802B61C0_E24AE0, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
-    { func_802B6638_E29068, world_action_talk_ROM_START, world_action_talk_ROM_END, TRUE },
-    { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
-    { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
-    { func_802B6000_E24920, 0x00E26710, 0x00E26DE0, FALSE },
-    { func_802B6000_E24920, 0x00E26710, 0x00E26DE0, FALSE },
-    { func_802B6060_E27570, 0x00E27510, 0x00E27C90, FALSE },
-    { func_802B66A8_E25578, 0x00E24ED0, 0x00E25D60, FALSE },
-    { func_802B6350_E28D80, 0x00E28A30, 0x00E291A0, TRUE },
-    { func_802B6508_E28F38, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B6000_E24920, 0x00E27C90, 0x00E27F40, FALSE },
-    { func_802B6000_E24920, 0x00E287F0, 0x00E28A30, FALSE },
-    { func_802B6000_E24920, 0x00E27F40, 0x00E287F0, FALSE },
-    { func_802B6230_E24800, 0x00E245D0, 0x00E24920, TRUE },
-    { func_802B6120_E2A7D0, 0x00E2A6B0, 0x00E2B530, TRUE },
-    { func_802B6000_E24920, 0x00E25D60, 0x00E26710, FALSE },
-    { func_802B63D4_E28E04, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B6478_E28EA8, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B60A4_E29514, 0x00E29470, 0x00E2A340, FALSE },
-    { func_802B6000_E24920, 0x00E291A0, 0x00E29470, FALSE },
-    { func_802B6000_E24920, 0x00E2A340, 0x00E2A6B0, FALSE },
-    { func_802B6350_E28D80, 0x00E28A30, 0x00E291A0, TRUE },
-    { func_802B6000_E24920, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B6000_E24920, 0x00E245D0, 0x00E24920, TRUE },
-    { func_802B609C_E28ACC, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B6350_E28D80, 0x00E28A30, 0x00E291A0, FALSE },
-    { func_802B6350_E28D80, 0x00E236E0, 0x00E24040, FALSE },
-    { func_802B6350_E28D80, 0x00E28A30, 0x00E291A0, TRUE },
+    { func_802B6638_E29068, world_action_encounter_ROM_START, world_action_encounter_ROM_END, TRUE },
+    { func_802B6000_E24920, world_action_super_boots_ROM_START, world_action_super_boots_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_super_boots_ROM_START, world_action_super_boots_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_ultra_boots_ROM_START, world_action_ultra_boots_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_ultra_boots_ROM_START, world_action_ultra_boots_ROM_END, FALSE },
+    { func_802B6060_E27570, world_action_slide_ROM_START, world_action_slide_ROM_END, FALSE },
+    { func_802B66A8_E25578, world_action_hammer_ROM_START, world_action_hammer_ROM_END, FALSE },
+    { func_802B6350_E28D80, world_action_encounter_ROM_START, world_action_encounter_ROM_END, TRUE },
+    { func_802B6508_E28F38, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_hit_fire_ROM_START, world_action_hit_fire_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_16_ROM_START, world_action_16_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_hit_lava_ROM_START, world_action_hit_lava_ROM_END, FALSE },
+    { func_802B6230_E24800, world_action_18_ROM_START, world_action_18_ROM_END, TRUE },
+    { func_802B6120_E2A7D0, world_action_sneaky_parasol_ROM_START, world_action_sneaky_parasol_ROM_END, TRUE },
+    { func_802B6000_E24920, world_action_spin_ROM_START, world_action_spin_ROM_END, FALSE },
+    { func_802B63D4_E28E04, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B6478_E28EA8, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B60A4_E29514, world_action_use_spinning_flower_ROM_START, world_action_use_spinning_flower_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_use_munchlesia_ROM_START, world_action_use_munchlesia_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_use_tweester_ROM_START, world_action_use_tweester_ROM_END, FALSE },
+    { func_802B6350_E28D80, world_action_encounter_ROM_START, world_action_encounter_ROM_END, TRUE },
+    { func_802B6000_E24920, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B6000_E24920, world_action_18_ROM_START, world_action_18_ROM_END, TRUE },
+    { func_802B609C_E28ACC, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B6350_E28D80, world_action_encounter_ROM_START, world_action_encounter_ROM_END, FALSE },
+    { func_802B6350_E28D80, world_action_walk_ROM_START, world_action_walk_ROM_END, FALSE },
+    { func_802B6350_E28D80, world_action_encounter_ROM_START, world_action_encounter_ROM_END, TRUE },
 };

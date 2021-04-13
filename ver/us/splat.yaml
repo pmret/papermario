@@ -9987,12 +9987,14 @@ segments:
     subsegments:
     - [0xE24040, c, jump]
   - type: code
+    name: world_action_18
+    dir: world/action
     start: 0xE245D0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE245D0, c]
-    - [0xE248D0, data]
+    - [0xE245D0, c, 18]
+    - [0xE248D0, data, 18]
   - type: code
     name: world_action_land
     dir: world/action
@@ -10002,99 +10004,123 @@ segments:
     subsegments:
     - [0xE24920, c, land]
   - type: code
+    name: world_action_hammer
+    dir: world/action
     start: 0xE24ED0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE24ED0, c, E24ED0]
-    - [0xE25C80, data]
-    - [0xE25CC0, .rodata, E24ED0]
+    - [0xE24ED0, c, hammer]
+    - [0xE25C80, data, hammer]
+    - [0xE25CC0, .rodata, hammer]
   - type: code
+    name: world_action_spin
+    dir: world/action
     start: 0xE25D60
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE25D60, c, E25D60]
-    - [0xE26700, .rodata, E25D60]
+    - [0xE25D60, c, spin]
+    - [0xE26700, .rodata, spin]
   - type: code
+    name: world_action_ultra_boots
+    dir: world/action
     start: 0xE26710
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE26710, c, E26710]
-    - [0xE26DA0, .rodata, E26710]
+    - [0xE26710, c, ultra_boots]
+    - [0xE26DA0, .rodata, ultra_boots]
   - type: code
+    name: world_action_super_boots
+    dir: world/action
     start: 0xE26DE0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE26DE0, c, E26DE0]
-    - [0xE274C0, .rodata, E26DE0]
+    - [0xE26DE0, c, super_boots]
+    - [0xE274C0, .rodata, super_boots]
   - type: code
+    name: world_action_slide
+    dir: world/action
     start: 0xE27510
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE27510, c, E27510]
-    - [0xE27C50, .rodata, E27510]
+    - [0xE27510, c, slide]
+    - [0xE27C50, .rodata, slide]
   - type: code
+    name: world_action_hit_fire
+    dir: world/action
     start: 0xE27C90
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE27C90, c]
+    - [0xE27C90, c, hit_fire]
   - type: code
+    name: world_action_hit_lava
+    dir: world/action
     start: 0xE27F40
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE27F40, c, E27F40]
-    - [0xE28790, .rodata, E27F40]
+    - [0xE27F40, c, hit_lava]
+    - [0xE28790, .rodata, hit_lava]
   - type: code
+    name: world_action_16
+    dir: world/action
     start: 0xE287F0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE287F0, c]
+    - [0xE287F0, c, 16]
   - type: code
-    name: world_action_talk
+    name: world_action_encounter
     dir: world/action
     start: 0xE28A30
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE28A30, c, talk]
-    - [0xE29190, .rodata, talk]
+    - [0xE28A30, c, encounter]
+    - [0xE29190, .rodata, encounter]
   - type: code
+    name: world_action_use_munchlesia
+    dir: world/action
     start: 0xE291A0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE291A0, c, E291A0]
-    - [0xE29450, .rodata, E291A0]
+    - [0xE291A0, c, use_munchlesia]
+    - [0xE29450, .rodata, use_munchlesia]
   - type: code
+    name: world_action_use_spinning_flower
+    dir: world/action
     start: 0xE29470
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE29470, c, E29470]
-    - [0xE2A300, .rodata, E29470]
+    - [0xE29470, c, use_spinning_flower]
+    - [0xE2A300, .rodata, use_spinning_flower]
   - type: code
+    name: world_action_use_tweester
+    dir: world/action
     start: 0xE2A340
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE2A340, c, E2A340]
-    - [0xE2A690, data]
-    - [0xE2A6A0, .rodata, E2A340]
+    - [0xE2A340, c, use_tweester]
+    - [0xE2A690, data, use_tweester]
+    - [0xE2A6A0, .rodata, use_tweester]
   - type: code
+    name: world_action_sneaky_parasol
+    dir: world/action
     start: 0xE2A6B0
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE2A6B0, c, E2A6B0]
-    - [0xE2B420, data]
-    - [0xE2B440, .rodata, E2A6B0]
+    - [0xE2A6B0, c, sneaky_parasol]
+    - [0xE2B420, data, sneaky_parasol]
+    - [0xE2B440, .rodata, sneaky_parasol]
   - type: code
     dir: entity/default
     start: 0xE2B530

@@ -145,7 +145,7 @@ void func_800DFAAC(void) {
 
     check_input_midair_jump();
 
-    if (playerStatus->actionState != ACTION_STATE_SLIDING) {
+    if (playerStatus->actionState != ACTION_STATE_SLIDE) {
         collision_main_lateral();
         func_800E4508();
 

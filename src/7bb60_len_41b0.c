@@ -22,7 +22,7 @@ s32 func_800E26C4(void) {
     if (actionState == ACTION_STATE_IDLE ||
         actionState == ACTION_STATE_WALK ||
         actionState == ACTION_STATE_RUN ||
-        actionState == ACTION_STATE_TWEESTER ||
+        actionState == ACTION_STATE_USE_TWEESTER ||
         actionState == ACTION_STATE_SPIN
     ) {
         return 1;
@@ -383,11 +383,11 @@ void set_action_state(s32 actionState) {
         return;
     }
 
-    if (actionState == ACTION_STATE_HIT_HAZARD || actionState == ACTION_STATE_HIT_LAVA) {
+    if (actionState == ACTION_STATE_HIT_FIRE || actionState == ACTION_STATE_HIT_LAVA) {
         PartnerID partner;
 
         if (playerStatus->unk_BF == 3) {
-            actionState = ACTION_STATE_HIT_HAZARD;
+            actionState = ACTION_STATE_HIT_FIRE;
         }
 
         // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
@@ -402,14 +402,14 @@ void set_action_state(s32 actionState) {
         }
     }
 
-    if (actionState == ACTION_STATE_SLIDING) {
+    if (actionState == ACTION_STATE_SLIDE) {
         playerStatus->flags |= 0x10;
         playerStatus->moveFrames = 0;
         playerStatus->flags &= ~0x4000;
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
-    if (actionState == ACTION_STATE_TWEESTER) {
+    if (actionState == ACTION_STATE_USE_TWEESTER) {
         playerStatus->prevActionState = ACTION_STATE_IDLE;
     }
 
