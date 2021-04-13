@@ -141,7 +141,7 @@ class N64SegData(N64SegCodeSubsegment):
         return sym_str
     
     def disassemble_data(self, rom_bytes):
-        rodata_encountered = self.type == "rodata"
+        rodata_encountered = "rodata" in self.type
         ret = ".include \"macro.inc\"\n\n"
         ret += f'.section {self.get_linker_section()}'
 
@@ -153,9 +153,6 @@ class N64SegData(N64SegCodeSubsegment):
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
             sym = self.parent.get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
-            
-            if sym.vram_start == 0x80097D90:
-                dog = 5
             
             sym_str = f"\n\nglabel {sym.name}\n"
             dis_start = self.parent.ram_to_rom(syms[i].vram_start)

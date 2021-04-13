@@ -243,7 +243,6 @@ class N64SegCodeSubsegment(Segment):
                                     if offset != 0:
                                         offset_str = f"+0x{offset:X}"
 
-
                                 if self.parent:
                                     self.parent.check_rodata_sym(func_addr, sym)
 
@@ -358,7 +357,7 @@ class N64SegCodeSubsegment(Segment):
                 rom_offset += 4
 
     def should_scan(self) -> bool:
-        return self.should_split()
+        return options.mode_active("code")
     
     def should_split(self) -> bool:
         return self.extract and options.mode_active("code")
