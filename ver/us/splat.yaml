@@ -9979,11 +9979,13 @@ segments:
     - [0xE236E0, c, walk]
     - [0xE23FF0, data, walk]
   - type: code
+    name: world_action_jump
+    dir: world/action
     start: 0xE24040
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE24040, c]
+    - [0xE24040, c, jump]
   - type: code
     start: 0xE245D0
     vram: 0x802B6000
