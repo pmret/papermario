@@ -512,7 +512,9 @@ typedef struct Camera {
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ char unk_494[28];
+    /* 0x494 */ char unk_494[0x8];
+    /* 0x49C */ f32 unk_49C;
+    /* 0x4A0 */ char unk_4A0[0x10];
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ char unk_4BC[28];
     /* 0x4D8 */ s32 controllerType;
@@ -1060,7 +1062,10 @@ typedef struct Shadow {
     /* 0x0A */ char unk_0A[6];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ char unk_28[80];
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ char unk_2C[0x4];
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ char unk_34[0x44];
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1517,7 +1522,7 @@ typedef struct PlayerStatus {
     /* 0x00D */ char unk_0D[1];
     /* 0x00E */ u8 unk_0E;
     /* 0x00F */ u8 unk_0F;
-    /* 0x010 */ char unk_10[0x2];
+    /* 0x010 */ s16 unk_10;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */

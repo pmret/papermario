@@ -10,6 +10,8 @@
 #define UNK_FUN_PTR(name) void(*name)(void)
 #define UNK_ARGS
 
+typedef void (*UnkFunc)();
+
 /// Linker symbol address, as in `ld_addrs.h`.
 typedef u8 Addr[];
 
