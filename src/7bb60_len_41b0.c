@@ -23,7 +23,8 @@ s32 func_800E26C4(void) {
         actionState == ACTION_STATE_WALK ||
         actionState == ACTION_STATE_RUN ||
         actionState == ACTION_STATE_USE_TWEESTER ||
-        actionState == ACTION_STATE_SPIN) {
+        actionState == ACTION_STATE_SPIN
+    ) {
         return 1;
     }
 
@@ -358,12 +359,26 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->animFlags & 0x4000) {
-        if (actionState < ACTION_STATE_CONVERSATION) {
+        // TODO figure this out
+#ifdef NON_MATCHING
+        if (
+            actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
+            actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
+            actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_ABORTED_JUMP ||
+            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_7 ||
+            actionState == ACTION_STATE_FALLING || actionState == ACTION_STATE_STEP_DOWN ||
+            actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
+        ) {
+#else
+        if (actionState < ACTION_STATE_CONVERSATION)
             if (actionState >= 0) {
+#endif
                 playerStatus->prevActionState = playerStatus->actionState;
                 playerStatus->actionState = actionState;
                 playerStatus->flags |= 0x80000000;
+#ifdef NON_MATCHING
             }
+#endif
         }
         return;
     }
