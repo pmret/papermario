@@ -241,6 +241,7 @@ segments:
     - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
+    - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
     - [0x4DF30, c]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
@@ -326,7 +327,8 @@ segments:
     - [0x7bb60, c, 7bb60_len_41b0]
     - [0x7fd10, c, 7fd10_len_b40]
     - [0x80850, c, 80850_len_3060]
-    - [0x838b0, c, world/partners]
+    - [0x838B0, c, world/actions] # DUMMY ROM
+    - [0x838B0, c, world/partners]
     - [0x891b0, c, 891b0_len_fb0]
     - [0x8a160, c, 8a160_len_700]
     - [0x8a860, c, 8a860_len_3f30]
@@ -2724,6 +2726,8 @@ segments:
     overlay: True
     subalign: 4
     subsegments:
+    - [0x4309A0, c, battles] # DUMMY ROM
+    - [0x4309A0, c, goomba] # DUMMY ROM
     - [0x4309A0, c]
     - [0x431180, c]
     - [0x4313F0, c]
@@ -3319,6 +3323,7 @@ segments:
     subalign: 4
     subsegments:
     - [0x715850,     c, lib]
+    - [0x715E50,     c, mushroom] # DUMMY ROM
     - [0x715E50, .data, lib]
     - [0x71640C, .data, mushroom]
     - [0x716C60,  .bss, lib]
@@ -3330,6 +3335,7 @@ segments:
     subalign: 4
     subsegments:
     - [0x716C60,     c, lib]
+    - [0x717060,     c, fire_flower] # DUMMY ROM
     - [0x717060, .data, lib]
     - [0x71761C, .data, fire_flower]
     - [0x7179D0,  .bss, lib]
@@ -3340,6 +3346,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7179D0,       c, lib]
+    - [0x717C10,       c, dusty_hammer] # DUMMY ROM
     - [0x717C10,   .data, lib]
     - [0x7181D0,     ci4, dusty_hammer, 32, 32]
     - [0x7183D0, palette, dusty_hammer]

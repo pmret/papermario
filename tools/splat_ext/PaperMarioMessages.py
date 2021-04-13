@@ -485,9 +485,11 @@ class N64SegPaperMarioMessages(N64Segment):
     def write_markup(self, markup):
         self.f.write(re.sub("\n", "\n\t", markup))
 
-        if markup == "[Font Title]\n" or markup == "[Font Subtitle]\n":
+        markup_lower = markup.lower()
+
+        if markup_lower == "[font title]\n" or markup_lower == "[font subtitle]\n":
             self.root_charset = CHARSET_CREDITS
-        elif markup == "[Font Standard]":
+        elif markup_lower == "[font standard]":
             self.root_charset = CHARSET
 
     def cache(self):

@@ -203,6 +203,7 @@ class Configure:
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
+        import segtypes.n64.data # Doesn't get imported on jp for some odd reason (should maybe be a * import?)
 
         assert self.linker_entries is not None
 
