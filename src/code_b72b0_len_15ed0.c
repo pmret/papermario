@@ -226,7 +226,7 @@ void func_80122D7C(s32 idx, u32* arg1) {
     u32* phi_a1;
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if (entityModel != NULL && (entityModel->flags)) {
+    if (entityModel != NULL && entityModel->flags) {
         phi_a1 = arg1;
         if (arg1 == NULL) {
             phi_a1 = &D_8014C260;
@@ -247,7 +247,7 @@ void free_entity_model_by_index(s32 idx) {
     EntityModelList** entityModelList = &gCurrentEntityModelList;
     EntityModel* entityModel = (**entityModelList)[index];
 
-    if (entityModel != NULL && (entityModel->flags)) {
+    if (entityModel != NULL && entityModel->flags) {
         if (entityModel->flags & 0x400) {
             heap_free(entityModel->displayList);
         }
@@ -277,7 +277,7 @@ void free_entity_model_by_ref(EntityModel* entityModel) {
 void set_entity_model_flags(s32 idx, s32 newFlags) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
-    if (entityModel != NULL && (entityModel->flags)) {
+    if (entityModel != NULL && entityModel->flags) {
         entityModel->flags |= newFlags;
     }
 }
