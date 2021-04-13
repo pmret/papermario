@@ -1704,7 +1704,7 @@ typedef struct struct802E2BA4 {
     /* 0x02 */ u16 unk_02[24][2];
 } struct802E2BA4;
 
-// from code_102c80, size unknown.
+// from 102c80, size unknown.
 typedef struct struct802E1400 {
     /* 0x000 */ Vec3f unk_00;
     /* 0x00C */ char unk_0C[4];
@@ -1734,7 +1734,7 @@ typedef struct struct802E1400 {
     /* 0x188 */ f32 unk_188[24];
 } struct802E1400;
 
-// from code_104940_len_dc0, size unknown
+// from 104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
 typedef struct struct802E3650 {
     /* 0x000 */ u8 unk_00;

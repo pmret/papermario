@@ -20,7 +20,7 @@ Gfx N(displayList)[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, &N(mystery_pal_png)),
+    gsDPLoadTLUT_pal16(0, &N(mystery_pal)),
     gsDPLoadTextureTile_4b(&N(mystery_png), G_IM_FMT_CI, N(mystery_png_width), N(mystery_png_height), 0, 0, N(mystery_png_width) - 1, N(mystery_png_height) - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
