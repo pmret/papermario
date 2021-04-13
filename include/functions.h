@@ -215,7 +215,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(s32* updateFunc, void (*drawFunc)(void));
+s32 bind_dynamic_entity_7(void (*updateFunc)(void), void (*drawFunc)(void));
 s32 get_dynamic_entity(s32 arg0);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
