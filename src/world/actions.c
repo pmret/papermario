@@ -2,26 +2,28 @@
 #include "ld_addrs.h"
 #include "actions.h"
 
+// Overlays
 #include "action/idle.h"
+#include "action/walk.h"
 
-s32 func_802B6000_E24920();
-s32 func_802B6288_E23968();
-s32 func_802B60B4_E240F4();
-s32 func_802B6198_E241D8();
-s32 func_802B6294_E242D4();
-s32 func_802B6060_E27570();
-s32 func_802B6348_E24388();
-s32 func_802B61C0_E24AE0();
-s32 func_802B6638_E29068();
-s32 func_802B66A8_E25578();
-s32 func_802B6350_E28D80();
-s32 func_802B6508_E28F38();
-s32 func_802B6230_E24800();
-s32 func_802B6120_E2A7D0();
-s32 func_802B63D4_E28E04();
-s32 func_802B6478_E28EA8();
-s32 func_802B60A4_E29514();
-s32 func_802B609C_E28ACC();
+void func_802B6000_E24920(void);
+void func_802B6288_E23968(void);
+void func_802B60B4_E240F4(void);
+void func_802B6198_E241D8(void);
+void func_802B6294_E242D4(void);
+void func_802B6060_E27570(void);
+void func_802B6348_E24388(void);
+void func_802B61C0_E24AE0(void);
+void func_802B6638_E29068(void);
+void func_802B66A8_E25578(void);
+void func_802B6350_E28D80(void);
+void func_802B6508_E28F38(void);
+void func_802B6230_E24800(void);
+void func_802B6120_E2A7D0(void);
+void func_802B63D4_E28E04(void);
+void func_802B6478_E28EA8(void);
+void func_802B60A4_E29514(void);
+void func_802B609C_E28ACC(void);
 
 f32 D_800F7B40 = 0.0f;
 s32 D_800F7B44 = 0;
@@ -38,11 +40,12 @@ s32 D_800F7B94[] = { 0x00390000, 0x00390002, 0x00390003, 0x00390004, 0x00390005,
 s32 D_800F7C1C[] = { 0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000 };
 s32 D_800F7C30[] = { 0x0058001B, 0x00580001, 0x00580004, 0x00580006, 0x00580008, 0x00580000, 0x0058001B, 0x005A0003, 0x005A0006, 0x005A0009, 0x005A000B, 0x005A0000, 0x005A001A, 0x00390002, 0x00390003, 0x00390004, 0x00390005, 0x00390000, 0x00390014 };
 void* D_800F7C7C[] = { &D_800F7BE8, &D_800F7BE8, &D_800F7BBC, &D_800F7B94 };
+
 Action D_800F7C8C[39] = {
     // TODO: ld addrs
-    { world_action_idle_update, &world_action_idle_ROM_START, &world_action_idle_ROM_END, TRUE },
-    (s32) &func_802B6000_E24920, 0x00E236E0, 0x00E24040, TRUE,
-    (s32) &func_802B6288_E23968, 0x00E236E0, 0x00E24040, TRUE,
+    { world_action_idle_update, world_action_idle_ROM_START, world_action_idle_ROM_END, TRUE },
+    { func_802B6000_E24920, world_action_walk_ROM_START, world_action_walk_ROM_END, TRUE },
+    { func_802B6288_E23968, world_action_walk_ROM_START, world_action_walk_ROM_END, TRUE },
     (s32) &func_802B60B4_E240F4, 0x00E24040, 0x00E245D0, TRUE,
     (s32) &func_802B60B4_E240F4, 0x00E24040, 0x00E245D0, TRUE,
     (s32) &func_802B60B4_E240F4, 0x00E24040, 0x00E245D0, FALSE,
