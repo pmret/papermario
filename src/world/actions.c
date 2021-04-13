@@ -6,6 +6,7 @@
 #include "action/idle.h"
 #include "action/walk.h"
 #include "action/jump.h"
+#include "action/land.h"
 
 void func_802B6000_E24920(void);
 void func_802B6288_E23968(void);
@@ -43,7 +44,6 @@ s32 D_800F7C30[] = { 0x0058001B, 0x00580001, 0x00580004, 0x00580006, 0x00580008,
 void* D_800F7C7C[] = { &D_800F7BE8, &D_800F7BE8, &D_800F7BBC, &D_800F7B94 };
 
 Action D_800F7C8C[39] = {
-    // TODO: ld addrs
     { world_action_idle_update, world_action_idle_ROM_START, world_action_idle_ROM_END, TRUE },
     { func_802B6000_E24920, world_action_walk_ROM_START, world_action_walk_ROM_END, TRUE },
     { func_802B6288_E23968, world_action_walk_ROM_START, world_action_walk_ROM_END, TRUE },
@@ -54,8 +54,8 @@ Action D_800F7C8C[39] = {
     { func_802B6198_E241D8, world_action_jump_ROM_START, world_action_jump_ROM_END, FALSE },
     { func_802B6294_E242D4, world_action_jump_ROM_START, world_action_jump_ROM_END, TRUE },
     { func_802B6348_E24388, world_action_jump_ROM_START, world_action_jump_ROM_END, TRUE },
-    { func_802B6000_E24920, 0x00E24920, 0x00E24ED0, TRUE },
-    { func_802B61C0_E24AE0, 0x00E24920, 0x00E24ED0, TRUE },
+    { func_802B6000_E24920, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
+    { func_802B61C0_E24AE0, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
     { func_802B6638_E29068, 0x00E28A30, 0x00E291A0, TRUE },
     { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
     { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
