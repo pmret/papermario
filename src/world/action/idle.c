@@ -1,9 +1,5 @@
 #include "idle.h"
 
-// Awkward func_800DFEFC (set player anim?) branching
-// #ifndef NON_MATCHING
-// INCLUDE_ASM(void, "world/action/idle", world_action_idle_update, void);
-// #else
 void input_to_move_vector(f32* angle, f32* magnitude);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
@@ -11,9 +7,9 @@ s32 check_input_hammer(void);
 void world_action_idle_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    s32 phi_s1 = 0;
+    s32 wasMoving = FALSE;
 
-    if (playerStatus->animFlags & 0x1000) {
+    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
         func_802B61E4_E23444();
         return;
     }
@@ -24,7 +20,7 @@ void world_action_idle_update(void) {
         s32 anim;
 
         playerStatus->flags &= ~0x8008000E;
-        phi_s1 = 1;
+        wasMoving = TRUE;
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
         playerStatus->decorationList = 0;
@@ -32,9 +28,9 @@ void world_action_idle_update(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0;
 
-        if (playerStatus->animFlags & 0x4000) {
+        if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
             anim = 0x90002;
-        } else if (!(playerStatus->animFlags & 1)) {
+        } else if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_HOLDING_ITEM)) {
             anim = 0x10002;
         } else if ((s8)playerStatus->prevActionState == ACTION_STATE_IDLE) {
             anim = 0x60005;
@@ -44,19 +40,20 @@ void world_action_idle_update(void) {
         func_800DFEFC(anim);
     }
 
-    if (playerStatus->animFlags & 0x200) {
-        set_action_state(ACTION_STATE_1C);
+    if (playerStatus->animFlags & PLAYER_ANIM_FLAG_GET_STAR_SPIRIT) {
+        set_action_state(ACTION_STATE_GET_STAR_SPIRIT);
     } else {
         f32 angle;
         f32 magnitude;
 
         input_to_move_vector(&angle, &magnitude);
         func_800E5150();
+
         if (check_input_jump()) {
             if (magnitude != 0.0f || playerStatus->targetYaw != angle) {
                 playerStatus->targetYaw = angle;
             }
-        } else if (phi_s1 || !check_input_hammer()) {
+        } else if (wasMoving || !check_input_hammer()) {
             if (magnitude == 0.0f) {
                 playerData->idleFrameCounter++;
             } else {
@@ -70,6 +67,6 @@ void world_action_idle_update(void) {
         }
     }
 }
-// #endif
 
+// peach
 INCLUDE_ASM(void, "world/action/idle", func_802B61E4_E23444, void);

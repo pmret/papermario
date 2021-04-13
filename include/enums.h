@@ -1346,35 +1346,43 @@ enum ActionStates {
     ACTION_STATE_WALK,
     ACTION_STATE_RUN,
     ACTION_STATE_JUMP,
-    ACTION_STATE_BOUNCE,
-    ACTION_STATE_ABORTED_JUMP,
-    ACTION_STATE_LAUNCH,
-    ACTION_STATE_7,
+    ACTION_STATE_BOUNCE,            ///< Used with Kooper
+    ACTION_STATE_HOP,               ///< Released A before apex of jump
+    ACTION_STATE_LAUNCH,            ///< Shy Guy Toybox jack-in-the-boxes
+    ACTION_STATE_LAND_ON_SWITCH,    ///< Small red/blue ! switches
     ACTION_STATE_FALLING,
     ACTION_STATE_STEP_DOWN,
     ACTION_STATE_LAND,
     ACTION_STATE_STEP_DOWN_LAND,
 
     // Following action states prohibit movement (see set_action_state())
-    ACTION_STATE_TALK,
+    ACTION_STATE_TALK,              ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP,
     ACTION_STATE_GROUND_POUND,
     ACTION_STATE_ULTRA_JUMP,
     ACTION_STATE_ULTRA_POUND,
     ACTION_STATE_SLIDING,
     ACTION_STATE_HAMMER,
-    ACTION_STATE_HIT_HAZARD             = 21,
+    ACTION_STATE_13,
+    ACTION_STATE_14,
+    ACTION_STATE_HIT_HAZARD,
     ACTION_STATE_UNKNOWN_16,
     ACTION_STATE_HIT_LAVA,
     ACTION_STATE_18,
-    ACTION_STATE_SPIN                   = 26,
+    ACTION_STATE_SNEAKY_PARASOL,
+    ACTION_STATE_SPIN,
     ACTION_STATE_ENEMY_FIRST_STRIKE,
-    ACTION_STATE_1C,
-    ACTION_STATE_SPINNING_FLOWER        = 29,
-    ACTION_STATE_USE_TWEESTER           = 31,
-    ACTION_STATE_RIDE                   = 33,
+    ACTION_STATE_GET_STAR_SPIRIT,
+    ACTION_STATE_SPINNING_FLOWER,
+    ACTION_STATE_1E,
+    ACTION_STATE_TWEESTER,
+    ACTION_STATE_BOUNCE_OFF_SWITCH, ///< Small red/blue ! switches
+    ACTION_STATE_RIDE,
     ACTION_STATE_STEP_UP,
-    ACTION_STATE_USE_SPRING             = 38,
+    ACTION_STATE_23,
+    ACTION_STATE_24,
+    ACTION_STATE_25,
+    ACTION_STATE_USE_SPRING,
 };
 
 typedef s32 NpcID;
@@ -1553,6 +1561,25 @@ enum NpcFlags {
 
     NPC_FLAG_40000000          = 0x40000000,
     NPC_FLAG_80000000          = 0x80000000,
+};
+
+// XXX bad name
+/// @see PlayerStatus::animFlags
+enum PlayerAnimFlags {
+    PLAYER_ANIM_FLAG_HOLDING_ITEM    = 0x00000001,
+    PLAYER_ANIM_FLAG_2               = 0x00000002,
+    PLAYER_ANIM_FLAG_4               = 0x00000004,
+    PLAYER_ANIM_FLAG_8               = 0x00000008,
+    PLAYER_ANIM_FLAG_INTERACT_PROMPT = 0x00000010, ///< ! prompt
+    PLAYER_ANIM_FLAG_SPEECH_PROMPT   = 0x00000020, ///< (...) prompt
+    PLAYER_ANIM_FLAG_40              = 0x00000040,
+    PLAYER_ANIM_FLAG_PULSE_STONE     = 0x00000080,
+    PLAYER_ANIM_FLAG_100             = 0x00000100,
+    PLAYER_ANIM_FLAG_GET_STAR_SPIRIT = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_ANIM_FLAG_SHIVER          = 0x00000400,
+    PLAYER_ANIM_FLAG_PEACH_PHYSICS   = 0x00001000,
+    PLAYER_ANIM_FLAG_IN_DISGUISE     = 0x00002000,
+    PLAYER_ANIM_FLAG_8BIT_MARIO      = 0x00004000,
 };
 
 #endif

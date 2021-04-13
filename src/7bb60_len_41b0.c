@@ -22,7 +22,7 @@ s32 func_800E26C4(void) {
     if (actionState == ACTION_STATE_IDLE ||
         actionState == ACTION_STATE_WALK ||
         actionState == ACTION_STATE_RUN ||
-        actionState == ACTION_STATE_USE_TWEESTER ||
+        actionState == ACTION_STATE_TWEESTER ||
         actionState == ACTION_STATE_SPIN
     ) {
         return 1;
@@ -98,7 +98,7 @@ void gravity_use_fall_params(void) {
 void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->actionState != ACTION_STATE_7 && playerStatus->actionState != ACTION_STATE_BOUNCE) {
+    if (playerStatus->actionState != ACTION_STATE_LAND_ON_SWITCH && playerStatus->actionState != ACTION_STATE_BOUNCE) {
         f32* temp;
 
         playerStatus->position.y = func_800E3514(func_800E34D8(), &temp);
@@ -364,8 +364,8 @@ void set_action_state(s32 actionState) {
         if (
             actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
             actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
-            actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_ABORTED_JUMP ||
-            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_7 ||
+            actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_HOP ||
+            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LAND_ON_SWITCH ||
             actionState == ACTION_STATE_FALLING || actionState == ACTION_STATE_STEP_DOWN ||
             actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
         ) {
@@ -409,7 +409,7 @@ void set_action_state(s32 actionState) {
     }
 
     playerStatus->prevActionState = playerStatus->actionState;
-    if (actionState == ACTION_STATE_USE_TWEESTER) {
+    if (actionState == ACTION_STATE_TWEESTER) {
         playerStatus->prevActionState = ACTION_STATE_IDLE;
     }
 
@@ -500,7 +500,7 @@ void check_input_spin(void) {
     Temp8010F250* temp_8010F250 = &D_8010F250;
     Temp8010F250* temp2 = temp_8010F250;
 
-    if (!(playerStatus->flags & 0x5000) &&
+    if (!(playerStatus->flags & (PLAYER_ANIM_FLAG_8BIT_MARIO | PLAYER_ANIM_FLAG_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(ABILITY_SLOW_GO)) {
@@ -541,9 +541,9 @@ void func_800E63A4(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (arg0 != 0) {
-        set_action_state(0x19);
+        set_action_state(ACTION_STATE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~0x2000;
+        playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         npc_free_by_index(D_8010C96C);
@@ -567,17 +567,17 @@ void func_800E6428(void) {
             if (*temp_8010C92C == 0) {
                 GameStatus** gameStatus = &gGameStatusPtr;
                 if ((*gameStatus)->peachFlags & 2) {
-                    playerStatus->animFlags |= 0x2000;
+                    playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
                     (*gameStatus)->peachFlags |= 2;
 
                     disguiseNpc = make_disguise_npc((*gameStatus)->peachDisguise);
                     if (disguiseNpc != NULL) {
-                        disguiseNpc->flags &= ~0x40000;
+                        disguiseNpc->flags &= ~NPC_FLAG_40000;
                     }
                 }
             }
         } else if (gGameStatusPtr->peachFlags & 4 && playerStatus2->pressedButtons & B_BUTTON) {
-            set_action_state(0x19);
+            set_action_state(ACTION_STATE_SNEAKY_PARASOL);
         }
     }
 }
@@ -588,7 +588,7 @@ void func_800E6500(void) {
     if (D_8010C96C >= 0) {
         Npc* npc = get_npc_by_index(D_8010C96C);
 
-        if (npc->flags & 0x40000) {
+        if (npc->flags & NPC_FLAG_40000) {
             npc->renderYaw = playerStatus->spriteFacingAngle;
         } else {
             npc->yaw = playerStatus->targetYaw;
