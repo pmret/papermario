@@ -1557,7 +1557,7 @@ typedef struct PlayerStatus {
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
-    /* 0x08C */ char unk_8C[4];
+    /* 0x08C */ s32 unk_8C;
     /* 0x090 */ f32 unk_90;
     /* 0x094 */ char unk_94[12];
     /* 0x0A0 */ f32 heading;

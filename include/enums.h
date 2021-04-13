@@ -1369,6 +1369,7 @@ enum ActionStates {
     ACTION_STATE_18,
     ACTION_STATE_SPIN                   = 26,
     ACTION_STATE_ENEMY_FIRST_STRIKE,
+    ACTION_STATE_1C,
     ACTION_STATE_SPINNING_FLOWER        = 29,
     ACTION_STATE_USE_TWEESTER           = 31,
     ACTION_STATE_RIDE                   = 33,

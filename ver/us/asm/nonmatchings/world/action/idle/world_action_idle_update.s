@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802B6000_E23260
+glabel world_action_idle_update
 /* E23260 802B6000 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* E23264 802B6004 AFB1001C */  sw        $s1, 0x1c($sp)
 /* E23268 802B6008 AFB00018 */  sw        $s0, 0x18($sp)
