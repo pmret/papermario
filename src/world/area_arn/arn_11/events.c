@@ -1,6 +1,10 @@
 #include "arn_11.h"
 #include "sprite/npc/tubbas_heart.h"
 
+enum {
+    NPC_TUBBAS_HEART,
+};
+
 Script N(802400F0) = SCRIPT({
     SetCamType(0, 6, 1);
     SetCamSpeed(0, 3.0);
@@ -17,30 +21,30 @@ Script N(802401BC) = SCRIPT({
     sleep 30;
     SetPlayerSpeed(3.0);
     PlayerMoveTo(6, 0, 0);
-    SpeakToPlayer(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BF));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BF));
     sleep 10;
-    SetPlayerAnimation(0x80007);
+    SetPlayerAnimation(ANIM_80007);
     sleep 40;
-    SpeakToPlayer(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C0));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C0));
     SetPlayerAnimation(ANIM_10002);
     sleep 10;
     SetPlayerAnimation(0x90000);
     sleep 30;
-    SpeakToPlayer(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C1));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C1));
     SetPlayerAnimation(ANIM_10002);
     sleep 20;
     SetPlayerAnimation(0x90000);
     spawn {
-        SetNpcJumpscale(NPC_PLAYER, 2.5);
-        GetNpcPos(NPC_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-        NpcJump0(NPC_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
+        GetNpcPos(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
         sleep 1;
-        PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-        NpcJump0(NPC_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
+        PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
     }
     sleep 40;
-    SpeakToPlayer(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C2));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C2));
     SetPlayerAnimation(0x90000);
     sleep 10;
     SetNpcVar(0, 0, 1);
@@ -248,7 +252,7 @@ Script N(init_80240E70) = SCRIPT({
 });
 
 StaticNpc N(npcGroup_80240EEC) = {
-    .id = 0,
+    .id = NPC_TUBBAS_HEART,
     .settings = &N(npcSettings_802406A0),
     .pos = { 119.0f, 60.0f, 0.0f },
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000,

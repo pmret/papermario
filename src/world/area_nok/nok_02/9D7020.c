@@ -15,7 +15,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 /*
 ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &D_80241C68_BE09F8;
+    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
     s32* test;
 
@@ -29,11 +29,11 @@ ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
         for (i = 0, test = *ptr; i < 16; i++) {
             script->varTable[i] = *test++;
         }
-        ptr = &D_80241C68_BE09F8;
+        ptr = &N(D_80241C68_BE09F8);
         heap_free(*ptr);
         *ptr = NULL;
     }
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -65,10 +65,10 @@ ApiStatus N(func_80240624_9D7644)(ScriptInstance* script, s32 isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
         set_variable(script, *args, D_80241CD0_BE0A60);
-        return 2;
+        return ApiStatus_DONE2;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 */
 
@@ -79,7 +79,7 @@ ApiStatus N(func_80240678_9D7698)(ScriptInstance* script, s32 isInitialCall) {
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

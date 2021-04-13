@@ -53,7 +53,7 @@ glabel func_80240688_E1EAE8
 /* E1EBA8 80240748 00000000 */   nop
 /* E1EBAC 8024074C 0C037F14 */  jal       clear_player_status
 /* E1EBB0 80240750 00000000 */   nop
-/* E1EBB4 80240754 0C00E12F */  jal       clear_npcs
+/* E1EBB4 80240754 0C00E12F */  jal       npc_list_clear
 /* E1EBB8 80240758 00000000 */   nop
 /* E1EBBC 8024075C 0C039CE8 */  jal       clear_player_data
 /* E1EBC0 80240760 00000000 */   nop

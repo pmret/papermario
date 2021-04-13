@@ -78,7 +78,7 @@ typedef struct CamPosSettings {
 
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
-    /* 0x01 */ u8 level;
+    /* 0x01 */ s8 level;
     /* 0x02 */ s16 unk_02[3];
 } PartnerData; // size = 0x08
 
@@ -348,7 +348,13 @@ typedef struct Entity {
 
 typedef Entity* EntityList[MAX_ENTITIES];
 
-typedef UNK_TYPE* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
+typedef struct DynamicEntity {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ void (*update)(void);
+    /* 0x08 */ void (*draw)(void);
+} DynamicEntity;
+
+typedef DynamicEntity* DynamicEntityList[MAX_DYNAMIC_ENTITIES];
 
 typedef struct StaticEntityData {
     /* 0x00 */ s16 flags;
@@ -1717,7 +1723,7 @@ typedef struct struct802E2BA4 {
     /* 0x02 */ u16 unk_02[24][2];
 } struct802E2BA4;
 
-// from code_102c80, size unknown.
+// from 102c80, size unknown.
 typedef struct struct802E1400 {
     /* 0x000 */ Vec3f unk_00;
     /* 0x00C */ char unk_0C[4];
@@ -1747,7 +1753,7 @@ typedef struct struct802E1400 {
     /* 0x188 */ f32 unk_188[24];
 } struct802E1400;
 
-// from code_104940_len_dc0, size unknown
+// from 104940_len_dc0, size unknown
 // appears to belong to the hammer blocks(?)
 typedef struct struct802E3650 {
     /* 0x000 */ u8 unk_00;
@@ -1848,5 +1854,24 @@ typedef struct Temp8025D160_2 {
     /* 0x24 */ char unk_24[8];
     /* 0x2C */ s32 unk_2C;
 } Temp8025D160_2; // size = 0x30 (?)
+
+typedef struct EntityModel {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ u8 renderMode;
+    /* 0x05 */ u8 unk_05;
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ u8 unk_07;
+    /* 0x08 */ f32 nextFrameTime; ///< Set to 1.0 after each update
+    /* 0x0C */ f32 timeScale; ///< Default is 1.0
+    /* 0x10 */ s32* cmdListReadPos;
+    /* 0x14 */ Gfx* displayList;
+    /* 0x18 */ Matrix4s transform;
+    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x5C */ Vtx* vertexArray;
+    /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
+    /* 0x64 */ s32 setupGfxCallbackArg0;
+} EntityModel; // size = 0x68
+
+typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
 
 #endif

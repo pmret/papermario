@@ -19,6 +19,7 @@
 #define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
 #define CAM(id) (&gCameras[id])
+#define CAM2(id) ({ Camera* c = gCameras; &c[id]; })
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
 #define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])
 
@@ -29,12 +30,12 @@
 #define OVERRIDE_FLAG_UNSET(flag) { s32* overrideFlags = &gOverrideFlags; *overrideFlags &= ~flag; }
 #define OVERRIDE_FLAG_CHECK(flag) ({ s32* overrideFlags = &gOverrideFlags; *overrideFlags & flag; })
 
-
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 
 #define MAX_ANIMATED_MODELS 16
 #define MAX_ANIMATED_MESHES 16
+#define MAX_ENTITY_MODELS 256
 #define MAX_MODELS 256
 #define MAX_SCRIPTS 128
 #define MAX_NPCS 64
@@ -53,8 +54,7 @@
 { \
     ScriptList** temp = &gCurrentScriptListPtr; \
     s32 *numScripts = &gNumScripts; \
-    new = heap_malloc(sizeof(ScriptInstance)); \
-    (**temp)[index] = new; \
+    (**temp)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
     (*numScripts)++; \
     ASSERT(new != NULL); \
 }

@@ -6,6 +6,11 @@ extern Npc* wPartnerNpc;
 void func_800EF3C0(s32, s32);
 void func_800EF3D4(s16);
 
+enum {
+    NPC_TUBBAS_HEART,
+    NPC_YAKKEY,
+};
+
 Script N(802403B0) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
@@ -50,21 +55,21 @@ Script N(8024049C) = SCRIPT({
                 SetNpcPos(NPC_PARTNER, 1000, 1000, 0);
                 RotateModel(0, 80, 0, -1, 0);
                 RotateModel(1, 80, 0, -1, 0);
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
-                SetNpcJumpscale(NPC_PLAYER, 2.5);
-                PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-                NpcJump0(NPC_PLAYER, -50, 0, 50, 10);
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -50, 0, 50, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
                 sleep 1;
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
-                PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-                NpcJump0(NPC_PLAYER, -110, 0, 110, 10);
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -110, 0, 110, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
                 sleep 1;
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
-                PlaySoundAtNpc(NPC_PLAYER, 0x20C8, 0);
-                NpcJump0(NPC_PLAYER, -180, 0, 180, 10);
-                SetNpcAnimation(NPC_PLAYER, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
+                NpcJump0(NPC_TUBBAS_HEART, -180, 0, 180, 10);
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
                 sleep 1;
                 MakeLerp(80, 0, 10, 0);
                 loop {
@@ -117,7 +122,7 @@ Script N(main) = SCRIPT({
     spawn N(80240300);
 });
 
-static s32 N(pad_A6C)[] = {
+static s32 N(pad_A6C) = {
     0x00000000,
 };
 
@@ -269,7 +274,7 @@ Script N(8024118C) = SCRIPT({
     spawn N(80240CC0);
 });
 
-static s32 N(pad_11FC)[] = {
+static s32 N(pad_11FC) = {
     0x00000000,
 };
 
@@ -336,7 +341,7 @@ Script N(init_802413E8) = SCRIPT({
 });
 
 StaticNpc N(npcGroup_80241448) = {
-    .id = 0,
+    .id = NPC_TUBBAS_HEART,
     .settings = &N(npcSettings_80241220),
     .pos = { -23.0f, 75.0f, 31.0f },
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
@@ -366,7 +371,7 @@ StaticNpc N(npcGroup_80241448) = {
 };
 
 StaticNpc N(npcGroup_80241638) = {
-    .id = 1,
+    .id = NPC_YAKKEY,
     .settings = &N(npcSettings_8024124C),
     .pos = { 38.0f, 0.0f, 97.0f },
     .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_Y_MOVEMENT,
@@ -402,7 +407,7 @@ NpcGroupList N(npcGroupList_80241828) = {
     {},
 };
 
-static s32 N(pad_184C)[] = {
+static s32 N(pad_184C) = {
     0x00000000,
 };
 

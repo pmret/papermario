@@ -10,7 +10,7 @@ NpcAISettings N(npcAISettings_80240370) = {
     .alertRadius = 250.0f,
     .unk_14 = 2,
     .chaseSpeed = 3.5f,
-    .unk_1C = 45,
+    .unk_1C = { .s = 45 },
     .unk_20 = 6,
     .chaseRadius = 300.0f,
     .unk_2C = 1,

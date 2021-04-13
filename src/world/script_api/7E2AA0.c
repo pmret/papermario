@@ -36,7 +36,7 @@ ApiStatus func_80281C84(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E2AA0", MakeDoorAdvanced);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E2AA0", MakeDoorAdvanced, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802822A8);
 

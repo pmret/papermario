@@ -46,10 +46,10 @@ ApiStatus N(func_8024114C_D6572C)(ScriptInstance* script, s32 isInitialCall) {
         ptr = &D_80241CCC_BE0A5C;
         *ptr = 0;
         set_variable(script, *args, D_80241CD0_BE0A60);
-        return 2;
+        return ApiStatus_DONE2;
     }
 
-    return 0;
+    return ApiStatus_BLOCK;
 }
 */
 
@@ -60,7 +60,7 @@ ApiStatus N(func_802411A0_D65780)(ScriptInstance* script, s32 isInitialCall) {
     
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 
@@ -72,9 +72,9 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241310_D658F0);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
 /*
-s) {
+ApiStatus N(func_802413A4_D65984)(ScriptInstance* script, s32 isInitialCall) {
     func_800EB168(get_variable(script, *script->ptrReadPos));
-    return 2;
+    return ApiStatus_DONE2;
 }
 */
 

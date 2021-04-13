@@ -1,12 +1,9 @@
-import os
 from segtypes.n64.segment import N64Segment
-from pathlib import Path
 from util.n64 import Yay0decompress
 from util.color import unpack_color
 from util.iter import iter_in_groups
 from util import options
 import png
-
 
 def decode_null_terminated_ascii(data):
     length = 0
@@ -17,23 +14,35 @@ def decode_null_terminated_ascii(data):
 
     return data[:length].decode('ascii')
 
-
 def parse_palette(data):
-        palette = []
+    palette = []
 
-        for a, b in iter_in_groups(data, 2):
-            palette.append(unpack_color([a, b]))
+    for a, b in iter_in_groups(data, 2):
+        palette.append(unpack_color([a, b]))
 
-        return palette
+    return palette
 
+def add_file_ext(name: str) -> str:
+    if name.startswith("party_"):
+        return name + ".png"
+    elif name.endswith("_hit") or name.endswith("_shape"):
+        return name + ".bin" # TODO: xml
+    elif name.endswith("_tex"):
+        return name + ".bin" # TODO: texture archive
+    elif name.endswith("_bg"):
+        return name + ".png"
+    else:
+        return name + ".bin"
 
 class N64SegPaperMarioMapFS(N64Segment):
-    def __init__(self, segment, next_segment):
-        super().__init__(segment, next_segment)
+    def __init__(self, segment, rom_start, rom_end):
+        super().__init__(segment, rom_start, rom_end)
 
-    def split(self, rom_bytes, base_path):
-        bin_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin"))
-        img_party_dir = self.create_split_dir(base_path, options.get("assets_dir", "img") + "/party")
+        self.files = segment["files"]
+
+    def split(self, rom_bytes):
+        fs_dir = options.get_asset_path() / self.dir / self.name
+        fs_dir.mkdir(parents=True, exist_ok=True)
 
         data = rom_bytes[self.rom_start: self.rom_end]
 
@@ -51,30 +60,16 @@ class N64SegPaperMarioMapFS(N64Segment):
 
             if offset == 0:
                 path = None
-            elif name.startswith("party_"):
-                path = os.path.join(img_party_dir, "{}.png".format(name))
-            elif name.endswith("_hit") or name.endswith("_shape"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
-                path = os.path.join(map_dir, "{}.bin".format(name))
-            elif name.endswith("_tex"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
-                path = os.path.join(map_dir, "{}.bin".format(name))
-            elif name.endswith("_bg"):
-                map_dir = self.create_split_dir(base_path, options.get("assets_dir", "bin") + f"/map")
-                path = os.path.join(map_dir, "{}.png".format(name))
             else:
-                path = os.path.join(bin_dir, "{}.bin".format(name))
+                path = fs_dir / add_file_ext(name)
 
             if name == "end_data":
                 break
 
-            bytes = rom_bytes[self.rom_start + 0x20 +
-                                offset: self.rom_start + 0x20 + offset + size]
-
-            Path(path).parent.mkdir(parents=True, exist_ok=True)
+            bytes_start = self.rom_start + 0x20 + offset
+            bytes = rom_bytes[bytes_start : bytes_start + size]
 
             if is_compressed:
-                self.log(f"Decompressing {name}...")
                 bytes = Yay0decompress.decompress_yay0(bytes)
 
             if name.startswith("party_"):
@@ -101,20 +96,20 @@ class N64SegPaperMarioMapFS(N64Segment):
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(bytes, path.split(".")[0] + ".alt.png", header_offset=0x10)
+                    write_bg_png(bytes, fs_dir / f"{name}.alt.png", header_offset=0x10)
             else:
                 with open(path, "wb") as f:
                     f.write(bytes)
 
-            self.log(f"Wrote {name} to {Path(bin_dir, path)}")
-
             asset_idx += 1
 
+    def get_linker_entries(self):
+        from segtypes.linker_entry import LinkerEntry
 
-    def get_ld_files(self):
-        return [(options.get("assets_dir", "bin"), self.name, ".data", self.rom_start)]
+        fs_dir = options.get_asset_path() / self.dir / self.name
 
-
-    @staticmethod
-    def get_default_name(addr):
-        return "assets"
+        return [LinkerEntry(
+            self,
+            [fs_dir / add_file_ext(name) for name in self.files],
+            fs_dir.with_suffix(".dat"), ".data"),
+        ]

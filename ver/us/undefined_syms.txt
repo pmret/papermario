@@ -54,3 +54,4 @@ kzn_20_bss = 0x802442D0;
 code_eb1170_bss = 0x802442D0;
 D_000001E4 = 0x1E4;
 gPauseMenuStrings = 0x8026F778;
+D_802442D0 = 0x802442D0;
