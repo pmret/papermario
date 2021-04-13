@@ -277,7 +277,7 @@ void update_encounters_conversation(void) {
             enable_player_input();
             func_800EF600();
 
-            if (playerStatus->actionState == ACTION_STATE_CONVERSATION) {
+            if (playerStatus->actionState == ACTION_STATE_TALK) {
                 set_action_state(ACTION_STATE_IDLE);
             }
 

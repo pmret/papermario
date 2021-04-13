@@ -1356,7 +1356,7 @@ enum ActionStates {
     ACTION_STATE_STEP_DOWN_LAND,
 
     // Following action states prohibit movement (see set_action_state())
-    ACTION_STATE_CONVERSATION,
+    ACTION_STATE_TALK,
     ACTION_STATE_SPIN_JUMP,
     ACTION_STATE_GROUND_POUND,
     ACTION_STATE_ULTRA_JUMP,

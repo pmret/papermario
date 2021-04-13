@@ -10057,12 +10057,14 @@ segments:
     subsegments:
     - [0xE287F0, c]
   - type: code
+    name: world_action_talk
+    dir: world/action
     start: 0xE28A30
     vram: 0x802B6000
     overlay: True
     subsegments:
-    - [0xE28A30, c, E28A30]
-    - [0xE29190, .rodata, E28A30]
+    - [0xE28A30, c, talk]
+    - [0xE29190, .rodata, talk]
   - type: code
     start: 0xE291A0
     vram: 0x802B6000

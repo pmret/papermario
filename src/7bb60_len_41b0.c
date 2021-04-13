@@ -370,7 +370,7 @@ void set_action_state(s32 actionState) {
             actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
         ) {
 #else
-        if (actionState < ACTION_STATE_CONVERSATION)
+        if (actionState < ACTION_STATE_TALK)
             if (actionState >= 0) {
 #endif
                 playerStatus->prevActionState = playerStatus->actionState;

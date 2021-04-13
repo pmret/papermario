@@ -56,7 +56,7 @@ Action D_800F7C8C[39] = {
     { func_802B6348_E24388, world_action_jump_ROM_START, world_action_jump_ROM_END, TRUE },
     { func_802B6000_E24920, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
     { func_802B61C0_E24AE0, world_action_land_ROM_START, world_action_land_ROM_END, TRUE },
-    { func_802B6638_E29068, 0x00E28A30, 0x00E291A0, TRUE },
+    { func_802B6638_E29068, world_action_talk_ROM_START, world_action_talk_ROM_END, TRUE },
     { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
     { func_802B6000_E24920, 0x00E26DE0, 0x00E27510, FALSE },
     { func_802B6000_E24920, 0x00E26710, 0x00E26DE0, FALSE },
