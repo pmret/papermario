@@ -2,7 +2,7 @@
 #include "world/partners.h"
 
 f32 func_800E34D8(void);
-f32 func_800E3514(f32, f32*);
+f32 func_800E3514(f32, s32* colliderID);
 
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
@@ -99,10 +99,11 @@ void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->actionState != ACTION_STATE_LAND_ON_SWITCH && playerStatus->actionState != ACTION_STATE_BOUNCE) {
-        f32* temp;
+        s32* colliderID;
 
-        playerStatus->position.y = func_800E3514(func_800E34D8(), &temp);
-        func_800E315C(temp);
+        playerStatus->position.y = func_800E3514(func_800E34D8(), &colliderID);
+
+        func_800E315C(colliderID);
     }
 }
 
@@ -134,7 +135,7 @@ f32 func_800E34D8(void) {
     return ret;
 }
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E3514, f32 arg0, f32* arg1);
+INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E3514, f32 arg0, s32* colliderID);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_lateral);
 

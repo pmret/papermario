@@ -436,9 +436,9 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
 
     if (!(playerStatus->position.y > -10.0f)) {
         f32 temp_f20 = func_800E34D8();
-        s32 var;
+        s32 colliderID;
 
-        playerStatus->position.y = func_800E3514(temp_f20, &var);
+        playerStatus->position.y = func_800E3514(temp_f20, &colliderID);
         script->functionTemp[0].s += fabsf(temp_f20);
 
         return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;
