@@ -29,9 +29,9 @@ glabel make_disguise_npc
 /* 7FA88 800E65D8 00031040 */  sll       $v0, $v1, 1
 /* 7FA8C 800E65DC 00431021 */  addu      $v0, $v0, $v1
 /* 7FA90 800E65E0 000210C0 */  sll       $v0, $v0, 3
-/* 7FA94 800E65E4 3C01800F */  lui       $at, %hi(D_800F7C1C)
+/* 7FA94 800E65E4 3C01800F */  lui       $at, %hi(world_actions_peachDisguises)
 /* 7FA98 800E65E8 00220821 */  addu      $at, $at, $v0
-/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, %lo(D_800F7C1C)($at)
+/* 7FA9C 800E65EC 8C227C1C */  lw        $v0, %lo(world_actions_peachDisguises)($at)
 /* 7FAA0 800E65F0 00031880 */  sll       $v1, $v1, 2
 /* 7FAA4 800E65F4 AFA00018 */  sw        $zero, 0x18($sp)
 /* 7FAA8 800E65F8 AFA0001C */  sw        $zero, 0x1c($sp)

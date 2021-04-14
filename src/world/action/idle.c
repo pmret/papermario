@@ -1,8 +1,18 @@
 #include "common.h"
+#include "../actions.h"
 
 void input_to_move_vector(f32* angle, f32* magnitude);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
+
+NpcAnimID world_action_idle_peachAnims[] = {
+    0x000A0001, // Idle
+
+    // Cooking:
+    0x000A0007, 0x000A0009, 0x000A000B, 0x000A000D, 0x000A000F, 0x000A0011, 0x000A0013,
+    0x000A0015, 0x000A0017, 0x000A0019, 0x000A001B, 0x000A001D, 0x000A001F, 0x000A0021, 0x000A0023,
+    0x000A0025, 0x000A0027, 0x000A0029, 0x00000000,
+};
 
 void world_action_idle_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -17,7 +27,7 @@ void world_action_idle_update(void) {
     playerStatus->framesOnGround++;
 
     if (playerStatus->flags & 0x80000000) {
-        s32 anim;
+        NpcAnimID anim;
 
         playerStatus->flags &= ~0x8008000E;
         wasMoving = TRUE;
@@ -68,5 +78,89 @@ void world_action_idle_update(void) {
     }
 }
 
-// peach
+#ifndef NON_MATCHING
 INCLUDE_ASM(void, "world/action/idle", func_802B61E4_E23444, void);
+#else
+void func_802B61E4_E23444(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+
+    if (playerStatus->flags & 0x80000000) {
+        GameStatus* gameStatus;
+        playerStatus->flags &= ~0x80000000;
+        playerStatus->fallState = 0;
+        playerStatus->framesOnGround = 0;
+        playerStatus->decorationList = 0;
+        playerStatus->unk_C2 = 0;
+        playerStatus->currentSpeed = 0.0f;
+        playerStatus->flags &= ~0xE;
+
+        if ((playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
+            gameStatus = gGameStatusPtr; // XXX
+
+            if (!(gameStatus->peachFlags & 0x10)) {
+                func_800DFEFC(world_action_idle_peachAnims[gameStatus->peachAnimIdx]);
+            } else {
+                func_800DFEFC(0xC000E);
+            }
+        } else {
+            func_800DFEFC(world_actions_peachDisguises[gameStatus->peachDisguise].idle);
+        }
+    }
+
+    if (!(playerStatus->animFlags & 0x2000)) {
+        NpcAnimID phi_a0;
+
+        switch (playerStatus->fallState) {
+            case 0:
+                if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {
+                    if ((s32) playerStatus->framesOnGround >= 0x709) {
+                        playerStatus->fallState++;
+                        func_800DFEFC(0xC0003);
+                        return;
+                    }
+                    playerStatus->framesOnGround++;
+                }
+                break;
+            case 1:
+                if ((u16) playerStatus->unk_BC != 0) {
+                    playerStatus->fallState++;
+                    playerStatus->framesOnGround = 0;
+                    func_800DFEFC(0xA0001);
+                }
+                break;
+            case 2: {
+                s32 frames = ++playerStatus->framesOnGround;
+
+                if (frames >= 201) {
+                    playerStatus->fallState++;
+                    func_800DFEFC(0xC0003);
+                }
+                break;
+            }
+            case 3:
+                if ((playerStatus->flags & 0x3000) != 0) {
+                    func_800DFEFC(0xA0001);
+                    playerStatus->fallState = 0;
+                } else if ((u16) playerStatus->unk_BC != 0) {
+                    func_800DFEFC(0xC0004);
+                }
+                break;
+        }
+    }
+
+    {
+        f32 angle;
+        f32 magnitude;
+
+        input_to_move_vector(&angle, &magnitude);
+        func_800E5150();
+
+        if (magnitude != 0.0f) {
+            playerStatus->framesOnGround = 0;
+            playerStatus->targetYaw = angle;
+            set_action_state(ACTION_STATE_WALK);
+        }
+    }
+}
+#endif

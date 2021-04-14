@@ -8,9 +8,19 @@ typedef struct Action {
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ s8 flag;
-} Action;
+} Action; // size = 0x10
+
+typedef struct DisguiseAnims {
+    /* 0x00 */ NpcAnimID idle;
+    /* 0x04 */ NpcAnimID unk4;
+    /* 0x08 */ NpcAnimID unk8;
+    /* 0x0C */ NpcAnimID unkC;
+    /* 0x10 */ NpcAnimID unk10;
+} DisguiseAnims; // size = 0x18
 
 extern f32 D_800F7B90;
-extern Action D_800F7C8C[39]; // size = 0x10 * 39
+extern Action D_800F7C8C[39];
+
+extern DisguiseAnims world_actions_peachDisguises[];
 
 #endif

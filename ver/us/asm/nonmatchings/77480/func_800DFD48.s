@@ -89,9 +89,9 @@ glabel func_800DFD48
 /* 79324 800DFE74 00031040 */  sll       $v0, $v1, 1
 /* 79328 800DFE78 00431021 */  addu      $v0, $v0, $v1
 /* 7932C 800DFE7C 000210C0 */  sll       $v0, $v0, 3
-/* 79330 800DFE80 3C04800F */  lui       $a0, %hi(D_800F7C30)
+/* 79330 800DFE80 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0x14)
 /* 79334 800DFE84 00822021 */  addu      $a0, $a0, $v0
-/* 79338 800DFE88 8C847C30 */  lw        $a0, %lo(D_800F7C30)($a0)
+/* 79338 800DFE88 8C847C30 */  lw        $a0, %lo(world_actions_peachDisguises+0x14)($a0)
 /* 7933C 800DFE8C 0C0398DB */  jal       func_800E636C
 /* 79340 800DFE90 00000000 */   nop
 /* 79344 800DFE94 08037FBB */  j         .L800DFEEC

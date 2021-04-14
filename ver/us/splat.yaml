@@ -9968,7 +9968,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE23260, c, idle]
-    - [0xE23690, data, idle]
+    - [0xE23690, .data, idle]
   - type: code
     name: world_action_walk
     dir: world/action

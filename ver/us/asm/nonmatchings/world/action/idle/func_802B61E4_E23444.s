@@ -32,10 +32,10 @@ glabel func_802B61E4_E23444
 /* E234B0 802B6250 3C04000C */   lui      $a0, 0xc
 /* E234B4 802B6254 90620080 */  lbu       $v0, 0x80($v1)
 /* E234B8 802B6258 00021080 */  sll       $v0, $v0, 2
-/* E234BC 802B625C 3C04802B */  lui       $a0, %hi(D_802B6430_E23690)
+/* E234BC 802B625C 3C04802B */  lui       $a0, %hi(world_action_idle_peachAnims)
 /* E234C0 802B6260 00822021 */  addu      $a0, $a0, $v0
 /* E234C4 802B6264 0C037FBF */  jal       func_800DFEFC
-/* E234C8 802B6268 8C846430 */   lw       $a0, %lo(D_802B6430_E23690)($a0)
+/* E234C8 802B6268 8C846430 */   lw       $a0, %lo(world_action_idle_peachAnims)($a0)
 /* E234CC 802B626C 080AD8AA */  j         .L802B62A8
 /* E234D0 802B6270 00000000 */   nop
 .L802B6274:
@@ -48,9 +48,9 @@ glabel func_802B61E4_E23444
 /* E234E8 802B6288 00031040 */  sll       $v0, $v1, 1
 /* E234EC 802B628C 00431021 */  addu      $v0, $v0, $v1
 /* E234F0 802B6290 000210C0 */  sll       $v0, $v0, 3
-/* E234F4 802B6294 3C04800F */  lui       $a0, %hi(D_800F7C1C)
+/* E234F4 802B6294 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises)
 /* E234F8 802B6298 00822021 */  addu      $a0, $a0, $v0
-/* E234FC 802B629C 8C847C1C */  lw        $a0, %lo(D_800F7C1C)($a0)
+/* E234FC 802B629C 8C847C1C */  lw        $a0, %lo(world_actions_peachDisguises)($a0)
 /* E23500 802B62A0 0C0398DB */  jal       func_800E636C
 /* E23504 802B62A4 00000000 */   nop
 .L802B62A8:

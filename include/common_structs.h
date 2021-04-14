@@ -999,7 +999,7 @@ typedef struct GameStatus {
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80;
+    /* 0x080 */ u8 peachAnimIdx; ///< @see world_action_idle_peachAnims
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
@@ -1568,7 +1568,7 @@ typedef struct PlayerStatus {
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ u8 prevActionState;
-    /* 0x0B6 */ u8 fallState;
+    /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
     /* 0x0BC */ s16 unk_BC;
