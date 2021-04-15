@@ -16,6 +16,7 @@ typedef struct DisguiseAnims {
     /* 0x08 */ NpcAnimID unk8;
     /* 0x0C */ NpcAnimID unkC;
     /* 0x10 */ NpcAnimID unk10;
+    /* 0x10 */ NpcAnimID unk14;
 } DisguiseAnims; // size = 0x18
 
 extern f32 D_800F7B90;

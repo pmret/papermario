@@ -1531,7 +1531,7 @@ typedef struct PlayerStatus {
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
-    /* 0x00C */ u8 peachDisguise;
+    /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ char unk_0D[1];
     /* 0x00E */ u8 unk_0E;
     /* 0x00F */ u8 unk_0F;
@@ -1571,7 +1571,7 @@ typedef struct PlayerStatus {
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
-    /* 0x0BC */ s16 unk_BC;
+    /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;

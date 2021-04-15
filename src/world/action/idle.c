@@ -86,7 +86,6 @@ void func_802B61E4_E23444(void) {
     PlayerData* playerData = &gPlayerData;
 
     if (playerStatus->flags & 0x80000000) {
-        GameStatus* gameStatus;
         playerStatus->flags &= ~0x80000000;
         playerStatus->fallState = 0;
         playerStatus->framesOnGround = 0;
@@ -95,26 +94,22 @@ void func_802B61E4_E23444(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->flags &= ~0xE;
 
-        if ((playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
-            gameStatus = gGameStatusPtr; // XXX
-
-            if (!(gameStatus->peachFlags & 0x10)) {
-                func_800DFEFC(world_action_idle_peachAnims[gameStatus->peachAnimIdx]);
+        if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
+            if (!(gGameStatusPtr->peachFlags & 0x10)) {
+                func_800DFEFC(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
             } else {
-                func_800DFEFC(0xC000E);
+                func_800DFEFC(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
             }
         } else {
-            func_800DFEFC(world_actions_peachDisguises[gameStatus->peachDisguise].idle);
+            func_800DFEFC(0xC000E);
         }
     }
 
     if (!(playerStatus->animFlags & 0x2000)) {
-        NpcAnimID phi_a0;
-
         switch (playerStatus->fallState) {
             case 0:
                 if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {
-                    if ((s32) playerStatus->framesOnGround >= 0x709) {
+                    if (playerStatus->framesOnGround > 1800) {
                         playerStatus->fallState++;
                         func_800DFEFC(0xC0003);
                         return;
@@ -123,16 +118,15 @@ void func_802B61E4_E23444(void) {
                 }
                 break;
             case 1:
-                if ((u16) playerStatus->unk_BC != 0) {
+                if (playerStatus->unk_BC != 0) {
                     playerStatus->fallState++;
                     playerStatus->framesOnGround = 0;
                     func_800DFEFC(0xA0001);
                 }
                 break;
             case 2: {
-                s32 frames = ++playerStatus->framesOnGround;
-
-                if (frames >= 201) {
+                playerStatus->framesOnGround++;
+                if (playerStatus->framesOnGround > 200) {
                     playerStatus->fallState++;
                     func_800DFEFC(0xC0003);
                 }
@@ -142,7 +136,7 @@ void func_802B61E4_E23444(void) {
                 if ((playerStatus->flags & 0x3000) != 0) {
                     func_800DFEFC(0xA0001);
                     playerStatus->fallState = 0;
-                } else if ((u16) playerStatus->unk_BC != 0) {
+                } else if (playerStatus->unk_BC != 0) {
                     func_800DFEFC(0xC0004);
                 }
                 break;
