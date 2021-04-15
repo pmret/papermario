@@ -1519,7 +1519,7 @@ typedef struct PlayerStatus {
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ u8 peachDisguise;
-    /* 0x00D */ char unk_0D[1];
+    /* 0x00D */ s8 unk_0D;
     /* 0x00E */ u8 unk_0E;
     /* 0x00F */ u8 unk_0F;
     /* 0x010 */ s16 unk_10;
@@ -1539,14 +1539,16 @@ typedef struct PlayerStatus {
     /* 0x060 */ char unk_60[4];
     /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
-    /* 0x06C */ char unk_6C[4];
+    /* 0x06C */ f32 unk_6C;
     /* 0x070 */ f32 gravityIntegrator[4];
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
     /* 0x08C */ char unk_8C[4];
     /* 0x090 */ f32 unk_90;
-    /* 0x094 */ char unk_94[12];
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 unk_98;
+    /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ char unk_A4[4];
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
@@ -1804,7 +1806,9 @@ typedef struct Temp8010F250 {
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
-} Temp8010F250;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ SoundID unk_30;
+} Temp8010F250; // size = 0x34
 
 typedef struct Temp8010EBB0 {
     /* 0x000 */ s8 unk_00;

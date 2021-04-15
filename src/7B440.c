@@ -1,8 +1,21 @@
 #include "common.h"
 
+extern s32 D_8010C920;
+extern s32 D_8010C940;
+extern s32 D_8010C954;
+extern s32 D_8010C958;
+extern s32 D_8010C95C;
+extern s32 D_8010C96C;
+extern s32 D_8010C980;
+extern s32 D_8010C9A0;
+extern s32 D_800F7B40;
+extern s32 D_800F7B44;
+extern s32 D_8010C938;
+extern s32 D_8010C990;
+
 void update_player_input(void) {
-    PlayerStatus* ps = &gPlayerStatus;
-    PlayerStatus* playerStatus = ps; // ??? necessary
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus; // needed for some macro - not sure what yet
     s32 inputBufPos = playerStatus->inputBufPos;
 
     playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
@@ -33,11 +46,99 @@ void update_player_input(void) {
 
     if (playerStatus->animFlags & 8) {
         playerStatus->animFlags |= 0x200000;
-        playerStatus->pressedButtons |= 4;
+        playerStatus2->pressedButtons |= 4;
     }
 }
 
-INCLUDE_ASM(s32, "7B440", func_800E205C);
+void func_800E205C(void) {
+    s32* temp8010C92C = &D_8010C92C;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    GameStatus** gameStatus;
+    GameStatus *gameStatus2;
+    MapConfig* mapConfig;
+    f32 one;
+    f32* floatsTemp;
+
+    D_8010C96C = -1;
+    D_8010C954 = 0;
+    D_8010C920 = 0;
+    D_8010C940 = 0;
+    D_8010C958 = 0;
+    *temp8010C92C = 0;
+    D_8010C95C = 0;
+    D_8010C980 = 0;
+    D_800F7B40 = 0;
+    D_800F7B44 = 0;
+    D_8010C938 = 0;
+    D_8010C990 = 0;
+    playerStatus->unk_0D = 1;
+    playerStatus->renderMode = 0xD;
+
+    gameStatus = &gGameStatusPtr;
+    playerStatus->unk_0E = 255;
+    playerStatus->unk_0F = 255;
+    (*gameStatus)->peachFlags &= ~0x8;
+    (*gameStatus)->peachFlags &= ~0x10;
+
+    one = 1.0f;
+
+    if ((*gameStatus)->peachFlags & 1) {
+        playerStatus->colliderHeight = 55;
+        playerStatus->colliderDiameter = 38;
+        playerStatus->animFlags |= 0x1000;
+
+        if ((*gameStatus)->peachFlags & 2) {
+            *temp8010C92C = 2;
+            playerStatus->peachDisguise = (*gameStatus)->peachDisguise;
+        }
+    } else {
+        playerStatus->colliderHeight = 37;
+        playerStatus->colliderDiameter = 26;
+        (*gameStatus)->unk_80 = 0;
+    }
+
+    // This grossness is needed for matching
+    floatsTemp = &D_800F7B70[0];
+    playerStatus->walkSpeed = *(floatsTemp++) * one;
+    playerStatus->runSpeed = *(floatsTemp++) * one;
+    playerStatus->unk_6C = *(floatsTemp++) * one;
+
+    set_action_state(ACTION_STATE_IDLE);
+
+    gameStatus2 = gGameStatusPtr;
+    playerStatus->currentSpeed = 0.0f;
+    playerStatus->targetYaw = 0.0f;
+    playerStatus->unk_64 = 0.0f;
+    playerStatus->unk_88 = 0.0f;
+    playerStatus->anim = 0;
+    playerStatus->decorationList = 0;
+    playerStatus->position.x = 0.0f;
+    playerStatus->position.y = 0.0f;
+    playerStatus->position.z = 0.0f;
+    playerStatus->currentYaw = 0.0f;
+    playerStatus->unk_90 = 0.0f;
+    playerStatus->unk_94 = 0;
+    playerStatus->unk_98 = 0;
+    playerStatus->unk_9C = 0;
+
+    mapConfig = gAreas[gameStatus2->areaID].maps[gameStatus2->mapID].config;
+
+    if (mapConfig->entryList != NULL) {
+        if (gameStatus2->entryID < mapConfig->entryCount) {
+            playerStatus->position.x = (*mapConfig->entryList)[gameStatus2->entryID].x;
+            playerStatus->position.y = (*mapConfig->entryList)[gameStatus2->entryID].y;
+            playerStatus->position.z = (*mapConfig->entryList)[gameStatus2->entryID].z;
+            playerStatus->currentYaw = (*mapConfig->entryList)[gameStatus2->entryID].yaw;
+        }
+    }
+
+    gCameras->targetPos.x = playerStatus->position.x;
+    gCameras->targetPos.y = playerStatus->position.y;
+    gCameras->targetPos.z = playerStatus->position.z;
+
+    func_800E59A0(mapConfig);
+    mem_clear(&D_8010F250, sizeof(Temp8010F250));
+}
 
 void func_800E22E4(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -92,8 +193,6 @@ void func_800E23FC(f32* arg0, f32* arg1) {
     *arg0 = temp2;
     *arg1 = temp1;
 }
-
-extern s32 D_8010C9A0;
 
 INCLUDE_ASM(s32, "7B440", func_800E24F8);
 // void func_800E24F8(void) {
