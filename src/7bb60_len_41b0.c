@@ -509,6 +509,7 @@ void check_input_spin(void) {
         s32 actionState = playerStatus->actionState;
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
 
+        // TODO
         if (actionState != 0x21) {
             if (actionState < 0x22) {
                 if (actionState < 3) {
