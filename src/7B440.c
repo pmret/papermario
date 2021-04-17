@@ -94,7 +94,7 @@ void func_800E205C(void) {
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        (*gameStatus)->unk_80 = 0;
+        (*gameStatus)->peachAnimIdx = 0;
     }
 
     // This grossness is needed for matching
