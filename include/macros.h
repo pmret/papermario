@@ -21,7 +21,6 @@
 #define CAM(id) (&gCameras[id])
 #define CAM2(id) ({ Camera* c = gCameras; &c[id]; })
 #define CURRENT_CAM (&gCameras[gCurrentCameraID])
-#define GET_MAP_ENTRY(cfg, idx) (&(*cfg->entryList)[idx])
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
