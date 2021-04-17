@@ -420,7 +420,7 @@ if __name__ == "__main__":
     exec_shell(["make", "-C", str(ROOT / args.splat)])
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
-    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell("cpp --version"):
+    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
         print("error: system C preprocessor is not GNU!")
         print("This is a known issue on macOS - only clang's cpp is installed by default.")
         print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
