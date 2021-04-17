@@ -6,7 +6,11 @@ import sys
 import ninja_syntax
 from glob import glob
 
+# Configuration:
 VERSIONS = ["us", "jp"]
+DO_SHA1_CHECK = True
+
+# Paths:
 ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
@@ -59,10 +63,16 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
-    ninja.rule("sha1sum",
-        description="check $in",
-        command=f"sha1sum -c $in && touch $out",
-    )
+    if DO_SHA1_CHECK:
+        ninja.rule("sha1sum",
+            description="check $in",
+            command=f"sha1sum -c $in && touch $out",
+        )
+    else:
+        ninja.rule("sha1sum",
+            description="check $in",
+            command=f"touch $out",
+        )
 
     ninja.rule("cc",
         description="cc($version) $in",
@@ -165,6 +175,7 @@ class Configure:
             verbose=False,
         )
         self.linker_entries = split.linker_writer.entries[:]
+        self.asset_stack = split.config["asset_stack"]
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
@@ -190,9 +201,7 @@ class Configure:
         out = []
 
         for path in src_paths:
-            if path.parents[0] == "assets":
-                # TODO resolve asset
-                pass
+            path = self.resolve_asset_path(path)
 
             if path.is_dir():
                 out.extend(glob(str(path) + "/**/*", recursive=True))
@@ -200,6 +209,19 @@ class Configure:
                 out.append(str(path))
 
         return out
+
+    def resolve_asset_path(self, path: Path) -> Path:
+        parts = list(path.parts)
+
+        if parts[0] == "assets":
+            for d in self.asset_stack:
+                parts[1] = d
+                new_path = Path("/".join(parts))
+                if new_path.exists():
+                    return new_path
+
+        # ¯\_(ツ)_/¯
+        return path
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes

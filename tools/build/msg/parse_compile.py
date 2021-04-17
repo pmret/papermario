@@ -753,9 +753,15 @@ if __name__ == "__main__":
 
                         message.bytes += [0xFF, 0x1A, 0, index, delay]
                     elif command == "animloop":
-                        message.bytes += [0xFF, 0x1B, 0, 0]
+                        if len(args) != 2:
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
+                            exit(1)
+                        message.bytes += [0xFF, 0x1B, args[0], args[1]]
                     elif command == "animdone":
-                        message.bytes += [0xFF, 0x1C, 0]
+                        if len(args) != 1:
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
+                            exit(1)
+                        message.bytes += [0xFF, 0x1C, args[0]]
                     elif command == "setcursorpos":
                         index = named_args.get("index")
                         pos = named_args.get("pos")
