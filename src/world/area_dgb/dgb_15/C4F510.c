@@ -329,7 +329,7 @@ NpcAISettings N(npcAISettings_8024271C) = {
 
 Script N(npcAI_8024274C) = SCRIPT({
     spawn N(80242184);
-    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_200)), TRUE);
+    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE);
     SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_C));
     spawn N(802424E8);
     N(func_80241464_C50974)(N(npcAISettings_8024271C));
@@ -362,7 +362,7 @@ StaticNpc N(npcGroup_802428C0) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_8024212C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = NPC_FLAG_100 | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_802427EC),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -523,17 +523,17 @@ ApiStatus N(update_starpoints_display_C4F8CC)(ScriptInstance *script, s32 isInit
                 }
                 posX = npc2->pos.x;
                 posZ = npc2->pos.z;
-                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->unk_34);
-                
+                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->renderYaw);
+
                 npc->pos.x = posX;
                 enemy->unk_10.x = npc->pos.x;
 
                 npc->pos.y = npc2->pos.y + enemy->varTable[0];
                 enemy->unk_10.y = npc->pos.y;
-                
+
                 npc->pos.z = posZ;
                 enemy->unk_10.z = npc->pos.z;
-                
+
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 enemy->flags &= 0xE0EFFFFF;
                 npc->duration = 0;
@@ -556,7 +556,7 @@ ApiStatus N(update_starpoints_display_C4F8CC)(ScriptInstance *script, s32 isInit
                 enemy->unk_07 = func;
                 script->functionTemp[0].s = 0;
             }
-            break; 
+            break;
     }
 
     return ApiStatus_BLOCK;
@@ -705,13 +705,13 @@ void N(func_80240A28_C4FF38)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[1].s--;
     }
 
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         if (npc->moveSpeed < 4.0) {
             func_8003D660(npc, 0);
         } else {
             func_8003D660(npc, 1);
         }
-        
+
         x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
         z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
@@ -719,7 +719,7 @@ void N(func_80240A28_C4FF38)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
             script->functionTemp[0].s = 2;
             script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || 
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) ||
                 (aiSettings->waitTime <= 0) || (script->functionTemp[1].s == 0)) {
                 script->functionTemp[0].s = 4;
             }
@@ -746,7 +746,7 @@ void N(func_80240D90_C502A0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             script->functionTemp[0].s = 10;
         }
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration == 0) {
             script->functionTemp[1].s--;

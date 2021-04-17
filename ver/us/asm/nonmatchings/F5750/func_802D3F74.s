@@ -15,7 +15,7 @@ glabel func_802D3F74
 /* F894C 802D3F9C 00431021 */  addu      $v0, $v0, $v1
 /* F8950 802D3FA0 8C420000 */  lw        $v0, ($v0)
 /* F8954 802D3FA4 8C440000 */  lw        $a0, ($v0)
-/* F8958 802D3FA8 0C048B77 */  jal       func_80122DDC
+/* F8958 802D3FA8 0C048B77 */  jal       get_entity_model
 /* F895C 802D3FAC 8E100000 */   lw       $s0, ($s0)
 /* F8960 802D3FB0 AC500000 */  sw        $s0, ($v0)
 /* F8964 802D3FB4 8FBF0014 */  lw        $ra, 0x14($sp)

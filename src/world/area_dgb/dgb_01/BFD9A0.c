@@ -471,7 +471,7 @@ f32 N(D_80244CD0_C02550)[] = {
 
 Script N(80244CE8) = SCRIPT({
     SetSelfEnemyFlagBits(((0x00100000 | 0x01000000 | 0x02000000 | 0x04000000 | 0x08000000 | 0x10000000 | 0x20000000)), TRUE);
-    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT)), TRUE);
+    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE);
 });
 
 NpcAISettings N(npcAISettings_80244D24) = {
@@ -492,9 +492,9 @@ void N(func_80240120_BFD9A0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
@@ -602,7 +602,7 @@ void N(func_802402D0_BFDB50)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (aiSettings->unk_14 >= 0) {
             if (script->functionTemp[1].s <= 0) {
                 script->functionTemp[1].s = aiSettings->unk_14;
-                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && 
+                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
@@ -621,9 +621,9 @@ void N(func_802402D0_BFDB50)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
@@ -633,7 +633,7 @@ void N(func_802402D0_BFDB50)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s4) {
-        if (npc->unk_8C == 0) {
+        if (npc->turnAroundYawAdjustment == 0) {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         } else {
             return;
@@ -709,7 +709,7 @@ void N(func_802409B8_BFE238)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[9]--;
     }
 
-    if ((npc->unk_8C == 0) && (npc->duration <= 0)) {
+    if ((npc->turnAroundYawAdjustment == 0) && (npc->duration <= 0)) {
         script->functionTemp[1].s--;
         if (script->functionTemp[1].s > 0) {
             if (!(enemy->npcSettings->unk_2A & 0x10)) {
@@ -762,8 +762,8 @@ void N(func_80240F78_BFE7F8)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->unk_07 = 0;
         if (!(npc->flags & 8)) {
             posX = npc->pos.x;
-            posY = npc->pos.y; 
-            posZ = npc->pos.z; 
+            posY = npc->pos.y;
+            posZ = npc->pos.z;
             posW = 1000.0f;
             phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
         } else {
@@ -806,8 +806,8 @@ void N(func_80240F78_BFE7F8)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         posX = npc->pos.x;
-        posY = npc->pos.y + npc->collisionHeight; 
-        posZ = npc->pos.z; 
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
         posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
         if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {
@@ -1008,8 +1008,8 @@ void N(func_80241954_BFF1D4)(ScriptInstance *script, NpcAISettings *aiSettings, 
             npc->rotation.y -= 360.0;
         }
         temp_f8_2 = 255.0f - (cosine((s32)npc->rotation.y % 180) * 56.0f);
-        func_802DE894(npc->unk_24, 6, temp_f8_2, temp_f8_2, temp_f8_2, 255, 0);
-        
+        func_802DE894(npc->spriteInstanceID, 6, temp_f8_2, temp_f8_2, temp_f8_2, 255, 0);
+
         posX = (*playerStatus)->position.x;
         posY = (*playerStatus)->position.y;
         posZ = (*playerStatus)->position.z;
@@ -1037,7 +1037,7 @@ void N(func_80241BF0_BFF470)(ScriptInstance *script, NpcAISettings *aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     enemy->varTable[0] &= ~0x100;
-    func_802DE894(npc->unk_24, 0, 0, 0, 0, 0, 0);
+    func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
     if (enemy->varTable[0] & 0x1000) {
         sfx_stop_sound(0x80000011);
         enemy->varTable[0] &= ~0x1000;
@@ -1142,7 +1142,7 @@ void N(func_80241F98_BFF818)(ScriptInstance *script, NpcAISettings *aiSettings, 
     }
 
     script->functionTemp[1].s--;
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         posW = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
@@ -1178,7 +1178,7 @@ ApiStatus N(func_802422B0_BFFB30)(ScriptInstance *script, s32 isInitialCall) {
     switch (script->functionTemp[0].s) {
         case 0:
             N(func_80240120_BFD9A0)(script, aiSettings, territoryPtr);
-            func_802DE894(npc->unk_24, 0, 0, 0, 0, 0, 0);
+            func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
             N(func_802402D0_BFDB50)(script, aiSettings, territoryPtr);
             if (script->functionTemp[0].s == 12) {
@@ -1488,13 +1488,13 @@ void N(func_80242684_BFFF04)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[1].s--;
     }
 
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         if (npc->moveSpeed < 4.0) {
             func_8003D660(npc, 0);
         } else {
             func_8003D660(npc, 1);
         }
-        
+
         x = script->functionTemp[2].s[enemy->territory->patrol.points].x;
         z = script->functionTemp[2].s[enemy->territory->patrol.points].z;
         npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
@@ -1502,7 +1502,7 @@ void N(func_80242684_BFFF04)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (dist2D(npc->pos.x, npc->pos.z, x, z) <= npc->moveSpeed) {
             script->functionTemp[0].s = 2;
             script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) || 
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->moveTime <= 0) ||
                 (aiSettings->waitTime <= 0) || (script->functionTemp[1].s == 0)) {
                 script->functionTemp[0].s = 4;
             }
@@ -1529,7 +1529,7 @@ void N(func_802429EC_C0026C)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             script->functionTemp[0].s = 10;
         }
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration == 0) {
             script->functionTemp[1].s--;
@@ -1609,7 +1609,7 @@ void N(func_80243000_C00880)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[1].s = 0;
     script->functionTemp[0].s = 1;
 }
- 
+
 ApiStatus N(func_802430C0_C00940)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1846,7 +1846,7 @@ StaticNpc N(npcGroup_80246090) = {
     .id = NPC_SENTINEL0,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245D80),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -1877,7 +1877,7 @@ StaticNpc N(npcGroup_80246280) = {
     .id = NPC_SENTINEL1,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, 230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245E44),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -1908,7 +1908,7 @@ StaticNpc N(npcGroup_80246470) = {
     .id = NPC_SENTINEL2,
     .settings = &N(npcSettings_8024526C),
     .pos = { -180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245F08),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -1939,7 +1939,7 @@ StaticNpc N(npcGroup_80246660) = {
     .id = NPC_SENTINEL3,
     .settings = &N(npcSettings_8024526C),
     .pos = { 180.0f, 100.0f, -230.0f },
-    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80245FCC),
     .yaw = 270,
     .dropFlags = 0x80,

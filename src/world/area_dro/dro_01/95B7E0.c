@@ -270,7 +270,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242784_95D984);
 /*
 ApiStatus N(func_80242784_95D984)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

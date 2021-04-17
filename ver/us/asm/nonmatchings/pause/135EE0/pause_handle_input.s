@@ -37,7 +37,7 @@ glabel pause_handle_input
 /* 1377E0 802444A0 8E250004 */  lw        $a1, 4($s1)
 /* 1377E4 802444A4 26310010 */  addiu     $s1, $s1, 0x10
 /* 1377E8 802444A8 3C063F80 */  lui       $a2, 0x3f80
-/* 1377EC 802444AC 0C0B78AB */  jal       func_802DE2AC
+/* 1377EC 802444AC 0C0B78AB */  jal       spr_update_sprite
 /* 1377F0 802444B0 26100001 */   addiu    $s0, $s0, 1
 /* 1377F4 802444B4 2A020003 */  slti      $v0, $s0, 3
 /* 1377F8 802444B8 1440FFF7 */  bnez      $v0, .L80244498

@@ -100,34 +100,37 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
+typedef s32 Palette16[16]; // size = 0x40
+
 typedef struct Npc {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ UNK_PTR onUpdate; /* run before anything else for this npc in the npc update step */
-    /* 0x008 */ UNK_PTR onRender; /* run after the display list for this npc is built */
+    /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
+    /* 0x008 */ void (*onRender)(struct Npc*); ///< Run after the display list for this NPC is built
     /* 0x00C */ f32 yaw;
     /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
-    /* 0x024 */ s32 unk_24;
+    /* 0x024 */ s32 spriteInstanceID;
     /* 0x028 */ u32 currentAnim;
     /* 0x02C */ char unk_2C[4];
     /* 0x030 */ f32 animationSpeed;
-    /* 0x034 */ f32 unk_34; // some angle?
+    /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
-    /* 0x050 */ f32 unk_50;
+    /* 0x050 */ f32 rotationVerticalPivotOffset;
     /* 0x054 */ Vec3f scale;
     /* 0x060 */ Vec3f moveToPos;
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
-    /* 0x084 */ char unk_84[4];
+    /* 0x084 */ u16 unk_84;
+    /* 0x086 */ u16 unk_86;
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
-    /* 0x08C */ s16 unk_8C;
+    /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ char unk_96[12];
@@ -138,12 +141,26 @@ typedef struct Npc {
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ u8 renderMode;
     /* 0x0AB */ s8 unk_AB;
-    /* 0x0AC */ u8 unk_AC;
-    /* 0x0AD */ char unk_AD[3];
-    /* 0x0B0 */ s32 unk_B0;
-    /* 0x0B4 */ char unk_B4[72];
-    /* 0x0FC */ s32 unk_FC;
-    /* 0x100 */ char unk_100[576];
+    /* 0x0AC */ u8 alpha;
+    /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
+    /* 0x0AE */ char unk_AD[2];
+    /* 0x0B0 */ s32** extraAnimList;
+    /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
+    /* 0x0B5 */ char unk_B5[13];
+    /* 0x0C1 */ s8 paletteCount;
+    /* 0x0C2 */ char unk_C2[2];
+    /* 0x0C4 */ UNK_PTR spritePaletteList;
+    /* 0x0C8 */ Palette16 localPaletteData[16];
+    /* 0x2C8 */ Palette16* localPalettes[16];
+    /* 0x308 */ char unk_308[0x50];
+    /* 0x318 */ f32 screenSpaceOffset2D[2];
+    /* 0x320 */ f32 verticalStretch;
+    /* 0x324 */ struct EffectInstance* decorations[2];
+    /* 0x32C */ s8 decorationType[2];
+    /* 0x32E */ s8 changedDecoration;
+    /* 0x32F */ char unk_32F;
+    /* 0x330 */ s8 decorationInitialised[2];
+    /* 0x332 */ char unk_332[14];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -982,7 +999,7 @@ typedef struct GameStatus {
     /* 0x07D */ s8 unk_7D;
     /* 0x07E */ u8 peachFlags; /* (1 = isPeach, 2 = isTransformed, 4 = hasUmbrella) */
     /* 0x07F */ s8 peachDisguise; /* (1 = koopatrol, 2 = hammer bros, 3 = clubba) */
-    /* 0x080 */ char unk_80;
+    /* 0x080 */ u8 peachAnimIdx; ///< @see world_action_idle_peachAnims
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
@@ -1056,11 +1073,12 @@ typedef struct Shadow {
     /* 0x04 */ char unk_04[2];
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
-    /* 0x08 */ s16 unk_08;
+    /* 0x08 */ s16 unk_08; // entity model index?
     /* 0x0A */ char unk_0A[6];
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ char unk_28[80];
+    /* 0x28 */ struct Vec3f unk_28;
+    /* 0x34 */ char unk_34[68];
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1513,7 +1531,7 @@ typedef struct PlayerStatus {
     /* 0x004 */ u32 animFlags;
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
-    /* 0x00C */ u8 peachDisguise;
+    /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ char unk_0D[1];
     /* 0x00E */ u8 unk_0E;
     /* 0x00F */ u8 unk_0F;
@@ -1539,7 +1557,7 @@ typedef struct PlayerStatus {
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
-    /* 0x08C */ char unk_8C[4];
+    /* 0x08C */ s32 unk_8C;
     /* 0x090 */ f32 unk_90;
     /* 0x094 */ char unk_94[12];
     /* 0x0A0 */ f32 heading;
@@ -1550,15 +1568,16 @@ typedef struct PlayerStatus {
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
     /* 0x0B5 */ u8 prevActionState;
-    /* 0x0B6 */ u8 fallState;
+    /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
-    /* 0x0BC */ s16 unk_BC;
+    /* 0x0BC */ u16 unk_BC;
     /* 0x0BE */ u8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;
     /* 0x0C2 */ s16 unk_C2;
-    /* 0x0C4 */ char unk_C4[2];
+    /* 0x0C4 */ char unk_C4;
+    /* 0x0C5 */ s8 unk_C5;
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
@@ -1799,7 +1818,9 @@ typedef struct Temp8010F250 {
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
-} Temp8010F250;
+    /* 0x10 */ char unk_10[0x20];
+    /* 0x30 */ SoundID unk_30;
+} Temp8010F250; // size = 0x34
 
 typedef struct Temp8010EBB0 {
     /* 0x000 */ s8 unk_00;

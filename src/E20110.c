@@ -23,5 +23,5 @@ void func_802B79C8_E20AD8(void) {
     gPlayerStatusPtr->unk_C8 = NULL;
     gPlayerStatusPtr->animFlags &= ~0x10;
     func_800EF3D4(0);
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
 }

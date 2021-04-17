@@ -114,7 +114,7 @@ glabel pause_partners_update
 /* 13FC7C 8024C93C 8C440000 */  lw        $a0, ($v0)
 /* 13FC80 8024C940 8C650000 */  lw        $a1, ($v1)
 .L8024C944:
-/* 13FC84 8024C944 0C0B78AB */  jal       func_802DE2AC
+/* 13FC84 8024C944 0C0B78AB */  jal       spr_update_sprite
 /* 13FC88 8024C948 26100004 */   addiu    $s0, $s0, 4
 /* 13FC8C 8024C94C 3C028027 */  lui       $v0, %hi(D_802706B0)
 /* 13FC90 8024C950 8C4206B0 */  lw        $v0, %lo(D_802706B0)($v0)

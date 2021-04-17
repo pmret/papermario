@@ -99,7 +99,7 @@ ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->unk_50 = var1;
+    npc->rotationVerticalPivotOffset = var1;
     return ApiStatus_DONE2;
 }
 
@@ -316,7 +316,7 @@ ApiStatus SetNpcSprite(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    set_npc_sprite(npc, arg1, 0);
+    set_npc_sprite(npc, arg1, NULL);
     return ApiStatus_DONE2;
 }
 

@@ -145,7 +145,7 @@ StaticNpc N(npcGroup_80240784) = {
     .id = 0,
     .settings = &N(npcSettings_802405D0),
     .pos = { 0.0f, 25.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80240730),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -182,7 +182,7 @@ ApiStatus N(func_80240000_BF6060)(ScriptInstance *script, s32 isInitialCall) {
     if (entity == NULL) {
         return ApiStatus_BLOCK;
     }
-    
+
     play_model_animation(entity->virtualModelIndex, &D_000001E4);
     return ApiStatus_DONE2;
 }

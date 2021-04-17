@@ -545,7 +545,7 @@ void func_802E2BA4(s32 entityIndex) {
     x_inv = -entity->position.x;
     y_inv = -entity->position.y;
     z_inv = -entity->position.z;
-    phi_fp = temp_s4->unk_34;
+    phi_fp = temp_s4->renderYaw;
     for (i = 0; i < 24; i++) {
         if (temp_s4->unk_3C.s == 0xFF) {
             gDPSetRenderMode(temp_s2++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);

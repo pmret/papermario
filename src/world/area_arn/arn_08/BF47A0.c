@@ -3,7 +3,7 @@
 ApiStatus N(func_80240000_BF47A0)(ScriptInstance *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 temp_f20;
-    f32 var;
+    s32 colliderID;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
@@ -11,7 +11,7 @@ ApiStatus N(func_80240000_BF47A0)(ScriptInstance *script, s32 isInitialCall) {
     }
 
     temp_f20 = func_800E34D8();
-    playerStatus->position.y = func_800E3514(temp_f20, &var);
+    playerStatus->position.y = func_800E3514(temp_f20, &colliderID);
     script->functionTemp[0].s += fabsf(temp_f20);
     do {} while(0);
     return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;

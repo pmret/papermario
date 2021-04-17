@@ -238,7 +238,7 @@ void func_80122D7C(s32 idx, u32* arg1) {
     }
 }
 
-EntityModel* func_80122DDC(s32 listIndex) {
+EntityModel* get_entity_model(s32 listIndex) {
     return (*gCurrentEntityModelList)[listIndex & ~0x800];
 }
 

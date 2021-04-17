@@ -175,7 +175,7 @@ Script N(hit_80240F64) = SCRIPT({
         sleep 10;
         GetNpcPos(NPC_GOOMPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_200, TRUE);
+        SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE);
         SetNpcPos(NPC_GOOMPA, 0, -1000, 0);
         SetNpcFlagBits(NPC_GOOMPA, NPC_FLAG_100, FALSE);
         EnablePartnerAI();
@@ -190,7 +190,7 @@ Script N(init_802411A8) = SCRIPT({
     BindNpcHit(-1, N(hit_80240F64));
     match STORY_PROGRESS {
         >= STORY_CH0_GOOMPA_JOINED_PARTY {
-            SetNpcFlagBits(NPC_SELF, NPC_FLAG_200, FALSE);
+            SetNpcFlagBits(NPC_SELF, NPC_FLAG_GRAVITY, FALSE);
             SetNpcFlagBits(NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE);
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }

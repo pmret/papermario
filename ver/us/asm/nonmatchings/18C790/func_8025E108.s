@@ -6,7 +6,7 @@ glabel func_8025E108
 /* 18C9EC 8025E10C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 18C9F0 8025E110 0C0B5059 */  jal       func_802D4164
 /* 18C9F4 8025E114 8C8400A8 */   lw       $a0, 0xa8($a0)
-/* 18C9F8 8025E118 0C048B77 */  jal       func_80122DDC
+/* 18C9F8 8025E118 0C048B77 */  jal       get_entity_model
 /* 18C9FC 8025E11C 8C440000 */   lw       $a0, ($v0)
 /* 18CA00 8025E120 3C05FFFF */  lui       $a1, 0xffff
 /* 18CA04 8025E124 0040202D */  daddu     $a0, $v0, $zero

@@ -344,7 +344,7 @@ StaticNpc N(npcGroup_80241448) = {
     .id = NPC_TUBBAS_HEART,
     .settings = &N(npcSettings_80241220),
     .pos = { -23.0f, 75.0f, 31.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_80241288),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -374,7 +374,7 @@ StaticNpc N(npcGroup_80241638) = {
     .id = NPC_YAKKEY,
     .settings = &N(npcSettings_8024124C),
     .pos = { 38.0f, 0.0f, 97.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_IGNORE_HEIGHT,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_NO_Y_MOVEMENT,
     .init = &N(init_802413E8),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -436,9 +436,9 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
 
     if (!(playerStatus->position.y > -10.0f)) {
         f32 temp_f20 = func_800E34D8();
-        s32 var;
+        s32 colliderID;
 
-        playerStatus->position.y = func_800E3514(temp_f20, &var);
+        playerStatus->position.y = func_800E3514(temp_f20, &colliderID);
         script->functionTemp[0].s += fabsf(temp_f20);
 
         return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;

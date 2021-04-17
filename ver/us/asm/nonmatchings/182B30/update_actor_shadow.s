@@ -95,7 +95,7 @@ glabel update_actor_shadow
 /* 1843F0 80255B10 04800007 */  bltz      $a0, .L80255B30
 /* 1843F4 80255B14 00000000 */   nop
 /* 1843F8 80255B18 8E050088 */  lw        $a1, 0x88($s0)
-/* 1843FC 80255B1C 0C0B78AB */  jal       func_802DE2AC
+/* 1843FC 80255B1C 0C0B78AB */  jal       spr_update_sprite
 /* 184400 80255B20 8E060090 */   lw       $a2, 0x90($s0)
 /* 184404 80255B24 0C0B7972 */  jal       func_802DE5C8
 /* 184408 80255B28 8E040084 */   lw       $a0, 0x84($s0)

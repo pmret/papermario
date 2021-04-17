@@ -415,7 +415,7 @@ StaticNpc N(npcGroup_80241FE4) = {
     .id = NPC_BOO0,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_400000,
     .init = &N(init_80241F70),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -446,7 +446,7 @@ StaticNpc N(npcGroup_802421D4) = {
     .id = NPC_BOO1,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241F94),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -476,7 +476,7 @@ StaticNpc N(npcGroup_802423C4) = {
     .id = NPC_BOO2,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FA4),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -506,7 +506,7 @@ StaticNpc N(npcGroup_802425B4) = {
     .id = NPC_BOO3,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FB4),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -536,7 +536,7 @@ StaticNpc N(npcGroup_802427A4) = {
     .id = NPC_BOO4,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FC4),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -566,7 +566,7 @@ StaticNpc N(npcGroup_80242994) = {
     .id = NPC_BOO5,
     .settings = &N(npcSettings_80240640),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS,
     .init = &N(init_80241FD4),
     .yaw = 90,
     .dropFlags = 0x80,
@@ -674,13 +674,13 @@ Script N(80242B84) = SCRIPT({
     GetCurrentPartnerID(SI_VAR(0));
     match SI_VAR(0) {
         == 1 {
-            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_200, TRUE);
+            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE);
         }
         == 2 {
-            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_200, TRUE);
+            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE);
         }
         == 3 {
-            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_200, TRUE);
+            SetNpcFlagBits(NPC_PARTNER, NPC_FLAG_GRAVITY, TRUE);
         }
     }
     DisablePartnerAI(0);
@@ -748,7 +748,7 @@ StaticNpc N(npcGroup_802434FC) = {
     .id = NPC_SENTINEL,
     .settings = &N(npcSettings_8024066C),
     .pos = { 0.0f, 0.0f, -1000.0f },
-    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_200 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_400000,
+    .flags = NPC_FLAG_PASSIVE | NPC_FLAG_4 | NPC_FLAG_100 | NPC_FLAG_GRAVITY | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_400000,
     .init = &N(init_802434EC),
     .yaw = 90,
     .dropFlags = 0x80,

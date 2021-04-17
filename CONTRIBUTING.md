@@ -21,8 +21,7 @@ If you use Visual Studio Code, you can use _Run Build Task_ (Ctrl+Shift+B) to ru
 Once you've created a successful (`OK`) build, copy `ver/us/build/` to `ver/us/expected/build/`:
 
 ```sh
-$ mkdir -p ver/us/expected
-$ cp -r ver/us/build ver/us/expected
+./make_expected.sh
 ```
 
 (If you're working with other versions of the game, replace `us` in the file paths.)

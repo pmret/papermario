@@ -30,7 +30,7 @@ glabel func_802D4050
 /* F8A48 802D4098 8E030000 */  lw        $v1, ($s0)
 /* F8A4C 802D409C 26310004 */  addiu     $s1, $s1, 4
 /* F8A50 802D40A0 8C640000 */  lw        $a0, ($v1)
-/* F8A54 802D40A4 0C048B77 */  jal       func_80122DDC
+/* F8A54 802D40A4 0C048B77 */  jal       get_entity_model
 /* F8A58 802D40A8 0040802D */   daddu    $s0, $v0, $zero
 /* F8A5C 802D40AC 0040182D */  daddu     $v1, $v0, $zero
 /* F8A60 802D40B0 26100001 */  addiu     $s0, $s0, 1
