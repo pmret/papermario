@@ -326,7 +326,7 @@ class Configure:
                     variables = {
                         "sprite_id": sprite_id,
                         "sprite_name": sprite_name,
-                        "sprite_dir": str(sprite_dir),
+                        "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
                     }
 
                     build(bin_path, [sprite_dir], "sprite", variables=variables)
