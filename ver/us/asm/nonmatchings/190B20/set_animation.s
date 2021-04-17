@@ -62,7 +62,7 @@ glabel set_animation
 /* 1926A8 80263DC8 0240282D */   daddu    $a1, $s2, $zero
 /* 1926AC 80263DCC 8E040084 */  lw        $a0, 0x84($s0)
 /* 1926B0 80263DD0 8E060090 */  lw        $a2, 0x90($s0)
-/* 1926B4 80263DD4 0C0B78AB */  jal       func_802DE2AC
+/* 1926B4 80263DD4 0C0B78AB */  jal       spr_update_sprite
 /* 1926B8 80263DD8 AE050088 */   sw       $a1, 0x88($s0)
 /* 1926BC 80263DDC 8E040084 */  lw        $a0, 0x84($s0)
 /* 1926C0 80263DE0 0C0B7972 */  jal       func_802DE5C8

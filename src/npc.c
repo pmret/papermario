@@ -111,24 +111,24 @@ void disable_npc_shadow(Npc* npc) {
     }
 }
 
-void set_npc_sprite(Npc* npc, s32 anim, s32 arg2) {
+void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
     s32 flagsTemp;
 
-    ASSERT((npc->flags & 0x1000000) || func_802DE5E8(npc->unk_24) == 0);
+    ASSERT((npc->flags & NPC_FLAG_1000000) || func_802DE5E8(npc->spriteInstanceID) == 0);
 
-    npc->unk_B0 = arg2;
+    npc->extraAnimList = extraAnimList;
 
-    if (!(npc->flags & 0x1000000)) {
-        npc->unk_24 = func_802DE0EC(anim, arg2);
-        ASSERT(npc->unk_24 >= 0);
+    if (!(npc->flags & NPC_FLAG_1000000)) {
+        npc->spriteInstanceID = func_802DE0EC(anim, extraAnimList);
+        ASSERT(npc->spriteInstanceID >= 0);
     }
 
     flagsTemp = npc->flags;
     npc->currentAnim = anim;
 
     if (!(flagsTemp & 0x40000000)) {
-        if (!(flagsTemp & 0x1000000)) {
-            func_802DE2AC(npc->unk_24, anim, npc->animationSpeed);
+        if (!(flagsTemp & NPC_FLAG_1000000)) {
+            func_802DE2AC(npc->spriteInstanceID, anim, npc->animationSpeed);
         }
     }
 }
@@ -277,7 +277,7 @@ Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_SIMPLE_XZ_HITBOX)) {
+        if (npc != NULL && npc->flags != 0 && !(npc->flags & NPC_FLAG_PARTICLE)) {
             if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 
@@ -303,7 +303,7 @@ Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius) {
     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
 
-        if (npc != NULL && npc->flags != 0 && (npc->flags & NPC_FLAG_SIMPLE_XZ_HITBOX)) {
+        if (npc != NULL && npc->flags != 0 && (npc->flags & NPC_FLAG_PARTICLE)) {
             if (!(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_4))) {
                 f32 distance = fabsf(dist2D(npc->pos.x, npc->pos.z, x, z));
 

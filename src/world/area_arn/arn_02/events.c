@@ -218,8 +218,8 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
     }
 
     playerStatus = &gPlayerStatusPtr;
-    if (fabsf(get_clamped_angle_diff(phi_f20, 
-            atan2(npc->pos.x, npc->pos.z, 
+    if (fabsf(get_clamped_angle_diff(phi_f20,
+            atan2(npc->pos.x, npc->pos.z,
                   (*playerStatus)->position.x, (*playerStatus)->position.z))) > 75.0) {
         ret = FALSE;
     }
@@ -324,9 +324,9 @@ void N(func_80240834_BDD9E4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.detectShape, 
-            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
-            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
+    if (is_point_within_region(enemy->territory->wander.detectShape,
+            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z,
+            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX,
             enemy->territory->wander.detectSizeZ)) {
         phi_s1 = 1;
     }
@@ -335,7 +335,7 @@ void N(func_80240834_BDD9E4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y;
     posZ = npc->pos.z;
 
-    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ, 
+    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ,
             1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
         phi_s1 = 1;
     }
@@ -377,7 +377,7 @@ void N(func_80240A30_BDDBE0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;
         script->functionTemp[0].s = 50;
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
@@ -419,7 +419,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    if (enemy->unk_B0 & 4) { 
+    if (enemy->unk_B0 & 4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }

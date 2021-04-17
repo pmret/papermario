@@ -34,17 +34,17 @@ ApiStatus N(UnkFunc7)(ScriptInstance *script, s32 isInitialCall) {
                 }
                 posX = npc2->pos.x;
                 posZ = npc2->pos.z;
-                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->unk_34);
-                
+                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->renderYaw);
+
                 npc->pos.x = posX;
                 enemy->unk_10.x = npc->pos.x;
 
                 npc->pos.y = npc2->pos.y + enemy->varTable[0];
                 enemy->unk_10.y = npc->pos.y;
-                
+
                 npc->pos.z = posZ;
                 enemy->unk_10.z = npc->pos.z;
-                
+
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 enemy->flags &= 0xE0EFFFFF;
                 npc->duration = 0;
@@ -67,7 +67,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance *script, s32 isInitialCall) {
                 enemy->unk_07 = func;
                 script->functionTemp[0].s = 0;
             }
-            break; 
+            break;
     }
 
     return ApiStatus_BLOCK;

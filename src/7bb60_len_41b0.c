@@ -2,7 +2,7 @@
 #include "world/partners.h"
 
 f32 func_800E34D8(void);
-f32 func_800E3514(f32, f32*);
+f32 func_800E3514(f32, s32* colliderID);
 
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
@@ -23,7 +23,8 @@ s32 func_800E26C4(void) {
         actionState == ACTION_STATE_WALK ||
         actionState == ACTION_STATE_RUN ||
         actionState == ACTION_STATE_USE_TWEESTER ||
-        actionState == ACTION_STATE_SPIN) {
+        actionState == ACTION_STATE_SPIN
+    ) {
         return 1;
     }
 
@@ -97,11 +98,12 @@ void gravity_use_fall_params(void) {
 void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->actionState != ACTION_STATE_7 && playerStatus->actionState != ACTION_STATE_BOUNCE) {
-        f32* temp;
+    if (playerStatus->actionState != ACTION_STATE_LAND_ON_SWITCH && playerStatus->actionState != ACTION_STATE_BOUNCE) {
+        s32* colliderID;
 
-        playerStatus->position.y = func_800E3514(func_800E34D8(), &temp);
-        func_800E315C(temp);
+        playerStatus->position.y = func_800E3514(func_800E34D8(), &colliderID);
+
+        func_800E315C(colliderID);
     }
 }
 
@@ -133,7 +135,7 @@ f32 func_800E34D8(void) {
     return ret;
 }
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E3514, f32 arg0, f32* arg1);
+INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E3514, f32 arg0, s32* colliderID);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_lateral);
 
@@ -358,21 +360,35 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->animFlags & 0x4000) {
-        if (actionState < ACTION_STATE_CONVERSATION) {
+        // TODO figure this out
+#ifdef NON_MATCHING
+        if (
+            actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK ||
+            actionState == ACTION_STATE_RUN || actionState == ACTION_STATE_JUMP ||
+            actionState == ACTION_STATE_BOUNCE || actionState == ACTION_STATE_HOP ||
+            actionState == ACTION_STATE_LAUNCH || actionState == ACTION_STATE_LAND_ON_SWITCH ||
+            actionState == ACTION_STATE_FALLING || actionState == ACTION_STATE_STEP_DOWN ||
+            actionState == ACTION_STATE_LAND || actionState == ACTION_STATE_STEP_DOWN_LAND
+        ) {
+#else
+        if (actionState < ACTION_STATE_TALK)
             if (actionState >= 0) {
+#endif
                 playerStatus->prevActionState = playerStatus->actionState;
                 playerStatus->actionState = actionState;
                 playerStatus->flags |= 0x80000000;
+#ifdef NON_MATCHING
             }
+#endif
         }
         return;
     }
 
-    if (actionState == ACTION_STATE_HIT_HAZARD || actionState == ACTION_STATE_HIT_LAVA) {
+    if (actionState == ACTION_STATE_HIT_FIRE || actionState == ACTION_STATE_HIT_LAVA) {
         PartnerID partner;
 
         if (playerStatus->unk_BF == 3) {
-            actionState = ACTION_STATE_HIT_HAZARD;
+            actionState = ACTION_STATE_HIT_FIRE;
         }
 
         // Whilst Sushie, Lakilester, Parakarry's ability is active, hazards have no effect.
@@ -387,7 +403,7 @@ void set_action_state(s32 actionState) {
         }
     }
 
-    if (actionState == ACTION_STATE_SLIDING) {
+    if (actionState == ACTION_STATE_SLIDE) {
         playerStatus->flags |= 0x10;
         playerStatus->moveFrames = 0;
         playerStatus->flags &= ~0x4000;
@@ -485,7 +501,7 @@ void check_input_spin(void) {
     Temp8010F250* temp_8010F250 = &D_8010F250;
     Temp8010F250* temp2 = temp_8010F250;
 
-    if (!(playerStatus->flags & 0x5000) &&
+    if (!(playerStatus->flags & (PLAYER_ANIM_FLAG_8BIT_MARIO | PLAYER_ANIM_FLAG_PEACH_PHYSICS)) &&
         !(playerStatus->animFlags & 1) &&
         !(playerStatus->currentButtons & D_CBUTTONS) &&
         !is_ability_active(ABILITY_SLOW_GO)) {
@@ -493,6 +509,7 @@ void check_input_spin(void) {
         s32 actionState = playerStatus->actionState;
         s32 btnPressed = playerStatus->pressedButtons & Z_TRIG;
 
+        // TODO
         if (actionState != 0x21) {
             if (actionState < 0x22) {
                 if (actionState < 3) {
@@ -526,9 +543,9 @@ void func_800E63A4(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (arg0 != 0) {
-        set_action_state(0x19);
+        set_action_state(ACTION_STATE_SNEAKY_PARASOL);
     } else {
-        playerStatus->animFlags &= ~0x2000;
+        playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
         npc_free_by_index(D_8010C96C);
@@ -552,17 +569,17 @@ void func_800E6428(void) {
             if (*temp_8010C92C == 0) {
                 GameStatus** gameStatus = &gGameStatusPtr;
                 if ((*gameStatus)->peachFlags & 2) {
-                    playerStatus->animFlags |= 0x2000;
+                    playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
                     (*gameStatus)->peachFlags |= 2;
 
                     disguiseNpc = make_disguise_npc((*gameStatus)->peachDisguise);
                     if (disguiseNpc != NULL) {
-                        disguiseNpc->flags &= ~0x40000;
+                        disguiseNpc->flags &= ~NPC_FLAG_40000;
                     }
                 }
             }
         } else if (gGameStatusPtr->peachFlags & 4 && playerStatus2->pressedButtons & B_BUTTON) {
-            set_action_state(0x19);
+            set_action_state(ACTION_STATE_SNEAKY_PARASOL);
         }
     }
 }
@@ -573,8 +590,8 @@ void func_800E6500(void) {
     if (D_8010C96C >= 0) {
         Npc* npc = get_npc_by_index(D_8010C96C);
 
-        if (npc->flags & 0x40000) {
-            npc->unk_34 = playerStatus->spriteFacingAngle;
+        if (npc->flags & NPC_FLAG_40000) {
+            npc->renderYaw = playerStatus->spriteFacingAngle;
         } else {
             npc->yaw = playerStatus->targetYaw;
         }

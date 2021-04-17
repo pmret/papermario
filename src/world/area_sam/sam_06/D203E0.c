@@ -7,9 +7,9 @@ void N(func_80240550_D203E0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
@@ -177,7 +177,7 @@ INCLUDE_ASM(s32, "world/area_sam/sam_06/D203E0", func_80241DE0_D21C70);
 /*
 ApiStatus N(func_80241DE0_D21C70)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

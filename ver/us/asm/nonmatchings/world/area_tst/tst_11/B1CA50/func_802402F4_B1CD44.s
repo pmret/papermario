@@ -15,7 +15,7 @@ glabel func_802402F4_B1CD44
 /* B1CD6C 8024031C 8E0400CC */  lw        $a0, 0xcc($s0)
 /* B1CD70 80240320 0C044181 */  jal       get_shadow_by_index
 /* B1CD74 80240324 00000000 */   nop
-/* B1CD78 80240328 0C048B77 */  jal       func_80122DDC
+/* B1CD78 80240328 0C048B77 */  jal       get_entity_model
 /* B1CD7C 8024032C 84440008 */   lh       $a0, 8($v0)
 /* B1CD80 80240330 8C430000 */  lw        $v1, ($v0)
 /* B1CD84 80240334 3C04800A */  lui       $a0, %hi(D_8009A634)

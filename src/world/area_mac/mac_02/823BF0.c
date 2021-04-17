@@ -270,7 +270,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242AD4_825D94);
 /*
 ApiStatus N(func_80242AD4_825D94)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

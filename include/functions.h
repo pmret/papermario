@@ -187,7 +187,7 @@ void clear_partner_move_history(Npc* partner);
 
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
-void set_parter_tether_distance(f32);
+void set_partner_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);

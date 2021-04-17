@@ -138,7 +138,7 @@ glabel npc_list_update
 /* 14F24 80039B24 0C044181 */  jal       get_shadow_by_index
 /* 14F28 80039B28 8E040078 */   lw       $a0, 0x78($s0)
 /* 14F2C 80039B2C 84440008 */  lh        $a0, 8($v0)
-/* 14F30 80039B30 0C048B77 */  jal       func_80122DDC
+/* 14F30 80039B30 0C048B77 */  jal       get_entity_model
 /* 14F34 80039B34 0040882D */   daddu    $s1, $v0, $zero
 /* 14F38 80039B38 0040202D */  daddu     $a0, $v0, $zero
 /* 14F3C 80039B3C 8C430000 */  lw        $v1, ($v0)

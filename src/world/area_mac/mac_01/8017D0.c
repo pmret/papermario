@@ -320,7 +320,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
 /*
 ApiStatus N(func_80243D28_8045A8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;
@@ -398,11 +398,11 @@ void func_802454B4_805D34(void) {
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
-    set_parter_tether_distance(20.0f);
+    set_partner_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
     return ApiStatus_DONE2;
 }

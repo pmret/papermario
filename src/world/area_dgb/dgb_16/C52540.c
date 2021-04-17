@@ -200,7 +200,7 @@ StaticNpc N(npcGroup_80241A4C)[] = {
         .id = NPC_WORLD_CLUBBA0,
         .settings = &N(npcSettings_8024194C),
         .pos = { -70.0f, 0.0f, -100.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -237,7 +237,7 @@ StaticNpc N(npcGroup_80241A4C)[] = {
         .id = NPC_WORLD_CLUBBA1,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -269,7 +269,7 @@ StaticNpc N(npcGroup_80241E2C)[] = {
         .id = NPC_WORLD_CLUBBA2,
         .settings = &N(npcSettings_8024194C),
         .pos = { 0.0f, 0.0f, -235.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 90,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -305,7 +305,7 @@ StaticNpc N(npcGroup_80241E2C)[] = {
         .id = NPC_WORLD_CLUBBA3,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -337,7 +337,7 @@ StaticNpc N(npcGroup_8024220C)[] = {
         .id = NPC_WORLD_CLUBBA4,
         .settings = &N(npcSettings_8024194C),
         .pos = { 70.0f, 0.0f, -100.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 90,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -373,7 +373,7 @@ StaticNpc N(npcGroup_8024220C)[] = {
         .id = NPC_WORLD_CLUBBA5,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -405,7 +405,7 @@ StaticNpc N(npcGroup_802425EC)[] = {
         .id = NPC_WORLD_CLUBBA6,
         .settings = &N(npcSettings_8024194C),
         .pos = { 140.0f, 0.0f, -235.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -441,7 +441,7 @@ StaticNpc N(npcGroup_802425EC)[] = {
         .id = NPC_WORLD_CLUBBA7,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -473,7 +473,7 @@ StaticNpc N(npcGroup_802429CC)[] = {
         .id = NPC_WORLD_CLUBBA8,
         .settings = &N(npcSettings_8024194C),
         .pos = { 210.0f, 0.0f, -100.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 270,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -509,7 +509,7 @@ StaticNpc N(npcGroup_802429CC)[] = {
         .id = NPC_WORLD_CLUBBA9,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -541,7 +541,7 @@ StaticNpc N(npcGroup_80242DAC)[] = {
         .id = NPC_WORLD_CLUBBA10,
         .settings = &N(npcSettings_8024194C),
         .pos = { 280.0f, 0.0f, -235.0f },
-        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .yaw = 90,
         .dropFlags = 0x80,
         .itemDropChance = 5,
@@ -577,7 +577,7 @@ StaticNpc N(npcGroup_80242DAC)[] = {
         .id = NPC_WORLD_CLUBBA11,
         .settings = &N(npcSettings_80241A20),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_DROPS,
+        .flags = NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_DROPS,
         .yaw = 0,
         .dropFlags = 0x80,
         .heartDrops = NO_DROPS,
@@ -693,17 +693,17 @@ ApiStatus N(update_starpoints_display_C528FC)(ScriptInstance *script, s32 isInit
                 }
                 posX = npc2->pos.x;
                 posZ = npc2->pos.z;
-                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->unk_34);
-                
+                add_vec2D_polar(&posX, &posZ, enemy->varTable[1], 270.0f - npc2->renderYaw);
+
                 npc->pos.x = posX;
                 enemy->unk_10.x = npc->pos.x;
 
                 npc->pos.y = npc2->pos.y + enemy->varTable[0];
                 enemy->unk_10.y = npc->pos.y;
-                
+
                 npc->pos.z = posZ;
                 enemy->unk_10.z = npc->pos.z;
-                
+
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 enemy->flags &= 0xE0EFFFFF;
                 npc->duration = 0;
@@ -726,7 +726,7 @@ ApiStatus N(update_starpoints_display_C528FC)(ScriptInstance *script, s32 isInit
                 enemy->unk_07 = func;
                 script->functionTemp[0].s = 0;
             }
-            break; 
+            break;
     }
 
     return ApiStatus_BLOCK;
@@ -758,10 +758,10 @@ void N(func_802406A4_C52BE4)(ScriptInstance *script, NpcAISettings *aiSettings, 
     f32 posX, posZ;
 
     if (func_800490B4(territory, enemy, 80.0f, 0.0f, 0)) {
-        if ((gPlayerStatusPtr->actionState ==  2) || (gPlayerStatusPtr->actionState == 26) || 
-            (gPlayerStatusPtr->actionState ==  3) || (gPlayerStatusPtr->actionState == 14) || 
-            (gPlayerStatusPtr->actionState == 16) || (gPlayerStatusPtr->actionState == 11) || 
-            (gPlayerStatusPtr->actionState == 10) || (gPlayerStatusPtr->actionState == 18) || 
+        if ((gPlayerStatusPtr->actionState ==  2) || (gPlayerStatusPtr->actionState == 26) ||
+            (gPlayerStatusPtr->actionState ==  3) || (gPlayerStatusPtr->actionState == 14) ||
+            (gPlayerStatusPtr->actionState == 16) || (gPlayerStatusPtr->actionState == 11) ||
+            (gPlayerStatusPtr->actionState == 10) || (gPlayerStatusPtr->actionState == 18) ||
             (gPlayerStatusPtr->actionState == 19) || (gPlayerStatusPtr->actionState == 37)) {
             phi_s2 = TRUE;
         }
@@ -773,7 +773,7 @@ void N(func_802406A4_C52BE4)(ScriptInstance *script, NpcAISettings *aiSettings, 
         }
     }
 
-    if (((playerData->currentPartner == 1) && (D_8010EBB0.unk_00 != 0)) || 
+    if (((playerData->currentPartner == 1) && (D_8010EBB0.unk_00 != 0)) ||
         ((playerData->currentPartner == 3) && (D_8010EBB0.unk_00 == 2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
@@ -887,7 +887,7 @@ void N(func_80240C4C_C5318C)(ScriptInstance *script, NpcAISettings *aiSettings, 
         npc->duration = 15;
         enemy->varTable[7] = 50;
         script->functionTemp[0].s = 3;
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         var = npc->yaw;
         func_8004A784(npc, 5.0f, &var, 0, 0, 0);
         npc->yaw = var;
@@ -900,7 +900,7 @@ void N(func_80240DC4_C53304)(ScriptInstance *script, NpcAISettings *aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 
-    if (npc->unk_8C == 0) {
+    if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration <= 0) {
             npc->duration = 0;

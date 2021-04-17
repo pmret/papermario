@@ -42,7 +42,7 @@ glabel pause_spirits_update
 /* 140BCC 8024D88C 8E250000 */  lw        $a1, ($s1)
 .L8024D890:
 /* 140BD0 8024D890 3C063F80 */  lui       $a2, 0x3f80
-/* 140BD4 8024D894 0C0B78AB */  jal       func_802DE2AC
+/* 140BD4 8024D894 0C0B78AB */  jal       spr_update_sprite
 /* 140BD8 8024D898 26310010 */   addiu    $s1, $s1, 0x10
 /* 140BDC 8024D89C 3C028027 */  lui       $v0, %hi(D_802706FC)
 /* 140BE0 8024D8A0 8C4206FC */  lw        $v0, %lo(D_802706FC)($v0)
