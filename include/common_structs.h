@@ -529,7 +529,9 @@ typedef struct Camera {
     /* 0x488 */ f32 linearInterp;
     /* 0x48C */ f32 linearInterpScale; /* 3.0? */
     /* 0x490 */ f32 moveSpeed;
-    /* 0x494 */ char unk_494[28];
+    /* 0x494 */ char unk_494[0x8];
+    /* 0x49C */ f32 unk_49C;
+    /* 0x4A0 */ char unk_4A0[0x10];
     /* 0x4B0 */ Vec3f movePos;
     /* 0x4BC */ char unk_4BC[28];
     /* 0x4D8 */ s32 controllerType;
@@ -1078,7 +1080,7 @@ typedef struct Shadow {
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
     /* 0x28 */ struct Vec3f unk_28;
-    /* 0x34 */ char unk_34[68];
+    /* 0x34 */ char unk_34[0x44];
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1532,10 +1534,10 @@ typedef struct PlayerStatus {
     /* 0x008 */ s16 framesOnGround; /* Number of frames since last jump landed */
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ s8 peachDisguise;
-    /* 0x00D */ char unk_0D[1];
+    /* 0x00D */ s8 unk_0D;
     /* 0x00E */ u8 unk_0E;
     /* 0x00F */ u8 unk_0F;
-    /* 0x010 */ char unk_10[0x2];
+    /* 0x010 */ s16 unk_10;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 statusMenuCounterinputEnabledCounter; /* whether the C-up menu can appear */
@@ -1552,14 +1554,16 @@ typedef struct PlayerStatus {
     /* 0x060 */ char unk_60[4];
     /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
-    /* 0x06C */ char unk_6C[4];
+    /* 0x06C */ f32 unk_6C;
     /* 0x070 */ f32 gravityIntegrator[4];
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
     /* 0x08C */ s32 unk_8C;
     /* 0x090 */ f32 unk_90;
-    /* 0x094 */ char unk_94[12];
+    /* 0x094 */ s32 unk_94;
+    /* 0x098 */ s32 unk_98;
+    /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ f32 heading;
     /* 0x0A4 */ char unk_A4[4];
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */

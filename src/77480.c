@@ -1,10 +1,15 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 extern s32 D_8010C920;
-extern s32 D_8010C93C;
+extern UNK_FUN_PTR(D_8010C93C);
 extern s32 D_8010C940;
 extern s32 D_8010C950;
 extern s32 D_8010C958;
+
+extern s32 D_802BDF60;
+
+void func_802B72C0_E22870();
 
 void func_800E0514(void);
 
@@ -122,7 +127,26 @@ void update_player(void) {
     playerStatus->animFlags &= ~8;
 }
 
-INCLUDE_ASM(s32, "77480", check_input_use_partner);
+void check_input_use_partner(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerStatus* playerStatus2 = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    u32 actionState = playerStatus->actionState;
+
+    if (!(playerStatus->animFlags & 0x4000)) {
+        if (playerStatus->animFlags & 8 || playerStatus->statusMenuCounterinputEnabledCounter == 0) {
+            if (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & 0x80) &&
+                !(playerStatus->pressedButtons & BUTTON_B) && !(playerStatus->animFlags & 0x1000) &&
+                actionState <= ACTION_STATE_RUN) {
+
+                if (playerData->currentPartner == PARTNER_GOOMBARIO) {
+                    D_802BDF60 = playerStatus2->unk_C6;
+                }
+                partner_use_ability();
+            }
+        }
+    }
+}
 
 void func_800DFAAC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -329,16 +353,42 @@ void func_800E0260(void) {
     func_800E0330();
 }
 
+// Weird control flow / issue with loading linker addrs
+#ifdef NON_MATCHING
+extern s8 D_8015A57A;
+void func_800E0294(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (D_8015A57A != 0) {
+        UnkFunc* temp8010C93C = &D_8010C93C;
+
+        if (*temp8010C93C == NULL) {
+            if (!(playerStatus->animFlags & 0x30)) {
+                dma_copy(E225B0_ROM_START, E225B0_ROM_END, E225B0_VRAM);
+                *temp8010C93C = func_802B72C0_E22870;
+            }
+        } else {
+            (*temp8010C93C)();
+            return;
+        }
+    }
+
+    if (D_8010C93C != NULL) {
+        D_8010C93C();
+    }
+}
+#else
 INCLUDE_ASM(s32, "77480", func_800E0294);
+#endif
 
 void func_800E0330(void) {
-    if ((gPlayerStatusPtr->animFlags & PLAYER_ANIM_FLAG_100) && (D_8010C93C != 0)) {
+    if ((gPlayerStatusPtr->animFlags & PLAYER_ANIM_FLAG_100) && (D_8010C93C != NULL)) {
         func_802B7000_E225B0();
     }
 }
 
 void func_800E0374(void) {
-    D_8010C93C = 0;
+    D_8010C93C = NULL;
     gPlayerStatusPtr->animFlags &= ~PLAYER_ANIM_FLAG_100;
 }
 

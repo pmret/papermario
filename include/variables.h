@@ -101,6 +101,8 @@ extern s32 D_802E99DC;
 extern Entity* D_802EB3A0;
 extern s32 D_8015C7D0[3]; // not size 3
 
+extern f32 D_800F7B70[];
+
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
 extern UNK_TYPE D_0A0031B0;
