@@ -143,6 +143,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
     )
 
+    ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
+
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
         description="cc_tool $in",
@@ -372,6 +374,25 @@ class Configure:
                         })
                     elif name.endswith("_tex"):
                         compress = False
+                        bin_path = path
+                    elif name.endswith("_shape"):
+                        map_name = "_".join(name.split("_")[:-1])
+
+                        # Handle map XML files, if they exist (TODO: have splat output these)
+                        map_xml = self.resolve_asset_path(Path(f"assets/{self.version}") / seg.dir / seg.name / (map_name + ".xml"))
+                        if map_xml.exists():
+                            # Build a header file for this map
+                            build(
+                                self.build_path() / "include" / seg.dir / seg.name / (map_name + ".h"),
+                                [map_xml],
+                                "map_header",
+                            )
+
+                            # NOTE: we don't build the map xml into a _shape or _hit file (yet); the Star Rod Map Editor
+                            # is able to build the xml nonmatchingly into assets/star_rod_build/mapfs/*.bin for people
+                            # who want that (i.e. modders). 'star_rod_build' should be added to asset_stack also.
+
+                        compress = True
                         bin_path = path
                     else:
                         compress = True
