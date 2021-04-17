@@ -87,15 +87,15 @@ void func_802E8BC0(Entity* entity) {
     f32 entryX;
     f32 entryZ;
 
-    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->x;
-    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->z;
+    entryX = (*mapConfig->entryList)[temp->unk_0C].x;
+    entryZ = (*mapConfig->entryList)[temp->unk_0C].z;
     temp->unk_04 = func_800E0088(entryX, entryZ) / playerStatus->runSpeed;
     if (temp->unk_04 == 0) {
         temp->unk_04 = 1;
     }
 
-    entryX = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->x;
-    entryZ = GET_MAP_ENTRY(mapConfig, temp->unk_0C)->z;
+    entryX = (*mapConfig->entryList)[temp->unk_0C].x;
+    entryZ = (*mapConfig->entryList)[temp->unk_0C].z;
     temp_f20 = atan2(playerStatus2->position.x, playerStatus2->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();

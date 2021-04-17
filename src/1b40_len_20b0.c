@@ -282,7 +282,7 @@ void gfx_init_state(void) {
 
     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074230));
-    temp = gMasterGfxPos++;
+    //temp = gMasterGfxPos++;
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
 }
 #else
