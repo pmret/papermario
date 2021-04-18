@@ -1,7 +1,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-void dispatch_event_partner(s8 lastEventType) {
+void dispatch_event_partner(s32 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ScriptInstance* onHitScript = partnerActor->onHitScript;
@@ -46,7 +46,71 @@ INCLUDE_ASM(s32, "1AC760", calc_partner_test_enemy);
 
 INCLUDE_ASM(s32, "1AC760", calc_partner_damage_enemy);
 
+//Some slight stack / ordering issues at the beginning
+#ifdef NON_MATCHING
+s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partner = battleStatus->partnerActor;
+    ActorMovement* walkMovement = &partner->walk;
+    s32 flagCheck;
+    s32 temp_a1;
+
+    damageAmount = (s16)damageAmount;
+    battleStatus->currentAttackDamage = damageAmount;
+    partner->currentHP = 127;
+    temp_a1 = (s16)(partner->hpChangeCounter + damageAmount);
+    partner->hpChangeCounter += damageAmount;
+    partner->hpChangeCounter -= temp_a1;
+    partner->damageCounter += temp_a1;
+    battleStatus->lastAttackDamage = 0;
+    partner->currentHP -= temp_a1;
+
+    if (partner->currentHP <= 0) {
+        battleStatus->lastAttackDamage += partner->currentHP;
+        partner->currentHP = 0;
+        event = 0x20;
+    }
+
+    battleStatus->lastAttackDamage += temp_a1;
+    partner->lastDamageTaken = battleStatus->lastAttackDamage;
+    battleStatus->unk_19A = 0;
+
+    if (battleStatus->flags1 & 0x20) {
+        if (event == 0x9) {
+            event = 0xA;
+        }
+        if (event == 0x17) {
+            event = 0x19;
+        }
+    }
+
+    if (battleStatus->lastAttackDamage > 0) {
+        BattleStatus* battleStatus2 = &gBattleStatus; // TODO macro for setting flags of battleStatus
+        battleStatus2->flags1 |= 0x20;
+
+        inflict_status(partner, 0xD, battleStatus->lastAttackDamage);
+    }
+
+    if (stopMotion == 0) {
+        set_goal_pos_to_part(walkMovement, 0x100, 0);
+    }
+
+    show_damage_popup(walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z, battleStatus->lastAttackDamage, 1);
+    func_802666E4(partner, walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z, battleStatus->lastAttackDamage);
+
+    if (battleStatus->lastAttackDamage > 0) {
+        func_80267018(partner, 1);
+    }
+
+    partner->flags |= 0x80000;
+
+    flagCheck = (gBattleStatus.flags1 & 0x240) != 0;
+    dispatch_event_partner(event);
+    return flagCheck;
+}
+#else
 INCLUDE_ASM(s32, "1AC760", dispatch_damage_event_partner);
+#endif
 
 s32 dispatch_damage_event_partner_0(s32 damageAmount, s32 event, s32 stopMotion) {
     return dispatch_damage_event_partner(damageAmount, event, FALSE);

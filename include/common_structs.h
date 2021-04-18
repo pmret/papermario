@@ -654,7 +654,7 @@ typedef struct BattleStatus {
     /* 0x170 */ char unk_170;
     /* 0x171 */ u8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
-    /* 0x178 */ u8 moveCategory;
+    /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
     /* 0x17C */ s16 selectedMoveID;
@@ -939,7 +939,7 @@ typedef struct PrintContext {
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 unkArrayunkLength[4];
     /* 0x490 */ char unk_490[0x58];
-    /* 0x4E8 */ u8 unk_4E8;
+    /* 0x4E8 */ u8 currentOption;
     /* 0x4E9 */ char unk_4E9[19];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ char unk_500[9];

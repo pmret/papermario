@@ -1286,7 +1286,7 @@ INCLUDE_ASM(void, "190B20", show_damage_popup, f32 x, f32 y, f32 z, s32 damageAm
 
 INCLUDE_ASM(s32, "190B20", func_80266684);
 
-INCLUDE_ASM(s32, "190B20", func_802666E4);
+INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
 
 INCLUDE_ASM(s32, "190B20", func_802667F0);
 

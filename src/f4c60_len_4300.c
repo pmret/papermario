@@ -20,9 +20,65 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "f4c60_len_4300", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
 
-INCLUDE_ASM(s32, "f4c60_len_4300", ShowMessageAtScreenPos, ScriptInstance* script, s32 isInitialCall);
+ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
 
-INCLUDE_ASM(s32, "f4c60_len_4300", ShowMessageAtWorldPos, ScriptInstance* script, s32 isInitialCall);
+    if (isInitialCall) {
+        s32 stringID = get_variable(script, *args++);
+        s32 x = get_variable(script, *args++);
+        s32 y = get_variable(script, *args++);
+        s32* temp802DB264 = &D_802DB264;
+
+        *temp802DB264 = 0;
+        gCurrentPrintContext = load_string(stringID, temp802DB264);
+        clamp_printer_coords(gCurrentPrintContext, x, y);
+    }
+
+    if (gCurrentPrintContext->stateFlags & 0x40) {
+        return ApiStatus_DONE1;
+    }
+
+    if (D_802DB264 != 1) {
+        return ApiStatus_BLOCK;
+    }
+
+    script->varTable[0] = gCurrentPrintContext->currentOption;
+    return ApiStatus_DONE1;
+}
+
+ApiStatus ShowMessageAtWorldPos(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PrintContext** currentPrintContext;
+    s32* currentCameraID = &gCurrentCameraID;
+
+    if (isInitialCall) {
+        s32 stringID = get_variable(script, *args++);
+        s32 x = get_variable(script, *args++);
+        s32 y = get_variable(script, *args++);
+        s32 z = get_variable(script, *args++);
+        s32 x2;
+        s32 y2;
+        s32 z2;
+        s32* temp802DB264 = &D_802DB264;
+
+        *temp802DB264 = 0;
+        currentPrintContext = &gCurrentPrintContext;
+        *currentPrintContext = load_string(stringID, temp802DB264);
+        get_screen_coords(*currentCameraID, x, y, z, &x2, &y2, &z2);
+        clamp_printer_coords(*currentPrintContext, x2, y2);
+    }
+
+    if (gCurrentPrintContext->stateFlags & 0x40) {
+        return ApiStatus_DONE1;
+    }
+
+    if (D_802DB264 != 1) {
+        return ApiStatus_BLOCK;
+    }
+
+    script->varTable[0] = gCurrentPrintContext->currentOption;
+    return ApiStatus_DONE1;
+}
 
 ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -34,7 +90,7 @@ ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
     } else {
-        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        script->varTable[0] = gCurrentPrintContext->currentOption;
         return ApiStatus_DONE1;
     }
 }
@@ -51,12 +107,31 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
     } else {
-        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        script->varTable[0] = gCurrentPrintContext->currentOption;
         return ApiStatus_DONE1;
     }
 }
 
-INCLUDE_ASM(s32, "f4c60_len_4300", ShowChoice, ScriptInstance* script, s32 isInitialCall);
+ApiStatus ShowChoice(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PrintContext** temp802DB268;
+
+    if (isInitialCall) {
+        s32 stringID = get_variable(script, *args++);
+
+        script->functionTemp[1].s = 0;
+        D_802DB268 = load_string(stringID, &script->functionTemp[1]);
+    }
+
+    temp802DB268 = &D_802DB268;
+    script->varTable[0] = gCurrentPrintContext->currentOption = (*temp802DB268)->currentOption;
+
+    if ((*temp802DB268)->stateFlags & 0x40) {
+        return ApiStatus_DONE1;
+    }
+
+    return script->functionTemp[1].s == 1;
+}
 
 ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {
     close_message(D_802DB268);

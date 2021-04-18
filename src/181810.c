@@ -121,10 +121,10 @@ ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1].s == 1) {
-        u8 unk_4E8 = D_8029FA64->unk_4E8;
+        u8 currentOption = D_8029FA64->currentOption;
 
-        gSpeakingActorPrintCtx->unk_4E8 = D_8029FA64->unk_4E8;
-        script->varTable[0] = unk_4E8;
+        gSpeakingActorPrintCtx->currentOption = D_8029FA64->currentOption;
+        script->varTable[0] = currentOption;
 
         return ApiStatus_DONE1;
     }

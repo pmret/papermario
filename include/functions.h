@@ -41,6 +41,7 @@ Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
 void func_80070550(s32, f32, f32, f32, f32, f32, s32, s32);
 void func_802E263C(Entity* entity);
+void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);

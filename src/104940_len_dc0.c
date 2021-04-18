@@ -1,14 +1,28 @@
 #include "common.h"
 
-//display list func
-INCLUDE_ASM(s32, "104940_len_dc0", func_802E30C0);
+void func_802E30C0(s32 entityIndex) {
+    Gfx* gfx = gMasterGfxPos;
+    Entity* entity = get_entity_by_index(entityIndex);
+
+    gDPSetTextureLUT(gfx++, G_TT_NONE);
+    gSPTexture(gfx++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+
+    if (entity->alpha >= 255) {
+        gDPSetRenderMode(gfx++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+        gDPSetCombineMode(gfx++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+    } else {
+        gDPSetCombineLERP(gfx++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, entity->alpha);
+    }
+
+    gMasterGfxPos = gfx;
+}
 
 void func_802E31B0(Entity* entity) {
     func_80072230(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
 }
 
 f32 func_802E31EC(Entity* entity) {
-
     if ((get_entity_type(entity->listIndex) - 24) < 3) {
         entity->scale.y = 0.23f;
         entity->scale.x = 1.04f;
@@ -23,7 +37,6 @@ f32 func_802E31EC(Entity* entity) {
 }
 
 void func_802E328C(Entity* entity) {
-
     if ((get_entity_type(entity->listIndex) - 24) < 3) {
         entity->scale.x -= 0.09;
         entity->scale.z -= 0.09;
