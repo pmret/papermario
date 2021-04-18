@@ -654,7 +654,7 @@ typedef struct BattleStatus {
     /* 0x170 */ char unk_170;
     /* 0x171 */ u8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
-    /* 0x178 */ u8 moveCategory;
+    /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
     /* 0x17C */ s16 selectedMoveID;
