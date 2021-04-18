@@ -138,7 +138,7 @@ glabel state_step_language_select
 /* 107BC 800353BC 00000000 */   nop
 /* 107C0 800353C0 0C05259C */  jal       func_80149670
 /* 107C4 800353C4 0000202D */   daddu    $a0, $zero, $zero
-/* 107C8 800353C8 0C0B763E */  jal       func_802DD8F8
+/* 107C8 800353C8 0C0B763E */  jal       spr_init_sprites
 /* 107CC 800353CC 0000202D */   daddu    $a0, $zero, $zero
 /* 107D0 800353D0 0C045751 */  jal       clear_model_data
 /* 107D4 800353D4 00000000 */   nop

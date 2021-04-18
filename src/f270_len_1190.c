@@ -97,7 +97,7 @@ void state_init_logos(void) {
     clear_script_list();
     clear_dynamic_entity_list();
     func_8011D890();
-    func_802DD8F8(0);
+    spr_init_sprites(0);
     func_8011E224();
     clear_entity_models();
     npc_list_clear();
@@ -356,7 +356,7 @@ void state_step_pause(void) {
                     battle_heap_create();
                     nuContRmbForceStop();
                     func_80149670(0);
-                    func_802DD8F8(0);
+                    spr_init_sprites(0);
                     clear_model_data();
                     func_80148040();
                     use_default_background_settings();
@@ -450,7 +450,7 @@ void state_step_unpause(void) {
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
                         func_80149670(1);
-                        func_802DD8F8((*gameStatus)->unk_84);
+                        spr_init_sprites((*gameStatus)->unk_84);
                         init_model_data();
                         func_801480F0();
                         init_entity_models();

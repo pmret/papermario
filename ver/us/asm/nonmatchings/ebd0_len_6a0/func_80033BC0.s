@@ -62,7 +62,7 @@ glabel func_80033BC0
 /* F0A4 80033CA4 0C00AB28 */  jal       battle_heap_create
 /* F0A8 80033CA8 A062007E */   sb       $v0, 0x7e($v1)
 /* F0AC 80033CAC 8E020000 */  lw        $v0, ($s0)
-/* F0B0 80033CB0 0C0B763E */  jal       func_802DD8F8
+/* F0B0 80033CB0 0C0B763E */  jal       spr_init_sprites
 /* F0B4 80033CB4 80440084 */   lb       $a0, 0x84($v0)
 /* F0B8 80033CB8 0C0457FA */  jal       init_model_data
 /* F0BC 80033CBC 00000000 */   nop

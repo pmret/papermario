@@ -77,7 +77,7 @@ glabel step_battle
 /* EDF8 800339F8 A202007E */  sb        $v0, 0x7e($s0)
 /* EDFC 800339FC 24040006 */  addiu     $a0, $zero, 6
 .L80033A00:
-/* EE00 80033A00 0C0B763E */  jal       func_802DD8F8
+/* EE00 80033A00 0C0B763E */  jal       spr_init_sprites
 /* EE04 80033A04 00000000 */   nop
 /* EE08 80033A08 0C045751 */  jal       clear_model_data
 /* EE0C 80033A0C 00000000 */   nop

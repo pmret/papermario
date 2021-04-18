@@ -109,7 +109,7 @@ glabel L800381C8_135C8
 /* 13664 80038264 00000000 */   nop
 /* 13668 80038268 0C00B7BD */  jal       create_cameras_a
 /* 1366C 8003826C 00000000 */   nop
-/* 13670 80038270 0C0B763E */  jal       func_802DD8F8
+/* 13670 80038270 0C0B763E */  jal       spr_init_sprites
 /* 13674 80038274 0000202D */   daddu    $a0, $zero, $zero
 /* 13678 80038278 0C0482EC */  jal       clear_entity_models
 /* 1367C 8003827C 00000000 */   nop

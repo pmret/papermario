@@ -15,7 +15,7 @@ struct D_802DFA48 {
 }; // size = 0x14
 
 extern s32 D_802DF524;
-extern s32 D_802DF578[];
+extern s32 D_802DF548[];
 extern s32 D_802DF580;
 extern s32 D_802DF5B0[];
 extern struct D_802DF588 D_802DF588[]; // len 3?
@@ -189,38 +189,17 @@ void set_anim_timescale(f32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", func_802DD89C);
 
-// spr_init_sprites
-//INCLUDE_ASM(s32, "sprite", func_802DD8F8);
-void func_802DD8F8(s32 playerSpriteSet) {
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 temp_s0_3;
-    s32 temp_s0_4;
-    s32 temp_s0_5;
-    s32 temp_s1;
-    struct D_802DF4C4* temp_v0;
-    void *phi_v0;
-    s32 phi_s0;
-    s32 phi_s1;
-    s32 phi_v0_2;
-    s32 phi_s0_2;
-    struct D_802DF588* phi_v1;
-    s32 phi_s0_3;
-    s32* phi_v1_2;
-    s32 phi_s0_4;
-    struct D_802DFA48* phi_v1_3;
-    s32 phi_s0_5;
-
+void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
+    s32 unk_08;
 
     D_802DF524 = 0;
     _heap_create(&gSpriteHeapPtr, 0x40000U);
     func_8013A37C();
 
-
     for (i = 0; i < 0xD; i++) {
-        s32* d802DF578 = D_802DF578;
-        d802DF578[i] = 0;
+        s32* d = D_802DF548;
+        d[i] = 0;
     }
 
     D_802DF580 = 0;
@@ -229,19 +208,19 @@ void func_802DD8F8(s32 playerSpriteSet) {
         playerSpriteSet = 4;
     }
 
-    temp_s1 = (&D_802DF4C4[playerSpriteSet])->unk_08;
+    unk_08 = (&D_802DF4C4[playerSpriteSet])->unk_08;
     func_802DED60((&D_802DF4C4[playerSpriteSet])->cacheSize, (&D_802DF4C4[playerSpriteSet])->rasterSize);
 
     for (i = 1; i < 0xE; i++) {
-        if ((temp_s1 >> i) & 1) {
+        if ((unk_08 >> i) & 1) {
             func_802DD89C(i); // spr_load_player_sprite
         }
     }
 
     for (i = 0; i < 3; i++) {
-        phi_v1 = &D_802DF588[i];
-        phi_v1->unk_00 = 0;
-        phi_v1->unk_04 = -1;
+        struct D_802DF588* d = &D_802DF588[i];
+        d->unk_00 = 0;
+        d->unk_04 = -1;
     }
 
     for (i = 0; i < 0xEA; i++) {
@@ -253,12 +232,12 @@ void func_802DD8F8(s32 playerSpriteSet) {
     }
 
     for (i = 0; i < 0x33; i++) {
-        phi_v1_3 = &D_802DFA48[i];
-        phi_v1_3->unk_00 = 0;
-        phi_v1_3->unk_04 = 0;
-        phi_v1_3->unk_08 = 0;
-        phi_v1_3->unk_0C = -1;
-        phi_v1_3->unk_10 = 0;
+        struct D_802DFA48* d = &D_802DFA48[i];
+        d->unk_00 = 0;
+        d->unk_04 = 0;
+        d->unk_08 = 0;
+        d->unk_0C = -1;
+        d->unk_10 = 0;
     }
 
     func_802DBD40(); // spr_init_quad_cache

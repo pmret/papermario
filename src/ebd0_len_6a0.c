@@ -102,7 +102,7 @@ void step_battle(void) {
                 phi_a0 = 6;
             }
 
-            func_802DD8F8(phi_a0);
+            spr_init_sprites(phi_a0);
 
             clear_model_data();
             func_80148040();
