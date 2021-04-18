@@ -51,7 +51,7 @@ f32 D_802DF4C0 = 1.0f;
 s32 D_802DF4C4[] = { 0x00000006, 0x00000700, 0x000003C6, 0x00000012, 0x00000700, 0x000003C6, 0x0000000A, 0x00000900, 0x00003FC6, 0x00000003, 0x00000700, 0x00000006, 0x00000006, 0x00000900, 0x00003C00, 0x00000006, 0x00000700, 0x0000003E, 0x00000006, 0x00000900, 0x00003C00, 0x00000000, 0x00000000, };
 
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBD40);
+INCLUDE_ASM(s32, "sprite", func_802DBD40);
 
 // extern s32* gSpriteHeapPtr;
 // extern s32** D_802DFE44;
@@ -67,17 +67,17 @@ INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBD40);
 //     }
 // }
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBD8C);
+INCLUDE_ASM(s32, "sprite", func_802DBD8C);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBDBC);
+INCLUDE_ASM(s32, "sprite", func_802DBDBC);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBE78);
+INCLUDE_ASM(s32, "sprite", func_802DBE78);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DBFC0);
+INCLUDE_ASM(s32, "sprite", func_802DBFC0);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DC008);
+INCLUDE_ASM(s32, "sprite", func_802DC008);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", spr_appendMDL_component);
+INCLUDE_ASM(s32, "sprite", spr_appendMDL_component);
 
 void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ) {
     if (rotX == 0 && rotY == 0 && rotZ == 0) {
@@ -110,7 +110,7 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
     }
 }
 
-INCLUDE_ASM(s32, "fee30_len_2d60", spr_draw_component);
+INCLUDE_ASM(s32, "sprite", spr_draw_component);
 
 s32 _spr_sign_extend_12bit(u16 val) {
     s32 temp = val & 0xFFF;
@@ -132,23 +132,23 @@ s32 _spr_sign_extend_16bit(u16 val) {
     }
 }
 
-INCLUDE_ASM(s32, "fee30_len_2d60", update_component);
+INCLUDE_ASM(s32, "sprite", update_component);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD634);
+INCLUDE_ASM(s32, "sprite", func_802DD634);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD6DC);
+INCLUDE_ASM(s32, "sprite", func_802DD6DC);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD7B0);
+INCLUDE_ASM(s32, "sprite", func_802DD7B0);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD820);
+INCLUDE_ASM(s32, "sprite", func_802DD820);
 
 void set_anim_timescale(f32 arg0) {
     D_802DF4C0 = arg0 * 2.0f;
 }
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD89C);
+INCLUDE_ASM(s32, "sprite", func_802DD89C);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DD8F8);
+INCLUDE_ASM(s32, "sprite", func_802DD8F8);
 
 void func_802DDA60(void) {
     func_802DEFB4();
@@ -159,40 +159,40 @@ s32 func_802DDA84(void) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DDA8C);
+INCLUDE_ASM(s32, "sprite", func_802DDA8C);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", render_sprite);
+INCLUDE_ASM(s32, "sprite", render_sprite);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DDEC4);
+INCLUDE_ASM(s32, "sprite", func_802DDEC4);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DDEE4);
+INCLUDE_ASM(s32, "sprite", func_802DDEE4);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DDFF8);
+INCLUDE_ASM(s32, "sprite", func_802DDFF8);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE044);
+INCLUDE_ASM(s32, "sprite", func_802DE044);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE0C0);
+INCLUDE_ASM(s32, "sprite", func_802DE0C0);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE0EC);
+INCLUDE_ASM(s32, "sprite", func_802DE0EC);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE2AC, s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(s32, "sprite", func_802DE2AC, s32 arg0, s32 arg1, f32 arg2);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE3D8);
+INCLUDE_ASM(s32, "sprite", func_802DE3D8);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE5C8);
+INCLUDE_ASM(s32, "sprite", func_802DE5C8);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE5E8);
+INCLUDE_ASM(s32, "sprite", func_802DE5E8);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE748);
+INCLUDE_ASM(s32, "sprite", func_802DE748);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE780);
+INCLUDE_ASM(s32, "sprite", func_802DE780);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE894);
+INCLUDE_ASM(s32, "sprite", func_802DE894);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE8DC);
+INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DE9D8);
+INCLUDE_ASM(s32, "sprite", func_802DE9D8);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DEA40);
+INCLUDE_ASM(s32, "sprite", func_802DEA40);
 
-INCLUDE_ASM(s32, "fee30_len_2d60", func_802DEA6C);
+INCLUDE_ASM(s32, "sprite", func_802DEA6C);
