@@ -60,7 +60,7 @@ if __name__ == "__main__":
         print(f"#define {entry} {i}")
     print(f"EntryList {map_name}_entryList = {{")
     for entry in entrys:
-        print("    " + entry + "_vec4f,")
+        print("    { " + entry + "_vec4f },")
     print("};")
 
     print("")
