@@ -19,7 +19,7 @@ options:
   find_file_boundaries: True
   compiler: IDO
   platform: n64
-  base_dir: .
+  base_path: .
   target_path: baserom.z64
 """.format(rom.name.title(), rom.get_country_name(), basename)
 
