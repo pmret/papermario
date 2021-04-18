@@ -29,13 +29,14 @@ build.ninja
 baserom.*
 build/
 !tools/build
-/assets/jp
-/assets/us
 /docs/doxygen/
 /include/ld_addrs.h
 /include/message_ids.h
 /include/sprite/
 /include/map
+
+# Assets
+/assets/*
 
 # Star Rod
 /sprite/SpriteTable.xml

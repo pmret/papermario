@@ -27,7 +27,7 @@ class N64SegAsm(N64SegCodeSubsegment):
 
     def scan(self, rom_bytes: bytes):
         if self.rom_start != "auto" and self.rom_end != "auto" and self.rom_start != self.rom_end:
-            self.funcs_text = self.disassemble_code(rom_bytes)
+            self.funcs_text = self.disassemble_code(rom_bytes, options.get("asm_endlabels", False))
 
     def split(self, rom_bytes: bytes):
         if not self.rom_start == self.rom_end:

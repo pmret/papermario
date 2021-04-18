@@ -6,7 +6,11 @@ import sys
 import ninja_syntax
 from glob import glob
 
+# Configuration:
 VERSIONS = ["us", "jp"]
+DO_SHA1_CHECK = True
+
+# Paths:
 ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
@@ -59,10 +63,16 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
-    ninja.rule("sha1sum",
-        description="check $in",
-        command=f"sha1sum -c $in && touch $out",
-    )
+    if DO_SHA1_CHECK:
+        ninja.rule("sha1sum",
+            description="check $in",
+            command=f"sha1sum -c $in && touch $out",
+        )
+    else:
+        ninja.rule("sha1sum",
+            description="check $in",
+            command=f"touch $out",
+        )
 
     ninja.rule("cc",
         description="cc($version) $in",
@@ -133,6 +143,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
     )
 
+    ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
+
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
         description="cc_tool $in",
@@ -165,6 +177,7 @@ class Configure:
             verbose=False,
         )
         self.linker_entries = split.linker_writer.entries[:]
+        self.asset_stack = split.config["asset_stack"]
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
@@ -190,9 +203,7 @@ class Configure:
         out = []
 
         for path in src_paths:
-            if path.parents[0] == "assets":
-                # TODO resolve asset
-                pass
+            path = self.resolve_asset_path(path)
 
             if path.is_dir():
                 out.extend(glob(str(path) + "/**/*", recursive=True))
@@ -200,6 +211,19 @@ class Configure:
                 out.append(str(path))
 
         return out
+
+    def resolve_asset_path(self, path: Path) -> Path:
+        parts = list(path.parts)
+
+        if parts[0] == "assets":
+            for d in self.asset_stack:
+                parts[1] = d
+                new_path = Path("/".join(parts))
+                if new_path.exists():
+                    return new_path
+
+        # ¯\_(ツ)_/¯
+        return path
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
@@ -302,7 +326,7 @@ class Configure:
                     variables = {
                         "sprite_id": sprite_id,
                         "sprite_name": sprite_name,
-                        "sprite_dir": str(sprite_dir),
+                        "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
                     }
 
                     build(bin_path, [sprite_dir], "sprite", variables=variables)
@@ -350,6 +374,25 @@ class Configure:
                         })
                     elif name.endswith("_tex"):
                         compress = False
+                        bin_path = path
+                    elif name.endswith("_shape"):
+                        map_name = "_".join(name.split("_")[:-1])
+
+                        # Handle map XML files, if they exist (TODO: have splat output these)
+                        map_xml = self.resolve_asset_path(Path(f"assets/{self.version}") / seg.dir / seg.name / (map_name + ".xml"))
+                        if map_xml.exists():
+                            # Build a header file for this map
+                            build(
+                                self.build_path() / "include" / seg.dir / seg.name / (map_name + ".h"),
+                                [map_xml],
+                                "map_header",
+                            )
+
+                            # NOTE: we don't build the map xml into a _shape or _hit file (yet); the Star Rod Map Editor
+                            # is able to build the xml nonmatchingly into assets/star_rod_build/mapfs/*.bin for people
+                            # who want that (i.e. modders). 'star_rod_build' should be added to asset_stack also.
+
+                        compress = True
                         bin_path = path
                     else:
                         compress = True
@@ -420,7 +463,7 @@ if __name__ == "__main__":
     exec_shell(["make", "-C", str(ROOT / args.splat)])
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
-    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell("cpp --version"):
+    if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
         print("error: system C preprocessor is not GNU!")
         print("This is a known issue on macOS - only clang's cpp is installed by default.")
         print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
