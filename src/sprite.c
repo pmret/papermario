@@ -194,7 +194,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
     s32 unk_08;
 
     D_802DF524 = 0;
-    _heap_create(&gSpriteHeapPtr, 0x40000U);
+    _heap_create(&gSpriteHeapPtr, 0x40000);
     func_8013A37C();
 
     for (i = 0; i < 0xD; i++) {
