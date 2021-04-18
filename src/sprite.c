@@ -1,5 +1,30 @@
 #include "common.h"
 
+struct D_802DF588 {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+}; // size = 0xC
+
+struct D_802DFA48 {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    s32 unk_0C;
+    s32 unk_10;
+}; // size = 0x14
+
+extern s32 D_802DF524;
+extern s32 D_802DF578[];
+extern s32 D_802DF580;
+extern s32 D_802DF5B0[];
+extern struct D_802DF588 D_802DF588[]; // len 3?
+extern struct D_802DFA48 D_802DFA48[]; // len 0x33?
+extern u8 D_802DF958[];
+extern s32 gSpriteHeapPtr;
+
+void func_802DED60(s32 cacheSize, s32 maxRasterSize);
+
 s32 D_802DF390[] = { 0xFFF00038, 0x00000000, 0x00000000, 0xF0F0F0FF, 0x00100038, 0x00000000, 0x04000000, 0x787878FF,
                      0x00100000, 0x00000000, 0x04000700, 0x000000FF, 0xFFF00000, 0x00000000, 0x00000700, 0x787878FF,
                    };
@@ -48,7 +73,23 @@ Gfx D_802DF490[] = {
 
 f32 D_802DF4C0 = 1.0f;
 
-s32 D_802DF4C4[] = { 0x00000006, 0x00000700, 0x000003C6, 0x00000012, 0x00000700, 0x000003C6, 0x0000000A, 0x00000900, 0x00003FC6, 0x00000003, 0x00000700, 0x00000006, 0x00000006, 0x00000900, 0x00003C00, 0x00000006, 0x00000700, 0x0000003E, 0x00000006, 0x00000900, 0x00003C00, 0x00000000, 0x00000000, };
+struct D_802DF4C4 {
+    s32 cacheSize;
+    s32 rasterSize;
+    s32 unk_08;
+}; // size = 0xC
+
+// player sprite config?
+struct D_802DF4C4 D_802DF4C4[] = {
+    { 0x00000006, 0x00000700, 0x000003C6 }, // default
+    { 0x00000012, 0x00000700, 0x000003C6 },
+    { 0x0000000A, 0x00000900, 0x00003FC6 },
+    { 0x00000003, 0x00000700, 0x00000006 },
+    { 0x00000006, 0x00000900, 0x00003C00 }, // peach
+    { 0x00000006, 0x00000700, 0x0000003E },
+    { 0x00000006, 0x00000900, 0x00003C00 },
+    { 0x00000000, 0x00000000 } // ?
+};
 
 
 INCLUDE_ASM(s32, "sprite", func_802DBD40);
@@ -148,7 +189,80 @@ void set_anim_timescale(f32 arg0) {
 
 INCLUDE_ASM(s32, "sprite", func_802DD89C);
 
-INCLUDE_ASM(s32, "sprite", func_802DD8F8);
+// spr_init_sprites
+//INCLUDE_ASM(s32, "sprite", func_802DD8F8);
+void func_802DD8F8(s32 playerSpriteSet) {
+    s32 temp_s0;
+    s32 temp_s0_2;
+    s32 temp_s0_3;
+    s32 temp_s0_4;
+    s32 temp_s0_5;
+    s32 temp_s1;
+    struct D_802DF4C4* temp_v0;
+    void *phi_v0;
+    s32 phi_s0;
+    s32 phi_s1;
+    s32 phi_v0_2;
+    s32 phi_s0_2;
+    struct D_802DF588* phi_v1;
+    s32 phi_s0_3;
+    s32* phi_v1_2;
+    s32 phi_s0_4;
+    struct D_802DFA48* phi_v1_3;
+    s32 phi_s0_5;
+
+    s32 i;
+
+    D_802DF524 = 0;
+    _heap_create(&gSpriteHeapPtr, 0x40000U);
+    func_8013A37C();
+
+
+    for (i = 0; i < 0xD; i++) {
+        s32* d802DF578 = D_802DF578;
+        d802DF578[i] = 0;
+    }
+
+    D_802DF580 = 0;
+
+    if (gGameStatusPtr->peachFlags & 1) {
+        playerSpriteSet = 4;
+    }
+
+    temp_s1 = (&D_802DF4C4[playerSpriteSet])->unk_08;
+    func_802DED60((&D_802DF4C4[playerSpriteSet])->cacheSize, (&D_802DF4C4[playerSpriteSet])->rasterSize);
+
+    for (i = 1; i < 0xE; i++) {
+        if ((temp_s1 >> i) & 1) {
+            func_802DD89C(i); // spr_load_player_sprite
+        }
+    }
+
+    for (i = 0; i < 3; i++) {
+        phi_v1 = &D_802DF588[i];
+        phi_v1->unk_00 = 0;
+        phi_v1->unk_04 = -1;
+    }
+
+    for (i = 0; i < 0xEA; i++) {
+        s32* d802DF5B0 = D_802DF5B0;
+        u8* d802DF958 = D_802DF958;
+
+        d802DF5B0[i] = 0;
+        d802DF958[i] = 0;
+    }
+
+    for (i = 0; i < 0x33; i++) {
+        phi_v1_3 = &D_802DFA48[i];
+        phi_v1_3->unk_00 = 0;
+        phi_v1_3->unk_04 = 0;
+        phi_v1_3->unk_08 = 0;
+        phi_v1_3->unk_0C = -1;
+        phi_v1_3->unk_10 = 0;
+    }
+
+    func_802DBD40(); // spr_init_quad_cache
+}
 
 void func_802DDA60(void) {
     func_802DEFB4();
