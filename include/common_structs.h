@@ -939,7 +939,7 @@ typedef struct PrintContext {
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 unkArrayunkLength[4];
     /* 0x490 */ char unk_490[0x58];
-    /* 0x4E8 */ u8 unk_4E8;
+    /* 0x4E8 */ u8 currentOption;
     /* 0x4E9 */ char unk_4E9[19];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ char unk_500[9];

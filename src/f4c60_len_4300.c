@@ -42,7 +42,7 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    script->varTable[0] = gCurrentPrintContext->unk_4E8;
+    script->varTable[0] = gCurrentPrintContext->currentOption;
     return ApiStatus_DONE1;
 }
 
@@ -76,7 +76,7 @@ ApiStatus ShowMessageAtWorldPos(ScriptInstance *script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    script->varTable[0] = gCurrentPrintContext->unk_4E8;
+    script->varTable[0] = gCurrentPrintContext->currentOption;
     return ApiStatus_DONE1;
 }
 
@@ -90,7 +90,7 @@ ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
     } else {
-        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        script->varTable[0] = gCurrentPrintContext->currentOption;
         return ApiStatus_DONE1;
     }
 }
@@ -107,7 +107,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     } else if (D_802DB264 != 1) {
         return ApiStatus_BLOCK;
     } else {
-        script->varTable[0] = gCurrentPrintContext->unk_4E8;
+        script->varTable[0] = gCurrentPrintContext->currentOption;
         return ApiStatus_DONE1;
     }
 }
@@ -124,7 +124,7 @@ ApiStatus ShowChoice(ScriptInstance *script, s32 isInitialCall) {
     }
 
     temp802DB268 = &D_802DB268;
-    script->varTable[0] = gCurrentPrintContext->unk_4E8 = (*temp802DB268)->unk_4E8;
+    script->varTable[0] = gCurrentPrintContext->currentOption = (*temp802DB268)->currentOption;
 
     if ((*temp802DB268)->stateFlags & 0x40) {
         return ApiStatus_DONE1;
