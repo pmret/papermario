@@ -893,7 +893,15 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 unkCounter;
     /* 0x2F */ s8 unk_2F;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ char unk_34[40];
+    /* 0x34 */ char unk_34[8];
+    /* 0x3C */ s32 framesLeft;
+    /* 0x40 */ s32* currentState;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32* sequenceStart;
+    /* 0x4C */ s32* unk_4C;
+    /* 0x50 */ s32* unk_50;
+    /* 0x54 */ s32 unk_54;
+    /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
 
 typedef struct ModelNode {
