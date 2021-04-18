@@ -4,9 +4,9 @@
 glabel func_802DE9D8
 /* 101AC8 802DE9D8 0080382D */  daddu     $a3, $a0, $zero
 /* 101ACC 802DE9DC 00052880 */  sll       $a1, $a1, 2
-/* 101AD0 802DE9E0 3C04802E */  lui       $a0, %hi(D_802DF5B0)
+/* 101AD0 802DE9E0 3C04802E */  lui       $a0, %hi(spr_npcSprites)
 /* 101AD4 802DE9E4 00852021 */  addu      $a0, $a0, $a1
-/* 101AD8 802DE9E8 8C84F5B0 */  lw        $a0, %lo(D_802DF5B0)($a0)
+/* 101AD8 802DE9E8 8C84F5B0 */  lw        $a0, %lo(spr_npcSprites)($a0)
 /* 101ADC 802DE9EC 14800003 */  bnez      $a0, .L802DE9FC
 /* 101AE0 802DE9F0 00061080 */   sll      $v0, $a2, 2
 /* 101AE4 802DE9F4 03E00008 */  jr        $ra

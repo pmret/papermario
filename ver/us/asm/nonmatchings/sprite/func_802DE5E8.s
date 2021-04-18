@@ -25,8 +25,8 @@ glabel func_802DE5E8
 /* 101724 802DE634 080B79CA */  j         .L802DE728
 /* 101728 802DE638 0240102D */   daddu    $v0, $s2, $zero
 .L802DE63C:
-/* 10172C 802DE63C 3C03802E */  lui       $v1, %hi(D_802DF958)
-/* 101730 802DE640 2463F958 */  addiu     $v1, $v1, %lo(D_802DF958)
+/* 10172C 802DE63C 3C03802E */  lui       $v1, %hi(spr_npcSpriteInstanceCount)
+/* 101730 802DE640 2463F958 */  addiu     $v1, $v1, %lo(spr_npcSpriteInstanceCount)
 /* 101734 802DE644 02231821 */  addu      $v1, $s1, $v1
 /* 101738 802DE648 90620000 */  lbu       $v0, ($v1)
 /* 10173C 802DE64C 2442FFFF */  addiu     $v0, $v0, -1
@@ -49,24 +49,24 @@ glabel func_802DE5E8
 .L802DE68C:
 /* 10177C 802DE68C 00521021 */  addu      $v0, $v0, $s2
 /* 101780 802DE690 00021080 */  sll       $v0, $v0, 2
-/* 101784 802DE694 3C03802E */  lui       $v1, %hi(D_802DF958)
+/* 101784 802DE694 3C03802E */  lui       $v1, %hi(spr_npcSpriteInstanceCount)
 /* 101788 802DE698 00711821 */  addu      $v1, $v1, $s1
-/* 10178C 802DE69C 9063F958 */  lbu       $v1, %lo(D_802DF958)($v1)
+/* 10178C 802DE69C 9063F958 */  lbu       $v1, %lo(spr_npcSpriteInstanceCount)($v1)
 /* 101790 802DE6A0 3C10802E */  lui       $s0, %hi(D_802DFA4C)
 /* 101794 802DE6A4 02028021 */  addu      $s0, $s0, $v0
 /* 101798 802DE6A8 8E10FA4C */  lw        $s0, %lo(D_802DFA4C)($s0)
 /* 10179C 802DE6AC 14600008 */  bnez      $v1, .L802DE6D0
 /* 1017A0 802DE6B0 00111080 */   sll      $v0, $s1, 2
-/* 1017A4 802DE6B4 3C01802E */  lui       $at, %hi(D_802DF5B0)
+/* 1017A4 802DE6B4 3C01802E */  lui       $at, %hi(spr_npcSprites)
 /* 1017A8 802DE6B8 00220821 */  addu      $at, $at, $v0
-/* 1017AC 802DE6BC AC20F5B0 */  sw        $zero, %lo(D_802DF5B0)($at)
+/* 1017AC 802DE6BC AC20F5B0 */  sw        $zero, %lo(spr_npcSprites)($at)
 /* 1017B0 802DE6C0 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
 /* 1017B4 802DE6C4 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 1017B8 802DE6C8 0C00A487 */  jal       _heap_free
 /* 1017BC 802DE6CC 0280282D */   daddu    $a1, $s4, $zero
 .L802DE6D0:
-/* 1017C0 802DE6D0 3C02802E */  lui       $v0, %hi(D_802DF524)
-/* 1017C4 802DE6D4 8C42F524 */  lw        $v0, %lo(D_802DF524)($v0)
+/* 1017C0 802DE6D0 3C02802E */  lui       $v0, %hi(spr_allocateBtlComponentsOnWorldHeap)
+/* 1017C4 802DE6D4 8C42F524 */  lw        $v0, %lo(spr_allocateBtlComponentsOnWorldHeap)($v0)
 /* 1017C8 802DE6D8 3C048035 */  lui       $a0, %hi(gSpriteHeapPtr)
 /* 1017CC 802DE6DC 2484F800 */  addiu     $a0, $a0, %lo(gSpriteHeapPtr)
 /* 1017D0 802DE6E0 10400003 */  beqz      $v0, .L802DE6F0

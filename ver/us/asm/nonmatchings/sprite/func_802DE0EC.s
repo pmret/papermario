@@ -40,14 +40,14 @@ glabel func_802DE0EC
 /* 10125C 802DE16C 080B78A2 */  j         .L802DE288
 /* 101260 802DE170 2402FFFF */   addiu    $v0, $zero, -1
 .L802DE174:
-/* 101264 802DE174 3C02802E */  lui       $v0, %hi(D_802DF5B0)
-/* 101268 802DE178 2442F5B0 */  addiu     $v0, $v0, %lo(D_802DF5B0)
+/* 101264 802DE174 3C02802E */  lui       $v0, %hi(spr_npcSprites)
+/* 101268 802DE178 2442F5B0 */  addiu     $v0, $v0, %lo(spr_npcSprites)
 /* 10126C 802DE17C 00628821 */  addu      $s1, $v1, $v0
 /* 101270 802DE180 8E220000 */  lw        $v0, ($s1)
 /* 101274 802DE184 1040000E */  beqz      $v0, .L802DE1C0
 /* 101278 802DE188 0080902D */   daddu    $s2, $a0, $zero
-/* 10127C 802DE18C 3C03802E */  lui       $v1, %hi(D_802DF958)
-/* 101280 802DE190 2463F958 */  addiu     $v1, $v1, %lo(D_802DF958)
+/* 10127C 802DE18C 3C03802E */  lui       $v1, %hi(spr_npcSpriteInstanceCount)
+/* 101280 802DE190 2463F958 */  addiu     $v1, $v1, %lo(spr_npcSpriteInstanceCount)
 /* 101284 802DE194 02831821 */  addu      $v1, $s4, $v1
 /* 101288 802DE198 90620000 */  lbu       $v0, ($v1)
 /* 10128C 802DE19C 24420001 */  addiu     $v0, $v0, 1
@@ -62,9 +62,9 @@ glabel func_802DE0EC
 .L802DE1C0:
 /* 1012B0 802DE1C0 2684FFFF */  addiu     $a0, $s4, -1
 /* 1012B4 802DE1C4 24020001 */  addiu     $v0, $zero, 1
-/* 1012B8 802DE1C8 3C01802E */  lui       $at, %hi(D_802DF958)
+/* 1012B8 802DE1C8 3C01802E */  lui       $at, %hi(spr_npcSpriteInstanceCount)
 /* 1012BC 802DE1CC 00340821 */  addu      $at, $at, $s4
-/* 1012C0 802DE1D0 A022F958 */  sb        $v0, %lo(D_802DF958)($at)
+/* 1012C0 802DE1D0 A022F958 */  sb        $v0, %lo(spr_npcSpriteInstanceCount)($at)
 /* 1012C4 802DE1D4 0C0B7AC3 */  jal       load_sprite
 /* 1012C8 802DE1D8 0000282D */   daddu    $a1, $zero, $zero
 /* 1012CC 802DE1DC 0040802D */  daddu     $s0, $v0, $zero
