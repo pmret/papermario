@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from typing import Dict, List, Union, Set
+from typing import Dict, List, Union, Set, Any
 import argparse
 import pylibyaml
 import yaml
@@ -22,6 +22,7 @@ parser.add_argument("--verbose", action="store_true", help="Enable debug logging
 parser.add_argument("--use-cache", action="store_true", help="Only split changed segments in config")
 
 linker_writer: LinkerWriter
+config: Dict[str, Any]
 
 def fmt_size(size):
     if size > 1000000:
@@ -106,6 +107,8 @@ def do_statistics(seg_sizes, rom_bytes, seg_split, seg_cached):
     log.write(f"{'unknown':>20}: {fmt_size(unk_size):>8} ({unk_ratio:.2%}) from unknown bin files")
 
 def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
+    global config
+
     # Load config
     with open(config_path) as f:
         config = yaml.load(f.read(), Loader=yaml.SafeLoader)
