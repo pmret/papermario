@@ -60,7 +60,7 @@ glabel update_item_entities
 /* C869C 80131F9C 3C018015 */  lui       $at, %hi(D_80155D90)
 /* C86A0 80131FA0 A4225D90 */  sh        $v0, %lo(D_80155D90)($at)
 .L80131FA4:
-/* C86A4 80131FA4 0C04C2B3 */  jal       func_80130ACC
+/* C86A4 80131FA4 0C04C2B3 */  jal       do_animation
 /* C86A8 80131FA8 0220202D */   daddu    $a0, $s1, $zero
 .L80131FAC:
 /* C86AC 80131FAC 0C04C775 */  jal       func_80131DD4

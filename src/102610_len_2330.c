@@ -94,7 +94,7 @@ void func_802E1328(Entity* entity) {
 void func_802E1350(Entity* entity) {
     s32* temp = &D_802EB390;
     if (*temp != 0) {
-        if (D_802EB398->unk_4E8 == 1) {
+        if (D_802EB398->currentOption == 1) {
             set_entity_updatecmd(entity, &D_802E99DC);
         } else {
             exec_entity_updatecmd(entity);

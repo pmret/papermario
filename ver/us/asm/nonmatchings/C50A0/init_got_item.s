@@ -180,7 +180,7 @@ glabel init_got_item
 /* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
 /* C849C 80131D9C 0C04C27C */  jal       func_801309F0
 /* C84A0 80131DA0 0220202D */   daddu    $a0, $s1, $zero
-/* C84A4 80131DA4 0C04C2B3 */  jal       func_80130ACC
+/* C84A4 80131DA4 0C04C2B3 */  jal       do_animation
 /* C84A8 80131DA8 0220202D */   daddu    $a0, $s1, $zero
 /* C84AC 80131DAC 02A0102D */  daddu     $v0, $s5, $zero
 .L80131DB0:

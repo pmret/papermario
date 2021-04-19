@@ -654,7 +654,7 @@ typedef struct BattleStatus {
     /* 0x170 */ char unk_170;
     /* 0x171 */ u8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
-    /* 0x178 */ u8 moveCategory;
+    /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
     /* 0x17A */ s16 selectedItemID;
     /* 0x17C */ s16 selectedMoveID;
@@ -893,7 +893,15 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 unkCounter;
     /* 0x2F */ s8 unk_2F;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ char unk_34[40];
+    /* 0x34 */ char unk_34[8];
+    /* 0x3C */ s32 framesLeft;
+    /* 0x40 */ s32* currentState;
+    /* 0x44 */ s32 unk_44;
+    /* 0x48 */ s32* sequenceStart;
+    /* 0x4C */ s32* unk_4C;
+    /* 0x50 */ s32* unk_50;
+    /* 0x54 */ s32 unk_54;
+    /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
 
 typedef struct ModelNode {
@@ -939,7 +947,7 @@ typedef struct PrintContext {
     /* 0x487 */ u8 unkArraySize;
     /* 0x488 */ s16 unkArrayunkLength[4];
     /* 0x490 */ char unk_490[0x58];
-    /* 0x4E8 */ u8 unk_4E8;
+    /* 0x4E8 */ u8 currentOption;
     /* 0x4E9 */ char unk_4E9[19];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ char unk_500[9];

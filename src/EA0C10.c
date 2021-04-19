@@ -1,7 +1,7 @@
 #include "common.h"
 
-const char* ascii_EA6D70 = "kzn_11";
-const char* ascii_EA6D78 = "kzn_18";
+const char ascii_EA6D70[] = "kzn_11";
+const char ascii_EA6D78[] = "kzn_18";
 
 INCLUDE_ASM(s32, "EA0C10", func_80240310_EA0C10);
 
