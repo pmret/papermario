@@ -2473,34 +2473,84 @@ segments:
     subsections:
     - [0x3F9E50, c]
     - [0x3FA480, bin]
-  - [0x3FA4B0, ci4,     star_cards/card_front, 32, 32]
+  - start: 0x3FA4B0
+    type: ci4
+    name: star_cards/card_front
+    flip: v
+    width: 32
+    height: 32
   - [0x3FA6B0, palette, star_cards/card_front]
   - [0x3FA6D0, bin] # PAD
-  - [0x3FA8B0, ci4,     star_cards/card_back, 32, 64] # FLIP
+  - start: 0x3FA8B0
+    type: ci4
+    name: star_cards/card_back
+    flip: v
+    width: 32
+    height: 64
   - [0x3FACB0, palette, star_cards/card_back]
   - [0x3FACD0, bin] # PAD
-  - [0x3FAEB0, ci4,     star_cards/wave, 32, 32]
+  - start: 0x3FAEB0
+    type: ci4
+    name: star_cards/wave
+    flip: v
+    width: 32
+    height: 32
   - [0x3FB0B0, palette, star_cards/wave]
   - [0x3FB0D0, bin] # PAD
-  - [0x3FB2B0, ci4,     star_cards/squares, 16, 16]
+  - start: 0x3FB2B0
+    type: ci4
+    name: star_cards/squares
+    flip: v
+    width: 16
+    height: 16
   - [0x3FB330, palette, star_cards/squares]
   - [0x3FB350, bin] # PAD
-  - [0x3FB530, ci4,     star_cards/eldstar, 48, 48] # FLIP
+  - start: 0x3FB530
+    type: ci4
+    name: star_cards/eldstar
+    flip: v
+    width: 48
+    height: 48
   - [0x3FB9B0, palette, star_cards/eldstar]
   - [0x3FB9D0, bin] # PAD
-  - [0x3FBBB0, ci4,     star_cards/mamar, 48, 48] # FLIP
+  - start: 0x3FBBB0
+    type: ci4
+    name: star_cards/mamar
+    flip: v
+    width: 48
+    height: 48
   - [0x3FC030, palette, star_cards/mamar]
   - [0x3FC050, bin] # PAD
-  - [0x3FC230, ci4,     star_cards/skolar, 48, 48] # FLIP
+  - start: 0x3FC230
+    type: ci4
+    name: star_cards/skolar
+    flip: v
+    width: 48
+    height: 48
   - [0x3FC6B0, palette, star_cards/skolar]
   - [0x3FC6D0, bin] # PAD
-  - [0x3FC8B0, ci4,     star_cards/muskular, 48, 48] # FLIP
+  - start: 0x3FC8B0
+    type: ci4
+    name: star_cards/muskular
+    flip: v
+    width: 48
+    height: 48
   - [0x3FCD30, palette, star_cards/muskular]
   - [0x3FCD50, bin] # PAD
-  - [0x3FCF30, ci4,     star_cards/misstar, 48, 48] # FLIP
+  - start: 0x3FCF30
+    type: ci4
+    name: star_cards/misstar
+    flip: v
+    width: 48
+    height: 48
   - [0x3FD3B0, palette, star_cards/misstar]
   - [0x3FD3D0, bin] # PAD
-  - [0x3FDC30, ci4,     star_cards/klevar, 48, 48] # FLIP
+  - start: 0x3FDC30
+    type: ci4
+    name: star_cards/klevar
+    flip: v
+    width: 48
+    height: 48
   - [0x3FE0B0, palette, star_cards/klevar]
   - [0x3FE0D0, bin]
   - type: code
@@ -2527,18 +2577,34 @@ segments:
     subsections:
     - [0x404220, c]
     - [0x404E40, bin]
-  - [0x404F40, ci4,     world/cloud, 32, 32] # FLIP
+  - start: 0x404F40
+    type: ci4
+    name: world/cloud
+    flip: v
+    width: 32
+    height: 32
   - [0x405140, palette, world/cloud]
-  - [0x405340, ci4,     world/waterblock, 32, 32] # FLIP
+  - start: 0x405340
+    type: ci4
+    name: world/waterblock
+    flip: v
+    width: 32
+    height: 32
   - [0x405540, palette, world/waterblock]
-  - [0x405740, ci4,     world/yellow_carpet, 32, 32] # FLIP
+  - start: 0x405740
+    type: ci4
+    name: world/yellow_carpet
+    flip: v
+    width: 32
+    height: 32
   - [0x405940, palette, world/yellow_carpet]
-  - [0x405B40, i4,     world/number_4, 32, 32] # FLIP ci4
-  - [0x405D40, i4,     world/number_3, 32, 32] # FLIP ci4
-  - [0x405F40, i4,     world/number_2, 32, 32] # FLIP ci4
-  - [0x406140, i4,     world/number_1, 32, 32] # FLIP ci4
-  - [0x406340, ci4,     world/number_0, 32, 32] # FLIP
-  - [0x406540, palette, world/number_0]
+  - start: 0x405B40
+    type: ci4
+    name: world/numbers
+    flip: v
+    width: 32
+    height: 160
+  - [0x406540, palette, world/numbers]
   - [0x406740, bin]
   - type: code
     start: 0x406B40
