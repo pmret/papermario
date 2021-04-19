@@ -234,3 +234,64 @@ goomba:
     - fake_plant
     - fake_mushroom
     - electrocute
+spiked_goomba:
+  palettes:
+    - default
+    - gloomba
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - idle
+    - walk
+    - run
+    - headbonk
+    - dead
+    - pain
+    - burn_dead
+    - burn_pain
+    - dizzy
+    - sleep
+    - laugh
+    - electrocute
+paragoomba:
+  palettes:
+    - default
+    - red
+    - green
+    - gloomba
+    - _green1
+    - _green2
+    - _green3
+    - _green4
+    - _purple1
+    - _purple2
+    - _purple3
+    - _purple4
+    - _yellow1
+    - _yellow2
+    - _yellow3
+    - _yellow4
+    - burnt
+  animations:
+    - still
+    - idle
+    - aim
+    - walk
+    - run
+    - attack
+    - pain
+    - dead
+    - wings_only
+    - left_wing_only
+    - right_wing_only
+    - sleep
+    - dizzy
+    - burn_pain
+    - burn_dead
+    - electrocute

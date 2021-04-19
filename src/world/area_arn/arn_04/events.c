@@ -133,22 +133,22 @@ StaticNpc N(npcGroup_80243840) = {
     .maxCoinBonus = 2,
     .movement = { -350, 180, 150, 30, 0, -32767, 0, -350, 180, 150, 150 },
     .animations = {
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_3),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_5),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
+        NPC_ANIM(paragoomba, green, idle),
+        NPC_ANIM(paragoomba, green, walk),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, idle),
+        NPC_ANIM(paragoomba, green, idle),
+        NPC_ANIM(paragoomba, green, pain),
+        NPC_ANIM(paragoomba, green, pain),
+        NPC_ANIM(paragoomba, green, attack),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
+        NPC_ANIM(paragoomba, green, run),
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -652,7 +652,7 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (aiSettings->unk_14 >= 0) {
             if (script->functionTemp[1].s <= 0) {
                 script->functionTemp[1].s = aiSettings->unk_14;
-                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && 
+                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
