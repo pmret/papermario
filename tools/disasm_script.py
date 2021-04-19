@@ -74,9 +74,10 @@ def get_constants():
     global CONSTANTS
     global VALID_SAVE_VARS
 
-    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
+    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
-        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags" }
+        "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
+        "Events", "Statuses", "Elements" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
@@ -193,7 +194,7 @@ def make_anim_macro(self, sprite, palette, anim):
 
 def fix_args(self, func, args, info):
     global CONSTANTS
-    
+
     new_args = []
     args = args.split(", ")
     for i,arg in enumerate(args):
@@ -216,10 +217,10 @@ def fix_args(self, func, args, info):
                 sprite  = (argNum & 0xFF0000) >> 16
                 palette = (argNum & 0xFF00)   >> 8
                 anim    = (argNum & 0xFF)     >> 0
-                
+
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                elif "SI_" not in args[0] and CONSTANTS["MAP_NPCS"][int(args[0])] == "NPC_PLAYER":
+                elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"][int(args[0])] == "NPC_PLAYER":
                     if sprite == 0:
                         print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
                         call = f"0x{argNum:X}"
@@ -258,7 +259,7 @@ def fix_args(self, func, args, info):
             else:
                 if not (info[i] == "NpcIDs" and argNum > 0):
                     print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
-                
+
                 if (info[i] == "ItemIDs" and argNum < 0):
                     new_args.append(f"{int(argNum)}")
                 else:
@@ -861,7 +862,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
         # case variables need to be saved ahead of time, since they span many instructions
-        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or 
+        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or
             (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "WORLD_LOCATION")):
             argv[0] = self.replace_enum(argv[0], case=True)
 

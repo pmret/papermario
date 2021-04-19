@@ -10,6 +10,7 @@ import argparse
 from pathlib import Path
 
 import disasm_script
+import sjis
 
 DIR = os.path.dirname(__file__)
 
@@ -101,7 +102,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
                 bytes.seek(pos)
                 script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
-            
+
             if try_replace and "exitWalk" in name:
                 script_text = script_text.splitlines()
                 walkDistance = exitIdx = map_ = entryIdx = ""
@@ -128,7 +129,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             tmp_out = f"NpcSettings {name} = {{\n"
             npcSettings = bytes.read(struct["length"])
 
-            i = 0 
+            i = 0
             while i < struct["length"]:
                 if i == 0x0 or i == 0x24:
                     var_names = ["unk_00", "unk_24"]
@@ -169,7 +170,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                          "chaseSpeed", "unk_1C", "unk_20", "chaseRadius", "unk_28", "unk_2C"]
             while i < struct["length"]:
                 var_f, var_i1, var_i2 = unpack_from(f">fii", npcAISettings, i)
-                if not var_f == 0: 
+                if not var_f == 0:
                     tmp_out += INDENT + f".{var_names[x]} = {var_f:.01f}f,\n"
                 if not var_i1 == 0:
                     # account for X32
@@ -195,10 +196,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             for z in range(numNpcs):
                 i = 0
-                var_names = ["id", "settings", "pos", "flags", 
-                             "init", "unk_1C", "yaw", "dropFlags", 
-                             "itemDropChance", "itemDrops", "heartDrops", "flowerDrops", 
-                             "minCoinBonus", "maxCoinBonus", "movement", "animations", 
+                var_names = ["id", "settings", "pos", "flags",
+                             "init", "unk_1C", "yaw", "dropFlags",
+                             "itemDropChance", "itemDrops", "heartDrops", "flowerDrops",
+                             "minCoinBonus", "maxCoinBonus", "movement", "animations",
                              "unk_1E0", "extraAnimations", "tattle"]
 
                 if numNpcs > 1:
@@ -375,7 +376,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "NpcGroupList":
             tmp_out = f"NpcGroupList {name} = {{\n"
             npcGroupList = bytes.read(struct["length"])
-            
+
             i = 0
             while i < struct["length"]:
                 npcCount, npcs, battle = unpack_from(">3I", npcGroupList, i)
@@ -445,12 +446,160 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             num_bytes_remaining = struct["length"]
             while num_bytes_remaining > 0:
-                num_read, s = disasm_struct.output_single_line(bytes.read(0x1C), 0, "FormationRow")
-                num_bytes_remaining -= num_read
+                actor, position, priority, var0, var1, var2, var3 = unpack(">IIIIIII", bytes.read(0x1C))
+                num_bytes_remaining -= 0x1C
 
-                s = s.replace(", .var0 = 0, .var1 = 0, .var2 = 0, .var3 = 0", "")
+                out += "    "
 
-                out += f"    {s},\n"
+                if actor in symbol_map:
+                    out += f"&{symbol_map[actor][0][1]}, "
+
+                    s = f"ActorDesc {symbol_map[actor][0][1]};"
+                    if s not in INCLUDES_NEEDED["forward"]:
+                        INCLUDES_NEEDED["forward"].append(s)
+                else:
+                    out += f"{actor}, "
+
+
+                if priority in symbol_map:
+                    out += f"&{symbol_map[priority][0][1]}"
+
+                    s = f"Vec3f {symbol_map[priority][0][1]};"
+                    if s not in INCLUDES_NEEDED["forward"]:
+                        INCLUDES_NEEDED["forward"].append(s)
+                else:
+                    out += f"{priority}"
+
+                if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
+                    pass
+                else:
+                    out += f", {var1}, {var2} {var3}, {var4}"
+
+                out += " },\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "StageTable":
+            out += f"StageList {struct['name']} = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                name, ptr = unpack(">II", bytes.read(0x8))
+                num_bytes_remaining -= 0x8
+
+                if name == 0 and ptr == 0:
+                    out += "    {},\n"
+                else:
+                    out += "    { "
+                    out += f"{symbol_map[name][0][1]}, "
+                    out += f"&{symbol_map[ptr][0][1]} "
+                    out += "},\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "DefenseTable":
+            out += f"s32 {struct['name']}[] = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                if num_bytes_remaining == 4:
+                    bytes.read(0x4)
+                    out += "    ELEMENT_END,\n"
+                    break
+
+                element, value = unpack(">II", bytes.read(0x8))
+                num_bytes_remaining -= 0x8
+
+                element = disasm_script.CONSTANTS["Elements"][element]
+
+                out += f"    {element}, "
+                out += f"{value},\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "StatusTable":
+            out += f"s32 {struct['name']}[] = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                if num_bytes_remaining == 4:
+                    bytes.read(0x4)
+                    out += "    STATUS_END,\n"
+                    break
+
+                element, value = unpack(">II", bytes.read(0x8))
+                num_bytes_remaining -= 0x8
+
+                element = disasm_script.CONSTANTS["Statuses"][element]
+
+                out += f"    {element}, "
+                out += f"{value},\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "IdleAnimations":
+            out += f"s32 {struct['name']}[] = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                if num_bytes_remaining == 4:
+                    bytes.read(0x4)
+                    out += "    STATUS_END,\n"
+                    break
+
+                element, anim = unpack(">II", bytes.read(0x8))
+                num_bytes_remaining -= 0x8
+
+                element = disasm_script.CONSTANTS["Statuses"][element]
+
+                sprite_id =  (anim & 0x00FF0000) >> 16
+                palette_id = (anim & 0x0000FF00) >> 8
+                anim_id =    (anim & 0x000000FF) >> 0
+                sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
+                palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
+                anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
+                anim = f"NPC_ANIM({sprite}, {palette}, {anim})"
+                INCLUDES_NEEDED["sprites"].add(sprite)
+
+                out += f"    {element}, "
+                out += f"{anim},\n"
+
+            out += f"}};\n"
+        # TODO
+        #elif struct["type"] == "PartsTable":
+        #    pass
+        #elif struct["type"] == "Actor":
+        #    pass
+        elif struct["type"] == "Stage":
+            out += f"Stage {struct['name']} = {{\n"
+
+            texture, shape, hit, preBattle, postBattle, bg, unk_18, unk_1C, unk_20, unk_24 = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
+
+            if texture != 0:
+                out += f"    .texture = {symbol_map[texture][0][1]},\n"
+
+            if shape != 0:
+                out += f"    .shape = {symbol_map[shape][0][1]},\n"
+
+            if hit != 0:
+                out += f"    .hit = {symbol_map[hit][0][1]},\n"
+
+            if bg != 0:
+                out += f"    .bg = {symbol_map[bg][0][1]},\n"
+
+            if preBattle != 0:
+                out += f"    .preBattle = &{symbol_map[preBattle][0][1]},\n"
+
+            if postBattle != 0:
+                out += f"    .postBattle = &{symbol_map[preBattle][0][1]},\n"
+
+            if unk_18 != 0:
+                out += f"    .foregroundModelList = &{symbol_map[unk_18][0][1]},\n"
+
+            if unk_1C != 0:
+                out += f"    .unk_1C = {unk_1C:X},\n"
+
+            if unk_20 != 0:
+                out += f"    .unk_20 = {unk_20:X},\n"
+
+            if unk_24 != 0:
+                out += f"    .unk_24 = {unk_24:X},\n"
 
             out += f"}};\n"
         else: # unknown type of struct
@@ -570,10 +719,10 @@ if __name__ == "__main__":
     if ext == ".midx":
         map_name = base
         area_name, _ = map_name.split("_")
-        segment_name = f"world/area_{area_name}/{map_name}/"
+        segment_name = f"world/area_{area_name}/{map_name}"
     else:
         battle_area = "_".join(base.lower().split(" ")[1:])
-        segment_name = f"battle/{battle_area}/"
+        segment_name = f"battle/{battle_area}"
 
     symbol_map = {}
 
@@ -584,25 +733,28 @@ if __name__ == "__main__":
 
         rom_offset = -1
         for segment in splat_config["segments"]:
-            if isinstance(segment, dict) and segment.get("name") == segment_name:
+            if isinstance(segment, dict) and segment.get("dir") == segment_name:
                 rom_offset = segment["start"]
                 vram = segment["vram"]
                 break
 
     if rom_offset == -1:
-        print(f"can't find segment with name '{segment_name}' in splat.yaml")
+        print(f"can't find segment with dir '{segment_name}' in splat.yaml")
         exit(1)
 
-    function_replacements = get_function_list(area_name, map_name, rom_offset)
-    INCLUDED["includes"] = get_include_list(area_name, map_name)
+    if ext == ".midx":
+        function_replacements = get_function_list(area_name, map_name, rom_offset)
+        INCLUDED["includes"] = get_include_list(area_name, map_name)
+    else:
+        function_replacements = {}
 
     with open(args.idxfile, "r") as f:
         midx = parse_midx(f, vram=vram)
 
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
-        name_fixes = { 
-                       "script_NpcAI": "npcAI", 
-                       "aISettings": "npcAISettings", 
+        name_fixes = {
+                       "script_NpcAI": "npcAI",
+                       "aISettings": "npcAISettings",
                        "script_ExitWalk": "exitWalk",
                        "script_MakeEntities": "makeEntities",
                      }
@@ -611,7 +763,7 @@ if __name__ == "__main__":
             romfile.seek(struct["start"] + rom_offset)
 
             name = struct["name"]
-            
+
             if name.startswith("N("):
                 name = name[2:-1]
 
@@ -675,14 +827,14 @@ if __name__ == "__main__":
             name = f"NPC_{name}"
             disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
             INCLUDES_NEEDED["npcs"][id_] = name
-        
+
         for id_, name in disasm_script.CONSTANTS["NpcIDs"].items():
             disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
 
         romfile.seek(rom_offset, 0)
 
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
-        
+
         print("========== Includes needed: ===========\n")
         print(f"#include \"map.h\"")
         print(f"#include \"message_ids.h\"")
@@ -690,7 +842,7 @@ if __name__ == "__main__":
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
                 print(f"#include \"sprite/npc/{npc}.h\"")
         print()
-            
+
         if INCLUDES_NEEDED["forward"]:
             print()
             print("========== Forward declares: ==========\n")
@@ -711,4 +863,4 @@ if __name__ == "__main__":
         print("=======================================\n")
         print(disasm.rstrip())
 
-        
+
