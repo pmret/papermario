@@ -24,8 +24,8 @@ glabel func_80242680_DF9080
 /* DF90CC 802426CC AFA20014 */  sw        $v0, 0x14($sp)
 /* DF90D0 802426D0 8E050004 */  lw        $a1, 4($s0)
 /* DF90D4 802426D4 24020001 */  addiu     $v0, $zero, 1
-/* DF90D8 802426D8 3C01802E */  lui       $at, %hi(D_802DF524)
-/* DF90DC 802426DC AC22F524 */  sw        $v0, %lo(D_802DF524)($at)
+/* DF90D8 802426D8 3C01802E */  lui       $at, %hi(spr_allocateBtlComponentsOnWorldHeap)
+/* DF90DC 802426DC AC22F524 */  sw        $v0, %lo(spr_allocateBtlComponentsOnWorldHeap)($at)
 /* DF90E0 802426E0 0C00E219 */  jal       npc_create_standard
 /* DF90E4 802426E4 27A40010 */   addiu    $a0, $sp, 0x10
 /* DF90E8 802426E8 0C00E2B7 */  jal       get_npc_by_index

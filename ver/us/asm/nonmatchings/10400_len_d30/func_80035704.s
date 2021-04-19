@@ -137,7 +137,7 @@ glabel L80035814_10C14
 /* 10CD8 800358D8 0C05259C */  jal       func_80149670
 /* 10CDC 800358DC 24040001 */   addiu    $a0, $zero, 1
 /* 10CE0 800358E0 8E020000 */  lw        $v0, ($s0)
-/* 10CE4 800358E4 0C0B763E */  jal       func_802DD8F8
+/* 10CE4 800358E4 0C0B763E */  jal       spr_init_sprites
 /* 10CE8 800358E8 80440084 */   lb       $a0, 0x84($v0)
 /* 10CEC 800358EC 0C0457FA */  jal       init_model_data
 /* 10CF0 800358F0 00000000 */   nop

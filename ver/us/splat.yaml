@@ -424,9 +424,9 @@ segments:
     start: 0xFEE30
     vram: 0x802DBD40
     subsegments:
-    - [0x0fee30, c, fee30_len_2d60]
+    - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    - [0x102480, .data, fee30_len_2d60]
+    - [0x102480, .data, sprite]
   - type: code
     start: 0x102610
     vram: 0x802E0D90

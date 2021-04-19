@@ -137,7 +137,7 @@ glabel begin_state_title_screen
 /* 123D8 80036FD8 00000000 */   nop
 /* 123DC 80036FDC 0C047624 */  jal       func_8011D890
 /* 123E0 80036FE0 00000000 */   nop
-/* 123E4 80036FE4 0C0B763E */  jal       func_802DD8F8
+/* 123E4 80036FE4 0C0B763E */  jal       spr_init_sprites
 /* 123E8 80036FE8 0000202D */   daddu    $a0, $zero, $zero
 /* 123EC 80036FEC 0C047889 */  jal       func_8011E224
 /* 123F0 80036FF0 00000000 */   nop

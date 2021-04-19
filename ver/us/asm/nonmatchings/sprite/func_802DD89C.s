@@ -11,11 +11,11 @@ glabel func_802DD89C
 /* 1009A4 802DD8B4 0C0B7AC3 */  jal       load_sprite
 /* 1009A8 802DD8B8 0000302D */   daddu    $a2, $zero, $zero
 /* 1009AC 802DD8BC 00108080 */  sll       $s0, $s0, 2
-/* 1009B0 802DD8C0 3C04802E */  lui       $a0, %hi(D_802DF580)
-/* 1009B4 802DD8C4 2484F580 */  addiu     $a0, $a0, %lo(D_802DF580)
-/* 1009B8 802DD8C8 3C01802E */  lui       $at, %hi(D_802DF548)
+/* 1009B0 802DD8C0 3C04802E */  lui       $a0, %hi(spr_playerMaxComponents)
+/* 1009B4 802DD8C4 2484F580 */  addiu     $a0, $a0, %lo(spr_playerMaxComponents)
+/* 1009B8 802DD8C8 3C01802E */  lui       $at, %hi(spr_playerSprites)
 /* 1009BC 802DD8CC 00300821 */  addu      $at, $at, $s0
-/* 1009C0 802DD8D0 AC22F548 */  sw        $v0, %lo(D_802DF548)($at)
+/* 1009C0 802DD8D0 AC22F548 */  sw        $v0, %lo(spr_playerSprites)($at)
 /* 1009C4 802DD8D4 8C830000 */  lw        $v1, ($a0)
 /* 1009C8 802DD8D8 8C420008 */  lw        $v0, 8($v0)
 /* 1009CC 802DD8DC 0062182A */  slt       $v1, $v1, $v0

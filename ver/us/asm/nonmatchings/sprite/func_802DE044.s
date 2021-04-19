@@ -8,9 +8,9 @@ glabel func_802DE044
 /* 101140 802DE050 24A5FFFF */  addiu     $a1, $a1, -1
 /* 101144 802DE054 00051080 */  sll       $v0, $a1, 2
 /* 101148 802DE058 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 10114C 802DE05C 3C04802E */  lui       $a0, %hi(D_802DF548)
+/* 10114C 802DE05C 3C04802E */  lui       $a0, %hi(spr_playerSprites)
 /* 101150 802DE060 00822021 */  addu      $a0, $a0, $v0
-/* 101154 802DE064 8C84F548 */  lw        $a0, %lo(D_802DF548)($a0)
+/* 101154 802DE064 8C84F548 */  lw        $a0, %lo(spr_playerSprites)($a0)
 /* 101158 802DE068 10800011 */  beqz      $a0, .L802DE0B0
 /* 10115C 802DE06C 00061080 */   sll      $v0, $a2, 2
 /* 101160 802DE070 8C830000 */  lw        $v1, ($a0)

@@ -205,7 +205,7 @@ void load_engine_data(void) {
     clear_script_list();
     create_cameras_a();
     clear_player_status();
-    func_802DD8F8(0);
+    spr_init_sprites(0);
     clear_entity_models();
     func_8011E224();
     clear_model_data();

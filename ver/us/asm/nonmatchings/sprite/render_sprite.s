@@ -28,9 +28,9 @@ glabel render_sprite
 /* 100D8C 802DDC9C 304200FF */  andi      $v0, $v0, 0xff
 /* 100D90 802DDCA0 2443FFFF */  addiu     $v1, $v0, -1
 /* 100D94 802DDCA4 00031080 */  sll       $v0, $v1, 2
-/* 100D98 802DDCA8 3C08802E */  lui       $t0, %hi(D_802DF548)
+/* 100D98 802DDCA8 3C08802E */  lui       $t0, %hi(spr_playerSprites)
 /* 100D9C 802DDCAC 01024021 */  addu      $t0, $t0, $v0
-/* 100DA0 802DDCB0 8D08F548 */  lw        $t0, %lo(D_802DF548)($t0)
+/* 100DA0 802DDCB0 8D08F548 */  lw        $t0, %lo(spr_playerSprites)($t0)
 /* 100DA4 802DDCB4 3C01802E */  lui       $at, %hi(D_802DF57C)
 /* 100DA8 802DDCB8 AC23F57C */  sw        $v1, %lo(D_802DF57C)($at)
 /* 100DAC 802DDCBC 11000053 */  beqz      $t0, .L802DDE0C
@@ -59,9 +59,9 @@ glabel render_sprite
 .L802DDD14:
 /* 100E04 802DDD14 24630001 */  addiu     $v1, $v1, 1
 /* 100E08 802DDD18 00031080 */  sll       $v0, $v1, 2
-/* 100E0C 802DDD1C 3C14802E */  lui       $s4, %hi(D_802DF548)
+/* 100E0C 802DDD1C 3C14802E */  lui       $s4, %hi(spr_playerSprites)
 /* 100E10 802DDD20 0282A021 */  addu      $s4, $s4, $v0
-/* 100E14 802DDD24 8E94F548 */  lw        $s4, %lo(D_802DF548)($s4)
+/* 100E14 802DDD24 8E94F548 */  lw        $s4, %lo(spr_playerSprites)($s4)
 /* 100E18 802DDD28 3C01802E */  lui       $at, %hi(D_802DF57C)
 /* 100E1C 802DDD2C AC23F57C */  sw        $v1, %lo(D_802DF57C)($at)
 /* 100E20 802DDD30 8E940000 */  lw        $s4, ($s4)
@@ -138,9 +138,9 @@ glabel render_sprite
 /* 100F08 802DDE18 000A1040 */  sll       $v0, $t2, 1
 /* 100F0C 802DDE1C 004A1021 */  addu      $v0, $v0, $t2
 /* 100F10 802DDE20 00021080 */  sll       $v0, $v0, 2
-/* 100F14 802DDE24 3C10802E */  lui       $s0, %hi(D_802DF588)
+/* 100F14 802DDE24 3C10802E */  lui       $s0, %hi(spr_playerCurrentAnimInfo)
 /* 100F18 802DDE28 02028021 */  addu      $s0, $s0, $v0
-/* 100F1C 802DDE2C 8E10F588 */  lw        $s0, %lo(D_802DF588)($s0)
+/* 100F1C 802DDE2C 8E10F588 */  lw        $s0, %lo(spr_playerCurrentAnimInfo)($s0)
 /* 100F20 802DDE30 3C022000 */  lui       $v0, 0x2000
 /* 100F24 802DDE34 00821024 */  and       $v0, $a0, $v0
 /* 100F28 802DDE38 54400001 */  bnel      $v0, $zero, .L802DDE40

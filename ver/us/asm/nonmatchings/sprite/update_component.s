@@ -26,8 +26,8 @@ glabel update_component
 /* 100260 802DD170 4481A000 */  mtc1      $at, $f20
 /* 100264 802DD174 8E300008 */  lw        $s0, 8($s1)
 /* 100268 802DD178 C620000C */  lwc1      $f0, 0xc($s1)
-/* 10026C 802DD17C 3C01802E */  lui       $at, %hi(D_802DF4C0)
-/* 100270 802DD180 C422F4C0 */  lwc1      $f2, %lo(D_802DF4C0)($at)
+/* 10026C 802DD17C 3C01802E */  lui       $at, %hi(spr_animUpdateTimeScale)
+/* 100270 802DD180 C422F4C0 */  lwc1      $f2, %lo(spr_animUpdateTimeScale)($at)
 /* 100274 802DD184 4600A786 */  mov.s     $f30, $f20
 /* 100278 802DD188 46020001 */  sub.s     $f0, $f0, $f2
 /* 10027C 802DD18C 44801000 */  mtc1      $zero, $f2

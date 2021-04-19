@@ -29,7 +29,7 @@ glabel func_80240688_E1EAE8
 /* E1EB48 802406E8 00000000 */   nop
 /* E1EB4C 802406EC 0C00B7BD */  jal       create_cameras_a
 /* E1EB50 802406F0 00000000 */   nop
-/* E1EB54 802406F4 0C0B763E */  jal       func_802DD8F8
+/* E1EB54 802406F4 0C0B763E */  jal       spr_init_sprites
 /* E1EB58 802406F8 0000202D */   daddu    $a0, $zero, $zero
 /* E1EB5C 802406FC 0C0482EC */  jal       clear_entity_models
 /* E1EB60 80240700 00000000 */   nop
