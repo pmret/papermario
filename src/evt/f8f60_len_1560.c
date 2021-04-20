@@ -390,7 +390,7 @@ ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D5830(ScriptInstance* script, s32 initialCall) {
-    func_80027088(get_variable(script, *script->ptrReadPos));
+    set_time_freeze_mode(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 

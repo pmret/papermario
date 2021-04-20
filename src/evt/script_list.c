@@ -136,7 +136,7 @@ void init_script_list(void) {
 void func_802C3390(ScriptInstance* script) {
     s32 arg;
 
-    switch (D_8009A5D8) {
+    switch (timeFreezeMode) {
         default:
         case 0:
         case 4:

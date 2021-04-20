@@ -23,7 +23,7 @@ glabel func_80133FC8
 /* CA710 80134010 844265A4 */  lh        $v0, %lo(D_801565A4)($v0)
 /* CA714 80134014 14400041 */  bnez      $v0, .L8013411C
 /* CA718 80134018 2402FFFF */   addiu    $v0, $zero, -1
-/* CA71C 8013401C 0C009C64 */  jal       func_80027190
+/* CA71C 8013401C 0C009C64 */  jal       get_time_freeze_mode
 /* CA720 80134020 00000000 */   nop
 /* CA724 80134024 1440003D */  bnez      $v0, .L8013411C
 /* CA728 80134028 2402FFFF */   addiu    $v0, $zero, -1

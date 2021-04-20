@@ -89,7 +89,7 @@ glabel L80036244_11644
 /* 1169C 8003629C 8445008C */  lh        $a1, 0x8c($v0)
 /* 116A0 800362A0 0C0169BD */  jal       load_map_by_IDs
 /* 116A4 800362A4 0000302D */   daddu    $a2, $zero, $zero
-/* 116A8 800362A8 0C009C22 */  jal       func_80027088
+/* 116A8 800362A8 0C009C22 */  jal       set_time_freeze_mode
 /* 116AC 800362AC 0000202D */   daddu    $a0, $zero, $zero
 /* 116B0 800362B0 0C018030 */  jal       nuContRmbForceStopEnd
 /* 116B4 800362B4 00000000 */   nop

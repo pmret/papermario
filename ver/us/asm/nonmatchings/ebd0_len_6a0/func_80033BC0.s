@@ -163,7 +163,7 @@ glabel func_80033BC0
 /* F228 80033E28 8C840908 */  lw        $a0, %lo(D_800A0908)($a0)
 /* F22C 80033E2C 10800003 */  beqz      $a0, .L80033E3C
 /* F230 80033E30 AE620004 */   sw       $v0, 4($s3)
-/* F234 80033E34 0C009C22 */  jal       func_80027088
+/* F234 80033E34 0C009C22 */  jal       set_time_freeze_mode
 /* F238 80033E38 00000000 */   nop
 .L80033E3C:
 /* F23C 80033E3C 24040004 */  addiu     $a0, $zero, 4

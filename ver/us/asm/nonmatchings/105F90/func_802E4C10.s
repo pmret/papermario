@@ -120,7 +120,7 @@ glabel func_802E4C10
 /* 106624 802E4DA4 24040001 */  addiu     $a0, $zero, 1
 /* 106628 802E4DA8 AC600054 */  sw        $zero, 0x54($v1)
 /* 10662C 802E4DAC 34420200 */  ori       $v0, $v0, 0x200
-/* 106630 802E4DB0 0C009C22 */  jal       func_80027088
+/* 106630 802E4DB0 0C009C22 */  jal       set_time_freeze_mode
 /* 106634 802E4DB4 AC620004 */   sw       $v0, 4($v1)
 /* 106638 802E4DB8 3C03800A */  lui       $v1, %hi(gOverrideFlags)
 /* 10663C 802E4DBC 2463A650 */  addiu     $v1, $v1, %lo(gOverrideFlags)

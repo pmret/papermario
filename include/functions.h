@@ -97,7 +97,7 @@ s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
 
-void func_80027088(s32);
+void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 

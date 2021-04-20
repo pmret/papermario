@@ -4,7 +4,7 @@ void state_init_language_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    func_80027088(2);
+    set_time_freeze_mode(2);
     set_transition_stencil_zoom_0(0, D_800A0932[0]);
 }
 
@@ -14,7 +14,7 @@ void state_init_file_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    func_80027088(2);
+    set_time_freeze_mode(2);
     general_heap_create();
     func_801452E8(0, 0);
     func_80141100();
