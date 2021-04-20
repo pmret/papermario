@@ -24,7 +24,7 @@ ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "ED510", TranslateModel, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", TranslateModel, ScriptInstance* script, s32 isInitialCall);
 #endif
 
 ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
@@ -74,7 +74,7 @@ ApiStatus ScaleModel(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "ED510", ScaleModel, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", ScaleModel, ScriptInstance* script, s32 isInitialCall);
 #endif
 
 ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
@@ -161,7 +161,7 @@ ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "ED510", func_802C90FC);
+INCLUDE_ASM(s32, "evt/map_api", func_802C90FC);
 #endif
 
 ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {
@@ -266,10 +266,10 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "ED510", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
 #endif
 
-INCLUDE_ASM(s32, "ED510", func_802C95A0);
+INCLUDE_ASM(s32, "evt/map_api", func_802C95A0);
 
 ApiStatus func_802C971C(ScriptInstance* script, s32 isInitialCall) {
     func_8011B37C((u16)get_variable(script, *script->ptrReadPos));
@@ -289,11 +289,11 @@ ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ED510", TranslateGroup, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", TranslateGroup, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ED510", RotateGroup, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", RotateGroup, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ED510", ScaleGroup, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", ScaleGroup, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -304,7 +304,7 @@ ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ED510", EnableGroup, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", EnableGroup, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
@@ -316,13 +316,13 @@ ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ED510", modify_collider_family_flags);
+INCLUDE_ASM(s32, "evt/map_api", modify_collider_family_flags);
 
-INCLUDE_ASM(s32, "ED510", ModifyColliderFlags, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", ModifyColliderFlags, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ED510", ResetFromLava, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/map_api", ResetFromLava, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ED510", func_802C9FD4);
+INCLUDE_ASM(s32, "evt/map_api", func_802C9FD4);
 
 ApiStatus GetColliderCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 x, y, z;
@@ -351,11 +351,11 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ED510", set_zone_enabled);
+INCLUDE_ASM(s32, "evt/map_api", set_zone_enabled);
 
-INCLUDE_ASM(ApiStatus, "ED510", SetZoneEnabled, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/map_api", SetZoneEnabled, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ED510", goto_map);
+INCLUDE_ASM(s32, "evt/map_api", goto_map);
 
 ApiStatus GotoMap(ScriptInstance* script, s32 isInitialCall) {
     goto_map(script, 0);

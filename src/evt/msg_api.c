@@ -18,7 +18,7 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
 
-INCLUDE_ASM(ApiStatus, "f4c60_len_4300", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
+INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
 
 ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

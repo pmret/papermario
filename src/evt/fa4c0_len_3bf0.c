@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "fa4c0_len_3bf0", func_802D5B10);
+INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
 
-INCLUDE_ASM(s32, "fa4c0_len_3bf0", func_802D5C70);
+INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5C70);
 
 ApiStatus FadeOutMusic(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -166,9 +166,9 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "fa4c0_len_3bf0", func_802D663C);
+INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D663C);
 
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -127,7 +127,7 @@ ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "F5750", SetPlayerAnimation, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/player_api", SetPlayerAnimation, ScriptInstance* script, s32 isInitialCall);
 #endif
 
 ApiStatus SetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
@@ -167,11 +167,11 @@ ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
     return script->functionTemp[0].s < 0;
 }
 
-INCLUDE_ASM(s32, "F5750", func_802D1270);
+INCLUDE_ASM(s32, "evt/player_api", func_802D1270);
 
-INCLUDE_ASM(s32, "F5750", func_802D1380);
+INCLUDE_ASM(s32, "evt/player_api", func_802D1380);
 
-INCLUDE_ASM(s32, "F5750", player_jump);
+INCLUDE_ASM(s32, "evt/player_api", player_jump);
 
 ApiStatus PlayerJump(ScriptInstance* script, s32 isInitialCall) {
     return player_jump(script, isInitialCall, 0);
@@ -229,7 +229,7 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-INCLUDE_ASM(s32, "F5750", PlayerFaceNpc, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/player_api", PlayerFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetPlayerTargetYaw(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerStatus.targetYaw);
@@ -309,16 +309,16 @@ ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "F5750", UseEntryHeading, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", UseEntryHeading, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
     gPlayerStatus.flags &= ~0x4000000;
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "F5750", UseExitHeading, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", UseExitHeading, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D23F8);
+INCLUDE_ASM(s32, "evt/player_api", func_802D23F8);
 
 ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && (func_802D23F8() != 0)) {
@@ -352,7 +352,7 @@ ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall) {
     return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D2520, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2520, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
     s32 temp = *script->ptrReadPos;
@@ -361,7 +361,7 @@ ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "F5750", func_802D2884);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2884);
 
 ApiStatus DisablePulseStone(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -450,21 +450,21 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "F5750", func_802D2D30);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2D30);
 
-INCLUDE_ASM(s32, "F5750", func_802D2ED4);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2ED4);
 
-INCLUDE_ASM(s32, "F5750", func_802D2F34);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2F34);
 
-INCLUDE_ASM(s32, "F5750", func_802D2FCC);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2FCC);
 
-INCLUDE_ASM(s32, "F5750", func_802D3028);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3028);
 
-INCLUDE_ASM(s32, "F5750", func_802D31E0);
+INCLUDE_ASM(s32, "evt/player_api", func_802D31E0);
 
-INCLUDE_ASM(s32, "F5750", func_802D3398);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3398);
 
-INCLUDE_ASM(s32, "F5750", func_802D33D4);
+INCLUDE_ASM(s32, "evt/player_api", func_802D33D4);
 
 ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -536,46 +536,46 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D3624, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3624, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D3674);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3674);
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D36E0, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D36E0, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D378C);
+INCLUDE_ASM(s32, "evt/player_api", func_802D378C);
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D3840, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3840, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D38EC, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D38EC, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D3998);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3998);
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D39FC, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D39FC, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D3A60);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3A60);
 
-INCLUDE_ASM(ApiStatus, "F5750", func_802D3C58, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3C58, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "F5750", func_802D3EB8);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3EB8);
 
-INCLUDE_ASM(s32, "F5750", func_802D3F74);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3F74);
 
-INCLUDE_ASM(s32, "F5750", func_802D3FC8);
+INCLUDE_ASM(s32, "evt/player_api", func_802D3FC8);
 
-INCLUDE_ASM(s32, "F5750", func_802D4050);
+INCLUDE_ASM(s32, "evt/player_api", func_802D4050);
 
 UnkF5750* func_802D4164(s32 index) {
     return (*D_802DB7C0)[index];
 }
 
-INCLUDE_ASM(s32, "F5750", func_802D417C);
+INCLUDE_ASM(s32, "evt/player_api", func_802D417C);
 
 void func_802D420C(UnkF5750* arg0);
-INCLUDE_ASM(void, "F5750", func_802D420C, UnkF5750* arg0);
+INCLUDE_ASM(void, "evt/player_api", func_802D420C, UnkF5750* arg0);
 
-INCLUDE_ASM(s32, "F5750", func_802D42AC);
+INCLUDE_ASM(s32, "evt/player_api", func_802D42AC);
 
-INCLUDE_ASM(s32, "F5750", func_802D4364);
+INCLUDE_ASM(s32, "evt/player_api", func_802D4364);
 
 void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     UnkF5750* temp = (*D_802DB7C0)[index];
@@ -593,10 +593,10 @@ void func_802D43D0(s32 index, s32 arg1, s32 arg2, s32 arg3) {
     temp->unk_18 = arg3;
 }
 
-INCLUDE_ASM(s32, "F5750", func_802D43F4);
+INCLUDE_ASM(s32, "evt/player_api", func_802D43F4);
 
-INCLUDE_ASM(s32, "F5750", func_802D4434);
+INCLUDE_ASM(s32, "evt/player_api", func_802D4434);
 
-INCLUDE_ASM(s32, "F5750", func_802D4488);
+INCLUDE_ASM(s32, "evt/player_api", func_802D4488);
 
-INCLUDE_ASM(s32, "F5750", func_802D4560);
+INCLUDE_ASM(s32, "evt/player_api", func_802D4560);

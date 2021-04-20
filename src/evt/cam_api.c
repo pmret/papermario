@@ -179,9 +179,9 @@ ApiStatus SetCamTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CB008, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CB008, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ef070_len_3400", ShakeCam, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", ShakeCam, ScriptInstance* script, s32 isInitialCall);
 
 void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
     ScriptInstance* script;
@@ -248,9 +248,9 @@ ApiStatus PanToTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", UseSettingsFrom, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", UseSettingsFrom, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ef070_len_3400", LoadSettings, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", LoadSettings, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetCamType(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -459,11 +459,11 @@ ApiStatus WaitForCam(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", SetCamProperties, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", SetCamProperties, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ef070_len_3400", AdjustCam, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", AdjustCam, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "ef070_len_3400", ResetCam, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/cam_api", ResetCam, ScriptInstance* script, s32 isInitialCall);
 
 void func_802CCAC0(void) {
     s32 i;
@@ -477,7 +477,7 @@ void func_802CCAC0(void) {
     }
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", draw_anim_models);
+INCLUDE_ASM(s32, "evt/cam_api", draw_anim_models);
 
 ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
@@ -685,7 +685,7 @@ ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD4B4);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD4B4);
 
 void func_802CD57C(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -695,12 +695,12 @@ void func_802CD57C(void) {
     }
 }
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD5C0);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD5C0);
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD6E0);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD6E0);
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD7D8);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD7D8);
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD8F8);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD8F8);
 
-INCLUDE_ASM(s32, "ef070_len_3400", func_802CD9F0);
+INCLUDE_ASM(s32, "evt/cam_api", func_802CD9F0);

@@ -1135,14 +1135,14 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "si", si_handle_spawn_thread, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/si", si_handle_spawn_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_spawn_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-INCLUDE_ASM(s32, "si", si_handle_parallel_thread, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/si", si_handle_parallel_thread, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus si_handle_end_parallel_thread(ScriptInstance* script) {
     kill_script(script);
@@ -1153,7 +1153,7 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "si", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/si", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -1175,7 +1175,7 @@ s32 func_802C73B8(ScriptInstance* script) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "si", si_execute_next_command);
+INCLUDE_ASM(s32, "evt/si", si_execute_next_command);
 
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING
@@ -1233,7 +1233,7 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
     }
 }
 #else
-INCLUDE_ASM(s32, "si", get_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM(s32, "evt/si", get_variable, ScriptInstance* script, Bytecode var);
 #endif
 
 s32 get_variable_index(ScriptInstance* script, s32 var) {
@@ -1322,7 +1322,7 @@ s32 get_variable_index_alt(s32 var) {
     return var;
 }
 
-INCLUDE_ASM(s32, "si", set_variable, ScriptInstance* script, Bytecode var, s32 value);
+INCLUDE_ASM(s32, "evt/si", set_variable, ScriptInstance* script, Bytecode var, s32 value);
 
 // Tiny regalloc issue with the var <= -80000000 / -60000000 blocks
 #ifdef NON_MATCHING
@@ -1371,10 +1371,10 @@ f32 get_float_variable(ScriptInstance* script, Bytecode var) {
     }
 }
 #else
-INCLUDE_ASM(f32, "si", get_float_variable, ScriptInstance* script, Bytecode var);
+INCLUDE_ASM(f32, "evt/si", get_float_variable, ScriptInstance* script, Bytecode var);
 #endif
 
-INCLUDE_ASM(f32, "si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
+INCLUDE_ASM(f32, "evt/si", set_float_variable, ScriptInstance* script, Bytecode var, f32 value);
 
 Bytecode* si_find_label(ScriptInstance* script, s32 arg1) {
     Bytecode* ret = script->ptrReadPos;
@@ -1395,7 +1395,7 @@ Bytecode* si_find_label(ScriptInstance* script, s32 arg1) {
     return ret;
 }
 
-INCLUDE_ASM(Bytecode*, "si", si_skip_if, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "evt/si", si_skip_if, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1435,7 +1435,7 @@ INCLUDE_ASM(Bytecode*, "si", si_skip_if, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(Bytecode*, "si", si_skip_else, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "evt/si", si_skip_else, ScriptInstance* script);
 // Matching but needs rodata support
 /*Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
@@ -1471,8 +1471,8 @@ INCLUDE_ASM(Bytecode*, "si", si_skip_else, ScriptInstance* script);
     } while(1);
 }*/
 
-INCLUDE_ASM(Bytecode*, "si", si_goto_end_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM(Bytecode*, "si", si_goto_next_case, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "evt/si", si_goto_next_case, ScriptInstance* script);
 
-INCLUDE_ASM(Bytecode*, "si", si_goto_end_loop, ScriptInstance* script);
+INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_loop, ScriptInstance* script);

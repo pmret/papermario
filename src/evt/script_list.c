@@ -218,7 +218,7 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "e79b0_len_1920", start_script, Bytecode* initialLine, s32 priority,
+INCLUDE_ASM(ScriptInstance*, "evt/script_list", start_script, Bytecode* initialLine, s32 priority,
             s32 initialState);
 #endif
 
@@ -294,7 +294,7 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
     return newScript;
 }
 
-INCLUDE_ASM(s32, "e79b0_len_1920", start_child_script);
+INCLUDE_ASM(s32, "evt/script_list", start_child_script);
 
 #ifdef NON_MATCHING
 // appears to be functionally equivalent, some ordering and regalloc issues
@@ -363,7 +363,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     return child;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "e79b0_len_1920", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine,
+INCLUDE_ASM(ScriptInstance*, "evt/script_list", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine,
             s32 newState);
 #endif
 
@@ -431,10 +431,10 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     return script;
 }
 
-INCLUDE_ASM(s32, "e79b0_len_1920", update_scripts);
+INCLUDE_ASM(s32, "evt/script_list", update_scripts);
 
 // this function is evil.
-INCLUDE_ASM(s32, "e79b0_len_1920", func_802C3EE4);
+INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);
 
 void kill_script(ScriptInstance* instanceToKill) {
     ScriptInstance* childScript;

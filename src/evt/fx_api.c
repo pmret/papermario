@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(void, "FBE10", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
+INCLUDE_ASM(void, "evt/fx_api", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
 
-INCLUDE_ASM(void, "FBE10", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
+INCLUDE_ASM(void, "evt/fx_api", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
 
 ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -26,9 +26,9 @@ ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "FBE10", func_802D7690);
+INCLUDE_ASM(s32, "evt/fx_api", func_802D7690);
 
-INCLUDE_ASM(s32, "FBE10", ShowEmote, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -116,10 +116,10 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "FBE10", func_802D7E08);
+INCLUDE_ASM(s32, "evt/fx_api", func_802D7E08);
 
-INCLUDE_ASM(ApiStatus, "FBE10", ShowSleepBubble, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "FBE10", func_802D8248, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "FBE10", PlayEffect, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", PlayEffect, ScriptInstance* script, s32 isInitialCall);

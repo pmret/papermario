@@ -24,7 +24,7 @@ void set_npc_animation(Npc* npc, u32 arg1) {
 }
 
 /// Used in battle scripts.
-INCLUDE_ASM(ApiStatus, "f2470_len_27f0", CreateNpc, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/npc_api", CreateNpc, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -207,9 +207,9 @@ ApiStatus SetNpcAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "f2470_len_27f0", NpcMoveTo, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/npc_api", NpcMoveTo, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "f2470_len_27f0", _npc_jump_to);
+INCLUDE_ASM(s32, "evt/npc_api", _npc_jump_to);
 
 ApiStatus NpcJump0(ScriptInstance* script, s32 isInitialCall) {
     return _npc_jump_to(script, isInitialCall, 0);
@@ -219,7 +219,7 @@ ApiStatus NpcJump1(ScriptInstance* script, s32 isInitialCall) {
     return _npc_jump_to(script, isInitialCall, 1);
 }
 
-INCLUDE_ASM(s32, "f2470_len_27f0", NpcFlyTo, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/npc_api", NpcFlyTo, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -248,11 +248,11 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "f2470_len_27f0", InterpNpcYaw, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/npc_api", InterpNpcYaw, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "f2470_len_27f0", NpcFacePlayer, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/npc_api", NpcFacePlayer, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "f2470_len_27f0", NpcFaceNpc, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/npc_api", NpcFaceNpc, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetNpcFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -432,9 +432,9 @@ ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "f2470_len_27f0", BringPartnerOut, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/npc_api", BringPartnerOut, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "f2470_len_27f0", PutPartnerAway, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/npc_api", PutPartnerAway, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetCurrentPartnerID(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);

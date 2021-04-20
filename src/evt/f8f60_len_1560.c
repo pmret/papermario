@@ -346,10 +346,10 @@ void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* a
     heap_free(temp_s4);
 }
 #else
-INCLUDE_ASM(s32, "f8f60_len_1560", setup_path_data);
+INCLUDE_ASM(s32, "evt/f8f60_len_1560", setup_path_data);
 #endif
 
-INCLUDE_ASM(s32, "f8f60_len_1560", func_802D5270);
+INCLUDE_ASM(s32, "evt/f8f60_len_1560", func_802D5270);
 
 s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -373,7 +373,7 @@ s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "f8f60_len_1560", GetNextPathPos, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/f8f60_len_1560", GetNextPathPos, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
