@@ -2178,7 +2178,7 @@ segments:
     name: battle/text_action_command_ratings
     width: 64
     height: 125
-    flip: vertical
+    flip_y: true
   - [0x3917B0, bin]
   - type: code
     start: 0x391D30
