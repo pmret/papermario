@@ -345,7 +345,7 @@ void get_entity_fog_color(s32* r, s32* g, s32* b, s32* a) {
     *a = entity_fog_alpha;
 }
 
-void stub_dynamic_entity_delegate(DynamicEntity* entity) {
+void stub_dynamic_entity_delegate(void) {
 }
 
 void clear_dynamic_entity_list(void) {

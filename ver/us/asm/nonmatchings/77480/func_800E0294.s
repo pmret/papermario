@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_800E0294
+glabel check_for_ispy
 /* 79744 800E0294 3C028016 */  lui       $v0, %hi(D_8015A57A)
 /* 79748 800E0298 8042A57A */  lb        $v0, %lo(D_8015A57A)($v0)
 /* 7974C 800E029C 27BDFFE8 */  addiu     $sp, $sp, -0x18

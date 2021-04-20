@@ -1546,8 +1546,9 @@ enum NpcFlags {
     NPC_FLAG_4000              = 0x00004000,
     NPC_FLAG_8000              = 0x00008000,
     NPC_FLAG_DIRTY_SHADOW      = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
-    NPC_FLAG_INVISIBLE         = 0x00020000, ///< Invisible sprite (shadow and particles still render) (TODO: possibly causes loading of player sprites instead?)
-    NPC_FLAG_40000             = 0x00040000, ///< Related to NPC_FLAG_8000
+    NPC_FLAG_REFLECT_WALL      = 0x00020000, ///< Mirror rendering across z=0
+    NPC_FLAG_40000             = 0x00040000, ///< Yaw?
+    NPC_FLAG_REFLECT_FLOOR     = 0x00080000, ///< Mirror rendering across y=0
     NPC_FLAG_MOTION_BLUR       = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000            = 0x00200000,
     NPC_FLAG_400000            = 0x00400000,

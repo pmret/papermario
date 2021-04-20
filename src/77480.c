@@ -116,9 +116,9 @@ void update_player(void) {
 
     update_player_shadow();
     check_for_interactables();
-    func_800E0580();
-    func_800E0398();
-    func_800E0294();
+    check_for_conversation();
+    check_for_pulse_stone();
+    check_for_ispy();
 
     playerStatus->extraVelocity.x = 0.0f;
     playerStatus->extraVelocity.y = 0.0f;
@@ -356,7 +356,7 @@ void func_800E0260(void) {
 // Weird control flow / issue with loading linker addrs
 #ifdef NON_MATCHING
 extern s8 D_8015A57A;
-void func_800E0294(void) {
+void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (D_8015A57A != 0) {
@@ -378,7 +378,7 @@ void func_800E0294(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "77480", func_800E0294);
+INCLUDE_ASM(s32, "77480", check_for_ispy);
 #endif
 
 void func_800E0330(void) {
@@ -392,7 +392,7 @@ void func_800E0374(void) {
     gPlayerStatusPtr->animFlags &= ~PLAYER_ANIM_FLAG_100;
 }
 
-INCLUDE_ASM(s32, "77480", func_800E0398);
+INCLUDE_ASM(s32, "77480", check_for_pulse_stone);
 
 void func_800E04D0(void) {
     if ((gPlayerStatusPtr->animFlags & 0x40) && (D_8010C920 != 0)) {
@@ -418,7 +418,7 @@ s32 func_800E0538(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", func_800E0580);
+INCLUDE_ASM(s32, "77480", check_for_conversation);
 
 void func_800E0658(void) {
     if ((gPlayerStatusPtr->animFlags & 0x20) && (D_8010C940 != 0)) {

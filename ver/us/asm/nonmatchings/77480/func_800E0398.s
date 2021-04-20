@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_800E0398
+glabel check_for_pulse_stone
 /* 79848 800E0398 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 7984C 800E039C AFB00010 */  sw        $s0, 0x10($sp)
 /* 79850 800E03A0 3C108011 */  lui       $s0, %hi(D_8010C920)

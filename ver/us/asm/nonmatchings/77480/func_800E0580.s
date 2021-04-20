@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_800E0580
+glabel check_for_conversation
 /* 79A30 800E0580 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 79A34 800E0584 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* 79A38 800E0588 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)
