@@ -2500,7 +2500,7 @@ segments:
   - start: 0x3FA4B0
     type: ci4
     name: star_cards/card_front
-    flip: v
+    flip_y: true
     width: 32
     height: 32
   - [0x3FA6B0, palette, star_cards/card_front]
@@ -2508,7 +2508,7 @@ segments:
   - start: 0x3FA8B0
     type: ci4
     name: star_cards/card_back
-    flip: v
+    flip_y: true
     width: 32
     height: 64
   - [0x3FACB0, palette, star_cards/card_back]
@@ -2516,7 +2516,7 @@ segments:
   - start: 0x3FAEB0
     type: ci4
     name: star_cards/wave
-    flip: v
+    flip_y: true
     width: 32
     height: 32
   - [0x3FB0B0, palette, star_cards/wave]
@@ -2524,7 +2524,7 @@ segments:
   - start: 0x3FB2B0
     type: ci4
     name: star_cards/squares
-    flip: v
+    flip_y: true
     width: 16
     height: 16
   - [0x3FB330, palette, star_cards/squares]
@@ -2532,7 +2532,7 @@ segments:
   - start: 0x3FB530
     type: ci4
     name: star_cards/eldstar
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FB9B0, palette, star_cards/eldstar]
@@ -2540,7 +2540,7 @@ segments:
   - start: 0x3FBBB0
     type: ci4
     name: star_cards/mamar
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FC030, palette, star_cards/mamar]
@@ -2548,7 +2548,7 @@ segments:
   - start: 0x3FC230
     type: ci4
     name: star_cards/skolar
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FC6B0, palette, star_cards/skolar]
@@ -2556,7 +2556,7 @@ segments:
   - start: 0x3FC8B0
     type: ci4
     name: star_cards/muskular
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FCD30, palette, star_cards/muskular]
@@ -2564,7 +2564,7 @@ segments:
   - start: 0x3FCF30
     type: ci4
     name: star_cards/misstar
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FD3B0, palette, star_cards/misstar]
@@ -2572,7 +2572,7 @@ segments:
   - start: 0x3FDC30
     type: ci4
     name: star_cards/klevar
-    flip: v
+    flip_y: true
     width: 48
     height: 48
   - [0x3FE0B0, palette, star_cards/klevar]
@@ -2604,28 +2604,28 @@ segments:
   - start: 0x404F40
     type: ci4
     name: world/cloud
-    flip: v
+    flip_y: true
     width: 32
     height: 32
   - [0x405140, palette, world/cloud]
   - start: 0x405340
     type: ci4
     name: world/waterblock
-    flip: v
+    flip_y: true
     width: 32
     height: 32
   - [0x405540, palette, world/waterblock]
   - start: 0x405740
     type: ci4
     name: world/yellow_carpet
-    flip: v
+    flip_y: true
     width: 32
     height: 32
   - [0x405940, palette, world/yellow_carpet]
   - start: 0x405B40
     type: ci4
     name: world/numbers
-    flip: v
+    flip_y: true
     width: 32
     height: 160
   - [0x406540, palette, world/numbers]
