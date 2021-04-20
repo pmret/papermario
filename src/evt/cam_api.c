@@ -1,5 +1,15 @@
 #include "common.h"
 
+Script ShakeCam1 = SCRIPT({
+    group 0;
+    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0);
+});
+
+Script ShakeCamX = SCRIPT({
+    group 0;
+    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
+});
+
 ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 id = get_variable(script, *args++);

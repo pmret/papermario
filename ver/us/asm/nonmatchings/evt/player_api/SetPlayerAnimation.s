@@ -8,8 +8,8 @@ glabel SetPlayerAnimation
 /* F5A40 802D1090 0C0B1EAF */  jal       get_variable
 /* F5A44 802D1094 8C450000 */   lw       $a1, ($v0)
 /* F5A48 802D1098 3C040008 */  lui       $a0, 8
-/* F5A4C 802D109C 3C03802E */  lui       $v1, %hi(gPlayerNpcPtr)
-/* F5A50 802D10A0 8C639D20 */  lw        $v1, %lo(gPlayerNpcPtr)($v1)
+/* F5A4C 802D109C 3C03802E */  lui       $v1, %hi(playerNpc)
+/* F5A50 802D10A0 8C639D20 */  lw        $v1, %lo(playerNpc)($v1)
 /* F5A54 802D10A4 34840003 */  ori       $a0, $a0, 3
 /* F5A58 802D10A8 AC620028 */  sw        $v0, 0x28($v1)
 /* F5A5C 802D10AC 3C018011 */  lui       $at, %hi(gPlayerAnimation)

@@ -67,8 +67,6 @@ extern ShadowList* gCurrentShadowListPtr;
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
 
-extern Npc* gPlayerNpcPtr;
-
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
@@ -305,9 +303,8 @@ extern UNK_TYPE D_0A000808;
 
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;
-extern Bytecode* ShakeCam1;
-extern Bytecode* ShakeCamX;
-extern Bytecode* D_802D9D50;
+extern Script ShakeCam1;
+extern Script ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;

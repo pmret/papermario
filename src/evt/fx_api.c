@@ -94,6 +94,10 @@ ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+Script D_802D9D50 = SCRIPT({
+    func_802D7BA4();
+});
+
 ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
@@ -104,7 +108,7 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     s32 var5 = get_variable(script, *args++);
     s32 var6 = get_variable(script, *args++);
 
-    ScriptInstance* newScript = start_script(&D_802D9D50, 1, 0);
+    ScriptInstance* newScript = start_script(D_802D9D50, 1, 0);
     newScript->varTable[0] = var0;
     newScript->varTable[1] = var1;
     newScript->varTable[2] = var2;

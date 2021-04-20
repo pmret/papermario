@@ -18,6 +18,8 @@ typedef UnkF5750* UnkF5750List[0x40];
 extern s16 D_802DB5B0;
 extern UnkF5750List* D_802DB7C0;
 
+Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
+
 ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 hideShadow = get_variable(script, *args++);
@@ -73,13 +75,13 @@ ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
     f32 y = get_variable(script, *args++);
     f32 z = get_variable(script, *args++);
 
-    gPlayerNpcPtr->pos.x = x;
-    gPlayerNpcPtr->pos.y = y;
-    gPlayerNpcPtr->pos.z = z;
+    playerNpc->pos.x = x;
+    playerNpc->pos.y = y;
+    playerNpc->pos.z = z;
 
-    playerStatus->position.x = gPlayerNpcPtr->pos.x;
-    playerStatus->position.y = gPlayerNpcPtr->pos.y;
-    playerStatus->position.z = gPlayerNpcPtr->pos.z;
+    playerStatus->position.x = playerNpc->pos.x;
+    playerStatus->position.y = playerNpc->pos.y;
+    playerStatus->position.z = playerNpc->pos.z;
 
     return ApiStatus_DONE2;
 }
@@ -88,7 +90,7 @@ ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 height = get_variable(script, *args++);
     s32 radius = get_variable(script, *args);
-    Npc* player = gPlayerNpcPtr;
+    Npc* player = playerNpc;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     player->collisionHeight = height;
@@ -101,12 +103,12 @@ ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerSpeed(ScriptInstance* script, s32 isInitialCall) {
-    gPlayerNpcPtr->moveSpeed = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->moveSpeed = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetPlayerJumpscale(ScriptInstance* script, s32 isInitialCall) {
-    gPlayerNpcPtr->jumpScale = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->jumpScale = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -117,7 +119,7 @@ ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
 
     animation = get_variable(script, *args);
 
-    gPlayerNpcPtr->currentAnim = animation;
+    playerNpc->currentAnim = animation;
     gPlayerAnimation = animation;
 
     if (animation == 0x80003) {
@@ -136,7 +138,7 @@ ApiStatus SetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
-    gPlayerNpcPtr->animationSpeed = get_float_variable(script, *script->ptrReadPos);
+    playerNpc->animationSpeed = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -154,8 +156,8 @@ ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
 
         if (script->functionTemp[0].s == 0) {
             script->functionTemp[0].s = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
-                                               targetZ) / gPlayerNpcPtr->moveSpeed;
-            moveSpeed = gPlayerNpcPtr->moveSpeed;
+                                               targetZ) / playerNpc->moveSpeed;
+            moveSpeed = playerNpc->moveSpeed;
         } else {
             moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0].s;
         }
@@ -193,7 +195,7 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     s32* time = &script->functionTemp[3].s;
 
     if (isInitialCall) {
-        Npc** player = &gPlayerNpcPtr;
+        Npc** player = &playerNpc;
 
         (*player)->yaw = playerStatus->targetYaw;
         *initialYaw = (*player)->yaw;
@@ -210,7 +212,7 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (*time > 0) {
-        Npc** player = &gPlayerNpcPtr;
+        Npc** player = &playerNpc;
 
         (*player)->duration++;
         (*player)->yaw = *initialYaw + ((*deltaYaw * (*player)->duration) / *time);
@@ -219,7 +221,7 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
 
         return !((*player)->duration < *time);
     } else {
-        Npc** player = &gPlayerNpcPtr;
+        Npc** player = &playerNpc;
 
         (*player)->yaw += *deltaYaw;
         (*player)->yaw = clamp_angle((*player)->yaw);

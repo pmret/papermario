@@ -46,8 +46,8 @@ glabel player_jump
 /* F5F30 802D1580 4680A520 */  cvt.s.w   $f20, $f20
 /* F5F34 802D1584 0C0B1EAF */  jal       get_variable
 /* F5F38 802D1588 0240202D */   daddu    $a0, $s2, $zero
-/* F5F3C 802D158C 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
-/* F5F40 802D1590 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
+/* F5F3C 802D158C 3C10802E */  lui       $s0, %hi(playerNpc)
+/* F5F40 802D1590 26109D20 */  addiu     $s0, $s0, %lo(playerNpc)
 /* F5F44 802D1594 8E030000 */  lw        $v1, ($s0)
 /* F5F48 802D1598 C6200028 */  lwc1      $f0, 0x28($s1)
 /* F5F4C 802D159C E4600038 */  swc1      $f0, 0x38($v1)
@@ -103,8 +103,8 @@ glabel player_jump
 /* F600C 802D165C 4600A003 */  div.s     $f0, $f20, $f0
 /* F6010 802D1660 E4600018 */  swc1      $f0, 0x18($v1)
 .L802D1664:
-/* F6014 802D1664 3C03802E */  lui       $v1, %hi(gPlayerNpcPtr)
-/* F6018 802D1668 8C639D20 */  lw        $v1, %lo(gPlayerNpcPtr)($v1)
+/* F6014 802D1664 3C03802E */  lui       $v1, %hi(playerNpc)
+/* F6018 802D1668 8C639D20 */  lw        $v1, %lo(playerNpc)($v1)
 /* F601C 802D166C 8464008E */  lh        $a0, 0x8e($v1)
 /* F6020 802D1670 C4620014 */  lwc1      $f2, 0x14($v1)
 /* F6024 802D1674 2482FFFF */  addiu     $v0, $a0, -1
@@ -154,8 +154,8 @@ glabel player_jump
 /* F60C8 802D1718 24020001 */  addiu     $v0, $zero, 1
 /* F60CC 802D171C AE420070 */  sw        $v0, 0x70($s2)
 .L802D1720:
-/* F60D0 802D1720 3C10802E */  lui       $s0, %hi(gPlayerNpcPtr)
-/* F60D4 802D1724 26109D20 */  addiu     $s0, $s0, %lo(gPlayerNpcPtr)
+/* F60D0 802D1720 3C10802E */  lui       $s0, %hi(playerNpc)
+/* F60D4 802D1724 26109D20 */  addiu     $s0, $s0, %lo(playerNpc)
 /* F60D8 802D1728 8E040000 */  lw        $a0, ($s0)
 /* F60DC 802D172C 8C850018 */  lw        $a1, 0x18($a0)
 /* F60E0 802D1730 0C00EA95 */  jal       npc_move_heading
@@ -197,8 +197,8 @@ glabel player_jump
 /* F6168 802D17B8 0C037FBF */  jal       func_800DFEFC
 /* F616C 802D17BC 00000000 */   nop
 .L802D17C0:
-/* F6170 802D17C0 3C03802E */  lui       $v1, %hi(gPlayerNpcPtr)
-/* F6174 802D17C4 24639D20 */  addiu     $v1, $v1, %lo(gPlayerNpcPtr)
+/* F6170 802D17C0 3C03802E */  lui       $v1, %hi(playerNpc)
+/* F6174 802D17C4 24639D20 */  addiu     $v1, $v1, %lo(playerNpc)
 /* F6178 802D17C8 8C620000 */  lw        $v0, ($v1)
 /* F617C 802D17CC C4400038 */  lwc1      $f0, 0x38($v0)
 /* F6180 802D17D0 E6200028 */  swc1      $f0, 0x28($s1)
@@ -242,8 +242,8 @@ glabel player_jump
 .L802D1860:
 /* F6210 802D1860 0C037FBF */  jal       func_800DFEFC
 /* F6214 802D1864 00000000 */   nop
-/* F6218 802D1868 3C04802E */  lui       $a0, %hi(gPlayerNpcPtr)
-/* F621C 802D186C 8C849D20 */  lw        $a0, %lo(gPlayerNpcPtr)($a0)
+/* F6218 802D1868 3C04802E */  lui       $a0, %hi(playerNpc)
+/* F621C 802D186C 8C849D20 */  lw        $a0, %lo(playerNpc)($a0)
 /* F6220 802D1870 0C00F598 */  jal       func_8003D660
 /* F6224 802D1874 24050002 */   addiu    $a1, $zero, 2
 /* F6228 802D1878 12600004 */  beqz      $s3, .L802D188C
@@ -253,8 +253,8 @@ glabel player_jump
 /* F6234 802D1884 1662000E */  bne       $s3, $v0, .L802D18C0
 /* F6238 802D1888 24020001 */   addiu    $v0, $zero, 1
 .L802D188C:
-/* F623C 802D188C 3C02802E */  lui       $v0, %hi(gPlayerNpcPtr)
-/* F6240 802D1890 8C429D20 */  lw        $v0, %lo(gPlayerNpcPtr)($v0)
+/* F623C 802D188C 3C02802E */  lui       $v0, %hi(playerNpc)
+/* F6240 802D1890 8C429D20 */  lw        $v0, %lo(playerNpc)($v0)
 /* F6244 802D1894 C44C001C */  lwc1      $f12, 0x1c($v0)
 /* F6248 802D1898 0C038D45 */  jal       func_800E3514
 /* F624C 802D189C 27A50010 */   addiu    $a1, $sp, 0x10

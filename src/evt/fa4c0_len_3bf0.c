@@ -1,6 +1,12 @@
 #include "common.h"
 
+s32 D_802D9D30 = 0;
+
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
+
+Script D_802D9D34 = SCRIPT({
+    func_802D5B10();
+});
 
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5C70);
 
@@ -169,6 +175,8 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D663C);
+
+// TODO: probably a split here (sound_api, item_api)
 
 ApiStatus RemoveKeyItemAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
