@@ -1,5 +1,5 @@
 import importlib
-from typing import Dict, TYPE_CHECKING, Union, Optional, List
+from typing import Dict, TYPE_CHECKING, Union, Optional, List, Literal
 from pathlib import Path
 from util import log
 from util import options
@@ -10,7 +10,7 @@ import sys
 if TYPE_CHECKING:
     from segtypes.linker_entry import LinkerEntry
 
-RomAddr = Union[int, str]
+RomAddr = Union[int, Literal["auto"]]
 
 
 def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
