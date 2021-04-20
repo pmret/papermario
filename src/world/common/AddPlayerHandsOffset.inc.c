@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(SomeXYZFuncTodoRename)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 xVar = *args++;

@@ -241,7 +241,7 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_802424D4_95D6D4);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_dro/dro_01/95B7E0", func_80242730_95D930);
 /*

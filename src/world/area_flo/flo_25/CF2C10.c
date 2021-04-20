@@ -190,7 +190,7 @@ ApiStatus N(func_80241944_CF4514)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241D58_CF4928);
 /*

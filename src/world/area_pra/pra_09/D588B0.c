@@ -28,7 +28,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_80240D3C_D595CC);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_8024114C_D599DC);
 /*
@@ -57,7 +57,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_09/D588B0", func_802411A0_D59A30);
 /*
 ApiStatus N(func_802411A0_D59A30)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;
