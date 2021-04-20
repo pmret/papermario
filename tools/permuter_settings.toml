@@ -2,4 +2,7 @@ compiler_command = "cpp -w -Iver/us/build/include -Iinclude -Isrc -DPERMUTER -D 
 assembler_command = "mips-linux-gnu-as -march=vr4300 -mabi=32"
 
 [preserve_macros]
-"g[DS]P.*" = "void"
+"gs?[DS]P.*" = "void"
+OVERRIDE_FLAG_CHECK = "int"
+OS_K0_TO_PHYSICAL = "int"
+"G_.*" = "int"

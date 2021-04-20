@@ -278,13 +278,26 @@ s32 func_80027190(void) {
 
 #ifdef NON_MATCHING
 void gfx_init_state(void) {
-    Gfx* temp;
-
+    Gfx** temp = &gMasterGfxPos;
     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074230));
-    //temp = gMasterGfxPos++;
+    (*temp)++;
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
 }
+// void gfx_init_state(void) {
+//     Gfx* gfx = gMasterGfxPos++;
+
+//     gSPSegment(gfx, 0x00, 0x0);
+
+//     gfx = gMasterGfxPos++;
+//     gSPDisplayList(gfx, OS_K0_TO_PHYSICAL(&D_80074230));
+//     {
+//         Gfx *_g = (Gfx *) (gMasterGfxPos++);
+//         gfx->words.w0 = (((unsigned int) ((((unsigned int) 0xde) & ((0x01 << 8) - 1)) << 24)) | ((unsigned int) ((((unsigned int) 0x00) & ((0x01 << 8) - 1)) << 16))) | ((unsigned int) ((((unsigned int) 0) & ((0x01 << 16) - 1)) << 0));
+//         gfx->words.w1 = (unsigned int) ((u32) (((char *) (&D_80074210)) - 0x80000000));
+//     }
+//     ;
+// }
 #else
 INCLUDE_ASM(void, "1b40_len_20b0", gfx_init_state);
 #endif
@@ -299,6 +312,38 @@ INCLUDE_ASM(s32, "1b40_len_20b0", func_80027774);
 
 INCLUDE_ASM(s32, "1b40_len_20b0", func_800279B4);
 
+// ordering issues, graphics sadness
+#ifdef NON_MATCHING
+void func_80027BAC(s32 arg0, s32 arg1) {
+    s32 i;
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, arg1);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+
+    for (i = 0; i < 40; i++) {
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, arg0 + (0xF00 * i));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+        gSPTextureRectangle(gMasterGfxPos++, 0, i * 24, 0x04FC, 20 + i * 24, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+    }
+}
+#else
 INCLUDE_ASM(s32, "1b40_len_20b0", func_80027BAC);
+#endif
 
 INCLUDE_ASM(void, "1b40_len_20b0", gfx_draw_background);
