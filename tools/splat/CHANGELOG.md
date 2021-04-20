@@ -5,6 +5,7 @@
 * Image segment changes:
   * Added `flip_x` and `flip_y` boolean parameters to replace `flip`.
     * `flip` is deprecated and will produce a warning when used.
+    * Fixed flipping of `ci4` and `ci8` images.
   * Fixed `extract: false` (and `start: auto`) behaviour.
 
 ## 0.7.0: The Path Update
