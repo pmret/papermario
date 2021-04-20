@@ -1,12 +1,12 @@
 import sys
 from colorama import init, Fore, Style
-from typing import Union, Literal
+from typing import Optional
 
 init(autoreset=True)
 
 newline = True
 
-Status = Union[None, Literal["ok"], Literal["warn"], Literal["error"], Literal["skip"]]
+Status = Optional[str]
 
 def write(*args, status=None, **kwargs):
     global newline
