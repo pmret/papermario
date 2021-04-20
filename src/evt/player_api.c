@@ -497,7 +497,7 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
 
-    update_entity_rendercmd(temp->unk_00);
+    exec_entity_model_commandlist(temp->unk_00);
     set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;
@@ -532,7 +532,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
 
-    update_entity_rendercmd(temp->unk_00);
+    exec_entity_model_commandlist(temp->unk_00);
     set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;

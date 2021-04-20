@@ -195,7 +195,7 @@ s32 is_player_action_state(ActionState actionState) {
 
 void func_80110BCC(Entity *entity) {
     if (!(entity->flags & 8)) {
-        func_80122D7C(entity->virtualModelIndex);
+        set_entity_model_render_command_list(entity->virtualModelIndex);
     }
 }
 

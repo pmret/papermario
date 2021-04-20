@@ -36,7 +36,7 @@ glabel func_802D420C
 /* F8C30 802D4280 AE000018 */  sw        $zero, 0x18($s0)
 /* F8C34 802D4284 E600001C */  swc1      $f0, 0x1c($s0)
 /* F8C38 802D4288 E6000020 */  swc1      $f0, 0x20($s0)
-/* F8C3C 802D428C 0C0483C1 */  jal       update_entity_rendercmd
+/* F8C3C 802D428C 0C0483C1 */  jal       exec_entity_model_commandlist
 /* F8C40 802D4290 E6000024 */   swc1     $f0, 0x24($s0)
 /* F8C44 802D4294 0220102D */  daddu     $v0, $s1, $zero
 .L802D4298:

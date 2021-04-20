@@ -100,8 +100,8 @@ glabel draw_entity_model_extra3
 /* B8AD4 801223D4 30A20400 */  andi      $v0, $a1, 0x400
 /* B8AD8 801223D8 144001F6 */  bnez      $v0, .L80122BB4
 /* B8ADC 801223DC A4C40000 */   sh       $a0, ($a2)
-/* B8AE0 801223E0 3C028015 */  lui       $v0, %hi(D_80154378)
-/* B8AE4 801223E4 8C424378 */  lw        $v0, %lo(D_80154378)($v0)
+/* B8AE0 801223E0 3C028015 */  lui       $v0, %hi(entity_fog_enabled)
+/* B8AE4 801223E4 8C424378 */  lw        $v0, %lo(entity_fog_enabled)($v0)
 /* B8AE8 801223E8 10400003 */  beqz      $v0, .L801223F8
 /* B8AEC 801223EC 0000182D */   daddu    $v1, $zero, $zero
 /* B8AF0 801223F0 30A20800 */  andi      $v0, $a1, 0x800
@@ -426,10 +426,10 @@ glabel L80122860_B8F60
 /* B8F88 80122888 AC820004 */  sw        $v0, 4($a0)
 glabel L8012288C_B8F8C
 /* B8F8C 8012288C 3C070001 */  lui       $a3, 1
-/* B8F90 80122890 3C028015 */  lui       $v0, %hi(D_80154390)
-/* B8F94 80122894 8C424390 */  lw        $v0, %lo(D_80154390)($v0)
-/* B8F98 80122898 3C038015 */  lui       $v1, %hi(D_8015438C)
-/* B8F9C 8012289C 8C63438C */  lw        $v1, %lo(D_8015438C)($v1)
+/* B8F90 80122890 3C028015 */  lui       $v0, %hi(entity_fog_dist_max)
+/* B8F94 80122894 8C424390 */  lw        $v0, %lo(entity_fog_dist_max)($v0)
+/* B8F98 80122898 3C038015 */  lui       $v1, %hi(entity_fog_dist_min)
+/* B8F9C 8012289C 8C63438C */  lw        $v1, %lo(entity_fog_dist_min)($v1)
 /* B8FA0 801228A0 34E7F400 */  ori       $a3, $a3, 0xf400
 /* B8FA4 801228A4 00431023 */  subu      $v0, $v0, $v1
 /* B8FA8 801228A8 14400002 */  bnez      $v0, .L801228B4
@@ -497,8 +497,8 @@ glabel L80122980_B9080
 /* B9088 80122988 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* B908C 8012298C 3442FFFF */  ori       $v0, $v0, 0xffff
 /* B9090 80122990 8CC50000 */  lw        $a1, ($a2)
-/* B9094 80122994 3C048015 */  lui       $a0, %hi(D_80154378)
-/* B9098 80122998 8C844378 */  lw        $a0, %lo(D_80154378)($a0)
+/* B9094 80122994 3C048015 */  lui       $a0, %hi(entity_fog_enabled)
+/* B9098 80122998 8C844378 */  lw        $a0, %lo(entity_fog_enabled)($a0)
 /* B909C 8012299C 00A0182D */  daddu     $v1, $a1, $zero
 /* B90A0 801229A0 24A50008 */  addiu     $a1, $a1, 8
 /* B90A4 801229A4 ACC50000 */  sw        $a1, ($a2)
@@ -577,7 +577,7 @@ glabel L80122980_B9080
 /* B91B8 80122AB8 0C019D60 */  jal       guMtxL2F
 /* B91BC 80122ABC 0220282D */   daddu    $a1, $s1, $zero
 /* B91C0 80122AC0 27B00050 */  addiu     $s0, $sp, 0x50
-/* B91C4 80122AC4 0C048450 */  jal       make_mtx_flipZ
+/* B91C4 80122AC4 0C048450 */  jal       make_entity_model_mtx_flipZ
 /* B91C8 80122AC8 0200202D */   daddu    $a0, $s0, $zero
 /* B91CC 80122ACC 27A40010 */  addiu     $a0, $sp, 0x10
 /* B91D0 80122AD0 0200282D */  daddu     $a1, $s0, $zero

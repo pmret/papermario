@@ -21,7 +21,7 @@ glabel func_802D3674
 /* F8064 802D36B4 02038021 */  addu      $s0, $s0, $v1
 /* F8068 802D36B8 8E030000 */  lw        $v1, ($s0)
 /* F806C 802D36BC 8C640000 */  lw        $a0, ($v1)
-/* F8070 802D36C0 0C048B5F */  jal       func_80122D7C
+/* F8070 802D36C0 0C048B5F */  jal       set_entity_model_render_command_list
 /* F8074 802D36C4 0040282D */   daddu    $a1, $v0, $zero
 /* F8078 802D36C8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* F807C 802D36CC 8FB10014 */  lw        $s1, 0x14($sp)

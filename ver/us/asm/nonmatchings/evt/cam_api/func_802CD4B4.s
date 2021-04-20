@@ -49,7 +49,7 @@ glabel func_802CD4B4
 /* F1F00 802CD550 3C04802D */  lui       $a0, %hi(func_802CCAC0)
 /* F1F04 802CD554 2484CAC0 */  addiu     $a0, $a0, %lo(func_802CCAC0)
 /* F1F08 802CD558 3C05802D */  lui       $a1, %hi(draw_anim_models)
-/* F1F0C 802CD55C 0C048C56 */  jal       bind_dynamic_entity_3
+/* F1F0C 802CD55C 0C048C56 */  jal       create_dynamic_entity_world
 /* F1F10 802CD560 24A5CB18 */   addiu    $a1, $a1, %lo(draw_anim_models)
 /* F1F14 802CD564 8FBF001C */  lw        $ra, 0x1c($sp)
 /* F1F18 802CD568 8FB20018 */  lw        $s2, 0x18($sp)

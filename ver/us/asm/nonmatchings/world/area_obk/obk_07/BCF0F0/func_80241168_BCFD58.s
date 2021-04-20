@@ -16,7 +16,7 @@ glabel func_80241168_BCFD58
 /* BCFD84 80241194 8CC30000 */  lw        $v1, ($a2)
 /* BCFD88 80241198 0040882D */  daddu     $s1, $v0, $zero
 /* BCFD8C 8024119C 34630010 */  ori       $v1, $v1, 0x10
-/* BCFD90 802411A0 0C048C8F */  jal       bind_dynamic_entity_7
+/* BCFD90 802411A0 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* BCFD94 802411A4 ACC30000 */   sw       $v1, ($a2)
 /* BCFD98 802411A8 24040059 */  addiu     $a0, $zero, 0x59
 /* BCFD9C 802411AC 26230164 */  addiu     $v1, $s1, 0x164

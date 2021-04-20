@@ -8,7 +8,7 @@ glabel func_802414F4_D6FEA4
 /* D6FEB0 80241500 3C058024 */  lui       $a1, %hi(func_80241530_D6FEE0)
 /* D6FEB4 80241504 24A51530 */  addiu     $a1, $a1, %lo(func_80241530_D6FEE0)
 /* D6FEB8 80241508 AFBF0014 */  sw        $ra, 0x14($sp)
-/* D6FEBC 8024150C 0C048C56 */  jal       bind_dynamic_entity_3
+/* D6FEBC 8024150C 0C048C56 */  jal       create_dynamic_entity_world
 /* D6FEC0 80241510 0000202D */   daddu    $a0, $zero, $zero
 /* D6FEC4 80241514 8E03013C */  lw        $v1, 0x13c($s0)
 /* D6FEC8 80241518 AC620000 */  sw        $v0, ($v1)

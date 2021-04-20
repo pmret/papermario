@@ -5,15 +5,15 @@ extern EntityModelList gBattleEntityModelList;
 extern EntityModelList* gCurrentEntityModelList;
 extern s32 gEntityModelCount;
 extern s32 D_8014C260[];
-extern s32 D_80154378; // entity fog enabled
-extern s32 D_8015437C; // entity fog red
-extern s32 D_80154380; // entity fog green
-extern s32 D_80154384; // entity fog blue
-extern s32 D_80154388; // entity fog alpha
-extern s32 D_8015438C; // entity fog dist min
-extern s32 D_80154390; // entity fog dist max
+extern s32 entity_fog_enabled;
+extern s32 entity_fog_red;
+extern s32 entity_fog_green;
+extern s32 entity_fog_blue;
+extern s32 entity_fog_alpha;
+extern s32 entity_fog_dist_min;
+extern s32 entity_fog_dist_max;
 
-s32 step_entity_rendercmd(EntityModel* entityModel);
+s32 step_entity_model_commandlist(EntityModel* entityModel);
 
 void clear_entity_models(void) {
     s32 i;
@@ -28,14 +28,14 @@ void clear_entity_models(void) {
         (*gCurrentEntityModelList)[i] = NULL;
     }
 
-    D_8015437C = 10;
-    D_80154380 = 10;
-    D_80154384 = 10;
-    D_80154388 = 10;
-    D_8015438C = 800;
+    entity_fog_red = 10;
+    entity_fog_green = 10;
+    entity_fog_blue = 10;
+    entity_fog_alpha = 10;
+    entity_fog_dist_min = 800;
     gEntityModelCount = 0;
-    D_80154378 = 0;
-    D_80154390 = 1000;
+    entity_fog_enabled = 0;
+    entity_fog_dist_max = 1000;
 }
 
 void init_entity_models(void) {
@@ -47,14 +47,14 @@ void init_entity_models(void) {
         gCurrentEntityModelList = &gBattleEntityModelList;
     }
 
-    D_8015437C = 10;
-    D_80154380 = 10;
-    D_80154384 = 10;
-    D_80154388 = 10;
-    D_8015438C = 800;
+    entity_fog_red = 10;
+    entity_fog_green = 10;
+    entity_fog_blue = 10;
+    entity_fog_alpha = 10;
+    entity_fog_dist_min = 800;
     gEntityModelCount = 0;
-    D_80154378 = 0;
-    D_80154390 = 1000;
+    entity_fog_enabled = 0;
+    entity_fog_dist_max = 1000;
 }
 
 s32 load_entity_model(s32* cmdList) {
@@ -137,7 +137,7 @@ s32 ALT_load_entity_model(s32* cmdList) {
     return i;
 }
 
-void update_entity_rendercmd(s32 idx) {
+void exec_entity_model_commandlist(s32 idx) {
     EntityModel* entityModel;
     void* temp_v0_2;
 
@@ -150,7 +150,7 @@ void update_entity_rendercmd(s32 idx) {
                     entityModel->flags &= ~0x100;
                     entityModel->nextFrameTime -= entityModel->timeScale;
                     if (entityModel->nextFrameTime <= 0.0f) {
-                        while (step_entity_rendercmd(entityModel));
+                        while (step_entity_model_commandlist(entityModel));
                     }
                 }
             }
@@ -158,7 +158,7 @@ void update_entity_rendercmd(s32 idx) {
     }
 }
 
-s32 step_entity_rendercmd(EntityModel* entityModel) {
+s32 step_entity_model_commandlist(EntityModel* entityModel) {
     Gfx* displayList;
 
     u32* curPos = entityModel->cmdListReadPos;
@@ -202,7 +202,7 @@ s32 step_entity_rendercmd(EntityModel* entityModel) {
     return 0;
 }
 
-void make_mtx_flipZ(Matrix4f mtx) {
+void make_entity_model_mtx_flipZ(Matrix4f mtx) {
     guMtxIdentF(*mtx);
     mtx[0][0] = 1.0f;
     mtx[1][1] = 1.0f;
@@ -222,13 +222,13 @@ INCLUDE_ASM(s32, "entity", draw_entity_model_extra2);
 
 INCLUDE_ASM(s32, "entity", draw_entity_model_extra3);
 
-void func_80122D7C(s32 idx, u32* arg1) {
+void set_entity_model_render_command_list(s32 idx, u32* commandList) {
     u32* phi_a1;
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
     if (entityModel != NULL && entityModel->flags) {
-        phi_a1 = arg1;
-        if (arg1 == NULL) {
+        phi_a1 = commandList;
+        if (commandList == NULL) {
             phi_a1 = &D_8014C260;
         }
         entityModel->cmdListReadPos = phi_a1;
@@ -290,7 +290,7 @@ void clear_entity_model_flags(s32 idx, s32 newFlags) {
     }
 }
 
-void func_80122F64(s32 idx, s32 setupGfxCallbackArg0, UNK_FUN_PTR(fpSetupGfxCallback)) {
+void bind_entity_model_setupGfx(s32 idx, s32 setupGfxCallbackArg0, UNK_FUN_PTR(fpSetupGfxCallback)) {
     EntityModel* entityModel = (*gCurrentEntityModelList)[idx & ~0x800];
 
     entityModel->fpSetupGfxCallback = fpSetupGfxCallback;
@@ -310,42 +310,42 @@ void func_80122FB8(s32 idx, s32 newFlags) {
 }
 
 void enable_entity_fog(void) {
-    D_80154378 = 1;
+    entity_fog_enabled = 1;
 }
 
 void disable_entity_fog(void) {
-    D_80154378 = 0;
+    entity_fog_enabled = 0;
 }
 
 void set_entity_fog_dist(s32 min, s32 max) {
-    D_8015438C = min;
-    D_80154390 = max;
+    entity_fog_dist_min = min;
+    entity_fog_dist_max = max;
 }
 
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a) {
-    D_8015437C = r;
-    D_80154380 = g;
-    D_80154384 = b;
-    D_80154388 = a;
+    entity_fog_red = r;
+    entity_fog_green = g;
+    entity_fog_blue = b;
+    entity_fog_alpha = a;
 }
 
 s32 is_entity_fog_enabled(void) {
-    return D_80154378;
+    return entity_fog_enabled;
 }
 
 void get_entity_fog_distance(s32* start, s32* end) {
-    *start = D_8015438C;
-    *end = D_80154390;
+    *start = entity_fog_dist_min;
+    *end = entity_fog_dist_max;
 }
 
 void get_entity_fog_color(s32* r, s32* g, s32* b, s32* a) {
-    *r = D_8015437C;
-    *g = D_80154380;
-    *b = D_80154384;
-    *a = D_80154388;
+    *r = entity_fog_red;
+    *g = entity_fog_green;
+    *b = entity_fog_blue;
+    *a = entity_fog_alpha;
 }
 
-void stub_dynamic_entity_delegate(void) {
+void stub_dynamic_entity_delegate(DynamicEntity* entity) {
 }
 
 void clear_dynamic_entity_list(void) {
@@ -370,7 +370,7 @@ void init_dynamic_entity_list(void) {
     }
 }
 
-s32 bind_dynamic_entity_3(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -401,7 +401,7 @@ s32 bind_dynamic_entity_3(void (*updateFunc)(void), void (*drawFunc)(void)) {
     return i;
 }
 
-s32 bind_dynamic_entity_7(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -432,7 +432,7 @@ s32 bind_dynamic_entity_7(void (*updateFunc)(void), void (*drawFunc)(void)) {
     return i;
 }
 
-s32 bind_dynamic_entity_B(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_dynamic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -475,7 +475,7 @@ void update_dynamic_entities(void) {
     }
 }
 
-void render_dynamic_entities(void) {
+void render_dynamic_entities_world(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -488,7 +488,7 @@ void render_dynamic_entities(void) {
     }
 }
 
-void func_801234E0(void) {
+void render_dynamic_entities_frontUI(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -501,7 +501,7 @@ void func_801234E0(void) {
     }
 }
 
-void func_80123550(void) {
+void render_dynamic_entities_backUI(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -514,7 +514,7 @@ void func_80123550(void) {
     }
 }
 
-void func_801235C0(s32 idx) {
+void free_dynamic_entity(s32 idx) {
     if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
         DynamicEntityList** curDynEntityList = &gCurrentDynamicEntityListPtr;
 

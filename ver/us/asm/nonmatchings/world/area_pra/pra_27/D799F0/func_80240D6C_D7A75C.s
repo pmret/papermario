@@ -45,7 +45,7 @@ glabel func_80240D6C_D7A75C
 /* D7A7E8 80240DF8 3C048024 */  lui       $a0, %hi(pra_27_SetPartnerFlags80000)
 /* D7A7EC 80240DFC 24840EE8 */  addiu     $a0, $a0, %lo(pra_27_SetPartnerFlags80000)
 .L80240E00:
-/* D7A7F0 80240E00 0C048C56 */  jal       bind_dynamic_entity_3
+/* D7A7F0 80240E00 0C048C56 */  jal       create_dynamic_entity_world
 /* D7A7F4 80240E04 0000282D */   daddu    $a1, $zero, $zero
 /* D7A7F8 80240E08 8E03013C */  lw        $v1, 0x13c($s0)
 /* D7A7FC 80240E0C AC620004 */  sw        $v0, 4($v1)

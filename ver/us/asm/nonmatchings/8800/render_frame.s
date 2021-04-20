@@ -402,7 +402,7 @@ glabel render_frame
 /* 9130 8002DD30 00000000 */   nop
 /* 9134 8002DD34 0C00E9FC */  jal       npc_list_render
 /* 9138 8002DD38 00000000 */   nop
-/* 913C 8002DD3C 0C048D1C */  jal       render_dynamic_entities
+/* 913C 8002DD3C 0C048D1C */  jal       render_dynamic_entities_world
 /* 9140 8002DD40 00000000 */   nop
 /* 9144 8002DD44 0C0167BD */  jal       render_effects
 /* 9148 8002DD48 00000000 */   nop
@@ -457,7 +457,7 @@ glabel render_frame
 /* 9208 8002DE08 0800B788 */  j         .L8002DE20
 /* 920C 8002DE0C 00000000 */   nop
 .L8002DE10:
-/* 9210 8002DE10 0C048D1C */  jal       render_dynamic_entities
+/* 9210 8002DE10 0C048D1C */  jal       render_dynamic_entities_world
 /* 9214 8002DE14 00000000 */   nop
 /* 9218 8002DE18 0C04766E */  jal       func_8011D9B8
 /* 921C 8002DE1C 00000000 */   nop

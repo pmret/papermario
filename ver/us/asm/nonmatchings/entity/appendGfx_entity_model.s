@@ -108,8 +108,8 @@ glabel appendGfx_entity_model
 /* B79F4 801212F4 AD870020 */  sw        $a3, 0x20($t4)
 /* B79F8 801212F8 AD800024 */  sw        $zero, 0x24($t4)
 /* B79FC 801212FC ADA20000 */  sw        $v0, ($t5)
-/* B7A00 80121300 3C038015 */  lui       $v1, %hi(D_80154378)
-/* B7A04 80121304 8C634378 */  lw        $v1, %lo(D_80154378)($v1)
+/* B7A00 80121300 3C038015 */  lui       $v1, %hi(entity_fog_enabled)
+/* B7A04 80121304 8C634378 */  lw        $v1, %lo(entity_fog_enabled)($v1)
 /* B7A08 80121308 24020CF0 */  addiu     $v0, $zero, 0xcf0
 /* B7A0C 8012130C AD880028 */  sw        $t0, 0x28($t4)
 /* B7A10 80121310 10600004 */  beqz      $v1, .L80121324
@@ -437,10 +437,10 @@ glabel L8012178C_B7E8C
 /* B7EB4 801217B4 AC820004 */  sw        $v0, 4($a0)
 glabel L801217B8_B7EB8
 /* B7EB8 801217B8 3C070001 */  lui       $a3, 1
-/* B7EBC 801217BC 3C028015 */  lui       $v0, %hi(D_80154390)
-/* B7EC0 801217C0 8C424390 */  lw        $v0, %lo(D_80154390)($v0)
-/* B7EC4 801217C4 3C038015 */  lui       $v1, %hi(D_8015438C)
-/* B7EC8 801217C8 8C63438C */  lw        $v1, %lo(D_8015438C)($v1)
+/* B7EBC 801217BC 3C028015 */  lui       $v0, %hi(entity_fog_dist_max)
+/* B7EC0 801217C0 8C424390 */  lw        $v0, %lo(entity_fog_dist_max)($v0)
+/* B7EC4 801217C4 3C038015 */  lui       $v1, %hi(entity_fog_dist_min)
+/* B7EC8 801217C8 8C63438C */  lw        $v1, %lo(entity_fog_dist_min)($v1)
 /* B7ECC 801217CC 34E7F400 */  ori       $a3, $a3, 0xf400
 /* B7ED0 801217D0 00431023 */  subu      $v0, $v0, $v1
 /* B7ED4 801217D4 14400002 */  bnez      $v0, .L801217E0
@@ -508,8 +508,8 @@ glabel L801218AC_B7FAC
 /* B7FB4 801218B4 24C6A66C */  addiu     $a2, $a2, %lo(gMasterGfxPos)
 /* B7FB8 801218B8 3442FFFF */  ori       $v0, $v0, 0xffff
 /* B7FBC 801218BC 8CC50000 */  lw        $a1, ($a2)
-/* B7FC0 801218C0 3C048015 */  lui       $a0, %hi(D_80154378)
-/* B7FC4 801218C4 8C844378 */  lw        $a0, %lo(D_80154378)($a0)
+/* B7FC0 801218C0 3C048015 */  lui       $a0, %hi(entity_fog_enabled)
+/* B7FC4 801218C4 8C844378 */  lw        $a0, %lo(entity_fog_enabled)($a0)
 /* B7FC8 801218C8 00A0182D */  daddu     $v1, $a1, $zero
 /* B7FCC 801218CC 24A50008 */  addiu     $a1, $a1, 8
 /* B7FD0 801218D0 ACC50000 */  sw        $a1, ($a2)
@@ -605,7 +605,7 @@ glabel L801218AC_B7FAC
 /* B8124 80121A24 0C019D60 */  jal       guMtxL2F
 /* B8128 80121A28 0220282D */   daddu    $a1, $s1, $zero
 /* B812C 80121A2C 27B00050 */  addiu     $s0, $sp, 0x50
-/* B8130 80121A30 0C048450 */  jal       make_mtx_flipZ
+/* B8130 80121A30 0C048450 */  jal       make_entity_model_mtx_flipZ
 /* B8134 80121A34 0200202D */   daddu    $a0, $s0, $zero
 /* B8138 80121A38 27A40010 */  addiu     $a0, $sp, 0x10
 /* B813C 80121A3C 0200282D */  daddu     $a1, $s0, $zero

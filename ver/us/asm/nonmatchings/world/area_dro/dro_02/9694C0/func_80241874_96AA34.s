@@ -33,7 +33,7 @@ glabel func_80241874_96AA34
 /* 96AAA4 802418E4 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96AAA8 802418E8 0C0B1EAF */  jal       get_variable
 /* 96AAAC 802418EC 34A5D487 */   ori      $a1, $a1, 0xd487
-/* 96AAB0 802418F0 0C048D70 */  jal       func_801235C0
+/* 96AAB0 802418F0 0C048D70 */  jal       free_dynamic_entity
 /* 96AAB4 802418F4 0040202D */   daddu    $a0, $v0, $zero
 /* 96AAB8 802418F8 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 96AABC 802418FC 8FB00010 */  lw        $s0, 0x10($sp)
