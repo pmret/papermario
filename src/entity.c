@@ -210,17 +210,17 @@ void make_mtx_flipZ(Matrix4f mtx) {
     mtx[3][3] = 1.0f;
 }
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", appendGfx_entity_model);
+INCLUDE_ASM(s32, "entity", appendGfx_entity_model);
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", draw_entity_model_shadow);
+INCLUDE_ASM(s32, "entity", draw_entity_model_shadow);
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", draw_entity_model_main);
+INCLUDE_ASM(s32, "entity", draw_entity_model_main);
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", draw_entity_model_extra1);
+INCLUDE_ASM(s32, "entity", draw_entity_model_extra1);
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", draw_entity_model_extra2);
+INCLUDE_ASM(s32, "entity", draw_entity_model_extra2);
 
-INCLUDE_ASM(s32, "b72b0_len_15ed0", draw_entity_model_extra3);
+INCLUDE_ASM(s32, "entity", draw_entity_model_extra3);
 
 void func_80122D7C(s32 idx, u32* arg1) {
     u32* phi_a1;

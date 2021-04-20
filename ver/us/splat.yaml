@@ -360,7 +360,7 @@ segments:
     subsegments:
     - [0xa5dd0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
-    - [0xb72b0, c, b72b0_len_15ed0]
+    - [0xb72b0, c, entity]
     - [0xB9D60, c, B9D60]
     - [0xC50A0, c, C50A0]
     - [0xcd180, c, cd180_len_38f0]
@@ -385,7 +385,7 @@ segments:
     - [0xE5DF0, .data, e0b30_len_b80]
     - [0xE5E40, .rodata, a5dd0_len_114e0]
     - [0xE6560, .rodata, B4580]
-    - [0xE67B0, .rodata, b72b0_len_15ed0]
+    - [0xE67B0, .rodata, entity]
     - [0xE6A70, .rodata, B9D60]
     - [0xE7140, .rodata, C50A0]
     - [0xE75A0, .rodata, cd180_len_38f0]
