@@ -76,7 +76,26 @@ void func_80240128_D4D168(void) {
     }
 }
 
-INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_802402F0_D4D330, PlayerStatus* playerStatus);
+void func_802402F0_D4D330(PlayerStatus* playerStatus) {
+    f32 yaw = -CAM(D_8009A634)->currentYaw;
+    Matrix4f main;
+    Matrix4f translation;
+    Matrix4f rotation;
+    Matrix4f scale;
+
+    guRotateF(&rotation, yaw, 0.0f, -1.0f, 0.0f);
+    guRotateF(&main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guMtxCatF(&rotation, &main, &main);
+    guRotateF(&rotation, yaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(&main, &rotation, &main);
+    guRotateF(&rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(&main, &rotation, &main);
+    guScaleF(&scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guMtxCatF(&main, &scale, &main);
+    guTranslateF(&translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
+    guMtxCatF(&main, &translation, &main);
+    render_sprite(2, 0, 0, 0, &main);
+}
 
 ApiStatus func_8024049C_D4D4DC(ScriptInstance* script, s32 isInitialCall) {
     switch (script->varTable[0]) {
