@@ -112,11 +112,54 @@ ApiStatus func_8024049C_D4D4DC(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240500_D4D540, void); // draw
+void func_80240870_D4D8B0(PlayerStatus* playerStatus);
+void func_8024068C_D4D6CC(PlayerStatus* playerStatus);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_8024068C_D4D6CC);
+void func_80240500_D4D540(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    EntityModel* entityModel;
+    s32 renderMode = playerStatus->renderMode;
+    RenderTask renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
+    s32 screenX;
+    s32 screenY;
+    s32 screenZ;
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0);
+    if (playerStatus->flags & 1) {
+        entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
+
+        get_screen_coords(D_8009A634, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
+                          &screenX, &screenY, &screenZ);
+
+        func_802DDA8C(1, playerStatus->trueAnimation, 1.0f);
+
+        if (!(playerStatus->flags & 0x20000)) {
+            if (playerStatus->alpha1 != D_802D9D71) {
+                if (playerStatus->alpha1 < 254) {
+                    renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+                    func_802DDEE4(1, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                } else {
+                    renderMode = RENDER_MODE_ALPHATEST;
+                    func_802DDEE4(1, -1, 0, 0, 0, 0, 0, 0);
+                }
+            }
+            D_802D9D71 = playerStatus->alpha1;
+        } else {
+            renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+            D_802D9D71 = 0;
+        }
+
+        renderTaskPtr->renderMode = renderMode;
+        renderTaskPtr->appendGfxArg = playerStatus;
+        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->appendGfx = !(playerStatus->flags & 0x20000) ? func_8024068C_D4D6CC : func_80240870_D4D8B0;
+        queue_render_task(renderTaskPtr);
+    }
+}
+
+INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_8024068C_D4D6CC, PlayerStatus* playerStatus);
+
+INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0, PlayerStatus* playerStatus);
 
 void pra_01_SetPartnerFlagsA0000(void);
 void pra_01_SetPartnerFlags80000(void);
