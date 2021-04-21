@@ -83,18 +83,18 @@ void func_802402F0_D4D330(PlayerStatus* playerStatus) {
     Matrix4f rotation;
     Matrix4f scale;
 
-    guRotateF(&rotation, yaw, 0.0f, -1.0f, 0.0f);
-    guRotateF(&main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
-    guMtxCatF(&rotation, &main, &main);
-    guRotateF(&rotation, yaw, 0.0f, 1.0f, 0.0f);
-    guMtxCatF(&main, &rotation, &main);
-    guRotateF(&rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
-    guMtxCatF(&main, &rotation, &main);
-    guScaleF(&scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
-    guMtxCatF(&main, &scale, &main);
-    guTranslateF(&translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
-    guMtxCatF(&main, &translation, &main);
-    render_sprite(2, 0, 0, 0, &main);
+    guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guMtxCatF(rotation, main, main);
+    guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(main, rotation, main);
+    guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(main, rotation, main);
+    guScaleF(scale, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guMtxCatF(main, scale, main);
+    guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
+    guMtxCatF(main, translation, main);
+    render_sprite(2, 0, 0, NULL, main);
 }
 
 ApiStatus func_8024049C_D4D4DC(ScriptInstance* script, s32 isInitialCall) {
@@ -176,9 +176,128 @@ void func_80240500_D4D540(void) {
     }
 }
 
-INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_8024068C_D4D6CC, PlayerStatus* playerStatus);
+void func_8024068C_D4D6CC(PlayerStatus *playerStatus) {
+    f32 yaw = -CAM(D_8009A634)->currentYaw;
+    Matrix4f main;
+    Matrix4f translation;
+    Matrix4f rotation;
+    Matrix4f scale;
+    s32 flags;
 
-INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0, PlayerStatus* playerStatus);
+    guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+    guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+    guMtxCatF(rotation, main, main);
+    guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(main, rotation, main);
+    guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(main, rotation, main);
+    guScaleF(scale, SPRITE_WORLD_SCALE, -SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+    guMtxCatF(main, scale, main);
+    guTranslateF(translation, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
+    guMtxCatF(main, translation, main);
+
+    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+        flags = 0x10000001;
+    } else {
+        flags = 1;
+    }
+
+    render_sprite(flags, 0, 0, NULL, main);
+}
+
+//INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0, PlayerStatus* playerStatus);
+
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
+
+void func_80240870_D4D8B0(PlayerStatus *playerStatus) {
+    Matrix4f main;
+    Matrix4f translation;
+    Matrix4f rotation;
+    Matrix4f scale;
+    f32 yaw;
+    f32 blurAngle;
+    s32 tint;
+    f32 px;
+    f32 py;
+    f32 pz;
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 i;
+    s32 flags;
+
+    for (i = 0; i < 2; i++) {
+        yaw = -CAM(D_8009A634)->currentYaw;
+
+        if (i == 0) {
+            if ((playerStatus->spriteFacingAngle > 90.0f) && (playerStatus->spriteFacingAngle <= 180.0f)) {
+                yaw = 180.0f - playerStatus->spriteFacingAngle;
+            } else {
+                if ((playerStatus->spriteFacingAngle > 180.0f) && (playerStatus->spriteFacingAngle <= 270.0f)) {
+                    yaw = playerStatus->spriteFacingAngle - 180.0f;
+                } else if ((playerStatus->spriteFacingAngle > 270.0f) && (playerStatus->spriteFacingAngle <= 360.0f)) {
+                    yaw = 360.0f - playerStatus->spriteFacingAngle;
+                } else {
+                    yaw = playerStatus->spriteFacingAngle;
+                }
+            }
+
+            tint = yaw / 25.0f;
+            tint = 255 - (tint * 60);
+            if (tint < 100) {
+                tint = 100;
+            }
+
+            func_802DDEE4(1, -1, 6, tint, tint, tint, 255, 0);
+
+            guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(main, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+            guMtxCatF(rotation, main, main);
+            px = playerStatus->position.x;
+            py = playerStatus->position.y;
+            pz = playerStatus->position.z;
+        } else {
+            // Spinning blur animation
+
+            blurAngle = func_800E5938(i, &x, &y, &z);
+
+            if (y == 0x80000000) {
+                py = playerStatus->position.y;
+            } else {
+                py = y;
+            }
+
+            px = playerStatus->position.x;
+            pz = playerStatus->position.z;
+            func_802DDEE4(1, -1, 7, 0, 0, 0, 0x40, 0);
+            guRotateF(main, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
+            guRotateF(main, blurAngle, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(rotation, main, main);
+        }
+
+        guTranslateF(translation, 0.0f, -playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(translation, main, main);
+        guRotateF(rotation, yaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(main, rotation, main);
+        guRotateF(rotation, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(main, rotation, main);
+        guTranslateF(translation, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(main, translation, main);
+        guScaleF(scale, SPRITE_WORLD_SCALE, -SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
+        guMtxCatF(main, scale, main);
+        guTranslateF(translation, px, -py, pz);
+        guMtxCatF(main, translation, main);
+
+        if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+            flags = 0x10000001;
+        } else {
+            flags = 1;
+        }
+
+        render_sprite(flags, 0, 0, 0, &main);
+    }
+}
 
 void pra_01_SetPartnerFlagsA0000(void);
 void pra_01_SetPartnerFlags80000(void);
