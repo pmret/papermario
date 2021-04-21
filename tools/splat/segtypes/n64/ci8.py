@@ -3,6 +3,7 @@ from segtypes.n64.rgba16 import N64SegRgba16
 import png
 from util import log
 from util import options
+from util import iter
 
 if TYPE_CHECKING:
     from segtypes.n64.palette import N64SegPalette as Palette
@@ -35,7 +36,19 @@ class N64SegCi8(N64SegRgba16):
 
     @staticmethod
     def parse_image(data, width, height, flip_h=False, flip_v=False):
-        return data
+        # hot path
+        if not flip_h and not flip_v:
+            return data
+        
+        flipped_data = bytearray()
+
+        for x, y, i in iter.iter_image_indexes(width, height, 1, 1, flip_h, flip_v):
+            flipped_data.append(data[i])
+
+        return flipped_data
 
     def max_length(self):
         return self.width * self.height
+
+    def cache(self):
+        return (self.config, self.rom_end, 1)

@@ -35,11 +35,8 @@ class LinkerEntry:
     def __init__(self, segment: Segment, src_paths: List[Path], object_path: Path, section: str):
         self.segment = segment
         self.src_paths = [clean_up_path(p) for p in src_paths]
+        self.object_path = path_to_object_path(object_path)
         self.section = section
-        if self.section == "linker":
-            self.object_path = None
-        else:
-            self.object_path = path_to_object_path(object_path)
 
 class LinkerWriter():
     def __init__(self):
@@ -65,7 +62,6 @@ class LinkerWriter():
             if entry.section == "linker": # TODO: isinstance is preferable
                 self._end_block()
                 self._begin_segment(entry.segment)
-                continue
 
             start = entry.segment.rom_start
             if isinstance(start, int):

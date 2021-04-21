@@ -2172,14 +2172,12 @@ segments:
     subsegments:
     - [0x38F900, c]
     - [0x390340, bin]
-  - [0x3903D0, bin]
-  - start: 0x390810
-    type: ia4
-    name: battle/text_action_command_ratings
-    width: 64
-    height: 125
-    flip: vertical
-  - [0x3917B0, bin]
+  - [0x3903D0, ia4, battle/lucky, 64, 32]
+  - [0x3907D0, ia4, battle/miss,  64, 32]
+  - [0x390BD0, ia4, battle/good,  64, 32]
+  - [0x390FD0, ia4, battle/nice,  64, 32]
+  - [0x3913D0, ia4, battle/super, 64, 32]
+  - [0x3917D0, bin]
   - type: code
     start: 0x391D30
     vram: 0xE0092000
@@ -2471,20 +2469,114 @@ segments:
     subsegments:
     - [0x3EB4E0, c]
     - [0x3EBC30, bin]
-  - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
-  - [0x3EE7E0, bin]
+  - [0x3EBE60, ia8,    world/ch0,               144, 40]
+  - [0x3ED4E0, ia8,    world/text_chapter,      128, 40]
+  - [0x3EE8E0, ia8,    world/text_end_of,       104, 40]
+  - [0x3EF920, ia8,    world/exclamation_point, 16,  40]
+  - [0x3EFBA0, ia8,    world/ch1,               64,  64]
+  - [0x3F0BA0, ia8,    world/ch2,               64,  64]
+  - [0x3F1BA0, ia8,    world/ch3,               64,  64]
+  - [0x3F2BA0, ia8,    world/ch4,               64,  64]
+  - [0x3F3BA0, ia8,    world/ch5,               64,  64]
+  - [0x3F4BA0, ia8,    world/ch6,               64,  64]
+  - [0x3F5BA0, ia8,    world/ch7,               64,  64]
+  - [0x3F6BA0, ia8,    world/ch8,               64,  64]
+  - [0x3F7BA0, rgba16, world/chapter_rainbow,   8,  16]
+  - [0x3F7CA0, bin]
   - type: code
     start: 0x3F83F0
     vram: 0xE0110000
     subsegments:
     - [0x3F83F0, c]
     - [0x3F8CA0, bin]
+  - [0x3F8CC0, i4, ice_smash, 64, 128]
+  - [0x3F9CC0, bin]
   - type: code
     start: 0x3F9E50
     vram: 0xE0112000
     subsegments:
     - [0x3F9E50, c]
     - [0x3FA480, bin]
+  - start: 0x3FA4B0
+    type: ci4
+    name: star_cards/card_front
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x3FA6B0, palette, star_cards/card_front]
+  - [0x3FA6D0, bin] # PAD
+  - start: 0x3FA8B0
+    type: ci4
+    name: star_cards/card_back
+    flip_y: true
+    width: 32
+    height: 64
+  - [0x3FACB0, palette, star_cards/card_back]
+  - [0x3FACD0, bin] # PAD
+  - start: 0x3FAEB0
+    type: ci4
+    name: star_cards/wave
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x3FB0B0, palette, star_cards/wave]
+  - [0x3FB0D0, bin] # PAD
+  - start: 0x3FB2B0
+    type: ci4
+    name: star_cards/squares
+    flip_y: true
+    width: 16
+    height: 16
+  - [0x3FB330, palette, star_cards/squares]
+  - [0x3FB350, bin] # PAD
+  - start: 0x3FB530
+    type: ci4
+    name: star_cards/eldstar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FB9B0, palette, star_cards/eldstar]
+  - [0x3FB9D0, bin] # PAD
+  - start: 0x3FBBB0
+    type: ci4
+    name: star_cards/mamar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FC030, palette, star_cards/mamar]
+  - [0x3FC050, bin] # PAD
+  - start: 0x3FC230
+    type: ci4
+    name: star_cards/skolar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FC6B0, palette, star_cards/skolar]
+  - [0x3FC6D0, bin] # PAD
+  - start: 0x3FC8B0
+    type: ci4
+    name: star_cards/muskular
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FCD30, palette, star_cards/muskular]
+  - [0x3FCD50, bin] # PAD
+  - start: 0x3FCF30
+    type: ci4
+    name: star_cards/misstar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FD3B0, palette, star_cards/misstar]
+  - [0x3FD3D0, bin] # PAD
+  - start: 0x3FDC30
+    type: ci4
+    name: star_cards/klevar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FE0B0, palette, star_cards/klevar]
+  - [0x3FE0D0, bin]
   - type: code
     start: 0x3FEAE0
     vram: 0xE0114000
@@ -2509,6 +2601,35 @@ segments:
     subsegments:
     - [0x404220, c]
     - [0x404E40, bin]
+  - start: 0x404F40
+    type: ci4
+    name: world/cloud
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405140, palette, world/cloud]
+  - start: 0x405340
+    type: ci4
+    name: world/waterblock
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405540, palette, world/waterblock]
+  - start: 0x405740
+    type: ci4
+    name: world/yellow_carpet
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405940, palette, world/yellow_carpet]
+  - start: 0x405B40
+    type: ci4
+    name: world/numbers
+    flip_y: true
+    width: 32
+    height: 160
+  - [0x406540, palette, world/numbers]
+  - [0x406740, bin]
   - type: code
     start: 0x406B40
     vram: 0xE011C000

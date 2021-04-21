@@ -50,7 +50,13 @@ class Converter():
         self.mode = mode
         self.infile = infile
         self.outfile = outfile
+        self.flip_x = "--flip-x" in argv
         self.flip_y = "--flip-y" in argv
+
+        if self.flip_y:
+            print(self.infile)
+
+        assert self.flip_x == False, "flip_x is not supported"
 
         self.warned = False
 
@@ -250,7 +256,7 @@ class Converter():
 
 if __name__ == "__main__":
     if len(argv) < 4:
-        print("usage: build.py MODE INFILE OUTFILE [--flip-y]")
+        print("usage: build.py MODE INFILE OUTFILE [--flip-x] [--flip-y]")
         exit(1)
 
     Converter(*argv[1:]).convert()

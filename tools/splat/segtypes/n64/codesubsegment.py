@@ -39,7 +39,7 @@ class N64SegCodeSubsegment(Segment):
     def is_branch_insn(mnemonic):
         return (mnemonic.startswith("b") and not mnemonic.startswith("binsl") and not mnemonic == "break") or mnemonic == "j"
 
-    def disassemble_code(self, rom_bytes, addsuffix=False):
+    def disassemble_code(self, rom_bytes):
         insns = [insn for insn in N64SegCodeSubsegment.md.disasm(rom_bytes[self.rom_start : self.rom_end], self.vram_start)]
 
         funcs = self.process_insns(insns, self.rom_start)
@@ -50,7 +50,7 @@ class N64SegCodeSubsegment(Segment):
 
         funcs = self.determine_symbols(funcs)
         self.gather_jumptable_labels(rom_bytes)
-        return self.add_labels(funcs, addsuffix)
+        return self.add_labels(funcs)
 
     def process_insns(self, insns, rom_addr):
         assert(isinstance(self.parent, N64SegCode))
@@ -243,6 +243,7 @@ class N64SegCodeSubsegment(Segment):
                                     if offset != 0:
                                         offset_str = f"+0x{offset:X}"
 
+
                                 if self.parent:
                                     self.parent.check_rodata_sym(func_addr, sym)
 
@@ -256,7 +257,7 @@ class N64SegCodeSubsegment(Segment):
             ret[func_addr] = func
         return ret
 
-    def add_labels(self, funcs, addsuffix):
+    def add_labels(self, funcs):
         ret = {}
 
         for func in funcs:
@@ -310,9 +311,6 @@ class N64SegCodeSubsegment(Segment):
 
                 if insn[0].mnemonic != "branch" and insn[0].mnemonic.startswith("b") or insn[0].mnemonic.startswith("j"):
                     indent_next = True
-            
-            if addsuffix:            
-                func_text.append(f"endlabel {sym.name}")
 
             ret[func] = (func_text, rom_addr)
 
@@ -360,7 +358,7 @@ class N64SegCodeSubsegment(Segment):
                 rom_offset += 4
 
     def should_scan(self) -> bool:
-        return options.mode_active("code")
+        return self.should_split()
     
     def should_split(self) -> bool:
         return self.extract and options.mode_active("code")
