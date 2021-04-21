@@ -122,7 +122,7 @@ INCLUDE_ASM(s32, "121f0_len_1290", title_draw_press_start);
 
 //     gSPDisplayList(gMasterGfxPos++, D_80077A50);
 //     gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-//     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xF8, 0xF0, 0x98, D_80077A28); // B
+//     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xF8, 0xF0, 0x98, D_80077A28);
 //     gDPPipeSync(gMasterGfxPos++);
 //     gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 1, D_800A0980);
 //     gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,

@@ -277,27 +277,27 @@ s32 func_80027190(void) {
 }
 
 #ifdef NON_MATCHING
-void gfx_init_state(void) {
-    Gfx** temp = &gMasterGfxPos;
-    gSPSegment(gMasterGfxPos++, 0x00, 0x0);
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074230));
-    (*temp)++;
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
-}
 // void gfx_init_state(void) {
-//     Gfx* gfx = gMasterGfxPos++;
-
-//     gSPSegment(gfx, 0x00, 0x0);
-
-//     gfx = gMasterGfxPos++;
-//     gSPDisplayList(gfx, OS_K0_TO_PHYSICAL(&D_80074230));
-//     {
-//         Gfx *_g = (Gfx *) (gMasterGfxPos++);
-//         gfx->words.w0 = (((unsigned int) ((((unsigned int) 0xde) & ((0x01 << 8) - 1)) << 24)) | ((unsigned int) ((((unsigned int) 0x00) & ((0x01 << 8) - 1)) << 16))) | ((unsigned int) ((((unsigned int) 0) & ((0x01 << 16) - 1)) << 0));
-//         gfx->words.w1 = (unsigned int) ((u32) (((char *) (&D_80074210)) - 0x80000000));
-//     }
-//     ;
+//     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
+//     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
+//     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 // }
+// matching but bullshit
+void gfx_init_state(void) {
+    Gfx* gfx;
+    Gfx* gfx2;
+
+    gfx = gMasterGfxPos++;
+    gSPSegment(gfx, 0x00, 0x0);
+
+    gfx = gMasterGfxPos++;
+    gSPDisplayList(gfx, OS_K0_TO_PHYSICAL(D_80074230));
+
+    gfx2 = gMasterGfxPos++;
+
+    gfx[1].words.w0 = (_SHIFTL((G_DL), 24, 8) | _SHIFTL((0), 16, 8) | _SHIFTL((G_DL_PUSH), 0, 16));
+    gfx[1].words.w1 = OS_K0_TO_PHYSICAL(D_80074210);
+}
 #else
 INCLUDE_ASM(void, "1b40_len_20b0", gfx_init_state);
 #endif
