@@ -6,8 +6,8 @@ glabel draw_entity_model_shadow
 /* B83EC 80121CEC 0080302D */  daddu     $a2, $a0, $zero
 /* B83F0 80121CF0 AFB1008C */  sw        $s1, 0x8c($sp)
 /* B83F4 80121CF4 27B10028 */  addiu     $s1, $sp, 0x28
-/* B83F8 80121CF8 3C07800A */  lui       $a3, %hi(D_8009A634)
-/* B83FC 80121CFC 84E7A634 */  lh        $a3, %lo(D_8009A634)($a3)
+/* B83F8 80121CF8 3C07800A */  lui       $a3, %hi(gCurrentCamID)
+/* B83FC 80121CFC 84E7A634 */  lh        $a3, %lo(gCurrentCamID)($a3)
 /* B8400 80121D00 3C04800B */  lui       $a0, %hi(gCameras)
 /* B8404 80121D04 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* B8408 80121D08 AFBF0094 */  sw        $ra, 0x94($sp)

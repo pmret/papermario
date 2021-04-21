@@ -13,8 +13,8 @@ glabel func_80241948_D9EE18
 /* D9EE38 80241968 AFB00010 */  sw        $s0, 0x10($sp)
 /* D9EE3C 8024196C F7B40028 */  sdc1      $f20, 0x28($sp)
 /* D9EE40 80241970 8E330148 */  lw        $s3, 0x148($s1)
-/* D9EE44 80241974 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D9EE48 80241978 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D9EE44 80241974 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D9EE48 80241978 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D9EE4C 8024197C 8E30000C */  lw        $s0, 0xc($s1)
 /* D9EE50 80241980 00031080 */  sll       $v0, $v1, 2
 /* D9EE54 80241984 00431021 */  addu      $v0, $v0, $v1

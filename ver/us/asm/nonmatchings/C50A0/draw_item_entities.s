@@ -29,8 +29,8 @@ glabel draw_item_entities
 /* C93DC 80132CDC 30820040 */   andi     $v0, $a0, 0x40
 /* C93E0 80132CE0 54400020 */  bnel      $v0, $zero, .L80132D64
 /* C93E4 80132CE4 26310001 */   addiu    $s1, $s1, 1
-/* C93E8 80132CE8 3C02800A */  lui       $v0, %hi(D_8009A634)
-/* C93EC 80132CEC 8442A634 */  lh        $v0, %lo(D_8009A634)($v0)
+/* C93E8 80132CE8 3C02800A */  lui       $v0, %hi(gCurrentCamID)
+/* C93EC 80132CEC 8442A634 */  lh        $v0, %lo(gCurrentCamID)($v0)
 /* C93F0 80132CF0 00551004 */  sllv      $v0, $s5, $v0
 /* C93F4 80132CF4 00821024 */  and       $v0, $a0, $v0
 /* C93F8 80132CF8 10400019 */  beqz      $v0, .L80132D60

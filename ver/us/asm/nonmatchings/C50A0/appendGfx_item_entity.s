@@ -77,8 +77,8 @@ glabel appendGfx_item_entity
 /* C89B4 801322B4 00000000 */  nop
 /* C89B8 801322B8 E6600030 */  swc1      $f0, 0x30($s3)
 .L801322BC:
-/* C89BC 801322BC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* C89C0 801322C0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* C89BC 801322BC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* C89C0 801322C0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* C89C4 801322C4 3C014334 */  lui       $at, 0x4334
 /* C89C8 801322C8 44816000 */  mtc1      $at, $f12
 /* C89CC 801322CC 00031080 */  sll       $v0, $v1, 2

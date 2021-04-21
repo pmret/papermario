@@ -29,8 +29,8 @@ glabel draw_entity_model_extra2
 /* B88E4 801221E4 31020020 */   andi     $v0, $t0, 0x20
 /* B88E8 801221E8 14400024 */  bnez      $v0, .L8012227C
 /* B88EC 801221EC 24020001 */   addiu    $v0, $zero, 1
-/* B88F0 801221F0 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* B88F4 801221F4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* B88F0 801221F0 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* B88F4 801221F4 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* B88F8 801221F8 00621004 */  sllv      $v0, $v0, $v1
 /* B88FC 801221FC 01021024 */  and       $v0, $t0, $v0
 /* B8900 80122200 1040001E */  beqz      $v0, .L8012227C

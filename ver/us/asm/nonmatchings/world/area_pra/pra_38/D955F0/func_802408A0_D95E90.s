@@ -27,8 +27,8 @@ glabel func_802408A0_D95E90
 /* D95EE8 802408F8 F7B80160 */  sdc1      $f24, 0x160($sp)
 /* D95EEC 802408FC F7B40150 */  sdc1      $f20, 0x150($sp)
 .L80240900:
-/* D95EF0 80240900 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D95EF4 80240904 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D95EF0 80240900 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D95EF4 80240904 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D95EF8 80240908 00031080 */  sll       $v0, $v1, 2
 /* D95EFC 8024090C 00431021 */  addu      $v0, $v0, $v1
 /* D95F00 80240910 00021080 */  sll       $v0, $v0, 2

@@ -18,8 +18,8 @@ glabel render_frame
 /* 8B70 8002D770 F7B40058 */  sdc1      $f20, 0x58($sp)
 /* 8B74 8002D774 14800005 */  bnez      $a0, .L8002D78C
 /* 8B78 8002D778 AFA40070 */   sw       $a0, 0x70($sp)
-/* 8B7C 8002D77C 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 8B80 8002D780 A420A634 */  sh        $zero, %lo(D_8009A634)($at)
+/* 8B7C 8002D77C 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 8B80 8002D780 A420A634 */  sh        $zero, %lo(gCurrentCamID)($at)
 /* 8B84 8002D784 0C0459A6 */  jal       func_80116698
 /* 8B88 8002D788 00000000 */   nop
 .L8002D78C:
@@ -63,8 +63,8 @@ glabel render_frame
 /* 8C18 8002D818 00000000 */   nop
 /* 8C1C 8002D81C 8EC201FC */  lw        $v0, 0x1fc($s6)
 /* 8C20 8002D820 97AB0022 */  lhu       $t3, 0x22($sp)
-/* 8C24 8002D824 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 8C28 8002D828 A42BA634 */  sh        $t3, %lo(D_8009A634)($at)
+/* 8C24 8002D824 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 8C28 8002D828 A42BA634 */  sh        $t3, %lo(gCurrentCamID)($at)
 /* 8C2C 8002D82C 50400005 */  beql      $v0, $zero, .L8002D844
 /* 8C30 8002D830 3C02DC08 */   lui      $v0, 0xdc08
 /* 8C34 8002D834 0040F809 */  jalr      $v0
@@ -315,8 +315,8 @@ glabel render_frame
 /* 8FE4 8002DBE4 AC830004 */  sw        $v1, 4($a0)
 .L8002DBE8:
 /* 8FE8 8002DBE8 26C400D4 */  addiu     $a0, $s6, 0xd4
-/* 8FEC 8002DBEC 3C05800A */  lui       $a1, %hi(D_8009A634)
-/* 8FF0 8002DBF0 84A5A634 */  lh        $a1, %lo(D_8009A634)($a1)
+/* 8FEC 8002DBEC 3C05800A */  lui       $a1, %hi(gCurrentCamID)
+/* 8FF0 8002DBF0 84A5A634 */  lh        $a1, %lo(gCurrentCamID)($a1)
 /* 8FF4 8002DBF4 3C02800A */  lui       $v0, %hi(gDisplayContext)
 /* 8FF8 8002DBF8 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 8FFC 8002DBFC 00052980 */  sll       $a1, $a1, 6
@@ -326,8 +326,8 @@ glabel render_frame
 /* 900C 8002DC0C 3C05DA38 */  lui       $a1, 0xda38
 /* 9010 8002DC10 34A50007 */  ori       $a1, $a1, 7
 /* 9014 8002DC14 8EE20000 */  lw        $v0, ($s7)
-/* 9018 8002DC18 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 901C 8002DC1C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 9018 8002DC18 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 901C 8002DC1C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 9020 8002DC20 0040202D */  daddu     $a0, $v0, $zero
 /* 9024 8002DC24 24420008 */  addiu     $v0, $v0, 8
 /* 9028 8002DC28 00031980 */  sll       $v1, $v1, 6
@@ -382,8 +382,8 @@ glabel render_frame
 /* 90E8 8002DCE8 30820010 */  andi      $v0, $a0, 0x10
 /* 90EC 8002DCEC 14400048 */  bnez      $v0, .L8002DE10
 /* 90F0 8002DCF0 24020003 */   addiu    $v0, $zero, 3
-/* 90F4 8002DCF4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 90F8 8002DCF8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 90F4 8002DCF4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 90F8 8002DCF8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 90FC 8002DCFC 10620019 */  beq       $v1, $v0, .L8002DD64
 /* 9100 8002DD00 30820200 */   andi     $v0, $a0, 0x200
 /* 9104 8002DD04 14400003 */  bnez      $v0, .L8002DD14
@@ -428,8 +428,8 @@ glabel render_frame
 /* 9194 8002DD94 0C018E44 */  jal       guOrthoF
 /* 9198 8002DD98 E7A20018 */   swc1     $f2, 0x18($sp)
 /* 919C 8002DD9C 0200202D */  daddu     $a0, $s0, $zero
-/* 91A0 8002DDA0 3C05800A */  lui       $a1, %hi(D_8009A634)
-/* 91A4 8002DDA4 84A5A634 */  lh        $a1, %lo(D_8009A634)($a1)
+/* 91A0 8002DDA0 3C05800A */  lui       $a1, %hi(gCurrentCamID)
+/* 91A4 8002DDA4 84A5A634 */  lh        $a1, %lo(gCurrentCamID)($a1)
 /* 91A8 8002DDA8 3C02800A */  lui       $v0, %hi(gDisplayContext)
 /* 91AC 8002DDAC 8C42A674 */  lw        $v0, %lo(gDisplayContext)($v0)
 /* 91B0 8002DDB0 00052980 */  sll       $a1, $a1, 6
@@ -439,8 +439,8 @@ glabel render_frame
 /* 91C0 8002DDC0 3C05DA38 */  lui       $a1, 0xda38
 /* 91C4 8002DDC4 34A50007 */  ori       $a1, $a1, 7
 /* 91C8 8002DDC8 8EE20000 */  lw        $v0, ($s7)
-/* 91CC 8002DDCC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 91D0 8002DDD0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 91CC 8002DDCC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 91D0 8002DDD0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 91D4 8002DDD4 0040202D */  daddu     $a0, $v0, $zero
 /* 91D8 8002DDD8 24420008 */  addiu     $v0, $v0, 8
 /* 91DC 8002DDDC 00031980 */  sll       $v1, $v1, 6

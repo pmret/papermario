@@ -7,8 +7,8 @@ glabel func_80240C08_A9A198
 /* A9A1A0 80240C10 0080982D */  daddu     $s3, $a0, $zero
 /* A9A1A4 80240C14 AFB40040 */  sw        $s4, 0x40($sp)
 /* A9A1A8 80240C18 0000A02D */  daddu     $s4, $zero, $zero
-/* A9A1AC 80240C1C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A9A1B0 80240C20 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A9A1AC 80240C1C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A9A1B0 80240C20 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A9A1B4 80240C24 3C04800B */  lui       $a0, %hi(gCameras)
 /* A9A1B8 80240C28 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* A9A1BC 80240C2C AFBF0044 */  sw        $ra, 0x44($sp)

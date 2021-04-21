@@ -3,8 +3,8 @@
 
 glabel func_80241B8C_824E4C
 /* 824E4C 80241B8C 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 824E50 80241B90 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 824E54 80241B94 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 824E50 80241B90 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 824E54 80241B94 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 824E58 80241B98 3C05800B */  lui       $a1, %hi(gCameras)
 /* 824E5C 80241B9C 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* 824E60 80241BA0 AFBF0010 */  sw        $ra, 0x10($sp)

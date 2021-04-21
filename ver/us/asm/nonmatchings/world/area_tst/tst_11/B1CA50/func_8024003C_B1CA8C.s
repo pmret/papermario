@@ -18,8 +18,8 @@ glabel func_8024003C_B1CA8C
 /* B1CAC0 80240070 0C048B77 */  jal       get_entity_model
 /* B1CAC4 80240074 84440008 */   lh       $a0, 8($v0)
 /* B1CAC8 80240078 8C430000 */  lw        $v1, ($v0)
-/* B1CACC 8024007C 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* B1CAD0 80240080 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* B1CACC 8024007C 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* B1CAD0 80240080 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* B1CAD4 80240084 34630200 */  ori       $v1, $v1, 0x200
 /* B1CAD8 80240088 AC430000 */  sw        $v1, ($v0)
 /* B1CADC 8024008C 27A20030 */  addiu     $v0, $sp, 0x30

@@ -27,8 +27,8 @@ glabel func_80240870_D6BE90
 /* D6BEE8 802408C8 F7B80160 */  sdc1      $f24, 0x160($sp)
 /* D6BEEC 802408CC F7B40150 */  sdc1      $f20, 0x150($sp)
 .L802408D0:
-/* D6BEF0 802408D0 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D6BEF4 802408D4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D6BEF0 802408D0 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D6BEF4 802408D4 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D6BEF8 802408D8 00031080 */  sll       $v0, $v1, 2
 /* D6BEFC 802408DC 00431021 */  addu      $v0, $v0, $v1
 /* D6BF00 802408E0 00021080 */  sll       $v0, $v0, 2

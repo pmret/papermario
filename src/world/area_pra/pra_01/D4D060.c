@@ -12,7 +12,7 @@ enum Reflection {
     REFLECTION_WALL,
 };
 
-extern s16 D_8009A634; // cam id
+extern s16 gCurrentCamID; // cam id
 
 void func_80240128_D4D168(void);
 void func_80240500_D4D540(void);
@@ -40,7 +40,7 @@ void func_80240128_D4D168(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
         entityModel->flags |= 0x200;
 
-        get_screen_coords(D_8009A634, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
 
         anim = N(UnkFunc2)(playerStatus->trueAnimation);
@@ -77,7 +77,7 @@ void func_80240128_D4D168(void) {
 }
 
 void func_802402F0_D4D330(PlayerStatus* playerStatus) {
-    f32 yaw = -CAM(D_8009A634)->currentYaw;
+    f32 yaw = -CAM(gCurrentCamID)->currentYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -147,7 +147,7 @@ void func_80240500_D4D540(void) {
     if (playerStatus->flags & 1) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
 
-        get_screen_coords(D_8009A634, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
 
         func_802DDA8C(1, playerStatus->trueAnimation, 1.0f);
@@ -177,7 +177,7 @@ void func_80240500_D4D540(void) {
 }
 
 void func_8024068C_D4D6CC(PlayerStatus *playerStatus) {
-    f32 yaw = -CAM(D_8009A634)->currentYaw;
+    f32 yaw = -CAM(gCurrentCamID)->currentYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -205,8 +205,6 @@ void func_8024068C_D4D6CC(PlayerStatus *playerStatus) {
     render_sprite(flags, 0, 0, NULL, main);
 }
 
-//INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240870_D4D8B0, PlayerStatus* playerStatus);
-
 f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 void func_80240870_D4D8B0(PlayerStatus *playerStatus) {
@@ -227,7 +225,7 @@ void func_80240870_D4D8B0(PlayerStatus *playerStatus) {
     s32 flags;
 
     for (i = 0; i < 2; i++) {
-        yaw = -CAM(D_8009A634)->currentYaw;
+        yaw = -CAM(gCurrentCamID)->currentYaw;
 
         if (i == 0) {
             if ((playerStatus->spriteFacingAngle > 90.0f) && (playerStatus->spriteFacingAngle <= 180.0f)) {

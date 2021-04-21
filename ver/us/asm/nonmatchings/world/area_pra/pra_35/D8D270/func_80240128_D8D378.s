@@ -29,8 +29,8 @@ glabel func_80240128_D8D378
 /* D8D3D8 80240188 27A20034 */  addiu     $v0, $sp, 0x34
 /* D8D3DC 8024018C AFA20014 */  sw        $v0, 0x14($sp)
 /* D8D3E0 80240190 C6000030 */  lwc1      $f0, 0x30($s0)
-/* D8D3E4 80240194 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* D8D3E8 80240198 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* D8D3E4 80240194 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* D8D3E8 80240198 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* D8D3EC 8024019C 46000007 */  neg.s     $f0, $f0
 /* D8D3F0 802401A0 44070000 */  mfc1      $a3, $f0
 /* D8D3F4 802401A4 27A20038 */  addiu     $v0, $sp, 0x38

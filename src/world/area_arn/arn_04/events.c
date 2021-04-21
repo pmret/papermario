@@ -652,7 +652,7 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (aiSettings->unk_14 >= 0) {
             if (script->functionTemp[1].s <= 0) {
                 script->functionTemp[1].s = aiSettings->unk_14;
-                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && 
+                if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
@@ -968,7 +968,7 @@ s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings *aiSettings, E
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     f32 phi_f20;
     s32 ret = FALSE;
 

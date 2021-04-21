@@ -7,8 +7,8 @@ glabel render_menu_icons
 /* D9DBC 801436BC AFB20518 */  sw        $s2, 0x518($sp)
 /* D9DC0 801436C0 AFB10514 */  sw        $s1, 0x514($sp)
 /* D9DC4 801436C4 AFB00510 */  sw        $s0, 0x510($sp)
-/* D9DC8 801436C8 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D9DCC 801436CC 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D9DC8 801436C8 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D9DCC 801436CC 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D9DD0 801436D0 24020003 */  addiu     $v0, $zero, 3
 /* D9DD4 801436D4 146200AB */  bne       $v1, $v0, .L80143984
 /* D9DD8 801436D8 0000902D */   daddu    $s2, $zero, $zero
@@ -189,8 +189,8 @@ glabel render_menu_icons
 /* DA074 80143974 1440FFF5 */  bnez      $v0, .L8014394C
 /* DA078 80143978 00000000 */   nop
 .L8014397C:
-/* DA07C 8014397C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* DA080 80143980 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* DA07C 8014397C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* DA080 80143980 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 .L80143984:
 /* DA084 80143984 24020001 */  addiu     $v0, $zero, 1
 /* DA088 80143988 146200A9 */  bne       $v1, $v0, .L80143C30

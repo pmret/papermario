@@ -29,8 +29,8 @@ glabel func_80240158_D57588
 /* D575E8 802401B8 27A20034 */  addiu     $v0, $sp, 0x34
 /* D575EC 802401BC AFA20014 */  sw        $v0, 0x14($sp)
 /* D575F0 802401C0 C6000030 */  lwc1      $f0, 0x30($s0)
-/* D575F4 802401C4 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* D575F8 802401C8 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* D575F4 802401C4 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* D575F8 802401C8 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* D575FC 802401CC 46000007 */  neg.s     $f0, $f0
 /* D57600 802401D0 44070000 */  mfc1      $a3, $f0
 /* D57604 802401D4 27A20038 */  addiu     $v0, $sp, 0x38

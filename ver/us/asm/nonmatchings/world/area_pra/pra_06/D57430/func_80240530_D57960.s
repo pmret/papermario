@@ -28,8 +28,8 @@ glabel func_80240530_D57960
 /* D579BC 8024058C 27A20038 */  addiu     $v0, $sp, 0x38
 /* D579C0 80240590 AFA20018 */  sw        $v0, 0x18($sp)
 /* D579C4 80240594 C600002C */  lwc1      $f0, 0x2c($s0)
-/* D579C8 80240598 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* D579CC 8024059C 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* D579C8 80240598 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* D579CC 8024059C 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* D579D0 802405A0 46000007 */  neg.s     $f0, $f0
 /* D579D4 802405A4 44060000 */  mfc1      $a2, $f0
 /* D579D8 802405A8 0C00B94E */  jal       get_screen_coords

@@ -6,8 +6,8 @@ glabel draw_entity_model_main
 /* B85BC 80121EBC 0080402D */  daddu     $t0, $a0, $zero
 /* B85C0 80121EC0 AFB1008C */  sw        $s1, 0x8c($sp)
 /* B85C4 80121EC4 27B10028 */  addiu     $s1, $sp, 0x28
-/* B85C8 80121EC8 3C09800A */  lui       $t1, %hi(D_8009A634)
-/* B85CC 80121ECC 8529A634 */  lh        $t1, %lo(D_8009A634)($t1)
+/* B85C8 80121EC8 3C09800A */  lui       $t1, %hi(gCurrentCamID)
+/* B85CC 80121ECC 8529A634 */  lh        $t1, %lo(gCurrentCamID)($t1)
 /* B85D0 80121ED0 3C04800B */  lui       $a0, %hi(gCameras)
 /* B85D4 80121ED4 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* B85D8 80121ED8 AFBF0094 */  sw        $ra, 0x94($sp)
