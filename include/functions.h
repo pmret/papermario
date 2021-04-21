@@ -333,5 +333,8 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
 
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+EntityModel* get_entity_model(s32 idx);
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 #endif

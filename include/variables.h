@@ -358,6 +358,8 @@ extern UNK_PTR D_800F7BBC;
 
 extern s32 D_802C05CC;
 
+extern s16 gCurrentCamID;
+
 // Heap?
 extern s32 D_803DA800;
 

@@ -1,5 +1,7 @@
 /// This include provides functions and scripts for setting up mirror reflections for the player and partner, used in
 /// Crystal Palace (area_pra).
+///
+/// See also tst_11, which has a more primitive wall reflection implementation.
 
 #include "common.h"
 #include "map.h"
@@ -9,12 +11,6 @@ enum Reflection {
     REFLECTION_FLOOR,
     REFLECTION_WALL,
 };
-
-extern s16 gCurrentCamID;
-
-s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
-EntityModel* get_entity_model(s32 idx);
-f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 void N(reflection_setup_wall)(void);
 void N(reflection_setup_floor)(void);
@@ -67,7 +63,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
 }
 
 ApiStatus N(ReflectWall)(ScriptInstance* script, s32 isInitialCall) {
-    script->array[0] = (s32) create_dynamic_entity_world(NULL, &N(reflection_setup_wall));
+    script->array[0] = (s32) create_dynamic_entity_world(NULL, N(reflection_setup_wall));
     return ApiStatus_DONE2;
 }
 
@@ -146,7 +142,7 @@ ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
-            script->array[0] = create_dynamic_entity_world(NULL, &N(reflection_setup_floor));
+            script->array[0] = create_dynamic_entity_world(NULL, N(reflection_setup_floor));
             OVERRIDE_FLAG_SET(0x80);
             break;
         case REFLECTION_WALL:
