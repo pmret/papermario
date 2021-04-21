@@ -1,3 +1,6 @@
+/// This include provides functions and scripts for setting up mirror reflections for the player and partner, used in
+/// Crystal Palace (area_pra).
+
 #include "common.h"
 #include "map.h"
 
@@ -322,20 +325,20 @@ ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                script->array[1] = create_dynamic_entity_world(pra_01_SetPartnerFlagsA0000, NULL);
+                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlagsA0000), NULL);
                 break;
             case REFLECTION_FLOOR:
-                script->array[1] = create_dynamic_entity_world(pra_01_SetPartnerFlags80000, NULL);
+                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags80000), NULL);
                 break;
             case REFLECTION_WALL:
-                script->array[1] = create_dynamic_entity_world(pra_01_SetPartnerFlags20000, NULL);
+                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags20000), NULL);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
-                script->array[1] = create_dynamic_entity_world(pra_01_SetPartnerFlags80000, NULL);
+                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags80000), NULL);
                 break;
             case REFLECTION_WALL:
                 break;

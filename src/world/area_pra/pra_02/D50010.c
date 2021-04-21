@@ -1,30 +1,6 @@
 #include "pra_02.h"
 
-#include "world/common/UnkFunc2.inc.c"
-
-#include "world/common/UnkFunc3.inc.c"
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802400EC_D500DC);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240128_D50118);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802402F0_D502E0);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024049C_D5048C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240500_D504F0);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_8024068C_D5067C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240870_D50860);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80240D3C_D50D2C);
-
-#include "world/common/SetPartnerFlagsA0000.inc.c"
-
-#include "world/common/SetPartnerFlags80000.inc.c"
-
-#include "world/common/SetPartnerFlags20000.inc.c"
+#include "world/common/reflection.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
