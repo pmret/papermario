@@ -1,7 +1,11 @@
 #include "tst_11.h"
 
+// TODO: nonmatchings in this file are very similar to matched funcs in src/world/common/reflection.inc.c
+
 void func_8024003C_B1CA8C(void);
 void func_80240100_B1CB50(void);
+void func_802402F4_B1CD44(void);
+void N(SetPartnerFlagsA0000)(void);
 
 ApiStatus func_80240000_B1CA50(ScriptInstance* script, s32 isInitialCall) {
     script->array[0] = (s32) create_dynamic_entity_frontUI(NULL, func_8024003C_B1CA8C);
@@ -34,13 +38,30 @@ void func_8024003C_B1CA8C(void) {
 
 INCLUDE_ASM(void, "world/area_tst/tst_11/B1CA50", func_80240100_B1CB50, void);
 
-INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802402B8_B1CD08);
+ApiStatus func_802402B8_B1CD08(ScriptInstance* script, s32 isInitialCall) {
+    script->array[0] = (s32) create_dynamic_entity_frontUI(NULL, func_802402F4_B1CD44);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802402F4_B1CD44);
+INCLUDE_ASM(void, "world/area_tst/tst_11/B1CA50", func_802402F4_B1CD44, void);
 
 INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802403B8_B1CE08);
 
-INCLUDE_ASM(s32, "world/area_tst/tst_11/B1CA50", func_802406D4_B1D124);
+ApiStatus func_802406D4_B1D124(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc;
+
+    script->array[1] = create_dynamic_entity_world(N(SetPartnerFlagsA0000), NULL);
+
+    npc = get_npc_safe(NPC_PARTNER);
+
+    if (npc == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    npc->flags |= 0xA0000;
+
+    return ApiStatus_DONE2;
+}
 
 void N(SetPartnerFlagsA0000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);

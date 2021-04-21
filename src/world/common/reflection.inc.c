@@ -1,7 +1,7 @@
 /// This include provides functions and scripts for setting up mirror reflections for the player and partner, used in
 /// Crystal Palace (area_pra).
 ///
-/// See also tst_11, which has a more primitive wall reflection implementation.
+/// See also tst_11, which has a more primitive reflection implementation.
 
 #include "common.h"
 #include "map.h"
