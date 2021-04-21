@@ -231,8 +231,15 @@ extern s32 D_800B0CF0;
 extern s32 D_800D91E0;
 extern s32 D_800D9230;
 extern s32* D_80210000;
-extern s8 D_802D9D70; // player alpha1 copy? (type is u8?)
+extern u8 D_802D9D70; // player alpha1 copy?
 extern s8 D_802D9D71; // player alpha2 copy?
+
+
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
 
 extern s16 gCurrentDoorSoundsSet;
 

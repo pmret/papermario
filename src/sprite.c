@@ -275,7 +275,7 @@ s32 func_802DDA84(void) {
     return 0;
 }
 
-INCLUDE_ASM(s32, "sprite", func_802DDA8C);
+INCLUDE_ASM(void, "sprite", func_802DDA8C, s32 arg0, s32 arg1, f32 arg2);
 
 INCLUDE_ASM(s32, "sprite", render_sprite);
 

@@ -295,11 +295,7 @@ void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
+void func_802DDA8C(s32, s32, f32);
 
 void initialize_curtains(void);
 void update_curtains(void);

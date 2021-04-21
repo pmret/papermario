@@ -25,13 +25,9 @@ ApiStatus func_802400EC_D4D12C(ScriptInstance* script, s32 isInitialCall) {
 
 EntityModel* get_entity_model(s32 idx);
 
-#ifndef NON_MATCHING
-INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_80240128_D4D168, void); // draw
-#else
 void func_80240128_D4D168(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 anim;
-    u8 alpha;
     EntityModel* entityModel;
     s32 renderMode = playerStatus->renderMode;
     RenderTask renderTask;
@@ -44,7 +40,8 @@ void func_80240128_D4D168(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
         entityModel->flags |= 0x200;
 
-        get_screen_coords(D_8009A634, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z, &screenX, &screenY, &screenZ);
+        get_screen_coords(D_8009A634, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+                          &screenX, &screenY, &screenZ);
 
         anim = N(UnkFunc2)(playerStatus->trueAnimation);
 
@@ -55,32 +52,29 @@ void func_80240128_D4D168(void) {
         // spr_update_player_sprite
         func_802DDA8C(2, anim, 1.0f);
 
-        if (playerStatus->flags & 0x20000) {
-            //D_802D9D70 = 0;
-            renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-        } else {
-            alpha = playerStatus->alpha1;
-
-            if (alpha != (u8) D_802D9D70) {
-                if (alpha < 254) {
+        if (!(playerStatus->flags & 0x20000)) {
+            if (playerStatus->alpha1 != D_802D9D70) {
+                if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    func_802DDEE4(2, -1, 7, 0, 0, 0, 0, 0);
+                    func_802DDEE4(2, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
                     func_802DDEE4(2, -1, 0, 0, 0, 0, 0, 0);
-                    D_802D9D70 = playerStatus->alpha1;
                 }
             }
+            D_802D9D70 = playerStatus->alpha1;
+        } else {
+            renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
+            D_802D9D70 = 0;
         }
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = &func_802402F0_D4D330;
+        renderTaskPtr->appendGfx = func_802402F0_D4D330;
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
-#endif
 
 INCLUDE_ASM(void, "world/area_pra/pra_01/D4D060", func_802402F0_D4D330, PlayerStatus* playerStatus);
 
