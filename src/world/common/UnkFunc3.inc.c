@@ -12,7 +12,8 @@ s32 N(UnkFunc3)(s32 arg0) {
             }
             break;
         case 6:
-            temp_v1_2 = arg0 + 0xFFF9FFF4;
+        // unkfunc2 inlined
+            temp_v1_2 = arg0 + 0xFFF9FFF4; // + ~0x0006000B
             if (temp_v1_2 < 16) {
                 if (temp_v1_2 & 1) {
                     return arg0;

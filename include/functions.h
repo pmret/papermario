@@ -81,6 +81,8 @@ void func_800706D0(s32, f32, f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
+
+// TODO: out types are s32 not f32
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);

@@ -1583,4 +1583,31 @@ enum PlayerAnimFlags {
     PLAYER_ANIM_FLAG_8BIT_MARIO      = 0x00004000,
 };
 
+/// not really
+enum RenderMode {
+    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
+    RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
+    RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
+    RENDER_MODE_DECAL_OPA               = 0x05,
+    RENDER_MODE_DECAL_OPA_NO_AA         = 0x07,
+    RENDER_MODE_INTERSECTING_OPA        = 0x09,
+    RENDER_MODE_ALPHATEST               = 0x0D,
+    RENDER_MODE_ALPHATEST_ONESIDED      = 0x0F,
+    RENDER_MODE_ALPHATEST_NO_ZB         = 0x10,
+    RENDER_MODE_SURFACE_XLU_LAYER1      = 0x11,
+    RENDER_MODE_SURFACE_XLU_NO_AA       = 0x13,
+    RENDER_MODE_SURFACE_XLU_NO_ZB       = 0x14,
+    RENDER_MODE_SURF_XLU_ZB_ZUPD        = 0x15,
+    RENDER_MODE_SURFACE_XLU_LAYER2      = 0x16,
+    RENDER_MODE_DECAL_XLU               = 0x1A,
+    RENDER_MODE_DECAL_XLU_NO_AA         = 0x1C,
+    RENDER_MODE_SHADOW                  = 0x20,
+    RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
+    RENDER_MODE_INTERSECTING_XLU        = 0x26,
+    RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_CLOUD                   = 0x2E,
+    RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
+};
+
 #endif

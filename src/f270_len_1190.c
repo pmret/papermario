@@ -491,7 +491,7 @@ void state_step_unpause(void) {
                         set_time_freeze_mode(1);
                         D_800A0921 = 3;
                         playerStatus = &gPlayerStatus;
-                        playerStatus->unk_0F = playerStatus->unk_0E - 1;
+                        playerStatus->alpha2 = playerStatus->alpha1 - 1;
                         D_802D9D71 = D_802D9D70 + 1;
 
                         update_counters();
