@@ -74,26 +74,21 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", update_fall_state);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2F60);
 
-void gravity_use_fall_params(void) {
-    f32* floats = D_800F7B60;
-    PlayerStatus* playerStatus2;
-    PlayerStatus* playerStatus;
+// void gravity_use_fall_params(void) {
+//     f32* floats = D_800F7B60;
 
-    playerStatus = &gPlayerStatus;
-    playerStatus2 = &gPlayerStatus;
-
-    if (playerStatus->flags & 0x40000) {
-        playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[3] = *floats++ / 12.0f;
-    } else {
-        playerStatus2->gravityIntegrator[0] = *floats++;
-        playerStatus2->gravityIntegrator[1] = *floats++;
-        playerStatus2->gravityIntegrator[2] = *floats++;
-        playerStatus2->gravityIntegrator[3] = *floats++;
-    }
-}
+//     if (gPlayerStatus.flags & 0x40000) {
+//         gPlayerStatus.gravityIntegrator[0] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[1] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[2] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[3] = *floats++ / 12.0f;
+//     } else {
+//         gPlayerStatus.gravityIntegrator[0] = *floats++;
+//         gPlayerStatus.gravityIntegrator[1] = *floats++;
+//         gPlayerStatus.gravityIntegrator[2] = *floats++;
+//         gPlayerStatus.gravityIntegrator[3] = *floats++;
+//     }
+// }
 
 void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -557,7 +552,6 @@ void func_800E63A4(s32 arg0) {
 
 void func_800E6428(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = playerStatus;
     s32 actionState = playerStatus->actionState;
     Npc* disguiseNpc;
 
@@ -578,7 +572,7 @@ void func_800E6428(void) {
                     }
                 }
             }
-        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus2->pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
             set_action_state(ACTION_STATE_SNEAKY_PARASOL);
         }
     }
