@@ -150,7 +150,7 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
         case 2:
             ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
             ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-            if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z, 
+            if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z,
                        ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
                 ptr->unk_4E = 3;
             }
@@ -206,7 +206,7 @@ ApiStatus N(func_80240708_BED4F8)(ScriptInstance* script, s32 isInitialCall) {
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, 
+    if (dist2D(playerStatus->position.x, playerStatus->position.z,
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }
@@ -371,6 +371,8 @@ Script N(exitSingleDoor_802428D4) = SCRIPT({
 Script N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
 
 Script N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
+
+static const f64 rodata_alignment = 0.0;
 
 Script N(80242A30) = SCRIPT({
     DisablePlayerInput(TRUE);

@@ -9,6 +9,7 @@
 #include "sprite/npc/moustafa.h"
 #include "sprite/npc/toad.h"
 #include "sprite/npc/world_merlee.h"
+#include "world/area_dro/dro_02/img_1.png.h"
 
 #define UNK_ALPHA_FUNC_NPC 10
 
@@ -1185,7 +1186,7 @@ s8 N(D_802475E0_9707A0)[] = {
 s32 N(pad_XX111)[] = { 0 };
 
 // 32x32 Ci4
-s32 N(intTable_802475E8)[] = {
+s32 N(image1)[] = {
     0x66000000, 0x00000000, 0x00000000, 0x00000000, 0x60000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000333, 0x33333333, 0x33333333, 0x33333333,
     0x00000333, 0x33333333, 0x33333333, 0x33333333, 0x00000334, 0x44442024, 0x44444444, 0x20244444,
@@ -1205,9 +1206,10 @@ s32 N(intTable_802475E8)[] = {
 };
 
 // Above palette
-s32 N(intTable_802477E8)[] = {
+s32 N(image1_pal)[] = {
     0xEF7BB18D, 0xCCABCD4F, 0x998DC30F, 0xEF7BEDF2, 0x0D2F0000, 0x00000000, 0x00000000, 0x00000000,
 };
+
 
 Vtx N(D_80247808_9709C8)[] = {
     VTX(-24, 2, 0, 0, 60, 0xFF, 0xFF, 0xFF, 0xFF),
@@ -1227,6 +1229,9 @@ Vtx N(D_80247888_970A48)[] = {
     VTX(30, 0, -2, 1920, 2016, 0x00, 0x00, 0x00, 0x00),
 };
 
+extern void* world_area_dro_dro_02_img_1_pal_png;
+extern void* world_area_dro_dro_02_img_1_png;
+
 Gfx N(D_802478C8_970A88)[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1243,8 +1248,8 @@ Gfx N(D_802478C8_970A88)[] = {
     gsDPSetCombineKey(G_CK_NONE),
     gsDPSetAlphaCompare(G_AC_NONE),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
-    gsDPLoadTLUT_pal16(0, N(intTable_802477E8)),
-    gsDPLoadTextureTile_4b(N(intTable_802475E8), G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTLUT_pal16(0, N(image1_pal)),
+    gsDPLoadTextureTile_4b(N(image1), G_IM_FMT_CI, 32, 0, 0, 0, 31, 31, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
     gsSPEndDisplayList(),
 };
@@ -1547,7 +1552,7 @@ Script N(80248788) = SCRIPT({
         else {
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(SomeXYZFuncTodoRename)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             SI_VAR(0) |=c 0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
@@ -1579,7 +1584,7 @@ Script N(8024891C) = SCRIPT({
         else {
             RemoveItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(SomeXYZFuncTodoRename)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
             sleep 30;
@@ -1877,13 +1882,13 @@ s32 N(D_802490F8_9722B8)[] = {
     0x0030FF23, 0x008C0038, 0xFF0E00C8, 0x004BFF14, 0x008C0053, 0xFEF000BE, 0x0055FEF6, 0x008C005D,
 };
 
-s32 N(D_8024A520_9736E0)[];
+s32 N(image2)[];
 
 Gfx N(D_8024A3B8_973578)[] = {
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),
-    gsDPLoadTextureBlock(N(D_8024A520_9736E0), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(N(image2), G_IM_FMT_RGBA, G_IM_SIZ_16b, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPSetGeometryMode(G_LIGHTING),
     gsSPVertex(N(D_802490F8_9722B8), 32, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
@@ -1922,7 +1927,7 @@ Gfx N(D_8024A3B8_973578)[] = {
 };
 
 // 16x32 RGA16 texture
-s32 N(D_8024A520_9736E0)[] = {
+s32 N(image2)[] = {
     0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D, 0x9D1D9D1D,
     0x9D1DBDE5, 0xBDE5BDE5, 0xBDE5BDE5, 0xBDE5BDE5, 0xBDE5BDE5, 0xBDE5BDE5, 0xBDE5BDE5, 0xBDE5BDE5,
     0x9D1DBDE5, 0xDEF7D6AB, 0xDEF7D6AB, 0xDEF7D6AB, 0xDEF7D6AB, 0xDEF7D6AB, 0xDEF7D6AB, 0xDEF7D6AB,
@@ -2739,7 +2744,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_ARCHEOLOGIST,
         .settings = &N(npcSettings_80247484),
         .pos = { -320.0f, 0.0f, -14.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BA50),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -2770,7 +2775,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE0,
         .settings = &N(npcSettings_80247500),
         .pos = { -20.0f, 0.0f, 40.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BBAC),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -2801,7 +2806,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DISGUISED_MOUSTAFA,
         .settings = &N(npcSettings_80247558),
         .pos = { 245.0f, 0.0f, -35.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D04C),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -2831,7 +2836,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_TOAD,
         .settings = &N(npcSettings_80247584),
         .pos = { -143.0f, 0.0f, -170.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D790),
         .yaw = 180,
         .dropFlags = 0x80,
@@ -2861,7 +2866,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_WORLD_MERLEE,
         .settings = &N(npcSettings_80248754),
         .pos = { -130.0f, 0.0f, -400.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80247A80),
         .yaw = 180,
         .dropFlags = 0x80,
@@ -2891,7 +2896,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSTAFA,
         .settings = &N(npcSettings_80247558),
         .pos = { 0.0f, -1000.0f, 0.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D130),
         .yaw = 0,
         .dropFlags = 0x80,
@@ -2921,7 +2926,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE1,
         .settings = &N(npcSettings_8024752C),
         .pos = { 25.0f, 0.0f, -38.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BCD4),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -2951,7 +2956,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_DRYITE2,
         .settings = &N(npcSettings_8024752C),
         .pos = { -375.0f, 0.0f, -10.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BD28),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -2981,7 +2986,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER0,
         .settings = &N(npcSettings_80247558),
         .pos = { -50.0f, 0.0f, -470.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024BF10),
         .yaw = 180,
         .dropFlags = 0x80,
@@ -3011,7 +3016,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER1,
         .settings = &N(npcSettings_80247558),
         .pos = { -270.0f, 0.0f, 91.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024C038),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -3041,7 +3046,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_MOUSER2,
         .settings = &N(npcSettings_80247558),
         .pos = { 210.0f, 0.0f, -35.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024D3E8),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -3070,7 +3075,7 @@ StaticNpc N(npcGroup_8024D7B4)[] = {
         .id = NPC_CHUCK_QUIZMO,
         .settings = &N(npcSettings_802473B0),
         .pos = { -335.0f, 0.0f, 90.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .unk_1C = { 00, 00, 00, 01, 00, 03, 02, 01},
         .yaw = 270,
         .dropFlags = 0x80,
@@ -3265,7 +3270,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024EFC0), effectPtr);
-        func_801235C0(gPauseMenuCursorPosY);
+        free_dynamic_entity(gPauseMenuCursorPosY);
         return ApiStatus_DONE2;
     }
 
@@ -3337,7 +3342,7 @@ void N(func_802412F8_96A4B8)(void) {
 }
 
 ApiStatus N(func_80241364_96A524)(ScriptInstance *script, s32 isInitialCall) {
-    gPauseMenuCursorPosY = bind_dynamic_entity_7(NULL, N(func_802412F8_96A4B8));
+    gPauseMenuCursorPosY = create_dynamic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
     return ApiStatus_DONE2;
 }
 
@@ -3452,7 +3457,7 @@ ApiStatus N(func_802416FC_96A8BC)(ScriptInstance *script, s32 isInitialCall) {
     func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
     set_variable(script, SI_ARRAY(3), ret);
 
-    set_variable(script, SI_ARRAY(7), bind_dynamic_entity_3(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
+    set_variable(script, SI_ARRAY(7), create_dynamic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
     return ApiStatus_DONE2;
 }
 
@@ -3461,7 +3466,7 @@ ApiStatus N(func_80241874_96AA34)(ScriptInstance *script, s32 isInitialCall) {
     func_8013A854(get_variable(script, SI_ARRAY(1)));
     func_8013A854(get_variable(script, SI_ARRAY(2)));
     func_8013A854(get_variable(script, SI_ARRAY(3)));
-    func_801235C0(get_variable(script, SI_ARRAY(7)));
+    free_dynamic_entity(get_variable(script, SI_ARRAY(7)));
     return ApiStatus_DONE2;
 }
 
@@ -3987,7 +3992,7 @@ ApiStatus N(func_80243068_96C228)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_802432C0_96C480)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

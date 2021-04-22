@@ -33,7 +33,7 @@ glabel func_802A13E4_7316E4
 glabel L802A1434_731734
 /* 731734 802A1434 3C05802A */  lui       $a1, %hi(func_802A123C_73153C)
 /* 731738 802A1438 24A5123C */  addiu     $a1, $a1, %lo(func_802A123C_73153C)
-/* 73173C 802A143C 0C048C8F */  jal       bind_dynamic_entity_7
+/* 73173C 802A143C 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 731740 802A1440 0000202D */   daddu    $a0, $zero, $zero
 /* 731744 802A1444 3C01802A */  lui       $at, %hi(D_802A2E00)
 /* 731748 802A1448 AC222E00 */  sw        $v0, %lo(D_802A2E00)($at)
@@ -279,7 +279,7 @@ glabel L802A1754_731A54
 /* 731AC0 802A17C0 A462017A */  sh        $v0, 0x17a($v1)
 /* 731AC4 802A17C4 00021400 */  sll       $v0, $v0, 0x10
 /* 731AC8 802A17C8 00021403 */  sra       $v0, $v0, 0x10
-/* 731ACC 802A17CC 0C048D70 */  jal       func_801235C0
+/* 731ACC 802A17CC 0C048D70 */  jal       free_dynamic_entity
 /* 731AD0 802A17D0 ACC20084 */   sw       $v0, 0x84($a2)
 .L802A17D4:
 /* 731AD4 802A17D4 8E240000 */  lw        $a0, ($s1)

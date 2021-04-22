@@ -73,7 +73,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
             script->functionTemp[2].s = 0;
             sfx_play_sound(0x2033);
             camera->unk_1C = 0;
-            D_802A1CD0 = bind_dynamic_entity_7(NULL, func_802A123C_727B4C);
+            D_802A1CD0 = create_dynamic_entity_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0].s = 1;
         case 1:
             camera->flags |= 8;
@@ -86,7 +86,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
             }
             camera->unk_1C = 0;
             camera->flags &= ~8;
-            func_801235C0(D_802A1CD0);
+            free_dynamic_entity(D_802A1CD0);
             return ApiStatus_DONE2;
     }
 

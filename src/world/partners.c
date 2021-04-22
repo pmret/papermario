@@ -55,7 +55,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 D_800F8024 = 0;
 s32 D_800F8028 = 0;
@@ -254,7 +254,7 @@ f32 D_800F833C = 0;
 f32 D_800F8340 = 0;
 f32 D_800F8344 = 0;
 
-NpcID create_basic_npc(NpcBlueprint* blueprint);
+NpcID npc_create_basic(NpcBlueprint* blueprint);
 
 extern s32 D_802C0000;
 
@@ -310,7 +310,7 @@ void load_partner_npc(void) {
     blueprint.initialAnim = (*partner)->idle;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
-    D_8010CFD0 = npcIndex = create_basic_npc(blueprintPtr);
+    D_8010CFD0 = npcIndex = npc_create_basic(blueprintPtr);
 
     *partnerNpcPtr = get_npc_by_index(npcIndex);
 
@@ -335,7 +335,7 @@ void load_partner_npc(void) {
 }
 
 void func_800EA6A8(void) {
-    free_npc_by_index(D_8010CFD0);
+    npc_free_by_index(D_8010CFD0);
 }
 
 INCLUDE_ASM(s32, "world/partners", _use_partner_ability);
@@ -438,7 +438,7 @@ void partner_reset_data(void) {
 
     temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
-    get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+    get_dynamic_entity(create_dynamic_entity_frontUI(_use_partner_ability, NULL));
 
     temp8010CFD8 = &D_8010CFD8;
     temp8010CFE8 = &D_8010CFE8;
@@ -658,11 +658,11 @@ void enable_partner_ai(void) {
     }
 }
 
-void set_parter_tether_distance(f32 arg0) {
+void set_partner_tether_distance(f32 arg0) {
     D_8010CFC0 = arg0;
 }
 
-void reset_parter_tether_distance(void) {
+void reset_partner_tether_distance(void) {
     D_8010CFC0 = 40.0f;
 }
 

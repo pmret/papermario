@@ -15,11 +15,11 @@ glabel func_8024029C_B1B80C
 /* B1B834 802402C4 8E0400CC */  lw        $a0, 0xcc($s0)
 /* B1B838 802402C8 0C044181 */  jal       get_shadow_by_index
 /* B1B83C 802402CC 00000000 */   nop
-/* B1B840 802402D0 0C048B77 */  jal       func_80122DDC
+/* B1B840 802402D0 0C048B77 */  jal       get_entity_model
 /* B1B844 802402D4 84440008 */   lh       $a0, 8($v0)
 /* B1B848 802402D8 8C430000 */  lw        $v1, ($v0)
-/* B1B84C 802402DC 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* B1B850 802402E0 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* B1B84C 802402DC 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* B1B850 802402E0 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* B1B854 802402E4 34630200 */  ori       $v1, $v1, 0x200
 /* B1B858 802402E8 AC430000 */  sw        $v1, ($v0)
 /* B1B85C 802402EC 27A20030 */  addiu     $v0, $sp, 0x30

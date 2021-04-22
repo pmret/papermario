@@ -30,7 +30,7 @@ ApiStatus N(SetManyVars)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SetPlayerStatusAnimFlags100000)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SomeXYZFunc2)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(SomeXYZFuncTodoRename)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkCameraFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkMovePartner)(ScriptInstance* script, s32 isInitialCall);

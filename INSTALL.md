@@ -27,7 +27,7 @@ Copy an unmodified Paper Mario (USA) ROM (sha1: `3837f44cda784b466c9a2d99df70d77
 
 Configure the build and extract assets from the base ROM:
 ```sh
-./configure.py
+./configure
 ```
 
 Compile the game:

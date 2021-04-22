@@ -24,9 +24,9 @@ glabel func_80242690_E079F0
 /* E07A3C 802426DC AFA20014 */  sw        $v0, 0x14($sp)
 /* E07A40 802426E0 8E050004 */  lw        $a1, 4($s0)
 /* E07A44 802426E4 24020001 */  addiu     $v0, $zero, 1
-/* E07A48 802426E8 3C01802E */  lui       $at, %hi(D_802DF524)
-/* E07A4C 802426EC AC22F524 */  sw        $v0, %lo(D_802DF524)($at)
-/* E07A50 802426F0 0C00E219 */  jal       create_standard_npc
+/* E07A48 802426E8 3C01802E */  lui       $at, %hi(spr_allocateBtlComponentsOnWorldHeap)
+/* E07A4C 802426EC AC22F524 */  sw        $v0, %lo(spr_allocateBtlComponentsOnWorldHeap)($at)
+/* E07A50 802426F0 0C00E219 */  jal       npc_create_standard
 /* E07A54 802426F4 27A40010 */   addiu    $a0, $sp, 0x10
 /* E07A58 802426F8 0C00E2B7 */  jal       get_npc_by_index
 /* E07A5C 802426FC 0040202D */   daddu    $a0, $v0, $zero

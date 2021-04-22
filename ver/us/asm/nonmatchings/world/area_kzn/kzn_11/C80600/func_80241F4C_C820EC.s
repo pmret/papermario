@@ -62,7 +62,7 @@ glabel func_80241F4C_C820EC
 /* C821D0 80242030 AE12002C */  sw        $s2, 0x2c($s0)
 /* C821D4 80242034 AE02001C */  sw        $v0, 0x1c($s0)
 .L80242038:
-/* C821D8 80242038 0C009C64 */  jal       func_80027190
+/* C821D8 80242038 0C009C64 */  jal       get_time_freeze_mode
 /* C821DC 8024203C 00000000 */   nop
 /* C821E0 80242040 14400131 */  bnez      $v0, .L80242508
 /* C821E4 80242044 0000102D */   daddu    $v0, $zero, $zero

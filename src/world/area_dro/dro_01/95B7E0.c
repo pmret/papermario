@@ -10,7 +10,7 @@
 
 #define UNK_ALPHA_FUNC_NPC 10
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;
 extern s16 D_8014C290;
 extern s16 D_8014C294;
 
@@ -1223,7 +1223,7 @@ Script N(802477E8) = SCRIPT({
         else {
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(SomeXYZFuncTodoRename)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             SI_VAR(0) |=c 0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
@@ -1827,7 +1827,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_MOUSER0,
         .settings = &N(npcSettings_80245134),
         .pos = { -332.0f, 0.0f, 188.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802481F8),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -1857,7 +1857,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE0,
         .settings = &N(npcSettings_80245060),
         .pos = { -235.0f, 0.0f, 160.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802483A8),
         .yaw = 90,
         .dropFlags = 0x80,
@@ -1888,7 +1888,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE1,
         .settings = &N(npcSettings_80245108),
         .pos = { -380.0f, 0.0f, -15.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802484E0),
         .yaw = 61,
         .dropFlags = 0x80,
@@ -1918,7 +1918,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE2,
         .settings = &N(npcSettings_80245108),
         .pos = { 195.0f, 0.0f, -75.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80248AE4),
         .yaw = 74,
         .dropFlags = 0x80,
@@ -1948,7 +1948,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE3,
         .settings = &N(npcSettings_80245108),
         .pos = { 225.0f, 0.0f, -83.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80248CC8),
         .yaw = 257,
         .dropFlags = 0x80,
@@ -1978,7 +1978,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_ARTIST_TOAD,
         .settings = &N(npcSettings_80245108),
         .pos = { 285.0f, 0.0f, -274.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80249168),
         .yaw = 271,
         .dropFlags = 0x80,
@@ -2008,7 +2008,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_MOUSER1,
         .settings = &N(npcSettings_80245134),
         .pos = { 31.0f, 0.0f, -374.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_8024981C),
         .yaw = 180,
         .dropFlags = 0x80,
@@ -2038,7 +2038,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_CHUCK_QUIZMO,
         .settings = &N(npcSettings_80247788),
         .pos = { -400.0f, 0.0f, 100.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT,
         .unk_1C = { 00, 00, 00, 01, 00, 03, 02, 00},
         .yaw = 263,
         .dropFlags = 0x80,
@@ -2068,7 +2068,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE4,
         .settings = &N(npcSettings_80245060),
         .pos = { -120.0f, 0.0f, 134.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80249ABC),
         .yaw = 257,
         .dropFlags = 0x80,
@@ -2099,7 +2099,7 @@ StaticNpc N(npcGroup_80249B34)[] = {
         .id = NPC_DRYITE5,
         .settings = &N(npcSettings_802450DC),
         .pos = { 40.0f, 0.0f, 105.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_80249B10),
         .yaw = 270,
         .dropFlags = 0x80,
@@ -2133,7 +2133,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
         .id = NPC_THREE_SISTERS0,
         .settings = &N(npcSettings_80245160),
         .pos = { -141.0f, 0.0f, -18.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802498C4),
         .yaw = 62,
         .dropFlags = 0x80,
@@ -2163,7 +2163,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
         .id = NPC_THREE_SISTERS1,
         .settings = &N(npcSettings_80245160),
         .pos = { -124.0f, 0.0f, -61.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802498C4),
         .yaw = 63,
         .dropFlags = 0x80,
@@ -2193,7 +2193,7 @@ StaticNpc N(npcGroup_8024AE94)[] = {
         .id = NPC_THREE_SISTERS2,
         .settings = &N(npcSettings_80245160),
         .pos = { -80.0f, 0.0f, -35.0f },
-        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_NO_PROJECT_SHADOW,
+        .flags = NPC_FLAG_PASSIVE | NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
         .init = &N(init_802498C4),
         .yaw = 244,
         .dropFlags = 0x80,
@@ -3378,7 +3378,7 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024DFE0), effectPtr);
-        func_801235C0(N(D_8024DFC0));
+        free_dynamic_entity(N(D_8024DFC0));
         return ApiStatus_DONE2;
     }
 
@@ -3450,13 +3450,13 @@ void N(func_80242468_95D668)(void) {
 }
 
 ApiStatus N(func_802424D4_95D6D4)(ScriptInstance *script, s32 isInitialCall) {
-    N(D_8024DFC0) = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    N(D_8024DFC0) = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_80242730_95D930)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

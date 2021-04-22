@@ -74,7 +74,7 @@ def get_constants():
     global CONSTANTS
     global VALID_SAVE_VARS
 
-    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
+    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags" }
     for enum in valid_enums:
@@ -193,7 +193,7 @@ def make_anim_macro(self, sprite, palette, anim):
 
 def fix_args(self, func, args, info):
     global CONSTANTS
-    
+
     new_args = []
     args = args.split(", ")
     for i,arg in enumerate(args):
@@ -266,7 +266,7 @@ def fix_args(self, func, args, info):
             else:
                 if not (info[i] == "NpcIDs" and argNum > 0):
                     print(f"0x{argNum:X} was not found within {info[i]} constants for function {func} arg {i}, add it.")
-                
+
                 if (info[i] == "ItemIDs" and argNum < 0):
                     new_args.append(f"{int(argNum)}")
                 else:
@@ -387,7 +387,7 @@ def replace_constants(self, func, args):
     return args
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {}):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {"functions": set(), "includes": set()}):
         self.bytes = bytes
         self.script_name = script_name
 
@@ -872,7 +872,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
         # case variables need to be saved ahead of time, since they span many instructions
-        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or 
+        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or
             (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "WORLD_LOCATION")):
             argv[0] = self.replace_enum(argv[0], case=True)
 

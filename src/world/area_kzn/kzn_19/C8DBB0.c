@@ -89,7 +89,7 @@ ApiStatus N(func_80240A14_C8E5C4)(ScriptInstance* script, s32 isInitialCall) {
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, 
+    if (dist2D(playerStatus->position.x, playerStatus->position.z,
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }
@@ -146,7 +146,7 @@ ApiStatus N(func_80241468_C8F018)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_802417AC_C8F35C);
 /*
@@ -175,7 +175,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_19/C8DBB0", func_80241800_C8F3B0);
 /*
 ApiStatus N(func_80241800_C8F3B0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

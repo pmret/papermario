@@ -15,7 +15,7 @@ void N(UnkFunc14_copy)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         } else {
             script->functionTemp[0].s = 10;
         }
-    } else if (npc->unk_8C == 0) {
+    } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
         if (npc->duration == 0) {
             script->functionTemp[1].s--;

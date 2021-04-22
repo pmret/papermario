@@ -1,12 +1,10 @@
-import os
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
-from segtypes.segment import Segment
 from util import options
 
 class N64SegHeader(N64Segment):
-    def should_run(self):
-        return N64Segment.should_run(self) or options.mode_active("asm")
+    def should_split(self):
+        return self.extract and options.mode_active("code")
 
     @staticmethod
     def get_line(typ, data, comment):
@@ -19,9 +17,10 @@ class N64SegHeader(N64Segment):
         
         return f".{typ} {dstr} /* {comment} */"
 
-    def split(self, rom_bytes, base_path):
-        out_dir = Segment.create_split_dir(base_path, "asm")
+    def out_path(self) -> Path:
+        return options.get_asm_path() / self.dir / f"{self.name}.s"
 
+    def split(self, rom_bytes):
         encoding = options.get("header_encoding", "ASCII")
 
         header_lines = []
@@ -34,7 +33,13 @@ class N64SegHeader(N64Segment):
         header_lines.append(self.get_line("word", rom_bytes[0x14:0x18], "Checksum 2"))
         header_lines.append(self.get_line("word", rom_bytes[0x18:0x1C], "Unknown 1"))
         header_lines.append(self.get_line("word", rom_bytes[0x1C:0x20], "Unknown 2"))
-        header_lines.append(".ascii \"" + rom_bytes[0x20:0x34].decode(encoding).strip().ljust(20) + "\" /* Internal name */")
+
+        if encoding != "word":
+            header_lines.append(".ascii \"" + rom_bytes[0x20:0x34].decode(encoding).strip().ljust(20) + "\" /* Internal name */")
+        else:
+            for i in range(0x20, 0x34, 4):
+                header_lines.append(self.get_line("word", rom_bytes[i:i+4], "Internal name"))
+
         header_lines.append(self.get_line("word", rom_bytes[0x34:0x38], "Unknown 3"))
         header_lines.append(self.get_line("word", rom_bytes[0x38:0x3C], "Cartridge"))
         header_lines.append(self.get_line("ascii", rom_bytes[0x3C:0x3E], "Cartridge ID"))
@@ -42,19 +47,11 @@ class N64SegHeader(N64Segment):
         header_lines.append(self.get_line("byte", rom_bytes[0x3F:0x40], "Version"))
         header_lines.append("")
 
-        s_path = os.path.join(out_dir, self.name + ".s")
-        Path(s_path).parent.mkdir(parents=True, exist_ok=True)
-        with open(s_path, "w", newline="\n") as f:
+        src_path = self.out_path()
+        src_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(src_path, "w", newline="\n") as f:
             f.write("\n".join(header_lines))
-        self.log(f"Wrote {self.name} to {s_path}")
-
-
-    def get_ld_section_name(self):
-        return self.name
-
-
-    def get_ld_files(self):
-        return [("asm", f"{self.name}.s", ".data", self.rom_start)]
+        self.log(f"Wrote {self.name} to {src_path}")
 
     @staticmethod
     def get_default_name(addr):

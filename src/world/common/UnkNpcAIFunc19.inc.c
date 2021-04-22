@@ -9,7 +9,7 @@ void N(UnkNpcAIFunc19)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         npc->duration--;
     }
 
-    if (npc->unk_8C == 0 && npc->duration <= 0) {
+    if (npc->turnAroundYawAdjustment == 0 && npc->duration <= 0) {
         npc->duration = 8;
         npc->currentAnim = enemy->animList[11];
         script->functionTemp[0].s = 51;

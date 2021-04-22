@@ -4,15 +4,23 @@ options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
-  ld_o_replace_extension: False
-  ld_addrs_header: build/include/ld_addrs.h
-  extensions: ../../tools/splat_ext
-  symbol_addrs_path: symbol_addrs.txt
   platform: n64
-  out_dir: .
-  target_path: baserom.z64
-  src_path: ../../src/jp
-  assets_dir: assets
+
+  base_path: ../..
+  target_path: ver/jp/baserom.z64
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: ver/jp/symbol_addrs.txt
+  ld_script_path: ver/jp/papermario.ld
+  linker_symbol_header_path: ver/jp/build/include/ld_addrs.h
+  src_path: src/jp
+  asm_path: ver/jp/asm
+  asset_path: assets/jp
+  build_path: ver/jp/build
+  cache_path: ver/jp/.splat_cache
+  undefined_funcs_auto_path: ver/jp/undefined_funcs_auto.txt
+  undefined_syms_auto_path: ver/jp/undefined_syms_auto.txt
+asset_stack:
+  - jp
 segments:
   - name: header
     type: header
@@ -23,7 +31,7 @@ segments:
     start: 0x1000
     vram: 0x80025C00
     subalign: 8
-    subsections:
+    subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c] # 1060 (identical)
     - [0x1370, c] # 1370
@@ -86,7 +94,7 @@ segments:
     - [0x3AF40, c]
     - [0x3AFA0, c]
     - [0x3B040, c]
-    - [0x3B150, c, os/nusys/code_3B150] # 3b4a0
+    - [0x3B150, c, os/nusys/3B150] # 3b4a0
     - [0x3B2A0, c]
     - [0x3B400, c]
     - [0x3B420, c]

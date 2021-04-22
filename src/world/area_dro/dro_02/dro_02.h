@@ -14,7 +14,7 @@ ApiStatus N(Set80151310_0)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(Set80151310_1)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SetCamVfov)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SetManyVars)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(SomeXYZFuncTodoRename)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkCameraFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc26)(ScriptInstance* script, s32 isInitialCall);

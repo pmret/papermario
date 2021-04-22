@@ -72,12 +72,12 @@ INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283908);
 INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283A50);
 
 ApiStatus func_80283B88(ScriptInstance* script, s32 isInitialCall) {
-    set_parter_tether_distance(20.0f);
+    set_partner_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80283BB0(ScriptInstance* script, s32 isInitialCall) {
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
     return ApiStatus_DONE2;
 }
 

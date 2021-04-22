@@ -46,7 +46,7 @@ ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
 #define NAMESPACE nok_02
 
 #define NAMESPACE dup_nok_02
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 #define NAMESPACE nok_02
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
@@ -76,7 +76,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
 /*
 ApiStatus N(func_80240678_9D7698)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

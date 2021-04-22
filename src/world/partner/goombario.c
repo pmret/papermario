@@ -64,7 +64,7 @@ void world_goombario_pre_battle(Npc* partner) {
     new_var = new_var2;
 
     if (*new_var != 0) {
-        func_80027088(0);
+        set_time_freeze_mode(0);
         enable_player_input();
         CancelMessageAndBlock();
         clear_partner_move_history(partner);

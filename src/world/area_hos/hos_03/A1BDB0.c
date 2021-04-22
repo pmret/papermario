@@ -9,9 +9,9 @@ void N(func_80240CB0_A1BDB0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z, 
-            npc->pos.x, npc->pos.z, 
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
+            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+            npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
@@ -317,7 +317,7 @@ ApiStatus N(func_80242E2C_A1DF2C)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        func_801235C0(D_8024DFC0);
+        free_dynamic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -410,7 +410,7 @@ void N(func_8024349C_A1E59C)(void) {
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80243508_A1E608);
 /*
 ApiStatus N(func_80243508_A1E608)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */

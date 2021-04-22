@@ -2,7 +2,7 @@
 #include "message_ids.h"
 #include "sprite/npc/world_tubba.h"
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;
 
 enum {
     NPC_WORLD_TUBBA,
@@ -329,7 +329,7 @@ NpcAISettings N(npcAISettings_8024271C) = {
 
 Script N(npcAI_8024274C) = SCRIPT({
     spawn N(80242184);
-    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_200)), TRUE);
+    SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE);
     SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_C));
     spawn N(802424E8);
     N(func_80241464_C50974)(N(npcAISettings_8024271C));
@@ -362,7 +362,7 @@ StaticNpc N(npcGroup_802428C0) = {
     .id = NPC_WORLD_TUBBA,
     .settings = &N(npcSettings_8024212C),
     .pos = { 0.0f, -1000.0f, 0.0f },
-    .flags = NPC_FLAG_100 | NPC_FLAG_IGNORE_HEIGHT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
+    .flags = NPC_FLAG_100 | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_40000 | NPC_FLAG_200000 | NPC_FLAG_NO_DROPS,
     .init = &N(init_802427EC),
     .yaw = 270,
     .dropFlags = 0x80,
@@ -456,7 +456,7 @@ s32 N(func_80240208_C4F718)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;

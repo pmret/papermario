@@ -342,7 +342,7 @@ ApiStatus N(func_80242148_825408)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        func_801235C0(D_8024DFC0);
+        free_dynamic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -435,14 +435,14 @@ void N(func_802427B8_825A78)(void) {
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242824_825AE4);
 /*
 ApiStatus N(func_80242824_825AE4)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242A80_825D40);
 /*
@@ -471,7 +471,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242AD4_825D94);
 /*
 ApiStatus N(func_80242AD4_825D94)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;

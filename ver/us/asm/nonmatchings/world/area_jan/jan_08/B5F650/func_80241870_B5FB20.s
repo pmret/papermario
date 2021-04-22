@@ -18,8 +18,8 @@ glabel func_80241870_B5FB20
 /* B5FB54 802418A4 0040802D */  daddu     $s0, $v0, $zero
 /* B5FB58 802418A8 3C05800B */  lui       $a1, %hi(gCameras)
 /* B5FB5C 802418AC 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* B5FB60 802418B0 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* B5FB64 802418B4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* B5FB60 802418B0 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* B5FB64 802418B4 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* B5FB68 802418B8 00912021 */  addu      $a0, $a0, $s1
 /* B5FB6C 802418BC 00031080 */  sll       $v0, $v1, 2
 /* B5FB70 802418C0 00431021 */  addu      $v0, $v0, $v1

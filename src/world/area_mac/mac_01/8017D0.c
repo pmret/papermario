@@ -356,7 +356,7 @@ ApiStatus N(func_80242898_803118)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        func_801235C0(D_8024DFC0);
+        free_dynamic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -449,7 +449,7 @@ void N(func_80242F08_803788)(void) {
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
 /*
 ApiStatus N(func_80242F74_8037F4)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = bind_dynamic_entity_7(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */
@@ -492,7 +492,7 @@ ApiStatus func_80243AA0_804320(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243CD4_804554);
 /*
@@ -521,7 +521,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243D28_8045A8);
 /*
 ApiStatus N(func_80243D28_8045A8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     D_80241CD0_BE0A60 = get_variable(script, *args);
     D_80241CCC_BE0A5C = 1;
     return ApiStatus_DONE2;
@@ -637,11 +637,11 @@ void func_802454B4_805D34(void) {
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
-    set_parter_tether_distance(20.0f);
+    set_partner_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
-    reset_parter_tether_distance();
+    reset_partner_tether_distance();
     return ApiStatus_DONE2;
 }

@@ -1346,34 +1346,43 @@ enum ActionStates {
     ACTION_STATE_WALK,
     ACTION_STATE_RUN,
     ACTION_STATE_JUMP,
-    ACTION_STATE_BOUNCE,
-    ACTION_STATE_ABORTED_JUMP,
-    ACTION_STATE_LAUNCH,
-    ACTION_STATE_7,
+    ACTION_STATE_BOUNCE,            ///< Used with Kooper
+    ACTION_STATE_HOP,               ///< Released A before apex of jump
+    ACTION_STATE_LAUNCH,            ///< Shy Guy Toybox jack-in-the-boxes
+    ACTION_STATE_LAND_ON_SWITCH,    ///< Small red/blue ! switches
     ACTION_STATE_FALLING,
     ACTION_STATE_STEP_DOWN,
     ACTION_STATE_LAND,
     ACTION_STATE_STEP_DOWN_LAND,
 
-    // Following action states prohibit movement:
-    ACTION_STATE_CONVERSATION,
+    // Following action states prohibit movement (see set_action_state())
+    ACTION_STATE_TALK,              ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP,
     ACTION_STATE_GROUND_POUND,
     ACTION_STATE_ULTRA_JUMP,
     ACTION_STATE_ULTRA_POUND,
-    ACTION_STATE_SLIDING,
+    ACTION_STATE_SLIDE,
     ACTION_STATE_HAMMER,
-    ACTION_STATE_HIT_HAZARD             = 21,
-    ACTION_STATE_UNKNOWN_16,
+    ACTION_STATE_13,
+    ACTION_STATE_14,
+    ACTION_STATE_HIT_FIRE,            ///< Causes Mario to fly up and take damage. Used for fire bars.
+    ACTION_STATE_UNKNOWN_16, // some kind of knockback, does no damage
     ACTION_STATE_HIT_LAVA,
     ACTION_STATE_18,
-    ACTION_STATE_SPIN                   = 26,
+    ACTION_STATE_SNEAKY_PARASOL,
+    ACTION_STATE_SPIN,
     ACTION_STATE_ENEMY_FIRST_STRIKE,
-    ACTION_STATE_SPINNING_FLOWER        = 29,
-    ACTION_STATE_USE_TWEESTER           = 31,
-    ACTION_STATE_RIDE                   = 33,
+    ACTION_STATE_GET_STAR_SPIRIT,
+    ACTION_STATE_USE_SPINNING_FLOWER,
+    ACTION_STATE_USE_MUNCHLESIA,      ///< Set by the jan_09 squishy flower entity; throws the player in the air.
+    ACTION_STATE_USE_TWEESTER,
+    ACTION_STATE_BOUNCE_OFF_SWITCH,   ///< Small red/blue ! switches
+    ACTION_STATE_RIDE,
     ACTION_STATE_STEP_UP,
-    ACTION_STATE_USE_SPRING             = 38,
+    ACTION_STATE_23,
+    ACTION_STATE_24,
+    ACTION_STATE_25,
+    ACTION_STATE_USE_SPRING,
 };
 
 typedef s32 NpcID;
@@ -1381,6 +1390,7 @@ enum NpcIDs {
     NPC_SELF         = -1,
     NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
+    NPC_BTL_MERLEE   = -10,
 };
 
 typedef UNK_TYPE TriggerFlag;
@@ -1525,24 +1535,79 @@ enum NpcFlags {
     NPC_FLAG_PASSIVE           = 0x00000001, ///< Collision does not trigger battle
     NPC_FLAG_4                 = 0x00000004,
     NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
-    NPC_FLAG_10                = 0x00000010, // TODO (shadow-related?)
+    NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
     NPC_FLAG_80                = 0x00000080, // TODO
     NPC_FLAG_100               = 0x00000100, // TODO
-    NPC_FLAG_200               = 0x00000200, // TODO (enable gravity?)
+    NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
-    NPC_FLAG_IGNORE_HEIGHT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
     NPC_FLAG_NO_PROJECT_SHADOW = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
     NPC_FLAG_4000              = 0x00004000,
     NPC_FLAG_8000              = 0x00008000,
-    NPC_FLAG_10000             = 0x00010000,
-    NPC_FLAG_INVISIBLE         = 0x00020000, ///< Invisible sprite (shadow and particles still render) (TODO: possibly causes loading of player sprites instead?)
-    NPC_FLAG_40000             = 0x00040000,
+    NPC_FLAG_DIRTY_SHADOW      = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
+    NPC_FLAG_REFLECT_WALL      = 0x00020000, ///< Mirror rendering across z=0
+    NPC_FLAG_40000             = 0x00040000, ///< Yaw?
+    NPC_FLAG_REFLECT_FLOOR     = 0x00080000, ///< Mirror rendering across y=0
+    NPC_FLAG_MOTION_BLUR       = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000            = 0x00200000,
     NPC_FLAG_400000            = 0x00400000,
     NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_1000000           = 0x01000000, // TODO. fails assert in set_npc_sprite
+
+    /// Use simpler, faster physics calculations:
+    ///  - Perform only one lateral collision test during motion
+    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
+    NPC_FLAG_PARTICLE          = 0x04000000,
+
     NPC_FLAG_40000000          = 0x40000000,
     NPC_FLAG_80000000          = 0x80000000,
+};
+
+// XXX bad name
+/// @see PlayerStatus::animFlags
+enum PlayerAnimFlags {
+    PLAYER_ANIM_FLAG_HOLDING_ITEM    = 0x00000001,
+    PLAYER_ANIM_FLAG_2               = 0x00000002,
+    PLAYER_ANIM_FLAG_4               = 0x00000004,
+    PLAYER_ANIM_FLAG_8               = 0x00000008,
+    PLAYER_ANIM_FLAG_INTERACT_PROMPT = 0x00000010, ///< ! prompt
+    PLAYER_ANIM_FLAG_SPEECH_PROMPT   = 0x00000020, ///< (...) prompt
+    PLAYER_ANIM_FLAG_40              = 0x00000040,
+    PLAYER_ANIM_FLAG_PULSE_STONE     = 0x00000080,
+    PLAYER_ANIM_FLAG_100             = 0x00000100,
+    PLAYER_ANIM_FLAG_GET_STAR_SPIRIT = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_ANIM_FLAG_SHIVER          = 0x00000400,
+    PLAYER_ANIM_FLAG_PEACH_PHYSICS   = 0x00001000,
+    PLAYER_ANIM_FLAG_IN_DISGUISE     = 0x00002000,
+    PLAYER_ANIM_FLAG_8BIT_MARIO      = 0x00004000,
+};
+
+/// not really
+enum RenderMode {
+    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
+    RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
+    RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
+    RENDER_MODE_DECAL_OPA               = 0x05,
+    RENDER_MODE_DECAL_OPA_NO_AA         = 0x07,
+    RENDER_MODE_INTERSECTING_OPA        = 0x09,
+    RENDER_MODE_ALPHATEST               = 0x0D,
+    RENDER_MODE_ALPHATEST_ONESIDED      = 0x0F,
+    RENDER_MODE_ALPHATEST_NO_ZB         = 0x10,
+    RENDER_MODE_SURFACE_XLU_LAYER1      = 0x11,
+    RENDER_MODE_SURFACE_XLU_NO_AA       = 0x13,
+    RENDER_MODE_SURFACE_XLU_NO_ZB       = 0x14,
+    RENDER_MODE_SURF_XLU_ZB_ZUPD        = 0x15,
+    RENDER_MODE_SURFACE_XLU_LAYER2      = 0x16,
+    RENDER_MODE_DECAL_XLU               = 0x1A,
+    RENDER_MODE_DECAL_XLU_NO_AA         = 0x1C,
+    RENDER_MODE_SHADOW                  = 0x20,
+    RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
+    RENDER_MODE_INTERSECTING_XLU        = 0x26,
+    RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_CLOUD                   = 0x2E,
+    RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
 };
 
 #endif

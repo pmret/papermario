@@ -15,7 +15,7 @@ glabel func_80240468_E161E8
 /* E16210 80240490 00000000 */   nop
 /* E16214 80240494 3C058024 */  lui       $a1, %hi(func_80240430_E161B0)
 /* E16218 80240498 24A50430 */  addiu     $a1, $a1, %lo(func_80240430_E161B0)
-/* E1621C 8024049C 0C048C56 */  jal       bind_dynamic_entity_3
+/* E1621C 8024049C 0C048C56 */  jal       create_dynamic_entity_world
 /* E16220 802404A0 0000202D */   daddu    $a0, $zero, $zero
 /* E16224 802404A4 3C118011 */  lui       $s1, %hi(D_80108B28)
 /* E16228 802404A8 26318B28 */  addiu     $s1, $s1, %lo(D_80108B28)

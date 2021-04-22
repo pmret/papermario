@@ -7,6 +7,9 @@ from util import options
 import png
 import xml.etree.ElementTree as ET
 
+import pylibyaml
+import yaml
+
 class Sprite:
     def __init__(self):
         self.max_components = 0
@@ -69,8 +72,8 @@ class Sprite:
 
     def write_to_dir(self, path):
         SpriteSheet = ET.Element("SpriteSheet", {
-            "a": str(self.max_components),
-            "b": str(self.num_variations),
+            "maxComponents": str(self.max_components),
+            "paletteGroups": str(self.num_variations),
         })
 
         PaletteList = ET.SubElement(SpriteSheet, "PaletteList")
@@ -253,52 +256,47 @@ class Component:
 class N64SegPaperMarioNpcSprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, segment, next_segment):
-        super().__init__(segment, next_segment)
+    def __init__(self, segment, rom_start, rom_end):
+        super().__init__(segment, rom_start, rom_end)
 
-        if type(segment) is dict and "files" in segment:
-            self.files = segment["files"]
-        else:
-            self.files = DEFAULT_SPRITE_NAMES
+        self.files = segment["files"]
 
-    def split(self, rom_bytes, base_path):
-        out_dir = self.create_split_dir(base_path, options.get("assets_dir") + "/sprite/" + self.name)
+        with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
+            self.sprite_cfg = yaml.load(f.read(), Loader=yaml.SafeLoader)
+
+    def split(self, rom_bytes):
+        out_dir = options.get_asset_path() / self.dir / self.name
 
         data = rom_bytes[self.rom_start:self.rom_end]
         pos = 0
 
-        for i, file in enumerate(self.files):
-            if type(file) is dict:
-                sprite_name = file["name"]
-            else:
-                sprite_name = file
+        for i, sprite_name in enumerate(self.files):
+            #self.log(f"Splitting sprite {sprite_name}...")
 
-            self.log(f"Splitting sprite {sprite_name}...")
-
-            sprite_dir = self.create_split_dir(out_dir, sprite_name)
+            sprite_dir = out_dir / sprite_name
+            sprite_dir.mkdir(parents=True, exist_ok=True)
 
             start = int.from_bytes(data[i * 4 : (i + 1) * 4], byteorder="big")
             end = int.from_bytes(data[(i + 1) * 4 : (i + 2) * 4], byteorder="big")
 
             sprite_data = Yay0decompress.decompress_yay0(data[start:end])
-
-            """
-            with open(sprite_dir / "raw.bin", "wb") as f:
-                f.write(sprite_data)
-            """
-
             sprite = Sprite.from_bytes(sprite_data)
 
-            if type(file) is dict:
-                sprite.image_names = file.get("frames", [])
-                sprite.palette_names = file.get("palettes", [])
-                sprite.animation_names = file.get("animations", [])
+            if sprite_name in self.sprite_cfg:
+                sprite.image_names = self.sprite_cfg[sprite_name].get("frames", [])
+                sprite.palette_names = self.sprite_cfg[sprite_name].get("palettes", [])
+                sprite.animation_names = self.sprite_cfg[sprite_name].get("animations", [])
 
             sprite.write_to_dir(sprite_dir)
 
-    def get_ld_files(self):
-        return [(options.get("assets_dir"), "sprite/" + self.name, ".data", self.rom_start)]
+    def get_linker_entries(self):
+        from segtypes.linker_entry import LinkerEntry
 
-    @staticmethod
-    def get_default_name(addr):
-        return "npc"
+        basepath = options.get_asset_path() / "sprite" / f"{self.name}"
+        out_paths = [options.get_asset_path() / "sprite" / self.name / (f["name"] if type(f) is dict else f)
+                     for f in self.files]
+
+        return [LinkerEntry(self, out_paths, basepath, ".data")]
+
+    def cache(self):
+        return (self.config, self.rom_end, self.sprite_cfg)

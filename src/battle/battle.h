@@ -198,9 +198,9 @@
 #define ACTOR_TYPE_COUNT 0xD4
 
 #define AREA(id) \
-    .dmaStart = &code_##id##_ROM_START, \
-    .dmaEnd = &code_##id##_ROM_END, \
-    .dmaDest = &code_##id##_VRAM
+    .dmaStart = battle_##id##_ROM_START, \
+    .dmaEnd = battle_##id##_ROM_END, \
+    .dmaDest = battle_##id##_VRAM
 
 typedef struct ActorPartDesc {
     /* 0x00 */ s32 flags;

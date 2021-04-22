@@ -34,7 +34,7 @@ glabel func_802A13E4_72C994
 glabel L802A143C_72C9EC
 /* 72C9EC 802A143C 3C05802A */  lui       $a1, %hi(battle_item_mystery_func_802A123C_72C7EC)
 /* 72C9F0 802A1440 24A5123C */  addiu     $a1, $a1, %lo(battle_item_mystery_func_802A123C_72C7EC)
-/* 72C9F4 802A1444 0C048C8F */  jal       bind_dynamic_entity_7
+/* 72C9F4 802A1444 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 72C9F8 802A1448 0000202D */   daddu    $a0, $zero, $zero
 /* 72C9FC 802A144C 3C01802A */  lui       $at, %hi(D_802A25F8)
 /* 72CA00 802A1450 AC2225F8 */  sw        $v0, %lo(D_802A25F8)($at)
@@ -309,7 +309,7 @@ glabel L802A17CC_72CD7C
 /* 72CDE4 802A1834 A642017A */  sh        $v0, 0x17a($s2)
 /* 72CDE8 802A1838 00021400 */  sll       $v0, $v0, 0x10
 /* 72CDEC 802A183C 00021403 */  sra       $v0, $v0, 0x10
-/* 72CDF0 802A1840 0C048D70 */  jal       func_801235C0
+/* 72CDF0 802A1840 0C048D70 */  jal       free_dynamic_entity
 /* 72CDF4 802A1844 ACC20084 */   sw       $v0, 0x84($a2)
 .L802A1848:
 /* 72CDF8 802A1848 8E240000 */  lw        $a0, ($s1)

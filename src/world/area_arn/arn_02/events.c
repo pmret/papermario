@@ -204,7 +204,7 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     f32 phi_f20;
     s32 ret = FALSE;
 
@@ -218,8 +218,8 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
     }
 
     playerStatus = &gPlayerStatusPtr;
-    if (fabsf(get_clamped_angle_diff(phi_f20, 
-            atan2(npc->pos.x, npc->pos.z, 
+    if (fabsf(get_clamped_angle_diff(phi_f20,
+            atan2(npc->pos.x, npc->pos.z,
                   (*playerStatus)->position.x, (*playerStatus)->position.z))) > 75.0) {
         ret = FALSE;
     }
@@ -346,7 +346,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    if (enemy->unk_B0 & 4) { 
+    if (enemy->unk_B0 & 4) {
         if (enemy->unk_B4 != 0) {
             return ApiStatus_BLOCK;
         }

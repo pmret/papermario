@@ -123,7 +123,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             s32 i;
             MenuIcon** iconPtr;
 
-            D_802A2E00 = bind_dynamic_entity_7(NULL, func_802A123C_73153C);
+            D_802A2E00 = create_dynamic_entity_frontUI(NULL, func_802A123C_73153C);
             i = rand_int(13000);
             D_802A2DF4 = i;
 
@@ -238,7 +238,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             g = N(D_802A2858_732B58)[i];
             battleStatus->selectedItemID = g;
             script->varTable[0] = g;
-            func_801235C0(D_802A2E00);
+            free_dynamic_entity(D_802A2E00);
             for (i = 0; i < 5; i++) {
                 free_icon(*iconPtr++);
             }

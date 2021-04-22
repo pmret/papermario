@@ -16,8 +16,8 @@ glabel func_8024140C_D659EC
 /* D65A18 80241438 1060001B */  beqz      $v1, .L802414A8
 /* D65A1C 8024143C 0040802D */   daddu    $s0, $v0, $zero
 /* D65A20 80241440 C6000040 */  lwc1      $f0, 0x40($s0)
-/* D65A24 80241444 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* D65A28 80241448 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* D65A24 80241444 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* D65A28 80241448 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* D65A2C 8024144C 27A20030 */  addiu     $v0, $sp, 0x30
 /* D65A30 80241450 AFA20010 */  sw        $v0, 0x10($sp)
 /* D65A34 80241454 27A20034 */  addiu     $v0, $sp, 0x34

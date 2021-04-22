@@ -18,8 +18,8 @@ glabel func_80240258_D11318
 /* D1134C 8024028C 0040802D */  daddu     $s0, $v0, $zero
 /* D11350 80240290 3C05800B */  lui       $a1, %hi(gCameras)
 /* D11354 80240294 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* D11358 80240298 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D1135C 8024029C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D11358 80240298 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D1135C 8024029C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D11360 802402A0 00912021 */  addu      $a0, $a0, $s1
 /* D11364 802402A4 00031080 */  sll       $v0, $v1, 2
 /* D11368 802402A8 00431021 */  addu      $v0, $v0, $v1

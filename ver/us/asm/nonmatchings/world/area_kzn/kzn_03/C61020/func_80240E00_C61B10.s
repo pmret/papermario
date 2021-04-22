@@ -18,8 +18,8 @@ glabel func_80240E00_C61B10
 /* C61B44 80240E34 0040802D */  daddu     $s0, $v0, $zero
 /* C61B48 80240E38 3C05800B */  lui       $a1, %hi(gCameras)
 /* C61B4C 80240E3C 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* C61B50 80240E40 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* C61B54 80240E44 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* C61B50 80240E40 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* C61B54 80240E44 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* C61B58 80240E48 00912021 */  addu      $a0, $a0, $s1
 /* C61B5C 80240E4C 00031080 */  sll       $v0, $v1, 2
 /* C61B60 80240E50 00431021 */  addu      $v0, $v0, $v1

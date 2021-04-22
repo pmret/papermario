@@ -42,6 +42,7 @@ Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
 void func_80070550(s32, f32, f32, f32, f32, f32, s32, s32);
 void func_802E263C(Entity* entity);
+void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
@@ -81,6 +82,8 @@ void func_800706D0(s32, f32, f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
+
+// TODO: out types are s32 not f32
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
@@ -96,15 +99,15 @@ Npc* make_disguise_npc(s32 peachDisguise);
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
-
 void func_80027088(s32);
+void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
-
+void func_80070F70(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
 void func_80071090(s32, f32, f32, f32, s32);
 Effect* func_80071750(s32, f32, f32, f32, f32, s32);
 Effect* func_800720B0(s32, f32, f32, f32, f32, s32);
@@ -192,7 +195,7 @@ void clear_partner_move_history(Npc* partner);
 
 void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
-void set_parter_tether_distance(f32);
+void set_partner_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
@@ -220,7 +223,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(s32* updateFunc, void (*drawFunc)(void));
+s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 s32 get_dynamic_entity(s32 arg0);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
@@ -296,12 +299,12 @@ s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
-
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;
 extern f32 gCurtainFade;
 extern f32 gCurtainFadeGoal;
 extern UNK_FUN_PTR(gCurtainDrawCallback);
+void func_802DDA8C(s32, s32, f32);
 
 void initialize_curtains(void);
 void update_curtains(void);
@@ -340,5 +343,9 @@ ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall);
+
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+EntityModel* get_entity_model(s32 idx);
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 #endif

@@ -12,6 +12,7 @@ expected/
 .vscode/launch.json
 /tools/star-rod
 /ver/current
+/ver/*/assets
 
 # Build artifacts
 build.ninja
@@ -27,13 +28,15 @@ build.ninja
 *.zip
 baserom.*
 build/
-assets/
+!tools/build
 /docs/doxygen/
 /include/ld_addrs.h
 /include/message_ids.h
 /include/sprite/
 /include/map
-/tools/permuter_settings.toml
+
+# Assets
+/assets/*
 
 # Star Rod
 /sprite/SpriteTable.xml

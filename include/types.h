@@ -10,6 +10,11 @@
 #define UNK_FUN_PTR(name) void(*name)(void)
 #define UNK_ARGS
 
+typedef void (*UnkFunc)();
+
+/// Linker symbol address, as in `ld_addrs.h`.
+typedef u8 Addr[];
+
 typedef s32 BattleID;
 #define BATTLE_ID(unk, area, stage, index) ((unk << 24) + (area << 16) + (stage << 8) + index)
 

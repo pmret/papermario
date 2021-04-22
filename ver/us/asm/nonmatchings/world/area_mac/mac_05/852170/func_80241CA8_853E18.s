@@ -43,7 +43,7 @@ glabel func_80241CA8_853E18
 /* 853EA8 80241D38 ACA00018 */   sw       $zero, 0x18($a1)
 /* 853EAC 80241D3C 3C048025 */  lui       $a0, %hi(D_802529D0)
 /* 853EB0 80241D40 8C8429D0 */  lw        $a0, %lo(D_802529D0)($a0)
-/* 853EB4 80241D44 0C048D70 */  jal       func_801235C0
+/* 853EB4 80241D44 0C048D70 */  jal       free_dynamic_entity
 /* 853EB8 80241D48 00000000 */   nop
 /* 853EBC 80241D4C 24020002 */  addiu     $v0, $zero, 2
 .L80241D50:

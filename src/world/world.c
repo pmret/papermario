@@ -130,10 +130,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_script_list();
     create_cameras_a();
     gameStatus2 = &gGameStatusPtr;
-    func_802DD8F8((*gameStatus2)->unk_84);
+    spr_init_sprites((*gameStatus2)->unk_84);
     func_8011E224();
     clear_entity_models();
-    clear_npcs();
+    npc_list_clear();
     func_80141100();
     clear_trigger_data();
     clear_model_data();
@@ -274,17 +274,17 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 #define MAP(map) \
     .id = #map, \
     .config = &map##_config, \
-    .dmaStart = &code_##map##_ROM_START, \
-    .dmaEnd = &code_##map##_ROM_END, \
-    .dmaDest = &code_##map##_VRAM \
+    .dmaStart = map##_ROM_START, \
+    .dmaEnd = map##_ROM_END, \
+    .dmaDest = map##_VRAM \
 
 // Should be removed once the data section containing .init and .config of all maps have been disassembled
 #define MAP_UNSPLIT(map, configVRAM) \
     .id = #map, \
     .config = (MapConfig*)(configVRAM), \
-    .dmaStart = &code_##map##_ROM_START, \
-    .dmaEnd = &code_##map##_ROM_END, \
-    .dmaDest = &code_##map##_VRAM \
+    .dmaStart = map##_ROM_START, \
+    .dmaEnd = map##_ROM_END, \
+    .dmaDest = map##_VRAM \
 
 
 // these, along with all the *_maps, almost certainly belong in the next file

@@ -7,8 +7,8 @@ glabel func_80240B78_A67C78
 /* A67C80 80240B80 0080982D */  daddu     $s3, $a0, $zero
 /* A67C84 80240B84 AFB40040 */  sw        $s4, 0x40($sp)
 /* A67C88 80240B88 0000A02D */  daddu     $s4, $zero, $zero
-/* A67C8C 80240B8C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A67C90 80240B90 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A67C8C 80240B8C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A67C90 80240B90 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A67C94 80240B94 3C04800B */  lui       $a0, %hi(gCameras)
 /* A67C98 80240B98 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* A67C9C 80240B9C AFBF0044 */  sw        $ra, 0x44($sp)

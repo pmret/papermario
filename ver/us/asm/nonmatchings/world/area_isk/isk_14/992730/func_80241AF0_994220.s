@@ -46,7 +46,7 @@ glabel func_80241AF0_994220
 /* 9942C4 80241B94 E6000028 */  swc1      $f0, 0x28($s0)
 /* 9942C8 80241B98 E600002C */  swc1      $f0, 0x2c($s0)
 /* 9942CC 80241B9C E6000030 */  swc1      $f0, 0x30($s0)
-/* 9942D0 80241BA0 0C048C8F */  jal       bind_dynamic_entity_7
+/* 9942D0 80241BA0 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 9942D4 80241BA4 E6040018 */   swc1     $f4, 0x18($s0)
 /* 9942D8 80241BA8 AE020004 */  sw        $v0, 4($s0)
 /* 9942DC 80241BAC 8FBF0028 */  lw        $ra, 0x28($sp)

@@ -20,7 +20,7 @@ ApiStatus func_80241CC8_8D31D8(ScriptInstance* script, s32 isInitialCall) {
     s32 mapVar11 = get_variable(script, SI_MAP_VAR(11));
     s32 mapVar12 = get_variable(script, SI_MAP_VAR(12));
 
-    func_801235C0(mapVar10[1]);
+    free_dynamic_entity(mapVar10[1]);
 
     heap_free(mapVar10);
     heap_free(mapVar11);

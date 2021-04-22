@@ -5,8 +5,8 @@ glabel func_802403B8_B1CE08
 /* B1CE08 802403B8 27BDFEA0 */  addiu     $sp, $sp, -0x160
 /* B1CE0C 802403BC F7B40138 */  sdc1      $f20, 0x138($sp)
 /* B1CE10 802403C0 4480A000 */  mtc1      $zero, $f20
-/* B1CE14 802403C4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* B1CE18 802403C8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* B1CE14 802403C4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* B1CE18 802403C8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* B1CE1C 802403CC F7BC0158 */  sdc1      $f28, 0x158($sp)
 /* B1CE20 802403D0 3C01BF80 */  lui       $at, 0xbf80
 /* B1CE24 802403D4 4481E000 */  mtc1      $at, $f28

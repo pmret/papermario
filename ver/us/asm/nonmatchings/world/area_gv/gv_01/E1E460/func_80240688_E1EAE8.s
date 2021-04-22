@@ -29,7 +29,7 @@ glabel func_80240688_E1EAE8
 /* E1EB48 802406E8 00000000 */   nop
 /* E1EB4C 802406EC 0C00B7BD */  jal       create_cameras_a
 /* E1EB50 802406F0 00000000 */   nop
-/* E1EB54 802406F4 0C0B763E */  jal       func_802DD8F8
+/* E1EB54 802406F4 0C0B763E */  jal       spr_init_sprites
 /* E1EB58 802406F8 0000202D */   daddu    $a0, $zero, $zero
 /* E1EB5C 802406FC 0C0482EC */  jal       clear_entity_models
 /* E1EB60 80240700 00000000 */   nop
@@ -53,7 +53,7 @@ glabel func_80240688_E1EAE8
 /* E1EBA8 80240748 00000000 */   nop
 /* E1EBAC 8024074C 0C037F14 */  jal       clear_player_status
 /* E1EBB0 80240750 00000000 */   nop
-/* E1EBB4 80240754 0C00E12F */  jal       clear_npcs
+/* E1EBB4 80240754 0C00E12F */  jal       npc_list_clear
 /* E1EBB8 80240758 00000000 */   nop
 /* E1EBBC 8024075C 0C039CE8 */  jal       clear_player_data
 /* E1EBC0 80240760 00000000 */   nop

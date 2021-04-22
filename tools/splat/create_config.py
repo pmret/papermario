@@ -3,7 +3,6 @@
 import argparse
 from util.n64 import rominfo
 from util.n64 import find_code_length
-from segtypes.n64.code import N64SegCode
 
 parser = argparse.ArgumentParser(description="Create a splat config from a rom (currently only n64 .z64 roms supported)")
 parser.add_argument("rom", help="path to a .z64 rom")
@@ -20,7 +19,7 @@ options:
   find_file_boundaries: True
   compiler: IDO
   platform: n64
-  out_dir: .
+  base_dir: .
   target_path: baserom.z64
 """.format(rom.name.title(), rom.get_country_name(), basename)
 
@@ -41,7 +40,7 @@ options:
     type: code
     start: 0x1000
     vram: 0x{:X}
-    subsections:
+    subsegments:
       - [0x1000, asm]
   - type: bin
     start: 0x{:X}
