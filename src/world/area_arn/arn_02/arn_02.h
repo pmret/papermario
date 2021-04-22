@@ -13,4 +13,4 @@ NpcGroupList N(npcGroupList_80241A9C);
 Script N(makeEntities);
 ApiStatus N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall);
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;

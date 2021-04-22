@@ -67,8 +67,6 @@ extern ShadowList* gCurrentShadowListPtr;
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
 
-extern Npc* gPlayerNpcPtr;
-
 extern CollisionData gCollisionData;
 
 extern s8 D_800A0900;
@@ -233,8 +231,15 @@ extern s32 D_800B0CF0;
 extern s32 D_800D91E0;
 extern s32 D_800D9230;
 extern s32* D_80210000;
-extern s8 D_802D9D70;
-extern s8 D_802D9D71;
+extern u8 D_802D9D70; // player alpha1 copy?
+extern u8 D_802D9D71; // player alpha2 copy?
+
+
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
 
 extern s16 gCurrentDoorSoundsSet;
 
@@ -275,12 +280,12 @@ extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
 extern s32 D_8009A5D0;
-extern s32 D_8009A5D8;
+extern s32 timeFreezeMode;
 extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
-extern s32 D_8009A5D8;
+extern s32 timeFreezeMode;
 extern u8 D_800A0963;
 
 extern s32 D_8009A5D0;
@@ -305,9 +310,8 @@ extern UNK_TYPE D_0A000808;
 
 // Scripts
 extern Bytecode* SCRIPT_NpcDefeat;
-extern Bytecode* ShakeCam1;
-extern Bytecode* ShakeCamX;
-extern Bytecode* D_802D9D50;
+extern Script ShakeCam1;
+extern Script ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
@@ -353,6 +357,8 @@ extern UNK_PTR D_800F7BE8;
 extern UNK_PTR D_800F7BBC;
 
 extern s32 D_802C05CC;
+
+extern s16 gCurrentCamID;
 
 // Heap?
 extern s32 D_803DA800;

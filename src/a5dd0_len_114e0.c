@@ -14,8 +14,8 @@ typedef struct Fog {
 typedef struct RenderTaskEntry {
     /* 0x00 */ s32 unk_00;
     /* 0x04 */ s32 unk_04;
-    /* 0x08 */ struct Model* model;
-    /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
+    /* 0x08 */ void* appendGfxArg;
+    /* 0x0C */ void (*appendGfx)(void*);
 } RenderTaskEntry; // size = 0x10
 
 typedef Model* SmallModelList[4];
@@ -195,7 +195,7 @@ s32 is_player_action_state(ActionState actionState) {
 
 void func_80110BCC(Entity *entity) {
     if (!(entity->flags & 8)) {
-        func_80122D7C(entity->virtualModelIndex);
+        set_entity_model_render_command_list(entity->virtualModelIndex);
     }
 }
 
@@ -690,8 +690,8 @@ RenderTaskEntry* queue_render_task(RenderTask* task) {
         entry->unk_00 = 0x21;
     }
 
-    entry->model = task->model;
-    entry->fpBuildDL = task->fpBuildDL;
+    entry->appendGfxArg = task->appendGfxArg;
+    entry->appendGfx = task->appendGfx;
     entry->unk_04 = D_8014C188[task->renderMode] - task->distance;
 
     return entry;

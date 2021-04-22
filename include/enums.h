@@ -1546,8 +1546,9 @@ enum NpcFlags {
     NPC_FLAG_4000              = 0x00004000,
     NPC_FLAG_8000              = 0x00008000,
     NPC_FLAG_DIRTY_SHADOW      = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
-    NPC_FLAG_INVISIBLE         = 0x00020000, ///< Invisible sprite (shadow and particles still render) (TODO: possibly causes loading of player sprites instead?)
-    NPC_FLAG_40000             = 0x00040000, ///< Related to NPC_FLAG_8000
+    NPC_FLAG_REFLECT_WALL      = 0x00020000, ///< Mirror rendering across z=0
+    NPC_FLAG_40000             = 0x00040000, ///< Yaw?
+    NPC_FLAG_REFLECT_FLOOR     = 0x00080000, ///< Mirror rendering across y=0
     NPC_FLAG_MOTION_BLUR       = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
     NPC_FLAG_200000            = 0x00200000,
     NPC_FLAG_400000            = 0x00400000,
@@ -1580,6 +1581,33 @@ enum PlayerAnimFlags {
     PLAYER_ANIM_FLAG_PEACH_PHYSICS   = 0x00001000,
     PLAYER_ANIM_FLAG_IN_DISGUISE     = 0x00002000,
     PLAYER_ANIM_FLAG_8BIT_MARIO      = 0x00004000,
+};
+
+/// not really
+enum RenderMode {
+    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
+    RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
+    RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
+    RENDER_MODE_DECAL_OPA               = 0x05,
+    RENDER_MODE_DECAL_OPA_NO_AA         = 0x07,
+    RENDER_MODE_INTERSECTING_OPA        = 0x09,
+    RENDER_MODE_ALPHATEST               = 0x0D,
+    RENDER_MODE_ALPHATEST_ONESIDED      = 0x0F,
+    RENDER_MODE_ALPHATEST_NO_ZB         = 0x10,
+    RENDER_MODE_SURFACE_XLU_LAYER1      = 0x11,
+    RENDER_MODE_SURFACE_XLU_NO_AA       = 0x13,
+    RENDER_MODE_SURFACE_XLU_NO_ZB       = 0x14,
+    RENDER_MODE_SURF_XLU_ZB_ZUPD        = 0x15,
+    RENDER_MODE_SURFACE_XLU_LAYER2      = 0x16,
+    RENDER_MODE_DECAL_XLU               = 0x1A,
+    RENDER_MODE_DECAL_XLU_NO_AA         = 0x1C,
+    RENDER_MODE_SHADOW                  = 0x20,
+    RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
+    RENDER_MODE_INTERSECTING_XLU        = 0x26,
+    RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_CLOUD                   = 0x2E,
+    RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
 };
 
 #endif

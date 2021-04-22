@@ -22,7 +22,7 @@ glabel func_802413D0_BCFFC0
 /* BD0004 80241414 00000000 */   nop
 /* BD0008 80241418 0C05123D */  jal       free_icon
 /* BD000C 8024141C 8E040044 */   lw       $a0, 0x44($s0)
-/* BD0010 80241420 0C048D70 */  jal       func_801235C0
+/* BD0010 80241420 0C048D70 */  jal       free_dynamic_entity
 /* BD0014 80241424 8E04002C */   lw       $a0, 0x2c($s0)
 /* BD0018 80241428 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BD001C 8024142C 8FB00010 */  lw        $s0, 0x10($sp)

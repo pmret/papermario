@@ -7,7 +7,7 @@ glabel func_80243FC4_A2E204
 /* A2E20C 80243FCC 3C058024 */  lui       $a1, %hi(func_80243CC0_A2DF00)
 /* A2E210 80243FD0 24A53CC0 */  addiu     $a1, $a1, %lo(func_80243CC0_A2DF00)
 /* A2E214 80243FD4 AFBF0014 */  sw        $ra, 0x14($sp)
-/* A2E218 80243FD8 0C048C8F */  jal       bind_dynamic_entity_7
+/* A2E218 80243FD8 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* A2E21C 80243FDC AFB00010 */   sw       $s0, 0x10($sp)
 /* A2E220 80243FE0 3C040001 */  lui       $a0, 1
 /* A2E224 80243FE4 3C108025 */  lui       $s0, %hi(D_8024AA20_A34C60)

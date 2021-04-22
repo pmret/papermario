@@ -271,8 +271,8 @@ glabel func_8013CFA8
 /* D3AB8 8013D3B8 00581024 */  and       $v0, $v0, $t8
 /* D3ABC 8013D3BC 50400057 */  beql      $v0, $zero, .L8013D51C
 /* D3AC0 8013D3C0 AFAE0010 */   sw       $t6, 0x10($sp)
-/* D3AC4 8013D3C4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D3AC8 8013D3C8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D3AC4 8013D3C4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D3AC8 8013D3C8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D3ACC 8013D3CC 00031080 */  sll       $v0, $v1, 2
 /* D3AD0 8013D3D0 00431021 */  addu      $v0, $v0, $v1
 /* D3AD4 8013D3D4 00021080 */  sll       $v0, $v0, 2
@@ -478,8 +478,8 @@ glabel func_8013CFA8
 /* D3DD0 8013D6D0 00581024 */  and       $v0, $v0, $t8
 /* D3DD4 8013D6D4 10400098 */  beqz      $v0, .L8013D938
 /* D3DD8 8013D6D8 240900FF */   addiu    $t1, $zero, 0xff
-/* D3DDC 8013D6DC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D3DE0 8013D6E0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D3DDC 8013D6DC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D3DE0 8013D6E0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D3DE4 8013D6E4 00031080 */  sll       $v0, $v1, 2
 /* D3DE8 8013D6E8 00431021 */  addu      $v0, $v0, $v1
 /* D3DEC 8013D6EC 00021080 */  sll       $v0, $v0, 2
@@ -659,8 +659,8 @@ glabel func_8013CFA8
 /* D4068 8013D968 00581024 */  and       $v0, $v0, $t8
 /* D406C 8013D96C 1040002C */  beqz      $v0, .L8013DA20
 /* D4070 8013D970 3C050100 */   lui      $a1, 0x100
-/* D4074 8013D974 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D4078 8013D978 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D4074 8013D974 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D4078 8013D978 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D407C 8013D97C 3C058007 */  lui       $a1, %hi(gGameStatusPtr)
 /* D4080 8013D980 8CA5419C */  lw        $a1, %lo(gGameStatusPtr)($a1)
 /* D4084 8013D984 00031080 */  sll       $v0, $v1, 2

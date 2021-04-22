@@ -11,7 +11,7 @@ glabel func_80268E88
 /* 197780 80268EA0 3C058027 */  lui       $a1, %hi(func_80268AF8)
 /* 197784 80268EA4 24A58AF8 */  addiu     $a1, $a1, %lo(func_80268AF8)
 /* 197788 80268EA8 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 19778C 80268EAC 0C048C8F */  jal       bind_dynamic_entity_7
+/* 19778C 80268EAC 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 197790 80268EB0 00000000 */   nop
 /* 197794 80268EB4 AE020000 */  sw        $v0, ($s0)
 /* 197798 80268EB8 A600004A */  sh        $zero, 0x4a($s0)

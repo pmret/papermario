@@ -75,8 +75,8 @@ void func_800E205C(void) {
     playerStatus->renderMode = 0xD;
 
     gameStatus = &gGameStatusPtr;
-    playerStatus->unk_0E = 255;
-    playerStatus->unk_0F = 255;
+    playerStatus->alpha1 = 255;
+    playerStatus->alpha2 = 255;
     (*gameStatus)->peachFlags &= ~0x8;
     (*gameStatus)->peachFlags &= ~0x10;
 

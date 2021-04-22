@@ -2,7 +2,7 @@
 #include "sprite/npc/world_clubba.h"
 #include "message_ids.h"
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;
 extern Npc* wPartnerNpc;
 
 enum {
@@ -750,7 +750,7 @@ s32 N(func_80240458_C31938)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;

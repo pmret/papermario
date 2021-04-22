@@ -18,8 +18,8 @@ glabel func_80241228_C77F08
 /* C77F3C 8024125C 0040802D */  daddu     $s0, $v0, $zero
 /* C77F40 80241260 3C05800B */  lui       $a1, %hi(gCameras)
 /* C77F44 80241264 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* C77F48 80241268 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* C77F4C 8024126C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* C77F48 80241268 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* C77F4C 8024126C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* C77F50 80241270 00912021 */  addu      $a0, $a0, $s1
 /* C77F54 80241274 00031080 */  sll       $v0, $v1, 2
 /* C77F58 80241278 00431021 */  addu      $v0, $v0, $v1

@@ -1117,8 +1117,8 @@ typedef struct ItemEntityPhysicsData {
 typedef struct RenderTask {
     /* 0x00 */ s32 renderMode;
     /* 0x04 */ s32 distance; /* value between 0 and -10k */
-    /* 0x08 */ struct Model* model;
-    /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
+    /* 0x08 */ void* appendGfxArg;
+    /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
 
 typedef struct SelectableTarget {
@@ -1543,8 +1543,8 @@ typedef struct PlayerStatus {
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ s8 unk_0D;
-    /* 0x00E */ u8 unk_0E;
-    /* 0x00F */ u8 unk_0F;
+    /* 0x00E */ u8 alpha1;
+    /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 unk_10;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
@@ -1567,13 +1567,13 @@ typedef struct PlayerStatus {
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
-    /* 0x08C */ s32 unk_8C;
+    /* 0x08C */ f32 unk_8C;
     /* 0x090 */ f32 unk_90;
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ f32 heading;
-    /* 0x0A4 */ char unk_A4[4];
+    /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
@@ -1584,7 +1584,7 @@ typedef struct PlayerStatus {
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
     /* 0x0BC */ u16 unk_BC;
-    /* 0x0BE */ u8 renderMode;
+    /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;
     /* 0x0C2 */ s16 unk_C2;

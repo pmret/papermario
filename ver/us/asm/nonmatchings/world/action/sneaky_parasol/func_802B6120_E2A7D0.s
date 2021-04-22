@@ -172,7 +172,7 @@ glabel L802B6324_E2A9D4
 /* E2AA08 802B6358 080ADA7C */  j         L802B69F0_E2B0A0
 /* E2AA0C 802B635C A22200B6 */   sb       $v0, 0xb6($s1)
 .L802B6360:
-/* E2AA10 802B6360 0C009C22 */  jal       func_80027088
+/* E2AA10 802B6360 0C009C22 */  jal       set_time_freeze_mode
 /* E2AA14 802B6364 24040002 */   addiu    $a0, $zero, 2
 /* E2AA18 802B6368 080ADA7C */  j         L802B69F0_E2B0A0
 /* E2AA1C 802B636C 00000000 */   nop
@@ -364,7 +364,7 @@ glabel L802B661C_E2ACCC
 /* E2ACD8 802B6628 00021400 */  sll       $v0, $v0, 0x10
 /* E2ACDC 802B662C 144000F0 */  bnez      $v0, L802B69F0_E2B0A0
 /* E2ACE0 802B6630 00000000 */   nop
-/* E2ACE4 802B6634 0C009C22 */  jal       func_80027088
+/* E2ACE4 802B6634 0C009C22 */  jal       set_time_freeze_mode
 /* E2ACE8 802B6638 0000202D */   daddu    $a0, $zero, $zero
 /* E2ACEC 802B663C 3C048011 */  lui       $a0, %hi(D_8010C96C)
 /* E2ACF0 802B6640 8C84C96C */  lw        $a0, %lo(D_8010C96C)($a0)
@@ -591,7 +591,7 @@ glabel L802B6968_E2B018
 /* E2B024 802B6974 00021400 */  sll       $v0, $v0, 0x10
 /* E2B028 802B6978 1440001D */  bnez      $v0, L802B69F0_E2B0A0
 /* E2B02C 802B697C 00000000 */   nop
-/* E2B030 802B6980 0C009C22 */  jal       func_80027088
+/* E2B030 802B6980 0C009C22 */  jal       set_time_freeze_mode
 /* E2B034 802B6984 0000202D */   daddu    $a0, $zero, $zero
 /* E2B038 802B6988 3C03FFEF */  lui       $v1, 0xffef
 /* E2B03C 802B698C 3463FFFF */  ori       $v1, $v1, 0xffff

@@ -275,8 +275,8 @@ glabel func_8011D9B8
 /* B449C 8011DD9C AC77000C */  sw        $s7, 0xc($v1)
 /* B44A0 8011DDA0 AE220000 */  sw        $v0, ($s1)
 /* B44A4 8011DDA4 AC640014 */  sw        $a0, 0x14($v1)
-/* B44A8 8011DDA8 3C04800A */  lui       $a0, %hi(D_8009A634)
-/* B44AC 8011DDAC 8484A634 */  lh        $a0, %lo(D_8009A634)($a0)
+/* B44A8 8011DDA8 3C04800A */  lui       $a0, %hi(gCurrentCamID)
+/* B44AC 8011DDAC 8484A634 */  lh        $a0, %lo(gCurrentCamID)($a0)
 /* B44B0 8011DDB0 24620020 */  addiu     $v0, $v1, 0x20
 /* B44B4 8011DDB4 AC720010 */  sw        $s2, 0x10($v1)
 /* B44B8 8011DDB8 AE220000 */  sw        $v0, ($s1)

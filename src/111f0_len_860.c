@@ -34,7 +34,7 @@ void func_80035E54(void) {
     OVERRIDE_FLAG_SET(0x8);
 
     set_variable(0, SI_SAVE_VAR(1), (*gameStatus)->unk_A9);
-    D_8009A5D8 = 0;
+    timeFreezeMode = 0;
 }
 
 INCLUDE_ASM(s32, "111f0_len_860", func_80035EEC);

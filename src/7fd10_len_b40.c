@@ -6,9 +6,9 @@ void func_800E6860(void) {
     if (D_8010EBB0.unk_00 != 0 && D_8010EBB0.unk_03 == 9) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
-        func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->unk_0E, 0);
-        func_8003D624(partner, 7, playerStatus->unk_0E, 0, 0, 0, 0);
-        playerStatus->unk_0F = 0;
+        func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+        func_8003D624(partner, 7, playerStatus->alpha1, 0, 0, 0, 0);
+        playerStatus->alpha2 = 0;
     }
 }
 

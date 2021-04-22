@@ -241,7 +241,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242974_9D9994);
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242BD0_9D9BF0);
 /*

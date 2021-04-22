@@ -51,7 +51,7 @@ glabel func_8003E338
 /* 197E0 8003E3E0 24A5E670 */  addiu     $a1, $a1, %lo(npc_dyn_entity_draw_no_op)
 /* 197E4 8003E3E4 3C01800A */  lui       $at, %hi(gGameState)
 /* 197E8 8003E3E8 AC20A600 */  sw        $zero, %lo(gGameState)($at)
-/* 197EC 8003E3EC 0C048C56 */  jal       bind_dynamic_entity_3
+/* 197EC 8003E3EC 0C048C56 */  jal       create_dynamic_entity_world
 /* 197F0 8003E3F0 0000202D */   daddu    $a0, $zero, $zero
 /* 197F4 8003E3F4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 197F8 8003E3F8 03E00008 */  jr        $ra

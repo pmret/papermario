@@ -19,8 +19,8 @@ glabel func_80241D30_A95470
 /* A954A8 80241D68 0040882D */  daddu     $s1, $v0, $zero
 /* A954AC 80241D6C 4406A000 */  mfc1      $a2, $f20
 /* A954B0 80241D70 4407B000 */  mfc1      $a3, $f22
-/* A954B4 80241D74 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A954B8 80241D78 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A954B4 80241D74 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A954B8 80241D78 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A954BC 80241D7C 3C05800B */  lui       $a1, %hi(gCameras)
 /* A954C0 80241D80 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* A954C4 80241D84 AFA00010 */  sw        $zero, 0x10($sp)

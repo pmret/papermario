@@ -7,8 +7,8 @@ glabel func_80242F44_DF1DE4
 /* DF1DEC 80242F4C 0080982D */  daddu     $s3, $a0, $zero
 /* DF1DF0 80242F50 AFB40040 */  sw        $s4, 0x40($sp)
 /* DF1DF4 80242F54 0000A02D */  daddu     $s4, $zero, $zero
-/* DF1DF8 80242F58 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* DF1DFC 80242F5C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* DF1DF8 80242F58 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* DF1DFC 80242F5C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* DF1E00 80242F60 3C04800B */  lui       $a0, %hi(gCameras)
 /* DF1E04 80242F64 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* DF1E08 80242F68 AFBF0044 */  sw        $ra, 0x44($sp)

@@ -43,7 +43,7 @@ glabel update_item_entity_temp
 /* CBE58 80135758 8C620000 */  lw        $v0, ($v1)
 /* CBE5C 8013575C 24040002 */  addiu     $a0, $zero, 2
 /* CBE60 80135760 34420040 */  ori       $v0, $v0, 0x40
-/* CBE64 80135764 0C009C22 */  jal       func_80027088
+/* CBE64 80135764 0C009C22 */  jal       set_time_freeze_mode
 /* CBE68 80135768 AC620000 */   sw       $v0, ($v1)
 .L8013576C:
 /* CBE6C 8013576C 0C04C3DC */  jal       func_80130F70
@@ -624,7 +624,7 @@ glabel L80135F94_CC694
 /* CC69C 80135F9C 00431024 */  and       $v0, $v0, $v1
 /* CC6A0 80135FA0 1440000D */  bnez      $v0, .L80135FD8
 /* CC6A4 80135FA4 00000000 */   nop
-/* CC6A8 80135FA8 0C009C22 */  jal       func_80027088
+/* CC6A8 80135FA8 0C009C22 */  jal       set_time_freeze_mode
 /* CC6AC 80135FAC 0000202D */   daddu    $a0, $zero, $zero
 /* CC6B0 80135FB0 0C038069 */  jal       enable_player_input
 /* CC6B4 80135FB4 00000000 */   nop
@@ -857,7 +857,7 @@ glabel L80136310_CCA10
 /* CCA10 80136310 3C040001 */  lui       $a0, 1
 /* CCA14 80136314 0C037FDE */  jal       func_800DFF78
 /* CCA18 80136318 34840002 */   ori      $a0, $a0, 2
-/* CCA1C 8013631C 0C009C22 */  jal       func_80027088
+/* CCA1C 8013631C 0C009C22 */  jal       set_time_freeze_mode
 /* CCA20 80136320 0000202D */   daddu    $a0, $zero, $zero
 /* CCA24 80136324 0C038069 */  jal       enable_player_input
 /* CCA28 80136328 00000000 */   nop

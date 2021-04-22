@@ -19,8 +19,8 @@ glabel func_802400A0_A4CAC0
 /* A4CAF8 802400D8 0040882D */  daddu     $s1, $v0, $zero
 /* A4CAFC 802400DC 4406A000 */  mfc1      $a2, $f20
 /* A4CB00 802400E0 4407B000 */  mfc1      $a3, $f22
-/* A4CB04 802400E4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A4CB08 802400E8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A4CB04 802400E4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A4CB08 802400E8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A4CB0C 802400EC 3C05800B */  lui       $a1, %hi(gCameras)
 /* A4CB10 802400F0 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* A4CB14 802400F4 AFA00010 */  sw        $zero, 0x10($sp)

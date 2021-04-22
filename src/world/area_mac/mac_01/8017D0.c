@@ -291,7 +291,7 @@ ApiStatus func_80243AA0_804320(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80243CD4_804554);
 /*

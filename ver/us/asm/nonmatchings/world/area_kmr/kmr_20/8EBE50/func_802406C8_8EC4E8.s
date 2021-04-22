@@ -278,7 +278,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC8E0 80240AC0 8FA70010 */  lw        $a3, 0x10($sp)
 /* 8EC8E4 80240AC4 3C058024 */  lui       $a1, %hi(func_802405BC_8EC3DC)
 /* 8EC8E8 80240AC8 24A505BC */  addiu     $a1, $a1, %lo(func_802405BC_8EC3DC)
-/* 8EC8EC 80240ACC 0C048C8F */  jal       bind_dynamic_entity_7
+/* 8EC8EC 80240ACC 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 8EC8F0 80240AD0 AE270024 */   sw       $a3, 0x24($s1)
 /* 8EC8F4 80240AD4 3C018026 */  lui       $at, %hi(D_8025B2A8)
 /* 8EC8F8 80240AD8 AC22B2A8 */  sw        $v0, %lo(D_8025B2A8)($at)

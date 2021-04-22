@@ -137,7 +137,7 @@ ApiStatus N(func_80241D60_DB4020)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
 /*

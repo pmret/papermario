@@ -8,7 +8,7 @@ glabel func_80241D08_9914E8
 /* 9914F4 80241D14 0C0B1EAF */  jal       get_variable
 /* 9914F8 80241D18 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* 9914FC 80241D1C 8C440008 */  lw        $a0, 8($v0)
-/* 991500 80241D20 0C048D70 */  jal       func_801235C0
+/* 991500 80241D20 0C048D70 */  jal       free_dynamic_entity
 /* 991504 80241D24 00000000 */   nop
 /* 991508 80241D28 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 99150C 80241D2C 24020002 */  addiu     $v0, $zero, 2

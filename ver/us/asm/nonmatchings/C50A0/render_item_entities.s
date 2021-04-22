@@ -61,8 +61,8 @@ glabel render_item_entities
 .L80132F28:
 /* C9628 80132F28 3C0E800B */  lui       $t6, %hi(gCameras)
 /* C962C 80132F2C 25CE1D80 */  addiu     $t6, $t6, %lo(gCameras)
-/* C9630 80132F30 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* C9634 80132F34 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* C9630 80132F30 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* C9634 80132F34 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* C9638 80132F38 3C014334 */  lui       $at, 0x4334
 /* C963C 80132F3C 44816000 */  mtc1      $at, $f12
 /* C9640 80132F40 00031080 */  sll       $v0, $v1, 2

@@ -118,7 +118,7 @@ glabel func_8024EFE0
 /* 17DA68 8024F188 8E04FFBC */  lw        $a0, -0x44($s0)
 /* 17DA6C 8024F18C 3C068025 */  lui       $a2, %hi(func_8024F768)
 /* 17DA70 8024F190 24C6F768 */  addiu     $a2, $a2, %lo(func_8024F768)
-/* 17DA74 8024F194 0C048BD9 */  jal       func_80122F64
+/* 17DA74 8024F194 0C048BD9 */  jal       bind_entity_model_setupGfx
 /* 17DA78 8024F198 0260282D */   daddu    $a1, $s3, $zero
 /* 17DA7C 8024F19C 0240102D */  daddu     $v0, $s2, $zero
 /* 17DA80 8024F1A0 E618FFF0 */  swc1      $f24, -0x10($s0)

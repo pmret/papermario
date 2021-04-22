@@ -3,8 +3,8 @@
 
 glabel func_80241F68_B36B38
 /* B36B38 80241F68 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* B36B3C 80241F6C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* B36B40 80241F70 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* B36B3C 80241F6C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* B36B40 80241F70 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* B36B44 80241F74 3C05800B */  lui       $a1, %hi(gCameras)
 /* B36B48 80241F78 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* B36B4C 80241F7C AFBF0010 */  sw        $ra, 0x10($sp)

@@ -35,7 +35,7 @@ glabel L80240720_AF8070
 /* AF8084 80240734 24A506A0 */  addiu     $a1, $a1, %lo(func_802406A0_AF7FF0)
 /* AF8088 80240738 3C018024 */  lui       $at, %hi(D_80246534)
 /* AF808C 8024073C AC226534 */  sw        $v0, %lo(D_80246534)($at)
-/* AF8090 80240740 0C048C8F */  jal       bind_dynamic_entity_7
+/* AF8090 80240740 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* AF8094 80240744 0000202D */   daddu    $a0, $zero, $zero
 /* AF8098 80240748 3C038024 */  lui       $v1, %hi(D_8024659C)
 /* AF809C 8024074C 2463659C */  addiu     $v1, $v1, %lo(D_8024659C)
@@ -271,7 +271,7 @@ glabel L80240A78_AF83C8
 /* AF83FC 80240AAC 8E040004 */   lw       $a0, 4($s0)
 /* AF8400 80240AB0 3C048024 */  lui       $a0, %hi(D_80246554)
 /* AF8404 80240AB4 8C846554 */  lw        $a0, %lo(D_80246554)($a0)
-/* AF8408 80240AB8 0C048D70 */  jal       func_801235C0
+/* AF8408 80240AB8 0C048D70 */  jal       free_dynamic_entity
 /* AF840C 80240ABC 00000000 */   nop
 /* AF8410 80240AC0 080902CA */  j         .L80240B28
 /* AF8414 80240AC4 24020002 */   addiu    $v0, $zero, 2

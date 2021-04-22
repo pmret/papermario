@@ -81,6 +81,8 @@ void func_800706D0(s32, f32, f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
+
+// TODO: out types are s32 not f32
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
@@ -97,7 +99,7 @@ s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
 
-void func_80027088(s32);
+void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 
@@ -216,7 +218,7 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(void (*updateFunc)(void), void (*drawFunc)(void));
+s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
 s32 get_dynamic_entity(s32 arg0);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
@@ -293,11 +295,7 @@ void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
+void func_802DDA8C(s32, s32, f32);
 
 void initialize_curtains(void);
 void update_curtains(void);
@@ -335,5 +333,8 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
 
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+EntityModel* get_entity_model(s32 idx);
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 #endif

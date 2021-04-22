@@ -124,8 +124,8 @@ void step_battle(void) {
             load_battle_section();
             D_800A0904 = gPlayerStatusPtr->animFlags;
             gPlayerStatusPtr->animFlags &= ~0x40;
-            D_800A0908 = func_80027190(gPlayerStatusPtr);
-            func_80027088(0);
+            D_800A0908 = get_time_freeze_mode(gPlayerStatusPtr);
+            set_time_freeze_mode(0);
             OVERRIDE_FLAG_UNSET(0x8);
 
             if (D_800A0900 >= 0) {

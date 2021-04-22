@@ -1818,8 +1818,8 @@ glabel L80114690_AAD90
 /* AB0E8 801149E8 3C04DA38 */   lui      $a0, 0xda38
 /* AB0EC 801149EC 8E050000 */  lw        $a1, ($s0)
 /* AB0F0 801149F0 8FB90038 */  lw        $t9, 0x38($sp)
-/* AB0F4 801149F4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* AB0F8 801149F8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* AB0F4 801149F4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* AB0F8 801149F8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* AB0FC 801149FC 00A0302D */  daddu     $a2, $a1, $zero
 /* AB100 80114A00 03371025 */  or        $v0, $t9, $s7
 /* AB104 80114A04 38420001 */  xori      $v0, $v0, 1

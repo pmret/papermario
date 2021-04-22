@@ -156,7 +156,7 @@ glabel L800EA83C_83CEC
 /* 83D9C 800EA8EC 24040001 */  addiu     $a0, $zero, 1
 /* 83DA0 800EA8F0 00641821 */  addu      $v1, $v1, $a0
 /* 83DA4 800EA8F4 AC45014C */  sw        $a1, 0x14c($v0)
-/* 83DA8 800EA8F8 0C009C22 */  jal       func_80027088
+/* 83DA8 800EA8F8 0C009C22 */  jal       set_time_freeze_mode
 /* 83DAC 800EA8FC AE230000 */   sw       $v1, ($s1)
 /* 83DB0 800EA900 0803AC53 */  j         L800EB14C_845FC
 /* 83DB4 800EA904 00000000 */   nop
@@ -167,7 +167,7 @@ glabel L800EA83C_83CEC
 /* 83DC4 800EA914 00000000 */   nop
 /* 83DC8 800EA918 1440020C */  bnez      $v0, L800EB14C_845FC
 /* 83DCC 800EA91C 00000000 */   nop
-/* 83DD0 800EA920 0C009C22 */  jal       func_80027088
+/* 83DD0 800EA920 0C009C22 */  jal       set_time_freeze_mode
 /* 83DD4 800EA924 0000202D */   daddu    $a0, $zero, $zero
 /* 83DD8 800EA928 0C03A9AA */  jal       func_800EA6A8
 /* 83DDC 800EA92C 00000000 */   nop
@@ -211,7 +211,7 @@ glabel L800EA83C_83CEC
 /* 83E70 800EA9C0 24040001 */  addiu     $a0, $zero, 1
 /* 83E74 800EA9C4 AC46014C */  sw        $a2, 0x14c($v0)
 /* 83E78 800EA9C8 00641821 */  addu      $v1, $v1, $a0
-/* 83E7C 800EA9CC 0C009C22 */  jal       func_80027088
+/* 83E7C 800EA9CC 0C009C22 */  jal       set_time_freeze_mode
 /* 83E80 800EA9D0 ACA30000 */   sw       $v1, ($a1)
 /* 83E84 800EA9D4 0803AC53 */  j         L800EB14C_845FC
 /* 83E88 800EA9D8 00000000 */   nop
@@ -239,7 +239,7 @@ glabel L800EA83C_83CEC
 /* 83EDC 800EAA2C 3C018011 */  lui       $at, %hi(D_8010CD30)
 /* 83EE0 800EAA30 0C038069 */  jal       enable_player_input
 /* 83EE4 800EAA34 AC32CD30 */   sw       $s2, %lo(D_8010CD30)($at)
-/* 83EE8 800EAA38 0C009C22 */  jal       func_80027088
+/* 83EE8 800EAA38 0C009C22 */  jal       set_time_freeze_mode
 /* 83EEC 800EAA3C 0000202D */   daddu    $a0, $zero, $zero
 /* 83EF0 800EAA40 0803AC53 */  j         L800EB14C_845FC
 /* 83EF4 800EAA44 00000000 */   nop

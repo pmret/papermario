@@ -76,7 +76,7 @@ glabel L80035C10_11010
 /* 11024 80035C24 3C01800A */  lui       $at, %hi(D_800A0931)
 /* 11028 80035C28 A0220931 */  sb        $v0, %lo(D_800A0931)($at)
 glabel L80035C2C_1102C
-/* 1102C 80035C2C 0C009C22 */  jal       func_80027088
+/* 1102C 80035C2C 0C009C22 */  jal       set_time_freeze_mode
 /* 11030 80035C30 0000202D */   daddu    $a0, $zero, $zero
 /* 11034 80035C34 1600000B */  bnez      $s0, .L80035C64
 /* 11038 80035C38 2402000A */   addiu    $v0, $zero, 0xa

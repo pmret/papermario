@@ -5,8 +5,8 @@ glabel func_8023F088
 /* 16D968 8023F088 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 16D96C 8023F08C AFB40068 */  sw        $s4, 0x68($sp)
 /* 16D970 8023F090 0000A02D */  daddu     $s4, $zero, $zero
-/* 16D974 8023F094 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 16D978 8023F098 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 16D974 8023F094 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 16D978 8023F098 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 16D97C 8023F09C 3C04800B */  lui       $a0, %hi(gCameras)
 /* 16D980 8023F0A0 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 16D984 8023F0A4 AFBF007C */  sw        $ra, 0x7c($sp)
@@ -930,8 +930,8 @@ glabel func_8023F088
 /* 16E7A0 8023FEC0 ACA3000C */  sw        $v1, 0xc($a1)
 /* 16E7A4 8023FEC4 26E400D4 */  addiu     $a0, $s7, 0xd4
 .L8023FEC8:
-/* 16E7A8 8023FEC8 3C10800A */  lui       $s0, %hi(D_8009A634)
-/* 16E7AC 8023FECC 2610A634 */  addiu     $s0, $s0, %lo(D_8009A634)
+/* 16E7A8 8023FEC8 3C10800A */  lui       $s0, %hi(gCurrentCamID)
+/* 16E7AC 8023FECC 2610A634 */  addiu     $s0, $s0, %lo(gCurrentCamID)
 /* 16E7B0 8023FED0 3C11800A */  lui       $s1, %hi(gDisplayContext)
 /* 16E7B4 8023FED4 2631A674 */  addiu     $s1, $s1, %lo(gDisplayContext)
 /* 16E7B8 8023FED8 8FC30000 */  lw        $v1, ($fp)

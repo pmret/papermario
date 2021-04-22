@@ -129,11 +129,11 @@ glabel step_battle
 /* EEC4 80033AC4 3C01800A */  lui       $at, %hi(D_800A0904)
 /* EEC8 80033AC8 AC220904 */  sw        $v0, %lo(D_800A0904)($at)
 /* EECC 80033ACC 00431024 */  and       $v0, $v0, $v1
-/* EED0 80033AD0 0C009C64 */  jal       func_80027190
+/* EED0 80033AD0 0C009C64 */  jal       get_time_freeze_mode
 /* EED4 80033AD4 AC820004 */   sw       $v0, 4($a0)
 /* EED8 80033AD8 3C01800A */  lui       $at, %hi(D_800A0908)
 /* EEDC 80033ADC AC220908 */  sw        $v0, %lo(D_800A0908)($at)
-/* EEE0 80033AE0 0C009C22 */  jal       func_80027088
+/* EEE0 80033AE0 0C009C22 */  jal       set_time_freeze_mode
 /* EEE4 80033AE4 0000202D */   daddu    $a0, $zero, $zero
 /* EEE8 80033AE8 3C05800A */  lui       $a1, %hi(gOverrideFlags)
 /* EEEC 80033AEC 24A5A650 */  addiu     $a1, $a1, %lo(gOverrideFlags)

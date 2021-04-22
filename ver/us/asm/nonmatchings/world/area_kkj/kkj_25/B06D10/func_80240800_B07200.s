@@ -14,7 +14,7 @@ glabel func_80240800_B07200
 /* B07224 80240824 0040802D */  daddu     $s0, $v0, $zero
 /* B07228 80240828 0C04EA15 */  jal       func_8013A854
 /* B0722C 8024082C 8E040000 */   lw       $a0, ($s0)
-/* B07230 80240830 0C048D70 */  jal       func_801235C0
+/* B07230 80240830 0C048D70 */  jal       free_dynamic_entity
 /* B07234 80240834 8E040004 */   lw       $a0, 4($s0)
 /* B07238 80240838 0C00AB4B */  jal       heap_free
 /* B0723C 8024083C 0200202D */   daddu    $a0, $s0, $zero
