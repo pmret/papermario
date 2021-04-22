@@ -20,9 +20,9 @@ void osCleanupThread(void);
 void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
 
-s32 heap_malloc(s32 size);
+void* heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 
 s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
@@ -218,7 +218,7 @@ s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode item
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
-s32 get_dynamic_entity(s32 arg0);
+DynamicEntity* get_dynamic_entity(s32 idx);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 

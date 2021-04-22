@@ -807,7 +807,7 @@ StaticNpc N(npcGroup_802443AC) = {
         NPC_ANIM(world_tubba, Palette_00, Anim_0),
         NPC_ANIM(world_tubba, Palette_00, Anim_0),
     },
-    .extraAnimations = &N(extraAnimationList_80244390),
+    .extraAnimations = N(extraAnimationList_80244390),
 };
 
 Script N(idle_8024459C) = SCRIPT({

@@ -20,8 +20,8 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .tattle = 0x1900C2,
 };
@@ -306,7 +306,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
         .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
-        .extraAnimations = &N(extraAnimationList_80241B6C),
+        .extraAnimations = N(extraAnimationList_80241B6C),
     },
     {
         .id = NPC_WORLD_CLUBBA1,
@@ -335,7 +335,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_80241B94),
+        .extraAnimations = N(extraAnimationList_80241B94),
     },
 };
 
@@ -403,7 +403,7 @@ StaticNpc N(npcGroup_802421E8)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_80241B94),
+        .extraAnimations = N(extraAnimationList_80241B94),
     },
 };
 

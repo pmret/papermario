@@ -296,7 +296,7 @@ typedef struct {
     /* 0x08 */ BattleID battle;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
+#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
 
 Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);

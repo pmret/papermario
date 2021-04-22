@@ -26,10 +26,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = MSG_dgb_08_tattle,
+    .tattle = { MSG_dgb_08_tattle },
 };
 
 Script N(80243CF0) = SCRIPT({
@@ -560,7 +560,7 @@ StaticNpc N(npcGroup_80245290)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
         .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
-        .extraAnimations = &N(extraAnimationList_80244290),
+        .extraAnimations = N(extraAnimationList_80244290),
     },
     {
         .id = NPC_WORLD_CLUBBA1,
@@ -589,7 +589,7 @@ StaticNpc N(npcGroup_80245290)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_802442B8),
+        .extraAnimations = N(extraAnimationList_802442B8),
     },
 };
 
@@ -629,7 +629,7 @@ StaticNpc N(npcGroup_80245670)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
         .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
-        .extraAnimations = &N(extraAnimationList_80244290),
+        .extraAnimations = N(extraAnimationList_80244290),
     },
     {
         .id = NPC_WORLD_CLUBBA3,
@@ -658,7 +658,7 @@ StaticNpc N(npcGroup_80245670)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_802442B8),
+        .extraAnimations = N(extraAnimationList_802442B8),
     },
 };
 
@@ -698,7 +698,7 @@ StaticNpc N(npcGroup_80245A50)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
         .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
-        .extraAnimations = &N(extraAnimationList_80244290),
+        .extraAnimations = N(extraAnimationList_80244290),
     },
     {
         .id = NPC_WORLD_CLUBBA5,
@@ -727,7 +727,7 @@ StaticNpc N(npcGroup_80245A50)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_802442B8),
+        .extraAnimations = N(extraAnimationList_802442B8),
     },
 };
 
@@ -923,7 +923,7 @@ StaticNpc N(npcGroup_80246768) = {
         NPC_ANIM(world_clubba, Palette_00, Anim_2),
     },
     .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
-    .extraAnimations = &N(extraAnimationList_80244290),
+    .extraAnimations = N(extraAnimationList_80244290),
 };
 
 NpcGroupList N(npcGroupList_80246958) = {

@@ -91,9 +91,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-s32 N(D_80241C68_BE09F8) = {
-    0x00000000,
-};
+s32* N(D_80241C68_BE09F8) = NULL;
 
 Script N(80241C6C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -138,9 +136,9 @@ Script N(80241CD4) = SCRIPT({
 });
 
 Script N(80241E18) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241CD4), 0x10, 0, D_80244A20, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802415F4_BE0384), SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_80241680_BE0410), SI_VAR(0)),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) D_80244A20, 0, 1),
+    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_802415F4_BE0384), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
@@ -1208,6 +1206,7 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+/// Pushes/pops script local variables to D_80241C68_BE09F8
 ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
@@ -1215,7 +1214,7 @@ ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
 
     if (*ptr == NULL) {
         i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
+        *ptr = (s32*) i;
         for (i = 0, test = *ptr; i < 16; i++) {
             *test++ = script->varTable[i];
         }

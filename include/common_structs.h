@@ -1880,7 +1880,7 @@ typedef struct EntityModel {
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
     /* 0x18 */ Matrix4s transform;
-    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
     /* 0x64 */ s32 setupGfxCallbackArg0;

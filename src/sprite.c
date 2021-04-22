@@ -152,11 +152,11 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
         Matrix4f mtx, mtx2;
         f32 f1, f2, f3, f4, f5, f6, f7, f8, f9;
 
-        guRotateF(&mtx, rotY, 0.0f, 1.0f, 0.0f);
-        guRotateF(&mtx2, rotZ, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(&mtx2, &mtx, &mtx);
-        guRotateF(&mtx2, rotX, 1.0f, 0.0f, 0.0f);
-        guMtxCatF(&mtx2, &mtx, &mtx);
+        guRotateF(mtx, rotY, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtx2, rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtx2, mtx, mtx);
+        guRotateF(mtx2, rotX, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(mtx2, mtx, mtx);
 
         f1 = (mtx[0][0] * inX);
         f2 = (mtx[1][0] * inY);

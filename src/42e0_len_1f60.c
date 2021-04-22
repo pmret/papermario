@@ -6,6 +6,8 @@
 u16 D_80074260 = 0;
 s32 D_80074264 = 0;
 
+void reset_max_rumble_duration(void);
+
 void poll_rumble(void) {
     nuContRmbCheck(0);
     nuContRmbModeSet(0, 2);

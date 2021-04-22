@@ -7,7 +7,7 @@ HeapNode* general_heap_create(void) {
     return _heap_create(&D_802FB800, 0x54000);
 }
 
-s32 general_heap_malloc(s32 size) {
+void* general_heap_malloc(s32 size) {
     return _heap_malloc(&D_802FB800, size);
 }
 
@@ -31,7 +31,7 @@ s32 func_8002ACDC(void) {
     return 0;
 }
 
-s32 heap_malloc(s32 size) {
+void* heap_malloc(s32 size) {
     if (gGameStatusPtr->isBattle == 0) {
         return general_heap_malloc(size);
     } else {
@@ -54,7 +54,7 @@ s32 collision_heap_create(void) {
     return 0;
 }
 
-s32 collision_heap_malloc(s32 size) {
+void* collision_heap_malloc(s32 size) {
     if (!gGameStatusPtr->isBattle) {
         return _heap_malloc(&D_80268000, size);
     } else {
