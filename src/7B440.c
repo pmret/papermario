@@ -50,17 +50,20 @@ void update_player_input(void) {
     }
 }
 
+#ifdef NON_MATCHING
 void func_800E205C(void) {
+    s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
     MapConfig* mapConfig;
     f32 one;
+    f32* floatsTemp;
 
     D_8010C96C = -1;
     D_8010C954 = 0;
     D_8010C920 = 0;
     D_8010C940 = 0;
     D_8010C958 = 0;
-    D_8010C92C = 0;
+    *temp8010C92C = 0;
     D_8010C95C = 0;
     D_8010C980 = 0;
     D_800F7B40 = 0;
@@ -83,7 +86,7 @@ void func_800E205C(void) {
         playerStatus->animFlags |= 0x1000;
 
         if (gGameStatusPtr->peachFlags & 2) {
-            D_8010C92C = 2;
+            *temp8010C92C = 2;
             playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }
     } else {
@@ -93,9 +96,10 @@ void func_800E205C(void) {
     }
 
     // This grossness is needed for matching
-    playerStatus->walkSpeed = D_800F7B70[0] * one;
-    playerStatus->runSpeed = D_800F7B70[1] * one;
-    playerStatus->unk_6C = D_800F7B70[2] * one;
+    floatsTemp = &D_800F7B70[0];
+    playerStatus->walkSpeed = *(floatsTemp++) * one;
+    playerStatus->runSpeed = *(floatsTemp++) * one;
+    playerStatus->unk_6C = *(floatsTemp++) * one;
 
     set_action_state(ACTION_STATE_IDLE);
 
@@ -132,6 +136,9 @@ void func_800E205C(void) {
     func_800E59A0(mapConfig);
     mem_clear(&D_8010F250, sizeof(Temp8010F250));
 }
+#else
+INCLUDE_ASM(s32, "7B440", func_800E205C);
+#endif
 
 void func_800E22E4(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;

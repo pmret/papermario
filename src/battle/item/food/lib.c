@@ -120,11 +120,11 @@ ApiStatus N(func_802A1438_733508)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/AddFP.inc.c"
 
+#ifdef NON_MATCHING
 ApiStatus N(func_802A15A0_733670)(ScriptInstance* script, s32 isInitialCall) {
-    StaticItem* itemTable = gItemTable;
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = get_variable(script, *args++);
-    StaticItem* item = &itemTable[itemIdx];
+    StaticItem* item = &gItemTable[itemIdx];
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;
@@ -134,11 +134,14 @@ ApiStatus N(func_802A15A0_733670)(ScriptInstance* script, s32 isInitialCall) {
         script->varTable[13] = 1;
     }
 
-    script->varTable[15] = script->varTable[11]  < 0 ||
+    script->varTable[15] = (script->varTable[11] < 0) ||
                            (script->varTable[11] <= 0 && script->varTable[12] < 0);
 
     return ApiStatus_DONE2;
 }
+#else
+INCLUDE_ASM(ApiStatus, "battle/item/food/lib", battle_item_food_func_802A15A0_733670, ScriptInstance* script, s32 isInitialCall)
+#endif
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {

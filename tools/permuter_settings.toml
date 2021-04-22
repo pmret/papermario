@@ -1,4 +1,4 @@
-compiler_command = "cpp -w -Iver/us/build/include -Iinclude -Isrc -DPERMUTER -D _LANGUAGE_C -D _FINALROM -D VERSION=us -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32  -D SCRIPT(...)={} | iconv --from UTF-8 --to SHIFT-JIS | tools/build/linux/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow  -o - | tools/build/linux/mips-nintendo-nu64-as -EB -G 0 -"
+compiler_command = "cpp -w -Iver/us/build/include -Iinclude -Isrc -DPERMUTER -D _LANGUAGE_C -D _FINALROM -D VERSION=us -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32  -D SCRIPT(...)={} | iconv --from UTF-8 --to SHIFT-JIS | tools/build/linux/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -fforce-addr -o - | tools/build/linux/mips-nintendo-nu64-as -EB -G 0 -"
 assembler_command = "mips-linux-gnu-as -march=vr4300 -mabi=32"
 
 [preserve_macros]

@@ -105,7 +105,7 @@ ApiStatus N(func_802A1450_7309F0)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(AddFP)(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
+
     s32 amt = get_variable(script, *script->ptrReadPos);
     // @bug Should be playerData->curFP
     s32 newFP = playerData->curHP + amt;
@@ -114,7 +114,7 @@ ApiStatus N(AddFP)(ScriptInstance* script, s32 isInitialCall) {
         newFP = playerData->curMaxFP;
     }
 
-    playerData2->curFP = newFP;
+    playerData->curFP = newFP;
 
     return ApiStatus_DONE2;
 }

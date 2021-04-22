@@ -150,13 +150,12 @@ INCLUDE_ASM(s32, "181810", LoadBattleDmaData);
 
 ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* battleStatus2 = battleStatus;
 
     if (get_variable(script, *script->ptrReadPos) != 0) {
-        battleStatus2->unk_92 |= 1;
+        battleStatus->unk_92 |= 1;
         OVERRIDE_FLAG_SET(0x80);
     } else {
-        battleStatus2->unk_92 &= ~1;
+        battleStatus->unk_92 &= ~1;
         OVERRIDE_FLAG_UNSET(0x80);
     }
 
