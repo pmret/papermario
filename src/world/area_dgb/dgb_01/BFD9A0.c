@@ -1341,16 +1341,16 @@ NpcSettings N(npcSettings_802452E8) = {
     .height = 90,
     .radius = 65,
     .ai = &N(npcAI_802452C8),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
 NpcSettings N(npcSettings_80245314) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 

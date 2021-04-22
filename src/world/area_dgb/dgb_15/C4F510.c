@@ -210,8 +210,8 @@ s32 N(unk_missing_80242100)[] = {
 NpcSettings N(npcSettings_8024212C) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 

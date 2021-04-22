@@ -148,16 +148,16 @@ NpcSettings N(npcSettings_80244150) = {
     .height = 90,
     .radius = 65,
     .ai = &N(80244130),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
 NpcSettings N(npcSettings_8024417C) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -229,8 +229,8 @@ NpcSettings N(npcSettings_80244360) = {
     .height = 36,
     .radius = 34,
     .ai = &N(npcAI_802442F0),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
