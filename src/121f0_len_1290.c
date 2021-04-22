@@ -41,6 +41,9 @@ Gfx D_80077A50[] = {
     gsSPEndDisplayList(),
 };
 
+extern s32 D_80077A2B;
+extern s32 D_800A0980;
+
 INCLUDE_ASM(s32, "121f0_len_1290", begin_state_title_screen);
 
 INCLUDE_ASM(s32, "121f0_len_1290", step_title_screen);
@@ -81,60 +84,48 @@ void title_draw_images(f32 arg0, f32 arg1) {
 
 INCLUDE_ASM(void, "121f0_len_1290", title_draw_logo);
 
-extern s32 D_80077A2B;
-extern s32 D_800A0980;
+void title_draw_press_start(void) {
+    switch (D_80077A2C) {
+        case 0:
+            D_80077A28 -= 128;
+            if (D_80077A28 < 0) {
+                D_80077A28 = 0;
+            }
 
-INCLUDE_ASM(s32, "121f0_len_1290", title_draw_press_start);
-// void title_draw_press_start(void) {
-//     s32* temp80077A28;
-//     s32* temp80077A2C = &D_80077A2C;
-//     s32* temp80077A30;
+            D_80077A30++;
+            if (D_80077A30 >= 16) {
+                D_80077A30 = 0;
+                D_80077A2C = 1;
+            }
+            break;
+        case 1:
+            D_80077A28 += 128;
+            if (D_80077A28 > 255) {
+                D_80077A28 = 255;
+            }
 
-//     switch (*temp80077A2C) {
-//         case 0:
-//             temp80077A28 = &D_80077A28;
-//             *temp80077A28 -= 128;
-//             if (*temp80077A28 < 0) {
-//                 *temp80077A28 = 0;
-//             }
+            D_80077A30++;
+            if (D_80077A30 >= 16) {
+                D_80077A30 = 0;
+                D_80077A2C = 0;
+            }
+    }
 
-//             temp80077A30 = &D_80077A30;
-//             (*temp80077A30)++;
-//             if (*temp80077A30 >= 16) {
-//                 *temp80077A30 = 0;
-//                 *temp80077A2C = 1;
-//             }
-//             break;
-//         case 1:
-//             temp80077A28 = &D_80077A28;
-//             *temp80077A28 += 128;
-//             if (*temp80077A28 > 255) {
-//                 *temp80077A28 = 255;
-//             }
-
-//             temp80077A30 = &D_80077A30;
-//             (*temp80077A30)++;
-//             if (*temp80077A30 >= 16) {
-//                 *temp80077A30 = 0;
-//                 *temp80077A2C = 0;
-//             }
-//     }
-
-//     gSPDisplayList(gMasterGfxPos++, D_80077A50);
-//     gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-//     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xF8, 0xF0, 0x98, D_80077A28);
-//     gDPPipeSync(gMasterGfxPos++);
-//     gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 1, D_800A0980);
-//     gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-//                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-//     gDPLoadSync(gMasterGfxPos++);
-//     gDPLoadBlock(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 2047, 128);
-//     gDPPipeSync(gMasterGfxPos++);
-//     gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
-//                G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-//     gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x01FC, 0x007C);
-//     gSPTextureRectangle(gMasterGfxPos++, 0x0180, 0x0224, 0x0380, 0x02A4, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
-//     gDPPipeSync(gMasterGfxPos++);
-// }
+    gSPDisplayList(gMasterGfxPos++, D_80077A50);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xF8, 0xF0, 0x98, D_80077A28);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 1, D_800A0980);
+    gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPLoadSync(gMasterGfxPos++);
+    gDPLoadBlock(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 2047, 128);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+               G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x01FC, 0x007C);
+    gSPTextureRectangle(gMasterGfxPos++, 0x0180, 0x0224, 0x0380, 0x02A4, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+    gDPPipeSync(gMasterGfxPos++);
+}
 
 INCLUDE_ASM(void, "121f0_len_1290", title_draw_copyright, f32 arg0);
