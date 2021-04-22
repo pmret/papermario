@@ -58,7 +58,7 @@ ApiStatus func_802406D4_B1D124(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->flags |= 0xA0000;
+    npc->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
 
     return ApiStatus_DONE2;
 }
@@ -67,6 +67,6 @@ void N(SetPartnerFlagsA0000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0xA0000;
+        partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
     }
 }

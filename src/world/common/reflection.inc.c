@@ -350,20 +350,20 @@ ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                partner->flags |= 0x80000 | 0x20000;
+                partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
                 break;
             case REFLECTION_FLOOR:
-                partner->flags |= 0x80000;
+                partner->flags |= NPC_FLAG_REFLECT_FLOOR;
                 break;
             case REFLECTION_WALL:
-                partner->flags |= 0x20000;
+                partner->flags |= NPC_FLAG_REFLECT_WALL;
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
-                partner->flags |= 0x80000;
+                partner->flags |= NPC_FLAG_REFLECT_FLOOR;
                 break;
             case REFLECTION_WALL:
                 break;
@@ -377,7 +377,7 @@ void N(SetPartnerFlagsA0000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0xA0000;
+        partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
     }
 }
 
@@ -385,7 +385,7 @@ void N(SetPartnerFlags80000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0x80000;
+        partner->flags |= NPC_FLAG_REFLECT_FLOOR;
     }
 }
 
@@ -393,7 +393,7 @@ void N(SetPartnerFlags20000)(void) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
 
     if (partner != NULL) {
-        partner->flags |= 0x20000;
+        partner->flags |= NPC_FLAG_REFLECT_WALL;
     }
 }
 
