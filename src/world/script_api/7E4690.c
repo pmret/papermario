@@ -20,7 +20,6 @@ ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     Npc* partner;
 
     if (gPlayerData.currentPartner == PARTNER_NONE) {
@@ -35,18 +34,15 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
         partner->pos.y = playerStatus->position.y;
     }
 
-    set_npc_yaw(partner, playerStatus2->targetYaw);
+    set_npc_yaw(partner, playerStatus->targetYaw);
     clear_partner_move_history(partner);
     return ApiStatus_DONE2;
 }
 
-// currentPartner is being loaded as unsigned instead of signed
-#ifdef NON_MATCHING
 ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     Camera* camera = CURRENT_CAM;
-    s8 currentPartner = gPlayerData.currentPartner;
+    s32 currentPartner = gPlayerData.currentPartner;
 
     playerStatus->position.x = gGameStatusPtr->savedPos.x;
     playerStatus->position.y = gGameStatusPtr->savedPos.y;
@@ -54,20 +50,18 @@ ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
 
     if (currentPartner != PARTNER_NONE) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
-        f32 angle = clamp_angle((playerStatus2->spriteFacingAngle < 180.0f) ? (90.0f) : (-90.0f));
-        partner->pos.x = playerStatus2->position.x;
-        partner->pos.y = playerStatus2->position.y;
-        partner->pos.z = playerStatus2->position.z;
-        add_vec2D_polar(&partner->pos.x, &partner->pos.z, playerStatus2->colliderDiameter + 5, angle);
+        f32 angle = clamp_angle((playerStatus->spriteFacingAngle < 180.0f) ? (90.0f) : (-90.0f));
+
+        partner->pos.x = playerStatus->position.x;
+        partner->pos.y = playerStatus->position.y;
+        partner->pos.z = playerStatus->position.z;
+        add_vec2D_polar(&partner->pos.x, &partner->pos.z, playerStatus->colliderDiameter + 5, angle);
         enable_partner_ai();
     }
 
     camera->unk_08 = 1;
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283908);
-#endif
 
 INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283A50);
 

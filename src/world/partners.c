@@ -690,7 +690,6 @@ INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = &gCameras;
-    Camera* cameras2 = cameras;
     f32 yaw;
     s32 ret;
 
@@ -704,10 +703,10 @@ s32 func_800EF4E0(void) {
         }
     } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
         ret = 1;
-        yaw = clamp_angle(cameras2[0].currentYaw - 90.0f);
+        yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
     } else {
-        yaw = clamp_angle(cameras2[0].currentYaw + 90.0f);
         ret = 0;
+        yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
     }
 
     playerStatus->targetYaw = yaw;

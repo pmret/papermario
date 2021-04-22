@@ -163,18 +163,17 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        PlayerStatus** playerStatus = &gPlayerStatusPtr;
-        f32 x = (*playerStatus)->position.x;
-        f32 y = (*playerStatus)->position.y + arg1;
-        f32 z = (*playerStatus)->position.z;
-        s32 hitID = do_lateral_collision(arg0, *playerStatus, &x, &y, &z, 0, angle);
+        f32 x = gPlayerStatusPtr->position.x;
+        f32 y = gPlayerStatusPtr->position.y + arg1;
+        f32 z = gPlayerStatusPtr->position.z;
+        s32 hitID = do_lateral_collision(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
         }
 
-        (*playerStatus)->position.x = x;
-        (*playerStatus)->position.z = z;
+        gPlayerStatusPtr->position.x = x;
+        gPlayerStatusPtr->position.z = z;
         angle += 90.0f;
     }
 

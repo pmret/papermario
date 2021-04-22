@@ -48,29 +48,28 @@ INCLUDE_ASM(s32, "121f0_len_1290", begin_state_title_screen);
 
 INCLUDE_ASM(s32, "121f0_len_1290", step_title_screen);
 
-INCLUDE_ASM(s32, "121f0_len_1290", func_800375A4);
-// void func_800375A4(void) {
-//     switch (gGameStatusPtr->loadMenuState) {
-//         case 0:
-//             D_80077A28 = 0;
-//             D_80077A2C = 0;
-//             D_80077A30 = 0;
-//             func_80037960();
-//             break;
-//         case 2:
-//             func_80037960();
-//             if (gGameStatusPtr->contBitPattern & 1) {
-//                 title_draw_press_start();
-//             }
-//         default:
-//             break;
-//         case 1:
-//         case 4:
-//         case 5:
-//             func_80037960();
-//             break;
-//     }
-// }
+void func_800375A4(void) {
+    switch (gGameStatusPtr->loadMenuState) {
+        case 0:
+            D_80077A28 = 0;
+            D_80077A2C = 0;
+            D_80077A30 = 0;
+            func_80037960();
+            break;
+        case 2:
+            func_80037960();
+            if (gGameStatusPtr->contBitPattern & 1) {
+                title_draw_press_start();
+            }
+        default:
+            break;
+        case 1:
+        case 4:
+        case 5:
+            func_80037960();
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "121f0_len_1290", title_append_gfx);
 

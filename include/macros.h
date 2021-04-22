@@ -53,10 +53,8 @@
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
 { \
-    ScriptList** temp = &gCurrentScriptListPtr; \
-    s32 *numScripts = &gNumScripts; \
-    (**temp)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
-    (*numScripts)++; \
+    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
+    gNumScripts++; \
     ASSERT(new != NULL); \
 }
 

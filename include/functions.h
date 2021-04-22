@@ -30,7 +30,7 @@ s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
-
+s32 get_time_freeze_mode(void);
 void render_player_model();
 
 f32 integrate_gravity(void);

@@ -15,7 +15,6 @@ extern s32 D_8010C990;
 
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus; // needed for some macro - not sure what yet
     s32 inputBufPos = playerStatus->inputBufPos;
 
     playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
@@ -46,7 +45,7 @@ void update_player_input(void) {
 
     if (playerStatus->animFlags & 8) {
         playerStatus->animFlags |= 0x200000;
-        playerStatus2->pressedButtons |= 4;
+        playerStatus->pressedButtons |= 4;
     }
 }
 

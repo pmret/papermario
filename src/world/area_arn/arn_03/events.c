@@ -1264,26 +1264,21 @@ ApiStatus N(func_80241648_BE03D8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus N(func_80241680_BE0410)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* var1 = get_variable(script, *args);
+    s32* var1 = get_variable(script, *args++);
     s32 i;
 
     if (var1 != NULL) {
         for (i = 0; var1[i] != 0; i++) {
-            *(D_80244A20 + i) = var1[i];
+            D_80244A20[i] = var1[i];
         }
         D_80244A20[i] = 0;
     } else {
         for (i = 0; i < 0x70; i++) {
-            *(D_80244A20 + i) = i + 16;
+            D_80244A20[i] = i + 16;
             D_80244A20[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", arn_03_func_80241680_BE0410, ScriptInstance* script, s32 isInitialCall);
-#endif
-
