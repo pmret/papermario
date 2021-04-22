@@ -153,7 +153,7 @@ void func_802C3390(ScriptInstance* script) {
 }
 
 #ifdef NON_MATCHING
-ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState) {
+ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
     ScriptInstance* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
@@ -173,9 +173,9 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     newScript->state = initialState | 1;
     newScript->currentOpcode = 0;
     newScript->priority = priority;
-    newScript->ptrNextLine = initialLine;
-    newScript->ptrFirstLine = initialLine;
-    newScript->ptrCurrentLine = initialLine;
+    newScript->ptrNextLine = source;
+    newScript->ptrFirstLine = source;
+    newScript->ptrCurrentLine = source;
     newScript->userData = NULL;
     newScript->blockingParent = NULL;
     newScript->childScript = NULL;
@@ -218,11 +218,11 @@ ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialSta
     return newScript;
 }
 #else
-INCLUDE_ASM(ScriptInstance*, "evt/script_list", start_script, Bytecode* initialLine, s32 priority,
+INCLUDE_ASM(ScriptInstance*, "evt/script_list", start_script, Script* source, s32 priority,
             s32 initialState);
 #endif
 
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags) {
+ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags) {
     ScriptInstance* newScript;
     s32 scriptListCount;
     s32 i;
@@ -250,9 +250,9 @@ ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 ini
         newScript->currentOpcode = 0;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
-        newScript->ptrNextLine = initialLine;
-        newScript->ptrFirstLine = initialLine;
-        newScript->ptrCurrentLine = initialLine;
+        newScript->ptrNextLine = source;
+        newScript->ptrFirstLine = source;
+        newScript->ptrCurrentLine = source;
         newScript->userData = 0;
         newScript->blockingParent = 0;
         newScript->childScript = 0;
@@ -568,7 +568,7 @@ Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 tri
     def.inputArg3 = arg6;
 
     trigger = create_trigger(&def);
-    trigger->scriptStart = script;
+    trigger->scriptSource = script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
     trigger->scriptVars[0] = triggerVar0;

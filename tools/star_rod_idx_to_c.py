@@ -405,8 +405,8 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             bytes.read(0x10)
 
             main,entry_list,entry_count = unpack(">IIi", bytes.read(4 * 3))
-            out += f"    .main = N(main),\n"
-            out += f"    .entryList = {entry_list_name},\n"
+            out += f"    .main = &N(main),\n"
+            out += f"    .entryList = &{entry_list_name},\n"
             out += f"    .entryCount = ENTRY_COUNT({entry_list_name}),\n"
 
             bytes.read(0x1C)

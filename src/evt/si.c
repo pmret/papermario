@@ -965,7 +965,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
     ScriptInstance* script;
 
     if (trigger->runningScript == NULL) {
-        scriptStart = trigger->scriptStart;
+        scriptStart = trigger->scriptSource;
         if (is_trigger_bound(trigger, scriptStart)) {
             return 0;
         }
@@ -1005,7 +1005,7 @@ ApiStatus si_handle_bind_trigger(ScriptInstance* script) {
     def.function = _bound_script_trigger_handler;
 
     trigger = create_trigger(&def);
-    trigger->scriptStart = triggerScript;
+    trigger->scriptSource = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
@@ -1090,7 +1090,7 @@ ApiStatus si_handle_does_script_exist(ScriptInstance* script) {
 
 void si_standard_trigger_executor(Trigger* trigger) {
     if (trigger->runningScript == NULL) {
-        ScriptInstance* newScript = start_script(trigger->scriptStart, trigger->priority, 0x20);
+        ScriptInstance* newScript = start_script(trigger->scriptSource, trigger->priority, 0x20);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
         newScript->varTable[0] = trigger->scriptVars[0];
@@ -1125,7 +1125,7 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     def.inputArg3 = a5;
 
     trigger = create_trigger(&def);
-    trigger->scriptStart = triggerScript;
+    trigger->scriptSource = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
     trigger->scriptVars[0] = get_variable(script, script->varTable[0]);

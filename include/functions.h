@@ -192,8 +192,8 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 void set_partner_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
-ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
+ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
+ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
 
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);

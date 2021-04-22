@@ -139,7 +139,7 @@ void func_802E8D74(Entity* entity) {
 }
 
 void func_802E8E10(Entity* entity) {
-    Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptStart;
+    Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptSource;
 
     OVERRIDE_FLAG_UNSET(0x40);
     entity->boundScript = triggerScriptStart;

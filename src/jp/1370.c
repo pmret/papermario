@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern s32* D_80073DE0;
+extern s32 D_80073DE0;
 
 INCLUDE_ASM(s32, "1370", func_80025F70);
 
