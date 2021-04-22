@@ -1472,6 +1472,27 @@ void remove_player_buffs(PlayerBuff buffs) {
 INCLUDE_ASM(s32, "190B20", func_8026777C);
 
 INCLUDE_ASM(s32, "190B20", func_8026787C);
+// extern s32 D_80293970;
+
+// void func_8026787C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
+//     gDPPipeSync(gMasterGfxPos++);
+//     gSPDisplayList(gMasterGfxPos++, &D_80293970);
+
+//     if ((arg3 & 0xFF) == 0xFF) {
+//         gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+//         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+//     } else {
+//         gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+//         gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+//     }
+
+//     gDPSetPrimColor(gMasterGfxPos++, 0, 0, arg0, arg1, arg2, arg3);
+//     gDPFillRectangle(gMasterGfxPos++, arg4, arg5, arg6, arg7);
+//     gDPPipeSync(gMasterGfxPos++);
+
+//     gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+//     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+// }
 
 INCLUDE_ASM(s32, "190B20", func_80267A3C);
 

@@ -277,11 +277,11 @@ s32 func_80027190(void) {
 }
 
 #ifdef NON_MATCHING
-// void gfx_init_state(void) {
-//     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
-//     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
-//     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
-// }
+void gfx_init_state(void) {
+    gSPSegment(gMasterGfxPos++, 0x00, 0x0);
+    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
+    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
+}
 // matching but bullshit
 void gfx_init_state(void) {
     Gfx* gfx;
