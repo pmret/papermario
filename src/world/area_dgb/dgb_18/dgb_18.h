@@ -6,9 +6,9 @@
 ApiStatus N(UnkFunc1)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_802436B4);
-Script N(main);
-Script N(makeEntities);
-Script N(npcAI_80242834);
+extern NpcGroupList N(npcGroupList_802436B4);
+extern Script N(main);
+extern Script N(makeEntities);
+extern Script N(npcAI_80242834);
 
-s32 N(D_802436E0_C59620);
+extern s32 N(D_802436E0_C59620);

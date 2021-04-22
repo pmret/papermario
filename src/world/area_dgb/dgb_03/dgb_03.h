@@ -12,8 +12,8 @@ ApiStatus N(func_80242480_C33960)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SetEntityFlags100000)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(ScriptInstance* script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_80244988);
-Script N(80243608);
-Script N(80243740);
-Script N(main);
-Script N(makeEntities);
+extern NpcGroupList N(npcGroupList_80244988);
+extern Script N(80243608);
+extern Script N(80243740);
+extern Script N(main);
+extern Script N(makeEntities);

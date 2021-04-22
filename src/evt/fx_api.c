@@ -39,7 +39,7 @@ ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
+    s32* ptrValue = (s32*) get_variable(script, *args++);
 
     *ptrValue |= 0x10;
     return ApiStatus_DONE2;
@@ -47,7 +47,7 @@ ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
+    s32** ptrValue = (s32**) get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
 
     ptrTemp[5] = 10;
@@ -56,7 +56,7 @@ ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = get_variable(script, *args++);
+    s32** ptrValue = (s32**) get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
 
     ptrTemp[12] = 5;
@@ -71,7 +71,7 @@ ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
     s32 var5 = script->varTable[5];
     s32 var6 = script->varTable[6];
     s32 temp;
-    s32 t0;
+    f32 t0;
     f32 t1;
 
     if (isInitialCall) {

@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_arn_07_tattle,
+    .tattle = { MSG_arn_07_tattle },
 };
 
 Script N(80241F10) = SCRIPT({
