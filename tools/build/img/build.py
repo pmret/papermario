@@ -53,9 +53,6 @@ class Converter():
         self.flip_x = "--flip-x" in argv
         self.flip_y = "--flip-y" in argv
 
-        if self.flip_y:
-            print(self.infile)
-
         assert self.flip_x == False, "flip_x is not supported"
 
         self.warned = False
