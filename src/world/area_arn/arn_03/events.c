@@ -123,7 +123,7 @@ Script N(80241CD4) = SCRIPT({
         else {
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(SomeXYZFuncTodoRename)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             SI_VAR(0) |=c 0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
@@ -1234,7 +1234,7 @@ ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_802415F4_BE0384)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

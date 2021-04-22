@@ -32,8 +32,8 @@ glabel func_8023ED5C
 /* 16D6A4 8023EDC4 00000000 */   nop
 /* 16D6A8 8023EDC8 0C0957F6 */  jal       func_80255FD8
 /* 16D6AC 8023EDCC 00000000 */   nop
-/* 16D6B0 8023EDD0 3C02800A */  lui       $v0, %hi(D_8009A634)
-/* 16D6B4 8023EDD4 9442A634 */  lhu       $v0, %lo(D_8009A634)($v0)
+/* 16D6B0 8023EDD0 3C02800A */  lui       $v0, %hi(gCurrentCamID)
+/* 16D6B4 8023EDD4 9442A634 */  lhu       $v0, %lo(gCurrentCamID)($v0)
 /* 16D6B8 8023EDD8 2442FFFF */  addiu     $v0, $v0, -1
 /* 16D6BC 8023EDDC 2C420002 */  sltiu     $v0, $v0, 2
 /* 16D6C0 8023EDE0 10400094 */  beqz      $v0, .L8023F034

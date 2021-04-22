@@ -2,6 +2,8 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
+// TODO: timeFreezeMode is probably bss here
+
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
@@ -178,7 +180,7 @@ void load_engine_data(void) {
 
     dma_copy(FEE30_ROM_START, FEE30_ROM_END, FEE30_VRAM);
     dma_copy(_759B0_ROM_START, _759B0_ROM_END, _759B0_VRAM);
-    dma_copy(E79B0_ROM_START, E79B0_ROM_END, E79B0_VRAM);
+    dma_copy(evt_ROM_START, evt_ROM_END, evt_VRAM);
     dma_copy(_102610_ROM_START, _102610_ROM_END, _102610_VRAM);
     dma_copy(A5DD0_ROM_START, A5DD0_ROM_END, A5DD0_VRAM);
     dma_copy(_10CC10_ROM_START, _10CC10_ROM_END, _10CC10_VRAM);
@@ -193,7 +195,7 @@ void load_engine_data(void) {
     (*gameStatus)->unk_81 = 0;
     (*gameStatus)->unk_82 = -8;
     (*gameStatus)->unk_83 = 4;
-    D_8009A5D8 = 0;
+    timeFreezeMode = 0;
     (*gameStatus)->unk_75 = (*gameStatus)->unk_13C = 0;
     D_80074021 = 5;
     (*gameStatus)->saveCount = 0;
@@ -205,7 +207,7 @@ void load_engine_data(void) {
     clear_script_list();
     create_cameras_a();
     clear_player_status();
-    func_802DD8F8(0);
+    spr_init_sprites(0);
     clear_entity_models();
     func_8011E224();
     clear_model_data();
@@ -240,40 +242,46 @@ void load_engine_data(void) {
     set_game_mode(0);
 }
 
-void func_80027088(s32 arg0) {
-    switch (arg0) {
+/// Time freeze modes:
+///  0: normal
+///  1: NPCs move, can't be interacted with
+///  2: NPCs don't move, no partner ability, can't interact, can't use exits
+///  3: NPCs don't more or animate (partner switch menu)
+///  4: NPCs can move, animations don't update, can use exits
+void set_time_freeze_mode(s32 mode) {
+    switch (mode) {
         case 0:
-            D_8009A5D8 = arg0;
+            timeFreezeMode = mode;
             OVERRIDE_FLAG_UNSET(0xF00);
             resume_all_group(3);
             break;
         case 1:
-            D_8009A5D8 = arg0;
+            timeFreezeMode = mode;
             OVERRIDE_FLAG_UNSET(0xE00);
             OVERRIDE_FLAG_SET(0x100);
             suspend_all_group(1);
             break;
         case 2:
-            D_8009A5D8 = arg0;
+            timeFreezeMode = mode;
             OVERRIDE_FLAG_UNSET(0xC00);
             OVERRIDE_FLAG_SET(0x300);
             suspend_all_group(2);
             break;
         case 3:
-            D_8009A5D8 = arg0;
+            timeFreezeMode = mode;
             OVERRIDE_FLAG_UNSET(0x800);
             OVERRIDE_FLAG_SET(0x700);
             suspend_all_group(2);
             break;
         case 4:
-            D_8009A5D8 = arg0;
+            timeFreezeMode = mode;
             OVERRIDE_FLAG_SET(0xF00);
             break;
     }
 }
 
-s32 func_80027190(void) {
-    return D_8009A5D8;
+s32 get_time_freeze_mode(void) {
+    return timeFreezeMode;
 }
 
 #ifdef NON_MATCHING

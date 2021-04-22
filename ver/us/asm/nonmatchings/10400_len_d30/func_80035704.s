@@ -137,7 +137,7 @@ glabel L80035814_10C14
 /* 10CD8 800358D8 0C05259C */  jal       func_80149670
 /* 10CDC 800358DC 24040001 */   addiu    $a0, $zero, 1
 /* 10CE0 800358E0 8E020000 */  lw        $v0, ($s0)
-/* 10CE4 800358E4 0C0B763E */  jal       func_802DD8F8
+/* 10CE4 800358E4 0C0B763E */  jal       spr_init_sprites
 /* 10CE8 800358E8 80440084 */   lb       $a0, 0x84($v0)
 /* 10CEC 800358EC 0C0457FA */  jal       init_model_data
 /* 10CF0 800358F0 00000000 */   nop
@@ -207,7 +207,7 @@ glabel L80035814_10C14
 /* 10DE4 800359E4 00000000 */   nop
 /* 10DE8 800359E8 0C03A631 */  jal       func_800E98C4
 /* 10DEC 800359EC 00000000 */   nop
-/* 10DF0 800359F0 0C009C22 */  jal       func_80027088
+/* 10DF0 800359F0 0C009C22 */  jal       set_time_freeze_mode
 /* 10DF4 800359F4 24040001 */   addiu    $a0, $zero, 1
 .L800359F8:
 /* 10DF8 800359F8 0C051FB1 */  jal       set_windows_visible
@@ -273,7 +273,7 @@ glabel L80035A68_10E68
 /* 10ED8 80035AD8 0800D6C8 */  j         .L80035B20
 /* 10EDC 80035ADC 0000202D */   daddu    $a0, $zero, $zero
 glabel L80035AE0_10EE0
-/* 10EE0 80035AE0 0C009C22 */  jal       func_80027088
+/* 10EE0 80035AE0 0C009C22 */  jal       set_time_freeze_mode
 /* 10EE4 80035AE4 0000202D */   daddu    $a0, $zero, $zero
 /* 10EE8 80035AE8 0C037DD0 */  jal       update_player
 /* 10EEC 80035AEC 00000000 */   nop

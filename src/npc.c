@@ -391,7 +391,7 @@ void func_8003E338(void) {
 
     func_80045AC0();
     gGameState = 0;
-    bind_dynamic_entity_3(0, npc_dyn_entity_draw_no_op);
+    create_dynamic_entity_world(0, npc_dyn_entity_draw_no_op);
 }
 
 void clear_encounter_status(void) {
@@ -432,7 +432,7 @@ void clear_encounter_status(void) {
 
     func_80045AC0();
     gGameState = 0;
-    bind_dynamic_entity_3(NULL, npc_dyn_entity_draw_no_op);
+    create_dynamic_entity_world(NULL, npc_dyn_entity_draw_no_op);
 }
 
 void func_8003E50C(void) {

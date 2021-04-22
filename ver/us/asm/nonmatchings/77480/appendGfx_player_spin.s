@@ -28,8 +28,8 @@ glabel appendGfx_player_spin
 /* 7AC10 800E1760 F7B80160 */  sdc1      $f24, 0x160($sp)
 /* 7AC14 800E1764 F7B40150 */  sdc1      $f20, 0x150($sp)
 .L800E1768:
-/* 7AC18 800E1768 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 7AC1C 800E176C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 7AC18 800E1768 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 7AC1C 800E176C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 7AC20 800E1770 00031080 */  sll       $v0, $v1, 2
 /* 7AC24 800E1774 00431021 */  addu      $v0, $v0, $v1
 /* 7AC28 800E1778 00021080 */  sll       $v0, $v0, 2

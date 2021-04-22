@@ -115,8 +115,7 @@ INCLUDE_ASM(s32, "43F0", int_to_string);
 // should maybe be called bzero
 void mem_clear(s8* data, s32 numBytes) {
     while (numBytes > 0) {
-        *data = 0;
-        data++;
+        *data++ = 0;
         numBytes--;
     }
 }

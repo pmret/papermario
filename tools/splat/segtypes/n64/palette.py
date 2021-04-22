@@ -27,18 +27,19 @@ class N64SegPalette(N64Segment):
             self.name.split(".")[0]
         ) if type(segment) is dict else self.name.split(".")[0]
 
-        if self.rom_end == "auto":
-            log.error(f"segment {self.name} needs to know where it ends; add a position marker [0xDEADBEEF] after it")
+        if self.extract:
+            if self.rom_end == "auto":
+                log.error(f"segment {self.name} needs to know where it ends; add a position marker [0xDEADBEEF] after it")
 
-        if self.max_length() and isinstance(self.rom_end, int):
-            expected_len = int(self.max_length())
-            actual_len = self.rom_end - self.rom_start
-            if actual_len > expected_len and actual_len - expected_len > self.subalign:
-                log.error(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
+            if self.max_length() and isinstance(self.rom_end, int):
+                expected_len = int(self.max_length())
+                actual_len = self.rom_end - self.rom_start
+                if actual_len > expected_len and actual_len - expected_len > self.subalign:
+                    log.error(f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)")
 
     def should_split(self):
-        return super().should_split() or options.mode_active("img")
-    
+        return self.extract and (super().should_split() or options.mode_active("img"))
+ 
     def out_path(self) -> Optional[Path]:
         return options.get_asset_path() / self.dir / f"{self.name}.png"
 

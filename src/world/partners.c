@@ -438,7 +438,7 @@ void partner_reset_data(void) {
 
     temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
-    get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
+    get_dynamic_entity(create_dynamic_entity_frontUI(_use_partner_ability, NULL));
 
     temp8010CFD8 = &D_8010CFD8;
     temp8010CFE8 = &D_8010CFE8;

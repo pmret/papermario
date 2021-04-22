@@ -19,8 +19,8 @@ glabel func_80240AE4_A6EEC4
 /* A6EEFC 80240B1C 0040882D */  daddu     $s1, $v0, $zero
 /* A6EF00 80240B20 4406A000 */  mfc1      $a2, $f20
 /* A6EF04 80240B24 4407B000 */  mfc1      $a3, $f22
-/* A6EF08 80240B28 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A6EF0C 80240B2C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A6EF08 80240B28 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A6EF0C 80240B2C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A6EF10 80240B30 3C05800B */  lui       $a1, %hi(gCameras)
 /* A6EF14 80240B34 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* A6EF18 80240B38 AFA00010 */  sw        $zero, 0x10($sp)

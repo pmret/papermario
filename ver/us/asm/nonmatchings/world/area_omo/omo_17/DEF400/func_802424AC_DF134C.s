@@ -13,8 +13,8 @@ glabel func_802424AC_DF134C
 /* DF136C 802424CC AFB00010 */  sw        $s0, 0x10($sp)
 /* DF1370 802424D0 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* DF1374 802424D4 8E330148 */  lw        $s3, 0x148($s1)
-/* DF1378 802424D8 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* DF137C 802424DC 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* DF1378 802424D8 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* DF137C 802424DC 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* DF1380 802424E0 8E30000C */  lw        $s0, 0xc($s1)
 /* DF1384 802424E4 00031080 */  sll       $v0, $v1, 2
 /* DF1388 802424E8 00431021 */  addu      $v0, $v0, $v1

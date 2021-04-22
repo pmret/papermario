@@ -62,7 +62,7 @@ glabel func_80033BC0
 /* F0A4 80033CA4 0C00AB28 */  jal       battle_heap_create
 /* F0A8 80033CA8 A062007E */   sb       $v0, 0x7e($v1)
 /* F0AC 80033CAC 8E020000 */  lw        $v0, ($s0)
-/* F0B0 80033CB0 0C0B763E */  jal       func_802DD8F8
+/* F0B0 80033CB0 0C0B763E */  jal       spr_init_sprites
 /* F0B4 80033CB4 80440084 */   lb       $a0, 0x84($v0)
 /* F0B8 80033CB8 0C0457FA */  jal       init_model_data
 /* F0BC 80033CBC 00000000 */   nop
@@ -163,7 +163,7 @@ glabel func_80033BC0
 /* F228 80033E28 8C840908 */  lw        $a0, %lo(D_800A0908)($a0)
 /* F22C 80033E2C 10800003 */  beqz      $a0, .L80033E3C
 /* F230 80033E30 AE620004 */   sw       $v0, 4($s3)
-/* F234 80033E34 0C009C22 */  jal       func_80027088
+/* F234 80033E34 0C009C22 */  jal       set_time_freeze_mode
 /* F238 80033E38 00000000 */   nop
 .L80033E3C:
 /* F23C 80033E3C 24040004 */  addiu     $a0, $zero, 4

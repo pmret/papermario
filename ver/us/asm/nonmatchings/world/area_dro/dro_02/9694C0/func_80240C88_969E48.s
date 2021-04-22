@@ -43,7 +43,7 @@ glabel func_80240C88_969E48
 /* 969ED8 80240D18 ACA00018 */   sw       $zero, 0x18($a1)
 /* 969EDC 80240D1C 3C048025 */  lui       $a0, %hi(gPauseMenuCursorPosY)
 /* 969EE0 80240D20 8C84EFA0 */  lw        $a0, %lo(gPauseMenuCursorPosY)($a0)
-/* 969EE4 80240D24 0C048D70 */  jal       func_801235C0
+/* 969EE4 80240D24 0C048D70 */  jal       free_dynamic_entity
 /* 969EE8 80240D28 00000000 */   nop
 /* 969EEC 80240D2C 24020002 */  addiu     $v0, $zero, 2
 .L80240D30:

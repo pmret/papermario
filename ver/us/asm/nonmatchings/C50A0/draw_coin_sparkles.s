@@ -7,8 +7,8 @@ glabel draw_coin_sparkles
 /* C7214 80130B14 0080902D */  daddu     $s2, $a0, $zero
 /* C7218 80130B18 AFB70164 */  sw        $s7, 0x164($sp)
 /* C721C 80130B1C 3C170001 */  lui       $s7, 1
-/* C7220 80130B20 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* C7224 80130B24 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* C7220 80130B20 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* C7224 80130B24 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* C7228 80130B28 3C014334 */  lui       $at, 0x4334
 /* C722C 80130B2C 44816000 */  mtc1      $at, $f12
 /* C7230 80130B30 36F71630 */  ori       $s7, $s7, 0x1630

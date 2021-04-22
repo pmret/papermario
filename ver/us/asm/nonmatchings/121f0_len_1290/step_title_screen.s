@@ -284,7 +284,7 @@ glabel L80037450_12850
 /* 128A0 800374A0 00000000 */   nop
 /* 128A4 800374A4 0C050440 */  jal       func_80141100
 /* 128A8 800374A8 00000000 */   nop
-/* 128AC 800374AC 0C0B763E */  jal       func_802DD8F8
+/* 128AC 800374AC 0C0B763E */  jal       spr_init_sprites
 /* 128B0 800374B0 0000202D */   daddu    $a0, $zero, $zero
 /* 128B4 800374B4 0C04432E */  jal       clear_entity_data
 /* 128B8 800374B8 24040001 */   addiu    $a0, $zero, 1

@@ -48,7 +48,7 @@ glabel gfx_draw_frame
 /* 1FAC 80026BAC 00000000 */   nop
 /* 1FB0 80026BB0 0C04E088 */  jal       render_transition_stencil_lower
 /* 1FB4 80026BB4 00000000 */   nop
-/* 1FB8 80026BB8 0C048D54 */  jal       func_80123550
+/* 1FB8 80026BB8 0C048D54 */  jal       render_dynamic_entities_backUI
 /* 1FBC 80026BBC 00000000 */   nop
 /* 1FC0 80026BC0 0C050884 */  jal       func_80142210
 /* 1FC4 80026BC4 00000000 */   nop
@@ -87,7 +87,7 @@ glabel gfx_draw_frame
 /* 2040 80026C40 0C049081 */  jal       render_messages
 /* 2044 80026C44 00000000 */   nop
 .L80026C48:
-/* 2048 80026C48 0C048D38 */  jal       func_801234E0
+/* 2048 80026C48 0C048D38 */  jal       render_dynamic_entities_frontUI
 /* 204C 80026C4C 00000000 */   nop
 /* 2050 80026C50 0C0509C7 */  jal       func_8014271C
 /* 2054 80026C54 00000000 */   nop

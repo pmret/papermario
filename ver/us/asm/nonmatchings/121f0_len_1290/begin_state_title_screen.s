@@ -22,8 +22,8 @@ glabel begin_state_title_screen
 /* 1220C 80036E0C AFB00020 */  sw        $s0, 0x20($sp)
 /* 12210 80036E10 F7B40030 */  sdc1      $f20, 0x30($sp)
 /* 12214 80036E14 AE400000 */  sw        $zero, ($s2)
-/* 12218 80036E18 3C01800A */  lui       $at, %hi(D_8009A5D8)
-/* 1221C 80036E1C AC20A5D8 */  sw        $zero, %lo(D_8009A5D8)($at)
+/* 12218 80036E18 3C01800A */  lui       $at, %hi(timeFreezeMode)
+/* 1221C 80036E1C AC20A5D8 */  sw        $zero, %lo(timeFreezeMode)($at)
 /* 12220 80036E20 3C018015 */  lui       $at, %hi(D_8014C248)
 /* 12224 80036E24 A022C248 */  sb        $v0, %lo(D_8014C248)($at)
 /* 12228 80036E28 0C00AB00 */  jal       general_heap_create
@@ -137,7 +137,7 @@ glabel begin_state_title_screen
 /* 123D8 80036FD8 00000000 */   nop
 /* 123DC 80036FDC 0C047624 */  jal       func_8011D890
 /* 123E0 80036FE0 00000000 */   nop
-/* 123E4 80036FE4 0C0B763E */  jal       func_802DD8F8
+/* 123E4 80036FE4 0C0B763E */  jal       spr_init_sprites
 /* 123E8 80036FE8 0000202D */   daddu    $a0, $zero, $zero
 /* 123EC 80036FEC 0C047889 */  jal       func_8011E224
 /* 123F0 80036FF0 00000000 */   nop

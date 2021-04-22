@@ -43,12 +43,12 @@ glabel func_8024F394
 /* 17DCEC 8024F40C 0C048BC9 */  jal       clear_entity_model_flags
 /* 17DCF0 8024F410 24050020 */   addiu    $a1, $zero, 0x20
 .L8024F414:
-/* 17DCF4 8024F414 0C0483C1 */  jal       update_entity_rendercmd
+/* 17DCF4 8024F414 0C0483C1 */  jal       exec_entity_model_commandlist
 /* 17DCF8 8024F418 0220202D */   daddu    $a0, $s1, $zero
 /* 17DCFC 8024F41C 08093D5A */  j         .L8024F568
 /* 17DD00 8024F420 00000000 */   nop
 .L8024F424:
-/* 17DD04 8024F424 0C0483C1 */  jal       update_entity_rendercmd
+/* 17DD04 8024F424 0C0483C1 */  jal       exec_entity_model_commandlist
 /* 17DD08 8024F428 0220202D */   daddu    $a0, $s1, $zero
 /* 17DD0C 8024F42C 8E02FFDC */  lw        $v0, -0x24($s0)
 /* 17DD10 8024F430 0440000D */  bltz      $v0, .L8024F468

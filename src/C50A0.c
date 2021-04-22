@@ -17,9 +17,53 @@ INCLUDE_ASM(s32, "C50A0", func_8012FE78);
 
 INCLUDE_ASM(s32, "C50A0", func_801309F0);
 
-INCLUDE_ASM(s32, "C50A0", func_80130A04);
+s32 next_sequence_step(ItemEntity *itemEntity) {
+    s32* currentState = itemEntity->currentState;
 
-INCLUDE_ASM(s32, "C50A0", func_80130ACC);
+    switch (*currentState++) {
+        case 1:
+            itemEntity->framesLeft = *currentState++;
+            itemEntity->unk_44 = *currentState++;
+            itemEntity->currentState = currentState;
+            break;
+
+        case 2:
+            itemEntity->currentState = itemEntity->sequenceStart;
+            return 1;
+
+        case 3:
+            itemEntity->sequenceStart = currentState;
+            itemEntity->currentState = currentState;
+            return 1;
+
+        case 7:
+            itemEntity->framesLeft = *currentState++;
+            itemEntity->unk_4C = *currentState++;
+            itemEntity->unk_50 = *currentState++;
+            itemEntity->unk_54 = *currentState++;
+            itemEntity->unk_58 = *currentState++;
+            itemEntity->currentState = currentState;
+            break;
+
+        case 4:
+            itemEntity->currentState = currentState++;
+            itemEntity->currentState = currentState++;
+
+        case 0:
+            return 1;
+    }
+
+    return 0;
+}
+
+void do_animation(ItemEntity* itemEntity) {
+    itemEntity->framesLeft--;
+    if (itemEntity->framesLeft <= 0) {
+        while (next_sequence_step(itemEntity) != 0) {
+            
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "C50A0", draw_coin_sparkles);
 

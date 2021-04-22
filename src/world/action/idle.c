@@ -36,7 +36,7 @@ void world_action_idle_update(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0;
+        playerStatus->unk_8C = 0.0f;
 
         if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
             anim = 0x90002;

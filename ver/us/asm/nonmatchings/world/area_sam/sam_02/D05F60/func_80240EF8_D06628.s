@@ -3,8 +3,8 @@
 
 glabel func_80240EF8_D06628
 /* D06628 80240EF8 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* D0662C 80240EFC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D06630 80240F00 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D0662C 80240EFC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D06630 80240F00 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D06634 80240F04 3C05800B */  lui       $a1, %hi(gCameras)
 /* D06638 80240F08 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* D0663C 80240F0C AFBF0010 */  sw        $ra, 0x10($sp)

@@ -14,4 +14,4 @@ Script N(802433D0);
 NpcGroupList N(npcGroupList_80244000);
 Script N(makeEntities);
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;

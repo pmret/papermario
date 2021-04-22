@@ -23,7 +23,7 @@ glabel func_802BBA60_E303B0
 /* E303D0 802BBA80 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
 /* E303D4 802BBA84 AFBF0020 */  sw        $ra, 0x20($sp)
 /* E303D8 802BBA88 AFB00010 */  sw        $s0, 0x10($sp)
-/* E303DC 802BBA8C 0C009C64 */  jal       func_80027190
+/* E303DC 802BBA8C 0C009C64 */  jal       get_time_freeze_mode
 /* E303E0 802BBA90 8E300040 */   lw       $s0, 0x40($s1)
 /* E303E4 802BBA94 14400017 */  bnez      $v0, .L802BBAF4
 /* E303E8 802BBA98 00000000 */   nop

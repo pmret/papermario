@@ -471,7 +471,7 @@ glabel L80131A0C_C810C
 /* C813C 80131A3C 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
 /* C8140 80131A40 0C04C27C */  jal       func_801309F0
 /* C8144 80131A44 0200202D */   daddu    $a0, $s0, $zero
-/* C8148 80131A48 0C04C2B3 */  jal       func_80130ACC
+/* C8148 80131A48 0C04C2B3 */  jal       do_animation
 /* C814C 80131A4C 0200202D */   daddu    $a0, $s0, $zero
 /* C8150 80131A50 86030018 */  lh        $v1, 0x18($s0)
 /* C8154 80131A54 2402015C */  addiu     $v0, $zero, 0x15c

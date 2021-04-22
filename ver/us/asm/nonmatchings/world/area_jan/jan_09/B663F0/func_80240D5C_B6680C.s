@@ -18,8 +18,8 @@ glabel func_80240D5C_B6680C
 /* B66840 80240D90 0040802D */  daddu     $s0, $v0, $zero
 /* B66844 80240D94 3C05800B */  lui       $a1, %hi(gCameras)
 /* B66848 80240D98 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* B6684C 80240D9C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* B66850 80240DA0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* B6684C 80240D9C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* B66850 80240DA0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* B66854 80240DA4 00912021 */  addu      $a0, $a0, $s1
 /* B66858 80240DA8 00031080 */  sll       $v0, $v1, 2
 /* B6685C 80240DAC 00431021 */  addu      $v0, $v0, $v1

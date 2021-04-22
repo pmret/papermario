@@ -130,7 +130,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_script_list();
     create_cameras_a();
     gameStatus2 = &gGameStatusPtr;
-    func_802DD8F8((*gameStatus2)->unk_84);
+    spr_init_sprites((*gameStatus2)->unk_84);
     func_8011E224();
     clear_entity_models();
     npc_list_clear();

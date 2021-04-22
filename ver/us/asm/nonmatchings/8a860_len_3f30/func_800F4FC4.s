@@ -93,7 +93,7 @@ glabel func_800F4FC4
 /* 8E5C0 800F5110 A022D691 */  sb        $v0, %lo(D_8010D691)($at)
 /* 8E5C4 800F5114 3C018011 */  lui       $at, %hi(D_8010D692)
 /* 8E5C8 800F5118 A023D692 */  sb        $v1, %lo(D_8010D692)($at)
-/* 8E5CC 800F511C 0C048C8F */  jal       bind_dynamic_entity_7
+/* 8E5CC 800F511C 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 8E5D0 800F5120 0000282D */   daddu    $a1, $zero, $zero
 /* 8E5D4 800F5124 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 8E5D8 800F5128 8FB00010 */  lw        $s0, 0x10($sp)

@@ -22,7 +22,7 @@ glabel load_demo_battle
 /* 4E258 80072E58 00000000 */   nop
 /* 4E25C 80072E5C 0C00B7BD */  jal       create_cameras_a
 /* 4E260 80072E60 00000000 */   nop
-/* 4E264 80072E64 0C0B763E */  jal       func_802DD8F8
+/* 4E264 80072E64 0C0B763E */  jal       spr_init_sprites
 /* 4E268 80072E68 0000202D */   daddu    $a0, $zero, $zero
 /* 4E26C 80072E6C 0C047889 */  jal       func_8011E224
 /* 4E270 80072E70 00000000 */   nop

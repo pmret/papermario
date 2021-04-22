@@ -9,6 +9,7 @@ from glob import glob
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
+CFLAGS = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
@@ -74,18 +75,16 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
             command=f"touch $out",
         )
 
-    standard_cc_flags = "-O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow"
-
     ninja.rule("cc",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {standard_cc_flags} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {standard_cc_flags} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )

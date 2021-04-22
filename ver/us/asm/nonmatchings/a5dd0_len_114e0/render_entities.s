@@ -123,7 +123,7 @@ glabel render_entities
 /* A675C 8011005C 3C068011 */  lui       $a2, %hi(func_8010FE44)
 /* A6760 80110060 24C6FE44 */  addiu     $a2, $a2, %lo(func_8010FE44)
 .L80110064:
-/* A6764 80110064 0C048BD9 */  jal       func_80122F64
+/* A6764 80110064 0C048BD9 */  jal       bind_entity_model_setupGfx
 /* A6768 80110068 00000000 */   nop
 .L8011006C:
 /* A676C 8011006C 8E070044 */  lw        $a3, 0x44($s0)

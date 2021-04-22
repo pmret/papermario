@@ -65,7 +65,7 @@ glabel test_item_player_collision
 /* CA2F4 80133BF4 30620040 */  andi      $v0, $v1, 0x40
 /* CA2F8 80133BF8 144000E5 */  bnez      $v0, .L80133F90
 /* CA2FC 80133BFC 0000102D */   daddu    $v0, $zero, $zero
-/* CA300 80133C00 0C009C64 */  jal       func_80027190
+/* CA300 80133C00 0C009C64 */  jal       get_time_freeze_mode
 /* CA304 80133C04 00000000 */   nop
 /* CA308 80133C08 144000E1 */  bnez      $v0, .L80133F90
 /* CA30C 80133C0C 0000102D */   daddu    $v0, $zero, $zero

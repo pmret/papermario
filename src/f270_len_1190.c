@@ -97,7 +97,7 @@ void state_init_logos(void) {
     clear_script_list();
     clear_dynamic_entity_list();
     func_8011D890();
-    func_802DD8F8(0);
+    spr_init_sprites(0);
     func_8011E224();
     clear_entity_models();
     npc_list_clear();
@@ -310,7 +310,7 @@ void state_init_pause(void) {
     D_800A0921 = 0;
     D_800A0922 = 0;
     disable_player_input();
-    func_80027088(3);
+    set_time_freeze_mode(3);
     set_windows_visible(2);
 }
 
@@ -356,7 +356,7 @@ void state_step_pause(void) {
                     battle_heap_create();
                     nuContRmbForceStop();
                     func_80149670(0);
-                    func_802DD8F8(0);
+                    spr_init_sprites(0);
                     clear_model_data();
                     func_80148040();
                     use_default_background_settings();
@@ -450,7 +450,7 @@ void state_step_unpause(void) {
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
                         func_80149670(1);
-                        func_802DD8F8((*gameStatus)->unk_84);
+                        spr_init_sprites((*gameStatus)->unk_84);
                         init_model_data();
                         func_801480F0();
                         init_entity_models();
@@ -488,10 +488,10 @@ void state_step_unpause(void) {
                         func_8003B1B0();
                         set_windows_visible(0);
                         func_800E98C4();
-                        func_80027088(1);
+                        set_time_freeze_mode(1);
                         D_800A0921 = 3;
                         playerStatus = &gPlayerStatus;
-                        playerStatus->unk_0F = playerStatus->unk_0E - 1;
+                        playerStatus->alpha2 = playerStatus->alpha1 - 1;
                         D_802D9D71 = D_802D9D70 + 1;
 
                         update_counters();
@@ -525,7 +525,7 @@ void state_step_unpause(void) {
             }
             break;
         case 4:
-            func_80027088(0);
+            set_time_freeze_mode(0);
             update_counters();
             npc_list_update();
             update_player();

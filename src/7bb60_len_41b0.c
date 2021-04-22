@@ -341,7 +341,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5530);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E58F0);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5938);
+INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5938, s32 lag, s32* x, s32* y, s32* z);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E59A0);
 

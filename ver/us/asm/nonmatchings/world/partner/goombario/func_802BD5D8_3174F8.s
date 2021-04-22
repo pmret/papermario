@@ -115,7 +115,7 @@ glabel func_802BD5D8_3174F8
 /* 317668 802BD748 080AF6A1 */  j         .L802BDA84
 /* 31766C 802BD74C AE200070 */   sw       $zero, 0x70($s1)
 .L802BD750:
-/* 317670 802BD750 0C009C22 */  jal       func_80027088
+/* 317670 802BD750 0C009C22 */  jal       set_time_freeze_mode
 /* 317674 802BD754 24040001 */   addiu    $a0, $zero, 1
 /* 317678 802BD758 3C03FDFF */  lui       $v1, 0xfdff
 /* 31767C 802BD75C 3463FFFF */  ori       $v1, $v1, 0xffff
