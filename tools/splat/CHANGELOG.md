@@ -1,6 +1,6 @@
 # splat Release Notes
 
-## 0.7.1
+### 0.7.1
 
 * Image segment changes:
   * Added `flip_x` and `flip_y` boolean parameters to replace `flip`.
