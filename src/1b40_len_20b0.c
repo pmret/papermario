@@ -284,31 +284,11 @@ s32 get_time_freeze_mode(void) {
     return timeFreezeMode;
 }
 
-#ifdef NON_MATCHING
 void gfx_init_state(void) {
     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
-// matching but bullshit
-void gfx_init_state(void) {
-    Gfx* gfx;
-    Gfx* gfx2;
-
-    gfx = gMasterGfxPos++;
-    gSPSegment(gfx, 0x00, 0x0);
-
-    gfx = gMasterGfxPos++;
-    gSPDisplayList(gfx, OS_K0_TO_PHYSICAL(D_80074230));
-
-    gfx2 = gMasterGfxPos++;
-
-    gfx[1].words.w0 = (_SHIFTL((G_DL), 24, 8) | _SHIFTL((0), 16, 8) | _SHIFTL((G_DL_PUSH), 0, 16));
-    gfx[1].words.w1 = OS_K0_TO_PHYSICAL(D_80074210);
-}
-#else
-INCLUDE_ASM(void, "1b40_len_20b0", gfx_init_state);
-#endif
 
 INCLUDE_ASM(s32, "1b40_len_20b0", func_800271FC);
 
@@ -320,10 +300,9 @@ INCLUDE_ASM(s32, "1b40_len_20b0", func_80027774);
 
 INCLUDE_ASM(s32, "1b40_len_20b0", func_800279B4);
 
-// ordering issues, graphics sadness
-#ifdef NON_MATCHING
 void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;
+    s32 temp = 24; // todo figure out why this is needed and can't be used elsewhere
 
     gDPPipeSync(gMasterGfxPos++);
     gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
@@ -346,12 +325,9 @@ void func_80027BAC(s32 arg0, s32 arg1) {
                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                    G_TX_NOLOD);
         gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
-        gSPTextureRectangle(gMasterGfxPos++, 0, i * 24, 0x04FC, 20 + i * 24, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gSPTextureRectangle(gMasterGfxPos++, 0, i * temp, 0x04FC, (i * 24) + 20, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
         gDPPipeSync(gMasterGfxPos++);
     }
 }
-#else
-INCLUDE_ASM(s32, "1b40_len_20b0", func_80027BAC);
-#endif
 
 INCLUDE_ASM(void, "1b40_len_20b0", gfx_draw_background);
