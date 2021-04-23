@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-s32 D_80244A20[0x70];
+static s32 N(D_80244A20)[0x70];
 
 Script N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -139,7 +139,7 @@ Script N(80241CD4) = SCRIPT({
 
 Script N(80241E18) = {
     SI_CMD(ScriptOpcode_CALL, N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241CD4), 0x10, 0, D_80244A20, 0, 1),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241CD4), 0x10, 0, N(D_80244A20), 0, 1),
     SI_CMD(ScriptOpcode_CALL, N(func_802415F4_BE0384), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
@@ -1229,29 +1229,21 @@ ApiStatus N(func_80241648_BE03D8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
-ApiStatus func_80241680_BE0410(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241680_BE0410)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(D_80244A20 + i) = ptr[i];
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
         }
-        D_80244A20[i] = 0;
+        N(D_80244A20)[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(D_80244A20 + i) = i + 16;
-            D_80244A20[0x70] = 0;
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", arn_03_func_80241680_BE0410, ScriptInstance* script, s32 isInitialCall);
-#endif
- 

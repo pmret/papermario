@@ -54,10 +54,10 @@ typedef struct {
 
 static s8 N(pad_D_8024EF80)[0x4];
 static f32 N(D_8024EF84);
-static f32 N(D_8024EF88);
+static s32 N(D_8024EF88);
 static s8 N(pad_D_8024EF8C)[0x4];
-static N(temp)* N(D_8024EF90);
-static s8 N(pad_D_8024EF94)[0x20];
+static N(temp)* N(D_8024EF90)[4];
+static s8 N(pad_D_8024EF94)[0x18];
 static s32 N(D_8024EFB8);
 static s8 N(pad_D_8024EFBC)[0x4];
 static Effect* N(D_8024EFC0);
@@ -3469,127 +3469,125 @@ ApiStatus N(func_80241874_96AA34)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+//#define NON_MATCHING
 #ifdef NON_MATCHING
-u32 N(func_8024190C_96AACC)(ScriptInstance *script, s32 isInitialCall) {
-    Gfx* gfx = &gMasterGfxPos;
-
-    f32 subroutine_arg6[4][4];
-    f32 subroutine_arg16;
+s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
+    Matrix4f subroutine_arg6;
+    Matrix4f subroutine_arg16;
     s32 subroutine_arg26;
     s32 subroutine_arg2C;
     s32 subroutine_arg2D;
     s32 subroutine_arg2E;
     s32 subroutine_arg2F;
 
-
-    if (script->state == 0) {
+    if (ptr->unk_00 == 0) {
         return 1;
     }
 
-    gSPDisplayList(gfx++, N(D_802478C8_970A88));
+    gSPDisplayList(gMasterGfxPos++, N(D_802478C8_970A88));
 
-    if ((script->state == 1) || (script->state == 4) || (script->state == 5)) {
-        guTranslateF(&subroutine_arg16, script->groupFlags, (s32)script->ptrNextLine, (s32)script->ptrReadPos);
-        guMtxCatF(&subroutine_arg16, isInitialCall, &subroutine_arg6);
-        guRotateF(&subroutine_arg16, script->labelIndices[0], 0.0f, 1.0f, 0.0f);
-        guMtxCatF(&subroutine_arg16, &subroutine_arg6, &subroutine_arg6);
-        guRotateF(&subroutine_arg16, script->labelIndices[4], 1.0f, 0.0f, 0.0f);
-        guMtxCatF(&subroutine_arg16, &subroutine_arg6, &subroutine_arg6);
-        guMtxF2L(&subroutine_arg6, &gDisplayContext->lookAt[0].l[0].l.col[(gMatrixListPos << 6) + 0x11630]);
+    if ((ptr->unk_00 == 1) || (ptr->unk_00 == 4) || (ptr->unk_00 == 5)) {
+        guTranslateF(&subroutine_arg16, ptr->unk_04, ptr->unk_08, ptr->unk_0C);
+        guMtxCatF(&subroutine_arg16, matrix, &subroutine_arg6);
+        guRotateF(&subroutine_arg16, ptr->unk_10, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(&subroutine_arg16, subroutine_arg6, subroutine_arg6);
+        guRotateF(&subroutine_arg16, ptr->unk_14, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(&subroutine_arg16, subroutine_arg6, subroutine_arg6);
+        guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
 
-        gSPMatrix(gfx++, gDisplayContext->lookAt[0].l[0].l.col[gMatrixListPos++ + 0x11630], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-        if ((script->state == 1) || (script->state == 4)) {
-            gSPDisplayList(gfx++, N(D_802479B8_970B78));
+        if ((ptr->unk_00 == 1) || (ptr->unk_00 == 4)) {
+            gSPDisplayList(gMasterGfxPos++, N(D_802479B8_970B78));
         }
 
-        if ((script->state == 1) || (script->state == 5)) {
-            func_802DE044(&subroutine_arg2C, script->labelIndices[8], script->labelIndices[12]);
+        if ((ptr->unk_00 == 1) || (ptr->unk_00 == 5)) {
+            func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
 
-            gDPSetTextureLUT(gfx++, G_TT_RGBA16);
-            gDPLoadTLUT_pal16(gfx++, 0, 0xFFFFFFFF);
-            gDPTileSync(gfx++);
-            gDPSetTile(gfx++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPLoadSync(gfx++);
-            gDPLoadTLUTCmd(gfx++, G_TX_LOADTILE, 15);
-            gDPPipeSync(gfx++);
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, 0xFFFFFFFF);
+            gDPTileSync(gMasterGfxPos++);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPLoadSync(gMasterGfxPos++);
+            gDPLoadTLUTCmd(gMasterGfxPos++, G_TX_LOADTILE, 15);
+            gDPPipeSync(gMasterGfxPos++);
 
-            gDPSetTextureImage(gfx++, G_IM_FMT_CI, G_IM_SIZ_8b, subroutine_arg2E, subroutine_arg2C);
-            gDPSetTile(gfx++, G_IM_FMT_CI, G_IM_SIZ_8b, 0, subroutine_arg2E, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, subroutine_arg2E, subroutine_arg2C);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 0, subroutine_arg2E, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
 
-            gDPLoadSync(gfx++);
-            gDPLoadTile(gfx++, G_TX_LOADTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
+            gDPLoadSync(gMasterGfxPos++);
+            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
 
-            gDPPipeSync(gfx++);
-            gDPSetTile(gfx++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, subroutine_arg2E, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, subroutine_arg2E, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
 
-            guTranslateF(&subroutine_arg6, (s32)script->labelPositions[0] - (subroutine_arg2E / 2) - 30, 0.0f, 0.0f);
-            guMtxF2L(&subroutine_arg6, &gDisplayContext->lookAt[0].l[0].l.col[(gMatrixListPos << 6) + 0x11630]);
+            guTranslateF(&subroutine_arg6, ptr->unk_20 - (subroutine_arg2E / 2) - 30, 0.0f, 0.0f);
+            guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
             
-            gSPMatrix(gfx++, gDisplayContext->lookAt[0].l[0].l.col[gMatrixListPos++ + 0x11630], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gfx++, N(D_80247A38_970BF8));
-            gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMasterGfxPos++, N(D_80247A38_970BF8));
+            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         }
 
-        gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         return 1;
     }
 
-    if (script->state == 2) {
-        gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
+    if (ptr->unk_00 == 2) {
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
 
-        guTranslateF(&subroutine_arg16, N(D_8024F010).unk_04, N(D_8024F010).unk_08, N(D_8024F010).unk_0C);
-        guMtxCatF(&subroutine_arg16, isInitialCall, &subroutine_arg6);
-        guMtxF2L(&subroutine_arg6, &gDisplayContext->lookAt[0].l[0].l.col[(gMatrixListPos << 6) + 0x11630]);
+        guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(&subroutine_arg16, matrix, subroutine_arg6);
+        guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
         
-        gSPMatrix(gfx++, gDisplayContext->lookAt[0].l[0].l.col[gMatrixListPos + 0x11630], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(0)), &subroutine_arg26, 0x30, &subroutine_arg6);
         
-        gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
         return 1;
     }
 
-    if (script->state == 3) {
-        gDPSetTileSize(gfx++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
+    if (ptr->unk_00 == 3) {
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
 
-        guTranslateF(&subroutine_arg16, N(D_8024F010).unk_04, N(D_8024F010).unk_08, N(D_8024F010).unk_0C, 0xD8380002);
-        guMtxCatF(&subroutine_arg16, isInitialCall, &subroutine_arg6);
-        guMtxF2L(&subroutine_arg6, &gDisplayContext->lookAt[0].l[0].l.col[(gMatrixListPos << 6) + 0x11630]);
+        guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(&subroutine_arg16, matrix, &subroutine_arg6);
+        guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
         
-        gSPMatrix(gfx++, 0xFFFFFFFF, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMasterGfxPos++, 0xFFFFFFFF, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(1)), &subroutine_arg26, 0x30, &subroutine_arg6);
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(2)), &subroutine_arg26, 0x30, &subroutine_arg6);
         
-        gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
-        guTranslateF(&subroutine_arg16, N(D_8024F010).unk_04, N(D_8024F010).unk_08, N(D_8024F010).unk_0C);
-        guMtxCatF(&subroutine_arg16, isInitialCall, &subroutine_arg6);
-        guMtxF2L(&subroutine_arg6, &gDisplayContext->lookAt[0].l[0].l.col[(gMatrixListPos << 6) + 0x11630]);
+        guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
+        guMtxCatF(&subroutine_arg16, matrix, &subroutine_arg6);
+        guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
         
-        gSPMatrix(gfx++, gDisplayContext->lookAt[0].l[0].l.col[((gMatrixListPos++ & 0xFFFF) << 6) + 0x11630], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gMatrixListPos++;
 
-        func_802DE044(&subroutine_arg2C, script->labelIndices[8], script->labelIndices[12]);
-        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E /2), subroutine_arg2F / 2, 0xFF), &subroutine_arg26, 0x10, &subroutine_arg6);
+        func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
         
-        gSPPopMatrix(gfx++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
     return 1;
 }
 #else
-INCLUDE_ASM(u32, "world/area_dro/dro_02/9694C0", dro_02_func_8024190C_96AACC, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(u32, "world/area_dro/dro_02/9694C0", dro_02_func_8024190C_96AACC, D_8024F010_Struct* ptr, Matrix4f matrix);
 #endif
 
 void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     s32* CC_ptr = &N(D_8024EFCC);
     D_8024F010_Struct* F010_ptr;
-    f32 sp20[4][4];
-    f32 sp60[4][4];
-    f32 spA0[4][4];
+    Matrix4f sp20;
+    Matrix4f sp60;
+    Matrix4f spA0;
 
     guPositionF(&spA0, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
     
@@ -3608,8 +3606,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg
 
 // Too much work, maybe try again later
 #ifdef NON_MATCHING
-
-void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
+void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
     N(temp)** effect;
     N(temp)** effect2;
     N(temp)** effect3;
@@ -3646,7 +3643,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
     f32 subroutine_arg1C;
     f32 subroutine_arg1D;
 
-    N(D_8024F010)_Struct* ptr;
+    D_8024F010_Struct* ptr;
     s32* ptr2;
     s32* ptr3;
     s32* ptr4;
@@ -3657,7 +3654,7 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
     s32* ptr9;
     s32* ptr10;
     f32* ptr11;
-    N(D_8024F010)_Struct* ptr12;
+    D_8024F010_Struct* ptr12;
 
     f32 testf1;
     f32 testf2;
@@ -3666,288 +3663,249 @@ void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall) {
         case 0:
             N(D_8024EF88) = 0;
             set_variable(N(D_8024EFCC), SI_ARRAY(9), 1);
-            ptr = &N(D_8024F010);
             
-            ptr->unk_00 = 1;
-            ptr->unk_04 = -200.0f;
-            ptr->unk_08 = 0;
-            ptr->unk_0C = 0;
-            ptr->unk_14 = 0;
-            ptr->unk_10 = 0;
-            ptr->unk_18 = 1;
-            ptr->unk_1C = 0xC;
-            ptr->unk_20 = 2;
-            ptr->unk_24 = 1;
-            ptr->unk_28 = 200.0f;
-            ptr->unk_2C = 0;
-            ptr->unk_30 = 1.0f;
-            ptr->unk_38 = 0;
-            ptr->unk_34 = 0;
-            ptr->unk_3C = 1;
-            ptr->unk_40 = 0x30;
-            ptr->unk_44 = 0;
-            ptr->unk_48 = 1;
-            ptr->unk_4C = 0;
-            ptr->unk_50 = 200.0f;
-            ptr->unk_54 = 2.0f;
-            ptr->unk_5C = 0;
-            ptr->unk_58 = 0;
-            ptr->unk_60 = 8;
-            ptr->unk_64 = 5;
-            ptr->unk_68 = 4;
+            N(D_8024F010)[0].unk_00 = 1;
+            N(D_8024F010)[0].unk_04 = -200.0f;
+            N(D_8024F010)[0].unk_08 = 0;
+            N(D_8024F010)[0].unk_0C = 0;
+            N(D_8024F010)[0].unk_14 = 0;
+            N(D_8024F010)[0].unk_10 = 0;
+            N(D_8024F010)[0].unk_18 = 1;
+            N(D_8024F010)[0].unk_1C = 0xC;
+            N(D_8024F010)[0].unk_20 = 2;
+
+            N(D_8024F010)[1].unk_00 = 1;
+            N(D_8024F010)[1].unk_04 = 200.0f;
+            N(D_8024F010)[1].unk_08 = 0;
+            N(D_8024F010)[1].unk_0C = 1.0f;
+            N(D_8024F010)[1].unk_14 = 0;
+            N(D_8024F010)[1].unk_10 = 0;
+            N(D_8024F010)[1].unk_18 = 1;
+            N(D_8024F010)[1].unk_1C = 0x30;
+            N(D_8024F010)[1].unk_20 = 0;
+
+            N(D_8024F010)[2].unk_00 = 1;
+            N(D_8024F010)[2].unk_04 = 0;
+            N(D_8024F010)[2].unk_08 = 200.0f;
+            N(D_8024F010)[2].unk_0C = 2.0f;
+            N(D_8024F010)[2].unk_14 = 0;
+            N(D_8024F010)[2].unk_10 = 0;
+            N(D_8024F010)[2].unk_18 = 8;
+            N(D_8024F010)[2].unk_1C = 5;
+            N(D_8024F010)[2].unk_20 = 4;
             break;
 
         case 1:
-            ptr = &N(D_8024F010);
-            ptr2 = &N(D_8024EF88);
-
-            ptr->unk_04 += 10.0f;
-            ptr->unk_28 += -10.0f;
-            ptr->unk_50 += -10.0f;
-            (*ptr2)++;
-            if ((*ptr2) == 0x12) {
+            N(D_8024F010)[0].unk_04 += 10.0f;
+            N(D_8024F010)[1].unk_04 += -10.0f;
+            N(D_8024F010)[2].unk_08 += -10.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 0x12) {
                 gPlayerStatus.position.y = -1000.0f;
             }
-            if ((*ptr2) == 0x14) {
+            if (N(D_8024EF88) == 0x14) {
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 2);
-                (*ptr2) = 0;
+                N(D_8024EF88) = 0;
             }
             break;
 
         case 2:
-            N(D_8024F010).unk_00 = 2;
-            N(D_8024F010).unk_24 = 0;
-            N(D_8024F010).unk_48 = 0;
-            N(D_8024F010).unk_04 = 0;
-            N(D_8024F010).unk_08 = 0;
-            N(D_8024F010).unk_0C = 0;
+            N(D_8024F010)[0].unk_00 = 2;
+            N(D_8024F010)[1].unk_00 = 0;
+            N(D_8024F010)[2].unk_00 = 0;
+            N(D_8024F010)[0].unk_04 = 0;
+            N(D_8024F010)[0].unk_08 = 0;
+            N(D_8024F010)[0].unk_0C = 0;
             break;
 
         case 3:
-            ptr3 = &N(D_8024EF88);
-
-            N(D_8024F010).unk_00 = 1;
-            N(D_8024F010).unk_24 = 1;
-            N(D_8024F010).unk_48 = 1;
-            N(D_8024F010).unk_04 -= 10.0f;
-            N(D_8024F010).unk_28 += 10.0f;
-            (*ptr3)++;
-            if ((*ptr3) == 0xA) {
-                (*ptr3) = 0;
+            N(D_8024F010)[0].unk_00 = 1;
+            N(D_8024F010)[1].unk_00 = 1;
+            N(D_8024F010)[2].unk_00 = 1;
+            N(D_8024F010)[0].unk_04 -= 10.0f;
+            N(D_8024F010)[1].unk_04 += 10.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 4);
             }
             break;
 
         case 4:
-            ptr = &N(D_8024F010);
-            ptr4 = &N(D_8024EF88);
-
-            ptr->unk_08 = 0;
-            ptr->unk_0C = 0;
-            ptr->unk_2C = 0;
-            ptr->unk_4C = 0;
-            ptr->unk_50 = 0;
-            ptr->unk_04 = -100.0f;
-            ptr->unk_28 = 100.0f;
-            ptr->unk_30 = 1.0f;
-            ptr->unk_54 = 2.0f;
-            (*ptr4)++;
-            if ((*ptr4) == 0x14) {
-                (*ptr4) = 0;
+            N(D_8024F010)[0].unk_08 = 0;
+            N(D_8024F010)[0].unk_0C = 0;
+            N(D_8024F010)[1].unk_08 = 0;
+            N(D_8024F010)[2].unk_04 = 0;
+            N(D_8024F010)[2].unk_08 = 0;
+            N(D_8024F010)[0].unk_04 = -100.0f;
+            N(D_8024F010)[1].unk_04 = 100.0f;
+            N(D_8024F010)[1].unk_0C = 1.0f;
+            N(D_8024F010)[2].unk_0C = 2.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 0x14) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 5);
                 sfx_play_sound_with_params(0x203, 0, 0x18, 0);
             }
             break;
 
         case 5:
-            ptr = &N(D_8024F010);
-            ptr5 = &N(D_8024EF88);
-
-            ptr->unk_34 = 0;
-            ptr->unk_58 = 0;
-            ptr->unk_10 += 18.0f;
-            (*ptr5)++;
-            if ((*ptr5) == 8) {
-                func_80242214_96B3D4(0, &subroutine_arg6, &subroutine_arg7, &subroutine_arg8, &subroutine_arg9);
+            N(D_8024F010)[1].unk_10 = 0;
+            N(D_8024F010)[2].unk_10 = 0;
+            N(D_8024F010)[0].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(0, &subroutine_arg6, &subroutine_arg7, &subroutine_arg8, &subroutine_arg9);
                 func_8006FEF0(0, subroutine_arg6, subroutine_arg7 + 20.0f, subroutine_arg8, 30.0f);
             }
-            if ((*ptr5) == 0xA) {
-                (*ptr5) = 0;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 6);
                 sfx_play_sound_with_params(0x203, 0, 0x40, 0);
             }
             break;
 
         case 6:
-            ptr = &N(D_8024F010);
-            ptr6 = &N(D_8024EF88);
-
-            ptr->unk_34 = 0;
-            ptr->unk_10 += 18.0f;
-            ptr->unk_58 += 18.0f;
-            (*ptr6)++;
-            if ((*ptr6) == 8) {
-                func_80242214_96B3D4(2, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
+            N(D_8024F010)[1].unk_10 = 0;
+            N(D_8024F010)[0].unk_10 += 18.0f;
+            N(D_8024F010)[2].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(2, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
                 func_8006FEF0(0, subroutine_argA, subroutine_argB + 20.0f, subroutine_argC, 30.0f);
             }
-            if ((*ptr6) == 0xA) {
-                (*ptr6) = 0;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 7);
                 sfx_play_sound_with_params(0x203, 0, 0x68, 0);
             }
             break;
 
         case 7:
-            ptr = &N(D_8024F010);
-            ptr7 = &N(D_8024EF88);
-            
-            ptr->unk_10 = 0;
-            ptr->unk_34 += 18.0f;
-            ptr->unk_58 += 18.0f;
-            (*ptr7)++;
-            if ((*ptr7) == 8) {
-                func_80242214_96B3D4(1, &subroutine_argE, &subroutine_argF, &subroutine_arg10, &subroutine_arg11);
+            N(D_8024F010)[0].unk_10 = 0;
+            N(D_8024F010)[1].unk_10 += 18.0f;
+            N(D_8024F010)[2].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 8) {
+                N(func_80242214_96B3D4)(1, &subroutine_argE, &subroutine_argF, &subroutine_arg10, &subroutine_arg11);
                 func_8006FEF0(0, subroutine_argE, subroutine_argF + 20.0f, subroutine_arg10, 30.0f);
             }
-            if ((*ptr7) == 0xA) {
-                (*ptr7) = 0;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 8);
             }
             break;
 
         case 8:
-            ptr = &N(D_8024F010);
-            ptr8 = &N(D_8024EF88);
-            
-            ptr->unk_10 = 0;
-            ptr->unk_58 = 0;
-            ptr->unk_34 += 18.0f;
-            (*ptr8)++;
-            if ((*ptr8) == 0xA) {
-                (*ptr8) = 0;
+            N(D_8024F010)[0].unk_10 = 0;
+            N(D_8024F010)[2].unk_10 = 0;
+            N(D_8024F010)[1].unk_10 += 18.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 9);
             }
             break;
 
         case 9:
-            ptr = &N(D_8024F010);
-            ptr9 = &N(D_8024EF88);
-            
-            ptr->unk_08 = 0;
-            ptr->unk_10 = 0;
-            ptr->unk_2C = 0;
-            ptr->unk_34 = 0;
-            ptr->unk_4C = 0;
-            ptr->unk_50 = 0;
-            ptr->unk_58 = 0;
-            ptr->unk_04 += 10.0f;
-            ptr->unk_28 -= 10.0f;
-            (*ptr9)++;
-            if ((*ptr9) == 0xA) {
-                (*ptr9) = 0;
+            N(D_8024F010)[0].unk_08 = 0;
+            N(D_8024F010)[0].unk_10 = 0;
+            N(D_8024F010)[1].unk_08 = 0;
+            N(D_8024F010)[1].unk_10 = 0;
+            N(D_8024F010)[2].unk_04 = 0;
+            N(D_8024F010)[2].unk_08 = 0;
+            N(D_8024F010)[2].unk_10 = 0;
+            N(D_8024F010)[0].unk_04 += 10.0f;
+            N(D_8024F010)[1].unk_04 -= 10.0f;
+            N(D_8024EF88)++;
+            if (N(D_8024EF88) == 0xA) {
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 10);
             }
             break;
 
         case 10:
-            ptr = &N(D_8024F010);
-            ptr->unk_00 = 3;
-            ptr->unk_18 = 8;
-            ptr->unk_24 = 0;
-            ptr->unk_48 = 0;
-            ptr->unk_1C = 0x11;
+            N(D_8024F010)[0].unk_00 = 3;
+            N(D_8024F010)[0].unk_18 = 8;
+            N(D_8024F010)[1].unk_00 = 0;
+            N(D_8024F010)[2].unk_00 = 0;
+            N(D_8024F010)[0].unk_1C = 0x11;
             return;
 
         case 11:
-            effect2 = &N(D_8024EF90);
-            ptr = &N(D_8024F010);
-            
-            ptr->unk_00 = 4;
-            ptr->unk_24 = 5;
-            ptr->unk_3C = 8;
-            ptr->unk_04 = 0;
-            ptr->unk_0C = 0;
-            ptr->unk_28 = 0;
-            ptr->unk_30 = 0;
-            ptr->unk_40 = 0xA;
-            ptr->unk_44 = 0;
+            N(D_8024F010)[0].unk_00 = 4;
+            N(D_8024F010)[1].unk_00 = 5;
+            N(D_8024F010)[1].unk_18 = 8;
+            N(D_8024F010)[0].unk_04 = 0;
+            N(D_8024F010)[0].unk_0C = 0;
+            N(D_8024F010)[1].unk_04 = 0;
+            N(D_8024F010)[1].unk_0C = 0;
+            N(D_8024F010)[1].unk_1C = 0xA;
+            N(D_8024F010)[1].unk_20 = 0;
             N(D_8024EF88) = 0;
-            ptr->unk_08 = 68.0f;
-            ptr->unk_10 = 180.0f;
-            ptr->unk_2C = 68.0f;
-            ptr->unk_34 = 180.0f;
+            N(D_8024F010)[0].unk_08 = 68.0f;
+            N(D_8024F010)[0].unk_10 = 180.0f;
+            N(D_8024F010)[1].unk_08 = 68.0f;
+            N(D_8024F010)[1].unk_10 = 180.0f;
             set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xC);
-            *gPauseMenuTabs = NULL;
+            gPauseMenuTabs[0].unk_00 = 0;
             N(D_8024EF84) = 1.0f;
-            func_80242214_96B3D4(1, &subroutine_arg12, &subroutine_arg13, &subroutine_arg14, &subroutine_arg15);
-
+            N(func_80242214_96B3D4)(1, &subroutine_arg12, &subroutine_arg13, &subroutine_arg14, &subroutine_arg15);
+            
+            effect = &N(D_8024EF90);
             for (i = 0; i < 4; i++) {
-                N(temp)* res = func_800720B0(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
+                (*effect) = func_800720B0(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
 
-                *effect2 = res;
-                //(*effect2)->unk_0C = effectPtr;
-                (*effect2)->unk_0C->unk_28 = 0xD7;
-                (*effect2)->unk_0C->unk_2C = 0x37;
-                (*effect2)->unk_0C->unk_30 = 0xFF;
+                (*effect)->unk_0C->unk_28 = 0xD7;
+                (*effect)->unk_0C->unk_2C = 0x37;
+                (*effect)->unk_0C->unk_30 = 0xFF;
+                effect++;
+
                 j = 1;
-                while (j < (*effect2)->unk_08) {
-                    N(temp)** eff2 = effect2;
-                    (*eff2)->unk_0C->unk_48->unk_38[j++] *= 0.1;
+                while (j < (*effect)->unk_08) {
+                    (*effect)->unk_0C->unk_48->unk_38[j++] *= 0.1;
                 }
             }
             break;
 
         case 12: {
             MenuTab* menuTabs;
-            //N(temp)** effect6 = &N(D_8024EF90);
-            N(temp)** effect7;
             s32 y;
 
-            func_80242214_96B3D4(1, &subroutine_arg16, &subroutine_arg17, &subroutine_arg18, &subroutine_arg19);
-            effect7 = &N(D_8024EF90);
-
+            N(func_80242214_96B3D4)(1, &subroutine_arg16, &subroutine_arg17, &subroutine_arg18, &subroutine_arg19);
             for (y = 0; y < 4; y++) {
-                N(temp)** eff = &N(D_8024EF90)[y];
-                (*eff)->unk_0C->unk_04 = subroutine_arg16;
-                (*eff)->unk_0C->unk_08 = subroutine_arg17 + 20.0f;
-                (*eff)->unk_0C->unk_0C = subroutine_arg18;
-                (*eff)->unk_0C->unk_34 -= 0.1;
-                if ((*eff)->unk_0C->unk_34 < 0.1) {
-                    (*eff)->unk_0C->unk_34 = 0.1f;
+                N(D_8024EF90)[y]->unk_0C->unk_04 = subroutine_arg16;
+                N(D_8024EF90)[y]->unk_0C->unk_08 = subroutine_arg17 + 20.0f;
+                N(D_8024EF90)[y]->unk_0C->unk_0C = subroutine_arg18;
+                N(D_8024EF90)[y]->unk_0C->unk_34 -= 0.1;
+                if (N(D_8024EF90)[y]->unk_0C->unk_34 < 0.1) {
+                    N(D_8024EF90)[y]->unk_0C->unk_34 = 0.1f;
                 }
 
                 j = 1;
-                while (j < (*eff)->unk_08) {
-                    N(temp)** eff2 = eff;
+                while (j < N(D_8024EF90)[y]->unk_08) {
+                    N(temp)** eff2 = &N(D_8024EF90)[y];
 
                     (*eff2)->unk_0C->unk_48->unk_38[j++] += 0.01;
-                    //EffectUnkStruct1* test = test2 + j++;
-                    //test2->unk_38 += 0.01;
                 }
             }
 
-            ptr10 = &N(D_8024EF88);
-            ptr11 = &N(D_8024EF84);
-            ptr12 = &N(D_8024F010);
-            menuTabs = &gPauseMenuTabs;
-
-            ptr12->unk_08 += menuTabs->unk_00;
-            ptr12->unk_2C += (*ptr11);
-            menuTabs->unk_00 += 0.4;
-            (*ptr11) -= 0.05;
-            (*ptr10)++;
-            if (ptr12->unk_2C < -5.0f) {
-                ptr12->unk_2C = -5.0f;
-                (*ptr10) = 0;
+            N(D_8024F010)[0].unk_08 += gPauseMenuTabs[0].unk_00;
+            N(D_8024F010)[1].unk_08 += N(D_8024EF84);
+            gPauseMenuTabs[0].unk_00 += 0.4;
+            N(D_8024EF84) -= 0.05;
+            N(D_8024EF88)++;
+            if (N(D_8024F010)[1].unk_08 < -5.0f) {
+                N(D_8024F010)[1].unk_08 = -5.0f;
+                N(D_8024EF88) = 0;
                 set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xD);
-                ptr12->unk_00 = 0;
-                ptr12->unk_24 = 0;
-                func_80242214_96B3D4(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
+                N(D_8024F010)[0].unk_00 = 0;
+                N(D_8024F010)[1].unk_00 = 0;
+                N(func_80242214_96B3D4)(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
                 func_8006FEF0(0, subroutine_arg1A, subroutine_arg1B + 20.0f, subroutine_arg1C, 30.0f);
                 sfx_play_sound(0x206);
-                effect = &N(D_8024EF90);
                 for (x = 0; x < 4; x++) {
-                    (*(effect + x))->flags |= 0x10;
+                    N(D_8024EF90)[x]->flags |= 0x10;
                 }
             }
             break;
@@ -3962,17 +3920,16 @@ INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, S
 #endif
 
 void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
-    s32* CC_ptr = &N(D_8024EFCC);
-    f32 sp20[4][4];
+    Matrix4f sp20;
     u32 temp_s1;
 
-    guPositionF(&sp20, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
+    guPositionF(&sp20, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
     
     temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[2], &sp20);
     if ((N(D_8024F010)[0].unk_00 == 2) && ((temp_s1 - 1) < 2)) {
-        set_variable(*CC_ptr, SI_ARRAY(9), 3);
+        set_variable(N(D_8024EFCC), SI_ARRAY(9), 3);
     }
     if ((N(D_8024F010)[0].unk_00 == 3) && ((temp_s1 - 1) < 2)) {
         set_variable(N(D_8024EFCC), SI_ARRAY(9), 0xB);
@@ -3995,17 +3952,13 @@ ApiStatus N(func_80243068_96C228)(ScriptInstance *script, s32 isInitialCall) {
 
 ApiStatus N(func_802432C0_96C480)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &N(D_80248780_971940);
-        *ptr = 0;
+        N(D_80248780_971940) = 0;
     }
 
-    ptr = &N(D_80248780_971940);
-    if (*ptr != NULL) {
-        ptr = &N(D_80248780_971940);
-        *ptr = 0;
+    if (N(D_80248780_971940) != NULL) {
+        N(D_80248780_971940) = 0;
         set_variable(script, *args, N(D_80248784_971944));
         return ApiStatus_DONE2;
     }
@@ -4021,57 +3974,43 @@ ApiStatus N(func_80243314_96C4D4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus N(func_8024334C_96C50C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(N(D_8024F080) + i) = ptr[i];
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_8024F080)[i] = ptr[i];
         }
         N(D_8024F080)[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(N(D_8024F080) + i) = i + 16;
+        for (i = 0; i < 0x70; i++) {
+            N(D_8024F080)[i] = i + 16;
             N(D_8024F080)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_8024334C_96C50C, ScriptInstance* script, s32 isInitialCall);
-#endif
 
-#ifdef NON_MATCHING
 ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(N(D_8024F248) + i) = ptr[i];
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_8024F248)[i] = ptr[i];
         }
         N(D_8024F248)[i] = 0;
     } else {
-        for (; i < 0x5B; i++) {
-            *(N(D_8024F248) + i) = i + 0x80;
+        for (i = 0; i < 0x5B; i++) {
+            N(D_8024F248)[i] = i + 128;
             N(D_8024F248)[0x5B] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/area_dro/dro_02/9694C0", dro_02_func_802433E8_96C5A8, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 #include "world/common/Call800E9894.inc.c"
 

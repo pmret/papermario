@@ -3485,30 +3485,24 @@ ApiStatus N(func_80242784_95D984)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
-ApiStatus N(func_802427BC_95D9BC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802427BC_95D9BC)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        for (; *ptr != 0; i++) {
-            *(N(D_8024DFF0) + i) = *ptr++;
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_8024DFF0)[i] = ptr[i];
         }
         N(D_8024DFF0)[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(N(D_8024DFF0) + i) = i + 16;
+        for (i = 0; i < 0x70; i++) {
+            N(D_8024DFF0)[i] = i + 16;
             N(D_8024DFF0)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "world/area_dro/dro_01/95B7E0", dro_01_func_802427BC_95D9BC, ScriptInstance *script, s32 isInitialCall);
-#endif
 
 ApiStatus N(func_80242858_95DA58)(ScriptInstance *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -44,21 +44,18 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802411D8_D657B8);
 /*
 ApiStatus N(func_802411D8_D657B8)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(N(D_8024F080) + i) = ptr[i];
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
         }
-        N(D_8024F080)[i] = 0;
+        N(D_80244A20)[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(N(D_8024F080) + i) = i + 16;
-            N(D_8024F080)[0x70] = 0;
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
@@ -69,21 +66,18 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241274_D65854);
 /*
 ApiStatus N(func_80241274_D65854)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    i = 0;
     if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(N(D_8024F080) + i) = ptr[i];
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
         }
-        N(D_8024F080)[i] = 0;
+        N(D_80244A20)[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(N(D_8024F080) + i) = i + 16;
-            N(D_8024F080)[0x70] = 0;
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;

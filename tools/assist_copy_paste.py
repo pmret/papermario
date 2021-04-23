@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+DO_OVERWRITE = False
+
 def get_file_name(name):
     out = ""
     decomp = False
@@ -37,6 +39,8 @@ def find_file_path(looking_for):
     if not "src/world/area_" in file_path:
         file_path = ""
     return file_name, file_path, decomp
+
+
 
 map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
 # cut out half the map
@@ -97,6 +101,9 @@ for file in files[1:]:
         print(f"Failed to find {file}")
         continue
 
+    if function[3] == "_" and function[6] == "_" and function.startswith(Path(file_path).parts[3]):
+        function = function[len("xxx_yy_"):]
+
     print(f"Func:\"{function}\" path:\"{file_path}\" Decomped: {decomp}")
 
     file_path = (Path(__file__).parent.parent / file_path).resolve()
@@ -108,23 +115,51 @@ for file in files[1:]:
 
     func_file = file_path.read_text().splitlines()
     new_func_file = []
-    for i,line in enumerate(func_file):
+    i = 0
+    while i < len(func_file):
+        line = func_file[i]
         if line:
             stripped_line = line.strip()
             split_line = stripped_line.split(" ")
 
-            if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and ((i+1 < len(func_file) and "/*" not in func_file[i+1]) or (i+1 == len(func_file))):
+            if len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and ((i+1 < len(func_file) and "/*" not in func_file[i+1] and not func_file[i+1].startswith("#endif")) or (i+1 == len(func_file))):
                 new_func_file.append(stripped_line)
                 temp = function_text.splitlines()
                 temp[1] = temp[1].replace("N()", f"N({function})")
                 new_func_file.append("\n".join(temp))
+            elif len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and func_file[i+1].startswith("#endif"):
+                if DO_OVERWRITE:
+                    #a NON_MATCHING func
+                    x = i
+                    while not func_file[x].startswith("#ifdef NON_MATCHING"):
+                        x -= 1
+                    # strip away lines already added
+                    new_func_file = new_func_file[:x]
+                    new_func_file.append(stripped_line)
+                    temp = function_text.splitlines()
+                    temp[1] = temp[1].replace("N()", f"N({function})")
+                    new_func_file.append("\n".join(temp))
+                    i += 1
+                else:
+                    new_func_file.append(line)
+
             elif len(split_line) > 2 and "INCLUDE_ASM" in split_line[0] and function in split_line[2] and i+1 < len(func_file) and "/*" in func_file[i+1]:
-                print(f"{file_path} already has this function commented out")
-                new_func_file.append(line)
+                if DO_OVERWRITE:
+                    while not (func_file[i] == "}" and func_file[i+1] == "*/"):
+                        i += 1
+                    i += 1
+                    new_func_file.append(stripped_line)
+                    temp = function_text.splitlines()
+                    temp[1] = temp[1].replace("N()", f"N({function})")
+                    new_func_file.append("\n".join(temp))
+                else:
+                    print(f"{file_path} already has this function commented out")
+                    new_func_file.append(line)
             else:
                 new_func_file.append(line)
         else:
             new_func_file.append(line)
+        i += 1
 
     if new_func_file[-1] != "":
         new_func_file.append("")

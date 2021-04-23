@@ -8193,6 +8193,7 @@ segments:
     - [0xBE04B0,   .data, header]
     - [0xBE05C0,   .data, events]
     - [0xBE35E0, .rodata, events]
+    - [0xBE37B0,    .bss, events]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
