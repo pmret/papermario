@@ -34,7 +34,7 @@ ApiStatus func_802BD26C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802BD32C(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
+
     s32 newHP = playerData->curHP + get_variable(script, *script->ptrReadPos);
 
     if (newHP > playerData->curMaxHP) {
@@ -45,13 +45,13 @@ ApiStatus func_802BD32C(ScriptInstance* script, s32 isInitialCall) {
         newHP = 1;
     }
 
-    playerData2->curHP = newHP;
+    playerData->curHP = newHP;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
+
     s32 newFP = playerData->curFP + get_variable(script, *script->ptrReadPos);
 
     if (newFP > playerData->curMaxFP) {
@@ -62,7 +62,7 @@ ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
         newFP = 1;
     }
 
-    playerData2->curFP = newFP;
+    playerData->curFP = newFP;
     return ApiStatus_DONE2;
 }
 

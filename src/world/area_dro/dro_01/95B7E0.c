@@ -3310,16 +3310,15 @@ void N(UnkFunc28)(ScriptInstance *script, s32 isInitialCall);
 #include "world/common/UnkFunc29.inc.c"
 
 ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
     if (quizzesAnswered < 999) {
-        playerData->quizzesAnswered++;
+        gPlayerData.quizzesAnswered++;
     }
 
     if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
         script->varTable[0] = 1;
-        playerData->quizzesCorrect++;
+        gPlayerData.quizzesCorrect++;
     } else {
         script->varTable[0] = 0;
     }

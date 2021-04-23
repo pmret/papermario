@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(UnkFunc34)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = ({ PlayerData* p = &gPlayerData; p; });
+    PlayerData* playerData = &gPlayerData;
 
     script->varTable[1] = 0;
     if (playerData->curMaxHP != playerData->curHP) {

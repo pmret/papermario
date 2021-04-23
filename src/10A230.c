@@ -80,7 +80,6 @@ void func_802E8ADC(Entity* entity) {
 
 void func_802E8BC0(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     struct802E89B0* temp = entity->dataBuf;
     MapConfig* mapConfig = get_current_map_header();
     f32 temp_f20;
@@ -96,10 +95,10 @@ void func_802E8BC0(Entity* entity) {
 
     entryX = (*mapConfig->entryList)[temp->unk_0C].x;
     entryZ = (*mapConfig->entryList)[temp->unk_0C].z;
-    temp_f20 = atan2(playerStatus2->position.x, playerStatus2->position.z, entryX, entryZ);
+    temp_f20 = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
-    move_player(temp->unk_04, temp_f20, playerStatus2->runSpeed);
+    move_player(temp->unk_04, temp_f20, playerStatus->runSpeed);
 }
 
 void func_802E8C94(Entity* entity) {

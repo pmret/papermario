@@ -824,10 +824,8 @@ void N(func_80241954_BFF1D4)(ScriptInstance *script, NpcAISettings *aiSettings, 
         npc->flags &= 0xFFDFFFFF;
         script->functionTemp[0].s = 16;
     } else {
-        PlayerStatus** playerStatus = &gPlayerStatusPtr;
-
-        npc->pos.x = (*playerStatus)->position.x;
-        npc->pos.z = (*playerStatus)->position.z + 2.0f;
+        npc->pos.x = gPlayerStatusPtr->position.x;
+        npc->pos.z = gPlayerStatusPtr->position.z + 2.0f;
         npc->rotation.y += 25.0f;
         if (npc->rotation.y > 360.0) {
             npc->rotation.y -= 360.0;
@@ -835,9 +833,9 @@ void N(func_80241954_BFF1D4)(ScriptInstance *script, NpcAISettings *aiSettings, 
         temp_f8_2 = 255.0f - (cosine((s32)npc->rotation.y % 180) * 56.0f);
         func_802DE894(npc->spriteInstanceID, 6, temp_f8_2, temp_f8_2, temp_f8_2, 255, 0);
 
-        posX = (*playerStatus)->position.x;
-        posY = (*playerStatus)->position.y;
-        posZ = (*playerStatus)->position.z;
+        posX = gPlayerStatusPtr->position.x;
+        posY = gPlayerStatusPtr->position.y;
+        posZ = gPlayerStatusPtr->position.z;
         posW = 1000.0f;
         func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
         if (fabsf(npc->pos.y - posY) > 24.0) {

@@ -241,14 +241,13 @@ ApiStatus GetPlayerTargetYaw(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetPlayerFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     Bytecode bits = *args++;
     Bytecode a1 = *args;
 
     if (get_variable(script, a1)) {
         playerStatus->flags |= bits;
     } else {
-        playerStatus2->flags &= ~bits;
+        playerStatus->flags &= ~bits;
     }
 
     return ApiStatus_DONE2;
@@ -367,12 +366,11 @@ INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2884, ScriptInstance* script, 
 
 ApiStatus DisablePulseStone(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
 
     if (get_variable(script, *script->ptrReadPos)) {
         playerStatus->animFlags &= ~0x80;
     } else {
-        playerStatus2->animFlags |= 0x80;
+        playerStatus->animFlags |= 0x80;
     }
 
     return ApiStatus_DONE2;
@@ -409,16 +407,15 @@ ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
 
     if (get_variable(script, *args)) {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
         playerStatus->animFlags &= ~0x4000;
     } else {
-        playerStatus2->colliderHeight = 19;
-        playerStatus2->colliderDiameter = 26;
-        playerStatus2->animFlags |= 0x44004;
+        playerStatus->colliderHeight = 19;
+        playerStatus->colliderDiameter = 26;
+        playerStatus->animFlags |= 0x44004;
     }
 
     return ApiStatus_DONE2;

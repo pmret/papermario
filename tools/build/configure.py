@@ -9,7 +9,13 @@ from glob import glob
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
-CFLAGS = "-Wuninitialized -Wshadow -Wmissing-braces"
+
+CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
+            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
+
+CFLAGS          = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -fforce-addr"
+CFLAGS_NUSYS    = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
+CFLAGS_LIBULTRA = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
@@ -77,14 +83,28 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("cc",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cc_nusys",
+        description="cc($version) $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_NUSYS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cc_libultra",
+        description="cc($version) $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_LIBULTRA} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} -w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version -ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 -O2 -quiet -G 0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -260,7 +280,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task == "cc" or task == "cc_dsl":
+                elif task in ["cc", "cc_dsl", "cc_nusys", "cc_libultra"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -282,10 +302,15 @@ class Configure:
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.type[0] == "."):
                 task = "cc"
-                with entry.src_paths[0].open() as f:
-                    s = f.read()
-                    if "SCRIPT(" in s or "#pragma SCRIPT" in s:
-                        task = "cc_dsl"
+                if "nusys" in entry.src_paths[0].parts:
+                    task = "cc_nusys"
+                elif "os" in entry.src_paths[0].parts:
+                    task = "cc_libultra"
+                else:
+                    with entry.src_paths[0].open() as f:
+                        s = f.read()
+                        if "SCRIPT(" in s or "#pragma SCRIPT" in s:
+                            task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)
             elif isinstance(seg, segtypes.n64.bin.N64SegBin):

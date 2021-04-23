@@ -9,7 +9,6 @@ extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
 
 ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* secondBattleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 posX = partnerActor->currentPos.x;
     f32 posY = partnerActor->currentPos.y;
@@ -24,7 +23,7 @@ ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
         script->varTable[0] = 20;
     }
 
-    if (secondBattleStatus->unk_83 != 0) {
+    if (battleStatus->unk_83 != 0) {
         if (script->varTable[0] < 10) {
             script->varTable[0] = 10;
         }
@@ -41,7 +40,7 @@ INCLUDE_ASM(s32, "battle/partner/6F10E0", func_8023817C_6F125C);
 
 ApiStatus func_80238A20_6F1B00(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* partnerActor = gBattleStatus.partnerActor;
     Vec3f* pos = &partnerActor->walk.currentPos;
 
     if (isInitialCall) {
@@ -121,16 +120,15 @@ ApiStatus func_8023903C_6F211C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
-    BattleStatus* battleStatus = &gBattleStatus;
-    Actor* partnerActor = battleStatus->partnerActor;
+    Actor* partnerActor = gBattleStatus.partnerActor;
 
-    if (!(battleStatus->flags1 & 0x40000000)) {
+    if (!(gBattleStatus.flags1 & 0x40000000)) {
         partnerActor->isGlowing = FALSE;
     }
 
     script->varTable[0] = partnerActor->isGlowing;
     partnerActor->isGlowing = FALSE;
-    battleStatus->flags1 &= ~0x40000000;
+    gBattleStatus.flags1 &= ~0x40000000;
 
     return ApiStatus_DONE2;
 }

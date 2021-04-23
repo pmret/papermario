@@ -74,26 +74,42 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", update_fall_state);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2F60);
 
+#ifdef NON_MATCHING
+// void gravity_use_fall_params(void) {
+//     f32* floats = D_800F7B60;
+// do { } while (0);
+//     if (gPlayerStatus.flags & 0x40000) {
+//         gPlayerStatus.gravityIntegrator[0] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[1] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[2] = *floats++ / 12.0f;
+//         gPlayerStatus.gravityIntegrator[3] = *floats++ / 12.0f;
+//     } else {
+//         gPlayerStatus.gravityIntegrator[0] = *floats++;
+//         gPlayerStatus.gravityIntegrator[1] = *floats++;
+//         gPlayerStatus.gravityIntegrator[2] = *floats++;
+//         gPlayerStatus.gravityIntegrator[3] = *floats++;
+//     }
+// }
 void gravity_use_fall_params(void) {
-    f32* floats = D_800F7B60;
-    PlayerStatus* playerStatus2;
-    PlayerStatus* playerStatus;
-
+    PlayerStatus *playerStatus;
+    f32 *floats = D_800F7B60;
+    do {} while (0);
     playerStatus = &gPlayerStatus;
-    playerStatus2 = &gPlayerStatus;
-
     if (playerStatus->flags & 0x40000) {
-        playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
-        playerStatus->gravityIntegrator[3] = *floats++ / 12.0f;
+        playerStatus->gravityIntegrator[0] = (*(floats++)) / 12.0f;
+        playerStatus->gravityIntegrator[1] = (*(floats++)) / 12.0f;
+        playerStatus->gravityIntegrator[2] = (*(floats++)) / 12.0f;
+        playerStatus->gravityIntegrator[3] = (*(floats++)) / 12.0f;
     } else {
-        playerStatus2->gravityIntegrator[0] = *floats++;
-        playerStatus2->gravityIntegrator[1] = *floats++;
-        playerStatus2->gravityIntegrator[2] = *floats++;
-        playerStatus2->gravityIntegrator[3] = *floats++;
+        playerStatus->gravityIntegrator[0] = *(floats++);
+        playerStatus->gravityIntegrator[1] = *(floats++);
+        playerStatus->gravityIntegrator[2] = *(floats++);
+        playerStatus->gravityIntegrator[3] = *(floats++);
     }
 }
+#else
+INCLUDE_ASM(s32, "7bb60_len_41b0", gravity_use_fall_params);
+#endif
 
 void func_800E3100(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -147,18 +163,17 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        PlayerStatus** playerStatus = &gPlayerStatusPtr;
-        f32 x = (*playerStatus)->position.x;
-        f32 y = (*playerStatus)->position.y + arg1;
-        f32 z = (*playerStatus)->position.z;
-        s32 hitID = do_lateral_collision(arg0, *playerStatus, &x, &y, &z, 0, angle);
+        f32 x = gPlayerStatusPtr->position.x;
+        f32 y = gPlayerStatusPtr->position.y + arg1;
+        f32 z = gPlayerStatusPtr->position.z;
+        s32 hitID = do_lateral_collision(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
         }
 
-        (*playerStatus)->position.x = x;
-        (*playerStatus)->position.z = z;
+        gPlayerStatusPtr->position.x = x;
+        gPlayerStatusPtr->position.z = z;
         angle += 90.0f;
     }
 
@@ -282,7 +297,6 @@ void func_800E5098(s32 arg0) {
         u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
         s32 soundID;
         s32 soundID2;
-        s16* temp_800F7B80;
 
         if (colliderType == 6 || colliderType == 9) {
             soundID = 0x143;
@@ -292,14 +306,12 @@ void func_800E5098(s32 arg0) {
             soundID2 = SOUND_STEP2;
         }
 
-        temp_800F7B80 = &D_800F7B80;
-
-        if (*temp_800F7B80 == 0) {
+        if (D_800F7B80 == 0) {
             soundID = soundID2;
         }
 
         sfx_play_sound_at_player(soundID, 0);
-        *temp_800F7B80 ^= 1;
+        D_800F7B80 ^= 1;
     }
 }
 
@@ -377,10 +389,7 @@ void set_action_state(s32 actionState) {
                 playerStatus->prevActionState = playerStatus->actionState;
                 playerStatus->actionState = actionState;
                 playerStatus->flags |= 0x80000000;
-#ifdef NON_MATCHING
             }
-#endif
-        }
         return;
     }
 
@@ -476,14 +485,14 @@ void start_bounce_b(void) {
     playerStatus->flags |= 0x800000;
 }
 
+// TODO playerData isn't used
 s32 check_input_hammer(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
-    if (playerStatus->pressedButtons & BUTTON_B) {
-        if (!(playerStatus->flags & 4)) {
-            if (D_8010EBB0.unk_00 != 1 || playerData->currentPartner != PARTNER_WATT) {
-                if (playerData->hammerLevel != -1) {
+    if (gPlayerStatus.pressedButtons & BUTTON_B) {
+        if (!(gPlayerStatus.flags & 4)) {
+            if (D_8010EBB0.unk_00 != 1 || gPlayerData.currentPartner != PARTNER_WATT) {
+                if (gPlayerData.hammerLevel != -1) {
                     set_action_state(ACTION_STATE_HAMMER);
                     return TRUE;
                 }
@@ -557,7 +566,6 @@ void func_800E63A4(s32 arg0) {
 
 void func_800E6428(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = playerStatus;
     s32 actionState = playerStatus->actionState;
     Npc* disguiseNpc;
 
@@ -578,7 +586,7 @@ void func_800E6428(void) {
                     }
                 }
             }
-        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus2->pressedButtons & B_BUTTON) {
+        } else if (gGameStatusPtr->peachFlags & 4 && playerStatus->pressedButtons & B_BUTTON) {
             set_action_state(ACTION_STATE_SNEAKY_PARASOL);
         }
     }

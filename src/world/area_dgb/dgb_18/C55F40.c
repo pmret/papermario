@@ -843,7 +843,6 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240EBC_C56DFC)(ScriptInstance *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = playerStatus;
     Npc *npc = get_npc_unsafe(0);
     f32 posX, posZ;
 
@@ -858,7 +857,7 @@ ApiStatus N(func_80240EBC_C56DFC)(ScriptInstance *script, s32 isInitialCall) {
 
     if (script->functionTemp[1].s == 0) {
         if (npc->duration == 0) {
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus2->position.x, playerStatus2->position.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             npc->duration = 15;
         }
         npc->duration--;

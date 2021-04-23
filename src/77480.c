@@ -129,7 +129,6 @@ void update_player(void) {
 
 void check_input_use_partner(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     u32 actionState = playerStatus->actionState;
 
@@ -140,7 +139,7 @@ void check_input_use_partner(void) {
                 actionState <= ACTION_STATE_RUN) {
 
                 if (playerData->currentPartner == PARTNER_GOOMBARIO) {
-                    D_802BDF60 = playerStatus2->unk_C6;
+                    D_802BDF60 = playerStatus->unk_C6;
                 }
                 partner_use_ability();
             }
