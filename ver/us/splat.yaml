@@ -251,6 +251,8 @@ segments:
     - [0x4F9D0, data, 6240_len_c00]
     - [0x52D08, .data, f270_len_1190]
     - [0x52D80, data]
+    - [0x52DC0, .data, 121f0_len_1290]
+    - [0x52EE0, data] # Start of 13480_len_3f0's data
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
     - [0x541B0, .data, 30450]
@@ -315,6 +317,7 @@ segments:
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
+    - [0x75240, .bss, 1b40_len_20b0]
     - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0

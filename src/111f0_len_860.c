@@ -31,7 +31,7 @@ void func_80035E54(void) {
     nuContRmbForceStopEnd();
     func_801382AC(mapTransitonAlpha);
 
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
 
     set_variable(0, SI_SAVE_VAR(1), (*gameStatus)->unk_A9);
     timeFreezeMode = 0;

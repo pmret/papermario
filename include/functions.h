@@ -30,12 +30,13 @@ s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
-
+s32 get_time_freeze_mode(void);
 void render_player_model();
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
 
+void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);

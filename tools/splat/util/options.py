@@ -22,12 +22,12 @@ def initialize(config: Dict, config_path: str, base_path=None, target_path=None)
 
 def set(opt, val):
     opts[opt] = val
-    
+
 def get(opt, default=None):
     return opts.get(opt, default)
 
 def get_platform() -> str:
-    return opts.get("platform", "N64")
+    return opts.get("platform", "n64")
 
 def get_compiler() -> str:
     return opts.get("compiler", "IDO")

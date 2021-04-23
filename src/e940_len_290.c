@@ -1,7 +1,7 @@
 #include "common.h"
 
 void begin_state_init(void) {
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
     gGameStatusPtr->loadMenuState = 3;
 }
 
@@ -77,7 +77,7 @@ void step_init_state(void) {
         func_80056180();
     }
 
-    OVERRIDE_FLAG_UNSET(0x8);
+    gOverrideFlags &= ~0x8;
     set_game_mode(1);
 }
 

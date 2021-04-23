@@ -41,16 +41,15 @@ extern s8 D_800A0910[];
 
 void state_init_logos(void) {
     Camera* cameras = &gCameras;
-    GameStatus** gameStatus = &gGameStatusPtr;
     s8* romStart;
     s8* romEnd;
     s32* logoRam;
     s32* temp_800A0910;
 
     general_heap_create();
-    (*gameStatus)->loadMenuState = 0;
-    (*gameStatus)->menuCounter = 0;
-    (*gameStatus)->bSkipIntro = FALSE;
+    gGameStatusPtr->loadMenuState = 0;
+    gGameStatusPtr->menuCounter = 0;
+    gGameStatusPtr->bSkipIntro = FALSE;
     intro_logos_set_fade_alpha(255);
     intro_logos_set_fade_color(0);
 
@@ -105,9 +104,9 @@ void state_init_logos(void) {
     use_default_background_settings();
     clear_entity_data(1);
     clear_effect_data();
-    OVERRIDE_FLAG_SET(0x2);
+    gOverrideFlags |= 0x2;
     intro_logos_update_fade();
-    (*gameStatus)->enableBackground = FALSE;
+    gGameStatusPtr->enableBackground = FALSE;
 }
 
 //INCLUDE_ASM(s32, "f270_len_1190", state_step_logos);
@@ -315,12 +314,9 @@ void state_init_pause(void) {
 }
 
 void state_step_pause(void) {
-    s8* temp800A0921 = &D_800A0921;
-    s32 temp800A0921_2 = *temp800A0921;
-    s8* temp800A0920;
-    s8* temp800A0920_2;
+    s32 temp800A0921_2 = D_800A0921;
 
-    switch (temp800A0921_2) {
+    switch (D_800A0921) {
         case 0:
             update_counters();
             npc_list_update();
@@ -328,30 +324,26 @@ void state_step_pause(void) {
             update_effects();
             if (D_8009A658[1] == D_8009A64C) {
                 D_800A0920 = 4;
-                *temp800A0921 = 2;
-                OVERRIDE_FLAG_SET(0x8);
+                D_800A0921 = 2;
+                gOverrideFlags |= 0x8;
                 gGameStatusPtr->enableBackground &= ~0xF0;
                 gGameStatusPtr->enableBackground |= 0x10;
 
             }
             break;
         case 2:
-            temp800A0920 = &D_800A0920;
-            if (*temp800A0920 >= 0) {
-                GameStatus** gameStatus;
-
-                if (*temp800A0920 != 0) {
-                    (*temp800A0920)--;
+            if (D_800A0920 >= 0) {
+                if (D_800A0920 != 0) {
+                    (D_800A0920)--;
                 }
 
-                if (*temp800A0920 == 0) {
-                    *temp800A0920 = -1;
+                if (D_800A0920 == 0) {
+                    D_800A0920 = -1;
                     nuGfxSetCfb(&D_80077950, 2);
-                    gameStatus = &gGameStatusPtr;
-                    (*gameStatus)->unk_15E = (*gameStatus)->unk_15C;
+                    gGameStatusPtr->unk_15E = gGameStatusPtr->unk_15C;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
-                    (*gameStatus)->isBattle = temp800A0921_2;
+                    gGameStatusPtr->isBattle = temp800A0921_2;
                     allocate_hit_tables();
                     battle_heap_create();
                     nuContRmbForceStop();
@@ -376,7 +368,7 @@ void state_step_pause(void) {
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
-                    OVERRIDE_FLAG_UNSET(0x8);
+                    gOverrideFlags &= ~0x8;
                 }
 
                 if (D_800A0920 >= 0) {
@@ -384,10 +376,9 @@ void state_step_pause(void) {
                 }
             }
 
-            temp800A0920_2 = &D_800A0920;
-            if (*temp800A0920_2 >= -10) {
+            if (D_800A0920 >= -10) {
                 pause_handle_input(0, 0);
-                (*temp800A0920_2)--;
+                D_800A0920--;
             } else {
                 pause_handle_input(gGameStatusPtr->pressedButtons, gGameStatusPtr->heldButtons);
             }
@@ -409,48 +400,39 @@ void state_init_unpause(void) {
 }
 
 void state_step_unpause(void) {
-    s8* temp800A0921 = &D_800A0921;
-
-    switch (*temp800A0921) {
-        s8* temp800A0920;
-        s16* temp800A0922;
-        s16* temp800A0922_2;
-
+    switch (D_800A0921) {
         case 0:
         case 1:
-            temp800A0920 = &D_800A0920;
-
-            if (*temp800A0920 == 4) {
-                OVERRIDE_FLAG_SET(0x8);
+            if (D_800A0920 == 4) {
+                gOverrideFlags |= 0x8;
             }
 
-            if (*temp800A0920 >= 0) {
-                if (*temp800A0920 != 0) {
-                    (*temp800A0920)--;
+            if (D_800A0920 >= 0) {
+                if (D_800A0920 != 0) {
+                    (D_800A0920)--;
                 }
 
-                if (*temp800A0920 == 0) {
-                    if (*temp800A0920 == 0) {
-                        GameStatus** gameStatus = &gGameStatusPtr;
+                if (D_800A0920 == 0) {
+                    if (D_800A0920 == 0) {
                         PlayerStatus* playerStatus;
                         MapConfig* mapConfig;
                         Map* map;
                         s32 assetData;
                         s32 assetSize;
 
-                        *temp800A0920 = -1;
+                        D_800A0920 = -1;
                         nuGfxSetCfb(&D_80077950, ARRAY_COUNT(D_80077950));
                         pause_cleanup();
-                        OVERRIDE_FLAG_UNSET(0x8);
+                        gOverrideFlags &= ~0x8;
                         mapConfig = get_current_map_header();
-                        map = &gAreas[(*gameStatus)->areaID].maps[(*gameStatus)->mapID];
-                        (*gameStatus)->isBattle = FALSE;
-                        (*gameStatus)->enableBackground &= ~0xF0;
+                        map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+                        gGameStatusPtr->isBattle = FALSE;
+                        gGameStatusPtr->enableBackground &= ~0xF0;
                         func_8005AF84();
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
                         func_80149670(1);
-                        spr_init_sprites((*gameStatus)->unk_84);
+                        spr_init_sprites(gGameStatusPtr->unk_84);
                         init_model_data();
                         func_801480F0();
                         init_entity_models();
@@ -499,10 +481,9 @@ void state_step_unpause(void) {
                         update_player();
                         update_effects();
 
-                        temp800A0922_2 = &D_800A0922;
-                        *temp800A0922_2 -= 20;
-                        if (*temp800A0922_2 < 0) {
-                            *temp800A0922_2 = 0;
+                        D_800A0922 -= 20;
+                        if (D_800A0922 < 0) {
+                            D_800A0922 = 0;
                         }
                     }
                 }
@@ -514,13 +495,12 @@ void state_step_unpause(void) {
             update_player();
             update_effects();
 
-            temp800A0922 = &D_800A0922;
-            if (*temp800A0922 == 0) {
-                *temp800A0921 = 4;
+            if (D_800A0922 == 0) {
+                D_800A0921 = 4;
             } else {
-                *temp800A0922 -= 20;
-                if (*temp800A0922 < 0) {
-                    *temp800A0922 = 0;
+                D_800A0922 -= 20;
+                if (D_800A0922 < 0) {
+                    D_800A0922 = 0;
                 }
             }
             break;

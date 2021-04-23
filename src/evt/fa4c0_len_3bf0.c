@@ -1,12 +1,14 @@
 #include "common.h"
 
-s32 D_802D9D30 = 0;
+s32 func_802D5B10();
 
-INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
+s32 D_802D9D30 = 0;
 
 Script D_802D9D34 = SCRIPT({
     func_802D5B10();
 });
+
+INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5B10);
 
 INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D5C70);
 
@@ -225,7 +227,7 @@ ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
     func_800EF600();
-    OVERRIDE_FLAG_UNSET(0x40);
+    gOverrideFlags &= ~0x40;
     return ApiStatus_DONE2;
 }
 

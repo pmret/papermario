@@ -16,7 +16,6 @@ INCLUDE_ASM(s32, "battle/star/focus/789E60", func_802A1494_78A2F4);
 
 ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
     s32 deepFocusSP;
     s32 superFocusSP;
 
@@ -32,7 +31,7 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
 
     add_SP(deepFocusSP + superFocusSP + 128);
 
-    if (playerData2->specialBarsFilled == playerData2->maxStarPower * 256) {
+    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
         script->varTable[0] = 2;
     }
 
@@ -41,7 +40,6 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802A15B0_78A410(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
 
     script->varTable[0] = 0;
 
@@ -52,7 +50,7 @@ ApiStatus func_802A15B0_78A410(ScriptInstance* script, s32 isInitialCall) {
 
     add_SP(128);
 
-    if (playerData2->specialBarsFilled == playerData2->maxStarPower * 256) {
+    if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
         script->varTable[0] = 2;
     }
 

@@ -12,7 +12,6 @@ void func_E011A398(void) {
 
 INCLUDE_ASM(s32, "404220", func_E011A3A0);
 
-#ifdef NON_MATCHING // gfx gbi macro issue
 void func_E011A3BC(s16 alpha) {
     if (alpha == 255) {
         gDPSetRenderMode(gMasterGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN,
@@ -25,9 +24,6 @@ void func_E011A3BC(s16 alpha) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
     }
 }
-#else
-INCLUDE_ASM(s32, "404220", func_E011A3BC);
-#endif
 
 INCLUDE_ASM(s32, "404220", func_E011A48C);
 

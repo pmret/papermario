@@ -58,21 +58,18 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 }
 
 void world_goombario_pre_battle(Npc* partner) {
-    // TODO fake match nonsense
-    s8* new_var = &D_8010EBB0.unk_00;
-    s8* new_var2 = &D_8010EBB0.unk_00;
-    new_var = new_var2;
+    Temp8010EBB0* temp = &D_8010EBB0;
 
-    if (*new_var != 0) {
+    if (temp->unk_00 != 0) {
         set_time_freeze_mode(0);
         enable_player_input();
         CancelMessageAndBlock();
         clear_partner_move_history(partner);
-        D_8010EBB0.unk_00 = 0;
-        D_8010EBB0.unk_03 = 0;
+        temp->unk_00 = 0;
+        temp->unk_03 = 0;
         disable_npc_blur(partner);
     }
-    D_8010EBB0.unk_03 = 1;
+    temp->unk_03 = 1;
 }
 
 s32 D_802BDC40_317B60[] = {
