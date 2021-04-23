@@ -400,9 +400,9 @@ ApiStatus func_802D585C(ScriptInstance* script, s32 initialCall) {
     s32 flags = get_variable(script, *ptrReadPos++);
 
     if (setMode) {
-        OVERRIDE_FLAG_SET(flags);
+        gOverrideFlags |= flags;
     } else {
-        OVERRIDE_FLAG_UNSET(flags);
+        gOverrideFlags &= ~flags;
     }
 
     return ApiStatus_DONE2;

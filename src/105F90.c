@@ -100,7 +100,7 @@ void func_802E54CC(Entity* entity) {
         *ptr = 0;
         load_string(0x1D0001, ptr);
         set_time_freeze_mode(1);
-        OVERRIDE_FLAG_SET(0x40);
+        gOverrideFlags |= 0x40;
         disable_player_input();
         set_global_flag(SI_SAVE_FLAG(96));
         return;
@@ -112,7 +112,7 @@ void func_802E555C(Entity* entity) {
     if (D_802EB3C0) {
         exec_entity_updatecmd(entity);
         set_time_freeze_mode(0);
-        OVERRIDE_FLAG_UNSET(0x40);
+        gOverrideFlags &= ~0x40;
         enable_player_input();
     }
 }

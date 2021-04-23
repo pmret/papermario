@@ -84,10 +84,10 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (OVERRIDE_FLAG_CHECK(0x20)) {
+    if (gOverrideFlags & 0x20) {
         switch (D_800741A2) {
             case 0:
-                OVERRIDE_FLAG_SET(0x200);
+                gOverrideFlags |= 0x200;
                 disable_player_input();
 
                 if (D_800741A0 == 255) {
@@ -101,12 +101,12 @@ void step_game_loop(void) {
                 }
                 break;
             case 1:
-                OVERRIDE_FLAG_SET(0x8);
+                gOverrideFlags |= 0x8;
                 D_8009A690--;
                 if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
                     set_game_mode(0);
-                    OVERRIDE_FLAG_UNSET(0x20);
+                    gOverrideFlags &= ~0x20;
                 }
                 break;
         }
@@ -115,28 +115,28 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x100)) {
-        OVERRIDE_FLAG_SET(0x1000);
+    if (gOverrideFlags & 0x100) {
+        gOverrideFlags |= 0x1000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x1000);
+        gOverrideFlags &= ~0x1000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x200)) {
-        OVERRIDE_FLAG_SET(0x2000);
+    if (gOverrideFlags & 0x200) {
+        gOverrideFlags |= 0x2000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x2000);
+        gOverrideFlags &= ~0x2000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x400)) {
-        OVERRIDE_FLAG_SET(0x4000);
+    if (gOverrideFlags & 0x400) {
+        gOverrideFlags |= 0x4000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x4000);
+        gOverrideFlags &= ~0x4000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x800)) {
-        OVERRIDE_FLAG_SET(0x8000);
+    if (gOverrideFlags & 0x800) {
+        gOverrideFlags |= 0x8000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x8000);
+        gOverrideFlags &= ~0x8000;
     }
 
     rand_int(1);
@@ -155,7 +155,7 @@ void gfx_task_background(void) {
     // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
     ASSERT((s32)((u32)((gMasterGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->backgroundGfx))
 
-    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (gMasterGfxPos - gDisplayContext->backgroundGfx) << 3,
+    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (u32)(gMasterGfxPos - gDisplayContext->backgroundGfx) * 8,
                    NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);
 }
 
@@ -228,7 +228,8 @@ void gfx_draw_frame(void) {
     gDPFullSync(gMasterGfxPos++);
     gSPEndDisplayList(gMasterGfxPos++);
 
-    nuGfxTaskStart(gDisplayContext->mainGfx, (gMasterGfxPos - gDisplayContext->mainGfx) << 3, NU_GFX_UCODE_F3DEX2, 0x40001);
+    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
+                   NU_SC_TASK_LODABLE | NU_SC_SWAPBUFFER);
     gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
     func_8002C890(D_8009A64C, 0x140, 0xF0);
 }
@@ -296,7 +297,7 @@ void load_engine_data(void) {
         gGameStatusPtr->unk_48[i] = 12;
     }
 
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
     set_game_mode(0);
 }
 
@@ -310,30 +311,30 @@ void set_time_freeze_mode(s32 mode) {
     switch (mode) {
         case 0:
             timeFreezeMode = mode;
-            OVERRIDE_FLAG_UNSET(0xF00);
+            gOverrideFlags &= ~0xF00;
             resume_all_group(3);
             break;
         case 1:
             timeFreezeMode = mode;
-            OVERRIDE_FLAG_UNSET(0xE00);
-            OVERRIDE_FLAG_SET(0x100);
+            gOverrideFlags &= ~0xE00;
+            gOverrideFlags |= 0x100;
             suspend_all_group(1);
             break;
         case 2:
             timeFreezeMode = mode;
-            OVERRIDE_FLAG_UNSET(0xC00);
-            OVERRIDE_FLAG_SET(0x300);
+            gOverrideFlags &= ~0xC00;
+            gOverrideFlags |= 0x300;
             suspend_all_group(2);
             break;
         case 3:
             timeFreezeMode = mode;
-            OVERRIDE_FLAG_UNSET(0x800);
-            OVERRIDE_FLAG_SET(0x700);
+            gOverrideFlags &= ~0x800;
+            gOverrideFlags |= 0x700;
             suspend_all_group(2);
             break;
         case 4:
             timeFreezeMode = mode;
-            OVERRIDE_FLAG_SET(0xF00);
+            gOverrideFlags |= 0xF00;
             break;
     }
 }

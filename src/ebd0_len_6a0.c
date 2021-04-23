@@ -65,7 +65,7 @@ void step_battle(void) {
             return;
         }
         (D_800A0900)--;
-        OVERRIDE_FLAG_SET(0x8);
+        gOverrideFlags |= 0x8;
         nuContRmbForceStop();
     }
 
@@ -121,7 +121,7 @@ void step_battle(void) {
             gPlayerStatusPtr->animFlags &= ~0x40;
             D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(0);
-            OVERRIDE_FLAG_UNSET(0x8);
+            gOverrideFlags &= ~0x8;
 
             if (D_800A0900 >= 0) {
                 return;
@@ -150,7 +150,7 @@ void func_80033B54(void) {
 }
 
 void func_80033B88(void) {
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
     nuContRmbForceStop();
     D_800A0900 = 5;
 }

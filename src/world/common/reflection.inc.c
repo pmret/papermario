@@ -143,7 +143,7 @@ ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_dynamic_entity_world(NULL, N(reflection_setup_floor));
-            OVERRIDE_FLAG_SET(0x80);
+            gOverrideFlags |= 0x80;
             break;
         case REFLECTION_WALL:
             break;

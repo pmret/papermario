@@ -2,8 +2,6 @@
 #include "map.h"
 
 ApiStatus N(GetCurrentCameraYawClamped180)(ScriptInstance* script, s32 isInitialCall) {
-    Camera* currentCamera = CURRENT_CAM;
-
-    script->varTable[0] = clamp_angle(currentCamera->currentYaw + 180.0f);
+    script->varTable[0] = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
     return ApiStatus_DONE2;
 }

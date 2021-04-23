@@ -104,7 +104,7 @@ void state_init_logos(void) {
     use_default_background_settings();
     clear_entity_data(1);
     clear_effect_data();
-    OVERRIDE_FLAG_SET(0x2);
+    gOverrideFlags |= 0x2;
     intro_logos_update_fade();
     gGameStatusPtr->enableBackground = FALSE;
 }
@@ -325,7 +325,7 @@ void state_step_pause(void) {
             if (D_8009A658[1] == D_8009A64C) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
-                OVERRIDE_FLAG_SET(0x8);
+                gOverrideFlags |= 0x8;
                 gGameStatusPtr->enableBackground &= ~0xF0;
                 gGameStatusPtr->enableBackground |= 0x10;
 
@@ -368,7 +368,7 @@ void state_step_pause(void) {
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
                     pause_init();
-                    OVERRIDE_FLAG_UNSET(0x8);
+                    gOverrideFlags &= ~0x8;
                 }
 
                 if (D_800A0920 >= 0) {
@@ -404,7 +404,7 @@ void state_step_unpause(void) {
         case 0:
         case 1:
             if (D_800A0920 == 4) {
-                OVERRIDE_FLAG_SET(0x8);
+                gOverrideFlags |= 0x8;
             }
 
             if (D_800A0920 >= 0) {
@@ -423,7 +423,7 @@ void state_step_unpause(void) {
                         D_800A0920 = -1;
                         nuGfxSetCfb(&D_80077950, ARRAY_COUNT(D_80077950));
                         pause_cleanup();
-                        OVERRIDE_FLAG_UNSET(0x8);
+                        gOverrideFlags &= ~0x8;
                         mapConfig = get_current_map_header();
                         map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
                         gGameStatusPtr->isBattle = FALSE;

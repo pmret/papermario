@@ -41,7 +41,7 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* camera = CURRENT_CAM;
+    Camera* camera = &gCameras[gCurrentCameraID];
     s32 currentPartner = gPlayerData.currentPartner;
 
     playerStatus->position.x = gGameStatusPtr->savedPos.x;
