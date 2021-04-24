@@ -177,6 +177,17 @@ typedef struct StatDrop {
 #define OVERRIDE_MOVEMENT_SPEED(speed) (speed * 32767)
 #define NO_OVERRIDE_MOVEMENT_SPEED OVERRIDE_MOVEMENT_SPEED(-1)
 
+typedef struct EnemyDrops {
+    /* 0x00 */ s8 dropFlags;
+    /* 0x01 */ s8 itemDropChance; // %
+    /* 0x02 */ ItemDrop itemDrops[8];
+    /* 0x32 */ StatDrop heartDrops[8];
+    /* 0x72 */ StatDrop flowerDrops[8];
+    /* 0xB2 */ s16 minCoinBonus;
+    /* 0xB4 */ s16 maxCoinBonus;
+    /* 0xB6 */ char unk_DE[2];
+} EnemyDrops; // size = 0xB8
+
 typedef struct StaticNpc {
     /* 0x000 */ NpcID id;
     /* 0x004 */ NpcSettings* settings;
@@ -185,13 +196,7 @@ typedef struct StaticNpc {
     /* 0x018 */ Bytecode* init;
     /* 0x01C */ char unk_1C[8];
     /* 0x024 */ s32 yaw;
-    /* 0x028 */ s8 dropFlags;
-    /* 0x029 */ s8 itemDropChance; // %
-    /* 0x02A */ ItemDrop itemDrops[8];
-    /* 0x05A */ StatDrop heartDrops[8];
-    /* 0x09A */ StatDrop flowerDrops[8];
-    /* 0x0DA */ s16 minCoinBonus;
-    /* 0x0DC */ s16 maxCoinBonus;
+    /* 0x028 */ EnemyDrops drops;
     /* 0x0E0 */ s32 movement[48]; // TODO: type
     /* 0x1A0 */ NpcAnimID animations[16];
     /* 0x1E0 */ char unk_1E0[8];
@@ -284,7 +289,7 @@ typedef struct Enemy {
     /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ s32* animList;
     /* 0xD0 */ EnemyTerritory* territory;
-    /* 0xD4 */ s16* dropTables;
+    /* 0xD4 */ EnemyDrops* drops;
     /* 0xD8 */ u32 tattleString;
     /* 0xDC */ char unk_DC[20];
 } Enemy; // size = 0xF0
