@@ -283,7 +283,7 @@ segments:
     - [0x73148, .rodata, 1b40_len_20b0]
     - [0x73160, .rodata, 43F0]
     - [0x73200, .rodata, 6e40_len_500]
-    - [0x73434, .rodata, 7340_len_b00]
+    - [0x73230, .rodata, 7340_len_b00]
     - [0x735E0, .rodata, 8800]
     - [0x73610, .rodata, B0E0]
     - [0x73680, .rodata, d610_len_1330]

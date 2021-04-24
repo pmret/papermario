@@ -234,6 +234,7 @@ extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
+extern DisplayContext D_80164000[];
 
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;

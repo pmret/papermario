@@ -541,7 +541,7 @@ def dump_objfile() -> Tuple[str, ObjdumpCommand, ObjdumpCommand]:
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = "ver/us/expected/" + objfile
+    refobjfile = "ver/us/expected/" + os.path.relpath(objfile)
     if not os.path.isfile(refobjfile):
         fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
 
