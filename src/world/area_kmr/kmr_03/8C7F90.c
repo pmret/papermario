@@ -56,11 +56,11 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_kmr_03_tattle,
+    .tattle = { MSG_kmr_03_tattle },
 };
 
 Script N(802406C0) = SCRIPT({

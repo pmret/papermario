@@ -111,7 +111,7 @@ void N(reflection_setup_wall)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = N(reflection_render_wall);
+        renderTaskPtr->appendGfx = (void (*)(void *)) N(reflection_render_wall);
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }
@@ -189,7 +189,7 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
-        renderTaskPtr->appendGfx = !(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(reflection_render_floor_fancy);
+        renderTaskPtr->appendGfx = (void (*)(void *)) (!(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(reflection_render_floor_fancy));
         queue_render_task(renderTaskPtr);
     }
 }

@@ -23,7 +23,12 @@ Install build dependencies:
 ./install.sh
 ```
 
-Copy an unmodified Paper Mario (USA) ROM (sha1: `3837f44cda784b466c9a2d99df70d77c322b97a0`) into the root directory of the repository with the name `baserom.z64`. If you're using WSL, you can enter the Linux filesystem by opening `\\wsl$` in File Explorer; e.g. `\\wsl$\Ubuntu\home\<your username>\papermario`.
+Copy baseroms into the following places (at least 1 is required):
+
+* `ver/us/baserom.z64` (sha1: `3837f44cda784b466c9a2d99df70d77c322b97a0`)
+* `ver/jp/baserom.z64` (sha1: `b9cca3ff260b9ff427d981626b82f96de73586d3`)
+
+(If you're using WSL, you can enter the Linux filesystem by opening `\\wsl$` in File Explorer; e.g. `\\wsl$\Ubuntu\home\<your username>\papermario`.)
 
 Configure the build and extract assets from the base ROM:
 ```sh

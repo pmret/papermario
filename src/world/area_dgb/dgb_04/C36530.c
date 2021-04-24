@@ -16,10 +16,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = MSG_dgb_04_tattle,
+    .tattle = { MSG_dgb_04_tattle },
 };
 
 Script N(80243170) = SCRIPT({

@@ -11,6 +11,8 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef Bytecode Script[0];
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -244,7 +246,7 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ Bytecode* scriptStart;
+    /* 0x10 */ Script* scriptSource;
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
@@ -1416,10 +1418,10 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ Bytecode* idleCode;
-    /* 0x1C4 */ Bytecode* takeTurnCode;
-    /* 0x1C8 */ Bytecode* onHitCode;
-    /* 0x1CC */ Bytecode* onTurnChangeCode;
+    /* 0x1C0 */ Script* idleScriptSource;
+    /* 0x1C4 */ Script* takeTurnScriptSource;
+    /* 0x1C8 */ Script* onHitScriptSource;
+    /* 0x1CC */ Script* onTurnChanceScriptSource;
     /* 0x1D0 */ struct ScriptInstance* idleScript;
     /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
     /* 0x1D8 */ struct ScriptInstance* onHitScript;
@@ -1878,7 +1880,7 @@ typedef struct EntityModel {
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
     /* 0x18 */ Matrix4s transform;
-    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
     /* 0x64 */ s32 setupGfxCallbackArg0;

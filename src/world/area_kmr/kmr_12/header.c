@@ -7,11 +7,11 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(Main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_kmr_12_tattle,
+    .tattle = { MSG_kmr_12_tattle },
 };
 
 Script N(PlayMusic) = SCRIPT({

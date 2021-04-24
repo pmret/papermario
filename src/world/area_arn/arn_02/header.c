@@ -2,16 +2,16 @@
 #include "message_ids.h"
 
 EntryList N(entryList) = {
-    { -585.0f,  60.0f, 150.0f,  90.0f }, 
-    {  880.0f, 320.0f, 150.0f, 270.0f }, 
+    { -585.0f,  60.0f, 150.0f,  90.0f },
+    {  880.0f, 320.0f, 150.0f, 270.0f },
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_arn_02_tattle,
+    .tattle = { MSG_arn_02_tattle },
 };
 
 Script N(80241040) = SCRIPT({

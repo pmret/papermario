@@ -4,6 +4,6 @@
 #include "common.h"
 #include "battle/battle.h"
 
-ActorDesc goomba;
+extern ActorDesc goomba;
 
 #endif
