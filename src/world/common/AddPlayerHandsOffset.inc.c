@@ -12,7 +12,7 @@ ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall) {
     f32 z = (f32)get_variable(script, zVar);
     f32 cameraYaw;
 
-    cameraYaw = CURRENT_CAM->currentYaw;
+    cameraYaw = gCameras[gCurrentCameraID].currentYaw;
 
     if (playerStatus->spriteFacingAngle == 0.0f) {
         cameraYaw -= 100.0f;

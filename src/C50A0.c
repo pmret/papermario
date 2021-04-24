@@ -60,7 +60,7 @@ void do_animation(ItemEntity* itemEntity) {
     itemEntity->framesLeft--;
     if (itemEntity->framesLeft <= 0) {
         while (next_sequence_step(itemEntity) != 0) {
-            
+
         }
     }
 }
@@ -135,7 +135,7 @@ void clear_item_entity_flags(s32 index, s32 flags) {
 
 void func_801341B0(s32 index) {
     ItemEntity* itemEntity = D_801565A0[index];
-    OVERRIDE_FLAG_SET(0x40);
+    gOverrideFlags |= 0x40;
     itemEntity->flags |= 0x100;
 }
 

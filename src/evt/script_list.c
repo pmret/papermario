@@ -152,7 +152,6 @@ void func_802C3390(ScriptInstance* script) {
     suspend_all_group(arg);
 }
 
-#ifdef NON_MATCHING
 ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
     ScriptInstance* newScript;
     s32 curScriptIndex;
@@ -209,18 +208,13 @@ ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
         gScriptIdList[scriptListCount] = newScript->id;
     }
     func_802C3390(newScript);
-    {
-        s32* tempCounter = &gStaticScriptCounter;
-        if (*tempCounter == 0) {
-            *tempCounter = 1;
-        }
+
+    if (gStaticScriptCounter == 0) {
+        gStaticScriptCounter = 1;
     }
+
     return newScript;
 }
-#else
-INCLUDE_ASM(ScriptInstance*, "evt/script_list", start_script, Script* source, s32 priority,
-            s32 initialState);
-#endif
 
 ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags) {
     ScriptInstance* newScript;
@@ -296,11 +290,8 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
 
 INCLUDE_ASM(s32, "evt/script_list", start_child_script);
 
-#ifdef NON_MATCHING
-// appears to be functionally equivalent, some ordering and regalloc issues
 ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
     ScriptInstance* child;
-    s32* temp6;
     s32 curScriptIndex;
     s32 i;
     s32 scriptListCount;
@@ -355,17 +346,13 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
         gScriptIdList[scriptListCount] = child->id;
     }
 
-    temp6 = &gStaticScriptCounter;
-    if (*temp6 == 0) {
-        *temp6 = 1;
+    if (gStaticScriptCounter == 0) {
+        gStaticScriptCounter = 1;
     }
+
     func_802C3390(child);
     return child;
 }
-#else
-INCLUDE_ASM(ScriptInstance*, "evt/script_list", func_802C39F8, ScriptInstance* parentScript, Bytecode* nextLine,
-            s32 newState);
-#endif
 
 ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) {
     ScriptInstance* curScript;

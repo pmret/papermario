@@ -245,8 +245,7 @@ EntityModel* get_entity_model(s32 listIndex) {
 
 void free_entity_model_by_index(s32 idx) {
     s32 index = idx & ~0x800;
-    EntityModelList** entityModelList = &gCurrentEntityModelList;
-    EntityModel* entityModel = (**entityModelList)[index];
+    EntityModel* entityModel = (*gCurrentEntityModelList)[index];
 
     if (entityModel != NULL && entityModel->flags) {
         if (entityModel->flags & 0x400) {
@@ -254,8 +253,8 @@ void free_entity_model_by_index(s32 idx) {
         }
         {
             s32* modelCount = &gEntityModelCount;
-            heap_free((**entityModelList)[index]);
-            (**entityModelList)[index] = NULL;
+            heap_free((*gCurrentEntityModelList)[index]);
+            (*gCurrentEntityModelList)[index] = NULL;
             (*modelCount)--;
         }
     }

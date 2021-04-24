@@ -453,10 +453,9 @@ void update_coin_counter(void) {
 
 void show_coin_counter(void) {
     UiStatus* uiStatus = &gUIStatus;
-    s16* coinCounterUnk = &D_8010CD10;
     s32 index;
 
-    if ((*coinCounterUnk != 0) || (D_8010CD12 != 0)) {
+    if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
         set_window_update(0x14, 2);
         if (uiStatus->iconIndex12 > -1) {
             free_icon(uiStatus->iconIndex10);
@@ -465,7 +464,7 @@ void show_coin_counter(void) {
         }
         uiStatus->unk_6C[0] = 0;
         uiStatus->unk_6C[1] = 0;
-        *coinCounterUnk = 0;
+        D_8010CD10 = 0;
         D_8010CD12 = 0;
     }
 
@@ -584,13 +583,13 @@ void func_800E984C(void) {
 
 s32 func_800E9860(void) {
     UiStatus* uiStatus = &gUIStatus;
-    UiStatus* uiStatus2 = &gUIStatus;
+
     s32 ret = 1 - uiStatus->unk_45[0];
 
     if (uiStatus->unk_45[1] != 0) {
         ret = 0;
     }
-    if (uiStatus2->ignoreChanges) {
+    if (uiStatus->ignoreChanges) {
         ret = 0;
     }
     return ret;
@@ -631,15 +630,14 @@ s32 is_status_menu_visible(void) {
 
 void status_menu_start_blinking_hp(void) {
     UiStatus* uiStatus = &gUIStatus;
-    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gGameStatusPtr->isBattle == 0) {
         uiStatus->hpBlinkTimer = 120;
     }
 
-    if (uiStatus2->hpBlinking != 1) {
-        uiStatus2->hpBlinking = 1;
-        uiStatus2->hpBlinkCounter = 0;
+    if (uiStatus->hpBlinking != 1) {
+        uiStatus->hpBlinking = 1;
+        uiStatus->hpBlinkCounter = 0;
     }
 }
 
@@ -655,15 +653,14 @@ void status_menu_stop_blinking_hp(void) {
 
 void status_menu_start_blinking_fp(void) {
     UiStatus* uiStatus = &gUIStatus;
-    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gGameStatusPtr->isBattle == 0) {
         uiStatus->fpBlinkTimer = 120;
     }
 
-    if (uiStatus2->fpBlinking != 1) {
-        uiStatus2->fpBlinking = 1;
-        uiStatus2->fpBlinkCounter = 0;
+    if (uiStatus->fpBlinking != 1) {
+        uiStatus->fpBlinking = 1;
+        uiStatus->fpBlinkCounter = 0;
     }
 }
 
@@ -678,15 +675,14 @@ void status_menu_stop_blinking_fp(void) {
 
 void status_menu_start_blinking_coins(void) {
     UiStatus* uiStatus = &gUIStatus;
-    UiStatus* uiStatus2 = &gUIStatus;
 
     if (gGameStatusPtr->isBattle == 0) {
         uiStatus->coinsBlinkTimer = 120;
     }
 
-    if (uiStatus2->coinsBlinking != 1) {
-        uiStatus2->coinsBlinking = 1;
-        uiStatus2->coinsBlinkCounter = 0;
+    if (uiStatus->coinsBlinking != 1) {
+        uiStatus->coinsBlinking = 1;
+        uiStatus->coinsBlinkCounter = 0;
     }
 }
 
@@ -1110,19 +1106,18 @@ s32 add_coins(s32 amt) {
 
 s8 add_star_points(s32 amt) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
     s8 newSP = playerData->starPoints + amt;
 
     // TODO: probably a macro!
-    playerData2->starPoints = newSP;
+    playerData->starPoints = newSP;
     if (newSP > 100) {
-        playerData2->starPoints = 100;
+        playerData->starPoints = 100;
     }
 
     // TODO: probably a macro!
-    newSP = playerData2->starPoints;
+    newSP = playerData->starPoints;
     if (newSP < 0) {
-        playerData2->starPoints = 0;
+        playerData->starPoints = 0;
     }
     return gPlayerData.starPoints;
 }
@@ -1268,14 +1263,13 @@ s8 add_fortress_keys(s32 amt) {
 
 s8 subtract_fortress_keys(s8 amt) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData; // required to match
 
     playerData->fortressKeyCount -= amt;
     if (playerData->fortressKeyCount < 0) {
         playerData->fortressKeyCount = 0;
     }
 
-    return playerData2->fortressKeyCount; // required to use playerData2 here to match
+    return playerData->fortressKeyCount;
 }
 
 s8 get_fortress_key_count(void) {

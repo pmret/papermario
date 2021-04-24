@@ -1325,7 +1325,7 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_arn/arn_07/BED740", arn_07_func_80240B00_BED8F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+INCLUDE_ASM(void, "world/area_arn/arn_07/events", arn_07_func_80240B00_BED8F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc1.inc.c"

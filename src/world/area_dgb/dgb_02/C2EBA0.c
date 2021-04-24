@@ -422,7 +422,6 @@ NpcGroupList N(npcGroupList_802425C8) = {
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
 s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
-    PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = CAM2(gCurrentCamID);
@@ -430,7 +429,7 @@ s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
     f32 phi_f20;
     s32 ret = TRUE;
 
-    if (dist2D(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z) > enemy2->varTable[2]) {
+    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > enemy2->varTable[2]) {
         ret = FALSE;
     }
 
@@ -440,11 +439,11 @@ s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
         phi_f20 = 270.0f;
     }
 
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z))) > enemy2->varTable[3]) {
+    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > enemy2->varTable[3]) {
         ret = FALSE;
     }
 
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - (*playerStatus)->position.y)) {
+    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
         ret = FALSE;
     }
 

@@ -10,7 +10,7 @@ from util import options
 
 class N64SegC(N64SegCodeSubsegment):
     defined_funcs: Set[str] = set()
-    
+
     STRIP_C_COMMENTS_RE = re.compile(
         r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
         re.DOTALL | re.MULTILINE
@@ -135,7 +135,7 @@ class N64SegC(N64SegCodeSubsegment):
         c_lines = self.get_c_preamble()
 
         for func in funcs_text:
-            func_name = self.get_symbol(func, type="func", local_only=True).name
+            func_name = self.parent.get_symbol(func, type="func", local_only=True).name
             if options.get_compiler() == "GCC":
                 c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(self.name, func_name))
             else:

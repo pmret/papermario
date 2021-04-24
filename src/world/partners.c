@@ -432,20 +432,14 @@ s32 partner_can_use_ability(void) {
 
 void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* temp8010CFD8;
-    s32* temp8010CFE8;
-    s32 temp_s0;
+    s32 currentPartner = gPlayerData.currentPartner;
 
-    temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
     get_dynamic_entity(create_dynamic_entity_frontUI(_use_partner_ability, NULL));
 
-    temp8010CFD8 = &D_8010CFD8;
-    temp8010CFE8 = &D_8010CFE8;
-
     D_8010CFE0 = 1;
-    *temp8010CFE8 = 9;
-    *temp8010CFD8 = temp_s0;
+    D_8010CFE8 = 9;
+    D_8010CFD8 = currentPartner;
 
     if (gGameStatusPtr->unk_7D != 0) {
         D_8010EBB0.unk_00 = 1;
@@ -457,8 +451,8 @@ void partner_reset_data(void) {
     D_800F8340 = playerStatus->position.y;
     D_800F8344 = playerStatus->position.z;
 
-    if (*temp8010CFD8 == 0) {
-        *temp8010CFE8 = 1;
+    if (D_8010CFD8 == 0) {
+        D_8010CFE8 = 1;
     } else {
         load_partner_npc();
         wPartnerNpc->scale.x = 1.0f;
@@ -518,27 +512,25 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    s8* temp8010EBB0 = &D_8010EBB0;
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PlayerData* playerData = &gPlayerData;
 
     if (D_8010CFD8 != 0) {
-        ScriptID* scriptID = &D_8010CFDC;
-        PlayerData* playerData = &gPlayerData;
-
-        if (does_script_exist(*scriptID) != 0) {
-            kill_script_by_ID(*scriptID);
+        if (does_script_exist(D_8010CFDC) != 0) {
+            kill_script_by_ID(D_8010CFDC);
         }
 
         D_8010CFD4 = start_script(wPartner->update, 20, 0x20);
         D_8010CFD4->owner2.npc = wPartnerNpc;
-        *scriptID = D_8010CFD4->id;
+        D_8010CFDC = D_8010CFD4->id;
         D_8010CFD4->groupFlags = 0xA;
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0[3] == 6) {
+        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0->unk_03 == 6) {
             gPlayerStatusPtr->animFlags &= ~1;
             gPlayerStatusPtr->animFlags &= ~2;
-            temp8010EBB0[3] = 0;
+            temp8010EBB0->unk_03 = 0;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -646,15 +638,13 @@ void func_800EF314(void) {
 }
 
 void enable_partner_ai(void) {
-    WorldPartner** partner = &wPartnerNpc;
-
     D_8010CFC8 = 0;
-    clear_partner_move_history(*partner);
+    clear_partner_move_history(wPartnerNpc);
 
     if (!wPartner->isFlying) {
-        enable_partner_walking(*partner, FALSE);
+        enable_partner_walking(wPartnerNpc, FALSE);
     } else {
-        enable_partner_flying(*partner, FALSE);
+        enable_partner_flying(wPartnerNpc, FALSE);
     }
 }
 
@@ -700,7 +690,6 @@ INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = &gCameras;
-    Camera* cameras2 = cameras;
     f32 yaw;
     s32 ret;
 
@@ -714,10 +703,10 @@ s32 func_800EF4E0(void) {
         }
     } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
         ret = 1;
-        yaw = clamp_angle(cameras2[0].currentYaw - 90.0f);
+        yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
     } else {
-        yaw = clamp_angle(cameras2[0].currentYaw + 90.0f);
         ret = 0;
+        yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
     }
 
     playerStatus->targetYaw = yaw;

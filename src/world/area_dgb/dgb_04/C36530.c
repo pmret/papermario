@@ -1131,7 +1131,7 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance *script, s32 isInitialCall) {
 #include "world/common/SetOverrideFlags_40.inc.c"
 
 ApiStatus N(func_802423EC_C3891C)(ScriptInstance *script, s32 isInitialCall) {
-    OVERRIDE_FLAG_UNSET(0x40)
+    gOverrideFlags &= ~0x40;
     return ApiStatus_DONE2;
 }
 

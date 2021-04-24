@@ -67,18 +67,16 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282414);
 #ifdef NON_MATCHING
 ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
     Camera* camera;
-    Camera* camera2;
     f32 temp_f0;
 
     temp_f0 = get_float_variable(script, *script->ptrReadPos);
     camera = CAM(0);
-    camera2 = CAM(0);
 
     if (temp_f0 >= 0.0f) {
         D_80286540 = camera->moveSpeed;
-        camera2->moveSpeed = temp_f0;
+        camera->moveSpeed = temp_f0;
     } else {
-        camera2->moveSpeed = D_80286540;
+        camera->moveSpeed = D_80286540;
     }
 
     return ApiStatus_DONE2;

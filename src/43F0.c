@@ -306,12 +306,11 @@ f32 get_player_normal_yaw(void) {
 }
 
 f32 get_player_normal_pitch(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
-    f32 traceNormalX = (*gameStatus)->playerTraceNormal.x;
-    f32 traceNormalZ = (*gameStatus)->playerTraceNormal.z;
+    f32 traceNormalX = gGameStatusPtr->playerTraceNormal.x;
+    f32 traceNormalZ = gGameStatusPtr->playerTraceNormal.z;
     f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
 
-    return atan2(0.0f, 0.0f, sqrt, -(*gameStatus)->playerTraceNormal.y);
+    return atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerTraceNormal.y);
 }
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {

@@ -289,8 +289,8 @@ void bgm_pop_battle_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
     if (gGameStatusPtr->demoState == 0) {
-        if (OVERRIDE_FLAG_CHECK(0x20000)) {
-            OVERRIDE_FLAG_UNSET(0x20000);
+        if (gOverrideFlags & 0x20000) {
+            gOverrideFlags &= ~0x20000;
         } else {
             musicSetting->flags |= 8;
             _bgm_set_song(0, musicSetting->unk_24, musicSetting->unk_28, 0, 8);
@@ -302,7 +302,7 @@ void bgm_pop_battle_song(void) {
 void bgm_push_battle_song(void) {
     MusicSettings* musicSetting = &gMusicSettings[0];
 
-    if (gGameStatusPtr->demoState == 0 && !OVERRIDE_FLAG_CHECK(0x20000)) {
+    if (gGameStatusPtr->demoState == 0 && !(gOverrideFlags & 0x20000)) {
         func_8005553C(0, 250);
         musicSetting->unk_24 = musicSetting->songID;
         musicSetting->unk_28 = musicSetting->variation;
