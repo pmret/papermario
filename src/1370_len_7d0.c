@@ -7,12 +7,12 @@ void gfxRetrace_Callback(s32);
 void gfxPreNMI_Callback(void);
 void gfx_task_main(void);
 
-extern s32* D_80073E00;
-extern s32 D_80073E04;
+extern s32 D_80073E00;
+extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern s32 D_80073E10;
-extern s32* D_8009A680;
+extern s16* D_8009A680;
 extern OSViMode _osViModeNtscLan1;
 extern OSViMode _osViModeMPalLan1;
 
@@ -37,7 +37,7 @@ void boot_main(void) {
     func_8002D160();
     func_802B2000();
     func_802B203C();
-    nuGfxFuncSet(gfxRetrace_Callback);
+    nuGfxFuncSet((NUGfxFunc) gfxRetrace_Callback);
     nuGfxPreNMIFuncSet(gfxPreNMI_Callback);
     gRandSeed += osGetCount();
     nuGfxDisplayOn();
@@ -50,8 +50,8 @@ void gfxRetrace_Callback(s32 arg0) {
         if (D_80073E00 == 1) {
             nuGfxTaskAllEndWait();
             if (arg0 == 0) {
-                void* fb = osViGetCurrentFramebuffer();
-                s32* temp_8009A680 = &D_8009A680; // TODO probably the wrong type
+                u16* fb = (u16*) osViGetCurrentFramebuffer();
+                u16** temp_8009A680 = &D_8009A680;
 
                 temp_8009A680[2] = fb;
                 temp_8009A680[1] = fb;

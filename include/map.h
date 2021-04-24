@@ -193,10 +193,16 @@ typedef struct StaticNpc {
     /* 0x004 */ NpcSettings* settings;
     /* 0x008 */ Vec3f pos;
     /* 0x014 */ s32 flags;
-    /* 0x018 */ Bytecode* init;
+    /* 0x018 */ Script* init;
     /* 0x01C */ char unk_1C[8];
     /* 0x024 */ s32 yaw;
-    /* 0x028 */ EnemyDrops drops;
+    /* 0x028 */ s8 dropFlags; // TODO: use EnemyDrops (requires tons of map edits)
+    /* 0x029 */ s8 itemDropChance; // %
+    /* 0x02A */ ItemDrop itemDrops[8];
+    /* 0x05A */ StatDrop heartDrops[8];
+    /* 0x09A */ StatDrop flowerDrops[8];
+    /* 0x0DA */ s16 minCoinBonus;
+    /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0E0 */ s32 movement[48]; // TODO: type
     /* 0x1A0 */ NpcAnimID animations[16];
     /* 0x1E0 */ char unk_1E0[8];
@@ -258,12 +264,12 @@ typedef struct Enemy {
     /* 0x10 */ Vec3s unk_10;
     /* 0x16 */ char unk_16[2];
     /* 0x18 */ struct NpcSettings* npcSettings;
-    /* 0x1C */ Bytecode* initBytecode;
-    /* 0x20 */ Bytecode* interactBytecode;
-    /* 0x24 */ Bytecode* aiBytecode;
-    /* 0x28 */ Bytecode* hitBytecode;
-    /* 0x2C */ Bytecode* auxBytecode;
-    /* 0x30 */ Bytecode* defeatBytecode;
+    /* 0x1C */ Script* initBytecode;
+    /* 0x20 */ Script* interactBytecode;
+    /* 0x24 */ Script* aiBytecode;
+    /* 0x28 */ Script* hitBytecode;
+    /* 0x2C */ Script* auxBytecode;
+    /* 0x30 */ Script* defeatBytecode;
     /* 0x34 */ struct ScriptInstance* initScript;
     /* 0x38 */ struct ScriptInstance* interactScript;
     /* 0x3C */ struct ScriptInstance* aiScript;
@@ -301,7 +307,7 @@ typedef struct {
     /* 0x08 */ BattleID battle;
 } NpcGroupList[]; // size = 0x0C
 
-#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), &npcs, battle }
+#define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }
 
 Enemy* get_enemy(NpcID npcId);
 MapConfig* get_current_map_header(void);
@@ -309,7 +315,7 @@ MapConfig* get_current_map_header(void);
 s32 func_800490B4(EnemyTerritoryThing* arg0, Enemy* arg1, f32 arg2, f32 arg3, s32 arg4);
 
 /// Zero-terminated.
-Area gAreas[29];
+extern Area gAreas[29];
 
 /// Lists the songs that are forced to use the variation determined by `map.songVariation & 1`.
 /// @see bgm_get_map_default_variation

@@ -89,7 +89,7 @@ void N(func_802A123C_72C7EC)(void) {
     }
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery/lib", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
             s32 isInitialCall);
 #endif
 
@@ -257,7 +257,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery/lib", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
             s32 isInitialCall);
 #endif
 

@@ -58,7 +58,7 @@ f32 length2D(f32 x, f32 y) {
 
 HeapNode* _heap_create(s32* addr, u32 size) {
     if (size < 32) {
-        return (HeapNode*) - 1;
+        return (HeapNode*) -1;
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
@@ -131,7 +131,7 @@ void copy_matrix(Matrix4f src, Matrix4f dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 

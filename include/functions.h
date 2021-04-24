@@ -20,9 +20,9 @@ void osCleanupThread(void);
 void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
 
-s32 heap_malloc(s32 size);
+void* heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 
 s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
@@ -84,8 +84,7 @@ void func_800706D0(s32, f32, f32, f32);
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
 
-// TODO: out types are s32 not f32
-void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
+void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
@@ -195,8 +194,8 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 void set_partner_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
-ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
+ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
+ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
 
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
@@ -221,7 +220,7 @@ s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode item
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
 s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
-s32 get_dynamic_entity(s32 arg0);
+DynamicEntity* get_dynamic_entity(s32 idx);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 

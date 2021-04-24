@@ -8,7 +8,7 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void clamp_printer_coords(PrintContext* printer, f32 x, f32 y);
+void clamp_printer_coords(PrintContext* printer, s32 x, s32 y);
 
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -21,7 +21,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     s32 anim;
 
     f32 headX, headY, headZ;
-    f32 screenX, screenY, screenZ;
+    s32 screenX, screenY, screenZ;
     s32 stringID2;
 
     if (isInitialCall) {

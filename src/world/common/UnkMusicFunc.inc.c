@@ -13,7 +13,7 @@ ApiStatus N(UnkMusicFunc)(ScriptInstance* script, s32 isInitialCall) {
         script->functionTemp[2].s = ((s32*)(script->functionTemp[0].s))[5];
     }
 
-    something = script->functionTemp[0].s;
+    something = (X32*) script->functionTemp[0].s;
 
     if (get_variable(script, script->functionTemp[2].s)) {
         if (script->functionTemp[1].s != 2) {

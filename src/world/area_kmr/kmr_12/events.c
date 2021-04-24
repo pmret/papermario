@@ -10,7 +10,7 @@ Script N(BindExits) = SCRIPT({
     bind N(ExitEast) to TRIGGER_FLOOR_ABOVE 3; // deili2
 });
 
-Script N(Main) = SCRIPT({
+Script N(main) = SCRIPT({
     WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);

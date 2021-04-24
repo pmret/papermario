@@ -17,10 +17,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = MSG_dgb_05_tattle,
+    .tattle = { MSG_dgb_05_tattle },
 };
 
 Script N(802414E0) = SCRIPT({
@@ -167,8 +167,8 @@ NpcSettings N(npcSettings_80241A4C) = {
     .height = 36,
     .radius = 34,
     .ai = &N(npcAI_802419DC),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -256,7 +256,7 @@ StaticNpc N(npcGroup_80241B4C)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_802419A4),
+        .extraAnimations = N(extraAnimationList_802419A4),
     },
 };
 
@@ -324,7 +324,7 @@ StaticNpc N(npcGroup_80241F2C)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_802419A4),
+        .extraAnimations = N(extraAnimationList_802419A4),
     },
 };
 

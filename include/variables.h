@@ -157,7 +157,7 @@ extern s32 D_802A3838;
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
-extern Bytecode* gPauseMenuCurrentDescIconScript;
+extern s32* gPauseMenuCurrentDescIconScript;
 extern s8 gPauseMenuCurrentTab;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
@@ -310,7 +310,7 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern Bytecode* SCRIPT_NpcDefeat;
+extern Script* SCRIPT_NpcDefeat;
 extern Script ShakeCam1;
 extern Script ShakeCamX;
 

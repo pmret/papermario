@@ -39,11 +39,11 @@ void dispatch_event_actor(Actor* actor, Event event) {
     ScriptInstance* onHitScript = actor->onHitScript;
     ScriptID onHitID = actor->onHitID;
 
-    if (actor->onHitCode != NULL) {
+    if (actor->onHitScriptSource != NULL) {
         ScriptInstance* newScript;
 
         actor->lastEventType = event;
-        newScript = start_script(actor->onHitCode, 0xA, 0x20);
+        newScript = start_script(actor->onHitScriptSource, 0xA, 0x20);
         actor->onHitScript = newScript;
         actor->onHitID = newScript->id;
         newScript->owner1.actorID = actor->actorID;
@@ -77,14 +77,14 @@ s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event) {
 ApiStatus BindTakeTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    Script* takeTurnScript;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
-    get_actor(actorID)->takeTurnCode = var1;
+    takeTurnScript = (Script*) get_variable(script, *args++);
+    get_actor(actorID)->takeTurnScriptSource = takeTurnScript;
     return ApiStatus_DONE2;
 }
 
@@ -117,7 +117,7 @@ ApiStatus ResumeTakeTurn(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    Bytecode* idleCode;
+    Script* idleCode;
     Actor* actor;
     ScriptInstance* newScriptContext;
 
@@ -125,7 +125,7 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    idleCode = get_variable(script, *args++);
+    idleCode = (Script*) get_variable(script, *args++);
     actor = get_actor(actorID);
 
     if (actor->idleScript != 0) {
@@ -133,7 +133,7 @@ ApiStatus BindIdle(ScriptInstance* script, s32 isInitialCall) {
         actor->idleScript = 0;
     }
 
-    actor->idleCode = idleCode;
+    actor->idleScriptSource = idleCode;
     newScriptContext = start_script(idleCode, 10, 0);
     actor->idleScript = newScriptContext;
     actor->idleScriptID = newScriptContext->id;
@@ -175,28 +175,28 @@ ApiStatus EnableIdleScript(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus BindHandleEvent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    Script* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
-    get_actor(actorID)->onHitCode = var1;
+    var1 = (Script*) get_variable(script, *args++);
+    get_actor(actorID)->onHitScriptSource = var1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus BindNextTurn(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    Script* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
-    get_actor(actorID)->onTurnChangeCode = var1;
+    var1 = (Script*) get_variable(script, *args++);
+    get_actor(actorID)->onTurnChanceScriptSource = var1;
     return ApiStatus_DONE2;
 }
 
@@ -339,14 +339,14 @@ ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     s32 partIndex;
-    s32 var2;
+    u32* var2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = get_variable(script, *args++);
-    var2 = get_variable(script, *args++);
+    var2 = (u32*) get_variable(script, *args++);
     get_actor_part(get_actor(actorID), partIndex)->defenseTable = var2;
     return ApiStatus_DONE2;
 }
@@ -354,13 +354,13 @@ ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetStatusTable(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
-    s32 var1;
+    u32* var1;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    var1 = get_variable(script, *args++);
+    var1 = (u32*) get_variable(script, *args++);
     get_actor(actorID)->statusTable = var1;
     return ApiStatus_DONE2;
 }
@@ -369,14 +369,14 @@ ApiStatus SetIdleAnimations(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     s32 partIndex;
-    s32 var2;
+    u32* var2;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
     partIndex = get_variable(script, *args++);
-    var2 = get_variable(script, *args++);
+    var2 = (u32*) get_variable(script, *args++);
     get_actor_part(get_actor(actorID), partIndex)->idleAnimations = var2;
     return ApiStatus_DONE2;
 }

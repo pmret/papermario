@@ -18,10 +18,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = 0x1900D2,
+    .tattle = { MSG_dgb_18_tattle },
 };
 
 Script N(802412C0) = SCRIPT({
@@ -107,16 +107,16 @@ NpcSettings N(npcSettings_802415D0) = {
     .height = 90,
     .radius = 65,
     .ai = &N(802415B0),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
 NpcSettings N(npcSettings_802415FC) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
