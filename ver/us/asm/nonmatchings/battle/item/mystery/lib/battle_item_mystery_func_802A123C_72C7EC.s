@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802A123C_72C7EC
+glabel battle_item_mystery_func_802A123C_72C7EC
 /* 72C7EC 802A123C 3C03802A */  lui       $v1, %hi(D_802A25E4)
 /* 72C7F0 802A1240 8C6325E4 */  lw        $v1, %lo(D_802A25E4)($v1)
 /* 72C7F4 802A1244 27BDFF98 */  addiu     $sp, $sp, -0x68

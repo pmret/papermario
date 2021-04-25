@@ -675,8 +675,8 @@ glabel L802A6170_41AF00
 /* 41B0D0 802A6340 269478E0 */  addiu     $s4, $s4, %lo(gItemTable)
 /* 41B0D4 802A6344 24120002 */  addiu     $s2, $zero, 2
 /* 41B0D8 802A6348 02A0882D */  daddu     $s1, $s5, $zero
-/* 41B0DC 802A634C 3C03802B */  lui       $v1, %hi(D_802AB4F0+0x23)
-/* 41B0E0 802A6350 9063B513 */  lbu       $v1, %lo(D_802AB4F0+0x23)($v1)
+/* 41B0DC 802A634C 3C03802B */  lui       $v1, %hi(D_802AB513)
+/* 41B0E0 802A6350 9063B513 */  lbu       $v1, %lo(D_802AB513)($v1)
 /* 41B0E4 802A6354 24020155 */  addiu     $v0, $zero, 0x155
 /* 41B0E8 802A6358 A6C201AE */  sh        $v0, 0x1ae($s6)
 /* 41B0EC 802A635C A2D001F6 */  sb        $s0, 0x1f6($s6)

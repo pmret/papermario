@@ -66,8 +66,8 @@ glabel func_802414D8_9C68B8
 /* 9C69AC 802415CC 0000202D */   daddu    $a0, $zero, $zero
 /* 9C69B0 802415D0 0220202D */  daddu     $a0, $s1, $zero
 /* 9C69B4 802415D4 3C05F4AC */  lui       $a1, 0xf4ac
-/* 9C69B8 802415D8 3C018025 */  lui       $at, %hi(D_80251C64)
-/* 9C69BC 802415DC AC221C64 */  sw        $v0, %lo(D_80251C64)($at)
+/* 9C69B8 802415D8 3C018025 */  lui       $at, %hi(dgb_01_D_80251C64_C0F4E4)
+/* 9C69BC 802415DC AC221C64 */  sw        $v0, %lo(dgb_01_D_80251C64_C0F4E4)($at)
 /* 9C69C0 802415E0 0C0B1EAF */  jal       get_variable
 /* 9C69C4 802415E4 34A5D481 */   ori      $a1, $a1, 0xd481
 /* 9C69C8 802415E8 0220202D */  daddu     $a0, $s1, $zero
