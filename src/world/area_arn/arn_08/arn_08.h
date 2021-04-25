@@ -14,10 +14,10 @@ ApiStatus N(func_802400D4_BF4874)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802400F4_BF4894)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024019C_BF493C)(ScriptInstance* script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_80241828);
-Script N(80240B50);
-Script N(80240BA0);
-Script N(8024118C);
-Script N(80240300);
-Script N(main);
-Script N(makeEntities);
+extern NpcGroupList N(npcGroupList_80241828);
+extern Script N(80240B50);
+extern Script N(80240BA0);
+extern Script N(8024118C);
+extern Script N(80240300);
+extern Script N(main);
+extern Script N(makeEntities);

@@ -9,11 +9,9 @@
 #define GetGoomba N(GetGoomba)
 ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);
 
-MapConfig N(config);
-
-Script N(Main);
-Script N(PlayMusic);
-Script N(MakeEntities);
-Script N(ReadWestSign);
-
-NpcGroupList N(npcGroupList);
+extern  MapConfig N(config);
+extern  Script N(Main);
+extern  Script N(PlayMusic);
+extern  Script N(MakeEntities);
+extern  Script N(ReadWestSign);
+extern NpcGroupList N(npcGroupList);

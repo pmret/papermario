@@ -78,8 +78,8 @@ const s32 D_8009A140[] = {
     /* 0x75630 */ 0x08080808, 0x08080808, 0x08080808, 0x08080808,
 };
 
-BattleList area_kmr_part_1_battles;
-StageList area_kmr_part_1_stages;
+extern BattleList area_kmr_part_1_battles;
+extern StageList area_kmr_part_1_stages;
 
 BattleArea gBattleAreas[0x30] = {
     {

@@ -15,8 +15,6 @@ typedef struct {
     u32 unk_08;
 } N(shopPrice);
 
-s32** N(D_8024B5B0_9667B0);
-
 ApiStatus N(GetCamVfov)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(GetCurrentCameraYawClamped180)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(GetCurrentFloor)(ScriptInstance* script, s32 isInitialCall);
@@ -72,20 +70,22 @@ ApiStatus N(dup_GetEntryPos)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(dup_SetPlayerStatusAnimFlags100000)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(dup_SomeXYZFunc2)(ScriptInstance* script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_8024B464);
-NpcGroupList N(npcGroupList_8024B47C);
-Script N(80244450);
-Script N(8024C218);
-Script N(8024C2EC);
-Script N(8024C41C);
-Script N(8024C4C8);
-Script N(8024CDA0);
-Script N(8024DD78);
-Script N(main);
-Script N(makeEntities);
-N(shopInventory) N(shopInventory_8024B4FC)[];
-Script N(shopItemPositions_8024BA68);
-Script N(shopOwnerNPC_8024BA80);
-N(shopPrice) N(shopPriceList_8024B550)[];
-Script N(unk_80248088);
-Script N(unk_8024884C);
+extern s32** N(D_8024B5B0_9667B0);
+extern N(shopInventory) N(shopInventory_8024B4FC)[];
+extern N(shopPrice) N(shopPriceList_8024B550)[];
+
+extern NpcGroupList N(npcGroupList_8024B464);
+extern NpcGroupList N(npcGroupList_8024B47C);
+extern Script N(80244450);
+extern Script N(8024C218);
+extern Script N(8024C2EC);
+extern Script N(8024C41C);
+extern Script N(8024C4C8);
+extern Script N(8024CDA0);
+extern Script N(8024DD78);
+extern Script N(main);
+extern Script N(makeEntities);
+extern Script N(shopItemPositions_8024BA68);
+extern Script N(shopOwnerNPC_8024BA80);
+extern Script N(unk_80248088);
+extern Script N(unk_8024884C);

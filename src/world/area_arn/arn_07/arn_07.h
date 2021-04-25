@@ -16,17 +16,17 @@ ApiStatus N(SetEntityFlags100000)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(GetEntityPosition)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus PostChapter3StatUpdate(ScriptInstance* script, s32 isInitialCall);
 
-Script N(exitSingleDoor_802428D4);
-NpcGroupList N(npcGroupList_8024787C);
-NpcGroupList N(npcGroupList_802478B8);
-NpcGroupList N(npcGroupList_802478E8);
-Script N(80243790);
-Script N(802437AC);
-Script N(802439B0);
-Script N(80242048);
-Script N(80241F10);
-Script N(main);
-Script N(makeEntities);
+extern NpcGroupList N(npcGroupList_8024787C);
+extern NpcGroupList N(npcGroupList_802478B8);
+extern NpcGroupList N(npcGroupList_802478E8);
+extern Script N(exitSingleDoor_802428D4);
+extern Script N(80243790);
+extern Script N(802437AC);
+extern Script N(802439B0);
+extern Script N(80242048);
+extern Script N(80241F10);
+extern Script N(main);
+extern Script N(makeEntities);
 
 enum {
     NPC_TUBBAS_HEART,

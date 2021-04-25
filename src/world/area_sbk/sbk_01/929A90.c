@@ -3,8 +3,8 @@
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-Script N(main);
-NpcGroupList N(npcGroupList_802407D8);
+extern Script N(main);
+extern NpcGroupList N(npcGroupList_802407D8);
 
 EntryList N(entryList) = {
     { -475.0f, 0.0f, 0.0f, 90.0f },

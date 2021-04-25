@@ -55,9 +55,9 @@ ApiStatus N(func_80243A40_96CC00)(ScriptInstance* script, s32 isInitialCall);
 void N(func_8024240C_96B5CC)(ScriptInstance *script, s32 isInitialCall);
 void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall);
 
-NpcGroupList N(npcGroupList_8024EEF4);
-Script N(80244C78);
-Script N(8024D434);
-Script N(8024D494);
-Script N(8024D700);
-Script N(main);
+extern NpcGroupList N(npcGroupList_8024EEF4);
+extern Script N(80244C78);
+extern Script N(8024D434);
+extern Script N(8024D494);
+extern Script N(8024D700);
+extern Script N(main);
