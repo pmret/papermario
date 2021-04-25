@@ -77,6 +77,9 @@ def read_symbol_addrs():
                 unique_lines.add(line)
 
         for line in unique_lines:
+            if "_ROM_START" in line or "_ROM_END" in line:
+                continue
+
             main, ext = line.rstrip().split(";")
             opt = ext.split("//")[-1].strip().split(" ")
 
@@ -84,7 +87,6 @@ def read_symbol_addrs():
             type = ""
             rom = -1
 
-            args = []
             for thing in list(opt):
                 if thing.strip() == "":
                     opt.remove(thing)
@@ -96,6 +98,11 @@ def read_symbol_addrs():
                     opt.remove(thing)
                 elif "dead:" in thing:
                     dead = True
+
+            eqsplit = main.split(" = ")
+            if len(eqsplit) != 2:
+                print(f"Line malformed: '{main}'")
+                sys.exit(1)
 
             name, addr = main.split(" = ")
 
@@ -116,6 +123,9 @@ def read_elf():
         if " F " in line or " O " in line or " *ABS*" in line:
             components = line.split()
             name = components[-1]
+
+            if "_ROM_START" in name or "_ROM_END" in name:
+                continue
 
             if "/" in name or \
                name in ignores or \
