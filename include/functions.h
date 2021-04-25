@@ -103,7 +103,7 @@ void func_80027088(s32);
 void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
-
+void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);

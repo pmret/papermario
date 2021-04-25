@@ -757,11 +757,19 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
+typedef struct ModelNode {
+    /* 0x00 */ s32 type; /* 2 = model */
+    /* 0x04 */ UNK_PTR displayList;
+    /* 0x08 */ s32 numProperties;
+    /* 0x0C */ UNK_PTR propertyList;
+    /* 0x10 */ struct ModelGroupData* groupData;
+} ModelNode; // size = 0x14
+
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
     /* 0x04 */ char unk_04[4];
-    /* 0x08 */ s32* modelNode;
+    /* 0x08 */ struct ModelNode** modelNode;
     /* 0x0C */ struct ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
@@ -938,14 +946,6 @@ typedef struct ItemEntity {
     /* 0x54 */ s32 unk_54;
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
-
-typedef struct ModelNode {
-    /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ UNK_PTR displayList;
-    /* 0x08 */ s32 numProperties;
-    /* 0x0C */ UNK_PTR propertyList;
-    /* 0x10 */ struct ModelGroupData* groupData;
-} ModelNode; // size = 0x14
 
 typedef struct StaticShadowData {
     /* 0x00 */ s16 flags;

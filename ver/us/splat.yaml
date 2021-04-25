@@ -8826,19 +8826,13 @@ segments:
     start: 0xCB9200
     vram: 0x80240000
     subsegments:
-    - [0xCB9200, c]
-    - [0xCB9240, c]
-    - [0xCB9280, c]
-    - [0xCB96B0, c]
-    - [0xCBA430, c]
-    - [0xCBA670, data]
-    - [0xCBA830, data]
-    - [0xCBA880, data]
-    - [0xCBAEB0, data]
-    - [0xCBC420, data]
-    - [0xCBD270, data]
-    - [0xCBD290, data]
-    - [0xCBDCB0, rodata]
+    - [0xCB9200,       c, CB9200]
+    - [0xCB9240,       c, CB9240]
+    - [0xCB9280,       c, CB9280]
+    - [0xCB96B0,       c, CB96B0]
+    - [0xCBA430,       c, CBA430]
+    - [0xCBA670,   .data, CB9280]
+    - [0xCBDCB0, .rodata, CB9280]
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
