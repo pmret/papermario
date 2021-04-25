@@ -89,7 +89,7 @@ void N(func_802A123C_72C7EC)(void) {
     }
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery/lib", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
             s32 isInitialCall);
 #endif
 
@@ -123,7 +123,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
             struct N(tempStc)* ic;
             StaticItem* itemTable;
 
-            D_802A25F8 = bind_dynamic_entity_7(NULL, func_802A123C_72C7EC);
+            D_802A25F8 = create_dynamic_entity_frontUI(NULL, func_802A123C_72C7EC);
             D_802A25EC = rand_int(18200);
             D_802A25F0 = 1000;
             tablePtr = &D_802A25FC;
@@ -246,7 +246,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
             g = D_802A25FC[i];
             battleStatus->selectedItemID = g;
             script->varTable[0] = g;
-            func_801235C0(D_802A25F8);
+            free_dynamic_entity(D_802A25F8);
             for (i = 0; i < 7; i++) {
                 free_icon(*iconPtr++);
             }
@@ -257,7 +257,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery_72C5B0", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery/lib", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
             s32 isInitialCall);
 #endif
 

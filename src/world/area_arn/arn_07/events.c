@@ -115,8 +115,8 @@ NpcSettings N(npcSettings_80243C78) = {
     .height = 18,
     .radius = 20,
     .ai = &N(npcAI_80243C08),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 12,
     .unk_2A = 1,
 };
@@ -140,8 +140,8 @@ NpcSettings N(npcSettings_80243CC4) = {
 NpcSettings N(npcSettings_80243CF0) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -715,7 +715,7 @@ StaticNpc N(npcGroup_80245D0C)[] = {
             NPC_ANIM(world_tubba, Palette_00, Anim_0),
             NPC_ANIM(world_tubba, Palette_00, Anim_0),
         },
-        .extraAnimations = &N(extraAnimationList_802451D4),
+        .extraAnimations = N(extraAnimationList_802451D4),
     },
     {
         .id = NPC_TUBBAS_HEART,
@@ -777,7 +777,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_01, Anim_3),
             NPC_ANIM(boo, Palette_01, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_80245200),
+        .extraAnimations = N(extraAnimationList_80245200),
     },
     {
         .id = NPC_BOO1,
@@ -807,7 +807,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_01, Anim_3),
             NPC_ANIM(boo, Palette_01, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_80245200),
+        .extraAnimations = N(extraAnimationList_80245200),
     },
     {
         .id = NPC_BOO2,
@@ -837,7 +837,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_01, Anim_3),
             NPC_ANIM(boo, Palette_01, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_80245200),
+        .extraAnimations = N(extraAnimationList_80245200),
     },
     {
         .id = NPC_BOO3,
@@ -867,7 +867,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_01, Anim_3),
             NPC_ANIM(boo, Palette_01, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_80245200),
+        .extraAnimations = N(extraAnimationList_80245200),
     },
     {
         .id = NPC_BOO4,
@@ -897,7 +897,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_00, Anim_3),
             NPC_ANIM(boo, Palette_00, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_802451F8),
+        .extraAnimations = N(extraAnimationList_802451F8),
     },
     {
         .id = NPC_BOO5,
@@ -927,7 +927,7 @@ StaticNpc N(npcGroup_802460EC)[] = {
             NPC_ANIM(boo, Palette_00, Anim_3),
             NPC_ANIM(boo, Palette_00, Anim_3),
         },
-        .extraAnimations = &N(extraAnimationList_802451F8),
+        .extraAnimations = N(extraAnimationList_802451F8),
     },
 };
 
@@ -989,7 +989,7 @@ StaticNpc N(npcGroup_80246E7C) = {
         NPC_ANIM(bootler, Palette_00, Anim_7),
         NPC_ANIM(bootler, Palette_00, Anim_8),
     },
-    .extraAnimations = &N(extraAnimationList_80245208),
+    .extraAnimations = N(extraAnimationList_80245208),
 };
 
 Script N(init_8024706C) = SCRIPT({
@@ -1325,7 +1325,7 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_arn/arn_07/BED740", arn_07_func_80240B00_BED8F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+INCLUDE_ASM(void, "world/area_arn/arn_07/events", arn_07_func_80240B00_BED8F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc1.inc.c"

@@ -8,7 +8,7 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void clamp_printer_coords(PrintContext* printer, f32 x, f32 y);
+void clamp_printer_coords(PrintContext* printer, s32 x, s32 y);
 
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -21,7 +21,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     s32 anim;
 
     f32 headX, headY, headZ;
-    f32 screenX, screenY, screenZ;
+    s32 screenX, screenY, screenZ;
     s32 stringID2;
 
     if (isInitialCall) {
@@ -59,7 +59,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0].s = 0;
-        OVERRIDE_FLAG_SET(0x10);
+        gOverrideFlags |= 0x10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
         }
@@ -100,7 +100,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
 
         if (gSpeakingActorPrintIsDone == 1) {
             decrement_status_menu_disabled();
-            OVERRIDE_FLAG_UNSET(0x10);
+            gOverrideFlags &= ~0x10;
             return ApiStatus_DONE1;
         }
     }
@@ -150,14 +150,13 @@ INCLUDE_ASM(s32, "181810", LoadBattleDmaData);
 
 ApiStatus func_802536A8(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* battleStatus2 = battleStatus;
 
     if (get_variable(script, *script->ptrReadPos) != 0) {
-        battleStatus2->unk_92 |= 1;
-        OVERRIDE_FLAG_SET(0x80);
+        battleStatus->unk_92 |= 1;
+        gOverrideFlags |= 0x80;
     } else {
-        battleStatus2->unk_92 &= ~1;
-        OVERRIDE_FLAG_UNSET(0x80);
+        battleStatus->unk_92 &= ~1;
+        gOverrideFlags &= ~0x80;
     }
 
     return ApiStatus_DONE2;

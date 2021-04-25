@@ -57,6 +57,7 @@ class N64SegGroup(N64Segment):
             segment.parent = self
             
             if segment.rom_start != "auto":
+                assert isinstance(segment.rom_start, int)
                 segment.vram_start = self.rom_to_ram(segment.rom_start)
 
             # TODO: assumes section order - generalize and stuff

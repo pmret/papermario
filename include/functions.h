@@ -20,9 +20,9 @@ void osCleanupThread(void);
 void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
 
-s32 heap_malloc(s32 size);
+void* heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest);
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest);
 
 s32 get_global_byte(s32 index);
 s32 get_global_flag(s32 index);
@@ -30,12 +30,13 @@ s32 get_area_byte(s32 index);
 s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
-
+s32 get_time_freeze_mode(void);
 void render_player_model();
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
 
+void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
@@ -81,7 +82,8 @@ void func_800706D0(s32, f32, f32, f32);
 
 // Text
 PrintContext* load_string(s32 stringID, s32* a1);
-void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, f32* outX, f32* outY, f32* outZ);
+
+void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
@@ -97,7 +99,7 @@ s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
 
-void func_80027088(s32);
+void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 
@@ -191,8 +193,8 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 void set_partner_tether_distance(f32);
 s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
-ScriptInstance* start_script(Bytecode* initialLine, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Bytecode* initialLine, u8 priority, u8 initialState, u8 groupFlags);
+ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
+ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
 
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
@@ -216,8 +218,8 @@ ItemEntity* get_item_entity(s32 itemEntityIndex);
 s32 make_item_entity_nodelay(s32 itemID, f32 x, f32 y, f32 z, ItemSpawnMode itemSpawnMode, s32 pickupVar);
 void set_item_entity_flags(s32 itemEntityIndex, s32 flag);
 
-s32 bind_dynamic_entity_7(void (*updateFunc)(void), void (*drawFunc)(void));
-s32 get_dynamic_entity(s32 arg0);
+s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void));
+DynamicEntity* get_dynamic_entity(s32 idx);
 
 void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 
@@ -293,11 +295,7 @@ void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
+void func_802DDA8C(s32, s32, f32);
 
 void initialize_curtains(void);
 void update_curtains(void);
@@ -335,5 +333,8 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
 
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+EntityModel* get_entity_model(s32 idx);
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 #endif

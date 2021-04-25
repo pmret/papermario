@@ -58,7 +58,7 @@ glabel update_shadows
 /* A6264 8010FB64 08043EDD */  j         .L8010FB74
 /* A6268 8010FB68 00000000 */   nop
 .L8010FB6C:
-/* A626C 8010FB6C 0C0483C1 */  jal       update_entity_rendercmd
+/* A626C 8010FB6C 0C0483C1 */  jal       exec_entity_model_commandlist
 /* A6270 8010FB70 86040008 */   lh       $a0, 8($s0)
 .L8010FB74:
 /* A6274 8010FB74 8E020000 */  lw        $v0, ($s0)

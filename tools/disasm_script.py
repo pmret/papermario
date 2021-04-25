@@ -377,7 +377,7 @@ def replace_constants(self, func, args):
     return args
 
 class ScriptDisassembler:
-    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {}):
+    def __init__(self, bytes, script_name = "script", symbol_map = {}, romstart = 0, INCLUDES_NEEDED = {}, INCLUDED = {"functions": set(), "includes": set()}):
         self.bytes = bytes
         self.script_name = script_name
 

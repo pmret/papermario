@@ -9,7 +9,7 @@ void dispatch_event_partner(s32 lastEventType) {
     ScriptInstance* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitCode, 10, 0x20);
+    script = start_script(partnerActor->onHitScriptSource, 10, 0x20);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;
@@ -32,7 +32,7 @@ void dispatch_event_partner_continue_turn(s8 lastEventType) {
     ScriptInstance* script;
 
     partnerActor->lastEventType = lastEventType;
-    script = start_script(partnerActor->onHitCode, 10, 0x20);
+    script = start_script(partnerActor->onHitScriptSource, 10, 0x20);
     partnerActor->onHitScript = script;
     partnerActor->onHitID = script->id;
     script->owner1.actorID = ACTOR_PARTNER;

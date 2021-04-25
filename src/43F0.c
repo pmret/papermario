@@ -58,7 +58,7 @@ f32 length2D(f32 x, f32 y) {
 
 HeapNode* _heap_create(s32* addr, u32 size) {
     if (size < 32) {
-        return (HeapNode*) - 1;
+        return (HeapNode*) -1;
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
@@ -115,8 +115,7 @@ INCLUDE_ASM(s32, "43F0", int_to_string);
 // should maybe be called bzero
 void mem_clear(s8* data, s32 numBytes) {
     while (numBytes > 0) {
-        *data = 0;
-        data++;
+        *data++ = 0;
         numBytes--;
     }
 }
@@ -132,7 +131,7 @@ void copy_matrix(Matrix4f src, Matrix4f dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
@@ -307,12 +306,11 @@ f32 get_player_normal_yaw(void) {
 }
 
 f32 get_player_normal_pitch(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
-    f32 traceNormalX = (*gameStatus)->playerTraceNormal.x;
-    f32 traceNormalZ = (*gameStatus)->playerTraceNormal.z;
+    f32 traceNormalX = gGameStatusPtr->playerTraceNormal.x;
+    f32 traceNormalZ = gGameStatusPtr->playerTraceNormal.z;
     f32 sqrt = sqrtf(SQ(traceNormalX) + SQ(traceNormalZ));
 
-    return atan2(0.0f, 0.0f, sqrt, -(*gameStatus)->playerTraceNormal.y);
+    return atan2(0.0f, 0.0f, sqrt, -gGameStatusPtr->playerTraceNormal.y);
 }
 
 f32 dist2D(f32 ax, f32 ay, f32 bx, f32 by) {

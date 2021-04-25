@@ -3,5 +3,5 @@
 
 #define NAMESPACE dgb_17
 
-Script N(main);
-Script N(makeEntities);
+extern Script N(main);
+extern Script N(makeEntities);

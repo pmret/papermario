@@ -89,7 +89,7 @@ glabel initialize_battle
 .L8023E26C:
 /* 16CB4C 8023E26C 3C058024 */  lui       $a1, %hi(func_8023ED5C)
 /* 16CB50 8023E270 24A5ED5C */  addiu     $a1, $a1, %lo(func_8023ED5C)
-/* 16CB54 8023E274 0C048C56 */  jal       bind_dynamic_entity_3
+/* 16CB54 8023E274 0C048C56 */  jal       create_dynamic_entity_world
 /* 16CB58 8023E278 0000202D */   daddu    $a0, $zero, $zero
 /* 16CB5C 8023E27C 0C093B70 */  jal       func_8024EDC0
 /* 16CB60 8023E280 0000882D */   daddu    $s1, $zero, $zero

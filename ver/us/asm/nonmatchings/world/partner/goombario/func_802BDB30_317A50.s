@@ -5,7 +5,7 @@ glabel func_802BDB30_317A50
 /* 317A50 802BDB30 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 317A54 802BDB34 0000202D */  daddu     $a0, $zero, $zero
 /* 317A58 802BDB38 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 317A5C 802BDB3C 0C009C22 */  jal       func_80027088
+/* 317A5C 802BDB3C 0C009C22 */  jal       set_time_freeze_mode
 /* 317A60 802BDB40 AFB00010 */   sw       $s0, 0x10($sp)
 /* 317A64 802BDB44 3C03802C */  lui       $v1, %hi(func_802BDF64_3248B4)
 /* 317A68 802BDB48 2463DF64 */  addiu     $v1, $v1, %lo(func_802BDF64_3248B4)

@@ -2,7 +2,7 @@
 #include "sprite/npc/world_clubba.h"
 #include "message_ids.h"
 
-extern s16 D_8009A634;
+extern s16 gCurrentCamID;
 extern Npc* wPartnerNpc;
 
 enum {
@@ -20,8 +20,8 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .tattle = 0x1900C2,
 };
@@ -213,8 +213,8 @@ NpcSettings N(npcSettings_80241C3C) = {
     .height = 36,
     .radius = 34,
     .ai = &N(npcAI_80241BCC),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -245,8 +245,8 @@ NpcSettings N(npcSettings_80241D08) = {
     .height = 36,
     .radius = 34,
     .ai = &N(npcAI_80241C98),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -306,7 +306,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
         .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
-        .extraAnimations = &N(extraAnimationList_80241B6C),
+        .extraAnimations = N(extraAnimationList_80241B6C),
     },
     {
         .id = NPC_WORLD_CLUBBA1,
@@ -335,7 +335,7 @@ StaticNpc N(npcGroup_80241E08)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_80241B94),
+        .extraAnimations = N(extraAnimationList_80241B94),
     },
 };
 
@@ -403,7 +403,7 @@ StaticNpc N(npcGroup_802421E8)[] = {
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
             NPC_ANIM(world_clubba, Palette_00, Anim_2),
         },
-        .extraAnimations = &N(extraAnimationList_80241B94),
+        .extraAnimations = N(extraAnimationList_80241B94),
     },
 };
 
@@ -422,15 +422,14 @@ NpcGroupList N(npcGroupList_802425C8) = {
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
 s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
-    PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;
 
-    if (dist2D(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z) > enemy2->varTable[2]) {
+    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > enemy2->varTable[2]) {
         ret = FALSE;
     }
 
@@ -440,11 +439,11 @@ s32 N(func_80240208_C2EDA8)(ScriptInstance *script) {
         phi_f20 = 270.0f;
     }
 
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z))) > enemy2->varTable[3]) {
+    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > enemy2->varTable[3]) {
         ret = FALSE;
     }
 
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - (*playerStatus)->position.y)) {
+    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
         ret = FALSE;
     }
 

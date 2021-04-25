@@ -329,7 +329,7 @@ glabel L802E52AC_106B2C
 /* 106B34 802E52B4 00431024 */  and       $v0, $v0, $v1
 /* 106B38 802E52B8 0C038069 */  jal       enable_player_input
 /* 106B3C 802E52BC AE420004 */   sw       $v0, 4($s2)
-/* 106B40 802E52C0 0C009C22 */  jal       func_80027088
+/* 106B40 802E52C0 0C009C22 */  jal       set_time_freeze_mode
 /* 106B44 802E52C4 0000202D */   daddu    $a0, $zero, $zero
 /* 106B48 802E52C8 0220202D */  daddu     $a0, $s1, $zero
 /* 106B4C 802E52CC 3C05800A */  lui       $a1, %hi(gOverrideFlags)

@@ -78,8 +78,9 @@ class LinkerWriter():
                 if start % 0x10 != 0 and i != 0:
                     do_next = True
 
-            path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
-            self._write_symbol(path_cname, ".")
+            if entry.object_path:
+                path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
+                self._write_symbol(path_cname, ".")
 
             if entry.section != "linker":
                 self._writeln(f"{entry.object_path}({entry.section});")

@@ -61,7 +61,7 @@ void func_802E8ADC(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((entity->unk_06 & 1) != 0) {
-        OVERRIDE_FLAG_SET(0x40);
+        gOverrideFlags |= 0x40;
 
         if (!(playerStatus->flags & 0x3000)) {
             s32 stickAxis0 = abs(playerStatus->stickAxis[0]);
@@ -74,13 +74,12 @@ void func_802E8ADC(Entity* entity) {
             }
         }
     } else {
-        OVERRIDE_FLAG_UNSET(0x40);
+        gOverrideFlags &= ~0x40;
     }
 }
 
 void func_802E8BC0(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus;
     struct802E89B0* temp = entity->dataBuf;
     MapConfig* mapConfig = get_current_map_header();
     f32 temp_f20;
@@ -96,10 +95,10 @@ void func_802E8BC0(Entity* entity) {
 
     entryX = (*mapConfig->entryList)[temp->unk_0C].x;
     entryZ = (*mapConfig->entryList)[temp->unk_0C].z;
-    temp_f20 = atan2(playerStatus2->position.x, playerStatus2->position.z, entryX, entryZ);
+    temp_f20 = atan2(playerStatus->position.x, playerStatus->position.z, entryX, entryZ);
     disable_player_input();
     disable_player_static_collisions();
-    move_player(temp->unk_04, temp_f20, playerStatus2->runSpeed);
+    move_player(temp->unk_04, temp_f20, playerStatus->runSpeed);
 }
 
 void func_802E8C94(Entity* entity) {
@@ -114,7 +113,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Trigger* pipeTrigger = (Trigger*)bluePipe->dataBuf; // TODO: is Trigger correct?
 
-    playerStatus->targetYaw = CURRENT_CAM->currentYaw + 180.0f;
+    playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
     pipeTrigger->params1 = 0x19;
     playerStatus->renderMode = 0xD;
 
@@ -139,9 +138,9 @@ void func_802E8D74(Entity* entity) {
 }
 
 void func_802E8E10(Entity* entity) {
-    Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptStart;
+    Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptSource;
 
-    OVERRIDE_FLAG_UNSET(0x40);
+    gOverrideFlags &= ~0x40;
     entity->boundScript = triggerScriptStart;
     func_80110678(entity);
 }

@@ -51,8 +51,8 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     initStatus = 0;
     sfx_stop_env_sounds();
-    OVERRIDE_FLAG_UNSET(0x40);
-    OVERRIDE_FLAG_UNSET(0x80);
+    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~0x80;
 
     gameStatus = &gGameStatusPtr;
 

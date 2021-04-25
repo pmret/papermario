@@ -30,13 +30,13 @@ void func_802E10F4(Entity* entity) {
 }
 
 void func_802E114C(void) {
-    func_80027088(1);
+    set_time_freeze_mode(1);
     disable_player_input();
     gPlayerStatusPtr->currentSpeed = 0.0f;
 }
 
 void func_802E117C(void) {
-    func_80027088(0);
+    set_time_freeze_mode(0);
     enable_player_input();
 }
 

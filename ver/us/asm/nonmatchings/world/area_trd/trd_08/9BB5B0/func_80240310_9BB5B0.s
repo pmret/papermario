@@ -62,7 +62,7 @@ glabel func_80240310_9BB5B0
 /* 9BB694 802403F4 AE12002C */  sw        $s2, 0x2c($s0)
 /* 9BB698 802403F8 AE02001C */  sw        $v0, 0x1c($s0)
 .L802403FC:
-/* 9BB69C 802403FC 0C009C64 */  jal       func_80027190
+/* 9BB69C 802403FC 0C009C64 */  jal       get_time_freeze_mode
 /* 9BB6A0 80240400 00000000 */   nop
 /* 9BB6A4 80240404 14400131 */  bnez      $v0, .L802408CC
 /* 9BB6A8 80240408 0000102D */   daddu    $v0, $zero, $zero

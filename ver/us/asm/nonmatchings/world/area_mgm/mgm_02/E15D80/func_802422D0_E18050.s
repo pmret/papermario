@@ -8,7 +8,7 @@ glabel func_802422D0_E18050
 /* E1805C 802422DC 0C00FB3A */  jal       get_enemy
 /* E18060 802422E0 AFB00010 */   sw       $s0, 0x10($sp)
 /* E18064 802422E4 8C50006C */  lw        $s0, 0x6c($v0)
-/* E18068 802422E8 0C048D70 */  jal       func_801235C0
+/* E18068 802422E8 0C048D70 */  jal       free_dynamic_entity
 /* E1806C 802422EC 8E040000 */   lw       $a0, ($s0)
 /* E18070 802422F0 0C05123D */  jal       free_icon
 /* E18074 802422F4 8E04000C */   lw       $a0, 0xc($s0)

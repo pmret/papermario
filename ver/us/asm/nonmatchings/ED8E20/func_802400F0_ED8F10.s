@@ -4,8 +4,7 @@
 .section .rodata
 
 glabel D_80243170_EDBF90
-.ascii "[%d] dokan get pos  (no=%d)  pos=%d, %d, %d,  dir=%d
-\0\0\0flo_23\0\0flo_12\0\0flo_11\0\0"
+.ascii "[%d] dokan get pos  (no=%d)  pos=%d, %d, %d,  dir=%d\n\0\0\0flo_23\0\0flo_12\0\0flo_11\0\0"
 
 .section .text
 

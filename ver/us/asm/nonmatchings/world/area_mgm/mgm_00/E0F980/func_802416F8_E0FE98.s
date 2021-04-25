@@ -23,7 +23,7 @@ glabel func_802416F8_E0FE98
 /* E0FEE0 80241740 240200FF */  addiu     $v0, $zero, 0xff
 /* E0FEE4 80241744 AE300070 */  sw        $s0, 0x70($s1)
 /* E0FEE8 80241748 AE000000 */  sw        $zero, ($s0)
-/* E0FEEC 8024174C 0C048C56 */  jal       bind_dynamic_entity_3
+/* E0FEEC 8024174C 0C048C56 */  jal       create_dynamic_entity_world
 /* E0FEF0 80241750 AE02000C */   sw       $v0, 0xc($s0)
 /* E0FEF4 80241754 0220202D */  daddu     $a0, $s1, $zero
 /* E0FEF8 80241758 3C05FD05 */  lui       $a1, 0xfd05
@@ -39,7 +39,7 @@ glabel func_802416F8_E0FE98
 /* E0FF1C 8024177C 14620007 */  bne       $v1, $v0, .L8024179C
 /* E0FF20 80241780 0000102D */   daddu    $v0, $zero, $zero
 /* E0FF24 80241784 8E040014 */  lw        $a0, 0x14($s0)
-/* E0FF28 80241788 0C048D70 */  jal       func_801235C0
+/* E0FF28 80241788 0C048D70 */  jal       free_dynamic_entity
 /* E0FF2C 8024178C 00000000 */   nop
 /* E0FF30 80241790 0C00AB4B */  jal       heap_free
 /* E0FF34 80241794 0200202D */   daddu    $a0, $s0, $zero

@@ -24,7 +24,7 @@ class N64SegHeader(N64Segment):
         encoding = options.get("header_encoding", "ASCII")
 
         header_lines = []
-        header_lines.append(f".section .data, \"a\"\n")
+        header_lines.append(f".section .data\n")
         header_lines.append(self.get_line("word", rom_bytes[0x00:0x04], "PI BSB Domain 1 register"))
         header_lines.append(self.get_line("word", rom_bytes[0x04:0x08], "Clockrate setting"))
         header_lines.append(self.get_line("word", rom_bytes[0x08:0x0C], "Entrypoint address"))

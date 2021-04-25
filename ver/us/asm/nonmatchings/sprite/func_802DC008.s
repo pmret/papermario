@@ -147,8 +147,8 @@ glabel func_802DC008
 /* FF330 802DC240 30420002 */  andi      $v0, $v0, 2
 /* FF334 802DC244 10400059 */  beqz      $v0, .L802DC3AC
 /* FF338 802DC248 AD830000 */   sw       $v1, ($t4)
-/* FF33C 802DC24C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* FF340 802DC250 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* FF33C 802DC24C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* FF340 802DC250 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* FF344 802DC254 3C04800B */  lui       $a0, %hi(gCameras)
 /* FF348 802DC258 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* FF34C 802DC25C 00031080 */  sll       $v0, $v1, 2
@@ -362,8 +362,8 @@ glabel func_802DC008
 /* FF650 802DC560 30420002 */  andi      $v0, $v0, 2
 /* FF654 802DC564 104000C5 */  beqz      $v0, .L802DC87C
 /* FF658 802DC568 ACE30000 */   sw       $v1, ($a3)
-/* FF65C 802DC56C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* FF660 802DC570 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* FF65C 802DC56C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* FF660 802DC570 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* FF664 802DC574 3C04800B */  lui       $a0, %hi(gCameras)
 /* FF668 802DC578 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* FF66C 802DC57C 00031080 */  sll       $v0, $v1, 2
@@ -512,8 +512,8 @@ glabel func_802DC008
 /* FF88C 802DC79C 3C050100 */   lui      $a1, 0x100
 /* FF890 802DC7A0 3C04800B */  lui       $a0, %hi(gCameras)
 /* FF894 802DC7A4 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
-/* FF898 802DC7A8 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* FF89C 802DC7AC 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* FF898 802DC7A8 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* FF89C 802DC7AC 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* FF8A0 802DC7B0 3C068007 */  lui       $a2, %hi(gGameStatusPtr)
 /* FF8A4 802DC7B4 8CC6419C */  lw        $a2, %lo(gGameStatusPtr)($a2)
 /* FF8A8 802DC7B8 00031080 */  sll       $v0, $v1, 2

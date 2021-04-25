@@ -29,8 +29,8 @@ glabel npc_list_render
 /* 15C28 8003A828 3C01461C */  lui       $at, 0x461c
 /* 15C2C 8003A82C 34214000 */  ori       $at, $at, 0x4000
 /* 15C30 8003A830 4481B000 */  mtc1      $at, $f22
-/* 15C34 8003A834 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 15C38 8003A838 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 15C34 8003A834 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 15C38 8003A838 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 15C3C 8003A83C 3C04800B */  lui       $a0, %hi(gCameras)
 /* 15C40 8003A840 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* 15C44 8003A844 AFBF0064 */  sw        $ra, 0x64($sp)

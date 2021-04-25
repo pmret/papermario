@@ -5,6 +5,8 @@ void input_to_move_vector(f32* angle, f32* magnitude);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
 
+void func_802B61E4_E23444(void);
+
 NpcAnimID world_action_idle_peachAnims[] = {
     0x000A0001, // Idle
 
@@ -36,7 +38,7 @@ void world_action_idle_update(void) {
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
-        playerStatus->unk_8C = 0;
+        playerStatus->unk_8C = 0.0f;
 
         if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
             anim = 0x90002;

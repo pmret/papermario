@@ -74,7 +74,7 @@ glabel L802E663C_107EBC
 /* 107EDC 802E665C A2020000 */  sb        $v0, ($s0)
 /* 107EE0 802E6660 A2020002 */  sb        $v0, 2($s0)
 /* 107EE4 802E6664 E600002C */  swc1      $f0, 0x2c($s0)
-/* 107EE8 802E6668 0C009C22 */  jal       func_80027088
+/* 107EE8 802E6668 0C009C22 */  jal       set_time_freeze_mode
 /* 107EEC 802E666C E6020030 */   swc1     $f2, 0x30($s0)
 /* 107EF0 802E6670 0C038045 */  jal       disable_player_static_collisions
 /* 107EF4 802E6674 00000000 */   nop
@@ -350,7 +350,7 @@ glabel L802E6A48_1082C8
 /* 1082E8 802E6A68 82020002 */  lb        $v0, 2($s0)
 /* 1082EC 802E6A6C 10400009 */  beqz      $v0, .L802E6A94
 /* 1082F0 802E6A70 00000000 */   nop
-/* 1082F4 802E6A74 0C009C22 */  jal       func_80027088
+/* 1082F4 802E6A74 0C009C22 */  jal       set_time_freeze_mode
 /* 1082F8 802E6A78 0000202D */   daddu    $a0, $zero, $zero
 /* 1082FC 802E6A7C 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* 108300 802E6A80 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)

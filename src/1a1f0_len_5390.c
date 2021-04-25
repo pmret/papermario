@@ -109,9 +109,9 @@ ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = CURRENT_CAM->lookAt_obj.x;
-    script->varTable[1] = CURRENT_CAM->lookAt_obj.y;
-    script->varTable[2] = CURRENT_CAM->lookAt_obj.z;
+    script->varTable[0] = gCameras[gCurrentCameraID].lookAt_obj.x;
+    script->varTable[1] = gCameras[gCurrentCameraID].lookAt_obj.y;
+    script->varTable[2] = gCameras[gCurrentCameraID].lookAt_obj.z;
 
     return ApiStatus_DONE2;
 }

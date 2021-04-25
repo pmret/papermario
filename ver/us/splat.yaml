@@ -45,7 +45,7 @@ segments:
     - [0x3bf0, c, 3bf0_len_6f0]
     - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
-    - [0x6000, c, 6000]
+    - [0x6000, c, heap]
     - [0x6240, c, 6240_len_c00]
     - [0x6e40, c, 6e40_len_500]
     - [0x7340, c, 7340_len_b00]
@@ -251,6 +251,8 @@ segments:
     - [0x4F9D0, data, 6240_len_c00]
     - [0x52D08, .data, f270_len_1190]
     - [0x52D80, data]
+    - [0x52DC0, .data, 121f0_len_1290]
+    - [0x52EE0, data] # Start of 13480_len_3f0's data
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
     - [0x541B0, .data, 30450]
@@ -315,6 +317,7 @@ segments:
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
+    - [0x75240, .bss, 1b40_len_20b0]
     - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
@@ -360,7 +363,7 @@ segments:
     subsegments:
     - [0xa5dd0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
-    - [0xb72b0, c, b72b0_len_15ed0]
+    - [0xb72b0, c, entity]
     - [0xB9D60, c, B9D60]
     - [0xC50A0, c, C50A0]
     - [0xcd180, c, cd180_len_38f0]
@@ -385,7 +388,7 @@ segments:
     - [0xE5DF0, .data, e0b30_len_b80]
     - [0xE5E40, .rodata, a5dd0_len_114e0]
     - [0xE6560, .rodata, B4580]
-    - [0xE67B0, .rodata, b72b0_len_15ed0]
+    - [0xE67B0, .rodata, entity]
     - [0xE6A70, .rodata, B9D60]
     - [0xE7140, .rodata, C50A0]
     - [0xE75A0, .rodata, cd180_len_38f0]
@@ -397,29 +400,34 @@ segments:
     - [0xE7950, .rodata, DF950]
     - [0xE7990, .rodata, e0b30_len_b80]
   - type: code
+    dir: evt
     start: 0xE79B0
     vram: 0x802C3000
     subsegments:
-    - [0xe79b0, c, e79b0_len_1920]
+    - [0xe79b0, c, script_list]
     - [0xe92d0, c, si]
-    - [0xED510, c, ED510]
-    - [0xef070, c, ef070_len_3400]
-    - [0xf2470, c, f2470_len_27f0]
-    - [0xf4c60, c, f4c60_len_4300]
-    - [0xf5750, c, F5750]
+    - [0xED510, c, map_api]
+    - [0xef070, c, cam_api]
+    - [0xf2470, c, npc_api]
+    - [0xf4c60, c, msg_api]
+    - [0xf5750, c, player_api]
     - [0xf8f60, c, f8f60_len_1560]
     - [0xfa4c0, c, fa4c0_len_3bf0]
-    - [0xFBE10, c, FBE10]
-    - [0xfe0b0, c, fe0b0_len_5a0]
-    - [0xFE650, .data, e79b0_len_1920]
-    - [0xFE660, data, si]
-    - [0xFE730, .rodata, e79b0_len_1920]
+    - [0xFBE10, c, fx_api]
+    - [0xfe0b0, c, demo_api]
+    - [0xFE650, .data, script_list]
+    - [0xFE660, .data, cam_api]
+    - [0xFE6D0, .data, player_api]
+    - [0xFE6E0, .data, fa4c0_len_3bf0]
+    - [0xFE700, .data, fx_api]
+    - [0xFE720, data, si]
+    - [0xFE730, .rodata, script_list]
     - [0xFE748, .rodata, si]
-    - [0xFEB80, .rodata, ef070_len_3400]
-    - [0xFEB90, .rodata, f2470_len_27f0]
-    - [0xFEBA0, .rodata, f4c60_len_4300]
-    - [0xFEBB8, .rodata, F5750]
-    - [0xFEC08, .rodata, FBE10]
+    - [0xFEB80, .rodata, cam_api]
+    - [0xFEB90, .rodata, npc_api]
+    - [0xFEBA0, .rodata, msg_api]
+    - [0xFEBB8, .rodata, player_api]
+    - [0xFEC08, .rodata, fx_api]
   - type: code
     start: 0xFEE30
     vram: 0x802DBD40
@@ -2172,14 +2180,12 @@ segments:
     subsegments:
     - [0x38F900, c]
     - [0x390340, bin]
-  - [0x3903D0, bin]
-  - start: 0x390810
-    type: ia4
-    name: battle/text_action_command_ratings
-    width: 64
-    height: 125
-    flip: vertical
-  - [0x3917B0, bin]
+  - [0x3903D0, ia4, battle/lucky, 64, 32]
+  - [0x3907D0, ia4, battle/miss,  64, 32]
+  - [0x390BD0, ia4, battle/good,  64, 32]
+  - [0x390FD0, ia4, battle/nice,  64, 32]
+  - [0x3913D0, ia4, battle/super, 64, 32]
+  - [0x3917D0, bin]
   - type: code
     start: 0x391D30
     vram: 0xE0092000
@@ -2471,20 +2477,114 @@ segments:
     subsegments:
     - [0x3EB4E0, c]
     - [0x3EBC30, bin]
-  - [0x3ED4E0, ia8, world/text_chapter, 128, 38]
-  - [0x3EE7E0, bin]
+  - [0x3EBE60, ia8,    world/ch0,               144, 40]
+  - [0x3ED4E0, ia8,    world/text_chapter,      128, 40]
+  - [0x3EE8E0, ia8,    world/text_end_of,       104, 40]
+  - [0x3EF920, ia8,    world/exclamation_point, 16,  40]
+  - [0x3EFBA0, ia8,    world/ch1,               64,  64]
+  - [0x3F0BA0, ia8,    world/ch2,               64,  64]
+  - [0x3F1BA0, ia8,    world/ch3,               64,  64]
+  - [0x3F2BA0, ia8,    world/ch4,               64,  64]
+  - [0x3F3BA0, ia8,    world/ch5,               64,  64]
+  - [0x3F4BA0, ia8,    world/ch6,               64,  64]
+  - [0x3F5BA0, ia8,    world/ch7,               64,  64]
+  - [0x3F6BA0, ia8,    world/ch8,               64,  64]
+  - [0x3F7BA0, rgba16, world/chapter_rainbow,   8,  16]
+  - [0x3F7CA0, bin]
   - type: code
     start: 0x3F83F0
     vram: 0xE0110000
     subsegments:
     - [0x3F83F0, c]
     - [0x3F8CA0, bin]
+  - [0x3F8CC0, i4, ice_smash, 64, 128]
+  - [0x3F9CC0, bin]
   - type: code
     start: 0x3F9E50
     vram: 0xE0112000
     subsegments:
     - [0x3F9E50, c]
     - [0x3FA480, bin]
+  - start: 0x3FA4B0
+    type: ci4
+    name: star_cards/card_front
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x3FA6B0, palette, star_cards/card_front]
+  - [0x3FA6D0, bin] # PAD
+  - start: 0x3FA8B0
+    type: ci4
+    name: star_cards/card_back
+    flip_y: true
+    width: 32
+    height: 64
+  - [0x3FACB0, palette, star_cards/card_back]
+  - [0x3FACD0, bin] # PAD
+  - start: 0x3FAEB0
+    type: ci4
+    name: star_cards/wave
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x3FB0B0, palette, star_cards/wave]
+  - [0x3FB0D0, bin] # PAD
+  - start: 0x3FB2B0
+    type: ci4
+    name: star_cards/squares
+    flip_y: true
+    width: 16
+    height: 16
+  - [0x3FB330, palette, star_cards/squares]
+  - [0x3FB350, bin] # PAD
+  - start: 0x3FB530
+    type: ci4
+    name: star_cards/eldstar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FB9B0, palette, star_cards/eldstar]
+  - [0x3FB9D0, bin] # PAD
+  - start: 0x3FBBB0
+    type: ci4
+    name: star_cards/mamar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FC030, palette, star_cards/mamar]
+  - [0x3FC050, bin] # PAD
+  - start: 0x3FC230
+    type: ci4
+    name: star_cards/skolar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FC6B0, palette, star_cards/skolar]
+  - [0x3FC6D0, bin] # PAD
+  - start: 0x3FC8B0
+    type: ci4
+    name: star_cards/muskular
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FCD30, palette, star_cards/muskular]
+  - [0x3FCD50, bin] # PAD
+  - start: 0x3FCF30
+    type: ci4
+    name: star_cards/misstar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FD3B0, palette, star_cards/misstar]
+  - [0x3FD3D0, bin] # PAD
+  - start: 0x3FDC30
+    type: ci4
+    name: star_cards/klevar
+    flip_y: true
+    width: 48
+    height: 48
+  - [0x3FE0B0, palette, star_cards/klevar]
+  - [0x3FE0D0, bin]
   - type: code
     start: 0x3FEAE0
     vram: 0xE0114000
@@ -2509,6 +2609,35 @@ segments:
     subsegments:
     - [0x404220, c]
     - [0x404E40, bin]
+  - start: 0x404F40
+    type: ci4
+    name: world/cloud
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405140, palette, world/cloud]
+  - start: 0x405340
+    type: ci4
+    name: world/waterblock
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405540, palette, world/waterblock]
+  - start: 0x405740
+    type: ci4
+    name: world/yellow_carpet
+    flip_y: true
+    width: 32
+    height: 32
+  - [0x405940, palette, world/yellow_carpet]
+  - start: 0x405B40
+    type: ci4
+    name: world/numbers
+    flip_y: true
+    width: 32
+    height: 160
+  - [0x406540, palette, world/numbers]
+  - [0x406740, bin]
   - type: code
     start: 0x406B40
     vram: 0xE011C000

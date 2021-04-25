@@ -10,8 +10,8 @@ glabel func_802414BC_D65A9C
 /* D65AB0 802414D0 0C00E769 */  jal       func_80039DA4
 /* D65AB4 802414D4 0080882D */   daddu    $s1, $a0, $zero
 /* D65AB8 802414D8 44800000 */  mtc1      $zero, $f0
-/* D65ABC 802414DC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D65AC0 802414E0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D65ABC 802414DC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D65AC0 802414E0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D65AC4 802414E4 C6220034 */  lwc1      $f2, 0x34($s1)
 /* D65AC8 802414E8 00031080 */  sll       $v0, $v1, 2
 /* D65ACC 802414EC 00431021 */  addu      $v0, $v0, $v1

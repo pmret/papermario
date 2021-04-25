@@ -56,7 +56,7 @@ glabel func_80035EEC
 /* 113A8 80035FA8 8E020000 */  lw        $v0, ($s0)
 /* 113AC 80035FAC 94430086 */  lhu       $v1, 0x86($v0)
 /* 113B0 80035FB0 0000202D */  daddu     $a0, $zero, $zero
-/* 113B4 80035FB4 0C009C22 */  jal       func_80027088
+/* 113B4 80035FB4 0C009C22 */  jal       set_time_freeze_mode
 /* 113B8 80035FB8 A4430088 */   sh       $v1, 0x88($v0)
 /* 113BC 80035FBC 8E020000 */  lw        $v0, ($s0)
 /* 113C0 80035FC0 80420071 */  lb        $v0, 0x71($v0)

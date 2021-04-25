@@ -7,10 +7,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = MSG_dgb_10_tattle,
+    .tattle = { MSG_dgb_10_tattle },
 };
 
 Script N(80240250) = SCRIPT({
@@ -327,16 +327,15 @@ ApiStatus N(func_802400A0_C4C430)(ScriptInstance *script, s32 isInitialCall) {
 
 ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = playerStatus;
     s32 var;
 
     if (playerStatus->position.y >= 0.0f) {
         return 0;
     }
 
-    if (playerStatus2->position.x < 440.0f) {
+    if (playerStatus->position.x < 440.0f) {
         var = 3;
-    } else if (playerStatus2->position.z < -170.0f) {
+    } else if (playerStatus->position.z < -170.0f) {
         var = 2;
     } else {
         var = 1;

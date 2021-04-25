@@ -15,7 +15,6 @@ extern s32 D_8010C990;
 
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = &gPlayerStatus; // needed for some macro - not sure what yet
     s32 inputBufPos = playerStatus->inputBufPos;
 
     playerStatus->stickAxis[0] = gGameStatusPtr->stickX;
@@ -46,15 +45,14 @@ void update_player_input(void) {
 
     if (playerStatus->animFlags & 8) {
         playerStatus->animFlags |= 0x200000;
-        playerStatus2->pressedButtons |= 4;
+        playerStatus->pressedButtons |= 4;
     }
 }
 
+#ifdef NON_MATCHING
 void func_800E205C(void) {
     s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    GameStatus** gameStatus;
-    GameStatus *gameStatus2;
     MapConfig* mapConfig;
     f32 one;
     f32* floatsTemp;
@@ -74,27 +72,26 @@ void func_800E205C(void) {
     playerStatus->unk_0D = 1;
     playerStatus->renderMode = 0xD;
 
-    gameStatus = &gGameStatusPtr;
-    playerStatus->unk_0E = 255;
-    playerStatus->unk_0F = 255;
-    (*gameStatus)->peachFlags &= ~0x8;
-    (*gameStatus)->peachFlags &= ~0x10;
+    playerStatus->alpha1 = 255;
+    playerStatus->alpha2 = 255;
+    gGameStatusPtr->peachFlags &= ~0x8;
+    gGameStatusPtr->peachFlags &= ~0x10;
 
     one = 1.0f;
 
-    if ((*gameStatus)->peachFlags & 1) {
+    if (gGameStatusPtr->peachFlags & 1) {
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
         playerStatus->animFlags |= 0x1000;
 
-        if ((*gameStatus)->peachFlags & 2) {
+        if (gGameStatusPtr->peachFlags & 2) {
             *temp8010C92C = 2;
-            playerStatus->peachDisguise = (*gameStatus)->peachDisguise;
+            playerStatus->peachDisguise = gGameStatusPtr->peachDisguise;
         }
     } else {
         playerStatus->colliderHeight = 37;
         playerStatus->colliderDiameter = 26;
-        (*gameStatus)->peachAnimIdx = 0;
+        gGameStatusPtr->peachAnimIdx = 0;
     }
 
     // This grossness is needed for matching
@@ -105,7 +102,6 @@ void func_800E205C(void) {
 
     set_action_state(ACTION_STATE_IDLE);
 
-    gameStatus2 = gGameStatusPtr;
     playerStatus->currentSpeed = 0.0f;
     playerStatus->targetYaw = 0.0f;
     playerStatus->unk_64 = 0.0f;
@@ -121,14 +117,14 @@ void func_800E205C(void) {
     playerStatus->unk_98 = 0;
     playerStatus->unk_9C = 0;
 
-    mapConfig = gAreas[gameStatus2->areaID].maps[gameStatus2->mapID].config;
+    mapConfig = gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID].config;
 
     if (mapConfig->entryList != NULL) {
-        if (gameStatus2->entryID < mapConfig->entryCount) {
-            playerStatus->position.x = (*mapConfig->entryList)[gameStatus2->entryID].x;
-            playerStatus->position.y = (*mapConfig->entryList)[gameStatus2->entryID].y;
-            playerStatus->position.z = (*mapConfig->entryList)[gameStatus2->entryID].z;
-            playerStatus->currentYaw = (*mapConfig->entryList)[gameStatus2->entryID].yaw;
+        if (gGameStatusPtr->entryID < mapConfig->entryCount) {
+            playerStatus->position.x = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
+            playerStatus->position.y = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
+            playerStatus->position.z = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
+            playerStatus->currentYaw = (*mapConfig->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
@@ -139,6 +135,9 @@ void func_800E205C(void) {
     func_800E59A0(mapConfig);
     mem_clear(&D_8010F250, sizeof(Temp8010F250));
 }
+#else
+INCLUDE_ASM(s32, "7B440", func_800E205C);
+#endif
 
 void func_800E22E4(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -148,15 +147,14 @@ void func_800E22E4(s32* arg0) {
 
 void input_to_move_vector(f32* angle, f32* magnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PlayerStatus* playerStatus2 = playerStatus;
     f32 stickAxisX;
     f32 stickAxisY;
     f32 ang;
     f32 mag;
     f32 magMax = 70.0f;
 
-    stickAxisX = playerStatus2->stickAxis[0];
-    stickAxisY = -playerStatus2->stickAxis[1];
+    stickAxisX = playerStatus->stickAxis[0];
+    stickAxisY = -playerStatus->stickAxis[1];
 
     mag = dist2D(0.0f, 0.0f, stickAxisX, stickAxisY);
     if (mag >= magMax) {
@@ -165,7 +163,7 @@ void input_to_move_vector(f32* angle, f32* magnitude) {
 
     ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[0].currentYaw);
     if (mag == 0.0f) {
-        ang = playerStatus2->targetYaw;
+        ang = playerStatus->targetYaw;
     }
 
     *angle = ang;

@@ -51,8 +51,8 @@ NpcSettings N(npcSettings_802436B0) = {
     .height = 20,
     .radius = 23,
     .ai = &N(npcAI_80243690),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 12,
 };
 
@@ -86,8 +86,8 @@ NpcSettings N(npcSettings_80243794) = {
     .height = 18,
     .radius = 20,
     .ai = &N(npcAI_80243724),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 12,
     .unk_2A = 1,
 };
@@ -114,8 +114,8 @@ NpcSettings N(npcSettings_80243814) = {
     .height = 24,
     .radius = 24,
     .ai = &N(npcAI_802437F0),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 15,
 };
 
@@ -702,7 +702,7 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_arn/arn_04/BE37B0", arn_04_func_80241040_BE47F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+INCLUDE_ASM(void, "world/area_arn/arn_04/events", arn_04_func_80241040_BE47F0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc1_copy.inc.c"
@@ -968,7 +968,7 @@ s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings *aiSettings, E
     PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(D_8009A634);
+    Camera* camera = CAM2(gCurrentCamID);
     f32 phi_f20;
     s32 ret = FALSE;
 
@@ -984,10 +984,10 @@ s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings *aiSettings, E
     playerStatus = &gPlayerStatusPtr;
     if (fabsf(get_clamped_angle_diff(phi_f20,
             atan2(npc->pos.x, npc->pos.z,
-                  (*playerStatus)->position.x, (*playerStatus)->position.z))) > 75.0) {
+                  gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > 75.0) {
         ret = FALSE;
     }
-    if (fabsf(npc->pos.y - (*playerStatus)->position.y) >= 40.0f) {
+    if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         ret = FALSE;
     }
     if (D_8010EBB0.unk_03 == 9) {
@@ -1024,14 +1024,12 @@ void N(func_8024255C_BE5D0C)(ScriptInstance* script, NpcAISettings* aiSettings, 
 #include "world/common/UnkNpcAIFunc22.inc.c"
 
 void N(func_80242858_BE6008)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        playerStatus = &gPlayerStatusPtr;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0].s = 12;
     } else {
         npc->duration--;
@@ -1054,23 +1052,21 @@ void N(func_80242858_BE6008)(ScriptInstance* script, NpcAISettings* aiSettings, 
 void N(func_80242A1C_BE61CC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    PlayerStatus** playerStatus = &gPlayerStatusPtr;
 
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     if (npc->duration % 3 == 0) {
         fx_walk_normal(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
     }
 
     npc->duration--;
     if (npc->duration <= 0) {
-        playerStatus = &gPlayerStatusPtr;
 
         enemy->unk_10.x = npc->pos.x;
         enemy->unk_10.y = npc->pos.y;
         enemy->unk_10.z = npc->pos.z;
         enemy->unk_07 = 1;
         npc->moveSpeed = aiSettings->chaseSpeed;
-        npc->duration = dist2D(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z) / npc->moveSpeed + 0.9;
+        npc->duration = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed + 0.9;
         if (npc->duration < 15) {
             npc->duration = 15;
         }
@@ -1133,10 +1129,9 @@ void N(func_80242D0C_BE64BC)(ScriptInstance* script, NpcAISettings* aiSettings, 
 void N(func_80242DB8_BE6568)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    PlayerStatus** playerStatus = &gPlayerStatusPtr;
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0].s = 12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;

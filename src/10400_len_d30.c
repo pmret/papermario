@@ -4,7 +4,7 @@ void state_init_language_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    func_80027088(2);
+    set_time_freeze_mode(2);
     set_transition_stencil_zoom_0(0, D_800A0932[0]);
 }
 
@@ -14,7 +14,7 @@ void state_init_file_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    func_80027088(2);
+    set_time_freeze_mode(2);
     general_heap_create();
     func_801452E8(0, 0);
     func_80141100();
@@ -43,7 +43,7 @@ void state_init_file_select(void) {
     cameras[0].unk_1C = 0;
     cameras[0].unk_20 = 100;
     cameras[0].unk_22 = 0;
-    OVERRIDE_FLAG_SET(0x10000);
+    gOverrideFlags |= 0x10000;
 }
 
 INCLUDE_ASM(s32, "10400_len_d30", state_step_language_select);
@@ -65,7 +65,7 @@ void func_800355D4(void) {
         set_transition_stencil_zoom_0(0, D_800A0932[0]);
     }
     D_800A0930 = 1;
-    OVERRIDE_FLAG_UNSET(0x40);
+    gOverrideFlags &= ~0x40;
 }
 
 void func_80035660(void) {
@@ -77,10 +77,10 @@ void func_80035660(void) {
         set_map_transition_effect(7);
     } else {
         set_map_transition_effect(8);
-        OVERRIDE_FLAG_UNSET(0x0010000);
+        gOverrideFlags &= ~0x0010000;
         bgm_set_song(0, -1, 0, 1000, 8);
     }
-    OVERRIDE_FLAG_UNSET(0x40);
+    gOverrideFlags &= ~0x40;
 }
 
 INCLUDE_ASM(s32, "10400_len_d30", func_80035704);

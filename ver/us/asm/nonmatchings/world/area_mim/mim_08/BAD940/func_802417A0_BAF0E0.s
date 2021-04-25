@@ -18,8 +18,8 @@ glabel func_802417A0_BAF0E0
 /* BAF114 802417D4 0040802D */  daddu     $s0, $v0, $zero
 /* BAF118 802417D8 3C05800B */  lui       $a1, %hi(gCameras)
 /* BAF11C 802417DC 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
-/* BAF120 802417E0 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* BAF124 802417E4 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* BAF120 802417E0 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* BAF124 802417E4 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* BAF128 802417E8 00912021 */  addu      $a0, $a0, $s1
 /* BAF12C 802417EC 00031080 */  sll       $v0, $v1, 2
 /* BAF130 802417F0 00431021 */  addu      $v0, $v0, $v1

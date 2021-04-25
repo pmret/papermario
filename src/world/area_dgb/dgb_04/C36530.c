@@ -16,10 +16,10 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
-    .tattle = MSG_dgb_04_tattle,
+    .tattle = { MSG_dgb_04_tattle },
 };
 
 Script N(80243170) = SCRIPT({
@@ -1131,7 +1131,7 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance *script, s32 isInitialCall) {
 #include "world/common/SetOverrideFlags_40.inc.c"
 
 ApiStatus N(func_802423EC_C3891C)(ScriptInstance *script, s32 isInitialCall) {
-    OVERRIDE_FLAG_UNSET(0x40)
+    gOverrideFlags &= ~0x40;
     return ApiStatus_DONE2;
 }
 

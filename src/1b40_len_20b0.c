@@ -2,6 +2,8 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
+// TODO: timeFreezeMode is probably bss here
+
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
@@ -45,10 +47,6 @@ void gfx_draw_background(void);
 
 void step_game_loop(void) {
     PlayerData* playerData = &gPlayerData;
-    s8* temp80074021;
-    s16* temp80074182;
-    s16* temp800741A0;
-    s16* temp8009A690;
 
     update_input();
 
@@ -61,11 +59,10 @@ void step_game_loop(void) {
 
     update_max_rumble_duration();
 
-    temp80074021 = &D_80074021;
-    if (*temp80074021 != 0) {
-        (*temp80074021)-- ;
-        if (*temp80074021 == 0) {
-            *temp80074021 = D_80074020;
+    if (D_80074021 != 0) {
+        D_80074021-- ;
+        if (D_80074021 == 0) {
+            D_80074021 = D_80074020;
         } else {
             return;
         }
@@ -87,32 +84,29 @@ void step_game_loop(void) {
     update_windows();
     update_curtains();
 
-    if (OVERRIDE_FLAG_CHECK(0x20)) {
-        temp80074182 = &D_800741A2;
-
-        switch (*temp80074182) {
+    if (gOverrideFlags & 0x20) {
+        switch (D_800741A2) {
             case 0:
-                OVERRIDE_FLAG_SET(0x200);
+                gOverrideFlags |= 0x200;
                 disable_player_input();
-                temp800741A0 = &D_800741A0;
-                if (*temp800741A0 == 255) {
-                    *temp80074182 = 1;
+
+                if (D_800741A0 == 255) {
+                    D_800741A2 = 1;
                     D_8009A690 = 3;
                 } else {
-                    *temp800741A0 += 10;
-                    if (*temp800741A0 > 255) {
-                        *temp800741A0 = 255;
+                    D_800741A0 += 10;
+                    if (D_800741A0 > 255) {
+                        D_800741A0 = 255;
                     }
                 }
                 break;
             case 1:
-                OVERRIDE_FLAG_SET(0x8);
-                temp8009A690 = &D_8009A690;
-                (*temp8009A690)--;
-                if (*temp8009A690 == 0) {
+                gOverrideFlags |= 0x8;
+                D_8009A690--;
+                if (D_8009A690 == 0) {
                     sfx_stop_env_sounds();
                     set_game_mode(0);
-                    OVERRIDE_FLAG_UNSET(0x20);
+                    gOverrideFlags &= ~0x20;
                 }
                 break;
         }
@@ -121,82 +115,149 @@ void step_game_loop(void) {
         D_800741A2 = 0;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x100)) {
-        OVERRIDE_FLAG_SET(0x1000);
+    if (gOverrideFlags & 0x100) {
+        gOverrideFlags |= 0x1000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x1000);
+        gOverrideFlags &= ~0x1000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x200)) {
-        OVERRIDE_FLAG_SET(0x2000);
+    if (gOverrideFlags & 0x200) {
+        gOverrideFlags |= 0x2000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x2000);
+        gOverrideFlags &= ~0x2000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x400)) {
-        OVERRIDE_FLAG_SET(0x4000);
+    if (gOverrideFlags & 0x400) {
+        gOverrideFlags |= 0x4000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x4000);
+        gOverrideFlags &= ~0x4000;
     }
 
-    if (OVERRIDE_FLAG_CHECK(0x800)) {
-        OVERRIDE_FLAG_SET(0x8000);
+    if (gOverrideFlags & 0x800) {
+        gOverrideFlags |= 0x8000;
     } else {
-        OVERRIDE_FLAG_UNSET(0x8000);
+        gOverrideFlags &= ~0x8000;
     }
 
     rand_int(1);
 }
 
 void gfx_task_background(void) {
-    DisplayContext** gDisplayContextPtr = &gDisplayContext;
-    Gfx** gfx = &gMasterGfxPos;
-    DisplayContext* dispContexts = D_80164000;
-
-    *gDisplayContextPtr = &dispContexts[gCurrentDisplayContextIndex];
-    *gfx = &(*gDisplayContextPtr)->backgroundGfx[0];
+    gDisplayContext = &D_80164000[gCurrentDisplayContextIndex];
+    gMasterGfxPos = &gDisplayContext->backgroundGfx[0];
 
     gfx_init_state();
     gfx_draw_background();
 
-    gDPFullSync((*gfx)++);
-    gSPEndDisplayList((*gfx)++);
+    gDPFullSync(gMasterGfxPos++);
+    gSPEndDisplayList(gMasterGfxPos++);
 
     // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
-    ASSERT((s32)((u32)((*gfx) - (*gDisplayContextPtr)->backgroundGfx) << 3 >> 3) < ARRAY_COUNT((
-                *gDisplayContextPtr)->backgroundGfx));
+    ASSERT((s32)((u32)((gMasterGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->backgroundGfx))
 
-    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (gMasterGfxPos - gDisplayContext->backgroundGfx) << 3,
+    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (u32)(gMasterGfxPos - gDisplayContext->backgroundGfx) * 8,
                    NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);
 }
 
-INCLUDE_ASM(s32, "1b40_len_20b0", gfx_draw_frame);
+void gfx_draw_frame(void) {
+    gMatrixListPos = 0;
+    gMasterGfxPos = &gDisplayContext->mainGfx[0];
+
+    if (gOverrideFlags & 8) {
+        gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
+        return;
+    }
+
+    gSPMatrix(gMasterGfxPos++, D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+
+    func_802DDA60(gDisplayContext, &gMasterGfxPos);
+
+    if (!(gOverrideFlags & 2)) {
+        render_frame(0);
+    }
+
+    func_800E0260();
+    func_802C3EE4();
+    render_transition_stencil_lower();
+    render_dynamic_entities_backUI();
+    func_80142210();
+    func_80059F94();
+    render_ui();
+
+    if (!(gOverrideFlags & 0x10000)) {
+        render_window_root();
+    }
+    if (!(gOverrideFlags & 2) && gGameStatusPtr->disableScripts == 0) {
+        render_frame(1);
+    }
+
+    if (!(gOverrideFlags & 0x100010)) {
+        render_messages();
+    }
+
+    render_dynamic_entities_frontUI();
+    func_8014271C();
+    render_transition_stencil_upper();
+
+    if ((gOverrideFlags & 0x100010) == 0x10) {
+        render_messages();
+    }
+
+    render_curtains();
+
+    if (gOverrideFlags & 0x100000) {
+        render_messages();
+    }
+    if (gOverrideFlags & 0x10000) {
+        render_window_root();
+    }
+
+    func_80112FC4();
+
+    if (gOverrideFlags & 0x20) {
+        switch (D_800741A2) {
+            case 0:
+            case 1:
+                _render_transition_stencil(7, D_800741A0, 0);
+                break;
+        }
+    }
+
+    ASSERT((s32)(((u32)(gMasterGfxPos - gDisplayContext->mainGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->mainGfx));
+
+    gDPFullSync(gMasterGfxPos++);
+    gSPEndDisplayList(gMasterGfxPos++);
+
+    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
+                   NU_SC_TASK_LODABLE | NU_SC_SWAPBUFFER);
+    gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
+    func_8002C890(D_8009A64C, 0x140, 0xF0);
+}
 
 void load_engine_data(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
     s32 i;
 
     dma_copy(FEE30_ROM_START, FEE30_ROM_END, FEE30_VRAM);
     dma_copy(_759B0_ROM_START, _759B0_ROM_END, _759B0_VRAM);
-    dma_copy(E79B0_ROM_START, E79B0_ROM_END, E79B0_VRAM);
+    dma_copy(evt_ROM_START, evt_ROM_END, evt_VRAM);
     dma_copy(_102610_ROM_START, _102610_ROM_END, _102610_VRAM);
     dma_copy(A5DD0_ROM_START, A5DD0_ROM_END, A5DD0_VRAM);
     dma_copy(_10CC10_ROM_START, _10CC10_ROM_END, _10CC10_VRAM);
 
     gOverrideFlags = 0;
-    (*gameStatus)->unk_79 = 0;
-    (*gameStatus)->enableBackground = 0;
-    (*gameStatus)->musicEnabled = 1;
-    (*gameStatus)->unk_7C = 1;
-    (*gameStatus)->unk_A8 = -1;
-    (*gameStatus)->unk_AA = 0;
-    (*gameStatus)->unk_81 = 0;
-    (*gameStatus)->unk_82 = -8;
-    (*gameStatus)->unk_83 = 4;
-    D_8009A5D8 = 0;
-    (*gameStatus)->unk_75 = (*gameStatus)->unk_13C = 0;
+    gGameStatusPtr->unk_79 = 0;
+    gGameStatusPtr->enableBackground = 0;
+    gGameStatusPtr->musicEnabled = 1;
+    gGameStatusPtr->unk_7C = 1;
+    gGameStatusPtr->unk_A8 = -1;
+    gGameStatusPtr->unk_AA = 0;
+    gGameStatusPtr->unk_81 = 0;
+    gGameStatusPtr->unk_82 = -8;
+    gGameStatusPtr->unk_83 = 4;
+    timeFreezeMode = 0;
+    gGameStatusPtr->unk_75 = gGameStatusPtr->unk_13C = 0;
     D_80074021 = 5;
-    (*gameStatus)->saveCount = 0;
+    gGameStatusPtr->saveCount = 0;
     fio_init_flash();
     func_80028838();
     general_heap_create();
@@ -232,62 +293,61 @@ void load_engine_data(void) {
     poll_rumble();
 
     for (i = 0; i < 4; i++) {
-        (*gameStatus)->unk_50[i] = 3;
-        (*gameStatus)->unk_48[i] = 12;
+        gGameStatusPtr->unk_50[i] = 3;
+        gGameStatusPtr->unk_48[i] = 12;
     }
 
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
     set_game_mode(0);
 }
 
-void func_80027088(s32 arg0) {
-    switch (arg0) {
+/// Time freeze modes:
+///  0: normal
+///  1: NPCs move, can't be interacted with
+///  2: NPCs don't move, no partner ability, can't interact, can't use exits
+///  3: NPCs don't more or animate (partner switch menu)
+///  4: NPCs can move, animations don't update, can use exits
+void set_time_freeze_mode(s32 mode) {
+    switch (mode) {
         case 0:
-            D_8009A5D8 = arg0;
-            OVERRIDE_FLAG_UNSET(0xF00);
+            timeFreezeMode = mode;
+            gOverrideFlags &= ~0xF00;
             resume_all_group(3);
             break;
         case 1:
-            D_8009A5D8 = arg0;
-            OVERRIDE_FLAG_UNSET(0xE00);
-            OVERRIDE_FLAG_SET(0x100);
+            timeFreezeMode = mode;
+            gOverrideFlags &= ~0xE00;
+            gOverrideFlags |= 0x100;
             suspend_all_group(1);
             break;
         case 2:
-            D_8009A5D8 = arg0;
-            OVERRIDE_FLAG_UNSET(0xC00);
-            OVERRIDE_FLAG_SET(0x300);
+            timeFreezeMode = mode;
+            gOverrideFlags &= ~0xC00;
+            gOverrideFlags |= 0x300;
             suspend_all_group(2);
             break;
         case 3:
-            D_8009A5D8 = arg0;
-            OVERRIDE_FLAG_UNSET(0x800);
-            OVERRIDE_FLAG_SET(0x700);
+            timeFreezeMode = mode;
+            gOverrideFlags &= ~0x800;
+            gOverrideFlags |= 0x700;
             suspend_all_group(2);
             break;
         case 4:
-            D_8009A5D8 = arg0;
-            OVERRIDE_FLAG_SET(0xF00);
+            timeFreezeMode = mode;
+            gOverrideFlags |= 0xF00;
             break;
     }
 }
 
-s32 func_80027190(void) {
-    return D_8009A5D8;
+s32 get_time_freeze_mode(void) {
+    return timeFreezeMode;
 }
 
-#ifdef NON_MATCHING
 void gfx_init_state(void) {
-    Gfx* temp;
-
     gSPSegment(gMasterGfxPos++, 0x00, 0x0);
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074230));
-    //temp = gMasterGfxPos++;
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(&D_80074210));
+    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
+    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
-#else
-INCLUDE_ASM(void, "1b40_len_20b0", gfx_init_state);
-#endif
 
 INCLUDE_ASM(s32, "1b40_len_20b0", func_800271FC);
 
@@ -299,6 +359,34 @@ INCLUDE_ASM(s32, "1b40_len_20b0", func_80027774);
 
 INCLUDE_ASM(s32, "1b40_len_20b0", func_800279B4);
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_80027BAC);
+void func_80027BAC(s32 arg0, s32 arg1) {
+    s32 i;
+    s32 temp = 24; // todo figure out why this is needed and can't be used elsewhere
+
+    gDPPipeSync(gMasterGfxPos++);
+    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, arg1);
+    gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
+    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+
+    for (i = 0; i < 40; i++) {
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, arg0 + (0xF00 * i));
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
+                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                   G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+        gSPTextureRectangle(gMasterGfxPos++, 0, i * temp, 0x04FC, (i * 24) + 20, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gDPPipeSync(gMasterGfxPos++);
+    }
+}
 
 INCLUDE_ASM(void, "1b40_len_20b0", gfx_draw_background);

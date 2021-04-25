@@ -8,7 +8,7 @@ ApiStatus N(UnkFunc20)(ScriptInstance *script, s32 isInitialCall) {
     s32 si_var = *args++;
     Effect* effect = func_80071750(0, entity->position.x, entity->position.y + 12.5f, entity->position.z, 0.7f, 0);
 
-    set_variable(script, si_var, effect);
+    set_variable(script, si_var, (s32) effect);
 
     return ApiStatus_DONE2;
 }

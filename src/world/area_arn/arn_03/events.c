@@ -91,9 +91,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-s32 N(D_80241C68_BE09F8) = {
-    0x00000000,
-};
+s32* N(D_80241C68_BE09F8) = NULL;
 
 Script N(80241C6C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -123,7 +121,7 @@ Script N(80241CD4) = SCRIPT({
         else {
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(SomeXYZFuncTodoRename)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
+            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             SI_VAR(0) |=c 0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
@@ -138,9 +136,9 @@ Script N(80241CD4) = SCRIPT({
 });
 
 Script N(80241E18) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241CD4), 0x10, 0, D_80244A20, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802415F4_BE0384), SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_80241680_BE0410), SI_VAR(0)),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) D_80244A20, 0, 1),
+    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_802415F4_BE0384), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
@@ -1208,6 +1206,7 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
+/// Pushes/pops script local variables to D_80241C68_BE09F8
 ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
     s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
@@ -1215,7 +1214,7 @@ ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
 
     if (*ptr == NULL) {
         i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
+        *ptr = (s32*) i;
         for (i = 0, test = *ptr; i < 16; i++) {
             *test++ = script->varTable[i];
         }
@@ -1234,7 +1233,7 @@ ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 ApiStatus N(func_802415F4_BE0384)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -1264,29 +1263,21 @@ ApiStatus N(func_80241648_BE03D8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
-ApiStatus func_80241680_BE0410(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241680_BE0410)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* temp_v0 = get_variable(script, *args);
-    s32* ptr = temp_v0;
+    s32* var1 = get_variable(script, *args++);
     s32 i;
 
-    i = 0;
-    if (ptr != NULL) {
-        s32 new_var;
-        for (new_var = ptr[0]; new_var != 0; i++) {
-            *(D_80244A20 + i) = ptr[i];
+    if (var1 != NULL) {
+        for (i = 0; var1[i] != 0; i++) {
+            D_80244A20[i] = var1[i];
         }
         D_80244A20[i] = 0;
     } else {
-        for (; i < 0x70; i++) {
-            *(D_80244A20 + i) = i + 16;
+        for (i = 0; i < 0x70; i++) {
+            D_80244A20[i] = i + 16;
             D_80244A20[0x70] = 0;
         }
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/area_arn/arn_03/BDED90", arn_03_func_80241680_BE0410, ScriptInstance* script, s32 isInitialCall);
-#endif
-

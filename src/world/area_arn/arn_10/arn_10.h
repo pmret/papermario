@@ -4,7 +4,7 @@
 
 #define NAMESPACE arn_10
 
-Script N(main);
-Script N(80240060);
-NpcGroupList N(npcGroupList_80240BB8);
-Script N(makeEntities);
+extern Script N(main);
+extern Script N(80240060);
+extern NpcGroupList N(npcGroupList_80240BB8);
+extern Script N(makeEntities);

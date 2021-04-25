@@ -25,8 +25,8 @@ NpcSettings N(npcSettings_8024035C) = {
     .height = 72,
     .radius = 15,
     .ai = &N(npcAI_80240330),
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 9,
 };
 

@@ -38,8 +38,8 @@ glabel update_cameras
 /* 8864 8002D464 544000A4 */  bnel      $v0, $zero, .L8002D6F8
 /* 8868 8002D468 26730001 */   addiu    $s3, $s3, 1
 /* 886C 8002D46C 86030004 */  lh        $v1, 4($s0)
-/* 8870 8002D470 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 8874 8002D474 A433A634 */  sh        $s3, %lo(D_8009A634)($at)
+/* 8870 8002D470 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 8874 8002D474 A433A634 */  sh        $s3, %lo(gCurrentCamID)($at)
 /* 8878 8002D478 2C620007 */  sltiu     $v0, $v1, 7
 /* 887C 8002D47C 1040001E */  beqz      $v0, L8002D4F8_88F8
 /* 8880 8002D480 00031080 */   sll      $v0, $v1, 2
@@ -228,7 +228,7 @@ glabel L8002D4F8_88F8
 /* 8B20 8002D720 8FB00040 */  lw        $s0, 0x40($sp)
 /* 8B24 8002D724 D7B60068 */  ldc1      $f22, 0x68($sp)
 /* 8B28 8002D728 D7B40060 */  ldc1      $f20, 0x60($sp)
-/* 8B2C 8002D72C 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 8B30 8002D730 A420A634 */  sh        $zero, %lo(D_8009A634)($at)
+/* 8B2C 8002D72C 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 8B30 8002D730 A420A634 */  sh        $zero, %lo(gCurrentCamID)($at)
 /* 8B34 8002D734 03E00008 */  jr        $ra
 /* 8B38 8002D738 27BD0070 */   addiu    $sp, $sp, 0x70

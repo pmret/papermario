@@ -72,8 +72,8 @@ glabel render_sprite
 .L802DDD3C:
 /* 100E2C 802DDD3C 14400019 */  bnez      $v0, .L802DDDA4
 /* 100E30 802DDD40 24A2FFA5 */   addiu    $v0, $a1, -0x5b
-/* 100E34 802DDD44 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 100E38 802DDD48 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 100E34 802DDD44 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 100E38 802DDD48 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 100E3C 802DDD4C 00031080 */  sll       $v0, $v1, 2
 /* 100E40 802DDD50 00431021 */  addu      $v0, $v0, $v1
 /* 100E44 802DDD54 00021080 */  sll       $v0, $v0, 2

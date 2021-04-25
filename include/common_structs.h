@@ -11,6 +11,8 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef Bytecode Script[0];
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -244,7 +246,7 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ Bytecode* scriptStart;
+    /* 0x10 */ Script* scriptSource;
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
@@ -1117,8 +1119,8 @@ typedef struct ItemEntityPhysicsData {
 typedef struct RenderTask {
     /* 0x00 */ s32 renderMode;
     /* 0x04 */ s32 distance; /* value between 0 and -10k */
-    /* 0x08 */ struct Model* model;
-    /* 0x0C */ UNK_FUN_PTR(fpBuildDL); /* function for making display list for model */
+    /* 0x08 */ void* appendGfxArg;
+    /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
 
 typedef struct SelectableTarget {
@@ -1416,10 +1418,10 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ Bytecode* idleCode;
-    /* 0x1C4 */ Bytecode* takeTurnCode;
-    /* 0x1C8 */ Bytecode* onHitCode;
-    /* 0x1CC */ Bytecode* onTurnChangeCode;
+    /* 0x1C0 */ Script* idleScriptSource;
+    /* 0x1C4 */ Script* takeTurnScriptSource;
+    /* 0x1C8 */ Script* onHitScriptSource;
+    /* 0x1CC */ Script* onTurnChanceScriptSource;
     /* 0x1D0 */ struct ScriptInstance* idleScript;
     /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
     /* 0x1D8 */ struct ScriptInstance* onHitScript;
@@ -1543,8 +1545,8 @@ typedef struct PlayerStatus {
     /* 0x00A */ char unk_0A[2];
     /* 0x00C */ s8 peachDisguise;
     /* 0x00D */ s8 unk_0D;
-    /* 0x00E */ u8 unk_0E;
-    /* 0x00F */ u8 unk_0F;
+    /* 0x00E */ u8 alpha1;
+    /* 0x00F */ u8 alpha2;
     /* 0x010 */ s16 unk_10;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
@@ -1567,13 +1569,13 @@ typedef struct PlayerStatus {
     /* 0x080 */ f32 targetYaw;
     /* 0x084 */ f32 currentYaw;
     /* 0x088 */ f32 unk_88;
-    /* 0x08C */ s32 unk_8C;
+    /* 0x08C */ f32 unk_8C;
     /* 0x090 */ f32 unk_90;
     /* 0x094 */ s32 unk_94;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ f32 heading;
-    /* 0x0A4 */ char unk_A4[4];
+    /* 0x0A4 */ s32 trueAnimation; ///< Encoding back-facing sprite
     /* 0x0A8 */ f32 spriteFacingAngle; /* angle of sprite, relative to camera, from 0 to 180 */
     /* 0x0AC */ char unk_AC[4];
     /* 0x0B0 */ s16 colliderHeight;
@@ -1584,7 +1586,7 @@ typedef struct PlayerStatus {
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
     /* 0x0BC */ u16 unk_BC;
-    /* 0x0BE */ u8 renderMode;
+    /* 0x0BE */ s8 renderMode;
     /* 0x0BF */ s8 unk_BF;
     /* 0x0C0 */ s16 decorationList;
     /* 0x0C2 */ s16 unk_C2;
@@ -1878,7 +1880,7 @@ typedef struct EntityModel {
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
     /* 0x18 */ Matrix4s transform;
-    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
     /* 0x64 */ s32 setupGfxCallbackArg0;

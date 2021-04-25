@@ -2,7 +2,7 @@
 
 ApiStatus N(AddHP)(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
+
     s32 amt = get_variable(script, *script->ptrReadPos);
     s32 newHP = playerData->curHP + amt;
 
@@ -10,7 +10,7 @@ ApiStatus N(AddHP)(ScriptInstance* script, s32 isInitialCall) {
         newHP = playerData->curMaxHP;
     }
 
-    playerData2->curHP = newHP;
+    playerData->curHP = newHP;
 
     return ApiStatus_DONE2;
 }

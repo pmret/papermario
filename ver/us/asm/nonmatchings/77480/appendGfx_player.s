@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel appendGfx_player
-/* 7A7A4 800E12F4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* 7A7A8 800E12F8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* 7A7A4 800E12F4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* 7A7A8 800E12F8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* 7A7AC 800E12FC 27BDFEB0 */  addiu     $sp, $sp, -0x150
 /* 7A7B0 800E1300 AFB20128 */  sw        $s2, 0x128($sp)
 /* 7A7B4 800E1304 3C128011 */  lui       $s2, %hi(gPlayerStatus)

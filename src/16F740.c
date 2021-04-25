@@ -80,6 +80,7 @@ INCLUDE_ASM(s32, "16F740", func_80242FE0);
 void func_80243910(void) {
 }
 
+#ifdef NON_MATCHING
 void switch_order(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -96,19 +97,21 @@ void switch_order(void) {
 
     dma_copy(_415D90_ROM_START, _415D90_ROM_END, _415D90_VRAM);
 
-    // TODO Needed to match
-    if (0) { s32 new_var; do { } while (new_var); }
+    // // TODO Needed to match
+    // if (0) { s32 new_var; do { } while (new_var); }
 
     if (battleStatus->flags1 & 0x80000) {
         func_80241190(14);
-    } else if (gBattleStatus.battleState == 70) {
-        s32 oldBattleState = gBattleStatus.battleState;
+    } else if (battleStatus->battleState == 70) {
         func_80241190(13);
-        gBattleStatus.battleState = oldBattleState;
+        battleStatus->battleState = 70;
     } else {
         func_80241190(13);
     }
 }
+#else
+INCLUDE_ASM(s32, "16F740", switch_order);
+#endif
 
 void func_802439D0(void) {
 }
@@ -236,17 +239,15 @@ INCLUDE_ASM(s32, "16F740", func_80248190);
 
 void func_802485FC(void) {
     if (D_8029F254 != 0) {
-        s32* temp_v0 = &D_80280A30;
-
-        if (*temp_v0 == 0) {
+        if (D_80280A30 == 0) {
             set_transition_stencil_zoom_0(255, -1.0f);
         } else {
-            *temp_v0 -= 20;
-            if (*temp_v0 < 0) {
-                *temp_v0 = 0;
+            D_80280A30 -= 20;
+            if (D_80280A30 < 0) {
+                D_80280A30 = 0;
             }
 
-            set_transition_stencil_zoom_0(0, *temp_v0);
+            set_transition_stencil_zoom_0(0, D_80280A30);
         }
     }
 }
@@ -255,17 +256,15 @@ INCLUDE_ASM(s32, "16F740", func_80248660);
 
 void func_80248AA4(void) {
     if (D_8029F254 != 0) {
-        s32* temp_v0 = &D_80280A30;
-
-        if (*temp_v0 == 0) {
+        if (D_80280A30 == 0) {
             set_transition_stencil_zoom_0(255, -1.0f);
         } else {
-            *temp_v0 -= 20;
-            if (*temp_v0 < 0) {
-                *temp_v0 = 0;
+            D_80280A30 -= 20;
+            if (D_80280A30 < 0) {
+                D_80280A30 = 0;
             }
 
-            set_transition_stencil_zoom_0(0, *temp_v0);
+            set_transition_stencil_zoom_0(0, D_80280A30);
         }
     }
 }

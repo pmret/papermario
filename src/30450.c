@@ -97,7 +97,7 @@ void func_8005513C(u32 arg0) {
 }
 
 void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
-    SoundManager* sym = D_8009A640;
+    SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
@@ -108,11 +108,11 @@ void snd_start_sound(s32 soundID, u8 volume, s8 pan) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(sym, soundID, a1temp, 0, pan);
+    snd_enqueue_sfx_event(soundManager, soundID, a1temp, 0, pan);
 }
 
 void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
-    SoundManager* sym = D_8009A640;
+    SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
@@ -129,11 +129,11 @@ void snd_start_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) 
         pitchShift = -0x960;
     }
 
-    snd_enqueue_sfx_event(sym, soundID, a1temp, pitchShift, pan);
+    snd_enqueue_sfx_event(soundManager, soundID, a1temp, pitchShift, pan);
 }
 
 void snd_adjust_sound(s32 soundID, u8 volume, s8 pan) {
-    SoundManager* sym = D_8009A640;
+    SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
@@ -144,11 +144,11 @@ void snd_adjust_sound(s32 soundID, u8 volume, s8 pan) {
         pan = 0x7F;
     }
 
-    snd_enqueue_sfx_event(sym, soundID | 0x1000, a1temp, 0, pan);
+    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, a1temp, 0, pan);
 }
 
 void snd_adjust_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift) {
-    SoundManager* sym = D_8009A640;
+    SoundManager* soundManager = D_8009A640;
     s16 a1temp = volume * 256;
 
     if (a1temp != 0) {
@@ -165,11 +165,13 @@ void snd_adjust_sound_with_shift(s32 soundID, u8 volume, s8 pan, s16 pitchShift)
         pitchShift = -0x960;
     }
 
-    snd_enqueue_sfx_event(sym, soundID | 0x1000, a1temp, pitchShift, pan);
+    snd_enqueue_sfx_event(soundManager, soundID | 0x1000, a1temp, pitchShift, pan);
 }
 
 void snd_stop_sound(s32 soundID) {
-    snd_enqueue_sfx_event(D_8009A640, soundID | 0x8000, 0, 0, 0);
+    SoundManager* soundManager = D_8009A640;
+
+    snd_enqueue_sfx_event(soundManager, soundID | 0x8000, 0, 0, 0);
 }
 
 void func_800553F4(void) {
@@ -177,7 +179,9 @@ void func_800553F4(void) {
 }
 
 void snd_start_sound_raw(s32 soundID, s16 volume, s16 pitchShift, s32 pan) {
-    snd_enqueue_sfx_event(D_8009A640, soundID, volume, pitchShift, pan);
+    SoundManager* soundManager = D_8009A640;
+
+    snd_enqueue_sfx_event(soundManager, soundID, volume, pitchShift, pan);
 }
 
 s32 func_80055448(s32 arg0) {

@@ -228,7 +228,7 @@ glabel L800E6FC8_80478
 .L800E7008:
 /* 804B8 800E7008 0C03D390 */  jal       func_800F4E40
 /* 804BC 800E700C 0240202D */   daddu    $a0, $s2, $zero
-/* 804C0 800E7010 0C009C22 */  jal       func_80027088
+/* 804C0 800E7010 0C009C22 */  jal       set_time_freeze_mode
 /* 804C4 800E7014 24040003 */   addiu    $a0, $zero, 3
 /* 804C8 800E7018 82620000 */  lb        $v0, ($s3)
 /* 804CC 800E701C 14400003 */  bnez      $v0, .L800E702C
@@ -362,7 +362,7 @@ glabel L800E7090_80540
 /* 8069C 800E71EC 8CA20000 */  lw        $v0, ($a1)
 /* 806A0 800E71F0 2403FFBF */  addiu     $v1, $zero, -0x41
 /* 806A4 800E71F4 00431024 */  and       $v0, $v0, $v1
-/* 806A8 800E71F8 0C009C22 */  jal       func_80027088
+/* 806A8 800E71F8 0C009C22 */  jal       set_time_freeze_mode
 /* 806AC 800E71FC ACA20000 */   sw       $v0, ($a1)
 /* 806B0 800E7200 08039C9B */  j         L800E726C_8071C
 /* 806B4 800E7204 00000000 */   nop

@@ -159,7 +159,7 @@ glabel create_entity
 /* A81F8 80111AF8 00000000 */   nop
 /* A81FC 80111AFC A6020014 */  sh        $v0, 0x14($s0)
 /* A8200 80111B00 00021400 */  sll       $v0, $v0, 0x10
-/* A8204 80111B04 0C0483C1 */  jal       update_entity_rendercmd
+/* A8204 80111B04 0C0483C1 */  jal       exec_entity_model_commandlist
 /* A8208 80111B08 00022403 */   sra      $a0, $v0, 0x10
 /* A820C 80111B0C 080446C7 */  j         .L80111B1C
 /* A8210 80111B10 00000000 */   nop
