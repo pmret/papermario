@@ -119,6 +119,7 @@ Effect* func_800716F0(s32, f32, f32, f32, f32, s32);
 
 void func_80071690(s32, f32, f32, f32);
 void func_800F4E40(void*);
+s32 func_800DDCEC(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);

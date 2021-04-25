@@ -1270,8 +1270,6 @@ Script N(80245F5C) = SCRIPT({
     spawn N(80245C3C);
 });
 
-s32 func_800DDCEC(s32, f32*, f32*, f32*, f32, f32, f32, f32);
-
 void N(func_80240D80_CAFAC0)(ScriptInstance *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1419,7 +1417,6 @@ void N(func_802414C8_CB0208)(ScriptInstance *script, NpcAISettings *npcAISetting
     }
 }
 
-// NEW
 ApiStatus N(func_8024150C_CB024C)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
