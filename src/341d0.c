@@ -44,18 +44,16 @@ void func_80059D48(void) {
 INCLUDE_ASM(s32, "341d0", update_effects);
 
 s32 render_effects(void) {
-    EffectInstance** curEffectInst;
     s32 i;
 
-    curEffectInst = &D_800B4398[0];
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if ((curEffectInst[i] != NULL) && (curEffectInst[i]->flags & 1) && (curEffectInst[i]->flags & 8)) {
+        if ((D_800B4398[i] != NULL) && (D_800B4398[i]->flags & 1) && (D_800B4398[i]->flags & 8)) {
             if (gGameStatusPtr->isBattle) {
-                if (curEffectInst[i]->flags & 4) {
-                    curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
+                if (D_800B4398[i]->flags & 4) {
+                    D_800B4398[i]->effect->renderWorld(D_800B4398[i]);
                 }
-            } else if (!(curEffectInst[i]->flags & 4)) {
-                curEffectInst[i]->effect->renderWorld(curEffectInst[i]);
+            } else if (!(D_800B4398[i]->flags & 4)) {
+                D_800B4398[i]->effect->renderWorld(D_800B4398[i]);
             }
         }
     }
@@ -67,11 +65,10 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
     Effect* curEffect;
     s32 i;
-    EffectInstance** temp = &D_800B4398[0];
 
     // Search for an unused instance
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if (temp[i] == NULL) {
+        if (D_800B4398[i] == NULL) {
             break;
         }
     }
@@ -129,10 +126,9 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
 
 void remove_effect(EffectInstance* arg0) {
     s32 i;
-    EffectInstance** temp = &D_800B4398[0];
 
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if (temp[i] == arg0) {
+        if (D_800B4398[i] == arg0) {
             break;
         }
     }
@@ -152,16 +148,16 @@ void remove_effect(EffectInstance* arg0) {
 
 void remove_all_effects(void) {
     s32 i;
-    EffectInstance** temp = &D_800B4398[0];
 
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        EffectInstance* temp2 = temp[i];
+        EffectInstance* temp2 = D_800B4398[i];
+
         if (temp2 != NULL && temp2->flags & 4) {
             if (temp2->data != NULL) {
                 general_heap_free(temp2->data);
             }
             general_heap_free(temp2);
-            temp[i] = NULL;
+            D_800B4398[i] = NULL;
         }
     }
 }

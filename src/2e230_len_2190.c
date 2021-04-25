@@ -8,33 +8,27 @@ void func_80052E30(u8 index) {
 }
 
 void snd_load_audio_data(s32 frequency) {
-    UnkAl19E0** temp_s4 = &D_8009A5C0;
     UnkAl19E0* temp4;
     s32* temp_v0_2;
     ALHeap* alHeap;
     u32 i;
     s32 subroutine_arg7[2];
     u8 temp6[4];
-    BGMPlayer** temp1 = &D_8009A664;
-    BGMPlayer** temp1_1;
-    SoundManager** temp2 = &D_8009A640;
-    SoundManager** temp2_1;
-    BGMPlayer** temp3;
     UnkAl48* temp5;
 
     alHeap = D_80078E54->unk_18;
-    *temp_s4 = alHeapAlloc(alHeap, 1, 0x19E0);
+    D_8009A5C0 = alHeapAlloc(alHeap, 1, 0x19E0);
 
-    (*temp1) = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
+    D_8009A664 = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     D_8009A5FC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
     D_8009A5CC = alHeapAlloc(alHeap, 1, sizeof(BGMPlayer));
-    (*temp2) = alHeapAlloc(alHeap, 1, 0x6CC);
+    D_8009A640 = alHeapAlloc(alHeap, 1, 0x6CC);
     D_8009A628 = alHeapAlloc(alHeap, 1, 0x834);
-    (*temp1)->soundManager = (*temp2);
-    D_8009A628->unk_00 = *(temp_s4);
+    D_8009A664->soundManager = D_8009A640;
+    D_8009A628->unk_00 = D_8009A5C0;
 
 
-    temp4 = *temp_s4;
+    temp4 = D_8009A5C0;
     temp_v0_2 = alHeapAlloc(alHeap, 1, 0x8000);
     temp4->currentTrackData[0] = &temp_v0_2[0];
     temp4->currentTrackData[1] = &temp_v0_2[0x1400];
@@ -91,30 +85,26 @@ void snd_load_audio_data(s32 frequency) {
         temp4->banks[i] = alHeapAlloc(alHeap, 1, 0x840);
     }
 
-    temp2_1 = &D_8009A640;
-    temp3 = &D_8009A5FC;
-    temp1_1 = &D_8009A664;
-
-    func_8004E158(*temp1_1, 1, 0, temp4);
+    func_8004E158(D_8009A664, 1, 0, temp4);
     temp6[0] = 0;
     temp6[1] = 3;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(*temp1_1, &temp6);
-    func_8004E158(*temp3, 2, 2, temp4);
+    func_8004E344(D_8009A664, &temp6);
+    func_8004E158(D_8009A5FC, 2, 2, temp4);
     temp6[0] = 2;
     temp6[1] = 0xff;
     temp6[2] = 0xff;
     temp6[3] = 0xff;
-    func_8004E344(*temp3, &temp6);
-    func_8004B440(*temp2_1, 4, 1, temp4, 0x10);
+    func_8004E344(D_8009A5FC, &temp6);
+    func_8004B440(D_8009A640, 4, 1, temp4, 0x10);
     func_80050B90(D_8009A628, 6, 1, temp4);
     func_80052614(temp4);
     snd_load_BK_headers(temp4, alHeap);
     if (snd_fetch_SBN_file(temp4->mseqFileList->unk_0, 0x20, subroutine_arg7) == 0) {
         snd_read_rom(subroutine_arg7[0], temp4->dataSEF, subroutine_arg7[1] & 0xFFFFFF);
     }
-    snd_load_sfx_groups_from_SEF(*temp2_1);
+    snd_load_sfx_groups_from_SEF(D_8009A640);
     if (snd_fetch_SBN_file(temp4->mseqFileList->unk_2, 0x40, subroutine_arg7) == 0) {
         snd_load_PER(temp4, subroutine_arg7[0]);
     }
@@ -189,7 +179,6 @@ void snd_update_sequence_players(void) {
     UnkAl834* temp_s0 = D_8009A628;
     BGMPlayer* bgmPlayer1;
     BGMPlayer* bgmPlayer2;
-    s32* t1;
 
     func_80053654(temp_s2);
 
@@ -210,8 +199,7 @@ void snd_update_sequence_players(void) {
         manager->unk_BA = func_8004C444(manager);
     }
 
-    t1 = &D_80078DB0;
-    if (*t1 == 0) {
+    if (D_80078DB0 == 0) {
         bgmPlayer1 = D_8009A5FC;
         if (bgmPlayer1->fadeInfo.fadeTime != 0) {
             snd_update_bgm_fade(bgmPlayer1);
@@ -225,7 +213,7 @@ void snd_update_sequence_players(void) {
             bgmPlayer1->unk_10 += bgmPlayer1->unk_0C;
             bgmPlayer1->unk_5C = func_8004E4B8(bgmPlayer1);
         }
-        if (*t1 == 0) {
+        if (D_80078DB0 == 0) {
             if (temp_s2->unk_80 != 0) {
                 func_8004DFD4(temp_s2);
             }

@@ -16,10 +16,8 @@ s32 D_80078E60[] = { 0x7FFF7FFC, 0x7FF57FE8, 0x7FD77FC0, 0x7FA57F84, 0x7F5F7F34,
 INCLUDE_ASM(s32, "31650", func_80056250);
 
 void func_800565A4(void) {
-    UnkAl0** sym = &D_80078E50;
-
-    if (*sym != NULL) {
-        *sym = NULL;
+    if (D_80078E50 != NULL) {
+        D_80078E50 = NULL;
     }
 }
 
@@ -144,16 +142,14 @@ INCLUDE_ASM(s32, "31650", func_80057C54);
 INCLUDE_ASM(s32, "31650", func_80057D0C);
 
 void func_80057DC8(s32 arg0) {
-    s32* sym;
     if (arg0 < 2) {
         D_800A3FF0 = 0;
         D_800A3FEE = 0;
     }
 
-    sym = &D_800A3FF0;
-    *sym = arg0;
+    D_800A3FF0 = arg0;
     if (arg0 >= 5) {
-        *sym = 4;
+        D_800A3FF0 = 4;
     }
 }
 
