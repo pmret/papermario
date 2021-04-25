@@ -170,13 +170,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             for a,b,c,d in zip(x,y,z,w):
                 out += f"\n    {{ {a:>{x_size}}f, {b:>{y_size}}f, {c:>{z_size}}f, {d:>{w_size}}f }},"
-            
+
             out += f"\n}};\n"
         elif struct["type"] == "NpcSettings":
             tmp_out = f"NpcSettings {name} = {{\n"
             npcSettings = bytes.read(struct["length"])
 
-            i = 0 
+            i = 0
             while i < struct["length"]:
                 if i == 0x0 or i == 0x24:
                     var_names = ["unk_00", "unk_24"]
@@ -767,10 +767,12 @@ if __name__ == "__main__":
         print()
             
         if INCLUDES_NEEDED["forward"]:
-            print()
             print("========== Forward declares: ==========\n")
             for forward in sorted(INCLUDES_NEEDED["forward"]):
-                print(forward)
+                if not (forward.startswith("ApiStatus") or forward.startswith("void")):
+                    print("extern " + forward)
+                else:
+                    print(forward)
             print()
 
         if INCLUDES_NEEDED["npcs"]:

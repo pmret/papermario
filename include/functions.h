@@ -115,7 +115,10 @@ void func_80072950(s32, f32, f32, f32, f32, s32 time);
 Effect* func_800715D0(s32, f32, f32, f32);
 Effect* func_80071810(s32, f32, f32, f32);
 Effect* func_80072890(s32, f32, f32, f32, f32, s32);
+Effect* func_800716F0(s32, f32, f32, f32, f32, s32);
+
 void func_80071690(s32, f32, f32, f32);
+void func_800F4E40(void*);
 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);

@@ -168,7 +168,7 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_80071630);
 
 INCLUDE_ASM(void, "4ac90_len_3910", func_80071690, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_800716F0);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_800716F0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(Effect*, "4ac90_len_3910", func_80071750, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4, s32 a5);
 

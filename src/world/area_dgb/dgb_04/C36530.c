@@ -267,10 +267,10 @@ s16 N(D_80243D38_C3A268)[] = {
 };
 
 s32 N(D_80243D48_C3A278)[8][2] = {
-    {0x001D00E0, 0x001D00E1 }, {0x001D00E2, 0x001D00E3 },
-    {0x001D00E4, 0x001D00E5 }, {0x001D00E6, 0x001D00E7 },
-    {0x001D00E8, 0x001D00E9 }, {0x001D00EA, 0x001D00EB },
-    {0x001D00EC, 0x001D00ED }, {0x001D00EE, 0x001D00EF }
+    { 0x001D00E0, 0x001D00E1 }, { 0x001D00E2, 0x001D00E3 },
+    { 0x001D00E4, 0x001D00E5 }, { 0x001D00E6, 0x001D00E7 },
+    { 0x001D00E8, 0x001D00E9 }, { 0x001D00EA, 0x001D00EB },
+    { 0x001D00EC, 0x001D00ED }, { 0x001D00EE, 0x001D00EF }
 };
 
 f32 N(D_80243D88_C3A2B8)[] = {
@@ -1130,9 +1130,7 @@ typedef struct {
     Entity* unk_5C;
     s32 unk_60;
     s32 unk_64;
-} UserData;
-
-Effect* func_800716F0(s32, f32, f32, f32, f32, s32);
+} N(UserData);
 
 ApiStatus N(func_802429D0_C38F00)(ScriptInstance *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
@@ -1140,15 +1138,15 @@ ApiStatus N(func_802429D0_C38F00)(ScriptInstance *script, s32 isInitialCall) {
     f32 sinTheta, cosTheta;
     s32 i;
     f32 var;
-    UserData* userDataPtr;
-    UserData* scriptPtr;
+    N(UserData)* userDataPtr;
+    N(UserData)* scriptPtr;
     f32 save, save2;
 
     sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
-        script->userData = (UserData*)general_heap_malloc(0x68);
-        scriptPtr = (UserData*)script->userData;
+        script->userData = (N(UserData)*)general_heap_malloc(0x68);
+        scriptPtr = (N(UserData)*)script->userData;
 
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
@@ -1180,7 +1178,7 @@ ApiStatus N(func_802429D0_C38F00)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    scriptPtr = (UserData*)script->userData;
+    scriptPtr = (N(UserData)*)script->userData;
     switch (scriptPtr->unk_00) {
         case 0:
             save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
