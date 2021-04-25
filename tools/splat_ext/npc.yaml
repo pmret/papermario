@@ -327,3 +327,174 @@ cleft:
     - laugh
     - rock_shimmer_green_grey
     - rock_shimmer_green_brown
+jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - still_shell
+    - idle
+    - idle_shell
+    - idle_angry
+    - idle_point
+    - walk
+    - walk_back
+    - run
+    - sprint_normal
+    - sprint_crazy
+    - swim
+    - run_back
+    - jump
+    - jump_still
+    - jump_land
+    - hurt
+    - hide_shell
+    - hurt_crazy
+    - dead
+    - dead_still
+    - talk
+    - talk_shell
+    - talk2
+    - happy
+    - talk_point
+    - point_tap
+    - sleep
+    - dizzy
+    - stand_weird
+    - stand_weird2
+    - stand_weird_land
+    - trip
+    - trip_still
+    - fall
+    - panick
+    - climb_loop
+    - climb_end
+    - trip_forward
+    - burn_hurt
+    - burn_dead
+    - hanging
+    - shadowboxing
+spiked_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - jump
+    - jump_still
+    - jump_land
+    - pose_still
+    - pose_angry
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+spiked_para_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - still_shell
+    - idle
+    - idle_point
+    - idle_shell
+    - walk
+    - run
+    - attack
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - burn_shell
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging
+    - shell_hide
+    - shell_show
+    - angry
+mage_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - attack
+    - attack2
+    - attack2_burn
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging
+para_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - attack
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging
