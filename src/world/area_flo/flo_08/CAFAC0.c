@@ -118,7 +118,7 @@ Script N(80242178) = SCRIPT({
     if (SI_VAR(0) == -1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DC), 160, 40);
         sleep 10;
-        N(func_80240510_CAF250)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -133,7 +133,7 @@ Script N(80242178) = SCRIPT({
     }
     N(func_802401CC_CAEF0C)();
     if (SI_VAR(0) == -1) {
-        N(func_80240510_CAF250)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -154,7 +154,7 @@ Script N(80242178) = SCRIPT({
     ShowChoice(MESSAGE_ID(0x1E, 0x000D));
     CloseMessage();
     if (SI_VAR(0) != 0) {
-        N(func_80240510_CAF250)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -164,7 +164,7 @@ Script N(80242178) = SCRIPT({
     await N(80242014);
     N(UnkFunc18)(SI_VAR(11), SI_VAR(13));
     SI_SAVE_FLAG(1402) = 1;
-    N(func_80240510_CAF250)(SI_VAR(9));
+    N(UnkFunc39)(SI_VAR(9));
     N(UnkFunc19)();
     if (SI_VAR(13) == 1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DD), 160, 40);

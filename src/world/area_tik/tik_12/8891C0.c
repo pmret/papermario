@@ -61,16 +61,7 @@ ApiStatus N(func_80241038_889C08)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_8024112C_889CFC);
-/*
-ApiStatus N(func_8024112C_889CFC)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 

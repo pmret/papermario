@@ -124,13 +124,7 @@ ApiStatus N(func_8024041C_CAF15C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-ApiStatus N(func_80240510_CAF250)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 
@@ -188,7 +182,7 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
         userDataPtr = scriptPtr;
         for (i = 0, save = 50.0f; i < 3; i++) {
             var = 0;
-            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, *(N(D_80242008_CB0D48) + i)); //*(dataPtr++));
+            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, N(D_80242008_CB0D48)[i]);
             userDataPtr->unk_38[i] = cosTheta * var;
             userDataPtr->unk_50[i] = sinTheta * var;
             userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
@@ -205,7 +199,7 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80242008_CB0D48) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80242008_CB0D48)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -223,7 +217,7 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80242008_CB0D48) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80242008_CB0D48)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }

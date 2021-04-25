@@ -330,7 +330,7 @@ Script N(80243EF8) = SCRIPT({
     if (SI_VAR(0) == -1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DC), 160, 40);
         sleep 10;
-        N(func_802428E0_C38E10)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -345,7 +345,7 @@ Script N(80243EF8) = SCRIPT({
     }
     N(func_8024259C_C38ACC)();
     if (SI_VAR(0) == -1) {
-        N(func_802428E0_C38E10)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -366,7 +366,7 @@ Script N(80243EF8) = SCRIPT({
     ShowChoice(1966093);
     CloseMessage();
     if (SI_VAR(0) != 0) {
-        N(func_802428E0_C38E10)(SI_VAR(9));
+        N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
         func_802D585C(0, 2097152);
@@ -376,7 +376,7 @@ Script N(80243EF8) = SCRIPT({
     await N(80243D94);
     N(UnkFunc18)(SI_VAR(11), SI_VAR(13));
     SI_SAVE_FLAG(1046) = 1;
-    N(func_802428E0_C38E10)(SI_VAR(9));
+    N(UnkFunc39)(SI_VAR(9));
     N(UnkFunc19)();
     if (SI_VAR(13) == 1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DD), 160, 40);
@@ -1078,13 +1078,7 @@ ApiStatus N(func_802427EC_C38D1C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-ApiStatus N(func_802428E0_C38E10)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 

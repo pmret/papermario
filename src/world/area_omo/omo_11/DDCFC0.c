@@ -32,16 +32,7 @@ ApiStatus N(func_80240BAC_DDD3DC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240CA0_DDD4D0);
-/*
-ApiStatus N(func_80240CA0_DDD4D0)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 

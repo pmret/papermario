@@ -15,7 +15,7 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802427EC_C38D1C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc19)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc20)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802428E0_C38E10)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc39)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc21)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc22)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802429D0_C38F00)(ScriptInstance* script, s32 isInitialCall);
