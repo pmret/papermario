@@ -58,15 +58,15 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
     f32 sinTheta, cosTheta;
     s32 i;
     f32 var;
-    UserData* userDataPtr;
-    UserData* scriptPtr;
+    N(UserData)* userDataPtr;
+    N(UserData)* scriptPtr;
     f32 save, save2;
 
     sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
-        script->userData = (UserData*)general_heap_malloc(0x68);
-        scriptPtr = (UserData*)script->userData;
+        script->userData = (N(UserData)*)general_heap_malloc(0x68);
+        scriptPtr = (N(UserData)*)script->userData;
 
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
@@ -89,7 +89,7 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
         userDataPtr = scriptPtr;
         for (i = 0, save = 50.0f; i < 3; i++) {
             var = 0;
-            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, *(N(D_80243D88_C3A2B8) + i)); //*(dataPtr++));
+            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, N(D_80243A48_87D628)[i]);
             userDataPtr->unk_38[i] = cosTheta * var;
             userDataPtr->unk_50[i] = sinTheta * var;
             userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
@@ -98,7 +98,7 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    scriptPtr = (UserData*)script->userData;
+    scriptPtr = (N(UserData)*)script->userData;
     switch (scriptPtr->unk_00) {
         case 0:
             save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
@@ -106,7 +106,7 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243A48_87D628)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -124,7 +124,7 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243A48_87D628)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -184,4 +184,4 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240FE8_87ABC8);
+#include "world/common/UnkFunc40.inc.c"

@@ -276,10 +276,4 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-ApiStatus N(func_80240D08_CAFA48)(ScriptInstance *script, s32 isInitialCall) {
-    script->varTable[0] = 0;
-    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
-        script->varTable[0] = 1;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc40.inc.c"

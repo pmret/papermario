@@ -199,14 +199,18 @@ for file in files[1:]:
                     i += 1
 
                     func_data = function_text.splitlines()
-                    #if asm_path.is_file():
-                    #    asm_data = asm_path.read_text().splitlines()
-                    #    for asm_line in asm_data:
-                    #        if "jal" in asm_line and asm_line.count("_") == 2:
-                    #            new_data_name = asm_line.split(" ")[-1]
-                    #            break
-                    #    old_data_name = "N(" + func_data[9].split("N(",1)[1].split(")",1)[0] + ")"
-                    #    func_data = function_text.replace(old_data_name, "N(" + new_data_name + ")").splitlines()
+                    if asm_path.is_file():
+                        asm_data = asm_path.read_text().splitlines()
+                        for x,asm_line in enumerate(asm_data):
+                            if "lui" in asm_line and "addiu" in asm_data[x+1] and "D_" in asm_line and asm_line.count("_") == 2:
+                                new_data_name = asm_line.split("(",1)[1].split(")",1)[0]
+                                break
+                        else:
+                            print(f"Failed to find new data name")
+                            exit()
+
+                        old_data_name = "N(" + func_data[38].split("N(",1)[1].split(")",1)[0] + ")"
+                        func_data = function_text.replace(old_data_name, "N(" + new_data_name + ")").splitlines()
 
                     new_func_file.append(stripped_line)
                     func_data[1] = func_data[1].replace("N()", f"N({function})")

@@ -1,13 +1,13 @@
 from pathlib import Path
 
-FUNC="""    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
+FUNC="""    script->varTable[0] = 0;
+    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
+        script->varTable[0] = 1;
+    }
     return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc39"
+NEW_FUNC_NAME = f"UnkFunc40"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

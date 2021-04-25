@@ -103,7 +103,7 @@ Script N(80242178) = SCRIPT({
     if (SI_VAR(0) == 1) {
         return;
     }
-    N(func_80240D08_CAFA48)();
+    N(UnkFunc40)();
     if (SI_VAR(0) == 1) {
         return;
     }
