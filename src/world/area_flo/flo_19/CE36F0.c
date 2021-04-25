@@ -30,6 +30,18 @@ ApiStatus func_80240340_CE3A30(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "world/area_flo/flo_19/CE36F0", func_802404D0_CE3BC0);
+/*
+ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = *args++;
+    s32 var2 = *args++;
+
+    set_variable(script, var1, gPlayerStatus.spriteFacingAngle);
+    set_variable(script, var2, gPlayerStatus.targetYaw);
+
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_19/CE36F0", func_80240540_CE3C30);
 

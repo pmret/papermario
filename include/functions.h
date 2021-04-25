@@ -329,6 +329,10 @@ f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
 f32 dead_cos_rad(f32 x);
 f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 
+s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
+EntityModel* get_entity_model(s32 idx);
+f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
+
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
 ApiStatus func_80045900(ScriptInstance* script);
@@ -343,9 +347,8 @@ ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D5FF8(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D5FD8(ScriptInstance* script, s32 isInitialCall);
 
-s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
-EntityModel* get_entity_model(s32 idx);
-f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 #endif

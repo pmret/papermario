@@ -140,10 +140,10 @@ for file in files[1:]:
                     old_data_name = ""
                     new_data_name = ""
 
-                    if "ptr" in func_file[i+1]:
-                        new_func_data = function_text.splitlines()[1:-1]
-                        old_data_name = new_func_data[3].split("if (",1)[1].split(" == ",1)[0]
-                        new_data_name = func_file[i+1].split(" = ",1)[1][1:-1]
+                    #if "ptr" in func_file[i+1]:
+                    #    new_func_data = function_text.splitlines()[1:-1]
+                    #    old_data_name = new_func_data[3].split("if (",1)[1].split(" == ",1)[0]
+                    #    new_data_name = func_file[i+1].split(" = ",1)[1][1:-1]
 
                     func_data = function_text.replace(old_data_name, new_data_name)
 
@@ -187,14 +187,14 @@ for file in files[1:]:
 
                     func_data = function_text.splitlines()
                     
-                    if asm_path.is_file():
-                        asm_data = asm_path.read_text().splitlines()
-                        for asm_line in asm_data:
-                            if "lui" in asm_line and "D_" in asm_line:
-                                new_data_name = asm_line.split("(",1)[1].split(")",1)[0]
-                                break
-                        old_data_name = func_data[4].split("if (",1)[1].split(" == ",1)[0]
-                        func_data = function_text.replace(old_data_name, "N(" + new_data_name + ")").splitlines()
+                    #if asm_path.is_file():
+                    #    asm_data = asm_path.read_text().splitlines()
+                    #    for asm_line in asm_data:
+                    #        if "lui" in asm_line and "D_" in asm_line:
+                    #            new_data_name = asm_line.split("(",1)[1].split(")",1)[0]
+                    #            break
+                    #    old_data_name = func_data[4].split("if (",1)[1].split(" == ",1)[0]
+                    #    func_data = function_text.replace(old_data_name, "N(" + new_data_name + ")").splitlines()
 
                     new_func_file.append(stripped_line)
                     func_data[1] = func_data[1].replace("N()", f"N({function})")

@@ -8777,12 +8777,10 @@ segments:
     start: 0xCA72A0
     vram: 0x80240000
     subsegments:
-    - [0xCA72A0, c]
-    - [0xCA72E0, c]
-    - [0xCA78D0, data]
-    - [0xCA8150, data]
-    - [0xCAC170, data]
-    - [0xCAC1D0, rodata]
+    - [0xCA72A0,       c, CA72A0]
+    - [0xCA72E0,       c, CA72E0]
+    - [0xCA78D0,   .data, CA72E0]
+    - [0xCAC1D0, .rodata, CA72E0]
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
