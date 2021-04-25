@@ -1,7 +1,5 @@
 #include "flo_09.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_09/CB5040", func_80240040_CB5040);
-/*
 ApiStatus N(func_80240040_CB5040)(ScriptInstance *script, s32 isInitialCall) {
     f32 var1 = script->varTable[0] - script->varTable[3];
     f32 var2 = script->varTable[1] - script->varTable[4];
@@ -15,4 +13,3 @@ ApiStatus N(func_80240040_CB5040)(ScriptInstance *script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-*/

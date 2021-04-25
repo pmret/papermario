@@ -8813,14 +8813,12 @@ segments:
     start: 0xCB5000
     vram: 0x80240000
     subsegments:
-    - [0xCB5000, c]
-    - [0xCB5040, c]
-    - [0xCB50E0, c]
-    - [0xCB5320, c]
-    - [0xCB6820, data]
-    - [0xCB7010, data]
-    - [0xCB7880, data]
-    - [0xCB9190, rodata]
+    - [0xCB5000,       c, CB5000]
+    - [0xCB5040,       c, CB5040]
+    - [0xCB50E0,       c, CB50E0]
+    - [0xCB5320,       c, CB5320]
+    - [0xCB6820,   .data, CB5320]
+    - [0xCB9190, .rodata, CB5320]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
