@@ -550,7 +550,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += "    STATUS_END,\n"
                     break
 
-                element, value = unpack(">II", bytes.read(0x8))
+                element, value = unpack(">Ii", bytes.read(0x8))
                 num_bytes_remaining -= 0x8
 
                 element = disasm_script.CONSTANTS["Statuses"][element]

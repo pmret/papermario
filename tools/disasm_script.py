@@ -221,7 +221,7 @@ def fix_args(self, func, args, info):
 
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
-                elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"][int(args[0])] == "NPC_PLAYER":
+                elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
                     if sprite == 0:
                         print(f"Func {func} arg {i} ({CONSTANTS['MAP_NPCS'][int(args[0])]}) -- sprite was 0, is this really valid? Arg 0x{argNum:X} -- sprite: {sprite}, palette: {palette}, anim: {anim}")
                         call = f"0x{argNum:X}"
@@ -471,7 +471,7 @@ class ScriptDisassembler:
         return name
 
     def replace_star_rod_prefix(self, addr):
-        if addr in self.symbol_map:
+        if addr > 0x80000000 and addr in self.symbol_map:
             name = self.symbol_map[addr][0][1]
             toReplace = True
             suffix = ""
@@ -761,7 +761,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         return self.case_stack[-1] if self.case_stack else False
 
     def var(self, arg):
-        if arg in self.symbol_map:
+        if arg in self.symbol_map and arg >= 0x80000000:
             return self.symbol_map[arg][0][1]
         elif type(arg) is str:
             return arg
