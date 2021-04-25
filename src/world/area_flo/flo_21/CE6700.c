@@ -102,3 +102,11 @@ ApiStatus N(func_80240708_CE6E08)(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_21/CE6700", func_80240B00_CE7200);
+/*
+void func_80072950();
+
+ApiStatus N(func_80240B00_CE7200)(ScriptInstance* script, s32 isInitialCall) {
+    func_80072950(1, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}
+*/

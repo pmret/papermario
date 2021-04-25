@@ -23,13 +23,43 @@ INCLUDES_NEEDED["npcs"] = {}
 INCLUDES_NEEDED["sprites"] = set()
 INCLUDES_NEEDED["tattle"] = []
 
+def get_flag_name(arg):
+    v = arg - 2**32 # convert to s32
+    if v > -250000000:
+        if v <= -220000000: return str((v + 230000000) / 1024)
+        elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
+        elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
+        elif v <= -160000000:
+            if v + 170000000 == 0:
+                return "STORY_PROGRESS"
+            elif v + 170000000 == 425:
+                return "WORLD_LOCATION"
+            else:
+                return f"SI_SAVE_VAR({v + 170000000})"
+        elif v <= -140000000: return f"SI_AREA_VAR({v + 150000000})"
+        elif v <= -120000000: return f"SI_SAVE_FLAG({v + 130000000})"
+        elif v <= -100000000: return f"SI_AREA_FLAG({v + 110000000})"
+        elif v <= -80000000: return f"SI_MAP_FLAG({v + 90000000})"
+        elif v <= -60000000: return f"SI_FLAG({v + 70000000})"
+        elif v <= -40000000: return f"SI_MAP_VAR({v + 50000000})"
+        elif v <= -20000000: return f"SI_VAR({v + 30000000})"
+
+    if arg == 0xFFFFFFFF:
+        return "-1"
+    elif (arg & 0xFF000000) == 0x80000000:
+        return f"0x{arg:X}"
+    elif arg >= 0x80000000:
+        return f"{arg - 0x100000000}"
+    else:
+        return f"{arg}"
+
 def get_function_list(area_name, map_name, rom_offset):
     map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
     i = 0
     firstFind = False
     functions = {}
     while i < len(map_file):
-        if map_file[i].startswith(f" ver/us/build/src/world/area_{area_name}/{map_name}/"):
+        if map_file[i].startswith(f".{map_name}"):
             firstFind = True
             i += 1
             while not map_file[i].startswith(" .data"):
@@ -415,6 +445,31 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             items = unpack(f">{struct['length']//4}I", bytes.read(struct["length"]))
             for item in items:
                 out += f"    {disasm_script.CONSTANTS['ItemIDs'][item]},\n"
+            out += f"}};\n"
+        elif struct["type"] == "TreeDropList":
+            out += f"s32 {name}[] = {{\n"
+
+            data = bytes.read(struct["length"])
+            count = unpack_from(">I", data, 0)[0]
+
+            out += f"\t{count},\n"
+
+            pos = 4
+            for _ in range(count):
+                entry = list(unpack_from(">7I", data, pos))
+                pos += 7*4
+
+                entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                entry[3] = entry[3] - 0x100000000 if entry[3] >= 0x80000000 else entry[3]
+
+                flag1 = get_flag_name(entry[5])
+                flag2 = get_flag_name(entry[6])
+
+                out += f"\t{disasm_script.CONSTANTS['ItemIDs'][entry[0]]}, "
+                out += f"{entry[1]}, {entry[2]}, {entry[3]}, "
+                out += f"0x{entry[4]:X}, {flag1}, {flag2},\n"
+
             out += f"}};\n"
 
         elif struct["type"] == "Header":

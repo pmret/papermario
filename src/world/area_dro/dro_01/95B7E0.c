@@ -3037,7 +3037,8 @@ s32 N(treeModelList_Tree1_Trunk)[] = {
 };
 
 s32 N(treeDropList_Tree1)[] = {
-    0x00000001, 0x00000157, 0x00000078, 0x0000005C, 0xFFFFFFEE, 0x0000000F, 0xF8405E78, 0x00000000,
+    1, 
+    ITEM_COIN, 120, 92, -18, 0xF, SI_SAVE_FLAG(760), 0,
 };
 
 s32 N(shakeTreeEvent_Tree1)[] = {

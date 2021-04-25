@@ -5,6 +5,14 @@
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_19/CE36F0", func_8024030C_CE39FC);
+/*
+void func_80072950();
+
+ApiStatus N(func_8024030C_CE39FC)(ScriptInstance* script, s32 isInitialCall) {
+    func_80072950(1, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}
+*/
 
 // Identical to UnkFloatFunc except for the presence of the fabsf
 ApiStatus func_80240340_CE3A30(ScriptInstance* script, s32 isInitialCall) {
