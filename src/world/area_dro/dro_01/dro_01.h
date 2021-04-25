@@ -15,7 +15,7 @@ typedef struct {
     u32 unk_08;
 } N(shopPrice);
 
-s32* N(D_8024B5B0_9667B0);
+s32** N(D_8024B5B0_9667B0);
 
 ApiStatus N(GetCamVfov)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(GetCurrentCameraYawClamped180)(ScriptInstance* script, s32 isInitialCall);

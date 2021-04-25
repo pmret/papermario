@@ -3,23 +3,19 @@
 INCLUDE_ASM(s32, "world/area_sbk/sbk_34/945F10", func_80240040_945F10);
 /*
 ApiStatus N(func_80240040_945F10)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80240D9C_946C6C) == NULL) {
+        N(D_80240D9C_946C6C) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80240D9C_946C6C)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80240D9C_946C6C)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80240D9C_946C6C));
+        N(D_80240D9C_946C6C) = NULL;
     }
     return ApiStatus_DONE2;
 }

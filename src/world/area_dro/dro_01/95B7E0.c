@@ -533,7 +533,7 @@ NpcSettings N(npcSettings_8024518C) = {
     .level = 99,
 };
 
-s32* N(D_802451B8_9603B8) = NULL;
+s32** N(D_802451B8_9603B8) = NULL;
 
 Script N(802451BC) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -2260,7 +2260,7 @@ N(shopPrice) N(shopPriceList_8024B550)[] = {
     {},
 };
 
-s32* N(D_8024B5B0_9667B0) = NULL;
+s32** N(D_8024B5B0_9667B0) = NULL;
 
 Script N(8024B5B4) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);

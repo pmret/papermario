@@ -191,23 +191,19 @@ ApiStatus N(func_80241DE4_C5C524)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
 /*
 ApiStatus N(func_80241FCC_C5C70C)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80244A10_C5F150) == NULL) {
+        N(D_80244A10_C5F150) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80244A10_C5F150)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80244A10_C5F150)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80244A10_C5F150));
+        N(D_80244A10_C5F150) = NULL;
     }
     return ApiStatus_DONE2;
 }

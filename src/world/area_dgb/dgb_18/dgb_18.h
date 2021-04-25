@@ -11,4 +11,4 @@ Script N(main);
 Script N(makeEntities);
 Script N(npcAI_80242834);
 
-s32 N(D_802436E0_C59620);
+s32** N(D_802436E0_C59620);

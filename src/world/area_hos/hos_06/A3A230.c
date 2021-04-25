@@ -63,23 +63,19 @@ ApiStatus N(func_80241008_A3A4E8)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A3A230", func_802410A4_A3A584);
 /*
 ApiStatus N(func_802410A4_A3A584)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_8024476C_A3DC4C) == NULL) {
+        N(D_8024476C_A3DC4C) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_8024476C_A3DC4C)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_8024476C_A3DC4C)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_8024476C_A3DC4C));
+        N(D_8024476C_A3DC4C) = NULL;
     }
     return ApiStatus_DONE2;
 }

@@ -432,9 +432,7 @@ static s32 N(pad_4DD4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-s32 N(D_80244DE0_96DFA0) = {
-    0x00000000,
-};
+s32** N(D_80244DE0_96DFA0) = NULL;
 
 Script N(80244DE4) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -3109,23 +3107,19 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
 };
 
 ApiStatus N(func_80240300_9694C0)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80244DE0_96DFA0);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80244DE0_96DFA0) == NULL) {
+        N(D_80244DE0_96DFA0) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80244DE0_96DFA0)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80244DE0_96DFA0)[i];
         }
-        ptr = &N(D_80244DE0_96DFA0);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80244DE0_96DFA0));
+        N(D_80244DE0_96DFA0) = NULL;
     }
     return ApiStatus_DONE2;
 }

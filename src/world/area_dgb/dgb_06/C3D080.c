@@ -81,9 +81,7 @@ Script N(main) = SCRIPT({
     spawn N(enterSingleDoor_80240474);
 });
 
-s32 N(D_80240620_C3D6A0) = {
-    0x00000000,
-};
+s32** N(D_80240620_C3D6A0) = NULL;
 
 Script N(80240624) = SCRIPT({
     group 0;
@@ -193,23 +191,19 @@ NpcGroupList N(npcGroupList_80240B44) = {
 };
 
 ApiStatus N(func_80240000_C3D080)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80240620_C3D6A0);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80240620_C3D6A0) == NULL) {
+        N(D_80240620_C3D6A0) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80240620_C3D6A0)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80240620_C3D6A0)[i];
         }
-        ptr = &N(D_80240620_C3D6A0);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80240620_C3D6A0));
+        N(D_80240620_C3D6A0) = NULL;
     }
     return ApiStatus_DONE2;
 }

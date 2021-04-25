@@ -87,23 +87,19 @@ ApiStatus N(func_80240664_CF81D4)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80240700_CF8270);
 /*
 ApiStatus N(func_80240700_CF8270)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_802435F0_CFB160) == NULL) {
+        N(D_802435F0_CFB160) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_802435F0_CFB160)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_802435F0_CFB160)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_802435F0_CFB160));
+        N(D_802435F0_CFB160) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -388,23 +384,19 @@ INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241B20_CF9690);
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241C90_CF9800);
 /*
 ApiStatus N(func_80241C90_CF9800)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_8024D8F0_D05460) == NULL) {
+        N(D_8024D8F0_D05460) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_8024D8F0_D05460)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_8024D8F0_D05460)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_8024D8F0_D05460));
+        N(D_8024D8F0_D05460) = NULL;
     }
     return ApiStatus_DONE2;
 }
