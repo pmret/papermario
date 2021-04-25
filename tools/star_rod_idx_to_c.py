@@ -60,6 +60,32 @@ def get_include_list(area_name, map_name):
                         includes.add(func_name)
     return includes
 
+def read_flags(flags: int, constants_name: str) -> str:
+    enabled = []
+    for x in range(32):
+        val = flags & (1 << x)
+        if val:
+            if val in disasm_script.CONSTANTS[constants_name]:
+                enabled.append(disasm_script.CONSTANTS[constants_name][val])
+            else:
+                print(f"0x{val:08X} missing from enum {constants_name}!")
+                enabled.append(f"0x{val:08X}")
+    if not enabled:
+        enabled.append("0")
+
+    return " | ".join(enabled)
+
+def read_ptr(addr: int, symbol_map: dict, needs_ampersand: bool = False) -> str:
+    if addr == 0:
+        return "NULL"
+    elif addr in symbol_map:
+        if needs_ampersand:
+            return f"&{symbol_map[addr][0][1]}"
+        else:
+            return f"{symbol_map[addr][0][1]}"
+    else:
+        return f"(void*) 0x{addr:08X}"
+
 def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
     global INCLUDES_NEEDED, INCLUDED
     out = ""
@@ -435,7 +461,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             out += f"f32 {name}[] = {{"
             for i in range(0, struct["length"], 4):
                 if (i % (4 * 4)) == 0:
-                    out += f"\n    "
+                    out += f"\n   "
 
                 word = unpack(">f", bytes.read(4))[0]
                 out += f" {word:.01f}f,"
@@ -558,14 +584,58 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 INCLUDES_NEEDED["sprites"].add(sprite)
 
                 out += f"    {element}, "
+                out += " " * (16 - len(element))
                 out += f"{anim},\n"
 
             out += f"}};\n"
-        # TODO
-        #elif struct["type"] == "PartsTable":
-        #    pass
-        #elif struct["type"] == "Actor":
-        #    pass
+        elif struct["type"] == "PartsTable":
+            out += f"ActorPartDesc {struct['name']}[] = {{\n"
+
+            for _ in range(0, struct["length"] // 36):
+                d = unpack(">IbbbbbbhIIIIxxxxxxxx", bytes.read(36))
+
+                out += INDENT + "{\n"
+                out += INDENT + INDENT + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
+                out += INDENT + INDENT + f".index = {d[1]},\n"
+                out += INDENT + INDENT  + f".posOffset = {{ {d[2]}, {d[3]}, {d[4]} }},\n"
+                out += INDENT + INDENT  + f".targetOffset = {{ {d[5]}, {d[6]} }},\n"
+                out += INDENT + INDENT  + f".opacity = {d[7]},\n"
+                out += INDENT + INDENT  + f".idleAnimations = {read_ptr(d[8], symbol_map)},\n"
+                out += INDENT + INDENT  + f".defenseTable = {read_ptr(d[9], symbol_map)},\n"
+                out += INDENT + INDENT  + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
+                out += INDENT + INDENT  + f".elementImmunityFlags = {d[11]},\n" # TODO flags
+                out += INDENT + "},\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "Actor":
+            out += f"ActorDesc {struct['name']} = {{\n"
+
+            d = unpack(">IxBBBhxxIIIBBBBBBBBbbbbbbbb", bytes.read(struct["length"]))
+
+            out += INDENT + f".flags = {read_flags(d[0], 'ActorFlags')},\n"
+            out += INDENT + f".type = {d[1]},\n" # TODO enum
+            out += INDENT + f".level = {d[2]},\n"
+            out += INDENT + f".maxHP = {d[3]},\n"
+            out += INDENT + f".partCount = ARRAY_COUNT({read_ptr(d[5], symbol_map)}),\n"
+            out += INDENT + f".partsData = {read_ptr(d[5], symbol_map)},\n"
+            out += INDENT + f".script = {read_ptr(d[6], symbol_map)},\n"
+            out += INDENT + f".statusTable = {read_ptr(d[7], symbol_map)},\n"
+            out += INDENT + f".escapeChance = {d[8]},\n"
+            out += INDENT + f".airLiftChance = {d[9]},\n"
+            out += INDENT + f".spookChance = {d[10]},\n"
+            out += INDENT + f".baseStatusChance = {d[11]},\n"
+            out += INDENT + f".upAndAwayChance = {d[12]},\n"
+            out += INDENT + f".spinSmashReq = {d[13]},\n"
+            out += INDENT + f".powerBounceChance = {d[14]},\n"
+            out += INDENT + f".coinReward = {d[15]},\n"
+            out += INDENT + f".size = {{ {d[16]}, {d[17]} }},\n"
+            out += INDENT + f".hpBarOffset = {{ {d[18]}, {d[19]} }},\n"
+            out += INDENT + f".statusIconOffset = {{ {d[20]}, {d[21]} }},\n"
+            out += INDENT + f".statusMessageOffset = {{ {d[22]}, {d[23]} }},\n"
+
+            out += f"}};\n"
+
+            pass
         elif struct["type"] == "Stage":
             out += f"Stage {struct['name']} = {{\n"
 
@@ -720,9 +790,11 @@ if __name__ == "__main__":
         map_name = base
         area_name, _ = map_name.split("_")
         segment_name = f"world/area_{area_name}/{map_name}"
+        is_battle = False
     else:
         battle_area = "_".join(base.lower().split(" ")[1:])
         segment_name = f"battle/{battle_area}"
+        is_battle = True
 
     symbol_map = {}
 
@@ -836,7 +908,10 @@ if __name__ == "__main__":
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
 
         print("========== Includes needed: ===========\n")
-        print(f"#include \"map.h\"")
+        if is_battle:
+            print(f"#include \"battle/battle.h\"")
+        else:
+            print(f"#include \"map.h\"")
         print(f"#include \"message_ids.h\"")
         if INCLUDES_NEEDED["sprites"]:
             for npc in sorted(INCLUDES_NEEDED["sprites"]):

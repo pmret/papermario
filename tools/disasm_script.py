@@ -77,7 +77,8 @@ def get_constants():
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
-        "Events", "Statuses", "Elements" }
+        "Events", "Statuses", "Elements",
+        "ActorFlags", "ActorPartFlags", "ActorEventFlags", "ElementFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
     CONSTANTS["NPC_SPRITE"] = {}
