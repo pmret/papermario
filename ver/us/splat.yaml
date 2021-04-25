@@ -8765,17 +8765,11 @@ segments:
     start: 0xC9DF20
     vram: 0x80240000
     subsegments:
-    - [0xC9DF20, c]
-    - [0xC9DF60, c]
-    - [0xC9EE30, c]
-    - [0xC9F300, data]
-    - [0xC9F5E0, data]
-    - [0xCA3D50, data]
-    - [0xCA4770, data]
-    - [0xCA7050, data]
-    - [0xCA70A0, rodata]
-    - [0xCA70E0, rodata]
-    - [0xCA7290, rodata]
+    - [0xC9DF20,       c, C9DF20]
+    - [0xC9DF60,       c, C9DF60]
+    - [0xC9EE30,       c, C9EE30]
+    - [0xC9F300,   .data, C9DF60]
+    - [0xCA70A0, .rodata, C9DF60]
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code

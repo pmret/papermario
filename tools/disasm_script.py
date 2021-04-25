@@ -174,6 +174,9 @@ def get_constants():
     return
 
 def make_anim_macro(self, sprite, palette, anim):
+    if sprite == 0xFF and palette == 0xFF and anim == 0xFF:
+        return "-1"
+
     call = "NPC_ANIM("
     if sprite in CONSTANTS["NPC_SPRITE"]:
         call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
@@ -217,9 +220,9 @@ def fix_args(self, func, args, info):
                 palette = (argNum & 0xFF00)   >> 8
                 anim    = (argNum & 0xFF)     >> 0
 
-                if argNum not in CONSTANTS["MAP_NPCS"]:
-                    new_args.append(f"0x{argNum:X}")
-                    continue
+                #if argNum not in CONSTANTS["MAP_NPCS"]:
+                #    new_args.append(f"0x{argNum:X}")
+                #    continue
                 
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
@@ -296,6 +299,7 @@ replace_funcs = {
 
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
+    "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
     "EnemyDamageTarget"         :{0:"ActorIDs"},
     "EnemyTestTarget"           :{0:"ActorIDs"},
 
@@ -369,7 +373,9 @@ replace_funcs = {
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
+    "ShowMessageAtWorldPos"     :{0:"CustomMsg"},
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs"},
 }
@@ -479,7 +485,7 @@ class ScriptDisassembler:
         name = "N(" + name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}" + ")"
         return name
 
-    def replace_star_rod_prefix(self, addr):
+    def replace_star_rod_prefix(self, addr, isArg=False):
         if addr in self.symbol_map:
             name = self.symbol_map[addr][0][1]
             toReplace = True
@@ -510,12 +516,16 @@ class ScriptDisassembler:
                 if name not in self.INCLUDED["functions"]:
                     self.INCLUDES_NEEDED["forward"].append(prefix + name + suffix + ";")
                     self.INCLUDED["functions"].add(name)
-            return name
+                return name
+            elif not isArg or name.startswith("\""):
+                return name
+            else:
+                return str(addr)
         return addr
 
-    def addr_ref(self, addr):
+    def addr_ref(self, addr, isArg=False):
         if addr in self.symbol_map:
-            return self.replace_star_rod_prefix(addr)
+            return self.replace_star_rod_prefix(addr, isArg)
         return f"0x{addr:08X}"
 
     def trigger(self, trigger):
@@ -1082,7 +1092,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if addr in self.symbol_map:
                 func_name = self.addr_ref(addr)
                 for i,arg in enumerate(argv):
-                    argv[i] = self.replace_star_rod_prefix(arg)
+                    argv[i] = self.replace_star_rod_prefix(arg, isArg=True)
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
                 argv_str = replace_constants(self, func_name, argv_str)
 

@@ -56,3 +56,4 @@ D_000001E4 = 0x1E4;
 gPauseMenuStrings = 0x8026F778;
 broken_kmr_04_function_addr = 0x80243770;
 D_802442D0 = 0x802442D0;
+trd_06_fake_sym = 0x802491C0;

@@ -21,6 +21,7 @@ INCLUDES_NEEDED["include"] = []
 INCLUDES_NEEDED["forward"] = []
 INCLUDES_NEEDED["npcs"] = {}
 INCLUDES_NEEDED["sprites"] = set()
+INCLUDES_NEEDED["tattle"] = []
 
 def get_function_list(area_name, map_name, rom_offset):
     map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
@@ -120,9 +121,26 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "EntryList":
             entry_list_name = name
             out += f"EntryList {name} = {{"
-            for i in range(0, struct["length"], 4 * 4):
-                x,y,z,yaw = unpack(">ffff", bytes.read(4 * 4))
-                out += f"\n    {{ {x}f, {y}f, {z}f, {yaw}f }},"
+            entry_list = bytes.read(struct["length"])
+            entry_count = len(entry_list) // 16
+            pos = 0
+            x = []
+            y = []
+            z = []
+            w = []
+            for _ in range(entry_count):
+                a,b,c,d = unpack_from(">ffff", entry_list, pos)
+                x.append(f"{a:.01f}"); y.append(f"{b:.01f}"); z.append(f"{c:.01f}"); w.append(f"{d:.01f}")
+                pos += 16
+
+            x_size = max([len(a) for a in x])
+            y_size = max([len(a) for a in y])
+            z_size = max([len(a) for a in z])
+            w_size = max([len(a) for a in w])
+
+            for a,b,c,d in zip(x,y,z,w):
+                out += f"\n    {{ {a:>{x_size}}f, {b:>{y_size}}f, {c:>{z_size}}f, {d:>{w_size}}f }},"
+            
             out += f"\n}};\n"
         elif struct["type"] == "NpcSettings":
             tmp_out = f"NpcSettings {name} = {{\n"
@@ -416,7 +434,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
                 raise Exception(f"unknown MapConfig background {bg:X}")
-            out += f"    .tattle = 0x{tattle:X},\n"
+            #out += f"    .tattle = 0x{tattle:X},\n"
+            INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
+            out += f"    .tattle = MSG_{map_name}_tattle,\n"
 
             out += f"}};\n"
             afterHeader = True
@@ -570,10 +590,10 @@ if __name__ == "__main__":
     if ext == ".midx":
         map_name = base
         area_name, _ = map_name.split("_")
-        segment_name = f"world/area_{area_name}/{map_name}/"
+        segment_name = f"world/area_{area_name}/{map_name}"
     else:
         battle_area = "_".join(base.lower().split(" ")[1:])
-        segment_name = f"battle/{battle_area}/"
+        segment_name = f"battle/{battle_area}"
 
     symbol_map = {}
 
@@ -584,7 +604,7 @@ if __name__ == "__main__":
 
         rom_offset = -1
         for segment in splat_config["segments"]:
-            if isinstance(segment, dict) and segment.get("name") == segment_name:
+            if isinstance(segment, dict) and segment.get("dir") == segment_name:
                 rom_offset = segment["start"]
                 vram = segment["vram"]
                 break
@@ -707,6 +727,9 @@ if __name__ == "__main__":
                 lastnum = k
             print(f"}};")
             print()
+
+        [print(x) for x in INCLUDES_NEEDED["tattle"]]
+        print()
 
         print("=======================================\n")
         print(disasm.rstrip())

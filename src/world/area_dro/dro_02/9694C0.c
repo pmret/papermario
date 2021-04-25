@@ -56,7 +56,7 @@ static s8 N(pad_D_8024EF80)[0x4];
 static f32 N(D_8024EF84);
 static s32 N(D_8024EF88);
 static s8 N(pad_D_8024EF8C)[0x4];
-static N(temp)* N(D_8024EF90)[4];
+static N(temp)* N(D_8024EF90)[4]; // possibly bigger?
 static s8 N(pad_D_8024EF94)[0x18];
 static s32 N(D_8024EFB8);
 static s8 N(pad_D_8024EFBC)[0x4];
@@ -68,9 +68,9 @@ static s32 N(D_8024EFD0)[16];
 static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
 static s32 N(D_8024F080)[0x70];
-static s8 N(pad_D_8024F244)[0x4];
+static s8 N(pad_D_8024F244)[0x4]; // likely conencted to the above
 static s32 N(D_8024F248)[0x5B];
-static s8 N(pad_D_8024F3B4)[0x4];
+static s8 N(pad_D_8024F3B4)[0x4]; // likely conencted to the above
 static s32 N(D_8024F3B8);
 
 // DATA
