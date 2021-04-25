@@ -114,7 +114,7 @@ Script N(80242178) = SCRIPT({
     SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_100)), TRUE);
     N(UnkFunc20)(SI_MAP_VAR(0), SI_VAR(9));
     FindKeyItem(ITEM_ULTRA_STONE, SI_VAR(12));
-    N(func_80240120_CAEE60)();
+    N(UnkFunc38)();
     if (SI_VAR(0) == -1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DC), 160, 40);
         sleep 10;

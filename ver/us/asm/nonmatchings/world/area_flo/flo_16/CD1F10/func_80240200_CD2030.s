@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240200_CD2030
+glabel flo_16_UnkFunc38
 /* CD2030 80240200 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* CD2034 80240204 AFB3001C */  sw        $s3, 0x1c($sp)
 /* CD2038 80240208 0080982D */  daddu     $s3, $a0, $zero
@@ -27,7 +27,7 @@ glabel func_80240200_CD2030
 /* CD2084 80240254 50400008 */  beql      $v0, $zero, .L80240278
 /* CD2088 80240258 26100001 */   addiu    $s0, $s0, 1
 /* CD208C 8024025C 0200202D */  daddu     $a0, $s0, $zero
-/* CD2090 80240260 0C09006D */  jal       func_802401B4_CD1FE4
+/* CD2090 80240260 0C09006D */  jal       flo_16_UnkFunc37
 /* CD2094 80240264 00122C03 */   sra      $a1, $s2, 0x10
 /* CD2098 80240268 10540003 */  beq       $v0, $s4, .L80240278
 /* CD209C 8024026C 26100001 */   addiu    $s0, $s0, 1

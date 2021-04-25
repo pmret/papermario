@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240400_879FE0
+glabel tik_07_UnkFunc38
 /* 879FE0 80240400 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 879FE4 80240404 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 879FE8 80240408 0080982D */  daddu     $s3, $a0, $zero
@@ -27,7 +27,7 @@ glabel func_80240400_879FE0
 /* 87A034 80240454 50400008 */  beql      $v0, $zero, .L80240478
 /* 87A038 80240458 26100001 */   addiu    $s0, $s0, 1
 /* 87A03C 8024045C 0200202D */  daddu     $a0, $s0, $zero
-/* 87A040 80240460 0C0900ED */  jal       func_802403B4_879F94
+/* 87A040 80240460 0C0900ED */  jal       tik_07_UnkFunc37
 /* 87A044 80240464 00122C03 */   sra      $a1, $s2, 0x10
 /* 87A048 80240468 10540003 */  beq       $v0, $s4, .L80240478
 /* 87A04C 8024046C 26100001 */   addiu    $s0, $s0, 1

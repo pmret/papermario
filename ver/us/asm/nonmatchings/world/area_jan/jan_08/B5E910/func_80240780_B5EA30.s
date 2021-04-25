@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240780_B5EA30
+glabel jan_08_UnkFunc38
 /* B5EA30 80240780 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* B5EA34 80240784 AFB3001C */  sw        $s3, 0x1c($sp)
 /* B5EA38 80240788 0080982D */  daddu     $s3, $a0, $zero
@@ -27,7 +27,7 @@ glabel func_80240780_B5EA30
 /* B5EA84 802407D4 50400008 */  beql      $v0, $zero, .L802407F8
 /* B5EA88 802407D8 26100001 */   addiu    $s0, $s0, 1
 /* B5EA8C 802407DC 0200202D */  daddu     $a0, $s0, $zero
-/* B5EA90 802407E0 0C0901CD */  jal       func_80240734_B5E9E4
+/* B5EA90 802407E0 0C0901CD */  jal       jan_08_UnkFunc37
 /* B5EA94 802407E4 00122C03 */   sra      $a1, $s2, 0x10
 /* B5EA98 802407E8 10540003 */  beq       $v0, $s4, .L802407F8
 /* B5EA9C 802407EC 26100001 */   addiu    $s0, $s0, 1

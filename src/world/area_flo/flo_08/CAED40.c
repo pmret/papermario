@@ -15,34 +15,9 @@ ApiStatus N(func_8024003C_CAED7C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-s32 N(func_802400D4_CAEE14)(s32 idx, s16 arg1) {
-    if (!gPlayerData.partners[idx].enabled) {
-        return -1;
-    }
+#include "world/common/UnkFunc37.inc.c"
 
-    if (gPlayerData.partners[idx].level <= arg1) {
-        return gPlayerData.partners[idx].level;
-    }
-
-    return -1;
-}
-
-ApiStatus N(func_80240120_CAEE60)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    s32 i;
-    s16 var = script->varTable[12] >= 0;
-
-    script->varTable[0] = -1;
-
-    for (i = 1; i < 12; i++) {
-        if (playerData->partners[i].enabled && N(func_802400D4_CAEE14)(i, var) != -1) {
-            script->varTable[0] = 1;
-            break;
-        }
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc38.inc.c"
 
 #ifdef NON_MATCHING
 typedef struct {
@@ -86,7 +61,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance *script, s32 isInitialCall) {
             if (playerData->partners[idx].enabled) {
                 ptr->unk_108[i] = idx;
                 ptr->unk_84[i] = *D_8008EF20[idx];
-                partnerLevel = N(func_802400D4_CAEE14)(idx, var);
+                partnerLevel = N(UnkFunc37)(idx, var);
                 if (partnerLevel >= 0) {
                     ptr->unk_00[i] = D_800F7F00[idx];
                     ptr->unk_18C[i] = 1;

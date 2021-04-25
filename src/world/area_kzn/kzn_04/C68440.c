@@ -14,27 +14,9 @@ ApiStatus N(func_8024034C_C6847C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_802403E4_C68514);
+#include "world/common/UnkFunc37.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_80240430_C68560);
-/*
-ApiStatus N(func_80240430_C68560)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    s32 i;
-    s16 var = script->varTable[12] >= 0;
-
-    script->varTable[0] = -1;
-
-    for (i = 1; i < 12; i++) {
-        if (playerData->partners[i].enabled && N(func_802424A4_C389D4)(i, var) != -1) {
-            script->varTable[0] = 1;
-            break;
-        }
-    }
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc38.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_04/C68440", func_802404DC_C6860C);
 

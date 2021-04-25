@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802400D4_988C34
+glabel isk_10_UnkFunc37
 /* 988C34 802400D4 3C028011 */  lui       $v0, %hi(gPlayerData)
 /* 988C38 802400D8 2442F290 */  addiu     $v0, $v0, %lo(gPlayerData)
 /* 988C3C 802400DC 000420C0 */  sll       $a0, $a0, 3

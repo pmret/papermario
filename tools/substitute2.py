@@ -1,9 +1,22 @@
 from pathlib import Path
 
-FUNC="""    return ApiStatus_DONE2;
+FUNC="""    PlayerData* playerData = &gPlayerData;
+    s32 i;
+    s16 var = script->varTable[12] >= 0;
+
+    script->varTable[0] = -1;
+
+    for (i = 1; i < 12; i++) {
+        if (playerData->partners[i].enabled && N(UnkFunc37)(i, var) != -1) {
+            script->varTable[0] = 1;
+            break;
+        }
+    }
+
+    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc36"
+NEW_FUNC_NAME = f"UnkFunc38"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []

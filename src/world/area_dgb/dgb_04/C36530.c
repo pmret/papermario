@@ -326,7 +326,7 @@ Script N(80243EF8) = SCRIPT({
     SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_100)), TRUE);
     N(UnkFunc20)(SI_MAP_VAR(0), SI_VAR(9));
     FindKeyItem(15, SI_VAR(12));
-    N(func_802424F0_C38A20)();
+    N(UnkFunc38)();
     if (SI_VAR(0) == -1) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00DC), 160, 40);
         sleep 10;
@@ -962,36 +962,9 @@ ApiStatus N(func_8024240C_C3893C)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#ifdef NON_MATCHING
-s32 N(func_802424A4_C389D4)(s32 arg0, s16 arg1) {
-    PlayerData* playerData = &gPlayerData;
-    if (playerData->partners[arg0].enabled) {
-        if (playerData->partners[arg0].level <= arg1) {
-            return playerData->partners[arg0].level;
-        }
-    }
-    return -1;
-}
-#else
-INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", dgb_04_func_802424A4_C389D4, s32 arg0, s16 arg1)
-#endif
+#include "world/common/UnkFunc37.inc.c"
 
-ApiStatus N(func_802424F0_C38A20)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    s32 i;
-    s16 var = script->varTable[12] >= 0;
-
-    script->varTable[0] = -1;
-
-    for (i = 1; i < 12; i++) {
-        if (playerData->partners[i].enabled && N(func_802424A4_C389D4)(i, var) != -1) {
-            script->varTable[0] = 1;
-            break;
-        }
-    }
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc38.inc.c"
 
 #ifdef NON_MATCHING
 
@@ -1041,7 +1014,7 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance *script, s32 isInitialCall) {
 
             ptr->unk_108[i] = idx;
             ptr->unk_84[i] = **(D_8008EF20 + idx);
-            temp_a0 = N(func_802424A4_C389D4)(idx, var);
+            temp_a0 = N(UnkFunc37)(idx, var);
             if (temp_a0 >= 0) {
                 ptr->unk_00[i] = *(D_800F7F00 + idx);
                 ptr->unk_18C[i] = 1;
