@@ -196,18 +196,14 @@ INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241D58_CF4928);
 /*
 ApiStatus N(func_80241D58_CF4928)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80242ACC_CF569C) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80242ACC_CF569C)) {
+        N(D_80242ACC_CF569C) = FALSE;
+        set_variable(script, *args, N(D_80242AD0_CF56A0));
         return ApiStatus_DONE2;
     }
 
@@ -220,8 +216,8 @@ INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241DAC_CF497C);
 ApiStatus N(func_80241DAC_CF497C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_80242AD0_CF56A0) = get_variable(script, *args);
+    N(D_80242ACC_CF569C) = TRUE;
     return ApiStatus_DONE2;
 }
 */
@@ -249,7 +245,39 @@ ApiStatus N(func_80241DE4_CF49B4)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241E80_CF4A50);
+/*
+ApiStatus N(func_80241E80_CF4A50)(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 itemIdx = get_variable(script, *args++);
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    ItemEntity* item = get_item_entity(itemIdx);
+
+    item->position.x = var1;
+    item->position.y = var2;
+    item->position.z = var3;
+
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241F44_CF4B14);
+/*
+ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance *script, s32 isInitialCall) {
+    s32 itemId = get_variable(script, *script->ptrReadPos);
+    StaticItem* item = &gItemTable[itemId];
+
+    if (itemId == ITEM_YUMMY_MEAL) {
+        script->varTable[9] = 2;
+    } else if (item->typeFlags & 0x80) {
+        script->varTable[9] = 1;
+    } else {
+        script->varTable[9] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241FB4_CF4B84);

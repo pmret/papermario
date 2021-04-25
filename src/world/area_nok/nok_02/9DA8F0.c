@@ -14,18 +14,14 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243BEC_9DAC0C);
 /*
 ApiStatus N(func_80243BEC_9DAC0C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80252400_9E9420) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80252400_9E9420)) {
+        N(D_80252400_9E9420) = FALSE;
+        set_variable(script, *args, N(D_80252404_9E9424));
         return ApiStatus_DONE2;
     }
 
@@ -38,8 +34,8 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9DA8F0", func_80243C40_9DAC60);
 ApiStatus N(func_80243C40_9DAC60)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_80252404_9E9424) = get_variable(script, *args);
+    N(D_80252400_9E9420) = TRUE;
     return ApiStatus_DONE2;
 }
 */

@@ -320,18 +320,14 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_8024226C_8B22DC);
 /*
 ApiStatus N(func_8024226C_8B22DC)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80247E30_8B7EA0) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80247E30_8B7EA0)) {
+        N(D_80247E30_8B7EA0) = FALSE;
+        set_variable(script, *args, N(D_80247E34_8B7EA4));
         return ApiStatus_DONE2;
     }
 
@@ -344,8 +340,8 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_802422C0_8B2330);
 ApiStatus N(func_802422C0_8B2330)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_80247E34_8B7EA4) = get_variable(script, *args);
+    N(D_80247E30_8B7EA0) = TRUE;
     return ApiStatus_DONE2;
 }
 */
