@@ -196,3 +196,15 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802422A0_DB4560);
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242328_DB45E8);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
+/*
+ApiStatus N(func_802423C8_DB4688)(ScriptInstance *script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i < 0x5B; i++) {
+        N(D_802457C0)[i] = 0x80 + i;
+    }
+
+    N(D_8024592C) = 0;
+    return ApiStatus_DONE2;
+}
+*/

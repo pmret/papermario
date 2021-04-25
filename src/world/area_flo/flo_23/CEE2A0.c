@@ -103,3 +103,15 @@ ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_flo/flo_23/CEE2A0", func_80240C9C_CEEEFC);
+/*
+ApiStatus N(func_80240C9C_CEEEFC)(ScriptInstance *script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i < 0x5B; i++) {
+        N(D_802429B8)[i] = 0x80 + i;
+    }
+
+    N(D_802429BC) = 0;
+    return ApiStatus_DONE2;
+}
+*/

@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import re
 
-WRITE_FILE = False
+WRITE_FILE = True
 DO_OVERWRITE = True
 DO_OVERWRITE_DECOMP = False
 
