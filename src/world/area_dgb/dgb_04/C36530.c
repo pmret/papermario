@@ -991,53 +991,50 @@ typedef struct {
 
 ApiStatus N(func_8024259C_C38ACC)(ScriptInstance *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    N(UnkStruct)* structPtr;
     N(UnkStruct)* ptr;
     s32 i;
-    s32 temp_a0;
+    s32 partnerLevel;
     s32 var, partnerActiveCount;
+    s32 idx;
 
     if (isInitialCall) {
         script->functionTemp[2].s = heap_malloc(0x330);
-        structPtr = script->functionTemp[2].s;
+        ptr = script->functionTemp[2].s;
 
-        ptr = structPtr;
         partnerActiveCount = 0;
         var = script->varTable[12] >= 0;
 
         for (i = 0; i < 8; i++) {
-            s32 idx = *(N(D_80243D38_C3A268) + i);
+            idx = N(D_80243D38_C3A268)[i];
 
             if (playerData->partners[idx].enabled) {
-                continue;
+                ptr->unk_108[i] = idx;
+                ptr->unk_84[i] = *D_8008EF20[idx];
+                partnerLevel = N(UnkFunc37)(idx, var);
+                if (partnerLevel >= 0) {
+                    ptr->unk_00[i] = D_800F7F00[idx];
+                    ptr->unk_18C[i] = 1;
+                    ptr->unk_294[i] = N(D_80243D48_C3A278)[i][partnerLevel];
+                } else {
+                    ptr->unk_00[i] = D_800F7F40[idx];
+                    ptr->unk_18C[i] = 0;
+                    ptr->unk_294[i] = N(D_80243D30_C3A260)[var];
+                }
+                ptr->unk_210[i] = playerData->partners[idx].level;
+                partnerActiveCount++;
             }
-
-            ptr->unk_108[i] = idx;
-            ptr->unk_84[i] = **(D_8008EF20 + idx);
-            temp_a0 = N(UnkFunc37)(idx, var);
-            if (temp_a0 >= 0) {
-                ptr->unk_00[i] = *(D_800F7F00 + idx);
-                ptr->unk_18C[i] = 1;
-                ptr->unk_294[i] = *(temp_a0 + *(N(D_80243D48_C3A278) + i));
-            } else {
-                ptr->unk_00[i] = *(D_800F7F40 + idx);
-                ptr->unk_18C[i] = 0;
-                ptr->unk_294[i] = *(N(D_80243D30_C3A260) + var);
-            }
-            ptr->unk_210[i] = playerData->partners[idx].level;
-            partnerActiveCount++;
         }
 
-        structPtr->unk_318 = 4;
-        structPtr->unk_324 = partnerActiveCount;
-        structPtr->unk_328 = 0;
-        func_800F4E40(structPtr);
+        ptr->unk_318 = 4;
+        ptr->unk_324 = partnerActiveCount;
+        ptr->unk_328 = 0;
+        func_800F4E40(ptr);
         script->functionTemp[0].s = 0;
     }
 
-    structPtr = script->functionTemp[2].s;
+    ptr = script->functionTemp[2].s;
     if (script->functionTemp[0].s == 0) {
-        script->functionTemp[1].s = structPtr->unk_32C;
+        script->functionTemp[1].s = ptr->unk_32C;
         if (script->functionTemp[1].s != 0) {
             func_800F13B0();
         } else {
@@ -1053,8 +1050,8 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance *script, s32 isInitialCall) {
 
     func_800F1538();
     if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0] = D_8008EF20[structPtr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1] = structPtr->unk_108[script->functionTemp[1].s - 1];
+        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
+        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
     } else {
         script->varTable[0] = -1;
     }
@@ -1064,7 +1061,7 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38ACC, ScriptInstance *script, s32 isInitialCall)
+INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38ACC, ScriptInstance *script, s32 isInitialCall)
 #endif
 
 ApiStatus N(func_802427EC_C38D1C)(ScriptInstance* script, s32 isInitialCall) {

@@ -8904,17 +8904,15 @@ segments:
     start: 0xCD1E30
     vram: 0x80240000
     subsegments:
-    - [0xCD1E30, c]
-    - [0xCD1E70, c]
-    - [0xCD1F10, c]
-    - [0xCD2C80, c]
-    - [0xCD4770, c]
-    - [0xCD47A0, data]
-    - [0xCD5530, data]
-    - [0xCD5E40, data]
-    - [0xCD6330, data]
-    - [0xCD7210, rodata]
-    - [0xCD7278, rodata]
+    - [0xCD1E30,       c, CD1E30]
+    - [0xCD1E70,       c, CD1E70]
+    - [0xCD1F10,       c, CD1F10]
+    - [0xCD2C80,       c, CD2C80]
+    - [0xCD4770,       c, CD4770]
+    - [0xCD47A0,   .data, CD1F10]
+    - [0xCD5E40,   .data, CD2C80]
+    - [0xCD7210, .rodata, CD1F10]
+    - [0xCD7220, .rodata, CD2C80]
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code

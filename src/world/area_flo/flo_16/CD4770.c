@@ -1,3 +1,10 @@
 #include "flo_16.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_16/CD4770", func_80242940_CD4770);
+ApiStatus N(func_80242940_CD4770)(ScriptInstance *script, s32 isInitialCall) {
+    script->varTable[0] = 0;
+    do {} while(0);
+    if ((gPlayerActionState == 14) || (gPlayerActionState == 16)) {
+        script->varTable[0] = 1;
+    }
+    return ApiStatus_DONE2;
+}
