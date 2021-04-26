@@ -33,8 +33,8 @@ glabel func_8024085C_EB96AC
 /* EB971C 802408CC 8C42000C */  lw        $v0, 0xc($v0)
 /* EB9720 802408D0 AE420028 */  sw        $v0, 0x28($s2)
 /* EB9724 802408D4 C6000018 */  lwc1      $f0, 0x18($s0)
-/* EB9728 802408D8 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EB972C 802408DC 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EB9728 802408D8 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EB972C 802408DC 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EB9730 802408E0 E6400018 */  swc1      $f0, 0x18($s2)
 /* EB9734 802408E4 8C460028 */  lw        $a2, 0x28($v0)
 /* EB9738 802408E8 0C00ABDC */  jal       fio_validate_header_checksums

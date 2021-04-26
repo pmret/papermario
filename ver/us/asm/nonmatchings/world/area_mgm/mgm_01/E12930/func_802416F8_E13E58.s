@@ -14,13 +14,13 @@ glabel func_802416F8_E13E58
 /* E13E7C 8024171C 26100001 */  addiu     $s0, $s0, 1
 /* E13E80 80241720 0C0496FA */  jal       set_message_value
 /* E13E84 80241724 0200202D */   daddu    $a0, $s0, $zero
-/* E13E88 80241728 3C048015 */  lui       $a0, %hi(D_8014C290)
-/* E13E8C 8024172C 2484C290 */  addiu     $a0, $a0, %lo(D_8014C290)
+/* E13E88 80241728 3C048015 */  lui       $a0, %hi(MessagePlural)
+/* E13E8C 8024172C 2484C290 */  addiu     $a0, $a0, %lo(MessagePlural)
 /* E13E90 80241730 24020001 */  addiu     $v0, $zero, 1
 /* E13E94 80241734 16020003 */  bne       $s0, $v0, .L80241744
 /* E13E98 80241738 00000000 */   nop
-/* E13E9C 8024173C 3C048015 */  lui       $a0, %hi(D_8014C294)
-/* E13EA0 80241740 2484C294 */  addiu     $a0, $a0, %lo(D_8014C294)
+/* E13E9C 8024173C 3C048015 */  lui       $a0, %hi(MessageSingular)
+/* E13EA0 80241740 2484C294 */  addiu     $a0, $a0, %lo(MessageSingular)
 .L80241744:
 /* E13EA4 80241744 0C0496CF */  jal       set_message_string
 /* E13EA8 80241748 24050001 */   addiu    $a1, $zero, 1

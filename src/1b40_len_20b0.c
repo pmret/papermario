@@ -39,7 +39,6 @@ Gfx D_80074230[] = {
     gsSPEndDisplayList(),
 };
 
-extern DisplayContext D_80164000[];
 extern s16 D_8009A690;
 
 void gfx_init_state(void);

@@ -12,8 +12,8 @@ glabel func_80240DA0_EDF760
 /* EDF77C 80240DBC 0C00F92F */  jal       func_8003E4BC
 /* EDF780 80240DC0 86240008 */   lh       $a0, 8($s1)
 /* EDF784 80240DC4 0040802D */  daddu     $s0, $v0, $zero
-/* EDF788 80240DC8 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EDF78C 80240DCC 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EDF788 80240DC8 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EDF78C 80240DCC 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EDF790 80240DD0 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EDF794 80240DD4 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EDF798 80240DD8 A600008E */  sh        $zero, 0x8e($s0)

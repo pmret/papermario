@@ -6,8 +6,7 @@ void begin_state_init(void) {
 }
 
 void step_init_state(void) {
-    GameStatus** gameStatusPtr = &gGameStatusPtr;
-    GameStatus* gameStatus = *gameStatusPtr;
+    GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
     if (gameStatus->loadMenuState != 0) {
@@ -16,18 +15,18 @@ void step_init_state(void) {
     }
 
     gOverrideFlags = 0;
-    (*gameStatusPtr)->areaID = 0;
-    (*gameStatusPtr)->isBattle = 0;
+    gGameStatusPtr->areaID = 0;
+    gGameStatusPtr->isBattle = 0;
     gameStatus->prevArea = -1;
     gameStatus->mapID = 0;
     gameStatus->entryID = 0;
-    (*gameStatusPtr)->unk_76 = 0;
-    (*gameStatusPtr)->disableScripts = 0;
-    (*gameStatusPtr)->unk_7D = 0;
-    (*gameStatusPtr)->unk_A8 = -1;
-    (*gameStatusPtr)->unk_AA = 0;
-    (*gameStatusPtr)->unk_A9 = -1;
-    (*gameStatusPtr)->demoState = 0;
+    gGameStatusPtr->unk_76 = 0;
+    gGameStatusPtr->disableScripts = 0;
+    gGameStatusPtr->unk_7D = 0;
+    gGameStatusPtr->unk_A8 = -1;
+    gGameStatusPtr->unk_AA = 0;
+    gGameStatusPtr->unk_A9 = -1;
+    gGameStatusPtr->demoState = 0;
 
     general_heap_create();
     func_8011D890();
@@ -63,8 +62,8 @@ void step_init_state(void) {
     initialize_curtains();
 
     for (i = 0; i < 4; i++) {
-        (*gameStatusPtr)->unk_50[i] = 4;
-        (*gameStatusPtr)->unk_48[i] = 0xF;
+        gGameStatusPtr->unk_50[i] = 4;
+        gGameStatusPtr->unk_48[i] = 0xF;
     }
 
     fio_has_valid_backup();

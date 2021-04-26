@@ -39,9 +39,9 @@ glabel func_802B6638_E29068
 /* E290E8 802B66B8 00031040 */  sll       $v0, $v1, 1
 /* E290EC 802B66BC 00431021 */  addu      $v0, $v0, $v1
 /* E290F0 802B66C0 000210C0 */  sll       $v0, $v0, 3
-/* E290F4 802B66C4 3C04800F */  lui       $a0, %hi(D_800F7C28)
+/* E290F4 802B66C4 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0xC)
 /* E290F8 802B66C8 00822021 */  addu      $a0, $a0, $v0
-/* E290FC 802B66CC 8C847C28 */  lw        $a0, %lo(D_800F7C28)($a0)
+/* E290FC 802B66CC 8C847C28 */  lw        $a0, %lo(world_actions_peachDisguises+0xC)($a0)
 /* E29100 802B66D0 0C0398DB */  jal       func_800E636C
 /* E29104 802B66D4 00000000 */   nop
 /* E29108 802B66D8 2402001E */  addiu     $v0, $zero, 0x1e

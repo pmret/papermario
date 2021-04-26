@@ -12,8 +12,8 @@ glabel func_80240C4C_EF325C
 /* EF3278 80240C68 0C00F92F */  jal       func_8003E4BC
 /* EF327C 80240C6C 86240008 */   lh       $a0, 8($s1)
 /* EF3280 80240C70 0040802D */  daddu     $s0, $v0, $zero
-/* EF3284 80240C74 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF3288 80240C78 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF3284 80240C74 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF3288 80240C78 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF328C 80240C7C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EF3290 80240C80 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EF3294 80240C84 A600008E */  sh        $zero, 0x8e($s0)

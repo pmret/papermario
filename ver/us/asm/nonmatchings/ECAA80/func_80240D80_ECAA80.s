@@ -42,8 +42,8 @@ glabel func_80240D80_ECAA80
 /* ECAB14 80240E14 8C42000C */  lw        $v0, 0xc($v0)
 /* ECAB18 80240E18 AE020028 */  sw        $v0, 0x28($s0)
 /* ECAB1C 80240E1C C6200018 */  lwc1      $f0, 0x18($s1)
-/* ECAB20 80240E20 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* ECAB24 80240E24 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* ECAB20 80240E20 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* ECAB24 80240E24 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* ECAB28 80240E28 E6000018 */  swc1      $f0, 0x18($s0)
 /* ECAB2C 80240E2C 8C460028 */  lw        $a2, 0x28($v0)
 /* ECAB30 80240E30 8C470030 */  lw        $a3, 0x30($v0)
@@ -83,8 +83,8 @@ glabel func_80240D80_ECAA80
 .L80240EB4:
 /* ECABB4 80240EB4 0C00AB85 */  jal       func_8002AE14
 /* ECABB8 80240EB8 4600A306 */   mov.s    $f12, $f20
-/* ECABBC 80240EBC 3C148010 */  lui       $s4, %hi(D_800FFC90)
-/* ECABC0 80240EC0 2694FC90 */  addiu     $s4, $s4, %lo(D_800FFC90)
+/* ECABBC 80240EBC 3C148010 */  lui       $s4, %hi(dead_gPlayerStatusPtr)
+/* ECABC0 80240EC0 2694FC90 */  addiu     $s4, $s4, %lo(dead_gPlayerStatusPtr)
 /* ECABC4 80240EC4 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* ECABC8 80240EC8 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* ECABCC 80240ECC 8E820000 */  lw        $v0, ($s4)

@@ -1,11 +1,10 @@
 #include "common.h"
+#include "nu/nusys.h"
 
 void func_80035E54(void);
 
 void func_80035DF0(s16 arg0) {
-    s16* tempPtr = &D_800A0942;
-
-    *tempPtr = arg0;
+    D_800A0942 = arg0;
 }
 
 void func_80035E00(void) {
@@ -20,20 +19,16 @@ void func_80035E24(void) {
 }
 
 void func_80035E54(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
-    u16* mapTransitonAlpha;
-
     D_800A0944 = 0;
     D_800A0946 = 4;
-    (*gameStatus)->exitAngle = 0.0f;
-    mapTransitonAlpha = &gMapTransitionAlpha;
-    *mapTransitonAlpha = 0xFF;
+    gGameStatusPtr->exitAngle = 0.0f;
+    gMapTransitionAlpha = 0xFF;
     nuContRmbForceStopEnd();
-    func_801382AC(mapTransitonAlpha);
+    func_801382AC(&gMapTransitionAlpha);
 
     gOverrideFlags |= 0x8;
 
-    set_variable(0, SI_SAVE_VAR(1), (*gameStatus)->unk_A9);
+    set_variable(0, SI_SAVE_VAR(1), gGameStatusPtr->unk_A9);
     timeFreezeMode = 0;
 }
 
@@ -66,16 +61,11 @@ void func_800363FC(void) {
     }
 }
 
-s32 func_80036430(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
+void func_80036430(void) {
     gMapTransitionAlpha = 0xFF;
     D_800A0942 = 0x14;
     D_800A0944 = 0x01;
-
-    playerStatus->flags |= 0x1000;
-
-    return playerStatus->flags;
+    gPlayerStatus.flags |= 0x1000;
 }
 
 INCLUDE_ASM(s32, "111f0_len_860", func_8003646C);

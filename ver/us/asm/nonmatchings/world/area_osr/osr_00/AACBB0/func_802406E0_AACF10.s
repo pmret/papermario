@@ -11,8 +11,8 @@ glabel func_802406E0_AACF10
 /* AACF28 802406F8 02042021 */  addu      $a0, $s0, $a0
 /* AACF2C 802406FC 24853D86 */  addiu     $a1, $a0, 0x3d86
 /* AACF30 80240700 AFB10014 */  sw        $s1, 0x14($sp)
-/* AACF34 80240704 3C118024 */  lui       $s1, %hi(D_802437C0)
-/* AACF38 80240708 263137C0 */  addiu     $s1, $s1, %lo(D_802437C0)
+/* AACF34 80240704 3C118024 */  lui       $s1, %hi(arn_04_npcAISettings_802437C0)
+/* AACF38 80240708 263137C0 */  addiu     $s1, $s1, %lo(arn_04_npcAISettings_802437C0)
 /* AACF3C 8024070C AFBF0018 */  sw        $ra, 0x18($sp)
 /* AACF40 80240710 0C00A5CF */  jal       dma_copy
 /* AACF44 80240714 0220302D */   daddu    $a2, $s1, $zero

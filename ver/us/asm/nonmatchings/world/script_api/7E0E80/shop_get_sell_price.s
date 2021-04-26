@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80280B78
+glabel shop_get_sell_price
 /* 7E19F8 80280B78 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7E19FC 80280B7C 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7E1A00 80280B80 8C420144 */  lw        $v0, 0x144($v0)

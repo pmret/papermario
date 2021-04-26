@@ -10,7 +10,8 @@ glabel D_802456D0_C4C2B0
 .double 0.09
 
 .section .text
-glabel func_802415D4_C481B4
+
+glabel dgb_09_func_802415D4_C481B4
 /* C481B4 802415D4 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* C481B8 802415D8 AFB3004C */  sw        $s3, 0x4c($sp)
 /* C481BC 802415DC 0080982D */  daddu     $s3, $a0, $zero

@@ -1,6 +1,6 @@
 #include "dgb_01.h"
 
-Gfx D_00C06870_1[] = {
+Gfx D_80248FF0_C06870[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_MODULATEIA),

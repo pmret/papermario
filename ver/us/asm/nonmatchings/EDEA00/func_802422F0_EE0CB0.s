@@ -18,8 +18,8 @@ glabel func_802422F0_EE0CB0
 /* EE0CE4 80242324 AE030028 */  sw        $v1, 0x28($s0)
 /* EE0CE8 80242328 96220076 */  lhu       $v0, 0x76($s1)
 /* EE0CEC 8024232C A602008E */  sh        $v0, 0x8e($s0)
-/* EE0CF0 80242330 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EE0CF4 80242334 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EE0CF0 80242330 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EE0CF4 80242334 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EE0CF8 80242338 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EE0CFC 8024233C 8C460028 */  lw        $a2, 0x28($v0)
 /* EE0D00 80242340 0C00ABDC */  jal       fio_validate_header_checksums

@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80280AC4
+glabel shop_update_item_select_popup
 /* 7E1944 80280AC4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7E1948 80280AC8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7E194C 80280ACC 27BDFFE0 */  addiu     $sp, $sp, -0x20

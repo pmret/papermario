@@ -5,8 +5,8 @@ glabel func_802416F0_9C6AD0
 /* 9C6AD0 802416F0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9C6AD4 802416F4 10A0000B */  beqz      $a1, .L80241724
 /* 9C6AD8 802416F8 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 9C6ADC 802416FC 3C038025 */  lui       $v1, %hi(D_80251C64)
-/* 9C6AE0 80241700 8C631C64 */  lw        $v1, %lo(D_80251C64)($v1)
+/* 9C6ADC 802416FC 3C038025 */  lui       $v1, %hi(dgb_01_D_80251C64_C0F4E4)
+/* 9C6AE0 80241700 8C631C64 */  lw        $v1, %lo(dgb_01_D_80251C64_C0F4E4)($v1)
 /* 9C6AE4 80241704 8C620000 */  lw        $v0, ($v1)
 /* 9C6AE8 80241708 3C048025 */  lui       $a0, %hi(D_80251C68)
 /* 9C6AEC 8024170C 8C841C68 */  lw        $a0, %lo(D_80251C68)($a0)

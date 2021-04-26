@@ -2,7 +2,7 @@
 #include "map.h"
 #include "npc.h"
 
-s32 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
+s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 
 void npc_callback_no_op(void) {
 }
@@ -128,16 +128,16 @@ void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
 
     if (!(flagsTemp & 0x40000000)) {
         if (!(flagsTemp & NPC_FLAG_1000000)) {
-            func_802DE2AC(npc->spriteInstanceID, anim, npc->animationSpeed);
+            spr_update_sprite(npc->spriteInstanceID, anim, npc->animationSpeed);
         }
     }
 }
 
 void enable_npc_blur(Npc* npc) {
-    BlurBuffer* blurBuf;
-    s32 i;
-
     if (!(npc->flags & 0x100000)) {
+        BlurBuffer* blurBuf;
+        s32 i;
+
         npc->flags |= 0x100000;
 
         blurBuf = heap_malloc(sizeof(BlurBuffer));
@@ -228,7 +228,7 @@ INCLUDE_ASM(s32, "npc", func_8003C3D8);
 
 INCLUDE_ASM(s32, "npc", func_8003C428);
 
-INCLUDE_ASM(s32, "npc", func_8003C444);
+INCLUDE_ASM(s32, "npc", npc_update_decorations);
 
 INCLUDE_ASM(s32, "npc", func_8003C53C);
 
@@ -396,7 +396,6 @@ void func_8003E338(void) {
 
 void clear_encounter_status(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    GameStatus** gameStatus;
     s32 i;
     s32 j;
 
@@ -418,14 +417,13 @@ void clear_encounter_status(void) {
         }
     }
 
-    gameStatus = &gGameStatusPtr;
     currentEncounter->numEncounters = 0;
     currentEncounter->eFirstStrike = 0;
     currentEncounter->hitType = 0;
     currentEncounter->unk_0A = 0;
-    currentEncounter->currentAreaIndex = (*gameStatus)->areaID;
-    currentEncounter->currentMapIndex = (*gameStatus)->mapID;
-    currentEncounter->currentEntryIndex = (*gameStatus)->entryID;
+    currentEncounter->currentAreaIndex = gGameStatusPtr->areaID;
+    currentEncounter->currentMapIndex = gGameStatusPtr->mapID;
+    currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->unk_12 = 0;
@@ -439,8 +437,7 @@ void func_8003E50C(void) {
 }
 
 void func_8003E514(s8 arg0) {
-    EncounterStatus* currentEncounter = &gCurrentEncounter;
-    currentEncounter->unk_08 = arg0;
+    gCurrentEncounter.unk_08 = arg0;
 }
 
 void update_counters(void) {
@@ -492,10 +489,12 @@ void draw_encounter_ui(void) {
 }
 
 void draw_first_strike_ui(void) {
-    if (gGameState != 0) {
-        if (gGameState == 3) {
+    switch (gGameState) {
+        case 0:
+        default:
+            break;
+        case 3:
             show_first_strike_message();
-        }
     }
 }
 

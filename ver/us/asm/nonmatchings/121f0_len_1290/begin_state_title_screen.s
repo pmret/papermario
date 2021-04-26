@@ -7,7 +7,7 @@ glabel D_80098390
 .ascii "title_data\0\0"
 
 glabel D_8009839C
-.word 0x7469746C, 0x655F6267, 0x00000000
+.ascii "title_bg\0\0\0\0"
 
 .section .text
 

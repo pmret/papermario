@@ -12,8 +12,8 @@ glabel func_80241A2C_EEEB2C
 /* EEEB48 80241A48 0C00F92F */  jal       func_8003E4BC
 /* EEEB4C 80241A4C 86240008 */   lh       $a0, 8($s1)
 /* EEEB50 80241A50 0040802D */  daddu     $s0, $v0, $zero
-/* EEEB54 80241A54 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EEEB58 80241A58 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EEEB54 80241A54 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EEEB58 80241A58 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EEEB5C 80241A5C C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EEEB60 80241A60 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EEEB64 80241A64 A600008E */  sh        $zero, 0x8e($s0)

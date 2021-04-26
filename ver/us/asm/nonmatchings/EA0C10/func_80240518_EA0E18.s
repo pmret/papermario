@@ -37,8 +37,8 @@ glabel func_80240518_EA0E18
 /* EA0E7C 8024057C 000210C0 */  sll       $v0, $v0, 3
 /* EA0E80 80240580 0C010ABD */  jal       func_80042AF4
 /* EA0E84 80240584 00459021 */   addu     $s2, $v0, $a1
-/* EA0E88 80240588 3C148010 */  lui       $s4, %hi(D_800FFC90)
-/* EA0E8C 8024058C 2694FC90 */  addiu     $s4, $s4, %lo(D_800FFC90)
+/* EA0E88 80240588 3C148010 */  lui       $s4, %hi(dead_gPlayerStatusPtr)
+/* EA0E8C 8024058C 2694FC90 */  addiu     $s4, $s4, %lo(dead_gPlayerStatusPtr)
 /* EA0E90 80240590 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EA0E94 80240594 8E830000 */  lw        $v1, ($s4)
 /* EA0E98 80240598 C60E0040 */  lwc1      $f14, 0x40($s0)

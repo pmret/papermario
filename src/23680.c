@@ -7,30 +7,22 @@ INCLUDE_ASM(s32, "23680", spawn_drops);
 #ifdef NON_MATCHING
 s32 get_coin_drop_amount(Enemy* enemy) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
-    s16* dropTables = enemy->dropTables;
-    s32 t1;
-    s32 t2;
     s32 amt;
+    s32 mx;
     s32 diff;
-    s32 max;
-    s32 min;
 
-    t1 = dropTables[89];
-    t2 = dropTables[90];
+    amt = enemy->drops->minCoinBonus;
+    mx = enemy->drops->maxCoinBonus;
 
-    min = t1;
-    max = t2;
-
-    if (max < min) {
-        min = t2;
-        max = t1;
+    if (enemy->drops->minCoinBonus > enemy->drops->maxCoinBonus) {
+        amt = enemy->drops->maxCoinBonus;
+        mx = enemy->drops->minCoinBonus;
     }
 
-    diff = max - min;
+    diff = mx - amt;
 
-    amt = min;
-    if ((min < 0) || (diff != 0)) {
-        amt = rand_int(diff) + min;
+    if ((amt < 0) || (diff != 0)) {
+        amt = rand_int(diff) + amt;
     }
 
     if (amt < 0) {

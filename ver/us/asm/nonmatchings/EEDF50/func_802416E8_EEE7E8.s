@@ -107,8 +107,8 @@ glabel func_802416E8_EEE7E8
 /* EEE968 80241868 44821000 */  mtc1      $v0, $f2
 /* EEE96C 8024186C 00000000 */  nop
 /* EEE970 80241870 468010A0 */  cvt.s.w   $f2, $f2
-/* EEE974 80241874 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EEE978 80241878 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EEE974 80241874 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EEE978 80241878 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EEE97C 8024187C 46020000 */  add.s     $f0, $f0, $f2
 /* EEE980 80241880 3C014024 */  lui       $at, 0x4024
 /* EEE984 80241884 44812800 */  mtc1      $at, $f5

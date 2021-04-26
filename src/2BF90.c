@@ -77,7 +77,6 @@ void func_800511BC(UnkAl834* arg0) {
                     temp->unk_25 = 1;
                 }
                 func_80051434(arg0, temp);
-                var = temp->unk_24;
             }
         }
     }

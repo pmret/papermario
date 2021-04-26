@@ -240,8 +240,8 @@ glabel func_80240220_EF2830
 /* EF2B8C 8024057C 3C014024 */  lui       $at, 0x4024
 /* EF2B90 80240580 44810800 */  mtc1      $at, $f1
 /* EF2B94 80240584 44800000 */  mtc1      $zero, $f0
-/* EF2B98 80240588 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF2B9C 8024058C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF2B98 80240588 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF2B9C 8024058C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF2BA0 80240590 460010A1 */  cvt.d.s   $f2, $f2
 /* EF2BA4 80240594 46201080 */  add.d     $f2, $f2, $f0
 /* EF2BA8 80240598 C440002C */  lwc1      $f0, 0x2c($v0)

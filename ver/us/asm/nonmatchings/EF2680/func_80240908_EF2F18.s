@@ -107,8 +107,8 @@ glabel func_80240908_EF2F18
 /* EF3098 80240A88 44821000 */  mtc1      $v0, $f2
 /* EF309C 80240A8C 00000000 */  nop
 /* EF30A0 80240A90 468010A0 */  cvt.s.w   $f2, $f2
-/* EF30A4 80240A94 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF30A8 80240A98 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF30A4 80240A94 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF30A8 80240A98 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF30AC 80240A9C 46020000 */  add.s     $f0, $f0, $f2
 /* EF30B0 80240AA0 3C014024 */  lui       $at, 0x4024
 /* EF30B4 80240AA4 44812800 */  mtc1      $at, $f5

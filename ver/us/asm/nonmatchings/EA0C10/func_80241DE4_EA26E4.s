@@ -53,8 +53,8 @@ glabel func_80241DE4_EA26E4
 /* EA2780 80241E80 00021043 */  sra       $v0, $v0, 1
 /* EA2784 80241E84 A60200A8 */  sh        $v0, 0xa8($s0)
 .L80241E88:
-/* EA2788 80241E88 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EA278C 80241E8C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EA2788 80241E88 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EA278C 80241E8C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EA2790 80241E90 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EA2794 80241E94 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EA2798 80241E98 8C460028 */  lw        $a2, 0x28($v0)
