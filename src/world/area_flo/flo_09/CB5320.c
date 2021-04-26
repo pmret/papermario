@@ -192,7 +192,7 @@ Script N(802422BC) = SCRIPT({
     EnableModel(SI_VAR(6), 0);
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    N(func_80240040_CB5040)();
+    N(UnkFunc43)();
     if (SI_VAR(0) == 0) {
         sleep 1;
         goto 0;

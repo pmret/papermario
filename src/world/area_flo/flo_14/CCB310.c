@@ -193,7 +193,7 @@ Script N(80242EAC) = SCRIPT({
     EnableModel(SI_VAR(6), 0);
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    N(func_80240340_CCB650)();
+    N(UnkFunc43)();
     if (SI_VAR(0) == 0) {
         sleep 1;
         goto 0;
@@ -562,19 +562,7 @@ ApiStatus N(func_8024030C_CCB61C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240340_CCB650)(ScriptInstance *script, s32 isInitialCall) {
-    f32 var1 = script->varTable[0] - script->varTable[3];
-    f32 var2 = script->varTable[1] - script->varTable[4];
-    f32 var3 = script->varTable[2] - script->varTable[5];
-    s32 flag = TRUE;
-    
-    if (!((SQ(var1) + SQ(var2) + SQ(var3)) < 3600.0f)) {
-        flag = FALSE;
-    }
-    script->varTable[0] = flag;
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc43.inc.c"
 
 ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance *script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {

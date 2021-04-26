@@ -30,7 +30,7 @@ ApiStatus N(func_802419FC_CB073C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241A98_CB07D8)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241B5C_CB089C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241BCC_CB090C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_80241E40_CB0B80)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc43)(ScriptInstance* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80244EC4);
 extern Script N(80245914);

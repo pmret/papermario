@@ -8,7 +8,7 @@ ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_80240340_CCB650)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc43)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024042C_CCB73C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024046C_CCB77C)(ScriptInstance* script, s32 isInitialCall);
@@ -27,4 +27,3 @@ extern Script N(80244F30);
 extern Script N(80245224);
 extern Script N(d_80242360);
 extern Script N(main);
-
