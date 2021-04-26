@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 
 // *INDENT-OFF*
 Script N(searchBush_802417F0) = {
@@ -15,7 +15,7 @@ Script N(searchBush_802417F0) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 339, 0),
@@ -26,7 +26,7 @@ Script N(searchBush_802417F0) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),
@@ -86,7 +86,7 @@ Script N(shakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 358, 0),
@@ -97,7 +97,7 @@ Script N(shakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),
@@ -118,7 +118,7 @@ Script N(shakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
                     SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
                         SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
                         SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(4), 357, 0),
@@ -129,7 +129,7 @@ Script N(shakeTree_80241B50) = {
                 SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
                 SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
                     SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
+                    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
                 SI_CMD(ScriptOpcode_END_LOOP),
                 SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
             SI_CMD(ScriptOpcode_END_LOOP),

@@ -1,6 +1,6 @@
 #include "jan_08.h"
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 
 
 INCLUDE_ASM(s32, "world/area_jan/jan_08/B5E5C0", func_8024054C_B5E7FC);
