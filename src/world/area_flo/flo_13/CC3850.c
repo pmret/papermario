@@ -707,7 +707,7 @@ Script N(80245444) = SCRIPT({
     SI_VAR(0) += 30;
     SetNpcSpeed(NPC_WORLD_LAKILESTER, 3.5);
     NpcMoveTo(NPC_WORLD_LAKILESTER, SI_VAR(0), 60, 0);
-    N(func_80240040_CC3850)(0, 8);
+    N(UnkFunc41)(0, 8);
     N(func_802435D0_CC6DE0)();
     spawn N(802438CC);
     sleep 15;
@@ -1180,50 +1180,7 @@ NpcGroupList N(npcGroupList_80247984) = {
     {},
 };
 
-ApiStatus N(func_80240040_CC3850)(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    PlayerData* playerData = &gPlayerData;
-    NpcID npcID = get_variable(script, *args++);
-    PartnerID partnerID = get_variable(script, *args++);
-    Npc* npc = get_npc_safe(npcID);
-
-    if (isInitialCall) {
-        if (gPlayerData.currentPartner == PARTNER_NONE) {
-            script->functionTemp[0].s = 2;
-        } else {
-            script->functionTemp[0].s = 0;
-        }
-    }
-
-    switch (script->functionTemp[0].s) {
-        case 0:
-            func_800EB168(0);
-            script->functionTemp[1].s = 30;
-            script->functionTemp[0].s = 1;
-            break;
-        case 1:
-            script->functionTemp[1].s--;
-            if (script->functionTemp[1].s == -1) {
-                script->functionTemp[0].s = 2;
-            }
-            break;
-        case 2:
-            playerData->currentPartner = partnerID;
-            playerData->partners[partnerID].enabled = TRUE;
-            clear_partner_move_history(npc);
-            func_800EB2A4(playerData->currentPartner);
-            script->functionTemp[0].s = 3;
-            break;
-        case 3:
-            set_npc_yaw(get_npc_safe(NPC_PARTNER), npc->yaw);
-            npc->flags &= ~4;
-            disable_npc_shadow(npc);
-            npc->pos.y = -1000.0f;
-            return ApiStatus_DONE2;
-    }
-
-    return ApiStatus_BLOCK;
-}
+#include "world/common/UnkFunc41.inc.c"
 
 void N(func_802401C4_CC39D4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;

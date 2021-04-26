@@ -5,7 +5,7 @@
 #define NAMESPACE kmr_03
 
 ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_80240000_8C7F90)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc41)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall);
 
 NpcGroupList N(npcGroupList_80241450);

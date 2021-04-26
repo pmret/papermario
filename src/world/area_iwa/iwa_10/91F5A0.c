@@ -1,6 +1,6 @@
 #include "iwa_10.h"
 
-INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91F5A0", func_80241030_91F5A0);
+#include "world/common/UnkFunc41.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 

@@ -1,6 +1,6 @@
 #include "nok_04.h"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_04/9EDBF0", func_80240000_9EDBF0);
+#include "world/common/UnkFunc41.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 

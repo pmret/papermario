@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import re
 
-WRITE_FILE = False
+WRITE_FILE = True
 DO_OVERWRITE = True
 DO_OVERWRITE_DECOMP = False
 
@@ -168,26 +168,26 @@ for file in files[1:]:
                 #            break
                 #    old_data_name = "N(" + func_data[8].split("N(",1)[1].split(")",1)[0] + ")"
                 #    func_data = function_text.replace(old_data_name, "N(" + new_data_name + ")").splitlines()
-                if asm_path.is_file():
-                    asm_data = asm_path.read_text().splitlines()
-                    for x,asm_line in enumerate(asm_data):
-                        if "lui" in asm_line and "addiu" in asm_data[x+1] and "D_" in asm_line and asm_line.count("_") == 1:
-                            new_data_name1 = asm_line.split("(",1)[1].split(")",1)[0]
-                        elif "lui" in asm_line and "sw" in asm_data[x+1] and "D_" in asm_line and asm_line.count("_") == 1:
-                            new_data_name2 = asm_line.split("(",1)[1].split(")",1)[0]
-                            break
-                    else:
-                        print(f"Failed to find new data name")
-                        exit()
+                #if asm_path.is_file():
+                #    asm_data = asm_path.read_text().splitlines()
+                #    for x,asm_line in enumerate(asm_data):
+                #        if "lui" in asm_line and "addiu" in asm_data[x+1] and "D_" in asm_line and asm_line.count("_") == 1:
+                #            new_data_name1 = asm_line.split("(",1)[1].split(")",1)[0]
+                #        elif "lui" in asm_line and "sw" in asm_data[x+1] and "D_" in asm_line and asm_line.count("_") == 1:
+                #            new_data_name2 = asm_line.split("(",1)[1].split(")",1)[0]
+                #            break
+                #    else:
+                #        print(f"Failed to find new data name")
+                #        exit()
+                
+                #    old_data_name1 = func_data[5].split("N(",1)[1].split(")",1)[0]
+                #    old_data_name2 = func_data[8].split("N(",1)[1].split(")",1)[0]
 
-                    old_data_name1 = func_data[5].split("N(",1)[1].split(")",1)[0]
-                    old_data_name2 = func_data[8].split("N(",1)[1].split(")",1)[0]
-
-                    ft2 = function_text
-                    ft2 = ft2.replace("N(" + old_data_name1 + ")", old_data_name1)
-                    ft2 = ft2.replace("N(" + old_data_name2 + ")", old_data_name2)
-                    ft2 = ft2.replace(old_data_name1, "N(" + new_data_name1 + ")")
-                    func_data = ft2.replace(old_data_name2, "N(" + new_data_name2 + ")").splitlines()
+                #    ft2 = function_text
+                #    ft2 = ft2.replace("N(" + old_data_name1 + ")", old_data_name1)
+                #    ft2 = ft2.replace("N(" + old_data_name2 + ")", old_data_name2)
+                #    ft2 = ft2.replace(old_data_name1, "N(" + new_data_name1 + ")")
+                #    func_data = ft2.replace(old_data_name2, "N(" + new_data_name2 + ")").splitlines()
 
                 new_func_file.append(stripped_line)
                 func_data[1] = func_data[1].replace("N()", f"N({function})")

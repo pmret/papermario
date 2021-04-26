@@ -4,7 +4,7 @@
 #define NAMESPACE flo_13
 
 ApiStatus N(func_80240000_CC3810)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_80240040_CC3850)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc41)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80242A6C_CC627C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243368_CC6B78)(ScriptInstance* script, s32 isInitialCall);
