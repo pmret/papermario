@@ -4180,6 +4180,7 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
+    overlay: True
     subsegments:
     - [0x7E0E80, c]
     - [0x7E2AA0, c]

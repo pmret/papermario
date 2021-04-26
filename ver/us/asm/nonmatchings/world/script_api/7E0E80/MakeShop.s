@@ -80,8 +80,8 @@ glabel MakeShop
 /* 7E27F8 80281978 0000902D */   daddu    $s2, $zero, $zero
 /* 7E27FC 8028197C 3C1E8007 */  lui       $fp, %hi(gGameStatusPtr)
 /* 7E2800 80281980 27DE419C */  addiu     $fp, $fp, %lo(gGameStatusPtr)
-/* 7E2804 80281984 3C178028 */  lui       $s7, %hi(D_80283F58)
-/* 7E2808 80281988 26F73F58 */  addiu     $s7, $s7, %lo(D_80283F58)
+/* 7E2804 80281984 3C178028 */  lui       $s7, %hi(D_80283F58_7E4DD8)
+/* 7E2808 80281988 26F73F58 */  addiu     $s7, $s7, %lo(D_80283F58_7E4DD8)
 /* 7E280C 8028198C 24160003 */  addiu     $s6, $zero, 3
 /* 7E2810 80281990 26B10002 */  addiu     $s1, $s5, 2
 .L80281994:
