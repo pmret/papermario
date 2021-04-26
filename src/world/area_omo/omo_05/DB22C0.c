@@ -57,7 +57,7 @@ void N(func_802416A8_DB3968)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_80242F88_DB5248)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
