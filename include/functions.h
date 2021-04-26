@@ -358,5 +358,10 @@ ApiStatus func_802D5FF8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D5FD8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D62E4(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80044238(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall);
+
+
 
 #endif

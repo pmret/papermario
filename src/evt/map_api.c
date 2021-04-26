@@ -161,7 +161,7 @@ ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "evt/map_api", func_802C90FC);
+INCLUDE_ASM(ApiStatus, "evt/map_api", func_802C90FC, ScriptInstance* script, s32 isInitialCall);
 #endif
 
 ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {

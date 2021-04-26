@@ -8876,15 +8876,14 @@ segments:
     start: 0xCCB310
     vram: 0x80240000
     subsegments:
-    - [0xCCB310, c]
-    - [0xCCBE20, c]
-    - [0xCCD670, c]
-    - [0xCCD6A0, data]
-    - [0xCCDF10, data]
-    - [0xCCF7D0, data]
-    - [0xCD0240, data]
-    - [0xCD0280, data]
-    - [0xCD0620, rodata]
+    - [0xCCB310,       c, CCB310]
+    - [0xCCBE20,       c, CCBE20]
+    - [0xCCD670,       c, CCD670]
+    - [0xCCD6A0,   .data, CCB310]
+    - [0xCCF7D0,   .data, CCBE20]
+    - [0xCD0620, .rodata, CCB310]
+    - [0xCD0660, .rodata, CCBE20]
+    - [0xCD06C0,    .bss, CCBE20]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code

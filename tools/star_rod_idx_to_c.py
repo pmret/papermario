@@ -266,7 +266,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                         addr = unpack_from(f">I", staticNpc, curr_base+i)[0]
                         if not addr == 0:
                             if var_name != "flags" and addr in symbol_map:
-                                tmp_out += INDENT + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+                                if var_name == "extraAnimations":
+                                    tmp_out += INDENT + f".{var_name} = {symbol_map[addr][0][1]},\n"
+                                else:
+                                    tmp_out += INDENT + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+
                                 if symbol_map[addr][0][1] not in INCLUDED["functions"]:
                                     INCLUDES_NEEDED["forward"].append(symbol_map[addr][0][1])
                             else:
@@ -478,8 +482,8 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             bytes.read(0x10)
 
             main,entry_list,entry_count = unpack(">IIi", bytes.read(4 * 3))
-            out += f"    .main = N(main),\n"
-            out += f"    .entryList = {entry_list_name},\n"
+            out += f"    .main = &N(main),\n"
+            out += f"    .entryList = &{entry_list_name},\n"
             out += f"    .entryCount = ENTRY_COUNT({entry_list_name}),\n"
 
             bytes.read(0x1C)
@@ -491,7 +495,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 raise Exception(f"unknown MapConfig background {bg:X}")
             #out += f"    .tattle = 0x{tattle:X},\n"
             INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
-            out += f"    .tattle = MSG_{map_name}_tattle,\n"
+            out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"
 
             out += f"}};\n"
             afterHeader = True
