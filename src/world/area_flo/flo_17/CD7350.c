@@ -394,6 +394,28 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_17/CD7350", flo_17_func_80241C64_CD8F
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_802421C0_CD94A0);
+/*
+void N(func_802421C0_CD94A0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    if ((npc->duration <= 0) || (--npc->duration <= 0)) {
+        if (npc->turnAroundYawAdjustment == 0) {
+            npc->currentAnim = enemy->animList[9];
+            npc->moveSpeed = aiSettings->chaseSpeed;
+            if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
+                npc->collisionHeight = enemy->varTable[6] / 2;
+            }
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            if (npc->duration < enemy->varTable[3]) {
+                npc->duration = enemy->varTable[3];
+            }
+            enemy->varTable[4] = npc->duration;
+            script->functionTemp[0].s = 14;
+        }
+    }
+}
+*/
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
@@ -402,3 +424,223 @@ INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_802421C0_CD94A0);
 INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_802424D8_CD97B8);
 
 INCLUDE_ASM(s32, "world/area_flo/flo_17/CD7350", func_80242918_CD9BF8);
+/*
+ApiStatus N(func_80242918_CD9BF8)(ScriptInstance *script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* aiSettings = get_variable(script, *args);
+    s32 var;
+    u32 x, y, z;
+    f32 x2, y2, z2, w2;
+    Npc* npc2;
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->wander.detectShape;
+    territory.pointX = enemy->territory->wander.detect.x;
+    territory.pointZ = enemy->territory->wander.detect.z;
+    territory.sizeX = enemy->territory->wander.detectSizeX;
+    territory.sizeZ = enemy->territory->wander.detectSizeZ;
+    territory.unk_18 = 65.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall) {
+        enemy->varTable[6] = npc->collisionHeight;
+        enemy->unk_B0 |= 8;
+    }
+
+    if (isInitialCall || (enemy->varTable[10] == 100)) {
+        script->functionTemp[0].s = 100;
+        npc->duration = 0;
+        npc->currentAnim = enemy->animList[0];
+        npc->flags &= ~0x800;
+        enemy->flags |= 0x200000;
+        npc->flags = (npc->flags & ~0x200) | 8;
+        enemy->varTable[10] = 0;
+        enemy->varTable[11] = -1;
+        npc->pos.x = 0.0f;
+        npc->pos.y = -1000.0f;
+        npc->pos.z = 0.0f;
+    }
+
+    if (enemy->unk_B0 & 4) {
+        npc->duration = 0;
+        npc->collisionHeight = enemy->varTable[6];
+        enemy->unk_B0 &= ~4;
+        if (npc->flags & 0x800) {
+            npc->currentAnim = 0x4A0018;
+            npc->moveSpeed = 0.0f;
+            npc->jumpVelocity = 0.0f;
+            npc->jumpScale = 1.0f;
+            script->functionTemp[0].s = 102;
+        } else {
+            fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &var);
+            npc->currentAnim = enemy->animList[0];
+            script->functionTemp[1].s = 0;
+            script->functionTemp[0].s = 200;
+        }
+    }
+    get_screen_coords(0, npc->pos.x, npc->pos.y, npc->pos.z, &x, &y, &z);
+    if ((script->functionTemp[0].s < 100) && ((x + 50) >= 421)) {
+        script->functionTemp[0].s = 110;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            func_800495A0(script, aiSettings, territoryPtr);
+            npc->collisionHeight = enemy->varTable[6];
+            if (enemy->varTable[13] != 0) {
+                if (npc->pos.y <= 0.0) {
+                    npc->flags = (npc->flags & ~0x200) | 8;
+                } else {
+                    npc->flags = (npc->flags | 0x200) & ~8;
+                }
+            }
+            func_800496B8(script, aiSettings, territoryPtr);
+            break;
+
+        case 1:
+            func_800496B8(script, aiSettings, territoryPtr);
+            break;
+
+        case 2:
+            base_UnkNpcAIFunc1(script, aiSettings, territoryPtr);
+
+        case 3:
+            func_80049C04(script, aiSettings, territoryPtr);
+            break;
+
+        case 12:
+            N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
+        
+        case 13:
+            N(func_802421C0_CD94A0)(script, aiSettings, territoryPtr);
+            npc->collisionHeight = enemy->varTable[6];
+            break;
+
+        case 14:
+            N(UnkNpcAIFunc12)(script, aiSettings, territoryPtr);
+            break;
+
+        case 15:
+            N(set_script_owner_npc_col_height)(script, aiSettings, territoryPtr);
+            break;
+
+        case 100:
+            if (enemy->varTable[10] != 2) {
+                break;
+            }
+            npc2 = get_npc_unsafe(get_enemy(enemy->varTable[11])->npcID);
+            if (npc2->yaw < 180.0) {
+                npc->pos.x = npc2->pos.x + 12.0;
+            } else {
+                npc->pos.x = npc2->pos.x - 12.0;
+            }
+            npc->pos.y = npc2->pos.y + 25.0;
+            npc->pos.z = npc2->pos.z + 1.0;
+            npc->rotation.y = 0.0f;
+            npc->flags |= 8;
+            npc->flags &= ~2;
+            npc->flags &= ~0x200;
+            npc->renderYaw = 0.0f;
+            npc->currentAnim = 0x4A0018;
+            script->functionTemp[0].s = 101;
+
+        case 101:
+            if (enemy->varTable[10] != 3) {
+                break;
+            }
+            enemy->varTable[10] = 4;
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            npc->moveSpeed = 2.5f;
+            npc->jumpVelocity = 8.0f;
+            npc->jumpScale = 0.8f;
+            npc->flags |= 0x800;
+            script->functionTemp[0].s = 102;
+
+        case 102:
+            if (npc->moveSpeed > 0.0) {
+                x2 = npc->pos.x;
+                y2 = npc->pos.y;
+                z2 = npc->pos.z;
+                if (func_800DDC44(npc->unk_80, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius) == 0) {
+                    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+                } else {
+                    npc->moveSpeed = 0.0f;
+                }
+            }
+            
+
+            if (npc->jumpVelocity < 0.0) {
+                x2 = npc->pos.x;
+                y2 = npc->pos.y + 13.0;
+                z2 = npc->pos.z;
+                w2 = fabsf(npc->jumpVelocity) + 16.0;
+                if ((func_800DCB7C(npc->unk_80, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
+                    npc->pos.y = y2;
+                    enemy->territory->wander.point.x = npc->pos.x;
+                    enemy->territory->wander.point.y = npc->pos.y;
+                    enemy->territory->wander.point.z = npc->pos.z;
+                    enemy->territory->wander.detect.x = npc->pos.x;
+                    enemy->territory->wander.detect.y = npc->pos.y;
+                    enemy->territory->wander.detect.z = npc->pos.z;
+                    enemy->varTable[10] = 5;
+                    if (enemy->varTable[13] != 0) {
+                        if (npc->pos.y <= 0.0) {
+                            npc->flags = (npc->flags & ~0x200) | 8;
+                        } else {
+                            npc->flags = (npc->flags | 0x200) & ~8;
+                        }
+                    } else if (!enemy->territory->wander.isFlying) {
+                        npc->flags = (npc->flags | 0x200) & ~8;
+                    } else {
+                        npc->flags = (npc->flags & ~0x200) | 8;
+                    }
+                    npc->flags = (npc->flags | 0x40000) & ~0x800;
+                    npc->jumpVelocity = 0.0f;
+                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                    npc->currentAnim = 0x4A001A;
+                    npc->duration = 3;
+                    script->functionTemp[0].s = 103;
+                    break;
+                }
+            }
+            npc->pos.y += npc->jumpVelocity;
+            npc->jumpVelocity -= npc->jumpScale;
+            break;
+
+        case 103:
+            npc->duration--;
+            if (npc->duration <= 0) {
+                npc->flags &= 0xFFFBFFFF;
+                npc->currentAnim = 0x4A0001;
+                script->functionTemp[0].s = 0;
+            }
+            break;
+
+        case 110:
+            npc->duration = 30;
+            npc->pos.x = 0.0f;
+            npc->pos.z = 0.0f;
+            npc->pos.y = -1000.0f;
+            npc->flags = (npc->flags | 0xA) & ~0x200;
+            script->functionTemp[0].s = 111;
+
+        case 111:
+            npc->duration--;
+            if (npc->duration <= 0) {
+                enemy->varTable[10] = 0;
+                script->functionTemp[0].s = 100;
+            }
+            break;
+
+        case 200:
+            func_8004A73C(script);
+            break;
+
+    }
+    return ApiStatus_BLOCK;
+}
+*/

@@ -322,7 +322,7 @@ Script N(8024445C) = SCRIPT({
     GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 0:
     GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    N(func_80243368_CC6B78)();
+    N(UnkFunc42)();
     InterpNpcYaw(NPC_WORLD_LAKILESTER, SI_VAR(10), 0);
     SI_VAR(0) = SI_VAR(3);
     SI_VAR(1) = SI_VAR(4);
@@ -338,7 +338,7 @@ Script N(80244560) = SCRIPT({
     GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 0:
     GetNpcPos(NPC_LAKILULU0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    N(func_80243368_CC6B78)();
+    N(UnkFunc42)();
     InterpNpcYaw(NPC_LAKILULU0, SI_VAR(10), 0);
     SI_VAR(0) = SI_VAR(3);
     SI_VAR(1) = SI_VAR(4);
@@ -2093,10 +2093,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80243368_CC6B78)(ScriptInstance *script, s32 isInitialCall) {
-    script->varTable[10] = atan2(script->varTable[0], script->varTable[2], script->varTable[3], script->varTable[5]);
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc42.inc.c"
 
 ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(1);
