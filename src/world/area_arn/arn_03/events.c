@@ -1006,7 +1006,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
@@ -1142,7 +1142,7 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 100.0f;
+    territory.unk_18 = 100.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {

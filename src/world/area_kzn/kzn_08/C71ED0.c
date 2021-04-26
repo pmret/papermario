@@ -72,7 +72,7 @@ ApiStatus N(func_80241D5C_C731DC)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -141,7 +141,7 @@ ApiStatus N(func_80242354_C737D4)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -255,7 +255,7 @@ ApiStatus N(func_80242B58_C73FD8)(ScriptInstance *script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {

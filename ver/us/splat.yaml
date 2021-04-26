@@ -8862,15 +8862,13 @@ segments:
     start: 0xCC3810
     vram: 0x80240000
     subsegments:
-    - [0xCC3810, c]
-    - [0xCC3850, c]
-    - [0xCC6DE0, c]
-    - [0xCC6E80, data]
-    - [0xCC7160, data]
-    - [0xCC7250, data]
-    - [0xCCB230, rodata]
-    - [0xCCB298, rodata]
-    - [0xCCB2F8, rodata]
+    - [0xCC3810,       c, CC3810]
+    - [0xCC3850,       c, CC3850]
+    - [0xCC6DE0,       c, CC6DE0]
+    - [0xCC6E80,   .data, CC3850]
+    - [0xCCB230, .rodata, CC3850]
+    - [0xCCB300, .rodata, CC6DE0]
+    - [0xCCB310,    .bss, CC6DE0]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code

@@ -337,6 +337,9 @@ s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
 EntityModel* get_entity_model(s32 idx);
 f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
+void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
+void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
+
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
 ApiStatus func_80045900(ScriptInstance* script);

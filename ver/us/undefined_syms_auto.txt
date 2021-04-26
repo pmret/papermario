@@ -3108,3 +3108,4 @@ code_eb1170_bss = 0x802442D0;
 D_000001E4 = 0x1E4;
 broken_kmr_04_function_addr = 0x80243770;
 trd_06_fake_sym = 0x802491C0;
+jan_05_temp_bss = 0x80247AF0;

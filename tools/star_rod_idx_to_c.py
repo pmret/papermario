@@ -515,6 +515,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f" {word:.01f}f,"
 
             out += f"\n}};\n"
+        elif struct["type"] == "VectorList":
+            data = bytes.read(struct["length"])
+            if len(data) > 0:
+                out += f"Vec3f {name}[] = {{\n"
+                out += f"\t"
+            for i,pos in enumerate(range(0, len(data), 0xC)):
+                x, y, z = unpack_from(">fff", data, pos)
+                out += f" {{ {x:.01f}, {y:.01f}, {z:.01f} }},"
+                if (i+1) % 2 == 0:
+                    out += f"\n\t"
+            out += f"\n}};\n"
+
         elif struct["type"] == "Formation":
             out += f"Formation {struct['name']} = {{\n"
 
