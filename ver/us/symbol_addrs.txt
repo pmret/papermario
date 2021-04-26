@@ -6982,7 +6982,6 @@ battle_item_strange_cake_DrinkItem = 0x802A20F4; // type:data rom:0x7323F4
 battle_item_strange_cake_data = 0x802A27D0; // type:data rom:0x732AD0
 battle_item_strange_cake_D_802A2848_732B48 = 0x802A2848; // type:data rom:0x732B48
 battle_item_strange_cake_D_802A2858_732B58 = 0x802A2858; // type:data rom:0x732B58
-D_802A285A_732B5A = 0x802A285A; // type:data rom:0x732B5A
 battle_item_strange_cake_script6 = 0x802A2870; // type:data rom:0x732B70
 battle_item_strange_cake_script7 = 0x802A2B70; // type:data rom:0x732E70
 battle_item_strange_cake_script8 = 0x802A2C40; // type:data rom:0x732F40

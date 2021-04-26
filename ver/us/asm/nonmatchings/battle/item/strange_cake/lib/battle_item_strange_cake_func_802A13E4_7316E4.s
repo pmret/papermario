@@ -6,9 +6,9 @@
 glabel jtbl_802A2DB0_7330B0
 .word L802A1434_731734, L802A14D0_7317D0, L802A1614_731914, L802A1698_731998, L802A1734_731A34, L802A1754_731A54, 0, 0
 
-
 .section .text
-glabel func_802A13E4_7316E4
+
+glabel battle_item_strange_cake_func_802A13E4_7316E4
 /* 7316E4 802A13E4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 7316E8 802A13E8 0080302D */  daddu     $a2, $a0, $zero
 /* 7316EC 802A13EC AFBF0020 */  sw        $ra, 0x20($sp)
@@ -31,8 +31,8 @@ glabel func_802A13E4_7316E4
 /* 73172C 802A142C 00400008 */  jr        $v0
 /* 731730 802A1430 00000000 */   nop
 glabel L802A1434_731734
-/* 731734 802A1434 3C05802A */  lui       $a1, %hi(func_802A123C_73153C)
-/* 731738 802A1438 24A5123C */  addiu     $a1, $a1, %lo(func_802A123C_73153C)
+/* 731734 802A1434 3C05802A */  lui       $a1, %hi(battle_item_strange_cake_func_802A123C_73153C)
+/* 731738 802A1438 24A5123C */  addiu     $a1, $a1, %lo(battle_item_strange_cake_func_802A123C_73153C)
 /* 73173C 802A143C 0C048C8F */  jal       create_dynamic_entity_frontUI
 /* 731740 802A1440 0000202D */   daddu    $a0, $zero, $zero
 /* 731744 802A1444 3C01802A */  lui       $at, %hi(D_802A2E00)
