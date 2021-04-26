@@ -2,7 +2,7 @@
 #include "map.h"
 #include "npc.h"
 
-s32 func_802DE2AC(s32 arg0, s32 arg1, f32 arg2);
+s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 
 void npc_callback_no_op(void) {
 }
@@ -128,7 +128,7 @@ void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
 
     if (!(flagsTemp & 0x40000000)) {
         if (!(flagsTemp & NPC_FLAG_1000000)) {
-            func_802DE2AC(npc->spriteInstanceID, anim, npc->animationSpeed);
+            spr_update_sprite(npc->spriteInstanceID, anim, npc->animationSpeed);
         }
     }
 }
@@ -228,7 +228,7 @@ INCLUDE_ASM(s32, "npc", func_8003C3D8);
 
 INCLUDE_ASM(s32, "npc", func_8003C428);
 
-INCLUDE_ASM(s32, "npc", func_8003C444);
+INCLUDE_ASM(s32, "npc", npc_update_decorations);
 
 INCLUDE_ASM(s32, "npc", func_8003C53C);
 
