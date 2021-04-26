@@ -123,7 +123,7 @@ ApiStatus N(func_8024134C_CF3F1C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241668_CF4238);
 
-INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_802418E8_CF44B8);
+#include "world/common/UnkFunc45.inc.c"
 
 INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241944_CF4514);
 /*
@@ -180,7 +180,7 @@ ApiStatus N(func_80241944_CF4514)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241668_CF4238)(script, aiSettings, territoryPtr);
             break;
         case 14:
-            N(func_802418E8_CF44B8)(script, aiSettings, territoryPtr);
+            N(UnkFunc45)(script, aiSettings, territoryPtr);
             break;
     }
 

@@ -123,7 +123,7 @@ glabel L802424EC_C7396C
 glabel L80242504_C73984
 /* C73984 80242504 0280202D */  daddu     $a0, $s4, $zero
 /* C73988 80242508 0200282D */  daddu     $a1, $s0, $zero
-/* C7398C 8024250C 0C0908BE */  jal       func_802422F8_C73778
+/* C7398C 8024250C 0C0908BE */  jal       kzn_08_UnkFunc45
 /* C73990 80242510 0260302D */   daddu    $a2, $s3, $zero
 glabel L80242514_C73994
 /* C73994 80242514 0000102D */  daddu     $v0, $zero, $zero

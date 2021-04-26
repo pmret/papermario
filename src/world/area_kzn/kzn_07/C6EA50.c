@@ -127,6 +127,6 @@ ApiStatus N(func_80241B2C_C6FE5C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_07/C6EA50", func_80241E48_C70178);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_07/C6EA50", func_802420C8_C703F8);
+#include "world/common/UnkFunc45.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_07/C6EA50", func_80242124_C70454);

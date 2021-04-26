@@ -640,17 +640,7 @@ void N(func_80242478_CD42A8)(ScriptInstance *script, NpcAISettings *aiSettings, 
     script->functionTemp[0].s = 12;
 }
 
-void N(func_802426F8_CD4528)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        enemy->varTable[2] = 0;
-        npc->duration = 0;
-        script->functionTemp[0].s = 0;
-    }
-}
+#include "world/common/UnkFunc45.inc.c"
 
 ApiStatus N(func_80242754_CD4584)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -704,7 +694,7 @@ ApiStatus N(func_80242754_CD4584)(ScriptInstance *script, s32 isInitialCall) {
             N(func_80242478_CD42A8)(script, aiSettings, territoryPtr);
             break;
         case 20:
-            N(func_802426F8_CD4528)(script, aiSettings, territoryPtr);
+            N(UnkFunc45)(script, aiSettings, territoryPtr);
             break;
     }
 

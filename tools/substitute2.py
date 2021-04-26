@@ -1,16 +1,17 @@
 from pathlib import Path
 
-FUNC="""    script->varTable[0] = 0;
-    do {} while(0);
-    if (gPlayerActionState == 14) {
-        script->varTable[0] = 1;
-    } else if (gPlayerActionState == 16) {
-        script->varTable[0] = 1;
+FUNC="""    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration <= 0) {
+        enemy->varTable[2] = 0;
+        npc->duration = 0;
+        script->functionTemp[0].s = 0;
     }
-    return ApiStatus_DONE2;
 }""".splitlines()
 
-NEW_FUNC_NAME = f"UnkFunc44"
+NEW_FUNC_NAME = f"UnkFunc45"
 NEW_INCLUDE = f"#include \"world/common/{NEW_FUNC_NAME}.inc.c\""
 
 RENAMED = []
