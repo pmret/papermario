@@ -8850,12 +8850,11 @@ segments:
     start: 0xCC0E30
     vram: 0x80240000
     subsegments:
-    - [0xCC0E30, c]
-    - [0xCC0E70, c]
-    - [0xCC1520, data]
-    - [0xCC16A0, data]
-    - [0xCC1C60, data]
-    - [0xCC3800, rodata]
+    - [0xCC0E30,       c, CC0E30]
+    - [0xCC0E70,       c, CC0E70]
+    - [0xCC1520,   .data, CC0E70]
+    - [0xCC3800, .rodata, CC0E70]
+    - [0xCC3810,    .bss, CC0E70]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
