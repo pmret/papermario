@@ -387,7 +387,7 @@ Script N(80243DB0) = SCRIPT({
 
 Script N(80243E80) = SCRIPT({
     if (SI_AREA_FLAG(39) == 0) {
-        N(func_80240E18_CD2C48)();
+        N(UnkFunc44)();
         if (SI_VAR(0) == 0) {
             return;
         }
@@ -686,13 +686,4 @@ ApiStatus N(func_802406E0_CD2510)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc24.inc.c"
 
-ApiStatus N(func_80240E18_CD2C48)(ScriptInstance *script, s32 isInitialCall) {
-    script->varTable[0] = 0;
-    do {} while(0);
-    if (gPlayerActionState == 14) {
-        script->varTable[0] = 1;
-    } else if (gPlayerActionState == 16) {
-        script->varTable[0] = 1;
-    }
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc44.inc.c"

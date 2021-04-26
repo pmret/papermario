@@ -84,7 +84,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241310_D51300);
 
 #include "world/common/GetEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_80241478_D51468);
+#include "world/common/UnkFunc44.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_02/D50010", func_802414A8_D51498);
 

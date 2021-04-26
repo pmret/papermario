@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240E18_CD2C48
+glabel flo_16_UnkFunc44
 /* CD2C48 80240E18 AC800084 */  sw        $zero, 0x84($a0)
 /* CD2C4C 80240E1C 3C038011 */  lui       $v1, %hi(gPlayerActionState)
 /* CD2C50 80240E20 8063F07C */  lb        $v1, %lo(gPlayerActionState)($v1)
