@@ -179,10 +179,10 @@ glabel D_8014C270
 glabel D_8014C280
 .word 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000
 
-glabel D_8014C290
+glabel MessagePlural
 .word 0x53FD0000
 
-glabel D_8014C294
+glabel MessageSingular
 .short 0xF0FD
 
 glabel D_8014C296

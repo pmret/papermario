@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8028051C
+glabel ShowShopPurchaseDialog
 /* 7E139C 8028051C 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 7E13A0 80280520 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 7E13A4 80280524 0080982D */  daddu     $s3, $a0, $zero
@@ -53,7 +53,7 @@ glabel func_8028051C
 .L802805DC:
 /* 7E145C 802805DC 8E250000 */  lw        $a1, ($s1)
 /* 7E1460 802805E0 8E460004 */  lw        $a2, 4($s2)
-/* 7E1464 802805E4 0C0A0022 */  jal       func_80280088
+/* 7E1464 802805E4 0C0A0022 */  jal       shop_owner_buy_dialog
 /* 7E1468 802805E8 0000202D */   daddu    $a0, $zero, $zero
 /* 7E146C 802805EC AE620074 */  sw        $v0, 0x74($s3)
 /* 7E1470 802805F0 0C03A6D5 */  jal       increment_status_menu_disabled
@@ -131,7 +131,7 @@ glabel func_8028051C
 /* 7E1578 802806F8 0043102A */  slt       $v0, $v0, $v1
 /* 7E157C 802806FC 10400006 */  beqz      $v0, .L80280718
 /* 7E1580 80280700 00000000 */   nop
-/* 7E1584 80280704 0C0A005F */  jal       func_8028017C
+/* 7E1584 80280704 0C0A005F */  jal       shop_owner_continue_speech
 /* 7E1588 80280708 24040001 */   addiu    $a0, $zero, 1
 /* 7E158C 8028070C AE620074 */  sw        $v0, 0x74($s3)
 /* 7E1590 80280710 080A024A */  j         .L80280928
@@ -147,7 +147,7 @@ glabel func_8028051C
 /* 7E15B4 80280734 2403FFFF */  addiu     $v1, $zero, -1
 /* 7E15B8 80280738 14430007 */  bne       $v0, $v1, .L80280758
 /* 7E15BC 8028073C 00000000 */   nop
-/* 7E15C0 80280740 0C0A005F */  jal       func_8028017C
+/* 7E15C0 80280740 0C0A005F */  jal       shop_owner_continue_speech
 /* 7E15C4 80280744 24040002 */   addiu    $a0, $zero, 2
 /* 7E15C8 80280748 AE620074 */  sw        $v0, 0x74($s3)
 /* 7E15CC 8028074C 24020004 */  addiu     $v0, $zero, 4
@@ -176,14 +176,14 @@ glabel func_8028051C
 /* 7E1620 802807A0 0C039D5D */  jal       add_item
 /* 7E1624 802807A4 00000000 */   nop
 .L802807A8:
-/* 7E1628 802807A8 0C0A005F */  jal       func_8028017C
+/* 7E1628 802807A8 0C0A005F */  jal       shop_owner_continue_speech
 /* 7E162C 802807AC 24040003 */   addiu    $a0, $zero, 3
 /* 7E1630 802807B0 AE620074 */  sw        $v0, 0x74($s3)
 /* 7E1634 802807B4 24020005 */  addiu     $v0, $zero, 5
 /* 7E1638 802807B8 080A024A */  j         .L80280928
 /* 7E163C 802807BC AE620070 */   sw       $v0, 0x70($s3)
 .L802807C0:
-/* 7E1640 802807C0 0C0A00B4 */  jal       func_802802D0
+/* 7E1640 802807C0 0C0A00B4 */  jal       shop_owner_reset_speech
 /* 7E1644 802807C4 24040016 */   addiu    $a0, $zero, 0x16
 /* 7E1648 802807C8 AE620074 */  sw        $v0, 0x74($s3)
 /* 7E164C 802807CC 24020006 */  addiu     $v0, $zero, 6
