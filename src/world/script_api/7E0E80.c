@@ -3,13 +3,28 @@
 extern s32 MessagePlural;
 extern s32 MessageSingular;
 
-extern s32 D_80283E80_7E4D00;
-extern s32 D_80283EB0_7E4D30;
-extern s32 D_80283EE0_7E4D60;
-extern s32 D_80283F2C_7E4DAC;
-extern s32 D_80284034_7E4EB4;
 extern s32 D_80286520;
 extern s32 D_80286524;
+
+ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall);
+ApiStatus ShowShopPurchaseDialog(ScriptInstance* script, s32 isInitialCall);
+ApiStatus ShowShopOwnerDialog(ScriptInstance* script, s32 isInitialCall);
+
+s32 D_80283E80_7E4D00[] = { 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+s32 D_80283EB0_7E4D30[] = { 0x00000043, 0x00000006, ContinueSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+s32 D_80283EE0_7E4D60[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+s32 D_80283F2C_7E4DAC[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C80, 0xFE363C81, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+s32 D_80283F58_7E4DD8[] = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C81, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000000, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000002, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000003, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000001, 0x0000000A, 0x00000043, 0x00000001, func_802803C8, 0x0000000A, 0x00000002, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000013, 0x00000000, 0x00000043, 0x00000002, func_80280410, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+s32 D_80284034_7E4EB4[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+
+static s32 D_80286520;
+static s32 D_80286524;
 
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -57,14 +72,11 @@ s32 shop_owner_continue_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     ScriptInstance* script = start_script(&D_80283EB0_7E4D30, 1, 0);
-    s32 idleAnim;
 
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    idleAnim = shop->owner->idleAnim;
-    script->varTable[3] = idleAnim;
-    script->functionTemp[3].s = idleAnim;
+    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -74,7 +86,6 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     s32 phi_a0;
     ScriptInstance* script;
-    s32 idleAnim;
 
     set_message_value(amount, 0);
 
@@ -90,9 +101,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    idleAnim = shop->owner->idleAnim;
-    script->varTable[3] = idleAnim;
-    script->functionTemp[3].s = idleAnim;
+    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -101,14 +110,11 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     ScriptInstance* script = start_script(&D_80283EE0_7E4D60, 1, 0);
-    s32 idleAnim;
 
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    idleAnim = shop->owner->idleAnim;
-    script->varTable[3] = idleAnim;
-    script->functionTemp[3].s = idleAnim;
+    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -116,13 +122,10 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
 s32 shop_owner_end_speech(void) {
     Shop* shop = gGameStatusPtr->mapShop;
     ScriptInstance* script = start_script(&D_80283F2C_7E4DAC, 1, 0);
-    s32 idleAnim;
 
     script->varTable[0] = shop->owner->npcID;
     script->varTable[1] = shop->owner->talkAnim;
-    idleAnim = shop->owner->idleAnim;
-    script->varTable[2] = idleAnim;
-    script->functionTemp[3].s = idleAnim;
+    script->functionTemp[3].s = script->varTable[2] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -145,7 +148,7 @@ ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Needs data migration
+// BSS nop issue
 #ifdef NON_MATCHING
 ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -185,7 +188,7 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280410);
 #endif
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", ShowShopPurchaseDialog);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
 
@@ -217,7 +220,7 @@ s32 shop_get_sell_price(s32 itemID) {
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_get_sell_price);
 #endif
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", ShowShopOwnerDialog);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopOwnerDialog, ScriptInstance* script, s32 isInitialCall);
 
 void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;

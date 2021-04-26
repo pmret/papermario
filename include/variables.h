@@ -365,6 +365,6 @@ extern s16 gCurrentCamID;
 extern s32 D_803DA800;
 
 // Dead code
-extern PlayerStatus* dead_gPlayerStatusPtr; // gPlayerStatusPtr
+extern PlayerStatus* dead_gPlayerStatusPtr;
 
 #endif

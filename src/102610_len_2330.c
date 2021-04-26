@@ -48,7 +48,6 @@ void save_game_at_player_position(void) {
 }
 
 void func_802E1204(Entity* entity) {
-
     if (!get_global_flag(SI_SAVE_FLAG(95))) {
         s32* temp = &D_802EB390;
         *temp = 0;
