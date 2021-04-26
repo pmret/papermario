@@ -53,8 +53,8 @@ glabel func_80242218_EF4828
 /* EF48C4 802422B4 00021043 */  sra       $v0, $v0, 1
 /* EF48C8 802422B8 A60200A8 */  sh        $v0, 0xa8($s0)
 .L802422BC:
-/* EF48CC 802422BC 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF48D0 802422C0 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF48CC 802422BC 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF48D0 802422C0 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF48D4 802422C4 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EF48D8 802422C8 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EF48DC 802422CC 8C460028 */  lw        $a2, 0x28($v0)

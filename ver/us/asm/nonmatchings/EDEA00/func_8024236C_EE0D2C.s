@@ -53,8 +53,8 @@ glabel func_8024236C_EE0D2C
 /* EE0DC8 80242408 00021043 */  sra       $v0, $v0, 1
 /* EE0DCC 8024240C A60200A8 */  sh        $v0, 0xa8($s0)
 .L80242410:
-/* EE0DD0 80242410 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EE0DD4 80242414 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EE0DD0 80242410 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EE0DD4 80242414 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EE0DD8 80242418 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EE0DDC 8024241C C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EE0DE0 80242420 8C460028 */  lw        $a2, 0x28($v0)

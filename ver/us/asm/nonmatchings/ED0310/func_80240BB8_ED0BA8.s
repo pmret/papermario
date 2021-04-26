@@ -107,8 +107,8 @@ glabel func_80240BB8_ED0BA8
 /* ED0D28 80240D38 44821000 */  mtc1      $v0, $f2
 /* ED0D2C 80240D3C 00000000 */  nop
 /* ED0D30 80240D40 468010A0 */  cvt.s.w   $f2, $f2
-/* ED0D34 80240D44 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* ED0D38 80240D48 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* ED0D34 80240D44 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* ED0D38 80240D48 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* ED0D3C 80240D4C 46020000 */  add.s     $f0, $f0, $f2
 /* ED0D40 80240D50 3C014024 */  lui       $at, 0x4024
 /* ED0D44 80240D54 44812800 */  mtc1      $at, $f5

@@ -47,8 +47,8 @@ glabel func_80240500_EB9350
 /* EB93F8 802405A8 E7A20014 */  swc1      $f2, 0x14($sp)
 /* EB93FC 802405AC 0C01D444 */  jal       func_80075110
 /* EB9400 802405B0 E7A40018 */   swc1     $f4, 0x18($sp)
-/* EB9404 802405B4 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EB9408 802405B8 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EB9404 802405B4 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EB9408 802405B8 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EB940C 802405BC C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EB9410 802405C0 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EB9414 802405C4 8C460028 */  lw        $a2, 0x28($v0)

@@ -33,8 +33,8 @@ glabel func_80242374_EEF474
 /* EEF4E4 802423E4 8C42000C */  lw        $v0, 0xc($v0)
 /* EEF4E8 802423E8 AE420028 */  sw        $v0, 0x28($s2)
 /* EEF4EC 802423EC C6000018 */  lwc1      $f0, 0x18($s0)
-/* EEF4F0 802423F0 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EEF4F4 802423F4 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EEF4F0 802423F0 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EEF4F4 802423F4 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EEF4F8 802423F8 E6400018 */  swc1      $f0, 0x18($s2)
 /* EEF4FC 802423FC 8C460028 */  lw        $a2, 0x28($v0)
 /* EEF500 80242400 0C00ABDC */  jal       fio_validate_header_checksums

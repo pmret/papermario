@@ -1712,6 +1712,7 @@ segments:
     - [0x324a10, c, goompa]
     - [0x324e80, .data, goompa]
     - [0x324F00, .rodata, goompa]
+    - [0x324F00, .bss, goompa]
   - type: code
     dir: world/partner
     name: world_partner_goombaria

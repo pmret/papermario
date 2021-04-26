@@ -18,8 +18,8 @@ glabel func_8024219C_EF47AC
 /* EF47E0 802421D0 AE030028 */  sw        $v1, 0x28($s0)
 /* EF47E4 802421D4 96220076 */  lhu       $v0, 0x76($s1)
 /* EF47E8 802421D8 A602008E */  sh        $v0, 0x8e($s0)
-/* EF47EC 802421DC 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF47F0 802421E0 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF47EC 802421DC 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF47F0 802421E0 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF47F4 802421E4 C60E0040 */  lwc1      $f14, 0x40($s0)
 /* EF47F8 802421E8 8C460028 */  lw        $a2, 0x28($v0)
 /* EF47FC 802421EC 0C00ABDC */  jal       fio_validate_header_checksums

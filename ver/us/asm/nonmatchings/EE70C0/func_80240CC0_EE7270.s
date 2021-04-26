@@ -230,8 +230,8 @@ glabel func_80240CC0_EE7270
 /* EE75CC 8024101C 3C014024 */  lui       $at, 0x4024
 /* EE75D0 80241020 44810800 */  mtc1      $at, $f1
 /* EE75D4 80241024 44800000 */  mtc1      $zero, $f0
-/* EE75D8 80241028 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EE75DC 8024102C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EE75D8 80241028 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EE75DC 8024102C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EE75E0 80241030 460010A1 */  cvt.d.s   $f2, $f2
 /* EE75E4 80241034 46201080 */  add.d     $f2, $f2, $f0
 /* EE75E8 80241038 C440002C */  lwc1      $f0, 0x2c($v0)

@@ -240,8 +240,8 @@ glabel func_80241000_EEE100
 /* EEE45C 8024135C 3C014024 */  lui       $at, 0x4024
 /* EEE460 80241360 44810800 */  mtc1      $at, $f1
 /* EEE464 80241364 44800000 */  mtc1      $zero, $f0
-/* EEE468 80241368 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EEE46C 8024136C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EEE468 80241368 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EEE46C 8024136C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EEE470 80241370 460010A1 */  cvt.d.s   $f2, $f2
 /* EEE474 80241374 46201080 */  add.d     $f2, $f2, $f0
 /* EEE478 80241378 C440002C */  lwc1      $f0, 0x2c($v0)
