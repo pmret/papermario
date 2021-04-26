@@ -7,7 +7,7 @@ glabel D_80098050
 .ascii "FPCSR:%08XH\0"
 
 glabel D_8009805C
-.word 0x28257329, 0x00000000
+.ascii "(%s)\0\0\0\0"
 
 .section .text
 
