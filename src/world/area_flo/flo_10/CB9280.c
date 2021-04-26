@@ -17,7 +17,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = 0x80240000, //MSG_flo_10_tattle, broken value, fails to build
+    .tattle = N(func_80240000_CB9200),
 };
 
 Script N(802414E0) = SCRIPT({

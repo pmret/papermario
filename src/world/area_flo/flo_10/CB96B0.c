@@ -142,7 +142,7 @@ typedef struct {
     /* 0x0C */ N(UnkStruct2)* unk_0C;
 } N(UnkStruct);
 
-void func_80240A98_CB9C98(void) {
+void N(func_80240A98_CB9C98)(void) {
     Camera* camera = &gCameras[gCurrentCameraID];
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(0x30));
     // modelNode propertylist? Causes too many derefences and conflicts with the modelNode load below
