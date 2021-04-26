@@ -8891,12 +8891,8 @@ segments:
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
-    - [0xCD06C0, data]
-    - [0xCD07E0, data]
-    - [0xCD09C0, data]
-    - [0xCD19A0, data]
-    - [0xCD1A20, data]
-    - [0xCD1E20, rodata]
+    - [0xCD06C0,   .data, CD06C0]
+    - [0xCD1E20, .rodata, CD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
