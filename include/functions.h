@@ -48,6 +48,10 @@ void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
 
+void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
+void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
+void set_hud_element_scale(s32 index, f32 scale);
+
 void create_shadow_callback(Shadow* entity);
 void func_802E10F4(Entity* entity);
 void func_802E114C(void);

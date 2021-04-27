@@ -72,7 +72,7 @@ glabel L802A4AA8_419838
 /* 4198CC 802A4B3C 3C053EE6 */  lui       $a1, 0x3ee6
 /* 4198D0 802A4B40 34A56666 */  ori       $a1, $a1, 0x6666
 /* 4198D4 802A4B44 0240202D */  daddu     $a0, $s2, $zero
-/* 4198D8 802A4B48 0C051308 */  jal       func_80144C20
+/* 4198D8 802A4B48 0C051308 */  jal       set_hud_element_scale
 /* 4198DC 802A4B4C AE720000 */   sw       $s2, ($s3)
 /* 4198E0 802A4B50 0240202D */  daddu     $a0, $s2, $zero
 /* 4198E4 802A4B54 0C051280 */  jal       set_icon_flags
@@ -276,7 +276,7 @@ glabel L802A4D4C_419ADC
 /* 419BDC 802A4E4C 00822021 */  addu      $a0, $a0, $v0
 /* 419BE0 802A4E50 8C84D628 */  lw        $a0, %lo(D_802AD628)($a0)
 /* 419BE4 802A4E54 3C053EE6 */  lui       $a1, 0x3ee6
-/* 419BE8 802A4E58 0C051308 */  jal       func_80144C20
+/* 419BE8 802A4E58 0C051308 */  jal       set_hud_element_scale
 /* 419BEC 802A4E5C 34A56666 */   ori      $a1, $a1, 0x6666
 /* 419BF0 802A4E60 0C05272D */  jal       sfx_play_sound
 /* 419BF4 802A4E64 240400C7 */   addiu    $a0, $zero, 0xc7

@@ -555,7 +555,7 @@ glabel pause_badges_draw_contents
 /* 13B070 80247D30 0220202D */   daddu    $a0, $s1, $zero
 /* 13B074 80247D34 3C053F2B */  lui       $a1, 0x3f2b
 /* 13B078 80247D38 34A5BA99 */  ori       $a1, $a1, 0xba99
-/* 13B07C 80247D3C 0C051308 */  jal       func_80144C20
+/* 13B07C 80247D3C 0C051308 */  jal       set_hud_element_scale
 /* 13B080 80247D40 0220202D */   daddu    $a0, $s1, $zero
 .L80247D44:
 /* 13B084 80247D44 0C091CAA */  jal       pause_badges_scroll_offset_x

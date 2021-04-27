@@ -81,7 +81,7 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_icon_flags);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144A5C);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144C20);
+INCLUDE_ASM(void, "d5a50_len_5fd0", set_hud_element_scale, s32 index, f32 scale);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144DF4);
 

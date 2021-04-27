@@ -967,7 +967,7 @@ typedef struct PrintContext {
     /* 0x53A */ char unk_53A[30];
 } PrintContext; // size = 0x558
 
-typedef struct ShopItemEntitiy {
+typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;
     /* 0x04 */ Vec3f pos;
 } ShopItemEntity; // size = 0x10
@@ -1318,7 +1318,7 @@ typedef struct ShopItemLocation {
 
 typedef struct StaticInventoryItem {
     /* 0x0 */ s32 unk_00;
-    /* 0x4 */ char unk_04[0x4];
+    /* 0x4 */ s32 price;
     /* 0x8 */ s32 unk_08;
 } StaticInventoryItem; // size = 0xC
 

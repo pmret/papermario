@@ -486,7 +486,7 @@ glabel pause_tutorial_draw_contents
 /* 1372A4 80243F64 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 1372A8 80243F68 00822021 */  addu      $a0, $a0, $v0
 /* 1372AC 80243F6C 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
-/* 1372B0 80243F70 0C051308 */  jal       func_80144C20
+/* 1372B0 80243F70 0C051308 */  jal       set_hud_element_scale
 /* 1372B4 80243F74 00000000 */   nop
 /* 1372B8 80243F78 8EA20000 */  lw        $v0, ($s5)
 /* 1372BC 80243F7C 00021080 */  sll       $v0, $v0, 2

@@ -180,7 +180,7 @@ glabel shop_draw_items
 /* 7E264C 802817CC 26660005 */   addiu    $a2, $s3, 5
 /* 7E2650 802817D0 8E440020 */  lw        $a0, 0x20($s2)
 /* 7E2654 802817D4 3C053F33 */  lui       $a1, 0x3f33
-/* 7E2658 802817D8 0C051308 */  jal       func_80144C20
+/* 7E2658 802817D8 0C051308 */  jal       set_hud_element_scale
 /* 7E265C 802817DC 34A53333 */   ori      $a1, $a1, 0x3333
 /* 7E2660 802817E0 0C0511EA */  jal       draw_icon_0
 /* 7E2664 802817E4 8E440020 */   lw       $a0, 0x20($s2)

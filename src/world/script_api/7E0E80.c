@@ -186,61 +186,65 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, ScriptInstance* script, s32 isInitialCall);
 
+//dumb stuff
+#ifdef NON_MATCHING
+extern s32 D_8008A680[337][2];
+
+void shop_open_item_select_popup(s32 mode) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    PopupMenu* menu = &shop->itemSelectMenu;
+    s32 numItemSlots;
+    s32 popupType;
+    s32 i;
+    s32 numEntries;
+
+    switch (mode) {
+        case 0:
+            numItemSlots = 10;
+            popupType = 5;
+            break;
+        case 1:
+            numItemSlots = 10;
+            popupType = 6;
+            break;
+        default:
+            numItemSlots = 32;
+            popupType = 7;
+    }
+
+    numEntries = 0;
+
+    for (i = 0; i < numItemSlots; i++) {
+        s32 itemID;
+
+        if (mode >= 0 && mode < 2) {
+            itemID = gPlayerData.invItems[i];
+        } else {
+            itemID = gPlayerData.storedItems[i];
+        }
+
+        if (itemID != 0) {
+            menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+            menu->userIndex[i] = i;
+            menu->enabled[i] = TRUE;
+            menu->nameString[i] = gItemTable[itemID].nameString;
+            menu->descString[i] = gItemTable[itemID].itemString;
+            menu->value[i] = shop_get_sell_price(itemID);
+            numEntries++;
+        }
+    }
+
+    menu->popupType = popupType;
+    menu->numEntries = numEntries;
+    menu->initialPos = 0;
+    func_800F4FC4(menu);
+    func_800E9894();
+    func_800E98EC();
+    open_status_menu_short();
+}
+#else
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
-// extern s32 D_8008A680[337][2];
-
-// void shop_open_item_select_popup(s32 mode) {
-//     Shop* shop = gGameStatusPtr->mapShop;
-//     PopupMenu* menu = &shop->itemSelectMenu;
-//     s32 numItemSlots;
-//     s32 popupType;
-//     s32 i;
-//     s32 numEntries;
-
-//     switch (mode) {
-//         case 0:
-//             numItemSlots = 10;
-//             popupType = 5;
-//             break;
-//         case 1:
-//             numItemSlots = 10;
-//             popupType = 6;
-//             break;
-//         default:
-//             numItemSlots = 32;
-//             popupType = 7;
-//     }
-
-//     numEntries = 0;
-
-//     for (i = 0; i < numItemSlots; i++) {
-//         s32 itemID;
-
-//         if (mode < 2) {
-//             itemID = gPlayerData.invItems[i];
-//         } else {
-//             itemID = gPlayerData.storedItems[i];
-//         }
-
-//         if (itemID != 0) {
-//             menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
-//             menu->userIndex[i] = i;
-//             menu->enabled[i] = TRUE;
-//             menu->nameString[i] = gItemTable[itemID].nameString;
-//             menu->descString[i] = gItemTable[itemID].itemString;
-//             menu->value[i] = shop_get_sell_price(itemID);
-//             numEntries++;
-//         }
-//     }
-
-//     menu->popupType = popupType;
-//     menu->numEntries = numEntries;
-//     menu->initialPos = 0;
-//     func_800F4FC4(menu);
-//     func_800E9894();
-//     func_800E98EC();
-//     open_status_menu_short();
-// }
+#endif
 
 s32 shop_update_item_select_popup(s32* selectedIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
@@ -306,81 +310,79 @@ void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     draw_msg(item->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
 
+// Problems with the struct iteration
+#ifdef NON_MATCHING
+void shop_draw_items(void) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    StaticInventoryItem* staticItems;
+    Camera* camera;
+    s32 i;
+    s32 xTemp;
+    s32 yTemp;
+    s32 xOffset;
+    f32 x, y, z, s;
+    f32 inX, inY, inZ;
+    ShopItemEntity* shopItemEntities;
+
+    if (shop->flags & 1) {
+        set_window_update(10, basic_window_update);
+        set_window_update(11, basic_window_update);
+    } else {
+        set_window_update(10, basic_hidden_window_update);
+        set_window_update(11, basic_hidden_window_update);
+    }
+
+    if (shop->flags & 1) {
+        camera = &gCameras[gCurrentCameraID];
+        staticItems = shop->staticInventory;
+        shopItemEntities = gGameStatusPtr->shopItemEntities;
+
+        for (i = 0; i < shop->numItems; i++) {
+            inX = shopItemEntities[i].pos.x;
+            inY = shopItemEntities[i].pos.y + 30.0f;
+            inZ = shopItemEntities[i].pos.z;
+
+            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+
+            s = 1.0f / s;
+
+            x *= s;
+            y *= -s;
+            z = (z * s + 1.0f) * 0.5;
+
+            if (z > 0.0f && z < 1.0f) {
+                xTemp = (((x * camera->viewportW) + camera->viewportW) * 0.5) + camera->viewportStartX;
+                yTemp = (((y * camera->viewportH) + camera->viewportH) * 0.5) + camera->viewportStartY;
+
+                if (staticItems[i].price < 100) {
+                    xOffset = -4;
+                } else {
+                    xOffset = 0;
+                }
+
+                if (!(get_item_entity(shopItemEntities[i].index)->flags & 0x40)) {
+                    draw_number(staticItems[i].price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
+                }
+
+                if (i == shop->currentItemSlot) {
+                    set_icon_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
+                    set_hud_element_scale(shop->costIconID, 0.7f);
+                    draw_icon_0(shop->costIconID);
+                }
+            }
+        }
+    }
+
+    if (shop->unk_358 > 0) {
+        shop->unk_358--;
+    } else {
+        shop->flags &= ~0x1;
+        func_800E9900();
+    }
+}
+#else
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_draw_items);
-// void shop_draw_items(void) {
-//     Shop* shop = gGameStatusPtr->mapShop;
-//     s32* shopItemData;
-//     Camera* camera;
-//     s32 i;
-
-//     f32 temp_f0;
-//     f32 temp_f0_2;
-//     f32 temp_f0_3;
-//     f32 temp_f6;
-//     s32 temp_s1;
-//     s32 temp_s3;
-//     s32 temp_s7;
-//     s32 temp_v0;
-//     UnkFunc phi_s0;
-//     s32 *phi_s4;
-//     char *phi_s6;
-//     s32 *phi_fp;
-//     s32 phi_s0_2;
-
-
-//     if (shop->flags & 1) {
-//         phi_s0 = basic_window_update;
-//     } else {
-//         phi_s0 = basic_hidden_window_update;
-//     }
-
-//     set_window_update(10, phi_s0);
-//     set_window_update(11, phi_s0);
-
-//     if (shop->flags & 1) {
-//         shopItemData = gGameStatusPtr->shopItemEntities;
-//         camera = &gCameras[gCurrentCameraID];
-
-//         phi_s4 = shopItemData + 0xC;
-//         phi_s6 = shop->staticInventory->unk_04;
-//         phi_fp = shopItemData;
-
-//         for (i = 0; i < shop->numItems; i++) {
-//             transform_point(camera->perspectiveMatrix, phi_s4->unk-8, phi_s4->unk-4 + 30.0f, phi_s4->unk0, 1.0f, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
-//             temp_f6 = 1.0f / subroutine_argD;
-//             temp_f0 = (f32) ((f64) ((subroutine_argC * temp_f6) + 1.0f) * 0.5);
-//             if ((temp_f0 > 0.0f) && (temp_f0 < 1.0f)) {
-//                 temp_f0_2 = (f32) camera->viewportW;
-//                 temp_f0_3 = (f32) camera->viewportH;
-//                 temp_s1 = (s32) (((f64) ((subroutine_argA * temp_f6 * temp_f0_2) + temp_f0_2) * 0.5) + (f64) camera->viewportStartX);
-//                 temp_s3 = (s32) (((f64) ((subroutine_argB * -temp_f6 * temp_f0_3) + temp_f0_3) * 0.5) + (f64) camera->viewportStartY);
-//                 phi_s0_2 = 0;
-//                 if (*phi_s6 < 0x64) {
-//                     phi_s0_2 = -4;
-//                 }
-//                 if ((get_item_entity(*phi_fp)->flags & 0x40) == 0) {
-//                     draw_number(*phi_s6, temp_s1 + phi_s0_2, temp_s3, 1, 0, 0xFF, 0);
-//                 }
-//                 if (i == shop->currentItemSlot) {
-//                     set_icon_render_pos((MenuIcon *) shop->costIconID, (temp_s1 + phi_s0_2) - 6, temp_s3 + 5);
-//                     func_80144C20(shop->costIconID, 0x3F333333);
-//                     draw_icon_0(shop->costIconID);
-//                 }
-//             }
-//         }
-//             phi_s4 = phi_s4 + 0x10;
-//             phi_s6 = phi_s6 + 0xC;
-//             phi_fp = phi_fp + 0x10;
-//         }
-//     }
-//     temp_v0 = shop->unk_358;
-//     if (temp_v0 > 0) {
-//         shop->unk_358 = temp_v0 - 1;
-//         return;
-//     }
-//     shop->flags = (u16) shop->flags & 0xFFFE;
-//     func_800E9900();
-// }
+#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, ScriptInstance* script, s32 isInitialCall);
 

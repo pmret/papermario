@@ -81,7 +81,7 @@ INCLUDE_ASM(s32, "B9D60", func_80126F78);
 
 INCLUDE_ASM(s32, "B9D60", draw_digit);
 
-INCLUDE_ASM(s32, "B9D60", draw_number);
+INCLUDE_ASM(void, "B9D60", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
 void func_80127B70(s32 arg0) {
     func_80127D90(arg0, 0, 0, 0, 0, 4, 0);
