@@ -122,7 +122,7 @@ Script N(80241CD4) = SCRIPT({
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            SI_VAR(0) |=c 0x50000;
+            SI_VAR(0) |= (const) 0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
             sleep 30;
@@ -666,13 +666,13 @@ Script N(idle_80243D28) = SCRIPT({
     SI_VAR(4) += 60;
     loop {
         RandInt(5, SI_VAR(5));
-        SI_VAR(6) =f SI_VAR(5);
+        SI_VAR(6) = (float) SI_VAR(5);
         SI_VAR(6) *= 0.1005859375;
         SI_VAR(6) += 0.80078125;
         SetNpcSpeed(NPC_SELF, SI_VAR(6));
         NpcMoveTo(NPC_SELF, SI_VAR(3), SI_VAR(2), 0);
         RandInt(5, SI_VAR(5));
-        SI_VAR(6) =f SI_VAR(5);
+        SI_VAR(6) = (float) SI_VAR(5);
         SI_VAR(6) *= 0.1005859375;
         SI_VAR(6) += 0.80078125;
         SetNpcSpeed(NPC_SELF, SI_VAR(6));

@@ -32,13 +32,13 @@ Script N(802437AC) = SCRIPT({
     SI_VAR(2) = 1.0;
     loop 50 {
         SI_VAR(2) -= 0.0107421875;
-        SI_VAR(0) +=f SI_VAR(2);
+        SI_VAR(0) += (float) SI_VAR(2);
         RotateModel(27, SI_VAR(0), 0, 0, 1);
         sleep 1;
     }
     loop 50 {
         SI_VAR(2) += 0.0107421875;
-        SI_VAR(0) +=f SI_VAR(2);
+        SI_VAR(0) += (float) SI_VAR(2);
         RotateModel(27, SI_VAR(0), 0, 0, 1);
         sleep 1;
     }
@@ -412,8 +412,8 @@ Script N(idle_80244CC8) = SCRIPT({
         MakeLerp(50, 80, 15, 0);
         loop {
             UpdateLerp();
-            SI_VAR(2) =f SI_VAR(0);
-            SI_VAR(2) /=f 100;
+            SI_VAR(2) = (float) SI_VAR(0);
+            SI_VAR(2) /= (float) 100;
             SetNpcScale(NPC_SELF, SI_VAR(2), SI_VAR(2), SI_VAR(2));
             sleep 1;
             if (SI_VAR(1) == 0) {

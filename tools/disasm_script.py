@@ -1045,29 +1045,29 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} += {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} +=f {lhs};")
+                self.write_line(f"{self.var(argv[0])} += (float) {lhs};")
         elif opcode == 0x2D:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} -= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} -=f {lhs};")
+                self.write_line(f"{self.var(argv[0])} -= (float) {lhs};")
         elif opcode == 0x2E:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} *= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} *=f {lhs};")
+                self.write_line(f"{self.var(argv[0])} *= (float) {lhs};")
         elif opcode == 0x2F:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} /= {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} /=f {lhs};")
+                self.write_line(f"{self.var(argv[0])} /= (float) {lhs};")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
-        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &=c 0x{argv[1]:X};")
-        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |=c 0x{argv[1]:X};")
+        elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &= (const) 0x{argv[1]:X};")
+        elif opcode == 0x42: self.write_line(f"{self.var(argv[0])} |= (const) 0x{argv[1]:X};")
         elif opcode == 0x43:
             addr = argv[0]
             if addr in self.symbol_map:

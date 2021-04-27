@@ -37,7 +37,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_COCONUT;
+    SI_VAR(10) = (const) ITEM_COCONUT;
 
     await N(UseItemWithEffect);
 

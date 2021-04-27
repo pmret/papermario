@@ -1,7 +1,7 @@
 #include "shooting_star.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_SHOOTING_STAR;
+    SI_VAR(10) = (const) ITEM_SHOOTING_STAR;
     await N(UseItemWithEffect);
     spawn {
         sleep 5;

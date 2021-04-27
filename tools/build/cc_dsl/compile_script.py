@@ -54,8 +54,8 @@ script_parser = Lark(r"""
          | "jump" expr          -> jump_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
-         | lhs set_op "f" expr  -> set_float_stmt
-         | lhs set_op "c" expr  -> set_const_stmt
+         | lhs set_op "(float)" expr  -> set_float_stmt
+         | lhs set_op "(const)" expr  -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
          | "unbind"             -> unbind_stmt

@@ -112,7 +112,7 @@ s32 N(modelCommandList)[] = {
 };
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_EGG_MISSILE;
+    SI_VAR(10) = (const) ITEM_EGG_MISSILE;
     await N(UseItemWithEffect);
     UseCamPreset(3);
     MoveBattleCamOver(15);
