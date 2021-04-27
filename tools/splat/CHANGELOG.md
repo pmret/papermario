@@ -1,5 +1,11 @@
 # splat Release Notes
 
+### 0.7.2
+
+* Data disassembly changes:
+  * String detection has been improved. Please send me false positives / negatives as you see them and I can try to improve it further!
+  * Symbols in a data segment pointed to by other symbols will now properly be split out as their own symbols
+
 ### 0.7.1
 
 * Image segment changes:

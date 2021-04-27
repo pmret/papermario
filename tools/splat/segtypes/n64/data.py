@@ -1,6 +1,6 @@
 from segtypes.n64.codesubsegment import N64SegCodeSubsegment
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Optional
 from util.symbols import Symbol
 from util import floats, options
 
@@ -33,14 +33,21 @@ class N64SegData(N64SegCodeSubsegment):
     def get_linker_section(self) -> str:
         return ".data"
 
-    def get_symbols(self):
-        ret = []
+    def get_symbols(self, rom_bytes):
+        symset = set()
+
+        # Find inter-data symbols
+        for i in range(self.rom_start, self.rom_end, 4):
+            bits = int.from_bytes(rom_bytes[i : i + 4], "big")
+            if self.contains_vram(bits):
+                symset.add(self.parent.get_symbol(bits, create=True, define=True, local_only=True))
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
                 if not symbol.dead and self.contains_vram(symbol.vram_start):
-                    ret.append(symbol)
+                    symset.add(symbol)
 
+        ret = list(symset)
         ret.sort(key=lambda s:s.vram_start)
 
         # Ensure we start at the beginning
@@ -52,21 +59,75 @@ class N64SegData(N64SegCodeSubsegment):
 
         return ret
 
+    def are_null(chars):
+        for b in chars:
+            if b != '\x00':
+                return False
+        return True
+
     @staticmethod
     def is_valid_ascii(bytes):
-        if len(bytes) < 8:
+        null_char = '\x00'
+        valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890[]():%!#=-_ "
+        invalid_chars = ""
+        duplicate_limit = 10
+
+        last_char = 0
+        true_end = None
+        consecutive_duplicates = 0
+        valid_count = 0
+
+        if len(bytes) <= 4 or bytes[0] == 0:
             return False
 
-        num_empty_bytes = 0
-        for b in bytes:
-            if b == 0:
-                num_empty_bytes += 1
-
-        empty_ratio = num_empty_bytes / len(bytes)
-        if empty_ratio > 0.2:
+        try:
+            chars = bytes.decode("EUC-JP")
+        except:
             return False
 
-        return True
+        if len(chars) <= 4:
+            return False
+
+        for i, c in enumerate(chars):
+            # Ensure null bytes are only at the end of ascii strings
+            # TODO: if we find null bytes in the middle, break this into multiple strings ?
+            if c == null_char:
+                if true_end is None:
+                    if N64SegData.are_null(chars[i:]):
+                        true_end = i
+                    else:
+                        pass
+                        #return False
+
+            # Ensure we're not seeing a ton of the same character in a row
+            if last_char == c:
+                consecutive_duplicates += 1
+                if consecutive_duplicates >= duplicate_limit and last_char != null_char:
+                    return False
+            else:
+                consecutive_duplicates = 0
+
+            if c in valid_chars:
+                valid_count += 1
+            elif c in invalid_chars:
+                return False
+
+            last_char = c
+
+        # Ensure the number of valid characters is sufficient
+        if true_end is not None:
+            # If there are more than 16 null chars at the end, something is afoot
+            if len(chars) - true_end > 16:
+                return False
+            end = true_end
+        else:
+            end = len(chars)
+
+        valid_ratio = valid_count / end
+        if valid_ratio >= 0.75:
+            return True
+
+        return False
     
     def disassemble_symbol(self, sym_bytes, sym_type):
         if sym_type == "jtbl":
@@ -86,9 +147,10 @@ class N64SegData(N64SegCodeSubsegment):
         if sym_type == "ascii":
             try:
                 ascii_str = sym_bytes.decode("EUC-JP")
-                ascii_str = ascii_str.replace("\\", "\\\\")
+                # ascii_str = ascii_str.rstrip("\x00")
                 ascii_str = ascii_str.replace("\x00", "\\0")
                 ascii_str = ascii_str.replace("\n", "\\n")
+
                 sym_str += f'"{ascii_str}"'
                 return sym_str
             except:
@@ -148,7 +210,7 @@ class N64SegData(N64SegCodeSubsegment):
         if self.size == 0:
             return None
 
-        syms = self.get_symbols()
+        syms = self.get_symbols(rom_bytes)
 
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
