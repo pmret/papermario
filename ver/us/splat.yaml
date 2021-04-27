@@ -8916,15 +8916,11 @@ segments:
     start: 0xCD72E0
     vram: 0x80240000
     subsegments:
-    - [0xCD72E0, c]
-    - [0xCD7320, c]
-    - [0xCD7350, c]
-    - [0xCDA500, data]
-    - [0xCDB2B0, data]
-    - [0xCDC560, data]
-    - [0xCDC5D0, rodata]
-    - [0xCDC638, rodata]
-    - [0xCDC698, rodata]
+    - [0xCD72E0,       c, CD72E0]
+    - [0xCD7320,       c, CD7320]
+    - [0xCD7350,       c, CD7350]
+    - [0xCDA500,   .data, CD7350]
+    - [0xCDC5D0, .rodata, CD7350]
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code

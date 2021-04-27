@@ -85,12 +85,12 @@ glabel func_80241C64_CD8F44
 .L80241D98:
 /* CD9078 80241D98 0280202D */  daddu     $a0, $s4, $zero
 /* CD907C 80241D9C 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9080 80241DA0 0C09001C */  jal       func_80240070_CD7350
+/* CD9080 80241DA0 0C09001C */  jal       flo_17_func_80240070_CD7350
 /* CD9084 80241DA4 02A0302D */   daddu    $a2, $s5, $zero
 .L80241DA8:
 /* CD9088 80241DA8 0280202D */  daddu     $a0, $s4, $zero
 /* CD908C 80241DAC 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9090 80241DB0 0C09056C */  jal       func_802415B0_CD8890
+/* CD9090 80241DB0 0C09056C */  jal       flo_17_func_802415B0_CD8890
 /* CD9094 80241DB4 02A0302D */   daddu    $a2, $s5, $zero
 /* CD9098 80241DB8 08090778 */  j         .L80241DE0
 /* CD909C 80241DBC 00000000 */   nop
@@ -102,7 +102,7 @@ glabel func_80241C64_CD8F44
 /* CD90B0 80241DD0 0280202D */  daddu     $a0, $s4, $zero
 .L80241DD4:
 /* CD90B4 80241DD4 02C0282D */  daddu     $a1, $s6, $zero
-/* CD90B8 80241DD8 0C090685 */  jal       func_80241A14_CD8CF4
+/* CD90B8 80241DD8 0C090685 */  jal       flo_17_func_80241A14_CD8CF4
 /* CD90BC 80241DDC 02A0302D */   daddu    $a2, $s5, $zero
 .L80241DE0:
 /* CD90C0 80241DE0 8E830070 */  lw        $v1, 0x70($s4)
@@ -117,7 +117,7 @@ glabel func_80241C64_CD8F44
 /* CD90E0 80241E00 8C460028 */  lw        $a2, 0x28($v0)
 /* CD90E4 80241E04 0C00A720 */  jal       atan2
 /* CD90E8 80241E08 8C470030 */   lw       $a3, 0x30($v0)
-/* CD90EC 80241E0C 0C09055A */  jal       func_80241568_CD8848
+/* CD90EC 80241E0C 0C09055A */  jal       flo_17_func_80241568_CD8848
 /* CD90F0 80241E10 E640000C */   swc1     $f0, 0xc($s2)
 /* CD90F4 80241E14 0440000F */  bltz      $v0, .L80241E54
 /* CD90F8 80241E18 AE62007C */   sw       $v0, 0x7c($s3)

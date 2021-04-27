@@ -31,7 +31,7 @@ ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetEntityPosition.inc.c"
 
-ApiStatus N(D_80240710_A57BC0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240710_A57BC0)(ScriptInstance *script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
     set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);

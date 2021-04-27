@@ -246,7 +246,7 @@ static s32 N(pad_4F64)[] = {
 
 Script N(80244F70) = SCRIPT({
     loop {
-        N(D_80242360_CCD670)(SI_VAR(0));
+        N(func_80242360_CCD670)(SI_VAR(0));
         if (SI_VAR(0) == SI_VAR(4)) {
             GetPlayerActionState(SI_VAR(0));
             if (SI_VAR(0) != 23) {

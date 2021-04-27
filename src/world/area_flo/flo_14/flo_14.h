@@ -3,7 +3,7 @@
 
 #define NAMESPACE flo_14
 
-ApiStatus N(D_80242360_CCD670)(ScriptInstance *script, s32 isInitialCall);
+ApiStatus N(func_80242360_CCD670)(ScriptInstance *script, s32 isInitialCall);
 ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall);
