@@ -4,13 +4,13 @@
 .section .rodata
 
 glabel D_80099BF0
-.ascii " +-#0\0\0\0"
+.word 0x202B2D23, 0x30000000
 
 glabel D_80099BF8
 .word 0x00000001, 0x00000002, 0x00000004, 0x00000008, 0x00000010, 0x00000000
 
 glabel D_80099C10
-.ascii "hlL\0\0\0\0\0"
+.word 0x686C4C00, 0x00000000
 
 .section .text
 

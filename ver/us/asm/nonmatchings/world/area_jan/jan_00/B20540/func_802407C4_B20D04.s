@@ -13,8 +13,8 @@ glabel func_802407C4_B20D04
 /* B20D24 802407E4 8C620000 */  lw        $v0, ($v1)
 /* B20D28 802407E8 5040000A */  beql      $v0, $zero, .L80240814
 /* B20D2C 802407EC 00041080 */   sll      $v0, $a0, 2
-/* B20D30 802407F0 3C058024 */  lui       $a1, %hi(jan_05_temp_bss)
-/* B20D34 802407F4 24A57AF0 */  addiu     $a1, $a1, %lo(jan_05_temp_bss)
+/* B20D30 802407F0 3C058024 */  lui       $a1, %hi(jan_00_fake_sym)
+/* B20D34 802407F4 24A57AF0 */  addiu     $a1, $a1, %lo(jan_00_fake_sym)
 .L802407F8:
 /* B20D38 802407F8 24630004 */  addiu     $v1, $v1, 4
 /* B20D3C 802407FC 24840001 */  addiu     $a0, $a0, 1
@@ -24,14 +24,14 @@ glabel func_802407C4_B20D04
 /* B20D4C 8024080C 24A50004 */   addiu    $a1, $a1, 4
 /* B20D50 80240810 00041080 */  sll       $v0, $a0, 2
 .L80240814:
-/* B20D54 80240814 3C018024 */  lui       $at, %hi(jan_05_temp_bss)
+/* B20D54 80240814 3C018024 */  lui       $at, %hi(jan_00_fake_sym)
 /* B20D58 80240818 00220821 */  addu      $at, $at, $v0
-/* B20D5C 8024081C AC207AF0 */  sw        $zero, %lo(jan_05_temp_bss)($at)
+/* B20D5C 8024081C AC207AF0 */  sw        $zero, %lo(jan_00_fake_sym)($at)
 /* B20D60 80240820 08090214 */  j         .L80240850
 /* B20D64 80240824 00000000 */   nop
 .L80240828:
-/* B20D68 80240828 3C038024 */  lui       $v1, %hi(jan_05_temp_bss)
-/* B20D6C 8024082C 24637AF0 */  addiu     $v1, $v1, %lo(jan_05_temp_bss)
+/* B20D68 80240828 3C038024 */  lui       $v1, %hi(jan_00_fake_sym)
+/* B20D6C 8024082C 24637AF0 */  addiu     $v1, $v1, %lo(jan_00_fake_sym)
 /* B20D70 80240830 0060282D */  daddu     $a1, $v1, $zero
 .L80240834:
 /* B20D74 80240834 24820010 */  addiu     $v0, $a0, 0x10

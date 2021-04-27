@@ -15,7 +15,7 @@ glabel func_80240858_BC4AD8
 /* BC4B00 80240880 8FBF0014 */  lw        $ra, 0x14($sp)
 /* BC4B04 80240884 8FB00010 */  lw        $s0, 0x10($sp)
 /* BC4B08 80240888 24020002 */  addiu     $v0, $zero, 2
-/* BC4B0C 8024088C 3C018024 */  lui       $at, %hi(D_80243DA4)
-/* BC4B10 80240890 AC233DA4 */  sw        $v1, %lo(D_80243DA4)($at)
+/* BC4B0C 8024088C 3C018024 */  lui       $at, %hi(flo_13_80243DA4)
+/* BC4B10 80240890 AC233DA4 */  sw        $v1, %lo(flo_13_80243DA4)($at)
 /* BC4B14 80240894 03E00008 */  jr        $ra
 /* BC4B18 80240898 27BD0018 */   addiu    $sp, $sp, 0x18

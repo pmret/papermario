@@ -9,4 +9,4 @@ glabel D_80257F08_8C7F78
 .double 990.0
 
 glabel D_80257F10_8C7F80
-.ascii "party_kurio\0\0\0\0\0"
+.word 0x70617274, 0x795F6B75, 0x72696F00, 0x00000000

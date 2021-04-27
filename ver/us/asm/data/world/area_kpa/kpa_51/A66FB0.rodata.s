@@ -3,7 +3,7 @@
 .section .rodata
 
 glabel D_80242F20_A66FB0
-.ascii "kpa_50_shape\0\0\0\0"
+.word 0x6B70615F, 0x35305F73, 0x68617065, 0x00000000
 
 glabel D_80242F30_A66FC0
-.ascii "kpa_50_hit\0\0kpa_32\0\0kpa_133\0\0\0\0\0"
+.word 0x6B70615F, 0x35305F68, 0x69740000, 0x6B70615F, 0x33320000, 0x6B70615F, 0x31333300, 0x00000000

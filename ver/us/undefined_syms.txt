@@ -67,5 +67,3 @@ D_802E98E0 = 0x802E98E0;
 D_802E99DC = 0x802E99DC;
 D_80093DB0 = 0x80093DB0;
 jan_00_fake_sym = 0x80247AF0;
-D_8014C290_sym_that_alex_removed = 0x8014C294;
-D_8014C294_sym_that_alex_removed = 0x8014C294;

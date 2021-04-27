@@ -4,13 +4,10 @@
 .section .rodata
 
 glabel D_80244F88_EC7188
-.ascii "cccc\n"
+.word 0x63636363, 0x0A000000
 
 glabel D_80244F90_EC7190
 .double 0.2
-
-glabel D_80244F98_EC7198
-.ascii "touch_choro\n"
 
 .section .text
 

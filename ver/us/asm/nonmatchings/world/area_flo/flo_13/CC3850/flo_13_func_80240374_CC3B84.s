@@ -10,7 +10,8 @@ glabel D_80247A40_CCB250
 .double 0.09
 
 .section .text
-glabel func_80240374_CC3B84
+
+glabel flo_13_func_80240374_CC3B84
 /* CC3B84 80240374 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* CC3B88 80240378 AFB3004C */  sw        $s3, 0x4c($sp)
 /* CC3B8C 8024037C 0080982D */  daddu     $s3, $a0, $zero

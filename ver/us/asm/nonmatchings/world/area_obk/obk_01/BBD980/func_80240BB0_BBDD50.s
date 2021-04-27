@@ -13,8 +13,8 @@ glabel func_80240BB0_BBDD50
 /* BBDD70 80240BD0 8C620000 */  lw        $v0, ($v1)
 /* BBDD74 80240BD4 5040000A */  beql      $v0, $zero, .L80240C00
 /* BBDD78 80240BD8 00041080 */   sll      $v0, $a0, 2
-/* BBDD7C 80240BDC 3C058024 */  lui       $a1, %hi(D_802458F0)
-/* BBDD80 80240BE0 24A558F0 */  addiu     $a1, $a1, %lo(D_802458F0)
+/* BBDD7C 80240BDC 3C058024 */  lui       $a1, %hi(flo_08_shakeTreeEvent_Tree1)
+/* BBDD80 80240BE0 24A558F0 */  addiu     $a1, $a1, %lo(flo_08_shakeTreeEvent_Tree1)
 .L80240BE4:
 /* BBDD84 80240BE4 24630004 */  addiu     $v1, $v1, 4
 /* BBDD88 80240BE8 24840001 */  addiu     $a0, $a0, 1
@@ -24,14 +24,14 @@ glabel func_80240BB0_BBDD50
 /* BBDD98 80240BF8 24A50004 */   addiu    $a1, $a1, 4
 /* BBDD9C 80240BFC 00041080 */  sll       $v0, $a0, 2
 .L80240C00:
-/* BBDDA0 80240C00 3C018024 */  lui       $at, %hi(D_802458F0)
+/* BBDDA0 80240C00 3C018024 */  lui       $at, %hi(flo_08_shakeTreeEvent_Tree1)
 /* BBDDA4 80240C04 00220821 */  addu      $at, $at, $v0
-/* BBDDA8 80240C08 AC2058F0 */  sw        $zero, %lo(D_802458F0)($at)
+/* BBDDA8 80240C08 AC2058F0 */  sw        $zero, %lo(flo_08_shakeTreeEvent_Tree1)($at)
 /* BBDDAC 80240C0C 0809030F */  j         .L80240C3C
 /* BBDDB0 80240C10 00000000 */   nop
 .L80240C14:
-/* BBDDB4 80240C14 3C038024 */  lui       $v1, %hi(D_802458F0)
-/* BBDDB8 80240C18 246358F0 */  addiu     $v1, $v1, %lo(D_802458F0)
+/* BBDDB4 80240C14 3C038024 */  lui       $v1, %hi(flo_08_shakeTreeEvent_Tree1)
+/* BBDDB8 80240C18 246358F0 */  addiu     $v1, $v1, %lo(flo_08_shakeTreeEvent_Tree1)
 /* BBDDBC 80240C1C 0060282D */  daddu     $a1, $v1, $zero
 .L80240C20:
 /* BBDDC0 80240C20 24820010 */  addiu     $v0, $a0, 0x10
