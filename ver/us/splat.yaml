@@ -8962,14 +8962,11 @@ segments:
     start: 0xCEC240
     vram: 0x80240000
     subsegments:
-    - [0xCEC240, c]
-    - [0xCEC280, c]
-    - [0xCEC290, c]
-    - [0xCEC4D0, data]
-    - [0xCEC760, data]
-    - [0xCED050, data]
-    - [0xCED7E0, data]
-    - [0xCEE250, rodata]
+    - [0xCEC240,       c, CEC240]
+    - [0xCEC280,       c, CEC280]
+    - [0xCEC290,       c, CEC290]
+    - [0xCEC4D0,   .data, CEC240]
+    - [0xCEE250, .rodata, CEC240]
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
