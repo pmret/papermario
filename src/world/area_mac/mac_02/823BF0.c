@@ -529,8 +529,8 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802430D0_826390);
 ApiStatus N(func_802430D0_826390)(ScriptInstance *script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i < 0x5B; i++) {
-        N(D_8024EA10)[i] = 0x80 + i;
+    for (i = 0; i <= 90; i++) {
+        N(D_8024EA10)[i] = 128 + i;
     }
 
     N(D_8024EA14) = 0;

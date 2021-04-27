@@ -331,8 +331,8 @@ INCLUDE_ASM(s32, "world/area_flo/flo_25/CF2C10", func_80241FB4_CF4B84);
 ApiStatus N(func_80241FB4_CF4B84)(ScriptInstance *script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i < 0x5B; i++) {
-        N(D_80245110)[i] = 0x80 + i;
+    for (i = 0; i <= 90; i++) {
+        N(D_80245110)[i] = 128 + i;
     }
 
     N(D_8024527C) = 0;

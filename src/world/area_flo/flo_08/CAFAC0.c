@@ -1521,7 +1521,7 @@ ApiStatus N(func_802419FC_CB073C)(ScriptInstance* script, s32 isInitialCall) {
         }
         N(D_802462C0_B4AA30)[i] = 0;
     } else {
-        for (i = 0; i < 0x5B; i++) {
+        for (i = 0; i <= 90; i++) {
             N(D_802462C0_B4AA30)[i] = i + 128;
             N(D_802462C0_B4AA30)[0x5B] = 0;
         }
@@ -1562,8 +1562,8 @@ ApiStatus N(func_80241B5C_CB089C)(ScriptInstance *script, s32 isInitialCall) {
 ApiStatus N(func_80241BCC_CB090C)(ScriptInstance *script, s32 isInitialCall) {
     s32 i;
 
-    for (i = 0; i < 0x5B; i++) {
-        N(D_8024642C)[i] = 0x80 + i;
+    for (i = 0; i <= 90; i++) {
+        N(D_8024642C)[i] = 128 + i;
     }
 
     N(D_80246598) = 0;

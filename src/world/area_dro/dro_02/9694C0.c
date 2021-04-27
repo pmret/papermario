@@ -3996,7 +3996,7 @@ ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
         }
         N(D_8024F248)[i] = 0;
     } else {
-        for (i = 0; i < 0x5B; i++) {
+        for (i = 0; i <= 90; i++) {
             N(D_8024F248)[i] = i + 128;
             N(D_8024F248)[0x5B] = 0;
         }

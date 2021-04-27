@@ -607,7 +607,7 @@ ApiStatus N(func_802422C0_CCD5D0)(ScriptInstance* script, s32 isInitialCall) {
         }
         N(D_802453B0_EF79C0)[i] = 0;
     } else {
-        for (i = 0; i < 0x5B; i++) {
+        for (i = 0; i <= 90; i++) {
             N(D_802453B0_EF79C0)[i] = i + 128;
             N(D_802453B0_EF79C0)[0x5B] = 0;
         }
