@@ -307,6 +307,80 @@ void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
 }
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_draw_items);
+// void shop_draw_items(void) {
+//     Shop* shop = gGameStatusPtr->mapShop;
+//     s32* shopItemData;
+//     Camera* camera;
+//     s32 i;
+
+//     f32 temp_f0;
+//     f32 temp_f0_2;
+//     f32 temp_f0_3;
+//     f32 temp_f6;
+//     s32 temp_s1;
+//     s32 temp_s3;
+//     s32 temp_s7;
+//     s32 temp_v0;
+//     UnkFunc phi_s0;
+//     s32 *phi_s4;
+//     char *phi_s6;
+//     s32 *phi_fp;
+//     s32 phi_s0_2;
+
+
+//     if (shop->flags & 1) {
+//         phi_s0 = basic_window_update;
+//     } else {
+//         phi_s0 = basic_hidden_window_update;
+//     }
+
+//     set_window_update(10, phi_s0);
+//     set_window_update(11, phi_s0);
+
+//     if (shop->flags & 1) {
+//         shopItemData = gGameStatusPtr->shopItemEntities;
+//         camera = &gCameras[gCurrentCameraID];
+
+//         phi_s4 = shopItemData + 0xC;
+//         phi_s6 = shop->staticInventory->unk_04;
+//         phi_fp = shopItemData;
+
+//         for (i = 0; i < shop->numItems; i++) {
+//             transform_point(camera->perspectiveMatrix, phi_s4->unk-8, phi_s4->unk-4 + 30.0f, phi_s4->unk0, 1.0f, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
+//             temp_f6 = 1.0f / subroutine_argD;
+//             temp_f0 = (f32) ((f64) ((subroutine_argC * temp_f6) + 1.0f) * 0.5);
+//             if ((temp_f0 > 0.0f) && (temp_f0 < 1.0f)) {
+//                 temp_f0_2 = (f32) camera->viewportW;
+//                 temp_f0_3 = (f32) camera->viewportH;
+//                 temp_s1 = (s32) (((f64) ((subroutine_argA * temp_f6 * temp_f0_2) + temp_f0_2) * 0.5) + (f64) camera->viewportStartX);
+//                 temp_s3 = (s32) (((f64) ((subroutine_argB * -temp_f6 * temp_f0_3) + temp_f0_3) * 0.5) + (f64) camera->viewportStartY);
+//                 phi_s0_2 = 0;
+//                 if (*phi_s6 < 0x64) {
+//                     phi_s0_2 = -4;
+//                 }
+//                 if ((get_item_entity(*phi_fp)->flags & 0x40) == 0) {
+//                     draw_number(*phi_s6, temp_s1 + phi_s0_2, temp_s3, 1, 0, 0xFF, 0);
+//                 }
+//                 if (i == shop->currentItemSlot) {
+//                     set_icon_render_pos((MenuIcon *) shop->costIconID, (temp_s1 + phi_s0_2) - 6, temp_s3 + 5);
+//                     func_80144C20(shop->costIconID, 0x3F333333);
+//                     draw_icon_0(shop->costIconID);
+//                 }
+//             }
+//         }
+//             phi_s4 = phi_s4 + 0x10;
+//             phi_s6 = phi_s6 + 0xC;
+//             phi_fp = phi_fp + 0x10;
+//         }
+//     }
+//     temp_v0 = shop->unk_358;
+//     if (temp_v0 > 0) {
+//         shop->unk_358 = temp_v0 - 1;
+//         return;
+//     }
+//     shop->flags = (u16) shop->flags & 0xFFFE;
+//     func_800E9900();
+// }
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, ScriptInstance* script, s32 isInitialCall);
 

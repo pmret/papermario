@@ -190,7 +190,7 @@ void state_step_logos(void) {
                 D_800A0910 = 0;
 
                 intro_logos_set_fade_alpha(255);
-                gGameStatusPtr->unk_A8 = 0;
+                gGameStatusPtr->creditsViewportMode = 0;
                 set_game_mode(16);
                 break;
         }
@@ -412,7 +412,7 @@ void state_step_unpause(void) {
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
                         func_80149670(1);
-                        spr_init_sprites(gGameStatusPtr->unk_84);
+                        spr_init_sprites(gGameStatusPtr->playerSpriteSet);
                         init_model_data();
                         func_801480F0();
                         init_entity_models();

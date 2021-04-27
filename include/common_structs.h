@@ -967,6 +967,11 @@ typedef struct PrintContext {
     /* 0x53A */ char unk_53A[30];
 } PrintContext; // size = 0x558
 
+typedef struct ShopItemEntitiy {
+    /* 0x00 */ s32 index;
+    /* 0x04 */ Vec3f pos;
+} ShopItemEntity; // size = 0x10
+
 typedef struct GameStatus {
     /* 0x000 */ u32 currentButtons;
     /* 0x004 */ u32 altCurrentButtons; /* input used for batte when flag 80000 set */
@@ -999,8 +1004,8 @@ typedef struct GameStatus {
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
-    /* 0x074 */ char unk_74;
-    /* 0x075 */ s8 unk_75;
+    /* 0x074 */ s8 debugEnemyContact;
+    /* 0x075 */ s8 debugQuizmo;
     /* 0x076 */ s8 unk_76;
     /* 0x077 */ char unk_77;
     /* 0x078 */ s8 disableScripts;
@@ -1015,7 +1020,7 @@ typedef struct GameStatus {
     /* 0x081 */ s8 unk_81;
     /* 0x082 */ s8 unk_82;
     /* 0x083 */ s8 unk_83;
-    /* 0x084 */ s8 unk_84;
+    /* 0x084 */ s8 playerSpriteSet;
     /* 0x085 */ char unk_85;
     /* 0x086 */ s16 areaID;
     /* 0x088 */ s16 prevArea;
@@ -1024,12 +1029,12 @@ typedef struct GameStatus {
     /* 0x08E */ s16 entryID;
     /* 0x090 */ u16 unk_90;
     /* 0x092 */ u16 unk_92;
-    /* 0x094 */ f32 exitAngle;
+    /* 0x094 */ f32 exitTangent;
     /* 0x098 */ Vec3f playerPos;
     /* 0x0A4 */ f32 playerYaw;
-    /* 0x0A8 */ s8 unk_A8;
+    /* 0x0A8 */ s8 creditsViewportMode;
     /* 0x0A9 */ s8 unk_A9;
-    /* 0x0AA */ s8 unk_AA;
+    /* 0x0AA */ s8 demoFlags;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ s8 loadMenuState;
     /* 0x0AD */ s8 menuCounter;
@@ -1046,7 +1051,7 @@ typedef struct GameStatus {
     /* 0x138 */ s32 nextRNG;
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[2];
-    /* 0x140 */ s32* shopItemData;
+    /* 0x140 */ ShopItemEntity* shopItemEntities;
     /* 0x144 */ struct Shop* mapShop;
     /* 0x148 */ s16 enableBackground; /* (bit 2 is also used for something) */
     /* 0x14A */ s16 backgroundMinW;

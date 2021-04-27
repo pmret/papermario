@@ -8,7 +8,7 @@ void begin_state_intro(void) {
     set_curtain_scale_goal(1.0f);
     set_curtain_fade_goal(0.3f);
 
-    unk_A8 = gGameStatusPtr->unk_A8;
+    unk_A8 = gGameStatusPtr->creditsViewportMode;
     switch (unk_A8) {
         case 0:
             intro_logos_set_fade_alpha(0);
@@ -48,7 +48,7 @@ void begin_state_intro(void) {
             intro_logos_set_fade_alpha(0);
             intro_logos_set_fade_color(208);
 
-            gGameStatusPtr->unk_A8 = -1;
+            gGameStatusPtr->creditsViewportMode = -1;
 
             D_800A0956 = 6;
             D_800A0958 = 6;

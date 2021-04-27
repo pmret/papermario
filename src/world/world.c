@@ -48,7 +48,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gOverrideFlags &= ~0x40;
     gOverrideFlags &= ~0x80;
 
-    gGameStatusPtr->unk_84 = 0;
+    gGameStatusPtr->playerSpriteSet = 0;
     func_8002D160();
     func_802B2078();
     func_8011D890();
@@ -119,7 +119,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_dynamic_entity_list();
     clear_script_list();
     create_cameras_a();
-    spr_init_sprites(gGameStatusPtr->unk_84);
+    spr_init_sprites(gGameStatusPtr->playerSpriteSet);
     func_8011E224();
     clear_entity_models();
     npc_list_clear();
@@ -129,7 +129,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     func_80148040();
     use_default_background_settings();
 
-    if (gGameStatusPtr->unk_A8 == -1) {
+    if (gGameStatusPtr->creditsViewportMode == -1) {
         func_80138188();
     }
 
@@ -173,7 +173,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gCameras[2].flags |= 0x2;
     gCameras[3].flags |= 0x2;
 
-    if (gGameStatusPtr->unk_A8 == -1) {
+    if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);
     } else {
         set_cam_viewport(0, 29, 28, 262, 162);

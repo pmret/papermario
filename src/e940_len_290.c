@@ -23,8 +23,8 @@ void step_init_state(void) {
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
     gGameStatusPtr->unk_7D = 0;
-    gGameStatusPtr->unk_A8 = -1;
-    gGameStatusPtr->unk_AA = 0;
+    gGameStatusPtr->creditsViewportMode = -1;
+    gGameStatusPtr->demoFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
     gGameStatusPtr->demoState = 0;
 

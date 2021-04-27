@@ -248,13 +248,13 @@ void load_engine_data(void) {
     gGameStatusPtr->enableBackground = 0;
     gGameStatusPtr->musicEnabled = 1;
     gGameStatusPtr->unk_7C = 1;
-    gGameStatusPtr->unk_A8 = -1;
-    gGameStatusPtr->unk_AA = 0;
+    gGameStatusPtr->creditsViewportMode = -1;
+    gGameStatusPtr->demoFlags = 0;
     gGameStatusPtr->unk_81 = 0;
     gGameStatusPtr->unk_82 = -8;
     gGameStatusPtr->unk_83 = 4;
     timeFreezeMode = 0;
-    gGameStatusPtr->unk_75 = gGameStatusPtr->unk_13C = 0;
+    gGameStatusPtr->debugQuizmo = gGameStatusPtr->unk_13C = 0;
     D_80074021 = 5;
     gGameStatusPtr->saveCount = 0;
     fio_init_flash();
