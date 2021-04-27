@@ -240,8 +240,8 @@ glabel func_80240374_EDED34
 /* EDF090 802406D0 3C014024 */  lui       $at, 0x4024
 /* EDF094 802406D4 44810800 */  mtc1      $at, $f1
 /* EDF098 802406D8 44800000 */  mtc1      $zero, $f0
-/* EDF09C 802406DC 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EDF0A0 802406E0 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EDF09C 802406DC 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EDF0A0 802406E0 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EDF0A4 802406E4 460010A1 */  cvt.d.s   $f2, $f2
 /* EDF0A8 802406E8 46201080 */  add.d     $f2, $f2, $f0
 /* EDF0AC 802406EC C440002C */  lwc1      $f0, 0x2c($v0)

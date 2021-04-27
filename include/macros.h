@@ -24,10 +24,6 @@
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
 
-#define OVERRIDE_FLAG_SET(flag) { s32* overrideFlags = &gOverrideFlags; *overrideFlags |= flag; }
-#define OVERRIDE_FLAG_UNSET(flag) { s32* overrideFlags = &gOverrideFlags; *overrideFlags &= ~flag; }
-#define OVERRIDE_FLAG_CHECK(flag) ({ s32* overrideFlags = &gOverrideFlags; *overrideFlags & flag; })
-
 #define MAX_MAPVARS 16
 #define MAX_MAPFLAGS 3
 
@@ -52,10 +48,8 @@
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
 { \
-    ScriptList** temp = &gCurrentScriptListPtr; \
-    s32 *numScripts = &gNumScripts; \
-    (**temp)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
-    (*numScripts)++; \
+    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
+    gNumScripts++; \
     ASSERT(new != NULL); \
 }
 

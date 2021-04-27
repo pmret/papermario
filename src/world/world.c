@@ -38,25 +38,17 @@ void load_world_script_api(void) {
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
-    PlayerStatus* playerStatus;
-    GameStatus** gameStatus;
-    GameStatus** gameStatus2;
-    GameStatus** gameStatus3;
-    s32 initStatus;
+    s32 initStatus = 0;
     Map* map;
     MapConfig* temp800A41E8;
-    s32* overrideFlags;
     char texStr[17];
     s32 decompressedSize;
 
-    initStatus = 0;
     sfx_stop_env_sounds();
-    OVERRIDE_FLAG_UNSET(0x40);
-    OVERRIDE_FLAG_UNSET(0x80);
+    gOverrideFlags &= ~0x40;
+    gOverrideFlags &= ~0x80;
 
-    gameStatus = &gGameStatusPtr;
-
-    (*gameStatus)->unk_84 = 0;
+    gGameStatusPtr->unk_84 = 0;
     func_8002D160();
     func_802B2078();
     func_8011D890();
@@ -66,14 +58,14 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     switch (loadType) {
         case 0:
             clear_area_flags();
-            (*gameStatus)->loadType = 0;
+            gGameStatusPtr->loadType = 0;
             break;
         case 1:
             fio_deserialize_state();
-            areaID = (*gameStatus)->areaID;
-            mapID = (*gameStatus)->mapID;
-            (*gameStatus)->prevArea = areaID;
-            (*gameStatus)->loadType = 1;
+            areaID = gGameStatusPtr->areaID;
+            mapID = gGameStatusPtr->mapID;
+            gGameStatusPtr->prevArea = areaID;
+            gGameStatusPtr->loadType = 1;
             break;
     }
 
@@ -84,7 +76,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sprintf(&D_800D9230, "%s_shape", map->id);
     sprintf(&D_800D91E0, "%s_hit", map->id);
     strcpy(texStr, map->id);
-    texStr[3] = 0;
+    texStr[3] = '\0';
     sprintf(&D_800B0CF0, "%s_tex", texStr);
 
     D_800A41E0 = map;
@@ -97,9 +89,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
     }
 
-    temp800A41E8 = &D_800A41E8;
-    *temp800A41E8 = *map->config;
-
+    D_800A41E8 = *map->config;
 
     temp800A41E8 = &D_800A41E8;
     if (map->init != 0) {
@@ -129,8 +119,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_dynamic_entity_list();
     clear_script_list();
     create_cameras_a();
-    gameStatus2 = &gGameStatusPtr;
-    spr_init_sprites((*gameStatus2)->unk_84);
+    spr_init_sprites(gGameStatusPtr->unk_84);
     func_8011E224();
     clear_entity_models();
     npc_list_clear();
@@ -140,7 +129,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     func_80148040();
     use_default_background_settings();
 
-    if ((*gameStatus2)->unk_A8 == -1) {
+    if (gGameStatusPtr->unk_A8 == -1) {
         func_80138188();
     }
 
@@ -159,8 +148,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     clear_printers();
     clear_item_entity_data();
 
-    playerStatus = &gPlayerStatus;
-    playerStatus->targetYaw = playerStatus->currentYaw;
+    gPlayerStatus.targetYaw = gPlayerStatus.currentYaw;
 
     func_801497FC(D_8008FF60[map->unk_1C.u32 % 4]);
     sfx_reset_door_sounds();
@@ -192,10 +180,9 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     initialize_status_menu();
-    gameStatus3 = &gGameStatusPtr;
-    (*gameStatus3)->unk_90 = 1000;
-    (*gameStatus3)->unk_92 = 1000;
-    (*gameStatus3)->mainScriptID = start_script_in_group(temp800A41E8->main, 0, 0, 0)->id;
+    gGameStatusPtr->unk_90 = 1000;
+    gGameStatusPtr->unk_92 = 1000;
+    gGameStatusPtr->mainScriptID = start_script_in_group(temp800A41E8->main, 0, 0, 0)->id;
 }
 
 s32 get_current_map_config() {

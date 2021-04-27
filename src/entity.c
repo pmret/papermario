@@ -14,6 +14,7 @@ extern s32 entity_fog_dist_min;
 extern s32 entity_fog_dist_max;
 
 s32 step_entity_model_commandlist(EntityModel* entityModel);
+void free_entity_model_by_ref(EntityModel* entityModel);
 
 void clear_entity_models(void) {
     s32 i;
@@ -83,7 +84,7 @@ s32 load_entity_model(s32* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = &D_8014C260;
+        newEntityModel->cmdListReadPos = D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -125,7 +126,7 @@ s32 ALT_load_entity_model(s32* cmdList) {
     newEntityModel->nextFrameTime = 1.0f;
     newEntityModel->timeScale = 1.0f;
     if (cmdList == NULL) {
-        newEntityModel->cmdListReadPos = &D_8014C260;
+        newEntityModel->cmdListReadPos = D_8014C260;
     }
     newEntityModel->vertexArray = NULL;
     newEntityModel->fpSetupGfxCallback = NULL;
@@ -167,8 +168,8 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
             free_entity_model_by_ref(entityModel);
             return 1;
         case 1: // set display list ptr
-            entityModel->nextFrameTime = *curPos++;
-            entityModel->displayList = *curPos++;
+            entityModel->nextFrameTime = (f32) *curPos++;
+            entityModel->displayList = (Gfx*) *curPos++;
             entityModel->cmdListReadPos = curPos;
             break;
         case 2: // restore saved position
@@ -203,7 +204,7 @@ s32 step_entity_model_commandlist(EntityModel* entityModel) {
 }
 
 void make_entity_model_mtx_flipZ(Matrix4f mtx) {
-    guMtxIdentF(*mtx);
+    guMtxIdentF(mtx);
     mtx[0][0] = 1.0f;
     mtx[1][1] = 1.0f;
     mtx[2][2] = -1.0f;
@@ -229,7 +230,7 @@ void set_entity_model_render_command_list(s32 idx, u32* commandList) {
     if (entityModel != NULL && entityModel->flags) {
         phi_a1 = commandList;
         if (commandList == NULL) {
-            phi_a1 = &D_8014C260;
+            phi_a1 = D_8014C260;
         }
         entityModel->cmdListReadPos = phi_a1;
         entityModel->cmdListSavedPos = phi_a1;
@@ -363,9 +364,9 @@ void clear_dynamic_entity_list(void) {
 
 void init_dynamic_entity_list(void) {
     if (!gGameStatusPtr->isBattle) {
-        gCurrentDynamicEntityListPtr = gWorldDynamicEntityList;
+        gCurrentDynamicEntityListPtr = &gWorldDynamicEntityList;
     } else {
-        gCurrentDynamicEntityListPtr = gBattleDynamicEntityList;
+        gCurrentDynamicEntityListPtr = &gBattleDynamicEntityList;
     }
 }
 
@@ -525,6 +526,6 @@ void free_dynamic_entity(s32 idx) {
     }
 }
 
-s32 get_dynamic_entity(s32 idx) {
+DynamicEntity* get_dynamic_entity(s32 idx) {
     return (*gCurrentDynamicEntityListPtr)[idx & ~0x800];
 }

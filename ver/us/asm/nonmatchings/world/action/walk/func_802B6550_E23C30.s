@@ -34,9 +34,9 @@ glabel func_802B6550_E23C30
 /* E23C9C 802B65BC 00031040 */  sll       $v0, $v1, 1
 /* E23CA0 802B65C0 00431021 */  addu      $v0, $v0, $v1
 /* E23CA4 802B65C4 000210C0 */  sll       $v0, $v0, 3
-/* E23CA8 802B65C8 3C04800F */  lui       $a0, %hi(D_800F7C20)
+/* E23CA8 802B65C8 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0x4)
 /* E23CAC 802B65CC 00822021 */  addu      $a0, $a0, $v0
-/* E23CB0 802B65D0 8C847C20 */  lw        $a0, %lo(D_800F7C20)($a0)
+/* E23CB0 802B65D0 8C847C20 */  lw        $a0, %lo(world_actions_peachDisguises+0x4)($a0)
 /* E23CB4 802B65D4 0C0398DB */  jal       func_800E636C
 /* E23CB8 802B65D8 00000000 */   nop
 .L802B65DC:

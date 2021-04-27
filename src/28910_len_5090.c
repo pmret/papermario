@@ -26,11 +26,9 @@ s32 func_8004DA0C(s32 songName) {
     s32 ret = 0;
 
     if (songName != 0) {
-        BGMPlayer* player;
+        BGMPlayer* player = snd_get_player_with_song_name(songName);
 
-        do {
-            player = snd_get_player_with_song_name(songName);
-        } while (0);
+        do {} while (0);
 
         do {
             if (player == NULL) {

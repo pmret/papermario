@@ -45,7 +45,7 @@ segments:
     - [0x3bf0, c, 3bf0_len_6f0]
     - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
-    - [0x6000, c, 6000]
+    - [0x6000, c, heap]
     - [0x6240, c, 6240_len_c00]
     - [0x6e40, c, 6e40_len_500]
     - [0x7340, c, 7340_len_b00]
@@ -251,6 +251,8 @@ segments:
     - [0x4F9D0, data, 6240_len_c00]
     - [0x52D08, .data, f270_len_1190]
     - [0x52D80, data]
+    - [0x52DC0, .data, 121f0_len_1290]
+    - [0x52EE0, data] # Start of 13480_len_3f0's data
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
     - [0x541B0, .data, 30450]
@@ -281,7 +283,7 @@ segments:
     - [0x73148, .rodata, 1b40_len_20b0]
     - [0x73160, .rodata, 43F0]
     - [0x73200, .rodata, 6e40_len_500]
-    - [0x73434, .rodata, 7340_len_b00]
+    - [0x73230, .rodata, 7340_len_b00]
     - [0x735E0, .rodata, 8800]
     - [0x73610, .rodata, B0E0]
     - [0x73680, .rodata, d610_len_1330]
@@ -315,6 +317,7 @@ segments:
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
+    - [0x75240, .bss, 1b40_len_20b0]
     - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
@@ -1709,6 +1712,7 @@ segments:
     - [0x324a10, c, goompa]
     - [0x324e80, .data, goompa]
     - [0x324F00, .rodata, goompa]
+    - [0x324F10, .bss, goompa]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -4176,13 +4180,16 @@ segments:
     type: code
     start: 0x7E0E80
     vram: 0x80280000
+    overlay: True
     subsegments:
     - [0x7E0E80, c]
     - [0x7E2AA0, c]
     - [0x7E3700, c]
     - [0x7E4690, c]
-    - [0x7E4D00, data]
+    - [0x7E4D00, .data, 7E0E80]
+    - [0x7E4EF0, data]
     - [0x7E7380, .rodata, 7E2AA0]
+    - [0x7E73A0, .bss, 7E0E80]
   - name: machi
     dir: world/area_mac/machi
     type: code

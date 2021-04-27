@@ -11,4 +11,3 @@ extern Script N(main);
 extern Script N(80241040);
 extern NpcGroupList N(npcGroupList_80241A9C);
 extern Script N(makeEntities);
-extern ApiStatus N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall);

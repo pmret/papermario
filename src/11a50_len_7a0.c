@@ -1,16 +1,14 @@
 #include "common.h"
 
 void begin_state_intro(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
     s8 unk_A8;
-    u8* mystery;
 
-    (*gameStatus)->loadMenuState = 0;
+    gGameStatusPtr->loadMenuState = 0;
 
     set_curtain_scale_goal(1.0f);
     set_curtain_fade_goal(0.3f);
 
-    unk_A8 = (*gameStatus)->unk_A8;
+    unk_A8 = gGameStatusPtr->unk_A8;
     switch (unk_A8) {
         case 0:
             intro_logos_set_fade_alpha(0);
@@ -25,9 +23,9 @@ void begin_state_intro(void) {
             D_800A0964 = 0;
 
             // hos_05 (Star Sanctuary)
-            (*gameStatus)->areaID = AREA_HOS;
-            (*gameStatus)->mapID = 5;
-            (*gameStatus)->entryID = 3;
+            gGameStatusPtr->areaID = AREA_HOS;
+            gGameStatusPtr->mapID = 5;
+            gGameStatusPtr->entryID = 3;
             break;
         case 1:
             intro_logos_set_fade_alpha(0);
@@ -42,24 +40,22 @@ void begin_state_intro(void) {
             D_800A0964 = 0;
 
             // hos_04 (Outside the Sanctuary)
-            (*gameStatus)->areaID = AREA_HOS;
-            (*gameStatus)->mapID = 4;
-            (*gameStatus)->entryID = 4;
+            gGameStatusPtr->areaID = AREA_HOS;
+            gGameStatusPtr->mapID = 4;
+            gGameStatusPtr->entryID = 4;
             break;
         default:
             intro_logos_set_fade_alpha(0);
             intro_logos_set_fade_color(208);
-
-            mystery = &D_800779B0;
 
             gGameStatusPtr->unk_A8 = -1;
 
             D_800A0956 = 6;
             D_800A0958 = 6;
 
-            ++*mystery;
-            if (*mystery >= 4) {
-                *mystery = 0;
+            D_800779B0++;
+            if (D_800779B0 >= 4) {
+                D_800779B0 = 0;
             }
 
             D_800A0964 = 3;

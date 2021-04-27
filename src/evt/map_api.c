@@ -38,13 +38,13 @@ ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
     Model* model = get_model_from_list_index(modelListIndex);
 
     if ((model->flags & 0x400) == 0) {
-        guRotateF(&model->transformMatrix, a, x, y, z);
+        guRotateF(model->transformMatrix, a, x, y, z);
         model->flags |= 0x1400;
     } else {
         Matrix4f mtx;
 
-        guRotateF(&mtx, a, x, y, z);
-        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+        guRotateF(mtx, a, x, y, z);
+        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
     }
 
     return ApiStatus_DONE2;

@@ -2,6 +2,9 @@
 #include "ld_addrs.h"
 #include "battle.h"
 
+extern BattleList area_kmr_part_1_battles;
+extern StageList area_kmr_part_1_stages;
+
 const s32 D_80099E40[] = {
     /* 0x75240 */ 0x00010202, 0x03030303, 0x04040404, 0x04040404,
     /* 0x75250 */ 0x05050505, 0x05050505, 0x05050505, 0x05050505,
@@ -77,9 +80,6 @@ const s32 D_8009A140[] = {
     /* 0x75620 */ 0x08080808, 0x08080808, 0x08080808, 0x08080808,
     /* 0x75630 */ 0x08080808, 0x08080808, 0x08080808, 0x08080808,
 };
-
-extern BattleList area_kmr_part_1_battles;
-extern StageList area_kmr_part_1_stages;
 
 BattleArea gBattleAreas[0x30] = {
     {

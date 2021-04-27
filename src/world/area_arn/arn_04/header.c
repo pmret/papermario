@@ -7,11 +7,11 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_arn_04_tattle,
+    .tattle = { MSG_arn_04_tattle },
 };
 
 Script N(802433D0) = SCRIPT({

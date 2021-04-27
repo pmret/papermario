@@ -58,7 +58,7 @@ f32 length2D(f32 x, f32 y) {
 
 HeapNode* _heap_create(s32* addr, u32 size) {
     if (size < 32) {
-        return (HeapNode*) - 1;
+        return (HeapNode*) -1;
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
@@ -131,7 +131,7 @@ void copy_matrix(Matrix4f src, Matrix4f dest) {
     bcopy(src, dest, sizeof(Matrix4f));
 }
 
-s32 dma_copy(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
@@ -182,11 +182,12 @@ void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
 }
 
 s32 _advance_rng(void) {
-    s32* rngVal = &gRandSeed;
+    gRandSeed *= 0x5D588B65;
+    gRandSeed++;
 
-    gGameStatusPtr->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
+    gGameStatusPtr->nextRNG = gRandSeed;
 
-    return *rngVal;
+    return gRandSeed;
 }
 
 f32 func_80029934(void) {

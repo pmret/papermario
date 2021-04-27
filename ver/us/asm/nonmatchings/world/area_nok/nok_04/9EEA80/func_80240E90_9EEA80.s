@@ -12,8 +12,8 @@ glabel func_80240E90_9EEA80
 /* 9EEA9C 80240EAC AFB00018 */   sw       $s0, 0x18($sp)
 /* 9EEAA0 80240EB0 0040802D */  daddu     $s0, $v0, $zero
 /* 9EEAA4 80240EB4 0200202D */  daddu     $a0, $s0, $zero
-/* 9EEAA8 80240EB8 3C118024 */  lui       $s1, %hi(D_80246E50)
-/* 9EEAAC 80240EBC 26316E50 */  addiu     $s1, $s1, %lo(D_80246E50)
+/* 9EEAA8 80240EB8 3C118024 */  lui       $s1, %hi(dgb_01_npcGroupList_80246E50)
+/* 9EEAAC 80240EBC 26316E50 */  addiu     $s1, $s1, %lo(dgb_01_npcGroupList_80246E50)
 /* 9EEAB0 80240EC0 0C01BB7C */  jal       decode_yay0
 /* 9EEAB4 80240EC4 0220282D */   daddu    $a1, $s1, $zero
 /* 9EEAB8 80240EC8 0C00AB1E */  jal       general_heap_free

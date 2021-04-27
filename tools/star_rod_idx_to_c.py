@@ -132,7 +132,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
                 bytes.seek(pos)
                 script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
-            
+
             if try_replace and "exitWalk" in name:
                 script_text = script_text.splitlines()
                 walkDistance = exitIdx = map_ = entryIdx = ""
@@ -217,7 +217,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                          "chaseSpeed", "unk_1C", "unk_20", "chaseRadius", "unk_28", "unk_2C"]
             while i < struct["length"]:
                 var_f, var_i1, var_i2 = unpack_from(f">fii", npcAISettings, i)
-                if not var_f == 0: 
+                if not var_f == 0:
                     tmp_out += INDENT + f".{var_names[x]} = {var_f:.01f}f,\n"
                 if not var_i1 == 0:
                     # account for X32
@@ -243,10 +243,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             for z in range(numNpcs):
                 i = 0
-                var_names = ["id", "settings", "pos", "flags", 
-                             "init", "unk_1C", "yaw", "dropFlags", 
-                             "itemDropChance", "itemDrops", "heartDrops", "flowerDrops", 
-                             "minCoinBonus", "maxCoinBonus", "movement", "animations", 
+                var_names = ["id", "settings", "pos", "flags",
+                             "init", "unk_1C", "yaw", "dropFlags",
+                             "itemDropChance", "itemDrops", "heartDrops", "flowerDrops",
+                             "minCoinBonus", "maxCoinBonus", "movement", "animations",
                              "unk_1E0", "extraAnimations", "tattle"]
 
                 if numNpcs > 1:
@@ -427,7 +427,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "NpcGroupList":
             tmp_out = f"NpcGroupList {name} = {{\n"
             npcGroupList = bytes.read(struct["length"])
-            
+
             i = 0
             while i < struct["length"]:
                 npcCount, npcs, battle = unpack_from(">3I", npcGroupList, i)
@@ -691,9 +691,9 @@ if __name__ == "__main__":
         midx = parse_midx(f, vram=vram)
 
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
-        name_fixes = { 
-                       "script_NpcAI": "npcAI", 
-                       "aISettings": "npcAISettings", 
+        name_fixes = {
+                       "script_NpcAI": "npcAI",
+                       "aISettings": "npcAISettings",
                        "script_ExitWalk": "exitWalk",
                        "script_MakeEntities": "makeEntities",
                      }
@@ -702,7 +702,7 @@ if __name__ == "__main__":
             romfile.seek(struct["start"] + rom_offset)
 
             name = struct["name"]
-            
+
             if name.startswith("N("):
                 name = name[2:-1]
 
@@ -766,14 +766,14 @@ if __name__ == "__main__":
             name = f"NPC_{name}"
             disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
             INCLUDES_NEEDED["npcs"][id_] = name
-        
+
         for id_, name in disasm_script.CONSTANTS["NpcIDs"].items():
             disasm_script.CONSTANTS["MAP_NPCS"][id_] = name
 
         romfile.seek(rom_offset, 0)
 
         disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset)
-        
+
         print("========== Includes needed: ===========\n")
         print(f"#include \"map.h\"")
         print(f"#include \"message_ids.h\"")
@@ -781,7 +781,7 @@ if __name__ == "__main__":
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
                 print(f"#include \"sprite/npc/{npc}.h\"")
         print()
-            
+
         if INCLUDES_NEEDED["forward"]:
             print("========== Forward declares: ==========\n")
             for forward in sorted(INCLUDES_NEEDED["forward"]):
@@ -807,4 +807,4 @@ if __name__ == "__main__":
         print("=======================================\n")
         print(disasm.rstrip())
 
-        
+

@@ -11,6 +11,8 @@ struct ScriptInstance;
 
 typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
 
+typedef Bytecode Script[0];
+
 typedef struct {
     u8 r, g, b, a;
 } Color_RGBA8;
@@ -244,7 +246,7 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ Bytecode* scriptStart;
+    /* 0x10 */ Script* scriptSource;
     /* 0x14 */ struct ScriptInstance* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
@@ -1329,13 +1331,46 @@ typedef struct DecorationTable {
     /* 0x8BE */ char unk_8BE[30];
 } DecorationTable; // size = 0x8E8
 
+typedef struct ShopOwner {
+    /* 0x00 */ s32 npcID;
+    /* 0x04 */ s32 idleAnim;
+    /* 0x08 */ s32 talkAnim;
+    /* 0x0C */ char unk_0C[0x4];
+    /* 0x10 */ Bytecode* unkScript;
+    /* 0x14 */ char unk_14[0x4];
+    /* 0x18 */ s32* shopStringIDs;
+} ShopOwner;
+
+typedef struct StaticInventoryItem {
+    /* 0x0 */ s32 unk_00;
+    /* 0x4 */ char unk_04[0x4];
+    /* 0x8 */ s32 unk_08;
+} StaticInventoryItem; // size = 0xC
+
+typedef struct StaticPriceItem {
+    /* 0x0 */ s32 itemID;
+    /* 0x4 */ s32 sellPrice;
+    /* 0x8 */ char unk_08[0x4];
+} StaticPriceItem; // size = 0xC
+
 typedef struct Shop {
-    /* 0x000 */ char unk_00[16];
-    /* 0x010 */ UNK_PTR owner;
+    /* 0x000 */ s16 flags;
+    /* 0x002 */ s16 numItems;
+    /* 0x004 */ s16 numSpecialPrices;
+    /* 0x006 */ char unk_06[2];
+    /* 0x008 */ s32 unk_08;
+    /* 0x00C */ s32 selectedStoreItemSlot;
+    /* 0x010 */ ShopOwner* owner;
     /* 0x014 */ UNK_PTR staticItemPositions;
-    /* 0x018 */ UNK_PTR staticInventory;
-    /* 0x01C */ UNK_PTR staticPriceList;
-    /* 0x020 */ char unk_20[828];
+    /* 0x018 */ StaticInventoryItem* staticInventory;
+    /* 0x01C */ StaticPriceItem* staticPriceList;
+    /* 0x020 */ s32 costIconID;
+    /* 0x024 */ s32 inventoryItemFlags;
+    /* 0x028 */ s32** unk_28;
+    /* 0x02C */ char unk_2C[0x328];
+    /* 0x354 */ s16 unk_354;
+    /* 0x356 */ char unk_356[0x2];
+    /* 0x358 */ s32 unk_358;
 } Shop; // size = 0x35C
 
 typedef struct Encounter {
@@ -1451,10 +1486,10 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ Bytecode* idleCode;
-    /* 0x1C4 */ Bytecode* takeTurnCode;
-    /* 0x1C8 */ Bytecode* onHitCode;
-    /* 0x1CC */ Bytecode* onTurnChangeCode;
+    /* 0x1C0 */ Script* idleScriptSource;
+    /* 0x1C4 */ Script* takeTurnScriptSource;
+    /* 0x1C8 */ Script* onHitScriptSource;
+    /* 0x1CC */ Script* onTurnChanceScriptSource;
     /* 0x1D0 */ struct ScriptInstance* idleScript;
     /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
     /* 0x1D8 */ struct ScriptInstance* onHitScript;
@@ -1914,7 +1949,7 @@ typedef struct EntityModel {
     /* 0x10 */ s32* cmdListReadPos;
     /* 0x14 */ Gfx* displayList;
     /* 0x18 */ Matrix4s transform;
-    /* 0x58 */ s32 cmdListSavedPos;
+    /* 0x58 */ s32* cmdListSavedPos;
     /* 0x5C */ Vtx* vertexArray;
     /* 0x60 */ UNK_FUN_PTR(fpSetupGfxCallback);
     /* 0x64 */ s32 setupGfxCallbackArg0;

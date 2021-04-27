@@ -57,12 +57,12 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
             playerStatus->animFlags |= 0x40000;
         }
-        OVERRIDE_FLAG_SET(0x40);
+        gOverrideFlags |= 0x40;
     } else {
         enable_player_input();
         func_800EF600();
         func_800E01DC();
-        OVERRIDE_FLAG_UNSET(0x40);
+        gOverrideFlags &= ~0x40;
         func_800E983C();
     }
     return ApiStatus_DONE2;

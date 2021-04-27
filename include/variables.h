@@ -99,7 +99,7 @@ extern s32 D_802E99DC;
 extern Entity* D_802EB3A0;
 extern s32 D_8015C7D0[3]; // not size 3
 
-extern f32 D_800F7B70[];
+extern f32 D_800F7B70[4];
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
@@ -157,7 +157,7 @@ extern s32 D_802A3838;
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
-extern Bytecode* gPauseMenuCurrentDescIconScript;
+extern s32* gPauseMenuCurrentDescIconScript;
 extern s8 gPauseMenuCurrentTab;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
@@ -234,6 +234,7 @@ extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
+extern DisplayContext D_80164000[];
 
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;
@@ -309,7 +310,7 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern Bytecode* SCRIPT_NpcDefeat;
+extern Script* SCRIPT_NpcDefeat;
 extern Script ShakeCam1;
 extern Script ShakeCamX;
 
@@ -353,8 +354,8 @@ extern s32 D_802920E8[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 
-extern UNK_PTR D_800F7BE8;
-extern UNK_PTR D_800F7BBC;
+extern s32 D_800F7BE8[];
+extern s32 D_800F7BBC[];
 
 extern s32 D_802C05CC;
 
@@ -364,6 +365,6 @@ extern s16 gCurrentCamID;
 extern s32 D_803DA800;
 
 // Dead code
-extern PlayerStatus* D_800FFC90; // gPlayerStatusPtr
+extern PlayerStatus* dead_gPlayerStatusPtr;
 
 #endif

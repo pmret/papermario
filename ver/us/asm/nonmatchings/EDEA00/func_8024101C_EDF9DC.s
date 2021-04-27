@@ -110,8 +110,8 @@ glabel func_8024101C_EDF9DC
 /* EDFB74 802411B4 00000000 */   nop
 /* EDFB78 802411B8 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* EDFB7C 802411BC C60E0040 */  lwc1      $f14, 0x40($s0)
-/* EDFB80 802411C0 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EDFB84 802411C4 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EDFB80 802411C0 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EDFB84 802411C4 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EDFB88 802411C8 A600008E */  sh        $zero, 0x8e($s0)
 /* EDFB8C 802411CC 8C460028 */  lw        $a2, 0x28($v0)
 /* EDFB90 802411D0 0C00ABDC */  jal       fio_validate_header_checksums

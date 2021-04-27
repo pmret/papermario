@@ -1,6 +1,8 @@
 #include "common.h"
 #include "goompa.h"
 
+static s32 goompa_802BD600;
+
 void world_goompa_init(Npc* partner) {
     partner->collisionHeight = 24;
     partner->collisionRadius = 20;
@@ -36,7 +38,7 @@ Script world_goompa_take_out = SCRIPT({
     GoompaTakeOut();
 });
 
-s32 D_802BD58C_324E9C = 0x802BD600;
+s32 D_802BD58C_324E9C = &goompa_802BD600;
 
 Script world_goompa_update = SCRIPT({
     func_802BD14C_324A5C();

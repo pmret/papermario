@@ -4,7 +4,7 @@
 .section .rodata
 
 glabel D_80247BE0_EE65A0
-.word 0x70617274, 0x795F706F, 0x6B6F7069, 0x00000000
+.ascii "party_pokopi\0\0\0\0"
 
 .section .text
 

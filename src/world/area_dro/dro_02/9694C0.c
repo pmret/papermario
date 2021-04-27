@@ -13,8 +13,8 @@
 
 #define UNK_ALPHA_FUNC_NPC 10
 
-extern s16 D_8014C290;
-extern s16 D_8014C294;
+extern s16 D_8014C290_sym_that_alex_removed;
+extern s16 D_8014C294_sym_that_alex_removed;
 
 enum {
     NPC_ARCHEOLOGIST,
@@ -992,9 +992,9 @@ Script N(80246520) = {
             SI_CMD(ScriptOpcode_CALL, N(func_80240DF0_969FB0)),
             SI_CMD(ScriptOpcode_CALL, SetMessageValue, SI_SAVE_VAR(352), 0),
             SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(352), 1),
-                SI_CMD(ScriptOpcode_CALL, SetMessageString, &D_8014C294, 1),
+                SI_CMD(ScriptOpcode_CALL, SetMessageString, &D_8014C294_sym_that_alex_removed, 1),
             SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, SetMessageString, &D_8014C290, 1),
+                SI_CMD(ScriptOpcode_CALL, SetMessageString, &D_8014C290_sym_that_alex_removed, 1),
             SI_CMD(ScriptOpcode_END_IF),
             SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524303),
         SI_CMD(ScriptOpcode_END_IF),

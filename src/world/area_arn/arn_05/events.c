@@ -61,8 +61,8 @@ static s32 N(pad_16A8)[] = {
 NpcSettings N(npcSettings_802416B0) = {
     .height = 90,
     .radius = 65,
-    .onHit = EnemyNpcHit,
-    .onDefeat = EnemyNpcDefeat,
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
     .level = 13,
 };
 
@@ -807,7 +807,7 @@ StaticNpc N(npcGroup_802443AC) = {
         NPC_ANIM(world_tubba, Palette_00, Anim_0),
         NPC_ANIM(world_tubba, Palette_00, Anim_0),
     },
-    .extraAnimations = &N(extraAnimationList_80244390),
+    .extraAnimations = N(extraAnimationList_80244390),
 };
 
 Script N(idle_8024459C) = SCRIPT({

@@ -14,11 +14,11 @@ EntryList N(entryList) = {
 };
 
 MapConfig N(config) = {
-    .main = N(main),
-    .entryList = N(entryList),
+    .main = &N(main),
+    .entryList = &N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_sbk_01_tattle,
+    .tattle = { MSG_sbk_01_tattle },
 };
 
 Script N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  0, "sbk_00",  1);

@@ -111,7 +111,7 @@ void N(reflection_setup_wall)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = N(reflection_render_wall);
+        renderTaskPtr->appendGfx = (void (*)(void *)) N(reflection_render_wall);
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }
@@ -143,7 +143,7 @@ ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_dynamic_entity_world(NULL, N(reflection_setup_floor));
-            OVERRIDE_FLAG_SET(0x80);
+            gOverrideFlags |= 0x80;
             break;
         case REFLECTION_WALL:
             break;
@@ -189,7 +189,7 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
-        renderTaskPtr->appendGfx = !(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(reflection_render_floor_fancy);
+        renderTaskPtr->appendGfx = (void (*)(void *)) (!(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(reflection_render_floor_fancy));
         queue_render_task(renderTaskPtr);
     }
 }

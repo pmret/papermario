@@ -12,10 +12,8 @@ enum {
 };
 
 ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CD348(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CD3C0(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus N(func_80240000_BFD880)(void);
 ApiStatus N(GetEntityPosition)(ScriptInstance* script, s32 isInitialCall);

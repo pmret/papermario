@@ -68,13 +68,13 @@ ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802BD3E4(ScriptInstance* script, s32 isInitialCall) {
     set_time_freeze_mode(2);
-    OVERRIDE_FLAG_SET(0x200000);
+    gOverrideFlags |= 0x200000;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802BD41C(ScriptInstance* script, s32 isInitialCall) {
     set_time_freeze_mode(0);
-    OVERRIDE_FLAG_UNSET(0x200000);
+    gOverrideFlags &= ~0x200000;
     return ApiStatus_DONE2;
 }
 

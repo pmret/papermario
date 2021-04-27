@@ -47,9 +47,8 @@ s16 intro_logos_fade_out(s16 addAlpha) {
 }
 
 void intro_logos_update_fade(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
-    set_transition_stencil_zoom_0(0, (*gameStatus)->bootAlpha);
-    set_transition_stencil_color(0, (*gameStatus)->bootBlue, (*gameStatus)->bootGreen, (*gameStatus)->bootRed);
+    set_transition_stencil_zoom_0(0, gGameStatusPtr->bootAlpha);
+    set_transition_stencil_color(0, gGameStatusPtr->bootBlue, gGameStatusPtr->bootGreen, gGameStatusPtr->bootRed);
 }
 
 void begin_state_battle(void) {
@@ -58,25 +57,24 @@ void begin_state_battle(void) {
 
 #ifdef NON_MATCHING
 void step_battle(void) {
-    s8* temp800A0900 = &D_800A0900;
     s32 phi_a0;
+    u32 currentBattleSection;
+    u32 unk_47B;
 
-    if (*temp800A0900 == 5) {
+    if (D_800A0900 == 5) {
         if (D_8009A658[1] != D_8009A64C) {
             return;
         }
-        (*temp800A0900)--;
-        OVERRIDE_FLAG_SET(0x8);
+        D_800A0900--;
+        gOverrideFlags |= 0x8;
         nuContRmbForceStop();
     }
 
-    if (*temp800A0900 >= 0) {
-        if (*temp800A0900 > 0) {
-            (*temp800A0900)--;
+    if (D_800A0900 >= 0) {
+        if (D_800A0900 > 0) {
+            D_800A0900--;
         } else {
-            GameStatus* gameStatus;
-
-            *temp800A0900 = -1;
+            D_800A0900 = -1;
             nuGfxSetCfb(&D_800778A0, 2);
             nuContRmbForceStopEnd();
             sfx_stop_env_sounds();
@@ -87,21 +85,23 @@ void step_battle(void) {
             func_802B20B4();
             func_80149670(0);
 
-            gameStatus = gGameStatusPtr;
+            currentBattleSection = gBattleStatus.currentBattleSection;
+            unk_47B = gBattleStatus.unk_47B;
 
             // This part sucks
-            if (!(gameStatus->peachFlags & 1)) {
-                if (gBattleStatus.currentBattleSection != 0x26 || gBattleStatus.unk_47B != 0) {
-                    phi_a0 = 5;
-                } else {
-                    gameStatus->peachFlags |= 1;
+            if (gGameStatusPtr->peachFlags & 1) {
+                gGameStatusPtr->peachFlags |= 1;
+                phi_a0 = 6;
+            } else if (currentBattleSection == 0x26) {
+                if (unk_47B == 0) {
+                    gGameStatusPtr->peachFlags |= 1;
                     phi_a0 = 6;
+                } else {
+                    phi_a0 = 5;
                 }
             } else {
-                gameStatus->peachFlags |= 1;
-                phi_a0 = 6;
+                phi_a0 = 5;
             }
-
             spr_init_sprites(phi_a0);
 
             clear_model_data();
@@ -118,15 +118,15 @@ void step_battle(void) {
             npc_list_clear();
             clear_entity_data(1);
             clear_trigger_data();
-            dma_copy(&code_code_16C8E0_ROM_START, &code_code_16C8E0_ROM_END, &code_code_16C8E0_VRAM);
+            dma_copy(&_16C8E0_ROM_START, &_16C8E0_ROM_END, &_16C8E0_VRAM);
             initialize_battle();
             func_802409F4();
             load_battle_section();
             D_800A0904 = gPlayerStatusPtr->animFlags;
             gPlayerStatusPtr->animFlags &= ~0x40;
-            D_800A0908 = get_time_freeze_mode(gPlayerStatusPtr);
+            D_800A0908 = get_time_freeze_mode();
             set_time_freeze_mode(0);
-            OVERRIDE_FLAG_UNSET(0x8);
+            gOverrideFlags &= ~0x8;
 
             if (D_800A0900 >= 0) {
                 return;
@@ -146,7 +146,6 @@ void step_battle(void) {
 INCLUDE_ASM(s32, "ebd0_len_6a0", step_battle);
 #endif
 
-
 void func_80033B54(void) {
     draw_encounter_ui();
     if (D_800A0900 < 0) {
@@ -155,7 +154,7 @@ void func_80033B54(void) {
 }
 
 void func_80033B88(void) {
-    OVERRIDE_FLAG_SET(0x8);
+    gOverrideFlags |= 0x8;
     nuContRmbForceStop();
     D_800A0900 = 5;
 }

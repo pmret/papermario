@@ -62,8 +62,8 @@ glabel func_80240DC4_EA16C4
 /* EA174C 80240E4C 8622008E */  lh        $v0, 0x8e($s1)
 /* EA1750 80240E50 1440025D */  bnez      $v0, .L802417C8
 /* EA1754 80240E54 00000000 */   nop
-/* EA1758 80240E58 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EA175C 80240E5C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EA1758 80240E58 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EA175C 80240E5C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EA1760 80240E60 0C00AB85 */  jal       func_8002AE14
 /* EA1764 80240E64 C44C00A8 */   lwc1     $f12, 0xa8($v0)
 /* EA1768 80240E68 3C014334 */  lui       $at, 0x4334
@@ -116,8 +116,8 @@ glabel func_80240DC4_EA16C4
 /* EA181C 80240F1C 8EC20088 */  lw        $v0, 0x88($s6)
 /* EA1820 80240F20 14400010 */  bnez      $v0, .L80240F64
 /* EA1824 80240F24 46000606 */   mov.s    $f24, $f0
-/* EA1828 80240F28 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EA182C 80240F2C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EA1828 80240F28 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EA182C 80240F2C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EA1830 80240F30 804300B4 */  lb        $v1, 0xb4($v0)
 /* EA1834 80240F34 3C014200 */  lui       $at, 0x4200
 /* EA1838 80240F38 4481A000 */  mtc1      $at, $f20
@@ -132,8 +132,8 @@ glabel func_80240DC4_EA16C4
 /* EA185C 80240F5C 080903E8 */  j         .L80240FA0
 /* EA1860 80240F60 0200202D */   daddu    $a0, $s0, $zero
 .L80240F64:
-/* EA1864 80240F64 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EA1868 80240F68 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EA1864 80240F64 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EA1868 80240F68 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EA186C 80240F6C 804300B4 */  lb        $v1, 0xb4($v0)
 /* EA1870 80240F70 3C014218 */  lui       $at, 0x4218
 /* EA1874 80240F74 4481A000 */  mtc1      $at, $f20
@@ -150,8 +150,8 @@ glabel func_80240DC4_EA16C4
 .L80240F9C:
 /* EA189C 80240F9C 0200202D */  daddu     $a0, $s0, $zero
 .L80240FA0:
-/* EA18A0 80240FA0 3C158010 */  lui       $s5, %hi(D_800FFC90)
-/* EA18A4 80240FA4 26B5FC90 */  addiu     $s5, $s5, %lo(D_800FFC90)
+/* EA18A0 80240FA0 3C158010 */  lui       $s5, %hi(dead_gPlayerStatusPtr)
+/* EA18A4 80240FA4 26B5FC90 */  addiu     $s5, $s5, %lo(dead_gPlayerStatusPtr)
 /* EA18A8 80240FA8 4407C000 */  mfc1      $a3, $f24
 /* EA18AC 80240FAC 862200A6 */  lh        $v0, 0xa6($s1)
 /* EA18B0 80240FB0 8EA30000 */  lw        $v1, ($s5)
@@ -398,8 +398,8 @@ glabel func_80240DC4_EA16C4
 /* EA1C54 80241354 08090550 */  j         .L80241540
 /* EA1C58 80241358 241E0001 */   addiu    $fp, $zero, 1
 .L8024135C:
-/* EA1C5C 8024135C 3C108010 */  lui       $s0, %hi(D_800FFC90)
-/* EA1C60 80241360 2610FC90 */  addiu     $s0, $s0, %lo(D_800FFC90)
+/* EA1C5C 8024135C 3C108010 */  lui       $s0, %hi(dead_gPlayerStatusPtr)
+/* EA1C60 80241360 2610FC90 */  addiu     $s0, $s0, %lo(dead_gPlayerStatusPtr)
 /* EA1C64 80241364 8E020000 */  lw        $v0, ($s0)
 /* EA1C68 80241368 3C014024 */  lui       $at, 0x4024
 /* EA1C6C 8024136C 44811800 */  mtc1      $at, $f3
@@ -673,8 +673,8 @@ glabel func_80240DC4_EA16C4
 /* EA2074 80241774 E620003C */  swc1      $f0, 0x3c($s1)
 .L80241778:
 /* EA2078 80241778 C62C0038 */  lwc1      $f12, 0x38($s1)
-/* EA207C 8024177C 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EA2080 80241780 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EA207C 8024177C 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EA2080 80241780 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EA2084 80241784 C62E0040 */  lwc1      $f14, 0x40($s1)
 /* EA2088 80241788 8C460028 */  lw        $a2, 0x28($v0)
 /* EA208C 8024178C 0C00ABDC */  jal       fio_validate_header_checksums

@@ -380,8 +380,8 @@ glabel func_80242AF0_EE14B0
 /* EE1A08 80243048 24020004 */   addiu    $v0, $zero, 4
 /* EE1A0C 8024304C AE420094 */  sw        $v0, 0x94($s2)
 /* EE1A10 80243050 C62C0038 */  lwc1      $f12, 0x38($s1)
-/* EE1A14 80243054 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EE1A18 80243058 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EE1A14 80243054 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EE1A18 80243058 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EE1A1C 8024305C C62E0040 */  lwc1      $f14, 0x40($s1)
 /* EE1A20 80243060 8C460028 */  lw        $a2, 0x28($v0)
 /* EE1A24 80243064 0C00ABDC */  jal       fio_validate_header_checksums
@@ -548,8 +548,8 @@ glabel func_80242AF0_EE14B0
 /* EE1C94 802432D4 C62C0038 */  lwc1      $f12, 0x38($s1)
 /* EE1C98 802432D8 C62E0040 */  lwc1      $f14, 0x40($s1)
 /* EE1C9C 802432DC 8E220000 */  lw        $v0, ($s1)
-/* EE1CA0 802432E0 3C048010 */  lui       $a0, %hi(D_800FFC90)
-/* EE1CA4 802432E4 8C84FC90 */  lw        $a0, %lo(D_800FFC90)($a0)
+/* EE1CA0 802432E0 3C048010 */  lui       $a0, %hi(dead_gPlayerStatusPtr)
+/* EE1CA4 802432E4 8C84FC90 */  lw        $a0, %lo(dead_gPlayerStatusPtr)($a0)
 /* EE1CA8 802432E8 3C030004 */  lui       $v1, 4
 /* EE1CAC 802432EC AE20001C */  sw        $zero, 0x1c($s1)
 /* EE1CB0 802432F0 00431025 */  or        $v0, $v0, $v1
