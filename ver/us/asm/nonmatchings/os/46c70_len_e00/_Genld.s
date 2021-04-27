@@ -4,7 +4,7 @@
 .section .rodata
 
 glabel D_80099E30
-.word 0x30000000, 0x00000000, 0x00000000, 0x00000000
+.ascii "0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
 
 .section .text
 

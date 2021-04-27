@@ -3,7 +3,7 @@
 .section .rodata
 
 glabel D_80242470_8A7EF0
-.word 0x74696B5F, 0x31385F73, 0x68617065, 0x00000000
+.ascii "tik_18_shape\0\0\0\0"
 
 glabel D_80242480_8A7F00
-.word 0x74696B5F, 0x31385F68, 0x69740000, 0x74696B5F, 0x32350000, 0x74696B5F, 0x32330000, 0x00000000
+.ascii "tik_18_hit\0\0tik_25\0\0tik_23\0\0\0\0\0\0"
