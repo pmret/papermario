@@ -9,7 +9,6 @@
 #include "sprite/npc/moustafa.h"
 #include "sprite/npc/toad.h"
 #include "sprite/npc/world_merlee.h"
-#include "world/area_dro/dro_02/img_1.png.h"
 
 #define UNK_ALPHA_FUNC_NPC 10
 
@@ -1226,9 +1225,6 @@ Vtx N(D_80247888_970A48)[] = {
     VTX(-30, 0, -2, 0, 2016, 0x00, 0x00, 0x00, 0x00),
     VTX(30, 0, -2, 1920, 2016, 0x00, 0x00, 0x00, 0x00),
 };
-
-extern void* world_area_dro_dro_02_img_1_pal_png;
-extern void* world_area_dro_dro_02_img_1_png;
 
 Gfx N(D_802478C8_970A88)[] = {
     gsDPPipeSync(),
