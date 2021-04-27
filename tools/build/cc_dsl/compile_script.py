@@ -54,6 +54,7 @@ script_parser = Lark(r"""
          | "jump" expr          -> jump_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
          | lhs set_op expr      -> set_stmt
+         | lhs set_op "(int)" expr    -> set_int_stmt
          | lhs set_op "(float)" expr  -> set_float_stmt
          | lhs set_op "(const)" expr  -> set_const_stmt
          | bind_stmt
@@ -549,6 +550,12 @@ class Compile(Transformer):
             opcode = opcodes.get("int", None)
             if not opcode:
                 raise CompileError(f"int operation `{opcodes['__op__']}' not supported", tree.meta)
+        return Cmd(opcode, lhs, rhs)
+    def set_int_stmt(self, tree):
+        lhs, opcodes, rhs = tree.children
+        opcode = opcodes.get("int", None)
+        if not opcode:
+            raise CompileError(f"int operation `{opcodes['__op__']}' not supported", tree.meta)
         return Cmd(opcode, lhs, rhs)
     def set_float_stmt(self, tree):
         lhs, opcodes, rhs = tree.children
