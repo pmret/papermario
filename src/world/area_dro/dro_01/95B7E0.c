@@ -80,7 +80,7 @@ static N(temp)* N(D_8024DFE0);
 static N(temp)* N(D_8024DFE4);
 static N(temp)* N(D_8024DFE8);
 static s8 N(pad_D_8024DFEC)[0x4];
-static s32 N(D_8024DFF0)[0x70];
+static s32 N(D_8024DFF0)[112];
 static s8 N(pad_D_8024E1B0)[0x4]; // Probably part of the above
 static s32 N(D_8024E1B4);
 
@@ -3489,7 +3489,7 @@ ApiStatus N(func_802427BC_95D9BC)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_8024DFF0)[i] = i + 16;
-            N(D_8024DFF0)[0x70] = 0;
+            N(D_8024DFF0)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

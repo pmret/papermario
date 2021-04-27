@@ -495,7 +495,7 @@ ApiStatus N(func_802402F8_CEE558)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i <= 90; i++) {
             N(D_802426E0)[i] = i + 128;
-            N(D_802426E0)[0x5B] = 0;
+            N(D_802426E0)[91] = 0;
         }
     }
     return ApiStatus_DONE2;

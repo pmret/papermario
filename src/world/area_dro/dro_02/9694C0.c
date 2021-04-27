@@ -67,9 +67,9 @@ static ScriptInstance* N(D_8024EFCC);
 static s32 N(D_8024EFD0)[16];
 static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
-static s32 N(D_8024F080)[0x70];
+static s32 N(D_8024F080)[112];
 static s8 N(pad_D_8024F244)[0x4]; // likely conencted to the above
-static s32 N(D_8024F248)[0x5B];
+static s32 N(D_8024F248)[91];
 static s8 N(pad_D_8024F3B4)[0x4]; // likely conencted to the above
 static s32 N(D_8024F3B8);
 
@@ -3979,7 +3979,7 @@ ApiStatus N(func_8024334C_96C50C)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_8024F080)[i] = i + 16;
-            N(D_8024F080)[0x70] = 0;
+            N(D_8024F080)[112] = 0;
         }
     }
     return ApiStatus_DONE2;
@@ -3998,7 +3998,7 @@ ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i <= 90; i++) {
             N(D_8024F248)[i] = i + 128;
-            N(D_8024F248)[0x5B] = 0;
+            N(D_8024F248)[91] = 0;
         }
     }
     return ApiStatus_DONE2;

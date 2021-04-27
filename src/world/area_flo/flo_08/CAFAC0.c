@@ -16,8 +16,8 @@ enum {
 };
 
 // BSS
-static s32 N(D_802462C0_B4AA30)[0x5B];
-static s32 N(D_8024642C)[0x5B];
+static s32 N(D_802462C0_B4AA30)[91];
+static s32 N(D_8024642C)[91];
 static s32 N(D_80246598);
 
 // DATA
@@ -1523,7 +1523,7 @@ ApiStatus N(func_802419FC_CB073C)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i <= 90; i++) {
             N(D_802462C0_B4AA30)[i] = i + 128;
-            N(D_802462C0_B4AA30)[0x5B] = 0;
+            N(D_802462C0_B4AA30)[91] = 0;
         }
     }
     return ApiStatus_DONE2;

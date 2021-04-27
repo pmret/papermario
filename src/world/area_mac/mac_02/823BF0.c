@@ -485,7 +485,7 @@ ApiStatus N(func_80242B0C_825DCC)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[0x70] = 0;
+            N(D_80244A20)[112] = 0;
         }
     }
     return ApiStatus_DONE2;
@@ -507,7 +507,7 @@ ApiStatus N(func_80242BA8_825E68)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[0x70] = 0;
+            N(D_80244A20)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

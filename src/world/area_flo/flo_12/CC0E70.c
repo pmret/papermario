@@ -7,7 +7,7 @@ enum {
     NPC_ROSIE1,
 };
 
-static N(D_802429E0)[0x70];
+static N(D_802429E0)[112];
 
 EntryList N(entryList) = {
     { 280.0f, 0.0f, 0.0f, 270.0f },
@@ -709,7 +709,7 @@ ApiStatus N(func_8024064C_CC147C)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_802429E0)[i] = i + 16;
-            N(D_802429E0)[0x70] = 0;
+            N(D_802429E0)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

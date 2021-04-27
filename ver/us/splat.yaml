@@ -8986,13 +8986,11 @@ segments:
     start: 0xCF0940
     vram: 0x80240000
     subsegments:
-    - [0xCF0940, c]
-    - [0xCF0980, c]
-    - [0xCF0BC0, c]
-    - [0xCF0ED0, data]
-    - [0xCF1680, data]
-    - [0xCF2AF0, data]
-    - [0xCF2BB0, rodata]
+    - [0xCF0940,       c, CF0940]
+    - [0xCF0980,       c, CF0980]
+    - [0xCF0BC0,       c, CF0BC0]
+    - [0xCF0ED0,   .data, CF0940]
+    - [0xCF2BB0, .rodata, CF0940]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code

@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-static s32 N(D_80244A20)[0x70];
+static s32 N(D_80244A20)[112];
 
 Script N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -1236,7 +1236,7 @@ ApiStatus N(func_80241680_BE0410)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         for (i = 0; i < 0x70; i++) {
             N(D_80244A20)[i] = i + 16;
-            N(D_80244A20)[0x70] = 0;
+            N(D_80244A20)[112] = 0;
         }
     }
     return ApiStatus_DONE2;
