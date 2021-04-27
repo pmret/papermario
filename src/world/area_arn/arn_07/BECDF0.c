@@ -2,9 +2,6 @@
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/tubbas_heart.h"
 
-void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-
 struct N(temp) {
     char unk_00[0xC];
     EffectInstanceDataThing* unk_0C;

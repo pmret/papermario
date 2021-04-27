@@ -205,7 +205,9 @@ def fix_args(self, func, args, info):
             arg = "0x" + arg[2:]
         if "0x" in arg and int(arg, 16) >= 0xF0000000:
             arg = f"{int(arg, 16) - 0x100000000}"
-        if i in info:
+        if i in info or (i+1 == len(args) and -1 in info):
+            if i+1 == len(args) and -1 in info:
+                i = -1
             if "_" in arg:
                 new_args.append(f"{arg}")
                 continue
@@ -275,6 +277,7 @@ def fix_args(self, func, args, info):
                 else:
                     #Print the unknowns in hex
                     new_args.append(f"0x{int(argNum):X}")
+
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
@@ -374,7 +377,7 @@ replace_funcs = {
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
     "ShowMessageAtWorldPos"     :{0:"CustomMsg"},
-    "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", -1:"CustomMsg"},
     "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs"},

@@ -8950,11 +8950,11 @@ segments:
     start: 0xCE6700
     vram: 0x80240000
     subsegments:
-    - [0xCE6700, c]
-    - [0xCE7240, c]
-    - [0xCE73F0, data]
-    - [0xCE7EC0, data]
-    - [0xCEC210, rodata]
+    - [0xCE6700,       c, CE6700]
+    - [0xCE7240,       c, CE7240]
+    - [0xCE73F0,   .data, CE6700]
+    - [0xCE7440,   .data, CE7240]
+    - [0xCEC210, .rodata, CE6700]
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
