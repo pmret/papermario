@@ -37,10 +37,9 @@ NUPiOverlaySegment D_8007795C = {
 void appendGfx_intro_logos();
 
 // bss?
-extern s8 D_800A0910[];
+extern s8* D_800A0910;
 
 void state_init_logos(void) {
-    Camera* cameras = &gCameras;
     s8* romStart;
     s8* romEnd;
     s32* logoRam;
@@ -58,41 +57,41 @@ void state_init_logos(void) {
     logoRam = heap_malloc(romEnd - romStart);
 
     temp_800A0910 = &D_800A0910;
-    *temp_800A0910 = logoRam;
+    D_800A0910 = logoRam;
 
     dma_copy(romStart, romEnd, logoRam);
 
     // TODO probably this is not ideal
-    D_800A0918 = (*temp_800A0910) + 0x0;
-    D_800A0914 = (*temp_800A0910) + 0x7000;
-    D_800A091C = (*temp_800A0910) + 0x15000;
+    D_800A0918 = D_800A0910 + 0x0;
+    D_800A0914 = D_800A0910 + 0x7000;
+    D_800A091C = D_800A0910 + 0x15000;
 
     nuContRmbForceStop();
     create_cameras_a();
-    cameras[0].mode = 6;
-    cameras[0].unk_06 = 1;
-    cameras[0].nearClip = 0x10;
-    cameras[0].farClip = 0x1000;
+    gCameras[0].mode = 6;
+    gCameras[0].unk_06 = 1;
+    gCameras[0].nearClip = 0x10;
+    gCameras[0].farClip = 0x1000;
     gCurrentCameraID = 0;
-    cameras[0].vfov = 25.0f;
-    cameras[0].flags |= 0x2;
-    cameras[1].flags |= 0x2;
-    cameras[2].flags |= 0x2;
-    cameras[3].flags |= 0x2;
+    gCameras[0].vfov = 25.0f;
+    gCameras[0].flags |= 0x2;
+    gCameras[1].flags |= 0x2;
+    gCameras[2].flags |= 0x2;
+    gCameras[3].flags |= 0x2;
     set_cam_viewport(0, 12, 28, 296, 184);
-    cameras[0].unk_1E = 0x28;
-    cameras[0].backgroundColor[0] = 0;
-    cameras[0].backgroundColor[1] = 0;
-    cameras[0].backgroundColor[2] = 0;
-    cameras[0].unk_54 = 25.0f;
-    cameras[0].unk_58 = 25.0f;
-    cameras[0].unk_1C = 0;
-    cameras[0].unk_20 = 100;
-    cameras[0].unk_22 = 0;
-    cameras[0].lookAt_eye[0] = 500.0f;
-    cameras[0].lookAt_eye[1] = 1000.0f;
-    cameras[0].lookAt_eye[2] = 1500.0f;
-    cameras[0].unk_5C = 150.0f;
+    gCameras[0].unk_1E = 0x28;
+    gCameras[0].backgroundColor[0] = 0;
+    gCameras[0].backgroundColor[1] = 0;
+    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].unk_54 = 25.0f;
+    gCameras[0].unk_58 = 25.0f;
+    gCameras[0].unk_1C = 0;
+    gCameras[0].unk_20 = 100;
+    gCameras[0].unk_22 = 0;
+    gCameras[0].lookAt_eye[0] = 500.0f;
+    gCameras[0].lookAt_eye[1] = 1000.0f;
+    gCameras[0].lookAt_eye[2] = 1500.0f;
+    gCameras[0].unk_5C = 150.0f;
     clear_script_list();
     clear_dynamic_entity_list();
     func_8011D890();
@@ -109,11 +108,7 @@ void state_init_logos(void) {
     gGameStatusPtr->enableBackground = FALSE;
 }
 
-//INCLUDE_ASM(s32, "f270_len_1190", state_step_logos);
 void state_step_logos(void) {
-    s32 gameModeTemp;
-    s32* temp800A0910;
-
     if (gGameStatusPtr->bSkipIntro) {
         if (intro_logos_fade_out(0xA) != 0) {
             set_curtain_scale(1.0f);
@@ -122,16 +117,12 @@ void state_step_logos(void) {
         }
     } else {
         switch (gGameStatusPtr->loadMenuState) {
-            GameStatus** gameStatus;
-
             case 1:
-                gameStatus = &gGameStatusPtr;
-
-                if ((*gameStatus)->menuCounter == 0) {
+                if (gGameStatusPtr->menuCounter == 0) {
                     intro_logos_set_fade_color(208);
-                    (*gameStatus)->loadMenuState++;
+                    gGameStatusPtr->loadMenuState++;
                 }
-                (*gameStatus)->menuCounter--;
+                gGameStatusPtr->menuCounter--;
                 break;
             case 2:
                 if (intro_logos_fade_out(0xA) != 0) {
@@ -140,20 +131,16 @@ void state_step_logos(void) {
                 break;
             case 3:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    GameStatus** gameStatus = &gGameStatusPtr;
-
-                    (*gameStatus)->loadMenuState++;
-                    (*gameStatus)->menuCounter = 40;
+                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->menuCounter = 40;
                 }
                 break;
             case 4:
-                gameStatus = &gGameStatusPtr;
-
-                if ((*gameStatus)->menuCounter == 0) {
-                    (*gameStatus)->loadMenuState++;
+                if (gGameStatusPtr->menuCounter == 0) {
+                    gGameStatusPtr->loadMenuState++;
                     intro_logos_set_fade_color(208);
                 }
-                (*gameStatus)->menuCounter--;
+                gGameStatusPtr->menuCounter--;
                 break;
             case 5:
                 if (intro_logos_fade_out(0xA) != 0) {
@@ -163,20 +150,17 @@ void state_step_logos(void) {
             case 0:
             case 6:
                 if (intro_logos_fade_in(0xA) != 0) {
-                    GameStatus** gameStatus = &gGameStatusPtr;
-
-                    (*gameStatus)->loadMenuState++;
-                    (*gameStatus)->menuCounter = 30;
+                    gGameStatusPtr->loadMenuState++;
+                    gGameStatusPtr->menuCounter = 30;
                 }
                 break;
             case 7:
-                gameStatus = &gGameStatusPtr;
-                if ((*gameStatus)->menuCounter == 0) {
-                    (*gameStatus)->loadMenuState++;
+                if (gGameStatusPtr->menuCounter == 0) {
+                    gGameStatusPtr->loadMenuState++;
                     intro_logos_set_fade_color(208);
-                    (*gameStatus)->menuCounter = 30;
+                    gGameStatusPtr->menuCounter = 30;
                 }
-                (*gameStatus)->menuCounter--;
+                gGameStatusPtr->menuCounter--;
                 break;
             case 8:
                 if (gGameStatusPtr->menuCounter == 0) {
@@ -190,10 +174,8 @@ void state_step_logos(void) {
                 break;
             case 9:
                 if (intro_logos_fade_out(0xA) != 0) {
-                    GameStatus** gameStatus = &gGameStatusPtr;
-
-                    (*gameStatus)->menuCounter = 15;
-                    (*gameStatus)->loadMenuState++;
+                    gGameStatusPtr->menuCounter = 15;
+                    gGameStatusPtr->loadMenuState++;
                 }
                 break;
             case 10:
@@ -204,9 +186,8 @@ void state_step_logos(void) {
                 }
                 break;
             case 11:
-                temp800A0910 = &D_800A0910;
-                heap_free(*temp800A0910);
-                *temp800A0910 = 0;
+                heap_free(D_800A0910);
+                D_800A0910 = 0;
 
                 intro_logos_set_fade_alpha(255);
                 gGameStatusPtr->unk_A8 = 0;
@@ -314,7 +295,7 @@ void state_init_pause(void) {
 }
 
 void state_step_pause(void) {
-    s32 temp800A0921_2 = D_800A0921;
+    s32 oldIsBattle = D_800A0921;
 
     switch (D_800A0921) {
         case 0:
@@ -343,7 +324,7 @@ void state_step_pause(void) {
                     gGameStatusPtr->unk_15E = gGameStatusPtr->unk_15C;
                     sfx_stop_env_sounds();
                     func_8003B1A8();
-                    gGameStatusPtr->isBattle = temp800A0921_2;
+                    gGameStatusPtr->isBattle = oldIsBattle;
                     allocate_hit_tables();
                     battle_heap_create();
                     nuContRmbForceStop();
@@ -409,12 +390,11 @@ void state_step_unpause(void) {
 
             if (D_800A0920 >= 0) {
                 if (D_800A0920 != 0) {
-                    (D_800A0920)--;
+                    D_800A0920--;
                 }
 
                 if (D_800A0920 == 0) {
                     if (D_800A0920 == 0) {
-                        PlayerStatus* playerStatus;
                         MapConfig* mapConfig;
                         Map* map;
                         s32 assetData;
@@ -472,8 +452,7 @@ void state_step_unpause(void) {
                         func_800E98C4();
                         set_time_freeze_mode(1);
                         D_800A0921 = 3;
-                        playerStatus = &gPlayerStatus;
-                        playerStatus->alpha2 = playerStatus->alpha1 - 1;
+                        gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;
                         D_802D9D71 = D_802D9D70 + 1;
 
                         update_counters();

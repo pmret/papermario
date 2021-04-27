@@ -107,8 +107,8 @@ glabel func_80240A5C_EDF41C
 /* EDF59C 80240BDC 44821000 */  mtc1      $v0, $f2
 /* EDF5A0 80240BE0 00000000 */  nop
 /* EDF5A4 80240BE4 468010A0 */  cvt.s.w   $f2, $f2
-/* EDF5A8 80240BE8 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EDF5AC 80240BEC 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EDF5A8 80240BE8 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EDF5AC 80240BEC 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EDF5B0 80240BF0 46020000 */  add.s     $f0, $f0, $f2
 /* EDF5B4 80240BF4 3C014024 */  lui       $at, 0x4024
 /* EDF5B8 80240BF8 44812800 */  mtc1      $at, $f5

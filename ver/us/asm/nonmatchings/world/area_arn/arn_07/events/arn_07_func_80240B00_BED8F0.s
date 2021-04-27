@@ -2,6 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 .section .rodata
+
 glabel D_80247958_BF4748
 .double 0.09
 
@@ -9,7 +10,8 @@ glabel D_80247960_BF4750
 .double 0.09
 
 .section .text
-glabel func_80240B00_BED8F0
+
+glabel arn_07_func_80240B00_BED8F0
 /* BED8F0 80240B00 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* BED8F4 80240B04 AFB3004C */  sw        $s3, 0x4c($sp)
 /* BED8F8 80240B08 0080982D */  daddu     $s3, $a0, $zero

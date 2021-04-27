@@ -42,6 +42,8 @@ Gfx D_80077A50[] = {
 };
 
 extern s32 D_80077A2B;
+extern s32* D_800A0978;
+extern s32* D_800A097C;
 extern s32 D_800A0980;
 
 INCLUDE_ASM(s32, "121f0_len_1290", begin_state_title_screen);
@@ -127,4 +129,36 @@ void title_draw_press_start(void) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-INCLUDE_ASM(void, "121f0_len_1290", title_draw_copyright, f32 arg0);
+void title_draw_copyright(f32 arg0) {
+    s32 alpha;
+    s32 i;
+
+    gSPDisplayList(gMasterGfxPos++, &D_80077A50);
+    gDPPipeSync(gMasterGfxPos++);
+
+    alpha = 255.0f - (arg0 * 255.0f);
+    if (alpha < 0xFF) {
+        if (alpha < 0) {
+            alpha = 0;
+        }
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
+                          PRIMITIVE, 0);
+        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
+    }
+
+    for (i = 0; i < 2; i++) {
+        alpha = 0; // TODO figure out why this is needed
+        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 144, &D_800A097C[0x240 * i]);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 18, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPLoadSync(gMasterGfxPos++);
+        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x023C, 0x003C);
+        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 18, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                   G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x023C, 0x003C);
+        gSPTextureRectangle(gMasterGfxPos++, 0x0164, 0x2FC + (0x40 * i), 0x03A4, 0x33C + (0x40 * i), G_TX_RENDERTILE,
+                            0, 0, 0x0400, 0x0400);
+    }
+    gDPPipeSync(gMasterGfxPos++);
+}

@@ -110,8 +110,8 @@ glabel func_80241178_ED1168
 /* ED1300 80241310 00000000 */   nop
 /* ED1304 80241314 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* ED1308 80241318 C60E0040 */  lwc1      $f14, 0x40($s0)
-/* ED130C 8024131C 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* ED1310 80241320 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* ED130C 8024131C 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* ED1310 80241320 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* ED1314 80241324 A600008E */  sh        $zero, 0x8e($s0)
 /* ED1318 80241328 8C460028 */  lw        $a2, 0x28($v0)
 /* ED131C 8024132C 0C00ABDC */  jal       fio_validate_header_checksums

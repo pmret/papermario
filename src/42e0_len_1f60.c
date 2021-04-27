@@ -15,10 +15,8 @@ void poll_rumble(void) {
 
 void start_rumble(s32 freq, s32 frame) {
     if (gGameStatusPtr->demoState == 0) {
-        u16* sym = &D_80074260;
-
-        if (*sym != 0) {
-            s32 symx2 = *sym * 2;
+        if (D_80074260 != 0) {
+            s32 symx2 = D_80074260 * 2;
 
             if (frame > symx2) {
                 frame = symx2;
@@ -33,17 +31,13 @@ void start_rumble(s32 freq, s32 frame) {
 }
 
 void update_max_rumble_duration(void) {
-    s32* sym = &D_80074264;
-    u16* sym2;
-
-    if (*sym != gGameStatusPtr->currentButtons) {
-        *sym = gGameStatusPtr->currentButtons;
+    if (D_80074264 != gGameStatusPtr->currentButtons) {
+        D_80074264 = gGameStatusPtr->currentButtons;
         reset_max_rumble_duration();
     }
 
-    sym2 = &D_80074260;
-    if (*sym2 != 0) {
-        (*sym2)--;
+    if (D_80074260 != 0) {
+        D_80074260--;
     }
 }
 

@@ -10,7 +10,7 @@ glabel D_802A3F00_721550
 .word 0x3F800000, 0x3F800000, 0x3F400000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F400000, 0x3F400000
 
 glabel D_802A3F28_721578
-.word 0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260, 0x802A32A0, 0x802A32E0, 0x802A3260
+.word battle_item_sleepy_sheep_modelCommandList, 0x802A32A0, 0x802A32E0, battle_item_sleepy_sheep_modelCommandList, 0x802A32A0, 0x802A32E0, battle_item_sleepy_sheep_modelCommandList, 0x802A32A0, 0x802A32E0, battle_item_sleepy_sheep_modelCommandList
 
 .section .text
 

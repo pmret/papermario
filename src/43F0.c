@@ -182,11 +182,12 @@ void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
 }
 
 s32 _advance_rng(void) {
-    s32* rngVal = &gRandSeed;
+    gRandSeed *= 0x5D588B65;
+    gRandSeed++;
 
-    gGameStatusPtr->nextRNG = *rngVal = (*rngVal * 0x5D588B65) + 1;
+    gGameStatusPtr->nextRNG = gRandSeed;
 
-    return *rngVal;
+    return gRandSeed;
 }
 
 f32 func_80029934(void) {

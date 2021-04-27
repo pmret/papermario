@@ -7,7 +7,8 @@ glabel jtbl_802A25A0_72DB50
 .word L802A143C_72C9EC, L802A1548_72CAF8, L802A168C_72CC3C, L802A1710_72CCC0, L802A17AC_72CD5C, L802A17CC_72CD7C, 0, 0
 
 .section .text
-glabel func_802A13E4_72C994
+
+glabel battle_item_mystery_func_802A13E4_72C994
 /* 72C994 802A13E4 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 72C998 802A13E8 0080302D */  daddu     $a2, $a0, $zero
 /* 72C99C 802A13EC AFB20020 */  sw        $s2, 0x20($sp)

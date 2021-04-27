@@ -54,9 +54,9 @@ glabel func_802B6738_E23E18
 /* E23ECC 802B67EC 00031040 */  sll       $v0, $v1, 1
 /* E23ED0 802B67F0 00431021 */  addu      $v0, $v0, $v1
 /* E23ED4 802B67F4 000210C0 */  sll       $v0, $v0, 3
-/* E23ED8 802B67F8 3C04800F */  lui       $a0, %hi(D_800F7C24)
+/* E23ED8 802B67F8 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0x8)
 /* E23EDC 802B67FC 00822021 */  addu      $a0, $a0, $v0
-/* E23EE0 802B6800 8C847C24 */  lw        $a0, %lo(D_800F7C24)($a0)
+/* E23EE0 802B6800 8C847C24 */  lw        $a0, %lo(world_actions_peachDisguises+0x8)($a0)
 /* E23EE4 802B6804 0C0398DB */  jal       func_800E636C
 /* E23EE8 802B6808 00000000 */   nop
 .L802B680C:

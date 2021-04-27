@@ -1296,13 +1296,46 @@ typedef struct DecorationTable {
     /* 0x8BE */ char unk_8BE[30];
 } DecorationTable; // size = 0x8E8
 
+typedef struct ShopOwner {
+    /* 0x00 */ s32 npcID;
+    /* 0x04 */ s32 idleAnim;
+    /* 0x08 */ s32 talkAnim;
+    /* 0x0C */ char unk_0C[0x4];
+    /* 0x10 */ Bytecode* unkScript;
+    /* 0x14 */ char unk_14[0x4];
+    /* 0x18 */ s32* shopStringIDs;
+} ShopOwner;
+
+typedef struct StaticInventoryItem {
+    /* 0x0 */ s32 unk_00;
+    /* 0x4 */ char unk_04[0x4];
+    /* 0x8 */ s32 unk_08;
+} StaticInventoryItem; // size = 0xC
+
+typedef struct StaticPriceItem {
+    /* 0x0 */ s32 itemID;
+    /* 0x4 */ s32 sellPrice;
+    /* 0x8 */ char unk_08[0x4];
+} StaticPriceItem; // size = 0xC
+
 typedef struct Shop {
-    /* 0x000 */ char unk_00[16];
-    /* 0x010 */ UNK_PTR owner;
+    /* 0x000 */ s16 flags;
+    /* 0x002 */ s16 numItems;
+    /* 0x004 */ s16 numSpecialPrices;
+    /* 0x006 */ char unk_06[2];
+    /* 0x008 */ s32 unk_08;
+    /* 0x00C */ s32 selectedStoreItemSlot;
+    /* 0x010 */ ShopOwner* owner;
     /* 0x014 */ UNK_PTR staticItemPositions;
-    /* 0x018 */ UNK_PTR staticInventory;
-    /* 0x01C */ UNK_PTR staticPriceList;
-    /* 0x020 */ char unk_20[828];
+    /* 0x018 */ StaticInventoryItem* staticInventory;
+    /* 0x01C */ StaticPriceItem* staticPriceList;
+    /* 0x020 */ s32 costIconID;
+    /* 0x024 */ s32 inventoryItemFlags;
+    /* 0x028 */ s32** unk_28;
+    /* 0x02C */ char unk_2C[0x328];
+    /* 0x354 */ s16 unk_354;
+    /* 0x356 */ char unk_356[0x2];
+    /* 0x358 */ s32 unk_358;
 } Shop; // size = 0x35C
 
 typedef struct Encounter {

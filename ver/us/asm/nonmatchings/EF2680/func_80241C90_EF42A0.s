@@ -122,8 +122,8 @@ glabel func_80241C90_EF42A0
 /* EF4450 80241E40 1462001A */  bne       $v1, $v0, .L80241EAC
 /* EF4454 80241E44 00000000 */   nop
 /* EF4458 80241E48 C64C0038 */  lwc1      $f12, 0x38($s2)
-/* EF445C 80241E4C 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EF4460 80241E50 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EF445C 80241E4C 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EF4460 80241E50 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EF4464 80241E54 C64E0040 */  lwc1      $f14, 0x40($s2)
 /* EF4468 80241E58 8C460028 */  lw        $a2, 0x28($v0)
 /* EF446C 80241E5C 0C00ABDC */  jal       fio_validate_header_checksums
@@ -253,8 +253,8 @@ glabel func_80241C90_EF42A0
 /* EF4628 80242018 2C420002 */  sltiu     $v0, $v0, 2
 /* EF462C 8024201C 10400054 */  beqz      $v0, .L80242170
 /* EF4630 80242020 0000102D */   daddu    $v0, $zero, $zero
-/* EF4634 80242024 3C108010 */  lui       $s0, %hi(D_800FFC90)
-/* EF4638 80242028 2610FC90 */  addiu     $s0, $s0, %lo(D_800FFC90)
+/* EF4634 80242024 3C108010 */  lui       $s0, %hi(dead_gPlayerStatusPtr)
+/* EF4638 80242028 2610FC90 */  addiu     $s0, $s0, %lo(dead_gPlayerStatusPtr)
 /* EF463C 8024202C C64C0038 */  lwc1      $f12, 0x38($s2)
 /* EF4640 80242030 8E020000 */  lw        $v0, ($s0)
 /* EF4644 80242034 C64E0040 */  lwc1      $f14, 0x40($s2)

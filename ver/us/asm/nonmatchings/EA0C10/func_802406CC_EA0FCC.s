@@ -104,8 +104,8 @@ glabel func_802406CC_EA0FCC
 /* EA1148 80240848 C622006C */  lwc1      $f2, 0x6c($s1)
 /* EA114C 8024084C 468010A0 */  cvt.s.w   $f2, $f2
 /* EA1150 80240850 46020000 */  add.s     $f0, $f0, $f2
-/* EA1154 80240854 3C038010 */  lui       $v1, %hi(D_800FFC90)
-/* EA1158 80240858 8C63FC90 */  lw        $v1, %lo(D_800FFC90)($v1)
+/* EA1154 80240854 3C038010 */  lui       $v1, %hi(dead_gPlayerStatusPtr)
+/* EA1158 80240858 8C63FC90 */  lw        $v1, %lo(dead_gPlayerStatusPtr)($v1)
 /* EA115C 8024085C E640003C */  swc1      $f0, 0x3c($s2)
 /* EA1160 80240860 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* EA1164 80240864 4600020D */  trunc.w.s $f8, $f0

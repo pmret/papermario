@@ -9,8 +9,6 @@ void state_init_language_select(void) {
 }
 
 void state_init_file_select(void) {
-    Camera* cameras = gCameras;
-
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
@@ -19,30 +17,30 @@ void state_init_file_select(void) {
     func_801452E8(0, 0);
     func_80141100();
     load_model_textures(0, 0, 0);
-    cameras[0].mode = 6;
-    cameras[0].unk_06 = 1;
-    cameras[0].nearClip = 16;
-    cameras[0].farClip = 4096;
-    cameras[0].flags |= 2;
+    gCameras[0].mode = 6;
+    gCameras[0].unk_06 = 1;
+    gCameras[0].nearClip = 16;
+    gCameras[0].farClip = 4096;
+    gCameras[0].flags |= 2;
     gCurrentCameraID = 0;
-    cameras[1].flags |= 2;
-    cameras[2].flags |= 2;
-    cameras[3].flags |= 2;
-    cameras[0].vfov = 25.0f;
+    gCameras[1].flags |= 2;
+    gCameras[2].flags |= 2;
+    gCameras[3].flags |= 2;
+    gCameras[0].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
-    cameras[0].unk_1E = 40;
-    cameras[0].lookAt_eye[0] = 500.0f;
-    cameras[0].lookAt_eye[1] = 1000.0f;
-    cameras[0].lookAt_eye[2] = 1500.0f;
-    cameras[0].unk_5C = 150.0f;
-    cameras[0].backgroundColor[0] = 0;
-    cameras[0].backgroundColor[1] = 0;
-    cameras[0].backgroundColor[2] = 0;
-    cameras[0].unk_54 = 25.0f;
-    cameras[0].unk_58 = 25.0f;
-    cameras[0].unk_1C = 0;
-    cameras[0].unk_20 = 100;
-    cameras[0].unk_22 = 0;
+    gCameras[0].unk_1E = 40;
+    gCameras[0].lookAt_eye[0] = 500.0f;
+    gCameras[0].lookAt_eye[1] = 1000.0f;
+    gCameras[0].lookAt_eye[2] = 1500.0f;
+    gCameras[0].unk_5C = 150.0f;
+    gCameras[0].backgroundColor[0] = 0;
+    gCameras[0].backgroundColor[1] = 0;
+    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].unk_54 = 25.0f;
+    gCameras[0].unk_58 = 25.0f;
+    gCameras[0].unk_1C = 0;
+    gCameras[0].unk_20 = 100;
+    gCameras[0].unk_22 = 0;
     gOverrideFlags |= 0x10000;
 }
 

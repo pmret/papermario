@@ -1,6 +1,6 @@
 #include "dgb_01.h"
 
-Gfx D_8024B770_1[] = {
+Gfx D_8024B770_C08FF0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -50,7 +50,7 @@ Gfx D_8024B770_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024B8F8_1[] = {
+Gfx D_8024B8F8_C09178[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -104,7 +104,7 @@ Gfx D_8024B8F8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BAA0_1[] = {
+Gfx D_8024BAA0_C09320[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -158,7 +158,7 @@ Gfx D_8024BAA0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BC48_1[] = {
+Gfx D_8024BC48_C094C8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -181,7 +181,7 @@ Gfx D_8024BC48_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BCF8_1[] = {
+Gfx D_8024BCF8_C09578[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -199,7 +199,7 @@ Gfx D_8024BCF8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BD80_1[] = {
+Gfx D_8024BD80_C09600[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024BCF8),
     gsSPDisplayList(0x8024BC48),
@@ -209,7 +209,7 @@ Gfx D_8024BD80_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BDC8_1[] = {
+Gfx D_8024BDC8_C09648[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -222,7 +222,7 @@ Gfx D_8024BDC8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BE28_1[] = {
+Gfx D_8024BE28_C096A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253960, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024BDC8),
@@ -230,7 +230,7 @@ Gfx D_8024BE28_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BE60_1[] = {
+Gfx D_8024BE60_C096E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -243,7 +243,7 @@ Gfx D_8024BE60_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BEC0_1[] = {
+Gfx D_8024BEC0_C09740[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253920, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024BE60),
@@ -251,7 +251,7 @@ Gfx D_8024BEC0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BEF8_1[] = {
+Gfx D_8024BEF8_C09778[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -264,7 +264,7 @@ Gfx D_8024BEF8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BF58_1[] = {
+Gfx D_8024BF58_C097D8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802538E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024BEF8),
@@ -272,7 +272,7 @@ Gfx D_8024BF58_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BF90_1[] = {
+Gfx D_8024BF90_C09810[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024BF58),
     gsSPDisplayList(0x8024BEC0),
@@ -280,7 +280,7 @@ Gfx D_8024BF90_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024BFC8_1[] = {
+Gfx D_8024BFC8_C09848[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -294,7 +294,7 @@ Gfx D_8024BFC8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C030_1[] = {
+Gfx D_8024C030_C098B0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -308,7 +308,7 @@ Gfx D_8024C030_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C098_1[] = {
+Gfx D_8024C098_C09918[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -322,7 +322,7 @@ Gfx D_8024C098_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C100_1[] = {
+Gfx D_8024C100_C09980[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -353,7 +353,7 @@ Gfx D_8024C100_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C1F0_1[] = {
+Gfx D_8024C1F0_C09A70[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -384,7 +384,7 @@ Gfx D_8024C1F0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C2E0_1[] = {
+Gfx D_8024C2E0_C09B60[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -415,7 +415,7 @@ Gfx D_8024C2E0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C3D0_1[] = {
+Gfx D_8024C3D0_C09C50[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024C2E0),
     gsSPDisplayList(0x8024C1F0),
@@ -426,7 +426,7 @@ Gfx D_8024C3D0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C420_1[] = {
+Gfx D_8024C420_C09CA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -447,7 +447,7 @@ Gfx D_8024C420_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C4C0_1[] = {
+Gfx D_8024C4C0_C09D40[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -468,7 +468,7 @@ Gfx D_8024C4C0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C560_1[] = {
+Gfx D_8024C560_C09DE0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -489,7 +489,7 @@ Gfx D_8024C560_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C600_1[] = {
+Gfx D_8024C600_C09E80[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024C560),
     gsSPDisplayList(0x8024C4C0),
@@ -497,7 +497,7 @@ Gfx D_8024C600_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C638_1[] = {
+Gfx D_8024C638_C09EB8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024C600),
     gsSPDisplayList(0x8024C3D0),
@@ -505,7 +505,7 @@ Gfx D_8024C638_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C670_1[] = {
+Gfx D_8024C670_C09EF0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -550,7 +550,7 @@ Gfx D_8024C670_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C7D0_1[] = {
+Gfx D_8024C7D0_C0A050[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024C670),
@@ -558,7 +558,7 @@ Gfx D_8024C7D0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C808_1[] = {
+Gfx D_8024C808_C0A088[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -586,7 +586,7 @@ Gfx D_8024C808_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C8E0_1[] = {
+Gfx D_8024C8E0_C0A160[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024C808),
@@ -594,7 +594,7 @@ Gfx D_8024C8E0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C918_1[] = {
+Gfx D_8024C918_C0A198[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -611,7 +611,7 @@ Gfx D_8024C918_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024C998_1[] = {
+Gfx D_8024C998_C0A218[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -646,7 +646,7 @@ Gfx D_8024C998_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CAA8_1[] = {
+Gfx D_8024CAA8_C0A328[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802538A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024C998),
@@ -656,7 +656,7 @@ Gfx D_8024CAA8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CAF0_1[] = {
+Gfx D_8024CAF0_C0A370[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -672,7 +672,7 @@ Gfx D_8024CAF0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CB68_1[] = {
+Gfx D_8024CB68_C0A3E8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -697,7 +697,7 @@ Gfx D_8024CB68_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CC28_1[] = {
+Gfx D_8024CC28_C0A4A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -713,7 +713,7 @@ Gfx D_8024CC28_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CCA0_1[] = {
+Gfx D_8024CCA0_C0A520[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -728,7 +728,7 @@ Gfx D_8024CCA0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CD10_1[] = {
+Gfx D_8024CD10_C0A590[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -746,7 +746,7 @@ Gfx D_8024CD10_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CD98_1[] = {
+Gfx D_8024CD98_C0A618[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -761,7 +761,7 @@ Gfx D_8024CD98_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CE08_1[] = {
+Gfx D_8024CE08_C0A688[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -824,7 +824,7 @@ Gfx D_8024CE08_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024CFF8_1[] = {
+Gfx D_8024CFF8_C0A878[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024CE08),
     gsSPDisplayList(0x8024CD98),
@@ -838,7 +838,7 @@ Gfx D_8024CFF8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D060_1[] = {
+Gfx D_8024D060_C0A8E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -907,7 +907,7 @@ Gfx D_8024D060_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D280_1[] = {
+Gfx D_8024D280_C0AB00[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024D060),
@@ -915,7 +915,7 @@ Gfx D_8024D280_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D2B8_1[] = {
+Gfx D_8024D2B8_C0AB38[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -943,7 +943,7 @@ Gfx D_8024D2B8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D390_1[] = {
+Gfx D_8024D390_C0AC10[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024D2B8),
@@ -951,7 +951,7 @@ Gfx D_8024D390_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D3C8_1[] = {
+Gfx D_8024D3C8_C0AC48[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -968,7 +968,7 @@ Gfx D_8024D3C8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D448_1[] = {
+Gfx D_8024D448_C0ACC8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -999,7 +999,7 @@ Gfx D_8024D448_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D538_1[] = {
+Gfx D_8024D538_C0ADB8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253860, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024D448),
@@ -1009,7 +1009,7 @@ Gfx D_8024D538_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D580_1[] = {
+Gfx D_8024D580_C0AE00[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1027,7 +1027,7 @@ Gfx D_8024D580_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D608_1[] = {
+Gfx D_8024D608_C0AE88[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1043,7 +1043,7 @@ Gfx D_8024D608_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D680_1[] = {
+Gfx D_8024D680_C0AF00[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1060,7 +1060,7 @@ Gfx D_8024D680_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D700_1[] = {
+Gfx D_8024D700_C0AF80[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1078,7 +1078,7 @@ Gfx D_8024D700_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D788_1[] = {
+Gfx D_8024D788_C0B008[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1099,7 +1099,7 @@ Gfx D_8024D788_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D828_1[] = {
+Gfx D_8024D828_C0B0A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1121,7 +1121,7 @@ Gfx D_8024D828_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024D8D0_1[] = {
+Gfx D_8024D8D0_C0B150[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1214,7 +1214,7 @@ Gfx D_8024D8D0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DBB0_1[] = {
+Gfx D_8024DBB0_C0B430[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024D8D0),
     gsSPDisplayList(0x8024D828),
@@ -1228,7 +1228,7 @@ Gfx D_8024DBB0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DC18_1[] = {
+Gfx D_8024DC18_C0B498[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253820, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024DBB0),
@@ -1236,7 +1236,7 @@ Gfx D_8024DC18_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DC50_1[] = {
+Gfx D_8024DC50_C0B4D0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1264,7 +1264,7 @@ Gfx D_8024DC50_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DD28_1[] = {
+Gfx D_8024DD28_C0B5A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024DC50),
@@ -1272,7 +1272,7 @@ Gfx D_8024DD28_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DD60_1[] = {
+Gfx D_8024DD60_C0B5E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1317,7 +1317,7 @@ Gfx D_8024DD60_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DEC0_1[] = {
+Gfx D_8024DEC0_C0B740[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024DD60),
@@ -1325,7 +1325,7 @@ Gfx D_8024DEC0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DEF8_1[] = {
+Gfx D_8024DEF8_C0B778[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1347,7 +1347,7 @@ Gfx D_8024DEF8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024DFA0_1[] = {
+Gfx D_8024DFA0_C0B820[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1364,7 +1364,7 @@ Gfx D_8024DFA0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E020_1[] = {
+Gfx D_8024E020_C0B8A0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1382,7 +1382,7 @@ Gfx D_8024E020_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E0A8_1[] = {
+Gfx D_8024E0A8_C0B928[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1398,7 +1398,7 @@ Gfx D_8024E0A8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E120_1[] = {
+Gfx D_8024E120_C0B9A0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1416,7 +1416,7 @@ Gfx D_8024E120_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E1A8_1[] = {
+Gfx D_8024E1A8_C0BA28[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1500,7 +1500,7 @@ Gfx D_8024E1A8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E440_1[] = {
+Gfx D_8024E440_C0BCC0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024E1A8),
     gsSPDisplayList(0x8024E120),
@@ -1513,7 +1513,7 @@ Gfx D_8024E440_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E4A0_1[] = {
+Gfx D_8024E4A0_C0BD20[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802537E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024E440),
@@ -1521,7 +1521,7 @@ Gfx D_8024E4A0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E4D8_1[] = {
+Gfx D_8024E4D8_C0BD58[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1549,7 +1549,7 @@ Gfx D_8024E4D8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E5B0_1[] = {
+Gfx D_8024E5B0_C0BE30[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1580,7 +1580,7 @@ Gfx D_8024E5B0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E6A0_1[] = {
+Gfx D_8024E6A0_C0BF20[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802537A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024E5B0),
@@ -1588,7 +1588,7 @@ Gfx D_8024E6A0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E6D8_1[] = {
+Gfx D_8024E6D8_C0BF58[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1619,7 +1619,7 @@ Gfx D_8024E6D8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E7C8_1[] = {
+Gfx D_8024E7C8_C0C048[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253760, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024E6D8),
@@ -1627,7 +1627,7 @@ Gfx D_8024E7C8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E800_1[] = {
+Gfx D_8024E800_C0C080[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1645,7 +1645,7 @@ Gfx D_8024E800_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E888_1[] = {
+Gfx D_8024E888_C0C108[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024E800),
@@ -1653,7 +1653,7 @@ Gfx D_8024E888_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E8C0_1[] = {
+Gfx D_8024E8C0_C0C140[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1668,7 +1668,7 @@ Gfx D_8024E8C0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E930_1[] = {
+Gfx D_8024E930_C0C1B0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253720, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024E8C0),
@@ -1676,7 +1676,7 @@ Gfx D_8024E930_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E968_1[] = {
+Gfx D_8024E968_C0C1E8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1691,7 +1691,7 @@ Gfx D_8024E968_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024E9D8_1[] = {
+Gfx D_8024E9D8_C0C258[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1709,7 +1709,7 @@ Gfx D_8024E9D8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EA60_1[] = {
+Gfx D_8024EA60_C0C2E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1724,7 +1724,7 @@ Gfx D_8024EA60_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EAD0_1[] = {
+Gfx D_8024EAD0_C0C350[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1763,7 +1763,7 @@ Gfx D_8024EAD0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EC00_1[] = {
+Gfx D_8024EC00_C0C480[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024EAD0),
     gsSPDisplayList(0x8024EA60),
@@ -1777,7 +1777,7 @@ Gfx D_8024EC00_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EC68_1[] = {
+Gfx D_8024EC68_C0C4E8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024EC00),
     gsSPDisplayList(0x8024E4A0),
@@ -1787,7 +1787,7 @@ Gfx D_8024EC68_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024ECB0_1[] = {
+Gfx D_8024ECB0_C0C530[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1833,7 +1833,7 @@ Gfx D_8024ECB0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EE18_1[] = {
+Gfx D_8024EE18_C0C698[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1850,14 +1850,14 @@ Gfx D_8024EE18_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EE98_1[] = {
+Gfx D_8024EE98_C0C718[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024EE18),
     gsSPDisplayList(0x8024ECB0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EEC8_1[] = {
+Gfx D_8024EEC8_C0C748[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802536E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024EE98),
@@ -1865,7 +1865,7 @@ Gfx D_8024EEC8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF00_1[] = {
+Gfx D_8024EF00_C0C780[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1878,7 +1878,7 @@ Gfx D_8024EF00_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF60_1[] = {
+Gfx D_8024EF60_C0C7E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802536A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024EF00),
@@ -1886,7 +1886,7 @@ Gfx D_8024EF60_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EF98_1[] = {
+Gfx D_8024EF98_C0C818[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1899,7 +1899,7 @@ Gfx D_8024EF98_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024EFF8_1[] = {
+Gfx D_8024EFF8_C0C878[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253660, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024EF98),
@@ -1907,7 +1907,7 @@ Gfx D_8024EFF8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F030_1[] = {
+Gfx D_8024F030_C0C8B0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1920,7 +1920,7 @@ Gfx D_8024F030_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F090_1[] = {
+Gfx D_8024F090_C0C910[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253620, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F030),
@@ -1928,7 +1928,7 @@ Gfx D_8024F090_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F0C8_1[] = {
+Gfx D_8024F0C8_C0C948[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1941,7 +1941,7 @@ Gfx D_8024F0C8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F128_1[] = {
+Gfx D_8024F128_C0C9A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802535E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F0C8),
@@ -1949,7 +1949,7 @@ Gfx D_8024F128_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F160_1[] = {
+Gfx D_8024F160_C0C9E0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1962,7 +1962,7 @@ Gfx D_8024F160_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F1C0_1[] = {
+Gfx D_8024F1C0_C0CA40[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802535A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F160),
@@ -1970,7 +1970,7 @@ Gfx D_8024F1C0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F1F8_1[] = {
+Gfx D_8024F1F8_C0CA78[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -1983,7 +1983,7 @@ Gfx D_8024F1F8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F258_1[] = {
+Gfx D_8024F258_C0CAD8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253560, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F1F8),
@@ -1991,7 +1991,7 @@ Gfx D_8024F258_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F290_1[] = {
+Gfx D_8024F290_C0CB10[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2004,7 +2004,7 @@ Gfx D_8024F290_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F2F0_1[] = {
+Gfx D_8024F2F0_C0CB70[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253520, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F290),
@@ -2012,7 +2012,7 @@ Gfx D_8024F2F0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F328_1[] = {
+Gfx D_8024F328_C0CBA8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2025,7 +2025,7 @@ Gfx D_8024F328_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F388_1[] = {
+Gfx D_8024F388_C0CC08[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802534E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F328),
@@ -2033,7 +2033,7 @@ Gfx D_8024F388_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F3C0_1[] = {
+Gfx D_8024F3C0_C0CC40[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2046,7 +2046,7 @@ Gfx D_8024F3C0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F420_1[] = {
+Gfx D_8024F420_C0CCA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802534A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F3C0),
@@ -2054,7 +2054,7 @@ Gfx D_8024F420_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F458_1[] = {
+Gfx D_8024F458_C0CCD8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024F420),
     gsSPDisplayList(0x8024F388),
@@ -2068,7 +2068,7 @@ Gfx D_8024F458_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F4C0_1[] = {
+Gfx D_8024F4C0_C0CD40[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2081,7 +2081,7 @@ Gfx D_8024F4C0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F520_1[] = {
+Gfx D_8024F520_C0CDA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253460, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F4C0),
@@ -2089,7 +2089,7 @@ Gfx D_8024F520_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F558_1[] = {
+Gfx D_8024F558_C0CDD8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2102,7 +2102,7 @@ Gfx D_8024F558_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F5B8_1[] = {
+Gfx D_8024F5B8_C0CE38[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253420, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F558),
@@ -2110,7 +2110,7 @@ Gfx D_8024F5B8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F5F0_1[] = {
+Gfx D_8024F5F0_C0CE70[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2123,7 +2123,7 @@ Gfx D_8024F5F0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F650_1[] = {
+Gfx D_8024F650_C0CED0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802533E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F5F0),
@@ -2131,7 +2131,7 @@ Gfx D_8024F650_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F688_1[] = {
+Gfx D_8024F688_C0CF08[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2144,7 +2144,7 @@ Gfx D_8024F688_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F6E8_1[] = {
+Gfx D_8024F6E8_C0CF68[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802533A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F688),
@@ -2152,7 +2152,7 @@ Gfx D_8024F6E8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F720_1[] = {
+Gfx D_8024F720_C0CFA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2165,7 +2165,7 @@ Gfx D_8024F720_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F780_1[] = {
+Gfx D_8024F780_C0D000[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253360, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F720),
@@ -2173,7 +2173,7 @@ Gfx D_8024F780_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F7B8_1[] = {
+Gfx D_8024F7B8_C0D038[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2186,7 +2186,7 @@ Gfx D_8024F7B8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F818_1[] = {
+Gfx D_8024F818_C0D098[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253320, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F7B8),
@@ -2194,7 +2194,7 @@ Gfx D_8024F818_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F850_1[] = {
+Gfx D_8024F850_C0D0D0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2207,7 +2207,7 @@ Gfx D_8024F850_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F8B0_1[] = {
+Gfx D_8024F8B0_C0D130[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802532E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F850),
@@ -2215,7 +2215,7 @@ Gfx D_8024F8B0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F8E8_1[] = {
+Gfx D_8024F8E8_C0D168[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2228,7 +2228,7 @@ Gfx D_8024F8E8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F948_1[] = {
+Gfx D_8024F948_C0D1C8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802532A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F8E8),
@@ -2236,7 +2236,7 @@ Gfx D_8024F948_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F980_1[] = {
+Gfx D_8024F980_C0D200[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2249,7 +2249,7 @@ Gfx D_8024F980_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024F9E0_1[] = {
+Gfx D_8024F9E0_C0D260[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253260, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024F980),
@@ -2257,7 +2257,7 @@ Gfx D_8024F9E0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FA18_1[] = {
+Gfx D_8024FA18_C0D298[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2270,7 +2270,7 @@ Gfx D_8024FA18_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FA78_1[] = {
+Gfx D_8024FA78_C0D2F8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253220, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024FA18),
@@ -2278,7 +2278,7 @@ Gfx D_8024FA78_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FAB0_1[] = {
+Gfx D_8024FAB0_C0D330[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2291,7 +2291,7 @@ Gfx D_8024FAB0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FB10_1[] = {
+Gfx D_8024FB10_C0D390[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802531E0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x8024FAB0),
@@ -2299,7 +2299,7 @@ Gfx D_8024FB10_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FB48_1[] = {
+Gfx D_8024FB48_C0D3C8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024FB10),
     gsSPDisplayList(0x8024FA78),
@@ -2315,7 +2315,7 @@ Gfx D_8024FB48_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FBC0_1[] = {
+Gfx D_8024FBC0_C0D440[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2333,7 +2333,7 @@ Gfx D_8024FBC0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FC48_1[] = {
+Gfx D_8024FC48_C0D4C8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2411,14 +2411,14 @@ Gfx D_8024FC48_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FEB0_1[] = {
+Gfx D_8024FEB0_C0D730[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024FC48),
     gsSPDisplayList(0x8024FBC0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_8024FEE0_1[] = {
+Gfx D_8024FEE0_C0D760[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2475,13 +2475,13 @@ Gfx D_8024FEE0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802500A0_1[] = {
+Gfx D_802500A0_C0D920[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x8024FEE0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_802500C8_1[] = {
+Gfx D_802500C8_C0D948[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x802500A0),
     gsSPDisplayList(0x8024FEB0),
@@ -2490,7 +2490,7 @@ Gfx D_802500C8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250108_1[] = {
+Gfx D_80250108_C0D988[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2503,7 +2503,7 @@ Gfx D_80250108_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250168_1[] = {
+Gfx D_80250168_C0D9E8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2527,7 +2527,7 @@ Gfx D_80250168_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250220_1[] = {
+Gfx D_80250220_C0DAA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2542,7 +2542,7 @@ Gfx D_80250220_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250290_1[] = {
+Gfx D_80250290_C0DB10[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2556,7 +2556,7 @@ Gfx D_80250290_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802502F8_1[] = {
+Gfx D_802502F8_C0DB78[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2570,7 +2570,7 @@ Gfx D_802502F8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250360_1[] = {
+Gfx D_80250360_C0DBE0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2664,7 +2664,7 @@ Gfx D_80250360_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250648_1[] = {
+Gfx D_80250648_C0DEC8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x80250360),
     gsSPDisplayList(0x802502F8),
@@ -2675,7 +2675,7 @@ Gfx D_80250648_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250698_1[] = {
+Gfx D_80250698_C0DF18[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2693,7 +2693,7 @@ Gfx D_80250698_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250720_1[] = {
+Gfx D_80250720_C0DFA0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2709,7 +2709,7 @@ Gfx D_80250720_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250798_1[] = {
+Gfx D_80250798_C0E018[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2727,7 +2727,7 @@ Gfx D_80250798_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250820_1[] = {
+Gfx D_80250820_C0E0A0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2743,7 +2743,7 @@ Gfx D_80250820_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250898_1[] = {
+Gfx D_80250898_C0E118[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2759,7 +2759,7 @@ Gfx D_80250898_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250910_1[] = {
+Gfx D_80250910_C0E190[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2897,7 +2897,7 @@ Gfx D_80250910_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250D58_1[] = {
+Gfx D_80250D58_C0E5D8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x80250910),
     gsSPDisplayList(0x80250898),
@@ -2908,7 +2908,7 @@ Gfx D_80250D58_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250DA8_1[] = {
+Gfx D_80250DA8_C0E628[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x802531A0, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x80250D58),
@@ -2916,7 +2916,7 @@ Gfx D_80250DA8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250DE0_1[] = {
+Gfx D_80250DE0_C0E660[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2938,7 +2938,7 @@ Gfx D_80250DE0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250E88_1[] = {
+Gfx D_80250E88_C0E708[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2962,7 +2962,7 @@ Gfx D_80250E88_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250F40_1[] = {
+Gfx D_80250F40_C0E7C0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2980,7 +2980,7 @@ Gfx D_80250F40_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80250FC8_1[] = {
+Gfx D_80250FC8_C0E848[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -2998,7 +2998,7 @@ Gfx D_80250FC8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251050_1[] = {
+Gfx D_80251050_C0E8D0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3014,7 +3014,7 @@ Gfx D_80251050_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802510C8_1[] = {
+Gfx D_802510C8_C0E948[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3155,7 +3155,7 @@ Gfx D_802510C8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251528_1[] = {
+Gfx D_80251528_C0EDA8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x802510C8),
     gsSPDisplayList(0x80251050),
@@ -3166,7 +3166,7 @@ Gfx D_80251528_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251578_1[] = {
+Gfx D_80251578_C0EDF8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPMatrix(0x80253160, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(0x80251528),
@@ -3174,7 +3174,7 @@ Gfx D_80251578_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802515B0_1[] = {
+Gfx D_802515B0_C0EE30[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3192,7 +3192,7 @@ Gfx D_802515B0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251638_1[] = {
+Gfx D_80251638_C0EEB8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3207,7 +3207,7 @@ Gfx D_80251638_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802516A8_1[] = {
+Gfx D_802516A8_C0EF28[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3221,7 +3221,7 @@ Gfx D_802516A8_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251710_1[] = {
+Gfx D_80251710_C0EF90[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3239,7 +3239,7 @@ Gfx D_80251710_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251798_1[] = {
+Gfx D_80251798_C0F018[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -3296,7 +3296,7 @@ Gfx D_80251798_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251958_1[] = {
+Gfx D_80251958_C0F1D8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x80251798),
     gsSPDisplayList(0x80251710),
@@ -3306,7 +3306,7 @@ Gfx D_80251958_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802519A0_1[] = {
+Gfx D_802519A0_C0F220[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x80251958),
     gsSPDisplayList(0x80251578),
@@ -3317,7 +3317,7 @@ Gfx D_802519A0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_802519F0_1[] = {
+Gfx D_802519F0_C0F270[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x802519A0),
     gsSPDisplayList(0x8024EC68),
@@ -3325,13 +3325,13 @@ Gfx D_802519F0_1[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251A28_1[] = {
+Gfx D_80251A28_C0F2A8[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x802519F0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80251A50_1[] = {
+Gfx D_80251A50_C0F2D0[] = {
     gsSPSetLights1((*(Lights1*)0x80253140)),
     gsSPDisplayList(0x80251A28),
     gsSPEndDisplayList(),

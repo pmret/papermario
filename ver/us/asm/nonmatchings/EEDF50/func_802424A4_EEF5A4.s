@@ -121,8 +121,8 @@ glabel func_802424A4_EEF5A4
 /* EEF750 80242650 080909B8 */  j         .L802426E0
 /* EEF754 80242654 46220000 */   add.d    $f0, $f0, $f2
 .L80242658:
-/* EEF758 80242658 3C028010 */  lui       $v0, %hi(D_800FFC90)
-/* EEF75C 8024265C 8C42FC90 */  lw        $v0, %lo(D_800FFC90)($v0)
+/* EEF758 80242658 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)
+/* EEF75C 8024265C 8C42FC90 */  lw        $v0, %lo(dead_gPlayerStatusPtr)($v0)
 /* EEF760 80242660 3C014018 */  lui       $at, 0x4018
 /* EEF764 80242664 44811800 */  mtc1      $at, $f3
 /* EEF768 80242668 44801000 */  mtc1      $zero, $f2

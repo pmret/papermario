@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80280954
+glabel shop_open_item_select_popup
 /* 7E17D4 80280954 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 7E17D8 80280958 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* 7E17DC 8028095C 27BDFFC0 */  addiu     $sp, $sp, -0x40
@@ -69,7 +69,7 @@ glabel func_80280954
 /* 7E18BC 80280A3C AE020084 */  sw        $v0, 0x84($s0)
 /* 7E18C0 80280A40 8C620014 */  lw        $v0, 0x14($v1)
 /* 7E18C4 80280A44 02659821 */  addu      $s3, $s3, $a1
-/* 7E18C8 80280A48 0C0A02DE */  jal       func_80280B78
+/* 7E18C8 80280A48 0C0A02DE */  jal       shop_get_sell_price
 /* 7E18CC 80280A4C AE020294 */   sw       $v0, 0x294($s0)
 /* 7E18D0 80280A50 AE020210 */  sw        $v0, 0x210($s0)
 /* 7E18D4 80280A54 26100004 */  addiu     $s0, $s0, 4

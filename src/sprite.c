@@ -291,7 +291,7 @@ INCLUDE_ASM(s32, "sprite", func_802DE0C0);
 
 INCLUDE_ASM(s32, "sprite", func_802DE0EC);
 
-INCLUDE_ASM(s32, "sprite", func_802DE2AC, s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 
 INCLUDE_ASM(s32, "sprite", func_802DE3D8);
 
