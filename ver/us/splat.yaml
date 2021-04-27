@@ -8940,13 +8940,9 @@ segments:
     start: 0xCE36F0
     vram: 0x80240000
     subsegments:
-    - [0xCE36F0, c]
-    - [0xCE4030, data]
-    - [0xCE41B0, data]
-    - [0xCE41F0, data]
-    - [0xCE4740, data]
-    - [0xCE5160, data]
-    - [0xCE66F0, rodata]
+    - [0xCE36F0,       c, CE36F0]
+    - [0xCE4030,   .data, CE36F0]
+    - [0xCE66F0, .rodata, CE36F0]
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
