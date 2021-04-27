@@ -23,9 +23,6 @@ s32 D_80283F58_7E4DD8[] = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C8
 
 s32 D_80284034_7E4EB4[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-static s32 D_80286520;
-static s32 D_80286524;
-
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
@@ -148,9 +145,10 @@ ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// BSS nop issue
-#ifdef NON_MATCHING
 ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
+    static ScriptInstance* D_80286520;
+    static s32 D_80286524;
+
     Shop* shop = gGameStatusPtr->mapShop;
     s32 var1 = get_variable(script, *script->ptrReadPos);
 
@@ -161,6 +159,7 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
         shop->unk_358 = 5;
 
         if (gGameStatusPtr->pressedButtons & 0x8000) {
+
             ScriptInstance* childScript;
 
             disable_player_input();
@@ -184,9 +183,6 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
     enable_player_input();
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280410);
-#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, ScriptInstance* script, s32 isInitialCall);
 
