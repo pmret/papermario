@@ -8928,14 +8928,11 @@ segments:
     start: 0xCDC6A0
     vram: 0x80240000
     subsegments:
-    - [0xCDC6A0, c]
-    - [0xCDCBD0, c]
-    - [0xCDCC30, c]
-    - [0xCDCE70, data]
-    - [0xCDCF60, data]
-    - [0xCDD530, data]
-    - [0xCE2D60, data]
-    - [0xCE36E0, rodata]
+    - [0xCDC6A0,       c, CDC6A0]
+    - [0xCDCBD0,       c, CDCBD0]
+    - [0xCDCC30,       c, CDCC30]
+    - [0xCDCE70,   .data, CDC6A0]
+    - [0xCE36E0, .rodata, CDC6A0]
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
