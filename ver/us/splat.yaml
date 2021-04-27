@@ -8998,16 +8998,13 @@ segments:
     start: 0xCF2BD0
     vram: 0x80240000
     subsegments:
-    - [0xCF2BD0, c]
-    - [0xCF2C10, c]
-    - [0xCF4BC0, c]
-    - [0xCF4E00, c]
-    - [0xCF4EA0, data]
-    - [0xCF6860, data]
-    - [0xCF68B0, data]
-    - [0xCF7310, data]
-    - [0xCF7AA0, rodata]
-    - [0xCF7B08, rodata]
+    - [0xCF2BD0,       c, CF2BD0]
+    - [0xCF2C10,       c, CF2C10]
+    - [0xCF4BC0,       c, CF4BC0]
+    - [0xCF4E00,       c, CF4E00]
+    - [0xCF4EA0,   .data, CF2C10]
+    - [0xCF7AA0, .rodata, CF2C10]
+    - [0xCF7B70,    .bss, CF2C10]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code

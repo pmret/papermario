@@ -106,7 +106,7 @@ Script N(main) = SCRIPT({
     spawn EnterWalk;
     await N(80240D30);
     if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
-        N(func_80240000_C9DF20)();
+        N(func_80240000_CEE260)();
     }
 });
 
