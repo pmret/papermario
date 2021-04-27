@@ -1306,6 +1306,11 @@ typedef struct ShopOwner {
     /* 0x18 */ s32* shopStringIDs;
 } ShopOwner;
 
+typedef struct ShopItemLocation {
+    /* 0x0 */ s16 posModelID;
+    /* 0x2 */ s16 triggerColliderID;
+} ShopItemLocation; // size = 0x4
+
 typedef struct StaticInventoryItem {
     /* 0x0 */ s32 unk_00;
     /* 0x4 */ char unk_04[0x4];
@@ -1318,23 +1323,42 @@ typedef struct StaticPriceItem {
     /* 0x8 */ char unk_08[0x4];
 } StaticPriceItem; // size = 0xC
 
+typedef struct PopupMenu {
+    /* 0x000 */ s32* ptrIcon[32];
+    /* 0x080 */ char unk_80[4];
+    /* 0x084 */ s32 nameString[32];
+    /* 0x104 */ char unk_104[4];
+    /* 0x108 */ s32 userIndex[32]; // used to map menu order to a user-ID for each item
+    /* 0x188 */ char unk_188[4];
+    /* 0x18C */ s32 enabled[32];
+    /* 0x20C */ char unk_20C[4];
+    /* 0x210 */ s32 value[32]; // sale price, etc
+    /* 0x290 */ char unk_290[4];
+    /* 0x294 */ s32 descString[32];
+    /* 0x314 */ char unk_314[4];
+    /* 0x318 */ s32 popupType; // C = keys
+    /* 0x31C */ s32 unk_31C;
+    /* 0x320 */ s32 unk_320;
+    /* 0x324 */ s32 numEntries;
+    /* 0x328 */ s32 initialPos;
+    /* 0x32C */ s16 result;
+    /* 0x32E */ char unk_32E[0x2];
+} PopupMenu; // size = 0x330
+
 typedef struct Shop {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 numItems;
     /* 0x004 */ s16 numSpecialPrices;
     /* 0x006 */ char unk_06[2];
-    /* 0x008 */ s32 unk_08;
+    /* 0x008 */ s32 currentItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
-    /* 0x014 */ UNK_PTR staticItemPositions;
+    /* 0x014 */ ShopItemLocation* staticItemPositions;
     /* 0x018 */ StaticInventoryItem* staticInventory;
     /* 0x01C */ StaticPriceItem* staticPriceList;
     /* 0x020 */ s32 costIconID;
     /* 0x024 */ s32 inventoryItemFlags;
-    /* 0x028 */ s32** unk_28;
-    /* 0x02C */ char unk_2C[0x328];
-    /* 0x354 */ s16 unk_354;
-    /* 0x356 */ char unk_356[0x2];
+    /* 0x028 */ PopupMenu itemSelectMenu;
     /* 0x358 */ s32 unk_358;
 } Shop; // size = 0x35C
 

@@ -150,10 +150,10 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
     static s32 D_80286524;
 
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 var1 = get_variable(script, *script->ptrReadPos);
+    s32 currentItemSlot = get_variable(script, *script->ptrReadPos);
 
     if (!(shop->flags & 8)) {
-        shop->unk_08 = var1;
+        shop->currentItemSlot = currentItemSlot;
         shop->flags |= 1;
         func_800E98EC();
         shop->unk_358 = 5;
@@ -166,7 +166,7 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
             disable_player_static_collisions();
 
             childScript = start_script(&D_80284034_7E4EB4, 1, 0);
-            childScript->varTable[0] = var1;
+            childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
             shop->flags |= 8;
@@ -187,8 +187,80 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
+// extern s32 D_8008A680[337][2];
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_update_item_select_popup);
+// void shop_open_item_select_popup(s32 mode) {
+//     Shop* shop = gGameStatusPtr->mapShop;
+//     PopupMenu* menu = &shop->itemSelectMenu;
+//     s32 numItemSlots;
+//     s32 popupType;
+//     s32 i;
+//     s32 numEntries;
+
+//     switch (mode) {
+//         case 0:
+//             numItemSlots = 10;
+//             popupType = 5;
+//             break;
+//         case 1:
+//             numItemSlots = 10;
+//             popupType = 6;
+//             break;
+//         default:
+//             numItemSlots = 32;
+//             popupType = 7;
+//     }
+
+//     numEntries = 0;
+
+//     for (i = 0; i < numItemSlots; i++) {
+//         s32 itemID;
+
+//         if (mode < 2) {
+//             itemID = gPlayerData.invItems[i];
+//         } else {
+//             itemID = gPlayerData.storedItems[i];
+//         }
+
+//         if (itemID != 0) {
+//             menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+//             menu->userIndex[i] = i;
+//             menu->enabled[i] = TRUE;
+//             menu->nameString[i] = gItemTable[itemID].nameString;
+//             menu->descString[i] = gItemTable[itemID].itemString;
+//             menu->value[i] = shop_get_sell_price(itemID);
+//             numEntries++;
+//         }
+//     }
+
+//     menu->popupType = popupType;
+//     menu->numEntries = numEntries;
+//     menu->initialPos = 0;
+//     func_800F4FC4(menu);
+//     func_800E9894();
+//     func_800E98EC();
+//     open_status_menu_short();
+// }
+
+s32 shop_update_item_select_popup(s32* selectedIndex) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    PopupMenu* menu = &shop->itemSelectMenu;
+    s16 menuResult = shop->itemSelectMenu.result;
+
+    if (menuResult == 0) {
+        return 0;
+    }
+
+    func_800F13B0();
+
+    if (menuResult == 0xFF) {
+        *selectedIndex = -1;
+    } else {
+        *selectedIndex = menu->userIndex[menuResult - 1];
+    }
+
+    return 1;
+}
 
 void shop_close_item_select_popup(void) {
     func_800F1538();
@@ -197,30 +269,31 @@ void shop_close_item_select_popup(void) {
     close_status_menu();
 }
 
-// Ordering issue
-#ifdef NON_MATCHING
 s32 shop_get_sell_price(s32 itemID) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 numItems = shop->numSpecialPrices;
+    StaticPriceItem* items = shop->staticPriceList;
     s32 i;
 
+    if (shop) {
+        i = 0;
+    } // TODO fake match
+
+
     for (i = 0; i < numItems; i++) {
-        if (shop->staticPriceList[i].itemID == itemID) {
-            return shop->staticPriceList[i].sellPrice;
+        if (items[i].itemID == itemID) {
+            return items[i].sellPrice;
         }
     }
 
     return gItemTable[itemID].sellValue;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_get_sell_price);
-#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopOwnerDialog, ScriptInstance* script, s32 isInitialCall);
 
 void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* siItem = &shop->staticInventory[shop->unk_08];
+    StaticInventoryItem* siItem = &shop->staticInventory[shop->currentItemSlot];
     StaticItem* item = &gItemTable[siItem->unk_00];
 
     draw_msg(item->nameString, posX + 60 - (get_string_width(item->nameString, 0) >> 1), posY + 6, 255, 0, 0);
@@ -228,7 +301,7 @@ void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* item = &shop->staticInventory[shop->unk_08];
+    StaticInventoryItem* item = &shop->staticInventory[shop->currentItemSlot];
 
     draw_msg(item->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
