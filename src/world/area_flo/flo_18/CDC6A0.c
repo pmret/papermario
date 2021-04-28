@@ -805,21 +805,13 @@ Script N(80242E28) = {
 };
 // *INDENT-ON*
 
-s32 N(triggerCoord_8024367C)[] = {
-    0x40A00000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_8024367C) = { 5.0f, 0.0f, -10.0, 0.0f };
 
-s32 N(triggerCoord_8024368C)[] = {
-    0xC0A00000, 0x00000000, 0xC1A00000, 0x00000000,
-};
+Vec4f N(triggerCoord_8024368C) = { -5.0f, 0.0f, -20.0f, 0.0f };
 
-s32 N(triggerCoord_8024369C)[] = {
-    0x42480000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 
-s32 N(triggerCoord_802436AC)[] = {
-    0x42D20000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 Script N(802436BC) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
@@ -1371,21 +1363,13 @@ Script N(80245624) = SCRIPT({
     }
 });
 
-s32 N(triggerCoord_80245694)[] = {
-    0x40A00000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_80245694) = { 5.0f, 0.0f, -10.0, 0.0f };
 
-s32 N(triggerCoord_802456A4)[] = {
-    0xC0A00000, 0x00000000, 0xC1A00000, 0x00000000,
-};
+Vec4f N(triggerCoord_802456A4) = { -5.0f, 0.0f, -20.0f, 0.0f };
 
-s32 N(triggerCoord_802456B4)[] = {
-    0x42480000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_802456B4) = { 50.0f, 0.0f, -10.0, 0.0f };
 
-s32 N(triggerCoord_802456C4)[] = {
-    0x42D20000, 0x00000000, 0xC1200000, 0x00000000,
-};
+Vec4f N(triggerCoord_802456C4) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 Script N(802456D4) = SCRIPT({
     SI_MAP_VAR(10) = -1;

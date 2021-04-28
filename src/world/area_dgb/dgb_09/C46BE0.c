@@ -147,9 +147,7 @@ static s32 N(pad_3E4C) = {
     0x00000000,
 };
 
-s32 N(triggerCoord_80243E50)[] = {
-    0x43960000, 0x00000000, 0x42B00000, 0x00000000,
-};
+Vec4f N(triggerCoord_80243E50) = { 300.0f, 0.0f, 88.0f, 0.0f };
 
 Script N(80243E60) = SCRIPT({
     sleep 2;

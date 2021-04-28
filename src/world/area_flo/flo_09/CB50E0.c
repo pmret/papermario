@@ -326,64 +326,70 @@ Script N(tree3_Callback) = SCRIPT({
     }
 });
 
-s32 N(treeModelList_Tree1_Leaves)[] = {
-    0x00000002, 0x0000000F, 0x00000010,
+FoliageModelList N(tree1_Leaves) = {
+	.count = 2,
+	.models = { 15, 16 }
 };
 
-s32 N(treeModelList_Tree1_Trunk)[] = {
-    0x00000001, 0x0000000E,
+FoliageModelList N(tree1_Trunk) = {
+	.count = 1,
+	.models = { 14 }
 };
 
-s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), 0x00000000, 0x00000000, N(tree1_Callback),
+ShakeTreeConfig N(tree1) = {
+	.leaves = &N(tree1_Leaves),
+	.trunk = &N(tree1_Trunk),
+	.callback = N(tree1_Callback),
 };
 
-s32 N(triggerCoord_80243428)[] = {
-    0xC3480000, 0x00000000, 0x3F800000, 0x00000000,
+Vec4f N(triggerCoord_80243428) = { -200.0f, 0.0f, 1.0f, 0.0f };
+
+FoliageModelList N(tree2_Leaves) = {
+	.count = 2,
+	.models = { 19, 20 }
 };
 
-s32 N(treeModelList_Tree2_Leaves)[] = {
-    0x00000002, 0x00000013, 0x00000014,
+FoliageModelList N(tree2_Trunk) = {
+	.count = 1,
+	.models = { 18 }
 };
 
-s32 N(treeModelList_Tree2_Trunk)[] = {
-    0x00000001, 0x00000012,
+ShakeTreeConfig N(tree2) = {
+	.leaves = &N(tree2_Leaves),
+	.trunk = &N(tree2_Trunk),
+	.callback = N(tree2_Callback),
 };
 
-s32 N(shakeTreeEvent_Tree2)[] = {
-    N(treeModelList_Tree2_Leaves), N(treeModelList_Tree2_Trunk), 0x00000000, 0x00000000, N(tree2_Callback),
+Vec4f N(triggerCoord_80243460) = { 0.0f, 0.0f, 1.0f, 0.0f };
+
+FoliageModelList N(tree3_Leaves) = {
+	.count = 2,
+	.models = { 23, 24 }
 };
 
-s32 N(triggerCoord_80243460)[] = {
-    0x00000000, 0x00000000, 0x3F800000, 0x00000000,
+FoliageModelList N(tree3_Trunk) = {
+	.count = 1,
+	.models = { 22 }
 };
 
-s32 N(treeModelList_Tree3_Leaves)[] = {
-    0x00000002, 0x00000017, 0x00000018,
+ShakeTreeConfig N(tree3) = {
+	.leaves = &N(tree3_Leaves),
+	.trunk = &N(tree3_Trunk),
+	.callback = N(tree3_Callback),
 };
 
-s32 N(treeModelList_Tree3_Trunk)[] = {
-    0x00000001, 0x00000016,
-};
-
-s32 N(shakeTreeEvent_Tree3)[] = {
-    N(treeModelList_Tree3_Leaves), N(treeModelList_Tree3_Trunk), 0x00000000, 0x00000000, N(tree3_Callback),
-};
-
-s32 N(triggerCoord_80243498)[] = {
-    0x43480000, 0x00000000, 0x3F800000, 0x00000000,
-};
+Vec4f N(triggerCoord_80243498) = { 200.0f, 0.0f, 1.0f, 0.0f };
 
 Script N(802434A8) = SCRIPT({
     SI_AREA_VAR(4) = 0;
     SI_AREA_VAR(5) = 0;
-    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    SI_VAR(0) = N(tree1);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 15;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243428);
-    SI_VAR(0) = N(shakeTreeEvent_Tree2);
+    SI_VAR(0) = N(tree2);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 16;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243460);
-    SI_VAR(0) = N(shakeTreeEvent_Tree3);
+    SI_VAR(0) = N(tree3);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 17;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243498);
 });

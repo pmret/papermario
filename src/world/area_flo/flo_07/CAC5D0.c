@@ -429,24 +429,26 @@ Script N(tree1_Callback) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-s32 N(treeModelList_Tree1_Leaves)[] = {
-    0x00000003, 0x00000013, 0x00000014, 0x00000015,
+FoliageModelList N(tree1_Leaves) = {
+	.count = 3,
+	.models = { 19, 20, 21 }
 };
 
-s32 N(treeModelList_Tree1_Trunk)[] = {
-    0x00000001, 0x00000012,
+FoliageModelList N(tree1_Trunk) = {
+	.count = 1,
+	.models = { 18 }
 };
 
-s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), 0x00000000, 0x00000000, N(tree1_Callback),
+ShakeTreeConfig N(tree1) = {
+	.leaves = &N(tree1_Leaves),
+	.trunk = &N(tree1_Trunk),
+	.callback = N(tree1_Callback),
 };
 
-s32 N(triggerCoord_802428B4)[] = {
-    0xC39A8000, 0x00000000, 0x41F80000, 0x00000000,
-};
+Vec4f N(triggerCoord_802428B4) = { -309.0f, 0.0f, 31.0f, 0.0f };
 
 Script N(802428C4) = SCRIPT({
-    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    SI_VAR(0) = N(tree1);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 4;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_802428B4);
 });

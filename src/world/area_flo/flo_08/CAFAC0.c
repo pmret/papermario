@@ -1239,32 +1239,46 @@ ApiStatus N(func_80241BCC_CB090C)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/foliage.inc.c"
 
-s32 N(treeModelList_Tree1_Leaves)[] = {
-    0x00000001, 0x0000002E,
+FoliageModelList N(tree1_Leaves) = {
+	.count = 1,
+	.models = { 46 }
 };
 
-s32 N(treeModelList_Tree1_Trunk)[] = {
-    0x00000001, 0x0000002D,
+FoliageModelList N(tree1_Trunk) = {
+	.count = 1,
+	.models = { 45 }
 };
 
-s32 N(treeDropList_Tree1)[] = {
-    2,
-    ITEM_BLUE_BERRY, 340, 102, -89, 0xC, 0, SI_AREA_FLAG(29),
-    ITEM_BLUE_BERRY, 440, 102, -89, 0xC, 0, SI_AREA_FLAG(30),
+FoliageDropList N(tree1_Drops) = {
+	.count = 2,
+	.drops = {
+		{
+			.itemID = ITEM_BLUE_BERRY,
+			.pos = { 340, 102, -89 },
+			.spawnMode = 0xC,
+			.spawnFlag = SI_AREA_FLAG(29),
+		},
+		{
+			.itemID = ITEM_BLUE_BERRY,
+			.pos = { 440, 102, -89 },
+			.spawnMode = 0xC,
+			.spawnFlag = SI_AREA_FLAG(30),
+		},
+	}
 };
 
-s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), N(treeDropList_Tree1), 0x00000000, 0x00000000,
+ShakeTreeConfig N(tree1) = {
+	.leaves = &N(tree1_Leaves),
+	.trunk = &N(tree1_Trunk),
+	.drops = &N(tree1_Drops),
 };
 
-s32 N(triggerCoord_80245904)[] = {
-    0x43C38000, 0x00000000, 0xC2CC0000, 0x00000000,
-};
+Vec4f N(triggerCoord_80245904) = { 391.0f, 0.0f, -102.0f, 0.0f };
 
 Script N(80245914) = SCRIPT({
     SI_AREA_FLAG(29) = 0;
     SI_AREA_FLAG(30) = 0;
-    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    SI_VAR(0) = N(tree1);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 22;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80245904);
 });

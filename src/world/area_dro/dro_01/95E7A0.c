@@ -26,29 +26,38 @@
 
 #include "world/common/foliage.inc.c"
 
-s32 N(treeModelList_Tree1_Leaves)[] = {
-    0x00000001, 0x0000000D,
+FoliageModelList N(tree1_Leaves) = {
+	.count = 1,
+	.models = { 13 }
 };
 
-s32 N(treeModelList_Tree1_Trunk)[] = {
-    0x00000001, 0x0000000E,
+FoliageModelList N(tree1_Trunk) = {
+	.count = 1,
+	.models = { 14 }
 };
 
-s32 N(treeDropList_Tree1)[] = {
-    1, 
-    ITEM_COIN, 120, 92, -18, 0xF, SI_SAVE_FLAG(760), 0,
+FoliageDropList N(tree1_Drops) = {
+	.count = 1,
+	.drops = {
+		{
+			.itemID = ITEM_COIN,
+			.pos = { 120, 92, -18 },
+			.spawnMode = 0xF,
+			.pickupFlag = SI_SAVE_FLAG(760),
+		},
+	}
 };
 
-s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), N(treeDropList_Tree1), 0x00000000, 0x00000000,
+ShakeTreeConfig N(tree1) = {
+	.leaves = &N(tree1_Leaves),
+	.trunk = &N(tree1_Trunk),
+	.drops = &N(tree1_Drops),
 };
 
-s32 N(triggerCoord_8024DD68)[] = {
-    0x42F00000, 0x00000000, 0xC22C0000, 0x00000000,
-};
+Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
 Script N(8024DD78) = SCRIPT({
-    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    SI_VAR(0) = N(tree1);
     bind N(shakeTree) to TRIGGER_WALL_HAMMER 11;
     bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_8024DD68);
 });

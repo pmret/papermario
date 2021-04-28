@@ -126,6 +126,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
     INDENT = f"    "
     afterHeader = False
+    treePrint = False
 
     while len(midx) > 0:
         struct = midx.pop(0)
@@ -159,6 +160,15 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
                 bytes.seek(pos)
                 script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
+
+            if "shakeTree" in name or "searchBush" in name:
+                symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
+                if not treePrint:
+                    out += f"=======================================\n"
+                    out += f"==========BELOW foliage.inc.c==========\n"
+                    out += f"=======================================\n\n"
+                    treePrint = True
+                continue
 
             if try_replace and "exitWalk" in name:
                 script_text = script_text.splitlines()
@@ -478,12 +488,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    {disasm_script.CONSTANTS['ItemIDs'][item]},\n"
             out += f"}};\n"
         elif struct["type"] == "TreeDropList":
-            out += f"s32 {name}[] = {{\n"
+            new_name = "N(" + name.split('_',1)[1][:-1].lower() + "_Drops)"
+            symbol_map[struct["vaddr"]][0][1] = new_name
+            
+            out += f"FoliageDropList {new_name} = {{\n"
 
             data = bytes.read(struct["length"])
             count = unpack_from(">I", data, 0)[0]
 
-            out += f"\t{count},\n"
+            out += f"\t.count = {count},\n"
+
+            if count > 0:
+                out += f"\t.drops = {{\n"
 
             pos = 4
             for _ in range(count):
@@ -497,11 +513,129 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 flag1 = get_flag_name(entry[5])
                 flag2 = get_flag_name(entry[6])
 
-                out += f"\t{disasm_script.CONSTANTS['ItemIDs'][entry[0]]}, "
-                out += f"{entry[1]}, {entry[2]}, {entry[3]}, "
-                out += f"0x{entry[4]:X}, {flag1}, {flag2},\n"
+                out += f"\t\t{{\n"
+                out += f"\t\t\t.itemID = {disasm_script.CONSTANTS['ItemIDs'][entry[0]]},\n"
+                out += f"\t\t\t.pos = {{ {entry[1]}, {entry[2]}, {entry[3]} }},\n"
+                if entry[4] != 0:
+                    out += f"\t\t\t.spawnMode = 0x{entry[4]:X},\n"
+                if flag1 != '0':
+                    out += f"\t\t\t.pickupFlag = {flag1},\n"
+                if flag2 != '0':
+                    out += f"\t\t\t.spawnFlag = {flag2},\n"
+                out += f"\t\t}},\n"
+
+            if count > 0:
+                out += f"\t}}\n"
 
             out += f"}};\n"
+
+        elif struct["type"] == "TreeModelList" or struct["type"] == "TreeEffectVectors":
+            isModelList = struct["type"] == "TreeModelList"
+
+            name_parts = name.split('_')
+            if isModelList:
+                new_name = "N(" + name_parts[1].lower() + "_" + name_parts[2]
+            else:
+                new_name = "N(" + name_parts[1][:-1].lower() + "_Vectors)"
+            symbol_map[struct["vaddr"]][0][1] = new_name
+
+            if isModelList:
+                out += f"FoliageModelList {new_name} = {{\n"
+            else:
+                out += f"TreeEffectVectors {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            count = unpack_from(">I", data, 0)[0]
+
+            out += f"\t.count = {count},\n"
+
+            if isModelList:
+                if count > 0:
+                    out += f"\t.models = {{ "
+                
+                pos = 4
+                for _ in range(count):
+                    entry = unpack_from(">I", data, pos)[0]
+                    pos += 4
+
+                    out += f"{entry}, "
+
+                if count > 0:
+                    out = out[:-2]
+                    out += f" }}\n"
+
+            else:
+                if count > 0:
+                    out += f"\t.vectors = {{\n"
+                
+                pos = 4
+                for _ in range(count):
+                    entry = list(unpack_from(">3I", data, pos))
+
+                    entry[0] = entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
+                    entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                    entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                    
+                    pos += 3*4
+
+                    out += f"\t\t{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
+
+                if count > 0:
+                    out += f"\t}}\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "SearchBushEvent":
+            new_name = "N(" + name.split('_',1)[1].lower()
+            symbol_map[struct["vaddr"]][0][1] = new_name
+
+            num = int(new_name.split("bush",1)[1][:-1])
+            out += f"SearchBushConfig {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">4I", data, 0)
+
+            if entry[0] != 0:
+                out += f"\t.bush = &N(bush{num}_Bush),\n"
+            if entry[1] != 0:
+                out += f"\t.drops = &N(bush{num}_Drops),\n"
+            if entry[2] != 0:
+                out += f"\t.vectors = &N(bush{num}_Vectors),\n"
+            if entry[3] != 0:
+                out += f"\t.callback = N(bush{num}_Callback),\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "ShakeTreeEvent":
+            new_name = "N(" + name.split('_',1)[1].lower()
+            symbol_map[struct["vaddr"]][0][1] = new_name
+            
+            num = int(new_name.split("tree",1)[1][:-1])
+            out += f"ShakeTreeConfig {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">5I", data, 0)
+
+            if entry[0] != 0:
+                out += f"\t.leaves = &N(tree{num}_Leaves),\n"
+            if entry[1] != 0:
+                out += f"\t.trunk = &N(tree{num}_Trunk),\n"
+            if entry[2] != 0:
+                out += f"\t.drops = &N(tree{num}_Drops),\n"
+            if entry[3] != 0:
+                out += f"\t.vectors = &N(tree{num}_Vectors),\n"
+            if entry[4] != 0:
+                out += f"\t.callback = N(tree{num}_Callback),\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "TriggerCoord":
+            out += f"Vec4f {name} = {{"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">4f", data, 0)
+
+            out += f" {entry[0]:.01f}f, {entry[1]:.01f}f, {entry[2]:.01f}f, {entry[3]:.01f}f }};\n"
 
         elif struct["type"] == "Header":
             out += f"MapConfig N(config) = {{\n"

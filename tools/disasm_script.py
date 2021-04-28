@@ -491,6 +491,8 @@ class ScriptDisassembler:
         return name
 
     def replace_star_rod_prefix(self, addr, isArg=False):
+        if type(addr) is str:
+            return addr
         if addr > 0x80000000 and addr in self.symbol_map:
             name = self.symbol_map[addr][0][1]
             toReplace = True

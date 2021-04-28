@@ -70,3 +70,4 @@ jan_00_fake_sym = 0x80247AF0;
 D_80247AF0_CCB300 = 0x80247AF0;
 D_802491C0_CA70E0 = 0x802491C0;
 pra_09_bss_sym = 0x80246A20;
+obk_01_bss_sym = 0x802458F0;
