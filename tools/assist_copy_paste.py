@@ -2,6 +2,11 @@ import sys
 from pathlib import Path
 import re
 
+RUN_ME = False
+if not RUN_ME:
+    print(f"Are you sure yo uwant to run this? Edit RUN_ME in the script if so")
+    exit()
+
 WRITE_FILE = True
 DO_OVERWRITE = True
 DO_OVERWRITE_DECOMP = False

@@ -1,5 +1,10 @@
 from pathlib import Path
 
+RUN_ME = False
+if not RUN_ME:
+    print(f"Are you sure yo uwant to run this? Edit RUN_ME in the script if so")
+    exit()
+    
 FUNC="""    Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
