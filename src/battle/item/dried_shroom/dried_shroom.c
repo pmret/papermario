@@ -1,7 +1,7 @@
 #include "dried_shroom.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_DRIED_SHROOM;
+    SI_VAR(10) = (const) ITEM_DRIED_SHROOM;
     await N(UseItemWithEffect);
     await N(EatItem);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_STICK_OUT_TONGUE);

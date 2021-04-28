@@ -1,7 +1,7 @@
 #include "stop_watch.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_STOP_WATCH;
+    SI_VAR(10) = (const) ITEM_STOP_WATCH;
     await N(UseItemWithEffect);
     spawn {
         sleep 5;

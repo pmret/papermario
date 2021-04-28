@@ -1,7 +1,7 @@
 #include "stone_cap.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_STONE_CAP;
+    SI_VAR(10) = (const) ITEM_STONE_CAP;
     await N(UseItemWithEffect);
     PlaySound(SOUND_UNKNOWN_361);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_30009);

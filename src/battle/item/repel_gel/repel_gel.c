@@ -1,7 +1,7 @@
 #include "repel_gel.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_REPEL_GEL;
+    SI_VAR(10) = (const) ITEM_REPEL_GEL;
     await N(UseItemWithEffect);
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_375);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_30008);

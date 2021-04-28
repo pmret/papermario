@@ -1,6 +1,6 @@
 #include "kmr_04.h"
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 
 #define NAMESPACE dup_kmr_04
 #include "world/common/CheckPartnerFlags1000.inc.c"

@@ -250,7 +250,7 @@ ApiStatus N(func_8024219C_B4CC0C)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 #define NAMESPACE dup_jan_05
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 #define NAMESPACE jan_05
 
 ApiStatus func_8024268C_B4D0FC(ScriptInstance* script) {

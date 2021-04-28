@@ -1610,4 +1610,33 @@ enum RenderMode {
     RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
 };
 
+enum ActorFlags {
+    ACTOR_FLAG_NO_SHADOW        = 0x00000004, ///< Hide shadow.
+    ACTOR_FLAG_FLYING           = 0x00000200, ///< Quake Hammer can't hit.
+    ACTOR_FLAG_HP_OFFSET_BELOW  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_TARGET_ONLY      = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
+    ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
+};
+
+enum ActorPartFlags {
+    PART_FLAG_INVISIBLE         = 0x00000001,
+    PART_FLAG_NO_TARGET         = 0x00020000, ///< Cannot be targeted.
+    PART_FLAG_MULTI_TARGET      = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
+};
+
+enum ActorEventFlags {
+    EVENT_FLAG_FIREY            = 0x00000002, ///< Player takes burn damage upon contact.
+    EVENT_FLAG_ICY              = 0x00000008, ///< No known effect, but is used.
+    EVENT_FLAG_SPIKY_TOP        = 0x00000010, ///< Player takes spike damage from jump attacks.
+    EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
+    EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
+    EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
+    EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
+    EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
+    EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
+    EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
+    EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
+};
+
 #endif

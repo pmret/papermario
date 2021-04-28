@@ -97,7 +97,7 @@ class Sprite:
             })
 
         for i, palette in enumerate(self.palettes):
-            name = self.palette_names[i] if self.palette_names else f"Palette_{i:02X}"
+            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Palette_{i:02X}"
 
             if i in palette_to_raster:
                 img = palette_to_raster[i][0]

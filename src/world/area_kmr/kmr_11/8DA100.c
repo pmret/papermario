@@ -1,6 +1,6 @@
 #include "kmr_11.h"
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_11/8DA100", func_8024023C_8DA33C);
 

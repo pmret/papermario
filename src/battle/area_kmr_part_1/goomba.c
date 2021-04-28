@@ -173,46 +173,46 @@ Script goomba_dispatch = SCRIPT({
     GetLastEvent(ACTOR_SELF, SI_VAR(0));
     match SI_VAR(0) {
         EVENT_HIT_COMBO, EVENT_HIT {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
         }
         == EVENT_BURN_HIT {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
-            SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, burn_pain);
+            SI_VAR(2) = (const) NPC_ANIM(goomba, normal, burn_dead);
             await DoBurnHit;
         }
         == EVENT_BURN_DEATH {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_pain);
-            SI_VAR(2) = c NPC_ANIM(goomba, normal, burn_dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, burn_pain);
+            SI_VAR(2) = (const) NPC_ANIM(goomba, normal, burn_dead);
             await DoBurnHit;
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, burn_dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, burn_dead);
             await DoDeath;
             return;
         }
         == EVENT_SPIN_SMASH_HIT {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
         }
         == EVENT_SPIN_SMASH_DEATH {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoSpinSmashHit;
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
         == EVENT_SHOCK_HIT {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoJumpBack;
             JumpToGoal(ACTOR_SELF, 5, 0, 1, 0);
             SetAnimationRate(ACTOR_SELF, 1, 2.0);
@@ -227,26 +227,26 @@ Script goomba_dispatch = SCRIPT({
             JumpToGoal(ACTOR_SELF, 5, 0, 1, 0);
         }
         == EVENT_SHOCK_DEATH {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, electrocute);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, electrocute);
             await DoShockHit;
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
         == EVENT_STAR_BEAM, 23, EVENT_IMMUNE, EVENT_AIR_LIFT_FAILED {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, idle);
             await DoImmune;
         }
         == EVENT_DEATH {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoNormalHit;
             sleep 10;
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, dead);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, dead);
             await DoDeath;
             return;
         }
@@ -260,25 +260,25 @@ Script goomba_dispatch = SCRIPT({
             HPBarToHome(ACTOR_SELF);
         }
         == EVENT_RECOVER_STATUS {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, idle);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, idle);
             await DoRecover;
         }
         == EVENT_SCARE_AWAY {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
-            SI_VAR(2) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, run);
+            SI_VAR(2) = (const) NPC_ANIM(goomba, normal, pain);
             await DoScareAway;
             return;
         }
         == EVENT_BEGIN_AIR_LIFT {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, run);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, run);
             await DoAirLift;
         }
         == EVENT_BLOW_AWAY {
-            SI_VAR(0) = c 1;
-            SI_VAR(1) = c NPC_ANIM(goomba, normal, pain);
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(goomba, normal, pain);
             await DoBlowAway;
             return;
         } else {

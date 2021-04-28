@@ -22,4 +22,4 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95E7A0", func_802435D4_95E7D4);
 #include "world/common/SomeXYZFunc2.inc.c"
 #define NAMESPACE dro_01
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
