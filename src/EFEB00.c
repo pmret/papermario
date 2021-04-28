@@ -8,7 +8,7 @@
 
 #include "common/DeadUnk1.inc.c"
 
-INCLUDE_ASM(s32, "EFEB00", func_80240340_EFEE40);
+#include "common/DeadUnkFloatFuncAbs.inc.c"
 
 INCLUDE_ASM(s32, "EFEB00", func_802404D0_EFEFD0);
 
