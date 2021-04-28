@@ -1,18 +1,16 @@
 #include "common.h"
 
 void func_800287F0(void) {
-    GameStatus** gameStatus = &gGameStatusPtr;
-
-    (*gameStatus)->currentButtons = 0;
-    (*gameStatus)->pressedButtons = 0;
-    (*gameStatus)->heldButtons = 0;
-    (*gameStatus)->stickX = 0;
-    (*gameStatus)->stickY = 0;
-    (*gameStatus)->prevButtons = 0;
-    (*gameStatus)->unk_50[0] = 4;
-    (*gameStatus)->unk_48[0] = 15;
-    (*gameStatus)->unk_60 = 0;
-    (*gameStatus)->unk_58 = 0;
+    gGameStatusPtr->currentButtons = 0;
+    gGameStatusPtr->pressedButtons = 0;
+    gGameStatusPtr->heldButtons = 0;
+    gGameStatusPtr->stickX = 0;
+    gGameStatusPtr->stickY = 0;
+    gGameStatusPtr->prevButtons = 0;
+    gGameStatusPtr->unk_50[0] = 4;
+    gGameStatusPtr->unk_48[0] = 15;
+    gGameStatusPtr->unk_60 = 0;
+    gGameStatusPtr->unk_58 = 0;
 }
 
 void func_80028838(void) {

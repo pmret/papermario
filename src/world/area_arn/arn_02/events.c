@@ -201,7 +201,6 @@ NpcGroupList N(npcGroupList_80241A9C) = {
 };
 
 s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = CAM2(gCurrentCamID);
@@ -217,7 +216,6 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
         phi_f20 = 270.0f;
     }
 
-    playerStatus = &gPlayerStatusPtr;
     if (fabsf(get_clamped_angle_diff(phi_f20,
             atan2(npc->pos.x, npc->pos.z,
                   gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > 75.0) {

@@ -1208,23 +1208,21 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
 
 /// Pushes/pops script local variables to D_80241C68_BE09F8
 ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
     s32* test;
 
-    if (*ptr == NULL) {
+    if (N(D_80241C68_BE09F8) == NULL) {
         i = heap_malloc(16 * sizeof(s32));
-        *ptr = (s32*) i;
-        for (i = 0, test = *ptr; i < 16; i++) {
+        N(D_80241C68_BE09F8) = (s32*) i;
+        for (i = 0, test = N(D_80241C68_BE09F8); i < 16; i++) {
             *test++ = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
+        for (i = 0, test = N(D_80241C68_BE09F8); i < 16; i++) {
             script->varTable[i] = *test++;
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80241C68_BE09F8));
+        N(D_80241C68_BE09F8) = NULL;
     }
     return ApiStatus_DONE2;
 }

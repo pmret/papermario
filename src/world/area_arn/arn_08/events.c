@@ -460,12 +460,10 @@ ApiStatus N(func_8024019C_BF493C)(ScriptInstance *script, s32 isInitialCall) {
             (*dataPtr)++;
             break;
         case 3: {
-            Npc** partnerNpcPtr = &wPartnerNpc;
-
-            clear_partner_move_history(*partnerNpcPtr);
+            clear_partner_move_history(wPartnerNpc);
             func_800EF3C0(playerStatus->position.x, playerStatus->position.z);
             func_800EF3D4(0);
-            set_npc_yaw(*partnerNpcPtr, 90.0f);
+            set_npc_yaw(wPartnerNpc, 90.0f);
             playerStatus->targetYaw = 90.0f;
             playerStatus->currentYaw = 90.0f;
             playerStatus->spriteFacingAngle = 0.0f;

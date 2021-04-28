@@ -6,7 +6,7 @@ struct struct8024F5C0 {
     char unk14[0x10];
 };
 
-extern struct struct8024F5C0* D_8024F5C0[1];
+extern struct struct8024F5C0 D_8024F5C0[1];
 extern s32 D_8024F570[];
 
 s32 pause_items_comparator(s16* a, s16* b) {
@@ -140,21 +140,18 @@ INCLUDE_ASM(s32, "pause/pause_items", pause_items_load_items);
 
 void pause_items_init(s8* arg0) {
     s32 i;
-    s32* temp_a0 = D_8024F570;
-    MenuIcon** itemIcons = gItemIcons;
-    struct struct8024F5C0* temp = D_8024F5C0;
 
     gItemMenuLevel = 0;
     gItemMenuCurrentTab = 0;
     pause_items_load_items(FALSE);
 
     for (i = 0; i < ARRAY_COUNT(gItemIcons); i++) {
-        itemIcons[i] = create_icon(temp_a0[i]);
-        set_icon_flags(itemIcons[i], 0x80);
+        gItemIcons[i] = create_icon(D_8024F570[i]);
+        set_icon_flags(gItemIcons[i], 0x80);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8024F5C0); i++) {
-        temp[i].unk10 = arg0;
+        D_8024F5C0[i].unk10 = arg0;
     }
 
     setup_pause_menu_tab(&D_8024F5C0, 1);
@@ -164,35 +161,27 @@ void pause_items_init(s8* arg0) {
 INCLUDE_ASM(s32, "pause/pause_items", pause_items_handle_input);
 
 void pause_items_update(void) {
-    s32* currPos = &gItemMenuCurrentScrollPos;
-    PauseItemPage* menuPages = gItemMenuPages;
-    PauseItemPage* menuPage = &menuPages[gItemMenuCurrentPage];
-    s32* temp802705DC;
+    PauseItemPage* menuPage = &gItemMenuPages[gItemMenuCurrentPage];
     s32 selectedIndex = (gItemMenuSelectedIndex / menuPage->numCols) - menuPage->listStart;
 
-    if ((selectedIndex < 2) || (menuPage->numRows < 9)) {
+    if (selectedIndex < 2 || menuPage->numRows < 9) {
         D_802705DC = 0;
     } else if (selectedIndex >= (menuPage->numRows - 2)) {
         D_802705DC = menuPage->numRows - 8;
-    } else {
-        temp802705DC = &D_802705DC;
-        if ((selectedIndex - *temp802705DC) > 6) {
-            *temp802705DC = selectedIndex - 6;
-        } else if ((selectedIndex - *temp802705DC) < 1) {
-            *temp802705DC = selectedIndex - 1;
-        }
+    } else if ((selectedIndex - D_802705DC) > 6) {
+        D_802705DC = selectedIndex - 6;
+    } else if ((selectedIndex - D_802705DC) < 1) {
+        D_802705DC = selectedIndex - 1;
     }
 
-    currPos = &gItemMenuCurrentScrollPos;
     gItemMenuTargetScrollPos = pause_items_get_pos_y(gItemMenuCurrentPage, D_802705DC * menuPage->numCols);
-    *currPos += pause_interp_vertical_scroll(gItemMenuTargetScrollPos - *currPos);
+    gItemMenuCurrentScrollPos += pause_interp_vertical_scroll(gItemMenuTargetScrollPos - gItemMenuCurrentScrollPos);
 }
 
 void pause_items_cleanup(void) {
-    MenuIcon** itemIcons = gItemIcons;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gItemIcons); i++) {
-        free_icon(itemIcons[i]);
+        free_icon(gItemIcons[i]);
     }
 }
