@@ -160,8 +160,6 @@ s32 update_enemy_shadows(void) {
     }
 }
 
-s32 update_player_actor_shadow();
-
 void update_hero_shadows(void) {
     update_actor_shadow(1, gBattleStatus.partnerActor);
     update_player_actor_shadow();
@@ -246,9 +244,6 @@ INCLUDE_ASM(s32, "182B30", func_8025BAA0);
 
 INCLUDE_ASM(s32, "182B30", func_8025C120);
 
-s32 func_8025C8A0(s32 arg0, ActorPart* arg1);
-s32 func_8025C918(void);
-
 s32 func_8025C840(s32 arg0, ActorPart* arg1) {
 
     if (!(arg1->flags & 2)) {
@@ -276,9 +271,6 @@ s32 func_8025C8A0(s32 arg0, ActorPart* arg1) {
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025C918);
-
-void func_8025CD28(s32 arg0, ActorPart* arg1);
-s32 func_8025CD40(void);
 
 s32 func_8025CCC8(s32 arg0, ActorPart* arg1) {
 

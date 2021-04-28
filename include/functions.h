@@ -344,28 +344,6 @@ void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
-ApiStatus func_80045900(ScriptInstance* script);
-ApiStatus func_802D6420(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D585C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D5FF8(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D5FD8(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D62E4(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_80044238(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802C971C(ScriptInstance* script, s32 isInitialCall);
 
 
 #endif
