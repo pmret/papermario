@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80144C20
+glabel set_hud_element_scale
 /* DB320 80144C20 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB324 80144C24 00822024 */  and       $a0, $a0, $v0
 /* DB328 80144C28 00042080 */  sll       $a0, $a0, 2
