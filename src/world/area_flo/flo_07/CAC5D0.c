@@ -430,19 +430,19 @@ Script N(tree1_Callback) = SCRIPT({
 });
 
 FoliageModelList N(tree1_Leaves) = {
-	.count = 3,
-	.models = { 19, 20, 21 }
+    .count = 3,
+    .models = { 19, 20, 21 }
 };
 
 FoliageModelList N(tree1_Trunk) = {
-	.count = 1,
-	.models = { 18 }
+    .count = 1,
+    .models = { 18 }
 };
 
 ShakeTreeConfig N(tree1) = {
-	.leaves = &N(tree1_Leaves),
-	.trunk = &N(tree1_Trunk),
-	.callback = N(tree1_Callback),
+    .leaves = &N(tree1_Leaves),
+    .trunk = &N(tree1_Trunk),
+    .callback = &N(tree1_Callback),
 };
 
 Vec4f N(triggerCoord_802428B4) = { -309.0f, 0.0f, 31.0f, 0.0f };

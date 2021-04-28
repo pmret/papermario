@@ -58,7 +58,7 @@ ShakeTreeConfig N(tree1) = {
     .leaves = &N(treeModelList_Tree1_Leaves),
     .trunk = &N(treeModelList_Tree1_Trunk),
     .vectors = &N(treeEffectVectors_Tree1),
-    .callback = N(tree1_Callback),
+    .callback = &N(tree1_Callback),
 };
 
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };

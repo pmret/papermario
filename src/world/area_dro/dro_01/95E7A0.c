@@ -27,31 +27,31 @@
 #include "world/common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
-	.count = 1,
-	.models = { 13 }
+    .count = 1,
+    .models = { 13 }
 };
 
 FoliageModelList N(tree1_Trunk) = {
-	.count = 1,
-	.models = { 14 }
+    .count = 1,
+    .models = { 14 }
 };
 
 FoliageDropList N(tree1_Drops) = {
-	.count = 1,
-	.drops = {
-		{
-			.itemID = ITEM_COIN,
-			.pos = { 120, 92, -18 },
-			.spawnMode = 0xF,
-			.pickupFlag = SI_SAVE_FLAG(760),
-		},
-	}
+    .count = 1,
+    .drops = {
+        {
+            .itemID = ITEM_COIN,
+            .pos = { 120, 92, -18 },
+            .spawnMode = 0xF,
+            .pickupFlag = SI_SAVE_FLAG(760),
+        },
+    }
 };
 
 ShakeTreeConfig N(tree1) = {
-	.leaves = &N(tree1_Leaves),
-	.trunk = &N(tree1_Trunk),
-	.drops = &N(tree1_Drops),
+    .leaves = &N(tree1_Leaves),
+    .trunk = &N(tree1_Trunk),
+    .drops = &N(tree1_Drops),
 };
 
 Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };

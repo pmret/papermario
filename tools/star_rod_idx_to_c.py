@@ -602,7 +602,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             if entry[2] != 0:
                 out += f"\t.vectors = &N(bush{num}_Vectors),\n"
             if entry[3] != 0:
-                out += f"\t.callback = N(bush{num}_Callback),\n"
+                out += f"\t.callback = &N(bush{num}_Callback),\n"
 
             out += f"}};\n"
 
@@ -625,7 +625,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             if entry[3] != 0:
                 out += f"\t.vectors = &N(tree{num}_Vectors),\n"
             if entry[4] != 0:
-                out += f"\t.callback = N(tree{num}_Callback),\n"
+                out += f"\t.callback = &N(tree{num}_Callback),\n"
 
             out += f"}};\n"
 

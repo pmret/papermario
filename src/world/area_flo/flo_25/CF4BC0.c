@@ -3,37 +3,37 @@
 #include "world/common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
-	.count = 3,
-	.models = { 22, 23, 24 }
+    .count = 3,
+    .models = { 22, 23, 24 }
 };
 
 FoliageModelList N(tree1_Trunk) = {
-	.count = 1,
-	.models = { 21 }
+    .count = 1,
+    .models = { 21 }
 };
 
 FoliageDropList N(tree1_Drops) = {
-	.count = 2,
-	.drops = {
-		{
-			.itemID = ITEM_YELLOW_BERRY,
-			.pos = { -432, 84, -44 },
-			.spawnMode = 0xC,
-			.spawnFlag = SI_AREA_FLAG(33),
-		},
-		{
-			.itemID = ITEM_YELLOW_BERRY,
-			.pos = { -346, 72, -114 },
-			.spawnMode = 0xC,
-			.spawnFlag = SI_AREA_FLAG(34),
-		},
-	}
+    .count = 2,
+    .drops = {
+        {
+            .itemID = ITEM_YELLOW_BERRY,
+            .pos = { -432, 84, -44 },
+            .spawnMode = 0xC,
+            .spawnFlag = SI_AREA_FLAG(33),
+        },
+        {
+            .itemID = ITEM_YELLOW_BERRY,
+            .pos = { -346, 72, -114 },
+            .spawnMode = 0xC,
+            .spawnFlag = SI_AREA_FLAG(34),
+        },
+    }
 };
 
 ShakeTreeConfig N(tree1) = {
-	.leaves = &N(tree1_Leaves),
-	.trunk = &N(tree1_Trunk),
-	.drops = &N(tree1_Drops),
+    .leaves = &N(tree1_Leaves),
+    .trunk = &N(tree1_Trunk),
+    .drops = &N(tree1_Drops),
 };
 
 Vec4f N(triggerCoord_802446AC) = { -388.0f, 0.0f, -92.0f, 0.0f };

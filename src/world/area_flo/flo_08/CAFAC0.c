@@ -1240,37 +1240,37 @@ ApiStatus N(func_80241BCC_CB090C)(ScriptInstance *script, s32 isInitialCall) {
 #include "world/common/foliage.inc.c"
 
 FoliageModelList N(tree1_Leaves) = {
-	.count = 1,
-	.models = { 46 }
+    .count = 1,
+    .models = { 46 }
 };
 
 FoliageModelList N(tree1_Trunk) = {
-	.count = 1,
-	.models = { 45 }
+    .count = 1,
+    .models = { 45 }
 };
 
 FoliageDropList N(tree1_Drops) = {
-	.count = 2,
-	.drops = {
-		{
-			.itemID = ITEM_BLUE_BERRY,
-			.pos = { 340, 102, -89 },
-			.spawnMode = 0xC,
-			.spawnFlag = SI_AREA_FLAG(29),
-		},
-		{
-			.itemID = ITEM_BLUE_BERRY,
-			.pos = { 440, 102, -89 },
-			.spawnMode = 0xC,
-			.spawnFlag = SI_AREA_FLAG(30),
-		},
-	}
+    .count = 2,
+    .drops = {
+        {
+            .itemID = ITEM_BLUE_BERRY,
+            .pos = { 340, 102, -89 },
+            .spawnMode = 0xC,
+            .spawnFlag = SI_AREA_FLAG(29),
+        },
+        {
+            .itemID = ITEM_BLUE_BERRY,
+            .pos = { 440, 102, -89 },
+            .spawnMode = 0xC,
+            .spawnFlag = SI_AREA_FLAG(30),
+        },
+    }
 };
 
 ShakeTreeConfig N(tree1) = {
-	.leaves = &N(tree1_Leaves),
-	.trunk = &N(tree1_Trunk),
-	.drops = &N(tree1_Drops),
+    .leaves = &N(tree1_Leaves),
+    .trunk = &N(tree1_Trunk),
+    .drops = &N(tree1_Drops),
 };
 
 Vec4f N(triggerCoord_80245904) = { 391.0f, 0.0f, -102.0f, 0.0f };
