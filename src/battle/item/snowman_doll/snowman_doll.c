@@ -1,7 +1,7 @@
 #include "snowman_doll.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_SNOWMAN_DOLL;
+    SI_VAR(10) = (const) ITEM_SNOWMAN_DOLL;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_363);

@@ -87,7 +87,7 @@ Script N(main) = SCRIPT({
         await N(script6);
         return;
     }
-    SI_VAR(10) = c ITEM_LIFE_SHROOM;
+    SI_VAR(10) = (const) ITEM_LIFE_SHROOM;
     SI_VAR(1) = SI_VAR(15);
     await N(UseItemWithEffect);
     await N(EatItem);

@@ -77,7 +77,7 @@ Script N(script6) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_SUPER_SODA;
+    SI_VAR(10) = (const) ITEM_SUPER_SODA;
     await N(UseItemWithEffect);
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));

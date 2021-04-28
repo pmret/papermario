@@ -234,3 +234,267 @@ goomba:
     - fake_plant
     - fake_mushroom
     - electrocute
+spiked_goomba:
+  palettes:
+    - default
+    - gloomba
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - idle
+    - walk
+    - run
+    - headbonk
+    - dead
+    - pain
+    - burn_dead
+    - burn_pain
+    - dizzy
+    - sleep
+    - laugh
+    - electrocute
+paragoomba:
+  palettes:
+    - default
+    - red
+    - hyper
+    - gloomba
+    - _green1
+    - _green2
+    - _green3
+    - _green4
+    - _purple1
+    - _purple2
+    - _purple3
+    - _purple4
+    - _yellow1
+    - _yellow2
+    - _yellow3
+    - _yellow4
+    - burnt
+  animations:
+    - still
+    - idle
+    - aim
+    - walk
+    - run
+    - attack
+    - pain
+    - dead
+    - wings_only
+    - left_wing_only
+    - right_wing_only
+    - sleep
+    - dizzy
+    - burn_pain
+    - burn_dead
+    - electrocute
+cleft:
+  palettes:
+    - default
+    - hyper
+  animations: # TODO
+    - still
+    - inverted_still
+    - idle
+    - inverted_idle
+    - Anim_4
+    - Anim_5
+    - walk
+    - run
+    - skid
+    - Anim_9
+    - inverted_jump
+    - Anim_B
+    - sleep
+    - inverted_sleep
+    - dizzy
+    - inverted_dizzy
+    - charge_still
+    - charge
+    - shake_rock
+    - from_rock
+    - rock
+    - into_rock
+    - rock_lighten
+    - rock_darken
+    - laugh
+    - rock_shimmer_green_grey
+    - rock_shimmer_green_brown
+jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - still_shell
+    - idle
+    - idle_shell
+    - idle_angry
+    - idle_point
+    - walk
+    - walk_back
+    - run
+    - sprint_normal
+    - sprint_crazy
+    - swim
+    - run_back
+    - jump
+    - jump_still
+    - jump_land
+    - hurt
+    - hide_shell
+    - hurt_crazy
+    - dead
+    - dead_still
+    - talk
+    - talk_shell
+    - talk2
+    - happy
+    - talk_point
+    - point_tap
+    - sleep
+    - dizzy
+    - stand_weird
+    - stand_weird2
+    - stand_weird_land
+    - trip
+    - trip_still
+    - fall
+    - panick
+    - climb_loop
+    - climb_end
+    - trip_forward
+    - burn_hurt
+    - burn_dead
+    - hanging
+    - shadowboxing
+spiked_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - jump
+    - jump_still
+    - jump_land
+    - pose_still
+    - pose_angry
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+spiked_para_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - still_shell
+    - idle
+    - idle_point
+    - idle_shell
+    - walk
+    - run
+    - attack
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - burn_shell
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging
+    - shell_hide
+    - shell_show
+    - angry
+mage_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - attack
+    - attack2
+    - attack2_burn
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging
+para_jr_troopa:
+  palettes:
+    - default
+    - black
+    - _green1
+    - _green2
+    - _purple1
+    - _purple2
+    - _yellow1
+    - _yellow2
+    - burnt
+  animations:
+    - still
+    - still_point
+    - idle
+    - idle_point
+    - walk
+    - run
+    - attack
+    - hurt
+    - burn_hurt
+    - burn_dead
+    - sleep
+    - dizzy
+    - talk_point
+    - hanging

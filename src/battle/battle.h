@@ -257,7 +257,7 @@ typedef struct Stage {
     /* 0x0C */ Bytecode* preBattle;
     /* 0x10 */ Bytecode* postBattle;
     /* 0x14 */ const char* bg;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
