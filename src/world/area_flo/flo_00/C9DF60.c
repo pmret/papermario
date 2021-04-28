@@ -38,7 +38,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_flo_00_tattle,
+    .tattle = { MSG_flo_00_tattle },
 };
 
 Script N(802414D0) = SCRIPT({

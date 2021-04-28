@@ -86,7 +86,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_dro_02_tattle,
+    .tattle = { MSG_dro_02_tattle },
 };
 
 // *INDENT-OFF*
@@ -3577,7 +3577,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg
     Matrix4f sp60;
     Matrix4f spA0;
 
-    guPositionF(&spA0, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
+    guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
     
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
@@ -3911,7 +3911,7 @@ void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
     Matrix4f sp20;
     u32 temp_s1;
 
-    guPositionF(&sp20, 0.0f, -CURRENT_CAM->currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
+    guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
     
     temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);

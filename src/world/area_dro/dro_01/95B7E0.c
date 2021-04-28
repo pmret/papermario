@@ -103,7 +103,7 @@ MapConfig N(config) = {
     .entryList = N(entryList),
     .entryCount = ENTRY_COUNT(N(entryList)),
     .background = &gBackgroundImage,
-    .tattle = MSG_dro_01_tattle,
+    .tattle = { MSG_dro_01_tattle },
 };
 
 // *INDENT-OFF*

@@ -19,7 +19,6 @@
 #define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
 #define CAM(id) (&gCameras[id])
-#define CURRENT_CAM (&gCameras[gCurrentCameraID])
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
