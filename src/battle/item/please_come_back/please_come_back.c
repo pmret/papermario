@@ -1,7 +1,7 @@
 #include "please_come_back.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_DIZZY_DIAL;
+    SI_VAR(10) = (const) ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
     SetGoalToHome(ACTOR_PLAYER);
     SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_MIDAIR_STILL, ANIM_MIDAIR, ANIM_10009);

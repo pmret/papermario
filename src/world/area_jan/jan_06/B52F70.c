@@ -250,5 +250,5 @@ ApiStatus N(func_802420EC_B5491C)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 #define NAMESPACE dup_jan_06
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 #define NAMESPACE jan_06

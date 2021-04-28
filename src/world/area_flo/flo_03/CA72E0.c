@@ -77,10 +77,10 @@ Script N(80240880) = SCRIPT({
     SI_VAR(14) = SI_VAR(4);
     SI_VAR(12) -= SI_VAR(0);
     SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) =f SI_VAR(12);
+    SI_VAR(0) = (float) SI_VAR(12);
     SI_VAR(0) /= 100.0;
     SI_VAR(15) = 100.0;
-    SI_VAR(15) /=f SI_VAR(0);
+    SI_VAR(15) /= (float) SI_VAR(0);
     SI_VAR(15) += 11;
     SI_VAR(5) = 200;
     SI_VAR(5) /= SI_VAR(15);
@@ -258,7 +258,7 @@ Script N(interact_802412BC) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SI_MAP_VAR(14) = 1;
-            SI_VAR(4) = 3.5;
+            SI_VAR(4) = (int) 3.5;
             await N(8024122C);
             SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0050));
             SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_6));
@@ -338,7 +338,7 @@ Script N(interact_802412BC) = SCRIPT({
             ShowEmote(1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0);
             sleep 15;
             SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0056));
-            SI_VAR(4) = 90.0;
+            SI_VAR(4) = (int) 90.0;
             await N(8024122C);
             SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0057));
             SetEnemyFlagBits(1, 1, 0);
@@ -356,7 +356,7 @@ Script N(interact_802412BC) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0058));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_6));
             } else {
-                SI_VAR(4) = 3.5;
+                SI_VAR(4) = (int) 3.5;
                 await N(8024122C);
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_8), NPC_ANIM(petunia, Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x0059));
                 EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0);
@@ -1086,228 +1086,6 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-// *INDENT-OFF*
-Script N(searchBush_80244480) = {
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(5), SI_VAR(15), SI_VAR(7)),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(1), 0),
-            SI_CMD(ScriptOpcode_LOOP, 5),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-                        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-                        SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 339, 0),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(3), 0, 0, 0),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(2), 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(5), SI_VAR(6), SI_VAR(7)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(10), 0),
-                    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9)),
-                SI_CMD(ScriptOpcode_ELSE),
-                    SI_CMD(ScriptOpcode_CALL, GetValueByRef, SI_VAR(10), SI_VAR(11)),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(11), 0),
-                        SI_CMD(ScriptOpcode_CALL, SetValueByRef, SI_VAR(10), 1),
-                        SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9)),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(4), 0),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, 0xFE363C84),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
-
-// *INDENT-OFF*
-Script N(shakeTree_802447E0) = {
-    SI_CMD(ScriptOpcode_SET_TIMESCALE, SI_FIXED(2.0)),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(6), SI_VAR(15), SI_VAR(8)),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 357),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 358),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(1), 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_LOOP, 5),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-                        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-                        SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 358, 0),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(3), 0, 0, 0),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(2), 0),
-            SI_CMD(ScriptOpcode_LOOP, 5),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-                        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-                        SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(4), 357, 0),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                    SI_CMD(ScriptOpcode_CALL, N(SomeMatrixOperation2), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-                SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(4), 0, 0, 0),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(3), 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(3)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(4)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(9), SI_VAR(10), SI_VAR(11)),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(11), 0),
-                    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-                SI_CMD(ScriptOpcode_ELSE),
-                    SI_CMD(ScriptOpcode_CALL, GetValueByRef, SI_VAR(11), SI_VAR(12)),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(12), 0),
-                        SI_CMD(ScriptOpcode_CALL, SetValueByRef, SI_VAR(11), 1),
-                        SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_IF_NE, SI_VAR(4), 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(4)),
-            SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_LOOP, SI_VAR(5)),
-                SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-                SI_CMD(ScriptOpcode_CALL, PlayEffect, 20, 0, SI_VAR(6), SI_VAR(7), SI_VAR(8), 100, 0, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(5), 0),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, 0xFE363C85),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
-
-s32 N(treeModelList_Tree1_Leaves)[] = {
-    0x00000001, 0x00000017,
-};
-
-s32 N(treeModelList_Tree1_Trunk)[] = {
-    0x00000001, 0x00000016,
-};
-
-s32 N(treeDropList_Tree1)[] = {
-    2,
-    ITEM_RED_BERRY, -256, 102, -169, 0xC, 0, SI_AREA_FLAG(27),
-    ITEM_RED_BERRY, -156, 102, -169, 0xC, 0, SI_AREA_FLAG(28),
-};
-
-s32 N(shakeTreeEvent_Tree1)[] = {
-    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), N(treeDropList_Tree1), 0x00000000, 0x00000000,
-};
-
-s32 N(triggerCoord_80244E44)[] = {
-    0xC3500000, 0x00000000, 0xC3360000, 0x00000000,
-};
-
-Script N(80244E54) = SCRIPT({
-    SI_AREA_FLAG(27) = 0;
-    SI_AREA_FLAG(28) = 0;
-    SI_VAR(0) = N(shakeTreeEvent_Tree1);
-    bind N(shakeTree_802447E0) to TRIGGER_WALL_HAMMER 16;
-    bind N(shakeTree_802447E0) to TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
-});
-
-static s32 N(pad_4ECC) = {
-    0x00000000,
-};
-
-Script N(80244ED0) = SCRIPT({
-
-});
-
-Script N(makeEntities) = SCRIPT({
-    MakeEntity(0x802EAB04, -175, 0, 150, 0, ITEM_MAP, MAKE_ENTITY_END);
-    AssignPanelFlag(SI_SAVE_FLAG(1404));
-});
-
 ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
@@ -1381,4 +1159,47 @@ ApiStatus N(func_80240158_CA73F8)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
+
+s32 N(treeModelList_Tree1_Leaves)[] = {
+    0x00000001, 0x00000017,
+};
+
+s32 N(treeModelList_Tree1_Trunk)[] = {
+    0x00000001, 0x00000016,
+};
+
+s32 N(treeDropList_Tree1)[] = {
+    2,
+    ITEM_RED_BERRY, -256, 102, -169, 0xC, 0, SI_AREA_FLAG(27),
+    ITEM_RED_BERRY, -156, 102, -169, 0xC, 0, SI_AREA_FLAG(28),
+};
+
+s32 N(shakeTreeEvent_Tree1)[] = {
+    N(treeModelList_Tree1_Leaves), N(treeModelList_Tree1_Trunk), N(treeDropList_Tree1), 0x00000000, 0x00000000,
+};
+
+s32 N(triggerCoord_80244E44)[] = {
+    0xC3500000, 0x00000000, 0xC3360000, 0x00000000,
+};
+
+Script N(80244E54) = SCRIPT({
+    SI_AREA_FLAG(27) = 0;
+    SI_AREA_FLAG(28) = 0;
+    SI_VAR(0) = N(shakeTreeEvent_Tree1);
+    bind N(shakeTree) to TRIGGER_WALL_HAMMER 16;
+    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
+});
+
+static s32 N(pad_4ECC) = {
+    0x00000000,
+};
+
+Script N(80244ED0) = SCRIPT({
+
+});
+
+Script N(makeEntities) = SCRIPT({
+    MakeEntity(0x802EAB04, -175, 0, 150, 0, ITEM_MAP, MAKE_ENTITY_END);
+    AssignPanelFlag(SI_SAVE_FLAG(1404));
+});

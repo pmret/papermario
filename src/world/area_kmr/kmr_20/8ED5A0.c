@@ -25,7 +25,7 @@
 #define NAMESPACE kmr_20
 
 #define NAMESPACE dup3_kmr_20
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 #define NAMESPACE kmr_20
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED5A0", func_80241C9C_8EDABC);

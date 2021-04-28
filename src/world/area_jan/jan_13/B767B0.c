@@ -8,5 +8,5 @@ INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_80240214_B769C4);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_13/B767B0", func_802402B8_B76A68);
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
 

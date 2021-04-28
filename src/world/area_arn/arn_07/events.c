@@ -32,13 +32,13 @@ Script N(802437AC) = SCRIPT({
     SI_VAR(2) = 1.0;
     loop 50 {
         SI_VAR(2) -= 0.0107421875;
-        SI_VAR(0) +=f SI_VAR(2);
+        SI_VAR(0) += (float) SI_VAR(2);
         RotateModel(27, SI_VAR(0), 0, 0, 1);
         sleep 1;
     }
     loop 50 {
         SI_VAR(2) += 0.0107421875;
-        SI_VAR(0) +=f SI_VAR(2);
+        SI_VAR(0) += (float) SI_VAR(2);
         RotateModel(27, SI_VAR(0), 0, 0, 1);
         sleep 1;
     }
@@ -412,8 +412,8 @@ Script N(idle_80244CC8) = SCRIPT({
         MakeLerp(50, 80, 15, 0);
         loop {
             UpdateLerp();
-            SI_VAR(2) =f SI_VAR(0);
-            SI_VAR(2) /=f 100;
+            SI_VAR(2) = (float) SI_VAR(0);
+            SI_VAR(2) /= (float) 100;
             SetNpcScale(NPC_SELF, SI_VAR(2), SI_VAR(2), SI_VAR(2));
             sleep 1;
             if (SI_VAR(1) == 0) {
@@ -1017,22 +1017,22 @@ StaticNpc N(npcGroup_802470BC) = {
     .maxCoinBonus = 2,
     .movement = { -216, 60, -10, 30, 0, -32767, 0, -216, 60, -10, 250 },
     .animations = {
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_3),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_5),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, walk),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, attack),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -1054,22 +1054,22 @@ StaticNpc N(npcGroup_802472AC) = {
     .maxCoinBonus = 2,
     .movement = { 0, 60, 150, 30, 0, -32767, 0, 0, 60, 150, 250 },
     .animations = {
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_3),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_5),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, walk),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, attack),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -1091,22 +1091,22 @@ StaticNpc N(npcGroup_8024749C) = {
     .maxCoinBonus = 2,
     .movement = { 260, 60, 30, 30, 0, -32767, 0, 260, 60, 30, 250 },
     .animations = {
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_3),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_1),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_6),
-        NPC_ANIM(paragoomba, Palette_02, Anim_5),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
-        NPC_ANIM(paragoomba, Palette_02, Anim_4),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, walk),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, idle),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, pain),
+        NPC_ANIM(paragoomba, hyper, attack),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
+        NPC_ANIM(paragoomba, hyper, run),
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };

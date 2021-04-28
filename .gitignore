@@ -47,6 +47,7 @@ build/
 /out
 dump
 *.backup
+crash.xml
 
 /tools/Yay0compress
 /tools/n64crc

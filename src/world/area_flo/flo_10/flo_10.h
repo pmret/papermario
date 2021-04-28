@@ -3,7 +3,7 @@
 
 #define NAMESPACE flo_10
 
-ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall);
 s32 N(func_80240000_CB9200)(void);

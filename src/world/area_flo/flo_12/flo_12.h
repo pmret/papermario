@@ -4,7 +4,7 @@
 #define NAMESPACE flo_12
 
 ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CC0E30)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall);

@@ -714,8 +714,8 @@ s32 N(intTable_8024262C)[] = {
 };
 
 Script N(8024263C) = SCRIPT({
-    SI_VAR(0) =f 10;
-    SI_VAR(1) =f 1;
+    SI_VAR(0) = (float) 10;
+    SI_VAR(1) = (float) 1;
     parallel {
         loop 8 {
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), FALSE);
@@ -726,8 +726,8 @@ Script N(8024263C) = SCRIPT({
             SetNpcFlagBits(NPC_HUFF_N_PUFF1, ((0x00000002)), TRUE);
             SetNpcFlagBits(NPC_HUFF_N_PUFF2, ((0x00000002)), TRUE);
             sleep SI_VAR(1);
-            SI_VAR(0) -=f 0;
-            SI_VAR(1) +=f 0;
+            SI_VAR(0) -= (float) 0;
+            SI_VAR(1) += (float) 0;
         }
         loop {
             SetNpcFlagBits(NPC_HUFF_N_PUFF0, ((0x00000002)), FALSE);

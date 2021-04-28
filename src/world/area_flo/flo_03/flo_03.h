@@ -3,7 +3,7 @@
 
 #define NAMESPACE flo_03
 
-ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CA72A0)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240158_CA73F8)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240460_CA7700)(ScriptInstance* script, s32 isInitialCall);

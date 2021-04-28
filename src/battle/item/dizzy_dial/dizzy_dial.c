@@ -1,7 +1,7 @@
 #include "dizzy_dial.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_DIZZY_DIAL;
+    SI_VAR(10) = (const) ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
     UseCamPreset(2);
     MoveBattleCamOver(20);

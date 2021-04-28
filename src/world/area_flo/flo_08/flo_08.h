@@ -5,7 +5,7 @@
 
 ApiStatus N(AddPlayerHandsOffset)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(SetOverrideFlags_40)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc17)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc18)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc19)(ScriptInstance* script, s32 isInitialCall);

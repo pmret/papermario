@@ -152,4 +152,4 @@ ApiStatus N(func_802415A4_940B54)(ScriptInstance *script, s32 isInitialCall) {
 }
 */
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"

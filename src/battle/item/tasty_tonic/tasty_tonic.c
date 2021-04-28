@@ -1,7 +1,7 @@
 #include "tasty_tonic.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_TASTY_TONIC;
+    SI_VAR(10) = (const) ITEM_TASTY_TONIC;
     await N(UseItemWithEffect);
     InitTargetIterator();
     GetOwnerTarget(SI_VAR(0), SI_VAR(1));

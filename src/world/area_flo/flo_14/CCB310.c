@@ -152,10 +152,10 @@ Script N(80242C00) = SCRIPT({
     SI_VAR(14) = SI_VAR(4);
     SI_VAR(12) -= SI_VAR(0);
     SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) =f SI_VAR(12);
+    SI_VAR(0) = (float) SI_VAR(12);
     SI_VAR(0) /= 100.0;
     SI_VAR(15) = 100.0;
-    SI_VAR(15) /=f SI_VAR(0);
+    SI_VAR(15) /= (float) SI_VAR(0);
     SI_VAR(15) += 11;
     SI_VAR(5) = 200;
     SI_VAR(5) /= SI_VAR(15);
@@ -361,14 +361,14 @@ Script N(80243870) = SCRIPT({
     SI_VAR(9) = 180;
     loop SI_VAR(9) {
         TranslateModel(123, 591, 55, 121);
-        SI_VAR(3) =f SI_VAR(2);
-        SI_VAR(3) /=f 10;
+        SI_VAR(3) = (float) SI_VAR(2);
+        SI_VAR(3) /= (float) 10;
         ScaleModel(123, SI_VAR(3), SI_VAR(3), SI_VAR(3));
         TranslateModel(123, SI_VAR(4), SI_VAR(5), SI_VAR(6));
         SI_VAR(2) += 0.05078125;
         if (SI_VAR(9) > 90) {
-            SI_VAR(4) +=f SI_VAR(7);
-            SI_VAR(5) +=f SI_VAR(8);
+            SI_VAR(4) += (float) SI_VAR(7);
+            SI_VAR(5) += (float) SI_VAR(8);
         }
         sleep 1;
     }
@@ -380,8 +380,8 @@ Script N(80243870) = SCRIPT({
         TranslateModel(123, 591, 55, 121);
         ScaleModel(123, SI_VAR(3), SI_VAR(3), SI_VAR(3));
         TranslateModel(123, SI_VAR(4), SI_VAR(5), SI_VAR(6));
-        SI_VAR(4) +=f SI_VAR(7);
-        SI_VAR(6) +=f SI_VAR(8);
+        SI_VAR(4) += (float) SI_VAR(7);
+        SI_VAR(6) += (float) SI_VAR(8);
         sleep 1;
     }
     SI_AREA_FLAG(36) = 0;

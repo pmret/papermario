@@ -1,7 +1,7 @@
 #include "unknown_item.h"
 
 Script N(main) = SCRIPT({
-    SI_VAR(10) = c ITEM_ULTRA_SHROOM;
+    SI_VAR(10) = (const) ITEM_ULTRA_SHROOM;
     await N(UseItemWithEffect);
     await N(EatItem);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

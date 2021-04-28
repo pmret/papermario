@@ -255,7 +255,7 @@ Script N(openDoor_80244340) = SCRIPT({
 
 Script N(moveWalls_80244390) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
-    SI_VAR(1) /=f 50;
+    SI_VAR(1) /= (float) 50;
     TranslateModel(104, 0, SI_VAR(1), 0);
     TranslateModel(105, 0, SI_VAR(1), 0);
     TranslateModel(106, 0, SI_VAR(1), 0);
@@ -266,7 +266,7 @@ Script N(moveWalls_80244390) = SCRIPT({
 
 Script N(dropDoor_80244474) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
-    SI_VAR(1) /=f 50;
+    SI_VAR(1) /= (float) 50;
     TranslateModel(108, 0, SI_VAR(1), 0);
     TranslateModel(110, 0, SI_VAR(1), 0);
     RotateModel(108, SI_VAR(0), 1, 0, 0);
@@ -279,7 +279,7 @@ Script N(openDoor_8024451C) = SCRIPT({
 
 Script N(moveWalls_8024454C) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
-    SI_VAR(1) /=f 50;
+    SI_VAR(1) /= (float) 50;
     RotateGroup(61, SI_VAR(0), 0, 0, -1);
 });
 
@@ -489,14 +489,14 @@ Script N(80244F84) = SCRIPT({
     SetCamType(0, SI_VAR(1), 0);
     GetCamDistance(0, SI_VAR(0));
     if (SI_VAR(0) > 0) {
-        SI_VAR(0) =f 370;
+        SI_VAR(0) = (float) 370;
     } else {
-        SI_VAR(0) =f -370;
+        SI_VAR(0) = (float) -370;
     }
     SetCamDistance(0, SI_VAR(0));
     GetCamPitch(0, SI_VAR(0), SI_VAR(1));
-    SI_VAR(0) =f 13.0;
-    SI_VAR(1) =f -10.0;
+    SI_VAR(0) = (float) 13.0;
+    SI_VAR(1) = (float) -10.0;
     SetCamPitch(0, SI_VAR(0), SI_VAR(1));
     PanToTarget(0, 0, 1);
     SetCamLeadPlayer(0, 0);
@@ -508,9 +508,9 @@ Script N(80245120) = SCRIPT({
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     GetCamDistance(0, SI_VAR(0));
     if (SI_VAR(0) > 0) {
-        SI_VAR(0) =f 17;
+        SI_VAR(0) = (float) 17;
     } else {
-        SI_VAR(0) =f -17;
+        SI_VAR(0) = (float) -17;
     }
     SetCamDistance(0, SI_VAR(0));
     SetCamSpeed(0, 90.0);
@@ -527,24 +527,24 @@ Script N(80245258) = SCRIPT({
     sleep 20;
     N(UnkCameraFunc)(SI_ARRAY(1), SI_ARRAY(3), 83, SI_VAR(0), SI_VAR(1));
     spawn {
-        SI_VAR(2) =f 0;
+        SI_VAR(2) = (float) 0;
         loop 60 {
-            SI_VAR(3) =f SI_VAR(0);
-            SI_VAR(4) =f SI_VAR(1);
-            SI_VAR(3) *=f SI_VAR(2);
-            SI_VAR(4) *=f SI_VAR(2);
-            SI_VAR(3) /=f 60;
-            SI_VAR(4) /=f 60;
-            SI_VAR(3) +=f SI_ARRAY(1);
-            SI_VAR(4) +=f SI_ARRAY(3);
+            SI_VAR(3) = (float) SI_VAR(0);
+            SI_VAR(4) = (float) SI_VAR(1);
+            SI_VAR(3) *= (float) SI_VAR(2);
+            SI_VAR(4) *= (float) SI_VAR(2);
+            SI_VAR(3) /= (float) 60;
+            SI_VAR(4) /= (float) 60;
+            SI_VAR(3) += (float) SI_ARRAY(1);
+            SI_VAR(4) += (float) SI_ARRAY(3);
             SetPlayerPos(SI_VAR(3), SI_ARRAY(2), SI_VAR(4));
-            SI_VAR(2) +=f 1;
+            SI_VAR(2) += (float) 1;
             sleep 1;
         }
-        SI_VAR(3) =f SI_VAR(0);
-        SI_VAR(4) =f SI_VAR(1);
-        SI_VAR(3) +=f SI_ARRAY(1);
-        SI_VAR(4) +=f SI_ARRAY(3);
+        SI_VAR(3) = (float) SI_VAR(0);
+        SI_VAR(4) = (float) SI_VAR(1);
+        SI_VAR(3) += (float) SI_ARRAY(1);
+        SI_VAR(4) += (float) SI_ARRAY(3);
         SetPlayerPos(SI_VAR(3), SI_ARRAY(2), SI_VAR(4));
     }
     N(UnkRotatePlayer)();
@@ -555,16 +555,16 @@ Script N(80245258) = SCRIPT({
 Script N(80245408) = SCRIPT({
     GetNpcPos(NPC_PARTNER, SI_VAR(10), SI_VAR(11), SI_VAR(12));
     N(UnkCameraFunc)(SI_VAR(10), SI_VAR(12), 108, SI_VAR(0), SI_VAR(1));
-    SI_VAR(5) =f SI_ARRAY(2);
-    SI_VAR(5) -=f SI_VAR(11);
+    SI_VAR(5) = (float) SI_ARRAY(2);
+    SI_VAR(5) -= (float) SI_VAR(11);
     spawn {
         N(UnkMovePartner)();
-        SI_VAR(3) =f SI_VAR(0);
-        SI_VAR(4) =f SI_VAR(1);
-        SI_VAR(6) =f SI_VAR(5);
-        SI_VAR(3) +=f SI_VAR(10);
-        SI_VAR(4) +=f SI_VAR(12);
-        SI_VAR(6) +=f SI_VAR(11);
+        SI_VAR(3) = (float) SI_VAR(0);
+        SI_VAR(4) = (float) SI_VAR(1);
+        SI_VAR(6) = (float) SI_VAR(5);
+        SI_VAR(3) += (float) SI_VAR(10);
+        SI_VAR(4) += (float) SI_VAR(12);
+        SI_VAR(6) += (float) SI_VAR(11);
         SetNpcPos(NPC_PARTNER, SI_VAR(3), SI_VAR(6), SI_VAR(4));
     }
     N(UnkRotatePartner)();
@@ -576,18 +576,18 @@ Script N(80245540) = SCRIPT({
     GetNpcPos(NPC_CHUCK_QUIZMO, SI_VAR(10), SI_VAR(11), SI_VAR(12));
     N(UnkCameraFunc)(SI_VAR(10), SI_VAR(12), -70, SI_VAR(0), SI_VAR(1));
     spawn {
-        SI_VAR(2) =f 0;
+        SI_VAR(2) = (float) 0;
         loop 60 {
-            SI_VAR(3) =f SI_VAR(0);
-            SI_VAR(4) =f SI_VAR(1);
-            SI_VAR(3) *=f SI_VAR(2);
-            SI_VAR(4) *=f SI_VAR(2);
-            SI_VAR(3) /=f 60;
-            SI_VAR(4) /=f 60;
-            SI_VAR(3) +=f SI_VAR(10);
-            SI_VAR(4) +=f SI_VAR(12);
+            SI_VAR(3) = (float) SI_VAR(0);
+            SI_VAR(4) = (float) SI_VAR(1);
+            SI_VAR(3) *= (float) SI_VAR(2);
+            SI_VAR(4) *= (float) SI_VAR(2);
+            SI_VAR(3) /= (float) 60;
+            SI_VAR(4) /= (float) 60;
+            SI_VAR(3) += (float) SI_VAR(10);
+            SI_VAR(4) += (float) SI_VAR(12);
             SetNpcPos(NPC_CHUCK_QUIZMO, SI_VAR(3), SI_ARRAY(2), SI_VAR(4));
-            SI_VAR(2) +=f 1;
+            SI_VAR(2) += (float) 1;
             sleep 1;
         }
     }
@@ -796,10 +796,10 @@ Script N(802462A4) = SCRIPT({
 Script N(802462E4) = SCRIPT({
     spawn {
         N(UnkCameraFunc)(SI_ARRAY(1), SI_ARRAY(3), 25, SI_VAR(0), SI_VAR(1));
-        SI_VAR(2) =f SI_ARRAY(1);
-        SI_VAR(2) +=f SI_VAR(0);
-        SI_VAR(3) =f SI_ARRAY(3);
-        SI_VAR(3) +=f SI_VAR(1);
+        SI_VAR(2) = (float) SI_ARRAY(1);
+        SI_VAR(2) += (float) SI_VAR(0);
+        SI_VAR(3) = (float) SI_ARRAY(3);
+        SI_VAR(3) += (float) SI_VAR(1);
         SetNpcAnimation(NPC_PARTNER, 0x102);
         NpcMoveTo(NPC_PARTNER, SI_VAR(2), SI_VAR(3), 40);
         SetNpcAnimation(NPC_PARTNER, 0x106);
@@ -1547,7 +1547,7 @@ Script N(80248788) = SCRIPT({
             RemoveKeyItemAt(SI_VAR(1));
             GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
             N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            SI_VAR(0) |=c 0x50000;
+            SI_VAR(0) |= (const)  0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
             sleep 30;
@@ -2095,7 +2095,7 @@ Script N(8024B20C) = SCRIPT({
             DisablePartnerAI(0);
             GetNpcPos(NPC_PARTNER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
             N(UnkYawFunc)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            SI_VAR(0) |=c 0x50000;
+            SI_VAR(0) |= (const)  0x50000;
             MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
             SI_VAR(10) = spawn N(8024B18C);
             SetNpcAnimation(NPC_PARTNER, 0x40002);

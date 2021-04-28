@@ -3,7 +3,7 @@
 
 #define NAMESPACE flo_22
 
-ApiStatus N(SomeMatrixOperation2)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240000_CEC240)(ScriptInstance* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80240DE4);

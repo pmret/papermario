@@ -95,10 +95,10 @@ Script N(802416C0) = SCRIPT({
     SI_VAR(14) = SI_VAR(4);
     SI_VAR(12) -= SI_VAR(0);
     SI_VAR(13) -= SI_VAR(1);
-    SI_VAR(0) =f SI_VAR(12);
+    SI_VAR(0) = (float) SI_VAR(12);
     SI_VAR(0) /= 100.0;
     SI_VAR(15) = 100.0;
-    SI_VAR(15) /=f SI_VAR(0);
+    SI_VAR(15) /= (float) SI_VAR(0);
     SI_VAR(15) += 11;
     SI_VAR(5) = 200;
     SI_VAR(5) /= SI_VAR(15);
@@ -1467,10 +1467,10 @@ static s32 N(pad_684C) = {
 };
 
 Script N(80246850) = SCRIPT({
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) -= -700.0;
     SI_VAR(1) /= 100.0;
-    SI_VAR(2) =f SI_VAR(1);
+    SI_VAR(2) = (float) SI_VAR(1);
     SI_VAR(2) *= 100.0;
     if (SI_VAR(2) > 100) {
         SI_VAR(1) = 1.0;
@@ -1509,7 +1509,7 @@ Script N(80246850) = SCRIPT({
     TranslateModel(115, 0, SI_VAR(0), 0);
     TranslateModel(117, 0, SI_VAR(0), 0);
     TranslateModel(119, 0, SI_VAR(0), 0);
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= -12.0;
     RotateGroup(74, SI_VAR(1), 0, 1, 0);
     RotateModel(89, SI_VAR(1), 0, 1, 0);
@@ -1544,10 +1544,10 @@ Script N(80246850) = SCRIPT({
     TranslateModel(115, 8.0029296875, 536.2294921875, 0.947265625);
     TranslateModel(117, 12.998046875, 586.1533203125, 0.947265625);
     TranslateModel(119, -13.001953125, 631.1533203125, 0.947265625);
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) -= -700.0;
     SI_VAR(1) /= 300.0;
-    SI_VAR(2) =f SI_VAR(1);
+    SI_VAR(2) = (float) SI_VAR(1);
     SI_VAR(2) *= 100.0;
     if (SI_VAR(2) > 100) {
         SI_VAR(1) = 1.0;
@@ -1587,17 +1587,17 @@ Script N(80246850) = SCRIPT({
 });
 
 Script N(80247488) = SCRIPT({
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) -= -700.0;
     SI_VAR(1) /= 100.0;
-    SI_VAR(2) =f SI_VAR(1);
+    SI_VAR(2) = (float) SI_VAR(1);
     SI_VAR(2) *= 100.0;
     if (SI_VAR(2) > 100) {
         SI_VAR(1) = 1.0;
     }
     ScaleGroup(79, SI_VAR(1), 1, SI_VAR(1));
     TranslateGroup(79, 0, SI_VAR(0), 0);
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= -12.0;
     RotateGroup(79, SI_VAR(1), 0, 1, 0);
 });
@@ -1606,7 +1606,7 @@ Script N(80247588) = SCRIPT({
     TranslateModel(83, 9.5, 12.0, 15.0);
     TranslateModel(85, -9.5, 12.0, 15.0);
     TranslateModel(87, 0.0, 0.0, 17.0);
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= 90.0;
     RotateModel(83, SI_VAR(1), 0, 0, -1);
     RotateModel(85, SI_VAR(1), 0, 0, 1);
@@ -1620,14 +1620,14 @@ Script N(80247588) = SCRIPT({
 
 Script N(802476F4) = SCRIPT({
     ScaleModel(81, SI_VAR(0), SI_VAR(0), SI_VAR(0));
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= 90.0;
     SI_VAR(1) += -90.0;
     RotateModel(81, SI_VAR(1), 1, 0, 0);
 });
 
 Script N(80247770) = SCRIPT({
-    SI_VAR(1) =f SI_VAR(0);
+    SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= -3.0;
     TranslateModel(81, -0.259765625, SI_VAR(0), 1.4775390625);
     RotateModel(81, SI_VAR(1), 0, 1, 0);
@@ -1645,12 +1645,12 @@ Script N(802477EC) = SCRIPT({
         SI_AREA_FLAG(44) = 1;
         ModifyColliderFlags(0, 47, 0x7FFFFE00);
         ModifyColliderFlags(0, 48, 0x7FFFFE00);
-        SI_VAR(9) = -59.0;
-        SI_VAR(10) = 22.0;
-        SI_VAR(11) = 125.0;
-        SI_VAR(12) = -55.0;
-        SI_VAR(13) = 24.0;
-        SI_VAR(14) = 145.0;
+        SI_VAR(9) = (int) -59.0;
+        SI_VAR(10) = (int) 22.0;
+        SI_VAR(11) = (int) 125.0;
+        SI_VAR(12) = (int) -55.0;
+        SI_VAR(13) = (int) 24.0;
+        SI_VAR(14) = (int) 145.0;
         PlayerMoveTo(SI_VAR(9), SI_VAR(11), 8);
         SetNpcJumpscale(NPC_PARTNER, 0.0);
         NpcJump0(NPC_PARTNER, SI_VAR(12), SI_VAR(13), SI_VAR(14), 5);
@@ -1680,9 +1680,9 @@ Script N(802477EC) = SCRIPT({
                 SI_VAR(15) += 1;
                 N(UnkFloatFunc)(SI_VAR(15), SI_VAR(0), 0, 700, 800, 0, 0);
                 spawn N(80247770);
-                SI_VAR(2) =f SI_VAR(0);
+                SI_VAR(2) = (float) SI_VAR(0);
                 SI_VAR(2) *= -3.0;
-                SI_VAR(3) =f SI_VAR(0);
+                SI_VAR(3) = (float) SI_VAR(0);
                 N(func_80240F80_C9EEA0)();
                 N(func_802410B4_C9EFD4)();
                 if (SI_VAR(15) == 350) {
@@ -1711,12 +1711,12 @@ Script N(80247BCC) = SCRIPT({
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
-    SI_VAR(9) = -59.0;
-    SI_VAR(10) = 22.0;
-    SI_VAR(11) = 125.0;
-    SI_VAR(12) = -55.0;
-    SI_VAR(13) = 23.0;
-    SI_VAR(14) = 145.0;
+    SI_VAR(9) = (int) -59.0;
+    SI_VAR(10) = (int) 22.0;
+    SI_VAR(11) = (int) 125.0;
+    SI_VAR(12) = (int) -55.0;
+    SI_VAR(13) = (int) 23.0;
+    SI_VAR(14) = (int) 145.0;
     spawn {
         sleep 5;
         SetNpcAnimation(NPC_PARTNER, 0x106);
@@ -1739,9 +1739,9 @@ Script N(80247BCC) = SCRIPT({
         SI_VAR(15) += 1;
         N(UnkFloatFunc)(SI_VAR(15), SI_VAR(0), 70, 0, 120, 0, 0);
         spawn N(80247770);
-        SI_VAR(2) =f SI_VAR(0);
+        SI_VAR(2) = (float) SI_VAR(0);
         SI_VAR(2) *= -3.0;
-        SI_VAR(3) =f SI_VAR(0);
+        SI_VAR(3) = (float) SI_VAR(0);
         N(func_80240F80_C9EEA0)();
         N(func_802410B4_C9EFD4)();
         sleep 1;
@@ -1777,13 +1777,13 @@ Script N(80247FAC) = SCRIPT({
         loop 1200 {
             SI_VAR(15) += 1;
             N(UnkFloatFunc)(SI_VAR(15), SI_VAR(0), -700, 0, 1200, 0, 0);
-            SI_VAR(2) =f SI_VAR(0);
+            SI_VAR(2) = (float) SI_VAR(0);
             SI_VAR(2) *= 1.0;
-            SI_VAR(0) =f SI_VAR(2);
+            SI_VAR(0) = (float) SI_VAR(2);
             spawn N(80246850);
-            SI_VAR(2) =f SI_VAR(0);
+            SI_VAR(2) = (float) SI_VAR(0);
             SI_VAR(2) *= 1.0;
-            SI_VAR(0) =f SI_VAR(2);
+            SI_VAR(0) = (float) SI_VAR(2);
             spawn N(80247488);
             match SI_VAR(15) {
                 == 200 {

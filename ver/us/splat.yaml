@@ -5658,6 +5658,7 @@ segments:
     - [0x95E660,       c, 95E660]
     - [0x95E7A0,       c, 95E7A0]
     - [0x95ECC0,   .data, 95B7E0]
+    - [0x9685C0,   .data, 95E7A0]
     - [0x968FD0, .rodata, 95B7E0]
     - [0x9691C0,    .bss, 95B7E0]
   - name: dro_02
@@ -8824,8 +8825,9 @@ segments:
     - [0xCB5040,       c, CB5040]
     - [0xCB50E0,       c, CB50E0]
     - [0xCB5320,       c, CB5320]
-    - [0xCB6820,   .data, CB5320]
-    - [0xCB9190, .rodata, CB5320]
+    - [0xCB6820,   .data, CB50E0]
+    - [0xCB9190, .rodata, CB50E0]
+    - [0xCB91A0, .rodata, CB5320]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
@@ -8839,6 +8841,7 @@ segments:
     - [0xCB96B0,       c, CB96B0]
     - [0xCBA430,       c, CBA430]
     - [0xCBA670,   .data, CB9280]
+    - [0xCBD290,   .data, CBA430]
     - [0xCBDCB0, .rodata, CB9280]
   - name: flo_11
     dir: world/area_flo/flo_11
@@ -8939,6 +8942,7 @@ segments:
     - [0xCDCBD0,       c, CDCBD0]
     - [0xCDCC30,       c, CDCC30]
     - [0xCDCE70,   .data, CDC6A0]
+    - [0xCE2D60,   .data, CDCC30]
     - [0xCE36E0, .rodata, CDC6A0]
   - name: flo_19
     dir: world/area_flo/flo_19
@@ -8973,6 +8977,7 @@ segments:
     - [0xCEC280,       c, CEC280]
     - [0xCEC290,       c, CEC290]
     - [0xCEC4D0,   .data, CEC240]
+    - [0xCED7E0,   .data, CEC290]
     - [0xCEE250, .rodata, CEC240]
   - name: flo_23
     dir: world/area_flo/flo_23
@@ -8996,8 +9001,8 @@ segments:
     - [0xCF0940,       c, CF0940]
     - [0xCF0980,       c, CF0980]
     - [0xCF0BC0,       c, CF0BC0]
-    - [0xCF0ED0,   .data, CF0940]
-    - [0xCF2BB0, .rodata, CF0940]
+    - [0xCF0ED0,   .data, CF0980]
+    - [0xCF2BB0, .rodata, CF0980]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
@@ -9010,6 +9015,7 @@ segments:
     - [0xCF4BC0,       c, CF4BC0]
     - [0xCF4E00,       c, CF4E00]
     - [0xCF4EA0,   .data, CF2C10]
+    - [0xCF68B0,   .data, CF4BC0]
     - [0xCF7AA0, .rodata, CF2C10]
     - [0xCF7B70,    .bss, CF2C10]
   - name: sam_01
