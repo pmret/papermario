@@ -496,10 +496,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             data = bytes.read(struct["length"])
             count = unpack_from(">I", data, 0)[0]
 
-            out += f"\t.count = {count},\n"
+            out += f"{INDENT}.count = {count},\n"
 
             if count > 0:
-                out += f"\t.drops = {{\n"
+                out += f"{INDENT}.drops = {{\n"
 
             pos = 4
             for _ in range(count):
@@ -513,19 +513,19 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 flag1 = get_flag_name(entry[5])
                 flag2 = get_flag_name(entry[6])
 
-                out += f"\t\t{{\n"
-                out += f"\t\t\t.itemID = {disasm_script.CONSTANTS['ItemIDs'][entry[0]]},\n"
-                out += f"\t\t\t.pos = {{ {entry[1]}, {entry[2]}, {entry[3]} }},\n"
+                out += f"{INDENT * 2}{{\n"
+                out += f"{INDENT * 3}.itemID = {disasm_script.CONSTANTS['ItemIDs'][entry[0]]},\n"
+                out += f"{INDENT * 3}.pos = {{ {entry[1]}, {entry[2]}, {entry[3]} }},\n"
                 if entry[4] != 0:
-                    out += f"\t\t\t.spawnMode = 0x{entry[4]:X},\n"
+                    out += f"{INDENT * 3}.spawnMode = 0x{entry[4]:X},\n"
                 if flag1 != '0':
-                    out += f"\t\t\t.pickupFlag = {flag1},\n"
+                    out += f"{INDENT * 3}.pickupFlag = {flag1},\n"
                 if flag2 != '0':
-                    out += f"\t\t\t.spawnFlag = {flag2},\n"
-                out += f"\t\t}},\n"
+                    out += f"{INDENT * 3}.spawnFlag = {flag2},\n"
+                out += f"{INDENT * 2}}},\n"
 
             if count > 0:
-                out += f"\t}}\n"
+                out += f"{INDENT}}}\n"
 
             out += f"}};\n"
 
@@ -547,11 +547,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             data = bytes.read(struct["length"])
             count = unpack_from(">I", data, 0)[0]
 
-            out += f"\t.count = {count},\n"
+            out += f"{INDENT}.count = {count},\n"
 
             if isModelList:
                 if count > 0:
-                    out += f"\t.models = {{ "
+                    out += f"{INDENT}.models = {{ "
                 
                 pos = 4
                 for _ in range(count):
@@ -566,7 +566,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             else:
                 if count > 0:
-                    out += f"\t.vectors = {{\n"
+                    out += f"{INDENT}.vectors = {{\n"
                 
                 pos = 4
                 for _ in range(count):
@@ -578,10 +578,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     
                     pos += 3*4
 
-                    out += f"\t\t{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
+                    out += f"{INDENT * 2}{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
 
                 if count > 0:
-                    out += f"\t}}\n"
+                    out += f"{INDENT}}}\n"
 
             out += f"}};\n"
 
@@ -596,13 +596,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             entry = unpack_from(">4I", data, 0)
 
             if entry[0] != 0:
-                out += f"\t.bush = &N(bush{num}_Bush),\n"
+                out += f"{INDENT}.bush = &N(bush{num}_Bush),\n"
             if entry[1] != 0:
-                out += f"\t.drops = &N(bush{num}_Drops),\n"
+                out += f"{INDENT}.drops = &N(bush{num}_Drops),\n"
             if entry[2] != 0:
-                out += f"\t.vectors = &N(bush{num}_Vectors),\n"
+                out += f"{INDENT}.vectors = &N(bush{num}_Vectors),\n"
             if entry[3] != 0:
-                out += f"\t.callback = &N(bush{num}_Callback),\n"
+                out += f"{INDENT}.callback = &N(bush{num}_Callback),\n"
 
             out += f"}};\n"
 
@@ -617,15 +617,15 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             entry = unpack_from(">5I", data, 0)
 
             if entry[0] != 0:
-                out += f"\t.leaves = &N(tree{num}_Leaves),\n"
+                out += f"{INDENT}.leaves = &N(tree{num}_Leaves),\n"
             if entry[1] != 0:
-                out += f"\t.trunk = &N(tree{num}_Trunk),\n"
+                out += f"{INDENT}.trunk = &N(tree{num}_Trunk),\n"
             if entry[2] != 0:
-                out += f"\t.drops = &N(tree{num}_Drops),\n"
+                out += f"{INDENT}.drops = &N(tree{num}_Drops),\n"
             if entry[3] != 0:
-                out += f"\t.vectors = &N(tree{num}_Vectors),\n"
+                out += f"{INDENT}.vectors = &N(tree{num}_Vectors),\n"
             if entry[4] != 0:
-                out += f"\t.callback = &N(tree{num}_Callback),\n"
+                out += f"{INDENT}.callback = &N(tree{num}_Callback),\n"
 
             out += f"}};\n"
 
