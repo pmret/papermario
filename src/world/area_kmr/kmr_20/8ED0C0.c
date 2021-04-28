@@ -6,13 +6,13 @@
 
 #include "world/common/UnkFunc32.inc.c"
 
-#include "world/common/UnkFunc33.inc.c"
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-#include "world/common/UnkFunc34.inc.c"
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
 #include "world/common/UnkFunc35.inc.c"
 

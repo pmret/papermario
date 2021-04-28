@@ -134,7 +134,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;
@@ -190,13 +190,13 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc32.inc.c"
 
-#include "world/common/UnkFunc33.inc.c"
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-#include "world/common/UnkFunc34.inc.c"
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
 #include "world/common/UnkFunc35.inc.c"
 
@@ -355,7 +355,7 @@ ApiStatus N(func_80241CD8_B368A8)(ScriptInstance *script, s32 isInitialCall) {
     temp_v0 = temp_s0_2 < (*(N(quizRequirements) + i)).unk_04;
     test2 = var = temp_v0;
 
-    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) || 
+    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
         script->varTable[0] = 1;
     } else {
@@ -368,14 +368,6 @@ ApiStatus N(func_80241CD8_B368A8)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 #include "world/common/UnkFunc31.inc.c"
-
-#include "world/common/GetNpcUnsafeOwner2.inc.c"
-
-#include "world/common/UnkFunc28.inc.c"
-
-#include "world/common/UnkAlphaFunc.inc.c"
-
-#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242288_B36E58);
 /*

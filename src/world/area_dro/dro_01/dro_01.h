@@ -58,7 +58,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243014_95E214)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243058_95E258)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243084_95E284)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(UnkFunc30)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(GetFloorCollider)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802431B4_95E3B4)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802431FC_95E3FC)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243350_95E550)(ScriptInstance* script, s32 isInitialCall);

@@ -75,7 +75,7 @@ ApiStatus N(func_8024059C_84316C)(ScriptInstance *script, s32 isInitialCall) {
     temp_v0 = temp_s0_2 < (*(N(quizRequirements) + i)).unk_04;
     test2 = var = temp_v0;
 
-    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) || 
+    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
         script->varTable[0] = 1;
     } else {
@@ -88,14 +88,6 @@ ApiStatus N(func_8024059C_84316C)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 #include "world/common/UnkFunc31.inc.c"
-
-#include "world/common/GetNpcUnsafeOwner2.inc.c"
-
-#include "world/common/UnkFunc28.inc.c"
-
-#include "world/common/UnkAlphaFunc.inc.c"
-
-#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_80240B4C_84371C);
 /*
@@ -342,7 +334,7 @@ ApiStatus PostChapter4StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc30.inc.c"
+#include "world/common/GetFloorCollider.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_04/843030", func_802419AC_84457C);
 

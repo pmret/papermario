@@ -11,9 +11,9 @@ void N(UnkFunc10)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.detectShape, 
-            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z, 
-            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX, 
+    if (is_point_within_region(enemy->territory->wander.detectShape,
+            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z,
+            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX,
             enemy->territory->wander.detectSizeZ)) {
         phi_s1 = 1;
     }
@@ -22,7 +22,7 @@ void N(UnkFunc10)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y;
     posZ = npc->pos.z;
 
-    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ, 
+    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ,
             1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
         phi_s1 = 1;
     }

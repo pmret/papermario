@@ -546,13 +546,13 @@ Script N(802451EC) = SCRIPT({
 });
 
 u8 N(quizAnswers)[] = {
-    0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00, 
-    0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02, 
-    0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00, 
+    0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00,
+    0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02,
+    0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00,
     0x02, 0x01, 0x01, 0x02, 0x02, 0x01, 0x01, 0x01,
-    0x00, 0x02, 0x02, 0x02, 0x02, 0x00, 0x01, 0x01, 
-    0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01, 
-    0x01, 0x00, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02, 
+    0x00, 0x02, 0x02, 0x02, 0x02, 0x00, 0x01, 0x01,
+    0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01,
+    0x01, 0x00, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02,
     0x01, 0x02, 0x00, 0x02, 0x02, 0x01, 0x01, 0x01,
 };
 
@@ -562,9 +562,9 @@ typedef struct {
 } N(quizReqStruct);
 
 N(quizReqStruct) N(quizRequirements)[] = {
-    { -108, 0 }, { -76, 10 }, 
+    { -108, 0 }, { -76, 10 },
     { -54, 20 }, { -14, 30 },
-    {   6, 37 }, {  39, 44 }, 
+    {   6, 37 }, {  39, 44 },
     {  58, 52 }, {  88, 60 },
     {  96, 64 }, {   0, 64 },
 };
@@ -1459,7 +1459,7 @@ Script N(init_802484E0) = SCRIPT({
 
 Script N(80248504) = SCRIPT({
     loop {
-        N(UnkFunc30)(SI_VAR(0));
+        N(GetFloorCollider)(SI_VAR(0));
         if (SI_VAR(0) == 8) {
             break loop;
         }
@@ -2231,32 +2231,32 @@ NpcGroupList N(npcGroupList_8024B47C) = {
 };
 
 s32 N(intTable_8024B4A0)[] = {
-    MESSAGE_ID(0x27, 0x0049), MESSAGE_ID(0x27, 0x004A), MESSAGE_ID(0x27, 0x004B), MESSAGE_ID(0x27, 0x004C), 
+    MESSAGE_ID(0x27, 0x0049), MESSAGE_ID(0x27, 0x004A), MESSAGE_ID(0x27, 0x004B), MESSAGE_ID(0x27, 0x004C),
     MESSAGE_ID(0x27, 0x004D), MESSAGE_ID(0x27, 0x004E), MESSAGE_ID(0x27, 0x004F), MESSAGE_ID(0x27, 0x0050),
-    MESSAGE_ID(0x27, 0x0051), MESSAGE_ID(0x27, 0x0052), MESSAGE_ID(0x27, 0x0053), MESSAGE_ID(0x27, 0x0054), 
+    MESSAGE_ID(0x27, 0x0051), MESSAGE_ID(0x27, 0x0052), MESSAGE_ID(0x27, 0x0053), MESSAGE_ID(0x27, 0x0054),
     MESSAGE_ID(0x27, 0x0055), MESSAGE_ID(0x27, 0x0056), MESSAGE_ID(0x27, 0x0057), MESSAGE_ID(0x27, 0x0058),
-    MESSAGE_ID(0x27, 0x0059), MESSAGE_ID(0x27, 0x005A), MESSAGE_ID(0x27, 0x005B), MESSAGE_ID(0x27, 0x005C), 
+    MESSAGE_ID(0x27, 0x0059), MESSAGE_ID(0x27, 0x005A), MESSAGE_ID(0x27, 0x005B), MESSAGE_ID(0x27, 0x005C),
     MESSAGE_ID(0x27, 0x005D), MESSAGE_ID(0x27, 0x005E), MESSAGE_ID(0x27, 0x005F),
 };
 
 N(shopInventory) N(shopInventory_8024B4FC)[] = {
-    { ITEM_THUNDER_BOLT,    5, MESSAGE_ID(0x24, 0x0003) }, 
-    { ITEM_DUSTY_HAMMER,    2, MESSAGE_ID(0x24, 0x0005) }, 
-    { ITEM_HONEY_SYRUP,     5, MESSAGE_ID(0x24, 0x0016) }, 
-    { ITEM_DRIED_SHROOM,    2, MESSAGE_ID(0x24, 0x000D) }, 
-    { ITEM_DRIED_PASTA,     3, MESSAGE_ID(0x24, 0x001D) }, 
-    { ITEM_MUSHROOM,        3, MESSAGE_ID(0x24, 0x0009) }, 
+    { ITEM_THUNDER_BOLT,    5, MESSAGE_ID(0x24, 0x0003) },
+    { ITEM_DUSTY_HAMMER,    2, MESSAGE_ID(0x24, 0x0005) },
+    { ITEM_HONEY_SYRUP,     5, MESSAGE_ID(0x24, 0x0016) },
+    { ITEM_DRIED_SHROOM,    2, MESSAGE_ID(0x24, 0x000D) },
+    { ITEM_DRIED_PASTA,     3, MESSAGE_ID(0x24, 0x001D) },
+    { ITEM_MUSHROOM,        3, MESSAGE_ID(0x24, 0x0009) },
     {},
 };
 
 N(shopPrice) N(shopPriceList_8024B550)[] = {
-    { ITEM_SNOWMAN_DOLL,    12, 0x00000000 }, 
-    { ITEM_MELON,           10, 0x00000000 }, 
-    { ITEM_ICED_POTATO,     10, 0x00000000 }, 
-    { ITEM_TASTY_TONIC,      5, 0x00000000 }, 
-    { ITEM_SUPER_SODA,       6, 0x00000000 }, 
-    { ITEM_SPECIAL_SHAKE,   15, 0x00000000 }, 
-    { ITEM_DRIED_PASTA,      2, 0x00000000 }, 
+    { ITEM_SNOWMAN_DOLL,    12, 0x00000000 },
+    { ITEM_MELON,           10, 0x00000000 },
+    { ITEM_ICED_POTATO,     10, 0x00000000 },
+    { ITEM_TASTY_TONIC,      5, 0x00000000 },
+    { ITEM_SUPER_SODA,       6, 0x00000000 },
+    { ITEM_SPECIAL_SHAKE,   15, 0x00000000 },
+    { ITEM_DRIED_PASTA,      2, 0x00000000 },
     {},
 };
 
@@ -2951,7 +2951,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;
@@ -3069,7 +3069,7 @@ ApiStatus N(func_802415AC_95C7AC)(ScriptInstance *script, s32 isInitialCall) {
     temp_v0 = temp_s0_2 < (*(N(quizRequirements) + i)).unk_04;
     test2 = var = temp_v0;
 
-    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) || 
+    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
         script->varTable[0] = 1;
     } else {
@@ -3080,17 +3080,7 @@ ApiStatus N(func_802415AC_95C7AC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void N(UnkFunc28)(ScriptInstance *script, s32 isInitialCall);
-
 #include "world/common/UnkFunc31.inc.c"
-
-#include "world/common/GetNpcUnsafeOwner2.inc.c"
-
-#include "world/common/UnkFunc28.inc.c"
-
-#include "world/common/UnkAlphaFunc.inc.c"
-
-#include "world/common/UnkFunc29.inc.c"
 
 ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance *script, s32 isInitialCall) {
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
@@ -3260,7 +3250,7 @@ ApiStatus N(func_80242730_95D930)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80242784_95D984)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     N(D_802477E4_9629E4) = get_variable(script, *args);
     N(D_802477E0_9629E0) = 1;
     return ApiStatus_DONE2;
@@ -3430,7 +3420,7 @@ ApiStatus N(func_80243084_95E284)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#include "world/common/UnkFunc30.inc.c"
+#include "world/common/GetFloorCollider.inc.c"
 
 void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;

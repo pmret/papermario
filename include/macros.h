@@ -37,6 +37,7 @@
 #define MAX_ENTITIES 30
 #define MAX_DYNAMIC_ENTITIES 16
 #define MAX_TEX_PANNERS 16
+#define MAX_ITEM_ENTITIES 256
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f
@@ -70,24 +71,5 @@
 #define NS(x, y) _NS(x, y)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
-
-#define CLAMP(x, min, max) ((x) < (min) ? (min) : (x) > (max) ? (max) : (x))
-#define CLAMP_MAX(x, max) ((x) > (max) ? (max) : (x))
-#define CLAMP_MIN(x, min) ((x) < (min) ? (min) : (x))
-
-/**
- * `x` vertex x
- * `y` vertex y
- * `z` vertex z
- * `s` texture s coordinate
- * `t` texture t coordinate
- * `crnx` red component of color vertex, or x component of normal vertex
- * `cgny` green component of color vertex, or y component of normal vertex
- * `cbnz` blue component of color vertex, or z component of normal vertex
- * `a` alpha
- */
-#define VTX(x,y,z,s,t,crnx,cgny,cbnz,a) { { { x, y, z }, 0, { s, t }, { crnx, cgny, cbnz, a } } }
-
-#define VTX_T(x,y,z,s,t,cr,cg,cb,a) { { x, y, z }, 0, { s, t }, { cr, cg, cb, a } }
 
 #endif

@@ -85,7 +85,7 @@ ApiStatus N(func_80240708_9C3018)(ScriptInstance* script, s32 isInitialCall) {
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, 
+    if (dist2D(playerStatus->position.x, playerStatus->position.z,
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }

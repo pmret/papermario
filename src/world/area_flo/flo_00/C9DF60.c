@@ -1306,7 +1306,7 @@ NpcSettings N(npcSettings_80245E5C) = {
 };
 
 f32 N(D_80245E88_CA3DA8)[] = {
-    266.0f,  20.0f, 322.0f, 310.0f, 
+    266.0f,  20.0f, 322.0f, 310.0f,
      30.0f, 312.0f, 346.0f,  90.0f,
     300.0f, 400.0f, 200.0f, 287.0f,
 };
@@ -2196,7 +2196,7 @@ ApiStatus N(func_80240BD4_C9EAF4)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;

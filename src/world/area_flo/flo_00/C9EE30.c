@@ -15,7 +15,7 @@ ApiStatus N(func_80240F80_C9EEA0)(ScriptInstance *script, s32 isInitialCall) {
     f32 var1 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(-83.0f, 87.0f, script->varTable[9], script->varTable[11]);
     f32 clamped = clamp_angle(atan2(-83.0f, 87.0f, script->varTable[9], script->varTable[11]) - var1);
-    
+
     var1 = sin_deg(clamped);
     gPlayerStatus.position.x = (dist * var1) + -83.0f;
     gPlayerStatus.position.y = get_variable(NULL, script->varTable[10]) + get_variable(NULL, script->varTable[3]);
@@ -30,13 +30,13 @@ ApiStatus N(func_802410B4_C9EFD4)(ScriptInstance *script, s32 isInitialCall) {
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(-83.0f, 87.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(atan2(-83.0f, 87.0f, script->varTable[12], script->varTable[14]) - temp_f20);
-    
+
     temp_f20 = sin_deg(clamped);
     npc->pos.x = (dist * temp_f20) + -83.0f;
     npc->pos.y = get_variable(NULL, script->varTable[13]) + get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(clamped);
     npc->pos.z = 87.0f - (dist * temp_f20);
-    
+
     return ApiStatus_DONE2;
 }
 

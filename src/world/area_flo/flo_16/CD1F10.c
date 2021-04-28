@@ -423,10 +423,6 @@ ApiStatus N(func_8024011C_CD1F4C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#include "world/common/UnkFunc37.inc.c"
-
-#include "world/common/UnkFunc38.inc.c"
-
 #ifdef NON_MATCHING
 typedef struct {
     s32 unk_00[8];

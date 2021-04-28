@@ -747,7 +747,7 @@ void N(func_80241618_BFEE98)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->flags &= 0xFFDFFFFF;
+        npc->flags &= ~0x00200000;
         npc->duration = aiSettings->unk_20 / 2 + rand_int(aiSettings->unk_20 / 2 + 1);
         npc->currentAnim = enemy->animList[8];
         npc->moveSpeed = aiSettings->chaseSpeed;
@@ -821,7 +821,7 @@ void N(func_80241954_BFF1D4)(ScriptInstance *script, NpcAISettings *aiSettings, 
     if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
         enemy->varTable[0] &= ~0x100;
         npc->rotation.y = 0.0f;
-        npc->flags &= 0xFFDFFFFF;
+        npc->flags &= ~0x00200000;
         script->functionTemp[0].s = 16;
     } else {
         npc->pos.x = gPlayerStatusPtr->position.x;
@@ -842,7 +842,7 @@ void N(func_80241954_BFF1D4)(ScriptInstance *script, NpcAISettings *aiSettings, 
             npc->pos.y -= 1.8;
         } else {
             npc->rotation.y = 0.0f;
-            npc->flags &= 0xFFDFFFFF;
+            npc->flags &= ~0x00200000;
             if (D_8010EBB0.unk_03 != 9) {
                 disable_player_input();
                 func_800EF628();
@@ -925,7 +925,7 @@ void N(func_80241EF0_BFF770)(ScriptInstance *script, NpcAISettings *aiSettings, 
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     enemy->varTable[0] &= ~0x100;
-    npc->flags &= 0xFFDFFFFF;
+    npc->flags &= ~0x00200000;
     npc->moveSpeed = 2.0 * aiSettings->moveSpeed;
     enemy->varTable[2] = 0;
     enemy->varTable[4] = npc->pos.y * 100.0;
@@ -1359,7 +1359,7 @@ ApiStatus N(func_802430C0_C00940)(ScriptInstance *script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;

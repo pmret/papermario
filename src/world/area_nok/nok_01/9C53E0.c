@@ -28,13 +28,13 @@ INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_802407F4_9C5BD4);
 
 #include "world/common/UnkFunc32.inc.c"
 
-#include "world/common/UnkFunc33.inc.c"
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-#include "world/common/UnkFunc34.inc.c"
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
 #include "world/common/UnkFunc35.inc.c"
 
@@ -115,7 +115,7 @@ ApiStatus N(func_80240EA4_9C6284)(ScriptInstance *script, s32 isInitialCall) {
     temp_v0 = temp_s0_2 < (*(N(quizRequirements) + i)).unk_04;
     test2 = var = temp_v0;
 
-    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) || 
+    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
         script->varTable[0] = 1;
     } else {
@@ -128,14 +128,6 @@ ApiStatus N(func_80240EA4_9C6284)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 #include "world/common/UnkFunc31.inc.c"
-
-#include "world/common/GetNpcUnsafeOwner2.inc.c"
-
-#include "world/common/UnkFunc28.inc.c"
-
-#include "world/common/UnkAlphaFunc.inc.c"
-
-#include "world/common/UnkFunc29.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80241454_9C6834);
 /*

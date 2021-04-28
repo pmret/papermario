@@ -1783,7 +1783,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
     }
 
@@ -1963,7 +1963,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
 
         case 12:
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
-        
+
         case 13:
             N(func_80242314_CC5B24)(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
@@ -2020,7 +2020,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
                     npc->moveSpeed = 0.0f;
                 }
             }
-            
+
 
             if (npc->jumpVelocity < 0.0) {
                 x2 = npc->pos.x;
@@ -2107,10 +2107,10 @@ ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance *script, s32 isInitialCall) {
     }
     if (script->functionTemp[0].s == (script->functionTemp[0].s / 5) * 5) {
 
-        sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z, 
+        sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
             &param1, &param2, 0x200002);
 
-        sfx_play_sound_with_params(0x295, param1, param2, 
+        sfx_play_sound_with_params(0x295, param1, param2,
             update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, script->functionTemp[1].s));
     }
 
@@ -2128,10 +2128,10 @@ ApiStatus N(func_802434D4_CC6CE4)(ScriptInstance *script, s32 isInitialCall) {
     }
     if (script->functionTemp[0].s == (script->functionTemp[0].s / 5) * 5) {
 
-        sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z, 
+        sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
             &param1, &param2, 0x200002);
 
-        sfx_play_sound_with_params(0x295, param1, param2, 
+        sfx_play_sound_with_params(0x295, param1, param2,
             update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, 0x50));
     }
 

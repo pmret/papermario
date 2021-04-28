@@ -104,4 +104,4 @@ ApiStatus N(func_80240A3C_C9696C)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_80240A68_C96998);
 
-#include "world/common/UnkFunc30.inc.c"
+#include "world/common/GetFloorCollider.inc.c"

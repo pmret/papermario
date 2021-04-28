@@ -1006,7 +1006,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance *script, NpcAISettings *npcAISetting
         }
 
         dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        
+
         if ((phi_f22 < npc->moveSpeed * 1.5) && (phi_f24 < npc->moveSpeed * 1.5) && (phi_f26 < npc->moveSpeed * 1.5) &&
             (func_800490B4(territory, enemy, npcAISettings->alertRadius, npcAISettings->unk_10.f, 0) != 0)) {
             phi_s3 = TRUE;

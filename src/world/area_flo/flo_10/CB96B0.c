@@ -87,16 +87,16 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                     gDPLoadSync(gMasterGfxPos++);
 
                     gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, phi_s6 * 4, phi_s5 * 4, (phi_s4 - 1) * 4, (phi_s5 - 1) * 4);
-                    
+
                     gDPPipeSync(gMasterGfxPos++);
                     gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, phi_s4 - phi_s6, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
 
                     gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, phi_s6 * 4, phi_s5 * 4, (phi_s4 - 1) * 4, (phi_s5 - 1) * 4);
-                    
-                    gSPTextureRectangle(gMasterGfxPos++, 
-                            (phi_s4 - 1) * 4, (phi_s5 - 1) * 4, phi_s6 * 4, phi_s5 * 4, 
-                            G_TX_RENDERTILE, 
-                            phi_s6, phi_s5, 
+
+                    gSPTextureRectangle(gMasterGfxPos++,
+                            (phi_s4 - 1) * 4, (phi_s5 - 1) * 4, phi_s6 * 4, phi_s5 * 4,
+                            G_TX_RENDERTILE,
+                            phi_s6, phi_s5,
                             0x0400, (sin_deg(N(D_80244070_CBD270) + (i * 30)) * 500.0f) - 0x1F4);
                 }
             }
@@ -163,7 +163,7 @@ void N(func_80240A98_CB9C98)(void) {
     sp3C = unk1->unk_04;
     sp38 = unk1->unk_1C;
 
-    transform_point(camera->perspectiveMatrix, 
+    transform_point(camera->perspectiveMatrix,
                     model->center[0] - sp3C, model->center[1], model->center[2] - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
@@ -179,7 +179,7 @@ void N(func_80240A98_CB9C98)(void) {
     temp_f20 = sp28;
     temp_f22 = sp2C;
 
-    transform_point(camera->perspectiveMatrix, 
+    transform_point(camera->perspectiveMatrix,
                     model->center[0] - sp3C, model->center[1], model->center[2] + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
@@ -211,7 +211,7 @@ void N(func_80240A98_CB9C98)(void) {
         temp_f22 = sp2C;
     }
 
-    transform_point(camera->perspectiveMatrix, 
+    transform_point(camera->perspectiveMatrix,
                     model->center[0] + sp3C, model->center[1], model->center[2] + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
@@ -241,7 +241,7 @@ void N(func_80240A98_CB9C98)(void) {
         temp_f22 = sp2C;
     }
 
-    transform_point(camera->perspectiveMatrix, 
+    transform_point(camera->perspectiveMatrix,
                     model->center[0] + sp3C, model->center[1], model->center[2] - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 

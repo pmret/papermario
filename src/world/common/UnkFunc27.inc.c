@@ -43,7 +43,7 @@ ApiStatus N(UnkFunc27)(ScriptInstance *script, s32 isInitialCall) {
         case 2:
             *D_801512F0 = temp_s1;
             break;
-        
+
     }
     return ApiStatus_DONE2;
 }

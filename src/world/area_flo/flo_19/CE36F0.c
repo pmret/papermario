@@ -704,13 +704,13 @@ ApiStatus N(func_80240660_CE3D50)(ScriptInstance *script, s32 isInitialCall) {
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(atan2(0.0f, 0.0f, script->varTable[12], script->varTable[14]) - temp_f20);
-    
+
     temp_f20 = sin_deg(clamped);
     npc->pos.x = (dist * temp_f20) + 0.0f;
     npc->pos.y = get_variable(NULL, script->varTable[13]) + get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(clamped);
     npc->pos.z = 0.0f - (dist * temp_f20);
-    
+
     return ApiStatus_DONE2;
 }
 

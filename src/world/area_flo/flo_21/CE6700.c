@@ -268,7 +268,7 @@ ApiStatus N(func_80240708_CE6E08)(ScriptInstance* script, s32 isInitialCall) {
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, 
+    if (dist2D(playerStatus->position.x, playerStatus->position.z,
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }
@@ -405,13 +405,13 @@ Script N(main) = SCRIPT({
 });
 
 s32 N(D_802414FC_CE7BFC)[] = {
-    0, 
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1), 
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1), 
-    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375),
-    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), 
+    0,
     SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
-    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1), 
+    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
+    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375),
+    SI_FIXED(1.1005859375), SI_FIXED(1.1005859375), SI_FIXED(1.1005859375),
+    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
+    SI_FIXED(1), SI_FIXED(1), SI_FIXED(1),
     SI_FIXED(0.900390625), SI_FIXED(0.900390625), SI_FIXED(0.900390625),
     SI_FIXED(0.900390625), SI_FIXED(0.900390625), SI_FIXED(0.900390625),
 };

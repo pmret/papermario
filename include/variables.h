@@ -163,7 +163,7 @@ extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuIconScripts[8];
-extern MenuTab gPauseMenuTabs[7]; // [7]
+extern MenuTab gPauseMenuTabs[7];
 extern s32 gPauseMenuCursorPosX;
 extern s32 gPauseMenuCursorPosY;
 extern s32 gPauseMenuCursorOpacity;

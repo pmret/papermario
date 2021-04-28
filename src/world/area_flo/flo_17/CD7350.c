@@ -1207,7 +1207,7 @@ ApiStatus N(func_802424D8_CD97B8)(ScriptInstance *script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
     }
 
@@ -1387,7 +1387,7 @@ ApiStatus N(func_80242918_CD9BF8)(ScriptInstance *script, s32 isInitialCall) {
 
         case 12:
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
-        
+
         case 13:
             N(func_802421C0_CD94A0)(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
@@ -1444,7 +1444,7 @@ ApiStatus N(func_80242918_CD9BF8)(ScriptInstance *script, s32 isInitialCall) {
                     npc->moveSpeed = 0.0f;
                 }
             }
-            
+
 
             if (npc->jumpVelocity < 0.0) {
                 x2 = npc->pos.x;

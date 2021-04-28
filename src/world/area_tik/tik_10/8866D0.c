@@ -16,10 +16,6 @@ ApiStatus N(func_802406BC_886A7C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-#include "world/common/UnkFunc37.inc.c"
-
-#include "world/common/UnkFunc38.inc.c"
-
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_8024084C_886C0C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_10/8866D0", func_80240A9C_886E5C);

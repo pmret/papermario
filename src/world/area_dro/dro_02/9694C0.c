@@ -444,13 +444,13 @@ Script N(80244E14) = SCRIPT({
 });
 
 u8 N(quizAnswers)[] = {
-    0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00, 
-    0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02, 
-    0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00, 
+    0x02, 0x01, 0x01, 0x02, 0x02, 0x00, 0x02, 0x00,
+    0x02, 0x01, 0x00, 0x02, 0x01, 0x01, 0x00, 0x02,
+    0x00, 0x02, 0x01, 0x00, 0x00, 0x02, 0x01, 0x00,
     0x02, 0x01, 0x01, 0x02, 0x02, 0x01, 0x01, 0x01,
-    0x00, 0x02, 0x02, 0x02, 0x02, 0x00, 0x01, 0x01, 
-    0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01, 
-    0x01, 0x00, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02, 
+    0x00, 0x02, 0x02, 0x02, 0x02, 0x00, 0x01, 0x01,
+    0x02, 0x01, 0x02, 0x01, 0x02, 0x00, 0x00, 0x01,
+    0x01, 0x00, 0x01, 0x02, 0x01, 0x00, 0x02, 0x02,
     0x01, 0x02, 0x00, 0x02, 0x02, 0x01, 0x01, 0x01,
 };
 
@@ -460,9 +460,9 @@ typedef struct {
 } N(quizReqStruct);
 
 N(quizReqStruct) N(quizRequirements)[] = {
-    { -108, 0 }, { -76, 10 }, 
+    { -108, 0 }, { -76, 10 },
     { -54, 20 }, { -14, 30 },
-    {   6, 37 }, {  39, 44 }, 
+    {   6, 37 }, {  39, 44 },
     {  58, 52 }, {  88, 60 },
     {  96, 64 }, {   0, 64 },
 };
@@ -1209,21 +1209,21 @@ s32 N(image1_pal)[] = {
 
 
 Vtx N(D_80247808_9709C8)[] = {
-    VTX(-24, 2, 0, 0, 60, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(-22, 0, 0, 85, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(22, 0, 0, 1963, 0, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(24, 2, 0, 2048, 60, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(24, 66, 0, 2048, 1988, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(22, 68, 0, 1963, 2048, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(-22, 68, 0, 85, 2048, 0xFF, 0xFF, 0xFF, 0xFF),
-    VTX(-24, 66, 0, 0, 1988, 0xFF, 0xFF, 0xFF, 0xFF),
+    { .v = { -24, 2, 0, 0, 0, 60, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { -22, 0, 0, 0, 85, 0, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { 22, 0, 0, 0, 1963, 0, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { 24, 2, 0, 0, 2048, 60, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { 24, 66, 0, 0, 2048, 1988, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { 22, 68, 0, 0, 1963, 2048, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { -22, 68, 0, 0, 85, 2048, 0xFF, 0xFF, 0xFF, 0xFF } },
+    { .v = { -24, 66, 0, 0, 0, 1988, 0xFF, 0xFF, 0xFF, 0xFF } },
 };
 
 Vtx N(D_80247888_970A48)[] = {
-    VTX(-30, 68, -2, 0, -160, 0x00, 0x00, 0x00, 0x00),
-    VTX(30, 68, -2, 1920, -160, 0x00, 0x00, 0x00, 0x00),
-    VTX(-30, 0, -2, 0, 2016, 0x00, 0x00, 0x00, 0x00),
-    VTX(30, 0, -2, 1920, 2016, 0x00, 0x00, 0x00, 0x00),
+    { .v = { -30, 68, -2, 0, 0, -160, 0x00, 0x00, 0x00, 0x00 } },
+    { .v = { 30, 68, -2, 0, 1920, -160, 0x00, 0x00, 0x00, 0x00 } },
+    { .v = { -30, 0, -2, 0, 0, 2016, 0x00, 0x00, 0x00, 0x00 } },
+    { .v = { 30, 0, -2, 0, 1920, 2016, 0x00, 0x00, 0x00, 0x00 } },
 };
 
 Gfx N(D_802478C8_970A88)[] = {
@@ -1683,13 +1683,13 @@ s32 N(D_80248D34_971EF4)[] = {
 };
 
 s32 N(D_80248D60_971F20)[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, N(D_80248D34_971EF4),
-    0xFFFF0000, 0x00000000, 0x00000000, N(D_80248D60_971F20), 
+    0xFFFF0000, 0x00000000, 0x00000000, N(D_80248D60_971F20),
     N(D_80248D34_971EF4), N(D_80248D08_971EC8), N(D_80248CDC_971E9C), N(D_80248CB0_971E70),
-    N(D_80248C84_971E44), N(D_80248C58_971E18), N(D_80248C2C_971DEC), N(D_80248C00_971DC0), 
+    N(D_80248C84_971E44), N(D_80248C58_971E18), N(D_80248C2C_971DEC), N(D_80248C00_971DC0),
     N(D_80248BD4_971D94), N(D_80248BA8_971D68), N(D_80248B7C_971D3C), N(D_80248B50_971D10),
-    N(D_80248B24_971CE4), N(D_80248AF8_971CB8), N(D_80248ACC_971C8C), N(D_80248AA0_971C60), 
+    N(D_80248B24_971CE4), N(D_80248AF8_971CB8), N(D_80248ACC_971C8C), N(D_80248AA0_971C60),
     0x00000000, 0x00000000,
 };
 
@@ -2019,7 +2019,7 @@ Script N(interact_8024ADE4) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     SI_VAR(10) = SI_VAR(2);
     SI_VAR(11) = SI_VAR(3);
-    N(UnkFunc34)();
+    N(DoesPlayerNeedSleep)();
     if (SI_VAR(1) == 0) {
         SI_VAR(8) = SI_VAR(0);
     }
@@ -2689,7 +2689,7 @@ Script N(8024D494) = SCRIPT({
     PlayerMoveTo(-179, -198, 0);
     spawn {
         sleep 15;
-        N(UnkFunc33)(0, 40);
+        N(CamSetFOV)(0, 40);
         SetCamType(0, 4, 0);
         SetCamPitch(0, 95, -61);
         SetCamDistance(0, 108);
@@ -2712,7 +2712,7 @@ Script N(8024D494) = SCRIPT({
     sleep 20;
     spawn {
         sleep 81;
-        N(UnkFunc33)(0, 25);
+        N(CamSetFOV)(0, 25);
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         sleep 1;
@@ -3170,7 +3170,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
     temp_v0 = temp_s0_2 < (*(N(quizRequirements) + i)).unk_04;
     test2 = var = temp_v0;
 
-    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) || 
+    if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
         script->varTable[0] = 1;
     } else {
@@ -3182,14 +3182,6 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
 }
 
 #include "world/common/UnkFunc31.inc.c"
-
-#include "world/common/GetNpcUnsafeOwner2.inc.c"
-
-#include "world/common/UnkFunc28.inc.c"
-
-#include "world/common/UnkAlphaFunc.inc.c"
-
-#include "world/common/UnkFunc29.inc.c"
 
 ApiStatus N(func_802409EC_969BAC)(ScriptInstance *script, s32 isInitialCall) {
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
@@ -3379,7 +3371,7 @@ ApiStatus N(func_802414C0_96A680)(ScriptInstance *script, s32 isInitialCall) {
 
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
-            if (npc != 0 && npc->flags != 0 && npc->npcID != -4 && npc->npcID != 4) {
+            if (npc != 0 && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
                 npc->flags |= 0x800000;
             }
         }
@@ -3409,7 +3401,7 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance *script, s32 isInitialCall) {
     }
     set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
 
-    if ((script->functionTemp[0].s == 0) && (script->functionTemp[1].s == 0)) {
+    if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
         script->functionTemp[1].s = 1;
     } else if (script->functionTemp[1].s == 1) {
         func_8011D82C(0);
@@ -3417,8 +3409,8 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance *script, s32 isInitialCall) {
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
 
-            if (npc != NULL && npc->flags != 0 && npc->npcID != -4 && npc->npcID != 4) {
-                npc->flags &= 0xFF7FFFFF;
+            if (npc != NULL && npc->flags != 0 && npc->npcID != NPC_PARTNER && npc->npcID != NPC_WORLD_MERLEE) {
+                npc->flags &= ~0x00800000;
             }
         }
         return ApiStatus_DONE2;
@@ -3512,7 +3504,7 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
 
             guTranslateF(&subroutine_arg6, ptr->unk_20 - (subroutine_arg2E / 2) - 30, 0.0f, 0.0f);
             guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
-            
+
             gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMasterGfxPos++, N(D_80247A38_970BF8));
             gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
@@ -3528,11 +3520,11 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
         guMtxCatF(&subroutine_arg16, matrix, subroutine_arg6);
         guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
-        
+
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(0)), &subroutine_arg26, 0x30, &subroutine_arg6);
-        
+
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
         return 1;
@@ -3544,24 +3536,24 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
         guMtxCatF(&subroutine_arg16, matrix, &subroutine_arg6);
         guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
-        
+
         gSPMatrix(gMasterGfxPos++, 0xFFFFFFFF, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(1)), &subroutine_arg26, 0x30, &subroutine_arg6);
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(2)), &subroutine_arg26, 0x30, &subroutine_arg6);
-        
+
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
         guTranslateF(&subroutine_arg16, N(D_8024F010)[0].unk_04, N(D_8024F010)[0].unk_08, N(D_8024F010)[0].unk_0C);
         guMtxCatF(&subroutine_arg16, matrix, &subroutine_arg6);
         guMtxF2L(&subroutine_arg6, &gDisplayContext->matrixStack[gMatrixListPos++]);
-        
+
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gMatrixListPos++;
 
         func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
-        
+
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
     return 1;
@@ -3578,7 +3570,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg
     Matrix4f spA0;
 
     guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
-    
+
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
     guMtxCatF(&sp60, &spA0, &sp20);
@@ -3625,7 +3617,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
     f32 subroutine_arg17;
     f32 subroutine_arg18;
     f32 subroutine_arg19;
-    
+
     f32 subroutine_arg1A;
     f32 subroutine_arg1B;
     f32 subroutine_arg1C;
@@ -3651,7 +3643,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
         case 0:
             N(D_8024EF88) = 0;
             set_variable(N(D_8024EFCC), SI_ARRAY(9), 1);
-            
+
             N(D_8024F010)[0].unk_00 = 1;
             N(D_8024F010)[0].unk_04 = -200.0f;
             N(D_8024F010)[0].unk_08 = 0;
@@ -3839,7 +3831,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
             gPauseMenuTabs[0].unk_00 = 0;
             N(D_8024EF84) = 1.0f;
             N(func_80242214_96B3D4)(1, &subroutine_arg12, &subroutine_arg13, &subroutine_arg14, &subroutine_arg15);
-            
+
             effect = &N(D_8024EF90);
             for (i = 0; i < 4; i++) {
                 (*effect) = func_800720B0(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
@@ -3912,7 +3904,7 @@ void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
     u32 temp_s1;
 
     guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
-    
+
     temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);
     func_8024190C_96AACC(&N(D_8024F010)[2], &sp20);
@@ -3956,7 +3948,7 @@ ApiStatus N(func_802432C0_96C480)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80243314_96C4D4)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    
+
     N(D_80248784_971944) = get_variable(script, *args);
     N(D_80248780_971940) = 1;
     return ApiStatus_DONE2;
@@ -4006,13 +3998,13 @@ ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc32.inc.c"
 
-#include "world/common/UnkFunc33.inc.c"
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-#include "world/common/UnkFunc34.inc.c"
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
 #include "world/common/UnkFunc35.inc.c"
 
