@@ -47,6 +47,7 @@ void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
+f32 length2D(f32 x, f32 y);
 
 void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
