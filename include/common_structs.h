@@ -85,9 +85,9 @@ typedef struct PartnerData {
 } PartnerData; // size = 0x08
 
 typedef struct HeapNode {
-    /* 0x00 */ UNK_PTR next;
+    /* 0x00 */ struct HeapNode* next;
     /* 0x04 */ s32 length;
-    /* 0x08 */ s16 allocated;
+    /* 0x08 */ u16 allocated;
     /* 0x0A */ s16 entryID;
     /* 0x0C */ s32 capacity;
 } HeapNode; // size = 0x10
