@@ -40,8 +40,9 @@
 #define MAX_ITEM_ENTITIES 256
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
-#define PI 3.141592f
-#define TAU 6.28318f
+#define PI      3.141592f
+#define PI_D    3.141592
+#define TAU     6.28318f
 
 #define SPRITE_WORLD_SCALE 0.71428573f
 
@@ -63,6 +64,8 @@
 }
 
 #define SQ(x) (x*x)
+#define CUBE(x) (x*x*x)
+#define QUART(x) (x*x*x*x)
 
 // Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)

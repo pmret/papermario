@@ -14,9 +14,11 @@ f32 D_80074274[] = {
     0.984808f, 0.987688f, 0.990268f, 0.992546f, 0.994522f, 0.996195f, 0.997564f, 0.99863f, 0.999391f, 0.999848f, 1.0f
 };
 
-s8 D_800743E0[] = {
-    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69,
-    0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7A, 0x00, 0x00,
+u8 D_800743E0[] = {
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+    'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+    's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
@@ -110,7 +112,52 @@ s32 sign(s32 val) {
     return sign;
 }
 
-INCLUDE_ASM(s32, "43F0", int_to_string);
+// D_800743E0 index needs to add the upper 32 bits from func_8006DDC0 ret
+#ifdef NON_MATCHING
+
+typedef struct {
+    u8 unk_00[39];
+    u8 unk_39;
+} Unk_struct_43F0;
+
+u32 func_8006DDC0(s64 arg0, s64 arg1);
+u64 func_8006D800(s64 arg0, s64 arg1);
+
+char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
+    Unk_struct_43F0 unk_struct;
+    s32 phi_s4 = 0x26;
+    s32 phi_fp = 0;
+    s64 arg0 = arg01;
+
+    if (arg0 < 0) {
+        phi_fp = 1;
+        arg0 *= -1;
+    }
+    unk_struct.unk_39 = 0;
+
+    while (TRUE) {
+        u8 (*new_var)[];
+
+        unk_struct.unk_00[phi_s4] = (*(new_var = &D_800743E0))[func_8006DDC0(arg0, arg2)];
+        arg0 = func_8006D800(arg0, arg2);
+        if (arg0 == 0 || phi_s4 == 0) {
+            break;
+        }
+        phi_s4--;
+    }
+
+    if (phi_fp) {
+        phi_s4--;
+        unk_struct.unk_00[phi_s4] = 0x2D;
+    }
+
+    strcpy(arg1, &unk_struct.unk_00[phi_s4]);
+
+    return arg1;
+}
+#else
+INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char *arg1, s32 arg2);
+#endif
 
 // should maybe be called bzero
 void mem_clear(s8* data, s32 numBytes) {
@@ -300,7 +347,46 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
     return b - a;
 }
 
-INCLUDE_ASM(f32, "43F0", atan2, f32 startX, f32 startZ, f32 endX, f32 endZ);
+f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
+    f32 xDiff = endX - startX;
+    f32 zDiff = endZ - startZ;
+    f32 absXDiff = fabsf(xDiff);
+    f32 absZDiff = fabsf(zDiff);
+    f32 temp_f20;
+
+    if (absZDiff < absXDiff) {
+        temp_f20 = (absZDiff / absXDiff) * 45.0f;
+        temp_f20 *= D_80074414[round(2.0f * temp_f20)];
+        if (xDiff >= 0.0f) {
+            if (zDiff >= 0.0f) {
+                return temp_f20 + 90.0f;
+            } else {
+                return 90.0f - temp_f20;
+            }
+        }
+        if (zDiff >= 0.0f) {
+            return 270.0f - temp_f20;
+        } else {
+            return temp_f20 + 270.0f;
+        }
+    } else {
+        if (absZDiff == 0.0f) {
+            return 0.0f;
+        }
+        temp_f20 = (absXDiff / absZDiff) * 45.0f;
+        temp_f20 *= D_80074414[round(2.0f * temp_f20)];
+        if (zDiff >= 0.0f) {
+            if (xDiff >= 0.0f) {
+                return 180.0f - temp_f20;
+            } else {
+                return temp_f20 + 180.0f;
+            }
+        } else if (!(xDiff >= 0.0f)) {
+            return 360.0f - temp_f20;
+        }
+    }
+    return temp_f20;
+}
 
 f32 get_player_normal_yaw(void) {
     return atan2(0, 0, gGameStatusPtr->playerTraceNormal.x, gGameStatusPtr->playerTraceNormal.z);
@@ -379,34 +465,106 @@ f32 cos_deg(f32 angle) {
     return coss(_wrap_trig_lookup_value(angle * 182.04445f)) * 3.051851e-05;
 }
 
-INCLUDE_ASM(f32, "43F0", update_lerp, Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
+f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
+    s32 val1s;
+    f32 temp_f4;
 
-//void func_8002A904(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
-INCLUDE_ASM(void, "43F0", func_8002A904, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6,
-            u16 arg7);
+    if (duration == 0) {
+        return end;
+    }
 
-INCLUDE_ASM(s32, "43F0", func_8002AAC4);
-// void func_8002AAC4(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7) {
-//     s16 phi_t0;
-//     s16 phi_t1;
-//     s16 phi_t2;
-//     s16 phi_t3;
+    switch (easing) {
+        case EASING_LINEAR:
+            return start + ((end - start) * elapsed / duration);
+        case EASING_QUADRATIC_IN:
+            return start + (SQ(elapsed) * (end - start) / SQ(duration));
+        case EASING_CUBIC_IN:
+            return start + (CUBE(elapsed) * (end - start) / CUBE(duration));
+        case EASING_QUARTIC_IN:
+            return start + (QUART(elapsed) * (end - start) / QUART(duration));
+        case EASING_COS_SLOW_OVERSHOOT:
+            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+        case EASING_COS_FAST_OVERSHOOT:
+            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+        case EASING_QUADRATIC_OUT:
+            val1s = duration - elapsed;
+            return (start + (end - start)) - ((SQ(val1s) * (end - start))) / SQ(duration);
+        case EASING_CUBIC_OUT:
+            val1s = duration - elapsed;
+            return (start + (end - start)) - ((CUBE(val1s) * (end - start))) / CUBE(duration);
+        case EASING_QUARTIC_OUT:
+            val1s = duration - elapsed;
+            return (start + (end - start)) - ((QUART(val1s) * (end - start))) / QUART(duration);
+        case EASING_COS_BOUNCE:
+            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) * (duration - elapsed) / SQ((f32)duration);
+            if (temp_f4 < 0.0f) {
+                temp_f4 = -temp_f4;
+            }
+            return end - ((end - start) * temp_f4);
+        case EASING_COS_IN_OUT:
+            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * PI_D) / (f32)duration)) * 0.5);
+        case EASING_SIN_OUT:
+            return start + ((end - start) * sin_rad(((f32)elapsed * 1.570796) / (f32)duration));
+        case EASING_COS_IN:
+            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * 1.570796) / (f32)duration)));
+    }
 
-//     phi_t0 = arg0;
-//     phi_t2 = arg2;
-//     if (arg2 < arg0) {
-//         phi_t0 = arg2;
-//         phi_t2 = arg0;
-//     }
+    return 0.0f;
+}
 
-//     phi_t1 = arg1;
-//     phi_t3 = arg3;
-//     if (arg3 < arg1) {
-//         phi_t1 = arg3;
-//         phi_t3 = arg1;
-//     }
+void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
+    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMasterGfxPos++, D_80074580);
 
-//     func_8002A904(arg4, arg5, arg6, arg7, phi_t0, phi_t1, phi_t2, phi_t3);
-// }
+    if (a == 255) {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    }
 
-INCLUDE_ASM(s32, "43F0", func_8002AB5C);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, a);
+    gDPFillRectangle(gMasterGfxPos++, left, top, right, bottom);
+
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+
+}
+
+void func_8002AAC4(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+    u16 temp;
+
+    if (right < left) {
+        temp = right;
+        right = left;
+        left = temp;
+    }
+
+    if (bottom < top) {
+        temp = bottom;
+        bottom = top;
+        top = temp;
+    }
+
+    func_8002A904(r, g, b, a, left, top, right, bottom);
+}
+
+void func_8002AB5C(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+    u16 temp;
+
+    if (right < left) {
+        temp = right;
+        right = left;
+        left = temp;
+    }
+
+    if (bottom < top) {
+        temp = bottom;
+        bottom = top;
+        top = temp;
+    }
+
+    func_8002A904(r, g, b, a, left, top, right, bottom);
+}
