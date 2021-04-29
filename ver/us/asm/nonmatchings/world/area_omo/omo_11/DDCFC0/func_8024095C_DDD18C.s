@@ -49,7 +49,7 @@ glabel func_8024095C_DDD18C
 /* DDD238 80240A08 AE300108 */  sw        $s0, 0x108($s1)
 /* DDD23C 80240A0C 8C420000 */  lw        $v0, ($v0)
 /* DDD240 80240A10 02E0282D */  daddu     $a1, $s7, $zero
-/* DDD244 80240A14 0C090219 */  jal       func_80240864_DDD094
+/* DDD244 80240A14 0C090219 */  jal       omo_11_UnkFunc37
 /* DDD248 80240A18 AE220084 */   sw       $v0, 0x84($s1)
 /* DDD24C 80240A1C 0040202D */  daddu     $a0, $v0, $zero
 /* DDD250 80240A20 04800011 */  bltz      $a0, .L80240A68

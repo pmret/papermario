@@ -102,7 +102,7 @@ INCLUDE_ASM(s32, "DF950", sfx_adjust_env_sound_pos, s32 soundID, s32 arg1, f32 a
 
 INCLUDE_ASM(s32, "DF950", func_80149A6C);
 
-INCLUDE_ASM(s32, "DF950", sfx_play_sound_with_params);
+INCLUDE_ASM(void, "DF950", sfx_play_sound_with_params, s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 
 INCLUDE_ASM(s32, "DF950", sfx_adjust_env_sound_params);
 
@@ -129,7 +129,7 @@ void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
 INCLUDE_ASM(s32, "DF950", sfx_play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
             f32 posZ);
 
-INCLUDE_ASM(s32, "DF950", sfx_get_spatialized_sound_params);
+INCLUDE_ASM(void, "DF950", sfx_get_spatialized_sound_params, f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "DF950", sfx_compute_spatialized_sound_params_0);
 

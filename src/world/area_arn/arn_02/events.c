@@ -201,10 +201,9 @@ NpcGroupList N(npcGroupList_80241A9C) = {
 };
 
 s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(gCurrentCamID);
+    Camera* camera = CAM(gCurrentCamID);
     f32 phi_f20;
     s32 ret = FALSE;
 
@@ -217,7 +216,6 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
         phi_f20 = 270.0f;
     }
 
-    playerStatus = &gPlayerStatusPtr;
     if (fabsf(get_clamped_angle_diff(phi_f20,
             atan2(npc->pos.x, npc->pos.z,
                   gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > 75.0) {
@@ -259,29 +257,7 @@ void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkNpcAIFunc22.inc.c"
 
-void N(func_802404D0_BDD680)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
-
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->functionTemp[0].s = 12;
-    } else {
-        npc->duration--;
-        if (npc->duration <= 0) {
-            script->functionTemp[1].s--;
-            if (script->functionTemp[1].s > 0) {
-                npc->yaw = clamp_angle(npc->yaw + 180.0f);
-                npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
-            } else {
-                fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
-                npc->duration = 15;
-                script->functionTemp[0].s = 0x28;
-            }
-        }
-    }
-}
+#include "world/common/UnkFunc8.inc.c"
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
@@ -309,41 +285,7 @@ void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240834_BDD9E4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    f32 posX, posY, posZ;
-    s32 phi_s1;
-
-    func_8003D660(npc, 1);
-    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-
-    phi_s1 = 0;
-    if (is_point_within_region(enemy->territory->wander.detectShape,
-            enemy->territory->wander.detect.x, enemy->territory->wander.detect.z,
-            npc->pos.x, npc->pos.z, enemy->territory->wander.detectSizeX,
-            enemy->territory->wander.detectSizeZ)) {
-        phi_s1 = 1;
-    }
-
-    posX = npc->pos.x;
-    posY = npc->pos.y;
-    posZ = npc->pos.z;
-
-    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ,
-            1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
-        phi_s1 = 1;
-    }
-
-    npc->duration--;
-    if (npc->duration <= 0) {
-        phi_s1 = 1;
-    }
-    if (phi_s1) {
-        script->functionTemp[0].s = 4;
-        enemy->unk_07 = 0;
-    }
-}
+#include "world/common/UnkFunc10.inc.c"
 
 void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
@@ -361,21 +303,7 @@ void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240A30_BDDBE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-
-    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->functionTemp[0].s = 12;
-    } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z) <= npc->moveSpeed) {
-        npc->duration = 10;
-        script->functionTemp[0].s = 50;
-    } else if (npc->turnAroundYawAdjustment == 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-    }
-}
+#include "world/common/UnkFunc9.inc.c"
 
 #include "world/common/UnkNpcAIFunc19.inc.c"
 
@@ -399,7 +327,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 40.0f;
+    territory.unk_18 = 40.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -445,7 +373,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
         case 4:
             N(UnkNpcAIFunc22)(script, npcAISettings, territoryPtr);
         case 5:
-            N(func_802404D0_BDD680)(script, npcAISettings, territoryPtr);
+            N(UnkFunc8)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 12:
             func_80049F7C(script, npcAISettings, territoryPtr);
@@ -469,7 +397,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
             N(func_80240694_BDD844)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 22:
-            N(func_80240834_BDD9E4)(script, npcAISettings, territoryPtr);
+            N(UnkFunc10)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 40:
             N(func_80240984_BDDB34)(script, npcAISettings, territoryPtr);
@@ -477,7 +405,7 @@ s32 N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
         case 41:
-            N(func_80240A30_BDDBE0)(script, npcAISettings, territoryPtr);
+            N(UnkFunc9)(script, npcAISettings, territoryPtr);
             return ApiStatus_BLOCK;
         case 50:
             N(UnkNpcAIFunc19)(script, npcAISettings, territoryPtr);

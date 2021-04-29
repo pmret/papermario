@@ -1,6 +1,6 @@
 #include "mac_03.h"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_03/833740", func_80241F40_833740);
+#include "world/common/GetFloorCollider.inc.c"
 
 #include "world/common/GetPlayerCoins.inc.c"
 

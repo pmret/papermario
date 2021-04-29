@@ -19,7 +19,6 @@
 #define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
 
 #define CAM(id) (&gCameras[id])
-#define CAM2(id) ({ Camera* c = gCameras; &c[id]; })
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
@@ -38,6 +37,7 @@
 #define MAX_ENTITIES 30
 #define MAX_DYNAMIC_ENTITIES 16
 #define MAX_TEX_PANNERS 16
+#define MAX_ITEM_ENTITIES 256
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI 3.141592f

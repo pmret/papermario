@@ -5,16 +5,16 @@
 #include "goomba.h"
 
 ApiStatus func_8021818C_430B2C(ScriptInstance* script, s32 isInitialCall);
-s32 goomba_anims_running[];
-s32 goomba_anims[];
-s32 goomba_defense_table[];
-s32 goomba_status_table[];
-s32 goomba_defense_table[];
-ActorPartDesc goomba_parts[];
-Script goomba_init;
-Script goomba_turn;
-Script goomba_idle;
-Script goomba_dispatch;
+extern s32 goomba_anims_running[];
+extern s32 goomba_anims[];
+extern s32 goomba_defense_table[];
+extern s32 goomba_status_table[];
+extern s32 goomba_defense_table[];
+extern ActorPartDesc goomba_parts[];
+extern Script goomba_init;
+extern Script goomba_turn;
+extern Script goomba_idle;
+extern Script goomba_dispatch;
 
 s32 goomba_defense_table[] = {
     ELEMENT_NORMAL, 0,

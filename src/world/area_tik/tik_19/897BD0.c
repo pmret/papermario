@@ -14,28 +14,6 @@ ApiStatus N(func_8024062C_897C0C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_802406C4_897CA4);
-
-INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_80240710_897CF0);
-/*
-ApiStatus N(func_80240710_897CF0)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    s32 i;
-    s16 var = script->varTable[12] >= 0;
-
-    script->varTable[0] = -1;
-
-    for (i = 1; i < 12; i++) {
-        if (playerData->partners[i].enabled && N(func_802424A4_C389D4)(i, var) != -1) {
-            script->varTable[0] = 1;
-            break;
-        }
-    }
-
-    return ApiStatus_DONE2;
-}
-*/
-
 INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_802407BC_897D9C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_80240A0C_897FEC);
@@ -50,16 +28,7 @@ ApiStatus N(func_80240A0C_897FEC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_80240B00_8980E0);
-/*
-ApiStatus N(func_80240B00_8980E0)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 
@@ -73,15 +42,15 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
     f32 sinTheta, cosTheta;
     s32 i;
     f32 var;
-    UserData* userDataPtr;
-    UserData* scriptPtr;
+    N(UserData)* userDataPtr;
+    N(UserData)* scriptPtr;
     f32 save, save2;
 
     sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
-        script->userData = (UserData*)general_heap_malloc(0x68);
-        scriptPtr = (UserData*)script->userData;
+        script->userData = (N(UserData)*)general_heap_malloc(0x68);
+        scriptPtr = (N(UserData)*)script->userData;
 
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
@@ -104,7 +73,7 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
         userDataPtr = scriptPtr;
         for (i = 0, save = 50.0f; i < 3; i++) {
             var = 0;
-            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, *(N(D_80243D88_C3A2B8) + i)); //*(dataPtr++));
+            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, N(D_80242708_899CE8)[i]);
             userDataPtr->unk_38[i] = cosTheta * var;
             userDataPtr->unk_50[i] = sinTheta * var;
             userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
@@ -113,7 +82,7 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    scriptPtr = (UserData*)script->userData;
+    scriptPtr = (N(UserData)*)script->userData;
     switch (scriptPtr->unk_00) {
         case 0:
             save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
@@ -121,7 +90,7 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80242708_899CE8)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -139,7 +108,7 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80242708_899CE8)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -199,4 +168,4 @@ ApiStatus N(func_80240BF0_8981D0)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_19/897BD0", func_802412F8_8988D8);
+#include "world/common/UnkFunc40.inc.c"

@@ -3,6 +3,28 @@
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_04/9A88A0", func_8024052C_9A891C);
+/*
+void N(func_8024052C_9A891C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    if ((npc->duration <= 0) || (--npc->duration <= 0)) {
+        if (npc->turnAroundYawAdjustment == 0) {
+            npc->currentAnim = enemy->animList[9];
+            npc->moveSpeed = aiSettings->chaseSpeed;
+            if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
+                npc->collisionHeight = enemy->varTable[6] / 2;
+            }
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            if (npc->duration < enemy->varTable[3]) {
+                npc->duration = enemy->varTable[3];
+            }
+            enemy->varTable[4] = npc->duration;
+            script->functionTemp[0].s = 14;
+        }
+    }
+}
+*/
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
@@ -104,7 +126,7 @@ ApiStatus N(func_80241818_9A9C08)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
@@ -124,7 +146,7 @@ ApiStatus N(func_80241818_9A9C08)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;
@@ -219,7 +241,7 @@ void N(func_80242A6C_9AAE5C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_802456F4_9ADAE4)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
@@ -250,7 +272,7 @@ ApiStatus N(func_80243124_9AB514)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {

@@ -19,6 +19,7 @@ void osCleanupThread(void);
 
 void func_80070A90(s32, f32, f32, f32);
 void func_80070AF0(s32, f32, f32, f32);
+f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
 HeapNode* _heap_create(s32* addr, u32 size);
@@ -99,19 +100,27 @@ Npc* make_disguise_npc(s32 peachDisguise);
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);
-
+void func_80027088(s32);
 void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
-
+void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void func_8006F8F0(f32, f32, f32);
 void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
-
+void func_80070F70(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
 void func_80071090(s32, f32, f32, f32, s32);
 Effect* func_80071750(s32, f32, f32, f32, f32, s32);
-void func_800720B0(s32, f32, f32, f32, f32, s32);
+Effect* func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
+Effect* func_800715D0(s32, f32, f32, f32);
+Effect* func_80071810(s32, f32, f32, f32);
+Effect* func_80072890(s32, f32, f32, f32, f32, s32);
+Effect* func_800716F0(s32, f32, f32, f32, f32, s32);
+
+void func_80071690(s32, f32, f32, f32);
+void func_800F4E40(void*);
+s32 func_800DDCEC(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
@@ -200,7 +209,7 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_anim_mesh(s32 arg0);
-void set_transition_stencil_zoom_0(s32, f32);
+void set_transition_stencil_zoom_0(u8, f32);
 void set_transition_stencil_zoom_1(s32, f32);
 void func_80137DC0(s32, f32*, f32*);
 s32 set_transition_stencil_color(s32, u8, u8, u8);
@@ -295,7 +304,11 @@ s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
-
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
 void func_802DDA8C(s32, s32, f32);
 
 void initialize_curtains(void);
@@ -321,21 +334,16 @@ f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
 f32 dead_cos_rad(f32 x);
 f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
 
-void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
-void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
-ApiStatus func_80045900(ScriptInstance* script);
-ApiStatus func_802D6420(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D585C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CDE68(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D8248(ScriptInstance* script, s32 isInitialCall);
-
 s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void));
 EntityModel* get_entity_model(s32 idx);
 f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
+
+void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
+void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
+void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
+void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
+
 
 #endif

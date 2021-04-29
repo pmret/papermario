@@ -24,7 +24,7 @@ INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4CF0);
 
 INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4D28);
 
-INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4E40);
+INCLUDE_ASM(void, "8a860_len_3f30", func_800F4E40, void* arg0);
 
 INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4FC4);
 

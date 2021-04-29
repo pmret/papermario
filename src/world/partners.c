@@ -601,7 +601,7 @@ void func_800EBB40(Npc* partner) {
     D_800F8344 = partner->pos.z;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EBC74);
+INCLUDE_ASM(void, "world/partners", func_800EBC74, Npc* partner);
 
 INCLUDE_ASM(void, "world/partners", enable_partner_flying, Npc* partner, s32 val);
 
@@ -732,6 +732,6 @@ void func_800EF628(void) {
     temp_8010EBB0->unk_14++;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EF640);
+INCLUDE_ASM(void, "world/partners", func_800EF640, Npc* partner);
 
 INCLUDE_ASM(s32, "world/partners", func_800EF82C);

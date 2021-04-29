@@ -4,24 +4,24 @@
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802412E8_8ED108);
+#include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241364_8ED184);
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241460_8ED280);
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802414B4_8ED2D4);
+#include "world/common/UnkFunc35.inc.c"
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_80241594_8ED3B4);
+#include "world/common/UnkFunc36.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_8024159C_8ED3BC);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802415C4_8ED3E4);
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED0C0", func_802415EC_8ED40C);
+#include "world/common/UnkFunc40.inc.c"

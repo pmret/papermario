@@ -128,7 +128,7 @@ Script N(npcAI_80240B50) = SCRIPT({
             SetPlayerAnimation(ANIM_80007);
             sleep 30;
             SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A8));
-            N(func_80240000_8C7F90)(0, 5);
+            N(UnkFunc41)(0, 5);
             STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, -220, 20, -72);
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));

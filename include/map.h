@@ -219,7 +219,7 @@ typedef struct {
     /* 0x0C */ s32 pointZ;
     /* 0x10 */ s32 sizeX;
     /* 0x14 */ s32 sizeZ;
-    /* 0x18 */ f32 unk_34;
+    /* 0x18 */ f32 unk_18;
     /* 0x1C */ s16 unk_1C;
 } EnemyTerritoryThing; // size = 0x20
 

@@ -1,3 +1,8 @@
 #include "flo_03.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_03/CA72A0", func_80240000_CA72A0);
+void func_80072950();
+
+ApiStatus N(func_80240000_CA72A0)(ScriptInstance* script, s32 isInitialCall) {
+    func_80072950(1, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}

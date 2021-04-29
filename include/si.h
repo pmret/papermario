@@ -75,7 +75,7 @@ typedef enum ScriptOpcode {
     ScriptOpcode_OR_CONST, ///< Args: container, value to bitwise OR with
     ScriptOpcode_CALL, ///< Args: *function, ...
     ScriptOpcode_SPAWN_SCRIPT, ///< Args: Script*
-    ScriptOpcode_SPAWN_SCRIPT_GET_ID, ///< Args: Script*, container
+    ScriptOpcode_SPAWN_GET_ID, ///< Args: Script*, container
     ScriptOpcode_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: Script*
     ScriptOpcode_BIND_TRIGGER, ///< Args: Script*, trigger flags, s32 target, 1, Trigger*
     ScriptOpcode_UNBIND, ///< Unbinds any triggers bound to this script.
@@ -99,16 +99,16 @@ typedef enum ScriptOpcode {
     ScriptOpcode_DEBUG_PRINT = 0x5B, ///< Args: expression
 } ScriptOpcode;
 
-#define SI_VAR(v) ((v - 30000000))
-#define SI_MAP_VAR(v) ((v - 50000000))
-#define SI_FLAG(v) ((v - 70000000))
-#define SI_MAP_FLAG(v) ((v - 90000000))
-#define SI_AREA_FLAG(v) ((v - 110000000))
-#define SI_SAVE_FLAG(v) ((v - 130000000))
-#define SI_AREA_VAR(v) ((v - 150000000))
-#define SI_SAVE_VAR(v) ((v - 170000000))
-#define SI_ARRAY(v) ((v - 190000000))
-#define SI_ARRAY_FLAG(v) ((v - 210000000))
+#define SI_VAR(v)           ((v -  30000000))
+#define SI_MAP_VAR(v)       ((v -  50000000))
+#define SI_FLAG(v)          ((v -  70000000))
+#define SI_MAP_FLAG(v)      ((v -  90000000))
+#define SI_AREA_FLAG(v)     ((v - 110000000))
+#define SI_SAVE_FLAG(v)     ((v - 130000000))
+#define SI_AREA_VAR(v)      ((v - 150000000))
+#define SI_SAVE_VAR(v)      ((v - 170000000))
+#define SI_ARRAY(v)         ((v - 190000000))
+#define SI_ARRAY_FLAG(v)    ((v - 210000000))
 #define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
 #define MAKE_ENTITY_END 0x80000000
 

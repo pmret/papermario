@@ -8,7 +8,9 @@
 #include "world/common/GetCurrentFloor.inc.c"
 #define NAMESPACE kmr_20
 
-INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8EDB70", func_80241D84_8EDBA4);
+#define NAMESPACE dup2_kmr_20
+#include "world/common/UnkFunc25.inc.c"
+#define NAMESPACE kmr_20
 
 #define NAMESPACE dup2_kmr_20
 #include "world/common/GetEntryPos.inc.c"

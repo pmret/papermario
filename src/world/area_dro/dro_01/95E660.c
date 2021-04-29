@@ -1,32 +1,28 @@
 #include "dro_01.h"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95E660", func_80243460_95E660);
-/*
 ApiStatus N(func_80243460_95E660)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_8024B5B0_9667B0) == NULL) {
+        N(D_8024B5B0_9667B0) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_8024B5B0_9667B0)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_8024B5B0_9667B0)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_8024B5B0_9667B0));
+        N(D_8024B5B0_9667B0) = NULL;
     }
     return ApiStatus_DONE2;
 }
-*/
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/GetItemName.inc.c"
 #define NAMESPACE dro_01
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95E660", func_80243578_95E778);
+ApiStatus N(func_80243578_95E778)(ScriptInstance* script, s32 isInitialCall) {
+    func_800E96C8();
+    return ApiStatus_DONE2;
+}

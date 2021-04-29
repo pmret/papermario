@@ -128,7 +128,7 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_80070EB0);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070F10);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80070F70);
+INCLUDE_ASM(void, "4ac90_len_3910", func_80070F70, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, s32* arg8);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070FD0);
 
@@ -162,19 +162,19 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_80071510);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80071570);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_800715D0);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_800715D0, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80071630);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80071690);
+INCLUDE_ASM(void, "4ac90_len_3910", func_80071690, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_800716F0);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_800716F0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(Effect*, "4ac90_len_3910", func_80071750, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4, s32 a5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_800717B0);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80071810);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_80071810, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80071870);
 
@@ -220,7 +220,7 @@ INCLUDE_ASM(void, "4ac90_len_3910", func_80071FF0, s32 arg0, f32 arg1, f32 arg2,
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072050);
 
-INCLUDE_ASM(void, "4ac90_len_3910", func_800720B0, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4, s32 a5);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_800720B0, s32 a0, f32 a1, f32 a2, f32 a3, f32 a4, s32 a5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072110);
 
@@ -254,7 +254,7 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_800725F0);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072650);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_800726B0);
+INCLUDE_ASM(void*, "4ac90_len_3910", func_800726B0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072710);
 
@@ -264,13 +264,13 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_800727D0);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072830);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80072890);
+INCLUDE_ASM(Effect*, "4ac90_len_3910", func_80072890, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_800728F0);
 
 INCLUDE_ASM(void, "4ac90_len_3910", func_80072950, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 time);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_800729B0);
+INCLUDE_ASM(void*, "4ac90_len_3910", func_800729B0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80072A10);
 

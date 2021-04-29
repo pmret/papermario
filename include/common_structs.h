@@ -759,11 +759,19 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
+typedef struct ModelNode {
+    /* 0x00 */ s32 type; /* 2 = model */
+    /* 0x04 */ UNK_PTR displayList;
+    /* 0x08 */ s32 numProperties;
+    /* 0x0C */ UNK_PTR propertyList;
+    /* 0x10 */ struct ModelGroupData* groupData;
+} ModelNode; // size = 0x14
+
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
     /* 0x04 */ char unk_04[4];
-    /* 0x08 */ s32* modelNode;
+    /* 0x08 */ struct ModelNode** modelNode;
     /* 0x0C */ struct ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
@@ -855,6 +863,41 @@ typedef struct EffectBlueprint {
     /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
+typedef struct {
+    char unk_00[0x38];
+    f32 unk_38[4];
+} EffectUnkStruct1;
+// TODO figure out what this actually is
+// func_800715D0 invokes gEffectTable[78]'s entryPoint function
+// func_80072230 invokes gEffectTable[111]'s entryPoint function
+// func_800729B0 invokes gEffectTable[131]'s entryPoint function
+// These functions are currently typed to return void
+// Assume they return an Effect*, and this struct is accessed at unk_0C,
+// but this struct differs from EffectInstanceData
+// Search for "struct N(temp)" for examples
+typedef struct {
+    char unk_00[0x4];
+    f32 unk_04;
+    f32 unk_08;
+    f32 unk_0C;
+    f32 unk_10;
+    char unk_14[0x4];
+    s32 unk_18;
+    s32 unk_1C;
+    s32 unk_20;
+    X32 unk_24;
+    s32 unk_28;
+    s32 unk_2C;
+    s32 unk_30;
+    s32 unk_34;
+    s32 unk_38;
+    char unk_3C[0xC];
+    EffectUnkStruct1* unk_48;
+    char unk_4C[0x24];
+    s32 unk_70;
+    s32 unk_74;
+} EffectInstanceDataThing;
+
 typedef struct Effect {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
@@ -905,14 +948,6 @@ typedef struct ItemEntity {
     /* 0x54 */ s32 unk_54;
     /* 0x58 */ s32 unk_58;
 } ItemEntity; // size = 0x5C
-
-typedef struct ModelNode {
-    /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ UNK_PTR displayList;
-    /* 0x08 */ s32 numProperties;
-    /* 0x0C */ UNK_PTR propertyList;
-    /* 0x10 */ struct ModelGroupData* groupData;
-} ModelNode; // size = 0x14
 
 typedef struct StaticShadowData {
     /* 0x00 */ s16 flags;
@@ -1738,7 +1773,8 @@ typedef struct {
 } PauseItemPage; // size = 0xC
 
 typedef struct {
-    /* 0x00 */ char unk_00[8];
+    /* 0x00 */ f32 unk_00;
+    /* 0x04 */ char unk_04[4];
     /* 0x08 */ s8* unk_08;
     /* 0x0C */ void* fpInit;
     /* 0x10 */ void* fpHandleInput;

@@ -109,8 +109,8 @@ glabel func_80041BD0
 /* 1D154 80041D54 A2C000A4 */  sb        $zero, 0xa4($s6)
 /* 1D158 80041D58 A2C000A8 */  sb        $zero, 0xa8($s6)
 /* 1D15C 80041D5C A2C000AC */  sb        $zero, 0xac($s6)
-/* 1D160 80041D60 3C02800A */  lui       $v0, %hi(D_8009A634)
-/* 1D164 80041D64 8042A634 */  lb        $v0, %lo(D_8009A634)($v0)
+/* 1D160 80041D60 3C02800A */  lui       $v0, %hi(gCurrentCamID)
+/* 1D164 80041D64 8042A634 */  lb        $v0, %lo(gCurrentCamID)($v0)
 /* 1D168 80041D68 24110001 */  addiu     $s1, $zero, 1
 /* 1D16C 80041D6C A6C000A2 */  sh        $zero, 0xa2($s6)
 /* 1D170 80041D70 A6C000A6 */  sh        $zero, 0xa6($s6)

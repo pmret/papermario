@@ -2,7 +2,7 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/world_bow.h"
 
-s32 D_80244A20[0x70];
+static s32 N(D_80244A20)[112];
 
 Script N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 
@@ -91,7 +91,7 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-s32* N(D_80241C68_BE09F8) = NULL;
+s32** N(D_80241C68_BE09F8) = NULL;
 
 Script N(80241C6C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -137,7 +137,7 @@ Script N(80241CD4) = SCRIPT({
 
 Script N(80241E18) = {
     SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) D_80244A20, 0, 1),
+    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) N(D_80244A20), 0, 1),
     SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_802415F4_BE0384), SI_VAR(0)),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
@@ -985,46 +985,11 @@ void N(func_8024067C_BDF40C)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
-void N(func_8024094C_BDF6DC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
-
-    if (!func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
-        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        npc->currentAnim = enemy->animList[0];
-        npc->duration = 25;
-        script->functionTemp[0].s = 14;
-    } else {
-        func_8003D660(npc, 1);
-        npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-        if (npc->duration > 0) {
-            npc->duration--;
-        } else {
-            script->functionTemp[0].s = 12;
-        }
-    }
-}
+#include "world/common/UnkFunc15.inc.c"
 
 #include "world/common/UnkNpcDurationFlagFunc.inc.c"
 
-void N(func_80240AD4_BDF864)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 i;
-
-    for (i = script->functionTemp[2].s; i < enemy->territory->patrol.numPoints; i++) {
-        if (i[enemy->territory->patrol.points].y <= npc->pos.y) {
-            script->functionTemp[2].s = i;
-            break;
-        }
-    }
-
-    npc->moveSpeed = aiSettings->moveSpeed;
-    npc->currentAnim = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkFunc16.inc.c"
 
 ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
@@ -1041,7 +1006,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
@@ -1061,7 +1026,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;
@@ -1096,13 +1061,13 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
         case 12:
             N(UnkNpcAIFunc13)(script, npcAISettings, territoryPtr);
         case 13:
-            N(func_8024094C_BDF6DC)(script, npcAISettings, territoryPtr);
+            N(UnkFunc15)(script, npcAISettings, territoryPtr);
             break;
         case 14:
             N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
             break;
         case 15:
-            N(func_80240AD4_BDF864)(script, npcAISettings, territoryPtr);
+            N(UnkFunc16)(script, npcAISettings, territoryPtr);
             break;
         case 99:
             func_8004A73C(script);
@@ -1177,7 +1142,7 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 100.0f;
+    territory.unk_18 = 100.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -1208,23 +1173,19 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
 
 /// Pushes/pops script local variables to D_80241C68_BE09F8
 ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = (s32*) i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80241C68_BE09F8) == NULL) {
+        N(D_80241C68_BE09F8) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80241C68_BE09F8)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80241C68_BE09F8)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80241C68_BE09F8));
+        N(D_80241C68_BE09F8) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -1265,18 +1226,18 @@ ApiStatus N(func_80241648_BE03D8)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80241680_BE0410)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* var1 = get_variable(script, *args++);
+    s32* ptr = get_variable(script, *args);
     s32 i;
 
-    if (var1 != NULL) {
-        for (i = 0; var1[i] != 0; i++) {
-            D_80244A20[i] = var1[i];
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
         }
-        D_80244A20[i] = 0;
+        N(D_80244A20)[i] = 0;
     } else {
         for (i = 0; i < 0x70; i++) {
-            D_80244A20[i] = i + 16;
-            D_80244A20[0x70] = 0;
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
         }
     }
     return ApiStatus_DONE2;

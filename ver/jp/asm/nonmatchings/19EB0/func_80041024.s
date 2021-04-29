@@ -40,8 +40,8 @@ glabel func_80041024
 /* 1C4A8 800410A8 AEA50094 */  sw        $a1, 0x94($s5)
 /* 1C4AC 800410AC AEA50098 */  sw        $a1, 0x98($s5)
 /* 1C4B0 800410B0 A2A20008 */  sb        $v0, 8($s5)
-/* 1C4B4 800410B4 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 1C4B8 800410B8 A020A634 */  sb        $zero, %lo(D_8009A634)($at)
+/* 1C4B4 800410B4 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 1C4B8 800410B8 A020A634 */  sb        $zero, %lo(gCurrentCamID)($at)
 /* 1C4BC 800410BC 3C018007 */  lui       $at, %hi(D_80077C10)
 /* 1C4C0 800410C0 AC207C10 */  sw        $zero, %lo(D_80077C10)($at)
 /* 1C4C4 800410C4 0C0B117A */  jal       func_802C45E8
@@ -241,8 +241,8 @@ glabel func_80041024
 /* 1C784 80041384 0C053FEA */  jal       func_8014FFA8
 /* 1C788 80041388 00000000 */   nop
 /* 1C78C 8004138C 24020001 */  addiu     $v0, $zero, 1
-/* 1C790 80041390 3C01800A */  lui       $at, %hi(D_8009A634)
-/* 1C794 80041394 A022A634 */  sb        $v0, %lo(D_8009A634)($at)
+/* 1C790 80041390 3C01800A */  lui       $at, %hi(gCurrentCamID)
+/* 1C794 80041394 A022A634 */  sb        $v0, %lo(gCurrentCamID)($at)
 /* 1C798 80041398 2402000A */  addiu     $v0, $zero, 0xa
 /* 1C79C 8004139C AEA2009C */  sw        $v0, 0x9c($s5)
 /* 1C7A0 800413A0 24020001 */  addiu     $v0, $zero, 1
