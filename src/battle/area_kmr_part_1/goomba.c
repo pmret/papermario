@@ -4,7 +4,10 @@
 #include "sprite/npc/goomba.h"
 #include "goomba.h"
 
-ApiStatus func_8021818C_430B2C(ScriptInstance* script, s32 isInitialCall);
+#define NAMESPACE b_area_kmr_part_1
+
+ApiStatus N(BattleAreaAngleStuff2)(ScriptInstance* script, s32 isInitialCall);
+
 s32 goomba_anims_running[];
 s32 goomba_anims[];
 s32 goomba_defense_table[];
@@ -289,7 +292,7 @@ Script goomba_dispatch = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, 1);
 });
 
-f32 D_8021A194_432B34[] = {
+f32 N(floatTable)[] = {
     0.000000f, 0.017452f, 0.034899f, 0.052336f, 0.069756f, 0.087156f, 0.104528f, 0.121869f,
     0.139173f, 0.156434f, 0.173648f, 0.190809f, 0.207912f, 0.224951f, 0.241922f, 0.258819f,
     0.275637f, 0.292372f, 0.309017f, 0.325568f, 0.342020f, 0.358368f, 0.374607f, 0.390731f,
@@ -339,7 +342,7 @@ Script goomba_turn = SCRIPT({
                 SI_VAR(0) = 0;
                 loop 16 {
                     GetActorPos(ACTOR_SELF, SI_VAR(4), SI_VAR(5), SI_VAR(6));
-                    func_8021818C_430B2C(SI_VAR(1), SI_VAR(2), SI_VAR(4), SI_VAR(5), SI_VAR(0));
+                    N(BattleAreaAngleStuff2)(SI_VAR(1), SI_VAR(2), SI_VAR(4), SI_VAR(5), SI_VAR(0));
                     SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
                     SI_VAR(1) = SI_VAR(4);
                     SI_VAR(2) = SI_VAR(5);
@@ -414,7 +417,7 @@ Script goomba_turn = SCRIPT({
                 SI_VAR(0) = 0;
                 loop 16 {
                     GetActorPos(ACTOR_SELF, SI_VAR(4), SI_VAR(5), SI_VAR(6));
-                    func_8021818C_430B2C(SI_VAR(1), SI_VAR(2), SI_VAR(4), SI_VAR(5), SI_VAR(0));
+                    N(BattleAreaAngleStuff2)(SI_VAR(1), SI_VAR(2), SI_VAR(4), SI_VAR(5), SI_VAR(0));
                     SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
                     SI_VAR(1) = SI_VAR(4);
                     SI_VAR(2) = SI_VAR(5);
