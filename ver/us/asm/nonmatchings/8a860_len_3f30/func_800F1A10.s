@@ -134,7 +134,7 @@ glabel L800F1A54_8AF04
 /* 8B038 800F1B88 34A56666 */  ori       $a1, $a1, 0x6666
 /* 8B03C 800F1B8C 3C018011 */  lui       $at, %hi(D_8010D678)
 /* 8B040 800F1B90 AC30D678 */  sw        $s0, %lo(D_8010D678)($at)
-/* 8B044 800F1B94 0C051308 */  jal       func_80144C20
+/* 8B044 800F1B94 0C051308 */  jal       set_hud_element_scale
 /* 8B048 800F1B98 0200202D */   daddu    $a0, $s0, $zero
 /* 8B04C 800F1B9C 0200202D */  daddu     $a0, $s0, $zero
 /* 8B050 800F1BA0 0C051280 */  jal       set_icon_flags

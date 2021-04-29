@@ -12,7 +12,7 @@ extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern s32 D_80073E10;
-extern s16* D_8009A680;
+extern u16* D_8009A680;
 extern OSViMode _osViModeNtscLan1;
 extern OSViMode _osViModeMPalLan1;
 
@@ -57,8 +57,8 @@ void gfxRetrace_Callback(s32 arg0) {
                 temp_8009A680[1] = fb;
                 temp_8009A680[0] = fb;
                 D_80073E04 = fb;
-                nuGfxSetCfb(temp_8009A680, 3);
-                osViSwapBuffer(*temp_8009A680);
+                nuGfxSetCfb(&D_8009A680, 3);
+                osViSwapBuffer(D_8009A680);
                 D_80073E00 = 2;
             }
         }

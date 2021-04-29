@@ -261,7 +261,7 @@ glabel L802A1DB4_416B44
 /* 416D84 802A1FF4 3C053FCC */  lui       $a1, 0x3fcc
 /* 416D88 802A1FF8 34A5CCCD */  ori       $a1, $a1, 0xcccd
 .L802A1FFC:
-/* 416D8C 802A1FFC 0C051308 */  jal       func_80144C20
+/* 416D8C 802A1FFC 0C051308 */  jal       set_hud_element_scale
 /* 416D90 802A2000 0260202D */   daddu    $a0, $s3, $zero
 /* 416D94 802A2004 0C05108E */  jal       func_80144238
 /* 416D98 802A2008 0260202D */   daddu    $a0, $s3, $zero
@@ -316,7 +316,7 @@ glabel L802A1DB4_416B44
 /* 416E5C 802A20CC 00452823 */   subu     $a1, $v0, $a1
 /* 416E60 802A20D0 3C053F99 */  lui       $a1, 0x3f99
 /* 416E64 802A20D4 34A5999A */  ori       $a1, $a1, 0x999a
-/* 416E68 802A20D8 0C051308 */  jal       func_80144C20
+/* 416E68 802A20D8 0C051308 */  jal       set_hud_element_scale
 /* 416E6C 802A20DC 0260202D */   daddu    $a0, $s3, $zero
 /* 416E70 802A20E0 16E00005 */  bnez      $s7, .L802A20F8
 /* 416E74 802A20E4 0260202D */   daddu    $a0, $s3, $zero
@@ -396,7 +396,7 @@ glabel L802A1DB4_416B44
 /* 416F88 802A21F8 4405C000 */  mfc1      $a1, $f24
 /* 416F8C 802A21FC 3C013F80 */  lui       $at, 0x3f80
 /* 416F90 802A2200 4481B000 */  mtc1      $at, $f22
-/* 416F94 802A2204 0C051308 */  jal       func_80144C20
+/* 416F94 802A2204 0C051308 */  jal       set_hud_element_scale
 /* 416F98 802A2208 0260202D */   daddu    $a0, $s3, $zero
 /* 416F9C 802A220C 4405B000 */  mfc1      $a1, $f22
 /* 416FA0 802A2210 3C063FE6 */  lui       $a2, 0x3fe6
@@ -453,7 +453,7 @@ glabel L802A1DB4_416B44
 /* 41706C 802A22DC 2406FFEC */   addiu    $a2, $zero, -0x14
 /* 417070 802A22E0 3C053F73 */  lui       $a1, 0x3f73
 /* 417074 802A22E4 34A53333 */  ori       $a1, $a1, 0x3333
-/* 417078 802A22E8 0C051308 */  jal       func_80144C20
+/* 417078 802A22E8 0C051308 */  jal       set_hud_element_scale
 /* 41707C 802A22EC 0260202D */   daddu    $a0, $s3, $zero
 /* 417080 802A22F0 001511C0 */  sll       $v0, $s5, 7
 /* 417084 802A22F4 00551023 */  subu      $v0, $v0, $s5
@@ -489,7 +489,7 @@ glabel L802A1DB4_416B44
 /* 4170FC 802A236C 0C051261 */  jal       set_icon_render_pos
 /* 417100 802A2370 24C600D4 */   addiu    $a2, $a2, 0xd4
 /* 417104 802A2374 4405B000 */  mfc1      $a1, $f22
-/* 417108 802A2378 0C051308 */  jal       func_80144C20
+/* 417108 802A2378 0C051308 */  jal       set_hud_element_scale
 /* 41710C 802A237C 0260202D */   daddu    $a0, $s3, $zero
 /* 417110 802A2380 0C05108E */  jal       func_80144238
 /* 417114 802A2384 0260202D */   daddu    $a0, $s3, $zero

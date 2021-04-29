@@ -170,7 +170,7 @@ glabel L802A2CE4_417A74
 /* 417C64 802A2ED4 3C053EE6 */  lui       $a1, 0x3ee6
 /* 417C68 802A2ED8 34A56666 */  ori       $a1, $a1, 0x6666
 /* 417C6C 802A2EDC 0240202D */  daddu     $a0, $s2, $zero
-/* 417C70 802A2EE0 0C051308 */  jal       func_80144C20
+/* 417C70 802A2EE0 0C051308 */  jal       set_hud_element_scale
 /* 417C74 802A2EE4 AE720000 */   sw       $s2, ($s3)
 /* 417C78 802A2EE8 0240202D */  daddu     $a0, $s2, $zero
 /* 417C7C 802A2EEC 0C051280 */  jal       set_icon_flags
@@ -256,7 +256,7 @@ glabel L802A2CE4_417A74
 /* 417DB4 802A3024 3C053F40 */  lui       $a1, 0x3f40
 /* 417DB8 802A3028 3C01802B */  lui       $at, %hi(battle_menu_moveTitleIcon)
 /* 417DBC 802A302C AC32D188 */  sw        $s2, %lo(battle_menu_moveTitleIcon)($at)
-/* 417DC0 802A3030 0C051308 */  jal       func_80144C20
+/* 417DC0 802A3030 0C051308 */  jal       set_hud_element_scale
 /* 417DC4 802A3034 0240202D */   daddu    $a0, $s2, $zero
 /* 417DC8 802A3038 0240202D */  daddu     $a0, $s2, $zero
 .L802A303C:
@@ -626,7 +626,7 @@ glabel L802A3490_418220
 /* 418314 802A3584 00822021 */  addu      $a0, $a0, $v0
 /* 418318 802A3588 8C84D128 */  lw        $a0, %lo(battle_menu_moveOptionIconIDs)($a0)
 /* 41831C 802A358C 3C053EE6 */  lui       $a1, 0x3ee6
-/* 418320 802A3590 0C051308 */  jal       func_80144C20
+/* 418320 802A3590 0C051308 */  jal       set_hud_element_scale
 /* 418324 802A3594 34A56666 */   ori      $a1, $a1, 0x6666
 /* 418328 802A3598 0C05272D */  jal       sfx_play_sound
 /* 41832C 802A359C 240400C7 */   addiu    $a0, $zero, 0xc7

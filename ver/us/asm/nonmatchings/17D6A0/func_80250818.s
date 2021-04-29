@@ -192,7 +192,7 @@ glabel L80250AA0_17F380
 /* 17F394 80250AB4 2626000E */   addiu    $a2, $s1, 0xe
 /* 17F398 80250AB8 86040000 */  lh        $a0, ($s0)
 /* 17F39C 80250ABC 3C053F19 */  lui       $a1, 0x3f19
-/* 17F3A0 80250AC0 0C051308 */  jal       func_80144C20
+/* 17F3A0 80250AC0 0C051308 */  jal       set_hud_element_scale
 /* 17F3A4 80250AC4 34A5999A */   ori      $a1, $a1, 0x999a
 /* 17F3A8 80250AC8 86040000 */  lh        $a0, ($s0)
 /* 17F3AC 80250ACC 0C0513AC */  jal       icon_set_opacity
@@ -242,7 +242,7 @@ glabel L80250B58_17F438
 /* 17F44C 80250B6C 2626000D */   addiu    $a2, $s1, 0xd
 /* 17F450 80250B70 86040000 */  lh        $a0, ($s0)
 /* 17F454 80250B74 3C053F19 */  lui       $a1, 0x3f19
-/* 17F458 80250B78 0C051308 */  jal       func_80144C20
+/* 17F458 80250B78 0C051308 */  jal       set_hud_element_scale
 /* 17F45C 80250B7C 34A5999A */   ori      $a1, $a1, 0x999a
 /* 17F460 80250B80 86040000 */  lh        $a0, ($s0)
 /* 17F464 80250B84 0C0513AC */  jal       icon_set_opacity
@@ -268,7 +268,7 @@ glabel L80250BB0_17F490
 /* 17F4B0 80250BD0 4481A000 */  mtc1      $at, $f20
 /* 17F4B4 80250BD4 86040000 */  lh        $a0, ($s0)
 /* 17F4B8 80250BD8 4405A000 */  mfc1      $a1, $f20
-/* 17F4BC 80250BDC 0C051308 */  jal       func_80144C20
+/* 17F4BC 80250BDC 0C051308 */  jal       set_hud_element_scale
 /* 17F4C0 80250BE0 00000000 */   nop
 /* 17F4C4 80250BE4 86040000 */  lh        $a0, ($s0)
 /* 17F4C8 80250BE8 0C0513AC */  jal       icon_set_opacity
@@ -284,7 +284,7 @@ glabel L80250BB0_17F490
 /* 17F4F0 80250C10 0220302D */   daddu    $a2, $s1, $zero
 /* 17F4F4 80250C14 86040000 */  lh        $a0, ($s0)
 /* 17F4F8 80250C18 4405A000 */  mfc1      $a1, $f20
-/* 17F4FC 80250C1C 0C051308 */  jal       func_80144C20
+/* 17F4FC 80250C1C 0C051308 */  jal       set_hud_element_scale
 /* 17F500 80250C20 00000000 */   nop
 /* 17F504 80250C24 86040000 */  lh        $a0, ($s0)
 /* 17F508 80250C28 0C0513AC */  jal       icon_set_opacity
@@ -329,7 +329,7 @@ glabel L80250C9C_17F57C
 /* 17F59C 80250CBC 4481A000 */  mtc1      $at, $f20
 /* 17F5A0 80250CC0 86040000 */  lh        $a0, ($s0)
 /* 17F5A4 80250CC4 4405A000 */  mfc1      $a1, $f20
-/* 17F5A8 80250CC8 0C051308 */  jal       func_80144C20
+/* 17F5A8 80250CC8 0C051308 */  jal       set_hud_element_scale
 /* 17F5AC 80250CCC 00000000 */   nop
 /* 17F5B0 80250CD0 86040000 */  lh        $a0, ($s0)
 /* 17F5B4 80250CD4 0C0513AC */  jal       icon_set_opacity
@@ -379,7 +379,7 @@ glabel L80250D60_17F640
 /* 17F658 80250D78 86040000 */  lh        $a0, ($s0)
 /* 17F65C 80250D7C 3C053F19 */  lui       $a1, 0x3f19
 /* 17F660 80250D80 34A5999A */  ori       $a1, $a1, 0x999a
-/* 17F664 80250D84 0C051308 */  jal       func_80144C20
+/* 17F664 80250D84 0C051308 */  jal       set_hud_element_scale
 /* 17F668 80250D88 2631000F */   addiu    $s1, $s1, 0xf
 /* 17F66C 80250D8C 86040000 */  lh        $a0, ($s0)
 /* 17F670 80250D90 0C0513AC */  jal       icon_set_opacity
@@ -398,7 +398,7 @@ glabel L80250D60_17F640
 /* 17F6A4 80250DC4 4481A000 */  mtc1      $at, $f20
 /* 17F6A8 80250DC8 86040000 */  lh        $a0, ($s0)
 /* 17F6AC 80250DCC 4405A000 */  mfc1      $a1, $f20
-/* 17F6B0 80250DD0 0C051308 */  jal       func_80144C20
+/* 17F6B0 80250DD0 0C051308 */  jal       set_hud_element_scale
 /* 17F6B4 80250DD4 00000000 */   nop
 /* 17F6B8 80250DD8 86040000 */  lh        $a0, ($s0)
 /* 17F6BC 80250DDC 0C0513AC */  jal       icon_set_opacity
@@ -416,7 +416,7 @@ glabel L80250D60_17F640
 /* 17F6E8 80250E08 00000000 */   nop
 /* 17F6EC 80250E0C 86040000 */  lh        $a0, ($s0)
 /* 17F6F0 80250E10 3C053F4C */  lui       $a1, 0x3f4c
-/* 17F6F4 80250E14 0C051308 */  jal       func_80144C20
+/* 17F6F4 80250E14 0C051308 */  jal       set_hud_element_scale
 /* 17F6F8 80250E18 34A5CCCD */   ori      $a1, $a1, 0xcccd
 /* 17F6FC 80250E1C 86040000 */  lh        $a0, ($s0)
 /* 17F700 80250E20 0C0513AC */  jal       icon_set_opacity
@@ -438,7 +438,7 @@ glabel L80250E3C_17F71C
 /* 17F738 80250E58 86040000 */  lh        $a0, ($s0)
 /* 17F73C 80250E5C 3C053F00 */  lui       $a1, 0x3f00
 .L80250E60:
-/* 17F740 80250E60 0C051308 */  jal       func_80144C20
+/* 17F740 80250E60 0C051308 */  jal       set_hud_element_scale
 /* 17F744 80250E64 00000000 */   nop
 .L80250E68:
 /* 17F748 80250E68 86040000 */  lh        $a0, ($s0)

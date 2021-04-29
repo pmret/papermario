@@ -8,15 +8,12 @@ extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
 void func_800E26B0(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
-    playerStatus->jumpApexHeight = playerStatus->position.y;
+    gPlayerStatus.jumpApexHeight = gPlayerStatus.position.y;
 }
 
 s32 func_800E26C4(void) {
-    PlayerStatus* playerStatus = gPlayerStatusPtr;
     PlayerData* playerData = &gPlayerData;
-    s32 actionState = playerStatus->actionState;
+    s32 actionState = gPlayerStatusPtr->actionState;
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
     if (actionState == ACTION_STATE_IDLE ||
@@ -33,7 +30,7 @@ s32 func_800E26C4(void) {
             if (temp_8010EBB0->unk_00 != 0) {
                 return 1;
             } else {
-                playerStatus->animFlags |= 4;
+                gPlayerStatusPtr->animFlags |= 4;
                 return 0;
             }
         } else {
@@ -41,7 +38,7 @@ s32 func_800E26C4(void) {
                 return temp_8010EBB0->unk_00 != 0;
             }
             if (temp_8010EBB0->unk_03 == 4) {
-                playerStatus->animFlags |= 4;
+                gPlayerStatusPtr->animFlags |= 4;
                 return 0;
             }
         }
@@ -52,15 +49,13 @@ s32 func_800E26C4(void) {
 void set_action_state(s32 actionState);
 
 void move_player(s32 duration, f32 heading, f32 speed) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+    gPlayerStatus.flags |= 0x4000;
+    gPlayerStatus.heading = heading;
+    gPlayerStatus.moveFrames = duration;
+    gPlayerStatus.currentSpeed = speed;
 
-    playerStatus->flags |= 0x4000;
-    playerStatus->heading = heading;
-    playerStatus->moveFrames = duration;
-    playerStatus->currentSpeed = speed;
-
-    if (!(playerStatus->animFlags & 0x400000)) {
-        set_action_state(speed > playerStatus->walkSpeed ? ACTION_STATE_RUN : ACTION_STATE_WALK);
+    if (!(gPlayerStatus.animFlags & 0x400000)) {
+        set_action_state(speed > gPlayerStatus.walkSpeed ? ACTION_STATE_RUN : ACTION_STATE_WALK);
     }
 }
 
@@ -112,12 +107,10 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", gravity_use_fall_params);
 #endif
 
 void func_800E3100(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
-    if (playerStatus->actionState != ACTION_STATE_LAND_ON_SWITCH && playerStatus->actionState != ACTION_STATE_BOUNCE) {
+    if (gPlayerStatus.actionState != ACTION_STATE_LAND_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
         s32* colliderID;
 
-        playerStatus->position.y = func_800E3514(func_800E34D8(), &colliderID);
+        gPlayerStatus.position.y = func_800E3514(func_800E34D8(), &colliderID);
 
         func_800E315C(colliderID);
     }
@@ -215,7 +208,7 @@ void func_800E4508(void) {
         f32 y = playerStatus->position.y;
         f32 z = playerStatus->position.z;
 
-        do_lateral_collision(0, playerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
+        do_lateral_collision(0, &gPlayerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
 
         temp_64 -= playerStatus->runSpeed / 10.0f;
         playerStatus->position.x = x;
@@ -226,7 +219,7 @@ void func_800E4508(void) {
             temp_64 = 0.0f;
         }
 
-        (*(&playerStatus))->unk_64 = temp_64;
+        playerStatus->unk_64 = temp_64;
     }
 }
 
@@ -273,6 +266,7 @@ void check_input_midair_jump(void) {
         gPlayerStatus.unk_C2 >= 6 &&
         gPlayerStatus.decorationList < 0x12 &&
         gPlayerStatus.pressedButtons & A_BUTTON) {
+
         switch (gPlayerData.bootsLevel) {
             case 0:
                 break;
@@ -570,17 +564,14 @@ void func_800E6428(void) {
     Npc* disguiseNpc;
 
     if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
-        s32* temp_8010C92C = &D_8010C92C;
-
-        if (*temp_8010C92C != 0) {
-            (*temp_8010C92C)--;
-            if (*temp_8010C92C == 0) {
-                GameStatus** gameStatus = &gGameStatusPtr;
-                if ((*gameStatus)->peachFlags & 2) {
+        if (D_8010C92C != 0) {
+            D_8010C92C--;
+            if (D_8010C92C == 0) {
+                if (gGameStatusPtr->peachFlags & 2) {
                     playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
-                    (*gameStatus)->peachFlags |= 2;
+                    gGameStatusPtr->peachFlags |= 2;
 
-                    disguiseNpc = make_disguise_npc((*gameStatus)->peachDisguise);
+                    disguiseNpc = make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
                         disguiseNpc->flags &= ~NPC_FLAG_40000;
                     }

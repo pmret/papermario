@@ -21,7 +21,7 @@ void func_80035E24(void) {
 void func_80035E54(void) {
     D_800A0944 = 0;
     D_800A0946 = 4;
-    gGameStatusPtr->exitAngle = 0.0f;
+    gGameStatusPtr->exitTangent = 0.0f;
     gMapTransitionAlpha = 0xFF;
     nuContRmbForceStopEnd();
     func_801382AC(&gMapTransitionAlpha);

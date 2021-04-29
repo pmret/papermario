@@ -151,7 +151,7 @@ glabel pause_textbox_draw_contents
 /* 136AF0 802437B0 0C05128B */  jal       clear_icon_flags
 /* 136AF4 802437B4 34058000 */   ori      $a1, $zero, 0x8000
 /* 136AF8 802437B8 8E04000C */  lw        $a0, 0xc($s0)
-/* 136AFC 802437BC 0C051308 */  jal       func_80144C20
+/* 136AFC 802437BC 0C051308 */  jal       set_hud_element_scale
 /* 136B00 802437C0 3C053F80 */   lui      $a1, 0x3f80
 /* 136B04 802437C4 0C0511F8 */  jal       draw_icon_2
 /* 136B08 802437C8 8E04000C */   lw       $a0, 0xc($s0)

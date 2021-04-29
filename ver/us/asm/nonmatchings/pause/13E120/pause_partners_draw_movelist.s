@@ -133,7 +133,7 @@ glabel pause_partners_draw_movelist
 /* 13F258 8024BF18 25080640 */  addiu     $t0, $t0, %lo(D_80270640)
 /* 13F25C 8024BF1C 02088021 */  addu      $s0, $s0, $t0
 /* 13F260 8024BF20 8E040000 */  lw        $a0, ($s0)
-/* 13F264 8024BF24 0C051308 */  jal       func_80144C20
+/* 13F264 8024BF24 0C051308 */  jal       set_hud_element_scale
 /* 13F268 8024BF28 3C053F00 */   lui      $a1, 0x3f00
 /* 13F26C 8024BF2C 03D63021 */  addu      $a2, $fp, $s6
 /* 13F270 8024BF30 8FA80054 */  lw        $t0, 0x54($sp)

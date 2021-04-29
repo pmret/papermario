@@ -31,7 +31,7 @@ glabel func_802189DC_447E1C
 /* 447E84 80218A44 0C051261 */  jal       set_icon_render_pos
 /* 447E88 80218A48 0220202D */   daddu    $a0, $s1, $zero
 /* 447E8C 80218A4C 3C053FC0 */  lui       $a1, 0x3fc0
-/* 447E90 80218A50 0C051308 */  jal       func_80144C20
+/* 447E90 80218A50 0C051308 */  jal       set_hud_element_scale
 /* 447E94 80218A54 0220202D */   daddu    $a0, $s1, $zero
 /* 447E98 80218A58 0220202D */  daddu     $a0, $s1, $zero
 /* 447E9C 80218A5C 3C050020 */  lui       $a1, 0x20

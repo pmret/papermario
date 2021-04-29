@@ -3171,7 +3171,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
     test2 = var = temp_v0;
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
-        ((gGameStatusPtr->unk_75 != 0) && var)) {
+        ((gGameStatusPtr->debugQuizmo != 0) && var)) {
         script->varTable[0] = 1;
     } else {
         kill_enemy(enemy);

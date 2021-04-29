@@ -253,7 +253,7 @@ glabel L802A93F4_42CAE4
 /* 42CC9C 802A95AC 0C0511FF */  jal       set_menu_icon_script
 /* 42CCA0 802A95B0 0200202D */   daddu    $a0, $s0, $zero
 /* 42CCA4 802A95B4 3C053F00 */  lui       $a1, 0x3f00
-/* 42CCA8 802A95B8 0C051308 */  jal       func_80144C20
+/* 42CCA8 802A95B8 0C051308 */  jal       set_hud_element_scale
 /* 42CCAC 802A95BC 0200202D */   daddu    $a0, $s0, $zero
 /* 42CCB0 802A95C0 0200202D */  daddu     $a0, $s0, $zero
 /* 42CCB4 802A95C4 8222005D */  lb        $v0, 0x5d($s1)

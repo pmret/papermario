@@ -2,8 +2,8 @@
 
 #define NAMESPACE b_area_nok
 
-INCLUDE_ASM(s32, "battle/area_nok/48D700", func_80218560_48D700);
-
-INCLUDE_ASM(s32, "battle/area_nok/48D700", func_802186EC_48D88C);
+#define NAMESPACE dup2_b_area_nok
+#include "common/BattleAreaAngleStuff.inc.c"
+#define NAMESPACE b_area_nok
 
 #include "common/UnkBattleFunc1.inc.c"

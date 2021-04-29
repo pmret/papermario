@@ -23,9 +23,6 @@ s32 D_80283F58_7E4DD8[] = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C8
 
 s32 D_80284034_7E4EB4[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-static s32 D_80286520;
-static s32 D_80286524;
-
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
@@ -148,26 +145,28 @@ ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// BSS nop issue
-#ifdef NON_MATCHING
 ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
+    static ScriptInstance* D_80286520;
+    static s32 D_80286524;
+
     Shop* shop = gGameStatusPtr->mapShop;
-    s32 var1 = get_variable(script, *script->ptrReadPos);
+    s32 currentItemSlot = get_variable(script, *script->ptrReadPos);
 
     if (!(shop->flags & 8)) {
-        shop->unk_08 = var1;
+        shop->currentItemSlot = currentItemSlot;
         shop->flags |= 1;
         func_800E98EC();
         shop->unk_358 = 5;
 
         if (gGameStatusPtr->pressedButtons & 0x8000) {
+
             ScriptInstance* childScript;
 
             disable_player_input();
             disable_player_static_collisions();
 
             childScript = start_script(&D_80284034_7E4EB4, 1, 0);
-            childScript->varTable[0] = var1;
+            childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
             shop->flags |= 8;
@@ -184,15 +183,88 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
     enable_player_input();
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", func_80280410);
-#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopPurchaseDialog, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
+//dumb stuff
+#ifdef NON_MATCHING
+extern s32 D_8008A680[337][2];
 
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_update_item_select_popup);
+void shop_open_item_select_popup(s32 mode) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    PopupMenu* menu = &shop->itemSelectMenu;
+    s32 numItemSlots;
+    s32 popupType;
+    s32 i;
+    s32 numEntries;
+
+    switch (mode) {
+        case 0:
+            numItemSlots = 10;
+            popupType = 5;
+            break;
+        case 1:
+            numItemSlots = 10;
+            popupType = 6;
+            break;
+        default:
+            numItemSlots = 32;
+            popupType = 7;
+    }
+
+    numEntries = 0;
+
+    for (i = 0; i < numItemSlots; i++) {
+        s32 itemID;
+
+        if (mode >= 0 && mode < 2) {
+            itemID = gPlayerData.invItems[i];
+        } else {
+            itemID = gPlayerData.storedItems[i];
+        }
+
+        if (itemID != 0) {
+            menu->ptrIcon[i] = D_8008A680[gItemTable[itemID].iconID][0];
+            menu->userIndex[i] = i;
+            menu->enabled[i] = TRUE;
+            menu->nameString[i] = gItemTable[itemID].nameString;
+            menu->descString[i] = gItemTable[itemID].itemString;
+            menu->value[i] = shop_get_sell_price(itemID);
+            numEntries++;
+        }
+    }
+
+    menu->popupType = popupType;
+    menu->numEntries = numEntries;
+    menu->initialPos = 0;
+    func_800F4FC4(menu);
+    func_800E9894();
+    func_800E98EC();
+    open_status_menu_short();
+}
+#else
+INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_open_item_select_popup);
+#endif
+
+s32 shop_update_item_select_popup(s32* selectedIndex) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    PopupMenu* menu = &shop->itemSelectMenu;
+    s16 menuResult = shop->itemSelectMenu.result;
+
+    if (menuResult == 0) {
+        return 0;
+    }
+
+    func_800F13B0();
+
+    if (menuResult == 0xFF) {
+        *selectedIndex = -1;
+    } else {
+        *selectedIndex = menu->userIndex[menuResult - 1];
+    }
+
+    return 1;
+}
 
 void shop_close_item_select_popup(void) {
     func_800F1538();
@@ -201,30 +273,31 @@ void shop_close_item_select_popup(void) {
     close_status_menu();
 }
 
-// Ordering issue
-#ifdef NON_MATCHING
 s32 shop_get_sell_price(s32 itemID) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 numItems = shop->numSpecialPrices;
+    StaticPriceItem* items = shop->staticPriceList;
     s32 i;
 
+    if (shop) {
+        i = 0;
+    } // TODO fake match
+
+
     for (i = 0; i < numItems; i++) {
-        if (shop->staticPriceList[i].itemID == itemID) {
-            return shop->staticPriceList[i].sellPrice;
+        if (items[i].itemID == itemID) {
+            return items[i].sellPrice;
         }
     }
 
     return gItemTable[itemID].sellValue;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_get_sell_price);
-#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", ShowShopOwnerDialog, ScriptInstance* script, s32 isInitialCall);
 
 void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* siItem = &shop->staticInventory[shop->unk_08];
+    StaticInventoryItem* siItem = &shop->staticInventory[shop->currentItemSlot];
     StaticItem* item = &gItemTable[siItem->unk_00];
 
     draw_msg(item->nameString, posX + 60 - (get_string_width(item->nameString, 0) >> 1), posY + 6, 255, 0, 0);
@@ -232,12 +305,84 @@ void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
-    StaticInventoryItem* item = &shop->staticInventory[shop->unk_08];
+    StaticInventoryItem* item = &shop->staticInventory[shop->currentItemSlot];
 
     draw_msg(item->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
 
+// Problems with the struct iteration
+#ifdef NON_MATCHING
+void shop_draw_items(void) {
+    Shop* shop = gGameStatusPtr->mapShop;
+    StaticInventoryItem* staticItems;
+    Camera* camera;
+    s32 i;
+    s32 xTemp;
+    s32 yTemp;
+    s32 xOffset;
+    f32 x, y, z, s;
+    f32 inX, inY, inZ;
+    ShopItemEntity* shopItemEntities;
+
+    if (shop->flags & 1) {
+        set_window_update(10, basic_window_update);
+        set_window_update(11, basic_window_update);
+    } else {
+        set_window_update(10, basic_hidden_window_update);
+        set_window_update(11, basic_hidden_window_update);
+    }
+
+    if (shop->flags & 1) {
+        camera = &gCameras[gCurrentCameraID];
+        staticItems = shop->staticInventory;
+        shopItemEntities = gGameStatusPtr->shopItemEntities;
+
+        for (i = 0; i < shop->numItems; i++) {
+            inX = shopItemEntities[i].pos.x;
+            inY = shopItemEntities[i].pos.y + 30.0f;
+            inZ = shopItemEntities[i].pos.z;
+
+            transform_point(camera->perspectiveMatrix, inX, inY, inZ, 1.0f, &x, &y, &z, &s);
+
+            s = 1.0f / s;
+
+            x *= s;
+            y *= -s;
+            z = (z * s + 1.0f) * 0.5;
+
+            if (z > 0.0f && z < 1.0f) {
+                xTemp = (((x * camera->viewportW) + camera->viewportW) * 0.5) + camera->viewportStartX;
+                yTemp = (((y * camera->viewportH) + camera->viewportH) * 0.5) + camera->viewportStartY;
+
+                if (staticItems[i].price < 100) {
+                    xOffset = -4;
+                } else {
+                    xOffset = 0;
+                }
+
+                if (!(get_item_entity(shopItemEntities[i].index)->flags & 0x40)) {
+                    draw_number(staticItems[i].price, xTemp + xOffset, yTemp, 1, 0, 255, 0);
+                }
+
+                if (i == shop->currentItemSlot) {
+                    set_icon_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
+                    set_hud_element_scale(shop->costIconID, 0.7f);
+                    draw_icon_0(shop->costIconID);
+                }
+            }
+        }
+    }
+
+    if (shop->unk_358 > 0) {
+        shop->unk_358--;
+    } else {
+        shop->flags &= ~0x1;
+        func_800E9900();
+    }
+}
+#else
 INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_draw_items);
+#endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, ScriptInstance* script, s32 isInitialCall);
 

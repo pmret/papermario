@@ -2865,9 +2865,9 @@ segments:
     - [0x4318D0, c]
     - [0x431B80, .data, battles]
     - [0x431FB0, .data, goomba]
-    - [0x433970, bin]
+    - [0x433970, data]
     - [0x4398A0, .rodata, battles]
-    - [0x439984, bin] # TODO change
+    - [0x439984, rodata] # TODO change
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -2880,7 +2880,7 @@ segments:
     - [0x43AA50, c]
     - [0x43ACC0, c]
     - [0x43AF30, c]
-    - [0x43B1E0, bin]
+    - [0x43B1E0, data]
   - dir: battle/area_kmr_part_3
     type: code
     start: 0x447440
@@ -2897,7 +2897,7 @@ segments:
     - [0x448B70, c]
     - [0x448E20, c]
     - [0x448E80, c]
-    - [0x4495F0, bin]
+    - [0x4495F0, data]
   - dir: battle/area_mac
     type: code
     start: 0x464490
@@ -2907,7 +2907,7 @@ segments:
     - [0x464490, c]
     - [0x464560, c]
     - [0x465D90, c]
-    - [0x4661E0, bin]
+    - [0x4661E0, data]
   - dir: battle/area_hos
     type: code
     start: 0x47F0B0
@@ -2917,7 +2917,7 @@ segments:
     - [0x47F0B0, c]
     - [0x47F0D0, c]
     - [0x47F570, c]
-    - [0x4800C0, bin]
+    - [0x4800C0, data]
   - dir: battle/area_nok
     type: code
     start: 0x48D1A0
@@ -2929,7 +2929,7 @@ segments:
     - [0x48DA50, c]
     - [0x48DBC0, c]
     - [0x48DCF0, c]
-    - [0x48DFC0, bin]
+    - [0x48DFC0, data]
   - dir: battle/area_trd_part_1
     type: code
     start: 0x4A10A0
@@ -2939,7 +2939,7 @@ segments:
     - [0x4A10A0, c]
     - [0x4A1190, c]
     - [0x4A12C0, c]
-    - [0x4A1530, bin]
+    - [0x4A1530, data]
   - dir: battle/area_trd_part_2
     type: code
     start: 0x4B11F0
@@ -2952,7 +2952,7 @@ segments:
     - [0x4B2550, c]
     - [0x4B2D10, c]
     - [0x4B34D0, c]
-    - [0x4B3740, bin]
+    - [0x4B3740, data]
   - dir: battle/area_trd_part_3
     type: code
     start: 0x4CF1B0
@@ -2960,7 +2960,7 @@ segments:
     overlay: True
     subsegments:
     - [0x4CF1B0, c]
-    - [0x4CF3D0, bin]
+    - [0x4CF3D0, data]
   - dir: battle/area_iwa
     type: code
     start: 0x4D01F0
@@ -2972,7 +2972,7 @@ segments:
     - [0x4D0310, c]
     - [0x4D0360, c]
     - [0x4D03B0, c]
-    - [0x4D0400, bin]
+    - [0x4D0400, data]
   - dir: battle/area_sbk
     type: code
     start: 0x4DA5E0
@@ -2981,7 +2981,7 @@ segments:
     subsegments:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
-    - [0x4DA860, bin]
+    - [0x4DA860, data]
     - [0x4E25E0, rodata]
   - dir: battle/area_isk_part_1
     type: code
@@ -2995,7 +2995,7 @@ segments:
     - [0x4E29B0, c]
     - [0x4E30C0, c]
     - [0x4E3190, c]
-    - [0x4E3350, bin]
+    - [0x4E3350, data]
   - dir: battle/area_isk_part_2
     type: code
     start: 0x4EF4A0
@@ -3006,7 +3006,7 @@ segments:
     - [0x4EFCF0, c]
     - [0x4EFDC0, c]
     - [0x4EFE90, c]
-    - [0x4EFFE0, bin]
+    - [0x4EFFE0, data]
   - dir: battle/area_mim
     type: code
     start: 0x4F7BE0
@@ -3016,7 +3016,7 @@ segments:
     - [0x4F7BE0, c]
     - [0x4F7D50, c]
     - [0x4F7F40, c]
-    - [0x4F7FA0, bin]
+    - [0x4F7FA0, data]
   - dir: battle/area_arn
     type: code
     start: 0x4FEA50
@@ -3027,14 +3027,14 @@ segments:
     - [0x4FED30, c]
     - [0x4FF010, c]
     - [0x4FF0D0, c]
-    - [0x4FF1C0, bin]
+    - [0x4FF1C0, data]
   - dir: battle/area_dgb
     type: code
     start: 0x50F020
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [0x50F020, bin]
+    - [0x50F020, data]
   - dir: battle/area_omo
     type: code
     start: 0x5125D0
@@ -3054,7 +3054,7 @@ segments:
     - [0x5134B0, c]
     - [0x513580, c]
     - [0x513790, c]
-    - [0x5137E0, bin]
+    - [0x5137E0, data]
   - dir: battle/area_omo2
     type: code
     start: 0x52B6A0
@@ -3063,7 +3063,7 @@ segments:
     subsegments:
     - [0x52B6A0, c]
     - [0x52B7C0, c]
-    - [0x52B9D0, bin]
+    - [0x52B9D0, data]
   - dir: battle/area_omo2_1
     type: code
     start: 0x543570
@@ -3071,7 +3071,7 @@ segments:
     overlay: True
     subsegments:
     - [0x543570, c]
-    - [0x543620, bin]
+    - [0x543620, data]
   - dir: battle/area_omo2_2
     type: code
     start: 0x5483E0
@@ -3079,7 +3079,7 @@ segments:
     overlay: True
     subsegments:
     - [0x5483E0, c]
-    - [0x548500, bin]
+    - [0x548500, data]
   - dir: battle/area_omo2_3
     type: code
     start: 0x54CC70
@@ -3087,28 +3087,28 @@ segments:
     overlay: True
     subsegments:
     - [0x54CC70, c]
-    - [0x54CCA0, bin]
+    - [0x54CCA0, data]
   - dir: battle/area_omo2_4
     type: code
     start: 0x552440
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552440, bin]
+    - [0x552440, data]
   - dir: battle/area_omo2_5
     type: code
     start: 0x552BB0
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x552BB0, bin]
+    - [0x552BB0, data]
   - dir: battle/area_omo2_6
     type: code
     start: 0x556C90
     vram: 0x80231000
     overlay: True
     subsegments:
-    - [0x556C90, bin]
+    - [0x556C90, data]
   - dir: battle/area_omo3
     type: code
     start: 0x5573E0
@@ -3121,7 +3121,7 @@ segments:
     - [0x557EC0, c]
     - [0x557F90, c]
     - [0x5580C0, c]
-    - [0x558190, bin]
+    - [0x558190, data]
   - dir: battle/area_kgr
     type: code
     start: 0x56E2A0
@@ -3130,7 +3130,7 @@ segments:
     subsegments:
     - [0x56E2A0, c]
     - [0x56E800, c]
-    - [0x56EC50, bin]
+    - [0x56EC50, data]
   - dir: battle/area_jan
     type: code
     start: 0x573920
@@ -3142,7 +3142,7 @@ segments:
     - [0x573AC0, c]
     - [0x573C30, c]
     - [0x573E10, c]
-    - [0x573EE0, bin]
+    - [0x573EE0, data]
   - dir: battle/area_jan2
     type: code
     start: 0x584940
@@ -3151,7 +3151,7 @@ segments:
     subsegments:
     - [0x584940, c]
     - [0x584B90, c]
-    - [0x585000, bin]
+    - [0x585000, data]
   - dir: battle/area_kzn
     type: code
     start: 0x58C2F0
@@ -3163,7 +3163,7 @@ segments:
     - [0x58C740, c]
     - [0x58C920, c]
     - [0x58CC90, c]
-    - [0x58D100, bin]
+    - [0x58D100, data]
   - dir: battle/area_kzn2
     type: code
     start: 0x59E6E0
@@ -3173,7 +3173,7 @@ segments:
     - [0x59E6E0, c]
     - [0x59F420, c]
     - [0x59F4D0, c]
-    - [0x59F530, bin]
+    - [0x59F530, data]
   - dir: battle/area_flo
     type: code
     start: 0x5B14B0
@@ -3186,7 +3186,7 @@ segments:
     - [0x5B1D80, c]
     - [0x5B20F0, c]
     - [0x5B28D0, c]
-    - [0x5B3370, bin]
+    - [0x5B3370, data]
   - dir: battle/area_flo2
     type: code
     start: 0x5CE690
@@ -3195,7 +3195,7 @@ segments:
     subsegments:
     - [0x5CE690, c]
     - [0x5CF2D0, c]
-    - [0x5CFF00, bin]
+    - [0x5CFF00, data]
   - dir: battle/area_tik
     type: code
     start: 0x5EC490
@@ -3211,7 +3211,7 @@ segments:
     - [0x5ED4B0, c]
     - [0x5ED950, c]
     - [0x5EDDF0, c]
-    - [0x5EE550, bin]
+    - [0x5EE550, data]
   - dir: battle/area_tik2
     type: code
     start: 0x608AB0
@@ -3223,7 +3223,7 @@ segments:
     - [0x609B30, c]
     - [0x609FD0, c]
     - [0x60A470, c]
-    - [0x60ABD0, bin]
+    - [0x60ABD0, data]
   - dir: battle/area_tik3
     type: code
     start: 0x6186F0
@@ -3236,7 +3236,7 @@ segments:
     - [0x618EA0, c]
     - [0x619340, c]
     - [0x6197E0, c]
-    - [0x619F40, bin]
+    - [0x619F40, data]
   - dir: battle/area_sam
     type: code
     start: 0x623BA0
@@ -3246,7 +3246,7 @@ segments:
     - [0x623BA0, c]
     - [0x6253E0, c]
     - [0x625750, c]
-    - [0x626A30, bin]
+    - [0x626A30, data]
   - dir: battle/area_sam2
     type: code
     start: 0x63D1E0
@@ -3257,7 +3257,7 @@ segments:
     - [0x63D710, c]
     - [0x63D9F0, c]
     - [0x63DD60, c]
-    - [0x63F040, bin]
+    - [0x63F040, data]
   - dir: battle/area_pra
     type: code
     start: 0x648E10
@@ -3270,7 +3270,7 @@ segments:
     - [0x6497F0, c]
     - [0x649B60, c]
     - [0x649ED0, c]
-    - [0x64A340, bin]
+    - [0x64A340, data]
   - dir: battle/area_pra2
     type: code
     start: 0x660750
@@ -3280,7 +3280,7 @@ segments:
     - [0x660750, c]
     - [0x660D20, c]
     - [0x660E10, c]
-    - [0x661150, bin]
+    - [0x661150, data]
   - dir: battle/area_pra3
     type: code
     start: 0x669D80
@@ -3290,7 +3290,7 @@ segments:
     - [0x669D80, c]
     - [0x66B5B0, c]
     - [0x66B920, c]
-    - [0x66BC90, bin]
+    - [0x66BC90, data]
   - dir: battle/area_kpa
     type: code
     start: 0x684A30
@@ -3301,7 +3301,7 @@ segments:
     - [0x684B00, c]
     - [0x684C30, c]
     - [0x685130, c]
-    - [0x685260, bin]
+    - [0x685260, data]
   - dir: battle/area_kpa2
     type: code
     start: 0x69F200
@@ -3311,7 +3311,7 @@ segments:
     - [0x69F200, c]
     - [0x69F320, c]
     - [0x6A2B50, c]
-    - [0x6A44E0, bin]
+    - [0x6A44E0, data]
   - dir: battle/area_kpa3
     type: code
     start: 0x6BBB90
@@ -3320,7 +3320,7 @@ segments:
     subsegments:
     - [0x6BBB90, c]
     - [0x6BBC60, c]
-    - [0x6BD250, bin]
+    - [0x6BD250, data]
   - dir: battle/area_kpa4
     type: code
     start: 0x6CC070
@@ -3329,7 +3329,7 @@ segments:
     subsegments:
     - [0x6CC070, c]
     - [0x6CC1C0, c]
-    - [0x6CC6C0, bin]
+    - [0x6CC6C0, data]
   - dir: battle/area_kkj
     type: code
     start: 0x6DBDA0
@@ -3338,7 +3338,7 @@ segments:
     subsegments:
     - [0x6DBDA0, c]
     - [0x6DC2F0, c]
-    - [0x6DC340, bin]
+    - [0x6DC340, data]
   - dir: battle/area_dig
     type: code
     start: 0x6DDDC0
@@ -3355,7 +3355,7 @@ segments:
     - [0x6DE3F0, c]
     - [0x6DE4A0, c]
     - [0x6DE650, c]
-    - [0x6DE670, bin]
+    - [0x6DE670, data]
   - name: battle_partner_goompa
     dir: battle/partner
     type: code

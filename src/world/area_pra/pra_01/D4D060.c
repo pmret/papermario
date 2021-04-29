@@ -2,7 +2,7 @@
 
 #include "world/common/reflection.inc.c"
 
-INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80240F20_D4DF60);
+#include "common/UnkFogFunc.inc.c"
 
 ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
     gOverrideFlags &= ~0x80;
