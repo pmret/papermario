@@ -15,9 +15,9 @@ f32 D_80074274[] = {
 };
 
 u8 D_800743E0[] = {
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-    'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
+    'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
@@ -348,16 +348,12 @@ f32 get_clamped_angle_diff(f32 a, f32 b) {
 }
 
 f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
-    f32 xDiff;
-    f32 zDiff;
-    f32 absXDiff;
-    f32 absZDiff;
+    f32 xDiff = endX - startX;
+    f32 zDiff = endZ - startZ;
+    f32 absXDiff = fabsf(xDiff);
+    f32 absZDiff = fabsf(zDiff);
     f32 temp_f20;
 
-    xDiff = endX - startX;
-    zDiff = endZ - startZ;
-    absXDiff = fabsf(xDiff);
-    absZDiff = fabsf(zDiff);
     if (absZDiff < absXDiff) {
         temp_f20 = (absZDiff / absXDiff) * 45.0f;
         temp_f20 *= D_80074414[round(2.0f * temp_f20)];
@@ -380,7 +376,6 @@ f32 atan2(f32 startX, f32 startZ, f32 endX, f32 endZ) {
         temp_f20 = (absXDiff / absZDiff) * 45.0f;
         temp_f20 *= D_80074414[round(2.0f * temp_f20)];
         if (zDiff >= 0.0f) {
-            temp_f20 = temp_f20;
             if (xDiff >= 0.0f) {
                 return 180.0f - temp_f20;
             } else {
@@ -488,9 +483,9 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
         case 3:
             return start + (QUART(elapsed) * (end - start) / QUART(duration));
         case 7:
-            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * 3.141592 * 4.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
         case 8:
-            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * 3.141592 * 4.0) / 15.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
         case 4:
             val1s = duration - elapsed;
             return (start + (end - start)) - ((SQ(val1s) * (end - start))) / SQ(duration);
@@ -501,13 +496,13 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
             val1s = duration - elapsed;
             return (start + (end - start)) - ((QUART(val1s) * (end - start))) / QUART(duration);
         case 9:
-            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * 3.141592 * 4.0) / 40.0) * (duration - elapsed) * (duration - elapsed) / SQ((f32)duration);
+            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) * (duration - elapsed) / SQ((f32)duration);
             if (temp_f4 < 0.0f) {
                 temp_f4 = -temp_f4;
             }
             return end - ((end - start) * temp_f4);
         case 10:
-            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * 3.141592) / (f32)duration)) * 0.5);
+            return start + ((end - start) * (1.0 - cos_rad(((f32)elapsed * PI_D) / (f32)duration)) * 0.5);
         case 11:
             return start + ((end - start) * sin_rad(((f32)elapsed * 1.570796) / (f32)duration));
         case 12:
@@ -517,11 +512,11 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
     return 0.0f;
 }
 
-void func_8002A904(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7) {
+void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 arg4, u16 arg5, u16 arg6, u16 arg7) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_80074580);
 
-    if (arg3 == 0xFF) {
+    if (a == 0xFF) {
         gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
     } else {
@@ -529,7 +524,7 @@ void func_8002A904(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 a
         gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, arg0, arg1, arg2, arg3);
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, a);
     gDPFillRectangle(gMasterGfxPos++, arg4, arg5, arg6, arg7);
 
     gDPPipeSync(gMasterGfxPos++);
