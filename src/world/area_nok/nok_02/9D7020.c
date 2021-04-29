@@ -4,7 +4,7 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 
@@ -15,23 +15,19 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240034_9D7054);
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 /*
 ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_802453D0_9DC3F0) == NULL) {
+        N(D_802453D0_9DC3F0) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_802453D0_9DC3F0)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_802453D0_9DC3F0)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_802453D0_9DC3F0));
+        N(D_802453D0_9DC3F0) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -53,18 +49,14 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
 /*
 ApiStatus N(func_80240624_9D7644)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80245434_9DC454) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80245434_9DC454)) {
+        N(D_80245434_9DC454) = FALSE;
+        set_variable(script, *args, N(D_80245438_9DC458));
         return ApiStatus_DONE2;
     }
 
@@ -77,10 +69,30 @@ INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
 ApiStatus N(func_80240678_9D7698)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_80245438_9DC458) = get_variable(script, *args);
+    N(D_80245434_9DC454) = TRUE;
     return ApiStatus_DONE2;
 }
 */
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802406B0_9D76D0);
+/*
+ApiStatus N(func_802406B0_9D76D0)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
+        }
+        N(D_80244A20)[i] = 0;
+    } else {
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/

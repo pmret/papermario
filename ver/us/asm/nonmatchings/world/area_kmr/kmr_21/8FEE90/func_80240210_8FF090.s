@@ -15,8 +15,8 @@ glabel func_80240210_8FF090
 /* 8FF0B8 80240238 0040882D */   daddu    $s1, $v0, $zero
 /* 8FF0BC 8024023C 0220202D */  daddu     $a0, $s1, $zero
 /* 8FF0C0 80240240 0040282D */  daddu     $a1, $v0, $zero
-/* 8FF0C4 80240244 3C108024 */  lui       $s0, %hi(func_802407F0_87A3D0)
-/* 8FF0C8 80240248 261007F0 */  addiu     $s0, $s0, %lo(func_802407F0_87A3D0)
+/* 8FF0C4 80240244 3C108024 */  lui       $s0, %hi(tik_07_UnkFunc39)
+/* 8FF0C8 80240248 261007F0 */  addiu     $s0, $s0, %lo(tik_07_UnkFunc39)
 /* 8FF0CC 8024024C 0C01BB7C */  jal       decode_yay0
 /* 8FF0D0 80240250 AE050000 */   sw       $a1, ($s0)
 /* 8FF0D4 80240254 0C00AB1E */  jal       general_heap_free

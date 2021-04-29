@@ -4,7 +4,7 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240034_A06F34);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 
@@ -15,6 +15,28 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240034_A06F34);
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_8024035C_A0725C);
+/*
+void N(func_8024035C_A0725C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    if ((npc->duration <= 0) || (--npc->duration <= 0)) {
+        if (npc->turnAroundYawAdjustment == 0) {
+            npc->currentAnim = enemy->animList[9];
+            npc->moveSpeed = aiSettings->chaseSpeed;
+            if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
+                npc->collisionHeight = enemy->varTable[6] / 2;
+            }
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            if (npc->duration < enemy->varTable[3]) {
+                npc->duration = enemy->varTable[3];
+            }
+            enemy->varTable[4] = npc->duration;
+            script->functionTemp[0].s = 14;
+        }
+    }
+}
+*/
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
@@ -63,7 +85,7 @@ void N(func_80241708_A08608)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_80243D5C_A0AC5C)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
@@ -94,7 +116,7 @@ ApiStatus N(func_80241DC0_A08CC0)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {

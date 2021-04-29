@@ -3,23 +3,19 @@
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
 /*
 ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80241900_A58DB0) == NULL) {
+        N(D_80241900_A58DB0) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80241900_A58DB0)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80241900_A58DB0)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80241900_A58DB0));
+        N(D_80241900_A58DB0) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -35,7 +31,12 @@ ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetEntityPosition.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240710_A57BC0);
+ApiStatus N(func_80240710_A57BC0)(ScriptInstance *script, s32 isInitialCall) {
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+
+    set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_8024073C_A57BEC);
 

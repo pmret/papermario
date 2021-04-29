@@ -517,7 +517,7 @@ ApiStatus func_800458CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80045900(ScriptInstance* script) {
+ApiStatus func_80045900(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var0 = get_variable(script, *script->ptrReadPos);

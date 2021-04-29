@@ -4,7 +4,7 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240034_E0E7D4);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 
@@ -106,7 +106,7 @@ ApiStatus N(func_80240E74_E0F614)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
@@ -126,7 +126,7 @@ ApiStatus N(func_80240E74_E0F614)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;

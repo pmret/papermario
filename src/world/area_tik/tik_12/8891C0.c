@@ -5,23 +5,19 @@ INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_802405F0_8891C0);
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240960_889530);
 /*
 ApiStatus N(func_80240960_889530)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80243C40_88C810) == NULL) {
+        N(D_80243C40_88C810) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80243C40_88C810)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80243C40_88C810)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80243C40_88C810));
+        N(D_80243C40_88C810) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -47,28 +43,6 @@ ApiStatus N(func_80240C58_889828)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc18.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240CF0_8898C0);
-
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240D3C_88990C);
-/*
-ApiStatus N(func_80240D3C_88990C)(ScriptInstance *script, s32 isInitialCall) {
-    PlayerData* playerData = &gPlayerData;
-    s32 i;
-    s16 var = script->varTable[12] >= 0;
-
-    script->varTable[0] = -1;
-
-    for (i = 1; i < 12; i++) {
-        if (playerData->partners[i].enabled && N(func_802424A4_C389D4)(i, var) != -1) {
-            script->varTable[0] = 1;
-            break;
-        }
-    }
-
-    return ApiStatus_DONE2;
-}
-*/
-
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240DE8_8899B8);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241038_889C08);
@@ -83,16 +57,7 @@ ApiStatus N(func_80241038_889C08)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_8024112C_889CFC);
-/*
-ApiStatus N(func_8024112C_889CFC)(ScriptInstance *script, s32 isInitialCall) {
-    Effect* effect = get_variable(script, *script->ptrReadPos);
-
-    effect->flags |= 0x10;
-
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/UnkFunc39.inc.c"
 
 #include "world/common/UnkFunc21.inc.c"
 
@@ -106,15 +71,15 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
     f32 sinTheta, cosTheta;
     s32 i;
     f32 var;
-    UserData* userDataPtr;
-    UserData* scriptPtr;
+    N(UserData)* userDataPtr;
+    N(UserData)* scriptPtr;
     f32 save, save2;
 
     sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
-        script->userData = (UserData*)general_heap_malloc(0x68);
-        scriptPtr = (UserData*)script->userData;
+        script->userData = (N(UserData)*)general_heap_malloc(0x68);
+        scriptPtr = (N(UserData)*)script->userData;
 
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
@@ -137,7 +102,7 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
         userDataPtr = scriptPtr;
         for (i = 0, save = 50.0f; i < 3; i++) {
             var = 0;
-            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, *(N(D_80243D88_C3A2B8) + i)); //*(dataPtr++));
+            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, N(D_80243D04_88C8D4)[i]);
             userDataPtr->unk_38[i] = cosTheta * var;
             userDataPtr->unk_50[i] = sinTheta * var;
             userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
@@ -146,7 +111,7 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
         }
     }
 
-    scriptPtr = (UserData*)script->userData;
+    scriptPtr = (N(UserData)*)script->userData;
     switch (scriptPtr->unk_00) {
         case 0:
             save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
@@ -154,7 +119,7 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243D04_88C8D4)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -172,7 +137,7 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
             for (i = 0; i < 3; i++) {
                 scriptPtr->unk_20[i] = save2;
                 var = save2;
-                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, *(N(D_80243D88_C3A2B8) + i));
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243D04_88C8D4)[i]);
                 scriptPtr->unk_14[i] = cosTheta * var;
                 scriptPtr->unk_2C[i] = sinTheta * var;
             }
@@ -232,4 +197,4 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241924_88A4F4);
+#include "world/common/UnkFunc40.inc.c"

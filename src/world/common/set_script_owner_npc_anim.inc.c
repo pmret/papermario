@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(set_script_owner_npc_anim)(ScriptInstance* script) {
+void N(set_script_owner_npc_anim)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

@@ -123,7 +123,7 @@ glabel L80241EFC_C8209C
 glabel L80241F14_C820B4
 /* C820B4 80241F14 0280202D */  daddu     $a0, $s4, $zero
 /* C820B8 80241F18 0200282D */  daddu     $a1, $s0, $zero
-/* C820BC 80241F1C 0C090742 */  jal       func_80241D08_C81EA8
+/* C820BC 80241F1C 0C090742 */  jal       kzn_11_UnkFunc45
 /* C820C0 80241F20 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F24_C820C4
 /* C820C4 80241F24 0000102D */  daddu     $v0, $zero, $zero

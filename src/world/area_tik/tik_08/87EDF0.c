@@ -4,7 +4,7 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_08/87EDF0", func_80240034_87EE24);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 

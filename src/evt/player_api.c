@@ -362,7 +362,7 @@ ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D2884);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2884, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus DisablePulseStone(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;

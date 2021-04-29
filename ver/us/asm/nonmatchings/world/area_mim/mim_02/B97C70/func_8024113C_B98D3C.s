@@ -13,8 +13,8 @@ glabel func_8024113C_B98D3C
 /* B98D5C 8024115C 8C620000 */  lw        $v0, ($v1)
 /* B98D60 80241160 5040000A */  beql      $v0, $zero, .L8024118C
 /* B98D64 80241164 00041080 */   sll      $v0, $a0, 2
-/* B98D68 80241168 3C058024 */  lui       $a1, %hi(dro_01_foliage_setup_shear_mtx)
-/* B98D6C 8024116C 24A53880 */  addiu     $a1, $a1, %lo(dro_01_foliage_setup_shear_mtx)
+/* B98D68 80241168 3C058024 */  lui       $a1, %hi(func_80243880_95EA80)
+/* B98D6C 8024116C 24A53880 */  addiu     $a1, $a1, %lo(func_80243880_95EA80)
 .L80241170:
 /* B98D70 80241170 24630004 */  addiu     $v1, $v1, 4
 /* B98D74 80241174 24840001 */  addiu     $a0, $a0, 1
@@ -24,14 +24,14 @@ glabel func_8024113C_B98D3C
 /* B98D84 80241184 24A50004 */   addiu    $a1, $a1, 4
 /* B98D88 80241188 00041080 */  sll       $v0, $a0, 2
 .L8024118C:
-/* B98D8C 8024118C 3C018024 */  lui       $at, %hi(dro_01_foliage_setup_shear_mtx)
+/* B98D8C 8024118C 3C018024 */  lui       $at, %hi(func_80243880_95EA80)
 /* B98D90 80241190 00220821 */  addu      $at, $at, $v0
-/* B98D94 80241194 AC203880 */  sw        $zero, %lo(dro_01_foliage_setup_shear_mtx)($at)
+/* B98D94 80241194 AC203880 */  sw        $zero, %lo(func_80243880_95EA80)($at)
 /* B98D98 80241198 08090472 */  j         .L802411C8
 /* B98D9C 8024119C 00000000 */   nop
 .L802411A0:
-/* B98DA0 802411A0 3C038024 */  lui       $v1, %hi(dro_01_foliage_setup_shear_mtx)
-/* B98DA4 802411A4 24633880 */  addiu     $v1, $v1, %lo(dro_01_foliage_setup_shear_mtx)
+/* B98DA0 802411A0 3C038024 */  lui       $v1, %hi(func_80243880_95EA80)
+/* B98DA4 802411A4 24633880 */  addiu     $v1, $v1, %lo(func_80243880_95EA80)
 /* B98DA8 802411A8 0060282D */  daddu     $a1, $v1, $zero
 .L802411AC:
 /* B98DAC 802411AC 24820010 */  addiu     $v0, $a0, 0x10

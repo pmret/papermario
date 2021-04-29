@@ -2,14 +2,12 @@
 #include "map.h"
 
 void N(UnkFunc8)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    PlayerStatus** playerStatus;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
-        playerStatus = &gPlayerStatusPtr;
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         script->functionTemp[0].s = 12;
     } else {
         npc->duration--;

@@ -123,9 +123,7 @@ static s32 N(pad_868)[] = {
     0x00000000, 0x00000000,
 };
 
-s32 N(D_80240870_C4E760) = {
-    0x00000000,
-};
+s32** N(D_80240870_C4E760) = NULL;
 
 Script N(80240874) = SCRIPT({
     group 0;
@@ -171,23 +169,19 @@ Script N(makeEntities) = SCRIPT({
 });
 
 ApiStatus N(func_80240000_C4DEF0)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80240870_C4E760);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80240870_C4E760) == NULL) {
+        N(D_80240870_C4E760) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80240870_C4E760)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80240870_C4E760)[i];
         }
-        ptr = &N(D_80240870_C4E760);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80240870_C4E760));
+        N(D_80240870_C4E760) = NULL;
     }
     return ApiStatus_DONE2;
 }

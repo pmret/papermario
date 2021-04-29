@@ -4,7 +4,7 @@
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240034_95B234);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 
@@ -12,6 +12,6 @@ INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240034_95B234);
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_802402E0_95B4E0);
+#include "world/common/UnkFunc27.inc.c"
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95B200", func_80240404_95B604);
+#include "world/common/UnkFunc26.inc.c"

@@ -176,7 +176,7 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/fa4c0_len_3bf0", func_802D663C);
+INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D663C, ScriptInstance* script, s32 isInitialCall);
 
 // TODO: probably a split here (sound_api, item_api)
 

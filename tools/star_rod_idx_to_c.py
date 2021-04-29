@@ -22,6 +22,37 @@ INCLUDES_NEEDED["include"] = []
 INCLUDES_NEEDED["forward"] = []
 INCLUDES_NEEDED["npcs"] = {}
 INCLUDES_NEEDED["sprites"] = set()
+INCLUDES_NEEDED["tattle"] = []
+
+def get_flag_name(arg):
+    v = arg - 2**32 # convert to s32
+    if v > -250000000:
+        if v <= -220000000: return str((v + 230000000) / 1024)
+        elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
+        elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
+        elif v <= -160000000:
+            if v + 170000000 == 0:
+                return "STORY_PROGRESS"
+            elif v + 170000000 == 425:
+                return "WORLD_LOCATION"
+            else:
+                return f"SI_SAVE_VAR({v + 170000000})"
+        elif v <= -140000000: return f"SI_AREA_VAR({v + 150000000})"
+        elif v <= -120000000: return f"SI_SAVE_FLAG({v + 130000000})"
+        elif v <= -100000000: return f"SI_AREA_FLAG({v + 110000000})"
+        elif v <= -80000000: return f"SI_MAP_FLAG({v + 90000000})"
+        elif v <= -60000000: return f"SI_FLAG({v + 70000000})"
+        elif v <= -40000000: return f"SI_MAP_VAR({v + 50000000})"
+        elif v <= -20000000: return f"SI_VAR({v + 30000000})"
+
+    if arg == 0xFFFFFFFF:
+        return "-1"
+    elif (arg & 0xFF000000) == 0x80000000:
+        return f"0x{arg:X}"
+    elif arg >= 0x80000000:
+        return f"{arg - 0x100000000}"
+    else:
+        return f"{arg}"
 
 def get_function_list(area_name, map_name, rom_offset):
     map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
@@ -29,7 +60,7 @@ def get_function_list(area_name, map_name, rom_offset):
     firstFind = False
     functions = {}
     while i < len(map_file):
-        if map_file[i].startswith(f" ver/us/build/src/world/area_{area_name}/{map_name}/"):
+        if map_file[i].startswith(f".{map_name}"):
             firstFind = True
             i += 1
             while not map_file[i].startswith(" .data"):
@@ -95,6 +126,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
     INDENT = f"    "
     afterHeader = False
+    treePrint = False
 
     while len(midx) > 0:
         struct = midx.pop(0)
@@ -129,6 +161,15 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 bytes.seek(pos)
                 script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
 
+            if "shakeTree" in name or "searchBush" in name:
+                symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
+                if not treePrint:
+                    out += f"=======================================\n"
+                    out += f"==========BELOW foliage.inc.c==========\n"
+                    out += f"=======================================\n\n"
+                    treePrint = True
+                continue
+
             if try_replace and "exitWalk" in name:
                 script_text = script_text.splitlines()
                 walkDistance = exitIdx = map_ = entryIdx = ""
@@ -147,9 +188,26 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "EntryList":
             entry_list_name = name
             out += f"EntryList {name} = {{"
-            for i in range(0, struct["length"], 4 * 4):
-                x,y,z,yaw = unpack(">ffff", bytes.read(4 * 4))
-                out += f"\n    {{ {x}f, {y}f, {z}f, {yaw}f }},"
+            entry_list = bytes.read(struct["length"])
+            entry_count = len(entry_list) // 16
+            pos = 0
+            x = []
+            y = []
+            z = []
+            w = []
+            for _ in range(entry_count):
+                a,b,c,d = unpack_from(">ffff", entry_list, pos)
+                x.append(f"{a:.01f}"); y.append(f"{b:.01f}"); z.append(f"{c:.01f}"); w.append(f"{d:.01f}")
+                pos += 16
+
+            x_size = max([len(a) for a in x])
+            y_size = max([len(a) for a in y])
+            z_size = max([len(a) for a in z])
+            w_size = max([len(a) for a in w])
+
+            for a,b,c,d in zip(x,y,z,w):
+                out += f"\n    {{ {a:>{x_size}}f, {b:>{y_size}}f, {c:>{z_size}}f, {d:>{w_size}}f }},"
+
             out += f"\n}};\n"
         elif struct["type"] == "NpcSettings":
             tmp_out = f"NpcSettings {name} = {{\n"
@@ -161,7 +219,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     var_names = ["unk_00", "unk_24"]
                     data = unpack_from(">4B", npcSettings, i)
                     if not sum(data) == 0:
-                        tmp_out += INDENT + f".{var_names[0] if i == 0 else var_names[1]} = {{ " + ", ".join(f"{x:02X}" for x in unk_00) + f" }},\n"
+                        tmp_out += INDENT + f".{var_names[0] if i == 0 else var_names[1]} = {{ " + ", ".join(f"0x{x:02X}" for x in data) + f" }},\n"
                 elif i == 0x4 or i == 0x28:
                     var_names = ["height", "radius", "level", "unk_2A"]
                     for x,var in enumerate(unpack_from(">2h", npcSettings, i)):
@@ -245,7 +303,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                         addr = unpack_from(f">I", staticNpc, curr_base+i)[0]
                         if not addr == 0:
                             if var_name != "flags" and addr in symbol_map:
-                                tmp_out += INDENT + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+                                if var_name == "extraAnimations":
+                                    tmp_out += INDENT + f".{var_name} = {symbol_map[addr][0][1]},\n"
+                                else:
+                                    tmp_out += INDENT + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+
                                 if symbol_map[addr][0][1] not in INCLUDED["functions"]:
                                     INCLUDES_NEEDED["forward"].append(symbol_map[addr][0][1])
                             else:
@@ -425,6 +487,155 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             for item in items:
                 out += f"    {disasm_script.CONSTANTS['ItemIDs'][item]},\n"
             out += f"}};\n"
+        elif struct["type"] == "TreeDropList":
+            new_name = "N(" + name.split('_',1)[1][:-1].lower() + "_Drops)"
+            symbol_map[struct["vaddr"]][0][1] = new_name
+            
+            out += f"FoliageDropList {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            count = unpack_from(">I", data, 0)[0]
+
+            out += f"{INDENT}.count = {count},\n"
+
+            if count > 0:
+                out += f"{INDENT}.drops = {{\n"
+
+            pos = 4
+            for _ in range(count):
+                entry = list(unpack_from(">7I", data, pos))
+                pos += 7*4
+
+                entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                entry[3] = entry[3] - 0x100000000 if entry[3] >= 0x80000000 else entry[3]
+
+                flag1 = get_flag_name(entry[5])
+                flag2 = get_flag_name(entry[6])
+
+                out += f"{INDENT * 2}{{\n"
+                out += f"{INDENT * 3}.itemID = {disasm_script.CONSTANTS['ItemIDs'][entry[0]]},\n"
+                out += f"{INDENT * 3}.pos = {{ {entry[1]}, {entry[2]}, {entry[3]} }},\n"
+                if entry[4] != 0:
+                    out += f"{INDENT * 3}.spawnMode = 0x{entry[4]:X},\n"
+                if flag1 != '0':
+                    out += f"{INDENT * 3}.pickupFlag = {flag1},\n"
+                if flag2 != '0':
+                    out += f"{INDENT * 3}.spawnFlag = {flag2},\n"
+                out += f"{INDENT * 2}}},\n"
+
+            if count > 0:
+                out += f"{INDENT}}}\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "TreeModelList" or struct["type"] == "TreeEffectVectors":
+            isModelList = struct["type"] == "TreeModelList"
+
+            name_parts = name.split('_')
+            if isModelList:
+                new_name = "N(" + name_parts[1].lower() + "_" + name_parts[2]
+            else:
+                new_name = "N(" + name_parts[1][:-1].lower() + "_Vectors)"
+            symbol_map[struct["vaddr"]][0][1] = new_name
+
+            if isModelList:
+                out += f"FoliageModelList {new_name} = {{\n"
+            else:
+                out += f"TreeEffectVectors {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            count = unpack_from(">I", data, 0)[0]
+
+            out += f"{INDENT}.count = {count},\n"
+
+            if isModelList:
+                if count > 0:
+                    out += f"{INDENT}.models = {{ "
+                
+                pos = 4
+                for _ in range(count):
+                    entry = unpack_from(">I", data, pos)[0]
+                    pos += 4
+
+                    out += f"{entry}, "
+
+                if count > 0:
+                    out = out[:-2]
+                    out += f" }}\n"
+
+            else:
+                if count > 0:
+                    out += f"{INDENT}.vectors = {{\n"
+                
+                pos = 4
+                for _ in range(count):
+                    entry = list(unpack_from(">3I", data, pos))
+
+                    entry[0] = entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
+                    entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                    entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                    
+                    pos += 3*4
+
+                    out += f"{INDENT * 2}{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
+
+                if count > 0:
+                    out += f"{INDENT}}}\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "SearchBushEvent":
+            new_name = "N(" + name.split('_',1)[1].lower()
+            symbol_map[struct["vaddr"]][0][1] = new_name
+
+            num = int(new_name.split("bush",1)[1][:-1])
+            out += f"SearchBushConfig {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">4I", data, 0)
+
+            if entry[0] != 0:
+                out += f"{INDENT}.bush = &N(bush{num}_Bush),\n"
+            if entry[1] != 0:
+                out += f"{INDENT}.drops = &N(bush{num}_Drops),\n"
+            if entry[2] != 0:
+                out += f"{INDENT}.vectors = &N(bush{num}_Vectors),\n"
+            if entry[3] != 0:
+                out += f"{INDENT}.callback = &N(bush{num}_Callback),\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "ShakeTreeEvent":
+            new_name = "N(" + name.split('_',1)[1].lower()
+            symbol_map[struct["vaddr"]][0][1] = new_name
+            
+            num = int(new_name.split("tree",1)[1][:-1])
+            out += f"ShakeTreeConfig {new_name} = {{\n"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">5I", data, 0)
+
+            if entry[0] != 0:
+                out += f"{INDENT}.leaves = &N(tree{num}_Leaves),\n"
+            if entry[1] != 0:
+                out += f"{INDENT}.trunk = &N(tree{num}_Trunk),\n"
+            if entry[2] != 0:
+                out += f"{INDENT}.drops = &N(tree{num}_Drops),\n"
+            if entry[3] != 0:
+                out += f"{INDENT}.vectors = &N(tree{num}_Vectors),\n"
+            if entry[4] != 0:
+                out += f"{INDENT}.callback = &N(tree{num}_Callback),\n"
+
+            out += f"}};\n"
+
+        elif struct["type"] == "TriggerCoord":
+            out += f"Vec4f {name} = {{"
+
+            data = bytes.read(struct["length"])
+            entry = unpack_from(">4f", data, 0)
+
+            out += f" {entry[0]:.01f}f, {entry[1]:.01f}f, {entry[2]:.01f}f, {entry[3]:.01f}f }};\n"
 
         elif struct["type"] == "Header":
             out += f"MapConfig N(config) = {{\n"
@@ -443,7 +654,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
                 raise Exception(f"unknown MapConfig background {bg:X}")
-            out += f"    .tattle = {{ 0x{tattle:X} }},\n"
+            #out += f"    .tattle = 0x{tattle:X},\n"
+            INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
+            out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"
 
             out += f"}};\n"
             afterHeader = True
@@ -467,6 +680,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f" {word:.01f}f,"
 
             out += f"\n}};\n"
+        elif struct["type"] == "VectorList":
+            data = bytes.read(struct["length"])
+            if len(data) > 0:
+                out += f"Vec3f {name}[] = {{\n"
+                out += f"\t"
+            for i,pos in enumerate(range(0, len(data), 0xC)):
+                x, y, z = unpack_from(">fff", data, pos)
+                out += f" {{ {x:.01f}, {y:.01f}, {z:.01f} }},"
+                if (i+1) % 2 == 0:
+                    out += f"\n\t"
+            out += f"\n}};\n"
+
         elif struct["type"] == "Formation":
             out += f"Formation {struct['name']} = {{\n"
 
@@ -919,10 +1144,12 @@ if __name__ == "__main__":
         print()
 
         if INCLUDES_NEEDED["forward"]:
-            print()
             print("========== Forward declares: ==========\n")
             for forward in sorted(INCLUDES_NEEDED["forward"]):
-                print(forward)
+                if not (forward.startswith("ApiStatus") or forward.startswith("void")):
+                    print("extern " + forward)
+                else:
+                    print(forward)
             print()
 
         if INCLUDES_NEEDED["npcs"]:
@@ -934,6 +1161,9 @@ if __name__ == "__main__":
                 lastnum = k
             print(f"}};")
             print()
+
+        [print(x) for x in INCLUDES_NEEDED["tattle"]]
+        print()
 
         print("=======================================\n")
         print(disasm.rstrip())

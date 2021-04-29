@@ -534,7 +534,7 @@ class Compile(Transformer):
         return Cmd("ScriptOpcode_SPAWN_SCRIPT", tree.children[0], meta=tree.meta)
     def spawn_set_stmt(self, tree):
         lhs, script = tree.children
-        return Cmd("ScriptOpcode_SPAWN_SCRIPT_GET_ID", script, lhs, meta=tree.meta)
+        return Cmd("ScriptOpcode_SPAWN_GET_ID", script, lhs, meta=tree.meta)
     def await_stmt(self, tree):
         return Cmd("ScriptOpcode_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
     def jump_stmt(self, tree):

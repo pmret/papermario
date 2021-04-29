@@ -2,3 +2,6 @@
 
 #include "world/common/foliage.inc.c"
 
+Script N(80247024) = SCRIPT({
+
+});

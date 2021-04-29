@@ -100,23 +100,19 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240C90_916A00);
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240FE0_916D50);
 /*
 ApiStatus N(func_80240FE0_916D50)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80241DA8_917B18) == NULL) {
+        N(D_80241DA8_917B18) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80241DA8_917B18)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80241DA8_917B18)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80241DA8_917B18));
+        N(D_80241DA8_917B18) = NULL;
     }
     return ApiStatus_DONE2;
 }

@@ -41,7 +41,7 @@ void N(func_80241134_C5B874)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_80244900_C5F040)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
@@ -72,7 +72,7 @@ ApiStatus N(func_802417EC_C5BF2C)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -122,8 +122,54 @@ ApiStatus N(func_802417EC_C5BF2C)(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241B08_C5C248);
+/*
+void N(func_80241B08_C5C248)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 x, y, z, w;
+    s32 var;
+    s32 flag;
+    f32 temp_f6;
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241D88_C5C4C8);
+    if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
+        fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
+        npc->currentAnim = enemy->animList[0];
+        npc->duration = 30;
+        script->functionTemp[0].s = 20;
+        enemy->varTable[9] = 30;
+        return;
+    }
+
+    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+    flag = 0;
+    if (!(npc->flags & 8)) {
+        x = npc->pos.x;
+        y = npc->pos.y + npc->collisionHeight;
+        z = npc->pos.z;
+        w = npc->collisionHeight + 3.0;
+        if ((func_800DCB7C(npc->unk_80, &x, &y, &z, &w) != 0) && (w < npc->collisionHeight)) {
+            flag = 1;
+        }
+    }
+
+    if (flag) {
+        npc->pos.y = y + 1.0;
+    } else {
+        temp_f6 = npc->pos.y - (gPlayerStatusPtr->position.y + 6.0);
+        if ((temp_f6 < 0.0) || (temp_f6 > 4.0)) {
+            temp_f6 = -temp_f6;
+            npc->pos.y += temp_f6 * 0.06;
+        }
+    }
+    if (npc->duration > 0) {
+        npc->duration--;
+        return;
+    }
+    script->functionTemp[0].s = 12;
+}
+*/
+
+#include "world/common/UnkFunc45.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241DE4_C5C524);
 /*
@@ -141,7 +187,7 @@ ApiStatus N(func_80241DE4_C5C524)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -180,7 +226,7 @@ ApiStatus N(func_80241DE4_C5C524)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241B08_C5C248)(script, aiSettings, territoryPtr);
             break;
         case 14:
-            N(func_80241D88_C5C4C8)(script, aiSettings, territoryPtr);
+            N(UnkFunc45)(script, aiSettings, territoryPtr);
             break;
     }
 
@@ -191,23 +237,19 @@ ApiStatus N(func_80241DE4_C5C524)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
 /*
 ApiStatus N(func_80241FCC_C5C70C)(ScriptInstance* script, s32 isInitialCall) {
-    s32** ptr = &N(D_80241C68_BE09F8);
     s32 i;
-    s32* test;
 
-    if (*ptr == NULL) {
-        i = heap_malloc(16 * sizeof(s32));
-        *ptr = i;
-        for (i = 0, test = *ptr; i < 16; i++) {
-            *test++ = script->varTable[i];
+    if (N(D_80244A10_C5F150) == NULL) {
+        N(D_80244A10_C5F150) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80244A10_C5F150)[i] = script->varTable[i];
         }
     } else {
-        for (i = 0, test = *ptr; i < 16; i++) {
-            script->varTable[i] = *test++;
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80244A10_C5F150)[i];
         }
-        ptr = &N(D_80241C68_BE09F8);
-        heap_free(*ptr);
-        *ptr = NULL;
+        heap_free(N(D_80244A10_C5F150));
+        N(D_80244A10_C5F150) = NULL;
     }
     return ApiStatus_DONE2;
 }
@@ -223,18 +265,14 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242310_C5CA50);
 /*
 ApiStatus N(func_80242310_C5CA50)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80244A74_C5F1B4) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80244A74_C5F1B4)) {
+        N(D_80244A74_C5F1B4) = FALSE;
+        set_variable(script, *args, N(D_80244A78_C5F1B8));
         return ApiStatus_DONE2;
     }
 
@@ -247,18 +285,53 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242364_C5CAA4);
 ApiStatus N(func_80242364_C5CAA4)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_80244A78_C5F1B8) = get_variable(script, *args);
+    N(D_80244A74_C5F1B4) = TRUE;
     return ApiStatus_DONE2;
 }
 */
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_8024239C_C5CADC);
+/*
+ApiStatus N(func_8024239C_C5CADC)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
+        }
+        N(D_80244A20)[i] = 0;
+    } else {
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/SetManyVars.inc.c"
 
 #include "world/common/UnkYawFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426B4_C5CDF4);
+/*
+ApiStatus N(func_802426B4_C5CDF4)(ScriptInstance *script, s32 isInitialCall) {
+    Npc *npc = get_npc_unsafe(script->varTable[2]);
+
+    D_8024E1B4 = npc->currentAnim;
+    npc->currentAnim = script->varTable[4];
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_802426F8_C5CE38);
+/*
+ApiStatus N(func_802426F8_C5CE38)(ScriptInstance *script, s32 isInitialCall) {
+    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
+    return ApiStatus_DONE2;
+}
+*/

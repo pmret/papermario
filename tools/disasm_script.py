@@ -176,6 +176,9 @@ def get_constants():
     return
 
 def make_anim_macro(self, sprite, palette, anim):
+    if sprite == 0xFF and palette == 0xFF and anim == 0xFF:
+        return "-1"
+
     call = "NPC_ANIM("
     if sprite in CONSTANTS["NPC_SPRITE"]:
         call += f"{CONSTANTS['NPC_SPRITE'][sprite]['name']}, "
@@ -204,7 +207,9 @@ def fix_args(self, func, args, info):
             arg = "0x" + arg[2:]
         if "0x" in arg and int(arg, 16) >= 0xF0000000:
             arg = f"{int(arg, 16) - 0x100000000}"
-        if i in info:
+        if i in info or (i+1 == len(args) and -1 in info):
+            if i+1 == len(args) and -1 in info:
+                i = -1
             if "_" in arg:
                 new_args.append(f"{arg}")
                 continue
@@ -219,6 +224,10 @@ def fix_args(self, func, args, info):
                 palette = (argNum & 0xFF00)   >> 8
                 anim    = (argNum & 0xFF)     >> 0
 
+                #if argNum not in CONSTANTS["MAP_NPCS"]:
+                #    new_args.append(f"0x{argNum:X}")
+                #    continue
+                
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                 elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
@@ -251,6 +260,10 @@ def fix_args(self, func, args, info):
                     enabled.append(f"0")
                 new_args.append("((" + " | ".join(enabled) + "))")
             elif info[i] == "NpcIDs":
+                if argNum not in CONSTANTS["MAP_NPCS"]:
+                    new_args.append(f"0x{argNum:X}")
+                    continue
+
                 if argNum >= 0:
                     new_args.append(CONSTANTS["MAP_NPCS"][argNum])
                 else:
@@ -266,6 +279,7 @@ def fix_args(self, func, args, info):
                 else:
                     #Print the unknowns in hex
                     new_args.append(f"0x{int(argNum):X}")
+
         else:
             new_args.append(f"{arg}")
     return ", ".join(new_args)
@@ -290,9 +304,11 @@ replace_funcs = {
 
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
+    "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
     "EnemyDamageTarget"         :{0:"ActorIDs"},
     "EnemyTestTarget"           :{0:"ActorIDs"},
 
+    "FindKeyItem"               :{0:"ItemIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
 
     "func_802CFE2C"             :{0:"NpcIDs"},
@@ -353,14 +369,18 @@ replace_funcs = {
     "SetNpcRotation"            :{0:"NpcIDs"},
     "SetNpcScale"               :{0:"NpcIDs"},
     "SetNpcSpeed"               :{0:"NpcIDs"},
+    "SetNpcSprite"              :{1:"Hex"},
     "SetNpcYaw"                 :{0:"NpcIDs"},
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
     "SetTargetActor"            :{0:"ActorIDs"},
+    "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
-    "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", 4:"CustomMsg"},
+    "ShowMessageAtWorldPos"     :{0:"CustomMsg"},
+    "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", -1:"CustomMsg"},
+    "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs"},
 }
@@ -470,7 +490,9 @@ class ScriptDisassembler:
         name = "N(" + name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}" + ")"
         return name
 
-    def replace_star_rod_prefix(self, addr):
+    def replace_star_rod_prefix(self, addr, isArg=False):
+        if type(addr) is str:
+            return addr
         if addr > 0x80000000 and addr in self.symbol_map:
             name = self.symbol_map[addr][0][1]
             toReplace = True
@@ -501,12 +523,16 @@ class ScriptDisassembler:
                 if name not in self.INCLUDED["functions"]:
                     self.INCLUDES_NEEDED["forward"].append(prefix + name + suffix + ";")
                     self.INCLUDED["functions"].add(name)
-            return name
+                return name
+            elif not isArg or name.startswith("\""):
+                return name
+            else:
+                return str(addr)
         return addr
 
-    def addr_ref(self, addr):
+    def addr_ref(self, addr, isArg=False):
         if addr in self.symbol_map:
-            return self.replace_star_rod_prefix(addr)
+            return self.replace_star_rod_prefix(addr, isArg)
         return f"0x{addr:08X}"
 
     def trigger(self, trigger):
@@ -1073,7 +1099,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if addr in self.symbol_map:
                 func_name = self.addr_ref(addr)
                 for i,arg in enumerate(argv):
-                    argv[i] = self.replace_star_rod_prefix(arg)
+                    argv[i] = self.replace_star_rod_prefix(arg, isArg=True)
                 argv_str = ", ".join(self.var(arg) for arg in argv[1:])
                 argv_str = replace_constants(self, func_name, argv_str)
 
@@ -1135,20 +1161,32 @@ if __name__ == "__main__":
     parser.add_argument("offset", type=lambda x: int(x, 16), default=0, help="Offset to start dissassembling from")
     parser.add_argument("-end", "-e", "--e", type=lambda x: int(x, 16), default=0, dest="end", required=False, help="End offset to stop dissassembling from.\nOnly used as a way to find valid scripts.")
     parser.add_argument("-vram", "-v", "--v", type=lambda x: int(x, 16), default=0, dest="vram", required=False, help="VRAM start will be tracked and used for the script output name")
+    parser.add_argument("-si", "--si", action="store_true", default=False, dest="si", required=False, help="Force si script output")
 
     args = parser.parse_args()
     vram_base = args.vram
     get_constants()
+
+    INCLUDED = {}
+    INCLUDED["functions"] = set()
+    INCLUDED["includes"] = set()
+    INCLUDES_NEEDED = {}
+    INCLUDES_NEEDED["include"] = []
+    INCLUDES_NEEDED["forward"] = []
+    INCLUDES_NEEDED["npcs"] = {}
+    INCLUDES_NEEDED["sprites"] = set()
 
     if args.end > args.offset:
         # Search the given memory range and report scripts
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
+            
+
             while args.offset < args.end:
                 f.seek(args.offset)
 
-                script = ScriptDSLDisassembler(f)
+                script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
 
@@ -1194,15 +1232,19 @@ if __name__ == "__main__":
 
             f.seek(args.offset)
 
-            script = ScriptDSLDisassembler(f)
-            try:
-                script_text = script.disassemble()
+            script = ScriptDSLDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
-                print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
-                      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
-                print()
-                print(script_text, end="")
+            if args.si:
+                print(ScriptDisassembler(f, "", {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(), end="")
+            else:
+                try:
+                    script_text = script.disassemble()
 
-            except UnsupportedScript:
-                f.seek(args.offset)
-                print(ScriptDisassembler(f).disassemble(), end="")
+                    print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                          f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
+                    print()
+                    print(script_text, end="")
+
+                except UnsupportedScript:
+                    f.seek(args.offset)
+                    print(ScriptDisassembler(f).disassemble(), end="")

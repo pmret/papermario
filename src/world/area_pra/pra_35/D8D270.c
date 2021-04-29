@@ -96,7 +96,7 @@ ApiStatus N(func_80241AB4_D8ED04)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->patrol.detect.z;
     territory.sizeX = enemy->territory->patrol.detectSizeX;
     territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
@@ -116,7 +116,7 @@ ApiStatus N(func_80241AB4_D8ED04)(ScriptInstance* script, s32 isInitialCall) {
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
             script->functionTemp[0].s = 12;
-            enemy->flags &= 0xBFFFFFFF;
+            enemy->flags &= ~0x40000000;
         }
 
         posX = npc->pos.x;
@@ -180,7 +180,7 @@ s32 N(func_80241FB8_D8F208)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM2(gCurrentCamID);
+    Camera* camera = CAM(gCurrentCamID);
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;
@@ -235,7 +235,7 @@ ApiStatus N(func_80242698_D8F8E8)(ScriptInstance *script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 65.0f;
+    territory.unk_18 = 65.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {

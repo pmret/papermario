@@ -3,9 +3,9 @@
 
 #define NAMESPACE dgb_03
 
-ApiStatus N(func_80240000_C314E0)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802400BC_C3159C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_8024060C_C31AEC)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc11)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc12)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024086C_C31D4C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802419B0_C32E90)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80242480_C33960)(ScriptInstance* script, s32 isInitialCall);

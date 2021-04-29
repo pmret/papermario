@@ -123,7 +123,7 @@ glabel L80241F7C_C5C6BC
 glabel L80241F94_C5C6D4
 /* C5C6D4 80241F94 0280202D */  daddu     $a0, $s4, $zero
 /* C5C6D8 80241F98 0200282D */  daddu     $a1, $s0, $zero
-/* C5C6DC 80241F9C 0C090762 */  jal       func_80241D88_C5C4C8
+/* C5C6DC 80241F9C 0C090762 */  jal       kzn_02_UnkFunc45
 /* C5C6E0 80241FA0 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241FA4_C5C6E4
 /* C5C6E4 80241FA4 0000102D */  daddu     $v0, $zero, $zero

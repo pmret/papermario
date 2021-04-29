@@ -6,7 +6,6 @@
 
 s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3);
 ApiStatus N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall);
-ApiStatus N(func_80240C90_BDDE40)(ScriptInstance *script, s32 isInitialCall);
 
 extern Script N(main);
 extern Script N(80241040);

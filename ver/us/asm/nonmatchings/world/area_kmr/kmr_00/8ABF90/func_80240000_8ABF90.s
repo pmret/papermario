@@ -46,8 +46,8 @@ glabel func_80240000_8ABF90
 /* 8AC034 802400A4 26100004 */  addiu     $s0, $s0, 4
 /* 8AC038 802400A8 0C0B1EAF */  jal       get_variable
 /* 8AC03C 802400AC 0220202D */   daddu    $a0, $s1, $zero
-/* 8AC040 802400B0 3C018024 */  lui       $at, %hi(D_802440F4)
-/* 8AC044 802400B4 AC2240F4 */  sw        $v0, %lo(D_802440F4)($at)
+/* 8AC040 802400B0 3C018024 */  lui       $at, %hi(flo_16_npcGroup_802440F4)
+/* 8AC044 802400B4 AC2240F4 */  sw        $v0, %lo(flo_16_npcGroup_802440F4)($at)
 /* 8AC048 802400B8 8E050000 */  lw        $a1, ($s0)
 /* 8AC04C 802400BC 26100004 */  addiu     $s0, $s0, 4
 /* 8AC050 802400C0 0C0B1EAF */  jal       get_variable
@@ -139,8 +139,8 @@ glabel func_80240000_8ABF90
 /* 8AC18C 802401FC 00006012 */   mflo     $t4
 /* 8AC190 80240200 3C078024 */  lui       $a3, %hi(D_802440E3)
 /* 8AC194 80240204 90E740E3 */  lbu       $a3, %lo(D_802440E3)($a3)
-/* 8AC198 80240208 3C028024 */  lui       $v0, %hi(D_802440F4)
-/* 8AC19C 8024020C 8C4240F4 */  lw        $v0, %lo(D_802440F4)($v0)
+/* 8AC198 80240208 3C028024 */  lui       $v0, %hi(flo_16_npcGroup_802440F4)
+/* 8AC19C 8024020C 8C4240F4 */  lw        $v0, %lo(flo_16_npcGroup_802440F4)($v0)
 /* 8AC1A0 80240210 00471023 */  subu      $v0, $v0, $a3
 /* 8AC1A4 80240214 00430018 */  mult      $v0, $v1
 /* 8AC1A8 80240218 00004012 */  mflo      $t0

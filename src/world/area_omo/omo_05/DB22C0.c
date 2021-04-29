@@ -57,7 +57,7 @@ void N(func_802416A8_DB3968)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->pos.y += N(D_802436DC_BE6E8C)[npc->duration++];
+    npc->pos.y += N(D_80242F88_DB5248)[npc->duration++];
     if (npc->duration >= 5) {
         script->functionTemp[0].s = 12;
     }
@@ -88,7 +88,7 @@ ApiStatus N(func_80241D60_DB4020)(ScriptInstance* script, s32 isInitialCall) {
     territory.pointZ = enemy->territory->wander.detect.z;
     territory.sizeX = enemy->territory->wander.detectSizeX;
     territory.sizeZ = enemy->territory->wander.detectSizeZ;
-    territory.unk_34 = 120.0f;
+    territory.unk_18 = 120.0f;
     territory.unk_1C = 0;
 
     if (isInitialCall) {
@@ -143,18 +143,14 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242178_DB4438);
 /*
 ApiStatus N(func_80242178_DB4438)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr;
 
     if (isInitialCall) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
+        N(D_80243098_DB5358) = FALSE;
     }
 
-    ptr = &D_80241CCC_BE0A5C;
-    if (*ptr != NULL) {
-        ptr = &D_80241CCC_BE0A5C;
-        *ptr = 0;
-        set_variable(script, *args, D_80241CD0_BE0A60);
+    if (N(D_80243098_DB5358)) {
+        N(D_80243098_DB5358) = FALSE;
+        set_variable(script, *args, N(D_8024309C_DB535C));
         return ApiStatus_DONE2;
     }
 
@@ -167,16 +163,48 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802421CC_DB448C);
 ApiStatus N(func_802421CC_DB448C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    D_80241CD0_BE0A60 = get_variable(script, *args);
-    D_80241CCC_BE0A5C = 1;
+    N(D_8024309C_DB535C) = get_variable(script, *args);
+    N(D_80243098_DB5358) = TRUE;
     return ApiStatus_DONE2;
 }
 */
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242204_DB44C4);
+/*
+ApiStatus N(func_80242204_DB44C4)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
+        }
+        N(D_80244A20)[i] = 0;
+    } else {
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802422A0_DB4560);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80242328_DB45E8);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802423C8_DB4688);
+/*
+ApiStatus N(func_802423C8_DB4688)(ScriptInstance *script, s32 isInitialCall) {
+    s32 i;
+
+    for (i = 0; i <= 90; i++) {
+        N(D_802457C0)[i] = 128 + i;
+    }
+
+    N(D_8024592C) = 0;
+    return ApiStatus_DONE2;
+}
+*/

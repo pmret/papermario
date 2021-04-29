@@ -4,7 +4,7 @@
 
 FoliageModelList N(treeModelList_Bush1_Bush) = {
     .count = 1,
-    .models = { 0x40 },
+    .models = { 64 },
 };
 
 FoliageVectorList N(treeEffectVectors_Bush1) = {
@@ -21,19 +21,19 @@ SearchBushConfig N(bush1) = {
 
 FoliageModelList N(treeModelList_Tree1_Leaves) = {
     .count = 1,
-    .models = { 0x3E },
+    .models = { 62 },
 };
 
 FoliageModelList N(treeModelList_Tree1_Trunk) = {
     .count = 1,
-    .models = { 0x3D },
+    .models = { 61 },
 };
 
 FoliageVectorList N(treeEffectVectors_Tree1) = {
     .count = 2,
     .vectors = {
-        { 0xFFFFFFB0, 0x00000082, 0x00000012 },
-        { 0x0000001C, 0x00000082, 0x00000027 },
+        { -80, 130, 18 },
+        {  28, 130, 39 },
     },
 };
 
@@ -58,7 +58,7 @@ ShakeTreeConfig N(tree1) = {
     .leaves = &N(treeModelList_Tree1_Leaves),
     .trunk = &N(treeModelList_Tree1_Trunk),
     .vectors = &N(treeEffectVectors_Tree1),
-    .callback = N(tree1_Callback),
+    .callback = &N(tree1_Callback),
 };
 
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
