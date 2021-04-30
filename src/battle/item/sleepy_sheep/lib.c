@@ -84,7 +84,6 @@ s32 N(D_802A3F28_721578)[] = {
     0x802A32E0, 0x802A3260
 };
 
-void fx_walk_large(s32, f32, f32, f32, s32);
 void func_802D4364(s32, s32, s32, s32);
 void func_802D43AC(s32, f32, f32, f32);
 void func_802D43F4(s32);
