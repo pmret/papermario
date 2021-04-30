@@ -1,5 +1,4 @@
 #include "common.h"
-#include "battle/battle.h"
 
 #define NAMESPACE b_area_kmr_part_2
 
@@ -13,23 +12,15 @@
 #include "common/BattleAreaAngleStuff.inc.c"
 #define NAMESPACE b_area_kmr_part_2
 
-ApiStatus func_80218780_43A210(ScriptInstance* script, s32 isInitialCall) {
-    ActorDesc* actorData = get_actor(script->owner1.actorID)->staticActorData;
-
-    actorData->level /= 4;
-    return ApiStatus_DONE2;
-}
+#include "common/DivActorLevel4.inc.c"
 
 #define NAMESPACE dup3_b_area_kmr_part_2
 #include "common/BattleAreaAngleStuff.inc.c"
 #define NAMESPACE b_area_kmr_part_2
 
-ApiStatus func_80218A30_43A4C0(ScriptInstance* script, s32 isInitialCall) {
-    ActorDesc* actorData = get_actor(script->owner1.actorID)->staticActorData;
-
-    actorData->level /= 4;
-    return ApiStatus_DONE2;
-}
+#define NAMESPACE dup_b_area_kmr_part_2
+#include "common/DivActorLevel4.inc.c"
+#define NAMESPACE b_area_kmr_part_2
 
 ApiStatus func_80218A60_43A4F0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
