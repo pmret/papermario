@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_sam2/63D1E0", func_80218000_63D1E0);
 
-INCLUDE_ASM(s32, "battle/area_sam2/63D1E0", func_80218314_63D4F4);
+#include "common/Dist3D.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_sam2/63D1E0", func_80218458_63D638);
 

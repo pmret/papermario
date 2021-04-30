@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "battle/area_kmr_part_3/447D50", func_80218AA4_447EE4);
 #include "common/BattleAreaAngleStuff.inc.c"
 #define NAMESPACE b_area_kmr_part_3
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_3/447D50", func_80218E1C_44825C);
+#include "common/Dist3D.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kmr_part_3/447D50", func_80218F60_4483A0);
 
