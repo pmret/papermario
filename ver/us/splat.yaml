@@ -8346,7 +8346,7 @@ segments:
     - [0xC08770,   rgba16, img7, 32, 32]
     - [0xC08F70,    .data, data7]
     - [0xC08FF0,    .data, data]
-    - [0xC20C70,  .rodata, BFD9A0] 
+    - [0xC20C70,  .rodata, BFD9A0]
     # rodata seemingly in 3 different parts:
     # dgb_00-18, 1x 32767.0, 2 jump tables
     # "dgb_00", 2x 32767.0, jump table

@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802193A4_624F44);
 
 INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_802193F0_624F90);
 
-INCLUDE_ASM(s32, "battle/area_sam/623BA0", func_8021943C_624FDC);
+#include "common/UnkBackgroundFunc3.inc.c"
 
 #include "common/SetBackgroundAlpha.inc.c"
 
