@@ -1,0 +1,8 @@
+#include "common/SetBackgroundAlpha.inc.c"
+1.00 - func_80218FA4_4483E4
+1.00 - func_80219780_465C10
+1.00 - func_80219480_625020
+1.00 - func_8021849C_63D67C
+1.00 - func_80219480_66B200
+1.00 - func_80219550_6BD0E0
+1.00 - func_80238478_703F68

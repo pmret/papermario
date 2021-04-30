@@ -25,12 +25,7 @@ ApiStatus func_802188A8_5CEF38(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802188EC_5CEF7C(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-
-    set_background_color_blend(0, 0, 0, get_variable(script, *args++));
-    return ApiStatus_DONE2;
-}
+#include "common/SetBackgroundAlpha.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_flo2/5CE690", func_80218924_5CEFB4);
 

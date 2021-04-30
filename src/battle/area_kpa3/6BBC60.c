@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_802194C0_6BD050);
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_8021950C_6BD09C);
 
-INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80219550_6BD0E0);
+#include "common/SetBackgroundAlpha.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa3/6BBC60", func_80219588_6BD118);
 
