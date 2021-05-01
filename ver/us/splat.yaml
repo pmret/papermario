@@ -1737,40 +1737,40 @@ segments:
     overlay: True
     subsegments:
     - [0x3251d0, c]
-    - [0x3255e0, bin]
+    - [0x3255e0, data]
   - type: code
     start: 0x325ad0
     vram: 0xE0200000
     subsegments:
     - [0x325ad0, c]
     - [0x325ee0, c]
-    - [0x326160, bin]
+    - [0x326160, data]
   - [0x326410, bin]
   - type: code
     start: 0x3278f0
     vram: 0xE0002000
     subsegments:
     - [0x3278f0, c]
-    - [0x328050, bin]
+    - [0x328050, data]
   - type: code
     start: 0x328110
     vram: 0xE000C000
     subsegments:
     - [0x328110, c]
-    - [0x328d20, bin]
+    - [0x328d20, data]
   - [0x328EA0, bin]
   - type: code
     start: 0x32C110
     vram: 0xE000E000
     subsegments:
     - [0x32C110, c]
-    - [0x32c770, bin]
+    - [0x32c770, data]
   - type: code
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
     - [0x32C7A0, c]
-    - [0x32CEB0, bin]
+    - [0x32CEB0, data]
   - type: code
     start: 0x32DD10
     vram: 0xE0012000
@@ -1781,13 +1781,13 @@ segments:
     vram: 0xE0014000
     subsegments:
     - [0x32E490, c]
-    - [0x32EC10, bin]
+    - [0x32EC10, data]
   - type: code
     start: 0x32EE30
     vram: 0xE0016000
     subsegments:
     - [0x32EE30, c]
-    - [0x32F550, bin]
+    - [0x32F550, data]
   - type: code
     start: 0x32F580
     vram: 0xE0018000
@@ -1799,7 +1799,7 @@ segments:
     vram: 0xE001A000
     subsegments:
     - [0x32FE30, c]
-    - [0x330440, bin]
+    - [0x330440, data]
   - type: code
     start: 0x330910
     vram: 0xE001C000
@@ -1811,376 +1811,376 @@ segments:
     vram: 0xE001E000
     subsegments:
     - [0x331940, c]
-    - [0x332690, bin]
+    - [0x332690, data]
   - [0x3326A0, bin]
   - type: code
     start: 0x333ec0
     vram: 0xE0020000
     subsegments:
     - [0x333ec0, c]
-    - [0x334b50, bin]
+    - [0x334b50, data]
   - [0x334C70, bin]
   - type: code
     start: 0x337240
     vram: 0xE0022000
     subsegments:
     - [0x337240, c]
-    - [0x337f10, bin]
+    - [0x337f10, data]
   - [0x337FC0, bin]
   - type: code
     start: 0x339250
     vram: 0xE0024000
     subsegments:
     - [0x339250, c]
-    - [0x339f10, bin]
+    - [0x339f10, data]
   - [0x339F60, bin]
   - type: code
     start: 0x33B180
     vram: 0xE0026000
     subsegments:
     - [0x33B180, c]
-    - [0x33bb70, bin]
+    - [0x33bb70, data]
   - [0x33BBD0, bin]
   - type: code
     start: 0x33CDF0
     vram: 0xE0028000
     subsegments:
     - [0x33CDF0, c]
-    - [0x33d5d0, bin]
+    - [0x33d5d0, data]
   - [0x33D610, bin]
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000
     subsegments:
     - [0x33E8C0, c]
-    - [0x33efe0, bin]
+    - [0x33efe0, data]
   - type: code
     start: 0x33FE80
     vram: 0xE002C000
     subsegments:
     - [0x33FE80, c]
-    - [0x3407c0, bin]
+    - [0x3407c0, data]
   - [0x340880, bin]
   - type: code
     start: 0x3419E0
     vram: 0xE002E000
     subsegments:
     - [0x3419E0, c]
-    - [0x342120, bin]
+    - [0x342120, data]
   - type: code
     start: 0x342140
     vram: 0xE0030000
     subsegments:
     - [0x342140, c]
-    - [0x342fd0, bin]
+    - [0x342fd0, data]
   - [0x343040, bin]
   - type: code
     start: 0x343680
     vram: 0xE0032000
     subsegments:
     - [0x343680, c]
-    - [0x343f30, bin]
+    - [0x343f30, data]
   - [0x343F70, bin]
   - type: code
     start: 0x344a10
     vram: 0xE0034000
     subsegments:
     - [0x344a10, c]
-    - [0x345190, bin]
+    - [0x345190, data]
   - [0x3451E0, bin]
   - type: code
     start: 0x3454E0
     vram: 0xE0036000
     subsegments:
     - [0x3454E0, c]
-    - [0x345b10, bin]
+    - [0x345b10, data]
   - [0x345B40, bin]
   - type: code
     start: 0x34DD20
     vram: 0xE0038000
     subsegments:
     - [0x34DD20, c]
-    - [0x34E710, bin]
+    - [0x34E710, data]
   - type: code
     start: 0x34EC80
     vram: 0xE003A000
     subsegments:
     - [0x34EC80, c]
-    - [0x34f480, bin]
+    - [0x34f480, data]
   - type: code
     start: 0x34F4C0
     vram: 0xE003C000
     subsegments:
     - [0x34F4C0, c]
-    - [0x350160, bin]
+    - [0x350160, data]
   - [0x350220, bin]
   - type: code
     start: 0x352440
     vram: 0xE003E000
     subsegments:
     - [0x352440, c]
-    - [0x352cb0, bin]
+    - [0x352cb0, data]
   - [0x352CE0, bin]
   - type: code
     start: 0x353300
     vram: 0xE0040000
     subsegments:
     - [0x353300, c]
-    - [0x353B40, bin]
+    - [0x353B40, data]
   - type: code
     start: 0x3547A0
     vram: 0xE0042000
     subsegments:
     - [0x3547A0, c]
-    - [0x354F20, bin]
+    - [0x354F20, data]
   - type: code
     start: 0x354F60
     vram: 0xE0044000
     subsegments:
     - [0x354F60, c]
-    - [0x355d10, bin]
+    - [0x355d10, data]
   - type: code
     start: 0x355EE0
     vram: 0xE0046000
     subsegments:
     - [0x355EE0, c]
-    - [0x3564e0, bin]
+    - [0x3564e0, data]
   - [0x356530, bin]
   - type: code
     start: 0x356980
     vram: 0xE0048000
     subsegments:
     - [0x356980, c]
-    - [0x357380, bin]
+    - [0x357380, data]
   - [0x3573A0, bin]
   - type: code
     start: 0x3584C0
     vram: 0xE004A000
     subsegments:
     - [0x3584C0, c]
-    - [0x359320, bin]
+    - [0x359320, data]
   - [0x3593B0, bin]
   - type: code
     start: 0x359F20
     vram: 0xE004C000
     subsegments:
     - [0x359F20, c]
-    - [0x35A580, bin]
+    - [0x35A580, data]
   - type: code
     start: 0x35B9D0
     vram: 0xE004E000
     subsegments:
     - [0x35B9D0, c]
-    - [0x35bfb0, bin]
+    - [0x35bfb0, data]
   - type: code
     start: 0x35BFD0
     vram: 0xE0050000
     subsegments:
     - [0x35BFD0, c]
-    - [0x35c530, bin]
+    - [0x35c530, data]
   - [0x35C550, bin]
   - type: code
     start: 0x35CA80
     vram: 0xE0052000
     subsegments:
     - [0x35CA80, c]
-    - [0x35D460, bin]
+    - [0x35D460, data]
   - type: code
     start: 0x35DA00
     vram: 0xE0056000
     subsegments:
     - [0x35DA00, c]
-    - [0x35E8A0, bin]
+    - [0x35E8A0, data]
   - type: code
     start: 0x35E920
     vram: 0xE0058000
     subsegments:
     - [0x35E920, c]
-    - [0x35F0A0, bin]
+    - [0x35F0A0, data]
   - type: code
     start: 0x3602C0
     vram: 0xE005A000
     subsegments:
     - [0x3602C0, c]
-    - [0x360a10, bin]
+    - [0x360a10, data]
   - [0x360A30, bin]
   - type: code
     start: 0x360F40
     vram: 0xE005C000
     subsegments:
     - [0x360F40, c]
-    - [0x361640, bin]
+    - [0x361640, data]
   - type: code
     start: 0x3625C0
     vram: 0xE005E000
     subsegments:
     - [0x3625C0, c]
-    - [0x362C30, bin]
+    - [0x362C30, data]
   - type: code
     start: 0x363160
     vram: 0xE0060000
     subsegments:
     - [0x363160, c]
-    - [0x363890, bin]
+    - [0x363890, data]
   - type: code
     start: 0x364300
     vram: 0xE0062000
     subsegments:
     - [0x364300, c]
-    - [0x364BC0, bin]
+    - [0x364BC0, data]
   - type: code
     start: 0x364F10
     vram: 0xE0064000
     subsegments:
     - [0x364F10, c]
-    - [0x365970, bin]
+    - [0x365970, data]
   - type: code
     start: 0x366030
     vram: 0xE0066000
     subsegments:
     - [0x366030, c]
-    - [0x366c80, bin]
+    - [0x366c80, data]
   - [0x366D60, bin]
   - type: code
     start: 0x36A8D0
     vram: 0xE0068000
     subsegments:
     - [0x36A8D0, c]
-    - [0x36ae80, bin]
+    - [0x36ae80, data]
   - [0x36AEE0, bin]
   - type: code
     start: 0x36D020
     vram: 0xE006A000
     subsegments:
     - [0x36D020, c]
-    - [0x36de10, bin]
+    - [0x36de10, data]
   - [0x36DF90, bin]
   - type: code
     start: 0x36E1D0
     vram: 0xE006C000
     subsegments:
     - [0x36E1D0, c]
-    - [0x36ed30, bin]
+    - [0x36ed30, data]
   - [0x36ED60, bin]
   - type: code
     start: 0x372790
     vram: 0xE006E000
     subsegments:
     - [0x372790, c]
-    - [0x373390, bin]
+    - [0x373390, data]
   - [0x3733E0, bin]
   - type: code
     start: 0x3740B0
     vram: 0xE0070000
     subsegments:
     - [0x3740B0, c]
-    - [0x374d80, bin]
+    - [0x374d80, data]
   - type: code
     start: 0x374E50
     vram: 0xE0072000
     subsegments:
     - [0x374E50, c]
-    - [0x375500, bin]
+    - [0x375500, data]
   - [0x375510, bin]
   - type: code
     start: 0x376460
     vram: 0xE0074000
     subsegments:
     - [0x376460, c]
-    - [0x376fc0, bin]
+    - [0x376fc0, data]
   - type: code
     start: 0x377070
     vram: 0xE0076000
     subsegments:
     - [0x377070, c]
-    - [0x377f00, bin]
+    - [0x377f00, data]
   - [0x377F80, bin]
   - type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
     - [0x37A3F0, c]
-    - [0x37acf0, bin]
+    - [0x37acf0, data]
   - [0x37ADD0, bin]
   - type: code
     start: 0x37C540
     vram: 0xE007A000
     subsegments:
     - [0x37C540, c]
-    - [0x37D140, bin]
+    - [0x37D140, data]
   - type: code
     start: 0x37D490
     vram: 0xE007C000
     subsegments:
     - [0x37D490, c]
-    - [0x37D9A0, bin]
+    - [0x37D9A0, data]
   - [0x37D9D0, bin]
   - type: code
     start: 0x37F720
     vram: 0xE007E000
     subsegments:
     - [0x37F720, c]
-    - [0x380350, bin]
+    - [0x380350, data]
   - [0x3803A0, bin]
   - type: code
     start: 0x3812C0
     vram: 0xE0080000
     subsegments:
     - [0x3812C0, c]
-    - [0x381d80, bin]
+    - [0x381d80, data]
   - [0x381E00, bin]
   - type: code
     start: 0x385640
     vram: 0xE0082000
     subsegments:
     - [0x385640, c]
-    - [0x386340, bin]
+    - [0x386340, data]
   - [0x3863B0, bin]
   - type: code
     start: 0x3889D0
     vram: 0xE0084000
     subsegments:
     - [0x3889D0, c]
-    - [0x3897e0, bin]
+    - [0x3897e0, data]
   - type: code
     start: 0x389850
     vram: 0xE0086000
     subsegments:
     - [0x389850, c]
-    - [0x38a2f0, bin]
+    - [0x38a2f0, data]
   - [0x38A350, bin]
   - type: code
     start: 0x38ADF0
     vram: 0xE0088000
     subsegments:
     - [0x38ADF0, c]
-    - [0x38bab0, bin]
+    - [0x38bab0, data]
   - [0x38BBA0, bin]
   - type: code
     start: 0x38C5F0
     vram: 0xE008A000
     subsegments:
     - [0x38C5F0, c]
-    - [0x38D040, bin]
+    - [0x38D040, data]
   - type: code
     start: 0x38DE00
     vram: 0xE008C000
     subsegments:
     - [0x38DE00, c]
-    - [0x38E8F0, bin]
+    - [0x38E8F0, data]
   - type: code
     start: 0x38EE60
     vram: 0xE008E000
     subsegments:
     - [0x38EE60, c]
-    - [0x38f6f0, bin]
+    - [0x38f6f0, data]
   - [0x38F710, bin]
   - type: code
     start: 0x38F900
     vram: 0xE0090000
     subsegments:
     - [0x38F900, c]
-    - [0x390340, bin]
+    - [0x390340, data]
   - [0x3903D0, ia4, battle/lucky, 64, 32]
   - [0x3907D0, ia4, battle/miss,  64, 32]
   - [0x390BD0, ia4, battle/good,  64, 32]
@@ -2192,14 +2192,14 @@ segments:
     vram: 0xE0092000
     subsegments:
     - [0x391D30, c]
-    - [0x3923c0, bin]
+    - [0x3923c0, data]
   - [0x392440, bin]
   - type: code
     start: 0x3928D0
     vram: 0xE0094000
     subsegments:
     - [0x3928D0, c]
-    - [0x393080, bin]
+    - [0x393080, data]
   - [0x3930A0, bin]
   - type: code
     start: 0x394280
@@ -2212,13 +2212,13 @@ segments:
     vram: 0xE0098000
     subsegments:
     - [0x395BB0, c]
-    - [0x3960C0, bin]
+    - [0x3960C0, data]
   - type: code
     start: 0x3965B0
     vram: 0xE009A000
     subsegments:
     - [0x3965B0, c]
-    - [0x397010, bin]
+    - [0x397010, data]
   - type: code
     start: 0x3981F0
     vram: 0xE009C000
@@ -2230,7 +2230,7 @@ segments:
     vram: 0xE009E000
     subsegments:
     - [0x39FF20, c]
-    - [0x3A0D10, bin]
+    - [0x3A0D10, data]
   - type: code
     start: 0x3A2290
     vram: 0xE00A0000
@@ -2242,40 +2242,40 @@ segments:
     vram: 0xE00A2000
     subsegments:
     - [0x3A2990, c]
-    - [0x3A3360, bin]
+    - [0x3A3360, data]
   - type: code
     start: 0x3A37E0
     vram: 0xE00A4000
     subsegments:
     - [0x3A37E0, c]
-    - [0x3a42b0, bin]
+    - [0x3a42b0, data]
   - [0x3A4320, bin]
   - type: code
     start: 0x3A5550
     vram: 0xE00A6000
     subsegments:
     - [0x3A5550, c]
-    - [0x3A5BE0, bin]
+    - [0x3A5BE0, data]
   - type: code
     start: 0x3A70F0
     vram: 0xE00A8000
     subsegments:
     - [0x3A70F0, c]
-    - [0x3A7710, bin]
+    - [0x3A7710, data]
   - [0x3A77A0, bin] # split further
   - type: code
     start: 0x3AA920
     vram: 0xE00AA000
     subsegments:
     - [0x3AA920, c]
-    - [0x3AAFE0, bin]
+    - [0x3AAFE0, data]
   - [0x3AB030, bin] # todo split this further
   - type: code
     start: 0x3AEE20
     vram: 0xE00AC000
     subsegments:
     - [0x3AEE20, c]
-    - [0x3AF5D0, bin]
+    - [0x3AF5D0, data]
   - [0x3AF700, bin] # todo split this further
   - type: code
     start: 0x3B2350
@@ -2288,196 +2288,196 @@ segments:
     vram: 0xE00B0000
     subsegments:
     - [0x3B3EB0, c]
-    - [0x3B4690, bin]
+    - [0x3B4690, data]
   - [0x3B46A0, bin] # todo split this further
   - type: code
     start: 0x3B4790
     vram: 0xE00B2000
     subsegments:
     - [0x3B4790, c]
-    - [0x3B5330, bin]
+    - [0x3B5330, data]
   - type: code
     start: 0x3B5CF0
     vram: 0xE00B4000
     subsegments:
     - [0x3B5CF0, c]
-    - [0x3B69E0, bin]
+    - [0x3B69E0, data]
   - type: code
     start: 0x3B7160
     vram: 0xE00B6000
     subsegments:
     - [0x3B7160, c]
-    - [0x3B78B0, bin]
+    - [0x3B78B0, data]
   - type: code
     start: 0x3B7B80
     vram: 0xE00B8000
     subsegments:
     - [0x3B7B80, c]
-    - [0x3B8470, bin]
+    - [0x3B8470, data]
   - [0x3B8860, bin] # todo split this further
   - type: code
     start: 0x3B8BD0
     vram: 0xE00BA000
     subsegments:
     - [0x3B8BD0, c]
-    - [0x3B9A50, bin]
+    - [0x3B9A50, data]
   - type: code
     start: 0x3BA030
     vram: 0xE00BC000
     subsegments:
     - [0x3BA030, c]
-    - [0x3BAC60, bin]
+    - [0x3BAC60, data]
   - [0x3BAEA0, bin] # todo split this further ADD STUFF AFTER HERE
   - type: code
     start: 0x3BBF60
     vram: 0xE00BE000
     subsegments:
     - [0x3BBF60, c]
-    - [0x3BCA50, bin]
+    - [0x3BCA50, data]
   - type: code
     start: 0x3BCD60
     vram: 0xE00C0000
     subsegments:
     - [0x3BCD60, c]
-    - [0x3BD770, bin]
+    - [0x3BD770, data]
   - type: code
     start: 0x3C11D0
     vram: 0xE00C2000
     subsegments:
     - [0x3C11D0, c]
-    - [0x3C1B60, bin]
+    - [0x3C1B60, data]
   - type: code
     start: 0x3CADF0
     vram: 0xE00C4000
     subsegments:
     - [0x3CADF0, c]
-    - [0x3CB7C0, bin]
+    - [0x3CB7C0, data]
   - type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
     subsegments:
     - [0x3CC9E0, c]
-    - [0x3CD670, bin]
+    - [0x3CD670, data]
   - type: code
     start: 0x3CF3A0
     vram: 0xE00C8000
     subsegments:
     - [0x3CF3A0, c]
-    - [0x3CFAB0, bin]
+    - [0x3CFAB0, data]
   - type: code
     start: 0x3D0500
     vram: 0xE00CA000
     subsegments:
     - [0x3D0500, c]
-    - [0x3D11B0, bin]
+    - [0x3D11B0, data]
   - type: code
     start: 0x3D1690
     vram: 0xE00CC000
     subsegments:
     - [0x3D1690, c]
-    - [0x3D2460, bin]
+    - [0x3D2460, data]
   - type: code
     start: 0x3D2AC0
     vram: 0xE00CE000
     subsegments:
     - [0x3D2AC0, c]
-    - [0x3D3910, bin]
+    - [0x3D3910, data]
   - type: code
     start: 0x3D3E20
     vram: 0xE00D0000
     subsegments:
     - [0x3D3E20, c]
-    - [0x3D4930, bin]
+    - [0x3D4930, data]
   - type: code
     start: 0x3D4970
     vram: 0xE00D2000
     subsegments:
     - [0x3D4970, c]
-    - [0x3D4E70, bin]
+    - [0x3D4E70, data]
   - type: code
     start: 0x3D5020
     vram: 0xE00D6000
     subsegments:
     - [0x3D5020, c]
-    - [0x3D5E60, bin]
+    - [0x3D5E60, data]
   - type: code
     start: 0x3D67C0
     vram: 0xE00D8000
     subsegments:
     - [0x3D67C0, c]
-    - [0x3D6FA0, bin]
+    - [0x3D6FA0, data]
   - type: code
     start: 0x3D7240
     vram: 0xE00DA000
     subsegments:
     - [0x3D7240, c]
-    - [0x3D7740, bin]
+    - [0x3D7740, data]
   - type: code
     start: 0x3D7A70
     vram: 0xE00DC000
     subsegments:
     - [0x3D7A70, c]
-    - [0x3D80B0, bin]
+    - [0x3D80B0, data]
   - type: code
     start: 0x3D8720
     vram: 0xE00DE000
     subsegments:
     - [0x3D8720, c]
-    - [0x3D8F30, bin]
+    - [0x3D8F30, data]
   - type: code
     start: 0x3DB460
     vram: 0xE00E0000
     subsegments:
     - [0x3DB460, c]
-    - [0x3DBEA0, bin]
+    - [0x3DBEA0, data]
   - type: code
     start: 0x3DC310
     vram: 0xE00E2000
     subsegments:
     - [0x3DC310, c]
-    - [0x3DCD00, bin]
+    - [0x3DCD00, data]
   - type: code
     start: 0x3DE000
     vram: 0xE00E4000
     subsegments:
     - [0x3DE000, c]
-    - [0x3DED90, bin]
+    - [0x3DED90, data]
   - type: code
     start: 0x3E0930
     vram: 0xE00E6000
     subsegments:
     - [0x3E0930, c]
-    - [0x3E11B0, bin]
+    - [0x3E11B0, data]
   - type: code
     start: 0x3E1690
     vram: 0xE00E8000
     subsegments:
     - [0x3E1690, c]
-    - [0x3E1CC0, bin]
+    - [0x3E1CC0, data]
   - type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
     subsegments:
     - [0x3E1EE0, c]
-    - [0x3E2930, bin]
+    - [0x3E2930, data]
   - type: code
     start: 0x3E43A0
     vram: 0xE010A000
     subsegments:
     - [0x3E43A0, c]
-    - [0x3E5060, bin]
+    - [0x3E5060, data]
   - type: code
     start: 0x3E54C0
     vram: 0xE010C000
     subsegments:
     - [0x3E54C0, c]
-    - [0x3E5ED0, bin]
+    - [0x3E5ED0, data]
   - type: code
     start: 0x3EB4E0
     vram: 0xE010E000
     subsegments:
     - [0x3EB4E0, c]
-    - [0x3EBC30, bin]
+    - [0x3EBC30, data]
   - [0x3EBE60, ia8,    world/ch0,               144, 40]
   - [0x3ED4E0, ia8,    world/text_chapter,      128, 40]
   - [0x3EE8E0, ia8,    world/text_end_of,       104, 40]
@@ -2497,7 +2497,7 @@ segments:
     vram: 0xE0110000
     subsegments:
     - [0x3F83F0, c]
-    - [0x3F8CA0, bin]
+    - [0x3F8CA0, data]
   - [0x3F8CC0, i4, ice_smash, 64, 128]
   - [0x3F9CC0, bin]
   - type: code
@@ -2505,7 +2505,7 @@ segments:
     vram: 0xE0112000
     subsegments:
     - [0x3F9E50, c]
-    - [0x3FA480, bin]
+    - [0x3FA480, data]
   - start: 0x3FA4B0
     type: ci4
     name: star_cards/card_front
@@ -2591,25 +2591,25 @@ segments:
     vram: 0xE0114000
     subsegments:
     - [0x3FEAE0, c]
-    - [0x3FF180, bin]
+    - [0x3FF180, data]
   - type: code
     start: 0x402640
     vram: 0xE0116000
     subsegments:
     - [0x402640, c]
-    - [0x4032A0, bin]
+    - [0x4032A0, data]
   - type: code
     start: 0x403400
     vram: 0xE0118000
     subsegments:
     - [0x403400, c]
-    - [0x403BB0, bin]
+    - [0x403BB0, data]
   - type: code
     start: 0x404220
     vram: 0xE011A000
     subsegments:
     - [0x404220, c]
-    - [0x404E40, bin]
+    - [0x404E40, data]
   - start: 0x404F40
     type: ci4
     name: world/cloud
@@ -2644,43 +2644,43 @@ segments:
     vram: 0xE011C000
     subsegments:
     - [0x406B40, c]
-    - [0x407040, bin]
+    - [0x407040, data]
   - type: code
     start: 0x409990
     vram: 0xE011E000
     subsegments:
     - [0x409990, c]
-    - [0x40A180, bin]
+    - [0x40A180, data]
   - type: code
     start: 0x40B3F0
     vram: 0xE0120000
     subsegments:
     - [0x40B3F0, c]
-    - [0x40BB70, bin]
+    - [0x40BB70, data]
   - type: code
     start: 0x40C5A0
     vram: 0xE0122000
     subsegments:
     - [0x40C5A0, c]
-    - [0x40D130, bin]
+    - [0x40D130, data]
   - type: code
     start: 0x412730
     vram: 0xE0124000
     subsegments:
     - [0x412730, c]
-    - [0x412FD0, bin]
+    - [0x412FD0, data]
   - type: code
     start: 0x413360
     vram: 0xE0126000
     subsegments:
     - [0x413360, c]
-    - [0x413F20, bin]
+    - [0x413F20, data]
   - type: code
     start: 0x414BA0
     vram: 0xE0128000
     subsegments:
     - [0x414BA0, c]
-    - [0x415020, bin]
+    - [0x415020, data]
   - type: code
     start: 0x415D90
     vram: 0x802A1000
@@ -2701,154 +2701,154 @@ segments:
     overlay: True
     subsegments:
     - [0x422000, c]
-    - [0x422A90, bin]
+    - [0x422A90, data]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x422AD0, c]
-    - [0x4233B0, bin]
+    - [0x4233B0, data]
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x4233F0, c]
-    - [0x423C30, bin]
+    - [0x423C30, data]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x423C70, c]
-    - [0x424550, bin]
+    - [0x424550, data]
   - type: code
     start: 0x425590
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x425590, c]
-    - [0x425B10, bin]
+    - [0x425B10, data]
   - type: code
     start: 0x425B50
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x425B50, c]
-    - [0x426130, bin]
+    - [0x426130, data]
   - type: code
     start: 0x426170
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x426170, c]
-    - [0x426970, bin]
+    - [0x426970, data]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x4269D0, c]
-    - [0x427320, bin]
+    - [0x427320, data]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x4273B0, c]
-    - [0x427A30, bin]
+    - [0x427A30, data]
   - type: code
     start: 0x427A70
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x427A70, c]
-    - [0x428280, bin]
+    - [0x428280, data]
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x4282E0, c]
-    - [0x428A30, bin]
+    - [0x428A30, data]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x428A70, c]
-    - [0x4292C0, bin]
+    - [0x4292C0, data]
   - type: code
     start: 0x429320
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x429320, c]
-    - [0x429C90, bin]
+    - [0x429C90, data]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x429D20, c]
-    - [0x42A480, bin]
+    - [0x42A480, data]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42A4F0, c]
-    - [0x42B650, bin]
+    - [0x42B650, data]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42C6F0, c]
-    - [0x42CEB0, bin]
+    - [0x42CEB0, data]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42CF10, c]
-    - [0x42D9B0, bin]
+    - [0x42D9B0, data]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42DA10, c]
-    - [0x42E330, bin]
+    - [0x42E330, data]
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42E3A0, c]
-    - [0x42ED70, bin]
+    - [0x42ED70, data]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42EE20, c]
-    - [0x42F680, bin]
+    - [0x42F680, data]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x42F6E0, c]
-    - [0x42FFC0, bin]
+    - [0x42FFC0, data]
   - type: code
     start: 0x430020
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x430020, c]
-    - [0x430940, bin]
+    - [0x430940, data]
   - dir: battle/area_kmr_part_1
     type: code
     start: 0x4309A0
