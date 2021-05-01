@@ -81,7 +81,7 @@ void func_802E4154(Entity* entity) {
             phi_a0 = &D_802EA0A0;
         }
         create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
-        set_entity_updatecmd(entity, &D_802EA310);
+        set_entity_commandlist(entity, &D_802EA310);
     } else {
         exec_entity_updatecmd(entity);
     }
@@ -162,7 +162,7 @@ void func_802E4484(Entity* entity) {
 }
 
 s32 func_802E44CC(Entity* entity) {
-    if (entity->boundScript != NULL) {
+    if (entity->boundScriptBytecode != NULL) {
         entity->flags |= 0x1000000;
         return TRUE;
     }
@@ -209,7 +209,7 @@ void func_802E464C(Entity* entity) {
     temp = entity->dataBuf;
     temp->unk_10 = D_8015C7D2;
     temp->unk_0A = 0xFFFF;
-    entity->unk_3C = func_802E455C;
+    entity->renderSetupFunc = func_802E455C;
 }
 
 void func_802E4694(Entity* entity) {
@@ -221,7 +221,7 @@ void func_802E46BC(Entity* entity) {
     AnimatedMesh* animMesh;
 
     entity_init_Hammer23Block_normal(entity);
-    entity->unk_3C = func_802E455C;
+    entity->renderSetupFunc = func_802E455C;
     animMesh = get_anim_mesh(entity->virtualModelIndex);
     animMesh->renderMode = 0x11;
     animMesh->flags |= 0x10000;

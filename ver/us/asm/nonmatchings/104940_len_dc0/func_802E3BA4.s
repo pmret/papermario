@@ -115,7 +115,7 @@ glabel L802E3CD8_105558
 /* 10558C 802E3D0C 24020001 */   addiu    $v0, $zero, 1
 /* 105590 802E3D10 3C05802F */  lui       $a1, %hi(D_802E9E80)
 /* 105594 802E3D14 24A59E80 */  addiu     $a1, $a1, %lo(D_802E9E80)
-/* 105598 802E3D18 0C043EF0 */  jal       set_entity_updatecmd
+/* 105598 802E3D18 0C043EF0 */  jal       set_entity_commandlist
 /* 10559C 802E3D1C 0220202D */   daddu    $a0, $s1, $zero
 /* 1055A0 802E3D20 C6200050 */  lwc1      $f0, 0x50($s1)
 /* 1055A4 802E3D24 080B8F6C */  j         .L802E3DB0
@@ -140,7 +140,7 @@ glabel L802E3D2C_1055AC
 /* 1055E4 802E3D64 24020001 */   addiu    $v0, $zero, 1
 /* 1055E8 802E3D68 3C05802F */  lui       $a1, %hi(D_802E9E80)
 /* 1055EC 802E3D6C 24A59E80 */  addiu     $a1, $a1, %lo(D_802E9E80)
-/* 1055F0 802E3D70 0C043EF0 */  jal       set_entity_updatecmd
+/* 1055F0 802E3D70 0C043EF0 */  jal       set_entity_commandlist
 /* 1055F4 802E3D74 0220202D */   daddu    $a0, $s1, $zero
 /* 1055F8 802E3D78 C6200050 */  lwc1      $f0, 0x50($s1)
 /* 1055FC 802E3D7C 080B8F6C */  j         .L802E3DB0
@@ -153,7 +153,7 @@ glabel L802E3D84_105604
 /* 105614 802E3D94 24020001 */   addiu    $v0, $zero, 1
 /* 105618 802E3D98 3C05802F */  lui       $a1, %hi(D_802E9E80)
 /* 10561C 802E3D9C 24A59E80 */  addiu     $a1, $a1, %lo(D_802E9E80)
-/* 105620 802E3DA0 0C043EF0 */  jal       set_entity_updatecmd
+/* 105620 802E3DA0 0C043EF0 */  jal       set_entity_commandlist
 /* 105624 802E3DA4 0220202D */   daddu    $a0, $s1, $zero
 /* 105628 802E3DA8 C6200050 */  lwc1      $f0, 0x50($s1)
 /* 10562C 802E3DAC 24040151 */  addiu     $a0, $zero, 0x151

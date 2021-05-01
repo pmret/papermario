@@ -148,7 +148,7 @@ void func_802E38D8(Entity* entity) {
 
     if ((temp->unk_04 == 0) || (temp->unk_06 == 0)) {
         temp->unk_03 = 1;
-        set_entity_updatecmd(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y,
+        set_entity_commandlist(get_entity_by_index(create_entity(&D_802EA07C, entity->position.x, entity->position.y,
                              entity->position.z,
                              entity->rotation.y, 0x80000000)), &D_802E9E54);
         entity->flags |= 0x20000020;
@@ -160,7 +160,7 @@ void func_802E3A00(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s16 phi_return;
 
-    if (entity->unk_0A == 0xE) {
+    if (entity->type == 0xE) {
         if (temp->unk_04 != 0xA) {
             temp->unk_06 -= 1;
             if (temp->unk_06 < 0) {
@@ -175,7 +175,7 @@ void func_802E3A48(Entity* entity) {
     s32 temp_v0;
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
-    if ((entity->unk_06 & 0x80) != 0) {
+    if ((entity->collisionFlags & 0x80) != 0) {
         exec_entity_updatecmd(entity);
         return;
     }
@@ -278,7 +278,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            set_entity_updatecmd(entity, &D_802E9E80);
+            set_entity_commandlist(entity, &D_802E9E80);
             sfx_play_sound_at_position(0x14f, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x16:
@@ -293,7 +293,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (!bVar2) {
                 return 1;
             }
-            set_entity_updatecmd(entity, &D_802E9E80);
+            set_entity_commandlist(entity, &D_802E9E80);
             sfx_play_sound_at_position(0x150, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x17:
@@ -301,7 +301,7 @@ s32 func_802E3BA4(Entity* entity) {
             if (gPlayerData.hammerLevel < '\x02') {
                 return 1;
             }
-            set_entity_updatecmd(entity, &D_802E9E80);
+            set_entity_commandlist(entity, &D_802E9E80);
             sfx_play_sound_at_position(0x151, 0, entity->position.x, entity->position.y, entity->position.z);
             break;
         case 0x1b:
@@ -324,7 +324,7 @@ INCLUDE_ASM(s32, "104940_len_dc0", func_802E3BA4, Entity* entity);
 
 void entity_init_Hammer1Block_normal(Entity* entity) {
     entity_init_Hammer23Block_normal(entity);
-    entity->unk_3C = func_802E30C0;
+    entity->renderSetupFunc = func_802E30C0;
 }
 
 s32 entity_init_HammerBlock_small(Entity* entity) {

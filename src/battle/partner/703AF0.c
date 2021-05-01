@@ -16,9 +16,9 @@ INCLUDE_ASM(s32, "battle/partner/703AF0", func_802383F8_703EE8);
 
 INCLUDE_ASM(s32, "battle/partner/703AF0", func_80238408_703EF8);
 
-INCLUDE_ASM(s32, "battle/partner/703AF0", func_80238434_703F24);
+#include "common/UnkBackgroundFunc3.inc.c"
 
-INCLUDE_ASM(s32, "battle/partner/703AF0", func_80238478_703F68);
+#include "common/SetBackgroundAlpha.inc.c"
 
 INCLUDE_ASM(s32, "battle/partner/703AF0", func_802384B0_703FA0);
 

@@ -60,7 +60,7 @@ void func_802E8A58(Entity* entity) {
 void func_802E8ADC(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((entity->unk_06 & 1) != 0) {
+    if ((entity->collisionFlags & 1) != 0) {
         gOverrideFlags |= 0x40;
 
         if (!(playerStatus->flags & 0x3000)) {
@@ -141,7 +141,7 @@ void func_802E8E10(Entity* entity) {
     Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptSource;
 
     gOverrideFlags &= ~0x40;
-    entity->boundScript = triggerScriptStart;
+    entity->boundScriptBytecode = triggerScriptStart;
     func_80110678(entity);
 }
 
@@ -158,7 +158,7 @@ f32 func_802E8F94(Entity* entity) {
     temp2 = temp[0];
     temp3 = temp[1];
     temp4 = temp[2];
-    entity->unk_3C = &push_entity_matrix;
+    entity->renderSetupFunc = &push_entity_matrix;
     temp_s0 = entity->dataBuf;
     temp5 = &entity->position.y; // required... wtf
     temp_s0->unk_0C = temp2;

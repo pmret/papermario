@@ -75,7 +75,7 @@ void func_802E5E50(Entity* entity) {
 
     func_802E581C(entity);
     if (temp_s0->unk_0A != 0) {
-        entity->unk_3C = NULL;
+        entity->renderSetupFunc = NULL;
     }
 
     entity->rotation.y = clamp_angle(entity->rotation.y + 3.0);
@@ -99,7 +99,7 @@ void func_802E5F50(Entity* entity) {
 
     temp->unk_128 = &D_0A000328;
     temp->unk_12C = &D_0A000380;
-    entity->unk_3C = func_802E586C;
+    entity->renderSetupFunc = func_802E586C;
 }
 
 void func_802E5F7C(Entity* entity) {
@@ -107,5 +107,5 @@ void func_802E5F7C(Entity* entity) {
 
     temp->unk_128 = &D_0A000800;
     temp->unk_12C = &D_0A000750;
-    entity->unk_3C = func_802E586C;
+    entity->renderSetupFunc = func_802E586C;
 }

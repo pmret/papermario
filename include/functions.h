@@ -225,6 +225,10 @@ s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
+void enable_world_fog(void);
+void set_world_fog_dist(s32 start, s32 end);
+void set_world_fog_color(s32 r, s32 g, s32 b, s32 a);
+
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
                      s32 pickupVar);
 s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
@@ -303,6 +307,7 @@ void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
+void fx_walk_large(s32, f32, f32, f32, s32);
 
 void func_80138D88(s32, s32, s32, s32, f32);
 s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);

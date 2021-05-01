@@ -32,9 +32,9 @@ INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802193A4_66B124);
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802193F0_66B170);
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_8021943C_66B1BC);
+#include "common/UnkBackgroundFunc3.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_80219480_66B200);
+#include "common/SetBackgroundAlpha.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_pra3/669D80", func_802194B8_66B238);
 
