@@ -26,7 +26,7 @@ void func_802E4B60(Entity* entity) {
     struct802E4B10* temp_s0;
     Entity* someEntity;
 
-    entity->unk_3C = func_802E4AEC;
+    entity->renderSetupFunc = func_802E4AEC;
     entity->alpha = 255;
     temp_s0 = entity->dataBuf;
     entity->flags |= 0x2000;

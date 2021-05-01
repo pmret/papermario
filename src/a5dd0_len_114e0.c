@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entities);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", update_shadows);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_entity_updatecmd);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_entity_commandlist);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_updatecmd);
 
@@ -254,7 +254,18 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111E9C);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", UseDynamicShadow);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignScript, ScriptInstance* script, s32 isInitialCall);
+ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall == TRUE) {
+        Bytecode* toBind = get_variable(script, *args++);
+
+        get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignAreaFlag, ScriptInstance* script, s32 isInitialCall);
 
@@ -281,7 +292,9 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
 
 INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112328);
+void func_80112328(s32 shadowIndex) {
+    func_8011085C(shadowIndex);
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112344);
 
@@ -492,7 +505,9 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B090);
 INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY,
             f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1C0);
+Model* func_8011B1C0(s32 index) {
+    return (*D_801512E0)[index];
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
 

@@ -26,7 +26,7 @@ glabel func_802E7034
 /* 108908 802E7088 AC820000 */  sw        $v0, ($a0)
 /* 10890C 802E708C 2402FFFF */  addiu     $v0, $zero, -1
 /* 108910 802E7090 AE020010 */  sw        $v0, 0x10($s0)
-/* 108914 802E7094 0C043EF0 */  jal       set_entity_updatecmd
+/* 108914 802E7094 0C043EF0 */  jal       set_entity_commandlist
 /* 108918 802E7098 E6000008 */   swc1     $f0, 8($s0)
 .L802E709C:
 /* 10891C 802E709C 8FBF0018 */  lw        $ra, 0x18($sp)

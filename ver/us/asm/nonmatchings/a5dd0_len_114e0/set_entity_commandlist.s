@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel set_entity_updatecmd
+glabel set_entity_commandlist
 /* A62C0 8010FBC0 AC850018 */  sw        $a1, 0x18($a0)
 /* A62C4 8010FBC4 00A0182D */  daddu     $v1, $a1, $zero
 /* A62C8 8010FBC8 24020001 */  addiu     $v0, $zero, 1

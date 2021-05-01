@@ -94,7 +94,7 @@ void func_802E1350(Entity* entity) {
     s32* temp = &D_802EB390;
     if (*temp != 0) {
         if (D_802EB398->currentOption == 1) {
-            set_entity_updatecmd(entity, &D_802E99DC);
+            set_entity_commandlist(entity, &D_802E99DC);
         } else {
             exec_entity_updatecmd(entity);
         }
@@ -106,6 +106,6 @@ void func_802E13B8(Entity* entity) {
     struct802E3650* temp = entity->dataBuf;
 
     entity_init_Hammer23Block_normal(entity);
-    entity->unk_3C = func_802E0DE0;
+    entity->renderSetupFunc = func_802E0DE0;
     temp->unk_04 = 8;
 }

@@ -319,28 +319,31 @@ typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
     /* 0x05 */ char unk_05;
-    /* 0x06 */ u8 unk_06;
+    /* 0x06 */ u8 collisionFlags;
     /* 0x07 */ s8 unk_07;
-    /* 0x08 */ char unk_08[2];
-    /* 0x0A */ u8 unk_0A;
+    /* 0x08 */ char unk_08;
+    /* 0x09 */ s8 hasEntityScript;
+    /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
-    /* 0x12 */ char unk_12[2];
+    /* 0x12 */ s16 vertexSegment;
     /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
-    /* 0x18 */ char unk_18[8];
-    /* 0x20 */ UNK_PTR buildMatrixOverride;
-    /* 0x24 */ char unk_24[4];
-    /* 0x28 */ Bytecode* boundScript;
-    /* 0x2C */ char unk_2C[12];
+    /* 0x18 */ s32* scriptReadPos;
+    /* 0x1C */ UNK_FUN_PTR(updateScriptCallback);
+    /* 0x20 */ UNK_FUN_PTR(updateMatrixOverride);
+    /* 0x24 */ ScriptInstance* boundScript;
+    /* 0x28 */ Bytecode* boundScriptBytecode;
+    /* 0x2C */ s32* savedReadPos;
+    /* 0x30 */ char unk_30[0x8];
     /* 0x38 */ struct StaticEntityData* staticData;
-    /* 0x3C */ UNK_PTR unk_3C; // pointer to draw func(?)
+    /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
     /* 0x40 */ void* dataBuf;
     /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
-    /* 0x6C */ char unk_6C[4];
+    /* 0x6C */ f32 shadowPosY;
     /* 0x70 */ Matrix4f* inverseTransformMatrix; /* world-to-local */
     /* 0x74 */ char unk_74[60];
     /* 0xB0 */ float effectiveSize;
