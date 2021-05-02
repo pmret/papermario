@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "182B30", enable_actor_blur);
 void disable_actor_blur(Actor* actor) {
     ActorPart* part = actor->partsTable;
 
-    if ((part->idleAnimations != 0) && !(part->flags & 2)) {
+    if ((part->idleAnimations != NULL) && !(part->flags & 2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
         if (decorationTable->unk_7DB != 0) {
