@@ -17,8 +17,9 @@ enum {
 
 // BSS
 static s32 N(D_802462C0_B4AA30)[91];
-static s32 N(D_8024642C)[91];
-static s32 N(D_80246598);
+static s8 N(D_802462C4_pad);
+static s32 N(D_80246428)[91];
+static s32 N(D_8024659C);
 
 // DATA
 EntryList N(entryList) = {
@@ -1230,10 +1231,10 @@ ApiStatus N(func_80241BCC_CB090C)(ScriptInstance *script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i <= 90; i++) {
-        N(D_8024642C)[i] = 128 + i;
+        N(D_80246428)[i] = 128 + i;
     }
 
-    N(D_80246598) = 0;
+    N(D_8024659C) = 0;
     return ApiStatus_DONE2;
 }
 

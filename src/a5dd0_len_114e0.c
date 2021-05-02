@@ -18,8 +18,16 @@ typedef struct RenderTaskEntry {
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTaskEntry; // size = 0x10
 
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(struct GameMode*);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
+} GameMode; // size = 0x18
+
 typedef Model* SmallModelList[4];
-extern SmallModelList* D_801512E0;
 
 extern s32 D_8015132C;
 extern Fog* wFog;
@@ -34,6 +42,13 @@ extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern s32 D_8014AFB0;
+
+// 0x801512B0 - bss start
+static s32 B_801512B0[12];
+static SmallModelList* D_801512E0;
+static s32 B_801512E4[3];
+static s8 B_801512F0[0x410];
+static GameMode gMainGameState[2]; // TODO rename
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entities);
 
@@ -311,18 +326,18 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B20);
 void NOP_state(void) {
 }
 
+// ordering
+#ifdef NON_MATCHING
+void func_80112B98(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
+        gMainGameState[i].flags = 0;
+    }
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B98);
-
-typedef struct GameMode {
-    /* 0x00 */ u16 flags;
-    /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(struct GameMode*);
-    /* 0x0C */ UNK_FUN_PTR(unk_0C);
-    /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
-} GameMode; // size = 0x18
-
-extern GameMode gMainGameState[2]; // TODO rename
+#endif
 
 // regalloc?
 #ifndef NON_MATCHING
