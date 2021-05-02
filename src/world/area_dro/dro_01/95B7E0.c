@@ -73,7 +73,8 @@ typedef struct {
 } N(temp);
 
 static s32 N(D_8024DFC0);
-static s8 N(pad_D_8024DFC4)[0x14];
+static s8 N(pad_D_8024DFC4)[0x4];
+static s32 N(pad_D_8024DFC8)[4];
 static s32 N(D_8024DFD8);
 static s8 N(pad_D_8024DFDC)[0x4];
 static N(temp)* N(D_8024DFE0);
