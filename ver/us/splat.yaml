@@ -399,6 +399,7 @@ segments:
     - [0xE7940, .rodata, ddaf0_len_c50]
     - [0xE7950, .rodata, DF950]
     - [0xE7990, .rodata, e0b30_len_b80]
+    - [0xE79B0, .bss, a5dd0_len_114e0]
   - type: code
     dir: evt
     start: 0xE79B0
