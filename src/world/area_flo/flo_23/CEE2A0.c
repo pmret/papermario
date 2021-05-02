@@ -10,6 +10,7 @@ enum {
 };
 
 static s32 N(D_802426E0)[91];
+static s8 N(D_8024284C_pad)[4];
 static s32 N(D_80242850)[91];
 static s32 N(D_802429BC);
 
