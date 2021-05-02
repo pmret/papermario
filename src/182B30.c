@@ -27,7 +27,20 @@ void mtx_mirror_y(Matrix4f arg0) {
 
 INCLUDE_ASM(s32, "182B30", enable_actor_blur);
 
-INCLUDE_ASM(s32, "182B30", disable_actor_blur);
+void disable_actor_blur(Actor* actor) {
+    ActorPart* part = actor->partsTable;
+
+    if ((part->idleAnimations != 0) && !(part->flags & 2)) {
+        DecorationTable* decorationTable = part->decorationTable;
+
+        if (decorationTable->unk_7DB != 0) {
+            decorationTable->unk_7DB--;
+            if (decorationTable->unk_7DB == 0) {
+                decorationTable->effectType = 0x14;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "182B30", reset_actor_blur);
 
