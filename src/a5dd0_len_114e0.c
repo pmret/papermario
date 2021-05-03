@@ -96,9 +96,9 @@ s32 D_8014AFB0 = 0xFF;
 
 s32 D_8014AFB4[] = {0, 0, 0};
 
-s32 D_8014AFC0[] = { &D_8014B7F8, &D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00, };
+s32* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00 };
 
-s32 D_8014B000[] = { &D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, 0x00000000, };
+s32* D_8014B000[] = { D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
 
 s32 D_8014B0B8 = 0xFCFFFFFF;
 
@@ -133,7 +133,20 @@ s8 D_8014B765 = 0;
 s8 D_8014B766 = 0;
 s8 D_8014B767 = 0;
 
-s32 D_8014B768[] = { 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00010000, 0x00000000, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, };
+Matrix4s D_8014B768 = {
+    .whole = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    },
+    .frac = {
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0}
+    }
+};
 
 s32 D_8014B7A8[] = { 0x00000006, 0x00000000, 0x00000005, 0x00020000, 0x00000004, 0x00030000, 0x00000003, 0x00038000, 0x00000002, 0x0003C000, 0x00000001, 0x0003E000, 0x00000000, 0x0003F000, 0x00000000, 0x0003F800, 0x00000000, 0x00000000, };
 
@@ -291,6 +304,20 @@ extern RenderTaskEntry* D_801533A0[];
 extern s32 D_801533AC;
 extern s32 D_801533B0; // num render task entries?
 extern s8 D_8015A578;
+
+// funcs
+void update_shadows(void);
+s32 step_entity_commandlist(Entity* entity);
+void render_shadows(void);
+void update_entity_transform_matrix(Entity* entity);
+void update_shadow_transform_matrix(Shadow* shadow);
+void update_entity_inverse_rotation_matrix(Entity* entity);
+void delete_entity(s32 entityIndex);
+void delete_entity_and_unload_data(s32 entityIndex);
+void func_8011085C(s32 shadowIndex);
+s32 entity_get_collision_flags(Entity *entity);
+void func_801117DC(StaticEntityData* data);
+void func_80112344(Entity* entity);
 
 void update_entities(void) {
     s32 i;
@@ -649,11 +676,11 @@ void render_shadows(void) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entity_transform_matrix);
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_transform_matrix, Entity* entity);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_shadow_transform_matrix);
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_shadow_transform_matrix, Shadow* shadow);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entity_inverse_rotation_matrix);
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_inverse_rotation_matrix, Entity* entity);
 
 Entity* get_entity_by_index(s32 index) {
     return (*gCurrentEntityListPtr)[index & 0xFFF];
@@ -726,7 +753,7 @@ void delete_entity(s32 entityIndex) {
     (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
-s32 delete_entity_and_unload_data(s32 entityIndex) {
+void delete_entity_and_unload_data(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
 
     if (entity->dataBuf != NULL) {
@@ -751,7 +778,7 @@ s32 delete_entity_and_unload_data(s32 entityIndex) {
     (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
-s32 func_8011085C(s32 shadowIndex) {
+void func_8011085C(s32 shadowIndex) {
     Shadow* shadow = get_shadow_by_index(shadowIndex);
 
     free_entity_model_by_index(shadow->entityModelID);
@@ -759,11 +786,73 @@ s32 func_8011085C(s32 shadowIndex) {
     (*gCurrentShadowListPtr)[shadowIndex] = NULL;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_get_collision_flags);
+s32 entity_get_collision_flags(Entity *entity) {
+    u32 listIndex = entity->listIndex;
+    s32 ret = 0;
+    u32 flag;
+
+    if (entity->flags & 0x20000) {
+        ret = 0x80;
+        entity->flags &= ~0x20000;
+    }
+
+    flag = gCollisionStatus.currentFloor;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 1;
+    }
+
+    flag = gCollisionStatus.lastTouchedFloor;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x100;
+    }
+
+    flag = gCollisionStatus.currentCeiling;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x4;
+    }
+
+    flag = gCollisionStatus.pushingAgainstWall;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x10;
+    }
+
+    flag = gCollisionStatus.lastWallHammered;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x40;
+    }
+
+    flag = gCollisionStatus.currentWall;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & 0x8000) {
+        ret |= 8;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801109DC);
 
+// float bs
+#ifdef NON_MATCHING
+s32 test_player_entity_aabb(Entity* entity) {
+    f32 temp_f4;
+    f32 colliderDiameter;
+
+    temp_f4 = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
+    if (temp_f4 > 0.0f || gPlayerStatus.colliderHeight + entity->aabb.y < fabsf(temp_f4)) {
+        return 0;
+    }
+
+    if ((gPlayerStatus.colliderDiameter + entity->aabb.x) * 0.5 < fabsf(gPlayerStatus.position.x - entity->position.x)) {
+        return 0;
+    }
+    if ((gPlayerStatus.colliderDiameter + entity->aabb.z) * 0.5 < fabsf(gPlayerStatus.position.z - entity->position.z)) {
+        return 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", test_player_entity_aabb);
+#endif
 
 s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
@@ -789,11 +878,11 @@ void func_80110BF8(Entity *entity) {
 void load_area_specific_entity_data(void) {
     if (D_8015132C == 0) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
-            dma_copy(&entity_jan_iwa_ROM_START, &entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
-            dma_copy(&entity_sbk_omo_ROM_START, &entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_sbk_omo_ROM_START, entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         } else {
-            dma_copy(&entity_default_ROM_START, &entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_default_ROM_START, entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         }
 
         D_8015132C = 1;
@@ -816,7 +905,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111790);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801117DC);
+INCLUDE_ASM(void, "a5dd0_len_114e0", func_801117DC, StaticEntityData* data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             s32 flags);
@@ -834,7 +923,7 @@ ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        Bytecode* toBind = get_variable(script, *args++);
+        Bytecode* toBind = (Bytecode*)get_variable(script, *args++);
 
         get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
         return ApiStatus_DONE2;
@@ -872,7 +961,7 @@ void func_80112328(s32 shadowIndex) {
     func_8011085C(shadowIndex);
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112344);
+INCLUDE_ASM(void, "a5dd0_len_114e0", func_80112344, Entity* entity);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801125E8);
 
@@ -922,12 +1011,12 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     gameMode->unk_08 = arg0->unk_08;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = &NOP_state;
-    if (gameMode->step == NULL) gameMode->step = &NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->render == NULL) gameMode->render = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = NOP_state;
+    if (gameMode->step == NULL) gameMode->step = NOP_state;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = NOP_state;
+    if (gameMode->render == NULL) gameMode->render = NOP_state;
 
-    gameMode->renderAux = &NOP_state;
+    gameMode->renderAux = NOP_state;
     gameMode->init();
 
     return gameMode;
@@ -944,12 +1033,12 @@ GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
     gameMode->step = arg0->step;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = &NOP_state;
-    if (gameMode->step == NULL) gameMode->step = &NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->render == NULL) gameMode->render = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = NOP_state;
+    if (gameMode->step == NULL) gameMode->step = NOP_state;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = NOP_state;
+    if (gameMode->render == NULL) gameMode->render = NOP_state;
 
-    gameMode->renderAux = &NOP_state;
+    gameMode->renderAux = NOP_state;
     gameMode->init();
 
     return gameMode;
@@ -964,7 +1053,7 @@ void func_80112D84(s32 i, void (*fn)(void)) {
     gameMode->flags |= 0x20;
 
     if (fn == NULL) {
-        gameMode->renderAux = &NOP_state;
+        gameMode->renderAux = NOP_state;
     }
 }
 

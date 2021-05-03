@@ -372,7 +372,7 @@ typedef struct StaticEntityData {
     /* 0x08 */ char unk_08[4];
     /* 0x0C */ UNK_FUN_PTR(unk_data_func);
     /* 0x10 */ UNK_PTR unk_data_ptr1;
-    /* 0x14 */ UNK_FUN_PTR(unk_data_ptr2);
+    /* 0x14 */ EntityCallback unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
