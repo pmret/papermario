@@ -268,14 +268,20 @@ s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000,
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // BSS
-static s32 B_801512B0[12];
+static s32 B_801512B0[3];
+static s32 D_801512BC;
+static s32 D_801512C0;
+static s32 D_801512C4;
+static s32 D_801512C8[6];
 static SmallModelList* D_801512E0;
-static s8 B_801512E4[0x4];
-static s8 B_801512E8[0x8];
+static s8 D_801512E4[0x4];
+static s8 D_801512E8[0x8];
 static s8 B_801512F0[0x410];
 static GameMode gMainGameState[2]; // TODO rename
 
+extern s32 D_80151324;
 extern s32 D_8015132C;
+extern s32 D_80151330;
 extern Fog* wFog;
 extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
@@ -284,16 +290,168 @@ extern s32 texPannerAuxV[MAX_TEX_PANNERS];
 extern RenderTaskEntry* D_801533A0[];
 extern s32 D_801533AC;
 extern s32 D_801533B0; // num render task entries?
+extern s8 D_8015A578;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entities);
+void update_entities(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_shadows);
+    D_801512BC = 0;
+    D_801512C0 = 0;
+    D_80151330++;
+
+    for (i = 0; i < 30; i++) {
+        Entity* entity = get_entity_by_index(i);
+
+        if (entity != NULL) {
+            D_801512C0++;
+
+            if (!(entity->flags & 0x40000000)) {
+                if (entity->flags & 0x1000000) {
+                    entity->flags &= ~0x1000000;
+                    if (!(entity->flags & 0x8000)) {
+                        entity->flags |= 0x2000000;
+                    }
+                    entity->boundScript = start_script(entity->boundScriptBytecode, 0xA, 0x20);
+                }
+
+                if (entity->flags & 0x2000000) {
+                    if (does_script_exist(entity->boundScript->id)) {
+                        if (entity->flags & 8) {
+                            func_8011E8BC(entity->virtualModelIndex);
+                        } else {
+                            exec_entity_model_commandlist(entity->virtualModelIndex);
+                        }
+
+                        if (entity->flags & 0x2000) {
+                            entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                        }
+
+                        if (!(entity->flags & 0x10)) {
+                            update_entity_transform_matrix(entity);
+                        }
+                        continue;
+                    } else {
+                        entity->flags &= ~0x2000000;
+                    }
+                }
+
+                if (entity->unk_07 == 0) {
+                    entity->collisionFlags = entity_get_collision_flags(entity);
+
+                    if (entity->collisionFlags) {
+                        EntityCallback entityCallback = entity->staticData->unk_data_ptr2;
+
+                        if (entityCallback != NULL && entityCallback(entity) != 0) {
+                            entity->unk_07 = 0xA;
+                            entity->flags |= 0x10000;
+                        }
+                    }
+                } else {
+                    entity->unk_07--;
+                    if (entity->flags & 0x40) {
+                        if (entity->unk_07 == 0) {
+                            entity->flags &= ~0x60;
+                        } else {
+                            entity->flags |= 0x20;
+                        }
+                    } else if (entity->unk_07 == 0) {
+                        entity->flags &= ~0x10000;
+                        entity->flags &= ~0x20000;
+                        entity->collisionFlags = 0;
+                    }
+                }
+
+                if (entity->flags & 0x2000) {
+                    entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                }
+
+                if (!gGameStatusPtr->disableScripts) {
+                    if (entity->updateScriptCallback != NULL) {
+                        entity->updateScriptCallback(entity);
+                    }
+
+                    if (entity->scriptReadPos != NULL) {
+                        if (entity->hasEntityScript) {
+                            entity->hasEntityScript--;
+                            if (!(entity->hasEntityScript)) {
+                                while (step_entity_updatecmd(entity) != 0);
+                            }
+                        }
+                    }
+                }
+
+                if (!(entity->flags & 0x10)) {
+                    update_entity_transform_matrix(entity);
+                }
+
+                if (!(entity->flags & 0x20)) {
+                    update_entity_inverse_rotation_matrix(entity);
+                }
+
+                if (entity->flags & 8) {
+                    func_8011E8BC(entity->virtualModelIndex);
+                } else {
+                    exec_entity_model_commandlist(entity->virtualModelIndex);
+                }
+
+                if (entity->shadowIndex >= 0) {
+                    func_80112344(entity);
+                }
+
+                if (entity->flags & 0x20000000) {
+                    delete_entity(entity->listIndex);
+                }
+
+                if (entity->flags & 0x4000000) {
+                    delete_entity_and_unload_data(entity->listIndex);
+                }
+            }
+        }
+    }
+
+    update_shadows();
+    D_8015A578 = 0;
+}
+
+void update_shadows(void) {
+    s32 i;
+
+    D_80151324 = 0;
+
+    for (i = 0; i < 60; i++) {
+        Shadow* shadow = get_shadow_by_index(i);
+
+        if (shadow != NULL) {
+            D_80151324++;
+
+            if (!(shadow->flags & 0x40000000)) {
+                if (shadow->flags & 0x2000) {
+                    shadow->unk_28.y = -gCameras[gCurrentCameraID].currentYaw;
+                }
+
+                update_shadow_transform_matrix(shadow);
+
+                if (shadow->flags & 8) {
+                    func_8011E8BC(shadow->unk_08);
+                } else {
+                    exec_entity_model_commandlist(shadow->unk_08);
+                }
+
+                if (shadow->flags & 0x20000000) {
+                    func_8011085C(shadow->unk_04);
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_entity_commandlist);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_updatecmd);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", exec_entity_updatecmd, Entity* entity);
+void exec_entity_updatecmd(Entity* entity) {
+    while (step_entity_updatecmd(entity) != 0);
+}
 
 void func_8010FD98(s32 arg0, s32 alpha) {
     if (alpha >= 255) {
@@ -374,8 +532,6 @@ u32 get_entity_type(s32 index) {
 
 void delete_entity(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
-    Shadow* shadow;
-    EntityList** currentEntityListPtrTemp;
 
     if (entity->dataBuf != NULL) {
         heap_free(entity->dataBuf);
@@ -388,21 +544,18 @@ void delete_entity(s32 entityIndex) {
     }
 
     if (entity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(entity->shadowIndex);
+        Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
         shadow->flags |= 0x10000000;
     }
 
-    currentEntityListPtrTemp = &gCurrentEntityListPtr;
-    heap_free((**currentEntityListPtrTemp)[entityIndex]);
-    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+    heap_free((*gCurrentEntityListPtr)[entityIndex]);
+    (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
 s32 delete_entity_and_unload_data(s32 entityIndex) {
-    Entity* entity;
-    Shadow* shadow;
-    EntityList** currentEntityListPtrTemp;
+    Entity* entity = get_entity_by_index(entityIndex);
 
-    entity = get_entity_by_index(entityIndex);
     if (entity->dataBuf != NULL) {
         heap_free(entity->dataBuf);
     }
@@ -412,25 +565,25 @@ s32 delete_entity_and_unload_data(s32 entityIndex) {
     } else {
         func_8011E438(get_anim_mesh(entity->virtualModelIndex));
     }
+
     func_801117DC(entity->staticData);
 
     if (entity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(entity->shadowIndex);
+        Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
         shadow->flags |= 0x10000000;
     }
 
-    currentEntityListPtrTemp = &gCurrentEntityListPtr;
-    heap_free((**currentEntityListPtrTemp)[entityIndex]);
-    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+    heap_free((*gCurrentEntityListPtr)[entityIndex]);
+    (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
 s32 func_8011085C(s32 shadowIndex) {
     Shadow* shadow = get_shadow_by_index(shadowIndex);
-    ShadowList** currentShadowListPtr = &gCurrentShadowListPtr;
 
     free_entity_model_by_index(shadow->unk_08);
-    heap_free((**currentShadowListPtr)[shadowIndex]);
-    (**currentShadowListPtr)[shadowIndex] = NULL;
+    heap_free((*gCurrentShadowListPtr)[shadowIndex]);
+    (*gCurrentShadowListPtr)[shadowIndex] = NULL;
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_get_collision_flags);
@@ -523,11 +676,11 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32
 
 ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Trigger* trigger;
 
     if (isInitialCall == TRUE) {
-        trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+        Trigger* trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
         trigger->flags.bytes.genericFlagIndex = get_variable_index(script, *args);
+
         return ApiStatus_DONE2;
     }
 
@@ -609,8 +762,7 @@ GameMode* set_next_game_mode(GameMode* arg0) {
 #endif
 
 GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
+    GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
@@ -631,45 +783,33 @@ GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
 }
 
 void func_80112D84(s32 i, void (*fn)(void)) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
+    GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->renderAux = fn;
     gameMode->flags |= 0x20;
+
     if (fn == NULL) {
         gameMode->renderAux = &NOP_state;
     }
 }
 
 void func_80112DD4(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags |= 4;
+    gMainGameState[i].flags |= 4;
 }
 
 void func_80112DFC(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags |= 8;
+    gMainGameState[i].flags |= 8;
 }
 
 void func_80112E24(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags &= ~0x1C;
+    gMainGameState[i].flags &= ~0x1C;
 }
 
 void func_80112E4C(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags &= ~0x0C;
-    gameMode->flags |= 0x10;
+    gMainGameState[i].flags &= ~0x0C;
+    gMainGameState[i].flags |= 0x10;
 }
 
 #ifndef NON_MATCHING
@@ -768,20 +908,17 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B5D0);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B660);
 
 void clone_model(u16 srcModelID, u16 newModelID) {
-    ModelList** modelList = &gCurrentModelListPtr;
     Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));
     Model* newModel;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(**modelList); i++) {
-        Model* model = (**modelList)[i];
-
-        if (model == NULL) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
+        if ((*gCurrentModelListPtr)[i] == NULL) {
             break;
         }
     }
 
-    (**modelList)[i] = newModel = heap_malloc(sizeof(Model));
+    (*gCurrentModelListPtr)[i] = newModel = heap_malloc(sizeof(Model));
     *newModel = *srcModel;
     newModel->modelID = newModelID;
 }
@@ -835,19 +972,15 @@ s32 is_world_fog_enabled(void) {
 }
 
 void get_world_fog_distance(s32* start, s32* end) {
-    Fog** fog = &wFog;
-
-    *start = (*fog)->startDistance;
-    *end = (*fog)->endDistance;
+    *start = wFog->startDistance;
+    *end = wFog->endDistance;
 }
 
 void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
-    Fog** fog = &wFog;
-
-    *r = (*fog)->r;
-    *g = (*fog)->g;
-    *b = (*fog)->b;
-    *a = (*fog)->a;
+    *r = wFog->r;
+    *g = wFog->g;
+    *b = wFog->b;
+    *a = wFog->a;
 }
 
 void set_tex_panner(Model* model, s8 texPannerID) {
@@ -881,9 +1014,19 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCEC);
 /// @returns TRUE if mtx is NULL or identity.
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_identity_fixed_mtx);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_background_color_blend, u8 r, u8 g, u8 b, u8 a);
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a) {
+    D_8014B74D = r;
+    D_8014B74E = g;
+    D_8014B74F = b;
+    D_8014B74C = a;
+}
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_background_color_blend);
+void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
+    *r = D_8014B74D;
+    *g = D_8014B74E;
+    *b = D_8014B74F;
+    *a = D_8014B74C;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BEB4);
 

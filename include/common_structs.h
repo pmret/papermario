@@ -315,6 +315,10 @@ typedef struct ScriptInstance {
 
 typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
+struct Entity;
+
+typedef s32 (*EntityCallback)(struct Entity*);
+
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
@@ -322,7 +326,7 @@ typedef struct Entity {
     /* 0x06 */ u8 collisionFlags;
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ char unk_08;
-    /* 0x09 */ s8 hasEntityScript;
+    /* 0x09 */ u8 hasEntityScript;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
@@ -330,8 +334,8 @@ typedef struct Entity {
     /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
     /* 0x18 */ s32* scriptReadPos;
-    /* 0x1C */ UNK_FUN_PTR(updateScriptCallback);
-    /* 0x20 */ UNK_FUN_PTR(updateMatrixOverride);
+    /* 0x1C */ EntityCallback updateScriptCallback;
+    /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ ScriptInstance* boundScript;
     /* 0x28 */ Bytecode* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
@@ -368,7 +372,7 @@ typedef struct StaticEntityData {
     /* 0x08 */ char unk_08[4];
     /* 0x0C */ UNK_FUN_PTR(unk_data_func);
     /* 0x10 */ UNK_PTR unk_data_ptr1;
-    /* 0x14 */ UNK_PTR unk_data_ptr2;
+    /* 0x14 */ UNK_FUN_PTR(unk_data_ptr2);
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
@@ -1125,7 +1129,8 @@ typedef struct PartnerAnimations {
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[2];
+    /* 0x04 */ u8 unk_04;
+    /* 0x05 */ char unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
     /* 0x08 */ s16 unk_08; // entity model index?
