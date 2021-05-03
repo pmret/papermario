@@ -426,19 +426,19 @@ void update_shadows(void) {
 
             if (!(shadow->flags & 0x40000000)) {
                 if (shadow->flags & 0x2000) {
-                    shadow->unk_28.y = -gCameras[gCurrentCameraID].currentYaw;
+                    shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
 
                 if (shadow->flags & 8) {
-                    func_8011E8BC(shadow->unk_08);
+                    func_8011E8BC(shadow->entityModelID);
                 } else {
-                    exec_entity_model_commandlist(shadow->unk_08);
+                    exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
                 if (shadow->flags & 0x20000000) {
-                    func_8011085C(shadow->unk_04);
+                    func_8011085C(shadow->listIndex);
                 }
             }
         }
@@ -603,7 +603,51 @@ void render_entities(void) {
     render_shadows();
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_shadows);
+void render_shadows(void) {
+    s32 i;
+
+    for (i = 0; i < 60; i++) {
+        Shadow* shadow = get_shadow_by_index(i);
+
+        if (shadow != NULL) {
+            if (shadow->flags & 1) {
+                if (shadow->flags & 0x10000000) {
+                    shadow->unk_05 -= 20;
+                    if (shadow->unk_05 <= 20) {
+                        shadow->flags |= 0x20000000;
+                    }
+                }
+            } else if (shadow->flags & 8) {
+                if (shadow->vertexArray == NULL) {
+                    func_8011F304(shadow->entityModelID, &shadow->transformMatrix);
+                } else {
+                    func_8011F3E8(shadow->entityModelID,
+                                  &shadow->transformMatrix,
+                                  shadow->vertexSegment,
+                                  shadow->vertexArray);
+                }
+            } else {
+                if (shadow->flags & 0x10000000) {
+                    shadow->unk_05 -= 20;
+                    if (shadow->unk_05 <= 20) {
+                        shadow->flags |=  0x20000000;
+                    }
+                }
+
+                bind_entity_model_setupGfx(shadow->entityModelID, shadow->unk_05, entity_model_set_shadow_color);
+
+                if (shadow->vertexArray == NULL) {
+                    draw_entity_model_shadow(shadow->entityModelID, &shadow->transformMatrix);
+                } else {
+                    draw_entity_model_main(shadow->entityModelID,
+                                           &shadow->transformMatrix,
+                                           shadow->vertexSegment,
+                                           shadow->vertexArray);
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entity_transform_matrix);
 
@@ -710,7 +754,7 @@ s32 delete_entity_and_unload_data(s32 entityIndex) {
 s32 func_8011085C(s32 shadowIndex) {
     Shadow* shadow = get_shadow_by_index(shadowIndex);
 
-    free_entity_model_by_index(shadow->unk_08);
+    free_entity_model_by_index(shadow->entityModelID);
     heap_free((*gCurrentShadowListPtr)[shadowIndex]);
     (*gCurrentShadowListPtr)[shadowIndex] = NULL;
 }

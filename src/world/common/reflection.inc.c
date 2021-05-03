@@ -79,7 +79,7 @@ void N(reflection_setup_wall)(void) {
     s32 screenZ;
 
     if (playerStatus->flags & 1) {
-        entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
+        entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= 0x200;
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
@@ -163,7 +163,7 @@ void N(reflection_setup_floor)(void) {
     s32 screenZ;
 
     if (playerStatus->flags & 1) {
-        entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->unk_08);
+        entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
 
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);

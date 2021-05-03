@@ -1129,16 +1129,18 @@ typedef struct PartnerAnimations {
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ u8 unk_04;
-    /* 0x05 */ char unk_05;
+    /* 0x04 */ u8 listIndex;
+    /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
-    /* 0x08 */ s16 unk_08; // entity model index?
-    /* 0x0A */ char unk_0A[6];
+    /* 0x08 */ s16 entityModelID; // entity model index?
+    /* 0x0A */ s16 vertexSegment;
+    /* 0x0C */ Vtx_tn** vertexArray;
     /* 0x10 */ struct Vec3f position;
     /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ struct Vec3f unk_28;
-    /* 0x34 */ char unk_34[0x44];
+    /* 0x28 */ struct Vec3f rotation;
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ Matrix4s transformMatrix;
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
