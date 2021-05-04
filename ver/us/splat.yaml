@@ -3371,7 +3371,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F10E0, c]
+    - [0x6F10E0, c, goombario]
     - [0x6F2290, data]
   - name: battle_partner_kooper
     dir: battle/partner
@@ -3380,7 +3380,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F5E80, c]
+    - [0x6F5E80, c, kooper]
     - [0x6F62B0, data]
   - name: battle_partner_bombette
     dir: battle/partner
@@ -3389,7 +3389,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6FAD10, c]
+    - [0x6FAD10, c, bombette]
     - [0x6FB350, data]
   - name: battle_partner_parakarry
     dir: battle/partner
@@ -3398,7 +3398,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6FFD80, c]
+    - [0x6FFD80, c, parakarry]
     - [0x701590, data]
   - name: battle_partner_watt
     dir: battle/partner
@@ -3407,7 +3407,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x703AF0, c]
+    - [0x703AF0, c, watt]
     - [0x704A80, data]
   - name: battle_partner_sushie
     dir: battle/partner
@@ -3416,7 +3416,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x707CA0, c]
+    - [0x707CA0, c, sushie]
     - [0x708B70, data]
   - name: battle_partner_lakilester
     dir: battle/partner
@@ -3425,7 +3425,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x70BD10, c]
+    - [0x70BD10, c, lakilester]
     - [0x70DED0, data]
   - name: battle_partner_bow
     dir: battle/partner
@@ -3434,7 +3434,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x710EF0, c]
+    - [0x710EF0, c, bow]
     - [0x7111F0, data]
   - name: battle_partner_twink
     dir: battle/partner
@@ -3443,7 +3443,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x714CF0, c]
+    - [0x714CF0, c, twink]
     - [0x714DC0, data]
   - dir: battle/item/mushroom
     type: code

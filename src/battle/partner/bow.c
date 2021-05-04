@@ -24,7 +24,7 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "battle/partner/710EF0", func_8023808C_710F7C, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "battle/partner/bow", func_8023808C_710F7C, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
