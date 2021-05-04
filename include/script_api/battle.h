@@ -278,6 +278,14 @@ ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CABE8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CAE50(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802A9000_430020(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802807D0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802694A4(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80269524(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80269550(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80280818(ScriptInstance* script, s32 isInitialCall); ///< YieldTurn copy
 
 extern Script PlayerScriptDispatcher;
 extern Script PeachScriptDispatcher;

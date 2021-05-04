@@ -3372,7 +3372,8 @@ segments:
     overlay: True
     subsegments:
     - [0x6F10E0, c, goombario]
-    - [0x6F2290, data]
+    - [0x6F2290, .data, goombario]
+    - [0x6F5E30, data, 6F2290] # rodata
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
