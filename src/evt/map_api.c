@@ -9,18 +9,21 @@ typedef struct TempSetZoneEnabled {
 
 extern TempSetZoneEnabled* D_800D91D4;
 
-// Works to set model->flags & 0x400 to modelListIndex, but that seems wrong and misleading (fake match)
-#ifdef NON_MATCHING
 ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 modelListIndex = get_model_list_index_from_tree_index(var1);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
-    Model* model = get_model_from_list_index(modelListIndex);
+    s32 modelIndex = get_variable(script, *args++);
+    f32 x;
+    f32 y;
+    f32 z;
+    Model* model;
 
-    if ((model->flags & 0x400) == 0) {
+    modelIndex = get_model_list_index_from_tree_index(modelIndex);
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+    model = get_model_from_list_index(modelIndex);
+
+    if (!(model->flags & 0x400)) {
         guTranslateF(&model->transformMatrix, x, y, z);
         model->flags |= 0x1400;
     } else {
@@ -32,9 +35,6 @@ ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "evt/map_api", TranslateModel, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -46,7 +46,7 @@ ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
     f32 z = get_float_variable(script, *args++);
     Model* model = get_model_from_list_index(modelListIndex);
 
-    if ((model->flags & 0x400) == 0) {
+    if (!(model->flags & 0x400)) {
         guRotateF(model->transformMatrix, a, x, y, z);
         model->flags |= 0x1400;
     } else {
@@ -59,18 +59,21 @@ ApiStatus RotateModel(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Same as TranslateModel above
-#ifdef NON_MATCHING
 ApiStatus ScaleModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
-    s32 modelListIndex = get_model_list_index_from_tree_index(var1);
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
-    Model* model = get_model_from_list_index(modelListIndex);
+    s32 modelIndex = get_variable(script, *args++);
+    f32 x;
+    f32 y;
+    f32 z;
+    Model* model;
 
-    if ((model->flags & 0x400) == 0) {
+    modelIndex = get_model_list_index_from_tree_index(modelIndex);
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+    model = get_model_from_list_index(modelIndex);
+
+    if (!(model->flags & 0x400)) {
         guScaleF(&model->transformMatrix, x, y, z);
         model->flags |= 0x1400;
     } else {
@@ -82,9 +85,6 @@ ApiStatus ScaleModel(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "evt/map_api", ScaleModel, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
