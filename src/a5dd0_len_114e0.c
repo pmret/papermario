@@ -1154,7 +1154,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_list_index_from_tree_index, s32 tr
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B090);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY,
+INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, u16 modelID, f32* centerX, f32* centerY,
             f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
 Model* func_8011B1C0(s32 index) {

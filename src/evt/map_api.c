@@ -122,7 +122,7 @@ ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
 
-    get_model_center_and_size(get_variable(script, *args++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+    get_model_center_and_size(get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY,
                               &sizeZ);
     script->varTable[0] = centerX;
     script->varTable[1] = centerY;
@@ -513,9 +513,9 @@ ApiStatus PlaySoundAtModel(ScriptInstance* script, s32 isInitialCall) {
     SoundID soundID = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
     f32 x, y, z;
-    f32 n1, n2, n3;
+    f32 sx, sy, sz;
 
-    get_model_center_and_size((u16)modelID, &x, &y, &z, &n1, &n2, &n3);
+    get_model_center_and_size(modelID, &x, &y, &z, &sx, &sy, &sz);
     sfx_play_sound_at_position(soundID, var3, x, y, z);
 
     return ApiStatus_DONE2;
