@@ -155,13 +155,15 @@ ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
+    Model* model;
+
+    treeIndex = get_model_list_index_from_tree_index(treeIndex);
+    model = get_model_from_list_index(treeIndex);
 
     func_8011BC7C(model, var2, var3);
     if (var2 != -1) {
@@ -169,9 +171,6 @@ ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(ApiStatus, "evt/map_api", func_802C90FC, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -381,7 +380,27 @@ void set_zone_enabled(s32 zoneID, s32 enabled) {
     }
 }
 
-INCLUDE_ASM(ApiStatus, "evt/map_api", SetZoneEnabled, ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetZoneEnabled(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 idx = get_variable(script, *args++);
+    s32 enabled = get_variable(script, *args++);
+    TempSetZoneEnabled* unkStruct = &D_800D91D4[idx];
+
+    if (unkStruct->id2 >= 0) {
+        set_zone_enabled(unkStruct->id2, enabled);
+    }
+
+    switch (enabled) {
+        case 0:
+            unkStruct->flags |= 0x10000;
+            break;
+        case 1:
+            unkStruct->flags &= ~0x10000;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/map_api", goto_map);
 
