@@ -1,5 +1,14 @@
 #include "common.h"
 
+typedef struct TempSetZoneEnabled {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 id1;
+    /* 0x06 */ s16 id2;
+    /* 0x08 */ char unk_08[0x14];
+} TempSetZoneEnabled; // size = 0x1C
+
+extern TempSetZoneEnabled* D_800D91D4;
+
 // Works to set model->flags & 0x400 to modelListIndex, but that seems wrong and misleading (fake match)
 #ifdef NON_MATCHING
 ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
@@ -78,17 +87,17 @@ INCLUDE_ASM(s32, "evt/map_api", ScaleModel, ScriptInstance* script, s32 isInitia
 #endif
 
 ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode modelID = get_variable(script, *thisPos++);
-    Bytecode index = *thisPos++;
+    Bytecode* args = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *args++);
+    Bytecode index = *args++;
 
     set_variable(script, index, get_model_list_index_from_tree_index(modelID));
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802C8EE4(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode modelID = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode modelID = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
 
     model->flags &= ~0x400;
@@ -96,16 +105,16 @@ ApiStatus func_802C8EE4(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus CloneModel(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode srcModelID = get_variable(script, *thisPos++);
-    Bytecode newModelID = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode srcModelID = get_variable(script, *args++);
+    Bytecode newModelID = get_variable(script, *args++);
 
     clone_model(srcModelID, newModelID);
     return ApiStatus_DONE2;
 }
 
 ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
     f32 centerX;
     f32 centerY;
     f32 centerZ;
@@ -113,7 +122,7 @@ ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 sizeY;
     f32 sizeZ;
 
-    get_model_center_and_size(get_variable(script, *thisPos++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
+    get_model_center_and_size(get_variable(script, *args++) & 0xFFFF, &centerX, &centerY, &centerZ, &sizeX, &sizeY,
                               &sizeZ);
     script->varTable[0] = centerX;
     script->varTable[1] = centerY;
@@ -122,9 +131,9 @@ ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *thisPos++);
-    s32 var2 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     set_tex_panner(model, var2);
@@ -133,9 +142,9 @@ ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode treeIndex = get_variable(script, *thisPos++);
-    Bytecode enable = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode treeIndex = get_variable(script, *args++);
+    Bytecode enable = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (enable) {
@@ -148,10 +157,10 @@ ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
 
 #ifdef NON_MATCHING
 ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *thisPos++);
-    s32 var2 = get_variable(script, *thisPos++);
-    s32 var3 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     func_8011BC7C(model, var2, var3);
@@ -165,18 +174,18 @@ INCLUDE_ASM(ApiStatus, "evt/map_api", func_802C90FC, ScriptInstance* script, s32
 #endif
 
 ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode treeIndex = get_variable(script, *thisPos++);
-    Bytecode var2 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode treeIndex = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
 
     get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->unk_A9 = var2;
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableTexPanning(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *thisPos++);
-    s32 flag = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *args++);
+    s32 flag = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
 
     if (flag) {
@@ -188,9 +197,9 @@ ApiStatus EnableTexPanning(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus EnableModel(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 listIndex = get_model_list_index_from_tree_index(get_variable(script, *thisPos++));
-    Bytecode flag = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 listIndex = get_model_list_index_from_tree_index(get_variable(script, *args++));
+    Bytecode flag = get_variable(script, *args++);
     Model* model = get_model_from_list_index(listIndex);
 
     if (flag != 0) {
@@ -202,20 +211,20 @@ ApiStatus EnableModel(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode var1 = get_variable(script, *thisPos++);
-    Bytecode var2 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode var1 = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
 
     func_8011B7C0(var1, 2, var2);
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetTexPanOffset(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    Bytecode var1 = get_variable(script, *thisPos++);
-    Bytecode var2 = get_variable(script, *thisPos++);
-    Bytecode var3 = get_variable(script, *thisPos++);
-    Bytecode var4 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    Bytecode var1 = get_variable(script, *args++);
+    Bytecode var2 = get_variable(script, *args++);
+    Bytecode var3 = get_variable(script, *args++);
+    Bytecode var4 = get_variable(script, *args++);
 
     if (var2 == 0) {
         set_main_pan_u(var1, var3);
@@ -229,33 +238,37 @@ ApiStatus SetTexPanOffset(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802C9428(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 var1 = get_variable(script, *thisPos++);
-    s32 var2 = get_variable(script, *thisPos++);
-    s32 var3 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
     func_8011BCB4(var1, var2, var3);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 var1 = get_variable(script, *thisPos++);
-    s32 var2 = get_variable(script, *thisPos++);
-    s32 var3 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
     func_8011BCD0(var1, var2, var3);
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
-ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *args++);
-    s32 listIndex = get_model_list_index_from_tree_index(treeIndex);
-    s32 a1 = *args++;
-    s32 enable = get_variable(script, *args++);
-    Model* model = get_model_from_list_index(listIndex);
+ApiStatus SetModelFlags(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode *args = script->ptrReadPos;
+    s32 modelIndex;
+    s32 a1;
+    s32 enable;
+    Model* model;
+
+    modelIndex = get_variable(script, *args++);
+    modelIndex = get_model_list_index_from_tree_index(modelIndex);
+    a1 = *args++;
+    enable = get_variable(script, *args++);
+    model = get_model_from_list_index(modelIndex);
 
     if (enable) {
         model->flags |= a1;
@@ -265,9 +278,6 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "evt/map_api", SetModelFlags, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 INCLUDE_ASM(s32, "evt/map_api", func_802C95A0);
 
@@ -277,9 +287,9 @@ ApiStatus func_802C971C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    u16 var1 = get_variable(script, *thisPos++);
-    s32 var2 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    u16 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
 
     if (var2 != 0) {
         func_8011B5D0(var1);
@@ -296,9 +306,9 @@ INCLUDE_ASM(s32, "evt/map_api", RotateGroup, ScriptInstance* script, s32 isIniti
 INCLUDE_ASM(s32, "evt/map_api", ScaleGroup, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 var1 = get_variable(script, *thisPos++);
-    Bytecode var2 = *thisPos++;
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    Bytecode var2 = *args++;
 
     set_variable(script, var2, func_8011B090(var1));
     return ApiStatus_DONE2;
@@ -307,10 +317,10 @@ ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "evt/map_api", EnableGroup, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 var1 = get_variable(script, *thisPos++);
-    u16 var2 = get_variable(script, *thisPos++);
-    s32 var3 = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    u16 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
     func_8011C164(var1, var2, var3);
     return ApiStatus_DONE2;
@@ -337,9 +347,9 @@ ApiStatus GetColliderCenter(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus ParentColliderToModel(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s16 colliderID = get_variable(script, *thisPos++);
-    s32 treeIndex = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s16 colliderID = get_variable(script, *args++);
+    s32 treeIndex = get_variable(script, *args++);
 
     parent_collider_to_model(colliderID, get_model_list_index_from_tree_index(treeIndex));
     update_collider_transform(colliderID);
@@ -351,7 +361,25 @@ ApiStatus UpdateColliderTransform(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", set_zone_enabled);
+void set_zone_enabled(s32 zoneID, s32 enabled) {
+    TempSetZoneEnabled* unkStruct = &D_800D91D4[zoneID];
+
+    if (unkStruct->id1 >= 0) {
+        set_zone_enabled(unkStruct->id1, enabled);
+    }
+    if (unkStruct->id2 >= 0) {
+        set_zone_enabled(unkStruct->id2, enabled);
+    }
+
+    switch (enabled) {
+        case 0:
+            unkStruct->flags |= 0x10000;
+            break;
+        case 1:
+            unkStruct->flags &= ~0x10000;
+            break;
+    }
+}
 
 INCLUDE_ASM(ApiStatus, "evt/map_api", SetZoneEnabled, ScriptInstance* script, s32 isInitialCall);
 
@@ -388,9 +416,9 @@ ApiStatus GetLoadType(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus SetRenderMode(ScriptInstance* script, s32 isInitialCall) {
-    Bytecode* thisPos = script->ptrReadPos;
-    s32 treeIndex = get_variable(script, *thisPos++);
-    s8 renderMode = get_variable(script, *thisPos++);
+    Bytecode* args = script->ptrReadPos;
+    s32 treeIndex = get_variable(script, *args++);
+    s8 renderMode = get_variable(script, *args++);
 
     get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex))->renderMode = renderMode;
 
