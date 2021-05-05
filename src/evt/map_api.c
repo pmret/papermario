@@ -314,6 +314,37 @@ ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "evt/map_api", EnableGroup, ScriptInstance* script, s32 isInitialCall);
+// ApiStatus EnableGroup(ScriptInstance* script, s32 isInitialCall) {
+//     Bytecode* args = script->ptrReadPos;
+//     Model* model;
+//     Model* model2;
+//     s32 modelIndex;
+//     s32 temp_s2;
+//     s32 modelIndex2;
+
+//     modelIndex = func_8011B090(get_variable(script, *args++));
+
+//     if (modelIndex == -1) {
+//         func_802C95A0(EnableModel, script);
+//         return ApiStatus_DONE2;
+//     }
+
+//     temp_s2 = get_variable(script, *args++);
+//     model = func_8011B1C0(modelIndex);
+//     modelIndex2 = model->center[1];
+
+//     while (model->center[1] >= modelIndex2) {
+//         model2 = get_model_from_list_index(modelIndex2);
+//         if (temp_s2 != 0) {
+//             model2->flags &= ~0x2;
+//         } else {
+//             model2->flags |= 0x2;
+//         }
+//         modelIndex2++;
+//     }
+
+//     return ApiStatus_DONE2;
+// }
 
 ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -325,7 +356,39 @@ ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// Sub vs add at the beginning with the colliderList access
+#ifdef NON_MATCHING
+void modify_collider_family_flags(s32 arg0, s32 arg1, s32 arg2) {
+    Collider* collider = &gCollisionData.colliderList[arg0];
+
+    if (collider->nextSibling >= 0) {
+        modify_collider_family_flags(collider->nextSibling, arg1, arg2);
+    }
+
+    if (collider->firstChild >= 0) {
+        modify_collider_family_flags(collider->firstChild, arg1, arg2);
+    }
+
+    switch (arg2) {
+        case 0:
+            collider->flags |= arg1;
+            break;
+        case 1:
+            collider->flags &= ~arg1;
+            break;
+        case 2:
+            collider->flags = arg1;
+            break;
+        case 3:
+            collider->flags &= ~0xFF;
+            collider->flags |= (u8)arg1;
+            break;
+
+    }
+}
+#else
 INCLUDE_ASM(s32, "evt/map_api", modify_collider_family_flags);
+#endif
 
 INCLUDE_ASM(s32, "evt/map_api", ModifyColliderFlags, ScriptInstance* script, s32 isInitialCall);
 
