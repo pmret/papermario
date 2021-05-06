@@ -27,9 +27,36 @@ void mtx_mirror_y(Matrix4f arg0) {
 
 INCLUDE_ASM(s32, "182B30", enable_actor_blur);
 
-INCLUDE_ASM(s32, "182B30", disable_actor_blur);
+void disable_actor_blur(Actor* actor) {
+    ActorPart* actorPart = actor->partsTable;
 
-INCLUDE_ASM(s32, "182B30", reset_actor_blur);
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & 2)) {
+        DecorationTable* decorationTable = actorPart->decorationTable;
+
+        if (decorationTable->unk_7DB != 0) {
+            decorationTable->unk_7DB--;
+            if (decorationTable->unk_7DB == 0) {
+                decorationTable->effectType = 20;
+            }
+        }
+    }
+}
+
+void reset_actor_blur(Actor* actor) {
+    ActorPart* actorPart = actor->partsTable;
+
+    if ((actorPart->idleAnimations != NULL) && !(actorPart->flags & 2)) {
+        DecorationTable* decorationTable = actorPart->decorationTable;
+
+        if (decorationTable->unk_7DB != 0) {
+            decorationTable->unk_7DB--;
+            if (decorationTable->unk_7DB == 0) {
+                actor->flags &= ~0x10000000;
+                decorationTable->effectType = 1;
+            }
+        }
+    }
+}
 
 void func_80254610(Actor* actor) {
     ActorPart* actorPart = actor->partsTable;
@@ -63,7 +90,6 @@ void enable_player_blur(void) {
     ActorPart* partsTable = playerActor->partsTable;
     DecorationTable* decorationTable = partsTable->decorationTable;
     s32 i;
-    u8* new_var;
 
     decorationTable->effectType = 0;
     decorationTable->unk_7DB++;
