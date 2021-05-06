@@ -13,23 +13,20 @@ void func_802E3E80(Entity* entity) {
 }
 
 void func_802E3E9C(Entity* entity) {
-    s32 alpha;
+    s32 alpha = entity->alpha;
 
-    alpha = entity->alpha;
     if (gPlayerStatus.animFlags & 1) {
         alpha += 32;
         if (alpha > 192) {
             alpha = 192;
         }
         entity->alpha = alpha;
-        return;
     } else {
         alpha -= 32;
         if (alpha <= 0) {
             alpha = 0;
         }
         entity->alpha = alpha;
-        return;
     }
 }
 
@@ -46,12 +43,9 @@ void func_802E405C(Entity* entity) {
 }
 
 void func_802E40A0(Entity* entity) {
-    s32 entityType;
-    s32 virtualModelIndex;
-    UNK_PTR ptr;
+    s32 entityType = get_entity_type(entity->listIndex);
 
-    entityType = get_entity_type(entity->listIndex);
-    if ((entityType == 0x12) || (entityType == 0x14)) {
+    if (entityType == 0x12 || entityType == 0x14) {
         play_model_animation(entity->virtualModelIndex, &D_00000094);
     } else {
         play_model_animation(entity->virtualModelIndex, &D_00000094_2);
@@ -70,11 +64,11 @@ void func_802E4108(Entity* entity) {
 }
 
 void func_802E4154(Entity* entity) {
-    u16 temp_v1;
-    UNK_PTR phi_a0;
     struct802E3F0C* temp = entity->dataBuf;
 
     if ((temp->unk_A != 0xFFFF) && get_global_flag(temp->unk_A)) {
+        UNK_PTR phi_a0;
+
         if (get_entity_type(entity->listIndex) != 0x14) {
             phi_a0 = &D_802EA07C;
         } else {
@@ -88,61 +82,62 @@ void func_802E4154(Entity* entity) {
 }
 
 void func_802E421C(Entity* entity) {
-    s32 temp_s2;
+    s32 entityType = get_entity_type(entity->listIndex);
+    UNK_PTR entityData = &D_802EA07C;
+    s32 entityIndex;
     s32 temp_s0;
-    s32 temp_v0_2;
-    s32 temp_v0_5;
+    s32 entityType2;
     struct802E3F0C* temp;
     Entity* entityTemp;
     Shadow* shadow;
-    UNK_PTR phi_a0;
 
-    temp_v0_2 = get_entity_type(entity->listIndex);
-    phi_a0 = &D_802EA07C;
-    if (temp_v0_2 < 0x15) {
-        phi_a0 = &D_802EA07C;
-        if (temp_v0_2 >= 0x12) {
-            phi_a0 = &D_802EA0A0;
+    if (entityType < 0x15) {
+        entityData = &D_802EA07C;
+        if (entityType >= 0x12) {
+            entityData = &D_802EA0A0;
         }
     }
-    temp_s2 = create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y,
+
+    entityIndex = create_entity(entityData, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y,
                             0x80000000);
-    entityTemp = get_entity_by_index(temp_s2);
+    entityTemp = get_entity_by_index(entityIndex);
     entityTemp->flags |= 1;
 
-    if ((entity->flags & 0x40000) != 0) {
+    if (entity->flags & 0x40000) {
         entityTemp->flags |= 0x40000;
     }
 
-    if ((entity->flags & 4) != 0) {
+    if (entity->flags & 4) {
         entityTemp->flags |= 4;
     }
 
     shadow = get_shadow_by_index(entityTemp->shadowIndex);
     shadow->flags |= 0x400001;
     temp_s0 = func_80112B20(entity);
-    temp_v0_5 = get_entity_type(entity->listIndex);
-    if ((temp_v0_5 == 0x12) || (temp_v0_5 == 0x14)) {
-        phi_a0 = &D_802EA660;
+
+    entityType2 = get_entity_type(entity->listIndex);
+    if (entityType2 == 0x12 || entityType2 == 0x14) {
+        entityData = &D_802EA660;
     } else if (temp_s0 != 0) {
-        phi_a0 = &D_802EA618;
+        entityData = &D_802EA618;
     } else {
-        phi_a0 = &D_802EA63C;
+        entityData = &D_802EA63C;
     }
-    entityTemp = get_entity_by_index(create_entity(phi_a0, entity->position.x, entity->position.y, entity->position.z,
+    entityTemp = get_entity_by_index(create_entity(entityData, entity->position.x, entity->position.y, entity->position.z,
                                      entity->rotation.y, 0x80000000));
     entityTemp->alpha = entity->alpha;
-    if (((entity->flags & 1) != 0) || ((u32) entity->alpha < 0xFF)) {
+    if ((entity->flags & 1) || (entity->alpha < 0xFF)) {
         entityTemp->alpha = 0x20;
     }
 
-    if ((entity->flags & 0x40000) != 0) {
+    if (entity->flags & 0x40000) {
         entityTemp->flags |= 0x40000;
     }
-    temp = entityTemp->dataBuf;
-    temp->unk_12 = temp_s2;
 
-    if ((entity->flags & 4) != 0) {
+    temp = entityTemp->dataBuf;
+    temp->unk_12 = entityIndex;
+
+    if (entity->flags & 4) {
         entityTemp->flags |= 4;
     }
 
@@ -154,11 +149,9 @@ void func_802E421C(Entity* entity) {
 }
 
 void func_802E4484(Entity* entity) {
-    Shadow* shadow;
-
-    entity->flags = (entity->flags | 1) & ~0x100;
-    shadow = get_shadow_by_index(entity->shadowIndex);
-    shadow->flags |= 0x10000001;
+    entity->flags |= 1;
+    entity->flags &= ~0x100;
+    get_shadow_by_index(entity->shadowIndex)->flags |= 0x10000001;
 }
 
 s32 func_802E44CC(Entity* entity) {
@@ -171,11 +164,9 @@ s32 func_802E44CC(Entity* entity) {
 
 // TODO: new file here?
 void func_802E44F8(void) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
-
     disable_player_input();
-    playerStatus->currentSpeed = 0.0f;
-    playerStatus->flags |= 0x800000;
+    gPlayerStatus.currentSpeed = 0.0f;
+    gPlayerStatus.flags |= 0x800000;
     set_action_state(8);
     gravity_use_fall_params();
 }
