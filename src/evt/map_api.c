@@ -314,37 +314,6 @@ ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
 }
 
 INCLUDE_ASM(s32, "evt/map_api", EnableGroup, ScriptInstance* script, s32 isInitialCall);
-// ApiStatus EnableGroup(ScriptInstance* script, s32 isInitialCall) {
-//     Bytecode* args = script->ptrReadPos;
-//     Model* model;
-//     Model* model2;
-//     s32 modelIndex;
-//     s32 temp_s2;
-//     s32 modelIndex2;
-
-//     modelIndex = func_8011B090(get_variable(script, *args++));
-
-//     if (modelIndex == -1) {
-//         func_802C95A0(EnableModel, script);
-//         return ApiStatus_DONE2;
-//     }
-
-//     temp_s2 = get_variable(script, *args++);
-//     model = func_8011B1C0(modelIndex);
-//     modelIndex2 = model->center[1];
-
-//     while (model->center[1] >= modelIndex2) {
-//         model2 = get_model_from_list_index(modelIndex2);
-//         if (temp_s2 != 0) {
-//             model2->flags &= ~0x2;
-//         } else {
-//             model2->flags |= 0x2;
-//         }
-//         modelIndex2++;
-//     }
-
-//     return ApiStatus_DONE2;
-// }
 
 ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

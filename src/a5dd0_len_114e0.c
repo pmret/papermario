@@ -475,60 +475,6 @@ void update_shadows(void) {
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_entity_commandlist);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
-// s32 step_entity_commandlist(Entity* entity) {
-//     s32* args = entity->scriptReadPos;
-
-//     switch (*args++) {
-//         case 0:
-//             entity->hasEntityScript = 0xFF;
-//             entity->updateScriptCallback = NULL;
-//             entity->scriptReadPos = NULL;
-//             return 0;
-//         case 1:
-//             entity->scriptReadPos = *args;
-//             entity->hasEntityScript = 1;
-//             entity->savedReadPos = *args;
-//             return 1;
-//         case 2:
-//             entity->scriptReadPos = args++;
-//             ((EntityCallback) (*args++))(entity);
-//             return 1;
-//         case 3:
-//             entity->hasEntityScript = *args++;
-//             entity->scriptReadPos = args++;
-//             entity->updateScriptCallback = (s32 (*)(struct Entity *)) *args++;
-//             return 0;
-//         case 4:
-//             entity->scriptReadPos = entity->savedReadPos[*args++];
-//             return 1;
-//         case 5:
-//             entity->savedReadPos[*args++] = args++;
-//             entity->scriptReadPos = args++;
-//             return 1;
-//         case 6:
-//             if (entity->boundScriptBytecode != NULL) {
-//                 entity->flags |= 0x1000000;
-//                 entity->scriptReadPos = args++;
-//             } else {
-//                 entity->scriptReadPos = args++;
-//             }
-//             return 1;
-//         case 7:
-//             entity->scriptReadPos = args++;
-//             entity->flags |= *args++;
-//             return 1;
-//         case 8:
-//             entity->scriptReadPos = args++;
-//             entity->flags &= ~*args++;
-//             return 1;
-//         case 9:
-//             sfx_play_sound(*args++);
-//             entity->scriptReadPos = args;
-//             return 1;
-//     }
-//     entity->scriptReadPos = ++args;
-//     return 1;
-// }
 
 void exec_entity_updatecmd(Entity* entity) {
     while (step_entity_commandlist(entity) != 0);
