@@ -326,7 +326,7 @@ void update_entities(void) {
     D_801512C0 = 0;
     D_80151330++;
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < MAX_ENTITIES; i++) {
         Entity* entity = get_entity_by_index(i);
 
         if (entity != NULL) {
@@ -445,7 +445,7 @@ void update_shadows(void) {
 
     D_80151324 = 0;
 
-    for (i = 0; i < 60; i++) {
+    for (i = 0; i < MAX_SHADOWS; i++) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {
@@ -503,7 +503,7 @@ void render_entities(void) {
     s32 phi_v0;
     s32 i;
 
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < MAX_ENTITIES; i++) {
         Entity* entity = get_entity_by_index(i);
 
         if (entity != NULL) {
@@ -579,7 +579,7 @@ void render_entities(void) {
 void render_shadows(void) {
     s32 i;
 
-    for (i = 0; i < 60; i++) {
+    for (i = 0; i < MAX_SHADOWS; i++) {
         Shadow* shadow = get_shadow_by_index(i);
 
         if (shadow != NULL) {

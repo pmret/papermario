@@ -423,10 +423,10 @@ ApiStatus SetZoneEnabled(ScriptInstance *script, s32 isInitialCall) {
     }
 
     switch (enabled) {
-        case 0:
+        case FALSE:
             unkStruct->flags |= 0x10000;
             break;
-        case 1:
+        case TRUE:
             unkStruct->flags &= ~0x10000;
             break;
     }

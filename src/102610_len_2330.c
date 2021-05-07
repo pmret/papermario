@@ -49,7 +49,7 @@ void save_game_at_player_position(void) {
 
 void func_802E1204(Entity* entity) {
     if (!get_global_flag(SI_SAVE_FLAG(95))) {
-        D_802EB390 = 0;
+        D_802EB390 = FALSE;
         load_string(0x1D0000, &D_802EB390);
         set_global_flag(SI_SAVE_FLAG(95));
         return;
@@ -60,14 +60,14 @@ void func_802E1204(Entity* entity) {
 }
 
 void func_802E1270(Entity* entity) {
-    if (D_802EB390 != 0) {
+    if (D_802EB390) {
         exec_entity_updatecmd(entity);
     }
 }
 
 void func_802E1298(void) {
-    D_802EB390 = 0;
-    D_802EB394 = 0;
+    D_802EB390 = FALSE;
+    D_802EB394 = FALSE;
     D_802EB39C = load_string(0x1D0004, &D_802EB394);
     D_802EB398 = load_string(0x1E000A, &D_802EB390);
 }
@@ -78,13 +78,13 @@ void func_802E12F8(void) {
 }
 
 void func_802E1328(Entity* entity) {
-    if (D_802EB394 != 0) {
+    if (D_802EB394) {
         exec_entity_updatecmd(entity);
     }
 }
 
 void func_802E1350(Entity* entity) {
-    if (D_802EB390 != 0) {
+    if (D_802EB390) {
         if (D_802EB398->currentOption == 1) {
             set_entity_commandlist(entity, &D_802E99DC);
         } else {
