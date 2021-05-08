@@ -378,7 +378,8 @@ segments:
     - [0xde740, c, de740_len_23f0]
     - [0xDF950, c, DF950]
     - [0xe0b30, c, e0b30_len_b80]
-    - [0xE16B0, data, a5dd0_len_114e0]
+    - [0xE16B0, .data, a5dd0_len_114e0]
+    - [0xE2950, data]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, d5a50_len_5fd0]
     - [0xE5820, .data, dc470_len_14c0]
@@ -399,6 +400,7 @@ segments:
     - [0xE7940, .rodata, ddaf0_len_c50]
     - [0xE7950, .rodata, DF950]
     - [0xE7990, .rodata, e0b30_len_b80]
+    - [0xE79B0, .bss, a5dd0_len_114e0]
   - type: code
     dir: evt
     start: 0xE79B0

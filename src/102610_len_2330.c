@@ -1,5 +1,10 @@
 #include "common.h"
 
+typedef struct struct802E10F4 {
+    char unk_0[4];
+    s16 angle;
+} struct802E10F4;
+
 void create_shadow_callback(Shadow* shadow) {
     shadow->scale.x = 0.1f;
     shadow->scale.y = 0.1f;
@@ -15,11 +20,6 @@ s32 func_802E0DB0(Shadow* shadow) {
 }
 
 INCLUDE_ASM(s32, "102610_len_2330", func_802E0DE0);
-
-typedef struct struct802E10F4 {
-    char unk_0[4];
-    s16 angle;
-} struct802E10F4;
 
 void func_802E10F4(Entity* entity) {
     struct802E10F4* temp;
@@ -49,9 +49,8 @@ void save_game_at_player_position(void) {
 
 void func_802E1204(Entity* entity) {
     if (!get_global_flag(SI_SAVE_FLAG(95))) {
-        s32* temp = &D_802EB390;
-        *temp = 0;
-        load_string(0x1D0000, temp);
+        D_802EB390 = FALSE;
+        load_string(0x1D0000, &D_802EB390);
         set_global_flag(SI_SAVE_FLAG(95));
         return;
     }
@@ -61,20 +60,16 @@ void func_802E1204(Entity* entity) {
 }
 
 void func_802E1270(Entity* entity) {
-    s32* temp = &D_802EB390;
-
-    if (*temp != 0) {
+    if (D_802EB390) {
         exec_entity_updatecmd(entity);
     }
 }
 
 void func_802E1298(void) {
-    s32* temp1 = &D_802EB390;
-    s32* temp2 = &D_802EB394;
-    *temp1 = 0;
-    *temp2 = 0;
-    D_802EB39C = load_string(0x1D0004, temp2);
-    D_802EB398 = load_string(0x1E000A, temp1);
+    D_802EB390 = FALSE;
+    D_802EB394 = FALSE;
+    D_802EB39C = load_string(0x1D0004, &D_802EB394);
+    D_802EB398 = load_string(0x1E000A, &D_802EB390);
 }
 
 void func_802E12F8(void) {
@@ -83,16 +78,13 @@ void func_802E12F8(void) {
 }
 
 void func_802E1328(Entity* entity) {
-    s32* temp = &D_802EB394;
-
-    if (*temp != 0) {
+    if (D_802EB394) {
         exec_entity_updatecmd(entity);
     }
 }
 
 void func_802E1350(Entity* entity) {
-    s32* temp = &D_802EB390;
-    if (*temp != 0) {
+    if (D_802EB390) {
         if (D_802EB398->currentOption == 1) {
             set_entity_commandlist(entity, &D_802E99DC);
         } else {

@@ -1,6 +1,10 @@
 #include "common.h"
 
+extern s32 D_801512F8;
+extern s32 D_80155D84;
 extern s32 D_80155D88;
+extern ItemEntity* D_80155DA0;
+extern ItemEntity* D_801561A0;
 ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
@@ -77,7 +81,18 @@ INCLUDE_ASM(s32, "C50A0", func_80130FAC);
 
 INCLUDE_ASM(s32, "C50A0", clear_item_entity_data);
 
-INCLUDE_ASM(s32, "C50A0", init_item_entity_list);
+void init_item_entity_list(void) {
+    if (!gGameStatusPtr->isBattle) {
+        D_801565A0 = &D_80155DA0;
+    } else {
+        D_801565A0 = &D_801561A0;
+    }
+
+    D_801565A4 = 0;
+    D_801565A8 = 0;
+    D_801512F8 = 0;
+    D_80155D84 = 0;
+}
 
 INCLUDE_ASM(s32, "C50A0", func_80131128);
 
