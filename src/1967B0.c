@@ -2,6 +2,17 @@
 
 INCLUDE_ASM(s32, "1967B0", LoadItemScript);
 
+extern s32 D_80293B80;
+
+typedef struct BattleItemTableEntry {
+    /* 0x0 */ u8* romStart;
+    /* 0x4 */ u8* romEnd;
+    /* 0x8 */ u8* vramStart;
+    /* 0xC */ u8* vramEnd;
+} BattleItemTableEntry; // size = 0x10
+
+extern BattleItemTableEntry gBattleItemTable[];
+
 INCLUDE_ASM(s32, "1967B0", LoadFreeItemScript);
 
 ApiStatus LoadMoveScript(ScriptInstance* script, s32 isInitialCall) {

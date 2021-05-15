@@ -164,6 +164,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
     )
 
+    ninja.rule("pack_title_data",
+        description="pack_title_data $out",
+        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
+    )
+
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
@@ -381,19 +386,48 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "PaperMarioMapFS":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
+                src_dir = Path("assets/x") / seg.name
 
                 for path in entry.src_paths:
                     name = path.stem
-                    bin_path = entry.object_path.with_suffix("").with_suffix("") / f"{name}.bin"
+                    out_dir = entry.object_path.with_suffix("").with_suffix("")
+                    bin_path = out_dir / f"{name}.bin"
 
                     if name.startswith("party_"):
                         compress = True
+                        yay0_path = bin_path.with_suffix(".Yay0")
                         build(bin_path, [path], "img", variables={
                             "img_type": "party",
                             "img_flags": "",
                         })
+                    elif name == "title_data":
+                        compress = True
+
+                        logotype_path = out_dir / "title_logotype.bin"
+                        copyright_path = out_dir / "title_copyright.bin"
+                        press_start_path = out_dir / "title_press_start.bin"
+
+                        build(logotype_path, [src_dir / "title/logotype.png"], "img", variables={
+                            "img_type": "rgba32",
+                            "img_flags": "",
+                        })
+                        build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                            "img_type": "ia8",
+                            "img_flags": "",
+                        })
+                        build(press_start_path, [src_dir / "title/press_start.png"], "img", variables={
+                            "img_type": "ia8",
+                            "img_flags": "",
+                        })
+
+                        build(bin_path, [
+                            logotype_path,
+                            copyright_path,
+                            press_start_path,
+                        ], "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
+                        bin_path = self.build_path() / bin_path
                         build(bin_path, [path], "img", variables={
                             "img_type": "bg",
                             "img_flags": "",

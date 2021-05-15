@@ -8,7 +8,7 @@ glabel jtbl_8014F740
 
 .section .text
 
-glabel step_entity_updatecmd
+glabel step_entity_commandlist
 /* A62D8 8010FBD8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* A62DC 8010FBDC AFB10014 */  sw        $s1, 0x14($sp)
 /* A62E0 8010FBE0 0080882D */  daddu     $s1, $a0, $zero

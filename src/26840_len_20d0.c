@@ -47,11 +47,11 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 
         sub->unk_7F = 0;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_90); i++) {
         manager->unk_90[i] = 0;
     }
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(manager->unk_A0); i++) {
         manager->unk_A0[i].x = 0;
     }
 
@@ -170,6 +170,7 @@ INCLUDE_ASM(s32, "26840_len_20d0", func_8004C300);
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_set_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
 
+void snd_set_player_modifiers(SoundManager* manager, SoundSFXEntry* sfxEntry);
 INCLUDE_ASM(void, "26840_len_20d0", snd_set_player_modifiers, SoundManager* manager, SoundSFXEntry* sfxEntry);
 
 INCLUDE_ASM(s16, "26840_len_20d0", func_8004C444, SoundManager* manager);
