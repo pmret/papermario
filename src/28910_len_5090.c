@@ -300,11 +300,8 @@ void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp_a1;
-    s32 temp_a2;
-
-    temp_a1 = player->unk_D4.u16;
-    temp_a2 = player->unk_D6.u8[0] & 0x7F;
+    s32 temp_a1 = player->unk_D4.u16;
+    s32 temp_a2 = player->unk_D6.u8[0] & 0x7F;
 
     if (temp_a2 != 0) {
         temp_a2 = temp_a2 << 0x18;

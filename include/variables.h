@@ -63,6 +63,7 @@ extern NpcList* gCurrentNpcListPtr;
 extern ShadowList gWorldShadowList;
 extern ShadowList gBattleShadowList;
 extern ShadowList* gCurrentShadowListPtr;
+extern HudElement** gHudElementList;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
@@ -203,7 +204,7 @@ extern s32 gItemMenuTargetScrollPos;
 extern s32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
-extern MenuIcon* gItemIcons[20];
+extern HudElement* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats

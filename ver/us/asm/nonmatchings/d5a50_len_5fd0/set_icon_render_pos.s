@@ -4,8 +4,8 @@
 glabel set_icon_render_pos
 /* DB084 80144984 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB088 80144988 00822024 */  and       $a0, $a0, $v0
-/* DB08C 8014498C 3C028015 */  lui       $v0, %hi(D_80157960)
-/* DB090 80144990 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
+/* DB08C 8014498C 3C028015 */  lui       $v0, %hi(gHudElementList)
+/* DB090 80144990 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
 /* DB094 80144994 00042080 */  sll       $a0, $a0, 2
 /* DB098 80144998 00822021 */  addu      $a0, $a0, $v0
 /* DB09C 8014499C 8C820000 */  lw        $v0, ($a0)

@@ -4,8 +4,8 @@
 glabel icon_set_tint
 /* DB5FC 80144EFC 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB600 80144F00 00822024 */  and       $a0, $a0, $v0
-/* DB604 80144F04 3C028015 */  lui       $v0, %hi(D_80157960)
-/* DB608 80144F08 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
+/* DB604 80144F04 3C028015 */  lui       $v0, %hi(gHudElementList)
+/* DB608 80144F08 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
 /* DB60C 80144F0C 00042080 */  sll       $a0, $a0, 2
 /* DB610 80144F10 00822021 */  addu      $a0, $a0, $v0
 /* DB614 80144F14 8C820000 */  lw        $v0, ($a0)

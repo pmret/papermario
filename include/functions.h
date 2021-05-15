@@ -163,8 +163,8 @@ s32 osGetId();
 
 void mem_clear(s8* data, s32 numBytes);
 
-MenuIcon* create_icon(s32* iconIndex);
-void set_icon_render_pos(MenuIcon* iconIndex, s32 posX, s32 posY);
+HudElement* create_icon(s32* iconIndex);
+void set_icon_render_pos(HudElement* iconIndex, s32 posX, s32 posY);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);

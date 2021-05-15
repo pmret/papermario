@@ -1,7 +1,7 @@
 #include "coconut.h"
 
 void* D_80108A64; // an image
-static MenuIcon* D_802A1E80;
+static HudElement* D_802A1E80;
 
 // Returns time to sleep for on $x.
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

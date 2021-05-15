@@ -1,7 +1,7 @@
 #include "super_soda.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A2280;
+static HudElement* D_802A2280;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

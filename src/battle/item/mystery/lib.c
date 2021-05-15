@@ -1,7 +1,7 @@
 #include "mystery.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A25C0;
+static HudElement* D_802A25C0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -57,12 +57,12 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 
 extern s32 D_802A25E4;
-extern MenuIcon* D_802A25C8;
+extern HudElement* D_802A25C8;
 extern s32 D_802A25EC;
 
 void N(func_802A123C_72C7EC)(void) {
     s32 i;
-    MenuIcon** ptr;
+    HudElement** ptr;
     s32 var;
     s32* var2;
 
@@ -102,7 +102,7 @@ extern s32 D_802A25F0;
 extern s32 D_802A25F4;
 extern s32 D_802A25F8;
 extern s16** D_802A25FC;
-extern MenuIcon** D_802A25C8;
+extern HudElement** D_802A25C8;
 extern struct N(tempStc) D_8008A680[100];
 
 ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
@@ -118,8 +118,8 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
             s32 i;
             f32 t0;
             f32 t1;
-            MenuIcon* icon;
-            MenuIcon** iconPtr;
+            HudElement* icon;
+            HudElement** iconPtr;
             struct N(tempStc)* ic;
             StaticItem* itemTable;
 
@@ -235,7 +235,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
             s32* F4ptr = &D_802A25F4;
             s32 i;
             s16 g;
-            MenuIcon** iconPtr;
+            HudElement** iconPtr;
 
             if (*F4ptr != 0) {
                 *F4ptr -= 1;
