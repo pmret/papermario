@@ -89,7 +89,12 @@ void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY) {
     hudElement->renderPosY = posY;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", get_icon_render_pos);
+void get_icon_render_pos(s32 iconIndex, s32* x, s32* y) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    *x = hudElement->renderPosX;
+    *y = hudElement->renderPosY;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_801449DC);
 
@@ -97,7 +102,6 @@ void set_icon_flags(s32 iconIndex, s32 flags) {
     gHudElementList[iconIndex & ~0x800]->flags |= flags;
 }
 
-//INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_icon_flags);
 void clear_icon_flags(s32 iconIndex, s32 flags) {
     gHudElementList[iconIndex & ~0x800]->flags &= ~flags;
 }
