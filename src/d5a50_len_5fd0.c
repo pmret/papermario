@@ -64,7 +64,9 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_icon_2);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", set_menu_icon_script);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", get_menu_icon_script);
+s32* get_menu_icon_script(s32 arg0) {
+    return gHudElementList[arg0 & ~0x800]->startReadPos;
+}
 
 HudElement* get_menu_icon(s32 arg0) {
     return gHudElementList[arg0 & ~0x800];
@@ -80,15 +82,25 @@ void free_icon(s32 arg0) {
     D_801512B4--;
 }
 
-INCLUDE_ASM(void, "d5a50_len_5fd0", set_icon_render_pos, HudElement* iconIndex, s32 posX, s32 posY);
+void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    hudElement->renderPosX = posX;
+    hudElement->renderPosY = posY;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", get_icon_render_pos);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_801449DC);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_icon_flags);
+void set_icon_flags(s32 iconIndex, s32 flags) {
+    gHudElementList[iconIndex & ~0x800]->flags |= flags;
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_icon_flags);
+//INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_icon_flags);
+void clear_icon_flags(s32 iconIndex, s32 flags) {
+    gHudElementList[iconIndex & ~0x800]->flags &= ~flags;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144A5C);
 
@@ -100,8 +112,8 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E4C);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E74);
 
-void icon_set_opacity(s32 arg0, s32 opacity) {
-    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+void icon_set_opacity(s32 iconIndex, s32 opacity) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
 
     hudElement->flags |= 0x20;
     hudElement->opacity = opacity;
@@ -111,7 +123,13 @@ void icon_set_opacity(s32 arg0, s32 opacity) {
     }
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", icon_set_tint);
+void icon_set_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    hudElement->tint[0] = tint1;
+    hudElement->tint[1] = tint2;
+    hudElement->tint[2] = tint3;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144F28);
 

@@ -397,13 +397,13 @@ typedef struct MusicSettings {
 } MusicSettings; // size = 0x30
 
 typedef struct HudElement {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u32* readPos;
-    /* 0x08 */ u32* startReadPos;
-    /* 0x0C */ u32* ptrPropertyList;
-    /* 0x10 */ u32* imageAddr;
-    /* 0x14 */ u32* paletteAddr;
-    /* 0x18 */ u32 memOffset;
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32* readPos;
+    /* 0x08 */ s32* startReadPos;
+    /* 0x0C */ s32* ptrPropertyList;
+    /* 0x10 */ s32* imageAddr;
+    /* 0x14 */ s32* paletteAddr;
+    /* 0x18 */ s32 memOffset;
     /* 0x1C */ s32* hudTransform;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
