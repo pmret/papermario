@@ -927,9 +927,9 @@ ApiStatus SetJumpAnimations(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->jumpPartIndex = jumpPartIndex;
-    actor->animJumpRise = animJumpRise;
-    actor->animJumpFall = animJumpFall;
-    actor->animJumpLand = animJumpLand;
+    actor->walk.animJumpRise = animJumpRise;
+    actor->walk.animJumpFall = animJumpFall;
+    actor->walk.animJumpLand = animJumpLand;
 
     return ApiStatus_DONE2;
 }

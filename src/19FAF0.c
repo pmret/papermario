@@ -110,7 +110,53 @@ INCLUDE_ASM(s32, "19FAF0", func_80273444);
 
 INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", PlayerLandJump, ScriptInstance* script, s32 isInitialCall);
+ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
+    Actor* player = gBattleStatus.playerActor;
+    ActorMovementWalk* walkMovement = &player->walk;
+    
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    if (script->functionTemp[0].s == 0) {
+        walkMovement->currentPos.x = player->currentPos.x;
+        walkMovement->currentPos.y = player->currentPos.y;
+        walkMovement->currentPos.z = player->currentPos.z;
+        script->functionTemp[0].s = 1;
+    }
+
+    if (walkMovement->velocity > 0.0f) {
+        if (walkMovement->animJumpRise != 0) {
+            set_animation(0, 0, walkMovement->animJumpRise);
+        }
+    }
+
+    if (walkMovement->velocity < 0.0f) {
+        if (walkMovement->animJumpFall != 0) {
+            set_animation(0, 0, walkMovement->animJumpFall);
+        }
+    }
+
+    walkMovement->currentPos.y += walkMovement->velocity;
+    walkMovement->velocity -= walkMovement->acceleration;
+    
+    add_xz_vec3f(&walkMovement->currentPos, walkMovement->speed, walkMovement->angle);
+    
+    player->currentPos.x = walkMovement->currentPos.x;
+    player->currentPos.y = walkMovement->currentPos.y;
+    player->currentPos.z = walkMovement->currentPos.z;
+
+    if (player->currentPos.y < 0.0f) {
+        player->currentPos.y = 0.0f;
+
+        play_movement_dust_effects(2, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
+        sfx_play_sound_at_position(SOUND_SOFT_LAND, 0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
+
+        return ApiStatus_DONE1;
+    }
+    
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "19FAF0", PlayerRunToGoal, ScriptInstance* script, s32 isInitialCall);
 

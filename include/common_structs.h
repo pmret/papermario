@@ -1481,16 +1481,28 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
+typedef struct ActorMovementWalk {
+    /* 0x00 */ Vec3f currentPos;
+    /* 0x0C */ Vec3f goalPos;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ char unk_24[24];
+    /* 0x3C */ f32 acceleration;
+    /* 0x40 */ f32 speed;
+    /* 0x44 */ f32 velocity;
+    /* 0x48 */ f32 angle;
+    /* 0x4C */ f32 distance;
+    /* 0x50 */ f32 bounceDivisor;
+    /* 0x54 */ char unk_54[0x4];
+    /* 0x58 */ s32 animJumpRise;
+    /* 0x5C */ s32 animJumpFall;
+    /* 0x60 */ s32 animJumpLand;
+} ActorMovementWalk; // size = 0x64;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovement walk;
-    /* 0x05C */ f32 bounceDivisor;
-    /* 0x060 */ char unk_60[4];
-    /* 0x064 */ s32 animJumpRise;
-    /* 0x068 */ s32 animJumpFall;
-    /* 0x06C */ s32 animJumpLand;
+    /* 0x00C */ ActorMovementWalk walk;
     /* 0x070 */ s16 moveTime;
     /* 0x072 */ s16 moveArcAmplitude;
     /* 0x074 */ char unk_74[3];
