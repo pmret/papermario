@@ -1854,7 +1854,7 @@ typedef struct {
     /* 0x12 */ s16 height;
     /* 0x14 */ UNK_PTR fpDrawContents;
     /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
-    /* 0x1C */ s8 unk_1C;
+    /* 0x1C */ u8 unk_1C;
     /* 0x1D */ char unk_1D[3];
 } UIPanel; // size = 0x20
 
