@@ -251,7 +251,6 @@ s32 get_stored_empty_count(void) {
 
 void enforce_hpfp_limits(void) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
 
     playerData->curMaxHP = playerData->hardMaxHP + (is_ability_active(4) * 5);
     if (playerData->curMaxHP > 75) {
@@ -261,12 +260,12 @@ void enforce_hpfp_limits(void) {
         playerData->curHP = playerData->curMaxHP;
     }
 
-    playerData2->curMaxFP = playerData2->hardMaxFP + (is_ability_active(12) * 5);
-    if (playerData2->curMaxFP > 75) {
-        playerData2->curMaxFP = 75;
+    playerData->curMaxFP = playerData->hardMaxFP + (is_ability_active(12) * 5);
+    if (playerData->curMaxFP > 75) {
+        playerData->curMaxFP = 75;
     }
-    if (playerData2->curFP > playerData2->curMaxFP) {
-        playerData2->curFP = playerData2->curMaxFP;
+    if (playerData->curFP > playerData->curMaxFP) {
+        playerData->curFP = playerData->curMaxFP;
     }
 }
 
@@ -1124,7 +1123,6 @@ s8 add_star_points(s32 amt) {
 
 u8 add_star_pieces(s32 amt) {
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
     s32 newSP = playerData->starPieces;
 
     newSP += amt;
@@ -1140,29 +1138,23 @@ u8 add_star_pieces(s32 amt) {
         playerData->starPiecesCollected += amt;
     }
 
-    return playerData2->starPieces;
+    return playerData->starPieces;
 }
 
 void increment_max_SP() {
-    PlayerData* playerData = &gPlayerData;
-
-    playerData->maxStarPower++;
-    playerData->specialBarsFilled = playerData->maxStarPower * 256;
+    gPlayerData.maxStarPower++;
+    gPlayerData.specialBarsFilled = gPlayerData.maxStarPower * 256;
 }
 
 void set_max_SP(s8 newMaxSP) {
-    PlayerData* playerData = &gPlayerData;
-
-    playerData->maxStarPower = newMaxSP;
-    playerData->specialBarsFilled = newMaxSP * 256;
+    gPlayerData.maxStarPower = newMaxSP;
+    gPlayerData.specialBarsFilled = newMaxSP * 256;
 }
 
 void add_SP(s32 amt) {
     // TODO cleanup
     PlayerData* playerData = &gPlayerData;
-    PlayerData* playerData2 = &gPlayerData;
     UiStatus* uiStatus = &gUIStatus;
-    UiStatus* uiStatus2 = &gUIStatus;
     s32 phi_v1;
     s32 blah;
 
@@ -1170,7 +1162,7 @@ void add_SP(s32 amt) {
     uiStatus->unk_57[1] = 60;
 
     phi_v1 = playerData->specialBarsFilled;
-    if (phi_v1 < 0) {
+    if (playerData->specialBarsFilled < 0) {
         phi_v1 = playerData->specialBarsFilled + 31;
     }
     uiStatus->unk_57[2] = phi_v1 >> 5;
@@ -1182,7 +1174,7 @@ void add_SP(s32 amt) {
         playerData->specialBarsFilled = blah;
     }
 
-    uiStatus2->displaySP = playerData2->specialBarsFilled;
+    gUIStatus.displaySP = gPlayerData.specialBarsFilled;
 }
 
 s32 recover_fp(s32 amt) {
@@ -1243,22 +1235,16 @@ void subtract_hp(s32 amt) {
 }
 
 s8 has_full_hp(void) {
-    PlayerData* playerData = &gPlayerData;
-
-    return playerData->curMaxHP == playerData->curHP;
+    return gPlayerData.curMaxHP == gPlayerData.curHP;
 }
 
 s8 has_full_fp(void) {
-    PlayerData* playerData = &gPlayerData;
-
-    return playerData->curMaxFP == playerData->curFP;
+    return gPlayerData.curMaxFP == gPlayerData.curFP;
 }
 
 s8 add_fortress_keys(s32 amt) {
-    PlayerData* playerData = &gPlayerData;
-
-    playerData->fortressKeyCount += amt;
-    return playerData->fortressKeyCount;
+    gPlayerData.fortressKeyCount += amt;
+    return gPlayerData.fortressKeyCount;
 }
 
 s8 subtract_fortress_keys(s8 amt) {
