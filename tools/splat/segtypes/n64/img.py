@@ -5,29 +5,29 @@ from util import options
 from util import log
 
 class N64SegImg(N64Segment):
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
-        if type(segment) is dict:
+        if isinstance(yaml, dict):
             if self.extract:
-                self.width = segment["width"]
-                self.height = segment["height"]
+                self.width = yaml["width"]
+                self.height = yaml["height"]
 
-            self.flip_horizontal = bool(segment.get("flip_x", False))
-            self.flip_vertical = bool(segment.get("flip_y", False))
+            self.flip_horizontal = bool(yaml.get("flip_x", False))
+            self.flip_vertical = bool(yaml.get("flip_y", False))
 
-            if segment.get("flip"):
+            if yaml.get("flip"):
                 self.warn(f"'flip' parameter for img segments is deprecated; use flip_x and flip_y instead")
-                flip = segment.get("flip")
+                flip = yaml.get("flip")
 
                 self.flip_vertical = flip == "both" or flip.startswith("v") or flip == "y"
                 self.flip_horizontal = flip == "both" or flip.startswith("h") or flip == "x"
         else:
             if self.extract:
-                if len(segment) < 5:
+                if len(yaml) < 5:
                     log.error(f"Error: {self.name} is missing width and height parameters")
-                self.width = segment[3]
-                self.height = segment[4]
+                self.width = yaml[3]
+                self.height = yaml[4]
 
             self.flip_horizontal = False
             self.flip_vertical = False

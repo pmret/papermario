@@ -6,8 +6,8 @@ from util.symbols import Symbol
 
 # code group
 class N64SegCode(N64SegGroup):
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
         self.reported_file_split = False
         self.labels_to_add = set()

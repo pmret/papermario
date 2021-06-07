@@ -1,6 +1,8 @@
 import importlib
 from typing import Dict, TYPE_CHECKING, Union, Optional, List
 from pathlib import Path
+
+import yaml
 from util import log
 from util import options
 from util.symbols import Symbol
@@ -90,7 +92,7 @@ class Segment:
         else:
             return str(segment[1])
         
-    def parse_segment_name(self, segment: Union[dict, list]) -> str:
+    def parse_segment_name(self, rom_start, segment: Union[dict, list]) -> str:
         if isinstance(segment, dict) and "name" in segment:
             return str(segment["name"])
         elif isinstance(segment, dict) and "dir" in segment:
@@ -98,27 +100,28 @@ class Segment:
         elif isinstance(segment, list) and len(segment) >= 3:
             return str(segment[2])
         else:
-            return str(self.__class__.get_default_name(self.rom_start))
+            return str(self.get_default_name(rom_start))
 
-    def __init__(self, segment: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr):
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True, 
+                 given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml: yaml = {}):
         self.rom_start = rom_start
         self.rom_end = rom_end
-        self.type = Segment.parse_segment_type(segment)
-        self.name = self.parse_segment_name(segment)
-        self.given_dir = Path(segment.get("dir", "")) if isinstance(segment, dict) else Path()
-        self.vram_start = parse_segment_vram(segment)
-        self.extract = bool(segment.get("extract", True)) if isinstance(segment, dict) else True
-        self.config = segment
-        self.given_subalign = parse_segment_subalign(segment)
-        self.parent:Optional[Segment] = None
-        self.args:List[str] = [] if isinstance(segment, dict) else segment[3:]
+        self.type = type
+        self.name = name
+        self.vram_start = vram_start
+        self.extract = extract
 
-        self.given_is_overlay:Optional[bool] = segment.get("overlay", False) if isinstance(segment, dict) else False
-
-        self.sibling:Optional[Segment] = None
-
+        self.given_subalign = given_subalign
+        self.given_is_overlay = given_is_overlay
+        self.given_dir = given_dir
         self.given_seg_symbols: Dict[int, Symbol] = {} # Symbols known to be in this segment
         self.given_ext_symbols: Dict[int, Symbol] = {} # Symbols not in this segment but also not from other overlapping ram address ranges
+
+        self.parent:Optional[Segment] = None
+        self.sibling:Optional[Segment] = None
+
+        self.args:List[str] = args
+        self.yaml = yaml
 
         if "skip" in self.args:
             self.extract = False
@@ -136,6 +139,19 @@ class Segment:
             if self.rom_start > self.rom_end:
                 print(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
                 sys.exit(1)
+
+    @classmethod
+    def from_yaml(cls, segment: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr):
+        type = Segment.parse_segment_type(segment)
+        name = cls.parse_segment_name(cls, rom_start, segment)
+        vram_start = parse_segment_vram(segment)
+        extract = bool(segment.get("extract", True)) if isinstance(segment, dict) else True
+        given_subalign = parse_segment_subalign(segment)
+        given_is_overlay:Optional[bool] = segment.get("overlay", False) if isinstance(segment, dict) else False
+        given_dir = Path(segment.get("dir", "")) if isinstance(segment, dict) else Path()
+        args:List[str] = [] if isinstance(segment, dict) else segment[3:]
+
+        return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, segment)
     
     @property
     def needs_symbols(self) -> bool:
@@ -234,7 +250,7 @@ class Segment:
         pass
 
     def cache(self):
-        return (self.config, self.rom_end)
+        return (self.yaml, self.rom_end)
 
     def get_linker_section(self) -> str:
         return ".data"
