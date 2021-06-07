@@ -1,7 +1,7 @@
 from collections import namedtuple
 from typing import Any, Optional
 
-Resolution = namedtuple('_Resolution', 'x y unit_is_meter')
+Resolution = namedtuple('Resolution', 'x y unit_is_meter')
 
 class Error(Exception): ...
 class FormatError(Error): ...

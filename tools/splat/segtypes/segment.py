@@ -1,8 +1,7 @@
 import importlib
-from typing import Dict, TYPE_CHECKING, Union, Optional, List
+from typing import Dict, TYPE_CHECKING, Type, Union, Optional, List
 from pathlib import Path
 
-import yaml
 from util import log
 from util import options
 from util.symbols import Symbol
@@ -91,8 +90,9 @@ class Segment:
             return str(segment["type"])
         else:
             return str(segment[1])
-        
-    def parse_segment_name(self, rom_start, segment: Union[dict, list]) -> str:
+
+    @staticmethod
+    def parse_segment_name(cls, rom_start, segment: Union[dict, list]) -> str:
         if isinstance(segment, dict) and "name" in segment:
             return str(segment["name"])
         elif isinstance(segment, dict) and "dir" in segment:
@@ -100,10 +100,10 @@ class Segment:
         elif isinstance(segment, list) and len(segment) >= 3:
             return str(segment[2])
         else:
-            return str(self.get_default_name(rom_start))
+            return str(cls.get_default_name(rom_start))
 
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True, 
-                 given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml: yaml = {}):
+                 given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml = {}):
         self.rom_start = rom_start
         self.rom_end = rom_end
         self.type = type
@@ -140,18 +140,18 @@ class Segment:
                 print(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
                 sys.exit(1)
 
-    @classmethod
-    def from_yaml(cls, segment: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr):
-        type = Segment.parse_segment_type(segment)
-        name = cls.parse_segment_name(cls, rom_start, segment)
-        vram_start = parse_segment_vram(segment)
-        extract = bool(segment.get("extract", True)) if isinstance(segment, dict) else True
-        given_subalign = parse_segment_subalign(segment)
-        given_is_overlay:Optional[bool] = segment.get("overlay", False) if isinstance(segment, dict) else False
-        given_dir = Path(segment.get("dir", "")) if isinstance(segment, dict) else Path()
-        args:List[str] = [] if isinstance(segment, dict) else segment[3:]
+    @staticmethod
+    def from_yaml(cls: Type["Segment"], yaml: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr):
+        type = Segment.parse_segment_type(yaml)
+        name = Segment.parse_segment_name(cls, rom_start, yaml)
+        vram_start = parse_segment_vram(yaml)
+        extract = bool(yaml.get("extract", True)) if isinstance(yaml, dict) else True
+        given_subalign = parse_segment_subalign(yaml)
+        given_is_overlay:Optional[bool] = yaml.get("overlay", False) if isinstance(yaml, dict) else False
+        given_dir = Path(yaml.get("dir", "")) if isinstance(yaml, dict) else Path()
+        args:List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
-        return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, segment)
+        return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
     
     @property
     def needs_symbols(self) -> bool:

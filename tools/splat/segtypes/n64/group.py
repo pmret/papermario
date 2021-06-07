@@ -29,10 +29,10 @@ class N64SegGroup(N64Segment):
 
     def handle_alls(self, segs, base_segs) -> bool:
         for i, elem in enumerate(segs):
-            if isinstance(elem, str) and elem.startswith("all_"):
+            if elem.type.startswith("all_"):
                 alls = []
 
-                rep_type = f".{elem[4:]}"
+                rep_type = f".{elem.type[4:]}"
                 replace_class = Segment.get_class_for_type(rep_type)
 
                 for base in base_segs.items():
@@ -63,7 +63,7 @@ class N64SegGroup(N64Segment):
             typ = Segment.parse_segment_type(subsection_yaml)
 
             if typ.startswith("all_"):
-                ret.append(typ)
+                ret.append(Segment("auto", "auto", typ, "", "auto"))
                 continue
 
             segment_class = Segment.get_class_for_type(typ)
@@ -75,7 +75,7 @@ class N64SegGroup(N64Segment):
                 print(f"Error: Code segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
                 sys.exit(1)
 
-            segment: Segment = segment_class.from_yaml(subsection_yaml, start, end)
+            segment: Segment = Segment.from_yaml(segment_class, subsection_yaml, start, end)
             segment.sibling = base_segments.get(segment.name, None)
             segment.parent = self
 

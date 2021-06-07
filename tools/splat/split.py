@@ -48,7 +48,7 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         this_start = Segment.parse_segment_start(seg_yaml)
         next_start = Segment.parse_segment_start(config_segments[i + 1])
 
-        segment: Segment = segment_class.from_yaml(seg_yaml, this_start, next_start)
+        segment: Segment = Segment.from_yaml(segment_class, seg_yaml, this_start, next_start)
 
         if segment.require_unique_name:
             if segment.name in seen_segment_names:
