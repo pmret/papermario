@@ -1,7 +1,7 @@
 #include "strange_cake.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A2DD0;
+static HudElement* D_802A2DD0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -57,12 +57,12 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 
 extern s32 D_802A25E4;
-extern MenuIcon* D_802A2DF4;
+extern HudElement* D_802A2DF4;
 extern s32 D_802A2DD8;
 
 ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
-    MenuIcon** ptr;
+    HudElement** ptr;
     s32 var;
     s32* var2;
 
@@ -101,7 +101,7 @@ extern s32 D_802A2DF8;
 extern s32 D_802A2DFC;
 extern s32 D_802A2E00;
 extern s32* D_802A2DD8;
-extern MenuIcon** D_802A25C8;
+extern HudElement** D_802A25C8;
 
 s32 N(D_802A2848_732B48)[] = {
     0x802A27F8, 0x802A2820, 0x802A27D0, 0x802A27F8
@@ -121,7 +121,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
     switch (D_802A2DEC) {
         case 0: {
             s32 i;
-            MenuIcon** iconPtr;
+            HudElement** iconPtr;
 
             D_802A2E00 = create_dynamic_entity_frontUI(NULL, func_802A123C_73153C);
             i = rand_int(13000);
@@ -132,7 +132,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             for (i = 0; i < 5; i++) {
                 s32* B48Ptr = &N(D_802A2848_732B48);
                 s32* B58Ptr = &N(D_802A2858_732B58);
-                MenuIcon* icon = create_icon(*(B48Ptr + * (B58Ptr + i)));
+                HudElement* icon = create_icon(*(B48Ptr + * (B58Ptr + i)));
 
                 *(&D_802A2DD8 + i) = icon;
                 set_icon_flags(icon, 0x80);
@@ -227,7 +227,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             s32* F4ptr = &D_802A2DFC;
             s32 i;
             s16 g;
-            MenuIcon** iconPtr;
+            HudElement** iconPtr;
 
             if (*F4ptr != 0) {
                 *F4ptr -= 1;

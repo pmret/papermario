@@ -18,6 +18,7 @@ s32 D_8014F0C8[] = { 0xFFF40000, 0x00000000, 0x08000800, 0x000000FF, 0x00330000,
                    };
 s32 D_8014F110[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 
+extern s32 D_801512B4;
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_8013F350);
 
@@ -29,7 +30,7 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", init_menu_icon_list);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_801413F8);
 
-INCLUDE_ASM(MenuIcon*, "d5a50_len_5fd0", create_icon, s32* iconIndex);
+INCLUDE_ASM(HudElement*, "d5a50_len_5fd0", create_icon, s32* iconIndex);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", update_menu_icons);
 
@@ -63,21 +64,47 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_icon_2);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", set_menu_icon_script);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", get_menu_icon_script);
+s32* get_menu_icon_script(s32 arg0) {
+    return gHudElementList[arg0 & ~0x800]->startReadPos;
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", get_menu_icon);
+HudElement* get_menu_icon(s32 arg0) {
+    return gHudElementList[arg0 & ~0x800];
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", free_icon, MenuIcon* iconIndex);
+void free_icon(s32 arg0) {
+    if (gHudElementList[arg0 & ~0x800]->flags & 0x10000) {
+        func_80145108(arg0 & ~0x800);
+    }
 
-INCLUDE_ASM(void, "d5a50_len_5fd0", set_icon_render_pos, MenuIcon* iconIndex, s32 posX, s32 posY);
+    heap_free(gHudElementList[arg0 & ~0x800]);
+    gHudElementList[arg0 & ~0x800] = NULL;
+    D_801512B4--;
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", get_icon_render_pos);
+void set_icon_render_pos(s32 iconIndex, s32 posX, s32 posY) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    hudElement->renderPosX = posX;
+    hudElement->renderPosY = posY;
+}
+
+void get_icon_render_pos(s32 iconIndex, s32* x, s32* y) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    *x = hudElement->renderPosX;
+    *y = hudElement->renderPosY;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_801449DC);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_icon_flags);
+void set_icon_flags(s32 iconIndex, s32 flags) {
+    gHudElementList[iconIndex & ~0x800]->flags |= flags;
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_icon_flags);
+void clear_icon_flags(s32 iconIndex, s32 flags) {
+    gHudElementList[iconIndex & ~0x800]->flags &= ~flags;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144A5C);
 
@@ -89,9 +116,24 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E4C);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E74);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", icon_set_opacity);
+void icon_set_opacity(s32 iconIndex, s32 opacity) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", icon_set_tint);
+    hudElement->flags |= 0x20;
+    hudElement->opacity = opacity;
+
+    if (opacity == 255) {
+        hudElement->flags &= ~0x20;
+    }
+}
+
+void icon_set_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3) {
+    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+
+    hudElement->tint[0] = tint1;
+    hudElement->tint[1] = tint2;
+    hudElement->tint[2] = tint3;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144F28);
 

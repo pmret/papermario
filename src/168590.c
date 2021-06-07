@@ -12,7 +12,14 @@ void func_80248160(void) {
 void func_80248168(void) {
 }
 
-INCLUDE_ASM(s32, "168590", func_80248170);
+void func_80248170(s32 arg0) {
+    UIPanel* panel = &gUIPanels[arg0];
+
+    if (panel->unk_1C == 0x8) {
+        panel->flags &= ~0x8;
+        set_window_update(arg0, 1);
+    }
+}
 
 INCLUDE_ASM(s32, "168590", func_802481B8);
 

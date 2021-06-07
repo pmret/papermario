@@ -2,7 +2,7 @@
 
 extern s32 D_80108A64;
 static s32* D_802A1CD0;
-static MenuIcon* D_802A1CD4;
+static HudElement* D_802A1CD4;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

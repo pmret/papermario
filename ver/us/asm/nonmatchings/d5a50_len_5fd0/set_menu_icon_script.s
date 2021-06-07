@@ -5,8 +5,8 @@ glabel set_menu_icon_script
 /* DAEFC 801447FC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* DAF00 80144800 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DAF04 80144804 00822024 */  and       $a0, $a0, $v0
-/* DAF08 80144808 3C028015 */  lui       $v0, %hi(D_80157960)
-/* DAF0C 8014480C 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
+/* DAF08 80144808 3C028015 */  lui       $v0, %hi(gHudElementList)
+/* DAF0C 8014480C 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
 /* DAF10 80144810 00042080 */  sll       $a0, $a0, 2
 /* DAF14 80144814 AFBF0014 */  sw        $ra, 0x14($sp)
 /* DAF18 80144818 AFB00010 */  sw        $s0, 0x10($sp)
