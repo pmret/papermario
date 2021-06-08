@@ -9,7 +9,7 @@ void N(UnkNpcAIFunc11)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         s32 something;
 
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
         script->functionTemp[0].s = 14;
     } else {

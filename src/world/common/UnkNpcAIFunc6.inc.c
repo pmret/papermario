@@ -9,7 +9,7 @@ void N(UnkNpcAIFunc6)(ScriptInstance* script) {
     if (npc->turnAroundYawAdjustment == 0) {
         enemy->varTable[0] = 2;
         npc->duration = enemy->varTable[1];
-        npc->currentAnim = enemy->animList[8];
+        npc->currentAnim.w = enemy->animList[8];
         script->functionTemp[0].s = 31;
     }
 }

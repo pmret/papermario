@@ -32,8 +32,7 @@ Script N(80242330) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -121,8 +120,8 @@ NpcSettings N(npcSettings_802428F0) = {
 };
 
 f32 N(D_8024291C_CF54EC)[] = {
-     4.5f, 3.5f, 2.6f, 2.0f,
-     1.5f, 20.0f,
+    4.5f, 3.5f, 2.6f, 2.0f,
+    1.5f, 20.0f,
 };
 
 NpcAISettings N(npcAISettings_80242934) = {
@@ -237,7 +236,8 @@ Script N(interact_80242C58) = SCRIPT({
         SetCamSpeed(0, 4.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_2), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0, MESSAGE_ID(0x11, 0x003B));
+        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_2), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0,
+                      MESSAGE_ID(0x11, 0x003B));
         SetPlayerAnimation(ANIM_THINKING);
         N(func_80241FB4_CF4B84)();
         SI_VAR(0) = 0x80245110;
@@ -247,8 +247,7 @@ Script N(interact_80242C58) = SCRIPT({
             <= 0 {
                 SetPlayerAnimation(ANIM_STAND_STILL);
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_2), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0, MESSAGE_ID(0x11, 0x003C));
-            }
-            else {
+            } else {
                 SI_VAR(8) = SI_VAR(0);
                 N(func_80241F44_CF4B14)(SI_VAR(0));
                 MakeItemEntity(SI_VAR(8), 505, 20, -24, 1, 0);
@@ -293,9 +292,9 @@ Script N(interact_80242C58) = SCRIPT({
                     == 158 {
                         SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_4), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0, MESSAGE_ID(0x11, 0x003E));
                         SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_1));
-                    }
-                    else {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_4), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0, MESSAGE_ID(0x11, 0x003D));
+                    } else {
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_4), NPC_ANIM(gate_flower, Palette_01, Anim_1), 0,
+                                      MESSAGE_ID(0x11, 0x003D));
                         SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_6));
                         PlaySoundAtNpc(NPC_SELF, 0x2096, 0);
                         MakeItemEntity(SI_VAR(8), -125, 20, 0, 1, 0);
@@ -355,9 +354,11 @@ Script N(interact_80242C58) = SCRIPT({
         sleep 10;
     } else {
         if (STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_9), NPC_ANIM(gate_flower, Palette_01, Anim_8), 0, MESSAGE_ID(0x11, 0x0040));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_9), NPC_ANIM(gate_flower, Palette_01, Anim_8), 0,
+                          MESSAGE_ID(0x11, 0x0040));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_9), NPC_ANIM(gate_flower, Palette_01, Anim_8), 0, MESSAGE_ID(0x11, 0x0041));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_9), NPC_ANIM(gate_flower, Palette_01, Anim_8), 0,
+                          MESSAGE_ID(0x11, 0x0041));
         }
     }
     DisablePlayerInput(FALSE);
@@ -509,14 +510,14 @@ void N(func_80240040_CF2C10)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
+                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+                               npc->pos.x, npc->pos.z,
+                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
-    npc->currentAnim = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[1];
     script->functionTemp[1].s = 0;
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
@@ -638,9 +639,9 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
+                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+                               npc->pos.x, npc->pos.z,
+                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
@@ -668,7 +669,8 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_flo/flo_25/CF2C10", flo_25_func_802401F0_CF2DC0, ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+INCLUDE_ASM(void, "world/area_flo/flo_25/CF2C10", flo_25_func_802401F0_CF2DC0, ScriptInstance* script,
+            NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
@@ -757,7 +759,7 @@ ApiStatus N(func_8024134C_CF3F1C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkNpcAIFunc13.inc.c"
 
-void N(func_80241668_CF4238)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+void N(func_80241668_CF4238)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -767,7 +769,7 @@ void N(func_80241668_CF4238)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1) == 0) {
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->duration = 30;
         script->functionTemp[0].s = 20;
         enemy->varTable[9] = 30;
@@ -911,7 +913,7 @@ ApiStatus N(func_80241DE4_CF49B4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241E80_CF4A50)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241E80_CF4A50)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -926,7 +928,7 @@ ApiStatus N(func_80241E80_CF4A50)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241F44_CF4B14)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241F44_CF4B14)(ScriptInstance* script, s32 isInitialCall) {
     s32 itemId = get_variable(script, *script->ptrReadPos);
     StaticItem* item = &gItemTable[itemId];
 
@@ -941,7 +943,7 @@ ApiStatus N(func_80241F44_CF4B14)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241FB4_CF4B84)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241FB4_CF4B84)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i <= 90; i++) {

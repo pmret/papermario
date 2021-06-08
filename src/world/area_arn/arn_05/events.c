@@ -103,10 +103,12 @@ Script N(interact_80241794) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(6) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0092));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0092));
                 SI_AREA_FLAG(6) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0093));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0093));
                 SI_AREA_FLAG(6) = 0;
             }
         }
@@ -133,10 +135,12 @@ Script N(interact_80241924) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(7) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0099));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0099));
                 SI_AREA_FLAG(7) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x009A));
                 SI_AREA_FLAG(7) = 0;
             }
         }
@@ -170,13 +174,16 @@ Script N(interact_80241AB4) = SCRIPT({
         >= STORY_CH5_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(1014) == 1) {
                 if (SI_AREA_FLAG(9) == 1) {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AE));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                                  0x00AE));
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B0));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                                  0x00B0));
                 }
             } else {
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7));
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AA));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00AA));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_9));
                 ContinueSpeech(-1, NPC_ANIM(boo, Palette_01, Anim_9), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AB));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_A));
@@ -224,10 +231,12 @@ Script N(interact_80241E28) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(8) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B3));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00B3));
                 SI_AREA_FLAG(8) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B4));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00B4));
                 SI_AREA_FLAG(8) = 0;
             }
         }
@@ -994,7 +1003,7 @@ Script N(makeEntities) = SCRIPT({
 
 void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 ret;
     f32 max;
     f32 posX;
@@ -1016,7 +1025,7 @@ void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
     }
 
-    npc->currentAnim = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[1];
     if (enemy->territory->patrol.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
     } else {
@@ -1040,7 +1049,7 @@ void N(func_8024067C_BE825C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
         script->functionTemp[2].s = 0;
     }
-    npc->currentAnim = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[1];
     if (enemy->territory->patrol.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
     } else {
@@ -1082,7 +1091,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall || enemy->unk_B0 & 4) {
         script->functionTemp[0].s = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags = (npc->flags | 0x200) & ~8;
@@ -1194,7 +1203,7 @@ void N(func_80241068_BE8C48)(ScriptInstance* script, NpcAISettings* aiSettings, 
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0].s = 4;
-            npc->currentAnim = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[0];
         }
     }
 }

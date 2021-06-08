@@ -158,7 +158,7 @@ Script N(80240BA0) = SCRIPT({
     PlaySound(0x8000004B);
     spawn {
         SI_VAR(0) = 0;
-    10:
+10:
         RotateModel(9, SI_VAR(0), 0, 0, 1);
         RotateModel(15, SI_VAR(0), 0, 0, 1);
         RotateModel(11, SI_VAR(0), 0, 0, 1);
@@ -417,17 +417,17 @@ Script N(makeEntities) = SCRIPT({
     }
 });
 
-ApiStatus N(func_802400C0_BF4860)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400C0_BF4860)(ScriptInstance* script, s32 isInitialCall) {
     gPlayerData.bootsLevel = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400D4_BF4874)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400D4_BF4874)(ScriptInstance* script, s32 isInitialCall) {
     func_800EF300();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400F4_BF4894)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
@@ -447,7 +447,7 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_8024019C_BF493C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024019C_BF493C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* dataPtr = &N(D_80241188_BF5928);
 

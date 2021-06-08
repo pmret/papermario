@@ -9,7 +9,7 @@ void N(DeadUnkNpcAIFunc14)(ScriptInstance* script, NpcAISettings* aiSettings) {
     f32 vt6 = enemy->varTable[6];
     f32 jumpScale = vt6 / 100.0;
 
-    npc->currentAnim = enemy->animList[8];
+    npc->currentAnim.w = enemy->animList[8];
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;

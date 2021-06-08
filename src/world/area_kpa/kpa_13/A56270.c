@@ -1,6 +1,6 @@
 #include "kpa_13.h"
 
-ApiStatus N(func_80240350_A56270)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240350_A56270)(ScriptInstance* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
     set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);

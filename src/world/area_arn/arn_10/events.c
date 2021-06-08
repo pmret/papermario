@@ -197,7 +197,7 @@ StaticNpc N(npcGroup_802409C8) = {
     .yaw = 270,
     .dropFlags = 0x80,
     .itemDropChance = 20,
-        { ITEM_DRIED_SHROOM, 10, 0 },
+    { ITEM_DRIED_SHROOM, 10, 0 },
     .heartDrops = STANDARD_HEART_DROPS(2),
     .flowerDrops = STANDARD_FLOWER_DROPS(2),
     .maxCoinBonus = 2,

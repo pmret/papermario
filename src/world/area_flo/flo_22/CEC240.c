@@ -24,8 +24,7 @@ Script N(802402E0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -325,8 +324,7 @@ Script N(80241028) = SCRIPT({
             } else {
                 ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DE), 35, 35, 0);
             }
-        }
-        else {
+        } else {
             await N(80240E84);
             RemoveItemAt(SI_VAR(1));
             ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DC), 35, 35, 0);

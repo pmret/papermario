@@ -28,8 +28,7 @@ Script N(80240060) = SCRIPT({
         match STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_SUN_TOWER_SUNNY, 0, 8);
             }
         }
@@ -220,14 +219,16 @@ Script N(interact_80240B28) = SCRIPT({
         }
         < STORY_CH6_STAR_SPIRIT_RESCUED {
             if (SI_SAVE_FLAG(1410) == 0) {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009D));
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                              0x009D));
                 SI_SAVE_FLAG(1410) = 1;
             } else {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009E));
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                              0x009E));
             }
-        }
-        else {
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009F));
+        } else {
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                          0x009F));
         }
     }
     SI_AREA_FLAG(38) = 1;

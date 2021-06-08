@@ -18,8 +18,7 @@ Script N(802423F0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -267,13 +266,13 @@ Script N(802432E8) = SCRIPT({
 });
 
 Vec3f N(vectorList_80243384)[] = {
-     { 531.0, 75.0, 81.0 }, { 481.0, 80.0, 81.0 },
-     { 431.0, 75.0, 81.0 }, { 381.0, 70.0, 81.0 },
-     { 331.0, 75.0, 81.0 }, { 281.0, 80.0, 81.0 },
-     { 231.0, 75.0, 81.0 }, { 181.0, 70.0, 81.0 },
-     { 131.0, 75.0, 81.0 }, { 81.0, 80.0, 81.0 },
-     { 31.0, 75.0, 81.0 }, { -19.0, 70.0, 81.0 },
-     { -69.0, 75.0, 81.0 },
+    { 531.0, 75.0, 81.0 }, { 481.0, 80.0, 81.0 },
+    { 431.0, 75.0, 81.0 }, { 381.0, 70.0, 81.0 },
+    { 331.0, 75.0, 81.0 }, { 281.0, 80.0, 81.0 },
+    { 231.0, 75.0, 81.0 }, { 181.0, 70.0, 81.0 },
+    { 131.0, 75.0, 81.0 }, { 81.0, 80.0, 81.0 },
+    { 31.0, 75.0, 81.0 }, { -19.0, 70.0, 81.0 },
+    { -69.0, 75.0, 81.0 },
 };
 
 Script N(80243420) = SCRIPT({
@@ -557,14 +556,14 @@ Script N(80243E78) = SCRIPT({
 
 void func_80072950();
 
-ApiStatus N(func_8024030C_CCB61C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall) {
     func_80072950(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
 #include "world/common/UnkFunc43.inc.c"
 
-ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
         script->varTable[14] = 0;
         return ApiStatus_DONE2;
@@ -575,14 +574,14 @@ ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024042C_CCB73C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024042C_CCB73C)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-4);
 
     npc->flags = get_variable(NULL, SI_MAP_VAR(0));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024046C_CCB77C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024046C_CCB77C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->functionTemp[0].s = get_variable(script, *args++);
@@ -595,8 +594,8 @@ ApiStatus N(func_8024046C_CCB77C)(ScriptInstance *script, s32 isInitialCall) {
 // graphics macros
 #ifdef NON_MATCHING
 s32 func_8011C2EC(s32);
-void func_8011C2B0(s32, s32*,s32*, s32*);
-void guMtxF2L(Matrix4f, Mtx *m);
+void func_8011C2B0(s32, s32*, s32*, s32*);
+void guMtxF2L(Matrix4f, Mtx* m);
 void guMtxIdentF(Matrix4f);
 
 void N(func_80240504_CCB814)(void) {

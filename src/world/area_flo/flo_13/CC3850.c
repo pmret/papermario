@@ -41,8 +41,7 @@ Script N(802436D0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -57,8 +56,7 @@ Script N(802436D0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_SUN_TOWER_SUNNY, 0, 8);
         }
     }
@@ -216,8 +214,8 @@ NpcSettings N(npcSettings_80244100) = {
 };
 
 f32 N(D_8024412C_CC793C)[] = {
-     4.5f, 3.5f, 2.6f, 2.0f,
-     1.5f, 20.0f,
+    4.5f, 3.5f, 2.6f, 2.0f,
+    1.5f, 20.0f,
 };
 
 NpcAISettings N(npcAISettings_80244144) = {
@@ -301,21 +299,21 @@ NpcSettings N(npcSettings_8024437C) = {
 };
 
 Vec3f N(vectorList_802443A8)[] = {
-     { -250.0, 130.0, 100.0 }, { -150.0, 90.0, 70.0 },
-     { 50.0, 70.0, 10.0 }, { 200.0, 35.0, 30.0 },
-     { 30.0, 10.0, 45.0 },
+    { -250.0, 130.0, 100.0 }, { -150.0, 90.0, 70.0 },
+    { 50.0, 70.0, 10.0 }, { 200.0, 35.0, 30.0 },
+    { 30.0, 10.0, 45.0 },
 };
 
 Vec3f N(vectorList_802443E4)[] = {
-     { -285.0, 130.0, 45.0 }, { -185.0, 90.0, 25.0 },
-     { 15.0, 70.0, 10.0 }, { 165.0, 35.0, 30.0 },
-     { -5.0, 10.0, 45.0 },
+    { -285.0, 130.0, 45.0 }, { -185.0, 90.0, 25.0 },
+    { 15.0, 70.0, 10.0 }, { 165.0, 35.0, 30.0 },
+    { -5.0, 10.0, 45.0 },
 };
 
 Vec3f N(vectorList_80244420)[] = {
-     { 10.0, 0.0, 45.0 }, { -90.0, 20.0, 45.0 },
-     { -190.0, 60.0, 45.0 }, { -290.0, 140.0, 45.0 },
-     { -390.0, 300.0, 45.0 },
+    { 10.0, 0.0, 45.0 }, { -90.0, 20.0, 45.0 },
+    { -190.0, 60.0, 45.0 }, { -290.0, 140.0, 45.0 },
+    { -390.0, 300.0, 45.0 },
 };
 
 Script N(8024445C) = SCRIPT({
@@ -649,7 +647,8 @@ Script N(80245444) = SCRIPT({
         sleep 10;
         goto 10;
     } else {
-        ContinueSpeech(1, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00A9));
+        ContinueSpeech(1, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                       0x00A9));
         SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_1));
         SetPlayerAnimation(ANIM_NOD_YES);
         sleep 10;
@@ -662,7 +661,8 @@ Script N(80245444) = SCRIPT({
         SetCamSpeed(0, 90.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester, Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AA));
+        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester,
+                      Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AA));
         SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
         EndSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0);
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -673,7 +673,8 @@ Script N(80245444) = SCRIPT({
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
         sleep 10;
-        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester, Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AB));
+        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester,
+                      Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AB));
         sleep 10;
         ShowChoice(MESSAGE_ID(0x1E, 0x0021));
         match SI_VAR(0) {
@@ -748,13 +749,16 @@ Script N(defeat_80246038) = SCRIPT({
 
 Script N(interact_802461C0) = SCRIPT({
     if (STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
-        SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0032));
+        SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+                      MESSAGE_ID(0x11, 0x0032));
     } else {
         GetCurrentPartnerID(SI_VAR(0));
         if (SI_VAR(0) != 8) {
-            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0034));
+            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+                          MESSAGE_ID(0x11, 0x0034));
         } else {
-            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0032));
+            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+                          MESSAGE_ID(0x11, 0x0032));
         }
     }
 });
@@ -1188,14 +1192,14 @@ void N(func_802401C4_CC39D4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
+                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+                               npc->pos.x, npc->pos.z,
+                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     } else {
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
-    npc->currentAnim = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[1];
     script->functionTemp[1].s = 0;
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
@@ -1207,7 +1211,7 @@ void N(func_802401C4_CC39D4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 }
 
 #ifdef NON_MATCHING
-void N(func_802404D0_CB54D0)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+void N(func_802404D0_CB54D0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
@@ -1321,9 +1325,9 @@ void N(func_802404D0_CB54D0)(ScriptInstance *script, NpcAISettings *aiSettings, 
     }
 
     if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
+                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
+                               npc->pos.x, npc->pos.z,
+                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
         posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
@@ -1351,7 +1355,8 @@ void N(func_802404D0_CB54D0)(ScriptInstance *script, NpcAISettings *aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_flo/flo_13/CC3850", flo_13_func_80240374_CC3B84, ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
+INCLUDE_ASM(void, "world/area_flo/flo_13/CC3850", flo_13_func_80240374_CC3B84, ScriptInstance* script,
+            NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
 #include "world/common/UnkNpcAIFunc1.inc.c"
@@ -1450,7 +1455,7 @@ s32 N(func_802416BC_CC4ECC)(void) {
     return -1;
 }
 
-void N(func_80241704_CC4F14)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+void N(func_80241704_CC4F14)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -1498,7 +1503,9 @@ void N(func_80241704_CC4F14)(ScriptInstance *script, NpcAISettings *aiSettings, 
         script->functionTemp[1].s--;
     }
 
-    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ) != 0) {
+    if (is_point_within_region(enemy->territory->wander.wanderShape, enemy->territory->wander.point.x,
+                               enemy->territory->wander.point.z, npc->pos.x, npc->pos.z, enemy->territory->wander.wanderSizeX,
+                               enemy->territory->wander.wanderSizeZ) != 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
     }
 
@@ -1534,7 +1541,7 @@ void N(func_80241704_CC4F14)(ScriptInstance *script, NpcAISettings *aiSettings, 
     }
 }
 
-void N(func_80241B68_CC5378)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+void N(func_80241B68_CC5378)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -1579,7 +1586,7 @@ void N(func_80241B68_CC5378)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 // enemy2 is being copied to a0
 #ifdef NON_MATCHING
-ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1636,7 +1643,7 @@ ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance *script, s32 isInitialCall) {
             enemy2->varTable[10] = 1;
             enemy2->varTable[11] = enemy->npcID;
             npc->duration = 15;
-            npc->currentAnim = 0x490014;
+            npc->currentAnim.w = 0x490014;
             script->functionTemp[0].s = 30;
         }
     }
@@ -1666,7 +1673,7 @@ ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance *script, s32 isInitialCall) {
         case 31:
             npc->duration--;
             if (npc->duration <= 0) {
-                npc->currentAnim = 0x490015;
+                npc->currentAnim.w = 0x490015;
                 get_enemy(enemy->varTable[4])->varTable[10] = 3;
                 npc->duration = 10;
                 script->functionTemp[0].s = 32;
@@ -1690,7 +1697,8 @@ ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance *script, s32 isInitialCall) {
     if (((u32)script->functionTemp[0].s - 30) < 2) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         dist = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, npc->pos.x, npc->pos.z);
-        if (!is_point_within_region(territoryPtr->shape, territoryPtr->pointX, territoryPtr->pointZ, npc->pos.x, npc->pos.z, territoryPtr->sizeX, territoryPtr->sizeZ)) {
+        if (!is_point_within_region(territoryPtr->shape, territoryPtr->pointX, territoryPtr->pointZ, npc->pos.x, npc->pos.z,
+                                    territoryPtr->sizeX, territoryPtr->sizeZ)) {
             if ((dist > 30.0) && (npc->turnAroundYawAdjustment == 0)) {
                 temp_f4 = dist - 20.0;
                 if (temp_f4 < 0.0) {
@@ -1708,23 +1716,25 @@ ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55C8, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55C8, ScriptInstance* script,
+            s32 isInitialCall);
 #endif
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-void N(func_80242314_CC5B24)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
+void N(func_80242314_CC5B24)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
         if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim = enemy->animList[9];
+            npc->currentAnim.w = enemy->animList[9];
             npc->moveSpeed = aiSettings->chaseSpeed;
             if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
                 npc->collisionHeight = enemy->varTable[6] / 2;
             }
-            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
+                                    gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
             if (npc->duration < enemy->varTable[3]) {
                 npc->duration = enemy->varTable[3];
             }
@@ -1738,7 +1748,7 @@ void N(func_80242314_CC5B24)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -1767,7 +1777,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
         script->functionTemp[0].s = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         npc->collisionHeight = enemy->varTable[6];
         enemy->varTable[9] = 0;
@@ -1790,8 +1800,8 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
     if (enemy->varTable[9] > 0) {
         enemy->varTable[9]--;
         if (enemy->varTable[9] == 0) {
-            if ((npc->currentAnim + 0xFFAAFFD2) < 2) {
-                npc->currentAnim = 0x55000C;
+            if ((npc->currentAnim.w + 0xFFAAFFD2) < 2) {
+                npc->currentAnim.w = 0x55000C;
             }
         } else {
             return ApiStatus_BLOCK;
@@ -1814,11 +1824,11 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;
                         enemy->unk_B5 = 0;
-                        npc->currentAnim = 0x55002F;
+                        npc->currentAnim.w = 0x55002F;
                     } else {
                         enemy->varTable[8] = 1;
                         enemy->unk_B5 = 1;
-                        npc->currentAnim = 0x55002E;
+                        npc->currentAnim.w = 0x55002E;
                     }
                     enemy->varTable[9] = 7;
                     return ApiStatus_BLOCK;
@@ -1857,7 +1867,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
             enemy->unk_B5 = 0;
         }
         if (enemy->varTable[8] != 0) {
-            switch (npc->currentAnim + 0xFFAAFFFC) {
+            switch (npc->currentAnim.w + 0xFFAAFFFC) {
                 case 0:
                 case 8:
                 case 10:
@@ -1865,7 +1875,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
                 case 14:
                 case 18:
                 case 20:
-                    npc->currentAnim++;
+                    npc->currentAnim.w++;
                     break;
             }
         }
@@ -1874,7 +1884,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80242A6C_CC627C)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -1903,7 +1913,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->functionTemp[0].s = 100;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         enemy->flags |= 0x200000;
         npc->flags = (npc->flags & ~0x200) | 8;
@@ -1919,14 +1929,14 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
         npc->collisionHeight = enemy->varTable[6];
         enemy->unk_B0 &= ~4;
         if (npc->flags & 0x800) {
-            npc->currentAnim = 0x4A0018;
+            npc->currentAnim.w = 0x4A0018;
             npc->moveSpeed = 0.0f;
             npc->jumpVelocity = 0.0f;
             npc->jumpScale = 1.0f;
             script->functionTemp[0].s = 102;
         } else {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &var);
-            npc->currentAnim = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[0];
             script->functionTemp[1].s = 0;
             script->functionTemp[0].s = 200;
         }
@@ -1994,7 +2004,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
             npc->flags &= ~2;
             npc->flags &= ~0x200;
             npc->renderYaw = 0.0f;
-            npc->currentAnim = 0x4A0018;
+            npc->currentAnim.w = 0x4A0018;
             script->functionTemp[0].s = 101;
 
         case 101:
@@ -2014,7 +2024,8 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
                 x2 = npc->pos.x;
                 y2 = npc->pos.y;
                 z2 = npc->pos.z;
-                if (func_800DDC44(npc->unk_80, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius) == 0) {
+                if (func_800DDC44(npc->unk_80, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight,
+                                  npc->collisionRadius) == 0) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                 } else {
                     npc->moveSpeed = 0.0f;
@@ -2050,7 +2061,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
                     npc->flags = (npc->flags | 0x40000) & ~0x800;
                     npc->jumpVelocity = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-                    npc->currentAnim = 0x4A001A;
+                    npc->currentAnim.w = 0x4A001A;
                     npc->duration = 3;
                     script->functionTemp[0].s = 103;
                     break;
@@ -2064,7 +2075,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags &= 0xFFFBFFFF;
-                npc->currentAnim = 0x4A0001;
+                npc->currentAnim.w = 0x4A0001;
                 script->functionTemp[0].s = 0;
             }
             break;
@@ -2095,8 +2106,8 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc42.inc.c"
 
-ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(1);
+ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(1);
     s16 param1;
     s16 param2;
 
@@ -2108,18 +2119,18 @@ ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance *script, s32 isInitialCall) {
     if (script->functionTemp[0].s == (script->functionTemp[0].s / 5) * 5) {
 
         sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
-            &param1, &param2, 0x200002);
+                                         &param1, &param2, 0x200002);
 
         sfx_play_sound_with_params(0x295, param1, param2,
-            update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, script->functionTemp[1].s));
+                                   update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, script->functionTemp[1].s));
     }
 
     script->functionTemp[0].s++;
     return (script->functionTemp[1].s < script->functionTemp[0].s) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802434D4_CC6CE4)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(0);
+ApiStatus N(func_802434D4_CC6CE4)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(0);
     s16 param1;
     s16 param2;
 
@@ -2129,10 +2140,10 @@ ApiStatus N(func_802434D4_CC6CE4)(ScriptInstance *script, s32 isInitialCall) {
     if (script->functionTemp[0].s == (script->functionTemp[0].s / 5) * 5) {
 
         sfx_get_spatialized_sound_params(npc->pos.x, npc->pos.y, npc->pos.z,
-            &param1, &param2, 0x200002);
+                                         &param1, &param2, 0x200002);
 
         sfx_play_sound_with_params(0x295, param1, param2,
-            update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, 0x50));
+                                   update_lerp(0, 500.0f, 0.0f, script->functionTemp[0].s, 0x50));
     }
 
     script->functionTemp[0].s++;

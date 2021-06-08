@@ -7,6 +7,6 @@ void N(UnkNpcAIFunc1_copy)(ScriptInstance* script, NpcAISettings* aiSettings, En
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim = *enemy->animList;
+    npc->currentAnim.w = *enemy->animList;
     script->functionTemp[0].s = 3;
 }

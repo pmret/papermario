@@ -35,7 +35,7 @@ s32 world_goombario_can_pause(Npc* partner) {
 
     if ((partner->flags & 0x1800) != 0x1000) {
         return new_var = 0;
-        do { } while(new_var); // why though
+        do { } while (new_var); // why though
     }
 
     return TRUE;

@@ -36,7 +36,7 @@ typedef struct {
     s16 unk_32C;
 } N(UnkStruct);
 
-ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     N(UnkStruct)* ptr;
     s32 i;
@@ -108,7 +108,8 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, ScriptInstance* script,
+            s32 isInitialCall);
 #endif
 
 ApiStatus N(func_8024041C_CAF15C)(ScriptInstance* script, s32 isInitialCall) {
@@ -141,8 +142,8 @@ typedef struct {
     s32 unk_64;
 } N(UserData);
 
-ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
+ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;
     s32 i;
@@ -160,7 +161,8 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance *script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
+            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+                                                   scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;
             userDataPtr->unk_20[i] = save;

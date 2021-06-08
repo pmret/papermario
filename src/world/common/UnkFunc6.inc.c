@@ -21,7 +21,7 @@ void N(UnkFunc6)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
 
     if (npc->jumpVelocity >= 0.0) {
         npc->pos.y += npc->jumpVelocity;
-        npc->currentAnim = enemy->animList[9];
+        npc->currentAnim.w = enemy->animList[9];
         enemy->unk_07 = 0;
         if (!(npc->flags & 8)) {
             posX = npc->pos.x;

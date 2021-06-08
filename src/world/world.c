@@ -158,7 +158,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
         if (temp800A41E8->modelTreeRoot != NULL) {
             load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
-       }
+        }
     }
 
     if (temp800A41E8->background != NULL) {
@@ -229,10 +229,11 @@ void* load_asset_by_name(char* assetName, s32* decompressedSize) {
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-   }
+    }
     *decompressedSize = curAsset->decompressedLength;
     ret = general_heap_malloc(curAsset->compressedLength);
-    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset, ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
+             ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
     heap_free(assetTableBuffer);
     return ret;
 }
@@ -249,7 +250,7 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-   }
+    }
     *compressedSize = curAsset->compressedLength;
     ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
     heap_free(assetTableBuffer);
@@ -276,11 +277,13 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 
 // these, along with all the *_maps, almost certainly belong in the next file
 s16 D_8008FF70[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5, 0, 4, 5, 0, 1, 2,
-                     0, 2, 3};
+                     0, 2, 3
+                   };
 
 f32 D_8008FFB8[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
                      0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f,
-                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f };
+                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f
+                   };
 
 /// Toad Town
 Map mac_maps[] = {
