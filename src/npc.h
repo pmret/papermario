@@ -20,11 +20,11 @@ void npc_list_update_current(void);
 /// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void);
 
-void npc_create(NpcBlueprint* blueprint, NpcAnimID animList[], s32 skipLoadingAnims);
+s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAnims);
 
 void npc_create_basic(NpcBlueprint* blueprint);
 
-void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID animList[]);
+void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID** animList);
 
 void npc_create_partner(NpcBlueprint* blueprint);
 
@@ -70,29 +70,29 @@ void update_npc_blur(Npc* npc);
 
 void appendGfx_npc_blur(Npc* npc);
 
-s32 func_8003B184();
+void func_8003B184(void);
 
-s32 func_8003B198();
+void func_8003B198(void);
 
 void func_8003B1A8(void);
 
-s32 func_8003B1B0();
+void func_8003B1B0(void);
 
 void set_npc_yaw(Npc* npc, f32 yaw);
 
-s32 func_8003B3D0();
+void func_8003B3D0(Npc* npc, s32 arg1);
 
-s32 func_8003B3F8();
+void func_8003B3F8(Npc* npc, s32 arg1);
 
-s32 func_8003B420();
+void func_8003B420(Npc* npc);
 
 s32 func_8003B44C();
 
 s32 func_8003B464();
 
-s32 func_8003B47C();
+void func_8003B47C(Npc* npc, s32 arg1, s32 arg2);
 
-s32 func_8003B500();
+void func_8003B500(Npc* npc, s32 arg1, s32 arg2);
 
 s32 func_8003B5B4();
 
@@ -102,45 +102,45 @@ s32 func_8003BA60();
 
 s32 func_8003BED8();
 
-s32 func_8003C3D8();
+void func_8003C3D8(Npc* npc, s32 idx, s8 decorationType);
 
-s32 func_8003C428();
+void func_8003C428(Npc* npc, s32 idx);
 
-s32 func_8003C444();
+s32 npc_update_decorations(Npc* npc);
 
-s32 func_8003C53C();
+void func_8003C53C(Npc* npc, s32 idx);
 
-s32 func_8003C61C();
+void func_8003C61C(Npc* npc, s32 idx);
 
-void func_8003C658(void);
+void func_8003C658(Npc* npc, s32 idx);
 
-void func_8003C660(void);
+void func_8003C660(Npc* npc, s32 idx);
 
-s32 func_8003C668();
+void func_8003C668(Npc* npc, s32 idx);
 
-s32 func_8003C78C();
+void func_8003C78C(Npc* npc, s32 idx);
 
-s32 func_8003C7A8();
+void func_8003C7A8(Npc* npc, s32 idx);
 
-void func_8003C8AC(void);
+void func_8003C8AC(Npc* npc, s32 idx);
 
-s32 func_8003C8B4();
+void func_8003C8B4(Npc* npc, s32 idx);
 
-s32 func_8003C984();
+void func_8003C984(Npc* npc, s32 idx);
 
-s32 func_8003C9A8();
+void func_8003C9A8(Npc* npc, s32 idx);
 
-s32 func_8003CB20();
+void func_8003CB20(Npc* npc, s32 idx);
 
-s32 func_8003CB44();
+void func_8003CB44(Npc* npc, s32 idx);
 
-s32 func_8003CC8C();
+void func_8003CC8C(Npc* npc, s32 idx);
 
-s32 func_8003CCB0();
+void func_8003CCB0(Npc* npc, s32 idx);
 
 void func_8003CFA0(void);
 
-s32 func_8003CFA8();
+void func_8003CFA8(Npc* npc, s32 idx);
 
 /// Finds the closest NPC to a given point within a radius. Ignores Y position.
 ///
@@ -168,19 +168,19 @@ Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius);
 /// @returns NULL if there are no NPCs within radius
 Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius);
 
-s32 func_8003D1D4();
+//s32 func_8003D1D4();
 
-s32 func_8003D2F8();
+s32 func_8003D2F8(Npc* npc);
 
-s32 func_8003D3BC();
+void func_8003D3BC(Npc* npc);
 
-s32 func_8003D624();
+void func_8003D624(Npc* npc, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-s32 func_8003D660();
+void func_8003D660(Npc* npc, s32 arg1);
 
-s32 func_8003D788();
+void func_8003D788(Npc* npc, s32 arg1);
 
-s32 func_8003DA38();
+void func_8003DA38(Npc* npc, s32 arg1);
 
 s32 func_8003DC38();
 
@@ -211,24 +211,58 @@ void npc_dyn_entity_draw_no_op(void);
 
 void make_npcs(s8 flags, s8 mapID, s32* npcGroupList);
 
-s32 kill_encounter();
+s32 kill_encounter(Enemy* enemy);
 
-s32 kill_enemy();
+void kill_enemy(Enemy* enemy);
 
-s32 bind_enemy_ai();
+/// Binds the specified ai script to the specified enemy
+///
+/// @param enemy               pointer to the enemy to bind the script to
+/// @param aiScriptBytecode    pointer to the script to be bound.
+s32 bind_enemy_ai(Enemy* enemy, Script* aiScriptBytecode);
 
-s32 bind_enemy_aux();
+/// Binds the specified auxillary script to the specified enemy
+///
+/// @param enemy               pointer to the enemy to bind the script to
+/// @param auxScriptBytecode   pointer to the script to be bound.
+s32 bind_enemy_aux(Enemy* enemy, Script* auxScriptBytecode);
 
-s32 bind_enemy_interact();
+/// Binds the specified interact script to the specified enemy
+///
+/// @param enemy                    pointer to the enemy to bind the script to
+/// @param interactScriptBytecode   pointer to the script to be bound.
+s32 bind_enemy_interact(Enemy* enemy, Script* interactScriptBytecode);
 
-s32 bind_npc_ai();
+/// Binds the specified ai script to the npc matching the specified npcId
+///
+/// @param npcID           ID of the desired npc
+/// @param npcAiBytecode   pointer to the script to be bound.
+void bind_npc_ai(s32 npcID, Script* npcAiBytecode);
 
-s32 bind_npc_aux();
+/// Binds the specified auxillary script to the npc matching the specified npcId
+///
+/// @param npcID           ID of the desired npc
+/// @param npcAuxBytecode  pointer to the script to be bound.
+void bind_npc_aux(s32 npcID, Script* npcAuxBytecode);
 
-s32 bind_npc_interact();
+/// Binds the specified interact script to the npc matching the specified npcId
+///
+/// @param npcID                ID of the desired npc
+/// @param npcInteractBytecode  pointer to the script to be bound.
+void bind_npc_interact(s32 npcID, Script* npcInteractBytecode);
 
+/// Looks for an enemy matching the specified npcID.
+/// 
+/// @param npcID   ID of the npc bound to the desired enemy.
+/// 
+/// @returns pointer to Enemy struct, if one is found. If one is not found, a panic occurs.
 Enemy* get_enemy(NpcID npcID);
 
-s32 get_enemy_safe();
+/// Same as get_enemy(), with the exception of always returning a value if an enemy is not found.
+///
+/// @param npcID   ID of the npc bound to the desired enemy.
+/// 
+/// @returns pointer to Enemy struct, if one is found. Otherwise, NULL.
+Enemy* get_enemy_safe(s32 npcID);
 
 #endif
