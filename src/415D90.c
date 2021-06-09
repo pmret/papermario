@@ -402,34 +402,34 @@ s32 can_switch_to_player(void) {
         s32 ret = player->koStatus == 0xD;
 
         if (debuff == 9) {
-           ret = FALSE;
+            ret = FALSE;
         }
         if (debuff == 10) {
-           ret = FALSE;
+            ret = FALSE;
         }
         if (debuff == 6) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (debuff == 3) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (debuff == 4) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (debuff == 5) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (debuff == 7) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (debuff == 8) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (player->stoneStatus == 0xC) {
-           ret = TRUE;
+            ret = TRUE;
         }
         if (battleStatus->outtaSightActive) {
-           ret = TRUE;
+            ret = TRUE;
         }
         return !ret;
     }

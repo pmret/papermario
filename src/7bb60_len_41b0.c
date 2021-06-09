@@ -21,7 +21,7 @@ s32 func_800E26C4(void) {
         actionState == ACTION_STATE_RUN ||
         actionState == ACTION_STATE_USE_TWEESTER ||
         actionState == ACTION_STATE_SPIN
-    ) {
+       ) {
         return 1;
     }
 
@@ -86,8 +86,8 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2F60);
 //     }
 // }
 void gravity_use_fall_params(void) {
-    PlayerStatus *playerStatus;
-    f32 *floats = D_800F7B60;
+    PlayerStatus* playerStatus;
+    f32* floats = D_800F7B60;
     do {} while (0);
     playerStatus = &gPlayerStatus;
     if (playerStatus->flags & 0x40000) {
@@ -380,10 +380,10 @@ void set_action_state(s32 actionState) {
         if (actionState < ACTION_STATE_TALK)
             if (actionState >= 0) {
 #endif
-                playerStatus->prevActionState = playerStatus->actionState;
-                playerStatus->actionState = actionState;
-                playerStatus->flags |= 0x80000000;
-            }
+            playerStatus->prevActionState = playerStatus->actionState;
+            playerStatus->actionState = actionState;
+            playerStatus->flags |= 0x80000000;
+        }
         return;
     }
 
@@ -538,7 +538,7 @@ void func_800E636C(s32 arg0) {
     s32 listIndex = D_8010C96C;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim = arg0;
+        get_npc_by_index(listIndex)->currentAnim.w = arg0;
     }
 }
 

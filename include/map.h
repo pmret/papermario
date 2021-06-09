@@ -282,7 +282,8 @@ typedef struct Enemy {
     /* 0x58 */ ScriptID hitScriptID;
     /* 0x5C */ ScriptID auxScriptID;
     /* 0x60 */ ScriptID defeatScriptID;
-    /* 0x64 */ char unk_64[8];
+    /* 0x64 */ UNK_PTR unk_64;
+    /* 0x68 */ char unk_68[4];
     /* 0x6C */ s32 varTable[16];
     /* 0xAC */ char unk_AC[4];
     /* 0xB0 */ s32 unk_B0;

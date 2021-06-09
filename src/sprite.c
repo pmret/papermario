@@ -53,14 +53,16 @@ Vtx spr_defaultQuad[] = {
 };
 
 Vp D_802DF3D0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 511, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 511, 0 },
+    }
+};
 
 Vp D_802DF3E0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 512, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 512, 0 },
+    }
+};
 
 Gfx D_802DF3F0[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
@@ -232,7 +234,8 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     flags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;
-    func_802DED60((&spr_playerSpriteSets[playerSpriteSet])->cacheSize, (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
+    func_802DED60((&spr_playerSpriteSets[playerSpriteSet])->cacheSize,
+                  (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
 
     for (i = 1; i < 0xE; i++) {
         if ((flags >> i) & 1) {

@@ -156,7 +156,7 @@ void pause_items_init(s8* arg0) {
 
     setup_pause_menu_tab(&D_8024F5C0, 1);
     *arg0 = 1;
- }
+}
 
 INCLUDE_ASM(s32, "pause/pause_items", pause_items_handle_input);
 

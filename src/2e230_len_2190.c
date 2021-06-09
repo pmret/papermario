@@ -462,7 +462,7 @@ void snd_get_sequence_player_and_track(u32 playerIndex, s32** outCurrentTrackDat
 }
 
 void snd_get_sequence_player(u32 playerIndex, BGMPlayer** outPlayer) {
-     switch (playerIndex) {
+    switch (playerIndex) {
         case 0:
             *outPlayer = D_8009A664;
             break;
@@ -546,10 +546,12 @@ InstrumentGroup* snd_get_BK_instruments(s32 bankGroup, u32 bankIndex) {
 
 INCLUDE_ASM(s32, "2e230_len_2190", snd_load_BK_to_bank, s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 arg3);
 
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
+void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount,
+                                u8 arg4);
 // float weirdness
 #ifdef NON_MATCHING
-void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank *bank, Instruments instruments, u32 instrumentCount, u8 arg4) {
+void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, Instruments instruments, u32 instrumentCount,
+                                u8 arg4) {
     SoundBank* sb = bank;
     Instrument* defaultInstrument = D_8009A5C0->defaultInstrument;
     f32 freq = D_8009A5C0->actualFrequency;
@@ -582,7 +584,8 @@ void snd_swizzle_BK_instruments(s32 bkFileOffset, SoundBank *bank, Instruments i
     }
 }
 #else
-INCLUDE_ASM(void, "2e230_len_2190", snd_swizzle_BK_instruments, s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
+INCLUDE_ASM(void, "2e230_len_2190", snd_swizzle_BK_instruments, s32 bkFileOffset, SoundBank* bank,
+            InstrumentGroup instruments, s32 instrumentCount, u8 arg4);
 #endif
 
 
@@ -610,7 +613,7 @@ INCLUDE_ASM(void, "2e230_len_2190", snd_read_rom, s32 arg0, s32* arg1, s32 arg2)
 
 INCLUDE_ASM(s32, "2e230_len_2190", snd_memset);
 
-void snd_bcopy(s8* src, s8 *dest, s32 size) {
+void snd_bcopy(s8* src, s8* dest, s32 size) {
     if (size > 0) {
         while (size-- != 0) {
             *dest++ = *src++;

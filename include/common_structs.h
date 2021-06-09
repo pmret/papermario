@@ -102,7 +102,12 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
-typedef s32 Palette16[16]; // size = 0x40
+typedef s16 Palette16[16]; // size = 0x20
+
+typedef union {
+    u16 h;
+    u32 w;
+} test;
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -115,8 +120,8 @@ typedef struct Npc {
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 spriteInstanceID;
-    /* 0x028 */ u32 currentAnim;
-    /* 0x02C */ char unk_2C[4];
+    /* 0x028 */ test currentAnim;
+    /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -128,41 +133,50 @@ typedef struct Npc {
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
-    /* 0x084 */ u16 unk_84;
-    /* 0x086 */ u16 unk_86;
+    /* 0x084 */ s16 unk_84;
+    /* 0x086 */ s16 unk_86;
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
-    /* 0x096 */ char unk_96[12];
+    /* 0x096 */ s16 unk_96;
+    /* 0x098 */ s16 unk_98;
+    /* 0x09A */ s16 unk_9A;
+    /* 0x09C */ s16 unk_9C;
+    /* 0x09E */ s16 unk_9E;
+    /* 0x0A0 */ s16 unk_A0;
     /* 0x0A2 */ u16 unk_A2;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
-    /* 0x0AA */ u8 renderMode;
+    /* 0x0AA */ s8 renderMode;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
-    /* 0x0AE */ char unk_AD[2];
+    /* 0x0AE */ char unk_AE[2];
     /* 0x0B0 */ s32** extraAnimList;
     /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
-    /* 0x0B5 */ char unk_B5[13];
+    /* 0x0B5 */ s8 unk_B5;
+    /* 0x0B6 */ s8 unk_B6;
+    /* 0x0B7 */ s8 unk_B7;
+    /* 0x0B8 */ char unk_B8[8];
+    /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ UNK_PTR spritePaletteList;
+    /* 0x0C4 */ s32* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
-    /* 0x308 */ char unk_308[0x50];
+    /* 0x308 */ char unk_308[16];
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
     /* 0x324 */ struct EffectInstance* decorations[2];
     /* 0x32C */ s8 decorationType[2];
-    /* 0x32E */ s8 changedDecoration;
-    /* 0x32F */ char unk_32F;
+    /* 0x32E */ s8 changedDecoration[2];
     /* 0x330 */ s8 decorationInitialised[2];
-    /* 0x332 */ char unk_332[14];
+    /* 0x332 */ s16 decorationUnk[2];
+    /* 0x336 */ char unk_336[10];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -1930,7 +1944,9 @@ typedef struct EffectInstanceData {
     /* 0x28 */ char unk_28[0x4];
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x4C];
+    /* 0x34 */ char unk_34[0x30];
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ char unk_68[0x18];
 } EffectInstanceData; // size = 0x80
 
 typedef struct Temp8010F250 {

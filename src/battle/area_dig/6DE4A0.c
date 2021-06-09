@@ -30,7 +30,7 @@ ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
     SelectableTarget* selectableTarget;
 
     battleStatus->moveCategory = 6;
-    do {} while(0);
+    do {} while (0);
     battleStatus->selectedItemID = 0;
     battleStatus->selectedMoveID = 0x98;
     battleStatus->currentTargetListFlags = D_8008FC44;

@@ -21,7 +21,7 @@ INCLUDE_ASM(s32, "C50A0", func_8012FE78);
 
 INCLUDE_ASM(s32, "C50A0", func_801309F0);
 
-s32 next_sequence_step(ItemEntity *itemEntity) {
+s32 next_sequence_step(ItemEntity* itemEntity) {
     s32* currentState = itemEntity->currentState;
 
     switch (*currentState++) {

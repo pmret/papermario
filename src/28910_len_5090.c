@@ -174,7 +174,7 @@ void snd_update_bgm_fade(BGMPlayer* player) {
     func_8004E444(player);
 }
 
-void func_8004E444(BGMPlayer *arg0) {
+void func_8004E444(BGMPlayer* arg0) {
     u16 mult = (arg0->fadeInfo.currentVolume.u16 * arg0->unk_3C) >> 15;
     s32 i;
 
@@ -440,7 +440,7 @@ INCLUDE_ASM(s32, "28910_len_5090", func_8005068C);
 
 INCLUDE_ASM(s32, "28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
 
-void func_80050770(BGMPlayer *player, f32 arg1) {
+void func_80050770(BGMPlayer* player, f32 arg1) {
     if (arg1 > 2.0) {
         arg1 = 2.0f;
     } else if (arg1 < 0.25) {

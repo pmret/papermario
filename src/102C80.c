@@ -7,7 +7,8 @@ void func_802E1400(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
 
     if (entity->collisionFlags & 1) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND) || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
+            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
             exec_entity_updatecmd(entity);
             temp->unk_22 = 8;
         }
