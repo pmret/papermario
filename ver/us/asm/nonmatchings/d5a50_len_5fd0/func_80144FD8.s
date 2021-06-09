@@ -6,8 +6,8 @@ glabel func_80144FD8
 /* DB6DC 80144FDC 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB6E0 80144FE0 00821024 */  and       $v0, $a0, $v0
 /* DB6E4 80144FE4 00021080 */  sll       $v0, $v0, 2
-/* DB6E8 80144FE8 3C038015 */  lui       $v1, %hi(D_80157960)
-/* DB6EC 80144FEC 8C637960 */  lw        $v1, %lo(D_80157960)($v1)
+/* DB6E8 80144FE8 3C038015 */  lui       $v1, %hi(gHudElementList)
+/* DB6EC 80144FEC 8C637960 */  lw        $v1, %lo(gHudElementList)($v1)
 /* DB6F0 80144FF0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* DB6F4 80144FF4 AFB00010 */  sw        $s0, 0x10($sp)
 /* DB6F8 80144FF8 00431021 */  addu      $v0, $v0, $v1

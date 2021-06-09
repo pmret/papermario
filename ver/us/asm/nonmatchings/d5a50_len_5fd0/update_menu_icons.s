@@ -10,8 +10,8 @@ glabel update_menu_icons
 /* D7D24 80141624 AFBF001C */  sw        $ra, 0x1c($sp)
 /* D7D28 80141628 AFB00010 */  sw        $s0, 0x10($sp)
 .L8014162C:
-/* D7D2C 8014162C 3C038015 */  lui       $v1, %hi(D_80157960)
-/* D7D30 80141630 8C637960 */  lw        $v1, %lo(D_80157960)($v1)
+/* D7D2C 8014162C 3C038015 */  lui       $v1, %hi(gHudElementList)
+/* D7D30 80141630 8C637960 */  lw        $v1, %lo(gHudElementList)($v1)
 /* D7D34 80141634 00111080 */  sll       $v0, $s1, 2
 /* D7D38 80141638 00431021 */  addu      $v0, $v0, $v1
 /* D7D3C 8014163C 8C500000 */  lw        $s0, ($v0)

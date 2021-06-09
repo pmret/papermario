@@ -12,7 +12,7 @@ ApiStatus func_802189DC_447E1C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = get_float_variable(script, *args++);
     f32 posY = get_float_variable(script, *args++);
-    MenuIcon* icon = create_icon(&D_80104A28);
+    HudElement* icon = create_icon(&D_80104A28);
 
     set_icon_render_pos(icon, posX, posY);
     set_hud_element_scale(icon, 1.5f);

@@ -5,8 +5,8 @@ glabel func_80144E74
 /* DB574 80144E74 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB578 80144E78 00822024 */  and       $a0, $a0, $v0
 /* DB57C 80144E7C 00042080 */  sll       $a0, $a0, 2
-/* DB580 80144E80 3C028015 */  lui       $v0, %hi(D_80157960)
-/* DB584 80144E84 8C427960 */  lw        $v0, %lo(D_80157960)($v0)
+/* DB580 80144E80 3C028015 */  lui       $v0, %hi(gHudElementList)
+/* DB584 80144E84 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
 /* DB588 80144E88 3C03F0FF */  lui       $v1, 0xf0ff
 /* DB58C 80144E8C 00822021 */  addu      $a0, $a0, $v0
 /* DB590 80144E90 8C840000 */  lw        $a0, ($a0)

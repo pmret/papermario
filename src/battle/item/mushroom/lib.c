@@ -1,7 +1,7 @@
 #include "mushroom.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A2410;
+static HudElement* D_802A2410;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

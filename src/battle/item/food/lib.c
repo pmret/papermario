@@ -1,7 +1,7 @@
 #include "food.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A24D0;
+static HudElement* D_802A24D0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

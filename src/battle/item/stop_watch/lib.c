@@ -1,7 +1,7 @@
 #include "stop_watch.h"
 
 extern s32 D_80108A64;
-static MenuIcon* D_802A1B40;
+static HudElement* D_802A1B40;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
