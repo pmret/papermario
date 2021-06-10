@@ -211,7 +211,6 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
                 cache[segment.unique_id()] = cached
 
         if segment.should_split():
-            print("Trying to split: " + segment.name)
             segment.split(rom_bytes)
 
         log.dot(status=segment.status())
