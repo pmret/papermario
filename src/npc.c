@@ -909,7 +909,6 @@ void func_8003C668(Npc* npc, s32 idx) {
             break;
         default:
             return;
-
     }
 
     instanceData = npc->decorations[idx]->data;
