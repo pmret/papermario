@@ -90,11 +90,13 @@ def get_info_bytes(rom_bytes, encoding):
     #     if rom_bytes.find(bytes(format, "ASCII")) != -1:
     #         compression_formats.append(format)
 
-    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes))
+    compiler = get_compiler_info(rom_bytes, entry_point, print_result=False)
+
+    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes), compiler)
 
 
 class N64Rom:
-    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size):
+    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size, compiler):
         self.name = name
         self.country_code = country_code
         self.libultra_version = libultra_version
@@ -103,11 +105,12 @@ class N64Rom:
         self.cic = cic
         self.entry_point = entry_point
         self.size = size
+        self.compiler = compiler
 
     def get_country_name(self):
         return country_codes[self.country_code]
 
-def get_compiler_info(rom_bytes, entry_point):
+def get_compiler_info(rom_bytes, entry_point, print_result=True):
     md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
     md.detail = True
 
@@ -121,8 +124,9 @@ def get_compiler_info(rom_bytes, entry_point):
             branches += 1
 
     compiler = "IDO" if branches > jumps else "GCC"
-
-    print(f"{branches} branches and {jumps} jumps detected in the first code segment. Compiler is most likely {compiler}")
+    if (print_result):
+        print(f"{branches} branches and {jumps} jumps detected in the first code segment. Compiler is most likely {compiler}")
+    return compiler
 
 # TODO: support .n64 extension
 def main():
