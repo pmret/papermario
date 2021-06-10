@@ -20,7 +20,6 @@ options:
   cache_path: ver/us/.splat_cache
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
-  verbose: True
 asset_stack:
   - us
 segments:
