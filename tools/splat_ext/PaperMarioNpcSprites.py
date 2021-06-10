@@ -58,15 +58,10 @@ class Sprite:
         l = []
         pos = 0
 
-        while True:
-            offset = int.from_bytes(data[pos:pos+4], byteorder="big", signed=True)
-
-            if offset == -1:
+        for offset in struct.iter_unpack(">i", data):
+            if offset[0] == -1:
                 break
-
-            l.append(offset)
-
-            pos += 4
+            l.append(offset[0])
 
         return l
 
