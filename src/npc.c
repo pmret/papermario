@@ -503,10 +503,7 @@ void npc_list_render(void) {
                     task->appendGfx = &npc_appendGfx;
                     task->renderMode = npc->renderMode;
                     if (npc->flags & 0x800000) {
-                        u8 r;
-                        u8 g;
-                        u8 b;
-                        u8 a;
+                        u8 r, g, b, a;
                         get_background_color_blend(&r, &g, &b, &a);
                         npc->alpha2 = 0xFF - a;
                     } else {
@@ -807,7 +804,6 @@ INCLUDE_ASM(s32, "npc", func_8003BA60);
 INCLUDE_ASM(s32, "npc", func_8003BED8);
 
 void func_8003C3D8(Npc* npc, s32 idx, s8 decorationType) {
-
     func_8003C53C(npc, idx);
     npc->decorationType[idx] = decorationType;
     npc->changedDecoration[idx] = 1;
@@ -849,7 +845,6 @@ s32 npc_update_decorations(Npc* npc) {
 }
 
 void func_8003C53C(Npc* npc, s32 idx) {
-
     switch (npc->decorationType[idx]) {
         case 0:
             func_8003C660(npc, idx);
@@ -877,7 +872,6 @@ void func_8003C53C(Npc* npc, s32 idx) {
 }
 
 void func_8003C61C(Npc* npc, s32 idx) {
-
     switch (npc->decorationType[idx]) {
         case 0:
         case 1:
@@ -945,9 +939,9 @@ void func_8003C7A8(Npc* npc, s32 idx) {
         case 1:
             if (npc->decorationUnk[idx] != 0) {
                 npc->decorationUnk[idx]--;
-                return;
+            } else {
+                npc->decorationInitialised[idx] = 0;
             }
-            npc->decorationInitialised[idx] = 0;
             break;
     }
 }
@@ -1055,7 +1049,7 @@ void func_8003CCB0(Npc* npc, s32 idx) {
     }
 }
 
-void func_8003CFA0(void) {
+void func_8003CFA0(Npc* npc, s32 idx) {
 }
 
 void func_8003CFA8(Npc* npc, s32 idx) {
@@ -1299,11 +1293,11 @@ void func_8003D788(Npc* npc, s32 arg1) {
                 sin_cos_rad((clamp_angle(-npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
                 fx_walk_normal(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), subroutine_argA, subroutine_argB);
-                return;
+            } else {
+                sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
+                func_80072350(3, npc->pos.x + (npc->collisionRadius * subroutine_argA), npc->pos.y + 1.5f,
+                              npc->pos.z + (npc->collisionRadius * subroutine_argB), 5.0f, 10.0f, 1.0f, 5, 30);
             }
-            sin_cos_rad((clamp_angle(npc->yaw) * TAU) / 360.0f, &subroutine_argA, &subroutine_argB);
-            func_80072350(3, npc->pos.x + (npc->collisionRadius * subroutine_argA), npc->pos.y + 1.5f,
-                          npc->pos.z + (npc->collisionRadius * subroutine_argB), 5.0f, 10.0f, 1.0f, 5, 30);
         }
     }
 }
@@ -1316,7 +1310,7 @@ extern s32 D_80077C20;
 void func_8006FB90(f32, f32, f32, f32);
 void func_8006FBF0(s32, f32, f32, f32, f32, f32);
 
-INCLUDE_ASM(s32, "npc", func_8003DA38, Npc* npc, s32 arg1);
+INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 
 INCLUDE_ASM(s32, "npc", func_8003DC38);
 
@@ -1592,7 +1586,7 @@ void kill_enemy(Enemy* enemy) {
     heap_free(enemy);
 }
 #else
-INCLUDE_ASM(s32, "npc", kill_enemy);
+INCLUDE_ASM(void, "npc", kill_enemy);
 #endif
 
 s32 bind_enemy_ai(Enemy* enemy, Script* aiScriptBytecode) {
@@ -1734,5 +1728,5 @@ Enemy* get_enemy_safe(s32 npcID) {
     return NULL;
 }
 #else
-INCLUDE_ASM(s32, "npc", get_enemy_safe);
+INCLUDE_ASM(Enemy*, "npc", get_enemy_safe, s32 npcID);
 #endif

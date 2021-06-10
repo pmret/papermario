@@ -48,7 +48,7 @@ s32 func_800397E8();
 /// Updates all NPCs.
 void npc_list_update(void);
 
-s32 func_80039DA4();
+f32 func_80039DA4();
 
 void npc_appendGfx(Npc* npc);
 
@@ -138,7 +138,7 @@ void func_8003CC8C(Npc* npc, s32 idx);
 
 void func_8003CCB0(Npc* npc, s32 idx);
 
-void func_8003CFA0(void);
+void func_8003CFA0(Npc* npc, s32 idx);
 
 void func_8003CFA8(Npc* npc, s32 idx);
 
