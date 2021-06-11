@@ -32,6 +32,9 @@ def get_platform() -> str:
 def get_compiler() -> str:
     return opts.get("compiler", "IDO")
 
+def get_header_encoding() -> str:
+    return opts.get("header_encoding", "ASCII")
+
 def get_subalign() -> int:
     return opts.get("subalign", 16)
 

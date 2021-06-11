@@ -3,6 +3,7 @@
 import argparse
 from capstone import *
 from capstone.mips import *
+import hashlib
 import zlib
 
 parser = argparse.ArgumentParser(description='Gives information on n64 roms')
@@ -92,11 +93,13 @@ def get_info_bytes(rom_bytes, encoding):
 
     compiler = get_compiler_info(rom_bytes, entry_point, print_result=False)
 
-    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes), compiler)
+    sha1 = hashlib.sha1(rom_bytes).hexdigest()
+
+    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes), compiler, sha1)
 
 
 class N64Rom:
-    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size, compiler):
+    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size, compiler, sha1):
         self.name = name
         self.country_code = country_code
         self.libultra_version = libultra_version
@@ -106,6 +109,7 @@ class N64Rom:
         self.entry_point = entry_point
         self.size = size
         self.compiler = compiler
+        self.sha1 = sha1
 
     def get_country_name(self):
         return country_codes[self.country_code]

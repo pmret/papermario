@@ -14,6 +14,7 @@ def main(rom_path):
 
     header = f"""
 name: {rom.name.title()} ({rom.get_country_name()})
+sha1: {rom.sha1}
 options:
   basename: {basename}
   target_path: {rom_path}
