@@ -11,6 +11,9 @@ typedef struct UnkF5750 {
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
+    /* 0x28 */ char unk_28[0x14];
+    /* 0x3C */ f32 unk_3C;
+    /* 0x40 */ f32 unk_40;
 } UnkF5750;
 
 typedef UnkF5750* UnkF5750List[0x40];
@@ -92,14 +95,13 @@ ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 height = get_variable(script, *args++);
     s32 radius = get_variable(script, *args);
-    Npc* player = playerNpc;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    player->collisionHeight = height;
-    player->collisionRadius = radius;
+    playerNpc->collisionHeight = height;
+    playerNpc->collisionRadius = radius;
 
-    playerStatus->colliderHeight = player->collisionHeight;
-    playerStatus->colliderDiameter = player->collisionRadius;
+    playerStatus->colliderHeight = playerNpc->collisionHeight;
+    playerStatus->colliderDiameter = playerNpc->collisionRadius;
 
     return ApiStatus_DONE2;
 }
@@ -114,25 +116,23 @@ ApiStatus SetPlayerJumpscale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PlayerAnim animation;
+    PlayerAnim currentAnim = get_variable(script, *args++);
+    s32 shakeAnim = 0x80003;
 
-    animation = get_variable(script, *args);
+    playerNpc->currentAnim = currentAnim;
 
-    playerNpc->currentAnim = animation;
-    gPlayerAnimation = animation;
+    do { } while (0); // Needed to match for some reason
 
-    if (animation == 0x80003) {
+    gPlayerAnimation = playerNpc->currentAnim;
+
+    if (gPlayerAnimation == shakeAnim) {
         exec_ShakeCam1(0, 0, 2);
     }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "evt/player_api", SetPlayerAnimation, ScriptInstance* script, s32 isInitialCall);
-#endif
 
 ApiStatus SetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
     set_action_state(get_variable(script, *script->ptrReadPos));
@@ -197,13 +197,11 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     s32* time = &script->functionTemp[3].s;
 
     if (isInitialCall) {
-        Npc** player = &playerNpc;
-
-        (*player)->yaw = playerStatus->targetYaw;
-        *initialYaw = (*player)->yaw;
+        playerNpc->yaw = playerStatus->targetYaw;
+        *initialYaw = playerNpc->yaw;
         *deltaYaw = get_float_variable(script, *args++) - *initialYaw;
         *time = get_variable(script, *args++);
-        (*player)->duration = 0;
+        playerNpc->duration = 0;
 
         if (*deltaYaw < -180.0f) {
             *deltaYaw += 360.0f;
@@ -214,20 +212,16 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (*time > 0) {
-        Npc** player = &playerNpc;
+        playerNpc->duration++;
+        playerNpc->yaw = *initialYaw + ((*deltaYaw * playerNpc->duration) / *time);
+        playerNpc->yaw = clamp_angle(playerNpc->yaw);
+        playerStatus->targetYaw = playerNpc->yaw;
 
-        (*player)->duration++;
-        (*player)->yaw = *initialYaw + ((*deltaYaw * (*player)->duration) / *time);
-        (*player)->yaw = clamp_angle((*player)->yaw);
-        playerStatus->targetYaw = (*player)->yaw;
-
-        return !((*player)->duration < *time);
+        return !(playerNpc->duration < *time);
     } else {
-        Npc** player = &playerNpc;
-
-        (*player)->yaw += *deltaYaw;
-        (*player)->yaw = clamp_angle((*player)->yaw);
-        playerStatus->targetYaw = (*player)->yaw;
+        playerNpc->yaw += *deltaYaw;
+        playerNpc->yaw = clamp_angle(playerNpc->yaw);
+        playerStatus->targetYaw = playerNpc->yaw;
 
         return ApiStatus_DONE2;
     }
@@ -343,7 +337,15 @@ ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "evt/player_api", UseExitHeading, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D23F8);
+s32 func_802D23F8(void) {
+    if (gPlayerActionState == ACTION_STATE_IDLE || gPlayerActionState == ACTION_STATE_WALK ||
+        gPlayerActionState == ACTION_STATE_RUN || gPlayerActionState == ACTION_STATE_LAND ||
+        gPlayerActionState == ACTION_STATE_STEP_DOWN_LAND || gPlayerActionState == ACTION_STATE_GROUND_POUND ||
+        gPlayerActionState == ACTION_STATE_ULTRA_POUND || gPlayerActionState == ACTION_STATE_SPIN) {
+        return TRUE;
+    }
+    return FALSE;
+}
 
 ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
@@ -473,13 +475,29 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D2D30);
+s32 func_802D2D30(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
+INCLUDE_ASM(s32, "evt/player_api", func_802D2D30, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D2ED4);
+void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    u16 temp1 = arg4 + arg6;
+    u16 temp2 = arg5 + arg7;
+
+    func_802D2D30(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D2F34);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D2FCC);
+void func_802D2FCC(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        UnkF5750* temp = (*D_802DB7C0)[i];
+
+        if (temp != NULL && temp->entityModelIndex >= 0) {
+            exec_entity_model_commandlist(temp->entityModelIndex);
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D3028);
 
@@ -574,7 +592,14 @@ ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3674);
+ApiStatus func_802D3674(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    u32* commandList = (u32*)get_variable(script, *args++);
+
+    set_entity_model_render_command_list((*D_802DB7C0)[index]->entityModelIndex, commandList);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D36E0, ScriptInstance* script, s32 isInitialCall);
 
@@ -584,9 +609,21 @@ INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3840, ScriptInstance* script, 
 
 INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D38EC, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3998);
+ApiStatus func_802D3998(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D39FC, ScriptInstance* script, s32 isInitialCall);
+    (*D_802DB7C0)[index]->unk_3C = get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D39FC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+
+    (*D_802DB7C0)[index]->unk_40 = get_float_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D3A60);
 

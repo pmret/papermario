@@ -804,9 +804,9 @@ s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
 }
 
-void func_80110BCC(Entity *entity) {
+void func_80110BCC(Entity *entity, u32* commandList) {
     if (!(entity->flags & 8)) {
-        set_entity_model_render_command_list(entity->virtualModelIndex);
+        set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
     }
 }
 

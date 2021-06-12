@@ -339,7 +339,7 @@ extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
-extern UNK_TYPE D_802EAE7C;
+extern u32* D_802EAE7C;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
