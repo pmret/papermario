@@ -28,10 +28,10 @@ s32 shop_owner_begin_speech(s32 messageIndex) {
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     ScriptInstance* script = start_script(&D_80283E80_7E4D00, 1, 0);
 
-    script->varTable[0] = shopStringID;
-    script->varTable[1] = shop->owner->npcID;
-    script->varTable[2] = shop->owner->talkAnim;
-    script->varTable[3] = shop->owner->idleAnim;
+    script->varTable[0].s = shopStringID;
+    script->varTable[1].s = shop->owner->npcID;
+    script->varTable[2].s = shop->owner->talkAnim;
+    script->varTable[3].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -57,10 +57,10 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
     }
 
     script = start_script(&D_80283E80_7E4D00, 1, 0);
-    script->varTable[0] = shopStringID;
-    script->varTable[1] = shop->owner->npcID;
-    script->varTable[2] = shop->owner->talkAnim;
-    script->varTable[3] = shop->owner->idleAnim;
+    script->varTable[0].s = shopStringID;
+    script->varTable[1].s = shop->owner->npcID;
+    script->varTable[2].s = shop->owner->talkAnim;
+    script->varTable[3].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -70,10 +70,10 @@ s32 shop_owner_continue_speech(s32 messageIndex) {
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     ScriptInstance* script = start_script(&D_80283EB0_7E4D30, 1, 0);
 
-    script->varTable[0] = shopStringID;
-    script->varTable[1] = shop->owner->npcID;
-    script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->varTable[0].s = shopStringID;
+    script->varTable[1].s = shop->owner->npcID;
+    script->varTable[2].s = shop->owner->talkAnim;
+    script->functionTemp[3].s = script->varTable[3].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -95,10 +95,10 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     set_message_string(phi_a0, 1);
 
     script = start_script(&D_80283EB0_7E4D30, 1, 0);
-    script->varTable[0] = shopStringID;
-    script->varTable[1] = shop->owner->npcID;
-    script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->varTable[0].s = shopStringID;
+    script->varTable[1].s = shop->owner->npcID;
+    script->varTable[2].s = shop->owner->talkAnim;
+    script->functionTemp[3].s = script->varTable[3].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -108,10 +108,10 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
     ScriptInstance* script = start_script(&D_80283EE0_7E4D60, 1, 0);
 
-    script->varTable[0] = shopStringID;
-    script->varTable[1] = shop->owner->npcID;
-    script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->varTable[0].s = shopStringID;
+    script->varTable[1].s = shop->owner->npcID;
+    script->varTable[2].s = shop->owner->talkAnim;
+    script->functionTemp[3].s = script->varTable[3].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -120,9 +120,9 @@ s32 shop_owner_end_speech(void) {
     Shop* shop = gGameStatusPtr->mapShop;
     ScriptInstance* script = start_script(&D_80283F2C_7E4DAC, 1, 0);
 
-    script->varTable[0] = shop->owner->npcID;
-    script->varTable[1] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[2] = shop->owner->idleAnim;
+    script->varTable[0].s = shop->owner->npcID;
+    script->varTable[1].s = shop->owner->talkAnim;
+    script->functionTemp[3].s = script->varTable[2].s = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -130,7 +130,7 @@ s32 shop_owner_end_speech(void) {
 ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    script->varTable[2] = FALSE;
+    script->varTable[2].s = FALSE;
 
     if (playerStatus->actionState == ACTION_STATE_BOUNCE ||
         playerStatus->actionState == ACTION_STATE_FALLING) {
@@ -141,7 +141,7 @@ ApiStatus func_802803C8(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    script->varTable[2] = TRUE;
+    script->varTable[2].s = TRUE;
     return ApiStatus_DONE2;
 }
 
@@ -166,7 +166,7 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
             disable_player_static_collisions();
 
             childScript = start_script(&D_80284034_7E4EB4, 1, 0);
-            childScript->varTable[0] = currentItemSlot;
+            childScript->varTable[0].s = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
             shop->flags |= 8;

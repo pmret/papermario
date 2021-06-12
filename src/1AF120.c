@@ -2,13 +2,13 @@
 
 ApiStatus GetDamageIntensity(ScriptInstance* script, s32 isInitialCall) {
     if (gBattleStatus.lastAttackDamage < 4) {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     } else if (gBattleStatus.lastAttackDamage < 7) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     } else if (gBattleStatus.lastAttackDamage < 10) {
-        script->varTable[0] = 2;
+        script->varTable[0].s = 2;
     } else {
-        script->varTable[0] = 3;
+        script->varTable[0].s = 3;
     }
     return ApiStatus_DONE2;
 }

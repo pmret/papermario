@@ -139,7 +139,7 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
 }
 
 ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
-    switch (script->varTable[0]) {
+    switch (script->varTable[0].s) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
             script->array[0] = create_dynamic_entity_world(NULL, N(reflection_setup_floor));
@@ -318,8 +318,8 @@ void N(reflection_render_floor_fancy)(PlayerStatus *playerStatus) {
 ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
     Npc* partner;
 
-    if (script->varTable[1] == FALSE) {
-        switch (script->varTable[0]) {
+    if (script->varTable[1].s == FALSE) {
+        switch (script->varTable[0].s) {
             case REFLECTION_FLOOR_WALL:
                 script->array[1] = create_dynamic_entity_world(N(SetPartnerFlagsA0000), NULL);
                 break;
@@ -331,7 +331,7 @@ ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
                 break;
         }
     } else {
-        switch (script->varTable[0]) {
+        switch (script->varTable[0].s) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
                 script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags80000), NULL);
@@ -347,8 +347,8 @@ ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if (script->varTable[1] == FALSE) {
-        switch (script->varTable[0]) {
+    if (script->varTable[1].s == FALSE) {
+        switch (script->varTable[0].s) {
             case REFLECTION_FLOOR_WALL:
                 partner->flags |= NPC_FLAG_REFLECT_WALL | NPC_FLAG_REFLECT_FLOOR;
                 break;
@@ -360,7 +360,7 @@ ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
                 break;
         }
     } else {
-        switch (script->varTable[0]) {
+        switch (script->varTable[0].s) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
                 partner->flags |= NPC_FLAG_REFLECT_FLOOR;

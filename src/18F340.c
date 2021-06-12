@@ -16,7 +16,7 @@ ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
         isImmobile = TRUE;
     }
 
-    script->varTable[0] = isImmobile;
+    script->varTable[0].s = isImmobile;
     return ApiStatus_DONE2;
 }
 
@@ -41,9 +41,9 @@ ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
 
     var = player->varTable[0];
     if (var >= rand_int(100)) {
-        script->varTable[0] = TRUE;
+        script->varTable[0].s = TRUE;
     } else {
-        script->varTable[0] = FALSE;
+        script->varTable[0].s = FALSE;
     }
     return ApiStatus_DONE2;
 }
@@ -75,9 +75,9 @@ INCLUDE_ASM(s32, "18F340", func_8026127C);
 ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
 
-    script->varTable[0] = FALSE;
+    script->varTable[0].s = FALSE;
     if (partnerActorExists) {
-        script->varTable[0] = TRUE;
+        script->varTable[0].s = TRUE;
     }
     return ApiStatus_DONE2;
 }
@@ -106,9 +106,9 @@ INCLUDE_ASM(s32, "18F340", func_802619B4);
 ApiStatus HasMerleeCastsLeft(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[0] = FALSE;
+    script->varTable[0].s = FALSE;
     if (playerData->merleeCastsLeft > 0) {
-        script->varTable[0] = TRUE;
+        script->varTable[0].s = TRUE;
     }
     return ApiStatus_DONE2;
 }
@@ -150,8 +150,8 @@ ApiStatus func_80261D98(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_80261DD4(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[11] = playerData->bootsLevel;
-    script->varTable[12] = playerData->hammerLevel;
+    script->varTable[11].s = playerData->bootsLevel;
+    script->varTable[12].s = playerData->hammerLevel;
     return ApiStatus_DONE2;
 }
 

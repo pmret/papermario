@@ -17,18 +17,18 @@ ApiStatus func_80238000_6F10E0(ScriptInstance* script, s32 isInitialCall) {
     f32 goalY = partnerActor->walk.goalPos.y;
     f32 goalZ = partnerActor->walk.goalPos.z;
 
-    script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
+    script->varTable[0].s = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
-    if (script->varTable[0] >= 21) {
-        script->varTable[0] = 20;
+    if (script->varTable[0].s >= 21) {
+        script->varTable[0].s = 20;
     }
 
     if (battleStatus->unk_83 != 0) {
-        if (script->varTable[0] < 10) {
-            script->varTable[0] = 10;
+        if (script->varTable[0].s < 10) {
+            script->varTable[0].s = 10;
         }
-    } else if (script->varTable[0] < 15) {
-        script->varTable[0] = 15;
+    } else if (script->varTable[0].s < 15) {
+        script->varTable[0].s = 15;
     }
 
     return ApiStatus_DONE2;
@@ -88,10 +88,10 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     MessageID* tattle = &bActorTattles[targetActor->actorType];
 
-    script->varTable[0] = *tattle;
+    script->varTable[0].s = *tattle;
 
-    if (script->varTable[0] == NULL) {
-        script->varTable[0] = bActorTattles[0];
+    if (script->varTable[0].s == NULL) {
+        script->varTable[0].s = bActorTattles[0];
     }
 
     save_tattle_flags(targetActor->actorType);
@@ -126,7 +126,7 @@ ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
         partnerActor->isGlowing = FALSE;
     }
 
-    script->varTable[0] = partnerActor->isGlowing;
+    script->varTable[0].s = partnerActor->isGlowing;
     partnerActor->isGlowing = FALSE;
     gBattleStatus.flags1 &= ~0x40000000;
 
@@ -136,7 +136,7 @@ ApiStatus func_80239068_6F2148(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802390B0_6F2190(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    script->varTable[0] = battleStatus->partnerActor->isGlowing;
+    script->varTable[0].s = battleStatus->partnerActor->isGlowing;
 
     return ApiStatus_DONE2;
 }
@@ -145,9 +145,9 @@ INCLUDE_ASM(s32, "battle/partner/6F10E0", func_802390C8_6F21A8);
 
 ApiStatus func_80239190_6F2270(ScriptInstance* script, s32 isInitialCall) {
     if (D_8023CDA4 == 0) {
-        script->varTable[0] = 36;
+        script->varTable[0].s = 36;
     } else {
-        script->varTable[0] = 37;
+        script->varTable[0].s = 37;
     }
 
     return ApiStatus_DONE2;

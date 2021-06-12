@@ -69,16 +69,16 @@ ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall)
     }
 
     if (nTargets > 0) {
-        script->varTable[0] = chanceTotal / nTargets;
+        script->varTable[0].s = chanceTotal / nTargets;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802383C0_6F6240(ScriptInstance* script, s32 isInitialCall) {
-    s32 var0 = script->varTable[0];
+    s32 var0 = script->varTable[0].s;
     s32 var1;
     s32 var2;
 
@@ -99,8 +99,8 @@ ApiStatus func_802383C0_6F6240(ScriptInstance* script, s32 isInitialCall) {
         var2 = 4;
     }
 
-    script->varTable[14] = var2;
-    script->varTable[15] = var1;
+    script->varTable[14].s = var2;
+    script->varTable[15].s = var1;
 
     return ApiStatus_DONE2;
 }

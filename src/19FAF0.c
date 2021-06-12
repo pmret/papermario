@@ -3,12 +3,12 @@
 #include "script_api/battle.h"
 
 ApiStatus func_80271210(ScriptInstance* script, s32 isInitialCall) {
-    func_80070AF0(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    func_80070AF0(0, script->varTable[0].s, script->varTable[1].s, script->varTable[2].s);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271258(ScriptInstance* script, s32 isInitialCall) {
-    func_80070AF0(1, script->varTable[0], script->varTable[1], script->varTable[2]);
+    func_80070AF0(1, script->varTable[0].s, script->varTable[1].s, script->varTable[2].s);
     return ApiStatus_DONE2;
 }
 
@@ -19,7 +19,7 @@ INCLUDE_ASM(s32, "19FAF0", func_80271328);
 INCLUDE_ASM(s32, "19FAF0", func_802713B0);
 
 ApiStatus func_8027143C(ScriptInstance* script, s32 isInitialCall) {
-    func_80070A90(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    func_80070A90(0, script->varTable[0].s, script->varTable[1].s, script->varTable[2].s);
     return ApiStatus_DONE2;
 }
 
@@ -113,7 +113,7 @@ INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, ScriptInstance* script, s32 isIniti
 ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
     ActorMovementWalk* walkMovement = &player->walk;
-    
+
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
     }
@@ -139,9 +139,9 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
 
     walkMovement->currentPos.y += walkMovement->velocity;
     walkMovement->velocity -= walkMovement->acceleration;
-    
+
     add_xz_vec3f(&walkMovement->currentPos, walkMovement->speed, walkMovement->angle);
-    
+
     player->currentPos.x = walkMovement->currentPos.x;
     player->currentPos.y = walkMovement->currentPos.y;
     player->currentPos.z = walkMovement->currentPos.z;
@@ -154,7 +154,7 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
 
         return ApiStatus_DONE1;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 

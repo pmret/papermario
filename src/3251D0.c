@@ -82,19 +82,19 @@ ApiStatus func_802BD458(ScriptInstance* script, s32 isInitialCall) {
     s32 itemIdx = get_variable(script, *script->ptrReadPos);
     s32 var15;
 
-    script->varTable[11] = (&gItemTable[itemIdx])->potencyA;
-    script->varTable[12] = (&gItemTable[itemIdx])->potencyB;
-    script->varTable[13] = 0;
+    script->varTable[11].s = (&gItemTable[itemIdx])->potencyA;
+    script->varTable[12].s = (&gItemTable[itemIdx])->potencyB;
+    script->varTable[13].s = 0;
 
     if ((&gItemTable[itemIdx])->typeFlags & 0x100) {
-        script->varTable[13] = 1;
+        script->varTable[13].s = 1;
     }
 
     var15 = 0;
-    if (script->varTable[11] < 0 || (script->varTable[11] <= 0 && script->varTable[12] < 0)) {
+    if (script->varTable[11].s < 0 || (script->varTable[11].s <= 0 && script->varTable[12].s < 0)) {
         var15 = 1;
     }
-    script->varTable[15] = var15;
+    script->varTable[15].s = var15;
 
     return ApiStatus_DONE2;
 }

@@ -10,8 +10,8 @@ ApiStatus func_80240358_8C82E8(ScriptInstance* script, s32 isInitialCall) {
     f32 xDelta = playerStatus->currentSpeed * 5.0f * sin_deg(playerStatus->targetYaw);
     f32 zDelta = playerStatus->currentSpeed * 5.0f * -cos_deg(playerStatus->targetYaw);
 
-    script->varTable[0] = playerStatus->position.x + xDelta;
-    script->varTable[1] = playerStatus->position.z + zDelta;
+    script->varTable[0].s = playerStatus->position.x + xDelta;
+    script->varTable[1].s = playerStatus->position.z + zDelta;
 
     return ApiStatus_DONE2;
 }

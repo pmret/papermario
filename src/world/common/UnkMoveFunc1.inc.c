@@ -11,18 +11,18 @@ ApiStatus N(UnkMoveFunc1)(ScriptInstance* script, s32 isInitialCall) {
     f32 goalY = playerActor->walk.goalPos.y;
     f32 goalZ = playerActor->walk.goalPos.z;
 
-    script->varTable[0] = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
+    script->varTable[0].s = (dist3D(posX, posY, posZ, goalX, goalY, goalZ) * 15.0f) / 100.0f;
 
-    if (script->varTable[0] > 20) {
-        script->varTable[0] = 20;
+    if (script->varTable[0].s > 20) {
+        script->varTable[0].s = 20;
     }
 
     if (battleStatus->unk_83 != 0) {
-        if (script->varTable[0] < 6) {
-            script->varTable[0] = 6;
+        if (script->varTable[0].s < 6) {
+            script->varTable[0].s = 6;
         }
-    } else if (script->varTable[0] < 12) {
-        script->varTable[0] = 12;
+    } else if (script->varTable[0].s < 12) {
+        script->varTable[0].s = 12;
     }
 
     return ApiStatus_DONE2;

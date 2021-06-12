@@ -10,11 +10,11 @@ ApiStatus N(func_802407D0_D3ADA0)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_80244F78_D3F548) == NULL) {
         N(D_80244F78_D3F548) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_80244F78_D3F548)[i] = script->varTable[i];
+            N(D_80244F78_D3F548)[i] = script->varTable[i].s;
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80244F78_D3F548)[i];
+            script->varTable[i].s = N(D_80244F78_D3F548)[i];
         }
         heap_free(N(D_80244F78_D3F548));
         N(D_80244F78_D3F548) = NULL;
@@ -79,10 +79,10 @@ ApiStatus N(func_8024090C_D3AEDC)(ScriptInstance *script, s32 isInitialCall) {
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     } else {
         kill_enemy(enemy);
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -101,11 +101,11 @@ ApiStatus N(func_80240EBC_D3B48C)(ScriptInstance *script, s32 isInitialCall) {
         playerData->quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
-        script->varTable[0] = 1;
+    if (script->varTable[0].s == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
+        script->varTable[0].s = 1;
         playerData->quizzesCorrect++;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;

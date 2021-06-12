@@ -906,7 +906,7 @@ ApiStatus si_handle_spawn_script(ScriptInstance* script) {
 
     i = 0;
     while (i < ARRAY_COUNT(script->varTable)) {
-        newScript->varTable[i] = script->varTable[i++];
+        newScript->varTable[i].s = script->varTable[i++].s;
     }
 
     i = 0;
@@ -933,7 +933,7 @@ ApiStatus si_handle_spawn_script_get_id(ScriptInstance* script) {
     newScript->owner2 = script->owner2;
 
     for (i = 0; i < ARRAY_COUNT(script->varTable); i++) {
-        newScript->varTable[i] = script->varTable[i];
+        newScript->varTable[i].s = script->varTable[i].s;
     }
 
     for (i = 0; i < ARRAY_COUNT(script->varFlags); i++) {
@@ -973,9 +973,9 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
         script = start_script(scriptStart, trigger->priority, 0x20);
         trigger->runningScript = script;
         trigger->runningScriptID = script->id;
-        script->varTable[0] = trigger->scriptVars[0];
-        script->varTable[1] = trigger->scriptVars[1];
-        script->varTable[2] = trigger->scriptVars[2];
+        script->varTable[0].s = trigger->scriptVars[0];
+        script->varTable[1].s = trigger->scriptVars[1];
+        script->varTable[2].s = trigger->scriptVars[2];
         script->owner2.trigger = trigger;
     }
 
@@ -1008,9 +1008,9 @@ ApiStatus si_handle_bind_trigger(ScriptInstance* script) {
     trigger->scriptSource = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
+    trigger->scriptVars[0] = get_variable(script, script->varTable[0].s);
+    trigger->scriptVars[1] = get_variable(script, script->varTable[1].s);
+    trigger->scriptVars[2] = get_variable(script, script->varTable[2].s);
 
     if (triggerOut != 0) {
         set_variable(script, triggerOut, trigger);
@@ -1093,9 +1093,9 @@ void si_standard_trigger_executor(Trigger* trigger) {
         ScriptInstance* newScript = start_script(trigger->scriptSource, trigger->priority, 0x20);
         trigger->runningScript = newScript;
         trigger->runningScriptID = newScript->id;
-        newScript->varTable[0] = trigger->scriptVars[0];
-        newScript->varTable[1] = trigger->scriptVars[1];
-        newScript->varTable[2] = trigger->scriptVars[2];
+        newScript->varTable[0].s = trigger->scriptVars[0];
+        newScript->varTable[1].s = trigger->scriptVars[1];
+        newScript->varTable[2].s = trigger->scriptVars[2];
         newScript->owner2.trigger = trigger;
     }
 
@@ -1128,9 +1128,9 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     trigger->scriptSource = triggerScript;
     trigger->runningScript = NULL;
     trigger->priority = script->priority;
-    trigger->scriptVars[0] = get_variable(script, script->varTable[0]);
-    trigger->scriptVars[1] = get_variable(script, script->varTable[1]);
-    trigger->scriptVars[2] = get_variable(script, script->varTable[2]);
+    trigger->scriptVars[0] = get_variable(script, script->varTable[0].s);
+    trigger->scriptVars[1] = get_variable(script, script->varTable[1].s);
+    trigger->scriptVars[2] = get_variable(script, script->varTable[2].s);
 
     return ApiStatus_DONE2;
 }
@@ -1226,7 +1226,7 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
         return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
     } else if (var <= -20000000) {
         var += 30000000;
-        var = script->varTable[var];
+        var = script->varTable[var].s;
         return (var > -270000000 && var < -220000000) ? fixed_var_to_float(var) : var;
     } else {
         return var;
@@ -1365,7 +1365,7 @@ f32 get_float_variable(ScriptInstance* script, Bytecode var) {
         return fixed_var_to_float(gMapVars[var]);
     } else if (var <= -20000000) {
         var += 30000000;
-        return fixed_var_to_float(script->varTable[var]);
+        return fixed_var_to_float(script->varTable[var].s);
     } else {
         return fixed_var_to_float(var);
     }

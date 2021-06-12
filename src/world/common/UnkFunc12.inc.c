@@ -5,10 +5,10 @@ ApiStatus N(UnkFunc12)(ScriptInstance *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 posX, posY, posZ, posW;
 
-    if (script->varTable[5] == 0) {
-        playerStatus->position.x = script->varTable[0];
+    if (script->varTable[5].s == 0) {
+        playerStatus->position.x = script->varTable[0].s;
     } else {
-        playerStatus->position.z = script->varTable[0];
+        playerStatus->position.z = script->varTable[0].s;
     }
 
     posX = playerStatus->position.x;

@@ -31,6 +31,6 @@ ApiStatus LoadStarPowerScript(ScriptInstance* script, s32 isInitialCall) {
     selectedItemID = battleStatus->selectedItemID;
     dma_copy((&D_8029C7D0[selectedItemID])->dmaStart, (&D_8029C7D0[selectedItemID])->dmaEnd,
              (&D_8029C7D0[selectedItemID])->dmaDest);
-    script->varTable[0] = (&D_8029C7D0[selectedItemID])->init;
+    script->varTable[0].s = (&D_8029C7D0[selectedItemID])->init;
     return ApiStatus_DONE2;
 }

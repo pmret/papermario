@@ -255,9 +255,9 @@ ApiStatus N(func_8024219C_B4CC0C)(ScriptInstance *script, s32 isInitialCall) {
 
 ApiStatus func_8024268C_B4D0FC(ScriptInstance* script) {
     if (get_enemy_safe(0) == NULL) {
-        script->varTable[0] = FALSE;
+        script->varTable[0].s = FALSE;
     } else {
-        script->varTable[0] = TRUE;
+        script->varTable[0].s = TRUE;
     }
     return ApiStatus_DONE2;
 }

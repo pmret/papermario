@@ -10,11 +10,11 @@ ApiStatus N(func_80240630_7EB340)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_80245DC0_7F0AD0) == NULL) {
         N(D_80245DC0_7F0AD0) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_80245DC0_7F0AD0)[i] = script->varTable[i];
+            N(D_80245DC0_7F0AD0)[i] = script->varTable[i].s;
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80245DC0_7F0AD0)[i];
+            script->varTable[i].s = N(D_80245DC0_7F0AD0)[i];
         }
         heap_free(N(D_80245DC0_7F0AD0));
         N(D_80245DC0_7F0AD0) = NULL;
@@ -77,10 +77,10 @@ ApiStatus N(func_8024076C_7EB47C)(ScriptInstance *script, s32 isInitialCall) {
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->unk_75 != 0) && var)) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     } else {
         kill_enemy(enemy);
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -99,11 +99,11 @@ ApiStatus N(func_80240D1C_7EBA2C)(ScriptInstance *script, s32 isInitialCall) {
         playerData->quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
-        script->varTable[0] = 1;
+    if (script->varTable[0].s == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
+        script->varTable[0].s = 1;
         playerData->quizzesCorrect++;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -349,10 +349,10 @@ ApiStatus N(func_80241A18_7EC728)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D30_7ECA40);
 /*
 ApiStatus N(func_80241D30_7ECA40)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->varTable[2]);
+    Npc *npc = get_npc_unsafe(script->varTable[2].s);
 
     D_8024E1B4 = npc->currentAnim;
-    npc->currentAnim = script->varTable[4];
+    npc->currentAnim = script->varTable[4].s;
     return ApiStatus_DONE2;
 }
 */
@@ -360,7 +360,7 @@ ApiStatus N(func_80241D30_7ECA40)(ScriptInstance *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241D74_7ECA84);
 /*
 ApiStatus N(func_80241D74_7ECA84)(ScriptInstance *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
+    get_npc_unsafe(script->varTable[2].s)->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
 */

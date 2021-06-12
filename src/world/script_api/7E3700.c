@@ -3,8 +3,8 @@
 ApiStatus func_80282880(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->position.x += (script->varTable[0] - playerStatus->position.x) / 2;
-    playerStatus->position.z += (script->varTable[2] - playerStatus->position.z) / 2;
+    playerStatus->position.x += (script->varTable[0].s - playerStatus->position.x) / 2;
+    playerStatus->position.z += (script->varTable[2].s - playerStatus->position.z) / 2;
 
     return ApiStatus_DONE2;
 }

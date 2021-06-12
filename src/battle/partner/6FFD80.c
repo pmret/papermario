@@ -19,7 +19,7 @@ ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
             break;
     }
 
-    script->varTable[15] = var0;
+    script->varTable[15].s = var0;
     return ApiStatus_DONE2;
 }
 
@@ -55,7 +55,7 @@ ApiStatus func_80238CE0_700A60(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    script->varTable[0] = airLiftChance;
+    script->varTable[0].s = airLiftChance;
 
     return ApiStatus_DONE2;
 }
@@ -65,7 +65,7 @@ INCLUDE_ASM(s32, "battle/partner/6FFD80", func_80238E24_700BA4);
 INCLUDE_ASM(s32, "battle/partner/6FFD80", func_802390B4_700E34);
 
 ApiStatus func_802397C8_701548(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[15] = ((script->varTable[0] * 100) / 2499) + 2;
+    script->varTable[15].s = ((script->varTable[0].s * 100) / 2499) + 2;
 
     return ApiStatus_DONE2;
 }

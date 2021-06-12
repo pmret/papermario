@@ -37,7 +37,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A2DD0, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0].s = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -237,7 +237,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             i = D_802A2DF0 / 26;
             g = N(D_802A2858_732B58)[i];
             battleStatus->selectedItemID = g;
-            script->varTable[0] = g;
+            script->varTable[0].s = g;
             free_dynamic_entity(D_802A2E00);
             for (i = 0; i < 5; i++) {
                 free_icon(*iconPtr++);
@@ -288,7 +288,7 @@ ApiStatus N(func_802A1A40_731D40)(ScriptInstance* script, s32 isInitialCall) {
         playerData->curHP = playerData->curMaxHP;
     }
 
-    script->varTable[3] = item->potencyA;
+    script->varTable[3].s = item->potencyA;
 
     return ApiStatus_DONE2;
 }
@@ -302,7 +302,7 @@ ApiStatus N(func_802A1A8C_731D8C)(ScriptInstance* script, s32 isInitialCall) {
         playerData->curFP = playerData->curMaxFP;
     }
 
-    script->varTable[3] = item->potencyB;
+    script->varTable[3].s = item->potencyB;
 
     return ApiStatus_DONE2;
 }

@@ -38,7 +38,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A1CD4, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0].s = sleepTime;
 
     return ApiStatus_DONE2;
 }

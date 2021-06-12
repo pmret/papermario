@@ -64,11 +64,11 @@ ApiStatus N(func_80240A44_92ACF4)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_802441D8_92E488) == NULL) {
         N(D_802441D8_92E488) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_802441D8_92E488)[i] = script->varTable[i];
+            N(D_802441D8_92E488)[i] = script->varTable[i].s;
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_802441D8_92E488)[i];
+            script->varTable[i].s = N(D_802441D8_92E488)[i];
         }
         heap_free(N(D_802441D8_92E488));
         N(D_802441D8_92E488) = NULL;
@@ -92,6 +92,6 @@ ApiStatus PostChapter2StatUpdate(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_sbk/sbk_02/92A9A0", func_80240B98_92AE48);
 
 ApiStatus GetItemCount(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = get_item_count();
+    script->varTable[0].s = get_item_count();
     return ApiStatus_DONE2;
 }

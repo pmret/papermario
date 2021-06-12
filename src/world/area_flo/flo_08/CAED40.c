@@ -49,7 +49,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance *script, s32 isInitialCall) {
         ptr = script->functionTemp[2].s;
 
         partnerActiveCount = 0;
-        var = script->varTable[12] >= 0;
+        var = script->varTable[12].s >= 0;
 
         for (i = 0; i < 8; i++) {
             idx = N(D_80241FB8_CB0CF8)[i];
@@ -97,10 +97,10 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance *script, s32 isInitialCall) {
 
     func_800F1538();
     if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
+        script->varTable[0].s = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
+        script->varTable[1].s = ptr->unk_108[script->functionTemp[1].s - 1];
     } else {
-        script->varTable[0] = -1;
+        script->varTable[0].s = -1;
     }
 
     heap_free(script->functionTemp[2].s);

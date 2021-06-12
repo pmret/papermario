@@ -1217,11 +1217,11 @@ ApiStatus N(func_80241B5C_CB089C)(ScriptInstance *script, s32 isInitialCall) {
     StaticItem* item = &gItemTable[itemId];
 
     if (itemId == ITEM_YUMMY_MEAL) {
-        script->varTable[9] = 2;
+        script->varTable[9].s = 2;
     } else if (item->typeFlags & 0x80) {
-        script->varTable[9] = 1;
+        script->varTable[9].s = 1;
     } else {
-        script->varTable[9] = 0;
+        script->varTable[9].s = 0;
     }
 
     return ApiStatus_DONE2;

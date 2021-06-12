@@ -64,12 +64,12 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
-    s32 var1 = script->varTable[1];
-    s32 var2 = script->varTable[2];
-    s32 var3 = script->varTable[3];
-    s32 var4 = script->varTable[4];
-    s32 var5 = script->varTable[5];
-    s32 var6 = script->varTable[6];
+    s32 var1 = script->varTable[1].s;
+    s32 var2 = script->varTable[2].s;
+    s32 var3 = script->varTable[3].s;
+    s32 var4 = script->varTable[4].s;
+    s32 var5 = script->varTable[5].s;
+    s32 var6 = script->varTable[6].s;
     s32 temp;
     f32 t0;
     f32 t1;
@@ -109,13 +109,13 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     s32 var6 = get_variable(script, *args++);
 
     ScriptInstance* newScript = start_script(D_802D9D50, 1, 0);
-    newScript->varTable[0] = var0;
-    newScript->varTable[1] = var1;
-    newScript->varTable[2] = var2;
-    newScript->varTable[3] = var3;
-    newScript->varTable[4] = var4;
-    newScript->varTable[5] = var5;
-    newScript->varTable[6] = var6;
+    newScript->varTable[0].s = var0;
+    newScript->varTable[1].s = var1;
+    newScript->varTable[2].s = var2;
+    newScript->varTable[3].s = var3;
+    newScript->varTable[4].s = var4;
+    newScript->varTable[5].s = var5;
+    newScript->varTable[6].s = var6;
 
     return ApiStatus_DONE2;
 }

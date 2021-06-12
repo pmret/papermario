@@ -37,7 +37,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A19C0, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0].s = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -59,7 +59,7 @@ ApiStatus N(func_802A123C_72DDAC)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, STATUS_E, script->varTable[0]);
+    inflict_status(player, STATUS_E, script->varTable[0].s);
     player->status = 0;
     part->flags |= 0x100;
 

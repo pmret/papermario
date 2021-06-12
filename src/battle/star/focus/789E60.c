@@ -19,10 +19,10 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
     s32 deepFocusSP;
     s32 superFocusSP;
 
-    script->varTable[0] = 0;
+    script->varTable[0].s = 0;
 
     if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
         return ApiStatus_DONE2;
     }
 
@@ -32,7 +32,7 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
     add_SP(deepFocusSP + superFocusSP + 128);
 
     if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
-        script->varTable[0] = 2;
+        script->varTable[0].s = 2;
     }
 
     return ApiStatus_DONE2;
@@ -41,17 +41,17 @@ ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802A15B0_78A410(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[0] = 0;
+    script->varTable[0].s = 0;
 
     if (playerData->specialBarsFilled >= playerData->maxStarPower * 256) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
         return ApiStatus_DONE2;
     }
 
     add_SP(128);
 
     if (playerData->specialBarsFilled == playerData->maxStarPower * 256) {
-        script->varTable[0] = 2;
+        script->varTable[0].s = 2;
     }
 
     return ApiStatus_DONE2;

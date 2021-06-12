@@ -17,7 +17,7 @@ INCLUDE_ASM(s32, "battle/star/star_beam/796FC0", func_802A1494_797454);
 INCLUDE_ASM(s32, "battle/star/star_beam/796FC0", func_802A1518_7974D8);
 
 ApiStatus func_802A2468_798428(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = D_802A3838;
+    script->varTable[0].s = D_802A3838;
     return ApiStatus_DONE2;
 }
 

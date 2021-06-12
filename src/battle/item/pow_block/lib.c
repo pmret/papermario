@@ -37,7 +37,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A2120, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0].s = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -61,7 +61,7 @@ ApiStatus N(func_802A123C_718A8C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (player->scalingFactor == 1.0) {
-        s32 var = script->varTable[10];
+        s32 var = script->varTable[10].s;
         get_entity_by_index(var);
         collisionStatus->currentCeiling = var | 0x4000;
         playerStatus->flags |= 2;
@@ -75,7 +75,7 @@ ApiStatus N(func_802A123C_718A8C)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802A12E4_718B34)(ScriptInstance* script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(script->varTable[10]);
+    Entity* entity = get_entity_by_index(script->varTable[10].s);
 
     entity->flags |= 0x20000000;
 
@@ -85,7 +85,7 @@ ApiStatus N(func_802A12E4_718B34)(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus N(func_802A1318_718B68)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
-    Entity* entity = get_entity_by_index(script->varTable[10]);
+    Entity* entity = get_entity_by_index(script->varTable[10].s);
 
     entity->scale.x = player->scalingFactor;
     entity->scale.y = player->scalingFactor;

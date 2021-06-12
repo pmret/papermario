@@ -13,14 +13,14 @@ ApiStatus func_802A10E4_743ED4(ScriptInstance* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(actor->targetActorID);
     u8 powerBounceChance;
 
-    script->varTable[0] = 99;
+    script->varTable[0].s = 99;
     powerBounceChance = targetActor->staticActorData->powerBounceChance;
     if (is_ability_active(ABILITY_DODGE_MASTER)) {
         powerBounceChance += 7;
     }
 
     if ((*D_802A2730_745520 * powerBounceChance) / 100 < rand_int(100)) {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;

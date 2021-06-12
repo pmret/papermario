@@ -37,7 +37,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A1D60, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0].s = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -58,7 +58,7 @@ ApiStatus N(func_802A123C_7307DC)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, STATUS_STATIC, script->varTable[0]);
+    inflict_status(player, STATUS_STATIC, script->varTable[0].s);
     player->status = 0;
     return ApiStatus_DONE2;
 }
@@ -98,7 +98,7 @@ ApiStatus N(func_802A1450_7309F0)(ScriptInstance* script, s32 isInitialCall) {
         playerData->curHP = playerData->curMaxHP;
     }
 
-    script->varTable[3] = item->potencyA;
+    script->varTable[3].s = item->potencyA;
 
     return ApiStatus_DONE2;
 }
@@ -128,7 +128,7 @@ ApiStatus N(func_802A14F0_730A90)(ScriptInstance* script, s32 isInitialCall) {
         playerData->curFP = playerData->curMaxFP;
     }
 
-    script->varTable[3] = item->potencyB;
+    script->varTable[3].s = item->potencyB;
 
     return ApiStatus_DONE2;
 }

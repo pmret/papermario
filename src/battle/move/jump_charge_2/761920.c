@@ -41,9 +41,9 @@ ApiStatus func_802A1108_761A28(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802A133C_761C5C(ScriptInstance* script, s32 isInitialCall) {
     if (D_802A2C20 == 0) {
-        script->varTable[0] = 6;
+        script->varTable[0].s = 6;
     } else {
-        script->varTable[0] = 7;
+        script->varTable[0].s = 7;
     }
 
     return ApiStatus_DONE2;

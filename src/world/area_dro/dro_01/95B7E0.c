@@ -3007,11 +3007,11 @@ ApiStatus N(func_80241470_95C670)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_802451B8_9603B8) == NULL) {
         N(D_802451B8_9603B8) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_802451B8_9603B8)[i] = script->varTable[i];
+            N(D_802451B8_9603B8)[i] = script->varTable[i].s;
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_802451B8_9603B8)[i];
+            script->varTable[i].s = N(D_802451B8_9603B8)[i];
         }
         heap_free(N(D_802451B8_9603B8));
         N(D_802451B8_9603B8) = NULL;
@@ -3072,10 +3072,10 @@ ApiStatus N(func_802415AC_95C7AC)(ScriptInstance *script, s32 isInitialCall) {
 
     if ((((sp_10 == temp_s6) && (sp_1e == phi_s5) && (phi_s7 == 0) && test2)) ||
         ((gGameStatusPtr->debugQuizmo != 0) && var)) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     } else {
         kill_enemy(enemy);
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -3090,11 +3090,11 @@ ApiStatus N(func_80241B5C_95CD5C)(ScriptInstance *script, s32 isInitialCall) {
         gPlayerData.quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
-        script->varTable[0] = 1;
+    if (script->varTable[0].s == N(quizAnswers)[get_variable(NULL, SI_SAVE_VAR(352))]) {
+        script->varTable[0].s = 1;
         gPlayerData.quizzesCorrect++;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -3402,15 +3402,15 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance *script, s32 isInitialCall) {
 #include "world/common/UnkYawFunc.inc.c"
 
 ApiStatus N(func_80243014_95E214)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->varTable[2]);
+    Npc *npc = get_npc_unsafe(script->varTable[2].s);
 
     N(D_8024E1B4) = npc->currentAnim;
-    npc->currentAnim = script->varTable[4];
+    npc->currentAnim = script->varTable[4].s;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80243058_95E258)(ScriptInstance *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim = N(D_8024E1B4);
+    get_npc_unsafe(script->varTable[2].s)->currentAnim = N(D_8024E1B4);
     return ApiStatus_DONE2;
 }
 
@@ -3449,9 +3449,9 @@ ApiStatus N(func_802431B4_95E3B4)(ScriptInstance *script, s32 isInitialCall) {
     s32 val = (playerData->frameCounter - playerData->unk_328) / 3600;
 
     if (val < 30) {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     } else {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     }
 
     return ApiStatus_DONE2;
@@ -3474,8 +3474,8 @@ ApiStatus N(func_802431FC_95E3FC)(ScriptInstance *script, s32 isInitialCall) {
         temp_f22 -= rand;
     }
     rand = rand_int(20) + 30;
-    script->varTable[0] = (sin_deg(temp_f22) * rand) + 183.0f;
-    script->varTable[1] = -75.0f - (cos_deg(temp_f22) * rand);
+    script->varTable[0].s = (sin_deg(temp_f22) * rand) + 183.0f;
+    script->varTable[1].s = -75.0f - (cos_deg(temp_f22) * rand);
 
     return ApiStatus_DONE2;
 }
@@ -3490,11 +3490,11 @@ ApiStatus N(func_80243350_95E550)(ScriptInstance *script, s32 isInitialCall) {
     f32 temp_f0 = (var4 - var2) / (var3 - var1);
 
     if (playerStatus->position.z < ((temp_f0 * playerStatus->position.x) + (var2 - (temp_f0 * var1)))) {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
         return ApiStatus_DONE2;
     }
 
-    script->varTable[0] = 1;
+    script->varTable[0].s = 1;
     return ApiStatus_BLOCK;
 }
 

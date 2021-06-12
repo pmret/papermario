@@ -1,10 +1,10 @@
 #include "common.h"
 
 typedef struct UnkF5750 {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ s32 unk_08;
-    /* 0x0C */ s32 unk_0C;
+    /* 0x00 */ s32 entityModelIndex;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ f32 unk_08;
+    /* 0x0C */ f32 unk_0C;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ s32 unk_18;
@@ -16,6 +16,8 @@ typedef struct UnkF5750 {
 typedef UnkF5750* UnkF5750List[0x40];
 
 extern s16 D_802DB5B0;
+extern s32 D_802DB5C0;
+extern s32 D_802DB6C0;
 extern UnkF5750List* D_802DB7C0;
 
 Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
@@ -310,7 +312,29 @@ ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", UseEntryHeading, ScriptInstance* script, s32 isInitialCall);
+ApiStatus UseEntryHeading(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    MapConfig* mapConfig = get_current_map_header();
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    f32 entryX = script->varTable[1].s = (*mapConfig->entryList)[gGameStatusPtr->entryID].x;
+    f32 entryY = script->varTable[2].s = (*mapConfig->entryList)[gGameStatusPtr->entryID].y;
+    f32 entryZ = script->varTable[3].s = (*mapConfig->entryList)[gGameStatusPtr->entryID].z;
+    f32 cosTheta;
+    f32 sinTheta;
+    f32 exitTangentFrac;
+
+    sin_cos_deg(clamp_angle((*mapConfig->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
+
+    exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
+    gPlayerStatus.position.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
+    gPlayerStatus.position.z = (entryZ - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
+
+    script->varTable[5].f = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
+    gPlayerStatus.flags |= 0x4000000;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
     gPlayerStatus.flags &= ~0x4000000;
@@ -322,7 +346,7 @@ INCLUDE_ASM(ApiStatus, "evt/player_api", UseExitHeading, ScriptInstance* script,
 INCLUDE_ASM(s32, "evt/player_api", func_802D23F8);
 
 ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) {
-    if ((gCollisionStatus.currentFloor >= 0) && (func_802D23F8() != 0)) {
+    if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
         return ApiStatus_DONE2;
     }
 
@@ -461,7 +485,14 @@ INCLUDE_ASM(s32, "evt/player_api", func_802D3028);
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D31E0);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3398);
+ApiStatus func_802D3398(ScriptInstance* script, s32 isInitialCall) {
+    if (!gGameStatusPtr->isBattle) {
+        D_802DB7C0 = &D_802DB6C0;
+    } else {
+        D_802DB7C0 = &D_802DB5C0;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D33D4);
 
@@ -474,7 +505,7 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         temp = (*D_802DB7C0)[i];
-        if (temp->unk_00 < 0) {
+        if (temp->entityModelIndex < 0) {
             break;
         }
     }
@@ -483,7 +514,7 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    temp->unk_00 = load_entity_model(unkStructPtr);
+    temp->entityModelIndex = load_entity_model(unkStructPtr);
     temp->unk_04 = 0;
     temp->unk_08 = 0;
     temp->unk_0C = 0;
@@ -494,7 +525,7 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
 
-    exec_entity_model_commandlist(temp->unk_00);
+    exec_entity_model_commandlist(temp->entityModelIndex);
     set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;
@@ -509,7 +540,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         temp = (*D_802DB7C0)[i];
-        if (temp->unk_00 < 0) {
+        if (temp->entityModelIndex < 0) {
             break;
         }
     }
@@ -518,7 +549,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    temp->unk_00 = ALT_load_entity_model(unkStructPtr);
+    temp->entityModelIndex = ALT_load_entity_model(unkStructPtr);
     temp->unk_04 = 0;
     temp->unk_08 = 0;
     temp->unk_0C = 0;
@@ -529,13 +560,19 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
 
-    exec_entity_model_commandlist(temp->unk_00);
+    exec_entity_model_commandlist(temp->entityModelIndex);
     set_variable(script, outVar, i);
 
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3624, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
+    UnkF5750* temp = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
+
+    free_entity_model_by_index(temp->entityModelIndex);
+    temp->entityModelIndex = -1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D3674);
 
@@ -557,7 +594,14 @@ INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3C58, ScriptInstance* script, 
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D3EB8);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3F74);
+ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 flags = *args++;
+
+    get_entity_model((*D_802DB7C0)[index]->entityModelIndex)->flags = flags;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D3FC8);
 
@@ -574,7 +618,13 @@ INCLUDE_ASM(void, "evt/player_api", func_802D420C, UnkF5750* arg0);
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D42AC);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D4364);
+void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    temp->unk_04 = arg1;
+    temp->unk_08 = arg2;
+    temp->unk_0C = arg3;
+}
 
 void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     UnkF5750* temp = (*D_802DB7C0)[index];
@@ -592,10 +642,30 @@ void func_802D43D0(s32 index, s32 arg1, s32 arg2, s32 arg3) {
     temp->unk_18 = arg3;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D43F4);
+void func_802D43F4(s32 index) {
+    UnkF5750* temp = (*D_802DB7C0)[index];
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D4434);
+    free_entity_model_by_index(temp->entityModelIndex);
+    temp->entityModelIndex = -1;
+}
+
+void func_802D4434(UnkF5750* arg0) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        if ((*D_802DB7C0)[i] == arg0) {
+            func_802D43F4(i);
+            return;
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D4488);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D4560);
+void func_802D4560(void) {
+    if (!gGameStatusPtr->isBattle) {
+        D_802DB7C0 = &D_802DB6C0;
+    } else {
+        D_802DB7C0 = &D_802DB5C0;
+    }
+}

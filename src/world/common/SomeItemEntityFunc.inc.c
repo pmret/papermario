@@ -2,7 +2,7 @@
 #include "map.h"
 
 ApiStatus N(SomeItemEntityFunc)(ScriptInstance* script, s32 isInitialCall) {
-    ItemEntity* itemEntity = get_item_entity(script->varTable[0]);
+    ItemEntity* itemEntity = get_item_entity(script->varTable[0].s);
 
     if (isInitialCall) {
         script->functionTemp[2].f = itemEntity->position.y;

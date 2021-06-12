@@ -13,9 +13,9 @@ ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall) {
     temp = (var3 - var1) / (var2 - var0);
 
     if (playerStatus->position.z < ((temp * playerStatus->position.x) + (var1 - (temp * var0)))) {
-        script->varTable[0] = 0;
+        script->varTable[0].s = 0;
     } else {
-        script->varTable[0] = 1;
+        script->varTable[0].s = 1;
     }
 
     return ApiStatus_DONE2;

@@ -124,7 +124,7 @@ ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
         u8 currentOption = D_8029FA64->currentOption;
 
         gSpeakingActorPrintCtx->currentOption = D_8029FA64->currentOption;
-        script->varTable[0] = currentOption;
+        script->varTable[0].s = currentOption;
 
         return ApiStatus_DONE1;
     }
