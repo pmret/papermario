@@ -5,15 +5,17 @@ typedef struct UnkF5750 {
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
     /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ s32 unk_18;
+    /* 0x10 */ f32 unk_10;
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 unk_24;
-    /* 0x28 */ char unk_28[0x14];
+    /* 0x28 */ char unk_28[0x10];
+    /* 0x38 */ f32 unk_38;
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
+    /* 0x44 */ f32 unk_44;
 } UnkF5750;
 
 typedef UnkF5750* UnkF5750List[0x40];
@@ -485,7 +487,7 @@ void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_802D2D30(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D2F34);
+INCLUDE_ASM(void, "evt/player_api", func_802D2F34, UnkF5750* arg0, f32 arg1, f32 arg2);
 
 void func_802D2FCC(void) {
     s32 i;
@@ -522,9 +524,9 @@ ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
     temp->unk_04 = 0.0f;
     temp->unk_08 = 0.0f;
     temp->unk_0C = 0.0f;
-    temp->unk_10 = 0;
-    temp->unk_14 = 0;
-    temp->unk_18 = 0;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
     temp->unk_1C = 1.0f;
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
@@ -552,12 +554,12 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     }
 
     temp->entityModelIndex = load_entity_model(unkStructPtr);
-    temp->unk_04 = 0;
-    temp->unk_08 = 0;
-    temp->unk_0C = 0;
-    temp->unk_10 = 0;
-    temp->unk_14 = 0;
-    temp->unk_18 = 0;
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
     temp->unk_1C = 1.0f;
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
@@ -587,12 +589,12 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     }
 
     temp->entityModelIndex = ALT_load_entity_model(unkStructPtr);
-    temp->unk_04 = 0;
-    temp->unk_08 = 0;
-    temp->unk_0C = 0;
-    temp->unk_10 = 0;
-    temp->unk_14 = 0;
-    temp->unk_18 = 0;
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
     temp->unk_1C = 1.0f;
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
@@ -620,13 +622,61 @@ ApiStatus func_802D3674(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D36E0, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 f1 = get_float_variable(script, *args++);
+    f32 f2 = get_float_variable(script, *args++);
+    f32 f3 = get_float_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D378C);
+    temp->unk_04 = f1;
+    temp->unk_08 = f2;
+    temp->unk_0C = f3;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3840, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
+    s32 outVar1 = *args++;
+    s32 outVar2 = *args++;
+    s32 outVar3 = *args++;
 
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D38EC, ScriptInstance* script, s32 isInitialCall);
+    set_variable(script, outVar1, temp->unk_04);
+    set_variable(script, outVar2, temp->unk_08);
+    set_variable(script, outVar3, temp->unk_0C);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 f1 = get_float_variable(script, *args++);
+    f32 f2 = get_float_variable(script, *args++);
+    f32 f3 = get_float_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    temp->unk_10 = f1;
+    temp->unk_14 = f2;
+    temp->unk_18 = f3;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    f32 f1 = get_float_variable(script, *args++);
+    f32 f2 = get_float_variable(script, *args++);
+    f32 f3 = get_float_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    temp->unk_1C = f1;
+    temp->unk_20 = f2;
+    temp->unk_24 = f3;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802D3998(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -648,7 +698,32 @@ INCLUDE_ASM(s32, "evt/player_api", func_802D3A60);
 
 INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3C58, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3EB8);
+ApiStatus func_802D3EB8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    UnkF5750* temp;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    if (script->functionTemp[0].s == 0) {
+        script->functionTemp[1].s = get_variable(script, *args++);
+        script->functionTemp[0].s = 1;
+    }
+
+    temp = (*D_802DB7C0)[script->functionTemp[1].s];
+    temp->unk_08 += temp->unk_44;
+    temp->unk_44 -= temp->unk_40;
+
+    func_802D2F34(temp, temp->unk_3C, temp->unk_38);
+
+    if (temp->unk_08 < 0.0f) {
+        temp->unk_08 = 0.0f;
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -688,9 +763,9 @@ UnkF5750* func_802D417C(s32 arg0, s32* entityModelData) {
     temp->unk_04 = 0.0f;
     temp->unk_08 = 0.0f;
     temp->unk_0C = 0.0f;
-    temp->unk_10 = 0;
-    temp->unk_14 = 0;
-    temp->unk_18 = 0;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
     temp->unk_1C = 1.0f;
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
@@ -718,9 +793,9 @@ s32 func_802D420C(s32* cmdList) {
     temp->unk_04 = 0.0f;
     temp->unk_08 = 0.0f;
     temp->unk_0C = 0.0f;
-    temp->unk_10 = 0;
-    temp->unk_14 = 0;
-    temp->unk_18 = 0;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
     temp->unk_1C = 1.0f;
     temp->unk_20 = 1.0f;
     temp->unk_24 = 1.0f;
@@ -748,7 +823,7 @@ void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     temp->unk_24 = arg3;
 }
 
-void func_802D43D0(s32 index, s32 arg1, s32 arg2, s32 arg3) {
+void func_802D43D0(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     UnkF5750* temp = (*D_802DB7C0)[index];
 
     temp->unk_10 = arg1;
