@@ -487,7 +487,14 @@ void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_802D2D30(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-INCLUDE_ASM(void, "evt/player_api", func_802D2F34, UnkF5750* arg0, f32 arg1, f32 arg2);
+void func_802D2F34(UnkF5750* arg0, f32 arg1, f32 arg2) {
+    f32 theta = (arg2 * TAU) / 360.0f;
+    f32 sin = sin_rad(theta);
+    f32 cos = cos_rad(theta);
+
+    arg0->unk_04 += arg1 * sin;
+    arg0->unk_0C += -arg1 * cos;
+}
 
 void func_802D2FCC(void) {
     s32 i;
