@@ -812,7 +812,36 @@ s32 func_802D420C(s32* cmdList) {
     return i;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D42AC);
+UnkF5750* func_802D42AC(s32* cmdList) {
+    s32 i;
+    UnkF5750* temp;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
+        if (temp->entityModelIndex < 0) {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
+        return 0;
+    }
+
+    temp->entityModelIndex = ALT_load_entity_model(cmdList);
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0.0f;
+    temp->unk_14 = 0.0f;
+    temp->unk_18 = 0.0f;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+
+    exec_entity_model_commandlist(temp->entityModelIndex);
+
+    return (*D_802DB7C0)[i];
+}
 
 void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
     UnkF5750* temp = (*D_802DB7C0)[index];
