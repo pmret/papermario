@@ -55,6 +55,10 @@ void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s3
 void set_hud_element_scale(s32 index, f32 scale);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
+void set_entity_model_flags(s32 idx, s32 newFlags);
+void clear_entity_model_flags(s32 idx, s32 newFlags);
+void exec_entity_model_commandlist(s32 idx);
+s32 load_entity_model(s32* cmdList);
 
 void create_shadow_callback(Shadow* entity);
 void func_802E10F4(Entity* entity);

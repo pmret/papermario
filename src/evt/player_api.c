@@ -512,7 +512,26 @@ ApiStatus func_802D3398(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D33D4);
+ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    u32* cmdList = (u32*)get_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    temp->entityModelIndex = load_entity_model(cmdList);
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0;
+    temp->unk_14 = 0;
+    temp->unk_18 = 0;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+    exec_entity_model_commandlist(temp->entityModelIndex);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -640,7 +659,21 @@ ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3FC8);
+ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 flags = *args++;
+    s32 cond = get_variable(script, *args++);
+    UnkF5750* temp = (*D_802DB7C0)[index];
+
+    if (cond) {
+        set_entity_model_flags(temp->entityModelIndex, flags);
+    } else {
+        clear_entity_model_flags(temp->entityModelIndex, flags);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D4050);
 
@@ -648,10 +681,54 @@ UnkF5750* func_802D4164(s32 index) {
     return (*D_802DB7C0)[index];
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D417C);
+UnkF5750* func_802D417C(s32 arg0, s32* entityModelData) {
+    UnkF5750* temp = (*D_802DB7C0)[arg0];
 
-void func_802D420C(UnkF5750* arg0);
-INCLUDE_ASM(void, "evt/player_api", func_802D420C, UnkF5750* arg0);
+    temp->entityModelIndex = load_entity_model(entityModelData);
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0;
+    temp->unk_14 = 0;
+    temp->unk_18 = 0;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+    exec_entity_model_commandlist(temp->entityModelIndex);
+
+    return (*D_802DB7C0)[arg0];
+}
+
+s32 func_802D420C(s32* cmdList) {
+    s32 i;
+    UnkF5750* temp;
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        temp = (*D_802DB7C0)[i];
+        if (temp->entityModelIndex < 0) {
+            break;
+        }
+    }
+
+    if (i >= ARRAY_COUNT(*D_802DB7C0)) {
+        return 0;
+    }
+
+    temp->entityModelIndex = load_entity_model(cmdList);
+    temp->unk_04 = 0.0f;
+    temp->unk_08 = 0.0f;
+    temp->unk_0C = 0.0f;
+    temp->unk_10 = 0;
+    temp->unk_14 = 0;
+    temp->unk_18 = 0;
+    temp->unk_1C = 1.0f;
+    temp->unk_20 = 1.0f;
+    temp->unk_24 = 1.0f;
+
+    exec_entity_model_commandlist(temp->entityModelIndex);
+
+    return i;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D42AC);
 
