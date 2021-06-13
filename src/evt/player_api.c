@@ -224,7 +224,131 @@ ApiStatus func_802D1380(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", player_jump);
+//INCLUDE_ASM(s32, "evt/player_api", player_jump);
+s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 xTemp;
+    f32 yTemp;
+    f32 zTemp;
+    f32 jumpVelocity;
+    s32 duration;
+    s32 animID;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+    }
+
+    if (script->functionTemp[0].s == 0) {
+        f32 dist;
+
+        xTemp = get_variable(script, *args++);
+        yTemp = get_variable(script, *args++);
+        zTemp = get_variable(script, *args++);
+        duration = get_variable(script, *args++);
+
+        playerNpc->pos.x = playerStatus->position.x;
+        playerNpc->pos.y = playerStatus->position.y;
+        playerNpc->pos.z = playerStatus->position.z;
+        playerNpc->moveToPos.x = xTemp;
+        playerNpc->moveToPos.y = yTemp;
+        playerNpc->moveToPos.z = zTemp;
+        playerNpc->duration = duration;
+        playerNpc->yaw = playerStatus->targetYaw;
+
+        dist = dist2D(playerNpc->pos.x, playerNpc->pos.z, playerNpc->moveToPos.x, playerNpc->moveToPos.z);
+        if (dist > 1.0) {
+            playerNpc->yaw = atan2(playerNpc->pos.x, playerNpc->pos.z, playerNpc->moveToPos.x, playerNpc->moveToPos.z);
+        }
+
+        yTemp = playerNpc->moveToPos.y - playerNpc->pos.y;
+
+        if (playerNpc->duration == 0) {
+            playerNpc->duration = dist / playerNpc->moveSpeed;
+        } else {
+            playerNpc->moveSpeed = dist / playerNpc->duration;
+        }
+
+        playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) * 0.5f) + (yTemp / playerNpc->duration);
+        playerStatus->flags |= 8;
+        playerStatus->animFlags |= 0x10000000;
+
+        if (mode == 0) {
+            if (!(playerStatus->animFlags & 0x4000)) {
+                if (!(playerStatus->animFlags & 1)) {
+                    animID = 0x10007;
+                } else {
+                    animID = 0x60009;
+                }
+            } else {
+                animID = 0x90005;
+            }
+            func_800DFEFC(animID);
+            sfx_play_sound_at_player(0x2081, 0);
+        }
+        script->functionTemp[0].s = 1;
+    }
+
+    npc_move_heading(playerNpc, playerNpc->moveSpeed, playerNpc->yaw);
+    playerNpc->pos.y += playerNpc->jumpVelocity;
+    jumpVelocity = playerNpc->jumpVelocity; // TODO: temp needed and used specifically only once below for this to match
+    playerNpc->jumpVelocity -= playerNpc->jumpScale;
+
+    if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
+        if (!(playerStatus->animFlags & 0x4000)) {
+            if (!(playerStatus->animFlags & 1)) {
+                animID = 0x10008;
+            } else {
+                animID = 0x6000A;
+            }
+        } else {
+            animID = 0x90005;
+        }
+        func_800DFEFC(animID);
+    }
+
+    playerStatus->position.x = playerNpc->pos.x;
+    playerStatus->position.y = playerNpc->pos.y;
+    playerStatus->position.z = playerNpc->pos.z;
+
+    if (mode == 0) {
+        playerStatus->targetYaw = playerNpc->yaw;
+    }
+
+    playerNpc->duration--;
+    if (playerNpc->duration == 0) {
+        playerStatus->flags &= -9;
+        playerStatus->animFlags &= ~0x10000000;
+
+        if (mode == 0) {
+            if (!(playerStatus->animFlags & 0x4000)) {
+                if (!(playerStatus->animFlags & 1)) {
+                    animID = 0x10009;
+                } else {
+                    animID = 0x6000B;
+                }
+            } else {
+                animID = 0x10003;
+            }
+            func_800DFEFC(animID);
+            func_8003D660(playerNpc, 2);
+        }
+
+        if (mode == 0 || mode == 2) {
+            s32 colliderID;
+
+            yTemp = func_800E3514(playerNpc->jumpVelocity, &colliderID);
+
+            if (colliderID >= 0) {
+                playerStatus->position.y = yTemp;
+                func_800E315C(colliderID);
+                func_800EFD08();
+            }
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
 
 ApiStatus PlayerJump(ScriptInstance* script, s32 isInitialCall) {
     return player_jump(script, isInitialCall, 0);

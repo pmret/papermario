@@ -1,9 +1,6 @@
 #include "common.h"
 #include "world/partners.h"
 
-f32 func_800E34D8(void);
-f32 func_800E3514(f32, s32* colliderID);
-
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
