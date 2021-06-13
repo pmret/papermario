@@ -1,6 +1,6 @@
 #include "common.h"
 
-typedef struct UnkF5750 {
+typedef struct VirtualEntity {
     /* 0x00 */ s32 entityModelIndex;
     /* 0x04 */ f32 unk_04;
     /* 0x08 */ f32 unk_08;
@@ -16,14 +16,15 @@ typedef struct UnkF5750 {
     /* 0x3C */ f32 unk_3C;
     /* 0x40 */ f32 unk_40;
     /* 0x44 */ f32 unk_44;
-} UnkF5750;
+    /* 0x48 */ char unk_48[0x4];
+} VirtualEntity;
 
-typedef UnkF5750* UnkF5750List[0x40];
+typedef VirtualEntity* VirtualEntityList[0x40];
 
 extern s16 D_802DB5B0;
-extern s32 D_802DB5C0;
-extern s32 D_802DB6C0;
-extern UnkF5750List* D_802DB7C0;
+extern VirtualEntityList D_802DB5C0;
+extern VirtualEntityList D_802DB6C0;
+extern VirtualEntityList* D_802DB7C0;
 
 Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
 
@@ -173,9 +174,55 @@ ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
     return script->functionTemp[0].s < 0;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D1270);
+ApiStatus func_802D1270(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = &gPlayerStatus;
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D1380);
+    if (isInitialCall) {
+        f32 targetX = get_variable(script, *args++);
+        f32 targetZ = get_variable(script, *args++);
+        f32 var3 = get_float_variable(script, *args++);
+        f32 dist;
+        f32 moveSpeed;
+
+        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+        dist = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+        script->functionTemp[0].s = dist / var3;
+        moveSpeed = dist / script->functionTemp[0].s;
+
+        move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
+    }
+
+    // functionTemp 0 is the time left
+    script->functionTemp[0].s--;
+    return (script->functionTemp[0].s < 0) * ApiStatus_DONE2;
+}
+
+ApiStatus func_802D1380(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (isInitialCall) {
+        f32 targetX = get_variable(script, *args++);
+        f32 targetZ = get_variable(script, *args++);
+
+        playerNpc->duration = get_variable(script, *args++);
+        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+
+        if (playerNpc->duration != 0) {
+            playerNpc->moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / (f32) playerNpc->duration;
+        } else {
+            playerNpc->duration = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / playerNpc->moveSpeed;
+            if (playerNpc->duration == 0) {
+                playerNpc->duration = 1;
+            }
+        }
+
+        move_player(playerNpc->duration, playerStatus->targetYaw, playerNpc->moveSpeed);
+    }
+
+    return ApiStatus_DONE1;
+}
 
 INCLUDE_ASM(s32, "evt/player_api", player_jump);
 
@@ -477,8 +524,22 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-s32 func_802D2D30(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
-INCLUDE_ASM(s32, "evt/player_api", func_802D2D30, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
+void func_802D2D30(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
+    gDPPipeSync(gMasterGfxPos++);
+
+    if (a == 0xFF) {
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    }
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, a);
+    gDPFillRectangle(gMasterGfxPos++, left, top, right, bottom);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+}
 
 void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     u16 temp1 = arg4 + arg6;
@@ -487,20 +548,20 @@ void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     func_802D2D30(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-void func_802D2F34(UnkF5750* arg0, f32 arg1, f32 arg2) {
+void func_802D2F34(VirtualEntity* arg0, f32 arg1, f32 arg2) {
     f32 theta = (arg2 * TAU) / 360.0f;
-    f32 sin = sin_rad(theta);
-    f32 cos = cos_rad(theta);
+    f32 sinTheta = sin_rad(theta);
+    f32 cosTheta = cos_rad(theta);
 
-    arg0->unk_04 += arg1 * sin;
-    arg0->unk_0C += -arg1 * cos;
+    arg0->unk_04 += arg1 * sinTheta;
+    arg0->unk_0C += -arg1 * cosTheta;
 }
 
 void func_802D2FCC(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
-        UnkF5750* temp = (*D_802DB7C0)[i];
+        VirtualEntity* temp = (*D_802DB7C0)[i];
 
         if (temp != NULL && temp->entityModelIndex >= 0) {
             exec_entity_model_commandlist(temp->entityModelIndex);
@@ -508,7 +569,7 @@ void func_802D2FCC(void) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D3028);
+INCLUDE_ASM(void, "evt/player_api", func_802D3028, void);
 
 INCLUDE_ASM(s32, "evt/player_api", func_802D31E0);
 
@@ -525,7 +586,7 @@ ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     u32* cmdList = (u32*)get_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->entityModelIndex = load_entity_model(cmdList);
     temp->unk_04 = 0.0f;
@@ -545,8 +606,8 @@ ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32* unkStructPtr = get_variable(script, *args++);
-    UnkF5750* temp;
+    s32* unkStructPtr = (s32*)get_variable(script, *args++);
+    VirtualEntity* temp;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
@@ -580,8 +641,8 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32* unkStructPtr = get_variable(script, *args++);
-    UnkF5750* temp;
+    s32* unkStructPtr = (s32*)get_variable(script, *args++);
+    VirtualEntity* temp;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
@@ -613,7 +674,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
-    UnkF5750* temp = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
+    VirtualEntity* temp = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
 
     free_entity_model_by_index(temp->entityModelIndex);
     temp->entityModelIndex = -1;
@@ -635,7 +696,7 @@ ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
     f32 f1 = get_float_variable(script, *args++);
     f32 f2 = get_float_variable(script, *args++);
     f32 f3 = get_float_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_04 = f1;
     temp->unk_08 = f2;
@@ -646,7 +707,7 @@ ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
     s32 outVar1 = *args++;
     s32 outVar2 = *args++;
     s32 outVar3 = *args++;
@@ -663,7 +724,7 @@ ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall) {
     f32 f1 = get_float_variable(script, *args++);
     f32 f2 = get_float_variable(script, *args++);
     f32 f3 = get_float_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_10 = f1;
     temp->unk_14 = f2;
@@ -677,7 +738,7 @@ ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall) {
     f32 f1 = get_float_variable(script, *args++);
     f32 f2 = get_float_variable(script, *args++);
     f32 f3 = get_float_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_1C = f1;
     temp->unk_20 = f2;
@@ -707,7 +768,7 @@ INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3C58, ScriptInstance* script, 
 
 ApiStatus func_802D3EB8(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    UnkF5750* temp;
+    VirtualEntity* temp;
 
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
@@ -746,7 +807,7 @@ ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
     s32 cond = get_variable(script, *args++);
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     if (cond) {
         set_entity_model_flags(temp->entityModelIndex, flags);
@@ -757,14 +818,49 @@ ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D4050);
+ApiStatus func_802D4050(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    EntityModel* entityModel = get_entity_model((*D_802DB7C0)[index]->entityModelIndex);
 
-UnkF5750* func_802D4164(s32 index) {
+    switch (var2) {
+        case -1:
+            entityModel->renderMode = 1;
+            break;
+        case 0:
+            entityModel->renderMode = 1;
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            break;
+        case 2:
+            entityModel->renderMode = 0xD;
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            break;
+        case 3:
+            entityModel->renderMode = 0x16;
+            get_variable(script, *args++);
+            break;
+        case 4:
+            entityModel->renderMode = 0x16;
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            get_variable(script, *args++);
+            break;
+    }
+    return ApiStatus_DONE2;
+}
+
+VirtualEntity* func_802D4164(s32 index) {
     return (*D_802DB7C0)[index];
 }
 
-UnkF5750* func_802D417C(s32 arg0, s32* entityModelData) {
-    UnkF5750* temp = (*D_802DB7C0)[arg0];
+VirtualEntity* func_802D417C(s32 arg0, s32* entityModelData) {
+    VirtualEntity* temp = (*D_802DB7C0)[arg0];
 
     temp->entityModelIndex = load_entity_model(entityModelData);
     temp->unk_04 = 0.0f;
@@ -783,7 +879,7 @@ UnkF5750* func_802D417C(s32 arg0, s32* entityModelData) {
 
 s32 func_802D420C(s32* cmdList) {
     s32 i;
-    UnkF5750* temp;
+    VirtualEntity* temp;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         temp = (*D_802DB7C0)[i];
@@ -812,9 +908,9 @@ s32 func_802D420C(s32* cmdList) {
     return i;
 }
 
-UnkF5750* func_802D42AC(s32* cmdList) {
+VirtualEntity* func_802D42AC(s32* cmdList) {
     s32 i;
-    UnkF5750* temp;
+    VirtualEntity* temp;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         temp = (*D_802DB7C0)[i];
@@ -844,7 +940,7 @@ UnkF5750* func_802D42AC(s32* cmdList) {
 }
 
 void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_04 = arg1;
     temp->unk_08 = arg2;
@@ -852,7 +948,7 @@ void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_1C = arg1;
     temp->unk_20 = arg2;
@@ -860,7 +956,7 @@ void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
 }
 
 void func_802D43D0(s32 index, f32 arg1, f32 arg2, f32 arg3) {
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     temp->unk_10 = arg1;
     temp->unk_14 = arg2;
@@ -868,13 +964,13 @@ void func_802D43D0(s32 index, f32 arg1, f32 arg2, f32 arg3) {
 }
 
 void func_802D43F4(s32 index) {
-    UnkF5750* temp = (*D_802DB7C0)[index];
+    VirtualEntity* temp = (*D_802DB7C0)[index];
 
     free_entity_model_by_index(temp->entityModelIndex);
     temp->entityModelIndex = -1;
 }
 
-void func_802D4434(UnkF5750* arg0) {
+void func_802D4434(VirtualEntity* arg0) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
@@ -885,7 +981,24 @@ void func_802D4434(UnkF5750* arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D4488);
+void func_802D4488(void) {
+    s32 i;
+
+    if (!gGameStatusPtr->isBattle) {
+        D_802DB7C0 = &D_802DB6C0;
+    } else {
+        D_802DB7C0 = &D_802DB5C0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
+        (*D_802DB7C0)[i] = heap_malloc(sizeof(VirtualEntity));
+        ASSERT((*D_802DB7C0)[i] != NULL);
+        (*D_802DB7C0)[i]->entityModelIndex = -1;
+    }
+
+    create_dynamic_entity_world(func_802D2FCC, func_802D3028);
+    create_dynamic_entity_backUI(NULL, func_802D31E0);
+}
 
 void func_802D4560(void) {
     if (!gGameStatusPtr->isBattle) {
