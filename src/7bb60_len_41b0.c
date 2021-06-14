@@ -19,16 +19,16 @@ s32 func_800E26C4(void) {
         actionState == ACTION_STATE_USE_TWEESTER ||
         actionState == ACTION_STATE_SPIN
     ) {
-        return 1;
+        return TRUE;
     }
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
             if (temp_8010EBB0->unk_00 != 0) {
-                return 1;
+                return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= 4;
-                return 0;
+                return FALSE;
             }
         } else {
             if (temp_8010EBB0->unk_03 == 6 || temp_8010EBB0->unk_03 == 7) {
@@ -36,11 +36,11 @@ s32 func_800E26C4(void) {
             }
             if (temp_8010EBB0->unk_03 == 4) {
                 gPlayerStatusPtr->animFlags |= 4;
-                return 0;
+                return FALSE;
             }
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void set_action_state(s32 actionState);

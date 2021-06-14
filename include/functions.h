@@ -62,6 +62,7 @@ s32 load_entity_model(s32* cmdList);
 
 f32 func_800E34D8(void);
 f32 func_800E3514(f32, s32* colliderID);
+s32 func_800E26C4(void);
 
 void create_shadow_callback(Shadow* entity);
 void func_802E10F4(Entity* entity);
