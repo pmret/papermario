@@ -60,7 +60,7 @@ f32 length2D(f32 x, f32 y) {
 
 HeapNode* _heap_create(s32* addr, u32 size) {
     if (size < 32) {
-        return (HeapNode*) -1;
+        return (HeapNode*)-1;
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
@@ -123,7 +123,7 @@ typedef struct {
 u32 func_8006DDC0(s64 arg0, s64 arg1);
 u64 func_8006D800(s64 arg0, s64 arg1);
 
-char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
+char* int_to_string(s32 arg01, char* arg1, s32 arg2) {
     Unk_struct_43F0 unk_struct;
     s32 phi_s4 = 0x26;
     s32 phi_fp = 0;
@@ -136,7 +136,7 @@ char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
     unk_struct.unk_39 = 0;
 
     while (TRUE) {
-        u8 (*new_var)[];
+        u8(*new_var)[];
 
         unk_struct.unk_00[phi_s4] = (*(new_var = &D_800743E0))[func_8006DDC0(arg0, arg2)];
         arg0 = func_8006D800(arg0, arg2);
@@ -156,7 +156,7 @@ char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
     return arg1;
 }
 #else
-INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char *arg1, s32 arg2);
+INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char* arg1, s32 arg2);
 #endif
 
 // should maybe be called bzero
@@ -483,9 +483,11 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
         case EASING_QUARTIC_IN:
             return start + (QUART(elapsed) * (end - start) / QUART(duration));
         case EASING_COS_SLOW_OVERSHOOT:
-            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) *
+                           (duration - elapsed)) / SQ((f32)duration));
         case EASING_COS_FAST_OVERSHOOT:
-            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) *
+                           (duration - elapsed)) / SQ((f32)duration));
         case EASING_QUADRATIC_OUT:
             val1s = duration - elapsed;
             return (start + (end - start)) - ((SQ(val1s) * (end - start))) / SQ(duration);
@@ -496,7 +498,8 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
             val1s = duration - elapsed;
             return (start + (end - start)) - ((QUART(val1s) * (end - start))) / QUART(duration);
         case EASING_COS_BOUNCE:
-            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) * (duration - elapsed) / SQ((f32)duration);
+            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) *
+                      (duration - elapsed) / SQ((f32)duration);
             if (temp_f4 < 0.0f) {
                 temp_f4 = -temp_f4;
             }

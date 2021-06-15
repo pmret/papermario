@@ -176,7 +176,7 @@ NpcGroupList N(npcGroupList_80240974) = {
     {},
 };
 
-ApiStatus N(func_80240000_BF6060)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BF6060)(ScriptInstance* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(0);
 
     if (entity == NULL) {

@@ -27,7 +27,7 @@ void N(UnkNpcAIFunc12)(ScriptInstance* script, NpcAISettings* aiSettings, s32 ar
 
     if ((npc->duration <= 0) || (--npc->duration <= 0) || (temp != 0)) {
         enemy->unk_07 = 0;
-        npc->currentAnim = enemy->animList[10];
+        npc->currentAnim.w = enemy->animList[10];
         npc->duration = 0;
         script->functionTemp[0].s = 15;
     }

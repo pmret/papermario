@@ -27,8 +27,7 @@ Script N(80241880) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -423,8 +422,8 @@ NpcSettings N(npcSettings_80243600) = {
 };
 
 f32 N(D_8024362C_CB862C)[] = {
-     4.5f, 3.5f, 2.6f, 2.0f,
-     1.5f, 20.0f,
+    4.5f, 3.5f, 2.6f, 2.0f,
+    1.5f, 20.0f,
 };
 
 NpcAISettings N(npcAISettings_80243644) = {

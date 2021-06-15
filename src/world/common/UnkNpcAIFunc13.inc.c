@@ -8,7 +8,7 @@ void N(UnkNpcAIFunc13)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     f32 angleDiff;
 
     npc->duration = (aiSettings->unk_20 / 2) + rand_int(aiSettings->unk_20 / 2 + 1);
-    npc->currentAnim = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[3];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);

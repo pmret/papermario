@@ -11,7 +11,7 @@ void N(UnkNpcAIFunc19)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
 
     if (npc->turnAroundYawAdjustment == 0 && npc->duration <= 0) {
         npc->duration = 8;
-        npc->currentAnim = enemy->animList[11];
+        npc->currentAnim.w = enemy->animList[11];
         script->functionTemp[0].s = 51;
     }
 }

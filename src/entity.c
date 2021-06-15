@@ -147,7 +147,7 @@ void exec_entity_model_commandlist(s32 idx) {
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
             if (!(entityModel->flags & 0x20)) {
-                if(!(entityModel->flags & 0x20000)) {
+                if (!(entityModel->flags & 0x20000)) {
                     entityModel->flags &= ~0x100;
                     entityModel->nextFrameTime -= entityModel->timeScale;
                     if (entityModel->nextFrameTime <= 0.0f) {

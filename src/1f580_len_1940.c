@@ -87,7 +87,7 @@ ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     ScriptInstance* newScript;
 
     kill_script(script);
-    npc->currentAnim = owner->animList[6];
+    npc->currentAnim.w = owner->animList[6];
     newScript = start_script(&SCRIPT_NpcDefeat, 10, 0);
     owner->defeatScript = newScript;
     owner->defeatScriptID = newScript->id;
@@ -528,7 +528,7 @@ ApiStatus func_80045900(ScriptInstance* script, s32 isInitialCall) {
         s32 unk;
 
         if (!(enemy->unk_B0 & 0x10)) {
-            npc->currentAnim = *enemy->animList;
+            npc->currentAnim.w = *enemy->animList;
         }
 
         if (!(enemy->unk_B0 & 0x8)) {

@@ -99,7 +99,7 @@ void func_802E421C(Entity* entity) {
     }
 
     entityIndex = create_entity(entityData, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y,
-                            0x80000000);
+                                0x80000000);
     entityTemp = get_entity_by_index(entityIndex);
     entityTemp->flags |= 1;
 

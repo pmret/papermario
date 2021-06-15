@@ -256,8 +256,8 @@ ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetModelFlags(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
+ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     s32 modelIndex;
     s32 a1;
     s32 enable;
@@ -412,7 +412,7 @@ void set_zone_enabled(s32 zoneID, s32 enabled) {
     }
 }
 
-ApiStatus SetZoneEnabled(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus SetZoneEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 idx = get_variable(script, *args++);
     s32 enabled = get_variable(script, *args++);

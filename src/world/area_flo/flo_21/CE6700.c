@@ -135,7 +135,7 @@ ApiStatus N(func_8024004C_CE674C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802401AC_CE68AC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802401AC_CE68AC)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
@@ -213,7 +213,7 @@ ApiStatus N(func_802401AC_CE68AC)(ScriptInstance *script, s32 isInitialCall) {
             ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
             ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
             if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z,
-                       ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
+                         ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
                 ptr->unk_4E = 3;
             }
             break;
@@ -305,8 +305,7 @@ Script N(80240E3C) = SCRIPT({
         }
         == STORY_CH6_DEFEATED_HUFF_N_PUFF {
             SI_VAR(0) = 1;
-        }
-        else {
+        } else {
             return;
         }
     }
@@ -439,7 +438,7 @@ Script N(802415E0) = SCRIPT({
 Script N(80241600) = SCRIPT({
     spawn {
         SI_VAR(15) = 0;
-    0:
+0:
         N(UnkFloatFunc)(SI_VAR(15), SI_VAR(0), 0.96875, 1.03125, 15, 0, 0);
         N(UnkFloatFunc)(SI_VAR(15), SI_VAR(1), 1.03125, 0.96875, 15, 0, 0);
         ScaleModel(88, SI_VAR(1), SI_VAR(0), 1);
@@ -496,8 +495,8 @@ NpcSettings N(npcSettings_80241870) = {
 };
 
 Vec3f N(vectorList_8024189C)[] = {
-     { 600.0, 104.0, 0.0 }, { 575.0, 204.0, 0.0 },
-     { 550.0, 104.0, 0.0 },
+    { 600.0, 104.0, 0.0 }, { 575.0, 204.0, 0.0 },
+    { 550.0, 104.0, 0.0 },
 };
 
 Script N(802418C0) = SCRIPT({
@@ -532,7 +531,7 @@ Script N(80241920) = SCRIPT({
     spawn {
         SetPlayerAnimation(ANIM_80017);
         LoadPath(30, N(vectorList_8024189C), 3, 0);
-    0:
+0:
         GetNextPathPos();
         SetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
         sleep 1;
@@ -656,8 +655,7 @@ Script N(80242290) = SCRIPT({
         == 1 {
             SI_VAR(3) = 5;
             SI_VAR(2) = 1;
-        }
-        else {
+        } else {
             return;
         }
     }

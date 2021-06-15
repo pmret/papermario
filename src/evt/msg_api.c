@@ -20,7 +20,7 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
 
-ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowMessageAtScreenPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -46,7 +46,7 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus ShowMessageAtWorldPos(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowMessageAtWorldPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PrintContext** currentPrintContext;
     s32* currentCameraID = &gCurrentCameraID;
@@ -112,7 +112,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus ShowChoice(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PrintContext** temp802DB268;
 

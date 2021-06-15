@@ -53,14 +53,16 @@ Vtx spr_defaultQuad[] = {
 };
 
 Vp D_802DF3D0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 511, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 511, 0 },
+    }
+};
 
 Vp D_802DF3E0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 512, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 512, 0 },
+    }
+};
 
 Gfx D_802DF3F0[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
@@ -232,7 +234,8 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     flags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;
-    func_802DED60((&spr_playerSpriteSets[playerSpriteSet])->cacheSize, (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
+    func_802DED60((&spr_playerSpriteSets[playerSpriteSet])->cacheSize,
+                  (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
 
     for (i = 1; i < 0xE; i++) {
         if ((flags >> i) & 1) {
@@ -277,7 +280,7 @@ s32 func_802DDA84(void) {
 
 INCLUDE_ASM(void, "sprite", func_802DDA8C, s32 arg0, s32 arg1, f32 arg2);
 
-INCLUDE_ASM(s32, "sprite", render_sprite);
+INCLUDE_ASM(void, "sprite", render_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 INCLUDE_ASM(s32, "sprite", func_802DDEC4);
 
@@ -293,7 +296,7 @@ INCLUDE_ASM(s32, "sprite", func_802DE0EC);
 
 INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 
-INCLUDE_ASM(s32, "sprite", func_802DE3D8);
+INCLUDE_ASM(void, "sprite", func_802DE3D8, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 
 INCLUDE_ASM(s32, "sprite", func_802DE5C8);
 
@@ -309,6 +312,6 @@ INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
 INCLUDE_ASM(s32, "sprite", func_802DE9D8);
 
-INCLUDE_ASM(s32, "sprite", func_802DEA40);
+INCLUDE_ASM(s32*, "sprite", func_802DEA40, u16 arg0);
 
 INCLUDE_ASM(s32, "sprite", func_802DEA6C);

@@ -1,5 +1,6 @@
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
+import struct
 from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
 from util.color import unpack_color
@@ -58,15 +59,10 @@ class Sprite:
         l = []
         pos = 0
 
-        while True:
-            offset = int.from_bytes(data[pos:pos+4], byteorder="big", signed=True)
-
-            if offset == -1:
+        for offset in struct.iter_unpack(">i", data):
+            if offset[0] == -1:
                 break
-
-            l.append(offset)
-
-            pos += 4
+            l.append(offset[0])
 
         return l
 

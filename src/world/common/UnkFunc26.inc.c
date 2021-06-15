@@ -4,8 +4,8 @@
 void func_8011BEB4(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
 void func_8011BF98(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7);
 
-ApiStatus N(UnkFunc26)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
+ApiStatus N(UnkFunc26)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);

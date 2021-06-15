@@ -95,8 +95,10 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
         set_goal_pos_to_part(walkMovement, 0x100, 0);
     }
 
-    show_damage_popup(walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z, battleStatus->lastAttackDamage, 1);
-    func_802666E4(partner, walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z, battleStatus->lastAttackDamage);
+    show_damage_popup(walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z,
+                      battleStatus->lastAttackDamage, 1);
+    func_802666E4(partner, walkMovement->goalPos.x, walkMovement->goalPos.y, walkMovement->goalPos.z,
+                  battleStatus->lastAttackDamage);
 
     if (battleStatus->lastAttackDamage > 0) {
         func_80267018(partner, 1);

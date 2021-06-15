@@ -5,7 +5,7 @@ void N(NpcJumpFunc2)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTer
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim = enemy->animList[4];
+    npc->currentAnim.w = enemy->animList[4];
     npc->jumpVelocity = 10.0f;
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
