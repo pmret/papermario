@@ -1,6 +1,5 @@
 #include "mystery.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A25C0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

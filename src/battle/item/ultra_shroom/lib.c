@@ -1,6 +1,5 @@
 #include "ultra_shroom.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A1AC0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

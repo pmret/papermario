@@ -368,4 +368,6 @@ extern s32 D_803DA800;
 // Dead code
 extern PlayerStatus* dead_gPlayerStatusPtr;
 
+extern s32 D_80108A64;
+
 #endif

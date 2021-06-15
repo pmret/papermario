@@ -1,6 +1,5 @@
 #include "please_come_back.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A18E0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

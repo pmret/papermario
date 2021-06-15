@@ -1,6 +1,5 @@
 #include "hustle_drink.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A1E70;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

@@ -1,6 +1,5 @@
 #include "strange_cake.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A2DD0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

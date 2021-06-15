@@ -822,6 +822,17 @@ typedef struct AnimatedMesh {
 
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
+typedef struct EffectInstanceData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ char unk_28[0x4];
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ char unk_34[0x4C];
+} EffectInstanceData; // size = 0x80
+
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
     /* 0x010 */ s8* printbuf;
@@ -917,7 +928,7 @@ typedef struct Effect {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ s32 unk_0C;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
     /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
@@ -1941,17 +1952,6 @@ typedef struct {
     /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
-
-typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f rotation;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ char unk_28[0x4];
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x4C];
-} EffectInstanceData; // size = 0x80
 
 typedef struct Temp8010F250 {
     /* 0x00 */ s8 unk_00;

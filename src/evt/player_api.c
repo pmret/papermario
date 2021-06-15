@@ -16,12 +16,12 @@ typedef struct VirtualEntity {
 
 typedef VirtualEntity* VirtualEntityList[0x40];
 
+Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
+
 extern s16 D_802DB5B0;
 extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
-
-Npc* playerNpc = (Npc*) 0x802DB270; // XXX: raw ptr
 
 ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -407,7 +407,7 @@ ApiStatus PlayerFaceNpc(ScriptInstance* script, s32 isInitialCall) {
         if (npcID == NPC_SELF) {
             npc = get_npc_safe(script->owner2.npcID);
         } else if (npcID < -270000000) {
-            npc = npcID;
+            npc = (Npc*)npcID;
         } else {
             npc = get_npc_safe(npcID);
             if (npc == NULL) {
