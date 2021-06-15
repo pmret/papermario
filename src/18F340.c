@@ -460,7 +460,44 @@ ApiStatus func_80261DD4(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "18F340", func_80261DF4);
 
-INCLUDE_ASM(s32, "18F340", func_80261FB4);
+ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
+    ItemEntity* item = get_item_entity(script->varTable[10].s);
+    Actor* player = gBattleStatus.playerActor;
+    s32 ft1;
+    f32 deltaX;
+    f32 deltaY;
+    f32 deltaZ;
+
+    if (isInitialCall) {
+        script->functionTemp[0].s = 0;
+        script->functionTemp[1].s = 10;
+    }
+
+    switch (script->functionTemp[0].s) {
+        case 0:
+            ft1 = script->functionTemp[1].s;
+            deltaX = player->currentPos.x - item->position.x;
+            deltaY = player->currentPos.y + 12.0f - item->position.y;
+            deltaZ = player->currentPos.z - 5.0f - item->position.z;
+
+            item->position.x += deltaX / ft1;
+            item->position.y += deltaY / ft1;
+            item->position.z += deltaZ / ft1;
+
+            item->position.y += dist2D(item->position.x, item->position.y, player->currentPos.x,
+                                       player->currentPos.y + 12.0f) / 5.0f;
+
+            if (script->functionTemp[1].s == 1) {
+                script->functionTemp[0].s = script->functionTemp[1].s;
+            }
+
+            script->functionTemp[1].s--;
+            break;
+        case 1:
+            return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_802620F8(ScriptInstance* script, s32 isInitialCall) {
     // TODO get type correct
