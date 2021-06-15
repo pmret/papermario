@@ -134,7 +134,7 @@ ApiStatus N(func_802A15A0_733670)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     temp = 0;
-    if((script->varTable[11].s < 0) || (script->varTable[11].s <= 0 && script->varTable[12].s < 0)) {
+    if ((script->varTable[11].s < 0) || (script->varTable[11].s <= 0 && script->varTable[12].s < 0)) {
         temp = 1;
     }
 

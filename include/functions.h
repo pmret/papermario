@@ -126,7 +126,7 @@ void func_8006FEF0(s32, f32, f32, f32, f32);
 void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
 void func_80070F70(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
 void func_80071090(s32, f32, f32, f32, s32);
-Effect* func_80071750(s32, f32, f32, f32, f32, s32);
+EffectInstance* func_80071750(s32, f32, f32, f32, f32, s32);
 Effect* func_800720B0(s32, f32, f32, f32, f32, s32);
 void func_80072950(s32, f32, f32, f32, f32, s32 time);
 Effect* func_800715D0(s32, f32, f32, f32);
@@ -182,7 +182,7 @@ void intro_logos_set_fade_alpha(s16 alpha);
 
 void set_game_mode(s16 idx);
 
-void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
+void fx_walk_normal(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 
 f32 func_800E0088(f32, f32);
@@ -198,8 +198,11 @@ PlayerData* get_player_data(void);
 s32 pause_interp_vertical_scroll(s32 deltaBefore);
 void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
+s32 func_800DC778(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 func_800DCB7C(s32, f32*, f32*, f32*, f32*);
+s32 func_800DDAE4(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 func_800DDC44(s32, f32*, f32*, f32*, f32, f32, f32, f32);
+s32 func_800DDD94(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 Npc* get_npc_by_index(s32 listIndex);
 
@@ -320,7 +323,7 @@ void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
-void fx_walk_large(s32, f32, f32, f32, s32);
+void fx_walk_large(s32, f32, f32, f32, f32);
 
 void func_80138D88(s32, s32, s32, s32, f32);
 s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
@@ -366,7 +369,16 @@ void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
-void base_UnkNpcAIFunc1(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory);
+void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
+s32* func_802DEA40(u16 arg0);
+void render_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_802DE3D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
+void guRotateAnglesF(float mf[4][4], f32 x, f32 y, f32 z);
+s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
+s32 func_800DC778(s32, f32*, f32*, f32*, f32*, f32, f32);
+void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
+void func_8006FB90(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void func_8006FBF0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 
 #endif

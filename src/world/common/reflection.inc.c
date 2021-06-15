@@ -111,7 +111,7 @@ void N(reflection_setup_wall)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->appendGfx = (void (*)(void *)) N(reflection_render_wall);
+        renderTaskPtr->appendGfx = (void (*)(void*)) N(reflection_render_wall);
         renderTaskPtr->distance = -screenZ;
         queue_render_task(renderTaskPtr);
     }
@@ -189,12 +189,13 @@ void N(reflection_setup_floor)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->distance = -screenZ;
-        renderTaskPtr->appendGfx = (void (*)(void *)) (!(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(reflection_render_floor_fancy));
+        renderTaskPtr->appendGfx = (void (*)(void*))(!(playerStatus->flags & 0x20000) ? N(reflection_render_floor) : N(
+                                       reflection_render_floor_fancy));
         queue_render_task(renderTaskPtr);
     }
 }
 
-void N(reflection_render_floor)(PlayerStatus *playerStatus) {
+void N(reflection_render_floor)(PlayerStatus* playerStatus) {
     f32 yaw = -CAM(gCurrentCamID)->currentYaw;
     Matrix4f main;
     Matrix4f translation;
@@ -223,7 +224,7 @@ void N(reflection_render_floor)(PlayerStatus *playerStatus) {
     render_sprite(flags, 0, 0, NULL, main);
 }
 
-void N(reflection_render_floor_fancy)(PlayerStatus *playerStatus) {
+void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -315,7 +316,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus *playerStatus) {
 
 /// int var0 = reflection type
 /// bool var1 = enable wall reflection
-ApiStatus N(ReflectPartner)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(ReflectPartner)(ScriptInstance* script, s32 isInitialCall) {
     Npc* partner;
 
     if (script->varTable[1].s == FALSE) {

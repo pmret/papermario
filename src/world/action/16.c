@@ -33,7 +33,8 @@ void func_802B6000_E287F0(void) {
         gPlayerStatus.gravityIntegrator[3] = -0.0987f;
         gPlayerStatus.flags |= 8;
 
-        D_802B6240 = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, gPlayerStatus.lastGoodPosition.x, gPlayerStatus.lastGoodPosition.z);
+        D_802B6240 = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, gPlayerStatus.lastGoodPosition.x,
+                           gPlayerStatus.lastGoodPosition.z);
         gPlayerStatus.currentSpeed = func_800E0088(gPlayerStatus.lastGoodPosition.x, gPlayerStatus.lastGoodPosition.z) / 18.0f;
     }
 

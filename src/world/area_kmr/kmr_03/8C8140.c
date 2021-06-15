@@ -61,7 +61,7 @@ NpcSettings N(npcSettings_80240950) = {
 Script N(8024097C) = SCRIPT({
 1:
     if (SI_AREA_FLAG(8) == 1) {
-    100:
+100:
         AwaitPlayerLeave(294, 123, 170);
         EnableNpcAI(0, 0);
         DisablePlayerInput(TRUE);
@@ -91,7 +91,7 @@ Script N(npcAI_80240B50) = SCRIPT({
 1:
     match STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
-        89:
+89:
             N(UnkPositionFunc)(-118, 86, -70, -15);
             sleep 1;
             if (SI_VAR(0) == 0) {

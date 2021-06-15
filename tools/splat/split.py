@@ -45,7 +45,7 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         seg_type = Segment.parse_segment_type(seg_yaml)
 
         segment_class = Segment.get_class_for_type(seg_type)
-        
+
         this_start = Segment.parse_segment_start(seg_yaml)
         next_start = Segment.parse_segment_start(config_segments[i + 1])
 
@@ -143,7 +143,7 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         try:
             with options.get_cache_path().open("rb") as f3:
                 cache = pickle.load(f3)
-            
+
             if verbose:
                 log.write(f"Loaded cache ({len(cache.keys())} items)")
         except Exception:

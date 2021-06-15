@@ -28,8 +28,7 @@ Script N(802414E0) = SCRIPT({
         match STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
             }
         }
@@ -149,8 +148,7 @@ Script N(main) = SCRIPT({
         == 2 {
             spawn N(802427EC);
             spawn N(80241988);
-        }
-        else {
+        } else {
             ModifyColliderFlags(0, 1, 0x7FFFFE00);
             SI_VAR(0) = N(80241988);
             spawn EnterWalk;
@@ -594,8 +592,7 @@ Script N(8024339C) = SCRIPT({
                 func_802D5830(0);
                 sleep 10;
                 SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x0081));
-            }
-            else {
+            } else {
                 GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
                 PlayerMoveTo(-17, -17, 20);
                 func_802CF56C(2);
@@ -637,7 +634,7 @@ Script N(80243628) = SCRIPT({
     SI_VAR(1) -= SI_VAR(6);
     SI_VAR(4) += SI_VAR(6);
     match SI_VAR(3) {
-    SI_VAR(1)..SI_VAR(4) {
+        SI_VAR(1)..SI_VAR(4) {
             spawn {
                 if (SI_VAR(3) < SI_VAR(0)) {
                     SI_VAR(0) -= 40;
@@ -682,21 +679,25 @@ Script N(interact_802437C8) = SCRIPT({
                 PanToTarget(0, 0, 1);
                 WaitForCam(0, 1.0);
                 sleep 10;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11, 0x0079));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11,
+                              0x0079));
                 NpcFacePlayer(NPC_SELF, 1);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_1));
                 PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_262, 0);
                 ShowEmote(-1, EMOTE_EXCLAMATION, 0, 15, 1, 0, 0, 0, 0);
                 sleep 15;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_1), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x007A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_1), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x007A));
                 EndSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_5), NPC_ANIM(lily, Palette_00, Anim_1), 0);
                 GetPlayerTargetYaw(SI_VAR(0));
                 InterpNpcYaw(NPC_SELF, SI_VAR(0), 1);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x007B));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 5, MESSAGE_ID(0x11,
+                              0x007B));
                 NpcFacePlayer(NPC_SELF, 1);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x007C));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x007C));
                 ShowChoice(MESSAGE_ID(0x1E, 0x0011));
                 sleep 10;
                 match SI_VAR(0) {
@@ -711,7 +712,8 @@ Script N(interact_802437C8) = SCRIPT({
                 SI_SAVE_FLAG(1375) = 1;
                 SetEnemyFlagBits(-1, 4194304, 0);
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11, 0x007F));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11,
+                              0x007F));
             }
         }
         < 49 {
@@ -725,9 +727,9 @@ Script N(interact_802437C8) = SCRIPT({
         }
         < 60 {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_3), NPC_ANIM(lily, Palette_00, Anim_7), 0, MESSAGE_ID(0x11, 0x0086));
-        }
-        else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0087));
+        } else {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                          0x0087));
         }
     }
     ResetCam(0, 4.0);

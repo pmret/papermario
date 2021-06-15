@@ -10,6 +10,6 @@ void N(UnkNpcAIFunc18)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     npc->collisionRadius = 24;
     script->functionTemp[1].s = 0;
     npc->duration = 0;
-    npc->currentAnim = enemy->animList[8];
+    npc->currentAnim.w = enemy->animList[8];
     script->functionTemp[0].s = 1;
 }

@@ -315,7 +315,7 @@ void update_entity_inverse_rotation_matrix(Entity* entity);
 void delete_entity(s32 entityIndex);
 void delete_entity_and_unload_data(s32 entityIndex);
 void func_8011085C(s32 shadowIndex);
-s32 entity_get_collision_flags(Entity *entity);
+s32 entity_get_collision_flags(Entity* entity);
 void func_801117DC(StaticEntityData* data);
 void func_80112344(Entity* entity);
 
@@ -514,7 +514,7 @@ void render_entities(void) {
                            gPlayerStatusPtr->position.z,
                            entity->position.x,
                            entity->position.z) > 200.0f
-                ) {
+                   ) {
                     continue;
                 }
 
@@ -658,8 +658,8 @@ ShadowList* get_shadow_list(void) {
     return ret;
 }
 
-s32 func_80110678(Npc *npc) {
-    if (npc->currentAnim != 0) {
+s32 func_80110678(Npc* npc) {
+    if (npc->currentAnim.w != 0) {
         npc->flags |= 0x1000000;
         return 1;
     }
@@ -732,7 +732,7 @@ void func_8011085C(s32 shadowIndex) {
     (*gCurrentShadowListPtr)[shadowIndex] = NULL;
 }
 
-s32 entity_get_collision_flags(Entity *entity) {
+s32 entity_get_collision_flags(Entity* entity) {
     u32 listIndex = entity->listIndex;
     s32 ret = 0;
     u32 flag;
@@ -804,13 +804,13 @@ s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
 }
 
-void func_80110BCC(Entity *entity, u32* commandList) {
+void func_80110BCC(Entity* entity, u32* commandList) {
     if (!(entity->flags & 8)) {
         set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
     }
 }
 
-void func_80110BF8(Entity *entity) {
+void func_80110BF8(Entity* entity) {
     entity->unk_07 = 0;
     entity->flags &= ~0x00010000;
 }

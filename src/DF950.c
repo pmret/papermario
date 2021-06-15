@@ -68,7 +68,8 @@ s32 D_8014F6B4[] = { 0x000001C1, 0x000001C2, 0x000001C3, 0x000001C4, 0x000001C5,
 
 extern s32 D_80159AD4;
 
-INCLUDE_ASM(void, "DF950", sfx_compute_spatialized_sound_params_2, f32 posX, f32 posY, f32 posZ, s16* volume, s16* pan, u32 sourceFlags);
+INCLUDE_ASM(void, "DF950", sfx_compute_spatialized_sound_params_2, f32 posX, f32 posY, f32 posZ, s16* volume, s16* pan,
+            u32 sourceFlags);
 
 void sfx_reset_door_sounds(void) {
     gCurrentDoorSoundsSet = 0;
@@ -129,7 +130,8 @@ void sfx_play_sound_at_npc(s32 soundID, s32 arg1, s32 npcID) {
 INCLUDE_ASM(s32, "DF950", sfx_play_sound_at_position, s32 soundID, s32 value2, f32 posX, f32 posY,
             f32 posZ);
 
-INCLUDE_ASM(void, "DF950", sfx_get_spatialized_sound_params, f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
+INCLUDE_ASM(void, "DF950", sfx_get_spatialized_sound_params, f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4,
+            s32 arg5);
 
 INCLUDE_ASM(s32, "DF950", sfx_compute_spatialized_sound_params_0);
 

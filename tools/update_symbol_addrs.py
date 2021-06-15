@@ -23,8 +23,6 @@ elf_symbols = []
 
 ignores = set()
 
-verbose = False
-
 def read_ignores():
     with open(ignores_path) as f:
         lines = f.readlines()

@@ -3,8 +3,8 @@
 
 s32 N(UnkFunc28)(Npc* npc);
 
-ApiStatus N(UnkFunc31)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->owner2.npcID);
+ApiStatus N(UnkFunc31)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
     npc->onRender = N(UnkFunc28);
     npc->blurBuf = heap_malloc(8);
@@ -62,7 +62,7 @@ ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0].s == 255) * ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkFunc29)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {

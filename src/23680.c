@@ -166,7 +166,7 @@ void func_80049E3C(ScriptInstance* script) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     func_800494C0(npc, 0x3E1, 0);
-    npc->currentAnim = enemy->animList[4];
+    npc->currentAnim.w = enemy->animList[4];
     npc->jumpVelocity = 10.0f;
     npc->jumpScale = 2.5f;
     npc->moveToPos.y = npc->pos.y;
@@ -205,7 +205,8 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z));
+        npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
+                                     enemy->territory->wander.point.z));
         script->functionTemp[0].s = 0;
     }
 }

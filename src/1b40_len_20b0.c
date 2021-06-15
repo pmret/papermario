@@ -152,7 +152,8 @@ void gfx_task_background(void) {
     gSPEndDisplayList(gMasterGfxPos++);
 
     // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
-    ASSERT((s32)((u32)((gMasterGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->backgroundGfx))
+    ASSERT((s32)((u32)((gMasterGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(
+               gDisplayContext->backgroundGfx))
 
     nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (u32)(gMasterGfxPos - gDisplayContext->backgroundGfx) * 8,
                    NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);

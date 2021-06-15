@@ -31,8 +31,7 @@ Script N(80240830) = SCRIPT({
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_PUFF_PUFF_MACHINE, 0, 8);
             PlaySoundAtCollider(20, 0x80000025, 0);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -890,7 +889,7 @@ Script N(802436BC) = SCRIPT({
     EnableTexPanning(41, 1);
     spawn {
         SI_VAR(14) = 1.0;
-    0:
+0:
         if (SI_SAVE_VAR(253) >= 3) {
             SI_VAR(14) *= 0.953125;
         }
@@ -951,27 +950,27 @@ NpcSettings N(npcSettings_80243F3C) = {
 };
 
 Vec3f N(vectorList_80243F68)[] = {
-     { -55.0, 15.0, 35.0 }, { -155.0, 35.0, 35.0 },
-     { -255.0, 75.0, 35.0 }, { -355.0, 155.0, 35.0 },
-     { -455.0, 315.0, 35.0 },
+    { -55.0, 15.0, 35.0 }, { -155.0, 35.0, 35.0 },
+    { -255.0, 75.0, 35.0 }, { -355.0, 155.0, 35.0 },
+    { -455.0, 315.0, 35.0 },
 };
 
 Vec3f N(vectorList_80243FA4)[] = {
-     { -20.0, 15.0, 30.0 }, { -120.0, 35.0, 30.0 },
-     { -220.0, 75.0, 30.0 }, { -320.0, 155.0, 30.0 },
-     { -420.0, 315.0, 30.0 },
+    { -20.0, 15.0, 30.0 }, { -120.0, 35.0, 30.0 },
+    { -220.0, 75.0, 30.0 }, { -320.0, 155.0, 30.0 },
+    { -420.0, 315.0, 30.0 },
 };
 
 Vec3f N(vectorList_80243FE0)[] = {
-     { 65.0, 15.0, 30.0 }, { -35.0, 35.0, 30.0 },
-     { -135.0, 75.0, 30.0 }, { -235.0, 155.0, 30.0 },
-     { -335.0, 315.0, 30.0 },
+    { 65.0, 15.0, 30.0 }, { -35.0, 35.0, 30.0 },
+    { -135.0, 75.0, 30.0 }, { -235.0, 155.0, 30.0 },
+    { -335.0, 315.0, 30.0 },
 };
 
 Vec3f N(vectorList_8024401C)[] = {
-     { 120.0, 15.0, 30.0 }, { 20.0, 35.0, 30.0 },
-     { -80.0, 75.0, 30.0 }, { -180.0, 155.0, 30.0 },
-     { -280.0, 315.0, 30.0 },
+    { 120.0, 15.0, 30.0 }, { 20.0, 35.0, 30.0 },
+    { -80.0, 75.0, 30.0 }, { -180.0, 155.0, 30.0 },
+    { -280.0, 315.0, 30.0 },
 };
 
 Script N(80244058) = SCRIPT({
@@ -1388,18 +1387,22 @@ Script N(interact_802457D4) = SCRIPT({
         == 0 {
             GetSelfNpcID(SI_VAR(0));
             if (SI_VAR(0) == 3) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5, MESSAGE_ID(0x11, 0x00B6));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5,
+                              MESSAGE_ID(0x11, 0x00B6));
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x00BC));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11,
+                              0x00BC));
             }
             SI_AREA_VAR(6) += 1;
         }
         == 1 {
             GetSelfNpcID(SI_VAR(0));
             if (SI_VAR(0) == 3) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5, MESSAGE_ID(0x11, 0x00B7));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5,
+                              MESSAGE_ID(0x11, 0x00B7));
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x00BD));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11,
+                              0x00BD));
             }
             SI_AREA_VAR(6) += 1;
         }
@@ -1407,12 +1410,14 @@ Script N(interact_802457D4) = SCRIPT({
             AdjustCam(0, 8.0, 0, 300, 19.0, -9.0);
             GetSelfNpcID(SI_VAR(0));
             if (SI_VAR(0) == 3) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5, MESSAGE_ID(0x11, 0x00B8));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 5,
+                              MESSAGE_ID(0x11, 0x00B8));
                 NpcFacePlayer(NPC_SELF, 0);
                 sleep 15;
                 EndSpeech(-1, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 0);
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x00BE));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11,
+                              0x00BE));
                 NpcFacePlayer(NPC_SELF, 0);
                 sleep 15;
                 EndSpeech(-1, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 0);
@@ -1484,10 +1489,10 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -1522,10 +1527,10 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -1560,10 +1565,10 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -1598,10 +1603,10 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -1636,10 +1641,10 @@ StaticNpc N(npcGroup_80245CEC)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -1702,7 +1707,7 @@ typedef struct N(temp) {
     N(unk_effect)* unk_0C;
 } N(temp);
 
-ApiStatus N(func_80240340_CDC9E0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240340_CDC9E0)(ScriptInstance* script, s32 isInitialCall) {
     N(temp)* ptr = script->varTable[15].s;
 
     ptr->unk_0C->unk_30 = 69;

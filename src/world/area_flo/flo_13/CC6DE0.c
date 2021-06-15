@@ -13,7 +13,7 @@ static s8 N(D_80247B00)[0x200];
 static s8 N(D_80247D00)[0x3D90];
 static N(Unk_bss_struct) N(D_8024BA90);
 
-ApiStatus N(func_802435D0_CC6DE0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802435D0_CC6DE0)(ScriptInstance* script, s32 isInitialCall) {
     s32 var;
     void* temp_s0 = load_asset_by_name("party_pokopi", &var);
 

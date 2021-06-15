@@ -162,7 +162,7 @@ Script N(80240DDC) = SCRIPT({
         RandInt(5, SI_VAR(10));
         SI_VAR(10) += 2;
         SI_VAR(11) = 0;
-    10:
+10:
         SI_VAR(3) = SI_VAR(0);
         SI_VAR(3) += 1;
         SetNpcPos(NPC_BOO0, SI_VAR(3), SI_VAR(1), SI_VAR(2));
@@ -700,8 +700,7 @@ Script N(80242B84) = SCRIPT({
         }
         == 9 {
             SpeakToPlayer(NPC_PARTNER, 0x108, 0x106, 5, MESSAGE_ID(0x0E, 0x00DA));
-        }
-        else {
+        } else {
             SpeakToPlayer(NPC_PARTNER, 0x108, 0x106, 5, MESSAGE_ID(0x0E, 0x00D6));
         }
     }

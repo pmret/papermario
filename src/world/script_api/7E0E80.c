@@ -39,7 +39,7 @@ s32 shop_owner_begin_speech(s32 messageIndex) {
 s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCost) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
-    ScriptInstance *script;
+    ScriptInstance* script;
     s32 phi_a0;
 
     set_message_string(itemName, 0);

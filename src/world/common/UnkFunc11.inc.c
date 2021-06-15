@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc11)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(UnkFunc11)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;

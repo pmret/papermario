@@ -119,11 +119,11 @@ ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
     PlayerAnim currentAnim = get_variable(script, *args++);
     s32 shakeAnim = 0x80003;
 
-    playerNpc->currentAnim = currentAnim;
+    playerNpc->currentAnim.w = currentAnim;
 
     do { } while (0); // Needed to match for some reason
 
-    gPlayerAnimation = playerNpc->currentAnim;
+    gPlayerAnimation = playerNpc->currentAnim.w;
 
     if (gPlayerAnimation == shakeAnim) {
         exec_ShakeCam1(0, 0, 2);

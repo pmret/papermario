@@ -15,11 +15,11 @@ void set_npc_animation(Npc* npc, u32 arg1) {
     PlayerData* playerData = &gPlayerData;
 
     if (arg1 - 0x101 < 9) {
-        npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[arg1 - 0x101];
+        npc->currentAnim.w = gPartnerAnimations[playerData->currentPartner].anims[arg1 - 0x101];
     } else if ((arg1 - 0x201) < 0x10) {
-        npc->currentAnim = get_enemy(npc->npcID)->animList[arg1 - 0x201];
+        npc->currentAnim.w = get_enemy(npc->npcID)->animList[arg1 - 0x201];
     } else {
-        npc->currentAnim = arg1;
+        npc->currentAnim.w = arg1;
     }
 }
 
@@ -189,7 +189,7 @@ ApiStatus GetNpcAnimation(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    set_variable(script, outVar, npc->currentAnim);
+    set_variable(script, outVar, npc->currentAnim.w);
     return ApiStatus_DONE2;
 }
 

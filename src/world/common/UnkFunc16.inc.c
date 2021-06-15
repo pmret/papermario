@@ -14,7 +14,7 @@ void N(UnkFunc16)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
     }
 
     npc->moveSpeed = aiSettings->moveSpeed;
-    npc->currentAnim = enemy->animList[1];
+    npc->currentAnim.w = enemy->animList[1];
     script->functionTemp[1].s = 0;
     script->functionTemp[0].s = 1;
 }

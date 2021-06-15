@@ -20,8 +20,7 @@ Script N(80240250) = SCRIPT({
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
     }
@@ -292,9 +291,9 @@ Script N(makeEntities) = SCRIPT({
     }
 });
 
-ApiStatus N(func_80240000_C4C390)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240000_C4C390)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 *array = script->array;
+    s32* array = script->array;
     f32 distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[3]);
 
     script->varTable[0].s = 1;
@@ -308,10 +307,10 @@ ApiStatus N(func_80240000_C4C390)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400A0_C4C430)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400A0_C4C430)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance;
-    s32 *array = script->array;
+    s32* array = script->array;
 
     distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[4]);
     script->varTable[0].s = 0;
@@ -325,7 +324,7 @@ ApiStatus N(func_802400A0_C4C430)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 var;
 
@@ -345,7 +344,7 @@ ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802401C0_C4C550)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802401C0_C4C550)(ScriptInstance* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y > -60.0f) {
         return ApiStatus_BLOCK;
     }

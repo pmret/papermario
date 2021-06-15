@@ -38,7 +38,8 @@ void N(UnkFunc4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
     }
 
     if (enemy->varTable[9] <= 0) {
-        if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
+        if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0))
+            && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
             func_800494C0(npc, 0x2F4, 0x200000);

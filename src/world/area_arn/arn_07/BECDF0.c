@@ -148,7 +148,7 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
             ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
             ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
             if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z,
-                       ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
+                         ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
                 ptr->unk_4E = 3;
             }
             break;
@@ -568,8 +568,7 @@ Script N(main) = SCRIPT({
         }
         == STORY_CH3_BEGAN_PEACH_MISSION {
             MakeNpcs(0, N(npcGroupList_802478E8));
-        }
-        else {
+        } else {
             MakeNpcs(0, N(npcGroupList_802478B8));
         }
     }

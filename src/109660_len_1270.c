@@ -53,7 +53,8 @@ s32 func_802E8858(Entity* entity) {
     s32 phi_a0 = FALSE;
 
     if (entity->collisionFlags & 1) {
-        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND) || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
+        if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
+            || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
             set_action_state(ACTION_STATE_FALLING);
             phi_a0 = TRUE;
         }
