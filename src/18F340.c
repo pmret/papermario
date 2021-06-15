@@ -10,7 +10,17 @@ extern s32 D_8029FBA8;
 extern s32 D_8029FBAC;
 extern s32 D_8029FBB0[];
 
-INCLUDE_ASM(s32, "18F340", func_80260A60);
+void func_80260A60(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
+
+    if (battleStatus->flags2 & 0x40) {
+        actorPart->idleAnimations = &bPeachIdleAnims;
+        set_animation(0, 0, 0xA0002);
+    } else if (!battleStatus->outtaSightActive) {
+        actorPart->idleAnimations = &bMarioIdleAnims;
+    }
+}
 
 ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -30,9 +40,28 @@ ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", activate_defend_command);
+ApiStatus activate_defend_command(ScriptInstance* script, s32 isInitialCall) {
+    ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
 
-INCLUDE_ASM(s32, "18F340", func_80260B70);
+    deduct_current_move_fp();
+    gBattleStatus.flags1 |= 0x400000;
+    actorPart->idleAnimations = &bMarioDefendAnims;
+    set_animation(0, 0, 0x10014);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80260B70(ScriptInstance* script, s32 isInitialCall) {
+    Actor* player = gBattleStatus.playerActor;
+
+    func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
+    sfx_play_sound(0x3FC);
+    script->varTable[0].s = 0;
+    if (player->debuff == 3 || player->debuff == 4 || player->debuff == 5 || player->debuff == 6 ||
+        player->debuff == 7 || player->debuff == 8) {
+        script->varTable[0].s = 1;
+    }
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "18F340", func_80260BF4);
 
@@ -122,9 +151,37 @@ ApiStatus func_80261064(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "18F340", func_802610CC);
 
-INCLUDE_ASM(s32, "18F340", func_80261164);
+ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0].s = 20;
+        unfreeze_cam();
+    }
 
-INCLUDE_ASM(s32, "18F340", func_802611E8);
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 12) & 0xFC);
+
+    script->functionTemp[0].s -= 1;
+    if (script->functionTemp[0].s == 0) {
+        set_background_color_blend(0, 0, 0, 0);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+ApiStatus func_802611E8(ScriptInstance *script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    StaticItem* item = &gItemTable[0x95];
+
+    playerData->curHP += item->potencyA;
+    if (playerData->curMaxHP < playerData->curHP) {
+        playerData->curHP = playerData->curMaxHP;
+    }
+    playerData->invItems[find_item(0x95)] = ITEM_NONE;
+    sort_items();
+    script->varTable[3].s = item->potencyA;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "18F340", func_8026127C);
 
@@ -149,7 +206,21 @@ INCLUDE_ASM(s32, "18F340", func_80261478);
 
 INCLUDE_ASM(s32, "18F340", func_80261530);
 
-INCLUDE_ASM(s32, "18F340", func_802615C8);
+ApiStatus func_802615C8(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        script->functionTemp[0].s = 25;
+    }
+
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 0xFF);
+
+    script->functionTemp[0].s -= 5;
+    if (script->functionTemp[0].s == 0) {
+        set_background_color_blend(0, 0, 0, 0);
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus func_80261648(ScriptInstance* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);

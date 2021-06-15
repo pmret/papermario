@@ -369,5 +369,8 @@ extern s32 D_803DA800;
 extern PlayerStatus* dead_gPlayerStatusPtr;
 
 extern s32 D_80108A64;
+extern s32 bMarioIdleAnims[];
+extern s32 bMarioDefendAnims[];
+extern s32 bPeachIdleAnims[];
 
 #endif
