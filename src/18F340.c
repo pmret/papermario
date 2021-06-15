@@ -1,5 +1,8 @@
 #include "common.h"
 
+extern s32 D_80108AAC;
+extern s32 D_80108AD4;
+
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
 extern Effect* D_8029FB98;
@@ -390,7 +393,32 @@ ApiStatus HasMerleeCastsLeft(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", func_802619E8);
+ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 x = get_variable(script, *args++);
+    s32 y = get_variable(script, *args++);
+    s32 z = get_variable(script, *args++);
+    s32 screenX;
+    s32 screenY;
+    s32 screenZ;
+
+    get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
+
+    screenX += 30;
+    screenY -= 19;
+
+    if (script->varTable[10].s > 0) {
+        D_8029FBAC = create_icon(&D_80108AD4);
+        set_icon_render_pos(D_8029FBAC, screenX, screenY);
+        screenY += 9;
+    }
+
+    if (script->varTable[11].s > 0 || script->varTable[12].s > 0) {
+        D_8029FBA8 = create_icon(&D_80108AAC);
+        set_icon_render_pos(D_8029FBA8, screenX, screenY);
+    }
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
     if (script->varTable[10].s > 0) {
