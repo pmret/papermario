@@ -1733,7 +1733,7 @@ typedef struct PlayerStatus {
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
-    /* 0x0B5 */ u8 prevActionState;
+    /* 0x0B5 */ s8 prevActionState;
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
