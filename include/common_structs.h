@@ -724,7 +724,7 @@ typedef struct BattleStatus {
     /* 0x45B */ char unk_45B[5];
     /* 0x460 */ s32 unk_460;
     /* 0x464 */ s32 unk_464;
-    /* 0x468 */ char unk_468[4];
+    /* 0x468 */ s32 unk_468;
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
     /* 0x470 */ s32 unk_470;
     /* 0x474 */ s32 unk_474;

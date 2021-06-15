@@ -196,7 +196,33 @@ ApiStatus func_802611E8(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// TODO something wrong with the struct breakdown for BattleStatus
+#ifdef NON_MATCHING
+ApiStatus func_8026127C(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+    BattleStatus* battleStatus = &gBattleStatus;
+
+    battleStatus->dangerFlags = 0;
+    gBattleState = battleStatus->unk_474;
+    battleStatus->battleState = battleStatus->unk_468;
+    battleStatus->flags1 |= 8;
+    battleStatus->flags2 &= ~0x8000000;
+
+    if (!(battleStatus->flags2 & 0x40)) {
+        if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
+            battleStatus->flags2 |= 0x8000000;
+            gBattleStatus.dangerFlags |= 1;
+        }
+        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) && !(battleStatus->dangerFlags & 1)) {
+            battleStatus->flags2 |= 0x8000000;
+            gBattleStatus.dangerFlags |= 2;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "18F340", func_8026127C);
+#endif
 
 ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
