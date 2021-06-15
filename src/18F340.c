@@ -149,7 +149,20 @@ ApiStatus func_80261064(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", func_802610CC);
+ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_8011D82C(1);
+        *D_801512F0 = 1;
+        set_background_color_blend(0, 0, 0, 0);
+        script->functionTemp[0].s = 20;
+    }
+
+    set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0].s) * 12) & 0xFC);
+
+    script->functionTemp[0].s -= 1;
+    do {} while(0); // TODO required to match
+    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+}
 
 ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -200,11 +213,40 @@ ApiStatus func_802613A8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", func_802613BC);
+ApiStatus func_802613BC(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "18F340", func_80261478);
+    func_800720B0(6, var1, var2 + 15, var3, 1.2f, 30);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "18F340", func_80261530);
+ApiStatus func_80261478(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+
+    func_80071750(9, var1, var2 + 15, var3, 5.0f, 15);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80261530(ScriptInstance* script, s32 isInitialCall) {
+    if (isInitialCall) {
+        func_8011D82C(1);
+        *D_801512F0 = 1;
+        set_background_color_blend(0, 0, 0, 0);
+        script->functionTemp[0].s = 25;
+    }
+
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 0xFE);
+
+    script->functionTemp[0].s--;
+    do {} while(0); // TODO required to match
+    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+}
 
 ApiStatus func_802615C8(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
@@ -334,9 +376,27 @@ ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "18F340", FXRecoverHP);
+ApiStatus FXRecoverHP(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    s32 var4 = get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "18F340", FXRecoverFP);
+    func_80071090(0, var1, var2, var3, var4);
+    return ApiStatus_DONE2;
+}
+
+ApiStatus FXRecoverFP(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    s32 var4 = get_variable(script, *args++);
+
+    func_80071090(1, var1, var2, var3, var4);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus IncrementPlayerHP(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
