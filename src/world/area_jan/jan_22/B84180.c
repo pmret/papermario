@@ -189,7 +189,7 @@ ApiStatus N(func_80240E90_B85010)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8_B85128);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FC4_B85144);
+#include "world/common/UnsetCamera0Flag1000.inc.c"
 
 ApiStatus PostChapter5StatUpdate(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

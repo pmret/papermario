@@ -142,7 +142,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261064(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
     if (heroes_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {

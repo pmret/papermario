@@ -210,4 +210,4 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435B8_DD0288);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435CC_DD029C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435E8_DD02B8);
+#include "world/common/UnsetCamera0Flag1000.inc.c"
