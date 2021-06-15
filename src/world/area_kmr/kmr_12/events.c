@@ -128,7 +128,7 @@ Script N(GoombaIdle) = SCRIPT({
     InterpNpcYaw(NPC_SELF, 90, 0);
     SetNpcFlagBits(NPC_SELF, 0x240000, FALSE);
     SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, FALSE);
-    SetSelfEnemyFlagBits(NPC_FLAG_40000000, TRUE);
+    SetSelfEnemyFlagBits(NPC_FLAG_NO_ANIMS_LOADED, TRUE);
 
     // We're done jumping off; the player can read the sign again
     bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;

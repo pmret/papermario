@@ -77,9 +77,9 @@ s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAni
     gNpcCount++;
     ASSERT(npc != NULL);
 
-    npc->flags = blueprint->flags | 0x410011;
+    npc->flags = blueprint->flags | (NPC_FLAG_400000 | NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW | NPC_FLAG_PASSIVE);
     if (skipLoadingAnims) {
-        npc->flags |= 0x40000000;
+        npc->flags |= NPC_FLAG_NO_ANIMS_LOADED;
     }
 
     npc->collisionRadius = 32;
@@ -143,14 +143,14 @@ s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAni
     }
     if (!skipLoadingAnims) {
         npc->extraAnimList = animList;
-        if (!(npc->flags & 0x1000000)) {
-            if (!(npc->flags & 0x4000000)) {
+        if (!(npc->flags & NPC_FLAG_1000000)) {
+            if (!(npc->flags & NPC_FLAG_PARTICLE)) {
                 npc->spriteInstanceID = func_802DE0EC(npc->currentAnim.w, animList);
             } else {
                 npc->spriteInstanceID = func_802DE0EC(npc->currentAnim.w | 0x80000000, animList);
             }
         } else {
-            npc->flags |= 2;
+            npc->flags |= NPC_FLAG_2;
         }
     }
 
@@ -189,8 +189,8 @@ void npc_free_by_index(s32 listIndex) {
                 npc->blurBuf = NULL;
             }
 
-            if (!(npc->flags & 0x40000000)) {
-                if (!(npc->flags & 0x1000000) && func_802DE5E8(npc->spriteInstanceID)) {
+            if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                if (!(npc->flags & NPC_FLAG_1000000) && func_802DE5E8(npc->spriteInstanceID)) {
                     PANIC();
                 }
             }
@@ -200,7 +200,7 @@ void npc_free_by_index(s32 listIndex) {
                 func_8003C428(npc, i);
             }
 
-            if (npc->flags & 0x100000) {
+            if (npc->flags & NPC_FLAG_MOTION_BLUR) {
                 disable_npc_blur(npc);
             }
 
@@ -219,8 +219,8 @@ void npc_free(Npc* npc) {
         npc->blurBuf = NULL;
     }
 
-    if (!(npc->flags & 0x40000000)) {
-        if (!(npc->flags & 0x1000000) && func_802DE5E8(npc->spriteInstanceID) != 0) {
+    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+        if (!(npc->flags & NPC_FLAG_1000000) && func_802DE5E8(npc->spriteInstanceID) != 0) {
             PANIC();
         }
     }
@@ -230,7 +230,7 @@ void npc_free(Npc* npc) {
         func_8003C428(npc, i);
     }
 
-    if (npc->flags & 0x100000) {
+    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
         disable_npc_blur(npc);
     }
 
@@ -258,84 +258,93 @@ void npc_do_world_collision(Npc* npc) {
     f32 temp_z;
 
     if (npc->flags & 0x40) {
-        npc->flags |= 0x8000000;
+        npc->flags |= NPC_FLAG_8000000;
     } else if ((npc->pos.x != npc->colliderPos.x) || (npc->pos.y != npc->colliderPos.y)
-               || (npc->pos.z != npc->colliderPos.z) || npc->flags & 0x8000000) {
-        npc->flags &= ~0x08000000;
+               || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_8000000) {
+        npc->flags &= ~NPC_FLAG_8000000;
         temp_f0 = clamp_angle(npc->yaw);
         temp_x = npc->pos.x;
         temp_y = npc->pos.y;
         temp_z = npc->pos.z;
-        if (!(npc->flags & 0x4000000)) {
+
+        if (!(npc->flags & NPC_FLAG_PARTICLE)) {
             phi_v0 = func_800DDC44(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         } else {
             phi_v0 = func_800DDD94(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         }
+
         if (phi_v0) {
-            npc->flags |= 0x6000;
+            npc->flags |= (NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_4000);
             npc->unk_86 = D_8010C97A;
             npc->pos.x = temp_x;
             npc->pos.z = temp_z;
         } else {
-            npc->flags &= ~0x6000;
+            npc->flags &= ~(NPC_FLAG_NO_PROJECT_SHADOW | NPC_FLAG_4000);
         }
+
         temp_f0 = clamp_angle(npc->yaw + 45.0f);
         temp_x = npc->pos.x;
         temp_y = npc->pos.y;
         temp_z = npc->pos.z;
-        if (!(npc->flags & 0x4000000)) {
+
+        if (!(npc->flags & NPC_FLAG_PARTICLE)) {
             phi_v0 = func_800DDC44(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         } else {
             phi_v0 = func_800DDAE4(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         }
+
         if (phi_v0) {
-            npc->flags |= 0x2000;
+            npc->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
             npc->pos.x = temp_x;
             npc->pos.z = temp_z;
         } else {
-            npc->flags &= ~0x2000;
+            npc->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
         }
+
         temp_f0 = clamp_angle(npc->yaw - 45.0f);
         temp_x = npc->pos.x;
         temp_y = npc->pos.y;
         temp_z = npc->pos.z;
-        if (!(npc->flags & 0x4000000)) {
+        if (!(npc->flags & NPC_FLAG_PARTICLE)) {
             phi_v0 = func_800DDC44(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         } else {
             phi_v0 = func_800DDAE4(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight, npc->collisionRadius);
         }
+
         if (phi_v0 != 0) {
-            npc->flags |= 0x2000;
+            npc->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
             npc->pos.x = temp_x;
             npc->pos.z = temp_z;
         } else {
-            npc->flags &= ~0x2000;
+            npc->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
         }
-        if (npc->flags & 0x4000000) {
+
+        if (npc->flags & NPC_FLAG_PARTICLE) {
             temp_f0 = clamp_angle(npc->yaw + 45.0f + 180.0f);
             temp_x = npc->pos.x;
             temp_y = npc->pos.y;
             temp_z = npc->pos.z;
             if (func_800DDC44(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight,
                               npc->collisionRadius) != 0) {
-                npc->flags |= 0x2000;
+                npc->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
                 npc->pos.x = temp_x;
                 npc->pos.z = temp_z;
             } else {
-                npc->flags = npc->flags & ~0x2000;
+                npc->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
             }
+
             temp_f0 = clamp_angle((npc->yaw - 45.0f) + 180.0f);
             temp_x = npc->pos.x;
             temp_y = npc->pos.y;
             temp_z = npc->pos.z;
             if (func_800DDC44(npc->unk_80, &temp_x, &temp_y, &temp_z, 0, temp_f0, npc->collisionHeight,
                               npc->collisionRadius) != 0) {
-                npc->flags |= 0x2000;
+                npc->flags |= NPC_FLAG_NO_PROJECT_SHADOW;
                 npc->pos.x = temp_x;
                 npc->pos.z = temp_z;
                 return;
             }
-            npc->flags &= ~0x2000;
+            npc->flags &= ~NPC_FLAG_NO_PROJECT_SHADOW;
         }
     }
 }
@@ -360,7 +369,7 @@ void npc_appendGfx(Npc* npc) {
     f32 temp_f22 = func_80039DA4();
 
     guTranslateF(subroutine_arg6, npc->pos.x, npc->pos.y + npc->unk_AB, npc->pos.z);
-    if (npc->flags & 0x80) {
+    if (npc->flags & NPC_FLAG_80) {
         npc_mtx_ident_mirror_y(subroutine_arg16);
         guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
     }
@@ -402,8 +411,8 @@ void npc_appendGfx(Npc* npc) {
         guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
     }
 
-    if ((npc->flags & 0x40000000) == 0) {
-        if (((npc->flags & 0x1000000) == 0) && (npc->currentAnim.w != 0) && (npc->spriteInstanceID >= 0)) {
+    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+        if (!(npc->flags & NPC_FLAG_100000) && (npc->currentAnim.w != 0) && (npc->spriteInstanceID >= 0)) {
             func_8003B47C(npc, temp_f22, subroutine_arg6);
             npc->unk_2C = func_802DE5C8(npc->spriteInstanceID);
         }
@@ -412,9 +421,9 @@ void npc_appendGfx(Npc* npc) {
         npc->unk_2C = func_802DDEC4(1);
     }
 
-    if (npc->flags & 0x20000) {
+    if (npc->flags & NPC_FLAG_REFLECT_WALL) {
         guTranslateF(subroutine_arg6, npc->pos.x, npc->pos.y + npc->unk_AB, -npc->pos.z);
-        if (npc->flags & 0x80) {
+        if (npc->flags & NPC_FLAG_80) {
             npc_mtx_ident_mirror_y(subroutine_arg16);
             guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
         }
@@ -430,8 +439,8 @@ void npc_appendGfx(Npc* npc) {
             guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
         }
 
-        if (!(npc->flags & 0x40000000)) {
-            if (!(npc->flags & 0x1000000) && (npc->currentAnim.w != 0)) {
+        if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim.w != 0)) {
                 func_802DE3D8(npc->spriteInstanceID, temp_f22, 0, 0, subroutine_arg6);
             }
         } else {
@@ -439,7 +448,7 @@ void npc_appendGfx(Npc* npc) {
         }
     }
 
-    if ((npc->flags & 0x80000) != 0) {
+    if (npc->flags & NPC_FLAG_REFLECT_FLOOR) {
         guTranslateF(subroutine_arg6, npc->pos.x, -(npc->pos.y + npc->unk_AB), npc->pos.z);
         npc_mtx_ident_mirror_y(subroutine_arg16);
         guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
@@ -456,8 +465,8 @@ void npc_appendGfx(Npc* npc) {
             guMtxCatF(subroutine_arg16, subroutine_arg6, subroutine_arg6);
         }
 
-        if (!(npc->flags & 0x40000000)) {
-            if (!(npc->flags & 0x1000000) && (npc->currentAnim.w != 0)) {
+        if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+            if (!(npc->flags & NPC_FLAG_1000000) && (npc->currentAnim.w != 0)) {
                 func_802DE3D8(npc->spriteInstanceID, temp_f22, 0, 0, subroutine_arg6);
             }
         } else {
@@ -487,7 +496,7 @@ void npc_list_render(void) {
 
         Npc* npc = (*gCurrentNpcListPtr)[i];
         if (npc != NULL) {
-            if (npc->flags && !(npc->flags & 0x81000006)) {
+            if (npc->flags && !(npc->flags & (NPC_FLAG_80000000 | NPC_FLAG_1000000 | NPC_FLAG_4 | NPC_FLAG_2))) {
                 transform_point(&cam->perspectiveMatrix, npc->pos.x, npc->pos.y, npc->pos.z, 1.0f, &x, &y, &z, &s);
                 if (!(s < 0.01) || !(s > -0.01)) {
                     phi_f20 = ((z * 5000.0f) / s) + 5000.0f;
@@ -501,17 +510,19 @@ void npc_list_render(void) {
                     task->appendGfxArg = npc;
                     task->appendGfx = &npc_appendGfx;
                     task->renderMode = npc->renderMode;
-                    if (npc->flags & 0x800000) {
+                    if (npc->flags & NPC_FLAG_NO_DROPS) {
                         u8 r, g, b, a;
                         get_background_color_blend(&r, &g, &b, &a);
                         npc->alpha2 = 0xFF - a;
                     } else {
                         npc->alpha2 = 0xFF;
                     }
+
                     if (npc->alpha2 != 0) {
                         queue_render_task(task);
                     }
-                    if ((npc->flags & 0x100000) != 0) {
+
+                    if ((npc->flags & NPC_FLAG_MOTION_BLUR) != 0) {
                         task->distance = -phi_f20;
                         task->appendGfx = &appendGfx_npc_blur;
                         task->appendGfxArg = npc;
@@ -568,27 +579,25 @@ Npc* get_npc_safe(NpcID npcID) {
 void enable_npc_shadow(Npc* npc) {
     Shadow* shadow;
 
-    if (!(npc->flags & 0x10)) {
+    if (!(npc->flags & NPC_FLAG_HAS_SHADOW)) {
         shadow = get_shadow_by_index(npc->shadowIndex);
         shadow->flags &= ~1;
-        npc->flags = npc->flags | 0x10010;
+        npc->flags = npc->flags | (NPC_FLAG_DIRTY_SHADOW | NPC_FLAG_HAS_SHADOW);
     }
 }
 
 void disable_npc_shadow(Npc* npc) {
     Shadow* shadow;
 
-    if (npc->flags & 0x10) {
+    if (npc->flags & NPC_FLAG_HAS_SHADOW) {
         shadow = get_shadow_by_index(npc->shadowIndex);
         shadow->flags |= 1;
-        npc->flags &= ~0x10;
-        npc->flags &= ~0x10000;
+        npc->flags &= ~NPC_FLAG_HAS_SHADOW;
+        npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
     }
 }
 
 void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
-    s32 flagsTemp;
-
     ASSERT((npc->flags & NPC_FLAG_1000000) || func_802DE5E8(npc->spriteInstanceID) == 0);
 
     npc->extraAnimList = extraAnimList;
@@ -598,22 +607,22 @@ void set_npc_sprite(Npc* npc, s32 anim, s32** extraAnimList) {
         ASSERT(npc->spriteInstanceID >= 0);
     }
 
-    flagsTemp = npc->flags;
+
     npc->currentAnim.w = anim;
 
-    if (!(flagsTemp & 0x40000000)) {
-        if (!(flagsTemp & NPC_FLAG_1000000)) {
+    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+        if (!(npc->flags & NPC_FLAG_1000000)) {
             spr_update_sprite(npc->spriteInstanceID, anim, npc->animationSpeed);
         }
     }
 }
 
 void enable_npc_blur(Npc* npc) {
-    if (!(npc->flags & 0x100000)) {
+    if (!(npc->flags & NPC_FLAG_MOTION_BLUR)) {
         BlurBuffer* blurBuf;
         s32 i;
 
-        npc->flags |= 0x100000;
+        npc->flags |= NPC_FLAG_MOTION_BLUR;
 
         blurBuf = heap_malloc(sizeof(BlurBuffer));
         npc->blurBuf = blurBuf;
@@ -630,8 +639,8 @@ void enable_npc_blur(Npc* npc) {
 }
 
 void disable_npc_blur(Npc* npc) {
-    if (npc->flags & 0x100000) {
-        npc->flags &= ~0x100000;
+    if (npc->flags & NPC_FLAG_MOTION_BLUR) {
+        npc->flags &= ~NPC_FLAG_MOTION_BLUR;
 
         heap_free(npc->blurBuf);
         npc->blurBuf = NULL;
@@ -674,25 +683,25 @@ void func_8003B1B0(void) {
     for (i = 0; i < MAX_NPCS; i++) {
         Npc* npc = (*gCurrentNpcListPtr)[i];
         if (npc != NULL) {
-            if (npc->flags && !(npc->flags & 0x40000000)) {
-                if (!(npc->flags & 0x1000000)) {
-                    if (!(npc->flags & 0x4000000)) {
+            if (npc->flags && !(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                if (!(npc->flags & NPC_FLAG_1000000)) {
+                    if (!(npc->flags & NPC_FLAG_PARTICLE)) {
                         npc->spriteInstanceID = func_802DE0EC(npc->currentAnim.w, npc->extraAnimList);
                     } else {
                         npc->spriteInstanceID = func_802DE0EC(npc->currentAnim.w | 0x80000000, npc->extraAnimList);
                     }
                 }
-                if (!(npc->flags & 0x40000000)) {
-                    if (!(npc->flags & 0x1000000) && (npc->unk_B4 != 0)) {
+                if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                    if (!(npc->flags & NPC_FLAG_1000000) && (npc->unk_B4 != 0)) {
                         npc->spritePaletteList = func_802DEA40(npc->currentAnim.h);
                         npc->paletteCount = 0;
                         while (npc->spritePaletteList[npc->paletteCount] != -1) {
-                          npc->paletteCount++;
+                            npc->paletteCount++;
                         }
                         npc->unk_C0 = func_802DEA6C(npc->currentAnim.h);
                     }
-                    if (!(npc->flags & 0x40000000)) {
-                        if (!(npc->flags & 0x1000000)) {
+                    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
+                        if (!(npc->flags & NPC_FLAG_1000000)) {
                             for (j = 0; j < 2; j++) {
                                 func_8003C61C(npc, j);
                             }
@@ -784,7 +793,7 @@ void func_8003B500(Npc* npc, s32 arg1, s32 arg2) {
         npc->unk_B6 = 0;
         npc->verticalStretch = 1.0f;
     }
-    if (!(npc->flags & 0x40000000)) {
+    if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         s32 temp_a2 = (npc->alpha * npc->alpha2 / 255);
         s32 temp = temp_a2 < 255; // TODO: better match?
         func_802DE3D8(npc->spriteInstanceID | (temp) << 31, arg1, temp_a2, NULL, arg2);
@@ -1113,7 +1122,7 @@ s32 func_8003D2F8(Npc* npc) {
     f32 z;
     f32 yaw;
 
-    if (npc->flags & 0x4000000) {
+    if (npc->flags & NPC_FLAG_PARTICLE) {
         y = get_shadow_by_index(npc->shadowIndex)->position.y + 13.0f;
     } else {
         y = npc->pos.y + 13.0f;
@@ -1221,7 +1230,7 @@ void func_8003D624(Npc* npc, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s
 void func_8003D660(Npc* npc, s32 arg1) {
     Temp8010EBB0* temp = &D_8010EBB0;
 
-    if ((npc->flags & 0x400002) == 0x400000) {
+    if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {
             switch (get_collider_type_by_id((u16)npc->unk_84) & 0xFF) {
                 case 6:
