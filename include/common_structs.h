@@ -104,11 +104,6 @@ typedef struct BlurBuffer {
 
 typedef s16 Palette16[16]; // size = 0x20
 
-typedef union {
-    u16 h;
-    u32 w;
-} test;
-
 typedef struct Npc {
     /* 0x000 */ s32 flags;
     /* 0x004 */ void (*onUpdate)(struct Npc*); ///< Run before anything else for this NPC in update_npcs()
@@ -120,7 +115,10 @@ typedef struct Npc {
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 spriteInstanceID;
-    /* 0x028 */ test currentAnim;
+    /* 0x028 */ union {
+    /*       */   u16 h;
+    /*       */   u32 w;
+    /*       */ } currentAnim;
     /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;

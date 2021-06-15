@@ -2,7 +2,16 @@
 #include "map.h"
 #include "npc.h"
 
-s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
+extern s16 D_8010C97A;
+extern s32 D_8010C978;
+
+extern f32 D_80077C10;
+extern s16 D_80077C14;
+
+extern f32 D_80077C18;
+extern s16 D_80077C1C;
+extern s16 D_80077C1E;
+extern s32 D_80077C20;
 
 void npc_callback_no_op(void) {
 }
@@ -28,10 +37,9 @@ void npc_list_clear(void) {
         (*gCurrentNpcListPtr)[i] = NULL;
     }
 
-    D_8009A604 = 0;
+    gNpcCount = 0;
     D_800A0B94 = 1;
 }
-
 
 void npc_list_update_current(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -40,7 +48,7 @@ void npc_list_update_current(void) {
         gCurrentNpcListPtr = &gBattleNpcList;
     }
 
-    D_8009A604 = 0;
+    gNpcCount = 0;
     D_800A0B94 = 1;
 }
 
@@ -63,11 +71,10 @@ s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAni
             break;
         }
     }
-
     ASSERT(i < MAX_NPCS);
 
     (*gCurrentNpcListPtr)[i] = npc = heap_malloc(sizeof(Npc));
-    D_8009A604++;
+    gNpcCount++;
     ASSERT(npc != NULL);
 
     npc->flags = blueprint->flags | 0x410011;
@@ -199,7 +206,7 @@ void npc_free_by_index(s32 listIndex) {
 
             heap_free((*gCurrentNpcListPtr)[listIndex]);
             (*gCurrentNpcListPtr)[listIndex] = NULL;
-            D_8009A604--;
+            gNpcCount--;
         }
     }
 }
@@ -236,14 +243,12 @@ void npc_free(Npc* npc) {
     }
 
     (*gCurrentNpcListPtr)[i] = NULL;
-    D_8009A604--;
+    gNpcCount--;
 }
 
 Npc* get_npc_by_index(s32 listIndex) {
     return (*gCurrentNpcListPtr)[listIndex & ~0x800];
 }
-
-extern s16 D_8010C97A;
 
 void npc_do_world_collision(Npc* npc) {
     f32 temp_f0;
@@ -339,8 +344,6 @@ INCLUDE_ASM(void, "npc", npc_do_other_npc_collision, Npc* npc);
 
 INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 
-s32 func_800DC778(s32, f32*, f32*, f32*, f32*, f32, f32);
-
 INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
 
 INCLUDE_ASM(s32, "npc", func_800397E8);
@@ -348,10 +351,6 @@ INCLUDE_ASM(s32, "npc", func_800397E8);
 INCLUDE_ASM(void, "npc", npc_list_update, void);
 
 INCLUDE_ASM(f32, "npc", func_80039DA4);
-
-void render_sprite(s32, s32, s32, ...);
-void func_802DE3D8(s32, s32, s32, s32, Matrix4f*);
-void guRotateAnglesF(float mf[4][4], f32 x, f32 y, f32 z);
 
 #ifdef NON_MATCHING
 // float regalloc
@@ -668,8 +667,6 @@ void func_8003B198(void) {
 void func_8003B1A8(void) {
 }
 
-s32* func_802DEA40(u16);
-
 void func_8003B1B0(void) {
     s32 i;
     s32 j;
@@ -688,8 +685,9 @@ void func_8003B1B0(void) {
                 if (!(npc->flags & 0x40000000)) {
                     if (!(npc->flags & 0x1000000) && (npc->unk_B4 != 0)) {
                         npc->spritePaletteList = func_802DEA40(npc->currentAnim.h);
-                        for (npc->paletteCount = 0; npc->spritePaletteList[npc->paletteCount] != -1; npc->paletteCount++) {
-
+                        npc->paletteCount = 0;
+                        while (npc->spritePaletteList[npc->paletteCount] != -1) {
+                          npc->paletteCount++;
                         }
                         npc->unk_C0 = func_802DEA6C(npc->currentAnim.h);
                     }
@@ -753,7 +751,7 @@ INCLUDE_ASM(s32, "npc", func_8003B44C);
 INCLUDE_ASM(s32, "npc", func_8003B464);
 
 #ifdef NON_MATCHING
-// Needs rodata migration.
+// Rodata issues.
 void func_8003B47C(Npc* npc, s32 arg1, s32 arg2) {
 
     switch (npc->unk_B4) {
@@ -1109,8 +1107,6 @@ Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius) {
 
 INCLUDE_ASM(s32, "npc", func_8003D1D4);
 
-extern s32 D_8010C978;
-
 s32 func_8003D2F8(Npc* npc) {
     f32 x;
     f32 y;
@@ -1261,11 +1257,6 @@ void func_8003D660(Npc* npc, s32 arg1) {
 INCLUDE_ASM(void, "npc", func_8003D660, Npc* npc, s32 arg1);
 #endif
 
-extern f32 D_80077C10;
-extern s16 D_80077C14;
-
-void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-
 void func_8003D788(Npc* npc, s32 arg1) {
     s32 phi_a2;
     f32 subroutine_argA;
@@ -1300,14 +1291,6 @@ void func_8003D788(Npc* npc, s32 arg1) {
         }
     }
 }
-
-extern f32 D_80077C18;
-extern s16 D_80077C1C;
-extern s16 D_80077C1E;
-extern s32 D_80077C20;
-
-void func_8006FB90(f32, f32, f32, f32);
-void func_8006FBF0(s32, f32, f32, f32, f32, f32);
 
 INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 

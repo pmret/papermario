@@ -360,5 +360,14 @@ void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
+s32* func_802DEA40(u16 arg0);
+void render_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_802DE3D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
+void guRotateAnglesF(float mf[4][4], f32 x, f32 y, f32 z);
+s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
+s32 func_800DC778(s32, f32*, f32*, f32*, f32*, f32, f32);
+void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
+void func_8006FB90(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void func_8006FBF0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 
 #endif
