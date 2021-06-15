@@ -991,10 +991,10 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
-    VirtualEntity* temp = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
 
-    free_entity_model_by_index(temp->entityModelIndex);
-    temp->entityModelIndex = -1;
+    free_entity_model_by_index(virtualEntity->entityModelIndex);
+    virtualEntity->entityModelIndex = -1;
     return ApiStatus_DONE2;
 }
 
@@ -1013,25 +1013,25 @@ ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
-    VirtualEntity* temp = (*D_802DB7C0)[index];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
-    temp->pos.x = x;
-    temp->pos.y = y;
-    temp->pos.z = z;
+    virtualEntity->pos.x = x;
+    virtualEntity->pos.y = y;
+    virtualEntity->pos.z = z;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
-    VirtualEntity* temp = (*D_802DB7C0)[index];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
     s32 outVar1 = *args++;
     s32 outVar2 = *args++;
     s32 outVar3 = *args++;
 
-    set_variable(script, outVar1, temp->pos.x);
-    set_variable(script, outVar2, temp->pos.y);
-    set_variable(script, outVar3, temp->pos.z);
+    set_variable(script, outVar1, virtualEntity->pos.x);
+    set_variable(script, outVar2, virtualEntity->pos.y);
+    set_variable(script, outVar3, virtualEntity->pos.z);
     return ApiStatus_DONE2;
 }
 
@@ -1041,11 +1041,11 @@ ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall) {
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
-    VirtualEntity* temp = (*D_802DB7C0)[index];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
-    temp->rot.x = x;
-    temp->rot.y = y;
-    temp->rot.z = z;
+    virtualEntity->rot.x = x;
+    virtualEntity->rot.y = y;
+    virtualEntity->rot.z = z;
     return ApiStatus_DONE2;
 }
 
@@ -1055,11 +1055,11 @@ ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall) {
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
     f32 z = get_float_variable(script, *args++);
-    VirtualEntity* temp = (*D_802DB7C0)[index];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
-    temp->scale.x = x;
-    temp->scale.y = y;
-    temp->scale.z = z;
+    virtualEntity->scale.x = x;
+    virtualEntity->scale.y = y;
+    virtualEntity->scale.z = z;
     return ApiStatus_DONE2;
 }
 
@@ -1253,12 +1253,12 @@ ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
     s32 cond = get_variable(script, *args++);
-    VirtualEntity* temp = (*D_802DB7C0)[index];
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     if (cond) {
-        set_entity_model_flags(temp->entityModelIndex, flags);
+        set_entity_model_flags(virtualEntity->entityModelIndex, flags);
     } else {
-        clear_entity_model_flags(temp->entityModelIndex, flags);
+        clear_entity_model_flags(virtualEntity->entityModelIndex, flags);
     }
 
     return ApiStatus_DONE2;
@@ -1305,8 +1305,8 @@ VirtualEntity* func_802D4164(s32 index) {
     return (*D_802DB7C0)[index];
 }
 
-VirtualEntity* func_802D417C(s32 arg0, s32* entityModelData) {
-    VirtualEntity* virtualEntity = (*D_802DB7C0)[arg0];
+VirtualEntity* func_802D417C(s32 index, s32* entityModelData) {
+    VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->entityModelIndex = load_entity_model(entityModelData);
     virtualEntity->pos.x = 0.0f;
@@ -1320,7 +1320,7 @@ VirtualEntity* func_802D417C(s32 arg0, s32* entityModelData) {
     virtualEntity->scale.z = 1.0f;
     exec_entity_model_commandlist(virtualEntity->entityModelIndex);
 
-    return (*D_802DB7C0)[arg0];
+    return (*D_802DB7C0)[index];
 }
 
 s32 func_802D420C(s32* cmdList) {
