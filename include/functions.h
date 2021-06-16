@@ -306,6 +306,12 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
 ScriptInstance* get_script_by_index(s32 index);
 
+void set_action_state(s32 actionState);
+s32 get_collider_type_by_id(s32 colliderID);
+void func_800DFF78(s32 arg0);
+void subtract_hp(s32 amt);
+void open_status_menu_long(void);
+
 void suspend_all_group(s32 groupFlags);
 void kill_script(ScriptInstance* instanceToKill);
 void exec_entity_updatecmd(Entity* entity);

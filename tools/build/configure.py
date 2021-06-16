@@ -17,6 +17,8 @@ CFLAGS          = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -W
 CFLAGS_NUSYS    = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 CFLAGS_LIBULTRA = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 
+ASFLAGS = "-EB -G 0"
+
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
@@ -58,6 +60,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     cross = "mips-linux-gnu-"
 
+    cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
+    nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
+
     ninja.variable("python", sys.executable)
 
     ninja.rule("ld",
@@ -83,28 +88,28 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("cc",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_nusys",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_NUSYS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_NUSYS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_libultra",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_LIBULTRA} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_LIBULTRA} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -527,7 +532,7 @@ if __name__ == "__main__":
         print("error: system C preprocessor is not GNU!")
         print("This is a known issue on macOS - only clang's cpp is installed by default.")
         print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-        print("    ./configure --cpp cpp-10")
+        print("    ./configure --cpp cpp-11")
         exit(1)
 
     # default version behaviour is to only do those that exist

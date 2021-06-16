@@ -1,6 +1,15 @@
 #include "common.h"
 
-extern Vec3f* D_802B6DB0_E25C80;
+typedef struct HammerUnk {
+    /* 0x00 */ Vec3f unk_00;
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ s32 unk_14;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ s32 unk_1C;
+} HammerUnk;
+
+extern HammerUnk* D_802B6DB0_E25C80;
 
 s32 func_802B6000_E24ED0(s32 arg0) {
     if (arg0 & 0x1000000) {
@@ -61,9 +70,9 @@ void func_802B6048_E24F18(s32 arg0) {
         zTemp = playerStatus->position.z + cosTheta;
     } else {
         phi_s3 = 3;
-        xTemp = D_802B6DB0_E25C80->x + sinTheta;
-        yTemp = D_802B6DB0_E25C80->y + playerStatus->colliderHeight - 5.0f;
-        zTemp = D_802B6DB0_E25C80->z + cosTheta;
+        xTemp = D_802B6DB0_E25C80->unk_00.x + sinTheta;
+        yTemp = D_802B6DB0_E25C80->unk_00.y + playerStatus->colliderHeight - 5.0f;
+        zTemp = D_802B6DB0_E25C80->unk_00.z + cosTheta;
         phi_s1 = 1;
     }
 
@@ -97,6 +106,60 @@ void func_802B6048_E24F18(s32 arg0) {
 
 INCLUDE_ASM(s32, "world/action/hammer", func_802B62A4_E25174);
 
-INCLUDE_ASM(void, "world/action/hammer", func_802B66A8_E25578, void);
+void func_802B66A8_E25578(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    D_802B6DB0_E25C80->unk_1C = 0;
+
+    if (playerStatus->flags < 0) {
+        s32 animID;
+        s32 soundID;
+
+        playerStatus->flags &= ~0x80000000;
+        playerStatus->flags |= 0x200000;
+        D_802B6DB0_E25C80->unk_18 = 0;
+        playerStatus->fallState = 0;
+        playerStatus->currentSpeed = 0.0f;
+        playerStatus->unk_BC = 0;
+        D_802B6DB0_E25C80->unk_10 = func_802B62A4_E25174(D_802B6DB0_E25C80);
+
+        if (gPlayerData.hammerLevel == 2) {
+            soundID = 0x2117;
+            animID = 0x6001A;
+            if (D_802B6DB0_E25C80->unk_10 < 0) {
+                animID = 0x60018;
+                soundID = 0x2117;
+            }
+        } else if (gPlayerData.hammerLevel == 1) {
+            soundID = 0x2116;
+            animID = 0x60016;
+            if (D_802B6DB0_E25C80->unk_10 < 0) {
+                soundID = 0x2116;
+                animID = 0x60014;
+            }
+        } else {
+            soundID = 0x2115;
+            animID = 0x60012;
+            if (D_802B6DB0_E25C80->unk_10 < 0) {
+                soundID = 0x2115;
+                animID = 0x60010;
+            }
+        }
+
+        func_800DFEFC(animID);
+        sfx_play_sound_at_player(soundID, 0);
+        D_802B6DB0_E25C80->unk_0C = 0;
+        D_802B6DB0_E25C80->unk_14 = 0;
+    }
+
+    playerStatus->flags &= ~0x1000000;
+    if (D_802B6DB0_E25C80->unk_18 < 3 && (playerStatus->flags & 0x40000)) {
+        playerStatus->flags |= 0x20000000;
+    } else if (D_802B6DB0_E25C80->unk_18 < 2) {
+        D_802B6DB0_E25C80->unk_18++;
+    } else {
+        func_802B6820_E256F0(D_802B6DB0_E25C80);
+    }
+}
 
 INCLUDE_ASM(s32, "world/action/hammer", func_802B6820_E256F0);
