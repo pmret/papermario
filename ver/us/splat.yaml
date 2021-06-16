@@ -10033,7 +10033,7 @@ segments:
     subsegments:
     - [0xE24ED0, c, hammer]
     - [0xE25C80, data, hammer]
-    - [0xE25CC0, .rodata, hammer]
+    - [0xE25C90, .rodata, hammer]
   - type: code
     name: world_action_spin
     dir: world/action

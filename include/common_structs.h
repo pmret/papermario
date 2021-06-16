@@ -1713,7 +1713,7 @@ typedef struct PlayerStatus {
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
-    /* 0x060 */ char unk_60[4];
+    /* 0x060 */ s32 unk_60;
     /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
     /* 0x06C */ f32 unk_6C;
