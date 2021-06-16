@@ -2030,4 +2030,20 @@ typedef struct EntityModel {
 
 typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
 
+typedef struct VirtualEntity {
+    /* 0x00 */ s32 entityModelIndex;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rot;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f goalPos;
+    /* 0x34 */ f32 moveDist;
+    /* 0x38 */ f32 moveAngle;
+    /* 0x3C */ f32 moveSpeed;
+    /* 0x40 */ f32 jumpGravity;
+    /* 0x44 */ f32 jumpVelocity;
+    /* 0x48 */ f32 moveTime;
+} VirtualEntity; // size = 0x4C
+
+typedef VirtualEntity* VirtualEntityList[0x40];
+
 #endif
