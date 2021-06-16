@@ -39,7 +39,7 @@ ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
         isImmobile = TRUE;
     }
 
-    script->varTable[0].s = isImmobile;
+    script->varTable[0] = isImmobile;
     return ApiStatus_DONE2;
 }
 
@@ -58,10 +58,10 @@ ApiStatus func_80260B70(ScriptInstance* script, s32 isInitialCall) {
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(0x3FC);
-    script->varTable[0].s = 0;
+    script->varTable[0] = 0;
     if (player->debuff == 3 || player->debuff == 4 || player->debuff == 5 || player->debuff == 6 ||
         player->debuff == 7 || player->debuff == 8) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     }
     return ApiStatus_DONE2;
 }
@@ -83,9 +83,9 @@ ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
 
     var = player->varTable[0];
     if (var >= rand_int(100)) {
-        script->varTable[0].s = TRUE;
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0].s = FALSE;
+        script->varTable[0] = FALSE;
     }
     return ApiStatus_DONE2;
 }
@@ -137,7 +137,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0].s = sleepTime;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -194,7 +194,7 @@ ApiStatus func_802611E8(ScriptInstance *script, s32 isInitialCall) {
     }
     playerData->invItems[find_item(0x95)] = ITEM_NONE;
     sort_items();
-    script->varTable[3].s = item->potencyA;
+    script->varTable[3] = item->potencyA;
 
     return ApiStatus_DONE2;
 }
@@ -230,9 +230,9 @@ INCLUDE_ASM(s32, "18F340", func_8026127C);
 ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
 
-    script->varTable[0].s = FALSE;
+    script->varTable[0] = FALSE;
     if (partnerActorExists) {
-        script->varTable[0].s = TRUE;
+        script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
 }
@@ -386,9 +386,9 @@ ApiStatus func_802619B4(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus HasMerleeCastsLeft(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[0].s = FALSE;
+    script->varTable[0] = FALSE;
     if (playerData->merleeCastsLeft > 0) {
-        script->varTable[0].s = TRUE;
+        script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
 }
@@ -407,13 +407,13 @@ ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
     screenX += 30;
     screenY -= 19;
 
-    if (script->varTable[10].s > 0) {
+    if (script->varTable[10] > 0) {
         D_8029FBAC = create_icon(&D_80108AD4);
         set_icon_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
-    if (script->varTable[11].s > 0 || script->varTable[12].s > 0) {
+    if (script->varTable[11] > 0 || script->varTable[12] > 0) {
         D_8029FBA8 = create_icon(&D_80108AAC);
         set_icon_render_pos(D_8029FBA8, screenX, screenY);
     }
@@ -421,10 +421,10 @@ ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
-    if (script->varTable[10].s > 0) {
+    if (script->varTable[10] > 0) {
         free_icon(D_8029FBAC);
     }
-    if (script->varTable[11].s > 0 || script->varTable[12].s > 0) {
+    if (script->varTable[11] > 0 || script->varTable[12] > 0) {
         free_icon(D_8029FBA8);
     }
     return ApiStatus_DONE2;
@@ -481,15 +481,15 @@ ApiStatus func_80261D98(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_80261DD4(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
-    script->varTable[11].s = playerData->bootsLevel;
-    script->varTable[12].s = playerData->hammerLevel;
+    script->varTable[11] = playerData->bootsLevel;
+    script->varTable[12] = playerData->hammerLevel;
     return ApiStatus_DONE2;
 }
 
 INCLUDE_ASM(s32, "18F340", func_80261DF4);
 
 ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
-    ItemEntity* item = get_item_entity(script->varTable[10].s);
+    ItemEntity* item = get_item_entity(script->varTable[10]);
     Actor* player = gBattleStatus.playerActor;
     s32 ft1;
     f32 deltaX;
@@ -529,7 +529,7 @@ ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802620F8(ScriptInstance* script, s32 isInitialCall) {
     // TODO get type correct
-    s32* temp_v1 = &D_8029FBB0[script->varTable[14].s];
+    s32* temp_v1 = &D_8029FBB0[script->varTable[14]];
 
     if (*temp_v1 != 0) {
         (*temp_v1)--;

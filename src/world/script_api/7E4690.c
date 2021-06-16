@@ -4,14 +4,14 @@
 ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    script->varTable[10].s = 0;
+    script->varTable[10] = 0;
     if (partner_get_ride_script() != NULL) {
         if (D_8010EBB0.unk_00 == 0) {
-            script->varTable[10].s = 0;
+            script->varTable[10] = 0;
         } else {
-            script->varTable[10].s = 1;
-            script->varTable[11].s = partner_get_ride_script();
-            script->varTable[13].s = playerStatus->targetYaw;
+            script->varTable[10] = 1;
+            script->varTable[11] = partner_get_ride_script();
+            script->varTable[13] = playerStatus->targetYaw;
         }
     }
 

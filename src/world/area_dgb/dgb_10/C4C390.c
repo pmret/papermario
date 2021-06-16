@@ -296,12 +296,12 @@ ApiStatus N(func_80240000_C4C390)(ScriptInstance* script, s32 isInitialCall) {
     s32* array = script->array;
     f32 distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[3]);
 
-    script->varTable[0].s = 1;
+    script->varTable[0] = 1;
     if ((playerStatus->actionState != 14) && (playerStatus->actionState != 16)) {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
     if (script->array[4] <= distance) {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
     return ApiStatus_DONE2;
@@ -313,12 +313,12 @@ ApiStatus N(func_802400A0_C4C430)(ScriptInstance* script, s32 isInitialCall) {
     s32* array = script->array;
 
     distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[4]);
-    script->varTable[0].s = 0;
+    script->varTable[0] = 0;
     if (distance < 112.5f) {
-        script->varTable[0].s = 2;
+        script->varTable[0] = 2;
     }
     if (distance < 37.5f) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     }
 
     return ApiStatus_DONE2;
@@ -339,7 +339,7 @@ ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance* script, s32 isInitialCall) {
     } else {
         var = 1;
     }
-    script->varTable[0].s = var;
+    script->varTable[0] = var;
 
     return ApiStatus_DONE2;
 }

@@ -999,7 +999,7 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance* script, s32 isInitialCall) {
         ptr = script->functionTemp[2].s;
 
         partnerActiveCount = 0;
-        var = script->varTable[12].s >= 0;
+        var = script->varTable[12] >= 0;
 
         for (i = 0; i < 8; i++) {
             idx = N(D_80243D38_C3A268)[i];
@@ -1047,10 +1047,10 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance* script, s32 isInitialCall) {
 
     func_800F1538();
     if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0].s = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1].s = ptr->unk_108[script->functionTemp[1].s - 1];
+        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
+        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
     } else {
-        script->varTable[0].s = -1;
+        script->varTable[0] = -1;
     }
 
     heap_free(script->functionTemp[2].s);
@@ -1227,8 +1227,8 @@ s32 N(func_80242F08_C39438)(ScriptInstance* script, s32 isInitialCall) {
     s32 ret = 0;
 
     if (isInitialCall) {
-        script->varTable[0].s = get_variable(script, *args++);
-        script->varTable[1].s = get_variable(script, *args++);
+        script->varTable[0] = get_variable(script, *args++);
+        script->varTable[1] = get_variable(script, *args++);
         script->functionTemp[0].s = 0;
         script->functionTemp[1].s = 0;
         set_transition_stencil_color(0, 0xD0, 0xD0, 0xD0);
@@ -1240,7 +1240,7 @@ s32 N(func_80242F08_C39438)(ScriptInstance* script, s32 isInitialCall) {
                 script->functionTemp[0].s = 1;
                 script->functionTemp[2].s = 0;
             }
-            script->functionTemp[1].s += script->varTable[0].s;
+            script->functionTemp[1].s += script->varTable[0];
             if (script->functionTemp[1].s >= 0x100) {
                 script->functionTemp[1].s = 0xFF;
             }
@@ -1257,7 +1257,7 @@ s32 N(func_80242F08_C39438)(ScriptInstance* script, s32 isInitialCall) {
             if (script->functionTemp[1].s == 0) {
                 ret = 1;
             }
-            script->functionTemp[1].s -= script->varTable[1].s;
+            script->functionTemp[1].s -= script->varTable[1];
             if (script->functionTemp[1].s < 0) {
                 script->functionTemp[1].s = 0;
             }

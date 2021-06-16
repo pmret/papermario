@@ -265,7 +265,7 @@ s32 use_consumable(s32 arg0) {
     arg0 = gPlayerData.invItems[arg0];
     dma_copy(D_800F8010[0], D_800F8010[1], &D_802C0000);
     script = start_script(D_800F8010[2], 1, 0);
-    script->varTable[10].s = arg0;
+    script->varTable[10] = arg0;
     return script->id;
 }
 

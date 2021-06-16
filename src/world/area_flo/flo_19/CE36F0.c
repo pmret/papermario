@@ -686,13 +686,13 @@ ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80240540_CE3C30)(ScriptInstance* script, s32 isInitialCall) {
-    f32 temp_f20 = get_variable(NULL, script->varTable[2].s);
-    f32 dist = dist2D(0.0f, 0.0f, script->varTable[9].s, script->varTable[11].s);
-    f32 temp_f22 = clamp_angle(atan2(0.0f, 0.0f, script->varTable[9].s, script->varTable[11].s) - temp_f20);
+    f32 temp_f20 = get_variable(NULL, script->varTable[2]);
+    f32 dist = dist2D(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
+    f32 temp_f22 = clamp_angle(atan2(0.0f, 0.0f, script->varTable[9], script->varTable[11]) - temp_f20);
 
     temp_f20 = sin_deg(temp_f22);
     gPlayerStatus.position.x = (dist * temp_f20) + 0.0f;
-    gPlayerStatus.position.y = get_variable(NULL, script->varTable[10].s) + get_variable(NULL, script->varTable[3].s);
+    gPlayerStatus.position.y = get_variable(NULL, script->varTable[10]) + get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(temp_f22);
     gPlayerStatus.position.z = 0.0f - (dist * temp_f20);
 
@@ -701,13 +701,13 @@ ApiStatus N(func_80240540_CE3C30)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_by_index(0);
-    f32 temp_f20 = get_variable(NULL, script->varTable[2].s);
-    f32 dist = dist2D(0.0f, 0.0f, script->varTable[12].s, script->varTable[14].s);
-    f32 clamped = clamp_angle(atan2(0.0f, 0.0f, script->varTable[12].s, script->varTable[14].s) - temp_f20);
+    f32 temp_f20 = get_variable(NULL, script->varTable[2]);
+    f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
+    f32 clamped = clamp_angle(atan2(0.0f, 0.0f, script->varTable[12], script->varTable[14]) - temp_f20);
 
     temp_f20 = sin_deg(clamped);
     npc->pos.x = (dist * temp_f20) + 0.0f;
-    npc->pos.y = get_variable(NULL, script->varTable[13].s) + get_variable(NULL, script->varTable[3].s);
+    npc->pos.y = get_variable(NULL, script->varTable[13]) + get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(clamped);
     npc->pos.z = 0.0f - (dist * temp_f20);
 
@@ -715,7 +715,7 @@ ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80240784_CE3E74)(ScriptInstance* script, s32 isInitialCall) {
-    set_transition_stencil_zoom_1(1, script->varTable[0].s);
+    set_transition_stencil_zoom_1(1, script->varTable[0]);
     return ApiStatus_DONE2;
 }
 

@@ -36,7 +36,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A25C0, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0].s = sleepTime;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -244,7 +244,7 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
             i = D_802A25E8 / 26;
             g = D_802A25FC[i];
             battleStatus->selectedItemID = g;
-            script->varTable[0].s = g;
+            script->varTable[0] = g;
             free_dynamic_entity(D_802A25F8);
             for (i = 0; i < 7; i++) {
                 free_icon(*iconPtr++);

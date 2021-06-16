@@ -36,7 +36,7 @@ typedef struct {
 } arn_07_struct; // size = 0x58
 
 ApiStatus N(func_80240000_BECDF0)(ScriptInstance* script, s32 isInitialCall) {
-    arn_07_struct* ptr = script->varTable[0].s;
+    arn_07_struct* ptr = script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
     return ((ptr->unk_44 < 2) == 0) * ApiStatus_DONE2;
@@ -47,7 +47,7 @@ ApiStatus N(func_8024004C_BECE3C)(ScriptInstance* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
-        script->varTable[0].s = ptr;
+        script->varTable[0] = ptr;
         set_variable(NULL, SI_MAP_VAR(1), ptr);
         ptr->unk_38 = get_variable(script, *args++);
         ptr->unk_3C = get_variable(script, *args++);
@@ -72,7 +72,7 @@ ApiStatus N(func_8024004C_BECE3C)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    arn_07_struct* ptr = script->varTable[0].s;
+    arn_07_struct* ptr = script->varTable[0];
 
     switch (ptr->unk_44) {
         case 0:
@@ -171,7 +171,7 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_802405BC_BED3AC)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
-    arn_07_struct* ptr = script->varTable[0].s;
+    arn_07_struct* ptr = script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
 }
@@ -181,7 +181,7 @@ ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         arn_07_struct* ptr = heap_malloc(sizeof(arn_07_struct));
-        script->varTable[0].s = ptr;
+        script->varTable[0] = ptr;
         ptr->unk_38 = get_variable(script, *args++);
         ptr->unk_18 = get_float_variable(script, *args++);
         ptr->unk_24 = get_float_variable(script, *args++);
@@ -199,7 +199,7 @@ ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240708_BED4F8)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    arn_07_struct* ptr = script->varTable[0].s;
+    arn_07_struct* ptr = script->varTable[0];
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);

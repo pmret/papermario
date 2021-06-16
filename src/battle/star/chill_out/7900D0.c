@@ -22,7 +22,7 @@ ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = D_802A2CC0;
+    script->varTable[0] = D_802A2CC0;
     return ApiStatus_DONE2;
 }
 
@@ -48,14 +48,14 @@ ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
     s32 flag1 = 0x400000; // these manual flag ones are necessary to match. once we figure out flags, we can add more
     s32 flag2 = 0x80000;
 
-    script->varTable[0].s = 0;
+    script->varTable[0] = 0;
 
     if ((target->flags & 0x4000) || (target->flags & flag1) || (target->flags & 0x2000) ||
         (part->eventFlags & 0x40000) || (part->eventFlags & flag2)) {
         return ApiStatus_DONE2;
     }
 
-    script->varTable[0].s = 1;
+    script->varTable[0] = 1;
     return ApiStatus_DONE2;
 }
 

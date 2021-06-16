@@ -36,7 +36,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A2280, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0].s = sleepTime;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -58,7 +58,7 @@ ApiStatus N(func_802A123C_724F1C)(ScriptInstance* script, s32 isInitialCall) {
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
     s32 c = get_variable(script, *args++);
-    ItemEntity* item = get_item_entity(script->varTable[14].s);
+    ItemEntity* item = get_item_entity(script->varTable[14]);
 
     item->position.x = a;
     item->position.y = b;

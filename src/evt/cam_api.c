@@ -197,9 +197,9 @@ void exec_ShakeCam1(s32 arg0, s32 arg1, s32 arg2) {
     ScriptInstance* script;
 
     script = start_script_in_group(&ShakeCam1, 1, 0, 4);
-    script->varTable[0].s = arg0;
-    script->varTable[1].s = arg1;
-    script->varTable[2].s = arg2;
+    script->varTable[0] = arg0;
+    script->varTable[1] = arg1;
+    script->varTable[2] = arg2;
 }
 
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3) {

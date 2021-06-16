@@ -5,6 +5,6 @@
 #include "world/common/UnkMoveFunc1.inc.c"
 
 ApiStatus func_802A10E4_785C04(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = 3;
+    script->varTable[0] = 3;
     return ApiStatus_DONE2;
 }

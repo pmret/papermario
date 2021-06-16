@@ -8,11 +8,11 @@ ApiStatus N(func_80240310_C96240)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_80241780_C976B0) == NULL) {
         N(D_80241780_C976B0) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_80241780_C976B0)[i] = script->varTable[i].s;
+            N(D_80241780_C976B0)[i] = script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i].s = N(D_80241780_C976B0)[i];
+            script->varTable[i] = N(D_80241780_C976B0)[i];
         }
         heap_free(N(D_80241780_C976B0));
         N(D_80241780_C976B0) = NULL;
@@ -86,10 +86,10 @@ ApiStatus N(func_802406E0_C96610)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_802409F8_C96928);
 /*
 ApiStatus N(func_802409F8_C96928)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->varTable[2].s);
+    Npc *npc = get_npc_unsafe(script->varTable[2]);
 
     D_8024E1B4 = npc->currentAnim;
-    npc->currentAnim = script->varTable[4].s;
+    npc->currentAnim = script->varTable[4];
     return ApiStatus_DONE2;
 }
 */
@@ -97,7 +97,7 @@ ApiStatus N(func_802409F8_C96928)(ScriptInstance *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_kzn/kzn_20/C96240", func_80240A3C_C9696C);
 /*
 ApiStatus N(func_80240A3C_C9696C)(ScriptInstance *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2].s)->currentAnim = D_8024E1B4;
+    get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }
 */

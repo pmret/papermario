@@ -7,7 +7,7 @@ extern s32 bMarioIdleAnims[];
 
 ApiStatus func_80238000_710EF0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    script->varTable[0].s = battleStatus->outtaSightActive;
+    script->varTable[0] = battleStatus->outtaSightActive;
 
     return ApiStatus_DONE2;
 }
@@ -19,7 +19,7 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     f32 partnerTargetActorSize = (partnerTargetActor->size.y + partnerTargetActor->size.x) / 2;
 
     partnerTargetActorSize = (partnerTargetActorSize * 150.0f) / 100.0f;
-    script->varTable[0].s = partnerTargetActorSize;
+    script->varTable[0] = partnerTargetActorSize;
 
     return ApiStatus_DONE2;
 }
@@ -35,10 +35,10 @@ ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
     f32 scalingFactor = playerActor->scalingFactor;
 
     var0 *= scalingFactor;
-    script->varTable[0].s += var0;
+    script->varTable[0] += var0;
 
     var1 *= scalingFactor;
-    script->varTable[1].s += var1;
+    script->varTable[1] += var1;
 
     return ApiStatus_DONE2;
 }
@@ -58,7 +58,7 @@ ApiStatus N(IsPartnerImmobile)(ScriptInstance* script, s32 isInitialCall) {
         isImmobile = TRUE;
     }
 
-    script->varTable[0].s = isImmobile;
+    script->varTable[0] = isImmobile;
     return ApiStatus_DONE2;
 }
 
@@ -104,9 +104,9 @@ ApiStatus N(AverageTargetStatusChance)(ScriptInstance* script, s32 isInitialCall
     }
 
     if (nTargets > 0) {
-        script->varTable[0].s = chanceTotal / nTargets;
+        script->varTable[0] = chanceTotal / nTargets;
     } else {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
     return ApiStatus_DONE2;

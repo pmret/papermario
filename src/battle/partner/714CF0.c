@@ -6,9 +6,9 @@ ApiStatus func_80238000_714CF0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & 0x40) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     } else {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
     return ApiStatus_DONE2;

@@ -68,9 +68,9 @@ ApiStatus N(AverageTargetParalyzeChance)(ScriptInstance* script, s32 isInitialCa
     }
 
     if (nTargets > 0) {
-        script->varTable[0].s = chanceTotal / nTargets;
+        script->varTable[0] = chanceTotal / nTargets;
     } else {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
     return ApiStatus_DONE2;

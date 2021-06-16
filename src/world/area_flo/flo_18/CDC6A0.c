@@ -1708,7 +1708,7 @@ typedef struct N(temp) {
 } N(temp);
 
 ApiStatus N(func_80240340_CDC9E0)(ScriptInstance* script, s32 isInitialCall) {
-    N(temp)* ptr = script->varTable[15].s;
+    N(temp)* ptr = script->varTable[15];
 
     ptr->unk_0C->unk_30 = 69;
     ptr->unk_0C->unk_34 = 255;

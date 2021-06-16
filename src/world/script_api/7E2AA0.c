@@ -41,12 +41,12 @@ INCLUDE_ASM(ApiStatus, "world/script_api/7E2AA0", MakeDoorAdvanced, ScriptInstan
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802822A8);
 
 ApiStatus func_80282314(ScriptInstance* script, s32 isInitialCall) {
-    script->functionTemp[1].s = script->varTable[1].s;
+    script->functionTemp[1].s = script->varTable[1];
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80282324(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = *(UNK_TYPE*)script->functionTemp[1].s;
+    script->varTable[0] = *(UNK_TYPE*)script->functionTemp[1].s;
     return ApiStatus_DONE2;
 }
 
@@ -121,24 +121,24 @@ ApiStatus func_802827A8(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
     DoorStuff* temp = script->functionTemp[1].s;
 
-    script->varTable[2].s = temp->unk_04;
-    script->varTable[3].s = temp->unk_0C;
-    script->varTable[4].s = temp->unk_10;
-    script->varTable[5].s = temp->unk_14;
-    script->varTable[6].s = temp->unk_18;
-    script->varTable[7].s = temp->unk_1C;
-    script->varTable[8].s = temp->unk_20;
-    script->varTable[9].s = temp->unk_24;
-    script->varTable[10].s = temp->unk_28;
-    script->varTable[11].s = temp->unk_2C;
-    script->varTable[12].s = temp->unk_30;
-    script->varTable[13].s = temp->unk_34;
-    script->varTable[14].s = temp->unk_38;
-    script->varTable[15].s = temp->unk_3C;
+    script->varTable[2] = temp->unk_04;
+    script->varTable[3] = temp->unk_0C;
+    script->varTable[4] = temp->unk_10;
+    script->varTable[5] = temp->unk_14;
+    script->varTable[6] = temp->unk_18;
+    script->varTable[7] = temp->unk_1C;
+    script->varTable[8] = temp->unk_20;
+    script->varTable[9] = temp->unk_24;
+    script->varTable[10] = temp->unk_28;
+    script->varTable[11] = temp->unk_2C;
+    script->varTable[12] = temp->unk_30;
+    script->varTable[13] = temp->unk_34;
+    script->varTable[14] = temp->unk_38;
+    script->varTable[15] = temp->unk_3C;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80282868(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[1].s = script->functionTemp[1].s;
+    script->varTable[1] = script->functionTemp[1].s;
     return ApiStatus_DONE2;
 }

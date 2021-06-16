@@ -15,7 +15,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
 
     switch (selectedMoveID) {
         case 146:
-            if (script->varTable[10].s > 0) {
+            if (script->varTable[10] > 0) {
                 func_800701F0(1, x, y + 20, z);
             } else {
                 func_800701F0(0, x, y + 20, z);
@@ -23,7 +23,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
             sfx_play_sound(8214);
             break;
         case 147:
-            if (script->varTable[10].s > 0) {
+            if (script->varTable[10] > 0) {
                 func_800701F0(1, x, y + 20, z);
             } else {
                 func_800701F0(0, x, y + 20, z);
@@ -31,7 +31,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
             sfx_play_sound(8215);
             break;
         case 148:
-            if (script->varTable[10].s > 0) {
+            if (script->varTable[10] > 0) {
                 func_800701F0(2, x, y + 20, z);
             } else {
                 func_800701F0(1, x, y + 20, z);
@@ -132,12 +132,12 @@ ApiStatus func_80238358_6FB068(ScriptInstance* script, s32 isInitialCall) {
 
 
     if (!(var0 < 100)) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     } else {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
-    script->varTable[15].s = var1;
+    script->varTable[15] = var1;
 
     return ApiStatus_DONE2;
 }
@@ -179,12 +179,12 @@ ApiStatus func_8023849C_6FB1AC(ScriptInstance* script, s32 isInitialCall) {
 
 
     if (!(var0 < 100)) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     } else {
-        script->varTable[0].s = 0;
+        script->varTable[0] = 0;
     }
 
-    script->varTable[15].s = var1;
+    script->varTable[15] = var1;
 
     return ApiStatus_DONE2;
 }
@@ -214,12 +214,12 @@ ApiStatus func_80238590_6FB2A0(ScriptInstance* script, s32 isInitialCall) {
 
 
     if (!(var0 < 100)) {
-        script->varTable[0].s = TRUE;
+        script->varTable[0] = TRUE;
     } else {
-        script->varTable[0].s = FALSE;
+        script->varTable[0] = FALSE;
     }
 
-    script->varTable[15].s = var1;
+    script->varTable[15] = var1;
 
     return ApiStatus_DONE2;
 }

@@ -124,9 +124,9 @@ ApiStatus GetModelCenter(ScriptInstance* script, s32 isInitialCall) {
 
     get_model_center_and_size(get_variable(script, *args++), &centerX, &centerY, &centerZ, &sizeX, &sizeY,
                               &sizeZ);
-    script->varTable[0].s = centerX;
-    script->varTable[1].s = centerY;
-    script->varTable[2].s = centerZ;
+    script->varTable[0] = centerX;
+    script->varTable[1] = centerY;
+    script->varTable[2] = centerZ;
     return ApiStatus_DONE2;
 }
 
@@ -370,9 +370,9 @@ ApiStatus GetColliderCenter(ScriptInstance* script, s32 isInitialCall) {
 
     get_collider_center(get_variable(script, *script->ptrReadPos), &x, &y, &z);
 
-    script->varTable[0].s = x;
-    script->varTable[1].s = y;
-    script->varTable[2].s = z;
+    script->varTable[0] = x;
+    script->varTable[1] = y;
+    script->varTable[2] = z;
 
     return ApiStatus_DONE2;
 }

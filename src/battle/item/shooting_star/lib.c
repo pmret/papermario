@@ -36,7 +36,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A1EE0, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0].s = sleepTime;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -68,7 +68,7 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     f32 temp_f22;
     f32 test;
 
-    if (script->varTable[0].s & 3) {
+    if (script->varTable[0] & 3) {
         rand = rand_int(100);
         rand += c8;
         temp_f22 = temp_s1 - rand;

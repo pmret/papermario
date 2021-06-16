@@ -109,17 +109,17 @@ ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = gCameras[gCurrentCameraID].lookAt_obj.x;
-    script->varTable[1].s = gCameras[gCurrentCameraID].lookAt_obj.y;
-    script->varTable[2].s = gCameras[gCurrentCameraID].lookAt_obj.z;
+    script->varTable[0] = gCameras[gCurrentCameraID].lookAt_obj.x;
+    script->varTable[1] = gCameras[gCurrentCameraID].lookAt_obj.y;
+    script->varTable[2] = gCameras[gCurrentCameraID].lookAt_obj.z;
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = FALSE;
+    script->varTable[0] = FALSE;
     if (gPlayerData.merleeCastsLeft > 0) {
-        script->varTable[0].s = TRUE;
+        script->varTable[0] = TRUE;
     }
 
     return ApiStatus_DONE2;

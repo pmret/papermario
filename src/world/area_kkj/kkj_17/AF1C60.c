@@ -8,11 +8,11 @@ ApiStatus N(func_80240000_AF1C60)(ScriptInstance* script, s32 isInitialCall) {
     if (N(D_802408C0_AF2520) == NULL) {
         N(D_802408C0_AF2520) = heap_malloc(16 * sizeof(s32));
         for (i = 0; i < 16; i++) {
-            N(D_802408C0_AF2520)[i] = script->varTable[i].s;
+            N(D_802408C0_AF2520)[i] = script->varTable[i];
         }
     } else {
         for (i = 0; i < 16; i++) {
-            script->varTable[i].s = N(D_802408C0_AF2520)[i];
+            script->varTable[i] = N(D_802408C0_AF2520)[i];
         }
         heap_free(N(D_802408C0_AF2520));
         N(D_802408C0_AF2520) = NULL;

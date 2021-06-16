@@ -2,9 +2,9 @@
 #include "map.h"
 
 ApiStatus N(IsGameStatusUnkAA_1)(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = 0;
+    script->varTable[0] = 0;
     if (gGameStatusPtr->demoFlags & 1) {
-        script->varTable[0].s = 1;
+        script->varTable[0] = 1;
     }
 
     return ApiStatus_DONE2;

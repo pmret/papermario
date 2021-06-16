@@ -565,11 +565,11 @@ ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
-        script->varTable[14].s = 0;
+        script->varTable[14] = 0;
         return ApiStatus_DONE2;
     }
 
-    script->varTable[14].s = 1;
+    script->varTable[14] = 1;
     set_variable(NULL, SI_MAP_VAR(0), get_npc_unsafe(-4)->flags);
     return ApiStatus_DONE2;
 }

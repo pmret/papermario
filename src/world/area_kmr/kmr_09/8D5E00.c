@@ -120,7 +120,7 @@ ApiStatus N(func_8024130C_8D710C)(ScriptInstance* script, s32 isInitialCall) {
 */
 
 ApiStatus func_802414F8_8D72F8(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = get_enemy_safe(2);
+    script->varTable[0] = get_enemy_safe(2);
 
     return ApiStatus_DONE2;
 }

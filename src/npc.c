@@ -1104,6 +1104,38 @@ Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius) {
 }
 
 INCLUDE_ASM(s32, "npc", func_8003D1D4);
+// s32 func_8003D1D4(s32 arg0) {
+//     s32 entityIndex = (arg0 | 0x4000);
+//     s32 yTemp = get_entity_by_index(entityIndex)->position.y - 10.0f;
+//     s32 i;
+
+//     for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+//         Npc* npc = (*gCurrentNpcListPtr)[i];
+
+//         if (npc != NULL && npc->flags != 0) {
+//             if (!(npc->flags & (0x80000000 | 0x4))) {
+//                 if (!(npc->pos.y < yTemp)) {
+//                     s32 temp_v0;
+
+//                     if (npc->flags & 0x8008) {
+//                         temp_v0 = func_8003D2F8(npc);
+//                         if (temp_v0 != 0) {
+//                             if (entityIndex == temp_v0) {
+//                                 return i;
+//                             }
+//                         }
+//                     } else if (npc->unk_84 & 0x4000) {
+//                         if (entityIndex == npc->unk_84) {
+//                             return i;
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+
+//     return -1;
+// }
 
 s32 func_8003D2F8(Npc* npc) {
     f32 x;

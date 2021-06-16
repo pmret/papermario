@@ -36,7 +36,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         set_icon_render_pos(D_802A1A60, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0].s = sleepTime;
+    script->varTable[0] = sleepTime;
 
     return ApiStatus_DONE2;
 }
@@ -64,7 +64,7 @@ ApiStatus N(func_802A123C_7217DC)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            inflict_status(player, STATUS_STONE, script->varTable[0].s);
+            inflict_status(player, STATUS_STONE, script->varTable[0]);
             player->status = 0;
             script->functionTemp[1].s = 3;
             script->functionTemp[0].s = 1;

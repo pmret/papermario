@@ -360,7 +360,7 @@ ApiStatus MakeItemEntity(ScriptInstance* script, s32 isInitialCall) {
     s32 itemSpawnMode = get_variable(script, *args++);
     s32 pickupVar = get_variable_index(script, *args++);
 
-    script->varTable[0].s = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
     return ApiStatus_DONE2;
 }
 
@@ -373,7 +373,7 @@ ApiStatus DropItemEntity(ScriptInstance* script, s32 isInitialCall) {
     s32 itemSpawnMode = get_variable(script, *args++);
     s32 pickupVar = get_variable(script, *args++);
 
-    script->varTable[0].s = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
     return ApiStatus_DONE2;
 }
 
@@ -386,8 +386,8 @@ ApiStatus DropItemEntityB(ScriptInstance* script, s32 isInitialCall) {
     s32 itemSpawnMode = get_variable(script, *args++);
     s32 pickupVar = get_variable_index(script, *args++);
 
-    script->varTable[0].s = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
-    set_item_entity_flags(script->varTable[0].s, 0x4000);
+    script->varTable[0] = make_item_entity_nodelay(itemID, x, y, z, itemSpawnMode, pickupVar);
+    set_item_entity_flags(script->varTable[0], 0x4000);
     return ApiStatus_DONE2;
 }
 
@@ -472,17 +472,17 @@ ApiStatus func_802D721C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus AddCoin(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = add_coins(get_variable(script, *script->ptrReadPos));
+    script->varTable[0] = add_coins(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus AddStarPoints(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = add_star_points(get_variable(script, *script->ptrReadPos));
+    script->varTable[0] = add_star_points(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
 ApiStatus AddStarPieces(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0].s = add_star_pieces(get_variable(script, *script->ptrReadPos));
+    script->varTable[0] = add_star_pieces(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 

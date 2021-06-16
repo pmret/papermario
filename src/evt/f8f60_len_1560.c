@@ -3,30 +3,30 @@
 ApiStatus MakeLerp(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
-    script->varTable[0xC].s = get_variable(script, *ptrReadPos++); // start
-    script->varTable[0xD].s = get_variable(script, *ptrReadPos++); // end
-    script->varTable[0xF].s = get_variable(script, *ptrReadPos++); // duration
-    script->varTable[0xB].s = get_variable(script, *ptrReadPos++); // easing type
-    script->varTable[0xE].s = 0; // elapsed
+    script->varTable[0xC] = get_variable(script, *ptrReadPos++); // start
+    script->varTable[0xD] = get_variable(script, *ptrReadPos++); // end
+    script->varTable[0xF] = get_variable(script, *ptrReadPos++); // duration
+    script->varTable[0xB] = get_variable(script, *ptrReadPos++); // easing type
+    script->varTable[0xE] = 0; // elapsed
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus UpdateLerp(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0x0].s = (s32) update_lerp(
-                                script->varTable[0xB].s,
-                                script->varTable[0xC].s,
-                                script->varTable[0xD].s,
-                                script->varTable[0xE].s,
-                                script->varTable[0xF].s
+    script->varTable[0x0] = (s32) update_lerp(
+                                script->varTable[0xB],
+                                script->varTable[0xC],
+                                script->varTable[0xD],
+                                script->varTable[0xE],
+                                script->varTable[0xF]
                             );
 
-    if (script->varTable[0xE].s >= script->varTable[0xF].s) {
-        script->varTable[0x1].s = 0; // finished
+    if (script->varTable[0xE] >= script->varTable[0xF]) {
+        script->varTable[0x1] = 0; // finished
     } else {
-        script->varTable[0x1].s = 1; // lerping
+        script->varTable[0x1] = 1; // lerping
     }
-    script->varTable[0xE].s++;
+    script->varTable[0xE]++;
 
     return ApiStatus_DONE2;
 }
@@ -359,7 +359,7 @@ s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
     s32 easingType = get_variable(script, *args++);
     Path* path = heap_malloc(sizeof(Path));
 
-    script->varTable[15].s = path;
+    script->varTable[15] = path;
     path->numVectors = numVectors;
     path->unk_04 = heap_malloc(numVectors * sizeof(f32));
     path->staticVectorList = vectorList;
