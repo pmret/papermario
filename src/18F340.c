@@ -58,10 +58,10 @@ ApiStatus func_80260B70(ScriptInstance* script, s32 isInitialCall) {
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(0x3FC);
-    script->varTable[0] = 0;
-    if (player->debuff == 3 || player->debuff == 4 || player->debuff == 5 || player->debuff == 6 ||
-        player->debuff == 7 || player->debuff == 8) {
-        script->varTable[0] = 1;
+    script->varTable[0] = FALSE;
+    if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
+        player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
+        script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
 }
