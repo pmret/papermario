@@ -1791,7 +1791,7 @@ typedef struct EncounterStatus {
     /* 0x01D */ s8 currentAreaIndex;
     /* 0x01E */ u8 currentMapIndex;
     /* 0x01F */ u8 currentEntryIndex;
-    /* 0x020 */ u8 mapID;
+    /* 0x020 */ s8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
     /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;

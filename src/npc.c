@@ -1300,12 +1300,13 @@ void func_8003D788(Npc* npc, s32 arg1) {
         f32 x = npc->pos.x;
         f32 y = npc->pos.y + 0.0f;
         f32 z = npc->pos.z;
+
         if (phi_a2 == 0) {
             fx_walk_large(0, x, y, z, D_80077C10);
             D_80077C10 = clamp_angle(D_80077C10 + 35.0f);
-            return;
+        } else {
+            func_80072350(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
         }
-        func_80072350(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
     } else if (arg1 != 0) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
@@ -1719,8 +1720,6 @@ Enemy* get_enemy(s32 npcID) {
     PANIC();
 }
 
-#ifdef NON_MATCHING
-// Matching, but having a TU padding issue
 Enemy* get_enemy_safe(s32 npcID) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
@@ -1728,6 +1727,7 @@ Enemy* get_enemy_safe(s32 npcID) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
+        
         if (currentEncounter != NULL) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
@@ -1739,6 +1739,3 @@ Enemy* get_enemy_safe(s32 npcID) {
     }
     return NULL;
 }
-#else
-INCLUDE_ASM(Enemy*, "npc", get_enemy_safe, s32 npcID);
-#endif
