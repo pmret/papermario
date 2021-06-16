@@ -49,10 +49,24 @@ void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
 f32 length2D(f32 x, f32 y);
+void input_to_move_vector(f32* angle, f32* magnitude);
+void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
+f32 func_800E5348(void);
 
 void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 void set_hud_element_scale(s32 index, f32 scale);
+
+void set_entity_model_render_command_list(s32 idx, u32* commandList);
+void set_entity_model_flags(s32 idx, s32 newFlags);
+void clear_entity_model_flags(s32 idx, s32 newFlags);
+void exec_entity_model_commandlist(s32 idx);
+s32 load_entity_model(s32* cmdList);
+
+f32 func_800E34D8(void);
+f32 func_800E3514(f32, s32* colliderID);
+s32 func_800E26C4(void);
+void func_802667F0(s32, Actor*, f32, f32, f32);
 
 void create_shadow_callback(Shadow* entity);
 void func_802E10F4(Entity* entity);
@@ -310,6 +324,10 @@ void func_80070970(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void func_800709D0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_80070130(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void func_800701F0(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void func_80070370(s32, f32, f32, f32, f32, s32, s32, s32);
+void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
+void func_80070A30(s32, f32, f32, f32, f32, s32, EffectInstanceData**);
+void func_80070EB0(s32, f32, f32, f32, f32, EffectInstanceData**);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 void fx_walk_large(s32, f32, f32, f32, f32);

@@ -63,7 +63,7 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_800702B0);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070310);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80070370);
+INCLUDE_ASM(void, "4ac90_len_3910", func_80070370, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_800703D0);
 
@@ -86,7 +86,7 @@ INCLUDE_ASM(void, "4ac90_len_3910", func_800706D0, s32 arg0, f32 arg1, f32 arg2,
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070730);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", fx_sweat);
+INCLUDE_ASM(void, "4ac90_len_3910", fx_sweat, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 arg6);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", fx_sleep_bubble);
 
@@ -100,7 +100,7 @@ INCLUDE_ASM(void, "4ac90_len_3910", func_80070970, s32 arg0, f32 arg1, f32 arg2,
 
 INCLUDE_ASM(void, "4ac90_len_3910", func_800709D0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80070A30);
+INCLUDE_ASM(void, "4ac90_len_3910", func_80070A30, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, EffectInstanceData** arg6);
 
 INCLUDE_ASM(void, "4ac90_len_3910", func_80070A90, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
@@ -124,7 +124,7 @@ INCLUDE_ASM(s32, "4ac90_len_3910", func_80070DF0);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070E50);
 
-INCLUDE_ASM(s32, "4ac90_len_3910", func_80070EB0);
+INCLUDE_ASM(void, "4ac90_len_3910", func_80070EB0, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstanceData** arg5);
 
 INCLUDE_ASM(s32, "4ac90_len_3910", func_80070F10);
 

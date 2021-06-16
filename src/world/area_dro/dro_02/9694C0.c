@@ -3203,7 +3203,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
         N(D_8024EFC8) = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
-        effectPtr = N(D_8024EFC0)->unk_0C;
+        effectPtr = N(D_8024EFC0)->instanceData;
         effectPtr->unk_18 = 0;
         effectPtr->unk_20 = 0;
         effectPtr->unk_24.s = 0;
@@ -3211,7 +3211,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
         effectPtr->unk_1C = 0;
     }
 
-    effectPtr = N(D_8024EFC0)->unk_0C;
+    effectPtr = N(D_8024EFC0)->instanceData;
 
     effectPtr->unk_20 += 10;
     effectPtr->unk_28 += 10;
@@ -3234,7 +3234,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
         N(D_8024EFC8)->flags |= 0x10;
     }
 
-    effectPtr = N(D_8024EFC0)->unk_0C;
+    effectPtr = N(D_8024EFC0)->instanceData;
     effectPtr->unk_18 -= 10;
     effectPtr->unk_20 -= 10;
     effectPtr->unk_24.s -= 10;
@@ -3258,7 +3258,7 @@ ApiStatus N(func_80240D3C_969EFC)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240D70_969F30)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->unk_0C;
+    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->instanceData;
 
     switch (var) {
         case 0:

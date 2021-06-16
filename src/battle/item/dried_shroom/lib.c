@@ -1,6 +1,5 @@
 #include "dried_shroom.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A1A90;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

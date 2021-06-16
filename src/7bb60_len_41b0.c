@@ -1,9 +1,6 @@
 #include "common.h"
 #include "world/partners.h"
 
-f32 func_800E34D8(void);
-f32 func_800E3514(f32, s32* colliderID);
-
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
@@ -22,16 +19,16 @@ s32 func_800E26C4(void) {
         actionState == ACTION_STATE_USE_TWEESTER ||
         actionState == ACTION_STATE_SPIN
        ) {
-        return 1;
+        return TRUE;
     }
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
             if (temp_8010EBB0->unk_00 != 0) {
-                return 1;
+                return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= 4;
-                return 0;
+                return FALSE;
             }
         } else {
             if (temp_8010EBB0->unk_03 == 6 || temp_8010EBB0->unk_03 == 7) {
@@ -39,11 +36,11 @@ s32 func_800E26C4(void) {
             }
             if (temp_8010EBB0->unk_03 == 4) {
                 gPlayerStatusPtr->animFlags |= 4;
-                return 0;
+                return FALSE;
             }
         }
     }
-    return 0;
+    return FALSE;
 }
 
 void set_action_state(s32 actionState);
@@ -317,7 +314,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5174);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", can_player_interact);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5348);
+INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5348, void);
 
 void func_800E546C(void) {
     f32 angle = 0.0f;

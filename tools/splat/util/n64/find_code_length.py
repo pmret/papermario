@@ -1,6 +1,8 @@
 #! /usr/bin/python3
 
 from capstone import *
+
+from capstone import Cs, CS_ARCH_MIPS, CS_MODE_MIPS64, CS_MODE_BIG_ENDIAN
 from capstone.mips import *
 
 import argparse

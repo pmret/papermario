@@ -9,8 +9,8 @@ if TYPE_CHECKING:
     from segtypes.n64.palette import N64SegPalette as Palette
 
 class N64SegCi8(N64SegRgba16):
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
         self.palette: 'Optional[Palette]' = None
         self.palette_name = self.name
@@ -51,4 +51,4 @@ class N64SegCi8(N64SegRgba16):
         return self.width * self.height
 
     def cache(self):
-        return (self.config, self.rom_end, 1)
+        return (self.yaml, self.rom_end, 1)

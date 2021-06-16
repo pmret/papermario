@@ -113,7 +113,7 @@ INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, ScriptInstance* script, s32 isIniti
 ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
     ActorMovementWalk* walkMovement = &player->walk;
-    
+
     if (isInitialCall) {
         script->functionTemp[0].s = 0;
     }
@@ -139,9 +139,9 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
 
     walkMovement->currentPos.y += walkMovement->velocity;
     walkMovement->velocity -= walkMovement->acceleration;
-    
+
     add_xz_vec3f(&walkMovement->currentPos, walkMovement->speed, walkMovement->angle);
-    
+
     player->currentPos.x = walkMovement->currentPos.x;
     player->currentPos.y = walkMovement->currentPos.y;
     player->currentPos.z = walkMovement->currentPos.z;
@@ -154,7 +154,7 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
 
         return ApiStatus_DONE1;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 

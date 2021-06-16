@@ -1,7 +1,7 @@
 #include "common.h"
 
-extern UNK_TYPE D_802EA728;
-extern UNK_TYPE D_802EA760;
+extern u32* D_802EA728;
+extern u32* D_802EA760;
 extern StaticEntityData D_802EA7BC;
 extern UNK_TYPE D_802EB3C0;
 

@@ -7,6 +7,7 @@ from util.color import unpack_color
 from util import options
 import png
 import xml.etree.ElementTree as ET
+import struct
 
 import pylibyaml
 import yaml
@@ -252,10 +253,10 @@ class Component:
 class N64SegPaperMarioNpcSprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
 
-        self.files = segment["files"]
+        self.files = yml["files"]
 
         with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
             self.sprite_cfg = yaml.load(f.read(), Loader=yaml.SafeLoader)
@@ -295,4 +296,4 @@ class N64SegPaperMarioNpcSprites(N64Segment):
         return [LinkerEntry(self, out_paths, basepath, ".data")]
 
     def cache(self):
-        return (self.config, self.rom_end, self.sprite_cfg)
+        return (self.yaml, self.rom_end, self.sprite_cfg)

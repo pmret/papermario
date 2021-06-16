@@ -3,6 +3,7 @@ import sys
 import os
 from ctypes import *
 from struct import pack, unpack_from
+from util import log
 
 tried_loading = False
 lib = None
@@ -45,6 +46,10 @@ def decompress_yay0(in_bytes, byte_order="big"):
         hdr = Yay0.from_buffer_copy(pack("<IIII", *unpack_from(">IIII", in_bytes, 0)))
     else:
         hdr = Yay0.from_buffer_copy(in_bytes, 0)
+
+    magic = getattr(hdr, hdr._fields_[0][0])
+    if magic != int.from_bytes(str.encode("Yay0"), byteorder="big"):
+        log.error(f"Yay0 magic is incorrect: {magic}")
 
     # create the input/output buffers, copying data to in
     src = (c_uint8 * len(in_bytes)).from_buffer_copy(in_bytes, 0)

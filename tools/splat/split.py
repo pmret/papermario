@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 
+import hashlib
 from typing import Dict, List, Union, Set, Any
 import argparse
 import pylibyaml
@@ -48,7 +49,7 @@ def initialize_segments(config_segments: Union[dict, list]) -> List[Segment]:
         this_start = Segment.parse_segment_start(seg_yaml)
         next_start = Segment.parse_segment_start(config_segments[i + 1])
 
-        segment: Segment = segment_class(seg_yaml, this_start, next_start)
+        segment: Segment = Segment.from_yaml(segment_class, seg_yaml, this_start, next_start)
 
         if segment.require_unique_name:
             if segment.name in seen_segment_names:
@@ -115,10 +116,18 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
 
     options.initialize(config, config_path, base_dir, target_path)
     options.set("modes", modes)
-    options.set("verbose", verbose)
+
+    if verbose:
+        options.set("verbose", True)
 
     with options.get_target_path().open("rb") as f2:
         rom_bytes = f2.read()
+
+    if "sha1" in config:
+        sha1 = hashlib.sha1(rom_bytes).hexdigest()
+        e_sha1 = config["sha1"]
+        if e_sha1 != sha1:
+            log.error(f"sha1 mismatch: expected {e_sha1}, was {sha1}")
 
     # Create main output dir
     options.get_base_path().mkdir(parents=True, exist_ok=True)

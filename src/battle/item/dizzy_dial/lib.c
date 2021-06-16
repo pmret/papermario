@@ -1,6 +1,5 @@
 #include "dizzy_dial.h"
 
-extern s32 D_80108A64;
 static s32* D_802A1CD0;
 static HudElement* D_802A1CD4;
 

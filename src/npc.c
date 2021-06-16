@@ -759,10 +759,7 @@ INCLUDE_ASM(s32, "npc", func_8003B44C);
 
 INCLUDE_ASM(s32, "npc", func_8003B464);
 
-#ifdef NON_MATCHING
-// Rodata issues.
 void func_8003B47C(Npc* npc, s32 arg1, s32 arg2) {
-
     switch (npc->unk_B4) {
         case 0:
             func_8003B500(npc, arg1, arg2);
@@ -781,18 +778,15 @@ void func_8003B47C(Npc* npc, s32 arg1, s32 arg2) {
             break;
     }
 }
-#else
-INCLUDE_ASM(void, "npc", func_8003B47C, Npc* npc, s32 arg1, s32 arg2);
-#endif
 
 void func_8003B500(Npc* npc, s32 arg1, s32 arg2) {
-
     if (npc->unk_B6 != 0) {
         npc->screenSpaceOffset2D[0] = 0.0f;
         npc->screenSpaceOffset2D[1] = 0.0f;
         npc->unk_B6 = 0;
         npc->verticalStretch = 1.0f;
     }
+
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         s32 temp_a2 = (npc->alpha * npc->alpha2 / 255);
         s32 temp = temp_a2 < 255; // TODO: better match?
@@ -898,11 +892,6 @@ void func_8003C658(Npc* npc, s32 idx) {
 
 void func_8003C660(Npc* npc, s32 idx) {
 }
-
-void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
-
-void func_80070A30(s32, f32, f32, f32, f32, s32, EffectInstanceData**);
-void func_80070EB0(s32, f32, f32, f32, f32, EffectInstanceData**);
 
 void func_8003C668(Npc* npc, s32 idx) {
     EffectInstanceData* instanceData;
@@ -1114,7 +1103,43 @@ Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius) {
     return closestNpc;
 }
 
+// Needs work
+#ifdef NON_MATCHING
+s32 func_8003D1D4(s32 arg0) {
+    s32 entityIndex = (arg0 | 0x4000);
+    s32 yTemp = get_entity_by_index(entityIndex)->position.y - 10.0f;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(*gCurrentNpcListPtr); i++) {
+        Npc* npc = (*gCurrentNpcListPtr)[i];
+
+        if (npc != NULL && npc->flags != 0) {
+            if (!(npc->flags & (0x80000000 | 0x4))) {
+                if (!(npc->pos.y < yTemp)) {
+                    s32 temp_v0;
+
+                    if (npc->flags & 0x8008) {
+                        temp_v0 = func_8003D2F8(npc);
+                        if (temp_v0 != 0) {
+                            if (entityIndex == temp_v0) {
+                                return i;
+                            }
+                        }
+                    } else if (npc->unk_84 & 0x4000) {
+                        if (entityIndex == npc->unk_84) {
+                            return i;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return -1;
+}
+#else
 INCLUDE_ASM(s32, "npc", func_8003D1D4);
+#endif
 
 s32 func_8003D2F8(Npc* npc) {
     f32 x;
@@ -1279,12 +1304,13 @@ void func_8003D788(Npc* npc, s32 arg1) {
         f32 x = npc->pos.x;
         f32 y = npc->pos.y + 0.0f;
         f32 z = npc->pos.z;
+
         if (phi_a2 == 0) {
             fx_walk_large(0, x, y, z, D_80077C10);
             D_80077C10 = clamp_angle(D_80077C10 + 35.0f);
-            return;
+        } else {
+            func_80072350(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
         }
-        func_80072350(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
     } else if (arg1 != 0) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
@@ -1698,8 +1724,6 @@ Enemy* get_enemy(s32 npcID) {
     PANIC();
 }
 
-#ifdef NON_MATCHING
-// Matching, but having a TU padding issue
 Enemy* get_enemy_safe(s32 npcID) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
@@ -1707,6 +1731,7 @@ Enemy* get_enemy_safe(s32 npcID) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
+        
         if (currentEncounter != NULL) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
@@ -1718,6 +1743,3 @@ Enemy* get_enemy_safe(s32 npcID) {
     }
     return NULL;
 }
-#else
-INCLUDE_ASM(Enemy*, "npc", get_enemy_safe, s32 npcID);
-#endif

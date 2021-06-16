@@ -1,5 +1,6 @@
 name: Paper Mario (North America)
 basename: papermario
+sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0
 options:
   find_file_boundaries: True
   compiler: GCC
@@ -10014,7 +10015,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE245D0, c, 18]
-    - [0xE248D0, data, 18]
+    - [0xE248D0, .data, 18]
   - type: code
     name: world_action_land
     dir: world/action
@@ -10032,7 +10033,7 @@ segments:
     subsegments:
     - [0xE24ED0, c, hammer]
     - [0xE25C80, data, hammer]
-    - [0xE25CC0, .rodata, hammer]
+    - [0xE25C90, .rodata, hammer]
   - type: code
     name: world_action_spin
     dir: world/action

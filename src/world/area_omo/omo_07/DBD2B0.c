@@ -307,6 +307,6 @@ ApiStatus N(func_80242C84_DBFF34)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242E70_DC0120);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242E8C_DC013C);
+#include "world/common/UnsetCamera0Flag1000.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242EA8_DC0158);

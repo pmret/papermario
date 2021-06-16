@@ -1,6 +1,5 @@
 #include "fright_jar.h"
 
-extern s32 D_80108A64;
 static HudElement* D_802A1CA0;
 
 ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {

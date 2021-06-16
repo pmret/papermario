@@ -164,4 +164,4 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241AD0_DAEED0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E04_DAF204);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E20_DAF220);
+#include "world/common/UnsetCamera0Flag1000.inc.c"

@@ -78,7 +78,7 @@ class LinkerWriter():
                 if start % 0x10 != 0 and i != 0:
                     do_next = True
 
-            if entry.object_path:
+            if entry.object_path and entry.section == ".data":
                 path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
                 self._write_symbol(path_cname, ".")
 
@@ -150,7 +150,7 @@ class LinkerWriter():
         self._writeln(f". = __romPos;")
 
         vram = segment.vram_start
-        vram_str = f"0x{vram:X}" if isinstance(vram, int) else ""
+        vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
 
         if segment.parent:
             name = to_cname(segment.parent.name + "_" + segment.name)
@@ -159,7 +159,7 @@ class LinkerWriter():
 
         self._write_symbol(f"{name}_ROM_START", "__romPos")
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
-        self._writeln(f".{name} {vram_str} : AT({name}_ROM_START) SUBALIGN({segment.subalign})")
+        self._writeln(f".{name} {vram_str}: AT({name}_ROM_START) SUBALIGN({segment.subalign})")
         self._begin_block()
 
     def _end_segment(self, segment: Segment):

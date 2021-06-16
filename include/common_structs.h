@@ -736,7 +736,7 @@ typedef struct BattleStatus {
     /* 0x45B */ char unk_45B[5];
     /* 0x460 */ s32 unk_460;
     /* 0x464 */ s32 unk_464;
-    /* 0x468 */ char unk_468[4];
+    /* 0x468 */ s32 unk_468;
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
     /* 0x470 */ s32 unk_470;
     /* 0x474 */ s32 unk_474;
@@ -834,6 +834,19 @@ typedef struct AnimatedMesh {
 
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
+typedef struct EffectInstanceData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ char unk_28[0x4];
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ char unk_34[0x30];
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ char unk_68[0x18];
+} EffectInstanceData; // size = 0x80
+
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
     /* 0x010 */ s8* printbuf;
@@ -929,7 +942,7 @@ typedef struct Effect {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ s32 unk_0C;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
     /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
@@ -1700,7 +1713,7 @@ typedef struct PlayerStatus {
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
-    /* 0x060 */ char unk_60[4];
+    /* 0x060 */ s32 unk_60;
     /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
     /* 0x06C */ f32 unk_6C;
@@ -1720,7 +1733,7 @@ typedef struct PlayerStatus {
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
-    /* 0x0B5 */ u8 prevActionState;
+    /* 0x0B5 */ s8 prevActionState;
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
@@ -1778,7 +1791,7 @@ typedef struct EncounterStatus {
     /* 0x01D */ s8 currentAreaIndex;
     /* 0x01E */ u8 currentMapIndex;
     /* 0x01F */ u8 currentEntryIndex;
-    /* 0x020 */ u8 mapID;
+    /* 0x020 */ s8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
     /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
@@ -1954,19 +1967,6 @@ typedef struct {
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
-typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f rotation;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ char unk_28[0x4];
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x30];
-    /* 0x64 */ f32 unk_64;
-    /* 0x68 */ char unk_68[0x18];
-} EffectInstanceData; // size = 0x80
-
 typedef struct Temp8010F250 {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 unk_01;
@@ -2029,5 +2029,21 @@ typedef struct EntityModel {
 } EntityModel; // size = 0x68
 
 typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
+
+typedef struct VirtualEntity {
+    /* 0x00 */ s32 entityModelIndex;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rot;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f goalPos;
+    /* 0x34 */ f32 moveDist;
+    /* 0x38 */ f32 moveAngle;
+    /* 0x3C */ f32 moveSpeed;
+    /* 0x40 */ f32 jumpGravity;
+    /* 0x44 */ f32 jumpVelocity;
+    /* 0x48 */ f32 moveTime;
+} VirtualEntity; // size = 0x4C
+
+typedef VirtualEntity* VirtualEntityList[0x40];
 
 #endif

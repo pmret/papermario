@@ -262,9 +262,9 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.x = userDataPtr->unk_14[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.y = userDataPtr->unk_20[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.z = userDataPtr->unk_2C[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.x = userDataPtr->unk_14[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.y = userDataPtr->unk_20[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.z = userDataPtr->unk_2C[i];
     }
 
     return ApiStatus_BLOCK;
