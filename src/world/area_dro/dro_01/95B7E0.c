@@ -30,7 +30,7 @@ enum {
     NPC_DRYITE5,
 };
 
-typedef struct N(Unk_Struct_1) {
+typedef struct Unk_Struct_1 {
     s32 unk_00;
     s32 unk_04;
     s32 unk_08;
@@ -46,7 +46,7 @@ typedef struct N(Unk_Struct_1) {
     f32 unk_30;
     f32 unk_34;
     s32 unk_38;
-} N(Unk_Struct_1);
+} Unk_Struct_1;
 
 typedef struct {
     s32 unk_00;
@@ -54,10 +54,10 @@ typedef struct {
     s32 unk_08;
     s32 unk_0C;
     s32 unk_10;
-    void (*unk_14)(N(Unk_Struct_1)*, s32);
-} N(Unk_Struct_2);
+    void (*unk_14)(Unk_Struct_1*, s32);
+} Unk_Struct_2;
 
-void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1);
+void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1);
 
 Script N(80248504);
 
@@ -3304,14 +3304,14 @@ ApiStatus N(func_802427BC_95D9BC)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    N(Unk_Struct_2)* temp_s1 = get_variable(script, *script->ptrReadPos);
-    N(Unk_Struct_1)* ptr;
+    Unk_Struct_2* temp_s1 = get_variable(script, *script->ptrReadPos);
+    Unk_Struct_1* ptr;
     s32 atan_res1, atan_res2;
     s32 clamp;
     s32 res;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = (N(Unk_Struct_1)*)heap_malloc(0x3C);
+        script->functionTemp[1].s = (Unk_Struct_1*)heap_malloc(0x3C);
         ptr = script->functionTemp[1].s;
         ptr->unk_00 = temp_s1->unk_00;
         ptr->unk_04 = temp_s1->unk_04;
@@ -3449,7 +3449,7 @@ ApiStatus N(func_80243084_95E284)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetFloorCollider.inc.c"
 
-void N(func_802430C8_95E2C8)(N(Unk_Struct_1)* ptr, s32 arg1) {
+void N(func_802430C8_95E2C8)(Unk_Struct_1* ptr, s32 arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     switch (arg1) {
