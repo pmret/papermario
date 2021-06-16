@@ -314,7 +314,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5174);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", can_player_interact);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5348);
+INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5348, void);
 
 void func_800E546C(void) {
     f32 angle = 0.0f;

@@ -759,10 +759,7 @@ INCLUDE_ASM(s32, "npc", func_8003B44C);
 
 INCLUDE_ASM(s32, "npc", func_8003B464);
 
-#ifdef NON_MATCHING
-// Rodata issues.
 void func_8003B47C(Npc* npc, s32 arg1, s32 arg2) {
-
     switch (npc->unk_B4) {
         case 0:
             func_8003B500(npc, arg1, arg2);
@@ -781,18 +778,15 @@ void func_8003B47C(Npc* npc, s32 arg1, s32 arg2) {
             break;
     }
 }
-#else
-INCLUDE_ASM(void, "npc", func_8003B47C, Npc* npc, s32 arg1, s32 arg2);
-#endif
 
 void func_8003B500(Npc* npc, s32 arg1, s32 arg2) {
-
     if (npc->unk_B6 != 0) {
         npc->screenSpaceOffset2D[0] = 0.0f;
         npc->screenSpaceOffset2D[1] = 0.0f;
         npc->unk_B6 = 0;
         npc->verticalStretch = 1.0f;
     }
+
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         s32 temp_a2 = (npc->alpha * npc->alpha2 / 255);
         s32 temp = temp_a2 < 255; // TODO: better match?
@@ -898,11 +892,6 @@ void func_8003C658(Npc* npc, s32 idx) {
 
 void func_8003C660(Npc* npc, s32 idx) {
 }
-
-void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
-
-void func_80070A30(s32, f32, f32, f32, f32, s32, EffectInstanceData**);
-void func_80070EB0(s32, f32, f32, f32, f32, EffectInstanceData**);
 
 void func_8003C668(Npc* npc, s32 idx) {
     EffectInstanceData* instanceData;
@@ -1140,80 +1129,80 @@ s32 func_8003D2F8(Npc* npc) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-// Rodata issue. Most likely the last function in the TU with a jumptable.
-void func_8003D3BC(Npc* npc) {
-    s32 temp_s4 = npc->unk_98;
-    s32 temp_s0 = npc->unk_9A;
-    s32 temp_s5 = npc->unk_9C;
-    s32 temp_s2 = npc->unk_9E;
-    s32 temp_s6 = npc->unk_A0;
-    s32 temp_s3 = npc->unk_A2;
+// #ifdef NON_MATCHING
+// // Rodata issue. Most likely the last function in the TU with a jumptable.
+// void func_8003D3BC(Npc* npc) {
+//     s32 temp_s4 = npc->unk_98;
+//     s32 temp_s0 = npc->unk_9A;
+//     s32 temp_s5 = npc->unk_9C;
+//     s32 temp_s2 = npc->unk_9E;
+//     s32 temp_s6 = npc->unk_A0;
+//     s32 temp_s3 = npc->unk_A2;
 
-    func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
+//     func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
 
-    switch (temp_s4) {
-        case 0:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, temp_s3);
-            break;
-        case 2:
-        case 3:
-            npc->renderMode = 13;
-        case 1:
-            func_802DE894(npc->spriteInstanceID, temp_s4, 0, 0, 0, 0, temp_s3);
-            break;
-        case 4:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 4, temp_s0, temp_s5, temp_s2, 0, temp_s3);
-            break;
-        case 6:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 6, temp_s0, temp_s5, temp_s2, 255, temp_s3);
-            break;
-        case 7:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 7, 255, 255, 255, temp_s0, temp_s3);
-            break;
-        case 8:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 8, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
-            break;
-        case 9:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 9, temp_s0, temp_s5, temp_s2, 255, temp_s3);
-            break;
-        case 10:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 10, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
-            break;
-        case 5:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 5, temp_s0, temp_s5, temp_s2, 0, temp_s3);
-            break;
-        case 13:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 13, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
-            break;
-        case 14:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 14, temp_s0, temp_s5, temp_s2, 255, temp_s3);
-            break;
-        case 15:
-            npc->renderMode = 13;
-            func_802DE894(npc->spriteInstanceID, 15, temp_s0, 255, 0, 255, temp_s3);
-            break;
-        case 16:
-            npc->renderMode = 22;
-            func_802DE894(npc->spriteInstanceID, 15, temp_s0, temp_s5, 0, temp_s5, temp_s3);
-            break;
-        default:
-            break;
-    }
-}
-#else
+//     switch (temp_s4) {
+//         case 0:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, temp_s3);
+//             break;
+//         case 2:
+//         case 3:
+//             npc->renderMode = 13;
+//         case 1:
+//             func_802DE894(npc->spriteInstanceID, temp_s4, 0, 0, 0, 0, temp_s3);
+//             break;
+//         case 4:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 4, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+//             break;
+//         case 6:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 6, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+//             break;
+//         case 7:
+//             npc->renderMode = 22;
+//             func_802DE894(npc->spriteInstanceID, 7, 255, 255, 255, temp_s0, temp_s3);
+//             break;
+//         case 8:
+//             npc->renderMode = 22;
+//             func_802DE894(npc->spriteInstanceID, 8, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+//             break;
+//         case 9:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 9, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+//             break;
+//         case 10:
+//             npc->renderMode = 22;
+//             func_802DE894(npc->spriteInstanceID, 10, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+//             break;
+//         case 5:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 5, temp_s0, temp_s5, temp_s2, 0, temp_s3);
+//             break;
+//         case 13:
+//             npc->renderMode = 22;
+//             func_802DE894(npc->spriteInstanceID, 13, temp_s0, temp_s5, temp_s2, temp_s6, temp_s3);
+//             break;
+//         case 14:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 14, temp_s0, temp_s5, temp_s2, 255, temp_s3);
+//             break;
+//         case 15:
+//             npc->renderMode = 13;
+//             func_802DE894(npc->spriteInstanceID, 15, temp_s0, 255, 0, 255, temp_s3);
+//             break;
+//         case 16:
+//             npc->renderMode = 22;
+//             func_802DE894(npc->spriteInstanceID, 15, temp_s0, temp_s5, 0, temp_s5, temp_s3);
+//             break;
+//         default:
+//             break;
+//     }
+// }
+// #else
 INCLUDE_ASM(void, "npc", func_8003D3BC, Npc* npc);
-#endif
+// #endif
 
 void func_8003D624(Npc* npc, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6) {
     npc->unk_98 = arg1;
