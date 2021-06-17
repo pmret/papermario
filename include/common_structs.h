@@ -794,9 +794,14 @@ typedef struct ModelGroupData {
     /* 0x10 */ struct ModelNode** childList;
 } ModelGroupData; // size = 0x14
 
+typedef struct ModelDisplayData {
+    /* 0x0 */ Gfx* displayList;
+    /* 0x4 */ char unk_00[0x4];
+} ModelDisplayData; // size = 0x8
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ Gfx** displayList;
+    /* 0x04 */ ModelDisplayData* displayData;
     /* 0x08 */ s32 numProperties;
     /* 0x0C */ UNK_PTR propertyList;
     /* 0x10 */ struct ModelGroupData* groupData;

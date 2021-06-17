@@ -297,7 +297,7 @@ void N(func_80240A98_CB9C98)(void) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMasterGfxPos++);
 
-        gSPDisplayList(gMasterGfxPos++, &(*model->modelNode->displayList[2])); // TODO HALP
+        gSPDisplayList(gMasterGfxPos++, model->modelNode->displayData->displayList);
         gDPPipeSync(gMasterGfxPos++);
 
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
