@@ -786,9 +786,17 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
+typedef struct ModelGroupData {
+    /* 0x00 */ UNK_PTR transformMatrix;
+    /* 0x04 */ UNK_PTR lightingGroup;
+    /* 0x08 */ s32 numLights;
+    /* 0x0C */ s32 numChildren;
+    /* 0x10 */ struct ModelNode** childList;
+} ModelGroupData; // size = 0x14
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ UNK_PTR displayList;
+    /* 0x04 */ Gfx** displayList;
     /* 0x08 */ s32 numProperties;
     /* 0x0C */ UNK_PTR propertyList;
     /* 0x10 */ struct ModelGroupData* groupData;
@@ -797,17 +805,17 @@ typedef struct ModelNode {
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ struct ModelNode** modelNode;
-    /* 0x0C */ struct ModelGroupData* groupData;
+    /* 0x04 */ Matrix4s* currentMatrix;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ struct Matrix4s specialMatrix;
+    /* 0x18 */ Matrix4s specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ f32 center[3];
+    /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ u8 renderMode;
+    /* 0xA6 */ s8 renderMode;
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ u8 unk_A9;
@@ -823,7 +831,7 @@ typedef struct AnimatedMesh {
     /* 0x008 */ u32* animation1;
     /* 0x00C */ u32* animation2;
     /* 0x010 */ char unk_10[136];
-    /* 0x098 */ struct Matrix4s mtx;
+    /* 0x098 */ Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
     /* 0x2D0 */ char unk_2D0[4];
@@ -1169,9 +1177,9 @@ typedef struct Shadow {
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
     /* 0x0C */ Vtx_tn** vertexArray;
-    /* 0x10 */ struct Vec3f position;
-    /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ struct Vec3f rotation;
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f rotation;
     /* 0x34 */ char unk_34[0x4];
     /* 0x38 */ Matrix4s transformMatrix;
 } Shadow; // size = 0x78
@@ -1464,7 +1472,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ struct Matrix4s* mtx;
+    /* 0x28 */ Matrix4s* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
@@ -1656,14 +1664,6 @@ typedef struct BackgroundHeader {
     /* 0x0C */ u16 width;
     /* 0x0E */ u16 height;
 } BackgroundHeader; // size = 0x10
-
-typedef struct ModelGroupData {
-    /* 0x00 */ UNK_PTR transformMatrix;
-    /* 0x04 */ UNK_PTR lightingGroup;
-    /* 0x08 */ s32 numLights;
-    /* 0x0C */ s32 numChildren;
-    /* 0x10 */ struct ModelNode** childList;
-} ModelGroupData; // size = 0x14
 
 typedef struct FontData {
     /* 0x00 */ char unk_00[24];

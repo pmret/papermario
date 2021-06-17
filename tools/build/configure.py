@@ -75,16 +75,10 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
-    if DO_SHA1_CHECK:
-        ninja.rule("sha1sum",
-            description="check $in",
-            command=f"sha1sum -c $in && touch $out",
-        )
-    else:
-        ninja.rule("sha1sum",
-            description="check $in",
-            command=f"touch $out",
-        )
+    ninja.rule("sha1sum",
+        description="check $in",
+        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+    )
 
     ninja.rule("cc",
         description="cc($version) $in",

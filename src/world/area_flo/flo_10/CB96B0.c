@@ -171,7 +171,7 @@ void N(func_80240A98_CB9C98)(void) {
     sp38 = unk1->unk_1C;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] - sp3C, model->center[1], model->center[2] - sp38, 1.0f,
+                    model->center.x - sp3C, model->center.y, model->center.z - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -187,7 +187,7 @@ void N(func_80240A98_CB9C98)(void) {
     temp_f22 = sp2C;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] - sp3C, model->center[1], model->center[2] + sp38, 1.0f,
+                    model->center.x - sp3C, model->center.y, model->center.z + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -219,7 +219,7 @@ void N(func_80240A98_CB9C98)(void) {
     }
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] + sp3C, model->center[1], model->center[2] + sp38, 1.0f,
+                    model->center.x + sp3C, model->center.y, model->center.z + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -249,7 +249,7 @@ void N(func_80240A98_CB9C98)(void) {
     }
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] + sp3C, model->center[1], model->center[2] - sp38, 1.0f,
+                    model->center.x + sp3C, model->center.y, model->center.z - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -297,7 +297,7 @@ void N(func_80240A98_CB9C98)(void) {
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMasterGfxPos++);
 
-        gSPDisplayList(gMasterGfxPos++, model->modelNode[1]->type);
+        gSPDisplayList(gMasterGfxPos++, &(*model->modelNode->displayList[2])); // TODO HALP
         gDPPipeSync(gMasterGfxPos++);
 
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
