@@ -799,11 +799,17 @@ typedef struct ModelDisplayData {
     /* 0x4 */ char unk_00[0x4];
 } ModelDisplayData; // size = 0x8
 
+typedef struct ModelNodeProperty {
+    /* 0x0 */ s32 key;
+    /* 0x4 */ s32 dataType;
+    /* 0x8 */ s32 data;
+} ModelNodeProperty; // size = 0x8;
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
     /* 0x04 */ ModelDisplayData* displayData;
     /* 0x08 */ s32 numProperties;
-    /* 0x0C */ UNK_PTR propertyList;
+    /* 0x0C */ ModelNodeProperty* propertyList;
     /* 0x10 */ struct ModelGroupData* groupData;
 } ModelNode; // size = 0x14
 
@@ -827,7 +833,23 @@ typedef struct Model {
     /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
+typedef struct ModelTransformGroup {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ s16 groupModelID;
+    /* 0x04 */ Matrix4s* matrixRDP_N;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ Matrix4s* transformMtx;
+    /* 0x10 */ Matrix4f matrixA;
+    /* 0x50 */ Matrix4f matrixB;
+    /* 0x90 */ Vec3f center;
+    /* 0x9C */ s8 minChildModelIndex;
+    /* 0x9D */ s8 maxChildModelIndex;
+    /* 0x9E */ u8 renderMode;
+    /* 0x9F */ s8 matrixMode;
+} ModelTransformGroup; // size = 0xA0
+
 typedef Model* ModelList[MAX_MODELS];
+typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS];
 
 typedef struct AnimatedMesh {
     /* 0x000 */ s32 flags;

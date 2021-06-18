@@ -13,8 +13,8 @@ glabel clear_model_data
 /* AC464 80115D64 AC2212CC */  sw        $v0, %lo(gCurrentModelListPtr)($at)
 /* AC468 80115D68 3C028015 */  lui       $v0, %hi(D_80151F70)
 /* AC46C 80115D6C 24421F70 */  addiu     $v0, $v0, %lo(D_80151F70)
-/* AC470 80115D70 3C018015 */  lui       $at, %hi(D_801512E0)
-/* AC474 80115D74 AC2212E0 */  sw        $v0, %lo(D_801512E0)($at)
+/* AC470 80115D70 3C018015 */  lui       $at, %hi(gCurrentTransformGroups)
+/* AC474 80115D74 AC2212E0 */  sw        $v0, %lo(gCurrentTransformGroups)($at)
 /* AC478 80115D78 3C028015 */  lui       $v0, %hi(gWorldModelSpecialDls)
 /* AC47C 80115D7C 24421F90 */  addiu     $v0, $v0, %lo(gWorldModelSpecialDls)
 /* AC480 80115D80 3C018015 */  lui       $at, %hi(gCurrentModelSpecialDlsPtr)
@@ -57,8 +57,8 @@ glabel clear_model_data
 /* AC510 80115E10 AC2212CC */  sw        $v0, %lo(gCurrentModelListPtr)($at)
 /* AC514 80115E14 3C028015 */  lui       $v0, %hi(D_80151F80)
 /* AC518 80115E18 24421F80 */  addiu     $v0, $v0, %lo(D_80151F80)
-/* AC51C 80115E1C 3C018015 */  lui       $at, %hi(D_801512E0)
-/* AC520 80115E20 AC2212E0 */  sw        $v0, %lo(D_801512E0)($at)
+/* AC51C 80115E1C 3C018015 */  lui       $at, %hi(gCurrentTransformGroups)
+/* AC520 80115E20 AC2212E0 */  sw        $v0, %lo(gCurrentTransformGroups)($at)
 /* AC524 80115E24 3C028015 */  lui       $v0, %hi(gBattleModelSpecialDls)
 /* AC528 80115E28 24422010 */  addiu     $v0, $v0, %lo(gBattleModelSpecialDls)
 /* AC52C 80115E2C 3C018015 */  lui       $at, %hi(gCurrentModelSpecialDlsPtr)
@@ -97,8 +97,8 @@ glabel clear_model_data
 /* AC5A8 80115EA8 2484FFFF */  addiu     $a0, $a0, -1
 /* AC5AC 80115EAC 0481FFFD */  bgez      $a0, .L80115EA4
 /* AC5B0 80115EB0 2442FFFC */   addiu    $v0, $v0, -4
-/* AC5B4 80115EB4 3C028015 */  lui       $v0, %hi(D_801512E0)
-/* AC5B8 80115EB8 8C4212E0 */  lw        $v0, %lo(D_801512E0)($v0)
+/* AC5B4 80115EB4 3C028015 */  lui       $v0, %hi(gCurrentTransformGroups)
+/* AC5B8 80115EB8 8C4212E0 */  lw        $v0, %lo(gCurrentTransformGroups)($v0)
 /* AC5BC 80115EBC 24040003 */  addiu     $a0, $zero, 3
 /* AC5C0 80115EC0 2442000C */  addiu     $v0, $v0, 0xc
 .L80115EC4:

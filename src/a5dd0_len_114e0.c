@@ -27,8 +27,6 @@ typedef struct GameMode {
     /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
 } GameMode; // size = 0x18
 
-typedef Model* SmallModelList[4];
-
 extern s32 D_8014B7F8[];
 extern s32 D_8014B820[];
 extern s32 D_8014B848[];
@@ -286,7 +284,7 @@ static s32 D_801512BC;
 static s32 D_801512C0;
 static s32 D_801512C4;
 static s32 D_801512C8[6];
-static SmallModelList* D_801512E0;
+static ModelTransformGroupList* gCurrentTransformGroups;
 static s8 D_801512E4[0x4];
 static s8 D_801512E8[0x8];
 static s8 B_801512F0[0x410];
@@ -1084,16 +1082,6 @@ void func_8011800C(Model*);
 
 // void render_models(void) {
 //     Camera* camera = &gCameras[gCurrentCameraID];
-//     Model* model;
-//     Model* model2;
-//     RenderTask renderTask;
-//     RenderTask* renderTaskPtr = &renderTask;
-//     s32 i;
-//     s32 skip;
-//     f32* propertyList;
-//     s32 distance;
-
-//     // mtx temps
 //     f32 cam00 = camera->perspectiveMatrix[0][0];
 //     f32 cam01 = camera->perspectiveMatrix[0][1];
 //     f32 cam02 = camera->perspectiveMatrix[0][2];
@@ -1110,6 +1098,15 @@ void func_8011800C(Model*);
 //     f32 cam31 = camera->perspectiveMatrix[3][1];
 //     f32 cam32 = camera->perspectiveMatrix[3][2];
 //     f32 cam33 = camera->perspectiveMatrix[3][3];
+
+//     Model* model;
+//     ModelTransformGroup* modelTransformGroup;
+//     RenderTask renderTask;
+//     RenderTask* renderTaskPtr;
+//     s32 i;
+//     s32 skip;
+//     ModelNodeProperty* propertyList;
+//     s32 distance;
 
 //     f32 someY;
 //     f32 someX;
@@ -1131,237 +1128,240 @@ void func_8011800C(Model*);
 //     f32 row0x3;
 //     f32 row1x3;
 
+//     renderTaskPtr = &renderTask;
+
 //     for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
 //         model = (*gCurrentModelListPtr)[i];
 //         if (model != NULL) {
-//             u16 mflags = model->flags; // todo this is needed to trick the compiler :/ ugly
+//             s32 mflags = model->flags; // todo this is needed to trick the compiler :/ ugly
 
-//             if ((model->flags != 0) && !(mflags & 0x4) && !(model->flags & 0x2) && !(mflags & 0x20) && !(model->flags & 0x8)) {
-//                 modelCenterX = model->center.x;
-//                 modelCenterY = model->center.y;
-//                 modelCenterZ = model->center.z;
-//                 propertyList = model->modelNode[0]->propertyList;
-//                 someZ = propertyList[7];
-//                 someX = propertyList[1];
-//                 someY = propertyList[4];
+//             if ((model->flags == 0) || (mflags & 0x4) || (model->flags & 0x2) || (mflags & 0x20) || (model->flags & 0x8)) {
+//                 continue;
+//             }
+
+//             modelCenterX = model->center.x;
+//             modelCenterY = model->center.y;
+//             modelCenterZ = model->center.z;
+
+//             if (model->flags & 0x200) {
+
+//                 propertyList = model->modelNode->propertyList;
+//                 someX = propertyList[0].dataType;
+//                 someY = propertyList[1].dataType;
+//                 someZ = propertyList[2].dataType;
+
+//                 xDelta = modelCenterX - someX;
+//                 yDelta = modelCenterY - someY;
+//                 zDelta = modelCenterZ - someZ;
+//                 row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                 row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                 row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                 row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
 //                 skip = 0;
+//                 if (row3 != 0.0f) {
+//                     row3 = 1.0f / row3;
+//                     row0x3 = row0 * row3;
+//                     row1x3 = row1 * row3;
 
-//                 if (model->flags & 0x200) {
+//                     if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+//                         if (someX != 0.0f) {
+//                             xDelta = modelCenterX + someX;
+//                             yDelta = modelCenterY - someY;
+//                             zDelta = modelCenterZ - someZ;
+//                             row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                             row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                             row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                             row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                     xDelta = modelCenterX - someX;
-//                     yDelta = modelCenterY - someY;
-//                     zDelta = modelCenterZ - someZ;
-//                     row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                     row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                     row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                     row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                             if (row3 != 0.0f) {
+//                                 row3 = 1.0f / row3;
+//                                 row0x3 = row0 * row3;
+//                                 row1x3 = row1 * row3;
 
+//                                 if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+// block_21:
+//                                     if (someY != 0.0f) {
+//                                         xDelta = modelCenterX - someX;
+//                                         yDelta = modelCenterY + someY;
+//                                         zDelta = modelCenterZ - someZ;
+//                                         row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                         row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                         row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                         row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                     if (row3 != 0.0f) {
-//                         row3 = 1.0f / row3;
-//                         row0x3 = row0 * row3;
-//                         row1x3 = row1 * row3;
+//                                         if (row3 != 0.0f) {
+//                                             row3 = 1.0f / row3;
+//                                             row0x3 = row0 * row3;
+//                                             row1x3 = row1 * row3;
 
-//                         if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//                             if (someX != 0.0f) {
-//                                 xDelta = modelCenterX + someX;
-//                                 yDelta = modelCenterY - someY;
-//                                 zDelta = modelCenterZ - someZ;
-//                                 row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                 row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                 row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                 row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                                             if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+// block_28:
+//                                                 if ((someX != 0.0f) && (someY != 0.0f)) {
+//                                                     xDelta = modelCenterX + someX;
+//                                                     yDelta = modelCenterY + someY;
+//                                                     zDelta = modelCenterZ - someZ;
+//                                                     row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                                     row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                                     row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                                     row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                                 if (row3 != 0.0f) {
-//                                     row3 = 1.0f / row3;
-//                                     row0x3 = row0 * row3;
-//                                     row1x3 = row1 * row3;
+//                                                     if (row3 != 0.0f) {
+//                                                         row3 = 1.0f / row3;
+//                                                         row0x3 = row0 * row3;
+//                                                         row1x3 = row1 * row3;
 
-//                                     if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//     block_21:
-//                                         if (someY != 0.0f) {
-//                                             xDelta = modelCenterX - someX;
-//                                             yDelta = modelCenterY + someY;
-//                                             zDelta = modelCenterZ - someZ;
-//                                             row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                             row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                             row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                             row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                                                         if (((row2 * row3) > -1.0f) && (row0x3 >= -1.0f) && (row0x3 <= 1.0f) && (row1x3 >= -1.0f)) {
+//                                                             if (!(row1x3 <= 1.0f)) {
+// block_36:
+//                                                                 if (someZ != 0.0f) {
+//                                                                     xDelta = modelCenterX - someX;
+//                                                                     yDelta = modelCenterY - someY;
+//                                                                     zDelta = modelCenterZ + someZ;
+//                                                                     row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                                                     row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                                                     row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                                                     row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                                             if (row3 != 0.0f) {
-//                                                 row3 = 1.0f / row3;
-//                                                 row0x3 = row0 * row3;
-//                                                 row1x3 = row1 * row3;
+//                                                                     if (row3 != 0.0f) {
+//                                                                         row3 = 1.0f / row3;
+//                                                                         row0x3 = row0 * row3;
+//                                                                         row1x3 = row1 * row3;
 
-//                                                 if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//     block_28:
-//                                                     if ((someX != 0.0f) && (someY != 0.0f)) {
-//                                                         xDelta = modelCenterX + someX;
-//                                                         yDelta = modelCenterY + someY;
-//                                                         zDelta = modelCenterZ - someZ;
-//                                                         row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                                         row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                                         row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                                         row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                                                                         if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+// block_44:
+//                                                                             if ((someX != 0.0f) && (someZ != 0.0f)) {
+//                                                                                 xDelta = modelCenterX + someX;
+//                                                                                 yDelta = modelCenterY - someY;
+//                                                                                 zDelta = modelCenterZ + someZ;
+//                                                                                 row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                                                                 row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                                                                 row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                                                                 row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                                                         if (row3 != 0.0f) {
-//                                                             row3 = 1.0f / row3;
-//                                                             row0x3 = row0 * row3;
-//                                                             row1x3 = row1 * row3;
+//                                                                                 if (row3 != 0.0f) {
+//                                                                                     row3 = 1.0f / row3;
+//                                                                                     row0x3 = row0 * row3;
+//                                                                                     row1x3 = row1 * row3;
 
-//                                                             if (((row2 * row3) > -1.0f) && (row0x3 >= -1.0f) && (row0x3 <= 1.0f) && (row1x3 >= -1.0f)) {
-//                                                                 if (!(row1x3 <= 1.0f)) {
-//     block_36:
-//                                                                     if (someZ != 0.0f) {
-//                                                                         xDelta = modelCenterX - someX;
-//                                                                         yDelta = modelCenterY - someY;
-//                                                                         zDelta = modelCenterZ + someZ;
-//                                                                         row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                                                         row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                                                         row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                                                         row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                                                                                     if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+// block_52:
+//                                                                                         if ((someY != 0.0f) && (someZ != 0.0f)) {
+//                                                                                             xDelta = modelCenterX - someX;
+//                                                                                             yDelta = modelCenterY + someY;
+//                                                                                             zDelta = modelCenterZ + someZ;
+//                                                                                             row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                                                                             row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                                                                             row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                                                                             row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                                                                         if (row3 != 0.0f) {
-//                                                                             row3 = 1.0f / row3;
-//                                                                             row0x3 = row0 * row3;
-//                                                                             row1x3 = row1 * row3;
+//                                                                                             if (row3 != 0.0f) {
+//                                                                                                 row3 = 1.0f / row3;
+//                                                                                                 row0x3 = row0 * row3;
+//                                                                                                 row1x3 = row1 * row3;
 
-//                                                                             if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//     block_44:
-//                                                                                 if ((someX != 0.0f) && (someZ != 0.0f)) {
-//                                                                                     xDelta = modelCenterX + someX;
-//                                                                                     yDelta = modelCenterY - someY;
-//                                                                                     zDelta = modelCenterZ + someZ;
-//                                                                                     row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                                                                     row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                                                                     row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                                                                     row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
+//                                                                                                 if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+// block_60:
+//                                                                                                     if ((someX != 0.0f) && (someY != 0.0f) && (someZ != 0.0f)) {
+//                                                                                                         xDelta = modelCenterX + someX;
+//                                                                                                         yDelta = modelCenterY + someY;
+//                                                                                                         zDelta = modelCenterZ + someZ;
+//                                                                                                         row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
+//                                                                                                         row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
+//                                                                                                         row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
+//                                                                                                         row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
 
-//                                                                                     if (row3 != 0.0f) {
-//                                                                                         row3 = 1.0f / row3;
-//                                                                                         row0x3 = row0 * row3;
-//                                                                                         row1x3 = row1 * row3;
+//                                                                                                         if (row3 != 0.0f) {
+//                                                                                                             row3 = 1.0f / row3;
+//                                                                                                             row0x3 = row0 * row3;
+//                                                                                                             row1x3 = row1 * row3;
 
-//                                                                                         if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//     block_52:
-//                                                                                             if ((someY != 0.0f) && (someZ != 0.0f)) {
-//                                                                                                 xDelta = modelCenterX - someX;
-//                                                                                                 yDelta = modelCenterY + someY;
-//                                                                                                 zDelta = modelCenterZ + someZ;
-//                                                                                                 row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                                                                                 row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                                                                                 row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                                                                                 row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
-
-//                                                                                                 if (row3 != 0.0f) {
-//                                                                                                     row3 = 1.0f / row3;
-//                                                                                                     row0x3 = row0 * row3;
-//                                                                                                     row1x3 = row1 * row3;
-
-//                                                                                                     if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//     block_60:
-//                                                                                                         if ((someX != 0.0f) && (someY != 0.0f) && (someZ != 0.0f)) {
-//                                                                                                             xDelta = modelCenterX + someX;
-//                                                                                                             yDelta = modelCenterY + someY;
-//                                                                                                             zDelta = modelCenterZ + someZ;
-//                                                                                                             row0 = (cam00 * xDelta) + (cam10 * yDelta) + (cam20 * zDelta) + cam30;
-//                                                                                                             row1 = (cam01 * xDelta) + (cam11 * yDelta) + (cam21 * zDelta) + cam31;
-//                                                                                                             row2 = (cam02 * xDelta) + (cam12 * yDelta) + (cam22 * zDelta) + cam32;
-//                                                                                                             row3 = (cam03 * xDelta) + (cam13 * yDelta) + (cam23 * zDelta) + cam33;
-
-//                                                                                                             if (row3 != 0.0f) {
-//                                                                                                                 row3 = 1.0f / row3;
-//                                                                                                                 row0x3 = row0 * row3;
-//                                                                                                                 row1x3 = row1 * row3;
-
-//                                                                                                                 if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || (!(row1x3 <= 1.0f))) {
-//                                                                                                                     skip = 1;
-//                                                                                                                 }
+//                                                                                                             if (!((row2 * row3) > -1.0f) || !(row0x3 >= -1.0f) || !(row0x3 <= 1.0f) || !(row1x3 >= -1.0f) || !(row1x3 <= 1.0f)) {
+//                                                                                                                 skip = 1;
 //                                                                                                             }
-//                                                                                                         } else {
-//                                                                                                             skip = 1;
 //                                                                                                         }
+//                                                                                                     } else {
+//                                                                                                         skip = 1;
 //                                                                                                     }
 //                                                                                                 }
-//                                                                                             } else {
-//                                                                                                 goto block_60;
 //                                                                                             }
+//                                                                                         } else {
+//                                                                                             goto block_60;
 //                                                                                         }
 //                                                                                     }
-//                                                                                 } else {
-//                                                                                     goto block_52;
 //                                                                                 }
+//                                                                             } else {
+//                                                                                 goto block_52;
 //                                                                             }
 //                                                                         }
-//                                                                     } else {
-//                                                                         goto block_44;
 //                                                                     }
+//                                                                 } else {
+//                                                                     goto block_44;
 //                                                                 }
-//                                                             } else {
-//                                                                 goto block_36;
 //                                                             }
+//                                                         } else {
+//                                                             goto block_36;
 //                                                         }
-//                                                     } else {
-//                                                         goto block_36;
 //                                                     }
+//                                                 } else {
+//                                                     goto block_36;
 //                                                 }
 //                                             }
-//                                         } else {
-//                                             goto block_28;
 //                                         }
+//                                     } else {
+//                                         goto block_28;
 //                                     }
 //                                 }
-//                             } else {
-//                                 goto block_21;
 //                             }
+//                         } else {
+//                             goto block_21;
 //                         }
 //                     }
-
-//                     if (skip) {
-//                         continue;
-//                     }
 //                 }
 
-//                 transform_point(camera->perspectiveMatrix, modelCenterX, modelCenterY, modelCenterZ, 1.0f, &row0, &row1, &row2, &row3);
-//                 distance = row2 + 5000.0f;
-//                 if (distance < 0) {
-//                     distance = 0;
-//                 } else if (distance > 10000) {
-//                     distance = 10000;
+//                 if (skip) {
+//                     continue;
 //                 }
-
-//                 renderTaskPtr->appendGfxArg = model;
-
-//                 if (model->modelNode[0]->type == 5) { // todo create type enum, 5 being group
-//                     renderTaskPtr->appendGfx = appendGfx_model_group;
-//                 } else {
-//                     renderTaskPtr->appendGfx = appendGfx_model;
-//                 }
-
-//                 renderTaskPtr->distance = -distance;
-//                 renderTaskPtr->renderMode = model->renderMode;
-//                 queue_render_task(renderTaskPtr);
 //             }
+
+//             transform_point(camera->perspectiveMatrix, modelCenterX, modelCenterY, modelCenterZ, 1.0f, &row0, &row1, &row2, &row3);
+//             distance = row2 + 5000.0f;
+//             if (distance < 0) {
+//                 distance = 0;
+//             } else if (distance > 10000) {
+//                 distance = 10000;
+//             }
+
+//             renderTaskPtr->appendGfxArg = model;
+
+//             if (model->modelNode->type == 5) { // todo create type enum, 5 being group
+//                 renderTaskPtr->appendGfx = appendGfx_model_group;
+//             } else {
+//                 renderTaskPtr->appendGfx = appendGfx_model;
+//             }
+
+//             renderTaskPtr->distance = -distance;
+//             renderTaskPtr->renderMode = model->renderMode;
+//             queue_render_task(renderTaskPtr);
 //         }
 //     }
 
-//     for (i = 0; i < ARRAY_COUNT(*D_801512E0); i++) {
-//         model2 = (*D_801512E0)[i];
-//         if (model2 != NULL) {
-//             if (model2->flags != 0 && !(model2->flags & 4)) {
-//                 transform_point(camera->perspectiveMatrix, modelCenterX, modelCenterY, modelCenterZ, 1.0f, &row0, &row1, &row2, &row3);
+//     for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
+//         modelTransformGroup = (*gCurrentTransformGroups)[i];
+//         if (modelTransformGroup != NULL) {
+//             if (modelTransformGroup->flags != 0 && !(modelTransformGroup->flags & 4)) {
+//                 transform_point(camera->perspectiveMatrix, modelTransformGroup->center.x, modelTransformGroup->center.y, modelTransformGroup->center.z, 1.0f, &row0, &row1, &row2, &row3);
 //                 if (row3 == 0.0f) {
 //                     row3 = 1.0f;
 //                 }
 
 //                 distance = (row2 / row3) * 10000.0f;
 
-//                 if (!(model2->flags & 2)) {
+//                 if (!(modelTransformGroup->flags & 2)) {
 //                     renderTaskPtr->appendGfx = func_8011800C;
-//                     renderTaskPtr->appendGfxArg = model2;
+//                     renderTaskPtr->appendGfxArg = modelTransformGroup;
 //                     renderTaskPtr->distance = -distance;
-//                     renderTaskPtr->renderMode = model2->renderMode; // should be offset 9E - is this a different struct?
+//                     renderTaskPtr->renderMode = modelTransformGroup->renderMode; // should be offset 9E - is this a different struct?
 //                     queue_render_task(renderTaskPtr);
 //                 }
 //             }
@@ -1395,7 +1395,7 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, u16 modelID, f32
             f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
 Model* func_8011B1C0(s32 index) {
-    return (*D_801512E0)[index];
+    return (*gCurrentTransformGroups)[index];
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
@@ -1437,11 +1437,11 @@ void func_8011BAE8(void) {
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(*D_801512E0); i++) {
-        Model* model = (*D_801512E0)[i];
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
+        ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
-        if (model != NULL) {
-            model->flags &= ~0x0400;
+        if (transformGroup != NULL) {
+            transformGroup->flags &= ~0x0400;
         }
     }
 }
