@@ -2,7 +2,8 @@
 
 import glob
 import os
-import re
+
+print_funcs = True
 
 sizes = {}
 
@@ -51,4 +52,5 @@ for thing in sorted(sizes.keys(), key=lambda x: sizes[x][2]):
     if val > 0:
         print(thing.ljust(25) + str(val))
 
-# print(dict(sorted(funcs.items(), key=lambda f: f[1])))
+if print_funcs:
+    print(dict(sorted(funcs.items(), key=lambda f: f[1])))
