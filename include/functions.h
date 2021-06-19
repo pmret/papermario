@@ -124,20 +124,7 @@ void set_time_freeze_mode(s32);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
-void func_8006F8F0(f32, f32, f32);
-void func_8006FEF0(s32, f32, f32, f32, f32);
-void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
-void func_80070F70(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
-void func_80071090(s32, f32, f32, f32, s32);
-EffectInstance* func_80071750(s32, f32, f32, f32, f32, s32);
-Effect* func_800720B0(s32, f32, f32, f32, f32, s32);
-void func_80072950(s32, f32, f32, f32, f32, s32 time);
-Effect* func_800715D0(s32, f32, f32, f32);
-Effect* func_80071810(s32, f32, f32, f32);
-Effect* func_80072890(s32, f32, f32, f32, f32, s32);
-Effect* func_800716F0(s32, f32, f32, f32, f32, s32);
 
-void func_80071690(s32, f32, f32, f32);
 void func_800F4E40(void*);
 s32 func_800DDCEC(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
@@ -340,8 +327,25 @@ void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angl
 void fx_walk_large(s32, f32, f32, f32, f32);
 
 void func_80138D88(s32, s32, s32, s32, f32);
-s32 func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
+
+// Effect funcs
+void func_8006F8F0(f32, f32, f32);
+void func_8006FEF0(s32, f32, f32, f32, f32);
+void func_80070190(s32, f32, f32, f32, s32, f32, s32, s32);
+void func_80070F70(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
+void func_80071090(s32, f32, f32, f32, s32);
+EffectInstance* func_80071750(s32, f32, f32, f32, f32, s32);
+EffectInstance* func_800720B0(s32, f32, f32, f32, f32, s32);
+//EffectInstance* func_80072950(s32, f32, f32, f32, f32, s32 time);
+EffectInstance* func_800715D0(s32, f32, f32, f32);
+EffectInstance* func_80071810(s32, f32, f32, f32);
+EffectInstance* func_80072890(s32, f32, f32, f32, f32, s32);
+EffectInstance* func_800716F0(s32, f32, f32, f32, f32, s32);
+void func_80071690(s32, f32, f32, f32);
+EffectInstance* func_80071030(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 void func_80070CD0(s32, f32, f32, f32, f32, f32);
+void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;
@@ -380,8 +384,6 @@ f32 func_800E5938(s32 lag, s32* x, s32* y, s32* z);
 
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
-void* func_800729B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void* func_800726B0(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 

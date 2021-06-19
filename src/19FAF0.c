@@ -12,20 +12,25 @@ ApiStatus func_80271258(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", func_802712A0);
+ApiStatus func_802712A0(ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_802712A0, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", func_80271328);
+ApiStatus func_80271328(ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271328, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", func_802713B0);
+ApiStatus func_802713B0(ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_8027143C(ScriptInstance* script, s32 isInitialCall) {
     func_80070A90(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", func_80271484);
+ApiStatus func_80271484(ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", func_80271588);
+ApiStatus func_80271588(ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, ScriptInstance* script, s32 isInitialCall);
 
 void dispatch_event_player(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
@@ -217,7 +222,23 @@ INCLUDE_ASM(s32, "19FAF0", func_802752AC);
 
 INCLUDE_ASM(s32, "19FAF0", func_80275F00);
 
-INCLUDE_ASM(s32, "19FAF0", DidActionSucceed, ScriptInstance* script, s32 isInitialCall);
+ApiStatus DidActionSucceed(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 outVar = *args++;
+    s32 actionSuccess = gBattleStatus.actionSuccess;
+    s32 actionSucceeded = 0;
+
+    if (actionSuccess < 0) {
+        actionSuccess = 0;
+    }
+
+    if (actionSucceeded < actionSuccess) {
+        actionSucceeded = actionSuccess;
+    }
+
+    set_variable(script, outVar, actionSucceeded);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80276EFC(ScriptInstance* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= 0x200000;

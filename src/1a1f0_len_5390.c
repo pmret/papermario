@@ -284,10 +284,10 @@ void draw_encounters_pre_battle(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (encounter->unk_94 != 0) {
-        f32 px, py, pz;
-        f32 ox, oy, oz;
-        s32 psx, psy, psz;
-        s32 osx, osy, osz;
+        f32 playerX, playerY, playerZ;
+        f32 otherX, otherY, otherZ;
+        s32 pScreenX, pScreenY, pScreenZ;
+        s32 oScreenX, oScreenY, oScreenZ;
 
         if (encounter->fadeOutAmount != 255) {
             encounter->fadeOutAccel++;
@@ -300,33 +300,35 @@ void draw_encounters_pre_battle(void) {
                 encounter->fadeOutAmount = 255;
             }
 
-            px = playerStatus->position.x;
-            py = playerStatus->position.y;
-            pz = playerStatus->position.z;
+            playerX = playerStatus->position.x;
+            playerY = playerStatus->position.y;
+            playerZ = playerStatus->position.z;
 
-            ox = npc->pos.x;
-            oy = npc->pos.y;
-            oz = npc->pos.z;
-            if (oy < -990.0f) {
-                ox = px;
-                oy = py;
-                oz = pz;
+            otherX = npc->pos.x;
+            otherY = npc->pos.y;
+            otherZ = npc->pos.z;
+            if (otherY < -990.0f) {
+                otherX = playerX;
+                otherY = playerY;
+                otherZ = playerZ;
             }
 
             if (gGameStatusPtr->demoState == 2) {
                 set_transition_stencil_zoom_1(10, encounter->fadeOutAmount);
                 set_transition_stencil_alpha(1, 255.0f);
                 set_transition_stencil_color(1, 0, 0, 0);
-                get_screen_coords(gCurrentCameraID, px, py + 20.0f, pz, &psx, &psy, &psz);
-                get_screen_coords(gCurrentCameraID, ox, oy + 15.0f, oz, &osx, &osy, &osz);
-                set_transition_stencil_center(1, 0, (psx - osx) / 2 + osx, (psy - osy) / 2 + osy);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_transition_stencil_center(1, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
             } else {
                 set_transition_stencil_zoom_0(10, encounter->fadeOutAmount);
                 set_transition_stencil_alpha(0, 255.0f);
                 set_transition_stencil_color(0, 0, 0, 0);
-                get_screen_coords(gCurrentCameraID, px, py + 20.0f, pz, &psx, &psy, &psz);
-                get_screen_coords(gCurrentCameraID, ox, oy + 15.0f, oz, &osx, &osy, &osz);
-                set_transition_stencil_center(0, 0, (psx - osx) / 2 + osx, (psy - osy) / 2 + osy);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_transition_stencil_center(0, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
             }
         }
     }
