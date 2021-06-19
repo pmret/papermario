@@ -23,8 +23,23 @@ void set_npc_animation(Npc* npc, u32 arg1) {
     }
 }
 
-/// Used in battle scripts.
-INCLUDE_ASM(ApiStatus, "evt/npc_api", CreateNpc, ScriptInstance* script, s32 isInitialCall);
+ApiStatus CreateNpc(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcID npcID = get_variable(script, *args++);
+    s32 initialAnim = get_variable(script, *args++);
+    NpcBlueprint blueprint;
+    Npc *npc;
+
+    blueprint.flags = 0;
+    blueprint.initialAnim = initialAnim;
+    blueprint.onUpdate = NULL;
+    blueprint.onRender = NULL;
+
+    npc = get_npc_by_index(npc_create_basic(&blueprint));
+    npc->npcID =  npcID;
+    disable_npc_shadow(npc);
+    return ApiStatus_DONE2;
+}
 
 ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
