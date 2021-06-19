@@ -7,7 +7,14 @@ typedef struct TempSetZoneEnabled {
     /* 0x08 */ char unk_08[0x14];
 } TempSetZoneEnabled; // size = 0x1C
 
+typedef struct LavaReset {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+} LavaReset; // size = 0x10;
+
 extern TempSetZoneEnabled* D_800D91D4;
+extern LavaReset* D_802DADA0;
+extern s32 D_802DADA4;
 
 ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -302,7 +309,6 @@ ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args);
     s32 index = func_8011B090(var1);
-    Matrix4f mtx;
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
 
@@ -324,6 +330,8 @@ ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
         guTranslateF(transformGroup->matrixB, x, y, z);
         transformGroup->flags |= 0x1400;
     } else {
+        Matrix4f mtx;
+
         guTranslateF(mtx, x, y, z);
         guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
     }
@@ -334,7 +342,6 @@ ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = func_8011B090(get_variable(script, *args));
-    Matrix4f mtx;
     ModelTransformGroup* transformGroup;
     f32 a, x, y, z;
 
@@ -356,6 +363,8 @@ ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
         guRotateF(transformGroup->matrixB, a, x, y, z);
         transformGroup->flags |= 0x1400;
     } else {
+        Matrix4f mtx;
+
         guRotateF(mtx, a, x, y, z);
         guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
     }
@@ -367,7 +376,6 @@ ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args);
     s32 index = func_8011B090(var1);
-    Matrix4f mtx;
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
 
@@ -389,6 +397,8 @@ ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
         guScaleF(transformGroup->matrixB, x, y, z);
         transformGroup->flags |= 0x1400;
     } else {
+        Matrix4f mtx;
+
         guScaleF(mtx, x, y, z);
         guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
     }
@@ -502,9 +512,69 @@ ApiStatus ModifyColliderFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", ResetFromLava, ScriptInstance* script, s32 isInitialCall);
+ApiStatus ResetFromLava(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+    Collider* collider;
+    LavaReset* lavaReset;
 
-INCLUDE_ASM(s32, "evt/map_api", func_802C9FD4);
+    if (isInitialCall) {
+        lavaReset = D_802DADA0 = get_variable(script, *args++);
+
+        while (TRUE) {
+            if (lavaReset->unk_00 == -1) {
+                break;
+            }
+            collider = &gCollisionData.colliderList[lavaReset->unk_00];
+            if (collider->firstChild >= 0) {
+                modify_collider_family_flags(collider->firstChild, 0x100, 0);
+            }
+            collider->flags |= 0x100;
+            lavaReset++;
+        }
+
+        D_802DADA4 = -1;
+    }
+
+    if (!(collisionStatus->currentFloor & 0x4000)) {
+        collider = &gCollisionData.colliderList[collisionStatus->currentFloor];
+        if (collider->flags & 0x100) {
+            D_802DADA4 = collisionStatus->currentFloor;
+            return ApiStatus_BLOCK;
+        }
+    }
+
+    return ApiStatus_BLOCK;
+}
+
+s32 func_802C9FD4(f32* outX, f32* outY, f32* outZ) {
+    Vec4f *temp_v0;
+    s32 temp_a0;
+    LavaReset* lavaReset = D_802DADA0;
+
+    if (D_802DADA4 == -1) {
+        temp_v0 = &(*get_current_map_header()->entryList)[gGameStatusPtr->entryID];
+        *outX = temp_v0->x;
+        *outY = temp_v0->y;
+        *outZ = temp_v0->z;
+        return -1;
+    }
+
+    while (TRUE) {
+        if (lavaReset->unk_00 == -1) {
+            break;
+        }
+
+        if (lavaReset->unk_00 == D_802DADA4) {
+            *outX = lavaReset->pos.x;
+            *outY = lavaReset->pos.y;
+            *outZ = lavaReset->pos.z;
+            return 1;
+        }
+        lavaReset++;
+    }
+    return 0;
+}
 
 ApiStatus GetColliderCenter(ScriptInstance* script, s32 isInitialCall) {
     f32 x, y, z;
@@ -575,7 +645,30 @@ ApiStatus SetZoneEnabled(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", goto_map);
+void goto_map(ScriptInstance* script, s32 mode) {
+    Bytecode* args = script->ptrReadPos;
+    s16 mapID;
+    s16 areaID;
+    s16 mapTransitionEffect = 0;
+
+    if (mode == 2) {
+        areaID = get_variable(script, *args++);
+        mapID = get_variable(script, *args++);
+    } else {
+        get_map_IDs_by_name(get_variable(script, *args++), &areaID, &mapID);
+    }
+
+    gGameStatusPtr->areaID = areaID;
+    gGameStatusPtr->mapID = mapID;
+    gGameStatusPtr->entryID = get_variable(script, *args++);
+
+    if (mode == 1) {
+        mapTransitionEffect = get_variable(script, *args++);
+    }
+
+    set_map_transition_effect(mapTransitionEffect);
+    set_game_mode(5);
+}
 
 ApiStatus GotoMap(ScriptInstance* script, s32 isInitialCall) {
     goto_map(script, 0);
