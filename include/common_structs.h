@@ -1180,17 +1180,7 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
-/*
-still;
-walk;
-jump;
-fall;
-fly;
-idle;
-run;
-talk;
-hurt;
-*/
+// PartnerAnims
 typedef struct PartnerAnimations {
     /* 0x00 */ UNK_PTR anims[9];
 } PartnerAnimations; // size = 0x24

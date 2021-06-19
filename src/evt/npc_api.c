@@ -1,5 +1,9 @@
 #include "common.h"
 #include "map.h"
+#include "npc.h"
+
+extern s32 D_802DAE40;
+extern s32 D_802DAE44;
 
 Npc* resolve_npc(ScriptInstance* script, NpcID npcIdOrPtr) {
     if (npcIdOrPtr == NPC_SELF) {
@@ -234,7 +238,77 @@ ApiStatus NpcJump1(ScriptInstance* script, s32 isInitialCall) {
     return _npc_jump_to(script, isInitialCall, 1);
 }
 
-INCLUDE_ASM(s32, "evt/npc_api", NpcFlyTo, ScriptInstance* script, s32 isInitialCall);
+ApiStatus NpcFlyTo(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    f32* outX = &script->varTable[3];
+    f32* outY = &script->varTable[4];
+    f32* outZ = &script->varTable[5];
+    Npc* npc;
+    f32 dist;
+    f32 yDelta;
+
+    if (isInitialCall) {
+        npc = resolve_npc(script, get_variable(script, *args++));
+        if (npc == NULL) {
+            return ApiStatus_DONE2;
+        }
+
+        script->functionTemp[1].s = npc;
+        npc->moveToPos.x = get_float_variable(script, *args++);
+        npc->moveToPos.y = get_float_variable(script, *args++);
+        npc->moveToPos.z = get_float_variable(script, *args++);
+        script->varTable[6] = get_variable(script, *args++);
+        script->functionTemp[2].s = get_variable(script, *args++);
+        script->functionTemp[3].s = get_variable(script, *args++);
+        npc->duration = 0;
+        *outX = npc->pos.x;
+        *outY = npc->pos.y;
+        *outZ = npc->pos.z;
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+        dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+        npc->planarFlyDist = dist;
+
+        if (script->varTable[6] == 0) {
+            script->varTable[6] = (dist / npc->moveSpeed);
+        } else {
+            npc->moveSpeed = dist / script->varTable[6];
+        }
+    }
+
+    npc = (Npc*)script->functionTemp[1].s;
+    npc->pos.x = update_lerp(script->functionTemp[3].s, *outX, npc->moveToPos.x, npc->duration, script->varTable[6]);
+    npc->pos.y = update_lerp(script->functionTemp[3].s, *outY, npc->moveToPos.y, npc->duration, script->varTable[6]);
+    npc->pos.z = update_lerp(script->functionTemp[3].s, *outZ, npc->moveToPos.z, npc->duration, script->varTable[6]);
+
+    npc->duration++;
+    if (npc->duration >= script->varTable[6]) {
+        npc->pos.x = npc->moveToPos.x;
+        npc->pos.y = npc->moveToPos.y;
+        npc->pos.z = npc->moveToPos.z;
+        return ApiStatus_DONE2;
+    }
+
+    dist = dist2D(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
+    if (dist == 0.0f) {
+        dist = 1.0f;
+    }
+    if (npc->planarFlyDist == 0.0f) {
+        npc->planarFlyDist = 1.0f;
+    }
+
+    yDelta = sin_deg((1.0 - (dist / npc->planarFlyDist)) * 180.0);
+    if (script->functionTemp[2].s == 0) {
+        yDelta = 0.0f;
+    }
+    if (script->functionTemp[2].s < 0) {
+        yDelta = -yDelta * -script->functionTemp[2].s;
+    }
+    if (script->functionTemp[2].s > 0) {
+        yDelta *= script->functionTemp[2].s;
+    }
+    npc->pos.y += yDelta;
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus GetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
@@ -447,7 +521,104 @@ ApiStatus func_802CF56C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/npc_api", BringPartnerOut, ScriptInstance* script, s32 isInitialCall);
+//INCLUDE_ASM(ApiStatus, "evt/npc_api", BringPartnerOut, ScriptInstance* script, s32 isInitialCall);
+s32 BringPartnerOut(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    NpcBlueprint bp;
+    NpcBlueprint* bpPointer = &bp;
+    PlayerData* playerData = &gPlayerData;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Npc* partner;
+    Npc* npc;
+    f32 duration;
+    f32 playerZ;
+    f32 targetZ;
+    f32 playerX;
+    f32 targetX;
+    f32 targetY;
+    f32 playerY;
+
+    if (isInitialCall) {
+        D_802DAE40 = get_variable(script, *args++);
+        if (playerData->currentPartner == D_802DAE40) {
+            D_802DAE40 = 0;
+            return ApiStatus_DONE2;
+        }
+
+        partner = get_npc_unsafe(NPC_PARTNER);
+        partner->npcID = -5;
+
+        bpPointer->flags = NPC_FLAG_100;
+        bpPointer->initialAnim = gPartnerAnimations[D_802DAE40].anims[PARTNER_ANIM_FLY];
+        bpPointer->onUpdate = NULL;
+        bpPointer->onRender = NULL;
+
+        D_802DAE44 = npc_create_basic(bpPointer);
+        npc = get_npc_by_index(D_802DAE44);
+        npc->collisionRadius = 10;
+        npc->collisionHeight = 10;
+        npc->npcID = NPC_PARTNER;
+        npc->scale.x = 0.0f;
+        npc->scale.y = 0.0f;
+        npc->scale.z = 0.0f;
+
+        targetX = partner->pos.x;
+        npc->moveToPos.x = targetX;
+        playerY = playerStatus->position.y;
+        npc->moveToPos.y = playerStatus->position.y;
+        targetZ = partner->pos.z + 30.0f;
+        npc->moveToPos.z = targetZ;
+        npc->pos.x = playerX = playerStatus->position.x;
+        npc->pos.y = targetY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
+        playerZ = playerStatus->position.z;
+        npc->moveSpeed = 4.0f;
+        npc->jumpScale = 1.6f;
+        npc->pos.z = playerZ;
+
+        npc->planarFlyDist = dist2D(playerX, npc->pos.z, targetX, targetZ);
+        npc->yaw = atan2(playerX, playerZ, targetX, targetZ);
+        npc->duration = npc->planarFlyDist / npc->moveSpeed;
+
+        if (npc->duration < 10) {
+            f32 ten = 10.0f;
+
+            npc->duration = 10;
+            npc->moveSpeed = npc->planarFlyDist / ten;
+        }
+
+        npc->jumpVelocity = ((playerY - targetY) + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
+        npc->currentAnim.w = gPartnerAnimations[D_802DAE40].anims[PARTNER_ANIM_WALK];
+        return ApiStatus_BLOCK;
+    }
+
+    npc = get_npc_by_index(D_802DAE44);
+    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVelocity;
+    if (npc->jumpVelocity <= 0.0f) {
+        npc->currentAnim.w = gPartnerAnimations[D_802DAE40].anims[PARTNER_ANIM_JUMP];
+    }
+    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+    duration = npc->duration;
+    if (duration > 10.0f) {
+        duration = 10.0f;
+    }
+    npc->scale.x = (10.f - duration) / 10.0f;
+    npc->scale.y = npc->scale.x;
+    npc->scale.z = npc->scale.x;
+
+    npc->duration--;
+    if (npc->duration < 0) {
+        npc->currentAnim.w = gPartnerAnimations[D_802DAE40].anims[PARTNER_ANIM_IDLE];
+        npc->jumpVelocity = 0.0f;
+        npc->pos.y = npc->moveToPos.y;
+        npc->scale.x = 1.0f;
+        npc->scale.y = 1.0f;
+        npc->scale.z = 1.0f;
+        npc->yaw = clamp_angle(npc->yaw + 180.0f);
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(ApiStatus, "evt/npc_api", PutPartnerAway, ScriptInstance* script, s32 isInitialCall);
 

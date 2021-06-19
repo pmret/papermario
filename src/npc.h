@@ -22,7 +22,7 @@ void npc_iter_no_op(void);
 
 s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAnims);
 
-void npc_create_basic(NpcBlueprint* blueprint);
+s32 npc_create_basic(NpcBlueprint* blueprint);
 
 void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID** animList);
 
@@ -102,7 +102,7 @@ s32 func_8003BA60();
 
 s32 func_8003BED8();
 
-void func_8003C3D8(Npc* npc, s32 idx, s8 decorationType);
+void func_8003C3D8(Npc* npc, s32 idx, s32 decorationType);
 
 void func_8003C428(Npc* npc, s32 idx);
 
@@ -174,7 +174,7 @@ s32 func_8003D2F8(Npc* npc);
 
 void func_8003D3BC(Npc* npc);
 
-void func_8003D624(Npc* npc, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6);
+void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 void func_8003D660(Npc* npc, s32 arg1);
 
@@ -252,16 +252,16 @@ void bind_npc_aux(s32 npcID, Script* npcAuxBytecode);
 void bind_npc_interact(s32 npcID, Script* npcInteractBytecode);
 
 /// Looks for an enemy matching the specified npcID.
-/// 
+///
 /// @param npcID   ID of the npc bound to the desired enemy.
-/// 
+///
 /// @returns pointer to Enemy struct, if one is found. If one is not found, a panic occurs.
 Enemy* get_enemy(NpcID npcID);
 
 /// Same as get_enemy(), with the exception of always returning a value if an enemy is not found.
 ///
 /// @param npcID   ID of the npc bound to the desired enemy.
-/// 
+///
 /// @returns pointer to Enemy struct, if one is found. Otherwise, NULL.
 Enemy* get_enemy_safe(s32 npcID);
 

@@ -1641,4 +1641,16 @@ enum ActorEventFlags {
     EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
 };
 
+enum PartnerAnims {
+    PARTNER_ANIM_STILL,
+    PARTNER_ANIM_WALK,
+    PARTNER_ANIM_JUMP,
+    PARTNER_ANIM_FALL,
+    PARTNER_ANIM_FLY,
+    PARTNER_ANIM_IDLE,
+    PARTNER_ANIM_RUN,
+    PARTNER_ANIM_TALK,
+    PARTNER_ANIM_HURT,
+};
+
 #endif
