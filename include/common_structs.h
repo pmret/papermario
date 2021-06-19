@@ -496,7 +496,7 @@ typedef struct Collider {
     /* 0x0C */ struct ColliderTriangle* triangleTable;
     /* 0x10 */ struct ColliderBoundingBox* aabb;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ f32* vertexTable[3];
+    /* 0x18 */ f32* vertexTable; // 3?
 } Collider; // size = 0x1C
 
 typedef struct Camera {
@@ -842,8 +842,8 @@ typedef struct ModelTransformGroup {
     /* 0x10 */ Matrix4f matrixA;
     /* 0x50 */ Matrix4f matrixB;
     /* 0x90 */ Vec3f center;
-    /* 0x9C */ s8 minChildModelIndex;
-    /* 0x9D */ s8 maxChildModelIndex;
+    /* 0x9C */ u8 minChildModelIndex;
+    /* 0x9D */ u8 maxChildModelIndex;
     /* 0x9E */ u8 renderMode;
     /* 0x9F */ s8 matrixMode;
 } ModelTransformGroup; // size = 0xA0

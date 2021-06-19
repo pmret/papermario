@@ -24,13 +24,13 @@ ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
     model = get_model_from_list_index(modelIndex);
 
     if (!(model->flags & 0x400)) {
-        guTranslateF(&model->transformMatrix, x, y, z);
+        guTranslateF(model->transformMatrix, x, y, z);
         model->flags |= 0x1400;
     } else {
         Matrix4f mtx;
 
-        guTranslateF(&mtx, x, y, z);
-        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+        guTranslateF(mtx, x, y, z);
+        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
     }
 
     return ApiStatus_DONE2;
@@ -74,13 +74,13 @@ ApiStatus ScaleModel(ScriptInstance* script, s32 isInitialCall) {
     model = get_model_from_list_index(modelIndex);
 
     if (!(model->flags & 0x400)) {
-        guScaleF(&model->transformMatrix, x, y, z);
+        guScaleF(model->transformMatrix, x, y, z);
         model->flags |= 0x1400;
     } else {
         Matrix4f mtx;
 
-        guScaleF(&mtx, x, y, z);
-        guMtxCatF(&mtx, &model->transformMatrix, &model->transformMatrix);
+        guScaleF(mtx, x, y, z);
+        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
     }
 
     return ApiStatus_DONE2;
@@ -298,11 +298,103 @@ ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", TranslateGroup, ScriptInstance* script, s32 isInitialCall);
+ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args);
+    s32 index = func_8011B090(var1);
+    Matrix4f mtx;
+    ModelTransformGroup* transformGroup;
+    f32 x, y, z;
 
-INCLUDE_ASM(s32, "evt/map_api", RotateGroup, ScriptInstance* script, s32 isInitialCall);
+    if (index == -1) {
+        func_802C95A0(TranslateModel, script);
+        return ApiStatus_DONE2;
+    }
 
-INCLUDE_ASM(s32, "evt/map_api", ScaleGroup, ScriptInstance* script, s32 isInitialCall);
+    args++;
+
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+
+    transformGroup = func_8011B1C0(index);
+
+    index = transformGroup->flags & 0x400; // TODO fix weird match
+    if (!index) {
+        guTranslateF(transformGroup->matrixB, x, y, z);
+        transformGroup->flags |= 0x1400;
+    } else {
+        guTranslateF(mtx, x, y, z);
+        guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = func_8011B090(get_variable(script, *args));
+    Matrix4f mtx;
+    ModelTransformGroup* transformGroup;
+    f32 a, x, y, z;
+
+    if (index == -1) {
+        func_802C95A0(RotateModel, script);
+        return ApiStatus_DONE2;
+    }
+
+    args++;
+
+    a = get_float_variable(script, *args++);
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+
+    transformGroup = func_8011B1C0(index);
+
+    if (!(transformGroup->flags & 0x400)) {
+        guRotateF(transformGroup->matrixB, a, x, y, z);
+        transformGroup->flags |= 0x1400;
+    } else {
+        guRotateF(mtx, a, x, y, z);
+        guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
+    }
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args);
+    s32 index = func_8011B090(var1);
+    Matrix4f mtx;
+    ModelTransformGroup* transformGroup;
+    f32 x, y, z;
+
+    if (index == -1) {
+        func_802C95A0(ScaleModel, script);
+        return ApiStatus_DONE2;
+    }
+
+    args++;
+
+    x = get_float_variable(script, *args++);
+    y = get_float_variable(script, *args++);
+    z = get_float_variable(script, *args++);
+
+    transformGroup = func_8011B1C0(index);
+
+    index = transformGroup->flags & 0x400; // TODO fix weird match
+    if (!(index)) {
+        guScaleF(transformGroup->matrixB, x, y, z);
+        transformGroup->flags |= 0x1400;
+    } else {
+        guScaleF(mtx, x, y, z);
+        guMtxCatF(mtx, transformGroup->matrixB, transformGroup->matrixB);
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -313,7 +405,33 @@ ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", EnableGroup, ScriptInstance* script, s32 isInitialCall);
+ApiStatus EnableGroup(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 index = func_8011B090(get_variable(script, *args));
+    s32 flagUnset;
+    ModelTransformGroup* transformGroup;
+
+    if (index == -1) {
+        func_802C95A0(EnableModel, script);
+        return ApiStatus_DONE2;
+    }
+
+    args++;
+
+    flagUnset = get_variable(script, *args++);
+    transformGroup = func_8011B1C0(index);
+
+    for (index = transformGroup->minChildModelIndex; index <= transformGroup->maxChildModelIndex; index++) {
+        Model* model = get_model_from_list_index(index);
+        if (flagUnset) {
+            model->flags &= ~0x2;
+        } else {
+            model->flags |= 0x2;
+        }
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -325,41 +443,64 @@ ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-// Sub vs add at the beginning with the colliderList access
-#ifdef NON_MATCHING
-void modify_collider_family_flags(s32 arg0, s32 arg1, s32 arg2) {
-    Collider* collider = &gCollisionData.colliderList[arg0];
+void modify_collider_family_flags(s32 index, s32 flags, s32 mode) {
+    Collider* collider = &gCollisionData.colliderList[index];
 
     if (collider->nextSibling >= 0) {
-        modify_collider_family_flags(collider->nextSibling, arg1, arg2);
+        modify_collider_family_flags(collider->nextSibling, flags, mode);
     }
 
     if (collider->firstChild >= 0) {
-        modify_collider_family_flags(collider->firstChild, arg1, arg2);
+        modify_collider_family_flags(collider->firstChild, flags, mode);
     }
 
-    switch (arg2) {
+    switch (mode) {
         case 0:
-            collider->flags |= arg1;
+            collider->flags |= flags;
             break;
         case 1:
-            collider->flags &= ~arg1;
+            collider->flags &= ~flags;
             break;
         case 2:
-            collider->flags = arg1;
+            collider->flags = flags;
             break;
         case 3:
             collider->flags &= ~0xFF;
-            collider->flags |= (u8)arg1;
+            collider->flags |= flags & 0xFF;
             break;
 
     }
 }
-#else
-INCLUDE_ASM(s32, "evt/map_api", modify_collider_family_flags);
-#endif
 
-INCLUDE_ASM(s32, "evt/map_api", ModifyColliderFlags, ScriptInstance* script, s32 isInitialCall);
+ApiStatus ModifyColliderFlags(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 mode = get_variable(script, *args++);
+    s32 index = get_variable(script, *args++);
+    s32 flags = get_variable(script, *args++);
+    Collider* collider = &gCollisionData.colliderList[index];
+
+    if (collider->firstChild >= 0) {
+        modify_collider_family_flags(collider->firstChild, flags, mode);
+    }
+
+    switch (mode) {
+        case 0:
+            collider->flags |= flags;
+            break;
+        case 1:
+            collider->flags &= ~flags;
+            break;
+        case 2:
+            collider->flags = flags;
+            break;
+        case 3:
+            collider->flags &= ~0xFF;
+            collider->flags |= flags & 0xFF;
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "evt/map_api", ResetFromLava, ScriptInstance* script, s32 isInitialCall);
 
