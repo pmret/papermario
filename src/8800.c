@@ -1,6 +1,7 @@
 #include "common.h"
+#include "camera.h"
 
-extern f32 D_8009A5EC;
+// D_8009A5EC bss here
 
 void initialize_next_camera(CameraInitData* data);
 

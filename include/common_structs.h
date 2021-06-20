@@ -516,7 +516,7 @@ typedef struct Camera {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
-    /* 0x006 */ u16 unk_06;
+    /* 0x006 */ s16 unk_06;
     /* 0x008 */ u16 unk_08;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
@@ -538,7 +538,7 @@ typedef struct Camera {
     /* 0x032 */ s16 targetScreenCoords[3];
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
-    /* 0x03C */ f32 lookAt_eye[3];
+    /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
