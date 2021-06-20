@@ -40,7 +40,7 @@ ApiStatus CreateNpc(ScriptInstance* script, s32 isInitialCall) {
     blueprint.onRender = NULL;
 
     npc = get_npc_by_index(npc_create_basic(&blueprint));
-    npc->npcID =  npcID;
+    npc->npcID = npcID;
     disable_npc_shadow(npc);
     return ApiStatus_DONE2;
 }

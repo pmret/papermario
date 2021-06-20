@@ -1182,18 +1182,18 @@ s32 si_execute_next_command(ScriptInstance *script) {
     while (TRUE) {
         s32 status = ApiStatus_DONE2;
         s32* lines;
-        s32 argC;
+        s32 nargs;
 
         switch (script->currentOpcode) {
             case 0:
                 script->ptrCurrentLine = script->ptrNextLine;
                 lines = script->ptrNextLine;
                 script->currentOpcode = *lines++;
-                argC = *lines++;
+                nargs = *lines++;
                 script->ptrReadPos = lines;
                 script->blocked = FALSE;
-                script->currentArgc = argC;
-                lines = &lines[argC];
+                script->currentArgc = nargs;
+                lines = &lines[nargs];
                 script->ptrNextLine = lines;
                 status = ApiStatus_REPEAT;
                 break;
@@ -1737,6 +1737,7 @@ Bytecode* si_skip_if(ScriptInstance* script) {
         opcode = *pos++;
         nargs = *pos++;
         pos += nargs;
+
         switch(opcode) {
             case 1:
                 PANIC();
@@ -1775,6 +1776,7 @@ Bytecode* si_skip_else(ScriptInstance* script) {
         opcode = *pos++;
         nargs = *pos++;
         pos += nargs;
+
         switch(opcode) {
             case 1:
                 PANIC();
@@ -1817,7 +1819,7 @@ Bytecode* si_skip_else(ScriptInstance* script) {
 INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_case, ScriptInstance* script);
 
 Bytecode* si_goto_next_case(ScriptInstance* script) {
-    s32 temp = 1;
+    s32 switchDepth = 1;
     Bytecode* pos = script->ptrNextLine;
     s32* opcode;
     s32* nargs;
@@ -1825,18 +1827,17 @@ Bytecode* si_goto_next_case(ScriptInstance* script) {
     do {
         opcode = pos++;
         nargs = pos++;
-
         pos += *nargs;
 
-        switch(*opcode) {
+        switch (*opcode) {
             case 1:
                 PANIC();
             case 20:
-                temp++;
+                switchDepth++;
                 break;
             case 35:
-                temp--;
-                if (temp == 0) {
+                switchDepth--;
+                if (switchDepth == 0) {
                     return opcode;
                 }
                 break;
@@ -1851,7 +1852,7 @@ Bytecode* si_goto_next_case(ScriptInstance* script) {
             case 30:
             case 32:
             case 33:
-                if (temp == 1) {
+                if (switchDepth == 1) {
                     return opcode;
                 }
             break;

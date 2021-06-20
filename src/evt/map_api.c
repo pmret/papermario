@@ -8,12 +8,12 @@ typedef struct TempSetZoneEnabled {
 } TempSetZoneEnabled; // size = 0x1C
 
 typedef struct LavaReset {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ s32 colliderID;
     /* 0x04 */ Vec3f pos;
 } LavaReset; // size = 0x10;
 
 extern TempSetZoneEnabled* D_800D91D4;
-extern LavaReset* D_802DADA0;
+extern LavaReset* gLavaResetList;
 extern s32 D_802DADA4;
 
 ApiStatus TranslateModel(ScriptInstance* script, s32 isInitialCall) {
@@ -519,13 +519,13 @@ ApiStatus ResetFromLava(ScriptInstance* script, s32 isInitialCall) {
     LavaReset* lavaReset;
 
     if (isInitialCall) {
-        lavaReset = D_802DADA0 = get_variable(script, *args++);
+        lavaReset = gLavaResetList = get_variable(script, *args++);
 
         while (TRUE) {
-            if (lavaReset->unk_00 == -1) {
+            if (lavaReset->colliderID == -1) {
                 break;
             }
-            collider = &gCollisionData.colliderList[lavaReset->unk_00];
+            collider = &gCollisionData.colliderList[lavaReset->colliderID];
             if (collider->firstChild >= 0) {
                 modify_collider_family_flags(collider->firstChild, 0x100, 0);
             }
@@ -550,7 +550,7 @@ ApiStatus ResetFromLava(ScriptInstance* script, s32 isInitialCall) {
 s32 func_802C9FD4(f32* outX, f32* outY, f32* outZ) {
     Vec4f *temp_v0;
     s32 temp_a0;
-    LavaReset* lavaReset = D_802DADA0;
+    LavaReset* lavaReset = gLavaResetList;
 
     if (D_802DADA4 == -1) {
         temp_v0 = &(*get_current_map_header()->entryList)[gGameStatusPtr->entryID];
@@ -561,11 +561,11 @@ s32 func_802C9FD4(f32* outX, f32* outY, f32* outZ) {
     }
 
     while (TRUE) {
-        if (lavaReset->unk_00 == -1) {
+        if (lavaReset->colliderID == -1) {
             break;
         }
 
-        if (lavaReset->unk_00 == D_802DADA4) {
+        if (lavaReset->colliderID == D_802DADA4) {
             *outX = lavaReset->pos.x;
             *outY = lavaReset->pos.y;
             *outZ = lavaReset->pos.z;

@@ -2,7 +2,6 @@
 
 extern f32 D_802B62B0;
 
-//INCLUDE_ASM(void, "world/action/hit_fire", func_802B6000_E27C90, void);
 void func_802B6000_E27C90(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sinTheta;
