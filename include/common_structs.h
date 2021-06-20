@@ -499,6 +499,19 @@ typedef struct Collider {
     /* 0x18 */ f32* vertexTable; // 3?
 } Collider; // size = 0x1C
 
+typedef struct CameraInitData {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ s8 type;
+    /* 0x03 */ char unk_03;
+    /* 0x04 */ s16 viewWidth;
+    /* 0x06 */ s16 viewHeight;
+    /* 0x08 */ s16 viewStartX;
+    /* 0x0A */ s16 viewStartY;
+    /* 0x0C */ s16 nearClip;
+    /* 0x0E */ s16 farClip;
+    /* 0x10 */ s16 vfov;
+} CameraInitData; // size = 0x12;
+
 typedef struct Camera {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 moveFlags;
