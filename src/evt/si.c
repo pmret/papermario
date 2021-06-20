@@ -1175,7 +1175,8 @@ s32 func_802C73B8(ScriptInstance* script) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "evt/si", si_execute_next_command);
+s32 si_execute_next_command(ScriptInstance* script);
+INCLUDE_ASM(s32, "evt/si", si_execute_next_command, ScriptInstance* script);
 
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING

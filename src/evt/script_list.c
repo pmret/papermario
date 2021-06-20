@@ -418,7 +418,44 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     return script;
 }
 
-INCLUDE_ASM(s32, "evt/script_list", update_scripts);
+void update_scripts(void) {
+    if (gGameStatusPtr->disableScripts != TRUE) {
+        s32 i;
+
+        gIsUpdatingScripts = TRUE;
+        sort_scripts();
+
+        for (i = 0; i < gScriptListCount; i++) {
+            ScriptInstance* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
+
+            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & 0x92)) {
+                s32 stop = FALSE;
+                s32 status;
+
+                script->frameCounter += script->timeScale;
+
+                do {
+                    if (script->frameCounter < 1.0) {
+                        // Continue to next script
+                        break;
+                    };
+
+                    script->frameCounter -= 1.0;
+                    status = si_execute_next_command(script);
+                    if (status == 1) {
+                        stop = TRUE;
+                        break;
+                    }
+                } while (status != -1);
+
+                if (stop) {
+                    break;
+                }
+            }
+        }
+        gIsUpdatingScripts = FALSE;
+    }
+}
 
 // this function is evil.
 INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);
