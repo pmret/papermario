@@ -96,7 +96,11 @@ typedef enum ScriptOpcode {
     ScriptOpcode_END_SPAWN_THREAD,
     ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
     ScriptOpcode_END_PARALLEL_THREAD,
-    ScriptOpcode_DEBUG_PRINT = 0x5B, ///< Args: expression
+    ScriptOpcode_90,
+    ScriptOpcode_DEBUG_PRINT, ///< Args: expression
+    ScriptOpcode_92,
+    ScriptOpcode_93,
+    ScriptOpcode_94,
 } ScriptOpcode;
 
 #define SI_VAR(v)           ((v -  30000000))

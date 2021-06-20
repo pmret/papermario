@@ -1197,285 +1197,285 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 script->ptrNextLine = lines;
                 status = ApiStatus_REPEAT;
                 break;
-            case 2:
+            case ScriptOpcode_RETURN:
                 status = si_handle_return(script);
                 break;
-            case 3:
+            case ScriptOpcode_LABEL:
                 status = si_handle_label(script);
                 break;
-            case 4:
+            case ScriptOpcode_GOTO:
                 status = si_handle_goto(script);
                 break;
-            case 5:
+            case ScriptOpcode_LOOP:
                 status = si_handle_loop(script);
                 break;
-            case 6:
+            case ScriptOpcode_END_LOOP:
                 status = si_handle_end_loop(script);
                 break;
-            case 7:
+            case ScriptOpcode_BREAK_LOOP:
                 status = si_handle_break_loop(script);
                 break;
-            case 8:
+            case ScriptOpcode_SLEEP_FRAMES:
                 status = si_handle_sleep_frames(script);
                 break;
-            case 9:
+            case ScriptOpcode_SLEEP_SECS:
                 status = si_handle_sleep_seconds(script);
                 break;
-            case 10:
+            case ScriptOpcode_IF_EQ:
                 status = si_handle_if_equal(script);
                 break;
-            case 11:
+            case ScriptOpcode_IF_NE:
                 status = si_handle_if_not_equal(script);
                 break;
-            case 12:
+            case ScriptOpcode_IF_LT:
                 status = si_handle_if_less(script);
                 break;
-            case 13:
+            case ScriptOpcode_IF_GT:
                 status = si_handle_if_greater(script);
                 break;
-            case 14:
+            case ScriptOpcode_IF_LE:
                 status = si_handle_if_less_equal(script);
                 break;
-            case 15:
+            case ScriptOpcode_IF_GE:
                 status = si_handle_if_greater_equal(script);
                 break;
-            case 16:
+            case ScriptOpcode_IF_FLAG:
                 status = si_handle_if_flag(script);
                 break;
-            case 17:
+            case ScriptOpcode_IF_NOT_FLAG:
                 status = si_handle_if_not_flag(script);
                 break;
-            case 18:
+            case ScriptOpcode_ELSE:
                 status = si_handle_else(script);
                 break;
-            case 19:
+            case ScriptOpcode_END_IF:
                 status = si_handle_end_if(script);
                 break;
-            case 20:
+            case ScriptOpcode_MATCH:
                 status = si_handle_match(script);
                 break;
-            case 21:
+            case ScriptOpcode_MATCH_CONST:
                 status = si_handle_match_const(script);
                 break;
-            case 22:
+            case ScriptOpcode_CASE_EQ:
                 status = si_handle_case_equal(script);
                 break;
-            case 23:
+            case ScriptOpcode_CASE_NE:
                 status = si_handle_case_not_equal(script);
                 break;
-            case 24:
+            case ScriptOpcode_CASE_LT:
                 status = si_handle_case_less(script);
                 break;
-            case 26:
+            case ScriptOpcode_CASE_LE:
                 status = si_handle_case_less_equal(script);
                 break;
-            case 25:
+            case ScriptOpcode_CASE_GT:
                 status = si_handle_case_greater(script);
                 break;
-            case 27:
+            case ScriptOpcode_CASE_GE:
                 status = si_handle_case_greater_equal(script);
                 break;
-            case 28:
+            case ScriptOpcode_CASE_ELSE:
                 status = si_handle_case_else(script);
                 break;
-            case 34:
+            case ScriptOpcode_BREAK_MATCH:
                 status = si_handle_break_match(script);
                 break;
-            case 29:
+            case ScriptOpcode_CASE_MULTI_OR_EQ:
                 status = si_handle_case_multi_or_equal(script);
                 break;
-            case 32:
+            case ScriptOpcode_END_CASE_MULTI:
                 status = si_handle_end_case_multi(script);
                 break;
-            case 30:
+            case ScriptOpcode_CASE_MULTI_AND_EQ:
                 status = si_handle_case_multi_and_equal(script);
                 break;
-            case 31:
+            case ScriptOpcode_CASE_FLAG:
                 status = si_handle_case_flag(script);
                 break;
-            case 33:
+            case ScriptOpcode_CASE_RANGE:
                 status = si_handle_case_range(script);
                 break;
-            case 35:
+            case ScriptOpcode_END_MATCH:
                 status = si_handle_end_match(script);
                 break;
-            case 36:
+            case ScriptOpcode_SET:
                 status = si_handle_set_var(script);
                 break;
-            case 37:
+            case ScriptOpcode_SET_CONST:
                 status = si_handle_set_const(script);
                 break;
-            case 38:
+            case ScriptOpcode_SET_F:
                 status = si_handle_set_float(script);
                 break;
-            case 39:
+            case ScriptOpcode_ADD:
                 status = si_handle_add(script);
                 break;
-            case 40:
+            case ScriptOpcode_SUB:
                 status = si_handle_subtract(script);
                 break;
-            case 41:
+            case ScriptOpcode_MUL:
                 status = si_handle_multiply(script);
                 break;
-            case 42:
+            case ScriptOpcode_DIV:
                 status = si_handle_divide(script);
                 break;
-            case 43:
+            case ScriptOpcode_MOD:
                 status = si_handle_mod(script);
                 break;
-            case 44:
+            case ScriptOpcode_ADD_F:
                 status = si_handle_addF(script);
                 break;
-            case 45:
+            case ScriptOpcode_SUB_F:
                 status = si_handle_subtractF(script);
                 break;
-            case 46:
+            case ScriptOpcode_MUL_F:
                 status = si_handle_multiplyF(script);
                 break;
-            case 47:
+            case ScriptOpcode_DIV_F:
                 status = si_handle_divideF(script);
                 break;
-            case 48:
+            case ScriptOpcode_USE_BUFFER:
                 status = si_handle_set_int_buffer_ptr(script);
                 break;
-            case 49:
+            case ScriptOpcode_BUFFER_READ_1:
                 status = si_handle_get_1_word(script);
                 break;
-            case 50:
+            case ScriptOpcode_BUFFER_READ_2:
                 status = si_handle_get_2_word(script);
                 break;
-            case 51:
+            case ScriptOpcode_BUFFER_READ_3:
                 status = si_handle_get_3_word(script);
                 break;
-            case 52:
+            case ScriptOpcode_BUFFER_READ_4:
                 status = si_handle_get_4_word(script);
                 break;
-            case 53:
+            case ScriptOpcode_BUFFER_PEEK:
                 status = si_handle_get_Nth_word(script);
                 break;
-            case 54:
+            case ScriptOpcode_USE_BUFFER_F:
                 status = si_handle_set_float_buffer_ptr(script);
                 break;
-            case 55:
+            case ScriptOpcode_BUFFER_READ_1_F:
                 status = si_handle_get_1_float(script);
                 break;
-            case 56:
+            case ScriptOpcode_BUFFER_READ_2_F:
                 status = si_handle_get_2_float(script);
                 break;
-            case 57:
+            case ScriptOpcode_BUFFER_READ_3_F:
                 status = si_handle_get_3_float(script);
                 break;
-            case 58:
+            case ScriptOpcode_BUFFER_READ_4_F:
                 status = si_handle_get_4_float(script);
                 break;
-            case 59:
+            case ScriptOpcode_BUFFER_PEEK_F:
                 status = si_handle_get_Nth_float(script);
                 break;
-            case 60:
+            case ScriptOpcode_USE_ARRAY:
                 status = si_handle_set_array(script);
                 break;
-            case 61:
+            case ScriptOpcode_USE_FLAGS:
                 status = si_handle_set_flag_array(script);
                 break;
-            case 62:
+            case ScriptOpcode_NEW_ARRAY:
                 status = si_handle_allocate_array(script);
                 break;
-            case 73:
+            case ScriptOpcode_KILL_SCRIPT:
                 status = si_handle_kill_script(script);
                 break;
-            case 63:
+            case ScriptOpcode_AND:
                 status = si_handle_AND(script);
                 break;
-            case 64:
+            case ScriptOpcode_AND_CONST:
                 status = si_handle_AND_const(script);
                 break;
-            case 65:
+            case ScriptOpcode_OR:
                 status = si_handle_OR(script);
                 break;
-            case 66:
+            case ScriptOpcode_OR_CONST:
                 status = si_handle_OR_const(script);
                 break;
-            case 67:
+            case ScriptOpcode_CALL:
                 status = si_handle_call(script);
                 break;
-            case 68:
+            case ScriptOpcode_SPAWN_SCRIPT:
                 status = si_handle_spawn_script(script);
                 break;
-            case 69:
+            case ScriptOpcode_SPAWN_GET_ID:
                 status = si_handle_spawn_script_get_id(script);
                 break;
-            case 70:
+            case ScriptOpcode_AWAIT_SCRIPT:
                 status = si_handle_await_script(script);
                 break;
-            case 71:
+            case ScriptOpcode_BIND_TRIGGER:
                 status = si_handle_bind_trigger(script);
                 break;
-            case 72:
+            case ScriptOpcode_UNBIND:
                 status = si_handle_unbind(script);
                 break;
-            case 75:
+            case ScriptOpcode_SET_PRIORITY:
                 status = si_handle_set_priority(script);
                 break;
-            case 76:
+            case ScriptOpcode_SET_TIMESCALE:
                 status = si_handle_set_timescale(script);
                 break;
-            case 77:
+            case ScriptOpcode_SET_GROUP:
                 status = si_handle_set_group(script);
                 break;
-            case 74:
+            case ScriptOpcode_JUMP:
                 status = si_handle_jump(script);
                 break;
-            case 78:
+            case ScriptOpcode_BIND_PADLOCK:
                 status = si_handle_bind_lock(script);
                 break;
-            case 79:
+            case ScriptOpcode_SUSPEND_GROUP:
                 status = si_handle_suspend_all(script);
                 break;
-            case 80:
+            case ScriptOpcode_RESUME_GROUP:
                 status = si_handle_resume_all(script);
                 break;
-            case 81:
+            case ScriptOpcode_SUSPEND_OTHERS:
                 status = si_handle_suspend_others(script);
                 break;
-            case 82:
+            case ScriptOpcode_RESUME_OTHERS:
                 status = si_handle_resume_others(script);
                 break;
-            case 83:
+            case ScriptOpcode_SUSPEND_SCRIPT:
                 status = si_handle_suspend_script(script);
                 break;
-            case 84:
+            case ScriptOpcode_RESUME_SCRIPT:
                 status = si_handle_resume_script(script);
                 break;
-            case 85:
+            case ScriptOpcode_SCRIPT_EXISTS:
                 status = si_handle_does_script_exist(script);
                 break;
-            case 86:
+            case ScriptOpcode_SPAWN_THREAD:
                 status = si_handle_spawn_thread(script);
                 break;
-            case 87:
+            case ScriptOpcode_END_SPAWN_THREAD:
                 status = si_handle_end_spawn_thread(script);
                 break;
-            case 88:
+            case ScriptOpcode_PARALLEL_THREAD:
                 status = si_handle_parallel_thread(script);
                 break;
-            case 89:
+            case ScriptOpcode_END_PARALLEL_THREAD:
                 status = si_handle_end_parallel_thread(script);
                 break;
-            case 90:
+            case ScriptOpcode_90:
                 status = func_802C6E14(script);
                 break;
-            case 91:
+            case ScriptOpcode_DEBUG_PRINT:
                 status = si_handle_print_debug_var(script);
                 break;
-            case 92:
+            case ScriptOpcode_92:
                 status = func_802C739C(script);
                 break;
-            case 93:
+            case ScriptOpcode_93:
                 status = func_802C73B0(script);
                 break;
-            case 94:
+            case ScriptOpcode_94:
                 status = func_802C73B8(script);
-            case 1:
+            case ScriptOpcode_END:
                 break;
             default:
                 PANIC();
@@ -1489,23 +1489,26 @@ s32 si_execute_next_command(ScriptInstance *script) {
             return -1;
         }
 
-        // TODO: this may be able to be a switch but I couldn't get it
-        if (status >= 0) {
-            if (status == ApiStatus_BLOCK) {
-            } else if (status == ApiStatus_DONE1) {
-                script->currentOpcode = 0;
-            } else if (status == ApiStatus_DONE2) {
-                script->currentOpcode = 0;
-                if (gGameStatusPtr->disableScripts != status) {
-                    continue;
-                }
-            } else {
-                continue;
-            }
-            return 0;
-        } else {
+        if (status < 0) {
             return 1;
         }
+
+        // TODO: this may be able to be a switch but I couldn't get it
+        if (status == ApiStatus_BLOCK) {
+            // return 0
+        } else if (status == ApiStatus_DONE1) {
+            script->currentOpcode = 0;
+            // return 0
+        } else if (status == ApiStatus_DONE2) {
+            script->currentOpcode = 0;
+            if (gGameStatusPtr->disableScripts != status) {
+                continue;
+            }
+            // return 0
+        } else {
+            continue;
+        }
+        return 0;
     }
 }
 
@@ -1739,25 +1742,25 @@ Bytecode* si_skip_if(ScriptInstance* script) {
         pos += nargs;
 
         switch(opcode) {
-            case 1:
+            case ScriptOpcode_END:
                 PANIC();
-            case 19:
+            case ScriptOpcode_END_IF:
                 nestedIfDepth--;
                 if (nestedIfDepth < 0) {
                     return pos;
                 }
                 break;
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 17:
+            case ScriptOpcode_IF_EQ:
+            case ScriptOpcode_IF_NE:
+            case ScriptOpcode_IF_LT:
+            case ScriptOpcode_IF_GT:
+            case ScriptOpcode_IF_LE:
+            case ScriptOpcode_IF_GE:
+            case ScriptOpcode_IF_FLAG:
+            case ScriptOpcode_IF_NOT_FLAG:
                 nestedIfDepth++;
                 break;
-            case 18:
+            case ScriptOpcode_ELSE:
                 if (nestedIfDepth == 0) {
                     return pos;
                 }
@@ -1778,9 +1781,9 @@ Bytecode* si_skip_else(ScriptInstance* script) {
         pos += nargs;
 
         switch(opcode) {
-            case 1:
+            case ScriptOpcode_END:
                 PANIC();
-            case 19:
+            case ScriptOpcode_END_IF:
                 nestedIfDepth--;
                 if (nestedIfDepth < 0) {
                     return pos;
@@ -1788,28 +1791,28 @@ Bytecode* si_skip_else(ScriptInstance* script) {
                 break;
             // If this isn't copy-pasted at least once, the function breaks, so
             // might as well be consistent
-            case 10:
+            case ScriptOpcode_IF_EQ:
                 nestedIfDepth++;
                 break;
-            case 11:
+            case ScriptOpcode_IF_NE:
                 nestedIfDepth++;
                 break;
-            case 12:
+            case ScriptOpcode_IF_LT:
                 nestedIfDepth++;
                 break;
-            case 13:
+            case ScriptOpcode_IF_GT:
                 nestedIfDepth++;
                 break;
-            case 14:
+            case ScriptOpcode_IF_LE:
                 nestedIfDepth++;
                 break;
-            case 15:
+            case ScriptOpcode_IF_GE:
                 nestedIfDepth++;
                 break;
-            case 16:
+            case ScriptOpcode_IF_FLAG:
                 nestedIfDepth++;
                 break;
-            case 17:
+            case ScriptOpcode_IF_NOT_FLAG:
                 nestedIfDepth++;
                 break;
         }
@@ -1830,28 +1833,28 @@ Bytecode* si_goto_next_case(ScriptInstance* script) {
         pos += *nargs;
 
         switch (*opcode) {
-            case 1:
+            case ScriptOpcode_END:
                 PANIC();
-            case 20:
+            case ScriptOpcode_MATCH:
                 switchDepth++;
                 break;
-            case 35:
+            case ScriptOpcode_END_MATCH:
                 switchDepth--;
                 if (switchDepth == 0) {
                     return opcode;
                 }
                 break;
-            case 22:
-            case 23:
-            case 24:
-            case 25:
-            case 26:
-            case 27:
-            case 28:
-            case 29:
-            case 30:
-            case 32:
-            case 33:
+            case ScriptOpcode_CASE_EQ:
+            case ScriptOpcode_CASE_NE:
+            case ScriptOpcode_CASE_LT:
+            case ScriptOpcode_CASE_GT:
+            case ScriptOpcode_CASE_LE:
+            case ScriptOpcode_CASE_GE:
+            case ScriptOpcode_CASE_ELSE:
+            case ScriptOpcode_CASE_MULTI_OR_EQ:
+            case ScriptOpcode_CASE_MULTI_AND_EQ:
+            case ScriptOpcode_END_CASE_MULTI:
+            case ScriptOpcode_CASE_RANGE:
                 if (switchDepth == 1) {
                     return opcode;
                 }
