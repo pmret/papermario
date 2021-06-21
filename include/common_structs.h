@@ -545,7 +545,7 @@ typedef struct Camera {
     /* 0x05C */ f32 unk_5C;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
-    /* 0x070 */ char unk_70[4];
+    /* 0x070 */ f32 unk_70;
     /* 0x074 */ f32 currentBoomYaw;
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
@@ -553,7 +553,8 @@ typedef struct Camera {
     /* 0x084 */ f32 trueRotation[3];
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ char unk_98[8];
+    /* 0x098 */ s32 unk_98;
+    /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
     /* 0x0B0 */ char unk_B0[0x24];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
@@ -2075,5 +2076,14 @@ typedef struct VirtualEntity {
 } VirtualEntity; // size = 0x4C
 
 typedef VirtualEntity* VirtualEntityList[0x40];
+
+typedef struct TempSetZoneEnabled {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 id1;
+    /* 0x06 */ s16 id2;
+    /* 0x08 */ char unk_08[0x8];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ char unk_14[0x8];
+} TempSetZoneEnabled; // size = 0x1C
 
 #endif

@@ -156,7 +156,7 @@ glabel D_800777EC
 .word 0x00000000, func_800355D4, func_80035704, 0x00000000, func_80035D18
 
 glabel D_80077800
-.word 0x00000000, state_init_file_select, func_800354EC, 0x00000000, state_drawUI_file_select
+.word 0x00000000, state_init_file_select, state_step_file_select, 0x00000000, state_drawUI_file_select
 
 glabel D_80077814
 .word 0x00000000, func_80035660, func_80035B40, 0x00000000, func_80035D20

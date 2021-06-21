@@ -2,6 +2,9 @@
 #include "camera.h"
 
 void do_camera_type_0(Camera*);
+void do_camera_type_1(Camera*);
+void do_camera_type_2(Camera*);
+void do_camera_type_4(Camera*);
 
 INCLUDE_ASM(void, "9d10_len_1080", do_camera_type_4, Camera* camera);
 

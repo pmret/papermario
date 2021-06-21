@@ -73,6 +73,7 @@ void step_battle(void) {
     if (D_800A0900 >= 0) {
         if (D_800A0900 > 0) {
             D_800A0900--;
+            return;
         } else {
             D_800A0900 = -1;
             nuGfxSetCfb(&D_800778A0, 2);
@@ -89,20 +90,12 @@ void step_battle(void) {
             unk_47B = gBattleStatus.unk_47B;
 
             // This part sucks
-            if (gGameStatusPtr->peachFlags & 1) {
+            if ((gGameStatusPtr->peachFlags & 1) || (currentBattleSection == 0x26 && unk_47B == 0)) {
                 gGameStatusPtr->peachFlags |= 1;
-                phi_a0 = 6;
-            } else if (currentBattleSection == 0x26) {
-                if (unk_47B == 0) {
-                    gGameStatusPtr->peachFlags |= 1;
-                    phi_a0 = 6;
-                } else {
-                    phi_a0 = 5;
-                }
+                spr_init_sprites(6);
             } else {
-                phi_a0 = 5;
+                spr_init_sprites(5);
             }
-            spr_init_sprites(phi_a0);
 
             clear_model_data();
             func_80148040();

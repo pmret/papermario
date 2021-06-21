@@ -173,7 +173,7 @@ glabel state_step_language_select
 /* 10848 80035448 3C048007 */  lui       $a0, %hi(D_8007798C)
 /* 1084C 8003544C 0C018038 */  jal       nuPiReadRomOverlay
 /* 10850 80035450 2484798C */   addiu    $a0, $a0, %lo(D_8007798C)
-/* 10854 80035454 0C091238 */  jal       func_802448E0
+/* 10854 80035454 0C091238 */  jal       filemenu_init
 /* 10858 80035458 24040001 */   addiu    $a0, $zero, 1
 /* 1085C 8003545C 240400FF */  addiu     $a0, $zero, 0xff
 /* 10860 80035460 3C06800A */  lui       $a2, %hi(gOverrideFlags)

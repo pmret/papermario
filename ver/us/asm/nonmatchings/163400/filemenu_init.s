@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_802448E0
+glabel filemenu_init
 /* 165140 802448E0 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 165144 802448E4 AFB40020 */  sw        $s4, 0x20($sp)
 /* 165148 802448E8 0080A02D */  daddu     $s4, $a0, $zero

@@ -165,6 +165,11 @@ s32 func_80055464(s32, s32);
 void func_800561A4(s32);
 s32 osGetId();
 
+s32 battle_heap_create(void);
+void filemenu_init(s32);
+
+s32 test_ray_zones(f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+
 void mem_clear(s8* data, s32 numBytes);
 
 HudElement* create_icon(s32* iconIndex);

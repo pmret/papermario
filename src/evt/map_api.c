@@ -1,18 +1,10 @@
 #include "common.h"
 
-typedef struct TempSetZoneEnabled {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s16 id1;
-    /* 0x06 */ s16 id2;
-    /* 0x08 */ char unk_08[0x14];
-} TempSetZoneEnabled; // size = 0x1C
-
 typedef struct LavaReset {
     /* 0x00 */ s32 colliderID;
     /* 0x04 */ Vec3f pos;
 } LavaReset; // size = 0x10;
 
-extern TempSetZoneEnabled* D_800D91D4;
 extern LavaReset* gLavaResetList;
 extern s32 D_802DADA4;
 

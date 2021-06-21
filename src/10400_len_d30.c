@@ -1,4 +1,26 @@
 #include "common.h"
+#include "ld_addrs.h"
+#include "nu/nusys.h"
+
+// todo remove here and from undefined_syms
+extern Addr _163400_BSS_START;
+extern Addr _163400_BSS_END;
+
+s32 D_80077980[] = { 0x8038F800, 0x803B5000, &D_803DA800, };
+
+NUPiOverlaySegment D_8007798C = {
+    .romStart = _163400_ROM_START,
+    .romEnd = _163400_ROM_END,
+    .ramStart = _163400_VRAM,
+    .textStart = _163400_VRAM,
+    .textEnd = _16A3E0_data__s,
+    .dataStart = _16A3E0_data__s,
+    .dataEnd = _163400_BSS_START,
+    .bssStart = _163400_BSS_START,
+    .bssEnd = _163400_BSS_END,
+};
+
+u8 D_800779B0 = 0;
 
 void state_init_language_select(void) {
     D_800A0931 = 0;
@@ -46,7 +68,36 @@ void state_init_file_select(void) {
 
 INCLUDE_ASM(s32, "10400_len_d30", state_step_language_select);
 
-INCLUDE_ASM(s32, "10400_len_d30", func_800354EC);
+void state_step_file_select(void) {
+    s32 temp = D_800A0931; // needed to match
+
+    switch (D_800A0931) {
+        case 1:
+            set_windows_visible(3);
+            D_800A0930 = temp;
+            D_800A0931 = 2;
+            break;
+        case 0:
+            D_800A0931 = 1;
+            break;
+        case 2:
+            if (D_800A0930 >= 0) {
+                D_800A0930--;
+                temp = D_800A0930;
+                if (temp == 0) {
+                    D_800A0930 = -1;
+                    battle_heap_create();
+                    nuPiReadRomOverlay(&D_8007798C);
+                    filemenu_init(0);
+                }
+            }
+
+            if (D_800A0930 < 0) {
+                func_802431A0();
+            }
+            break;
+    }
+}
 
 void state_drawUI_language_select(void) {
 }
