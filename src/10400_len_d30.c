@@ -29,9 +29,9 @@ void state_init_file_select(void) {
     gCameras[0].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 40;
-    gCameras[0].lookAt_eye[0] = 500.0f;
-    gCameras[0].lookAt_eye[1] = 1000.0f;
-    gCameras[0].lookAt_eye[2] = 1500.0f;
+    gCameras[0].lookAt_eye.x = 500.0f;
+    gCameras[0].lookAt_eye.y = 1000.0f;
+    gCameras[0].lookAt_eye.z = 1500.0f;
     gCameras[0].unk_5C = 150.0f;
     gCameras[0].backgroundColor[0] = 0;
     gCameras[0].backgroundColor[1] = 0;

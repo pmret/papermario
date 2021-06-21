@@ -88,9 +88,9 @@ void state_init_logos(void) {
     gCameras[0].unk_1C = 0;
     gCameras[0].unk_20 = 100;
     gCameras[0].unk_22 = 0;
-    gCameras[0].lookAt_eye[0] = 500.0f;
-    gCameras[0].lookAt_eye[1] = 1000.0f;
-    gCameras[0].lookAt_eye[2] = 1500.0f;
+    gCameras[0].lookAt_eye.x = 500.0f;
+    gCameras[0].lookAt_eye.y = 1000.0f;
+    gCameras[0].lookAt_eye.z = 1500.0f;
     gCameras[0].unk_5C = 150.0f;
     clear_script_list();
     clear_dynamic_entity_list();

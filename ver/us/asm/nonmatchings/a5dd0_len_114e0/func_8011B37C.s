@@ -27,8 +27,8 @@ glabel func_8011B37C
 /* B1AD4 8011B3D4 8E020000 */  lw        $v0, ($s0)
 /* B1AD8 8011B3D8 10400077 */  beqz      $v0, .L8011B5B8
 /* B1ADC 8011B3DC 0000802D */   daddu    $s0, $zero, $zero
-/* B1AE0 8011B3E0 3C118015 */  lui       $s1, %hi(D_801512E0)
-/* B1AE4 8011B3E4 263112E0 */  addiu     $s1, $s1, %lo(D_801512E0)
+/* B1AE0 8011B3E0 3C118015 */  lui       $s1, %hi(gCurrentTransformGroups)
+/* B1AE4 8011B3E4 263112E0 */  addiu     $s1, $s1, %lo(gCurrentTransformGroups)
 /* B1AE8 8011B3E8 8E230000 */  lw        $v1, ($s1)
 .L8011B3EC:
 /* B1AEC 8011B3EC 8C620000 */  lw        $v0, ($v1)

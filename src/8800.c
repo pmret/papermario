@@ -1,14 +1,125 @@
 #include "common.h"
+#include "camera.h"
+
+// D_8009A5EC bss here
+
+void initialize_next_camera(CameraInitData* data);
 
 INCLUDE_ASM(s32, "8800", update_cameras);
 
-INCLUDE_ASM(s32, "8800", render_frame);
+INCLUDE_ASM(void, "8800", render_frame);
 
-INCLUDE_ASM(s32, "8800", create_cameras_a);
+void create_cameras_a(void) {
+    CameraInitData camData;
+    CameraInitData* camDataPtr = &camData;
+    s32 i;
 
-INCLUDE_ASM(s32, "8800", create_cameras_b);
+    D_8009A5EC = 1.0f;
 
-INCLUDE_ASM(s32, "8800", initialize_next_camera);
+    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
+        gCameras[i].flags = 0;
+    }
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 0;
+    camDataPtr->viewStartY = 0;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 160;
+    camDataPtr->viewStartY = 0;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 0;
+    camDataPtr->viewStartY = 120;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 160;
+    camDataPtr->viewStartY = 120;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+}
+
+void create_cameras_b(void) {
+    CameraInitData camData;
+    CameraInitData* camDataPtr = &camData;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
+        gCameras[i].flags = 0;
+    }
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 0;
+    camDataPtr->viewStartY = 0;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 160;
+    camDataPtr->viewStartY = 0;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 0;
+    camDataPtr->viewStartY = 120;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+
+    camDataPtr->flags = 2;
+    camDataPtr->type = 0;
+    camDataPtr->viewWidth = 160;
+    camDataPtr->viewHeight = 120;
+    camDataPtr->viewStartX = 160;
+    camDataPtr->viewStartY = 120;
+    camDataPtr->nearClip = 8;
+    camDataPtr->farClip = 16384;
+    camDataPtr->vfov = 50;
+    initialize_next_camera(camDataPtr);
+}
+
+INCLUDE_ASM(void, "8800", initialize_next_camera, CameraInitData* data);
 
 INCLUDE_ASM(void, "8800", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
 

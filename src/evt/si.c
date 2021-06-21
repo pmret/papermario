@@ -1135,14 +1135,16 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/si", si_handle_spawn_thread, ScriptInstance* script, s32 isInitialCall);
+ApiStatus si_handle_spawn_thread(ScriptInstance* script);
+INCLUDE_ASM(s32, "evt/si", si_handle_spawn_thread, ScriptInstance* script);
 
 ApiStatus si_handle_end_spawn_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-INCLUDE_ASM(s32, "evt/si", si_handle_parallel_thread, ScriptInstance* script, s32 isInitialCall);
+ApiStatus si_handle_parallel_thread(ScriptInstance* script);
+INCLUDE_ASM(ApiStatus, "evt/si", si_handle_parallel_thread, ScriptInstance* script);
 
 ApiStatus si_handle_end_parallel_thread(ScriptInstance* script) {
     kill_script(script);
@@ -1153,7 +1155,8 @@ ApiStatus func_802C6E14(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/si", si_handle_print_debug_var, ScriptInstance* script, s32 isInitialCall);
+ApiStatus si_handle_print_debug_var(ScriptInstance* script);
+INCLUDE_ASM(ApiStatus, "evt/si", si_handle_print_debug_var, ScriptInstance* script);
 
 ApiStatus func_802C739C(ScriptInstance* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
@@ -1175,7 +1178,339 @@ s32 func_802C73B8(ScriptInstance* script) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "evt/si", si_execute_next_command);
+s32 si_execute_next_command(ScriptInstance *script) {
+    while (TRUE) {
+        s32 status = ApiStatus_DONE2;
+        s32* lines;
+        s32 nargs;
+
+        switch (script->currentOpcode) {
+            case 0:
+                script->ptrCurrentLine = script->ptrNextLine;
+                lines = script->ptrNextLine;
+                script->currentOpcode = *lines++;
+                nargs = *lines++;
+                script->ptrReadPos = lines;
+                script->blocked = FALSE;
+                script->currentArgc = nargs;
+                lines = &lines[nargs];
+                script->ptrNextLine = lines;
+                status = ApiStatus_REPEAT;
+                break;
+            case ScriptOpcode_RETURN:
+                status = si_handle_return(script);
+                break;
+            case ScriptOpcode_LABEL:
+                status = si_handle_label(script);
+                break;
+            case ScriptOpcode_GOTO:
+                status = si_handle_goto(script);
+                break;
+            case ScriptOpcode_LOOP:
+                status = si_handle_loop(script);
+                break;
+            case ScriptOpcode_END_LOOP:
+                status = si_handle_end_loop(script);
+                break;
+            case ScriptOpcode_BREAK_LOOP:
+                status = si_handle_break_loop(script);
+                break;
+            case ScriptOpcode_SLEEP_FRAMES:
+                status = si_handle_sleep_frames(script);
+                break;
+            case ScriptOpcode_SLEEP_SECS:
+                status = si_handle_sleep_seconds(script);
+                break;
+            case ScriptOpcode_IF_EQ:
+                status = si_handle_if_equal(script);
+                break;
+            case ScriptOpcode_IF_NE:
+                status = si_handle_if_not_equal(script);
+                break;
+            case ScriptOpcode_IF_LT:
+                status = si_handle_if_less(script);
+                break;
+            case ScriptOpcode_IF_GT:
+                status = si_handle_if_greater(script);
+                break;
+            case ScriptOpcode_IF_LE:
+                status = si_handle_if_less_equal(script);
+                break;
+            case ScriptOpcode_IF_GE:
+                status = si_handle_if_greater_equal(script);
+                break;
+            case ScriptOpcode_IF_FLAG:
+                status = si_handle_if_flag(script);
+                break;
+            case ScriptOpcode_IF_NOT_FLAG:
+                status = si_handle_if_not_flag(script);
+                break;
+            case ScriptOpcode_ELSE:
+                status = si_handle_else(script);
+                break;
+            case ScriptOpcode_END_IF:
+                status = si_handle_end_if(script);
+                break;
+            case ScriptOpcode_MATCH:
+                status = si_handle_match(script);
+                break;
+            case ScriptOpcode_MATCH_CONST:
+                status = si_handle_match_const(script);
+                break;
+            case ScriptOpcode_CASE_EQ:
+                status = si_handle_case_equal(script);
+                break;
+            case ScriptOpcode_CASE_NE:
+                status = si_handle_case_not_equal(script);
+                break;
+            case ScriptOpcode_CASE_LT:
+                status = si_handle_case_less(script);
+                break;
+            case ScriptOpcode_CASE_LE:
+                status = si_handle_case_less_equal(script);
+                break;
+            case ScriptOpcode_CASE_GT:
+                status = si_handle_case_greater(script);
+                break;
+            case ScriptOpcode_CASE_GE:
+                status = si_handle_case_greater_equal(script);
+                break;
+            case ScriptOpcode_CASE_ELSE:
+                status = si_handle_case_else(script);
+                break;
+            case ScriptOpcode_BREAK_MATCH:
+                status = si_handle_break_match(script);
+                break;
+            case ScriptOpcode_CASE_MULTI_OR_EQ:
+                status = si_handle_case_multi_or_equal(script);
+                break;
+            case ScriptOpcode_END_CASE_MULTI:
+                status = si_handle_end_case_multi(script);
+                break;
+            case ScriptOpcode_CASE_MULTI_AND_EQ:
+                status = si_handle_case_multi_and_equal(script);
+                break;
+            case ScriptOpcode_CASE_FLAG:
+                status = si_handle_case_flag(script);
+                break;
+            case ScriptOpcode_CASE_RANGE:
+                status = si_handle_case_range(script);
+                break;
+            case ScriptOpcode_END_MATCH:
+                status = si_handle_end_match(script);
+                break;
+            case ScriptOpcode_SET:
+                status = si_handle_set_var(script);
+                break;
+            case ScriptOpcode_SET_CONST:
+                status = si_handle_set_const(script);
+                break;
+            case ScriptOpcode_SET_F:
+                status = si_handle_set_float(script);
+                break;
+            case ScriptOpcode_ADD:
+                status = si_handle_add(script);
+                break;
+            case ScriptOpcode_SUB:
+                status = si_handle_subtract(script);
+                break;
+            case ScriptOpcode_MUL:
+                status = si_handle_multiply(script);
+                break;
+            case ScriptOpcode_DIV:
+                status = si_handle_divide(script);
+                break;
+            case ScriptOpcode_MOD:
+                status = si_handle_mod(script);
+                break;
+            case ScriptOpcode_ADD_F:
+                status = si_handle_addF(script);
+                break;
+            case ScriptOpcode_SUB_F:
+                status = si_handle_subtractF(script);
+                break;
+            case ScriptOpcode_MUL_F:
+                status = si_handle_multiplyF(script);
+                break;
+            case ScriptOpcode_DIV_F:
+                status = si_handle_divideF(script);
+                break;
+            case ScriptOpcode_USE_BUFFER:
+                status = si_handle_set_int_buffer_ptr(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_1:
+                status = si_handle_get_1_word(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_2:
+                status = si_handle_get_2_word(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_3:
+                status = si_handle_get_3_word(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_4:
+                status = si_handle_get_4_word(script);
+                break;
+            case ScriptOpcode_BUFFER_PEEK:
+                status = si_handle_get_Nth_word(script);
+                break;
+            case ScriptOpcode_USE_BUFFER_F:
+                status = si_handle_set_float_buffer_ptr(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_1_F:
+                status = si_handle_get_1_float(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_2_F:
+                status = si_handle_get_2_float(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_3_F:
+                status = si_handle_get_3_float(script);
+                break;
+            case ScriptOpcode_BUFFER_READ_4_F:
+                status = si_handle_get_4_float(script);
+                break;
+            case ScriptOpcode_BUFFER_PEEK_F:
+                status = si_handle_get_Nth_float(script);
+                break;
+            case ScriptOpcode_USE_ARRAY:
+                status = si_handle_set_array(script);
+                break;
+            case ScriptOpcode_USE_FLAGS:
+                status = si_handle_set_flag_array(script);
+                break;
+            case ScriptOpcode_NEW_ARRAY:
+                status = si_handle_allocate_array(script);
+                break;
+            case ScriptOpcode_KILL_SCRIPT:
+                status = si_handle_kill_script(script);
+                break;
+            case ScriptOpcode_AND:
+                status = si_handle_AND(script);
+                break;
+            case ScriptOpcode_AND_CONST:
+                status = si_handle_AND_const(script);
+                break;
+            case ScriptOpcode_OR:
+                status = si_handle_OR(script);
+                break;
+            case ScriptOpcode_OR_CONST:
+                status = si_handle_OR_const(script);
+                break;
+            case ScriptOpcode_CALL:
+                status = si_handle_call(script);
+                break;
+            case ScriptOpcode_SPAWN_SCRIPT:
+                status = si_handle_spawn_script(script);
+                break;
+            case ScriptOpcode_SPAWN_GET_ID:
+                status = si_handle_spawn_script_get_id(script);
+                break;
+            case ScriptOpcode_AWAIT_SCRIPT:
+                status = si_handle_await_script(script);
+                break;
+            case ScriptOpcode_BIND_TRIGGER:
+                status = si_handle_bind_trigger(script);
+                break;
+            case ScriptOpcode_UNBIND:
+                status = si_handle_unbind(script);
+                break;
+            case ScriptOpcode_SET_PRIORITY:
+                status = si_handle_set_priority(script);
+                break;
+            case ScriptOpcode_SET_TIMESCALE:
+                status = si_handle_set_timescale(script);
+                break;
+            case ScriptOpcode_SET_GROUP:
+                status = si_handle_set_group(script);
+                break;
+            case ScriptOpcode_JUMP:
+                status = si_handle_jump(script);
+                break;
+            case ScriptOpcode_BIND_PADLOCK:
+                status = si_handle_bind_lock(script);
+                break;
+            case ScriptOpcode_SUSPEND_GROUP:
+                status = si_handle_suspend_all(script);
+                break;
+            case ScriptOpcode_RESUME_GROUP:
+                status = si_handle_resume_all(script);
+                break;
+            case ScriptOpcode_SUSPEND_OTHERS:
+                status = si_handle_suspend_others(script);
+                break;
+            case ScriptOpcode_RESUME_OTHERS:
+                status = si_handle_resume_others(script);
+                break;
+            case ScriptOpcode_SUSPEND_SCRIPT:
+                status = si_handle_suspend_script(script);
+                break;
+            case ScriptOpcode_RESUME_SCRIPT:
+                status = si_handle_resume_script(script);
+                break;
+            case ScriptOpcode_SCRIPT_EXISTS:
+                status = si_handle_does_script_exist(script);
+                break;
+            case ScriptOpcode_SPAWN_THREAD:
+                status = si_handle_spawn_thread(script);
+                break;
+            case ScriptOpcode_END_SPAWN_THREAD:
+                status = si_handle_end_spawn_thread(script);
+                break;
+            case ScriptOpcode_PARALLEL_THREAD:
+                status = si_handle_parallel_thread(script);
+                break;
+            case ScriptOpcode_END_PARALLEL_THREAD:
+                status = si_handle_end_parallel_thread(script);
+                break;
+            case ScriptOpcode_90:
+                status = func_802C6E14(script);
+                break;
+            case ScriptOpcode_DEBUG_PRINT:
+                status = si_handle_print_debug_var(script);
+                break;
+            case ScriptOpcode_92:
+                status = func_802C739C(script);
+                break;
+            case ScriptOpcode_93:
+                status = func_802C73B0(script);
+                break;
+            case ScriptOpcode_94:
+                status = func_802C73B8(script);
+            case ScriptOpcode_END:
+                break;
+            default:
+                PANIC();
+        }
+
+        if (status == ApiStatus_REPEAT) {
+            continue;
+        }
+
+        if (status == ApiStatus_FINISH) {
+            return -1;
+        }
+
+        if (status < 0) {
+            return 1;
+        }
+
+        // TODO: this may be able to be a switch but I couldn't get it
+        if (status == ApiStatus_BLOCK) {
+            // return 0
+        } else if (status == ApiStatus_DONE1) {
+            script->currentOpcode = 0;
+            // return 0
+        } else if (status == ApiStatus_DONE2) {
+            script->currentOpcode = 0;
+            if (gGameStatusPtr->disableScripts != status) {
+                continue;
+            }
+            // return 0
+        } else {
+            continue;
+        }
+        return 0;
+    }
+}
 
 // TODO: consider renaming to si_get_variable
 #ifdef NON_MATCHING
@@ -1395,9 +1730,7 @@ Bytecode* si_find_label(ScriptInstance* script, s32 arg1) {
     return ret;
 }
 
-INCLUDE_ASM(Bytecode*, "evt/si", si_skip_if, ScriptInstance* script);
-// Matching but needs rodata support
-/*Bytecode* si_skip_if(ScriptInstance* script) {
+Bytecode* si_skip_if(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
     Bytecode* pos = script->ptrNextLine;
     Bytecode opcode;
@@ -1407,37 +1740,36 @@ INCLUDE_ASM(Bytecode*, "evt/si", si_skip_if, ScriptInstance* script);
         opcode = *pos++;
         nargs = *pos++;
         pos += nargs;
+
         switch(opcode) {
-            case 1:
+            case ScriptOpcode_END:
                 PANIC();
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 19:
+            case ScriptOpcode_END_IF:
                 nestedIfDepth--;
                 if (nestedIfDepth < 0) {
                     return pos;
                 }
                 break;
-            case 17:
+            case ScriptOpcode_IF_EQ:
+            case ScriptOpcode_IF_NE:
+            case ScriptOpcode_IF_LT:
+            case ScriptOpcode_IF_GT:
+            case ScriptOpcode_IF_LE:
+            case ScriptOpcode_IF_GE:
+            case ScriptOpcode_IF_FLAG:
+            case ScriptOpcode_IF_NOT_FLAG:
                 nestedIfDepth++;
                 break;
-            case 18:
+            case ScriptOpcode_ELSE:
                 if (nestedIfDepth == 0) {
                     return pos;
                 }
             break;
         }
     } while(1);
-}*/
+}
 
-INCLUDE_ASM(Bytecode*, "evt/si", si_skip_else, ScriptInstance* script);
-// Matching but needs rodata support
-/*Bytecode* si_skip_else(ScriptInstance* script) {
+Bytecode* si_skip_else(ScriptInstance* script) {
     s32 nestedIfDepth = 0;
     Bytecode* pos = script->ptrNextLine;
     Bytecode opcode;
@@ -1447,32 +1779,88 @@ INCLUDE_ASM(Bytecode*, "evt/si", si_skip_else, ScriptInstance* script);
         opcode = *pos++;
         nargs = *pos++;
         pos += nargs;
+
         switch(opcode) {
-            case 1:
+            case ScriptOpcode_END:
                 PANIC();
-            case 10:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-            case 16:
-            case 19:
+            case ScriptOpcode_END_IF:
                 nestedIfDepth--;
                 if (nestedIfDepth < 0) {
                     return pos;
                 }
                 break;
-            case 17:
+            // If this isn't copy-pasted at least once, the function breaks, so
+            // might as well be consistent
+            case ScriptOpcode_IF_EQ:
                 nestedIfDepth++;
                 break;
-
+            case ScriptOpcode_IF_NE:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_LT:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_GT:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_LE:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_GE:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_FLAG:
+                nestedIfDepth++;
+                break;
+            case ScriptOpcode_IF_NOT_FLAG:
+                nestedIfDepth++;
+                break;
         }
     } while(1);
-}*/
+}
 
 INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_case, ScriptInstance* script);
 
-INCLUDE_ASM(Bytecode*, "evt/si", si_goto_next_case, ScriptInstance* script);
+Bytecode* si_goto_next_case(ScriptInstance* script) {
+    s32 switchDepth = 1;
+    Bytecode* pos = script->ptrNextLine;
+    s32* opcode;
+    s32* nargs;
+
+    do {
+        opcode = pos++;
+        nargs = pos++;
+        pos += *nargs;
+
+        switch (*opcode) {
+            case ScriptOpcode_END:
+                PANIC();
+            case ScriptOpcode_MATCH:
+                switchDepth++;
+                break;
+            case ScriptOpcode_END_MATCH:
+                switchDepth--;
+                if (switchDepth == 0) {
+                    return opcode;
+                }
+                break;
+            case ScriptOpcode_CASE_EQ:
+            case ScriptOpcode_CASE_NE:
+            case ScriptOpcode_CASE_LT:
+            case ScriptOpcode_CASE_GT:
+            case ScriptOpcode_CASE_LE:
+            case ScriptOpcode_CASE_GE:
+            case ScriptOpcode_CASE_ELSE:
+            case ScriptOpcode_CASE_MULTI_OR_EQ:
+            case ScriptOpcode_CASE_MULTI_AND_EQ:
+            case ScriptOpcode_END_CASE_MULTI:
+            case ScriptOpcode_CASE_RANGE:
+                if (switchDepth == 1) {
+                    return opcode;
+                }
+            break;
+        }
+    } while(1);
+}
 
 INCLUDE_ASM(Bytecode*, "evt/si", si_goto_end_loop, ScriptInstance* script);

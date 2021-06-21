@@ -14,7 +14,7 @@ INCLUDE_ASM(void, "cd180_len_38f0", set_transition_stencil_center, s32 arg0, s32
 
 INCLUDE_ASM(s32, "cd180_len_38f0", set_transition_stencil_center_worldpos);
 
-INCLUDE_ASM(s32, "cd180_len_38f0", set_transition_stencil_alpha);
+INCLUDE_ASM(void, "cd180_len_38f0", set_transition_stencil_alpha, s32 arg0, f32 arg1);
 
 INCLUDE_ASM(s32, "cd180_len_38f0", clear_transition_stencil);
 

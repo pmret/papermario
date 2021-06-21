@@ -10140,7 +10140,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
-    - [0xE2B420, data, sneaky_parasol]
+    - [0xE2B430, data, sneaky_parasol]
     - [0xE2B440, .rodata, sneaky_parasol]
   - type: code
     dir: entity/default

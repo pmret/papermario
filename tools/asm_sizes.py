@@ -2,9 +2,12 @@
 
 import glob
 import os
-import re
+
+print_funcs = True
 
 sizes = {}
+
+funcs = {}
 
 def calc_insns(f_path):
     ret = 0
@@ -13,6 +16,7 @@ def calc_insns(f_path):
     for line in f_lines:
         if line.startswith("/* "):
             ret += 1
+    funcs[f_path.split("/")[-1][:-2]] = ret
     return ret
 
 def do_dir(root, dir):
@@ -47,3 +51,6 @@ for thing in sorted(sizes.keys(), key=lambda x: sizes[x][2]):
     val = sizes[thing][2]
     if val > 0:
         print(thing.ljust(25) + str(val))
+
+if print_funcs:
+    print(dict(sorted(funcs.items(), key=lambda f: f[1])))

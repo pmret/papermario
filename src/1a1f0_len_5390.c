@@ -1,6 +1,11 @@
 #include "common.h"
 #include "map.h"
 
+extern s32 D_800A0BA0;
+extern f32 D_800A0BA4;
+extern EffectInstance* D_800A0BA8;
+extern EffectInstance* D_800A0BAC;
+
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
@@ -101,7 +106,63 @@ ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", MerleeUpdateFX);
+// same as func_802616F4 aside from syms
+ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
+    Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
+    EffectInstanceData* effectInstanceData;
+
+    if (isInitialCall) {
+        script->functionTemp[1].s = 0;
+        D_800A0BA4 = merlee->pos.y;
+        D_800A0BA8 = func_80071750(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        D_800A0BAC = func_80071750(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        D_800A0BB8 = 0;
+        D_800A0BA0 = 12;
+        sfx_play_sound(0x2074);
+    }
+
+    merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1].s * TAU) / 360.0f) * 3.0f);
+
+    script->functionTemp[1].s += 10;
+    script->functionTemp[1].s = clamp_angle(script->functionTemp[1].s);
+
+    effectInstanceData = D_800A0BA8->data;
+    effectInstanceData->pos.x = merlee->pos.x;
+    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
+    effectInstanceData->pos.z = merlee->pos.z;
+
+    effectInstanceData = D_800A0BAC->data;
+    effectInstanceData->pos.x = merlee->pos.x;
+    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
+    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+
+    if (D_800A0BB8 == 2) {
+        D_800A0BA8->data->unk_30 = 0.00001f;
+        D_800A0BAC->data->unk_30 = 0.00001f;
+        D_800A0BA8->flags |= 0x10;
+        D_800A0BAC->flags |= 0x10;
+        return ApiStatus_DONE1;
+    }
+
+    if (D_800A0BB8 == 1) {
+        effectInstanceData = D_800A0BA8->data;
+        effectInstanceData->unk_30 += 0.35;
+        if (effectInstanceData->unk_30 > 3.5) {
+            effectInstanceData->unk_30 = 3.5f;
+        }
+
+        if (D_800A0BA0 != 0) {
+            D_800A0BA0--;
+        } else {
+            effectInstanceData = D_800A0BAC->data;
+            effectInstanceData->unk_30 += 0.5;
+            if (effectInstanceData->unk_30 > 5.0) {
+                D_800A0BB8 = 2;
+            }
+        }
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
     D_800A0BB8 = 1;
@@ -217,7 +278,63 @@ void draw_encounters_neutral() {
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_pre_battle);
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", draw_encounters_pre_battle);
+void draw_encounters_pre_battle(void) {
+    EncounterStatus* encounter = &gCurrentEncounter;
+    Npc* npc = get_npc_unsafe(encounter->currentEnemy->npcID);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (encounter->unk_94 != 0) {
+        f32 playerX, playerY, playerZ;
+        f32 otherX, otherY, otherZ;
+        s32 pScreenX, pScreenY, pScreenZ;
+        s32 oScreenX, oScreenY, oScreenZ;
+
+        if (encounter->fadeOutAmount != 255) {
+            encounter->fadeOutAccel++;
+            if (encounter->fadeOutAccel > 10) {
+                encounter->fadeOutAccel = 10;
+            }
+
+            encounter->fadeOutAmount += encounter->fadeOutAccel;
+            if (encounter->fadeOutAmount > 255) {
+                encounter->fadeOutAmount = 255;
+            }
+
+            playerX = playerStatus->position.x;
+            playerY = playerStatus->position.y;
+            playerZ = playerStatus->position.z;
+
+            otherX = npc->pos.x;
+            otherY = npc->pos.y;
+            otherZ = npc->pos.z;
+            if (otherY < -990.0f) {
+                otherX = playerX;
+                otherY = playerY;
+                otherZ = playerZ;
+            }
+
+            if (gGameStatusPtr->demoState == 2) {
+                set_transition_stencil_zoom_1(10, encounter->fadeOutAmount);
+                set_transition_stencil_alpha(1, 255.0f);
+                set_transition_stencil_color(1, 0, 0, 0);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_transition_stencil_center(1, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
+            } else {
+                set_transition_stencil_zoom_0(10, encounter->fadeOutAmount);
+                set_transition_stencil_alpha(0, 255.0f);
+                set_transition_stencil_color(0, 0, 0, 0);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_transition_stencil_center(0, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
+            }
+        }
+    }
+}
+
+extern s16 D_8009A668;
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", show_first_strike_message);
 

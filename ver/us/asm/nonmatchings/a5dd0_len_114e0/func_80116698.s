@@ -182,8 +182,8 @@ glabel func_80116698
 /* AD030 80116930 3C013F00 */  lui       $at, 0x3f00
 /* AD034 80116934 4481A000 */  mtc1      $at, $f20
 .L80116938:
-/* AD038 80116938 3C038015 */  lui       $v1, %hi(D_801512E0)
-/* AD03C 8011693C 8C6312E0 */  lw        $v1, %lo(D_801512E0)($v1)
+/* AD038 80116938 3C038015 */  lui       $v1, %hi(gCurrentTransformGroups)
+/* AD03C 8011693C 8C6312E0 */  lw        $v1, %lo(gCurrentTransformGroups)($v1)
 /* AD040 80116940 00121080 */  sll       $v0, $s2, 2
 /* AD044 80116944 00431021 */  addu      $v0, $v0, $v1
 /* AD048 80116948 8C500000 */  lw        $s0, ($v0)

@@ -5,8 +5,8 @@ extern s32 D_80108AD4;
 
 extern s32 D_8029FB90;
 extern f32 D_8029FB94;
-extern Effect* D_8029FB98;
-extern Effect* D_8029FB9C;
+extern EffectInstance* D_8029FB98;
+extern EffectInstance* D_8029FB9C;
 extern HudElement* D_8029FBA0;
 extern s16 D_8029FBA4;
 extern s32 D_8029FBA8;
@@ -340,26 +340,26 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
     script->functionTemp[1].s += 10;
     script->functionTemp[1].s = clamp_angle(script->functionTemp[1].s);
 
-    effectInstanceData = D_8029FB98->instanceData;
+    effectInstanceData = D_8029FB98->data;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z;
 
-    effectInstanceData = D_8029FB9C->instanceData;
+    effectInstanceData = D_8029FB9C->data;
     effectInstanceData->pos.x = merlee->pos.x;
     effectInstanceData->pos.y = merlee->pos.y + 16.0f;
     effectInstanceData->pos.z = merlee->pos.z + 5.0f;
 
     if (D_8029FBA4 == 2) {
-        D_8029FB98->instanceData->unk_30 = 0.00001f;
-        D_8029FB9C->instanceData->unk_30 = 0.00001f;
+        D_8029FB98->data->unk_30 = 0.00001f;
+        D_8029FB9C->data->unk_30 = 0.00001f;
         D_8029FB98->flags |= 0x10;
         D_8029FB9C->flags |= 0x10;
         return ApiStatus_DONE1;
     }
 
     if (D_8029FBA4 == 1) {
-        effectInstanceData = D_8029FB98->instanceData;
+        effectInstanceData = D_8029FB98->data;
         effectInstanceData->unk_30 += 0.35;
         if (effectInstanceData->unk_30 > 3.5) {
             effectInstanceData->unk_30 = 3.5f;
@@ -368,7 +368,7 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
         if (D_8029FB90 != 0) {
             D_8029FB90--;
         } else {
-            effectInstanceData = D_8029FB9C->instanceData;
+            effectInstanceData = D_8029FB9C->data;
             effectInstanceData->unk_30 += 0.5;
             if (effectInstanceData->unk_30 > 5.0) {
                 D_8029FBA4 = 2;

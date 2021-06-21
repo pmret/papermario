@@ -1031,8 +1031,8 @@ glabel render_models
 /* AE254 80117B54 3C013F80 */  lui       $at, 0x3f80
 /* AE258 80117B58 4481B000 */  mtc1      $at, $f22
 .L80117B5C:
-/* AE25C 80117B5C 3C038015 */  lui       $v1, %hi(D_801512E0)
-/* AE260 80117B60 8C6312E0 */  lw        $v1, %lo(D_801512E0)($v1)
+/* AE25C 80117B5C 3C038015 */  lui       $v1, %hi(gCurrentTransformGroups)
+/* AE260 80117B60 8C6312E0 */  lw        $v1, %lo(gCurrentTransformGroups)($v1)
 /* AE264 80117B64 00131080 */  sll       $v0, $s3, 2
 /* AE268 80117B68 00431021 */  addu      $v0, $v0, $v1
 /* AE26C 80117B6C 8C500000 */  lw        $s0, ($v0)

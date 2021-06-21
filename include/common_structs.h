@@ -496,14 +496,27 @@ typedef struct Collider {
     /* 0x0C */ struct ColliderTriangle* triangleTable;
     /* 0x10 */ struct ColliderBoundingBox* aabb;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ f32* vertexTable[3];
+    /* 0x18 */ f32* vertexTable; // 3?
 } Collider; // size = 0x1C
+
+typedef struct CameraInitData {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ s8 type;
+    /* 0x03 */ char unk_03;
+    /* 0x04 */ s16 viewWidth;
+    /* 0x06 */ s16 viewHeight;
+    /* 0x08 */ s16 viewStartX;
+    /* 0x0A */ s16 viewStartY;
+    /* 0x0C */ s16 nearClip;
+    /* 0x0E */ s16 farClip;
+    /* 0x10 */ s16 vfov;
+} CameraInitData; // size = 0x12;
 
 typedef struct Camera {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
-    /* 0x006 */ u16 unk_06;
+    /* 0x006 */ s16 unk_06;
     /* 0x008 */ u16 unk_08;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
@@ -525,7 +538,7 @@ typedef struct Camera {
     /* 0x032 */ s16 targetScreenCoords[3];
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
-    /* 0x03C */ f32 lookAt_eye[3];
+    /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
@@ -786,35 +799,70 @@ typedef struct CollisionData {
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
+typedef struct ModelGroupData {
+    /* 0x00 */ UNK_PTR transformMatrix;
+    /* 0x04 */ UNK_PTR lightingGroup;
+    /* 0x08 */ s32 numLights;
+    /* 0x0C */ s32 numChildren;
+    /* 0x10 */ struct ModelNode** childList;
+} ModelGroupData; // size = 0x14
+
+typedef struct ModelDisplayData {
+    /* 0x0 */ Gfx* displayList;
+    /* 0x4 */ char unk_00[0x4];
+} ModelDisplayData; // size = 0x8
+
+typedef struct ModelNodeProperty {
+    /* 0x0 */ s32 key;
+    /* 0x4 */ s32 dataType;
+    /* 0x8 */ s32 data;
+} ModelNodeProperty; // size = 0x8;
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ UNK_PTR displayList;
+    /* 0x04 */ ModelDisplayData* displayData;
     /* 0x08 */ s32 numProperties;
-    /* 0x0C */ UNK_PTR propertyList;
+    /* 0x0C */ ModelNodeProperty* propertyList;
     /* 0x10 */ struct ModelGroupData* groupData;
 } ModelNode; // size = 0x14
 
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ struct ModelNode** modelNode;
-    /* 0x0C */ struct ModelGroupData* groupData;
+    /* 0x04 */ Matrix4s* currentMatrix;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ struct Matrix4s specialMatrix;
+    /* 0x18 */ Matrix4s specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ f32 center[3];
+    /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ u8 renderMode;
+    /* 0xA6 */ s8 renderMode;
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ u8 unk_A9;
     /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
+typedef struct ModelTransformGroup {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ s16 groupModelID;
+    /* 0x04 */ Matrix4s* matrixRDP_N;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ Matrix4s* transformMtx;
+    /* 0x10 */ Matrix4f matrixA;
+    /* 0x50 */ Matrix4f matrixB;
+    /* 0x90 */ Vec3f center;
+    /* 0x9C */ u8 minChildModelIndex;
+    /* 0x9D */ u8 maxChildModelIndex;
+    /* 0x9E */ u8 renderMode;
+    /* 0x9F */ s8 matrixMode;
+} ModelTransformGroup; // size = 0xA0
+
 typedef Model* ModelList[MAX_MODELS];
+typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS];
 
 typedef struct AnimatedMesh {
     /* 0x000 */ s32 flags;
@@ -823,7 +871,7 @@ typedef struct AnimatedMesh {
     /* 0x008 */ u32* animation1;
     /* 0x00C */ u32* animation2;
     /* 0x010 */ char unk_10[136];
-    /* 0x098 */ struct Matrix4s mtx;
+    /* 0x098 */ Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
     /* 0x2D0 */ char unk_2D0[4];
@@ -1145,17 +1193,7 @@ typedef struct GameStatus {
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
-/*
-still;
-walk;
-jump;
-fall;
-fly;
-idle;
-run;
-talk;
-hurt;
-*/
+// PartnerAnims
 typedef struct PartnerAnimations {
     /* 0x00 */ UNK_PTR anims[9];
 } PartnerAnimations; // size = 0x24
@@ -1169,9 +1207,9 @@ typedef struct Shadow {
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
     /* 0x0C */ Vtx_tn** vertexArray;
-    /* 0x10 */ struct Vec3f position;
-    /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ struct Vec3f rotation;
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f rotation;
     /* 0x34 */ char unk_34[0x4];
     /* 0x38 */ Matrix4s transformMatrix;
 } Shadow; // size = 0x78
@@ -1464,7 +1502,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ struct Matrix4s* mtx;
+    /* 0x28 */ Matrix4s* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
@@ -1656,14 +1694,6 @@ typedef struct BackgroundHeader {
     /* 0x0C */ u16 width;
     /* 0x0E */ u16 height;
 } BackgroundHeader; // size = 0x10
-
-typedef struct ModelGroupData {
-    /* 0x00 */ UNK_PTR transformMatrix;
-    /* 0x04 */ UNK_PTR lightingGroup;
-    /* 0x08 */ s32 numLights;
-    /* 0x0C */ s32 numChildren;
-    /* 0x10 */ struct ModelNode** childList;
-} ModelGroupData; // size = 0x14
 
 typedef struct FontData {
     /* 0x00 */ char unk_00[24];

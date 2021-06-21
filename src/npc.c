@@ -163,8 +163,8 @@ s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAni
     return i;
 }
 
-void npc_create_basic(NpcBlueprint* blueprint) {
-    npc_create(blueprint, NULL, FALSE);
+s32 npc_create_basic(NpcBlueprint* blueprint) {
+    return npc_create(blueprint, NULL, FALSE);
 }
 
 void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID** animList) {
@@ -804,7 +804,7 @@ INCLUDE_ASM(s32, "npc", func_8003BA60);
 
 INCLUDE_ASM(s32, "npc", func_8003BED8);
 
-void func_8003C3D8(Npc* npc, s32 idx, s8 decorationType) {
+void func_8003C3D8(Npc* npc, s32 idx, s32 decorationType) {
     func_8003C53C(npc, idx);
     npc->decorationType[idx] = decorationType;
     npc->changedDecoration[idx] = 1;
@@ -1240,7 +1240,7 @@ void func_8003D3BC(Npc* npc) {
 INCLUDE_ASM(void, "npc", func_8003D3BC, Npc* npc);
 #endif
 
-void func_8003D624(Npc* npc, s16 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     npc->unk_98 = arg1;
     npc->unk_9A = arg2;
     npc->unk_9C = arg3;
@@ -1731,7 +1731,7 @@ Enemy* get_enemy_safe(s32 npcID) {
 
     for (i = 0; i < currentEncounterStatus->numEncounters; i++) {
         Encounter* currentEncounter = currentEncounterStatus->encounterList[i];
-        
+
         if (currentEncounter != NULL) {
             for (j = 0; j < currentEncounter->count; j++) {
                 Enemy* currentEnemy = currentEncounter->enemy[j];
