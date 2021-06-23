@@ -72,7 +72,7 @@ class LinkerWriter():
                 # Create new sections for non-0x10 alignment (hack)
                 if start % 0x10 != 0 and i != 0 or do_next:
                     self._end_block()
-                    self._begin_segment(entry.segment)
+                    self._begin_segment(entry.segment, for_subalign=True)
                     do_next = False
 
                 if start % 0x10 != 0 and i != 0:
@@ -82,8 +82,7 @@ class LinkerWriter():
                 path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
                 self._write_symbol(path_cname, ".")
 
-            if entry.section != "linker":
-                self._writeln(f"{entry.object_path}({entry.section});")
+            self._writeln(f"{entry.object_path}({entry.section});")
 
         self._end_segment(segment)
 
@@ -129,8 +128,6 @@ class LinkerWriter():
         self._writeln("}")
 
     def _write_symbol(self, symbol: str, value: Union[str, int]):
-        import re
-
         symbol = to_cname(symbol)
 
         if isinstance(value, int):
@@ -139,7 +136,7 @@ class LinkerWriter():
         self._writeln(f"{symbol} = {value};")
         self.symbols.append(symbol)
 
-    def _begin_segment(self, segment: Segment):
+    def _begin_segment(self, segment: Segment, for_subalign=False):
         # force location if not shiftable/auto
         if not self.shiftable and isinstance(segment.rom_start, int):
             self._writeln(f"__romPos = 0x{segment.rom_start:X};")
@@ -156,9 +153,13 @@ class LinkerWriter():
             name = to_cname(segment.parent.name + "_" + segment.name)
         else:
             name = to_cname(segment.name)
+        
+        if for_subalign:
+            name += to_cname(segment.type)
 
         self._write_symbol(f"{name}_ROM_START", "__romPos")
         self._write_symbol(f"{name}_VRAM", f"ADDR(.{name})")
+
         self._writeln(f".{name} {vram_str}: AT({name}_ROM_START) SUBALIGN({segment.subalign})")
         self._begin_block()
 

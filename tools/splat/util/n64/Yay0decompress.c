@@ -36,8 +36,7 @@ void decompress(Yay0Header* hdr, uint8_t* srcPtr, uint8_t* dstPtr, bool isBigEnd
             written += copy = (op >> 12) ? (2 + (op >> 12)) : (18 + *data++);
 
             while (copy--) {
-                *dstPtr = dstPtr[-(op & 0xfff) - 1];
-                dstPtr++;
+                *dstPtr++ = dstPtr[-(op & 0xfff) - 1];
             }
         }
     }
