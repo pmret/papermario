@@ -358,7 +358,7 @@ segments:
     - [0xA54F0, .rodata, world/partners]
     - [0xA5798, .rodata, 891b0_len_fb0]
     - [0xA57C0, .rodata, 8a160_len_700]
-    - [0xA57E0, .rodata, 8a860_len_3f30]
+    - [0xA57E0, .rodata, 8a860_len_3f30] # bss at 8010C920
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
