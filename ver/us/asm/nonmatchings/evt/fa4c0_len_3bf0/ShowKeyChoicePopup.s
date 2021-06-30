@@ -97,7 +97,7 @@ glabel ShowKeyChoicePopup
 /* FAF20 802D6570 0220202D */  daddu     $a0, $s1, $zero
 /* FAF24 802D6574 AE220318 */  sw        $v0, 0x318($s1)
 /* FAF28 802D6578 AE290324 */  sw        $t1, 0x324($s1)
-/* FAF2C 802D657C 0C03D390 */  jal       btl_create_popup_menu
+/* FAF2C 802D657C 0C03D390 */  jal       create_popup_menu
 /* FAF30 802D6580 AE200328 */   sw       $zero, 0x328($s1)
 /* FAF34 802D6584 24020001 */  addiu     $v0, $zero, 1
 /* FAF38 802D6588 AE000074 */  sw        $zero, 0x74($s0)

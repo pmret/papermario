@@ -3446,7 +3446,7 @@ ApiStatus N(func_80241874_96AA34)(ScriptInstance* script, s32 isInitialCall) {
 
 //#define NON_MATCHING
 #ifdef NON_MATCHING
-s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
+s32 dro_02_func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
     Matrix4f subroutine_arg6;
     Matrix4f subroutine_arg16;
     s32 subroutine_arg26;
@@ -3907,9 +3907,9 @@ void N(func_80242EAC_96C06C)(ScriptInstance* script, s32 isInitialCall) {
     guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC),
                 SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
 
-    temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
-    func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);
-    func_8024190C_96AACC(&N(D_8024F010)[2], &sp20);
+    temp_s1 = N(func_8024190C_96AACC)(&N(D_8024F010)[0], &sp20);
+    N(func_8024190C_96AACC)(&N(D_8024F010)[1], &sp20);
+    N(func_8024190C_96AACC)(&N(D_8024F010)[2], &sp20);
     if ((N(D_8024F010)[0].unk_00 == 2) && ((temp_s1 - 1) < 2)) {
         set_variable(N(D_8024EFCC), SI_ARRAY(9), 3);
     }

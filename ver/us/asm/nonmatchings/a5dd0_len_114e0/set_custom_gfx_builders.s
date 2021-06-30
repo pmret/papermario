@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8011BCD0
+glabel set_custom_gfx_builders
 /* B23D0 8011BCD0 3C028015 */  lui       $v0, %hi(D_801512B8)
 /* B23D4 8011BCD4 8C4212B8 */  lw        $v0, %lo(D_801512B8)($v0)
 /* B23D8 8011BCD8 000420C0 */  sll       $a0, $a0, 3

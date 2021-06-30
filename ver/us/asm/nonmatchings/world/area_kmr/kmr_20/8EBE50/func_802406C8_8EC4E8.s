@@ -141,7 +141,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC6D0 802408B0 8E82007C */  lw        $v0, 0x7c($s4)
 /* 8EC6D4 802408B4 3C048025 */  lui       $a0, %hi(D_80253060)
 /* 8EC6D8 802408B8 24843060 */  addiu     $a0, $a0, %lo(D_80253060)
-/* 8EC6DC 802408BC 0C03D390 */  jal       btl_create_popup_menu
+/* 8EC6DC 802408BC 0C03D390 */  jal       create_popup_menu
 /* 8EC6E0 802408C0 AC820328 */   sw       $v0, 0x328($a0)
 /* 8EC6E4 802408C4 0C03A631 */  jal       func_800E98C4
 /* 8EC6E8 802408C8 00000000 */   nop

@@ -75,7 +75,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_318 = 4;
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
-        btl_create_popup_menu(ptr);
+        create_popup_menu(ptr);
         script->functionTemp[0].s = 0;
     }
 

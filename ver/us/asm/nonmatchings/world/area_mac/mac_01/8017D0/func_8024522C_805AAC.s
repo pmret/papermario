@@ -77,7 +77,7 @@ glabel func_8024522C_805AAC
 /* 805BB8 80245338 24020008 */  addiu     $v0, $zero, 8
 /* 805BBC 8024533C AEC20318 */  sw        $v0, 0x318($s6)
 /* 805BC0 80245340 AED40324 */  sw        $s4, 0x324($s6)
-/* 805BC4 80245344 0C03D390 */  jal       btl_create_popup_menu
+/* 805BC4 80245344 0C03D390 */  jal       create_popup_menu
 /* 805BC8 80245348 AEC00328 */   sw       $zero, 0x328($s6)
 /* 805BCC 8024534C 0C03A631 */  jal       func_800E98C4
 /* 805BD0 80245350 00000000 */   nop

@@ -702,7 +702,7 @@ glabel L80135FE8_CC6E8
 /* CC7C4 801360C4 24020002 */  addiu     $v0, $zero, 2
 /* CC7C8 801360C8 AC820318 */  sw        $v0, 0x318($a0)
 /* CC7CC 801360CC AC870324 */  sw        $a3, 0x324($a0)
-/* CC7D0 801360D0 0C03D390 */  jal       btl_create_popup_menu
+/* CC7D0 801360D0 0C03D390 */  jal       create_popup_menu
 /* CC7D4 801360D4 AC800328 */   sw       $zero, 0x328($a0)
 /* CC7D8 801360D8 2404000C */  addiu     $a0, $zero, 0xc
 /* CC7DC 801360DC 3C108014 */  lui       $s0, %hi(basic_hidden_window_update)

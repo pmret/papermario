@@ -96,7 +96,7 @@ glabel func_802401FC_892C1C
 /* 892D78 80240358 24020004 */  addiu     $v0, $zero, 4
 /* 892D7C 8024035C AC820318 */  sw        $v0, 0x318($a0)
 /* 892D80 80240360 AC960324 */  sw        $s6, 0x324($a0)
-/* 892D84 80240364 0C03D390 */  jal       btl_create_popup_menu
+/* 892D84 80240364 0C03D390 */  jal       create_popup_menu
 /* 892D88 80240368 AC800328 */   sw       $zero, 0x328($a0)
 /* 892D8C 8024036C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240370:

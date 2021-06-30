@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel btl_state_update_begin_turn_9A9F04
+glabel func_80241B14_9A9F04
 /* 9A9F04 80241B14 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* 9A9F08 80241B18 AFB3005C */  sw        $s3, 0x5c($sp)
 /* 9A9F0C 80241B1C 0080982D */  daddu     $s3, $a0, $zero

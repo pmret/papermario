@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel btl_create_popup_menu
+glabel create_popup_menu
 /* 8E2F0 800F4E40 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8E2F4 800F4E44 AFB00010 */  sw        $s0, 0x10($sp)
 /* 8E2F8 800F4E48 AFBF0014 */  sw        $ra, 0x14($sp)

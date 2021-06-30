@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8009A578
+.word L80072F38_4E338, L80072F4C_4E34C, L80072F64_4E364, L80072F90_4E390, L80072FA8_4E3A8, 0
+
+glabel jtbl_8009A590
+.word L8007301C_4E41C, L80073070_4E470, L80073094_4E494, L800730CC_4E4CC, L800730F8_4E4F8, 0, 0, 0
+
+.section .text
+
 glabel load_demo_battle
 /* 4E214 80072E14 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4E218 80072E18 3C038007 */  lui       $v1, %hi(gGameStatusPtr)

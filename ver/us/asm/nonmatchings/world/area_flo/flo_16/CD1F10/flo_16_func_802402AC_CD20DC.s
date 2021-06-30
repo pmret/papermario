@@ -96,7 +96,7 @@ glabel func_802402AC_CD20DC
 /* CD2238 80240408 24020004 */  addiu     $v0, $zero, 4
 /* CD223C 8024040C AC820318 */  sw        $v0, 0x318($a0)
 /* CD2240 80240410 AC960324 */  sw        $s6, 0x324($a0)
-/* CD2244 80240414 0C03D390 */  jal       btl_create_popup_menu
+/* CD2244 80240414 0C03D390 */  jal       create_popup_menu
 /* CD2248 80240418 AC800328 */   sw       $zero, 0x328($a0)
 /* CD224C 8024041C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240420:

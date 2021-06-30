@@ -317,6 +317,7 @@ segments:
     - [0x75180, .rodata, os/exceptasm]
     - [0x751D0, .rodata, os/46c70_len_e00]
     - [0x75240, .rodata, battle/battle] # ram 80099E40
+    - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
     # - [0x75240, .bss, 1b40_len_20b0]

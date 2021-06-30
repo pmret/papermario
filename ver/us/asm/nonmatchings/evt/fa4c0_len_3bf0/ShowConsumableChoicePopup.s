@@ -97,7 +97,7 @@ glabel ShowConsumableChoicePopup
 /* FB13C 802D678C 0220202D */  daddu     $a0, $s1, $zero
 /* FB140 802D6790 AE220318 */  sw        $v0, 0x318($s1)
 /* FB144 802D6794 AE290324 */  sw        $t1, 0x324($s1)
-/* FB148 802D6798 0C03D390 */  jal       btl_create_popup_menu
+/* FB148 802D6798 0C03D390 */  jal       create_popup_menu
 /* FB14C 802D679C AE200328 */   sw       $zero, 0x328($s1)
 /* FB150 802D67A0 24020001 */  addiu     $v0, $zero, 1
 /* FB154 802D67A4 AE000074 */  sw        $zero, 0x74($s0)

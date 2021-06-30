@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel filemenu_draw_contents_copy_arrow_80493C
+glabel func_802440BC_80493C
 /* 80493C 802440BC 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 804940 802440C0 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 804944 802440C4 0C00EABB */  jal       get_npc_unsafe

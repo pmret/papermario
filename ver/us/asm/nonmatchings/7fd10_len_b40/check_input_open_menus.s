@@ -226,7 +226,7 @@ glabel L800E6FC8_80478
 /* 804B0 800E7000 08039C9B */  j         L800E726C_8071C
 /* 804B4 800E7004 00000000 */   nop
 .L800E7008:
-/* 804B8 800E7008 0C03D390 */  jal       btl_create_popup_menu
+/* 804B8 800E7008 0C03D390 */  jal       create_popup_menu
 /* 804BC 800E700C 0240202D */   daddu    $a0, $s2, $zero
 /* 804C0 800E7010 0C009C22 */  jal       set_time_freeze_mode
 /* 804C4 800E7014 24040003 */   addiu    $a0, $zero, 3
