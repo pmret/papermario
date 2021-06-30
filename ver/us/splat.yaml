@@ -244,7 +244,7 @@ segments:
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
     - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
-    - [0x4DF30, c]
+    - [0x4DF30, c, 4DF30]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
     - [0x4F420, .data, 1b40_len_20b0]
@@ -316,7 +316,10 @@ segments:
     - [0x75170, .rodata, os/42470_len_310]
     - [0x75180, .rodata, os/exceptasm]
     - [0x751D0, .rodata, os/46c70_len_e00]
-    - [0x75240, .rodata, battle/battle] # ram 80099E40
+    - [0x75240, .rodata, os/48c00_len_5c0]
+    - [0x75340, .rodata, os/491c0_len_f80]
+    - [0x75540, .rodata, os/49C70]
+    - [0x75640, .rodata, battle/battle]
     - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
@@ -10203,6 +10206,7 @@ segments:
     - [0xEBA260, data]
     - [0xEC2000, .rodata, EB8E50]
     - [0xEC2040, .rodata, EB8E90]
+    - [0xEC21E0, .rodata, EB9D90]
   - type: code
     start: 0xEC2200
     vram: 0x80240000

@@ -1,5 +1,10 @@
 #include "common.h"
 
+static char* N(exit_str_0) = "flo_07";
+static char* N(exit_str_1) = "\0\0\0\0";
+static char* N(exit_str_2) = "sam_11";
+static char* N(exit_str_3) = "flo_19";
+
 INCLUDE_ASM(s32, "EB9D90", func_80240F40_EB9D90);
 
 INCLUDE_ASM(s32, "EB9D90", func_80240FB0_EB9E00);
