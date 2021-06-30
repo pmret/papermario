@@ -14,7 +14,7 @@ ApiStatus GetDamageIntensity(ScriptInstance* script, s32 isInitialCall) {
 }
 
 // TODO: Rename to AddEffectOffset
-ApiStatus ActorAddMovePos(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AddEffectOffset(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = get_variable(script, *args++);
 

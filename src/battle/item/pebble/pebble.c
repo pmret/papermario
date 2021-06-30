@@ -38,15 +38,15 @@ s32 N(modelCommandList)[] = {
 Script N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_PEBBLE;
     await N(UseItemWithEffect);
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
-    func_802D3474(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
     SI_VAR(0) = 1.0;
     MultiplyByActorScale(SI_VAR(0));
-    func_802D38EC(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
+    SetVirtualEntityScale(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(3) = 20;
     SI_VAR(4) = 42;
@@ -55,7 +55,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) += SI_VAR(3);
     SI_VAR(1) += SI_VAR(4);
     SI_VAR(2) += SI_VAR(5);
-    func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
     GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -63,19 +63,19 @@ Script N(main) = SCRIPT({
         SI_VAR(0) = 0;
         loop 18 {
             SI_VAR(0) += 0xFFFFFFC4;
-            func_802D3840(SI_VAR(10), 0, 0, SI_VAR(0));
+            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
             sleep 1;
         }
     }
-    func_802D39FC(SI_VAR(10), 0.80078125);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 0.80078125);
     SI_VAR(2) += 5;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
     GetItemPower(ITEM_PEBBLE, SI_VAR(3), SI_VAR(4));
     ApplyShrinkFromOwner(SI_VAR(3));
     ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, SI_VAR(3), 32);
     SI_VAR(0) += 60;
     SI_VAR(1) += 0;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
-    func_802D3624(SI_VAR(10));
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
+    DeleteVirtualEntity(SI_VAR(10));
     await N(PlayerGoHome);
 });

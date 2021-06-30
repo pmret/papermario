@@ -78,7 +78,7 @@ void sfx_reset_door_sounds(void) {
 
 INCLUDE_ASM(void, "DF950", sfx_clear_sounds);
 
-INCLUDE_ASM(s32, "DF950", func_80149670);
+INCLUDE_ASM(s32, "DF950", sfx_clear_env_sounds);
 
 INCLUDE_ASM(void, "DF950", sfx_update_looping_sound_params);
 

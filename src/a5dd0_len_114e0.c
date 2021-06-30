@@ -24,7 +24,7 @@ typedef struct GameMode {
     /* 0x08 */ void (*step)(struct GameMode*);
     /* 0x0C */ UNK_FUN_PTR(unk_0C);
     /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
 } GameMode; // size = 0x18
 
 extern s32 D_8014B7F8[];
@@ -312,10 +312,10 @@ void update_shadow_transform_matrix(Shadow* shadow);
 void update_entity_inverse_rotation_matrix(Entity* entity);
 void delete_entity(s32 entityIndex);
 void delete_entity_and_unload_data(s32 entityIndex);
-void func_8011085C(s32 shadowIndex);
+void _delete_shadow(s32 shadowIndex);
 s32 entity_get_collision_flags(Entity* entity);
-void func_801117DC(StaticEntityData* data);
-void func_80112344(Entity* entity);
+void entity_free_static_data(StaticEntityData* data);
+void update_entity_shadow_position(Entity* entity);
 
 void update_entities(void) {
     s32 i;
@@ -342,7 +342,7 @@ void update_entities(void) {
                 if (entity->flags & 0x2000000) {
                     if (does_script_exist(entity->boundScript->id)) {
                         if (entity->flags & 8) {
-                            func_8011E8BC(entity->virtualModelIndex);
+                            update_model_animator(entity->virtualModelIndex);
                         } else {
                             exec_entity_model_commandlist(entity->virtualModelIndex);
                         }
@@ -414,13 +414,13 @@ void update_entities(void) {
                 }
 
                 if (entity->flags & 8) {
-                    func_8011E8BC(entity->virtualModelIndex);
+                    update_model_animator(entity->virtualModelIndex);
                 } else {
                     exec_entity_model_commandlist(entity->virtualModelIndex);
                 }
 
                 if (entity->shadowIndex >= 0) {
-                    func_80112344(entity);
+                    update_entity_shadow_position(entity);
                 }
 
                 if (entity->flags & 0x20000000) {
@@ -457,24 +457,28 @@ void update_shadows(void) {
                 update_shadow_transform_matrix(shadow);
 
                 if (shadow->flags & 8) {
-                    func_8011E8BC(shadow->entityModelID);
+                    update_model_animator(shadow->entityModelID);
                 } else {
                     exec_entity_model_commandlist(shadow->entityModelID);
                 }
 
                 if (shadow->flags & 0x20000000) {
-                    func_8011085C(shadow->listIndex);
+                    _delete_shadow(shadow->listIndex);
                 }
             }
         }
     }
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_entity_commandlist, Entity* entity, s32* entityScript);
+void set_entity_commandlist(Entity* entity, s32* entityScript) {
+    entity->scriptReadPos = entityScript;
+    entity->hasEntityScript = TRUE;
+    entity->savedReadPos = entity->scriptReadPos;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
 
-void exec_entity_updatecmd(Entity* entity) {
+void exec_entity_commandlist(Entity* entity) {
     while (step_entity_commandlist(entity) != 0);
 }
 
@@ -531,16 +535,16 @@ void render_entities(void) {
                 if (entity->flags & 8) {
                     if (D_8014AFB0 == 0xFF) {
                         if (entity->renderSetupFunc != NULL) {
-                            func_80120000(entity->virtualModelIndex, entity->listIndex, entity->renderSetupFunc);
+                            set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, entity->renderSetupFunc);
                         }
                     } else {
-                        func_80120000(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                        set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
                     }
 
                     if (entity->vertexData == NULL) {
-                        func_8011F304(entity->virtualModelIndex, &entity->transformMatrix);
+                        render_animated_model(entity->virtualModelIndex, &entity->transformMatrix);
                     } else {
-                        func_8011F3E8(entity->virtualModelIndex,
+                        render_animated_model_with_vertices(entity->virtualModelIndex,
                                       &entity->transformMatrix,
                                       entity->vertexSegment,
                                       entity->vertexData);
@@ -559,9 +563,9 @@ void render_entities(void) {
                     }
 
                     if (entity->vertexData == NULL) {
-                        draw_entity_model_shadow(entity->virtualModelIndex, &entity->transformMatrix);
+                        draw_entity_model_A(entity->virtualModelIndex, &entity->transformMatrix);
                     } else {
-                        draw_entity_model_main(entity->virtualModelIndex,
+                        draw_entity_model_B(entity->virtualModelIndex,
                                                &entity->transformMatrix,
                                                entity->vertexSegment,
                                                entity->vertexData);
@@ -590,9 +594,9 @@ void render_shadows(void) {
                 }
             } else if (shadow->flags & 8) {
                 if (shadow->vertexArray == NULL) {
-                    func_8011F304(shadow->entityModelID, &shadow->transformMatrix);
+                    render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
-                    func_8011F3E8(shadow->entityModelID,
+                    render_animated_model_with_vertices(shadow->entityModelID,
                                   &shadow->transformMatrix,
                                   shadow->vertexSegment,
                                   shadow->vertexArray);
@@ -608,9 +612,9 @@ void render_shadows(void) {
                 bind_entity_model_setupGfx(shadow->entityModelID, shadow->unk_05, entity_model_set_shadow_color);
 
                 if (shadow->vertexArray == NULL) {
-                    draw_entity_model_shadow(shadow->entityModelID, &shadow->transformMatrix);
+                    draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
                 } else {
-                    draw_entity_model_main(shadow->entityModelID,
+                    draw_entity_model_B(shadow->entityModelID,
                                            &shadow->transformMatrix,
                                            shadow->vertexSegment,
                                            shadow->vertexArray);
@@ -656,7 +660,7 @@ ShadowList* get_shadow_list(void) {
     return ret;
 }
 
-s32 func_80110678(Npc* npc) {
+s32 entity_start_script(Npc* npc) {
     if (npc->currentAnim.w != 0) {
         npc->flags |= 0x1000000;
         return 1;
@@ -684,7 +688,7 @@ void delete_entity(s32 entityIndex) {
     if (!(entity->flags & 8)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
-        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+        delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
     }
 
     if (entity->shadowIndex >= 0) {
@@ -707,10 +711,10 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     if (!(entity->flags & 8)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
-        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+        delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
     }
 
-    func_801117DC(entity->staticData);
+    entity_free_static_data(entity->staticData);
 
     if (entity->shadowIndex >= 0) {
         Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
@@ -722,7 +726,7 @@ void delete_entity_and_unload_data(s32 entityIndex) {
     (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
-void func_8011085C(s32 shadowIndex) {
+void _delete_shadow(s32 shadowIndex) {
     Shadow* shadow = get_shadow_by_index(shadowIndex);
 
     free_entity_model_by_index(shadow->entityModelID);
@@ -773,7 +777,7 @@ s32 entity_get_collision_flags(Entity* entity) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801109DC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
 
 // float bs
 #ifdef NON_MATCHING
@@ -802,7 +806,7 @@ s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
 }
 
-void func_80110BCC(Entity* entity, u32* commandList) {
+void entity_set_render_script(Entity* entity, u32* commandList) {
     if (!(entity->flags & 8)) {
         set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
     }
@@ -839,7 +843,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110E58);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801110B4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
@@ -849,7 +853,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111790);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_801117DC, StaticEntityData* data);
+INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             s32 flags);
@@ -859,7 +863,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
 
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111E9C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", UseDynamicShadow);
 
@@ -901,13 +905,13 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
 
 INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
 
-void func_80112328(s32 shadowIndex) {
-    func_8011085C(shadowIndex);
+void delete_shadow(s32 shadowIndex) {
+    _delete_shadow(shadowIndex);
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_80112344, Entity* entity);
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* entity);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801125E8);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_standard_shadow_scale);
 
@@ -915,14 +919,14 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_peach_shadow_scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B20);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 
-void NOP_state(void) {
+void state_delegate_NOP(void) {
 }
 
 // ordering
 #ifdef NON_MATCHING
-void func_80112B98(void) {
+void clear_game_modes(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
@@ -930,7 +934,7 @@ void func_80112B98(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B98);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_game_modes);
 #endif
 
 // regalloc?
@@ -955,12 +959,12 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     gameMode->unk_08 = arg0->unk_08;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = NOP_state;
-    if (gameMode->step == NULL) gameMode->step = NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = NOP_state;
-    if (gameMode->render == NULL) gameMode->render = NOP_state;
+    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
+    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
+    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
 
-    gameMode->renderAux = NOP_state;
+    gameMode->renderAux = state_delegate_NOP;
     gameMode->init();
 
     return gameMode;
@@ -977,18 +981,18 @@ GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
     gameMode->step = arg0->step;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = NOP_state;
-    if (gameMode->step == NULL) gameMode->step = NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = NOP_state;
-    if (gameMode->render == NULL) gameMode->render = NOP_state;
+    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
+    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
+    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
 
-    gameMode->renderAux = NOP_state;
+    gameMode->renderAux = state_delegate_NOP;
     gameMode->init();
 
     return gameMode;
 }
 
-void func_80112D84(s32 i, void (*fn)(void)) {
+void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
     GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
@@ -997,7 +1001,7 @@ void func_80112D84(s32 i, void (*fn)(void)) {
     gameMode->flags |= 0x20;
 
     if (fn == NULL) {
-        gameMode->renderAux = NOP_state;
+        gameMode->renderAux = state_delegate_NOP;
     }
 }
 
@@ -1038,13 +1042,13 @@ void step_current_game_mode(void) {
 #endif
 
 // similar to step_current_game_mode, but calls unk_0C
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112EEC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_do_unk);
 
 // similar to step_current_game_mode, but calls render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_ui);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_backUI);
 
 // calls renderAux and render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112FC4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_frontUI);
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
@@ -1078,7 +1082,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 
 void appendGfx_model_group(Model*);
 void appendGfx_model(Model*);
-void func_8011800C(Model*);
+void render_transform_group(Model*);
 
 // void render_models(void) {
 //     Camera* camera = &gCameras[gCurrentCameraID];
@@ -1359,7 +1363,7 @@ void func_8011800C(Model*);
 //             distance = (row2 / row3) * 10000.0f;
 
 //             if (!(modelTransformGroup->flags & 2)) {
-//                 renderTaskPtr->appendGfx = func_8011800C;
+//                 renderTaskPtr->appendGfx = render_transform_group;
 //                 renderTaskPtr->appendGfxArg = modelTransformGroup;
 //                 renderTaskPtr->distance = -distance;
 //                 renderTaskPtr->renderMode = modelTransformGroup->renderMode;
@@ -1373,9 +1377,9 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117D00);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117E74);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", render_transform_group_node);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", func_8011800C, Model*);
+INCLUDE_ASM(void, "a5dd0_len_114e0", render_transform_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801180E8);
 
@@ -1389,22 +1393,22 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_transforms);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_list_index_from_tree_index, s32 treeIndex);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B090, s32 arg0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_transform_group_index, s32 arg0);
 
 INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, u16 modelID, f32* centerX, f32* centerY,
             f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
-ModelTransformGroup* func_8011B1C0(s32 index) {
+ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B37C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", make_transform_group);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B5D0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", enable_transform_group);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B660);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", disable_transform_group);
 
 void clone_model(u16 srcModelID, u16 newModelID) {
     Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));
@@ -1502,13 +1506,13 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
     texPannerAuxV[texPannerID] = value;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BC7C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCB4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCD0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx_builders);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCEC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", build_custom_gfx);
 
 /// @returns TRUE if mtx is NULL or identity.
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_identity_fixed_mtx);
@@ -1527,33 +1531,33 @@ void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
     *a = D_8014B74C;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BEB4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_fog_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BF14);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_fog_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BF98);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_env_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BFD4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_env_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C028);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_vertex_count);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C0DC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C130);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_copy_vertices);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C164);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_make_local_vertex_copy);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C2B0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_vertices);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C2EC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_gfx);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C32C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011CFBC);
 
-void func_8011D72C(Gfx** arg0, u16 treeIndex) {
+void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
     Model copied = *model;
     Gfx* oldGfxPos;
@@ -1576,13 +1580,13 @@ void func_8011D72C(Gfx** arg0, u16 treeIndex) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D7E4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_next_texture_address);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D82C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_set_all_fog_mode);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D890);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D8D0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks_alt);
 
 RenderTaskEntry* queue_render_task(RenderTask* task) {
     RenderTaskEntry* entry = D_801533A0[D_801533AC];
@@ -1603,4 +1607,4 @@ RenderTaskEntry* queue_render_task(RenderTask* task) {
     return entry;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D9B8);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", execute_render_tasks);

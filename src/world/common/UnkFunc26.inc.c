@@ -1,8 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-void func_8011BEB4(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
-void func_8011BF98(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7);
+void set_model_fog_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7, u8 var8, s32 var9, s32 var10);
+void set_model_env_color_parameters(u8 var2, u8 var3, u8 var4, u8 var5, u8 var6, u8 var7);
 
 ApiStatus N(UnkFunc26)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -22,10 +22,10 @@ ApiStatus N(UnkFunc26)(ScriptInstance* script, s32 isInitialCall) {
             set_background_color_blend(var2, var3, var4, var5);
             break;
         case 2:
-            func_8011BEB4(var2, var3, var4, var5, var6, var7, var8, var9, var10);
+            set_model_fog_color_parameters(var2, var3, var4, var5, var6, var7, var8, var9, var10);
             break;
         case 3:
-            func_8011BF98(var2, var3, var4, var5, var6, var7);
+            set_model_env_color_parameters(var2, var3, var4, var5, var6, var7);
             break;
     }
 

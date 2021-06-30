@@ -13,7 +13,7 @@ Script N(main) = SCRIPT({
     PlayEffect(0x7, 2, -40, 55, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     sleep 20;
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     spawn {
         sleep 15;
@@ -48,7 +48,7 @@ Script N(main) = SCRIPT({
     SetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_80273444(20, 0, 0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:

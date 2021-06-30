@@ -94,7 +94,7 @@ ApiStatus N(func_80241FBC_A1D0BC)(ScriptInstance* script, s32 isInitialCall) {
         case 0:
             N(func_80240CB0_A1BDB0)(script, aiSettings, territoryPtr);
         case 1:
-            N(func_80240E60_A1BF60)(script, aiSettings, territoryPtr);
+            N(btl_merlee_on_start_turn_A1BF60)(script, aiSettings, territoryPtr);
             break;
         case 2:
             N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
@@ -257,9 +257,9 @@ ApiStatus N(func_80242C14_A1DD14)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -305,7 +305,7 @@ ApiStatus N(func_80242E2C_A1DF2C)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        free_dynamic_entity(D_8024DFC0);
+        free_generic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -388,9 +388,9 @@ void N(func_8024349C_A1E59C)(void) {
     s32 var = get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 */
@@ -398,7 +398,7 @@ void N(func_8024349C_A1E59C)(void) {
 INCLUDE_ASM(s32, "world/area_hos/hos_03/A1BDB0", func_80243508_A1E608);
 /*
 ApiStatus N(func_80243508_A1E608)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */

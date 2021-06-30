@@ -7,7 +7,7 @@ glabel func_80240CB0_A11530
 /* A11538 80240CB8 8C82000C */  lw        $v0, 0xc($a0)
 /* A1153C 80240CBC 0C0B1EAF */  jal       get_variable
 /* A11540 80240CC0 8C450000 */   lw       $a1, ($v0)
-/* A11544 80240CC4 0C03AC5A */  jal       func_800EB168
+/* A11544 80240CC4 0C03AC5A */  jal       switch_to_partner
 /* A11548 80240CC8 0040202D */   daddu    $a0, $v0, $zero
 /* A1154C 80240CCC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A11550 80240CD0 24020002 */  addiu     $v0, $zero, 2

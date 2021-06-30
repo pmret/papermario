@@ -113,7 +113,7 @@ s32 N(D_80241CD0_BE0A60) = {
 
 Script N(80241CD4) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -131,7 +131,7 @@ Script N(80241CD4) = SCRIPT({
         }
     }
     N(func_80241648_BE03D8)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -904,7 +904,7 @@ void N(func_80240158_BDEEE8)(ScriptInstance* script, NpcAISettings* aiSettings, 
             script->functionTemp[1].s = aiSettings->unk_14;
             if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                 fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-                func_800494C0(npc, 0x2F4, 0x200000);
+                ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
                     script->functionTemp[0].s = 10;
                 } else {
@@ -951,7 +951,7 @@ void N(func_802404C0_BDF250)(ScriptInstance* script, NpcAISettings* aiSettings, 
     if ((aiSettings->unk_14 >= 0) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        func_800494C0(npc, 0x2F4, 0x200000);
+        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         if (!(enemy->npcSettings->unk_2A & 1)) {
             script->functionTemp[0].s = 12;
         } else {
@@ -1045,7 +1045,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -1105,7 +1105,7 @@ void N(func_80240E90_BDFC20)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2].s)).y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
     posY += (*(enemy->territory->patrol.points + script->functionTemp[2].s)).y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {

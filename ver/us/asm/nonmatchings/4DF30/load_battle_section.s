@@ -40,7 +40,7 @@ glabel load_battle_section
 /* 4E064 80072C64 3C01800E */  lui       $at, %hi(D_800DC064)
 /* 4E068 80072C68 AC22C064 */  sw        $v0, %lo(D_800DC064)($at)
 .L80072C6C:
-/* 4E06C 80072C6C 0C090464 */  jal       func_80241190
+/* 4E06C 80072C6C 0C090464 */  jal       btl_set_state
 /* 4E070 80072C70 24040001 */   addiu    $a0, $zero, 1
 /* 4E074 80072C74 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4E078 80072C78 8FB10014 */  lw        $s1, 0x14($sp)

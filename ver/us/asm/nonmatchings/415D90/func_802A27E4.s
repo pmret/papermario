@@ -36,7 +36,7 @@ glabel func_802A27E4
 /* 4175E8 802A2858 2631D128 */  addiu     $s1, $s1, %lo(battle_menu_moveOptionIconIDs)
 .L802A285C:
 /* 4175EC 802A285C 8E240000 */  lw        $a0, ($s1)
-/* 4175F0 802A2860 0C05123D */  jal       free_icon
+/* 4175F0 802A2860 0C05123D */  jal       free_hud_element
 /* 4175F4 802A2864 26310004 */   addiu    $s1, $s1, 4
 /* 4175F8 802A2868 3C02802B */  lui       $v0, %hi(battle_menu_moveOptionCount)
 /* 4175FC 802A286C 8C42D4A4 */  lw        $v0, %lo(battle_menu_moveOptionCount)($v0)
@@ -47,19 +47,19 @@ glabel func_802A27E4
 .L802A2880:
 /* 417610 802A2880 3C04802B */  lui       $a0, %hi(battle_menu_moveCursorIcon)
 /* 417614 802A2884 8C84D118 */  lw        $a0, %lo(battle_menu_moveCursorIcon)($a0)
-/* 417618 802A2888 0C05123D */  jal       free_icon
+/* 417618 802A2888 0C05123D */  jal       free_hud_element
 /* 41761C 802A288C 0000802D */   daddu    $s0, $zero, $zero
 /* 417620 802A2890 3C04802B */  lui       $a0, %hi(battle_menu_moveUpArrowIcon)
 /* 417624 802A2894 8C84D11C */  lw        $a0, %lo(battle_menu_moveUpArrowIcon)($a0)
-/* 417628 802A2898 0C05123D */  jal       free_icon
+/* 417628 802A2898 0C05123D */  jal       free_hud_element
 /* 41762C 802A289C 00000000 */   nop
 /* 417630 802A28A0 3C04802B */  lui       $a0, %hi(battle_menu_moveDownArrowIcon)
 /* 417634 802A28A4 8C84D120 */  lw        $a0, %lo(battle_menu_moveDownArrowIcon)($a0)
-/* 417638 802A28A8 0C05123D */  jal       free_icon
+/* 417638 802A28A8 0C05123D */  jal       free_hud_element
 /* 41763C 802A28AC 00000000 */   nop
 /* 417640 802A28B0 3C04802B */  lui       $a0, %hi(battle_menu_moveTitleIcon)
 /* 417644 802A28B4 8C84D188 */  lw        $a0, %lo(battle_menu_moveTitleIcon)($a0)
-/* 417648 802A28B8 0C05123D */  jal       free_icon
+/* 417648 802A28B8 0C05123D */  jal       free_hud_element
 /* 41764C 802A28BC 00000000 */   nop
 /* 417650 802A28C0 3C02802B */  lui       $v0, %hi(battle_menu_moveOptionCount)
 /* 417654 802A28C4 8C42D4A4 */  lw        $v0, %lo(battle_menu_moveOptionCount)($v0)
@@ -69,7 +69,7 @@ glabel func_802A27E4
 /* 417664 802A28D4 2631D190 */  addiu     $s1, $s1, %lo(battle_menu_moveOptionCostUnitIconIDs)
 .L802A28D8:
 /* 417668 802A28D8 8E240000 */  lw        $a0, ($s1)
-/* 41766C 802A28DC 0C05123D */  jal       free_icon
+/* 41766C 802A28DC 0C05123D */  jal       free_hud_element
 /* 417670 802A28E0 26310004 */   addiu    $s1, $s1, 4
 /* 417674 802A28E4 3C02802B */  lui       $v0, %hi(battle_menu_moveOptionCount)
 /* 417678 802A28E8 8C42D4A4 */  lw        $v0, %lo(battle_menu_moveOptionCount)($v0)

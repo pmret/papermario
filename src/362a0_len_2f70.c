@@ -68,7 +68,7 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_triangle);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones);
+INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5, f32* arg6, f32* arg7, f32* arg8, f32* arg9);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_collider);
 

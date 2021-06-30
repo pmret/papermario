@@ -96,7 +96,7 @@ glabel func_802401CC_988D2C
 /* 988E88 80240328 24020004 */  addiu     $v0, $zero, 4
 /* 988E8C 8024032C AC820318 */  sw        $v0, 0x318($a0)
 /* 988E90 80240330 AC960324 */  sw        $s6, 0x324($a0)
-/* 988E94 80240334 0C03D390 */  jal       func_800F4E40
+/* 988E94 80240334 0C03D390 */  jal       btl_create_popup_menu
 /* 988E98 80240338 AC800328 */   sw       $zero, 0x328($a0)
 /* 988E9C 8024033C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240340:
@@ -107,7 +107,7 @@ glabel func_802401CC_988D2C
 /* 988EB0 80240350 8662032C */  lh        $v0, 0x32c($s3)
 /* 988EB4 80240354 10400009 */  beqz      $v0, .L8024037C
 /* 988EB8 80240358 AEA20074 */   sw       $v0, 0x74($s5)
-/* 988EBC 8024035C 0C03C4EC */  jal       func_800F13B0
+/* 988EBC 8024035C 0C03C4EC */  jal       hide_popup_menu
 /* 988EC0 80240360 00000000 */   nop
 /* 988EC4 80240364 8EA20070 */  lw        $v0, 0x70($s5)
 /* 988EC8 80240368 24420001 */  addiu     $v0, $v0, 1
@@ -120,7 +120,7 @@ glabel func_802401CC_988D2C
 /* 988EDC 8024037C 080900FB */  j         .L802403EC
 /* 988EE0 80240380 0000102D */   daddu    $v0, $zero, $zero
 .L80240384:
-/* 988EE4 80240384 0C03C54E */  jal       func_800F1538
+/* 988EE4 80240384 0C03C54E */  jal       destroy_popup_menu
 /* 988EE8 80240388 00000000 */   nop
 /* 988EEC 8024038C 8EA30074 */  lw        $v1, 0x74($s5)
 /* 988EF0 80240390 240200FF */  addiu     $v0, $zero, 0xff

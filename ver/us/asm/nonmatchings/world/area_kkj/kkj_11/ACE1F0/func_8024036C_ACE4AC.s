@@ -161,7 +161,7 @@ glabel func_8024036C_ACE4AC
 /* ACE714 802405D4 44820000 */  mtc1      $v0, $f0
 /* ACE718 802405D8 00000000 */  nop
 /* ACE71C 802405DC 46800020 */  cvt.s.w   $f0, $f0
-/* ACE720 802405E0 0C0376B9 */  jal       func_800DDAE4
+/* ACE720 802405E0 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* ACE724 802405E4 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* ACE728 802405E8 54400001 */  bnel      $v0, $zero, .L802405F0
 /* ACE72C 802405EC 0000802D */   daddu    $s0, $zero, $zero

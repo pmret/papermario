@@ -26,7 +26,7 @@ glabel osSetTimer
 /* 417A4 800663A4 AE030014 */  sw        $v1, 0x14($s0)
 /* 417A8 800663A8 AE040018 */  sw        $a0, 0x18($s0)
 .L800663AC:
-/* 417AC 800663AC 0C01ACD8 */  jal       __osDisableInt
+/* 417AC 800663AC 0C01ACD8 */  jal       osDisableInt
 /* 417B0 800663B0 AE05001C */   sw       $a1, 0x1c($s0)
 /* 417B4 800663B4 3C038009 */  lui       $v1, %hi(D_80094670)
 /* 417B8 800663B8 8C634670 */  lw        $v1, %lo(D_80094670)($v1)
@@ -73,7 +73,7 @@ glabel osSetTimer
 /* 4184C 8006644C 8C440010 */  lw        $a0, 0x10($v0)
 /* 41850 80066450 0C019984 */  jal       osSetTimerIntr
 /* 41854 80066454 8C450014 */   lw       $a1, 0x14($v0)
-/* 41858 80066458 0C01ACF4 */  jal       __osRestoreInt
+/* 41858 80066458 0C01ACF4 */  jal       osRestoreInt
 /* 4185C 8006645C 02402021 */   addu     $a0, $s2, $zero
 /* 41860 80066460 00001021 */  addu      $v0, $zero, $zero
 /* 41864 80066464 8FBF001C */  lw        $ra, 0x1c($sp)

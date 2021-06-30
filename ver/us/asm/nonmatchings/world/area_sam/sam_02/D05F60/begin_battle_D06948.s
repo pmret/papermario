@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel begin_battle_D06948
+glabel btl_state_update_normal_start_D06948
 /* D06948 80241218 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D0694C 8024121C AFB00010 */  sw        $s0, 0x10($sp)
 /* D06950 80241220 3C108011 */  lui       $s0, %hi(gPlayerData)

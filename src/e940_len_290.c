@@ -1,11 +1,11 @@
 #include "common.h"
 
-void begin_state_init(void) {
+void state_init_startup(void) {
     gOverrideFlags |= 0x8;
     gGameStatusPtr->loadMenuState = 3;
 }
 
-void step_init_state(void) {
+void state_step_startup(void) {
     GameStatus* gameStatus = gGameStatusPtr;
     s32 i;
 
@@ -29,27 +29,27 @@ void step_init_state(void) {
     gGameStatusPtr->demoState = 0;
 
     general_heap_create();
-    func_8011D890();
-    clear_dynamic_entity_list();
+    clear_render_tasks();
+    clear_generic_entity_list();
     clear_script_list();
     create_cameras_a();
     spr_init_sprites(0);
     clear_entity_models();
-    func_8011E224();
+    clear_animator_list();
     clear_model_data();
-    func_80148040();
-    use_default_background_settings();
-    func_801452E8(0, 0);
-    func_80141100();
+    clear_sprite_shading_data();
+    reset_background_settings();
+    set_hud_element_nonworld_cache(0, 0);
+    clear_hud_element_cache();
     clear_trigger_data();
     clear_printers();
     clear_entity_data(0);
-    clear_transition_stencil();
+    clear_screen_overlays();
     clear_player_status();
-    npc_list_clear();
+    clear_npcs();
     clear_player_data();
-    func_80072B30();
-    func_8003E338();
+    reset_battle_status();
+    init_encounter_status();
     clear_effect_data();
     clear_item_entity_data();
     clear_saved_variables();
@@ -81,5 +81,5 @@ void step_init_state(void) {
 }
 
 void state_drawUI_startup(void) {
-    func_8002AB5C(0, 0, 0x13F, 0xEF, 0, 0, 0, 0xFF);
+    startup_draw_prim_rect(0, 0, 0x13F, 0xEF, 0, 0, 0, 0xFF);
 }

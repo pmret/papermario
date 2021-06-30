@@ -34,7 +34,7 @@ glabel func_802B6000_E2A340
 /* E2A398 802B6058 8E220000 */  lw        $v0, ($s1)
 /* E2A39C 802B605C 3484001F */  ori       $a0, $a0, 0x1f
 /* E2A3A0 802B6060 00431025 */  or        $v0, $v0, $v1
-/* E2A3A4 802B6064 0C037FBF */  jal       func_800DFEFC
+/* E2A3A4 802B6064 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E2A3A8 802B6068 AE220000 */   sw       $v0, ($s1)
 /* E2A3AC 802B606C 3C10802B */  lui       $s0, %hi(D_802B6350_E2A690)
 /* E2A3B0 802B6070 26106350 */  addiu     $s0, $s0, %lo(D_802B6350_E2A690)
@@ -197,7 +197,7 @@ glabel func_802B6000_E2A340
 /* E2A608 802B62C8 922200B6 */  lbu       $v0, 0xb6($s1)
 /* E2A60C 802B62CC 0240202D */  daddu     $a0, $s2, $zero
 /* E2A610 802B62D0 24420001 */  addiu     $v0, $v0, 1
-/* E2A614 802B62D4 0C04419E */  jal       func_80110678
+/* E2A614 802B62D4 0C04419E */  jal       entity_start_script
 /* E2A618 802B62D8 A22200B6 */   sb       $v0, 0xb6($s1)
 /* E2A61C 802B62DC 080AD8CB */  j         .L802B632C
 /* E2A620 802B62E0 00000000 */   nop

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "../partners.h"
 
-ApiStatus func_80283810(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CheckRideScriptForEnterExit(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
@@ -30,16 +30,16 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     partner->pos.x = playerStatus->position.x;
     partner->pos.z = playerStatus->position.z;
 
-    if (is_current_partner_flying()) {
+    if (partner_is_flying()) {
         partner->pos.y = playerStatus->position.y;
     }
 
     set_npc_yaw(partner, playerStatus->targetYaw);
-    clear_partner_move_history(partner);
+    partner_clear_player_tracking(partner);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerPositionFromSaveData(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 currentPartner = gPlayerData.currentPartner;
@@ -63,19 +63,19 @@ ApiStatus func_80283908(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283A50);
+INCLUDE_ASM(s32, "world/script_api/7E4690", EnterPlayerPostPipe);
 
-ApiStatus func_80283B88(ScriptInstance* script, s32 isInitialCall) {
-    set_partner_tether_distance(20.0f);
+ApiStatus ShortenPartnerTetherDistance(ScriptInstance* script, s32 isInitialCall) {
+    partner_set_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283BB0(ScriptInstance* script, s32 isInitialCall) {
-    reset_partner_tether_distance();
+ApiStatus ResetPartnerTetherDistance(ScriptInstance* script, s32 isInitialCall) {
+    repartner_set_tether_distance();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80283BD0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerMoveToDoor(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -88,12 +88,12 @@ ApiStatus func_80283BD0(ScriptInstance* script, s32 isInitialCall) {
     return script->functionTemp[0].s < 0;
 }
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283C34);
+INCLUDE_ASM(s32, "world/script_api/7E4690", GetEntryCoords);
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283D00);
+INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSingleDoor);
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283D6C);
+INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitSingleDoor);
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283DF0);
+INCLUDE_ASM(s32, "world/script_api/7E4690", SetupDoubleDoors);
 
-INCLUDE_ASM(s32, "world/script_api/7E4690", func_80283E2C);
+INCLUDE_ASM(s32, "world/script_api/7E4690", SetupSplitDoubleDoors);

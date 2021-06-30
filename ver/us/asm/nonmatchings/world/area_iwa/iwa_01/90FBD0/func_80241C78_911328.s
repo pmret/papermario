@@ -18,7 +18,7 @@ glabel func_80241C78_911328
 /* 91135C 80241CAC 1C40000B */  bgtz      $v0, .L80241CDC
 /* 911360 80241CB0 0200202D */   daddu    $a0, $s0, $zero
 /* 911364 80241CB4 24050322 */  addiu     $a1, $zero, 0x322
-/* 911368 80241CB8 0C012530 */  jal       func_800494C0
+/* 911368 80241CB8 0C012530 */  jal       ai_enemy_play_sound
 /* 91136C 80241CBC 0000302D */   daddu    $a2, $zero, $zero
 /* 911370 80241CC0 3C02002F */  lui       $v0, 0x2f
 /* 911374 80241CC4 34420011 */  ori       $v0, $v0, 0x11

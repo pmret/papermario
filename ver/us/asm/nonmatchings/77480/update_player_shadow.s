@@ -100,7 +100,7 @@ glabel update_player_shadow
 /* 7B1EC 800E1D3C 27A20040 */  addiu     $v0, $sp, 0x40
 /* 7B1F0 800E1D40 AFA20020 */  sw        $v0, 0x20($sp)
 /* 7B1F4 800E1D44 27A20044 */  addiu     $v0, $sp, 0x44
-/* 7B1F8 800E1D48 0C0377F4 */  jal       test_below_player
+/* 7B1F8 800E1D48 0C0377F4 */  jal       player_raycast_below
 /* 7B1FC 800E1D4C AFA20024 */   sw       $v0, 0x24($sp)
 /* 7B200 800E1D50 C7A00038 */  lwc1      $f0, 0x38($sp)
 /* 7B204 800E1D54 C7A2003C */  lwc1      $f2, 0x3c($sp)

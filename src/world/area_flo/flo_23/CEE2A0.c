@@ -130,7 +130,7 @@ s32 N(D_80241310_CEF570) = {
 
 Script N(80241314) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D663C();
+    ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -147,7 +147,7 @@ Script N(80241314) = SCRIPT({
         }
     }
     N(func_802402C0_CEE520)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 

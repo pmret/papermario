@@ -11,7 +11,7 @@ glabel func_80260A20
 /* 18F318 80260A38 240700FF */  addiu     $a3, $zero, 0xff
 /* 18F31C 80260A3C AFBF0018 */  sw        $ra, 0x18($sp)
 /* 18F320 80260A40 AFA20010 */  sw        $v0, 0x10($sp)
-/* 18F324 80260A44 0C04993B */  jal       draw_msg
+/* 18F324 80260A44 0C04993B */  jal       draw_string
 /* 18F328 80260A48 AFA00014 */   sw       $zero, 0x14($sp)
 /* 18F32C 80260A4C 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 18F330 80260A50 03E00008 */  jr        $ra

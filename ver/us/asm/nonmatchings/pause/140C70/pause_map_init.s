@@ -17,11 +17,11 @@ glabel pause_map_init
 .L8024E634:
 /* 141974 8024E634 8E240000 */  lw        $a0, ($s1)
 /* 141978 8024E638 26310004 */  addiu     $s1, $s1, 4
-/* 14197C 8024E63C 0C050529 */  jal       create_icon
+/* 14197C 8024E63C 0C050529 */  jal       create_hud_element
 /* 141980 8024E640 26100001 */   addiu    $s0, $s0, 1
 /* 141984 8024E644 0040202D */  daddu     $a0, $v0, $zero
 /* 141988 8024E648 24050080 */  addiu     $a1, $zero, 0x80
-/* 14198C 8024E64C 0C051280 */  jal       set_icon_flags
+/* 14198C 8024E64C 0C051280 */  jal       set_hud_element_flags
 /* 141990 8024E650 AE440000 */   sw       $a0, ($s2)
 /* 141994 8024E654 1A00FFF7 */  blez      $s0, .L8024E634
 /* 141998 8024E658 26520004 */   addiu    $s2, $s2, 4

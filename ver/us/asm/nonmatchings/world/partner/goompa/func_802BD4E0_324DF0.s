@@ -14,7 +14,7 @@ glabel func_802BD4E0_324DF0
 /* 324E14 802BD504 8C620008 */  lw        $v0, 8($v1)
 /* 324E18 802BD508 ACA00000 */  sw        $zero, ($a1)
 /* 324E1C 802BD50C AC820000 */  sw        $v0, ($a0)
-/* 324E20 802BD510 0C03BD17 */  jal       clear_partner_move_history
+/* 324E20 802BD510 0C03BD17 */  jal       partner_clear_player_tracking
 /* 324E24 802BD514 AC600004 */   sw       $zero, 4($v1)
 .L802BD518:
 /* 324E28 802BD518 8FBF0010 */  lw        $ra, 0x10($sp)

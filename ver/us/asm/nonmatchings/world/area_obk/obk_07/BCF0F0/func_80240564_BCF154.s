@@ -150,7 +150,7 @@ glabel func_80240564_BCF154
 /* BCF36C 8024077C 00D03021 */  addu      $a2, $a2, $s0
 /* BCF370 80240780 00063400 */  sll       $a2, $a2, 0x10
 /* BCF374 80240784 00068C03 */  sra       $s1, $a2, 0x10
-/* BCF378 80240788 0C00AAB1 */  jal       func_8002AAC4
+/* BCF378 80240788 0C00AAB1 */  jal       startup_draw_prim_rect_COPY
 /* BCF37C 8024078C 0220302D */   daddu    $a2, $s1, $zero
 /* BCF380 80240790 8EA20028 */  lw        $v0, 0x28($s5)
 /* BCF384 80240794 2442FFFF */  addiu     $v0, $v0, -1
@@ -172,7 +172,7 @@ glabel func_80240564_BCF154
 /* BCF3C4 802407D4 AFAB001C */  sw        $t3, 0x1c($sp)
 /* BCF3C8 802407D8 AFA20010 */  sw        $v0, 0x10($sp)
 /* BCF3CC 802407DC AFAA0014 */  sw        $t2, 0x14($sp)
-/* BCF3D0 802407E0 0C00AAB1 */  jal       func_8002AAC4
+/* BCF3D0 802407E0 0C00AAB1 */  jal       startup_draw_prim_rect_COPY
 /* BCF3D4 802407E4 AFA90018 */   sw       $t1, 0x18($sp)
 /* BCF3D8 802407E8 8EA20028 */  lw        $v0, 0x28($s5)
 /* BCF3DC 802407EC 8FB20024 */  lw        $s2, 0x24($sp)
@@ -270,7 +270,7 @@ glabel func_80240564_BCF154
 /* BCF52C 8024093C 00028403 */  sra       $s0, $v0, 0x10
 /* BCF530 80240940 0200302D */  daddu     $a2, $s0, $zero
 /* BCF534 80240944 240B00FF */  addiu     $t3, $zero, 0xff
-/* BCF538 80240948 0C00AAB1 */  jal       func_8002AAC4
+/* BCF538 80240948 0C00AAB1 */  jal       startup_draw_prim_rect_COPY
 /* BCF53C 8024094C AFAB001C */   sw       $t3, 0x1c($sp)
 /* BCF540 80240950 8EA20028 */  lw        $v0, 0x28($s5)
 /* BCF544 80240954 2442FFFF */  addiu     $v0, $v0, -1
@@ -301,7 +301,7 @@ glabel func_80240564_BCF154
 /* BCF5A8 802409B8 AFAB001C */  sw        $t3, 0x1c($sp)
 /* BCF5AC 802409BC AFA30010 */  sw        $v1, 0x10($sp)
 /* BCF5B0 802409C0 AFAA0014 */  sw        $t2, 0x14($sp)
-/* BCF5B4 802409C4 0C00AAB1 */  jal       func_8002AAC4
+/* BCF5B4 802409C4 0C00AAB1 */  jal       startup_draw_prim_rect_COPY
 /* BCF5B8 802409C8 AFA90018 */   sw       $t1, 0x18($sp)
 /* BCF5BC 802409CC 8EA20028 */  lw        $v0, 0x28($s5)
 /* BCF5C0 802409D0 26520001 */  addiu     $s2, $s2, 1

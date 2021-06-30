@@ -25,7 +25,7 @@ Npc* func_802B6000_E2A6B0(void) {
         if (gGameStatusPtr->peachFlags & 8) {
             gGameStatusPtr->peachFlags &= ~0x8;
         } else {
-            ret = npc_find_near(playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 100.0f);
+            ret = npc_find_closest(playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 100.0f);
 
             if (ret != NULL) {
                 if (fabs(ret->pos.y - playerStatus->position.y) - 1.0 > 0.0) {

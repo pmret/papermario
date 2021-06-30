@@ -58,7 +58,7 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 
     manager->unk_168 = 0;
     func_8004BA54(manager, 0);
     snd_clear_sfx_queue(manager);
-    snd_initialize_fade(&manager->unk_40, 0, 0x7FFF, 0x7FFF);
+    snd_initialize_bgm_fade(&manager->unk_40, 0, 0x7FFF, 0x7FFF);
     func_80053A98(manager->unk_BE, manager->unk_40.unk_00.u16, manager->unk_5C);
     manager->unk_8C = 0xFF;
 
@@ -177,64 +177,64 @@ INCLUDE_ASM(s16, "26840_len_20d0", func_8004C444, SoundManager* manager);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C578);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004C844);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_get_scaled_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004C884);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CD94);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CE70);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_00_SetVolume);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CEA4);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_01_SetPan);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CEC4);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_02_SetInstrument);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CF0C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_03_SetReverb);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004CF3C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_04);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D00C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_05);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D038);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_06);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D050);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_07);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D07C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_08);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D114);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_09_StartLoop);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D130);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0A_EndLoop);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D15C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0B);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D180);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0C);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D1B4);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0D);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D23C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0E);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D2B0);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0F);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D2E4);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_10_Jump);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D310);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_11_Restart);
 
-void func_8004D31C(void) {
+void snd_SEFCmd_12_NOP(void) {
 }
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D324);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_13);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D33C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_14);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D354);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_15);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D36C);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_16);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D3A0);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_17);
 
-INCLUDE_ASM(s32, "26840_len_20d0", func_8004D3F8);
+INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_18);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004D428);
 

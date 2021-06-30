@@ -31,9 +31,9 @@ glabel func_802B65E8_E23CC8
 /* E23D28 802B6648 E6000080 */   swc1     $f0, 0x80($s0)
 .L802B664C:
 /* E23D2C 802B664C 27A40010 */  addiu     $a0, $sp, 0x10
-/* E23D30 802B6650 0C0388C1 */  jal       input_to_move_vector
+/* E23D30 802B6650 0C0388C1 */  jal       player_input_to_move_vector
 /* E23D34 802B6654 27A50014 */   addiu    $a1, $sp, 0x14
-/* E23D38 802B6658 0C039454 */  jal       func_800E5150
+/* E23D38 802B6658 0C039454 */  jal       phys_update_interact_collider
 /* E23D3C 802B665C 00000000 */   nop
 /* E23D40 802B6660 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* E23D44 802B6664 44800000 */  mtc1      $zero, $f0
@@ -86,7 +86,7 @@ glabel func_802B65E8_E23CC8
 /* E23DF8 802B6718 080AD9CA */  j         .L802B6728
 /* E23DFC 802B671C 00000000 */   nop
 .L802B6720:
-/* E23E00 802B6720 0C039426 */  jal       func_800E5098
+/* E23E00 802B6720 0C039426 */  jal       try_player_footstep_sounds
 /* E23E04 802B6724 00000000 */   nop
 .L802B6728:
 /* E23E08 802B6728 8FBF001C */  lw        $ra, 0x1c($sp)

@@ -109,7 +109,7 @@ glabel func_8021C14C_6A334C
 /* 6A34E0 8021C2E0 8E05FFDC */  lw        $a1, -0x24($s0)
 /* 6A34E4 8021C2E4 8E06FFE0 */  lw        $a2, -0x20($s0)
 /* 6A34E8 8021C2E8 8E07FFE4 */  lw        $a3, -0x1c($s0)
-/* 6A34EC 8021C2EC 0C01CA9C */  jal       func_80072A70
+/* 6A34EC 8021C2EC 0C01CA9C */  jal       playFX_85
 /* 6A34F0 8021C2F0 0000202D */   daddu    $a0, $zero, $zero
 /* 6A34F4 8021C2F4 AE220000 */  sw        $v0, ($s1)
 /* 6A34F8 8021C2F8 8C42000C */  lw        $v0, 0xc($v0)

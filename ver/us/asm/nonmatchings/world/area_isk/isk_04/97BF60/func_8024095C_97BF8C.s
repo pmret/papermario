@@ -44,7 +44,7 @@ glabel func_8024095C_97BF8C
 /* 97C018 802409E8 E4800038 */  swc1      $f0, 0x38($a0)
 /* 97C01C 802409EC C6200030 */  lwc1      $f0, 0x30($s1)
 /* 97C020 802409F0 46020000 */  add.s     $f0, $f0, $f2
-/* 97C024 802409F4 0C03BD17 */  jal       clear_partner_move_history
+/* 97C024 802409F4 0C03BD17 */  jal       partner_clear_player_tracking
 /* 97C028 802409F8 E4800040 */   swc1     $f0, 0x40($a0)
 /* 97C02C 802409FC C6200028 */  lwc1      $f0, 0x28($s1)
 /* 97C030 80240A00 C6220030 */  lwc1      $f2, 0x30($s1)
@@ -52,7 +52,7 @@ glabel func_8024095C_97BF8C
 /* 97C038 80240A08 44042000 */  mfc1      $a0, $f4
 /* 97C03C 80240A0C 4600110D */  trunc.w.s $f4, $f2
 /* 97C040 80240A10 44052000 */  mfc1      $a1, $f4
-/* 97C044 80240A14 0C03BCF0 */  jal       func_800EF3C0
+/* 97C044 80240A14 0C03BCF0 */  jal       partner_set_goal_pos
 /* 97C048 80240A18 00000000 */   nop
 /* 97C04C 80240A1C 0C03BCF5 */  jal       func_800EF3D4
 /* 97C050 80240A20 0000202D */   daddu    $a0, $zero, $zero

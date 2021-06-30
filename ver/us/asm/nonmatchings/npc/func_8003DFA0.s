@@ -68,7 +68,7 @@ glabel func_8003DFA0
 /* 1949C 8003E09C 44060000 */  mfc1      $a2, $f0
 /* 194A0 8003E0A0 C6000000 */  lwc1      $f0, ($s0)
 /* 194A4 8003E0A4 46800020 */  cvt.s.w   $f0, $f0
-/* 194A8 8003E0A8 0C01BF44 */  jal       func_8006FD10
+/* 194A8 8003E0A8 0C01BF44 */  jal       playFX_0C
 /* 194AC 8003E0AC E7A00010 */   swc1     $f0, 0x10($sp)
 /* 194B0 8003E0B0 8E020000 */  lw        $v0, ($s0)
 /* 194B4 8003E0B4 2C420001 */  sltiu     $v0, $v0, 1

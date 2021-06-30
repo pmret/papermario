@@ -30,9 +30,9 @@ glabel state_step_language_select
 .L80035228:
 /* 10628 80035228 0C037DD0 */  jal       update_player
 /* 1062C 8003522C 00000000 */   nop
-/* 10630 80035230 0C00E64C */  jal       npc_list_update
+/* 10630 80035230 0C00E64C */  jal       update_npcs
 /* 10634 80035234 00000000 */   nop
-/* 10638 80035238 0C00F949 */  jal       update_counters
+/* 10638 80035238 0C00F949 */  jal       update_encounters
 /* 1063C 8003523C 00000000 */   nop
 /* 10640 80035240 0C016754 */  jal       update_effects
 /* 10644 80035244 00000000 */   nop
@@ -56,7 +56,7 @@ glabel state_step_language_select
 /* 10688 80035288 00000000 */  nop
 /* 1068C 8003528C 46800020 */  cvt.s.w   $f0, $f0
 /* 10690 80035290 44050000 */  mfc1      $a1, $f0
-/* 10694 80035294 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 10694 80035294 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 10698 80035298 0000202D */   daddu    $a0, $zero, $zero
 /* 1069C 8003529C 86030000 */  lh        $v1, ($s0)
 /* 106A0 800352A0 240200FF */  addiu     $v0, $zero, 0xff
@@ -136,27 +136,27 @@ glabel state_step_language_select
 /* 107B4 800353B4 A0530070 */   sb       $s3, 0x70($v0)
 /* 107B8 800353B8 0C00AB28 */  jal       battle_heap_create
 /* 107BC 800353BC 00000000 */   nop
-/* 107C0 800353C0 0C05259C */  jal       func_80149670
+/* 107C0 800353C0 0C05259C */  jal       sfx_clear_env_sounds
 /* 107C4 800353C4 0000202D */   daddu    $a0, $zero, $zero
 /* 107C8 800353C8 0C0B763E */  jal       spr_init_sprites
 /* 107CC 800353CC 0000202D */   daddu    $a0, $zero, $zero
 /* 107D0 800353D0 0C045751 */  jal       clear_model_data
 /* 107D4 800353D4 00000000 */   nop
-/* 107D8 800353D8 0C052010 */  jal       func_80148040
+/* 107D8 800353D8 0C052010 */  jal       clear_sprite_shading_data
 /* 107DC 800353DC 00000000 */   nop
-/* 107E0 800353E0 0C05177E */  jal       use_default_background_settings
+/* 107E0 800353E0 0C05177E */  jal       reset_background_settings
 /* 107E4 800353E4 00000000 */   nop
 /* 107E8 800353E8 0C0482EC */  jal       clear_entity_models
 /* 107EC 800353EC 00000000 */   nop
-/* 107F0 800353F0 0C047889 */  jal       func_8011E224
+/* 107F0 800353F0 0C047889 */  jal       clear_animator_list
 /* 107F4 800353F4 00000000 */   nop
-/* 107F8 800353F8 0C048C2E */  jal       clear_dynamic_entity_list
+/* 107F8 800353F8 0C048C2E */  jal       clear_generic_entity_list
 /* 107FC 800353FC 00000000 */   nop
 /* 10800 80035400 3C048020 */  lui       $a0, %hi(func_80200000)
 /* 10804 80035404 24840000 */  addiu     $a0, $a0, %lo(func_80200000)
-/* 10808 80035408 0C0514BA */  jal       func_801452E8
+/* 10808 80035408 0C0514BA */  jal       set_hud_element_nonworld_cache
 /* 1080C 8003540C 3C050002 */   lui      $a1, 2
-/* 10810 80035410 0C050440 */  jal       func_80141100
+/* 10810 80035410 0C050440 */  jal       clear_hud_element_cache
 /* 10814 80035414 00000000 */   nop
 /* 10818 80035418 0C03A6EC */  jal       reset_status_menu
 /* 1081C 8003541C 00000000 */   nop
@@ -164,7 +164,7 @@ glabel state_step_language_select
 /* 10824 80035424 00000000 */   nop
 /* 10828 80035428 0C0B0C77 */  jal       clear_script_list
 /* 1082C 8003542C 00000000 */   nop
-/* 10830 80035430 0C00E12F */  jal       npc_list_clear
+/* 10830 80035430 0C00E12F */  jal       clear_npcs
 /* 10834 80035434 00000000 */   nop
 /* 10838 80035438 0C04432E */  jal       clear_entity_data
 /* 1083C 8003543C 0000202D */   daddu    $a0, $zero, $zero
@@ -173,7 +173,7 @@ glabel state_step_language_select
 /* 10848 80035448 3C048007 */  lui       $a0, %hi(D_8007798C)
 /* 1084C 8003544C 0C018038 */  jal       nuPiReadRomOverlay
 /* 10850 80035450 2484798C */   addiu    $a0, $a0, %lo(D_8007798C)
-/* 10854 80035454 0C091238 */  jal       func_802448E0
+/* 10854 80035454 0C091238 */  jal       filemenu_init
 /* 10858 80035458 24040001 */   addiu    $a0, $zero, 1
 /* 1085C 8003545C 240400FF */  addiu     $a0, $zero, 0xff
 /* 10860 80035460 3C06800A */  lui       $a2, %hi(gOverrideFlags)
@@ -182,14 +182,14 @@ glabel state_step_language_select
 /* 1086C 8003546C 8CC20000 */  lw        $v0, ($a2)
 /* 10870 80035470 3C05437F */  lui       $a1, 0x437f
 /* 10874 80035474 00431024 */  and       $v0, $v0, $v1
-/* 10878 80035478 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 10878 80035478 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 1087C 8003547C ACC20000 */   sw       $v0, ($a2)
 .L80035480:
 /* 10880 80035480 82020000 */  lb        $v0, ($s0)
 /* 10884 80035484 04410012 */  bgez      $v0, .L800354D0
 /* 10888 80035488 00000000 */   nop
 .L8003548C:
-/* 1088C 8003548C 0C090C68 */  jal       func_802431A0
+/* 1088C 8003548C 0C090C68 */  jal       filemenu_update
 /* 10890 80035490 00000000 */   nop
 /* 10894 80035494 3C03800A */  lui       $v1, %hi(D_800A0932)
 /* 10898 80035498 24630932 */  addiu     $v1, $v1, %lo(D_800A0932)
@@ -205,7 +205,7 @@ glabel state_step_language_select
 /* 108BC 800354BC 00000000 */  nop
 /* 108C0 800354C0 46800020 */  cvt.s.w   $f0, $f0
 /* 108C4 800354C4 44050000 */  mfc1      $a1, $f0
-/* 108C8 800354C8 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 108C8 800354C8 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 108CC 800354CC 0000202D */   daddu    $a0, $zero, $zero
 .L800354D0:
 /* 108D0 800354D0 8FBF0020 */  lw        $ra, 0x20($sp)

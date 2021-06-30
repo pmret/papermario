@@ -62,7 +62,7 @@ glabel func_80240F20_A64FB0
 .L80241004:
 /* A65094 80241004 0200202D */  daddu     $a0, $s0, $zero
 /* A65098 80241008 240520D5 */  addiu     $a1, $zero, 0x20d5
-/* A6509C 8024100C 0C012530 */  jal       func_800494C0
+/* A6509C 8024100C 0C012530 */  jal       ai_enemy_play_sound
 /* A650A0 80241010 0000302D */   daddu    $a2, $zero, $zero
 /* A650A4 80241014 86440008 */  lh        $a0, 8($s2)
 /* A650A8 80241018 0C00FB3A */  jal       get_enemy

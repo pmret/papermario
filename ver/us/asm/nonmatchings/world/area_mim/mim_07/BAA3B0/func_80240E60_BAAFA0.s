@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240E60_BAAFA0
+glabel btl_merlee_on_start_turn_BAAFA0
 /* BAAFA0 80240E60 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* BAAFA4 80240E64 AFB3003C */  sw        $s3, 0x3c($sp)
 /* BAAFA8 80240E68 0080982D */  daddu     $s3, $a0, $zero

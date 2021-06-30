@@ -160,23 +160,23 @@ void func_802A10B8(void) {
         s32* icons1 = &D_802AD010;
         s32* icons2 = &D_802AD028;
 
-        free_icon(icons1[i]);
-        free_icon(icons2[i]);
+        free_hud_element(icons1[i]);
+        free_hud_element(icons2[i]);
     }
 
-    free_icon(D_802AD040);
-    free_icon(D_802AD044);
-    free_icon(D_802AD048);
-    free_icon(D_802AD04C);
-    free_icon(D_802AD05C);
-    free_icon(D_802AD050);
-    free_icon(D_802AD054);
-    free_icon(D_802AD058);
+    free_hud_element(D_802AD040);
+    free_hud_element(D_802AD044);
+    free_hud_element(D_802AD048);
+    free_hud_element(D_802AD04C);
+    free_hud_element(D_802AD05C);
+    free_hud_element(D_802AD050);
+    free_hud_element(D_802AD054);
+    free_hud_element(D_802AD058);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A11B0);
 
-INCLUDE_ASM(s32, "415D90", draw_battle_wheel);
+INCLUDE_ASM(s32, "415D90", btl_draw_menu_wheel);
 
 INCLUDE_ASM(s32, "415D90", func_802A2684);
 
@@ -194,21 +194,21 @@ void func_802A2910(void) {
     moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        icon_set_tint(moveOptionIconIDs[i], 255, 255, 255);
+        set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    icon_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
     moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        icon_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+        set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_menu_icon_script(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_script(battle_menu_moveCursorIcon, &D_80104A28);
     set_window_update(1, 5);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -245,21 +245,21 @@ void func_802A2AB8(void) {
     moveOptionIconIDs = &battle_menu_moveOptionIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        icon_set_tint(moveOptionIconIDs[i], 255, 255, 255);
+        set_hud_element_tint(moveOptionIconIDs[i], 255, 255, 255);
     }
 
-    icon_set_tint(battle_menu_moveCursorIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
-    icon_set_tint(battle_menu_moveTitleIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveCursorIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveUpArrowIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveDownArrowIcon, 255, 255, 255);
+    set_hud_element_tint(battle_menu_moveTitleIcon, 255, 255, 255);
 
     moveOptionCostUnitIconIDs = &battle_menu_moveOptionCostUnitIconIDs;
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        icon_set_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
+        set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_menu_icon_script(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_script(battle_menu_moveCursorIcon, &D_80104A28);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -294,15 +294,15 @@ void func_802A43DC(s32 arg0, s32 arg1, s32 arg2) {
         phi_a3 = battle_menu_moveTextOpacity;
         phi_v0 = 0x31;
     }
-    draw_msg(phi_a0, phi_a1, phi_a2, phi_a3, phi_v0, 1);
+    draw_string(phi_a0, phi_a1, phi_a2, phi_a3, phi_v0, 1);
 }
 
 void func_802A4448(s32 arg0, s32 arg1, s32 arg2) {
     s32 icon = battle_menu_moveTitleIcon;
 
-    set_icon_render_pos(icon, arg1 + 0x10, arg2 + 0xF);
-    icon_set_opacity(icon, battle_menu_moveTextOpacity);
-    draw_icon_0(icon);
+    set_hud_element_render_pos(icon, arg1 + 0x10, arg2 + 0xF);
+    set_hud_element_alpha(icon, battle_menu_moveTextOpacity);
+    draw_hud_element_clipped(icon);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A4494);
@@ -322,7 +322,7 @@ void func_802A4534(s32 arg0, s32 arg1, s32 arg2) {
     } else {
         phi_s0 = 0x1D00A0;
     }
-    draw_msg(phi_s0, temp1, temp2 + D_802AB344[get_msg_lines(phi_s0) - 1], 255, 0xF, 0);
+    draw_string(phi_s0, temp1, temp2 + D_802AB344[get_string_lines(phi_s0) - 1], 255, 0xF, 0);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A45D8);
@@ -342,12 +342,12 @@ void func_802A472C(void) {
     set_window_update(8, 2);
 
     for (i = 0; i < D_802AD66C; i++) {
-        free_icon(temp[i]);
+        free_hud_element(temp[i]);
     }
 
-    free_icon(D_802AD618);
-    free_icon(D_802AD61C);
-    free_icon(D_802AD620);
+    free_hud_element(D_802AD618);
+    free_hud_element(D_802AD61C);
+    free_hud_element(D_802AD620);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A47E0);
@@ -366,7 +366,7 @@ INCLUDE_ASM(s32, "415D90", func_802A4A54);
 INCLUDE_ASM(s32, "415D90", func_802A5290);
 
 void func_802A56F8(s32 arg0, s32 arg1, s32 arg2) {
-    draw_msg(0x1D0043, arg1 + 0xF, arg2 + 2, D_802AD624, 0x33, 1);
+    draw_string(0x1D0043, arg1 + 0xF, arg2 + 2, D_802AD624, 0x33, 1);
 }
 
 #ifdef NON_MATCHING
@@ -380,7 +380,7 @@ void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
         case 20:
         case 30:
             if (D_802AD60B != 0) {
-                draw_msg(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
+                draw_string(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
             }
             break;
     }
@@ -391,7 +391,7 @@ INCLUDE_ASM(s32, "415D90", func_802A5738);
 
 INCLUDE_ASM(s32, "415D90", func_802A57C8);
 
-s32 can_switch_to_player(void) {
+s32 can_btl_state_update_switch_to_player(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -475,37 +475,37 @@ s32 func_802A58D0(void) {
     return !ret;
 }
 
-INCLUDE_ASM(s32, "415D90", update_player_menu);
+INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 
-INCLUDE_ASM(s32, "415D90", func_802A8180);
+INCLUDE_ASM(s32, "415D90", btl_state_draw_player_menu);
 
-INCLUDE_ASM(s32, "415D90", update_partner_menu);
+INCLUDE_ASM(s32, "415D90", btl_state_update_partner_menu);
 
-INCLUDE_ASM(s32, "415D90", func_802A9AE8);
+INCLUDE_ASM(s32, "415D90", btl_state_draw_partner_menu);
 
 s32 func_802A9B30(void) {
     return (gBattleStatus.flags2 & 4) <= 0;
 }
 
-INCLUDE_ASM(s32, "415D90", func_802A9B44);
+INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);
 
-INCLUDE_ASM(s32, "415D90", func_802AA05C);
-// void func_802AA05C(void) {
+INCLUDE_ASM(s32, "415D90", btl_state_draw_peach_menu);
+// void btl_state_draw_peach_menu(void) {
 //     switch (gBattleStatus.battleState) {
 //         case 1:
-//             draw_battle_wheel();
+//             btl_draw_menu_wheel();
 //             break;
 //         case 2:
-//             draw_battle_wheel();
+//             btl_draw_menu_wheel();
 //             break;
 //         case 3:
-//             draw_battle_wheel();
+//             btl_draw_menu_wheel();
 //             break;
 //         case 4:
-//             draw_battle_wheel();
+//             btl_draw_menu_wheel();
 //             break;
 //         case 5:
-//             draw_battle_wheel();
+//             btl_draw_menu_wheel();
 //             break;
 //         case 6:
 //         case 7:
@@ -519,24 +519,24 @@ s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
 }
 
-INCLUDE_ASM(s32, "415D90", func_802AA0B8); // look into m2c bug
+INCLUDE_ASM(s32, "415D90", btl_state_update_twink_menu); // look into m2c bug
 
-void func_802AA640(void) {
+void btl_state_draw_twink_menu(void) {
     switch (gBattleStatus.battleState) {
         case 1:
-            draw_battle_wheel();
+            btl_draw_menu_wheel();
             break;
         case 2:
-            draw_battle_wheel();
+            btl_draw_menu_wheel();
             break;
         case 3:
-            draw_battle_wheel();
+            btl_draw_menu_wheel();
             break;
         case 4:
-            draw_battle_wheel();
+            btl_draw_menu_wheel();
             break;
         case 5:
-            draw_battle_wheel();
+            btl_draw_menu_wheel();
             break;
         case 6:
         case 7:
@@ -546,12 +546,12 @@ void func_802AA640(void) {
     }
 }
 
-INCLUDE_ASM(s32, "415D90", update_targeting_enemies);
+INCLUDE_ASM(s32, "415D90", btl_state_update_select_target);
 
-INCLUDE_ASM(s32, "415D90", func_802AACD8);
+INCLUDE_ASM(s32, "415D90", btl_state_draw_select_target);
 
-void func_802AB330(void) {
+void btl_state_update_22(void) {
 }
 
-void func_802AB338(void) {
+void btl_state_draw_22(void) {
 }

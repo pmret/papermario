@@ -351,7 +351,7 @@ glabel pause_partners_draw_contents
 /* 13E770 8024B430 00031880 */  sll       $v1, $v1, 2
 /* 13E774 8024B434 00731821 */  addu      $v1, $v1, $s3
 /* 13E778 8024B438 8C640000 */  lw        $a0, ($v1)
-/* 13E77C 8024B43C 0C0B78F6 */  jal       func_802DE3D8
+/* 13E77C 8024B43C 0C0B78F6 */  jal       spr_draw_npc_sprite
 /* 13E780 8024B440 00A0382D */   daddu    $a3, $a1, $zero
 /* 13E784 8024B444 3C048027 */  lui       $a0, %hi(D_802706B0)
 /* 13E788 8024B448 248406B0 */  addiu     $a0, $a0, %lo(D_802706B0)

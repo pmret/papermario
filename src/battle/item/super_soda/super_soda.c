@@ -21,20 +21,20 @@ Script N(script6) = SCRIPT({
         sleep 20;
         SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     }
-    func_802D3474(SI_VAR(10), 0x80283EE8);
+    CreateVirtualEntity(SI_VAR(10), 0x80283EE8);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 0;
     SI_VAR(1) += 30;
     SI_VAR(2) += 5;
-    func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    func_802D3F74(SI_VAR(10), 32);
+    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetVirtualEntityFlags(SI_VAR(10), 32);
     spawn {
         GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(1) += 45;
         MakeItemEntity(SI_VAR(14), SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 0);
         SI_VAR(14) = SI_VAR(0);
         loop 25 {
-            func_802D378C(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            GetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
             N(func_802A123C_724F1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
             sleep 1;
         }
@@ -47,9 +47,9 @@ Script N(script6) = SCRIPT({
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);
     MoveBattleCamOver(25);
-    func_802D39FC(SI_VAR(10), 0.400390625);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 0.400390625);
     SI_VAR(2) += 5;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 25);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 25);
     AddBattleCamZoom(100);
     MoveBattleCamOver(30);
     GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

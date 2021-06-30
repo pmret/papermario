@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80242E00_EA3700
+glabel filemenu_set_cursor_goal_pos_EA3700
 /* EA3700 80242E00 3C038011 */  lui       $v1, %hi(D_80117160)
 /* EA3704 80242E04 24637160 */  addiu     $v1, $v1, %lo(D_80117160)
 /* EA3708 80242E08 80620000 */  lb        $v0, ($v1)

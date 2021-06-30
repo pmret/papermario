@@ -76,7 +76,7 @@ glabel func_8024059C_D3AB6C
 /* D3AC84 802406B4 E7A40018 */  swc1      $f4, 0x18($sp)
 /* D3AC88 802406B8 E7A2001C */  swc1      $f2, 0x1c($sp)
 /* D3AC8C 802406BC E7A00020 */  swc1      $f0, 0x20($sp)
-/* D3AC90 802406C0 0C0372DF */  jal       func_800DCB7C
+/* D3AC90 802406C0 0C0372DF */  jal       npc_raycast_down_sides
 /* D3AC94 802406C4 AFA20010 */   sw       $v0, 0x10($sp)
 /* D3AC98 802406C8 10400011 */  beqz      $v0, .L80240710
 /* D3AC9C 802406CC 24020002 */   addiu    $v0, $zero, 2

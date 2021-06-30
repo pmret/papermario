@@ -53,7 +53,7 @@ glabel func_800E06D8
 /* 79C3C 800E078C 08038200 */  j         .L800E0800
 /* 79C40 800E0790 00000000 */   nop
 .L800E0794:
-/* 79C44 800E0794 0C0394BE */  jal       can_player_interact
+/* 79C44 800E0794 0C0394BE */  jal       phys_can_player_interact
 /* 79C48 800E0798 00000000 */   nop
 /* 79C4C 800E079C 14400003 */  bnez      $v0, .L800E07AC
 /* 79C50 800E07A0 2402FFFF */   addiu    $v0, $zero, -1

@@ -87,7 +87,7 @@ glabel func_80240270_DF6C70
 /* DF6DA0 802403A0 8E050008 */  lw        $a1, 8($s0)
 /* DF6DA4 802403A4 8E060000 */  lw        $a2, ($s0)
 /* DF6DA8 802403A8 8E07000C */  lw        $a3, 0xc($s0)
-/* DF6DAC 802403AC 0C04BA38 */  jal       func_8012E8E0
+/* DF6DAC 802403AC 0C04BA38 */  jal       msg_get_glyph
 /* DF6DB0 802403B0 3C140001 */   lui      $s4, 1
 /* DF6DB4 802403B4 92A2000A */  lbu       $v0, 0xa($s5)
 /* DF6DB8 802403B8 3C013FE0 */  lui       $at, 0x3fe0

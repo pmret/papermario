@@ -12,7 +12,7 @@ void func_802B6000_E27C90(void) {
         playerStatus->flags &= ~0x80000000;
         playerStatus->animFlags |= 4;
         playerStatus->flags |= (0x800 | 0x8);
-        func_800DFF78(0x10019);
+        suggest_player_anim_setUnkFlag(0x10019);
         playerStatus->fallState = 0;
         playerStatus->gravityIntegrator[0] = 18.3473f;
         playerStatus->gravityIntegrator[1] = -3.738f;
@@ -20,7 +20,7 @@ void func_802B6000_E27C90(void) {
         playerStatus->gravityIntegrator[3] = -0.0987f;
         gCameras->moveFlags |= 1;
         D_802B62B0 = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
-        playerStatus->currentSpeed = func_800E0088(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
+        playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
         subtract_hp(1);
         open_status_menu_long();
         gOverrideFlags |= 0x40;
@@ -46,7 +46,7 @@ void func_802B6000_E27C90(void) {
     } else {
         s32 collider;
 
-        playerStatus->position.y = func_800E3514(func_800E34D8(), &collider);
+        playerStatus->position.y = player_check_collision_below(func_800E34D8(), &collider);
         if (collider >= 0) {
             collider = get_collider_type_by_id(collider);
             set_action_state(ACTION_STATE_LAND);

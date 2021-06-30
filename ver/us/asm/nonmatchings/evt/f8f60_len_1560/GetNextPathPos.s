@@ -106,7 +106,7 @@ glabel GetNextPathPos
 /* FA04C 802D569C AFA20014 */  sw        $v0, 0x14($sp)
 /* FA050 802D56A0 8E060000 */  lw        $a2, ($s0)
 /* FA054 802D56A4 8E070004 */  lw        $a3, 4($s0)
-/* FA058 802D56A8 0C0B549C */  jal       func_802D5270
+/* FA058 802D56A8 0C0B549C */  jal       get_path_position
 /* FA05C 802D56AC 27A50018 */   addiu    $a1, $sp, 0x18
 /* FA060 802D56B0 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* FA064 802D56B4 3C014480 */  lui       $at, 0x4480

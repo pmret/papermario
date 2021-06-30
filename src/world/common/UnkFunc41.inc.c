@@ -18,7 +18,7 @@ ApiStatus N(UnkFunc41)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            func_800EB168(0);
+            switch_to_partner(0);
             script->functionTemp[1].s = 30;
             script->functionTemp[0].s = 1;
             break;
@@ -31,7 +31,7 @@ ApiStatus N(UnkFunc41)(ScriptInstance* script, s32 isInitialCall) {
         case 2:
             playerData->currentPartner = partnerID;
             playerData->partners[partnerID].enabled = TRUE;
-            clear_partner_move_history(npc);
+            partner_clear_player_tracking(npc);
             func_800EB2A4(playerData->currentPartner);
             script->functionTemp[0].s = 3;
             break;

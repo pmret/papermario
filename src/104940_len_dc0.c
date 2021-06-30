@@ -1,6 +1,6 @@
 #include "common.h"
 
-void func_802E30C0(s32 entityIndex) {
+void entity_base_block_setupGfx(s32 entityIndex) {
     Gfx* gfx = gMasterGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
 
@@ -18,11 +18,11 @@ void func_802E30C0(s32 entityIndex) {
     gMasterGfxPos = gfx;
 }
 
-void func_802E31B0(Entity* entity) {
-    func_80072230(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+void entity_base_block_play_vanish_effect(Entity* entity) {
+    playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
 }
 
-f32 func_802E31EC(Entity* entity) {
+f32 entity_block_hit_init_scale(Entity* entity) {
     if ((get_entity_type(entity->listIndex) - 24) < 3) {
         entity->scale.y = 0.23f;
         entity->scale.x = 1.04f;
@@ -36,7 +36,7 @@ f32 func_802E31EC(Entity* entity) {
     }
 }
 
-void func_802E328C(Entity* entity) {
+void entity_block_hit_animate_scale(Entity* entity) {
     if ((get_entity_type(entity->listIndex) - 24) < 3) {
         entity->scale.x -= 0.09;
         entity->scale.z -= 0.09;
@@ -48,19 +48,19 @@ void func_802E328C(Entity* entity) {
         entity->scale.y += 0.09;
         entity->position.y -= 3.0f;
     }
-    func_802E3650(entity);
+    entity_base_block_idle(entity);
 }
 
-INCLUDE_ASM(s32, "104940_len_dc0", func_802E3370);
+INCLUDE_ASM(s32, "104940_len_dc0", entity_base_block_update_slow_sinking);
 
-s32 func_802E3650(Entity* entity) {
+s32 entity_base_block_idle(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s32 ret = 0;
 
-    if (func_80112B20() != 0) {
+    if (is_block_on_ground() != 0) {
         if (entity->flags & 0x200000) {
             ret = 1;
-            func_802E3370(entity);
+            entity_base_block_update_slow_sinking(entity);
             if (temp->unk_10 != -1) {
                 ItemEntity* itemEntity = get_item_entity(temp->unk_10);
                 itemEntity->position.y = entity->position.y + 4.0f;
@@ -71,7 +71,7 @@ s32 func_802E3650(Entity* entity) {
     return ret;
 }
 
-void entity_init_Hammer23Block_normal(Entity* entity) {
+void entity_base_block_init(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     f32 posY;
 
@@ -81,45 +81,45 @@ void entity_init_Hammer23Block_normal(Entity* entity) {
     entity->flags &= ~0x200000;
 }
 
-void func_802E3714(Entity* entity) {
+void entity_inactive_block_hit_init(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
     temp->unk_18 = 90.0f;
 }
 
-void func_802E3728(Entity* entity) {
+void entity_inactive_block_hit_anim(Entity* entity) {
     f64 temp_f20;
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
-    func_802E3A00(entity);
+    entity_MulticoinBlock_update_timer(entity);
     temp_f20 = entity->position.y;
     entity->position.y = temp_f20 + ((f64)sin_rad((temp->unk_18 * 6.28318f) / 360.0f) * 2);
     temp->unk_18 += 60.0f;
     if (temp->unk_18 > 450.0f) {
         temp->unk_18 = clamp_angle(temp->unk_18);
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E37E4(Entity* entity) {
+void entity_inactive_block_recoil_anim(Entity* entity) {
     f64 temp_f20;
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
-    func_802E3A00(entity);
+    entity_MulticoinBlock_update_timer(entity);
     temp_f20 = entity->position.y;
     entity->position.y = temp_f20 + ((f64)sin_rad((temp->unk_18 * 6.28318f) / 360.0f));
     temp->unk_18 += 60.0f;
     if (temp->unk_18 >= 360.0f) {
         temp->unk_18 = 0.0f;
         entity->position.y = temp->unk_14;
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E3898(Entity* entity) {
+void entity_MulticoinBlock_init(Entity* entity) {
     struct802E3650* temp;
 
-    entity_init_Hammer23Block_normal(entity);
+    entity_base_block_init(entity);
     temp = (struct802E3650*)entity->dataBuf;
     temp->unk_04 = 0xA;
     temp->unk_06 = 0x7B;
@@ -129,7 +129,7 @@ void func_802E3898(Entity* entity) {
 extern s32 D_802E9E54;
 extern StaticEntityData D_802EA07C;
 
-void func_802E38D8(Entity* entity) {
+void entity_MulticoinBlock_spawn_coin(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s32 phi_v1;
     s32 phi_v0;
@@ -155,7 +155,7 @@ void func_802E38D8(Entity* entity) {
     }
 }
 
-void func_802E3A00(Entity* entity) {
+void entity_MulticoinBlock_update_timer(Entity* entity) {
     u16 temp_v0;
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
     s16 phi_return;
@@ -171,23 +171,23 @@ void func_802E3A00(Entity* entity) {
     }
 }
 
-void func_802E3A48(Entity* entity) {
+void entity_MulticoinBlock_idle(Entity* entity) {
     s32 temp_v0;
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
 
     if ((entity->collisionFlags & 0x80) != 0) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
         return;
     }
-    func_802E3A00(entity);
-    func_802E3650(entity);
+    entity_MulticoinBlock_update_timer(entity);
+    entity_base_block_idle(entity);
     if (temp->unk_03 != 0) {
         create_entity(&D_802EA07C, entity->position.x, entity->position.y, entity->position.z, entity->rotation.y, 0x80000000);
         entity->flags |= 0x20000020;
     }
 }
 
-void func_802E3B08(Entity* entity) {
+void entity_MulticoinBlock_check_if_inactive(Entity* entity) {
     s32 temp_v0;
     u16 temp_v1;
     struct802E3650* temp = entity->dataBuf;
@@ -204,7 +204,7 @@ extern s32 D_802E9E80;
 
 #ifdef NON_MATCHING
 // tail merge + rodata
-s32 func_802E3BA4(Entity* entity) {
+s32 entity_block_handle_collision(Entity* entity) {
     u8 bVar1;
     s32 bVar2;
     s32 iVar3;
@@ -233,11 +233,11 @@ s32 func_802E3BA4(Entity* entity) {
         if (!(playerStatus->flags & 2)) {
             return 1;
         }
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
         return 1;
     }
     if (bVar1 & 0x80) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
         return 1;
     }
 
@@ -309,22 +309,22 @@ s32 func_802E3BA4(Entity* entity) {
         case 0x1d:
         case 0x1e:
         case 0x1f:
-            func_80110678(entity);
-            exec_entity_updatecmd(entity);
+            entity_start_script(entity);
+            exec_entity_commandlist(entity);
             return 1;
         case 0xb:
-            func_80110678(entity);
+            entity_start_script(entity);
             break;
     }
     return 1;
 }
 #else
-INCLUDE_ASM(s32, "104940_len_dc0", func_802E3BA4, Entity* entity);
+INCLUDE_ASM(s32, "104940_len_dc0", entity_block_handle_collision, Entity* entity);
 #endif
 
 void entity_init_Hammer1Block_normal(Entity* entity) {
-    entity_init_Hammer23Block_normal(entity);
-    entity->renderSetupFunc = func_802E30C0;
+    entity_base_block_init(entity);
+    entity->renderSetupFunc = entity_base_block_setupGfx;
 }
 
 s32 entity_init_HammerBlock_small(Entity* entity) {

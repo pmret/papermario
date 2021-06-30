@@ -6,7 +6,7 @@ Script N(main) = SCRIPT({
     N(FadeBackgroundToBlack)();
     spawn {
         sleep 5;
-        UseCamPreset(2);
+        UseBattleCamPreset(2);
         MoveBattleCamOver(50);
     }
     SetAnimation(ACTOR_PLAYER, 0, ANIM_CROUCH);
@@ -31,7 +31,7 @@ Script N(main) = SCRIPT({
         MoveBattleCamOver(2);
         sleep 2;
     }
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:

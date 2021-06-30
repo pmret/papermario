@@ -172,7 +172,7 @@ glabel func_802A1518_799CC8
 /* 799F38 802A1788 8E060008 */  lw        $a2, 8($s0)
 /* 799F3C 802A178C 8E07000C */  lw        $a3, 0xc($s0)
 .L802A1790:
-/* 799F40 802A1790 0C01C8D4 */  jal       func_80072350
+/* 799F40 802A1790 0C01C8D4 */  jal       playFX_72
 /* 799F44 802A1794 24040004 */   addiu    $a0, $zero, 4
 .L802A1798:
 /* 799F48 802A1798 26730004 */  addiu     $s3, $s3, 4
@@ -236,7 +236,7 @@ glabel func_802A1518_799CC8
 /* 79A018 802A1868 8E060008 */  lw        $a2, 8($s0)
 /* 79A01C 802A186C 8E07000C */  lw        $a3, 0xc($s0)
 .L802A1870:
-/* 79A020 802A1870 0C01C8D4 */  jal       func_80072350
+/* 79A020 802A1870 0C01C8D4 */  jal       playFX_72
 /* 79A024 802A1874 24040004 */   addiu    $a0, $zero, 4
 .L802A1878:
 /* 79A028 802A1878 26730004 */  addiu     $s3, $s3, 4
@@ -296,7 +296,7 @@ glabel L802A18B0_79A060
 /* 79A0E8 802A1938 44810000 */  mtc1      $at, $f0
 .L802A193C:
 /* 79A0EC 802A193C AFA00014 */  sw        $zero, 0x14($sp)
-/* 79A0F0 802A1940 0C01C964 */  jal       func_80072590
+/* 79A0F0 802A1940 0C01C964 */  jal       playFX_78
 /* 79A0F4 802A1944 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 79A0F8 802A1948 3C01802A */  lui       $at, %hi(D_802A37F0)
 /* 79A0FC 802A194C AC2237F0 */  sw        $v0, %lo(D_802A37F0)($at)
@@ -388,7 +388,7 @@ glabel L802A1A88_79A238
 /* 79A240 802A1A90 2442FFFF */   addiu    $v0, $v0, -1
 /* 79A244 802A1A94 0C093903 */  jal       func_8024E40C
 /* 79A248 802A1A98 24040002 */   addiu    $a0, $zero, 2
-/* 79A24C 802A1A9C 0C093936 */  jal       move_cam_over
+/* 79A24C 802A1A9C 0C093936 */  jal       btl_cam_move
 /* 79A250 802A1AA0 2404000A */   addiu    $a0, $zero, 0xa
 /* 79A254 802A1AA4 2402000F */  addiu     $v0, $zero, 0xf
 /* 79A258 802A1AA8 AFC20074 */  sw        $v0, 0x74($fp)
@@ -625,7 +625,7 @@ glabel L802A1B54_79A304
 /* 79A5BC 802A1E0C 2484001C */   addiu    $a0, $a0, 0x1c
 /* 79A5C0 802A1E10 0C093903 */  jal       func_8024E40C
 /* 79A5C4 802A1E14 24040003 */   addiu    $a0, $zero, 3
-/* 79A5C8 802A1E18 0C093936 */  jal       move_cam_over
+/* 79A5C8 802A1E18 0C093936 */  jal       btl_cam_move
 /* 79A5CC 802A1E1C 2404001E */   addiu    $a0, $zero, 0x1e
 /* 79A5D0 802A1E20 2402000F */  addiu     $v0, $zero, 0xf
 /* 79A5D4 802A1E24 AFC20074 */  sw        $v0, 0x74($fp)

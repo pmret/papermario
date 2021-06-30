@@ -2,12 +2,12 @@
 
 void sin_cos_rad(f32, f32*, f32*);
 f32 func_800E34D8(void);
-f32 func_800E3514(f32 length, s32* hitColliderID); // player_check_collision_below
+f32 player_check_collision_below(f32 length, s32* hitColliderID); // player_check_collision_below
 s32 get_collider_type_by_id(s32 colliderID);
 
 extern f32 D_802B6240; // bss? angle to lastGoodPosition
 
-// Float problems near func_800E0088; almost matching otherwise
+// Float problems near get_xz_dist_to_player; almost matching otherwise
 #ifndef NON_MATCHING
 INCLUDE_ASM(void, "world/action/16", func_802B6000_E287F0, void);
 #else
@@ -22,7 +22,7 @@ void func_802B6000_E287F0(void) {
 
         gPlayerStatus.flags &= ~0x80000000;
 
-        func_800DFF78(0x10017);
+        suggest_player_anim_setUnkFlag(0x10017);
 
         cameras[0].moveFlags |= 1;
 
@@ -35,7 +35,7 @@ void func_802B6000_E287F0(void) {
 
         D_802B6240 = atan2(gPlayerStatus.position.x, gPlayerStatus.position.z, gPlayerStatus.lastGoodPosition.x,
                            gPlayerStatus.lastGoodPosition.z);
-        gPlayerStatus.currentSpeed = func_800E0088(gPlayerStatus.lastGoodPosition.x, gPlayerStatus.lastGoodPosition.z) / 18.0f;
+        gPlayerStatus.currentSpeed = get_xz_dist_to_player(gPlayerStatus.lastGoodPosition.x, gPlayerStatus.lastGoodPosition.z) / 18.0f;
     }
 
     angleRad = (D_802B6240 * TAU) / 360.0f;
@@ -62,7 +62,7 @@ void func_802B6000_E287F0(void) {
     } else {
         s32 colliderID;
 
-        gPlayerStatus.position.y = func_800E3514(func_800E34D8(), &colliderID);
+        gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
 
         if (colliderID >= 0) {
             colliderID = get_collider_type_by_id(colliderID); // what

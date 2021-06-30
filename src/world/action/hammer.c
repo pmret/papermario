@@ -77,7 +77,7 @@ void func_802B6048_E24F18(s32 arg0) {
     }
 
     exec_ShakeCamX(0, 2, s2temp, phi_f24);
-    func_80070370(0, xTemp, yTemp, zTemp, phi_s1, phi_s3, 0, (s2temp + 3) * 3);
+    playFX_1D(0, xTemp, yTemp, zTemp, phi_s1, phi_s3, 0, (s2temp + 3) * 3);
 
     switch (is_ability_active(ABILITY_ATTACK_F_X)) {
         case 1:
@@ -146,7 +146,7 @@ void func_802B66A8_E25578(void) {
             }
         }
 
-        func_800DFEFC(animID);
+        suggest_player_anim_clearUnkFlag(animID);
         sfx_play_sound_at_player(soundID, 0);
         D_802B6DB0_E25C80->unk_0C = 0;
         D_802B6DB0_E25C80->unk_14 = 0;

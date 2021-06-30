@@ -12,7 +12,7 @@ glabel func_802BD17C_31B19C
 /* 31B1B8 802BD198 00000000 */  nop
 /* 31B1BC 802BD19C 46800020 */  cvt.s.w   $f0, $f0
 /* 31B1C0 802BD1A0 44070000 */  mfc1      $a3, $f0
-/* 31B1C4 802BD1A4 0C04CFF2 */  jal       func_80133FC8
+/* 31B1C4 802BD1A4 0C04CFF2 */  jal       test_item_entity_position
 /* 31B1C8 802BD1A8 00000000 */   nop
 /* 31B1CC 802BD1AC 0040282D */  daddu     $a1, $v0, $zero
 /* 31B1D0 802BD1B0 3C01802C */  lui       $at, %hi(D_802BEC68)

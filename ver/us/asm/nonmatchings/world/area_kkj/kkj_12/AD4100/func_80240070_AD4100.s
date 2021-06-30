@@ -118,7 +118,7 @@ glabel func_80240070_AD4100
 /* AD42B4 80240224 44820000 */  mtc1      $v0, $f0
 /* AD42B8 80240228 00000000 */  nop
 /* AD42BC 8024022C 46800020 */  cvt.s.w   $f0, $f0
-/* AD42C0 80240230 0C0376B9 */  jal       func_800DDAE4
+/* AD42C0 80240230 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* AD42C4 80240234 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* AD42C8 80240238 54400001 */  bnel      $v0, $zero, .L80240240
 /* AD42CC 8024023C 0000882D */   daddu    $s1, $zero, $zero

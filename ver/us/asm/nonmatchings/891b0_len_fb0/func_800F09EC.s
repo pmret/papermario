@@ -83,7 +83,7 @@ glabel func_800F09EC
 /* 89FC8 800F0B18 46020000 */  add.s     $f0, $f0, $f2
 /* 89FCC 800F0B1C 3C064220 */  lui       $a2, 0x4220
 /* 89FD0 800F0B20 44070000 */  mfc1      $a3, $f0
-/* 89FD4 800F0B24 0C01C244 */  jal       func_80070910
+/* 89FD4 800F0B24 0C01C244 */  jal       playFX_2C
 /* 89FD8 800F0B28 0000202D */   daddu    $a0, $zero, $zero
 .L800F0B2C:
 /* 89FDC 800F0B2C 8FBF001C */  lw        $ra, 0x1c($sp)

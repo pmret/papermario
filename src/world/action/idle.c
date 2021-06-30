@@ -1,7 +1,7 @@
 #include "common.h"
 #include "../actions.h"
 
-void input_to_move_vector(f32* angle, f32* magnitude);
+void player_input_to_move_vector(f32* angle, f32* magnitude);
 s32 check_input_jump(void);
 s32 check_input_hammer(void);
 
@@ -49,7 +49,7 @@ void world_action_idle_update(void) {
         } else {
             anim = 0x60007;
         }
-        func_800DFEFC(anim);
+        suggest_player_anim_clearUnkFlag(anim);
     }
 
     if (playerStatus->animFlags & PLAYER_ANIM_FLAG_GET_STAR_SPIRIT) {
@@ -58,8 +58,8 @@ void world_action_idle_update(void) {
         f32 angle;
         f32 magnitude;
 
-        input_to_move_vector(&angle, &magnitude);
-        func_800E5150();
+        player_input_to_move_vector(&angle, &magnitude);
+        phys_update_interact_collider();
 
         if (check_input_jump()) {
             if (magnitude != 0.0f || playerStatus->targetYaw != angle) {
@@ -98,12 +98,12 @@ void func_802B61E4_E23444(void) {
 
         if (!(playerStatus->animFlags & PLAYER_ANIM_FLAG_IN_DISGUISE)) {
             if (!(gGameStatusPtr->peachFlags & 0x10)) {
-                func_800DFEFC(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
+                suggest_player_anim_clearUnkFlag(world_action_idle_peachAnims[gGameStatusPtr->peachAnimIdx]);
             } else {
-                func_800DFEFC(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
+                suggest_player_anim_clearUnkFlag(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
             }
         } else {
-            func_800DFEFC(0xC000E);
+            suggest_player_anim_clearUnkFlag(0xC000E);
         }
     }
 
@@ -113,7 +113,7 @@ void func_802B61E4_E23444(void) {
                 if (((playerStatus->flags & 0x3000) == 0) && (playerStatus->unk_C4 == 0)) {
                     if (playerStatus->framesOnGround > 1800) {
                         playerStatus->fallState++;
-                        func_800DFEFC(0xC0003);
+                        suggest_player_anim_clearUnkFlag(0xC0003);
                         return;
                     }
                     playerStatus->framesOnGround++;
@@ -123,23 +123,23 @@ void func_802B61E4_E23444(void) {
                 if (playerStatus->unk_BC != 0) {
                     playerStatus->fallState++;
                     playerStatus->framesOnGround = 0;
-                    func_800DFEFC(0xA0001);
+                    suggest_player_anim_clearUnkFlag(0xA0001);
                 }
                 break;
             case 2: {
                 playerStatus->framesOnGround++;
                 if (playerStatus->framesOnGround > 200) {
                     playerStatus->fallState++;
-                    func_800DFEFC(0xC0003);
+                    suggest_player_anim_clearUnkFlag(0xC0003);
                 }
                 break;
             }
             case 3:
                 if ((playerStatus->flags & 0x3000) != 0) {
-                    func_800DFEFC(0xA0001);
+                    suggest_player_anim_clearUnkFlag(0xA0001);
                     playerStatus->fallState = 0;
                 } else if (playerStatus->unk_BC != 0) {
-                    func_800DFEFC(0xC0004);
+                    suggest_player_anim_clearUnkFlag(0xC0004);
                 }
                 break;
         }
@@ -149,8 +149,8 @@ void func_802B61E4_E23444(void) {
         f32 angle;
         f32 magnitude;
 
-        input_to_move_vector(&angle, &magnitude);
-        func_800E5150();
+        player_input_to_move_vector(&angle, &magnitude);
+        phys_update_interact_collider();
 
         if (magnitude != 0.0f) {
             playerStatus->framesOnGround = 0;

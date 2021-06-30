@@ -30,7 +30,7 @@ glabel func_802B644C_E24D6C
 /* E24DD0 802B64B0 E6000044 */  swc1      $f0, 0x44($s0)
 /* E24DD4 802B64B4 14400003 */  bnez      $v0, .L802B64C4
 /* E24DD8 802B64B8 E6020048 */   swc1     $f2, 0x48($s0)
-/* E24DDC 802B64BC 0C03954C */  jal       func_800E5530
+/* E24DDC 802B64BC 0C03954C */  jal       phys_adjust_cam_on_landing
 /* E24DE0 802B64C0 00000000 */   nop
 .L802B64C4:
 /* E24DE4 802B64C4 2402FFFF */  addiu     $v0, $zero, -1
@@ -47,7 +47,7 @@ glabel func_802B644C_E24D6C
 /* E24E0C 802B64EC 27A50014 */  addiu     $a1, $sp, 0x14
 /* E24E10 802B64F0 24420001 */  addiu     $v0, $v0, 1
 /* E24E14 802B64F4 A20200B6 */  sb        $v0, 0xb6($s0)
-/* E24E18 802B64F8 0C0388C1 */  jal       input_to_move_vector
+/* E24E18 802B64F8 0C0388C1 */  jal       player_input_to_move_vector
 /* E24E1C 802B64FC E6020054 */   swc1     $f2, 0x54($s0)
 /* E24E20 802B6500 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* E24E24 802B6504 44800000 */  mtc1      $zero, $f0

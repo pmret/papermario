@@ -34,7 +34,7 @@ glabel func_802B6648_E27428
 /* E2749C 802B66BC 27A20040 */  addiu     $v0, $sp, 0x40
 /* E274A0 802B66C0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E274A4 802B66C4 27A20044 */  addiu     $v0, $sp, 0x44
-/* E274A8 802B66C8 0C03791B */  jal       func_800DE46C
+/* E274A8 802B66C8 0C03791B */  jal       player_raycast_below_cam_relative
 /* E274AC 802B66CC AFA20020 */   sw       $v0, 0x20($sp)
 /* E274B0 802B66D0 8FBF0048 */  lw        $ra, 0x48($sp)
 /* E274B4 802B66D4 03E00008 */  jr        $ra

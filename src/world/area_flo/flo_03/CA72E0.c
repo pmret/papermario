@@ -52,7 +52,7 @@ Script N(802406A0) = SCRIPT({
 Script N(802407C0) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
-            func_802D5FF8(137, 0);
+            PushSong(137, 0);
         }
     }
 });
@@ -62,7 +62,7 @@ Script N(80240814) = SCRIPT({
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
             sleep 10;
-            func_802D5FD8();
+            PopSong();
         }
     }
 });

@@ -11,7 +11,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -32,8 +32,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A2120 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A2120, iconPosX + 36, iconPosY - 63);
+        D_802A2120 = create_hud_element(&D_80108A64);
+        set_hud_element_render_pos(D_802A2120, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -46,8 +46,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
-        free_icon(D_802A2120);
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+        free_hud_element(D_802A2120);
     }
 
     return ApiStatus_DONE2;
@@ -98,7 +98,7 @@ ApiStatus N(func_802A1318_718B68)(ScriptInstance* script, s32 isInitialCall) {
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
-        UseCamPreset(69);
+        UseBattleCamPreset(69);
         sleep 10;
 
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
@@ -144,7 +144,7 @@ Script N(UseItemWithEffect) = SCRIPT({
 });
 
 Script N(UseItem) = SCRIPT({
-    UseCamPreset(19);
+    UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);

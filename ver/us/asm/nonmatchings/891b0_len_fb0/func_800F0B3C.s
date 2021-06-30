@@ -87,7 +87,7 @@ glabel func_800F0B3C
 /* 8A128 800F0C78 46020000 */  add.s     $f0, $f0, $f2
 /* 8A12C 800F0C7C 44070000 */  mfc1      $a3, $f0
 /* 8A130 800F0C80 0000202D */  daddu     $a0, $zero, $zero
-/* 8A134 800F0C84 0C01C16C */  jal       func_800705B0
+/* 8A134 800F0C84 0C01C16C */  jal       playFX_23
 /* 8A138 800F0C88 E7A60010 */   swc1     $f6, 0x10($sp)
 .L800F0C8C:
 /* 8A13C 800F0C8C 8FBF0024 */  lw        $ra, 0x24($sp)

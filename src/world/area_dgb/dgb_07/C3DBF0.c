@@ -356,19 +356,19 @@ void N(func_802406A4_C3E294)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (phi_s2) {
-        func_800494C0(npc, 0xB000000E, 0);
+        ai_enemy_play_sound(npc, 0xB000000E, 0);
         npc->currentAnim.w = enemy->animList[11];
         npc->duration = 10;
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        func_800494C0(npc, 0x2F4, 0x200000);
+        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0].s = 2;
     }
 
     npc->duration++;
     if (npc->duration == 27) {
-        func_800494C0(npc, 0xB000000C, 0);
+        ai_enemy_play_sound(npc, 0xB000000C, 0);
     } else if (npc->duration == 57) {
-        func_800494C0(npc, 0xB000000D, 0);
+        ai_enemy_play_sound(npc, 0xB000000D, 0);
     } else if (npc->duration == 59) {
         npc->currentAnim.w = enemy->animList[12];
     } else if (npc->duration == 60) {

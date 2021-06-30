@@ -343,7 +343,7 @@ Script N(npcAI_802443DC) = SCRIPT({
     func_802D2B6C();
     DisablePartnerAI(0);
     group 0;
-    func_802D5830(1);
+    SetTimeFreezeMode(1);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
     SI_VAR(2) += 2;
@@ -780,19 +780,19 @@ void N(func_80240958_C47538)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (phi_s2) {
-        func_800494C0(npc, 0xB000000E, 0);
+        ai_enemy_play_sound(npc, 0xB000000E, 0);
         npc->currentAnim.w = enemy->animList[11];
         npc->duration = 10;
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        func_800494C0(npc, 0x2F4, 0x200000);
+        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0].s = 2;
     }
 
     npc->duration++;
     if (npc->duration == 27) {
-        func_800494C0(npc, 0xB000000C, 0);
+        ai_enemy_play_sound(npc, 0xB000000C, 0);
     } else if (npc->duration == 57) {
-        func_800494C0(npc, 0xB000000D, 0);
+        ai_enemy_play_sound(npc, 0xB000000D, 0);
     } else if (npc->duration == 59) {
         npc->currentAnim.w = enemy->animList[12];
     } else if (npc->duration == 60) {
@@ -1035,7 +1035,7 @@ void N(func_80241424_C48004)(ScriptInstance* script, NpcAISettings* aiSettings, 
 }
 
 #ifdef NON_MATCHING
-// second func_800DCB7C call
+// second npc_raycast_down_sides call
 void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1069,7 +1069,7 @@ void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, 
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
             if (temp_f22 < (temp_f26 - posW)) {
                 enemy->varTable[0] |= 0x10;
             }
@@ -1088,7 +1088,7 @@ void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, 
             posY = temp_f20;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
             phi_f4 = posY;
             phi_f4 += temp_f26;
             d = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
@@ -1111,7 +1111,7 @@ void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, 
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
         }
         if (phi_v0) {
             npc->pos.y = posY + temp_f26 + (temp_f0 * temp_f22);
@@ -1129,7 +1129,7 @@ void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, 
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
-                    func_800494C0(npc, 0x2F4, 0x200000);
+                    ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     if (enemy->npcSettings->unk_2A & 1) {
                         script->functionTemp[0].s = 10;
                     } else {
@@ -1355,7 +1355,7 @@ void N(func_80242C1C_C497FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
         posY = gPlayerStatusPtr->position.y;
         posZ = gPlayerStatusPtr->position.z;
         posW = 1000.0f;
-        func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+        npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
         if (fabsf(npc->pos.y - posY) > 24.0) {
             npc->pos.y -= 1.8;
         } else {
@@ -1363,7 +1363,7 @@ void N(func_80242C1C_C497FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
             npc->flags &= ~0x00200000;
             if (D_8010EBB0.unk_03 != 9) {
                 disable_player_input();
-                func_800EF628();
+                partner_disable_input();
                 npc->duration = 0;
                 script->functionTemp[0].s = 20;
             } else {
@@ -1401,7 +1401,7 @@ void N(func_80242F70_C49B50)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
     if (!(npc->pos.y < (posY + temp_f20))) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc->pos.y = posY + temp_f20;
@@ -1432,7 +1432,7 @@ void N(func_80243138_C49D18)(ScriptInstance* script, NpcAISettings* aiSettings, 
             script->functionTemp[0].s = 100;
         } else {
             enable_player_input();
-            func_800EF600();
+            partner_enable_input();
             script->functionTemp[0].s = 16;
         }
     }
@@ -1464,7 +1464,7 @@ void N(func_80243260_C49E40)(ScriptInstance* script, NpcAISettings* aiSettings, 
     s32 var;
     s32 var2;
 
-    if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+    if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
         npc->pos.y = posY + temp_f26 + (temp_f20 * temp_f22);
     } else {
         npc->pos.y = temp_f24 + (temp_f20 * temp_f22);
@@ -1475,7 +1475,7 @@ void N(func_80243260_C49E40)(ScriptInstance* script, NpcAISettings* aiSettings, 
         script->functionTemp[1].s = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
-            func_800494C0(npc, 0x2F4, 0x200000);
+            ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
             script->functionTemp[0].s = 12;
             return;

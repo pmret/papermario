@@ -9,7 +9,7 @@ glabel func_802188FC_59EFDC
 /* 59EFEC 8021890C AFBF0010 */  sw        $ra, 0x10($sp)
 /* 59EFF0 80218910 3C018023 */  lui       $at, %hi(D_8022B550)
 /* 59EFF4 80218914 AC22B550 */  sw        $v0, %lo(D_8022B550)($at)
-/* 59EFF8 80218918 0C048C56 */  jal       create_dynamic_entity_world
+/* 59EFF8 80218918 0C048C56 */  jal       create_generic_entity_world
 /* 59EFFC 8021891C 0000202D */   daddu    $a0, $zero, $zero
 /* 59F000 80218920 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 59F004 80218924 24020002 */  addiu     $v0, $zero, 2

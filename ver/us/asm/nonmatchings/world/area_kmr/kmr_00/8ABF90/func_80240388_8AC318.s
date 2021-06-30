@@ -4,7 +4,7 @@
 glabel func_80240388_8AC318
 /* 8AC318 80240388 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 8AC31C 8024038C AFBF0010 */  sw        $ra, 0x10($sp)
-/* 8AC320 80240390 0C04760B */  jal       func_8011D82C
+/* 8AC320 80240390 0C04760B */  jal       mdl_set_all_fog_mode
 /* 8AC324 80240394 24040003 */   addiu    $a0, $zero, 3
 /* 8AC328 80240398 3C038015 */  lui       $v1, %hi(D_801512F0)
 /* 8AC32C 8024039C 8C6312F0 */  lw        $v1, %lo(D_801512F0)($v1)

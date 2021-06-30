@@ -1,6 +1,6 @@
 #include "common.h"
 
-void title_draw_copyright(f32);
+void title_screen_draw_copyright(f32);
 
 s16 D_800779C0[] = {0, 0};
 s32 D_800779C4 = 0;
@@ -47,46 +47,46 @@ extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32 D_800A0980;
 
-INCLUDE_ASM(s32, "121f0_len_1290", begin_state_title_screen);
+INCLUDE_ASM(s32, "121f0_len_1290", state_init_title_screen);
 
-INCLUDE_ASM(s32, "121f0_len_1290", step_title_screen);
+INCLUDE_ASM(s32, "121f0_len_1290", state_step_title_screen);
 
-void func_800375A4(void) {
+void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->loadMenuState) {
         case 0:
             D_80077A28 = 0;
             D_80077A2C = 0;
             D_80077A30 = 0;
-            func_80037960();
+            draw_title_screen_NOP();
             break;
         case 2:
-            func_80037960();
+            draw_title_screen_NOP();
             if (gGameStatusPtr->contBitPattern & 1) {
-                title_draw_press_start();
+                title_screen_draw_press_start();
             }
         default:
             break;
         case 1:
         case 4:
         case 5:
-            func_80037960();
+            draw_title_screen_NOP();
             break;
     }
 }
 
-INCLUDE_ASM(s32, "121f0_len_1290", title_append_gfx);
+INCLUDE_ASM(s32, "121f0_len_1290", appendGfx_title_screen);
 
-void func_80037960(void) {
+void draw_title_screen_NOP(void) {
 }
 
-void title_draw_images(f32 arg0, f32 arg1) {
-    title_draw_logo();
-    title_draw_copyright(arg1);
+void title_screen_draw_images(f32 arg0, f32 arg1) {
+    title_screen_draw_logo();
+    title_screen_draw_copyright(arg1);
 }
 
-INCLUDE_ASM(void, "121f0_len_1290", title_draw_logo);
+INCLUDE_ASM(void, "121f0_len_1290", title_screen_draw_logo);
 
-void title_draw_press_start(void) {
+void title_screen_draw_press_start(void) {
     switch (D_80077A2C) {
         case 0:
             D_80077A28 -= 128;
@@ -130,7 +130,7 @@ void title_draw_press_start(void) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-void title_draw_copyright(f32 arg0) {
+void title_screen_draw_copyright(f32 arg0) {
     s32 alpha;
     s32 i;
 

@@ -50,7 +50,7 @@ glabel func_802BEA24_31CA44
 /* 31CAF0 802BEAD0 AE220000 */   sw       $v0, ($s1)
 /* 31CAF4 802BEAD4 0C039769 */  jal       set_action_state
 /* 31CAF8 802BEAD8 0000202D */   daddu    $a0, $zero, $zero
-/* 31CAFC 802BEADC 0C03BD17 */  jal       clear_partner_move_history
+/* 31CAFC 802BEADC 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31CB00 802BEAE0 0220202D */   daddu    $a0, $s1, $zero
 /* 31CB04 802BEAE4 0C00EB6B */  jal       disable_npc_blur
 /* 31CB08 802BEAE8 0220202D */   daddu    $a0, $s1, $zero

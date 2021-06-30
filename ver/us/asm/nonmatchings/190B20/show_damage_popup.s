@@ -50,7 +50,7 @@ glabel show_damage_popup
 /* 194F30 80266650 44071000 */  mfc1      $a3, $f2
 /* 194F34 80266654 0000202D */  daddu     $a0, $zero, $zero
 /* 194F38 80266658 AFA2001C */  sw        $v0, 0x1c($sp)
-/* 194F3C 8026665C 0C01C0F4 */  jal       func_800703D0
+/* 194F3C 8026665C 0C01C0F4 */  jal       playFX_1E
 /* 194F40 80266660 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 194F44 80266664 24020028 */  addiu     $v0, $zero, 0x28
 /* 194F48 80266668 3C018029 */  lui       $at, %hi(D_8029390C)

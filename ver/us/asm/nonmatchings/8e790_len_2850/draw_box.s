@@ -2216,7 +2216,7 @@ glabel draw_box
 /* 90820 800F7370 01CF0018 */  mult      $t6, $t7
 /* 90824 800F7374 AFB80198 */  sw        $t8, 0x198($sp)
 /* 90828 800F7378 00009012 */  mflo      $s2
-/* 9082C 800F737C 0C0475F9 */  jal       func_8011D7E4
+/* 9082C 800F737C 0C0475F9 */  jal       mdl_get_next_texture_address
 /* 90830 800F7380 00122040 */   sll      $a0, $s2, 1
 /* 90834 800F7384 0040402D */  daddu     $t0, $v0, $zero
 /* 90838 800F7388 8FB80198 */  lw        $t8, 0x198($sp)

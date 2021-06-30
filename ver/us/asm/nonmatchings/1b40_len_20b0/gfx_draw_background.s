@@ -520,7 +520,7 @@ glabel gfx_draw_background
 /* 39CC 800285CC 0800A177 */  j         .L800285DC
 /* 39D0 800285D0 ACA30004 */   sw       $v1, 4($a1)
 .L800285D4:
-/* 39D4 800285D4 0C0517B0 */  jal       enable_background_wave
+/* 39D4 800285D4 0C0517B0 */  jal       appendGfx_background_texture
 /* 39D8 800285D8 00000000 */   nop
 .L800285DC:
 /* 39DC 800285DC 3C04E300 */  lui       $a0, 0xe300

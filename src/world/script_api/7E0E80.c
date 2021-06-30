@@ -11,22 +11,22 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall);
 ApiStatus ShowShopPurchaseDialog(ScriptInstance* script, s32 isInitialCall);
 ApiStatus ShowShopOwnerDialog(ScriptInstance* script, s32 isInitialCall);
 
-s32 D_80283E80_7E4D00[] = { 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+s32 ShopBeginSpeech[] = { 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-s32 D_80283EB0_7E4D30[] = { 0x00000043, 0x00000006, ContinueSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+s32 ShopContinueSpeech[] = { 0x00000043, 0x00000006, ContinueSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-s32 D_80283EE0_7E4D60[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+s32 ShopResetSpeech[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0x00000043, 0x00000006, SpeakToPlayer, 0xFE363C81, 0xFE363C82, 0xFE363C83, 0x00000000, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-s32 D_80283F2C_7E4DAC[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C80, 0xFE363C81, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+s32 ShopEndSpeech[] = { 0x00000043, 0x00000005, EndSpeech, 0xFE363C80, 0xFE363C81, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
 s32 D_80283F58_7E4DD8[] = { 0x00000043, 0x00000002, GetCurrentPartner, 0xFE363C81, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000000, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000002, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x0000000A, 0x00000002, 0xFE363C81, 0x00000003, 0x00000004, 0x00000001, 0x0000000A, 0x00000013, 0x00000000, 0x00000002, 0x00000000, 0x00000003, 0x00000001, 0x0000000A, 0x00000043, 0x00000001, func_802803C8, 0x0000000A, 0x00000002, 0xFE363C82, 0x00000000, 0x00000002, 0x00000000, 0x00000013, 0x00000000, 0x00000043, 0x00000002, func_80280410, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
-s32 D_80284034_7E4EB4[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
+s32 BadgeShopInteract[] = { 0x00000043, 0x00000002, ShowShopPurchaseDialog, 0xFE363C80, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000043, 0x00000001, ShowShopOwnerDialog, 0x00000002, 0x00000000, 0x00000001, 0x00000000, };
 
 s32 shop_owner_begin_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
-    ScriptInstance* script = start_script(&D_80283E80_7E4D00, 1, 0);
+    ScriptInstance* script = start_script(&ShopBeginSpeech, 1, 0);
 
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
@@ -56,7 +56,7 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
         set_message_string(phi_a0, 2);
     }
 
-    script = start_script(&D_80283E80_7E4D00, 1, 0);
+    script = start_script(&ShopBeginSpeech, 1, 0);
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
@@ -68,7 +68,7 @@ s32 shop_owner_buy_dialog(s32 messageIndex, s32 itemName, s32 coinCost, s32 bpCo
 s32 shop_owner_continue_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
-    ScriptInstance* script = start_script(&D_80283EB0_7E4D30, 1, 0);
+    ScriptInstance* script = start_script(&ShopContinueSpeech, 1, 0);
 
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
@@ -94,7 +94,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
 
     set_message_string(phi_a0, 1);
 
-    script = start_script(&D_80283EB0_7E4D30, 1, 0);
+    script = start_script(&ShopContinueSpeech, 1, 0);
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
@@ -106,7 +106,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
 s32 shop_owner_reset_speech(s32 messageIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
     s32 shopStringID = shop->owner->shopStringIDs[messageIndex];
-    ScriptInstance* script = start_script(&D_80283EE0_7E4D60, 1, 0);
+    ScriptInstance* script = start_script(&ShopResetSpeech, 1, 0);
 
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
@@ -118,7 +118,7 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
 
 s32 shop_owner_end_speech(void) {
     Shop* shop = gGameStatusPtr->mapShop;
-    ScriptInstance* script = start_script(&D_80283F2C_7E4DAC, 1, 0);
+    ScriptInstance* script = start_script(&ShopEndSpeech, 1, 0);
 
     script->varTable[0] = shop->owner->npcID;
     script->varTable[1] = shop->owner->talkAnim;
@@ -165,7 +165,7 @@ ApiStatus func_80280410(ScriptInstance* script, s32 isInitialCall) {
             disable_player_input();
             disable_player_static_collisions();
 
-            childScript = start_script(&D_80284034_7E4EB4, 1, 0);
+            childScript = start_script(&BadgeShopInteract, 1, 0);
             childScript->varTable[0] = currentItemSlot;
             D_80286520 = childScript;
             D_80286524 = childScript->id;
@@ -255,7 +255,7 @@ s32 shop_update_item_select_popup(s32* selectedIndex) {
         return 0;
     }
 
-    func_800F13B0();
+    hide_popup_menu();
 
     if (menuResult == 0xFF) {
         *selectedIndex = -1;
@@ -267,7 +267,7 @@ s32 shop_update_item_select_popup(s32* selectedIndex) {
 }
 
 void shop_close_item_select_popup(void) {
-    func_800F1538();
+    destroy_popup_menu();
     func_800E9900();
     func_800E98C4();
     close_status_menu();
@@ -300,19 +300,19 @@ void shop_draw_item_name(s32 arg0, s32 posX, s32 posY) {
     StaticInventoryItem* siItem = &shop->staticInventory[shop->currentItemSlot];
     StaticItem* item = &gItemTable[siItem->unk_00];
 
-    draw_msg(item->nameString, posX + 60 - (get_string_width(item->nameString, 0) >> 1), posY + 6, 255, 0, 0);
+    draw_string(item->nameString, posX + 60 - (get_string_width(item->nameString, 0) >> 1), posY + 6, 255, 0, 0);
 }
 
 void shop_draw_item_desc(s32 arg0, s32 posX, s32 posY) {
     Shop* shop = gGameStatusPtr->mapShop;
     StaticInventoryItem* item = &shop->staticInventory[shop->currentItemSlot];
 
-    draw_msg(item->unk_08, posX + 8, posY, 255, 0xA, 0);
+    draw_string(item->unk_08, posX + 8, posY, 255, 0xA, 0);
 }
 
 // Problems with the struct iteration
 #ifdef NON_MATCHING
-void shop_draw_items(void) {
+void draw_shop_items(void) {
     Shop* shop = gGameStatusPtr->mapShop;
     StaticInventoryItem* staticItems;
     Camera* camera;
@@ -365,9 +365,9 @@ void shop_draw_items(void) {
                 }
 
                 if (i == shop->currentItemSlot) {
-                    set_icon_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
+                    set_hud_element_render_pos(shop->costIconID, (xTemp + xOffset) - 6, yTemp + 5);
                     set_hud_element_scale(shop->costIconID, 0.7f);
-                    draw_icon_0(shop->costIconID);
+                    draw_hud_element_clipped(shop->costIconID);
                 }
             }
         }
@@ -381,7 +381,7 @@ void shop_draw_items(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "world/script_api/7E0E80", shop_draw_items);
+INCLUDE_ASM(s32, "world/script_api/7E0E80", draw_shop_items);
 #endif
 
 INCLUDE_ASM(ApiStatus, "world/script_api/7E0E80", MakeShop, ScriptInstance* script, s32 isInitialCall);

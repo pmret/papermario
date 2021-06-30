@@ -44,7 +44,7 @@ glabel func_80240310_C6CC30
 /* C6CCC8 802403A8 8E050048 */  lw        $a1, 0x48($s0)
 /* C6CCCC 802403AC 8E06004C */  lw        $a2, 0x4c($s0)
 /* C6CCD0 802403B0 8E070050 */  lw        $a3, 0x50($s0)
-/* C6CCD4 802403B4 0C01C1CC */  jal       func_80070730
+/* C6CCD4 802403B4 0C01C1CC */  jal       playFX_27
 /* C6CCD8 802403B8 24040001 */   addiu    $a0, $zero, 1
 .L802403BC:
 /* C6CCDC 802403BC 8E220070 */  lw        $v0, 0x70($s1)

@@ -12,15 +12,15 @@ glabel func_802A94A4_425A34
 /* 425A50 802A94C0 14400004 */  bnez      $v0, .L802A94D4
 /* 425A54 802A94C4 0060882D */   daddu    $s1, $v1, $zero
 /* 425A58 802A94C8 8C640004 */  lw        $a0, 4($v1)
-/* 425A5C 802A94CC 0C0511EA */  jal       draw_icon_0
+/* 425A5C 802A94CC 0C0511EA */  jal       draw_hud_element_clipped
 /* 425A60 802A94D0 00000000 */   nop
 .L802A94D4:
 /* 425A64 802A94D4 8E300008 */  lw        $s0, 8($s1)
-/* 425A68 802A94D8 0C0511EA */  jal       draw_icon_0
+/* 425A68 802A94D8 0C0511EA */  jal       draw_hud_element_clipped
 /* 425A6C 802A94DC 0200202D */   daddu    $a0, $s0, $zero
 /* 425A70 802A94E0 0200202D */  daddu     $a0, $s0, $zero
 /* 425A74 802A94E4 27A50010 */  addiu     $a1, $sp, 0x10
-/* 425A78 802A94E8 0C05126B */  jal       get_icon_render_pos
+/* 425A78 802A94E8 0C05126B */  jal       get_hud_element_render_pos
 /* 425A7C 802A94EC 27A60014 */   addiu    $a2, $sp, 0x14
 /* 425A80 802A94F0 3C0451EB */  lui       $a0, 0x51eb
 /* 425A84 802A94F4 96230044 */  lhu       $v1, 0x44($s1)

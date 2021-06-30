@@ -38,7 +38,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
 
     if (enable) {
         disable_player_input();
-        func_800EF628();
+        partner_disable_input();
         close_status_menu();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
@@ -47,7 +47,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
         gOverrideFlags |= 0x40;
     } else {
         enable_player_input();
-        func_800EF600();
+        partner_enable_input();
         func_800E01DC();
         gOverrideFlags &= ~0x40;
         func_800E983C();
@@ -260,7 +260,7 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
             } else {
                 animID = 0x90005;
             }
-            func_800DFEFC(animID);
+            suggest_player_anim_clearUnkFlag(animID);
             sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
         }
         script->functionTemp[0].s = 1;
@@ -281,7 +281,7 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
         } else {
             animID = 0x90005;
         }
-        func_800DFEFC(animID);
+        suggest_player_anim_clearUnkFlag(animID);
     }
 
     playerStatus->position.x = playerNpc->pos.x;
@@ -307,14 +307,14 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
             } else {
                 animID = 0x10003;
             }
-            func_800DFEFC(animID);
+            suggest_player_anim_clearUnkFlag(animID);
             func_8003D660(playerNpc, 2);
         }
 
         if (mode == 0 || mode == 2) {
             s32 colliderID;
 
-            yTemp = func_800E3514(playerNpc->jumpVelocity, &colliderID);
+            yTemp = player_check_collision_below(playerNpc->jumpVelocity, &colliderID);
 
             if (colliderID >= 0) {
                 playerStatus->position.y = yTemp;
@@ -540,7 +540,7 @@ ApiStatus UseExitHeading(ScriptInstance* script, s32 isInitialCall) {
     MapConfig* mapConfig = get_current_map_header();
     f32* varTableVar5 = &script->varTable[5];
 
-    if (func_800E26C4()) {
+    if (can_trigger_loading_zone()) {
         s32 var1 = get_variable(script, *args++);
         s32 entryID = get_variable(script, *args++);
         f32 entryX = (*mapConfig->entryList)[entryID].x;
@@ -827,7 +827,7 @@ ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-void func_802D2D30(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
+void virtual_entity_appendGfx_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
     gDPPipeSync(gMasterGfxPos++);
 
     if (a == 0xFF) {
@@ -844,14 +844,14 @@ void func_802D2D30(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bot
     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 }
 
-void func_802D2ED4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void virtual_entity_render_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     u16 temp1 = arg4 + arg6;
     u16 temp2 = arg5 + arg7;
 
-    func_802D2D30(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
+    virtual_entity_appendGfx_quad(arg0, arg1, arg2, arg3, arg4, arg5, temp1, temp2);
 }
 
-void func_802D2F34(VirtualEntity* virtualEntity, f32 arg1, f32 arg2) {
+void virtual_entity_move_polar(VirtualEntity* virtualEntity, f32 arg1, f32 arg2) {
     f32 theta = (arg2 * TAU) / 360.0f;
     f32 sinTheta = sin_rad(theta);
     f32 cosTheta = cos_rad(theta);
@@ -860,7 +860,7 @@ void func_802D2F34(VirtualEntity* virtualEntity, f32 arg1, f32 arg2) {
     virtualEntity->pos.z += -arg1 * cosTheta;
 }
 
-void func_802D2FCC(void) {
+void virtual_entity_list_update(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
@@ -872,11 +872,11 @@ void func_802D2FCC(void) {
     }
 }
 
-INCLUDE_ASM(void, "evt/player_api", func_802D3028, void);
+INCLUDE_ASM(void, "evt/player_api", virtual_entity_list_render_world, void);
 
-INCLUDE_ASM(s32, "evt/player_api", func_802D31E0);
+INCLUDE_ASM(s32, "evt/player_api", virtual_entity_list_render_UI);
 
-ApiStatus func_802D3398(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus InitVirtualEntityList(ScriptInstance* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
         D_802DB7C0 = &D_802DB6C0;
     } else {
@@ -885,7 +885,7 @@ ApiStatus func_802D3398(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntityAt(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     u32* cmdList = (u32*)get_variable(script, *args++);
@@ -906,7 +906,7 @@ ApiStatus func_802D33D4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32* unkStructPtr = (s32*)get_variable(script, *args++);
@@ -941,7 +941,7 @@ ApiStatus func_802D3474(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntity_ALT(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32* unkStructPtr = (s32*)get_variable(script, *args++);
@@ -976,7 +976,7 @@ ApiStatus func_802D354C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DeleteVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
 
     free_entity_model_by_index(virtualEntity->entityModelIndex);
@@ -984,7 +984,7 @@ ApiStatus func_802D3624(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3674(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRenderCommands(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     u32* commandList = (u32*)get_variable(script, *args++);
@@ -993,7 +993,7 @@ ApiStatus func_802D3674(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1007,7 +1007,7 @@ ApiStatus func_802D36E0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
@@ -1021,7 +1021,7 @@ ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1035,7 +1035,7 @@ ApiStatus func_802D3840(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1049,7 +1049,7 @@ ApiStatus func_802D38EC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3998(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityMoveSpeed(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
 
@@ -1057,7 +1057,7 @@ ApiStatus func_802D3998(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D39FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityJumpGravity(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
 
@@ -1065,7 +1065,7 @@ ApiStatus func_802D39FC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3A60(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -1109,7 +1109,7 @@ ApiStatus func_802D3A60(ScriptInstance* script, s32 isInitialCall) {
     }
 
     virtualEntity = (*D_802DB7C0)[script->functionTemp[1].s];
-    func_802D2F34(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
+    virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
     virtualEntity->moveTime--;
 
     if (virtualEntity->moveTime <= 0.0f) {
@@ -1123,7 +1123,7 @@ ApiStatus func_802D3A60(ScriptInstance* script, s32 isInitialCall) {
 
 // float bs
 #ifdef NON_MATCHING
-ApiStatus func_802D3C58(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
     s32 index;
@@ -1182,7 +1182,7 @@ ApiStatus func_802D3C58(ScriptInstance* script, s32 isInitialCall) {
     virtualEntity->pos.y += virtualEntity->jumpVelocity;
     virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
 
-    func_802D2F34(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
+    virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
 
     virtualEntity->moveTime -= 1.0f;
     if (virtualEntity->moveTime <= 0.0f) {
@@ -1195,10 +1195,10 @@ ApiStatus func_802D3C58(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D3C58, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", VirtualEntityJumpTo, ScriptInstance* script, s32 isInitialCall);
 #endif
 
-ApiStatus func_802D3EB8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityLandJump(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -1215,7 +1215,7 @@ ApiStatus func_802D3EB8(ScriptInstance* script, s32 isInitialCall) {
     virtualEntity->pos.y += virtualEntity->jumpVelocity;
     virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
 
-    func_802D2F34(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
+    virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
 
     if (virtualEntity->pos.y < 0.0f) {
         virtualEntity->pos.y = 0.0f;
@@ -1225,7 +1225,7 @@ ApiStatus func_802D3EB8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityFlags(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
@@ -1234,7 +1234,7 @@ ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityFlagBits(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
@@ -1250,7 +1250,7 @@ ApiStatus func_802D3FC8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D4050(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRenderMode(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -1287,11 +1287,11 @@ ApiStatus func_802D4050(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-VirtualEntity* func_802D4164(s32 index) {
+VirtualEntity* virtual_entity_get_by_index(s32 index) {
     return (*D_802DB7C0)[index];
 }
 
-VirtualEntity* func_802D417C(s32 index, s32* entityModelData) {
+VirtualEntity* virtual_entity_create_at_index(s32 index, s32* entityModelData) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->entityModelIndex = load_entity_model(entityModelData);
@@ -1309,7 +1309,7 @@ VirtualEntity* func_802D417C(s32 index, s32* entityModelData) {
     return (*D_802DB7C0)[index];
 }
 
-s32 func_802D420C(s32* cmdList) {
+s32 virtual_entity_create(s32* cmdList) {
     s32 i;
     VirtualEntity* virtualEntity;
 
@@ -1340,7 +1340,7 @@ s32 func_802D420C(s32* cmdList) {
     return i;
 }
 
-VirtualEntity* func_802D42AC(s32* cmdList) {
+VirtualEntity* ALT_virtual_entity_create(s32* cmdList) {
     s32 i;
     VirtualEntity* virtualEntity;
 
@@ -1371,7 +1371,7 @@ VirtualEntity* func_802D42AC(s32* cmdList) {
     return (*D_802DB7C0)[i];
 }
 
-void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
+void virtual_entity_set_pos(s32 index, s32 arg1, s32 arg2, s32 arg3) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->pos.x = arg1;
@@ -1379,7 +1379,7 @@ void func_802D4364(s32 index, s32 arg1, s32 arg2, s32 arg3) {
     virtualEntity->pos.z = arg3;
 }
 
-void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
+void virtual_entity_set_scale(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->scale.x = arg1;
@@ -1387,7 +1387,7 @@ void func_802D43AC(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     virtualEntity->scale.z = arg3;
 }
 
-void func_802D43D0(s32 index, f32 arg1, f32 arg2, f32 arg3) {
+void virtual_entity_set_rotation(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     virtualEntity->rot.x = arg1;
@@ -1395,25 +1395,25 @@ void func_802D43D0(s32 index, f32 arg1, f32 arg2, f32 arg3) {
     virtualEntity->rot.z = arg3;
 }
 
-void func_802D43F4(s32 index) {
+void virtual_entity_delete_by_index(s32 index) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
 
     free_entity_model_by_index(virtualEntity->entityModelIndex);
     virtualEntity->entityModelIndex = -1;
 }
 
-void func_802D4434(VirtualEntity* arg0) {
+void virtual_entity_delete_by_ref(VirtualEntity* arg0) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*D_802DB7C0); i++) {
         if ((*D_802DB7C0)[i] == arg0) {
-            func_802D43F4(i);
+            virtual_entity_delete_by_index(i);
             return;
         }
     }
 }
 
-void func_802D4488(void) {
+void clear_virtual_entity_list(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
@@ -1428,11 +1428,11 @@ void func_802D4488(void) {
         (*D_802DB7C0)[i]->entityModelIndex = -1;
     }
 
-    create_dynamic_entity_world(func_802D2FCC, func_802D3028);
-    create_dynamic_entity_backUI(NULL, func_802D31E0);
+    create_generic_entity_world(virtual_entity_list_update, virtual_entity_list_render_world);
+    create_generic_entity_backUI(NULL, virtual_entity_list_render_UI);
 }
 
-void func_802D4560(void) {
+void init_virtual_entity_list(void) {
     if (!gGameStatusPtr->isBattle) {
         D_802DB7C0 = &D_802DB6C0;
     } else {

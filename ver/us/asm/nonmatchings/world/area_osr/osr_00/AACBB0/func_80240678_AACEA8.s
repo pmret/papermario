@@ -22,7 +22,7 @@ glabel func_80240678_AACEA8
 /* AACEEC 802406BC 30C600FF */  andi      $a2, $a2, 0xff
 /* AACEF0 802406C0 30E700FF */  andi      $a3, $a3, 0xff
 /* AACEF4 802406C4 AFA30010 */  sw        $v1, 0x10($sp)
-/* AACEF8 802406C8 0C046FE6 */  jal       func_8011BF98
+/* AACEF8 802406C8 0C046FE6 */  jal       set_model_env_color_parameters
 /* AACEFC 802406CC AFA20014 */   sw       $v0, 0x14($sp)
 /* AACF00 802406D0 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AACF04 802406D4 24020002 */  addiu     $v0, $zero, 2

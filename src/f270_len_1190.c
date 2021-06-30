@@ -93,14 +93,14 @@ void state_init_logos(void) {
     gCameras[0].lookAt_eye.z = 1500.0f;
     gCameras[0].unk_5C = 150.0f;
     clear_script_list();
-    clear_dynamic_entity_list();
-    func_8011D890();
+    clear_generic_entity_list();
+    clear_render_tasks();
     spr_init_sprites(0);
-    func_8011E224();
+    clear_animator_list();
     clear_entity_models();
-    npc_list_clear();
-    func_80141100();
-    use_default_background_settings();
+    clear_npcs();
+    clear_hud_element_cache();
+    reset_background_settings();
     clear_entity_data(1);
     clear_effect_data();
     gOverrideFlags |= 0x2;
@@ -195,7 +195,7 @@ void state_step_logos(void) {
                 break;
         }
     }
-    npc_list_update();
+    update_npcs();
     update_cameras();
     intro_logos_update_fade();
 }
@@ -299,8 +299,8 @@ void state_step_pause(void) {
 
     switch (D_800A0921) {
         case 0:
-            update_counters();
-            npc_list_update();
+            update_encounters();
+            update_npcs();
             update_player();
             update_effects();
             if (D_8009A658[1] == D_8009A64C) {
@@ -328,20 +328,20 @@ void state_step_pause(void) {
                     allocate_hit_tables();
                     battle_heap_create();
                     nuContRmbForceStop();
-                    func_80149670(0);
+                    sfx_clear_env_sounds(0);
                     spr_init_sprites(0);
                     clear_model_data();
-                    func_80148040();
-                    use_default_background_settings();
+                    clear_sprite_shading_data();
+                    reset_background_settings();
                     clear_entity_models();
-                    func_8011E224();
-                    clear_dynamic_entity_list();
-                    func_801452E8(_3169F0_VRAM, 0x38000);
-                    func_80141100();
+                    clear_animator_list();
+                    clear_generic_entity_list();
+                    set_hud_element_nonworld_cache(_3169F0_VRAM, 0x38000);
+                    clear_hud_element_cache();
                     reset_status_menu();
                     clear_item_entity_data();
                     clear_script_list();
-                    npc_list_clear();
+                    clear_npcs();
                     clear_entity_data(0);
                     clear_trigger_data();
                     D_800A0924 = func_80149828();
@@ -411,23 +411,23 @@ void state_step_unpause(void) {
                         func_8005AF84();
                         func_8002ACDC();
                         nuContRmbForceStopEnd();
-                        func_80149670(1);
+                        sfx_clear_env_sounds(1);
                         spr_init_sprites(gGameStatusPtr->playerSpriteSet);
                         init_model_data();
-                        func_801480F0();
+                        init_sprite_shading_data();
                         init_entity_models();
-                        func_8011E310();
-                        init_dynamic_entity_list();
-                        func_801452E8(0, 0);
-                        init_menu_icon_list();
+                        reset_animator_list();
+                        init_generic_entity_list();
+                        set_hud_element_nonworld_cache(0, 0);
+                        init_hud_element_list();
                         init_item_entity_list();
                         init_script_list();
-                        npc_list_update_current();
+                        init_npc_list();
                         func_80110E58();
                         init_trigger_list();
                         func_801497FC(D_800A0924);
                         bgm_reset_max_volume();
-                        load_world_script_api();
+                        load_map_script_lib();
                         assetData = load_asset_by_name(&D_800D9230, &assetSize);
                         decode_yay0(assetData, &D_80210000);
                         general_heap_free(assetData);
@@ -447,7 +447,7 @@ void state_step_unpause(void) {
 
                         gGameStatusPtr->unk_15C = gGameStatusPtr->unk_15E;
                         calculate_model_sizes();
-                        func_8003B1B0();
+                        npc_reload_all();
                         set_windows_visible(0);
                         func_800E98C4();
                         set_time_freeze_mode(1);
@@ -455,8 +455,8 @@ void state_step_unpause(void) {
                         gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;
                         D_802D9D71 = D_802D9D70 + 1;
 
-                        update_counters();
-                        npc_list_update();
+                        update_encounters();
+                        update_npcs();
                         update_player();
                         update_effects();
 
@@ -469,8 +469,8 @@ void state_step_unpause(void) {
             }
             break;
         case 3:
-            update_counters();
-            npc_list_update();
+            update_encounters();
+            update_npcs();
             update_player();
             update_effects();
 
@@ -485,8 +485,8 @@ void state_step_unpause(void) {
             break;
         case 4:
             set_time_freeze_mode(0);
-            update_counters();
-            npc_list_update();
+            update_encounters();
+            update_npcs();
             update_player();
             update_effects();
             enable_player_input();

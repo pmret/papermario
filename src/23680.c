@@ -128,7 +128,7 @@ s32 func_800493EC(Enemy* enemy, s32 arg1, f32 arg2, f32 arg3) {
     return 0;
 }
 
-void func_800494C0(Npc* npc, s32 arg1, s32 arg2) {
+void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2) {
     Enemy* enemy = get_enemy(npc->npcID);
     s32 value2 = (arg2 & 0xFFFF0000) | 2;
 
@@ -165,7 +165,7 @@ void func_80049E3C(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    func_800494C0(npc, 0x3E1, 0);
+    ai_enemy_play_sound(npc, 0x3E1, 0);
     npc->currentAnim.w = enemy->animList[4];
     npc->jumpVelocity = 10.0f;
     npc->jumpScale = 2.5f;

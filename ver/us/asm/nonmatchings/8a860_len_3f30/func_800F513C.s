@@ -91,11 +91,11 @@ glabel func_800F513C
 /* 8E730 800F5280 3C018011 */  lui       $at, %hi(D_8010D691)
 /* 8E734 800F5284 A022D691 */  sb        $v0, %lo(D_8010D691)($at)
 /* 8E738 800F5288 24020002 */  addiu     $v0, $zero, 2
-/* 8E73C 800F528C 3C04800F */  lui       $a0, %hi(func_800F1A10)
-/* 8E740 800F5290 24841A10 */  addiu     $a0, $a0, %lo(func_800F1A10)
+/* 8E73C 800F528C 3C04800F */  lui       $a0, %hi(popup_menu_update)
+/* 8E740 800F5290 24841A10 */  addiu     $a0, $a0, %lo(popup_menu_update)
 /* 8E744 800F5294 3C018011 */  lui       $at, %hi(D_8010D692)
 /* 8E748 800F5298 A022D692 */  sb        $v0, %lo(D_8010D692)($at)
-/* 8E74C 800F529C 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* 8E74C 800F529C 0C048C8F */  jal       create_generic_entity_frontUI
 /* 8E750 800F52A0 0000282D */   daddu    $a1, $zero, $zero
 /* 8E754 800F52A4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 8E758 800F52A8 8FB00010 */  lw        $s0, 0x10($sp)

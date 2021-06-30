@@ -5,7 +5,7 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     parallel {
         sleep 5;
-        UseCamPreset(2);
+        UseBattleCamPreset(2);
         MoveBattleCamOver(20);
     }
     N(FadeBackgroundToBlack)();
@@ -31,7 +31,7 @@ Script N(main) = SCRIPT({
     if (SI_VAR(0) != -1) {
         goto 0;
     }
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     sleep 30;

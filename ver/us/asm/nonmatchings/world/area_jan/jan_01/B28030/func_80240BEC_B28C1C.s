@@ -50,7 +50,7 @@ glabel func_80240BEC_B28C1C
 /* B28CD0 80240CA0 46800020 */  cvt.s.w   $f0, $f0
 /* B28CD4 80240CA4 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* B28CD8 80240CA8 8E640080 */  lw        $a0, 0x80($s3)
-/* B28CDC 80240CAC 0C037711 */  jal       func_800DDC44
+/* B28CDC 80240CAC 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* B28CE0 80240CB0 27A70030 */   addiu    $a3, $sp, 0x30
 /* B28CE4 80240CB4 10400003 */  beqz      $v0, .L80240CC4
 /* B28CE8 80240CB8 00000000 */   nop
@@ -86,7 +86,7 @@ glabel func_80240BEC_B28C1C
 /* B28D58 80240D28 E7A60038 */  swc1      $f6, 0x38($sp)
 /* B28D5C 80240D2C AFB20010 */  sw        $s2, 0x10($sp)
 /* B28D60 80240D30 8E640080 */  lw        $a0, 0x80($s3)
-/* B28D64 80240D34 0C0372DF */  jal       func_800DCB7C
+/* B28D64 80240D34 0C0372DF */  jal       npc_raycast_down_sides
 /* B28D68 80240D38 0220382D */   daddu    $a3, $s1, $zero
 /* B28D6C 80240D3C 0200282D */  daddu     $a1, $s0, $zero
 /* B28D70 80240D40 27A6002C */  addiu     $a2, $sp, 0x2c
@@ -113,7 +113,7 @@ glabel func_80240BEC_B28C1C
 /* B28DC4 80240D94 E7A00038 */  swc1      $f0, 0x38($sp)
 /* B28DC8 80240D98 AFB20010 */  sw        $s2, 0x10($sp)
 /* B28DCC 80240D9C 8E640080 */  lw        $a0, 0x80($s3)
-/* B28DD0 80240DA0 0C0372DF */  jal       func_800DCB7C
+/* B28DD0 80240DA0 0C0372DF */  jal       npc_raycast_down_sides
 /* B28DD4 80240DA4 0220382D */   daddu    $a3, $s1, $zero
 /* B28DD8 80240DA8 1040003D */  beqz      $v0, .L80240EA0
 /* B28DDC 80240DAC 00000000 */   nop
@@ -138,7 +138,7 @@ glabel func_80240BEC_B28C1C
 /* B28E28 80240DF8 8E650038 */  lw        $a1, 0x38($s3)
 /* B28E2C 80240DFC 8E66003C */  lw        $a2, 0x3c($s3)
 /* B28E30 80240E00 8E670040 */  lw        $a3, 0x40($s3)
-/* B28E34 80240E04 0C01BECC */  jal       fx_walk_normal
+/* B28E34 80240E04 0C01BECC */  jal       fx_walk
 /* B28E38 80240E08 24040002 */   addiu    $a0, $zero, 2
 /* B28E3C 80240E0C 02E0202D */  daddu     $a0, $s7, $zero
 /* B28E40 80240E10 2402000C */  addiu     $v0, $zero, 0xc

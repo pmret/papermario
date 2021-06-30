@@ -120,7 +120,7 @@ glabel func_80240AF8_E05E58
 /* E06010 80240CB0 8E250008 */  lw        $a1, 8($s1)
 /* E06014 80240CB4 8E260000 */  lw        $a2, ($s1)
 /* E06018 80240CB8 8E27000C */  lw        $a3, 0xc($s1)
-/* E0601C 80240CBC 0C04BA38 */  jal       func_8012E8E0
+/* E0601C 80240CBC 0C04BA38 */  jal       msg_get_glyph
 /* E06020 80240CC0 3C140001 */   lui      $s4, 1
 /* E06024 80240CC4 92A2000A */  lbu       $v0, 0xa($s5)
 /* E06028 80240CC8 3C013FE0 */  lui       $at, 0x3fe0

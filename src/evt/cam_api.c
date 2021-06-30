@@ -475,7 +475,7 @@ INCLUDE_ASM(s32, "evt/cam_api", AdjustCam, ScriptInstance* script, s32 isInitial
 
 INCLUDE_ASM(s32, "evt/cam_api", ResetCam, ScriptInstance* script, s32 isInitialCall);
 
-void func_802CCAC0(void) {
+void update_animated_models(void) {
     s32 i;
 
     for (i = 0; i < MAX_ANIMATED_MODELS; i++) {
@@ -487,9 +487,9 @@ void func_802CCAC0(void) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", draw_anim_models);
+INCLUDE_ASM(s32, "evt/cam_api", render_animated_models);
 
-ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus InitAnimatedModels(ScriptInstance* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
@@ -499,14 +499,14 @@ ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus LoadModelAnimation(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus LoadAnimatedModel(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
-    s32 animModelID = func_8011E4B8(0);
+    s32 animModelID = create_model_animator(0);
 
-    func_801203AC(animModelID, var1);
+    load_model_animator_tree(animModelID, var1);
     animModel->animModelID = animModelID;
     animModel->pos.x = 0;
     animModel->pos.y = 0;
@@ -523,14 +523,14 @@ ApiStatus LoadModelAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CCDAC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus LoadAnimatedMesh(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
     AnimatedModel* animModel = (*gCurrentMeshAnimationListPtr)[index];
-    s32 animModelID = func_8011E4B8(0);
+    s32 animModelID = create_model_animator(0);
 
-    func_80120474(animModelID, var1);
+    load_mesh_animator_tree(animModelID, var1);
     animModel->animModelID = animModelID;
     animModel->pos.x = 0;
     animModel->pos.y = 0;
@@ -559,7 +559,7 @@ ApiStatus PlayModelAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CCEDC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayModelAnimationStartingFrom(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -567,7 +567,7 @@ ApiStatus func_802CCEDC(ScriptInstance* script, s32 isInitialCall) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[index];
 
     model->currentAnimData = var2;
-    func_80120198(model->animModelID, var2, var3);
+    play_model_animation_starting_from(model->animModelID, var2, var3);
 
     return ApiStatus_DONE2;
 }
@@ -587,7 +587,7 @@ ApiStatus ChangeModelAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetAnimatedModelRootPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -602,7 +602,7 @@ ApiStatus SetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetAnimatedModelRootPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 outX = *args++;
@@ -617,7 +617,7 @@ ApiStatus GetAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AddAnimatedModelRootPosition(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -632,7 +632,7 @@ ApiStatus AddAnimModelPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimModelRotation(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetAnimatedModelRootRotation(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -647,7 +647,7 @@ ApiStatus SetAnimModelRotation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetAnimModelScale(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetAnimatedModelRootScale(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -662,29 +662,29 @@ ApiStatus SetAnimModelScale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CD348(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetAnimatedModelRenderMode(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 renderMode = get_float_variable(script, *args++);
 
-    get_anim_mesh((*gCurrentMeshAnimationListPtr)[index]->animModelID)->renderMode = renderMode;
+    get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID)->renderMode = renderMode;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CD3C0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DeleteAnimatedModel(ScriptInstance* script, s32 isInitialCall) {
     AnimatedModel* model = (*gCurrentMeshAnimationListPtr)[get_variable(script, *script->ptrReadPos)];
 
-    func_8011E438(get_anim_mesh(model->animModelID));
+    delete_model_animator(get_animator_by_index(model->animModelID));
     model->animModelID = -1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetAnimatorFlags(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 a1 = *args++;
     s32 enable = get_variable(script, *args++);
-    AnimatedMesh* animMesh = get_anim_mesh((*gCurrentMeshAnimationListPtr)[index]->animModelID);
+    AnimatedMesh* animMesh = get_animator_by_index((*gCurrentMeshAnimationListPtr)[index]->animModelID);
 
     if (enable) {
         animMesh->flags |= a1;
@@ -695,9 +695,9 @@ ApiStatus func_802CD418(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD4B4);
+INCLUDE_ASM(s32, "evt/cam_api", reset_model_animators);
 
-void func_802CD57C(void) {
+void init_model_animators(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentMeshAnimationListPtr = &gWorldMeshAnimationList;
     } else {
@@ -705,12 +705,12 @@ void func_802CD57C(void) {
     }
 }
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD5C0);
+INCLUDE_ASM(s32, "evt/cam_api", GetAnimatedNodePosition);
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD6E0);
+INCLUDE_ASM(s32, "evt/cam_api", GetAnimatedNodeRotation);
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD7D8);
+INCLUDE_ASM(s32, "evt/cam_api", GetAnimatedPositionByTreeIndex);
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD8F8);
+INCLUDE_ASM(s32, "evt/cam_api", GetAnimatedRotationByTreeIndex);
 
-INCLUDE_ASM(s32, "evt/cam_api", func_802CD9F0);
+INCLUDE_ASM(s32, "evt/cam_api", SetAnimatedNodeFlags);

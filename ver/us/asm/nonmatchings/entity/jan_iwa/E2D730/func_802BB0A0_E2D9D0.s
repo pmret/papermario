@@ -109,7 +109,7 @@ glabel func_802BB0A0_E2D9D0
 /* E2DB2C 802BB1FC 00000000 */  nop
 /* E2DB30 802BB200 45000003 */  bc1f      .L802BB210
 /* E2DB34 802BB204 00000000 */   nop
-/* E2DB38 802BB208 0C043F5A */  jal       exec_entity_updatecmd
+/* E2DB38 802BB208 0C043F5A */  jal       exec_entity_commandlist
 /* E2DB3C 802BB20C 0220202D */   daddu    $a0, $s1, $zero
 .L802BB210:
 /* E2DB40 802BB210 8FBF001C */  lw        $ra, 0x1c($sp)

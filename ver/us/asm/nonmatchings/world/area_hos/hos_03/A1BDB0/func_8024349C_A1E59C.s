@@ -26,7 +26,7 @@ glabel func_8024349C_A1E59C
 /* A1E5EC 802434EC 00000000 */  nop
 .L802434F0:
 /* A1E5F0 802434F0 00A0302D */  daddu     $a2, $a1, $zero
-/* A1E5F4 802434F4 0C01C5A4 */  jal       func_80071690
+/* A1E5F4 802434F4 0C01C5A4 */  jal       playFX_50
 /* A1E5F8 802434F8 00A0382D */   daddu    $a3, $a1, $zero
 .L802434FC:
 /* A1E5FC 802434FC 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -19,7 +19,7 @@
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024031C_879EFC);
 /*
 ApiStatus N(func_8024031C_879EFC)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -31,7 +31,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802404AC_87A08C);
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802406FC_87A2DC);
 /*
 ApiStatus N(func_802406FC_87A2DC)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -67,7 +67,7 @@ ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;
             userDataPtr->unk_20[i] = save;

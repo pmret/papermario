@@ -5,32 +5,32 @@
 #include "map.h" // TODO move npc-related structs here
 
 /// The default Npc::onUpdate and Npc::onRender callback.
-void npc_callback_no_op(void);
+void STUB_npc_callback(void);
 
 void npc_dyn_entity_draw_no_op(void);
 
-void npc_mtx_ident_mirror_y(Matrix4f mtx);
+void mtx_ident_mirror_y(Matrix4f mtx);
 
-void npc_list_clear(void);
+void clear_npcs(void);
 
 /// Points the current NPC list to the world or battle lists depending on game state.
-void npc_list_update_current(void);
+void init_npc_list(void);
 
 /// Iterates over the NPC list, doing absolutely nothing.
 /// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void);
 
-s32 npc_create(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAnims);
+s32 _create_npc(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAnims);
 
-s32 npc_create_basic(NpcBlueprint* blueprint);
+s32 _create_npc_basic(NpcBlueprint* blueprint);
 
-void npc_create_standard(NpcBlueprint* blueprint, NpcAnimID** animList);
+void _create_npc_standard(NpcBlueprint* blueprint, NpcAnimID** animList);
 
-void npc_create_partner(NpcBlueprint* blueprint);
+void _create_npc_partner(NpcBlueprint* blueprint);
 
-void npc_free_by_index(s32 listIndex);
+void free_npc_by_index(s32 listIndex);
 
-void npc_free(Npc* npc);
+void free_npc(Npc* npc);
 
 Npc* get_npc_by_index(s32 listIndex);
 
@@ -46,14 +46,14 @@ void npc_do_gravity(Npc* npc);
 s32 func_800397E8();
 
 /// Updates all NPCs.
-void npc_list_update(void);
+void update_npcs(void);
 
-f32 func_80039DA4();
+f32 npc_get_render_yaw();
 
-void npc_appendGfx(Npc* npc);
+void appendGfx_npc(Npc* npc);
 
 /// Renders all NPCs.
-void npc_list_render(void);
+void render_npcs(void);
 
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 
@@ -70,82 +70,82 @@ void update_npc_blur(Npc* npc);
 
 void appendGfx_npc_blur(Npc* npc);
 
-void func_8003B184(void);
+void npc_enable_collisions(void);
 
-void func_8003B198(void);
+void npc_disable_collisions(void);
 
 void func_8003B1A8(void);
 
-void func_8003B1B0(void);
+void npc_reload_all(void);
 
 void set_npc_yaw(Npc* npc, f32 yaw);
 
-void func_8003B3D0(Npc* npc, s32 arg1);
+void npc_set_palswap_mode_A(Npc* npc, s32 arg1);
 
-void func_8003B3F8(Npc* npc, s32 arg1);
+void npc_set_palswap_mode_B(Npc* npc, s32 arg1);
 
 void func_8003B420(Npc* npc);
 
-s32 func_8003B44C();
+s32 npc_set_palswap_1();
 
-s32 func_8003B464();
+s32 npc_set_palswap_2();
 
-void func_8003B47C(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2);
 
-void func_8003B500(Npc* npc, s32 arg1, s32 arg2);
+void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, s32 arg2);
 
-s32 func_8003B5B4();
+s32 npc_draw_palswap_mode_1();
 
-s32 func_8003B96C();
+s32 npc_blend_palette_colors();
 
-s32 func_8003BA60();
+s32 npc_draw_palswap_mode_2();
 
-s32 func_8003BED8();
+s32 npc_draw_palswap_mode_4();
 
-void func_8003C3D8(Npc* npc, s32 idx, s32 decorationType);
+void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType);
 
-void func_8003C428(Npc* npc, s32 idx);
+void npc_remove_decoration(Npc* npc, s32 idx);
 
 s32 npc_update_decorations(Npc* npc);
 
-void func_8003C53C(Npc* npc, s32 idx);
+void npc__remove_decoration(Npc* npc, s32 idx);
 
-void func_8003C61C(Npc* npc, s32 idx);
+void npc_reset_current_decoration(Npc* npc, s32 idx);
 
-void func_8003C658(Npc* npc, s32 idx);
+void npc_update_decoration_none(Npc* npc, s32 idx);
 
-void func_8003C660(Npc* npc, s32 idx);
+void npc_remove_decoration_none(Npc* npc, s32 idx);
 
-void func_8003C668(Npc* npc, s32 idx);
+void npc_update_decoration_bowser_aura(Npc* npc, s32 idx);
 
-void func_8003C78C(Npc* npc, s32 idx);
+void npc_remove_decoration_bowser_aura(Npc* npc, s32 idx);
 
-void func_8003C7A8(Npc* npc, s32 idx);
+void npc_update_decoration_sweat(Npc* npc, s32 idx);
 
-void func_8003C8AC(Npc* npc, s32 idx);
+void npc_remove_decoration_sweat(Npc* npc, s32 idx);
 
-void func_8003C8B4(Npc* npc, s32 idx);
+void npc_update_decoration_seeing_stars(Npc* npc, s32 idx);
 
-void func_8003C984(Npc* npc, s32 idx);
+void npc_remove_decoration_seeing_stars(Npc* npc, s32 idx);
 
-void func_8003C9A8(Npc* npc, s32 idx);
+void npc_update_decoration_glow_in_front(Npc* npc, s32 idx);
 
-void func_8003CB20(Npc* npc, s32 idx);
+void npc_remove_decoration_glow_in_front(Npc* npc, s32 idx);
 
-void func_8003CB44(Npc* npc, s32 idx);
+void npc_update_decoration_glow_behind(Npc* npc, s32 idx);
 
-void func_8003CC8C(Npc* npc, s32 idx);
+void npc_remove_decoration_glow_behind(Npc* npc, s32 idx);
 
-void func_8003CCB0(Npc* npc, s32 idx);
+void npc_update_decoration_charged(Npc* npc, s32 idx);
 
-void func_8003CFA0(Npc* npc, s32 idx);
+void npc_remove_decoration_charged(Npc* npc, s32 idx);
 
-void func_8003CFA8(Npc* npc, s32 idx);
+void npc__reset_current_decoration(Npc* npc, s32 idx);
 
 /// Finds the closest NPC to a given point within a radius. Ignores Y position.
 ///
 /// NPCs with NPC_FLAG_PARTICLE set are ignored.
-/// See also npc_find_near_simple(), which requires that NPC_FLAG_PARTICLE be set.
+/// See also npc_find_closest_simple(), which requires that NPC_FLAG_PARTICLE be set.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -153,12 +153,12 @@ void func_8003CFA8(Npc* npc, s32 idx);
 /// @param radius   No NPCs further than this distance will be considered
 ///
 /// @returns NULL if there are no NPCs within radius
-Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius);
+Npc* npc_find_closest(f32 x, f32 y, f32 z, f32 radius);
 
 /// Finds the closest simple-hitbox NPC to a given point within a radius. Ignores Y position.
 ///
 /// Only NPCs with NPC_FLAG_PARTICLE set are considered.
-/// See also npc_find_near(), which requires that NPC_FLAG_PARTICLE be unset.
+/// See also npc_find_closest(), which requires that NPC_FLAG_PARTICLE be unset.
 ///
 /// @param x        X position
 /// @param y        Y position (unused)
@@ -166,11 +166,11 @@ Npc* npc_find_near(f32 x, f32 y, f32 z, f32 radius);
 /// @param radius   No NPCs further than this distance will be considered
 ///
 /// @returns NULL if there are no NPCs within radius
-Npc* npc_find_near_simple(f32 x, f32 y, f32 z, f32 radius);
+Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius);
 
-//s32 func_8003D1D4();
+//s32 npc_find_standing_on_entity();
 
-s32 func_8003D2F8(Npc* npc);
+s32 npc_get_collider_below(Npc* npc);
 
 void func_8003D3BC(Npc* npc);
 
@@ -193,7 +193,7 @@ s32 func_8003E1D0();
 /// Duplicate of set_defeated().
 void COPY_set_defeated(s32 mapID, s32 encounterID);
 
-void func_8003E338(void);
+void init_encounter_status(void);
 
 void clear_encounter_status(void);
 
@@ -201,7 +201,7 @@ void func_8003E50C(void);
 
 void func_8003E514(s8 arg0);
 
-void update_counters(void);
+void update_encounters(void);
 
 void draw_encounter_ui(void);
 

@@ -62,7 +62,7 @@ glabel pause_partners_init
 /* 13F4F0 8024C1B0 0220282D */  daddu     $a1, $s1, $zero
 /* 13F4F4 8024C1B4 8E240000 */  lw        $a0, ($s1)
 /* 13F4F8 8024C1B8 26310010 */  addiu     $s1, $s1, 0x10
-/* 13F4FC 8024C1BC 0C0B783B */  jal       func_802DE0EC
+/* 13F4FC 8024C1BC 0C0B783B */  jal       spr_load_npc_sprite
 /* 13F500 8024C1C0 26100001 */   addiu    $s0, $s0, 1
 /* 13F504 8024C1C4 AE420000 */  sw        $v0, ($s2)
 /* 13F508 8024C1C8 2A020008 */  slti      $v0, $s0, 8
@@ -76,11 +76,11 @@ glabel pause_partners_init
 .L8024C1E8:
 /* 13F528 8024C1E8 8E240000 */  lw        $a0, ($s1)
 /* 13F52C 8024C1EC 26310004 */  addiu     $s1, $s1, 4
-/* 13F530 8024C1F0 0C050529 */  jal       create_icon
+/* 13F530 8024C1F0 0C050529 */  jal       create_hud_element
 /* 13F534 8024C1F4 26100001 */   addiu    $s0, $s0, 1
 /* 13F538 8024C1F8 0040202D */  daddu     $a0, $v0, $zero
 /* 13F53C 8024C1FC 24050080 */  addiu     $a1, $zero, 0x80
-/* 13F540 8024C200 0C051280 */  jal       set_icon_flags
+/* 13F540 8024C200 0C051280 */  jal       set_hud_element_flags
 /* 13F544 8024C204 AE440000 */   sw       $a0, ($s2)
 /* 13F548 8024C208 2A020008 */  slti      $v0, $s0, 8
 /* 13F54C 8024C20C 1440FFF6 */  bnez      $v0, .L8024C1E8

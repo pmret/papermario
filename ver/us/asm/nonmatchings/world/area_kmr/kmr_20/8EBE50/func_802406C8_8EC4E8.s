@@ -141,7 +141,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC6D0 802408B0 8E82007C */  lw        $v0, 0x7c($s4)
 /* 8EC6D4 802408B4 3C048025 */  lui       $a0, %hi(D_80253060)
 /* 8EC6D8 802408B8 24843060 */  addiu     $a0, $a0, %lo(D_80253060)
-/* 8EC6DC 802408BC 0C03D390 */  jal       func_800F4E40
+/* 8EC6DC 802408BC 0C03D390 */  jal       btl_create_popup_menu
 /* 8EC6E0 802408C0 AC820328 */   sw       $v0, 0x328($a0)
 /* 8EC6E4 802408C4 0C03A631 */  jal       func_800E98C4
 /* 8EC6E8 802408C8 00000000 */   nop
@@ -159,7 +159,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC714 802408F4 8442338C */  lh        $v0, %lo(D_8025338C)($v0)
 /* 8EC718 802408F8 1040007C */  beqz      $v0, .L80240AEC
 /* 8EC71C 802408FC AE820078 */   sw       $v0, 0x78($s4)
-/* 8EC720 80240900 0C03C4EC */  jal       func_800F13B0
+/* 8EC720 80240900 0C03C4EC */  jal       hide_popup_menu
 /* 8EC724 80240904 00000000 */   nop
 /* 8EC728 80240908 8E820074 */  lw        $v0, 0x74($s4)
 /* 8EC72C 8024090C 24420001 */  addiu     $v0, $v0, 1
@@ -168,7 +168,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC734 80240914 2842000F */  slti      $v0, $v0, 0xf
 /* 8EC738 80240918 14400075 */  bnez      $v0, .L80240AF0
 /* 8EC73C 8024091C 0000102D */   daddu    $v0, $zero, $zero
-/* 8EC740 80240920 0C03C54E */  jal       func_800F1538
+/* 8EC740 80240920 0C03C54E */  jal       destroy_popup_menu
 /* 8EC744 80240924 00000000 */   nop
 /* 8EC748 80240928 8E830078 */  lw        $v1, 0x78($s4)
 /* 8EC74C 8024092C 240200FF */  addiu     $v0, $zero, 0xff
@@ -278,7 +278,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC8E0 80240AC0 8FA70010 */  lw        $a3, 0x10($sp)
 /* 8EC8E4 80240AC4 3C058024 */  lui       $a1, %hi(func_802405BC_8EC3DC)
 /* 8EC8E8 80240AC8 24A505BC */  addiu     $a1, $a1, %lo(func_802405BC_8EC3DC)
-/* 8EC8EC 80240ACC 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* 8EC8EC 80240ACC 0C048C8F */  jal       create_generic_entity_frontUI
 /* 8EC8F0 80240AD0 AE270024 */   sw       $a3, 0x24($s1)
 /* 8EC8F4 80240AD4 3C018026 */  lui       $at, %hi(D_8025B2A8)
 /* 8EC8F8 80240AD8 AC22B2A8 */  sw        $v0, %lo(D_8025B2A8)($at)

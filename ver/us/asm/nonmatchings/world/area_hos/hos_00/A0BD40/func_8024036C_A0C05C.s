@@ -123,7 +123,7 @@ glabel func_8024036C_A0C05C
 /* A0C234 80240544 E7B60010 */  swc1      $f22, 0x10($sp)
 /* A0C238 80240548 E7BE0014 */  swc1      $f30, 0x14($sp)
 /* A0C23C 8024054C E7A0001C */  swc1      $f0, 0x1c($sp)
-/* A0C240 80240550 0C01BF8C */  jal       func_8006FE30
+/* A0C240 80240550 0C01BF8C */  jal       playFX_0F
 /* A0C244 80240554 E7B40018 */   swc1     $f20, 0x18($sp)
 /* A0C248 80240558 24020002 */  addiu     $v0, $zero, 2
 .L8024055C:

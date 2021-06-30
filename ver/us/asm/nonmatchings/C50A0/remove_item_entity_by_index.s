@@ -29,7 +29,7 @@ glabel remove_item_entity_by_index
 /* CA140 80133A40 00400008 */  jr        $v0
 /* CA144 80133A44 00000000 */   nop
 glabel L80133A48_CA148
-/* CA148 80133A48 0C0448CA */  jal       func_80112328
+/* CA148 80133A48 0C0448CA */  jal       delete_shadow
 /* CA14C 80133A4C 84640020 */   lh       $a0, 0x20($v1)
 glabel L80133A50_CA150
 /* CA150 80133A50 3C118015 */  lui       $s1, %hi(D_801565A0)

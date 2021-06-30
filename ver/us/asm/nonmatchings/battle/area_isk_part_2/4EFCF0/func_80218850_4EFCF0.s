@@ -21,7 +21,7 @@ glabel func_80218850_4EFCF0
 /* 4EFD30 80218890 24420740 */  addiu     $v0, $v0, %lo(D_80220740)
 /* 4EFD34 80218894 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4EFD38 80218898 AFA20014 */  sw        $v0, 0x14($sp)
-/* 4EFD3C 8021889C 0C01C124 */  jal       func_80070490
+/* 4EFD3C 8021889C 0C01C124 */  jal       playFX_20
 /* 4EFD40 802188A0 E7B40010 */   swc1     $f20, 0x10($sp)
 /* 4EFD44 802188A4 24040001 */  addiu     $a0, $zero, 1
 /* 4EFD48 802188A8 3C054301 */  lui       $a1, 0x4301
@@ -30,7 +30,7 @@ glabel func_80218850_4EFCF0
 /* 4EFD54 802188B4 3C028022 */  lui       $v0, %hi(D_80220744)
 /* 4EFD58 802188B8 24420744 */  addiu     $v0, $v0, %lo(D_80220744)
 /* 4EFD5C 802188BC E7B40010 */  swc1      $f20, 0x10($sp)
-/* 4EFD60 802188C0 0C01C124 */  jal       func_80070490
+/* 4EFD60 802188C0 0C01C124 */  jal       playFX_20
 /* 4EFD64 802188C4 AFA20014 */   sw       $v0, 0x14($sp)
 /* 4EFD68 802188C8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4EFD6C 802188CC D7B80030 */  ldc1      $f24, 0x30($sp)

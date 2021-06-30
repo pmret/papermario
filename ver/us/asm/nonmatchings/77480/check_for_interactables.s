@@ -110,7 +110,7 @@ glabel L800E08F8_79DA8
 /* 79E3C 800E098C 0803826A */  j         .L800E09A8
 /* 79E40 800E0990 00000000 */   nop
 .L800E0994:
-/* 79E44 800E0994 0C0394BE */  jal       can_player_interact
+/* 79E44 800E0994 0C0394BE */  jal       phys_can_player_interact
 /* 79E48 800E0998 00000000 */   nop
 /* 79E4C 800E099C 14400008 */  bnez      $v0, L800E09C0_79E70
 /* 79E50 800E09A0 24120001 */   addiu    $s2, $zero, 1
@@ -166,7 +166,7 @@ glabel L800E09C0_79E70
 /* 79F00 800E0A50 00000000 */   nop
 /* 79F04 800E0A54 0C03BCF5 */  jal       func_800EF3D4
 /* 79F08 800E0A58 0000202D */   daddu    $a0, $zero, $zero
-/* 79F0C 800E0A5C 0C03BCE9 */  jal       reset_partner_tether_distance
+/* 79F0C 800E0A5C 0C03BCE9 */  jal       repartner_set_tether_distance
 /* 79F10 800E0A60 00000000 */   nop
 /* 79F14 800E0A64 080382AD */  j         .L800E0AB4
 /* 79F18 800E0A68 00000000 */   nop

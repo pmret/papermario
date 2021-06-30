@@ -329,7 +329,7 @@ glabel func_80116698
 /* AD254 80116B54 2A420004 */  slti      $v0, $s2, 4
 /* AD258 80116B58 1440FF77 */  bnez      $v0, .L80116938
 /* AD25C 80116B5C 00000000 */   nop
-/* AD260 80116B60 0C046F3B */  jal       func_8011BCEC
+/* AD260 80116B60 0C046F3B */  jal       build_custom_gfx
 /* AD264 80116B64 00000000 */   nop
 /* AD268 80116B68 8FBF00D0 */  lw        $ra, 0xd0($sp)
 /* AD26C 80116B6C 8FB500CC */  lw        $s5, 0xcc($sp)

@@ -41,7 +41,7 @@ glabel func_802402CC_BCEEBC
 /* BCEF44 80240354 00000000 */  nop
 /* BCEF48 80240358 46800020 */  cvt.s.w   $f0, $f0
 /* BCEF4C 8024035C 46020000 */  add.s     $f0, $f0, $f2
-/* BCEF50 80240360 0C00A64D */  jal       func_80029934
+/* BCEF50 80240360 0C00A64D */  jal       rand_float
 /* BCEF54 80240364 E600003C */   swc1     $f0, 0x3c($s0)
 /* BCEF58 80240368 46000000 */  add.s     $f0, $f0, $f0
 /* BCEF5C 8024036C 3C014000 */  lui       $at, 0x4000

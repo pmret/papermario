@@ -30,7 +30,7 @@ options:
   # src_path: src
   # build_path: build
   # extensions_path: tools/splat_ext
-  # section_order: [.text, .data, .rodata, .bss]
+  # auto_all_sections: True
 """.lstrip()
 
     with open(rom_path, "rb") as f:

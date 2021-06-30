@@ -21,7 +21,7 @@ glabel func_802B6000_E24040
 /* E24080 802B6040 AE020000 */  sw        $v0, ($s0)
 /* E24084 802B6044 E600003C */  swc1      $f0, 0x3c($s0)
 /* E24088 802B6048 E6020040 */  swc1      $f2, 0x40($s0)
-/* E2408C 802B604C 0C038BD8 */  jal       func_800E2F60
+/* E2408C 802B604C 0C038BD8 */  jal       phys_init_integrator_for_current_state
 /* E24090 802B6050 E604004C */   swc1     $f4, 0x4c($s0)
 /* E24094 802B6054 8E030004 */  lw        $v1, 4($s0)
 /* E24098 802B6058 3C108016 */  lui       $s0, %hi(gCollisionStatus)
@@ -39,7 +39,7 @@ glabel func_802B6000_E24040
 /* E240C4 802B6084 3C040001 */  lui       $a0, 1
 /* E240C8 802B6088 34840007 */  ori       $a0, $a0, 7
 .L802B608C:
-/* E240CC 802B608C 0C037FBF */  jal       func_800DFEFC
+/* E240CC 802B608C 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E240D0 802B6090 00000000 */   nop
 /* E240D4 802B6094 96030002 */  lhu       $v1, 2($s0)
 /* E240D8 802B6098 2402FFFF */  addiu     $v0, $zero, -1

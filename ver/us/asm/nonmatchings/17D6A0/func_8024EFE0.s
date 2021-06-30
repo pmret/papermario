@@ -47,7 +47,7 @@ glabel func_8024EFE0
 /* 17D964 8024F084 46200000 */  add.d     $f0, $f0, $f0
 /* 17D968 8024F088 462005A0 */  cvt.s.d   $f22, $f0
 .L8024F08C:
-/* 17D96C 8024F08C 0C093BDA */  jal       create_popup
+/* 17D96C 8024F08C 0C093BDA */  jal       btl_create_popup
 /* 17D970 8024F090 00000000 */   nop
 /* 17D974 8024F094 0040802D */  daddu     $s0, $v0, $zero
 /* 17D978 8024F098 120000AD */  beqz      $s0, .L8024F350

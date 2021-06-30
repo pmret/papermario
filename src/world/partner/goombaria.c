@@ -11,9 +11,9 @@ ApiStatus GoombariaTakeOut(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EECC4(owner);
+        partner_init_get_out(owner);
     }
-    return func_800EECE8(owner) != 0;
+    return partner_get_out(owner) != 0;
 }
 
 ApiStatus GoombariaUpdate(ScriptInstance* script, s32 isInitialCall) {
@@ -21,11 +21,11 @@ ApiStatus GoombariaUpdate(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        enable_partner_walking(owner, TRUE);
+        partner_walking_enable(owner, TRUE);
     }
 
-    func_800EBA3C(owner);
-    func_800EBB40(owner);
+    partner_walking_update_player_tracking(owner);
+    partner_walking_update_motion(owner);
     playerData->unk_2F4[PARTNER_GOOMBARIA]++;
 
     return ApiStatus_BLOCK;
@@ -39,9 +39,9 @@ ApiStatus GoombariaPutAway(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EE994(owner);
+        partner_init_put_away(owner);
     }
-    return func_800EE9B8(owner) != 0;
+    return partner_put_away(owner) != 0;
 }
 
 Script world_goombaria_take_out = SCRIPT({

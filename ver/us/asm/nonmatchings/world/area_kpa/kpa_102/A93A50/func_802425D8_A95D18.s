@@ -164,7 +164,7 @@ glabel func_802425D8_A95D18
 /* A95F7C 8024283C 44820000 */  mtc1      $v0, $f0
 /* A95F80 80242840 00000000 */  nop
 /* A95F84 80242844 46800020 */  cvt.s.w   $f0, $f0
-/* A95F88 80242848 0C0376B9 */  jal       func_800DDAE4
+/* A95F88 80242848 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* A95F8C 8024284C E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A95F90 80242850 50400014 */  beql      $v0, $zero, .L802428A4
 /* A95F94 80242854 24130002 */   addiu    $s3, $zero, 2

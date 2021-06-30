@@ -53,7 +53,7 @@ glabel RemoveActor
 /* 1AB140 8027C860 8C820008 */  lw        $v0, 8($a0)
 /* 1AB144 8027C864 9042001F */  lbu       $v0, 0x1f($v0)
 /* 1AB148 8027C868 00621821 */  addu      $v1, $v1, $v0
-/* 1AB14C 8027C86C 0C0902EF */  jal       delete_actor
+/* 1AB14C 8027C86C 0C0902EF */  jal       btl_delete_actor
 /* 1AB150 8027C870 A663000E */   sh       $v1, 0xe($s3)
 /* 1AB154 8027C874 24020002 */  addiu     $v0, $zero, 2
 /* 1AB158 8027C878 322300FF */  andi      $v1, $s1, 0xff

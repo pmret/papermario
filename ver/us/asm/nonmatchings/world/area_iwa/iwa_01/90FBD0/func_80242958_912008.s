@@ -47,7 +47,7 @@ glabel func_80242958_912008
 /* 9120B0 80242A00 8E06003C */  lw        $a2, 0x3c($s0)
 /* 9120B4 80242A04 8E050038 */  lw        $a1, 0x38($s0)
 /* 9120B8 80242A08 44071000 */  mfc1      $a3, $f2
-/* 9120BC 80242A0C 0C01BECC */  jal       fx_walk_normal
+/* 9120BC 80242A0C 0C01BECC */  jal       fx_walk
 /* 9120C0 80242A10 24040002 */   addiu    $a0, $zero, 2
 .L80242A14:
 /* 9120C4 80242A14 9602008E */  lhu       $v0, 0x8e($s0)

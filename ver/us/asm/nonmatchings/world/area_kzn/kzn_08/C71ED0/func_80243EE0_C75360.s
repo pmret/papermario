@@ -34,7 +34,7 @@ glabel func_80243EE0_C75360
 /* C753D0 80243F50 44063000 */  mfc1      $a2, $f6
 /* C753D4 80243F54 4600018D */  trunc.w.s $f6, $f0
 /* C753D8 80243F58 44073000 */  mfc1      $a3, $f6
-/* C753DC 80243F5C 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
+/* C753DC 80243F5C 0C04DFB0 */  jal       set_screen_overlay_center_worldpos
 /* C753E0 80243F60 0080282D */   daddu    $a1, $a0, $zero
 /* C753E4 80243F64 27A40028 */  addiu     $a0, $sp, 0x28
 /* C753E8 80243F68 27A50029 */  addiu     $a1, $sp, 0x29
@@ -49,7 +49,7 @@ glabel func_80243EE0_C75360
 /* C7540C 80243F8C 27A20030 */  addiu     $v0, $sp, 0x30
 /* C75410 80243F90 AFA2001C */  sw        $v0, 0x1c($sp)
 /* C75414 80243F94 27A20034 */  addiu     $v0, $sp, 0x34
-/* C75418 80243F98 0C046FC5 */  jal       func_8011BF14
+/* C75418 80243F98 0C046FC5 */  jal       get_model_fog_color_parameters
 /* C7541C 80243F9C AFA20020 */   sw       $v0, 0x20($sp)
 /* C75420 80243FA0 240203E3 */  addiu     $v0, $zero, 0x3e3
 /* C75424 80243FA4 8FA30030 */  lw        $v1, 0x30($sp)
@@ -86,7 +86,7 @@ glabel func_80243EE0_C75360
 /* C75498 80244018 45000007 */  bc1f      .L80244038
 /* C7549C 8024401C 00000000 */   nop
 /* C754A0 80244020 4405A000 */  mfc1      $a1, $f20
-/* C754A4 80244024 0C04E035 */  jal       set_transition_stencil_alpha
+/* C754A4 80244024 0C04E035 */  jal       set_screen_overlay_alpha
 /* C754A8 80244028 24040001 */   addiu    $a0, $zero, 1
 /* C754AC 8024402C 4405A000 */  mfc1      $a1, $f20
 /* C754B0 80244030 0809103C */  j         .L802440F0
@@ -140,11 +140,11 @@ glabel func_80243EE0_C75360
 /* C75558 802440D8 C6060070 */  lwc1      $f6, 0x70($s0)
 /* C7555C 802440DC 468031A0 */  cvt.s.w   $f6, $f6
 /* C75560 802440E0 44053000 */  mfc1      $a1, $f6
-/* C75564 802440E4 0C04E035 */  jal       set_transition_stencil_alpha
+/* C75564 802440E4 0C04E035 */  jal       set_screen_overlay_alpha
 /* C75568 802440E8 24040001 */   addiu    $a0, $zero, 1
 /* C7556C 802440EC 4405B000 */  mfc1      $a1, $f22
 .L802440F0:
-/* C75570 802440F0 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* C75570 802440F0 0C04DF69 */  jal       set_screen_overlay_params_back
 /* C75574 802440F4 2404000B */   addiu    $a0, $zero, 0xb
 /* C75578 802440F8 0000102D */  daddu     $v0, $zero, $zero
 /* C7557C 802440FC 8FBF0044 */  lw        $ra, 0x44($sp)

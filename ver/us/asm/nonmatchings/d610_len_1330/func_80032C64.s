@@ -37,7 +37,7 @@ glabel func_80032C64
 /* E0E4 80032CE4 C62C0060 */  lwc1      $f12, 0x60($s1)
 /* E0E8 80032CE8 460E0380 */  add.s     $f14, $f0, $f14
 /* E0EC 80032CEC 8E260068 */  lw        $a2, 0x68($s1)
-/* E0F0 80032CF0 0C00C884 */  jal       func_80032210
+/* E0F0 80032CF0 0C00C884 */  jal       test_ray_zone
 /* E0F4 80032CF4 0240382D */   daddu    $a3, $s2, $zero
 /* E0F8 80032CF8 0040802D */  daddu     $s0, $v0, $zero
 /* E0FC 80032CFC 120000A1 */  beqz      $s0, .L80032F84
@@ -237,7 +237,7 @@ glabel func_80032C64
 /* E3D8 80032FD8 27A70040 */  addiu     $a3, $sp, 0x40
 /* E3DC 80032FDC 460E0380 */  add.s     $f14, $f0, $f14
 /* E3E0 80032FE0 4406D000 */  mfc1      $a2, $f26
-/* E3E4 80032FE4 0C00C884 */  jal       func_80032210
+/* E3E4 80032FE4 0C00C884 */  jal       test_ray_zone
 /* E3E8 80032FE8 4600E306 */   mov.s    $f12, $f28
 /* E3EC 80032FEC 0040802D */  daddu     $s0, $v0, $zero
 /* E3F0 80032FF0 120000DA */  beqz      $s0, .L8003335C

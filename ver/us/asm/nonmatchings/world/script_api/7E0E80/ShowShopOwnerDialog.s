@@ -538,7 +538,7 @@ glabel ShowShopOwnerDialog
 /* 7E21D0 80281350 24020049 */  addiu     $v0, $zero, 0x49
 .L80281354:
 /* 7E21D4 80281354 AE220070 */  sw        $v0, 0x70($s1)
-/* 7E21D8 80281358 0C049640 */  jal       load_string
+/* 7E21D8 80281358 0C049640 */  jal       msg_get_printer_for_string
 /* 7E21DC 8028135C AE200078 */   sw       $zero, 0x78($s1)
 /* 7E21E0 80281360 3C018028 */  lui       $at, %hi(D_80286538)
 /* 7E21E4 80281364 AC226538 */  sw        $v0, %lo(D_80286538)($at)

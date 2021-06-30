@@ -9,19 +9,19 @@ ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
 
-INCLUDE_ASM(s32, "C50A0", func_8012E9A0);
+INCLUDE_ASM(s32, "C50A0", draw_ci_image_with_clipping);
 
-INCLUDE_ASM(s32, "C50A0", func_8012EC94);
+INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
 
-INCLUDE_ASM(s32, "C50A0", func_8012F500);
+INCLUDE_ASM(s32, "C50A0", draw_tiled_image);
 
-INCLUDE_ASM(s32, "C50A0", func_8012FE10);
+INCLUDE_ASM(s32, "C50A0", integer_log);
 
-INCLUDE_ASM(s32, "C50A0", func_8012FE78);
+INCLUDE_ASM(s32, "C50A0", draw_adjustable_tiled_image);
 
-INCLUDE_ASM(s32, "C50A0", func_801309F0);
+INCLUDE_ASM(s32, "C50A0", sparkle_script_init);
 
-s32 next_sequence_step(ItemEntity* itemEntity) {
+s32 sparkle_script_step(ItemEntity* itemEntity) {
     s32* currentState = itemEntity->currentState;
 
     switch (*currentState++) {
@@ -60,10 +60,10 @@ s32 next_sequence_step(ItemEntity* itemEntity) {
     return 0;
 }
 
-void do_animation(ItemEntity* itemEntity) {
+void sparkle_script_update(ItemEntity* itemEntity) {
     itemEntity->framesLeft--;
     if (itemEntity->framesLeft <= 0) {
-        while (next_sequence_step(itemEntity) != 0) {
+        while (sparkle_script_step(itemEntity) != 0) {
 
         }
     }
@@ -75,9 +75,9 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
     return D_801565A0[itemEntityIndex];
 }
 
-INCLUDE_ASM(s32, "C50A0", func_80130F70);
+INCLUDE_ASM(s32, "C50A0", item_entity_disable_shadow);
 
-INCLUDE_ASM(s32, "C50A0", func_80130FAC);
+INCLUDE_ASM(s32, "C50A0", item_entity_enable_shadow);
 
 INCLUDE_ASM(s32, "C50A0", clear_item_entity_data);
 
@@ -94,7 +94,7 @@ void init_item_entity_list(void) {
     D_80155D84 = 0;
 }
 
-INCLUDE_ASM(s32, "C50A0", func_80131128);
+INCLUDE_ASM(s32, "C50A0", item_entity_load);
 
 s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
                      s32 pickupVar);
@@ -111,7 +111,7 @@ s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode,
 
 INCLUDE_ASM(s32, "C50A0", init_got_item);
 
-INCLUDE_ASM(s32, "C50A0", func_80131DD4);
+INCLUDE_ASM(s32, "C50A0", item_entity_update);
 
 INCLUDE_ASM(s32, "C50A0", update_item_entities);
 
@@ -131,7 +131,7 @@ INCLUDE_ASM(s32, "C50A0", func_80133A94);
 
 INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
 
-INCLUDE_ASM(s32, "C50A0", func_80133FC8);
+INCLUDE_ASM(s32, "C50A0", test_item_entity_position);
 
 void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = D_801565A0[index];

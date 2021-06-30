@@ -39,7 +39,7 @@ ApiStatus CreateNpc(ScriptInstance* script, s32 isInitialCall) {
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
 
-    npc = get_npc_by_index(npc_create_basic(&blueprint));
+    npc = get_npc_by_index(_create_npc_basic(&blueprint));
     npc->npcID = npcID;
     disable_npc_shadow(npc);
     return ApiStatus_DONE2;
@@ -53,7 +53,7 @@ ApiStatus DeleteNpc(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc_free(npc);
+    free_npc(npc);
     return ApiStatus_DONE2;
 }
 
@@ -713,7 +713,7 @@ ApiStatus ClearPartnerMoveHistory(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    clear_partner_move_history(npc);
+    partner_clear_player_tracking(npc);
     return ApiStatus_DONE2;
 }
 
@@ -811,7 +811,7 @@ s32 BringPartnerOut(ScriptInstance *script, s32 isInitialCall) {
         bpPointer->onUpdate = NULL;
         bpPointer->onRender = NULL;
 
-        D_802DAE44 = npc_create_basic(bpPointer);
+        D_802DAE44 = _create_npc_basic(bpPointer);
         npc = get_npc_by_index(D_802DAE44);
         npc->collisionRadius = 10;
         npc->collisionHeight = 10;
@@ -939,7 +939,7 @@ ApiStatus PutPartnerAway(ScriptInstance* script, s32 isInitialCall) {
         partner->currentAnim.w = gPartnerAnimations[D_802DAE40].anims[PARTNER_ANIM_FALL];
         partner->jumpVelocity = 0.0f;
         partner->pos.y = partner->moveToPos.y;
-        npc_free_by_index(D_802DAE44);
+        free_npc_by_index(D_802DAE44);
         get_npc_unsafe(-5)->npcID = NPC_PARTNER;
         return ApiStatus_DONE2;
     }
@@ -961,7 +961,7 @@ ApiStatus PartnerCanUseAbility(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PartnerIsFlying(ScriptInstance* script, s32 isInitialCall) {
     Bytecode arg0 = *script->ptrReadPos;
 
-    set_variable(script, arg0, is_current_partner_flying());
+    set_variable(script, arg0, partner_is_flying());
     return ApiStatus_DONE2;
 }
 
@@ -997,7 +997,7 @@ ApiStatus func_802CFE2C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcPaletteSwapMode(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
@@ -1007,11 +1007,11 @@ ApiStatus func_802CFE80(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003B3D0(npc, var1);
+    npc_set_palswap_mode_A(npc, var1);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CFEEC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcPaletteSwapLower(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
@@ -1024,11 +1024,11 @@ ApiStatus func_802CFEEC(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003B44C(npc, var1, var2, var3, var4);
+    npc_set_palswap_1(npc, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcPaletteSwapping(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     NpcID npcId = get_variable(script, *args++);
     Bytecode var1 = get_variable(script, *args++);
@@ -1045,12 +1045,12 @@ ApiStatus func_802CFFC0(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003B44C(npc, var1, var2, var3, var4);
-    func_8003B464(npc, var5, var6, var7, var8);
+    npc_set_palswap_1(npc, var1, var2, var3, var4);
+    npc_set_palswap_2(npc, var5, var6, var7, var8);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetNpcDecoration(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     NpcID npcID = get_variable(script, *ptrReadPos++);
     s32 value1 = get_variable(script, *ptrReadPos++);
@@ -1061,7 +1061,7 @@ ApiStatus SetNpcEffect(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003C3D8(npc, value1, value2);
+    npc_set_decoration(npc, value1, value2);
     return ApiStatus_DONE2;
 }
 

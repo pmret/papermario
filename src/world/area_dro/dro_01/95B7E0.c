@@ -452,7 +452,7 @@ Script N(main) = SCRIPT({
             MakeNpcs(0, N(npcGroupList_8024B464));
         }
     }
-    func_802D3398();
+    InitVirtualEntityList();
     await N(makeEntities);
     MakeShop(N(shopItemPositions_8024BA68), N(shopInventory_8024B4FC), N(shopPriceList_8024B550), 0);
     MakeShopOwner(N(shopOwnerNPC_8024BA80));
@@ -1212,7 +1212,7 @@ s32 N(D_802477E4_9629E4) = {
 
 Script N(802477E8) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1230,7 +1230,7 @@ Script N(802477E8) = SCRIPT({
         }
     }
     N(func_80242784_95D984)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -1253,7 +1253,7 @@ Script N(8024797C) = SCRIPT({
 
 Script N(802479FC) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1296,7 +1296,7 @@ Script N(802479FC) = SCRIPT({
         }
     }
     N(func_80242784_95D984)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -2983,7 +2983,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -3127,11 +3127,11 @@ ApiStatus N(func_80241BE0_95CDE0)(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024DFE0) = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024DFE0) = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)));
-        N(D_8024DFE4) = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024DFE4) = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)));
-        N(D_8024DFE8) = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024DFE8) = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = N(D_8024DFE0)->unk_0C;
@@ -3175,7 +3175,7 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance* script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024DFE0), effectPtr);
-        free_dynamic_entity(N(D_8024DFC0));
+        free_generic_entity(N(D_8024DFC0));
         return ApiStatus_DONE2;
     }
 
@@ -3240,14 +3240,14 @@ void N(func_80242468_95D668)(void) {
     s32 var = get_variable(NULL, N(D_8024DFD8));
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 
 ApiStatus N(func_802424D4_95D6D4)(ScriptInstance* script, s32 isInitialCall) {
-    N(D_8024DFC0) = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
+    N(D_8024DFC0) = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 
@@ -3333,7 +3333,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
     ptr = script->functionTemp[1].s;
     switch (ptr->unk_20) {
         case 0:
-            res = func_800E0088(ptr->unk_00, ptr->unk_08);
+            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
             if (res < ptr->unk_0C) {
                 ptr->unk_24 = playerStatus->position.x;
                 ptr->unk_28 = playerStatus->position.z;
@@ -3342,7 +3342,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
             break;
 
         case 1:
-            res = func_800E0088(ptr->unk_00, ptr->unk_08);
+            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
             if (res < ptr->unk_0C) {
                 atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_24, ptr->unk_28);
                 atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
@@ -3355,7 +3355,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
             break;
 
         case 2:
-            res = func_800E0088(ptr->unk_00, ptr->unk_08);
+            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
             if (res < ptr->unk_0C) {
                 atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_2C, ptr->unk_30);
                 atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);
@@ -3378,7 +3378,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
             break;
 
         case 3:
-            res = func_800E0088(ptr->unk_00, ptr->unk_08);
+            res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);
             if (res < ptr->unk_10) {
                 atan_res1 = atan2(ptr->unk_00, ptr->unk_08, ptr->unk_2C, ptr->unk_30);
                 atan_res2 = atan2(ptr->unk_00, ptr->unk_08, playerStatus->position.x, playerStatus->position.z);

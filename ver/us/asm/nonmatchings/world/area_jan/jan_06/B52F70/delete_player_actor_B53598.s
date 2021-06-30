@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel delete_player_actor_B53598
+glabel btl_delete_player_actor_B53598
 /* B53598 80240D68 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* B5359C 80240D6C AFB40040 */  sw        $s4, 0x40($sp)
 /* B535A0 80240D70 0080A02D */  daddu     $s4, $a0, $zero
@@ -49,7 +49,7 @@ glabel delete_player_actor_B53598
 /* B53648 80240E18 E7A40018 */   swc1     $f4, 0x18($sp)
 /* B5364C 80240E1C 0200202D */  daddu     $a0, $s0, $zero
 /* B53650 80240E20 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* B53654 80240E24 0C012530 */  jal       func_800494C0
+/* B53654 80240E24 0C012530 */  jal       ai_enemy_play_sound
 /* B53658 80240E28 3C060020 */   lui      $a2, 0x20
 /* B5365C 80240E2C 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* B53660 80240E30 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)

@@ -141,7 +141,7 @@ glabel func_8021B9A8_6A2BA8
 /* 6A2DBC 8021BBBC 44820000 */  mtc1      $v0, $f0
 /* 6A2DC0 8021BBC0 00000000 */  nop
 /* 6A2DC4 8021BBC4 46800020 */  cvt.s.w   $f0, $f0
-/* 6A2DC8 8021BBC8 0C01C6F4 */  jal       func_80071BD0
+/* 6A2DC8 8021BBC8 0C01C6F4 */  jal       playFX_5E
 /* 6A2DCC 8021BBCC E7A00014 */   swc1     $f0, 0x14($sp)
 /* 6A2DD0 8021BBD0 24040100 */  addiu     $a0, $zero, 0x100
 /* 6A2DD4 8021BBD4 0C00A67F */  jal       rand_int

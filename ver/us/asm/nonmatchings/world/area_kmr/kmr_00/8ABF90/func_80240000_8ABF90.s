@@ -22,7 +22,7 @@ glabel func_80240000_8ABF90
 /* 8ABFD4 80240044 AFA20010 */  sw        $v0, 0x10($sp)
 /* 8ABFD8 80240048 3C028024 */  lui       $v0, %hi(D_802440E5)
 /* 8ABFDC 8024004C 244240E5 */  addiu     $v0, $v0, %lo(D_802440E5)
-/* 8ABFE0 80240050 0C046FF5 */  jal       func_8011BFD4
+/* 8ABFE0 80240050 0C046FF5 */  jal       get_model_env_color_parameters
 /* 8ABFE4 80240054 AFA20014 */   sw       $v0, 0x14($sp)
 /* 8ABFE8 80240058 8E050000 */  lw        $a1, ($s0)
 /* 8ABFEC 8024005C 26100004 */  addiu     $s0, $s0, 4
@@ -211,7 +211,7 @@ glabel func_80240000_8ABF90
 /* 8AC294 80240304 AFA90010 */  sw        $t1, 0x10($sp)
 /* 8AC298 80240308 01024021 */  addu      $t0, $t0, $v0
 /* 8AC29C 8024030C 310800FF */  andi      $t0, $t0, 0xff
-/* 8AC2A0 80240310 0C046FE6 */  jal       func_8011BF98
+/* 8AC2A0 80240310 0C046FE6 */  jal       set_model_env_color_parameters
 /* 8AC2A4 80240314 AFA80014 */   sw       $t0, 0x14($sp)
 /* 8AC2A8 80240318 8E020000 */  lw        $v0, ($s0)
 /* 8AC2AC 8024031C 8E230000 */  lw        $v1, ($s1)
@@ -234,7 +234,7 @@ glabel func_80240000_8ABF90
 /* 8AC2EC 8024035C 3C038024 */  lui       $v1, %hi(D_802440FF)
 /* 8AC2F0 80240360 906340FF */  lbu       $v1, %lo(D_802440FF)($v1)
 /* 8AC2F4 80240364 AFA20010 */  sw        $v0, 0x10($sp)
-/* 8AC2F8 80240368 0C046FE6 */  jal       func_8011BF98
+/* 8AC2F8 80240368 0C046FE6 */  jal       set_model_env_color_parameters
 /* 8AC2FC 8024036C AFA30014 */   sw       $v1, 0x14($sp)
 /* 8AC300 80240370 24020002 */  addiu     $v0, $zero, 2
 .L80240374:

@@ -24,7 +24,7 @@ glabel func_802409AC_BA10DC
 /* BA1128 802409F8 10400024 */  beqz      $v0, .L80240A8C
 /* BA112C 802409FC 0220202D */   daddu    $a0, $s1, $zero
 /* BA1130 80240A00 24050322 */  addiu     $a1, $zero, 0x322
-/* BA1134 80240A04 0C012530 */  jal       func_800494C0
+/* BA1134 80240A04 0C012530 */  jal       ai_enemy_play_sound
 /* BA1138 80240A08 0000302D */   daddu    $a2, $zero, $zero
 /* BA113C 80240A0C 0000202D */  daddu     $a0, $zero, $zero
 /* BA1140 80240A10 0220282D */  daddu     $a1, $s1, $zero
@@ -50,7 +50,7 @@ glabel func_802409AC_BA10DC
 /* BA1190 80240A60 E7A40018 */   swc1     $f4, 0x18($sp)
 /* BA1194 80240A64 0220202D */  daddu     $a0, $s1, $zero
 /* BA1198 80240A68 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* BA119C 80240A6C 0C012530 */  jal       func_800494C0
+/* BA119C 80240A6C 0C012530 */  jal       ai_enemy_play_sound
 /* BA11A0 80240A70 3C060020 */   lui      $a2, 0x20
 /* BA11A4 80240A74 8E4200CC */  lw        $v0, 0xcc($s2)
 /* BA11A8 80240A78 8C420020 */  lw        $v0, 0x20($v0)

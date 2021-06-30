@@ -252,10 +252,10 @@ Script N(init_80240CD0) = SCRIPT({
 Script N(init_80240DB4) = SCRIPT({
     EnableNpcShadow(NPC_SUN1, FALSE);
     SetNpcAnimation(NPC_SUN1, NPC_ANIM(sun, Palette_00, Anim_2));
-    func_802CFE80(10, 3);
-    func_802CFE80(11, 3);
-    func_802CFFC0(10, 0, 1, 5, 5, 13, 5, 0, 0);
-    func_802CFFC0(11, 0, 1, 5, 5, 13, 5, 0, 0);
+    SetNpcPaletteSwapMode(10, 3);
+    SetNpcPaletteSwapMode(11, 3);
+    SetNpcPaletteSwapping(10, 0, 1, 5, 5, 13, 5, 0, 0);
+    SetNpcPaletteSwapping(11, 0, 1, 5, 5, 13, 5, 0, 0);
     if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN1, 0, 270, -5);
     } else {

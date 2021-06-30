@@ -42,7 +42,7 @@ glabel func_80271588
 /* 19FEF8 80271618 44070000 */  mfc1      $a3, $f0
 /* 19FEFC 8027161C 0000202D */  daddu     $a0, $zero, $zero
 /* 19FF00 80271620 E7B60010 */  swc1      $f22, 0x10($sp)
-/* 19FF04 80271624 0C01C7FC */  jal       func_80071FF0
+/* 19FF04 80271624 0C01C7FC */  jal       playFX_69
 /* 19FF08 80271628 AFB20014 */   sw       $s2, 0x14($sp)
 /* 19FF0C 8027162C 2A020014 */  slti      $v0, $s0, 0x14
 /* 19FF10 80271630 1440FFE1 */  bnez      $v0, .L802715B8

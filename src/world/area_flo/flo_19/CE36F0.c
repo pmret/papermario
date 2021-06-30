@@ -644,10 +644,10 @@ Script N(80242FD0) = SCRIPT({
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_8024030C_CE39FC)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -715,7 +715,7 @@ ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80240784_CE3E74)(ScriptInstance* script, s32 isInitialCall) {
-    set_transition_stencil_zoom_1(1, script->varTable[0]);
+    set_screen_overlay_params_back(1, script->varTable[0]);
     return ApiStatus_DONE2;
 }
 

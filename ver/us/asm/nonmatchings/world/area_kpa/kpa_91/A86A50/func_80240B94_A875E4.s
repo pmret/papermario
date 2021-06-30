@@ -113,7 +113,7 @@ glabel func_80240B94_A875E4
 /* A87780 80240D30 E7A0003C */  swc1      $f0, 0x3c($sp)
 /* A87784 80240D34 AFA20010 */  sw        $v0, 0x10($sp)
 /* A87788 80240D38 8E440080 */  lw        $a0, 0x80($s2)
-/* A8778C 80240D3C 0C0372DF */  jal       func_800DCB7C
+/* A8778C 80240D3C 0C0372DF */  jal       npc_raycast_down_sides
 /* A87790 80240D40 27A70040 */   addiu    $a3, $sp, 0x40
 /* A87794 80240D44 10400003 */  beqz      $v0, .L80240D54
 /* A87798 80240D48 00000000 */   nop

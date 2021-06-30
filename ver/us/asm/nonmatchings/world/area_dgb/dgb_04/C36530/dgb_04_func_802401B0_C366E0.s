@@ -92,7 +92,7 @@ glabel dgb_04_func_802401B0_C366E0
 /* C36810 802402E0 E7A60034 */  swc1      $f6, 0x34($sp)
 /* C36814 802402E4 AFA20010 */  sw        $v0, 0x10($sp)
 /* C36818 802402E8 8E040080 */  lw        $a0, 0x80($s0)
-/* C3681C 802402EC 0C0372DF */  jal       func_800DCB7C
+/* C3681C 802402EC 0C0372DF */  jal       npc_raycast_down_sides
 /* C36820 802402F0 27A70030 */   addiu    $a3, $sp, 0x30
 /* C36824 802402F4 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* C36828 802402F8 4600D001 */  sub.s     $f0, $f26, $f0
@@ -136,7 +136,7 @@ glabel dgb_04_func_802401B0_C366E0
 /* C368B8 80240388 E7A40034 */  swc1      $f4, 0x34($sp)
 /* C368BC 8024038C AFA20010 */  sw        $v0, 0x10($sp)
 /* C368C0 80240390 8E040080 */  lw        $a0, 0x80($s0)
-/* C368C4 80240394 0C0372DF */  jal       func_800DCB7C
+/* C368C4 80240394 0C0372DF */  jal       npc_raycast_down_sides
 /* C368C8 80240398 27A70030 */   addiu    $a3, $sp, 0x30
 /* C368CC 8024039C C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* C368D0 802403A0 461A2100 */  add.s     $f4, $f4, $f26
@@ -195,7 +195,7 @@ glabel dgb_04_func_802401B0_C366E0
 /* C36998 80240468 E7A60034 */  swc1      $f6, 0x34($sp)
 /* C3699C 8024046C AFA20010 */  sw        $v0, 0x10($sp)
 /* C369A0 80240470 8E040080 */  lw        $a0, 0x80($s0)
-/* C369A4 80240474 0C0372DF */  jal       func_800DCB7C
+/* C369A4 80240474 0C0372DF */  jal       npc_raycast_down_sides
 /* C369A8 80240478 27A70030 */   addiu    $a3, $sp, 0x30
 .L8024047C:
 /* C369AC 8024047C 10400007 */  beqz      $v0, .L8024049C
@@ -282,7 +282,7 @@ glabel dgb_04_func_802401B0_C366E0
 /* C36AE4 802405B4 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* C36AE8 802405B8 C480003C */  lwc1      $f0, 0x3c($a0)
 /* C36AEC 802405BC 3C060020 */  lui       $a2, 0x20
-/* C36AF0 802405C0 0C012530 */  jal       func_800494C0
+/* C36AF0 802405C0 0C012530 */  jal       ai_enemy_play_sound
 /* C36AF4 802405C4 E4800064 */   swc1     $f0, 0x64($a0)
 /* C36AF8 802405C8 8E220018 */  lw        $v0, 0x18($s1)
 /* C36AFC 802405CC 9442002A */  lhu       $v0, 0x2a($v0)

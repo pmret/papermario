@@ -222,7 +222,7 @@ glabel func_80240048_AA2D68
 /* AA30A0 80240380 34A50018 */  ori       $a1, $a1, 0x18
 /* AA30A4 80240384 8C42001C */  lw        $v0, 0x1c($v0)
 /* AA30A8 80240388 0000302D */  daddu     $a2, $zero, $zero
-/* AA30AC 8024038C 0C012530 */  jal       func_800494C0
+/* AA30AC 8024038C 0C012530 */  jal       ai_enemy_play_sound
 /* AA30B0 80240390 AE220028 */   sw       $v0, 0x28($s1)
 /* AA30B4 80240394 C620003C */  lwc1      $f0, 0x3c($s1)
 /* AA30B8 80240398 3C0140A0 */  lui       $at, 0x40a0
@@ -242,7 +242,7 @@ glabel func_80240048_AA2D68
 /* AA30F0 802403D0 E7A20010 */  swc1      $f2, 0x10($sp)
 /* AA30F4 802403D4 8E250038 */  lw        $a1, 0x38($s1)
 /* AA30F8 802403D8 44072000 */  mfc1      $a3, $f4
-/* AA30FC 802403DC 0C01C184 */  jal       func_80070610
+/* AA30FC 802403DC 0C01C184 */  jal       playFX_24
 /* AA3100 802403E0 0000202D */   daddu    $a0, $zero, $zero
 /* AA3104 802403E4 C620003C */  lwc1      $f0, 0x3c($s1)
 /* AA3108 802403E8 46140000 */  add.s     $f0, $f0, $f20
@@ -258,7 +258,7 @@ glabel func_80240048_AA2D68
 /* AA3130 80240410 E7A20010 */  swc1      $f2, 0x10($sp)
 /* AA3134 80240414 8E250038 */  lw        $a1, 0x38($s1)
 /* AA3138 80240418 44072000 */  mfc1      $a3, $f4
-/* AA313C 8024041C 0C01C1CC */  jal       func_80070730
+/* AA313C 8024041C 0C01C1CC */  jal       playFX_27
 /* AA3140 80240420 0000202D */   daddu    $a0, $zero, $zero
 /* AA3144 80240424 24020001 */  addiu     $v0, $zero, 1
 /* AA3148 80240428 A622008E */  sh        $v0, 0x8e($s1)

@@ -110,7 +110,7 @@ void func_802B609C_E28ACC(void) {
     sp34 = playerStatus->position.y;
     sp38 = playerStatus->position.z;
     sp3C = 5.0f;
-    if (func_800DE46C(&gPlayerStatus, temp_a1, temp_a2, temp_a3, temp_v0, &sp40, &sp44, &sp48, &sp4C) >= 0) {
+    if (player_raycast_below_cam_relative(&gPlayerStatus, temp_a1, temp_a2, temp_a3, temp_v0, &sp40, &sp44, &sp48, &sp4C) >= 0) {
         playerStatus->position.y = sp34;
     }
 
@@ -121,7 +121,7 @@ void func_802B609C_E28ACC(void) {
 
     if (D_8010C990 < phi_f20) {
         set_action_state(ACTION_STATE_FALLING);
-        gravity_use_fall_params();
+        gravity_use_fall_parms();
     }
 }
 #else
@@ -162,7 +162,7 @@ void func_802B63D4_E28E04(void) {
         playerStatus->unk_C2 = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0.0f;
-        func_800DFF78(0x10017);
+        suggest_player_anim_setUnkFlag(0x10017);
         playerStatus->framesOnGround = 30;
     }
 
@@ -183,7 +183,7 @@ void func_802B6478_E28EA8(void) {
         playerStatus->fallState = 0;
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_8C = 0.0f;
-        func_800DFF78(0x1001F);
+        suggest_player_anim_setUnkFlag(0x1001F);
     }
 
     if (!(playerStatus->animFlags & 0x200)) {
@@ -203,12 +203,12 @@ void func_802B6508_E28F38(void) {
         playerStatus->currentSpeed = 0.0f;
         playerStatus->unk_60 = 0;
         playerStatus->framesOnGround = 5;
-        input_to_move_vector(&angle, &magnitude);
+        player_input_to_move_vector(&angle, &magnitude);
 
         if (((angle >= 45.0f) && (angle <= 135.0f)) || ((angle >= 225.0f) && (angle <= 315.0f))) {
-            func_800DFF78(0x80000 | 0x20);
+            suggest_player_anim_setUnkFlag(0x80000 | 0x20);
         } else {
-            func_800DFEFC(0x60000 | 0x4);
+            suggest_player_anim_clearUnkFlag(0x60000 | 0x4);
         }
     }
 
@@ -233,12 +233,12 @@ void func_802B6638_E29068(void) {
         playerStatus->unk_60 = 0;
 
         if (!(playerStatus->animFlags & 0x1000)) {
-            func_800DFF78(0x80007);
+            suggest_player_anim_setUnkFlag(0x80007);
         } else if (playerStatus->unk_C4 == 0) {
             if (!(playerStatus->animFlags & 0x2000)) {
-                func_800DFF78(0xC0000);
+                suggest_player_anim_setUnkFlag(0xC0000);
             } else {
-                func_800E636C(world_actions_peachDisguises[playerStatus->peachDisguise].unk_0C);
+                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].unk_0C);
             }
         }
         playerStatus->framesOnGround = 30;
@@ -249,9 +249,9 @@ void func_802B6638_E29068(void) {
             playerStatus->framesOnGround--;
         } else if (playerStatus->unk_C4 == 0) {
             if (!(playerStatus->animFlags & 0x2000)) {
-                func_800DFF78(0xA0001);
+                suggest_player_anim_setUnkFlag(0xA0001);
             } else {
-                func_800E636C(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
+                peach_set_disguise_anim(world_actions_peachDisguises[playerStatus->peachDisguise].idle);
             }
         }
     }

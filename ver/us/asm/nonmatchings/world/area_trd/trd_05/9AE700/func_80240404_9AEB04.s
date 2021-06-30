@@ -45,7 +45,7 @@ glabel func_80240404_9AEB04
 /* 9AEBA4 802404A4 0000202D */  daddu     $a0, $zero, $zero
 /* 9AEBA8 802404A8 3C058024 */  lui       $a1, %hi(func_80240020_9AE720)
 /* 9AEBAC 802404AC 24A50020 */  addiu     $a1, $a1, %lo(func_80240020_9AE720)
-/* 9AEBB0 802404B0 0C048C56 */  jal       create_dynamic_entity_world
+/* 9AEBB0 802404B0 0C048C56 */  jal       create_generic_entity_world
 /* 9AEBB4 802404B4 AE020000 */   sw       $v0, ($s0)
 /* 9AEBB8 802404B8 AE020004 */  sw        $v0, 4($s0)
 /* 9AEBBC 802404BC 8FBF0014 */  lw        $ra, 0x14($sp)

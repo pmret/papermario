@@ -31,7 +31,7 @@ glabel func_80238C58_70C968
 /* 70C9C8 80238CB8 8C87014C */  lw        $a3, 0x14c($a0)
 /* 70C9CC 80238CBC 3C018024 */  lui       $at, %hi(D_8023D1E0)
 /* 70C9D0 80238CC0 E420D1E0 */  swc1      $f0, %lo(D_8023D1E0)($at)
-/* 70C9D4 80238CC4 0C01C304 */  jal       func_80070C10
+/* 70C9D4 80238CC4 0C01C304 */  jal       playFX_34
 /* 70C9D8 80238CC8 0000202D */   daddu    $a0, $zero, $zero
 /* 70C9DC 80238CCC 24020001 */  addiu     $v0, $zero, 1
 /* 70C9E0 80238CD0 0808E34D */  j         .L80238D34

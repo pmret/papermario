@@ -93,14 +93,14 @@ glabel func_80240360_B1B8D0
 /* B1BA30 802404C0 0080302D */   daddu    $a2, $a0, $zero
 /* B1BA34 802404C4 8E2500A4 */  lw        $a1, 0xa4($s1)
 /* B1BA38 802404C8 4406C000 */  mfc1      $a2, $f24
-/* B1BA3C 802404CC 0C0B76A3 */  jal       func_802DDA8C
+/* B1BA3C 802404CC 0C0B76A3 */  jal       spr_update_player_sprite
 /* B1BA40 802404D0 24040001 */   addiu    $a0, $zero, 1
 /* B1BA44 802404D4 24040001 */  addiu     $a0, $zero, 1
 /* B1BA48 802404D8 0000282D */  daddu     $a1, $zero, $zero
 /* B1BA4C 802404DC 00A0302D */  daddu     $a2, $a1, $zero
 /* B1BA50 802404E0 00A0382D */  daddu     $a3, $a1, $zero
 /* B1BA54 802404E4 27A20018 */  addiu     $v0, $sp, 0x18
-/* B1BA58 802404E8 0C0B7710 */  jal       render_sprite
+/* B1BA58 802404E8 0C0B7710 */  jal       spr_draw_player_sprite
 /* B1BA5C 802404EC AFA20010 */   sw       $v0, 0x10($sp)
 /* B1BA60 802404F0 8FBF0120 */  lw        $ra, 0x120($sp)
 /* B1BA64 802404F4 8FB1011C */  lw        $s1, 0x11c($sp)

@@ -62,7 +62,7 @@ glabel func_802BDDF0_324740
 /* 32481C 802BDECC 8E820000 */  lw        $v0, ($s4)
 /* 324820 802BDED0 2403FEFF */  addiu     $v1, $zero, -0x101
 /* 324824 802BDED4 00431024 */  and       $v0, $v0, $v1
-/* 324828 802BDED8 0C03BD17 */  jal       clear_partner_move_history
+/* 324828 802BDED8 0C03BD17 */  jal       partner_clear_player_tracking
 /* 32482C 802BDEDC AE820000 */   sw       $v0, ($s4)
 /* 324830 802BDEE0 8FBF0034 */  lw        $ra, 0x34($sp)
 /* 324834 802BDEE4 8FB40030 */  lw        $s4, 0x30($sp)

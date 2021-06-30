@@ -9,7 +9,7 @@ extern s32 D_8008EF20[11][4];
 #include "world/common/UnkFunc17.inc.c"
 
 ApiStatus N(func_8024003C_CAED7C)(ScriptInstance* script, s32 isInitialCall) {
-    func_802E5690(get_variable(script, *script->ptrReadPos));
+    entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -75,7 +75,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_318 = 4;
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
-        func_800F4E40(ptr);
+        btl_create_popup_menu(ptr);
         script->functionTemp[0].s = 0;
     }
 
@@ -83,7 +83,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
     if (script->functionTemp[0].s == 0) {
         script->functionTemp[1].s = ptr->unk_32C;
         if (script->functionTemp[1].s != 0) {
-            func_800F13B0();
+            hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
         }
@@ -95,7 +95,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    func_800F1538();
+    destroy_popup_menu();
     if (script->functionTemp[1].s != 0xFF) {
         script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
@@ -113,7 +113,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF
 #endif
 
 ApiStatus N(func_8024041C_CAF15C)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -161,7 +161,7 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

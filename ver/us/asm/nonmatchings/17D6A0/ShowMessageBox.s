@@ -16,7 +16,7 @@ glabel ShowMessageBox
 /* 17FBC0 802512E0 0C0B1EAF */  jal       get_variable
 /* 17FBC4 802512E4 0040802D */   daddu    $s0, $v0, $zero
 /* 17FBC8 802512E8 0200202D */  daddu     $a0, $s0, $zero
-/* 17FBCC 802512EC 0C093E58 */  jal       show_battle_message
+/* 17FBCC 802512EC 0C093E58 */  jal       btl_show_battle_message
 /* 17FBD0 802512F0 0040282D */   daddu    $a1, $v0, $zero
 /* 17FBD4 802512F4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 17FBD8 802512F8 8FB10014 */  lw        $s1, 0x14($sp)

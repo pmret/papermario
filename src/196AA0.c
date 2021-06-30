@@ -39,7 +39,7 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "196AA0", func_802691C8);
+INCLUDE_ASM(s32, "196AA0", SetupMashMeter);
 
 ApiStatus GetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
@@ -51,21 +51,21 @@ ApiStatus SetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802692EC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetActionCommandMode(ScriptInstance* script, s32 isInitialCall) {
     gBattleStatus.unk_83 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269318(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionCommandMode(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_83);
     return ApiStatus_DONE2;
 }
 
 INCLUDE_ASM(s32, "196AA0", func_80269344);
 
-INCLUDE_ASM(s32, "196AA0", func_80269370);
+INCLUDE_ASM(s32, "196AA0", SetCommandAutoSuccess);
 
-INCLUDE_ASM(s32, "196AA0", func_8026939C);
+INCLUDE_ASM(s32, "196AA0", GetCommandAutoSuccess);
 
 ApiStatus func_802693F0(ScriptInstance* script, s32 isInitialCall) {
     gBattleStatus.flags1 &= ~0x4000;
@@ -98,12 +98,12 @@ ApiStatus GetBlockResult(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802695A8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionResult(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_84);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802695D4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetActionResult(ScriptInstance* script, s32 isInitialCall) {
     gBattleStatus.unk_84 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

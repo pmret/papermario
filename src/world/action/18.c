@@ -15,7 +15,7 @@ void func_802B6000_E245D0(void) {
 
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
-        func_800E5530();
+        phys_adjust_cam_on_landing();
         if (!(playerStatus->animFlags & 0x1000)) {
             s32 temp;
 
@@ -24,7 +24,7 @@ void func_802B6000_E245D0(void) {
             } else {
                 temp = 0x60000;
             }
-            func_800DFEFC(temp);
+            suggest_player_anim_clearUnkFlag(temp);
         } else {
             func_802B6198_E24768();
         }
@@ -44,7 +44,7 @@ void func_802B6000_E245D0(void) {
     playerStatus->position.z -= cosTheta * 3.0f;
 
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
-        playerStatus->position.y = func_800E3514(playerStatus->gravityIntegrator[0], &colliderID);
+        playerStatus->position.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &colliderID);
     } else {
         playerStatus->position.y += playerStatus->gravityIntegrator[0];
     }
@@ -61,12 +61,12 @@ void func_802B6000_E245D0(void) {
 void func_802B6198_E24768(void) {
     if (!(gPlayerStatus.animFlags & 0x2000)) {
         if (!(gGameStatusPtr->peachFlags & 0x10)) {
-            func_800DFEFC((D_802B6300_E248D0)[gGameStatusPtr->peachAnimIdx]);
+            suggest_player_anim_clearUnkFlag((D_802B6300_E248D0)[gGameStatusPtr->peachAnimIdx]);
         } else {
-            func_800DFEFC(0xD000D); // dood
+            suggest_player_anim_clearUnkFlag(0xD000D); // dood
         }
     } else {
-        func_800E636C(world_actions_peachDisguises[gPlayerStatus.peachDisguise].unk_04);
+        peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].unk_04);
     }
 }
 
@@ -75,14 +75,14 @@ void func_802B6230_E24800(void) {
 
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
-        func_800DFEFC(0xA0005);
+        suggest_player_anim_clearUnkFlag(0xA0005);
         playerStatus->framesOnGround = 8;
     }
 
     if (playerStatus->framesOnGround != 0) {
         playerStatus->framesOnGround--;
         if (playerStatus->framesOnGround == 4) {
-            func_800E5098(1);
+            try_player_footstep_sounds(1);
         }
     } else {
         if (!(playerStatus->flags & 0x4000)) {

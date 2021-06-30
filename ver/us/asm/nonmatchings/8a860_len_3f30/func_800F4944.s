@@ -201,7 +201,7 @@ glabel L800F4BC4_8E074
 /* 8E0A4 800F4BF4 240700FF */  addiu     $a3, $zero, 0xff
 /* 8E0A8 800F4BF8 2402000F */  addiu     $v0, $zero, 0xf
 /* 8E0AC 800F4BFC AFA20010 */  sw        $v0, 0x10($sp)
-/* 8E0B0 800F4C00 0C04993B */  jal       draw_msg
+/* 8E0B0 800F4C00 0C04993B */  jal       draw_string
 /* 8E0B4 800F4C04 AFA00014 */   sw       $zero, 0x14($sp)
 .L800F4C08:
 /* 8E0B8 800F4C08 8FBF0020 */  lw        $ra, 0x20($sp)

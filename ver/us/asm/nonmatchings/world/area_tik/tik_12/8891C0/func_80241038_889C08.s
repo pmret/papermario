@@ -7,7 +7,7 @@ glabel func_80241038_889C08
 /* 889C10 80241040 8C82000C */  lw        $v0, 0xc($a0)
 /* 889C14 80241044 0C0B1EAF */  jal       get_variable
 /* 889C18 80241048 8C450000 */   lw       $a1, ($v0)
-/* 889C1C 8024104C 0C03AC5A */  jal       func_800EB168
+/* 889C1C 8024104C 0C03AC5A */  jal       switch_to_partner
 /* 889C20 80241050 0040202D */   daddu    $a0, $v0, $zero
 /* 889C24 80241054 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 889C28 80241058 24020002 */  addiu     $v0, $zero, 2

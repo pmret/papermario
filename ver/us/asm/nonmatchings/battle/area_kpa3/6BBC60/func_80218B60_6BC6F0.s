@@ -15,7 +15,7 @@ glabel func_80218B60_6BC6F0
 /* 6BC718 80218B88 44810000 */  mtc1      $at, $f0
 /* 6BC71C 80218B8C 0000382D */  daddu     $a3, $zero, $zero
 /* 6BC720 80218B90 AFA00014 */  sw        $zero, 0x14($sp)
-/* 6BC724 80218B94 0C01C844 */  jal       func_80072110
+/* 6BC724 80218B94 0C01C844 */  jal       playFX_6C
 /* 6BC728 80218B98 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 6BC72C 80218B9C 0200202D */  daddu     $a0, $s0, $zero
 /* 6BC730 80218BA0 8E250000 */  lw        $a1, ($s1)

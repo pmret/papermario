@@ -5,14 +5,14 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     spawn {
         sleep 5;
-        UseCamPreset(2);
+        UseBattleCamPreset(2);
         MoveBattleCamOver(20);
     }
     N(FadeBackgroundToBlack)();
     PlayEffect(0x62, 0, 0, 0, 0, 1.0, 200, 0, 0, 0, 0, 0, 0, 0);
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_246);
     sleep 200;
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:

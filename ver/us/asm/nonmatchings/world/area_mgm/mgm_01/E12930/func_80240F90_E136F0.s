@@ -44,7 +44,7 @@ glabel func_80240F90_E136F0
 /* E13788 80241028 44070000 */  mfc1      $a3, $f0
 /* E1378C 8024102C 24040001 */  addiu     $a0, $zero, 1
 /* E13790 80241030 AFA00010 */  sw        $zero, 0x10($sp)
-/* E13794 80241034 0C01BECC */  jal       fx_walk_normal
+/* E13794 80241034 0C01BECC */  jal       fx_walk
 /* E13798 80241038 AFA00014 */   sw       $zero, 0x14($sp)
 /* E1379C 8024103C 8E240088 */  lw        $a0, 0x88($s1)
 /* E137A0 80241040 0C0441B4 */  jal       delete_entity

@@ -13,7 +13,7 @@ glabel func_8025E14C
 /* 18CA4C 8025E16C AFBF0018 */  sw        $ra, 0x18($sp)
 /* 18CA50 8025E170 AFA20014 */  sw        $v0, 0x14($sp)
 /* 18CA54 8025E174 E7A00010 */  swc1      $f0, 0x10($sp)
-/* 18CA58 8025E178 0C01C484 */  jal       func_80071210
+/* 18CA58 8025E178 0C01C484 */  jal       playFX_44
 /* 18CA5C 8025E17C 00A0382D */   daddu    $a3, $a1, $zero
 /* 18CA60 8025E180 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 18CA64 8025E184 24020002 */  addiu     $v0, $zero, 2

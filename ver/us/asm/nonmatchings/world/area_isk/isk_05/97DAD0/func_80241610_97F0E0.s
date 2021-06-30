@@ -258,7 +258,7 @@ glabel func_80241610_97F0E0
 /* 97F4D0 80241A00 8FC6000C */  lw        $a2, 0xc($fp)
 /* 97F4D4 80241A04 25080001 */  addiu     $t0, $t0, 1
 /* 97F4D8 80241A08 AEE70000 */  sw        $a3, ($s7)
-/* 97F4DC 80241A0C 0C0B7A76 */  jal       func_802DE9D8
+/* 97F4DC 80241A0C 0C0B7A76 */  jal       spr_get_npc_raster_info
 /* 97F4E0 80241A10 A6080000 */   sh       $t0, ($s0)
 /* 97F4E4 80241A14 24050007 */  addiu     $a1, $zero, 7
 /* 97F4E8 80241A18 240600FF */  addiu     $a2, $zero, 0xff

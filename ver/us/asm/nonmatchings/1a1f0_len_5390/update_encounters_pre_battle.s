@@ -315,7 +315,7 @@ glabel update_encounters_pre_battle
 /* 1CBD4 800417D4 24042113 */   addiu    $a0, $zero, 0x2113
 /* 1CBD8 800417D8 0C05271B */  jal       sfx_stop_sound
 /* 1CBDC 800417DC 24042114 */   addiu    $a0, $zero, 0x2114
-/* 1CBE0 800417E0 0C01CB37 */  jal       func_80072CDC
+/* 1CBE0 800417E0 0C01CB37 */  jal       set_battle_formation
 /* 1CBE4 800417E4 0000202D */   daddu    $a0, $zero, $zero
 /* 1CBE8 800417E8 86840046 */  lh        $a0, 0x46($s4)
 /* 1CBEC 800417EC 0C01CB33 */  jal       set_battle_stage
@@ -332,7 +332,7 @@ glabel update_encounters_pre_battle
 /* 1CC18 80041818 A2A0000C */  sb        $zero, 0xc($s5)
 /* 1CC1C 8004181C A6A0000E */  sh        $zero, 0xe($s5)
 /* 1CC20 80041820 AEA00098 */  sw        $zero, 0x98($s5)
-/* 1CC24 80041824 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 1CC24 80041824 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 1CC28 80041828 AEA20090 */   sw       $v0, 0x90($s5)
 /* 1CC2C 8004182C 24020005 */  addiu     $v0, $zero, 5
 /* 1CC30 80041830 3C01800A */  lui       $at, %hi(gGameState)

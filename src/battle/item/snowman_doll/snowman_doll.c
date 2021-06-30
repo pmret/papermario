@@ -17,7 +17,7 @@ Script N(main) = SCRIPT({
         }
     }
     sleep 10;
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(50);
     sleep 50;
     PlayEffect(0x60, 0, 0, 0, 20, 1.0, 160, 0, 0, 0, 0, 0, 0, 0);

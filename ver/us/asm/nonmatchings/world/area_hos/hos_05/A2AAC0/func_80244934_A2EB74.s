@@ -27,23 +27,23 @@ glabel func_80244934_A2EB74
 /* A2EBC8 80244988 46800020 */  cvt.s.w   $f0, $f0
 /* A2EBCC 8024498C 44050000 */  mfc1      $a1, $f0
 .L80244990:
-/* A2EBD0 80244990 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* A2EBD0 80244990 0C04DF69 */  jal       set_screen_overlay_params_back
 /* A2EBD4 80244994 00000000 */   nop
 /* A2EBD8 80244998 24040001 */  addiu     $a0, $zero, 1
 /* A2EBDC 8024499C 240500FA */  addiu     $a1, $zero, 0xfa
 /* A2EBE0 802449A0 00A0302D */  daddu     $a2, $a1, $zero
-/* A2EBE4 802449A4 0C04DF84 */  jal       set_transition_stencil_color
+/* A2EBE4 802449A4 0C04DF84 */  jal       set_screen_overlay_color
 /* A2EBE8 802449A8 00A0382D */   daddu    $a3, $a1, $zero
 /* A2EBEC 802449AC 08091276 */  j         .L802449D8
 /* A2EBF0 802449B0 0000102D */   daddu    $v0, $zero, $zero
 .L802449B4:
 /* A2EBF4 802449B4 0000202D */  daddu     $a0, $zero, $zero
-/* A2EBF8 802449B8 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* A2EBF8 802449B8 0C04DF69 */  jal       set_screen_overlay_params_back
 /* A2EBFC 802449BC 0000282D */   daddu    $a1, $zero, $zero
 /* A2EC00 802449C0 24040001 */  addiu     $a0, $zero, 1
 /* A2EC04 802449C4 240500FA */  addiu     $a1, $zero, 0xfa
 /* A2EC08 802449C8 00A0302D */  daddu     $a2, $a1, $zero
-/* A2EC0C 802449CC 0C04DF84 */  jal       set_transition_stencil_color
+/* A2EC0C 802449CC 0C04DF84 */  jal       set_screen_overlay_color
 /* A2EC10 802449D0 00A0382D */   daddu    $a3, $a1, $zero
 /* A2EC14 802449D4 24020002 */  addiu     $v0, $zero, 2
 .L802449D8:

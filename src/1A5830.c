@@ -3,7 +3,7 @@
 
 void dispatch_event_actor(Actor* actor, Event event);
 
-s32 func_80276F50(Actor* actor) {
+s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
     s32 ret = FALSE;
 
@@ -833,19 +833,19 @@ ApiStatus ClearStatusEffects(ScriptInstance* script, s32 isInitialCall) {
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = STATUS_END;
-        func_80047898(actor->unk_436);
+        remove_status_1(actor->unk_436);
     }
 
     if (actor->staticStatus != 0) {
         actor->staticDuration = 0;
         actor->staticStatus = 0;
-        func_800479A0(actor->unk_436);
+        remove_status_2(actor->unk_436);
     }
 
     if (actor->transStatus != 0) {
         actor->transDuration = 0;
         actor->transStatus = 0;
-        func_80047AA8(actor->unk_436);
+        remove_status_3(actor->unk_436);
     }
 
     if (actor->stoneStatus != 0) {

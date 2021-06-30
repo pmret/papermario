@@ -178,7 +178,7 @@ glabel update_encounters_neutral
 /* 1AE2C 8003FA2C AFA00010 */  sw        $zero, 0x10($sp)
 /* 1AE30 8003FA30 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1AE34 8003FA34 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1AE38 8003FA38 0C01C064 */  jal       func_80070190
+/* 1AE38 8003FA38 0C01C064 */  jal       playFX_18
 /* 1AE3C 8003FA3C AFB0001C */   sw       $s0, 0x1c($sp)
 /* 1AE40 8003FA40 A2700005 */  sb        $s0, 5($s3)
 /* 1AE44 8003FA44 8E820004 */  lw        $v0, 4($s4)
@@ -668,7 +668,7 @@ glabel L8003FFA0_1B3A0
 /* 1B560 80040160 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1B564 80040164 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1B568 80040168 E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1B56C 8004016C 0C0376B9 */  jal       func_800DDAE4
+/* 1B56C 8004016C 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1B570 80040170 E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1B574 80040174 10400016 */  beqz      $v0, .L800401D0
 /* 1B578 80040178 00000000 */   nop
@@ -689,7 +689,7 @@ glabel L8003FFA0_1B3A0
 /* 1B5B4 800401B4 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1B5B8 800401B8 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1B5BC 800401BC E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1B5C0 800401C0 0C0376B9 */  jal       func_800DDAE4
+/* 1B5C0 800401C0 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1B5C4 800401C4 E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1B5C8 800401C8 144000F2 */  bnez      $v0, L80040594_1B994
 /* 1B5CC 800401CC 00000000 */   nop
@@ -830,7 +830,7 @@ glabel L80040320_1B720
 /* 1B7D0 800403D0 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1B7D4 800403D4 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1B7D8 800403D8 E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1B7DC 800403DC 0C0376B9 */  jal       func_800DDAE4
+/* 1B7DC 800403DC 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1B7E0 800403E0 E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1B7E4 800403E4 10400016 */  beqz      $v0, .L80040440
 /* 1B7E8 800403E8 00000000 */   nop
@@ -851,7 +851,7 @@ glabel L80040320_1B720
 /* 1B824 80040424 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1B828 80040428 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1B82C 8004042C E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1B830 80040430 0C0376B9 */  jal       func_800DDAE4
+/* 1B830 80040430 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1B834 80040434 E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1B838 80040438 14400056 */  bnez      $v0, L80040594_1B994
 /* 1B83C 8004043C 00000000 */   nop
@@ -1020,7 +1020,7 @@ glabel L80040594_1B994
 /* 1BA9C 8004069C E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1BAA0 800406A0 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1BAA4 800406A4 E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1BAA8 800406A8 0C0376B9 */  jal       func_800DDAE4
+/* 1BAA8 800406A8 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1BAAC 800406AC E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1BAB0 800406B0 10400016 */  beqz      $v0, .L8004070C
 /* 1BAB4 800406B4 0000802D */   daddu    $s0, $zero, $zero
@@ -1041,7 +1041,7 @@ glabel L80040594_1B994
 /* 1BAF0 800406F0 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1BAF4 800406F4 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1BAF8 800406F8 E7BC0018 */  swc1      $f28, 0x18($sp)
-/* 1BAFC 800406FC 0C0376B9 */  jal       func_800DDAE4
+/* 1BAFC 800406FC 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1BB00 80040700 E7B4001C */   swc1     $f20, 0x1c($sp)
 /* 1BB04 80040704 14400070 */  bnez      $v0, .L800408C8
 /* 1BB08 80040708 0000802D */   daddu    $s0, $zero, $zero
@@ -1132,7 +1132,7 @@ glabel L80040594_1B994
 /* 1BC48 80040848 AFA00010 */  sw        $zero, 0x10($sp)
 /* 1BC4C 8004084C E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1BC50 80040850 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1BC54 80040854 0C01C064 */  jal       func_80070190
+/* 1BC54 80040854 0C01C064 */  jal       playFX_18
 /* 1BC58 80040858 AFA2001C */   sw       $v0, 0x1c($sp)
 /* 1BC5C 8004085C 82220007 */  lb        $v0, 7($s1)
 /* 1BC60 80040860 10400005 */  beqz      $v0, .L80040878
@@ -1255,7 +1255,7 @@ glabel L80040918_1BD18
 .L80040A00:
 /* 1BE00 80040A00 0C03805E */  jal       disable_player_input
 /* 1BE04 80040A04 00000000 */   nop
-/* 1BE08 80040A08 0C03BD8A */  jal       func_800EF628
+/* 1BE08 80040A08 0C03BD8A */  jal       partner_disable_input
 /* 1BE0C 80040A0C 00000000 */   nop
 /* 1BE10 80040A10 928300B4 */  lbu       $v1, 0xb4($s4)
 /* 1BE14 80040A14 2462FFF1 */  addiu     $v0, $v1, -0xf
@@ -1370,7 +1370,7 @@ glabel L80040ABC_1BEBC
 .L80040BA4:
 /* 1BFA4 80040BA4 0C03805E */  jal       disable_player_input
 /* 1BFA8 80040BA8 00000000 */   nop
-/* 1BFAC 80040BAC 0C03BD8A */  jal       func_800EF628
+/* 1BFAC 80040BAC 0C03BD8A */  jal       partner_disable_input
 /* 1BFB0 80040BB0 00000000 */   nop
 /* 1BFB4 80040BB4 24020003 */  addiu     $v0, $zero, 3
 /* 1BFB8 80040BB8 A2600012 */  sb        $zero, 0x12($s3)
@@ -1517,7 +1517,7 @@ glabel L80040BF4_1BFF4
 /* 1C1CC 80040DCC AFA00010 */  sw        $zero, 0x10($sp)
 /* 1C1D0 80040DD0 E7B60014 */  swc1      $f22, 0x14($sp)
 /* 1C1D4 80040DD4 AFA00018 */  sw        $zero, 0x18($sp)
-/* 1C1D8 80040DD8 0C01C064 */  jal       func_80070190
+/* 1C1D8 80040DD8 0C01C064 */  jal       playFX_18
 /* 1C1DC 80040DDC AFBE001C */   sw       $fp, 0x1c($sp)
 .L80040DE0:
 /* 1C1E0 80040DE0 8EC20000 */  lw        $v0, ($s6)
@@ -1528,7 +1528,7 @@ glabel L80040BF4_1BFF4
 .L80040DF4:
 /* 1C1F4 80040DF4 0C03805E */  jal       disable_player_input
 /* 1C1F8 80040DF8 00000000 */   nop
-/* 1C1FC 80040DFC 0C03BD8A */  jal       func_800EF628
+/* 1C1FC 80040DFC 0C03BD8A */  jal       partner_disable_input
 /* 1C200 80040E00 00000000 */   nop
 /* 1C204 80040E04 8E820000 */  lw        $v0, ($s4)
 /* 1C208 80040E08 3C030004 */  lui       $v1, 4
@@ -1704,7 +1704,7 @@ glabel L80040E34_1C234
 /* 1C490 80041090 8E470040 */  lw        $a3, 0x40($s2)
 /* 1C494 80041094 24040003 */  addiu     $a0, $zero, 3
 .L80041098:
-/* 1C498 80041098 0C01C064 */  jal       func_80070190
+/* 1C498 80041098 0C01C064 */  jal       playFX_18
 /* 1C49C 8004109C 00000000 */   nop
 .L800410A0:
 /* 1C4A0 800410A0 8EC20000 */  lw        $v0, ($s6)
@@ -1747,7 +1747,7 @@ glabel L800410BC_1C4BC
 .L8004112C:
 /* 1C52C 8004112C 0C03805E */  jal       disable_player_input
 /* 1C530 80041130 00000000 */   nop
-/* 1C534 80041134 0C03BD8A */  jal       func_800EF628
+/* 1C534 80041134 0C03BD8A */  jal       partner_disable_input
 /* 1C538 80041138 00000000 */   nop
 /* 1C53C 8004113C 0C039769 */  jal       set_action_state
 /* 1C540 80041140 2404000C */   addiu    $a0, $zero, 0xc
@@ -1846,7 +1846,7 @@ glabel L8004115C_1C55C
 /* 1C694 80041294 AFA00010 */  sw        $zero, 0x10($sp)
 /* 1C698 80041298 E7B40014 */  swc1      $f20, 0x14($sp)
 /* 1C69C 8004129C AFA00018 */  sw        $zero, 0x18($sp)
-/* 1C6A0 800412A0 0C01C064 */  jal       func_80070190
+/* 1C6A0 800412A0 0C01C064 */  jal       playFX_18
 /* 1C6A4 800412A4 AFBE001C */   sw       $fp, 0x1c($sp)
 .L800412A8:
 /* 1C6A8 800412A8 8EC20000 */  lw        $v0, ($s6)
@@ -1857,7 +1857,7 @@ glabel L8004115C_1C55C
 .L800412BC:
 /* 1C6BC 800412BC 0C03805E */  jal       disable_player_input
 /* 1C6C0 800412C0 00000000 */   nop
-/* 1C6C4 800412C4 0C03BD8A */  jal       func_800EF628
+/* 1C6C4 800412C4 0C03BD8A */  jal       partner_disable_input
 /* 1C6C8 800412C8 00000000 */   nop
 /* 1C6CC 800412CC 0000202D */  daddu     $a0, $zero, $zero
 /* 1C6D0 800412D0 AE600090 */  sw        $zero, 0x90($s3)

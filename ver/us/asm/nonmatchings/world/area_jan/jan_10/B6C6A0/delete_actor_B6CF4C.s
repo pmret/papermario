@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel delete_actor_B6CF4C
+glabel btl_delete_actor_B6CF4C
 /* B6CF4C 80240BBC 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* B6CF50 80240BC0 AFB40050 */  sw        $s4, 0x50($sp)
 /* B6CF54 80240BC4 0080A02D */  daddu     $s4, $a0, $zero
@@ -50,7 +50,7 @@ glabel delete_actor_B6CF4C
 /* B6D000 80240C70 46800020 */  cvt.s.w   $f0, $f0
 /* B6D004 80240C74 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* B6D008 80240C78 8E640080 */  lw        $a0, 0x80($s3)
-/* B6D00C 80240C7C 0C037711 */  jal       func_800DDC44
+/* B6D00C 80240C7C 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* B6D010 80240C80 27A70030 */   addiu    $a3, $sp, 0x30
 /* B6D014 80240C84 10400003 */  beqz      $v0, .L80240C94
 /* B6D018 80240C88 00000000 */   nop
@@ -86,7 +86,7 @@ glabel delete_actor_B6CF4C
 /* B6D088 80240CF8 E7A60038 */  swc1      $f6, 0x38($sp)
 /* B6D08C 80240CFC AFB20010 */  sw        $s2, 0x10($sp)
 /* B6D090 80240D00 8E640080 */  lw        $a0, 0x80($s3)
-/* B6D094 80240D04 0C0372DF */  jal       func_800DCB7C
+/* B6D094 80240D04 0C0372DF */  jal       npc_raycast_down_sides
 /* B6D098 80240D08 0220382D */   daddu    $a3, $s1, $zero
 /* B6D09C 80240D0C 0200282D */  daddu     $a1, $s0, $zero
 /* B6D0A0 80240D10 27A6002C */  addiu     $a2, $sp, 0x2c
@@ -113,7 +113,7 @@ glabel delete_actor_B6CF4C
 /* B6D0F4 80240D64 E7A00038 */  swc1      $f0, 0x38($sp)
 /* B6D0F8 80240D68 AFB20010 */  sw        $s2, 0x10($sp)
 /* B6D0FC 80240D6C 8E640080 */  lw        $a0, 0x80($s3)
-/* B6D100 80240D70 0C0372DF */  jal       func_800DCB7C
+/* B6D100 80240D70 0C0372DF */  jal       npc_raycast_down_sides
 /* B6D104 80240D74 0220382D */   daddu    $a3, $s1, $zero
 /* B6D108 80240D78 1040003D */  beqz      $v0, .L80240E70
 /* B6D10C 80240D7C 00000000 */   nop
@@ -138,7 +138,7 @@ glabel delete_actor_B6CF4C
 /* B6D158 80240DC8 8E650038 */  lw        $a1, 0x38($s3)
 /* B6D15C 80240DCC 8E66003C */  lw        $a2, 0x3c($s3)
 /* B6D160 80240DD0 8E670040 */  lw        $a3, 0x40($s3)
-/* B6D164 80240DD4 0C01BECC */  jal       fx_walk_normal
+/* B6D164 80240DD4 0C01BECC */  jal       fx_walk
 /* B6D168 80240DD8 24040002 */   addiu    $a0, $zero, 2
 /* B6D16C 80240DDC 02E0202D */  daddu     $a0, $s7, $zero
 /* B6D170 80240DE0 2402000C */  addiu     $v0, $zero, 0xc

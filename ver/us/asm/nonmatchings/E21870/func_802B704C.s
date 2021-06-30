@@ -19,7 +19,7 @@ glabel func_802B704C
 /* E218F4 802B7084 30420080 */  andi      $v0, $v0, 0x80
 /* E218F8 802B7088 10400029 */  beqz      $v0, .L802B7130
 /* E218FC 802B708C 0000102D */   daddu    $v0, $zero, $zero
-/* E21900 802B7090 0C03814E */  jal       func_800E0538
+/* E21900 802B7090 0C03814E */  jal       has_valid_conversation_npc
 /* E21904 802B7094 00000000 */   nop
 /* E21908 802B7098 14400025 */  bnez      $v0, .L802B7130
 /* E2190C 802B709C 0000102D */   daddu    $v0, $zero, $zero

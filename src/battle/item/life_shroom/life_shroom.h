@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_life_shroom
 
-ApiStatus func_802D3F74(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D378C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetVirtualEntityFlags(ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall);
 

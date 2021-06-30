@@ -227,7 +227,7 @@ glabel func_802BC3DC_E2CB0C
 /* E2CE18 802BC6E8 E7B80010 */  swc1      $f24, 0x10($sp)
 /* E2CE1C 802BC6EC E7B40014 */  swc1      $f20, 0x14($sp)
 /* E2CE20 802BC6F0 E7A80018 */  swc1      $f8, 0x18($sp)
-/* E2CE24 802BC6F4 0C0376B9 */  jal       func_800DDAE4
+/* E2CE24 802BC6F4 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* E2CE28 802BC6F8 E7A8001C */   swc1     $f8, 0x1c($sp)
 /* E2CE2C 802BC6FC 10400031 */  beqz      $v0, .L802BC7C4
 /* E2CE30 802BC700 3C040004 */   lui      $a0, 4
@@ -293,7 +293,7 @@ glabel func_802BC3DC_E2CB0C
 /* E2CF1C 802BC7EC E7A40024 */  swc1      $f4, 0x24($sp)
 /* E2CF20 802BC7F0 E7A60028 */  swc1      $f6, 0x28($sp)
 /* E2CF24 802BC7F4 E7A0002C */  swc1      $f0, 0x2c($sp)
-/* E2CF28 802BC7F8 0C0372DF */  jal       func_800DCB7C
+/* E2CF28 802BC7F8 0C0372DF */  jal       npc_raycast_down_sides
 /* E2CF2C 802BC7FC AFA20010 */   sw       $v0, 0x10($sp)
 /* E2CF30 802BC800 1440000B */  bnez      $v0, .L802BC830
 /* E2CF34 802BC804 00000000 */   nop
@@ -375,7 +375,7 @@ glabel func_802BC3DC_E2CB0C
 /* E2D048 802BC918 2A620005 */  slti      $v0, $s3, 5
 /* E2D04C 802BC91C 14400003 */  bnez      $v0, .L802BC92C
 /* E2D050 802BC920 00000000 */   nop
-/* E2D054 802BC924 0C043F5A */  jal       exec_entity_updatecmd
+/* E2D054 802BC924 0C043F5A */  jal       exec_entity_commandlist
 /* E2D058 802BC928 03C0202D */   daddu    $a0, $fp, $zero
 .L802BC92C:
 /* E2D05C 802BC92C 8FBF0054 */  lw        $ra, 0x54($sp)

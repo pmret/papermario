@@ -1868,14 +1868,14 @@ Script N(802485A8) = SCRIPT({
     DisablePlayerInput(FALSE);
     if (SI_SAVE_FLAG(1371) == 0) {
         group 0;
-        func_802D5830(1);
+        SetTimeFreezeMode(1);
 10:
-        func_802D6420();
+        ShowKeyChoicePopup();
         SI_VAR(2) = SI_VAR(0);
         match SI_VAR(2) {
             <= 0 {
-                func_802D6954();
-                func_802D5830(0);
+                CloseChoicePopup();
+                SetTimeFreezeMode(0);
                 AwaitPlayerLeave(-85, 85, 28);
                 return;
             }
@@ -1907,14 +1907,14 @@ Script N(802485A8) = SCRIPT({
     }
     if (SI_SAVE_FLAG(1372) == 0) {
         group 0;
-        func_802D5830(1);
+        SetTimeFreezeMode(1);
 20:
-        func_802D6420();
+        ShowKeyChoicePopup();
         SI_VAR(2) = SI_VAR(0);
         match SI_VAR(2) {
             <= 0 {
-                func_802D6954();
-                func_802D5830(0);
+                CloseChoicePopup();
+                SetTimeFreezeMode(0);
                 AwaitPlayerLeave(-85, 85, 28);
                 return;
             }
@@ -1947,14 +1947,14 @@ Script N(802485A8) = SCRIPT({
         SI_SAVE_FLAG(1372) = 1;
     }
     group 0;
-    func_802D5830(1);
+    SetTimeFreezeMode(1);
 30:
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(2) = SI_VAR(0);
     match SI_VAR(2) {
         <= 0 {
-            func_802D6954();
-            func_802D5830(0);
+            CloseChoicePopup();
+            SetTimeFreezeMode(0);
             AwaitPlayerLeave(-85, 85, 28);
             return;
         }
@@ -2199,7 +2199,7 @@ ApiStatus N(func_80240BD4_C9EAF4)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }

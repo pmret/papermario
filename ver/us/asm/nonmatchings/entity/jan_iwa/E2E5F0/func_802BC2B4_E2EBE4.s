@@ -18,7 +18,7 @@ glabel func_802BC2B4_E2EBE4
 /* E2EC18 802BC2E8 A06000B5 */  sb        $zero, 0xb5($v1)
 /* E2EC1C 802BC2EC A06000B4 */  sb        $zero, 0xb4($v1)
 /* E2EC20 802BC2F0 00A22824 */  and       $a1, $a1, $v0
-/* E2EC24 802BC2F4 0C037FDE */  jal       func_800DFF78
+/* E2EC24 802BC2F4 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E2EC28 802BC2F8 AC650000 */   sw       $a1, ($v1)
 /* E2EC2C 802BC2FC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* E2EC30 802BC300 03E00008 */  jr        $ra

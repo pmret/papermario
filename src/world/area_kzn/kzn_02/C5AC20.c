@@ -147,7 +147,7 @@ void N(func_80241B08_C5C248)(ScriptInstance *script, NpcAISettings *aiSettings, 
         y = npc->pos.y + npc->collisionHeight;
         z = npc->pos.z;
         w = npc->collisionHeight + 3.0;
-        if ((func_800DCB7C(npc->unk_80, &x, &y, &z, &w) != 0) && (w < npc->collisionHeight)) {
+        if ((npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &w) != 0) && (w < npc->collisionHeight)) {
             flag = 1;
         }
     }

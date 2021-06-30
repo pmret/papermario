@@ -11,7 +11,7 @@ glabel func_80241C30_ECB930
 /* ECB948 80241C48 F7B80028 */  sdc1      $f24, 0x28($sp)
 /* ECB94C 80241C4C 4487C000 */  mtc1      $a3, $f24
 /* ECB950 80241C50 AFBF0014 */  sw        $ra, 0x14($sp)
-/* ECB954 80241C54 0C01B198 */  jal       __osGetCause
+/* ECB954 80241C54 0C01B198 */  jal       osGetCause
 /* ECB958 80241C58 0080802D */   daddu    $s0, $a0, $zero
 /* ECB95C 80241C5C 4616A582 */  mul.s     $f22, $f20, $f22
 /* ECB960 80241C60 00000000 */  nop

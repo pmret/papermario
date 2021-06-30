@@ -53,7 +53,7 @@ glabel func_802591EC
 /* 187B64 80259284 0100202D */  daddu     $a0, $t0, $zero
 /* 187B68 80259288 0140282D */  daddu     $a1, $t2, $zero
 .L8025928C:
-/* 187B6C 8025928C 0C0B7710 */  jal       render_sprite
+/* 187B6C 8025928C 0C0B7710 */  jal       spr_draw_player_sprite
 /* 187B70 80259290 0000382D */   daddu    $a3, $zero, $zero
 /* 187B74 80259294 08096522 */  j         .L80259488
 /* 187B78 80259298 0000102D */   daddu    $v0, $zero, $zero
@@ -71,7 +71,7 @@ glabel func_802591EC
 /* 187BA0 802592C0 AFAB0010 */  sw        $t3, 0x10($sp)
 /* 187BA4 802592C4 00882025 */  or        $a0, $a0, $t0
 .L802592C8:
-/* 187BA8 802592C8 0C0B78F6 */  jal       func_802DE3D8
+/* 187BA8 802592C8 0C0B78F6 */  jal       spr_draw_npc_sprite
 /* 187BAC 802592CC 00000000 */   nop
 /* 187BB0 802592D0 08096522 */  j         .L80259488
 /* 187BB4 802592D4 0000102D */   daddu    $v0, $zero, $zero

@@ -67,7 +67,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("ld",
         description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -T ver/$version/main_bss_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
     ninja.rule("z64",

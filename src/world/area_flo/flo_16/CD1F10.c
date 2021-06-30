@@ -292,7 +292,7 @@ Script N(802438C8) = SCRIPT({
     if (SI_VAR(0) == 1) {
         return;
     }
-    func_802D585C(1, 2097152);
+    ModifyGlobalOverrideFlags(1, 2097152);
     N(SetOverrideFlags_40)();
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
@@ -306,7 +306,7 @@ Script N(802438C8) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -321,7 +321,7 @@ Script N(802438C8) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -342,7 +342,7 @@ Script N(802438C8) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -358,7 +358,7 @@ Script N(802438C8) = SCRIPT({
     }
     DisablePlayerInput(FALSE);
     EnablePartnerAI();
-    func_802D585C(0, 2097152);
+    ModifyGlobalOverrideFlags(0, 2097152);
     N(UnkFunc17)();
 });
 
@@ -416,7 +416,7 @@ Script N(makeEntities) = SCRIPT({
 #include "world/common/UnkFunc17.inc.c"
 
 ApiStatus N(func_8024011C_CD1F4C)(ScriptInstance* script, s32 isInitialCall) {
-    func_802E5690(get_variable(script, *script->ptrReadPos));
+    entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -482,7 +482,7 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_318 = 4;
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
-        func_800F4E40(ptr);
+        btl_create_popup_menu(ptr);
         script->functionTemp[0].s = 0;
     }
 
@@ -490,7 +490,7 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
     if (script->functionTemp[0].s == 0) {
         script->functionTemp[1].s = ptr->unk_32C;
         if (script->functionTemp[1].s != 0) {
-            func_800F13B0();
+            hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
         }
@@ -502,7 +502,7 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    func_800F1538();
+    destroy_popup_menu();
     if (script->functionTemp[1].s != 0xFF) {
         script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
         script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
@@ -520,7 +520,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_16/CD1F10", flo_16_func_802402AC_CD20
 #endif
 
 ApiStatus N(func_802404FC_CD232C)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -568,7 +568,7 @@ ApiStatus N(func_802406E0_CD2510)(ScriptInstance* script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
                                                    scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;

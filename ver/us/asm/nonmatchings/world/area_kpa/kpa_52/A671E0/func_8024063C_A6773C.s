@@ -218,7 +218,7 @@ glabel func_8024063C_A6773C
 /* A67A74 80240974 44820000 */  mtc1      $v0, $f0
 /* A67A78 80240978 00000000 */  nop
 /* A67A7C 8024097C 46800020 */  cvt.s.w   $f0, $f0
-/* A67A80 80240980 0C0376B9 */  jal       func_800DDAE4
+/* A67A80 80240980 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* A67A84 80240984 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A67A88 80240988 54400001 */  bnel      $v0, $zero, .L80240990
 /* A67A8C 8024098C 24160001 */   addiu    $s6, $zero, 1
@@ -237,7 +237,7 @@ glabel func_8024063C_A6773C
 /* A67ABC 802409BC E7A6002C */  swc1      $f6, 0x2c($sp)
 /* A67AC0 802409C0 AFA20010 */  sw        $v0, 0x10($sp)
 /* A67AC4 802409C4 8E440080 */  lw        $a0, 0x80($s2)
-/* A67AC8 802409C8 0C0372DF */  jal       func_800DCB7C
+/* A67AC8 802409C8 0C0372DF */  jal       npc_raycast_down_sides
 /* A67ACC 802409CC 0280382D */   daddu    $a3, $s4, $zero
 /* A67AD0 802409D0 10400019 */  beqz      $v0, .L80240A38
 /* A67AD4 802409D4 00000000 */   nop
@@ -315,7 +315,7 @@ glabel func_8024063C_A6773C
 /* A67BE0 80240AE0 8E450038 */  lw        $a1, 0x38($s2)
 /* A67BE4 80240AE4 8E46003C */  lw        $a2, 0x3c($s2)
 /* A67BE8 80240AE8 8E470040 */  lw        $a3, 0x40($s2)
-/* A67BEC 80240AEC 0C01BECC */  jal       fx_walk_normal
+/* A67BEC 80240AEC 0C01BECC */  jal       fx_walk
 /* A67BF0 80240AF0 24040002 */   addiu    $a0, $zero, 2
 /* A67BF4 80240AF4 3C01C47A */  lui       $at, 0xc47a
 /* A67BF8 80240AF8 44810000 */  mtc1      $at, $f0

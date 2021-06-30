@@ -8,8 +8,8 @@
 #define NAMESPACE battle_item_sleepy_sheep
 
 ApiStatus func_80273444(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D3998(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D3A60(ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetVirtualEntityMoveSpeed(ScriptInstance* script, s32 isInitialCall);
+ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus N(func_802A123C_71E88C)(ScriptInstance* script, s32 isInitialCall);

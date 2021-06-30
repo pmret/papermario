@@ -78,7 +78,7 @@ glabel calc_partner_test_enemy
 /* 1AC970 8027E090 30420004 */  andi      $v0, $v0, 4
 /* 1AC974 8027E094 14400012 */  bnez      $v0, .L8027E0E0
 /* 1AC978 8027E098 0280202D */   daddu    $a0, $s4, $zero
-/* 1AC97C 8027E09C 0C099CAB */  jal       heroes_is_ability_active
+/* 1AC97C 8027E09C 0C099CAB */  jal       player_team_is_ability_active
 /* 1AC980 8027E0A0 24050002 */   addiu    $a1, $zero, 2
 /* 1AC984 8027E0A4 1440000E */  bnez      $v0, .L8027E0E0
 /* 1AC988 8027E0A8 3C031000 */   lui      $v1, 0x1000

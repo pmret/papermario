@@ -13,7 +13,7 @@ ApiStatus N(UnkFunc27)(ScriptInstance* script, s32 isInitialCall) {
     s32 temp_s2 = testS2;
 
     if (temp_s0_3 == -1) {
-        func_8011D82C(temp_s1);
+        mdl_set_all_fog_mode(temp_s1);
         return ApiStatus_DONE2;
     }
 
@@ -24,7 +24,7 @@ ApiStatus N(UnkFunc27)(ScriptInstance* script, s32 isInitialCall) {
                 if (*temp_s0_3 == temp_s2) {
                     break;
                 }
-                func_8011BC7C(get_model_from_list_index(get_model_list_index_from_tree_index(*temp_s0_3)), -1, temp_s1);
+                set_mdl_custom_gfx_set(get_model_from_list_index(get_model_list_index_from_tree_index(*temp_s0_3)), -1, temp_s1);
                 temp_s0_3++;
             };
             break;

@@ -22,7 +22,7 @@ ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
     if (actor->debuff != STATUS_END) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
-        func_80047898(actor->unk_436);
+        remove_status_1(actor->unk_436);
     }
 
     if (actor->koStatus != 0) {
@@ -31,7 +31,7 @@ ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
         actor->ptrDefuffIcon->ptrPropertyList[15] = 0;
     }
 
-    func_8026777C();
+    btl_update_ko_status();
     return ApiStatus_DONE2;
 }
 

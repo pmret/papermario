@@ -43,7 +43,7 @@ glabel func_802B6000_E291A0
 /* E29218 802B6078 00000000 */   nop
 glabel L802B607C_E2921C
 /* E2921C 802B607C 3C040001 */  lui       $a0, 1
-/* E29220 802B6080 0C037FBF */  jal       func_800DFEFC
+/* E29220 802B6080 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E29224 802B6084 3484002E */   ori      $a0, $a0, 0x2e
 /* E29228 802B6088 3C014180 */  lui       $at, 0x4180
 /* E2922C 802B608C 44810000 */  mtc1      $at, $f0
@@ -132,7 +132,7 @@ glabel L802B6174_E29314
 /* E29370 802B61D0 24421D80 */  addiu     $v0, $v0, %lo(gCameras)
 /* E29374 802B61D4 E4400060 */  swc1      $f0, 0x60($v0)
 /* E29378 802B61D8 E4420064 */  swc1      $f2, 0x64($v0)
-/* E2937C 802B61DC 0C038D45 */  jal       func_800E3514
+/* E2937C 802B61DC 0C038D45 */  jal       player_check_collision_below
 /* E29380 802B61E0 E4440068 */   swc1     $f4, 0x68($v0)
 /* E29384 802B61E4 8FA20010 */  lw        $v0, 0x10($sp)
 /* E29388 802B61E8 0440002B */  bltz      $v0, L802B6298_E29438
@@ -141,7 +141,7 @@ glabel L802B6174_E29314
 /* E29394 802B61F4 0C052736 */  jal       sfx_play_sound_at_player
 /* E29398 802B61F8 0000282D */   daddu    $a1, $zero, $zero
 /* E2939C 802B61FC 3C040008 */  lui       $a0, 8
-/* E293A0 802B6200 0C037FDE */  jal       func_800DFF78
+/* E293A0 802B6200 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E293A4 802B6204 34840003 */   ori      $a0, $a0, 3
 /* E293A8 802B6208 922200B6 */  lbu       $v0, 0xb6($s1)
 /* E293AC 802B620C 2403000A */  addiu     $v1, $zero, 0xa
@@ -156,7 +156,7 @@ glabel L802B6228_E293C8
 /* E293C8 802B6228 962200BC */  lhu       $v0, 0xbc($s1)
 /* E293CC 802B622C 1040001A */  beqz      $v0, L802B6298_E29438
 /* E293D0 802B6230 3C040001 */   lui      $a0, 1
-/* E293D4 802B6234 0C037FDE */  jal       func_800DFF78
+/* E293D4 802B6234 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E293D8 802B6238 34840030 */   ori      $a0, $a0, 0x30
 /* E293DC 802B623C 24020005 */  addiu     $v0, $zero, 5
 /* E293E0 802B6240 A22200B6 */  sb        $v0, 0xb6($s1)

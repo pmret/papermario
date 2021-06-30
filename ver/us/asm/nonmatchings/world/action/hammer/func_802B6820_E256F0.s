@@ -101,7 +101,7 @@ glabel func_802B6820_E256F0
 /* E25860 802B6990 E7A20030 */  swc1      $f2, 0x30($sp)
 /* E25864 802B6994 AFB30010 */  sw        $s3, 0x10($sp)
 /* E25868 802B6998 E7B40014 */  swc1      $f20, 0x14($sp)
-/* E2586C 802B699C 0C037B01 */  jal       do_lateral_collision
+/* E2586C 802B699C 0C037B01 */  jal       player_test_lateral_overlap
 /* E25870 802B69A0 E7B60018 */   swc1     $f22, 0x18($sp)
 /* E25874 802B69A4 3C03802B */  lui       $v1, %hi(D_802B6DB0_E25C80)
 /* E25878 802B69A8 8C636DB0 */  lw        $v1, %lo(D_802B6DB0_E25C80)($v1)
@@ -207,7 +207,7 @@ glabel func_802B6820_E256F0
 /* E259EC 802B6B1C E7A20030 */  swc1      $f2, 0x30($sp)
 /* E259F0 802B6B20 AFB30010 */  sw        $s3, 0x10($sp)
 /* E259F4 802B6B24 E7B40014 */  swc1      $f20, 0x14($sp)
-/* E259F8 802B6B28 0C037B01 */  jal       do_lateral_collision
+/* E259F8 802B6B28 0C037B01 */  jal       player_test_lateral_overlap
 /* E259FC 802B6B2C E7B60018 */   swc1     $f22, 0x18($sp)
 /* E25A00 802B6B30 3C03802B */  lui       $v1, %hi(D_802B6DB0_E25C80)
 /* E25A04 802B6B34 8C636DB0 */  lw        $v1, %lo(D_802B6DB0_E25C80)($v1)

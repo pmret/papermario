@@ -36,7 +36,7 @@ glabel func_80282C40
 /* 7E3B3C 80282CBC E7A60018 */  swc1      $f6, 0x18($sp)
 /* 7E3B40 80282CC0 E7A40020 */  swc1      $f4, 0x20($sp)
 /* 7E3B44 80282CC4 E7A0001C */  swc1      $f0, 0x1c($sp)
-/* 7E3B48 80282CC8 0C0372DF */  jal       func_800DCB7C
+/* 7E3B48 80282CC8 0C0372DF */  jal       npc_raycast_down_sides
 /* 7E3B4C 80282CCC AFA20010 */   sw       $v0, 0x10($sp)
 /* 7E3B50 80282CD0 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 7E3B54 80282CD4 4600120D */  trunc.w.s $f8, $f2

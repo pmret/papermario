@@ -12,7 +12,7 @@ glabel func_802BC658_E2EF88
 /* E2EFA4 802BC674 30420008 */  andi      $v0, $v0, 8
 /* E2EFA8 802BC678 10400003 */  beqz      $v0, .L802BC688
 /* E2EFAC 802BC67C 00000000 */   nop
-/* E2EFB0 802BC680 0C04419E */  jal       func_80110678
+/* E2EFB0 802BC680 0C04419E */  jal       entity_start_script
 /* E2EFB4 802BC684 00000000 */   nop
 .L802BC688:
 /* E2EFB8 802BC688 8FBF0010 */  lw        $ra, 0x10($sp)

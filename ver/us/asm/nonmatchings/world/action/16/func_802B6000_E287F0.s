@@ -16,7 +16,7 @@ glabel func_802B6000_E287F0
 /* E2881C 802B602C 3C040001 */  lui       $a0, 1
 /* E28820 802B6030 34840017 */  ori       $a0, $a0, 0x17
 /* E28824 802B6034 00621024 */  and       $v0, $v1, $v0
-/* E28828 802B6038 0C037FDE */  jal       func_800DFF78
+/* E28828 802B6038 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E2882C 802B603C AE020000 */   sw       $v0, ($s0)
 /* E28830 802B6040 C60C0028 */  lwc1      $f12, 0x28($s0)
 /* E28834 802B6044 C60E0030 */  lwc1      $f14, 0x30($s0)
@@ -65,7 +65,7 @@ glabel func_802B6000_E287F0
 /* E288E0 802B60F0 46806320 */  cvt.s.w   $f12, $f12
 /* E288E4 802B60F4 44837000 */  mtc1      $v1, $f14
 /* E288E8 802B60F8 00000000 */  nop
-/* E288EC 802B60FC 0C038022 */  jal       func_800E0088
+/* E288EC 802B60FC 0C038022 */  jal       get_xz_dist_to_player
 /* E288F0 802B6100 468073A0 */   cvt.s.w  $f14, $f14
 /* E288F4 802B6104 3C014190 */  lui       $at, 0x4190
 /* E288F8 802B6108 44811000 */  mtc1      $at, $f2
@@ -134,7 +134,7 @@ glabel func_802B6000_E287F0
 /* E289E8 802B61F8 0C038D36 */  jal       func_800E34D8
 /* E289EC 802B61FC 00000000 */   nop
 /* E289F0 802B6200 46000306 */  mov.s     $f12, $f0
-/* E289F4 802B6204 0C038D45 */  jal       func_800E3514
+/* E289F4 802B6204 0C038D45 */  jal       player_check_collision_below
 /* E289F8 802B6208 27A50018 */   addiu    $a1, $sp, 0x18
 /* E289FC 802B620C 8FA40018 */  lw        $a0, 0x18($sp)
 /* E28A00 802B6210 04800006 */  bltz      $a0, .L802B622C

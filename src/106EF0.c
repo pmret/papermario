@@ -2,7 +2,7 @@
 
 extern StaticEntityData D_802EA934;
 
-f32 func_802E5670(struct802E4B10* arg0, s32 arg1) {
+f32 entity_SuperBlockContent_get_previous_yaw(struct802E4B10* arg0, s32 arg1) {
     s32 idx = arg0->unk_D0 - arg1;
 
     if (idx < 0) {
@@ -11,7 +11,7 @@ f32 func_802E5670(struct802E4B10* arg0, s32 arg1) {
     return arg0->unk_D4[idx];
 }
 
-void func_802E5690(s32 entityIndex) {
+void entity_upgrade_block_hide_content(s32 entityIndex) {
     Entity* someEntity = get_entity_by_index(entityIndex);
     struct802E3650* temp = someEntity->dataBuf;
 
@@ -22,11 +22,11 @@ void func_802E5690(s32 entityIndex) {
     }
 }
 
-s32 func_802E56D0(Entity* entity) {
-    return func_802E3650(entity);
+s32 entity_upgrade_block_idle(Entity* entity) {
+    return entity_base_block_idle(entity);
 }
 
-void func_802E56EC(Entity* entity) {
+void entity_upgrade_block_check_if_inactive(Entity* entity) {
     struct802E3650* temp_s0 = entity->dataBuf;
 
     if (temp_s0->unk_0A != 0xFFFF && !get_global_flag(temp_s0->unk_0A)) {
@@ -41,24 +41,24 @@ void func_802E56EC(Entity* entity) {
     }
 }
 
-void func_802E578C(Entity* entity) {
+void entity_upgrade_block_init(Entity* entity) {
     struct802E3650* temp_s1 = entity->dataBuf;
 
-    entity_init_Hammer23Block_normal(entity);
+    entity_base_block_init(entity);
     entity->rotation.y += 180.0f;
     temp_s1->unk_0A = 0xFFFF;
     temp_s1->unk_12 = -1;
 }
 
-void func_802E57E4(Entity* entity) {
-    func_802E578C(entity);
+void entity_SuperBlock_init(Entity* entity) {
+    entity_upgrade_block_init(entity);
 }
 
-void func_802E5800(Entity* entity) {
-    func_802E578C(entity);
+void entity_UltraBlock_init(Entity* entity) {
+    entity_upgrade_block_init(entity);
 }
 
-void func_802E581C(Entity* entity) {
+void entity_SuperBlock_HitEffect_attach_to_parent(Entity* entity) {
     struct802E3650* temp = entity->dataBuf;
     Entity* temp_v0 = get_entity_by_index(temp->unk_00);
 
@@ -68,12 +68,12 @@ void func_802E581C(Entity* entity) {
 }
 
 // display list func
-INCLUDE_ASM(s32, "106EF0", func_802E586C);
+INCLUDE_ASM(s32, "106EF0", entity_SuperBlock_HitEffect_setupGfx);
 
-void func_802E5E50(Entity* entity) {
+void entity_SuperBlock_HitEffect_idle(Entity* entity) {
     struct802E4B10* temp_s0 = entity->dataBuf;
 
-    func_802E581C(entity);
+    entity_SuperBlock_HitEffect_attach_to_parent(entity);
     if (temp_s0->unk_0A != 0) {
         entity->renderSetupFunc = NULL;
     }
@@ -89,23 +89,23 @@ void func_802E5E50(Entity* entity) {
     if (temp_s0->unk_0A == 0 && gOverrideFlags == 0) {
         if (--temp_s0->unk_02 <= 0) {
             temp_s0->unk_02 = 50;
-            func_80070550(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
+            playFX_22(3, entity->position.x, entity->position.y, entity->position.z, 22.0f, 8.0f, 4, 20);
         }
     }
 }
 
-void func_802E5F50(Entity* entity) {
+void entity_init_SuperBlock_HitEffect1(Entity* entity) {
     struct802E3650* temp = entity->dataBuf;
 
     temp->unk_128 = &D_0A000328;
     temp->unk_12C = &D_0A000380;
-    entity->renderSetupFunc = func_802E586C;
+    entity->renderSetupFunc = entity_SuperBlock_HitEffect_setupGfx;
 }
 
-void func_802E5F7C(Entity* entity) {
+void entity_init_SuperBlock_HitEffect2(Entity* entity) {
     struct802E3650* temp = entity->dataBuf;
 
     temp->unk_128 = &D_0A000800;
     temp->unk_12C = &D_0A000750;
-    entity->renderSetupFunc = func_802E586C;
+    entity->renderSetupFunc = entity_SuperBlock_HitEffect_setupGfx;
 }

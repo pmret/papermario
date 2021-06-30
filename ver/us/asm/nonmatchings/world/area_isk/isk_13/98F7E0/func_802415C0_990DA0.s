@@ -13,7 +13,7 @@ glabel func_802415C0_990DA0
 .L802415E0:
 /* 990DC0 802415E0 8E040000 */  lw        $a0, ($s0)
 /* 990DC4 802415E4 26310001 */  addiu     $s1, $s1, 1
-/* 990DC8 802415E8 0C00E273 */  jal       npc_free
+/* 990DC8 802415E8 0C00E273 */  jal       free_npc
 /* 990DCC 802415EC 26100010 */   addiu    $s0, $s0, 0x10
 /* 990DD0 802415F0 2A220008 */  slti      $v0, $s1, 8
 /* 990DD4 802415F4 1440FFFA */  bnez      $v0, .L802415E0

@@ -39,13 +39,13 @@ Script N(802414E0) = SCRIPT({
 });
 
 Script N(802415C4) = SCRIPT({
-    func_802D5FF8(137, 2);
+    PushSong(137, 2);
 });
 
 Script N(802415E8) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
-    func_802D5FD8();
+    PopSong();
 });
 
 static s32 N(pad_1624)[] = {
@@ -583,13 +583,13 @@ Script N(8024339C) = SCRIPT({
         }
         DisablePlayerInput(TRUE);
         group 0;
-        func_802D5830(1);
-        func_802D6420();
+        SetTimeFreezeMode(1);
+        ShowKeyChoicePopup();
         SI_VAR(2) = SI_VAR(0);
         match SI_VAR(2) {
             == -1 {
-                func_802D6954();
-                func_802D5830(0);
+                CloseChoicePopup();
+                SetTimeFreezeMode(0);
                 sleep 10;
                 SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x0081));
             } else {
@@ -604,8 +604,8 @@ Script N(8024339C) = SCRIPT({
                 RemoveKeyItemAt(SI_VAR(1));
                 MakeItemEntity(ITEM_WATER_STONE, 0, -60, 6, 1, 0);
                 SI_VAR(10) = SI_VAR(0);
-                func_802D6954();
-                func_802D5830(0);
+                CloseChoicePopup();
+                SetTimeFreezeMode(0);
                 await N(802425E4);
             }
         }

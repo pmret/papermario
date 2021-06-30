@@ -3,7 +3,7 @@
 import glob
 import os
 
-print_funcs = True
+print_funcs = False
 
 sizes = {}
 
@@ -36,7 +36,7 @@ def do_dir(root, dir):
 
     avg = 0 if len(files) == 0 else total / len(files)
 
-    sizes[dir] = ((min, max, total, avg))
+    sizes[dir] = ((min, max, total, avg, len(files)))
 
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -47,8 +47,8 @@ for root, dirs, files in os.walk(asm_dir):
         if "/os" not in root and "/world/" not in root and "/battle/" not in root:
             do_dir(root, asm_dir)
 
-for thing in sorted(sizes.keys(), key=lambda x: sizes[x][2]):
-    val = sizes[thing][2]
+for thing in sorted(sizes.keys(), key=lambda x: sizes[x][4]):
+    val = sizes[thing][4]
     if val > 0:
         print(thing.ljust(25) + str(val))
 

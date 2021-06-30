@@ -43,7 +43,7 @@ glabel func_80241294_DF7C94
 /* DF7D2C 8024132C 8E050008 */  lw        $a1, 8($s0)
 /* DF7D30 80241330 8E060000 */  lw        $a2, ($s0)
 /* DF7D34 80241334 8E07000C */  lw        $a3, 0xc($s0)
-/* DF7D38 80241338 0C04BA38 */  jal       func_8012E8E0
+/* DF7D38 80241338 0C04BA38 */  jal       msg_get_glyph
 /* DF7D3C 8024133C 3C140001 */   lui      $s4, 1
 /* DF7D40 80241340 93A20042 */  lbu       $v0, 0x42($sp)
 /* DF7D44 80241344 3C013FE0 */  lui       $at, 0x3fe0

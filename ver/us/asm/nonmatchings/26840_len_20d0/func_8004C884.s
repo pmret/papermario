@@ -174,7 +174,7 @@ glabel func_8004C884
 /* 27EE8 8004CAE8 0240282D */  daddu     $a1, $s2, $zero
 /* 27EEC 8004CAEC 9202009C */  lbu       $v0, 0x9c($s0)
 /* 27EF0 8004CAF0 0200302D */  daddu     $a2, $s0, $zero
-/* 27EF4 8004CAF4 0C013365 */  jal       func_8004CD94
+/* 27EF4 8004CAF4 0C013365 */  jal       snd_set_voice_volume
 /* 27EF8 8004CAF8 A222000F */   sb       $v0, 0xf($s1)
 /* 27EFC 8004CAFC 8E020018 */  lw        $v0, 0x18($s0)
 /* 27F00 8004CB00 54400003 */  bnel      $v0, $zero, .L8004CB10
@@ -296,7 +296,7 @@ glabel func_8004C884
 /* 28098 8004CC98 14620007 */  bne       $v1, $v0, .L8004CCB8
 /* 2809C 8004CC9C 0220202D */   daddu    $a0, $s1, $zero
 /* 280A0 8004CCA0 0240282D */  daddu     $a1, $s2, $zero
-/* 280A4 8004CCA4 0C013365 */  jal       func_8004CD94
+/* 280A4 8004CCA4 0C013365 */  jal       snd_set_voice_volume
 /* 280A8 8004CCA8 0200302D */   daddu    $a2, $s0, $zero
 /* 280AC 8004CCAC 9222003D */  lbu       $v0, 0x3d($s1)
 /* 280B0 8004CCB0 34420020 */  ori       $v0, $v0, 0x20
@@ -328,7 +328,7 @@ glabel func_8004C884
 /* 28110 8004CD10 860400A4 */  lh        $a0, 0xa4($s0)
 /* 28114 8004CD14 00431021 */  addu      $v0, $v0, $v1
 .L8004CD18:
-/* 28118 8004CD18 0C014E3E */  jal       func_800538F8
+/* 28118 8004CD18 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2811C 8004CD1C 00442021 */   addu     $a0, $v0, $a0
 /* 28120 8004CD20 8E02001C */  lw        $v0, 0x1c($s0)
 /* 28124 8004CD24 C4420020 */  lwc1      $f2, 0x20($v0)

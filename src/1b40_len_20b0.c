@@ -69,11 +69,11 @@ void step_game_loop(void) {
 
     func_8011BAE8();
     npc_iter_no_op();
-    update_dynamic_entities();
+    update_generic_entities();
     update_triggers();
     update_scripts();
     update_messages();
-    update_menu_icons();
+    update_hud_elements();
     step_current_game_mode();
     update_entities();
     func_80138198();
@@ -170,19 +170,19 @@ void gfx_draw_frame(void) {
 
     gSPMatrix(gMasterGfxPos++, D_800741A8, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    func_802DDA60(gDisplayContext, &gMasterGfxPos);
+    spr_render_init(gDisplayContext, &gMasterGfxPos);
 
     if (!(gOverrideFlags & 2)) {
         render_frame(0);
     }
 
-    func_800E0260();
+    player_render_interact_prompts();
     func_802C3EE4();
-    render_transition_stencil_lower();
-    render_dynamic_entities_backUI();
-    func_80142210();
-    func_80059F94();
-    render_ui();
+    render_screen_overlay_backUI();
+    render_generic_entities_backUI();
+    render_hud_elements_backUI();
+    render_effects_UI();
+    state_render_backUI();
 
     if (!(gOverrideFlags & 0x10000)) {
         render_window_root();
@@ -195,9 +195,9 @@ void gfx_draw_frame(void) {
         render_messages();
     }
 
-    render_dynamic_entities_frontUI();
-    func_8014271C();
-    render_transition_stencil_upper();
+    render_generic_entities_frontUI();
+    render_hud_elements_frontUI();
+    render_screen_overlay_frontUI();
 
     if ((gOverrideFlags & 0x100010) == 0x10) {
         render_messages();
@@ -212,7 +212,7 @@ void gfx_draw_frame(void) {
         render_window_root();
     }
 
-    func_80112FC4();
+    state_render_frontUI();
 
     if (gOverrideFlags & 0x20) {
         switch (D_800741A2) {
@@ -261,27 +261,27 @@ void load_engine_data(void) {
     fio_init_flash();
     func_80028838();
     general_heap_create();
-    func_8011D890();
-    clear_dynamic_entity_list();
+    clear_render_tasks();
+    clear_generic_entity_list();
     clear_script_list();
     create_cameras_a();
     clear_player_status();
     spr_init_sprites(0);
     clear_entity_models();
-    func_8011E224();
+    clear_animator_list();
     clear_model_data();
-    func_80148040();
-    use_default_background_settings();
+    clear_sprite_shading_data();
+    reset_background_settings();
     clear_character_set();
     clear_printers();
-    func_80112B98();
-    npc_list_clear();
-    func_80141100();
+    clear_game_modes();
+    clear_npcs();
+    clear_hud_element_cache();
     clear_trigger_data();
     clear_entity_data(0);
     clear_player_data();
-    func_8003E338();
-    clear_transition_stencil();
+    init_encounter_status();
+    clear_screen_overlays();
     clear_effect_data();
     clear_saved_variables();
     clear_item_entity_data();

@@ -21,7 +21,7 @@ glabel play_movement_dust_effects
 /* 192C10 80264330 C42038A4 */  lwc1      $f0, %lo(D_802938A4)($at)
 /* 192C14 80264334 4406C000 */  mfc1      $a2, $f24
 /* 192C18 80264338 0000202D */  daddu     $a0, $zero, $zero
-/* 192C1C 8026433C 0C01BEB4 */  jal       fx_walk_large
+/* 192C1C 8026433C 0C01BEB4 */  jal       fx_land
 /* 192C20 80264340 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 192C24 80264344 08099110 */  j         .L80264440
 /* 192C28 80264348 00000000 */   nop
@@ -86,7 +86,7 @@ glabel play_movement_dust_effects
 /* 192D0C 8026442C 4407D000 */  mfc1      $a3, $f26
 /* 192D10 80264430 0000202D */  daddu     $a0, $zero, $zero
 /* 192D14 80264434 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 192D18 80264438 0C01BECC */  jal       fx_walk_normal
+/* 192D18 80264438 0C01BECC */  jal       fx_walk
 /* 192D1C 8026443C E7A00014 */   swc1     $f0, 0x14($sp)
 .L80264440:
 /* 192D20 80264440 8FBF0018 */  lw        $ra, 0x18($sp)

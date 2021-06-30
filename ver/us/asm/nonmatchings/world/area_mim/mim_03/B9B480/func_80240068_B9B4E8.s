@@ -7,7 +7,7 @@ glabel func_80240068_B9B4E8
 /* B9B4F0 80240070 AFB00010 */  sw        $s0, 0x10($sp)
 /* B9B4F4 80240074 0080802D */  daddu     $s0, $a0, $zero
 /* B9B4F8 80240078 AFBF0014 */  sw        $ra, 0x14($sp)
-/* B9B4FC 8024007C 0C038022 */  jal       func_800E0088
+/* B9B4FC 8024007C 0C038022 */  jal       get_xz_dist_to_player
 /* B9B500 80240080 46006386 */   mov.s    $f14, $f12
 /* B9B504 80240084 4600008D */  trunc.w.s $f2, $f0
 /* B9B508 80240088 E6020084 */  swc1      $f2, 0x84($s0)

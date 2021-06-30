@@ -12,7 +12,7 @@ Script N(main) = SCRIPT({
     N(func_802A123C_72619C)();
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
-    UseCamPreset(13);
+    UseBattleCamPreset(13);
     BattleCamTargetActor(ACTOR_SELF);
     MoveBattleCamOver(20);
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_369);
@@ -72,7 +72,7 @@ Script N(main) = SCRIPT({
     }
     sleep 10;
     SetAnimation(ACTOR_PLAYER, 0, ANIM_RUNNING);
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     sleep 20;
     await N(PlayerGoHome);

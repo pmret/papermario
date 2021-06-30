@@ -56,7 +56,7 @@ glabel func_80260948
 /* 18F2E0 80260A00 24A50011 */  addiu     $a1, $a1, 0x11
 /* 18F2E4 80260A04 240700FF */  addiu     $a3, $zero, 0xff
 /* 18F2E8 80260A08 AFA20010 */  sw        $v0, 0x10($sp)
-/* 18F2EC 80260A0C 0C04993B */  jal       draw_msg
+/* 18F2EC 80260A0C 0C04993B */  jal       draw_string
 /* 18F2F0 80260A10 AFA00014 */   sw       $zero, 0x14($sp)
 .L80260A14:
 /* 18F2F4 80260A14 8FBF0018 */  lw        $ra, 0x18($sp)

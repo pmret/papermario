@@ -49,37 +49,37 @@ glabel update_cameras
 /* 8890 8002D490 00400008 */  jr        $v0
 /* 8894 8002D494 00000000 */   nop
 glabel L8002D498_8898
-/* 8898 8002D498 0C00C525 */  jal       do_camera_type_3
+/* 8898 8002D498 0C00C525 */  jal       update_camera_zone_interp
 /* 889C 8002D49C 0200202D */   daddu    $a0, $s0, $zero
 /* 88A0 8002D4A0 0800B540 */  j         .L8002D500
 /* 88A4 8002D4A4 00000000 */   nop
 glabel L8002D4A8_88A8
-/* 88A8 8002D4A8 0C00BE14 */  jal       do_camera_type_0
+/* 88A8 8002D4A8 0C00BE14 */  jal       update_camera_mode_0
 /* 88AC 8002D4AC 0200202D */   daddu    $a0, $s0, $zero
 /* 88B0 8002D4B0 0800B540 */  j         .L8002D500
 /* 88B4 8002D4B4 00000000 */   nop
 glabel L8002D4B8_88B8
-/* 88B8 8002D4B8 0C00BCA4 */  jal       do_camera_type_1
+/* 88B8 8002D4B8 0C00BCA4 */  jal       update_camera_mode_1
 /* 88BC 8002D4BC 0200202D */   daddu    $a0, $s0, $zero
 /* 88C0 8002D4C0 0800B540 */  j         .L8002D500
 /* 88C4 8002D4C4 00000000 */   nop
 glabel L8002D4C8_88C8
-/* 88C8 8002D4C8 0C00BB3E */  jal       do_camera_type_2
+/* 88C8 8002D4C8 0C00BB3E */  jal       update_camera_mode_2
 /* 88CC 8002D4CC 0200202D */   daddu    $a0, $s0, $zero
 /* 88D0 8002D4D0 0800B540 */  j         .L8002D500
 /* 88D4 8002D4D4 00000000 */   nop
 glabel L8002D4D8_88D8
-/* 88D8 8002D4D8 0C00BA44 */  jal       do_camera_type_4
+/* 88D8 8002D4D8 0C00BA44 */  jal       update_camera_mode_4
 /* 88DC 8002D4DC 0200202D */   daddu    $a0, $s0, $zero
 /* 88E0 8002D4E0 0800B540 */  j         .L8002D500
 /* 88E4 8002D4E4 00000000 */   nop
 glabel L8002D4E8_88E8
-/* 88E8 8002D4E8 0C00C000 */  jal       do_camera_type_5
+/* 88E8 8002D4E8 0C00C000 */  jal       update_camera_mode_5
 /* 88EC 8002D4EC 0200202D */   daddu    $a0, $s0, $zero
 /* 88F0 8002D4F0 0800B540 */  j         .L8002D500
 /* 88F4 8002D4F4 00000000 */   nop
 glabel L8002D4F8_88F8
-/* 88F8 8002D4F8 0C00BE64 */  jal       do_camera_type_6
+/* 88F8 8002D4F8 0C00BE64 */  jal       update_camera_mode_6
 /* 88FC 8002D4FC 0200202D */   daddu    $a0, $s0, $zero
 .L8002D500:
 /* 8900 8002D500 C6000044 */  lwc1      $f0, 0x44($s0)
@@ -107,7 +107,7 @@ glabel L8002D4F8_88F8
 /* 8958 8002D558 30620004 */  andi      $v0, $v1, 4
 /* 895C 8002D55C 10400004 */  beqz      $v0, .L8002D570
 /* 8960 8002D560 261100D4 */   addiu    $s1, $s0, 0xd4
-/* 8964 8002D564 0C00CCE5 */  jal       create_camera_lead_player_mtx
+/* 8964 8002D564 0C00CCE5 */  jal       create_camera_leadplayer_matrix
 /* 8968 8002D568 0200202D */   daddu    $a0, $s0, $zero
 /* 896C 8002D56C 261100D4 */  addiu     $s1, $s0, 0xd4
 .L8002D570:

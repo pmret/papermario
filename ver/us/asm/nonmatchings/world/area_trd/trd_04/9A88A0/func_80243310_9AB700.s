@@ -56,7 +56,7 @@ glabel func_80243310_9AB700
 /* 9AB7CC 802433DC A2220007 */  sb        $v0, 7($s1)
 /* 9AB7D0 802433E0 4600010D */  trunc.w.s $f4, $f0
 /* 9AB7D4 802433E4 44022000 */  mfc1      $v0, $f4
-/* 9AB7D8 802433E8 0C012530 */  jal       func_800494C0
+/* 9AB7D8 802433E8 0C012530 */  jal       ai_enemy_play_sound
 /* 9AB7DC 802433EC A6220014 */   sh       $v0, 0x14($s1)
 /* 9AB7E0 802433F0 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* 9AB7E4 802433F4 8E420000 */  lw        $v0, ($s2)

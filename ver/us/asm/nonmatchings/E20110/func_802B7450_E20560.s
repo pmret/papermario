@@ -85,7 +85,7 @@ glabel L802B74C8_E205D8
 /* E2066C 802B755C 080ADD5B */  j         .L802B756C
 /* E20670 802B7560 00000000 */   nop
 .L802B7564:
-/* E20674 802B7564 0C0394BE */  jal       can_player_interact
+/* E20674 802B7564 0C0394BE */  jal       phys_can_player_interact
 /* E20678 802B7568 00000000 */   nop
 .L802B756C:
 /* E2067C 802B756C 14400008 */  bnez      $v0, L802B7590_E206A0

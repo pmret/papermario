@@ -7,6 +7,7 @@ options:
   mnemonic_ljust: 10
   platform: n64
   subalign: 8
+  auto_all_sections: True
 
   base_path: ../..
   target_path: ver/us/baserom.z64
@@ -211,14 +212,14 @@ segments:
     - [0x45a30, c, os/45a30_len_20]
     - [0x45a50, c, os/45a50_len_3a0]
     - [0x45df0, hasm, os/exceptasm]
-    - [0x46760, hasm, os/__osDisableInt]
-    - [0x467D0, hasm, os/__osRestoreInt]
+    - [0x46760, hasm, os/osDisableInt]
+    - [0x467D0, hasm, os/osRestoreInt]
     - [0x467f0, c, os/467f0_len_90]
     - [0x46880, c, os/46880_len_260]
     - [0x46ae0, c, os/46ae0_len_170]
     - [0x46c50, c, os/46c50_len_20]
     - [0x46c70, c, os/46c70_len_e00]
-    - [0x47A60, hasm, os/__osGetCause]
+    - [0x47A60, hasm, os/osGetCause]
     - [0x47a70, c, os/47a70_len_10]
     - [0x47a80, c, os/47a80_len_10]
     - [0x47a90, c, os/47a90_len_50]
@@ -251,7 +252,7 @@ segments:
     - [0x4F670, .data, 43F0]
     - [0x4F9D0, data, 6240_len_c00]
     - [0x52D08, .data, f270_len_1190]
-    - [0x52D80, data]
+    - [0x52D80, .data, 10400_len_d30]
     - [0x52DC0, .data, 121f0_len_1290]
     - [0x52EE0, data] # Start of 13480_len_3f0's data
     - [0x53570, .data, 25f00_len_940]
@@ -318,8 +319,8 @@ segments:
     - [0x75240, .rodata, battle/battle] # ram 80099E40
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
-    - [0x75240, .bss, 1b40_len_20b0]
-    - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
+    # - [0x75240, .bss, 1b40_len_20b0]
+    # - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
     vram: 0x800DC500
@@ -357,7 +358,7 @@ segments:
     - [0xA54F0, .rodata, world/partners]
     - [0xA5798, .rodata, 891b0_len_fb0]
     - [0xA57C0, .rodata, 8a160_len_700]
-    - [0xA57E0, .rodata, 8a860_len_3f30]
+    - [0xA57E0, .rodata, 8a860_len_3f30] # bss at 8010C920
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
@@ -401,7 +402,6 @@ segments:
     - [0xE7940, .rodata, ddaf0_len_c50]
     - [0xE7950, .rodata, DF950]
     - [0xE7990, .rodata, e0b30_len_b80]
-    - [0xE79B0, .bss, a5dd0_len_114e0]
   - type: code
     dir: evt
     start: 0xE79B0
@@ -437,7 +437,7 @@ segments:
     subsegments:
     - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    - [0x102480, .data, sprite]
+    # - [0x102480, .data, sprite]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
@@ -1715,7 +1715,6 @@ segments:
     - [0x324a10, c, goompa]
     - [0x324e80, .data, goompa]
     - [0x324F00, .rodata, goompa]
-    - [0x324F10, .bss, goompa]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -3459,7 +3458,6 @@ segments:
     - [0x715E50,     c, mushroom] # DUMMY ROM
     - [0x715E50, .data, lib]
     - [0x71640C, .data, mushroom]
-    - [0x716C60,  .bss, lib]
   - dir: battle/item/fire_flower
     type: code
     start: 0x716C60
@@ -3471,7 +3469,6 @@ segments:
     - [0x717060,     c, fire_flower] # DUMMY ROM
     - [0x717060, .data, lib]
     - [0x71761C, .data, fire_flower]
-    - [0x7179D0,  .bss, lib]
   - dir: battle/item/dusty_hammer
     type: code
     start: 0x7179D0
@@ -3484,7 +3481,6 @@ segments:
     - [0x7181D0,     ci4, dusty_hammer, 32, 32]
     - [0x7183D0, palette, dusty_hammer]
     - [0x7183F0,   .data, dusty_hammer]
-    - [0x718850,    .bss, lib]
   - dir: battle/item/pow_block
     type: code
     start: 0x718850
@@ -3495,7 +3491,6 @@ segments:
     - [0x718850,     c, lib]
     - [0x718BF0, .data, lib]
     - [0x7191AC, .data, pow_block]
-    - [0x719970,  .bss, lib]
   - dir: battle/item/pebble
     type: code
     start: 0x719970
@@ -3507,7 +3502,6 @@ segments:
     - [0x71A170,     ci4, pebble, 32, 32]
     - [0x71A370, palette, pebble]
     - [0x71A390,   .data, pebble]
-    - [0x71A7F0,    .bss, lib]
   - dir: battle/item/volt_shroom
     type: code
     start: 0x71A7F0
@@ -3518,7 +3512,6 @@ segments:
     - [0x71A7F0,     c, lib]
     - [0x71AA70, .data, lib]
     - [0x71B02C, .data, volt_shroom]
-    - [0x71B1A0,  .bss, lib]
   - dir: battle/item/thunder_rage
     type: code
     start: 0x71B1A0
@@ -3529,7 +3522,6 @@ segments:
     - [0x71B1A0,     c, lib]
     - [0x71B640, .data, lib]
     - [0x71BBFC, .data, thunder_rage]
-    - [0x71BE30,  .bss, lib]
   - dir: battle/item/snowman_doll
     type: code
     start: 0x71BE30
@@ -3540,7 +3532,6 @@ segments:
     - [0x71BE30,     c, lib]
     - [0x71C270, .data, lib]
     - [0x71C82C, .data, snowman_doll]
-    - [0x71CCE0,  .bss, lib]
   - dir: battle/item/dried_shroom
     type: code
     start: 0x71CCE0
@@ -3551,7 +3542,6 @@ segments:
     - [0x71CCE0,     c, lib]
     - [0x71D010, .data, lib]
     - [0x71D5DC, .data, dried_shroom]
-    - [0x71D770,  .bss, lib]
   - dir: battle/item/shooting_star
     type: code
     start: 0x71D770
@@ -3562,7 +3552,6 @@ segments:
     - [0x71D770,     c, lib]
     - [0x71DCC0, .data, lib]
     - [0x71E27C, .data, shooting_star]
-    - [0x71E650,  .bss, lib]
   - dir: battle/item/sleepy_sheep
     type: code
     start: 0x71E650
@@ -3579,7 +3568,6 @@ segments:
     - [0x720580, palette, sleepy_sheep3]
     - [0x7205A0,   .data, sleepy_sheep]
     - [0x7214D8, .rodata, lib]
-    - [0x7215A0,    .bss, lib]
   - dir: battle/item/stone_cap
     type: code
     start: 0x7215A0
@@ -3590,7 +3578,6 @@ segments:
     - [0x7215A0,     c, lib]
     - [0x721970, .data, lib]
     - [0x721F2C, .data, stone_cap]
-    - [0x722000,  .bss, lib]
   - dir: battle/item/tasty_tonic
     type: code
     start: 0x722000
@@ -3601,7 +3588,6 @@ segments:
     - [0x722000,     c, lib]
     - [0x7222D0, .data, lib]
     - [0x72289C, .data, tasty_tonic]
-    - [0x722B40,  .bss, lib]
   - dir: battle/item/thunder_bolt
     type: code
     start: 0x722B40
@@ -3612,7 +3598,6 @@ segments:
     - [0x722B40,     c, lib]
     - [0x722FE0, .data, lib]
     - [0x72359C, .data, thunder_bolt]
-    - [0x723780,  .bss, lib]
   - dir: battle/item/ultra_shroom
     type: code
     start: 0x723780
@@ -3623,7 +3608,6 @@ segments:
     - [0x723780,     c, lib]
     - [0x723AB0, .data, lib]
     - [0x72407C, .data, ultra_shroom]
-    - [0x724240,  .bss, lib]
   - dir: battle/item/unknown_item
     type: code
     start: 0x724240
@@ -3634,7 +3618,6 @@ segments:
     - [0x724240,     c, lib]
     - [0x724570, .data, lib]
     - [0x724B3C, .data, unknown_item]
-    - [0x724CE0,  .bss, lib]
   - dir: battle/item/super_soda
     type: code
     start: 0x724CE0
@@ -3645,7 +3628,6 @@ segments:
     - [0x724CE0,     c, lib]
     - [0x725210, .data, lib]
     - [0x7257CC, .data, super_soda]
-    - [0x725F60,  .bss, lib]
   - dir: battle/item/hustle_drink
     type: code
     start: 0x725F60
@@ -3656,7 +3638,6 @@ segments:
     - [0x725F60,     c, lib]
     - [0x726240, .data, lib]
     - [0x7267FC, .data, hustle_drink]
-    - [0x726DD0,  .bss, lib]
   - dir: battle/item/stop_watch
     type: code
     start: 0x726DD0
@@ -3667,7 +3648,6 @@ segments:
     - [0x726DD0,     c, lib]
     - [0x727120, .data, lib]
     - [0x7276EC, .data, stop_watch]
-    - [0x727910,  .bss, lib]
   - dir: battle/item/dizzy_dial
     type: code
     start: 0x727910
@@ -3679,7 +3659,6 @@ segments:
     - [0x727CE0,   .data, lib]
     - [0x72829C,   .data, dizzy_dial]
     - [0x7285D0, .rodata, lib]
-    - [0x7285E0,    .bss, lib]
   - dir: battle/item/please_come_back
     type: code
     start: 0x7285E0
@@ -3690,7 +3669,6 @@ segments:
     - [0x7285E0,     c, lib]
     - [0x728820, .data, lib]
     - [0x728DDC, .data, please_come_back]
-    - [0x728EC0,  .bss, lib]
   - dir: battle/item/egg_missile
     type: code
     start: 0x728EC0
@@ -3708,7 +3686,6 @@ segments:
     - [0x729DF0,     ci4, egg_missile4, 32, 32]
     - [0x729FF0, palette, egg_missile4]
     - [0x72A010,   .data, egg_missile]
-    - [0x72A750,    .bss, lib]
   - dir: battle/item/insecticide_herb
     type: code
     start: 0x72A750
@@ -3720,7 +3697,6 @@ segments:
     - [0x72B130,     ci4, insecticide_herb, 32, 32]
     - [0x72B330, palette, insecticide_herb]
     - [0x72B350,   .data, insecticide_herb]
-    - [0x72B910,    .bss, lib]
   - dir: battle/item/fright_jar
     type: code
     start: 0x72B910
@@ -3731,7 +3707,6 @@ segments:
     - [0x72B910,     c, lib]
     - [0x72BC60, .data, lib]
     - [0x72C22C, .data, fright_jar]
-    - [0x72C5B0,  .bss, lib]
   - dir: battle/item/mystery
     type: code
     start: 0x72C5B0
@@ -3744,7 +3719,6 @@ segments:
     - [0x72D6C0, palette, mystery]
     - [0x72D6E0,   .data, mystery]
     - [0x72DB50, .rodata, lib]
-    - [0x72DB70,    .bss, lib]
   - dir: battle/item/repel_gel
     type: code
     start: 0x72DB70
@@ -3755,7 +3729,6 @@ segments:
     - [0x72DB70,     c, lib]
     - [0x72DE00, .data, lib]
     - [0x72E3CC, .data, repel_gel]
-    - [0x72E530,  .bss, lib]
   - dir: battle/item/life_shroom
     type: code
     start: 0x72E530
@@ -3766,7 +3739,6 @@ segments:
     - [0x72E530,     c, lib]
     - [0x72EA20, .data, lib]
     - [0x72EFEC, .data, life_shroom]
-    - [0x72F720,  .bss, lib]
   - dir: battle/item/coconut
     type: code
     start: 0x72F720
@@ -3778,7 +3750,6 @@ segments:
     - [0x72FF20, ci4,     coconut, 32, 32]
     - [0x730120, palette, coconut]
     - [0x730140, .data,   coconut]
-    - [0x7305A0, .bss,    lib]
   - dir: battle/item/electro_pop
     type: code
     start: 0x7305A0
@@ -3789,7 +3760,6 @@ segments:
     - [0x7305A0,     c, lib]
     - [0x730AE0, .data, lib]
     - [0x73109C, .data, electro_pop]
-    - [0x731300,  .bss, lib]
   - dir: battle/item/strange_cake
     type: code
     start: 0x731300
@@ -3806,7 +3776,6 @@ segments:
     - [0x732AB0, palette, strange_cake3]
     - [0x732AD0,   .data, strange_cake]
     - [0x7330B0, .rodata, lib]
-    - [0x7330D0,    .bss, lib]
   - dir: battle/item/food
     type: code
     start: 0x7330D0
@@ -3817,7 +3786,6 @@ segments:
     - [0x7330D0,     c, lib]
     - [0x733700, .data, lib]
     - [0x733CBC, .data, food]
-    - [0x7345A0,  .bss, lib]
   - dir: battle/move/hammer
     type: code
     start: 0x7345A0
@@ -4192,7 +4160,6 @@ segments:
     - [0x7E4D00, .data, 7E0E80]
     - [0x7E4EF0, data]
     - [0x7E7380, .rodata, 7E2AA0]
-    - [0x7E73A0, .bss, 7E0E80]
   - name: machi
     dir: world/area_mac/machi
     type: code
@@ -5663,7 +5630,6 @@ segments:
     - [0x95ECC0,   .data, 95B7E0]
     - [0x9685C0,   .data, 95E7A0]
     - [0x968FD0, .rodata, 95B7E0]
-    - [0x9691C0,    .bss, 95B7E0]
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
@@ -5675,7 +5641,6 @@ segments:
     - [0x9694C0,       c, 9694C0]
     - [0x96CC30,   .data, 9694C0]
     - [0x9780D0, .rodata, 9694C0]
-    - [0x978140,    .bss, 9694C0]
   - name: isk_01
     dir: world/area_isk/isk_01
     type: code
@@ -8204,7 +8169,6 @@ segments:
     - [0xBE04B0,   .data, header]
     - [0xBE05C0,   .data, events]
     - [0xBE35E0, .rodata, events]
-    - [0xBE37B0,    .bss, events]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
@@ -8816,7 +8780,6 @@ segments:
     - [0xCB0B80,       c, CB0B80]
     - [0xCB0C20,   .data, CAFAC0]
     - [0xCB4E60, .rodata, CAFAC0]
-    - [0xCB5000,    .bss, CAFAC0]
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
@@ -8867,7 +8830,6 @@ segments:
     - [0xCC0E70,       c, CC0E70]
     - [0xCC1520,   .data, CC0E70]
     - [0xCC3800, .rodata, CC0E70]
-    - [0xCC3810,    .bss, CC0E70]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
@@ -8881,7 +8843,6 @@ segments:
     - [0xCC6E80,   .data, CC3850]
     - [0xCCB230, .rodata, CC3850]
     - [0xCCB300, .rodata, CC6DE0]
-    - [0xCCB310,    .bss, CC6DE0]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
@@ -8896,7 +8857,6 @@ segments:
     - [0xCCF7D0,   .data, CCBE20]
     - [0xCD0620, .rodata, CCB310]
     - [0xCD0660, .rodata, CCBE20]
-    - [0xCD06C0,    .bss, CCBE20]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
@@ -8993,7 +8953,6 @@ segments:
     - [0xCEE2A0,       c, CEE2A0]
     - [0xCEEF30,   .data, CEE2A0]
     - [0xCF08D0, .rodata, CEE2A0]
-    - [0xCF0940,    .bss, CEE2A0]
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
@@ -9020,7 +8979,6 @@ segments:
     - [0xCF4EA0,   .data, CF2C10]
     - [0xCF68B0,   .data, CF4BC0]
     - [0xCF7AA0, .rodata, CF2C10]
-    - [0xCF7B70,    .bss, CF2C10]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code

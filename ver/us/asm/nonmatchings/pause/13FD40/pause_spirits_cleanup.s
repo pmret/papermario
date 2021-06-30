@@ -12,7 +12,7 @@ glabel pause_spirits_cleanup
 .L8024D8F4:
 /* 140C34 8024D8F4 8E040000 */  lw        $a0, ($s0)
 /* 140C38 8024D8F8 26100004 */  addiu     $s0, $s0, 4
-/* 140C3C 8024D8FC 0C0B797A */  jal       func_802DE5E8
+/* 140C3C 8024D8FC 0C0B797A */  jal       spr_free_sprite
 /* 140C40 8024D900 26310001 */   addiu    $s1, $s1, 1
 /* 140C44 8024D904 2A220007 */  slti      $v0, $s1, 7
 /* 140C48 8024D908 1440FFFA */  bnez      $v0, .L8024D8F4

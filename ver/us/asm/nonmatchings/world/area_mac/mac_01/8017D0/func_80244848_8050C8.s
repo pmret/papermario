@@ -16,7 +16,7 @@ glabel func_80244848_8050C8
 /* 8050F0 80244870 00000000 */  nop
 /* 8050F4 80244874 46800020 */  cvt.s.w   $f0, $f0
 /* 8050F8 80244878 44050000 */  mfc1      $a1, $f0
-/* 8050FC 8024487C 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 8050FC 8024487C 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 805100 80244880 0000202D */   daddu    $a0, $zero, $zero
 /* 805104 80244884 08091225 */  j         .L80244894
 /* 805108 80244888 0000102D */   daddu    $v0, $zero, $zero

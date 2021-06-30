@@ -46,7 +46,7 @@ glabel func_802434F4_9AB8E4
 /* 9AB988 80243598 E7A60024 */  swc1      $f6, 0x24($sp)
 /* 9AB98C 8024359C AFA20010 */  sw        $v0, 0x10($sp)
 /* 9AB990 802435A0 8E040080 */  lw        $a0, 0x80($s0)
-/* 9AB994 802435A4 0C0372DF */  jal       func_800DCB7C
+/* 9AB994 802435A4 0C0372DF */  jal       npc_raycast_down_sides
 /* 9AB998 802435A8 27A70020 */   addiu    $a3, $sp, 0x20
 /* 9AB99C 802435AC 10400003 */  beqz      $v0, .L802435BC
 /* 9AB9A0 802435B0 4600A086 */   mov.s    $f2, $f20

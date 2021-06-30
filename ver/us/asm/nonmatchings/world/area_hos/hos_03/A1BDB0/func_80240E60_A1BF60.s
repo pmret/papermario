@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240E60_A1BF60
+glabel btl_merlee_on_start_turn_A1BF60
 /* A1BF60 80240E60 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* A1BF64 80240E64 AFB3004C */  sw        $s3, 0x4c($sp)
 /* A1BF68 80240E68 0080982D */  daddu     $s3, $a0, $zero
@@ -82,7 +82,7 @@ glabel func_80240E60_A1BF60
 /* A1C090 80240F90 E7A60034 */  swc1      $f6, 0x34($sp)
 /* A1C094 80240F94 AFA20010 */  sw        $v0, 0x10($sp)
 /* A1C098 80240F98 8E040080 */  lw        $a0, 0x80($s0)
-/* A1C09C 80240F9C 0C0372DF */  jal       func_800DCB7C
+/* A1C09C 80240F9C 0C0372DF */  jal       npc_raycast_down_sides
 /* A1C0A0 80240FA0 27A70030 */   addiu    $a3, $sp, 0x30
 /* A1C0A4 80240FA4 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* A1C0A8 80240FA8 4600D001 */  sub.s     $f0, $f26, $f0
@@ -126,7 +126,7 @@ glabel func_80240E60_A1BF60
 /* A1C138 80241038 E7A40034 */  swc1      $f4, 0x34($sp)
 /* A1C13C 8024103C AFA20010 */  sw        $v0, 0x10($sp)
 /* A1C140 80241040 8E040080 */  lw        $a0, 0x80($s0)
-/* A1C144 80241044 0C0372DF */  jal       func_800DCB7C
+/* A1C144 80241044 0C0372DF */  jal       npc_raycast_down_sides
 /* A1C148 80241048 27A70030 */   addiu    $a3, $sp, 0x30
 /* A1C14C 8024104C C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* A1C150 80241050 461A2100 */  add.s     $f4, $f4, $f26
@@ -185,7 +185,7 @@ glabel func_80240E60_A1BF60
 /* A1C218 80241118 E7A60034 */  swc1      $f6, 0x34($sp)
 /* A1C21C 8024111C AFA20010 */  sw        $v0, 0x10($sp)
 /* A1C220 80241120 8E040080 */  lw        $a0, 0x80($s0)
-/* A1C224 80241124 0C0372DF */  jal       func_800DCB7C
+/* A1C224 80241124 0C0372DF */  jal       npc_raycast_down_sides
 /* A1C228 80241128 27A70030 */   addiu    $a3, $sp, 0x30
 .L8024112C:
 /* A1C22C 8024112C 10400007 */  beqz      $v0, .L8024114C
@@ -272,7 +272,7 @@ glabel func_80240E60_A1BF60
 /* A1C364 80241264 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* A1C368 80241268 C480003C */  lwc1      $f0, 0x3c($a0)
 /* A1C36C 8024126C 3C060020 */  lui       $a2, 0x20
-/* A1C370 80241270 0C012530 */  jal       func_800494C0
+/* A1C370 80241270 0C012530 */  jal       ai_enemy_play_sound
 /* A1C374 80241274 E4800064 */   swc1     $f0, 0x64($a0)
 /* A1C378 80241278 8E220018 */  lw        $v0, 0x18($s1)
 /* A1C37C 8024127C 9442002A */  lhu       $v0, 0x2a($v0)

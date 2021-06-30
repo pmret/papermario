@@ -8,14 +8,14 @@ glabel func_802A9834_427204
 /* 427210 802A9840 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
 /* 427214 802A9844 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 427218 802A9848 AFB00018 */  sw        $s0, 0x18($sp)
-/* 42721C 802A984C 0C0511EA */  jal       draw_icon_0
+/* 42721C 802A984C 0C0511EA */  jal       draw_hud_element_clipped
 /* 427220 802A9850 8E240004 */   lw       $a0, 4($s1)
 /* 427224 802A9854 8E300008 */  lw        $s0, 8($s1)
-/* 427228 802A9858 0C0511EA */  jal       draw_icon_0
+/* 427228 802A9858 0C0511EA */  jal       draw_hud_element_clipped
 /* 42722C 802A985C 0200202D */   daddu    $a0, $s0, $zero
 /* 427230 802A9860 0200202D */  daddu     $a0, $s0, $zero
 /* 427234 802A9864 27A50010 */  addiu     $a1, $sp, 0x10
-/* 427238 802A9868 0C05126B */  jal       get_icon_render_pos
+/* 427238 802A9868 0C05126B */  jal       get_hud_element_render_pos
 /* 42723C 802A986C 27A60014 */   addiu    $a2, $sp, 0x14
 /* 427240 802A9870 86220068 */  lh        $v0, 0x68($s1)
 /* 427244 802A9874 14400011 */  bnez      $v0, .L802A98BC
@@ -53,7 +53,7 @@ glabel func_802A9834_427204
 /* 4272C0 802A98F0 00063403 */   sra      $a2, $a2, 0x10
 .L802A98F4:
 /* 4272C4 802A98F4 8E24000C */  lw        $a0, 0xc($s1)
-/* 4272C8 802A98F8 0C0511EA */  jal       draw_icon_0
+/* 4272C8 802A98F8 0C0511EA */  jal       draw_hud_element_clipped
 /* 4272CC 802A98FC 00000000 */   nop
 /* 4272D0 802A9900 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 4272D4 802A9904 8FB1001C */  lw        $s1, 0x1c($sp)

@@ -11,7 +11,7 @@ glabel func_80240410_EC2610
 /* EC2628 80240428 F7B80028 */  sdc1      $f24, 0x28($sp)
 /* EC262C 8024042C 4487C000 */  mtc1      $a3, $f24
 /* EC2630 80240430 AFBF0014 */  sw        $ra, 0x14($sp)
-/* EC2634 80240434 0C01B198 */  jal       __osGetCause
+/* EC2634 80240434 0C01B198 */  jal       osGetCause
 /* EC2638 80240438 0080802D */   daddu    $s0, $a0, $zero
 /* EC263C 8024043C 4616A582 */  mul.s     $f22, $f20, $f22
 /* EC2640 80240440 00000000 */  nop

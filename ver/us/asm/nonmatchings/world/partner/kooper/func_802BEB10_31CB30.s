@@ -7,7 +7,7 @@ glabel func_802BEB10_31CB30
 /* 31CB38 802BEB18 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 31CB3C 802BEB1C 10400005 */  beqz      $v0, .L802BEB34
 /* 31CB40 802BEB20 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 31CB44 802BEB24 0C03BD17 */  jal       clear_partner_move_history
+/* 31CB44 802BEB24 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31CB48 802BEB28 00000000 */   nop
 /* 31CB4C 802BEB2C 0C03ACC5 */  jal       partner_use_ability
 /* 31CB50 802BEB30 00000000 */   nop

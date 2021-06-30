@@ -114,8 +114,8 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
         if (opacity > 255) {
             opacity = 255;
         }
-        icon_set_opacity(gPauseMenuCommonIconIDs[0], opacity);
-        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
+        set_hud_element_alpha(gPauseMenuCommonIconIDs[0], opacity);
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
         draw_icon_2(gPauseMenuCommonIconIDs[0]);
     }
 }

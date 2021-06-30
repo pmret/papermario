@@ -16,7 +16,7 @@ glabel func_80240CB4_AF8604
 /* AF862C 80240CDC 00000000 */  nop
 /* AF8630 80240CE0 46800020 */  cvt.s.w   $f0, $f0
 /* AF8634 80240CE4 44050000 */  mfc1      $a1, $f0
-/* AF8638 80240CE8 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* AF8638 80240CE8 0C04DF62 */  jal       set_screen_overlay_params_front
 /* AF863C 80240CEC 0000202D */   daddu    $a0, $zero, $zero
 /* AF8640 80240CF0 08090340 */  j         .L80240D00
 /* AF8644 80240CF4 0000102D */   daddu    $v0, $zero, $zero

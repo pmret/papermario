@@ -9,7 +9,7 @@ glabel func_8024081C_9B1FAC
 /* 9B1FBC 8024082C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 9B1FC0 80240830 0C04EA15 */  jal       func_8013A854
 /* 9B1FC4 80240834 8E040004 */   lw       $a0, 4($s0)
-/* 9B1FC8 80240838 0C048D70 */  jal       free_dynamic_entity
+/* 9B1FC8 80240838 0C048D70 */  jal       free_generic_entity
 /* 9B1FCC 8024083C 8E040008 */   lw       $a0, 8($s0)
 /* 9B1FD0 80240840 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 9B1FD4 80240844 8FB00010 */  lw        $s0, 0x10($sp)

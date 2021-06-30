@@ -20,7 +20,7 @@ BGMPlayer* snd_get_player_with_song_name(s32 songString) {
 INCLUDE_ASM(BGMPlayer*, "28910_len_5090", snd_get_player_with_song_name, s32 songString);
 #endif
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004D7E0);
+INCLUDE_ASM(s32, "28910_len_5090", snd_dispatch_bgm_player_event);
 
 s32 func_8004DA0C(s32 songName) {
     s32 ret = 0;
@@ -55,11 +55,11 @@ void func_8004DAA8(BGMPlayer* player) {
         player->unk_221 = 4;
         player->unk_10 = 1;
         player->unkFrequency = 1;
-        func_80053A18(&player->fadeInfo);
+        snd_clear_bgm_fade(&player->fadeInfo);
     }
 }
 
-s32 func_8004DAE0(s32 songName) {
+s32 snd_is_song_playing(s32 songName) {
     if (songName != 0) {
         BGMPlayer* player = snd_get_player_with_song_name(songName);
 

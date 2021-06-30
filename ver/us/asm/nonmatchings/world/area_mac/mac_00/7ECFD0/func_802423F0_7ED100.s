@@ -88,7 +88,7 @@ glabel func_802423F0_7ED100
 /* 7ED24C 8024253C AC720010 */  sw        $s2, 0x10($v1)
 /* 7ED250 80242540 AC600014 */  sw        $zero, 0x14($v1)
 /* 7ED254 80242544 AC730018 */  sw        $s3, 0x18($v1)
-/* 7ED258 80242548 0C0475CB */  jal       func_8011D72C
+/* 7ED258 80242548 0C0475CB */  jal       mdl_draw_hidden_panel_surface
 /* 7ED25C 8024254C AC68001C */   sw       $t0, 0x1c($v1)
 /* 7ED260 80242550 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 7ED264 80242554 8FB3001C */  lw        $s3, 0x1c($sp)

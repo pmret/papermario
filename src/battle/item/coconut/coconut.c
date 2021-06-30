@@ -41,18 +41,18 @@ Script N(main) = SCRIPT({
 
     await N(UseItemWithEffect);
 
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(15);
 
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
 
-    func_802D3474(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
 
     $x = 1.0;
     MultiplyByActorScale($x);
-    func_802D38EC(SI_VAR(10), $x, $x, $x);
+    SetVirtualEntityScale(SI_VAR(10), $x, $x, $x);
 
     GetActorPos(ACTOR_PLAYER, $x, $y, $z);
     SI_VAR(3) = 20;
@@ -62,7 +62,7 @@ Script N(main) = SCRIPT({
     $x += SI_VAR(3);
     $y += SI_VAR(4);
     $z += SI_VAR(5);
-    func_802D36E0(SI_VAR(10), $x, $y, $z);
+    SetVirtualEntityPosition(SI_VAR(10), $x, $y, $z);
 
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
@@ -72,14 +72,14 @@ Script N(main) = SCRIPT({
         $x = 0;
         loop 18 {
             $x += -60;
-            func_802D3840(SI_VAR(10), 0, 0, $x);
+            SetVirtualEntityRotation(SI_VAR(10), 0, 0, $x);
             sleep 1;
         }
     }
 
-    func_802D39FC(SI_VAR(10), 0.8);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 0.8);
     $z += 5;
-    func_802D3C58(SI_VAR(10), $x, $y, $z, 18);
+    VirtualEntityJumpTo(SI_VAR(10), $x, $y, $z, 18);
 
     GetItemPower(ITEM_COCONUT, $damage, SI_VAR(4));
     ApplyShrinkFromOwner($damage);
@@ -88,9 +88,9 @@ Script N(main) = SCRIPT({
     // Bounce off
     $x += 60;
     $y += 0;
-    func_802D3C58(SI_VAR(10), $x, $y, $z, 16);
+    VirtualEntityJumpTo(SI_VAR(10), $x, $y, $z, 16);
 
-    func_802D3624(SI_VAR(10));
+    DeleteVirtualEntity(SI_VAR(10));
 
     await N(PlayerGoHome);
 });

@@ -1,12 +1,12 @@
-void func_80035DCC(void);
+void state_world_draw_aux_ui(void);
 
-void begin_state_world(void) {
-    func_80112D84(0, func_80035DCC);
+void state_init_world(void) {
+    game_mode_set_fpDrawAuxUI(0, state_world_draw_aux_ui);
 }
 
-void step_world(void) {
-    update_counters();
-    npc_list_update();
+void state_step_world(void) {
+    update_encounters();
+    update_npcs();
     update_player();
     update_item_entities();
     update_effects();
@@ -14,12 +14,12 @@ void step_world(void) {
     update_cameras();
 }
 
-void func_80035DA0(void) {
+void state_drawUI_world(void) {
     draw_status_ui();
     draw_encounter_ui();
     func_8013A6E8();
 }
 
-void func_80035DCC(void) {
+void state_world_draw_aux_ui(void) {
     draw_first_strike_ui();
 }

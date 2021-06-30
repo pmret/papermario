@@ -15,7 +15,7 @@ glabel func_80218A90_66A810
 /* 66A838 80218AB8 44810000 */  mtc1      $at, $f0
 /* 66A83C 80218ABC 0000382D */  daddu     $a3, $zero, $zero
 /* 66A840 80218AC0 AFA00014 */  sw        $zero, 0x14($sp)
-/* 66A844 80218AC4 0C01C844 */  jal       func_80072110
+/* 66A844 80218AC4 0C01C844 */  jal       playFX_6C
 /* 66A848 80218AC8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 66A84C 80218ACC 0200202D */  daddu     $a0, $s0, $zero
 /* 66A850 80218AD0 8E250000 */  lw        $a1, ($s1)

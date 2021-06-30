@@ -46,7 +46,7 @@ glabel mdl_create_model
 /* AC9B0 801162B0 AFA20014 */  sw        $v0, 0x14($sp)
 /* AC9B4 801162B4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* AC9B8 801162B8 8E060014 */  lw        $a2, 0x14($s0)
-/* AC9BC 801162BC 0C01C124 */  jal       func_80070490
+/* AC9BC 801162BC 0C01C124 */  jal       playFX_20
 /* AC9C0 801162C0 2624FFFF */   addiu    $a0, $s1, -1
 /* AC9C4 801162C4 08045995 */  j         .L80116654
 /* AC9C8 801162C8 00000000 */   nop

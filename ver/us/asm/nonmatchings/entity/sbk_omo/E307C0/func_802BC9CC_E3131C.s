@@ -9,7 +9,7 @@ glabel func_802BC9CC_E3131C
 /* E3132C 802BC9DC 30420001 */  andi      $v0, $v0, 1
 /* E31330 802BC9E0 10400003 */  beqz      $v0, .L802BC9F0
 /* E31334 802BC9E4 00000000 */   nop
-/* E31338 802BC9E8 0C04419E */  jal       func_80110678
+/* E31338 802BC9E8 0C04419E */  jal       entity_start_script
 /* E3133C 802BC9EC 00000000 */   nop
 .L802BC9F0:
 /* E31340 802BC9F0 8FBF0010 */  lw        $ra, 0x10($sp)

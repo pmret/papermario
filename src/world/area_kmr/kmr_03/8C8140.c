@@ -8,7 +8,7 @@ enum {
 ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
 
-    script->varTable[1] = func_800E0088(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
+    script->varTable[1] = get_xz_dist_to_player(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
     return ApiStatus_DONE2;
 }
 

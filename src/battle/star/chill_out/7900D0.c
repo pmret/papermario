@@ -31,13 +31,13 @@ ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {
     f32 b = rand_int(120) + 7;
     f32 c = rand_int(50) - 25;
 
-    func_80072230(2, a, b, c, 2.0f, 20);
+    playFX_6F(2, a, b, c, 2.0f, 20);
 
     a = rand_int(200) - 25;
     b = rand_int(120) + 7;
     c = rand_int(50) - 25;
 
-    func_8006FEF0(4, a, b, c, 40.0f);
+    playFX_11(4, a, b, c, 40.0f);
     return ApiStatus_DONE2;
 }
 

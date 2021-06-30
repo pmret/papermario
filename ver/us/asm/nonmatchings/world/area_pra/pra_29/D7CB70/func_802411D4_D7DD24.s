@@ -34,7 +34,7 @@ glabel func_802411D4_D7DD24
 /* D7DD98 80241248 46800020 */  cvt.s.w   $f0, $f0
 /* D7DD9C 8024124C 44070000 */  mfc1      $a3, $f0
 /* D7DDA0 80241250 0000202D */  daddu     $a0, $zero, $zero
-/* D7DDA4 80241254 0C01C16C */  jal       func_800705B0
+/* D7DDA4 80241254 0C01C16C */  jal       playFX_23
 /* D7DDA8 80241258 AFA00010 */   sw       $zero, 0x10($sp)
 /* D7DDAC 8024125C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* D7DDB0 80241260 8FB20020 */  lw        $s2, 0x20($sp)

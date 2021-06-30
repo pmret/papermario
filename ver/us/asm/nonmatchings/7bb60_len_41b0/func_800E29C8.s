@@ -53,9 +53,9 @@ glabel func_800E29C8
 /* 7BF30 800E2A80 00000000 */  nop
 /* 7BF34 800E2A84 45000009 */  bc1f      .L800E2AAC
 /* 7BF38 800E2A88 00000000 */   nop
-/* 7BF3C 800E2A8C 0C0389AC */  jal       func_800E26B0
+/* 7BF3C 800E2A8C 0C0389AC */  jal       record_jump_apex
 /* 7BF40 800E2A90 00000000 */   nop
-/* 7BF44 800E2A94 0C038C1B */  jal       gravity_use_fall_params
+/* 7BF44 800E2A94 0C038C1B */  jal       gravity_use_fall_parms
 /* 7BF48 800E2A98 00000000 */   nop
 /* 7BF4C 800E2A9C 0C038D12 */  jal       integrate_gravity
 /* 7BF50 800E2AA0 00000000 */   nop
@@ -101,7 +101,7 @@ glabel func_800E29C8
 /* 7BFE0 800E2B30 0C038D36 */  jal       func_800E34D8
 /* 7BFE4 800E2B34 00000000 */   nop
 /* 7BFE8 800E2B38 46000306 */  mov.s     $f12, $f0
-/* 7BFEC 800E2B3C 0C038D45 */  jal       func_800E3514
+/* 7BFEC 800E2B3C 0C038D45 */  jal       player_check_collision_below
 /* 7BFF0 800E2B40 27A50010 */   addiu    $a1, $sp, 0x10
 /* 7BFF4 800E2B44 8FA40010 */  lw        $a0, 0x10($sp)
 /* 7BFF8 800E2B48 0C038C57 */  jal       func_800E315C
@@ -117,7 +117,7 @@ glabel func_800E29C8
 /* 7C020 800E2B70 3C040001 */  lui       $a0, 1
 /* 7C024 800E2B74 34840009 */  ori       $a0, $a0, 9
 .L800E2B78:
-/* 7C028 800E2B78 0C037FBF */  jal       func_800DFEFC
+/* 7C028 800E2B78 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 7C02C 800E2B7C 00000000 */   nop
 /* 7C030 800E2B80 0C038069 */  jal       enable_player_input
 /* 7C034 800E2B84 00000000 */   nop

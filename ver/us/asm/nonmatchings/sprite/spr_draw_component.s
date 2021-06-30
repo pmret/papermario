@@ -77,7 +77,7 @@ glabel spr_draw_component
 /* 1000EC 802DCFFC 00101880 */   sll      $v1, $s0, 2
 /* 1000F0 802DD000 3C05802E */  lui       $a1, %hi(D_802DF57C)
 /* 1000F4 802DD004 8CA5F57C */  lw        $a1, %lo(D_802DF57C)($a1)
-/* 1000F8 802DD008 0C0B7BA8 */  jal       func_802DEEA0
+/* 1000F8 802DD008 0C0B7BA8 */  jal       spr_get_player_raster
 /* 1000FC 802DD00C 30840FFF */   andi     $a0, $a0, 0xfff
 /* 100100 802DD010 AE420000 */  sw        $v0, ($s2)
 /* 100104 802DD014 00101880 */  sll       $v1, $s0, 2
@@ -117,7 +117,7 @@ glabel spr_draw_component
 /* 100188 802DD098 AFB30028 */  sw        $s3, 0x28($sp)
 /* 10018C 802DD09C AFA3002C */  sw        $v1, 0x2c($sp)
 /* 100190 802DD0A0 AFA20030 */  sw        $v0, 0x30($sp)
-/* 100194 802DD0A4 0C0B723D */  jal       spr_appendMDL_component
+/* 100194 802DD0A4 0C0B723D */  jal       spr_appendGfx_component
 /* 100198 802DD0A8 E7A00024 */   swc1     $f0, 0x24($sp)
 /* 10019C 802DD0AC 8E020000 */  lw        $v0, ($s0)
 /* 1001A0 802DD0B0 AE22004C */  sw        $v0, 0x4c($s1)

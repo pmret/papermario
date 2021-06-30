@@ -26,7 +26,7 @@ glabel func_8003DA38
 /* 18E8C 8003DA8C 3C108007 */  lui       $s0, %hi(D_80077C18)
 /* 18E90 8003DA90 26107C18 */  addiu     $s0, $s0, %lo(D_80077C18)
 /* 18E94 8003DA94 8E070000 */  lw        $a3, ($s0)
-/* 18E98 8003DA98 0C01BEE4 */  jal       func_8006FB90
+/* 18E98 8003DA98 0C01BEE4 */  jal       playFX_08
 /* 18E9C 8003DA9C 460E0380 */   add.s    $f14, $f0, $f14
 /* 18EA0 8003DAA0 C6000000 */  lwc1      $f0, ($s0)
 /* 18EA4 8003DAA4 3C01420C */  lui       $at, 0x420c
@@ -119,7 +119,7 @@ glabel func_8003DA38
 /* 18FF8 8003DBF8 C6020000 */  lwc1      $f2, ($s0)
 /* 18FFC 8003DBFC 468010A0 */  cvt.s.w   $f2, $f2
 /* 19000 8003DC00 E7A20014 */  swc1      $f2, 0x14($sp)
-/* 19004 8003DC04 0C01BEFC */  jal       func_8006FBF0
+/* 19004 8003DC04 0C01BEFC */  jal       playFX_09
 /* 19008 8003DC08 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 1900C 8003DC0C 8E020000 */  lw        $v0, ($s0)
 /* 19010 8003DC10 2C420001 */  sltiu     $v0, $v0, 1

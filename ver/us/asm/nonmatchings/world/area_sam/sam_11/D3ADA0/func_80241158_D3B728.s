@@ -43,7 +43,7 @@ glabel func_80241158_D3B728
 /* D3B7B8 802411E8 ACA00018 */   sw       $zero, 0x18($a1)
 /* D3B7BC 802411EC 3C048025 */  lui       $a0, %hi(D_80251450)
 /* D3B7C0 802411F0 8C841450 */  lw        $a0, %lo(D_80251450)($a0)
-/* D3B7C4 802411F4 0C048D70 */  jal       free_dynamic_entity
+/* D3B7C4 802411F4 0C048D70 */  jal       free_generic_entity
 /* D3B7C8 802411F8 00000000 */   nop
 /* D3B7CC 802411FC 24020002 */  addiu     $v0, $zero, 2
 .L80241200:

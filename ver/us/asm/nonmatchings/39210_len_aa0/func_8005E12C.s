@@ -351,7 +351,7 @@ glabel func_8005E12C
 /* 39A4C 8005E64C E7A2002C */  swc1      $f2, 0x2c($sp)
 /* 39A50 8005E650 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39A54 8005E654 8E440080 */  lw        $a0, 0x80($s2)
-/* 39A58 8005E658 0C0372DF */  jal       func_800DCB7C
+/* 39A58 8005E658 0C0372DF */  jal       npc_raycast_down_sides
 /* 39A5C 8005E65C 27A70030 */   addiu    $a3, $sp, 0x30
 /* 39A60 8005E660 10400087 */  beqz      $v0, .L8005E880
 /* 39A64 8005E664 00000000 */   nop

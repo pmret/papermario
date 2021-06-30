@@ -45,7 +45,7 @@ glabel remove_item_entity_by_reference
 /* CA0A8 801339A8 00400008 */  jr        $v0
 /* CA0AC 801339AC 00000000 */   nop
 glabel L801339B0_CA0B0
-/* CA0B0 801339B0 0C0448CA */  jal       func_80112328
+/* CA0B0 801339B0 0C0448CA */  jal       delete_shadow
 /* CA0B4 801339B4 86240020 */   lh       $a0, 0x20($s1)
 glabel L801339B8_CA0B8
 /* CA0B8 801339B8 3C118015 */  lui       $s1, %hi(D_801565A0)

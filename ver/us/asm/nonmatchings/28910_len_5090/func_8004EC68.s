@@ -590,7 +590,7 @@ glabel func_8004EC68
 /* 2A8B0 8004F4B0 00032C03 */  sra       $a1, $v1, 0x10
 /* 2A8B4 8004F4B4 A6620014 */  sh        $v0, 0x14($s3)
 .L8004F4B8:
-/* 2A8B8 8004F4B8 0C014E3E */  jal       func_800538F8
+/* 2A8B8 8004F4B8 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2A8BC 8004F4BC 00A0202D */   daddu    $a0, $a1, $zero
 /* 2A8C0 8004F4C0 8E620000 */  lw        $v0, ($s3)
 /* 2A8C4 8004F4C4 C4420020 */  lwc1      $f2, 0x20($v0)
@@ -671,7 +671,7 @@ glabel func_8004EC68
 /* 2A9E0 8004F5E0 86020038 */  lh        $v0, 0x38($s0)
 /* 2A9E4 8004F5E4 8683020E */  lh        $v1, 0x20e($s4)
 /* 2A9E8 8004F5E8 00822021 */  addu      $a0, $a0, $v0
-/* 2A9EC 8004F5EC 0C014E3E */  jal       func_800538F8
+/* 2A9EC 8004F5EC 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2A9F0 8004F5F0 00832021 */   addu     $a0, $a0, $v1
 /* 2A9F4 8004F5F4 8E02000C */  lw        $v0, 0xc($s0)
 /* 2A9F8 8004F5F8 C4420020 */  lwc1      $f2, 0x20($v0)
@@ -878,7 +878,7 @@ glabel func_8004EC68
 /* 2ACD0 8004F8D0 86020038 */  lh        $v0, 0x38($s0)
 /* 2ACD4 8004F8D4 8683020E */  lh        $v1, 0x20e($s4)
 /* 2ACD8 8004F8D8 00822021 */  addu      $a0, $a0, $v0
-/* 2ACDC 8004F8DC 0C014E3E */  jal       func_800538F8
+/* 2ACDC 8004F8DC 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2ACE0 8004F8E0 00832021 */   addu     $a0, $a0, $v1
 /* 2ACE4 8004F8E4 8E620000 */  lw        $v0, ($s3)
 /* 2ACE8 8004F8E8 C4420020 */  lwc1      $f2, 0x20($v0)
@@ -984,7 +984,7 @@ glabel func_8004EC68
 /* 2AE58 8004FA58 00822021 */  addu      $a0, $a0, $v0
 /* 2AE5C 8004FA5C 00832021 */  addu      $a0, $a0, $v1
 .L8004FA60:
-/* 2AE60 8004FA60 0C014E3E */  jal       func_800538F8
+/* 2AE60 8004FA60 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2AE64 8004FA64 00000000 */   nop
 /* 2AE68 8004FA68 8E620000 */  lw        $v0, ($s3)
 /* 2AE6C 8004FA6C C4420020 */  lwc1      $f2, 0x20($v0)

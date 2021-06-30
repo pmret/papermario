@@ -311,7 +311,7 @@ Script goomba_turn = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, 0);
     EnableIdleScript(ACTOR_SELF, 0);
     SetTargetActor(ACTOR_SELF, 0);
-    UseCamPreset(63);
+    UseBattleCamPreset(63);
     BattleCamTargetActor(ACTOR_SELF);
     0x8024ECF8(-1, 1, 0);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, run));
@@ -391,7 +391,7 @@ Script goomba_turn = SCRIPT({
             JumpToGoal(ACTOR_SELF, 15, 0, 1, 0);
             SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, dizzy));
             sleep 5;
-            UseCamPreset(2);
+            UseBattleCamPreset(2);
             YieldTurn();
             SetActorYaw(ACTOR_SELF, 180);
             AddActorDecoration(ACTOR_SELF, 1, 0, 2);
@@ -440,7 +440,7 @@ Script goomba_turn = SCRIPT({
     EnemyDamageTarget(ACTOR_SELF, SI_VAR(0), 0, 0, 0, 1, 32);
     match SI_VAR(0) {
         0, 2 {
-            UseCamPreset(2);
+            UseBattleCamPreset(2);
             SetActorScale(ACTOR_SELF, 1.1, 0.8, 1.0);
             sleep 1;
             SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);

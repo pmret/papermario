@@ -30,7 +30,7 @@ glabel func_8025D160
 /* 18BAA0 8025D1C0 8CE50058 */  lw        $a1, 0x58($a3)
 /* 18BAA4 8025D1C4 8CE6005C */  lw        $a2, 0x5c($a3)
 /* 18BAA8 8025D1C8 8CE70060 */  lw        $a3, 0x60($a3)
-/* 18BAAC 8025D1CC 0C01C3AC */  jal       func_80070EB0
+/* 18BAAC 8025D1CC 0C01C3AC */  jal       playFX_3B
 /* 18BAB0 8025D1D0 24040003 */   addiu    $a0, $zero, 3
 /* 18BAB4 8025D1D4 24020001 */  addiu     $v0, $zero, 1
 /* 18BAB8 8025D1D8 A24208BC */  sb        $v0, 0x8bc($s2)

@@ -12,7 +12,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -33,8 +33,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1CD4 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1CD4, iconPosX + 36, iconPosY - 63);
+        D_802A1CD4 = create_hud_element(&D_80108A64);
+        set_hud_element_render_pos(D_802A1CD4, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -47,8 +47,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
-        free_icon(D_802A1CD4);
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+        free_hud_element(D_802A1CD4);
     }
 
     return ApiStatus_DONE2;
@@ -72,7 +72,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
             script->functionTemp[2].s = 0;
             sfx_play_sound(0x2033);
             camera->unk_1C = 0;
-            D_802A1CD0 = create_dynamic_entity_frontUI(NULL, func_802A123C_727B4C);
+            D_802A1CD0 = create_generic_entity_frontUI(NULL, func_802A123C_727B4C);
             script->functionTemp[0].s = 1;
         case 1:
             camera->flags |= 8;
@@ -85,7 +85,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
             }
             camera->unk_1C = 0;
             camera->flags &= ~8;
-            free_dynamic_entity(D_802A1CD0);
+            free_generic_entity(D_802A1CD0);
             return ApiStatus_DONE2;
     }
 
@@ -94,7 +94,7 @@ ApiStatus N(func_802A1270_727B80)(ScriptInstance* script, s32 isInitialCall) {
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
-        UseCamPreset(69);
+        UseBattleCamPreset(69);
         sleep 10;
 
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
@@ -140,7 +140,7 @@ Script N(UseItemWithEffect) = SCRIPT({
 });
 
 Script N(UseItem) = SCRIPT({
-    UseCamPreset(19);
+    UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);

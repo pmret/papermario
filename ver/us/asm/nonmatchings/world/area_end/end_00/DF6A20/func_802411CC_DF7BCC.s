@@ -16,7 +16,7 @@ glabel func_802411CC_DF7BCC
 /* DF7BF8 802411F8 8C440004 */  lw        $a0, 4($v0)
 /* DF7BFC 802411FC 8C450008 */  lw        $a1, 8($v0)
 /* DF7C00 80241200 8C460000 */  lw        $a2, ($v0)
-/* DF7C04 80241204 0C04BA38 */  jal       func_8012E8E0
+/* DF7C04 80241204 0C04BA38 */  jal       msg_get_glyph
 /* DF7C08 80241208 8C47000C */   lw       $a3, 0xc($v0)
 /* DF7C0C 8024120C 4600A00D */  trunc.w.s $f0, $f20
 /* DF7C10 80241210 44020000 */  mfc1      $v0, $f0
@@ -45,7 +45,7 @@ glabel func_802411CC_DF7BCC
 /* DF7C6C 8024126C AFA20030 */  sw        $v0, 0x30($sp)
 /* DF7C70 80241270 AFA30014 */  sw        $v1, 0x14($sp)
 /* DF7C74 80241274 8FA40038 */  lw        $a0, 0x38($sp)
-/* DF7C78 80241278 0C04BA68 */  jal       func_8012E9A0
+/* DF7C78 80241278 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* DF7C7C 8024127C 24070002 */   addiu    $a3, $zero, 2
 /* DF7C80 80241280 8FBF0048 */  lw        $ra, 0x48($sp)
 /* DF7C84 80241284 D7B60058 */  ldc1      $f22, 0x58($sp)
