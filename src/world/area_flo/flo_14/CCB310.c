@@ -538,7 +538,7 @@ Script N(80243E78) = SCRIPT({
     SI_VAR(0) = 10005;
     spawn N(80243B1C);
     func_802C9C70(0, 123, 1);
-    func_802C94A0(1, N(func_80240504_CCB814), 0);
+    SetCustomGfxBuilders(1, N(func_80240504_CCB814), 0);
     func_802C90FC(123, 1, -1);
     func_802C90FC(10001, 1, -1);
     func_802C90FC(10002, 1, -1);
@@ -546,7 +546,7 @@ Script N(80243E78) = SCRIPT({
     func_802C90FC(10004, 1, -1);
     func_802C90FC(10005, 1, -1);
     func_802C9C70(1, 57, 1);
-    func_802C94A0(2, N(func_802407D4_CCBAE4), 0);
+    SetCustomGfxBuilders(2, N(func_802407D4_CCBAE4), 0);
     func_802C90FC(57, 2, -1);
 });
 

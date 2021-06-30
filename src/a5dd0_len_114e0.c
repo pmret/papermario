@@ -470,7 +470,11 @@ void update_shadows(void) {
     }
 }
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_entity_commandlist, Entity* entity, s32* entityScript);
+void set_entity_commandlist(Entity* entity, s32* entityScript) {
+    entity->scriptReadPos = entityScript;
+    entity->hasEntityScript = TRUE;
+    entity->savedReadPos = entity->scriptReadPos;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
 
@@ -1506,7 +1510,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BC7C);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCB4);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCD0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx_builders);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCEC);
 

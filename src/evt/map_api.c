@@ -235,7 +235,7 @@ ApiStatus SetTexPanOffset(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C9428(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetCustomGfx(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -245,13 +245,13 @@ ApiStatus func_802C9428(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C94A0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetCustomGfxBuilders(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_8011BCD0(var1, var2, var3);
+    set_custom_gfx_builders(var1, var2, var3);
     return ApiStatus_DONE2;
 }
 
