@@ -138,7 +138,7 @@ glabel func_8024190C_96AACC
 /* 96ACD0 80241B10 3C130001 */  lui       $s3, 1
 /* 96ACD4 80241B14 8DA50018 */  lw        $a1, 0x18($t5)
 /* 96ACD8 80241B18 8DA6001C */  lw        $a2, 0x1c($t5)
-/* 96ACDC 80241B1C 0C0B7811 */  jal       func_802DE044
+/* 96ACDC 80241B1C 0C0B7811 */  jal       spr_get_player_raster_info
 /* 96ACE0 80241B20 36731630 */   ori      $s3, $s3, 0x1630
 /* 96ACE4 80241B24 3C02E300 */  lui       $v0, 0xe300
 /* 96ACE8 80241B28 34421001 */  ori       $v0, $v0, 0x1001
@@ -535,7 +535,7 @@ glabel func_8024190C_96AACC
 /* 96B2F0 80242130 8DA6001C */  lw        $a2, 0x1c($t5)
 /* 96B2F4 80242134 25080001 */  addiu     $t0, $t0, 1
 /* 96B2F8 80242138 AFC70000 */  sw        $a3, ($fp)
-/* 96B2FC 8024213C 0C0B7811 */  jal       func_802DE044
+/* 96B2FC 8024213C 0C0B7811 */  jal       spr_get_player_raster_info
 /* 96B300 80242140 A6280000 */   sh       $t0, ($s1)
 /* 96B304 80242144 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96B308 80242148 34A5D483 */  ori       $a1, $a1, 0xd483

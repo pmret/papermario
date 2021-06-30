@@ -91,7 +91,7 @@ ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80260E38(ScriptInstance* script, s32 isInitialCall) {
-    show_battle_message(0x31, 60);
+    btl_show_battle_message(0x31, 60);
     return ApiStatus_DONE2;
 }
 
@@ -112,7 +112,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -133,8 +133,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
+        D_8029FBA0 = create_hud_element(&D_80108A64);
+        set_hud_element_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -145,8 +145,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        free_icon(D_8029FBA0);
+    if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
+        free_hud_element(D_8029FBA0);
     }
 
     return ApiStatus_DONE2;
@@ -154,7 +154,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0].s = 20;
@@ -170,7 +170,7 @@ ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0].s = 20;
-        unfreeze_cam();
+        btl_cam_unfreeze();
     }
 
     set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 12) & 0xFC);
@@ -184,7 +184,7 @@ ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802611E8(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ConsumeLifeShroom(ScriptInstance *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     StaticItem* item = &gItemTable[0x95];
 
@@ -201,7 +201,7 @@ ApiStatus func_802611E8(ScriptInstance *script, s32 isInitialCall) {
 
 // TODO something wrong with the struct breakdown for BattleStatus
 #ifdef NON_MATCHING
-ApiStatus func_8026127C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus RestorePreDefeatState(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -224,7 +224,7 @@ ApiStatus func_8026127C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "18F340", func_8026127C);
+INCLUDE_ASM(s32, "18F340", RestorePreDefeatState);
 #endif
 
 ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
@@ -248,7 +248,7 @@ ApiStatus func_802613BC(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_800720B0(6, var1, var2 + 15, var3, 1.2f, 30);
+    playFX_6B(6, var1, var2 + 15, var3, 1.2f, 30);
     return ApiStatus_DONE2;
 }
 
@@ -258,13 +258,13 @@ ApiStatus func_80261478(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_80071750(9, var1, var2 + 15, var3, 5.0f, 15);
+    playFX_52(9, var1, var2 + 15, var3, 5.0f, 15);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80261530(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0].s = 25;
@@ -329,8 +329,8 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[1].s = 0;
         D_8029FB94 = merlee->pos.y;
-        D_8029FB98 = func_80071750(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
-        D_8029FB9C = func_80071750(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        D_8029FB98 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        D_8029FB9C = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
         D_8029FBA4 = 0;
         D_8029FB90 = 12;
         sfx_play_sound(0x2074);
@@ -408,24 +408,24 @@ ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
     screenY -= 19;
 
     if (script->varTable[10] > 0) {
-        D_8029FBAC = create_icon(&D_80108AD4);
-        set_icon_render_pos(D_8029FBAC, screenX, screenY);
+        D_8029FBAC = create_hud_element(&D_80108AD4);
+        set_hud_element_render_pos(D_8029FBAC, screenX, screenY);
         screenY += 9;
     }
 
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        D_8029FBA8 = create_icon(&D_80108AAC);
-        set_icon_render_pos(D_8029FBA8, screenX, screenY);
+        D_8029FBA8 = create_hud_element(&D_80108AAC);
+        set_hud_element_render_pos(D_8029FBA8, screenX, screenY);
     }
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
     if (script->varTable[10] > 0) {
-        free_icon(D_8029FBAC);
+        free_hud_element(D_8029FBAC);
     }
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        free_icon(D_8029FBA8);
+        free_hud_element(D_8029FBA8);
     }
     return ApiStatus_DONE2;
 }
@@ -437,7 +437,7 @@ ApiStatus FXRecoverHP(ScriptInstance* script, s32 isInitialCall) {
     s32 var3 = get_variable(script, *args++);
     s32 var4 = get_variable(script, *args++);
 
-    func_80071090(0, var1, var2, var3, var4);
+    playFX_40(0, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 
@@ -448,7 +448,7 @@ ApiStatus FXRecoverFP(ScriptInstance* script, s32 isInitialCall) {
     s32 var3 = get_variable(script, *args++);
     s32 var4 = get_variable(script, *args++);
 
-    func_80071090(1, var1, var2, var3, var4);
+    playFX_40(1, var1, var2, var3, var4);
     return ApiStatus_DONE2;
 }
 
@@ -474,7 +474,7 @@ ApiStatus IncrementPlayerFP(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80261D98(ScriptInstance* script, s32 isInitialCall) {
     inflict_status_set_duration(get_actor(script->owner1.actorID), 4, 0, 1);
-    func_8026777C();
+    btl_update_ko_status();
     return ApiStatus_DONE2;
 }
 

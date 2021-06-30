@@ -105,7 +105,7 @@ glabel _show_message
 /* F4E30 802D0480 0240202D */   daddu    $a0, $s2, $zero
 /* F4E34 802D0484 3C05802E */  lui       $a1, %hi(gCurrentPrintContext)
 /* F4E38 802D0488 8CA5B260 */  lw        $a1, %lo(gCurrentPrintContext)($a1)
-/* F4E3C 802D048C 0C04969A */  jal       load_message_to_printer
+/* F4E3C 802D048C 0C04969A */  jal       msg_printer_load_string
 /* F4E40 802D0490 0040202D */   daddu    $a0, $v0, $zero
 /* F4E44 802D0494 080B413A */  j         .L802D04E8
 /* F4E48 802D0498 2402FFFE */   addiu    $v0, $zero, -2
@@ -125,7 +125,7 @@ glabel _show_message
 /* F4E7C 802D04CC 0040A82D */  daddu     $s5, $v0, $zero
 /* F4E80 802D04D0 0200202D */  daddu     $a0, $s0, $zero
 .L802D04D4:
-/* F4E84 802D04D4 0C049640 */  jal       load_string
+/* F4E84 802D04D4 0C049640 */  jal       msg_get_printer_for_string
 /* F4E88 802D04D8 02C0282D */   daddu    $a1, $s6, $zero
 /* F4E8C 802D04DC 3C01802E */  lui       $at, %hi(gCurrentPrintContext)
 /* F4E90 802D04E0 AC22B260 */  sw        $v0, %lo(gCurrentPrintContext)($at)
@@ -194,7 +194,7 @@ glabel _show_message
 /* F4F80 802D05D0 3C06802E */  lui       $a2, %hi(D_802DAE54)
 /* F4F84 802D05D4 8CC6AE54 */  lw        $a2, %lo(D_802DAE54)($a2)
 /* F4F88 802D05D8 00652821 */  addu      $a1, $v1, $a1
-/* F4F8C 802D05DC 0C0496AE */  jal       clamp_printer_coords
+/* F4F8C 802D05DC 0C0496AE */  jal       msg_printer_set_origin_pos
 /* F4F90 802D05E0 00463021 */   addu     $a2, $v0, $a2
 /* F4F94 802D05E4 2402FFFE */  addiu     $v0, $zero, -2
 /* F4F98 802D05E8 1202002C */  beq       $s0, $v0, L802D069C_F504C
@@ -335,7 +335,7 @@ glabel L802D069C_F504C
 /* F5184 802D07D4 3C06802E */  lui       $a2, %hi(D_802DAE54)
 /* F5188 802D07D8 8CC6AE54 */  lw        $a2, %lo(D_802DAE54)($a2)
 /* F518C 802D07DC 00652821 */  addu      $a1, $v1, $a1
-/* F5190 802D07E0 0C0496AE */  jal       clamp_printer_coords
+/* F5190 802D07E0 0C0496AE */  jal       msg_printer_set_origin_pos
 /* F5194 802D07E4 00463021 */   addu     $a2, $v0, $a2
 .L802D07E8:
 /* F5198 802D07E8 3C02802E */  lui       $v0, %hi(gCurrentPrintContext)

@@ -1,66 +1,66 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "B4580", func_8011DE80);
+INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
-INCLUDE_ASM(s32, "B4580", func_8011DFD0);
+INCLUDE_ASM(s32, "B4580", animator_make_mirrorZ);
 
-INCLUDE_ASM(s32, "B4580", func_8011E014);
+INCLUDE_ASM(s32, "B4580", animator_make_mirrorY);
 
-INCLUDE_ASM(s32, "B4580", func_8011E058);
+INCLUDE_ASM(s32, "B4580", animator_make_mirrorX);
 
-INCLUDE_ASM(s32, "B4580", func_8011E09C);
+INCLUDE_ASM(s32, "B4580", animator_make_identity);
 
-INCLUDE_ASM(s32, "B4580", func_8011E0DC);
+INCLUDE_ASM(s32, "B4580", get_animator_child_with_id);
 
-INCLUDE_ASM(s32, "B4580", func_8011E150);
+INCLUDE_ASM(s32, "B4580", get_animator_child_for_model);
 
-INCLUDE_ASM(s32, "B4580", func_8011E1C4);
+INCLUDE_ASM(s32, "B4580", free_animator_nodes);
 
-INCLUDE_ASM(s32, "B4580", func_8011E224);
+INCLUDE_ASM(s32, "B4580", clear_animator_list);
 
-INCLUDE_ASM(s32, "B4580", func_8011E310);
+INCLUDE_ASM(s32, "B4580", reset_animator_list);
 
-INCLUDE_ASM(s32, "B4580", func_8011E398);
+INCLUDE_ASM(s32, "B4580", delete_model_animator_node);
 
-INCLUDE_ASM(s32, "B4580", func_8011E400);
+INCLUDE_ASM(s32, "B4580", delete_model_animator_nodes);
 
-INCLUDE_ASM(s32, "B4580", func_8011E438);
+INCLUDE_ASM(s32, "B4580", delete_model_animator);
 
-INCLUDE_ASM(s32, "B4580", func_8011E4B8);
+INCLUDE_ASM(s32, "B4580", create_model_animator);
 
-INCLUDE_ASM(s32, "B4580", func_8011E5E0);
+INCLUDE_ASM(s32, "B4580", create_mesh_animator);
 
-INCLUDE_ASM(s32, "B4580", func_8011E718);
+INCLUDE_ASM(s32, "B4580", add_anim_node);
 
-INCLUDE_ASM(s32, "B4580", func_8011E8BC);
+INCLUDE_ASM(s32, "B4580", update_model_animator);
 
 INCLUDE_ASM(s32, "B4580", func_8011EA54);
 
-INCLUDE_ASM(s32, "B4580", func_8011EBF0);
+INCLUDE_ASM(s32, "B4580", step_model_animator);
 
-INCLUDE_ASM(s32, "B4580", func_8011F058);
+INCLUDE_ASM(s32, "B4580", animator_update_model_transforms);
 
-INCLUDE_ASM(s32, "B4580", func_8011F118);
+INCLUDE_ASM(s32, "B4580", animator_node_update_model_transform);
 
-INCLUDE_ASM(s32, "B4580", func_8011F304);
+INCLUDE_ASM(s32, "B4580", render_animated_model);
 
-INCLUDE_ASM(s32, "B4580", func_8011F3E8);
+INCLUDE_ASM(s32, "B4580", render_animated_model_with_vertices);
 
-INCLUDE_ASM(s32, "B4580", func_8011F4D4);
+INCLUDE_ASM(s32, "B4580", appendGfx_animator);
 
-INCLUDE_ASM(s32, "B4580", func_8011FA54);
+INCLUDE_ASM(s32, "B4580", appendGfx_animator_node);
 
-INCLUDE_ASM(s32, "B4580", func_8011FF74);
+INCLUDE_ASM(s32, "B4580", get_animator_node_for_tree_index);
 
-INCLUDE_ASM(s32, "B4580", func_8011FF98);
+INCLUDE_ASM(s32, "B4580", get_animator_node_with_id);
 
-INCLUDE_ASM(s32, "B4580", func_8011FFB4);
+INCLUDE_ASM(s32, "B4580", set_animator_tree_to_node_map);
 
-AnimatedMesh* get_anim_mesh(s32 animModelID) {
+AnimatedMesh* get_animator_by_index(s32 animModelID) {
     return (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 }
 
-AnimatedMesh* func_80120000(s32 animModelID, s32 arg1, s32 arg2) {
+AnimatedMesh* set_animator_render_callback(s32 animModelID, s32 arg1, s32 arg2) {
     AnimatedMesh* ret = (*gCurrentAnimMeshListPtr)[animModelID & ~0x800];
 
     ret->unk_2D4 = arg2;
@@ -68,38 +68,38 @@ AnimatedMesh* func_80120000(s32 animModelID, s32 arg1, s32 arg2) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "B4580", func_80120028);
+INCLUDE_ASM(s32, "B4580", enable_anim_model_fog);
 
-INCLUDE_ASM(s32, "B4580", func_8012003C);
+INCLUDE_ASM(s32, "B4580", disable_anim_model_fog);
 
-INCLUDE_ASM(s32, "B4580", func_8012004C);
+INCLUDE_ASM(s32, "B4580", set_anim_model_fog_dist);
 
-INCLUDE_ASM(s32, "B4580", func_80120064);
+INCLUDE_ASM(s32, "B4580", set_anim_model_fog_color);
 
-INCLUDE_ASM(s32, "B4580", func_8012008C);
+INCLUDE_ASM(s32, "B4580", is_anim_model_fog_enabled);
 
-INCLUDE_ASM(s32, "B4580", func_8012009C);
+INCLUDE_ASM(s32, "B4580", get_anim_model_fog_distance);
 
-INCLUDE_ASM(s32, "B4580", func_801200B8);
+INCLUDE_ASM(s32, "B4580", get_anim_model_fog_color);
 
-INCLUDE_ASM(s32, "B4580", func_801200EC);
+INCLUDE_ASM(s32, "B4580", set_animator_flags);
 
-INCLUDE_ASM(s32, "B4580", func_80120118);
+INCLUDE_ASM(s32, "B4580", clear_animator_flags);
 
 INCLUDE_ASM(s32, "B4580", play_model_animation);
 
-INCLUDE_ASM(s32, "B4580", func_80120198);
+INCLUDE_ASM(s32, "B4580", play_model_animation_starting_from);
 
-INCLUDE_ASM(s32, "B4580", func_80120234);
+INCLUDE_ASM(s32, "B4580", load_model_animator_node);
 
-INCLUDE_ASM(s32, "B4580", func_801203AC);
+INCLUDE_ASM(s32, "B4580", load_model_animator_tree);
 
-INCLUDE_ASM(s32, "B4580", func_80120420);
+INCLUDE_ASM(s32, "B4580", load_mesh_animator_node);
 
-INCLUDE_ASM(s32, "B4580", func_80120474);
+INCLUDE_ASM(s32, "B4580", load_mesh_animator_tree);
 
-INCLUDE_ASM(s32, "B4580", func_80120530);
+INCLUDE_ASM(s32, "B4580", reload_mesh_animator_node);
 
-INCLUDE_ASM(s32, "B4580", func_80120678);
+INCLUDE_ASM(s32, "B4580", reload_mesh_animator_tree);
 
-INCLUDE_ASM(s32, "B4580", func_801206F8);
+INCLUDE_ASM(s32, "B4580", step_mesh_animator);

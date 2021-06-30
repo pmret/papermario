@@ -18,7 +18,7 @@ glabel osSetTimerIntr
 /* 41A40 80066640 24120000 */  addiu     $s2, $zero, 0
 /* 41A44 80066644 241301D4 */  addiu     $s3, $zero, 0x1d4
 .L80066648:
-/* 41A48 80066648 0C01ACD8 */  jal       __osDisableInt
+/* 41A48 80066648 0C01ACD8 */  jal       osDisableInt
 /* 41A4C 8006664C 00000000 */   nop
 /* 41A50 80066650 0C019680 */  jal       osGetCount
 /* 41A54 80066654 00408021 */   addu     $s0, $v0, $zero
@@ -28,7 +28,7 @@ glabel osSetTimerIntr
 /* 41A64 80066664 00002021 */  addu      $a0, $zero, $zero
 /* 41A68 80066668 0C01B1A0 */  jal       osSetCompare
 /* 41A6C 8006666C 02652021 */   addu     $a0, $s3, $a1
-/* 41A70 80066670 0C01ACF4 */  jal       __osRestoreInt
+/* 41A70 80066670 0C01ACF4 */  jal       osRestoreInt
 /* 41A74 80066674 02002021 */   addu     $a0, $s0, $zero
 /* 41A78 80066678 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 41A7C 8006667C 8FB30020 */  lw        $s3, 0x20($sp)

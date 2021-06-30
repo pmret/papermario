@@ -1,10 +1,10 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "de740_len_23f0", func_80148040);
+INCLUDE_ASM(s32, "de740_len_23f0", clear_sprite_shading_data);
 
-INCLUDE_ASM(s32, "de740_len_23f0", func_801480F0);
+INCLUDE_ASM(s32, "de740_len_23f0", init_sprite_shading_data);
 
-INCLUDE_ASM(s32, "de740_len_23f0", func_80148154);
+INCLUDE_ASM(s32, "de740_len_23f0", sprite_shading_set_light_source);
 
 INCLUDE_ASM(s32, "de740_len_23f0", render_shaded_sprite);
 

@@ -65,12 +65,12 @@ glabel create_shadow_from_data
 /* A83B8 80111CB8 0060102D */   daddu    $v0, $v1, $zero
 /* A83BC 80111CBC 34420008 */  ori       $v0, $v0, 8
 /* A83C0 80111CC0 AE020000 */  sw        $v0, ($s0)
-/* A83C4 80111CC4 0C04792E */  jal       func_8011E4B8
+/* A83C4 80111CC4 0C04792E */  jal       create_model_animator
 /* A83C8 80111CC8 8E440004 */   lw       $a0, 4($s2)
 /* A83CC 80111CCC A6020008 */  sh        $v0, 8($s0)
 /* A83D0 80111CD0 00021400 */  sll       $v0, $v0, 0x10
 /* A83D4 80111CD4 8E450008 */  lw        $a1, 8($s2)
-/* A83D8 80111CD8 0C0480EB */  jal       func_801203AC
+/* A83D8 80111CD8 0C0480EB */  jal       load_model_animator_tree
 /* A83DC 80111CDC 00022403 */   sra      $a0, $v0, 0x10
 /* A83E0 80111CE0 0804473D */  j         .L80111CF4
 /* A83E4 80111CE4 00000000 */   nop

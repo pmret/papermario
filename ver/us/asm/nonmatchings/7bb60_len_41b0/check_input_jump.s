@@ -20,7 +20,7 @@ glabel check_input_jump
 /* 7F64C 800E619C 24030005 */  addiu     $v1, $zero, 5
 /* 7F650 800E61A0 14430007 */  bne       $v0, $v1, .L800E61C0
 /* 7F654 800E61A4 00000000 */   nop
-/* 7F658 800E61A8 0C039178 */  jal       func_800E45E0
+/* 7F658 800E61A8 0C039178 */  jal       phys_should_player_be_sliding
 /* 7F65C 800E61AC 00000000 */   nop
 /* 7F660 800E61B0 10400003 */  beqz      $v0, .L800E61C0
 /* 7F664 800E61B4 00000000 */   nop

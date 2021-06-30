@@ -537,27 +537,27 @@ Script N(80243E78) = SCRIPT({
     spawn N(80243B1C);
     SI_VAR(0) = 10005;
     spawn N(80243B1C);
-    func_802C9C70(0, 123, 1);
+    MakeLocalVertexCopy(0, 123, 1);
     SetCustomGfxBuilders(1, N(func_80240504_CCB814), 0);
-    func_802C90FC(123, 1, -1);
-    func_802C90FC(10001, 1, -1);
-    func_802C90FC(10002, 1, -1);
-    func_802C90FC(10003, 1, -1);
-    func_802C90FC(10004, 1, -1);
-    func_802C90FC(10005, 1, -1);
-    func_802C9C70(1, 57, 1);
+    SetModelCustomGfx(123, 1, -1);
+    SetModelCustomGfx(10001, 1, -1);
+    SetModelCustomGfx(10002, 1, -1);
+    SetModelCustomGfx(10003, 1, -1);
+    SetModelCustomGfx(10004, 1, -1);
+    SetModelCustomGfx(10005, 1, -1);
+    MakeLocalVertexCopy(1, 57, 1);
     SetCustomGfxBuilders(2, N(func_802407D4_CCBAE4), 0);
-    func_802C90FC(57, 2, -1);
+    SetModelCustomGfx(57, 2, -1);
 });
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(0, 0, 0, 0, 0, 0);
+    playFX_82(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -593,8 +593,8 @@ ApiStatus N(func_8024046C_CCB77C)(ScriptInstance* script, s32 isInitialCall) {
 
 // graphics macros
 #ifdef NON_MATCHING
-s32 func_8011C2EC(s32);
-void func_8011C2B0(s32, s32*, s32*, s32*);
+s32 mdl_get_copied_gfx(s32);
+void mdl_get_copied_vertices(s32, s32*, s32*, s32*);
 void guMtxF2L(Matrix4f, Mtx* m);
 void guMtxIdentF(Matrix4f);
 
@@ -618,9 +618,9 @@ void N(func_80240504_CCB814)(void) {
 
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    func_8011C2B0(0, &x, &y, &z);
+    mdl_get_copied_vertices(0, &x, &y, &z);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, func_8011C2EC(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
 
     N(D_80243B14_CCEE24) += 1.0f;
 }
@@ -643,7 +643,7 @@ void N(func_802407D4_CCBAE4)(void) {
     f32 temp_f20;
     f32 temp_f0;
 
-    func_8011C2B0(1, &x, &y, &z);
+    mdl_get_copied_vertices(1, &x, &y, &z);
 
     for (i = 0; i < z; i++) {
         N(UnkStruct)* ptr1 = &x[i];
@@ -658,7 +658,7 @@ void N(func_802407D4_CCBAE4)(void) {
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, func_8011C2EC(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
 
     if (get_variable(NULL, SI_AREA_FLAG(36)) != 0) {
         if (N(D_80243B18_CCEE28) > 90) {

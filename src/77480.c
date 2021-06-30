@@ -13,32 +13,32 @@ void func_802B72C0_E22870();
 
 void func_800E0514(void);
 
-INCLUDE_ASM(s32, "77480", test_below_player);
+INCLUDE_ASM(s32, "77480", player_raycast_below);
 
-INCLUDE_ASM(s32, "77480", func_800DE46C);
+INCLUDE_ASM(s32, "77480", player_raycast_below_cam_relative);
 
-INCLUDE_ASM(s32, "77480", trace_below_player);
+INCLUDE_ASM(s32, "77480", player_raycast_down);
 
-INCLUDE_ASM(s32, "77480", collision_check_above);
+INCLUDE_ASM(s32, "77480", player_raycast_up_corners);
 
-INCLUDE_ASM(s32, "77480", trace_above_player);
+INCLUDE_ASM(s32, "77480", player_raycast_up_corner);
 
-INCLUDE_ASM(s32, "77480", do_lateral_collision, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4,
+INCLUDE_ASM(s32, "77480", player_test_lateral_overlap, s32 arg0, PlayerStatus* arg1, f32* arg2, f32* arg3, f32* arg4,
             f32 arg5, f32 arg6);
 
-INCLUDE_ASM(s32, "77480", func_800DEE5C);
+INCLUDE_ASM(s32, "77480", player_raycast_general);
 
-INCLUDE_ASM(s32, "77480", func_800DF15C, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5,
+INCLUDE_ASM(s32, "77480", player_test_move_without_slipping, PlayerStatus* arg0, f32* arg1, f32* arg2, f32* arg3, s32 arg4, f32 arg5,
             s32* arg6);
 
-void func_800DF3FC(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void player_get_slip_vector(f32* arg0, f32* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     f32 temp = (arg2 * arg4) + (arg3 * arg5);
 
     *arg0 = (arg2 - (temp * arg4)) * 0.5f;
     *arg1 = (arg3 - (temp * arg5)) * 0.5f;
 }
 
-INCLUDE_ASM(s32, "77480", test_player_lateral);
+INCLUDE_ASM(s32, "77480", player_test_move_with_slipping);
 
 void update_player(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -76,17 +76,17 @@ void update_player(void) {
 
     update_player_input();
     playerStatus->flags &= ~0x400;
-    func_800DFFCC();
+    update_player_blink();
 
     if (playerStatus->flags & 0x1000) {
-        func_800E5A2C();
+        phys_update_action_state();
         if (func_800E0208() == 0) {
             collision_main_lateral();
         }
     } else if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
-        func_800DFAAC();
+        phys_update_standard();
     } else {
-        func_800DFBE8();
+        phys_update_lava_reset();
     }
 
     if (playerStatus->flags & 0x4000) {
@@ -116,7 +116,7 @@ void update_player(void) {
 
     update_player_shadow();
     check_for_interactables();
-    check_for_conversation();
+    check_for_conversation_prompt();
     check_for_pulse_stone();
     check_for_ispy();
 
@@ -147,22 +147,22 @@ void check_input_use_partner(void) {
     }
 }
 
-void func_800DFAAC(void) {
+void phys_update_standard(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 flags;
 
     check_input_use_partner();
-    func_800E5A2C();
+    phys_update_action_state();
 
     if (!(playerStatus->flags & 8)) {
         if (playerStatus->flags & 2) {
-            update_fall_state();
+            phys_update_jump();
         }
     }
 
     if (playerStatus->flags & 4) {
         if (!(playerStatus->flags & 8)) {
-            func_800E3100();
+            phys_update_falling();
         }
     }
 
@@ -170,7 +170,7 @@ void func_800DFAAC(void) {
 
     if (playerStatus->actionState != ACTION_STATE_SLIDE) {
         collision_main_lateral();
-        func_800E4508();
+        collision_check_player_overlaps();
 
         if (
             collision_main_above() < 0 &&
@@ -182,7 +182,7 @@ void func_800DFAAC(void) {
 
         if ((playerStatus->actionState != ACTION_STATE_ENEMY_FIRST_STRIKE)
             && (playerStatus->actionState != ACTION_STATE_STEP_UP)) {
-            func_800E4744();
+            phys_main_collision_below();
         }
     }
 
@@ -197,10 +197,10 @@ void func_800DFAAC(void) {
     }
 }
 
-void func_800DFBE8(void) {
-    func_800E5A2C();
+void phys_update_lava_reset(void) {
+    phys_update_action_state();
     collision_main_lateral();
-    func_800E4BB8();
+    collision_lava_reset_check_additional_overlaps();
 
     if (!(gPlayerStatusPtr->flags & 0x4000000)) {
         Camera* camera = &gCameras[0];
@@ -215,12 +215,12 @@ void clear_player_status(void) {
     mem_clear(&gPlayerStatus, sizeof(gPlayerStatus));
 }
 
-void func_800DFC74(void) {
+void player_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     mem_clear(playerStatus, sizeof(PlayerStatus));
     playerStatus->flags = 1;
-    func_800E205C();
+    reset_player_status();
     playerStatus->shadowID = create_shadow_type(0, playerStatus->position.x, playerStatus->position.y,
                              playerStatus->position.z);
     func_800E6B68();
@@ -240,11 +240,11 @@ s32 func_800DFCF4(void) {
     return 1;
 }
 
-INCLUDE_ASM(s32, "77480", func_800DFD48);
+INCLUDE_ASM(s32, "77480", get_overriding_player_anim);
 
-void func_800DFEFC(s32 arg0) {
+void suggest_player_anim_clearUnkFlag(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = func_800DFD48(arg0);
+    s32 temp_v0 = get_overriding_player_anim(arg0);
 
     if (temp_v0 != -1) {
         playerStatus->anim = temp_v0;
@@ -253,7 +253,7 @@ void func_800DFEFC(s32 arg0) {
     }
 }
 
-void func_800DFF50(s32 arg0) {
+void force_player_anim(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->anim = arg0;
@@ -261,9 +261,9 @@ void func_800DFF50(s32 arg0) {
     playerStatus->flags &= ~0x10000000;
 }
 
-void func_800DFF78(s32 arg0) {
+void suggest_player_anim_setUnkFlag(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 temp_v0 = func_800DFD48(arg0);
+    s32 temp_v0 = get_overriding_player_anim(arg0);
 
     if (temp_v0 != -1) {
         playerStatus->anim = temp_v0;
@@ -272,10 +272,10 @@ void func_800DFF78(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "77480", func_800DFFCC);
+INCLUDE_ASM(s32, "77480", update_player_blink);
 
 // dist_to_player2D
-f32 func_800E0088(f32 x, f32 z) {
+f32 get_xz_dist_to_player(f32 x, f32 z) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     return dist2D(x, z, playerStatus->position.x, playerStatus->position.z);
@@ -345,7 +345,7 @@ s32 func_800E0208(void) {
     return ret;
 }
 
-void func_800E0260(void) {
+void player_render_interact_prompts(void) {
     func_800E0658();
     func_800E0AD0();
     func_800E04D0();
@@ -404,7 +404,7 @@ void func_800E0514(void) {
     gPlayerStatusPtr->animFlags &= ~0x40;
 }
 
-s32 func_800E0538(void) {
+s32 has_valid_conversation_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* unk_C8 = playerStatus->unk_C8;
     s32 ret = 0;
@@ -417,7 +417,7 @@ s32 func_800E0538(void) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "77480", check_for_conversation);
+INCLUDE_ASM(s32, "77480", check_for_conversation_prompt);
 
 void func_800E0658(void) {
     if ((gPlayerStatusPtr->animFlags & 0x20) && (D_8010C940 != 0)) {

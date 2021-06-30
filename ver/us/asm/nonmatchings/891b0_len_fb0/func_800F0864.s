@@ -93,7 +93,7 @@ glabel func_800F0864
 /* 89E68 800F09B8 460E0380 */  add.s     $f14, $f0, $f14
 /* 89E6C 800F09BC C6000000 */  lwc1      $f0, ($s0)
 /* 89E70 800F09C0 46800020 */  cvt.s.w   $f0, $f0
-/* 89E74 800F09C4 0C01BF44 */  jal       func_8006FD10
+/* 89E74 800F09C4 0C01BF44 */  jal       playFX_0C
 /* 89E78 800F09C8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 89E7C 800F09CC 8E020000 */  lw        $v0, ($s0)
 /* 89E80 800F09D0 2C420001 */  sltiu     $v0, $v0, 1

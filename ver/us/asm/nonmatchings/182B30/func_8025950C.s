@@ -40,7 +40,7 @@ glabel func_8025950C
 /* 187E70 80259590 1040003F */  beqz      $v0, .L80259690
 /* 187E74 80259594 0240282D */   daddu    $a1, $s2, $zero
 /* 187E78 80259598 96240088 */  lhu       $a0, 0x88($s1)
-/* 187E7C 8025959C 0C0B7A90 */  jal       func_802DEA40
+/* 187E7C 8025959C 0C0B7A90 */  jal       spr_get_npc_palettes
 /* 187E80 802595A0 00000000 */   nop
 /* 187E84 802595A4 AE0206D0 */  sw        $v0, 0x6d0($s0)
 /* 187E88 802595A8 0040202D */  daddu     $a0, $v0, $zero
@@ -113,7 +113,7 @@ glabel func_8025950C
 /* 187F70 80259690 8E240084 */  lw        $a0, 0x84($s1)
 /* 187F74 80259694 AFB30010 */  sw        $s3, 0x10($sp)
 /* 187F78 80259698 00872025 */  or        $a0, $a0, $a3
-/* 187F7C 8025969C 0C0B78F6 */  jal       func_802DE3D8
+/* 187F7C 8025969C 0C0B78F6 */  jal       spr_draw_npc_sprite
 /* 187F80 802596A0 0000382D */   daddu    $a3, $zero, $zero
 .L802596A4:
 /* 187F84 802596A4 8FBF0028 */  lw        $ra, 0x28($sp)

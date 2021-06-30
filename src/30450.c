@@ -37,7 +37,7 @@ void func_80055068(u32 arg0) {
                     s32 filename = snd_load_song((arg0 >> 4) & 0xFF, 0);
 
                     if (filename > ASCII_TO_U32('0', ' ', ' ', '\0')) {
-                        func_80055970(filename, (arg0 >> 0xC) & 3);
+                        snd_start_song_variation(filename, (arg0 >> 0xC) & 3);
                     }
                 }
                 break;
@@ -354,9 +354,9 @@ s32 snd_load_song(s32 songID, s32 playerIndex) {
     }
 }
 
-INCLUDE_ASM(s32, "30450", func_8005591C);
+INCLUDE_ASM(s32, "30450", snd_start_song);
 
-INCLUDE_ASM(s32, "30450", func_80055970);
+INCLUDE_ASM(s32, "30450", snd_start_song_variation);
 
 s32 func_800559C4(UNK_TYPE arg0) {
     return func_8004DA0C(arg0);
@@ -367,14 +367,14 @@ void func_800559E0(void) {
 }
 
 void func_800559FC(void) {
-    func_8004DAE0();
+    snd_is_song_playing();
 }
 
-INCLUDE_ASM(s32, "30450", func_80055A18);
+INCLUDE_ASM(s32, "30450", snd_set_song_variation_fade);
 
-INCLUDE_ASM(s32, "30450", func_80055A6C);
+INCLUDE_ASM(s32, "30450", snd_set_song_fade);
 
-INCLUDE_ASM(s32, "30450", func_80055ABC);
+INCLUDE_ASM(s32, "30450", snd_set_song_variation_fade_time);
 
 INCLUDE_ASM(s32, "30450", func_80055AF0);
 

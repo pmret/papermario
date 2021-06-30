@@ -29,7 +29,7 @@ glabel func_80241108_9908E8
 /* 990948 80241168 AFA00018 */  sw        $zero, 0x18($sp)
 /* 99094C 8024116C AFA0001C */  sw        $zero, 0x1c($sp)
 .L80241170:
-/* 990950 80241170 0C00E211 */  jal       npc_create_basic
+/* 990950 80241170 0C00E211 */  jal       _create_npc_basic
 /* 990954 80241174 0280202D */   daddu    $a0, $s4, $zero
 /* 990958 80241178 0C00E2B7 */  jal       get_npc_by_index
 /* 99095C 8024117C 0040202D */   daddu    $a0, $v0, $zero

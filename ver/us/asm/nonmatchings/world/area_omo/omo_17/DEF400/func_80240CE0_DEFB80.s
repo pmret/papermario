@@ -113,7 +113,7 @@ glabel func_80240CE0_DEFB80
 /* DEFD1C 80240E7C E7A0003C */  swc1      $f0, 0x3c($sp)
 /* DEFD20 80240E80 AFA20010 */  sw        $v0, 0x10($sp)
 /* DEFD24 80240E84 8E440080 */  lw        $a0, 0x80($s2)
-/* DEFD28 80240E88 0C0372DF */  jal       func_800DCB7C
+/* DEFD28 80240E88 0C0372DF */  jal       npc_raycast_down_sides
 /* DEFD2C 80240E8C 27A6003C */   addiu    $a2, $sp, 0x3c
 /* DEFD30 80240E90 10400003 */  beqz      $v0, .L80240EA0
 /* DEFD34 80240E94 00000000 */   nop

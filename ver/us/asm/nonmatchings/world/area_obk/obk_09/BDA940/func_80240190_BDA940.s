@@ -29,7 +29,7 @@ glabel func_80240190_BDA940
 /* BDA9A0 802401F0 8E050000 */  lw        $a1, ($s0)
 /* BDA9A4 802401F4 8E060004 */  lw        $a2, 4($s0)
 /* BDA9A8 802401F8 8E070008 */  lw        $a3, 8($s0)
-/* BDA9AC 802401FC 0C01C9AC */  jal       func_800726B0
+/* BDA9AC 802401FC 0C01C9AC */  jal       playFX_7B
 /* BDA9B0 80240200 24040001 */   addiu    $a0, $zero, 1
 /* BDA9B4 80240204 AE02001C */  sw        $v0, 0x1c($s0)
 /* BDA9B8 80240208 8C43000C */  lw        $v1, 0xc($v0)

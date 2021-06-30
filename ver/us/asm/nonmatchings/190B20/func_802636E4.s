@@ -87,11 +87,11 @@ glabel func_802636E4
 /* 1920F8 80263818 82300011 */  lb        $s0, 0x11($s1)
 /* 1920FC 8026381C 1200000B */  beqz      $s0, .L8026384C
 /* 192100 80263820 02A0202D */   daddu    $a0, $s5, $zero
-/* 192104 80263824 0C099CAB */  jal       heroes_is_ability_active
+/* 192104 80263824 0C099CAB */  jal       player_team_is_ability_active
 /* 192108 80263828 24050018 */   addiu    $a1, $zero, 0x18
 /* 19210C 8026382C 02028023 */  subu      $s0, $s0, $v0
 /* 192110 80263830 02A0202D */  daddu     $a0, $s5, $zero
-/* 192114 80263834 0C099CAB */  jal       heroes_is_ability_active
+/* 192114 80263834 0C099CAB */  jal       player_team_is_ability_active
 /* 192118 80263838 24050026 */   addiu    $a1, $zero, 0x26
 /* 19211C 8026383C 00021040 */  sll       $v0, $v0, 1
 /* 192120 80263840 02028023 */  subu      $s0, $s0, $v0

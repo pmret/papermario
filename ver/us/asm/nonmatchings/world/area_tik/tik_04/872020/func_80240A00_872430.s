@@ -43,7 +43,7 @@ glabel func_80240A00_872430
 /* 8724C8 80240A98 E7A2001C */  swc1      $f2, 0x1c($sp)
 /* 8724CC 80240A9C E7A40020 */  swc1      $f4, 0x20($sp)
 /* 8724D0 80240AA0 AFB10010 */  sw        $s1, 0x10($sp)
-/* 8724D4 80240AA4 0C04497A */  jal       func_801125E8
+/* 8724D4 80240AA4 0C04497A */  jal       entity_raycast_down
 /* 8724D8 80240AA8 AFB00014 */   sw       $s0, 0x14($sp)
 /* 8724DC 80240AAC 8FA5002C */  lw        $a1, 0x2c($sp)
 /* 8724E0 80240AB0 0C044A17 */  jal       set_standard_shadow_scale
@@ -89,7 +89,7 @@ glabel func_80240A00_872430
 /* 872580 80240B50 E7A2001C */  swc1      $f2, 0x1c($sp)
 /* 872584 80240B54 E7A40020 */  swc1      $f4, 0x20($sp)
 /* 872588 80240B58 AFB10010 */  sw        $s1, 0x10($sp)
-/* 87258C 80240B5C 0C04497A */  jal       func_801125E8
+/* 87258C 80240B5C 0C04497A */  jal       entity_raycast_down
 /* 872590 80240B60 AFB00014 */   sw       $s0, 0x14($sp)
 /* 872594 80240B64 8FA5002C */  lw        $a1, 0x2c($sp)
 /* 872598 80240B68 0C044A17 */  jal       set_standard_shadow_scale

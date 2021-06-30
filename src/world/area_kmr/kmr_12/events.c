@@ -200,11 +200,11 @@ Script N(ReadEastSign) = SCRIPT({
 
     group 0;
 
-    func_802D5830(1);
+    SetTimeFreezeMode(1);
     DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MSG_kmr_12_sign_to_fortress, 160, 40);
     DisablePlayerInput(FALSE);
-    func_802D5830(0);
+    SetTimeFreezeMode(0);
 });
 
 Script N(MakeEntities) = SCRIPT({

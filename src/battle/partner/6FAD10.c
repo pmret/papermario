@@ -10,36 +10,36 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
     s16 selectedMoveID;
     s32 soundID;
 
-    func_80070130(0, x, y, z);
+    playFX_17(0, x, y, z);
     selectedMoveID = battleStatus->selectedMoveID;
 
     switch (selectedMoveID) {
         case 146:
             if (script->varTable[10] > 0) {
-                func_800701F0(1, x, y + 20, z);
+                playFX_19(1, x, y + 20, z);
             } else {
-                func_800701F0(0, x, y + 20, z);
+                playFX_19(0, x, y + 20, z);
             }
             sfx_play_sound(8214);
             break;
         case 147:
             if (script->varTable[10] > 0) {
-                func_800701F0(1, x, y + 20, z);
+                playFX_19(1, x, y + 20, z);
             } else {
-                func_800701F0(0, x, y + 20, z);
+                playFX_19(0, x, y + 20, z);
             }
             sfx_play_sound(8215);
             break;
         case 148:
             if (script->varTable[10] > 0) {
-                func_800701F0(2, x, y + 20, z);
+                playFX_19(2, x, y + 20, z);
             } else {
-                func_800701F0(1, x, y + 20, z);
+                playFX_19(1, x, y + 20, z);
             }
             sfx_play_sound(8215);
             break;
         default:
-            func_800701F0(0, x, y + 20, z);
+            playFX_19(0, x, y + 20, z);
             sfx_play_sound(8214);
             break;
     }

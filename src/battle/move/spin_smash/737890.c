@@ -9,7 +9,7 @@ ApiStatus func_802A1000_737890(ScriptInstance* script, s32 isInitialCall) {
     f32 yPos = playerActor->currentPos.y + 15.0f;
     f32 zPos = playerActor->currentPos.z + 5.0f;
 
-    func_80070970(0, xPos, yPos, zPos, 6, 20);
+    playFX_2D(0, xPos, yPos, zPos, 6, 20);
 
     return ApiStatus_DONE2;
 }
@@ -21,7 +21,7 @@ ApiStatus func_802A1074_737904(ScriptInstance* script, s32 isInitialCall) {
     f32 yPos = playerActor->currentPos.y + 15.0f;
     f32 zPos = playerActor->currentPos.z + 5.0f;
 
-    func_800709D0(0, xPos, yPos, zPos, 1.0f, 20);
+    playFX_2E(0, xPos, yPos, zPos, 1.0f, 20);
 
     return ApiStatus_DONE2;
 }

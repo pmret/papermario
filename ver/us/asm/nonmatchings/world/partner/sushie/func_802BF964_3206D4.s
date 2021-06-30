@@ -7,7 +7,7 @@ glabel func_802BF964_3206D4
 /* 3206DC 802BF96C AFB00010 */  sw        $s0, 0x10($sp)
 /* 3206E0 802BF970 10A0000A */  beqz      $a1, .L802BF99C
 /* 3206E4 802BF974 8C90014C */   lw       $s0, 0x14c($a0)
-/* 3206E8 802BF978 0C03BA65 */  jal       func_800EE994
+/* 3206E8 802BF978 0C03BA65 */  jal       partner_init_put_away
 /* 3206EC 802BF97C 0200202D */   daddu    $a0, $s0, $zero
 /* 3206F0 802BF980 3C04800F */  lui       $a0, %hi(gPlayerStatusPtr)
 /* 3206F4 802BF984 8C847B30 */  lw        $a0, %lo(gPlayerStatusPtr)($a0)
@@ -17,7 +17,7 @@ glabel func_802BF964_3206D4
 /* 320704 802BF994 00431024 */  and       $v0, $v0, $v1
 /* 320708 802BF998 AC820004 */  sw        $v0, 4($a0)
 .L802BF99C:
-/* 32070C 802BF99C 0C03BA6E */  jal       func_800EE9B8
+/* 32070C 802BF99C 0C03BA6E */  jal       partner_put_away
 /* 320710 802BF9A0 0200202D */   daddu    $a0, $s0, $zero
 /* 320714 802BF9A4 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 320718 802BF9A8 8FB00010 */  lw        $s0, 0x10($sp)

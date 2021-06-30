@@ -61,7 +61,7 @@ glabel func_80242900_DF9300
 /* DF93E0 802429E0 E7B80010 */  swc1      $f24, 0x10($sp)
 /* DF93E4 802429E4 E7B60014 */  swc1      $f22, 0x14($sp)
 /* DF93E8 802429E8 E7B40018 */  swc1      $f20, 0x18($sp)
-/* DF93EC 802429EC 0C01C3DC */  jal       func_80070F70
+/* DF93EC 802429EC 0C01C3DC */  jal       playFX_3D
 /* DF93F0 802429F0 AFA20020 */   sw       $v0, 0x20($sp)
 /* DF93F4 802429F4 8FA30028 */  lw        $v1, 0x28($sp)
 /* DF93F8 802429F8 AE230084 */  sw        $v1, 0x84($s1)

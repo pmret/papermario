@@ -14,7 +14,7 @@ glabel func_802BD2D4_320E24
 /* 320E48 802BD2F8 8C91014C */  lw        $s1, 0x14c($a0)
 /* 320E4C 802BD2FC 10A00009 */  beqz      $a1, .L802BD324
 /* 320E50 802BD300 0220202D */   daddu    $a0, $s1, $zero
-/* 320E54 802BD304 0C03B4C4 */  jal       enable_partner_flying
+/* 320E54 802BD304 0C03B4C4 */  jal       partner_flying_enable
 /* 320E58 802BD308 24050001 */   addiu    $a1, $zero, 1
 /* 320E5C 802BD30C 3C04802C */  lui       $a0, %hi(D_802BFE7C_3239CC)
 /* 320E60 802BD310 8C84FE7C */  lw        $a0, %lo(D_802BFE7C_3239CC)($a0)
@@ -34,9 +34,9 @@ glabel func_802BD2D4_320E24
 /* 320E94 802BD344 00431025 */  or        $v0, $v0, $v1
 /* 320E98 802BD348 16400007 */  bnez      $s2, .L802BD368
 /* 320E9C 802BD34C AE220000 */   sw       $v0, ($s1)
-/* 320EA0 802BD350 0C03B52E */  jal       update_player_move_history
+/* 320EA0 802BD350 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 320EA4 802BD354 0220202D */   daddu    $a0, $s1, $zero
-/* 320EA8 802BD358 0C03B574 */  jal       func_800ED5D0
+/* 320EA8 802BD358 0C03B574 */  jal       partner_flying_update_motion
 /* 320EAC 802BD35C 0220202D */   daddu    $a0, $s1, $zero
 /* 320EB0 802BD360 080AF596 */  j         .L802BD658
 /* 320EB4 802BD364 0000102D */   daddu    $v0, $zero, $zero
@@ -227,9 +227,9 @@ glabel func_802BD2D4_320E24
 /* 321170 802BD620 080AF595 */  j         .L802BD654
 /* 321174 802BD624 AC820004 */   sw       $v0, 4($a0)
 .L802BD628:
-/* 321178 802BD628 0C03B52E */  jal       update_player_move_history
+/* 321178 802BD628 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 32117C 802BD62C 0220202D */   daddu    $a0, $s1, $zero
-/* 321180 802BD630 0C03B574 */  jal       func_800ED5D0
+/* 321180 802BD630 0C03B574 */  jal       partner_flying_update_motion
 /* 321184 802BD634 0220202D */   daddu    $a0, $s1, $zero
 /* 321188 802BD638 8E030000 */  lw        $v1, ($s0)
 /* 32118C 802BD63C 8C620000 */  lw        $v0, ($v1)

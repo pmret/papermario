@@ -63,7 +63,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
 }
 
 ApiStatus N(ReflectWall)(ScriptInstance* script, s32 isInitialCall) {
-    script->array[0] = (s32) create_dynamic_entity_world(NULL, N(reflection_setup_wall));
+    script->array[0] = (s32) create_generic_entity_world(NULL, N(reflection_setup_wall));
     return ApiStatus_DONE2;
 }
 
@@ -91,7 +91,7 @@ void N(reflection_setup_wall)(void) {
             anim = N(reflection_unk_change_anim_facing)(anim);
         }
 
-        func_802DDA8C(2, anim, 1.0f);
+        spr_update_player_sprite(2, anim, 1.0f);
 
         if (!(playerStatus->flags & 0x20000)) {
             if (playerStatus->alpha1 != D_802D9D70) {
@@ -135,14 +135,14 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
     guMtxCatF(main, scale, main);
     guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z - 3.0f);
     guMtxCatF(main, translation, main);
-    render_sprite(2, 0, 0, NULL, main);
+    spr_draw_player_sprite(2, 0, 0, NULL, main);
 }
 
 ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
-            script->array[0] = create_dynamic_entity_world(NULL, N(reflection_setup_floor));
+            script->array[0] = create_generic_entity_world(NULL, N(reflection_setup_floor));
             gOverrideFlags |= 0x80;
             break;
         case REFLECTION_WALL:
@@ -168,7 +168,7 @@ void N(reflection_setup_floor)(void) {
         get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
                           &screenX, &screenY, &screenZ);
 
-        func_802DDA8C(1, playerStatus->trueAnimation, 1.0f);
+        spr_update_player_sprite(1, playerStatus->trueAnimation, 1.0f);
 
         if (!(playerStatus->flags & 0x20000)) {
             if (playerStatus->alpha1 != D_802D9D71) {
@@ -221,7 +221,7 @@ void N(reflection_render_floor)(PlayerStatus* playerStatus) {
         flags = 1;
     }
 
-    render_sprite(flags, 0, 0, NULL, main);
+    spr_draw_player_sprite(flags, 0, 0, NULL, main);
 }
 
 void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
@@ -274,7 +274,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
         } else {
             // Spinning blur animation
 
-            blurAngle = func_800E5938(i, &x, &y, &z);
+            blurAngle = phys_get_spin_history(i, &x, &y, &z);
 
             if (y == 0x80000000) {
                 py = playerStatus->position.y;
@@ -310,7 +310,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
             flags = 1;
         }
 
-        render_sprite(flags, 0, 0, 0, &main);
+        spr_draw_player_sprite(flags, 0, 0, 0, &main);
     }
 }
 
@@ -322,20 +322,20 @@ ApiStatus N(ReflectPartner)(ScriptInstance* script, s32 isInitialCall) {
     if (script->varTable[1] == FALSE) {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
-                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlagsA0000), NULL);
+                script->array[1] = create_generic_entity_world(N(SetPartnerFlagsA0000), NULL);
                 break;
             case REFLECTION_FLOOR:
-                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags80000), NULL);
+                script->array[1] = create_generic_entity_world(N(SetPartnerFlags80000), NULL);
                 break;
             case REFLECTION_WALL:
-                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags20000), NULL);
+                script->array[1] = create_generic_entity_world(N(SetPartnerFlags20000), NULL);
                 break;
         }
     } else {
         switch (script->varTable[0]) {
             case REFLECTION_FLOOR_WALL:
             case REFLECTION_FLOOR:
-                script->array[1] = create_dynamic_entity_world(N(SetPartnerFlags80000), NULL);
+                script->array[1] = create_generic_entity_world(N(SetPartnerFlags80000), NULL);
                 break;
             case REFLECTION_WALL:
                 break;

@@ -7,7 +7,7 @@ glabel func_8024062C_897C0C
 /* 897C14 80240634 8C82000C */  lw        $v0, 0xc($a0)
 /* 897C18 80240638 0C0B1EAF */  jal       get_variable
 /* 897C1C 8024063C 8C450000 */   lw       $a1, ($v0)
-/* 897C20 80240640 0C0B95A4 */  jal       func_802E5690
+/* 897C20 80240640 0C0B95A4 */  jal       entity_upgrade_block_hide_content
 /* 897C24 80240644 0040202D */   daddu    $a0, $v0, $zero
 /* 897C28 80240648 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 897C2C 8024064C 24020002 */  addiu     $v0, $zero, 2

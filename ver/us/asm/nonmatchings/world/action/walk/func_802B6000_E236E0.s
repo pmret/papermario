@@ -47,7 +47,7 @@ glabel func_802B6000_E236E0
 /* E2377C 802B609C 3C040001 */  lui       $a0, 1
 /* E23780 802B60A0 34840004 */  ori       $a0, $a0, 4
 .L802B60A4:
-/* E23784 802B60A4 0C037FBF */  jal       func_800DFEFC
+/* E23784 802B60A4 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23788 802B60A8 00000000 */   nop
 .L802B60AC:
 /* E2378C 802B60AC 8E020000 */  lw        $v0, ($s0)
@@ -55,7 +55,7 @@ glabel func_802B6000_E236E0
 /* E23794 802B60B4 10400006 */  beqz      $v0, .L802B60D0
 /* E23798 802B60B8 24040008 */   addiu    $a0, $zero, 8
 /* E2379C 802B60BC C60000A0 */  lwc1      $f0, 0xa0($s0)
-/* E237A0 802B60C0 0C039426 */  jal       func_800E5098
+/* E237A0 802B60C0 0C039426 */  jal       try_player_footstep_sounds
 /* E237A4 802B60C4 E6000080 */   swc1     $f0, 0x80($s0)
 /* E237A8 802B60C8 080AD89A */  j         .L802B6268
 /* E237AC 802B60CC 00000000 */   nop
@@ -63,9 +63,9 @@ glabel func_802B6000_E236E0
 /* E237B0 802B60D0 27B20010 */  addiu     $s2, $sp, 0x10
 /* E237B4 802B60D4 0240202D */  daddu     $a0, $s2, $zero
 /* E237B8 802B60D8 27B10014 */  addiu     $s1, $sp, 0x14
-/* E237BC 802B60DC 0C0388C1 */  jal       input_to_move_vector
+/* E237BC 802B60DC 0C0388C1 */  jal       player_input_to_move_vector
 /* E237C0 802B60E0 0220282D */   daddu    $a1, $s1, $zero
-/* E237C4 802B60E4 0C039454 */  jal       func_800E5150
+/* E237C4 802B60E4 0C039454 */  jal       phys_update_interact_collider
 /* E237C8 802B60E8 00000000 */   nop
 /* E237CC 802B60EC 0C039858 */  jal       check_input_jump
 /* E237D0 802B60F0 00000000 */   nop
@@ -79,7 +79,7 @@ glabel func_802B6000_E236E0
 /* E237F0 802B6110 00000000 */   nop
 /* E237F4 802B6114 0240202D */  daddu     $a0, $s2, $zero
 .L802B6118:
-/* E237F8 802B6118 0C0388C1 */  jal       input_to_move_vector
+/* E237F8 802B6118 0C0388C1 */  jal       player_input_to_move_vector
 /* E237FC 802B611C 0220282D */   daddu    $a1, $s1, $zero
 /* E23800 802B6120 C7A40014 */  lwc1      $f4, 0x14($sp)
 /* E23804 802B6124 44800000 */  mtc1      $zero, $f0
@@ -167,7 +167,7 @@ glabel func_802B6000_E236E0
 /* E2392C 802B624C 080AD89A */  j         .L802B6268
 /* E23930 802B6250 00000000 */   nop
 .L802B6254:
-/* E23934 802B6254 0C039426 */  jal       func_800E5098
+/* E23934 802B6254 0C039426 */  jal       try_player_footstep_sounds
 /* E23938 802B6258 24040008 */   addiu    $a0, $zero, 8
 /* E2393C 802B625C 8E8202AC */  lw        $v0, 0x2ac($s4)
 /* E23940 802B6260 24420001 */  addiu     $v0, $v0, 1

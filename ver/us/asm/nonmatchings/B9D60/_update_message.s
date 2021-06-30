@@ -474,7 +474,7 @@ glabel L80123E98_BA598
 /* BA614 80123F14 00000000 */   nop
 .L80123F18:
 /* BA618 80123F18 0200202D */  daddu     $a0, $s0, $zero
-/* BA61C 80123F1C 0C04915C */  jal       func_80124570
+/* BA61C 80123F1C 0C04915C */  jal       msg_copy_to_print_buffer
 /* BA620 80123F20 0000302D */   daddu    $a2, $zero, $zero
 /* BA624 80123F24 0804905D */  j         L80124174_BA874
 /* BA628 80123F28 00000000 */   nop

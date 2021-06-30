@@ -206,15 +206,15 @@ glabel L80111480_A7B80
 /* A7DD8 801116D8 080445C4 */  j         .L80111710
 /* A7DDC 801116DC 00000000 */   nop
 .L801116E0:
-/* A7DE0 801116E0 0C04792E */  jal       func_8011E4B8
+/* A7DE0 801116E0 0C04792E */  jal       create_model_animator
 /* A7DE4 801116E4 8EC40004 */   lw       $a0, 4($s6)
 /* A7DE8 801116E8 A6820014 */  sh        $v0, 0x14($s4)
 /* A7DEC 801116EC 00021400 */  sll       $v0, $v0, 0x10
 /* A7DF0 801116F0 8EC50008 */  lw        $a1, 8($s6)
-/* A7DF4 801116F4 0C0480EB */  jal       func_801203AC
+/* A7DF4 801116F4 0C0480EB */  jal       load_model_animator_tree
 /* A7DF8 801116F8 00022403 */   sra      $a0, $v0, 0x10
 /* A7DFC 801116FC 86840014 */  lh        $a0, 0x14($s4)
-/* A7E00 80111700 0C047A2F */  jal       func_8011E8BC
+/* A7E00 80111700 0C047A2F */  jal       update_model_animator
 /* A7E04 80111704 00000000 */   nop
 /* A7E08 80111708 080445DA */  j         .L80111768
 /* A7E0C 8011170C 00000000 */   nop
@@ -225,19 +225,19 @@ glabel L80111480_A7B80
 /* A7E1C 8011171C 02029021 */   addu     $s2, $s0, $v0
 /* A7E20 80111720 02C0202D */  daddu     $a0, $s6, $zero
 /* A7E24 80111724 8E860044 */  lw        $a2, 0x44($s4)
-/* A7E28 80111728 0C04442D */  jal       func_801110B4
+/* A7E28 80111728 0C04442D */  jal       entity_anim_make_vertex_pointers
 /* A7E2C 8011172C 0200282D */   daddu    $a1, $s0, $zero
 .L80111730:
 /* A7E30 80111730 0220202D */  daddu     $a0, $s1, $zero
-/* A7E34 80111734 0C047978 */  jal       func_8011E5E0
+/* A7E34 80111734 0C047978 */  jal       create_mesh_animator
 /* A7E38 80111738 0200282D */   daddu    $a1, $s0, $zero
 /* A7E3C 8011173C 00022400 */  sll       $a0, $v0, 0x10
 /* A7E40 80111740 00042403 */  sra       $a0, $a0, 0x10
 /* A7E44 80111744 0240282D */  daddu     $a1, $s2, $zero
-/* A7E48 80111748 0C04811D */  jal       func_80120474
+/* A7E48 80111748 0C04811D */  jal       load_mesh_animator_tree
 /* A7E4C 8011174C A6820014 */   sh       $v0, 0x14($s4)
 /* A7E50 80111750 86840014 */  lh        $a0, 0x14($s4)
-/* A7E54 80111754 0C047A2F */  jal       func_8011E8BC
+/* A7E54 80111754 0C047A2F */  jal       update_model_animator
 /* A7E58 80111758 00000000 */   nop
 /* A7E5C 8011175C 8E820000 */  lw        $v0, ($s4)
 /* A7E60 80111760 34420008 */  ori       $v0, $v0, 8

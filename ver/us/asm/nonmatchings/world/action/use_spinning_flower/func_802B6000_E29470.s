@@ -38,7 +38,7 @@ glabel func_802B6000_E29470
 /* E294F4 802B6084 27A20040 */  addiu     $v0, $sp, 0x40
 /* E294F8 802B6088 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E294FC 802B608C 27A20044 */  addiu     $v0, $sp, 0x44
-/* E29500 802B6090 0C03791B */  jal       func_800DE46C
+/* E29500 802B6090 0C03791B */  jal       player_raycast_below_cam_relative
 /* E29504 802B6094 AFA20020 */   sw       $v0, 0x20($sp)
 /* E29508 802B6098 8FBF0048 */  lw        $ra, 0x48($sp)
 /* E2950C 802B609C 03E00008 */  jr        $ra

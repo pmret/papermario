@@ -30,7 +30,7 @@ glabel func_80241310_D6FCC0
 /* D6FD24 80241374 44060000 */  mfc1      $a2, $f0
 /* D6FD28 80241378 44907000 */  mtc1      $s0, $f14
 /* D6FD2C 8024137C 00000000 */  nop
-/* D6FD30 80241380 0C01BE3C */  jal       func_8006F8F0
+/* D6FD30 80241380 0C01BE3C */  jal       playFX_01
 /* D6FD34 80241384 468073A0 */   cvt.s.w  $f14, $f14
 /* D6FD38 80241388 8FBF001C */  lw        $ra, 0x1c($sp)
 /* D6FD3C 8024138C 8FB20018 */  lw        $s2, 0x18($sp)

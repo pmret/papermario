@@ -76,7 +76,7 @@ glabel battle_item_shooting_star_func_802A123C_71D9AC
 /* 71DAC0 802A1350 E7B60010 */  swc1      $f22, 0x10($sp)
 /* 71DAC4 802A1354 AFA00014 */  sw        $zero, 0x14($sp)
 /* 71DAC8 802A1358 E7B40018 */  swc1      $f20, 0x18($sp)
-/* 71DACC 802A135C 0C01BF8C */  jal       func_8006FE30
+/* 71DACC 802A135C 0C01BF8C */  jal       playFX_0F
 /* 71DAD0 802A1360 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 71DAD4 802A1364 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 71DAD8 802A1368 8FB20028 */  lw        $s2, 0x28($sp)

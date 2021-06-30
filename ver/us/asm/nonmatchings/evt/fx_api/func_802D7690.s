@@ -115,7 +115,7 @@ glabel func_802D7690
 /* FC1F4 802D7844 44060000 */  mfc1      $a2, $f0
 /* FC1F8 802D7848 4600A18D */  trunc.w.s $f6, $f20
 /* FC1FC 802D784C 44043000 */  mfc1      $a0, $f6
-/* FC200 802D7850 0C01BF2C */  jal       func_8006FCB0
+/* FC200 802D7850 0C01BF2C */  jal       playFX_0B
 /* FC204 802D7854 0000382D */   daddu    $a3, $zero, $zero
 /* FC208 802D7858 8E430070 */  lw        $v1, 0x70($s2)
 /* FC20C 802D785C 24630001 */  addiu     $v1, $v1, 1

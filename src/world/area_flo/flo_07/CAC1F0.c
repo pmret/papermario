@@ -23,7 +23,7 @@ typedef struct N(temp) {
 } N(temp);
 
 ApiStatus N(func_80240344_CAC534)(ScriptInstance* script, s32 isInitialCall) {
-    N(temp)* effect = func_80072350(3, -272.0f, 80.0f, 20.0f, 200.0f, 120.0f, 4.0f, 8, 0);
+    N(temp)* effect = playFX_72(3, -272.0f, 80.0f, 20.0f, 200.0f, 120.0f, 4.0f, 8, 0);
 
     effect->unk_0C->unk_38 = 0xF0;
     effect->unk_0C->unk_3C = 0xF0;

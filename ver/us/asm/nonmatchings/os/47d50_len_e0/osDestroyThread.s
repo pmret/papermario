@@ -6,7 +6,7 @@ glabel osDestroyThread
 /* 47D54 8006C954 AFB00010 */  sw        $s0, 0x10($sp)
 /* 47D58 8006C958 00808021 */  addu      $s0, $a0, $zero
 /* 47D5C 8006C95C AFBF0018 */  sw        $ra, 0x18($sp)
-/* 47D60 8006C960 0C01ACD8 */  jal       __osDisableInt
+/* 47D60 8006C960 0C01ACD8 */  jal       osDisableInt
 /* 47D64 8006C964 AFB10014 */   sw       $s1, 0x14($sp)
 /* 47D68 8006C968 16000004 */  bnez      $s0, .L8006C97C
 /* 47D6C 8006C96C 00408821 */   addu     $s1, $v0, $zero
@@ -19,7 +19,7 @@ glabel osDestroyThread
 /* 47D84 8006C984 10620004 */  beq       $v1, $v0, .L8006C998
 /* 47D88 8006C988 00000000 */   nop
 /* 47D8C 8006C98C 8E040008 */  lw        $a0, 8($s0)
-/* 47D90 8006C990 0C019880 */  jal       __osDequeueThread
+/* 47D90 8006C990 0C019880 */  jal       osDequeueThread
 /* 47D94 8006C994 02002821 */   addu     $a1, $s0, $zero
 .L8006C998:
 /* 47D98 8006C998 3C028009 */  lui       $v0, %hi(__osActiveQueue)
@@ -56,7 +56,7 @@ glabel osDestroyThread
 /* 47E04 8006CA04 0C01AC75 */  jal       osDispatchThread
 /* 47E08 8006CA08 00000000 */   nop
 .L8006CA0C:
-/* 47E0C 8006CA0C 0C01ACF4 */  jal       __osRestoreInt
+/* 47E0C 8006CA0C 0C01ACF4 */  jal       osRestoreInt
 /* 47E10 8006CA10 02202021 */   addu     $a0, $s1, $zero
 /* 47E14 8006CA14 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 47E18 8006CA18 8FB10014 */  lw        $s1, 0x14($sp)

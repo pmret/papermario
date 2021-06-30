@@ -37,7 +37,7 @@ void update_player_input(void) {
 }
 
 #ifdef NON_MATCHING
-void func_800E205C(void) {
+void reset_player_status(void) {
     s32* temp8010C92C = &D_8010C92C;
     PlayerStatus* playerStatus = &gPlayerStatus;
     MapConfig* mapConfig;
@@ -119,20 +119,20 @@ void func_800E205C(void) {
     gCameras->targetPos.y = playerStatus->position.y;
     gCameras->targetPos.z = playerStatus->position.z;
 
-    func_800E59A0(mapConfig);
+    phys_reset_spin_history(mapConfig);
     mem_clear(&D_8010F250, sizeof(Temp8010F250));
 }
 #else
-INCLUDE_ASM(s32, "7B440", func_800E205C);
+INCLUDE_ASM(s32, "7B440", reset_player_status);
 #endif
 
-void func_800E22E4(s32* arg0) {
+void get_packed_buttons(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     *arg0 = (u16)playerStatus->currentButtons | (playerStatus->pressedButtons << 16);
 }
 
-void input_to_move_vector(f32* angle, f32* magnitude) {
+void player_input_to_move_vector(f32* angle, f32* magnitude) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 stickAxisX;
     f32 stickAxisY;
@@ -157,7 +157,7 @@ void input_to_move_vector(f32* angle, f32* magnitude) {
     *magnitude = mag;
 }
 
-void func_800E23FC(f32* arg0, f32* arg1) {
+void game_input_to_move_vector(f32* arg0, f32* arg1) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 stickX = gGameStatusPtr->stickX;
     f32 stickY = -gGameStatusPtr->stickY;

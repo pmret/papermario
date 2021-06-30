@@ -40,7 +40,7 @@ glabel func_802A1628_78EDF8
 /* 78EE84 802A16B4 AFA00010 */  sw        $zero, 0x10($sp)
 /* 78EE88 802A16B8 AFA00018 */  sw        $zero, 0x18($sp)
 /* 78EE8C 802A16BC AFA3001C */  sw        $v1, 0x1c($sp)
-/* 78EE90 802A16C0 0C01C064 */  jal       func_80070190
+/* 78EE90 802A16C0 0C01C064 */  jal       playFX_18
 /* 78EE94 802A16C4 E7A00014 */   swc1     $f0, 0x14($sp)
 /* 78EE98 802A16C8 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 78EE9C 802A16CC 8FB20028 */  lw        $s2, 0x28($sp)

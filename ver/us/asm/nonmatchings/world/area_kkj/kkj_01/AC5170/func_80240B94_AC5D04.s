@@ -113,7 +113,7 @@ glabel func_80240B94_AC5D04
 /* AC5EA0 80240D30 E7A0003C */  swc1      $f0, 0x3c($sp)
 /* AC5EA4 80240D34 AFA20010 */  sw        $v0, 0x10($sp)
 /* AC5EA8 80240D38 8E440080 */  lw        $a0, 0x80($s2)
-/* AC5EAC 80240D3C 0C0372DF */  jal       func_800DCB7C
+/* AC5EAC 80240D3C 0C0372DF */  jal       npc_raycast_down_sides
 /* AC5EB0 80240D40 27A70040 */   addiu    $a3, $sp, 0x40
 /* AC5EB4 80240D44 10400003 */  beqz      $v0, .L80240D54
 /* AC5EB8 80240D48 00000000 */   nop

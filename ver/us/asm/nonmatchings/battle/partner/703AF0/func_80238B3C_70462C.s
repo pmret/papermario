@@ -38,7 +38,7 @@ glabel func_80238B3C_70462C
 /* 7046B0 80238BC0 44071000 */  mfc1      $a3, $f2
 /* 7046B4 80238BC4 2403003C */  addiu     $v1, $zero, 0x3c
 /* 7046B8 80238BC8 AFA30014 */  sw        $v1, 0x14($sp)
-/* 7046BC 80238BCC 0C01C664 */  jal       func_80071990
+/* 7046BC 80238BCC 0C01C664 */  jal       playFX_58
 /* 7046C0 80238BD0 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 7046C4 80238BD4 0040182D */  daddu     $v1, $v0, $zero
 /* 7046C8 80238BD8 8C64000C */  lw        $a0, 0xc($v1)

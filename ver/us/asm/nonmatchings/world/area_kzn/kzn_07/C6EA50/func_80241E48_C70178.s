@@ -90,7 +90,7 @@ glabel func_80241E48_C70178
 /* C702C8 80241F98 E7A00038 */  swc1      $f0, 0x38($sp)
 /* C702CC 80241F9C AFA20010 */  sw        $v0, 0x10($sp)
 /* C702D0 80241FA0 8E040080 */  lw        $a0, 0x80($s0)
-/* C702D4 80241FA4 0C0372DF */  jal       func_800DCB7C
+/* C702D4 80241FA4 0C0372DF */  jal       npc_raycast_down_sides
 /* C702D8 80241FA8 27A70034 */   addiu    $a3, $sp, 0x34
 /* C702DC 80241FAC 1040000A */  beqz      $v0, .L80241FD8
 /* C702E0 80241FB0 00000000 */   nop

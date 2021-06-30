@@ -268,7 +268,7 @@ glabel L801262A0_BC9A0
 /* BC9D0 801262D0 24020001 */  addiu     $v0, $zero, 1
 /* BC9D4 801262D4 AFA00010 */  sw        $zero, 0x10($sp)
 /* BC9D8 801262D8 AFA20014 */  sw        $v0, 0x14($sp)
-/* BC9DC 801262DC 0C049721 */  jal       func_80125C84
+/* BC9DC 801262DC 0C049721 */  jal       msg_get_print_char_width
 /* BC9E0 801262E0 0100282D */   daddu    $a1, $t0, $zero
 /* BC9E4 801262E4 02629821 */  addu      $s3, $s3, $v0
 glabel L801262E8_BC9E8

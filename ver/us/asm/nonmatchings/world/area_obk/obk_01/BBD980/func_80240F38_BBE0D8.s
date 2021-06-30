@@ -36,7 +36,7 @@ glabel func_80240F38_BBE0D8
 /* BBE14C 80240FAC 44820000 */  mtc1      $v0, $f0
 /* BBE150 80240FB0 00000000 */  nop
 /* BBE154 80240FB4 46800020 */  cvt.s.w   $f0, $f0
-/* BBE158 80240FB8 0C00A64D */  jal       func_80029934
+/* BBE158 80240FB8 0C00A64D */  jal       rand_float
 /* BBE15C 80240FBC E620003C */   swc1     $f0, 0x3c($s1)
 /* BBE160 80240FC0 46000000 */  add.s     $f0, $f0, $f0
 /* BBE164 80240FC4 3C014000 */  lui       $at, 0x4000

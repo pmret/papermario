@@ -478,7 +478,7 @@ glabel load_partner_actor
 /* 193B70 80265290 3C048000 */  lui       $a0, 0x8000
 /* 193B74 80265294 00442025 */  or        $a0, $v0, $a0
 /* 193B78 80265298 0000282D */  daddu     $a1, $zero, $zero
-/* 193B7C 8026529C 0C0B783B */  jal       func_802DE0EC
+/* 193B7C 8026529C 0C0B783B */  jal       spr_load_npc_sprite
 /* 193B80 802652A0 AE020088 */   sw       $v0, 0x88($s0)
 /* 193B84 802652A4 AE020084 */  sw        $v0, 0x84($s0)
 .L802652A8:
@@ -516,14 +516,14 @@ glabel load_partner_actor
 /* 193BF8 80265318 46800021 */  cvt.d.w   $f0, $f0
 /* 193BFC 8026531C 46220003 */  div.d     $f0, $f0, $f2
 /* 193C00 80265320 46200020 */  cvt.s.d   $f0, $f0
-/* 193C04 80265324 0C011D82 */  jal       func_80047608
+/* 193C04 80265324 0C011D82 */  jal       create_status_icon_set
 /* 193C08 80265328 E6200430 */   swc1     $f0, 0x430($s1)
 /* 193C0C 8026532C 3C05C30E */  lui       $a1, 0xc30e
 /* 193C10 80265330 3C064208 */  lui       $a2, 0x4208
 /* 193C14 80265334 3C073F80 */  lui       $a3, 0x3f80
 /* 193C18 80265338 0000202D */  daddu     $a0, $zero, $zero
 /* 193C1C 8026533C A6220436 */  sh        $v0, 0x436($s1)
-/* 193C20 80265340 0C01C43C */  jal       func_800710F0
+/* 193C20 80265340 0C01C43C */  jal       playFX_41
 /* 193C24 80265344 AFA00010 */   sw       $zero, 0x10($sp)
 /* 193C28 80265348 2405000A */  addiu     $a1, $zero, 0xa
 /* 193C2C 8026534C 8E2401C4 */  lw        $a0, 0x1c4($s1)

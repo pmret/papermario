@@ -407,21 +407,21 @@ static s32 N(pad_2AC8)[] = {
 Script N(80242AD0) = SCRIPT({
     group 0;
     suspend group 1;
-    func_802D6420();
+    ShowKeyChoicePopup();
     if (SI_VAR(0) == 0) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00D8), 160, 40);
-        func_802D6954();
+        CloseChoicePopup();
         resume group 1;
         return;
     }
     if (SI_VAR(0) == -1) {
-        func_802D6954();
+        CloseChoicePopup();
         resume group 1;
         return;
     }
     FindKeyItem(19, SI_VAR(0));
     RemoveKeyItemAt(SI_VAR(0));
-    func_802D6954();
+    CloseChoicePopup();
     SI_SAVE_FLAG(1066) = 1;
     N(GetEntityPosition)(SI_MAP_VAR(0), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     PlaySoundAt(0x269, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -690,7 +690,7 @@ ApiStatus N(func_80241464_C50974)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }

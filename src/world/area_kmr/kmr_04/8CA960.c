@@ -38,7 +38,7 @@ ApiStatus N(func_80240434_8CAD34)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80240444_8CAD44)(ScriptInstance* script, s32 isInitialCall) {
-    exec_entity_updatecmd(get_entity_by_index(script->varTable[0]));
+    exec_entity_commandlist(get_entity_by_index(script->varTable[0]));
 
     return ApiStatus_DONE2;
 }

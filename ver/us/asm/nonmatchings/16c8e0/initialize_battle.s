@@ -89,7 +89,7 @@ glabel initialize_battle
 .L8023E26C:
 /* 16CB4C 8023E26C 3C058024 */  lui       $a1, %hi(func_8023ED5C)
 /* 16CB50 8023E270 24A5ED5C */  addiu     $a1, $a1, %lo(func_8023ED5C)
-/* 16CB54 8023E274 0C048C56 */  jal       create_dynamic_entity_world
+/* 16CB54 8023E274 0C048C56 */  jal       create_generic_entity_world
 /* 16CB58 8023E278 0000202D */   daddu    $a0, $zero, $zero
 /* 16CB5C 8023E27C 0C093B70 */  jal       func_8024EDC0
 /* 16CB60 8023E280 0000882D */   daddu    $s1, $zero, $zero
@@ -99,27 +99,27 @@ glabel initialize_battle
 /* 16CB70 8023E290 24040001 */   addiu    $a0, $zero, 1
 /* 16CB74 8023E294 3C048029 */  lui       $a0, %hi(D_80291F80)
 /* 16CB78 8023E298 24841F80 */  addiu     $a0, $a0, %lo(D_80291F80)
-/* 16CB7C 8023E29C 0C050529 */  jal       create_icon
+/* 16CB7C 8023E29C 0C050529 */  jal       create_hud_element
 /* 16CB80 8023E2A0 00000000 */   nop
 /* 16CB84 8023E2A4 3C01802A */  lui       $at, %hi(D_8029EFBC)
 /* 16CB88 8023E2A8 AC22EFBC */  sw        $v0, %lo(D_8029EFBC)($at)
 /* 16CB8C 8023E2AC 0040202D */  daddu     $a0, $v0, $zero
-/* 16CB90 8023E2B0 0C051280 */  jal       set_icon_flags
+/* 16CB90 8023E2B0 0C051280 */  jal       set_hud_element_flags
 /* 16CB94 8023E2B4 24050080 */   addiu    $a1, $zero, 0x80
 /* 16CB98 8023E2B8 3C12802A */  lui       $s2, %hi(D_8029EFC0)
 /* 16CB9C 8023E2BC 2652EFC0 */  addiu     $s2, $s2, %lo(D_8029EFC0)
 .L8023E2C0:
 /* 16CBA0 8023E2C0 3C048008 */  lui       $a0, %hi(D_80080FF0)
 /* 16CBA4 8023E2C4 24840FF0 */  addiu     $a0, $a0, %lo(D_80080FF0)
-/* 16CBA8 8023E2C8 0C050529 */  jal       create_icon
+/* 16CBA8 8023E2C8 0C050529 */  jal       create_hud_element
 /* 16CBAC 8023E2CC 26310001 */   addiu    $s1, $s1, 1
 /* 16CBB0 8023E2D0 AE420000 */  sw        $v0, ($s2)
 /* 16CBB4 8023E2D4 0040802D */  daddu     $s0, $v0, $zero
 /* 16CBB8 8023E2D8 0200202D */  daddu     $a0, $s0, $zero
-/* 16CBBC 8023E2DC 0C051280 */  jal       set_icon_flags
+/* 16CBBC 8023E2DC 0C051280 */  jal       set_hud_element_flags
 /* 16CBC0 8023E2E0 24050082 */   addiu    $a1, $zero, 0x82
 /* 16CBC4 8023E2E4 0200202D */  daddu     $a0, $s0, $zero
-/* 16CBC8 8023E2E8 0C051277 */  jal       func_801449DC
+/* 16CBC8 8023E2E8 0C051277 */  jal       set_hud_element_render_depth
 /* 16CBCC 8023E2EC 24050014 */   addiu    $a1, $zero, 0x14
 /* 16CBD0 8023E2F0 2A22000A */  slti      $v0, $s1, 0xa
 /* 16CBD4 8023E2F4 1440FFF2 */  bnez      $v0, .L8023E2C0
@@ -130,15 +130,15 @@ glabel initialize_battle
 .L8023E308:
 /* 16CBE8 8023E308 3C048010 */  lui       $a0, %hi(D_80104BEC)
 /* 16CBEC 8023E30C 24844BEC */  addiu     $a0, $a0, %lo(D_80104BEC)
-/* 16CBF0 8023E310 0C050529 */  jal       create_icon
+/* 16CBF0 8023E310 0C050529 */  jal       create_hud_element
 /* 16CBF4 8023E314 26310001 */   addiu    $s1, $s1, 1
 /* 16CBF8 8023E318 AE420000 */  sw        $v0, ($s2)
 /* 16CBFC 8023E31C 0040802D */  daddu     $s0, $v0, $zero
 /* 16CC00 8023E320 0200202D */  daddu     $a0, $s0, $zero
-/* 16CC04 8023E324 0C051280 */  jal       set_icon_flags
+/* 16CC04 8023E324 0C051280 */  jal       set_hud_element_flags
 /* 16CC08 8023E328 24050082 */   addiu    $a1, $zero, 0x82
 /* 16CC0C 8023E32C 0200202D */  daddu     $a0, $s0, $zero
-/* 16CC10 8023E330 0C051277 */  jal       func_801449DC
+/* 16CC10 8023E330 0C051277 */  jal       set_hud_element_render_depth
 /* 16CC14 8023E334 24050014 */   addiu    $a1, $zero, 0x14
 /* 16CC18 8023E338 2A22000A */  slti      $v0, $s1, 0xa
 /* 16CC1C 8023E33C 1440FFF2 */  bnez      $v0, .L8023E308
@@ -149,15 +149,15 @@ glabel initialize_battle
 .L8023E350:
 /* 16CC30 8023E350 3C048008 */  lui       $a0, %hi(D_800810C8)
 /* 16CC34 8023E354 248410C8 */  addiu     $a0, $a0, %lo(D_800810C8)
-/* 16CC38 8023E358 0C050529 */  jal       create_icon
+/* 16CC38 8023E358 0C050529 */  jal       create_hud_element
 /* 16CC3C 8023E35C 26310001 */   addiu    $s1, $s1, 1
 /* 16CC40 8023E360 AE420000 */  sw        $v0, ($s2)
 /* 16CC44 8023E364 0040802D */  daddu     $s0, $v0, $zero
 /* 16CC48 8023E368 0200202D */  daddu     $a0, $s0, $zero
-/* 16CC4C 8023E36C 0C051280 */  jal       set_icon_flags
+/* 16CC4C 8023E36C 0C051280 */  jal       set_hud_element_flags
 /* 16CC50 8023E370 24050082 */   addiu    $a1, $zero, 0x82
 /* 16CC54 8023E374 0200202D */  daddu     $a0, $s0, $zero
-/* 16CC58 8023E378 0C051277 */  jal       func_801449DC
+/* 16CC58 8023E378 0C051277 */  jal       set_hud_element_render_depth
 /* 16CC5C 8023E37C 24050014 */   addiu    $a1, $zero, 0x14
 /* 16CC60 8023E380 2A22000A */  slti      $v0, $s1, 0xa
 /* 16CC64 8023E384 1440FFF2 */  bnez      $v0, .L8023E350

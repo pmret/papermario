@@ -145,7 +145,7 @@ glabel func_801363A0
 /* CCC90 80136590 240300A0 */  addiu     $v1, $zero, 0xa0
 /* CCC94 80136594 00628823 */  subu      $s1, $v1, $v0
 .L80136598:
-/* CCC98 80136598 0C04992C */  jal       get_msg_lines
+/* CCC98 80136598 0C04992C */  jal       get_string_lines
 /* CCC9C 8013659C 0240202D */   daddu    $a0, $s2, $zero
 /* CCCA0 801365A0 2442FFFF */  addiu     $v0, $v0, -1
 /* CCCA4 801365A4 00021040 */  sll       $v0, $v0, 1

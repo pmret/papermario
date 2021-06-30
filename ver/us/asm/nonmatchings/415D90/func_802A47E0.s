@@ -17,7 +17,7 @@ glabel func_802A47E0
 /* 41959C 802A480C 00A0302D */  daddu     $a2, $a1, $zero
 /* 4195A0 802A4810 00A0382D */  daddu     $a3, $a1, $zero
 /* 4195A4 802A4814 8E240000 */  lw        $a0, ($s1)
-/* 4195A8 802A4818 0C0513BF */  jal       icon_set_tint
+/* 4195A8 802A4818 0C0513BF */  jal       set_hud_element_tint
 /* 4195AC 802A481C 26310004 */   addiu    $s1, $s1, 4
 /* 4195B0 802A4820 3C02802B */  lui       $v0, %hi(D_802AD66C)
 /* 4195B4 802A4824 8C42D66C */  lw        $v0, %lo(D_802AD66C)($v0)
@@ -31,24 +31,24 @@ glabel func_802A47E0
 /* 4195D0 802A4840 3C10802B */  lui       $s0, %hi(D_802AD618)
 /* 4195D4 802A4844 2610D618 */  addiu     $s0, $s0, %lo(D_802AD618)
 /* 4195D8 802A4848 8E040000 */  lw        $a0, ($s0)
-/* 4195DC 802A484C 0C0513BF */  jal       icon_set_tint
+/* 4195DC 802A484C 0C0513BF */  jal       set_hud_element_tint
 /* 4195E0 802A4850 00A0382D */   daddu    $a3, $a1, $zero
 /* 4195E4 802A4854 240500FF */  addiu     $a1, $zero, 0xff
 /* 4195E8 802A4858 00A0302D */  daddu     $a2, $a1, $zero
 /* 4195EC 802A485C 3C04802B */  lui       $a0, %hi(D_802AD61C)
 /* 4195F0 802A4860 8C84D61C */  lw        $a0, %lo(D_802AD61C)($a0)
-/* 4195F4 802A4864 0C0513BF */  jal       icon_set_tint
+/* 4195F4 802A4864 0C0513BF */  jal       set_hud_element_tint
 /* 4195F8 802A4868 00A0382D */   daddu    $a3, $a1, $zero
 /* 4195FC 802A486C 240500FF */  addiu     $a1, $zero, 0xff
 /* 419600 802A4870 00A0302D */  daddu     $a2, $a1, $zero
 /* 419604 802A4874 3C04802B */  lui       $a0, %hi(D_802AD620)
 /* 419608 802A4878 8C84D620 */  lw        $a0, %lo(D_802AD620)($a0)
-/* 41960C 802A487C 0C0513BF */  jal       icon_set_tint
+/* 41960C 802A487C 0C0513BF */  jal       set_hud_element_tint
 /* 419610 802A4880 00A0382D */   daddu    $a3, $a1, $zero
 /* 419614 802A4884 8E040000 */  lw        $a0, ($s0)
 /* 419618 802A4888 3C058010 */  lui       $a1, %hi(D_80104A28)
 /* 41961C 802A488C 24A54A28 */  addiu     $a1, $a1, %lo(D_80104A28)
-/* 419620 802A4890 0C0511FF */  jal       set_menu_icon_script
+/* 419620 802A4890 0C0511FF */  jal       set_hud_element_script
 /* 419624 802A4894 00000000 */   nop
 /* 419628 802A4898 24040006 */  addiu     $a0, $zero, 6
 /* 41962C 802A489C 0C051F9F */  jal       set_window_update

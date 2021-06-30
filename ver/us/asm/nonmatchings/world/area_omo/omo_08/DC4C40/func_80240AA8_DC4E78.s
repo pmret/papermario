@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240AA8_DC4E78
+glabel btl_restore_world_cameras_DC4E78
 /* DC4E78 80240AA8 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* DC4E7C 80240AAC AFB30054 */  sw        $s3, 0x54($sp)
 /* DC4E80 80240AB0 0080982D */  daddu     $s3, $a0, $zero
@@ -113,7 +113,7 @@ glabel func_80240AA8_DC4E78
 /* DC5014 80240C44 E7A0003C */  swc1      $f0, 0x3c($sp)
 /* DC5018 80240C48 AFA20010 */  sw        $v0, 0x10($sp)
 /* DC501C 80240C4C 8E440080 */  lw        $a0, 0x80($s2)
-/* DC5020 80240C50 0C0372DF */  jal       func_800DCB7C
+/* DC5020 80240C50 0C0372DF */  jal       npc_raycast_down_sides
 /* DC5024 80240C54 27A6003C */   addiu    $a2, $sp, 0x3c
 /* DC5028 80240C58 10400003 */  beqz      $v0, .L80240C68
 /* DC502C 80240C5C 00000000 */   nop

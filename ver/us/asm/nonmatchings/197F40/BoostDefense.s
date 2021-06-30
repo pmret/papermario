@@ -46,14 +46,14 @@ glabel BoostDefense
 /* 19EAD4 802701F4 AE500074 */  sw        $s0, 0x74($s2)
 /* 19EAD8 802701F8 0C093903 */  jal       func_8024E40C
 /* 19EADC 802701FC AE510078 */   sw       $s1, 0x78($s2)
-/* 19EAE0 80270200 0C093978 */  jal       set_cam_zoffset
+/* 19EAE0 80270200 0C093978 */  jal       btl_cam_set_zoffset
 /* 19EAE4 80270204 2404000C */   addiu    $a0, $zero, 0xc
 /* 19EAE8 80270208 86040192 */  lh        $a0, 0x192($s0)
-/* 19EAEC 8027020C 0C09390F */  jal       cam_target_actor
+/* 19EAEC 8027020C 0C09390F */  jal       btl_cam_target_actor
 /* 19EAF0 80270210 00000000 */   nop
-/* 19EAF4 80270214 0C093965 */  jal       set_cam_zoom
+/* 19EAF4 80270214 0C093965 */  jal       btl_cam_set_zoom
 /* 19EAF8 80270218 240400FA */   addiu    $a0, $zero, 0xfa
-/* 19EAFC 8027021C 0C093936 */  jal       move_cam_over
+/* 19EAFC 8027021C 0C093936 */  jal       btl_cam_move
 /* 19EB00 80270220 2404000A */   addiu    $a0, $zero, 0xa
 /* 19EB04 80270224 0C093983 */  jal       func_8024E60C
 /* 19EB08 80270228 00000000 */   nop
@@ -61,7 +61,7 @@ glabel BoostDefense
 /* 19EB10 80270230 30420800 */  andi      $v0, $v0, 0x800
 /* 19EB14 80270234 10400004 */  beqz      $v0, .L80270248
 /* 19EB18 80270238 24020001 */   addiu    $v0, $zero, 1
-/* 19EB1C 8027023C 0C093978 */  jal       set_cam_zoffset
+/* 19EB1C 8027023C 0C093978 */  jal       btl_cam_set_zoffset
 /* 19EB20 80270240 0000202D */   daddu    $a0, $zero, $zero
 /* 19EB24 80270244 24020001 */  addiu     $v0, $zero, 1
 .L80270248:
@@ -225,7 +225,7 @@ glabel L8027047C_19ED5C
 /* 19ED7C 8027049C 44810000 */  mtc1      $at, $f0
 /* 19ED80 802704A0 2410001E */  addiu     $s0, $zero, 0x1e
 /* 19ED84 802704A4 AFB00014 */  sw        $s0, 0x14($sp)
-/* 19ED88 802704A8 0C01C2EC */  jal       func_80070BB0
+/* 19ED88 802704A8 0C01C2EC */  jal       playFX_33
 /* 19ED8C 802704AC E7A00010 */   swc1     $f0, 0x10($sp)
 /* 19ED90 802704B0 0C0938F6 */  jal       func_8024E3D8
 /* 19ED94 802704B4 24040013 */   addiu    $a0, $zero, 0x13
@@ -242,7 +242,7 @@ glabel L802704C8_19EDA8
 /* 19EDBC 802704DC 2405003F */   addiu    $a1, $zero, 0x3f
 /* 19EDC0 802704E0 0C093903 */  jal       func_8024E40C
 /* 19EDC4 802704E4 24040002 */   addiu    $a0, $zero, 2
-/* 19EDC8 802704E8 0C093936 */  jal       move_cam_over
+/* 19EDC8 802704E8 0C093936 */  jal       btl_cam_move
 /* 19EDCC 802704EC 2404000F */   addiu    $a0, $zero, 0xf
 /* 19EDD0 802704F0 92020222 */  lbu       $v0, 0x222($s0)
 /* 19EDD4 802704F4 24030001 */  addiu     $v1, $zero, 1
@@ -264,7 +264,7 @@ glabel L802704C8_19EDA8
 /* 19EE10 80270530 44810000 */  mtc1      $at, $f0
 /* 19EE14 80270534 2402003C */  addiu     $v0, $zero, 0x3c
 /* 19EE18 80270538 AFA20014 */  sw        $v0, 0x14($sp)
-/* 19EE1C 8027053C 0C01C634 */  jal       func_800718D0
+/* 19EE1C 8027053C 0C01C634 */  jal       playFX_56
 /* 19EE20 80270540 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 19EE24 80270544 2402000F */  addiu     $v0, $zero, 0xf
 /* 19EE28 80270548 AE42007C */  sw        $v0, 0x7c($s2)
@@ -277,13 +277,13 @@ glabel L80270558_19EE38
 /* 19EE40 80270560 2442FFFF */   addiu    $v0, $v0, -1
 /* 19EE44 80270564 2404001E */  addiu     $a0, $zero, 0x1e
 /* 19EE48 80270568 2405003C */  addiu     $a1, $zero, 0x3c
-/* 19EE4C 8027056C 0C093E81 */  jal       show_variable_battle_message
+/* 19EE4C 8027056C 0C093E81 */  jal       btl_show_variable_battle_message
 /* 19EE50 80270570 0220302D */   daddu    $a2, $s1, $zero
 /* 19EE54 80270574 24020004 */  addiu     $v0, $zero, 4
 /* 19EE58 80270578 0809C17B */  j         .L802705EC
 /* 19EE5C 8027057C AE420070 */   sw       $v0, 0x70($s2)
 glabel L80270580_19EE60
-/* 19EE60 80270580 0C093EAD */  jal       is_popup_displayed
+/* 19EE60 80270580 0C093EAD */  jal       btl_is_popup_displayed
 /* 19EE64 80270584 00000000 */   nop
 /* 19EE68 80270588 14400019 */  bnez      $v0, .L802705F0
 /* 19EE6C 8027058C 0000102D */   daddu    $v0, $zero, $zero

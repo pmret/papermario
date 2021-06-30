@@ -1684,10 +1684,10 @@ static s32 N(pad_66B4)[] = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_8024030C_CDC9AC)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

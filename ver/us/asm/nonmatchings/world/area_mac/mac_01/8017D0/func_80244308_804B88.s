@@ -23,7 +23,7 @@ glabel func_80244308_804B88
 /* 804BC8 80244348 AFA00010 */  sw        $zero, 0x10($sp)
 /* 804BCC 8024434C AFA00014 */  sw        $zero, 0x14($sp)
 /* 804BD0 80244350 0080282D */  daddu     $a1, $a0, $zero
-/* 804BD4 80244354 0C046FE6 */  jal       func_8011BF98
+/* 804BD4 80244354 0C046FE6 */  jal       set_model_env_color_parameters
 /* 804BD8 80244358 0080302D */   daddu    $a2, $a0, $zero
 /* 804BDC 8024435C 8E030070 */  lw        $v1, 0x70($s0)
 /* 804BE0 80244360 240200FF */  addiu     $v0, $zero, 0xff
@@ -35,7 +35,7 @@ glabel func_80244308_804B88
 /* 804BF8 80244378 0040202D */   daddu    $a0, $v0, $zero
 /* 804BFC 8024437C 0040202D */  daddu     $a0, $v0, $zero
 /* 804C00 80244380 2405FFFF */  addiu     $a1, $zero, -1
-/* 804C04 80244384 0C046F1F */  jal       func_8011BC7C
+/* 804C04 80244384 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* 804C08 80244388 0000302D */   daddu    $a2, $zero, $zero
 /* 804C0C 8024438C 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* 804C10 80244390 2404002A */   addiu    $a0, $zero, 0x2a
@@ -43,7 +43,7 @@ glabel func_80244308_804B88
 /* 804C18 80244398 0040202D */   daddu    $a0, $v0, $zero
 /* 804C1C 8024439C 0040202D */  daddu     $a0, $v0, $zero
 /* 804C20 802443A0 2405FFFF */  addiu     $a1, $zero, -1
-/* 804C24 802443A4 0C046F1F */  jal       func_8011BC7C
+/* 804C24 802443A4 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* 804C28 802443A8 0000302D */   daddu    $a2, $zero, $zero
 /* 804C2C 802443AC 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* 804C30 802443B0 24040029 */   addiu    $a0, $zero, 0x29
@@ -51,7 +51,7 @@ glabel func_80244308_804B88
 /* 804C38 802443B8 0040202D */   daddu    $a0, $v0, $zero
 /* 804C3C 802443BC 0040202D */  daddu     $a0, $v0, $zero
 /* 804C40 802443C0 2405FFFF */  addiu     $a1, $zero, -1
-/* 804C44 802443C4 0C046F1F */  jal       func_8011BC7C
+/* 804C44 802443C4 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* 804C48 802443C8 0000302D */   daddu    $a2, $zero, $zero
 /* 804C4C 802443CC 24020002 */  addiu     $v0, $zero, 2
 .L802443D0:

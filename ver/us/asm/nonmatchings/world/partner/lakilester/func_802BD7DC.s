@@ -71,7 +71,7 @@ glabel func_802BD7DC
 /* 321430 802BD8E0 27A20040 */  addiu     $v0, $sp, 0x40
 /* 321434 802BD8E4 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 321438 802BD8E8 27A20044 */  addiu     $v0, $sp, 0x44
-/* 32143C 802BD8EC 0C03791B */  jal       func_800DE46C
+/* 32143C 802BD8EC 0C03791B */  jal       player_raycast_below_cam_relative
 /* 321440 802BD8F0 AFA20020 */   sw       $v0, 0x20($sp)
 /* 321444 802BD8F4 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* 321448 802BD8F8 4614003E */  c.le.s    $f0, $f20

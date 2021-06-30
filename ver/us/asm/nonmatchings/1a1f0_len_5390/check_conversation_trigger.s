@@ -239,7 +239,7 @@ glabel check_conversation_trigger
 /* 1E96C 8004356C E7B60010 */  swc1      $f22, 0x10($sp)
 /* 1E970 80043570 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 1E974 80043574 E7A80018 */  swc1      $f8, 0x18($sp)
-/* 1E978 80043578 0C0376B9 */  jal       func_800DDAE4
+/* 1E978 80043578 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 1E97C 8004357C E7A2001C */   swc1     $f2, 0x1c($sp)
 /* 1E980 80043580 1440000A */  bnez      $v0, .L800435AC
 /* 1E984 80043584 00000000 */   nop

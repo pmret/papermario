@@ -36,13 +36,13 @@ Script N(802407A0) = SCRIPT({
 });
 
 Script N(8024086C) = SCRIPT({
-    func_802D5FF8(137, 1);
+    PushSong(137, 1);
 });
 
 Script N(80240890) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
-    func_802D5FD8();
+    PopSong();
 });
 
 static s32 N(pad_8CC) = {

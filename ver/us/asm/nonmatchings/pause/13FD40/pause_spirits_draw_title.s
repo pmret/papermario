@@ -46,7 +46,7 @@ glabel pause_spirits_draw_title
 /* 140670 8024D330 26660001 */  addiu     $a2, $s3, 1
 /* 140674 8024D334 240700FF */  addiu     $a3, $zero, 0xff
 /* 140678 8024D338 AFA00010 */  sw        $zero, 0x10($sp)
-/* 14067C 8024D33C 0C04993B */  jal       draw_msg
+/* 14067C 8024D33C 0C04993B */  jal       draw_string
 /* 140680 8024D340 AFA00014 */   sw       $zero, 0x14($sp)
 .L8024D344:
 /* 140684 8024D344 8FBF0028 */  lw        $ra, 0x28($sp)

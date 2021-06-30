@@ -126,10 +126,10 @@ s32** N(D_80240870_C4E760) = NULL;
 
 Script N(80240874) = SCRIPT({
     group 0;
-    func_802D5830(2);
+    SetTimeFreezeMode(2);
     sleep 40;
     ShowGotItem(SI_VAR(0), 0, 0);
-    func_802D5830(0);
+    SetTimeFreezeMode(0);
     return;
 });
 

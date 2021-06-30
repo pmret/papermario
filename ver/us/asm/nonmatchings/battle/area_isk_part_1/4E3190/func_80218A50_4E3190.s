@@ -14,7 +14,7 @@ glabel func_80218A50_4E3190
 /* 4E31B4 80218A74 24040001 */  addiu     $a0, $zero, 1
 /* 4E31B8 80218A78 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4E31BC 80218A7C AFA20014 */  sw        $v0, 0x14($sp)
-/* 4E31C0 80218A80 0C01C124 */  jal       func_80070490
+/* 4E31C0 80218A80 0C01C124 */  jal       playFX_20
 /* 4E31C4 80218A84 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 4E31C8 80218A88 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4E31CC 80218A8C 24020002 */  addiu     $v0, $zero, 2

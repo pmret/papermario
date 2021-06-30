@@ -169,7 +169,7 @@ glabel func_80241234_E13994
 /* E13C0C 802414AC 468010A0 */  cvt.s.w   $f2, $f2
 /* E13C10 802414B0 44071000 */  mfc1      $a3, $f2
 /* E13C14 802414B4 24040003 */  addiu     $a0, $zero, 3
-/* E13C18 802414B8 0C01BFBC */  jal       func_8006FEF0
+/* E13C18 802414B8 0C01BFBC */  jal       playFX_11
 /* E13C1C 802414BC E7A00010 */   swc1     $f0, 0x10($sp)
 /* E13C20 802414C0 0C05272D */  jal       sfx_play_sound
 /* E13C24 802414C4 24040213 */   addiu    $a0, $zero, 0x213

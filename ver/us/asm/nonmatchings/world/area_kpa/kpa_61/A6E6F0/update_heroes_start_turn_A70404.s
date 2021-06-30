@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel update_heroes_start_turn_A70404
+glabel btl_state_update_begin_player_turn_A70404
 /* A70404 80242024 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* A70408 80242028 AFB40040 */  sw        $s4, 0x40($sp)
 /* A7040C 8024202C 0080A02D */  daddu     $s4, $a0, $zero

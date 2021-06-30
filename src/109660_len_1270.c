@@ -18,7 +18,7 @@ typedef struct struct802E7DE0 {
     /* 0x304 */ f32 unk_304[36];
 } struct802E7DE0;
 
-INCLUDE_ASM(s32, "109660_len_1270", func_802E7DE0);
+INCLUDE_ASM(s32, "109660_len_1270", entity_WoodenCrate_init_fragments);
 
 typedef struct struct802E7F40 {
     /* 0x00 */ s32 unk_00;
@@ -29,7 +29,7 @@ typedef struct struct802E7F40 {
     /* 0x14 */ s32 unk_14;
 } struct802E7F40;
 
-void func_802E7F40(Entity* entity) {
+void entity_WoodenCrate_init(Entity* entity) {
     struct802E7F40* temp = entity->dataBuf;
 
     entity->scale.y = 0.85714287f;
@@ -37,18 +37,18 @@ void func_802E7F40(Entity* entity) {
     temp->unk_04 = 0xFFFF;
 }
 
-void func_802E7F6C(Entity* entity) {
+void entity_WoodenCrate_reset_fragments(Entity* entity) {
     struct802E7F40* temp = entity->dataBuf;
 
     temp->unk_0C = entity->position.y;
-    func_802E7DE0(entity, &D_0A004350, &D_0A0026F0);
+    entity_WoodenCrate_init_fragments(entity, &D_0A004350, &D_0A0026F0);
 }
 
-INCLUDE_ASM(s32, "109660_len_1270", func_802E7FA0);
+INCLUDE_ASM(s32, "109660_len_1270", entity_WoodenCrate_update_fragments);
 
-INCLUDE_ASM(s32, "109660_len_1270", func_802E854C);
+INCLUDE_ASM(s32, "109660_len_1270", entity_WoodenCrate_setupGfx);
 
-s32 func_802E8858(Entity* entity) {
+s32 entity_WoodenCrate_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 phi_a0 = FALSE;
 
@@ -61,17 +61,17 @@ s32 func_802E8858(Entity* entity) {
     }
 
     if (phi_a0) {
-        func_802E7F6C(entity);
-        func_80110BCC(entity, &D_802EAE7C);
-        func_80110678(entity);
-        exec_entity_updatecmd(entity);
+        entity_WoodenCrate_reset_fragments(entity);
+        entity_set_render_script(entity, &D_802EAE7C);
+        entity_start_script(entity);
+        exec_entity_commandlist(entity);
         sfx_play_sound(0x20AE);
     }
 }
 
-f32 func_800E546C(void);
+f32 player_get_camera_facing_angle(void);
 
-void func_802E88EC(Entity* entity, f32 arg1) {
+void entity_WoodenCrate_shatter(Entity* entity, f32 arg1) {
     struct802E7F40* temp = entity->dataBuf;
 
     if (temp->unk_00 != -1) {
@@ -86,7 +86,7 @@ void func_802E88EC(Entity* entity, f32 arg1) {
 
         if (flag) {
             make_item_entity(temp->unk_00, entity->position.x, entity->position.y + 33.0, entity->position.z, 0xA, 0,
-                             func_800E546C(), temp->unk_04);
+                             player_get_camera_facing_angle(), temp->unk_04);
         }
     }
 }

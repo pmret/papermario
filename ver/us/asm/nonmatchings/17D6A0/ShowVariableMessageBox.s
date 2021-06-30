@@ -23,7 +23,7 @@ glabel ShowVariableMessageBox
 /* 17FC34 80251354 0040802D */   daddu    $s0, $v0, $zero
 /* 17FC38 80251358 0240202D */  daddu     $a0, $s2, $zero
 /* 17FC3C 8025135C 0200282D */  daddu     $a1, $s0, $zero
-/* 17FC40 80251360 0C093E81 */  jal       show_variable_battle_message
+/* 17FC40 80251360 0C093E81 */  jal       btl_show_variable_battle_message
 /* 17FC44 80251364 0040302D */   daddu    $a2, $v0, $zero
 /* 17FC48 80251368 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 17FC4C 8025136C 8FB20018 */  lw        $s2, 0x18($sp)

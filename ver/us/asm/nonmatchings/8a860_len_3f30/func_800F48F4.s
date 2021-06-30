@@ -17,7 +17,7 @@ glabel func_800F48F4
 /* 8DDD4 800F4924 00021080 */  sll       $v0, $v0, 2
 /* 8DDD8 800F4928 00621821 */  addu      $v1, $v1, $v0
 /* 8DDDC 800F492C 8C640294 */  lw        $a0, 0x294($v1)
-/* 8DDE0 800F4930 0C04993B */  jal       draw_msg
+/* 8DDE0 800F4930 0C04993B */  jal       draw_string
 /* 8DDE4 800F4934 24A50008 */   addiu    $a1, $a1, 8
 /* 8DDE8 800F4938 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 8DDEC 800F493C 03E00008 */  jr        $ra

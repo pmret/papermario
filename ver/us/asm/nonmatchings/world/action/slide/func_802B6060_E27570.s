@@ -50,7 +50,7 @@ glabel func_802B6060_E27570
 /* E275E4 802B60D4 AC206798 */  sw        $zero, %lo(D_802B6798)($at)
 /* E275E8 802B60D8 3C01802B */  lui       $at, %hi(D_802B679C)
 /* E275EC 802B60DC AC20679C */  sw        $zero, %lo(D_802B679C)($at)
-/* E275F0 802B60E0 0C037FBF */  jal       func_800DFEFC
+/* E275F0 802B60E0 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E275F4 802B60E4 3484000A */   ori      $a0, $a0, 0xa
 /* E275F8 802B60E8 24040167 */  addiu     $a0, $zero, 0x167
 /* E275FC 802B60EC 0C052736 */  jal       sfx_play_sound_at_player
@@ -74,7 +74,7 @@ glabel func_802B6060_E27570
 /* E27640 802B6130 E7A2002C */  swc1      $f2, 0x2c($sp)
 /* E27644 802B6134 E7A40030 */  swc1      $f4, 0x30($sp)
 /* E27648 802B6138 E7A80010 */  swc1      $f8, 0x10($sp)
-/* E2764C 802B613C 0C037D18 */  jal       test_player_lateral
+/* E2764C 802B613C 0C037D18 */  jal       player_test_move_with_slipping
 /* E27650 802B6140 E7A60014 */   swc1     $f6, 0x14($sp)
 /* E27654 802B6144 C7A00028 */  lwc1      $f0, 0x28($sp)
 /* E27658 802B6148 C7A20030 */  lwc1      $f2, 0x30($sp)
@@ -157,7 +157,7 @@ glabel L802B6184_E27694
 /* E27780 802B6270 27A20040 */  addiu     $v0, $sp, 0x40
 /* E27784 802B6274 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E27788 802B6278 27A20044 */  addiu     $v0, $sp, 0x44
-/* E2778C 802B627C 0C03791B */  jal       func_800DE46C
+/* E2778C 802B627C 0C03791B */  jal       player_raycast_below_cam_relative
 /* E27790 802B6280 AFA20020 */   sw       $v0, 0x20($sp)
 /* E27794 802B6284 C7A0003C */  lwc1      $f0, 0x3c($sp)
 /* E27798 802B6288 AFA20048 */  sw        $v0, 0x48($sp)
@@ -262,7 +262,7 @@ glabel L802B6394_E278A4
 /* E27914 802B6404 27A20040 */  addiu     $v0, $sp, 0x40
 /* E27918 802B6408 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E2791C 802B640C 27A20044 */  addiu     $v0, $sp, 0x44
-/* E27920 802B6410 0C03791B */  jal       func_800DE46C
+/* E27920 802B6410 0C03791B */  jal       player_raycast_below_cam_relative
 /* E27924 802B6414 AFA20020 */   sw       $v0, 0x20($sp)
 /* E27928 802B6418 04400023 */  bltz      $v0, L802B64A8_E279B8
 /* E2792C 802B641C AFA20048 */   sw       $v0, 0x48($sp)
@@ -291,7 +291,7 @@ glabel L802B6394_E278A4
 /* E27984 802B6474 0C052736 */  jal       sfx_play_sound_at_player
 /* E27988 802B6478 0000282D */   daddu    $a1, $zero, $zero
 /* E2798C 802B647C 3C040001 */  lui       $a0, 1
-/* E27990 802B6480 0C037FDE */  jal       func_800DFF78
+/* E27990 802B6480 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E27994 802B6484 34840031 */   ori      $a0, $a0, 0x31
 /* E27998 802B6488 24020006 */  addiu     $v0, $zero, 6
 /* E2799C 802B648C A20200B6 */  sb        $v0, 0xb6($s0)
@@ -359,7 +359,7 @@ glabel L802B6544_E27A54
 /* E27A84 802B6574 0C038D36 */  jal       func_800E34D8
 /* E27A88 802B6578 00000000 */   nop
 /* E27A8C 802B657C 46000306 */  mov.s     $f12, $f0
-/* E27A90 802B6580 0C038D45 */  jal       func_800E3514
+/* E27A90 802B6580 0C038D45 */  jal       player_check_collision_below
 /* E27A94 802B6584 27A50048 */   addiu    $a1, $sp, 0x48
 /* E27A98 802B6588 8FA20048 */  lw        $v0, 0x48($sp)
 /* E27A9C 802B658C 04400063 */  bltz      $v0, .L802B671C
@@ -368,7 +368,7 @@ glabel L802B6544_E27A54
 /* E27AA8 802B6598 3C01BF80 */  lui       $at, 0xbf80
 /* E27AAC 802B659C 44810000 */  mtc1      $at, $f0
 /* E27AB0 802B65A0 34840003 */  ori       $a0, $a0, 3
-/* E27AB4 802B65A4 0C037FDE */  jal       func_800DFF78
+/* E27AB4 802B65A4 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E27AB8 802B65A8 E6200000 */   swc1     $f0, ($s1)
 /* E27ABC 802B65AC 24040162 */  addiu     $a0, $zero, 0x162
 /* E27AC0 802B65B0 0C052736 */  jal       sfx_play_sound_at_player
@@ -392,7 +392,7 @@ glabel L802B65C0_E27AD0
 /* E27B00 802B65F0 1040004A */  beqz      $v0, .L802B671C
 /* E27B04 802B65F4 00000000 */   nop
 /* E27B08 802B65F8 3C040001 */  lui       $a0, 1
-/* E27B0C 802B65FC 0C037FDE */  jal       func_800DFF78
+/* E27B0C 802B65FC 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E27B10 802B6600 34840030 */   ori      $a0, $a0, 0x30
 /* E27B14 802B6604 080AD9AC */  j         .L802B66B0
 /* E27B18 802B6608 00000000 */   nop
@@ -413,7 +413,7 @@ glabel L802B660C_E27B1C
 /* E27B4C 802B663C 10400037 */  beqz      $v0, .L802B671C
 /* E27B50 802B6640 00000000 */   nop
 /* E27B54 802B6644 3C040001 */  lui       $a0, 1
-/* E27B58 802B6648 0C037FDE */  jal       func_800DFF78
+/* E27B58 802B6648 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E27B5C 802B664C 34840031 */   ori      $a0, $a0, 0x31
 /* E27B60 802B6650 24040172 */  addiu     $a0, $zero, 0x172
 /* E27B64 802B6654 0C052736 */  jal       sfx_play_sound_at_player

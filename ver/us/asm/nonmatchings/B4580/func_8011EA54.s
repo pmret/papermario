@@ -46,7 +46,7 @@ glabel func_8011EA54
 /* B51F4 8011EAF4 14400008 */  bnez      $v0, .L8011EB18
 /* B51F8 8011EAF8 0200202D */   daddu    $a0, $s0, $zero
 .L8011EAFC:
-/* B51FC 8011EAFC 0C047AFC */  jal       func_8011EBF0
+/* B51FC 8011EAFC 0C047AFC */  jal       step_model_animator
 /* B5200 8011EB00 0200202D */   daddu    $a0, $s0, $zero
 /* B5204 8011EB04 0040182D */  daddu     $v1, $v0, $zero
 /* B5208 8011EB08 1C60FFFC */  bgtz      $v1, .L8011EAFC
@@ -56,10 +56,10 @@ glabel func_8011EA54
 .L8011EB18:
 /* B5218 8011EB18 3C013F80 */  lui       $at, 0x3f80
 /* B521C 8011EB1C 44810000 */  mtc1      $at, $f0
-/* B5220 8011EB20 0C04819E */  jal       func_80120678
+/* B5220 8011EB20 0C04819E */  jal       reload_mesh_animator_tree
 /* B5224 8011EB24 E6000090 */   swc1     $f0, 0x90($s0)
 .L8011EB28:
-/* B5228 8011EB28 0C0481BE */  jal       func_801206F8
+/* B5228 8011EB28 0C0481BE */  jal       step_mesh_animator
 /* B522C 8011EB2C 0200202D */   daddu    $a0, $s0, $zero
 /* B5230 8011EB30 0040182D */  daddu     $v1, $v0, $zero
 /* B5234 8011EB34 1C60FFFC */  bgtz      $v1, .L8011EB28
@@ -69,7 +69,7 @@ glabel func_8011EA54
 .L8011EB40:
 /* B5240 8011EB40 10620025 */  beq       $v1, $v0, .L8011EBD8
 /* B5244 8011EB44 0200202D */   daddu    $a0, $s0, $zero
-/* B5248 8011EB48 0C047C16 */  jal       func_8011F058
+/* B5248 8011EB48 0C047C16 */  jal       animator_update_model_transforms
 /* B524C 8011EB4C 0220282D */   daddu    $a1, $s1, $zero
 /* B5250 8011EB50 0000882D */  daddu     $s1, $zero, $zero
 /* B5254 8011EB54 2412FFFF */  addiu     $s2, $zero, -1

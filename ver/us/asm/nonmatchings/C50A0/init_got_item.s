@@ -147,7 +147,7 @@ glabel init_got_item
 /* C8414 80131D14 E7A60018 */  swc1      $f6, 0x18($sp)
 /* C8418 80131D18 E7A40020 */  swc1      $f4, 0x20($sp)
 /* C841C 80131D1C E7A0001C */  swc1      $f0, 0x1c($sp)
-/* C8420 80131D20 0C0372DF */  jal       func_800DCB7C
+/* C8420 80131D20 0C0372DF */  jal       npc_raycast_down_sides
 /* C8424 80131D24 AFA20010 */   sw       $v0, 0x10($sp)
 /* C8428 80131D28 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* C842C 80131D2C C7A2001C */  lwc1      $f2, 0x1c($sp)
@@ -170,7 +170,7 @@ glabel init_got_item
 /* C8470 80131D70 0200202D */  daddu     $a0, $s0, $zero
 /* C8474 80131D74 0C044A17 */  jal       set_standard_shadow_scale
 /* C8478 80131D78 E4800030 */   swc1     $f0, 0x30($a0)
-/* C847C 80131D7C 0C04C44A */  jal       func_80131128
+/* C847C 80131D7C 0C04C44A */  jal       item_entity_load
 /* C8480 80131D80 0220202D */   daddu    $a0, $s1, $zero
 /* C8484 80131D84 86230018 */  lh        $v1, 0x18($s1)
 /* C8488 80131D88 24020157 */  addiu     $v0, $zero, 0x157
@@ -178,9 +178,9 @@ glabel init_got_item
 /* C8490 80131D90 02A0102D */   daddu    $v0, $s5, $zero
 /* C8494 80131D94 3C058010 */  lui       $a1, %hi(D_80104AC0)
 /* C8498 80131D98 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
-/* C849C 80131D9C 0C04C27C */  jal       func_801309F0
+/* C849C 80131D9C 0C04C27C */  jal       sparkle_script_init
 /* C84A0 80131DA0 0220202D */   daddu    $a0, $s1, $zero
-/* C84A4 80131DA4 0C04C2B3 */  jal       do_animation
+/* C84A4 80131DA4 0C04C2B3 */  jal       sparkle_script_update
 /* C84A8 80131DA8 0220202D */   daddu    $a0, $s1, $zero
 /* C84AC 80131DAC 02A0102D */  daddu     $v0, $s5, $zero
 .L80131DB0:

@@ -30,7 +30,7 @@ ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 i;
 
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         D_801512F0[0] = 1;
         set_background_color_blend(0, 0, 0, 0);
 
@@ -80,7 +80,7 @@ ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall) {
     if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
         script->functionTemp[1].s = 1;
     } else if (script->functionTemp[1].s == 1) {
-        func_8011D82C(0);
+        mdl_set_all_fog_mode(0);
         *D_801512F0 = 0;
 
         for (i = 0; i < MAX_NPCS; i++) {

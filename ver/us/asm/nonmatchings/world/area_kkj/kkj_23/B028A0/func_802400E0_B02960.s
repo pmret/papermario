@@ -118,7 +118,7 @@ glabel func_802400E0_B02960
 /* B02B14 80240294 44820000 */  mtc1      $v0, $f0
 /* B02B18 80240298 00000000 */  nop
 /* B02B1C 8024029C 46800020 */  cvt.s.w   $f0, $f0
-/* B02B20 802402A0 0C0376B9 */  jal       func_800DDAE4
+/* B02B20 802402A0 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* B02B24 802402A4 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* B02B28 802402A8 54400001 */  bnel      $v0, $zero, .L802402B0
 /* B02B2C 802402AC 0000882D */   daddu    $s1, $zero, $zero

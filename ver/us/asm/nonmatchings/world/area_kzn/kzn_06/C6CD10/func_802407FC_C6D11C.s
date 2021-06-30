@@ -58,7 +58,7 @@ glabel func_802407FC_C6D11C
 /* C6D1EC 802408CC 0040802D */  daddu     $s0, $v0, $zero
 /* C6D1F0 802408D0 0200202D */  daddu     $a0, $s0, $zero
 /* C6D1F4 802408D4 2405FFFF */  addiu     $a1, $zero, -1
-/* C6D1F8 802408D8 0C046F1F */  jal       func_8011BC7C
+/* C6D1F8 802408D8 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6D1FC 802408DC 24060003 */   addiu    $a2, $zero, 3
 /* C6D200 802408E0 12C00004 */  beqz      $s6, .L802408F4
 /* C6D204 802408E4 00000000 */   nop
@@ -132,7 +132,7 @@ glabel func_802407FC_C6D11C
 /* C6D2EC 802409CC 0040802D */  daddu     $s0, $v0, $zero
 /* C6D2F0 802409D0 0200202D */  daddu     $a0, $s0, $zero
 /* C6D2F4 802409D4 2405FFFF */  addiu     $a1, $zero, -1
-/* C6D2F8 802409D8 0C046F1F */  jal       func_8011BC7C
+/* C6D2F8 802409D8 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6D2FC 802409DC 0000302D */   daddu    $a2, $zero, $zero
 /* C6D300 802409E0 16C00004 */  bnez      $s6, .L802409F4
 /* C6D304 802409E4 00000000 */   nop

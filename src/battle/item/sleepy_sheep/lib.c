@@ -11,7 +11,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -32,8 +32,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A3F50 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A3F50, iconPosX + 36, iconPosY - 63);
+        D_802A3F50 = create_hud_element(&D_80108A64);
+        set_hud_element_render_pos(D_802A3F50, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -46,8 +46,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
-        free_icon(D_802A3F50);
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+        free_hud_element(D_802A3F50);
     }
 
     return ApiStatus_DONE2;
@@ -83,9 +83,9 @@ s32 N(D_802A3F28_721578)[] = {
     0x802A32E0, 0x802A3260
 };
 
-void func_802D4364(s32, s32, s32, s32);
-void func_802D43AC(s32, f32, f32, f32);
-void func_802D43F4(s32);
+void virtual_entity_set_pos(s32, s32, s32, s32);
+void virtual_entity_set_scale(s32, f32, f32, f32);
+void virtual_entity_delete_by_index(s32);
 
 ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
@@ -115,13 +115,13 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
             D_802A3E88_7214D8_ptr3 = N(D_802A3E88_7214D8) + 2;
 
             for (i = 0; i < 10; i++) {
-                D_802A3F58_ptr[i] = func_802D420C(D_802A3F28_721578_ptr[i]);
+                D_802A3F58_ptr[i] = virtual_entity_create(D_802A3F28_721578_ptr[i]);
 
-                func_802D4364(D_802A3F58_ptr[i],
+                virtual_entity_set_pos(D_802A3F58_ptr[i],
                               *D_802A3E88_7214D8_ptr1 + D_802A3F88_ptr->x,
                               *D_802A3E88_7214D8_ptr2,
                               *D_802A3E88_7214D8_ptr3 + D_802A3F88_ptr->z);
-                func_802D43AC(D_802A3F58_ptr[i], N(D_802A3F00_721550)[i], N(D_802A3F00_721550)[i], 1.0f);
+                virtual_entity_set_scale(D_802A3F58_ptr[i], N(D_802A3F00_721550)[i], N(D_802A3F00_721550)[i], 1.0f);
                 D_802A3E88_7214D8_ptr1 += i * 3 + 0;
                 D_802A3E88_7214D8_ptr2 += i * 3 + 1;
                 D_802A3E88_7214D8_ptr3 += i * 3 + 2;
@@ -154,7 +154,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
                 y = *D_802A3E88_7214D8_ptr2;
                 z = *D_802A3E88_7214D8_ptr3 + D_802A3F88.z;
 
-                func_802D4364(D_802A3F58_ptr[i], x, y, z);
+                virtual_entity_set_pos(D_802A3F58_ptr[i], x, y, z);
 
                 if (flag == 0 && script->functionTemp[1].s == i) {
                     f32 x2, y2;
@@ -172,7 +172,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
                         if (x > 40.0f) {
                             x2 = -(x - 40.0f);
                         }
-                        fx_walk_large(3, x2, y2, z, 0);
+                        fx_land(3, x2, y2, z, 0);
                         flag = 1;
                     }
                 }
@@ -182,7 +182,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
             }
             if (gGameStatusPtr->frameCounter & 1) {
                 s32 randIdx = rand_int(9);
-                fx_walk_large(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
+                fx_land(2, N(D_802A3E88_7214D8)[randIdx * 3 + 0] + D_802A3F88_ptr->x,
                               N(D_802A3E88_7214D8)[randIdx * 3 + 1],
                               N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
             }
@@ -194,7 +194,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
 
         case 2:
             for (i = 0; i < 10; i++) {
-                func_802D43F4(*(&D_802A3F58 + i));
+                virtual_entity_delete_by_index(*(&D_802A3F58 + i));
             }
 
             return ApiStatus_DONE2;
@@ -273,7 +273,7 @@ ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall) {
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
-        UseCamPreset(69);
+        UseBattleCamPreset(69);
         sleep 10;
 
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
@@ -319,7 +319,7 @@ Script N(UseItemWithEffect) = SCRIPT({
 });
 
 Script N(UseItem) = SCRIPT({
-    UseCamPreset(19);
+    UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);

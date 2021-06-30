@@ -8,14 +8,14 @@ glabel func_802A9634_42A354
 /* 42A360 802A9640 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
 /* 42A364 802A9644 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 42A368 802A9648 AFB00020 */  sw        $s0, 0x20($sp)
-/* 42A36C 802A964C 0C0511EA */  jal       draw_icon_0
+/* 42A36C 802A964C 0C0511EA */  jal       draw_hud_element_clipped
 /* 42A370 802A9650 8E240004 */   lw       $a0, 4($s1)
 /* 42A374 802A9654 8E300008 */  lw        $s0, 8($s1)
-/* 42A378 802A9658 0C0511EA */  jal       draw_icon_0
+/* 42A378 802A9658 0C0511EA */  jal       draw_hud_element_clipped
 /* 42A37C 802A965C 0200202D */   daddu    $a0, $s0, $zero
 /* 42A380 802A9660 0200202D */  daddu     $a0, $s0, $zero
 /* 42A384 802A9664 27A50018 */  addiu     $a1, $sp, 0x18
-/* 42A388 802A9668 0C05126B */  jal       get_icon_render_pos
+/* 42A388 802A9668 0C05126B */  jal       get_hud_element_render_pos
 /* 42A38C 802A966C 27A6001C */   addiu    $a2, $sp, 0x1c
 /* 42A390 802A9670 8222005C */  lb        $v0, 0x5c($s1)
 /* 42A394 802A9674 14400013 */  bnez      $v0, .L802A96C4

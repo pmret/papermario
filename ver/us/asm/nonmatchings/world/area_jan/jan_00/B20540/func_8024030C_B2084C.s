@@ -9,7 +9,7 @@ glabel func_8024030C_B2084C
 /* B2085C 8024031C 0080382D */  daddu     $a3, $a0, $zero
 /* B20860 80240320 AFBF0018 */  sw        $ra, 0x18($sp)
 /* B20864 80240324 AFA00010 */  sw        $zero, 0x10($sp)
-/* B20868 80240328 0C01CA54 */  jal       func_80072950
+/* B20868 80240328 0C01CA54 */  jal       playFX_82
 /* B2086C 8024032C AFA00014 */   sw       $zero, 0x14($sp)
 /* B20870 80240330 8FBF0018 */  lw        $ra, 0x18($sp)
 /* B20874 80240334 24020002 */  addiu     $v0, $zero, 2

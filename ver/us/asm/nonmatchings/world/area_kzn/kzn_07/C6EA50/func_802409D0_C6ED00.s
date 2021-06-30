@@ -82,7 +82,7 @@ glabel func_802409D0_C6ED00
 /* C6EE30 80240B00 E7A60034 */  swc1      $f6, 0x34($sp)
 /* C6EE34 80240B04 AFA20010 */  sw        $v0, 0x10($sp)
 /* C6EE38 80240B08 8E040080 */  lw        $a0, 0x80($s0)
-/* C6EE3C 80240B0C 0C0372DF */  jal       func_800DCB7C
+/* C6EE3C 80240B0C 0C0372DF */  jal       npc_raycast_down_sides
 /* C6EE40 80240B10 27A70030 */   addiu    $a3, $sp, 0x30
 /* C6EE44 80240B14 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* C6EE48 80240B18 4600D001 */  sub.s     $f0, $f26, $f0
@@ -126,7 +126,7 @@ glabel func_802409D0_C6ED00
 /* C6EED8 80240BA8 E7A40034 */  swc1      $f4, 0x34($sp)
 /* C6EEDC 80240BAC AFA20010 */  sw        $v0, 0x10($sp)
 /* C6EEE0 80240BB0 8E040080 */  lw        $a0, 0x80($s0)
-/* C6EEE4 80240BB4 0C0372DF */  jal       func_800DCB7C
+/* C6EEE4 80240BB4 0C0372DF */  jal       npc_raycast_down_sides
 /* C6EEE8 80240BB8 27A70030 */   addiu    $a3, $sp, 0x30
 /* C6EEEC 80240BBC C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* C6EEF0 80240BC0 461A2100 */  add.s     $f4, $f4, $f26
@@ -185,7 +185,7 @@ glabel func_802409D0_C6ED00
 /* C6EFB8 80240C88 E7A60034 */  swc1      $f6, 0x34($sp)
 /* C6EFBC 80240C8C AFA20010 */  sw        $v0, 0x10($sp)
 /* C6EFC0 80240C90 8E040080 */  lw        $a0, 0x80($s0)
-/* C6EFC4 80240C94 0C0372DF */  jal       func_800DCB7C
+/* C6EFC4 80240C94 0C0372DF */  jal       npc_raycast_down_sides
 /* C6EFC8 80240C98 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240C9C:
 /* C6EFCC 80240C9C 10400007 */  beqz      $v0, .L80240CBC
@@ -272,7 +272,7 @@ glabel func_802409D0_C6ED00
 /* C6F104 80240DD4 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* C6F108 80240DD8 C480003C */  lwc1      $f0, 0x3c($a0)
 /* C6F10C 80240DDC 3C060020 */  lui       $a2, 0x20
-/* C6F110 80240DE0 0C012530 */  jal       func_800494C0
+/* C6F110 80240DE0 0C012530 */  jal       ai_enemy_play_sound
 /* C6F114 80240DE4 E4800064 */   swc1     $f0, 0x64($a0)
 /* C6F118 80240DE8 8E220018 */  lw        $v0, 0x18($s1)
 /* C6F11C 80240DEC 9442002A */  lhu       $v0, 0x2a($v0)

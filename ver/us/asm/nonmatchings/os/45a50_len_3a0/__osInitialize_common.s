@@ -169,7 +169,7 @@ glabel __osInitialize_common
 /* 45D84 8006A984 3442D354 */  ori       $v0, $v0, 0xd354
 .L8006A988:
 /* 45D88 8006A988 3C018009 */  lui       $at, %hi(D_800958F8)
-/* 45D8C 8006A98C 0C01B198 */  jal       __osGetCause
+/* 45D8C 8006A98C 0C01B198 */  jal       osGetCause
 /* 45D90 8006A990 AC2258F8 */   sw       $v0, %lo(D_800958F8)($at)
 /* 45D94 8006A994 30421000 */  andi      $v0, $v0, 0x1000
 /* 45D98 8006A998 10400003 */  beqz      $v0, .L8006A9A8

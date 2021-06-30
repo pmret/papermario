@@ -285,7 +285,7 @@ glabel func_800E0B90
 .L800E0FAC:
 /* 7A45C 800E0FAC 8E2500A4 */  lw        $a1, 0xa4($s1)
 /* 7A460 800E0FB0 44060000 */  mfc1      $a2, $f0
-/* 7A464 800E0FB4 0C0B76A3 */  jal       func_802DDA8C
+/* 7A464 800E0FB4 0C0B76A3 */  jal       spr_update_player_sprite
 /* 7A468 800E0FB8 0000202D */   daddu    $a0, $zero, $zero
 /* 7A46C 800E0FBC A62200BC */  sh        $v0, 0xbc($s1)
 /* 7A470 800E0FC0 8E220000 */  lw        $v0, ($s1)

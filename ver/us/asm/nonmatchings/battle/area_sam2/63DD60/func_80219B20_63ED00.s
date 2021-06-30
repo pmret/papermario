@@ -14,7 +14,7 @@ glabel func_80219B20_63ED00
 /* 63ED24 80219B44 AFB3002C */  sw        $s3, 0x2c($sp)
 /* 63ED28 80219B48 AFB20028 */  sw        $s2, 0x28($sp)
 /* 63ED2C 80219B4C AFB10024 */  sw        $s1, 0x24($sp)
-/* 63ED30 80219B50 0C0470AC */  jal       func_8011C2B0
+/* 63ED30 80219B50 0C0470AC */  jal       mdl_get_copied_vertices
 /* 63ED34 80219B54 AFB00020 */   sw       $s0, 0x20($sp)
 /* 63ED38 80219B58 8FA20018 */  lw        $v0, 0x18($sp)
 /* 63ED3C 80219B5C 18400052 */  blez      $v0, .L80219CA8
@@ -112,7 +112,7 @@ glabel func_80219B20_63ED00
 /* 63EE9C 80219CBC 24420008 */  addiu     $v0, $v0, 8
 /* 63EEA0 80219CC0 AC620000 */  sw        $v0, ($v1)
 /* 63EEA4 80219CC4 3C02DE00 */  lui       $v0, 0xde00
-/* 63EEA8 80219CC8 0C0470BB */  jal       func_8011C2EC
+/* 63EEA8 80219CC8 0C0470BB */  jal       mdl_get_copied_gfx
 /* 63EEAC 80219CCC AE020000 */   sw       $v0, ($s0)
 /* 63EEB0 80219CD0 AE020004 */  sw        $v0, 4($s0)
 /* 63EEB4 80219CD4 3C028022 */  lui       $v0, %hi(D_80223080_648260)

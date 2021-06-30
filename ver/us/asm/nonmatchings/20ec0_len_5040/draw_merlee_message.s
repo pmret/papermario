@@ -26,7 +26,7 @@ glabel draw_merlee_message
 /* 21324 80045F24 02221021 */  addu      $v0, $s1, $v0
 /* 21328 80045F28 00021043 */  sra       $v0, $v0, 1
 /* 2132C 80045F2C 241000A0 */  addiu     $s0, $zero, 0xa0
-/* 21330 80045F30 0C04992C */  jal       get_msg_lines
+/* 21330 80045F30 0C04992C */  jal       get_string_lines
 /* 21334 80045F34 02028023 */   subu     $s0, $s0, $v0
 /* 21338 80045F38 24040009 */  addiu     $a0, $zero, 9
 /* 2133C 80045F3C 2442FFFF */  addiu     $v0, $v0, -1

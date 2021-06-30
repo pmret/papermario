@@ -102,7 +102,7 @@ glabel L802402F4_DE8A64
 /* DE8A94 80240324 8E250018 */  lw        $a1, 0x18($s1)
 /* DE8A98 80240328 8E26001C */  lw        $a2, 0x1c($s1)
 /* DE8A9C 8024032C 8E270020 */  lw        $a3, 0x20($s1)
-/* DE8AA0 80240330 0C01C9AC */  jal       func_800726B0
+/* DE8AA0 80240330 0C01C9AC */  jal       playFX_7B
 /* DE8AA4 80240334 24040001 */   addiu    $a0, $zero, 1
 /* DE8AA8 80240338 AE220054 */  sw        $v0, 0x54($s1)
 /* DE8AAC 8024033C 8C43000C */  lw        $v1, 0xc($v0)

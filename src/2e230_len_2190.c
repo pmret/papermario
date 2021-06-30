@@ -352,9 +352,9 @@ void func_800538C4(UnkAl48* arg0, s32 arg1) { // type may be wrong but it seems 
     func_800576EC(arg1, 0, 0xB8);
 }
 
-INCLUDE_ASM(s32, "2e230_len_2190", func_800538F8);
+INCLUDE_ASM(s32, "2e230_len_2190", snd_tune_param_to_timescale);
 
-void snd_initialize_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
+void snd_initialize_bgm_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
     fade->currentVolume.s32 = startValue * 0x10000;
     fade->endVolume = endValue;
 
@@ -369,7 +369,7 @@ void snd_initialize_fade(Fade* fade, s32 time, s32 startValue, s16 endValue) {
     fade->fpFadeCallback = NULL;
 }
 
-void func_80053A18(Fade* fade) {
+void snd_clear_bgm_fade(Fade* fade) {
     fade->fadeTime = 0;
     fade->fadeStep = 0;
     fade->fpFadeCallback = NULL;

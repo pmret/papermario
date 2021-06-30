@@ -957,9 +957,9 @@ typedef struct {
     f32 unk_38[4];
 } EffectUnkStruct1;
 // TODO figure out what this actually is
-// func_800715D0 invokes gEffectTable[78]'s entryPoint function
-// func_80072230 invokes gEffectTable[111]'s entryPoint function
-// func_800729B0 invokes gEffectTable[131]'s entryPoint function
+// playFX_4E invokes gEffectTable[78]'s entryPoint function
+// playFX_6F invokes gEffectTable[111]'s entryPoint function
+// playFX_83 invokes gEffectTable[131]'s entryPoint function
 // These functions are currently typed to return void
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData

@@ -174,7 +174,7 @@ Script N(main) = SCRIPT({
     SetCamEnabled(0, 1);
     SetCamLeadPlayer(0, 0);
     MakeNpcs(0, N(npcGroupList_8024EEF4));
-    func_802D3398();
+    InitVirtualEntityList();
     await N(makeEntities);
     await N(80244C78);
     spawn N(80243AF0);
@@ -1537,7 +1537,7 @@ s32 N(D_80248784_971944) = {
 
 Script N(80248788) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1555,7 +1555,7 @@ Script N(80248788) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -1569,7 +1569,7 @@ Script N(802488CC) = {
 
 Script N(8024891C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D663C();
+    ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1586,7 +1586,7 @@ Script N(8024891C) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -2084,7 +2084,7 @@ Script N(8024B18C) = SCRIPT({
 
 Script N(8024B20C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -2127,7 +2127,7 @@ Script N(8024B20C) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -3196,11 +3196,11 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024EFC0) = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024EFC0) = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)));
-        N(D_8024EFC4) = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024EFC4) = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)));
-        N(D_8024EFC8) = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+        N(D_8024EFC8) = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = N(D_8024EFC0)->instanceData;
@@ -3244,7 +3244,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024EFC0), effectPtr);
-        free_dynamic_entity(gPauseMenuCursorPosY);
+        free_generic_entity(gPauseMenuCursorPosY);
         return ApiStatus_DONE2;
     }
 
@@ -3309,14 +3309,14 @@ void N(func_802412F8_96A4B8)(void) {
     s32 var = get_variable(NULL, N(D_8024EFB8));
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 
 ApiStatus N(func_80241364_96A524)(ScriptInstance* script, s32 isInitialCall) {
-    gPauseMenuCursorPosY = create_dynamic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
+    gPauseMenuCursorPosY = create_generic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
     return ApiStatus_DONE2;
 }
 
@@ -3360,7 +3360,7 @@ ApiStatus N(func_802414C0_96A680)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
 
@@ -3399,7 +3399,7 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
     if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
         script->functionTemp[1].s = 1;
     } else if (script->functionTemp[1].s == 1) {
-        func_8011D82C(0);
+        mdl_set_all_fog_mode(0);
         *D_801512F0 = 0;
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
@@ -3431,7 +3431,7 @@ ApiStatus N(func_802416FC_96A8BC)(ScriptInstance* script, s32 isInitialCall) {
     func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
     set_variable(script, SI_ARRAY(3), ret);
 
-    set_variable(script, SI_ARRAY(7), create_dynamic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
+    set_variable(script, SI_ARRAY(7), create_generic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
     return ApiStatus_DONE2;
 }
 
@@ -3440,7 +3440,7 @@ ApiStatus N(func_80241874_96AA34)(ScriptInstance* script, s32 isInitialCall) {
     func_8013A854(get_variable(script, SI_ARRAY(1)));
     func_8013A854(get_variable(script, SI_ARRAY(2)));
     func_8013A854(get_variable(script, SI_ARRAY(3)));
-    free_dynamic_entity(get_variable(script, SI_ARRAY(7)));
+    free_generic_entity(get_variable(script, SI_ARRAY(7)));
     return ApiStatus_DONE2;
 }
 
@@ -3477,7 +3477,7 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         }
 
         if ((ptr->unk_00 == 1) || (ptr->unk_00 == 5)) {
-            func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
+            spr_get_player_raster_info(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
 
             gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
             gDPLoadTLUT_pal16(gMasterGfxPos++, 0, 0xFFFFFFFF);
@@ -3549,7 +3549,7 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gMatrixListPos++;
 
-        func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
+        spr_get_player_raster_info(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
         func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E,
                       subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
 
@@ -3736,7 +3736,7 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(0, &subroutine_arg6, &subroutine_arg7, &subroutine_arg8, &subroutine_arg9);
-                func_8006FEF0(0, subroutine_arg6, subroutine_arg7 + 20.0f, subroutine_arg8, 30.0f);
+                playFX_11(0, subroutine_arg6, subroutine_arg7 + 20.0f, subroutine_arg8, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3752,7 +3752,7 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(2, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
-                func_8006FEF0(0, subroutine_argA, subroutine_argB + 20.0f, subroutine_argC, 30.0f);
+                playFX_11(0, subroutine_argA, subroutine_argB + 20.0f, subroutine_argC, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3768,7 +3768,7 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(1, &subroutine_argE, &subroutine_argF, &subroutine_arg10, &subroutine_arg11);
-                func_8006FEF0(0, subroutine_argE, subroutine_argF + 20.0f, subroutine_arg10, 30.0f);
+                playFX_11(0, subroutine_argE, subroutine_argF + 20.0f, subroutine_arg10, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3834,7 +3834,7 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
 
             effect = &N(D_8024EF90);
             for (i = 0; i < 4; i++) {
-                (*effect) = func_800720B0(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
+                (*effect) = playFX_6B(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
 
                 (*effect)->unk_0C->unk_28 = 0xD7;
                 (*effect)->unk_0C->unk_2C = 0x37;
@@ -3882,7 +3882,7 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
                 N(D_8024F010)[0].unk_00 = 0;
                 N(D_8024F010)[1].unk_00 = 0;
                 N(func_80242214_96B3D4)(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
-                func_8006FEF0(0, subroutine_arg1A, subroutine_arg1B + 20.0f, subroutine_arg1C, 30.0f);
+                playFX_11(0, subroutine_arg1A, subroutine_arg1B + 20.0f, subroutine_arg1C, 30.0f);
                 sfx_play_sound(0x206);
                 for (x = 0; x < 4; x++) {
                     N(D_8024EF90)[x]->flags |= 0x10;

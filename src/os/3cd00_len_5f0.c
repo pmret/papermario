@@ -8,7 +8,7 @@ extern s32 D_800B0ED0;
 s32 osContStartQuery(OSMesgQueue* mq) {
     s32 ret;
 
-    __osSiGetAccess();
+    osSiGetAccess();
     if (D_8009A61C != 0) {
         osPackRequestData(0);
         osSiRawStartDma(1, &D_800B0ED0);
@@ -16,7 +16,7 @@ s32 osContStartQuery(OSMesgQueue* mq) {
     }
     ret = osSiRawStartDma(0, &D_800B0ED0);
     D_8009A61C = 0;
-    __osSiRelAccess();
+    osSiRelAccess();
 
     return ret;
 }

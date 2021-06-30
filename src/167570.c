@@ -1,15 +1,15 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "167570", func_80246D10);
+INCLUDE_ASM(s32, "167570", filemenu_yesno_draw_options_contents);
 
-INCLUDE_ASM(s32, "167570", func_80246E24);
+INCLUDE_ASM(s32, "167570", filemenu_yesno_draw_prompt_contents);
 
-INCLUDE_ASM(s32, "167570", func_80247198);
+INCLUDE_ASM(s32, "167570", filemenu_yesno_init);
 
-INCLUDE_ASM(s32, "167570", func_802471EC);
+INCLUDE_ASM(s32, "167570", filemenu_yesno_handle_input);
 
-void func_80247D14(void) {
+void filemenu_yesno_update(void) {
 }
 
-void func_80247D1C(void) {
+void filemenu_yesno_cleanup(void) {
 }

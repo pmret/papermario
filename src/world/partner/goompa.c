@@ -12,9 +12,9 @@ ApiStatus GoompaTakeOut(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EECC4(owner);
+        partner_init_get_out(owner);
     }
-    return func_800EECE8(owner) != 0;
+    return partner_get_out(owner) != 0;
 }
 
 INCLUDE_ASM(s32, "world/partner/goompa", func_802BD14C_324A5C);
@@ -29,9 +29,9 @@ ApiStatus GoompaPutAway(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EE994(owner);
+        partner_init_put_away(owner);
     }
-    return func_800EE9B8(owner) != 0;
+    return partner_put_away(owner) != 0;
 }
 
 Script world_goompa_take_out = SCRIPT({

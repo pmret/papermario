@@ -10,7 +10,7 @@ glabel func_8024E3D8
 /* 17CCCC 8024E3EC 24020001 */  addiu     $v0, $zero, 1
 /* 17CCD0 8024E3F0 3C01802A */  lui       $at, %hi(D_8029F2A4)
 /* 17CCD4 8024E3F4 A022F2A4 */  sb        $v0, %lo(D_8029F2A4)($at)
-/* 17CCD8 8024E3F8 0C0933CD */  jal       use_cam_preset
+/* 17CCD8 8024E3F8 0C0933CD */  jal       btl_cam_use_preset
 /* 17CCDC 8024E3FC 00000000 */   nop
 .L8024E400:
 /* 17CCE0 8024E400 8FBF0010 */  lw        $ra, 0x10($sp)

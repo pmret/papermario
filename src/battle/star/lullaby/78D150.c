@@ -30,7 +30,7 @@ ApiStatus func_802A1518_78D668(ScriptInstance* script, s32 isInitialCall) {
         case 1:
             temp = script->functionTemp[2].s;
             temp2 = (sin_rad((script->functionTemp[1].s * TAU) / 360.0f) * 30.0f) + 30.0f;
-            func_800706D0(0, temp, temp2, 50.0f);
+            playFX_26(0, temp, temp2, 50.0f);
 
             script->functionTemp[2].s += 14;
             script->functionTemp[1].s += 20;

@@ -65,7 +65,7 @@ void func_80059D48(void) {
 
 INCLUDE_ASM(s32, "341d0", update_effects);
 
-s32 render_effects(void) {
+s32 render_effects_world(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
@@ -81,7 +81,7 @@ s32 render_effects(void) {
     }
 }
 
-INCLUDE_ASM(s32, "341d0", func_80059F94);
+INCLUDE_ASM(s32, "341d0", render_effects_UI);
 
 EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;

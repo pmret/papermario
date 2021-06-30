@@ -24,7 +24,7 @@ glabel func_80240970_9D7990
 /* 9D79DC 802409BC 4407B000 */  mfc1      $a3, $f22
 /* 9D79E0 802409C0 24040002 */  addiu     $a0, $zero, 2
 /* 9D79E4 802409C4 AFA00010 */  sw        $zero, 0x10($sp)
-/* 9D79E8 802409C8 0C01BECC */  jal       fx_walk_normal
+/* 9D79E8 802409C8 0C01BECC */  jal       fx_walk
 /* 9D79EC 802409CC AFA00014 */   sw       $zero, 0x14($sp)
 /* 9D79F0 802409D0 0C00A67F */  jal       rand_int
 /* 9D79F4 802409D4 240400C8 */   addiu    $a0, $zero, 0xc8
@@ -42,7 +42,7 @@ glabel func_80240970_9D7990
 /* 9D7A24 80240A04 44060000 */  mfc1      $a2, $f0
 /* 9D7A28 80240A08 24040002 */  addiu     $a0, $zero, 2
 /* 9D7A2C 80240A0C AFA00010 */  sw        $zero, 0x10($sp)
-/* 9D7A30 80240A10 0C01BECC */  jal       fx_walk_normal
+/* 9D7A30 80240A10 0C01BECC */  jal       fx_walk
 /* 9D7A34 80240A14 AFA00014 */   sw       $zero, 0x14($sp)
 /* 9D7A38 80240A18 0C00A67F */  jal       rand_int
 /* 9D7A3C 80240A1C 240400C8 */   addiu    $a0, $zero, 0xc8
@@ -60,7 +60,7 @@ glabel func_80240970_9D7990
 /* 9D7A6C 80240A4C 44060000 */  mfc1      $a2, $f0
 /* 9D7A70 80240A50 24040002 */  addiu     $a0, $zero, 2
 /* 9D7A74 80240A54 AFA00010 */  sw        $zero, 0x10($sp)
-/* 9D7A78 80240A58 0C01BECC */  jal       fx_walk_normal
+/* 9D7A78 80240A58 0C01BECC */  jal       fx_walk
 /* 9D7A7C 80240A5C AFA00014 */   sw       $zero, 0x14($sp)
 /* 9D7A80 80240A60 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 9D7A84 80240A64 D7B60028 */  ldc1      $f22, 0x28($sp)

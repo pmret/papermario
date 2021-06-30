@@ -107,7 +107,7 @@ Script N(80242178) = SCRIPT({
     if (SI_VAR(0) == 1) {
         return;
     }
-    func_802D585C(1, 2097152);
+    ModifyGlobalOverrideFlags(1, 2097152);
     N(SetOverrideFlags_40)();
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
@@ -121,7 +121,7 @@ Script N(80242178) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -136,7 +136,7 @@ Script N(80242178) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -157,7 +157,7 @@ Script N(80242178) = SCRIPT({
         N(UnkFunc39)(SI_VAR(9));
         DisablePlayerInput(FALSE);
         EnablePartnerAI();
-        func_802D585C(0, 2097152);
+        ModifyGlobalOverrideFlags(0, 2097152);
         N(UnkFunc17)();
         return;
     }
@@ -173,7 +173,7 @@ Script N(80242178) = SCRIPT({
     }
     DisablePlayerInput(FALSE);
     EnablePartnerAI();
-    func_802D585C(0, 2097152);
+    ModifyGlobalOverrideFlags(0, 2097152);
     N(UnkFunc17)();
 });
 
@@ -390,7 +390,7 @@ s32 N(D_8024308C_CB1DCC) = {
 
 Script N(80243090) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D663C();
+    ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -407,7 +407,7 @@ Script N(80243090) = SCRIPT({
         }
     }
     N(func_802419C4_CB0704)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -990,7 +990,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
     phi_f24 = 0.0f;
     phi_f26 = 0.0f;
 
-    if (func_800DDCEC(npc->unk_80, &subroutine_arg8, &subroutine_arg9, &subroutine_argA, npc->moveSpeed * 4.5, temp_f20,
+    if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_arg8, &subroutine_arg9, &subroutine_argA, npc->moveSpeed * 4.5, temp_f20,
                       npc->collisionHeight, npc->collisionRadius) != 0) {
         phi_f22 = dist2D(npc->pos.x, npc->pos.z, subroutine_arg8, subroutine_argA);
 
@@ -998,7 +998,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
         subroutine_argC = npc->pos.y;
         subroutine_argD = npc->pos.z;
 
-        if (func_800DDCEC(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, npc->moveSpeed * 4.5,
+        if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, npc->moveSpeed * 4.5,
                           clamp_angle(temp_f20 + 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
             phi_f24 = dist2D(npc->pos.x, npc->pos.z, subroutine_argB, subroutine_argD);
         }
@@ -1007,7 +1007,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
         subroutine_argF = npc->pos.y;
         subroutine_arg10 = npc->pos.z;
 
-        if (func_800DDCEC(npc->unk_80, &subroutine_argE, &subroutine_argF, &subroutine_arg10, npc->moveSpeed * 4.5,
+        if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argE, &subroutine_argF, &subroutine_arg10, npc->moveSpeed * 4.5,
                           clamp_angle(temp_f20 - 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
             phi_f26 = dist2D(npc->pos.x, npc->pos.z, subroutine_argE, subroutine_arg10);
         }

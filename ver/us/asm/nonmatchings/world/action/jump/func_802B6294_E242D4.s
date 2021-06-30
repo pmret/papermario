@@ -36,7 +36,7 @@ glabel func_802B6294_E242D4
 /* E24348 802B6308 3C040001 */  lui       $a0, 1
 /* E2434C 802B630C 34840008 */  ori       $a0, $a0, 8
 .L802B6310:
-/* E24350 802B6310 0C037FBF */  jal       func_800DFEFC
+/* E24350 802B6310 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E24354 802B6314 00000000 */   nop
 /* E24358 802B6318 3C03800B */  lui       $v1, %hi(gCameras)
 /* E2435C 802B631C 24631D80 */  addiu     $v1, $v1, %lo(gCameras)

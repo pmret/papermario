@@ -188,7 +188,7 @@ glabel func_80240000_BD3870
 /* BD3B4C 802402DC 8E46000C */  lw        $a2, 0xc($s2)
 /* BD3B50 802402E0 25080001 */  addiu     $t0, $t0, 1
 /* BD3B54 802402E4 AE270000 */  sw        $a3, ($s1)
-/* BD3B58 802402E8 0C0B7811 */  jal       func_802DE044
+/* BD3B58 802402E8 0C0B7811 */  jal       spr_get_player_raster_info
 /* BD3B5C 802402EC A6080000 */   sh       $t0, ($s0)
 /* BD3B60 802402F0 8FA30030 */  lw        $v1, 0x30($sp)
 /* BD3B64 802402F4 8FA40034 */  lw        $a0, 0x34($sp)

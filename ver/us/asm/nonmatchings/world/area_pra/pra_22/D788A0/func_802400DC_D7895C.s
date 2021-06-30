@@ -36,7 +36,7 @@ glabel func_802400DC_D7895C
 /* D789D8 80240158 44830000 */  mtc1      $v1, $f0
 /* D789DC 8024015C 00000000 */  nop
 /* D789E0 80240160 46800020 */  cvt.s.w   $f0, $f0
-/* D789E4 80240164 0C0371DE */  jal       func_800DC778
+/* D789E4 80240164 0C0371DE */  jal       npc_raycast_down_ahead
 /* D789E8 80240168 E7A00018 */   swc1     $f0, 0x18($sp)
 /* D789EC 8024016C C7A00020 */  lwc1      $f0, 0x20($sp)
 /* D789F0 80240170 C7A20028 */  lwc1      $f2, 0x28($sp)

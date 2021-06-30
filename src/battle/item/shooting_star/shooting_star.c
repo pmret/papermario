@@ -5,7 +5,7 @@ Script N(main) = SCRIPT({
     await N(UseItemWithEffect);
     spawn {
         sleep 5;
-        UseCamPreset(2);
+        UseBattleCamPreset(2);
         MoveBattleCamOver(20);
     }
     N(func_802A1444_71DBB4)();
@@ -42,7 +42,7 @@ Script N(main) = SCRIPT({
         }
     }
     sleep 90;
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:
@@ -62,7 +62,7 @@ Script N(main) = SCRIPT({
         goto 0;
     }
     sleep 20;
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     await N(PlayerGoHome);
     spawn {

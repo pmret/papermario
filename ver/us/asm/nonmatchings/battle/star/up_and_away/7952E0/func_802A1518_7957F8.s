@@ -7,7 +7,7 @@ glabel func_802A1518_7957F8
 /* 795800 802A1520 0080802D */  daddu     $s0, $a0, $zero
 /* 795804 802A1524 10A0000E */  beqz      $a1, .L802A1560
 /* 795808 802A1528 AFBF0014 */   sw       $ra, 0x14($sp)
-/* 79580C 802A152C 0C04760B */  jal       func_8011D82C
+/* 79580C 802A152C 0C04760B */  jal       mdl_set_all_fog_mode
 /* 795810 802A1530 24040001 */   addiu    $a0, $zero, 1
 /* 795814 802A1534 0000202D */  daddu     $a0, $zero, $zero
 /* 795818 802A1538 0080282D */  daddu     $a1, $a0, $zero

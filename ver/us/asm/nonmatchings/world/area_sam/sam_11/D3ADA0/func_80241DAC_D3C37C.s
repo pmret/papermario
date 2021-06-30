@@ -72,7 +72,7 @@ glabel func_80241DAC_D3C37C
 /* D3C484 80241EB4 44051000 */  mfc1      $a1, $f2
 /* D3C488 80241EB8 46203620 */  cvt.s.d   $f24, $f6
 /* D3C48C 80241EBC 44070000 */  mfc1      $a3, $f0
-/* D3C490 80241EC0 0C01C994 */  jal       func_80072650
+/* D3C490 80241EC0 0C01C994 */  jal       playFX_7A
 /* D3C494 80241EC4 462025A0 */   cvt.s.d  $f22, $f4
 /* D3C498 80241EC8 0040802D */  daddu     $s0, $v0, $zero
 /* D3C49C 80241ECC 8E02000C */  lw        $v0, 0xc($s0)

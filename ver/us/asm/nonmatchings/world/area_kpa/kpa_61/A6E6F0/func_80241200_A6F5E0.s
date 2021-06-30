@@ -77,7 +77,7 @@ glabel func_80241200_A6F5E0
 /* A6F700 80241320 E7A40018 */   swc1     $f4, 0x18($sp)
 /* A6F704 80241324 0260202D */  daddu     $a0, $s3, $zero
 /* A6F708 80241328 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* A6F70C 8024132C 0C012530 */  jal       func_800494C0
+/* A6F70C 8024132C 0C012530 */  jal       ai_enemy_play_sound
 /* A6F710 80241330 3C060020 */   lui      $a2, 0x20
 /* A6F714 80241334 24020032 */  addiu     $v0, $zero, 0x32
 /* A6F718 80241338 A662008E */  sh        $v0, 0x8e($s3)

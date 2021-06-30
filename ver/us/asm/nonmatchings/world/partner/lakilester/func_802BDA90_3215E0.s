@@ -35,7 +35,7 @@ glabel func_802BDA90_3215E0
 /* 321658 802BDB08 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 32165C 802BDB0C E7B4001C */  swc1      $f20, 0x1c($sp)
 /* 321660 802BDB10 8E040080 */  lw        $a0, 0x80($s0)
-/* 321664 802BDB14 0C037765 */  jal       func_800DDD94
+/* 321664 802BDB14 0C037765 */  jal       npc_test_move_complex_with_slipping
 /* 321668 802BDB18 27A70028 */   addiu    $a3, $sp, 0x28
 /* 32166C 802BDB1C 1040000C */  beqz      $v0, .L802BDB50
 /* 321670 802BDB20 24039FFF */   addiu    $v1, $zero, -0x6001
@@ -77,7 +77,7 @@ glabel func_802BDA90_3215E0
 /* 3216F8 802BDBA8 46800020 */  cvt.s.w   $f0, $f0
 /* 3216FC 802BDBAC E7A00018 */  swc1      $f0, 0x18($sp)
 /* 321700 802BDBB0 8E040080 */  lw        $a0, 0x80($s0)
-/* 321704 802BDBB4 0C0376B9 */  jal       func_800DDAE4
+/* 321704 802BDBB4 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321708 802BDBB8 27A70028 */   addiu    $a3, $sp, 0x28
 /* 32170C 802BDBBC 10400008 */  beqz      $v0, .L802BDBE0
 /* 321710 802BDBC0 2403DFFF */   addiu    $v1, $zero, -0x2001
@@ -115,7 +115,7 @@ glabel func_802BDA90_3215E0
 /* 321788 802BDC38 46800020 */  cvt.s.w   $f0, $f0
 /* 32178C 802BDC3C E7A00018 */  swc1      $f0, 0x18($sp)
 /* 321790 802BDC40 8E040080 */  lw        $a0, 0x80($s0)
-/* 321794 802BDC44 0C0376B9 */  jal       func_800DDAE4
+/* 321794 802BDC44 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321798 802BDC48 27A70028 */   addiu    $a3, $sp, 0x28
 /* 32179C 802BDC4C 10400008 */  beqz      $v0, .L802BDC70
 /* 3217A0 802BDC50 2403DFFF */   addiu    $v1, $zero, -0x2001
@@ -157,7 +157,7 @@ glabel func_802BDA90_3215E0
 /* 321828 802BDCD8 46800020 */  cvt.s.w   $f0, $f0
 /* 32182C 802BDCDC E7A00018 */  swc1      $f0, 0x18($sp)
 /* 321830 802BDCE0 8E040080 */  lw        $a0, 0x80($s0)
-/* 321834 802BDCE4 0C037711 */  jal       func_800DDC44
+/* 321834 802BDCE4 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 321838 802BDCE8 27A70028 */   addiu    $a3, $sp, 0x28
 /* 32183C 802BDCEC 10400009 */  beqz      $v0, .L802BDD14
 /* 321840 802BDCF0 2403DFFF */   addiu    $v1, $zero, -0x2001
@@ -200,7 +200,7 @@ glabel func_802BDA90_3215E0
 /* 3218CC 802BDD7C 46800020 */  cvt.s.w   $f0, $f0
 /* 3218D0 802BDD80 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 3218D4 802BDD84 8E040080 */  lw        $a0, 0x80($s0)
-/* 3218D8 802BDD88 0C037711 */  jal       func_800DDC44
+/* 3218D8 802BDD88 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 3218DC 802BDD8C 27A70028 */   addiu    $a3, $sp, 0x28
 /* 3218E0 802BDD90 10400009 */  beqz      $v0, .L802BDDB8
 /* 3218E4 802BDD94 2403DFFF */   addiu    $v1, $zero, -0x2001

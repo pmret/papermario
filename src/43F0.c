@@ -50,7 +50,7 @@ Gfx D_80074580[] = {
 };
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void func_80029860(s32 romStart, s32 vramDest, s32 length);
+void dma_write_block(s32 romStart, s32 vramDest, s32 length);
 
 #define ROM_CHUNK_SIZE 0x2000
 
@@ -195,22 +195,22 @@ s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     return length;
 }
 
-s32 func_800297D4(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_write(s32 romStart, s32 romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
     for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
-        func_80029860(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+        dma_write_block(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
     }
 
     if (i != length) {
-        func_80029860(romStart + i, vramDest + i, length - i);
+        dma_write_block(romStart + i, vramDest + i, length - i);
     }
 
     return length;
 }
 
-void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
+void dma_write_block(s32 dramAddr, s32 devAddr, s32 size) {
     OSIoMesg osIoMesg;
     OSMesg osMesg;
     OSMesgQueue osMesgQueue;
@@ -228,7 +228,7 @@ void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
     osRecvMesg(&osMesgQueue, &osMesg, 1);
 }
 
-s32 _advance_rng(void) {
+s32 advance_rng(void) {
     gRandSeed *= 0x5D588B65;
     gRandSeed++;
 
@@ -237,8 +237,8 @@ s32 _advance_rng(void) {
     return gRandSeed;
 }
 
-f32 func_80029934(void) {
-    s32 temp_v0 = _advance_rng() & 0x7FFF;
+f32 rand_float(void) {
+    s32 temp_v0 = advance_rng() & 0x7FFF;
     f64 temp_f2 = temp_v0;
 
     if (temp_v0 < 0) {
@@ -259,7 +259,7 @@ s32 func_80029994(s32 arg0) {
     }
 
     do  {
-        result = _advance_rng() / div;
+        result = advance_rng() / div;
     } while (result >= plusOne);
 
     return result;
@@ -515,7 +515,7 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
     return 0.0f;
 }
 
-void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
+void appendGfx_startup_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_80074580);
 
@@ -536,7 +536,7 @@ void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bot
 
 }
 
-void func_8002AAC4(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
     u16 temp;
 
     if (right < left) {
@@ -551,10 +551,10 @@ void func_8002AAC4(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b
         top = temp;
     }
 
-    func_8002A904(r, g, b, a, left, top, right, bottom);
+    appendGfx_startup_prim_rect(r, g, b, a, left, top, right, bottom);
 }
 
-void func_8002AB5C(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+void startup_draw_prim_rect(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
     u16 temp;
 
     if (right < left) {
@@ -569,5 +569,5 @@ void func_8002AB5C(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b
         top = temp;
     }
 
-    func_8002A904(r, g, b, a, left, top, right, bottom);
+    appendGfx_startup_prim_rect(r, g, b, a, left, top, right, bottom);
 }

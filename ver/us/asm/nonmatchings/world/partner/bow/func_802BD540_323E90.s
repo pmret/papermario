@@ -78,7 +78,7 @@ glabel func_802BD540_323E90
 /* 323FB0 802BD660 44820000 */  mtc1      $v0, $f0
 /* 323FB4 802BD664 00000000 */  nop
 /* 323FB8 802BD668 46800020 */  cvt.s.w   $f0, $f0
-/* 323FBC 802BD66C 0C037B01 */  jal       do_lateral_collision
+/* 323FBC 802BD66C 0C037B01 */  jal       player_test_lateral_overlap
 /* 323FC0 802BD670 E7A00014 */   swc1     $f0, 0x14($sp)
 .L802BD674:
 /* 323FC4 802BD674 8FBF003C */  lw        $ra, 0x3c($sp)

@@ -7,7 +7,7 @@ glabel func_802BDF08_324858
 /* 324860 802BDF10 AFB00010 */  sw        $s0, 0x10($sp)
 /* 324864 802BDF14 10A0000C */  beqz      $a1, .L802BDF48
 /* 324868 802BDF18 8C90014C */   lw       $s0, 0x14c($a0)
-/* 32486C 802BDF1C 0C03BA65 */  jal       func_800EE994
+/* 32486C 802BDF1C 0C03BA65 */  jal       partner_init_put_away
 /* 324870 802BDF20 0200202D */   daddu    $a0, $s0, $zero
 /* 324874 802BDF24 3C02802C */  lui       $v0, %hi(D_802BE0C0)
 /* 324878 802BDF28 8C42E0C0 */  lw        $v0, %lo(D_802BE0C0)($v0)
@@ -20,7 +20,7 @@ glabel func_802BDF08_324858
 /* 324890 802BDF40 0C0AF77C */  jal       func_802BDDF0_324740
 /* 324894 802BDF44 0200202D */   daddu    $a0, $s0, $zero
 .L802BDF48:
-/* 324898 802BDF48 0C03BA6E */  jal       func_800EE9B8
+/* 324898 802BDF48 0C03BA6E */  jal       partner_put_away
 /* 32489C 802BDF4C 0200202D */   daddu    $a0, $s0, $zero
 /* 3248A0 802BDF50 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 3248A4 802BDF54 8FB00010 */  lw        $s0, 0x10($sp)

@@ -22,7 +22,7 @@ void N(UnkFunc10)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
     posY = npc->pos.y;
     posZ = npc->pos.z;
 
-    if (func_800DDC44(npc->unk_80, &posX, &posY, &posZ,
+    if (npc_test_move_simple_with_slipping(npc->unk_80, &posX, &posY, &posZ,
                       1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
         phi_s1 = 1;
     }

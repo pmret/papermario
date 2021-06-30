@@ -5,11 +5,11 @@ extern s16 D_802809F6;
 extern s32 D_80280A30;
 extern s32 D_8029F254;
 
-INCLUDE_ASM(s32, "16F740", func_80240E60);
+INCLUDE_ASM(s32, "16F740", btl_merlee_on_start_turn);
 
-INCLUDE_ASM(s32, "16F740", func_80240FDC);
+INCLUDE_ASM(s32, "16F740", btl_merlee_on_first_strike);
 
-void func_80241190(s32 battleState) {
+void btl_set_state(s32 battleState) {
     s32 flags = gBattleStatus.flags2;
     if (0) { do { } while (1); }
     gBattleState = battleState;
@@ -38,41 +38,41 @@ void func_80241190(s32 battleState) {
     }
 }
 
-INCLUDE_ASM(s32, "16F740", begin_battle);
+INCLUDE_ASM(s32, "16F740", btl_state_update_normal_start);
 
-void func_80241AB8(void) {
-    set_transition_stencil_color(0, 0, 0, 0);
+void btl_state_draw_normal_start(void) {
+    set_screen_overlay_color(0, 0, 0, 0);
 
     if (D_80280A30 > 255) {
-        set_transition_stencil_zoom_0(0, 255.0f);
+        set_screen_overlay_params_front(0, 255.0f);
     } else {
-        set_transition_stencil_zoom_0(0, D_80280A30);
+        set_screen_overlay_params_front(0, D_80280A30);
     }
 }
 
-INCLUDE_ASM(s32, "16F740", func_80241B14);
+INCLUDE_ASM(s32, "16F740", btl_state_update_begin_turn);
 
-void func_8024201C(void) {
+void btl_state_draw_begin_turn(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_heroes_start_turn);
+INCLUDE_ASM(s32, "16F740", btl_state_update_begin_player_turn);
 
-void func_80242AC0(void) {
+void btl_state_draw_begin_player_turn(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", switch_to_player);
+INCLUDE_ASM(s32, "16F740", btl_state_update_switch_to_player);
 
-void func_80242BA8(void) {
+void btl_state_draw_switch_to_player(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_end_player_turn);
+INCLUDE_ASM(s32, "16F740", btl_state_update_begin_partner_turn);
 
-void func_80242EF8(void) {
+void btl_state_draw_begin_partner_turn(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", switch_to_partner);
+INCLUDE_ASM(void, "16F740", btl_state_update_switch_to_partner, s32);
 
-void func_80242FD8(void) {
+void btl_state_draw_switch_to_partner(void) {
 }
 
 INCLUDE_ASM(s32, "16F740", func_80242FE0);
@@ -81,7 +81,7 @@ void func_80243910(void) {
 }
 
 #ifdef NON_MATCHING
-void switch_order(void) {
+void btl_state_update_prepare_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->unk_4D = -1;
@@ -101,61 +101,61 @@ void switch_order(void) {
     // if (0) { s32 new_var; do { } while (new_var); }
 
     if (battleStatus->flags1 & 0x80000) {
-        func_80241190(14);
+        btl_set_state(14);
     } else if (battleStatus->battleState == 70) {
-        func_80241190(13);
+        btl_set_state(13);
         battleStatus->battleState = 70;
     } else {
-        func_80241190(13);
+        btl_set_state(13);
     }
 }
 #else
-INCLUDE_ASM(s32, "16F740", switch_order);
+INCLUDE_ASM(s32, "16F740", btl_state_update_prepare_menu);
 #endif
 
-void func_802439D0(void) {
+void btl_state_draw_prepare_menu(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", func_802439D8);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_turn);
 
-void func_80243FD4(void) {
+void btl_state_draw_end_turn(void) {
 }
 
-void func_80243FDC(void) {
+void btl_state_update_1C(void) {
     func_8024E40C(2);
-    func_80241190(12);
+    btl_set_state(12);
 }
 
-void func_80244000(void) {
+void btl_state_draw_1C(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", func_80244008);
+INCLUDE_ASM(s32, "16F740", btl_state_update_victory);
 
-void func_80244708(void) {
+void btl_state_draw_victory(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", func_80244710);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_training_battle);
 
-void func_80244A48(void) {
+void btl_state_draw_end_training_battle(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", end_battle);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_battle);
 
-INCLUDE_ASM(s32, "16F740", func_80244D90);
+INCLUDE_ASM(s32, "16F740", btl_state_draw_end_battle);
 
-INCLUDE_ASM(s32, "16F740", func_80244E38);
+INCLUDE_ASM(s32, "16F740", btl_state_update_defend);
 
-void func_80244EF8(void) {
+void btl_state_draw_defend(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_run_away);
+INCLUDE_ASM(s32, "16F740", btl_state_update_run_away);
 
-void func_80245438(void) {
+void btl_state_draw_run_away(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", func_80245440);
+INCLUDE_ASM(s32, "16F740", btl_state_update_defeat);
 
-void func_802456B0(void) {
+void btl_state_draw_defeat(void) {
 }
 
 ApiStatus EnablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
@@ -168,30 +168,30 @@ ApiStatus DisablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "16F740", update_swap_partner);
+INCLUDE_ASM(s32, "16F740", btl_state_update_change_partner);
 
-void func_80245AC8(void) {
+void btl_state_draw_change_partner(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_player_action);
+INCLUDE_ASM(s32, "16F740", btl_state_update_player_move);
 
-void func_80246448(void) {
+void btl_state_draw_player_move(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_player_change_turn);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_player_turn);
 
-void func_80246B2C_code(void) {
+void filemenu_main_update_code(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_partner_action);
+INCLUDE_ASM(s32, "16F740", btl_state_update_partner_move);
 
-void func_80247214(void) {
+void btl_state_draw_partner_move(void) {
 }
 
 // Something weird with using battleStatus twice but in specific ways
 #ifdef NON_MATCHING
-s32 func_80263434(void);
-void func_8024721C(void) {
+s32 btl_check_enemies_defeated(void);
+void btl_state_update_end_partner_turn(void) {
     BattleStatus* battleStatus;
     s32 battleState = gBattleStatus.battleState;
 
@@ -200,80 +200,80 @@ void func_8024721C(void) {
 
     if (battleState == 0) {
         battleStatus->flags2 |= 0x4;
-        if (!func_80263434()) {
+        if (!btl_check_enemies_defeated()) {
             battleStatus->flags1 &= ~0x80000;
             battleStatus->flags2 &= ~0x10;
 
             if (battleStatus->unk_94 < 0) {
                 battleStatus->unk_94 = 0;
-                func_80241190(6);
+                btl_set_state(6);
             } else {
-                func_80241190(9);
+                btl_set_state(9);
             }
         }
     }
 }
 #else
-INCLUDE_ASM(s32, "16F740", func_8024721C);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_partner_turn);
 #endif
 
 
-void func_802472A4(void) {
+void btl_state_draw_end_partner_turn(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_enemy_change_turn);
+INCLUDE_ASM(s32, "16F740", btl_state_update_next_enemy);
 
-void func_80247568(void) {
+void btl_state_draw_next_enemy(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", update_enemy_action);
+INCLUDE_ASM(s32, "16F740", btl_state_update_enemy_move);
 
-void func_80247AFC(void) {
+void btl_state_draw_enemy_move(void) {
 }
 
-INCLUDE_ASM(s32, "16F740", func_80247B04);
+INCLUDE_ASM(s32, "16F740", btl_state_update_first_strike);
 
-INCLUDE_ASM(s32, "16F740", func_802480F0);
+INCLUDE_ASM(s32, "16F740", btl_state_draw_first_stike);
 
-INCLUDE_ASM(s32, "16F740", func_80248190);
+INCLUDE_ASM(s32, "16F740", btl_state_update_partner_striking_first);
 
-void func_802485FC(void) {
+void btl_state_draw_partner_striking_first(void) {
     if (D_8029F254 != 0) {
         if (D_80280A30 == 0) {
-            set_transition_stencil_zoom_0(255, -1.0f);
+            set_screen_overlay_params_front(255, -1.0f);
         } else {
             D_80280A30 -= 20;
             if (D_80280A30 < 0) {
                 D_80280A30 = 0;
             }
 
-            set_transition_stencil_zoom_0(0, D_80280A30);
+            set_screen_overlay_params_front(0, D_80280A30);
         }
     }
 }
 
-INCLUDE_ASM(s32, "16F740", func_80248660);
+INCLUDE_ASM(s32, "16F740", btl_state_update_enemy_striking_first);
 
-void func_80248AA4(void) {
+void btl_state_draw_enemy_striking_first(void) {
     if (D_8029F254 != 0) {
         if (D_80280A30 == 0) {
-            set_transition_stencil_zoom_0(255, -1.0f);
+            set_screen_overlay_params_front(255, -1.0f);
         } else {
             D_80280A30 -= 20;
             if (D_80280A30 < 0) {
                 D_80280A30 = 0;
             }
 
-            set_transition_stencil_zoom_0(0, D_80280A30);
+            set_screen_overlay_params_front(0, D_80280A30);
         }
     }
 }
 
-INCLUDE_ASM(s32, "16F740", func_80248B08);
+INCLUDE_ASM(s32, "16F740", btl_state_update_end_demo_battle);
 
-void func_80248D78(void) {
+void btl_state_draw_end_demo_battle(void) {
     if (D_802809F6 == -1) {
-        set_transition_stencil_color(0, 0, 0, 0);
-        set_transition_stencil_zoom_0(0, D_80280A30);
+        set_screen_overlay_color(0, 0, 0, 0);
+        set_screen_overlay_params_front(0, D_80280A30);
     }
 }

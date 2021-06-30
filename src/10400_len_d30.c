@@ -27,7 +27,7 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     set_time_freeze_mode(2);
-    set_transition_stencil_zoom_0(0, D_800A0932[0]);
+    set_screen_overlay_params_front(0, D_800A0932[0]);
 }
 
 void state_init_file_select(void) {
@@ -36,8 +36,8 @@ void state_init_file_select(void) {
     disable_player_input();
     set_time_freeze_mode(2);
     general_heap_create();
-    func_801452E8(0, 0);
-    func_80141100();
+    set_hud_element_nonworld_cache(0, 0);
+    clear_hud_element_cache();
     load_model_textures(0, 0, 0);
     gCameras[0].mode = 6;
     gCameras[0].unk_06 = 1;
@@ -93,7 +93,7 @@ void state_step_file_select(void) {
             }
 
             if (D_800A0930 < 0) {
-                func_802431A0();
+                filemenu_update();
             }
             break;
     }
@@ -105,19 +105,19 @@ void state_drawUI_language_select(void) {
 void state_drawUI_file_select(void) {
 }
 
-void func_800355D4(void) {
+void state_init_exit_language_select(void) {
     if (D_800A0932[0] > 0) {
         D_800A0931 = 0;
-        set_transition_stencil_zoom_0(0, D_800A0932[0]);
+        set_screen_overlay_params_front(0, D_800A0932[0]);
     } else {
         D_800A0931 = 1;
-        set_transition_stencil_zoom_0(0, D_800A0932[0]);
+        set_screen_overlay_params_front(0, D_800A0932[0]);
     }
     D_800A0930 = 1;
     gOverrideFlags &= ~0x40;
 }
 
-void func_80035660(void) {
+void state_init_exit_file_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     D_800A0930 = 0;
@@ -132,12 +132,12 @@ void func_80035660(void) {
     gOverrideFlags &= ~0x40;
 }
 
-INCLUDE_ASM(s32, "10400_len_d30", func_80035704);
+INCLUDE_ASM(s32, "10400_len_d30", state_step_exit_language_select);
 
-INCLUDE_ASM(s32, "10400_len_d30", func_80035B40);
+INCLUDE_ASM(s32, "10400_len_d30", state_step_exit_file_select);
 
-void func_80035D18(void) {
+void state_drawUI_exit_language_select(void) {
 }
 
-void func_80035D20(void) {
+void state_drawUI_exit_file_select(void) {
 }

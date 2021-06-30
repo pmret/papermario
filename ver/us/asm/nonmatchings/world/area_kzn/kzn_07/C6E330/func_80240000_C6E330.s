@@ -36,7 +36,7 @@ glabel func_80240000_C6E330
 /* C6E3A8 80240078 0040202D */   daddu    $a0, $v0, $zero
 /* C6E3AC 8024007C 0040202D */  daddu     $a0, $v0, $zero
 /* C6E3B0 80240080 2405FFFF */  addiu     $a1, $zero, -1
-/* C6E3B4 80240084 0C046F1F */  jal       func_8011BC7C
+/* C6E3B4 80240084 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6E3B8 80240088 24060002 */   addiu    $a2, $zero, 2
 /* C6E3BC 8024008C 96620000 */  lhu       $v0, ($s3)
 /* C6E3C0 80240090 0202102A */  slt       $v0, $s0, $v0
@@ -53,7 +53,7 @@ glabel func_80240000_C6E330
 /* C6E3E4 802400B4 50800005 */  beql      $a0, $zero, .L802400CC
 /* C6E3E8 802400B8 26100001 */   addiu    $s0, $s0, 1
 /* C6E3EC 802400BC 2405FFFF */  addiu     $a1, $zero, -1
-/* C6E3F0 802400C0 0C046F1F */  jal       func_8011BC7C
+/* C6E3F0 802400C0 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6E3F4 802400C4 24060002 */   addiu    $a2, $zero, 2
 /* C6E3F8 802400C8 26100001 */  addiu     $s0, $s0, 1
 .L802400CC:
@@ -214,7 +214,7 @@ glabel func_80240000_C6E330
 /* C6E638 80240308 240203E8 */  addiu     $v0, $zero, 0x3e8
 /* C6E63C 8024030C 30E700FF */  andi      $a3, $a3, 0xff
 /* C6E640 80240310 AFB1001C */  sw        $s1, 0x1c($sp)
-/* C6E644 80240314 0C046FAD */  jal       func_8011BEB4
+/* C6E644 80240314 0C046FAD */  jal       set_model_fog_color_parameters
 /* C6E648 80240318 AFA20020 */   sw       $v0, 0x20($sp)
 /* C6E64C 8024031C 0000102D */  daddu     $v0, $zero, $zero
 .L80240320:

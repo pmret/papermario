@@ -46,7 +46,7 @@ glabel func_802BB044_E2B774
 /* E2B810 802BB0E0 00000000 */  nop
 /* E2B814 802BB0E4 45000003 */  bc1f      .L802BB0F4
 /* E2B818 802BB0E8 3C040001 */   lui      $a0, 1
-/* E2B81C 802BB0EC 0C037FBF */  jal       func_800DFEFC
+/* E2B81C 802BB0EC 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E2B820 802BB0F0 34840005 */   ori      $a0, $a0, 5
 .L802BB0F4:
 /* E2B824 802BB0F4 C6000000 */  lwc1      $f0, ($s0)

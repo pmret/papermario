@@ -3,12 +3,12 @@
 #include "script_api/battle.h"
 
 ApiStatus func_80271210(ScriptInstance* script, s32 isInitialCall) {
-    func_80070AF0(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    playFX_31(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80271258(ScriptInstance* script, s32 isInitialCall) {
-    func_80070AF0(1, script->varTable[0], script->varTable[1], script->varTable[2]);
+    playFX_31(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
@@ -22,7 +22,7 @@ ApiStatus func_802713B0(ScriptInstance* script, s32 isInitialCall);
 INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus func_8027143C(ScriptInstance* script, s32 isInitialCall) {
-    func_80070A90(0, script->varTable[0], script->varTable[1], script->varTable[2]);
+    playFX_30(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
@@ -245,7 +245,7 @@ ApiStatus func_80276EFC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80276F1C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DispatchEventPlayer(ScriptInstance* script, s32 isInitialCall) {
     dispatch_event_player(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

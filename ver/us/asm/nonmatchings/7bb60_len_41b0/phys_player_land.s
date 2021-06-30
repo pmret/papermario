@@ -31,7 +31,7 @@ glabel phys_player_land
 /* 7C790 800E32E0 30424000 */  andi      $v0, $v0, 0x4000
 /* 7C794 800E32E4 14400003 */  bnez      $v0, .L800E32F4
 /* 7C798 800E32E8 0060882D */   daddu    $s1, $v1, $zero
-/* 7C79C 800E32EC 0C03954C */  jal       func_800E5530
+/* 7C79C 800E32EC 0C03954C */  jal       phys_adjust_cam_on_landing
 /* 7C7A0 800E32F0 00000000 */   nop
 .L800E32F4:
 /* 7C7A4 800E32F4 96240002 */  lhu       $a0, 2($s1)
@@ -92,7 +92,7 @@ glabel phys_player_land
 /* 7C874 800E33C4 08038D0D */  j         .L800E3434
 /* 7C878 800E33C8 00000000 */   nop
 .L800E33CC:
-/* 7C87C 800E33CC 0C0388C1 */  jal       input_to_move_vector
+/* 7C87C 800E33CC 0C0388C1 */  jal       player_input_to_move_vector
 /* 7C880 800E33D0 27A50014 */   addiu    $a1, $sp, 0x14
 /* 7C884 800E33D4 C7A00014 */  lwc1      $f0, 0x14($sp)
 /* 7C888 800E33D8 44801000 */  mtc1      $zero, $f2

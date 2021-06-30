@@ -20,7 +20,7 @@ void N(UnkNpcAIFunc12)(ScriptInstance* script, NpcAISettings* aiSettings, s32 ar
     f2 = npc->pos.y;
     f3 = npc->pos.z;
 
-    temp = func_800DDC44(npc->unk_80, &f1, &f2, &f3, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius);
+    temp = npc_test_move_simple_with_slipping(npc->unk_80, &f1, &f2, &f3, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius);
     if (temp == 0) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }

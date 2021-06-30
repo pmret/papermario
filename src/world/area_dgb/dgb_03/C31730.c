@@ -334,21 +334,21 @@ static s32 N(pad_3738)[] = {
 Script N(80243740) = SCRIPT({
     group 0;
     suspend group 1;
-    func_802D6420();
+    ShowKeyChoicePopup();
     if (SI_VAR(0) == 0) {
         ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x00D8), 160, 40);
-        func_802D6954();
+        CloseChoicePopup();
         resume group 1;
         return;
     }
     if (SI_VAR(0) == -1) {
-        func_802D6954();
+        CloseChoicePopup();
         resume group 1;
         return;
     }
     FindKeyItem(19, SI_VAR(0));
     RemoveKeyItemAt(SI_VAR(0));
-    func_802D6954();
+    CloseChoicePopup();
     SI_SAVE_FLAG(1043) = 1;
     N(GetEntityPosition)(SI_MAP_VAR(0), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     PlaySoundAt(0x269, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -984,7 +984,7 @@ ApiStatus N(func_802416B4_C32B94)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -1166,19 +1166,19 @@ void N(func_80241D04_C331E4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     if (phi_s2) {
-        func_800494C0(npc, 0xB000000E, 0);
+        ai_enemy_play_sound(npc, 0xB000000E, 0);
         npc->currentAnim.w = enemy->animList[11];
         npc->duration = 10;
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-        func_800494C0(npc, 0x2F4, 0x200000);
+        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         script->functionTemp[0].s = 2;
     }
 
     npc->duration++;
     if (npc->duration == 27) {
-        func_800494C0(npc, 0xB000000C, 0);
+        ai_enemy_play_sound(npc, 0xB000000C, 0);
     } else if (npc->duration == 57) {
-        func_800494C0(npc, 0xB000000D, 0);
+        ai_enemy_play_sound(npc, 0xB000000D, 0);
     } else if (npc->duration == 59) {
         npc->currentAnim.w = enemy->animList[12];
     } else if (npc->duration == 60) {

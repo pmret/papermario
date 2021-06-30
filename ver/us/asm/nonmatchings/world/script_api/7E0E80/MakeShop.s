@@ -166,20 +166,20 @@ glabel MakeShop
 .L80281ACC:
 /* 7E294C 80281ACC 3C048008 */  lui       $a0, %hi(D_80080868)
 /* 7E2950 80281AD0 24840868 */  addiu     $a0, $a0, %lo(D_80080868)
-/* 7E2954 80281AD4 0C050529 */  jal       create_icon
+/* 7E2954 80281AD4 0C050529 */  jal       create_hud_element
 /* 7E2958 80281AD8 2410FFFF */   addiu    $s0, $zero, -1
 /* 7E295C 80281ADC 0040202D */  daddu     $a0, $v0, $zero
 /* 7E2960 80281AE0 24050080 */  addiu     $a1, $zero, 0x80
-/* 7E2964 80281AE4 0C051280 */  jal       set_icon_flags
+/* 7E2964 80281AE4 0C051280 */  jal       set_hud_element_flags
 /* 7E2968 80281AE8 AE840020 */   sw       $a0, 0x20($s4)
 /* 7E296C 80281AEC 8E840020 */  lw        $a0, 0x20($s4)
-/* 7E2970 80281AF0 0C05128B */  jal       clear_icon_flags
+/* 7E2970 80281AF0 0C05128B */  jal       clear_hud_element_flags
 /* 7E2974 80281AF4 34058000 */   ori      $a1, $zero, 0x8000
-/* 7E2978 80281AF8 3C058028 */  lui       $a1, %hi(shop_draw_items)
-/* 7E297C 80281AFC 24A51524 */  addiu     $a1, $a1, %lo(shop_draw_items)
-/* 7E2980 80281B00 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* 7E2978 80281AF8 3C058028 */  lui       $a1, %hi(draw_shop_items)
+/* 7E297C 80281AFC 24A51524 */  addiu     $a1, $a1, %lo(draw_shop_items)
+/* 7E2980 80281B00 0C048C8F */  jal       create_generic_entity_frontUI
 /* 7E2984 80281B04 0000202D */   daddu    $a0, $zero, $zero
-/* 7E2988 80281B08 0C048D8F */  jal       get_dynamic_entity
+/* 7E2988 80281B08 0C048D8F */  jal       get_generic_entity
 /* 7E298C 80281B0C 0040202D */   daddu    $a0, $v0, $zero
 /* 7E2990 80281B10 2404000A */  addiu     $a0, $zero, 0xa
 /* 7E2994 80281B14 24050064 */  addiu     $a1, $zero, 0x64

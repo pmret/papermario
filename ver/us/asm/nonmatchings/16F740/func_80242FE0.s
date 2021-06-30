@@ -98,7 +98,7 @@ glabel func_80242FE0
 /* 171A18 80243138 26730004 */   addiu    $s3, $s3, 4
 /* 171A1C 8024313C 16800079 */  bnez      $s4, .L80243324
 /* 171A20 80243140 00000000 */   nop
-/* 171A24 80243144 0C098F18 */  jal       func_80263C60
+/* 171A24 80243144 0C098F18 */  jal       reset_actor_turn_info
 /* 171A28 80243148 0000882D */   daddu    $s1, $zero, $zero
 /* 171A2C 8024314C 24130014 */  addiu     $s3, $zero, 0x14
 /* 171A30 80243150 3C14800E */  lui       $s4, %hi(gBattleStatus)
@@ -133,7 +133,7 @@ glabel func_80242FE0
 /* 171A9C 802431BC 1C400009 */  bgtz      $v0, .L802431E4
 /* 171AA0 802431C0 00000000 */   nop
 /* 171AA4 802431C4 86040436 */  lh        $a0, 0x436($s0)
-/* 171AA8 802431C8 0C011E26 */  jal       func_80047898
+/* 171AA8 802431C8 0C011E26 */  jal       remove_status_1
 /* 171AAC 802431CC A2000210 */   sb       $zero, 0x210($s0)
 /* 171AB0 802431D0 0200202D */  daddu     $a0, $s0, $zero
 /* 171AB4 802431D4 0C09DC58 */  jal       dispatch_event_actor
@@ -151,7 +151,7 @@ glabel func_80242FE0
 /* 171AE0 80243200 1C400006 */  bgtz      $v0, .L8024321C
 /* 171AE4 80243204 00000000 */   nop
 /* 171AE8 80243208 86040436 */  lh        $a0, 0x436($s0)
-/* 171AEC 8024320C 0C011E68 */  jal       func_800479A0
+/* 171AEC 8024320C 0C011E68 */  jal       remove_status_2
 /* 171AF0 80243210 A2000212 */   sb       $zero, 0x212($s0)
 /* 171AF4 80243214 3C01802A */  lui       $at, %hi(D_8029F258)
 /* 171AF8 80243218 AC33F258 */  sw        $s3, %lo(D_8029F258)($at)
@@ -166,7 +166,7 @@ glabel func_80242FE0
 /* 171B18 80243238 1C400006 */  bgtz      $v0, .L80243254
 /* 171B1C 8024323C 00000000 */   nop
 /* 171B20 80243240 86040436 */  lh        $a0, 0x436($s0)
-/* 171B24 80243244 0C011EAA */  jal       func_80047AA8
+/* 171B24 80243244 0C011EAA */  jal       remove_status_3
 /* 171B28 80243248 A2000218 */   sb       $zero, 0x218($s0)
 /* 171B2C 8024324C 3C01802A */  lui       $at, %hi(D_8029F258)
 /* 171B30 80243250 AC33F258 */  sw        $s3, %lo(D_8029F258)($at)
@@ -278,11 +278,11 @@ glabel func_80242FE0
 /* 171CA8 802433C8 26730004 */   addiu    $s3, $s3, 4
 /* 171CAC 802433CC 16800049 */  bnez      $s4, .L802434F4
 /* 171CB0 802433D0 00000000 */   nop
-/* 171CB4 802433D4 0C098D19 */  jal       func_80263464
+/* 171CB4 802433D4 0C098D19 */  jal       btl_check_player_defeated
 /* 171CB8 802433D8 00000000 */   nop
 /* 171CBC 802433DC 1440013F */  bnez      $v0, .L802438DC
 /* 171CC0 802433E0 00000000 */   nop
-/* 171CC4 802433E4 0C098D0D */  jal       func_80263434
+/* 171CC4 802433E4 0C098D0D */  jal       btl_check_enemies_defeated
 /* 171CC8 802433E8 00000000 */   nop
 /* 171CCC 802433EC 1440013B */  bnez      $v0, .L802438DC
 /* 171CD0 802433F0 00000000 */   nop
@@ -622,7 +622,7 @@ glabel func_80242FE0
 /* 1721AC 802438CC 14620003 */  bne       $v1, $v0, .L802438DC
 /* 1721B0 802438D0 24040014 */   addiu    $a0, $zero, 0x14
 .L802438D4:
-/* 1721B4 802438D4 0C090464 */  jal       func_80241190
+/* 1721B4 802438D4 0C090464 */  jal       btl_set_state
 /* 1721B8 802438D8 00000000 */   nop
 .L802438DC:
 /* 1721BC 802438DC 8FBF002C */  lw        $ra, 0x2c($sp)

@@ -63,7 +63,7 @@ glabel func_802189A0_58CC90
 /* 58CD78 80218A88 0040802D */  daddu     $s0, $v0, $zero
 /* 58CD7C 80218A8C E7BA0010 */  swc1      $f26, 0x10($sp)
 /* 58CD80 80218A90 E7B80014 */  swc1      $f24, 0x14($sp)
-/* 58CD84 80218A94 0C01BFD4 */  jal       func_8006FF50
+/* 58CD84 80218A94 0C01BFD4 */  jal       playFX_12
 /* 58CD88 80218A98 E7B60018 */   swc1     $f22, 0x18($sp)
 /* 58CD8C 80218A9C 0040202D */  daddu     $a0, $v0, $zero
 /* 58CD90 80218AA0 82030210 */  lb        $v1, 0x210($s0)

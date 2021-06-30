@@ -12,11 +12,11 @@ INCLUDE_ASM(s32, "18C790", func_8025E108);
 
 INCLUDE_ASM(s32, "18C790", func_8025E14C);
 
-INCLUDE_ASM(s32, "18C790", func_8025E190);
+INCLUDE_ASM(s32, "18C790", btl_state_update_celebration);
 
-INCLUDE_ASM(s32, "18C790", func_8025FF8C);
+INCLUDE_ASM(s32, "18C790", btl_draw_upgrade_windows);
 
-INCLUDE_ASM(s32, "18C790", func_802601BC);
+INCLUDE_ASM(s32, "18C790", btl_state_draw_celebration);
 
 INCLUDE_ASM(s32, "18C790", func_80260948);
 

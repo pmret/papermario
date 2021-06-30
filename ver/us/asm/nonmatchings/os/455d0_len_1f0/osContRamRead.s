@@ -17,7 +17,7 @@ glabel osContRamRead
 /* 45600 8006A200 AFB60040 */  sw        $s6, 0x40($sp)
 /* 45604 8006A204 AFB20030 */  sw        $s2, 0x30($sp)
 /* 45608 8006A208 AFB1002C */  sw        $s1, 0x2c($sp)
-/* 4560C 8006A20C 0C019771 */  jal       __osSiGetAccess
+/* 4560C 8006A20C 0C019771 */  jal       osSiGetAccess
 /* 45610 8006A210 AFA70014 */   sw       $a3, 0x14($sp)
 /* 45614 8006A214 24170002 */  addiu     $s7, $zero, 2
 /* 45618 8006A218 3216FFFF */  andi      $s6, $s0, 0xffff
@@ -118,7 +118,7 @@ glabel osContRamRead
 /* 45774 8006A374 0441FFAD */  bgez      $v0, .L8006A22C
 /* 45778 8006A378 26B5FFFF */   addiu    $s5, $s5, -1
 .L8006A37C:
-/* 4577C 8006A37C 0C01978C */  jal       __osSiRelAccess
+/* 4577C 8006A37C 0C01978C */  jal       osSiRelAccess
 /* 45780 8006A380 00000000 */   nop
 /* 45784 8006A384 02201021 */  addu      $v0, $s1, $zero
 /* 45788 8006A388 8FBF004C */  lw        $ra, 0x4c($sp)

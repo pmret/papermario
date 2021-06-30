@@ -84,7 +84,7 @@ ApiStatus si_handle_break_loop(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_sleep_frames(ScriptInstance* script) {
+ApiStatus si_handle_wait(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
@@ -100,7 +100,7 @@ ApiStatus si_handle_sleep_frames(ScriptInstance* script) {
     return !script->functionTemp[0].s;
 }
 
-ApiStatus si_handle_sleep_seconds(ScriptInstance* script) {
+ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
@@ -176,7 +176,7 @@ ApiStatus si_handle_if_greater_equal(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_if_flag(ScriptInstance* script) {
+ApiStatus si_handle_if_AND(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var = *args++;
 
@@ -187,7 +187,7 @@ ApiStatus si_handle_if_flag(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_if_not_flag(ScriptInstance* script) {
+ApiStatus si_handle_if_not_AND(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     Bytecode var = *args++;
 
@@ -207,7 +207,7 @@ ApiStatus si_handle_end_if(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_match(ScriptInstance* script) {
+ApiStatus si_handle_switch(ScriptInstance* script) {
     Bytecode value = get_variable(script, *script->ptrReadPos);
     s32 switchDepth = ++script->switchDepth;
 
@@ -219,7 +219,7 @@ ApiStatus si_handle_match(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_match_const(ScriptInstance* script) {
+ApiStatus si_handle_switch_const(ScriptInstance* script) {
     Bytecode* args = *script->ptrReadPos;
     s32 switchDepth = ++script->switchDepth;
 
@@ -395,7 +395,7 @@ ApiStatus si_handle_case_range(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_case_else(ScriptInstance* script) {
+ApiStatus si_handle_case_default(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
 
     ASSERT(switchDepth >= 0);
@@ -410,7 +410,7 @@ ApiStatus si_handle_case_else(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_case_flag(ScriptInstance* script) {
+ApiStatus si_handle_case_AND(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     s32 switchDepth = script->switchDepth;
     s32 var;
@@ -435,7 +435,7 @@ ApiStatus si_handle_case_flag(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_case_multi_or_equal(ScriptInstance* script) {
+ApiStatus si_handle_case_equal_OR(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     s32 switchDepth = script->switchDepth;
     s32 var;
@@ -460,7 +460,7 @@ ApiStatus si_handle_case_multi_or_equal(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_case_multi_and_equal(ScriptInstance* script) {
+ApiStatus si_handle_case_equal_AND(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     s32 switchDepth = script->switchDepth;
     s32 var;
@@ -488,7 +488,7 @@ ApiStatus si_handle_case_multi_and_equal(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_end_case_multi(ScriptInstance* script) {
+ApiStatus si_handle_end_case_group(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
 
     if (script->switchBlockState[script->switchDepth] == 0) {
@@ -505,13 +505,13 @@ ApiStatus si_handle_end_case_multi(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_break_match(ScriptInstance* script) {
+ApiStatus si_handle_break_case(ScriptInstance* script) {
     ASSERT(script->switchDepth >= 0);
     script->ptrNextLine = si_goto_end_case(script);
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_end_match(ScriptInstance* script) {
+ApiStatus si_handle_end_switch(ScriptInstance* script) {
     s32 switchDepth = script->switchDepth;
 
     ASSERT(switchDepth >= 0);
@@ -894,7 +894,7 @@ ApiStatus si_handle_call(ScriptInstance* script) {
     return func(newScript, isInitialCall); // todo fake match
 }
 
-ApiStatus si_handle_spawn_script(ScriptInstance* script) {
+ApiStatus si_handle_exec1(ScriptInstance* script) {
     ScriptInstance* newScript;
     s32 i;
 
@@ -920,7 +920,7 @@ ApiStatus si_handle_spawn_script(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_spawn_script_get_id(ScriptInstance* script) {
+ApiStatus si_handle_exec1_get_id(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     ScriptInstance* var = (ScriptInstance*)get_variable(script, *args++);
     Bytecode arg2 = *args++;
@@ -948,7 +948,7 @@ ApiStatus si_handle_spawn_script_get_id(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_await_script(ScriptInstance* script) {
+ApiStatus si_handle_exec_wait(ScriptInstance* script) {
     start_child_script(script, get_variable(script, *script->ptrReadPos), 0);
     script->currentOpcode = 0;
     return ApiStatus_FINISH;
@@ -987,7 +987,7 @@ s32 _bound_script_trigger_handler(Trigger* trigger) {
     return 1;
 }
 
-ApiStatus si_handle_bind_trigger(ScriptInstance* script) {
+ApiStatus si_handle_bind(ScriptInstance* script) {
     Bytecode* args = script->ptrReadPos;
     Trigger* trigger;
     Bytecode* triggerScript = get_variable(script, *args++);
@@ -1029,7 +1029,7 @@ ApiStatus si_handle_unbind(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_kill_script(ScriptInstance* script) {
+ApiStatus si_handle_kill(ScriptInstance* script) {
     kill_script_by_ID(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -1069,12 +1069,12 @@ ApiStatus si_handle_resume_others(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_suspend_script(ScriptInstance* script) {
+ApiStatus si_handle_suspend(ScriptInstance* script) {
     suspend_all_script(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_resume_script(ScriptInstance* script) {
+ApiStatus si_handle_resume(ScriptInstance* script) {
     resume_all_script(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -1135,18 +1135,18 @@ ApiStatus si_handle_bind_lock(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus si_handle_spawn_thread(ScriptInstance* script);
-INCLUDE_ASM(s32, "evt/si", si_handle_spawn_thread, ScriptInstance* script);
+ApiStatus si_handle_thread(ScriptInstance* script);
+INCLUDE_ASM(s32, "evt/si", si_handle_thread, ScriptInstance* script);
 
-ApiStatus si_handle_end_spawn_thread(ScriptInstance* script) {
+ApiStatus si_handle_end_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_FINISH;
 }
 
-ApiStatus si_handle_parallel_thread(ScriptInstance* script);
-INCLUDE_ASM(ApiStatus, "evt/si", si_handle_parallel_thread, ScriptInstance* script);
+ApiStatus si_handle_child_thread(ScriptInstance* script);
+INCLUDE_ASM(ApiStatus, "evt/si", si_handle_child_thread, ScriptInstance* script);
 
-ApiStatus si_handle_end_parallel_thread(ScriptInstance* script) {
+ApiStatus si_handle_end_child_thread(ScriptInstance* script) {
     kill_script(script);
     return ApiStatus_BLOCK;
 }
@@ -1216,10 +1216,10 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_break_loop(script);
                 break;
             case ScriptOpcode_SLEEP_FRAMES:
-                status = si_handle_sleep_frames(script);
+                status = si_handle_wait(script);
                 break;
             case ScriptOpcode_SLEEP_SECS:
-                status = si_handle_sleep_seconds(script);
+                status = si_handle_wait_seconds(script);
                 break;
             case ScriptOpcode_IF_EQ:
                 status = si_handle_if_equal(script);
@@ -1240,10 +1240,10 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_if_greater_equal(script);
                 break;
             case ScriptOpcode_IF_FLAG:
-                status = si_handle_if_flag(script);
+                status = si_handle_if_AND(script);
                 break;
             case ScriptOpcode_IF_NOT_FLAG:
-                status = si_handle_if_not_flag(script);
+                status = si_handle_if_not_AND(script);
                 break;
             case ScriptOpcode_ELSE:
                 status = si_handle_else(script);
@@ -1252,10 +1252,10 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_end_if(script);
                 break;
             case ScriptOpcode_MATCH:
-                status = si_handle_match(script);
+                status = si_handle_switch(script);
                 break;
             case ScriptOpcode_MATCH_CONST:
-                status = si_handle_match_const(script);
+                status = si_handle_switch_const(script);
                 break;
             case ScriptOpcode_CASE_EQ:
                 status = si_handle_case_equal(script);
@@ -1276,28 +1276,28 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_case_greater_equal(script);
                 break;
             case ScriptOpcode_CASE_ELSE:
-                status = si_handle_case_else(script);
+                status = si_handle_case_default(script);
                 break;
             case ScriptOpcode_BREAK_MATCH:
-                status = si_handle_break_match(script);
+                status = si_handle_break_case(script);
                 break;
             case ScriptOpcode_CASE_MULTI_OR_EQ:
-                status = si_handle_case_multi_or_equal(script);
+                status = si_handle_case_equal_OR(script);
                 break;
             case ScriptOpcode_END_CASE_MULTI:
-                status = si_handle_end_case_multi(script);
+                status = si_handle_end_case_group(script);
                 break;
             case ScriptOpcode_CASE_MULTI_AND_EQ:
-                status = si_handle_case_multi_and_equal(script);
+                status = si_handle_case_equal_AND(script);
                 break;
             case ScriptOpcode_CASE_FLAG:
-                status = si_handle_case_flag(script);
+                status = si_handle_case_AND(script);
                 break;
             case ScriptOpcode_CASE_RANGE:
                 status = si_handle_case_range(script);
                 break;
             case ScriptOpcode_END_MATCH:
-                status = si_handle_end_match(script);
+                status = si_handle_end_switch(script);
                 break;
             case ScriptOpcode_SET:
                 status = si_handle_set_var(script);
@@ -1381,7 +1381,7 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_allocate_array(script);
                 break;
             case ScriptOpcode_KILL_SCRIPT:
-                status = si_handle_kill_script(script);
+                status = si_handle_kill(script);
                 break;
             case ScriptOpcode_AND:
                 status = si_handle_AND(script);
@@ -1399,16 +1399,16 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_call(script);
                 break;
             case ScriptOpcode_SPAWN_SCRIPT:
-                status = si_handle_spawn_script(script);
+                status = si_handle_exec1(script);
                 break;
             case ScriptOpcode_SPAWN_GET_ID:
-                status = si_handle_spawn_script_get_id(script);
+                status = si_handle_exec1_get_id(script);
                 break;
             case ScriptOpcode_AWAIT_SCRIPT:
-                status = si_handle_await_script(script);
+                status = si_handle_exec_wait(script);
                 break;
             case ScriptOpcode_BIND_TRIGGER:
-                status = si_handle_bind_trigger(script);
+                status = si_handle_bind(script);
                 break;
             case ScriptOpcode_UNBIND:
                 status = si_handle_unbind(script);
@@ -1441,25 +1441,25 @@ s32 si_execute_next_command(ScriptInstance *script) {
                 status = si_handle_resume_others(script);
                 break;
             case ScriptOpcode_SUSPEND_SCRIPT:
-                status = si_handle_suspend_script(script);
+                status = si_handle_suspend(script);
                 break;
             case ScriptOpcode_RESUME_SCRIPT:
-                status = si_handle_resume_script(script);
+                status = si_handle_resume(script);
                 break;
             case ScriptOpcode_SCRIPT_EXISTS:
                 status = si_handle_does_script_exist(script);
                 break;
             case ScriptOpcode_SPAWN_THREAD:
-                status = si_handle_spawn_thread(script);
+                status = si_handle_thread(script);
                 break;
             case ScriptOpcode_END_SPAWN_THREAD:
-                status = si_handle_end_spawn_thread(script);
+                status = si_handle_end_thread(script);
                 break;
             case ScriptOpcode_PARALLEL_THREAD:
-                status = si_handle_parallel_thread(script);
+                status = si_handle_child_thread(script);
                 break;
             case ScriptOpcode_END_PARALLEL_THREAD:
-                status = si_handle_end_parallel_thread(script);
+                status = si_handle_end_child_thread(script);
                 break;
             case ScriptOpcode_90:
                 status = func_802C6E14(script);

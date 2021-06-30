@@ -4,11 +4,11 @@
 extern s32 D_8010C96C; // npc list index
 extern s16 D_8010C9B0;
 
-void func_800E26B0(void) {
+void record_jump_apex(void) {
     gPlayerStatus.jumpApexHeight = gPlayerStatus.position.y;
 }
 
-s32 func_800E26C4(void) {
+s32 can_trigger_loading_zone(void) {
     PlayerData* playerData = &gPlayerData;
     s32 actionState = gPlayerStatusPtr->actionState;
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
@@ -62,12 +62,12 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E29C8);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2BB0);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", update_fall_state);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2F60);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_init_integrator_for_current_state);
 
 #ifdef NON_MATCHING
-// void gravity_use_fall_params(void) {
+// void gravity_use_fall_parms(void) {
 //     f32* floats = D_800F7B60;
 // do { } while (0);
 //     if (gPlayerStatus.flags & 0x40000) {
@@ -82,7 +82,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2F60);
 //         gPlayerStatus.gravityIntegrator[3] = *floats++;
 //     }
 // }
-void gravity_use_fall_params(void) {
+void gravity_use_fall_parms(void) {
     PlayerStatus* playerStatus;
     f32* floats = D_800F7B60;
     do {} while (0);
@@ -100,14 +100,14 @@ void gravity_use_fall_params(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "7bb60_len_41b0", gravity_use_fall_params);
+INCLUDE_ASM(s32, "7bb60_len_41b0", gravity_use_fall_parms);
 #endif
 
-void func_800E3100(void) {
+void phys_update_falling(void) {
     if (gPlayerStatus.actionState != ACTION_STATE_LAND_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
         s32* colliderID;
 
-        gPlayerStatus.position.y = func_800E3514(func_800E34D8(), &colliderID);
+        gPlayerStatus.position.y = player_check_collision_below(func_800E34D8(), &colliderID);
 
         func_800E315C(colliderID);
     }
@@ -141,7 +141,7 @@ f32 func_800E34D8(void) {
     return ret;
 }
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E3514, f32 arg0, s32* colliderID);
+INCLUDE_ASM(f32, "7bb60_len_41b0", player_check_collision_below, f32 arg0, s32* colliderID);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_lateral);
 
@@ -156,7 +156,7 @@ s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {
         f32 x = gPlayerStatusPtr->position.x;
         f32 y = gPlayerStatusPtr->position.y + arg1;
         f32 z = gPlayerStatusPtr->position.z;
-        s32 hitID = do_lateral_collision(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
+        s32 hitID = player_test_lateral_overlap(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
@@ -182,7 +182,7 @@ s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ)
         f32 x = *outX;
         f32 y = *outY + arg1;
         f32 z = *outZ;
-        s32 hitID = do_lateral_collision(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
+        s32 hitID = player_test_lateral_overlap(arg0, gPlayerStatusPtr, &x, &y, &z, 0, angle);
 
         if (hitID >= 0) {
             ret = hitID;
@@ -196,7 +196,7 @@ s32 func_800E4404(s32 arg0, s32 arg1, f32 arg2, f32* outX, f32* outY, f32* outZ)
     return ret;
 }
 
-void func_800E4508(void) {
+void collision_check_player_overlaps(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 temp_64 = playerStatus->unk_64;
 
@@ -205,7 +205,7 @@ void func_800E4508(void) {
         f32 y = playerStatus->position.y;
         f32 z = playerStatus->position.z;
 
-        do_lateral_collision(0, &gPlayerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
+        player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, temp_64, playerStatus->unk_88);
 
         temp_64 -= playerStatus->runSpeed / 10.0f;
         playerStatus->position.x = x;
@@ -220,11 +220,11 @@ void func_800E4508(void) {
     }
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E45E0);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_should_player_be_sliding);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E46C8);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_is_on_sloped_ground);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E4744);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_main_collision_below);
 
 void func_800E4AD8(s32 arg0) {
     Camera* currentCamera = &gCameras[gCurrentCameraID];
@@ -238,7 +238,7 @@ void func_800E4B40(s32 arg0, f32* arg1, f32* arg2, f32* arg3) {
     func_800E4404(arg0, 0, gPlayerStatus.spriteFacingAngle - 90.0f + currentCamera->currentYaw, arg1, arg2, arg3);
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E4BB8);
+INCLUDE_ASM(s32, "7bb60_len_41b0", collision_lava_reset_check_additional_overlaps);
 
 void func_800E4F10(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -247,7 +247,7 @@ void func_800E4F10(void) {
     f32 x = playerStatus->position.x;
     f32 y = playerStatus->position.y;
     f32 z = playerStatus->position.z;
-    s32 temp = func_800DF15C(&gPlayerStatus, &x, &y, &z, 0, yaw, &tempB);
+    s32 temp = player_test_move_without_slipping(&gPlayerStatus, &x, &y, &z, 0, yaw, &tempB);
 
     playerStatus->position.x = x;
     playerStatus->position.z = z;
@@ -283,7 +283,7 @@ PartnerID get_current_partner_id(void) {
     return gPlayerData.currentPartner;
 }
 
-void func_800E5098(s32 arg0) {
+void try_player_footstep_sounds(s32 arg0) {
     if ((gGameStatusPtr->frameCounter % arg0) == 0) {
         u8 colliderType = get_collider_type_by_id(gCollisionStatus.currentFloor);
         s32 soundID;
@@ -306,17 +306,17 @@ void func_800E5098(s32 arg0) {
     }
 }
 
-void func_800E5150(void) {
-    gCollisionStatus.unk_0A = func_800E5174();
+void phys_update_interact_collider(void) {
+    gCollisionStatus.unk_0A = phys_check_interactable_collision();
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5174);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_check_interactable_collision);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", can_player_interact);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_can_player_interact);
 
 INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5348, void);
 
-void func_800E546C(void) {
+void player_get_camera_facing_angle(void) {
     f32 angle = 0.0f;
 
     if (gPlayerStatus.spriteFacingAngle >= 90.0f && gPlayerStatus.spriteFacingAngle < 270.0f) {
@@ -328,7 +328,7 @@ void func_800E546C(void) {
     clamp_angle(angle);
 }
 
-void save_ground_pos(void) {
+void phys_save_ground_pos(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->lastGoodPosition.x = playerStatus->position.x;
@@ -340,17 +340,17 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5530);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E58F0);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_clear_spin_history);
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5938, s32 lag, s32* x, s32* y, s32* z);
+INCLUDE_ASM(f32, "7bb60_len_41b0", phys_get_spin_history, s32 lag, s32* x, s32* y, s32* z);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E59A0);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_reset_spin_history);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5A2C);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E5C78);
+INCLUDE_ASM(s32, "7bb60_len_41b0", phys_peach_update);
 
 void set_action_state(s32 actionState) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -531,7 +531,7 @@ void check_input_spin(void) {
     }
 }
 
-void func_800E636C(s32 arg0) {
+void peach_set_disguise_anim(s32 arg0) {
     s32 listIndex = D_8010C96C;
 
     if (listIndex >= 0) {
@@ -548,14 +548,14 @@ void func_800E63A4(s32 arg0) {
         playerStatus->animFlags &= ~PLAYER_ANIM_FLAG_IN_DISGUISE;
         gGameStatusPtr->peachFlags &= ~0x2;
         playerStatus->peachDisguise = 0;
-        npc_free_by_index(D_8010C96C);
+        free_npc_by_index(D_8010C96C);
         set_action_state(ACTION_STATE_IDLE);
         playerStatus->colliderHeight = 55;
         playerStatus->colliderDiameter = 38;
     }
 }
 
-void func_800E6428(void) {
+void peach_check_for_parasol_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;
     Npc* disguiseNpc;
@@ -568,7 +568,7 @@ void func_800E6428(void) {
                     playerStatus->animFlags |= PLAYER_ANIM_FLAG_IN_DISGUISE;
                     gGameStatusPtr->peachFlags |= 2;
 
-                    disguiseNpc = make_disguise_npc(gGameStatusPtr->peachDisguise);
+                    disguiseNpc = peach_make_disguise_npc(gGameStatusPtr->peachDisguise);
                     if (disguiseNpc != NULL) {
                         disguiseNpc->flags &= ~NPC_FLAG_40000;
                     }
@@ -580,7 +580,7 @@ void func_800E6428(void) {
     }
 }
 
-void func_800E6500(void) {
+void peach_sync_disguise_npc(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (D_8010C96C >= 0) {
@@ -598,7 +598,7 @@ void func_800E6500(void) {
     }
 }
 
-INCLUDE_ASM(Npc*, "7bb60_len_41b0", make_disguise_npc, s32 peachDisguise);
+INCLUDE_ASM(Npc*, "7bb60_len_41b0", peach_make_disguise_npc, s32 peachDisguise);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E66C4);
+INCLUDE_ASM(s32, "7bb60_len_41b0", peach_disguise_check_overlaps);
 

@@ -78,7 +78,7 @@ glabel func_802416F0_910DA0
 /* 910EC0 80241810 44810000 */  mtc1      $at, $f0
 /* 910EC4 80241814 27A20360 */  addiu     $v0, $sp, 0x360
 /* 910EC8 80241818 E7A00360 */  swc1      $f0, 0x360($sp)
-/* 910ECC 8024181C 0C0372DF */  jal       func_800DCB7C
+/* 910ECC 8024181C 0C0372DF */  jal       npc_raycast_down_sides
 /* 910ED0 80241820 AFA20010 */   sw       $v0, 0x10($sp)
 /* 910ED4 80241824 1040000D */  beqz      $v0, .L8024185C
 /* 910ED8 80241828 00000000 */   nop

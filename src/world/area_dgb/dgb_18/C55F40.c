@@ -643,10 +643,10 @@ s32** N(D_802436E0_C59620) = NULL;
 
 Script N(802436E4) = SCRIPT({
     group 0;
-    func_802D5830(2);
+    SetTimeFreezeMode(2);
     sleep 40;
     ShowGotItem(SI_VAR(0), 0, 0);
-    func_802D5830(0);
+    SetTimeFreezeMode(0);
     return;
 });
 
@@ -797,7 +797,7 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }

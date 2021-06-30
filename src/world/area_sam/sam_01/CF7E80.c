@@ -196,9 +196,9 @@ ApiStatus N(func_80240E70_CF89E0)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -244,7 +244,7 @@ ApiStatus N(func_80241088_CF8BF8)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        free_dynamic_entity(D_8024DFC0);
+        free_generic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -327,9 +327,9 @@ void N(func_802416F8_CF9268)(void) {
     s32 var = get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 */
@@ -337,7 +337,7 @@ void N(func_802416F8_CF9268)(void) {
 INCLUDE_ASM(s32, "world/area_sam/sam_01/CF7E80", func_80241764_CF92D4);
 /*
 ApiStatus N(func_80241764_CF92D4)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */

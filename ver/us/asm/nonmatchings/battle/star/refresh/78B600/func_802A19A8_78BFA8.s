@@ -40,7 +40,7 @@ glabel func_802A19A8_78BFA8
 /* 78C034 802A1A34 46800020 */  cvt.s.w   $f0, $f0
 /* 78C038 802A1A38 44070000 */  mfc1      $a3, $f0
 /* 78C03C 802A1A3C 24040001 */  addiu     $a0, $zero, 1
-/* 78C040 802A1A40 0C01C424 */  jal       func_80071090
+/* 78C040 802A1A40 0C01C424 */  jal       playFX_40
 /* 78C044 802A1A44 AFA20010 */   sw       $v0, 0x10($sp)
 /* 78C048 802A1A48 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 78C04C 802A1A4C 8FB30024 */  lw        $s3, 0x24($sp)

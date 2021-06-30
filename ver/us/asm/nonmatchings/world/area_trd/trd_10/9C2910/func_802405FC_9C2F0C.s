@@ -45,7 +45,7 @@ glabel func_802405FC_9C2F0C
 /* 9C2FAC 8024069C 8E050018 */  lw        $a1, 0x18($s0)
 /* 9C2FB0 802406A0 8E060024 */  lw        $a2, 0x24($s0)
 /* 9C2FB4 802406A4 8E070020 */  lw        $a3, 0x20($s0)
-/* 9C2FB8 802406A8 0C01C9AC */  jal       func_800726B0
+/* 9C2FB8 802406A8 0C01C9AC */  jal       playFX_7B
 /* 9C2FBC 802406AC 24040001 */   addiu    $a0, $zero, 1
 /* 9C2FC0 802406B0 AE020054 */  sw        $v0, 0x54($s0)
 /* 9C2FC4 802406B4 8C43000C */  lw        $v1, 0xc($v0)

@@ -103,7 +103,7 @@ s32 N(modelCommandList)[] = {
 Script N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
-    UseCamPreset(19);
+    UseBattleCamPreset(19);
     SetBattleCamTarget(0xFFFFFFBD, 0xFFFFFFF1, 0xFFFFFFFB);
     SetBattleCamOffsetZ(45);
     SetBattleCamZoom(169);
@@ -155,7 +155,7 @@ Script N(main) = SCRIPT({
         N(func_802A1740_71ED90)();
         N(func_802A1848_71EE98)();
     }
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     sleep 8;
     SetJumpAnimations(ACTOR_PLAYER, 0, ANIM_1002B, ANIM_1002B, ANIM_MIDAIR);
@@ -178,21 +178,21 @@ Script N(main) = SCRIPT({
         SetActorYaw(ACTOR_PLAYER, 0);
     }
     sleep 40;
-    func_802D3474(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
     SI_VAR(7) = 0xFFFFFF38;
     SI_VAR(8) = 0;
     SI_VAR(9) = 0;
-    func_802D36E0(SI_VAR(10), SI_VAR(7), SI_VAR(8), SI_VAR(9));
-    func_802D38EC(SI_VAR(10), 0.7109375, 0.7109375, 0.7109375);
-    func_802D3998(SI_VAR(10), 7.0);
-    func_802D39FC(SI_VAR(10), 1.400390625);
+    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(7), SI_VAR(8), SI_VAR(9));
+    SetVirtualEntityScale(SI_VAR(10), 0.7109375, 0.7109375, 0.7109375);
+    SetVirtualEntityMoveSpeed(SI_VAR(10), 7.0);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 1.400390625);
     SetOwnerTarget(0, 0);
     SetGoalToTarget(ACTOR_PLAYER);
     GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 60;
-    func_802D3A60(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    VirtualEntityMoveTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_HIT_BLOCK);
     spawn {
         SetAnimation(ACTOR_PLAYER, 0, ANIM_SHOCK_STILL);
@@ -206,27 +206,27 @@ Script N(main) = SCRIPT({
     }
     PlayEffect(0x6, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 2;
-    func_802D39FC(SI_VAR(10), 1.400390625);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 1.400390625);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 60;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     SI_VAR(0) += 20;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     SI_VAR(0) += 10;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
     PlayEffect(0x6, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 5;
     spawn {
         GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 270;
-        func_802D3A60(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
-        func_802D3624(SI_VAR(10));
+        VirtualEntityMoveTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 0);
+        DeleteVirtualEntity(SI_VAR(10));
     }
     sleep 30;
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:

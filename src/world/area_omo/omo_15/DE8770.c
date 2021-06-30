@@ -29,7 +29,7 @@ ApiStatus N(func_8024004C_DE87BC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_20 = get_float_variable(script, *args++);
         ptr->unk_24 = get_float_variable(script, *args++);
         ptr->unk_28 = get_float_variable(script, *args++);
-        ptr->unk_50 = (struct N(temp)*)func_800729B0(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
+        ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
         ptr->unk_4A = 0;
@@ -66,7 +66,7 @@ ApiStatus N(func_802405FC_DE8D6C)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_24 = get_float_variable(script, *args++);
         ptr->unk_20 = get_float_variable(script, *args++);
         ptr->unk_28 = get_float_variable(script, *args++);
-        ptr->unk_54 = func_800726B0(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
+        ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;
         ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);

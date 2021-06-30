@@ -20,7 +20,7 @@ glabel BattleCamTargetActor
 /* 17D440 8024EB60 00000000 */   nop
 /* 17D444 8024EB64 8E040148 */  lw        $a0, 0x148($s0)
 .L8024EB68:
-/* 17D448 8024EB68 0C09390F */  jal       cam_target_actor
+/* 17D448 8024EB68 0C09390F */  jal       btl_cam_target_actor
 /* 17D44C 8024EB6C 00000000 */   nop
 /* 17D450 8024EB70 24020002 */  addiu     $v0, $zero, 2
 .L8024EB74:

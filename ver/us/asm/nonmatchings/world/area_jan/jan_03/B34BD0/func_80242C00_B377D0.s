@@ -6,7 +6,7 @@ glabel func_80242C00_B377D0
 /* B377D4 80242C04 3C058024 */  lui       $a1, %hi(func_80242B94_B37764)
 /* B377D8 80242C08 24A52B94 */  addiu     $a1, $a1, %lo(func_80242B94_B37764)
 /* B377DC 80242C0C AFBF0010 */  sw        $ra, 0x10($sp)
-/* B377E0 80242C10 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* B377E0 80242C10 0C048C8F */  jal       create_generic_entity_frontUI
 /* B377E4 80242C14 0000202D */   daddu    $a0, $zero, $zero
 /* B377E8 80242C18 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B377EC 80242C1C 3C018025 */  lui       $at, %hi(D_8024FED8)

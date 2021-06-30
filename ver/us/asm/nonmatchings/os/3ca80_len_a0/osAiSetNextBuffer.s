@@ -7,7 +7,7 @@ glabel osAiSetNextBuffer
 /* 3CA88 80061688 00808021 */  addu      $s0, $a0, $zero
 /* 3CA8C 8006168C AFB10014 */  sw        $s1, 0x14($sp)
 /* 3CA90 80061690 AFBF0018 */  sw        $ra, 0x18($sp)
-/* 3CA94 80061694 0C01AE14 */  jal       __osAiDeviceBusy
+/* 3CA94 80061694 0C01AE14 */  jal       osAiDeviceBusy
 /* 3CA98 80061698 00A08821 */   addu     $s1, $a1, $zero
 /* 3CA9C 8006169C 14400018 */  bnez      $v0, .L80061700
 /* 3CAA0 800616A0 2402FFFF */   addiu    $v0, $zero, -1

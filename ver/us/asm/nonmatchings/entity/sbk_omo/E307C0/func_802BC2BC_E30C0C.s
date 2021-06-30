@@ -52,7 +52,7 @@ glabel func_802BC2BC_E30C0C
 /* E30CC8 802BC378 27A60028 */  addiu     $a2, $sp, 0x28
 /* E30CCC 802BC37C 0200382D */  daddu     $a3, $s0, $zero
 /* E30CD0 802BC380 27A2002C */  addiu     $v0, $sp, 0x2c
-/* E30CD4 802BC384 0C0372DF */  jal       func_800DCB7C
+/* E30CD4 802BC384 0C0372DF */  jal       npc_raycast_down_sides
 /* E30CD8 802BC388 AFA20010 */   sw       $v0, 0x10($sp)
 /* E30CDC 802BC38C 10400019 */  beqz      $v0, .L802BC3F4
 /* E30CE0 802BC390 00000000 */   nop
@@ -103,7 +103,7 @@ glabel func_802BC2BC_E30C0C
 /* E30D84 802BC434 8E450048 */  lw        $a1, 0x48($s2)
 /* E30D88 802BC438 8E470050 */  lw        $a3, 0x50($s2)
 /* E30D8C 802BC43C 44061000 */  mfc1      $a2, $f2
-/* E30D90 802BC440 0C01C064 */  jal       func_80070190
+/* E30D90 802BC440 0C01C064 */  jal       playFX_18
 /* E30D94 802BC444 0040202D */   daddu    $a0, $v0, $zero
 /* E30D98 802BC448 1A600004 */  blez      $s3, .L802BC45C
 /* E30D9C 802BC44C 00000000 */   nop
@@ -117,7 +117,7 @@ glabel func_802BC2BC_E30C0C
 /* E30DB8 802BC468 00000000 */  nop
 /* E30DBC 802BC46C 46020001 */  sub.s     $f0, $f0, $f2
 /* E30DC0 802BC470 0240202D */  daddu     $a0, $s2, $zero
-/* E30DC4 802BC474 0C043F5A */  jal       exec_entity_updatecmd
+/* E30DC4 802BC474 0C043F5A */  jal       exec_entity_commandlist
 /* E30DC8 802BC478 E480004C */   swc1     $f0, 0x4c($a0)
 /* E30DCC 802BC47C 24020004 */  addiu     $v0, $zero, 4
 /* E30DD0 802BC480 0C038045 */  jal       disable_player_static_collisions

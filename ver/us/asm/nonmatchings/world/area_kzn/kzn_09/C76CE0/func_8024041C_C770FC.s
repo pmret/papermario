@@ -7,7 +7,7 @@ glabel func_8024041C_C770FC
 /* C77104 80240424 8C82000C */  lw        $v0, 0xc($a0)
 /* C77108 80240428 0C0B1EAF */  jal       get_variable
 /* C7710C 8024042C 8C450000 */   lw       $a1, ($v0)
-/* C77110 80240430 0C03AC5A */  jal       func_800EB168
+/* C77110 80240430 0C03AC5A */  jal       switch_to_partner
 /* C77114 80240434 0040202D */   daddu    $a0, $v0, $zero
 /* C77118 80240438 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C7711C 8024043C 24020002 */  addiu     $v0, $zero, 2

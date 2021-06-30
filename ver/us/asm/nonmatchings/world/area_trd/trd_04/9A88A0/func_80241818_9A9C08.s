@@ -113,7 +113,7 @@ glabel func_80241818_9A9C08
 /* 9A9DA4 802419B4 E7A0003C */  swc1      $f0, 0x3c($sp)
 /* 9A9DA8 802419B8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 9A9DAC 802419BC 8E440080 */  lw        $a0, 0x80($s2)
-/* 9A9DB0 802419C0 0C0372DF */  jal       func_800DCB7C
+/* 9A9DB0 802419C0 0C0372DF */  jal       npc_raycast_down_sides
 /* 9A9DB4 802419C4 27A70040 */   addiu    $a3, $sp, 0x40
 /* 9A9DB8 802419C8 10400003 */  beqz      $v0, .L802419D8
 /* 9A9DBC 802419CC 00000000 */   nop

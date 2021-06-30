@@ -195,7 +195,7 @@ glabel appendGfx_npc_blur
 /* 164F8 8003B0F8 0000302D */  daddu     $a2, $zero, $zero
 /* 164FC 8003B0FC AFB70010 */  sw        $s7, 0x10($sp)
 /* 16500 8003B100 8E040024 */  lw        $a0, 0x24($s0)
-/* 16504 8003B104 0C0B78F6 */  jal       func_802DE3D8
+/* 16504 8003B104 0C0B78F6 */  jal       spr_draw_npc_sprite
 /* 16508 8003B108 00C0382D */   daddu    $a3, $a2, $zero
 /* 1650C 8003B10C 0800EBAD */  j         .L8003AEB4
 /* 16510 8003B110 2652FFFF */   addiu    $s2, $s2, -1
@@ -205,7 +205,7 @@ glabel appendGfx_npc_blur
 /* 1651C 8003B11C 4600A20D */  trunc.w.s $f8, $f20
 /* 16520 8003B120 44054000 */  mfc1      $a1, $f8
 /* 16524 8003B124 0000302D */  daddu     $a2, $zero, $zero
-/* 16528 8003B128 0C0B7710 */  jal       render_sprite
+/* 16528 8003B128 0C0B7710 */  jal       spr_draw_player_sprite
 /* 1652C 8003B12C 00C0382D */   daddu    $a3, $a2, $zero
 /* 16530 8003B130 0800EBAD */  j         .L8003AEB4
 /* 16534 8003B134 2652FFFF */   addiu    $s2, $s2, -1

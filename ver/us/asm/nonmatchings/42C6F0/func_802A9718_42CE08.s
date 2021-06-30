@@ -12,7 +12,7 @@ glabel func_802A9718_42CE08
 .L802A9734:
 /* 42CE24 802A9734 8E040004 */  lw        $a0, 4($s0)
 /* 42CE28 802A9738 26100004 */  addiu     $s0, $s0, 4
-/* 42CE2C 802A973C 0C0511EA */  jal       draw_icon_0
+/* 42CE2C 802A973C 0C0511EA */  jal       draw_hud_element_clipped
 /* 42CE30 802A9740 26310001 */   addiu    $s1, $s1, 1
 /* 42CE34 802A9744 2A22000F */  slti      $v0, $s1, 0xf
 /* 42CE38 802A9748 1440FFFA */  bnez      $v0, .L802A9734

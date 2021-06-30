@@ -150,7 +150,7 @@ glabel appendGfx_player_spin
 /* 7ADD8 800E1928 0260202D */  daddu     $a0, $s3, $zero
 /* 7ADDC 800E192C 27A50120 */  addiu     $a1, $sp, 0x120
 /* 7ADE0 800E1930 27A60124 */  addiu     $a2, $sp, 0x124
-/* 7ADE4 800E1934 0C03964E */  jal       func_800E5938
+/* 7ADE4 800E1934 0C03964E */  jal       phys_get_spin_history
 /* 7ADE8 800E1938 27A70128 */   addiu    $a3, $sp, 0x128
 /* 7ADEC 800E193C 8FA60124 */  lw        $a2, 0x124($sp)
 /* 7ADF0 800E1940 3C028000 */  lui       $v0, 0x8000
@@ -296,7 +296,7 @@ glabel appendGfx_player_spin
 /* 7B010 800E1B60 AFA20010 */  sw        $v0, 0x10($sp)
 /* 7B014 800E1B64 0000282D */  daddu     $a1, $zero, $zero
 /* 7B018 800E1B68 00A0302D */  daddu     $a2, $a1, $zero
-/* 7B01C 800E1B6C 0C0B7710 */  jal       render_sprite
+/* 7B01C 800E1B6C 0C0B7710 */  jal       spr_draw_player_sprite
 /* 7B020 800E1B70 00A0382D */   daddu    $a3, $a1, $zero
 /* 7B024 800E1B74 26730001 */  addiu     $s3, $s3, 1
 /* 7B028 800E1B78 2A620002 */  slti      $v0, $s3, 2

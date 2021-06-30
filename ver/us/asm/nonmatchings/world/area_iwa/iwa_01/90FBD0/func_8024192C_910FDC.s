@@ -17,7 +17,7 @@ glabel func_8024192C_910FDC
 /* 91100C 8024195C 8E020000 */  lw        $v0, ($s0)
 /* 911010 80241960 24050321 */  addiu     $a1, $zero, 0x321
 /* 911014 80241964 00431024 */  and       $v0, $v0, $v1
-/* 911018 80241968 0C012530 */  jal       func_800494C0
+/* 911018 80241968 0C012530 */  jal       ai_enemy_play_sound
 /* 91101C 8024196C AE020000 */   sw       $v0, ($s0)
 /* 911020 80241970 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* 911024 80241974 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)

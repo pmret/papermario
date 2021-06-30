@@ -37,7 +37,7 @@ glabel pause_spirits_init
 /* 140718 8024D3D8 0220282D */  daddu     $a1, $s1, $zero
 /* 14071C 8024D3DC 8E240000 */  lw        $a0, ($s1)
 /* 140720 8024D3E0 26310010 */  addiu     $s1, $s1, 0x10
-/* 140724 8024D3E4 0C0B783B */  jal       func_802DE0EC
+/* 140724 8024D3E4 0C0B783B */  jal       spr_load_npc_sprite
 /* 140728 8024D3E8 26100001 */   addiu    $s0, $s0, 1
 /* 14072C 8024D3EC AE420000 */  sw        $v0, ($s2)
 /* 140730 8024D3F0 2A020007 */  slti      $v0, $s0, 7

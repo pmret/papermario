@@ -8,10 +8,10 @@ glabel func_802403D8_DDF6E8
 /* DDF6F4 802403E4 00000000 */  nop
 /* DDF6F8 802403E8 4405A000 */  mfc1      $a1, $f20
 /* DDF6FC 802403EC AFBF0010 */  sw        $ra, 0x10($sp)
-/* DDF700 802403F0 0C04E035 */  jal       set_transition_stencil_alpha
+/* DDF700 802403F0 0C04E035 */  jal       set_screen_overlay_alpha
 /* DDF704 802403F4 24040001 */   addiu    $a0, $zero, 1
 /* DDF708 802403F8 4405A000 */  mfc1      $a1, $f20
-/* DDF70C 802403FC 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* DDF70C 802403FC 0C04DF69 */  jal       set_screen_overlay_params_back
 /* DDF710 80240400 2404000B */   addiu    $a0, $zero, 0xb
 /* DDF714 80240404 8FBF0010 */  lw        $ra, 0x10($sp)
 /* DDF718 80240408 D7B40018 */  ldc1      $f20, 0x18($sp)

@@ -129,7 +129,7 @@ glabel func_80240534_A10DB4
 /* A10FA4 80240724 E7B60010 */  swc1      $f22, 0x10($sp)
 /* A10FA8 80240728 E7BE0014 */  swc1      $f30, 0x14($sp)
 /* A10FAC 8024072C E7A0001C */  swc1      $f0, 0x1c($sp)
-/* A10FB0 80240730 0C01BF8C */  jal       func_8006FE30
+/* A10FB0 80240730 0C01BF8C */  jal       playFX_0F
 /* A10FB4 80240734 E7B40018 */   swc1     $f20, 0x18($sp)
 /* A10FB8 80240738 24020002 */  addiu     $v0, $zero, 2
 .L8024073C:

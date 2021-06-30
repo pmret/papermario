@@ -17,11 +17,11 @@ glabel pause_stats_init
 .L80246AF8:
 /* 139E38 80246AF8 8E240000 */  lw        $a0, ($s1)
 /* 139E3C 80246AFC 26310004 */  addiu     $s1, $s1, 4
-/* 139E40 80246B00 0C050529 */  jal       create_icon
+/* 139E40 80246B00 0C050529 */  jal       create_hud_element
 /* 139E44 80246B04 26100001 */   addiu    $s0, $s0, 1
 /* 139E48 80246B08 0040202D */  daddu     $a0, $v0, $zero
 /* 139E4C 80246B0C 24050080 */  addiu     $a1, $zero, 0x80
-/* 139E50 80246B10 0C051280 */  jal       set_icon_flags
+/* 139E50 80246B10 0C051280 */  jal       set_hud_element_flags
 /* 139E54 80246B14 AE440000 */   sw       $a0, ($s2)
 /* 139E58 80246B18 2A02000C */  slti      $v0, $s0, 0xc
 /* 139E5C 80246B1C 1440FFF6 */  bnez      $v0, .L80246AF8

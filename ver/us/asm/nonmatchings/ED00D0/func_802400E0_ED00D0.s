@@ -11,7 +11,7 @@ glabel func_802400E0_ED00D0
 /* ED00E8 802400F8 F7B80028 */  sdc1      $f24, 0x28($sp)
 /* ED00EC 802400FC 4487C000 */  mtc1      $a3, $f24
 /* ED00F0 80240100 AFBF0014 */  sw        $ra, 0x14($sp)
-/* ED00F4 80240104 0C01B198 */  jal       __osGetCause
+/* ED00F4 80240104 0C01B198 */  jal       osGetCause
 /* ED00F8 80240108 0080802D */   daddu    $s0, $a0, $zero
 /* ED00FC 8024010C 4616A582 */  mul.s     $f22, $f20, $f22
 /* ED0100 80240110 00000000 */  nop

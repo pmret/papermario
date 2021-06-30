@@ -45,7 +45,7 @@ glabel func_802BD558_319AC8
 /* 319B68 802BD5F8 27A20040 */  addiu     $v0, $sp, 0x40
 /* 319B6C 802BD5FC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 319B70 802BD600 27A20044 */  addiu     $v0, $sp, 0x44
-/* 319B74 802BD604 0C03791B */  jal       func_800DE46C
+/* 319B74 802BD604 0C03791B */  jal       player_raycast_below_cam_relative
 /* 319B78 802BD608 AFA20020 */   sw       $v0, 0x20($sp)
 /* 319B7C 802BD60C 0040882D */  daddu     $s1, $v0, $zero
 /* 319B80 802BD610 0C016F6A */  jal       get_collider_type_by_id

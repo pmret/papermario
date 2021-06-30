@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80243380_803C00
+glabel filemenu_update_show_name_input_803C00
 /* 803C00 80243380 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 803C04 80243384 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 803C08 80243388 0080982D */  daddu     $s3, $a0, $zero
@@ -55,7 +55,7 @@ glabel func_80243380_803C00
 /* 803CC8 80243448 0000202D */  daddu     $a0, $zero, $zero
 /* 803CCC 8024344C 3C058024 */  lui       $a1, %hi(func_80242FA4_803824)
 /* 803CD0 80243450 24A52FA4 */  addiu     $a1, $a1, %lo(func_80242FA4_803824)
-/* 803CD4 80243454 0C048C56 */  jal       create_dynamic_entity_world
+/* 803CD4 80243454 0C048C56 */  jal       create_generic_entity_world
 /* 803CD8 80243458 AE020000 */   sw       $v0, ($s0)
 /* 803CDC 8024345C 0260202D */  daddu     $a0, $s3, $zero
 /* 803CE0 80243460 3C05FD05 */  lui       $a1, 0xfd05

@@ -16,11 +16,11 @@ glabel func_8013E904
 /* D5030 8013E930 8E93002C */  lw        $s3, 0x2c($s4)
 /* D5034 8013E934 3C120001 */  lui       $s2, 1
 /* D5038 8013E938 96640008 */  lhu       $a0, 8($s3)
-/* D503C 8013E93C 0C04BF84 */  jal       func_8012FE10
+/* D503C 8013E93C 0C04BF84 */  jal       integer_log
 /* D5040 8013E940 36521630 */   ori      $s2, $s2, 0x1630
 /* D5044 8013E944 24050002 */  addiu     $a1, $zero, 2
 /* D5048 8013E948 9664000A */  lhu       $a0, 0xa($s3)
-/* D504C 8013E94C 0C04BF84 */  jal       func_8012FE10
+/* D504C 8013E94C 0C04BF84 */  jal       integer_log
 /* D5050 8013E950 0040B02D */   daddu    $s6, $v0, $zero
 /* D5054 8013E954 3C108007 */  lui       $s0, %hi(gMatrixListPos)
 /* D5058 8013E958 261041F0 */  addiu     $s0, $s0, %lo(gMatrixListPos)

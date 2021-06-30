@@ -12,7 +12,7 @@ glabel pause_cleanup
 .L80244724:
 /* 137A64 80244724 8E240000 */  lw        $a0, ($s1)
 /* 137A68 80244728 26310004 */  addiu     $s1, $s1, 4
-/* 137A6C 8024472C 0C05123D */  jal       free_icon
+/* 137A6C 8024472C 0C05123D */  jal       free_hud_element
 /* 137A70 80244730 26100001 */   addiu    $s0, $s0, 1
 /* 137A74 80244734 2A020008 */  slti      $v0, $s0, 8
 /* 137A78 80244738 1440FFFA */  bnez      $v0, .L80244724
@@ -27,7 +27,7 @@ glabel pause_cleanup
 .L8024475C:
 /* 137A9C 8024475C 8E240000 */  lw        $a0, ($s1)
 /* 137AA0 80244760 26310004 */  addiu     $s1, $s1, 4
-/* 137AA4 80244764 0C0B797A */  jal       func_802DE5E8
+/* 137AA4 80244764 0C0B797A */  jal       spr_free_sprite
 /* 137AA8 80244768 26100001 */   addiu    $s0, $s0, 1
 /* 137AAC 8024476C 2A020003 */  slti      $v0, $s0, 3
 /* 137AB0 80244770 1440FFFA */  bnez      $v0, .L8024475C

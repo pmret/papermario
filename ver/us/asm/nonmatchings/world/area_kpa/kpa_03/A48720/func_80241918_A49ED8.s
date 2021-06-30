@@ -62,7 +62,7 @@ glabel func_80241918_A49ED8
 .L802419FC:
 /* A49FBC 802419FC 0200202D */  daddu     $a0, $s0, $zero
 /* A49FC0 80241A00 240520D5 */  addiu     $a1, $zero, 0x20d5
-/* A49FC4 80241A04 0C012530 */  jal       func_800494C0
+/* A49FC4 80241A04 0C012530 */  jal       ai_enemy_play_sound
 /* A49FC8 80241A08 0000302D */   daddu    $a2, $zero, $zero
 /* A49FCC 80241A0C 86440008 */  lh        $a0, 8($s2)
 /* A49FD0 80241A10 0C00FB3A */  jal       get_enemy

@@ -26,12 +26,12 @@ glabel filemenu_init
 .L80244934:
 /* 165194 80244934 8E240000 */  lw        $a0, ($s1)
 /* 165198 80244938 26310004 */  addiu     $s1, $s1, 4
-/* 16519C 8024493C 0C050529 */  jal       create_icon
+/* 16519C 8024493C 0C050529 */  jal       create_hud_element
 /* 1651A0 80244940 26100001 */   addiu    $s0, $s0, 1
 /* 1651A4 80244944 0040202D */  daddu     $a0, $v0, $zero
 /* 1651A8 80244948 3C052000 */  lui       $a1, 0x2000
 /* 1651AC 8024494C 34A50080 */  ori       $a1, $a1, 0x80
-/* 1651B0 80244950 0C051280 */  jal       set_icon_flags
+/* 1651B0 80244950 0C051280 */  jal       set_hud_element_flags
 /* 1651B4 80244954 AE440000 */   sw       $a0, ($s2)
 /* 1651B8 80244958 1A00FFF6 */  blez      $s0, .L80244934
 /* 1651BC 8024495C 26520004 */   addiu    $s2, $s2, 4
@@ -124,7 +124,7 @@ glabel filemenu_init
 /* 1652F8 80244A98 0000802D */  daddu     $s0, $zero, $zero
 /* 1652FC 80244A9C 30C50001 */  andi      $a1, $a2, 1
 /* 165300 80244AA0 00052840 */  sll       $a1, $a1, 1
-/* 165304 80244AA4 0C090B65 */  jal       func_80242D94
+/* 165304 80244AA4 0C090B65 */  jal       filemenu_set_selected
 /* 165308 80244AA8 00063042 */   srl      $a2, $a2, 1
 .L80244AAC:
 /* 16530C 80244AAC 8E240000 */  lw        $a0, ($s1)

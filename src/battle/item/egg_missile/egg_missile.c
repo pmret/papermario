@@ -114,17 +114,17 @@ s32 N(modelCommandList)[] = {
 Script N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_EGG_MISSILE;
     await N(UseItemWithEffect);
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
-    func_802D3474(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 20;
     SI_VAR(1) += 42;
     SI_VAR(2) += 5;
-    func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
     GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -132,14 +132,14 @@ Script N(main) = SCRIPT({
         SI_VAR(0) = 0;
         loop 18 {
             SI_VAR(0) += 60;
-            func_802D3840(SI_VAR(10), 0, 0, SI_VAR(0));
+            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
             sleep 1;
         }
     }
-    func_802D39FC(SI_VAR(10), 1.0);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 1.0);
     SI_VAR(2) += 5;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    func_802D3624(SI_VAR(10));
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
+    DeleteVirtualEntity(SI_VAR(10));
     PlaySound(SOUND_UNKNOWN_2010);
     N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     spawn {

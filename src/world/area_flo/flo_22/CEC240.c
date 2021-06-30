@@ -287,8 +287,8 @@ Script N(80240E84) = SCRIPT({
 Script N(80241028) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerInput(FALSE);
-    func_802D663C();
-    func_802D6954();
+    ShowConsumableChoicePopup();
+    CloseChoicePopup();
     DisablePlayerInput(TRUE);
     SI_VAR(8) = SI_VAR(0);
     match SI_VAR(8) {
@@ -371,9 +371,9 @@ static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_80240000_CEC240)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

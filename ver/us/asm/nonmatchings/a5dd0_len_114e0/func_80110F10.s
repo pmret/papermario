@@ -94,7 +94,7 @@ glabel func_80110F10
 /* A7768 80111068 0200282D */  daddu     $a1, $s0, $zero
 /* A776C 8011106C 0240302D */  daddu     $a2, $s2, $zero
 .L80111070:
-/* A7770 80111070 0C04442D */  jal       func_801110B4
+/* A7770 80111070 0C04442D */  jal       entity_anim_make_vertex_pointers
 /* A7774 80111074 00000000 */   nop
 .L80111078:
 /* A7778 80111078 26B50001 */  addiu     $s5, $s5, 1

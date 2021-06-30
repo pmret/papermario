@@ -1,21 +1,21 @@
 #include "common.h"
 
-void func_802E246C(Entity* entity, void* arg1, void* arg2);
+void entity_shattering_init_pieces(Entity* entity, void* arg1, void* arg2);
 
-void func_802E1400(Entity* entity) {
+void entity_GreenStompSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     struct802E1400* temp = entity->dataBuf;
 
     if (entity->collisionFlags & 1) {
         if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
             || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
-            exec_entity_updatecmd(entity);
+            exec_entity_commandlist(entity);
             temp->unk_22 = 8;
         }
     }
 }
 
-void func_802E1460(Entity* entity) {
+void entity_GreenStompSwitch_retract(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     u16 temp2 = temp->unk_22--;
 
@@ -23,12 +23,12 @@ void func_802E1460(Entity* entity) {
         entity->position.y -= 1.8625;
         return;
     }
-    func_80110678(entity);
-    exec_entity_updatecmd(entity);
+    entity_start_script(entity);
+    exec_entity_commandlist(entity);
     temp->unk_22 = 8;
 }
 
-void func_802E14D8(Entity* entity) {
+void entity_GreenStompSwitch_extend(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     u16 temp2 = temp->unk_22--;
 
@@ -36,13 +36,13 @@ void func_802E14D8(Entity* entity) {
         entity->position.y += 1.8625;
         return;
     }
-    exec_entity_updatecmd(entity);
+    exec_entity_commandlist(entity);
     temp->unk_22 = 8;
 }
 
-void func_801125E8(f32*, f32*, f32*, f32*, f32*, f32*);
+void entity_raycast_down(f32*, f32*, f32*, f32*, f32*, f32*);
 
-void func_802E153C(Entity* entity) {
+void entity_switch_fall_down(Entity* entity) {
     struct802E1400* temp_s1 = entity->dataBuf;
     f32 hitDepth = 10.0f;
     f32 x = entity->position.x;
@@ -51,7 +51,7 @@ void func_802E153C(Entity* entity) {
     f32 hitYaw;
     f32 hitPitch;
 
-    func_801125E8(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
+    entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
 
     if ((entity->position.y != y) && (entity->position.y > y)) {
         f32 var = temp_s1->unk_00.x;
@@ -64,36 +64,36 @@ void func_802E153C(Entity* entity) {
     }
 }
 
-void func_802E1614(Entity* entity) {
+void entity_HugeBlueSwitch_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (entity->collisionFlags & 1) {
         if ((playerStatus->actionState == ACTION_STATE_GROUND_POUND)
             || (playerStatus->actionState == ACTION_STATE_ULTRA_POUND)) {
-            exec_entity_updatecmd(entity);
+            exec_entity_commandlist(entity);
         }
     }
 }
 
-void func_802E1660(Entity* entity) {
+void entity_small_switch_idle(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp2 = &D_8010EBB0;
 
-    func_802E153C(entity);
+    entity_switch_fall_down(entity);
 
     if (entity->collisionFlags & 0x40) {
         if (playerStatus->actionState == ACTION_STATE_HAMMER) {
             if (gPlayerData.hammerLevel < 0) {
                 return;
             }
-            exec_entity_updatecmd(entity);
+            exec_entity_commandlist(entity);
 
             if (temp->attachedEntity == NULL) {
                 return;
             }
 
-            exec_entity_updatecmd(temp->attachedEntity);
+            exec_entity_commandlist(temp->attachedEntity);
             return;
         }
     }
@@ -112,22 +112,22 @@ void func_802E1660(Entity* entity) {
         }
     }
 
-    exec_entity_updatecmd(entity);
+    exec_entity_commandlist(entity);
 
     if (temp->attachedEntity == NULL) {
         return;
     }
 
-    exec_entity_updatecmd(temp->attachedEntity);
+    exec_entity_commandlist(temp->attachedEntity);
 }
 
-void func_802E1740(Entity* entity) {
+void entity_RedSwitch_wait_and_reset(Entity* entity) {
     if (!(entity->collisionFlags & 1)) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E176C(Entity* entity) {
+void entity_base_switch_anim_init(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
 
     temp->unk_00.x = 1.0f;
@@ -139,7 +139,7 @@ void func_802E176C(Entity* entity) {
 
 #ifdef NON_MATCHING
 // needs rodata support
-s32 func_802E17A8(Entity* entity) {
+s32 entity_RedSwitch_animate_scale(Entity* entity) {
     f32 temp_f0;
     f32 temp_f2;
     f32 temp_f4;
@@ -303,26 +303,26 @@ s32 func_802E17A8(Entity* entity) {
             break;
     }
 
-    func_802E153C(entity);
+    entity_switch_fall_down(entity);
     if (phi_s2 == 2) {
         temp_s0->unk_10 = 0;
         temp_s0->unk_11 = 0;
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 #else
-INCLUDE_ASM(s32, "102C80", func_802E17A8, Entity* entity);
+INCLUDE_ASM(s32, "102C80", entity_RedSwitch_animate_scale, Entity* entity);
 #endif
 
-void func_802E1EA8(Entity* entity) {
+void entity_base_switch_start_bound_script(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     set_area_flag(temp->unk_20);
-    func_80110678(entity);
+    entity_start_script(entity);
 }
 
 #ifdef NON_MATCHING
 // needs rodata support
-void func_802E1EDC(Entity* entity) {
+void entity_base_switch_animate_scale(Entity* entity) {
     f32 temp_f0;
     f32 temp_f4;
     f32 temp_f6;
@@ -449,23 +449,23 @@ void func_802E1EDC(Entity* entity) {
             break;
     }
 
-    func_802E153C(entity);
+    entity_switch_fall_down(entity);
     if (phi_s2 == 2) {
         temp_s0->unk_10 = 0;
         temp_s0->unk_11 = 0;
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 
     temp_s0->unk_24++;
     if ((temp_s0->unk_24 == 10) && (temp_s0->attachedEntity == NULL)) {
-        func_80072230(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
+        playFX_6F(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 0x3C);
     }
 }
 #else
-INCLUDE_ASM(void, "102C80", func_802E1EDC, Entity* entity);
+INCLUDE_ASM(void, "102C80", entity_base_switch_animate_scale, Entity* entity);
 #endif
 
-void func_802E234C(Entity* entity) {
+void entity_base_switch_init(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     struct802E1400* temp = entity->dataBuf;
 
@@ -475,11 +475,11 @@ void func_802E234C(Entity* entity) {
     temp->unk_14.z = 1.0f;
 }
 
-void entity_init_BlueSwitch(Entity* entity) {
+void entity_BlueSwitch_init(Entity* entity) {
     Entity* temp_v0_2;
     struct802E1400* temp = entity->dataBuf;
 
-    func_802E234C(entity);
+    entity_base_switch_init(entity);
     if (D_8015C7D0[0] == 2) {
         D_802EB3A0 = entity;
         return;
@@ -496,10 +496,10 @@ void entity_init_BlueSwitch(Entity* entity) {
     }
 }
 
-void entity_init_HugeBlueSwitch(Entity* entity) {
+void entity_HugeBlueSwitch_init(Entity* entity) {
     struct802E1400* temp;
 
-    func_802E234C(entity);
+    entity_base_switch_init(entity);
     temp = entity->dataBuf;
     entity->scale.x = 3.0f;
     entity->scale.y = 3.0f;
@@ -509,18 +509,18 @@ void entity_init_HugeBlueSwitch(Entity* entity) {
     temp->unk_14.z = 3.0f;
 }
 
-void func_802E2450(Entity* entity) {
-    func_802E3650(entity);
+void entity_BrickBlock_idle(Entity* entity) {
+    entity_base_block_idle(entity);
 }
 
 
-INCLUDE_ASM(void, "102C80", func_802E246C, Entity* entity, void* arg1, void* arg2);
+INCLUDE_ASM(void, "102C80", entity_shattering_init_pieces, Entity* entity, void* arg1, void* arg2);
 
-INCLUDE_ASM(void, "102C80", func_802E263C, Entity* entity);
+INCLUDE_ASM(void, "102C80", entity_shattering_idle, Entity* entity);
 
 #ifdef NON_MATCHING
 // display list issues
-void func_802E2BA4(s32 entityIndex) {
+void entity_shattering_setupGfx(s32 entityIndex) {
     Gfx* temp_s2;
     struct802E1400* temp_s4;
     struct802E2BA4* phi_fp;
@@ -570,5 +570,5 @@ void func_802E2BA4(s32 entityIndex) {
     gMasterGfxPos = temp_s2;
 }
 #else
-INCLUDE_ASM(s32, "102C80", func_802E2BA4);
+INCLUDE_ASM(s32, "102C80", entity_shattering_setupGfx);
 #endif

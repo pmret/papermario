@@ -13,9 +13,9 @@ ApiStatus func_802A10A4_74AE34(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
 
     if (script->varTable[10] == 0) {
-        func_80070B50(TRUE, var0 + 30, var1 + 25, var2, 45.0f);
+        playFX_32(TRUE, var0 + 30, var1 + 25, var2, 45.0f);
     } else {
-        func_80070B50(FALSE, var0 + 30, var1 + 25, var2, 45.0f);
+        playFX_32(FALSE, var0 + 30, var1 + 25, var2, 45.0f);
     }
 
     return ApiStatus_DONE2;

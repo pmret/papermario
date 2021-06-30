@@ -14,7 +14,7 @@ glabel func_802713B0
 /* 19FCB4 802713D4 C440008C */  lwc1      $f0, 0x8c($v0)
 /* 19FCB8 802713D8 46800020 */  cvt.s.w   $f0, $f0
 /* 19FCBC 802713DC 44070000 */  mfc1      $a3, $f0
-/* 19FCC0 802713E0 0C01C2BC */  jal       func_80070AF0
+/* 19FCC0 802713E0 0C01C2BC */  jal       playFX_31
 /* 19FCC4 802713E4 24040002 */   addiu    $a0, $zero, 2
 /* 19FCC8 802713E8 0040282D */  daddu     $a1, $v0, $zero
 /* 19FCCC 802713EC 8CA2000C */  lw        $v0, 0xc($a1)

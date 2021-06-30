@@ -221,11 +221,11 @@ ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus DeletePartner(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
-    delete_actor(battleStatus->partnerActor);
+    btl_delete_actor(battleStatus->partnerActor);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802807D0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionCommandResult(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var = *script->ptrReadPos;
     s32 actionSuccess = battleStatus->actionSuccess;

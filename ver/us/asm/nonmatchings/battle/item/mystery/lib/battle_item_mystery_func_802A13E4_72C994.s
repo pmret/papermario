@@ -35,7 +35,7 @@ glabel battle_item_mystery_func_802A13E4_72C994
 glabel L802A143C_72C9EC
 /* 72C9EC 802A143C 3C05802A */  lui       $a1, %hi(battle_item_mystery_func_802A123C_72C7EC)
 /* 72C9F0 802A1440 24A5123C */  addiu     $a1, $a1, %lo(battle_item_mystery_func_802A123C_72C7EC)
-/* 72C9F4 802A1444 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* 72C9F4 802A1444 0C048C8F */  jal       create_generic_entity_frontUI
 /* 72C9F8 802A1448 0000202D */   daddu    $a0, $zero, $zero
 /* 72C9FC 802A144C 3C01802A */  lui       $at, %hi(D_802A25F8)
 /* 72CA00 802A1450 AC2225F8 */  sw        $v0, %lo(D_802A25F8)($at)
@@ -55,7 +55,7 @@ glabel L802A143C_72C9EC
 /* 72CA38 802A1488 AE020000 */   sw       $v0, ($s0)
 /* 72CA3C 802A148C 24040001 */  addiu     $a0, $zero, 1
 /* 72CA40 802A1490 27A50010 */  addiu     $a1, $sp, 0x10
-/* 72CA44 802A1494 0C04DF70 */  jal       func_80137DC0
+/* 72CA44 802A1494 0C04DF70 */  jal       get_screen_overlay_params
 /* 72CA48 802A1498 27A60014 */   addiu    $a2, $sp, 0x14
 /* 72CA4C 802A149C C7A20014 */  lwc1      $f2, 0x14($sp)
 /* 72CA50 802A14A0 3C014357 */  lui       $at, 0x4357
@@ -89,11 +89,11 @@ glabel L802A143C_72C9EC
 /* 72CAB4 802A1504 000210C0 */  sll       $v0, $v0, 3
 /* 72CAB8 802A1508 00531021 */  addu      $v0, $v0, $s3
 /* 72CABC 802A150C 8C440000 */  lw        $a0, ($v0)
-/* 72CAC0 802A1510 0C050529 */  jal       create_icon
+/* 72CAC0 802A1510 0C050529 */  jal       create_hud_element
 /* 72CAC4 802A1514 26100001 */   addiu    $s0, $s0, 1
 /* 72CAC8 802A1518 0040202D */  daddu     $a0, $v0, $zero
 /* 72CACC 802A151C 24050080 */  addiu     $a1, $zero, 0x80
-/* 72CAD0 802A1520 0C051280 */  jal       set_icon_flags
+/* 72CAD0 802A1520 0C051280 */  jal       set_hud_element_flags
 /* 72CAD4 802A1524 AE240000 */   sw       $a0, ($s1)
 /* 72CAD8 802A1528 2A020007 */  slti      $v0, $s0, 7
 /* 72CADC 802A152C 1440FFED */  bnez      $v0, .L802A14E4
@@ -310,12 +310,12 @@ glabel L802A17CC_72CD7C
 /* 72CDE4 802A1834 A642017A */  sh        $v0, 0x17a($s2)
 /* 72CDE8 802A1838 00021400 */  sll       $v0, $v0, 0x10
 /* 72CDEC 802A183C 00021403 */  sra       $v0, $v0, 0x10
-/* 72CDF0 802A1840 0C048D70 */  jal       free_dynamic_entity
+/* 72CDF0 802A1840 0C048D70 */  jal       free_generic_entity
 /* 72CDF4 802A1844 ACC20084 */   sw       $v0, 0x84($a2)
 .L802A1848:
 /* 72CDF8 802A1848 8E240000 */  lw        $a0, ($s1)
 /* 72CDFC 802A184C 26310004 */  addiu     $s1, $s1, 4
-/* 72CE00 802A1850 0C05123D */  jal       free_icon
+/* 72CE00 802A1850 0C05123D */  jal       free_hud_element
 /* 72CE04 802A1854 26100001 */   addiu    $s0, $s0, 1
 /* 72CE08 802A1858 2A020007 */  slti      $v0, $s0, 7
 /* 72CE0C 802A185C 1440FFFA */  bnez      $v0, .L802A1848

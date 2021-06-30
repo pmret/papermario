@@ -142,7 +142,7 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -398,9 +398,9 @@ ApiStatus N(func_8024230C_B36EDC)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -446,7 +446,7 @@ ApiStatus N(func_80242524_B370F4)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        free_dynamic_entity(D_8024DFC0);
+        free_generic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -529,9 +529,9 @@ void N(func_80242B94_B37764)(void) {
     s32 var = get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 */
@@ -539,7 +539,7 @@ void N(func_80242B94_B37764)(void) {
 INCLUDE_ASM(s32, "world/area_jan/jan_03/B34BD0", func_80242C00_B377D0);
 /*
 ApiStatus N(func_80242C00_B377D0)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */

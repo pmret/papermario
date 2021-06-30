@@ -508,7 +508,7 @@ ApiStatus func_80045838(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_800494C0(npc, var2, var3);
+    ai_enemy_play_sound(npc, var2, var3);
     return ApiStatus_DONE2;
 }
 
@@ -541,7 +541,7 @@ ApiStatus func_80045900(ScriptInstance* script, s32 isInitialCall) {
             f32 z = npc->pos.z;
             f32 a = 100.0f;
 
-            if (func_800DCB7C(npc->unk_80, &x, &y, &z, &a) != 0) {
+            if (npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &a) != 0) {
                 npc->pos.y = y;
             }
             npc->flags &= ~0x800;

@@ -94,7 +94,7 @@ ApiStatus GetModelIndex(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C8EE4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus InvalidateModelTransform(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode modelID = get_variable(script, *args++);
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
@@ -140,7 +140,7 @@ ApiStatus SetTexPanner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetCustomGfxEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode treeIndex = get_variable(script, *args++);
     Bytecode enable = get_variable(script, *args++);
@@ -154,7 +154,7 @@ ApiStatus SetModelFlag10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetModelCustomGfx(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 treeIndex = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -164,14 +164,14 @@ ApiStatus func_802C90FC(ScriptInstance* script, s32 isInitialCall) {
     treeIndex = get_model_list_index_from_tree_index(treeIndex);
     model = get_model_from_list_index(treeIndex);
 
-    func_8011BC7C(model, var2, var3);
+    set_mdl_custom_gfx_set(model, var2, var3);
     if (var2 != -1) {
         model->flags |= 0x10;
     }
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C91A4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetModelTexVariant(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode treeIndex = get_variable(script, *args++);
     Bytecode var2 = get_variable(script, *args++);
@@ -241,7 +241,7 @@ ApiStatus SetCustomGfx(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_8011BCB4(var1, var2, var3);
+    set_custom_gfx(var1, var2, var3);
     return ApiStatus_DONE2;
 }
 
@@ -277,22 +277,22 @@ ApiStatus SetModelFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "evt/map_api", func_802C95A0);
+INCLUDE_ASM(s32, "evt/map_api", apply_transform_to_children);
 
-ApiStatus func_802C971C(ScriptInstance* script, s32 isInitialCall) {
-    func_8011B37C((u16)get_variable(script, *script->ptrReadPos));
+ApiStatus MakeTransformGroup(ScriptInstance* script, s32 isInitialCall) {
+    make_transform_group((u16)get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetTransformGroupEnabled(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     u16 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
 
     if (var2 != 0) {
-        func_8011B5D0(var1);
+        enable_transform_group(var1);
     } else {
-        func_8011B660(var1);
+        disable_transform_group(var1);
     }
     return ApiStatus_DONE2;
 }
@@ -300,12 +300,12 @@ ApiStatus func_802C9748(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args);
-    s32 index = func_8011B090(var1);
+    s32 index = get_transform_group_index(var1);
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
 
     if (index == -1) {
-        func_802C95A0(TranslateModel, script);
+        apply_transform_to_children(TranslateModel, script);
         return ApiStatus_DONE2;
     }
 
@@ -315,7 +315,7 @@ ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
     y = get_float_variable(script, *args++);
     z = get_float_variable(script, *args++);
 
-    transformGroup = func_8011B1C0(index);
+    transformGroup = get_transform_group(index);
 
     index = transformGroup->flags & 0x400; // TODO fix weird match
     if (!index) {
@@ -333,12 +333,12 @@ ApiStatus TranslateGroup(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = func_8011B090(get_variable(script, *args));
+    s32 index = get_transform_group_index(get_variable(script, *args));
     ModelTransformGroup* transformGroup;
     f32 a, x, y, z;
 
     if (index == -1) {
-        func_802C95A0(RotateModel, script);
+        apply_transform_to_children(RotateModel, script);
         return ApiStatus_DONE2;
     }
 
@@ -349,7 +349,7 @@ ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
     y = get_float_variable(script, *args++);
     z = get_float_variable(script, *args++);
 
-    transformGroup = func_8011B1C0(index);
+    transformGroup = get_transform_group(index);
 
     if (!(transformGroup->flags & 0x400)) {
         guRotateF(transformGroup->matrixB, a, x, y, z);
@@ -367,12 +367,12 @@ ApiStatus RotateGroup(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args);
-    s32 index = func_8011B090(var1);
+    s32 index = get_transform_group_index(var1);
     ModelTransformGroup* transformGroup;
     f32 x, y, z;
 
     if (index == -1) {
-        func_802C95A0(ScaleModel, script);
+        apply_transform_to_children(ScaleModel, script);
         return ApiStatus_DONE2;
     }
 
@@ -382,7 +382,7 @@ ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
     y = get_float_variable(script, *args++);
     z = get_float_variable(script, *args++);
 
-    transformGroup = func_8011B1C0(index);
+    transformGroup = get_transform_group(index);
 
     index = transformGroup->flags & 0x400; // TODO fix weird match
     if (!(index)) {
@@ -398,30 +398,30 @@ ApiStatus ScaleGroup(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C9B40(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetTransformGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     Bytecode var2 = *args++;
 
-    set_variable(script, var2, func_8011B090(var1));
+    set_variable(script, var2, get_transform_group_index(var1));
     return ApiStatus_DONE2;
 }
 
 ApiStatus EnableGroup(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 index = func_8011B090(get_variable(script, *args));
+    s32 index = get_transform_group_index(get_variable(script, *args));
     s32 flagUnset;
     ModelTransformGroup* transformGroup;
 
     if (index == -1) {
-        func_802C95A0(EnableModel, script);
+        apply_transform_to_children(EnableModel, script);
         return ApiStatus_DONE2;
     }
 
     args++;
 
     flagUnset = get_variable(script, *args++);
-    transformGroup = func_8011B1C0(index);
+    transformGroup = get_transform_group(index);
 
     for (index = transformGroup->minChildModelIndex; index <= transformGroup->maxChildModelIndex; index++) {
         Model* model = get_model_from_list_index(index);
@@ -435,13 +435,13 @@ ApiStatus EnableGroup(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802C9C70(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MakeLocalVertexCopy(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     u16 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_8011C164(var1, var2, var3);
+    mdl_make_local_vertex_copy(var1, var2, var3);
     return ApiStatus_DONE2;
 }
 
@@ -539,7 +539,7 @@ ApiStatus ResetFromLava(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-s32 func_802C9FD4(f32* outX, f32* outY, f32* outZ) {
+s32 get_lava_reset_pos(f32* outX, f32* outY, f32* outZ) {
     Vec4f *temp_v0;
     s32 temp_a0;
     LavaReset* lavaReset = gLavaResetList;

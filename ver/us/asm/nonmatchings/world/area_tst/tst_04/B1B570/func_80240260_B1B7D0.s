@@ -8,7 +8,7 @@ glabel func_80240260_B1B7D0
 /* B1B7DC 8024026C 3C058024 */  lui       $a1, %hi(func_8024029C_B1B80C)
 /* B1B7E0 80240270 24A5029C */  addiu     $a1, $a1, %lo(func_8024029C_B1B80C)
 /* B1B7E4 80240274 AFBF0014 */  sw        $ra, 0x14($sp)
-/* B1B7E8 80240278 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* B1B7E8 80240278 0C048C8F */  jal       create_generic_entity_frontUI
 /* B1B7EC 8024027C 0000202D */   daddu    $a0, $zero, $zero
 /* B1B7F0 80240280 8E03013C */  lw        $v1, 0x13c($s0)
 /* B1B7F4 80240284 AC620000 */  sw        $v0, ($v1)

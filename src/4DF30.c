@@ -4,10 +4,10 @@
 extern s32 D_800DC060;
 extern Stage* D_800DC064;
 
-INCLUDE_ASM(s32, "4DF30", func_80072B30);
+INCLUDE_ASM(s32, "4DF30", reset_battle_status);
 
-void func_80072BB0(void) {
-    func_80072B30();
+void ALT_reset_battle_status(void) {
+    reset_battle_status();
 }
 
 void func_80072BCC(s32 arg0) {
@@ -31,7 +31,7 @@ void load_battle_section(void) {
         D_800DC064 = &(*battleArea->stages)[gBattleStatus.unk_47C];
     }
 
-    func_80241190(1);
+    btl_set_state(1);
     gBattleStatus.unk_460 = 0;
 }
 #else
@@ -44,7 +44,7 @@ void set_battle_stage(s32 arg0) {
     gBattleStatus.unk_47C = arg0;
 }
 
-void func_80072CDC(s32 arg0) {
+void set_battle_formation(s32 arg0) {
     gBattleStatus.unk_484 = arg0;
 }
 

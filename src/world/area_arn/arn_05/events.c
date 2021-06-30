@@ -1113,7 +1113,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
@@ -1174,7 +1174,7 @@ void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y + script->functionTemp[2].s[enemy->territory->patrol.points].y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
     posY += script->functionTemp[2].s[enemy->territory->patrol.points].y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {
@@ -1255,6 +1255,6 @@ ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_802412C8_BE8EA8)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

@@ -1,6 +1,6 @@
 #include "common.h"
 
-void begin_state_intro(void) {
+void state_init_intro(void) {
     s8 unk_A8;
 
     gGameStatusPtr->loadMenuState = 0;
@@ -62,13 +62,13 @@ void begin_state_intro(void) {
             break;
     }
 
-    set_transition_stencil_zoom_1(D_800A0963, D_800A0954);
-    set_transition_stencil_color(1, D_800A095B, D_800A095D, D_800A095F);
+    set_screen_overlay_params_back(D_800A0963, D_800A0954);
+    set_screen_overlay_color(1, D_800A095B, D_800A095D, D_800A095F);
 
     intro_logos_update_fade();
 }
 
-INCLUDE_ASM(s32, "11a50_len_7a0", step_intro);
+INCLUDE_ASM(s32, "11a50_len_7a0", state_step_intro);
 
-void func_80036DE0(void) {
+void state_drawUI_intro(void) {
 }

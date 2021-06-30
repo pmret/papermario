@@ -59,10 +59,10 @@ Script N(main) = SCRIPT({
         jump UseMystery;
         return;
     }
-    func_802D3474(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 150;
-    func_802D36E0(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetOwnerTarget(0, 0);
     SetGoalToTarget(ACTOR_SELF);
     GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -70,18 +70,18 @@ Script N(main) = SCRIPT({
         SI_VAR(0) = 0;
         loop 18 {
             SI_VAR(0) += 0xFFFFFFC4;
-            func_802D3840(SI_VAR(10), 0, 0, SI_VAR(0));
+            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
             sleep 1;
         }
     }
-    func_802D39FC(SI_VAR(10), 0.6005859375);
+    SetVirtualEntityJumpGravity(SI_VAR(10), 0.6005859375);
     SI_VAR(2) += 5;
-    func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
     spawn {
         SI_VAR(0) += 60;
         SI_VAR(1) += 0;
-        func_802D3C58(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
-        func_802D3624(SI_VAR(10));
+        VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 16);
+        DeleteVirtualEntity(SI_VAR(10));
     }
     SetTargetActor(ACTOR_SELF, 0);
     SetGoalToTarget(ACTOR_SELF);

@@ -20,9 +20,9 @@ INCLUDE_ASM(s32, "B9D60", _update_message);
 
 INCLUDE_ASM(s32, "B9D60", render_messages);
 
-INCLUDE_ASM(s32, "B9D60", func_80124434);
+INCLUDE_ASM(s32, "B9D60", msg_play_speech_sound);
 
-INCLUDE_ASM(s32, "B9D60", func_80124570);
+INCLUDE_ASM(s32, "B9D60", msg_copy_to_print_buffer);
 
 INCLUDE_ASM(s32, "B9D60", initialize_printer);
 
@@ -30,15 +30,15 @@ INCLUDE_ASM(s32, "B9D60", dma_load_string);
 
 INCLUDE_ASM(s32, "B9D60", load_message_to_buffer);
 
-PrintContext* load_string(s32 stringID, s32* a1) {
-    return _load_string(stringID, a1, 0);
+PrintContext* msg_get_printer_for_string(s32 stringID, s32* a1) {
+    return _msg_get_printer_for_string(stringID, a1, 0);
 }
 
-INCLUDE_ASM(s32, "B9D60", _load_string);
+INCLUDE_ASM(s32, "B9D60", _get_printer_for_string);
 
-INCLUDE_ASM(s32, "B9D60", load_message_to_printer);
+INCLUDE_ASM(s32, "B9D60", msg_printer_load_string);
 
-INCLUDE_ASM(s32, "B9D60", clamp_printer_coords);
+INCLUDE_ASM(s32, "B9D60", msg_printer_set_origin_pos);
 
 s32 cancel_message(PrintContext* printContext) {
     if ((printContext->stateFlags & 2) == 0) {
@@ -61,52 +61,52 @@ void close_message(PrintContext* printContext) {
     printContext->stateFlags &= ~0x40;
 }
 
-INCLUDE_ASM(s32, "B9D60", func_80125C84);
+INCLUDE_ASM(s32, "B9D60", msg_get_print_char_width);
 
-INCLUDE_ASM(s32, "B9D60", get_char_width);
+INCLUDE_ASM(s32, "B9D60", msg_get_draw_char_width);
 
 INCLUDE_ASM(s32, "B9D60", get_string_properties);
 
 INCLUDE_ASM(s32, "B9D60", get_string_width);
 
-INCLUDE_ASM(s32, "B9D60", get_msg_lines);
+INCLUDE_ASM(s32, "B9D60", get_string_lines);
 
-INCLUDE_ASM(s32, "B9D60", draw_msg);
+INCLUDE_ASM(s32, "B9D60", draw_string);
 
-INCLUDE_ASM(s32, "B9D60", func_80126790);
+INCLUDE_ASM(s32, "B9D60", msg_update_rewind_arrow);
 
-INCLUDE_ASM(s32, "B9D60", func_80126EAC);
+INCLUDE_ASM(s32, "B9D60", msg_draw_rewind_arrow);
 
-INCLUDE_ASM(s32, "B9D60", func_80126F78);
+INCLUDE_ASM(s32, "B9D60", msg_draw_choice_pointer);
 
 INCLUDE_ASM(s32, "B9D60", draw_digit);
 
 INCLUDE_ASM(void, "B9D60", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
-void func_80127B70(s32 arg0) {
-    func_80127D90(arg0, 0, 0, 0, 0, 4, 0);
+void drawbox_message_delegate(s32 arg0) {
+    appendGfx_message(arg0, 0, 0, 0, 0, 4, 0);
 }
 
-INCLUDE_ASM(s32, "B9D60", func_80127BA4);
+INCLUDE_ASM(s32, "B9D60", draw_message_window);
 
-INCLUDE_ASM(s32, "B9D60", func_80127D90);
+INCLUDE_ASM(s32, "B9D60", appendGfx_message);
 
 
-void func_8012C2E0(void) {
+void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_8014C500);
 }
 
-INCLUDE_ASM(s32, "B9D60", func_8012C324);
+INCLUDE_ASM(s32, "B9D60", msg_draw_char);
 
-INCLUDE_ASM(s32, "B9D60", func_8012C9A8);
+INCLUDE_ASM(s32, "B9D60", msg_draw_prim_rect);
 
-INCLUDE_ASM(s32, "B9D60", func_8012CA08);
+INCLUDE_ASM(s32, "B9D60", appendGfx_msg_prim_rect);
 
-INCLUDE_ASM(s32, "B9D60", _draw_message_box);
+INCLUDE_ASM(s32, "B9D60", msg_draw_speech_bubble);
 
-INCLUDE_ASM(s32, "B9D60", func_8012D3DC);
+INCLUDE_ASM(s32, "B9D60", msg_draw_speech_arrow);
 
-INCLUDE_ASM(s32, "B9D60", func_8012DB58);
+INCLUDE_ASM(s32, "B9D60", msg_draw_frame);
 
-INCLUDE_ASM(s32, "B9D60", func_8012E8E0);
+INCLUDE_ASM(s32, "B9D60", msg_get_glyph);

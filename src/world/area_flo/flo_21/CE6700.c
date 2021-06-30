@@ -124,7 +124,7 @@ ApiStatus N(func_8024004C_CE674C)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_20 = get_float_variable(script, *args++);
         ptr->unk_24 = get_float_variable(script, *args++);
         ptr->unk_28 = get_float_variable(script, *args++);
-        ptr->unk_50 = (struct N(temp)*)func_800729B0(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
+        ptr->unk_50 = (struct N(temp)*)playFX_83(2, ptr->unk_0C, ptr->unk_10, ptr->unk_14, 1.0f, 0);
         ptr->unk_4E = 0;
         ptr->unk_48 = 0;
         ptr->unk_4A = 0;
@@ -167,7 +167,7 @@ ApiStatus N(func_802401AC_CE68AC)(ScriptInstance* script, s32 isInitialCall) {
         case 2:
             ptr->unk_46++;
             if (ptr->unk_46 >= 60) {
-                ptr->unk_54 = func_800726B0(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
+                ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_1C, ptr->unk_20, 1.0f, 0);
                 *((s8*)ptr->unk_54->unk_0C + 0x34) = ptr->unk_38;
                 ptr->unk_54->unk_0C->unk_20 = 0;
                 ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
@@ -252,7 +252,7 @@ ApiStatus N(func_802405FC_CE6CFC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_24 = get_float_variable(script, *args++);
         ptr->unk_20 = get_float_variable(script, *args++);
         ptr->unk_28 = get_float_variable(script, *args++);
-        ptr->unk_54 = func_800726B0(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
+        ptr->unk_54 = playFX_7B(1, ptr->unk_18, ptr->unk_24, ptr->unk_20, 1.0f, 0);
         ptr->unk_54->unk_0C->unk_34 = ptr->unk_38;
         ptr->unk_54->unk_0C->unk_20 = 0;
         ptr->unk_40 = create_shadow_type(0, ptr->unk_18, ptr->unk_28, ptr->unk_20);
@@ -1582,9 +1582,9 @@ NpcGroupList N(npcGroupList_80245AEC) = {
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_80240B00_CE7200)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

@@ -1,18 +1,18 @@
 #include "common.h"
 #include "camera.h"
 
-void do_camera_type_0(Camera*);
-void do_camera_type_1(Camera*);
-void do_camera_type_2(Camera*);
-void do_camera_type_4(Camera*);
+void update_camera_mode_0(Camera*);
+void update_camera_mode_1(Camera*);
+void update_camera_mode_2(Camera*);
+void update_camera_mode_4(Camera*);
 
-INCLUDE_ASM(void, "9d10_len_1080", do_camera_type_4, Camera* camera);
+INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_4, Camera* camera);
 
-INCLUDE_ASM(void, "9d10_len_1080", do_camera_type_2, Camera* camera);
+INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_2, Camera* camera);
 
-INCLUDE_ASM(void, "9d10_len_1080", do_camera_type_1, Camera* camera);
+INCLUDE_ASM(void, "9d10_len_1080", update_camera_mode_1, Camera* camera);
 
-void do_camera_type_0(Camera* camera) {
+void update_camera_mode_0(Camera* camera) {
     f32 xTemp;
     f32 yTemp;
     f32 zTemp;

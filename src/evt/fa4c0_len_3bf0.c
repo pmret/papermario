@@ -62,29 +62,29 @@ ApiStatus func_802D5FA4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5FD8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PopSong(ScriptInstance* script, s32 isInitialCall) {
     bgm_pop_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5FF8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PushSong(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     bgm_push_song(get_variable(script, *args++), get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6050(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PopBattleSong(ScriptInstance* script, s32 isInitialCall) {
     bgm_pop_battle_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6070(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PushBattleSong(ScriptInstance* script, s32 isInitialCall) {
     bgm_push_battle_song();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6090(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetBattleSong(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     bgm_set_battle_song(get_variable(script, *args++), get_variable(script, *args++));
@@ -113,7 +113,7 @@ ApiStatus PlaySound(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D617C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlaySoundWithVolume(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 soundID = get_variable(script, *args++);
     s32 value2 = get_variable(script, *args++);
@@ -155,7 +155,7 @@ ApiStatus UseDoorSounds(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6340(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UseAdvancedDoorSounds(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     D_80151308 = get_variable(script, *args++);
@@ -174,9 +174,9 @@ ApiStatus PlaySoundAtF(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D6420, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowKeyChoicePopup, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", func_802D663C, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fa4c0_len_3bf0", ShowConsumableChoicePopup, ScriptInstance* script, s32 isInitialCall);
 
 // TODO: probably a split here (sound_api, item_api)
 
@@ -223,10 +223,10 @@ ApiStatus AddKeyItem(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6954(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CloseChoicePopup(ScriptInstance* script, s32 isInitialCall) {
     enable_player_input();
     enable_player_static_collisions();
-    func_800EF600();
+    partner_enable_input();
     gOverrideFlags &= ~0x40;
     return ApiStatus_DONE2;
 }
@@ -279,7 +279,7 @@ ApiStatus AddItem(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D6AF0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ClearVariable(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, 0);
     return ApiStatus_DONE2;
 }
@@ -337,7 +337,7 @@ ApiStatus RemoveItem(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CountFortressKeys(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CountFortessKeys(ScriptInstance* script, s32 isInitialCall) {
     s32 outVar = *script->ptrReadPos;
 
     set_variable(script, outVar, get_fortress_key_count());
@@ -461,7 +461,7 @@ ApiStatus SetItemFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 ;
-ApiStatus func_802D721C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetItemAlpha(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemEntityIndex = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

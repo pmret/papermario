@@ -11,7 +11,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
@@ -32,8 +32,8 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_802A1EE0 = create_icon(&D_80108A64);
-        set_icon_render_pos(D_802A1EE0, iconPosX + 36, iconPosY - 63);
+        D_802A1EE0 = create_hud_element(&D_80108A64);
+        set_hud_element_render_pos(D_802A1EE0, iconPosX + 36, iconPosY - 63);
     }
 
     script->varTable[0] = sleepTime;
@@ -46,8 +46,8 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
-    if (heroes_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
-        free_icon(D_802A1EE0);
+    if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
+        free_hud_element(D_802A1EE0);
     }
 
     return ApiStatus_DONE2;
@@ -55,7 +55,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 #ifdef NON_MATCHING
 
-void func_8006FE30(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
+void playFX_0F(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     s32 c8 = 200;
@@ -89,7 +89,7 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     do {
-        func_8006FE30(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
+        playFX_0F(phi_a0, temp_s1, c8, temp_s0, temp_f22, 0, temp_f20, phi_v0 + 7);
         if (temp_f20) {
             temp_f20 -= rand;
         }
@@ -108,7 +108,7 @@ ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
     s32 b = get_variable(script, *args++);
     s32 c = get_variable(script, *args++);
 
-    func_80070190(2, a, b, c, 0, -1.0f, 0, 5);
+    playFX_18(2, a, b, c, 0, -1.0f, 0, 5);
 
     return ApiStatus_DONE2;
 }
@@ -117,7 +117,7 @@ ApiStatus N(func_802A1444_71DBB4)(ScriptInstance* script, s32 isInitialCall) {
     s32 ret;
 
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0].s = 10;
@@ -146,7 +146,7 @@ ApiStatus N(func_802A14D4_71DC44)(ScriptInstance* script, s32 isInitialCall) {
 
 Script N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
-        UseCamPreset(69);
+        UseBattleCamPreset(69);
         sleep 10;
 
         PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_208D);
@@ -192,7 +192,7 @@ Script N(UseItemWithEffect) = SCRIPT({
 });
 
 Script N(UseItem) = SCRIPT({
-    UseCamPreset(19);
+    UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
     SetBattleCamZoom(248);

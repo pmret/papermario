@@ -9,7 +9,7 @@ glabel pause_partners_draw_movelist_flower
 /* 13F3F0 8024C0B0 24A50011 */  addiu     $a1, $a1, 0x11
 /* 13F3F4 8024C0B4 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 13F3F8 8024C0B8 8E040004 */  lw        $a0, 4($s0)
-/* 13F3FC 8024C0BC 0C051261 */  jal       set_icon_render_pos
+/* 13F3FC 8024C0BC 0C051261 */  jal       set_hud_element_render_pos
 /* 13F400 8024C0C0 24C60010 */   addiu    $a2, $a2, 0x10
 /* 13F404 8024C0C4 8E040004 */  lw        $a0, 4($s0)
 /* 13F408 8024C0C8 0C0511F8 */  jal       draw_icon_2

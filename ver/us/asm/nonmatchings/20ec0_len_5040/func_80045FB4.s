@@ -4,7 +4,7 @@
 glabel func_80045FB4
 /* 213B4 80045FB4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 213B8 80045FB8 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 213BC 80045FBC 0C011722 */  jal       func_80045C88
+/* 213BC 80045FBC 0C011722 */  jal       get_current_merlee_message
 /* 213C0 80045FC0 AFB00010 */   sw       $s0, 0x10($sp)
 /* 213C4 80045FC4 0040802D */  daddu     $s0, $v0, $zero
 /* 213C8 80045FC8 12000015 */  beqz      $s0, .L80046020
@@ -12,8 +12,8 @@ glabel func_80045FB4
 /* 213D0 80045FD0 3C028004 */  lui       $v0, %hi(func_80046030)
 /* 213D4 80045FD4 24426030 */  addiu     $v0, $v0, %lo(func_80046030)
 /* 213D8 80045FD8 AE020004 */  sw        $v0, 4($s0)
-/* 213DC 80045FDC 3C028004 */  lui       $v0, %hi(func_800465E0)
-/* 213E0 80045FE0 244265E0 */  addiu     $v0, $v0, %lo(func_800465E0)
+/* 213DC 80045FDC 3C028004 */  lui       $v0, %hi(draw_all_status_icons)
+/* 213E0 80045FE0 244265E0 */  addiu     $v0, $v0, %lo(draw_all_status_icons)
 /* 213E4 80045FE4 AE000000 */  sw        $zero, ($s0)
 /* 213E8 80045FE8 AE000008 */  sw        $zero, 8($s0)
 /* 213EC 80045FEC 0C00AB0A */  jal       general_heap_malloc

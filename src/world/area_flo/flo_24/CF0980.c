@@ -82,8 +82,8 @@ Script N(main) = SCRIPT({
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
     await N(makeEntities);
-    func_802C971C(93);
-    func_802C971C(100);
+    MakeTransformGroup(93);
+    MakeTransformGroup(100);
     spawn N(80241728);
     spawn N(80241ABC);
     ModifyColliderFlags(3, 29, 0x00000004);

@@ -118,7 +118,7 @@ glabel func_802400B0_ACABD0
 /* ACAD84 80240264 44820000 */  mtc1      $v0, $f0
 /* ACAD88 80240268 00000000 */  nop
 /* ACAD8C 8024026C 46800020 */  cvt.s.w   $f0, $f0
-/* ACAD90 80240270 0C0376B9 */  jal       func_800DDAE4
+/* ACAD90 80240270 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* ACAD94 80240274 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* ACAD98 80240278 54400001 */  bnel      $v0, $zero, .L80240280
 /* ACAD9C 8024027C 0000882D */   daddu    $s1, $zero, $zero

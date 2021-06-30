@@ -30,23 +30,23 @@ glabel func_802A98D0_42D7E0
 /* 42D844 802A9934 86630056 */  lh        $v1, 0x56($s3)
 /* 42D848 802A9938 2445FFE1 */  addiu     $a1, $v0, -0x1f
 /* 42D84C 802A993C AFA20010 */  sw        $v0, 0x10($sp)
-/* 42D850 802A9940 0C051261 */  jal       set_icon_render_pos
+/* 42D850 802A9940 0C051261 */  jal       set_hud_element_render_pos
 /* 42D854 802A9944 00652823 */   subu     $a1, $v1, $a1
 /* 42D858 802A9948 8E640004 */  lw        $a0, 4($s3)
-/* 42D85C 802A994C 0C0511EA */  jal       draw_icon_0
+/* 42D85C 802A994C 0C0511EA */  jal       draw_hud_element_clipped
 /* 42D860 802A9950 00000000 */   nop
 /* 42D864 802A9954 8E720008 */  lw        $s2, 8($s3)
-/* 42D868 802A9958 0C0511EA */  jal       draw_icon_0
+/* 42D868 802A9958 0C0511EA */  jal       draw_hud_element_clipped
 /* 42D86C 802A995C 0240202D */   daddu    $a0, $s2, $zero
 /* 42D870 802A9960 0240202D */  daddu     $a0, $s2, $zero
 /* 42D874 802A9964 27B10010 */  addiu     $s1, $sp, 0x10
 /* 42D878 802A9968 0220282D */  daddu     $a1, $s1, $zero
 /* 42D87C 802A996C 27B00014 */  addiu     $s0, $sp, 0x14
-/* 42D880 802A9970 0C05126B */  jal       get_icon_render_pos
+/* 42D880 802A9970 0C05126B */  jal       get_hud_element_render_pos
 /* 42D884 802A9974 0200302D */   daddu    $a2, $s0, $zero
 /* 42D888 802A9978 0240202D */  daddu     $a0, $s2, $zero
 /* 42D88C 802A997C 0220282D */  daddu     $a1, $s1, $zero
-/* 42D890 802A9980 0C05126B */  jal       get_icon_render_pos
+/* 42D890 802A9980 0C05126B */  jal       get_hud_element_render_pos
 /* 42D894 802A9984 0200302D */   daddu    $a2, $s0, $zero
 /* 42D898 802A9988 3C02802B */  lui       $v0, %hi(D_802A9B00)
 /* 42D89C 802A998C 8C429B00 */  lw        $v0, %lo(D_802A9B00)($v0)
@@ -93,7 +93,7 @@ glabel func_802A98D0_42D7E0
 /* 42D934 802A9A24 00063403 */   sra      $a2, $a2, 0x10
 .L802A9A28:
 /* 42D938 802A9A28 8E640010 */  lw        $a0, 0x10($s3)
-/* 42D93C 802A9A2C 0C0511EA */  jal       draw_icon_0
+/* 42D93C 802A9A2C 0C0511EA */  jal       draw_hud_element_clipped
 /* 42D940 802A9A30 00000000 */   nop
 /* 42D944 802A9A34 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 42D948 802A9A38 8FB40028 */  lw        $s4, 0x28($sp)

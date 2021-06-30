@@ -38,13 +38,13 @@ Script N(80240750) = SCRIPT({
 });
 
 Script N(8024080C) = SCRIPT({
-    func_802D5FF8(137, 3);
+    PushSong(137, 3);
 });
 
 Script N(80240830) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
-    func_802D5FD8();
+    PopSong();
 });
 
 static s32 N(pad_86C) = {
@@ -178,7 +178,7 @@ s32 N(D_80241854_CC2684) = {
 
 Script N(80241858) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -196,7 +196,7 @@ Script N(80241858) = SCRIPT({
         }
     }
     N(func_80240614_CC1444)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 

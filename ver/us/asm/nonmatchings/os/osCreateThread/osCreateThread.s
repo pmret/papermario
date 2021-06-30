@@ -41,14 +41,14 @@ glabel osCreateThread
 /* 412F0 80065EF0 254AFFFF */  addiu     $t2, $t2, -1
 /* 412F4 80065EF4 01425021 */  addu      $t2, $t2, $v0
 /* 412F8 80065EF8 AE0A00F0 */  sw        $t2, 0xf0($s0)
-/* 412FC 80065EFC 0C01ACD8 */  jal       __osDisableInt
+/* 412FC 80065EFC 0C01ACD8 */  jal       osDisableInt
 /* 41300 80065F00 AE0B00F4 */   sw       $t3, 0xf4($s0)
 /* 41304 80065F04 3C038009 */  lui       $v1, %hi(__osActiveQueue)
 /* 41308 80065F08 8C63465C */  lw        $v1, %lo(__osActiveQueue)($v1)
 /* 4130C 80065F0C 00402021 */  addu      $a0, $v0, $zero
 /* 41310 80065F10 3C018009 */  lui       $at, %hi(__osActiveQueue)
 /* 41314 80065F14 AC30465C */  sw        $s0, %lo(__osActiveQueue)($at)
-/* 41318 80065F18 0C01ACF4 */  jal       __osRestoreInt
+/* 41318 80065F18 0C01ACF4 */  jal       osRestoreInt
 /* 4131C 80065F1C AE03000C */   sw       $v1, 0xc($s0)
 /* 41320 80065F20 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 41324 80065F24 8FB00010 */  lw        $s0, 0x10($sp)

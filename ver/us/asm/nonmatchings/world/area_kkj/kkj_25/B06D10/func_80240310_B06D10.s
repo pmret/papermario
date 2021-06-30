@@ -188,7 +188,7 @@ glabel func_80240310_B06D10
 /* B06FEC 802405EC 8E46000C */  lw        $a2, 0xc($s2)
 /* B06FF0 802405F0 25080001 */  addiu     $t0, $t0, 1
 /* B06FF4 802405F4 AE270000 */  sw        $a3, ($s1)
-/* B06FF8 802405F8 0C0B7811 */  jal       func_802DE044
+/* B06FF8 802405F8 0C0B7811 */  jal       spr_get_player_raster_info
 /* B06FFC 802405FC A6080000 */   sh       $t0, ($s0)
 /* B07000 80240600 8FA30030 */  lw        $v1, 0x30($sp)
 /* B07004 80240604 8FA40034 */  lw        $a0, 0x34($sp)

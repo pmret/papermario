@@ -104,7 +104,7 @@ glabel func_802403B8_B1CE08
 /* B1CF94 80240544 00A0302D */  daddu     $a2, $a1, $zero
 /* B1CF98 80240548 00A0382D */  daddu     $a3, $a1, $zero
 /* B1CF9C 8024054C 27B00020 */  addiu     $s0, $sp, 0x20
-/* B1CFA0 80240550 0C0B7710 */  jal       render_sprite
+/* B1CFA0 80240550 0C0B7710 */  jal       spr_draw_player_sprite
 /* B1CFA4 80240554 AFB00010 */   sw       $s0, 0x10($sp)
 /* B1CFA8 80240558 4405B000 */  mfc1      $a1, $f22
 /* B1CFAC 8024055C 4406A000 */  mfc1      $a2, $f20
@@ -178,7 +178,7 @@ glabel func_802403B8_B1CE08
 /* B1D0BC 8024066C 0000282D */  daddu     $a1, $zero, $zero
 /* B1D0C0 80240670 00A0302D */  daddu     $a2, $a1, $zero
 /* B1D0C4 80240674 00A0382D */  daddu     $a3, $a1, $zero
-/* B1D0C8 80240678 0C0B7710 */  jal       render_sprite
+/* B1D0C8 80240678 0C0B7710 */  jal       spr_draw_player_sprite
 /* B1D0CC 8024067C AFB00010 */   sw       $s0, 0x10($sp)
 /* B1D0D0 80240680 0220202D */  daddu     $a0, $s1, $zero
 /* B1D0D4 80240684 0000282D */  daddu     $a1, $zero, $zero

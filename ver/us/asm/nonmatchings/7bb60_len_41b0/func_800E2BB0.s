@@ -86,7 +86,7 @@ glabel func_800E2BB0
 .L800E2CB0:
 /* 7C160 800E2CB0 10400015 */  beqz      $v0, .L800E2D08
 /* 7C164 800E2CB4 00000000 */   nop
-/* 7C168 800E2CB8 0C0389AC */  jal       func_800E26B0
+/* 7C168 800E2CB8 0C0389AC */  jal       record_jump_apex
 /* 7C16C 800E2CBC 00000000 */   nop
 /* 7C170 800E2CC0 3C013DEA */  lui       $at, 0x3dea
 /* 7C174 800E2CC4 3421161E */  ori       $at, $at, 0x161e

@@ -25,7 +25,7 @@ void N(UnkFunc4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
         }
 
         if (phi_v0) {
@@ -42,7 +42,7 @@ void N(UnkFunc4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
             && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 1)) {
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
-            func_800494C0(npc, 0x2F4, 0x200000);
+            ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             if (enemy->npcSettings->unk_2A & 1) {
                 script->functionTemp[0].s = 10;
             } else {

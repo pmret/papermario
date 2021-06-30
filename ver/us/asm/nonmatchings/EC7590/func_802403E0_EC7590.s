@@ -11,7 +11,7 @@ glabel func_802403E0_EC7590
 /* EC75A8 802403F8 F7B80028 */  sdc1      $f24, 0x28($sp)
 /* EC75AC 802403FC 4487C000 */  mtc1      $a3, $f24
 /* EC75B0 80240400 AFBF0014 */  sw        $ra, 0x14($sp)
-/* EC75B4 80240404 0C01B198 */  jal       __osGetCause
+/* EC75B4 80240404 0C01B198 */  jal       osGetCause
 /* EC75B8 80240408 0080802D */   daddu    $s0, $a0, $zero
 /* EC75BC 8024040C 4616A582 */  mul.s     $f22, $f20, $f22
 /* EC75C0 80240410 00000000 */  nop

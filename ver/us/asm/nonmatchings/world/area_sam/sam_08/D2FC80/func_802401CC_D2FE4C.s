@@ -96,7 +96,7 @@ glabel func_802401CC_D2FE4C
 /* D2FFA8 80240328 24020004 */  addiu     $v0, $zero, 4
 /* D2FFAC 8024032C AC820318 */  sw        $v0, 0x318($a0)
 /* D2FFB0 80240330 AC960324 */  sw        $s6, 0x324($a0)
-/* D2FFB4 80240334 0C03D390 */  jal       func_800F4E40
+/* D2FFB4 80240334 0C03D390 */  jal       btl_create_popup_menu
 /* D2FFB8 80240338 AC800328 */   sw       $zero, 0x328($a0)
 /* D2FFBC 8024033C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240340:
@@ -107,7 +107,7 @@ glabel func_802401CC_D2FE4C
 /* D2FFD0 80240350 8662032C */  lh        $v0, 0x32c($s3)
 /* D2FFD4 80240354 10400009 */  beqz      $v0, .L8024037C
 /* D2FFD8 80240358 AEA20074 */   sw       $v0, 0x74($s5)
-/* D2FFDC 8024035C 0C03C4EC */  jal       func_800F13B0
+/* D2FFDC 8024035C 0C03C4EC */  jal       hide_popup_menu
 /* D2FFE0 80240360 00000000 */   nop
 /* D2FFE4 80240364 8EA20070 */  lw        $v0, 0x70($s5)
 /* D2FFE8 80240368 24420001 */  addiu     $v0, $v0, 1
@@ -120,7 +120,7 @@ glabel func_802401CC_D2FE4C
 /* D2FFFC 8024037C 080900FB */  j         .L802403EC
 /* D30000 80240380 0000102D */   daddu    $v0, $zero, $zero
 .L80240384:
-/* D30004 80240384 0C03C54E */  jal       func_800F1538
+/* D30004 80240384 0C03C54E */  jal       destroy_popup_menu
 /* D30008 80240388 00000000 */   nop
 /* D3000C 8024038C 8EA30074 */  lw        $v1, 0x74($s5)
 /* D30010 80240390 240200FF */  addiu     $v0, $zero, 0xff

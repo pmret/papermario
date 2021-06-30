@@ -33,7 +33,7 @@ glabel func_8004C578
 /* 279E4 8004C5E4 9442001E */  lhu       $v0, 0x1e($v0)
 /* 279E8 8004C5E8 860300A4 */  lh        $v1, 0xa4($s0)
 /* 279EC 8004C5EC 00822023 */  subu      $a0, $a0, $v0
-/* 279F0 8004C5F0 0C014E3E */  jal       func_800538F8
+/* 279F0 8004C5F0 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 279F4 8004C5F4 00832021 */   addu     $a0, $a0, $v1
 /* 279F8 8004C5F8 8E02001C */  lw        $v0, 0x1c($s0)
 /* 279FC 8004C5FC C4420020 */  lwc1      $f2, 0x20($v0)
@@ -69,7 +69,7 @@ glabel func_8004C578
 /* 27A68 8004C668 34420010 */  ori       $v0, $v0, 0x10
 /* 27A6C 8004C66C A2220043 */  sb        $v0, 0x43($s1)
 .L8004C670:
-/* 27A70 8004C670 0C013211 */  jal       func_8004C844
+/* 27A70 8004C670 0C013211 */  jal       snd_get_scaled_volume
 /* 27A74 8004C674 0200282D */   daddu    $a1, $s0, $zero
 /* 27A78 8004C678 0040202D */  daddu     $a0, $v0, $zero
 /* 27A7C 8004C67C 86230040 */  lh        $v1, 0x40($s1)
@@ -83,16 +83,16 @@ glabel func_8004C578
 /* 27A9C 8004C69C 0801320A */  j         .L8004C828
 /* 27AA0 8004C6A0 A222003D */   sb       $v0, 0x3d($s1)
 .L8004C6A4:
-/* 27AA4 8004C6A4 0C0133B1 */  jal       func_8004CEC4
+/* 27AA4 8004C6A4 0C0133B1 */  jal       snd_SEFCmd_02_SetInstrument
 /* 27AA8 8004C6A8 0200282D */   daddu    $a1, $s0, $zero
 /* 27AAC 8004C6AC 0240202D */  daddu     $a0, $s2, $zero
-/* 27AB0 8004C6B0 0C01339C */  jal       func_8004CE70
+/* 27AB0 8004C6B0 0C01339C */  jal       snd_SEFCmd_00_SetVolume
 /* 27AB4 8004C6B4 0200282D */   daddu    $a1, $s0, $zero
 /* 27AB8 8004C6B8 0240202D */  daddu     $a0, $s2, $zero
-/* 27ABC 8004C6BC 0C0133A9 */  jal       func_8004CEA4
+/* 27ABC 8004C6BC 0C0133A9 */  jal       snd_SEFCmd_01_SetPan
 /* 27AC0 8004C6C0 0200282D */   daddu    $a1, $s0, $zero
 /* 27AC4 8004C6C4 0240202D */  daddu     $a0, $s2, $zero
-/* 27AC8 8004C6C8 0C0133C3 */  jal       func_8004CF0C
+/* 27AC8 8004C6C8 0C0133C3 */  jal       snd_SEFCmd_03_SetReverb
 /* 27ACC 8004C6CC 0200282D */   daddu    $a1, $s0, $zero
 /* 27AD0 8004C6D0 8E040000 */  lw        $a0, ($s0)
 /* 27AD4 8004C6D4 90830000 */  lbu       $v1, ($a0)
@@ -135,7 +135,7 @@ glabel func_8004C578
 /* 27B5C 8004C75C 00431023 */  subu      $v0, $v0, $v1
 /* 27B60 8004C760 00443021 */  addu      $a2, $v0, $a0
 .L8004C764:
-/* 27B64 8004C764 0C014E3E */  jal       func_800538F8
+/* 27B64 8004C764 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 27B68 8004C768 00C0202D */   daddu    $a0, $a2, $zero
 /* 27B6C 8004C76C 8E02001C */  lw        $v0, 0x1c($s0)
 /* 27B70 8004C770 C4420020 */  lwc1      $f2, 0x20($v0)
@@ -164,7 +164,7 @@ glabel func_8004C578
 /* 27BC4 8004C7C4 0240202D */  daddu     $a0, $s2, $zero
 /* 27BC8 8004C7C8 9202009C */  lbu       $v0, 0x9c($s0)
 /* 27BCC 8004C7CC 0200282D */  daddu     $a1, $s0, $zero
-/* 27BD0 8004C7D0 0C013211 */  jal       func_8004C844
+/* 27BD0 8004C7D0 0C013211 */  jal       snd_get_scaled_volume
 /* 27BD4 8004C7D4 A222000F */   sb       $v0, 0xf($s1)
 /* 27BD8 8004C7D8 A6220040 */  sh        $v0, 0x40($s1)
 /* 27BDC 8004C7DC 8E020010 */  lw        $v0, 0x10($s0)

@@ -1,9 +1,9 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "169BE0", func_80249380);
+INCLUDE_ASM(s32, "169BE0", filemenu_draw_char);
 
-INCLUDE_ASM(s32, "169BE0", func_8024997C);
+INCLUDE_ASM(s32, "169BE0", filemenu_draw_message);
 
-INCLUDE_ASM(s32, "169BE0", func_80249AA4);
+INCLUDE_ASM(s32, "169BE0", filemenu_get_menu_message);
 
-INCLUDE_ASM(s32, "169BE0", func_80249AB8);
+INCLUDE_ASM(s32, "169BE0", filemenu_draw_file_name);

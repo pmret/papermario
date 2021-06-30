@@ -5,8 +5,8 @@
 s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data) {
     s32 ret;
 
-    __osPiGetAccess();
+    osPiGetAccess();
     ret = osEPiRawReadIo(pihandle, devAddr, data);
-    __osPiRelAccess();
+    osPiRelAccess();
     return ret;
 }

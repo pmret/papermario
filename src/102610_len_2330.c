@@ -5,99 +5,99 @@ typedef struct struct802E10F4 {
     s16 angle;
 } struct802E10F4;
 
-void create_shadow_callback(Shadow* shadow) {
+void entity_Shadow_init(Shadow* shadow) {
     shadow->scale.x = 0.1f;
     shadow->scale.y = 0.1f;
     shadow->scale.z = 0.1f;
 }
 
 //TODO: make sure this is the right struct for this.
-s32 func_802E0DB0(Shadow* shadow) {
+s32 entity_can_collide_with_jumping_player(Shadow* shadow) {
     if ((shadow->unk_06 & 4) && (gPlayerStatus.flags & 2)) {
         return TRUE;
     }
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "102610_len_2330", func_802E0DE0);
+INCLUDE_ASM(s32, "102610_len_2330", entity_SaveBlock_setupGfx);
 
-void func_802E10F4(Entity* entity) {
+void entity_SaveBlock_idle(Entity* entity) {
     struct802E10F4* temp;
 
     temp = (struct802E10F4*)entity->dataBuf;
     temp->angle = clamp_angle(temp->angle + 6);
-    func_802E3650(entity);
+    entity_base_block_idle(entity);
 }
 
-void func_802E114C(void) {
+void entity_SaveBlock_pause_game(void) {
     set_time_freeze_mode(1);
     disable_player_input();
     gPlayerStatusPtr->currentSpeed = 0.0f;
 }
 
-void func_802E117C(void) {
+void entity_SaveBlock_resume_game(void) {
     set_time_freeze_mode(0);
     enable_player_input();
 }
 
-void save_game_at_player_position(void) {
+void entity_SaveBlock_save_data(void) {
     gGameStatusPtr->savedPos.x = gPlayerStatusPtr->position.x;
     gGameStatusPtr->savedPos.y = gPlayerStatusPtr->position.y;
     gGameStatusPtr->savedPos.z = gPlayerStatusPtr->position.z;
     fio_save_game(gGameStatusPtr->saveSlot);
 }
 
-void func_802E1204(Entity* entity) {
+void entity_SaveBlock_show_tutorial_message(Entity* entity) {
     if (!get_global_flag(SI_SAVE_FLAG(95))) {
         D_802EB390 = FALSE;
-        load_string(0x1D0000, &D_802EB390);
+        msg_get_printer_for_string(0x1D0000, &D_802EB390);
         set_global_flag(SI_SAVE_FLAG(95));
         return;
     }
 
-    exec_entity_updatecmd(entity);
-    exec_entity_updatecmd(entity);
+    exec_entity_commandlist(entity);
+    exec_entity_commandlist(entity);
 }
 
-void func_802E1270(Entity* entity) {
+void entity_SaveBlock_wait_for_close_tutorial(Entity* entity) {
     if (D_802EB390) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E1298(void) {
+void entity_SaveBlock_show_choice_message(void) {
     D_802EB390 = FALSE;
     D_802EB394 = FALSE;
-    D_802EB39C = load_string(0x1D0004, &D_802EB394);
-    D_802EB398 = load_string(0x1E000A, &D_802EB390);
+    D_802EB39C = msg_get_printer_for_string(0x1D0004, &D_802EB394);
+    D_802EB398 = msg_get_printer_for_string(0x1E000A, &D_802EB390);
 }
 
-void func_802E12F8(void) {
-    load_message_to_printer(0x1D0005, D_802EB39C);
+void entity_SaveBlock_show_result_message(void) {
+    msg_printer_load_string(0x1D0005, D_802EB39C);
     sfx_play_sound(0x10);
 }
 
-void func_802E1328(Entity* entity) {
+void entity_SaveBlock_wait_for_close_result(Entity* entity) {
     if (D_802EB394) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E1350(Entity* entity) {
+void entity_SaveBlock_wait_for_close_choice(Entity* entity) {
     if (D_802EB390) {
         if (D_802EB398->currentOption == 1) {
             set_entity_commandlist(entity, &D_802E99DC);
         } else {
-            exec_entity_updatecmd(entity);
+            exec_entity_commandlist(entity);
         }
         close_message(D_802EB39C);
     }
 }
 
-void func_802E13B8(Entity* entity) {
+void entity_SaveBlock_init(Entity* entity) {
     struct802E3650* temp = entity->dataBuf;
 
-    entity_init_Hammer23Block_normal(entity);
-    entity->renderSetupFunc = func_802E0DE0;
+    entity_base_block_init(entity);
+    entity->renderSetupFunc = entity_SaveBlock_setupGfx;
     temp->unk_04 = 8;
 }

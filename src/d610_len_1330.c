@@ -4,9 +4,9 @@ extern s16 D_800A08F0;
 extern s32 gameModeMap[];
 
 s32 func_800328A4(Camera* camera, f32 arg1, f32 arg2);
-void create_camera_lead_player_mtx(Camera* camera);
+void create_camera_leadplayer_matrix(Camera* camera);
 
-INCLUDE_ASM(s32, "d610_len_1330", func_80032210);
+INCLUDE_ASM(s32, "d610_len_1330", test_ray_zone);
 
 INCLUDE_ASM(s32, "d610_len_1330", func_800322DC);
 
@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "d610_len_1330", func_80032970, Camera* camera, f32 arg1);
 
 INCLUDE_ASM(s32, "d610_len_1330", func_80032C64);
 
-void create_camera_lead_player_mtx(Camera *camera) {
+void create_camera_leadplayer_matrix(Camera *camera) {
     f32 xTemp = camera->lookAt_eye.x - camera->lookAt_obj.x;
     f32 yTemp = camera->lookAt_eye.y - camera->lookAt_obj.y;
     f32 zTemp = camera->lookAt_eye.z - camera->lookAt_obj.z;

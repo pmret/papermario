@@ -26,7 +26,7 @@ glabel func_802B6000_E26710
 /* E26748 802B6038 3463000A */  ori       $v1, $v1, 0xa
 /* E2674C 802B603C 00821024 */  and       $v0, $a0, $v0
 /* E26750 802B6040 00431025 */  or        $v0, $v0, $v1
-/* E26754 802B6044 0C03963C */  jal       func_800E58F0
+/* E26754 802B6044 0C03963C */  jal       phys_clear_spin_history
 /* E26758 802B6048 AE020000 */   sw       $v0, ($s0)
 /* E2675C 802B604C 3C014180 */  lui       $at, 0x4180
 /* E26760 802B6050 44810000 */  mtc1      $at, $f0
@@ -44,7 +44,7 @@ glabel func_802B6000_E26710
 /* E26790 802B6080 E6000070 */  swc1      $f0, 0x70($s0)
 /* E26794 802B6084 E6020074 */  swc1      $f2, 0x74($s0)
 /* E26798 802B6088 E6040078 */  swc1      $f4, 0x78($s0)
-/* E2679C 802B608C 0C037FDE */  jal       func_800DFF78
+/* E2679C 802B608C 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E267A0 802B6090 E606007C */   swc1     $f6, 0x7c($s0)
 /* E267A4 802B6094 0C03805E */  jal       disable_player_input
 /* E267A8 802B6098 00000000 */   nop
@@ -165,7 +165,7 @@ glabel L802B6244_E26954
 /* E26958 802B6248 00000000 */   nop
 /* E2695C 802B624C 46000506 */  mov.s     $f20, $f0
 /* E26960 802B6250 4600A306 */  mov.s     $f12, $f20
-/* E26964 802B6254 0C038D45 */  jal       func_800E3514
+/* E26964 802B6254 0C038D45 */  jal       player_check_collision_below
 /* E26968 802B6258 27A50010 */   addiu    $a1, $sp, 0x10
 /* E2696C 802B625C 8FA20010 */  lw        $v0, 0x10($sp)
 /* E26970 802B6260 04400014 */  bltz      $v0, .L802B62B4
@@ -196,7 +196,7 @@ glabel L802B6244_E26954
 /* E269D0 802B62C0 00000000 */  nop
 /* E269D4 802B62C4 4500000E */  bc1f      .L802B6300
 /* E269D8 802B62C8 00000000 */   nop
-/* E269DC 802B62CC 0C0389AC */  jal       func_800E26B0
+/* E269DC 802B62CC 0C0389AC */  jal       record_jump_apex
 /* E269E0 802B62D0 00000000 */   nop
 /* E269E4 802B62D4 24040147 */  addiu     $a0, $zero, 0x147
 /* E269E8 802B62D8 0000282D */  daddu     $a1, $zero, $zero
@@ -237,7 +237,7 @@ glabel L802B6354_E26A64
 /* E26A68 802B6358 00000000 */   nop
 /* E26A6C 802B635C 46000506 */  mov.s     $f20, $f0
 /* E26A70 802B6360 4600A306 */  mov.s     $f12, $f20
-/* E26A74 802B6364 0C038D45 */  jal       func_800E3514
+/* E26A74 802B6364 0C038D45 */  jal       player_check_collision_below
 /* E26A78 802B6368 27A50010 */   addiu    $a1, $sp, 0x10
 /* E26A7C 802B636C 3C01C2C8 */  lui       $at, 0xc2c8
 /* E26A80 802B6370 44811000 */  mtc1      $at, $f2

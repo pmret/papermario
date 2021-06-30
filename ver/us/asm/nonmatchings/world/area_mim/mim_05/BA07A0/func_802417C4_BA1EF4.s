@@ -110,7 +110,7 @@ glabel func_802417C4_BA1EF4
 /* BA2080 80241950 00000000 */   nop
 .L80241954:
 /* BA2084 80241954 0260282D */  daddu     $a1, $s3, $zero
-/* BA2088 80241958 0C0902AA */  jal       func_80240AA8_BA11D8
+/* BA2088 80241958 0C0902AA */  jal       btl_restore_world_cameras_BA11D8
 /* BA208C 8024195C 0280302D */   daddu    $a2, $s4, $zero
 /* BA2090 80241960 8E420070 */  lw        $v0, 0x70($s2)
 /* BA2094 80241964 14500021 */  bne       $v0, $s0, .L802419EC

@@ -3,7 +3,7 @@
 Script N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     sleep 10;
     spawn {
@@ -26,7 +26,7 @@ Script N(main) = SCRIPT({
         ShakeCam(1, 0, 2, 1.0);
         ShakeCam(1, 0, 2, 0.5);
         sleep 10;
-        UseCamPreset(3);
+        UseBattleCamPreset(3);
         MoveBattleCamOver(10);
         func_8024ECF8(0, 0, 0);
     }

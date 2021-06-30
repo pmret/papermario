@@ -69,7 +69,7 @@ glabel func_8004DFD4
 /* 294BC 8004E0BC 8E650084 */  lw        $a1, 0x84($s3)
 /* 294C0 8004E0C0 8E660088 */  lw        $a2, 0x88($s3)
 /* 294C4 8004E0C4 8E67008C */  lw        $a3, 0x8c($s3)
-/* 294C8 8004E0C8 0C014E5D */  jal       snd_initialize_fade
+/* 294C8 8004E0C8 0C014E5D */  jal       snd_initialize_bgm_fade
 /* 294CC 8004E0CC 2624002C */   addiu    $a0, $s1, 0x2c
 /* 294D0 8004E0D0 AE600080 */  sw        $zero, 0x80($s3)
 .L8004E0D4:

@@ -136,7 +136,7 @@ glabel func_80242CEC_BB062C
 .L80242ED4:
 /* BB0814 80242ED4 0240202D */  daddu     $a0, $s2, $zero
 /* BB0818 80242ED8 0260282D */  daddu     $a1, $s3, $zero
-/* BB081C 80242EDC 0C090AE8 */  jal       func_80242BA0_BB04E0
+/* BB081C 80242EDC 0C090AE8 */  jal       mainmenu_draw_rect_BB04E0
 /* BB0820 80242EE0 0280302D */   daddu    $a2, $s4, $zero
 /* BB0824 80242EE4 8E430070 */  lw        $v1, 0x70($s2)
 /* BB0828 80242EE8 2402000E */  addiu     $v0, $zero, 0xe

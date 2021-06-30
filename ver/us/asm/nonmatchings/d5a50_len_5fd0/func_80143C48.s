@@ -361,7 +361,7 @@ glabel func_80143C48
 /* DA8D4 801441D4 30620080 */   andi     $v0, $v1, 0x80
 /* DA8D8 801441D8 10400003 */  beqz      $v0, .L801441E8
 /* DA8DC 801441DC 00000000 */   nop
-/* DA8E0 801441E0 0C050AFF */  jal       render_menu_icon
+/* DA8E0 801441E0 0C050AFF */  jal       render_hud_element
 /* DA8E4 801441E4 00000000 */   nop
 .L801441E8:
 /* DA8E8 801441E8 8FBF0044 */  lw        $ra, 0x44($sp)

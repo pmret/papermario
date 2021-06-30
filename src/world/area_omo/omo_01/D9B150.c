@@ -51,14 +51,14 @@ void N(func_80240260_D9B150)(ScriptInstance *script, NpcAISettings *npcAISetting
     phi_f24 = 0.0f;
     phi_f26 = 0.0f;
 
-    if (func_800DDCEC(npc->unk_80, &subroutine_arg8, &subroutine_arg9, &subroutine_argA, npc->moveSpeed * 4.5, temp_f20, npc->collisionHeight, npc->collisionRadius) != 0) {
+    if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_arg8, &subroutine_arg9, &subroutine_argA, npc->moveSpeed * 4.5, temp_f20, npc->collisionHeight, npc->collisionRadius) != 0) {
         phi_f22 = dist2D(npc->pos.x, npc->pos.z, subroutine_arg8, subroutine_argA);
 
         subroutine_argB = npc->pos.x;
         subroutine_argC = npc->pos.y;
         subroutine_argD = npc->pos.z;
 
-        if (func_800DDCEC(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, npc->moveSpeed * 4.5, clamp_angle(temp_f20 + 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
+        if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argB, &subroutine_argC, &subroutine_argD, npc->moveSpeed * 4.5, clamp_angle(temp_f20 + 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
             phi_f24 = dist2D(npc->pos.x, npc->pos.z, subroutine_argB, subroutine_argD);
         }
 
@@ -66,7 +66,7 @@ void N(func_80240260_D9B150)(ScriptInstance *script, NpcAISettings *npcAISetting
         subroutine_argF = npc->pos.y;
         subroutine_arg10 = npc->pos.z;
 
-        if (func_800DDCEC(npc->unk_80, &subroutine_argE, &subroutine_argF, &subroutine_arg10, npc->moveSpeed * 4.5, clamp_angle(temp_f20 - 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
+        if (npc_test_move_simple_without_slipping(npc->unk_80, &subroutine_argE, &subroutine_argF, &subroutine_arg10, npc->moveSpeed * 4.5, clamp_angle(temp_f20 - 35.0f), npc->collisionHeight, npc->collisionRadius) != 0) {
             phi_f26 = dist2D(npc->pos.x, npc->pos.z, subroutine_argE, subroutine_arg10);
         }
 

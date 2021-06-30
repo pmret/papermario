@@ -1,30 +1,30 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-void func_80035E54(void);
+void init_enter_world_shared(void);
 
 void func_80035DF0(s16 arg0) {
     D_800A0942 = arg0;
 }
 
-void func_80035E00(void) {
+void state_init_enter_demo(void) {
     D_800A0948 = 0;
-    func_80035E54();
+    init_enter_world_shared();
 }
 
-void func_80035E24(void) {
+void state_init_enter_world(void) {
     D_800A0948 = 1;
     set_map_transition_effect(8);
-    func_80035E54();
+    init_enter_world_shared();
 }
 
-void func_80035E54(void) {
+void init_enter_world_shared(void) {
     D_800A0944 = 0;
     D_800A0946 = 4;
     gGameStatusPtr->exitTangent = 0.0f;
     gMapTransitionAlpha = 0xFF;
     nuContRmbForceStopEnd();
-    func_801382AC(&gMapTransitionAlpha);
+    update_exit_map_screen_overlay(&gMapTransitionAlpha);
 
     gOverrideFlags |= 0x8;
 
@@ -32,15 +32,15 @@ void func_80035E54(void) {
     timeFreezeMode = 0;
 }
 
-INCLUDE_ASM(s32, "111f0_len_860", func_80035EEC);
+INCLUDE_ASM(s32, "111f0_len_860", state_step_enter_world);
 
-void func_800360FC(void) {
+void state_drawUI_enter_world(void) {
     if (gGameStatusPtr->loadMenuState == 2) {
         draw_status_ui();
     }
 }
 
-void func_80036130(void) {
+void state_init_change_map(void) {
     gMapTransitionAlpha = 0x00;
     D_800A0942 = 0x14;
     D_800A0944 = 0x00;
@@ -53,9 +53,9 @@ void func_80036130(void) {
     }
 }
 
-INCLUDE_ASM(s32, "111f0_len_860", func_8003617C);
+INCLUDE_ASM(s32, "111f0_len_860", state_step_change_map);
 
-void func_800363FC(void) {
+void state_drawUI_change_map(void) {
     if (D_800A0944 == 4 || D_800A0944 == 0) {
         draw_status_ui();
     }

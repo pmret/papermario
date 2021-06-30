@@ -161,7 +161,7 @@ glabel func_80240B5C_ACB67C
 /* ACB8E4 80240DC4 44820000 */  mtc1      $v0, $f0
 /* ACB8E8 80240DC8 00000000 */  nop
 /* ACB8EC 80240DCC 46800020 */  cvt.s.w   $f0, $f0
-/* ACB8F0 80240DD0 0C0376B9 */  jal       func_800DDAE4
+/* ACB8F0 80240DD0 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* ACB8F4 80240DD4 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* ACB8F8 80240DD8 54400001 */  bnel      $v0, $zero, .L80240DE0
 /* ACB8FC 80240DDC 0000802D */   daddu    $s0, $zero, $zero

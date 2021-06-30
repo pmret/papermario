@@ -11,7 +11,7 @@ Script N(main) = SCRIPT({
         SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     }
     sleep 35;
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(20);
     sleep 10;
     GetActorPos(ACTOR_PLAYER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
@@ -39,7 +39,7 @@ Script N(main) = SCRIPT({
         }
     }
     sleep 80;
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     MoveBattleCamOver(20);
     InitTargetIterator();
 0:

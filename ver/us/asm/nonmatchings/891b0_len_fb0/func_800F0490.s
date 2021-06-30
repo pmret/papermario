@@ -57,7 +57,7 @@ glabel func_800F0490
 /* 89A04 800F0554 44810000 */  mtc1      $at, $f0
 /* 89A08 800F0558 8E260030 */  lw        $a2, 0x30($s1)
 /* 89A0C 800F055C 8E070000 */  lw        $a3, ($s0)
-/* 89A10 800F0560 0C01BF14 */  jal       func_8006FC50
+/* 89A10 800F0560 0C01BF14 */  jal       playFX_0A
 /* 89A14 800F0564 46007381 */   sub.s    $f14, $f14, $f0
 /* 89A18 800F0568 C6000000 */  lwc1      $f0, ($s0)
 /* 89A1C 800F056C 3C01420C */  lui       $at, 0x420c
@@ -145,7 +145,7 @@ glabel func_800F0490
 /* 89B60 800F06B0 2652005A */  addiu     $s2, $s2, 0x5a
 /* 89B64 800F06B4 26730001 */  addiu     $s3, $s3, 1
 /* 89B68 800F06B8 44070000 */  mfc1      $a3, $f0
-/* 89B6C 800F06BC 0C01BF2C */  jal       func_8006FCB0
+/* 89B6C 800F06BC 0C01BF2C */  jal       playFX_0B
 /* 89B70 800F06C0 0000202D */   daddu    $a0, $zero, $zero
 /* 89B74 800F06C4 2A620004 */  slti      $v0, $s3, 4
 /* 89B78 800F06C8 1040005B */  beqz      $v0, .L800F0838
@@ -240,7 +240,7 @@ glabel func_800F0490
 /* 89CD4 800F0824 46040000 */  add.s     $f0, $f0, $f4
 /* 89CD8 800F0828 46160000 */  add.s     $f0, $f0, $f22
 /* 89CDC 800F082C 44070000 */  mfc1      $a3, $f0
-/* 89CE0 800F0830 0C01BF2C */  jal       func_8006FCB0
+/* 89CE0 800F0830 0C01BF2C */  jal       playFX_0B
 /* 89CE4 800F0834 24040001 */   addiu    $a0, $zero, 1
 .L800F0838:
 /* 89CE8 800F0838 8FBF0028 */  lw        $ra, 0x28($sp)

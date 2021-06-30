@@ -7,7 +7,7 @@ glabel func_802426A8_B2EB18
 /* B2EB20 802426B0 8C82000C */  lw        $v0, 0xc($a0)
 /* B2EB24 802426B4 0C0B1EAF */  jal       get_variable
 /* B2EB28 802426B8 8C450000 */   lw       $a1, ($v0)
-/* B2EB2C 802426BC 0C03AC5A */  jal       func_800EB168
+/* B2EB2C 802426BC 0C03AC5A */  jal       switch_to_partner
 /* B2EB30 802426C0 0040202D */   daddu    $a0, $v0, $zero
 /* B2EB34 802426C4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B2EB38 802426C8 24020002 */  addiu     $v0, $zero, 2

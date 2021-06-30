@@ -49,7 +49,7 @@ glabel func_80240CDC_A1155C
 /* A1160C 80240D8C 44820000 */  mtc1      $v0, $f0
 /* A11610 80240D90 00000000 */  nop
 /* A11614 80240D94 46800020 */  cvt.s.w   $f0, $f0
-/* A11618 80240D98 0C01BFBC */  jal       func_8006FEF0
+/* A11618 80240D98 0C01BFBC */  jal       playFX_11
 /* A1161C 80240D9C E7A00010 */   swc1     $f0, 0x10($sp)
 /* A11620 80240DA0 8FBF002C */  lw        $ra, 0x2c($sp)
 /* A11624 80240DA4 8FB40028 */  lw        $s4, 0x28($sp)
