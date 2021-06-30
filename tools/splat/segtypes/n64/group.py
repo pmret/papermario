@@ -58,7 +58,7 @@ class N64SegGroup(N64Segment):
                 return True
         return False
 
-    def find_inserts(self, found_sections: Dict[str, Range], section_order) -> OrderedDict[str, int]:
+    def find_inserts(self, found_sections: Dict[str, Range], section_order) -> "OrderedDict[str, int]":
         inserts = OrderedDict()
 
         for i, section in enumerate(section_order):
