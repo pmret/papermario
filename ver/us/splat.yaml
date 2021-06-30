@@ -4175,7 +4175,8 @@ segments:
     - [0x7E8470, data]
     - [0x7EA340, data]
     - [0x7EAA50, data]
-    - [0x7EACD8, rodata]
+    - [0x7EACD8, .rodata, 7E73A0]
+    - [0x7EAD00, .rodata, 7E7850]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -4198,7 +4199,7 @@ segments:
     - [0x7FDF30, data]
     - [0x7FE550, data]
     - [0x8000B0, data]
-    - [0x8006A0, rodata]
+    - [0x8006A0, .rodata, 7EAD10]
     - [0x8006D0, rodata]
   - name: mac_01
     dir: world/area_mac/mac_01
