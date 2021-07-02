@@ -4203,7 +4203,7 @@ segments:
     - [0x7FE550, data]
     - [0x8000B0, data]
     - [0x8006A0, .rodata, 7EAD10]
-    - [0x8006D0, rodata]
+    - [0x8006D0, .rodata, 7ED280]
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code
@@ -7487,7 +7487,7 @@ segments:
     subsegments:
     - [0xB1D760, c]
     - [0xB1DB20, data]
-    - [0xB20460, rodata]
+    - [0xB20460, .rodata, B1D760]
   - name: tst_20
     dir: world/area_tst/tst_20
     type: code

@@ -15,4 +15,4 @@ def qc(words_string):
             print(f"static char* N(exit_str_{idx}) = \"{dec}\";")
             idx += 1
 
-qc("0x666C6F5F, 0x30300000, 0x6B6D725F, 0x32320000")
+qc("0x6D61635F, 0x30310000, 0x00000000, 0x00000000")

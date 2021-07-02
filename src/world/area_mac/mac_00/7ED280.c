@@ -164,6 +164,8 @@ ApiStatus N(func_80243104_7EDE14)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
+static char* N(exit_str_0) = "mac_01";
+
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400_7EE110);
 /*
 ApiStatus N(func_80243400_7EE110)(ScriptInstance* script, s32 isInitialCall) {
