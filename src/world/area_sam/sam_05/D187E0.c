@@ -1,5 +1,8 @@
 #include "sam_05.h"
 
+static char* N(exit_str_0) = "sam_04";
+static char* N(exit_str_1) = "sam_06";
+
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
 #include "world/common/UnkNpcAIFunc7.inc.c"

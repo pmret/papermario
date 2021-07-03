@@ -1,5 +1,10 @@
 #include "kmr_02.h"
 
+static char* N(exit_str_0) = "kmr_05";
+static char* N(exit_str_1) = "kmr_00";
+static char* N(exit_str_2) = "kmr_09";
+static char* N(exit_str_3) = "";
+
 #define UNK_ALPHA_FUNC_NPC 8
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
@@ -299,6 +304,9 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241964_8B19D4);
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241A10_8B1A80);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B0070", func_80241C18_8B1C88);
+
+static char* N(exit_str_4) = "nok_02";
+static char* N(exit_str_5) = "kmr_03";
 
 #include "world/common/UnkFunc41.inc.c"
 

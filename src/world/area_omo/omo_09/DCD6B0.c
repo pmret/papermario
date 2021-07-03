@@ -202,6 +202,8 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_80242DF0_DCFAC0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024324C_DCFF1C);
 
+static char* N(exit_str_0) = "omo_09";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024356C_DD023C);
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"

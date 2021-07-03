@@ -1,5 +1,8 @@
 #include "tik_14.h"
 
+static char* N(exit_str_0) = "tik_15";
+static char* N(exit_str_1) = "tik_21";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"

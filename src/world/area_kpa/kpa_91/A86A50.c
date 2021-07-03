@@ -1,5 +1,8 @@
 #include "kpa_91.h"
 
+static char* N(exit_str_0) = "kpa_90";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_kpa/kpa_91/A86A50", func_80240000_A86A50);
 /*
 ApiStatus N(func_80240000_A86A50)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {

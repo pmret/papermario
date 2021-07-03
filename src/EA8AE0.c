@@ -12,6 +12,10 @@ INCLUDE_ASM(s32, "EA8AE0", func_80240358_EA8E38);
 
 INCLUDE_ASM(s32, "EA8AE0", func_802404B8_EA8F98);
 
+static char* N(exit_str_0) = "kmr_23";
+static char* N(exit_str_1) = "kzn_18";
+static char* N(exit_str_2) = "kzn_20";
+
 INCLUDE_ASM(s32, "EA8AE0", func_802408C8_EA93A8);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80240908_EA93E8);

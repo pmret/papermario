@@ -96,7 +96,7 @@ glabel dgb_04_func_8024259C_C38ACC
 /* C38C28 802426F8 24020004 */  addiu     $v0, $zero, 4
 /* C38C2C 802426FC AC820318 */  sw        $v0, 0x318($a0)
 /* C38C30 80242700 AC960324 */  sw        $s6, 0x324($a0)
-/* C38C34 80242704 0C03D390 */  jal       btl_create_popup_menu
+/* C38C34 80242704 0C03D390 */  jal       create_popup_menu
 /* C38C38 80242708 AC800328 */   sw       $zero, 0x328($a0)
 /* C38C3C 8024270C AEA00070 */  sw        $zero, 0x70($s5)
 .L80242710:

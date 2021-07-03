@@ -1,5 +1,8 @@
 #include "iwa_02.h"
 
+static char* N(exit_str_0) = "iwa_01";
+static char* N(exit_str_1) = "iwa_04";
+
 INCLUDE_ASM(s32, "world/area_iwa/iwa_02/915D70", func_80240000_915D70);
 
 #include "world/common/UnkNpcAIFunc18.inc.c"

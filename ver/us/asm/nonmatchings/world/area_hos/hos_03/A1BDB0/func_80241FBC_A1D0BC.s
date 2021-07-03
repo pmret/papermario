@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8024BD88_A26E88
+.word L802420C8_A1D1C8, L802420D8_A1D1D8, L802420F0_A1D1F0, L80242100_A1D200, L80242180_A1D280, L80242180_A1D280, L80242180_A1D280, L80242180_A1D280, L80242180_A1D280, L80242180_A1D280, L80242118_A1D218, L80242128_A1D228, L80242140_A1D240, L80242158_A1D258, L80242170_A1D270, 0, 0, 0
+
+.section .text
+
 glabel func_80241FBC_A1D0BC
 /* A1D0BC 80241FBC 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* A1D0C0 80241FC0 AFB40040 */  sw        $s4, 0x40($sp)
@@ -79,7 +86,7 @@ glabel L802420C8_A1D1C8
 glabel L802420D8_A1D1D8
 /* A1D1D8 802420D8 0280202D */  daddu     $a0, $s4, $zero
 /* A1D1DC 802420DC 0200282D */  daddu     $a1, $s0, $zero
-/* A1D1E0 802420E0 0C090398 */  jal       btl_merlee_on_start_turn_A1BF60
+/* A1D1E0 802420E0 0C090398 */  jal       func_80240E60_A1BF60
 /* A1D1E4 802420E4 0260302D */   daddu    $a2, $s3, $zero
 /* A1D1E8 802420E8 08090861 */  j         .L80242184
 /* A1D1EC 802420EC 0000102D */   daddu    $v0, $zero, $zero

@@ -82,6 +82,8 @@ INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_802406A0_AF7FF0);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_802406C4_AF8014);
 
+static char* N(exit_str_0) = "kkj_18";
+
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240B4C_AF849C);
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_19/AF7C00", func_80240B8C_AF84DC);

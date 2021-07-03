@@ -114,8 +114,8 @@ class Segment:
         self.given_subalign = given_subalign
         self.given_is_overlay = given_is_overlay
         self.given_dir = given_dir
-        self.given_seg_symbols: Dict[int, Symbol] = {} # Symbols known to be in this segment
-        self.given_ext_symbols: Dict[int, Symbol] = {} # Symbols not in this segment but also not from other overlapping ram address ranges
+        self.given_seg_symbols: Dict[int, List[Symbol]] = {} # Symbols known to be in this segment
+        self.given_ext_symbols: Dict[int, List[Symbol]] = {} # Symbols not in this segment but also not from other overlapping ram address ranges
 
         self.parent:Optional[Segment] = None
         self.sibling:Optional[Segment] = None
@@ -180,14 +180,14 @@ class Segment:
         return False
 
     @property
-    def seg_symbols(self) -> Dict[int, Symbol]:
+    def seg_symbols(self) -> Dict[int, List[Symbol]]:
         if self.parent:
             return self.parent.seg_symbols
         else:
             return self.given_seg_symbols
 
     @property
-    def ext_symbols(self) -> Dict[int, Symbol]:
+    def ext_symbols(self) -> Dict[int, List[Symbol]]:
         if self.parent:
             return self.parent.ext_symbols
         else:

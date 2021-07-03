@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8024190C_96AACC
+glabel dro_02_func_8024190C_96AACC
 /* 96AACC 8024190C 27BDFF00 */  addiu     $sp, $sp, -0x100
 /* 96AAD0 80241910 AFBF00EC */  sw        $ra, 0xec($sp)
 /* 96AAD4 80241914 AFBE00E8 */  sw        $fp, 0xe8($sp)
@@ -349,8 +349,8 @@ glabel func_8024190C_96AACC
 /* 96B014 80241E54 3C120001 */  lui       $s2, 1
 /* 96B018 80241E58 36521630 */  ori       $s2, $s2, 0x1630
 /* 96B01C 80241E5C AD020004 */  sw        $v0, 4($t0)
-/* 96B020 80241E60 3C028025 */  lui       $v0, %hi(dro_02_D_8024F010)
-/* 96B024 80241E64 2442F010 */  addiu     $v0, $v0, %lo(dro_02_D_8024F010)
+/* 96B020 80241E60 3C028025 */  lui       $v0, %hi(D_8024F010)
+/* 96B024 80241E64 2442F010 */  addiu     $v0, $v0, %lo(D_8024F010)
 /* 96B028 80241E68 AD030000 */  sw        $v1, ($t0)
 /* 96B02C 80241E6C 8C450004 */  lw        $a1, 4($v0)
 /* 96B030 80241E70 8C460008 */  lw        $a2, 8($v0)
@@ -378,8 +378,8 @@ glabel func_8024190C_96AACC
 /* 96B088 80241EC8 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96B08C 80241ECC 34A5D480 */  ori       $a1, $a1, 0xd480
 /* 96B090 80241ED0 8FC30000 */  lw        $v1, ($fp)
-/* 96B094 80241ED4 3C048025 */  lui       $a0, %hi(dro_02_D_8024EFCC)
-/* 96B098 80241ED8 8C84EFCC */  lw        $a0, %lo(dro_02_D_8024EFCC)($a0)
+/* 96B094 80241ED4 3C048025 */  lui       $a0, %hi(D_8024EFCC)
+/* 96B098 80241ED8 8C84EFCC */  lw        $a0, %lo(D_8024EFCC)($a0)
 /* 96B09C 80241EDC 96020000 */  lhu       $v0, ($s0)
 /* 96B0A0 80241EE0 0060302D */  daddu     $a2, $v1, $zero
 /* 96B0A4 80241EE4 24630008 */  addiu     $v1, $v1, 8
@@ -429,8 +429,8 @@ glabel func_8024190C_96AACC
 /* 96B148 80241F88 36F70002 */  ori       $s7, $s7, 2
 /* 96B14C 80241F8C 3C0DD838 */  lui       $t5, 0xd838
 /* 96B150 80241F90 35AD0002 */  ori       $t5, $t5, 2
-/* 96B154 80241F94 3C108025 */  lui       $s0, %hi(dro_02_D_8024F010)
-/* 96B158 80241F98 2610F010 */  addiu     $s0, $s0, %lo(dro_02_D_8024F010)
+/* 96B154 80241F94 3C108025 */  lui       $s0, %hi(D_8024F010)
+/* 96B158 80241F98 2610F010 */  addiu     $s0, $s0, %lo(D_8024F010)
 /* 96B15C 80241F9C AFAD00C0 */  sw        $t5, 0xc0($sp)
 /* 96B160 80241FA0 AD030000 */  sw        $v1, ($t0)
 /* 96B164 80241FA4 AD020004 */  sw        $v0, 4($t0)
@@ -457,8 +457,8 @@ glabel func_8024190C_96AACC
 /* 96B1B8 80241FF8 00452821 */   addu     $a1, $v0, $a1
 /* 96B1BC 80241FFC 3C05F4AC */  lui       $a1, 0xf4ac
 /* 96B1C0 80242000 34A5D481 */  ori       $a1, $a1, 0xd481
-/* 96B1C4 80242004 3C158025 */  lui       $s5, %hi(dro_02_D_8024EFCC)
-/* 96B1C8 80242008 26B5EFCC */  addiu     $s5, $s5, %lo(dro_02_D_8024EFCC)
+/* 96B1C4 80242004 3C158025 */  lui       $s5, %hi(D_8024EFCC)
+/* 96B1C8 80242008 26B5EFCC */  addiu     $s5, $s5, %lo(D_8024EFCC)
 /* 96B1CC 8024200C 3C0D8000 */  lui       $t5, 0x8000
 /* 96B1D0 80242010 8FC30000 */  lw        $v1, ($fp)
 /* 96B1D4 80242014 8EA40000 */  lw        $a0, ($s5)

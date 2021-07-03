@@ -84,7 +84,7 @@ glabel func_80240B54_8EC974
 /* 8ECA94 80240C74 AEF50324 */  sw        $s5, 0x324($s7)
 /* 8ECA98 80240C78 8E82007C */  lw        $v0, 0x7c($s4)
 /* 8ECA9C 80240C7C 02E0202D */  daddu     $a0, $s7, $zero
-/* 8ECAA0 80240C80 0C03D390 */  jal       btl_create_popup_menu
+/* 8ECAA0 80240C80 0C03D390 */  jal       create_popup_menu
 /* 8ECAA4 80240C84 AC820328 */   sw       $v0, 0x328($a0)
 /* 8ECAA8 80240C88 0C03A631 */  jal       func_800E98C4
 /* 8ECAAC 80240C8C 00000000 */   nop

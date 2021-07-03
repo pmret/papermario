@@ -81,7 +81,7 @@ glabel func_80245028_8058A8
 /* 8059CC 8024514C 2402000D */  addiu     $v0, $zero, 0xd
 /* 8059D0 80245150 AFC20318 */  sw        $v0, 0x318($fp)
 /* 8059D4 80245154 AFD60324 */  sw        $s6, 0x324($fp)
-/* 8059D8 80245158 0C03D390 */  jal       btl_create_popup_menu
+/* 8059D8 80245158 0C03D390 */  jal       create_popup_menu
 /* 8059DC 8024515C AFC30328 */   sw       $v1, 0x328($fp)
 /* 8059E0 80245160 0C03A631 */  jal       func_800E98C4
 /* 8059E4 80245164 00000000 */   nop

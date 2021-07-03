@@ -1,5 +1,8 @@
 #include "iwa_04.h"
 
+static char* N(exit_str_0) = "iwa_02";
+static char* N(exit_str_1) = "sbk_99";
+
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240000_91B8E0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240080_91B960);

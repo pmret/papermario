@@ -1,5 +1,8 @@
 #include "mim_12.h"
 
+static char* N(exit_str_0) = "mim_11";
+static char* N(exit_str_1) = "arn_07";
+
 INCLUDE_ASM(s32, "world/area_mim/mim_12/BBB380", func_80240000_BBB380);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_12/BBB380", func_80240064_BBB3E4);

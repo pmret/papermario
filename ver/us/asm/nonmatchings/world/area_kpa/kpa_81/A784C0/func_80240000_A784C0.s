@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242000_A7A4C0
+.ascii "kpa_80_shape\0\0\0\0"
+
+glabel D_80242010_A7A4D0
+.ascii "kpa_80_hit\0\0kpa_50\0\0kpa_32\0\0kpa_04\0\0kpa_17\0\0\0\0\0\0"
+
+.section .text
+
 glabel func_80240000_A784C0
 /* A784C0 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* A784C4 80240004 3C04800E */  lui       $a0, %hi(D_800D9230)

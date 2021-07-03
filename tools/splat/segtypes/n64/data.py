@@ -1,6 +1,6 @@
 from segtypes.n64.codesubsegment import N64SegCodeSubsegment
 from pathlib import Path
-from typing import Dict, Optional
+from typing import List, Optional
 from util.symbols import Symbol
 from util import floats, options
 
@@ -33,7 +33,34 @@ class N64SegData(N64SegCodeSubsegment):
     def get_linker_section(self) -> str:
         return ".data"
 
-    def get_symbols(self, rom_bytes):
+    def check_jtbls(self, rom_bytes, syms: List[Symbol]):
+        for i, sym in enumerate(syms):
+            if sym.type == "jtbl":
+                start = self.parent.ram_to_rom(syms[i].vram_start)
+                assert isinstance(start, int)
+                end = self.parent.ram_to_rom(syms[i + 1].vram_start)
+                sym_bytes = rom_bytes[start:end]
+
+                b = 0
+                last_bits = 0
+                while b < len(sym_bytes):
+                    bits = int.from_bytes(sym_bytes[b : b + 4], "big")
+
+                    if last_bits != 0 and bits != 0 and abs(last_bits - bits) > 0x100000:
+                        new_sym_rom_start = start + b
+                        new_sym_ram_start = self.parent.rom_to_ram(new_sym_rom_start)
+                        sym.size = new_sym_rom_start - sym.rom
+
+                        syms.insert(i + 1, self.parent.get_symbol(new_sym_ram_start, create=True, define=True, local_only=True))
+                        return False
+
+                    if bits != 0:
+                        last_bits = bits
+                    b += 4
+
+        return True
+
+    def get_symbols(self, rom_bytes) -> List[Symbol]:
         symset = set()
 
         # Find inter-data symbols
@@ -47,7 +74,7 @@ class N64SegData(N64SegCodeSubsegment):
                 if not symbol.dead and self.contains_vram(symbol.vram_start):
                     symset.add(symbol)
 
-        ret = list(symset)
+        ret: List[Symbol] = list(symset)
         ret.sort(key=lambda s:s.vram_start)
 
         # Ensure we start at the beginning
@@ -56,6 +83,11 @@ class N64SegData(N64SegCodeSubsegment):
 
         # Make a dummy symbol here that marks the end of the previous symbol's disasm range
         ret.append(Symbol(self.vram_end))
+
+        while True:
+            valid = self.check_jtbls(rom_bytes, ret)
+            if valid:
+                break
 
         return ret
 

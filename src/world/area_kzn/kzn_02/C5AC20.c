@@ -234,6 +234,8 @@ ApiStatus N(func_80241DE4_C5C524)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
+static char* N(exit_str_0) = "kzn_02";
+
 INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80241FCC_C5C70C);
 /*
 ApiStatus N(func_80241FCC_C5C70C)(ScriptInstance* script, s32 isInitialCall) {

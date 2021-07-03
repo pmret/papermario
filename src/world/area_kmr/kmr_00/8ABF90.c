@@ -1,5 +1,8 @@
 #include "kmr_00.h"
 
+static char* N(exit_str_0) = "kmr_02";
+static char* N(exit_str_1) = "kmr_02\0";
+
 INCLUDE_ASM(s32, "world/area_kmr/kmr_00/8ABF90", func_80240000_8ABF90);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_00/8ABF90", func_80240388_8AC318);

@@ -164,4 +164,6 @@ ApiStatus N(func_80240C44_ABBED4)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
+static char* N(exit_str) = "end_00";
+
 INCLUDE_ASM(s32, "world/area_kkj/kkj_00/ABB340", func_80240F40_ABC1D0);

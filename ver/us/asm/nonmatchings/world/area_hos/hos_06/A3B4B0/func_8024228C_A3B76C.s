@@ -91,7 +91,7 @@ glabel func_8024228C_A3B76C
 /* A3B8B4 802423D4 24020001 */   addiu    $v0, $zero, 1
 .L802423D8:
 /* A3B8B8 802423D8 AC960324 */  sw        $s6, 0x324($a0)
-/* A3B8BC 802423DC 0C03D390 */  jal       btl_create_popup_menu
+/* A3B8BC 802423DC 0C03D390 */  jal       create_popup_menu
 /* A3B8C0 802423E0 AC800328 */   sw       $zero, 0x328($a0)
 /* A3B8C4 802423E4 AE600070 */  sw        $zero, 0x70($s3)
 .L802423E8:

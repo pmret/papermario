@@ -1,5 +1,8 @@
 #include "kpa_50.h"
 
+static char* N(exit_str_0) = "kpa_70";
+static char* N(exit_str_1) = "kpa_81";
+
 INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_80240000_A609D0);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_50/A609D0", func_802401F0_A60BC0);

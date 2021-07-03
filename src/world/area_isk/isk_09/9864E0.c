@@ -1,5 +1,8 @@
 #include "isk_09.h"
 
+static char* N(exit_str_0) = "isk_08";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_isk/isk_09/9864E0", func_80240000_9864E0);
 /*
 ApiStatus N(func_80240000_9864E0)(ScriptInstance* script, s32 isInitialCall) {

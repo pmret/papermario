@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8024A7D0_DD74A0
+.double 32767.0
+
+.section .text
+
 glabel func_80240F4C_DCDC1C
 /* DCDC1C 80240F4C 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* DCDC20 80240F50 AFB50024 */  sw        $s5, 0x24($sp)
