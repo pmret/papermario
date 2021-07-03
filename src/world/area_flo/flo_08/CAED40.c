@@ -112,10 +112,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF
             s32 isInitialCall);
 #endif
 
-ApiStatus N(func_8024041C_CAF15C)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 

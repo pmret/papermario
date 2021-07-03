@@ -145,7 +145,7 @@ Script N(80242178) = SCRIPT({
     EnablePartnerAI();
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != SI_VAR(11)) {
-        N(func_8024041C_CAF15C)(SI_VAR(11));
+        N(SwitchToPartner)(SI_VAR(11));
     } else {
         func_802CF56C(2);
     }

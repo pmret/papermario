@@ -484,4 +484,4 @@ ApiStatus N(func_80242678_B2EAE8)(ScriptInstance *script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_jan/jan_02/B2C8A0", func_802426A8_B2EB18);
+#include "world/common/SwitchToPartner.inc.c"

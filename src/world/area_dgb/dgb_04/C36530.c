@@ -356,7 +356,7 @@ Script N(80243EF8) = SCRIPT({
     EnablePartnerAI();
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != SI_VAR(11)) {
-        N(func_802427EC_C38D1C)(SI_VAR(11));
+        N(SwitchToPartner)(SI_VAR(11));
     } else {
         func_802CF56C(2);
     }
@@ -1062,12 +1062,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38A
             s32 isInitialCall)
 #endif
 
-ApiStatus N(func_802427EC_C38D1C)(ScriptInstance* script, s32 isInitialCall) {
-    s32 partnerID = get_variable(script, *script->ptrReadPos);
-    switch_to_partner(partnerID);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 

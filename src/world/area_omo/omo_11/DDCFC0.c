@@ -16,13 +16,7 @@ ApiStatus N(func_802407CC_DDCFFC)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_8024095C_DDD18C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_11/DDCFC0", func_80240BAC_DDD3DC);
-/*
-ApiStatus N(func_80240BAC_DDD3DC)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 

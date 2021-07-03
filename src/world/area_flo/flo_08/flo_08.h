@@ -18,7 +18,7 @@ ApiStatus N(UnkPartnerPosFunc2)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024003C_CAED7C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc38)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_8024041C_CAF15C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(SwitchToPartner)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc39)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(UnkFunc40)(ScriptInstance* script, s32 isInitialCall);

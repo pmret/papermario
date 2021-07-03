@@ -510,13 +510,7 @@ ApiStatus N(func_80242FB8_9D9FD8)(ScriptInstance *script, s32 isInitialCall) {
 }
 */
 
-INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80242FE4_9DA004);
-/*
-ApiStatus N(func_80242FE4_9DA004)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/SwitchToPartner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80243010_9DA030);
 

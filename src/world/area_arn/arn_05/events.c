@@ -552,7 +552,7 @@ Script N(80242C50) = SCRIPT({
     SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != 9) {
-        N(func_802412C8_BE8EA8)(9);
+        N(SwitchToPartner)(9);
         spawn {
             SI_MAP_VAR(0) = 0;
             ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00A2), 160, 40);
@@ -1254,7 +1254,4 @@ ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall) {
     return (gGameStatusPtr->pressedButtons >> 1) & ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802412C8_BE8EA8)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"
