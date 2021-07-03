@@ -187,7 +187,7 @@ glabel L802414A0_A87EF0
 glabel L802414B0_A87F00
 /* A87F00 802414B0 0260202D */  daddu     $a0, $s3, $zero
 /* A87F04 802414B4 0280282D */  daddu     $a1, $s4, $zero
-/* A87F08 802414B8 0C0903C3 */  jal       func_80240F0C_A8795C
+/* A87F08 802414B8 0C0903C3 */  jal       kpa_91_UnkDistFunc
 /* A87F0C 802414BC 02A0302D */   daddu    $a2, $s5, $zero
 /* A87F10 802414C0 08090540 */  j         L80241500_A87F50
 /* A87F14 802414C4 00000000 */   nop

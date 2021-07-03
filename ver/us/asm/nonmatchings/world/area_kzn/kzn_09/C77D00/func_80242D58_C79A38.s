@@ -244,7 +244,7 @@ glabel func_80242D58_C79A38
 /* C79D98 802430B8 0260202D */  daddu     $a0, $s3, $zero
 .L802430BC:
 /* C79D9C 802430BC 0280282D */  daddu     $a1, $s4, $zero
-/* C79DA0 802430C0 0C090A90 */  jal       func_80242A40_C79720
+/* C79DA0 802430C0 0C090A90 */  jal       kzn_09_UnkDistFunc
 /* C79DA4 802430C4 02A0302D */   daddu    $a2, $s5, $zero
 /* C79DA8 802430C8 08090C41 */  j         .L80243104
 /* C79DAC 802430CC 00000000 */   nop

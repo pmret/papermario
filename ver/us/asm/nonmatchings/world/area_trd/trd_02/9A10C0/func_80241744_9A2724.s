@@ -187,7 +187,7 @@ glabel L802419C0_9A29A0
 glabel L802419D0_9A29B0
 /* 9A29B0 802419D0 0260202D */  daddu     $a0, $s3, $zero
 /* 9A29B4 802419D4 0280282D */  daddu     $a1, $s4, $zero
-/* 9A29B8 802419D8 0C090057 */  jal       func_8024015C_9A113C
+/* 9A29B8 802419D8 0C090057 */  jal       trd_02_UnkDistFunc
 /* 9A29BC 802419DC 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A29C0 802419E0 08090688 */  j         L80241A20_9A2A00
 /* 9A29C4 802419E4 00000000 */   nop

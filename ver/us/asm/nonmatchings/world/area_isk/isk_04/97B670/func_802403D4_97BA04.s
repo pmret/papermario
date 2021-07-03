@@ -244,7 +244,7 @@ glabel func_802403D4_97BA04
 /* 97BD64 80240734 0260202D */  daddu     $a0, $s3, $zero
 .L80240738:
 /* 97BD68 80240738 0280282D */  daddu     $a1, $s4, $zero
-/* 97BD6C 8024073C 0C09002F */  jal       func_802400BC_97B6EC
+/* 97BD6C 8024073C 0C09002F */  jal       isk_04_UnkDistFunc
 /* 97BD70 80240740 02A0302D */   daddu    $a2, $s5, $zero
 /* 97BD74 80240744 080901E0 */  j         .L80240780
 /* 97BD78 80240748 00000000 */   nop

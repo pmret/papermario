@@ -187,7 +187,7 @@ glabel L80241E50_9FC640
 glabel L80241E60_9FC650
 /* 9FC650 80241E60 0260202D */  daddu     $a0, $s3, $zero
 /* 9FC654 80241E64 0280282D */  daddu     $a1, $s4, $zero
-/* 9FC658 80241E68 0C09017B */  jal       func_802405EC_9FADDC
+/* 9FC658 80241E68 0C09017B */  jal       nok_12_UnkDistFunc
 /* 9FC65C 80241E6C 02A0302D */   daddu    $a2, $s5, $zero
 /* 9FC660 80241E70 080907AC */  j         L80241EB0_9FC6A0
 /* 9FC664 80241E74 00000000 */   nop

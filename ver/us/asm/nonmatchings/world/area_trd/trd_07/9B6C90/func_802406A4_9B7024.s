@@ -244,7 +244,7 @@ glabel func_802406A4_9B7024
 /* 9B7384 80240A04 0260202D */  daddu     $a0, $s3, $zero
 .L80240A08:
 /* 9B7388 80240A08 0280282D */  daddu     $a1, $s4, $zero
-/* 9B738C 80240A0C 0C0900E3 */  jal       func_8024038C_9B6D0C
+/* 9B738C 80240A0C 0C0900E3 */  jal       trd_07_UnkDistFunc
 /* 9B7390 80240A10 02A0302D */   daddu    $a2, $s5, $zero
 /* 9B7394 80240A14 08090294 */  j         .L80240A50
 /* 9B7398 80240A18 00000000 */   nop

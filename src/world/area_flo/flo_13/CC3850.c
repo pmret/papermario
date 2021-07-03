@@ -1722,27 +1722,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-void N(func_80242314_CC5B24)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-        if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim.w = enemy->animList[9];
-            npc->moveSpeed = aiSettings->chaseSpeed;
-            if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
-                npc->collisionHeight = enemy->varTable[6] / 2;
-            }
-            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                    gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
-            if (npc->duration < enemy->varTable[3]) {
-                npc->duration = enemy->varTable[3];
-            }
-            enemy->varTable[4] = npc->duration;
-            script->functionTemp[0].s = 14;
-        }
-    }
-}
+#include "world/common/UnkDistFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
@@ -1843,7 +1823,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance* script, s32 isInitialCall) {
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
 
         case 13:
-            N(func_80242314_CC5B24)(script, aiSettings, territoryPtr);
+            N(UnkDistFunc)(script, aiSettings, territoryPtr);
             break;
 
         case 14:
@@ -1975,7 +1955,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance* script, s32 isInitialCall) {
             N(set_script_owner_npc_anim)(script, aiSettings, territoryPtr);
 
         case 13:
-            N(func_80242314_CC5B24)(script, aiSettings, territoryPtr);
+            N(UnkDistFunc)(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];
             break;
 
