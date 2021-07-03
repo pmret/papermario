@@ -1,5 +1,8 @@
 #include "tik_19.h"
 
+static char* N(exit_str_0) = "mac_00";
+static char* N(exit_str_1) = "";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"

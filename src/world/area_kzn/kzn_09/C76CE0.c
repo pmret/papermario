@@ -1,5 +1,8 @@
 #include "kzn_09.h"
 
+static char* N(exit_str_0) = "kzn_03";
+static char* N(exit_str_1) = "kzn_10";
+
 #include "world/common/SetOverrideFlags_40.inc.c"
 
 #include "world/common/UnkFunc17.inc.c"

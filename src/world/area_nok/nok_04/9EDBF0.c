@@ -1,5 +1,8 @@
 #include "nok_04.h"
 
+static char* N(exit_str_0) = "nok_03";
+static char* N(exit_str_1) = "";
+
 #include "world/common/UnkFunc41.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"

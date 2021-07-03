@@ -1,5 +1,12 @@
 #include "mim_11.h"
 
+static char* N(exit_str_0) = "osr_03";
+static char* N(exit_str_1) = "mim_07";
+static char* N(exit_str_2) = "mim_12";
+static char* N(exit_str_3) = "obk_01";
+static char* N(exit_str_4) = "tik_09";
+static char* N(exit_str_5) = "";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"

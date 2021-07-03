@@ -1,5 +1,8 @@
 #include "omo_07.h"
 
+static char* N(exit_str_0) = "omo_06";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240000_DBD2B0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240070_DBD320);
@@ -304,6 +307,8 @@ ApiStatus N(func_80242C84_DBFF34)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 */
+
+static char* N(exit_str_2) = "omo_07";
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80242E70_DC0120);
 

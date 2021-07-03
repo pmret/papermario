@@ -26,6 +26,8 @@ INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80241A08_E06D68);
 
 INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80241B44_E06EA4);
 
+static char* N(exit_str_0) = "kmr_30";
+
 INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_802421E8_E07548);
 
 INCLUDE_ASM(s32, "world/area_end/end_01/E05390", func_80242368_E076C8);

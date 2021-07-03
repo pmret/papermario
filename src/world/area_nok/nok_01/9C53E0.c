@@ -1,5 +1,8 @@
 #include "nok_01.h"
 
+static char* N(exit_str_0) = "nok_13";
+static char* N(exit_str_1) = "nok_02";
+
 #define UNK_ALPHA_FUNC_NPC 15
 
 INCLUDE_ASM(s32, "world/area_nok/nok_01/9C53E0", func_80240000_9C53E0);

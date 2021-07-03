@@ -43,6 +43,10 @@ ApiStatus N(func_8024004C_9C295C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_802401AC_9C2ABC);
 
+static char* N(exit_str_0) = "kmr_23";
+static char* N(exit_str_1) = "trd_06";
+static char* N(exit_str_2) = "trd_09";
+
 INCLUDE_ASM(s32, "world/area_trd/trd_10/9C2910", func_802405BC_9C2ECC);
 /*
 ApiStatus N(func_802405BC_9C2ECC)(ScriptInstance* script, s32 isInitialCall) {

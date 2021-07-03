@@ -1,5 +1,8 @@
 #include "hos_05.h"
 
+static char* N(exit_str_0) = "hos_04";
+static char* N(exit_str_1) = "";
+
 #include "world/common/UnkFunc27.inc.c"
 
 #include "world/common/UnkFunc26.inc.c"

@@ -1,6 +1,0 @@
-.include "macro.inc"
-
-.section .rodata
-
-glabel D_80242010_A548D0
-.word 0x6B70615F, 0x36320000, 0x6B70615F, 0x31320000, 0x6B70615F, 0x31370000, 0x00000000, 0x00000000

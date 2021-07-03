@@ -1,5 +1,8 @@
 #include "nok_11.h"
 
+static char* N(exit_str_0) = "mac_01";
+static char* N(exit_str_1) = "nok_12";
+
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
 INCLUDE_ASM(s32, "world/area_nok/nok_11/9F4A40", func_8024007C_9F4ABC);

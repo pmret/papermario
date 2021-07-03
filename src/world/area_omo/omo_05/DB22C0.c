@@ -1,5 +1,8 @@
 #include "omo_05.h"
 
+static char* N(exit_str_0) = "omo_17";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240000_DB22C0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240070_DB2330);

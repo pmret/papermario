@@ -43,6 +43,9 @@ ApiStatus N(func_8024006C_D86A6C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_32/D86A20", func_802401CC_D86BCC);
 
+static char* N(exit_str_0) = "kmr_23";
+static char* N(exit_str_1) = "pra_40";
+
 INCLUDE_ASM(s32, "world/area_pra/pra_32/D86A20", func_802405DC_D86FDC);
 /*
 ApiStatus N(func_802405DC_D86FDC)(ScriptInstance* script, s32 isInitialCall) {

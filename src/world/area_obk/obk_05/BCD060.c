@@ -1,5 +1,8 @@
 #include "obk_05.h"
 
+static char* N(exit_str_0) = "obk_01";
+static char* N(exit_str_1) = "obk_06";
+
 #include "world/common/UnsetCamera0MoveFlag1.inc.c"
 
 #include "world/common/SetCamera0MoveFlag1.inc.c"

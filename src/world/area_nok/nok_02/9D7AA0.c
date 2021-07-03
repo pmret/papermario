@@ -166,6 +166,9 @@ ApiStatus N(func_80241614_9D8634)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
+static char* N(exit_str_0) = "nok_02";
+static char* N(exit_str_1) = "obk_09";
+
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7AA0", func_80241910_9D8930);
 /*
 ApiStatus N(func_80241910_9D8930)(ScriptInstance* script, s32 isInitialCall) {

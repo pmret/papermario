@@ -1,5 +1,8 @@
 #include "kmr_06.h"
 
+static char* N(exit_str_0) = "kmr_09";
+static char* N(exit_str_1) = "kmr_07";
+
 INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D1510", func_80240000_8D1510);
 /*
 void N(func_80240000_8D1510)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {

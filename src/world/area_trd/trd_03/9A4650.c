@@ -1,5 +1,8 @@
 #include "trd_03.h"
 
+static char* N(exit_str_0) = "trd_02";
+static char* N(exit_str_1) = "trd_04";
+
 ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     u32 stickX;

@@ -1,5 +1,8 @@
 #include "tst_04.h"
 
+static char* N(exit_str_0) = "tst_03";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_80240000_B1B570);
 
 INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_802400FC_B1B66C);

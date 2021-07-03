@@ -1,5 +1,10 @@
 #include "jan_03.h"
 
+static char* N(exit_str_0) = "jan_02";
+static char* N(exit_str_1) = "jan_05";
+static char* N(exit_str_2) = "jan_22";
+static char* N(exit_str_3) = "";
+
 #define UNK_ALPHA_FUNC_NPC 17
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
@@ -183,6 +188,8 @@ ApiStatus N(func_802411B4_B35D84)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 */
+
+static char* N(exit_str_4) = "tik_08";
 
 #include "world/common/Call800E9894.inc.c"
 

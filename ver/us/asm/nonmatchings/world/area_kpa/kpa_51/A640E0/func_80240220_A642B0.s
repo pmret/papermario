@@ -3,11 +3,11 @@
 
 .section .rodata
 
-glabel D_80242F88_A67018
-.double 90.0
-
 glabel jtbl_80242F70_A67000
 .word L80240314_A643A4, L80240344_A643D4, L80240570_A64600, L802405B4_A64644, L8024060C_A6469C, 0
+
+glabel D_80242F88_A67018
+.double 90.0
 
 .section .text
 

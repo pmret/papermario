@@ -1,5 +1,8 @@
 #include "mac_05.h"
 
+static char* N(exit_str_0) = "mac_04";
+static char* N(exit_str_1) = "kgr_01";
+
 #define UNK_ALPHA_FUNC_NPC 6
 
 #include "world/common/UnkTexturePanFunc.inc.c"
@@ -538,6 +541,8 @@ ApiStatus N(func_80242A64_854BD4)(ScriptInstance *script, s32 isInitialCall) {
 */
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A90_854C00);
+
+static char* N(exit_str_2) = "mac_06";
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242C78_854DE8);
 

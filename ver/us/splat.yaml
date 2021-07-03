@@ -5586,6 +5586,7 @@ segments:
     start: 0x95AEB0
     vram: 0x80240000
     subsegments:
+    - [0x95AEB0, c]
     - [0x95AEB0, data]
     - [0x95B190, data]
     - [0x95B1F0]
@@ -5621,6 +5622,7 @@ segments:
     start: 0x978140
     vram: 0x80240000
     subsegments:
+    - [0x978140, c]
     - [0x978140, data]
     - [0x978360, data]
     - [0x9785C0, data]
@@ -5648,6 +5650,7 @@ segments:
     start: 0x979E50
     vram: 0x80240000
     subsegments:
+    - [0x979E50, c]
     - [0x979E50, data]
     - [0x97A210, data]
     - [0x97B340, data]
@@ -5687,6 +5690,7 @@ segments:
     start: 0x980A20
     vram: 0x80240000
     subsegments:
+    - [0x980A20, c]
     - [0x980A20, data]
     - [0x980D40, data]
     - [0x982150, data]
@@ -5769,6 +5773,7 @@ segments:
     start: 0x98D640
     vram: 0x80240000
     subsegments:
+    - [0x98D640, c]
     - [0x98D640, data]
     - [0x98DA70, data]
     - [0x98DCB0, data]
@@ -5830,6 +5835,7 @@ segments:
     start: 0x999740
     vram: 0x80240000
     subsegments:
+    - [0x999740, c]
     - [0x999740, data]
     - [0x999960, data]
     - [0x999BA0, data]
@@ -6058,7 +6064,6 @@ segments:
     - [0x9EEB20, data]
     - [0x9EEC40, data]
     - [0x9EEEB0, data]
-    - [0x9EF338, data]
     - [0x9F4A00]
   - name: nok_11
     dir: world/area_nok/nok_11
@@ -6453,6 +6458,7 @@ segments:
     start: 0xA5CA20
     vram: 0x80240000
     subsegments:
+    - [0xA5CA20, c]
     - [0xA5CA20, data]
     - [0xA5CB00, data]
     - [0xA5CBD0, data]
@@ -6489,6 +6495,7 @@ segments:
     start: 0xA60040
     vram: 0x80240000
     subsegments:
+    - [0xA60040, c]
     - [0xA60040, data]
     - [0xA60130, data]
     - [0xA60450]
@@ -6499,6 +6506,7 @@ segments:
     start: 0xA60470
     vram: 0x80240000
     subsegments:
+    - [0xA60470, c]
     - [0xA60470, data]
     - [0xA60560, data]
     - [0xA609B0]
@@ -6662,6 +6670,7 @@ segments:
     start: 0xA867B0
     vram: 0x80240000
     subsegments:
+    - [0xA867B0, c]
     - [0xA867B0, data]
     - [0xA86880, data]
     - [0xA86A40]
@@ -6686,6 +6695,7 @@ segments:
     start: 0xA8C7C0
     vram: 0x80240000
     subsegments:
+    - [0xA8C7C0, c]
     - [0xA8C7C0, data]
     - [0xA8C890, data]
     - [0xA8CA70]
@@ -6771,6 +6781,7 @@ segments:
     start: 0xA9C990
     vram: 0x80240000
     subsegments:
+    - [0xA9C990, c]
     - [0xA9C990, data]
     - [0xA9CA60, data]
     - [0xA9CC20]
@@ -6819,6 +6830,7 @@ segments:
     start: 0xAA1EE0
     vram: 0x80240000
     subsegments:
+    - [0xAA1EE0, c]
     - [0xAA1EE0, data]
     - [0xAA1FB0, data]
     - [0xAA2170]
@@ -6829,6 +6841,7 @@ segments:
     start: 0xAA2180
     vram: 0x80240000
     subsegments:
+    - [0xAA2180, c]
     - [0xAA2180, data]
     - [0xAA2240, data]
     - [0xAA23B0]
@@ -6839,6 +6852,7 @@ segments:
     start: 0xAA23C0
     vram: 0x80240000
     subsegments:
+    - [0xAA23C0, c]
     - [0xAA23C0, data]
     - [0xAA2490, data]
     - [0xAA2650]
@@ -6849,6 +6863,7 @@ segments:
     start: 0xAA2660
     vram: 0x80240000
     subsegments:
+    - [0xAA2660, c]
     - [0xAA2660, data]
     - [0xAA2720, data]
     - [0xAA2760, data]
@@ -6860,6 +6875,7 @@ segments:
     start: 0xAA28F0
     vram: 0x80240000
     subsegments:
+    - [0xAA28F0, c]
     - [0xAA28F0, data]
     - [0xAA29C0, data]
     - [0xAA2D10]
@@ -7008,6 +7024,7 @@ segments:
     start: 0xAC8D20
     vram: 0x80240000
     subsegments:
+    - [0xAC8D20, c]
     - [0xAC8D20, data]
     - [0xAC8E40, data]
     - [0xAC9160, data]
@@ -7209,6 +7226,7 @@ segments:
     start: 0xB022A0
     vram: 0x80240000
     subsegments:
+    - [0xB022A0, c]
     - [0xB022A0, data]
     - [0xB024E0]
   - name: kkj_22
@@ -7218,6 +7236,7 @@ segments:
     start: 0xB024F0
     vram: 0x80240000
     subsegments:
+    - [0xB024F0, c]
     - [0xB024F0, data]
     - [0xB025A0, data]
     - [0xB02870]
@@ -7299,6 +7318,7 @@ segments:
     start: 0xB14EA0
     vram: 0x80240000
     subsegments:
+    - [0xB14EA0, c]
     - [0xB14EA0, data]
     - [0xB150A0]
   - name: kkj_29
@@ -7321,6 +7341,7 @@ segments:
     start: 0xB1A900
     vram: 0x80240000
     subsegments:
+    - [0xB1A900, c]
     - [0xB1A900, data]
     - [0xB1AB20, data]
     - [0xB1AC20]
@@ -7331,6 +7352,7 @@ segments:
     start: 0xB1AC30
     vram: 0x80240000
     subsegments:
+    - [0xB1AC30, c]
     - [0xB1AC30, data]
     - [0xB1AE50, data]
     - [0xB1AF70]
@@ -7341,6 +7363,7 @@ segments:
     start: 0xB1AF80
     vram: 0x80240000
     subsegments:
+    - [0xB1AF80, c]
     - [0xB1AF80, data]
     - [0xB1B240, data]
     - [0xB1B560]
@@ -7366,6 +7389,7 @@ segments:
     start: 0xB1C540
     vram: 0x80240000
     subsegments:
+    - [0xB1C540, c]
     - [0xB1C540, data]
     - [0xB1CA40]
   - name: tst_11
@@ -7700,6 +7724,7 @@ segments:
     start: 0xB83B90
     vram: 0x80240000
     subsegments:
+    - [0xB83B90, c]
     - [0xB83B90, data]
     - [0xB83E10, data]
     - [0xB83E50]
@@ -7735,6 +7760,7 @@ segments:
     start: 0xB8FCD0
     vram: 0x80240000
     subsegments:
+    - [0xB8FCD0, c]
     - [0xB8FCD0, data]
     - [0xB903A0, data]
     - [0xB93430]
@@ -7991,6 +8017,7 @@ segments:
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
+    - [0xBCE690, c]
     - [0xBCE690, data]
     - [0xBCE760, data]
     - [0xBCEAD0, data]
