@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80246E40_9F4A30
+.ascii "party_kameki\0\0\0\0"
+
+.section .text
+
 glabel func_80240E90_9EEA80
 /* 9EEA80 80240E90 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 9EEA84 80240E94 3C048024 */  lui       $a0, %hi(D_80246E40_9F4A30)

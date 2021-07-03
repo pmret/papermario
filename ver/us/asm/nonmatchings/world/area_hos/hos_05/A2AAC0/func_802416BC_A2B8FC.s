@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8024F1E8_A39428
+.double 0.2
+
+.section .text
+
 glabel func_802416BC_A2B8FC
 /* A2B8FC 802416BC 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* A2B900 802416C0 3C038007 */  lui       $v1, %hi(gCurrentCameraID)

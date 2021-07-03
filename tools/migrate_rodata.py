@@ -27,7 +27,7 @@ def handle_symbol(area, symbol):
                         if not has_rodata_section:
                             asm_lines.insert(3, ".section .rodata\n")
                             asm_lines.insert(4, "\n")
-                            asm_lines.insert(5, ".section .text")
+                            asm_lines.insert(5, ".section .text\n")
                             asm_lines.insert(6, "\n")
                         asm_lines.insert(5, f"glabel {symbol[1]}\n")
                         asm_lines.insert(6, f"{symbol[2]}\n")

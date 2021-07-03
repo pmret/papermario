@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80243070_9B1770
+.double 0.7142857142857143
+
+.section .text
+
 glabel func_80240404_9AEB04
 /* 9AEB04 80240404 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 9AEB08 80240408 3C028011 */  lui       $v0, %hi(gPlayerStatus)

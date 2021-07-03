@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242160_AB2150
+.ascii "hos_bg\0\0mac_01\0\0hos_00\0\0mac_04\0\0"
+
+.section .text
+
 glabel func_80240000_AAFFF0
 /* AAFFF0 80240000 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* AAFFF4 80240004 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

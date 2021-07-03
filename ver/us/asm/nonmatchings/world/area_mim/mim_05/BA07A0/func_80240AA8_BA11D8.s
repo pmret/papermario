@@ -1,6 +1,28 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80244018_BA4748
+.double 380.0
+
+glabel D_80244020_BA4750
+.double -380.0
+
+glabel D_80244028_BA4758
+.double 305.0
+
+glabel D_80244030_BA4760
+.double 375.0
+
+glabel D_80244038_BA4768
+.double 45.0
+
+glabel D_80244040_BA4770
+.double 150.0, 0.0
+
+.section .text
+
 glabel btl_restore_world_cameras_BA11D8
 /* BA11D8 80240AA8 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* BA11DC 80240AAC AFBF0064 */  sw        $ra, 0x64($sp)
