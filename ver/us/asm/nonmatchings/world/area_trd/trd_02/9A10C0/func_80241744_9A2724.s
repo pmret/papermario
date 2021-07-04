@@ -175,7 +175,7 @@ glabel L80241990_9A2970
 glabel L802419A8_9A2988
 /* 9A2988 802419A8 0260202D */  daddu     $a0, $s3, $zero
 /* 9A298C 802419AC 0280282D */  daddu     $a1, $s4, $zero
-/* 9A2990 802419B0 0C0903CC */  jal       func_80240F30_9A1F10
+/* 9A2990 802419B0 0C0903CC */  jal       trd_02_UnkNpcAIFunc25
 /* 9A2994 802419B4 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A2998 802419B8 08090688 */  j         L80241A20_9A2A00
 /* 9A299C 802419BC 00000000 */   nop

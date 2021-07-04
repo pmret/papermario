@@ -175,7 +175,7 @@ glabel L80241550_A8DFD0
 glabel L80241568_A8DFE8
 /* A8DFE8 80241568 0260202D */  daddu     $a0, $s3, $zero
 /* A8DFEC 8024156C 0280282D */  daddu     $a1, $s4, $zero
-/* A8DFF0 80241570 0C0901D7 */  jal       func_8024075C_A8D1DC
+/* A8DFF0 80241570 0C0901D7 */  jal       kpa_95_UnkNpcAIFunc25
 /* A8DFF4 80241574 02A0302D */   daddu    $a2, $s5, $zero
 /* A8DFF8 80241578 08090578 */  j         L802415E0_A8E060
 /* A8DFFC 8024157C 00000000 */   nop

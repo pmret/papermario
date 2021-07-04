@@ -163,7 +163,7 @@ glabel L80241664_9A2644
 glabel L8024167C_9A265C
 /* 9A265C 8024167C 0280202D */  daddu     $a0, $s4, $zero
 /* 9A2660 80241680 0260282D */  daddu     $a1, $s3, $zero
-/* 9A2664 80241684 0C0903CC */  jal       func_80240F30_9A1F10
+/* 9A2664 80241684 0C0903CC */  jal       trd_02_UnkNpcAIFunc25
 /* 9A2668 80241688 02A0302D */   daddu    $a2, $s5, $zero
 /* 9A266C 8024168C 080905C7 */  j         L8024171C_9A26FC
 /* 9A2670 80241690 00000000 */   nop

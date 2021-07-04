@@ -163,7 +163,7 @@ glabel L80240DB0_A87800
 glabel L80240DC8_A87818
 /* A87818 80240DC8 0280202D */  daddu     $a0, $s4, $zero
 /* A8781C 80240DCC 0260282D */  daddu     $a1, $s3, $zero
-/* A87820 80240DD0 0C09019F */  jal       func_8024067C_A870CC
+/* A87820 80240DD0 0C09019F */  jal       kpa_91_UnkNpcAIFunc25
 /* A87824 80240DD4 02A0302D */   daddu    $a2, $s5, $zero
 /* A87828 80240DD8 0809039A */  j         L80240E68_A878B8
 /* A8782C 80240DDC 00000000 */   nop

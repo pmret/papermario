@@ -163,7 +163,7 @@ glabel L80241AF4_9FC2E4
 glabel L80241B0C_9FC2FC
 /* 9FC2FC 80241B0C 0280202D */  daddu     $a0, $s4, $zero
 /* 9FC300 80241B10 0260282D */  daddu     $a1, $s3, $zero
-/* 9FC304 80241B14 0C0904F0 */  jal       func_802413C0_9FBBB0
+/* 9FC304 80241B14 0C0904F0 */  jal       nok_12_UnkNpcAIFunc25
 /* 9FC308 80241B18 02A0302D */   daddu    $a2, $s5, $zero
 /* 9FC30C 80241B1C 080906EB */  j         L80241BAC_9FC39C
 /* 9FC310 80241B20 00000000 */   nop

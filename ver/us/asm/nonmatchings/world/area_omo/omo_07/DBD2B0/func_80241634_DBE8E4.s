@@ -163,7 +163,7 @@ glabel L80241850_DBEB00
 glabel L80241868_DBEB18
 /* DBEB18 80241868 0260202D */  daddu     $a0, $s3, $zero
 /* DBEB1C 8024186C 0280282D */  daddu     $a1, $s4, $zero
-/* DBEB20 80241870 0C0902FA */  jal       func_80240BE8_DBDE98
+/* DBEB20 80241870 0C0902FA */  jal       omo_07_UnkNpcAIFunc25
 /* DBEB24 80241874 02A0302D */   daddu    $a2, $s5, $zero
 /* DBEB28 80241878 08090654 */  j         L80241950_DBEC00
 /* DBEB2C 8024187C 00000000 */   nop

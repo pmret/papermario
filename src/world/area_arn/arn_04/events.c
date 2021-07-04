@@ -357,22 +357,7 @@ void N(func_802404C0_BE3C70)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_8024067C_BE3E2C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim.w = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc25.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
@@ -446,7 +431,7 @@ ApiStatus N(func_80240B94_BE4344)(ScriptInstance* script, s32 isInitialCall) {
             N(func_802404C0_BE3C70)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(func_8024067C_BE3E2C)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
             break;
         case 10:
             N(NpcJumpFunc2)(script, aiSettings, territoryPtr);

@@ -1239,23 +1239,7 @@ const char N(dgb_00_name_hack)[] = "dgb_00";
 
 #include "world/common/UnkFunc14.inc.c"
 
-ApiStatus N(btl_state_draw_switch_to_player_C00428)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim.w = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-    return 1;
-}
+#include "world/common/UnkNpcAIFunc25.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
@@ -1329,7 +1313,7 @@ ApiStatus N(func_802430C0_C00940)(ScriptInstance* script, s32 isInitialCall) {
             N(UnkFunc14)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(btl_state_draw_switch_to_player_C00428)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
             break;
         case 10:
             N(NpcJumpFunc2)(script, aiSettings, territoryPtr);

@@ -163,7 +163,7 @@ glabel L802413D0_B35FA0
 glabel L802413E8_B35FB8
 /* B35FB8 802413E8 0280202D */  daddu     $a0, $s4, $zero
 /* B35FBC 802413EC 0260282D */  daddu     $a1, $s3, $zero
-/* B35FC0 802413F0 0C090327 */  jal       func_80240C9C_B3586C
+/* B35FC0 802413F0 0C090327 */  jal       jan_03_UnkNpcAIFunc25
 /* B35FC4 802413F4 02A0302D */   daddu    $a2, $s5, $zero
 /* B35FC8 802413F8 08090522 */  j         L80241488_B36058
 /* B35FCC 802413FC 00000000 */   nop

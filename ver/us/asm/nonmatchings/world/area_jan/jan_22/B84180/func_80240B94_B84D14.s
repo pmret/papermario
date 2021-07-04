@@ -163,7 +163,7 @@ glabel L80240DB0_B84F30
 glabel L80240DC8_B84F48
 /* B84F48 80240DC8 0280202D */  daddu     $a0, $s4, $zero
 /* B84F4C 80240DCC 0260282D */  daddu     $a1, $s3, $zero
-/* B84F50 80240DD0 0C09019F */  jal       func_8024067C_B847FC
+/* B84F50 80240DD0 0C09019F */  jal       jan_22_UnkNpcAIFunc25
 /* B84F54 80240DD4 02A0302D */   daddu    $a2, $s5, $zero
 /* B84F58 80240DD8 0809039A */  j         L80240E68_B84FE8
 /* B84F5C 80240DDC 00000000 */   nop

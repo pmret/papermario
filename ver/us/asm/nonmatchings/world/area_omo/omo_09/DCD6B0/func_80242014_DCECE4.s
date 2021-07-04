@@ -163,7 +163,7 @@ glabel L80242230_DCEF00
 glabel L80242248_DCEF18
 /* DCEF18 80242248 0260202D */  daddu     $a0, $s3, $zero
 /* DCEF1C 8024224C 0280282D */  daddu     $a1, $s4, $zero
-/* DCEF20 80242250 0C090572 */  jal       func_802415C8_DCE298
+/* DCEF20 80242250 0C090572 */  jal       omo_09_UnkNpcAIFunc25
 /* DCEF24 80242254 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEF28 80242258 080908CC */  j         L80242330_DCF000
 /* DCEF2C 8024225C 00000000 */   nop

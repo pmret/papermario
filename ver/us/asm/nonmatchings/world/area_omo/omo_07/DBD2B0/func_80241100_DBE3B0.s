@@ -163,7 +163,7 @@ glabel L8024131C_DBE5CC
 glabel L80241334_DBE5E4
 /* DBE5E4 80241334 0280202D */  daddu     $a0, $s4, $zero
 /* DBE5E8 80241338 0260282D */  daddu     $a1, $s3, $zero
-/* DBE5EC 8024133C 0C0902FA */  jal       func_80240BE8_DBDE98
+/* DBE5EC 8024133C 0C0902FA */  jal       omo_07_UnkNpcAIFunc25
 /* DBE5F0 80241340 02A0302D */   daddu    $a2, $s5, $zero
 /* DBE5F4 80241344 080904F5 */  j         L802413D4_DBE684
 /* DBE5F8 80241348 00000000 */   nop

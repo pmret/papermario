@@ -163,7 +163,7 @@ glabel L80241CFC_DCE9CC
 glabel L80241D14_DCE9E4
 /* DCE9E4 80241D14 0280202D */  daddu     $a0, $s4, $zero
 /* DCE9E8 80241D18 0260282D */  daddu     $a1, $s3, $zero
-/* DCE9EC 80241D1C 0C090572 */  jal       func_802415C8_DCE298
+/* DCE9EC 80241D1C 0C090572 */  jal       omo_09_UnkNpcAIFunc25
 /* DCE9F0 80241D20 02A0302D */   daddu    $a2, $s5, $zero
 /* DCE9F4 80241D24 0809076D */  j         L80241DB4_DCEA84
 /* DCE9F8 80241D28 00000000 */   nop
