@@ -7,8 +7,8 @@ glabel fio_validate_header_checksums
 /* 6378 8002AF78 244295E8 */  addiu     $v0, $v0, %lo(D_800D95E8)
 /* 637C 8002AF7C AFB00010 */  sw        $s0, 0x10($sp)
 /* 6380 8002AF80 0040802D */  daddu     $s0, $v0, $zero
-/* 6384 8002AF84 3C058007 */  lui       $a1, %hi(D_800745D0)
-/* 6388 8002AF88 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
+/* 6384 8002AF84 3C058007 */  lui       $a1, %hi(magicSaveString)
+/* 6388 8002AF88 24A545D0 */  addiu     $a1, $a1, %lo(magicSaveString)
 /* 638C 8002AF8C AFBF0014 */  sw        $ra, 0x14($sp)
 /* 6390 8002AF90 0C01BB5C */  jal       strcmp
 /* 6394 8002AF94 0200202D */   daddu    $a0, $s0, $zero

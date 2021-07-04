@@ -11,6 +11,8 @@ f32 sqrtf(f32 f);
 f64 sqrt(f64 d);
 f32 cosine(s16 arg0);
 
+s32 strcmp(const char* str1, const char* str2);
+
 void nuBoot(void);
 void boot_idle(void);
 void boot_main(void);

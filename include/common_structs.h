@@ -1190,7 +1190,7 @@ typedef struct GameStatus {
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
-    /* 0x168 */ s32 saveCount;
+    /* 0x168 */ u32 saveCount;
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
@@ -1845,8 +1845,8 @@ typedef struct SaveData {
     /* 0x0030 */ s32 crc1;
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ s32 saveCount;
-    /* 0x0040 */ struct PlayerData player;
+    /* 0x003C */ u32 saveCount;
+    /* 0x0040 */ PlayerData player;
     /* 0x0380 */ char unk_380[0xE0];
     /* 0x0460 */ s32 starPoints;
     /* 0x0464 */ char unk_464[4];
@@ -1860,7 +1860,7 @@ typedef struct SaveData {
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
     /* 0x12E0 */ char unk_12E0[6];
-    /* 0x12E6 */ s16 savePos[3];
+    /* 0x12E6 */ Vec3s savePos;
     /* 0x12EC */ s32 unk_12EC;
     /* 0x12F0 */ s8 unk_12F0[12]; /* player name starts at 4th char */
     /* 0x12FC */ s32 unk_12FC;
