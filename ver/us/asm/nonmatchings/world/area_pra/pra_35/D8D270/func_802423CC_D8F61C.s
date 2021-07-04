@@ -115,7 +115,7 @@ glabel func_802423CC_D8F61C
 glabel L80242550_D8F7A0
 /* D8F7A0 80242550 0240202D */  daddu     $a0, $s2, $zero
 /* D8F7A4 80242554 0260282D */  daddu     $a1, $s3, $zero
-/* D8F7A8 80242558 0C0903C8 */  jal       func_80240F20_D8E170
+/* D8F7A8 80242558 0C0903C8 */  jal       pra_35_UnkNpcAIFunc24
 /* D8F7AC 8024255C 0280302D */   daddu    $a2, $s4, $zero
 glabel L80242560_D8F7B0
 /* D8F7B0 80242560 0240202D */  daddu     $a0, $s2, $zero

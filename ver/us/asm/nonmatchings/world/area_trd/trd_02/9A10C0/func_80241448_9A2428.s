@@ -139,7 +139,7 @@ glabel func_80241448_9A2428
 glabel L8024162C_9A260C
 /* 9A260C 8024162C 0280202D */  daddu     $a0, $s4, $zero
 /* 9A2610 80241630 0260282D */  daddu     $a1, $s3, $zero
-/* 9A2614 80241634 0C09022D */  jal       func_802408B4_9A1894
+/* 9A2614 80241634 0C09022D */  jal       trd_02_UnkNpcAIFunc24
 /* 9A2618 80241638 02A0302D */   daddu    $a2, $s5, $zero
 glabel L8024163C_9A261C
 /* 9A261C 8024163C 0280202D */  daddu     $a0, $s4, $zero

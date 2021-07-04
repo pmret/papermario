@@ -139,7 +139,7 @@ glabel func_80240B94_B84D14
 glabel L80240D78_B84EF8
 /* B84EF8 80240D78 0280202D */  daddu     $a0, $s4, $zero
 /* B84EFC 80240D7C 0260282D */  daddu     $a1, $s3, $zero
-/* B84F00 80240D80 0C090000 */  jal       func_80240000_B84180
+/* B84F00 80240D80 0C090000 */  jal       jan_22_UnkNpcAIFunc24
 /* B84F04 80240D84 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80240D88_B84F08
 /* B84F08 80240D88 0280202D */  daddu     $a0, $s4, $zero

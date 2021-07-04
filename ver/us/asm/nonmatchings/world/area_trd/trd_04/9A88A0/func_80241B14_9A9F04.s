@@ -149,7 +149,7 @@ glabel func_80241B14_9A9F04
 glabel L80241D20_9AA110
 /* 9AA110 80241D20 0260202D */  daddu     $a0, $s3, $zero
 /* 9AA114 80241D24 0280282D */  daddu     $a1, $s4, $zero
-/* 9AA118 80241D28 0C090321 */  jal       func_80240C84_9A9074
+/* 9AA118 80241D28 0C090321 */  jal       trd_04_UnkNpcAIFunc24
 /* 9AA11C 80241D2C 02A0302D */   daddu    $a2, $s5, $zero
 /* 9AA120 80241D30 96220086 */  lhu       $v0, 0x86($s1)
 /* 9AA124 80241D34 A64200A8 */  sh        $v0, 0xa8($s2)

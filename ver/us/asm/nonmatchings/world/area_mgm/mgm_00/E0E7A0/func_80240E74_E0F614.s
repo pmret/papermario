@@ -139,7 +139,7 @@ glabel func_80240E74_E0F614
 glabel L80241058_E0F7F8
 /* E0F7F8 80241058 0280202D */  daddu     $a0, $s4, $zero
 /* E0F7FC 8024105C 0260282D */  daddu     $a1, $s3, $zero
-/* E0F800 80241060 0C0900B8 */  jal       func_802402E0_E0EA80
+/* E0F800 80241060 0C0900B8 */  jal       mgm_00_UnkNpcAIFunc24
 /* E0F804 80241064 02A0302D */   daddu    $a2, $s5, $zero
 glabel L80241068_E0F808
 /* E0F808 80241068 0280202D */  daddu     $a0, $s4, $zero
