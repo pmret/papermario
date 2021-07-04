@@ -139,7 +139,7 @@ glabel func_80243104_7EDE14
 glabel L802432E8_7EDFF8
 /* 7EDFF8 802432E8 0280202D */  daddu     $a0, $s4, $zero
 /* 7EDFFC 802432EC 0260282D */  daddu     $a1, $s3, $zero
-/* 7EE000 802432F0 0C09095C */  jal       func_80242570_7ED280
+/* 7EE000 802432F0 0C09095C */  jal       mac_00_UnkNpcAIFunc24
 /* 7EE004 802432F4 02A0302D */   daddu    $a2, $s5, $zero
 glabel L802432F8_7EE008
 /* 7EE008 802432F8 0280202D */  daddu     $a0, $s4, $zero
@@ -163,7 +163,7 @@ glabel L80243320_7EE030
 glabel L80243338_7EE048
 /* 7EE048 80243338 0280202D */  daddu     $a0, $s4, $zero
 /* 7EE04C 8024333C 0260282D */  daddu     $a1, $s3, $zero
-/* 7EE050 80243340 0C090AFB */  jal       func_80242BEC_7ED8FC
+/* 7EE050 80243340 0C090AFB */  jal       mac_00_UnkNpcAIFunc25
 /* 7EE054 80243344 02A0302D */   daddu    $a2, $s5, $zero
 /* 7EE058 80243348 08090CF6 */  j         L802433D8_7EE0E8
 /* 7EE05C 8024334C 00000000 */   nop

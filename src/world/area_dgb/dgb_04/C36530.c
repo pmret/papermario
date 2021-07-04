@@ -356,7 +356,7 @@ Script N(80243EF8) = SCRIPT({
     EnablePartnerAI();
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != SI_VAR(11)) {
-        N(func_802427EC_C38D1C)(SI_VAR(11));
+        N(SwitchToPartner)(SI_VAR(11));
     } else {
         func_802CF56C(2);
     }
@@ -395,29 +395,7 @@ Script N(makeEntities) = SCRIPT({
     AssignScript(N(80243EF8));
 });
 
-void N(func_80240000_C36530)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
-                               enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-                               npc->pos.x, npc->pos.z,
-                               enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-    } else {
-        npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
-    }
-    npc->currentAnim.w = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    if (enemy->territory->wander.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
-    }
-    enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc23.inc.c"
 
 #ifdef NON_MATCHING
 // second npc_raycast_down_sides call
@@ -620,7 +598,7 @@ ApiStatus N(func_8024130C_C3783C)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_C36530)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
         case 1:
             N(func_802401B0_C366E0)(script, aiSettings, territoryPtr);
             break;
@@ -900,7 +878,7 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_C36530)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
             N(func_802401B0_C366E0)(script, aiSettings, territoryPtr);
@@ -1062,12 +1040,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38A
             s32 isInitialCall)
 #endif
 
-ApiStatus N(func_802427EC_C38D1C)(ScriptInstance* script, s32 isInitialCall) {
-    s32 partnerID = get_variable(script, *script->ptrReadPos);
-    switch_to_partner(partnerID);
-
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 

@@ -330,7 +330,7 @@ Script N(802438C8) = SCRIPT({
     EnablePartnerAI();
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != SI_VAR(11)) {
-        N(func_802404FC_CD232C)(SI_VAR(11));
+        N(SwitchToPartner)(SI_VAR(11));
     } else {
         func_802CF56C(2);
     }
@@ -519,10 +519,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_16/CD1F10", flo_16_func_802402AC_CD20
             s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802404FC_CD232C)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 

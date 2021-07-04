@@ -552,7 +552,7 @@ Script N(80242C50) = SCRIPT({
     SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != 9) {
-        N(func_802412C8_BE8EA8)(9);
+        N(SwitchToPartner)(9);
         spawn {
             SI_MAP_VAR(0) = 0;
             ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00A2), 160, 40);
@@ -1001,39 +1001,7 @@ Script N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA7E0, 17, 238, 80, 0, MAKE_ENTITY_END);
 });
 
-void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 ret;
-    f32 max;
-    f32 posX;
-    f32 posZ;
-    s32 i;
-    s32 j;
-
-    script->functionTemp[1].s = 0;
-    max = 32767.0f;
-    posX = npc->pos.x;
-    posZ = npc->pos.z;
-    script->functionTemp[2].s = 0;
-
-    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
-        ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
-        if (ret < max) {
-            max = ret;
-            script->functionTemp[2].s = j;
-        }
-    }
-
-    npc->currentAnim.w = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc24.inc.c"
 
 #include "world/common/UnkFunc13.inc.c"
 
@@ -1041,22 +1009,7 @@ void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc14.inc.c"
 
-void N(func_8024067C_BE825C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim.w = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc25.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
@@ -1120,7 +1073,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_BE7BE0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:
             N(UnkFunc13)(script, aiSettings, territoryPtr);
             break;
@@ -1130,7 +1083,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
             N(UnkFunc14)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(func_8024067C_BE825C)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
             break;
         case 10:
             N(NpcJumpFunc2)(script, aiSettings, territoryPtr);
@@ -1233,7 +1186,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_BE7BE0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:
             N(func_80240E90_BE8A70)(script, aiSettings, territoryPtr);
             break;
@@ -1243,7 +1196,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241068_BE8C48)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(func_8024067C_BE825C)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
     }
 
     enemy->varTable[0] = npc->pos.y;
@@ -1254,7 +1207,4 @@ ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall) {
     return (gGameStatusPtr->pressedButtons >> 1) & ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802412C8_BE8EA8)(ScriptInstance* script, s32 isInitialCall) {
-    switch_to_partner(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"

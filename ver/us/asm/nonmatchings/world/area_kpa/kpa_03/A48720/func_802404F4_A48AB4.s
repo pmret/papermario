@@ -244,7 +244,7 @@ glabel func_802404F4_A48AB4
 /* A48E14 80240854 0260202D */  daddu     $a0, $s3, $zero
 .L80240858:
 /* A48E18 80240858 0280282D */  daddu     $a1, $s4, $zero
-/* A48E1C 8024085C 0C090077 */  jal       func_802401DC_A4879C
+/* A48E1C 8024085C 0C090077 */  jal       kpa_03_UnkDistFunc
 /* A48E20 80240860 02A0302D */   daddu    $a2, $s5, $zero
 /* A48E24 80240864 08090228 */  j         .L802408A0
 /* A48E28 80240868 00000000 */   nop
