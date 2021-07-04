@@ -81,7 +81,7 @@ glabel func_802413AC_BAECEC
 glabel L802414B8_BAEDF8
 /* BAEDF8 802414B8 0280202D */  daddu     $a0, $s4, $zero
 /* BAEDFC 802414BC 0200282D */  daddu     $a1, $s0, $zero
-/* BAEE00 802414C0 0C090028 */  jal       func_802400A0_BAD9E0
+/* BAEE00 802414C0 0C090028 */  jal       mim_08_UnkNpcAIFunc23
 /* BAEE04 802414C4 0260302D */   daddu    $a2, $s3, $zero
 glabel L802414C8_BAEE08
 /* BAEE08 802414C8 0280202D */  daddu     $a0, $s4, $zero

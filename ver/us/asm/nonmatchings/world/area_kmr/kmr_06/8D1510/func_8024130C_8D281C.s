@@ -81,7 +81,7 @@ glabel func_8024130C_8D281C
 glabel L80241418_8D2928
 /* 8D2928 80241418 0280202D */  daddu     $a0, $s4, $zero
 /* 8D292C 8024141C 0200282D */  daddu     $a1, $s0, $zero
-/* 8D2930 80241420 0C090000 */  jal       func_80240000_8D1510
+/* 8D2930 80241420 0C090000 */  jal       kmr_06_UnkNpcAIFunc23
 /* 8D2934 80241424 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241428_8D2938
 /* 8D2938 80241428 0280202D */  daddu     $a0, $s4, $zero

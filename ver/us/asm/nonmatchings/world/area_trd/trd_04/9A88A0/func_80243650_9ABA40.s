@@ -84,7 +84,7 @@ glabel func_80243650_9ABA40
 glabel L80243768_9ABB58
 /* 9ABB58 80243768 0260202D */  daddu     $a0, $s3, $zero
 /* 9ABB5C 8024376C 0200282D */  daddu     $a1, $s0, $zero
-/* 9ABB60 80243770 0C090786 */  jal       func_80241E18_9AA208
+/* 9ABB60 80243770 0C090786 */  jal       trd_04_UnkNpcAIFunc23
 /* 9ABB64 80243774 0280302D */   daddu    $a2, $s4, $zero
 glabel L80243778_9ABB68
 /* 9ABB68 80243778 0260202D */  daddu     $a0, $s3, $zero
