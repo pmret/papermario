@@ -1,11 +1,44 @@
 #include "common.h"
-
-extern s32 D_800760C0;
-extern Mtx D_8009BAA8[];
+#include "no_controller.png.h"
+#include "ld_addrs.h"
 
 extern s32 D_80076078;
-extern s32 D_80077140;
-extern s32 D_800771E8;
+extern s32 D_800760C0;
+
+Gfx D_80077140[] = {
+    gsDPPipeSync(),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, no_controller_png_width, no_controller_png),
+    gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_CLAMP, 7, G_TX_NOLOD),
+    gsDPLoadSync(),
+    gsDPLoadTile(G_TX_LOADTILE, 0, 0, 0x01FC, 0x007C),
+    gsDPPipeSync(),
+    gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_CLAMP, 7, G_TX_NOLOD),
+    gsDPSetTileSize(G_TX_RENDERTILE, 0, 0, 0x01FC, 0x007C),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
+    gsSPSetGeometryMode(G_SHADE | G_SHADING_SMOOTH),
+    gsSPEndDisplayList(),
+};
+
+Gfx D_800771E8[] = {
+    gsSPTextureRectangle(0x0180, 0x0260, 0x0380, 0x02E0, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400),
+    gsDPPipeSync(),
+    gsSPEndDisplayList(),
+};
+
+// BSS
+extern Mtx D_8009BAA8[];
 
 void initialize_curtains(void) {
     gCurtainDrawCallback = NULL;

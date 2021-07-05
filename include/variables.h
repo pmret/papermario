@@ -380,6 +380,8 @@ extern s32 D_802C05CC;
 extern s16 gCurrentCamID;
 
 // Heap?
+extern s32 D_8038F800;
+extern s32 D_803B5000;
 extern s32 D_803DA800;
 
 // Dead code
