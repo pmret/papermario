@@ -5,6 +5,10 @@ static char* N(exit_str_1) = "";
 
 void func_8024029C_B1B80C(void);
 void func_80240360_B1B8D0(PlayerStatus* playerStatus);
+void func_80240574_B1BAE4(void);
+
+// BSS
+static s32 B_80240FD0_tst_04;
 
 ApiStatus func_80240000_B1B570(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(NPC_0);
@@ -116,12 +120,50 @@ void func_80240360_B1B8D0(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_80240510_B1BA80);
+ApiStatus func_80240510_B1BA80(ScriptInstance* script, s32 isInitialCall) {
+    Npc* partner;
 
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_80240574_B1BAE4);
+    script->array[1] = create_generic_entity_world(func_80240574_B1BAE4, NULL);
+    partner = get_npc_safe(NPC_PARTNER);
 
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_802405B0_B1BB20);
+    if (partner == NULL) {
+        return ApiStatus_DONE2;
+    }
 
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_802405D4_B1BB44);
+    partner->flags |= 0x20000;
+    partner->flags |= 0x80000;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_80240628_B1BB98);
+void func_80240574_B1BAE4(void) {
+    Npc* partner = get_npc_safe(NPC_PARTNER);
+
+    if (partner == NULL) {
+        return ApiStatus_DONE2;
+    }
+
+    partner->flags |= 0x20000;
+    partner->flags |= 0x80000;
+    return ApiStatus_DONE2;
+}
+
+void func_802405B0_B1BB20(void) {
+    update_model_animator(B_80240FD0_tst_04);
+}
+
+void func_802405D4_B1BB44(void) {
+    Matrix4f m0;
+    Matrix4f m1;
+    Matrix4f m2;
+    Matrix4f m3;
+    Matrix4f m4;
+
+    guTranslateF(m1, -484.0f, 25.0f, -40.0f);
+    guMtxF2L(m1, m4);
+    render_animated_model(B_80240FD0_tst_04, m4);
+}
+
+ApiStatus func_80240628_B1BB98(ScriptInstance* script, s32 isInitialCall) {
+    create_generic_entity_world(func_802405B0_B1BB20, func_802405D4_B1BB44);
+    return ApiStatus_DONE2;
+}
