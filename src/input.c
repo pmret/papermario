@@ -21,4 +21,4 @@ void func_80028838(void) {
     D_8009A6A6 = 0;
 }
 
-INCLUDE_ASM(s32, "3bf0_len_6f0", update_input);
+INCLUDE_ASM(s32, "input", update_input);

@@ -68,7 +68,7 @@ void state_init_intro(void) {
     intro_logos_update_fade();
 }
 
-INCLUDE_ASM(void, "11a50_len_7a0", state_step_intro, void);
+INCLUDE_ASM(void, "state_intro", state_step_intro, void);
 
 void state_drawUI_intro(void) {
 }

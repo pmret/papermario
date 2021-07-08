@@ -18,19 +18,19 @@ s32 get_spirits_rescued(void) {
     s32 storyProgress = get_variable(NULL, STORY_PROGRESS);
     s32 ret = 7;
 
-    if (storyProgress < get_variable(NULL, -0x4D)) {
+    if (storyProgress < get_variable(NULL, STORY_CH1_STAR_SPIRIT_RESCUED)) {
         ret = 0;
-    } else if (storyProgress < get_variable(NULL, -0x37)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH2_STAR_SPIRIT_RESCUED)) {
         ret = 1;
-    } else if (storyProgress < get_variable(NULL, -0xF)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH3_STAR_SPIRIT_RESCUED)) {
         ret = 2;
-    } else if (storyProgress < get_variable(NULL, 5)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH4_STAR_SPIRIT_RESCUED)) {
         ret = 3;
-    } else if (storyProgress < get_variable(NULL, 0x25)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH5_OPENED_ESCAPE_ROUTE)) {
         ret = 4;
-    } else if (storyProgress < get_variable(NULL, 0x39)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH6_STAR_SPIRIT_RESCUED)) {
         ret = 5;
-    } else if (storyProgress < get_variable(NULL, 0x57)) {
+    } else if (storyProgress < get_variable(NULL, STORY_CH7_STAR_SPIRIT_RESCUED)) {
         ret = 6;
     }
 

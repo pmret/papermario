@@ -66,7 +66,7 @@ void state_init_file_select(void) {
     gOverrideFlags |= 0x10000;
 }
 
-INCLUDE_ASM(void, "10400_len_d30", state_step_language_select, void);
+INCLUDE_ASM(void, "state_file_select", state_step_language_select, void);
 
 void state_step_file_select(void) {
     s32 temp = D_800A0931; // needed to match
@@ -132,9 +132,9 @@ void state_init_exit_file_select(void) {
     gOverrideFlags &= ~0x40;
 }
 
-INCLUDE_ASM(void, "10400_len_d30", state_step_exit_language_select, void);
+INCLUDE_ASM(void, "state_file_select", state_step_exit_language_select, void);
 
-INCLUDE_ASM(void, "10400_len_d30", state_step_exit_file_select, void);
+INCLUDE_ASM(void, "state_file_select", state_step_exit_file_select, void);
 
 void state_drawUI_exit_language_select(void) {
 }
