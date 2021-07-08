@@ -1387,7 +1387,6 @@ enum ActionStates {
 
 typedef s32 NpcID;
 enum NpcIDs {
-    NPC_0            = 0,
     NPC_SELF         = -1,
     NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
