@@ -47,9 +47,9 @@ extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32 D_800A0980;
 
-INCLUDE_ASM(s32, "121f0_len_1290", state_init_title_screen);
+INCLUDE_ASM(s32, "state_title_screen", state_init_title_screen);
 
-INCLUDE_ASM(s32, "121f0_len_1290", state_step_title_screen);
+INCLUDE_ASM(s32, "state_title_screen", state_step_title_screen);
 
 void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->loadMenuState) {
@@ -74,7 +74,7 @@ void state_drawUI_title_screen(void) {
     }
 }
 
-INCLUDE_ASM(s32, "121f0_len_1290", appendGfx_title_screen);
+INCLUDE_ASM(s32, "state_title_screen", appendGfx_title_screen);
 
 void draw_title_screen_NOP(void) {
 }
@@ -84,7 +84,7 @@ void title_screen_draw_images(f32 arg0, f32 arg1) {
     title_screen_draw_copyright(arg1);
 }
 
-INCLUDE_ASM(void, "121f0_len_1290", title_screen_draw_logo);
+INCLUDE_ASM(void, "state_title_screen", title_screen_draw_logo);
 
 void title_screen_draw_press_start(void) {
     switch (D_80077A2C) {
