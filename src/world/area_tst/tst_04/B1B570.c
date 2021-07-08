@@ -11,7 +11,7 @@ void func_80240574_B1BAE4(void);
 static s32 B_80240FD0_tst_04;
 
 ApiStatus func_80240000_B1B570(ScriptInstance* script, s32 isInitialCall) {
-    Npc* npc = get_npc_safe(NPC_0);
+    Npc* npc = get_npc_safe(0);
 
     if (npc != NULL && npc->unk_84 == 5) {
         f32 sinTheta;
