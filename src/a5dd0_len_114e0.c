@@ -279,7 +279,8 @@ s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000,
 s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
 
 // BSS
-static s32 B_801512B0[3];
+static s32 B_801512B0[2];
+static CustomModelGfxBuilder* gCurrentCustomModelGfxBuilders;
 static s32 D_801512BC;
 static s32 D_801512C0;
 static s32 D_801512C4;
@@ -1221,7 +1222,10 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx_builders);
+void set_custom_gfx_builders(s32 customGfxIndex, CustomModelGfxBuilderFunc pre, CustomModelGfxBuilderFunc post) {
+    gCurrentCustomModelGfxBuilders[customGfxIndex].pre = pre;
+    gCurrentCustomModelGfxBuilders[customGfxIndex].post = post;
+}
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", build_custom_gfx);
 

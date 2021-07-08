@@ -48,7 +48,7 @@ segments:
     - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
     - [0x6000, c, heap]
-    - [0x6240, c, 6240_len_c00]
+    - [0x6240, c, fio]
     - [0x6e40, c, 6e40_len_500]
     - [0x7340, c, 7340_len_b00]
     - [0x7e40, c, os/nusys/7e40_len_3f0]
@@ -250,7 +250,15 @@ segments:
     - [0x4F420, .data, 1b40_len_20b0]
     - [0x4F660, .data, 42e0_len_1f60]
     - [0x4F670, .data, 43F0]
-    - [0x4F9D0, data, 6240_len_c00]
+    - [0x4F9D0, .data, fio]
+    - [0x4F9E0, data, 6e40_beginning_data]
+    - [0x51540, ia8, no_controller, 128, 32]
+    - [0x52540, .data, 6e40_len_500]
+    - [0x52610, .data, 7340_len_b00]
+    - [0x527F0, .data, os/nusys/7e40_len_3f0]
+    - [0x52800, .data, os/nusys/nuSiMgr]
+    - [0x52810, .data, d610_len_1330]
+    - [0x52CA0, .data, ebd0_len_6a0]
     - [0x52D08, .data, f270_len_1190]
     - [0x52D80, .data, 10400_len_d30]
     - [0x52DC0, .data, 121f0_len_1290]
@@ -2976,7 +2984,6 @@ segments:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
     - [0x4DA860, data]
-    - [0x4E25E0, rodata]
   - dir: battle/area_isk_part_1
     type: code
     start: 0x4E2740

@@ -47,9 +47,9 @@ extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32 D_800A0980;
 
-INCLUDE_ASM(s32, "121f0_len_1290", state_init_title_screen);
+INCLUDE_ASM(void, "121f0_len_1290", state_init_title_screen, void);
 
-INCLUDE_ASM(s32, "121f0_len_1290", state_step_title_screen);
+INCLUDE_ASM(void, "121f0_len_1290", state_step_title_screen, void);
 
 void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->loadMenuState) {

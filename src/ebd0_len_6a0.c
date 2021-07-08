@@ -8,9 +8,25 @@ s16 intro_logos_fade_in(s16 subtractAlpha);
 s16 intro_logos_fade_out(s16 addAlpha);
 void intro_logos_update_fade(void);
 
+s32 D_800778A0[] = {
+    &D_8038F800, &D_803B5000, &D_803DA800, 0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000,
+};
+
+Gfx D_800778C8[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_COPY),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
+    gsDPSetRenderMode(G_RM_NOOP, G_RM_NOOP2),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsSPEndDisplayList(),
+};
+
+// BSS
 extern s32 D_800A0904;
 extern s32 D_800A0908;
-extern s16** D_800778A0;
 
 void intro_logos_set_fade_alpha(s16 alpha) {
     gGameStatusPtr->bootAlpha = alpha;
@@ -136,7 +152,7 @@ void state_step_battle(void) {
     update_cameras();
 }
 #else
-INCLUDE_ASM(s32, "ebd0_len_6a0", state_step_battle);
+INCLUDE_ASM(void, "ebd0_len_6a0", state_step_battle, void);
 #endif
 
 void state_drawUI_battle(void) {
@@ -152,7 +168,7 @@ void state_init_end_battle(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM(s32, "ebd0_len_6a0", state_step_end_battle);
+INCLUDE_ASM(void, "ebd0_len_6a0", state_step_end_battle, void);
 
 void state_drawUI_end_battle(void) {
 }

@@ -44,6 +44,7 @@
 #define PI      3.141592f
 #define PI_D    3.141592
 #define TAU     6.28318f
+#define PI_S    3.14159f // Shorter PI
 
 #define SPRITE_WORLD_SCALE 0.71428573f
 

@@ -34,17 +34,37 @@ INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242358_DF8D58);
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242500_DF8F00);
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242558_DF8F58);
+ApiStatus func_80242558_DF8F58(ScriptInstance* script, s32 isInitialCall) {
+    func_80242500_DF8F00();
+    load_font(1);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242580_DF8F80);
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242680_DF9080);
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242744_DF9144);
+ApiStatus func_80242744_DF9144(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 a1 = *args++;
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_802427A4_DF91A4);
+    set_variable(script, a1, _heap_malloc(&gSpriteHeapPtr, var1));
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_802427D8_DF91D8);
+ApiStatus func_802427A4_DF91A4(ScriptInstance* script, s32 isInitialCall) {
+    _heap_free(&gSpriteHeapPtr, get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_802427D8_DF91D8(ScriptInstance* script, s32 isInitialCall) {
+    Camera* camera = &gCameras[gCurrentCameraID];
+
+    camera->unk_506 = 1;
+    camera->movePos.x += 0.6666667f;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242830_DF9230);
 

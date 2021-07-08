@@ -6,8 +6,8 @@ glabel fio_flush_backups
 /* 6450 8002B050 AFB00010 */  sw        $s0, 0x10($sp)
 /* 6454 8002B054 3C10800E */  lui       $s0, %hi(D_800D95E8)
 /* 6458 8002B058 261095E8 */  addiu     $s0, $s0, %lo(D_800D95E8)
-/* 645C 8002B05C 3C058007 */  lui       $a1, %hi(D_800745D0)
-/* 6460 8002B060 24A545D0 */  addiu     $a1, $a1, %lo(D_800745D0)
+/* 645C 8002B05C 3C058007 */  lui       $a1, %hi(magicSaveString)
+/* 6460 8002B060 24A545D0 */  addiu     $a1, $a1, %lo(magicSaveString)
 /* 6464 8002B064 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 6468 8002B068 0C01BB50 */  jal       strcpy
 /* 646C 8002B06C 0200202D */   daddu    $a0, $s0, $zero

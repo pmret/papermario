@@ -430,33 +430,26 @@ ApiStatus N(func_80240B94_BE4344)(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
 #ifdef NON_MATCHING
-// second npc_raycast_down_sides call
+//second npc_raycast_down_sides call
 void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
+    f32 yPhi;
     f32 posX, posY, posZ, posW;
-    s32 var;
-    f32 temp_f0;
-    f32 phi_f4;
-    s32 phi_v0;
-    s32 phi_s4 = 0;
+    s32 cond = FALSE;
 
-    f32 a = enemy->varTable[7];
-    f32 temp_f2  = a / 100.0;
-    f32 b = enemy->varTable[3];
-    f32 temp_f26 = b / 100.0;
-    f32 c = enemy->varTable[4];
-    f32 temp_f20 = c / 100.0;
-    f32 d = enemy->varTable[1];
-    f32 temp_f22 = d / 100.0;
+    f32 vt7 = (f32)enemy->varTable[7] / 100.0;
+    f32 vt3 = (f32)enemy->varTable[3] / 100.0;
+    f32 vtY = (f32)enemy->varTable[4] / 100.0;
+    f32 vt1 = (f32)enemy->varTable[1] / 100.0;
 
     enemy->varTable[4] = npc->pos.y * 100.0;
-    temp_f24 = temp_f26 + temp_f2;
+    temp_f24 = vt3 + vt7;
 
     if ((enemy->varTable[0] & 0x11) == 1) {
         if (npc->flags & 8) {
-            if (temp_f22 < (temp_f24 - npc->pos.y)) {
+            if (vt1 < temp_f24 - npc->pos.y) {
                 enemy->varTable[0] |= 0x10;
             }
         } else {
@@ -465,53 +458,49 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
             posZ = npc->pos.z;
             posW = 1000.0f;
             npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-            if (temp_f22 < (temp_f26 - posW)) {
+            if (vt1 < (vt3 - posW)) {
                 enemy->varTable[0] |= 0x10;
             }
         }
     }
 
     if ((enemy->varTable[0] & 0x11) == 0x11) {
-        f64 test;
         if (npc->flags & 8) {
-            phi_f4 = temp_f24;
-            test = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            npc->pos.y = test;
+            yPhi = temp_f24;
+            npc->pos.y = ((yPhi - vtY) * 0.09) + vtY;
         } else {
             posX = npc->pos.x;
-            posY = temp_f20;
+            posY = vtY;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-            phi_f4 = posY;
-            phi_f4 += temp_f26;
-            d = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-            test = d;
-            npc->pos.y = test;
-            //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
-        }
-        //npc->pos.y = temp_f20 + ((phi_f4 - temp_f20) * 0.09);
 
-        if (fabsf(phi_f4 - npc->pos.y) < 1.0) {
-            npc->pos.y = phi_f4;
+            npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+            yPhi = posY;
+            yPhi += vt3;
+            npc->pos.y = vtY + ((yPhi - vtY) * 0.09);
+        }
+
+        if (fabsf(yPhi - npc->pos.y) < 1.0) {
+            npc->pos.y = yPhi;
             enemy->varTable[0] &= ~0x10;
         }
     } else if (enemy->varTable[1] > 0) {
-        temp_f0 = sin_deg(enemy->varTable[2]);
+        f32 sinTheta = sin_deg(enemy->varTable[2]);
+        s32 rayHit;
+
         if (npc->flags & 8) {
-            phi_v0 = FALSE;
+            rayHit = FALSE;
         } else {
             posX = npc->pos.x;
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+            rayHit = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
         }
-        if (phi_v0) {
-            npc->pos.y = posY + temp_f26 + (temp_f0 * temp_f22);
+        if (rayHit) {
+            npc->pos.y = posY + vt3 + (sinTheta * vt1);
         } else {
-            npc->pos.y = temp_f24 + (temp_f0 * temp_f22);
+            npc->pos.y = temp_f24 + (sinTheta * vt1);
         }
         enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 10);
     }
@@ -522,6 +511,8 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
                 script->functionTemp[1].s = aiSettings->unk_14;
                 if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
+                    s32 var;
+
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
@@ -546,11 +537,11 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
         posW = dist2D(enemy->territory->wander.point.x, enemy->territory->wander.point.z, npc->pos.x, npc->pos.z);
         if (npc->moveSpeed < posW) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-            phi_s4 = 1;
+            cond = TRUE;
         }
     }
 
-    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | phi_s4) {
+    if (enemy->territory->wander.wanderSizeX | enemy->territory->wander.wanderSizeZ | cond) {
         if (npc->turnAroundYawAdjustment == 0) {
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         } else {
@@ -559,13 +550,11 @@ void N(func_80241040_BE47F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     enemy->varTable[4] = npc->pos.y * 100.0;
-    if (aiSettings->moveTime > 0) {
-        if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0].s = 2;
-            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1].s < 3)) {
-                script->functionTemp[0].s = 0;
-            }
+    if (aiSettings->moveTime > 0 && (npc->duration <= 0 || --npc->duration <= 0)) {
+        script->functionTemp[0].s = 2;
+        script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
+        if (aiSettings->unk_2C <= 0 || aiSettings->waitTime <= 0 || script->functionTemp[1].s < 3) {
+            script->functionTemp[0].s = 0;
         }
     }
 }
