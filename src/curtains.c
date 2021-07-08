@@ -56,7 +56,6 @@ void render_curtains(void) {
         gSPDisplayList(gMasterGfxPos++, &D_80076078);
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
         gDPPipeSync(gMasterGfxPos++);
-
     }
 
     if (gCurtainDrawCallback != NULL) {
