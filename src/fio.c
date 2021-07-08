@@ -27,13 +27,13 @@ s32 get_spirits_rescued(void) {
 
 extern s32 D_800D95E8[];
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_calc_header_checksum);
+INCLUDE_ASM(s32, "fio", fio_calc_header_checksum);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_validate_header_checksums);
+INCLUDE_ASM(s32, "fio", fio_validate_header_checksums);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_has_valid_backup);
+INCLUDE_ASM(s32, "fio", fio_has_valid_backup);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_flush_backups);
+INCLUDE_ASM(s32, "fio", fio_flush_backups);
 
 #ifdef NON_MATCHING
 s32 fio_calc_file_checksum(s32* saveData) {
@@ -49,35 +49,35 @@ s32 fio_calc_file_checksum(s32* saveData) {
     return sum;
 }
 #else
-INCLUDE_ASM(s32, "6240_len_c00", fio_calc_file_checksum);
+INCLUDE_ASM(s32, "fio", fio_calc_file_checksum);
 #endif
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_validate_file_checksum);
+INCLUDE_ASM(s32, "fio", fio_validate_file_checksum);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_fetch_saved_file_info);
+INCLUDE_ASM(s32, "fio", fio_fetch_saved_file_info);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_load_game);
+INCLUDE_ASM(s32, "fio", fio_load_game);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_save_game);
+INCLUDE_ASM(s32, "fio", fio_save_game);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_erase_game);
+INCLUDE_ASM(s32, "fio", fio_erase_game);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_deserialize_state);
+INCLUDE_ASM(s32, "fio", fio_deserialize_state);
 
 void func_8002B608(void) {
     gGameStatusPtr->entryID = 10;
     fio_serialize_state();
 }
 
-INCLUDE_ASM(void, "6240_len_c00", fio_serialize_state);
+INCLUDE_ASM(void, "fio", fio_serialize_state);
 
 void fio_init_flash(void) {
     osFlashInit();
 }
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_read_flash);
+INCLUDE_ASM(s32, "fio", fio_read_flash);
 
-INCLUDE_ASM(s32, "6240_len_c00", fio_write_flash);
+INCLUDE_ASM(s32, "fio", fio_write_flash);
 
 void fio_erase_flash(s32 pageNum) {
     osFlashSectorErase(pageNum * 128);
