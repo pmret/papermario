@@ -1245,6 +1245,13 @@ typedef struct RenderTask {
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
 
+typedef void(*CustomModelGfxBuilderFunc)(s32 index);
+
+typedef struct CustomModelGfxBuilder {
+    /* 0x00 */ CustomModelGfxBuilderFunc pre;
+    /* 0x00 */ CustomModelGfxBuilderFunc post;
+} CustomModelGfxBuilder; // size = 0x8
+
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */

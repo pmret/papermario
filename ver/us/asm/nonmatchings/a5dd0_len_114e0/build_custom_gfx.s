@@ -6,8 +6,8 @@ glabel build_custom_gfx
 /* B23F0 8011BCF0 AFB10014 */  sw        $s1, 0x14($sp)
 /* B23F4 8011BCF4 0000882D */  daddu     $s1, $zero, $zero
 /* B23F8 8011BCF8 AFB50024 */  sw        $s5, 0x24($sp)
-/* B23FC 8011BCFC 3C158015 */  lui       $s5, %hi(D_801512B8)
-/* B2400 8011BD00 26B512B8 */  addiu     $s5, $s5, %lo(D_801512B8)
+/* B23FC 8011BCFC 3C158015 */  lui       $s5, %hi(gCurrentCustomModelGfxBuilders)
+/* B2400 8011BD00 26B512B8 */  addiu     $s5, $s5, %lo(gCurrentCustomModelGfxBuilders)
 /* B2404 8011BD04 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
 /* B2408 8011BD08 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
 /* B240C 8011BD0C AFB20018 */  sw        $s2, 0x18($sp)
