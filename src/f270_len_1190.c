@@ -17,7 +17,7 @@ Gfx D_80077908[] = {
 // probably a file split
 static s32 padding[] = {0, 0};
 
-s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
+s32 D_80077950[] = { &D_8038F800, &D_803B5000, &D_803DA800 };
 
 // TODO the gPauseMenuIconScripts should be DATA_START
 // TODO the gPauseMenuHeldButtons should be BSS_START

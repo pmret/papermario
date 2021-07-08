@@ -52,8 +52,8 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_16);
 
 INCLUDE_ASM(void, "4ac90_len_3910", playFX_17, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_18, s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, f32 arg5,
-            s32 arg6, s32 arg7);
+INCLUDE_ASM(void, "4ac90_len_3910", playFX_18, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+            f32 arg6, s32 arg7);
 
 INCLUDE_ASM(void, "4ac90_len_3910", playFX_19, s32 arg0, f32 arg1, f32 arg2, f32 arg3);
 
@@ -63,7 +63,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_1B);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_1C);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_1D, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7);
+INCLUDE_ASM(void, "4ac90_len_3910", playFX_1D, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, f32 arg6, s32 arg7);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_1E);
 
@@ -114,7 +114,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_34);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_35);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_36, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_36, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_37);
 
@@ -135,7 +135,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_3E);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_3F, s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_40, s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_40, s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_41);
 
@@ -179,7 +179,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_54, s32 arg0, f32 arg1, f3
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_55);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_56, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_56, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_57);
 
@@ -217,7 +217,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_67);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_68);
 
-INCLUDE_ASM(void, "4ac90_len_3910", playFX_69, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_69, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_6A);
 
@@ -229,14 +229,14 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_6D);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_6E);
 
-INCLUDE_ASM(UNK_TYPE, "4ac90_len_3910", playFX_6F, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_6F, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
             s32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_70);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_71);
 
-INCLUDE_ASM(UNK_TYPE, "4ac90_len_3910", playFX_72, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_72, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
             f32 arg5, f32 arg6, s32 arg7, s32 arg8);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_73);
@@ -255,7 +255,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_79);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_7A);
 
-INCLUDE_ASM(void*, "4ac90_len_3910", playFX_7B, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_7B, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_7C);
 
@@ -271,7 +271,7 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_81);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_82, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 time);
 
-INCLUDE_ASM(void*, "4ac90_len_3910", playFX_83, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_83, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 
 INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_84);
 

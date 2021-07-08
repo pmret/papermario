@@ -41,7 +41,6 @@ extern SpriteAnimData* spr_npcSprites[0xEA];
 extern struct spr_playerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern struct D_802DFA48 D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
-extern s32 gSpriteHeapPtr;
 
 void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 

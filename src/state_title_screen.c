@@ -47,9 +47,9 @@ extern s32* D_800A0978;
 extern s32* D_800A097C;
 extern s32 D_800A0980;
 
-INCLUDE_ASM(s32, "state_title_screen", state_init_title_screen);
+INCLUDE_ASM(void, "state_title_screen", state_init_title_screen, void);
 
-INCLUDE_ASM(s32, "state_title_screen", state_step_title_screen);
+INCLUDE_ASM(void, "state_title_screen", state_step_title_screen, void);
 
 void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->loadMenuState) {
@@ -74,7 +74,7 @@ void state_drawUI_title_screen(void) {
     }
 }
 
-INCLUDE_ASM(s32, "state_title_screen", appendGfx_title_screen);
+INCLUDE_ASM(void, "state_title_screen", appendGfx_title_screen);
 
 void draw_title_screen_NOP(void) {
 }

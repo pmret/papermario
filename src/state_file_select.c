@@ -6,7 +6,7 @@
 extern Addr _163400_BSS_START;
 extern Addr _163400_BSS_END;
 
-s32 D_80077980[] = { 0x8038F800, 0x803B5000, &D_803DA800, };
+s32 D_80077980[] = { &D_8038F800, &D_803B5000, &D_803DA800, };
 
 NUPiOverlaySegment D_8007798C = {
     .romStart = _163400_ROM_START,
@@ -66,7 +66,7 @@ void state_init_file_select(void) {
     gOverrideFlags |= 0x10000;
 }
 
-INCLUDE_ASM(s32, "state_file_select", state_step_language_select);
+INCLUDE_ASM(void, "state_file_select", state_step_language_select, void);
 
 void state_step_file_select(void) {
     s32 temp = D_800A0931; // needed to match
@@ -132,9 +132,9 @@ void state_init_exit_file_select(void) {
     gOverrideFlags &= ~0x40;
 }
 
-INCLUDE_ASM(s32, "state_file_select", state_step_exit_language_select);
+INCLUDE_ASM(void, "state_file_select", state_step_exit_language_select, void);
 
-INCLUDE_ASM(s32, "state_file_select", state_step_exit_file_select);
+INCLUDE_ASM(void, "state_file_select", state_step_exit_file_select, void);
 
 void state_drawUI_exit_language_select(void) {
 }

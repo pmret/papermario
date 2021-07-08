@@ -32,7 +32,7 @@ void init_enter_world_shared(void) {
     timeFreezeMode = 0;
 }
 
-INCLUDE_ASM(s32, "111f0_len_860", state_step_enter_world);
+INCLUDE_ASM(void, "111f0_len_860", state_step_enter_world, void);
 
 void state_drawUI_enter_world(void) {
     if (gGameStatusPtr->loadMenuState == 2) {
@@ -53,7 +53,7 @@ void state_init_change_map(void) {
     }
 }
 
-INCLUDE_ASM(s32, "111f0_len_860", state_step_change_map);
+INCLUDE_ASM(void, "111f0_len_860", state_step_change_map, void);
 
 void state_drawUI_change_map(void) {
     if (D_800A0944 == 4 || D_800A0944 == 0) {
@@ -68,7 +68,7 @@ void func_80036430(void) {
     gPlayerStatus.flags |= 0x1000;
 }
 
-INCLUDE_ASM(s32, "111f0_len_860", func_8003646C);
+INCLUDE_ASM(void, "111f0_len_860", func_8003646C, void);
 
 void func_80036640(void) {
 }
