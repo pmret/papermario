@@ -349,15 +349,15 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_800271FC);
+INCLUDE_ASM(s32, "main_loop", func_800271FC);
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_8002725C);
+INCLUDE_ASM(s32, "main_loop", func_8002725C);
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_80027600);
+INCLUDE_ASM(s32, "main_loop", func_80027600);
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_80027774);
+INCLUDE_ASM(s32, "main_loop", func_80027774);
 
-INCLUDE_ASM(s32, "1b40_len_20b0", func_800279B4);
+INCLUDE_ASM(s32, "main_loop", func_800279B4);
 
 void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;
@@ -389,4 +389,4 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(void, "1b40_len_20b0", gfx_draw_background);
+INCLUDE_ASM(void, "main_loop", gfx_draw_background);

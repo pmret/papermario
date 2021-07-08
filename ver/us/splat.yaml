@@ -43,7 +43,7 @@ segments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, 1060_len_310]
     - [0x1370, c, 1370_len_7d0]
-    - [0x1b40, c, 1b40_len_20b0]
+    - [0x1b40, c, main_loop]
     - [0x3bf0, c, 3bf0_len_6f0]
     - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
@@ -247,7 +247,7 @@ segments:
     - [0x4DF30, c, 4DF30]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
-    - [0x4F420, .data, 1b40_len_20b0]
+    - [0x4F420, .data, main_loop]
     - [0x4F660, .data, 42e0_len_1f60]
     - [0x4F670, .data, 43F0]
     - [0x4F9D0, data, fio]
@@ -282,7 +282,7 @@ segments:
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
     - [0x73130, .rodata, 1060_len_310]
-    - [0x73148, .rodata, 1b40_len_20b0]
+    - [0x73148, .rodata, main_loop]
     - [0x73160, .rodata, 43F0]
     - [0x73200, .rodata, 6e40_len_500]
     - [0x73230, .rodata, 7340_len_b00]
@@ -323,7 +323,7 @@ segments:
     - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
-    # - [0x75240, .bss, 1b40_len_20b0]
+    # - [0x75240, .bss, main_loop]
     # - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
