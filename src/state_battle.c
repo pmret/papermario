@@ -1,55 +1,8 @@
 #include "common.h"
-#include "nu/nusys.h"
-#include "ld_addrs.h"
-
-void intro_logos_set_fade_alpha(s16 alpha);
-void intro_logos_set_fade_color(s16 color);
-s16 intro_logos_fade_in(s16 subtractAlpha);
-s16 intro_logos_fade_out(s16 addAlpha);
-void intro_logos_update_fade(void);
 
 extern s32 D_800A0904;
 extern s32 D_800A0908;
 extern s16** D_800778A0;
-
-void intro_logos_set_fade_alpha(s16 alpha) {
-    gGameStatusPtr->bootAlpha = alpha;
-}
-
-void intro_logos_set_fade_color(s16 color) {
-    gGameStatusPtr->bootRed = color;
-    gGameStatusPtr->bootGreen = color;
-    gGameStatusPtr->bootBlue = color;
-}
-
-s16 intro_logos_fade_in(s16 subtractAlpha) {
-    if (gGameStatusPtr->bootAlpha != 0) {
-        gGameStatusPtr->bootAlpha -= subtractAlpha;
-        if (gGameStatusPtr->bootAlpha << 16 < 0) {
-            gGameStatusPtr->bootAlpha = 0;
-        }
-    } else {
-        return 1;
-    }
-    return 0;
-}
-
-s16 intro_logos_fade_out(s16 addAlpha) {
-    if (gGameStatusPtr->bootAlpha != 255) {
-        gGameStatusPtr->bootAlpha += addAlpha;
-        if (gGameStatusPtr->bootAlpha > 255) {
-            gGameStatusPtr->bootAlpha = 255;
-        }
-    } else {
-        return 1;
-    }
-    return 0;
-}
-
-void intro_logos_update_fade(void) {
-    set_screen_overlay_params_front(0, gGameStatusPtr->bootAlpha);
-    set_screen_overlay_color(0, gGameStatusPtr->bootBlue, gGameStatusPtr->bootGreen, gGameStatusPtr->bootRed);
-}
 
 void state_init_battle(void) {
     D_800A0900 = 5;
@@ -136,7 +89,7 @@ void state_step_battle(void) {
     update_cameras();
 }
 #else
-INCLUDE_ASM(s32, "ebd0_len_6a0", state_step_battle);
+INCLUDE_ASM(s32, "state_battle", state_step_battle);
 #endif
 
 void state_drawUI_battle(void) {
@@ -152,7 +105,7 @@ void state_init_end_battle(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM(s32, "ebd0_len_6a0", state_step_end_battle);
+INCLUDE_ASM(s32, "state_battle", state_step_end_battle);
 
 void state_drawUI_end_battle(void) {
 }
