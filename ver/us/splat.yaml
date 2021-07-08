@@ -44,7 +44,7 @@ segments:
     - [0x1060, c, 1060_len_310]
     - [0x1370, c, 1370_len_7d0]
     - [0x1b40, c, main_loop]
-    - [0x3bf0, c, 3bf0_len_6f0]
+    - [0x3bf0, c, input]
     - [0x42e0, c, 42e0_len_1f60]
     - [0x43F0, c]
     - [0x6000, c, heap]
