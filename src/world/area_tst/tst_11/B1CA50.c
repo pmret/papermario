@@ -1,7 +1,5 @@
 #include "tst_11.h"
 
-// TODO: nonmatchings in this file are very similar to matched funcs in src/world/common/reflection.inc.c
-
 void func_8024003C_B1CA8C(void);
 void func_80240100_B1CB50(PlayerStatus*);
 void func_802402F4_B1CD44(void);
@@ -64,7 +62,6 @@ ApiStatus func_802402B8_B1CD08(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(void, "world/area_tst/tst_11/B1CA50", func_802402F4_B1CD44, void);
 void func_802402F4_B1CD44(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     EntityModel* entityModel;

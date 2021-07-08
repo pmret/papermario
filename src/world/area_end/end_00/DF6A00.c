@@ -1,3 +1,6 @@
 #include "end_00.h"
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A00", func_80240000_DF6A00);
+ApiStatus func_80240000_DF6A00(ScriptInstance* script, s32 isInitialCall) {
+    gGameStatusPtr->playerSpriteSet = 3;
+    return ApiStatus_BLOCK;
+}

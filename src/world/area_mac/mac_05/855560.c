@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243948_855AB8);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243AB8_855C28);
 
-INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243BA4_855D14);
+#include "world/common/PlayFX3D.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/855560", func_80243CD4_855E44);
 
