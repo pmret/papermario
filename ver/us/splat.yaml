@@ -59,7 +59,7 @@ segments:
     - [0xad90, c, ad90_len_2880]
     - [0xB0E0, c]
     - [0xd610, c, d610_len_1330]
-    - [0xe940, c, e940_len_290]
+    - [0xe940, c, state_startup]
     - [0xebd0, c, intro_logos]
     - [0xecd0, c, state_battle]
     - [0xf270, c, f270_len_1190]
