@@ -34,6 +34,8 @@ void create_camera_leadplayer_matrix(Camera *camera) {
 void func_800334E8(void) {
 }
 
+// TODO: FILE SPLIT
+
 void set_game_mode(s16 idx) {
     D_800A08F0 = idx;
     set_game_mode_slot(0, gameModeMap[idx]);

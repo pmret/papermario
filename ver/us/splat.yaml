@@ -69,7 +69,7 @@ segments:
     - [0x111f0, c, 111f0_len_860] # possibly still state_world
     - [0x11a50, c, state_intro]
     - [0x121f0, c, state_title_screen]
-    - [0x13480, c, 13480_len_3f0]
+    - [0x13480, c, state_demo]
     - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
     - [0x1f580, c, 1f580_len_1940]
@@ -256,7 +256,7 @@ segments:
     - [0x52D08, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
-    - [0x52EE0, data] # Start of 13480_len_3f0's data
+    - [0x52EE0, data] # Start of state_demo's data
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
     - [0x541B0, .data, 30450]
@@ -296,7 +296,7 @@ segments:
     - [0x73720, .rodata, 111f0_len_860]
     - [0x73738, .rodata, state_intro]
     - [0x73790, .rodata, state_title_screen]
-    - [0x73860, .rodata, 13480_len_3f0]
+    - [0x73860, .rodata, state_demo]
     - [0x73880, .rodata, npc]
     - [0x739F0, .rodata, 1a1f0_len_5390]
     - [0x73AB0, .rodata, 20ec0_len_5040]

@@ -17,7 +17,7 @@ void state_init_demo(void) {
     clear_script_list();
 }
 
-INCLUDE_ASM(s32, "13480_len_3f0", state_step_demo);
+INCLUDE_ASM(s32, "state_demo", state_step_demo);
 
 void state_drawUI_demo(void) {
 
