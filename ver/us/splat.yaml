@@ -427,7 +427,7 @@ segments:
     - [0xFE6D0, .data, player_api]
     - [0xFE6E0, .data, fa4c0_len_3bf0]
     - [0xFE700, .data, fx_api]
-    - [0xFE720, data, si]
+    - [0xFE720, .data, si]
     - [0xFE730, .rodata, script_list]
     - [0xFE748, .rodata, si]
     - [0xFEB80, .rodata, cam_api]

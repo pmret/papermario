@@ -8,6 +8,11 @@ Bytecode* si_goto_next_case(ScriptInstance* script);
 Bytecode* si_goto_end_loop(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
+u8 D_802D9D70 = 0xFE;
+u8 D_802D9D71 = 0xFE;
+u8 D_802D9D72 = 0x00;
+u8 D_802D9D73 = 0xFF;
+
 f32 fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) / 1024.0f;
