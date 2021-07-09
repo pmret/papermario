@@ -3,9 +3,6 @@
 
 void appendGfx_intro_logos();
 
-// bss?
-extern s8* D_800A0910;
-
 Gfx D_80077908[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -16,6 +13,9 @@ Gfx D_80077908[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsSPEndDisplayList(),
 };
+
+// bss?
+extern s8* D_800A0910;
 
 void state_init_logos(void) {
     s8* romStart;
