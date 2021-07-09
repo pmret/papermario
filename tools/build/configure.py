@@ -347,11 +347,15 @@ class Configure:
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
                 build(inc_dir / (seg.name + ".png"), [bin_path], "img_include")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
-                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
+                bin_path = entry.object_path.with_suffix(".bin")
+                inc_dir = self.build_path() / "include" / seg.dir
+
+                build(bin_path, entry.src_paths, "img", variables={
                     "img_type": seg.type,
                     "img_flags": "",
                 })
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(entry.object_path, [bin_path], "bin")
+                build(inc_dir / (seg.name + ".pal.png"), [bin_path], "img_include")
             elif seg.type == "PaperMarioNpcSprites":
                 sprite_yay0s = []
 

@@ -3453,18 +3453,20 @@ segments:
     subsegments:
     - [0x716C60, c, fire_flower]
     - [0x717060, .data, fire_flower]
-  - dir: battle/item/dusty_hammer
+  - dir: battle/item
     type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7179D0,       c, lib] # TODO consolidate into one file and add image to data
-    - [0x717C10,       c, dusty_hammer] # DUMMY ROM
-    - [0x717C10,   .data, lib]
-    - [0x7181D0,     ci4, dusty_hammer, 32, 32]
-    - [0x7183D0, palette, dusty_hammer]
-    - [0x7183F0,   .data, dusty_hammer]
+    - [0x7179D0, c, dusty_hammer]
+    - start: 0x717C10
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x7181D0, ci4, dusty_hammer, 32, 32]
+      - [0x7183D0, palette, dusty_hammer]
+      - [0x7183F0]
   - name: pow_block
     dir: battle/item
     type: code
