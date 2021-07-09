@@ -341,7 +341,6 @@ segments:
   - type: code
     start: 0x759B0
     vram: 0x800DC500
-    subalign: 4
     subsegments:
     - [0x759b0, c, 759b0_len_61b0]
     - [0x77480, c, 77480]
@@ -367,15 +366,7 @@ segments:
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, .rodata, 77480]
-    - [0xA51E0, .rodata, 7B440]
-    - [0xA5230, .rodata, 7bb60_len_41b0]
-    - [0xA53E0, .rodata, 7fd10_len_b40]
-    - [0xA5410, .rodata, 80850_len_3060]
-    - [0xA54F0, .rodata, world/partners]
-    - [0xA5798, .rodata, 891b0_len_fb0]
-    - [0xA57C0, .rodata, 8a160_len_700]
-    - [0xA57E0, .rodata, 8a860_len_3f30] # bss at 8010C920
+    - [0xA5100] # bss at 8010C920
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
@@ -467,14 +458,7 @@ segments:
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, .data, 104730]
     - [0x10B610, data]
-    - [0x10C880, .rodata, 102C80]
-    - [0x10C9E0, .rodata, 104730]
-    - [0x10CA50, .rodata, 104940_len_dc0]
-    - [0x10CAF0, .rodata, 105F90]
-    - [0x10CB30, .rodata, 107830_len_e70]
-    - [0x10CB70, .rodata, 1086a0_len_fc0]
-    - [0x10CBD0, .rodata, 109660_len_1270]
-    - [0x10CC00, .rodata, 10A230]
+    - [0x10C880]
   - type: code
     start: 0x10CC10
     vram: 0x802EB3D0
@@ -4778,7 +4762,6 @@ segments:
     - [0x8DB2F0, data]
     - [0x8DC270, data]
     - [0x8DE400, data]
-    - [0x8DFB88, data]
     - [0x8DFBB0, data]
     - [0x8E0190, data]
     - [0x8EB190]
@@ -5997,7 +5980,6 @@ segments:
     - [0x9C8350, data]
     - [0x9C8920, data]
     - [0x9C89E0, data]
-    - [0x9CB328, data]
     - [0x9D4EF0, data]
     - [0x9D5110, data]
     - [0x9D5BF0, data]
@@ -7187,7 +7169,6 @@ segments:
     - [0xAF7950, c]
     - [0xAF7C00, c]
     - [0xAF8660, data]
-    - [0xAF8808, data]
     - [0xAF8B40, data]
     - [0xAF9050, data]
     - [0xAF9460, data]
