@@ -128,6 +128,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
     )
 
+    ninja.rule("img_include",
+        description="img_include $in",
+        command=f"$python {BUILD_TOOLS}/img/include.py $in $out",
+    )
+
     ninja.rule("yay0",
         description="yay0 $in",
         command=f"{BUILD_TOOLS}/yay0/Yay0compress $in $out",
@@ -269,7 +274,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h":
+                elif object_path.suffixes[-1] == ".h" or task == "img_include":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -330,13 +335,17 @@ class Configure:
                 if seg.flip_vertical:
                     flags += "--flip-y "
 
-                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
+                bin_path = entry.object_path.with_suffix(".bin")
+                inc_dir = self.build_path() / "include" / seg.dir
+
+                build(bin_path, entry.src_paths, "img", variables={
                     "img_type": seg.type,
                     "img_flags": flags,
                 })
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(entry.object_path, [bin_path], "bin")
 
-                build(self.build_path() / "include" / seg.dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
+                build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
+                build(inc_dir / (seg.name + ".png"), [bin_path], "img_include")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
                     "img_type": seg.type,
