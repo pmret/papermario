@@ -3,20 +3,6 @@
 #include "map.h"
 #include "nu/nusys.h"
 
-Gfx D_80077908[] = {
-    gsDPPipeSync(),
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetTexturePersp(G_TP_NONE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
-    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
-};
-
-// probably a file split
-static s32 padding[] = {0, 0};
-
 s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 
 // TODO the gPauseMenuIconScripts should be DATA_START
