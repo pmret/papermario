@@ -322,6 +322,38 @@ class Configure:
                             task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)
+
+                # images embedded inside data aren't linked, but they do need to be built into .inc.c files
+                if isinstance(seg, segtypes.n64.group.N64SegGroup):
+                    for seg in seg.subsegments:
+                        if isinstance(seg, segtypes.n64.img.N64SegImg):
+                            flags = ""
+                            if seg.flip_horizontal:
+                                flags += "--flip-x "
+                            if seg.flip_vertical:
+                                flags += "--flip-y "
+
+                            src_paths = [seg.out_path()]
+                            inc_dir = self.build_path() / "include" / seg.dir
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".png.bin")
+
+                            build(bin_path, src_paths, "img", variables={
+                                "img_type": seg.type,
+                                "img_flags": flags,
+                            })
+
+                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header")
+                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
+                        elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+                            src_paths = [seg.out_path()]
+                            inc_dir = self.build_path() / "include" / seg.dir
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
+
+                            build(bin_path, src_paths, "img", variables={
+                                "img_type": seg.type,
+                                "img_flags": "",
+                            })
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
             elif isinstance(seg, segtypes.n64.bin.N64SegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
@@ -345,17 +377,14 @@ class Configure:
                 build(entry.object_path, [bin_path], "bin")
 
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
-                build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")
-                inc_dir = self.build_path() / "include" / seg.dir
 
                 build(bin_path, entry.src_paths, "img", variables={
                     "img_type": seg.type,
                     "img_flags": "",
                 })
                 build(entry.object_path, [bin_path], "bin")
-                build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
             elif seg.type == "PaperMarioNpcSprites":
                 sprite_yay0s = []
 
