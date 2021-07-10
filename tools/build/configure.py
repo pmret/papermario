@@ -128,9 +128,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
     )
 
-    ninja.rule("img_include",
-        description="img_include $in",
-        command=f"$python {BUILD_TOOLS}/img/include.py $in $out",
+    ninja.rule("bin_inc_c",
+        description="bin_inc_c $out",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out",
     )
 
     ninja.rule("yay0",
@@ -274,7 +274,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h" or task == "img_include":
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -345,7 +345,7 @@ class Configure:
                 build(entry.object_path, [bin_path], "bin")
 
                 build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
-                build(inc_dir / (seg.name + ".png"), [bin_path], "img_include")
+                build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                 bin_path = entry.object_path.with_suffix(".bin")
                 inc_dir = self.build_path() / "include" / seg.dir
@@ -355,7 +355,7 @@ class Configure:
                     "img_flags": "",
                 })
                 build(entry.object_path, [bin_path], "bin")
-                build(inc_dir / (seg.name + ".pal.png"), [bin_path], "img_include")
+                build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
             elif seg.type == "PaperMarioNpcSprites":
                 sprite_yay0s = []
 

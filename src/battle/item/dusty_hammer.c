@@ -160,8 +160,8 @@ Script N(DrinkItem) = SCRIPT({
 
 static s32 _pad = 0; // XXX
 
-#include "battle/item/dusty_hammer.png"
-#include "battle/item/dusty_hammer.pal.png"
+#include "battle/item/dusty_hammer.png.inc.c"
+#include "battle/item/dusty_hammer.pal.inc.c"
 
 Vtx N(model)[] = {
     { .v = { -16, -16, 0, FALSE, 0,    0,    0, 0, 0, 255 } },
@@ -181,7 +181,7 @@ Gfx N(displayList)[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, battle_item_dusty_hammer_pal_png),
+    gsDPLoadTLUT_pal16(0, battle_item_dusty_hammer_pal),
     gsDPLoadTextureTile_4b(battle_item_dusty_hammer_png, G_IM_FMT_CI, battle_item_dusty_hammer_png_width, battle_item_dusty_hammer_png_height, 0, 0, battle_item_dusty_hammer_png_width - 1, battle_item_dusty_hammer_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
