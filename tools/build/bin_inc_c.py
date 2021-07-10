@@ -13,6 +13,7 @@ if __name__ == "__main__":
         cname = "_".join(cname.split("_")[2:])
 
     cname = re.sub(r"^build_include_", "", cname)
+    cname = re.sub(r"_inc_c$", "", cname)
 
     with open(outfile, "w") as f:
         f.write(f"unsigned char {cname}[] = {{")
