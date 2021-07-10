@@ -277,7 +277,6 @@ segments:
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F114, .data, os/nusys/nuGfxPreNMIFuncSet]
     - [0x6F120, .data, os/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
