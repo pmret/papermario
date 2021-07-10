@@ -8884,7 +8884,6 @@ segments:
     - [0xD07440, data]
     - [0xD09570, data]
     - [0xD09AD0, data]
-    #- [0xD0C294, data]
     - [0xD10DA0, data]
     - [0xD110A0]
   - name: sam_03
