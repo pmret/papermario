@@ -1,10 +1,11 @@
 from segtypes.n64.codesubsegment import N64SegCodeSubsegment
+from segtypes.n64.group import N64SegGroup
 from pathlib import Path
 from typing import List, Optional
 from util.symbols import Symbol
 from util import floats, options
 
-class N64SegData(N64SegCodeSubsegment):
+class N64SegData(N64SegCodeSubsegment, N64SegGroup):
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
             if self.sibling:
@@ -18,9 +19,16 @@ class N64SegData(N64SegCodeSubsegment):
             return options.get_asm_path() / "data" / self.dir / f"{self.name}.{self.type}.s"
 
     def scan(self, rom_bytes: bytes):
-        self.file_text = self.disassemble_data(rom_bytes)
+        N64SegGroup.scan(self, rom_bytes)
+
+        if super().should_scan():
+            self.file_text = self.disassemble_data(rom_bytes)
+        else:
+            self.file_text = None
 
     def split(self, rom_bytes: bytes):
+        N64SegGroup.split(self, rom_bytes)
+
         if self.file_text:
             path = self.out_path()
             
@@ -30,8 +38,20 @@ class N64SegData(N64SegCodeSubsegment):
                 with open(path, "w", newline="\n") as f:
                     f.write(self.file_text)
 
+    def should_split(self) -> bool:
+        return True
+
+    def should_scan(self) -> bool:
+        return True
+
+    def cache(self):
+        return [N64SegCodeSubsegment.cache(self), N64SegGroup.cache(self)]
+
     def get_linker_section(self) -> str:
         return ".data"
+
+    def get_linker_entries(self):
+        return N64SegCodeSubsegment.get_linker_entries(self)
 
     def check_jtbls(self, rom_bytes, syms: List[Symbol]):
         for i, sym in enumerate(syms):
