@@ -278,6 +278,7 @@ ApiStatus InitAnimatedModels(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CABE8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CAE50(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall);
 
 extern Script PlayerScriptDispatcher;
 extern Script PeachScriptDispatcher;

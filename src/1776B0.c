@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "1776B0", SetBattleCamZoom);
 
 INCLUDE_ASM(s32, "1776B0", AddBattleCamZoom);
 
-INCLUDE_ASM(s32, "1776B0", func_8024ECF8);
+INCLUDE_ASM(ApiStatus, "1776B0", func_8024ECF8, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "1776B0", FreezeBattleCam);
 

@@ -313,7 +313,7 @@ Script goomba_turn = SCRIPT({
     SetTargetActor(ACTOR_SELF, 0);
     UseBattleCamPreset(63);
     BattleCamTargetActor(ACTOR_SELF);
-    0x8024ECF8(-1, 1, 0);
+    func_8024ECF8(-1, 1, 0);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, run));
     SetGoalToTarget(ACTOR_SELF);
     AddGoalPos(ACTOR_SELF, 50, 0, 0);
