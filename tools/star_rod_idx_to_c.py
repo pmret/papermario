@@ -742,11 +742,8 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 else:
                     out += "    BATTLE("
                     out += f"{symbol_map[name][0][1]}, "
-                    out += f"{symbol_map[ptr][0][1]}, "
-                    if stage_ptr in symbol_map:
-                        out += f"&{symbol_map[stage_ptr][0][1]}"
-                    else:
-                        out += f"{stage_ptr}"
+                    out += f"&{symbol_map[ptr][0][1]}, "
+                    out += f"&{symbol_map[stage_ptr][0][1]}"
                     out += "),\n"
 
             out += f"}};\n"

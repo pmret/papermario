@@ -223,7 +223,7 @@ typedef struct ActorDesc {
     /* 0x07 */ u8 maxHP;
     /* 0x08 */ s16 partCount;
     /* 0x0A */ char unk_0A[2];
-    /* 0x0C */ struct ActorPartDesc** partsData;
+    /* 0x0C */ struct ActorPartDesc* partsData;
     /* 0x10 */ Bytecode* script;
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
