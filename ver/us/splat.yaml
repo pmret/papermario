@@ -262,7 +262,6 @@ segments:
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
-    - [0x52D08, .data, state_logos]
     - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
