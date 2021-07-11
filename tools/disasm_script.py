@@ -67,6 +67,13 @@ def script_lib(offset):
             _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
 
+def round_fixed(f: float) -> float:
+    g = f * 100.0
+    whole = round(g)
+    if abs(g - whole) <= 100.0/1024.0:
+        f = whole / 100.0
+    return f
+
 # Grab CONSTANTS from the include/ folder to save manual work
 CONSTANTS = {}
 SAVE_VARS = set()
@@ -77,7 +84,7 @@ def get_constants():
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
-        "Events", "Statuses", "Elements",
+        "Events", "Statuses", "Elements", "DamageTypes", "HitResults",
         "ActorFlags", "ActorPartFlags", "ActorEventFlags", "ElementFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
@@ -268,6 +275,18 @@ def fix_args(self, func, args, info):
                     new_args.append(CONSTANTS["MAP_NPCS"][argNum])
                 else:
                     new_args.append(CONSTANTS["NpcIDs"][argNum])
+            elif info[i] == "DamageTypes":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["DamageTypes"]:
+                            enabled.append(CONSTANTS["DamageTypes"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append("((" + " | ".join(enabled) + "))")
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
@@ -302,11 +321,11 @@ replace_funcs = {
     "DispatchDamagePlayerEvent" :{1:"Events"},
     "DispatchEvent"             :{0:"ActorIDs"},
 
-    "EnableIdleScript"          :{0:"ActorIDs"},
+    "EnableIdleScript"          :{0:"ActorIDs", 1:"Bool"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
-    "EnemyDamageTarget"         :{0:"ActorIDs"},
-    "EnemyTestTarget"           :{0:"ActorIDs"},
+    "EnemyDamageTarget"         :{0:"ActorIDs", 2:"DamageTypes"},
+    "EnemyTestTarget"           :{0:"ActorIDs", 2:"DamageTypes"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
@@ -346,7 +365,8 @@ replace_funcs = {
 
     "RemoveActorDecoration"     :{0:"ActorIDs"},
     "RemoveNpc"                 :{0:"NpcIDs"},
-    "RunToGoal"                 :{0:"ActorIDs"},
+    "RunToGoal"                 :{0:"ActorIDs", 2:"Bool"},
+    "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
@@ -374,7 +394,7 @@ replace_funcs = {
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
-    "SetTargetActor"            :{0:"ActorIDs"},
+    "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
@@ -382,7 +402,7 @@ replace_funcs = {
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", -1:"CustomMsg"},
     "SwitchMessage"             :{0:"CustomMsg"},
 
-    "UseIdleAnimation"          :{0:"ActorIDs"},
+    "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
 }
 
 def replace_constants(self, func, args):
@@ -794,7 +814,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
-            if v <= -220000000: return str((v + 230000000) / 1024)
+            if v <= -220000000: return str(round_fixed((v + 230000000) / 1024))
             elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
             elif v <= -160000000:
@@ -844,7 +864,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             var -= 0x100000000
 
         # put cases for replacing vars here
-        if ((    case and self.case_variable == "STORY_PROGRESS") or
+        if case and "handleEvent" in self.script_name and var in CONSTANTS["Events"]:
+            return CONSTANTS["Events"][var]
+        elif case and "takeTurn" in self.script_name and var in CONSTANTS["HitResults"]:
+            return CONSTANTS["HitResults"][var]
+        elif ((    case and self.case_variable == "STORY_PROGRESS") or
             (not case and self.save_variable == "STORY_PROGRESS")):
             if var in CONSTANTS["StoryProgress"]:
                 return CONSTANTS["StoryProgress"][var]
@@ -993,45 +1017,45 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.case_stack.append("MATCH")
         elif opcode == 0x16:
             self.case_stack.append("CASE")
-            self.write(f"== {self.var(argv[0])}")
+            self.write(f"== {self.replace_enum(argv[0], True)}")
         elif opcode == 0x17:
             self.case_stack.append("CASE")
-            self.write(f"!= {self.var(argv[0])}")
+            self.write(f"!= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x18:
             self.case_stack.append("CASE")
-            self.write(f"< {self.var(argv[0])}")
+            self.write(f"< {self.replace_enum(argv[0], True)}")
         elif opcode == 0x19:
             self.case_stack.append("CASE")
-            self.write(f"> {self.var(argv[0])}")
+            self.write(f"> {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1A:
             self.case_stack.append("CASE")
-            self.write(f"<= {self.var(argv[0])}")
+            self.write(f"<= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1B:
             self.case_stack.append("CASE")
-            self.write(f">= {self.var(argv[0])}")
+            self.write(f">= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1C:
             self.case_stack.append("CASE")
             self.write(f"else")
         elif opcode == 0x1D:
             if self.in_case == "CASE" or self.in_case == "MULTI":
-                self.out += f", {self.var(argv[0])}"
+                self.out += f", {self.replace_enum(argv[0], True)}"
 
                 # replace(!) CASE with MULTI
                 self.case_stack.pop()
                 self.case_stack.append("MULTI")
             else:
-                self.write(f"{self.var(argv[0])}")
+                self.write(f"{self.replace_enum(argv[0], True)}")
                 self.case_stack.append("MULTI")
         # opcode 0x1E?
         elif opcode == 0x1F:
             self.case_stack.append("CASE")
-            self.write_line(f"? {self.var(argv[0])}")
+            self.write_line(f"? {self.replace_enum(argv[0], True)}")
         elif opcode == 0x20:
             if not self.was_multi_case:
                 raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
         elif opcode == 0x21:
             self.indent -= 1
-            self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])}")
+            self.write_line(f"{self.replace_enum(argv[0], True)}..{self.replace_enum(argv[1], True)}")
             self.indent += 1
         elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:

@@ -490,7 +490,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "TreeDropList":
             new_name = "N(" + name.split('_',1)[1][:-1].lower() + "_Drops)"
             symbol_map[struct["vaddr"]][0][1] = new_name
-            
+
             out += f"FoliageDropList {new_name} = {{\n"
 
             data = bytes.read(struct["length"])
@@ -552,7 +552,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             if isModelList:
                 if count > 0:
                     out += f"{INDENT}.models = {{ "
-                
+
                 pos = 4
                 for _ in range(count):
                     entry = unpack_from(">I", data, pos)[0]
@@ -567,7 +567,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             else:
                 if count > 0:
                     out += f"{INDENT}.vectors = {{\n"
-                
+
                 pos = 4
                 for _ in range(count):
                     entry = list(unpack_from(">3I", data, pos))
@@ -575,7 +575,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     entry[0] = entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
                     entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
                     entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
-                    
+
                     pos += 3*4
 
                     out += f"{INDENT * 2}{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
@@ -609,7 +609,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "ShakeTreeEvent":
             new_name = "N(" + name.split('_',1)[1].lower()
             symbol_map[struct["vaddr"]][0][1] = new_name
-            
+
             num = int(new_name.split("tree",1)[1][:-1])
             out += f"ShakeTreeConfig {new_name} = {{\n"
 
@@ -700,7 +700,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 actor, position, priority, var0, var1, var2, var3 = unpack(">IIIIIII", bytes.read(0x1C))
                 num_bytes_remaining -= 0x1C
 
-                out += "    "
+                out += "    { "
 
                 if actor in symbol_map:
                     out += f"&{symbol_map[actor][0][1]}, "
@@ -727,6 +727,27 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f", {var1}, {var2} {var3}, {var4}"
 
                 out += " },\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "FormationTable":
+            out += f"BattleList {struct['name']} = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                name, formation_length, ptr, stage_ptr, zero = unpack(">IIIII", bytes.read(4 * 5))
+                num_bytes_remaining -= 4 * 5
+
+                if name == 0:
+                    out += "    {},\n"
+                else:
+                    out += "    BATTLE("
+                    out += f"{symbol_map[name][0][1]}, "
+                    out += f"{symbol_map[ptr][0][1]}, "
+                    if stage_ptr in symbol_map:
+                        out += f"&{symbol_map[stage_ptr][0][1]}"
+                    else:
+                        out += f"{stage_ptr}"
+                    out += "),\n"
 
             out += f"}};\n"
         elif struct["type"] == "StageTable":
