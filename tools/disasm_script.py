@@ -227,7 +227,7 @@ def fix_args(self, func, args, info):
                 #if argNum not in CONSTANTS["MAP_NPCS"]:
                 #    new_args.append(f"0x{argNum:X}")
                 #    continue
-                
+
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                 elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
@@ -1054,13 +1054,26 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if varB.startswith("script_"):
                 varB = "N(" + varB + ")"
             self.write_line(f"{varA} = {varB};")
-        elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X};")
+        elif opcode == 0x25:
+            varA = self.replace_enum(argv[0])
+            argNum = argv[1]
+
+            sprite  = (argNum & 0xFF0000) >> 16
+            palette = (argNum & 0xFF00)   >> 8
+            anim    = (argNum & 0xFF)     >> 0
+
+            call = make_anim_macro(self, sprite, palette, anim)
+
+            if "0x" in call:
+                call = self.var(argNum)
+
+            self.write_line(f"{varA} = (const) {call};")
         elif opcode == 0x26:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} = {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} =f {lhs};")
+                self.write_line(f"{self.var(argv[0])} = (float) {lhs};")
         elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])};")
         elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])};")
         elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])};")
@@ -1181,7 +1194,6 @@ if __name__ == "__main__":
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-            
 
             while args.offset < args.end:
                 f.seek(args.offset)
