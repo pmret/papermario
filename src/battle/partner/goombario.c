@@ -228,18 +228,17 @@ ActorPartDesc N(partsTable_802392A4)[] = {
     },
 };
 
+Script N(init_802392F0);
+
 ActorDesc N(goombario) = {
     .flags = 0,
-    .type = ACTOR_TYPE_goombario,
+    .type = 111,
     .level = 0,
     .maxHP = 99,
-
     .partCount = ARRAY_COUNT(N(partsTable_802392A4)),
     .partsData = N(partsTable_802392A4),
-
-    .script = N(init),
+    .script = N(init_802392F0),
     .statusTable = N(statusTable_802391F8),
-
     .escapeChance = 0,
     .airLiftChance = 0,
     .spookChance = 0,
@@ -248,18 +247,17 @@ ActorDesc N(goombario) = {
     .spinSmashReq = 4,
     .powerBounceChance = 80,
     .coinReward = 0,
-
     .size = { 29, 26 },
     .hpBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
     .statusMessageOffset = { 10, 20 },
 };
 
-Script N(init) = SCRIPT({
+Script N(init_802392F0) = SCRIPT({
     BindTakeTurn(ACTOR_PARTNER, N(takeTurn_802396D8));
     BindIdle(ACTOR_PARTNER, N(idle_80239350));
     BindHandleEvent(ACTOR_PARTNER, N(handleEvent_80239360));
-    BindNextTurn(ACTOR_PARTNER, N(nextTurn_80239A3C));
+    BindNextTurn(256, N(nextTurn_80239A3C));
 });
 
 Script N(idle_80239350) = SCRIPT({
@@ -271,62 +269,62 @@ Script N(handleEvent_80239360) = SCRIPT({
     CloseActionCommandInfo();
     GetLastEvent(ACTOR_PARTNER, SI_VAR(0));
     match SI_VAR(0) {
-        9, 10 {
-            SI_VAR(1) = (const) 0x9000A;
-            SI_VAR(2) = (const) 0x9000A;
+        EVENT_HIT_COMBO, EVENT_HIT {
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
+            SI_VAR(2) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x802977BC;
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80296014;
         }
-        23, 25 {
+        23, EVENT_IMMUNE {
             PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208C);
-            SI_VAR(0) = (const) 0x1;
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80297814;
         }
-        == 42 {
-            SI_VAR(1) = (const) 0x9000A;
+        == EVENT_SPIKE_CONTACT {
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             SI_VAR(2) = 12;
             await 0x80294FE4;
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80296014;
         }
-        == 44 {
-            SI_VAR(1) = (const) 0x9000B;
+        == EVENT_BURN_CONTACT {
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, burn_pain);
             SI_VAR(2) = 12;
-            SI_VAR(3) = (const) 0x9000C;
+            SI_VAR(3) = (const) NPC_ANIM(battle_goombario, default, burn_dead);
             await 0x80294C68;
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80296014;
         }
-        == 14 {
-            SI_VAR(1) = (const) 0x9000B;
-            SI_VAR(2) = (const) 0x9000C;
+        == EVENT_BURN_HIT {
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, burn_pain);
+            SI_VAR(2) = (const) NPC_ANIM(battle_goombario, default, burn_dead);
             await 0x8029621C;
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80296014;
         }
-        == 47 {
-            SI_VAR(1) = (const) 0x9000A;
+        == EVENT_SHOCK_HIT {
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             SI_VAR(2) = 12;
             await 0x80295744;
         }
         == 51 {
             N(StopGlowing)();
-            SI_VAR(1) = (const) 0x9000A;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, pain);
             await 0x80296014;
         }
         == 52 {
-            SI_VAR(0) = (const) 0x1;
-            SI_VAR(1) = (const) 0x90001;
-            SI_VAR(2) = (const) 0x90003;
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, idle);
+            SI_VAR(2) = (const) NPC_ANIM(battle_goombario, default, run);
             SI_VAR(3) = 0;
             await 0x80295EC4;
         }
-        24, 26 {
+        24, EVENT_BLOCK {
             PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208C);
-            SI_VAR(0) = (const) 0x1;
-            SI_VAR(1) = (const) 0x9000E;
+            SI_VAR(0) = (const) 1;
+            SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, block);
             await 0x80297814;
             sleep 10;
         }
@@ -342,26 +340,26 @@ Script N(takeTurn_802396D8) = SCRIPT({
         == 1 {
             await N(8023993C);
         }
-        == 0 {
+        == HIT_RESULT_HIT {
             await N(802397E0);
         }
-        == 5 {
+        == HIT_RESULT_LUCKY {
             await N(80239784);
         }
         == 3 {
             await N(8023994C);
         }
-        == 7 {
+        == HIT_RESULT_HIT_STATIC {
             await N(80239988);
         }
     }
 });
 
 Script N(80239784) = SCRIPT({
-    SI_VAR(0) = (const) 0x1;
-    SI_VAR(1) = (const) 0x90010;
-    SI_VAR(2) = (const) 0x90011;
-    SI_VAR(3) = (const) 0x90001;
+    SI_VAR(0) = (const) 1;
+    SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, celebrate);
+    SI_VAR(2) = (const) NPC_ANIM(battle_goombario, default, celebrate_still);
+    SI_VAR(3) = (const) NPC_ANIM(battle_goombario, default, idle);
     await 0x80294720;
 });
 
@@ -408,13 +406,13 @@ Script N(8023993C) = SCRIPT({
 });
 
 Script N(8023994C) = SCRIPT({
-    SI_VAR(0) = (const) 0x1;
-    SI_VAR(1) = (const) 0x90003;
+    SI_VAR(0) = (const) 1;
+    SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, run);
     await 0x80294AFC;
 });
 
 Script N(80239988) = SCRIPT({
-    UseIdleAnimation(ACTOR_PARTNER, 0);
+    UseIdleAnimation(ACTOR_PARTNER, FALSE);
     SetGoalToHome(ACTOR_PARTNER);
     SetActorSpeed(ACTOR_PARTNER, 6.0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, run));
@@ -430,7 +428,7 @@ Script N(nextTurn_80239A3C) = SCRIPT({
         == 10 {
             if (SI_SAVE_FLAG(1817) == 0) {
                 UseIdleAnimation(ACTOR_PARTNER, 0);
-                UseCamPreset(14);
+                UseBattleCamPreset(14);
                 BattleCamTargetActor(ACTOR_SELF);
                 MoveBattleCamOver(20);
                 sleep 10;
@@ -468,7 +466,7 @@ Script N(nextTurn_80239A3C) = SCRIPT({
 
 Script N(80239CA8) = SCRIPT({
     func_80280818();
-    UseCamPreset(51);
+    UseBattleCamPreset(51);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     spawn {
         sleep 4;
@@ -486,9 +484,9 @@ Script N(80239CA8) = SCRIPT({
     SI_VAR(0) -= 30;
     SI_VAR(1) = 0;
     SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetActorJumpGravity(ACTOR_PARTNER, 1.2001953125);
+    SetActorJumpGravity(ACTOR_PARTNER, 1.2);
     N(func_80238000_6F10E0)();
-    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), 0, 1, 0);
+    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), FALSE, TRUE, FALSE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
@@ -498,7 +496,7 @@ Script N(80239CA8) = SCRIPT({
     SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     AddGoalPos(ACTOR_PARTNER, -10, 0, 0);
-    JumpToGoal(ACTOR_PARTNER, 6, 0, 0, 1);
+    JumpToGoal(ACTOR_PARTNER, 6, FALSE, FALSE, TRUE);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
@@ -517,13 +515,13 @@ Script N(80239CA8) = SCRIPT({
 
 Script N(8023A06C) = SCRIPT({
     func_80280818();
-    UseCamPreset(3);
+    UseBattleCamPreset(3);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     SetGoalToHome(ACTOR_PARTNER);
     GetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 60;
     SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetActorJumpGravity(ACTOR_PARTNER, 1.400390625);
+    SetActorJumpGravity(ACTOR_PARTNER, 1.4);
     N(func_80238000_6F10E0)();
     spawn {
         sleep 4;
@@ -550,7 +548,7 @@ Script N(8023A06C) = SCRIPT({
         SetActorRotation(ACTOR_SELF, 0, 0, 0);
         SetActorRotationOffset(-127, 0, 0, 0);
     }
-    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), 0, 1, 0);
+    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), FALSE, TRUE, FALSE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
@@ -558,14 +556,14 @@ Script N(8023A06C) = SCRIPT({
     SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     AddGoalPos(ACTOR_PARTNER, -20, 0, 0);
-    JumpToGoal(ACTOR_PARTNER, 6, 0, 0, 1);
+    JumpToGoal(ACTOR_PARTNER, 6, FALSE, FALSE, TRUE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
     AddGoalPos(ACTOR_PARTNER, -10, 0, 0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     SetActorDispOffset(ACTOR_SELF, 0, 0, 0);
-    JumpToGoal(ACTOR_PARTNER, 4, 0, 0, 1);
+    JumpToGoal(ACTOR_PARTNER, 4, FALSE, FALSE, TRUE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
@@ -591,7 +589,7 @@ Script N(8023A52C) = SCRIPT({
         SI_VAR(3) = SI_VAR(0);
     }
     SetGoalPos(ACTOR_PARTNER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    UseCamPreset(47);
+    UseBattleCamPreset(47);
     SetActorSpeed(ACTOR_PARTNER, 5.0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, run));
     RunToGoal(ACTOR_PARTNER, 0);
@@ -625,9 +623,9 @@ Script N(8023A754) = {
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
     SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
@@ -654,7 +652,7 @@ Script N(8023A754) = {
         SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
     SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802807D0, SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_GT, 0),
             SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
@@ -677,10 +675,10 @@ Script N(8023A754) = {
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
     SI_CMD(ScriptOpcode_END_MATCH),
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 50),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
         SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 53),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
     SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
     SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
     SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
@@ -732,9 +730,9 @@ Script N(8023ADC4) = {
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
     SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
@@ -761,7 +759,7 @@ Script N(8023ADC4) = {
         SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
     SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802807D0, SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_GT, 0),
             SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
@@ -784,10 +782,10 @@ Script N(8023ADC4) = {
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
     SI_CMD(ScriptOpcode_END_MATCH),
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 50),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
         SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 53),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
     SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
     SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
     SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
@@ -841,9 +839,9 @@ Script N(8023B45C) = {
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
     SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
@@ -870,7 +868,7 @@ Script N(8023B45C) = {
         SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
     SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802807D0, SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_GT, 0),
             SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
@@ -893,10 +891,10 @@ Script N(8023B45C) = {
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
     SI_CMD(ScriptOpcode_END_MATCH),
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 50),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
         SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 53),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
     SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
     SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
     SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
@@ -965,9 +963,9 @@ Script N(8023BB9C) = {
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 1),
-    SI_CMD(ScriptOpcode_CALL, UseCamPreset, 52),
+    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
     SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
     SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
     SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
@@ -994,7 +992,7 @@ Script N(8023BB9C) = {
         SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
     SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802807D0, SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_GT, 0),
             SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
@@ -1017,10 +1015,10 @@ Script N(8023BB9C) = {
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
     SI_CMD(ScriptOpcode_END_MATCH),
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 50),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
         SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 53),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
     SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
     SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
     SI_CMD(ScriptOpcode_SET, SI_VAR(13), 0),
@@ -1028,10 +1026,10 @@ Script N(8023BB9C) = {
     SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
     SI_CMD(ScriptOpcode_LABEL, 10),
     SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 50),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
         SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
         SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseCamPreset, 53),
+        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
     SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
     SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
     SI_CMD(ScriptOpcode_CALL, func_8026919C, N(D_8023BB78_6ECC58)),
@@ -1087,7 +1085,7 @@ Script N(8023BB9C) = {
         SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
     SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
     SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802807D0, SI_VAR(0)),
+    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_GT, 0),
             SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
@@ -1134,7 +1132,7 @@ Script N(8023C5B8) = SCRIPT({
     SetActorSpeed(ACTOR_PARTNER, 6.0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, run));
     SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    RunToGoal(ACTOR_PARTNER, 0, 0);
+    RunToGoal(ACTOR_PARTNER, 0, FALSE);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_PARTNER);
@@ -1162,7 +1160,7 @@ Script N(8023C5B8) = SCRIPT({
     sleep 12;
     SetCamEnabled(2, 0);
     sleep 32;
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     SetBattleFlagBits(4, 0);
     func_80280818();
     SetGoalToHome(ACTOR_PARTNER);
@@ -1174,16 +1172,16 @@ Script N(8023C5B8) = SCRIPT({
 });
 
 Script N(8023C90C) = SCRIPT({
-    UseCamPreset(55);
+    UseBattleCamPreset(55);
     sleep 10;
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, charge));
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
     GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 15;
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208F);
-    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.2001953125);
+    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.2);
     sleep 3;
-    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 0.80078125);
+    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 0.8);
     spawn {
         sleep 15;
         GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1195,7 +1193,7 @@ Script N(8023C90C) = SCRIPT({
     sleep 30;
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
     SetActorDispOffset(ACTOR_PARTNER, 0, 0, 0);
-    UseCamPreset(2);
+    UseBattleCamPreset(2);
     MoveBattleCamOver(10);
     func_80238E74_6F1F54();
     if (SI_VAR(0) == 0) {
@@ -1206,7 +1204,7 @@ Script N(8023C90C) = SCRIPT({
         PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208E);
         func_80238EDC_6F1FBC(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         sleep 4;
-        SetActorJumpGravity(ACTOR_PARTNER, 1.400390625);
+        SetActorJumpGravity(ACTOR_PARTNER, 1.4);
         GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SetJumpAnimations(ACTOR_PARTNER, 589828, ANIM_1, ANIM_90004, ANIM_90004);
         SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

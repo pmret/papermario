@@ -288,6 +288,7 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80280818(ScriptInstance* script, s32 isInitialCall); ///< YieldTurn copy
 ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetActionCommandResult(ScriptInstance* script, s32 isInitialCall);
 
 extern Script PlayerScriptDispatcher;
 extern Script PeachScriptDispatcher;
