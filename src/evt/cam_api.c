@@ -153,9 +153,9 @@ ApiStatus SetCamBGColor(ScriptInstance* script, s32 isInitialCall) {
     Camera* cameras = gCameras;
     Camera* camera = &cameras[id];
 
-    camera->backgroundColor[0] = r;
-    camera->backgroundColor[1] = g;
-    camera->backgroundColor[2] = b;
+    camera->bgColor[0] = r;
+    camera->bgColor[1] = g;
+    camera->bgColor[2] = b;
     return ApiStatus_DONE2;
 }
 

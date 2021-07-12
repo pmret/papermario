@@ -534,7 +534,7 @@ typedef struct Camera {
     /* 0x026 */ s16 unk_26;
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
-    /* 0x02C */ s16 backgroundColor[3];
+    /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];

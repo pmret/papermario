@@ -16,6 +16,19 @@ Gfx D_800778C8[] = {
     gsSPEndDisplayList(),
 };
 
+// Should maybe be in state_logos.c but creates an 0x8 data split
+Gfx D_80077908[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
+    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsSPEndDisplayList(),
+};
+
+
 // BSS
 extern s32 D_800A0904;
 extern s32 D_800A0908;

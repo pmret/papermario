@@ -45,7 +45,7 @@ def get_base_path() -> Path:
     return Path(opts["base_path"])
 
 def get_asset_path() -> Path:
-    return get_base_path() / opts.get("asset_path", "assets")
+    return Path(get_base_path() / opts.get("asset_path", "assets")).relative_to(get_base_path())
 
 def get_target_path() -> Path:
     return get_base_path() / opts["target_path"]

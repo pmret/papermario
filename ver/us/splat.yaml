@@ -38,7 +38,6 @@ segments:
   - type: code
     start: 0x1000
     vram: 0x80025C00
-    subalign: 4
     subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, 1060_len_310]
@@ -263,7 +262,6 @@ segments:
     - [0x52810, .data, camera]
     - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
-    - [0x52D08, .data, state_logos]
     - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
@@ -277,7 +275,6 @@ segments:
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F114, .data, os/nusys/nuGfxPreNMIFuncSet]
     - [0x6F120, .data, os/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
@@ -3443,7 +3440,7 @@ segments:
     overlay: True
     subsegments:
     - [0x715850, c, mushroom] # TODO fix auto_all for .data
-    - [0x715E50, .data, mushroom]
+    - [0x715E50]
   - name: fire_flower
     dir: battle/item
     type: code
@@ -3452,19 +3449,22 @@ segments:
     overlay: True
     subsegments:
     - [0x716C60, c, fire_flower]
-    - [0x717060, .data, fire_flower]
-  - dir: battle/item/dusty_hammer
+    - [0x717060]
+  - name: dusty_hammer
+    dir: battle/item
     type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7179D0,       c, lib] # TODO consolidate into one file and add image to data
-    - [0x717C10,       c, dusty_hammer] # DUMMY ROM
-    - [0x717C10,   .data, lib]
-    - [0x7181D0,     ci4, dusty_hammer, 32, 32]
-    - [0x7183D0, palette, dusty_hammer]
-    - [0x7183F0,   .data, dusty_hammer]
+    - [0x7179D0, c, dusty_hammer]
+    - start: 0x717C10
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x7181D0, ci4, dusty_hammer, 32, 32]
+      - [0x7183D0, palette, dusty_hammer]
+      - [0x7183F0]
   - name: pow_block
     dir: battle/item
     type: code
@@ -3473,18 +3473,22 @@ segments:
     overlay: True
     subsegments:
     - [0x718850, c, pow_block]
-    - [0x718BF0, .data, pow_block]
-  - dir: battle/item/pebble
+    - [0x718BF0]
+  - name: pebble
+    dir: battle/item
     type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x719970,       c, lib]
-    - [0x719BB0,   .data, lib]
-    - [0x71A170,     ci4, pebble, 32, 32]
-    - [0x71A370, palette, pebble]
-    - [0x71A390,   .data, pebble]
+    - [0x719970, c, pebble]
+    - start: 0x719BB0
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x71A170, ci4, pebble, 32, 32]
+      - [0x71A370, palette, pebble]
+      - [0x71A390]
   - name: volt_shroom
     dir: battle/item
     type: code
@@ -3493,7 +3497,7 @@ segments:
     overlay: True
     subsegments:
     - [0x71A7F0, c, volt_shroom]
-    - [0x71AA70, .data, volt_shroom]
+    - [0x71AA70]
   - name: thunder_rage
     dir: battle/item
     type: code
@@ -3502,7 +3506,7 @@ segments:
     overlay: True
     subsegments:
     - [0x71B1A0, c, thunder_rage]
-    - [0x71B640, .data, thunder_rage]
+    - [0x71B640]
   - name: snowman_doll
     dir: battle/item
     type: code
@@ -3511,7 +3515,7 @@ segments:
     overlay: True
     subsegments:
     - [0x71BE30, c, snowman_doll]
-    - [0x71C270, .data, snowman_doll]
+    - [0x71C270]
   - name: dried_shroom
     dir: battle/item
     type: code
@@ -3520,7 +3524,7 @@ segments:
     overlay: True
     subsegments:
     - [0x71CCE0, c, dried_shroom]
-    - [0x71D010, .data, dried_shroom]
+    - [0x71D010]
   - name: shooting_star
     dir: battle/item
     type: code
@@ -3529,23 +3533,27 @@ segments:
     overlay: True
     subsegments:
     - [0x71D770, c, shooting_star]
-    - [0x71DCC0, .data, shooting_star]
-  - dir: battle/item/sleepy_sheep
+    - [0x71DCC0]
+  - name: sleepy_sheep
+    dir: battle/item
     type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x71E650,       c, lib]
-    - [0x71EFC0,   .data, lib]
-    - [0x71F580,     ci4, sleepy_sheep1, 56, 48]
-    - [0x71FAC0, palette, sleepy_sheep1]
-    - [0x71FAE0,     ci4, sleepy_sheep2, 56, 48]
-    - [0x720020, palette, sleepy_sheep2]
-    - [0x720040,     ci4, sleepy_sheep3, 56, 48]
-    - [0x720580, palette, sleepy_sheep3]
-    - [0x7205A0,   .data, sleepy_sheep]
-    - [0x7214D8, .rodata, lib]
+    - [0x71E650, c, sleepy_sheep]
+    - start: 0x71EFC0
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x71EFC0, .data, sleepy_sheep]
+      - [0x71F580, ci4, sleepy_sheep1, 56, 48]
+      - [0x71FAC0, palette, sleepy_sheep1]
+      - [0x71FAE0, ci4, sleepy_sheep2, 56, 48]
+      - [0x720020, palette, sleepy_sheep2]
+      - [0x720040, ci4, sleepy_sheep3, 56, 48]
+      - [0x720580, palette, sleepy_sheep3]
+      - [0x7205A0]
   - name: stone_cap
     dir: battle/item
     type: code
@@ -3554,7 +3562,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7215A0, c, stone_cap]
-    - [0x721970, .data, stone_cap]
+    - [0x721970]
   - name: tasty_tonic
     dir: battle/item
     type: code
@@ -3563,7 +3571,7 @@ segments:
     overlay: True
     subsegments:
     - [0x722000, c, tasty_tonic]
-    - [0x7222D0, .data, tasty_tonic]
+    - [0x7222D0]
   - name: thunder_bolt
     dir: battle/item
     type: code
@@ -3572,7 +3580,7 @@ segments:
     overlay: True
     subsegments:
     - [0x722B40, c, thunder_bolt]
-    - [0x722FE0, .data, thunder_bolt]
+    - [0x722FE0]
   - name: ultra_shroom
     dir: battle/item
     type: code
@@ -3581,7 +3589,7 @@ segments:
     overlay: True
     subsegments:
     - [0x723780, c, ultra_shroom]
-    - [0x723AB0, .data, ultra_shroom]
+    - [0x723AB0]
   - name: unknown_item
     dir: battle/item
     type: code
@@ -3590,7 +3598,7 @@ segments:
     overlay: True
     subsegments:
     - [0x724240, c, unknown_item]
-    - [0x724570, .data, unknown_item]
+    - [0x724570]
   - name: super_soda
     dir: battle/item
     type: code
@@ -3599,7 +3607,7 @@ segments:
     overlay: True
     subsegments:
     - [0x724CE0, c, super_soda]
-    - [0x725210, .data, super_soda]
+    - [0x725210]
   - name: hustle_drink
     dir: battle/item
     type: code
@@ -3608,7 +3616,7 @@ segments:
     overlay: True
     subsegments:
     - [0x725F60, c, hustle_drink]
-    - [0x726240, .data, hustle_drink]
+    - [0x726240]
   - name: stop_watch
     dir: battle/item
     type: code
@@ -3617,7 +3625,7 @@ segments:
     overlay: True
     subsegments:
     - [0x726DD0, c, stop_watch]
-    - [0x727120, .data, stop_watch]
+    - [0x727120]
   - name: dizzy_dial
     dir: battle/item
     type: code
@@ -3626,8 +3634,7 @@ segments:
     overlay: True
     subsegments:
     - [0x727910, c, dizzy_dial]
-    - [0x727CE0, .data, dizzy_dial]
-    - [0x7285D0, .rodata, dizzy_dial]
+    - [0x727CE0]
   - name: please_come_back
     dir: battle/item
     type: code
@@ -3635,36 +3642,45 @@ segments:
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7285E0,     c, please_come_back]
-    - [0x728820, .data, please_come_back]
-  - dir: battle/item/egg_missile
+    - [0x7285E0, c, please_come_back]
+    - [0x728820]
+  - name: egg_missile
+    dir: battle/item
     type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x728EC0,       c, lib]
-    - [0x7291D0,   .data, lib]
-    - [0x729790,     ci4, egg_missile1, 32, 32]
-    - [0x729990, palette, egg_missile1]
-    - [0x7299B0,     ci4, egg_missile2, 32, 32]
-    - [0x729BB0, palette, egg_missile2]
-    - [0x729BD0,     ci4, egg_missile3, 32, 32]
-    - [0x729DD0, palette, egg_missile3]
-    - [0x729DF0,     ci4, egg_missile4, 32, 32]
-    - [0x729FF0, palette, egg_missile4]
-    - [0x72A010,   .data, egg_missile]
-  - dir: battle/item/insecticide_herb
+    - [0x728EC0, c, egg_missile]
+    - start: 0x7291D0
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x7291D0, .data, egg_missile]
+      - [0x729790, ci4, egg_missile1, 32, 32]
+      - [0x729990, palette, egg_missile1]
+      - [0x7299B0, ci4, egg_missile2, 32, 32]
+      - [0x729BB0, palette, egg_missile2]
+      - [0x729BD0, ci4, egg_missile3, 32, 32]
+      - [0x729DD0, palette, egg_missile3]
+      - [0x729DF0, ci4, egg_missile4, 32, 32]
+      - [0x729FF0, palette, egg_missile4]
+      - [0x72A010]
+  - name: insecticide_herb
+    dir: battle/item
     type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72A750,       c, lib]
-    - [0x72AB70,   .data, lib]
-    - [0x72B130,     ci4, insecticide_herb, 32, 32]
-    - [0x72B330, palette, insecticide_herb]
-    - [0x72B350,   .data, insecticide_herb]
+    - [0x72A750, c, insecticide_herb]
+    - start: 0x72B130
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x72B130, ci4, insecticide_herb, 32, 32]
+      - [0x72B330, palette, insecticide_herb]
+      - [0x72B350]
   - name: fright_jar
     dir: battle/item
     type: code
@@ -3673,19 +3689,23 @@ segments:
     overlay: True
     subsegments:
     - [0x72B910, c, fright_jar]
-    - [0x72BC60, .data, fright_jar]
-  - dir: battle/item/mystery
+    - [0x72BC60]
+  - name: mystery
+    dir: battle/item
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72C5B0,       c, lib]
-    - [0x72CF00,   .data, lib]
-    - [0x72D4C0,     ci4, mystery, 32, 32]
-    - [0x72D6C0, palette, mystery]
-    - [0x72D6E0,   .data, mystery]
-    - [0x72DB50, .rodata, lib]
+    - [0x72C5B0, c, mystery]
+    - start: 0x72CF00
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x72CF00, .data, mystery]
+      - [0x72D4C0, ci4, mystery, 32, 32]
+      - [0x72D6C0, palette, mystery]
+      - [0x72D6E0]
   - name: repel_gel
     dir: battle/item
     type: code
@@ -3694,7 +3714,7 @@ segments:
     overlay: True
     subsegments:
     - [0x72DB70, c, repel_gel]
-    - [0x72DE00, .data, repel_gel]
+    - [0x72DE00]
   - name: life_shroom
     dir: battle/item
     type: code
@@ -3703,18 +3723,23 @@ segments:
     overlay: True
     subsegments:
     - [0x72E530, c, life_shroom]
-    - [0x72EA20, .data, life_shroom]
-  - dir: battle/item/coconut
+    - [0x72EA20]
+  - name: coconut
+    dir: battle/item
     type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72F720, c,       lib]
-    - [0x72F960, .data,   lib]
-    - [0x72FF20, ci4,     coconut, 32, 32]
-    - [0x730120, palette, coconut]
-    - [0x730140, .data,   coconut]
+    - [0x72F720, c, coconut]
+    - start: 0x72F960
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x72F960, .data, coconut]
+      - [0x72FF20, ci4, coconut, 32, 32]
+      - [0x730120, palette, coconut]
+      - [0x730140]
   - name: electro_pop
     dir: battle/item
     type: code
@@ -3723,23 +3748,27 @@ segments:
     overlay: True
     subsegments:
     - [0x7305A0, c, electro_pop]
-    - [0x730AE0, .data, electro_pop]
-  - dir: battle/item/strange_cake
+    - [0x730AE0]
+  - name: strange_cake
+    dir: battle/item
     type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x731300,       c, lib]
-    - [0x731EA0,   .data, lib]
-    - [0x732470,     ci4, strange_cake1, 32, 32]
-    - [0x732670, palette, strange_cake1]
-    - [0x732690,     ci4, strange_cake2, 32, 32]
-    - [0x732890, palette, strange_cake2]
-    - [0x7328B0,     ci4, strange_cake3, 32, 32]
-    - [0x732AB0, palette, strange_cake3]
-    - [0x732AD0,   .data, strange_cake]
-    - [0x7330B0, .rodata, lib]
+    - [0x731300, c, strange_cake]
+    - start: 0x731EA0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x731EA0, .data, strange_cake]
+      - [0x732470, ci4, strange_cake1, 32, 32]
+      - [0x732670, palette, strange_cake1]
+      - [0x732690, ci4, strange_cake2, 32, 32]
+      - [0x732890, palette, strange_cake2]
+      - [0x7328B0, ci4, strange_cake3, 32, 32]
+      - [0x732AB0, palette, strange_cake3]
+      - [0x732AD0]
   - name: food
     dir: battle/item
     type: code
@@ -3748,7 +3777,7 @@ segments:
     overlay: True
     subsegments:
     - [0x7330D0, c, food]
-    - [0x733700, .data, food]
+    - [0x733700]
   - dir: battle/move/hammer
     type: code
     start: 0x7345A0
@@ -4970,7 +4999,7 @@ segments:
     subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, "929270"]
+    - [0x9292D0, .data, 929270]
     - [0x929A00, .data, 9292B0]
     - [0x929A80]
   - name: sbk_01
@@ -8211,8 +8240,8 @@ segments:
     - [0xC20C70]
     # rodata seemingly in 3 different parts:
     # dgb_00-18, 1x 32767.0, 2 jump tables
-    # "dgb_00", 2x 32767.0, jump table
-    # "dgb_08" only
+    # dgb_00, 2x 32767.0, jump table
+    # dgb_08 only
   - type: code
     start: 0xC20F40
     vram: 0x80200000
@@ -8882,7 +8911,6 @@ segments:
     - [0xD07440, data]
     - [0xD09570, data]
     - [0xD09AD0, data]
-    #- [0xD0C294, data]
     - [0xD10DA0, data]
     - [0xD110A0]
   - name: sam_03
