@@ -2843,20 +2843,16 @@ segments:
     start: 0x4309A0
     vram: 0x80218000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x4309A0, c, battles] # DUMMY ROM
-    #- [0x4309A0, c, goomba] # DUMMY ROM
-    - [0x4309A0, c]
-    - [0x431180, c]
-    - [0x4313F0, c]
-    - [0x431660, c]
-    - [0x4318D0, c]
-    - [0x431B80, .data, battles]
-    #- [0x431FB0, .data, goomba]
-    - [0x433970, data]
-    - [0x4398A0, .rodata, battles]
-    #- [0x439984, rodata] # TODO change
+    - [auto, c, battles]
+    - [auto, c, actor/goomba]
+    - [auto, c, actor/spiked_goomba]
+    - [auto, c, actor/paragoomba]
+    - [auto, c, stage/kmr_02]
+    - [auto, c, stage/kmr_03]
+    - [auto, c, stage/kmr_04]
+    - [auto, c, stage/kmr_05]
+    - [auto, c, stage/kmr_06]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90

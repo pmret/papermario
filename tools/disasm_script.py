@@ -403,6 +403,22 @@ replace_funcs = {
     "SwitchMessage"             :{0:"CustomMsg"},
 
     "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
+    "BindTakeTurn"              :{0:"ActorIDs"},
+    "BindIdle"                  :{0:"ActorIDs"},
+    "BindHandleEvent"           :{0:"ActorIDs"},
+    "SetActorIdleSpeed"         :{0:"ActorIDs"},
+    "SetIdleAnimations"         :{0:"ActorIDs"},
+    "SetIdleGoal"               :{0:"ActorIDs"},
+    "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "GetStatusFlags"            :{0:"ActorIDs"},
+    "ResetAllActorSounds"       :{0:"ActorIDs"},
+    "FlyToGoal"                 :{0:"ActorIDs"},
+    "SetActorPos"               :{0:"ActorIDs"},
+    "HPBarToCurrent"            :{0:"ActorIDs"},
+    "SetActorFlagBits"          :{0:"ActorIDs"}, # TODO: 1:"ActorFlags"
+    "SetPartFlags"              :{0:"ActorIDs"},
+    "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartDispOffset"         :{0:"ActorIDs"},
 }
 
 def replace_constants(self, func, args):
