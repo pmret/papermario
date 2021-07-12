@@ -138,6 +138,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         if comments:
             out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
 
+        if struct["type"] == "ASCII" or struct["type"] == "SJIS" or struct["type"] == "ConstDouble":
+            # rodata string hopefully inlined elsewhere
+            out += f"// rodata: {struct['name']}\n"
+
         # format struct
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
@@ -660,10 +664,6 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             out += f"}};\n"
             afterHeader = True
-        elif struct["type"] == "ASCII" or struct["type"] == "SJIS":
-            # rodata string hopefully inlined elsewhere
-            bytes.read(struct["length"])
-            out += f"// rodata: {struct['name']}\n"
         elif struct["type"].startswith("Function"):
             bytes.read(struct["length"])
             out += f"s32 {name}();\n"
@@ -1038,7 +1038,12 @@ if __name__ == "__main__":
         is_battle = False
     else:
         battle_area = "_".join(base.lower().split(" ")[1:])
-        segment_name = f"battle/{battle_area}"
+
+        if "partner" in base:
+            segment_name = f"battle/partners/{battle_area}"
+        else:
+            segment_name = f"battle_partner_{battle_area}"
+
         is_battle = True
 
     symbol_map = {}
@@ -1050,13 +1055,13 @@ if __name__ == "__main__":
 
         rom_offset = -1
         for segment in splat_config["segments"]:
-            if isinstance(segment, dict) and segment.get("dir") == segment_name:
+            if isinstance(segment, dict) and (segment.get("dir") == segment_name or segment.get("name") == segment_name):
                 rom_offset = segment["start"]
                 vram = segment["vram"]
                 break
 
     if rom_offset == -1:
-        print(f"can't find segment with dir '{segment_name}' in splat.yaml")
+        print(f"can't find segment with dir or name '{segment_name}' in splat.yaml")
         exit(1)
 
     if ext == ".midx":
@@ -1117,6 +1122,10 @@ if __name__ == "__main__":
 
                 string_literal = '"' + string_data + '"'
                 symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+            elif struct["type"] == "ConstDouble":
+                double = unpack_from(">d", romfile.read(struct["length"]), 0)[0]
+                double_literal = f"{double}"
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], double_literal]]
             elif struct["type"] == "NpcGroup":
                 for z in range(struct["length"]//0x1F0):
                     npc = romfile.read(0x1F0)

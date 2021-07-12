@@ -37,7 +37,7 @@ ApiStatus func_80238000_6F5E80(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "battle/partner/6F5E80", func_80238114_6F5F94);
+INCLUDE_ASM(s32, "battle/partner/kooper", func_80238114_6F5F94);
 
 ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
