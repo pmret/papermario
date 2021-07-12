@@ -49,12 +49,13 @@ ActorPartDesc N(partsTable_802196C8)[] = {
         .defenseTable = N(defenseTable_80219610),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
+        .unk_1C = 246,
     },
 };
 
 ActorDesc NAMESPACE = {
     .flags = 0,
-    .type = 7,
+    .type = ACTOR_TYPE_goomba,
     .level = 5,
     .maxHP = 2,
     .partCount = ARRAY_COUNT(N(partsTable_802196C8)),

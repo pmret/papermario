@@ -712,14 +712,16 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f"{actor}, "
 
 
-                if priority in symbol_map:
-                    out += f"&{symbol_map[priority][0][1]}"
+                if position in symbol_map:
+                    out += f".position = &{symbol_map[position][0][1]}"
 
-                    s = f"Vec3f {symbol_map[priority][0][1]};"
+                    s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{priority}"
+                    out += f".position = {position}"
+
+                out += f", .priority = {priority}"
 
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass

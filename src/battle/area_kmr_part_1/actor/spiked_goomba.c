@@ -49,12 +49,13 @@ ActorPartDesc N(partsTable_8021B088)[] = {
         .defenseTable = N(defenseTable_8021AFD0),
         .eventFlags = EVENT_FLAG_SPIKY_TOP,
         .elementImmunityFlags = 0,
+        .unk_1C = 244,
     },
 };
 
 ActorDesc NAMESPACE = {
     .flags = 0,
-    .type = 9,
+    .type = ACTOR_TYPE_spiked_goomba,
     .level = 6,
     .maxHP = 2,
     .partCount = ARRAY_COUNT(N(partsTable_8021B088)),

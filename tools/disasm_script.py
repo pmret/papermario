@@ -321,7 +321,7 @@ replace_funcs = {
     "DispatchDamagePlayerEvent" :{1:"Events"},
     "DispatchEvent"             :{0:"ActorIDs"},
 
-    "EnableIdleScript"          :{0:"ActorIDs", 1:"Bool"},
+    "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
     "EnemyDamageTarget"         :{0:"ActorIDs", 2:"DamageTypes"},

@@ -212,7 +212,8 @@ typedef struct ActorPartDesc {
     /* 0x10 */ s32* defenseTable;
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ char unk_1C[8];
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ char unk_1E[6];
 } ActorPartDesc; // size = 0x24
 
 typedef struct ActorDesc {
@@ -291,7 +292,7 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), formation, stage }
+#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 
