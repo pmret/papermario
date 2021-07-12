@@ -2844,7 +2844,7 @@ segments:
     vram: 0x80218000
     overlay: True
     subsegments:
-    - [auto, c, battles]
+    - [auto, c, area]
     - [auto, c, actor/goomba]
     - [auto, c, actor/spiked_goomba]
     - [auto, c, actor/paragoomba]
