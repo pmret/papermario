@@ -2362,8 +2362,8 @@ glabel L80129F74_C0674
 /* C068C 80129F8C 97AD008E */  lhu       $t5, 0x8e($sp)
 /* C0690 80129F90 00031080 */  sll       $v0, $v1, 2
 /* C0694 80129F94 00431021 */  addu      $v0, $v0, $v1
-/* C0698 80129F98 3C038015 */  lui       $v1, %hi(D_801512F4)
-/* C069C 80129F9C 8C6312F4 */  lw        $v1, %lo(D_801512F4)($v1)
+/* C0698 80129F98 3C038015 */  lui       $v1, %hi(gMsgVarImages)
+/* C069C 80129F9C 8C6312F4 */  lw        $v1, %lo(gMsgVarImages)($v1)
 /* C06A0 80129FA0 00021080 */  sll       $v0, $v0, 2
 /* C06A4 80129FA4 00626021 */  addu      $t4, $v1, $v0
 /* C06A8 80129FA8 000D1400 */  sll       $v0, $t5, 0x10
@@ -3529,8 +3529,8 @@ glabel L8012AB5C_C125C
 /* C1780 8012B080 44800000 */  mtc1      $zero, $f0
 /* C1784 8012B084 00000000 */  nop
 /* C1788 8012B088 46220001 */  sub.d     $f0, $f0, $f2
-/* C178C 8012B08C 3C028015 */  lui       $v0, %hi(D_801512E4)
-/* C1790 8012B090 944212E4 */  lhu       $v0, %lo(D_801512E4)($v0)
+/* C178C 8012B08C 3C028015 */  lui       $v0, %hi(gMsgGlobalWaveCounter)
+/* C1790 8012B090 944212E4 */  lhu       $v0, %lo(gMsgGlobalWaveCounter)($v0)
 /* C1794 8012B094 8C630030 */  lw        $v1, 0x30($v1)
 /* C1798 8012B098 4620030D */  trunc.w.d $f12, $f0
 /* C179C 8012B09C 44046000 */  mfc1      $a0, $f12
@@ -4538,8 +4538,8 @@ glabel L8012BF70_C2670
 /* C2690 8012BF90 93C40530 */  lbu       $a0, 0x530($fp)
 /* C2694 8012BF94 00021880 */  sll       $v1, $v0, 2
 /* C2698 8012BF98 00621821 */  addu      $v1, $v1, $v0
-/* C269C 8012BF9C 3C028015 */  lui       $v0, %hi(D_801512F4)
-/* C26A0 8012BFA0 8C4212F4 */  lw        $v0, %lo(D_801512F4)($v0)
+/* C269C 8012BF9C 3C028015 */  lui       $v0, %hi(gMsgVarImages)
+/* C26A0 8012BFA0 8C4212F4 */  lw        $v0, %lo(gMsgVarImages)($v0)
 /* C26A4 8012BFA4 00031880 */  sll       $v1, $v1, 2
 /* C26A8 8012BFA8 04800078 */  bltz      $a0, .L8012C18C
 /* C26AC 8012BFAC 00438821 */   addu     $s1, $v0, $v1

@@ -239,6 +239,8 @@ extern u8 D_802D9D71; // player alpha2 copy?
 
 extern DisplayContext D_80164000[];
 
+extern MessagePrintState gMessagePrinters[3];
+
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;
 extern f32 gCurtainFade;

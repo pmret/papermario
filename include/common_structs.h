@@ -1066,7 +1066,7 @@ typedef struct MessagePrintState {
     /* 0x00E */ s16 currentPrintDelay;
     /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
     /* 0x450 */ s16 printBufferSize;
-    /* 0x452 */ s16 effectFrameCounter;
+    /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
     /* 0x455 */ s8 fontVariant;
     /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
@@ -1095,7 +1095,7 @@ typedef struct MessagePrintState {
     /* 0x488 */ s16 lineEndPos[4];
     /* 0x490 */ char unk_490[0x38];
     /* 0x4C8 */ s16 unk_4C8;
-    /* 0x4CA */ char unk_4CA[0x2];
+    /* 0x4CA */ s16 unk_4CA;
     /* 0x4CC */ s16 unk_4CC;
     /* 0x4CE */ s8 maxOption;
     /* 0x4CF */ char unk_4CF[0x1];
@@ -1109,7 +1109,7 @@ typedef struct MessagePrintState {
     /* 0x4ED */ s8 unkCounter;
     /* 0x4EE */ s8 selectedOption;
     /* 0x4EF */ char unk_4EF[0x9];
-    /* 0x4F8 */ s8 windowState;
+    /* 0x4F8 */ u8 windowState;
     /* 0x4F9 */ char unk_4F9[0x3];
     /* 0x4FC */ s32 stateFlags;
     /* 0x500 */ s16 delayFlags; // ?

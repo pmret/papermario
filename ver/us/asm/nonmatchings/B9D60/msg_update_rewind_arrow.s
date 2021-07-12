@@ -48,8 +48,8 @@ glabel msg_update_rewind_arrow
 /* BCF14 80126814 AC620000 */  sw        $v0, ($v1)
 /* BCF18 80126818 3C028015 */  lui       $v0, %hi(D_8014C2D8)
 /* BCF1C 8012681C 2442C2D8 */  addiu     $v0, $v0, %lo(D_8014C2D8)
-/* BCF20 80126820 3C058015 */  lui       $a1, %hi(D_80154C30)
-/* BCF24 80126824 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
+/* BCF20 80126820 3C058015 */  lui       $a1, %hi(gMessagePrinters)
+/* BCF24 80126824 24A54C30 */  addiu     $a1, $a1, %lo(gMessagePrinters)
 /* BCF28 80126828 AC620004 */  sw        $v0, 4($v1)
 /* BCF2C 8012682C 00041080 */  sll       $v0, $a0, 2
 /* BCF30 80126830 00441021 */  addu      $v0, $v0, $a0

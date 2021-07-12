@@ -8,8 +8,8 @@ glabel render_messages
 /* BA910 80124210 AFB00020 */  sw        $s0, 0x20($sp)
 /* BA914 80124214 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
 /* BA918 80124218 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
-/* BA91C 8012421C 3C058015 */  lui       $a1, %hi(D_80154C30)
-/* BA920 80124220 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
+/* BA91C 8012421C 3C058015 */  lui       $a1, %hi(gMessagePrinters)
+/* BA920 80124220 24A54C30 */  addiu     $a1, $a1, %lo(gMessagePrinters)
 /* BA924 80124224 44803000 */  mtc1      $zero, $f6
 /* BA928 80124228 3C028007 */  lui       $v0, %hi(gCurrentDisplayContextIndex)
 /* BA92C 8012422C 8C4241F4 */  lw        $v0, %lo(gCurrentDisplayContextIndex)($v0)
@@ -92,8 +92,8 @@ glabel render_messages
 .L80124358:
 /* BAA58 80124358 0000882D */  daddu     $s1, $zero, $zero
 /* BAA5C 8012435C 24120005 */  addiu     $s2, $zero, 5
-/* BAA60 80124360 3C108015 */  lui       $s0, %hi(D_80154C30)
-/* BAA64 80124364 26104C30 */  addiu     $s0, $s0, %lo(D_80154C30)
+/* BAA60 80124360 3C108015 */  lui       $s0, %hi(gMessagePrinters)
+/* BAA64 80124364 26104C30 */  addiu     $s0, $s0, %lo(gMessagePrinters)
 .L80124368:
 /* BAA68 80124368 8E0204FC */  lw        $v0, 0x4fc($s0)
 /* BAA6C 8012436C 30420002 */  andi      $v0, $v0, 2
