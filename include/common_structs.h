@@ -1057,39 +1057,101 @@ typedef struct SpriteComponent {
     /* 0x4C */ char unk_4C[4];
 } SpriteComponent; // size = 0x50
 
-typedef struct PrintContext {
-    /* 0x000 */ s8* string;
-    /* 0x004 */ s16 bufPos;
+typedef struct MessagePrintState {
+    /* 0x000 */ s8* srcBuffer;
+    /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
     /* 0x008 */ s32 stringID;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ u8 buffer[1024];
-    /* 0x410 */ char unk_410[68];
+    /* 0x00C */ s16 srcBufferPos;
+    /* 0x00E */ s16 currentPrintDelay;
+    /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
+    /* 0x450 */ s16 printBufferSize;
+    /* 0x452 */ s16 effectFrameCounter;
     /* 0x454 */ u8 font;
-    /* 0x455 */ char unk_455;
-    /* 0x456 */ s16 startPosX;
-    /* 0x458 */ s16 startPosY;
-    /* 0x45A */ char unk_45A[45];
+    /* 0x455 */ s8 fontVariant;
+    /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
+    /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
+    /* 0x45E */ s8 printDelayTime; // delay to print each chunk
+    /* 0x45F */ s8 charsPerChunk; // how many chars to print at once
+    /* 0x460 */ s16 curLinePos; // position along current line
+    /* 0x462 */ s16 unk_462;
+    /* 0x464 */ s8 unk_464;
+    /* 0x465 */ char unk_465;
+    /* 0x466 */ s16 nextLinePos; // ?
+    /* 0x468 */ s8 lineCount;
+    /* 0x469 */ char unk_469[0x3];
+    /* 0x46C */ s16 unk_46C;
+    /* 0x46E */ s16 unk_46E;
+    /* 0x470 */ s8 currentAnimFrame;
+    /* 0x471 */ char unk_471[0x3];
+    /* 0x474 */ s16 animTimers[4];
+    /* 0x47C */ s8 rewindArrowAnimState;
+    /* 0x47D */ char unk_47D[0x1];
+    /* 0x47E */ s16 rewindArrowBlinkCounter;
+    /* 0x480 */ s16 unk_480;
+    /* 0x482 */ Vec2s rewindArrowPos;
+    /* 0x486 */ s8 currentLine;
     /* 0x487 */ u8 unkArraySize;
-    /* 0x488 */ s16 unkArrayunkLength[4];
-    /* 0x490 */ char unk_490[0x58];
+    /* 0x488 */ s16 lineEndPos[4];
+    /* 0x490 */ char unk_490[0x38];
+    /* 0x4C8 */ s16 unk_4C8;
+    /* 0x4CA */ char unk_4CA[0x2];
+    /* 0x4CC */ s16 unk_4CC;
+    /* 0x4CE */ s8 maxOption;
+    /* 0x4CF */ char unk_4CF[0x1];
+    /* 0x4D0 */ s16 cursorPosX[6];
+    /* 0x4DC */ s16 cursorPosY[6];
     /* 0x4E8 */ u8 currentOption;
-    /* 0x4E9 */ char unk_4E9[19];
+    /* 0x4E9 */ s8 madeChoice;
+    /* 0x4EA */ s8 cancelOption;
+    /* 0x4EB */ char unk_4EB[0x1];
+    /* 0x4EC */ s8 targetOption;
+    /* 0x4ED */ s8 unkCounter;
+    /* 0x4EE */ s8 selectedOption;
+    /* 0x4EF */ char unk_4EF[0x9];
+    /* 0x4F8 */ s8 windowState;
+    /* 0x4F9 */ char unk_4F9[0x3];
     /* 0x4FC */ s32 stateFlags;
-    /* 0x500 */ char unk_500[9];
-    /* 0x509 */ u8 lerpElpasedTime;
-    /* 0x50A */ s16 startX;
-    /* 0x50C */ s16 startY;
-    /* 0x50E */ char unk_50E[6];
-    /* 0x514 */ s16 sizeY;
-    /* 0x516 */ s16 sizeX;
-    /* 0x518 */ char unk_518[19];
+    /* 0x500 */ s16 delayFlags; // ?
+    /* 0x502 */ char unk_502[0x2];
+    /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
+    /* 0x508 */ s8 style;
+    /* 0x509 */ s8 fadeInCounter;
+    /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
+    /* 0x50E */ Vec2s openStartPos;
+    /* 0x512 */ s8 fadeOutCounter;
+    /* 0x513 */ char unk_513[0x1];
+    /* 0x514 */ Vec2s windowSize;
+    /* 0x518 */ s8 speechSoundType;
+    /* 0x519 */ s8 volume;
+    /* 0x51A */ s8 unk_51A;
+    /* 0x51B */ char unk_51B[0x1];
+    /* 0x51C */ s16 speechVolumePitch;
+    /* 0x51E */ char unk_51E[0x2];
+    /* 0x520 */ s32 speedSoundIDA;
+    /* 0x524 */ s32 speedSoundIDB;
+    /* 0x528 */ s16 varBufferReadPos;
+    /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 currentImageIndex;
-    /* 0x52C */ char unk_52C[10];
-    /* 0x536 */ s16 height;
-    /* 0x538 */ s16 width;
-    /* 0x53A */ char unk_53A[30];
-} PrintContext; // size = 0x558
+    /* 0x52C */ Vec2s varImgeScreenPos; // in addition, posX=0 is taken as 'dont draw'
+    /* 0x530 */ s8 varImgHasBorder;
+    /* 0x531 */ s8 varImgFinalAlpha;
+    /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
+    /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
+    /* 0x534 */ s16 varImageFadeTimer; // frames faded in
+    /* 0x536 */ s16 stringHeight;
+    /* 0x538 */ s16 stringWidth;
+    /* 0x53A */ s8 maxLineChars;
+    /* 0x53B */ s8 numLines;
+    /* 0x53C */ s8 maxLinesPerPage;
+    /* 0x53D */ char unk_53D[0x3];
+    /* 0x540 */ f32 sizeScale;
+    /* 0x544 */ s32* letterBackgroundImg;
+    /* 0x548 */ s32* letterBackgroundPal;
+    /* 0x54C */ s32* letterContentImg;
+    /* 0x550 */ s32* letterContentPal;
+    /* 0x554 */ char unk_554[0x4];
+} MessagePrintState; // size = 0x558
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;

@@ -30,7 +30,7 @@ INCLUDE_ASM(s32, "B9D60", dma_load_string);
 
 INCLUDE_ASM(s32, "B9D60", load_message_to_buffer);
 
-PrintContext* msg_get_printer_for_string(s32 stringID, s32* a1) {
+MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1) {
     return _msg_get_printer_for_string(stringID, a1, 0);
 }
 
@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "B9D60", msg_printer_load_string);
 
 INCLUDE_ASM(s32, "B9D60", msg_printer_set_origin_pos);
 
-s32 cancel_message(PrintContext* printContext) {
+s32 cancel_message(MessagePrintState* printContext) {
     if ((printContext->stateFlags & 2) == 0) {
         return 0;
     }
@@ -57,7 +57,7 @@ INCLUDE_ASM(s32, "B9D60", set_message_string);
 
 INCLUDE_ASM(s32, "B9D60", set_message_value);
 
-void close_message(PrintContext* printContext) {
+void close_message(MessagePrintState* printContext) {
     printContext->stateFlags &= ~0x40;
 }
 
