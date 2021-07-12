@@ -3,17 +3,6 @@
 
 void appendGfx_intro_logos();
 
-Gfx D_80077908[] = {
-    gsDPPipeSync(),
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetTexturePersp(G_TP_NONE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
-    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
-};
-
 // bss?
 extern s8* D_800A0910;
 
@@ -58,9 +47,9 @@ void state_init_logos(void) {
     gCameras[3].flags |= 0x2;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 0x28;
-    gCameras[0].backgroundColor[0] = 0;
-    gCameras[0].backgroundColor[1] = 0;
-    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].bgColor[0] = 0;
+    gCameras[0].bgColor[1] = 0;
+    gCameras[0].bgColor[2] = 0;
     gCameras[0].unk_54 = 25.0f;
     gCameras[0].unk_58 = 25.0f;
     gCameras[0].unk_1C = 0;

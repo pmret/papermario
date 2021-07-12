@@ -12,10 +12,10 @@ NUPiOverlaySegment D_8007798C = {
     .romStart = _163400_ROM_START,
     .romEnd = _163400_ROM_END,
     .ramStart = _163400_VRAM,
-    .textStart = _163400_VRAM,
-    .textEnd = _16A3E0_data__s,
-    .dataStart = _16A3E0_data__s,
-    .dataEnd = _163400_BSS_START,
+    .textStart = _163400_TEXT_START,
+    .textEnd = _163400_TEXT_END,
+    .dataStart = _163400_DATA_START,
+    .dataEnd = _163400_DATA_END,
     .bssStart = _163400_BSS_START,
     .bssEnd = _163400_BSS_END,
 };
@@ -55,9 +55,9 @@ void state_init_file_select(void) {
     gCameras[0].lookAt_eye.y = 1000.0f;
     gCameras[0].lookAt_eye.z = 1500.0f;
     gCameras[0].unk_5C = 150.0f;
-    gCameras[0].backgroundColor[0] = 0;
-    gCameras[0].backgroundColor[1] = 0;
-    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].bgColor[0] = 0;
+    gCameras[0].bgColor[1] = 0;
+    gCameras[0].bgColor[2] = 0;
     gCameras[0].unk_54 = 25.0f;
     gCameras[0].unk_58 = 25.0f;
     gCameras[0].unk_1C = 0;
