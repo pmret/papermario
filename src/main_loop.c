@@ -518,20 +518,20 @@ void gfx_draw_background(void) {
                 backgroundSumH = 1;
             }
 
-            if (backgroundMinW > 0x13F) {
-                backgroundMinW = 0x13F;
+            if (backgroundMinW > 319) {
+                backgroundMinW = 319;
             }
 
-            if (backgroundMinH > 0xEF) {
-                backgroundMinH = 0xEF;
+            if (backgroundMinH > 239) {
+                backgroundMinH = 239;
             }
 
-            if (backgroundSumW > 0x140) {
-                backgroundSumW = 0x140;
+            if (backgroundSumW > 320) {
+                backgroundSumW = 320;
             }
 
-            if (backgroundSumH > 0xF0) {
-                backgroundSumH = 0xF0;
+            if (backgroundSumH > 240) {
+                backgroundSumH = 240;
             }
 
             if (!(gGameStatusPtr->enableBackground & 1)) {
