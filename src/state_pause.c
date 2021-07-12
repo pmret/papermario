@@ -5,19 +5,16 @@
 
 s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 
-// TODO the gPauseMenuIconScripts should be DATA_START
-// TODO the gPauseMenuHeldButtons should be BSS_START
-// TODO 80278640 is BSS_END
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,
     .romEnd = pause_ROM_END,
     .ramStart = pause_VRAM,
-    .textStart = pause_VRAM,
-    .textEnd = gPauseMenuIconScripts,
-    .dataStart = gPauseMenuIconScripts,
-    .dataEnd = &gPauseMenuHeldButtons,
-    .bssStart = &gPauseMenuHeldButtons,
-    .bssEnd = 0x80278640
+    .textStart = pause_TEXT_START,
+    .textEnd = pause_TEXT_END,
+    .dataStart = pause_DATA_START,
+    .dataEnd = pause_DATA_END,
+    .bssStart = pause_BSS_START,
+    .bssEnd = pause_BSS_END,
 };
 
 void state_init_pause(void) {
