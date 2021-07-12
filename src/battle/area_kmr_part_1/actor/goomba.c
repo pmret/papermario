@@ -107,9 +107,9 @@ Script N(idle_802197F8);
 Script N(handleEvent_80219AD4);
 
 Script N(init_802197AC) = SCRIPT({
-    BindTakeTurn(-127, N(takeTurn_8021A300));
-    BindIdle(-127, N(idle_802197F8));
-    BindHandleEvent(-127, N(handleEvent_80219AD4));
+    BindTakeTurn(ACTOR_SELF, N(takeTurn_8021A300));
+    BindIdle(ACTOR_SELF, N(idle_802197F8));
+    BindHandleEvent(ACTOR_SELF, N(handleEvent_80219AD4));
 });
 
 Script N(idle_802197F8) = SCRIPT({
@@ -118,7 +118,7 @@ Script N(idle_802197F8) = SCRIPT({
     SI_VAR(0) += 80;
     loop SI_VAR(0) {
     0:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 0;
@@ -127,14 +127,14 @@ Script N(idle_802197F8) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_80219760));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_80219714));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_80219760));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_80219714));
     loop 20 {
     1:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 1;
@@ -143,14 +143,14 @@ Script N(idle_802197F8) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_80219760));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_80219714));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_80219760));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_80219714));
     loop 80 {
     2:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 2;

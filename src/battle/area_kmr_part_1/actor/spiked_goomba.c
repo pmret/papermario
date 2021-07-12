@@ -107,9 +107,9 @@ Script N(idle_8021B1B8);
 Script N(handleEvent_8021B494);
 
 Script N(init_8021B16C) = SCRIPT({
-    BindTakeTurn(-127, N(takeTurn_8021BDDC));
-    BindIdle(-127, N(idle_8021B1B8));
-    BindHandleEvent(-127, N(handleEvent_8021B494));
+    BindTakeTurn(ACTOR_SELF, N(takeTurn_8021BDDC));
+    BindIdle(ACTOR_SELF, N(idle_8021B1B8));
+    BindHandleEvent(ACTOR_SELF, N(handleEvent_8021B494));
 });
 
 Script N(idle_8021B1B8) = SCRIPT({
@@ -118,7 +118,7 @@ Script N(idle_8021B1B8) = SCRIPT({
     SI_VAR(0) += 80;
     loop SI_VAR(0) {
     0:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 0;
@@ -127,14 +127,14 @@ Script N(idle_8021B1B8) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021B120));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021B0D4));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021B120));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021B0D4));
     loop 20 {
     1:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 1;
@@ -143,14 +143,14 @@ Script N(idle_8021B1B8) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021B120));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021B0D4));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021B120));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021B0D4));
     loop 80 {
     2:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 2;
@@ -277,13 +277,13 @@ Script N(handleEvent_8021B494) = SCRIPT({
             return;
         }
         == EVENT_SPIKE_TAUNT {
-            GetStatusFlags(-127, SI_VAR(0));
+            GetStatusFlags(ACTOR_SELF, SI_VAR(0));
             if (SI_VAR(0) !& 3526656) {
                 SetAnimation(ACTOR_SELF, 1, NPC_ANIM(spiked_goomba, default, laugh));
             }
             sleep 10;
             GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            GetStatusFlags(-127, SI_VAR(3));
+            GetStatusFlags(ACTOR_SELF, SI_VAR(3));
             if (SI_VAR(3) & 524288) {
                 SI_VAR(1) += 10;
             } else {

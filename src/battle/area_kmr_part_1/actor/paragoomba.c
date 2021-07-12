@@ -393,7 +393,7 @@ Script N(takeTurn_8021D74C) = SCRIPT({
             BattleCamTargetActor(ACTOR_SELF);
             func_8024ECF8(-1, 1, 0);
             PlaySoundAtActor(ACTOR_SELF, 0x20E0);
-            SetActorSounds(-127, 2, 0, 0);
+            SetActorSounds(ACTOR_SELF, 2, 0, 0);
             SetActorSpeed(ACTOR_SELF, 5.0);
             SetActorJumpGravity(ACTOR_SELF, 1.8);
             SetAnimation(ACTOR_SELF, 2, NPC_ANIM(paragoomba, default, attack));
@@ -401,7 +401,7 @@ Script N(takeTurn_8021D74C) = SCRIPT({
             SetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             JumpToGoal(ACTOR_SELF, 10, FALSE, FALSE, FALSE);
             PlaySoundAtActor(ACTOR_SELF, SOUND_UNUSED_2C1);
-            SetActorSounds(-127, 1, 0, 0);
+            SetActorSounds(ACTOR_SELF, 1, 0, 0);
             SetGoalToTarget(ACTOR_SELF);
             SI_VAR(0) -= 80;
             SI_VAR(1) = 20;
@@ -443,7 +443,7 @@ Script N(takeTurn_8021D74C) = SCRIPT({
             BattleCamTargetActor(ACTOR_SELF);
             func_8024ECF8(-1, 1, 0);
             PlaySoundAtActor(ACTOR_SELF, 0x20E0);
-            SetActorSounds(-127, 2, 0, 0);
+            SetActorSounds(ACTOR_SELF, 2, 0, 0);
             SetActorSpeed(ACTOR_SELF, 5.0);
             SetActorJumpGravity(ACTOR_SELF, 1.8);
             SetAnimation(ACTOR_SELF, 2, NPC_ANIM(paragoomba, default, attack));
@@ -451,7 +451,7 @@ Script N(takeTurn_8021D74C) = SCRIPT({
             SetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             JumpToGoal(ACTOR_SELF, 10, FALSE, FALSE, FALSE);
             PlaySoundAtActor(ACTOR_SELF, SOUND_UNUSED_2C1);
-            SetActorSounds(-127, 1, 0, 0);
+            SetActorSounds(ACTOR_SELF, 1, 0, 0);
             SetGoalToTarget(ACTOR_SELF);
             SetActorSpeed(ACTOR_SELF, 8.0);
             SetAnimation(ACTOR_SELF, 2, NPC_ANIM(paragoomba, default, attack));
@@ -485,22 +485,22 @@ Script N(8021E584);
 
 Script N(8021DF64) = SCRIPT({
     func_8027D32C(-127);
-    SetPartFlags(-127, 2, 131077);
-    SetPartFlags(-127, 3, 1179652);
-    SetPartFlags(-127, 4, 1179652);
-    SetPartFlags(-127, 1, 8388612);
+    SetPartFlags(ACTOR_SELF, 2, 131077);
+    SetPartFlags(ACTOR_SELF, 3, 1179652);
+    SetPartFlags(ACTOR_SELF, 4, 1179652);
+    SetPartFlags(ACTOR_SELF, 1, 8388612);
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPartPos(-127, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPartDispOffset(-127, 3, -9, 7, -2);
-    SetPartPos(-127, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPartDispOffset(-127, 4, 11, 7, -2);
+    SetPartPos(ACTOR_SELF, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetPartDispOffset(ACTOR_SELF, 3, -9, 7, -2);
+    SetPartPos(ACTOR_SELF, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetPartDispOffset(ACTOR_SELF, 4, 11, 7, -2);
     GetLastEvent(ACTOR_SELF, SI_VAR(0));
     if (SI_VAR(0) == 15) {
         SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, burn_dead));
     } else {
         SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, pain));
     }
-    SetActorSounds(-127, 2, 769, 0);
+    SetActorSounds(ACTOR_SELF, 2, 769, 0);
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) = 0;
     SetActorJumpGravity(ACTOR_SELF, 0.8);
@@ -510,7 +510,7 @@ Script N(8021DF64) = SCRIPT({
     spawn {
         ShakeCam(1, 0, 5, 0.3);
     }
-    ResetActorSounds(-127, 2);
+    ResetActorSounds(ACTOR_SELF, 2);
     GetLastEvent(ACTOR_SELF, SI_VAR(3));
     if (SI_VAR(3) == 15) {
         SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, pain));
@@ -524,26 +524,26 @@ Script N(8021DF64) = SCRIPT({
     SetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     JumpToGoal(ACTOR_SELF, 5, FALSE, TRUE, FALSE);
     loop 10 {
-        SetPartFlagBits(-127, 3, 1, 1);
-        SetPartFlagBits(-127, 4, 1, 1);
+        SetPartFlagBits(ACTOR_SELF, 3, 1, 1);
+        SetPartFlagBits(ACTOR_SELF, 4, 1, 1);
         sleep 1;
-        SetPartFlagBits(-127, 3, 1, 0);
-        SetPartFlagBits(-127, 4, 1, 0);
+        SetPartFlagBits(ACTOR_SELF, 3, 1, 0);
+        SetPartFlagBits(ACTOR_SELF, 4, 1, 0);
         sleep 1;
     }
-    SetPartFlagBits(-127, 3, 1, 1);
-    SetPartFlagBits(-127, 4, 1, 1);
-    GetIndexFromHome(-127, SI_VAR(0));
+    SetPartFlagBits(ACTOR_SELF, 3, 1, 1);
+    SetPartFlagBits(ACTOR_SELF, 4, 1, 1);
+    GetIndexFromHome(ACTOR_SELF, SI_VAR(0));
     SI_VAR(0) %= 4;
-    SetGoalToIndex(-127, SI_VAR(0));
+    SetGoalToIndex(ACTOR_SELF, SI_VAR(0));
     GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetHomePos(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetHomePos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM(goomba, normal, idle));
-    SetActorFlagBits(-127, 512, 0);
-    SetStatusTable(-127, N(statusTable_8021CB18));
+    SetActorFlagBits(ACTOR_SELF, 512, 0);
+    SetStatusTable(ACTOR_SELF, N(statusTable_8021CB18));
     SetActorType(ACTOR_SELF, ACTOR_TYPE_goomba);
     await N(8021E584);
-    SetActorFlagBits(-127, 4096, 1);
+    SetActorFlagBits(ACTOR_SELF, 4096, 1);
     HPBarToHome(ACTOR_SELF);
     ResetAllActorSounds(-127);
 });
@@ -582,9 +582,9 @@ Script N(idle_8021E5D0);
 Script N(handleEvent_8021E8AC);
 
 Script N(8021E584) = SCRIPT({
-    BindTakeTurn(-127, N(takeTurn_8021F0D8));
-    BindIdle(-127, N(idle_8021E5D0));
-    BindHandleEvent(-127, N(handleEvent_8021E8AC));
+    BindTakeTurn(ACTOR_SELF, N(takeTurn_8021F0D8));
+    BindIdle(ACTOR_SELF, N(idle_8021E5D0));
+    BindHandleEvent(ACTOR_SELF, N(handleEvent_8021E8AC));
 });
 
 Script N(idle_8021E5D0) = SCRIPT({
@@ -593,7 +593,7 @@ Script N(idle_8021E5D0) = SCRIPT({
     SI_VAR(0) += 80;
     loop SI_VAR(0) {
     0:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 0;
@@ -602,14 +602,14 @@ Script N(idle_8021E5D0) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021E538));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021E4EC));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E538));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E4EC));
     loop 20 {
     1:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 1;
@@ -618,14 +618,14 @@ Script N(idle_8021E5D0) = SCRIPT({
     }
     GetActorPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 5;
-    SetActorIdleSpeed(-127, 1.0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021E538));
-    SetIdleGoal(-127, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    IdleRunToGoal(-127, 0);
-    SetIdleAnimations(-127, 1, N(idleAnimations_8021E4EC));
+    SetActorIdleSpeed(ACTOR_SELF, 1.0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E538));
+    SetIdleGoal(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    IdleRunToGoal(ACTOR_SELF, 0);
+    SetIdleAnimations(ACTOR_SELF, 1, N(idleAnimations_8021E4EC));
     loop 80 {
     2:
-        GetStatusFlags(-127, SI_VAR(1));
+        GetStatusFlags(ACTOR_SELF, SI_VAR(1));
         if (SI_VAR(1) & 3526656) {
             sleep 1;
             goto 2;
