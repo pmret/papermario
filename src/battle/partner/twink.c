@@ -31,5 +31,5 @@ ApiStatus func_80238028_714D18(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(s32, "battle/partner/714CF0", func_80238028_714D18);
+INCLUDE_ASM(s32, "battle/partner/twink", func_80238028_714D18);
 #endif

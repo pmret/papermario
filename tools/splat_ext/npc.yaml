@@ -172,6 +172,35 @@ world_bombette:
     - celebrate
     - lit_charge
     - anim_11
+battle_goombario:
+  palettes:
+    - default
+    - green
+    - inactive
+    - yellow
+    - burn
+  animations:
+    - still
+    - idle
+    - walk
+    - run
+    - jump
+    - fall
+    - headbonk
+    - charge
+    - headbonk_unk
+    - charge_unk
+    - pain
+    - burn_pain
+    - burn_dead
+    - burn_unk
+    - block
+    - talk
+    - celebrate
+    - celebrate_still
+    - unk_12
+    - sleep
+    - daze
 goomba:
   frames:
     - still

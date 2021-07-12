@@ -138,6 +138,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         if comments:
             out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
 
+        if struct["type"] == "ASCII" or struct["type"] == "SJIS" or struct["type"] == "ConstDouble":
+            # rodata string hopefully inlined elsewhere
+            out += f"// rodata: {struct['name']}\n"
+
         # format struct
         if struct["type"].startswith("Script"):
             if struct["type"] == "Script_Main":
@@ -490,7 +494,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "TreeDropList":
             new_name = "N(" + name.split('_',1)[1][:-1].lower() + "_Drops)"
             symbol_map[struct["vaddr"]][0][1] = new_name
-            
+
             out += f"FoliageDropList {new_name} = {{\n"
 
             data = bytes.read(struct["length"])
@@ -552,7 +556,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             if isModelList:
                 if count > 0:
                     out += f"{INDENT}.models = {{ "
-                
+
                 pos = 4
                 for _ in range(count):
                     entry = unpack_from(">I", data, pos)[0]
@@ -567,7 +571,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
             else:
                 if count > 0:
                     out += f"{INDENT}.vectors = {{\n"
-                
+
                 pos = 4
                 for _ in range(count):
                     entry = list(unpack_from(">3I", data, pos))
@@ -575,7 +579,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     entry[0] = entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
                     entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
                     entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
-                    
+
                     pos += 3*4
 
                     out += f"{INDENT * 2}{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
@@ -609,7 +613,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
         elif struct["type"] == "ShakeTreeEvent":
             new_name = "N(" + name.split('_',1)[1].lower()
             symbol_map[struct["vaddr"]][0][1] = new_name
-            
+
             num = int(new_name.split("tree",1)[1][:-1])
             out += f"ShakeTreeConfig {new_name} = {{\n"
 
@@ -660,10 +664,6 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
 
             out += f"}};\n"
             afterHeader = True
-        elif struct["type"] == "ASCII" or struct["type"] == "SJIS":
-            # rodata string hopefully inlined elsewhere
-            bytes.read(struct["length"])
-            out += f"// rodata: {struct['name']}\n"
         elif struct["type"].startswith("Function"):
             bytes.read(struct["length"])
             out += f"s32 {name}();\n"
@@ -700,7 +700,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 actor, position, priority, var0, var1, var2, var3 = unpack(">IIIIIII", bytes.read(0x1C))
                 num_bytes_remaining -= 0x1C
 
-                out += "    "
+                out += "    { "
 
                 if actor in symbol_map:
                     out += f"&{symbol_map[actor][0][1]}, "
@@ -712,14 +712,16 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f"{actor}, "
 
 
-                if priority in symbol_map:
-                    out += f"&{symbol_map[priority][0][1]}"
+                if position in symbol_map:
+                    out += f".position = &{symbol_map[position][0][1]}"
 
-                    s = f"Vec3f {symbol_map[priority][0][1]};"
+                    s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{priority}"
+                    out += f".position = {position}"
+
+                out += f", .priority = {priority}"
 
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass
@@ -727,6 +729,24 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f", {var1}, {var2} {var3}, {var4}"
 
                 out += " },\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "FormationTable":
+            out += f"BattleList {struct['name']} = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                name, formation_length, ptr, stage_ptr, zero = unpack(">IIIII", bytes.read(4 * 5))
+                num_bytes_remaining -= 4 * 5
+
+                if name == 0:
+                    out += "    {},\n"
+                else:
+                    out += "    BATTLE("
+                    out += f"{symbol_map[name][0][1]}, "
+                    out += f"&{symbol_map[ptr][0][1]}, "
+                    out += f"&{symbol_map[stage_ptr][0][1]}"
+                    out += "),\n"
 
             out += f"}};\n"
         elif struct["type"] == "StageTable":
@@ -879,13 +899,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    .bg = {symbol_map[bg][0][1]},\n"
 
             if preBattle != 0:
-                out += f"    .preBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .preBattle = {symbol_map[preBattle][0][1]},\n"
 
             if postBattle != 0:
-                out += f"    .postBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .postBattle = {symbol_map[postBattle][0][1]},\n"
 
             if unk_18 != 0:
-                out += f"    .foregroundModelList = &{symbol_map[unk_18][0][1]},\n"
+                out += f"    .foregroundModelList = {symbol_map[unk_18][0][1]},\n"
 
             if unk_1C != 0:
                 out += f"    .unk_1C = {unk_1C:X},\n"
@@ -1018,7 +1038,12 @@ if __name__ == "__main__":
         is_battle = False
     else:
         battle_area = "_".join(base.lower().split(" ")[1:])
-        segment_name = f"battle/{battle_area}"
+
+        if "partner" in base:
+            segment_name = f"battle/partners/{battle_area}"
+        else:
+            segment_name = f"battle_partner_{battle_area}"
+
         is_battle = True
 
     symbol_map = {}
@@ -1030,13 +1055,13 @@ if __name__ == "__main__":
 
         rom_offset = -1
         for segment in splat_config["segments"]:
-            if isinstance(segment, dict) and segment.get("dir") == segment_name:
+            if isinstance(segment, dict) and (segment.get("dir") == segment_name or segment.get("name") == segment_name):
                 rom_offset = segment["start"]
                 vram = segment["vram"]
                 break
 
     if rom_offset == -1:
-        print(f"can't find segment with dir '{segment_name}' in splat.yaml")
+        print(f"can't find segment with dir or name '{segment_name}' in splat.yaml")
         exit(1)
 
     if ext == ".midx":
@@ -1097,6 +1122,10 @@ if __name__ == "__main__":
 
                 string_literal = '"' + string_data + '"'
                 symbol_map[struct["vaddr"]] = [[struct["vaddr"], string_literal]]
+            elif struct["type"] == "ConstDouble":
+                double = unpack_from(">d", romfile.read(struct["length"]), 0)[0]
+                double_literal = f"{double}"
+                symbol_map[struct["vaddr"]] = [[struct["vaddr"], double_literal]]
             elif struct["type"] == "NpcGroup":
                 for z in range(struct["length"]//0x1F0):
                     npc = romfile.read(0x1F0)

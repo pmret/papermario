@@ -2,15 +2,15 @@
 #include "ld_addrs.h"
 #include "battle.h"
 
-extern BattleList area_kmr_part_1_battles;
-extern StageList area_kmr_part_1_stages;
+extern BattleList b_area_kmr_part_1_formationTable;
+extern StageList b_area_kmr_part_1_stageTable;
 
 BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
         .name = "エリア ＫＭＲ その１",
-        .battles = area_kmr_part_1_battles,
-        .stages = area_kmr_part_1_stages,
+        .battles = b_area_kmr_part_1_formationTable,
+        .stages = b_area_kmr_part_1_stageTable,
     },
     {
         AREA(area_kmr_part_2),
