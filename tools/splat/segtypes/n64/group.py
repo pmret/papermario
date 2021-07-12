@@ -187,11 +187,12 @@ class N64SegGroup(N64Segment):
             prev_start = start
 
         # Add the automatic all_ sections
+        orig_len = len(ret)
         for section in reversed(inserts):
             idx = inserts[section]
 
             if idx == -1:
-                idx = len(ret)
+                idx = orig_len
 
             # bss hack TODO maybe rethink
             if section == "bss" and self.vram_start is not None:
