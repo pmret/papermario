@@ -1,59 +1,62 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "163400", func_80242BA0);
+// TODO this is the bss for the whole segment - break it up
+static char bss[0xA0];
 
-INCLUDE_ASM(s32, "163400", func_80242D94);
+INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
 
-INCLUDE_ASM(s32, "163400", func_80242DEC);
+INCLUDE_ASM(s32, "163400", filemenu_set_selected);
 
-INCLUDE_ASM(s32, "163400", func_80242E00);
+INCLUDE_ASM(s32, "163400", filemenu_set_cursor_alpha);
 
-INCLUDE_ASM(s32, "163400", func_80242F68);
+INCLUDE_ASM(s32, "163400", filemenu_set_cursor_goal_pos);
 
-INCLUDE_ASM(s32, "163400", func_802431A0);
+INCLUDE_ASM(s32, "163400", filemenu_update_cursor);
+
+INCLUDE_ASM(s32, "163400", filemenu_update);
 
 INCLUDE_ASM(s32, "163400", func_8024330C);
 
-INCLUDE_ASM(s32, "163400", func_80243380);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_name_input);
 
-INCLUDE_ASM(s32, "163400", func_802433F4);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_options_left);
 
-INCLUDE_ASM(s32, "163400", func_80243468);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_options_right);
 
-INCLUDE_ASM(s32, "163400", func_802434DC);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_options_bottom);
 
-INCLUDE_ASM(s32, "163400", func_80243550);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_title);
 
 INCLUDE_ASM(s32, "163400", func_802435C4);
 
-INCLUDE_ASM(s32, "163400", func_80243628);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_name_input);
 
-INCLUDE_ASM(s32, "163400", func_8024368C);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_options_left);
 
-INCLUDE_ASM(s32, "163400", func_802436F0);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_options_right);
 
-INCLUDE_ASM(s32, "163400", func_80243754);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_title);
 
-INCLUDE_ASM(s32, "163400", func_802437B8);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_options_bottom);
 
-INCLUDE_ASM(s32, "163400", func_8024381C);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_with_rotation);
 
-INCLUDE_ASM(s32, "163400", func_80243898);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_with_rotation);
 
-INCLUDE_ASM(s32, "163400", func_80243908);
+INCLUDE_ASM(s32, "163400", filemenu_update_select_file);
 
-INCLUDE_ASM(s32, "163400", func_80243B10);
+INCLUDE_ASM(s32, "163400", filemenu_update_deselect_file);
 
-INCLUDE_ASM(s32, "163400", func_80243CCC);
+INCLUDE_ASM(s32, "163400", filemenu_update_show_name_confirm);
 
-INCLUDE_ASM(s32, "163400", func_80243EEC);
+INCLUDE_ASM(s32, "163400", filemenu_update_hidden_name_confirm);
 
-INCLUDE_ASM(s32, "163400", func_80244030);
+INCLUDE_ASM(s32, "163400", filemenu_draw_cursor);
 
-INCLUDE_ASM(s32, "163400", func_802440BC);
+INCLUDE_ASM(s32, "163400", filemenu_draw_contents_copy_arrow);
 
-INCLUDE_ASM(s32, "163400", func_802448E0);
+INCLUDE_ASM(void, "163400", filemenu_init, s32 arg0);
 
-INCLUDE_ASM(s32, "163400", func_80244B00);
+INCLUDE_ASM(s32, "163400", filemenu_cleanup);
 
 INCLUDE_ASM(s32, "163400", func_80244BC4);

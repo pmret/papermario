@@ -33,7 +33,7 @@ typedef struct {
     /* 0x18 */ u32 decompressedLength;
 } AssetHeader; // size = 0x1C
 
-void load_world_script_api(void) {
+void load_map_script_lib(void) {
     dma_copy((s32)&world_script_api_ROM_START, (s32)&world_script_api_ROM_END, &world_script_api_VRAM);
 }
 
@@ -51,8 +51,8 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gGameStatusPtr->playerSpriteSet = 0;
     func_8002D160();
     func_802B2078();
-    func_8011D890();
-    clear_dynamic_entity_list();
+    clear_render_tasks();
+    clear_generic_entity_list();
     clear_script_list();
 
     switch (loadType) {
@@ -83,7 +83,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     if (map->bgName != NULL) {
         strcpy(&D_800D9668, map->bgName);
     }
-    load_world_script_api();
+    load_map_script_lib();
 
     if (map->dmaStart != NULL) {
         dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
@@ -115,19 +115,19 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     func_8002D160();
     func_802B2078();
-    func_80149670(0);
-    clear_dynamic_entity_list();
+    sfx_clear_env_sounds(0);
+    clear_generic_entity_list();
     clear_script_list();
     create_cameras_a();
     spr_init_sprites(gGameStatusPtr->playerSpriteSet);
-    func_8011E224();
+    clear_animator_list();
     clear_entity_models();
-    npc_list_clear();
-    func_80141100();
+    clear_npcs();
+    clear_hud_element_cache();
     clear_trigger_data();
     clear_model_data();
-    func_80148040();
-    use_default_background_settings();
+    clear_sprite_shading_data();
+    reset_background_settings();
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         func_80138188();
@@ -138,12 +138,12 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         load_hit_asset();
     }
 
-    func_80072B30();
+    reset_battle_status();
     clear_encounter_status();
     clear_entity_data(1);
     clear_effect_data();
     clear_player_status();
-    func_800DFC74();
+    player_reset_data();
     partner_reset_data();
     clear_printers();
     clear_item_entity_data();
@@ -158,7 +158,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
         if (temp800A41E8->modelTreeRoot != NULL) {
             load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
-       }
+        }
     }
 
     if (temp800A41E8->background != NULL) {
@@ -229,10 +229,11 @@ void* load_asset_by_name(char* assetName, s32* decompressedSize) {
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-   }
+    }
     *decompressedSize = curAsset->decompressedLength;
     ret = general_heap_malloc(curAsset->compressedLength);
-    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset, ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
+    dma_copy(ASSET_TABLE_FIRST_ENTRY + curAsset->offset,
+             ASSET_TABLE_FIRST_ENTRY + curAsset->offset + curAsset->compressedLength, ret);
     heap_free(assetTableBuffer);
     return ret;
 }
@@ -249,7 +250,7 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
     dma_copy(ASSET_TABLE_FIRST_ENTRY, ASSET_TABLE_FIRST_ENTRY + firstHeader.offset, assetTableBuffer);
     while (strcmp(curAsset->name, assetName) != 0) {
         curAsset++;
-   }
+    }
     *compressedSize = curAsset->compressedLength;
     ret = ASSET_TABLE_FIRST_ENTRY + curAsset->offset;
     heap_free(assetTableBuffer);
@@ -276,11 +277,13 @@ s32 get_asset_offset(char* assetName, s32* compressedSize) {
 
 // these, along with all the *_maps, almost certainly belong in the next file
 s16 D_8008FF70[] = { 4, 6, 5, 4, 7, 6, 0, 3, 4, 3, 7, 4, 3, 2, 7, 2, 6, 7, 2, 1, 6, 1, 5, 6, 1, 0, 5, 0, 4, 5, 0, 1, 2,
-                     0, 2, 3};
+                     0, 2, 3
+                   };
 
 f32 D_8008FFB8[] = { 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
                      0.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f,
-                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f };
+                     0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f
+                   };
 
 /// Toad Town
 Map mac_maps[] = {

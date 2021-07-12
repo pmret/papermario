@@ -2,6 +2,7 @@
 .set noreorder # don't insert nops after branches
 
 .section .rodata
+
 glabel D_80245308_CDC5E8
 .double 0.09
 
@@ -9,7 +10,8 @@ glabel D_80245310_CDC5F0
 .double 0.09
 
 .section .text
-glabel func_80240220_CD7500
+
+glabel flo_17_func_80240220_CD7500
 /* CD7500 80240220 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* CD7504 80240224 AFB3004C */  sw        $s3, 0x4c($sp)
 /* CD7508 80240228 0080982D */  daddu     $s3, $a0, $zero
@@ -90,7 +92,7 @@ glabel func_80240220_CD7500
 /* CD7630 80240350 E7A60034 */  swc1      $f6, 0x34($sp)
 /* CD7634 80240354 AFA20010 */  sw        $v0, 0x10($sp)
 /* CD7638 80240358 8E040080 */  lw        $a0, 0x80($s0)
-/* CD763C 8024035C 0C0372DF */  jal       func_800DCB7C
+/* CD763C 8024035C 0C0372DF */  jal       npc_raycast_down_sides
 /* CD7640 80240360 27A70030 */   addiu    $a3, $sp, 0x30
 /* CD7644 80240364 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* CD7648 80240368 4600D001 */  sub.s     $f0, $f26, $f0
@@ -134,7 +136,7 @@ glabel func_80240220_CD7500
 /* CD76D8 802403F8 E7A40034 */  swc1      $f4, 0x34($sp)
 /* CD76DC 802403FC AFA20010 */  sw        $v0, 0x10($sp)
 /* CD76E0 80240400 8E040080 */  lw        $a0, 0x80($s0)
-/* CD76E4 80240404 0C0372DF */  jal       func_800DCB7C
+/* CD76E4 80240404 0C0372DF */  jal       npc_raycast_down_sides
 /* CD76E8 80240408 27A70030 */   addiu    $a3, $sp, 0x30
 /* CD76EC 8024040C C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* CD76F0 80240410 461A2100 */  add.s     $f4, $f4, $f26
@@ -193,7 +195,7 @@ glabel func_80240220_CD7500
 /* CD77B8 802404D8 E7A60034 */  swc1      $f6, 0x34($sp)
 /* CD77BC 802404DC AFA20010 */  sw        $v0, 0x10($sp)
 /* CD77C0 802404E0 8E040080 */  lw        $a0, 0x80($s0)
-/* CD77C4 802404E4 0C0372DF */  jal       func_800DCB7C
+/* CD77C4 802404E4 0C0372DF */  jal       npc_raycast_down_sides
 /* CD77C8 802404E8 27A70030 */   addiu    $a3, $sp, 0x30
 .L802404EC:
 /* CD77CC 802404EC 10400007 */  beqz      $v0, .L8024050C
@@ -280,7 +282,7 @@ glabel func_80240220_CD7500
 /* CD7904 80240624 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* CD7908 80240628 C480003C */  lwc1      $f0, 0x3c($a0)
 /* CD790C 8024062C 3C060020 */  lui       $a2, 0x20
-/* CD7910 80240630 0C012530 */  jal       func_800494C0
+/* CD7910 80240630 0C012530 */  jal       ai_enemy_play_sound
 /* CD7914 80240634 E4800064 */   swc1     $f0, 0x64($a0)
 /* CD7918 80240638 8E220018 */  lw        $v0, 0x18($s1)
 /* CD791C 8024063C 9442002A */  lhu       $v0, 0x2a($v0)

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242010_C80190
+.double -469.0, 0.0
+
+.section .text
+
 glabel func_802405A4_C7E724
 /* C7E724 802405A4 3C018024 */  lui       $at, %hi(D_80242010_C80190)
 /* C7E728 802405A8 D4222010 */  ldc1      $f2, %lo(D_80242010_C80190)($at)

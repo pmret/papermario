@@ -41,9 +41,8 @@ extern SpriteAnimData* spr_npcSprites[0xEA];
 extern struct spr_playerCurrentAnimInfo spr_playerCurrentAnimInfo[3];
 extern struct D_802DFA48 D_802DFA48[51];
 extern u8 spr_npcSpriteInstanceCount[];
-extern s32 gSpriteHeapPtr;
 
-void func_802DED60(s32 cacheSize, s32 maxRasterSize);
+void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize);
 
 Vtx spr_defaultQuad[] = {
     {{{ -16, 56, 0 }, FALSE, {    0,    0 }, { 240, 240, 240, 255 }}},
@@ -53,14 +52,16 @@ Vtx spr_defaultQuad[] = {
 };
 
 Vp D_802DF3D0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 511, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 511, 0 },
+    }
+};
 
 Vp D_802DF3E0 = {{
-    { 640, 480, 511, 0 },
-    { 640, 480, 512, 0 },
-}};
+        { 640, 480, 511, 0 },
+        { 640, 480, 512, 0 },
+    }
+};
 
 Gfx D_802DF3F0[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
@@ -115,13 +116,13 @@ PlayerSpriteSet spr_playerSpriteSets[] = {
     /* Peach */ {  6, 0x900, 0x00003C00 },
 };
 
-INCLUDE_ASM(s32, "sprite", func_802DBD40);
+INCLUDE_ASM(s32, "sprite", spr_init_quad_cache);
 
 // extern s32* gSpriteHeapPtr;
 // extern s32** D_802DFE44;
 // extern s32* D_802DFE9C;
 
-// void func_802DBD40(void) {
+// void spr_init_quad_cache(void) {
 //     s32 i;
 //     s32* phi_v0;
 //     D_802DFE44 = _heap_malloc(&gSpriteHeapPtr, 0x580);
@@ -131,17 +132,17 @@ INCLUDE_ASM(s32, "sprite", func_802DBD40);
 //     }
 // }
 
-INCLUDE_ASM(s32, "sprite", func_802DBD8C);
+INCLUDE_ASM(s32, "sprite", spr_get_cached_quad);
 
-INCLUDE_ASM(s32, "sprite", func_802DBDBC);
+INCLUDE_ASM(s32, "sprite", spr_make_quad_for_size);
 
-INCLUDE_ASM(s32, "sprite", func_802DBE78);
+INCLUDE_ASM(s32, "sprite", spr_get_quad_for_size);
 
-INCLUDE_ASM(s32, "sprite", func_802DBFC0);
+INCLUDE_ASM(s32, "sprite", spr_clear_quad_cache);
 
-INCLUDE_ASM(s32, "sprite", func_802DC008);
+INCLUDE_ASM(s32, "sprite", spr_appendGfx_component_flat);
 
-INCLUDE_ASM(s32, "sprite", spr_appendMDL_component);
+INCLUDE_ASM(s32, "sprite", spr_appendGfx_component);
 
 void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ) {
     if (rotX == 0 && rotY == 0 && rotZ == 0) {
@@ -176,7 +177,7 @@ void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ
 
 INCLUDE_ASM(s32, "sprite", spr_draw_component);
 
-s32 _spr_sign_extend_12bit(u16 val) {
+s32 spr_sign_extend_12bit(u16 val) {
     s32 temp = val & 0xFFF;
 
     if (temp & 0x800) {
@@ -186,7 +187,7 @@ s32 _spr_sign_extend_12bit(u16 val) {
     }
 }
 
-s32 _spr_sign_extend_16bit(u16 val) {
+s32 spr_sign_extend_16bit(u16 val) {
     s32 temp = val & 0xFFFF;
 
     if (temp & 0x8000) {
@@ -196,21 +197,21 @@ s32 _spr_sign_extend_16bit(u16 val) {
     }
 }
 
-INCLUDE_ASM(s32, "sprite", update_component);
+INCLUDE_ASM(s32, "sprite", spr_component_update_commands);
 
-INCLUDE_ASM(s32, "sprite", func_802DD634);
+INCLUDE_ASM(s32, "sprite", spr_component_update_finish);
 
-INCLUDE_ASM(s32, "sprite", func_802DD6DC);
+INCLUDE_ASM(s32, "sprite", spr_component_update);
 
-INCLUDE_ASM(s32, "sprite", func_802DD7B0);
+INCLUDE_ASM(s32, "sprite", spr_init_component_anim_state);
 
-INCLUDE_ASM(s32, "sprite", func_802DD820);
+INCLUDE_ASM(s32, "sprite", spr_init_anim_state);
 
-void set_anim_timescale(f32 arg0) {
+void spr_set_anim_timescale(f32 arg0) {
     spr_animUpdateTimeScale = arg0 * 2.0f;
 }
 
-INCLUDE_ASM(s32, "sprite", func_802DD89C);
+INCLUDE_ASM(s32, "sprite", spr_load_player_sprite);
 
 void spr_init_sprites(s32 playerSpriteSet) {
     s32 i;
@@ -232,11 +233,12 @@ void spr_init_sprites(s32 playerSpriteSet) {
     }
 
     flags = (&spr_playerSpriteSets[playerSpriteSet])->initiallyLoaded;
-    func_802DED60((&spr_playerSpriteSets[playerSpriteSet])->cacheSize, (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
+    spr_init_player_raster_cache((&spr_playerSpriteSets[playerSpriteSet])->cacheSize,
+                  (&spr_playerSpriteSets[playerSpriteSet])->rasterSize);
 
     for (i = 1; i < 0xE; i++) {
         if ((flags >> i) & 1) {
-            func_802DD89C(i); // spr_load_player_sprite
+            spr_load_player_sprite(i); // spr_load_player_sprite
         }
     }
 
@@ -263,21 +265,21 @@ void spr_init_sprites(s32 playerSpriteSet) {
         d->unk_10 = 0;
     }
 
-    func_802DBD40(); // spr_init_quad_cache
+    spr_init_quad_cache(); // spr_init_quad_cache
 }
 
-void func_802DDA60(void) {
-    func_802DEFB4();
-    func_802DBFC0();
+void spr_render_init(void) {
+    spr_update_player_raster_cache();
+    spr_clear_quad_cache();
 }
 
 s32 func_802DDA84(void) {
     return 0;
 }
 
-INCLUDE_ASM(void, "sprite", func_802DDA8C, s32 arg0, s32 arg1, f32 arg2);
+INCLUDE_ASM(void, "sprite", spr_update_player_sprite, s32 arg0, s32 arg1, f32 arg2);
 
-INCLUDE_ASM(s32, "sprite", render_sprite);
+INCLUDE_ASM(void, "sprite", spr_draw_player_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 INCLUDE_ASM(s32, "sprite", func_802DDEC4);
 
@@ -285,19 +287,19 @@ INCLUDE_ASM(s32, "sprite", func_802DDEE4);
 
 INCLUDE_ASM(s32, "sprite", func_802DDFF8);
 
-INCLUDE_ASM(s32, "sprite", func_802DE044);
+INCLUDE_ASM(s32, "sprite", spr_get_player_raster_info);
 
-INCLUDE_ASM(s32, "sprite", func_802DE0C0);
+INCLUDE_ASM(s32, "sprite", spr_get_player_palettes);
 
-INCLUDE_ASM(s32, "sprite", func_802DE0EC);
+INCLUDE_ASM(s32, "sprite", spr_load_npc_sprite);
 
 INCLUDE_ASM(s32, "sprite", spr_update_sprite, s32 arg0, s32 arg1, f32 arg2);
 
-INCLUDE_ASM(s32, "sprite", func_802DE3D8);
+INCLUDE_ASM(void, "sprite", spr_draw_npc_sprite, s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 
 INCLUDE_ASM(s32, "sprite", func_802DE5C8);
 
-INCLUDE_ASM(s32, "sprite", func_802DE5E8);
+INCLUDE_ASM(s32, "sprite", spr_free_sprite);
 
 INCLUDE_ASM(s32, "sprite", func_802DE748);
 
@@ -307,8 +309,8 @@ INCLUDE_ASM(s32, "sprite", func_802DE894);
 
 INCLUDE_ASM(s32, "sprite", func_802DE8DC);
 
-INCLUDE_ASM(s32, "sprite", func_802DE9D8);
+INCLUDE_ASM(s32, "sprite", spr_get_npc_raster_info);
 
-INCLUDE_ASM(s32, "sprite", func_802DEA40);
+INCLUDE_ASM(s32*, "sprite", spr_get_npc_palettes, u16 arg0);
 
-INCLUDE_ASM(s32, "sprite", func_802DEA6C);
+INCLUDE_ASM(s32, "sprite", spr_get_npc_color_variations);

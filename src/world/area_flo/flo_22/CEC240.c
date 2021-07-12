@@ -24,8 +24,7 @@ Script N(802402E0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -288,8 +287,8 @@ Script N(80240E84) = SCRIPT({
 Script N(80241028) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerInput(FALSE);
-    func_802D663C();
-    func_802D6954();
+    ShowConsumableChoicePopup();
+    CloseChoicePopup();
     DisablePlayerInput(TRUE);
     SI_VAR(8) = SI_VAR(0);
     match SI_VAR(8) {
@@ -325,8 +324,7 @@ Script N(80241028) = SCRIPT({
             } else {
                 ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DE), 35, 35, 0);
             }
-        }
-        else {
+        } else {
             await N(80240E84);
             RemoveItemAt(SI_VAR(1));
             ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DC), 35, 35, 0);
@@ -373,9 +371,9 @@ static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_80240000_CEC240)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

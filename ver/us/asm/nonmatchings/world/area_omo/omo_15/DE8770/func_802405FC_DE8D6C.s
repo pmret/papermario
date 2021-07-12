@@ -45,7 +45,7 @@ glabel func_802405FC_DE8D6C
 /* DE8E0C 8024069C 8E050018 */  lw        $a1, 0x18($s0)
 /* DE8E10 802406A0 8E060024 */  lw        $a2, 0x24($s0)
 /* DE8E14 802406A4 8E070020 */  lw        $a3, 0x20($s0)
-/* DE8E18 802406A8 0C01C9AC */  jal       func_800726B0
+/* DE8E18 802406A8 0C01C9AC */  jal       playFX_7B
 /* DE8E1C 802406AC 24040001 */   addiu    $a0, $zero, 1
 /* DE8E20 802406B0 AE020054 */  sw        $v0, 0x54($s0)
 /* DE8E24 802406B4 8C43000C */  lw        $v1, 0xc($v0)

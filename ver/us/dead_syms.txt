@@ -4,5 +4,5 @@ dead_set_variable = 0x802D5468;
 dead_get_float_variable = 0x802D57FC;
 dead_cos_rad = 0x8002B4C0;
 dead_set_float_variable = 0x802D5A10;
-dead_func_8006FEF0 = 0x80075170;
+dead_playFX_11 = 0x80075170;
 dead_gPlayerStatusPtr = 0x800FFC90;

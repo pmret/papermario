@@ -3,7 +3,7 @@
 
 void N(UnkFunc8)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {

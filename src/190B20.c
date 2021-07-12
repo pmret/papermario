@@ -1072,11 +1072,11 @@ INCLUDE_ASM(s32, "190B20", func_80263268);
 
 INCLUDE_ASM(s32, "190B20", func_80263300);
 
-INCLUDE_ASM(s32, "190B20", func_802633E8);
+INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
 
-INCLUDE_ASM(s32, "190B20", func_80263434);
+INCLUDE_ASM(s32, "190B20", btl_check_enemies_defeated);
 
-INCLUDE_ASM(s32, "190B20", func_80263464);
+INCLUDE_ASM(s32, "190B20", btl_check_player_defeated);
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
 
@@ -1088,7 +1088,7 @@ INCLUDE_ASM(s32, "190B20", count_power_plus);
 
 INCLUDE_ASM(s32, "190B20", deduct_current_move_fp);
 
-INCLUDE_ASM(s32, "190B20", func_80263C60);
+INCLUDE_ASM(s32, "190B20", reset_actor_turn_info);
 
 INCLUDE_ASM(s32, "190B20", func_80263CC4);
 
@@ -1288,7 +1288,7 @@ INCLUDE_ASM(s32, "190B20", func_80266684);
 
 INCLUDE_ASM(void, "190B20", func_802666E4, Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16 arg4);
 
-INCLUDE_ASM(s32, "190B20", func_802667F0);
+INCLUDE_ASM(void, "190B20", func_802667F0, s32 arg0, Actor* arg1, f32 arg2, f32 arg3, f32 arg4);
 
 INCLUDE_ASM(s32, "190B20", func_80266970);
 
@@ -1362,7 +1362,7 @@ void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     }
 }
 
-s32 heroes_is_ability_active(Actor* actor, Ability ability) {
+s32 player_team_is_ability_active(Actor* actor, Ability ability) {
     s32 actorGenus = actor->actorID & 0x700;
     s32 hasAbility = FALSE;
 
@@ -1392,7 +1392,7 @@ void remove_part_shadow(ActorID actorID, s32 partIndex) {
     ActorPart* part = get_actor_part(get_actor(actorID), partIndex);
 
     part->flags |= 4;
-    func_80112328(part->shadow);
+    delete_shadow(part->shadow);
 }
 
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
@@ -1401,8 +1401,8 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size[0] / 24.0;
 }
 
-void func_80071A50(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-void func_80071C30(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+void playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+void playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 
 void remove_player_buffs(PlayerBuff buffs) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -1429,23 +1429,23 @@ void remove_player_buffs(PlayerBuff buffs) {
     if ((buffs & 0x20) && (player->staticStatus != 0)) {
         player->staticDuration = 0;
         player->staticStatus = 0;
-        func_800479A0(player->unk_436);
+        remove_status_2(player->unk_436);
     }
     if ((buffs & 0x40) && (player->transStatus != 0)) {
         player->transDuration = 0;
         player->transStatus = 0;
         playerPartsTable->flags &= ~0x100;
-        func_80047AA8(player->unk_436);
+        remove_status_3(player->unk_436);
     }
     if ((buffs & 0x200) && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_10 = 0;
         battleStatus->unk_A0[0] |= 0x10;
 
-        func_80071A50(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
-        func_80071C30(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
-        func_80071C30(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
-        func_80071C30(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        playFX_5A(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
+        playFX_5F(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        playFX_5F(0, player->currentPos.x - 15.0f, player->currentPos.y + 32.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
+        playFX_5F(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);
 
         battleStatus->unk_A0 = NULL;
         sfx_play_sound(0x299);
@@ -1469,12 +1469,12 @@ void remove_player_buffs(PlayerBuff buffs) {
     }
 }
 
-INCLUDE_ASM(s32, "190B20", func_8026777C);
+INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
 
-INCLUDE_ASM(s32, "190B20", func_8026787C);
+INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad);
 // extern s32 D_80293970;
 
-// void func_8026787C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
+// void btl_appendGfx_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
 //     gDPPipeSync(gMasterGfxPos++);
 //     gSPDisplayList(gMasterGfxPos++, &D_80293970);
 
@@ -1494,11 +1494,11 @@ INCLUDE_ASM(s32, "190B20", func_8026787C);
 //     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 // }
 
-INCLUDE_ASM(s32, "190B20", func_80267A3C);
+INCLUDE_ASM(s32, "190B20", btl_draw_prim_quad);
 
 INCLUDE_ASM(s32, "190B20", reset_all_actor_sounds);
 
-void hide_foreground_models_unsafe(void) {
+void hide_foreground_models_unchecked(void) {
     FGModelData* data = gBattleStatus.foregroundModelData;
 
     if (data != NULL && data->idList != NULL) {
@@ -1513,7 +1513,7 @@ void hide_foreground_models_unsafe(void) {
     }
 }
 
-void show_foreground_models_unsafe(void) {
+void show_foreground_models_unchecked(void) {
     FGModelData* data = gBattleStatus.foregroundModelData;
 
     if (data != NULL && data->idList != NULL) {

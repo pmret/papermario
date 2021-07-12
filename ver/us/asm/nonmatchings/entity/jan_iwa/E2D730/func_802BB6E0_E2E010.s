@@ -8,7 +8,7 @@ glabel func_802BB6E0_E2E010
 /* E2E01C 802BB6EC AFBF0020 */  sw        $ra, 0x20($sp)
 /* E2E020 802BB6F0 AFB1001C */  sw        $s1, 0x1c($sp)
 /* E2E024 802BB6F4 86040014 */  lh        $a0, 0x14($s0)
-/* E2E028 802BB6F8 0C047FF8 */  jal       get_anim_mesh
+/* E2E028 802BB6F8 0C047FF8 */  jal       get_animator_by_index
 /* E2E02C 802BB6FC 8E110040 */   lw       $s1, 0x40($s0)
 /* E2E030 802BB700 24030011 */  addiu     $v1, $zero, 0x11
 /* E2E034 802BB704 3C04802C */  lui       $a0, %hi(D_802BC7D0_E2F100)

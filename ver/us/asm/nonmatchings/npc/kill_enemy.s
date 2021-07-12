@@ -72,7 +72,7 @@ glabel kill_enemy
 /* 19C98 8003E898 AE00002C */  sw        $zero, 0x2c($s0)
 /* 19C9C 8003E89C 0C00EABB */  jal       get_npc_unsafe
 /* 19CA0 8003E8A0 AE000030 */   sw       $zero, 0x30($s0)
-/* 19CA4 8003E8A4 0C00E273 */  jal       npc_free
+/* 19CA4 8003E8A4 0C00E273 */  jal       free_npc
 /* 19CA8 8003E8A8 0040202D */   daddu    $a0, $v0, $zero
 /* 19CAC 8003E8AC 8E040064 */  lw        $a0, 0x64($s0)
 /* 19CB0 8003E8B0 50800004 */  beql      $a0, $zero, .L8003E8C4

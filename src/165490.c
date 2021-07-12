@@ -1,41 +1,41 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "165490", func_80244C30);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_title);
 
-INCLUDE_ASM(s32, "165490", func_80244CEC);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_stereo);
 
-INCLUDE_ASM(s32, "165490", func_80244D60);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_mono);
 
-INCLUDE_ASM(s32, "165490", func_80244DD0);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_option_left);
 
-INCLUDE_ASM(s32, "165490", func_80244E54);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_option_center);
 
-INCLUDE_ASM(s32, "165490", func_80244F44);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_option_right);
 
-INCLUDE_ASM(s32, "165490", func_80244FD4);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_info);
 
-INCLUDE_ASM(s32, "165490", func_8024544C);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_title);
 
-INCLUDE_ASM(s32, "165490", func_80245588);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_0_info);
 
-INCLUDE_ASM(s32, "165490", func_802455D8);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_1_info);
 
-INCLUDE_ASM(s32, "165490", func_80245628);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_2_info);
 
-INCLUDE_ASM(s32, "165490", func_80245678);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_3_info);
 
-INCLUDE_ASM(s32, "165490", func_802456C8);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_0_title);
 
-INCLUDE_ASM(s32, "165490", func_80245718);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_1_title);
 
-INCLUDE_ASM(s32, "165490", func_80245768);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_2_title);
 
-INCLUDE_ASM(s32, "165490", func_802457B8);
+INCLUDE_ASM(s32, "165490", filemenu_draw_contents_file_3_title);
 
-INCLUDE_ASM(s32, "165490", func_80245808);
+INCLUDE_ASM(s32, "165490", filemenu_main_init);
 
-INCLUDE_ASM(s32, "165490", func_80245A40);
+INCLUDE_ASM(s32, "165490", filemenu_main_handle_input);
 
-INCLUDE_ASM(s32, "165490", func_80246B2C);
+INCLUDE_ASM(s32, "165490", filemenu_main_update);
 
-INCLUDE_ASM(s32, "165490", func_80246CBC);
+INCLUDE_ASM(s32, "165490", filemenu_main_cleanup);

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802484E0_E1E260
+.double 59.0
+
+.section .text
+
 glabel func_80240000_E15D80
 /* E15D80 80240000 27BDFF90 */  addiu     $sp, $sp, -0x70
 /* E15D84 80240004 0000202D */  daddu     $a0, $zero, $zero
@@ -21,16 +28,16 @@ glabel func_80240000_E15D80
 /* E15DC0 80240040 2405005A */   addiu    $a1, $zero, 0x5a
 /* E15DC4 80240044 8E50000C */  lw        $s0, 0xc($s2)
 /* E15DC8 80240048 00A0302D */  daddu     $a2, $a1, $zero
-/* E15DCC 8024004C 0C051261 */  jal       set_icon_render_pos
+/* E15DCC 8024004C 0C051261 */  jal       set_hud_element_render_pos
 /* E15DD0 80240050 0200202D */   daddu    $a0, $s0, $zero
-/* E15DD4 80240054 0C0511EA */  jal       draw_icon_0
+/* E15DD4 80240054 0C0511EA */  jal       draw_hud_element_clipped
 /* E15DD8 80240058 0200202D */   daddu    $a0, $s0, $zero
 /* E15DDC 8024005C 2405005A */  addiu     $a1, $zero, 0x5a
 /* E15DE0 80240060 8E500010 */  lw        $s0, 0x10($s2)
 /* E15DE4 80240064 24060078 */  addiu     $a2, $zero, 0x78
-/* E15DE8 80240068 0C051261 */  jal       set_icon_render_pos
+/* E15DE8 80240068 0C051261 */  jal       set_hud_element_render_pos
 /* E15DEC 8024006C 0200202D */   daddu    $a0, $s0, $zero
-/* E15DF0 80240070 0C0511EA */  jal       draw_icon_0
+/* E15DF0 80240070 0C0511EA */  jal       draw_hud_element_clipped
 /* E15DF4 80240074 0200202D */   daddu    $a0, $s0, $zero
 /* E15DF8 80240078 2404003E */  addiu     $a0, $zero, 0x3e
 /* E15DFC 8024007C 24050074 */  addiu     $a1, $zero, 0x74
@@ -58,7 +65,7 @@ glabel func_80240000_E15D80
 /* E15E54 802400D4 00000000 */  nop
 /* E15E58 802400D8 00C43021 */  addu      $a2, $a2, $a0
 /* E15E5C 802400DC 00063400 */  sll       $a2, $a2, 0x10
-/* E15E60 802400E0 0C00AAB1 */  jal       func_8002AAC4
+/* E15E60 802400E0 0C00AAB1 */  jal       startup_draw_prim_rect_COPY
 /* E15E64 802400E4 00063403 */   sra      $a2, $a2, 0x10
 .L802400E8:
 /* E15E68 802400E8 8E220078 */  lw        $v0, 0x78($s1)
@@ -148,7 +155,7 @@ glabel func_80240000_E15D80
 /* E15F9C 8024021C 240700FF */  addiu     $a3, $zero, 0xff
 /* E15FA0 80240220 AFA00010 */  sw        $zero, 0x10($sp)
 /* E15FA4 80240224 AFA00014 */  sw        $zero, 0x14($sp)
-/* E15FA8 80240228 0C04993B */  jal       draw_msg
+/* E15FA8 80240228 0C04993B */  jal       draw_string
 /* E15FAC 8024022C 24A5002A */   addiu    $a1, $a1, 0x2a
 /* E15FB0 80240230 2406002B */  addiu     $a2, $zero, 0x2b
 /* E15FB4 80240234 24070001 */  addiu     $a3, $zero, 1
@@ -186,7 +193,7 @@ glabel func_80240000_E15D80
 /* E16034 802402B4 24630005 */  addiu     $v1, $v1, 5
 /* E16038 802402B8 00031C00 */  sll       $v1, $v1, 0x10
 /* E1603C 802402BC 00031C03 */  sra       $v1, $v1, 0x10
-/* E16040 802402C0 0C04BA68 */  jal       func_8012E9A0
+/* E16040 802402C0 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* E16044 802402C4 AFA30018 */   sw       $v1, 0x18($sp)
 /* E16048 802402C8 8E460008 */  lw        $a2, 8($s2)
 /* E1604C 802402CC 28C20385 */  slti      $v0, $a2, 0x385
@@ -267,7 +274,7 @@ glabel func_80240000_E15D80
 /* E16174 802403F4 240700FF */  addiu     $a3, $zero, 0xff
 /* E16178 802403F8 AFA00010 */  sw        $zero, 0x10($sp)
 /* E1617C 802403FC AFA00014 */  sw        $zero, 0x14($sp)
-/* E16180 80240400 0C04993B */  jal       draw_msg
+/* E16180 80240400 0C04993B */  jal       draw_string
 /* E16184 80240404 24A5001E */   addiu    $a1, $a1, 0x1e
 /* E16188 80240408 8FBF006C */  lw        $ra, 0x6c($sp)
 /* E1618C 8024040C 8FB60068 */  lw        $s6, 0x68($sp)

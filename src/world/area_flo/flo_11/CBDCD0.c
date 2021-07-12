@@ -30,8 +30,7 @@ Script N(802403E0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -704,7 +703,7 @@ Script N(defeat_80242AC4) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
-        0:
+0:
             if (SI_MAP_VAR(0) == 0) {
                 sleep 1;
                 goto 0;
@@ -755,10 +754,10 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -792,10 +791,10 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .dropFlags = 0x80,
         .itemDropChance = 25,
         .itemDrops = {
-                { ITEM_SUPER_SHROOM, 2, 0 },
-                { ITEM_MAPLE_SYRUP, 2, 0 },
-                { ITEM_THUNDER_RAGE, 2, 0 },
-                { ITEM_STOP_WATCH, 2, 0 },
+            { ITEM_SUPER_SHROOM, 2, 0 },
+            { ITEM_MAPLE_SYRUP, 2, 0 },
+            { ITEM_THUNDER_RAGE, 2, 0 },
+            { ITEM_STOP_WATCH, 2, 0 },
         },
         .heartDrops = STANDARD_HEART_DROPS(2),
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
@@ -847,9 +846,9 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_802402E0_CBDFB0)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(0, 0, 0, 0, 0, 0);
+    playFX_82(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

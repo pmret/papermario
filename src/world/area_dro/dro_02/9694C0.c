@@ -174,7 +174,7 @@ Script N(main) = SCRIPT({
     SetCamEnabled(0, 1);
     SetCamLeadPlayer(0, 0);
     MakeNpcs(0, N(npcGroupList_8024EEF4));
-    func_802D3398();
+    InitVirtualEntityList();
     await N(makeEntities);
     await N(80244C78);
     spawn N(80243AF0);
@@ -182,8 +182,7 @@ Script N(main) = SCRIPT({
     match SI_VAR(0) {
         2, 3 {
             await N(80243D10);
-        }
-        else {
+        } else {
             SI_VAR(0) = N(80243C9C);
             spawn EnterWalk;
         }
@@ -192,7 +191,7 @@ Script N(main) = SCRIPT({
     spawn {
         SetTexPanner(162, 1);
         SI_VAR(0) = 0;
-    123:
+123:
         SI_VAR(0) += 420;
         if (SI_VAR(0) > 65536) {
             SI_VAR(0) += -65536;
@@ -1538,7 +1537,7 @@ s32 N(D_80248784_971944) = {
 
 Script N(80248788) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1556,7 +1555,7 @@ Script N(80248788) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -1570,7 +1569,7 @@ Script N(802488CC) = {
 
 Script N(8024891C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D663C();
+    ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -1587,7 +1586,7 @@ Script N(8024891C) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -2043,7 +2042,7 @@ Script N(interact_8024ADE4) = SCRIPT({
     await N(8024D494);
     spawn {
         MakeLerp(0, 255, 60, 0);
-    0:
+0:
         UpdateLerp();
         N(UnkFunc32)(3, SI_VAR(0));
         sleep 1;
@@ -2058,7 +2057,7 @@ Script N(interact_8024ADE4) = SCRIPT({
         N(Call800EB168)(SI_VAR(10));
         sleep 45;
         MakeLerp(255, 0, 30, 0);
-    1:
+1:
         UpdateLerp();
         N(UnkFunc32)(0, SI_VAR(0));
         sleep 1;
@@ -2085,7 +2084,7 @@ Script N(8024B18C) = SCRIPT({
 
 Script N(8024B20C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -2128,7 +2127,7 @@ Script N(8024B20C) = SCRIPT({
         }
     }
     N(func_80243314_96C4D4)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -2170,8 +2169,7 @@ Script N(8024B5A0) = SCRIPT({
                     SpeakToPlayer(NPC_PARTNER, 0x40006, 0x40001, 5, SI_VAR(8));
                     EnablePartnerAI();
                     SI_VAR(12) = 1;
-                }
-                else {
+                } else {
                     DisablePartnerAI(0);
                     sleep 1;
                     SpeakToPlayer(NPC_PARTNER, 0x40006, 0x40001, 5, SI_VAR(9));
@@ -2223,8 +2221,7 @@ Script N(interact_8024B8F0) = SCRIPT({
                     }
                 }
             }
-        }
-        else {
+        } else {
             SpeakToPlayer(NPC_SELF, 0xB80004, 0xB80001, 0, MESSAGE_ID(0x0D, 0x00B3));
         }
     }
@@ -2248,8 +2245,7 @@ Script N(interact_8024BA9C) = SCRIPT({
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
             SpeakToPlayer(NPC_SELF, 0x930204, 0x930201, 0, MESSAGE_ID(0x0D, 0x0093));
-        }
-        else {
+        } else {
             SpeakToPlayer(NPC_SELF, 0x930204, 0x930201, 0, MESSAGE_ID(0x0D, 0x0094));
         }
     }
@@ -2276,8 +2272,7 @@ Script N(interact_8024BBD0) = SCRIPT({
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
             SpeakToPlayer(NPC_SELF, 0x930004, 0x930001, 0, MESSAGE_ID(0x0D, 0x00A3));
-        }
-        else {
+        } else {
             SpeakToPlayer(NPC_SELF, 0x930004, 0x930001, 0, MESSAGE_ID(0x0D, 0x00A4));
         }
     }
@@ -2314,8 +2309,7 @@ Script N(interact_8024BD4C) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00A8));
                 SI_AREA_FLAG(4) = 0;
             }
-        }
-        else {
+        } else {
             if (SI_AREA_FLAG(4) == 0) {
                 SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00A9));
                 SI_AREA_FLAG(4) = 1;
@@ -2344,8 +2338,7 @@ Script N(interact_8024BF34) = SCRIPT({
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
             SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00AD));
-        }
-        else {
+        } else {
             SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00AE));
         }
     }
@@ -2439,7 +2432,7 @@ Script N(interact_8024C4EC) = SCRIPT({
         < STORY_CH2_BOUGHT_SECRET_ITEMS {
             SI_VAR(11) = 0;
             SpeakToPlayer(NPC_DISGUISED_MOUSTAFA, 0xBC0004, 0xBC0001, 0, MESSAGE_ID(0x0D, 0x00B4));
-        0:
+0:
             ShowChoice(MESSAGE_ID(0x1E, 0x0019));
             if (SI_VAR(0) == 1) {
                 ContinueSpeech(2, 0xBC0004, 0xBC0001, 0, MESSAGE_ID(0x0D, 0x00B6));
@@ -2448,7 +2441,7 @@ Script N(interact_8024C4EC) = SCRIPT({
             } else {
                 EndSpeech(2, 12320772, 12320769, 0);
             }
-        1:
+1:
             SI_VAR(0) = 0;
             SI_VAR(1) = 2;
             await N(80248A50);
@@ -2618,8 +2611,7 @@ Script N(init_8024D04C) = SCRIPT({
             InterpNpcYaw(NPC_SELF, 270, 0);
             SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_200000)), TRUE);
             SetNpcAnimation(NPC_SELF, 0xBC0005);
-        }
-        else {
+        } else {
             BindNpcIdle(NPC_SELF, N(idle_8024C450));
             BindNpcInteract(NPC_SELF, N(interact_8024C4EC));
         }
@@ -3124,7 +3116,7 @@ ApiStatus N(func_80240300_9694C0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/Set80151310.inc.c"
 
-ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024043C_9695FC)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
     u16 phi_s0 = get_variable(script, SI_SAVE_FLAG(1768));
     u16 phi_s7 = get_variable(script, SI_SAVE_FLAG(1769));
@@ -3183,7 +3175,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc31.inc.c"
 
-ApiStatus N(func_802409EC_969BAC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802409EC_969BAC)(ScriptInstance* script, s32 isInitialCall) {
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
     if (quizzesAnswered < 999) {
@@ -3200,15 +3192,18 @@ ApiStatus N(func_802409EC_969BAC)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240A70_969C30)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024EFC0) = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        N(D_8024EFC4) = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        N(D_8024EFC8) = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        N(D_8024EFC0) = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+                                      get_variable(script, SI_ARRAY(3)));
+        N(D_8024EFC4) = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+                                      get_variable(script, SI_ARRAY(3)));
+        N(D_8024EFC8) = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
+                                      get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
-        effectPtr = N(D_8024EFC0)->unk_0C;
+        effectPtr = N(D_8024EFC0)->instanceData;
         effectPtr->unk_18 = 0;
         effectPtr->unk_20 = 0;
         effectPtr->unk_24.s = 0;
@@ -3216,7 +3211,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance *script, s32 isInitialCall) {
         effectPtr->unk_1C = 0;
     }
 
-    effectPtr = N(D_8024EFC0)->unk_0C;
+    effectPtr = N(D_8024EFC0)->instanceData;
 
     effectPtr->unk_20 += 10;
     effectPtr->unk_28 += 10;
@@ -3231,7 +3226,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240C88_969E48)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -3239,7 +3234,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance *script, s32 isInitialCall) {
         N(D_8024EFC8)->flags |= 0x10;
     }
 
-    effectPtr = N(D_8024EFC0)->unk_0C;
+    effectPtr = N(D_8024EFC0)->instanceData;
     effectPtr->unk_18 -= 10;
     effectPtr->unk_20 -= 10;
     effectPtr->unk_24.s -= 10;
@@ -3249,21 +3244,21 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(N(D_8024EFC0), effectPtr);
-        free_dynamic_entity(gPauseMenuCursorPosY);
+        free_generic_entity(gPauseMenuCursorPosY);
         return ApiStatus_DONE2;
     }
 
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240D3C_969EFC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240D3C_969EFC)(ScriptInstance* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC0))->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240D70_969F30)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240D70_969F30)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->unk_0C;
+    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->instanceData;
 
     switch (var) {
         case 0:
@@ -3283,17 +3278,17 @@ ApiStatus N(func_80240D70_969F30)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240DF0_969FB0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240DF0_969FB0)(ScriptInstance* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240E08_969FC8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240E08_969FC8)(ScriptInstance* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240E24_969FE4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240E24_969FE4)(ScriptInstance* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 2;
     return ApiStatus_DONE2;
 }
@@ -3314,18 +3309,18 @@ void N(func_802412F8_96A4B8)(void) {
     s32 var = get_variable(NULL, N(D_8024EFB8));
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 
-ApiStatus N(func_80241364_96A524)(ScriptInstance *script, s32 isInitialCall) {
-    gPauseMenuCursorPosY = create_dynamic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
+ApiStatus N(func_80241364_96A524)(ScriptInstance* script, s32 isInitialCall) {
+    gPauseMenuCursorPosY = create_generic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241394_96A554)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241394_96A554)(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
@@ -3361,11 +3356,11 @@ ApiStatus N(func_80241394_96A554)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802414C0_96A680)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802414C0_96A680)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
 
@@ -3387,7 +3382,7 @@ ApiStatus N(func_802414C0_96A680)(ScriptInstance *script, s32 isInitialCall) {
     return (script->functionTemp[0].s == 255) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802415CC_96A78C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
@@ -3404,7 +3399,7 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance *script, s32 isInitialCall) {
     if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
         script->functionTemp[1].s = 1;
     } else if (script->functionTemp[1].s == 1) {
-        func_8011D82C(0);
+        mdl_set_all_fog_mode(0);
         *D_801512F0 = 0;
         for (i = 0; i < 64; i++) {
             Npc* npc = get_npc_by_index(i);
@@ -3418,7 +3413,7 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802416FC_96A8BC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802416FC_96A8BC)(ScriptInstance* script, s32 isInitialCall) {
     s32 ret;
 
     N(D_8024EFCC) = script;
@@ -3436,22 +3431,22 @@ ApiStatus N(func_802416FC_96A8BC)(ScriptInstance *script, s32 isInitialCall) {
     func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
     set_variable(script, SI_ARRAY(3), ret);
 
-    set_variable(script, SI_ARRAY(7), create_dynamic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
+    set_variable(script, SI_ARRAY(7), create_generic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241874_96AA34)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241874_96AA34)(ScriptInstance* script, s32 isInitialCall) {
     func_8013A854(get_variable(script, SI_ARRAY(0)));
     func_8013A854(get_variable(script, SI_ARRAY(1)));
     func_8013A854(get_variable(script, SI_ARRAY(2)));
     func_8013A854(get_variable(script, SI_ARRAY(3)));
-    free_dynamic_entity(get_variable(script, SI_ARRAY(7)));
+    free_generic_entity(get_variable(script, SI_ARRAY(7)));
     return ApiStatus_DONE2;
 }
 
 //#define NON_MATCHING
 #ifdef NON_MATCHING
-s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
+s32 dro_02_func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
     Matrix4f subroutine_arg6;
     Matrix4f subroutine_arg16;
     s32 subroutine_arg26;
@@ -3482,24 +3477,27 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         }
 
         if ((ptr->unk_00 == 1) || (ptr->unk_00 == 5)) {
-            func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
+            spr_get_player_raster_info(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
 
             gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
             gDPLoadTLUT_pal16(gMasterGfxPos++, 0, 0xFFFFFFFF);
             gDPTileSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 0x0100, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP,
+                       G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPLoadSync(gMasterGfxPos++);
             gDPLoadTLUTCmd(gMasterGfxPos++, G_TX_LOADTILE, 15);
             gDPPipeSync(gMasterGfxPos++);
 
             gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, subroutine_arg2E, subroutine_arg2C);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 0, subroutine_arg2E, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 0, subroutine_arg2E, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+                       8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
 
             gDPLoadSync(gMasterGfxPos++);
             gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
 
             gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, subroutine_arg2E, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 0, subroutine_arg2E, G_TX_RENDERTILE, 0,
+                       G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
             gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, subroutine_arg2E, subroutine_arg2F);
 
             guTranslateF(&subroutine_arg6, ptr->unk_20 - (subroutine_arg2E / 2) - 30, 0.0f, 0.0f);
@@ -3551,8 +3549,9 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gMatrixListPos++;
 
-        func_802DE044(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
-        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E, subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
+        spr_get_player_raster_info(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
+        func_8013AF70(get_variable(N(D_8024EFCC), SI_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E,
+                      subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
 
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
     }
@@ -3562,14 +3561,15 @@ s32 func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
 INCLUDE_ASM(u32, "world/area_dro/dro_02/9694C0", dro_02_func_8024190C_96AACC, D_8024F010_Struct* ptr, Matrix4f matrix);
 #endif
 
-void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
+void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4) {
     s32* CC_ptr = &N(D_8024EFCC);
     D_8024F010_Struct* F010_ptr;
     Matrix4f sp20;
     Matrix4f sp60;
     Matrix4f spA0;
 
-    guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
+    guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)),
+                get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
 
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
@@ -3586,7 +3586,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg
 
 // Too much work, maybe try again later
 #ifdef NON_MATCHING
-void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
+void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
     N(temp)** effect;
     N(temp)** effect2;
     N(temp)** effect3;
@@ -3736,7 +3736,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(0, &subroutine_arg6, &subroutine_arg7, &subroutine_arg8, &subroutine_arg9);
-                func_8006FEF0(0, subroutine_arg6, subroutine_arg7 + 20.0f, subroutine_arg8, 30.0f);
+                playFX_11(0, subroutine_arg6, subroutine_arg7 + 20.0f, subroutine_arg8, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3752,7 +3752,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(2, &subroutine_argA, &subroutine_argB, &subroutine_argC, &subroutine_argD);
-                func_8006FEF0(0, subroutine_argA, subroutine_argB + 20.0f, subroutine_argC, 30.0f);
+                playFX_11(0, subroutine_argA, subroutine_argB + 20.0f, subroutine_argC, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3768,7 +3768,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 8) {
                 N(func_80242214_96B3D4)(1, &subroutine_argE, &subroutine_argF, &subroutine_arg10, &subroutine_arg11);
-                func_8006FEF0(0, subroutine_argE, subroutine_argF + 20.0f, subroutine_arg10, 30.0f);
+                playFX_11(0, subroutine_argE, subroutine_argF + 20.0f, subroutine_arg10, 30.0f);
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
@@ -3834,7 +3834,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
 
             effect = &N(D_8024EF90);
             for (i = 0; i < 4; i++) {
-                (*effect) = func_800720B0(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
+                (*effect) = playFX_6B(2, subroutine_arg12, subroutine_arg13 + 20.0f, subroutine_arg14, 8.0f, -1);
 
                 (*effect)->unk_0C->unk_28 = 0xD7;
                 (*effect)->unk_0C->unk_2C = 0x37;
@@ -3882,7 +3882,7 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
                 N(D_8024F010)[0].unk_00 = 0;
                 N(D_8024F010)[1].unk_00 = 0;
                 N(func_80242214_96B3D4)(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
-                func_8006FEF0(0, subroutine_arg1A, subroutine_arg1B + 20.0f, subroutine_arg1C, 30.0f);
+                playFX_11(0, subroutine_arg1A, subroutine_arg1B + 20.0f, subroutine_arg1C, 30.0f);
                 sfx_play_sound(0x206);
                 for (x = 0; x < 4; x++) {
                     N(D_8024EF90)[x]->flags |= 0x10;
@@ -3896,18 +3896,20 @@ void func_8024240C_96B5CC(ScriptInstance *script, s32 isInitialCall) {
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, ScriptInstance *script, s32 isInitialCall);
+INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, ScriptInstance* script,
+            s32 isInitialCall);
 #endif
 
-void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
+void N(func_80242EAC_96C06C)(ScriptInstance* script, s32 isInitialCall) {
     Matrix4f sp20;
     u32 temp_s1;
 
-    guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
+    guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC),
+                SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
 
-    temp_s1 = func_8024190C_96AACC(&N(D_8024F010)[0], &sp20);
-    func_8024190C_96AACC(&N(D_8024F010)[1], &sp20);
-    func_8024190C_96AACC(&N(D_8024F010)[2], &sp20);
+    temp_s1 = N(func_8024190C_96AACC)(&N(D_8024F010)[0], &sp20);
+    N(func_8024190C_96AACC)(&N(D_8024F010)[1], &sp20);
+    N(func_8024190C_96AACC)(&N(D_8024F010)[2], &sp20);
     if ((N(D_8024F010)[0].unk_00 == 2) && ((temp_s1 - 1) < 2)) {
         set_variable(N(D_8024EFCC), SI_ARRAY(9), 3);
     }
@@ -3916,12 +3918,12 @@ void N(func_80242EAC_96C06C)(ScriptInstance *script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(func_8024303C_96C1FC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024303C_96C1FC)(ScriptInstance* script, s32 isInitialCall) {
     sfx_play_sound_with_params(0x202A, 0, 0x18, 0);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243068_96C228)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80243068_96C228)(ScriptInstance* script, s32 isInitialCall) {
     sfx_play_sound_with_params(0x202B, 0, 0x68, 0);
     return ApiStatus_DONE2;
 }
@@ -4016,15 +4018,15 @@ ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkYawFunc.inc.c"
 
-ApiStatus N(func_802439FC_96CBBC)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_unsafe(script->varTable[2]);
+ApiStatus N(func_802439FC_96CBBC)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_unsafe(script->varTable[2]);
 
-    N(D_8024F3B8) = npc->currentAnim;
-    npc->currentAnim = script->varTable[4];
+    N(D_8024F3B8) = npc->currentAnim.w;
+    npc->currentAnim.w = script->varTable[4];
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243A40_96CC00)(ScriptInstance *script, s32 isInitialCall) {
-    get_npc_unsafe(script->varTable[2])->currentAnim = N(D_8024F3B8);
+ApiStatus N(func_80243A40_96CC00)(ScriptInstance* script, s32 isInitialCall) {
+    get_npc_unsafe(script->varTable[2])->currentAnim.w = N(D_8024F3B8);
     return ApiStatus_DONE2;
 }

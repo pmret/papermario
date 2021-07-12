@@ -28,7 +28,7 @@ glabel collision_main_above
 /* 7BCEC 800E283C 46140000 */  add.s     $f0, $f0, $f20
 /* 7BCF0 800E2840 E7A20028 */  swc1      $f2, 0x28($sp)
 /* 7BCF4 800E2844 E7B4002C */  swc1      $f20, 0x2c($sp)
-/* 7BCF8 800E2848 0C0388C1 */  jal       input_to_move_vector
+/* 7BCF8 800E2848 0C0388C1 */  jal       player_input_to_move_vector
 /* 7BCFC 800E284C E7A00024 */   swc1     $f0, 0x24($sp)
 /* 7BD00 800E2850 C7A2001C */  lwc1      $f2, 0x1c($sp)
 /* 7BD04 800E2854 44800000 */  mtc1      $zero, $f0
@@ -66,7 +66,7 @@ glabel collision_main_above
 /* 7BD7C 800E28CC 27A70028 */  addiu     $a3, $sp, 0x28
 /* 7BD80 800E28D0 E7A20018 */  swc1      $f2, 0x18($sp)
 /* 7BD84 800E28D4 AFA20010 */  sw        $v0, 0x10($sp)
-/* 7BD88 800E28D8 0C0379F9 */  jal       collision_check_above
+/* 7BD88 800E28D8 0C0379F9 */  jal       player_raycast_up_corners
 /* 7BD8C 800E28DC E7A20014 */   swc1     $f2, 0x14($sp)
 /* 7BD90 800E28E0 0040802D */  daddu     $s0, $v0, $zero
 /* 7BD94 800E28E4 06000030 */  bltz      $s0, .L800E29A8

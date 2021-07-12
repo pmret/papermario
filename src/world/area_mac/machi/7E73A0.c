@@ -1,5 +1,11 @@
 #include "machi.h"
 
+static char* N(exit_str_0) = "kmr_09";
+static char* N(exit_str_1) = "nok_10";
+static char* N(exit_str_2) = "iwa_00";
+static char* N(exit_str_3) = "tst_01";
+static char* N(exit_str_4) = "jan_00";
+
 INCLUDE_ASM(s32, "world/area_mac/machi/7E73A0", func_80240000_7E73A0);
 
 #include "world/common/UnkFunc36.inc.c"

@@ -52,7 +52,7 @@ glabel func_80241778_E06AD8
 /* E06B94 80241834 8E050008 */  lw        $a1, 8($s0)
 /* E06B98 80241838 8E060000 */  lw        $a2, ($s0)
 /* E06B9C 8024183C 8E07000C */  lw        $a3, 0xc($s0)
-/* E06BA0 80241840 0C04BA38 */  jal       func_8012E8E0
+/* E06BA0 80241840 0C04BA38 */  jal       msg_get_glyph
 /* E06BA4 80241844 46000606 */   mov.s    $f24, $f0
 /* E06BA8 80241848 93A20042 */  lbu       $v0, 0x42($sp)
 /* E06BAC 8024184C 3C013FE0 */  lui       $at, 0x3fe0

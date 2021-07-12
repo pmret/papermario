@@ -26,7 +26,7 @@ glabel func_80240010_8FF680
 /* 8FF6D0 80240060 0000382D */  daddu     $a3, $zero, $zero
 /* 8FF6D4 80240064 E7B40010 */  swc1      $f20, 0x10($sp)
 /* 8FF6D8 80240068 AFA00014 */  sw        $zero, 0x14($sp)
-/* 8FF6DC 8024006C 0C01C97C */  jal       func_800725F0
+/* 8FF6DC 8024006C 0C01C97C */  jal       playFX_79
 /* 8FF6E0 80240070 00A0302D */   daddu    $a2, $a1, $zero
 /* 8FF6E4 80240074 3C018025 */  lui       $at, %hi(D_802483C0)
 /* 8FF6E8 80240078 AC2283C0 */  sw        $v0, %lo(D_802483C0)($at)

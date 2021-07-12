@@ -17,6 +17,8 @@ CFLAGS          = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -W
 CFLAGS_NUSYS    = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 CFLAGS_LIBULTRA = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 
+ASFLAGS = "-EB -G 0"
+
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
@@ -58,11 +60,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     cross = "mips-linux-gnu-"
 
+    cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
+    nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
+
     ninja.variable("python", sys.executable)
 
     ninja.rule("ld",
         description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -T ver/$version/main_bss_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
     ninja.rule("z64",
@@ -70,41 +75,35 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         command=f"{cross}objcopy $in $out -O binary && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
-    if DO_SHA1_CHECK:
-        ninja.rule("sha1sum",
-            description="check $in",
-            command=f"sha1sum -c $in && touch $out",
-        )
-    else:
-        ninja.rule("sha1sum",
-            description="check $in",
-            command=f"touch $out",
-        )
+    ninja.rule("sha1sum",
+        description="check $in",
+        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+    )
 
     ninja.rule("cc",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_nusys",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_NUSYS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_NUSYS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_libultra",
         description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS_LIBULTRA} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_LIBULTRA} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {BUILD_TOOLS}/{os_dir}/cc1 {CFLAGS} -o - | {BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as -EB -G 0 - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -127,6 +126,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     ninja.rule("img_header",
         description="img_header $in",
         command=f"$python {BUILD_TOOLS}/img/header.py $in $out",
+    )
+
+    ninja.rule("bin_inc_c",
+        description="bin_inc_c $out",
+        command=f"$python {BUILD_TOOLS}/bin_inc_c.py $in $out",
     )
 
     ninja.rule("yay0",
@@ -162,6 +166,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     ninja.rule("mapfs",
         description="mapfs $out",
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
+    )
+
+    ninja.rule("pack_title_data",
+        description="pack_title_data $out",
+        command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
     )
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
@@ -265,7 +274,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif object_path.suffixes[-1] == ".h":
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -313,6 +322,38 @@ class Configure:
                             task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)
+
+                # images embedded inside data aren't linked, but they do need to be built into .inc.c files
+                if isinstance(seg, segtypes.n64.group.N64SegGroup):
+                    for seg in seg.subsegments:
+                        if isinstance(seg, segtypes.n64.img.N64SegImg):
+                            flags = ""
+                            if seg.flip_horizontal:
+                                flags += "--flip-x "
+                            if seg.flip_vertical:
+                                flags += "--flip-y "
+
+                            src_paths = [seg.out_path()]
+                            inc_dir = self.build_path() / "include" / seg.dir
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".png.bin")
+
+                            build(bin_path, src_paths, "img", variables={
+                                "img_type": seg.type,
+                                "img_flags": flags,
+                            })
+
+                            build(inc_dir / (seg.name + ".png.h"), src_paths, "img_header")
+                            build(inc_dir / (seg.name + ".png.inc.c"), [bin_path], "bin_inc_c")
+                        elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
+                            src_paths = [seg.out_path()]
+                            inc_dir = self.build_path() / "include" / seg.dir
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
+
+                            build(bin_path, src_paths, "img", variables={
+                                "img_type": seg.type,
+                                "img_flags": "",
+                            })
+                            build(inc_dir / (seg.name + ".pal.inc.c"), [bin_path], "bin_inc_c")
             elif isinstance(seg, segtypes.n64.bin.N64SegBin):
                 build(entry.object_path, entry.src_paths, "bin")
             elif isinstance(seg, segtypes.n64.Yay0.N64SegYay0):
@@ -326,19 +367,24 @@ class Configure:
                 if seg.flip_vertical:
                     flags += "--flip-y "
 
-                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
+                bin_path = entry.object_path.with_suffix(".bin")
+                inc_dir = self.build_path() / "include" / seg.dir
+
+                build(bin_path, entry.src_paths, "img", variables={
                     "img_type": seg.type,
                     "img_flags": flags,
                 })
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(entry.object_path, [bin_path], "bin")
 
-                build(self.build_path() / "include" / seg.dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
+                build(inc_dir / (seg.name + ".png.h"), entry.src_paths, "img_header")
             elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
-                build(entry.object_path.with_suffix(".bin"), entry.src_paths, "img", variables={
+                bin_path = entry.object_path.with_suffix(".bin")
+
+                build(bin_path, entry.src_paths, "img", variables={
                     "img_type": seg.type,
                     "img_flags": "",
                 })
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(entry.object_path, [bin_path], "bin")
             elif seg.type == "PaperMarioNpcSprites":
                 sprite_yay0s = []
 
@@ -381,19 +427,48 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "PaperMarioMapFS":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
+                src_dir = Path("assets/x") / seg.name
 
                 for path in entry.src_paths:
                     name = path.stem
-                    bin_path = entry.object_path.with_suffix("").with_suffix("") / f"{name}.bin"
+                    out_dir = entry.object_path.with_suffix("").with_suffix("")
+                    bin_path = out_dir / f"{name}.bin"
 
                     if name.startswith("party_"):
                         compress = True
+                        yay0_path = bin_path.with_suffix(".Yay0")
                         build(bin_path, [path], "img", variables={
                             "img_type": "party",
                             "img_flags": "",
                         })
+                    elif name == "title_data":
+                        compress = True
+
+                        logotype_path = out_dir / "title_logotype.bin"
+                        copyright_path = out_dir / "title_copyright.bin"
+                        press_start_path = out_dir / "title_press_start.bin"
+
+                        build(logotype_path, [src_dir / "title/logotype.png"], "img", variables={
+                            "img_type": "rgba32",
+                            "img_flags": "",
+                        })
+                        build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                            "img_type": "ia8",
+                            "img_flags": "",
+                        })
+                        build(press_start_path, [src_dir / "title/press_start.png"], "img", variables={
+                            "img_type": "ia8",
+                            "img_flags": "",
+                        })
+
+                        build(bin_path, [
+                            logotype_path,
+                            copyright_path,
+                            press_start_path,
+                        ], "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
+                        bin_path = self.build_path() / bin_path
                         build(bin_path, [path], "img", variables={
                             "img_type": "bg",
                             "img_flags": "",
@@ -493,7 +568,7 @@ if __name__ == "__main__":
         print("error: system C preprocessor is not GNU!")
         print("This is a known issue on macOS - only clang's cpp is installed by default.")
         print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-        print("    ./configure --cpp cpp-10")
+        print("    ./configure --cpp cpp-11")
         exit(1)
 
     # default version behaviour is to only do those that exist

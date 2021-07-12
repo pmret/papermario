@@ -33,7 +33,7 @@ glabel func_8025D3CC
 /* 18BD18 8025D438 8C850058 */  lw        $a1, 0x58($a0)
 /* 18BD1C 8025D43C 8C870060 */  lw        $a3, 0x60($a0)
 /* 18BD20 8025D440 44061000 */  mfc1      $a2, $f2
-/* 18BD24 8025D444 0C01C28C */  jal       func_80070A30
+/* 18BD24 8025D444 0C01C28C */  jal       playFX_2F
 /* 18BD28 8025D448 0000202D */   daddu    $a0, $zero, $zero
 /* 18BD2C 8025D44C 24020001 */  addiu     $v0, $zero, 1
 /* 18BD30 8025D450 08097524 */  j         .L8025D490

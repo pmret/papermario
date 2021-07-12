@@ -57,13 +57,13 @@ glabel func_80049C04
 /* 250D4 80049CD4 46800020 */  cvt.s.w   $f0, $f0
 /* 250D8 80049CD8 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 250DC 80049CDC 8E040080 */  lw        $a0, 0x80($s0)
-/* 250E0 80049CE0 0C037711 */  jal       func_800DDC44
+/* 250E0 80049CE0 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 250E4 80049CE4 27A70030 */   addiu    $a3, $sp, 0x30
 /* 250E8 80049CE8 14400025 */  bnez      $v0, .L80049D80
 /* 250EC 80049CEC 0200202D */   daddu    $a0, $s0, $zero
 /* 250F0 80049CF0 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* 250F4 80049CF4 3C060020 */  lui       $a2, 0x20
-/* 250F8 80049CF8 0C012530 */  jal       func_800494C0
+/* 250F8 80049CF8 0C012530 */  jal       ai_enemy_play_sound
 /* 250FC 80049CFC E614000C */   swc1     $f20, 0xc($s0)
 /* 25100 80049D00 0000202D */  daddu     $a0, $zero, $zero
 /* 25104 80049D04 0200282D */  daddu     $a1, $s0, $zero

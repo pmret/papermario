@@ -11,7 +11,7 @@ glabel func_80242500_DF8F00
 /* DF8F18 80242518 AFBF0014 */  sw        $ra, 0x14($sp)
 /* DF8F1C 8024251C 3C018025 */  lui       $at, %hi(D_8024F7E4)
 /* DF8F20 80242520 AC30F7E4 */  sw        $s0, %lo(D_8024F7E4)($at)
-/* DF8F24 80242524 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* DF8F24 80242524 0C048C8F */  jal       create_generic_entity_frontUI
 /* DF8F28 80242528 0000202D */   daddu    $a0, $zero, $zero
 /* DF8F2C 8024252C 2404001F */  addiu     $a0, $zero, 0x1f
 /* DF8F30 80242530 26030E0C */  addiu     $v1, $s0, 0xe0c

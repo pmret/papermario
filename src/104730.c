@@ -1,6 +1,6 @@
 #include "common.h"
 
-void func_802E2EB0(Entity* entity);
+void entity_shattering_block_init(Entity* entity);
 
 extern UNK_TYPE D_802E9170;
 extern UNK_TYPE D_802E91F0;
@@ -103,19 +103,19 @@ s32 D_802E9898[9] = {
 };
 
 s32 D_802E98BC[8] = {
-    0x00200000, (s32) &D_802E9850, 0x00000000, (s32)create_shadow_callback,
+    0x00200000, (s32) &D_802E9850, 0x00000000, (s32)entity_Shadow_init,
     0x00000000, 0x00000000, 0x00000000, 0x00000000
 };
 
 s32 D_802E98DC[9] = {
     0x01190A19, 0x00200000, (s32) &D_802E9874, 0x00000000,
-    (s32)create_shadow_callback, 0x00000000, 0x00000000, 0x00000000,
+    (s32)entity_Shadow_init, 0x00000000, 0x00000000, 0x00000000,
     0x00000000
 };
 
 s32 D_802E9900[9] = {
     0x01190A19, 0x00200000, (s32) &D_802E9898, 0x00000000,
-    (s32)create_shadow_callback, 0x00000000, 0x00000000, 0x00000000,
+    (s32)entity_Shadow_init, 0x00000000, 0x00000000, 0x00000000,
     0x00000000,
 };
 
@@ -124,18 +124,18 @@ s32 D_802E9924[3] = {
 };
 
 s32 D_802E9930[51] = {
-    0x00000003, 0x00000000, (s32)func_802E10F4, 0x00000009,
-    0x0000014E, 0x00000002, (s32)func_802E114C, 0x00000002,
-    (s32)func_802E31EC, 0x00000003, 0x00000006, (s32)func_802E328C,
+    0x00000003, 0x00000000, (s32)entity_SaveBlock_idle, 0x00000009,
+    0x0000014E, 0x00000002, (s32)entity_SaveBlock_pause_game, 0x00000002,
+    (s32)entity_block_hit_init_scale, 0x00000003, 0x00000006, (s32)entity_block_hit_animate_scale,
     0x00000003, 0x00000002, 0x00000000, 0x00000002,
-    (s32)func_802E1204, 0x00000003, 0x00000000, (s32)func_802E1270,
+    (s32)entity_SaveBlock_show_tutorial_message, 0x00000003, 0x00000000, (s32)entity_SaveBlock_wait_for_close_tutorial,
     0x00000003, 0x0000000E, 0x00000000, 0x00000002,
-    (s32)func_802E1298, 0x00000003, 0x00000000, (s32)func_802E1350,
-    0x00000002, (s32)save_game_at_player_position, 0x00000002, (s32)func_802E12F8,
-    0x00000003, 0x00000000, (s32)func_802E1328, 0x00000002,
-    (s32)func_802E117C, 0x00000003, 0x0000000C, 0x00000000,
+    (s32)entity_SaveBlock_show_choice_message, 0x00000003, 0x00000000, (s32)entity_SaveBlock_wait_for_close_choice,
+    0x00000002, (s32)entity_SaveBlock_save_data, 0x00000002, (s32)entity_SaveBlock_show_result_message,
+    0x00000003, 0x00000000, (s32)entity_SaveBlock_wait_for_close_result, 0x00000002,
+    (s32)entity_SaveBlock_resume_game, 0x00000003, 0x0000000C, 0x00000000,
     0x00000004, 0x00000000, 0x00000000, 0x00000002,
-    (s32)func_802E117C, 0x00000003, 0x00000002, 0x00000000,
+    (s32)entity_SaveBlock_resume_game, 0x00000003, 0x00000002, 0x00000000,
     0x00000001, (s32)D_802E9930, 0x00000000,
 };
 
@@ -145,7 +145,7 @@ s32 D_802E99FC[7] = {
     &D_0A003508, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9A18 = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, func_802E13B8, &D_802E9930, func_802E3BA4, &D_00E4B2E0, &D_00E4E7F0, 32, {0x19, 0x19, 0x19}};
+StaticEntityData D_802E9A18 = { 0x4200, 0x0020, &D_802E99FC, {0, 0, 0, 0}, entity_SaveBlock_init, &D_802E9930, entity_block_handle_collision, &D_00E4B2E0, &D_00E4E7F0, 32, {0x19, 0x19, 0x19}};
 
 // potential file split(?)
 s32 D_802E9A3C[1] = {
@@ -153,32 +153,32 @@ s32 D_802E9A3C[1] = {
 };
 
 s32 D_802E9A40[18] = {
-    0x00000003, 0x00000000, (s32)func_802E1660, 0x00000009,
-    0x00000152, 0x00000002, (s32)func_802E1EA8, 0x00000002,
-    (s32)func_802E176C, 0x00000003, 0x00000000, (s32)func_802E17A8,
-    0x00000003, 0x00000000, (s32)func_802E1740, 0x00000004,
+    0x00000003, 0x00000000, (s32)entity_small_switch_idle, 0x00000009,
+    0x00000152, 0x00000002, (s32)entity_base_switch_start_bound_script, 0x00000002,
+    (s32)entity_base_switch_anim_init, 0x00000003, 0x00000000, (s32)entity_RedSwitch_animate_scale,
+    0x00000003, 0x00000000, (s32)entity_RedSwitch_wait_and_reset, 0x00000004,
     0x00000000, 0x00000000,
 };
 
 s32 D_802E9A88[15] = {
-    0x00000003, 0x00000000, (s32)func_802E1614, 0x00000009,
-    0x00000152, 0x00000002, (s32)func_802E1EA8, 0x00000002,
-    (s32)func_802E176C, 0x00000003, 0x00000000, (s32)func_802E1EDC,
+    0x00000003, 0x00000000, (s32)entity_HugeBlueSwitch_idle, 0x00000009,
+    0x00000152, 0x00000002, (s32)entity_base_switch_start_bound_script, 0x00000002,
+    (s32)entity_base_switch_anim_init, 0x00000003, 0x00000000, (s32)entity_base_switch_animate_scale,
     0x00000007, 0x20000000, 0x00000000
 };
 
 s32 D_802E9AC4[15] = {
-    0x00000003, 0x00000000, (s32)func_802E1660, 0x00000009,
-    0x00000152, 0x00000002, (s32)func_802E1EA8, 0x00000002,
-    (s32)func_802E176C, 0x00000003, 0x00000000, (s32)func_802E1EDC,
+    0x00000003, 0x00000000, (s32)entity_small_switch_idle, 0x00000009,
+    0x00000152, 0x00000002, (s32)entity_base_switch_start_bound_script, 0x00000002,
+    (s32)entity_base_switch_anim_init, 0x00000003, 0x00000000, (s32)entity_base_switch_animate_scale,
     0x00000007, 0x20000000, 0x00000000
 };
 
 s32 D_802E9B00[16] = {
-    0x00000003, 0x00000000, (s32)func_802E1400, 0x00000003,
-    0x00000000, (s32)func_802E1460, 0x00000009, 0x00000152,
+    0x00000003, 0x00000000, (s32)entity_GreenStompSwitch_idle, 0x00000003,
+    0x00000000, (s32)entity_GreenStompSwitch_retract, 0x00000009, 0x00000152,
     0x00000003, 0x00000080, 0x00000000, 0x00000003,
-    0x00000000, (s32)func_802E14D8, 0x00000004, 0x00000000,
+    0x00000000, (s32)entity_GreenStompSwitch_extend, 0x00000004, 0x00000000,
 };
 
 s32 D_802E9B40[7] = {
@@ -201,14 +201,14 @@ s32 D_802E9B94[7] = {
     (s32) &D_0A000740, 0x00000002, 0x00000000,
 };
 
-StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, func_802E234C,              &D_802E9A40, NULL, &D_00E62AC0, &D_00E639C0,  8, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_init_BlueSwitch,     &D_802E9AC4, NULL, &D_00E639C0, &D_00E648D0,  7, {0x16, 0x17, 0x16} };
-StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_init_HugeBlueSwitch, &D_802E9A88, NULL, &D_00E639C0, &D_00E648D0,  9, {0x42, 0x4B, 0x42} };
-StaticEntityData D_802E9C1C = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, func_802E234C,              &D_802E9B00, NULL, &D_00E62370, &D_00E62AC0, 10, {0x32, 0x0F, 0x32} };
+StaticEntityData D_802E9BB0 = { 0xA000, 0x002C, &D_802E9B78, {0, 0, 0, 0}, entity_base_switch_init,              &D_802E9A40, NULL, &D_00E62AC0, &D_00E639C0,  8, {0x16, 0x17, 0x16} };
+StaticEntityData D_802E9BD4 = { 0xAA04, 0x002C, &D_802E9B40, {0, 0, 0, 0}, entity_BlueSwitch_init,     &D_802E9AC4, NULL, &D_00E639C0, &D_00E648D0,  7, {0x16, 0x17, 0x16} };
+StaticEntityData D_802E9BF8 = { 0xAA04, 0x002C, &D_802E9B5C, {0, 0, 0, 0}, entity_HugeBlueSwitch_init, &D_802E9A88, NULL, &D_00E639C0, &D_00E648D0,  9, {0x42, 0x4B, 0x42} };
+StaticEntityData D_802E9C1C = { 0xC000, 0x002C, &D_802E9B94, {0, 0, 0, 0}, entity_base_switch_init,              &D_802E9B00, NULL, &D_00E62370, &D_00E62AC0, 10, {0x32, 0x0F, 0x32} };
 
 s32 D_802E9C40[12] = {
     0x00000007, 0x00000020, 0x00000003, 0x00000000,
-    func_802E263C, 0x00000007, 0x00000001, 0x00000007,
+    entity_shattering_idle, 0x00000007, 0x00000001, 0x00000007,
     0x20000000, 0x00000000, 0x00000000, 0x00000000
 };
 
@@ -224,15 +224,15 @@ extern UNK_TYPE D_00E3B870;
 extern UNK_TYPE D_00E3E260;
 extern UNK_TYPE D_00E42240;
 
-StaticEntityData D_802E9C8C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 21, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CB0 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 22, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CD4 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 23, {0x10, 0x10, 0x10}};
-StaticEntityData D_802E9CF8 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 24, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D1C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 25, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D40 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 26, {0x08, 0x08, 0x08}};
-StaticEntityData D_802E9D64 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, func_802E2EB0, &D_802E9C40, NULL, &D_00E3E260, &D_00E42240, 13, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9C8C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 21, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CB0 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 22, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CD4 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 23, {0x10, 0x10, 0x10}};
+StaticEntityData D_802E9CF8 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E32420, &D_00E35670, 24, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D1C = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E35670, &D_00E38890, 25, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D40 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E38890, &D_00E3B870, 26, {0x08, 0x08, 0x08}};
+StaticEntityData D_802E9D64 = { 0x0000, 0x0250, &D_802E9C70, {0, 0, 0, 0}, entity_shattering_block_init, &D_802E9C40, NULL, &D_00E3E260, &D_00E42240, 13, {0x08, 0x08, 0x08}};
 
-void func_802E2EB0(Entity* entity) {
+void entity_shattering_block_init(Entity* entity) {
     u32 type;
     void* a2 = NULL;
     void* a1 = NULL;
@@ -280,10 +280,10 @@ void func_802E2EB0(Entity* entity) {
         return;
     }
 
-    func_802E246C(entity, a1, a2);
+    entity_shattering_init_pieces(entity, a1, a2);
 }
 
-void func_802E2FD0(Entity* entity) {
+void entity_breakable_block_create_shattering_entity(Entity* entity) {
     u32 type;
     StaticEntityData* addr = NULL;
 

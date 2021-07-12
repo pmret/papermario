@@ -20,12 +20,12 @@ glabel func_802403F0_AD62C0
 .L80240428:
 /* AD62F8 80240428 240500A0 */  addiu     $a1, $zero, 0xa0
 /* AD62FC 8024042C 00A0302D */  daddu     $a2, $a1, $zero
-/* AD6300 80240430 0C04DF84 */  jal       set_transition_stencil_color
+/* AD6300 80240430 0C04DF84 */  jal       set_screen_overlay_color
 /* AD6304 80240434 00A0382D */   daddu    $a3, $a1, $zero
 /* AD6308 80240438 C6000074 */  lwc1      $f0, 0x74($s0)
 /* AD630C 8024043C 46800020 */  cvt.s.w   $f0, $f0
 /* AD6310 80240440 44050000 */  mfc1      $a1, $f0
-/* AD6314 80240444 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* AD6314 80240444 0C04DF62 */  jal       set_screen_overlay_params_front
 /* AD6318 80240448 24040001 */   addiu    $a0, $zero, 1
 /* AD631C 8024044C 8E020074 */  lw        $v0, 0x74($s0)
 /* AD6320 80240450 8FBF0014 */  lw        $ra, 0x14($sp)

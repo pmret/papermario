@@ -66,9 +66,9 @@ glabel func_802401D0_E12930
 /* E12A1C 802402BC 8E300004 */  lw        $s0, 4($s1)
 /* E12A20 802402C0 8E250014 */  lw        $a1, 0x14($s1)
 /* E12A24 802402C4 0200202D */  daddu     $a0, $s0, $zero
-/* E12A28 802402C8 0C051261 */  jal       set_icon_render_pos
+/* E12A28 802402C8 0C051261 */  jal       set_hud_element_render_pos
 /* E12A2C 802402CC 24A5000F */   addiu    $a1, $a1, 0xf
-/* E12A30 802402D0 0C0511EA */  jal       draw_icon_0
+/* E12A30 802402D0 0C0511EA */  jal       draw_hud_element_clipped
 /* E12A34 802402D4 0200202D */   daddu    $a0, $s0, $zero
 /* E12A38 802402D8 8E24000C */  lw        $a0, 0xc($s1)
 /* E12A3C 802402DC 8E230010 */  lw        $v1, 0x10($s1)

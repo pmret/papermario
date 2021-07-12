@@ -67,7 +67,7 @@ glabel func_80241AF0_A6FED0
 /* A6FFC4 80241BE4 1440002C */  bnez      $v0, .L80241C98
 /* A6FFC8 80241BE8 0200202D */   daddu    $a0, $s0, $zero
 /* A6FFCC 80241BEC 240520D4 */  addiu     $a1, $zero, 0x20d4
-/* A6FFD0 80241BF0 0C012530 */  jal       func_800494C0
+/* A6FFD0 80241BF0 0C012530 */  jal       ai_enemy_play_sound
 /* A6FFD4 80241BF4 0000302D */   daddu    $a2, $zero, $zero
 /* A6FFD8 80241BF8 27A4002C */  addiu     $a0, $sp, 0x2c
 /* A6FFDC 80241BFC 27A50030 */  addiu     $a1, $sp, 0x30
@@ -103,7 +103,7 @@ glabel func_80241AF0_A6FED0
 /* A70054 80241C74 44810000 */  mtc1      $at, $f0
 /* A70058 80241C78 2402000D */  addiu     $v0, $zero, 0xd
 /* A7005C 80241C7C AFA20014 */  sw        $v0, 0x14($sp)
-/* A70060 80241C80 0C01BFEC */  jal       func_8006FFB0
+/* A70060 80241C80 0C01BFEC */  jal       playFX_13
 /* A70064 80241C84 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A70068 80241C88 2402000F */  addiu     $v0, $zero, 0xf
 /* A7006C 80241C8C A602008E */  sh        $v0, 0x8e($s0)

@@ -70,7 +70,7 @@ glabel func_802BBD78_E2E6A8
 /* E2E790 802BBE60 44073000 */  mfc1      $a3, $f6
 /* E2E794 802BBE64 0000202D */  daddu     $a0, $zero, $zero
 /* E2E798 802BBE68 AFA20018 */  sw        $v0, 0x18($sp)
-/* E2E79C 802BBE6C 0C01C13C */  jal       func_800704F0
+/* E2E79C 802BBE6C 0C01C13C */  jal       playFX_21
 /* E2E7A0 802BBE70 E7A00014 */   swc1     $f0, 0x14($sp)
 /* E2E7A4 802BBE74 8FBF0024 */  lw        $ra, 0x24($sp)
 /* E2E7A8 802BBE78 8FB00020 */  lw        $s0, 0x20($sp)

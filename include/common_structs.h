@@ -102,7 +102,7 @@ typedef struct BlurBuffer {
     /* 0xA4 */ f32 z[20];
 } BlurBuffer; // size = 0xF4
 
-typedef s32 Palette16[16]; // size = 0x40
+typedef s16 Palette16[16]; // size = 0x20
 
 typedef struct Npc {
     /* 0x000 */ s32 flags;
@@ -115,8 +115,11 @@ typedef struct Npc {
     /* 0x01C */ f32 jumpVelocity;
     /* 0x020 */ struct BlurBuffer* blurBuf; ///< Null unless flag 0x100000 is set.
     /* 0x024 */ s32 spriteInstanceID;
-    /* 0x028 */ u32 currentAnim;
-    /* 0x02C */ char unk_2C[4];
+    /* 0x028 */ union {
+    /*       */   u16 h;
+    /*       */   u32 w;
+    /*       */ } currentAnim;
+    /* 0x02C */ s32 unk_2C;
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
@@ -128,41 +131,50 @@ typedef struct Npc {
     /* 0x078 */ s32 shadowIndex;
     /* 0x07C */ f32 shadowScale;
     /* 0x080 */ s32 unk_80;
-    /* 0x084 */ u16 unk_84;
-    /* 0x086 */ u16 unk_86;
+    /* 0x084 */ s16 unk_84;
+    /* 0x086 */ s16 unk_86;
     /* 0x088 */ s16 isFacingAway;
     /* 0x08A */ s16 yawCamOffset;
     /* 0x08C */ s16 turnAroundYawAdjustment;
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
-    /* 0x096 */ char unk_96[12];
+    /* 0x096 */ s16 unk_96;
+    /* 0x098 */ s16 unk_98;
+    /* 0x09A */ s16 unk_9A;
+    /* 0x09C */ s16 unk_9C;
+    /* 0x09E */ s16 unk_9E;
+    /* 0x0A0 */ s16 unk_A0;
     /* 0x0A2 */ u16 unk_A2;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;
     /* 0x0A8 */ s16 collisionHeight;
-    /* 0x0AA */ u8 renderMode;
+    /* 0x0AA */ s8 renderMode;
     /* 0x0AB */ s8 unk_AB;
     /* 0x0AC */ u8 alpha;
     /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
-    /* 0x0AE */ char unk_AD[2];
+    /* 0x0AE */ char unk_AE[2];
     /* 0x0B0 */ s32** extraAnimList;
     /* 0x0B4 */ s8 unk_B4; // some kind of rendering type, 0..4 inclusive
-    /* 0x0B5 */ char unk_B5[13];
+    /* 0x0B5 */ s8 unk_B5;
+    /* 0x0B6 */ s8 unk_B6;
+    /* 0x0B7 */ s8 unk_B7;
+    /* 0x0B8 */ char unk_B8[8];
+    /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ s8 paletteCount;
     /* 0x0C2 */ char unk_C2[2];
-    /* 0x0C4 */ UNK_PTR spritePaletteList;
+    /* 0x0C4 */ s32* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
-    /* 0x308 */ char unk_308[0x50];
+    /* 0x308 */ char unk_308[16];
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
     /* 0x324 */ struct EffectInstance* decorations[2];
     /* 0x32C */ s8 decorationType[2];
-    /* 0x32E */ s8 changedDecoration;
-    /* 0x32F */ char unk_32F;
+    /* 0x32E */ s8 changedDecoration[2];
     /* 0x330 */ s8 decorationInitialised[2];
-    /* 0x332 */ char unk_332[14];
+    /* 0x332 */ s16 decorationUnk[2];
+    /* 0x336 */ char unk_336[10];
 } Npc; // size = 0x340
 
 typedef Npc* NpcList[MAX_NPCS];
@@ -315,6 +327,10 @@ typedef struct ScriptInstance {
 
 typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
 
+struct Entity;
+
+typedef s32 (*EntityCallback)(struct Entity*);
+
 typedef struct Entity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ u8 listIndex;
@@ -322,7 +338,7 @@ typedef struct Entity {
     /* 0x06 */ u8 collisionFlags;
     /* 0x07 */ s8 unk_07;
     /* 0x08 */ char unk_08;
-    /* 0x09 */ s8 hasEntityScript;
+    /* 0x09 */ u8 hasEntityScript;
     /* 0x0A */ u8 type;
     /* 0x0B */ u8 alpha;
     /* 0x0C */ Vec3s aabb;
@@ -330,8 +346,8 @@ typedef struct Entity {
     /* 0x14 */ s16 virtualModelIndex;
     /* 0x16 */ s16 shadowIndex;
     /* 0x18 */ s32* scriptReadPos;
-    /* 0x1C */ UNK_FUN_PTR(updateScriptCallback);
-    /* 0x20 */ UNK_FUN_PTR(updateMatrixOverride);
+    /* 0x1C */ EntityCallback updateScriptCallback;
+    /* 0x20 */ EntityCallback updateMatrixOverride;
     /* 0x24 */ ScriptInstance* boundScript;
     /* 0x28 */ Bytecode* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
@@ -368,7 +384,7 @@ typedef struct StaticEntityData {
     /* 0x08 */ char unk_08[4];
     /* 0x0C */ UNK_FUN_PTR(unk_data_func);
     /* 0x10 */ UNK_PTR unk_data_ptr1;
-    /* 0x14 */ UNK_PTR unk_data_ptr2;
+    /* 0x14 */ EntityCallback unk_data_ptr2;
     /* 0x18 */ s32 dmaStart;
     /* 0x1C */ s32 dmaEnd;
     /* 0x20 */ u8 entityType;
@@ -392,27 +408,35 @@ typedef struct MusicSettings {
     /* 0x2C */ s32 unk_2C;
 } MusicSettings; // size = 0x30
 
-typedef struct MenuIcon {
-    /* 0x00 */ u32 flags;
-    /* 0x04 */ u32* readPos;
-    /* 0x08 */ u32* startReadPos;
-    /* 0x0C */ u32* ptrPropertyList;
-    /* 0x10 */ u32* imageAddr;
-    /* 0x14 */ u32* paletteAddr;
-    /* 0x18 */ u32 memOffset;
-    /* 0x1C */ char unk_1C[24];
+typedef struct HudElement {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s32* readPos;
+    /* 0x08 */ s32* startReadPos;
+    /* 0x0C */ s32* ptrPropertyList;
+    /* 0x10 */ s32* imageAddr;
+    /* 0x14 */ s32* paletteAddr;
+    /* 0x18 */ s32 memOffset;
+    /* 0x1C */ s32* hudTransform;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unkImgScale[2];
+    /* 0x30 */ f32 uniformScale;
     /* 0x34 */ f32 widthScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
     /* 0x38 */ f32 heightScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
     /* 0x3C */ s16 renderPosX;
     /* 0x3E */ s16 renderPosY;
     /* 0x40 */ u8 screenPosOffset[2];
     /* 0x42 */ u8 worldPosOffset[3];
-    /* 0x45 */ char unk_45[2];
+    /* 0x45 */ s8 drawSizePreset;
+    /* 0x46 */ s8 tileSizePreset;
     /* 0x47 */ u8 updateTimer;
     /* 0x48 */ u8 sizeX; /* screen size? */
     /* 0x49 */ u8 sizeY; /* screen size? */
-    /* 0x4A */ char unk_4A[10];
-} MenuIcon; // size = 0x54
+    /* 0x4A */ u8 opacity;
+    /* 0x4B */ s8 tint[3];
+    /* 0x4E */ s8 customImageSize[2];
+    /* 0x40 */ s8 customDrawSize[2];
+} HudElement; // size = 0x54
 
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndexes[2];
@@ -472,14 +496,27 @@ typedef struct Collider {
     /* 0x0C */ struct ColliderTriangle* triangleTable;
     /* 0x10 */ struct ColliderBoundingBox* aabb;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ f32* vertexTable[3];
+    /* 0x18 */ f32* vertexTable; // 3?
 } Collider; // size = 0x1C
+
+typedef struct CameraInitData {
+    /* 0x00 */ s16 flags;
+    /* 0x02 */ s8 type;
+    /* 0x03 */ char unk_03;
+    /* 0x04 */ s16 viewWidth;
+    /* 0x06 */ s16 viewHeight;
+    /* 0x08 */ s16 viewStartX;
+    /* 0x0A */ s16 viewStartY;
+    /* 0x0C */ s16 nearClip;
+    /* 0x0E */ s16 farClip;
+    /* 0x10 */ s16 vfov;
+} CameraInitData; // size = 0x12;
 
 typedef struct Camera {
     /* 0x000 */ s16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
-    /* 0x006 */ u16 unk_06;
+    /* 0x006 */ s16 unk_06;
     /* 0x008 */ u16 unk_08;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
@@ -497,18 +534,18 @@ typedef struct Camera {
     /* 0x026 */ s16 unk_26;
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
-    /* 0x02C */ s16 backgroundColor[3];
+    /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
-    /* 0x03C */ f32 lookAt_eye[3];
+    /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
     /* 0x054 */ f32 unk_54;
     /* 0x058 */ f32 unk_58;
     /* 0x05C */ f32 unk_5C;
     /* 0x060 */ Vec3f targetPos;
     /* 0x06C */ f32 currentYaw;
-    /* 0x070 */ char unk_70[4];
+    /* 0x070 */ f32 unk_70;
     /* 0x074 */ f32 currentBoomYaw;
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
@@ -516,7 +553,8 @@ typedef struct Camera {
     /* 0x084 */ f32 trueRotation[3];
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
-    /* 0x098 */ char unk_98[8];
+    /* 0x098 */ s32 unk_98;
+    /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
     /* 0x0B0 */ char unk_B0[0x24];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
@@ -712,7 +750,7 @@ typedef struct BattleStatus {
     /* 0x45B */ char unk_45B[5];
     /* 0x460 */ s32 unk_460;
     /* 0x464 */ s32 unk_464;
-    /* 0x468 */ char unk_468[4];
+    /* 0x468 */ s32 unk_468;
     /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
     /* 0x470 */ s32 unk_470;
     /* 0x474 */ s32 unk_474;
@@ -756,41 +794,76 @@ typedef struct StaticMove {
 
 typedef struct CollisionData {
     /* 0x00 */ f32* vertices;
-    /* 0x04 */ Collider* collider_list;
+    /* 0x04 */ Collider* colliderList;
     /* 0x08 */ struct ColliderBoundingBox** aabbs;
     /* 0x0C */ s16 numColliders;
     /* 0x0E */ char unk_0E[2];
 } CollisionData; // size = 0x10
 
+typedef struct ModelGroupData {
+    /* 0x00 */ UNK_PTR transformMatrix;
+    /* 0x04 */ UNK_PTR lightingGroup;
+    /* 0x08 */ s32 numLights;
+    /* 0x0C */ s32 numChildren;
+    /* 0x10 */ struct ModelNode** childList;
+} ModelGroupData; // size = 0x14
+
+typedef struct ModelDisplayData {
+    /* 0x0 */ Gfx* displayList;
+    /* 0x4 */ char unk_00[0x4];
+} ModelDisplayData; // size = 0x8
+
+typedef struct ModelNodeProperty {
+    /* 0x0 */ s32 key;
+    /* 0x4 */ s32 dataType;
+    /* 0x8 */ s32 data;
+} ModelNodeProperty; // size = 0x8;
+
 typedef struct ModelNode {
     /* 0x00 */ s32 type; /* 2 = model */
-    /* 0x04 */ UNK_PTR displayList;
+    /* 0x04 */ ModelDisplayData* displayData;
     /* 0x08 */ s32 numProperties;
-    /* 0x0C */ UNK_PTR propertyList;
+    /* 0x0C */ ModelNodeProperty* propertyList;
     /* 0x10 */ struct ModelGroupData* groupData;
 } ModelNode; // size = 0x14
 
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ s16 modelID;
-    /* 0x04 */ char unk_04[4];
-    /* 0x08 */ struct ModelNode** modelNode;
-    /* 0x0C */ struct ModelGroupData* groupData;
+    /* 0x04 */ Matrix4s* currentMatrix;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ ModelGroupData* groupData;
     /* 0x10 */ s32* currentSpecialMatrix;
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ struct Matrix4s specialMatrix;
+    /* 0x18 */ Matrix4s specialMatrix;
     /* 0x58 */ Matrix4f transformMatrix;
-    /* 0x98 */ f32 center[3];
+    /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 specialDisplayListID;
-    /* 0xA6 */ u8 renderMode;
+    /* 0xA6 */ s8 renderMode;
     /* 0xA7 */ char unk_A7;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ u8 unk_A9;
     /* 0xAA */ char unk_AA[6];
 } Model; // size = 0xB0
 
+typedef struct ModelTransformGroup {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ s16 groupModelID;
+    /* 0x04 */ Matrix4s* matrixRDP_N;
+    /* 0x08 */ ModelNode* modelNode;
+    /* 0x0C */ Matrix4s* transformMtx;
+    /* 0x10 */ Matrix4f matrixA;
+    /* 0x50 */ Matrix4f matrixB;
+    /* 0x90 */ Vec3f center;
+    /* 0x9C */ u8 minChildModelIndex;
+    /* 0x9D */ u8 maxChildModelIndex;
+    /* 0x9E */ u8 renderMode;
+    /* 0x9F */ s8 matrixMode;
+} ModelTransformGroup; // size = 0xA0
+
 typedef Model* ModelList[MAX_MODELS];
+typedef ModelTransformGroup* ModelTransformGroupList[MAX_MODEL_TRANSFORM_GROUPS];
 
 typedef struct AnimatedMesh {
     /* 0x000 */ s32 flags;
@@ -799,7 +872,7 @@ typedef struct AnimatedMesh {
     /* 0x008 */ u32* animation1;
     /* 0x00C */ u32* animation2;
     /* 0x010 */ char unk_10[136];
-    /* 0x098 */ struct Matrix4s mtx;
+    /* 0x098 */ Matrix4s mtx;
     /* 0x0D8 */ char unk_D8[500];
     /* 0x2CC */ s32 time;
     /* 0x2D0 */ char unk_2D0[4];
@@ -809,6 +882,19 @@ typedef struct AnimatedMesh {
 } AnimatedMesh; // size = 0x2E0
 
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
+
+typedef struct EffectInstanceData {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rotation;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ char unk_28[0x4];
+    /* 0x2C */ s32 unk_2C;
+    /* 0x30 */ f32 unk_30;
+    /* 0x34 */ char unk_34[0x30];
+    /* 0x64 */ f32 unk_64;
+    /* 0x68 */ char unk_68[0x18];
+} EffectInstanceData; // size = 0x80
 
 typedef struct PrintHandle {
     /* 0x000 */ char unk_00[16];
@@ -871,9 +957,9 @@ typedef struct {
     f32 unk_38[4];
 } EffectUnkStruct1;
 // TODO figure out what this actually is
-// func_800715D0 invokes gEffectTable[78]'s entryPoint function
-// func_80072230 invokes gEffectTable[111]'s entryPoint function
-// func_800729B0 invokes gEffectTable[131]'s entryPoint function
+// playFX_4E invokes gEffectTable[78]'s entryPoint function
+// playFX_6F invokes gEffectTable[111]'s entryPoint function
+// playFX_83 invokes gEffectTable[131]'s entryPoint function
 // These functions are currently typed to return void
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData
@@ -905,7 +991,7 @@ typedef struct Effect {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ s32 unk_0C;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
     /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
@@ -1104,36 +1190,29 @@ typedef struct GameStatus {
     /* 0x160 */ Vec3s savedPos;
     /* 0x166 */ u8 saveSlot;
     /* 0x167 */ u8 loadType; /* (0 = from map, 1 = from main menu) */
-    /* 0x168 */ s32 saveCount;
+    /* 0x168 */ u32 saveCount;
     /* 0x16C */ char unk_16C[12];
 } GameStatus; // size = 0x178
 
-/*
-still;
-walk;
-jump;
-fall;
-fly;
-idle;
-run;
-talk;
-hurt;
-*/
+// PartnerAnims
 typedef struct PartnerAnimations {
     /* 0x00 */ UNK_PTR anims[9];
 } PartnerAnimations; // size = 0x24
 
 typedef struct Shadow {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ char unk_04[2];
+    /* 0x04 */ u8 listIndex;
+    /* 0x05 */ u8 unk_05;
     /* 0x06 */ u8 unk_06;
     /* 0x07 */ char unk_07;
-    /* 0x08 */ s16 unk_08; // entity model index?
-    /* 0x0A */ char unk_0A[6];
-    /* 0x10 */ struct Vec3f position;
-    /* 0x1C */ struct Vec3f scale;
-    /* 0x28 */ struct Vec3f unk_28;
-    /* 0x34 */ char unk_34[0x44];
+    /* 0x08 */ s16 entityModelID;
+    /* 0x0A */ s16 vertexSegment;
+    /* 0x0C */ Vtx_tn** vertexArray;
+    /* 0x10 */ Vec3f position;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f rotation;
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ Matrix4s transformMatrix;
 } Shadow; // size = 0x78
 
 typedef Shadow* ShadowList[MAX_SHADOWS];
@@ -1165,6 +1244,13 @@ typedef struct RenderTask {
     /* 0x08 */ void* appendGfxArg;
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
+
+typedef void(*CustomModelGfxBuilderFunc)(s32 index);
+
+typedef struct CustomModelGfxBuilder {
+    /* 0x00 */ CustomModelGfxBuilderFunc pre;
+    /* 0x00 */ CustomModelGfxBuilderFunc post;
+} CustomModelGfxBuilder; // size = 0x8
 
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
@@ -1424,7 +1510,7 @@ typedef struct AnimatedModel {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rot;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ struct Matrix4s* mtx;
+    /* 0x28 */ Matrix4s* mtx;
     /* 0x2C */ char unk_2C[60];
     /* 0x68 */ u32 currentAnimData;
     /* 0x6C */ char unk_6C[4];
@@ -1466,16 +1552,28 @@ typedef struct ActorMovement {
     /* 0x4C */ f32 distance;
 } ActorMovement; // size = 0x50;
 
+typedef struct ActorMovementWalk {
+    /* 0x00 */ Vec3f currentPos;
+    /* 0x0C */ Vec3f goalPos;
+    /* 0x18 */ Vec3f unk_18;
+    /* 0x24 */ char unk_24[24];
+    /* 0x3C */ f32 acceleration;
+    /* 0x40 */ f32 speed;
+    /* 0x44 */ f32 velocity;
+    /* 0x48 */ f32 angle;
+    /* 0x4C */ f32 distance;
+    /* 0x50 */ f32 bounceDivisor;
+    /* 0x54 */ char unk_54[0x4];
+    /* 0x58 */ s32 animJumpRise;
+    /* 0x5C */ s32 animJumpFall;
+    /* 0x60 */ s32 animJumpLand;
+} ActorMovementWalk; // size = 0x64;
+
 typedef struct Actor {
     /* 0x000 */ s32 flags;
     /* 0x004 */ char unk_04[4];
     /* 0x008 */ struct ActorDesc* staticActorData;
-    /* 0x00C */ ActorMovement walk;
-    /* 0x05C */ f32 bounceDivisor;
-    /* 0x060 */ char unk_60[4];
-    /* 0x064 */ s32 animJumpRise;
-    /* 0x068 */ s32 animJumpFall;
-    /* 0x06C */ s32 animJumpLand;
+    /* 0x00C */ ActorMovementWalk walk;
     /* 0x070 */ s16 moveTime;
     /* 0x072 */ s16 moveArcAmplitude;
     /* 0x074 */ char unk_74[3];
@@ -1577,7 +1675,7 @@ typedef struct Actor {
     /* 0x434 */ s16 renderMode; /* initially 0xD, set to 0x22 if any part is transparent */
     /* 0x436 */ s16 unk_436;
     /* 0x438 */ s32 x[2]; /* ??? see FUN_80253974 */
-    /* 0x440 */ struct MenuIcon* ptrDefuffIcon;
+    /* 0x440 */ struct HudElement* ptrDefuffIcon;
 } Actor; // size = 0x444
 
 typedef struct TileDescriptor {
@@ -1604,14 +1702,6 @@ typedef struct BackgroundHeader {
     /* 0x0C */ u16 width;
     /* 0x0E */ u16 height;
 } BackgroundHeader; // size = 0x10
-
-typedef struct ModelGroupData {
-    /* 0x00 */ UNK_PTR transformMatrix;
-    /* 0x04 */ UNK_PTR lightingGroup;
-    /* 0x08 */ s32 numLights;
-    /* 0x0C */ s32 numChildren;
-    /* 0x10 */ struct ModelNode** childList;
-} ModelGroupData; // size = 0x14
 
 typedef struct FontData {
     /* 0x00 */ char unk_00[24];
@@ -1661,7 +1751,7 @@ typedef struct PlayerStatus {
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
     /* 0x05C */ f32 runSpeed;
-    /* 0x060 */ char unk_60[4];
+    /* 0x060 */ s32 unk_60;
     /* 0x064 */ f32 unk_64;
     /* 0x068 */ f32 normalPitch;
     /* 0x06C */ f32 unk_6C;
@@ -1681,7 +1771,7 @@ typedef struct PlayerStatus {
     /* 0x0B0 */ s16 colliderHeight;
     /* 0x0B2 */ s16 colliderDiameter;
     /* 0x0B4 */ s8 actionState;
-    /* 0x0B5 */ u8 prevActionState;
+    /* 0x0B5 */ s8 prevActionState;
     /* 0x0B6 */ s8 fallState; ///< Also used as sleep state in Peach idle action
     /* 0x0B7 */ char unk_B7;
     /* 0x0B8 */ s32 anim;
@@ -1739,7 +1829,7 @@ typedef struct EncounterStatus {
     /* 0x01D */ s8 currentAreaIndex;
     /* 0x01E */ u8 currentMapIndex;
     /* 0x01F */ u8 currentEntryIndex;
-    /* 0x020 */ u8 mapID;
+    /* 0x020 */ s8 mapID;
     /* 0x021 */ s8 resetMapEncounterFlags;
     /* 0x021 */ char unk_22[2];
     /* 0x024 */ s32* npcGroupList;
@@ -1762,8 +1852,8 @@ typedef struct SaveData {
     /* 0x0030 */ s32 crc1;
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
-    /* 0x003C */ s32 saveCount;
-    /* 0x0040 */ struct PlayerData player;
+    /* 0x003C */ u32 saveCount;
+    /* 0x0040 */ PlayerData player;
     /* 0x0380 */ char unk_380[0xE0];
     /* 0x0460 */ s32 starPoints;
     /* 0x0464 */ char unk_464[4];
@@ -1777,7 +1867,7 @@ typedef struct SaveData {
     /* 0x12B0 */ s32 areaFlags[8];
     /* 0x12D0 */ s8 areaBytes[16];
     /* 0x12E0 */ char unk_12E0[6];
-    /* 0x12E6 */ s16 savePos[3];
+    /* 0x12E6 */ Vec3s savePos;
     /* 0x12EC */ s32 unk_12EC;
     /* 0x12F0 */ s8 unk_12F0[12]; /* player name starts at 4th char */
     /* 0x12FC */ s32 unk_12FC;
@@ -1827,7 +1917,7 @@ typedef struct {
     /* 0x12 */ s16 height;
     /* 0x14 */ UNK_PTR fpDrawContents;
     /* 0x18 */ s32 unk_18; // MenuTab pointer for pause menu tabs
-    /* 0x1C */ s8 unk_1C;
+    /* 0x1C */ u8 unk_1C;
     /* 0x1D */ char unk_1D[3];
 } UIPanel; // size = 0x20
 
@@ -1915,17 +2005,6 @@ typedef struct {
     /* 0x11630 */ Matrix4s matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 
-typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f rotation;
-    /* 0x1C */ Vec3f scale;
-    /* 0x28 */ char unk_28[0x4];
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ f32 unk_30;
-    /* 0x34 */ char unk_34[0x4C];
-} EffectInstanceData; // size = 0x80
-
 typedef struct Temp8010F250 {
     /* 0x00 */ s8 unk_00;
     /* 0x01 */ s8 unk_01;
@@ -1988,5 +2067,30 @@ typedef struct EntityModel {
 } EntityModel; // size = 0x68
 
 typedef EntityModel* EntityModelList[MAX_ENTITY_MODELS];
+
+typedef struct VirtualEntity {
+    /* 0x00 */ s32 entityModelIndex;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ Vec3f rot;
+    /* 0x1C */ Vec3f scale;
+    /* 0x28 */ Vec3f goalPos;
+    /* 0x34 */ f32 moveDist;
+    /* 0x38 */ f32 moveAngle;
+    /* 0x3C */ f32 moveSpeed;
+    /* 0x40 */ f32 jumpGravity;
+    /* 0x44 */ f32 jumpVelocity;
+    /* 0x48 */ f32 moveTime;
+} VirtualEntity; // size = 0x4C
+
+typedef VirtualEntity* VirtualEntityList[0x40];
+
+typedef struct TempSetZoneEnabled {
+    /* 0x00 */ s32 flags;
+    /* 0x04 */ s16 id1;
+    /* 0x06 */ s16 id2;
+    /* 0x08 */ char unk_08[0x8];
+    /* 0x10 */ s32 unk_10;
+    /* 0x14 */ char unk_14[0x8];
+} TempSetZoneEnabled; // size = 0x1C
 
 #endif

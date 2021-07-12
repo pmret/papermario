@@ -17,7 +17,7 @@ glabel pause_partners_draw_movelist_title
 /* 13F3B8 8024C078 2605000C */  addiu     $a1, $s0, 0xc
 /* 13F3BC 8024C07C 02223021 */  addu      $a2, $s1, $v0
 /* 13F3C0 8024C080 240700FF */  addiu     $a3, $zero, 0xff
-/* 13F3C4 8024C084 0C04993B */  jal       draw_msg
+/* 13F3C4 8024C084 0C04993B */  jal       draw_string
 /* 13F3C8 8024C088 AFA20014 */   sw       $v0, 0x14($sp)
 /* 13F3CC 8024C08C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 13F3D0 8024C090 8FB1001C */  lw        $s1, 0x1c($sp)

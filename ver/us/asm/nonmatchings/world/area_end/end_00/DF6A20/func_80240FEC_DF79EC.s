@@ -70,7 +70,7 @@ glabel func_80240FEC_DF79EC
 /* DF7AF0 802410F0 8E07000C */  lw        $a3, 0xc($s0)
 /* DF7AF4 802410F4 25290001 */  addiu     $t1, $t1, 1
 /* DF7AF8 802410F8 AE680000 */  sw        $t0, ($s3)
-/* DF7AFC 802410FC 0C04BA38 */  jal       func_8012E8E0
+/* DF7AFC 802410FC 0C04BA38 */  jal       msg_get_glyph
 /* DF7B00 80241100 A6290000 */   sh       $t1, ($s1)
 /* DF7B04 80241104 0000202D */  daddu     $a0, $zero, $zero
 /* DF7B08 80241108 27A50020 */  addiu     $a1, $sp, 0x20

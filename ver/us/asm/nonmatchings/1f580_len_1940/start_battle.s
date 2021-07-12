@@ -44,7 +44,7 @@ glabel start_battle
 .L8004474C:
 /* 1FB4C 8004474C 0C03805E */  jal       disable_player_input
 /* 1FB50 80044750 0000802D */   daddu    $s0, $zero, $zero
-/* 1FB54 80044754 0C03BD8A */  jal       func_800EF628
+/* 1FB54 80044754 0C03BD8A */  jal       partner_disable_input
 /* 1FB58 80044758 00000000 */   nop
 /* 1FB5C 8004475C 8E740088 */  lw        $s4, 0x88($s3)
 /* 1FB60 80044760 8E820000 */  lw        $v0, ($s4)

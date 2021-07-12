@@ -146,8 +146,8 @@ void pause_items_init(s8* arg0) {
     pause_items_load_items(FALSE);
 
     for (i = 0; i < ARRAY_COUNT(gItemIcons); i++) {
-        gItemIcons[i] = create_icon(D_8024F570[i]);
-        set_icon_flags(gItemIcons[i], 0x80);
+        gItemIcons[i] = create_hud_element(D_8024F570[i]);
+        set_hud_element_flags(gItemIcons[i], 0x80);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_8024F5C0); i++) {
@@ -156,7 +156,7 @@ void pause_items_init(s8* arg0) {
 
     setup_pause_menu_tab(&D_8024F5C0, 1);
     *arg0 = 1;
- }
+}
 
 INCLUDE_ASM(s32, "pause/pause_items", pause_items_handle_input);
 
@@ -182,6 +182,6 @@ void pause_items_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gItemIcons); i++) {
-        free_icon(gItemIcons[i]);
+        free_hud_element(gItemIcons[i]);
     }
 }

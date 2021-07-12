@@ -23,7 +23,7 @@ glabel func_8025BAA0
 /* 18A3C8 8025BAE8 00E0982D */   daddu    $s3, $a3, $zero
 /* 18A3CC 8025BAEC 16800016 */  bnez      $s4, .L8025BB48
 /* 18A3D0 8025BAF0 00000000 */   nop
-/* 18A3D4 8025BAF4 0C0B7830 */  jal       func_802DE0C0
+/* 18A3D4 8025BAF4 0C0B7830 */  jal       spr_get_player_palettes
 /* 18A3D8 8025BAF8 96440088 */   lhu      $a0, 0x88($s2)
 /* 18A3DC 8025BAFC AE0206D0 */  sw        $v0, 0x6d0($s0)
 /* 18A3E0 8025BB00 0040202D */  daddu     $a0, $v0, $zero
@@ -46,7 +46,7 @@ glabel func_8025BAA0
 /* 18A420 8025BB40 08096EC7 */  j         .L8025BB1C
 /* 18A424 8025BB44 00000000 */   nop
 .L8025BB48:
-/* 18A428 8025BB48 0C0B7A90 */  jal       func_802DEA40
+/* 18A428 8025BB48 0C0B7A90 */  jal       spr_get_npc_palettes
 /* 18A42C 8025BB4C 96440088 */   lhu      $a0, 0x88($s2)
 /* 18A430 8025BB50 AE0206D0 */  sw        $v0, 0x6d0($s0)
 /* 18A434 8025BB54 0040202D */  daddu     $a0, $v0, $zero

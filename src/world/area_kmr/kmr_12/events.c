@@ -128,7 +128,7 @@ Script N(GoombaIdle) = SCRIPT({
     InterpNpcYaw(NPC_SELF, 90, 0);
     SetNpcFlagBits(NPC_SELF, 0x240000, FALSE);
     SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, FALSE);
-    SetSelfEnemyFlagBits(NPC_FLAG_40000000, TRUE);
+    SetSelfEnemyFlagBits(NPC_FLAG_NO_ANIMS_LOADED, TRUE);
 
     // We're done jumping off; the player can read the sign again
     bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
@@ -200,11 +200,11 @@ Script N(ReadEastSign) = SCRIPT({
 
     group 0;
 
-    func_802D5830(1);
+    SetTimeFreezeMode(1);
     DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MSG_kmr_12_sign_to_fortress, 160, 40);
     DisablePlayerInput(FALSE);
-    func_802D5830(0);
+    SetTimeFreezeMode(0);
 });
 
 Script N(MakeEntities) = SCRIPT({

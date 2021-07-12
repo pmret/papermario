@@ -409,7 +409,7 @@ glabel pause_map_draw_contents
 /* 141478 8024E138 25C20016 */  addiu     $v0, $t6, 0x16
 /* 14147C 8024E13C 01E28821 */  addu      $s1, $t7, $v0
 /* 141480 8024E140 02263021 */  addu      $a2, $s1, $a2
-/* 141484 8024E144 0C051261 */  jal       set_icon_render_pos
+/* 141484 8024E144 0C051261 */  jal       set_hud_element_render_pos
 /* 141488 8024E148 24C6FFF9 */   addiu    $a2, $a2, -7
 /* 14148C 8024E14C 8E040000 */  lw        $a0, ($s0)
 /* 141490 8024E150 0C0511F8 */  jal       draw_icon_2

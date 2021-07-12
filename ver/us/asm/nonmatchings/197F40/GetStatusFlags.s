@@ -143,7 +143,7 @@ glabel GetStatusFlags
 /* 19DCE4 8026F404 3C022000 */   lui      $v0, 0x2000
 /* 19DCE8 8026F408 02028025 */  or        $s0, $s0, $v0
 .L8026F40C:
-/* 19DCEC 8026F40C 0C099CAB */  jal       heroes_is_ability_active
+/* 19DCEC 8026F40C 0C099CAB */  jal       player_team_is_ability_active
 /* 19DCF0 8026F410 24050016 */   addiu    $a1, $zero, 0x16
 /* 19DCF4 8026F414 10400002 */  beqz      $v0, .L8026F420
 /* 19DCF8 8026F418 3C024000 */   lui      $v0, 0x4000

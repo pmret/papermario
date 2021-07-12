@@ -28,37 +28,37 @@ INCLUDE_ASM(s32, "1776B0", func_8024CB68);
 
 INCLUDE_ASM(s32, "1776B0", func_8024CE9C);
 
-INCLUDE_ASM(s32, "1776B0", use_cam_preset);
+INCLUDE_ASM(s32, "1776B0", btl_cam_use_preset);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E3D8);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E40C);
 
-INCLUDE_ASM(s32, "1776B0", cam_target_actor);
+INCLUDE_ASM(s32, "1776B0", btl_cam_target_actor);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E45C);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E484);
 
-INCLUDE_ASM(s32, "1776B0", move_cam_over);
+INCLUDE_ASM(s32, "1776B0", btl_cam_move);
 
-INCLUDE_ASM(s32, "1776B0", set_cam_target_pos);
+INCLUDE_ASM(s32, "1776B0", btl_cam_set_target_pos);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E554);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E584);
 
-INCLUDE_ASM(s32, "1776B0", set_cam_zoom);
+INCLUDE_ASM(s32, "1776B0", btl_cam_set_zoom);
 
-INCLUDE_ASM(s32, "1776B0", add_cam_zoom);
+INCLUDE_ASM(s32, "1776B0", btl_cam_add_zoom);
 
-INCLUDE_ASM(s32, "1776B0", set_cam_zoffset);
+INCLUDE_ASM(s32, "1776B0", btl_cam_set_zoffset);
 
-INCLUDE_ASM(s32, "1776B0", unfreeze_cam);
+INCLUDE_ASM(s32, "1776B0", btl_cam_unfreeze);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E60C);
 
-INCLUDE_ASM(s32, "1776B0", UseCamPreset);
+INCLUDE_ASM(s32, "1776B0", UseBattleCamPreset);
 
 INCLUDE_ASM(s32, "1776B0", func_8024E664);
 
@@ -88,7 +88,7 @@ INCLUDE_ASM(s32, "1776B0", SetBattleCamZoom);
 
 INCLUDE_ASM(s32, "1776B0", AddBattleCamZoom);
 
-INCLUDE_ASM(s32, "1776B0", func_8024ECF8);
+INCLUDE_ASM(ApiStatus, "1776B0", func_8024ECF8, ScriptInstance* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "1776B0", FreezeBattleCam);
 

@@ -24,7 +24,7 @@ glabel func_80240738_C6D058
 /* C6D0A0 80240780 0040202D */   daddu    $a0, $v0, $zero
 /* C6D0A4 80240784 0040202D */  daddu     $a0, $v0, $zero
 /* C6D0A8 80240788 2405FFFF */  addiu     $a1, $zero, -1
-/* C6D0AC 8024078C 0C046F1F */  jal       func_8011BC7C
+/* C6D0AC 8024078C 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6D0B0 80240790 0000302D */   daddu    $a2, $zero, $zero
 /* C6D0B4 80240794 96420000 */  lhu       $v0, ($s2)
 /* C6D0B8 80240798 0202102A */  slt       $v0, $s0, $v0
@@ -41,7 +41,7 @@ glabel func_80240738_C6D058
 /* C6D0DC 802407BC 50800005 */  beql      $a0, $zero, .L802407D4
 /* C6D0E0 802407C0 26100001 */   addiu    $s0, $s0, 1
 /* C6D0E4 802407C4 2405FFFF */  addiu     $a1, $zero, -1
-/* C6D0E8 802407C8 0C046F1F */  jal       func_8011BC7C
+/* C6D0E8 802407C8 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6D0EC 802407CC 0000302D */   daddu    $a2, $zero, $zero
 /* C6D0F0 802407D0 26100001 */  addiu     $s0, $s0, 1
 .L802407D4:

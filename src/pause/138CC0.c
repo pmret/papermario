@@ -11,7 +11,7 @@ void pause_stats_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gStatsMenuIconIDs); i++) {
-        free_icon(iconIDs[i]);
+        free_hud_element(iconIDs[i]);
     }
 }
 

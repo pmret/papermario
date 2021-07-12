@@ -76,7 +76,7 @@ Trigger* get_trigger_by_id(s32 triggerID) {
 s32 should_collider_allow_interact(s32 colliderID) {
     s32 i;
 
-    if (can_player_interact() == 0) {
+    if (phys_can_player_interact() == 0) {
         return 0;
     }
 

@@ -12,11 +12,11 @@ typedef struct Action {
 
 typedef struct DisguiseAnims {
     /* 0x00 */ NpcAnimID idle;
-    /* 0x04 */ NpcAnimID unk4;
-    /* 0x08 */ NpcAnimID unk8;
-    /* 0x0C */ NpcAnimID unkC;
-    /* 0x10 */ NpcAnimID unk10;
-    /* 0x10 */ NpcAnimID unk14;
+    /* 0x04 */ NpcAnimID unk_04;
+    /* 0x08 */ NpcAnimID unk_08;
+    /* 0x0C */ NpcAnimID unk_0C;
+    /* 0x10 */ NpcAnimID unk_10;
+    /* 0x10 */ NpcAnimID unk_14;
 } DisguiseAnims; // size = 0x18
 
 extern f32 D_800F7B90;

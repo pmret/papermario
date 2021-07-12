@@ -927,9 +927,9 @@ ApiStatus SetJumpAnimations(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->jumpPartIndex = jumpPartIndex;
-    actor->animJumpRise = animJumpRise;
-    actor->animJumpFall = animJumpFall;
-    actor->animJumpLand = animJumpLand;
+    actor->walk.animJumpRise = animJumpRise;
+    actor->walk.animJumpFall = animJumpFall;
+    actor->walk.animJumpLand = animJumpLand;
 
     return ApiStatus_DONE2;
 }
@@ -2048,14 +2048,14 @@ ApiStatus GetBattleState(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026E16C(ScriptInstance* script, s32 isInitialCall) {
-    func_80241190(get_variable(script, *script->ptrReadPos));
+ApiStatus SetBattleState(ScriptInstance* script, s32 isInitialCall) {
+    btl_set_state(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "197F40", func_8026E198);
+INCLUDE_ASM(s32, "197F40", WaitForState);
 
-INCLUDE_ASM(s32, "197F40", func_8026E208);
+INCLUDE_ASM(s32, "197F40", CancelEnemyTurn);
 
 INCLUDE_ASM(s32, "197F40", func_8026E260);
 
@@ -2107,7 +2107,7 @@ INCLUDE_ASM(s32, "197F40", GetOwnerTarget);
 
 INCLUDE_ASM(s32, "197F40", func_8026E914);
 
-ApiStatus GetAttackerActorID(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerActorID(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.attackerActorID);
     return ApiStatus_DONE2;
 }

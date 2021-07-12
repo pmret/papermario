@@ -12,11 +12,11 @@ ApiStatus func_802189DC_447E1C(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = get_float_variable(script, *args++);
     f32 posY = get_float_variable(script, *args++);
-    MenuIcon* icon = create_icon(&D_80104A28);
+    HudElement* icon = create_hud_element(&D_80104A28);
 
-    set_icon_render_pos(icon, posX, posY);
+    set_hud_element_render_pos(icon, posX, posY);
     set_hud_element_scale(icon, 1.5f);
-    clear_icon_flags(icon, 0x200002);
+    clear_hud_element_flags(icon, 0x200002);
     set_variable(script, *args++, icon);
     load_tattle_flags(0x8B);
     return ApiStatus_DONE2;

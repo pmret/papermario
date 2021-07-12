@@ -46,7 +46,7 @@ glabel npc_do_gravity
 /* 14B2C 8003972C 27A2002C */  addiu     $v0, $sp, 0x2c
 /* 14B30 80039730 AFA20010 */  sw        $v0, 0x10($sp)
 /* 14B34 80039734 8E040080 */  lw        $a0, 0x80($s0)
-/* 14B38 80039738 0C0372DF */  jal       func_800DCB7C
+/* 14B38 80039738 0C0372DF */  jal       npc_raycast_down_sides
 /* 14B3C 8003973C 27A70028 */   addiu    $a3, $sp, 0x28
 /* 14B40 80039740 0800E5E0 */  j         .L80039780
 /* 14B44 80039744 00000000 */   nop
@@ -63,7 +63,7 @@ glabel npc_do_gravity
 /* 14B6C 8003976C 46800020 */  cvt.s.w   $f0, $f0
 /* 14B70 80039770 E7A00018 */  swc1      $f0, 0x18($sp)
 /* 14B74 80039774 8E040080 */  lw        $a0, 0x80($s0)
-/* 14B78 80039778 0C0371DE */  jal       func_800DC778
+/* 14B78 80039778 0C0371DE */  jal       npc_raycast_down_ahead
 /* 14B7C 8003977C 27A70028 */   addiu    $a3, $sp, 0x28
 .L80039780:
 /* 14B80 80039780 10400010 */  beqz      $v0, .L800397C4

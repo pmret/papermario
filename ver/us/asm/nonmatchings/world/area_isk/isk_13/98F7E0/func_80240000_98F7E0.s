@@ -45,7 +45,7 @@ glabel func_80240000_98F7E0
 /* 98F880 802400A0 0000302D */  daddu     $a2, $zero, $zero
 /* 98F884 802400A4 E6020014 */  swc1      $f2, 0x14($s0)
 /* 98F888 802400A8 46200020 */  cvt.s.d   $f0, $f0
-/* 98F88C 802400AC 0C012530 */  jal       func_800494C0
+/* 98F88C 802400AC 0C012530 */  jal       ai_enemy_play_sound
 /* 98F890 802400B0 E600001C */   swc1     $f0, 0x1c($s0)
 /* 98F894 802400B4 8E6300D0 */  lw        $v1, 0xd0($s3)
 /* 98F898 802400B8 C6000040 */  lwc1      $f0, 0x40($s0)
@@ -109,7 +109,7 @@ glabel func_80240000_98F7E0
 /* 98F97C 8024019C 46800020 */  cvt.s.w   $f0, $f0
 /* 98F980 802401A0 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 98F984 802401A4 8E040080 */  lw        $a0, 0x80($s0)
-/* 98F988 802401A8 0C037711 */  jal       func_800DDC44
+/* 98F988 802401A8 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 98F98C 802401AC 27A70028 */   addiu    $a3, $sp, 0x28
 /* 98F990 802401B0 10400016 */  beqz      $v0, .L8024020C
 /* 98F994 802401B4 26310001 */   addiu    $s1, $s1, 1

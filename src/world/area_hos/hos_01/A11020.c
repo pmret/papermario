@@ -29,12 +29,6 @@ void func_80240C34_A114B4(void) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_01/A11020", func_80240C84_A11504);
 
-INCLUDE_ASM(s32, "world/area_hos/hos_01/A11020", func_80240CB0_A11530);
-/*
-ApiStatus N(func_80240CB0_A11530)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/SwitchToPartner.inc.c"
 
 INCLUDE_ASM(s32, "world/area_hos/hos_01/A11020", func_80240CDC_A1155C);

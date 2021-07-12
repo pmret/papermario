@@ -18,32 +18,470 @@ typedef struct RenderTaskEntry {
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTaskEntry; // size = 0x10
 
-typedef Model* SmallModelList[4];
-extern SmallModelList* D_801512E0;
+typedef struct GameMode {
+    /* 0x00 */ u16 flags;
+    /* 0x04 */ void (*init)(void);
+    /* 0x08 */ void (*step)(struct GameMode*);
+    /* 0x0C */ UNK_FUN_PTR(unk_0C);
+    /* 0x10 */ void (*render)(void);
+    /* 0x14 */ void (*renderAux)(void); ///< @see state_render_frontUI
+} GameMode; // size = 0x18
 
+extern s32 D_8014B7F8[];
+extern s32 D_8014B820[];
+extern s32 D_8014B848[];
+extern s32 D_8014B870[];
+extern s32 D_8014B898[];
+extern s32 D_8014B8C0[];
+extern s32 D_8014B8E8[];
+extern s32 D_8014B910[];
+extern s32 D_8014B938[];
+extern s32 D_8014B960[];
+extern s32 D_8014B988[];
+extern s32 D_8014B9B0[];
+extern s32 D_8014B9D8[];
+extern s32 D_8014BA00[];
+extern s32 D_8014BA20[];
+extern s32 D_8014BA48[];
+extern s32 D_8014BA70[];
+extern s32 D_8014BA98[];
+extern s32 D_8014BAC0[];
+extern s32 D_8014BAE8[];
+extern s32 D_8014BB10[];
+extern s32 D_8014BB38[];
+extern s32 D_8014BB60[];
+extern s32 D_8014BB88[];
+extern s32 D_8014BBB0[];
+extern s32 D_8014BBD8[];
+extern s32 D_8014BC00[];
+extern s32 D_8014BC28[];
+extern s32 D_8014BC50[];
+extern s32 D_8014BC78[];
+extern s32 D_8014BCA0[];
+extern s32 D_8014BCC8[];
+extern s32 D_8014BCF8[];
+extern s32 D_8014BD18[];
+extern s32 D_8014BD40[];
+extern s32 D_8014BD68[];
+extern s32 D_8014BD88[];
+extern s32 D_8014BDB0[];
+extern s32 D_8014BDD8[];
+extern s32 D_8014BE00[];
+extern s32 D_8014BE28[];
+extern s32 D_8014BE50[];
+extern s32 D_8014BE78[];
+extern s32 D_8014BEA0[];
+extern s32 D_8014BEC8[];
+extern s32 D_8014BEF0[];
+extern s32 D_8014BF18[];
+extern s32 D_8014BF40[];
+extern s32 D_8014BF68[];
+extern s32 D_8014BF90[];
+extern s32 D_8014BFB8[];
+extern s32 D_8014BFE0[];
+extern s32 D_8014C008[];
+extern s32 D_8014C028[];
+extern s32 D_8014C050[];
+extern s32 D_8014C078[];
+extern s32 D_8014C098[];
+extern s32 D_8014C0C0[];
+extern s32 D_8014C0E8[];
+extern s32 D_8014C110[];
+extern s32 D_8014C138[];
+extern s32 D_8014C160[];
+
+s32 D_8014AFB0 = 0xFF;
+
+s32 D_8014AFB4[] = {0, 0, 0};
+
+s32* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00 };
+
+s32* D_8014B000[] = { D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
+
+s32 D_8014B0B8 = 0xFCFFFFFF;
+
+s32 D_8014B0BC[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838, 0xFC457FFF, 0xFFFDF838, 0xFC41FFFF, 0xFFFEF838, 0xFC121824, 0xFF33FFFF, 0xFC127FFF, 0xFFFFF238, 0xFC1219FF, 0xFFFFFE38, 0xFC127E0A, 0xF3FFF238, 0xFC121803, 0xFFFFFF78, 0xFC147E28, 0x44FE793C, 0xFC147FFF, 0x4FFE7838, 0xFC147FFF, 0x4FFE7838, 0xFC147E0A, 0x4FFE72F8, 0xFC147E03, 0x4FFE7978, 0xFCFFFFFF, 0xFFFCF279, 0xFCFFFFFF, 0xFFFCF238, 0xFCFFFFFF, 0xFFFCF238, 0xFC157FFF, 0xFFFDF238, 0xFCFFFE03, 0xFFFCF378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFF13FFFF, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFF13FFFF, 0xFC20A204, 0xFF13FFFF, 0xFC20A203, 0xFF13FF7F, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF9883, 0xFFFFAF78, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FE03, 0x2FFD7378, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61FEC3, 0x11FCF279, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FE03, 0x1FFCF378, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, };
+
+s32 D_8014B400 = 0xFCFFFFFF;
+
+s32 D_8014B404[] = { 0xFFFE793C, 0xFCFFFFFF, 0xFFFE7838, 0xFCFFFFFF, 0xFFFE7838, 0xFC457FFF, 0xFFFDF838, 0xFC41FFFF, 0xFFFEF838, 0xFC127E24, 0xFFFFF3F9, 0xFC127FFF, 0xFFFFF238, 0xFC127FFF, 0xFFFFF238, 0xFC127E0A, 0xF3FFF238, 0xFC127E03, 0xFFFFF378, 0xFC147E28, 0x44FE793C, 0xFC147FFF, 0x4FFE7838, 0xFC147FFF, 0x4FFE7838, 0xFC147E0A, 0x4FFE72F8, 0xFC147E03, 0x4FFE7978, 0xFCFFFFFF, 0xFFFCF279, 0xFCFFFFFF, 0xFFFCF238, 0xFCFFFFFF, 0xFFFCF238, 0xFC157FFF, 0xFFFDF238, 0xFCFFFE03, 0xFFFCF378, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1FFC93FC, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC93F8, 0xFC26A004, 0x1F1093FF, 0xFC26A004, 0x1FFC92F8, 0xFC26A003, 0x1FFC9378, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFF13FF7F, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFC20A204, 0xFFFFFFF8, 0xFC111404, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A204, 0xFFFFFFF8, 0xFC20A203, 0xFFFFFF78, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF99FF, 0xFFFFAF38, 0xFCFF9883, 0xFFFFAF78, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FFFF, 0x2FFD7238, 0xFC15FE03, 0x2FFD7378, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61E4C1, 0x12FC9238, 0xFC61FEC3, 0x11FCF279, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FFFF, 0x1FFCF238, 0xFC61FE03, 0x1FFCF378, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC10E228, 0x40C8A449, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, 0xFC75FEEB, 0xFFFFFDFE, };
+
+s32 D_8014B748 = 0x8028E000;
+
+s8 D_8014B74C = 0;
+s8 D_8014B74D = 0;
+s8 D_8014B74E = 0;
+s8 D_8014B74F = 0;
+s8 D_8014B750 = 0;
+s8 D_8014B751 = 0;
+s8 D_8014B752 = 0;
+s8 D_8014B753 = 0;
+s8 D_8014B754 = 0;
+s8 D_8014B755 = 0;
+s8 D_8014B756 = 0;
+s8 D_8014B757 = 0;
+s32 D_8014B758 = 950;
+s32 D_8014B75C = 1000;
+s8 D_8014B760 = 0xFF;
+s8 D_8014B761 = 0xFF;
+s8 D_8014B762 = 0xFF;
+s8 D_8014B763 = 0;
+s8 D_8014B764 = 0;
+s8 D_8014B765 = 0;
+s8 D_8014B766 = 0;
+s8 D_8014B767 = 0;
+
+Matrix4s D_8014B768 = {
+    .whole = {
+        {1, 0, 0, 0},
+        {0, 1, 0, 0},
+        {0, 0, 1, 0},
+        {0, 0, 0, 1}
+    },
+    .frac = {
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0}
+    }
+};
+
+s32 D_8014B7A8[] = { 0x00000006, 0x00000000, 0x00000005, 0x00020000, 0x00000004, 0x00030000, 0x00000003, 0x00038000, 0x00000002, 0x0003C000, 0x00000001, 0x0003E000, 0x00000000, 0x0003F000, 0x00000000, 0x0003F800, 0x00000000, 0x00000000, };
+
+s32 D_8014B7F0[] = { 0x00000000, 0x00000000, };
+
+s32 D_8014B7F8[] = { 0xE200001C, 0x00552078, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B820[] = { 0xE200001C, 0x00552D58, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B848[] = { 0xE200001C, 0x00552478, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B870[] = { 0xE200001C, 0x00553078, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014B898[] = { 0xE200001C, 0x005049D8, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014B8C0[] = { 0xE200001C, 0x00504DD8, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014B8E8[] = { 0xE200001C, 0x005045D8, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014B910[] = { 0xE200001C, 0x00552230, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B938[] = { 0xE200001C, 0x00552E10, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B960[] = { 0xE200001C, 0x00552478, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xFCFFFFFF, 0xFFFE793C, 0xDF000000, 0x00000000, };
+
+s32 D_8014B988[] = { 0xE200001C, 0x00553078, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014B9B0[] = { 0xE200001C, 0x00504A50, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014B9D8[] = { 0xE200001C, 0x00504F50, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BA00[] = { 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BA20[] = { 0xE200001C, 0x005049F8, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BA48[] = { 0xE200001C, 0x00552048, 0xE3000A01, 0x00000000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220404, 0xDF000000, 0x00000000, };
+
+s32 D_8014BA70[] = { 0xE200001C, 0x00553048, 0xE3000A01, 0x00000000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220004, 0xDF000000, 0x00000000, };
+
+s32 D_8014BA98[] = { 0xE200001C, 0x005041C8, 0xE3000A01, 0x00000000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220004, 0xDF000000, 0x00000000, };
+
+s32 D_8014BAC0[] = { 0xE200001C, 0x005049F8, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BAE8[] = { 0xE200001C, 0x00504B40, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BB10[] = { 0xE200001C, 0x00504B50, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BB38[] = { 0xE200001C, 0x00504340, 0xE3000A01, 0x00000000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BB60[] = { 0xE200001C, 0x0C192078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BB88[] = { 0xE200001C, 0x0C192D58, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BBB0[] = { 0xE200001C, 0x0C192478, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BBD8[] = { 0xE200001C, 0x0C193078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BC00[] = { 0xE200001C, 0x0C1849D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BC28[] = { 0xE200001C, 0x0C184DD8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BC50[] = { 0xE200001C, 0x0C1845D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BC78[] = { 0xE200001C, 0x0C192230, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BCA0[] = { 0xE200001C, 0x0C192E10, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BCC8[] = { 0xE200001C, 0x0C192478, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220405, 0xFCFFFFFF, 0xFFFE793C, 0xDF000000, 0x00000000, };
+
+s32 D_8014BCF8[] = { 0xE200001C, 0x0C193078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xDF000000, 0x00000000, };
+
+s32 D_8014BD18[] = { 0xE200001C, 0x0C184A50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BD40[] = { 0xE200001C, 0x0C184E50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BD68[] = { 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BD88[] = { 0xE200001C, 0x0C1849D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BDB0[] = { 0xE200001C, 0x0C192048, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220404, 0xDF000000, 0x00000000, };
+
+s32 D_8014BDD8[] = { 0xE200001C, 0x0C193048, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220004, 0xDF000000, 0x00000000, };
+
+s32 D_8014BE00[] = { 0xE200001C, 0x0C1841C8, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00220004, 0xDF000000, 0x00000000, };
+
+s32 D_8014BE28[] = { 0xE200001C, 0x0C184B50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BE50[] = { 0xE200001C, 0x0C184340, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BE78[] = { 0xE200001C, 0xC8112078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BEA0[] = { 0xE200001C, 0xC8112D58, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BEC8[] = { 0xE200001C, 0xC8112478, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BEF0[] = { 0xE200001C, 0xC8113078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BF18[] = { 0xE200001C, 0xC81049D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BF40[] = { 0xE200001C, 0xC8104DD8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BF68[] = { 0xE200001C, 0xC81045D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014BF90[] = { 0xE200001C, 0xC8112230, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BFB8[] = { 0xE200001C, 0xC8112E10, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014BFE0[] = { 0xE200001C, 0xC8112478, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230405, 0xDF000000, 0x00000000, };
+
+s32 D_8014C008[] = { 0xE200001C, 0xC8113078, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xDF000000, 0x00000000, };
+
+s32 D_8014C028[] = { 0xE200001C, 0xC8104A50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C050[] = { 0xE200001C, 0xC8104E50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C078[] = { 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C098[] = { 0xE200001C, 0xC81049D8, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00230005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C0C0[] = { 0xE200001C, 0xC8112048, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00230404, 0xDF000000, 0x00000000, };
+
+s32 D_8014C0E8[] = { 0xE200001C, 0xC8113048, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00230004, 0xDF000000, 0x00000000, };
+
+s32 D_8014C110[] = { 0xE200001C, 0xC81041C8, 0xE3000A01, 0x00100000, 0xD9C0F9FA, 0x00000000, 0xD9FFFFFF, 0x00230004, 0xDF000000, 0x00000000, };
+
+s32 D_8014C138[] = { 0xE200001C, 0xC8104B50, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C160[] = { 0xE200001C, 0xC8104340, 0xE3000A01, 0x00100000, 0xD9C0F9FB, 0x00000000, 0xD9FFFFFF, 0x00220005, 0xDF000000, 0x00000000, };
+
+s32 D_8014C188[] = { 0xFFFE7960, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x000F4240, 0x000F4240, 0x000F4240, 0x00000000, 0x007A1200, 0x007A1200, 0x007A1200, 0x00000000, 0x007A1200, 0x007270E0, 0x007270E0, 0x007270E0, 0x00000000, 0x006ACFC0, 0x006ACFC0, 0x006ACFC0, 0x006ACFC0, 0x00632EA0, 0x00632EA0, 0x00632EA0, 0x00000000, 0x005B8D80, 0x005B8D80, 0x005B8D80, 0x00000000, 0x0053EC60, 0x0053EC60, 0x0053EC60, 0x007A1200, 0x003D0900, 0x0040D990, 0x0044AA20, 0x0044AA20, 0x007A1200, 0x000AAE60, };  // render mode -> distance map?
+
+s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
+
+// BSS
+static s32 B_801512B0[2];
+static CustomModelGfxBuilder* gCurrentCustomModelGfxBuilders;
+static s32 D_801512BC;
+static s32 D_801512C0;
+static s32 D_801512C4;
+static s32 D_801512C8[6];
+static ModelTransformGroupList* gCurrentTransformGroups;
+static s8 D_801512E4[0x4];
+static s8 D_801512E8[0x8];
+static s8 B_801512F0[0x410];
+static GameMode gMainGameState[2]; // TODO rename
+
+extern s32 D_80151324;
 extern s32 D_8015132C;
+extern s32 D_80151330;
 extern Fog* wFog;
-
-extern s32 D_801533B0; // num render task entries?
-extern s32 D_801533AC;
-extern s32 D_8014C188[]; // render mode -> distance map?
-extern RenderTaskEntry* D_801533A0[];
-
 extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern s32 D_8014AFB0;
+extern RenderTaskEntry* D_801533A0[];
+extern s32 D_801533AC;
+extern s32 D_801533B0; // num render task entries?
+extern s8 D_8015A578;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entities);
+// funcs
+void update_shadows(void);
+s32 step_entity_commandlist(Entity* entity);
+void render_shadows(void);
+void update_entity_transform_matrix(Entity* entity);
+void update_shadow_transform_matrix(Shadow* shadow);
+void update_entity_inverse_rotation_matrix(Entity* entity);
+void delete_entity(s32 entityIndex);
+void delete_entity_and_unload_data(s32 entityIndex);
+void _delete_shadow(s32 shadowIndex);
+s32 entity_get_collision_flags(Entity* entity);
+void entity_free_static_data(StaticEntityData* data);
+void update_entity_shadow_position(Entity* entity);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_shadows);
+void update_entities(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_entity_commandlist);
+    D_801512BC = 0;
+    D_801512C0 = 0;
+    D_80151330++;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_updatecmd);
+    for (i = 0; i < MAX_ENTITIES; i++) {
+        Entity* entity = get_entity_by_index(i);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", exec_entity_updatecmd, Entity* entity);
+        if (entity != NULL) {
+            D_801512C0++;
+
+            if (!(entity->flags & 0x40000000)) {
+                if (entity->flags & 0x1000000) {
+                    entity->flags &= ~0x1000000;
+                    if (!(entity->flags & 0x8000)) {
+                        entity->flags |= 0x2000000;
+                    }
+                    entity->boundScript = start_script(entity->boundScriptBytecode, 0xA, 0x20);
+                }
+
+                if (entity->flags & 0x2000000) {
+                    if (does_script_exist(entity->boundScript->id)) {
+                        if (entity->flags & 8) {
+                            update_model_animator(entity->virtualModelIndex);
+                        } else {
+                            exec_entity_model_commandlist(entity->virtualModelIndex);
+                        }
+
+                        if (entity->flags & 0x2000) {
+                            entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                        }
+
+                        if (!(entity->flags & 0x10)) {
+                            update_entity_transform_matrix(entity);
+                        }
+                        continue;
+                    } else {
+                        entity->flags &= ~0x2000000;
+                    }
+                }
+
+                if (entity->unk_07 == 0) {
+                    entity->collisionFlags = entity_get_collision_flags(entity);
+
+                    if (entity->collisionFlags) {
+                        EntityCallback entityCallback = entity->staticData->unk_data_ptr2;
+
+                        if (entityCallback != NULL && entityCallback(entity) != 0) {
+                            entity->unk_07 = 0xA;
+                            entity->flags |= 0x10000;
+                        }
+                    }
+                } else {
+                    entity->unk_07--;
+                    if (entity->flags & 0x40) {
+                        if (entity->unk_07 == 0) {
+                            entity->flags &= ~0x60;
+                        } else {
+                            entity->flags |= 0x20;
+                        }
+                    } else if (entity->unk_07 == 0) {
+                        entity->flags &= ~0x10000;
+                        entity->flags &= ~0x20000;
+                        entity->collisionFlags = 0;
+                    }
+                }
+
+                if (entity->flags & 0x2000) {
+                    entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                }
+
+                if (!gGameStatusPtr->disableScripts) {
+                    if (entity->updateScriptCallback != NULL) {
+                        entity->updateScriptCallback(entity);
+                    }
+
+                    if (entity->scriptReadPos != NULL) {
+                        if (entity->hasEntityScript) {
+                            entity->hasEntityScript--;
+                            if (!(entity->hasEntityScript)) {
+                                while (step_entity_commandlist(entity) != 0);
+                            }
+                        }
+                    }
+                }
+
+                if (!(entity->flags & 0x10)) {
+                    update_entity_transform_matrix(entity);
+                }
+
+                if (!(entity->flags & 0x20)) {
+                    update_entity_inverse_rotation_matrix(entity);
+                }
+
+                if (entity->flags & 8) {
+                    update_model_animator(entity->virtualModelIndex);
+                } else {
+                    exec_entity_model_commandlist(entity->virtualModelIndex);
+                }
+
+                if (entity->shadowIndex >= 0) {
+                    update_entity_shadow_position(entity);
+                }
+
+                if (entity->flags & 0x20000000) {
+                    delete_entity(entity->listIndex);
+                }
+
+                if (entity->flags & 0x4000000) {
+                    delete_entity_and_unload_data(entity->listIndex);
+                }
+            }
+        }
+    }
+
+    update_shadows();
+    D_8015A578 = 0;
+}
+
+void update_shadows(void) {
+    s32 i;
+
+    D_80151324 = 0;
+
+    for (i = 0; i < MAX_SHADOWS; i++) {
+        Shadow* shadow = get_shadow_by_index(i);
+
+        if (shadow != NULL) {
+            D_80151324++;
+
+            if (!(shadow->flags & 0x40000000)) {
+                if (shadow->flags & 0x2000) {
+                    shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                }
+
+                update_shadow_transform_matrix(shadow);
+
+                if (shadow->flags & 8) {
+                    update_model_animator(shadow->entityModelID);
+                } else {
+                    exec_entity_model_commandlist(shadow->entityModelID);
+                }
+
+                if (shadow->flags & 0x20000000) {
+                    _delete_shadow(shadow->listIndex);
+                }
+            }
+        }
+    }
+}
+
+void set_entity_commandlist(Entity* entity, s32* entityScript) {
+    entity->scriptReadPos = entityScript;
+    entity->hasEntityScript = TRUE;
+    entity->savedReadPos = entity->scriptReadPos;
+}
+
+INCLUDE_ASM(s32, "a5dd0_len_114e0", step_entity_commandlist, Entity* entity);
+
+void exec_entity_commandlist(Entity* entity) {
+    while (step_entity_commandlist(entity) != 0);
+}
 
 void func_8010FD98(s32 arg0, s32 alpha) {
     if (alpha >= 255) {
@@ -64,15 +502,134 @@ void entity_model_set_shadow_color(s32 alpha) {
     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x00, 0x00, 0x00, alpha);
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_entities);
+void render_entities(void) {
+    s32 phi_v0;
+    s32 i;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_shadows);
+    for (i = 0; i < MAX_ENTITIES; i++) {
+        Entity* entity = get_entity_by_index(i);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entity_transform_matrix);
+        if (entity != NULL) {
+            if (!gGameStatusPtr->isBattle) {
+                if (D_80151310 != 0 &&
+                    !(entity->flags & 0x80000) &&
+                    dist2D(gPlayerStatusPtr->position.x,
+                           gPlayerStatusPtr->position.z,
+                           entity->position.x,
+                           entity->position.z) > 200.0f
+                   ) {
+                    continue;
+                }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_shadow_transform_matrix);
+                if (D_80151310 == 1) {
+                    if (!(entity->flags & 2)) {
+                        continue;
+                    }
+                } else if (D_80151310 == 2) {
+                    if (!(entity->flags & 0x40000)) {
+                        continue;
+                    }
+                }
+            }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", update_entity_inverse_rotation_matrix);
+            if (!(entity->flags & 1)) {
+                if (entity->flags & 8) {
+                    if (D_8014AFB0 == 0xFF) {
+                        if (entity->renderSetupFunc != NULL) {
+                            set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, entity->renderSetupFunc);
+                        }
+                    } else {
+                        set_animator_render_callback(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                    }
+
+                    if (entity->vertexData == NULL) {
+                        render_animated_model(entity->virtualModelIndex, &entity->transformMatrix);
+                    } else {
+                        render_animated_model_with_vertices(entity->virtualModelIndex,
+                                      &entity->transformMatrix,
+                                      entity->vertexSegment,
+                                      entity->vertexData);
+                    }
+                } else {
+                    if (D_8014AFB0 == 0xFF) {
+                        if (entity->renderSetupFunc != NULL) {
+                            bind_entity_model_setupGfx(entity->virtualModelIndex,
+                                                       entity->listIndex,
+                                                       entity->renderSetupFunc);
+                        } else {
+                            get_entity_model(entity->virtualModelIndex)->fpSetupGfxCallback = NULL;
+                        }
+                    } else {
+                        bind_entity_model_setupGfx(entity->virtualModelIndex, entity->listIndex, func_8010FE44);
+                    }
+
+                    if (entity->vertexData == NULL) {
+                        draw_entity_model_A(entity->virtualModelIndex, &entity->transformMatrix);
+                    } else {
+                        draw_entity_model_B(entity->virtualModelIndex,
+                                               &entity->transformMatrix,
+                                               entity->vertexSegment,
+                                               entity->vertexData);
+                    }
+                }
+            }
+        }
+    }
+
+    render_shadows();
+}
+
+void render_shadows(void) {
+    s32 i;
+
+    for (i = 0; i < MAX_SHADOWS; i++) {
+        Shadow* shadow = get_shadow_by_index(i);
+
+        if (shadow != NULL) {
+            if (shadow->flags & 1) {
+                if (shadow->flags & 0x10000000) {
+                    shadow->unk_05 -= 20;
+                    if (shadow->unk_05 <= 20) {
+                        shadow->flags |= 0x20000000;
+                    }
+                }
+            } else if (shadow->flags & 8) {
+                if (shadow->vertexArray == NULL) {
+                    render_animated_model(shadow->entityModelID, &shadow->transformMatrix);
+                } else {
+                    render_animated_model_with_vertices(shadow->entityModelID,
+                                  &shadow->transformMatrix,
+                                  shadow->vertexSegment,
+                                  shadow->vertexArray);
+                }
+            } else {
+                if (shadow->flags & 0x10000000) {
+                    shadow->unk_05 -= 20;
+                    if (shadow->unk_05 <= 20) {
+                        shadow->flags |=  0x20000000;
+                    }
+                }
+
+                bind_entity_model_setupGfx(shadow->entityModelID, shadow->unk_05, entity_model_set_shadow_color);
+
+                if (shadow->vertexArray == NULL) {
+                    draw_entity_model_A(shadow->entityModelID, &shadow->transformMatrix);
+                } else {
+                    draw_entity_model_B(shadow->entityModelID,
+                                           &shadow->transformMatrix,
+                                           shadow->vertexSegment,
+                                           shadow->vertexArray);
+                }
+            }
+        }
+    }
+}
+
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_transform_matrix, Entity* entity);
+
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_shadow_transform_matrix, Shadow* shadow);
+
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_inverse_rotation_matrix, Entity* entity);
 
 Entity* get_entity_by_index(s32 index) {
     return (*gCurrentEntityListPtr)[index & 0xFFF];
@@ -104,8 +661,8 @@ ShadowList* get_shadow_list(void) {
     return ret;
 }
 
-s32 func_80110678(Npc *npc) {
-    if (npc->currentAnim != 0) {
+s32 entity_start_script(Npc* npc) {
+    if (npc->currentAnim.w != 0) {
         npc->flags |= 0x1000000;
         return 1;
     }
@@ -124,8 +681,6 @@ u32 get_entity_type(s32 index) {
 
 void delete_entity(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
-    Shadow* shadow;
-    EntityList** currentEntityListPtrTemp;
 
     if (entity->dataBuf != NULL) {
         heap_free(entity->dataBuf);
@@ -134,25 +689,22 @@ void delete_entity(s32 entityIndex) {
     if (!(entity->flags & 8)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
-        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+        delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
     }
 
     if (entity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(entity->shadowIndex);
+        Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
         shadow->flags |= 0x10000000;
     }
 
-    currentEntityListPtrTemp = &gCurrentEntityListPtr;
-    heap_free((**currentEntityListPtrTemp)[entityIndex]);
-    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+    heap_free((*gCurrentEntityListPtr)[entityIndex]);
+    (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
-s32 delete_entity_and_unload_data(s32 entityIndex) {
-    Entity* entity;
-    Shadow* shadow;
-    EntityList** currentEntityListPtrTemp;
+void delete_entity_and_unload_data(s32 entityIndex) {
+    Entity* entity = get_entity_by_index(entityIndex);
 
-    entity = get_entity_by_index(entityIndex);
     if (entity->dataBuf != NULL) {
         heap_free(entity->dataBuf);
     }
@@ -160,46 +712,108 @@ s32 delete_entity_and_unload_data(s32 entityIndex) {
     if (!(entity->flags & 8)) {
         free_entity_model_by_index(entity->virtualModelIndex);
     } else {
-        func_8011E438(get_anim_mesh(entity->virtualModelIndex));
+        delete_model_animator(get_animator_by_index(entity->virtualModelIndex));
     }
-    func_801117DC(entity->staticData);
+
+    entity_free_static_data(entity->staticData);
 
     if (entity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(entity->shadowIndex);
+        Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+
         shadow->flags |= 0x10000000;
     }
 
-    currentEntityListPtrTemp = &gCurrentEntityListPtr;
-    heap_free((**currentEntityListPtrTemp)[entityIndex]);
-    (**currentEntityListPtrTemp)[entityIndex] = NULL;
+    heap_free((*gCurrentEntityListPtr)[entityIndex]);
+    (*gCurrentEntityListPtr)[entityIndex] = NULL;
 }
 
-s32 func_8011085C(s32 shadowIndex) {
+void _delete_shadow(s32 shadowIndex) {
     Shadow* shadow = get_shadow_by_index(shadowIndex);
-    ShadowList** currentShadowListPtr = &gCurrentShadowListPtr;
 
-    free_entity_model_by_index(shadow->unk_08);
-    heap_free((**currentShadowListPtr)[shadowIndex]);
-    (**currentShadowListPtr)[shadowIndex] = NULL;
+    free_entity_model_by_index(shadow->entityModelID);
+    heap_free((*gCurrentShadowListPtr)[shadowIndex]);
+    (*gCurrentShadowListPtr)[shadowIndex] = NULL;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_get_collision_flags);
+s32 entity_get_collision_flags(Entity* entity) {
+    u32 listIndex = entity->listIndex;
+    s32 ret = 0;
+    u32 flag;
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801109DC);
+    if (entity->flags & 0x20000) {
+        ret = 0x80;
+        entity->flags &= ~0x20000;
+    }
 
+    flag = gCollisionStatus.currentFloor;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 1;
+    }
+
+    flag = gCollisionStatus.lastTouchedFloor;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x100;
+    }
+
+    flag = gCollisionStatus.currentCeiling;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x4;
+    }
+
+    flag = gCollisionStatus.pushingAgainstWall;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x10;
+    }
+
+    flag = gCollisionStatus.lastWallHammered;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag) {
+        ret |= 0x40;
+    }
+
+    flag = gCollisionStatus.currentWall;
+    if (flag != -1 && (flag & 0x4000) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & 0x8000) {
+        ret |= 8;
+    }
+
+    return ret;
+}
+
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_interacts_with_current_partner);
+
+// float bs
+#ifdef NON_MATCHING
+s32 test_player_entity_aabb(Entity* entity) {
+    f32 temp_f4;
+    f32 colliderDiameter;
+
+    temp_f4 = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
+    if (temp_f4 > 0.0f || gPlayerStatus.colliderHeight + entity->aabb.y < fabsf(temp_f4)) {
+        return 0;
+    }
+
+    if ((gPlayerStatus.colliderDiameter + entity->aabb.x) * 0.5 < fabsf(gPlayerStatus.position.x - entity->position.x)) {
+        return 0;
+    }
+    if ((gPlayerStatus.colliderDiameter + entity->aabb.z) * 0.5 < fabsf(gPlayerStatus.position.z - entity->position.z)) {
+        return 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM(s32, "a5dd0_len_114e0", test_player_entity_aabb);
+#endif
 
 s32 is_player_action_state(ActionState actionState) {
     return actionState == gPlayerActionState;
 }
 
-void func_80110BCC(Entity *entity) {
+void entity_set_render_script(Entity* entity, u32* commandList) {
     if (!(entity->flags & 8)) {
-        set_entity_model_render_command_list(entity->virtualModelIndex);
+        set_entity_model_render_command_list(entity->virtualModelIndex, commandList);
     }
 }
 
-void func_80110BF8(Entity *entity) {
+void func_80110BF8(Entity* entity) {
     entity->unk_07 = 0;
     entity->flags &= ~0x00010000;
 }
@@ -213,11 +827,11 @@ void func_80110BF8(Entity *entity) {
 void load_area_specific_entity_data(void) {
     if (D_8015132C == 0) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
-            dma_copy(&entity_jan_iwa_ROM_START, &entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
-            dma_copy(&entity_sbk_omo_ROM_START, &entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_sbk_omo_ROM_START, entity_sbk_omo_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         } else {
-            dma_copy(&entity_default_ROM_START, &entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
+            dma_copy(entity_default_ROM_START, entity_default_ROM_END, AREA_SPECIFIC_ENTITY_VRAM);
         }
 
         D_8015132C = 1;
@@ -230,7 +844,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110E58);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80110F10);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801110B4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_anim_make_vertex_pointers);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_entity_data_loaded);
 
@@ -240,7 +854,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_split_entity_data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111790);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801117DC);
+INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
             s32 flags);
@@ -250,7 +864,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
 
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111E9C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", UseDynamicShadow);
 
@@ -258,7 +872,7 @@ ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
-        Bytecode* toBind = get_variable(script, *args++);
+        Bytecode* toBind = (Bytecode*)get_variable(script, *args++);
 
         get_entity_by_index(gLastCreatedEntityIndex)->boundScriptBytecode = toBind;
         return ApiStatus_DONE2;
@@ -273,11 +887,11 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32
 
 ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Trigger* trigger;
 
     if (isInitialCall == TRUE) {
-        trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
+        Trigger* trigger = (Trigger*)get_entity_by_index(gLastCreatedEntityIndex)->dataBuf;
         trigger->flags.bytes.genericFlagIndex = get_variable_index(script, *args);
+
         return ApiStatus_DONE2;
     }
 
@@ -292,13 +906,13 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
 
 INCLUDE_ASM(Shadow*, "a5dd0_len_114e0", create_shadow_type, s32 type, f32 x, f32 y, f32 z);
 
-void func_80112328(s32 shadowIndex) {
-    func_8011085C(shadowIndex);
+void delete_shadow(s32 shadowIndex) {
+    _delete_shadow(shadowIndex);
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112344);
+INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* entity);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801125E8);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_standard_shadow_scale);
 
@@ -306,23 +920,23 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_peach_shadow_scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B20);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 
-void NOP_state(void) {
+void state_delegate_NOP(void) {
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112B98);
+// ordering
+#ifdef NON_MATCHING
+void clear_game_modes(void) {
+    s32 i;
 
-typedef struct GameMode {
-    /* 0x00 */ u16 flags;
-    /* 0x04 */ void (*init)(void);
-    /* 0x08 */ void (*step)(struct GameMode*);
-    /* 0x0C */ UNK_FUN_PTR(unk_0C);
-    /* 0x10 */ void (*render)(void);
-    /* 0x14 */ void (*renderAux)(void); ///< @see func_80112FC4
-} GameMode; // size = 0x18
-
-extern GameMode gMainGameState[2]; // TODO rename
+    for (i = 0; i < ARRAY_COUNT(gMainGameState); i++) {
+        gMainGameState[i].flags = 0;
+    }
+}
+#else
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_game_modes);
+#endif
 
 // regalloc?
 #ifndef NON_MATCHING
@@ -346,12 +960,12 @@ GameMode* set_next_game_mode(GameMode* arg0) {
     gameMode->unk_08 = arg0->unk_08;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = &NOP_state;
-    if (gameMode->step == NULL) gameMode->step = &NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->render == NULL) gameMode->render = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
+    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
+    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
 
-    gameMode->renderAux = &NOP_state;
+    gameMode->renderAux = state_delegate_NOP;
     gameMode->init();
 
     return gameMode;
@@ -359,8 +973,7 @@ GameMode* set_next_game_mode(GameMode* arg0) {
 #endif
 
 GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
+    GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
@@ -369,57 +982,45 @@ GameMode* set_game_mode_slot(s32 i, GameMode* arg0) {
     gameMode->step = arg0->step;
     gameMode->render = arg0->render;
     gameMode->unk_0C = NULL;
-    if (gameMode->init == NULL) gameMode->init = &NOP_state;
-    if (gameMode->step == NULL) gameMode->step = &NOP_state;
-    if (gameMode->unk_0C == NULL) gameMode->unk_0C = &NOP_state;
-    if (gameMode->render == NULL) gameMode->render = &NOP_state;
+    if (gameMode->init == NULL) gameMode->init = state_delegate_NOP;
+    if (gameMode->step == NULL) gameMode->step = state_delegate_NOP;
+    if (gameMode->unk_0C == NULL) gameMode->unk_0C = state_delegate_NOP;
+    if (gameMode->render == NULL) gameMode->render = state_delegate_NOP;
 
-    gameMode->renderAux = &NOP_state;
+    gameMode->renderAux = state_delegate_NOP;
     gameMode->init();
 
     return gameMode;
 }
 
-void func_80112D84(s32 i, void (*fn)(void)) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
+void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void)) {
+    GameMode* gameMode = &gMainGameState[i];
 
     ASSERT(i < ARRAY_COUNT(gMainGameState));
 
     gameMode->renderAux = fn;
     gameMode->flags |= 0x20;
+
     if (fn == NULL) {
-        gameMode->renderAux = &NOP_state;
+        gameMode->renderAux = state_delegate_NOP;
     }
 }
 
 void func_80112DD4(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags |= 4;
+    gMainGameState[i].flags |= 4;
 }
 
 void func_80112DFC(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags |= 8;
+    gMainGameState[i].flags |= 8;
 }
 
 void func_80112E24(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags &= ~0x1C;
+    gMainGameState[i].flags &= ~0x1C;
 }
 
 void func_80112E4C(s32 i) {
-    GameMode* gameModes = &gMainGameState;
-    GameMode* gameMode = &gameModes[i];
-
-    gameMode->flags &= ~0x0C;
-    gameMode->flags |= 0x10;
+    gMainGameState[i].flags &= ~0x0C;
+    gMainGameState[i].flags |= 0x10;
 }
 
 #ifndef NON_MATCHING
@@ -442,15 +1043,15 @@ void step_current_game_mode(void) {
 #endif
 
 // similar to step_current_game_mode, but calls unk_0C
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112EEC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_do_unk);
 
 // similar to step_current_game_mode, but calls render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", render_ui);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_backUI);
 
 // calls renderAux and render
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80112FC4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", state_render_frontUI);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", appendGfx_model);
+INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80114B58);
 
@@ -480,13 +1081,17 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80116698);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", render_models);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", appendGfx_model_group);
+void appendGfx_model_group(Model*);
+void appendGfx_model(Model*);
+void render_transform_group(Model*);
+
+INCLUDE_ASM(void, "a5dd0_len_114e0", appendGfx_model_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117D00);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80117E74);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", render_transform_group_node);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011800C);
+INCLUDE_ASM(void, "a5dd0_len_114e0", render_transform_group, Model*);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_801180E8);
 
@@ -500,38 +1105,35 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", load_model_transforms);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_list_index_from_tree_index, s32 treeIndex);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B090);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_transform_group_index, s32 arg0);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, s32 modelID, f32* centerX, f32* centerY,
+INCLUDE_ASM(void, "a5dd0_len_114e0", get_model_center_and_size, u16 modelID, f32* centerX, f32* centerY,
             f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ);
 
-Model* func_8011B1C0(s32 index) {
-    return (*D_801512E0)[index];
+ModelTransformGroup* get_transform_group(s32 index) {
+    return (*gCurrentTransformGroups)[index];
 }
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B1D8);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B37C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", make_transform_group);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B5D0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", enable_transform_group);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011B660);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", disable_transform_group);
 
 void clone_model(u16 srcModelID, u16 newModelID) {
-    ModelList** modelList = &gCurrentModelListPtr;
     Model* srcModel = get_model_from_list_index(get_model_list_index_from_tree_index(srcModelID));
     Model* newModel;
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(**modelList); i++) {
-        Model* model = (**modelList)[i];
-
-        if (model == NULL) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentModelListPtr); i++) {
+        if ((*gCurrentModelListPtr)[i] == NULL) {
             break;
         }
     }
 
-    (**modelList)[i] = newModel = heap_malloc(sizeof(Model));
+    (*gCurrentModelListPtr)[i] = newModel = heap_malloc(sizeof(Model));
     *newModel = *srcModel;
     newModel->modelID = newModelID;
 }
@@ -551,11 +1153,11 @@ void func_8011BAE8(void) {
         }
     }
 
-    for (i = 0; i < ARRAY_COUNT(*D_801512E0); i++) {
-        Model* model = (*D_801512E0)[i];
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
+        ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
-        if (model != NULL) {
-            model->flags &= ~0x0400;
+        if (transformGroup != NULL) {
+            transformGroup->flags &= ~0x0400;
         }
     }
 }
@@ -585,19 +1187,15 @@ s32 is_world_fog_enabled(void) {
 }
 
 void get_world_fog_distance(s32* start, s32* end) {
-    Fog** fog = &wFog;
-
-    *start = (*fog)->startDistance;
-    *end = (*fog)->endDistance;
+    *start = wFog->startDistance;
+    *end = wFog->endDistance;
 }
 
 void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
-    Fog** fog = &wFog;
-
-    *r = (*fog)->r;
-    *g = (*fog)->g;
-    *b = (*fog)->b;
-    *a = (*fog)->a;
+    *r = wFog->r;
+    *g = wFog->g;
+    *b = wFog->b;
+    *a = wFog->a;
 }
 
 void set_tex_panner(Model* model, s8 texPannerID) {
@@ -620,48 +1218,61 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
     texPannerAuxV[texPannerID] = value;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BC7C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCB4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCD0);
+void set_custom_gfx_builders(s32 customGfxIndex, CustomModelGfxBuilderFunc pre, CustomModelGfxBuilderFunc post) {
+    gCurrentCustomModelGfxBuilders[customGfxIndex].pre = pre;
+    gCurrentCustomModelGfxBuilders[customGfxIndex].post = post;
+}
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BCEC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", build_custom_gfx);
 
 /// @returns TRUE if mtx is NULL or identity.
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_identity_fixed_mtx);
 
-INCLUDE_ASM(void, "a5dd0_len_114e0", set_background_color_blend, u8 r, u8 g, u8 b, u8 a);
+void set_background_color_blend(u8 r, u8 g, u8 b, u8 a) {
+    D_8014B74D = r;
+    D_8014B74E = g;
+    D_8014B74F = b;
+    D_8014B74C = a;
+}
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", get_background_color_blend);
+void get_background_color_blend(u8* r, u8* g, u8* b, u8* a) {
+    *r = D_8014B74D;
+    *g = D_8014B74E;
+    *b = D_8014B74F;
+    *a = D_8014B74C;
+}
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BEB4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_fog_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BF14);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_fog_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BF98);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", set_model_env_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011BFD4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", get_model_env_color_parameters);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C028);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_vertex_count);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C0DC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_update_vtx_pointers);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C130);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_local_gfx_copy_vertices);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C164);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_make_local_vertex_copy);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C2B0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_vertices);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C2EC);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_copied_gfx);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C32C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011C80C);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011CFBC);
 
-void func_8011D72C(Gfx** arg0, u16 treeIndex) {
+void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
     Model copied = *model;
     Gfx* oldGfxPos;
@@ -684,13 +1295,13 @@ void func_8011D72C(Gfx** arg0, u16 treeIndex) {
     }
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D7E4);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_get_next_texture_address);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D82C);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_set_all_fog_mode);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D890);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D8D0);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", clear_render_tasks_alt);
 
 RenderTaskEntry* queue_render_task(RenderTask* task) {
     RenderTaskEntry* entry = D_801533A0[D_801533AC];
@@ -711,4 +1322,4 @@ RenderTaskEntry* queue_render_task(RenderTask* task) {
     return entry;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", func_8011D9B8);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", execute_render_tasks);

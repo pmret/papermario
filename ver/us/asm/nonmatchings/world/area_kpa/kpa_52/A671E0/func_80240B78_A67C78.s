@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802439F0_A6AAF0
+.double 180.0
+
+glabel D_802439F8_A6AAF8
+.double 90.0
+
+glabel D_80243A00_A6AB00
+.double 1.2
+
+.section .text
+
 glabel func_80240B78_A67C78
 /* A67C78 80240B78 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* A67C7C 80240B7C AFB3003C */  sw        $s3, 0x3c($sp)
@@ -75,7 +88,7 @@ glabel func_80240B78_A67C78
 /* A67D7C 80240C7C 8E050038 */  lw        $a1, 0x38($s0)
 /* A67D80 80240C80 8E06003C */  lw        $a2, 0x3c($s0)
 /* A67D84 80240C84 8E070040 */  lw        $a3, 0x40($s0)
-/* A67D88 80240C88 0C01BECC */  jal       fx_walk_normal
+/* A67D88 80240C88 0C01BECC */  jal       fx_walk
 /* A67D8C 80240C8C 24040002 */   addiu    $a0, $zero, 2
 /* A67D90 80240C90 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A67D94 80240C94 0C00A6C9 */  jal       clamp_angle
@@ -155,7 +168,7 @@ glabel func_80240B78_A67C78
 /* A67EB4 80240DB4 44820000 */  mtc1      $v0, $f0
 /* A67EB8 80240DB8 00000000 */  nop
 /* A67EBC 80240DBC 46800020 */  cvt.s.w   $f0, $f0
-/* A67EC0 80240DC0 0C037711 */  jal       func_800DDC44
+/* A67EC0 80240DC0 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* A67EC4 80240DC4 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A67EC8 80240DC8 54400007 */  bnel      $v0, $zero, .L80240DE8
 /* A67ECC 80240DCC 24140001 */   addiu    $s4, $zero, 1
@@ -201,7 +214,7 @@ glabel func_80240B78_A67C78
 /* A67F64 80240E64 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* A67F68 80240E68 AFA20010 */  sw        $v0, 0x10($sp)
 /* A67F6C 80240E6C 8E040080 */  lw        $a0, 0x80($s0)
-/* A67F70 80240E70 0C0372DF */  jal       func_800DCB7C
+/* A67F70 80240E70 0C0372DF */  jal       npc_raycast_down_sides
 /* A67F74 80240E74 27A70028 */   addiu    $a3, $sp, 0x28
 /* A67F78 80240E78 1040000B */  beqz      $v0, .L80240EA8
 /* A67F7C 80240E7C 00000000 */   nop
@@ -240,7 +253,7 @@ glabel func_80240B78_A67C78
 /* A67FF4 80240EF4 8E050038 */  lw        $a1, 0x38($s0)
 /* A67FF8 80240EF8 8E06003C */  lw        $a2, 0x3c($s0)
 /* A67FFC 80240EFC 8E070040 */  lw        $a3, 0x40($s0)
-/* A68000 80240F00 0C01BECC */  jal       fx_walk_normal
+/* A68000 80240F00 0C01BECC */  jal       fx_walk
 /* A68004 80240F04 24040002 */   addiu    $a0, $zero, 2
 /* A68008 80240F08 3C01C47A */  lui       $at, 0xc47a
 /* A6800C 80240F0C 44810000 */  mtc1      $at, $f0

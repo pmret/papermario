@@ -33,7 +33,7 @@ glabel battle_item_strange_cake_func_802A13E4_7316E4
 glabel L802A1434_731734
 /* 731734 802A1434 3C05802A */  lui       $a1, %hi(battle_item_strange_cake_func_802A123C_73153C)
 /* 731738 802A1438 24A5123C */  addiu     $a1, $a1, %lo(battle_item_strange_cake_func_802A123C_73153C)
-/* 73173C 802A143C 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* 73173C 802A143C 0C048C8F */  jal       create_generic_entity_frontUI
 /* 731740 802A1440 0000202D */   daddu    $a0, $zero, $zero
 /* 731744 802A1444 3C01802A */  lui       $at, %hi(D_802A2E00)
 /* 731748 802A1448 AC222E00 */  sw        $v0, %lo(D_802A2E00)($at)
@@ -57,11 +57,11 @@ glabel L802A1434_731734
 /* 73178C 802A148C 00021080 */  sll       $v0, $v0, 2
 /* 731790 802A1490 00531021 */  addu      $v0, $v0, $s3
 /* 731794 802A1494 8C440000 */  lw        $a0, ($v0)
-/* 731798 802A1498 0C050529 */  jal       create_icon
+/* 731798 802A1498 0C050529 */  jal       create_hud_element
 /* 73179C 802A149C 26100001 */   addiu    $s0, $s0, 1
 /* 7317A0 802A14A0 0040202D */  daddu     $a0, $v0, $zero
 /* 7317A4 802A14A4 24050080 */  addiu     $a1, $zero, 0x80
-/* 7317A8 802A14A8 0C051280 */  jal       set_icon_flags
+/* 7317A8 802A14A8 0C051280 */  jal       set_hud_element_flags
 /* 7317AC 802A14AC AE440000 */   sw       $a0, ($s2)
 /* 7317B0 802A14B0 2A020005 */  slti      $v0, $s0, 5
 /* 7317B4 802A14B4 1440FFF3 */  bnez      $v0, .L802A1484
@@ -279,12 +279,12 @@ glabel L802A1754_731A54
 /* 731AC0 802A17C0 A462017A */  sh        $v0, 0x17a($v1)
 /* 731AC4 802A17C4 00021400 */  sll       $v0, $v0, 0x10
 /* 731AC8 802A17C8 00021403 */  sra       $v0, $v0, 0x10
-/* 731ACC 802A17CC 0C048D70 */  jal       free_dynamic_entity
+/* 731ACC 802A17CC 0C048D70 */  jal       free_generic_entity
 /* 731AD0 802A17D0 ACC20084 */   sw       $v0, 0x84($a2)
 .L802A17D4:
 /* 731AD4 802A17D4 8E240000 */  lw        $a0, ($s1)
 /* 731AD8 802A17D8 26310004 */  addiu     $s1, $s1, 4
-/* 731ADC 802A17DC 0C05123D */  jal       free_icon
+/* 731ADC 802A17DC 0C05123D */  jal       free_hud_element
 /* 731AE0 802A17E0 26100001 */   addiu    $s0, $s0, 1
 /* 731AE4 802A17E4 2A020005 */  slti      $v0, $s0, 5
 /* 731AE8 802A17E8 1440FFFA */  bnez      $v0, .L802A17D4

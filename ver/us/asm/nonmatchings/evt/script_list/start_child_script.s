@@ -133,7 +133,7 @@ glabel start_child_script
 /* E8358 802C39A8 00240821 */  addu      $at, $at, $a0
 /* E835C 802C39AC AC23AA98 */  sw        $v1, %lo(gScriptIdList)($at)
 .L802C39B0:
-/* E8360 802C39B0 0C0B0CE4 */  jal       func_802C3390
+/* E8360 802C39B0 0C0B0CE4 */  jal       suspend_frozen_scripts
 /* E8364 802C39B4 0200202D */   daddu    $a0, $s0, $zero
 /* E8368 802C39B8 3C03802E */  lui       $v1, %hi(gStaticScriptCounter)
 /* E836C 802C39BC 24639CA0 */  addiu     $v1, $v1, %lo(gStaticScriptCounter)

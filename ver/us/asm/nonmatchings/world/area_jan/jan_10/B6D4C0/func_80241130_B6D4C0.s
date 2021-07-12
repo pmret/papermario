@@ -53,7 +53,7 @@ glabel func_80241130_B6D4C0
 /* B6D57C 802411EC E7A40020 */  swc1      $f4, 0x20($sp)
 /* B6D580 802411F0 AFA30010 */  sw        $v1, 0x10($sp)
 /* B6D584 802411F4 27A3002C */  addiu     $v1, $sp, 0x2c
-/* B6D588 802411F8 0C04497A */  jal       func_801125E8
+/* B6D588 802411F8 0C04497A */  jal       entity_raycast_down
 /* B6D58C 802411FC AFA30014 */   sw       $v1, 0x14($sp)
 /* B6D590 80241200 8FA5002C */  lw        $a1, 0x2c($sp)
 /* B6D594 80241204 0C044A17 */  jal       set_standard_shadow_scale
@@ -79,7 +79,7 @@ glabel func_80241130_B6D4C0
 /* B6D5E4 80241254 E6000024 */   swc1     $f0, 0x24($s0)
 .L80241258:
 /* B6D5E8 80241258 8E240078 */  lw        $a0, 0x78($s1)
-/* B6D5EC 8024125C 0C0448CA */  jal       func_80112328
+/* B6D5EC 8024125C 0C0448CA */  jal       delete_shadow
 /* B6D5F0 80241260 00000000 */   nop
 /* B6D5F4 80241264 24020002 */  addiu     $v0, $zero, 2
 .L80241268:

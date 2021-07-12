@@ -85,7 +85,7 @@ glabel flo_17_func_80241C64_CD8F44
 .L80241D98:
 /* CD9078 80241D98 0280202D */  daddu     $a0, $s4, $zero
 /* CD907C 80241D9C 02C0282D */  daddu     $a1, $s6, $zero
-/* CD9080 80241DA0 0C09001C */  jal       flo_17_func_80240070_CD7350
+/* CD9080 80241DA0 0C09001C */  jal       flo_17_UnkNpcAIFunc23
 /* CD9084 80241DA4 02A0302D */   daddu    $a2, $s5, $zero
 .L80241DA8:
 /* CD9088 80241DA8 0280202D */  daddu     $a0, $s4, $zero

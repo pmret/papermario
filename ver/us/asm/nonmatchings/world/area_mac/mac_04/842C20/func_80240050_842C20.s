@@ -68,7 +68,7 @@ glabel func_80240050_842C20
 /* 842D1C 8024014C AFB30014 */  sw        $s3, 0x14($sp)
 /* 842D20 80240150 AFB20018 */  sw        $s2, 0x18($sp)
 /* 842D24 80240154 AFB0001C */  sw        $s0, 0x1c($sp)
-/* 842D28 80240158 0C046FAD */  jal       func_8011BEB4
+/* 842D28 80240158 0C046FAD */  jal       set_model_fog_color_parameters
 /* 842D2C 8024015C AFA20020 */   sw       $v0, 0x20($sp)
 /* 842D30 80240160 8FBF004C */  lw        $ra, 0x4c($sp)
 /* 842D34 80240164 8FBE0048 */  lw        $fp, 0x48($sp)

@@ -66,7 +66,7 @@ glabel func_802409D4_A64A64
 /* A64B58 80240AC8 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* A64B5C 80240ACC AFA20010 */  sw        $v0, 0x10($sp)
 /* A64B60 80240AD0 8E440080 */  lw        $a0, 0x80($s2)
-/* A64B64 80240AD4 0C0372DF */  jal       func_800DCB7C
+/* A64B64 80240AD4 0C0372DF */  jal       npc_raycast_down_sides
 /* A64B68 80240AD8 27A50018 */   addiu    $a1, $sp, 0x18
 /* A64B6C 80240ADC 10400004 */  beqz      $v0, .L80240AF0
 /* A64B70 80240AE0 2402000B */   addiu    $v0, $zero, 0xb

@@ -48,11 +48,11 @@ glabel clear_item_entity_data
 .L80131090:
 /* C7790 80131090 3C058013 */  lui       $a1, %hi(draw_item_entities)
 /* C7794 80131094 24A52C80 */  addiu     $a1, $a1, %lo(draw_item_entities)
-/* C7798 80131098 0C048C56 */  jal       create_dynamic_entity_world
+/* C7798 80131098 0C048C56 */  jal       create_generic_entity_world
 /* C779C 8013109C 0000202D */   daddu    $a0, $zero, $zero
 /* C77A0 801310A0 3C058013 */  lui       $a1, %hi(func_80132D94)
 /* C77A4 801310A4 24A52D94 */  addiu     $a1, $a1, %lo(func_80132D94)
-/* C77A8 801310A8 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* C77A8 801310A8 0C048C8F */  jal       create_generic_entity_frontUI
 /* C77AC 801310AC 0000202D */   daddu    $a0, $zero, $zero
 /* C77B0 801310B0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* C77B4 801310B4 3C018015 */  lui       $at, %hi(D_801565A4)

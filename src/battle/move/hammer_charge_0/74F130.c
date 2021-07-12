@@ -15,7 +15,7 @@ ApiStatus func_802A10C8_74F1F8(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     s32 var3 = get_variable(script, *args++);
 
-    func_800718D0(0, var1, var2, var3, 1.0f, 60);
+    playFX_56(0, var1, var2, var3, 1.0f, 60);
     battleStatus->hammerCharge += 1;
 
     if (battleStatus->hammerCharge > 99) {
@@ -36,7 +36,7 @@ ApiStatus func_802A11CC_74F2FC(ScriptInstance* script, s32 isInitialCall) {
     s32 var2 = get_variable(script, *args++);
     f32 var3 = get_float_variable(script, *args++);
 
-    func_800720B0(6, var0 + 10, var1 + 18, var2, var3, 45);
+    playFX_6B(6, var0 + 10, var1 + 18, var2, var3, 45);
 
     return ApiStatus_DONE2;
 }

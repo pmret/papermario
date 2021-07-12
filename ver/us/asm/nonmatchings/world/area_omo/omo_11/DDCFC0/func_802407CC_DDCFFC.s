@@ -7,7 +7,7 @@ glabel func_802407CC_DDCFFC
 /* DDD004 802407D4 8C82000C */  lw        $v0, 0xc($a0)
 /* DDD008 802407D8 0C0B1EAF */  jal       get_variable
 /* DDD00C 802407DC 8C450000 */   lw       $a1, ($v0)
-/* DDD010 802407E0 0C0B95A4 */  jal       func_802E5690
+/* DDD010 802407E0 0C0B95A4 */  jal       entity_upgrade_block_hide_content
 /* DDD014 802407E4 0040202D */   daddu    $a0, $v0, $zero
 /* DDD018 802407E8 8FBF0010 */  lw        $ra, 0x10($sp)
 /* DDD01C 802407EC 24020002 */  addiu     $v0, $zero, 2

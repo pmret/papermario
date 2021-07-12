@@ -178,7 +178,7 @@ glabel show_first_strike_message
 /* 1D2EC 80041EEC 240700FF */  addiu     $a3, $zero, 0xff
 /* 1D2F0 80041EF0 2402000A */  addiu     $v0, $zero, 0xa
 /* 1D2F4 80041EF4 AFA20010 */  sw        $v0, 0x10($sp)
-/* 1D2F8 80041EF8 0C04993B */  jal       draw_msg
+/* 1D2F8 80041EF8 0C04993B */  jal       draw_string
 /* 1D2FC 80041EFC AFA00014 */   sw       $zero, 0x14($sp)
 .L80041F00:
 /* 1D300 80041F00 8FBF0054 */  lw        $ra, 0x54($sp)

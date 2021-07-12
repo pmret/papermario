@@ -13,7 +13,7 @@ glabel pause_tabs_draw_stats_805418
 /* 805438 80244BB8 27A50010 */  addiu     $a1, $sp, 0x10
 /* 80543C 80244BBC 0040802D */  daddu     $s0, $v0, $zero
 /* 805440 80244BC0 27A60014 */  addiu     $a2, $sp, 0x14
-/* 805444 80244BC4 0C0470AC */  jal       func_8011C2B0
+/* 805444 80244BC4 0C0470AC */  jal       mdl_get_copied_vertices
 /* 805448 80244BC8 27A70018 */   addiu    $a3, $sp, 0x18
 /* 80544C 80244BCC 8FA20018 */  lw        $v0, 0x18($sp)
 /* 805450 80244BD0 1840002C */  blez      $v0, .L80244C84
@@ -79,7 +79,7 @@ glabel pause_tabs_draw_stats_805418
 /* 805518 80244C98 24420008 */  addiu     $v0, $v0, 8
 /* 80551C 80244C9C AC620000 */  sw        $v0, ($v1)
 /* 805520 80244CA0 3C02DE00 */  lui       $v0, 0xde00
-/* 805524 80244CA4 0C0470BB */  jal       func_8011C2EC
+/* 805524 80244CA4 0C0470BB */  jal       mdl_get_copied_gfx
 /* 805528 80244CA8 AE020000 */   sw       $v0, ($s0)
 /* 80552C 80244CAC AE020004 */  sw        $v0, 4($s0)
 /* 805530 80244CB0 8FBF0024 */  lw        $ra, 0x24($sp)

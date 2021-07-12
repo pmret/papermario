@@ -25,7 +25,7 @@ void load_map_bg(char* optAssetName) {
     }
 }
 
-void use_default_background_settings(void) {
+void reset_background_settings(void) {
     D_801595A0 = 0;
     D_8014F12F = 0;
     gGameStatusPtr->unk_15C = 0xB4;
@@ -61,9 +61,9 @@ u16 blend_background_channel(s32 arg0, s32 arg1, s32 alpha) {
     return temp_lo;
 }
 
-INCLUDE_ASM(s32, "dc470_len_14c0", enable_background_wave);
+INCLUDE_ASM(s32, "dc470_len_14c0", appendGfx_background_texture);
 
-void func_8014720C(void) {
+void enable_background_wave(void) {
     D_8014F12F = 1;
 }
 

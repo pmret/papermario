@@ -1,9 +1,9 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc7)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     Enemy* enemy2;
     Npc* npc2;
     f32 posX, posZ;
@@ -30,7 +30,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance *script, s32 isInitialCall) {
             enemy->unk_07 = 1;
             if (enemy2->varTable[0] == 3) {
                 if (enemy->varTable[15] != 0) {
-                    func_800494C0(npc2, enemy->varTable[15], 0);
+                    ai_enemy_play_sound(npc2, enemy->varTable[15], 0);
                 }
                 posX = npc2->pos.x;
                 posZ = npc2->pos.z;

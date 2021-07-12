@@ -20,7 +20,7 @@ ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
 
-ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowMessageAtScreenPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -30,8 +30,8 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
         s32* temp802DB264 = &D_802DB264;
 
         *temp802DB264 = 0;
-        gCurrentPrintContext = load_string(stringID, temp802DB264);
-        clamp_printer_coords(gCurrentPrintContext, x, y);
+        gCurrentPrintContext = msg_get_printer_for_string(stringID, temp802DB264);
+        msg_printer_set_origin_pos(gCurrentPrintContext, x, y);
     }
 
     if (gCurrentPrintContext->stateFlags & 0x40) {
@@ -46,7 +46,7 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus ShowMessageAtWorldPos(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowMessageAtWorldPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PrintContext** currentPrintContext;
     s32* currentCameraID = &gCurrentCameraID;
@@ -63,9 +63,9 @@ ApiStatus ShowMessageAtWorldPos(ScriptInstance *script, s32 isInitialCall) {
 
         *temp802DB264 = 0;
         currentPrintContext = &gCurrentPrintContext;
-        *currentPrintContext = load_string(stringID, temp802DB264);
+        *currentPrintContext = msg_get_printer_for_string(stringID, temp802DB264);
         get_screen_coords(*currentCameraID, x, y, z, &x2, &y2, &z2);
-        clamp_printer_coords(*currentPrintContext, x2, y2);
+        msg_printer_set_origin_pos(*currentPrintContext, x2, y2);
     }
 
     if (gCurrentPrintContext->stateFlags & 0x40) {
@@ -99,7 +99,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        load_message_to_printer(get_variable(script, *args), gCurrentPrintContext);
+        msg_printer_load_string(get_variable(script, *args), gCurrentPrintContext);
     }
 
     if (gCurrentPrintContext->stateFlags & 0x40) {
@@ -112,7 +112,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus ShowChoice(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PrintContext** temp802DB268;
 
@@ -120,7 +120,7 @@ ApiStatus ShowChoice(ScriptInstance *script, s32 isInitialCall) {
         s32 stringID = get_variable(script, *args++);
 
         script->functionTemp[1].s = 0;
-        D_802DB268 = load_string(stringID, &script->functionTemp[1]);
+        D_802DB268 = msg_get_printer_for_string(stringID, &script->functionTemp[1]);
     }
 
     temp802DB268 = &D_802DB268;

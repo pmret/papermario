@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ld_addrs.h"
 
 typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
@@ -8,9 +9,10 @@ extern EffectTableEntry gEffectTable[135];
 
 #define EFFECT_LOADED 1
 
-extern EffectInstance* D_800B4398[96]; //effectInstanceList
-extern Effect D_800A4000[15];
 extern void* D_80059C80;
+extern Effect D_800A4000[15];
+extern EffectInstance* D_800B4398[96]; //effectInstanceList
+extern s32 D_801A6000;
 
 INCLUDE_ASM(s32, "341d0", func_80058DD0);
 
@@ -34,16 +36,36 @@ INCLUDE_ASM(s32, "341d0", func_80059BD4);
 void stub_effect_delegate(EffectInstance* effectInst) {
 }
 
-INCLUDE_ASM(s32, "341d0", set_effect_pos_offset);
+void set_effect_pos_offset(Effect* effect, f32 x, f32 y, f32 z) {
+    EffectInstanceData* instanceData = effect->instanceData;
 
-INCLUDE_ASM(s32, "341d0", clear_effect_data);
+    instanceData->pos.x = x;
+    instanceData->pos.y = y;
+    instanceData->pos.z = z;
+}
+
+void clear_effect_data(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
+        D_800A4000[i].flags = 0;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
+        D_800B4398[i] = 0;
+    }
+
+    osUnmapTLBAll();
+    osMapTLB(0x10, NULL, _325AD0_VRAM, (s32)&D_801A6000 & 0xFFFFFF, -1, -1);
+    dma_copy(_325AD0_ROM_START, _325AD0_ROM_END, _325AD0_VRAM);
+}
 
 void func_80059D48(void) {
 }
 
 INCLUDE_ASM(s32, "341d0", update_effects);
 
-s32 render_effects(void) {
+s32 render_effects_world(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
@@ -59,7 +81,7 @@ s32 render_effects(void) {
     }
 }
 
-INCLUDE_ASM(s32, "341d0", func_80059F94);
+INCLUDE_ASM(s32, "341d0", render_effects_UI);
 
 EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;

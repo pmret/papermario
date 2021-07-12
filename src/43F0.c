@@ -50,7 +50,7 @@ Gfx D_80074580[] = {
 };
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void func_80029860(s32 romStart, s32 vramDest, s32 length);
+void dma_write_block(s32 romStart, s32 vramDest, s32 length);
 
 #define ROM_CHUNK_SIZE 0x2000
 
@@ -60,7 +60,7 @@ f32 length2D(f32 x, f32 y) {
 
 HeapNode* _heap_create(s32* addr, u32 size) {
     if (size < 32) {
-        return (HeapNode*) -1;
+        return (HeapNode*)-1;
     } else {
         HeapNode* heapNode = ALIGN16((s32)addr);
 
@@ -123,7 +123,7 @@ typedef struct {
 u32 func_8006DDC0(s64 arg0, s64 arg1);
 u64 func_8006D800(s64 arg0, s64 arg1);
 
-char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
+char* int_to_string(s32 arg01, char* arg1, s32 arg2) {
     Unk_struct_43F0 unk_struct;
     s32 phi_s4 = 0x26;
     s32 phi_fp = 0;
@@ -136,7 +136,7 @@ char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
     unk_struct.unk_39 = 0;
 
     while (TRUE) {
-        u8 (*new_var)[];
+        u8(*new_var)[];
 
         unk_struct.unk_00[phi_s4] = (*(new_var = &D_800743E0))[func_8006DDC0(arg0, arg2)];
         arg0 = func_8006D800(arg0, arg2);
@@ -156,7 +156,7 @@ char *int_to_string(s32 arg01, char *arg1, s32 arg2) {
     return arg1;
 }
 #else
-INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char *arg1, s32 arg2);
+INCLUDE_ASM(char*, "43F0", int_to_string, s32 arg01, char* arg1, s32 arg2);
 #endif
 
 // should maybe be called bzero
@@ -195,22 +195,22 @@ s32 dma_copy(Addr romStart, Addr romEnd, void* vramDest) {
     return length;
 }
 
-s32 func_800297D4(s32 romStart, s32 romEnd, void* vramDest) {
+s32 dma_write(s32 romStart, s32 romEnd, void* vramDest) {
     u32 length = romEnd - romStart;
     s32 i;
 
     for (i = 0; i + ROM_CHUNK_SIZE < length; i += ROM_CHUNK_SIZE) {
-        func_80029860(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
+        dma_write_block(romStart + i, vramDest + i, ROM_CHUNK_SIZE);
     }
 
     if (i != length) {
-        func_80029860(romStart + i, vramDest + i, length - i);
+        dma_write_block(romStart + i, vramDest + i, length - i);
     }
 
     return length;
 }
 
-void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
+void dma_write_block(s32 dramAddr, s32 devAddr, s32 size) {
     OSIoMesg osIoMesg;
     OSMesg osMesg;
     OSMesgQueue osMesgQueue;
@@ -228,7 +228,7 @@ void func_80029860(s32 dramAddr, s32 devAddr, s32 size) {
     osRecvMesg(&osMesgQueue, &osMesg, 1);
 }
 
-s32 _advance_rng(void) {
+s32 advance_rng(void) {
     gRandSeed *= 0x5D588B65;
     gRandSeed++;
 
@@ -237,8 +237,8 @@ s32 _advance_rng(void) {
     return gRandSeed;
 }
 
-f32 func_80029934(void) {
-    s32 temp_v0 = _advance_rng() & 0x7FFF;
+f32 rand_float(void) {
+    s32 temp_v0 = advance_rng() & 0x7FFF;
     f64 temp_f2 = temp_v0;
 
     if (temp_v0 < 0) {
@@ -259,7 +259,7 @@ s32 func_80029994(s32 arg0) {
     }
 
     do  {
-        result = _advance_rng() / div;
+        result = advance_rng() / div;
     } while (result >= plusOne);
 
     return result;
@@ -483,9 +483,11 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
         case EASING_QUARTIC_IN:
             return start + (QUART(elapsed) * (end - start) / QUART(duration));
         case EASING_COS_SLOW_OVERSHOOT:
-            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) *
+                           (duration - elapsed)) / SQ((f32)duration));
         case EASING_COS_FAST_OVERSHOOT:
-            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) * (duration - elapsed)) / SQ((f32)duration));
+            return end - (((end - start) * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) *
+                           (duration - elapsed)) / SQ((f32)duration));
         case EASING_QUADRATIC_OUT:
             val1s = duration - elapsed;
             return (start + (end - start)) - ((SQ(val1s) * (end - start))) / SQ(duration);
@@ -496,7 +498,8 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
             val1s = duration - elapsed;
             return (start + (end - start)) - ((QUART(val1s) * (end - start))) / QUART(duration);
         case EASING_COS_BOUNCE:
-            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) * (duration - elapsed) / SQ((f32)duration);
+            temp_f4 = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) *
+                      (duration - elapsed) / SQ((f32)duration);
             if (temp_f4 < 0.0f) {
                 temp_f4 = -temp_f4;
             }
@@ -512,7 +515,7 @@ f32 update_lerp(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
     return 0.0f;
 }
 
-void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
+void appendGfx_startup_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_80074580);
 
@@ -533,7 +536,7 @@ void func_8002A904(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bot
 
 }
 
-void func_8002AAC4(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
     u16 temp;
 
     if (right < left) {
@@ -548,10 +551,10 @@ void func_8002AAC4(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b
         top = temp;
     }
 
-    func_8002A904(r, g, b, a, left, top, right, bottom);
+    appendGfx_startup_prim_rect(r, g, b, a, left, top, right, bottom);
 }
 
-void func_8002AB5C(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
+void startup_draw_prim_rect(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a) {
     u16 temp;
 
     if (right < left) {
@@ -566,5 +569,5 @@ void func_8002AB5C(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b
         top = temp;
     }
 
-    func_8002A904(r, g, b, a, left, top, right, bottom);
+    appendGfx_startup_prim_rect(r, g, b, a, left, top, right, bottom);
 }

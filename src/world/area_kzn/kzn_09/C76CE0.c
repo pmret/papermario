@@ -1,5 +1,8 @@
 #include "kzn_09.h"
 
+static char* N(exit_str_0) = "kzn_03";
+static char* N(exit_str_1) = "kzn_10";
+
 #include "world/common/SetOverrideFlags_40.inc.c"
 
 #include "world/common/UnkFunc17.inc.c"
@@ -7,7 +10,7 @@
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024003C_C76D1C);
 /*
 ApiStatus N(func_8024003C_C76D1C)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -16,13 +19,7 @@ ApiStatus N(func_8024003C_C76D1C)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_802401CC_C76EAC);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_09/C76CE0", func_8024041C_C770FC);
-/*
-ApiStatus N(func_8024041C_C770FC)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 
@@ -55,7 +52,7 @@ ApiStatus N(func_80240600_C772E0)(ScriptInstance *script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;
             userDataPtr->unk_20[i] = save;

@@ -1,5 +1,8 @@
 #include "common.h"
 
+// TODO this is the bss for the whole segment - break it up
+static char bss[0x8580];
+
 // Need data segment and vars declared above
 #ifdef NON_MATCHING
 void pause_set_cursor_opacity(s32 val) {
@@ -114,8 +117,8 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
         if (opacity > 255) {
             opacity = 255;
         }
-        icon_set_opacity(gPauseMenuCommonIconIDs[0], opacity);
-        set_icon_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
+        set_hud_element_alpha(gPauseMenuCommonIconIDs[0], opacity);
+        set_hud_element_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
         draw_icon_2(gPauseMenuCommonIconIDs[0]);
     }
 }

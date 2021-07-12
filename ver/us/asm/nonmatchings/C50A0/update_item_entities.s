@@ -44,7 +44,7 @@ glabel update_item_entities
 /* C865C 80131F5C 00000000 */   nop
 /* C8660 80131F60 3C058010 */  lui       $a1, %hi(D_80104AC0)
 /* C8664 80131F64 24A54AC0 */  addiu     $a1, $a1, %lo(D_80104AC0)
-/* C8668 80131F68 0C04C27C */  jal       func_801309F0
+/* C8668 80131F68 0C04C27C */  jal       sparkle_script_init
 /* C866C 80131F6C 0220202D */   daddu    $a0, $s1, $zero
 /* C8670 80131F70 0C00A67F */  jal       rand_int
 /* C8674 80131F74 24040010 */   addiu    $a0, $zero, 0x10
@@ -60,10 +60,10 @@ glabel update_item_entities
 /* C869C 80131F9C 3C018015 */  lui       $at, %hi(D_80155D90)
 /* C86A0 80131FA0 A4225D90 */  sh        $v0, %lo(D_80155D90)($at)
 .L80131FA4:
-/* C86A4 80131FA4 0C04C2B3 */  jal       do_animation
+/* C86A4 80131FA4 0C04C2B3 */  jal       sparkle_script_update
 /* C86A8 80131FA8 0220202D */   daddu    $a0, $s1, $zero
 .L80131FAC:
-/* C86AC 80131FAC 0C04C775 */  jal       func_80131DD4
+/* C86AC 80131FAC 0C04C775 */  jal       item_entity_update
 /* C86B0 80131FB0 0220202D */   daddu    $a0, $s1, $zero
 /* C86B4 80131FB4 8223001B */  lb        $v1, 0x1b($s1)
 /* C86B8 80131FB8 2C62001D */  sltiu     $v0, $v1, 0x1d
@@ -148,7 +148,7 @@ glabel L8013204C_C874C
 /* C87D8 801320D8 E7A60024 */  swc1      $f6, 0x24($sp)
 /* C87DC 801320DC E7A40020 */  swc1      $f4, 0x20($sp)
 /* C87E0 801320E0 E7A0001C */  swc1      $f0, 0x1c($sp)
-/* C87E4 801320E4 0C0372DF */  jal       func_800DCB7C
+/* C87E4 801320E4 0C0372DF */  jal       npc_raycast_down_sides
 /* C87E8 801320E8 AFA30010 */   sw       $v1, 0x10($sp)
 /* C87EC 801320EC C7A00018 */  lwc1      $f0, 0x18($sp)
 /* C87F0 801320F0 C7A2001C */  lwc1      $f2, 0x1c($sp)

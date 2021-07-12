@@ -397,7 +397,7 @@ glabel pause_spirits_draw_contents
 /* 14034C 8024D00C 00021080 */  sll       $v0, $v0, 2
 /* 140350 8024D010 00561021 */  addu      $v0, $v0, $s6
 /* 140354 8024D014 8C440000 */  lw        $a0, ($v0)
-/* 140358 8024D018 0C0B78F6 */  jal       func_802DE3D8
+/* 140358 8024D018 0C0B78F6 */  jal       spr_draw_npc_sprite
 /* 14035C 8024D01C 00A0382D */   daddu    $a3, $a1, $zero
 /* 140360 8024D020 3C028027 */  lui       $v0, %hi(D_802706FC)
 /* 140364 8024D024 8C4206FC */  lw        $v0, %lo(D_802706FC)($v0)

@@ -16,7 +16,7 @@ glabel func_80241168_BCFD58
 /* BCFD84 80241194 8CC30000 */  lw        $v1, ($a2)
 /* BCFD88 80241198 0040882D */  daddu     $s1, $v0, $zero
 /* BCFD8C 8024119C 34630010 */  ori       $v1, $v1, 0x10
-/* BCFD90 802411A0 0C048C8F */  jal       create_dynamic_entity_frontUI
+/* BCFD90 802411A0 0C048C8F */  jal       create_generic_entity_frontUI
 /* BCFD94 802411A4 ACC30000 */   sw       $v1, ($a2)
 /* BCFD98 802411A8 24040059 */  addiu     $a0, $zero, 0x59
 /* BCFD9C 802411AC 26230164 */  addiu     $v1, $s1, 0x164
@@ -54,53 +54,53 @@ glabel func_80241168_BCFD58
 /* BCFE18 80241228 AE2001CC */  sw        $zero, 0x1cc($s1)
 /* BCFE1C 8024122C AE220038 */  sw        $v0, 0x38($s1)
 /* BCFE20 80241230 E62001C4 */  swc1      $f0, 0x1c4($s1)
-/* BCFE24 80241234 0C050529 */  jal       create_icon
+/* BCFE24 80241234 0C050529 */  jal       create_hud_element
 /* BCFE28 80241238 E62001D0 */   swc1     $f0, 0x1d0($s1)
 /* BCFE2C 8024123C 0040802D */  daddu     $s0, $v0, $zero
 /* BCFE30 80241240 8E250034 */  lw        $a1, 0x34($s1)
 /* BCFE34 80241244 8E260038 */  lw        $a2, 0x38($s1)
 /* BCFE38 80241248 0200202D */  daddu     $a0, $s0, $zero
-/* BCFE3C 8024124C 0C051261 */  jal       set_icon_render_pos
+/* BCFE3C 8024124C 0C051261 */  jal       set_hud_element_render_pos
 /* BCFE40 80241250 AE30003C */   sw       $s0, 0x3c($s1)
 /* BCFE44 80241254 0200202D */  daddu     $a0, $s0, $zero
-/* BCFE48 80241258 0C051277 */  jal       func_801449DC
+/* BCFE48 80241258 0C051277 */  jal       set_hud_element_render_depth
 /* BCFE4C 8024125C 0000282D */   daddu    $a1, $zero, $zero
 /* BCFE50 80241260 0200202D */  daddu     $a0, $s0, $zero
-/* BCFE54 80241264 0C051280 */  jal       set_icon_flags
+/* BCFE54 80241264 0C051280 */  jal       set_hud_element_flags
 /* BCFE58 80241268 24050082 */   addiu    $a1, $zero, 0x82
 /* BCFE5C 8024126C 3C048011 */  lui       $a0, %hi(D_80108AFC)
 /* BCFE60 80241270 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)
-/* BCFE64 80241274 0C050529 */  jal       create_icon
+/* BCFE64 80241274 0C050529 */  jal       create_hud_element
 /* BCFE68 80241278 00000000 */   nop
 /* BCFE6C 8024127C 0040802D */  daddu     $s0, $v0, $zero
 /* BCFE70 80241280 8E250034 */  lw        $a1, 0x34($s1)
 /* BCFE74 80241284 8E260038 */  lw        $a2, 0x38($s1)
 /* BCFE78 80241288 0200202D */  daddu     $a0, $s0, $zero
 /* BCFE7C 8024128C AE300040 */  sw        $s0, 0x40($s1)
-/* BCFE80 80241290 0C051261 */  jal       set_icon_render_pos
+/* BCFE80 80241290 0C051261 */  jal       set_hud_element_render_pos
 /* BCFE84 80241294 24C6001C */   addiu    $a2, $a2, 0x1c
 /* BCFE88 80241298 0200202D */  daddu     $a0, $s0, $zero
-/* BCFE8C 8024129C 0C051277 */  jal       func_801449DC
+/* BCFE8C 8024129C 0C051277 */  jal       set_hud_element_render_depth
 /* BCFE90 802412A0 0000282D */   daddu    $a1, $zero, $zero
 /* BCFE94 802412A4 0200202D */  daddu     $a0, $s0, $zero
-/* BCFE98 802412A8 0C051280 */  jal       set_icon_flags
+/* BCFE98 802412A8 0C051280 */  jal       set_hud_element_flags
 /* BCFE9C 802412AC 24050082 */   addiu    $a1, $zero, 0x82
 /* BCFEA0 802412B0 3C048011 */  lui       $a0, %hi(D_80109244)
 /* BCFEA4 802412B4 24849244 */  addiu     $a0, $a0, %lo(D_80109244)
-/* BCFEA8 802412B8 0C050529 */  jal       create_icon
+/* BCFEA8 802412B8 0C050529 */  jal       create_hud_element
 /* BCFEAC 802412BC 00000000 */   nop
 /* BCFEB0 802412C0 0040802D */  daddu     $s0, $v0, $zero
 /* BCFEB4 802412C4 8E250034 */  lw        $a1, 0x34($s1)
 /* BCFEB8 802412C8 8E260038 */  lw        $a2, 0x38($s1)
 /* BCFEBC 802412CC 0200202D */  daddu     $a0, $s0, $zero
 /* BCFEC0 802412D0 AE300044 */  sw        $s0, 0x44($s1)
-/* BCFEC4 802412D4 0C051261 */  jal       set_icon_render_pos
+/* BCFEC4 802412D4 0C051261 */  jal       set_hud_element_render_pos
 /* BCFEC8 802412D8 24C6001C */   addiu    $a2, $a2, 0x1c
 /* BCFECC 802412DC 0200202D */  daddu     $a0, $s0, $zero
-/* BCFED0 802412E0 0C051277 */  jal       func_801449DC
+/* BCFED0 802412E0 0C051277 */  jal       set_hud_element_render_depth
 /* BCFED4 802412E4 0000282D */   daddu    $a1, $zero, $zero
 /* BCFED8 802412E8 0200202D */  daddu     $a0, $s0, $zero
-/* BCFEDC 802412EC 0C051280 */  jal       set_icon_flags
+/* BCFEDC 802412EC 0C051280 */  jal       set_hud_element_flags
 /* BCFEE0 802412F0 24050082 */   addiu    $a1, $zero, 0x82
 /* BCFEE4 802412F4 8FBF0018 */  lw        $ra, 0x18($sp)
 /* BCFEE8 802412F8 8FB10014 */  lw        $s1, 0x14($sp)

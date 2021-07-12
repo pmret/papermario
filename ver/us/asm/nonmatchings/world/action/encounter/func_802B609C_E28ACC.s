@@ -157,7 +157,7 @@ glabel func_802B609C_E28ACC
 /* E28CEC 802B62BC 27A20048 */  addiu     $v0, $sp, 0x48
 /* E28CF0 802B62C0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E28CF4 802B62C4 27A2004C */  addiu     $v0, $sp, 0x4c
-/* E28CF8 802B62C8 0C03791B */  jal       func_800DE46C
+/* E28CF8 802B62C8 0C03791B */  jal       player_raycast_below_cam_relative
 /* E28CFC 802B62CC AFA20020 */   sw       $v0, 0x20($sp)
 /* E28D00 802B62D0 04400003 */  bltz      $v0, .L802B62E0
 /* E28D04 802B62D4 00000000 */   nop
@@ -183,7 +183,7 @@ glabel func_802B609C_E28ACC
 /* E28D4C 802B631C 00000000 */   nop
 /* E28D50 802B6320 0C039769 */  jal       set_action_state
 /* E28D54 802B6324 24040008 */   addiu    $a0, $zero, 8
-/* E28D58 802B6328 0C038C1B */  jal       gravity_use_fall_params
+/* E28D58 802B6328 0C038C1B */  jal       gravity_use_fall_parms
 /* E28D5C 802B632C 00000000 */   nop
 .L802B6330:
 /* E28D60 802B6330 8FBF005C */  lw        $ra, 0x5c($sp)

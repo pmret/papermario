@@ -65,7 +65,7 @@ glabel func_80240D90_DDD5C0
 /* DDD6AC 80240E7C 8C450048 */  lw        $a1, 0x48($v0)
 /* DDD6B0 80240E80 8C470050 */  lw        $a3, 0x50($v0)
 /* DDD6B4 80240E84 44060000 */  mfc1      $a2, $f0
-/* DDD6B8 80240E88 0C01C5BC */  jal       func_800716F0
+/* DDD6B8 80240E88 0C01C5BC */  jal       playFX_51
 /* DDD6BC 80240E8C 26310001 */   addiu    $s1, $s1, 1
 /* DDD6C0 80240E90 AE020008 */  sw        $v0, 8($s0)
 /* DDD6C4 80240E94 E614002C */  swc1      $f20, 0x2c($s0)

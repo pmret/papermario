@@ -17,7 +17,7 @@ glabel func_800F4D28
 /* 8E208 800F4D58 AFB20028 */  sw        $s2, 0x28($sp)
 /* 8E20C 800F4D5C 26720009 */  addiu     $s2, $s3, 9
 /* 8E210 800F4D60 AFBF0034 */  sw        $ra, 0x34($sp)
-/* 8E214 800F4D64 0C0513AC */  jal       icon_set_opacity
+/* 8E214 800F4D64 0C0513AC */  jal       set_hud_element_alpha
 /* 8E218 800F4D68 0200202D */   daddu    $a0, $s0, $zero
 /* 8E21C 800F4D6C 3C028011 */  lui       $v0, %hi(D_8010D69C)
 /* 8E220 800F4D70 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)
@@ -32,22 +32,22 @@ glabel func_800F4D28
 /* 8E240 800F4D90 0220282D */  daddu     $a1, $s1, $zero
 /* 8E244 800F4D94 2666000A */  addiu     $a2, $s3, 0xa
 .L800F4D98:
-/* 8E248 800F4D98 0C051261 */  jal       set_icon_render_pos
+/* 8E248 800F4D98 0C051261 */  jal       set_hud_element_render_pos
 /* 8E24C 800F4D9C 00000000 */   nop
-/* 8E250 800F4DA0 0C0511EA */  jal       draw_icon_0
+/* 8E250 800F4DA0 0C0511EA */  jal       draw_hud_element_clipped
 /* 8E254 800F4DA4 0200202D */   daddu    $a0, $s0, $zero
 /* 8E258 800F4DA8 2685001A */  addiu     $a1, $s4, 0x1a
 /* 8E25C 800F4DAC 3C108011 */  lui       $s0, %hi(D_8010D664)
 /* 8E260 800F4DB0 8E10D664 */  lw        $s0, %lo(D_8010D664)($s0)
 /* 8E264 800F4DB4 2666000B */  addiu     $a2, $s3, 0xb
-/* 8E268 800F4DB8 0C051261 */  jal       set_icon_render_pos
+/* 8E268 800F4DB8 0C051261 */  jal       set_hud_element_render_pos
 /* 8E26C 800F4DBC 0200202D */   daddu    $a0, $s0, $zero
 /* 8E270 800F4DC0 3C118011 */  lui       $s1, %hi(D_8010D650)
 /* 8E274 800F4DC4 2631D650 */  addiu     $s1, $s1, %lo(D_8010D650)
 /* 8E278 800F4DC8 8E250000 */  lw        $a1, ($s1)
-/* 8E27C 800F4DCC 0C0513AC */  jal       icon_set_opacity
+/* 8E27C 800F4DCC 0C0513AC */  jal       set_hud_element_alpha
 /* 8E280 800F4DD0 0200202D */   daddu    $a0, $s0, $zero
-/* 8E284 800F4DD4 0C0511EA */  jal       draw_icon_0
+/* 8E284 800F4DD4 0C0511EA */  jal       draw_hud_element_clipped
 /* 8E288 800F4DD8 0200202D */   daddu    $a0, $s0, $zero
 /* 8E28C 800F4DDC 3C028011 */  lui       $v0, %hi(D_8010D69C)
 /* 8E290 800F4DE0 8C42D69C */  lw        $v0, %lo(D_8010D69C)($v0)

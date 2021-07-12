@@ -37,7 +37,7 @@ glabel func_802A9000_42C6F0
 /* 42C76C 802A907C A2000084 */  sb        $zero, 0x84($s0)
 /* 42C770 802A9080 A6220056 */  sh        $v0, 0x56($s1)
 /* 42C774 802A9084 24020050 */  addiu     $v0, $zero, 0x50
-/* 42C778 802A9088 0C050529 */  jal       create_icon
+/* 42C778 802A9088 0C050529 */  jal       create_hud_element
 /* 42C77C 802A908C A6220058 */   sh       $v0, 0x58($s1)
 /* 42C780 802A9090 0040802D */  daddu     $s0, $v0, $zero
 /* 42C784 802A9094 0200202D */  daddu     $a0, $s0, $zero
@@ -45,31 +45,31 @@ glabel func_802A9000_42C6F0
 /* 42C78C 802A909C 86260058 */  lh        $a2, 0x58($s1)
 /* 42C790 802A90A0 26320004 */  addiu     $s2, $s1, 4
 /* 42C794 802A90A4 AE300004 */  sw        $s0, 4($s1)
-/* 42C798 802A90A8 0C051261 */  jal       set_icon_render_pos
+/* 42C798 802A90A8 0C051261 */  jal       set_hud_element_render_pos
 /* 42C79C 802A90AC 24C6001C */   addiu    $a2, $a2, 0x1c
 /* 42C7A0 802A90B0 0200202D */  daddu     $a0, $s0, $zero
-/* 42C7A4 802A90B4 0C051277 */  jal       func_801449DC
+/* 42C7A4 802A90B4 0C051277 */  jal       set_hud_element_render_depth
 /* 42C7A8 802A90B8 0000282D */   daddu    $a1, $zero, $zero
 /* 42C7AC 802A90BC 0200202D */  daddu     $a0, $s0, $zero
-/* 42C7B0 802A90C0 0C051280 */  jal       set_icon_flags
+/* 42C7B0 802A90C0 0C051280 */  jal       set_hud_element_flags
 /* 42C7B4 802A90C4 24050082 */   addiu    $a1, $zero, 0x82
 .L802A90C8:
 /* 42C7B8 802A90C8 3C048011 */  lui       $a0, %hi(D_80108B28)
 /* 42C7BC 802A90CC 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
-/* 42C7C0 802A90D0 0C050529 */  jal       create_icon
+/* 42C7C0 802A90D0 0C050529 */  jal       create_hud_element
 /* 42C7C4 802A90D4 26730001 */   addiu    $s3, $s3, 1
 /* 42C7C8 802A90D8 0040802D */  daddu     $s0, $v0, $zero
 /* 42C7CC 802A90DC 0200202D */  daddu     $a0, $s0, $zero
 /* 42C7D0 802A90E0 AE500004 */  sw        $s0, 4($s2)
 /* 42C7D4 802A90E4 86250056 */  lh        $a1, 0x56($s1)
 /* 42C7D8 802A90E8 86260058 */  lh        $a2, 0x58($s1)
-/* 42C7DC 802A90EC 0C051261 */  jal       set_icon_render_pos
+/* 42C7DC 802A90EC 0C051261 */  jal       set_hud_element_render_pos
 /* 42C7E0 802A90F0 26520004 */   addiu    $s2, $s2, 4
 /* 42C7E4 802A90F4 0200202D */  daddu     $a0, $s0, $zero
-/* 42C7E8 802A90F8 0C051277 */  jal       func_801449DC
+/* 42C7E8 802A90F8 0C051277 */  jal       set_hud_element_render_depth
 /* 42C7EC 802A90FC 0000282D */   daddu    $a1, $zero, $zero
 /* 42C7F0 802A9100 0200202D */  daddu     $a0, $s0, $zero
-/* 42C7F4 802A9104 0C051280 */  jal       set_icon_flags
+/* 42C7F4 802A9104 0C051280 */  jal       set_hud_element_flags
 /* 42C7F8 802A9108 24050082 */   addiu    $a1, $zero, 0x82
 /* 42C7FC 802A910C 2A62000F */  slti      $v0, $s3, 0xf
 /* 42C800 802A9110 1440FFED */  bnez      $v0, .L802A90C8

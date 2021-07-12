@@ -30,7 +30,7 @@ glabel func_802A96F4_4231C4
 /* 423228 802A9758 86220056 */  lh        $v0, 0x56($s1)
 /* 42322C 802A975C 2465FFE1 */  addiu     $a1, $v1, -0x1f
 /* 423230 802A9760 AFA30010 */  sw        $v1, 0x10($sp)
-/* 423234 802A9764 0C051261 */  jal       set_icon_render_pos
+/* 423234 802A9764 0C051261 */  jal       set_hud_element_render_pos
 /* 423238 802A9768 00452823 */   subu     $a1, $v0, $a1
 /* 42323C 802A976C 8FA50010 */  lw        $a1, 0x10($sp)
 /* 423240 802A9770 8E24000C */  lw        $a0, 0xc($s1)
@@ -38,21 +38,21 @@ glabel func_802A96F4_4231C4
 /* 423248 802A9778 86260058 */  lh        $a2, 0x58($s1)
 /* 42324C 802A977C 24A5FFE1 */  addiu     $a1, $a1, -0x1f
 /* 423250 802A9780 00452823 */  subu      $a1, $v0, $a1
-/* 423254 802A9784 0C051261 */  jal       set_icon_render_pos
+/* 423254 802A9784 0C051261 */  jal       set_hud_element_render_pos
 /* 423258 802A9788 24C6FFFF */   addiu    $a2, $a2, -1
 /* 42325C 802A978C 3C02800E */  lui       $v0, %hi(gBattleStatus+0x83)
 /* 423260 802A9790 8042C0F3 */  lb        $v0, %lo(gBattleStatus+0x83)($v0)
 /* 423264 802A9794 10400003 */  beqz      $v0, .L802A97A4
 /* 423268 802A9798 00000000 */   nop
-/* 42326C 802A979C 0C0511EA */  jal       draw_icon_0
+/* 42326C 802A979C 0C0511EA */  jal       draw_hud_element_clipped
 /* 423270 802A97A0 8E240004 */   lw       $a0, 4($s1)
 .L802A97A4:
 /* 423274 802A97A4 8E300008 */  lw        $s0, 8($s1)
-/* 423278 802A97A8 0C0511EA */  jal       draw_icon_0
+/* 423278 802A97A8 0C0511EA */  jal       draw_hud_element_clipped
 /* 42327C 802A97AC 0200202D */   daddu    $a0, $s0, $zero
 /* 423280 802A97B0 0200202D */  daddu     $a0, $s0, $zero
 /* 423284 802A97B4 27A50010 */  addiu     $a1, $sp, 0x10
-/* 423288 802A97B8 0C05126B */  jal       get_icon_render_pos
+/* 423288 802A97B8 0C05126B */  jal       get_hud_element_render_pos
 /* 42328C 802A97BC 27A60014 */   addiu    $a2, $sp, 0x14
 /* 423290 802A97C0 3C02802B */  lui       $v0, %hi(D_802A9920)
 /* 423294 802A97C4 8C429920 */  lw        $v0, %lo(D_802A9920)($v0)
@@ -99,11 +99,11 @@ glabel func_802A96F4_4231C4
 /* 42332C 802A985C 00063403 */   sra      $a2, $a2, 0x10
 .L802A9860:
 /* 423330 802A9860 8E24000C */  lw        $a0, 0xc($s1)
-/* 423334 802A9864 0C0511EA */  jal       draw_icon_0
+/* 423334 802A9864 0C0511EA */  jal       draw_hud_element_clipped
 /* 423338 802A9868 00000000 */   nop
-/* 42333C 802A986C 0C0511EA */  jal       draw_icon_0
+/* 42333C 802A986C 0C0511EA */  jal       draw_hud_element_clipped
 /* 423340 802A9870 8E240010 */   lw       $a0, 0x10($s1)
-/* 423344 802A9874 0C0511EA */  jal       draw_icon_0
+/* 423344 802A9874 0C0511EA */  jal       draw_hud_element_clipped
 /* 423348 802A9878 8E240014 */   lw       $a0, 0x14($s1)
 /* 42334C 802A987C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 423350 802A9880 8FB20020 */  lw        $s2, 0x20($sp)

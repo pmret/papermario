@@ -14,7 +14,7 @@ glabel func_80243494_803D14
 /* 803D38 802434B8 0040802D */  daddu     $s0, $v0, $zero
 /* 803D3C 802434BC 0C04EA15 */  jal       func_8013A854
 /* 803D40 802434C0 8E040000 */   lw       $a0, ($s0)
-/* 803D44 802434C4 0C048D70 */  jal       free_dynamic_entity
+/* 803D44 802434C4 0C048D70 */  jal       free_generic_entity
 /* 803D48 802434C8 8E040004 */   lw       $a0, 4($s0)
 /* 803D4C 802434CC 0C00AB4B */  jal       heap_free
 /* 803D50 802434D0 0200202D */   daddu    $a0, $s0, $zero

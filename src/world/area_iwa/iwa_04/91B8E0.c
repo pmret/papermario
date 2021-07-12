@@ -1,5 +1,8 @@
 #include "iwa_04.h"
 
+static char* N(exit_str_0) = "iwa_02";
+static char* N(exit_str_1) = "sbk_99";
+
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240000_91B8E0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_04/91B8E0", func_80240080_91B960);
@@ -18,7 +21,7 @@ void N(func_80240254_91BB34)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
             npc->currentAnim = enemy->animList[9];
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
-            func_800494C0(npc, 0x2F4, 0x200000);
+            ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->duration = 12;
             script->functionTemp[0].s = 2;
         }
@@ -47,7 +50,7 @@ void N(func_80240714_91BFF4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z);
     if (npc->duration % 3 == 0) {
-        fx_walk_normal(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
+        fx_walk(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
     }
 
     npc->duration--;

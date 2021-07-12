@@ -152,7 +152,7 @@ glabel func_802A1518_78BB18
 /* 78BD44 802A1744 8E050038 */  lw        $a1, 0x38($s0)
 /* 78BD48 802A1748 8E06003C */  lw        $a2, 0x3c($s0)
 /* 78BD4C 802A174C 8E070040 */  lw        $a3, 0x40($s0)
-/* 78BD50 802A1750 0C01BFBC */  jal       func_8006FEF0
+/* 78BD50 802A1750 0C01BFBC */  jal       playFX_11
 /* 78BD54 802A1754 0000202D */   daddu    $a0, $zero, $zero
 .L802A1758:
 /* 78BD58 802A1758 9602008E */  lhu       $v0, 0x8e($s0)

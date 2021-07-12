@@ -3,7 +3,7 @@
 
 ApiStatus N(FadeBackgroundToBlack)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0].s = 20;

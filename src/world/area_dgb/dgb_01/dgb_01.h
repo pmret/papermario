@@ -11,9 +11,9 @@ enum {
     NPC_WORLD_TUBBA,
 };
 
-ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CD348(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CD3C0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus InitAnimatedModels(ScriptInstance* script, s32 isInitialCall);
+ApiStatus SetAnimatedModelRenderMode(ScriptInstance* script, s32 isInitialCall);
+ApiStatus DeleteAnimatedModel(ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus N(func_80240000_BFD880)(void);
 ApiStatus N(GetEntityPosition)(ScriptInstance* script, s32 isInitialCall);

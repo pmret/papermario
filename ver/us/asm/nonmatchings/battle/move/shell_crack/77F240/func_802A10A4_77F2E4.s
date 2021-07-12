@@ -47,7 +47,7 @@ glabel func_802A10A4_77F2E4
 /* 77F388 802A1148 44061000 */  mfc1      $a2, $f2
 /* 77F38C 802A114C 0000202D */  daddu     $a0, $zero, $zero
 /* 77F390 802A1150 E7B80010 */  swc1      $f24, 0x10($sp)
-/* 77F394 802A1154 0C01C7FC */  jal       func_80071FF0
+/* 77F394 802A1154 0C01C7FC */  jal       playFX_69
 /* 77F398 802A1158 AFB20014 */   sw       $s2, 0x14($sp)
 /* 77F39C 802A115C 2A220014 */  slti      $v0, $s1, 0x14
 /* 77F3A0 802A1160 1440FFE4 */  bnez      $v0, .L802A10F4

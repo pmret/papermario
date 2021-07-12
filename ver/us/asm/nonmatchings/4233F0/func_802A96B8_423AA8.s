@@ -37,7 +37,7 @@ glabel func_802A96B8_423AA8
 /* 423B20 802A9730 86020056 */  lh        $v0, 0x56($s0)
 /* 423B24 802A9734 2465FFE1 */  addiu     $a1, $v1, -0x1f
 /* 423B28 802A9738 AFA30010 */  sw        $v1, 0x10($sp)
-/* 423B2C 802A973C 0C051261 */  jal       set_icon_render_pos
+/* 423B2C 802A973C 0C051261 */  jal       set_hud_element_render_pos
 /* 423B30 802A9740 00452823 */   subu     $a1, $v0, $a1
 /* 423B34 802A9744 8FA50010 */  lw        $a1, 0x10($sp)
 /* 423B38 802A9748 8E04000C */  lw        $a0, 0xc($s0)
@@ -45,21 +45,21 @@ glabel func_802A96B8_423AA8
 /* 423B40 802A9750 86060058 */  lh        $a2, 0x58($s0)
 /* 423B44 802A9754 24A5FFE1 */  addiu     $a1, $a1, -0x1f
 /* 423B48 802A9758 00452823 */  subu      $a1, $v0, $a1
-/* 423B4C 802A975C 0C051261 */  jal       set_icon_render_pos
+/* 423B4C 802A975C 0C051261 */  jal       set_hud_element_render_pos
 /* 423B50 802A9760 24C6FFFF */   addiu    $a2, $a2, -1
 /* 423B54 802A9764 8602006A */  lh        $v0, 0x6a($s0)
 /* 423B58 802A9768 14400004 */  bnez      $v0, .L802A977C
 /* 423B5C 802A976C 0200882D */   daddu    $s1, $s0, $zero
 /* 423B60 802A9770 8E040004 */  lw        $a0, 4($s0)
-/* 423B64 802A9774 0C0511EA */  jal       draw_icon_0
+/* 423B64 802A9774 0C0511EA */  jal       draw_hud_element_clipped
 /* 423B68 802A9778 00000000 */   nop
 .L802A977C:
 /* 423B6C 802A977C 8E300008 */  lw        $s0, 8($s1)
-/* 423B70 802A9780 0C0511EA */  jal       draw_icon_0
+/* 423B70 802A9780 0C0511EA */  jal       draw_hud_element_clipped
 /* 423B74 802A9784 0200202D */   daddu    $a0, $s0, $zero
 /* 423B78 802A9788 0200202D */  daddu     $a0, $s0, $zero
 /* 423B7C 802A978C 27A50010 */  addiu     $a1, $sp, 0x10
-/* 423B80 802A9790 0C05126B */  jal       get_icon_render_pos
+/* 423B80 802A9790 0C05126B */  jal       get_hud_element_render_pos
 /* 423B84 802A9794 27A60014 */   addiu    $a2, $sp, 0x14
 /* 423B88 802A9798 3C0451EB */  lui       $a0, 0x51eb
 /* 423B8C 802A979C 96230044 */  lhu       $v1, 0x44($s1)
@@ -77,9 +77,9 @@ glabel func_802A96B8_423AA8
 /* 423BBC 802A97CC 0C09A1DC */  jal       func_80268770
 /* 423BC0 802A97D0 00063403 */   sra      $a2, $a2, 0x10
 /* 423BC4 802A97D4 8E24000C */  lw        $a0, 0xc($s1)
-/* 423BC8 802A97D8 0C0511EA */  jal       draw_icon_0
+/* 423BC8 802A97D8 0C0511EA */  jal       draw_hud_element_clipped
 /* 423BCC 802A97DC 00000000 */   nop
-/* 423BD0 802A97E0 0C0511EA */  jal       draw_icon_0
+/* 423BD0 802A97E0 0C0511EA */  jal       draw_hud_element_clipped
 /* 423BD4 802A97E4 8E240010 */   lw       $a0, 0x10($s1)
 /* 423BD8 802A97E8 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 423BDC 802A97EC 8FB1001C */  lw        $s1, 0x1c($sp)

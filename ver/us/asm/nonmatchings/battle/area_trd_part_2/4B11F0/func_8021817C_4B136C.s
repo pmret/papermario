@@ -97,7 +97,7 @@ glabel func_8021817C_4B136C
 /* 4B14D0 802182E0 33C200FF */  andi      $v0, $fp, 0xff
 /* 4B14D4 802182E4 AFA20014 */  sw        $v0, 0x14($sp)
 /* 4B14D8 802182E8 32E200FF */  andi      $v0, $s7, 0xff
-/* 4B14DC 802182EC 0C046FAD */  jal       func_8011BEB4
+/* 4B14DC 802182EC 0C046FAD */  jal       set_model_fog_color_parameters
 /* 4B14E0 802182F0 AFA20018 */   sw       $v0, 0x18($sp)
 /* 4B14E4 802182F4 080860C7 */  j         .L8021831C
 /* 4B14E8 802182F8 00000000 */   nop
@@ -108,7 +108,7 @@ glabel func_8021817C_4B136C
 /* 4B14F8 80218308 93A2002B */  lbu       $v0, 0x2b($sp)
 /* 4B14FC 8021830C AFA20010 */  sw        $v0, 0x10($sp)
 /* 4B1500 80218310 33C200FF */  andi      $v0, $fp, 0xff
-/* 4B1504 80218314 0C046FE6 */  jal       func_8011BF98
+/* 4B1504 80218314 0C046FE6 */  jal       set_model_env_color_parameters
 /* 4B1508 80218318 AFA20014 */   sw       $v0, 0x14($sp)
 .L8021831C:
 /* 4B150C 8021831C 8FBF0054 */  lw        $ra, 0x54($sp)

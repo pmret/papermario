@@ -1,28 +1,28 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E5FB0);
+INCLUDE_ASM(s32, "107830_len_e70", entity_ScriptSpring_idle);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6064);
+INCLUDE_ASM(s32, "107830_len_e70", entity_SimpleSpring_idle);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6118);
+INCLUDE_ASM(s32, "107830_len_e70", entity_SimpleSpring_set_jump_params);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6178);
+INCLUDE_ASM(s32, "107830_len_e70", entity_SimpleSpring_enable_player_input);
 
-void func_802E6194(void) {
+void entity_ScriptSpring_init(void) {
 }
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E619C);
+INCLUDE_ASM(s32, "107830_len_e70", entity_SimpleSpring_init);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E61B0);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_setupGfx);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6338);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_set_ispy_notification);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6390);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_hide);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E63A8);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_idle);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6574);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_flip_over);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6B6C);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_is_item_on_top);
 
-INCLUDE_ASM(s32, "107830_len_e70", func_802E6C24);
+INCLUDE_ASM(s32, "107830_len_e70", entity_HiddenPanel_init);

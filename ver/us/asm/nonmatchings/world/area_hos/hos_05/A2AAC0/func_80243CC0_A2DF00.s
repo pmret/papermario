@@ -65,7 +65,7 @@ glabel func_80243CC0_A2DF00
 .L80243DB0:
 /* A2DFF0 80243DB0 24040001 */  addiu     $a0, $zero, 1
 /* A2DFF4 80243DB4 27A50010 */  addiu     $a1, $sp, 0x10
-/* A2DFF8 80243DB8 0C04DF70 */  jal       func_80137DC0
+/* A2DFF8 80243DB8 0C04DF70 */  jal       get_screen_overlay_params
 /* A2DFFC 80243DBC 27A60014 */   addiu    $a2, $sp, 0x14
 /* A2E000 80243DC0 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* A2E004 80243DC4 44800000 */  mtc1      $zero, $f0

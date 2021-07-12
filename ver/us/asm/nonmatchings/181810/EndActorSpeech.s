@@ -116,7 +116,7 @@ glabel EndActorSpeech
 /* 181D5C 8025347C 2610FA60 */  addiu     $s0, $s0, %lo(gSpeakingActorPrintCtx)
 /* 181D60 80253480 8E040000 */  lw        $a0, ($s0)
 /* 181D64 80253484 8FA50020 */  lw        $a1, 0x20($sp)
-/* 181D68 80253488 0C0496AE */  jal       clamp_printer_coords
+/* 181D68 80253488 0C0496AE */  jal       msg_printer_set_origin_pos
 /* 181D6C 8025348C 8FA60024 */   lw       $a2, 0x24($sp)
 /* 181D70 80253490 8E020000 */  lw        $v0, ($s0)
 /* 181D74 80253494 8C4304FC */  lw        $v1, 0x4fc($v0)

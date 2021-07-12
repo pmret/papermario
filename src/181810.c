@@ -8,7 +8,7 @@ extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void clamp_printer_coords(PrintContext* printer, s32 x, s32 y);
+void msg_printer_set_origin_pos(PrintContext* printer, s32 x, s32 y);
 
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -54,9 +54,9 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         {
             s32* isPrintDone = &gSpeakingActorPrintIsDone;
             *isPrintDone = FALSE;
-            gSpeakingActorPrintCtx = load_string(stringID2, isPrintDone);
+            gSpeakingActorPrintCtx = msg_get_printer_for_string(stringID2, isPrintDone);
         }
-        clamp_printer_coords(gSpeakingActorPrintCtx, screenX, screenY);
+        msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         script->functionTemp[0].s = 0;
         gOverrideFlags |= 0x10;
@@ -81,7 +81,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         printContext = &gSpeakingActorPrintCtx;
-        clamp_printer_coords(*printContext, screenX, screenY);
+        msg_printer_set_origin_pos(*printContext, screenX, screenY);
 
         if ((*printContext)->stateFlags & 0x40) {
             decrement_status_menu_disabled();
@@ -117,7 +117,7 @@ ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
         s32 stringID = get_variable(script, *args);
 
         script->functionTemp[1].s = 0;
-        D_8029FA64 = load_string(stringID, &script->functionTemp[1].s);
+        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1].s);
     }
 
     if (script->functionTemp[1].s == 1) {
@@ -194,7 +194,7 @@ ApiStatus func_802537C0(ScriptInstance* script, s32 isInitialCall) {
     s32 t3;
 
     // While loop may not be necessary in the future
-    do { func_80137DC0(1, &t1, &t2); } while (0);
+    do { get_screen_overlay_params(1, &t1, &t2); } while (0);
 
     if (t2 < 128.0f) {
         t3 = 0;
@@ -280,11 +280,11 @@ ApiStatus StopLoopingSoundAtActor(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetForegroundModelsVisibleUnsafe(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetForegroundModelsVisibleUnchecked(ScriptInstance* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
-        show_foreground_models_unsafe();
+        show_foreground_models_unchecked();
     } else {
-        hide_foreground_models_unsafe();
+        hide_foreground_models_unchecked();
     }
     return ApiStatus_DONE2;
 }
@@ -352,7 +352,7 @@ INCLUDE_ASM(s32, "181810", load_tattle_flags);
 
 ApiStatus func_80253FB0(ScriptInstance* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = 3;
-    func_80241190(0x20);
+    btl_set_state(0x20);
 
     return ApiStatus_DONE2;
 }

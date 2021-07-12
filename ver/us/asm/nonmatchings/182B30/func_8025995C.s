@@ -55,7 +55,7 @@ glabel func_8025995C
 /* 1882F8 80259A18 0220302D */  daddu     $a2, $s1, $zero
 /* 1882FC 80259A1C 264706D4 */  addiu     $a3, $s2, 0x6d4
 .L80259A20:
-/* 188300 80259A20 0C0B7710 */  jal       render_sprite
+/* 188300 80259A20 0C0B7710 */  jal       spr_draw_player_sprite
 /* 188304 80259A24 00000000 */   nop
 /* 188308 80259A28 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 18830C 80259A2C 8FB40028 */  lw        $s4, 0x28($sp)

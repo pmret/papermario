@@ -1,11 +1,13 @@
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
+import struct
 from util.n64 import Yay0decompress
 from util.iter import iter_in_groups
 from util.color import unpack_color
 from util import options
 import png
 import xml.etree.ElementTree as ET
+import struct
 
 import pylibyaml
 import yaml
@@ -58,15 +60,10 @@ class Sprite:
         l = []
         pos = 0
 
-        while True:
-            offset = int.from_bytes(data[pos:pos+4], byteorder="big", signed=True)
-
-            if offset == -1:
+        for offset in struct.iter_unpack(">i", data):
+            if offset[0] == -1:
                 break
-
-            l.append(offset)
-
-            pos += 4
+            l.append(offset[0])
 
         return l
 
@@ -256,10 +253,10 @@ class Component:
 class N64SegPaperMarioNpcSprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
 
-        self.files = segment["files"]
+        self.files = yml["files"]
 
         with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
             self.sprite_cfg = yaml.load(f.read(), Loader=yaml.SafeLoader)
@@ -299,4 +296,4 @@ class N64SegPaperMarioNpcSprites(N64Segment):
         return [LinkerEntry(self, out_paths, basepath, ".data")]
 
     def cache(self):
-        return (self.config, self.rom_end, self.sprite_cfg)
+        return (self.yaml, self.rom_end, self.sprite_cfg)

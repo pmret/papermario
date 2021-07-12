@@ -46,7 +46,7 @@ glabel func_8021875C_4EFBFC
 /* 4EFCA0 80218800 AFA30020 */  sw        $v1, 0x20($sp)
 /* 4EFCA4 80218804 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 4EFCA8 80218808 E7A20018 */  swc1      $f2, 0x18($sp)
-/* 4EFCAC 8021880C 0C01C544 */  jal       func_80071510
+/* 4EFCAC 8021880C 0C01C544 */  jal       playFX_4C
 /* 4EFCB0 80218810 E7A4001C */   swc1     $f4, 0x1c($sp)
 /* 4EFCB4 80218814 8C43000C */  lw        $v1, 0xc($v0)
 /* 4EFCB8 80218818 AC600030 */  sw        $zero, 0x30($v1)

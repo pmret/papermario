@@ -10,7 +10,7 @@ glabel func_8024032C_A3FA6C
 /* A3FA80 80240340 2C620005 */  sltiu     $v0, $v1, 5
 /* A3FA84 80240344 10400003 */  beqz      $v0, .L80240354
 /* A3FA88 80240348 24620001 */   addiu    $v0, $v1, 1
-/* A3FA8C 8024034C 0C00D994 */  jal       begin_state_intro
+/* A3FA8C 8024034C 0C00D994 */  jal       state_init_intro
 /* A3FA90 80240350 A08200A8 */   sb       $v0, 0xa8($a0)
 .L80240354:
 /* A3FA94 80240354 8FBF0010 */  lw        $ra, 0x10($sp)

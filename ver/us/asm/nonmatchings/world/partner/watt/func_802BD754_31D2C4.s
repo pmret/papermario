@@ -196,7 +196,7 @@ glabel func_802BD754_31D2C4
 /* 31D590 802BDA20 0C0AF805 */  jal       func_802BE014_31DB84
 /* 31D594 802BDA24 AE420004 */   sw       $v0, 4($s2)
 /* 31D598 802BDA28 0220202D */  daddu     $a0, $s1, $zero
-/* 31D59C 802BDA2C 0C00ECF4 */  jal       func_8003B3D0
+/* 31D59C 802BDA2C 0C00ECF4 */  jal       npc_set_palswap_mode_A
 /* 31D5A0 802BDA30 0200282D */   daddu    $a1, $s0, $zero
 /* 31D5A4 802BDA34 24020002 */  addiu     $v0, $zero, 2
 /* 31D5A8 802BDA38 AE620074 */  sw        $v0, 0x74($s3)
@@ -339,7 +339,7 @@ glabel func_802BD754_31D2C4
 /* 31D7B0 802BDC40 2403FFFC */  addiu     $v1, $zero, -4
 /* 31D7B4 802BDC44 00431024 */  and       $v0, $v0, $v1
 /* 31D7B8 802BDC48 AE420004 */  sw        $v0, 4($s2)
-/* 31D7BC 802BDC4C 0C03BD17 */  jal       clear_partner_move_history
+/* 31D7BC 802BDC4C 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31D7C0 802BDC50 AE250028 */   sw       $a1, 0x28($s1)
 /* 31D7C4 802BDC54 0220202D */  daddu     $a0, $s1, $zero
 /* 31D7C8 802BDC58 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
@@ -351,7 +351,7 @@ glabel func_802BD754_31D2C4
 /* 31D7E0 802BDC70 A2A00000 */  sb        $zero, ($s5)
 /* 31D7E4 802BDC74 A040007D */  sb        $zero, 0x7d($v0)
 /* 31D7E8 802BDC78 24020014 */  addiu     $v0, $zero, 0x14
-/* 31D7EC 802BDC7C 0C00ECF4 */  jal       func_8003B3D0
+/* 31D7EC 802BDC7C 0C00ECF4 */  jal       npc_set_palswap_mode_A
 /* 31D7F0 802BDC80 AE020000 */   sw       $v0, ($s0)
 /* 31D7F4 802BDC84 8E420000 */  lw        $v0, ($s2)
 /* 31D7F8 802BDC88 30420800 */  andi      $v0, $v0, 0x800

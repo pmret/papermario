@@ -65,7 +65,7 @@ glabel func_802441EC_804A6C
 /* 804B44 802442C4 AFA70010 */  sw        $a3, 0x10($sp)
 /* 804B48 802442C8 9202007B */  lbu       $v0, 0x7b($s0)
 /* 804B4C 802442CC 0080302D */  daddu     $a2, $a0, $zero
-/* 804B50 802442D0 0C046FE6 */  jal       func_8011BF98
+/* 804B50 802442D0 0C046FE6 */  jal       set_model_env_color_parameters
 /* 804B54 802442D4 AFA20014 */   sw       $v0, 0x14($sp)
 /* 804B58 802442D8 8E030070 */  lw        $v1, 0x70($s0)
 /* 804B5C 802442DC 24020040 */  addiu     $v0, $zero, 0x40

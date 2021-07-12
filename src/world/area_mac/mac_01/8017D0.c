@@ -6,43 +6,9 @@ extern u8 D_80258407_818C87;
 
 #include "world/common/UnkMusicFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241080_801900);
-/*
-ApiStatus N(func_80241080_801900)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    f32 ret;
-    f32 max;
-    f32 posX;
-    f32 posZ;
-    s32 i;
-    s32 j;
-
-    script->functionTemp[1].s = 0;
-    max = 32767.0f;
-    posX = npc->pos.x;
-    posZ = npc->pos.z;
-    script->functionTemp[2].s = 0;
-
-    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
-        ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
-        if (ret < max) {
-            max = ret;
-            script->functionTemp[2].s = j;
-        }
-    }
-
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-
-    script->functionTemp[0].s = 1;
-    return ApiStatus_DONE1;
-}
-*/
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcAIFunc24.inc.c"
+#define NAMESPACE mac_01
 
 #include "world/common/UnkFunc13.inc.c"
 
@@ -52,26 +18,9 @@ ApiStatus N(func_80241080_801900)(ScriptInstance* script, NpcAISettings* aiSetti
 
 #include "world/common/UnkFunc14.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_802416FC_801F7C);
-/*
-ApiStatus N(func_802416FC_801F7C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-    return ApiStatus_DONE1;
-}
-*/
+#define NAMESPACE dup_mac_01
+#include "world/common/UnkNpcAIFunc25.inc.c"
+#define NAMESPACE mac_01
 
 #define NAMESPACE dup_mac_01
 #include "world/common/NpcJumpFunc2.inc.c"
@@ -138,14 +87,14 @@ ApiStatus N(func_80241C14_802494)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80241080_801900)(script, npcAISettings, territoryPtr);
+#include "world/common/UnkNpcAIFunc24.inc.c"
         case 1:
             N(func_802411D8_801A58)(script, npcAISettings, territoryPtr);
             break;
@@ -155,7 +104,7 @@ ApiStatus N(func_80241C14_802494)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241540_801DC0)(script, npcAISettings, territoryPtr);
             break;
         case 4:
-            N(func_802416FC_801F7C)(script, npcAISettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
             break;
         case 10:
             dup_NpcJumpFunc2(script, npcAISettings, territoryPtr);
@@ -179,6 +128,9 @@ ApiStatus N(func_80241C14_802494)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 */
+
+static char* N(exit_str_0) = "flo_00";
+static char* N(exit_str_1) = "kmr_22";
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80241F10_802790);
 /*
@@ -296,9 +248,9 @@ ApiStatus N(func_80242680_802F00)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = func_800715D0(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE4 = func_80071810(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
-        D_8024DFE8 = func_80072890(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)), get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -344,7 +296,7 @@ ApiStatus N(func_80242898_803118)(ScriptInstance *script, s32 isInitialCall) {
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
         remove_effect(D_8024DFE0, effectPtr);
-        free_dynamic_entity(D_8024DFC0);
+        free_generic_entity(D_8024DFC0);
         return ApiStatus_DONE2;
     }
 
@@ -427,9 +379,9 @@ void N(func_80242F08_803788)(void) {
     s32 var = get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
-        func_80071690(0, 0, 0, 0);
+        playFX_50(0, 0, 0, 0);
     } else if (var == 2) {
-        func_80071690(1, 0, 0, 0);
+        playFX_50(1, 0, 0, 0);
     }
 }
 */
@@ -437,7 +389,7 @@ void N(func_80242F08_803788)(void) {
 INCLUDE_ASM(s32, "world/area_mac/mac_01/8017D0", func_80242F74_8037F4);
 /*
 ApiStatus N(func_80242F74_8037F4)(ScriptInstance *script, s32 isInitialCall) {
-    D_8024DFC0 = create_dynamic_entity_frontUI(NULL, N(func_80242468_95D668));
+    D_8024DFC0 = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
 */
@@ -605,7 +557,7 @@ ApiStatus func_80245440_805CC0(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_800EB168(script->varTable[10]);
+    switch_to_partner(script->varTable[10]);
     script->varTable[1] = 1;
     return ApiStatus_DONE2;
 }
@@ -618,11 +570,11 @@ void func_802454B4_805D34(void) {
 }
 
 ApiStatus func_80245504_805D84(ScriptInstance* script, s32 isInitialCall) {
-    set_partner_tether_distance(20.0f);
+    partner_set_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_8024552C_805DAC(ScriptInstance* script, s32 isInitialCall) {
-    reset_partner_tether_distance();
+    repartner_set_tether_distance();
     return ApiStatus_DONE2;
 }

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80242CB0_D896B0
+.word L8024020C_D86C0C, L802402CC_D86CCC, L80240314_D86D14, L802403B4_D86DB4, L8024041C_D86E1C
+
+.section .text
+
 glabel func_802401CC_D86BCC
 /* D86BCC 802401CC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* D86BD0 802401D0 AFBF0020 */  sw        $ra, 0x20($sp)
@@ -102,7 +109,7 @@ glabel L80240314_D86D14
 /* D86D44 80240344 8E250018 */  lw        $a1, 0x18($s1)
 /* D86D48 80240348 8E26001C */  lw        $a2, 0x1c($s1)
 /* D86D4C 8024034C 8E270020 */  lw        $a3, 0x20($s1)
-/* D86D50 80240350 0C01C9AC */  jal       func_800726B0
+/* D86D50 80240350 0C01C9AC */  jal       playFX_7B
 /* D86D54 80240354 24040001 */   addiu    $a0, $zero, 1
 /* D86D58 80240358 AE220054 */  sw        $v0, 0x54($s1)
 /* D86D5C 8024035C 8C43000C */  lw        $v1, 0xc($v0)

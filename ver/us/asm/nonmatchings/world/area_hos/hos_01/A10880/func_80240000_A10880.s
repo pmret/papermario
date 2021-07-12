@@ -60,7 +60,7 @@ glabel func_80240000_A10880
 /* A1095C 802400DC E7B40018 */  swc1      $f20, 0x18($sp)
 /* A10960 802400E0 4600108D */  trunc.w.s $f2, $f2
 /* A10964 802400E4 44041000 */  mfc1      $a0, $f2
-/* A10968 802400E8 0C01BF8C */  jal       func_8006FE30
+/* A10968 802400E8 0C01BF8C */  jal       playFX_0F
 /* A1096C 802400EC E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A10970 802400F0 8FBF0030 */  lw        $ra, 0x30($sp)
 /* A10974 802400F4 8FB1002C */  lw        $s1, 0x2c($sp)

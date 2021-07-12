@@ -1,5 +1,10 @@
 #include "nok_02.h"
 
+static char* N(exit_str_0) = "nok_01";
+static char* N(exit_str_1) = "nok_03";
+static char* N(exit_str_2) = "tik_01";
+static char* N(exit_str_3) = "";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"

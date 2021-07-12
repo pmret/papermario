@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkFunc5)(Npc *npc, Enemy *enemy, ScriptInstance *script, NpcAISettings *aiSettings) {
+void N(UnkFunc5)(Npc* npc, Enemy* enemy, ScriptInstance* script, NpcAISettings* aiSettings) {
     f32 posX, posY, posZ, posW;
     s32 temp_a1;
     s32 temp_v1;
@@ -21,7 +21,7 @@ void N(UnkFunc5)(Npc *npc, Enemy *enemy, ScriptInstance *script, NpcAISettings *
     posY = npc->pos.y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
     enemy->varTable[2] = 0;
     enemy->varTable[9] = 0;
     enemy->varTable[3] = ((posW * 100.0) + 0.5);

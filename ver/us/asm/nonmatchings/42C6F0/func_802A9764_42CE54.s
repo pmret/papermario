@@ -10,12 +10,12 @@ glabel func_802A9764_42CE54
 /* 42CE68 802A9778 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 42CE6C 802A977C AFB00010 */  sw        $s0, 0x10($sp)
 /* 42CE70 802A9780 8C440004 */  lw        $a0, 4($v0)
-/* 42CE74 802A9784 0C05123D */  jal       free_icon
+/* 42CE74 802A9784 0C05123D */  jal       free_hud_element
 /* 42CE78 802A9788 24500004 */   addiu    $s0, $v0, 4
 .L802A978C:
 /* 42CE7C 802A978C 8E040004 */  lw        $a0, 4($s0)
 /* 42CE80 802A9790 26100004 */  addiu     $s0, $s0, 4
-/* 42CE84 802A9794 0C05123D */  jal       free_icon
+/* 42CE84 802A9794 0C05123D */  jal       free_hud_element
 /* 42CE88 802A9798 26310001 */   addiu    $s1, $s1, 1
 /* 42CE8C 802A979C 2A22000F */  slti      $v0, $s1, 0xf
 /* 42CE90 802A97A0 1440FFFA */  bnez      $v0, .L802A978C

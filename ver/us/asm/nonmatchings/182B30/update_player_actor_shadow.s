@@ -15,7 +15,7 @@ glabel update_player_actor_shadow
 /* 1864B4 80257BD4 0000202D */  daddu     $a0, $zero, $zero
 /* 1864B8 80257BD8 8E450088 */  lw        $a1, 0x88($s2)
 /* 1864BC 80257BDC 8E460090 */  lw        $a2, 0x90($s2)
-/* 1864C0 80257BE0 0C0B76A3 */  jal       func_802DDA8C
+/* 1864C0 80257BE0 0C0B76A3 */  jal       spr_update_player_sprite
 /* 1864C4 80257BE4 0040982D */   daddu    $s3, $v0, $zero
 /* 1864C8 80257BE8 AE42008C */  sw        $v0, 0x8c($s2)
 /* 1864CC 80257BEC 8E020000 */  lw        $v0, ($s0)
@@ -76,7 +76,7 @@ glabel update_player_actor_shadow
 /* 1865A0 80257CC0 E7A40020 */  swc1      $f4, 0x20($sp)
 /* 1865A4 80257CC4 46200020 */  cvt.s.d   $f0, $f0
 /* 1865A8 80257CC8 E7A0001C */  swc1      $f0, 0x1c($sp)
-/* 1865AC 80257CCC 0C0372DF */  jal       func_800DCB7C
+/* 1865AC 80257CCC 0C0372DF */  jal       npc_raycast_down_sides
 /* 1865B0 80257CD0 AFA20010 */   sw       $v0, 0x10($sp)
 /* 1865B4 80257CD4 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 1865B8 80257CD8 3C014348 */  lui       $at, 0x4348

@@ -36,7 +36,7 @@ glabel func_80242730_C5CE70
 .L802427A0:
 /* C5CEE0 802427A0 3C108011 */  lui       $s0, %hi(wPartnerNpc)
 /* C5CEE4 802427A4 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
-/* C5CEE8 802427A8 0C03BD17 */  jal       clear_partner_move_history
+/* C5CEE8 802427A8 0C03BD17 */  jal       partner_clear_player_tracking
 /* C5CEEC 802427AC 8E040000 */   lw       $a0, ($s0)
 /* C5CEF0 802427B0 C6200028 */  lwc1      $f0, 0x28($s1)
 /* C5CEF4 802427B4 C6220030 */  lwc1      $f2, 0x30($s1)
@@ -44,7 +44,7 @@ glabel func_80242730_C5CE70
 /* C5CEFC 802427BC 44042000 */  mfc1      $a0, $f4
 /* C5CF00 802427C0 4600110D */  trunc.w.s $f4, $f2
 /* C5CF04 802427C4 44052000 */  mfc1      $a1, $f4
-/* C5CF08 802427C8 0C03BCF0 */  jal       func_800EF3C0
+/* C5CF08 802427C8 0C03BCF0 */  jal       partner_set_goal_pos
 /* C5CF0C 802427CC 00000000 */   nop
 /* C5CF10 802427D0 0C03BCF5 */  jal       func_800EF3D4
 /* C5CF14 802427D4 0000202D */   daddu    $a0, $zero, $zero

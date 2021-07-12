@@ -32,7 +32,7 @@ glabel func_80241E24_97F8F4
 /* 97F960 80241E90 4406A000 */  mfc1      $a2, $f20
 /* 97F964 80241E94 44070000 */  mfc1      $a3, $f0
 /* 97F968 80241E98 0000202D */  daddu     $a0, $zero, $zero
-/* 97F96C 80241E9C 0C01BEB4 */  jal       fx_walk_large
+/* 97F96C 80241E9C 0C01BEB4 */  jal       fx_land
 /* 97F970 80241EA0 AFA00010 */   sw       $zero, 0x10($sp)
 /* 97F974 80241EA4 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 97F978 80241EA8 8FB00018 */  lw        $s0, 0x18($sp)

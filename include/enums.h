@@ -1544,11 +1544,13 @@ enum Areas {
 
 enum NpcFlags {
     NPC_FLAG_PASSIVE           = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_2                 = 0x00000002,
     NPC_FLAG_4                 = 0x00000004,
     NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
     NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
     NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
     NPC_FLAG_80                = 0x00000080, // TODO
+    NPC_FLAG_40                = 0x00000040,
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
@@ -1570,8 +1572,8 @@ enum NpcFlags {
     ///  - Perform only one lateral collision test during motion
     ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
     NPC_FLAG_PARTICLE          = 0x04000000,
-
-    NPC_FLAG_40000000          = 0x40000000,
+    NPC_FLAG_8000000           = 0x08000000,
+    NPC_FLAG_NO_ANIMS_LOADED   = 0x40000000, ///< Npc has no animations loaded
     NPC_FLAG_80000000          = 0x80000000,
 };
 
@@ -1648,6 +1650,18 @@ enum ActorEventFlags {
     EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
     EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
     EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
+};
+
+enum PartnerAnims {
+    PARTNER_ANIM_STILL,
+    PARTNER_ANIM_WALK,
+    PARTNER_ANIM_JUMP,
+    PARTNER_ANIM_FALL,
+    PARTNER_ANIM_FLY,
+    PARTNER_ANIM_IDLE,
+    PARTNER_ANIM_RUN,
+    PARTNER_ANIM_TALK,
+    PARTNER_ANIM_HURT,
 };
 
 #endif

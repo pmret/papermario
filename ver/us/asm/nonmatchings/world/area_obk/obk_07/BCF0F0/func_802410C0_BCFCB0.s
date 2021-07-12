@@ -8,14 +8,14 @@ glabel func_802410C0_BCFCB0
 /* BCFCBC 802410CC 0C090150 */  jal       func_80240540_BCF130
 /* BCFCC0 802410D0 AFB00018 */   sw       $s0, 0x18($sp)
 /* BCFCC4 802410D4 0040882D */  daddu     $s1, $v0, $zero
-/* BCFCC8 802410D8 0C0511EA */  jal       draw_icon_0
+/* BCFCC8 802410D8 0C0511EA */  jal       draw_hud_element_clipped
 /* BCFCCC 802410DC 8E24003C */   lw       $a0, 0x3c($s1)
 /* BCFCD0 802410E0 8E300040 */  lw        $s0, 0x40($s1)
-/* BCFCD4 802410E4 0C0511EA */  jal       draw_icon_0
+/* BCFCD4 802410E4 0C0511EA */  jal       draw_hud_element_clipped
 /* BCFCD8 802410E8 0200202D */   daddu    $a0, $s0, $zero
 /* BCFCDC 802410EC 0200202D */  daddu     $a0, $s0, $zero
 /* BCFCE0 802410F0 27A50010 */  addiu     $a1, $sp, 0x10
-/* BCFCE4 802410F4 0C05126B */  jal       get_icon_render_pos
+/* BCFCE4 802410F4 0C05126B */  jal       get_hud_element_render_pos
 /* BCFCE8 802410F8 27A60014 */   addiu    $a2, $sp, 0x14
 /* BCFCEC 802410FC 8FA40010 */  lw        $a0, 0x10($sp)
 /* BCFCF0 80241100 8FA50014 */  lw        $a1, 0x14($sp)
@@ -23,7 +23,7 @@ glabel func_802410C0_BCFCB0
 /* BCFCF8 80241108 0C090284 */  jal       func_80240A10_BCF600
 /* BCFCFC 8024110C 24070002 */   addiu    $a3, $zero, 2
 /* BCFD00 80241110 8E240044 */  lw        $a0, 0x44($s1)
-/* BCFD04 80241114 0C0511EA */  jal       draw_icon_0
+/* BCFD04 80241114 0C0511EA */  jal       draw_hud_element_clipped
 /* BCFD08 80241118 00000000 */   nop
 /* BCFD0C 8024111C 8FBF0020 */  lw        $ra, 0x20($sp)
 /* BCFD10 80241120 8FB1001C */  lw        $s1, 0x1c($sp)

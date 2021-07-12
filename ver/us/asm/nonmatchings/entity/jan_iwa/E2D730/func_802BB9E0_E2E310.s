@@ -194,7 +194,7 @@ glabel L802BBC74_E2E5A4
 /* E2E5BC 802BBC8C 00000000 */   nop
 /* E2E5C0 802BBC90 0C03BCCA */  jal       enable_partner_ai
 /* E2E5C4 802BBC94 A2000000 */   sb       $zero, ($s0)
-/* E2E5C8 802BBC98 0C03954C */  jal       func_800E5530
+/* E2E5C8 802BBC98 0C03954C */  jal       phys_adjust_cam_on_landing
 /* E2E5CC 802BBC9C 00000000 */   nop
 .L802BBCA0:
 /* E2E5D0 802BBCA0 8FBF002C */  lw        $ra, 0x2c($sp)

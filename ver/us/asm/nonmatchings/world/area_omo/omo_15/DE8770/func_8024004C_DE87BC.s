@@ -75,7 +75,7 @@ glabel func_8024004C_DE87BC
 /* DE88D4 80240164 8E05000C */  lw        $a1, 0xc($s0)
 /* DE88D8 80240168 8E060010 */  lw        $a2, 0x10($s0)
 /* DE88DC 8024016C 8E070014 */  lw        $a3, 0x14($s0)
-/* DE88E0 80240170 0C01CA6C */  jal       func_800729B0
+/* DE88E0 80240170 0C01CA6C */  jal       playFX_83
 /* DE88E4 80240174 24040002 */   addiu    $a0, $zero, 2
 /* DE88E8 80240178 AE020050 */  sw        $v0, 0x50($s0)
 /* DE88EC 8024017C A600004E */  sh        $zero, 0x4e($s0)

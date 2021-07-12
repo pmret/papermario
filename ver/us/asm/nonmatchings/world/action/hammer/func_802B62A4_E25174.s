@@ -117,7 +117,7 @@ glabel func_802B62A4_E25174
 /* E25304 802B6434 E7A40030 */  swc1      $f4, 0x30($sp)
 /* E25308 802B6438 AFB30010 */  sw        $s3, 0x10($sp)
 /* E2530C 802B643C E7B40014 */  swc1      $f20, 0x14($sp)
-/* E25310 802B6440 0C037B01 */  jal       do_lateral_collision
+/* E25310 802B6440 0C037B01 */  jal       player_test_lateral_overlap
 /* E25314 802B6444 E7B60018 */   swc1     $f22, 0x18($sp)
 /* E25318 802B6448 0040882D */  daddu     $s1, $v0, $zero
 /* E2531C 802B644C 0621FFC9 */  bgez      $s1, .L802B6374
@@ -223,7 +223,7 @@ glabel func_802B62A4_E25174
 /* E25494 802B65C4 E7A40030 */  swc1      $f4, 0x30($sp)
 /* E25498 802B65C8 AFB30010 */  sw        $s3, 0x10($sp)
 /* E2549C 802B65CC E7B40014 */  swc1      $f20, 0x14($sp)
-/* E254A0 802B65D0 0C037B01 */  jal       do_lateral_collision
+/* E254A0 802B65D0 0C037B01 */  jal       player_test_lateral_overlap
 /* E254A4 802B65D4 E7B60018 */   swc1     $f22, 0x18($sp)
 /* E254A8 802B65D8 0040882D */  daddu     $s1, $v0, $zero
 /* E254AC 802B65DC 0621FFCC */  bgez      $s1, .L802B6510

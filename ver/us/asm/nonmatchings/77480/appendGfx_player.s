@@ -247,7 +247,7 @@ glabel appendGfx_player
 /* 7AB5C 800E16AC 00A0302D */  daddu     $a2, $a1, $zero
 /* 7AB60 800E16B0 00A0382D */  daddu     $a3, $a1, $zero
 .L800E16B4:
-/* 7AB64 800E16B4 0C0B7710 */  jal       render_sprite
+/* 7AB64 800E16B4 0C0B7710 */  jal       spr_draw_player_sprite
 /* 7AB68 800E16B8 00000000 */   nop
 /* 7AB6C 800E16BC 3C03800F */  lui       $v1, %hi(D_800F7B4C)
 /* 7AB70 800E16C0 24637B4C */  addiu     $v1, $v1, %lo(D_800F7B4C)

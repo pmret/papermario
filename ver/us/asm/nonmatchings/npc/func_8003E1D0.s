@@ -63,7 +63,7 @@ glabel func_8003E1D0
 /* 196B8 8003E2B8 44063000 */  mfc1      $a2, $f6
 /* 196BC 8003E2BC 44070000 */  mfc1      $a3, $f0
 /* 196C0 8003E2C0 0000202D */  daddu     $a0, $zero, $zero
-/* 196C4 8003E2C4 0C01C16C */  jal       func_800705B0
+/* 196C4 8003E2C4 0C01C16C */  jal       playFX_23
 /* 196C8 8003E2C8 E7A40010 */   swc1     $f4, 0x10($sp)
 .L8003E2CC:
 /* 196CC 8003E2CC 8FBF001C */  lw        $ra, 0x1c($sp)

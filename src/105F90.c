@@ -1,19 +1,19 @@
 #include "common.h"
 
-extern UNK_TYPE D_802EA728;
-extern UNK_TYPE D_802EA760;
+extern u32* D_802EA728;
+extern u32* D_802EA760;
 extern StaticEntityData D_802EA7BC;
 extern UNK_TYPE D_802EB3C0;
 
-INCLUDE_ASM(s32, "105F90", func_802E4710);
+INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_get_previous_yaw);
 
-INCLUDE_ASM(s32, "105F90", func_802E4730);
+INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent__setupGfx);
 
-void func_802E4AEC(s32 entityIndex) {
-    func_802E4730(entityIndex, &D_0A000808);
+void entity_HeartBlockContent_setupGfx(s32 entityIndex) {
+    entity_HeartBlockContent__setupGfx(entityIndex, &D_0A000808);
 }
 
-void func_802E4B10(Entity* entity) {
+void entity_HeartBlockContent_set_initial_pos(Entity* entity) {
     struct802E4B10* temp = entity->dataBuf;
     Entity* entityTemp = get_entity_by_index(temp->unk_00);
 
@@ -22,11 +22,11 @@ void func_802E4B10(Entity* entity) {
     entity->position.z = entityTemp->position.z;
 }
 
-void func_802E4B60(Entity* entity) {
+void entity_HeartBlockContent__reset(Entity* entity) {
     struct802E4B10* temp_s0;
     Entity* someEntity;
 
-    entity->renderSetupFunc = func_802E4AEC;
+    entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
     entity->alpha = 255;
     temp_s0 = entity->dataBuf;
     entity->flags |= 0x2000;
@@ -49,10 +49,10 @@ void func_802E4B60(Entity* entity) {
     entity->scale.y = entity->scale.x;
     entity->scale.z = entity->scale.x;
 
-    func_802E4B10(entity);
+    entity_HeartBlockContent_set_initial_pos(entity);
 }
 
-INCLUDE_ASM(s32, "105F90", func_802E4C10);
+INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_anim_idle);
 
 void func_802E4DE0(Entity* entity) {
     struct802E4B10* temp = entity->dataBuf;
@@ -64,65 +64,65 @@ void func_802E4DE0(Entity* entity) {
     entity->rotation.z = 0.0f;
 }
 
-INCLUDE_ASM(s32, "105F90", func_802E4E04);
+INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent__anim_heal);
 
-void func_802E5308(Entity* entity) {
-    func_802E3650(entity);
+void entity_HeartBlock_idle(Entity* entity) {
+    entity_base_block_idle(entity);
 }
 
-INCLUDE_ASM(s32, "105F90", func_802E5324);
+INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_anim_beating);
 
-void func_802E540C(Entity* entity) {
-    func_802E4B10(entity);
+void entity_HeartBlockContent_init(Entity* entity) {
+    entity_HeartBlockContent_set_initial_pos(entity);
 }
 
-void func_802E5428(Entity* entity) {
-    func_802E4B60(entity);
-    func_80110BCC(entity, &D_802EA728);
+void entity_HeartBlockContent_reset(Entity* entity) {
+    entity_HeartBlockContent__reset(entity);
+    entity_set_render_script(entity, &D_802EA728);
 }
 
-void func_802E545C(Entity* entity) {
-    func_802E4C10(entity, 0);
-    func_802E5324(entity);
+void entity_HeartBlockContent_idle(Entity* entity) {
+    entity_HeartBlockContent_anim_idle(entity, 0);
+    entity_HeartBlockContent_anim_beating(entity);
 }
 
-void func_802E548C(Entity* entity) {
-    func_802E4E04(entity, 0);
+void entity_HeartBlockContent_anim_heal(Entity* entity) {
+    entity_HeartBlockContent__anim_heal(entity, 0);
 }
 
-void func_802E54A8(Entity* entity) {
-    func_80110BCC(entity, &D_802EA760);
+void entity_HeartBlock_change_render_script(Entity* entity) {
+    entity_set_render_script(entity, &D_802EA760);
 }
 
-void func_802E54CC(Entity* entity) {
+void entity_HeartBlock_show_tutorial_message(Entity* entity) {
     if ((!gPlayerData.partners[1].enabled) && get_global_flag(SI_SAVE_FLAG(96)) == 0) {
         UNK_TYPE* ptr = &D_802EB3C0;
         *ptr = 0;
-        load_string(0x1D0001, ptr);
+        msg_get_printer_for_string(0x1D0001, ptr);
         set_time_freeze_mode(1);
         gOverrideFlags |= 0x40;
         disable_player_input();
         set_global_flag(SI_SAVE_FLAG(96));
         return;
     }
-    exec_entity_updatecmd(entity);
+    exec_entity_commandlist(entity);
 }
 
-void func_802E555C(Entity* entity) {
+void entity_HeartBlock_wait_for_close_tutorial(Entity* entity) {
     if (D_802EB3C0) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
         set_time_freeze_mode(0);
         gOverrideFlags &= ~0x40;
         enable_player_input();
     }
 }
 
-s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
+s8 entity_HeartBlock_create_child_entity(Entity* entity, StaticEntityData* data) {
     s32 temp_s2 = D_8015C7D0[0];
     Entity* someEntity;
     struct802E4B10* temp_v1;
 
-    entity_init_Hammer23Block_normal(entity);
+    entity_base_block_init(entity);
     someEntity = get_entity_by_index(create_entity(data, entity->position.x, entity->position.y, entity->position.z, 0.0f,
                                      0x80000000));
     temp_v1 = someEntity->dataBuf;
@@ -135,6 +135,6 @@ s8 func_802E55A8(Entity* entity, StaticEntityData* data) {
     }
 }
 
-void func_802E5648(Entity* entity) {
-    func_802E55A8(entity, &D_802EA7BC);
+void entity_HeartBlock_init(Entity* entity) {
+    entity_HeartBlock_create_child_entity(entity, &D_802EA7BC);
 }

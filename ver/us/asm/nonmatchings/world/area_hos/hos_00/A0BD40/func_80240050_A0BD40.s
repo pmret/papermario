@@ -60,7 +60,7 @@ glabel func_80240050_A0BD40
 /* A0BE1C 8024012C E7B40018 */  swc1      $f20, 0x18($sp)
 /* A0BE20 80240130 4600108D */  trunc.w.s $f2, $f2
 /* A0BE24 80240134 44041000 */  mfc1      $a0, $f2
-/* A0BE28 80240138 0C01BF8C */  jal       func_8006FE30
+/* A0BE28 80240138 0C01BF8C */  jal       playFX_0F
 /* A0BE2C 8024013C E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A0BE30 80240140 8FBF0030 */  lw        $ra, 0x30($sp)
 /* A0BE34 80240144 8FB1002C */  lw        $s1, 0x2c($sp)

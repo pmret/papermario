@@ -218,7 +218,7 @@ glabel update_actor_shadow
 /* 1845C0 80255CE0 27A20024 */  addiu     $v0, $sp, 0x24
 /* 1845C4 80255CE4 E7A00020 */  swc1      $f0, 0x20($sp)
 /* 1845C8 80255CE8 E7A20024 */  swc1      $f2, 0x24($sp)
-/* 1845CC 80255CEC 0C0372DF */  jal       func_800DCB7C
+/* 1845CC 80255CEC 0C0372DF */  jal       npc_raycast_down_sides
 /* 1845D0 80255CF0 AFA20010 */   sw       $v0, 0x10($sp)
 /* 1845D4 80255CF4 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 1845D8 80255CF8 3C014348 */  lui       $at, 0x4348
@@ -327,7 +327,7 @@ glabel update_actor_shadow
 /* 184754 80255E74 27A20024 */  addiu     $v0, $sp, 0x24
 /* 184758 80255E78 E7A00024 */  swc1      $f0, 0x24($sp)
 /* 18475C 80255E7C E7A20020 */  swc1      $f2, 0x20($sp)
-/* 184760 80255E80 0C0372DF */  jal       func_800DCB7C
+/* 184760 80255E80 0C0372DF */  jal       npc_raycast_down_sides
 /* 184764 80255E84 AFA20010 */   sw       $v0, 0x10($sp)
 /* 184768 80255E88 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 18476C 80255E8C 3C014348 */  lui       $at, 0x4348

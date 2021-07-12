@@ -20,7 +20,7 @@ BGMPlayer* snd_get_player_with_song_name(s32 songString) {
 INCLUDE_ASM(BGMPlayer*, "28910_len_5090", snd_get_player_with_song_name, s32 songString);
 #endif
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004D7E0);
+INCLUDE_ASM(s32, "28910_len_5090", snd_dispatch_bgm_player_event);
 
 s32 func_8004DA0C(s32 songName) {
     s32 ret = 0;
@@ -45,18 +45,31 @@ s32 func_8004DA0C(s32 songName) {
     return ret;
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004DA74);
+void func_8004DA74(void) {
+    func_8004DAA8(D_8009A664);
+    func_8004DAA8(D_8009A5FC);
+}
 
 void func_8004DAA8(BGMPlayer* player) {
     if (player->unk_221 != 0) {
         player->unk_221 = 4;
         player->unk_10 = 1;
         player->unkFrequency = 1;
-        func_80053A18(&player->fadeInfo);
+        snd_clear_bgm_fade(&player->fadeInfo);
     }
 }
 
-INCLUDE_ASM(s32, "28910_len_5090", func_8004DAE0);
+s32 snd_is_song_playing(s32 songName) {
+    if (songName != 0) {
+        BGMPlayer* player = snd_get_player_with_song_name(songName);
+
+        if (player != NULL) {
+            return songName == player->songName;
+        }
+        return 2;
+    }
+    return 3;
+}
 
 INCLUDE_ASM(s32, "28910_len_5090", func_8004DB28);
 
@@ -174,7 +187,7 @@ void snd_update_bgm_fade(BGMPlayer* player) {
     func_8004E444(player);
 }
 
-void func_8004E444(BGMPlayer *arg0) {
+void func_8004E444(BGMPlayer* arg0) {
     u16 mult = (arg0->fadeInfo.currentVolume.u16 * arg0->unk_3C) >> 15;
     s32 i;
 
@@ -287,11 +300,8 @@ void snd_BGMCmd_E4_MasterTempoFade(BGMPlayer* player, BGMPlayerTrack* track) {
 }
 
 void snd_BGMCmd_E5_MasterVolumeFade(BGMPlayer* player, BGMPlayerTrack* track) {
-    s32 temp_a1;
-    s32 temp_a2;
-
-    temp_a1 = player->unk_D4.u16;
-    temp_a2 = player->unk_D6.u8[0] & 0x7F;
+    s32 temp_a1 = player->unk_D4.u16;
+    s32 temp_a2 = player->unk_D6.u8[0] & 0x7F;
 
     if (temp_a2 != 0) {
         temp_a2 = temp_a2 << 0x18;
@@ -440,7 +450,7 @@ INCLUDE_ASM(s32, "28910_len_5090", func_8005068C);
 
 INCLUDE_ASM(s32, "28910_len_5090", func_800506C8, s32 arg0, s32 arg1);
 
-void func_80050770(BGMPlayer *player, f32 arg1) {
+void func_80050770(BGMPlayer* player, f32 arg1) {
     if (arg1 > 2.0) {
         arg1 = 2.0f;
     } else if (arg1 < 0.25) {
@@ -475,7 +485,10 @@ void func_8005083C(BGMPlayer* arg0, s32 arg1, s16 arg2, s8 arg3) {
     }
 }
 
-INCLUDE_ASM(void, "28910_len_5090", func_8005087C, BGMPlayer* player, s32* arg1, s32 arg2);
+void func_8005087C(BGMPlayer* player, s32* arg1, s32 arg2) {
+    player->unk_204 = arg1;
+    player->unk_232 = arg2;
+}
 
 INCLUDE_ASM(s32, "28910_len_5090", func_80050888);
 

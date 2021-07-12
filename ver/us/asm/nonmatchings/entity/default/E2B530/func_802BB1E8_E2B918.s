@@ -126,7 +126,7 @@ glabel L802BB2CC_E2B9FC
 /* E2BAA4 802BB374 8E250048 */  lw        $a1, 0x48($s1)
 /* E2BAA8 802BB378 8E270050 */  lw        $a3, 0x50($s1)
 /* E2BAAC 802BB37C 44062000 */  mfc1      $a2, $f4
-/* E2BAB0 802BB380 0C01BFBC */  jal       func_8006FEF0
+/* E2BAB0 802BB380 0C01BFBC */  jal       playFX_11
 /* E2BAB4 802BB384 0000202D */   daddu    $a0, $zero, $zero
 /* E2BAB8 802BB388 8E220000 */  lw        $v0, ($s1)
 /* E2BABC 802BB38C 34420020 */  ori       $v0, $v0, 0x20
@@ -265,7 +265,7 @@ glabel L802BB56C_E2BC9C
 /* E2BCB0 802BB580 0220202D */   daddu    $a0, $s1, $zero
 /* E2BCB4 802BB584 92020012 */  lbu       $v0, 0x12($s0)
 /* E2BCB8 802BB588 24420001 */  addiu     $v0, $v0, 1
-/* E2BCBC 802BB58C 0C04419E */  jal       func_80110678
+/* E2BCBC 802BB58C 0C04419E */  jal       entity_start_script
 /* E2BCC0 802BB590 A2020012 */   sb       $v0, 0x12($s0)
 /* E2BCC4 802BB594 24020005 */  addiu     $v0, $zero, 5
 /* E2BCC8 802BB598 080AED75 */  j         .L802BB5D4
@@ -282,7 +282,7 @@ glabel L802BB5A0_E2BCD0
 /* E2BCF0 802BB5C0 A2020012 */  sb        $v0, 0x12($s0)
 /* E2BCF4 802BB5C4 8E220000 */  lw        $v0, ($s1)
 /* E2BCF8 802BB5C8 34420021 */  ori       $v0, $v0, 0x21
-/* E2BCFC 802BB5CC 0C043F5A */  jal       exec_entity_updatecmd
+/* E2BCFC 802BB5CC 0C043F5A */  jal       exec_entity_commandlist
 /* E2BD00 802BB5D0 AE220000 */   sw       $v0, ($s1)
 .L802BB5D4:
 /* E2BD04 802BB5D4 92020012 */  lbu       $v0, 0x12($s0)

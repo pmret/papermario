@@ -344,7 +344,7 @@ glabel L800421E8_1D5E8
 /* 1D7D0 800423D0 14400005 */  bnez      $v0, .L800423E8
 /* 1D7D4 800423D4 24020002 */   addiu    $v0, $zero, 2
 /* 1D7D8 800423D8 3C040001 */  lui       $a0, 1
-/* 1D7DC 800423DC 0C037FBF */  jal       func_800DFEFC
+/* 1D7DC 800423DC 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 1D7E0 800423E0 34840032 */   ori      $a0, $a0, 0x32
 /* 1D7E4 800423E4 24020002 */  addiu     $v0, $zero, 2
 .L800423E8:
@@ -404,7 +404,7 @@ glabel L800421E8_1D5E8
 /* 1D8A4 800424A4 14620004 */  bne       $v1, $v0, .L800424B8
 /* 1D8A8 800424A8 00000000 */   nop
 /* 1D8AC 800424AC 3C040001 */  lui       $a0, 1
-/* 1D8B0 800424B0 0C037FBF */  jal       func_800DFEFC
+/* 1D8B0 800424B0 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 1D8B4 800424B4 34840032 */   ori      $a0, $a0, 0x32
 .L800424B8:
 /* 1D8B8 800424B8 8ED40088 */  lw        $s4, 0x88($s6)
@@ -532,13 +532,13 @@ glabel L800421E8_1D5E8
 /* 1DA60 80042660 2402000F */  addiu     $v0, $zero, 0xf
 /* 1DA64 80042664 0C038069 */  jal       enable_player_input
 /* 1DA68 80042668 A2C2000A */   sb       $v0, 0xa($s6)
-/* 1DA6C 8004266C 0C03BD80 */  jal       func_800EF600
+/* 1DA6C 8004266C 0C03BD80 */  jal       partner_enable_input
 /* 1DA70 80042670 00000000 */   nop
 /* 1DA74 80042674 3C02800A */  lui       $v0, %hi(D_8009A63C)
 /* 1DA78 80042678 8042A63C */  lb        $v0, %lo(D_8009A63C)($v0)
 /* 1DA7C 8004267C 14400226 */  bnez      $v0, .L80042F18
 /* 1DA80 80042680 3C040001 */   lui      $a0, 1
-/* 1DA84 80042684 0C037FBF */  jal       func_800DFEFC
+/* 1DA84 80042684 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 1DA88 80042688 34840002 */   ori      $a0, $a0, 2
 /* 1DA8C 8004268C 08010BC6 */  j         .L80042F18
 /* 1DA90 80042690 00000000 */   nop
@@ -730,10 +730,10 @@ glabel L800421E8_1D5E8
 /* 1DD28 80042928 2402002D */  addiu     $v0, $zero, 0x2d
 /* 1DD2C 8004292C 0C038069 */  jal       enable_player_input
 /* 1DD30 80042930 A6E20010 */   sh       $v0, 0x10($s7)
-/* 1DD34 80042934 0C03BD80 */  jal       func_800EF600
+/* 1DD34 80042934 0C03BD80 */  jal       partner_enable_input
 /* 1DD38 80042938 00000000 */   nop
 /* 1DD3C 8004293C 3C05BF80 */  lui       $a1, 0xbf80
-/* 1DD40 80042940 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 1DD40 80042940 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 1DD44 80042944 240400FF */   addiu    $a0, $zero, 0xff
 /* 1DD48 80042948 3C02800A */  lui       $v0, %hi(D_8009A63C)
 /* 1DD4C 8004294C 8042A63C */  lb        $v0, %lo(D_8009A63C)($v0)
@@ -771,13 +771,13 @@ glabel L800421E8_1D5E8
 /* 1DDC0 800429C0 8EE300B8 */  lw        $v1, 0xb8($s7)
 /* 1DDC4 800429C4 14620157 */  bne       $v1, $v0, .L80042F24
 /* 1DDC8 800429C8 3C040001 */   lui      $a0, 1
-/* 1DDCC 800429CC 0C037FBF */  jal       func_800DFEFC
+/* 1DDCC 800429CC 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 1DDD0 800429D0 34840002 */   ori      $a0, $a0, 2
 /* 1DDD4 800429D4 08010BC9 */  j         .L80042F24
 /* 1DDD8 800429D8 00000000 */   nop
 .L800429DC:
 /* 1DDDC 800429DC 3C040008 */  lui       $a0, 8
-/* 1DDE0 800429E0 0C037FBF */  jal       func_800DFEFC
+/* 1DDE0 800429E0 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 1DDE4 800429E4 34840009 */   ori      $a0, $a0, 9
 /* 1DDE8 800429E8 8ED40088 */  lw        $s4, 0x88($s6)
 /* 1DDEC 800429EC 8E820000 */  lw        $v0, ($s4)
@@ -904,10 +904,10 @@ glabel L800421E8_1D5E8
 .L80042B98:
 /* 1DF98 80042B98 0C038069 */  jal       enable_player_input
 /* 1DF9C 80042B9C 00000000 */   nop
-/* 1DFA0 80042BA0 0C03BD80 */  jal       func_800EF600
+/* 1DFA0 80042BA0 0C03BD80 */  jal       partner_enable_input
 /* 1DFA4 80042BA4 00000000 */   nop
 /* 1DFA8 80042BA8 3C05BF80 */  lui       $a1, 0xbf80
-/* 1DFAC 80042BAC 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 1DFAC 80042BAC 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 1DFB0 80042BB0 240400FF */   addiu    $a0, $zero, 0xff
 /* 1DFB4 80042BB4 2402000F */  addiu     $v0, $zero, 0xf
 /* 1DFB8 80042BB8 AEC20094 */  sw        $v0, 0x94($s6)
@@ -1153,11 +1153,11 @@ glabel L800421E8_1D5E8
 .L80042F08:
 /* 1E308 80042F08 0C038069 */  jal       enable_player_input
 /* 1E30C 80042F0C 00000000 */   nop
-/* 1E310 80042F10 0C03BD80 */  jal       func_800EF600
+/* 1E310 80042F10 0C03BD80 */  jal       partner_enable_input
 /* 1E314 80042F14 00000000 */   nop
 .L80042F18:
 /* 1E318 80042F18 3C05BF80 */  lui       $a1, 0xbf80
-/* 1E31C 80042F1C 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 1E31C 80042F1C 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 1E320 80042F20 240400FF */   addiu    $a0, $zero, 0xff
 .L80042F24:
 /* 1E324 80042F24 0C0B1192 */  jal       resume_all_group

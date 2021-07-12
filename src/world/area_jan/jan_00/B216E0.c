@@ -1,5 +1,9 @@
 #include "jan_00.h"
 
+static char* N(exit_str_0) = "jan_01";
+static char* N(exit_str_1) = "jan_08";
+static char* N(exit_str_2) = "mac_06";
+
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B216E0", func_802411A0_B216E0);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_00/B216E0", func_802411EC_B2172C);

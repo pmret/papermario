@@ -30,8 +30,7 @@ Script N(80240750) = SCRIPT({
         match STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
             }
         }
@@ -39,13 +38,13 @@ Script N(80240750) = SCRIPT({
 });
 
 Script N(8024080C) = SCRIPT({
-    func_802D5FF8(137, 3);
+    PushSong(137, 3);
 });
 
 Script N(80240830) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
-    func_802D5FD8();
+    PopSong();
 });
 
 static s32 N(pad_86C) = {
@@ -179,7 +178,7 @@ s32 N(D_80241854_CC2684) = {
 
 Script N(80241858) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
-    func_802D6420();
+    ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
     match SI_VAR(0) {
         == 0 {}
@@ -197,7 +196,7 @@ Script N(80241858) = SCRIPT({
         }
     }
     N(func_80240614_CC1444)(SI_VAR(10));
-    func_802D6954();
+    CloseChoicePopup();
     unbind;
 });
 
@@ -301,16 +300,20 @@ Script N(interact_80241C8C) = SCRIPT({
                         == 0 {
                             if (SI_SAVE_FLAG(1375) == 1) {
                                 spawn N(80241BE4);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11, 0x0090));
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11,
+                                              0x0090));
                                 SetPlayerAnimation(0x60005);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0091));
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                              0x0091));
                                 SetPlayerAnimation(ANIM_PRAY);
                                 sleep 40;
                                 SetPlayerAnimation(ANIM_10002);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0092));
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                              0x0092));
                                 SI_SAVE_FLAG(1379) = 1;
                             } else {
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11, 0x0090));
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11,
+                                              0x0090));
                             }
                         }
                         == 1 {
@@ -335,9 +338,9 @@ Script N(interact_80241C8C) = SCRIPT({
             match SI_VAR(0) {
                 <= 0 {
                     SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0093));
-                }
-                else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0095));
+                } else {
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                  0x0095));
                     RemoveItemEntity(SI_VAR(7));
                     MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);
                     SI_VAR(0) = 87;
@@ -345,7 +348,8 @@ Script N(interact_80241C8C) = SCRIPT({
                     await N(802417F0);
                     AddKeyItem(ITEM_WATER_STONE);
                     sleep 10;
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0096));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                  0x0096));
                     SI_AREA_FLAG(22) = 1;
                     STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
                 }
@@ -363,9 +367,9 @@ Script N(interact_80241C8C) = SCRIPT({
         }
         < 60 {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0098));
-        }
-        else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0099));
+        } else {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                          0x0099));
         }
     }
     ResetCam(0, 4.0);
@@ -393,8 +397,7 @@ Script N(init_802423D0) = SCRIPT({
             SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
             MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
             SI_VAR(10) = SI_VAR(0);
-        }
-        else {
+        } else {
             SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
             SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
             MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);

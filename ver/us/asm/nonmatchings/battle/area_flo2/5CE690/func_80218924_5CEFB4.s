@@ -45,7 +45,7 @@ glabel func_80218924_5CEFB4
 /* 5CF054 802189C4 44072000 */  mfc1      $a3, $f4
 /* 5CF058 802189C8 0000202D */  daddu     $a0, $zero, $zero
 /* 5CF05C 802189CC AFA00014 */  sw        $zero, 0x14($sp)
-/* 5CF060 802189D0 0C01C64C */  jal       func_80071930
+/* 5CF060 802189D0 0C01C64C */  jal       playFX_57
 /* 5CF064 802189D4 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 5CF068 802189D8 AE220084 */  sw        $v0, 0x84($s1)
 /* 5CF06C 802189DC 8FBF0028 */  lw        $ra, 0x28($sp)

@@ -8,7 +8,7 @@
 
 ApiStatus EnablePartnerBlur(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DisablePartnerBlur(ScriptInstance* script, s32 isInitialCall);
-ApiStatus UseCamPreset(ScriptInstance* script, s32 isInitialCall);
+ApiStatus UseBattleCamPreset(ScriptInstance* script, s32 isInitialCall);
 ApiStatus SetBattleCamTarget(ScriptInstance* script, s32 isInitialCall);
 ApiStatus SetBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall);
 ApiStatus AddBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall);
@@ -256,7 +256,7 @@ ApiStatus PartnerPowerBounceEnemy(ScriptInstance* script, s32 isInitialCall);
 ApiStatus PartnerTestEnemy(ScriptInstance* script, s32 isInitialCall);
 ApiStatus DeletePartner(ScriptInstance* script, s32 isInitialCall);
 ApiStatus GetDamageIntensity(ScriptInstance* script, s32 isInitialCall);
-ApiStatus ActorAddMovePos(ScriptInstance* script, s32 isInitialCall);
+ApiStatus AddEffectOffset(ScriptInstance* script, s32 isInitialCall);
 ApiStatus LoadStarPowerScript(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80248DD0(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80248DE4(ScriptInstance* script, s32 isInitialCall);
@@ -273,8 +273,8 @@ ApiStatus func_8024C944(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024CB68(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024E9B0(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024E748(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802D3398(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802CCCB0(ScriptInstance* script, s32 isInitialCall);
+ApiStatus InitVirtualEntityList(ScriptInstance* script, s32 isInitialCall);
+ApiStatus InitAnimatedModels(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8024CE9C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CABE8(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_802CAE50(ScriptInstance* script, s32 isInitialCall);
@@ -286,6 +286,8 @@ ApiStatus func_80269524(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80269550(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall);
 ApiStatus func_80280818(ScriptInstance* script, s32 isInitialCall); ///< YieldTurn copy
+ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_8027D32C(ScriptInstance* script, s32 isInitialCall);
 
 extern Script PlayerScriptDispatcher;
 extern Script PeachScriptDispatcher;

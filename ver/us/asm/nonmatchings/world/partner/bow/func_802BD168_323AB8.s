@@ -21,7 +21,7 @@ glabel func_802BD168_323AB8
 /* 323ADC 802BD18C 8C91014C */  lw        $s1, 0x14c($a0)
 /* 323AE0 802BD190 10A00009 */  beqz      $a1, .L802BD1B8
 /* 323AE4 802BD194 0220202D */   daddu    $a0, $s1, $zero
-/* 323AE8 802BD198 0C03B4C4 */  jal       enable_partner_flying
+/* 323AE8 802BD198 0C03B4C4 */  jal       partner_flying_enable
 /* 323AEC 802BD19C 24050001 */   addiu    $a1, $zero, 1
 /* 323AF0 802BD1A0 3C04802C */  lui       $a0, %hi(D_802BDFFC_32494C)
 /* 323AF4 802BD1A4 8C84DFFC */  lw        $a0, %lo(D_802BDFFC_32494C)($a0)
@@ -37,9 +37,9 @@ glabel func_802BD168_323AB8
 /* 323B18 802BD1C8 24420001 */  addiu     $v0, $v0, 1
 /* 323B1C 802BD1CC 16400007 */  bnez      $s2, .L802BD1EC
 /* 323B20 802BD1D0 AE020318 */   sw       $v0, 0x318($s0)
-/* 323B24 802BD1D4 0C03B52E */  jal       update_player_move_history
+/* 323B24 802BD1D4 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 323B28 802BD1D8 0220202D */   daddu    $a0, $s1, $zero
-/* 323B2C 802BD1DC 0C03B574 */  jal       func_800ED5D0
+/* 323B2C 802BD1DC 0C03B574 */  jal       partner_flying_update_motion
 /* 323B30 802BD1E0 0220202D */   daddu    $a0, $s1, $zero
 /* 323B34 802BD1E4 080AF537 */  j         .L802BD4DC
 /* 323B38 802BD1E8 0000102D */   daddu    $v0, $zero, $zero
@@ -230,9 +230,9 @@ glabel func_802BD168_323AB8
 /* 323DF4 802BD4A4 080AF536 */  j         .L802BD4D8
 /* 323DF8 802BD4A8 AC820004 */   sw       $v0, 4($a0)
 .L802BD4AC:
-/* 323DFC 802BD4AC 0C03B52E */  jal       update_player_move_history
+/* 323DFC 802BD4AC 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 323E00 802BD4B0 0220202D */   daddu    $a0, $s1, $zero
-/* 323E04 802BD4B4 0C03B574 */  jal       func_800ED5D0
+/* 323E04 802BD4B4 0C03B574 */  jal       partner_flying_update_motion
 /* 323E08 802BD4B8 0220202D */   daddu    $a0, $s1, $zero
 /* 323E0C 802BD4BC 8E030000 */  lw        $v1, ($s0)
 /* 323E10 802BD4C0 8C620000 */  lw        $v0, ($v1)

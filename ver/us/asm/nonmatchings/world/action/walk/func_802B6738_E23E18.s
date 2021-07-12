@@ -33,19 +33,19 @@ glabel func_802B6738_E23E18
 /* E23E84 802B67A4 14400006 */  bnez      $v0, .L802B67C0
 /* E23E88 802B67A8 00021080 */   sll      $v0, $v0, 2
 /* E23E8C 802B67AC 3C04000A */  lui       $a0, 0xa
-/* E23E90 802B67B0 0C037FBF */  jal       func_800DFEFC
+/* E23E90 802B67B0 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23E94 802B67B4 34840003 */   ori      $a0, $a0, 3
 /* E23E98 802B67B8 080ADA03 */  j         .L802B680C
 /* E23E9C 802B67BC 00000000 */   nop
 .L802B67C0:
 /* E23EA0 802B67C0 3C04802B */  lui       $a0, %hi(D_802B6910_E23FF0)
 /* E23EA4 802B67C4 00822021 */  addu      $a0, $a0, $v0
-/* E23EA8 802B67C8 0C037FBF */  jal       func_800DFEFC
+/* E23EA8 802B67C8 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23EAC 802B67CC 8C846910 */   lw       $a0, %lo(D_802B6910_E23FF0)($a0)
 /* E23EB0 802B67D0 080ADA03 */  j         .L802B680C
 /* E23EB4 802B67D4 00000000 */   nop
 .L802B67D8:
-/* E23EB8 802B67D8 0C037FBF */  jal       func_800DFEFC
+/* E23EB8 802B67D8 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23EBC 802B67DC 3484000D */   ori      $a0, $a0, 0xd
 /* E23EC0 802B67E0 080ADA03 */  j         .L802B680C
 /* E23EC4 802B67E4 00000000 */   nop
@@ -57,7 +57,7 @@ glabel func_802B6738_E23E18
 /* E23ED8 802B67F8 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0x8)
 /* E23EDC 802B67FC 00822021 */  addu      $a0, $a0, $v0
 /* E23EE0 802B6800 8C847C24 */  lw        $a0, %lo(world_actions_peachDisguises+0x8)($a0)
-/* E23EE4 802B6804 0C0398DB */  jal       func_800E636C
+/* E23EE4 802B6804 0C0398DB */  jal       peach_set_disguise_anim
 /* E23EE8 802B6808 00000000 */   nop
 .L802B680C:
 /* E23EEC 802B680C 8E020000 */  lw        $v0, ($s0)
@@ -71,9 +71,9 @@ glabel func_802B6738_E23E18
 /* E23F08 802B6828 27A40010 */  addiu     $a0, $sp, 0x10
 /* E23F0C 802B682C C600005C */  lwc1      $f0, 0x5c($s0)
 /* E23F10 802B6830 27A50014 */  addiu     $a1, $sp, 0x14
-/* E23F14 802B6834 0C0388C1 */  jal       input_to_move_vector
+/* E23F14 802B6834 0C0388C1 */  jal       player_input_to_move_vector
 /* E23F18 802B6838 E6000054 */   swc1     $f0, 0x54($s0)
-/* E23F1C 802B683C 0C039454 */  jal       func_800E5150
+/* E23F1C 802B683C 0C039454 */  jal       phys_update_interact_collider
 /* E23F20 802B6840 00000000 */   nop
 /* E23F24 802B6844 C7A20014 */  lwc1      $f2, 0x14($sp)
 /* E23F28 802B6848 44800000 */  mtc1      $zero, $f0
@@ -120,7 +120,7 @@ glabel func_802B6738_E23E18
 /* E23FC4 802B68E4 080ADA3D */  j         .L802B68F4
 /* E23FC8 802B68E8 00000000 */   nop
 .L802B68EC:
-/* E23FCC 802B68EC 0C039426 */  jal       func_800E5098
+/* E23FCC 802B68EC 0C039426 */  jal       try_player_footstep_sounds
 /* E23FD0 802B68F0 00000000 */   nop
 .L802B68F4:
 /* E23FD4 802B68F4 8FBF001C */  lw        $ra, 0x1c($sp)

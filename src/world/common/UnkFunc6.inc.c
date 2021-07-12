@@ -21,14 +21,14 @@ void N(UnkFunc6)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
 
     if (npc->jumpVelocity >= 0.0) {
         npc->pos.y += npc->jumpVelocity;
-        npc->currentAnim = enemy->animList[9];
+        npc->currentAnim.w = enemy->animList[9];
         enemy->unk_07 = 0;
         if (!(npc->flags & 8)) {
             posX = npc->pos.x;
             posY = npc->pos.y;
             posZ = npc->pos.z;
             posW = 1000.0f;
-            phi_v0 = func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+            phi_v0 = npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
         } else {
             phi_v0 = FALSE;
         }
@@ -72,7 +72,7 @@ void N(UnkFunc6)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
         posY = npc->pos.y + npc->collisionHeight;
         posZ = npc->pos.z;
         posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {
                 npc->jumpVelocity = 0.0f;
                 npc->pos.y = posY;

@@ -8,7 +8,7 @@ enum {
 ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
 
-    script->varTable[1] = func_800E0088(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
+    script->varTable[1] = get_xz_dist_to_player(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
     return ApiStatus_DONE2;
 }
 
@@ -61,7 +61,7 @@ NpcSettings N(npcSettings_80240950) = {
 Script N(8024097C) = SCRIPT({
 1:
     if (SI_AREA_FLAG(8) == 1) {
-    100:
+100:
         AwaitPlayerLeave(294, 123, 170);
         EnableNpcAI(0, 0);
         DisablePlayerInput(TRUE);
@@ -91,7 +91,7 @@ Script N(npcAI_80240B50) = SCRIPT({
 1:
     match STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
-        89:
+89:
             N(UnkPositionFunc)(-118, 86, -70, -15);
             sleep 1;
             if (SI_VAR(0) == 0) {

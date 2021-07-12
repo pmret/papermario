@@ -48,7 +48,7 @@ glabel func_802B6000_E24920
 /* E249C4 802B60A4 3C040001 */  lui       $a0, 1
 /* E249C8 802B60A8 34840009 */  ori       $a0, $a0, 9
 .L802B60AC:
-/* E249CC 802B60AC 0C037FBF */  jal       func_800DFEFC
+/* E249CC 802B60AC 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E249D0 802B60B0 00000000 */   nop
 /* E249D4 802B60B4 34048161 */  ori       $a0, $zero, 0x8161
 /* E249D8 802B60B8 0C052736 */  jal       sfx_play_sound_at_player
@@ -60,7 +60,7 @@ glabel func_802B6000_E24920
 /* E249F0 802B60D0 30424000 */  andi      $v0, $v0, 0x4000
 /* E249F4 802B60D4 14400004 */  bnez      $v0, .L802B60E8
 /* E249F8 802B60D8 3C04FFFB */   lui      $a0, 0xfffb
-/* E249FC 802B60DC 0C03954C */  jal       func_800E5530
+/* E249FC 802B60DC 0C03954C */  jal       phys_adjust_cam_on_landing
 /* E24A00 802B60E0 00000000 */   nop
 /* E24A04 802B60E4 3C04FFFB */  lui       $a0, 0xfffb
 .L802B60E8:
@@ -85,7 +85,7 @@ glabel func_802B6000_E24920
 /* E24A4C 802B612C 27A50014 */  addiu     $a1, $sp, 0x14
 /* E24A50 802B6130 24420001 */  addiu     $v0, $v0, 1
 /* E24A54 802B6134 A20200B6 */  sb        $v0, 0xb6($s0)
-/* E24A58 802B6138 0C0388C1 */  jal       input_to_move_vector
+/* E24A58 802B6138 0C0388C1 */  jal       player_input_to_move_vector
 /* E24A5C 802B613C E6000054 */   swc1     $f0, 0x54($s0)
 /* E24A60 802B6140 0C039858 */  jal       check_input_jump
 /* E24A64 802B6144 00000000 */   nop

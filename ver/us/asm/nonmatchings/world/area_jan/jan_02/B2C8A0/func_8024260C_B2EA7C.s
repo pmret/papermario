@@ -26,7 +26,7 @@ glabel func_8024260C_B2EA7C
 /* B2EACC 8024265C 00000000 */  nop
 .L80242660:
 /* B2EAD0 80242660 00A0302D */  daddu     $a2, $a1, $zero
-/* B2EAD4 80242664 0C01C5A4 */  jal       func_80071690
+/* B2EAD4 80242664 0C01C5A4 */  jal       playFX_50
 /* B2EAD8 80242668 00A0382D */   daddu    $a3, $a1, $zero
 .L8024266C:
 /* B2EADC 8024266C 8FBF0010 */  lw        $ra, 0x10($sp)

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80246CB8_B594E8
+.word L80241494_B53CC4, L802414A4_B53CD4, L802414BC_B53CEC, L802414DC_B53D0C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L8024152C_B53D5C, L802414F4_B53D24, L80241504_B53D34, L8024151C_B53D4C, 0
+
+.section .text
+
 glabel func_80241330_B53B60
 /* B53B60 80241330 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* B53B64 80241334 AFB3003C */  sw        $s3, 0x3c($sp)
@@ -117,7 +124,7 @@ glabel L802414BC_B53CEC
 glabel L802414DC_B53D0C
 /* B53D0C 802414DC 0260202D */  daddu     $a0, $s3, $zero
 /* B53D10 802414E0 0280282D */  daddu     $a1, $s4, $zero
-/* B53D14 802414E4 0C09035A */  jal       delete_player_actor_B53598
+/* B53D14 802414E4 0C09035A */  jal       btl_delete_player_actor_B53598
 /* B53D18 802414E8 0200302D */   daddu    $a2, $s0, $zero
 /* B53D1C 802414EC 0809054C */  j         .L80241530
 /* B53D20 802414F0 0000102D */   daddu    $v0, $zero, $zero

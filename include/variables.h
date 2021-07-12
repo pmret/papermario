@@ -63,6 +63,7 @@ extern NpcList* gCurrentNpcListPtr;
 extern ShadowList gWorldShadowList;
 extern ShadowList gBattleShadowList;
 extern ShadowList* gCurrentShadowListPtr;
+extern HudElement** gHudElementList;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
@@ -100,6 +101,8 @@ extern Entity* D_802EB3A0;
 extern s32 D_8015C7D0[3]; // not size 3
 
 extern f32 D_800F7B70[4];
+
+extern TempSetZoneEnabled* D_800D91D4;
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
@@ -203,7 +206,7 @@ extern s32 gItemMenuTargetScrollPos;
 extern s32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
-extern MenuIcon* gItemIcons[20];
+extern HudElement* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats
@@ -211,7 +214,7 @@ extern s32 gStatsMenuIconIDs[12];
 
 
 extern s32 gGameState;
-extern s16 D_8009A604;
+extern s16 gNpcCount;
 extern s32 D_8009A64C;
 extern s32* D_8009A658;
 extern s32 gOverrideFlags;
@@ -249,6 +252,7 @@ extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
+
 extern s32 D_80108248;
 extern s32 D_80108518;
 extern s32 D_80108270;
@@ -258,6 +262,20 @@ extern s32 D_801086AC;
 extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
+
+extern s32 D_8010C920;
+extern s32 D_8010C940;
+extern s32 D_8010C954;
+extern s32 D_8010C958;
+extern s32 D_8010C95C;
+extern s32 D_8010C96C;
+extern s32 D_8010C980;
+extern s32 D_8010C9A0;
+extern f32 D_800F7B40;
+extern s32 D_800F7B44;
+extern f32 D_8010C938;
+extern f32 D_8010C990;
+
 extern Temp8010EBB0 D_8010EBB0; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
@@ -338,7 +356,7 @@ extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
-extern UNK_TYPE D_802EAE7C;
+extern u32* D_802EAE7C;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
@@ -361,10 +379,19 @@ extern s32 D_802C05CC;
 
 extern s16 gCurrentCamID;
 
+extern s32 gSpriteHeapPtr;
+
 // Heap?
+extern s32 D_8038F800;
+extern s32 D_803B5000;
 extern s32 D_803DA800;
 
 // Dead code
 extern PlayerStatus* dead_gPlayerStatusPtr;
+
+extern s32 D_80108A64;
+extern s32 bMarioIdleAnims[];
+extern s32 bMarioDefendAnims[];
+extern s32 bPeachIdleAnims[];
 
 #endif

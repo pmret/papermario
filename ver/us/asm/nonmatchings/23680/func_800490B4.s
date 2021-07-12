@@ -149,7 +149,7 @@ glabel func_800490B4
 /* 246BC 800492BC E7B40010 */  swc1      $f20, 0x10($sp)
 /* 246C0 800492C0 E7A00014 */  swc1      $f0, 0x14($sp)
 /* 246C4 800492C4 E7A20018 */  swc1      $f2, 0x18($sp)
-/* 246C8 800492C8 0C037711 */  jal       func_800DDC44
+/* 246C8 800492C8 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 246CC 800492CC E7A2001C */   swc1     $f2, 0x1c($sp)
 /* 246D0 800492D0 1440003B */  bnez      $v0, .L800493C0
 /* 246D4 800492D4 0000102D */   daddu    $v0, $zero, $zero

@@ -26,13 +26,13 @@ ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
 
     func_800EF414(get_variable(script, *thisPos++), get_variable(script, *thisPos++));
-    set_partner_tether_distance(0.0f);
+    partner_set_tether_distance(0.0f);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80281C84(ScriptInstance* script, s32 isInitialCall) {
     func_800EF3E4();
-    reset_partner_tether_distance();
+    repartner_set_tether_distance();
     return ApiStatus_DONE2;
 }
 
@@ -85,18 +85,18 @@ ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282594);
 #endif
 
-ApiStatus func_802825FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode1(ScriptInstance* script, s32 isInitialCall) {
     D_80151310 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80282610(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode2(ScriptInstance* script, s32 isInitialCall) {
     D_80151310 = 2;
     return ApiStatus_DONE2;
 }
 
 // common probably
-ApiStatus func_80282624(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode0(ScriptInstance* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;
 }

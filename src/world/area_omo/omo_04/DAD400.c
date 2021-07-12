@@ -1,5 +1,8 @@
 #include "omo_04.h"
 
+static char* N(exit_str_0) = "omo_03";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240000_DAD400);
 /*
 ApiStatus N(func_80240000_DAD400)(ScriptInstance* script, s32 isInitialCall) {
@@ -33,32 +36,7 @@ ApiStatus N(func_80240000_DAD400)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802402F4_DAD6F4);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_802403A0_DAD7A0);
-/*
-void N(func_802403A0_DAD7A0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-    } else {
-        npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
-    }
-    npc->currentAnim = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    if (enemy->territory->wander.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
-    }
-    enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[0].s = 1;
-}
-*/
+#include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80240550_DAD950);
 
@@ -123,7 +101,7 @@ ApiStatus N(func_802416AC_DAEAAC)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_802403A0_DAD7A0)(script, aiSettings, territoryPtr);
+#include "world/common/UnkNpcAIFunc23.inc.c"
         case 1:
             N(func_80240550_DAD950)(script, aiSettings, territoryPtr);
             break;
@@ -162,6 +140,8 @@ INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241A70_DAEE70);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241AD0_DAEED0);
 
+static char* N(exit_str_2) = "omo_04";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E04_DAF204);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_04/DAD400", func_80241E20_DAF220);
+#include "world/common/UnsetCamera0Flag1000.inc.c"

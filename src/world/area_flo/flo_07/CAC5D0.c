@@ -27,8 +27,7 @@ Script N(802407A0) = SCRIPT({
         match STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
             }
         }
@@ -37,13 +36,13 @@ Script N(802407A0) = SCRIPT({
 });
 
 Script N(8024086C) = SCRIPT({
-    func_802D5FF8(137, 1);
+    PushSong(137, 1);
 });
 
 Script N(80240890) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
-    func_802D5FD8();
+    PopSong();
 });
 
 static s32 N(pad_8CC) = {
@@ -295,10 +294,12 @@ Script N(interact_80242044) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             if (SI_AREA_FLAG(5) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0070));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x0070));
                 SI_AREA_FLAG(5) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0071));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x0071));
             }
         }
         < STORY_CH6_GOT_FERTILE_SOIL {
@@ -325,29 +326,35 @@ Script N(interact_80242044) = SCRIPT({
                     await N(80241DBC);
                     ResetCam(0, 4.0);
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0072));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                                  0x0072));
                 }
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0072));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x0072));
             }
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             if (SI_SAVE_FLAG(1374) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0072));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                              0x0072));
             } else {
                 if (STORY_PROGRESS < STORY_CH6_GOT_WATER_STONE) {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0073));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                                  0x0073));
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0074));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                                  0x0074));
                 }
-                ContinueSpeech(-1, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0075));
+                ContinueSpeech(-1, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                               0x0075));
             }
         }
         < STORY_CH6_RETURNED_TO_TOAD_TOWN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0076));
-        }
-        else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0077));
+        } else {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                          0x0077));
         }
     }
     await N(80240890);
@@ -372,12 +379,14 @@ Script N(802424F4) = SCRIPT({
         DisablePlayerInput(TRUE);
         sleep 10;
         if (SI_AREA_VAR(3) < 5) {
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006E));
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                          0x006E));
             GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
             PlayerMoveTo(410, SI_VAR(3), 10);
             SI_AREA_VAR(3) += 1;
         } else {
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006F));
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                          0x006F));
             SI_AREA_VAR(3) = 0;
         }
         DisablePlayerInput(FALSE);
@@ -391,7 +400,8 @@ Script N(tree1_Callback) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH6_GOT_CRYSTAL_BERRY) {
         NpcFacePlayer(NPC_POSIE, 1);
         sleep 10;
-        SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0067));
+        SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                      0x0067));
         if (STORY_PROGRESS == STORY_CH6_GOT_FERTILE_SOIL) {
             if (SI_SAVE_FLAG(1379) == 1) {
                 UseSettingsFrom(0, -250, 0, 0);
@@ -406,7 +416,8 @@ Script N(tree1_Callback) = SCRIPT({
         if (SI_SAVE_FLAG(1374) == 0) {
             NpcFacePlayer(NPC_POSIE, 1);
             sleep 10;
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0067));
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                          0x0067));
         } else {
             SI_AREA_VAR(2) += 1;
             match SI_AREA_VAR(2) {

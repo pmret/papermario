@@ -1,8 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-s32 N(UnkFunc23)(ScriptInstance *script, s32 isInitialCall) {
-    Bytecode *args = script->ptrReadPos;
+s32 N(UnkFunc23)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
     s32 ret = 0;
 
     if (isInitialCall) {
@@ -10,7 +10,7 @@ s32 N(UnkFunc23)(ScriptInstance *script, s32 isInitialCall) {
         script->varTable[1] = get_variable(script, *args++);
         script->functionTemp[0].s = 0;
         script->functionTemp[1].s = 0;
-        set_transition_stencil_color(0, 0xD0, 0xD0, 0xD0);
+        set_screen_overlay_color(0, 0xD0, 0xD0, 0xD0);
     }
 
     switch (script->functionTemp[0].s) {
@@ -43,7 +43,7 @@ s32 N(UnkFunc23)(ScriptInstance *script, s32 isInitialCall) {
             break;
     }
 
-    set_transition_stencil_zoom_0(1, script->functionTemp[1].s);
+    set_screen_overlay_params_front(1, script->functionTemp[1].s);
 
     return ret;
 }

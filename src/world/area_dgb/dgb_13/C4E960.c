@@ -19,8 +19,7 @@ Script N(80240050) = SCRIPT({
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
     }

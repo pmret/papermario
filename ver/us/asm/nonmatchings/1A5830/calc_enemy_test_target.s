@@ -96,7 +96,7 @@ glabel calc_enemy_test_target
 /* 1A5C20 80277340 0809DCF5 */  j         .L802773D4
 /* 1A5C24 80277344 24020006 */   addiu    $v0, $zero, 6
 .L80277348:
-/* 1A5C28 80277348 0C099CAB */  jal       heroes_is_ability_active
+/* 1A5C28 80277348 0C099CAB */  jal       player_team_is_ability_active
 /* 1A5C2C 8027734C 24050008 */   addiu    $a1, $zero, 8
 /* 1A5C30 80277350 10400007 */  beqz      $v0, .L80277370
 /* 1A5C34 80277354 0200202D */   daddu    $a0, $s0, $zero
@@ -107,7 +107,7 @@ glabel calc_enemy_test_target
 /* 1A5C48 80277368 24110005 */   addiu    $s1, $zero, 5
 /* 1A5C4C 8027736C 0200202D */  daddu     $a0, $s0, $zero
 .L80277370:
-/* 1A5C50 80277370 0C099CAB */  jal       heroes_is_ability_active
+/* 1A5C50 80277370 0C099CAB */  jal       player_team_is_ability_active
 /* 1A5C54 80277374 24050021 */   addiu    $a1, $zero, 0x21
 /* 1A5C58 80277378 1040000B */  beqz      $v0, .L802773A8
 /* 1A5C5C 8027737C 0200202D */   daddu    $a0, $s0, $zero
@@ -122,7 +122,7 @@ glabel calc_enemy_test_target
 /* 1A5C80 802773A0 24110005 */   addiu    $s1, $zero, 5
 /* 1A5C84 802773A4 0200202D */  daddu     $a0, $s0, $zero
 .L802773A8:
-/* 1A5C88 802773A8 0C099CAB */  jal       heroes_is_ability_active
+/* 1A5C88 802773A8 0C099CAB */  jal       player_team_is_ability_active
 /* 1A5C8C 802773AC 24050023 */   addiu    $a1, $zero, 0x23
 /* 1A5C90 802773B0 10400008 */  beqz      $v0, .L802773D4
 /* 1A5C94 802773B4 24020006 */   addiu    $v0, $zero, 6

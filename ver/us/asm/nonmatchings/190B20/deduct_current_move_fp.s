@@ -21,11 +21,11 @@ glabel deduct_current_move_fp
 /* 1924E8 80263C08 8C9100D8 */  lw        $s1, 0xd8($a0)
 /* 1924EC 80263C0C 1200000B */  beqz      $s0, .L80263C3C
 /* 1924F0 80263C10 0220202D */   daddu    $a0, $s1, $zero
-/* 1924F4 80263C14 0C099CAB */  jal       heroes_is_ability_active
+/* 1924F4 80263C14 0C099CAB */  jal       player_team_is_ability_active
 /* 1924F8 80263C18 24050018 */   addiu    $a1, $zero, 0x18
 /* 1924FC 80263C1C 02028023 */  subu      $s0, $s0, $v0
 /* 192500 80263C20 0220202D */  daddu     $a0, $s1, $zero
-/* 192504 80263C24 0C099CAB */  jal       heroes_is_ability_active
+/* 192504 80263C24 0C099CAB */  jal       player_team_is_ability_active
 /* 192508 80263C28 24050026 */   addiu    $a1, $zero, 0x26
 /* 19250C 80263C2C 00021040 */  sll       $v0, $v0, 1
 /* 192510 80263C30 02028023 */  subu      $s0, $s0, $v0

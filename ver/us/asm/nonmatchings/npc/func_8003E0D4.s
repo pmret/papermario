@@ -58,7 +58,7 @@ glabel func_8003E0D4
 /* 195A8 8003E1A8 46020000 */  add.s     $f0, $f0, $f2
 /* 195AC 8003E1AC 3C064220 */  lui       $a2, 0x4220
 /* 195B0 8003E1B0 44070000 */  mfc1      $a3, $f0
-/* 195B4 8003E1B4 0C01C244 */  jal       func_80070910
+/* 195B4 8003E1B4 0C01C244 */  jal       playFX_2C
 /* 195B8 8003E1B8 24040001 */   addiu    $a0, $zero, 1
 .L8003E1BC:
 /* 195BC 8003E1BC 8FBF0014 */  lw        $ra, 0x14($sp)

@@ -1,5 +1,7 @@
 #include "omo_12.h"
 
+static char* N(exit_str_0) = "omo_11\0";
+
 INCLUDE_ASM(s32, "world/area_omo/omo_12/DDF730", func_80240420_DDF730);
 /*
 ApiStatus N(func_80240420_DDF730)(ScriptInstance *script, s32 isInitialCall) {

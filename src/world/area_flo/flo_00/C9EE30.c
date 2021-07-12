@@ -1,6 +1,6 @@
 #include "flo_00.h"
 
-ApiStatus N(func_80240F10_C9EE30)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240F10_C9EE30)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = *args++;
     s32 var2 = *args++;
@@ -11,7 +11,7 @@ ApiStatus N(func_80240F10_C9EE30)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240F80_C9EEA0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240F80_C9EEA0)(ScriptInstance* script, s32 isInitialCall) {
     f32 var1 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(-83.0f, 87.0f, script->varTable[9], script->varTable[11]);
     f32 clamped = clamp_angle(atan2(-83.0f, 87.0f, script->varTable[9], script->varTable[11]) - var1);
@@ -25,8 +25,8 @@ ApiStatus N(func_80240F80_C9EEA0)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802410B4_C9EFD4)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_by_index(0);
+ApiStatus N(func_802410B4_C9EFD4)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_by_index(0);
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(-83.0f, 87.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(atan2(-83.0f, 87.0f, script->varTable[12], script->varTable[14]) - temp_f20);
@@ -44,12 +44,12 @@ ApiStatus N(func_802410B4_C9EFD4)(ScriptInstance *script, s32 isInitialCall) {
 
 #include "world/common/SyncStatusMenu.inc.c"
 
-ApiStatus N(func_8024139C_C9F2BC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024139C_C9F2BC)(ScriptInstance* script, s32 isInitialCall) {
     increment_status_menu_disabled();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802413BC_C9F2DC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802413BC_C9F2DC)(ScriptInstance* script, s32 isInitialCall) {
     decrement_status_menu_disabled();
     return ApiStatus_DONE2;
 }

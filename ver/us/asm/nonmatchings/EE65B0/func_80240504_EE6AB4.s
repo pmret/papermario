@@ -7,7 +7,7 @@ glabel func_80240504_EE6AB4
 /* EE6ABC 8024050C AFB00060 */  sw        $s0, 0x60($sp)
 /* EE6AC0 80240510 F7B60070 */  sdc1      $f22, 0x70($sp)
 /* EE6AC4 80240514 F7B40068 */  sdc1      $f20, 0x68($sp)
-/* EE6AC8 80240518 0C01B198 */  jal       __osGetCause
+/* EE6AC8 80240518 0C01B198 */  jal       osGetCause
 /* EE6ACC 8024051C 27A40010 */   addiu    $a0, $sp, 0x10
 /* EE6AD0 80240520 3C108024 */  lui       $s0, %hi(D_80243B44_EEA0F4)
 /* EE6AD4 80240524 26103B44 */  addiu     $s0, $s0, %lo(D_80243B44_EEA0F4)

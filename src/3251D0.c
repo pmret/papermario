@@ -6,7 +6,7 @@ ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
     s32 b = get_variable(script, *args++);
     s32 c = get_variable(script, *args++);
 
-    func_8006FEF0(0, a, b, c, 60.0f);
+    playFX_11(0, a, b, c, 60.0f);
     return ApiStatus_DONE2;
 }
 
@@ -17,7 +17,7 @@ ApiStatus func_802BD1AC_32527C(ScriptInstance* script, s32 isInitialCall) {
     s32 c = get_variable(script, *args++);
     s32 d = get_variable(script, *args++);
 
-    func_80071090(0, a, b, c, d);
+    playFX_40(0, a, b, c, d);
     return ApiStatus_DONE2;
 }
 
@@ -28,7 +28,7 @@ ApiStatus func_802BD26C(ScriptInstance* script, s32 isInitialCall) {
     s32 c = get_variable(script, *args++);
     s32 d = get_variable(script, *args++);
 
-    func_80071090(1, a, b, c, d);
+    playFX_40(1, a, b, c, d);
     return ApiStatus_DONE2;
 }
 

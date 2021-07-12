@@ -21,12 +21,12 @@ glabel func_802410B0_D7DC00
 /* D7DC40 802410F0 27A50018 */  addiu     $a1, $sp, 0x18
 /* D7DC44 802410F4 27A6001C */  addiu     $a2, $sp, 0x1c
 /* D7DC48 802410F8 27B00020 */  addiu     $s0, $sp, 0x20
-/* D7DC4C 802410FC 0C0470AC */  jal       func_8011C2B0
+/* D7DC4C 802410FC 0C0470AC */  jal       mdl_get_copied_vertices
 /* D7DC50 80241100 0200382D */   daddu    $a3, $s0, $zero
 /* D7DC54 80241104 26240001 */  addiu     $a0, $s1, 1
 /* D7DC58 80241108 27A50024 */  addiu     $a1, $sp, 0x24
 /* D7DC5C 8024110C 27A60028 */  addiu     $a2, $sp, 0x28
-/* D7DC60 80241110 0C0470AC */  jal       func_8011C2B0
+/* D7DC60 80241110 0C0470AC */  jal       mdl_get_copied_vertices
 /* D7DC64 80241114 0200382D */   daddu    $a3, $s0, $zero
 /* D7DC68 80241118 8FA40024 */  lw        $a0, 0x24($sp)
 /* D7DC6C 8024111C 8FA50018 */  lw        $a1, 0x18($sp)
@@ -45,12 +45,12 @@ glabel func_802410B0_D7DC00
 /* D7DC9C 8024114C 27A50018 */  addiu     $a1, $sp, 0x18
 /* D7DCA0 80241150 27A6001C */  addiu     $a2, $sp, 0x1c
 /* D7DCA4 80241154 27B00020 */  addiu     $s0, $sp, 0x20
-/* D7DCA8 80241158 0C0470AC */  jal       func_8011C2B0
+/* D7DCA8 80241158 0C0470AC */  jal       mdl_get_copied_vertices
 /* D7DCAC 8024115C 0200382D */   daddu    $a3, $s0, $zero
 /* D7DCB0 80241160 26240002 */  addiu     $a0, $s1, 2
 /* D7DCB4 80241164 27A50024 */  addiu     $a1, $sp, 0x24
 /* D7DCB8 80241168 27A60028 */  addiu     $a2, $sp, 0x28
-/* D7DCBC 8024116C 0C0470AC */  jal       func_8011C2B0
+/* D7DCBC 8024116C 0C0470AC */  jal       mdl_get_copied_vertices
 /* D7DCC0 80241170 0200382D */   daddu    $a3, $s0, $zero
 /* D7DCC4 80241174 8FA40018 */  lw        $a0, 0x18($sp)
 /* D7DCC8 80241178 8FA50024 */  lw        $a1, 0x24($sp)
@@ -68,7 +68,7 @@ glabel func_802410B0_D7DC00
 /* D7DCF4 802411A4 24420008 */  addiu     $v0, $v0, 8
 /* D7DCF8 802411A8 AC620000 */  sw        $v0, ($v1)
 /* D7DCFC 802411AC 3C02DE00 */  lui       $v0, 0xde00
-/* D7DD00 802411B0 0C0470BB */  jal       func_8011C2EC
+/* D7DD00 802411B0 0C0470BB */  jal       mdl_get_copied_gfx
 /* D7DD04 802411B4 AE020000 */   sw       $v0, ($s0)
 /* D7DD08 802411B8 AE020004 */  sw        $v0, 4($s0)
 .L802411BC:

@@ -9,7 +9,7 @@ void N(UnkFunc14_copy)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     if ((aiSettings->unk_14 >= 0) && func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        func_800494C0(npc, 0x2F4, 0x200000);
+        ai_enemy_play_sound(npc, 0x2F4, 0x200000);
         if (!(enemy->npcSettings->unk_2A & 1)) {
             script->functionTemp[0].s = 12;
         } else {

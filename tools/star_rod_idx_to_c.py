@@ -700,7 +700,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 actor, position, priority, var0, var1, var2, var3 = unpack(">IIIIIII", bytes.read(0x1C))
                 num_bytes_remaining -= 0x1C
 
-                out += "    "
+                out += "    { "
 
                 if actor in symbol_map:
                     out += f"&{symbol_map[actor][0][1]}, "
@@ -712,14 +712,16 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f"{actor}, "
 
 
-                if priority in symbol_map:
-                    out += f"&{symbol_map[priority][0][1]}"
+                if position in symbol_map:
+                    out += f".position = &{symbol_map[position][0][1]}"
 
-                    s = f"Vec3f {symbol_map[priority][0][1]};"
+                    s = f"Vec3f {symbol_map[position][0][1]};"
                     if s not in INCLUDES_NEEDED["forward"]:
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
-                    out += f"{priority}"
+                    out += f".position = {position}"
+
+                out += f", .priority = {priority}"
 
                 if var0 == 0 and var1 == 0 and var2 == 0 and var3 == 0:
                     pass
@@ -727,6 +729,24 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     out += f", {var1}, {var2} {var3}, {var4}"
 
                 out += " },\n"
+
+            out += f"}};\n"
+        elif struct["type"] == "FormationTable":
+            out += f"BattleList {struct['name']} = {{\n"
+
+            num_bytes_remaining = struct["length"]
+            while num_bytes_remaining > 0:
+                name, formation_length, ptr, stage_ptr, zero = unpack(">IIIII", bytes.read(4 * 5))
+                num_bytes_remaining -= 4 * 5
+
+                if name == 0:
+                    out += "    {},\n"
+                else:
+                    out += "    BATTLE("
+                    out += f"{symbol_map[name][0][1]}, "
+                    out += f"&{symbol_map[ptr][0][1]}, "
+                    out += f"&{symbol_map[stage_ptr][0][1]}"
+                    out += "),\n"
 
             out += f"}};\n"
         elif struct["type"] == "StageTable":
@@ -879,13 +899,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    .bg = {symbol_map[bg][0][1]},\n"
 
             if preBattle != 0:
-                out += f"    .preBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .preBattle = {symbol_map[preBattle][0][1]},\n"
 
             if postBattle != 0:
-                out += f"    .postBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .postBattle = {symbol_map[postBattle][0][1]},\n"
 
             if unk_18 != 0:
-                out += f"    .foregroundModelList = &{symbol_map[unk_18][0][1]},\n"
+                out += f"    .foregroundModelList = {symbol_map[unk_18][0][1]},\n"
 
             if unk_1C != 0:
                 out += f"    .unk_1C = {unk_1C:X},\n"

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802455F8_C76A78
+.word L80241E68_C732E8, L80241E78_C732F8, L80241E90_C73310, L80241EA0_C73320, L80241F20_C733A0, L80241F20_C733A0, L80241F20_C733A0, L80241F20_C733A0, L80241F20_C733A0, L80241F20_C733A0, L80241EB8_C73338, L80241EC8_C73348, L80241EE0_C73360, L80241EF8_C73378, L80241F10_C73390, 0
+
+.section .text
+
 glabel func_80241D5C_C731DC
 /* C731DC 80241D5C 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* C731E0 80241D60 AFB40040 */  sw        $s4, 0x40($sp)
@@ -74,7 +81,7 @@ glabel func_80241D5C_C731DC
 glabel L80241E68_C732E8
 /* C732E8 80241E68 0280202D */  daddu     $a0, $s4, $zero
 /* C732EC 80241E6C 0200282D */  daddu     $a1, $s0, $zero
-/* C732F0 80241E70 0C090294 */  jal       func_80240A50_C71ED0
+/* C732F0 80241E70 0C090294 */  jal       kzn_08_UnkNpcAIFunc23
 /* C732F4 80241E74 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241E78_C732F8
 /* C732F8 80241E78 0280202D */  daddu     $a0, $s4, $zero

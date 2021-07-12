@@ -149,7 +149,7 @@ glabel func_802B6000_E25D60
 /* E25F54 802B61F4 8E040030 */  lw        $a0, 0x30($s0)
 /* E25F58 802B61F8 0C052736 */  jal       sfx_play_sound_at_player
 /* E25F5C 802B61FC 0000282D */   daddu    $a1, $zero, $zero
-/* E25F60 802B6200 0C037FDE */  jal       func_800DFF78
+/* E25F60 802B6200 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* E25F64 802B6204 0260202D */   daddu    $a0, $s3, $zero
 /* E25F68 802B6208 3C038007 */  lui       $v1, %hi(gCurrentCameraID)
 /* E25F6C 802B620C 8C637410 */  lw        $v1, %lo(gCurrentCameraID)($v1)
@@ -185,14 +185,14 @@ glabel func_802B6000_E25D60
 /* E25FDC 802B627C 0280202D */   daddu    $a0, $s4, $zero
 /* E25FE0 802B6280 0220282D */  daddu     $a1, $s1, $zero
 /* E25FE4 802B6284 3C063F80 */  lui       $a2, 0x3f80
-/* E25FE8 802B6288 0C01C4B4 */  jal       func_800712D0
+/* E25FE8 802B6288 0C01C4B4 */  jal       playFX_46_whirlwind
 /* E25FEC 802B628C 240703E8 */   addiu    $a3, $zero, 0x3e8
 /* E25FF0 802B6290 AE2200D8 */  sw        $v0, 0xd8($s1)
 .L802B6294:
-/* E25FF4 802B6294 0C03963C */  jal       func_800E58F0
+/* E25FF4 802B6294 0C03963C */  jal       phys_clear_spin_history
 /* E25FF8 802B6298 00000000 */   nop
 /* E25FFC 802B629C 27A40010 */  addiu     $a0, $sp, 0x10
-/* E26000 802B62A0 0C0388C1 */  jal       input_to_move_vector
+/* E26000 802B62A0 0C0388C1 */  jal       player_input_to_move_vector
 /* E26004 802B62A4 27A50014 */   addiu    $a1, $sp, 0x14
 /* E26008 802B62A8 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* E2600C 802B62AC C7A20014 */  lwc1      $f2, 0x14($sp)
@@ -269,7 +269,7 @@ glabel func_802B6000_E25D60
 /* E26118 802B63B8 0C05271B */  jal       sfx_stop_sound
 /* E2611C 802B63BC AE230000 */   sw       $v1, ($s1)
 /* E26120 802B63C0 27A40010 */  addiu     $a0, $sp, 0x10
-/* E26124 802B63C4 0C0388C1 */  jal       input_to_move_vector
+/* E26124 802B63C4 0C0388C1 */  jal       player_input_to_move_vector
 /* E26128 802B63C8 27A50014 */   addiu    $a1, $sp, 0x14
 /* E2612C 802B63CC C7A00010 */  lwc1      $f0, 0x10($sp)
 /* E26130 802B63D0 080ADA5B */  j         .L802B696C
@@ -516,9 +516,9 @@ glabel func_802B6000_E25D60
 /* E264C0 802B6760 00000000 */   nop
 .L802B6764:
 /* E264C4 802B6764 27A40010 */  addiu     $a0, $sp, 0x10
-/* E264C8 802B6768 0C0388C1 */  jal       input_to_move_vector
+/* E264C8 802B6768 0C0388C1 */  jal       player_input_to_move_vector
 /* E264CC 802B676C 27A50014 */   addiu    $a1, $sp, 0x14
-/* E264D0 802B6770 0C039454 */  jal       func_800E5150
+/* E264D0 802B6770 0C039454 */  jal       phys_update_interact_collider
 /* E264D4 802B6774 00000000 */   nop
 /* E264D8 802B6778 0C039858 */  jal       check_input_jump
 /* E264DC 802B677C 00000000 */   nop
@@ -649,7 +649,7 @@ glabel func_802B6000_E25D60
 /* E266A8 802B6948 A6250008 */  sh        $a1, 8($s1)
 /* E266AC 802B694C A22500B6 */  sb        $a1, 0xb6($s1)
 /* E266B0 802B6950 00621824 */  and       $v1, $v1, $v0
-/* E266B4 802B6954 0C037FBF */  jal       func_800DFEFC
+/* E266B4 802B6954 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E266B8 802B6958 AE230000 */   sw       $v1, ($s1)
 .L802B695C:
 /* E266BC 802B695C C62C00A8 */  lwc1      $f12, 0xa8($s1)

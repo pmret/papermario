@@ -30,7 +30,7 @@ glabel spr_update_sprite
 /* 101400 802DE310 8C770000 */  lw        $s7, ($v1)
 /* 101404 802DE314 00621821 */  addu      $v1, $v1, $v0
 /* 101408 802DE318 8C760000 */  lw        $s6, ($v1)
-/* 10140C 802DE31C 0C0B7623 */  jal       set_anim_timescale
+/* 10140C 802DE31C 0C0B7623 */  jal       spr_set_anim_timescale
 /* 101410 802DE320 30B400FF */   andi     $s4, $a1, 0xff
 /* 101414 802DE324 06A00004 */  bltz      $s5, .L802DE338
 /* 101418 802DE328 0260202D */   daddu    $a0, $s3, $zero
@@ -38,7 +38,7 @@ glabel spr_update_sprite
 /* 101420 802DE330 10510008 */  beq       $v0, $s1, .L802DE354
 /* 101424 802DE334 3C024000 */   lui      $v0, 0x4000
 .L802DE338:
-/* 101428 802DE338 0C0B7608 */  jal       func_802DD820
+/* 101428 802DE338 0C0B7608 */  jal       spr_init_anim_state
 /* 10142C 802DE33C 02C0282D */   daddu    $a1, $s6, $zero
 /* 101430 802DE340 00141200 */  sll       $v0, $s4, 8
 /* 101434 802DE344 00511025 */  or        $v0, $v0, $s1
@@ -59,7 +59,7 @@ glabel spr_update_sprite
 /* 10146C 802DE37C 02C0302D */  daddu     $a2, $s6, $zero
 /* 101470 802DE380 AFB40010 */  sw        $s4, 0x10($sp)
 /* 101474 802DE384 8E040010 */  lw        $a0, 0x10($s0)
-/* 101478 802DE388 0C0B75B7 */  jal       func_802DD6DC
+/* 101478 802DE388 0C0B75B7 */  jal       spr_component_update
 /* 10147C 802DE38C 02E0382D */   daddu    $a3, $s7, $zero
 /* 101480 802DE390 AE020010 */  sw        $v0, 0x10($s0)
 /* 101484 802DE394 00121080 */  sll       $v0, $s2, 2

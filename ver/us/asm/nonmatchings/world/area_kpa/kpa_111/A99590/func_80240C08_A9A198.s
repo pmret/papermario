@@ -1,6 +1,19 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80243250_A9C7E0
+.double 180.0
+
+glabel D_80243258_A9C7E8
+.double 90.0
+
+glabel D_80243260_A9C7F0
+.double 1.2
+
+.section .text
+
 glabel func_80240C08_A9A198
 /* A9A198 80240C08 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* A9A19C 80240C0C AFB3003C */  sw        $s3, 0x3c($sp)
@@ -75,7 +88,7 @@ glabel func_80240C08_A9A198
 /* A9A29C 80240D0C 8E050038 */  lw        $a1, 0x38($s0)
 /* A9A2A0 80240D10 8E06003C */  lw        $a2, 0x3c($s0)
 /* A9A2A4 80240D14 8E070040 */  lw        $a3, 0x40($s0)
-/* A9A2A8 80240D18 0C01BECC */  jal       fx_walk_normal
+/* A9A2A8 80240D18 0C01BECC */  jal       fx_walk
 /* A9A2AC 80240D1C 24040002 */   addiu    $a0, $zero, 2
 /* A9A2B0 80240D20 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A9A2B4 80240D24 0C00A6C9 */  jal       clamp_angle
@@ -155,7 +168,7 @@ glabel func_80240C08_A9A198
 /* A9A3D4 80240E44 44820000 */  mtc1      $v0, $f0
 /* A9A3D8 80240E48 00000000 */  nop
 /* A9A3DC 80240E4C 46800020 */  cvt.s.w   $f0, $f0
-/* A9A3E0 80240E50 0C037711 */  jal       func_800DDC44
+/* A9A3E0 80240E50 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* A9A3E4 80240E54 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A9A3E8 80240E58 54400007 */  bnel      $v0, $zero, .L80240E78
 /* A9A3EC 80240E5C 24140001 */   addiu    $s4, $zero, 1
@@ -201,7 +214,7 @@ glabel func_80240C08_A9A198
 /* A9A484 80240EF4 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* A9A488 80240EF8 AFA20010 */  sw        $v0, 0x10($sp)
 /* A9A48C 80240EFC 8E040080 */  lw        $a0, 0x80($s0)
-/* A9A490 80240F00 0C0372DF */  jal       func_800DCB7C
+/* A9A490 80240F00 0C0372DF */  jal       npc_raycast_down_sides
 /* A9A494 80240F04 27A70028 */   addiu    $a3, $sp, 0x28
 /* A9A498 80240F08 1040000B */  beqz      $v0, .L80240F38
 /* A9A49C 80240F0C 00000000 */   nop
@@ -240,7 +253,7 @@ glabel func_80240C08_A9A198
 /* A9A514 80240F84 8E050038 */  lw        $a1, 0x38($s0)
 /* A9A518 80240F88 8E06003C */  lw        $a2, 0x3c($s0)
 /* A9A51C 80240F8C 8E070040 */  lw        $a3, 0x40($s0)
-/* A9A520 80240F90 0C01BECC */  jal       fx_walk_normal
+/* A9A520 80240F90 0C01BECC */  jal       fx_walk
 /* A9A524 80240F94 24040002 */   addiu    $a0, $zero, 2
 /* A9A528 80240F98 3C01C47A */  lui       $at, 0xc47a
 /* A9A52C 80240F9C 44810000 */  mtc1      $at, $f0

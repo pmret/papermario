@@ -96,7 +96,7 @@ glabel func_802402AC_CD20DC
 /* CD2238 80240408 24020004 */  addiu     $v0, $zero, 4
 /* CD223C 8024040C AC820318 */  sw        $v0, 0x318($a0)
 /* CD2240 80240410 AC960324 */  sw        $s6, 0x324($a0)
-/* CD2244 80240414 0C03D390 */  jal       func_800F4E40
+/* CD2244 80240414 0C03D390 */  jal       create_popup_menu
 /* CD2248 80240418 AC800328 */   sw       $zero, 0x328($a0)
 /* CD224C 8024041C AEA00070 */  sw        $zero, 0x70($s5)
 .L80240420:
@@ -107,7 +107,7 @@ glabel func_802402AC_CD20DC
 /* CD2260 80240430 8662032C */  lh        $v0, 0x32c($s3)
 /* CD2264 80240434 10400009 */  beqz      $v0, .L8024045C
 /* CD2268 80240438 AEA20074 */   sw       $v0, 0x74($s5)
-/* CD226C 8024043C 0C03C4EC */  jal       func_800F13B0
+/* CD226C 8024043C 0C03C4EC */  jal       hide_popup_menu
 /* CD2270 80240440 00000000 */   nop
 /* CD2274 80240444 8EA20070 */  lw        $v0, 0x70($s5)
 /* CD2278 80240448 24420001 */  addiu     $v0, $v0, 1
@@ -120,7 +120,7 @@ glabel func_802402AC_CD20DC
 /* CD228C 8024045C 08090133 */  j         .L802404CC
 /* CD2290 80240460 0000102D */   daddu    $v0, $zero, $zero
 .L80240464:
-/* CD2294 80240464 0C03C54E */  jal       func_800F1538
+/* CD2294 80240464 0C03C54E */  jal       destroy_popup_menu
 /* CD2298 80240468 00000000 */   nop
 /* CD229C 8024046C 8EA30074 */  lw        $v1, 0x74($s5)
 /* CD22A0 80240470 240200FF */  addiu     $v0, $zero, 0xff

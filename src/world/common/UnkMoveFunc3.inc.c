@@ -8,8 +8,8 @@ ApiStatus N(UnkMoveFunc3)(ScriptInstance* script, s32 isInitialCall) {
     s32 var3 = get_variable(script, *args++);
     f32 var4 = get_float_variable(script, *args++);
 
-    func_800720B0(6, var1 + 10, var2 + 18, var3, var4, 45);
-    func_80070BB0(13, var1 + 10, var2 + 18, var3, var4, 30);
+    playFX_6B(6, var1 + 10, var2 + 18, var3, var4, 45);
+    playFX_33(13, var1 + 10, var2 + 18, var3, var4, 30);
 
     return ApiStatus_DONE2;
 }

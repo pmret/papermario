@@ -83,21 +83,23 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, phi_a2);
                     gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(subroutine_arg6));
 
-                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0,
+                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
                     gDPLoadSync(gMasterGfxPos++);
 
                     gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, phi_s6 * 4, phi_s5 * 4, (phi_s4 - 1) * 4, (phi_s5 - 1) * 4);
 
                     gDPPipeSync(gMasterGfxPos++);
-                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, phi_s4 - phi_s6, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, phi_s4 - phi_s6, G_TX_RENDERTILE, 0,
+                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
 
                     gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, phi_s6 * 4, phi_s5 * 4, (phi_s4 - 1) * 4, (phi_s5 - 1) * 4);
 
                     gSPTextureRectangle(gMasterGfxPos++,
-                            (phi_s4 - 1) * 4, (phi_s5 - 1) * 4, phi_s6 * 4, phi_s5 * 4,
-                            G_TX_RENDERTILE,
-                            phi_s6, phi_s5,
-                            0x0400, (sin_deg(N(D_80244070_CBD270) + (i * 30)) * 500.0f) - 0x1F4);
+                                        (phi_s4 - 1) * 4, (phi_s5 - 1) * 4, phi_s6 * 4, phi_s5 * 4,
+                                        G_TX_RENDERTILE,
+                                        phi_s6, phi_s5,
+                                        0x0400, (sin_deg(N(D_80244070_CBD270) + (i * 30)) * 500.0f) - 0x1F4);
                 }
             }
 
@@ -113,14 +115,19 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
                     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, phi_a2);
                     gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(subroutine_arg6));
-                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0,
+                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
                     gDPLoadSync(gMasterGfxPos++);
 
-                    gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, phi_s6 * 4, (temp_s2_2 - subroutine_arg5) * 4, (phi_s4 - 1) * 4, (temp_s2_2 - 1) * 4);
+                    gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, phi_s6 * 4, (temp_s2_2 - subroutine_arg5) * 4, (phi_s4 - 1) * 4,
+                                (temp_s2_2 - 1) * 4);
                     gDPPipeSync(gMasterGfxPos++);
-                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
-                    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (phi_s4 - 1) * 4, (temp_s2_2 - subroutine_arg5) * 4, phi_s6 * 4, (temp_s2_2 - subroutine_arg5) * 4);
-                    gSPTextureRectangle(gMasterGfxPos++, phi_s6 * 4, arg1 + (i * 6), phi_s4 * 4, ((arg1 + (i * 6)) + subroutine_arg5) * 4, G_TX_RENDERTILE, phi_s6, temp_s2_2, 0x0400, -0x0400);
+                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_RENDERTILE, 0,
+                               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
+                    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (phi_s4 - 1) * 4, (temp_s2_2 - subroutine_arg5) * 4, phi_s6 * 4,
+                                   (temp_s2_2 - subroutine_arg5) * 4);
+                    gSPTextureRectangle(gMasterGfxPos++, phi_s6 * 4, arg1 + (i * 6), phi_s4 * 4, ((arg1 + (i * 6)) + subroutine_arg5) * 4,
+                                        G_TX_RENDERTILE, phi_s6, temp_s2_2, 0x0400, -0x0400);
                 }
             }
         }
@@ -164,7 +171,7 @@ void N(func_80240A98_CB9C98)(void) {
     sp38 = unk1->unk_1C;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] - sp3C, model->center[1], model->center[2] - sp38, 1.0f,
+                    model->center.x - sp3C, model->center.y, model->center.z - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -180,7 +187,7 @@ void N(func_80240A98_CB9C98)(void) {
     temp_f22 = sp2C;
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] - sp3C, model->center[1], model->center[2] + sp38, 1.0f,
+                    model->center.x - sp3C, model->center.y, model->center.z + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -212,7 +219,7 @@ void N(func_80240A98_CB9C98)(void) {
     }
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] + sp3C, model->center[1], model->center[2] + sp38, 1.0f,
+                    model->center.x + sp3C, model->center.y, model->center.z + sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -242,7 +249,7 @@ void N(func_80240A98_CB9C98)(void) {
     }
 
     transform_point(camera->perspectiveMatrix,
-                    model->center[0] + sp3C, model->center[1], model->center[2] - sp38, 1.0f,
+                    model->center.x + sp3C, model->center.y, model->center.z - sp38, 1.0f,
                     &sp28, &sp2C, &sp30, &sp34);
 
     sp28 = sp28 * (1.0f / sp34);
@@ -283,13 +290,14 @@ void N(func_80240A98_CB9C98)(void) {
         temp_f22 += camera->viewportStartY;
 
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-        gDPSetRenderMode(gMasterGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
+        gDPSetRenderMode(gMasterGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS,
+                         Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxZBuffer));
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMasterGfxPos++);
 
-        gSPDisplayList(gMasterGfxPos++, model->modelNode[1]->type);
+        gSPDisplayList(gMasterGfxPos++, model->modelNode->displayData->displayList);
         gDPPipeSync(gMasterGfxPos++);
 
         gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));

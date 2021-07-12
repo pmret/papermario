@@ -63,7 +63,7 @@ glabel func_80218C40_5B20F0
 /* 5B21D8 80218D28 0040802D */  daddu     $s0, $v0, $zero
 /* 5B21DC 80218D2C E7BA0010 */  swc1      $f26, 0x10($sp)
 /* 5B21E0 80218D30 E7B80014 */  swc1      $f24, 0x14($sp)
-/* 5B21E4 80218D34 0C01BFD4 */  jal       func_8006FF50
+/* 5B21E4 80218D34 0C01BFD4 */  jal       playFX_12
 /* 5B21E8 80218D38 E7B60018 */   swc1     $f22, 0x18($sp)
 /* 5B21EC 80218D3C 0040202D */  daddu     $a0, $v0, $zero
 /* 5B21F0 80218D40 82030210 */  lb        $v1, 0x210($s0)

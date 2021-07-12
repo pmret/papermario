@@ -25,7 +25,7 @@ glabel func_80136A08
 /* CD154 80136A54 8C640014 */  lw        $a0, 0x14($v1)
 /* CD158 80136A58 240700FF */  addiu     $a3, $zero, 0xff
 /* CD15C 80136A5C AFA20010 */  sw        $v0, 0x10($sp)
-/* CD160 80136A60 0C04993B */  jal       draw_msg
+/* CD160 80136A60 0C04993B */  jal       draw_string
 /* CD164 80136A64 AFA00014 */   sw       $zero, 0x14($sp)
 .L80136A68:
 /* CD168 80136A68 8FBF0018 */  lw        $ra, 0x18($sp)

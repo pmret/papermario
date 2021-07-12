@@ -53,7 +53,7 @@ glabel func_802405EC_8D43AC
 /* 8D446C 802406AC E7A40018 */   swc1     $f4, 0x18($sp)
 /* 8D4470 802406B0 0200202D */  daddu     $a0, $s0, $zero
 /* 8D4474 802406B4 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* 8D4478 802406B8 0C012530 */  jal       func_800494C0
+/* 8D4478 802406B8 0C012530 */  jal       ai_enemy_play_sound
 /* 8D447C 802406BC 3C060020 */   lui      $a2, 0x20
 /* 8D4480 802406C0 C60C0038 */  lwc1      $f12, 0x38($s0)
 /* 8D4484 802406C4 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)

@@ -43,7 +43,7 @@ glabel func_80219010_5CF6A0
 /* 5CF72C 8021909C AFA00014 */  sw        $zero, 0x14($sp)
 /* 5CF730 802190A0 00A0302D */  daddu     $a2, $a1, $zero
 /* 5CF734 802190A4 00A0382D */  daddu     $a3, $a1, $zero
-/* 5CF738 802190A8 0C01CA54 */  jal       func_80072950
+/* 5CF738 802190A8 0C01CA54 */  jal       playFX_82
 /* 5CF73C 802190AC AFA50010 */   sw       $a1, 0x10($sp)
 /* 5CF740 802190B0 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 5CF744 802190B4 8FB30024 */  lw        $s3, 0x24($sp)

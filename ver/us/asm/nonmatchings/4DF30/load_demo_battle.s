@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8009A578
+.word L80072F38_4E338, L80072F4C_4E34C, L80072F64_4E364, L80072F90_4E390, L80072FA8_4E3A8, 0
+
+glabel jtbl_8009A590
+.word L8007301C_4E41C, L80073070_4E470, L80073094_4E494, L800730CC_4E4CC, L800730F8_4E4F8, 0, 0, 0
+
+.section .text
+
 glabel load_demo_battle
 /* 4E214 80072E14 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4E218 80072E18 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -16,7 +26,7 @@ glabel load_demo_battle
 /* 4E240 80072E40 A440008C */  sh        $zero, 0x8c($v0)
 /* 4E244 80072E44 0C00AB00 */  jal       general_heap_create
 /* 4E248 80072E48 A0400070 */   sb       $zero, 0x70($v0)
-/* 4E24C 80072E4C 0C048C2E */  jal       clear_dynamic_entity_list
+/* 4E24C 80072E4C 0C048C2E */  jal       clear_generic_entity_list
 /* 4E250 80072E50 00000000 */   nop
 /* 4E254 80072E54 0C0B0C77 */  jal       clear_script_list
 /* 4E258 80072E58 00000000 */   nop
@@ -24,25 +34,25 @@ glabel load_demo_battle
 /* 4E260 80072E60 00000000 */   nop
 /* 4E264 80072E64 0C0B763E */  jal       spr_init_sprites
 /* 4E268 80072E68 0000202D */   daddu    $a0, $zero, $zero
-/* 4E26C 80072E6C 0C047889 */  jal       func_8011E224
+/* 4E26C 80072E6C 0C047889 */  jal       clear_animator_list
 /* 4E270 80072E70 00000000 */   nop
 /* 4E274 80072E74 0C0482EC */  jal       clear_entity_models
 /* 4E278 80072E78 00000000 */   nop
-/* 4E27C 80072E7C 0C00E12F */  jal       npc_list_clear
+/* 4E27C 80072E7C 0C00E12F */  jal       clear_npcs
 /* 4E280 80072E80 00000000 */   nop
-/* 4E284 80072E84 0C050440 */  jal       func_80141100
+/* 4E284 80072E84 0C050440 */  jal       clear_hud_element_cache
 /* 4E288 80072E88 00000000 */   nop
 /* 4E28C 80072E8C 0C0515A0 */  jal       clear_trigger_data
 /* 4E290 80072E90 00000000 */   nop
 /* 4E294 80072E94 0C045751 */  jal       clear_model_data
 /* 4E298 80072E98 00000000 */   nop
-/* 4E29C 80072E9C 0C052010 */  jal       func_80148040
+/* 4E29C 80072E9C 0C052010 */  jal       clear_sprite_shading_data
 /* 4E2A0 80072EA0 00000000 */   nop
-/* 4E2A4 80072EA4 0C05177E */  jal       use_default_background_settings
+/* 4E2A4 80072EA4 0C05177E */  jal       reset_background_settings
 /* 4E2A8 80072EA8 00000000 */   nop
 /* 4E2AC 80072EAC 0C04E062 */  jal       func_80138188
 /* 4E2B0 80072EB0 00000000 */   nop
-/* 4E2B4 80072EB4 0C01CACC */  jal       func_80072B30
+/* 4E2B4 80072EB4 0C01CACC */  jal       reset_battle_status
 /* 4E2B8 80072EB8 00000000 */   nop
 /* 4E2BC 80072EBC 0C00F900 */  jal       clear_encounter_status
 /* 4E2C0 80072EC0 00000000 */   nop
@@ -63,7 +73,7 @@ glabel load_demo_battle
 /* 4E2FC 80072EFC 0C04C3FC */  jal       clear_item_entity_data
 /* 4E300 80072F00 00000000 */   nop
 /* 4E304 80072F04 3C05437F */  lui       $a1, 0x437f
-/* 4E308 80072F08 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 4E308 80072F08 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 4E30C 80072F0C 24040009 */   addiu    $a0, $zero, 9
 /* 4E310 80072F10 3C108011 */  lui       $s0, %hi(gPlayerData)
 /* 4E314 80072F14 2610F290 */  addiu     $s0, $s0, %lo(gPlayerData)

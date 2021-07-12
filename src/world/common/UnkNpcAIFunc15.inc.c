@@ -11,5 +11,5 @@ void N(UnkNpcAIFunc15)(ScriptInstance* script, NpcAISettings* aiSettings, s32 ar
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
     script->functionTemp[0].s = 13;
-    func_800494C0(enemy, 0xB0000017, 0);
+    ai_enemy_play_sound(enemy, 0xB0000017, 0);
 }

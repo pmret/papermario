@@ -17,7 +17,7 @@ glabel pause_tabs_draw_map
 /* 1384D0 80245190 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
 /* 1384D4 80245194 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 1384D8 80245198 8E040014 */  lw        $a0, 0x14($s0)
-/* 1384DC 8024519C 0C051280 */  jal       set_icon_flags
+/* 1384DC 8024519C 0C051280 */  jal       set_hud_element_flags
 /* 1384E0 802451A0 24050020 */   addiu    $a1, $zero, 0x20
 /* 1384E4 802451A4 3C013FE0 */  lui       $at, 0x3fe0
 /* 1384E8 802451A8 44811800 */  mtc1      $at, $f3
@@ -39,18 +39,18 @@ glabel pause_tabs_draw_map
 /* 138524 802451E4 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
 /* 138528 802451E8 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 13852C 802451EC 8E040014 */  lw        $a0, 0x14($s0)
-/* 138530 802451F0 0C05128B */  jal       clear_icon_flags
+/* 138530 802451F0 0C05128B */  jal       clear_hud_element_flags
 /* 138534 802451F4 24050020 */   addiu    $a1, $zero, 0x20
 /* 138538 802451F8 8E040014 */  lw        $a0, 0x14($s0)
 /* 13853C 802451FC 240500FF */  addiu     $a1, $zero, 0xff
 .L80245200:
-/* 138540 80245200 0C0513AC */  jal       icon_set_opacity
+/* 138540 80245200 0C0513AC */  jal       set_hud_element_alpha
 /* 138544 80245204 00000000 */   nop
 /* 138548 80245208 26450017 */  addiu     $a1, $s2, 0x17
 /* 13854C 8024520C 3C108027 */  lui       $s0, %hi(gPauseMenuTabIconIDs)
 /* 138550 80245210 26100130 */  addiu     $s0, $s0, %lo(gPauseMenuTabIconIDs)
 /* 138554 80245214 8E040014 */  lw        $a0, 0x14($s0)
-/* 138558 80245218 0C051261 */  jal       set_icon_render_pos
+/* 138558 80245218 0C051261 */  jal       set_hud_element_render_pos
 /* 13855C 8024521C 26660007 */   addiu    $a2, $s3, 7
 /* 138560 80245220 8E040014 */  lw        $a0, 0x14($s0)
 /* 138564 80245224 0C0511F8 */  jal       draw_icon_2

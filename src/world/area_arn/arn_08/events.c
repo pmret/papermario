@@ -3,7 +3,7 @@
 #include "sprite/npc/yakkey.h"
 
 extern Npc* wPartnerNpc;
-void func_800EF3C0(s32, s32);
+void partner_set_goal_pos(s32, s32);
 void func_800EF3D4(s16);
 
 enum {
@@ -158,7 +158,7 @@ Script N(80240BA0) = SCRIPT({
     PlaySound(0x8000004B);
     spawn {
         SI_VAR(0) = 0;
-    10:
+10:
         RotateModel(9, SI_VAR(0), 0, 0, 1);
         RotateModel(15, SI_VAR(0), 0, 0, 1);
         RotateModel(11, SI_VAR(0), 0, 0, 1);
@@ -417,17 +417,17 @@ Script N(makeEntities) = SCRIPT({
     }
 });
 
-ApiStatus N(func_802400C0_BF4860)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400C0_BF4860)(ScriptInstance* script, s32 isInitialCall) {
     gPlayerData.bootsLevel = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400D4_BF4874)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400D4_BF4874)(ScriptInstance* script, s32 isInitialCall) {
     func_800EF300();
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400F4_BF4894)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
@@ -438,7 +438,7 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
         f32 temp_f20 = func_800E34D8();
         s32 colliderID;
 
-        playerStatus->position.y = func_800E3514(temp_f20, &colliderID);
+        playerStatus->position.y = player_check_collision_below(temp_f20, &colliderID);
         script->functionTemp[0].s += fabsf(temp_f20);
 
         return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;
@@ -447,7 +447,7 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_8024019C_BF493C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024019C_BF493C)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* dataPtr = &N(D_80241188_BF5928);
 
@@ -460,8 +460,8 @@ ApiStatus N(func_8024019C_BF493C)(ScriptInstance *script, s32 isInitialCall) {
             (*dataPtr)++;
             break;
         case 3: {
-            clear_partner_move_history(wPartnerNpc);
-            func_800EF3C0(playerStatus->position.x, playerStatus->position.z);
+            partner_clear_player_tracking(wPartnerNpc);
+            partner_set_goal_pos(playerStatus->position.x, playerStatus->position.z);
             func_800EF3D4(0);
             set_npc_yaw(wPartnerNpc, 90.0f);
             playerStatus->targetYaw = 90.0f;

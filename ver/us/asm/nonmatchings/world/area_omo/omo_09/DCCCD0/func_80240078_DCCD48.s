@@ -56,7 +56,7 @@ glabel func_80240078_DCCD48
 /* DCCE14 80240144 27A20040 */  addiu     $v0, $sp, 0x40
 /* DCCE18 80240148 AFA2001C */  sw        $v0, 0x1c($sp)
 /* DCCE1C 8024014C 27A20044 */  addiu     $v0, $sp, 0x44
-/* DCCE20 80240150 0C03791B */  jal       func_800DE46C
+/* DCCE20 80240150 0C03791B */  jal       player_raycast_below_cam_relative
 /* DCCE24 80240154 AFA20020 */   sw       $v0, 0x20($sp)
 /* DCCE28 80240158 0040402D */  daddu     $t0, $v0, $zero
 /* DCCE2C 8024015C 0000302D */  daddu     $a2, $zero, $zero
@@ -141,7 +141,7 @@ glabel func_80240078_DCCD48
 /* DCCF40 80240270 C4400000 */  lwc1      $f0, ($v0)
 /* DCCF44 80240274 46001080 */  add.s     $f2, $f2, $f0
 /* DCCF48 80240278 0260202D */  daddu     $a0, $s3, $zero
-/* DCCF4C 8024027C 0C03BD17 */  jal       clear_partner_move_history
+/* DCCF4C 8024027C 0C03BD17 */  jal       partner_clear_player_tracking
 /* DCCF50 80240280 E6620040 */   swc1     $f2, 0x40($s3)
 /* DCCF54 80240284 26520008 */  addiu     $s2, $s2, 8
 .L80240288:

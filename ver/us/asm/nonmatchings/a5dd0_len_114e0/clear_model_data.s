@@ -13,16 +13,16 @@ glabel clear_model_data
 /* AC464 80115D64 AC2212CC */  sw        $v0, %lo(gCurrentModelListPtr)($at)
 /* AC468 80115D68 3C028015 */  lui       $v0, %hi(D_80151F70)
 /* AC46C 80115D6C 24421F70 */  addiu     $v0, $v0, %lo(D_80151F70)
-/* AC470 80115D70 3C018015 */  lui       $at, %hi(D_801512E0)
-/* AC474 80115D74 AC2212E0 */  sw        $v0, %lo(D_801512E0)($at)
+/* AC470 80115D70 3C018015 */  lui       $at, %hi(gCurrentTransformGroups)
+/* AC474 80115D74 AC2212E0 */  sw        $v0, %lo(gCurrentTransformGroups)($at)
 /* AC478 80115D78 3C028015 */  lui       $v0, %hi(gWorldModelSpecialDls)
 /* AC47C 80115D7C 24421F90 */  addiu     $v0, $v0, %lo(gWorldModelSpecialDls)
 /* AC480 80115D80 3C018015 */  lui       $at, %hi(gCurrentModelSpecialDlsPtr)
 /* AC484 80115D84 AC2212E8 */  sw        $v0, %lo(gCurrentModelSpecialDlsPtr)($at)
 /* AC488 80115D88 3C028015 */  lui       $v0, %hi(D_80152090)
 /* AC48C 80115D8C 24422090 */  addiu     $v0, $v0, %lo(D_80152090)
-/* AC490 80115D90 3C018015 */  lui       $at, %hi(D_801512B8)
-/* AC494 80115D94 AC2212B8 */  sw        $v0, %lo(D_801512B8)($at)
+/* AC490 80115D90 3C018015 */  lui       $at, %hi(gCurrentCustomModelGfxBuilders)
+/* AC494 80115D94 AC2212B8 */  sw        $v0, %lo(gCurrentCustomModelGfxBuilders)($at)
 /* AC498 80115D98 3C028015 */  lui       $v0, %hi(D_80152214)
 /* AC49C 80115D9C 24422214 */  addiu     $v0, $v0, %lo(D_80152214)
 /* AC4A0 80115DA0 3C018015 */  lui       $at, %hi(D_801512FC)
@@ -57,16 +57,16 @@ glabel clear_model_data
 /* AC510 80115E10 AC2212CC */  sw        $v0, %lo(gCurrentModelListPtr)($at)
 /* AC514 80115E14 3C028015 */  lui       $v0, %hi(D_80151F80)
 /* AC518 80115E18 24421F80 */  addiu     $v0, $v0, %lo(D_80151F80)
-/* AC51C 80115E1C 3C018015 */  lui       $at, %hi(D_801512E0)
-/* AC520 80115E20 AC2212E0 */  sw        $v0, %lo(D_801512E0)($at)
+/* AC51C 80115E1C 3C018015 */  lui       $at, %hi(gCurrentTransformGroups)
+/* AC520 80115E20 AC2212E0 */  sw        $v0, %lo(gCurrentTransformGroups)($at)
 /* AC524 80115E24 3C028015 */  lui       $v0, %hi(gBattleModelSpecialDls)
 /* AC528 80115E28 24422010 */  addiu     $v0, $v0, %lo(gBattleModelSpecialDls)
 /* AC52C 80115E2C 3C018015 */  lui       $at, %hi(gCurrentModelSpecialDlsPtr)
 /* AC530 80115E30 AC2212E8 */  sw        $v0, %lo(gCurrentModelSpecialDlsPtr)($at)
 /* AC534 80115E34 3C028015 */  lui       $v0, %hi(D_80152110)
 /* AC538 80115E38 24422110 */  addiu     $v0, $v0, %lo(D_80152110)
-/* AC53C 80115E3C 3C018015 */  lui       $at, %hi(D_801512B8)
-/* AC540 80115E40 AC2212B8 */  sw        $v0, %lo(D_801512B8)($at)
+/* AC53C 80115E3C 3C018015 */  lui       $at, %hi(gCurrentCustomModelGfxBuilders)
+/* AC540 80115E40 AC2212B8 */  sw        $v0, %lo(gCurrentCustomModelGfxBuilders)($at)
 /* AC544 80115E44 3C028015 */  lui       $v0, %hi(D_80152218)
 /* AC548 80115E48 24422218 */  addiu     $v0, $v0, %lo(D_80152218)
 /* AC54C 80115E4C 3C018015 */  lui       $at, %hi(D_801512FC)
@@ -97,8 +97,8 @@ glabel clear_model_data
 /* AC5A8 80115EA8 2484FFFF */  addiu     $a0, $a0, -1
 /* AC5AC 80115EAC 0481FFFD */  bgez      $a0, .L80115EA4
 /* AC5B0 80115EB0 2442FFFC */   addiu    $v0, $v0, -4
-/* AC5B4 80115EB4 3C028015 */  lui       $v0, %hi(D_801512E0)
-/* AC5B8 80115EB8 8C4212E0 */  lw        $v0, %lo(D_801512E0)($v0)
+/* AC5B4 80115EB4 3C028015 */  lui       $v0, %hi(gCurrentTransformGroups)
+/* AC5B8 80115EB8 8C4212E0 */  lw        $v0, %lo(gCurrentTransformGroups)($v0)
 /* AC5BC 80115EBC 24040003 */  addiu     $a0, $zero, 3
 /* AC5C0 80115EC0 2442000C */  addiu     $v0, $v0, 0xc
 .L80115EC4:
@@ -107,8 +107,8 @@ glabel clear_model_data
 /* AC5CC 80115ECC 0481FFFD */  bgez      $a0, .L80115EC4
 /* AC5D0 80115ED0 2442FFFC */   addiu    $v0, $v0, -4
 /* AC5D4 80115ED4 0000202D */  daddu     $a0, $zero, $zero
-/* AC5D8 80115ED8 3C058015 */  lui       $a1, %hi(D_801512B8)
-/* AC5DC 80115EDC 8CA512B8 */  lw        $a1, %lo(D_801512B8)($a1)
+/* AC5D8 80115ED8 3C058015 */  lui       $a1, %hi(gCurrentCustomModelGfxBuilders)
+/* AC5DC 80115EDC 8CA512B8 */  lw        $a1, %lo(gCurrentCustomModelGfxBuilders)($a1)
 /* AC5E0 80115EE0 3C038015 */  lui       $v1, %hi(gCurrentModelSpecialDlsPtr)
 /* AC5E4 80115EE4 8C6312E8 */  lw        $v1, %lo(gCurrentModelSpecialDlsPtr)($v1)
 .L80115EE8:

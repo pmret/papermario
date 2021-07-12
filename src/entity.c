@@ -147,7 +147,7 @@ void exec_entity_model_commandlist(s32 idx) {
         entityModel = (*gCurrentEntityModelList)[idx];
         if (entityModel != NULL && (entityModel->flags)) {
             if (!(entityModel->flags & 0x20)) {
-                if(!(entityModel->flags & 0x20000)) {
+                if (!(entityModel->flags & 0x20000)) {
                     entityModel->flags &= ~0x100;
                     entityModel->nextFrameTime -= entityModel->timeScale;
                     if (entityModel->nextFrameTime <= 0.0f) {
@@ -213,15 +213,15 @@ void make_entity_model_mtx_flipZ(Matrix4f mtx) {
 
 INCLUDE_ASM(s32, "entity", appendGfx_entity_model);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_shadow);
+INCLUDE_ASM(s32, "entity", draw_entity_model_A);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_main);
+INCLUDE_ASM(s32, "entity", draw_entity_model_B);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_extra1);
+INCLUDE_ASM(s32, "entity", draw_entity_model_C);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_extra2);
+INCLUDE_ASM(s32, "entity", draw_entity_model_D);
 
-INCLUDE_ASM(s32, "entity", draw_entity_model_extra3);
+INCLUDE_ASM(s32, "entity", draw_entity_model_E);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList) {
     u32* phi_a1;
@@ -345,10 +345,10 @@ void get_entity_fog_color(s32* r, s32* g, s32* b, s32* a) {
     *a = entity_fog_alpha;
 }
 
-void stub_dynamic_entity_delegate(void) {
+void stub_generic_entity_delegate(void) {
 }
 
-void clear_dynamic_entity_list(void) {
+void clear_generic_entity_list(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
@@ -362,7 +362,7 @@ void clear_dynamic_entity_list(void) {
     }
 }
 
-void init_dynamic_entity_list(void) {
+void init_generic_entity_list(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentDynamicEntityListPtr = &gWorldDynamicEntityList;
     } else {
@@ -370,7 +370,7 @@ void init_dynamic_entity_list(void) {
     }
 }
 
-s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -388,11 +388,11 @@ s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     newDynEntity->flags = 3;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
-        newDynEntity->update = &stub_dynamic_entity_delegate;
+        newDynEntity->update = &stub_generic_entity_delegate;
     }
     newDynEntity->draw = drawFunc;
     if (drawFunc == NULL) {
-        newDynEntity->draw = &stub_dynamic_entity_delegate;
+        newDynEntity->draw = &stub_generic_entity_delegate;
     }
 
     if (gGameStatusPtr->isBattle) {
@@ -401,7 +401,7 @@ s32 create_dynamic_entity_world(void (*updateFunc)(void), void (*drawFunc)(void)
     return i;
 }
 
-s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -419,11 +419,11 @@ s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     newDynEntity->flags = 7;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
-        newDynEntity->update = &stub_dynamic_entity_delegate;
+        newDynEntity->update = &stub_generic_entity_delegate;
     }
     newDynEntity->draw = drawFunc;
     if (drawFunc == NULL) {
-        newDynEntity->draw = &stub_dynamic_entity_delegate;
+        newDynEntity->draw = &stub_generic_entity_delegate;
     }
 
     if (gGameStatusPtr->isBattle) {
@@ -432,7 +432,7 @@ s32 create_dynamic_entity_frontUI(void (*updateFunc)(void), void (*drawFunc)(voi
     return i;
 }
 
-s32 create_dynamic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
+s32 create_generic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void)) {
     s32 i;
     DynamicEntity* newDynEntity;
 
@@ -450,11 +450,11 @@ s32 create_dynamic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     newDynEntity->flags = 0xB;
     newDynEntity->update = updateFunc;
     if (updateFunc == NULL) {
-        newDynEntity->update = &stub_dynamic_entity_delegate;
+        newDynEntity->update = &stub_generic_entity_delegate;
     }
     newDynEntity->draw = drawFunc;
     if (drawFunc == NULL) {
-        newDynEntity->draw = &stub_dynamic_entity_delegate;
+        newDynEntity->draw = &stub_generic_entity_delegate;
     }
 
     if (gGameStatusPtr->isBattle) {
@@ -463,7 +463,7 @@ s32 create_dynamic_entity_backUI(void (*updateFunc)(void), void (*drawFunc)(void
     return i;
 }
 
-void update_dynamic_entities(void) {
+void update_generic_entities(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -475,7 +475,7 @@ void update_dynamic_entities(void) {
     }
 }
 
-void render_dynamic_entities_world(void) {
+void render_generic_entities_world(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -488,7 +488,7 @@ void render_dynamic_entities_world(void) {
     }
 }
 
-void render_dynamic_entities_frontUI(void) {
+void render_generic_entities_frontUI(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -501,7 +501,7 @@ void render_dynamic_entities_frontUI(void) {
     }
 }
 
-void render_dynamic_entities_backUI(void) {
+void render_generic_entities_backUI(void) {
     s32 i;
 
     for (i = 0; i < MAX_DYNAMIC_ENTITIES; i++) {
@@ -514,7 +514,7 @@ void render_dynamic_entities_backUI(void) {
     }
 }
 
-void free_dynamic_entity(s32 idx) {
+void free_generic_entity(s32 idx) {
     if (!gGameStatusPtr->isBattle || (idx & 0x800)) {
         DynamicEntityList** curDynEntityList = &gCurrentDynamicEntityListPtr;
 
@@ -526,6 +526,6 @@ void free_dynamic_entity(s32 idx) {
     }
 }
 
-DynamicEntity* get_dynamic_entity(s32 idx) {
+DynamicEntity* get_generic_entity(s32 idx) {
     return (*gCurrentDynamicEntityListPtr)[idx & ~0x800];
 }

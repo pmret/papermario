@@ -11,17 +11,17 @@ typedef struct struct802E89B0 {
     /* 0x18 */ f32 unk_18;
 } struct802E89B0;
 
-void func_802E89B0(Entity* entity) {
+void entity_BlueWarpPipe_check_if_active(Entity* entity) {
     struct802E89B0* temp_s0;
 
     temp_s0 = entity->dataBuf;
     if (get_global_flag(temp_s0->unk_14)) {
         temp_s0->unk_04 = 0x10;
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E89F8(Entity* entity) {
+void entity_BlueWarpPipe_rise_up(Entity* entity) {
     struct802E89B0* temp = entity->dataBuf;
 
     temp->unk_04--;
@@ -29,11 +29,11 @@ void func_802E89F8(Entity* entity) {
         entity->position.y += 2.3125;
     } else {
         temp->unk_04 = 0;
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E8A58(Entity* entity) {
+void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
     struct802E89B0* temp = entity->dataBuf;
 
     if (temp->unk_0C == gGameStatusPtr->entryID) {
@@ -49,15 +49,15 @@ void func_802E8A58(Entity* entity) {
                 }
                 break;
             default:
-                exec_entity_updatecmd(entity);
+                exec_entity_commandlist(entity);
                 break;
         }
     } else {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E8ADC(Entity* entity) {
+void entity_BlueWarpPipe_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if ((entity->collisionFlags & 1) != 0) {
@@ -69,7 +69,7 @@ void func_802E8ADC(Entity* entity) {
 
             if ((stickAxis0 != 0) || (stickAxis1 != 0)) {
                 if (atan2(0.0f, 0.0f, stickAxis0, stickAxis1) < 60.0f) {
-                    exec_entity_updatecmd(entity);
+                    exec_entity_commandlist(entity);
                 }
             }
         }
@@ -78,7 +78,7 @@ void func_802E8ADC(Entity* entity) {
     }
 }
 
-void func_802E8BC0(Entity* entity) {
+void entity_BlueWarpPipe_set_player_move_to_center(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     struct802E89B0* temp = entity->dataBuf;
     MapConfig* mapConfig = get_current_map_header();
@@ -88,7 +88,7 @@ void func_802E8BC0(Entity* entity) {
 
     entryX = (*mapConfig->entryList)[temp->unk_0C].x;
     entryZ = (*mapConfig->entryList)[temp->unk_0C].z;
-    temp->unk_04 = func_800E0088(entryX, entryZ) / playerStatus->runSpeed;
+    temp->unk_04 = get_xz_dist_to_player(entryX, entryZ) / playerStatus->runSpeed;
     if (temp->unk_04 == 0) {
         temp->unk_04 = 1;
     }
@@ -101,15 +101,15 @@ void func_802E8BC0(Entity* entity) {
     move_player(temp->unk_04, temp_f20, playerStatus->runSpeed);
 }
 
-void func_802E8C94(Entity* entity) {
+void entity_BlueWarpPipe_wait_player_move_to_center(Entity* entity) {
     Trigger* trigger = (Trigger*)entity->dataBuf; // TODO: is Trigger correct?
 
     if (--trigger->params1 == -1) {
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void player_enter_blue_pipe(Entity* bluePipe) {
+void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Trigger* pipeTrigger = (Trigger*)bluePipe->dataBuf; // TODO: is Trigger correct?
 
@@ -122,7 +122,7 @@ void player_enter_blue_pipe(Entity* bluePipe) {
     disable_player_shadow();
 }
 
-void func_802E8D74(Entity* entity) {
+void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Trigger* entityTrigger = (Trigger*)entity->dataBuf; // TODO: is Trigger correct?
 
@@ -133,21 +133,21 @@ void func_802E8D74(Entity* entity) {
         playerStatus->renderMode = 0xD;
         playerStatus->position.y -= 50.0f;
         func_802DDFF8(0x10002, 0, 0, 0, 0, 0, 0);
-        exec_entity_updatecmd(entity);
+        exec_entity_commandlist(entity);
     }
 }
 
-void func_802E8E10(Entity* entity) {
+void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
     Bytecode* triggerScriptStart = ((Trigger*)entity->dataBuf)->scriptSource;
 
     gOverrideFlags &= ~0x40;
     entity->boundScriptBytecode = triggerScriptStart;
-    func_80110678(entity);
+    entity_start_script(entity);
 }
 
-INCLUDE_ASM(s32, "10A230", push_entity_matrix);
+INCLUDE_ASM(s32, "10A230", entity_BlueWarpPipe_setupGfx);
 
-f32 func_802E8F94(Entity* entity) {
+f32 entity_init_BlueWarpPipe(Entity* entity) {
     struct802E89B0* temp_s0;
     s32* temp = &D_8015C7D0;
     s32 temp2;
@@ -158,7 +158,7 @@ f32 func_802E8F94(Entity* entity) {
     temp2 = temp[0];
     temp3 = temp[1];
     temp4 = temp[2];
-    entity->renderSetupFunc = &push_entity_matrix;
+    entity->renderSetupFunc = &entity_BlueWarpPipe_setupGfx;
     temp_s0 = entity->dataBuf;
     temp5 = &entity->position.y; // required... wtf
     temp_s0->unk_0C = temp2;

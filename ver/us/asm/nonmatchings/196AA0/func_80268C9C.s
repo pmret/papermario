@@ -151,7 +151,7 @@ glabel L80268E3C_19771C
 /* 197744 80268E64 00431024 */  and       $v0, $v0, $v1
 /* 197748 80268E68 0C093EC3 */  jal       close_action_command_instruction_popup
 /* 19774C 80268E6C AC820000 */   sw       $v0, ($a0)
-/* 197750 80268E70 0C093EB1 */  jal       set_popup_duration
+/* 197750 80268E70 0C093EB1 */  jal       btl_set_popup_duration
 /* 197754 80268E74 0000202D */   daddu    $a0, $zero, $zero
 /* 197758 80268E78 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 19775C 80268E7C 8FB00010 */  lw        $s0, 0x10($sp)

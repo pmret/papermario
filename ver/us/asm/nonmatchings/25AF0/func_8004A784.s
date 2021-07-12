@@ -51,7 +51,7 @@ glabel func_8004A784
 /* 25C3C 8004A83C 46800020 */  cvt.s.w   $f0, $f0
 /* 25C40 8004A840 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 25C44 8004A844 8E040080 */  lw        $a0, 0x80($s0)
-/* 25C48 8004A848 0C037711 */  jal       func_800DDC44
+/* 25C48 8004A848 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 25C4C 8004A84C 4600A606 */   mov.s    $f24, $f20
 /* 25C50 8004A850 0040902D */  daddu     $s2, $v0, $zero
 /* 25C54 8004A854 1240008D */  beqz      $s2, .L8004AA8C
@@ -90,7 +90,7 @@ glabel func_8004A784
 /* 25CD8 8004A8D8 46800020 */  cvt.s.w   $f0, $f0
 /* 25CDC 8004A8DC E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 25CE0 8004A8E0 8E040080 */  lw        $a0, 0x80($s0)
-/* 25CE4 8004A8E4 0C037711 */  jal       func_800DDC44
+/* 25CE4 8004A8E4 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 25CE8 8004A8E8 27A70034 */   addiu    $a3, $sp, 0x34
 /* 25CEC 8004A8EC 10400007 */  beqz      $v0, .L8004A90C
 /* 25CF0 8004A8F0 00000000 */   nop
@@ -127,7 +127,7 @@ glabel func_8004A784
 /* 25D68 8004A968 46800020 */  cvt.s.w   $f0, $f0
 /* 25D6C 8004A96C E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 25D70 8004A970 8E040080 */  lw        $a0, 0x80($s0)
-/* 25D74 8004A974 0C037711 */  jal       func_800DDC44
+/* 25D74 8004A974 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* 25D78 8004A978 27A70040 */   addiu    $a3, $sp, 0x40
 /* 25D7C 8004A97C 10400007 */  beqz      $v0, .L8004A99C
 /* 25D80 8004A980 00000000 */   nop

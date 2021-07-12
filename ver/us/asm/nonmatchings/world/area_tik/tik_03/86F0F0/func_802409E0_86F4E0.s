@@ -35,7 +35,7 @@ glabel func_802409E0_86F4E0
 .L80240A4C:
 /* 86F54C 80240A4C 3C108011 */  lui       $s0, %hi(wPartnerNpc)
 /* 86F550 80240A50 2610C930 */  addiu     $s0, $s0, %lo(wPartnerNpc)
-/* 86F554 80240A54 0C03BD17 */  jal       clear_partner_move_history
+/* 86F554 80240A54 0C03BD17 */  jal       partner_clear_player_tracking
 /* 86F558 80240A58 8E040000 */   lw       $a0, ($s0)
 /* 86F55C 80240A5C C6200028 */  lwc1      $f0, 0x28($s1)
 /* 86F560 80240A60 C6220030 */  lwc1      $f2, 0x30($s1)
@@ -43,7 +43,7 @@ glabel func_802409E0_86F4E0
 /* 86F568 80240A68 44042000 */  mfc1      $a0, $f4
 /* 86F56C 80240A6C 4600110D */  trunc.w.s $f4, $f2
 /* 86F570 80240A70 44052000 */  mfc1      $a1, $f4
-/* 86F574 80240A74 0C03BCF0 */  jal       func_800EF3C0
+/* 86F574 80240A74 0C03BCF0 */  jal       partner_set_goal_pos
 /* 86F578 80240A78 00000000 */   nop
 /* 86F57C 80240A7C 0C03BCF5 */  jal       func_800EF3D4
 /* 86F580 80240A80 0000202D */   daddu    $a0, $zero, $zero

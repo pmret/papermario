@@ -182,8 +182,8 @@ glabel func_80116698
 /* AD030 80116930 3C013F00 */  lui       $at, 0x3f00
 /* AD034 80116934 4481A000 */  mtc1      $at, $f20
 .L80116938:
-/* AD038 80116938 3C038015 */  lui       $v1, %hi(D_801512E0)
-/* AD03C 8011693C 8C6312E0 */  lw        $v1, %lo(D_801512E0)($v1)
+/* AD038 80116938 3C038015 */  lui       $v1, %hi(gCurrentTransformGroups)
+/* AD03C 8011693C 8C6312E0 */  lw        $v1, %lo(gCurrentTransformGroups)($v1)
 /* AD040 80116940 00121080 */  sll       $v0, $s2, 2
 /* AD044 80116944 00431021 */  addu      $v0, $v0, $v1
 /* AD048 80116948 8C500000 */  lw        $s0, ($v0)
@@ -329,7 +329,7 @@ glabel func_80116698
 /* AD254 80116B54 2A420004 */  slti      $v0, $s2, 4
 /* AD258 80116B58 1440FF77 */  bnez      $v0, .L80116938
 /* AD25C 80116B5C 00000000 */   nop
-/* AD260 80116B60 0C046F3B */  jal       func_8011BCEC
+/* AD260 80116B60 0C046F3B */  jal       build_custom_gfx
 /* AD264 80116B64 00000000 */   nop
 /* AD268 80116B68 8FBF00D0 */  lw        $ra, 0xd0($sp)
 /* AD26C 80116B6C 8FB500CC */  lw        $s5, 0xcc($sp)

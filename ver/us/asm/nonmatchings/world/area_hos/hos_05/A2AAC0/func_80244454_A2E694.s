@@ -14,7 +14,7 @@ glabel func_80244454_A2E694
 /* A2E6B8 80244478 2610AA20 */  addiu     $s0, $s0, %lo(D_8024AA20_A34C60)
 /* A2E6BC 8024447C 8E020000 */  lw        $v0, ($s0)
 /* A2E6C0 80244480 8C440000 */  lw        $a0, ($v0)
-/* A2E6C4 80244484 0C048D70 */  jal       free_dynamic_entity
+/* A2E6C4 80244484 0C048D70 */  jal       free_generic_entity
 /* A2E6C8 80244488 A440005C */   sh       $zero, 0x5c($v0)
 /* A2E6CC 8024448C 8E030000 */  lw        $v1, ($s0)
 /* A2E6D0 80244490 24020001 */  addiu     $v0, $zero, 1

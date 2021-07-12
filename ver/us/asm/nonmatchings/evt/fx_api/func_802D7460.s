@@ -21,7 +21,7 @@ glabel func_802D7460
 /* FBE50 802D74A0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* FBE54 802D74A4 E7A00010 */  swc1      $f0, 0x10($sp)
 /* FBE58 802D74A8 E7A00014 */  swc1      $f0, 0x14($sp)
-/* FBE5C 802D74AC 0C01C154 */  jal       func_80070550
+/* FBE5C 802D74AC 0C01C154 */  jal       playFX_22
 /* FBE60 802D74B0 AFA2001C */   sw       $v0, 0x1c($sp)
 /* FBE64 802D74B4 8FBF0020 */  lw        $ra, 0x20($sp)
 /* FBE68 802D74B8 03E00008 */  jr        $ra

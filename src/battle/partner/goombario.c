@@ -75,11 +75,11 @@ ApiStatus N(func_80238A20_6F1B00)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (partnerActor->walk.velocity > 0.0f) {
-        set_animation(0x100, 0, partnerActor->animJumpRise);
+        set_animation(0x100, 0, partnerActor->walk.animJumpRise);
     }
 
     if (partnerActor->walk.velocity < 0.0f) {
-        set_animation(0x100, 0, partnerActor->animJumpFall);
+        set_animation(0x100, 0, partnerActor->walk.animJumpFall);
     }
 
     partnerActor->walk.currentPos.y = (partnerActor->walk.currentPos.y + partnerActor->walk.velocity);
@@ -94,7 +94,7 @@ ApiStatus N(func_80238A20_6F1B00)(ScriptInstance* script, s32 isInitialCall) {
 
         play_movement_dust_effects(2, partnerActor->currentPos.x, partnerActor->currentPos.y, partnerActor->currentPos.z,
                                    partnerActor->yaw);
-        sfx_play_sound(0x148);
+        sfx_play_sound(SOUND_SOFT_LAND);
 
         return ApiStatus_DONE1;
     }

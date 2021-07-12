@@ -64,7 +64,7 @@ glabel func_802416EC_A49CAC
 /* A49D94 802417D4 1443002C */  bne       $v0, $v1, .L80241888
 /* A49D98 802417D8 0200202D */   daddu    $a0, $s0, $zero
 /* A49D9C 802417DC 240520D4 */  addiu     $a1, $zero, 0x20d4
-/* A49DA0 802417E0 0C012530 */  jal       func_800494C0
+/* A49DA0 802417E0 0C012530 */  jal       ai_enemy_play_sound
 /* A49DA4 802417E4 0000302D */   daddu    $a2, $zero, $zero
 /* A49DA8 802417E8 27A4002C */  addiu     $a0, $sp, 0x2c
 /* A49DAC 802417EC 27A50030 */  addiu     $a1, $sp, 0x30
@@ -100,7 +100,7 @@ glabel func_802416EC_A49CAC
 /* A49E24 80241864 44810000 */  mtc1      $at, $f0
 /* A49E28 80241868 2402000D */  addiu     $v0, $zero, 0xd
 /* A49E2C 8024186C AFA20014 */  sw        $v0, 0x14($sp)
-/* A49E30 80241870 0C01BFEC */  jal       func_8006FFB0
+/* A49E30 80241870 0C01BFEC */  jal       playFX_13
 /* A49E34 80241874 E7A00010 */   swc1     $f0, 0x10($sp)
 /* A49E38 80241878 2402000F */  addiu     $v0, $zero, 0xf
 /* A49E3C 8024187C A602008E */  sh        $v0, 0x8e($s0)

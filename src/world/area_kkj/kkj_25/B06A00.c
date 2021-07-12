@@ -1,3 +1,8 @@
 #include "kkj_25.h"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_25/B06A00", func_80240000_B06A00);
+static char* N(exit_str_0) = "kkj_24";
+static char* N(exit_str_1) = "kkj_25";
+static char* N(exit_str_2) = "kkj_25\0";
+static char* N(exit_str_3) = "osr_03";
+
+#include "world/common/SetPlayerSpriteSet2.inc.c"

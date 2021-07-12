@@ -60,7 +60,7 @@ glabel D_E02006D8
 .word atan2
 
 glabel D_E02006DC
-.word func_800DCB7C
+.word npc_raycast_down_sides
 
 glabel D_E02006E0
 .word load_effect
@@ -69,7 +69,7 @@ glabel D_E02006E4
 .word sqrtf
 
 glabel D_E02006E8
-.word func_8011D72C
+.word mdl_draw_hidden_panel_surface
 
 glabel D_E02006EC
 .word func_8011CFBC
@@ -87,16 +87,16 @@ glabel D_E02006FC
 .word guLookAtHiliteF
 
 glabel D_E0200700
-.word set_transition_stencil_zoom_1
+.word set_screen_overlay_params_back
 
 glabel D_E0200704
-.word set_transition_stencil_center
+.word set_screen_overlay_center
 
 glabel D_E0200708
-.word set_transition_stencil_center_worldpos
+.word set_screen_overlay_center_worldpos
 
 glabel D_E020070C
-.word func_8011D7E4
+.word mdl_get_next_texture_address
 
 glabel D_E0200710
 .word guPositionF
@@ -114,7 +114,7 @@ glabel D_E0200720
 .word draw_box
 
 glabel D_E0200724
-.word draw_msg
+.word draw_string
 
 glabel D_E0200728
 .word get_string_width

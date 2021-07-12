@@ -28,8 +28,7 @@ Script N(80240060) = SCRIPT({
         match STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_SUN_TOWER_SUNNY, 0, 8);
             }
         }
@@ -220,14 +219,16 @@ Script N(interact_80240B28) = SCRIPT({
         }
         < STORY_CH6_STAR_SPIRIT_RESCUED {
             if (SI_SAVE_FLAG(1410) == 0) {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009D));
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                              0x009D));
                 SI_SAVE_FLAG(1410) = 1;
             } else {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009E));
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                              0x009E));
             }
-        }
-        else {
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009F));
+        } else {
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                          0x009F));
         }
     }
     SI_AREA_FLAG(38) = 1;
@@ -251,10 +252,10 @@ Script N(init_80240CD0) = SCRIPT({
 Script N(init_80240DB4) = SCRIPT({
     EnableNpcShadow(NPC_SUN1, FALSE);
     SetNpcAnimation(NPC_SUN1, NPC_ANIM(sun, Palette_00, Anim_2));
-    func_802CFE80(10, 3);
-    func_802CFE80(11, 3);
-    func_802CFFC0(10, 0, 1, 5, 5, 13, 5, 0, 0);
-    func_802CFFC0(11, 0, 1, 5, 5, 13, 5, 0, 0);
+    SetNpcPaletteSwapMode(10, 3);
+    SetNpcPaletteSwapMode(11, 3);
+    SetNpcPaletteSwapping(10, 0, 1, 5, 5, 13, 5, 0, 0);
+    SetNpcPaletteSwapping(11, 0, 1, 5, 5, 13, 5, 0, 0);
     if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN1, 0, 270, -5);
     } else {

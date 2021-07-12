@@ -57,7 +57,7 @@ glabel func_8025DA68
 /* 18C410 8025DB30 3C014120 */  lui       $at, 0x4120
 /* 18C414 8025DB34 44810000 */  mtc1      $at, $f0
 /* 18C418 8025DB38 24040001 */  addiu     $a0, $zero, 1
-/* 18C41C 8025DB3C 0C01BFBC */  jal       func_8006FEF0
+/* 18C41C 8025DB3C 0C01BFBC */  jal       playFX_11
 /* 18C420 8025DB40 E7A00010 */   swc1     $f0, 0x10($sp)
 .L8025DB44:
 /* 18C424 8025DB44 00111040 */  sll       $v0, $s1, 1
@@ -83,7 +83,7 @@ glabel func_8025DA68
 /* 18C474 8025DB94 3C0141A0 */  lui       $at, 0x41a0
 /* 18C478 8025DB98 44810000 */  mtc1      $at, $f0
 /* 18C47C 8025DB9C A50008BE */  sh        $zero, 0x8be($t0)
-/* 18C480 8025DBA0 0C01BFBC */  jal       func_8006FEF0
+/* 18C480 8025DBA0 0C01BFBC */  jal       playFX_11
 /* 18C484 8025DBA4 E7A00010 */   swc1     $f0, 0x10($sp)
 .L8025DBA8:
 /* 18C488 8025DBA8 8FBF0020 */  lw        $ra, 0x20($sp)

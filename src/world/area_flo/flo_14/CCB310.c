@@ -18,8 +18,7 @@ Script N(802423F0) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
         }
     }
@@ -267,13 +266,13 @@ Script N(802432E8) = SCRIPT({
 });
 
 Vec3f N(vectorList_80243384)[] = {
-     { 531.0, 75.0, 81.0 }, { 481.0, 80.0, 81.0 },
-     { 431.0, 75.0, 81.0 }, { 381.0, 70.0, 81.0 },
-     { 331.0, 75.0, 81.0 }, { 281.0, 80.0, 81.0 },
-     { 231.0, 75.0, 81.0 }, { 181.0, 70.0, 81.0 },
-     { 131.0, 75.0, 81.0 }, { 81.0, 80.0, 81.0 },
-     { 31.0, 75.0, 81.0 }, { -19.0, 70.0, 81.0 },
-     { -69.0, 75.0, 81.0 },
+    { 531.0, 75.0, 81.0 }, { 481.0, 80.0, 81.0 },
+    { 431.0, 75.0, 81.0 }, { 381.0, 70.0, 81.0 },
+    { 331.0, 75.0, 81.0 }, { 281.0, 80.0, 81.0 },
+    { 231.0, 75.0, 81.0 }, { 181.0, 70.0, 81.0 },
+    { 131.0, 75.0, 81.0 }, { 81.0, 80.0, 81.0 },
+    { 31.0, 75.0, 81.0 }, { -19.0, 70.0, 81.0 },
+    { -69.0, 75.0, 81.0 },
 };
 
 Script N(80243420) = SCRIPT({
@@ -538,33 +537,33 @@ Script N(80243E78) = SCRIPT({
     spawn N(80243B1C);
     SI_VAR(0) = 10005;
     spawn N(80243B1C);
-    func_802C9C70(0, 123, 1);
-    func_802C94A0(1, N(func_80240504_CCB814), 0);
-    func_802C90FC(123, 1, -1);
-    func_802C90FC(10001, 1, -1);
-    func_802C90FC(10002, 1, -1);
-    func_802C90FC(10003, 1, -1);
-    func_802C90FC(10004, 1, -1);
-    func_802C90FC(10005, 1, -1);
-    func_802C9C70(1, 57, 1);
-    func_802C94A0(2, N(func_802407D4_CCBAE4), 0);
-    func_802C90FC(57, 2, -1);
+    MakeLocalVertexCopy(0, 123, 1);
+    SetCustomGfxBuilders(1, N(func_80240504_CCB814), 0);
+    SetModelCustomGfx(123, 1, -1);
+    SetModelCustomGfx(10001, 1, -1);
+    SetModelCustomGfx(10002, 1, -1);
+    SetModelCustomGfx(10003, 1, -1);
+    SetModelCustomGfx(10004, 1, -1);
+    SetModelCustomGfx(10005, 1, -1);
+    MakeLocalVertexCopy(1, 57, 1);
+    SetCustomGfxBuilders(2, N(func_802407D4_CCBAE4), 0);
+    SetModelCustomGfx(57, 2, -1);
 });
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
-ApiStatus N(func_8024030C_CCB61C)(ScriptInstance *script, s32 isInitialCall) {
-    func_80072950(0, 0, 0, 0, 0, 0);
+ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall) {
+    playFX_82(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
 #include "world/common/UnkFunc43.inc.c"
 
-ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
         script->varTable[14] = 0;
         return ApiStatus_DONE2;
@@ -575,14 +574,14 @@ ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024042C_CCB73C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024042C_CCB73C)(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-4);
 
     npc->flags = get_variable(NULL, SI_MAP_VAR(0));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024046C_CCB77C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024046C_CCB77C)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->functionTemp[0].s = get_variable(script, *args++);
@@ -594,9 +593,9 @@ ApiStatus N(func_8024046C_CCB77C)(ScriptInstance *script, s32 isInitialCall) {
 
 // graphics macros
 #ifdef NON_MATCHING
-s32 func_8011C2EC(s32);
-void func_8011C2B0(s32, s32*,s32*, s32*);
-void guMtxF2L(Matrix4f, Mtx *m);
+s32 mdl_get_copied_gfx(s32);
+void mdl_get_copied_vertices(s32, s32*, s32*, s32*);
+void guMtxF2L(Matrix4f, Mtx* m);
 void guMtxIdentF(Matrix4f);
 
 void N(func_80240504_CCB814)(void) {
@@ -619,9 +618,9 @@ void N(func_80240504_CCB814)(void) {
 
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    func_8011C2B0(0, &x, &y, &z);
+    mdl_get_copied_vertices(0, &x, &y, &z);
     gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, func_8011C2EC(0));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(0));
 
     N(D_80243B14_CCEE24) += 1.0f;
 }
@@ -644,7 +643,7 @@ void N(func_802407D4_CCBAE4)(void) {
     f32 temp_f20;
     f32 temp_f0;
 
-    func_8011C2B0(1, &x, &y, &z);
+    mdl_get_copied_vertices(1, &x, &y, &z);
 
     for (i = 0; i < z; i++) {
         N(UnkStruct)* ptr1 = &x[i];
@@ -659,7 +658,7 @@ void N(func_802407D4_CCBAE4)(void) {
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, func_8011C2EC(1));
+    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(1));
 
     if (get_variable(NULL, SI_AREA_FLAG(36)) != 0) {
         if (N(D_80243B18_CCEE28) > 90) {

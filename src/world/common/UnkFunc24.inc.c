@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc24)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(UnkFunc24)(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
     if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
         script->varTable[0] = 1;

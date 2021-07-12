@@ -32,8 +32,7 @@ Script N(80241F10) = SCRIPT({
         }
         == STORY_CH3_BEGAN_PEACH_MISSION {
             SetMusicTrack(0, SONG_STAR_SPIRIT_THEME, 1, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
             PlayAmbientSounds(AMBIENT_WIND);
         }

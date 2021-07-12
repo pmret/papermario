@@ -43,7 +43,7 @@ glabel func_800397E8
 /* 14C7C 8003987C 27A60024 */  addiu     $a2, $sp, 0x24
 /* 14C80 80039880 AFA20010 */  sw        $v0, 0x10($sp)
 /* 14C84 80039884 8E040080 */  lw        $a0, 0x80($s0)
-/* 14C88 80039888 0C0372DF */  jal       func_800DCB7C
+/* 14C88 80039888 0C0372DF */  jal       npc_raycast_down_sides
 /* 14C8C 8003988C 27A70028 */   addiu    $a3, $sp, 0x28
 /* 14C90 80039890 0800E633 */  j         .L800398CC
 /* 14C94 80039894 00000000 */   nop
@@ -59,7 +59,7 @@ glabel func_800397E8
 /* 14CB8 800398B8 46800020 */  cvt.s.w   $f0, $f0
 /* 14CBC 800398BC E7A00018 */  swc1      $f0, 0x18($sp)
 /* 14CC0 800398C0 8E040080 */  lw        $a0, 0x80($s0)
-/* 14CC4 800398C4 0C0371DE */  jal       func_800DC778
+/* 14CC4 800398C4 0C0371DE */  jal       npc_raycast_down_ahead
 /* 14CC8 800398C8 27A70028 */   addiu    $a3, $sp, 0x28
 .L800398CC:
 /* 14CCC 800398CC 1040000F */  beqz      $v0, .L8003990C

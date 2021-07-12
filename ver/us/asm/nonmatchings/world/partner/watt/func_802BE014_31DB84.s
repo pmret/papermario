@@ -22,7 +22,7 @@ glabel func_802BE014_31DB84
 /* 31DBC4 802BE054 34840007 */   ori      $a0, $a0, 7
 /* 31DBC8 802BE058 3C040006 */  lui       $a0, 6
 .L802BE05C:
-/* 31DBCC 802BE05C 0C037FBF */  jal       func_800DFEFC
+/* 31DBCC 802BE05C 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 31DBD0 802BE060 00000000 */   nop
 /* 31DBD4 802BE064 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 31DBD8 802BE068 03E00008 */  jr        $ra

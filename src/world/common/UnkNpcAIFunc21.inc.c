@@ -9,7 +9,7 @@ void N(UnkNpcAIFunc21)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     if (npc->duration <= 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         enable_npc_shadow(npc);
-        npc->currentAnim = enemy->animList[10];
+        npc->currentAnim.w = enemy->animList[10];
         npc->duration = 8;
         script->functionTemp[0].s = 3;
     }

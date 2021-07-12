@@ -210,7 +210,7 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
             *t1 = 255;
         }
 
-        set_transition_stencil_zoom_1(10, *t1);
+        set_screen_overlay_params_back(10, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -229,7 +229,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
     if (*t0 == 0) {
         t1v = *t1;
         if (t1v == 0) {
-            set_transition_stencil_zoom_1(255, -1.0f);
+            set_screen_overlay_params_back(255, -1.0f);
             return ApiStatus_DONE2;
         }
         t1v -= 10;
@@ -237,7 +237,7 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
         if (t1v < 0) {
             *t1 = 0;
         }
-        set_transition_stencil_zoom_1(10, *t1);
+        set_screen_overlay_params_back(10, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -246,9 +246,9 @@ ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
 ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
     s32 value = get_variable(script, *script->ptrReadPos);
     if (value < 0) {
-        set_transition_stencil_zoom_1(255, -1.0f);
+        set_screen_overlay_params_back(255, -1.0f);
     } else {
-        set_transition_stencil_zoom_1(10, value);
+        set_screen_overlay_params_back(10, value);
     }
 
     return ApiStatus_DONE2;
@@ -257,21 +257,21 @@ ApiStatus func_802D4CC4(ScriptInstance* script, s32 initialCall) {
 ApiStatus func_802D4D14(ScriptInstance* script, s32 initialCall) {
     s32 value = get_float_variable(script, *script->ptrReadPos);
 
-    set_transition_stencil_center(0, 0, 0xC, 0x14);
-    set_transition_stencil_center(0, 1, 0x134, 0xDC);
-    set_transition_stencil_zoom_0(0xC, value);
+    set_screen_overlay_center(0, 0, 0xC, 0x14);
+    set_screen_overlay_center(0, 1, 0x134, 0xDC);
+    set_screen_overlay_params_front(0xC, value);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D4D88(ScriptInstance* script, s32 initialCall) {
-    set_transition_stencil_zoom_0(0xC, 0);
+    set_screen_overlay_params_front(0xC, 0);
     return ApiStatus_DONE2;
 }
 
 #ifdef NON_MATCHING
 // most likely functionally equivalent, lots of issues though.
-void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
+void load_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* arg3) {
     struct Vec3f* temp_s4;
     f32* temp_s7;
     s32 i;
@@ -346,10 +346,10 @@ void setup_path_data(s32 numVecs, f32* arg1, struct Vec3f* arg2, struct Vec3f* a
     heap_free(temp_s4);
 }
 #else
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", setup_path_data);
+INCLUDE_ASM(s32, "evt/f8f60_len_1560", load_path_data);
 #endif
 
-INCLUDE_ASM(s32, "evt/f8f60_len_1560", func_802D5270);
+INCLUDE_ASM(s32, "evt/f8f60_len_1560", get_path_position);
 
 s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -364,7 +364,7 @@ s32 LoadPath(ScriptInstance* script, s32 isInitialCall) {
     path->unk_04 = heap_malloc(numVectors * sizeof(f32));
     path->staticVectorList = vectorList;
     path->vectors = heap_malloc(numVectors * sizeof(Vec3f));
-    setup_path_data(path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
+    load_path_data(path->numVectors, path->unk_04, path->staticVectorList, path->vectors);
 
     path->timeElapsed = 0;
     path->timeLeft = time - 1;
@@ -389,12 +389,12 @@ ApiStatus GetDist2D(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D5830(ScriptInstance* script, s32 initialCall) {
+ApiStatus SetTimeFreezeMode(ScriptInstance* script, s32 initialCall) {
     set_time_freeze_mode(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D585C(ScriptInstance* script, s32 initialCall) {
+ApiStatus ModifyGlobalOverrideFlags(ScriptInstance* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 setMode = get_variable(script,  *ptrReadPos++);
     s32 flags = get_variable(script, *ptrReadPos++);

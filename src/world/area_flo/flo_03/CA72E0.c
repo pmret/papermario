@@ -42,8 +42,7 @@ Script N(802406A0) = SCRIPT({
             }
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
-            }
-            else {
+            } else {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
             }
         }
@@ -53,7 +52,7 @@ Script N(802406A0) = SCRIPT({
 Script N(802407C0) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
-            func_802D5FF8(137, 0);
+            PushSong(137, 0);
         }
     }
 });
@@ -63,7 +62,7 @@ Script N(80240814) = SCRIPT({
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
             sleep 10;
-            func_802D5FD8();
+            PopSong();
         }
     }
 });
@@ -353,12 +352,14 @@ Script N(interact_802412BC) = SCRIPT({
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1411) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0058));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0,
+                              MESSAGE_ID(0x11, 0x0058));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_6));
             } else {
                 SI_VAR(4) = (int) 3.5;
                 await N(8024122C);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_8), NPC_ANIM(petunia, Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x0059));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_8), NPC_ANIM(petunia, Palette_00, Anim_3), 0,
+                              MESSAGE_ID(0x11, 0x0059));
                 EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0);
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_4));
                 sleep 20;
@@ -368,7 +369,8 @@ Script N(interact_802412BC) = SCRIPT({
                 await N(80240F0C);
                 AddKeyItem(ITEM_MAGICAL_BEAN);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                              MESSAGE_ID(0x11, 0x005A));
                 EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0);
                 STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
             }
@@ -378,13 +380,14 @@ Script N(interact_802412BC) = SCRIPT({
         }
         < STORY_CH6_RETURNED_TO_TOAD_TOWN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005C));
-        }
-        else {
+        } else {
             if (SI_AREA_VAR(1) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005D));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                              MESSAGE_ID(0x11, 0x005D));
                 SI_AREA_VAR(1) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005E));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                              MESSAGE_ID(0x11, 0x005E));
             }
         }
     }
@@ -407,8 +410,7 @@ Script N(init_80241E10) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SetNpcPos(NPC_DAYZEE, 0, -1000, 0);
-        }
-        else {
+        } else {
             if (SI_SAVE_FLAG(1366) == 0) {
                 SetEnemyFlagBits(1, 1, 0);
                 BindNpcIdle(NPC_SELF, N(npcAI_8024119C));
@@ -816,8 +818,7 @@ Script N(init_8024338C) = SCRIPT({
             } else {
                 SetNpcPos(NPC_MONTY_MOLE0, 0, -1000, 0);
             }
-        }
-        else {
+        } else {
             SetNpcPos(NPC_MONTY_MOLE0, 0, -1000, 0);
         }
     }
@@ -840,8 +841,7 @@ Script N(init_802434CC) = SCRIPT({
             } else {
                 SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
             }
-        }
-        else {
+        } else {
             SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
         }
     }
@@ -864,8 +864,7 @@ Script N(init_8024360C) = SCRIPT({
             } else {
                 SetNpcPos(NPC_MONTY_MOLE2, 0, -1000, 0);
             }
-        }
-        else {
+        } else {
             SetNpcPos(NPC_MONTY_MOLE2, 0, -1000, 0);
         }
     }
@@ -888,8 +887,7 @@ Script N(init_8024374C) = SCRIPT({
             } else {
                 SetNpcPos(NPC_MONTY_MOLE3, 0, -1000, 0);
             }
-        }
-        else {
+        } else {
             SetNpcPos(NPC_MONTY_MOLE3, 0, -1000, 0);
         }
     }
@@ -1106,9 +1104,9 @@ ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-ApiStatus N(func_80240158_CA73F8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240158_CA73F8)(ScriptInstance* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
 
     f32 clamp = clamp_angle(atan2(-210.0f, -183.0f, gPlayerStatus.position.x, gPlayerStatus.position.z) + 180.0f);
     f32 sp10 = -210.0f;
@@ -1143,18 +1141,18 @@ ApiStatus N(func_80240158_CA73F8)(ScriptInstance *script, s32 isInitialCall) {
                 add_vec2D_polar(&sp10, &sp14, 46.0f, clamp);
             }
         }
-        npc->currentAnim = enemy->animList[2];
+        npc->currentAnim.w = enemy->animList[2];
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc_move_heading(npc, 2.0f, npc->yaw);
     } else if (temp_f4 > 0.2) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, sp10, sp14);
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim = enemy->animList[1];
+        npc->currentAnim.w = enemy->animList[1];
     } else {
         npc->pos.x = sp10;
         npc->pos.z = sp14;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
     }
     return ApiStatus_BLOCK;
 }

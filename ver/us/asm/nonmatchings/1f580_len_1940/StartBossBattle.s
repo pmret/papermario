@@ -47,7 +47,7 @@ glabel StartBossBattle
 .L80044940:
 /* 1FD40 80044940 0C03805E */  jal       disable_player_input
 /* 1FD44 80044944 0000802D */   daddu    $s0, $zero, $zero
-/* 1FD48 80044948 0C03BD8A */  jal       func_800EF628
+/* 1FD48 80044948 0C03BD8A */  jal       partner_disable_input
 /* 1FD4C 8004494C 00000000 */   nop
 /* 1FD50 80044950 8E740088 */  lw        $s4, 0x88($s3)
 /* 1FD54 80044954 8E820000 */  lw        $v0, ($s4)

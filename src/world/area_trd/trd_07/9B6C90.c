@@ -2,29 +2,7 @@
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_8024038C_9B6D0C);
-/*
-void N(func_8024038C_9B6D0C)(ScriptInstance *script, NpcAISettings *aiSettings, EnemyTerritoryThing *territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-        if (npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim = enemy->animList[9];
-            npc->moveSpeed = aiSettings->chaseSpeed;
-            if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
-                npc->collisionHeight = enemy->varTable[6] / 2;
-            }
-            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
-            if (npc->duration < enemy->varTable[3]) {
-                npc->duration = enemy->varTable[3];
-            }
-            enemy->varTable[4] = npc->duration;
-            script->functionTemp[0].s = 14;
-        }
-    }
-}
-*/
+#include "world/common/UnkDistFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 
@@ -32,32 +10,7 @@ void N(func_8024038C_9B6D0C)(ScriptInstance *script, NpcAISettings *aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_802406A4_9B7024);
 
-INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80240AE4_9B7464);
-/*
-void N(func_80240AE4_9B7464)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration = aiSettings->moveTime / 2 + rand_int(aiSettings->moveTime / 2 + 1);
-    if (is_point_within_region(enemy->territory->wander.wanderShape,
-            enemy->territory->wander.point.x, enemy->territory->wander.point.z,
-            npc->pos.x, npc->pos.z,
-            enemy->territory->wander.wanderSizeX, enemy->territory->wander.wanderSizeZ)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
-    } else {
-        npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
-    }
-    npc->currentAnim = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    if (enemy->territory->wander.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
-    }
-    enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[0].s = 1;
-}
-*/
+#include "world/common/UnkNpcAIFunc23.inc.c"
 
 INCLUDE_ASM(s32, "world/area_trd/trd_07/9B6C90", func_80240C94_9B7614);
 
@@ -122,7 +75,7 @@ ApiStatus N(func_80241DF0_9B8770)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240AE4_9B7464)(script, aiSettings, territoryPtr);
+#include "world/common/UnkNpcAIFunc23.inc.c"
         case 1:
             N(func_80240C94_9B7614)(script, aiSettings, territoryPtr);
             break;

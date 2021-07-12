@@ -78,7 +78,7 @@ glabel func_80238EDC_6F1FBC
 /* 6F20D0 80238FF0 44071000 */  mfc1      $a3, $f2
 /* 6F20D4 80238FF4 2403003C */  addiu     $v1, $zero, 0x3c
 /* 6F20D8 80238FF8 AFA30014 */  sw        $v1, 0x14($sp)
-/* 6F20DC 80238FFC 0C01C634 */  jal       func_800718D0
+/* 6F20DC 80238FFC 0C01C634 */  jal       playFX_56
 /* 6F20E0 80239000 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 6F20E4 80239004 3C05800E */  lui       $a1, %hi(gBattleStatus)
 /* 6F20E8 80239008 24A5C070 */  addiu     $a1, $a1, %lo(gBattleStatus)

@@ -30,6 +30,7 @@
 #define MAX_ANIMATED_MESHES 16
 #define MAX_ENTITY_MODELS 256
 #define MAX_MODELS 256
+#define MAX_MODEL_TRANSFORM_GROUPS 4
 #define MAX_SCRIPTS 128
 #define MAX_NPCS 64
 #define MAX_TRIGGERS 64
@@ -43,8 +44,11 @@
 #define PI      3.141592f
 #define PI_D    3.141592
 #define TAU     6.28318f
+#define PI_S    3.14159f // Shorter PI
 
 #define SPRITE_WORLD_SCALE 0.71428573f
+
+#define PACK_FILL_COLOR(r, g, b, a) (GPACK_RGBA5551(r, g, b, a) << 0x10) | GPACK_RGBA5551(r, g, b, a)
 
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \

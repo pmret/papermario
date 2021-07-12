@@ -96,7 +96,7 @@ glabel dgb_04_func_8024259C_C38ACC
 /* C38C28 802426F8 24020004 */  addiu     $v0, $zero, 4
 /* C38C2C 802426FC AC820318 */  sw        $v0, 0x318($a0)
 /* C38C30 80242700 AC960324 */  sw        $s6, 0x324($a0)
-/* C38C34 80242704 0C03D390 */  jal       func_800F4E40
+/* C38C34 80242704 0C03D390 */  jal       create_popup_menu
 /* C38C38 80242708 AC800328 */   sw       $zero, 0x328($a0)
 /* C38C3C 8024270C AEA00070 */  sw        $zero, 0x70($s5)
 .L80242710:
@@ -107,7 +107,7 @@ glabel dgb_04_func_8024259C_C38ACC
 /* C38C50 80242720 8662032C */  lh        $v0, 0x32c($s3)
 /* C38C54 80242724 10400009 */  beqz      $v0, .L8024274C
 /* C38C58 80242728 AEA20074 */   sw       $v0, 0x74($s5)
-/* C38C5C 8024272C 0C03C4EC */  jal       func_800F13B0
+/* C38C5C 8024272C 0C03C4EC */  jal       hide_popup_menu
 /* C38C60 80242730 00000000 */   nop
 /* C38C64 80242734 8EA20070 */  lw        $v0, 0x70($s5)
 /* C38C68 80242738 24420001 */  addiu     $v0, $v0, 1
@@ -120,7 +120,7 @@ glabel dgb_04_func_8024259C_C38ACC
 /* C38C7C 8024274C 080909EF */  j         .L802427BC
 /* C38C80 80242750 0000102D */   daddu    $v0, $zero, $zero
 .L80242754:
-/* C38C84 80242754 0C03C54E */  jal       func_800F1538
+/* C38C84 80242754 0C03C54E */  jal       destroy_popup_menu
 /* C38C88 80242758 00000000 */   nop
 /* C38C8C 8024275C 8EA30074 */  lw        $v1, 0x74($s5)
 /* C38C90 80242760 240200FF */  addiu     $v0, $zero, 0xff

@@ -82,7 +82,7 @@ glabel func_8025D90C
 /* 18C318 8025DA38 44064000 */  mfc1      $a2, $f8
 /* 18C31C 8025DA3C 0000202D */  daddu     $a0, $zero, $zero
 /* 18C320 8025DA40 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 18C324 8025DA44 0C01BECC */  jal       fx_walk_normal
+/* 18C324 8025DA44 0C01BECC */  jal       fx_walk
 /* 18C328 8025DA48 E7A00014 */   swc1     $f0, 0x14($sp)
 .L8025DA4C:
 /* 18C32C 8025DA4C 8FBF001C */  lw        $ra, 0x1c($sp)

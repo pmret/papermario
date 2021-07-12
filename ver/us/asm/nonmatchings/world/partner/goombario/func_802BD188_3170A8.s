@@ -11,10 +11,10 @@ glabel func_802BD188_3170A8
 /* 3170C0 802BD1A0 AC22DF60 */  sw        $v0, %lo(D_802BDF60)($at)
 /* 3170C4 802BD1A4 10A00003 */  beqz      $a1, .L802BD1B4
 /* 3170C8 802BD1A8 00000000 */   nop
-/* 3170CC 802BD1AC 0C03BB31 */  jal       func_800EECC4
+/* 3170CC 802BD1AC 0C03BB31 */  jal       partner_init_get_out
 /* 3170D0 802BD1B0 0200202D */   daddu    $a0, $s0, $zero
 .L802BD1B4:
-/* 3170D4 802BD1B4 0C03BB3A */  jal       func_800EECE8
+/* 3170D4 802BD1B4 0C03BB3A */  jal       partner_get_out
 /* 3170D8 802BD1B8 0200202D */   daddu    $a0, $s0, $zero
 /* 3170DC 802BD1BC 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 3170E0 802BD1C0 8FB00010 */  lw        $s0, 0x10($sp)

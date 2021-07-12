@@ -40,7 +40,7 @@ glabel collision_check_player_intersecting_world
 /* 7D840 800E4390 AFA00014 */  sw        $zero, 0x14($sp)
 /* 7D844 800E4394 E7B40018 */  swc1      $f20, 0x18($sp)
 /* 7D848 800E4398 8E050000 */  lw        $a1, ($s0)
-/* 7D84C 800E439C 0C037B01 */  jal       do_lateral_collision
+/* 7D84C 800E439C 0C037B01 */  jal       player_test_lateral_overlap
 /* 7D850 800E43A0 27A70024 */   addiu    $a3, $sp, 0x24
 /* 7D854 800E43A4 0040182D */  daddu     $v1, $v0, $zero
 /* 7D858 800E43A8 04630001 */  bgezl     $v1, .L800E43B0

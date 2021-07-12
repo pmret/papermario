@@ -36,7 +36,7 @@ ApiStatus N(func_80240960_889530)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240C58_889828);
 /*
 ApiStatus N(func_80240C58_889828)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */
@@ -45,13 +45,7 @@ ApiStatus N(func_80240C58_889828)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240DE8_8899B8);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80241038_889C08);
-/*
-ApiStatus N(func_80241038_889C08)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
-*/
+#include "world/common/SwitchToPartner.inc.c"
 
 #include "world/common/UnkFunc19.inc.c"
 
@@ -84,7 +78,7 @@ ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
         scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-            userDataPtr->unk_08[i] = func_800716F0(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
             save = 0.0f;
             userDataPtr->unk_2C[i] = save;
             userDataPtr->unk_20[i] = save;

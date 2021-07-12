@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80244888_9BB208
+.double 0.09
+
+glabel D_80244890_9BB210
+.double 0.09
+
+.section .text
+
 glabel func_80240C94_9B7614
 /* 9B7614 80240C94 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* 9B7618 80240C98 AFB3004C */  sw        $s3, 0x4c($sp)
@@ -82,7 +92,7 @@ glabel func_80240C94_9B7614
 /* 9B7744 80240DC4 E7A60034 */  swc1      $f6, 0x34($sp)
 /* 9B7748 80240DC8 AFA20010 */  sw        $v0, 0x10($sp)
 /* 9B774C 80240DCC 8E040080 */  lw        $a0, 0x80($s0)
-/* 9B7750 80240DD0 0C0372DF */  jal       func_800DCB7C
+/* 9B7750 80240DD0 0C0372DF */  jal       npc_raycast_down_sides
 /* 9B7754 80240DD4 27A70030 */   addiu    $a3, $sp, 0x30
 /* 9B7758 80240DD8 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* 9B775C 80240DDC 4600D001 */  sub.s     $f0, $f26, $f0
@@ -126,7 +136,7 @@ glabel func_80240C94_9B7614
 /* 9B77EC 80240E6C E7A40034 */  swc1      $f4, 0x34($sp)
 /* 9B77F0 80240E70 AFA20010 */  sw        $v0, 0x10($sp)
 /* 9B77F4 80240E74 8E040080 */  lw        $a0, 0x80($s0)
-/* 9B77F8 80240E78 0C0372DF */  jal       func_800DCB7C
+/* 9B77F8 80240E78 0C0372DF */  jal       npc_raycast_down_sides
 /* 9B77FC 80240E7C 27A70030 */   addiu    $a3, $sp, 0x30
 /* 9B7800 80240E80 C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* 9B7804 80240E84 461A2100 */  add.s     $f4, $f4, $f26
@@ -185,7 +195,7 @@ glabel func_80240C94_9B7614
 /* 9B78CC 80240F4C E7A60034 */  swc1      $f6, 0x34($sp)
 /* 9B78D0 80240F50 AFA20010 */  sw        $v0, 0x10($sp)
 /* 9B78D4 80240F54 8E040080 */  lw        $a0, 0x80($s0)
-/* 9B78D8 80240F58 0C0372DF */  jal       func_800DCB7C
+/* 9B78D8 80240F58 0C0372DF */  jal       npc_raycast_down_sides
 /* 9B78DC 80240F5C 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240F60:
 /* 9B78E0 80240F60 10400007 */  beqz      $v0, .L80240F80
@@ -272,7 +282,7 @@ glabel func_80240C94_9B7614
 /* 9B7A18 80241098 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* 9B7A1C 8024109C C480003C */  lwc1      $f0, 0x3c($a0)
 /* 9B7A20 802410A0 3C060020 */  lui       $a2, 0x20
-/* 9B7A24 802410A4 0C012530 */  jal       func_800494C0
+/* 9B7A24 802410A4 0C012530 */  jal       ai_enemy_play_sound
 /* 9B7A28 802410A8 E4800064 */   swc1     $f0, 0x64($a0)
 /* 9B7A2C 802410AC 8E220018 */  lw        $v0, 0x18($s1)
 /* 9B7A30 802410B0 9442002A */  lhu       $v0, 0x2a($v0)

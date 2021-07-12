@@ -1,7 +1,7 @@
 #include "dgb_00.h"
 #include "message_ids.h"
 
-ApiStatus N(func_80240000_BFA0A0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BFA0A0)(ScriptInstance* script, s32 isInitialCall) {
     sprintf(&D_800D9230, "arn_20_shape");
     sprintf(&D_800D91E0, "arn_20_hit");
     sprintf(&D_800B0CF0, "arn_tex");
@@ -28,8 +28,7 @@ Script N(80240110) = SCRIPT({
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
-        }
-        else {
+        } else {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }
     }
@@ -66,8 +65,7 @@ Script N(802402D0) = SCRIPT({
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             spawn N(80240F50);
             await N(80241AA0);
-        }
-        else {
+        } else {
             bind N(exitDoubleDoor_8024021C) to TRIGGER_WALL_PRESS_A 18;
         }
     }

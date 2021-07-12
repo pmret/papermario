@@ -49,7 +49,7 @@ glabel func_80240628_A00C28
 /* A00CD8 802406D8 E7A40018 */   swc1     $f4, 0x18($sp)
 /* A00CDC 802406DC 0200202D */  daddu     $a0, $s0, $zero
 /* A00CE0 802406E0 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* A00CE4 802406E4 0C012530 */  jal       func_800494C0
+/* A00CE4 802406E4 0C012530 */  jal       ai_enemy_play_sound
 /* A00CE8 802406E8 3C060020 */   lui      $a2, 0x20
 /* A00CEC 802406EC 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* A00CF0 802406F0 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)

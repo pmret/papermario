@@ -51,18 +51,18 @@ glabel func_802A9120_421B10
 /* 421BC4 802A91D4 00431024 */  and       $v0, $v0, $v1
 /* 421BC8 802A91D8 2403DFFF */  addiu     $v1, $zero, -0x2001
 /* 421BCC 802A91DC 00431024 */  and       $v0, $v0, $v1
-/* 421BD0 802A91E0 0C051261 */  jal       set_icon_render_pos
+/* 421BD0 802A91E0 0C051261 */  jal       set_hud_element_render_pos
 /* 421BD4 802A91E4 AE620000 */   sw       $v0, ($s3)
 /* 421BD8 802A91E8 82220061 */  lb        $v0, 0x61($s1)
 /* 421BDC 802A91EC 10400003 */  beqz      $v0, .L802A91FC
 /* 421BE0 802A91F0 0200202D */   daddu    $a0, $s0, $zero
-/* 421BE4 802A91F4 0C05128B */  jal       clear_icon_flags
+/* 421BE4 802A91F4 0C05128B */  jal       clear_hud_element_flags
 /* 421BE8 802A91F8 24050002 */   addiu    $a1, $zero, 2
 .L802A91FC:
 /* 421BEC 802A91FC 2402000A */  addiu     $v0, $zero, 0xa
 /* 421BF0 802A9200 0C09A446 */  jal       func_80269118
 /* 421BF4 802A9204 A682004C */   sh       $v0, 0x4c($s4)
-/* 421BF8 802A9208 0C093EB1 */  jal       set_popup_duration
+/* 421BF8 802A9208 0C093EB1 */  jal       btl_set_popup_duration
 /* 421BFC 802A920C 2404000A */   addiu    $a0, $zero, 0xa
 .L802A9210:
 /* 421C00 802A9210 24020002 */  addiu     $v0, $zero, 2

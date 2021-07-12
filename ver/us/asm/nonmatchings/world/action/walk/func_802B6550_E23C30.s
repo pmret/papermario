@@ -20,12 +20,12 @@ glabel func_802B6550_E23C30
 /* E23C6C 802B658C 00021080 */  sll       $v0, $v0, 2
 /* E23C70 802B6590 3C04802B */  lui       $a0, %hi(D_802B6910_E23FF0)
 /* E23C74 802B6594 00822021 */  addu      $a0, $a0, $v0
-/* E23C78 802B6598 0C037FBF */  jal       func_800DFEFC
+/* E23C78 802B6598 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23C7C 802B659C 8C846910 */   lw       $a0, %lo(D_802B6910_E23FF0)($a0)
 /* E23C80 802B65A0 080AD977 */  j         .L802B65DC
 /* E23C84 802B65A4 00000000 */   nop
 .L802B65A8:
-/* E23C88 802B65A8 0C037FBF */  jal       func_800DFEFC
+/* E23C88 802B65A8 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E23C8C 802B65AC 3484000D */   ori      $a0, $a0, 0xd
 /* E23C90 802B65B0 080AD977 */  j         .L802B65DC
 /* E23C94 802B65B4 00000000 */   nop
@@ -37,7 +37,7 @@ glabel func_802B6550_E23C30
 /* E23CA8 802B65C8 3C04800F */  lui       $a0, %hi(world_actions_peachDisguises+0x4)
 /* E23CAC 802B65CC 00822021 */  addu      $a0, $a0, $v0
 /* E23CB0 802B65D0 8C847C20 */  lw        $a0, %lo(world_actions_peachDisguises+0x4)($a0)
-/* E23CB4 802B65D4 0C0398DB */  jal       func_800E636C
+/* E23CB4 802B65D4 0C0398DB */  jal       peach_set_disguise_anim
 /* E23CB8 802B65D8 00000000 */   nop
 .L802B65DC:
 /* E23CBC 802B65DC 8FBF0010 */  lw        $ra, 0x10($sp)

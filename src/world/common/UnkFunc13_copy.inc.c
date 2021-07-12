@@ -12,7 +12,7 @@ void N(UnkFunc13_copy)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
             script->functionTemp[1].s = aiSettings->unk_14;
             if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                 fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-                func_800494C0(npc, 0x2F4, 0x200000);
+                ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                 if (enemy->npcSettings->unk_2A & 1) {
                     script->functionTemp[0].s = 10;
                 } else {

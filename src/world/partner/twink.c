@@ -11,9 +11,9 @@ ApiStatus TwinkTakeOut(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EECC4(owner);
+        partner_init_get_out(owner);
     }
-    return func_800EECE8(owner) != 0;
+    return partner_get_out(owner) != 0;
 }
 
 ApiStatus TwinkUpdate(ScriptInstance* script, s32 isInitialCall) {
@@ -21,11 +21,11 @@ ApiStatus TwinkUpdate(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        enable_partner_flying(owner, TRUE);
+        partner_flying_enable(owner, TRUE);
     }
 
-    update_player_move_history(owner);
-    func_800ED5D0(owner);
+    partner_flying_update_player_tracking(owner);
+    partner_flying_update_motion(owner);
     playerData->unk_2F4[PARTNER_TWINK]++;
 
     return ApiStatus_BLOCK;
@@ -39,9 +39,9 @@ ApiStatus TwinkPutAway(ScriptInstance* script, s32 isInitialCall) {
     Npc* owner = script->owner2.npc;
 
     if (isInitialCall) {
-        func_800EE994(owner);
+        partner_init_put_away(owner);
     }
-    return func_800EE9B8(owner) != 0;
+    return partner_put_away(owner) != 0;
 }
 
 Script world_twink_take_out = SCRIPT({

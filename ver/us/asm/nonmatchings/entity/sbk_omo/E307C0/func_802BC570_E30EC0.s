@@ -289,7 +289,7 @@ glabel L802BC928_E31278
 /* E312B0 802BC960 080AF25E */  j         .L802BC978
 /* E312B4 802BC964 A2020000 */   sb       $v0, ($s0)
 glabel L802BC968_E312B8
-/* E312B8 802BC968 0C043F5A */  jal       exec_entity_updatecmd
+/* E312B8 802BC968 0C043F5A */  jal       exec_entity_commandlist
 /* E312BC 802BC96C 0220202D */   daddu    $a0, $s1, $zero
 /* E312C0 802BC970 0C038050 */  jal       enable_player_static_collisions
 /* E312C4 802BC974 A2000000 */   sb       $zero, ($s0)

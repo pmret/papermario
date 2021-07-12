@@ -10,7 +10,7 @@ glabel func_80240DF8_A2B038
 /* A2B04C 80240E0C 2C620005 */  sltiu     $v0, $v1, 5
 /* A2B050 80240E10 10400003 */  beqz      $v0, .L80240E20
 /* A2B054 80240E14 24620001 */   addiu    $v0, $v1, 1
-/* A2B058 80240E18 0C00D994 */  jal       begin_state_intro
+/* A2B058 80240E18 0C00D994 */  jal       state_init_intro
 /* A2B05C 80240E1C A08200A8 */   sb       $v0, 0xa8($a0)
 .L80240E20:
 /* A2B060 80240E20 8FBF0010 */  lw        $ra, 0x10($sp)

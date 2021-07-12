@@ -43,14 +43,14 @@ glabel ElectrifyActor
 /* 19F2B0 802709D0 AE500074 */  sw        $s0, 0x74($s2)
 /* 19F2B4 802709D4 0C093903 */  jal       func_8024E40C
 /* 19F2B8 802709D8 AE510078 */   sw       $s1, 0x78($s2)
-/* 19F2BC 802709DC 0C093978 */  jal       set_cam_zoffset
+/* 19F2BC 802709DC 0C093978 */  jal       btl_cam_set_zoffset
 /* 19F2C0 802709E0 2404000C */   addiu    $a0, $zero, 0xc
 /* 19F2C4 802709E4 86040192 */  lh        $a0, 0x192($s0)
-/* 19F2C8 802709E8 0C09390F */  jal       cam_target_actor
+/* 19F2C8 802709E8 0C09390F */  jal       btl_cam_target_actor
 /* 19F2CC 802709EC 00000000 */   nop
-/* 19F2D0 802709F0 0C093965 */  jal       set_cam_zoom
+/* 19F2D0 802709F0 0C093965 */  jal       btl_cam_set_zoom
 /* 19F2D4 802709F4 240400FA */   addiu    $a0, $zero, 0xfa
-/* 19F2D8 802709F8 0C093936 */  jal       move_cam_over
+/* 19F2D8 802709F8 0C093936 */  jal       btl_cam_move
 /* 19F2DC 802709FC 2404000A */   addiu    $a0, $zero, 0xa
 /* 19F2E0 80270A00 0C093983 */  jal       func_8024E60C
 /* 19F2E4 80270A04 00000000 */   nop
@@ -58,7 +58,7 @@ glabel ElectrifyActor
 /* 19F2EC 80270A0C 30420800 */  andi      $v0, $v0, 0x800
 /* 19F2F0 80270A10 10400004 */  beqz      $v0, .L80270A24
 /* 19F2F4 80270A14 24020001 */   addiu    $v0, $zero, 1
-/* 19F2F8 80270A18 0C093978 */  jal       set_cam_zoffset
+/* 19F2F8 80270A18 0C093978 */  jal       btl_cam_set_zoffset
 /* 19F2FC 80270A1C 0000202D */   daddu    $a0, $zero, $zero
 /* 19F300 80270A20 24020001 */  addiu     $v0, $zero, 1
 .L80270A24:
@@ -156,7 +156,7 @@ glabel L80270B5C_19F43C
 /* 19F45C 80270B7C 44071000 */  mfc1      $a3, $f2
 /* 19F460 80270B80 2410001E */  addiu     $s0, $zero, 0x1e
 /* 19F464 80270B84 AFB00014 */  sw        $s0, 0x14($sp)
-/* 19F468 80270B88 0C01C64C */  jal       func_80071930
+/* 19F468 80270B88 0C01C64C */  jal       playFX_57
 /* 19F46C 80270B8C E7A00010 */   swc1     $f0, 0x10($sp)
 /* 19F470 80270B90 0C0938F6 */  jal       func_8024E3D8
 /* 19F474 80270B94 24040013 */   addiu    $a0, $zero, 0x13
@@ -173,7 +173,7 @@ glabel L80270BA8_19F488
 /* 19F49C 80270BBC 2405003F */   addiu    $a1, $zero, 0x3f
 /* 19F4A0 80270BC0 0C093903 */  jal       func_8024E40C
 /* 19F4A4 80270BC4 24040002 */   addiu    $a0, $zero, 2
-/* 19F4A8 80270BC8 0C093936 */  jal       move_cam_over
+/* 19F4A8 80270BC8 0C093936 */  jal       btl_cam_move
 /* 19F4AC 80270BCC 2404000F */   addiu    $a0, $zero, 0xf
 /* 19F4B0 80270BD0 0200202D */  daddu     $a0, $s0, $zero
 /* 19F4B4 80270BD4 2405000B */  addiu     $a1, $zero, 0xb
@@ -190,13 +190,13 @@ glabel L80270BF4_19F4D4
 /* 19F4DC 80270BFC 2442FFFF */   addiu    $v0, $v0, -1
 /* 19F4E0 80270C00 24040022 */  addiu     $a0, $zero, 0x22
 /* 19F4E4 80270C04 2405003C */  addiu     $a1, $zero, 0x3c
-/* 19F4E8 80270C08 0C093E81 */  jal       show_variable_battle_message
+/* 19F4E8 80270C08 0C093E81 */  jal       btl_show_variable_battle_message
 /* 19F4EC 80270C0C 0220302D */   daddu    $a2, $s1, $zero
 /* 19F4F0 80270C10 24020004 */  addiu     $v0, $zero, 4
 /* 19F4F4 80270C14 0809C322 */  j         .L80270C88
 /* 19F4F8 80270C18 AE420070 */   sw       $v0, 0x70($s2)
 glabel L80270C1C_19F4FC
-/* 19F4FC 80270C1C 0C093EAD */  jal       is_popup_displayed
+/* 19F4FC 80270C1C 0C093EAD */  jal       btl_is_popup_displayed
 /* 19F500 80270C20 00000000 */   nop
 /* 19F504 80270C24 14400019 */  bnez      $v0, .L80270C8C
 /* 19F508 80270C28 0000102D */   daddu    $v0, $zero, $zero

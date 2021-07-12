@@ -1,6 +1,11 @@
 #include "common.h"
 #include "map.h"
 
+extern s32 D_800A0BA0;
+extern f32 D_800A0BA4;
+extern EffectInstance* D_800A0BA8;
+extern EffectInstance* D_800A0BAC;
+
 s32 get_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     s32 encounterIdx = encounterID / 32;
@@ -30,21 +35,21 @@ void set_defeated(s32 mapID, s32 encounterID) {
 
 ApiStatus ShowMerleeCoinMessage(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_80045D00(0, 60);
+        show_merlee_message(0, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus ShowMerleeRanOutMessage(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_80045D00(1, 60);
+        show_merlee_message(1, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        func_8011D82C(1);
+        mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
         script->functionTemp[0].s = 25;
@@ -101,7 +106,63 @@ ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", MerleeUpdateFX);
+// same as func_802616F4 aside from syms
+ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
+    Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
+    EffectInstanceData* effectInstanceData;
+
+    if (isInitialCall) {
+        script->functionTemp[1].s = 0;
+        D_800A0BA4 = merlee->pos.y;
+        D_800A0BA8 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
+        D_800A0BAC = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
+        D_800A0BB8 = 0;
+        D_800A0BA0 = 12;
+        sfx_play_sound(0x2074);
+    }
+
+    merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1].s * TAU) / 360.0f) * 3.0f);
+
+    script->functionTemp[1].s += 10;
+    script->functionTemp[1].s = clamp_angle(script->functionTemp[1].s);
+
+    effectInstanceData = D_800A0BA8->data;
+    effectInstanceData->pos.x = merlee->pos.x;
+    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
+    effectInstanceData->pos.z = merlee->pos.z;
+
+    effectInstanceData = D_800A0BAC->data;
+    effectInstanceData->pos.x = merlee->pos.x;
+    effectInstanceData->pos.y = merlee->pos.y + 16.0f;
+    effectInstanceData->pos.z = merlee->pos.z + 5.0f;
+
+    if (D_800A0BB8 == 2) {
+        D_800A0BA8->data->unk_30 = 0.00001f;
+        D_800A0BAC->data->unk_30 = 0.00001f;
+        D_800A0BA8->flags |= 0x10;
+        D_800A0BAC->flags |= 0x10;
+        return ApiStatus_DONE1;
+    }
+
+    if (D_800A0BB8 == 1) {
+        effectInstanceData = D_800A0BA8->data;
+        effectInstanceData->unk_30 += 0.35;
+        if (effectInstanceData->unk_30 > 3.5) {
+            effectInstanceData->unk_30 = 3.5f;
+        }
+
+        if (D_800A0BA0 != 0) {
+            D_800A0BA0--;
+        } else {
+            effectInstanceData = D_800A0BAC->data;
+            effectInstanceData->unk_30 += 0.5;
+            if (effectInstanceData->unk_30 > 5.0) {
+                D_800A0BB8 = 2;
+            }
+        }
+    }
+    return ApiStatus_BLOCK;
+}
 
 ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
     D_800A0BB8 = 1;
@@ -131,7 +192,7 @@ ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
 
-    func_800720B0(6, var0, var1, var2, 1.2f, 30);
+    playFX_6B(6, var0, var1, var2, 1.2f, 30);
     return ApiStatus_DONE2;
 }
 
@@ -141,7 +202,7 @@ ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
 
-    func_80071750(9, var0, var1, var2, 5.0f, 15);
+    playFX_52(9, var0, var1, var2, 5.0f, 15);
     return ApiStatus_DONE2;
 }
 
@@ -163,12 +224,12 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
 
     if (script->functionTemp[1].s == 15) {
         sfx_play_sound(SOUND_DEATH);
-        func_80070190(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
+        playFX_18(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
     temp1 = script->functionTemp[1].s;
     if (script->functionTemp[1].s == 10) {
-        func_8006F8F0(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
+        playFX_01(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
         if (script->functionTemp[1].s == temp1) { // what? (never can be false, seemingly)
             spawn_drops(enemy);
         }
@@ -217,7 +278,63 @@ void draw_encounters_neutral() {
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_pre_battle);
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", draw_encounters_pre_battle);
+void draw_encounters_pre_battle(void) {
+    EncounterStatus* encounter = &gCurrentEncounter;
+    Npc* npc = get_npc_unsafe(encounter->currentEnemy->npcID);
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    if (encounter->unk_94 != 0) {
+        f32 playerX, playerY, playerZ;
+        f32 otherX, otherY, otherZ;
+        s32 pScreenX, pScreenY, pScreenZ;
+        s32 oScreenX, oScreenY, oScreenZ;
+
+        if (encounter->fadeOutAmount != 255) {
+            encounter->fadeOutAccel++;
+            if (encounter->fadeOutAccel > 10) {
+                encounter->fadeOutAccel = 10;
+            }
+
+            encounter->fadeOutAmount += encounter->fadeOutAccel;
+            if (encounter->fadeOutAmount > 255) {
+                encounter->fadeOutAmount = 255;
+            }
+
+            playerX = playerStatus->position.x;
+            playerY = playerStatus->position.y;
+            playerZ = playerStatus->position.z;
+
+            otherX = npc->pos.x;
+            otherY = npc->pos.y;
+            otherZ = npc->pos.z;
+            if (otherY < -990.0f) {
+                otherX = playerX;
+                otherY = playerY;
+                otherZ = playerZ;
+            }
+
+            if (gGameStatusPtr->demoState == 2) {
+                set_screen_overlay_params_back(10, encounter->fadeOutAmount);
+                set_screen_overlay_alpha(1, 255.0f);
+                set_screen_overlay_color(1, 0, 0, 0);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_screen_overlay_center(1, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
+            } else {
+                set_screen_overlay_params_front(10, encounter->fadeOutAmount);
+                set_screen_overlay_alpha(0, 255.0f);
+                set_screen_overlay_color(0, 0, 0, 0);
+                get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
+                get_screen_coords(gCurrentCameraID, otherX, otherY + 15.0f, otherZ, &oScreenX, &oScreenY, &oScreenZ);
+                set_screen_overlay_center(0, 0, (pScreenX - oScreenX) / 2 + oScreenX,
+                                              (pScreenY - oScreenY) / 2 + oScreenY);
+            }
+        }
+    }
+}
+
+extern s16 D_8009A668;
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", show_first_strike_message);
 
@@ -228,8 +345,8 @@ s32 draw_encounters_post_battle(void) {
     s32 ret = currentEncounter->fadeOutAccel;
 
     if (ret != 0) {
-        set_transition_stencil_zoom_0(0, currentEncounter->fadeOutAmount);
-        ret = set_transition_stencil_color(0, 0, 0, 0);
+        set_screen_overlay_params_front(0, currentEncounter->fadeOutAmount);
+        ret = set_screen_overlay_color(0, 0, 0, 0);
     }
 
     return ret;
@@ -275,7 +392,7 @@ void update_encounters_conversation(void) {
             }
 
             enable_player_input();
-            func_800EF600();
+            partner_enable_input();
 
             if (playerStatus->actionState == ACTION_STATE_TALK) {
                 set_action_state(ACTION_STATE_IDLE);

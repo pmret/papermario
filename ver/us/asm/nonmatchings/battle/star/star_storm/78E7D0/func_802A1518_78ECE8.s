@@ -62,7 +62,7 @@ glabel func_802A1518_78ECE8
 /* 78EDC4 802A15F4 E7B40010 */  swc1      $f20, 0x10($sp)
 /* 78EDC8 802A15F8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 78EDCC 802A15FC E7A0001C */  swc1      $f0, 0x1c($sp)
-/* 78EDD0 802A1600 0C01BF8C */  jal       func_8006FE30
+/* 78EDD0 802A1600 0C01BF8C */  jal       playFX_0F
 /* 78EDD4 802A1604 AFA70018 */   sw       $a3, 0x18($sp)
 /* 78EDD8 802A1608 8FBF002C */  lw        $ra, 0x2c($sp)
 /* 78EDDC 802A160C 8FB20028 */  lw        $s2, 0x28($sp)

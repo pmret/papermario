@@ -1,11 +1,13 @@
 name: Paper Mario (North America)
 basename: papermario
+sha1: 3837f44cda784b466c9a2d99df70d77c322b97a0
 options:
   find_file_boundaries: True
   compiler: GCC
   mnemonic_ljust: 10
   platform: n64
   subalign: 8
+  auto_all_sections: True
 
   base_path: ../..
   target_path: ver/us/baserom.z64
@@ -36,19 +38,18 @@ segments:
   - type: code
     start: 0x1000
     vram: 0x80025C00
-    subalign: 4
     subsegments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, 1060_len_310]
     - [0x1370, c, 1370_len_7d0]
-    - [0x1b40, c, 1b40_len_20b0]
-    - [0x3bf0, c, 3bf0_len_6f0]
-    - [0x42e0, c, 42e0_len_1f60]
+    - [0x1b40, c, main_loop]
+    - [0x3bf0, c, input]
+    - [0x42e0, c, rumble]
     - [0x43F0, c]
     - [0x6000, c, heap]
-    - [0x6240, c, 6240_len_c00]
-    - [0x6e40, c, 6e40_len_500]
-    - [0x7340, c, 7340_len_b00]
+    - [0x6240, c, fio]
+    - [0x6e40, c, curtains]
+    - [0x7340, c, crash]
     - [0x7e40, c, os/nusys/7e40_len_3f0]
     - [0x8230, c, os/nusys/nuSiMgr]
     - [0x8560, c]
@@ -56,16 +57,19 @@ segments:
     - [0x9d10, c, 9d10_len_1080]
     - [0xad90, c, ad90_len_2880]
     - [0xB0E0, c]
-    - [0xd610, c, d610_len_1330]
-    - [0xe940, c, e940_len_290]
-    - [0xebd0, c, ebd0_len_6a0]
-    - [0xf270, c, f270_len_1190]
-    - [0x10400, c, 10400_len_d30]
-    - [0x11130, c, 11130_len_c0]
-    - [0x111f0, c, 111f0_len_860]
-    - [0x11a50, c, 11a50_len_7a0]
-    - [0x121f0, c, 121f0_len_1290]
-    - [0x13480, c, 13480_len_3f0]
+    - [0xd610, c, camera]
+    - [0xe8f0, c, game_modes]
+    - [0xe940, c, state_startup]
+    - [0xebd0, c, intro_logos]
+    - [0xecd0, c, state_battle]
+    - [0xf270, c, state_logos]
+    - [0xfd40, c, state_pause]
+    - [0x10400, c, state_file_select]
+    - [0x11130, c, state_world]
+    - [0x111f0, c, 111f0_len_860] # possibly still state_world
+    - [0x11a50, c, state_intro]
+    - [0x121f0, c, state_title_screen]
+    - [0x13480, c, state_demo]
     - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
     - [0x1f580, c, 1f580_len_1940]
@@ -210,14 +214,14 @@ segments:
     - [0x45a30, c, os/45a30_len_20]
     - [0x45a50, c, os/45a50_len_3a0]
     - [0x45df0, hasm, os/exceptasm]
-    - [0x46760, hasm, os/__osDisableInt]
-    - [0x467D0, hasm, os/__osRestoreInt]
+    - [0x46760, hasm, os/osDisableInt]
+    - [0x467D0, hasm, os/osRestoreInt]
     - [0x467f0, c, os/467f0_len_90]
     - [0x46880, c, os/46880_len_260]
     - [0x46ae0, c, os/46ae0_len_170]
     - [0x46c50, c, os/46c50_len_20]
     - [0x46c70, c, os/46c70_len_e00]
-    - [0x47A60, hasm, os/__osGetCause]
+    - [0x47A60, hasm, os/osGetCause]
     - [0x47a70, c, os/47a70_len_10]
     - [0x47a80, c, os/47a80_len_10]
     - [0x47a90, c, os/47a90_len_50]
@@ -242,16 +246,25 @@ segments:
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
     - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
-    - [0x4DF30, c]
+    - [0x4DF30, c, 4DF30]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
-    - [0x4F420, .data, 1b40_len_20b0]
-    - [0x4F660, .data, 42e0_len_1f60]
+    - [0x4F420, .data, main_loop]
+    - [0x4F660, .data, rumble]
     - [0x4F670, .data, 43F0]
-    - [0x4F9D0, data, 6240_len_c00]
-    - [0x52D08, .data, f270_len_1190]
-    - [0x52D80, data]
-    - [0x52DC0, .data, 121f0_len_1290]
+    - [0x4F9D0, .data, fio]
+    - [0x4F9E0, data, 6e40_beginning_data]
+    - [0x51540, ia8, no_controller, 128, 32]
+    - [0x52540, .data, curtains]
+    - [0x52610, .data, crash]
+    - [0x527F0, .data, os/nusys/7e40_len_3f0]
+    - [0x52800, .data, os/nusys/nuSiMgr]
+    - [0x52810, .data, camera]
+    - [0x52820, .data, game_modes]
+    - [0x52CA0, .data, state_battle]
+    - [0x52D50, .data, state_pause]
+    - [0x52D80, .data, state_file_select]
+    - [0x52DC0, .data, state_title_screen]
     - [0x52EE0, data] # Start of 13480_len_3f0's data
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
@@ -262,7 +275,6 @@ segments:
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F114, .data, os/nusys/nuGfxPreNMIFuncSet]
     - [0x6F120, .data, os/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
@@ -280,19 +292,19 @@ segments:
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
     - [0x73130, .rodata, 1060_len_310]
-    - [0x73148, .rodata, 1b40_len_20b0]
+    - [0x73148, .rodata, main_loop]
     - [0x73160, .rodata, 43F0]
-    - [0x73200, .rodata, 6e40_len_500]
-    - [0x73230, .rodata, 7340_len_b00]
+    - [0x73200, .rodata, curtains]
+    - [0x73230, .rodata, crash]
     - [0x735E0, .rodata, 8800]
     - [0x73610, .rodata, B0E0]
-    - [0x73680, .rodata, d610_len_1330]
-    - [0x73690, .rodata, f270_len_1190]
-    - [0x736E8, .rodata, 10400_len_d30]
+    - [0x73680, .rodata, camera]
+    - [0x73690, .rodata, state_logos]
+    - [0x736E8, .rodata, state_file_select]
     - [0x73720, .rodata, 111f0_len_860]
-    - [0x73738, .rodata, 11a50_len_7a0]
-    - [0x73790, .rodata, 121f0_len_1290]
-    - [0x73860, .rodata, 13480_len_3f0]
+    - [0x73738, .rodata, state_intro]
+    - [0x73790, .rodata, state_title_screen]
+    - [0x73860, .rodata, state_demo]
     - [0x73880, .rodata, npc]
     - [0x739F0, .rodata, 1a1f0_len_5390]
     - [0x73AB0, .rodata, 20ec0_len_5040]
@@ -314,15 +326,18 @@ segments:
     - [0x75170, .rodata, os/42470_len_310]
     - [0x75180, .rodata, os/exceptasm]
     - [0x751D0, .rodata, os/46c70_len_e00]
-    - [0x75240, .rodata, battle/battle] # ram 80099E40
+    - [0x75240, .rodata, os/48c00_len_5c0]
+    - [0x75340, .rodata, os/491c0_len_f80]
+    - [0x75540, .rodata, os/49C70]
+    - [0x75640, .rodata, battle/battle]
+    - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
-    - [0x75240, .bss, 1b40_len_20b0]
-    - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
+    # - [0x75240, .bss, main_loop]
+    # - [0x75240, .bss, os/39cb0_len_100, 0x0] # size unknown
   - type: code
     start: 0x759B0
     vram: 0x800DC500
-    subalign: 4
     subsegments:
     - [0x759b0, c, 759b0_len_61b0]
     - [0x77480, c, 77480]
@@ -348,15 +363,7 @@ segments:
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, .rodata, 77480]
-    - [0xA51E0, .rodata, 7B440]
-    - [0xA5230, .rodata, 7bb60_len_41b0]
-    - [0xA53E0, .rodata, 7fd10_len_b40]
-    - [0xA5410, .rodata, 80850_len_3060]
-    - [0xA54F0, .rodata, world/partners]
-    - [0xA5798, .rodata, 891b0_len_fb0]
-    - [0xA57C0, .rodata, 8a160_len_700]
-    - [0xA57E0, .rodata, 8a860_len_3f30]
+    - [0xA5100] # bss at 8010C920
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
@@ -378,7 +385,8 @@ segments:
     - [0xde740, c, de740_len_23f0]
     - [0xDF950, c, DF950]
     - [0xe0b30, c, e0b30_len_b80]
-    - [0xE16B0, data, a5dd0_len_114e0]
+    - [0xE16B0, .data, a5dd0_len_114e0]
+    - [0xE2950, data]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, d5a50_len_5fd0]
     - [0xE5820, .data, dc470_len_14c0]
@@ -386,19 +394,7 @@ segments:
     - [0xE5850, .data, ddaf0_len_c50]
     - [0xE59D0, .data, DF950]
     - [0xE5DF0, .data, e0b30_len_b80]
-    - [0xE5E40, .rodata, a5dd0_len_114e0]
-    - [0xE6560, .rodata, B4580]
-    - [0xE67B0, .rodata, entity]
-    - [0xE6A70, .rodata, B9D60]
-    - [0xE7140, .rodata, C50A0]
-    - [0xE75A0, .rodata, cd180_len_38f0]
-    - [0xE7680, .rodata, CEE40]
-    - [0xE76B0, .rodata, d0a70_len_4fe0]
-    - [0xE7840, .rodata, d5a50_len_5fd0]
-    - [0xE7920, .rodata, dc470_len_14c0]
-    - [0xE7940, .rodata, ddaf0_len_c50]
-    - [0xE7950, .rodata, DF950]
-    - [0xE7990, .rodata, e0b30_len_b80]
+    - [0xE5E40]
   - type: code
     dir: evt
     start: 0xE79B0
@@ -434,7 +430,7 @@ segments:
     subsegments:
     - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    - [0x102480, .data, sprite]
+    # - [0x102480, .data, sprite]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
@@ -459,14 +455,7 @@ segments:
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, .data, 104730]
     - [0x10B610, data]
-    - [0x10C880, .rodata, 102C80]
-    - [0x10C9E0, .rodata, 104730]
-    - [0x10CA50, .rodata, 104940_len_dc0]
-    - [0x10CAF0, .rodata, 105F90]
-    - [0x10CB30, .rodata, 107830_len_e70]
-    - [0x10CB70, .rodata, 1086a0_len_fc0]
-    - [0x10CBD0, .rodata, 109660_len_1270]
-    - [0x10CC00, .rodata, 10A230]
+    - [0x10C880]
   - type: code
     start: 0x10CC10
     vram: 0x802EB3D0
@@ -1633,8 +1622,8 @@ segments:
     overlay: True
     subsegments:
     - [0x317020, c, goombario]
-    - [0x317b60, .data, goombario]
-    - [0x317DA0, .rodata, goombario]
+    - [0x317B60, .data, goombario]
+    - [0x317DA0]
   - type: code
     dir: world/partner
     name: world_partner_bombette
@@ -1653,7 +1642,7 @@ segments:
     subsegments:
     - [0x319670, c, parakarry]
     - [0x31b000, data]
-    - [0x31B080, .rodata, parakarry]
+    - [0x31B080]
   - type: code
     dir: world/partner
     name: world_partner_kooper
@@ -1663,7 +1652,7 @@ segments:
     subsegments:
     - [0x31b120, c, kooper]
     - [0x31cb60, data]
-    - [0x31CBE0, .rodata, kooper]
+    - [0x31CBE0]
   - type: code
     dir: world/partner
     name: world_partner_watt
@@ -1682,7 +1671,7 @@ segments:
     subsegments:
     - [0x31de70, c, sushie]
     - [0x320b20, data]
-    - [0x320BC0, .rodata, sushie]
+    - [0x320BC0]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
@@ -1701,7 +1690,7 @@ segments:
     subsegments:
     - [0x323A50, c, bow]
     - [0x324930, data]
-    - [0x3249B0, .rodata, bow]
+    - [0x3249B0]
   - type: code
     dir: world/partner
     name: world_partner_goompa
@@ -1711,8 +1700,7 @@ segments:
     subsegments:
     - [0x324a10, c, goompa]
     - [0x324e80, .data, goompa]
-    - [0x324F00, .rodata, goompa]
-    - [0x324F10, .bss, goompa]
+    - [0x324F00]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -2687,14 +2675,14 @@ segments:
     subsegments:
     - [0x415D90, c, 415D90]
     - [0x4200D0, .data, 415D90]
-    - [0x420500, .rodata, 415D90]
+    - [0x420500]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
     overlay: True
     subsegments:
     - [0x4219F0, c, 4219F0]
-    - [0x421FC0, .rodata, 4219F0]
+    - [0x421FC0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -2853,21 +2841,33 @@ segments:
     type: code
     start: 0x4309A0
     vram: 0x80218000
-    overlay: True
     subalign: 4
+    overlay: True
     subsegments:
-    - [0x4309A0, c, battles] # DUMMY ROM
-    - [0x4309A0, c, goomba] # DUMMY ROM
-    - [0x4309A0, c]
-    - [0x431180, c]
-    - [0x4313F0, c]
-    - [0x431660, c]
-    - [0x4318D0, c]
-    - [0x431B80, .data, battles]
-    - [0x431FB0, .data, goomba]
-    - [0x433970, data]
-    - [0x4398A0, .rodata, battles]
-    - [0x439984, rodata] # TODO change
+    - [0x4309A0, c, area]
+    - [0x4309A0, c, actor/goomba]
+    - [0x430C20, c, actor/spiked_goomba]
+    - [0x430EA0, c, actor/paragoomba]
+    - [0x431180, c, stage/kmr_02]
+    - [0x431180, c, stage/kmr_03]
+    - [0x4313F0, c, stage/kmr_04]
+    - [0x431660, c, stage/kmr_05]
+    - [0x4318D0, c, stage/kmr_06]
+    - [0x431B80, .data, area]
+    - [0x431FB0, .data, actor/goomba]
+    - [0x433970, .data, actor/spiked_goomba]
+    - [0x4354A0, .data, actor/paragoomba]
+    - [0x438740, .data, stage/kmr_02]
+    - [0x4387A0, .data, stage/kmr_03]
+    - [0x438BF0, .data, stage/kmr_04]
+    - [0x439040, .data, stage/kmr_05]
+    - [0x439440, .data, stage/kmr_06]
+    - [0x4398A0, .rodata, area]
+    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
+    - [0x4399CC, .rodata, stage/kmr_03]
+    - [0x4399FC, .rodata, stage/kmr_04]
+    - [0x439A2C, .rodata, stage/kmr_05]
+    - [0x439A5C, .rodata, stage/kmr_06]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -2982,7 +2982,6 @@ segments:
     - [0x4DA5E0, c]
     - [0x4DA6B0, c]
     - [0x4DA860, data]
-    - [0x4E25E0, rodata]
   - dir: battle/area_isk_part_1
     type: code
     start: 0x4E2740
@@ -3446,376 +3445,352 @@ segments:
     subsegments:
     - [0x714CF0, c, twink]
     - [0x714DC0, data]
-  - dir: battle/item/mushroom
+  - name: mushroom
+    dir: battle/item
     type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x715850,     c, lib]
-    - [0x715E50,     c, mushroom] # DUMMY ROM
-    - [0x715E50, .data, lib]
-    - [0x71640C, .data, mushroom]
-    - [0x716C60,  .bss, lib]
-  - dir: battle/item/fire_flower
+    - [0x715850, c, mushroom] # TODO fix auto_all for .data
+    - [0x715E50]
+  - name: fire_flower
+    dir: battle/item
     type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x716C60,     c, lib]
-    - [0x717060,     c, fire_flower] # DUMMY ROM
-    - [0x717060, .data, lib]
-    - [0x71761C, .data, fire_flower]
-    - [0x7179D0,  .bss, lib]
-  - dir: battle/item/dusty_hammer
+    - [0x716C60, c, fire_flower]
+    - [0x717060]
+  - name: dusty_hammer
+    dir: battle/item
     type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7179D0,       c, lib]
-    - [0x717C10,       c, dusty_hammer] # DUMMY ROM
-    - [0x717C10,   .data, lib]
-    - [0x7181D0,     ci4, dusty_hammer, 32, 32]
-    - [0x7183D0, palette, dusty_hammer]
-    - [0x7183F0,   .data, dusty_hammer]
-    - [0x718850,    .bss, lib]
-  - dir: battle/item/pow_block
+    - [0x7179D0, c, dusty_hammer]
+    - start: 0x717C10
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x7181D0, ci4, dusty_hammer, 32, 32]
+      - [0x7183D0, palette, dusty_hammer]
+      - [0x7183F0]
+  - name: pow_block
+    dir: battle/item
     type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x718850,     c, lib]
-    - [0x718BF0, .data, lib]
-    - [0x7191AC, .data, pow_block]
-    - [0x719970,  .bss, lib]
-  - dir: battle/item/pebble
+    - [0x718850, c, pow_block]
+    - [0x718BF0]
+  - name: pebble
+    dir: battle/item
     type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x719970,       c, lib]
-    - [0x719BB0,   .data, lib]
-    - [0x71A170,     ci4, pebble, 32, 32]
-    - [0x71A370, palette, pebble]
-    - [0x71A390,   .data, pebble]
-    - [0x71A7F0,    .bss, lib]
-  - dir: battle/item/volt_shroom
+    - [0x719970, c, pebble]
+    - start: 0x719BB0
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x71A170, ci4, pebble, 32, 32]
+      - [0x71A370, palette, pebble]
+      - [0x71A390]
+  - name: volt_shroom
+    dir: battle/item
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71A7F0,     c, lib]
-    - [0x71AA70, .data, lib]
-    - [0x71B02C, .data, volt_shroom]
-    - [0x71B1A0,  .bss, lib]
-  - dir: battle/item/thunder_rage
+    - [0x71A7F0, c, volt_shroom]
+    - [0x71AA70]
+  - name: thunder_rage
+    dir: battle/item
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71B1A0,     c, lib]
-    - [0x71B640, .data, lib]
-    - [0x71BBFC, .data, thunder_rage]
-    - [0x71BE30,  .bss, lib]
-  - dir: battle/item/snowman_doll
+    - [0x71B1A0, c, thunder_rage]
+    - [0x71B640]
+  - name: snowman_doll
+    dir: battle/item
     type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71BE30,     c, lib]
-    - [0x71C270, .data, lib]
-    - [0x71C82C, .data, snowman_doll]
-    - [0x71CCE0,  .bss, lib]
-  - dir: battle/item/dried_shroom
+    - [0x71BE30, c, snowman_doll]
+    - [0x71C270]
+  - name: dried_shroom
+    dir: battle/item
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71CCE0,     c, lib]
-    - [0x71D010, .data, lib]
-    - [0x71D5DC, .data, dried_shroom]
-    - [0x71D770,  .bss, lib]
-  - dir: battle/item/shooting_star
+    - [0x71CCE0, c, dried_shroom]
+    - [0x71D010]
+  - name: shooting_star
+    dir: battle/item
     type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71D770,     c, lib]
-    - [0x71DCC0, .data, lib]
-    - [0x71E27C, .data, shooting_star]
-    - [0x71E650,  .bss, lib]
-  - dir: battle/item/sleepy_sheep
+    - [0x71D770, c, shooting_star]
+    - [0x71DCC0]
+  - name: sleepy_sheep
+    dir: battle/item
     type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x71E650,       c, lib]
-    - [0x71EFC0,   .data, lib]
-    - [0x71F580,     ci4, sleepy_sheep1, 56, 48]
-    - [0x71FAC0, palette, sleepy_sheep1]
-    - [0x71FAE0,     ci4, sleepy_sheep2, 56, 48]
-    - [0x720020, palette, sleepy_sheep2]
-    - [0x720040,     ci4, sleepy_sheep3, 56, 48]
-    - [0x720580, palette, sleepy_sheep3]
-    - [0x7205A0,   .data, sleepy_sheep]
-    - [0x7214D8, .rodata, lib]
-    - [0x7215A0,    .bss, lib]
-  - dir: battle/item/stone_cap
+    - [0x71E650, c, sleepy_sheep]
+    - start: 0x71EFC0
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x71EFC0, .data, sleepy_sheep]
+      - [0x71F580, ci4, sleepy_sheep1, 56, 48]
+      - [0x71FAC0, palette, sleepy_sheep1]
+      - [0x71FAE0, ci4, sleepy_sheep2, 56, 48]
+      - [0x720020, palette, sleepy_sheep2]
+      - [0x720040, ci4, sleepy_sheep3, 56, 48]
+      - [0x720580, palette, sleepy_sheep3]
+      - [0x7205A0]
+  - name: stone_cap
+    dir: battle/item
     type: code
     start: 0x7215A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7215A0,     c, lib]
-    - [0x721970, .data, lib]
-    - [0x721F2C, .data, stone_cap]
-    - [0x722000,  .bss, lib]
-  - dir: battle/item/tasty_tonic
+    - [0x7215A0, c, stone_cap]
+    - [0x721970]
+  - name: tasty_tonic
+    dir: battle/item
     type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x722000,     c, lib]
-    - [0x7222D0, .data, lib]
-    - [0x72289C, .data, tasty_tonic]
-    - [0x722B40,  .bss, lib]
-  - dir: battle/item/thunder_bolt
+    - [0x722000, c, tasty_tonic]
+    - [0x7222D0]
+  - name: thunder_bolt
+    dir: battle/item
     type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x722B40,     c, lib]
-    - [0x722FE0, .data, lib]
-    - [0x72359C, .data, thunder_bolt]
-    - [0x723780,  .bss, lib]
-  - dir: battle/item/ultra_shroom
+    - [0x722B40, c, thunder_bolt]
+    - [0x722FE0]
+  - name: ultra_shroom
+    dir: battle/item
     type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x723780,     c, lib]
-    - [0x723AB0, .data, lib]
-    - [0x72407C, .data, ultra_shroom]
-    - [0x724240,  .bss, lib]
-  - dir: battle/item/unknown_item
+    - [0x723780, c, ultra_shroom]
+    - [0x723AB0]
+  - name: unknown_item
+    dir: battle/item
     type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x724240,     c, lib]
-    - [0x724570, .data, lib]
-    - [0x724B3C, .data, unknown_item]
-    - [0x724CE0,  .bss, lib]
-  - dir: battle/item/super_soda
+    - [0x724240, c, unknown_item]
+    - [0x724570]
+  - name: super_soda
+    dir: battle/item
     type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x724CE0,     c, lib]
-    - [0x725210, .data, lib]
-    - [0x7257CC, .data, super_soda]
-    - [0x725F60,  .bss, lib]
-  - dir: battle/item/hustle_drink
+    - [0x724CE0, c, super_soda]
+    - [0x725210]
+  - name: hustle_drink
+    dir: battle/item
     type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x725F60,     c, lib]
-    - [0x726240, .data, lib]
-    - [0x7267FC, .data, hustle_drink]
-    - [0x726DD0,  .bss, lib]
-  - dir: battle/item/stop_watch
+    - [0x725F60, c, hustle_drink]
+    - [0x726240]
+  - name: stop_watch
+    dir: battle/item
     type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x726DD0,     c, lib]
-    - [0x727120, .data, lib]
-    - [0x7276EC, .data, stop_watch]
-    - [0x727910,  .bss, lib]
-  - dir: battle/item/dizzy_dial
+    - [0x726DD0, c, stop_watch]
+    - [0x727120]
+  - name: dizzy_dial
+    dir: battle/item
     type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x727910,       c, lib]
-    - [0x727CE0,   .data, lib]
-    - [0x72829C,   .data, dizzy_dial]
-    - [0x7285D0, .rodata, lib]
-    - [0x7285E0,    .bss, lib]
-  - dir: battle/item/please_come_back
+    - [0x727910, c, dizzy_dial]
+    - [0x727CE0]
+  - name: please_come_back
+    dir: battle/item
     type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7285E0,     c, lib]
-    - [0x728820, .data, lib]
-    - [0x728DDC, .data, please_come_back]
-    - [0x728EC0,  .bss, lib]
-  - dir: battle/item/egg_missile
+    - [0x7285E0, c, please_come_back]
+    - [0x728820]
+  - name: egg_missile
+    dir: battle/item
     type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x728EC0,       c, lib]
-    - [0x7291D0,   .data, lib]
-    - [0x729790,     ci4, egg_missile1, 32, 32]
-    - [0x729990, palette, egg_missile1]
-    - [0x7299B0,     ci4, egg_missile2, 32, 32]
-    - [0x729BB0, palette, egg_missile2]
-    - [0x729BD0,     ci4, egg_missile3, 32, 32]
-    - [0x729DD0, palette, egg_missile3]
-    - [0x729DF0,     ci4, egg_missile4, 32, 32]
-    - [0x729FF0, palette, egg_missile4]
-    - [0x72A010,   .data, egg_missile]
-    - [0x72A750,    .bss, lib]
-  - dir: battle/item/insecticide_herb
+    - [0x728EC0, c, egg_missile]
+    - start: 0x7291D0
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x7291D0, .data, egg_missile]
+      - [0x729790, ci4, egg_missile1, 32, 32]
+      - [0x729990, palette, egg_missile1]
+      - [0x7299B0, ci4, egg_missile2, 32, 32]
+      - [0x729BB0, palette, egg_missile2]
+      - [0x729BD0, ci4, egg_missile3, 32, 32]
+      - [0x729DD0, palette, egg_missile3]
+      - [0x729DF0, ci4, egg_missile4, 32, 32]
+      - [0x729FF0, palette, egg_missile4]
+      - [0x72A010]
+  - name: insecticide_herb
+    dir: battle/item
     type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72A750,       c, lib]
-    - [0x72AB70,   .data, lib]
-    - [0x72B130,     ci4, insecticide_herb, 32, 32]
-    - [0x72B330, palette, insecticide_herb]
-    - [0x72B350,   .data, insecticide_herb]
-    - [0x72B910,    .bss, lib]
-  - dir: battle/item/fright_jar
+    - [0x72A750, c, insecticide_herb]
+    - start: 0x72B130
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x72B130, ci4, insecticide_herb, 32, 32]
+      - [0x72B330, palette, insecticide_herb]
+      - [0x72B350]
+  - name: fright_jar
+    dir: battle/item
     type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72B910,     c, lib]
-    - [0x72BC60, .data, lib]
-    - [0x72C22C, .data, fright_jar]
-    - [0x72C5B0,  .bss, lib]
-  - dir: battle/item/mystery
+    - [0x72B910, c, fright_jar]
+    - [0x72BC60]
+  - name: mystery
+    dir: battle/item
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72C5B0,       c, lib]
-    - [0x72CF00,   .data, lib]
-    - [0x72D4C0,     ci4, mystery, 32, 32]
-    - [0x72D6C0, palette, mystery]
-    - [0x72D6E0,   .data, mystery]
-    - [0x72DB50, .rodata, lib]
-    - [0x72DB70,    .bss, lib]
-  - dir: battle/item/repel_gel
+    - [0x72C5B0, c, mystery]
+    - start: 0x72CF00
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x72CF00, .data, mystery]
+      - [0x72D4C0, ci4, mystery, 32, 32]
+      - [0x72D6C0, palette, mystery]
+      - [0x72D6E0]
+  - name: repel_gel
+    dir: battle/item
     type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72DB70,     c, lib]
-    - [0x72DE00, .data, lib]
-    - [0x72E3CC, .data, repel_gel]
-    - [0x72E530,  .bss, lib]
-  - dir: battle/item/life_shroom
+    - [0x72DB70, c, repel_gel]
+    - [0x72DE00]
+  - name: life_shroom
+    dir: battle/item
     type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72E530,     c, lib]
-    - [0x72EA20, .data, lib]
-    - [0x72EFEC, .data, life_shroom]
-    - [0x72F720,  .bss, lib]
-  - dir: battle/item/coconut
+    - [0x72E530, c, life_shroom]
+    - [0x72EA20]
+  - name: coconut
+    dir: battle/item
     type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72F720, c,       lib]
-    - [0x72F960, .data,   lib]
-    - [0x72FF20, ci4,     coconut, 32, 32]
-    - [0x730120, palette, coconut]
-    - [0x730140, .data,   coconut]
-    - [0x7305A0, .bss,    lib]
-  - dir: battle/item/electro_pop
+    - [0x72F720, c, coconut]
+    - start: 0x72F960
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x72F960, .data, coconut]
+      - [0x72FF20, ci4, coconut, 32, 32]
+      - [0x730120, palette, coconut]
+      - [0x730140]
+  - name: electro_pop
+    dir: battle/item
     type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7305A0,     c, lib]
-    - [0x730AE0, .data, lib]
-    - [0x73109C, .data, electro_pop]
-    - [0x731300,  .bss, lib]
-  - dir: battle/item/strange_cake
+    - [0x7305A0, c, electro_pop]
+    - [0x730AE0]
+  - name: strange_cake
+    dir: battle/item
     type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x731300,       c, lib]
-    - [0x731EA0,   .data, lib]
-    - [0x732470,     ci4, strange_cake1, 32, 32]
-    - [0x732670, palette, strange_cake1]
-    - [0x732690,     ci4, strange_cake2, 32, 32]
-    - [0x732890, palette, strange_cake2]
-    - [0x7328B0,     ci4, strange_cake3, 32, 32]
-    - [0x732AB0, palette, strange_cake3]
-    - [0x732AD0,   .data, strange_cake]
-    - [0x7330B0, .rodata, lib]
-    - [0x7330D0,    .bss, lib]
-  - dir: battle/item/food
+    - [0x731300, c, strange_cake]
+    - start: 0x731EA0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x731EA0, .data, strange_cake]
+      - [0x732470, ci4, strange_cake1, 32, 32]
+      - [0x732670, palette, strange_cake1]
+      - [0x732690, ci4, strange_cake2, 32, 32]
+      - [0x732890, palette, strange_cake2]
+      - [0x7328B0, ci4, strange_cake3, 32, 32]
+      - [0x732AB0, palette, strange_cake3]
+      - [0x732AD0]
+  - name: food
+    dir: battle/item
     type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7330D0,     c, lib]
-    - [0x733700, .data, lib]
-    - [0x733CBC, .data, food]
-    - [0x7345A0,  .bss, lib]
+    - [0x7330D0, c, food]
+    - [0x733700]
   - dir: battle/move/hammer
     type: code
     start: 0x7345A0
@@ -4189,8 +4164,7 @@ segments:
     - [0x7E4690, c]
     - [0x7E4D00, .data, 7E0E80]
     - [0x7E4EF0, data]
-    - [0x7E7380, .rodata, 7E2AA0]
-    - [0x7E73A0, .bss, 7E0E80]
+    - [0x7E7380]
   - name: machi
     dir: world/area_mac/machi
     type: code
@@ -4205,7 +4179,8 @@ segments:
     - [0x7E8470, data]
     - [0x7EA340, data]
     - [0x7EAA50, data]
-    - [0x7EACD8, rodata]
+    - [0x7EACD8, .rodata, 7E73A0]
+    - [0x7EAD00, .rodata, 7E7850]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -4228,8 +4203,7 @@ segments:
     - [0x7FDF30, data]
     - [0x7FE550, data]
     - [0x8000B0, data]
-    - [0x8006A0, rodata]
-    - [0x8006D0, rodata]
+    - [0x8006A0]
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code
@@ -4251,7 +4225,7 @@ segments:
     - [0x8202D0, data]
     - [0x822100, data]
     - [0x822460, data]
-    - [0x822F30, rodata]
+    - [0x822F30]
   - name: mac_02
     dir: world/area_mac/mac_02
     type: code
@@ -4270,7 +4244,7 @@ segments:
     - [0x8282E0, data]
     - [0x828F10, data]
     - [0x8313E0, data]
-    - [0x831490, rodata]
+    - [0x831490]
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
@@ -4289,7 +4263,7 @@ segments:
     - [0x83F500, data]
     - [0x83F6C0, data]
     - [0x8404A0, data]
-    - [0x842BB0, rodata]
+    - [0x842BB0]
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code
@@ -4313,8 +4287,7 @@ segments:
     - [0x8508F0, data]
     - [0x851410, data]
     - [0x8520A0, data]
-    - [0x852120, rodata]
-    - [0x852150, rodata]
+    - [0x852120]
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code
@@ -4331,10 +4304,7 @@ segments:
     - [0x857070, data]
     - [0x862BC0, data]
     - [0x864450, data]
-    - [0x8648B8, data]
-    - [0x864910, rodata]
-    - [0x864AE0, rodata]
-    - [0x864B20, rodata]
+    - [0x864910]
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
@@ -4348,8 +4318,7 @@ segments:
     - [0x8661D0, data]
     - [0x8666A0, data]
     - [0x867EF0, data]
-    - [0x869450, rodata]
-    - [0x869490, rodata]
+    - [0x869450]
   - name: tik_01
     dir: world/area_tik/tik_01
     type: code
@@ -4364,7 +4333,7 @@ segments:
     - [0x86A030, data]
     - [0x86B350, data]
     - [0x86BC00, data]
-    - [0x86C710, rodata]
+    - [0x86C710]
   - name: tik_02
     dir: world/area_tik/tik_02
     type: code
@@ -4379,7 +4348,7 @@ segments:
     - [0x86D190, data]
     - [0x86D800, data]
     - [0x86E2C0, data]
-    - [0x86EAF0, rodata]
+    - [0x86EAF0]
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
@@ -4395,7 +4364,7 @@ segments:
     - [0x871430, data]
     - [0x871730, data]
     - [0x8717F0, data]
-    - [0x871A10, rodata]
+    - [0x871A10]
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code
@@ -4410,7 +4379,7 @@ segments:
     - [0x8739F0, data]
     - [0x8742C0, data]
     - [0x8746E0, data]
-    - [0x874DA0, rodata]
+    - [0x874DA0]
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
@@ -4425,7 +4394,7 @@ segments:
     - [0x875D10, data]
     - [0x8765C0, data]
     - [0x876A50, data]
-    - [0x876ED0, rodata]
+    - [0x876ED0]
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
@@ -4439,7 +4408,7 @@ segments:
     - [0x8778F0, data]
     - [0x878F90, data]
     - [0x879860, data]
-    - [0x879BB0, rodata]
+    - [0x879BB0]
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code
@@ -4454,7 +4423,7 @@ segments:
     - [0x87D5D0, data]
     - [0x87E590, data]
     - [0x87E890, data]
-    - [0x87ED80, rodata]
+    - [0x87ED80]
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code
@@ -4469,7 +4438,7 @@ segments:
     - [0x87F9A0, data]
     - [0x881770, data]
     - [0x8819D0, data]
-    - [0x8821A0, rodata]
+    - [0x8821A0]
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code
@@ -4484,8 +4453,7 @@ segments:
     - [0x883500, data]
     - [0x8856E0, data]
     - [0x885A80, data]
-    - [0x886340, rodata]
-    - [0x886360, rodata]
+    - [0x886340]
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
@@ -4499,7 +4467,7 @@ segments:
     - [0x887800, data]
     - [0x887B20, data]
     - [0x8883F0, data]
-    - [0x888BC0, rodata]
+    - [0x888BC0]
   - name: tik_12
     dir: world/area_tik/tik_12
     type: code
@@ -4514,8 +4482,7 @@ segments:
     - [0x88AEA0, data]
     - [0x88BF60, data]
     - [0x88C810, data]
-    - [0x88D590, rodata]
-    - [0x88D5A0, rodata]
+    - [0x88D590]
   - name: tik_14
     dir: world/area_tik/tik_14
     type: code
@@ -4529,7 +4496,7 @@ segments:
     - [0x88DFF0, data]
     - [0x88F180, data]
     - [0x88FA30, data]
-    - [0x88FB90, rodata]
+    - [0x88FB90]
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
@@ -4543,7 +4510,7 @@ segments:
     - [0x890740, data]
     - [0x891890, data]
     - [0x8922A0, data]
-    - [0x892A10, rodata]
+    - [0x892A10]
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
@@ -4557,7 +4524,7 @@ segments:
     - [0x893D80, data]
     - [0x893E40, data]
     - [0x8944F0, data]
-    - [0x8956C0, rodata]
+    - [0x8956C0]
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
@@ -4571,7 +4538,7 @@ segments:
     - [0x895E20, data]
     - [0x896CA0, data]
     - [0x897450, data]
-    - [0x8975D0, rodata]
+    - [0x8975D0]
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
@@ -4584,7 +4551,7 @@ segments:
     - [0x898910, data]
     - [0x898990, data]
     - [0x899C90, data]
-    - [0x89A340, rodata]
+    - [0x89A340]
   - name: tik_20
     dir: world/area_tik/tik_20
     type: code
@@ -4597,8 +4564,7 @@ segments:
     - [0x89B490, data]
     - [0x89B530, data]
     - [0x89D200, data]
-    - [0x89D720, rodata]
-    - [0x89D740, rodata]
+    - [0x89D720]
   - name: tik_21
     dir: world/area_tik/tik_21
     type: code
@@ -4610,7 +4576,7 @@ segments:
     - [0x89E100, data]
     - [0x89E1A0, data]
     - [0x89FD70, data]
-    - [0x89FEA0, rodata]
+    - [0x89FEA0]
   - name: tik_22
     dir: world/area_tik/tik_22
     type: code
@@ -4622,7 +4588,7 @@ segments:
     - [0x89FEF0, c]
     - [0x8A0870, data]
     - [0x8A0930, data]
-    - [0x8A23C0, rodata]
+    - [0x8A23C0]
   - name: tik_23
     dir: world/area_tik/tik_23
     type: code
@@ -4635,7 +4601,7 @@ segments:
     - [0x8A3510, data]
     - [0x8A35A0, data]
     - [0x8A5340, data]
-    - [0x8A5A10, rodata]
+    - [0x8A5A10]
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
@@ -4650,8 +4616,7 @@ segments:
     - [0x8A69C0, data]
     - [0x8A7810, data]
     - [0x8A7A20, data]
-    - [0x8A7EF0, rodata]
-    - [0x8A7F20, rodata]
+    - [0x8A7EF0]
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
@@ -4664,7 +4629,7 @@ segments:
     - [0x8A8740, data]
     - [0x8A8800, data]
     - [0x8A93D0, data]
-    - [0x8A9A00, rodata]
+    - [0x8A9A00]
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code
@@ -4677,7 +4642,7 @@ segments:
     - [0x8A9F30, data]
     - [0x8AA1D0, data]
     - [0x8AA310, data]
-    - [0x8AA430, rodata]
+    - [0x8AA430]
   - name: kgr_02
     dir: world/area_kgr/kgr_02
     type: code
@@ -4691,7 +4656,7 @@ segments:
     - [0x8AABD0, data]
     - [0x8AADC0, data]
     - [0x8ABE60, data]
-    - [0x8ABF80, rodata]
+    - [0x8ABF80]
   - name: kmr_00
     dir: world/area_kmr/kmr_00
     type: code
@@ -4705,7 +4670,7 @@ segments:
     - [0x8ACFE0, data]
     - [0x8AEC40, data]
     - [0x8B0010, data]
-    - [0x8B0060, rodata]
+    - [0x8B0060]
   - name: kmr_02
     dir: world/area_kmr/kmr_02
     type: code
@@ -4726,9 +4691,7 @@ segments:
     - [0x8C51D0, data]
     - [0x8C7010, data]
     - [0x8C7B70, data]
-    - [0x8C7D90, rodata]
-    - [0x8C7DB0, rodata]
-    - [0x8C7F70, rodata]
+    - [0x8C7D90]
   - name: kmr_03
     dir: world/area_kmr/kmr_03
     type: code
@@ -4744,10 +4707,9 @@ segments:
     - [0x8C85E0, .data, 8C7F90]
     - [0x8C8680, .data, 8C8140]
     - [0x8C88E0, .data, 8C82B0]
-      # - [0x8C9400, data]
     - [0x8C9780, .data, 8C83A0]
     - [0x8CA2D0, .data, 8C85E0]
-    - [0x8CA8F0, .rodata, 8C8140]
+    - [0x8CA8F0]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
@@ -4760,9 +4722,8 @@ segments:
     - [0x8CAD70, data]
     - [0x8CAF00, data]
     - [0x8CB160, data]
-    # - [0x8CC35C, data]
     - [0x8CC4F0, data]
-    - [0x8CE060, rodata]
+    - [0x8CE060]
   - name: kmr_05
     dir: world/area_kmr/kmr_05
     type: code
@@ -4776,7 +4737,7 @@ segments:
     - [0x8CF880, data]
     - [0x8D0900, data]
     - [0x8D0940, data]
-    - [0x8D14A0, rodata]
+    - [0x8D14A0]
   - name: kmr_06
     dir: world/area_kmr/kmr_06
     type: code
@@ -4790,7 +4751,7 @@ segments:
     - [0x8D3340, data]
     - [0x8D3AC0, data]
     - [0x8D3B30, data]
-    - [0x8D3D50, rodata]
+    - [0x8D3D50]
   - name: kmr_07
     dir: world/area_kmr/kmr_07
     type: code
@@ -4801,7 +4762,7 @@ segments:
     - [0x8D3DC0, c]
     - [0x8D4880, data]
     - [0x8D49A0, data]
-    - [0x8D5C40, rodata]
+    - [0x8D5C40]
   - name: kmr_09
     dir: world/area_kmr/kmr_09
     type: code
@@ -4813,7 +4774,7 @@ segments:
     - [0x8D7330, data]
     - [0x8D73C0, data]
     - [0x8D83B0, data]
-    - [0x8D8460, rodata]
+    - [0x8D8460]
   - name: kmr_10
     dir: world/area_kmr/kmr_10
     type: code
@@ -4827,7 +4788,7 @@ segments:
     - [0x8D8B80, data]
     - [0x8D8E60, data]
     - [0x8D90F0, data]
-    - [0x8DA0F0, rodata]
+    - [0x8DA0F0]
   - name: kmr_11
     dir: world/area_kmr/kmr_11
     type: code
@@ -4843,11 +4804,9 @@ segments:
     - [0x8DB2F0, data]
     - [0x8DC270, data]
     - [0x8DE400, data]
-    - [0x8DFB88, data]
     - [0x8DFBB0, data]
     - [0x8E0190, data]
-    - [0x8EB190, rodata]
-    - [0x8EB1B0, rodata]
+    - [0x8EB190]
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code
@@ -4856,9 +4815,10 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0x8EB360, c, header]
+    - [0x8EB390, c, events]
     - [0x8EB390, .data, header]
     - [0x8EB420, .data, events]
-    - [0x8EBE10, .rodata, events]
+    - [0x8EBE10]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
     type: code
@@ -4887,8 +4847,7 @@ segments:
     - [0x8F61F0, data]
     - [0x8F66D0, data]
     - [0x8F9D30, data]
-    - [0x8FEE20, rodata]
-    - [0x8FEE50, rodata]
+    - [0x8FEE20]
   - name: kmr_21
     dir: world/area_kmr/kmr_21
     type: code
@@ -4899,7 +4858,7 @@ segments:
     - [0x8FEE80, c]
     - [0x8FEE90, c]
     - [0x8FF160, data]
-    - [0x8FF650, rodata]
+    - [0x8FF650]
   - name: kmr_22
     dir: world/area_kmr/kmr_22
     type: code
@@ -4912,8 +4871,7 @@ segments:
     - [0x8FF8B0, c]
     - [0x900380, data]
     - [0x900A80, data]
-    - [0x9079D0, rodata]
-    - [0x907A20, rodata]
+    - [0x9079D0]
   - name: kmr_23
     dir: world/area_kmr/kmr_23
     type: code
@@ -4924,7 +4882,7 @@ segments:
     - [0x907A30, c]
     - [0x907A40, c]
     - [0x908B00, data]
-    - [0x90B210, rodata]
+    - [0x90B210]
   - name: kmr_24
     dir: world/area_kmr/kmr_24
     type: code
@@ -4935,7 +4893,7 @@ segments:
     - [0x90B240, c]
     - [0x90B250, c]
     - [0x90B350, data]
-    - [0x90B6C0, rodata]
+    - [0x90B6C0]
   - name: kmr_30
     dir: world/area_kmr/kmr_30
     type: code
@@ -4958,7 +4916,7 @@ segments:
     - [0x90CC40, c]
     - [0x90CEF0, c]
     - [0x90CF20, data]
-    - [0x90F6A0, rodata]
+    - [0x90F6A0]
   - name: iwa_01
     dir: world/area_iwa/iwa_01
     type: code
@@ -4973,9 +4931,7 @@ segments:
     - [0x913070, data]
     - [0x9135D0, data]
     - [0x9154B0, data]
-    - [0x915A00, rodata]
-    - [0x915A20, rodata]
-    - [0x915A40, rodata]
+    - [0x915A00]
   - name: iwa_02
     dir: world/area_iwa/iwa_02
     type: code
@@ -4987,7 +4943,7 @@ segments:
     - [0x916E70, data]
     - [0x917170, data]
     - [0x917220, data]
-    - [0x918AA0, rodata]
+    - [0x918AA0]
   - name: iwa_03
     dir: world/area_iwa/iwa_03
     type: code
@@ -5000,8 +4956,7 @@ segments:
     - [0x919F00, data]
     - [0x91A6B0, data]
     - [0x91B510, data]
-    - [0x91B7D0, rodata]
-    - [0x91B7E0, rodata]
+    - [0x91B7D0]
   - name: iwa_04
     dir: world/area_iwa/iwa_04
     type: code
@@ -5013,7 +4968,7 @@ segments:
     - [0x91C9C0, data]
     - [0x91CA50, data]
     - [0x91CFA0, data]
-    - [0x91E460, rodata]
+    - [0x91E460]
   - name: iwa_10
     dir: world/area_iwa/iwa_10
     type: code
@@ -5033,7 +4988,7 @@ segments:
     - [0x921830, data]
     - [0x923FD0, data]
     - [0x9247B0, data]
-    - [0x9269D0, rodata]
+    - [0x9269D0]
   - name: iwa_11
     dir: world/area_iwa/iwa_11
     type: code
@@ -5047,7 +5002,7 @@ segments:
     - [0x926D00, data]
     - [0x926D90, data]
     - [0x927030, data]
-    - [0x929240, rodata]
+    - [0x929240]
   - name: sbk_00
     dir: world/area_sbk/sbk_00
     type: code
@@ -5057,9 +5012,9 @@ segments:
     subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, "929270"]
+    - [0x9292D0, .data, 929270]
     - [0x929A00, .data, 9292B0]
-    - [0x929A80, .rodata, "929270"]
+    - [0x929A80]
   - name: sbk_01
     dir: world/area_sbk/sbk_01
     type: code
@@ -5071,7 +5026,7 @@ segments:
     - [0x929AD0, c]
     - [0x929AF0, .data, 929A90]
     - [0x929E00, .data, 929AD0]
-    - [0x92A290, .rodata, 929A90]
+    - [0x92A290]
   - name: sbk_02
     dir: world/area_sbk/sbk_02
     type: code
@@ -5086,7 +5041,7 @@ segments:
     - [0x92B500, data]
     - [0x92E220, data]
     - [0x92F830, data]
-    - [0x92F880, rodata]
+    - [0x92F880]
   - name: sbk_03
     dir: world/area_sbk/sbk_03
     type: code
@@ -5098,7 +5053,7 @@ segments:
     - [0x92F8F0, c]
     - [0x92F910, data]
     - [0x92FC20, data]
-    - [0x9304B0, rodata]
+    - [0x9304B0]
   - name: sbk_04
     dir: world/area_sbk/sbk_04
     type: code
@@ -5110,7 +5065,7 @@ segments:
     - [0x930510, c]
     - [0x930530, data]
     - [0x930840, data]
-    - [0x930CD0, rodata]
+    - [0x930CD0]
   - name: sbk_05
     dir: world/area_sbk/sbk_05
     type: code
@@ -5123,7 +5078,7 @@ segments:
     - [0x930D50, data]
     - [0x9310F0, data]
     - [0x931130, data]
-    - [0x9325A0, rodata]
+    - [0x9325A0]
   - name: sbk_06
     dir: world/area_sbk/sbk_06
     type: code
@@ -5136,7 +5091,7 @@ segments:
     - [0x932940, data]
     - [0x932BF0, data]
     - [0x933160, data]
-    - [0x933C70, rodata]
+    - [0x933C70]
   - name: sbk_10
     dir: world/area_sbk/sbk_10
     type: code
@@ -5147,7 +5102,7 @@ segments:
     - [0x933C80, c]
     - [0x933CC0, data]
     - [0x933FD0, data]
-    - [0x934020, rodata]
+    - [0x934020]
   - name: sbk_11
     dir: world/area_sbk/sbk_11
     type: code
@@ -5159,7 +5114,7 @@ segments:
     - [0x934080, c]
     - [0x9341A0, data]
     - [0x934530, data]
-    - [0x934D20, rodata]
+    - [0x934D20]
   - name: sbk_12
     dir: world/area_sbk/sbk_12
     type: code
@@ -5171,7 +5126,7 @@ segments:
     - [0x934D80, c]
     - [0x934DA0, data]
     - [0x935130, data]
-    - [0x9357C0, rodata]
+    - [0x9357C0]
   - name: sbk_13
     dir: world/area_sbk/sbk_13
     type: code
@@ -5183,7 +5138,7 @@ segments:
     - [0x935820, c]
     - [0x935940, data]
     - [0x935CD0, data]
-    - [0x9366C0, rodata]
+    - [0x9366C0]
   - name: sbk_14
     dir: world/area_sbk/sbk_14
     type: code
@@ -5194,7 +5149,7 @@ segments:
     - [0x9366E0, c]
     - [0x936720, data]
     - [0x936B20, data]
-    - [0x936CA0, rodata]
+    - [0x936CA0]
   - name: sbk_15
     dir: world/area_sbk/sbk_15
     type: code
@@ -5206,7 +5161,7 @@ segments:
     - [0x936D10, c]
     - [0x936D30, data]
     - [0x9370C0, data]
-    - [0x937550, rodata]
+    - [0x937550]
   - name: sbk_16
     dir: world/area_sbk/sbk_16
     type: code
@@ -5218,7 +5173,7 @@ segments:
     - [0x9375B0, c]
     - [0x9377F0, data]
     - [0x937B00, data]
-    - [0x938570, rodata]
+    - [0x938570]
   - name: sbk_20
     dir: world/area_sbk/sbk_20
     type: code
@@ -5231,7 +5186,7 @@ segments:
     - [0x9386D0, data]
     - [0x9389F0, data]
     - [0x938DD0, data]
-    - [0x939540, rodata]
+    - [0x939540]
   - name: sbk_21
     dir: world/area_sbk/sbk_21
     type: code
@@ -5241,7 +5196,7 @@ segments:
     subsegments:
     - [0x939560, c]
     - [0x9395A0, data]
-    - [0x939910, rodata]
+    - [0x939910]
   - name: sbk_22
     dir: world/area_sbk/sbk_22
     type: code
@@ -5253,7 +5208,7 @@ segments:
     - [0x939970, c]
     - [0x939A90, data]
     - [0x93A610, data]
-    - [0x93A740, rodata]
+    - [0x93A740]
   - name: sbk_23
     dir: world/area_sbk/sbk_23
     type: code
@@ -5264,7 +5219,7 @@ segments:
     - [0x93A760, c]
     - [0x93A7A0, data]
     - [0x93AB20, data]
-    - [0x93AC00, rodata]
+    - [0x93AC00]
   - name: sbk_24
     dir: world/area_sbk/sbk_24
     type: code
@@ -5277,7 +5232,7 @@ segments:
     - [0x93AFB0, data]
     - [0x93B3C0, data]
     - [0x93B770, data]
-    - [0x93C260, rodata]
+    - [0x93C260]
   - name: sbk_25
     dir: world/area_sbk/sbk_25
     type: code
@@ -5291,7 +5246,7 @@ segments:
     - [0x93C9A0, data]
     - [0x93D110, data]
     - [0x93DB80, data]
-    - [0x93DCB0, rodata]
+    - [0x93DCB0]
   - name: sbk_26
     dir: world/area_sbk/sbk_26
     type: code
@@ -5305,7 +5260,7 @@ segments:
     - [0x93E070, data]
     - [0x93E390, data]
     - [0x93EB80, data]
-    - [0x93F590, rodata]
+    - [0x93F590]
   - name: sbk_30
     dir: world/area_sbk/sbk_30
     type: code
@@ -5315,8 +5270,7 @@ segments:
     subsegments:
     - [0x93F5B0, c]
     - [0x940DC0, data]
-    - [0x943E20, rodata]
-    - [0x943E50, rodata]
+    - [0x943E20]
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code
@@ -5328,7 +5282,7 @@ segments:
     - [0x944040, c]
     - [0x944140, data]
     - [0x9444D0, data]
-    - [0x944A40, rodata]
+    - [0x944A40]
   - name: sbk_32
     dir: world/area_sbk/sbk_32
     type: code
@@ -5339,7 +5293,7 @@ segments:
     - [0x944A60, c]
     - [0x944AA0, c]
     - [0x944BC0, data]
-    - [0x9459B0, rodata]
+    - [0x9459B0]
   - name: sbk_33
     dir: world/area_sbk/sbk_33
     type: code
@@ -5350,7 +5304,7 @@ segments:
     - [0x9459D0, c]
     - [0x945A10, data]
     - [0x945BA0, data]
-    - [0x945EA0, rodata]
+    - [0x945EA0]
   - name: sbk_34
     dir: world/area_sbk/sbk_34
     type: code
@@ -5363,7 +5317,7 @@ segments:
     - [0x946670, c]
     - [0x9468B0, data]
     - [0x947C80, data]
-    - [0x948690, rodata]
+    - [0x948690]
   - name: sbk_35
     dir: world/area_sbk/sbk_35
     type: code
@@ -5375,7 +5329,7 @@ segments:
     - [0x9486F0, c]
     - [0x948A30, data]
     - [0x949330, data]
-    - [0x949E40, rodata]
+    - [0x949E40]
   - name: sbk_36
     dir: world/area_sbk/sbk_36
     type: code
@@ -5387,7 +5341,7 @@ segments:
     - [0x949EA0, c]
     - [0x94A0E0, data]
     - [0x94A470, data]
-    - [0x94B380, rodata]
+    - [0x94B380]
   - name: sbk_40
     dir: world/area_sbk/sbk_40
     type: code
@@ -5400,7 +5354,7 @@ segments:
     - [0x94B4E0, data]
     - [0x94B800, data]
     - [0x94BF70, data]
-    - [0x94C020, rodata]
+    - [0x94C020]
   - name: sbk_41
     dir: world/area_sbk/sbk_41
     type: code
@@ -5411,7 +5365,7 @@ segments:
     - [0x94C040, c]
     - [0x94C080, data]
     - [0x94C400, data]
-    - [0x94C4E0, rodata]
+    - [0x94C4E0]
   - name: sbk_42
     dir: world/area_sbk/sbk_42
     type: code
@@ -5423,7 +5377,7 @@ segments:
     - [0x94C550, c]
     - [0x94C650, data]
     - [0x94C9E0, data]
-    - [0x94D150, rodata]
+    - [0x94D150]
   - name: sbk_43
     dir: world/area_sbk/sbk_43
     type: code
@@ -5434,7 +5388,7 @@ segments:
     - [0x94D170, c]
     - [0x94D1B0, data]
     - [0x94D530, data]
-    - [0x94D580, rodata]
+    - [0x94D580]
   - name: sbk_44
     dir: world/area_sbk/sbk_44
     type: code
@@ -5446,7 +5400,7 @@ segments:
     - [0x94D5E0, c]
     - [0x94D700, data]
     - [0x94DA90, data]
-    - [0x94E480, rodata]
+    - [0x94E480]
   - name: sbk_45
     dir: world/area_sbk/sbk_45
     type: code
@@ -5457,7 +5411,7 @@ segments:
     - [0x94E4A0, c]
     - [0x94E4E0, data]
     - [0x94E8E0, data]
-    - [0x94E980, rodata]
+    - [0x94E980]
   - name: sbk_46
     dir: world/area_sbk/sbk_46
     type: code
@@ -5472,7 +5426,7 @@ segments:
     - [0x94F070, data]
     - [0x94FA60, data]
     - [0x950570, data]
-    - [0x9505F0, rodata]
+    - [0x9505F0]
   - name: sbk_50
     dir: world/area_sbk/sbk_50
     type: code
@@ -5482,7 +5436,7 @@ segments:
     subsegments:
     - [0x950610, c]
     - [0x950650, data]
-    - [0x950950, rodata]
+    - [0x950950]
   - name: sbk_51
     dir: world/area_sbk/sbk_51
     type: code
@@ -5494,7 +5448,7 @@ segments:
     - [0x9509B0, c]
     - [0x950AD0, data]
     - [0x950E60, data]
-    - [0x951650, rodata]
+    - [0x951650]
   - name: sbk_52
     dir: world/area_sbk/sbk_52
     type: code
@@ -5505,7 +5459,7 @@ segments:
     - [0x951670, c]
     - [0x9516B0, data]
     - [0x951A30, data]
-    - [0x951AC0, rodata]
+    - [0x951AC0]
   - name: sbk_53
     dir: world/area_sbk/sbk_53
     type: code
@@ -5517,7 +5471,7 @@ segments:
     - [0x951B20, c]
     - [0x951B40, data]
     - [0x951ED0, data]
-    - [0x952560, rodata]
+    - [0x952560]
   - name: sbk_54
     dir: world/area_sbk/sbk_54
     type: code
@@ -5528,7 +5482,7 @@ segments:
     - [0x952580, c]
     - [0x9525C0, data]
     - [0x952940, data]
-    - [0x952A20, rodata]
+    - [0x952A20]
   - name: sbk_55
     dir: world/area_sbk/sbk_55
     type: code
@@ -5542,7 +5496,7 @@ segments:
     - [0x952CF0, data]
     - [0x953090, data]
     - [0x953520, data]
-    - [0x953FA0, rodata]
+    - [0x953FA0]
   - name: sbk_56
     dir: world/area_sbk/sbk_56
     type: code
@@ -5554,7 +5508,7 @@ segments:
     - [0x954D80, c]
     - [0x954FC0, data]
     - [0x9553F0, data]
-    - [0x9569D0, rodata]
+    - [0x9569D0]
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
@@ -5566,7 +5520,7 @@ segments:
     - [0x956A30, c]
     - [0x956A50, data]
     - [0x956CF0, data]
-    - [0x956F80, rodata]
+    - [0x956F80]
   - name: sbk_61
     dir: world/area_sbk/sbk_61
     type: code
@@ -5577,7 +5531,7 @@ segments:
     - [0x956F90, c]
     - [0x956FD0, data]
     - [0x9572E0, data]
-    - [0x957330, rodata]
+    - [0x957330]
   - name: sbk_62
     dir: world/area_sbk/sbk_62
     type: code
@@ -5589,7 +5543,7 @@ segments:
     - [0x957390, c]
     - [0x9573B0, data]
     - [0x9576C0, data]
-    - [0x957D50, rodata]
+    - [0x957D50]
   - name: sbk_63
     dir: world/area_sbk/sbk_63
     type: code
@@ -5601,7 +5555,7 @@ segments:
     - [0x957DB0, c]
     - [0x957DD0, data]
     - [0x9580E0, data]
-    - [0x958570, rodata]
+    - [0x958570]
   - name: sbk_64
     dir: world/area_sbk/sbk_64
     type: code
@@ -5612,7 +5566,7 @@ segments:
     - [0x958590, c]
     - [0x9585D0, data]
     - [0x9588E0, data]
-    - [0x958930, rodata]
+    - [0x958930]
   - name: sbk_65
     dir: world/area_sbk/sbk_65
     type: code
@@ -5622,7 +5576,7 @@ segments:
     subsegments:
     - [0x958950, c]
     - [0x958990, data]
-    - [0x958C90, rodata]
+    - [0x958C90]
   - name: sbk_66
     dir: world/area_sbk/sbk_66
     type: code
@@ -5636,7 +5590,7 @@ segments:
     - [0x9592E0, data]
     - [0x95A240, data]
     - [0x95AD50, data]
-    - [0x95AEA0, rodata]
+    - [0x95AEA0]
   - name: sbk_99
     dir: world/area_sbk/sbk_99
     type: code
@@ -5644,9 +5598,10 @@ segments:
     start: 0x95AEB0
     vram: 0x80240000
     subsegments:
+    - [0x95AEB0, c]
     - [0x95AEB0, data]
     - [0x95B190, data]
-    - [0x95B1F0, rodata]
+    - [0x95B1F0]
   - name: dro_01
     dir: world/area_dro/dro_01
     type: code
@@ -5660,8 +5615,7 @@ segments:
     - [0x95E7A0,       c, 95E7A0]
     - [0x95ECC0,   .data, 95B7E0]
     - [0x9685C0,   .data, 95E7A0]
-    - [0x968FD0, .rodata, 95B7E0]
-    - [0x9691C0,    .bss, 95B7E0]
+    - [0x968FD0]
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
@@ -5672,8 +5626,7 @@ segments:
     - [0x9691C0,       c, 9691C0]
     - [0x9694C0,       c, 9694C0]
     - [0x96CC30,   .data, 9694C0]
-    - [0x9780D0, .rodata, 9694C0]
-    - [0x978140,    .bss, 9694C0]
+    - [0x9780D0]
   - name: isk_01
     dir: world/area_isk/isk_01
     type: code
@@ -5681,10 +5634,11 @@ segments:
     start: 0x978140
     vram: 0x80240000
     subsegments:
+    - [0x978140, c]
     - [0x978140, data]
     - [0x978360, data]
     - [0x9785C0, data]
-    - [0x978700, rodata]
+    - [0x978700]
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
@@ -5700,7 +5654,7 @@ segments:
     - [0x978DE0, data]
     - [0x979390, data]
     - [0x9793F0, data]
-    - [0x979E40, rodata]
+    - [0x979E40]
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
@@ -5708,10 +5662,11 @@ segments:
     start: 0x979E50
     vram: 0x80240000
     subsegments:
+    - [0x979E50, c]
     - [0x979E50, data]
     - [0x97A210, data]
     - [0x97B340, data]
-    - [0x97B620, rodata]
+    - [0x97B620]
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code
@@ -5727,8 +5682,7 @@ segments:
     - [0x97CA70, data]
     - [0x97CB60, data]
     - [0x97D2F0, data]
-    - [0x97DA40, rodata]
-    - [0x97DAC0, rodata]
+    - [0x97DA40]
   - name: isk_05
     dir: world/area_isk/isk_05
     type: code
@@ -5740,10 +5694,7 @@ segments:
     - [0x97F990, data]
     - [0x97FCE0, data]
     - [0x97FE50, data]
-    - [0x980970, rodata]
-    - [0x980980, rodata]
-    - [0x9809C8, rodata]
-    - [0x980A08, rodata]
+    - [0x980970]
   - name: isk_06
     dir: world/area_isk/isk_06
     type: code
@@ -5751,10 +5702,11 @@ segments:
     start: 0x980A20
     vram: 0x80240000
     subsegments:
+    - [0x980A20, c]
     - [0x980A20, data]
     - [0x980D40, data]
     - [0x982150, data]
-    - [0x982430, rodata]
+    - [0x982430]
   - name: isk_07
     dir: world/area_isk/isk_07
     type: code
@@ -5771,7 +5723,7 @@ segments:
     - [0x983AD0, data]
     - [0x984390, data]
     - [0x9845D0, data]
-    - [0x984E20, rodata]
+    - [0x984E20]
   - name: isk_08
     dir: world/area_isk/isk_08
     type: code
@@ -5783,7 +5735,7 @@ segments:
     - [0x985720, data]
     - [0x985B00, data]
     - [0x986090, data]
-    - [0x986460, rodata]
+    - [0x986460]
   - name: isk_09
     dir: world/area_isk/isk_09
     type: code
@@ -5798,7 +5750,7 @@ segments:
     - [0x986BD0, data]
     - [0x987560, data]
     - [0x988290, data]
-    - [0x988B50, rodata]
+    - [0x988B50]
   - name: isk_10
     dir: world/area_isk/isk_10
     type: code
@@ -5809,8 +5761,7 @@ segments:
     - [0x988B60, c]
     - [0x989910, data]
     - [0x98A580, data]
-    - [0x98A9E0, rodata]
-    - [0x98AA00, rodata]
+    - [0x98A9E0]
   - name: isk_11
     dir: world/area_isk/isk_11
     type: code
@@ -5826,7 +5777,7 @@ segments:
     - [0x98B330, data]
     - [0x98B620, data]
     - [0x98D3C0, data]
-    - [0x98D620, rodata]
+    - [0x98D620]
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code
@@ -5834,11 +5785,12 @@ segments:
     start: 0x98D640
     vram: 0x80240000
     subsegments:
+    - [0x98D640, c]
     - [0x98D640, data]
     - [0x98DA70, data]
     - [0x98DCB0, data]
     - [0x98ED40, data]
-    - [0x98F7C0, rodata]
+    - [0x98F7C0]
   - name: isk_13
     dir: world/area_isk/isk_13
     type: code
@@ -5849,10 +5801,7 @@ segments:
     - [0x98F7E0, c]
     - [0x991850, data]
     - [0x991A90, data]
-    - [0x992680, rodata]
-    - [0x992690, rodata]
-    - [0x9926D8, rodata]
-    - [0x992718, rodata]
+    - [0x992680]
   - name: isk_14
     dir: world/area_isk/isk_14
     type: code
@@ -5864,9 +5813,7 @@ segments:
     - [0x994490, data]
     - [0x9946D0, data]
     - [0x994860, data]
-    - [0x995150, rodata]
-    - [0x995160, rodata]
-    - [0x9951A8, rodata]
+    - [0x995150]
   - name: isk_16
     dir: world/area_isk/isk_16
     type: code
@@ -5880,7 +5827,7 @@ segments:
     - [0x996410, data]
     - [0x996C40, data]
     - [0x997E20, data]
-    - [0x997F40, rodata]
+    - [0x997F40]
   - name: isk_18
     dir: world/area_isk/isk_18
     type: code
@@ -5892,7 +5839,7 @@ segments:
     - [0x998860, data]
     - [0x998B90, data]
     - [0x999520, data]
-    - [0x9996D0, rodata]
+    - [0x9996D0]
   - name: isk_19
     dir: world/area_isk/isk_19
     type: code
@@ -5900,10 +5847,11 @@ segments:
     start: 0x999740
     vram: 0x80240000
     subsegments:
+    - [0x999740, c]
     - [0x999740, data]
     - [0x999960, data]
     - [0x999BA0, data]
-    - [0x999C60, rodata]
+    - [0x999C60]
   - name: trd_00
     dir: world/area_trd/trd_00
     type: code
@@ -5918,7 +5866,7 @@ segments:
     - [0x99A410, data]
     - [0x99AFB0, data]
     - [0x99B280, data]
-    - [0x99C970, rodata]
+    - [0x99C970]
   - name: trd_01
     dir: world/area_trd/trd_01
     type: code
@@ -5933,9 +5881,7 @@ segments:
     - [0x99E110, data]
     - [0x99F960, data]
     - [0x99FD80, data]
-    - [0x9A0DB0, rodata]
-    - [0x9A0DD0, rodata]
-    - [0x9A0E30, rodata]
+    - [0x9A0DB0]
   - name: trd_02
     dir: world/area_trd/trd_02
     type: code
@@ -5949,8 +5895,7 @@ segments:
     - [0x9A2B00, data]
     - [0x9A3870, data]
     - [0x9A3AB0, data]
-    - [0x9A42B0, rodata]
-    - [0x9A4320, rodata]
+    - [0x9A42B0]
   - name: trd_03
     dir: world/area_trd/trd_03
     type: code
@@ -5965,7 +5910,7 @@ segments:
     - [0x9A51A0, data]
     - [0x9A5FF0, data]
     - [0x9A60F0, data]
-    - [0x9A8380, rodata]
+    - [0x9A8380]
   - name: trd_04
     dir: world/area_trd/trd_04
     type: code
@@ -5979,9 +5924,7 @@ segments:
     - [0x9ABC90, data]
     - [0x9ABD70, data]
     - [0x9AD960, data]
-    - [0x9AE2B0, rodata]
-    - [0x9AE330, rodata]
-    - [0x9AE6B8, rodata]
+    - [0x9AE2B0]
   - name: trd_05
     dir: world/area_trd/trd_05
     type: code
@@ -5995,7 +5938,7 @@ segments:
     - [0x9AEFC0, data]
     - [0x9AF7C0, data]
     - [0x9AF820, data]
-    - [0x9B1760, rodata]
+    - [0x9B1760]
   - name: trd_06
     dir: world/area_trd/trd_06
     type: code
@@ -6010,8 +5953,7 @@ segments:
     - [0x9B24B0, data]
     - [0x9B2610, data]
     - [0x9B5FC0, data]
-    - [0x9B6940, rodata]
-    - [0x9B6950, rodata]
+    - [0x9B6940]
   - name: trd_07
     dir: world/area_trd/trd_07
     type: code
@@ -6025,9 +5967,7 @@ segments:
     - [0x9B9310, data]
     - [0x9B9760, data]
     - [0x9BA050, data]
-    - [0x9BB190, rodata]
-    - [0x9BB200, rodata]
-    - [0x9BB258, rodata]
+    - [0x9BB190]
   - name: trd_08
     dir: world/area_trd/trd_08
     type: code
@@ -6040,7 +5980,7 @@ segments:
     - [0x9BBCC0, data]
     - [0x9BBD50, data]
     - [0x9BC1A0, data]
-    - [0x9BD650, rodata]
+    - [0x9BD650]
   - name: trd_09
     dir: world/area_trd/trd_09
     type: code
@@ -6055,7 +5995,7 @@ segments:
     - [0x9BDD80, data]
     - [0x9BDE80, data]
     - [0x9C24C0, data]
-    - [0x9C28F0, rodata]
+    - [0x9C28F0]
   - name: trd_10
     dir: world/area_trd/trd_10
     type: code
@@ -6068,7 +6008,7 @@ segments:
     - [0x9C3160, data]
     - [0x9C3A30, data]
     - [0x9C4FC0, data]
-    - [0x9C53B0, rodata]
+    - [0x9C53B0]
   - name: nok_01
     dir: world/area_nok/nok_01
     type: code
@@ -6082,12 +6022,11 @@ segments:
     - [0x9C8350, data]
     - [0x9C8920, data]
     - [0x9C89E0, data]
-    - [0x9CB328, data]
     - [0x9D4EF0, data]
     - [0x9D5110, data]
     - [0x9D5BF0, data]
     - [0x9D5F80, data]
-    - [0x9D6E60, rodata]
+    - [0x9D6E60]
   - name: nok_02
     dir: world/area_nok/nok_02
     type: code
@@ -6111,8 +6050,7 @@ segments:
     - [0x9E9420, data]
     - [0x9EA630, data]
     - [0x9EB3D0, data]
-    - [0x9EB620, rodata]
-    - [0x9EB640, rodata]
+    - [0x9EB620]
   - name: nok_03
     dir: world/area_nok/nok_03
     type: code
@@ -6124,7 +6062,7 @@ segments:
     - [0x9EC610, data]
     - [0x9EC700, data]
     - [0x9ECBD0, data]
-    - [0x9EDB90, rodata]
+    - [0x9EDB90]
   - name: nok_04
     dir: world/area_nok/nok_04
     type: code
@@ -6137,10 +6075,7 @@ segments:
     - [0x9EEB20, data]
     - [0x9EEC40, data]
     - [0x9EEEB0, data]
-    - [0x9EF338, data]
-    - [0x9F4A00, rodata]
-    - [0x9F4A10, rodata]
-    - [0x9F4A30, rodata]
+    - [0x9F4A00]
   - name: nok_11
     dir: world/area_nok/nok_11
     type: code
@@ -6152,8 +6087,7 @@ segments:
     - [0x9F6990, data]
     - [0x9F6A50, data]
     - [0x9F7180, data]
-    - [0x9FA720, rodata]
-    - [0x9FA790, rodata]
+    - [0x9FA720]
   - name: nok_12
     dir: world/area_nok/nok_12
     type: code
@@ -6172,8 +6106,7 @@ segments:
     - [0x9FD410, data]
     - [0x9FE000, data]
     - [0x9FFB70, data]
-    - [0xA00250, rodata]
-    - [0xA002C0, rodata]
+    - [0xA00250]
   - name: nok_13
     dir: world/area_nok/nok_13
     type: code
@@ -6188,9 +6121,7 @@ segments:
     - [0xA02040, data]
     - [0xA02420, data]
     - [0xA026C0, data]
-    - [0xA027B0, rodata]
-    - [0xA027D0, rodata]
-    - [0xA02820, rodata]
+    - [0xA027B0]
   - name: nok_14
     dir: world/area_nok/nok_14
     type: code
@@ -6206,9 +6137,7 @@ segments:
     - [0xA052F0, data]
     - [0xA057B0, data]
     - [0xA06110, data]
-    - [0xA06DF0, rodata]
-    - [0xA06E60, rodata]
-    - [0xA06EB8, rodata]
+    - [0xA06DF0]
   - name: nok_15
     dir: world/area_nok/nok_15
     type: code
@@ -6222,10 +6151,7 @@ segments:
     - [0xA09750, data]
     - [0xA0AB50, data]
     - [0xA0AB90, data]
-    - [0xA0BBD0, rodata]
-    - [0xA0BBF0, rodata]
-    - [0xA0BC50, rodata]
-    - [0xA0BCA8, rodata]
+    - [0xA0BBD0]
   - name: hos_00
     dir: world/area_hos/hos_00
     type: code
@@ -6243,9 +6169,7 @@ segments:
     - [0xA0D7A0, data]
     - [0xA0E520, data]
     - [0xA107E0, data]
-    - [0xA10820, rodata]
-    - [0xA10830, rodata]
-    - [0xA10870, rodata]
+    - [0xA10820]
   - name: hos_01
     dir: world/area_hos/hos_01
     type: code
@@ -6261,7 +6185,7 @@ segments:
     - [0xA12E00, data]
     - [0xA15860, data]
     - [0xA158D0, data]
-    - [0xA161F0, rodata]
+    - [0xA161F0]
   - name: hos_02
     dir: world/area_hos/hos_02
     type: code
@@ -6277,8 +6201,7 @@ segments:
     - [0xA19530, data]
     - [0xA1A6A0, data]
     - [0xA1ADA0, data]
-    - [0xA1AFF0, rodata]
-    - [0xA1B098, rodata]
+    - [0xA1AFF0]
   - name: hos_03
     dir: world/area_hos/hos_03
     type: code
@@ -6297,8 +6220,7 @@ segments:
     - [0xA23120, data]
     - [0xA26C00, data]
     - [0xA26E00, data]
-    - [0xA26E50, rodata]
-    - [0xA26E70, rodata]
+    - [0xA26E50]
   - name: hos_04
     dir: world/area_hos/hos_04
     type: code
@@ -6316,12 +6238,9 @@ segments:
     - [0xA285C0, data]
     - [0xA28920, data]
     - [0xA28990, data]
-    # - [0xA289F4, data]
     - [0xA290B0, data]
     - [0xA2A120, data]
-    - [0xA2A1C0, rodata]
-    - [0xA2A1E0, rodata]
-    - [0xA2A1F8, rodata]
+    - [0xA2A1C0]
   - name: hos_05
     dir: world/area_hos/hos_05
     type: code
@@ -6339,10 +6258,7 @@ segments:
     - [0xA30810, data]
     - [0xA37CD0, data]
     - [0xA37E70, data]
-    - [0xA39400, rodata]
-    - [0xA39410, rodata]
-    - [0xA394A0, rodata]
-    - [0xA394C0, rodata]
+    - [0xA39400]
   - name: hos_06
     dir: world/area_hos/hos_06
     type: code
@@ -6359,7 +6275,7 @@ segments:
     - [0xA3BAE0, data]
     - [0xA3C090, data]
     - [0xA3DAB0, data]
-    - [0xA3F730, rodata]
+    - [0xA3F730]
   - name: hos_10
     dir: world/area_hos/hos_10
     type: code
@@ -6375,7 +6291,7 @@ segments:
     - [0xA40540, data]
     - [0xA42DA0, data]
     - [0xA43920, data]
-    - [0xA45910, rodata]
+    - [0xA45910]
   - name: hos_20
     dir: world/area_hos/hos_20
     type: code
@@ -6387,7 +6303,7 @@ segments:
     - [0xA45C40, c]
     - [0xA45C90, data]
     - [0xA46350, data]
-    - [0xA46F40, rodata]
+    - [0xA46F40]
   - name: kpa_01
     dir: world/area_kpa/kpa_01
     type: code
@@ -6401,7 +6317,7 @@ segments:
     - [0xA47A60, data]
     - [0xA47D70, data]
     - [0xA48500, data]
-    - [0xA48550, rodata]
+    - [0xA48550]
   - name: kpa_03
     dir: world/area_kpa/kpa_03
     type: code
@@ -6415,9 +6331,7 @@ segments:
     - [0xA4A480, data]
     - [0xA4A520, data]
     - [0xA4A750, data]
-    - [0xA4BE30, rodata]
-    - [0xA4BEA0, rodata]
-    - [0xA4BED8, rodata]
+    - [0xA4BE30]
   - name: kpa_04
     dir: world/area_kpa/kpa_04
     type: code
@@ -6428,7 +6342,7 @@ segments:
     - [0xA4BF60, c]
     - [0xA4C0D0, data]
     - [0xA4C1A0, data]
-    - [0xA4CA10, rodata]
+    - [0xA4CA10]
   - name: kpa_08
     dir: world/area_kpa/kpa_08
     type: code
@@ -6442,8 +6356,7 @@ segments:
     - [0xA4DF90, data]
     - [0xA4E250, data]
     - [0xA4E710, data]
-    - [0xA4EF30, rodata]
-    - [0xA4EF78, rodata]
+    - [0xA4EF30]
   - name: kpa_09
     dir: world/area_kpa/kpa_09
     type: code
@@ -6457,7 +6370,7 @@ segments:
     - [0xA503C0, data]
     - [0xA506D0, data]
     - [0xA50B90, data]
-    - [0xA517B0, rodata]
+    - [0xA517B0]
   - name: kpa_10
     dir: world/area_kpa/kpa_10
     type: code
@@ -6468,7 +6381,7 @@ segments:
     - [0xA51980, c]
     - [0xA51C90, data]
     - [0xA51D90, data]
-    - [0xA528A0, rodata]
+    - [0xA528A0]
   - name: kpa_11
     dir: world/area_kpa/kpa_11
     type: code
@@ -6482,8 +6395,7 @@ segments:
     - [0xA534C0, data]
     - [0xA53D80, data]
     - [0xA53E30, data]
-    - [0xA548D0, rodata]
-    - [0xA548F0, rodata]
+    - [0xA548D0]
   - name: kpa_12
     dir: world/area_kpa/kpa_12
     type: code
@@ -6496,7 +6408,7 @@ segments:
     - [0xA54CA0, c]
     - [0xA54DC0, data]
     - [0xA55620, data]
-    - [0xA55F00, rodata]
+    - [0xA55F00]
   - name: kpa_13
     dir: world/area_kpa/kpa_13
     type: code
@@ -6510,7 +6422,7 @@ segments:
     - [0xA56390, data]
     - [0xA56BD0, data]
     - [0xA56CA0, data]
-    - [0xA57490, rodata]
+    - [0xA57490]
   - name: kpa_14
     dir: world/area_kpa/kpa_14
     type: code
@@ -6525,7 +6437,7 @@ segments:
     - [0xA57E40, data]
     - [0xA58DB0, data]
     - [0xA59060, data]
-    - [0xA59370, rodata]
+    - [0xA59370]
   - name: kpa_15
     dir: world/area_kpa/kpa_15
     type: code
@@ -6537,7 +6449,7 @@ segments:
     - [0xA596A0, c]
     - [0xA59960, data]
     - [0xA59E30, data]
-    - [0xA5A020, rodata]
+    - [0xA5A020]
   - name: kpa_16
     dir: world/area_kpa/kpa_16
     type: code
@@ -6549,7 +6461,7 @@ segments:
     - [0xA5A340, c]
     - [0xA5A3D0, data]
     - [0xA5B180, data]
-    - [0xA5CA10, rodata]
+    - [0xA5CA10]
   - name: kpa_17
     dir: world/area_kpa/kpa_17
     type: code
@@ -6557,11 +6469,12 @@ segments:
     start: 0xA5CA20
     vram: 0x80240000
     subsegments:
+    - [0xA5CA20, c]
     - [0xA5CA20, data]
     - [0xA5CB00, data]
     - [0xA5CBD0, data]
     - [0xA5CE90, data]
-    - [0xA5E0B0, rodata]
+    - [0xA5E0B0]
   - name: kpa_32
     dir: world/area_kpa/kpa_32
     type: code
@@ -6573,7 +6486,7 @@ segments:
     - [0xA5E3D0, data]
     - [0xA5E4C0, data]
     - [0xA5E500, data]
-    - [0xA5F060, rodata]
+    - [0xA5F060]
   - name: kpa_33
     dir: world/area_kpa/kpa_33
     type: code
@@ -6585,7 +6498,7 @@ segments:
     - [0xA5F390, data]
     - [0xA5F480, data]
     - [0xA5F4C0, data]
-    - [0xA60020, rodata]
+    - [0xA60020]
   - name: kpa_40
     dir: world/area_kpa/kpa_40
     type: code
@@ -6593,9 +6506,10 @@ segments:
     start: 0xA60040
     vram: 0x80240000
     subsegments:
+    - [0xA60040, c]
     - [0xA60040, data]
     - [0xA60130, data]
-    - [0xA60450, rodata]
+    - [0xA60450]
   - name: kpa_41
     dir: world/area_kpa/kpa_41
     type: code
@@ -6603,9 +6517,10 @@ segments:
     start: 0xA60470
     vram: 0x80240000
     subsegments:
+    - [0xA60470, c]
     - [0xA60470, data]
     - [0xA60560, data]
-    - [0xA609B0, rodata]
+    - [0xA609B0]
   - name: kpa_50
     dir: world/area_kpa/kpa_50
     type: code
@@ -6616,7 +6531,7 @@ segments:
     - [0xA609D0, c]
     - [0xA623F0, data]
     - [0xA624D0, data]
-    - [0xA63E60, rodata]
+    - [0xA63E60]
   - name: kpa_51
     dir: world/area_kpa/kpa_51
     type: code
@@ -6629,10 +6544,7 @@ segments:
     - [0xA65CB0, data]
     - [0xA65D80, data]
     - [0xA660E0, data]
-    - [0xA66FB0, rodata]
-    - [0xA66FE0, rodata]
-    - [0xA67018, rodata]
-    - [0xA67098, rodata]
+    - [0xA66FB0]
   - name: kpa_52
     dir: world/area_kpa/kpa_52
     type: code
@@ -6646,8 +6558,7 @@ segments:
     - [0xA68510, data]
     - [0xA68710, data]
     - [0xA68B40, data]
-    - [0xA6AAC0, rodata]
-    - [0xA6AAE0, rodata]
+    - [0xA6AAC0]
   - name: kpa_53
     dir: world/area_kpa/kpa_53
     type: code
@@ -6660,8 +6571,7 @@ segments:
     - [0xA6AEE0, data]
     - [0xA6B270, data]
     - [0xA6CA80, data]
-    - [0xA6CAC0, rodata]
-    - [0xA6CAF0, rodata]
+    - [0xA6CAC0]
   - name: kpa_60
     dir: world/area_kpa/kpa_60
     type: code
@@ -6672,7 +6582,7 @@ segments:
     - [0xA6CB00, c]
     - [0xA6CBE0, c]
     - [0xA6CEF0, data]
-    - [0xA6E3A0, rodata]
+    - [0xA6E3A0]
   - name: kpa_61
     dir: world/area_kpa/kpa_61
     type: code
@@ -6686,9 +6596,7 @@ segments:
     - [0xA707F0, data]
     - [0xA70FE0, data]
     - [0xA71FC0, data]
-    - [0xA720A0, rodata]
-    - [0xA72110, rodata]
-    - [0xA72148, rodata]
+    - [0xA720A0]
   - name: kpa_62
     dir: world/area_kpa/kpa_62
     type: code
@@ -6700,7 +6608,7 @@ segments:
     - [0xA72300, c]
     - [0xA72610, data]
     - [0xA72740, data]
-    - [0xA73590, rodata]
+    - [0xA73590]
   - name: kpa_63
     dir: world/area_kpa/kpa_63
     type: code
@@ -6713,7 +6621,7 @@ segments:
     - [0xA738E0, data]
     - [0xA73920, data]
     - [0xA73D30, data]
-    - [0xA74860, rodata]
+    - [0xA74860]
   - name: kpa_70
     dir: world/area_kpa/kpa_70
     type: code
@@ -6726,7 +6634,7 @@ segments:
     - [0xA75360, data]
     - [0xA75440, data]
     - [0xA75B70, data]
-    - [0xA78450, rodata]
+    - [0xA78450]
   - name: kpa_81
     dir: world/area_kpa/kpa_81
     type: code
@@ -6739,7 +6647,7 @@ segments:
     - [0xA78900, data]
     - [0xA789F0, data]
     - [0xA79200, data]
-    - [0xA7A4C0, rodata]
+    - [0xA7A4C0]
   - name: kpa_82
     dir: world/area_kpa/kpa_82
     type: code
@@ -6752,7 +6660,7 @@ segments:
     - [0xA7A940, data]
     - [0xA7AA10, data]
     - [0xA7AF80, data]
-    - [0xA83460, rodata]
+    - [0xA83460]
   - name: kpa_83
     dir: world/area_kpa/kpa_83
     type: code
@@ -6765,7 +6673,7 @@ segments:
     - [0xA83500, data]
     - [0xA835D0, data]
     - [0xA83AC0, data]
-    - [0xA86780, rodata]
+    - [0xA86780]
   - name: kpa_90
     dir: world/area_kpa/kpa_90
     type: code
@@ -6773,9 +6681,10 @@ segments:
     start: 0xA867B0
     vram: 0x80240000
     subsegments:
+    - [0xA867B0, c]
     - [0xA867B0, data]
     - [0xA86880, data]
-    - [0xA86A40, rodata]
+    - [0xA86A40]
   - name: kpa_91
     dir: world/area_kpa/kpa_91
     type: code
@@ -6789,8 +6698,7 @@ segments:
     - [0xA88420, data]
     - [0xA88730, data]
     - [0xA8C230, data]
-    - [0xA8C470, rodata]
-    - [0xA8C480, rodata]
+    - [0xA8C470]
   - name: kpa_94
     dir: world/area_kpa/kpa_94
     type: code
@@ -6798,9 +6706,10 @@ segments:
     start: 0xA8C7C0
     vram: 0x80240000
     subsegments:
+    - [0xA8C7C0, c]
     - [0xA8C7C0, data]
     - [0xA8C890, data]
-    - [0xA8CA70, rodata]
+    - [0xA8CA70]
   - name: kpa_95
     dir: world/area_kpa/kpa_95
     type: code
@@ -6814,8 +6723,7 @@ segments:
     - [0xA8E450, data]
     - [0xA8E690, data]
     - [0xA8E970, data]
-    - [0xA92470, rodata]
-    - [0xA92480, rodata]
+    - [0xA92470]
   - name: kpa_96
     dir: world/area_kpa/kpa_96
     type: code
@@ -6826,7 +6734,7 @@ segments:
     - [0xA927C0, c]
     - [0xA927F0, data]
     - [0xA928B0, data]
-    - [0xA93150, rodata]
+    - [0xA93150]
   - name: kpa_100
     dir: world/area_kpa/kpa_100
     type: code
@@ -6838,7 +6746,7 @@ segments:
     - [0xA931B0, data]
     - [0xA93270, data]
     - [0xA933D0, data]
-    - [0xA93410, rodata]
+    - [0xA93410]
   - name: kpa_101
     dir: world/area_kpa/kpa_101
     type: code
@@ -6850,7 +6758,7 @@ segments:
     - [0xA93490, data]
     - [0xA93550, data]
     - [0xA936D0, data]
-    - [0xA93710, rodata]
+    - [0xA93710]
   - name: kpa_102
     dir: world/area_kpa/kpa_102
     type: code
@@ -6863,9 +6771,7 @@ segments:
     - [0xA96CD0, data]
     - [0xA96DA0, data]
     - [0xA97690, data]
-    - [0xA99250, rodata]
-    - [0xA99478, rodata]
-    - [0xA994B0, rodata]
+    - [0xA99250]
   - name: kpa_111
     dir: world/area_kpa/kpa_111
     type: code
@@ -6878,7 +6784,7 @@ segments:
     - [0xA9AA20, data]
     - [0xA9ACF0, data]
     - [0xA9C740, data]
-    - [0xA9C7C0, rodata]
+    - [0xA9C7C0]
   - name: kpa_112
     dir: world/area_kpa/kpa_112
     type: code
@@ -6886,9 +6792,10 @@ segments:
     start: 0xA9C990
     vram: 0x80240000
     subsegments:
+    - [0xA9C990, c]
     - [0xA9C990, data]
     - [0xA9CA60, data]
-    - [0xA9CC20, rodata]
+    - [0xA9CC20]
   - name: kpa_113
     dir: world/area_kpa/kpa_113
     type: code
@@ -6902,8 +6809,7 @@ segments:
     - [0xA9D7B0, data]
     - [0xA9DA60, data]
     - [0xA9DD00, data]
-    - [0xA9E900, rodata]
-    - [0xA9E920, rodata]
+    - [0xA9E900]
   - name: kpa_114
     dir: world/area_kpa/kpa_114
     type: code
@@ -6914,7 +6820,7 @@ segments:
     - [0xA9E980, c]
     - [0xA9E9D0, data]
     - [0xA9EAA0, data]
-    - [0xA9ED10, rodata]
+    - [0xA9ED10]
   - name: kpa_115
     dir: world/area_kpa/kpa_115
     type: code
@@ -6927,8 +6833,7 @@ segments:
     - [0xAA01E0, data]
     - [0xAA0430, data]
     - [0xAA0B20, data]
-    - [0xAA1D00, rodata]
-    - [0xAA1D20, rodata]
+    - [0xAA1D00]
   - name: kpa_116
     dir: world/area_kpa/kpa_116
     type: code
@@ -6936,9 +6841,10 @@ segments:
     start: 0xAA1EE0
     vram: 0x80240000
     subsegments:
+    - [0xAA1EE0, c]
     - [0xAA1EE0, data]
     - [0xAA1FB0, data]
-    - [0xAA2170, rodata]
+    - [0xAA2170]
   - name: kpa_117
     dir: world/area_kpa/kpa_117
     type: code
@@ -6946,9 +6852,10 @@ segments:
     start: 0xAA2180
     vram: 0x80240000
     subsegments:
+    - [0xAA2180, c]
     - [0xAA2180, data]
     - [0xAA2240, data]
-    - [0xAA23B0, rodata]
+    - [0xAA23B0]
   - name: kpa_118
     dir: world/area_kpa/kpa_118
     type: code
@@ -6956,9 +6863,10 @@ segments:
     start: 0xAA23C0
     vram: 0x80240000
     subsegments:
+    - [0xAA23C0, c]
     - [0xAA23C0, data]
     - [0xAA2490, data]
-    - [0xAA2650, rodata]
+    - [0xAA2650]
   - name: kpa_119
     dir: world/area_kpa/kpa_119
     type: code
@@ -6966,10 +6874,11 @@ segments:
     start: 0xAA2660
     vram: 0x80240000
     subsegments:
+    - [0xAA2660, c]
     - [0xAA2660, data]
     - [0xAA2720, data]
     - [0xAA2760, data]
-    - [0xAA28E0, rodata]
+    - [0xAA28E0]
   - name: kpa_121
     dir: world/area_kpa/kpa_121
     type: code
@@ -6977,9 +6886,10 @@ segments:
     start: 0xAA28F0
     vram: 0x80240000
     subsegments:
+    - [0xAA28F0, c]
     - [0xAA28F0, data]
     - [0xAA29C0, data]
-    - [0xAA2D10, rodata]
+    - [0xAA2D10]
   - name: kpa_130
     dir: world/area_kpa/kpa_130
     type: code
@@ -6991,7 +6901,7 @@ segments:
     - [0xAA3460, data]
     - [0xAA3530, data]
     - [0xAA3870, data]
-    - [0xAA7460, rodata]
+    - [0xAA7460]
   - name: kpa_133
     dir: world/area_kpa/kpa_133
     type: code
@@ -7006,7 +6916,7 @@ segments:
     - [0xAA8290, data]
     - [0xAA8C70, data]
     - [0xAA8F10, data]
-    - [0xAA8F90, rodata]
+    - [0xAA8F90]
   - name: kpa_134
     dir: world/area_kpa/kpa_134
     type: code
@@ -7022,7 +6932,7 @@ segments:
     - [0xAAA060, data]
     - [0xAABF00, data]
     - [0xAAC3B0, data]
-    - [0xAAC820, rodata]
+    - [0xAAC820]
   - name: osr_00
     dir: world/area_osr/osr_00
     type: code
@@ -7034,7 +6944,7 @@ segments:
     - [0xAACBB0, c]
     - [0xAACFC0, data]
     - [0xAAD790, data]
-    - [0xAAFFD0, rodata]
+    - [0xAAFFD0]
   - name: osr_01
     dir: world/area_osr/osr_01
     type: code
@@ -7048,7 +6958,7 @@ segments:
     - [0xAB0AB0, data]
     - [0xAB0C10, data]
     - [0xAB1150, data]
-    - [0xAB2150, rodata]
+    - [0xAB2150]
   - name: osr_02
     dir: world/area_osr/osr_02
     type: code
@@ -7064,7 +6974,7 @@ segments:
     - [0xAB2B00, data]
     - [0xAB2BB0, data]
     - [0xAB5D40, data]
-    - [0xAB6270, rodata]
+    - [0xAB6270]
   - name: osr_03
     dir: world/area_osr/osr_03
     type: code
@@ -7079,7 +6989,7 @@ segments:
     - [0xAB7E20, data]
     - [0xAB8350, data]
     - [0xAB8B10, data]
-    - [0xAB9270, rodata]
+    - [0xAB9270]
   - name: osr_04
     dir: world/area_osr/osr_04
     type: code
@@ -7090,7 +7000,7 @@ segments:
     - [0xAB92B0, c]
     - [0xAB9370, data]
     - [0xAB95D0, data]
-    - [0xABB260, rodata]
+    - [0xABB260]
   - name: kkj_00
     dir: world/area_kkj/kkj_00
     type: code
@@ -7105,7 +7015,7 @@ segments:
     - [0xABEC70, data]
     - [0xABEF20, data]
     - [0xAC40D0, data]
-    - [0xAC4FB0, rodata]
+    - [0xAC4FB0]
   - name: kkj_01
     dir: world/area_kkj/kkj_01
     type: code
@@ -7117,8 +7027,7 @@ segments:
     - [0xAC6000, data]
     - [0xAC6140, data]
     - [0xAC67E0, data]
-    - [0xAC8B60, rodata]
-    - [0xAC8B80, rodata]
+    - [0xAC8B60]
   - name: kkj_02
     dir: world/area_kkj/kkj_02
     type: code
@@ -7126,10 +7035,11 @@ segments:
     start: 0xAC8D20
     vram: 0x80240000
     subsegments:
+    - [0xAC8D20, c]
     - [0xAC8D20, data]
     - [0xAC8E40, data]
     - [0xAC9160, data]
-    - [0xAC9700, rodata]
+    - [0xAC9700]
   - name: kkj_03
     dir: world/area_kkj/kkj_03
     type: code
@@ -7143,7 +7053,7 @@ segments:
     - [0xAC9C00, data]
     - [0xACA010, data]
     - [0xACA250, data]
-    - [0xACAB00, rodata]
+    - [0xACAB00]
   - name: kkj_10
     dir: world/area_kkj/kkj_10
     type: code
@@ -7158,7 +7068,7 @@ segments:
     - [0xACBBF0, data]
     - [0xACC510, data]
     - [0xACC700, data]
-    - [0xACE0D0, rodata]
+    - [0xACE0D0]
   - name: kkj_11
     dir: world/area_kkj/kkj_11
     type: code
@@ -7175,7 +7085,7 @@ segments:
     - [0xACFF30, data]
     - [0xAD02E0, data]
     - [0xAD27F0, data]
-    - [0xAD4010, rodata]
+    - [0xAD4010]
   - name: kkj_12
     dir: world/area_kkj/kkj_12
     type: code
@@ -7186,7 +7096,7 @@ segments:
     - [0xAD4090, c]
     - [0xAD4100, c]
     - [0xAD4940, data]
-    - [0xAD5EA0, rodata]
+    - [0xAD5EA0]
   - name: kkj_13
     dir: world/area_kkj/kkj_13
     type: code
@@ -7203,7 +7113,7 @@ segments:
     - [0xAD6E60, data]
     - [0xAD8650, data]
     - [0xAD9460, data]
-    - [0xADAE60, rodata]
+    - [0xADAE60]
   - name: kkj_14
     dir: world/area_kkj/kkj_14
     type: code
@@ -7227,7 +7137,7 @@ segments:
     - [0xAE32D0, data]
     - [0xAE3610, data]
     - [0xAE3850, data]
-    - [0xAE5550, rodata]
+    - [0xAE5550]
   - name: kkj_15
     dir: world/area_kkj/kkj_15
     type: code
@@ -7249,7 +7159,7 @@ segments:
     - [0xAEA230, data]
     - [0xAEB820, data]
     - [0xAECB30, data]
-    - [0xAED3E0, rodata]
+    - [0xAED3E0]
   - name: kkj_16
     dir: world/area_kkj/kkj_16
     type: code
@@ -7263,7 +7173,7 @@ segments:
     - [0xAEE7F0, data]
     - [0xAF09D0, data]
     - [0xAF1B10, data]
-    - [0xAF1C10, rodata]
+    - [0xAF1C10]
   - name: kkj_17
     dir: world/area_kkj/kkj_17
     type: code
@@ -7275,7 +7185,7 @@ segments:
     - [0xAF2200, data]
     - [0xAF2440, data]
     - [0xAF2520, data]
-    - [0xAF2C90, rodata]
+    - [0xAF2C90]
   - name: kkj_18
     dir: world/area_kkj/kkj_18
     type: code
@@ -7290,8 +7200,7 @@ segments:
     - [0xAF3600, data]
     - [0xAF3CB0, data]
     - [0xAF4BB0, data]
-    - [0xAF7920, rodata]
-    - [0xAF7940, rodata]
+    - [0xAF7920]
   - name: kkj_19
     dir: world/area_kkj/kkj_19
     type: code
@@ -7302,11 +7211,10 @@ segments:
     - [0xAF7950, c]
     - [0xAF7C00, c]
     - [0xAF8660, data]
-    - [0xAF8808, data]
     - [0xAF8B40, data]
     - [0xAF9050, data]
     - [0xAF9460, data]
-    - [0xAFDAF0, rodata]
+    - [0xAFDAF0]
   - name: kkj_20
     dir: world/area_kkj/kkj_20
     type: code
@@ -7320,7 +7228,7 @@ segments:
     - [0xAFE1E0, data]
     - [0xAFE3C0, data]
     - [0xAFE610, data]
-    - [0xB02290, rodata]
+    - [0xB02290]
   - name: kkj_21
     dir: world/area_kkj/kkj_21
     type: code
@@ -7328,8 +7236,9 @@ segments:
     start: 0xB022A0
     vram: 0x80240000
     subsegments:
+    - [0xB022A0, c]
     - [0xB022A0, data]
-    - [0xB024E0, rodata]
+    - [0xB024E0]
   - name: kkj_22
     dir: world/area_kkj/kkj_22
     type: code
@@ -7337,9 +7246,10 @@ segments:
     start: 0xB024F0
     vram: 0x80240000
     subsegments:
+    - [0xB024F0, c]
     - [0xB024F0, data]
     - [0xB025A0, data]
-    - [0xB02870, rodata]
+    - [0xB02870]
   - name: kkj_23
     dir: world/area_kkj/kkj_23
     type: code
@@ -7355,8 +7265,7 @@ segments:
     - [0xB036B0, data]
     - [0xB04420, data]
     - [0xB04FB0, data]
-    - [0xB06530, rodata]
-    - [0xB06550, rodata]
+    - [0xB06530]
   - name: kkj_24
     dir: world/area_kkj/kkj_24
     type: code
@@ -7368,7 +7277,7 @@ segments:
     - [0xB06590, data]
     - [0xB06640, data]
     - [0xB069B0, data]
-    - [0xB069F0, rodata]
+    - [0xB069F0]
   - name: kkj_25
     dir: world/area_kkj/kkj_25
     type: code
@@ -7386,7 +7295,7 @@ segments:
     - [0xB0B310, data]
     - [0xB0E3A0, data]
     - [0xB0F280, data]
-    - [0xB13100, rodata]
+    - [0xB13100]
   - name: kkj_26
     dir: world/area_kkj/kkj_26
     type: code
@@ -7398,7 +7307,7 @@ segments:
     - [0xB13150, data]
     - [0xB13500, data]
     - [0xB13A40, data]
-    - [0xB13D50, rodata]
+    - [0xB13D50]
   - name: kkj_27
     dir: world/area_kkj/kkj_27
     type: code
@@ -7411,7 +7320,7 @@ segments:
     - [0xB14210, data]
     - [0xB14340, data]
     - [0xB143E0, data]
-    - [0xB14E90, rodata]
+    - [0xB14E90]
   - name: kkj_28
     dir: world/area_kkj/kkj_28
     type: code
@@ -7419,8 +7328,9 @@ segments:
     start: 0xB14EA0
     vram: 0x80240000
     subsegments:
+    - [0xB14EA0, c]
     - [0xB14EA0, data]
-    - [0xB150A0, rodata]
+    - [0xB150A0]
   - name: kkj_29
     dir: world/area_kkj/kkj_29
     type: code
@@ -7433,7 +7343,7 @@ segments:
     - [0xB15120, data]
     - [0xB15410, data]
     - [0xB15DA0, data]
-    - [0xB1A8F0, rodata]
+    - [0xB1A8F0]
   - name: tst_01
     dir: world/area_tst/tst_01
     type: code
@@ -7441,9 +7351,10 @@ segments:
     start: 0xB1A900
     vram: 0x80240000
     subsegments:
+    - [0xB1A900, c]
     - [0xB1A900, data]
     - [0xB1AB20, data]
-    - [0xB1AC20, rodata]
+    - [0xB1AC20]
   - name: tst_02
     dir: world/area_tst/tst_02
     type: code
@@ -7451,9 +7362,10 @@ segments:
     start: 0xB1AC30
     vram: 0x80240000
     subsegments:
+    - [0xB1AC30, c]
     - [0xB1AC30, data]
     - [0xB1AE50, data]
-    - [0xB1AF70, rodata]
+    - [0xB1AF70]
   - name: tst_03
     dir: world/area_tst/tst_03
     type: code
@@ -7461,9 +7373,10 @@ segments:
     start: 0xB1AF80
     vram: 0x80240000
     subsegments:
+    - [0xB1AF80, c]
     - [0xB1AF80, data]
     - [0xB1B240, data]
-    - [0xB1B560, rodata]
+    - [0xB1B560]
   - name: tst_04
     dir: world/area_tst/tst_04
     type: code
@@ -7478,7 +7391,7 @@ segments:
     - [0xB1C220, data]
     - [0xB1C270, data]
     - [0xB1C510, data]
-    - [0xB1C530, rodata]
+    - [0xB1C530]
   - name: tst_10
     dir: world/area_tst/tst_10
     type: code
@@ -7486,8 +7399,9 @@ segments:
     start: 0xB1C540
     vram: 0x80240000
     subsegments:
+    - [0xB1C540, c]
     - [0xB1C540, data]
-    - [0xB1CA40, rodata]
+    - [0xB1CA40]
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code
@@ -7515,7 +7429,7 @@ segments:
     subsegments:
     - [0xB1D760, c]
     - [0xB1DB20, data]
-    - [0xB20460, rodata]
+    - [0xB20460]
   - name: tst_20
     dir: world/area_tst/tst_20
     type: code
@@ -7539,7 +7453,7 @@ segments:
     - [0xB226D0, data]
     - [0xB25E90, data]
     - [0xB275B0, data]
-    - [0xB27FE0, rodata]
+    - [0xB27FE0]
   - name: jan_01
     dir: world/area_jan/jan_01
     type: code
@@ -7554,7 +7468,7 @@ segments:
     - [0xB299B0, data]
     - [0xB2B430, data]
     - [0xB2B590, data]
-    - [0xB2C410, rodata]
+    - [0xB2C410]
   - name: jan_02
     dir: world/area_jan/jan_02
     type: code
@@ -7571,7 +7485,7 @@ segments:
     - [0xB2F410, data]
     - [0xB33E00, data]
     - [0xB33E50, data]
-    - [0xB34A20, rodata]
+    - [0xB34A20]
   - name: jan_03
     dir: world/area_jan/jan_03
     type: code
@@ -7587,8 +7501,7 @@ segments:
     - [0xB435D0, data]
     - [0xB438B0, data]
     - [0xB43B60, data]
-    - [0xB445A0, rodata]
-    - [0xB445C0, rodata]
+    - [0xB445A0]
   - name: jan_04
     dir: world/area_jan/jan_04
     type: code
@@ -7613,8 +7526,7 @@ segments:
     - [0xB490C0, data]
     - [0xB497F0, data]
     - [0xB4A4B0, data]
-    - [0xB4AA20, rodata]
-    - [0xB4AA50, rodata]
+    - [0xB4AA20]
   - name: jan_05
     dir: world/area_jan/jan_05
     type: code
@@ -7634,9 +7546,7 @@ segments:
     - [0xB4F170, data]
     - [0xB517F0, data]
     - [0xB523E0, data]
-    - [0xB52470, rodata]
-    - [0xB524A0, rodata]
-    - [0xB524E8, rodata]
+    - [0xB52470]
   - name: jan_06
     dir: world/area_jan/jan_06
     type: code
@@ -7656,8 +7566,7 @@ segments:
     - [0xB572C0, data]
     - [0xB57320, data]
     - [0xB586B0, data]
-    - [0xB594C0, rodata]
-    - [0xB59528, rodata]
+    - [0xB594C0]
   - name: jan_07
     dir: world/area_jan/jan_07
     type: code
@@ -7673,8 +7582,7 @@ segments:
     - [0xB5ACA0, data]
     - [0xB5CA50, data]
     - [0xB5D490, data]
-    - [0xB5DF60, rodata]
-    - [0xB5DF70, rodata]
+    - [0xB5DF60]
   - name: jan_08
     dir: world/area_jan/jan_08
     type: code
@@ -7692,9 +7600,7 @@ segments:
     - [0xB620B0, data]
     - [0xB62850, data]
     - [0xB64B90, data]
-    - [0xB65740, rodata]
-    - [0xB65760, rodata]
-    - [0xB65770, rodata]
+    - [0xB65740]
   - name: jan_09
     dir: world/area_jan/jan_09
     type: code
@@ -7710,8 +7616,7 @@ segments:
     - [0xB687D0, data]
     - [0xB6B400, data]
     - [0xB6BFB0, data]
-    - [0xB6C020, rodata]
-    - [0xB6C050, rodata]
+    - [0xB6C020]
   - name: jan_10
     dir: world/area_jan/jan_10
     type: code
@@ -7729,8 +7634,7 @@ segments:
     - [0xB6F1D0, data]
     - [0xB6FC50, data]
     - [0xB707C0, data]
-    - [0xB70800, rodata]
-    - [0xB70810, rodata]
+    - [0xB70800]
   - name: jan_11
     dir: world/area_jan/jan_11
     type: code
@@ -7743,7 +7647,7 @@ segments:
     - [0xB71060, data]
     - [0xB710F0, data]
     - [0xB728B0, data]
-    - [0xB730A0, rodata]
+    - [0xB730A0]
   - name: jan_12
     dir: world/area_jan/jan_12
     type: code
@@ -7756,8 +7660,7 @@ segments:
     - [0xB74310, data]
     - [0xB75250, data]
     - [0xB75D30, data]
-    - [0xB76450, rodata]
-    - [0xB76470, rodata]
+    - [0xB76450]
   - name: jan_13
     dir: world/area_jan/jan_13
     type: code
@@ -7770,7 +7673,7 @@ segments:
     - [0xB77000, data]
     - [0xB794C0, data]
     - [0xB79FA0, data]
-    - [0xB7A020, rodata]
+    - [0xB7A020]
   - name: jan_14
     dir: world/area_jan/jan_14
     type: code
@@ -7784,8 +7687,7 @@ segments:
     - [0xB7B5C0, data]
     - [0xB7C630, data]
     - [0xB7D2C0, data]
-    - [0xB7D8B0, rodata]
-    - [0xB7D8D0, rodata]
+    - [0xB7D8B0]
   - name: jan_15
     dir: world/area_jan/jan_15
     type: code
@@ -7799,7 +7701,7 @@ segments:
     - [0xB7DEE0, data]
     - [0xB7F4A0, data]
     - [0xB7FF80, data]
-    - [0xB7FFF0, rodata]
+    - [0xB7FFF0]
   - name: jan_16
     dir: world/area_jan/jan_16
     type: code
@@ -7812,7 +7714,7 @@ segments:
     - [0xB80540, data]
     - [0xB82C70, data]
     - [0xB82CD0, data]
-    - [0xB837A0, rodata]
+    - [0xB837A0]
   - name: jan_17
     dir: world/area_jan/jan_17
     type: code
@@ -7824,7 +7726,7 @@ segments:
     - [0xB837E0, data]
     - [0xB838C0, data]
     - [0xB83B20, data]
-    - [0xB83B80, rodata]
+    - [0xB83B80]
   - name: jan_18
     dir: world/area_jan/jan_18
     type: code
@@ -7832,9 +7734,10 @@ segments:
     start: 0xB83B90
     vram: 0x80240000
     subsegments:
+    - [0xB83B90, c]
     - [0xB83B90, data]
     - [0xB83E10, data]
-    - [0xB83E50, rodata]
+    - [0xB83E50]
   - name: jan_19
     dir: world/area_jan/jan_19
     type: code
@@ -7845,7 +7748,7 @@ segments:
     - [0xB83E60, c]
     - [0xB83E80, data]
     - [0xB84110, data]
-    - [0xB84170, rodata]
+    - [0xB84170]
   - name: jan_22
     dir: world/area_jan/jan_22
     type: code
@@ -7859,8 +7762,7 @@ segments:
     - [0xB85AE0, data]
     - [0xB8D910, data]
     - [0xB8E200, data]
-    - [0xB8FB00, rodata]
-    - [0xB8FB20, rodata]
+    - [0xB8FB00]
   - name: jan_23
     dir: world/area_jan/jan_23
     type: code
@@ -7868,9 +7770,10 @@ segments:
     start: 0xB8FCD0
     vram: 0x80240000
     subsegments:
+    - [0xB8FCD0, c]
     - [0xB8FCD0, data]
     - [0xB903A0, data]
-    - [0xB93430, rodata]
+    - [0xB93430]
   - name: mim_01
     dir: world/area_mim/mim_01
     type: code
@@ -7885,8 +7788,7 @@ segments:
     - [0xB953B0, data]
     - [0xB957E0, data]
     - [0xB960E0, data]
-    - [0xB97A10, rodata]
-    - [0xB97A30, rodata]
+    - [0xB97A10]
   - name: mim_02
     dir: world/area_mim/mim_02
     type: code
@@ -7900,7 +7802,7 @@ segments:
     - [0xB98EA0, data]
     - [0xB9A390, data]
     - [0xB9B250, data]
-    - [0xB9B420, rodata]
+    - [0xB9B420]
   - name: mim_03
     dir: world/area_mim/mim_03
     type: code
@@ -7913,7 +7815,7 @@ segments:
     - [0xB9BA70, data]
     - [0xB9BE30, data]
     - [0xB9D500, data]
-    - [0xB9D940, rodata]
+    - [0xB9D940]
   - name: mim_04
     dir: world/area_mim/mim_04
     type: code
@@ -7928,8 +7830,7 @@ segments:
     - [0xB9EB50, data]
     - [0xB9F020, data]
     - [0xB9FEA0, data]
-    - [0xBA06C0, rodata]
-    - [0xBA06E0, rodata]
+    - [0xBA06C0]
   - name: mim_05
     dir: world/area_mim/mim_05
     type: code
@@ -7942,7 +7843,7 @@ segments:
     - [0xBA2150, data]
     - [0xBA2210, data]
     - [0xBA3A80, data]
-    - [0xBA4590, rodata]
+    - [0xBA4590]
   - name: mim_06
     dir: world/area_mim/mim_06
     type: code
@@ -7957,8 +7858,7 @@ segments:
     - [0xBA7570, data]
     - [0xBA82F0, data]
     - [0xBA9170, data]
-    - [0xBA9F10, rodata]
-    - [0xBA9F30, rodata]
+    - [0xBA9F10]
   - name: mim_07
     dir: world/area_mim/mim_07
     type: code
@@ -7975,7 +7875,7 @@ segments:
     - [0xBAB7C0, data]
     - [0xBABAD0, data]
     - [0xBAC9C0, data]
-    - [0xBAD8D0, rodata]
+    - [0xBAD8D0]
   - name: mim_08
     dir: world/area_mim/mim_08
     type: code
@@ -7989,8 +7889,7 @@ segments:
     - [0xBB0E30, data]
     - [0xBB0E80, data]
     - [0xBB1D00, data]
-    - [0xBB2BD0, rodata]
-    - [0xBB2C38, rodata]
+    - [0xBB2BD0]
   - name: mim_09
     dir: world/area_mim/mim_09
     type: code
@@ -8004,7 +7903,7 @@ segments:
     - [0xBB4130, data]
     - [0xBB4180, data]
     - [0xBB4830, data]
-    - [0xBB5980, rodata]
+    - [0xBB5980]
   - name: mim_10
     dir: world/area_mim/mim_10
     type: code
@@ -8017,7 +7916,7 @@ segments:
     - [0xBB5EB0, data]
     - [0xBB5EF0, data]
     - [0xBB61D0, data]
-    - [0xBB7050, rodata]
+    - [0xBB7050]
   - name: mim_11
     dir: world/area_mim/mim_11
     type: code
@@ -8031,7 +7930,7 @@ segments:
     - [0xBB7C30, data]
     - [0xBBA180, data]
     - [0xBBA2E0, data]
-    - [0xBBB350, rodata]
+    - [0xBBB350]
   - name: mim_12
     dir: world/area_mim/mim_12
     type: code
@@ -8044,7 +7943,7 @@ segments:
     - [0xBBBB90, data]
     - [0xBBBE60, data]
     - [0xBBC2B0, data]
-    - [0xBBD190, rodata]
+    - [0xBBD190]
   - name: obk_01
     dir: world/area_obk/obk_01
     type: code
@@ -8058,7 +7957,7 @@ segments:
     - [0xBBE410, data]
     - [0xBC0100, data]
     - [0xBC11A0, data]
-    - [0xBC2A30, rodata]
+    - [0xBC2A30]
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
@@ -8073,7 +7972,7 @@ segments:
     - [0xBC3720, data]
     - [0xBC3DE0, data]
     - [0xBC3F60, data]
-    - [0xBC4260, rodata]
+    - [0xBC4260]
   - name: obk_03
     dir: world/area_obk/obk_03
     type: code
@@ -8091,7 +7990,7 @@ segments:
     - [0xBC6250, data]
     - [0xBC7120, data]
     - [0xBC7DE0, data]
-    - [0xBC7E40, rodata]
+    - [0xBC7E40]
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code
@@ -8106,7 +8005,7 @@ segments:
     - [0xBC9020, data]
     - [0xBCB260, data]
     - [0xBCB870, data]
-    - [0xBCD030, rodata]
+    - [0xBCD030]
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
@@ -8120,7 +8019,7 @@ segments:
     - [0xBCDB00, data]
     - [0xBCDFF0, data]
     - [0xBCE040, data]
-    - [0xBCE680, rodata]
+    - [0xBCE680]
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code
@@ -8128,10 +8027,11 @@ segments:
     start: 0xBCE690
     vram: 0x80240000
     subsegments:
+    - [0xBCE690, c]
     - [0xBCE690, data]
     - [0xBCE760, data]
     - [0xBCEAD0, data]
-    - [0xBCEBE0, rodata]
+    - [0xBCEBE0]
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
@@ -8148,7 +8048,7 @@ segments:
     - [0xBD0DB0, data]
     - [0xBD14F0, data]
     - [0xBD1C80, data]
-    - [0xBD3860, rodata]
+    - [0xBD3860]
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code
@@ -8164,7 +8064,7 @@ segments:
     - [0xBD50D0, data]
     - [0xBD64D0, data]
     - [0xBD6DD0, data]
-    - [0xBDA730, rodata]
+    - [0xBDA730]
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code
@@ -8179,7 +8079,7 @@ segments:
     - [0xBDABE0, data]
     - [0xBDB140, data]
     - [0xBDCE10, data]
-    - [0xBDD190, rodata]
+    - [0xBDD190]
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
@@ -8190,7 +8090,7 @@ segments:
     - [0xBDD1B0,       c, events]
     - [0xBDE190,   .data, header]
     - [0xBDE2A0,   .data, events]
-    - [0xBDEC80, .rodata, events]
+    - [0xBDEC80]
   - name: arn_03
     dir: world/area_arn/arn_03
     type: code
@@ -8201,8 +8101,7 @@ segments:
     - [0xBDED90,       c, events]
     - [0xBE04B0,   .data, header]
     - [0xBE05C0,   .data, events]
-    - [0xBE35E0, .rodata, events]
-    - [0xBE37B0,    .bss, events]
+    - [0xBE35E0]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
@@ -8213,8 +8112,7 @@ segments:
     - [0xBE37B0,       c, events]
     - [0xBE6B20,   .data, header]
     - [0xBE6C30,   .data, events]
-    - [0xBE78D0, .rodata, events]
-    - [0xBE7AD8, .rodata, events]
+    - [0xBE78D0]
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
@@ -8225,7 +8123,7 @@ segments:
     - [0xBE7BE0,       c, events]
     - [0xBE8EE0,   .data, header]
     - [0xBE9290,   .data, events]
-    - [0xBECC20, .rodata, events]
+    - [0xBECC20]
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
@@ -8240,9 +8138,7 @@ segments:
     - [0xBEEC80,   .data, header]
     - [0xBEEE30,   .data, BECDF0]
     - [0xBF0580,   .data, events]
-    - [0xBF46F0, .rodata, BECDF0]
-    - [0xBF4730, .rodata, BED5F0]
-    - [0xBF4740, .rodata, events]
+    - [0xBF46F0]
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
@@ -8254,7 +8150,7 @@ segments:
     - [0xBF4860,       c, events]
     - [0xBF4A30,   .data, header]
     - [0xBF4B50,   .data, events]
-    - [0xBF6040, .rodata, events]
+    - [0xBF6040]
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
@@ -8265,7 +8161,7 @@ segments:
     - [0xBF6060,       c, events]
     - [0xBF60A0,   .data, header]
     - [0xBF61A0,   .data, events]
-    - [0xBF69F0, .rodata, events]
+    - [0xBF69F0]
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
@@ -8273,9 +8169,11 @@ segments:
     start: 0xBF6A00
     vram: 0x80240000
     subsegments:
+    - [0xBF6A00, c, header]
+    - [0xBF6A00, c, events]
     - [0xBF6A00,   .data, header]
     - [0xBF6B00,   .data, events]
-    - [0xBF7670, .rodata, events]
+    - [0xBF7670]
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
@@ -8283,9 +8181,11 @@ segments:
     start: 0xBF7680
     vram: 0x80240000
     subsegments:
+    - [0xBF7680, c, header]
+    - [0xBF7680, c, events]
     - [0xBF7680,   .data, header]
     - [0xBF7770,   .data, events]
-    - [0xBF8780, .rodata, events]
+    - [0xBF8780]
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
@@ -8293,9 +8193,11 @@ segments:
     start: 0xBF8790
     vram: 0x80240000
     subsegments:
+    - [0xBF8790, c, header]
+    - [0xBF8790, c, events]
     - [0xBF8790,   .data, header]
     - [0xBF8890,   .data, events]
-    - [0xBF9400, .rodata, events]
+    - [0xBF9400]
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
@@ -8303,9 +8205,11 @@ segments:
     start: 0xBF9410
     vram: 0x80240000
     subsegments:
+    - [0xBF9410, c, header]
+    - [0xBF9410, c, events]
     - [0xBF9410,   .data, header]
     - [0xBF9510,   .data, events]
-    - [0xBFA090, .rodata, events]
+    - [0xBFA090]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
@@ -8317,8 +8221,7 @@ segments:
     - [0xBFA100,       c, BFA100]
     - [0xBFA150,   .data, BFA0A0]
     - [0xBFA260,   .data, BFA100]
-    - [0xBFD840, .rodata, BFA0A0]
-    - [0xBFD864, .rodata, BFA100]
+    - [0xBFD840]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
@@ -8347,11 +8250,11 @@ segments:
     - [0xC08770,   rgba16, img7, 32, 32]
     - [0xC08F70,    .data, data7]
     - [0xC08FF0,    .data, data]
-    - [0xC20C70,  .rodata, BFD9A0]
+    - [0xC20C70]
     # rodata seemingly in 3 different parts:
     # dgb_00-18, 1x 32767.0, 2 jump tables
-    # "dgb_00", 2x 32767.0, jump table
-    # "dgb_08" only
+    # dgb_00, 2x 32767.0, jump table
+    # dgb_08 only
   - type: code
     start: 0xC20F40
     vram: 0x80200000
@@ -8366,7 +8269,7 @@ segments:
     subsegments:
     - [0xC2EBA0,       c, C2EBA0]
     - [0xC2FFD0,   .data, C2EBA0]
-    - [0xC31190, .rodata, C2EBA0]
+    - [0xC31190]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
@@ -8377,7 +8280,7 @@ segments:
     - [0xC314E0,       c, C314E0]
     - [0xC31730,       c, C31730]
     - [0xC33CB0,   .data, C31730]
-    - [0xC35EA0, .rodata, C31730]
+    - [0xC35EA0]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
@@ -8387,8 +8290,7 @@ segments:
     subsegments:
     - [0xC36530,       c, C36530]
     - [0xC39640,   .data, C36530]
-    - [0xC3A910, .rodata, C36530]
-    - [0xC3A978, .rodata, C36530]
+    - [0xC3A910]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
@@ -8398,7 +8300,7 @@ segments:
     subsegments:
     - [0xC3AA10,       c, C3AA10]
     - [0xC3BEA0,   .data, C3AA10]
-    - [0xC3CD40, .rodata, C3AA10]
+    - [0xC3CD40]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
@@ -8408,7 +8310,7 @@ segments:
     subsegments:
     - [0xC3D080,       c, C3D080]
     - [0xC3D340,   .data, C3D080]
-    - [0xC3DBE0, .rodata, C3D080]
+    - [0xC3DBE0]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
@@ -8418,8 +8320,7 @@ segments:
     subsegments:
     - [0xC3DBF0,       c, C3DBF0]
     - [0xC3F020,   .data, C3DBF0]
-    - [0xC3FA70, .rodata, C3DBF0]
-    - [0xC3FA80, .rodata, C3DBF0]
+    - [0xC3FA70]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
@@ -8429,9 +8330,7 @@ segments:
     subsegments:
     - [0xC3FDB0,       c, C3FDB0]
     - [0xC43A40,   .data, C3FDB0]
-    - [0xC467A0, .rodata, C3FDB0]
-    - [0xC467B0, .rodata, C3FDB0]
-    - [0xC46B40, .rodata, C3FDB0]
+    - [0xC467A0]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
@@ -8441,8 +8340,7 @@ segments:
     subsegments:
     - [0xC46BE0,       c, C46BE0]
     - [0xC4A3E0,   .data, C46BE0]
-    - [0xC4BF50, .rodata, C46BE0]
-    - [0xC4C2F8, .rodata, C46BE0]
+    - [0xC4BF50]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
@@ -8452,7 +8350,7 @@ segments:
     subsegments:
     - [0xC4C390,       c, C4C390]
     - [0xC4C580,   .data, C4C390]
-    - [0xC4D3D0, .rodata, C4C390]
+    - [0xC4D3D0]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
@@ -8462,7 +8360,7 @@ segments:
     subsegments:
     - [0xC4D3E0,       c, C4D3E0]
     - [0xC4D430,   .data, C4D3E0]
-    - [0xC4DEE0, .rodata, C4D3E0]
+    - [0xC4DEE0]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
@@ -8472,7 +8370,7 @@ segments:
     subsegments:
     - [0xC4DEF0,       c, C4DEF0]
     - [0xC4E1B0,   .data, C4DEF0]
-    - [0xC4E950, .rodata, C4DEF0]
+    - [0xC4E950]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
@@ -8480,8 +8378,9 @@ segments:
     start: 0xC4E960
     vram: 0x80240000
     subsegments:
+    - [0xC4E960, c, C4E960]
     - [0xC4E960,   .data, C4E960]
-    - [0xC4F020, .rodata, C4E960]
+    - [0xC4F020]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
@@ -8489,8 +8388,9 @@ segments:
     start: 0xC4F030
     vram: 0x80240000
     subsegments:
+    - [0xC4F030, c, C4F030]
     - [0xC4F030,   .data, C4F030]
-    - [0xC4F500, .rodata, C4F030]
+    - [0xC4F500]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
@@ -8501,8 +8401,7 @@ segments:
     - [0xC4F510,       c, C4F510]
     - [0xC50CA0,       c, C50CA0]
     - [0xC50D80,   .data, C4F510]
-    - [0xC521E0, .rodata, C4F510]
-    - [0xC52200, .rodata, C4F510]
+    - [0xC521E0]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
@@ -8512,8 +8411,7 @@ segments:
     subsegments:
     - [0xC52540,       c, C52540]
     - [0xC53970,   .data, C52540]
-    - [0xC55720, .rodata, C52540]
-    - [0xC55730, .rodata, C52540]
+    - [0xC55720]
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
@@ -8521,8 +8419,9 @@ segments:
     start: 0xC55A60
     vram: 0x80240000
     subsegments:
+    - [0xC55A60,       c, C55A60]
     - [0xC55A60,   .data, C55A60]
-    - [0xC55F30, .rodata, C55A60]
+    - [0xC55F30]
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
@@ -8533,8 +8432,7 @@ segments:
     - [0xC55F40,       c, C55F40]
     - [0xC56EF0,       c, C56EF0]
     - [0xC571B0,   .data, C55F40]
-    - [0xC59810, .rodata, C55F40]
-    - [0xC59820, .rodata, C55F40]
+    - [0xC59810]
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code
@@ -8544,7 +8442,7 @@ segments:
     subsegments:
     - [0xC599D0, c]
     - [0xC59CE0, data]
-    - [0xC5A730, rodata]
+    - [0xC5A730]
   - name: kzn_02
     dir: world/area_kzn/kzn_02
     type: code
@@ -8559,9 +8457,7 @@ segments:
     - [0xC5CF60, data]
     - [0xC5D9B0, data]
     - [0xC609C0, data]
-    - [0xC60C30, rodata]
-    - [0xC60C98, rodata]
-    - [0xC60D00, rodata]
+    - [0xC60C30]
   - name: kzn_03
     dir: world/area_kzn/kzn_03
     type: code
@@ -8576,9 +8472,7 @@ segments:
     - [0xC647B0, data]
     - [0xC66FC0, data]
     - [0xC676A0, data]
-    - [0xC67ED0, rodata]
-    - [0xC67F50, rodata]
-    - [0xC68120, rodata]
+    - [0xC67ED0]
   - name: kzn_04
     dir: world/area_kzn/kzn_04
     type: code
@@ -8592,7 +8486,7 @@ segments:
     - [0xC69890, data]
     - [0xC69D70, data]
     - [0xC6A420, data]
-    - [0xC6C0C0, rodata]
+    - [0xC6C0C0]
   - name: kzn_05
     dir: world/area_kzn/kzn_05
     type: code
@@ -8602,7 +8496,7 @@ segments:
     subsegments:
     - [0xC6C0D0, c]
     - [0xC6C3E0, data]
-    - [0xC6C910, rodata]
+    - [0xC6C910]
   - name: kzn_06
     dir: world/area_kzn/kzn_06
     type: code
@@ -8614,8 +8508,7 @@ segments:
     - [0xC6CC30, c]
     - [0xC6CD10, c]
     - [0xC6D390, data]
-    - [0xC6E300, rodata]
-    - [0xC6E320, rodata]
+    - [0xC6E300]
   - name: kzn_07
     dir: world/area_kzn/kzn_07
     type: code
@@ -8629,8 +8522,7 @@ segments:
     - [0xC70710, data]
     - [0xC70C60, data]
     - [0xC70EC0, data]
-    - [0xC713B0, rodata]
-    - [0xC71418, rodata]
+    - [0xC713B0]
   - name: kzn_08
     dir: world/area_kzn/kzn_08
     type: code
@@ -8643,9 +8535,7 @@ segments:
     - [0xC71ED0, c]
     - [0xC755A0, data]
     - [0xC76030, data]
-    - [0xC76A50, rodata]
-    - [0xC76AB8, rodata]
-    - [0xC76B18, rodata]
+    - [0xC76A50]
   - name: kzn_09
     dir: world/area_kzn/kzn_09
     type: code
@@ -8659,7 +8549,7 @@ segments:
     - [0xC7A6F0, data]
     - [0xC7A9E0, data]
     - [0xC7B0D0, data]
-    - [0xC7DF40, rodata]
+    - [0xC7DF40]
   - name: kzn_10
     dir: world/area_kzn/kzn_10
     type: code
@@ -8671,7 +8561,7 @@ segments:
     - [0xC7E4B0, c]
     - [0xC7E850, data]
     - [0xC7EE90, data]
-    - [0xC80170, rodata]
+    - [0xC80170]
   - name: kzn_11
     dir: world/area_kzn/kzn_11
     type: code
@@ -8685,8 +8575,7 @@ segments:
     - [0xC82800, data]
     - [0xC83180, data]
     - [0xC83870, data]
-    - [0xC859E0, rodata]
-    - [0xC85A48, rodata]
+    - [0xC859E0]
   - name: kzn_17
     dir: world/area_kzn/kzn_17
     type: code
@@ -8699,8 +8588,7 @@ segments:
     - [0xC887B0, c]
     - [0xC88B50, data]
     - [0xC89450, data]
-    - [0xC8BE40, rodata]
-    - [0xC8C080, rodata]
+    - [0xC8BE40]
   - name: kzn_18
     dir: world/area_kzn/kzn_18
     type: code
@@ -8712,7 +8600,7 @@ segments:
     - [0xC8C0E0, c]
     - [0xC8C3F0, c]
     - [0xC8C460, data]
-    - [0xC8DBA0, rodata]
+    - [0xC8DBA0]
   - name: kzn_19
     dir: world/area_kzn/kzn_19
     type: code
@@ -8727,8 +8615,7 @@ segments:
     - [0xC90BF0, data]
     - [0xC959B0, data]
     - [0xC95E70, data]
-    - [0xC95EF0, rodata]
-    - [0xC95F20, rodata]
+    - [0xC95EF0]
   - name: kzn_20
     dir: world/area_kzn/kzn_20
     type: code
@@ -8740,7 +8627,7 @@ segments:
     - [0xC96240, c]
     - [0xC969F0, data]
     - [0xC97600, data]
-    - [0xC9A1F0, rodata]
+    - [0xC9A1F0]
   - name: kzn_22
     dir: world/area_kzn/kzn_22
     type: code
@@ -8753,7 +8640,7 @@ segments:
     - [0xC9A590, data]
     - [0xC9A650, data]
     - [0xC9B120, data]
-    - [0xC9C2F0, rodata]
+    - [0xC9C2F0]
   - name: kzn_23
     dir: world/area_kzn/kzn_23
     type: code
@@ -8766,7 +8653,7 @@ segments:
     - [0xC9C920, data]
     - [0xC9C9B0, data]
     - [0xC9D020, data]
-    - [0xC9DF10, rodata]
+    - [0xC9DF10]
   - name: flo_00
     dir: world/area_flo/flo_00
     type: code
@@ -8778,7 +8665,7 @@ segments:
     - [0xC9DF60,       c, C9DF60]
     - [0xC9EE30,       c, C9EE30]
     - [0xC9F300,   .data, C9DF60]
-    - [0xCA70A0, .rodata, C9DF60]
+    - [0xCA70A0]
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code
@@ -8789,7 +8676,7 @@ segments:
     - [0xCA72A0,       c, CA72A0]
     - [0xCA72E0,       c, CA72E0]
     - [0xCA78D0,   .data, CA72E0]
-    - [0xCAC1D0, .rodata, CA72E0]
+    - [0xCAC1D0]
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
@@ -8800,7 +8687,7 @@ segments:
     - [0xCAC1F0,       c, CAC1F0]
     - [0xCAC5D0,       c, CAC5D0]
     - [0xCAC930,   .data, CAC5D0]
-    - [0xCAED20, .rodata, CAC5D0]
+    - [0xCAED20]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
@@ -8813,8 +8700,7 @@ segments:
     - [0xCAFAC0,       c, CAFAC0]
     - [0xCB0B80,       c, CB0B80]
     - [0xCB0C20,   .data, CAFAC0]
-    - [0xCB4E60, .rodata, CAFAC0]
-    - [0xCB5000,    .bss, CAFAC0]
+    - [0xCB4E60]
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
@@ -8827,8 +8713,7 @@ segments:
     - [0xCB50E0,       c, CB50E0]
     - [0xCB5320,       c, CB5320]
     - [0xCB6820,   .data, CB50E0]
-    - [0xCB9190, .rodata, CB50E0]
-    - [0xCB91A0, .rodata, CB5320]
+    - [0xCB9190]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
@@ -8843,7 +8728,7 @@ segments:
     - [0xCBA430,       c, CBA430]
     - [0xCBA670,   .data, CB9280]
     - [0xCBD290,   .data, CBA430]
-    - [0xCBDCB0, .rodata, CB9280]
+    - [0xCBDCB0]
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
@@ -8853,7 +8738,7 @@ segments:
     subsegments:
     - [0xCBDCD0,       c, CBDCD0]
     - [0xCBDFF0,   .data, CBDCD0]
-    - [0xCC0E10, .rodata, CBDCD0]
+    - [0xCC0E10]
   - name: flo_12
     dir: world/area_flo/flo_12
     type: code
@@ -8864,8 +8749,7 @@ segments:
     - [0xCC0E30,       c, CC0E30]
     - [0xCC0E70,       c, CC0E70]
     - [0xCC1520,   .data, CC0E70]
-    - [0xCC3800, .rodata, CC0E70]
-    - [0xCC3810,    .bss, CC0E70]
+    - [0xCC3800]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
@@ -8877,9 +8761,7 @@ segments:
     - [0xCC3850,       c, CC3850]
     - [0xCC6DE0,       c, CC6DE0]
     - [0xCC6E80,   .data, CC3850]
-    - [0xCCB230, .rodata, CC3850]
-    - [0xCCB300, .rodata, CC6DE0]
-    - [0xCCB310,    .bss, CC6DE0]
+    - [0xCCB230]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
@@ -8892,9 +8774,7 @@ segments:
     - [0xCCD670,       c, CCD670]
     - [0xCCD6A0,   .data, CCB310]
     - [0xCCF7D0,   .data, CCBE20]
-    - [0xCD0620, .rodata, CCB310]
-    - [0xCD0660, .rodata, CCBE20]
-    - [0xCD06C0,    .bss, CCBE20]
+    - [0xCD0620]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
@@ -8902,8 +8782,9 @@ segments:
     start: 0xCD06C0
     vram: 0x80240000
     subsegments:
+    - [0xCD06C0,       c, CD06C0]
     - [0xCD06C0,   .data, CD06C0]
-    - [0xCD1E20, .rodata, CD06C0]
+    - [0xCD1E20]
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
@@ -8918,8 +8799,7 @@ segments:
     - [0xCD4770,       c, CD4770]
     - [0xCD47A0,   .data, CD1F10]
     - [0xCD5E40,   .data, CD2C80]
-    - [0xCD7210, .rodata, CD1F10]
-    - [0xCD7220, .rodata, CD2C80]
+    - [0xCD7210]
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code
@@ -8931,7 +8811,7 @@ segments:
     - [0xCD7320,       c, CD7320]
     - [0xCD7350,       c, CD7350]
     - [0xCDA500,   .data, CD7350]
-    - [0xCDC5D0, .rodata, CD7350]
+    - [0xCDC5D0]
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code
@@ -8944,7 +8824,7 @@ segments:
     - [0xCDCC30,       c, CDCC30]
     - [0xCDCE70,   .data, CDC6A0]
     - [0xCE2D60,   .data, CDCC30]
-    - [0xCE36E0, .rodata, CDC6A0]
+    - [0xCE36E0]
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
@@ -8954,7 +8834,7 @@ segments:
     subsegments:
     - [0xCE36F0,       c, CE36F0]
     - [0xCE4030,   .data, CE36F0]
-    - [0xCE66F0, .rodata, CE36F0]
+    - [0xCE66F0]
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
@@ -8966,7 +8846,7 @@ segments:
     - [0xCE7240,       c, CE7240]
     - [0xCE73F0,   .data, CE6700]
     - [0xCE7440,   .data, CE7240]
-    - [0xCEC210, .rodata, CE6700]
+    - [0xCEC210]
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
@@ -8979,7 +8859,7 @@ segments:
     - [0xCEC290,       c, CEC290]
     - [0xCEC4D0,   .data, CEC240]
     - [0xCED7E0,   .data, CEC290]
-    - [0xCEE250, .rodata, CEC240]
+    - [0xCEE250]
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
@@ -8990,8 +8870,7 @@ segments:
     - [0xCEE260,       c, CEE260]
     - [0xCEE2A0,       c, CEE2A0]
     - [0xCEEF30,   .data, CEE2A0]
-    - [0xCF08D0, .rodata, CEE2A0]
-    - [0xCF0940,    .bss, CEE2A0]
+    - [0xCF08D0]
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
@@ -9003,7 +8882,7 @@ segments:
     - [0xCF0980,       c, CF0980]
     - [0xCF0BC0,       c, CF0BC0]
     - [0xCF0ED0,   .data, CF0980]
-    - [0xCF2BB0, .rodata, CF0980]
+    - [0xCF2BB0]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
@@ -9017,8 +8896,7 @@ segments:
     - [0xCF4E00,       c, CF4E00]
     - [0xCF4EA0,   .data, CF2C10]
     - [0xCF68B0,   .data, CF4BC0]
-    - [0xCF7AA0, .rodata, CF2C10]
-    - [0xCF7B70,    .bss, CF2C10]
+    - [0xCF7AA0]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code
@@ -9032,7 +8910,7 @@ segments:
     - [0xCF9BC0, data]
     - [0xD01D90, data]
     - [0xD05460, data]
-    - [0xD05720, rodata]
+    - [0xD05720]
   - name: sam_02
     dir: world/area_sam/sam_02
     type: code
@@ -9046,9 +8924,8 @@ segments:
     - [0xD07440, data]
     - [0xD09570, data]
     - [0xD09AD0, data]
-    #- [0xD0C294, data]
     - [0xD10DA0, data]
-    - [0xD110A0, rodata]
+    - [0xD110A0]
   - name: sam_03
     dir: world/area_sam/sam_03
     type: code
@@ -9060,7 +8937,7 @@ segments:
     - [0xD119E0, data]
     - [0xD11A70, data]
     - [0xD11D40, data]
-    - [0xD13420, rodata]
+    - [0xD13420]
   - name: sam_04
     dir: world/area_sam/sam_04
     type: code
@@ -9076,7 +8953,7 @@ segments:
     - [0xD15010, data]
     - [0xD16E20, data]
     - [0xD18720, data]
-    - [0xD187C0, rodata]
+    - [0xD187C0]
   - name: sam_05
     dir: world/area_sam/sam_05
     type: code
@@ -9090,7 +8967,7 @@ segments:
     - [0xD1A890, data]
     - [0xD1A900, data]
     - [0xD1F780, data]
-    - [0xD1FCB0, rodata]
+    - [0xD1FCB0]
   - name: sam_06
     dir: world/area_sam/sam_06
     type: code
@@ -9104,8 +8981,7 @@ segments:
     - [0xD22560, data]
     - [0xD23E50, data]
     - [0xD2BC50, data]
-    - [0xD2BCC0, rodata]
-    - [0xD2BCD0, rodata]
+    - [0xD2BCC0]
   - name: sam_07
     dir: world/area_sam/sam_07
     type: code
@@ -9119,7 +8995,7 @@ segments:
     - [0xD2E0B0, data]
     - [0xD2E1F0, data]
     - [0xD2E9C0, data]
-    - [0xD2FAA0, rodata]
+    - [0xD2FAA0]
   - name: sam_08
     dir: world/area_sam/sam_08
     type: code
@@ -9133,7 +9009,7 @@ segments:
     - [0xD314C0, data]
     - [0xD31E80, data]
     - [0xD335E0, data]
-    - [0xD36140, rodata]
+    - [0xD36140]
   - name: sam_09
     dir: world/area_sam/sam_09
     type: code
@@ -9145,7 +9021,7 @@ segments:
     - [0xD366F0, data]
     - [0xD36780, data]
     - [0xD369A0, data]
-    - [0xD377F0, rodata]
+    - [0xD377F0]
   - name: sam_10
     dir: world/area_sam/sam_10
     type: code
@@ -9158,8 +9034,7 @@ segments:
     - [0xD384A0, data]
     - [0xD38550, data]
     - [0xD38840, data]
-    - [0xD3A410, rodata]
-    - [0xD3A430, rodata]
+    - [0xD3A410]
   - name: sam_11
     dir: world/area_sam/sam_11
     type: code
@@ -9177,8 +9052,7 @@ segments:
     - [0xD3D900, data]
     - [0xD46980, data]
     - [0xD48C40, data]
-    - [0xD4B9E0, rodata]
-    - [0xD4BA00, rodata]
+    - [0xD4B9E0]
   - name: sam_12
     dir: world/area_sam/sam_12
     type: code
@@ -9193,7 +9067,7 @@ segments:
     - [0xD4BFE0, data]
     - [0xD4C2A0, data]
     - [0xD4CF90, data]
-    - [0xD4D030, rodata]
+    - [0xD4D030]
   - name: pra_01
     dir: world/area_pra/pra_01
     type: code
@@ -9207,7 +9081,7 @@ segments:
     - [0xD4E500, data]
     - [0xD4EF50, data]
     - [0xD4FFC0, data]
-    - [0xD4FFD0, rodata]
+    - [0xD4FFD0]
   - name: pra_02
     dir: world/area_pra/pra_02
     type: code
@@ -9221,7 +9095,7 @@ segments:
     - [0xD51720, data]
     - [0xD52A80, data]
     - [0xD52DE0, data]
-    - [0xD53C80, rodata]
+    - [0xD53C80]
   - name: pra_03
     dir: world/area_pra/pra_03
     type: code
@@ -9234,7 +9108,7 @@ segments:
     - [0xD53E60, data]
     - [0xD53F10, data]
     - [0xD543C0, data]
-    - [0xD54670, rodata]
+    - [0xD54670]
   - name: pra_04
     dir: world/area_pra/pra_04
     type: code
@@ -9249,8 +9123,7 @@ segments:
     - [0xD55080, data]
     - [0xD554E0, data]
     - [0xD55840, data]
-    - [0xD55B40, rodata]
-    - [0xD55B60, rodata]
+    - [0xD55B40]
   - name: pra_05
     dir: world/area_pra/pra_05
     type: code
@@ -9262,7 +9135,7 @@ segments:
     - [0xD55BD0, c]
     - [0xD56D90, data]
     - [0xD56E20, data]
-    - [0xD57420, rodata]
+    - [0xD57420]
   - name: pra_06
     dir: world/area_pra/pra_06
     type: code
@@ -9273,7 +9146,7 @@ segments:
     - [0xD57430, c]
     - [0xD58380, data]
     - [0xD58410, data]
-    - [0xD58860, rodata]
+    - [0xD58860]
   - name: pra_09
     dir: world/area_pra/pra_09
     type: code
@@ -9285,7 +9158,7 @@ segments:
     - [0xD588B0, c]
     - [0xD59EE0, data]
     - [0xD59F80, data]
-    - [0xD5F2A0, rodata]
+    - [0xD5F2A0]
   - name: pra_10
     dir: world/area_pra/pra_10
     type: code
@@ -9297,7 +9170,7 @@ segments:
     - [0xD5F2D0, c]
     - [0xD60960, data]
     - [0xD60A00, data]
-    - [0xD614A0, rodata]
+    - [0xD614A0]
   - name: pra_11
     dir: world/area_pra/pra_11
     type: code
@@ -9310,7 +9183,7 @@ segments:
     - [0xD626E0, data]
     - [0xD62770, data]
     - [0xD62B10, data]
-    - [0xD62D00, rodata]
+    - [0xD62D00]
   - name: pra_12
     dir: world/area_pra/pra_12
     type: code
@@ -9321,7 +9194,7 @@ segments:
     - [0xD62D10, c]
     - [0xD63F20, data]
     - [0xD63FB0, data]
-    - [0xD645B0, rodata]
+    - [0xD645B0]
   - name: pra_13
     dir: world/area_pra/pra_13
     type: code
@@ -9334,7 +9207,7 @@ segments:
     - [0xD65BC0, data]
     - [0xD65C70, data]
     - [0xD66880, data]
-    - [0xD67CF0, rodata]
+    - [0xD67CF0]
   - name: pra_14
     dir: world/area_pra/pra_14
     type: code
@@ -9347,7 +9220,7 @@ segments:
     - [0xD68EE0, data]
     - [0xD68F80, data]
     - [0xD69630, data]
-    - [0xD69800, rodata]
+    - [0xD69800]
   - name: pra_15
     dir: world/area_pra/pra_15
     type: code
@@ -9360,7 +9233,7 @@ segments:
     - [0xD69850, data]
     - [0xD698E0, data]
     - [0xD69AD0, data]
-    - [0xD69B10, rodata]
+    - [0xD69B10]
   - name: pra_16
     dir: world/area_pra/pra_16
     type: code
@@ -9372,7 +9245,7 @@ segments:
     - [0xD69B40, c]
     - [0xD6AA40, data]
     - [0xD6AAF0, data]
-    - [0xD6B610, rodata]
+    - [0xD6B610]
   - name: pra_18
     dir: world/area_pra/pra_18
     type: code
@@ -9385,7 +9258,7 @@ segments:
     - [0xD6C540, data]
     - [0xD6C5F0, data]
     - [0xD6CF60, data]
-    - [0xD6E9A0, rodata]
+    - [0xD6E9A0]
   - name: pra_19
     dir: world/area_pra/pra_19
     type: code
@@ -9398,7 +9271,7 @@ segments:
     - [0xD70360, data]
     - [0xD70400, data]
     - [0xD70A70, data]
-    - [0xD76390, rodata]
+    - [0xD76390]
   - name: pra_20
     dir: world/area_pra/pra_20
     type: code
@@ -9410,7 +9283,7 @@ segments:
     - [0xD763C0, c]
     - [0xD772C0, data]
     - [0xD77390, data]
-    - [0xD77F00, rodata]
+    - [0xD77F00]
   - name: pra_21
     dir: world/area_pra/pra_21
     type: code
@@ -9423,7 +9296,7 @@ segments:
     - [0xD78040, data]
     - [0xD780E0, data]
     - [0xD78540, data]
-    - [0xD78870, rodata]
+    - [0xD78870]
   - name: pra_22
     dir: world/area_pra/pra_22
     type: code
@@ -9436,7 +9309,7 @@ segments:
     - [0xD78B50, data]
     - [0xD78BF0, data]
     - [0xD796B0, data]
-    - [0xD799E0, rodata]
+    - [0xD799E0]
   - name: pra_27
     dir: world/area_pra/pra_27
     type: code
@@ -9448,7 +9321,7 @@ segments:
     - [0xD7AC00, data]
     - [0xD7AC90, data]
     - [0xD7B080, data]
-    - [0xD7B270, rodata]
+    - [0xD7B270]
   - name: pra_28
     dir: world/area_pra/pra_28
     type: code
@@ -9460,7 +9333,7 @@ segments:
     - [0xD7C4B0, data]
     - [0xD7C540, data]
     - [0xD7C930, data]
-    - [0xD7CB20, rodata]
+    - [0xD7CB20]
   - name: pra_29
     dir: world/area_pra/pra_29
     type: code
@@ -9473,7 +9346,7 @@ segments:
     - [0xD7DDD0, data]
     - [0xD7DE90, data]
     - [0xD7E9B0, data]
-    - [0xD7ED50, rodata]
+    - [0xD7ED50]
   - name: pra_31
     dir: world/area_pra/pra_31
     type: code
@@ -9488,7 +9361,7 @@ segments:
     - [0xD7FEC0, data]
     - [0xD80E20, data]
     - [0xD81250, data]
-    - [0xD869E0, rodata]
+    - [0xD869E0]
   - name: pra_32
     dir: world/area_pra/pra_32
     type: code
@@ -9500,7 +9373,7 @@ segments:
     - [0xD86A20, c]
     - [0xD87240, data]
     - [0xD87DF0, data]
-    - [0xD896B0, rodata]
+    - [0xD896B0]
   - name: pra_33
     dir: world/area_pra/pra_33
     type: code
@@ -9513,7 +9386,7 @@ segments:
     - [0xD8A770, data]
     - [0xD8A820, data]
     - [0xD8B060, data]
-    - [0xD8B3A0, rodata]
+    - [0xD8B3A0]
   - name: pra_34
     dir: world/area_pra/pra_34
     type: code
@@ -9526,7 +9399,7 @@ segments:
     - [0xD8C3B0, data]
     - [0xD8C470, data]
     - [0xD8D130, data]
-    - [0xD8D240, rodata]
+    - [0xD8D240]
   - name: pra_35
     dir: world/area_pra/pra_35
     type: code
@@ -9541,7 +9414,7 @@ segments:
     - [0xD8FF10, data]
     - [0xD90700, data]
     - [0xD91030, data]
-    - [0xD91220, rodata]
+    - [0xD91220]
   - name: pra_36
     dir: world/area_pra/pra_36
     type: code
@@ -9552,7 +9425,7 @@ segments:
     - [0xD91700, c]
     - [0xD92650, data]
     - [0xD926F0, data]
-    - [0xD92F10, rodata]
+    - [0xD92F10]
   - name: pra_37
     dir: world/area_pra/pra_37
     type: code
@@ -9563,8 +9436,7 @@ segments:
     - [0xD92F40, c]
     - [0xD94760, data]
     - [0xD94800, data]
-    - [0xD95420, rodata]
-    - [0xD95450, rodata]
+    - [0xD95420]
   - name: pra_38
     dir: world/area_pra/pra_38
     type: code
@@ -9575,8 +9447,7 @@ segments:
     - [0xD955F0, c]
     - [0xD96CD0, data]
     - [0xD96D70, data]
-    - [0xD97810, rodata]
-    - [0xD97840, rodata]
+    - [0xD97810]
   - name: pra_39
     dir: world/area_pra/pra_39
     type: code
@@ -9587,8 +9458,7 @@ segments:
     - [0xD97890, c]
     - [0xD98F70, data]
     - [0xD99010, data]
-    - [0xD99930, rodata]
-    - [0xD99960, rodata]
+    - [0xD99930]
   - name: pra_40
     dir: world/area_pra/pra_40
     type: code
@@ -9601,7 +9471,7 @@ segments:
     - [0xD9A8D0, data]
     - [0xD9A970, data]
     - [0xD9AE80, data]
-    - [0xD9AEE0, rodata]
+    - [0xD9AEE0]
   - name: omo_01
     dir: world/area_omo/omo_01
     type: code
@@ -9616,7 +9486,7 @@ segments:
     - [0xD9BD50, data]
     - [0xD9C200, data]
     - [0xD9D250, data]
-    - [0xD9D330, rodata]
+    - [0xD9D330]
   - name: omo_02
     dir: world/area_omo/omo_02
     type: code
@@ -9632,7 +9502,7 @@ segments:
     - [0xDA05B0, data]
     - [0xDA0A50, data]
     - [0xDA1CD0, data]
-    - [0xDA4D30, rodata]
+    - [0xDA4D30]
   - name: omo_03
     dir: world/area_omo/omo_03
     type: code
@@ -9645,7 +9515,7 @@ segments:
     - [0xDA5AD0, data]
     - [0xDA6050, data]
     - [0xDA8190, data]
-    - [0xDAD3B0, rodata]
+    - [0xDAD3B0]
   - name: omo_04
     dir: world/area_omo/omo_04
     type: code
@@ -9657,10 +9527,7 @@ segments:
     - [0xDAF240, c]
     - [0xDAF320, data]
     - [0xDAF3E0, data]
-    - [0xDB20A0, rodata]
-    - [0xDB20B0, rodata]
-    - [0xDB2108, rodata]
-    - [0xDB22B0, rodata]
+    - [0xDB20A0]
   - name: omo_05
     dir: world/area_omo/omo_05
     type: code
@@ -9672,9 +9539,7 @@ segments:
     - [0xDB46C0, data]
     - [0xDB4770, data]
     - [0xDB7410, data]
-    - [0xDB7560, rodata]
-    - [0xDB7570, rodata]
-    - [0xDB7908, rodata]
+    - [0xDB7560]
   - name: omo_06
     dir: world/area_omo/omo_06
     type: code
@@ -9688,7 +9553,7 @@ segments:
     - [0xDB88E0, data]
     - [0xDB9060, data]
     - [0xDBCFD0, data]
-    - [0xDBD270, rodata]
+    - [0xDBD270]
   - name: omo_07
     dir: world/area_omo/omo_07
     type: code
@@ -9705,9 +9570,7 @@ segments:
     - [0xDC0B80, data]
     - [0xDC30B0, data]
     - [0xDC3730, data]
-    - [0xDC3E70, rodata]
-    - [0xDC3E80, rodata]
-    - [0xDC43C0, rodata]
+    - [0xDC3E70]
   - name: omo_08
     dir: world/area_omo/omo_08
     type: code
@@ -9721,7 +9584,7 @@ segments:
     - [0xDC52F0, data]
     - [0xDC8100, data]
     - [0xDCBA10, data]
-    - [0xDCCB00, rodata]
+    - [0xDCCB00]
   - name: omo_09
     dir: world/area_omo/omo_09
     type: code
@@ -9742,9 +9605,7 @@ segments:
     - [0xDD3520, data]
     - [0xDD4150, data]
     - [0xDD6BB0, data]
-    - [0xDD72F0, rodata]
-    - [0xDD7300, rodata]
-    - [0xDD79A0, rodata]
+    - [0xDD72F0]
   - name: omo_10
     dir: world/area_omo/omo_10
     type: code
@@ -9757,7 +9618,7 @@ segments:
     - [0xDD8640, data]
     - [0xDD8A60, data]
     - [0xDDC720, data]
-    - [0xDDC7F0, rodata]
+    - [0xDDC7F0]
   - name: omo_11
     dir: world/area_omo/omo_11
     type: code
@@ -9770,7 +9631,7 @@ segments:
     - [0xDDDD00, data]
     - [0xDDDD90, data]
     - [0xDDEE80, data]
-    - [0xDDF300, rodata]
+    - [0xDDF300]
   - name: omo_12
     dir: world/area_omo/omo_12
     type: code
@@ -9783,7 +9644,7 @@ segments:
     - [0xDDF7D0, data]
     - [0xDDF960, data]
     - [0xDDFB60, data]
-    - [0xDE2470, rodata]
+    - [0xDE2470]
   - name: omo_13
     dir: world/area_omo/omo_13
     type: code
@@ -9798,7 +9659,7 @@ segments:
     - [0xDE3A10, data]
     - [0xDE3F70, data]
     - [0xDE5100, data]
-    - [0xDE5360, rodata]
+    - [0xDE5360]
   - name: omo_14
     dir: world/area_omo/omo_14
     type: code
@@ -9811,7 +9672,7 @@ segments:
     - [0xDE5C70, data]
     - [0xDE5D00, data]
     - [0xDE5FA0, data]
-    - [0xDE8760, rodata]
+    - [0xDE8760]
   - name: omo_15
     dir: world/area_omo/omo_15
     type: code
@@ -9822,7 +9683,7 @@ segments:
     - [0xDE8770, c]
     - [0xDE8F70, data]
     - [0xDE9670, data]
-    - [0xDEBEA0, rodata]
+    - [0xDEBEA0]
   - name: omo_16
     dir: world/area_omo/omo_16
     type: code
@@ -9834,7 +9695,7 @@ segments:
     - [0xDEC4D0, data]
     - [0xDEC600, data]
     - [0xDEEC30, data]
-    - [0xDEEE80, rodata]
+    - [0xDEEE80]
   - name: omo_17
     dir: world/area_omo/omo_17
     type: code
@@ -9850,9 +9711,7 @@ segments:
     - [0xDF4EB0, data]
     - [0xDF57A0, data]
     - [0xDF6380, data]
-    - [0xDF6470, rodata]
-    - [0xDF64B0, rodata]
-    - [0xDF6848, rodata]
+    - [0xDF6470]
   - name: end_00
     dir: world/area_end/end_00
     type: code
@@ -9870,7 +9729,7 @@ segments:
     - [0xE019E0, data]
     - [0xE04180, data]
     - [0xE052C0, data]
-    - [0xE05300, rodata]
+    - [0xE05300]
   - name: end_01
     dir: world/area_end/end_01
     type: code
@@ -9889,7 +9748,7 @@ segments:
     - [0xE0C0C0, data]
     - [0xE0D510, data]
     - [0xE0E700, data]
-    - [0xE0E740, rodata]
+    - [0xE0E740]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
     type: code
@@ -9902,8 +9761,7 @@ segments:
     - [0xE0FF60, data]
     - [0xE111A0, data]
     - [0xE123E0, data]
-    - [0xE12570, rodata]
-    - [0xE12590, rodata]
+    - [0xE12570]
   - name: mgm_01
     dir: world/area_mgm/mgm_01
     type: code
@@ -9916,7 +9774,7 @@ segments:
     - [0xE13F10, data]
     - [0xE141D0, data]
     - [0xE15440, data]
-    - [0xE15D10, rodata]
+    - [0xE15D10]
   - name: mgm_02
     dir: world/area_mgm/mgm_02
     type: code
@@ -9929,7 +9787,7 @@ segments:
     - [0xE18180, data]
     - [0xE183D0, data]
     - [0xE1E020, data]
-    - [0xE1E260, rodata]
+    - [0xE1E260]
   - name: mgm_03
     dir: world/area_mgm/mgm_03
     type: code
@@ -9954,7 +9812,7 @@ segments:
     subsegments:
     - [0xE20110, c, E20110]
     - [0xE20B30, data]
-    - [0xE20DD0, .rodata, E20110]
+    - [0xE20DD0]
   - type: code
     overlay: True
     start: 0xE20EB0
@@ -9962,7 +9820,7 @@ segments:
     subsegments:
     - [0xe20eb0, c, e20eb0]
     - [0xE215C0, data]
-    - [0xE21860, .rodata, e20eb0]
+    - [0xE21860]
   - type: code
     overlay: True
     start: 0xE21870
@@ -9970,7 +9828,7 @@ segments:
     subsegments:
     - [0xE21870, c, E21870]
     - [0xE21EB0, data]
-    - [0xE22590, .rodata, E21870]
+    - [0xE22590]
   - type: code
     overlay: True
     start: 0xE225B0
@@ -9978,7 +9836,7 @@ segments:
     subsegments:
     - [0xE225B0, c, E225B0]
     - [0xE22B30, data]
-    - [0xE23230, .rodata, E225B0]
+    - [0xE23230]
   - type: code
     name: world_action_idle
     dir: world/action
@@ -10013,7 +9871,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE245D0, c, 18]
-    - [0xE248D0, data, 18]
+    - [0xE248D0, .data, 18]
   - type: code
     name: world_action_land
     dir: world/action
@@ -10031,7 +9889,7 @@ segments:
     subsegments:
     - [0xE24ED0, c, hammer]
     - [0xE25C80, data, hammer]
-    - [0xE25CC0, .rodata, hammer]
+    - [0xE25C90]
   - type: code
     name: world_action_spin
     dir: world/action
@@ -10040,7 +9898,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE25D60, c, spin]
-    - [0xE26700, .rodata, spin]
+    - [0xE26700]
   - type: code
     name: world_action_ultra_boots
     dir: world/action
@@ -10049,7 +9907,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE26710, c, ultra_boots]
-    - [0xE26DA0, .rodata, ultra_boots]
+    - [0xE26DA0]
   - type: code
     name: world_action_super_boots
     dir: world/action
@@ -10058,7 +9916,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE26DE0, c, super_boots]
-    - [0xE274C0, .rodata, super_boots]
+    - [0xE274C0]
   - type: code
     name: world_action_slide
     dir: world/action
@@ -10067,7 +9925,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE27510, c, slide]
-    - [0xE27C50, .rodata, slide]
+    - [0xE27C50]
   - type: code
     name: world_action_hit_fire
     dir: world/action
@@ -10084,7 +9942,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE27F40, c, hit_lava]
-    - [0xE28790, .rodata, hit_lava]
+    - [0xE28790]
   - type: code
     name: world_action_16
     dir: world/action
@@ -10101,7 +9959,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE28A30, c, encounter]
-    - [0xE29190, .rodata, encounter]
+    - [0xE29190]
   - type: code
     name: world_action_use_munchlesia
     dir: world/action
@@ -10110,7 +9968,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE291A0, c, use_munchlesia]
-    - [0xE29450, .rodata, use_munchlesia]
+    - [0xE29450]
   - type: code
     name: world_action_use_spinning_flower
     dir: world/action
@@ -10119,7 +9977,7 @@ segments:
     overlay: True
     subsegments:
     - [0xE29470, c, use_spinning_flower]
-    - [0xE2A300, .rodata, use_spinning_flower]
+    - [0xE2A300]
   - type: code
     name: world_action_use_tweester
     dir: world/action
@@ -10129,7 +9987,7 @@ segments:
     subsegments:
     - [0xE2A340, c, use_tweester]
     - [0xE2A690, data, use_tweester]
-    - [0xE2A6A0, .rodata, use_tweester]
+    - [0xE2A6A0]
   - type: code
     name: world_action_sneaky_parasol
     dir: world/action
@@ -10138,8 +9996,8 @@ segments:
     overlay: True
     subsegments:
     - [0xE2A6B0, c, sneaky_parasol]
-    - [0xE2B420, data, sneaky_parasol]
-    - [0xE2B440, .rodata, sneaky_parasol]
+    - [0xE2B430, data, sneaky_parasol]
+    - [0xE2B440]
   - type: code
     dir: entity/default
     start: 0xE2B530
@@ -10150,9 +10008,7 @@ segments:
     - [0xE2BE40, c, E2BE40]
     - [0xE2C930, c]
     - [0xE2D410, data]
-    - [0xE2D680, .rodata, E2B530]
-    - [0xE2D6D0, .rodata, E2BE40]
-    - [0xE2D6F0, .rodata, E2C930]
+    - [0xE2D680]
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
@@ -10163,8 +10019,7 @@ segments:
     - [0xE2E5F0, c]
     - [0xE2EDE0, c]
     - [0xE2EFD0, data]
-    - [0xE2F6F0, .rodata, E2D730]
-    - [0xE2F740, .rodata, E2E5F0]
+    - [0xE2F6F0]
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
@@ -10174,8 +10029,7 @@ segments:
     - [0xE2F750, c, E2F750]
     - [0xE307C0, c, E307C0]
     - [0xE31380, data]
-    - [0xE314C0, .rodata, E2F750]
-    - [0xE314F0, .rodata, E307C0]
+    - [0xE314C0]
   - [0xE31530, bin] # unk data
   - type: code
     start: 0xEA0900
@@ -10186,8 +10040,7 @@ segments:
     - [0xEA0C10, c, EA0C10]
     - [0xEA36E0, c, EA36E0]
     - [0xEA3A80, data]
-    - [0xEA6D70, .rodata, EA0C10]
-    - [0xEA6FB0, .rodata, EA36E0]
+    - [0xEA6D70]
   - type: code
     start: 0xEA6FD0
     vram: 0x80240000
@@ -10204,7 +10057,7 @@ segments:
     subsegments:
     - [0xEA8AE0, c]
     - [0xEAA810, data]
-    - [0xEB0E20, .rodata, EA8AE0]
+    - [0xEB0E20]
   - type: code
     start: 0xEB0E60
     vram: 0x80240000
@@ -10229,7 +10082,7 @@ segments:
     - [0xEB7230, c]
     - [0xEB7540, c, EB7540]
     - [0xEB7850, data]
-    - [0xEB8E40, .rodata, EB7540]
+    - [0xEB8E40]
   - type: code
     start: 0xEB8E50
     vram: 0x80240000
@@ -10239,8 +10092,7 @@ segments:
     - [0xEB8E90, c, EB8E90]
     - [0xEB9D90, c]
     - [0xEBA260, data]
-    - [0xEC2000, .rodata, EB8E50]
-    - [0xEC2040, .rodata, EB8E90]
+    - [0xEC2000]
   - type: code
     start: 0xEC2200
     vram: 0x80240000
@@ -10250,8 +10102,7 @@ segments:
     - [0xEC2240, c, EC2240]
     - [0xEC2610, c]
     - [0xEC2850, data]
-    - [0xEC7170, .rodata, EC2200]
-    - [0xEC7188, .rodata, EC2240]
+    - [0xEC7170]
   - type: code
     start: 0xEC71B0
     vram: 0x80240000
@@ -10271,7 +10122,7 @@ segments:
     - [0xECB930, c]
     - [0xECBB70, c]
     - [0xECBC10, data]
-    - [0xECFE60, .rodata, ECAA80]
+    - [0xECFE60]
   - type: code
     start: 0xECFFF0
     vram: 0x80240000
@@ -10282,7 +10133,7 @@ segments:
     - [0xED00D0, c]
     - [0xED0310, c]
     - [0xED1840, data]
-    - [0xED41C0, .rodata, ED0310]
+    - [0xED41C0]
   - type: code
     start: 0xED4220
     vram: 0x80240000
@@ -10301,7 +10152,7 @@ segments:
     subsegments:
     - [0xED8E20, c, ED8E20]
     - [0xED9170, data]
-    - [0xEDBF90, .rodata, ED8E20]
+    - [0xEDBF90]
   - type: code
     start: 0xEDBFE0
     vram: 0x80240000
@@ -10319,8 +10170,7 @@ segments:
     - [0xEDEA00, c, EDEA00]
     - [0xEE2040, c, EE2040]
     - [0xEE20E0, data]
-    - [0xEE64B0, .rodata, EDEA00]
-    - [0xEE65A0, .rodata, EE2040]
+    - [0xEE64B0]
   - type: code
     start: 0xEE65B0
     vram: 0x80240000
@@ -10341,7 +10191,7 @@ segments:
     - [0xEEDF50, c]
     - [0xEEFAA0, c]
     - [0xEEFAD0, data]
-    - [0xEF2550, .rodata, EEDF50]
+    - [0xEF2550]
   - type: code
     start: 0xEF2610
     vram: 0x80240000
@@ -10351,7 +10201,7 @@ segments:
     - [0xEF2650, c]
     - [0xEF2680, c, EF2680]
     - [0xEF58E0, data]
-    - [0xEF79C0, .rodata, EF2680]
+    - [0xEF79C0]
   - type: code
     start: 0xEF7A80
     vram: 0x80240000

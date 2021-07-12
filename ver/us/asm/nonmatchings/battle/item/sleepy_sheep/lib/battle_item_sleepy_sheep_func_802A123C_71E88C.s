@@ -3,8 +3,8 @@
 
 .section .rodata
 
-glabel D_802A3E88_7214D8
-.word 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFE2, 0x00000000, 0xFFFFFFCE, 0xFFFFFFE5, 0x00000000, 0x0000001E, 0xFFFFFFBA, 0x00000000, 0xFFFFFFFB, 0xFFFFFF97, 0x00000000, 0x0000001E, 0xFFFFFF92, 0x00000000, 0xFFFFFFCE, 0xFFFFFF6F, 0x00000000, 0xFFFFFFFB, 0xFFFFFF56, 0x00000000, 0xFFFFFFCE, 0xFFFFFF42, 0x00000000, 0xFFFFFFE2, 0xFFFFFF2E, 0x00000000, 0xFFFFFFF6
+glabel D_802A3E88_7214E0
+.word 0x00000000, 0xFFFFFFE2, 0x00000000, 0xFFFFFFCE, 0xFFFFFFE5, 0x00000000, 0x0000001E, 0xFFFFFFBA, 0x00000000, 0xFFFFFFFB, 0xFFFFFF97, 0x00000000, 0x0000001E, 0xFFFFFF92, 0x00000000, 0xFFFFFFCE, 0xFFFFFF6F, 0x00000000, 0xFFFFFFFB, 0xFFFFFF56, 0x00000000, 0xFFFFFFCE, 0xFFFFFF42, 0x00000000, 0xFFFFFFE2, 0xFFFFFF2E, 0x00000000, 0xFFFFFFF6
 
 glabel D_802A3F00_721550
 .word 0x3F800000, 0x3F800000, 0x3F400000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F400000, 0x3F400000
@@ -73,7 +73,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 .L802A130C:
 /* 71E95C 802A130C 8E440000 */  lw        $a0, ($s2)
 /* 71E960 802A1310 26520004 */  addiu     $s2, $s2, 4
-/* 71E964 802A1314 0C0B5083 */  jal       func_802D420C
+/* 71E964 802A1314 0C0B5083 */  jal       virtual_entity_create
 /* 71E968 802A1318 26310001 */   addiu    $s1, $s1, 1
 /* 71E96C 802A131C 3C08802A */  lui       $t0, %hi(D_802A3E88_7214D8)
 /* 71E970 802A1320 25083E88 */  addiu     $t0, $t0, %lo(D_802A3E88_7214D8)
@@ -103,13 +103,13 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71E9D0 802A1380 44052000 */  mfc1      $a1, $f4
 /* 71E9D4 802A1384 4600C10D */  trunc.w.s $f4, $f24
 /* 71E9D8 802A1388 44072000 */  mfc1      $a3, $f4
-/* 71E9DC 802A138C 0C0B50D9 */  jal       func_802D4364
+/* 71E9DC 802A138C 0C0B50D9 */  jal       virtual_entity_set_pos
 /* 71E9E0 802A1390 26730004 */   addiu    $s3, $s3, 4
 /* 71E9E4 802A1394 0200202D */  daddu     $a0, $s0, $zero
 /* 71E9E8 802A1398 8EE50000 */  lw        $a1, ($s7)
 /* 71E9EC 802A139C 26F70004 */  addiu     $s7, $s7, 4
 /* 71E9F0 802A13A0 3C073F80 */  lui       $a3, 0x3f80
-/* 71E9F4 802A13A4 0C0B50EB */  jal       func_802D43AC
+/* 71E9F4 802A13A4 0C0B50EB */  jal       virtual_entity_set_scale
 /* 71E9F8 802A13A8 00A0302D */   daddu    $a2, $a1, $zero
 /* 71E9FC 802A13AC 2A22000A */  slti      $v0, $s1, 0xa
 /* 71EA00 802A13B0 1440FFD6 */  bnez      $v0, .L802A130C
@@ -201,7 +201,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71EB4C 802A14FC 44052000 */  mfc1      $a1, $f4
 /* 71EB50 802A1500 4600C10D */  trunc.w.s $f4, $f24
 /* 71EB54 802A1504 44072000 */  mfc1      $a3, $f4
-/* 71EB58 802A1508 0C0B50D9 */  jal       func_802D4364
+/* 71EB58 802A1508 0C0B50D9 */  jal       virtual_entity_set_pos
 /* 71EB5C 802A150C 00000000 */   nop
 /* 71EB60 802A1510 56A00038 */  bnel      $s5, $zero, .L802A15F4
 /* 71EB64 802A1514 2694000C */   addiu    $s4, $s4, 0xc
@@ -260,7 +260,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71EC2C 802A15DC 4406A000 */  mfc1      $a2, $f20
 /* 71EC30 802A15E0 4407C000 */  mfc1      $a3, $f24
 /* 71EC34 802A15E4 24150001 */  addiu     $s5, $zero, 1
-/* 71EC38 802A15E8 0C01BEB4 */  jal       fx_walk_large
+/* 71EC38 802A15E8 0C01BEB4 */  jal       fx_land
 /* 71EC3C 802A15EC AFA00010 */   sw       $zero, 0x10($sp)
 /* 71EC40 802A15F0 2694000C */  addiu     $s4, $s4, 0xc
 .L802A15F4:
@@ -305,7 +305,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 /* 71ECDC 802A168C 4406A000 */  mfc1      $a2, $f20
 /* 71ECE0 802A1690 44070000 */  mfc1      $a3, $f0
 /* 71ECE4 802A1694 24040002 */  addiu     $a0, $zero, 2
-/* 71ECE8 802A1698 0C01BEB4 */  jal       fx_walk_large
+/* 71ECE8 802A1698 0C01BEB4 */  jal       fx_land
 /* 71ECEC 802A169C AFA00010 */   sw       $zero, 0x10($sp)
 .L802A16A0:
 /* 71ECF0 802A16A0 C7C20000 */  lwc1      $f2, ($fp)
@@ -326,7 +326,7 @@ glabel battle_item_sleepy_sheep_func_802A123C_71E88C
 .L802A16D8:
 /* 71ED28 802A16D8 8E040000 */  lw        $a0, ($s0)
 /* 71ED2C 802A16DC 26100004 */  addiu     $s0, $s0, 4
-/* 71ED30 802A16E0 0C0B50FD */  jal       func_802D43F4
+/* 71ED30 802A16E0 0C0B50FD */  jal       virtual_entity_delete_by_index
 /* 71ED34 802A16E4 26310001 */   addiu    $s1, $s1, 1
 /* 71ED38 802A16E8 2A22000A */  slti      $v0, $s1, 0xa
 /* 71ED3C 802A16EC 1440FFFA */  bnez      $v0, .L802A16D8

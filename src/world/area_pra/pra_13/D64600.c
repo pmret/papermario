@@ -85,7 +85,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_80241310_D658F0);
 INCLUDE_ASM(s32, "world/area_pra/pra_13/D64600", func_802413A4_D65984);
 /*
 ApiStatus N(func_802413A4_D65984)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 */

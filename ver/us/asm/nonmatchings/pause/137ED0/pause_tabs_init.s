@@ -17,11 +17,11 @@ glabel pause_tabs_init
 .L802452B8:
 /* 1385F8 802452B8 8E240000 */  lw        $a0, ($s1)
 /* 1385FC 802452BC 26310004 */  addiu     $s1, $s1, 4
-/* 138600 802452C0 0C050529 */  jal       create_icon
+/* 138600 802452C0 0C050529 */  jal       create_hud_element
 /* 138604 802452C4 26100001 */   addiu    $s0, $s0, 1
 /* 138608 802452C8 0040202D */  daddu     $a0, $v0, $zero
 /* 13860C 802452CC 24050080 */  addiu     $a1, $zero, 0x80
-/* 138610 802452D0 0C051280 */  jal       set_icon_flags
+/* 138610 802452D0 0C051280 */  jal       set_hud_element_flags
 /* 138614 802452D4 AE440000 */   sw       $a0, ($s2)
 /* 138618 802452D8 2A020006 */  slti      $v0, $s0, 6
 /* 13861C 802452DC 1440FFF6 */  bnez      $v0, .L802452B8

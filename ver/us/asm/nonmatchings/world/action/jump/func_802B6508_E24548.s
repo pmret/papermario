@@ -25,12 +25,12 @@ glabel func_802B6508_E24548
 /* E24598 802B6558 10600004 */  beqz      $v1, .L802B656C
 /* E2459C 802B655C A4820002 */   sh       $v0, 2($a0)
 /* E245A0 802B6560 3C04000A */  lui       $a0, 0xa
-/* E245A4 802B6564 0C037FBF */  jal       func_800DFEFC
+/* E245A4 802B6564 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* E245A8 802B6568 34840006 */   ori      $a0, $a0, 6
 .L802B656C:
 /* E245AC 802B656C 960200C0 */  lhu       $v0, 0xc0($s0)
 /* E245B0 802B6570 24420001 */  addiu     $v0, $v0, 1
-/* E245B4 802B6574 0C039454 */  jal       func_800E5150
+/* E245B4 802B6574 0C039454 */  jal       phys_update_interact_collider
 /* E245B8 802B6578 A60200C0 */   sh       $v0, 0xc0($s0)
 /* E245BC 802B657C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* E245C0 802B6580 8FB00010 */  lw        $s0, 0x10($sp)

@@ -287,7 +287,7 @@ Script N(80241780) = SCRIPT({
     bind N(80241734) to TRIGGER_FLOOR_TOUCH 10;
     spawn {
         SI_VAR(15) = 0;
-    0:
+0:
         N(func_80240340_CE3A30)(SI_VAR(15), SI_VAR(0), 0.96875, 1.03125, 15, 0, 0);
         N(func_80240340_CE3A30)(SI_VAR(15), SI_VAR(1), 1.03125, 0.96875, 15, 0, 0);
         ScaleModel(70, SI_VAR(1), SI_VAR(0), 1);
@@ -440,7 +440,7 @@ Script N(80241CC4) = SCRIPT({
         SI_VAR(3) = (float) SI_VAR(0);
         N(func_80240540_CE3C30)();
         N(func_80240660_CE3D50)();
-    11:
+11:
         sleep 1;
         if (SI_AREA_FLAG(45) == 1) {
             goto 11;
@@ -543,14 +543,14 @@ Script N(802423F8) = SCRIPT({
                 if (SI_VAR(15) == 300) {
                     SI_MAP_VAR(10) = 1;
                 }
-            11:
+11:
                 sleep 1;
                 if (SI_AREA_FLAG(45) == 1) {
                     goto 11;
                 }
             }
         }
-    10:
+10:
         if (SI_MAP_VAR(10) == 0) {
             sleep 1;
             goto 10;
@@ -644,10 +644,10 @@ Script N(80242FD0) = SCRIPT({
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-void func_80072950();
+void playFX_82();
 
 ApiStatus N(func_8024030C_CE39FC)(ScriptInstance* script, s32 isInitialCall) {
-    func_80072950(1, 0, 0, 0, 0, 0);
+    playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
@@ -674,7 +674,7 @@ ApiStatus N(func_80240340_CE3A30)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = *args++;
     s32 var2 = *args++;
@@ -685,7 +685,7 @@ ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240540_CE3C30)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240540_CE3C30)(ScriptInstance* script, s32 isInitialCall) {
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
     f32 temp_f22 = clamp_angle(atan2(0.0f, 0.0f, script->varTable[9], script->varTable[11]) - temp_f20);
@@ -699,8 +699,8 @@ ApiStatus N(func_80240540_CE3C30)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240660_CE3D50)(ScriptInstance *script, s32 isInitialCall) {
-    Npc *npc = get_npc_by_index(0);
+ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
+    Npc* npc = get_npc_by_index(0);
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(atan2(0.0f, 0.0f, script->varTable[12], script->varTable[14]) - temp_f20);
@@ -714,8 +714,8 @@ ApiStatus N(func_80240660_CE3D50)(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240784_CE3E74)(ScriptInstance *script, s32 isInitialCall) {
-    set_transition_stencil_zoom_1(1, script->varTable[0]);
+ApiStatus N(func_80240784_CE3E74)(ScriptInstance* script, s32 isInitialCall) {
+    set_screen_overlay_params_back(1, script->varTable[0]);
     return ApiStatus_DONE2;
 }
 

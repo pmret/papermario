@@ -11,7 +11,7 @@ glabel func_801369D0
 /* CD0E8 801369E8 240700FF */  addiu     $a3, $zero, 0xff
 /* CD0EC 801369EC AFBF0018 */  sw        $ra, 0x18($sp)
 /* CD0F0 801369F0 AFA20010 */  sw        $v0, 0x10($sp)
-/* CD0F4 801369F4 0C04993B */  jal       draw_msg
+/* CD0F4 801369F4 0C04993B */  jal       draw_string
 /* CD0F8 801369F8 AFA00014 */   sw       $zero, 0x14($sp)
 /* CD0FC 801369FC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* CD100 80136A00 03E00008 */  jr        $ra

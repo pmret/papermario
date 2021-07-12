@@ -540,7 +540,7 @@ glabel create_actor
 /* 194490 80265BB0 3463FFFF */  ori       $v1, $v1, 0xffff
 /* 194494 80265BB4 00432024 */  and       $a0, $v0, $v1
 /* 194498 80265BB8 0000282D */  daddu     $a1, $zero, $zero
-/* 19449C 80265BBC 0C0B783B */  jal       func_802DE0EC
+/* 19449C 80265BBC 0C0B783B */  jal       spr_load_npc_sprite
 /* 1944A0 80265BC0 AE040088 */   sw       $a0, 0x88($s0)
 /* 1944A4 80265BC4 AE020084 */  sw        $v0, 0x84($s0)
 .L80265BC8:
@@ -599,10 +599,10 @@ glabel create_actor
 /* 19456C 80265C8C 46220003 */  div.d     $f0, $f0, $f2
 /* 194570 80265C90 46200020 */  cvt.s.d   $f0, $f0
 /* 194574 80265C94 E6200430 */  swc1      $f0, 0x430($s1)
-/* 194578 80265C98 0C01C43C */  jal       func_800710F0
+/* 194578 80265C98 0C01C43C */  jal       playFX_41
 /* 19457C 80265C9C AFA00010 */   sw       $zero, 0x10($sp)
 /* 194580 80265CA0 AE220440 */  sw        $v0, 0x440($s1)
-/* 194584 80265CA4 0C011D82 */  jal       func_80047608
+/* 194584 80265CA4 0C011D82 */  jal       create_status_icon_set
 /* 194588 80265CA8 AE200228 */   sw       $zero, 0x228($s1)
 /* 19458C 80265CAC A6220436 */  sh        $v0, 0x436($s1)
 /* 194590 80265CB0 0220102D */  daddu     $v0, $s1, $zero

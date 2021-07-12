@@ -111,8 +111,8 @@ void clear_script_list(void) {
         gMapFlags[i] = 0;
     }
 
-    func_802D4488();
-    func_802CD4B4();
+    clear_virtual_entity_list();
+    reset_model_animators();
 }
 
 void init_script_list(void) {
@@ -129,11 +129,11 @@ void init_script_list(void) {
     gNumScripts = 0;
     gIsUpdatingScripts = 0;
 
-    func_802D4560();
-    func_802CD57C();
+    init_virtual_entity_list();
+    init_model_animators();
 }
 
-void func_802C3390(ScriptInstance* script) {
+void suspend_frozen_scripts(ScriptInstance* script) {
     s32 arg;
 
     switch (timeFreezeMode) {
@@ -207,7 +207,7 @@ ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
     }
-    func_802C3390(newScript);
+    suspend_frozen_scripts(newScript);
 
     if (gStaticScriptCounter == 0) {
         gStaticScriptCounter = 1;
@@ -278,7 +278,7 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
         }
     } while (0);
 
-    func_802C3390(newScript);
+    suspend_frozen_scripts(newScript);
 
     tempCounter = &gStaticScriptCounter;
     if (*tempCounter == 0) {
@@ -350,7 +350,7 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
         gStaticScriptCounter = 1;
     }
 
-    func_802C3390(child);
+    suspend_frozen_scripts(child);
     return child;
 }
 
@@ -390,7 +390,7 @@ ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) 
     script->unk_158 = 0;
     script->timeScale = gGlobalTimeSpace;
     find_script_labels(script);
-    func_802C3390(script);
+    suspend_frozen_scripts(script);
 
     return script;
 }
@@ -413,12 +413,49 @@ ScriptInstance* restart_script(ScriptInstance* script) {
     script->timeScale = gGlobalTimeSpace;
 
     find_script_labels(script);
-    func_802C3390(script);
+    suspend_frozen_scripts(script);
 
     return script;
 }
 
-INCLUDE_ASM(s32, "evt/script_list", update_scripts);
+void update_scripts(void) {
+    if (gGameStatusPtr->disableScripts != TRUE) {
+        s32 i;
+
+        gIsUpdatingScripts = TRUE;
+        sort_scripts();
+
+        for (i = 0; i < gScriptListCount; i++) {
+            ScriptInstance* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
+
+            if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & 0x92)) {
+                s32 stop = FALSE;
+                s32 status;
+
+                script->frameCounter += script->timeScale;
+
+                do {
+                    if (script->frameCounter < 1.0) {
+                        // Continue to next script
+                        break;
+                    };
+
+                    script->frameCounter -= 1.0;
+                    status = si_execute_next_command(script);
+                    if (status == 1) {
+                        stop = TRUE;
+                        break;
+                    }
+                } while (status != -1);
+
+                if (stop) {
+                    break;
+                }
+            }
+        }
+        gIsUpdatingScripts = FALSE;
+    }
+}
 
 // this function is evil.
 INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);

@@ -5,7 +5,7 @@ glabel osCartRomInit
 /* 3C310 80060F10 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 3C314 80060F14 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 3C318 80060F18 AFB10014 */  sw        $s1, 0x14($sp)
-/* 3C31C 80060F1C 0C018529 */  jal       __osPiGetAccess
+/* 3C31C 80060F1C 0C018529 */  jal       osPiGetAccess
 /* 3C320 80060F20 AFB00010 */   sw       $s0, 0x10($sp)
 /* 3C324 80060F24 3C028009 */  lui       $v0, %hi(D_80093D80)
 /* 3C328 80060F28 8C423D80 */  lw        $v0, %lo(D_80093D80)($v0)
@@ -80,17 +80,17 @@ glabel osCartRomInit
 /* 3C434 80061034 A022430F */  sb        $v0, %lo(D_800B430F)($at)
 /* 3C438 80061038 3C01800B */  lui       $at, %hi(D_800B4310)
 /* 3C43C 8006103C A0234310 */  sb        $v1, %lo(D_800B4310)($at)
-/* 3C440 80061040 0C01ACD8 */  jal       __osDisableInt
+/* 3C440 80061040 0C01ACD8 */  jal       osDisableInt
 /* 3C444 80061044 2630FFF4 */   addiu    $s0, $s1, -0xc
 /* 3C448 80061048 3C038009 */  lui       $v1, %hi(__osPiTable)
 /* 3C44C 8006104C 8C633D6C */  lw        $v1, %lo(__osPiTable)($v1)
 /* 3C450 80061050 00402021 */  addu      $a0, $v0, $zero
 /* 3C454 80061054 3C018009 */  lui       $at, %hi(__osPiTable)
 /* 3C458 80061058 AC303D6C */  sw        $s0, %lo(__osPiTable)($at)
-/* 3C45C 8006105C 0C01ACF4 */  jal       __osRestoreInt
+/* 3C45C 8006105C 0C01ACF4 */  jal       osRestoreInt
 /* 3C460 80061060 AE23FFF4 */   sw       $v1, -0xc($s1)
 .L80061064:
-/* 3C464 80061064 0C018544 */  jal       __osPiRelAccess
+/* 3C464 80061064 0C018544 */  jal       osPiRelAccess
 /* 3C468 80061068 00000000 */   nop
 /* 3C46C 8006106C 3C02800B */  lui       $v0, %hi(D_800B4308)
 /* 3C470 80061070 24424308 */  addiu     $v0, $v0, %lo(D_800B4308)

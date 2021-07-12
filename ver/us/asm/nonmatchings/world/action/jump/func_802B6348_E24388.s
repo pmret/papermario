@@ -31,7 +31,7 @@ glabel func_802B6348_E24388
 .L802B63AC:
 /* E243EC 802B63AC 960200C0 */  lhu       $v0, 0xc0($s0)
 /* E243F0 802B63B0 24420001 */  addiu     $v0, $v0, 1
-/* E243F4 802B63B4 0C039454 */  jal       func_800E5150
+/* E243F4 802B63B4 0C039454 */  jal       phys_update_interact_collider
 /* E243F8 802B63B8 A60200C0 */   sh       $v0, 0xc0($s0)
 /* E243FC 802B63BC 0200202D */  daddu     $a0, $s0, $zero
 /* E24400 802B63C0 27A50028 */  addiu     $a1, $sp, 0x28
@@ -57,7 +57,7 @@ glabel func_802B6348_E24388
 /* E24450 802B6410 27A20040 */  addiu     $v0, $sp, 0x40
 /* E24454 802B6414 AFA2001C */  sw        $v0, 0x1c($sp)
 /* E24458 802B6418 27A20044 */  addiu     $v0, $sp, 0x44
-/* E2445C 802B641C 0C03791B */  jal       func_800DE46C
+/* E2445C 802B641C 0C03791B */  jal       player_raycast_below_cam_relative
 /* E24460 802B6420 AFA20020 */   sw       $v0, 0x20($sp)
 /* E24464 802B6424 0C016F6A */  jal       get_collider_type_by_id
 /* E24468 802B6428 0040202D */   daddu    $a0, $v0, $zero

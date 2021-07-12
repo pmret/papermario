@@ -15,10 +15,10 @@ glabel func_802BDD0C_31D87C
 /* 31D8A4 802BDD34 8C90014C */   lw       $s0, 0x14c($a0)
 /* 31D8A8 802BDD38 0C0AF460 */  jal       func_802BD180_31CCF0
 /* 31D8AC 802BDD3C 00000000 */   nop
-/* 31D8B0 802BDD40 0C03BA65 */  jal       func_800EE994
+/* 31D8B0 802BDD40 0C03BA65 */  jal       partner_init_put_away
 /* 31D8B4 802BDD44 0200202D */   daddu    $a0, $s0, $zero
 /* 31D8B8 802BDD48 3C040001 */  lui       $a0, 1
-/* 31D8BC 802BDD4C 0C037FD4 */  jal       func_800DFF50
+/* 31D8BC 802BDD4C 0C037FD4 */  jal       force_player_anim
 /* 31D8C0 802BDD50 34840002 */   ori      $a0, $a0, 2
 /* 31D8C4 802BDD54 2402FFFC */  addiu     $v0, $zero, -4
 /* 31D8C8 802BDD58 A2200003 */  sb        $zero, 3($s1)
@@ -30,7 +30,7 @@ glabel func_802BDD0C_31D87C
 /* 31D8E0 802BDD70 AE430004 */  sw        $v1, 4($s2)
 /* 31D8E4 802BDD74 A080007D */  sb        $zero, 0x7d($a0)
 .L802BDD78:
-/* 31D8E8 802BDD78 0C03BA6E */  jal       func_800EE9B8
+/* 31D8E8 802BDD78 0C03BA6E */  jal       partner_put_away
 /* 31D8EC 802BDD7C 0200202D */   daddu    $a0, $s0, $zero
 /* 31D8F0 802BDD80 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 31D8F4 802BDD84 8FB20018 */  lw        $s2, 0x18($sp)

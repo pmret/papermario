@@ -6,7 +6,7 @@ extern u32 D_E0200734[];
 u32 func_E0200000(s32 arg0) {
     s32 temp_v0 = D_E0200690 * 4;
 
-    D_E0200690 = (u32) ((temp_v0 + 2) * (temp_v0 + 3)) / 4;
+    D_E0200690 = (u32)((temp_v0 + 2) * (temp_v0 + 3)) / 4;
 
     return D_E0200690 % (arg0 + 1);
 }

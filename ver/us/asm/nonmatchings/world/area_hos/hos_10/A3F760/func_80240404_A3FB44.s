@@ -17,7 +17,7 @@ glabel func_80240404_A3FB44
 /* A3FB74 80240434 AFA00018 */  sw        $zero, 0x18($sp)
 /* A3FB78 80240438 E7A00010 */  swc1      $f0, 0x10($sp)
 /* A3FB7C 8024043C E7A20014 */  swc1      $f2, 0x14($sp)
-/* A3FB80 80240440 0C01BF8C */  jal       func_8006FE30
+/* A3FB80 80240440 0C01BF8C */  jal       playFX_0F
 /* A3FB84 80240444 E7A4001C */   swc1     $f4, 0x1c($sp)
 /* A3FB88 80240448 8FBF0020 */  lw        $ra, 0x20($sp)
 /* A3FB8C 8024044C 24020002 */  addiu     $v0, $zero, 2

@@ -62,7 +62,7 @@ glabel func_80241D28_A70108
 .L80241E0C:
 /* A701EC 80241E0C 0200202D */  daddu     $a0, $s0, $zero
 /* A701F0 80241E10 240520D5 */  addiu     $a1, $zero, 0x20d5
-/* A701F4 80241E14 0C012530 */  jal       func_800494C0
+/* A701F4 80241E14 0C012530 */  jal       ai_enemy_play_sound
 /* A701F8 80241E18 0000302D */   daddu    $a2, $zero, $zero
 /* A701FC 80241E1C 86440008 */  lh        $a0, 8($s2)
 /* A70200 80241E20 0C00FB3A */  jal       get_enemy

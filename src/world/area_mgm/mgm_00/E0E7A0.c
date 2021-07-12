@@ -1,5 +1,10 @@
 #include "mgm_00.h"
 
+static char* N(exit_str_0) = "mac_03";
+static char* N(exit_str_1) = "mgm_01";
+static char* N(exit_str_2) = "mgm_02";
+static char* N(exit_str_3) = "";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
@@ -12,43 +17,7 @@
 
 #include "world/common/SomeXYZFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_802402E0_E0EA80);
-/*
-ApiStatus N(func_802402E0_E0EA80)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    f32 ret;
-    f32 max;
-    f32 posX;
-    f32 posZ;
-    s32 i;
-    s32 j;
-
-    script->functionTemp[1].s = 0;
-    max = 32767.0f;
-    posX = npc->pos.x;
-    posZ = npc->pos.z;
-    script->functionTemp[2].s = 0;
-
-    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
-        ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
-        if (ret < max) {
-            max = ret;
-            script->functionTemp[2].s = j;
-        }
-    }
-
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-
-    script->functionTemp[0].s = 1;
-    return ApiStatus_DONE1;
-}
-*/
+#include "world/common/UnkNpcAIFunc24.inc.c"
 
 #include "world/common/UnkFunc13.inc.c"
 
@@ -56,26 +25,7 @@ ApiStatus N(func_802402E0_E0EA80)(ScriptInstance* script, NpcAISettings* aiSetti
 
 #include "world/common/UnkFunc14.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_8024095C_E0F0FC);
-/*
-ApiStatus N(func_8024095C_E0F0FC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-    return ApiStatus_DONE1;
-}
-*/
+#include "world/common/UnkNpcAIFunc25.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
@@ -134,14 +84,14 @@ ApiStatus N(func_80240E74_E0F614)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_802402E0_E0EA80)(script, npcAISettings, territoryPtr);
+#include "world/common/UnkNpcAIFunc24.inc.c"
         case 1:
             N(func_80240438_E0EBD8)(script, npcAISettings, territoryPtr);
             break;
@@ -151,7 +101,7 @@ ApiStatus N(func_80240E74_E0F614)(ScriptInstance* script, s32 isInitialCall) {
             N(func_802407A0_E0EF40)(script, npcAISettings, territoryPtr);
             break;
         case 4:
-            N(func_8024095C_E0F0FC)(script, npcAISettings, territoryPtr);
+#include "world/common/UnkNpcAIFunc25.inc.c"
             break;
         case 10:
             N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);

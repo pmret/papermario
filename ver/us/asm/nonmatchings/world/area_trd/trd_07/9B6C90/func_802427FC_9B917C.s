@@ -52,7 +52,7 @@ glabel func_802427FC_9B917C
 /* 9B9238 802428B8 44071000 */  mfc1      $a3, $f2
 /* 9B923C 802428BC 46000007 */  neg.s     $f0, $f0
 /* 9B9240 802428C0 E7B40010 */  swc1      $f20, 0x10($sp)
-/* 9B9244 802428C4 0C01BECC */  jal       fx_walk_normal
+/* 9B9244 802428C4 0C01BECC */  jal       fx_walk
 /* 9B9248 802428C8 E7A00014 */   swc1     $f0, 0x14($sp)
 /* 9B924C 802428CC 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 9B9250 802428D0 8FB30024 */  lw        $s3, 0x24($sp)

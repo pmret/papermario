@@ -77,7 +77,7 @@ glabel func_8024244C_A95B8C
 /* A95CAC 8024256C E7A40018 */   swc1     $f4, 0x18($sp)
 /* A95CB0 80242570 0260202D */  daddu     $a0, $s3, $zero
 /* A95CB4 80242574 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* A95CB8 80242578 0C012530 */  jal       func_800494C0
+/* A95CB8 80242578 0C012530 */  jal       ai_enemy_play_sound
 /* A95CBC 8024257C 3C060020 */   lui      $a2, 0x20
 /* A95CC0 80242580 24020032 */  addiu     $v0, $zero, 0x32
 /* A95CC4 80242584 A662008E */  sh        $v0, 0x8e($s3)

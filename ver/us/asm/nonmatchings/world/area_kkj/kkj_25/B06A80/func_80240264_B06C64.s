@@ -32,7 +32,7 @@ glabel func_80240264_B06C64
 /* B06CD0 802402D0 4406B000 */  mfc1      $a2, $f22
 /* B06CD4 802402D4 4407A000 */  mfc1      $a3, $f20
 /* B06CD8 802402D8 0000202D */  daddu     $a0, $zero, $zero
-/* B06CDC 802402DC 0C01C094 */  jal       func_80070250
+/* B06CDC 802402DC 0C01C094 */  jal       playFX_1A
 /* B06CE0 802402E0 AFA20010 */   sw       $v0, 0x10($sp)
 /* B06CE4 802402E4 8FBF0020 */  lw        $ra, 0x20($sp)
 /* B06CE8 802402E8 8FB1001C */  lw        $s1, 0x1c($sp)

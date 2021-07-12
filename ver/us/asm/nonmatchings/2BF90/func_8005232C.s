@@ -124,7 +124,7 @@ glabel func_8005232C
 /* 2D8E8 800524E8 A6220040 */  sh        $v0, 0x40($s1)
 /* 2D8EC 800524EC 84A20004 */  lh        $v0, 4($a1)
 /* 2D8F0 800524F0 8644000C */  lh        $a0, 0xc($s2)
-/* 2D8F4 800524F4 0C014E3E */  jal       func_800538F8
+/* 2D8F4 800524F4 0C014E3E */  jal       snd_tune_param_to_timescale
 /* 2D8F8 800524F8 00442021 */   addu     $a0, $v0, $a0
 /* 2D8FC 800524FC 8E420000 */  lw        $v0, ($s2)
 /* 2D900 80052500 C4420020 */  lwc1      $f2, 0x20($v0)

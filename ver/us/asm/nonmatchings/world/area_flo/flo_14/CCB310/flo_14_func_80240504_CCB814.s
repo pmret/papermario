@@ -144,7 +144,7 @@ glabel func_80240504_CCB814
 /* CCBA20 80240710 0000202D */  daddu     $a0, $zero, $zero
 /* CCBA24 80240714 27A50050 */  addiu     $a1, $sp, 0x50
 /* CCBA28 80240718 27A60054 */  addiu     $a2, $sp, 0x54
-/* CCBA2C 8024071C 0C0470AC */  jal       func_8011C2B0
+/* CCBA2C 8024071C 0C0470AC */  jal       mdl_get_copied_vertices
 /* CCBA30 80240720 27A70058 */   addiu    $a3, $sp, 0x58
 /* CCBA34 80240724 3C03DA38 */  lui       $v1, 0xda38
 /* CCBA38 80240728 34630001 */  ori       $v1, $v1, 1
@@ -173,7 +173,7 @@ glabel func_80240504_CCB814
 /* CCBA94 80240784 ACE30004 */  sw        $v1, 4($a3)
 /* CCBA98 80240788 ACC20000 */  sw        $v0, ($a2)
 /* CCBA9C 8024078C 3C02DE00 */  lui       $v0, 0xde00
-/* CCBAA0 80240790 0C0470BB */  jal       func_8011C2EC
+/* CCBAA0 80240790 0C0470BB */  jal       mdl_get_copied_gfx
 /* CCBAA4 80240794 AE020000 */   sw       $v0, ($s0)
 /* CCBAA8 80240798 3C038024 */  lui       $v1, %hi(flo_14_D_80243B14_CCEE24)
 /* CCBAAC 8024079C 24633B14 */  addiu     $v1, $v1, %lo(flo_14_D_80243B14_CCEE24)

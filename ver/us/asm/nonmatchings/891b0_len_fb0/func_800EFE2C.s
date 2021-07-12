@@ -75,7 +75,7 @@ glabel func_800EFE2C
 /* 893E4 800EFF34 3C018011 */  lui       $at, %hi(D_80109484)
 /* 893E8 800EFF38 C4209484 */  lwc1      $f0, %lo(D_80109484)($at)
 /* 893EC 800EFF3C 0000202D */  daddu     $a0, $zero, $zero
-/* 893F0 800EFF40 0C01BEB4 */  jal       fx_walk_large
+/* 893F0 800EFF40 0C01BEB4 */  jal       fx_land
 /* 893F4 800EFF44 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 893F8 800EFF48 0803C08E */  j         .L800F0238
 /* 893FC 800EFF4C 00000000 */   nop
@@ -217,7 +217,7 @@ glabel func_800EFE2C
 /* 89608 800F0158 44070000 */  mfc1      $a3, $f0
 /* 8960C 800F015C 0000202D */  daddu     $a0, $zero, $zero
 /* 89610 800F0160 E7AA0010 */  swc1      $f10, 0x10($sp)
-/* 89614 800F0164 0C01BECC */  jal       fx_walk_normal
+/* 89614 800F0164 0C01BECC */  jal       fx_walk
 /* 89618 800F0168 E7A80014 */   swc1     $f8, 0x14($sp)
 /* 8961C 800F016C 0803C08E */  j         .L800F0238
 /* 89620 800F0170 00000000 */   nop
@@ -271,7 +271,7 @@ glabel func_800EFE2C
 /* 896D8 800F0228 E7A40018 */  swc1      $f4, 0x18($sp)
 /* 896DC 800F022C E7A20014 */  swc1      $f2, 0x14($sp)
 .L800F0230:
-/* 896E0 800F0230 0C01C8D4 */  jal       func_80072350
+/* 896E0 800F0230 0C01C8D4 */  jal       playFX_72
 /* 896E4 800F0234 00000000 */   nop
 .L800F0238:
 /* 896E8 800F0238 8FBF0034 */  lw        $ra, 0x34($sp)

@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 class N64SegPalette(N64Segment):
     require_unique_name = False
 
-    def __init__(self, segment, rom_start, rom_end):
-        super().__init__(segment, rom_start, rom_end)
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
         self.raster: 'Optional[Raster]' = None
 
@@ -22,10 +22,10 @@ class N64SegPalette(N64Segment):
         #  1) same as the relevant raster segment name (max. 1 palette)
         #  2) relevant raster segment name + "." + unique palette name
         #  3) unique, referencing the relevant raster segment using `raster_name`
-        self.raster_name = segment.get(
+        self.raster_name = yaml.get(
             "raster_name",
             self.name.split(".")[0]
-        ) if type(segment) is dict else self.name.split(".")[0]
+        ) if isinstance(yaml, dict) else self.name.split(".")[0]
 
         if self.extract:
             if self.rom_end == "auto":

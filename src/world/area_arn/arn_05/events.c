@@ -103,10 +103,12 @@ Script N(interact_80241794) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(6) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0092));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0092));
                 SI_AREA_FLAG(6) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0093));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0093));
                 SI_AREA_FLAG(6) = 0;
             }
         }
@@ -133,10 +135,12 @@ Script N(interact_80241924) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(7) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0099));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x0099));
                 SI_AREA_FLAG(7) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x009A));
                 SI_AREA_FLAG(7) = 0;
             }
         }
@@ -170,13 +174,16 @@ Script N(interact_80241AB4) = SCRIPT({
         >= STORY_CH5_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(1014) == 1) {
                 if (SI_AREA_FLAG(9) == 1) {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AE));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_5), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                                  0x00AE));
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B0));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                                  0x00B0));
                 }
             } else {
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7));
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AA));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_7), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00AA));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_9));
                 ContinueSpeech(-1, NPC_ANIM(boo, Palette_01, Anim_9), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00AB));
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_A));
@@ -224,10 +231,12 @@ Script N(interact_80241E28) = SCRIPT({
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(8) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B3));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00B3));
                 SI_AREA_FLAG(8) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B4));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                              0x00B4));
                 SI_AREA_FLAG(8) = 0;
             }
         }
@@ -543,7 +552,7 @@ Script N(80242C50) = SCRIPT({
     SpeakToPlayer(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 0, MESSAGE_ID(0x0E, 0x00A1));
     GetCurrentPartnerID(SI_VAR(0));
     if (SI_VAR(0) != 9) {
-        N(func_802412C8_BE8EA8)(9);
+        N(SwitchToPartner)(9);
         spawn {
             SI_MAP_VAR(0) = 0;
             ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00A2), 160, 40);
@@ -992,39 +1001,7 @@ Script N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA7E0, 17, 238, 80, 0, MAKE_ENTITY_END);
 });
 
-void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    f32 ret;
-    f32 max;
-    f32 posX;
-    f32 posZ;
-    s32 i;
-    s32 j;
-
-    script->functionTemp[1].s = 0;
-    max = 32767.0f;
-    posX = npc->pos.x;
-    posZ = npc->pos.z;
-    script->functionTemp[2].s = 0;
-
-    for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
-        ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
-        if (ret < max) {
-            max = ret;
-            script->functionTemp[2].s = j;
-        }
-    }
-
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc24.inc.c"
 
 #include "world/common/UnkFunc13.inc.c"
 
@@ -1032,22 +1009,7 @@ void N(func_80240000_BE7BE0)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc14.inc.c"
 
-void N(func_8024067C_BE825C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= enemy->territory->patrol.numPoints) {
-        script->functionTemp[2].s = 0;
-    }
-    npc->currentAnim = enemy->animList[1];
-    if (enemy->territory->patrol.moveSpeedOverride < 0) {
-        npc->moveSpeed = aiSettings->moveSpeed;
-    } else {
-        npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
-    }
-    script->functionTemp[0].s = 1;
-}
+#include "world/common/UnkNpcAIFunc25.inc.c"
 
 #include "world/common/NpcJumpFunc2.inc.c"
 
@@ -1082,7 +1044,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall || enemy->unk_B0 & 4) {
         script->functionTemp[0].s = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         if (!enemy->territory->patrol.isFlying) {
             npc->flags = (npc->flags | 0x200) & ~8;
@@ -1104,14 +1066,14 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         posW = 100.0f;
 
-        if (func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
             npc->pos.y = posY;
         }
     }
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_BE7BE0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:
             N(UnkFunc13)(script, aiSettings, territoryPtr);
             break;
@@ -1121,7 +1083,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
             N(UnkFunc14)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(func_8024067C_BE825C)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
             break;
         case 10:
             N(NpcJumpFunc2)(script, aiSettings, territoryPtr);
@@ -1165,7 +1127,7 @@ void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, 
     posY = npc->pos.y + script->functionTemp[2].s[enemy->territory->patrol.points].y;
     posZ = npc->pos.z;
     posW = 1000.0f;
-    func_800DCB7C(npc->unk_80, &posX, &posY, &posZ, &posW);
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
     posY += script->functionTemp[2].s[enemy->territory->patrol.points].y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {
@@ -1194,7 +1156,7 @@ void N(func_80241068_BE8C48)(ScriptInstance* script, NpcAISettings* aiSettings, 
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
             script->functionTemp[0].s = 4;
-            npc->currentAnim = enemy->animList[0];
+            npc->currentAnim.w = enemy->animList[0];
         }
     }
 }
@@ -1224,7 +1186,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0].s) {
         case 0:
-            N(func_80240000_BE7BE0)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:
             N(func_80240E90_BE8A70)(script, aiSettings, territoryPtr);
             break;
@@ -1234,7 +1196,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241068_BE8C48)(script, aiSettings, territoryPtr);
             break;
         case 4:
-            N(func_8024067C_BE825C)(script, aiSettings, territoryPtr);
+            N(UnkNpcAIFunc25)(script, aiSettings, territoryPtr);
     }
 
     enemy->varTable[0] = npc->pos.y;
@@ -1245,7 +1207,4 @@ ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall) {
     return (gGameStatusPtr->pressedButtons >> 1) & ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802412C8_BE8EA8)(ScriptInstance* script, s32 isInitialCall) {
-    func_800EB168(get_variable(script, *script->ptrReadPos));
-    return ApiStatus_DONE2;
-}
+#include "world/common/SwitchToPartner.inc.c"

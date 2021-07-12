@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80243380_8554F0
+glabel filemenu_update_show_name_input_8554F0
 /* 8554F0 80243380 3C038011 */  lui       $v1, %hi(gPlayerData)
 /* 8554F4 80243384 2463F290 */  addiu     $v1, $v1, %lo(gPlayerData)
 /* 8554F8 80243388 8C6202BC */  lw        $v0, 0x2bc($v1)

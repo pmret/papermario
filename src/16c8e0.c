@@ -60,59 +60,59 @@ Script BtlBringPartnerOut = SCRIPT({
 s8 D_80280CE0[] = { 0, 0, 0, 0 };
 s32 D_80280CE4 = -1;
 
-Script D_80280CE8 = SCRIPT({
+Script CamPreset_B = SCRIPT({
     func_80248DD0();
 });
 
-Script D_80280D04 = SCRIPT({
+Script CamPreset_F = SCRIPT({
     func_80248DE4();
 });
 
-Script D_80280D20 = SCRIPT({
+Script CamPreset_M = SCRIPT({
     func_80249804();
 });
 
-Script D_80280D3C = SCRIPT({
+Script CamPreset_G = SCRIPT({
     func_8024A214();
 });
 
-Script D_80280D58 = SCRIPT({
+Script CamPreset_I = SCRIPT({
     func_8024A990();
 });
 
-Script D_80280D74 = SCRIPT({
+Script CamPreset_H = SCRIPT({
     func_8024AFE4();
 });
 
-Script D_80280D90 = SCRIPT({
+Script CamPreset_N = SCRIPT({
     func_8024B5FC();
 });
 
-Script D_80280DAC = SCRIPT({
+Script CamPreset_C = SCRIPT({
     func_8024B9A0();
 });
 
-Script D_80280DC8 = SCRIPT({
+Script CamPreset_D = SCRIPT({
     func_8024BDA4();
 });
 
-Script D_80280DE4 = SCRIPT({
+Script CamPreset_E = SCRIPT({
     func_8024C180();
 });
 
-Script D_80280E00 = SCRIPT({
+Script CamPreset_J = SCRIPT({
     func_8024C570();
 });
 
-Script D_80280E1C = SCRIPT({
+Script CamPreset_K = SCRIPT({
     func_8024C944();
 });
 
-Script D_80280E38 = SCRIPT({
+Script CamPreset_L = SCRIPT({
     func_8024CB68();
 });
 
-Script D_80280E54 = SCRIPT({
+Script CamPreset_A = SCRIPT({
     func_8024E9B0(0, 15, 0);
     func_8024E748(2, 550);
     func_8024E748(3, 100);
@@ -125,8 +125,8 @@ Script D_80280EB8 = SCRIPT({
     SetCamBGColor(CAM_BATTLE, 0, 0, 0);
     SetCamEnabled(CAM_BATTLE, TRUE);
     sleep 1;
-    func_802D3398();
-    func_802CCCB0();
+    InitVirtualEntityList();
+    InitAnimatedModels();
     func_802CABE8(CAM_BATTLE, 0, 240, 100, 8);
     func_802CAE50(CAM_BATTLE, -75, 35, 0);
     BattleCamTargetActor(ACTOR_PLAYER);
@@ -193,9 +193,9 @@ void update_actor_shadows(void) {
     }
 }
 
-INCLUDE_ASM(s32, "16c8e0", update_battle_state);
+INCLUDE_ASM(s32, "16c8e0", btl_update);
 
-INCLUDE_ASM(s32, "16c8e0", draw_main_battle_ui);
+INCLUDE_ASM(s32, "16c8e0", btl_draw_ui);
 
 INCLUDE_ASM(s32, "16c8e0", func_8023ED5C);
 
@@ -204,18 +204,18 @@ INCLUDE_ASM(s32, "16c8e0", func_8023F060);
 INCLUDE_ASM(s32, "16c8e0", func_8023F088);
 
 void func_8023FF84(void) {
-    show_foreground_models_unsafe();
+    show_foreground_models_unchecked();
 }
 
-INCLUDE_ASM(s32, "16c8e0", draw_enemy_health_bars);
+INCLUDE_ASM(s32, "16c8e0", btl_draw_enemy_health_bars);
 
-INCLUDE_ASM(s32, "16c8e0", update_starpoints_display);
+INCLUDE_ASM(s32, "16c8e0", btl_update_starpoints_display);
 
-INCLUDE_ASM(s32, "16c8e0", func_802409F4);
+INCLUDE_ASM(s32, "16c8e0", btl_save_world_cameras);
 
-INCLUDE_ASM(s32, "16c8e0", func_80240AA8);
+INCLUDE_ASM(s32, "16c8e0", btl_restore_world_cameras);
 
-void delete_actor(Actor* actor) {
+void btl_delete_actor(Actor* actor) {
     ActorPart* partsTable;
     ActorPart* actorPartTemp;
     BattleStatus* battleStatus;
@@ -240,13 +240,13 @@ void delete_actor(Actor* actor) {
 
     while (partsTable != NULL) {
         if (!(partsTable->flags & 0x4)) {
-            func_80112328(partsTable->shadow);
+            delete_shadow(partsTable->shadow);
         }
 
         if (partsTable->idleAnimations != NULL) {
             func_802DE894(partsTable->unk_84, 0, 0, 0, 0, 0, 0);
 
-            ASSERT(func_802DE5E8(partsTable->unk_84) == 0);
+            ASSERT(spr_free_sprite(partsTable->unk_84) == 0);
 
             if (!(partsTable->flags & 0x80000000)) {
                 heap_free(partsTable->movement);
@@ -261,8 +261,8 @@ void delete_actor(Actor* actor) {
         partsTable = actorPartTemp;
     }
 
-    func_80112328(actor->shadow);
-    func_800476F4(actor->unk_436);
+    delete_shadow(actor->shadow);
+    remove_all_status_icons(actor->unk_436);
     remove_effect(actor->ptrDefuffIcon);
 
     if (actor->unk_200 != NULL) {
@@ -280,7 +280,7 @@ void delete_actor(Actor* actor) {
     heap_free(actor);
 }
 
-void delete_player_actor(Actor* player) {
+void btl_delete_player_actor(Actor* player) {
     struct ActorPart* partsTable;
     struct ActorPartMovement* movement;
     struct DecorationTable* decorationTable;
@@ -304,8 +304,8 @@ void delete_player_actor(Actor* player) {
     decorationTable = partsTable->decorationTable;
     movement = partsTable->movement;
 
-    func_80112328(player->shadow);
-    func_800476F4(player->unk_436);
+    delete_shadow(player->shadow);
+    remove_all_status_icons(player->unk_436);
     remove_effect(player->ptrDefuffIcon);
 
     if (player->unk_200 != NULL) {
