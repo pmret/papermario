@@ -897,13 +897,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 out += f"    .bg = {symbol_map[bg][0][1]},\n"
 
             if preBattle != 0:
-                out += f"    .preBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .preBattle = {symbol_map[preBattle][0][1]},\n"
 
             if postBattle != 0:
-                out += f"    .postBattle = &{symbol_map[preBattle][0][1]},\n"
+                out += f"    .postBattle = {symbol_map[preBattle][0][1]},\n"
 
             if unk_18 != 0:
-                out += f"    .foregroundModelList = &{symbol_map[unk_18][0][1]},\n"
+                out += f"    .foregroundModelList = {symbol_map[unk_18][0][1]},\n"
 
             if unk_1C != 0:
                 out += f"    .unk_1C = {unk_1C:X},\n"

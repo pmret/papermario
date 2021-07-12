@@ -14,6 +14,6 @@ Stage NAMESPACE = {
     .texture = "kmr_tex",
     .shape = "kmr_bt02_shape",
     .bg = "kmr_bg",
-    .preBattle = &N(beforeBattle_8021FDA0),
-    .postBattle = &N(beforeBattle_8021FDA0),
+    .preBattle = N(beforeBattle_8021FDA0),
+    .postBattle = N(beforeBattle_8021FDA0),
 };

@@ -3,8 +3,8 @@
 
 #define NAMESPACE b_area_kmr_part_1_kmr_06
 
-#include "common/UnkFogFunc.inc.c"
 #include "clouds.inc.c"
+#include "common/UnkFogFunc.inc.c"
 
 Script N(beforeBattle_80220E28) = SCRIPT({
     SetSpriteShading(-1);
@@ -33,7 +33,7 @@ Stage NAMESPACE = {
     .shape = "kmr_bt06_shape",
     .hit = "kmr_bt06_hit",
     .bg = "kmr_bg",
-    .preBattle = &N(beforeBattle_80220E28),
-    .postBattle = &N(beforeBattle_80220E28),
-    .foregroundModelList = &N(foregroundModelList_80220EBC),
+    .preBattle = N(beforeBattle_80220E28),
+    .postBattle = N(beforeBattle_80220E28),
+    .foregroundModelList = N(foregroundModelList_80220EBC),
 };

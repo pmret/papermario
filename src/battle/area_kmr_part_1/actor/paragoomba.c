@@ -477,6 +477,8 @@ Script N(takeTurn_8021D74C) = SCRIPT({
 
 Script N(8021E584);
 
+#include "common/StartRumbleWithParams.inc.c"
+
 Script N(8021DF64) = SCRIPT({
     func_8027D32C(-127);
     SetPartFlags(-127, 2, 131077);
@@ -500,7 +502,7 @@ Script N(8021DF64) = SCRIPT({
     SetActorJumpGravity(ACTOR_SELF, 0.8);
     SetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     JumpToGoal(ACTOR_SELF, 15, FALSE, TRUE, FALSE);
-    N(AngleCalculate)(100, 10);
+    N(StartRumbleWithParams)(100, 10);
     spawn {
         ShakeCam(1, 0, 5, 0.3);
     }
