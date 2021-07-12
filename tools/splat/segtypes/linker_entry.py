@@ -28,7 +28,7 @@ def to_cname(symbol: str) -> str:
 
     if symbol[0] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']:
         symbol = "_" + symbol
-    
+
     return symbol
 
 def get_segment_cname(segment: Segment) -> str:
@@ -104,16 +104,16 @@ class LinkerWriter():
                 bss_started = True
                 self._write_symbol(f"{seg_name}_BSS_START", ".")
 
-            start = entry.segment.rom_start
-            if isinstance(start, int):
-                # Create new sections for non-0x10 alignment (hack)
-                if start % 0x10 != 0 and i != 0 or do_next:
-                    self._end_block()
-                    self._begin_segment(entry.segment, mid_segment=True)
-                    do_next = False
+            # start = entry.segment.rom_start
+            # if isinstance(start, int):
+            #     # Create new sections for non-0x10 alignment (hack)
+            #     if start % 0x10 != 0 and i != 0 or do_next:
+            #         self._end_block()
+            #         self._begin_segment(entry.segment, mid_segment=True)
+            #         do_next = False
 
-                if start % 0x10 != 0 and i != 0:
-                    do_next = True
+            #     if start % 0x10 != 0 and i != 0:
+            #         do_next = True
 
             if entry.object_path and cur_section == ".data":
                 path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", str(entry.segment.dir / entry.segment.name) + ".".join(entry.object_path.suffixes[:-1]))
@@ -197,7 +197,7 @@ class LinkerWriter():
         vram_str = f"0x{vram:X} " if isinstance(vram, int) else ""
 
         name = get_segment_cname(segment)
-        
+
         if mid_segment:
             name += to_cname(segment.type)
 
