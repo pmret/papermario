@@ -110,8 +110,8 @@ glabel pause_tabs_update
 /* 138A84 80245744 0000202D */  daddu     $a0, $zero, $zero
 .L80245748:
 /* 138A88 80245748 0080802D */  daddu     $s0, $a0, $zero
-/* 138A8C 8024574C 3C078025 */  lui       $a3, %hi(D_8024EF80)
-/* 138A90 80245750 24E7EF80 */  addiu     $a3, $a3, %lo(D_8024EF80)
+/* 138A8C 8024574C 3C078025 */  lui       $a3, %hi(gPauseMenuTabs)
+/* 138A90 80245750 24E7EF80 */  addiu     $a3, $a3, %lo(gPauseMenuTabs)
 /* 138A94 80245754 3C068025 */  lui       $a2, %hi(D_8024F1D0)
 /* 138A98 80245758 24C6F1D0 */  addiu     $a2, $a2, %lo(D_8024F1D0)
 /* 138A9C 8024575C 3C058016 */  lui       $a1, %hi(gUIPanels)
@@ -156,8 +156,8 @@ glabel pause_tabs_update
 /* 138B28 802457E8 2508F1D0 */  addiu     $t0, $t0, %lo(D_8024F1D0)
 /* 138B2C 802457EC 02081021 */  addu      $v0, $s0, $t0
 /* 138B30 802457F0 90420000 */  lbu       $v0, ($v0)
-/* 138B34 802457F4 3C088025 */  lui       $t0, %hi(D_8024EF80)
-/* 138B38 802457F8 2508EF80 */  addiu     $t0, $t0, %lo(D_8024EF80)
+/* 138B34 802457F4 3C088025 */  lui       $t0, %hi(gPauseMenuTabs)
+/* 138B38 802457F8 2508EF80 */  addiu     $t0, $t0, %lo(gPauseMenuTabs)
 /* 138B3C 802457FC 00021080 */  sll       $v0, $v0, 2
 /* 138B40 80245800 00481021 */  addu      $v0, $v0, $t0
 /* 138B44 80245804 8C420000 */  lw        $v0, ($v0)
