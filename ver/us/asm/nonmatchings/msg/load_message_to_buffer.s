@@ -4,13 +4,13 @@
 glabel load_message_to_buffer
 /* BBF8C 8012588C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* BBF90 80125890 AFB10014 */  sw        $s1, 0x14($sp)
-/* BBF94 80125894 3C118015 */  lui       $s1, %hi(D_8014C296)
-/* BBF98 80125898 2631C296 */  addiu     $s1, $s1, %lo(D_8014C296)
+/* BBF94 80125894 3C118015 */  lui       $s1, %hi(gNextMessageBuffer)
+/* BBF98 80125898 2631C296 */  addiu     $s1, $s1, %lo(gNextMessageBuffer)
 /* BBF9C 8012589C AFBF0018 */  sw        $ra, 0x18($sp)
 /* BBFA0 801258A0 AFB00010 */  sw        $s0, 0x10($sp)
 /* BBFA4 801258A4 86250000 */  lh        $a1, ($s1)
-/* BBFA8 801258A8 3C108015 */  lui       $s0, %hi(D_80154430)
-/* BBFAC 801258AC 26104430 */  addiu     $s0, $s0, %lo(D_80154430)
+/* BBFA8 801258A8 3C108015 */  lui       $s0, %hi(gMessageBufferA)
+/* BBFAC 801258AC 26104430 */  addiu     $s0, $s0, %lo(gMessageBufferA)
 /* BBFB0 801258B0 00052A80 */  sll       $a1, $a1, 0xa
 /* BBFB4 801258B4 0C049601 */  jal       dma_load_string
 /* BBFB8 801258B8 00B02821 */   addu     $a1, $a1, $s0

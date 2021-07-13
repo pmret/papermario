@@ -1,14 +1,14 @@
 #include "common.h"
 
-extern PrintContext* gSpeakingActorPrintCtx;
-extern PrintContext* D_8029FA64;
+extern MessagePrintState* gSpeakingActorPrintCtx;
+extern MessagePrintState* D_8029FA64;
 extern s32 gSpeakingActorPrintIsDone; // unk_08
 extern s32 gSpeakingActorTalkAnim;
 extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void msg_printer_set_origin_pos(PrintContext* printer, s32 x, s32 y);
+void msg_printer_set_origin_pos(MessagePrintState* printer, s32 x, s32 y);
 
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -17,7 +17,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     s32 stringID;
     ActorID actorID;
     s32 partIndex;
-    PrintContext** printContext;
+    MessagePrintState** printContext;
     s32 anim;
 
     f32 headX, headY, headZ;

@@ -48,7 +48,7 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ShowMessageAtWorldPos(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PrintContext** currentPrintContext;
+    MessagePrintState** currentPrintContext;
     s32* currentCameraID = &gCurrentCameraID;
 
     if (isInitialCall) {
@@ -114,7 +114,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    PrintContext** temp802DB268;
+    MessagePrintState** temp802DB268;
 
     if (isInitialCall) {
         s32 stringID = get_variable(script, *args++);

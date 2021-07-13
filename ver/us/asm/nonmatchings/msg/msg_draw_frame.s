@@ -351,8 +351,8 @@ glabel msg_draw_frame
 /* C4770 8012E070 5C600001 */  bgtzl     $v1, .L8012E078
 /* C4774 8012E074 0000182D */   daddu    $v1, $zero, $zero
 .L8012E078:
-/* C4778 8012E078 3C028015 */  lui       $v0, %hi(D_801512D8)
-/* C477C 8012E07C 8C4212D8 */  lw        $v0, %lo(D_801512D8)($v0)
+/* C4778 8012E078 3C028015 */  lui       $v0, %hi(gMsgBGScrollAmtX)
+/* C477C 8012E07C 8C4212D8 */  lw        $v0, %lo(gMsgBGScrollAmtX)($v0)
 /* C4780 8012E080 0804B824 */  j         .L8012E090
 /* C4784 8012E084 00431023 */   subu     $v0, $v0, $v1
 .L8012E088:
@@ -368,8 +368,8 @@ glabel msg_draw_frame
 /* C47A8 8012E0A8 5C600001 */  bgtzl     $v1, .L8012E0B0
 /* C47AC 8012E0AC 0000182D */   daddu    $v1, $zero, $zero
 .L8012E0B0:
-/* C47B0 8012E0B0 3C028015 */  lui       $v0, %hi(D_8015130C)
-/* C47B4 8012E0B4 8C42130C */  lw        $v0, %lo(D_8015130C)($v0)
+/* C47B0 8012E0B0 3C028015 */  lui       $v0, %hi(gMsgBGScrollAmtY)
+/* C47B4 8012E0B4 8C42130C */  lw        $v0, %lo(gMsgBGScrollAmtY)($v0)
 /* C47B8 8012E0B8 00431023 */  subu      $v0, $v0, $v1
 /* C47BC 8012E0BC 0804B87E */  j         .L8012E1F8
 /* C47C0 8012E0C0 3042FFFF */   andi     $v0, $v0, 0xffff
@@ -437,8 +437,8 @@ glabel msg_draw_frame
 /* C489C 8012E19C 5C600001 */  bgtzl     $v1, .L8012E1A4
 /* C48A0 8012E1A0 0000182D */   daddu    $v1, $zero, $zero
 .L8012E1A4:
-/* C48A4 8012E1A4 3C028015 */  lui       $v0, %hi(D_801512D8)
-/* C48A8 8012E1A8 8C4212D8 */  lw        $v0, %lo(D_801512D8)($v0)
+/* C48A4 8012E1A4 3C028015 */  lui       $v0, %hi(gMsgBGScrollAmtX)
+/* C48A8 8012E1A8 8C4212D8 */  lw        $v0, %lo(gMsgBGScrollAmtX)($v0)
 /* C48AC 8012E1AC 0804B86F */  j         .L8012E1BC
 /* C48B0 8012E1B0 00431023 */   subu     $v0, $v0, $v1
 .L8012E1B4:
@@ -454,8 +454,8 @@ glabel msg_draw_frame
 /* C48D4 8012E1D4 5C600001 */  bgtzl     $v1, .L8012E1DC
 /* C48D8 8012E1D8 0000182D */   daddu    $v1, $zero, $zero
 .L8012E1DC:
-/* C48DC 8012E1DC 3C028015 */  lui       $v0, %hi(D_8015130C)
-/* C48E0 8012E1E0 8C42130C */  lw        $v0, %lo(D_8015130C)($v0)
+/* C48DC 8012E1DC 3C028015 */  lui       $v0, %hi(gMsgBGScrollAmtY)
+/* C48E0 8012E1E0 8C42130C */  lw        $v0, %lo(gMsgBGScrollAmtY)($v0)
 /* C48E4 8012E1E4 00431023 */  subu      $v0, $v0, $v1
 /* C48E8 8012E1E8 0804B87E */  j         .L8012E1F8
 /* C48EC 8012E1EC 3042FFFF */   andi     $v0, $v0, 0xffff

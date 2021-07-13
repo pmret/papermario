@@ -369,7 +369,7 @@ segments:
     - [0xa5dd0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xb72b0, c, entity]
-    - [0xB9D60, c, B9D60]
+    - [0xB9D60, c, msg]
     - [0xC50A0, c, C50A0]
     - [0xcd180, c, cd180_len_38f0]
     - [0xCEE40, c, CEE40]

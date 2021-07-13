@@ -3,8 +3,8 @@
 
 glabel msg_draw_rewind_arrow
 /* BD5AC 80126EAC 27BDFFC0 */  addiu     $sp, $sp, -0x40
-/* BD5B0 80126EB0 3C058015 */  lui       $a1, %hi(D_80154C30)
-/* BD5B4 80126EB4 24A54C30 */  addiu     $a1, $a1, %lo(D_80154C30)
+/* BD5B0 80126EB0 3C058015 */  lui       $a1, %hi(gMessagePrinters)
+/* BD5B4 80126EB4 24A54C30 */  addiu     $a1, $a1, %lo(gMessagePrinters)
 /* BD5B8 80126EB8 00041080 */  sll       $v0, $a0, 2
 /* BD5BC 80126EBC 00441021 */  addu      $v0, $v0, $a0
 /* BD5C0 80126EC0 00021080 */  sll       $v0, $v0, 2
