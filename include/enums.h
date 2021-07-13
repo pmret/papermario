@@ -496,6 +496,7 @@ enum Easings {
 
 typedef UNK_TYPE SoundID;
 enum SoundIDs {
+    SOUND_UNKNOWN_0,
     SOUND_UNKNOWN_D                 = 13,
     SOUND_UNKNOWN_E                 = 14,
     SOUND_UNKNOWN_43                = 67,
@@ -535,6 +536,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_25C               = 604,
     SOUND_UNKNOWN_25D,
     SOUND_UNKNOWN_262               = 610,
+    SOUND_UNKNOWN_282               = 642,
     SOUND_BOW_SPOOK                 = 657,
     SOUND_UNUSED_2C1                = 705,
     SOUND_SMOKE_BURST               = 717,
@@ -575,7 +577,9 @@ enum SoundIDs {
     SOUND_MOLE_THROW                = 1000,
     SOUND_UNKNOWN_3F3               = 1011,
     SOUND_THROW                     = 1018,
-    SOUND_BOW_VANISH                = 8206,
+    SOUND_UNKNOWN_2003              = 8195,
+    SOUND_UNKNOWN_200D              = 8205,
+    SOUND_BOW_VANISH,
     SOUND_BOW_APPEAR,
     SOUND_UNKNOWN_2010,
     SOUND_CANNON1                   = 8214,
@@ -590,8 +594,10 @@ enum SoundIDs {
     SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
     SOUND_JUMP_2081                 = 8321,
-    SOUND_UNKNOWN_208D              = 8333,
+    SOUND_UNKNOWN_208C              = 8332,
+    SOUND_UNKNOWN_208D,
     SOUND_UNKNOWN_208E,
+    SOUND_UNKNOWN_208F,
     SOUND_UNKNOWN_2095              = 8341,
     SOUND_SPELL_CAST1               = 8404,
     SOUND_SPELL_CAST2,
@@ -973,8 +979,10 @@ enum ItemIDs {
     ITEM_ITEMS_ICON,
 };
 
+// TODO: use NPC_ANIM-like macro for player animations
 typedef UNK_TYPE PlayerAnim;
 enum PlayerAnims {
+    ANIM_1                      = 1, // XXX
     ANIM_STAND_STILL            = 0x10000,
     ANIM_CROUCH_STILL,
     ANIM_10002,
@@ -1028,6 +1036,9 @@ enum PlayerAnims {
     ANIM_8001B                  = 0x8001B,
     ANIM_8001D                  = 0x8001D,
     ANIM_8001E,
+    ANIM_90004                  = 0x90004,
+    ANIM_90005,
+    ANIM_90006,
 };
 
 typedef UNK_TYPE AmbientSound;

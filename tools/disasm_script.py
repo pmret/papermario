@@ -67,6 +67,13 @@ def script_lib(offset):
             _script_lib[k] = sorted(_script_lib[k], key=lambda x: x[0])
     return _script_lib
 
+def round_fixed(f: float) -> float:
+    g = f * 100.0
+    whole = round(g)
+    if abs(g - whole) <= 100.0/1024.0:
+        f = whole / 100.0
+    return f
+
 # Grab CONSTANTS from the include/ folder to save manual work
 CONSTANTS = {}
 SAVE_VARS = set()
@@ -77,7 +84,7 @@ def get_constants():
     valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes", "NpcFlags",
-        "Events", "Statuses", "Elements",
+        "Events", "Statuses", "Elements", "DamageTypes", "HitResults",
         "ActorFlags", "ActorPartFlags", "ActorEventFlags", "ElementFlags" }
     for enum in valid_enums:
         CONSTANTS[enum] = {}
@@ -227,7 +234,7 @@ def fix_args(self, func, args, info):
                 #if argNum not in CONSTANTS["MAP_NPCS"]:
                 #    new_args.append(f"0x{argNum:X}")
                 #    continue
-                
+
                 if func == "SetAnimation" and int(new_args[1], 10) == 0:
                     call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                 elif "SI_" not in args[0] and int(args[0]) >= 0 and CONSTANTS["MAP_NPCS"].get(int(args[0])) == "NPC_PLAYER":
@@ -268,6 +275,18 @@ def fix_args(self, func, args, info):
                     new_args.append(CONSTANTS["MAP_NPCS"][argNum])
                 else:
                     new_args.append(CONSTANTS["NpcIDs"][argNum])
+            elif info[i] == "DamageTypes":
+                enabled = []
+                for x in range(32):
+                    flag = argNum & (1 << x)
+                    if flag:
+                        if flag in CONSTANTS["DamageTypes"]:
+                            enabled.append(CONSTANTS["DamageTypes"][flag])
+                        else:
+                            enabled.append(f"0x{flag:08X}")
+                if not enabled:
+                    enabled.append(f"0")
+                new_args.append("((" + " | ".join(enabled) + "))")
             elif argNum in CONSTANTS[info[i]]:
                 new_args.append(f"{CONSTANTS[info[i]][argNum]}")
             else:
@@ -305,8 +324,8 @@ replace_funcs = {
     "EnableIdleScript"          :{0:"ActorIDs"},
     "EnableNpcShadow"           :{0:"NpcIDs", 1:"Bool"},
     "EndSpeech"                 :{1:"CustomAnim", 2:"CustomAnim"},
-    "EnemyDamageTarget"         :{0:"ActorIDs"},
-    "EnemyTestTarget"           :{0:"ActorIDs"},
+    "EnemyDamageTarget"         :{0:"ActorIDs", 2:"DamageTypes"},
+    "EnemyTestTarget"           :{0:"ActorIDs", 2:"DamageTypes"},
 
     "FindKeyItem"               :{0:"ItemIDs"},
     "ForceHomePos"              :{0:"ActorIDs"},
@@ -346,7 +365,8 @@ replace_funcs = {
 
     "RemoveActorDecoration"     :{0:"ActorIDs"},
     "RemoveNpc"                 :{0:"NpcIDs"},
-    "RunToGoal"                 :{0:"ActorIDs"},
+    "RunToGoal"                 :{0:"ActorIDs", 2:"Bool"},
+    "JumpToGoal"                :{0:"ActorIDs", 2:"Bool", 3:"Bool", 4:"Bool"},
 
     "SetActorDispOffset"        :{0:"ActorIDs"},
     "SetActorJumpGravity"       :{0:"ActorIDs"},
@@ -374,7 +394,7 @@ replace_funcs = {
     "SetPlayerAnimation"        :{0:"PlayerAnims"},
     "SetSelfEnemyFlagBits"      :{0:"NpcFlags", 1:"Bool"},
     #"SetSelfVar"                :{1:"Bool"}, # apparently this was a bool in some scripts but it passes non-0/1 values, including negatives
-    "SetTargetActor"            :{0:"ActorIDs"},
+    "SetTargetActor"            :{0:"ActorIDs", 1:"ActorIDs"},
     "ShowChoice"                :{0:"CustomMsg"},
     "ShowEmote"                 :{1:"Emotes"},
     "ShowMessageAtScreenPos"    :{0:"CustomMsg"},
@@ -382,7 +402,23 @@ replace_funcs = {
     "SpeakToPlayer"             :{0:"NpcIDs", 1:"CustomAnim", 2:"CustomAnim", -1:"CustomMsg"},
     "SwitchMessage"             :{0:"CustomMsg"},
 
-    "UseIdleAnimation"          :{0:"ActorIDs"},
+    "UseIdleAnimation"          :{0:"ActorIDs", 1:"Bool"},
+    "BindTakeTurn"              :{0:"ActorIDs"},
+    "BindIdle"                  :{0:"ActorIDs"},
+    "BindHandleEvent"           :{0:"ActorIDs"},
+    "SetActorIdleSpeed"         :{0:"ActorIDs"},
+    "SetIdleAnimations"         :{0:"ActorIDs"},
+    "SetIdleGoal"               :{0:"ActorIDs"},
+    "IdleFlyToGoal"             :{0:"ActorIDs"},
+    "GetStatusFlags"            :{0:"ActorIDs"},
+    "ResetAllActorSounds"       :{0:"ActorIDs"},
+    "FlyToGoal"                 :{0:"ActorIDs"},
+    "SetActorPos"               :{0:"ActorIDs"},
+    "HPBarToCurrent"            :{0:"ActorIDs"},
+    "SetActorFlagBits"          :{0:"ActorIDs"}, # TODO: 1:"ActorFlags"
+    "SetPartFlags"              :{0:"ActorIDs"},
+    "SetPartPos"                :{0:"ActorIDs"},
+    "SetPartDispOffset"         :{0:"ActorIDs"},
 }
 
 def replace_constants(self, func, args):
@@ -794,7 +830,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         v = arg - 2**32 # convert to s32
         if v > -250000000:
-            if v <= -220000000: return str((v + 230000000) / 1024)
+            if v <= -220000000: return str(round_fixed((v + 230000000) / 1024))
             elif v <= -200000000: return f"SI_ARRAY_FLAG({v + 210000000})"
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
             elif v <= -160000000:
@@ -844,7 +880,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             var -= 0x100000000
 
         # put cases for replacing vars here
-        if ((    case and self.case_variable == "STORY_PROGRESS") or
+        if case and "handleEvent" in self.script_name and var in CONSTANTS["Events"]:
+            return CONSTANTS["Events"][var]
+        elif case and "takeTurn" in self.script_name and var in CONSTANTS["HitResults"]:
+            return CONSTANTS["HitResults"][var]
+        elif ((    case and self.case_variable == "STORY_PROGRESS") or
             (not case and self.save_variable == "STORY_PROGRESS")):
             if var in CONSTANTS["StoryProgress"]:
                 return CONSTANTS["StoryProgress"][var]
@@ -993,45 +1033,45 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.case_stack.append("MATCH")
         elif opcode == 0x16:
             self.case_stack.append("CASE")
-            self.write(f"== {self.var(argv[0])}")
+            self.write(f"== {self.replace_enum(argv[0], True)}")
         elif opcode == 0x17:
             self.case_stack.append("CASE")
-            self.write(f"!= {self.var(argv[0])}")
+            self.write(f"!= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x18:
             self.case_stack.append("CASE")
-            self.write(f"< {self.var(argv[0])}")
+            self.write(f"< {self.replace_enum(argv[0], True)}")
         elif opcode == 0x19:
             self.case_stack.append("CASE")
-            self.write(f"> {self.var(argv[0])}")
+            self.write(f"> {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1A:
             self.case_stack.append("CASE")
-            self.write(f"<= {self.var(argv[0])}")
+            self.write(f"<= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1B:
             self.case_stack.append("CASE")
-            self.write(f">= {self.var(argv[0])}")
+            self.write(f">= {self.replace_enum(argv[0], True)}")
         elif opcode == 0x1C:
             self.case_stack.append("CASE")
             self.write(f"else")
         elif opcode == 0x1D:
             if self.in_case == "CASE" or self.in_case == "MULTI":
-                self.out += f", {self.var(argv[0])}"
+                self.out += f", {self.replace_enum(argv[0], True)}"
 
                 # replace(!) CASE with MULTI
                 self.case_stack.pop()
                 self.case_stack.append("MULTI")
             else:
-                self.write(f"{self.var(argv[0])}")
+                self.write(f"{self.replace_enum(argv[0], True)}")
                 self.case_stack.append("MULTI")
         # opcode 0x1E?
         elif opcode == 0x1F:
             self.case_stack.append("CASE")
-            self.write_line(f"? {self.var(argv[0])}")
+            self.write_line(f"? {self.replace_enum(argv[0], True)}")
         elif opcode == 0x20:
             if not self.was_multi_case:
                 raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
         elif opcode == 0x21:
             self.indent -= 1
-            self.write_line(f"{self.var(argv[0])}..{self.var(argv[1])}")
+            self.write_line(f"{self.replace_enum(argv[0], True)}..{self.replace_enum(argv[1], True)}")
             self.indent += 1
         elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:
@@ -1054,13 +1094,26 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             if varB.startswith("script_"):
                 varB = "N(" + varB + ")"
             self.write_line(f"{varA} = {varB};")
-        elif opcode == 0x25: self.write_line(f"{self.var(argv[0])} =c 0x{argv[1]:X};")
+        elif opcode == 0x25:
+            varA = self.replace_enum(argv[0])
+            argNum = argv[1]
+
+            sprite  = (argNum & 0xFF0000) >> 16
+            palette = (argNum & 0xFF00)   >> 8
+            anim    = (argNum & 0xFF)     >> 0
+
+            call = make_anim_macro(self, sprite, palette, anim)
+
+            if "0x" in call:
+                call = self.var(argNum)
+
+            self.write_line(f"{varA} = (const) {call};")
         elif opcode == 0x26:
             lhs = self.var(argv[1])
             if self.is_float(lhs):
                 self.write_line(f"{self.var(argv[0])} = {lhs};")
             else:
-                self.write_line(f"{self.var(argv[0])} =f {lhs};")
+                self.write_line(f"{self.var(argv[0])} = (float) {lhs};")
         elif opcode == 0x27: self.write_line(f"{self.var(argv[0])} += {self.var(argv[1])};")
         elif opcode == 0x28: self.write_line(f"{self.var(argv[0])} -= {self.var(argv[1])};")
         elif opcode == 0x29: self.write_line(f"{self.var(argv[0])} *= {self.var(argv[1])};")
@@ -1181,7 +1234,6 @@ if __name__ == "__main__":
         with open(args.file, "rb") as f:
             gap = False
             first_print = False
-            
 
             while args.offset < args.end:
                 f.seek(args.offset)

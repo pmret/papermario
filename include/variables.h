@@ -87,14 +87,14 @@ extern s32 D_8010CD20;
 extern s32 D_801595A0;
 extern BackgroundHeader gBackgroundImage;
 
-extern PrintContext* gCurrentPrintContext;
+extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
-extern PrintContext* D_802DB268;
+extern MessagePrintState* D_802DB268;
 
 extern s32 D_802EB390;
 extern s32 D_802EB394;
-extern PrintContext* D_802EB398;
-extern PrintContext* D_802EB39C;
+extern MessagePrintState* D_802EB398;
+extern MessagePrintState* D_802EB39C;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
@@ -236,6 +236,8 @@ extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
 extern DisplayContext D_80164000[];
+
+extern MessagePrintState gMessagePrinters[3];
 
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;

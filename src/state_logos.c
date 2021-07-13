@@ -47,9 +47,9 @@ void state_init_logos(void) {
     gCameras[3].flags |= 0x2;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 0x28;
-    gCameras[0].backgroundColor[0] = 0;
-    gCameras[0].backgroundColor[1] = 0;
-    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].bgColor[0] = 0;
+    gCameras[0].bgColor[1] = 0;
+    gCameras[0].bgColor[2] = 0;
     gCameras[0].unk_54 = 25.0f;
     gCameras[0].unk_58 = 25.0f;
     gCameras[0].unk_1C = 0;

@@ -100,7 +100,7 @@ void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
 // Text
-PrintContext* msg_get_printer_for_string(s32 stringID, s32* a1);
+MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 

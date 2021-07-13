@@ -1,5 +1,8 @@
 #include "common.h"
 
+// TODO this is the bss for the whole segment - break it up
+static char bss[0x8580];
+
 // Need data segment and vars declared above
 #ifdef NON_MATCHING
 void pause_set_cursor_opacity(s32 val) {
