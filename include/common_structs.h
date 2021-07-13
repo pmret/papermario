@@ -1073,17 +1073,14 @@ typedef struct MessagePrintState {
     /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
     /* 0x45E */ s8 printDelayTime; // delay to print each chunk
     /* 0x45F */ s8 charsPerChunk; // how many chars to print at once
-    /* 0x460 */ s16 curLinePos; // position along current line
-    /* 0x462 */ s16 unk_462;
+    /* 0x460 */ s32 curLinePos; // position along current line
     /* 0x464 */ s8 unk_464;
     /* 0x465 */ char unk_465;
     /* 0x466 */ s16 nextLinePos; // ?
     /* 0x468 */ s8 lineCount;
     /* 0x469 */ char unk_469[0x3];
-    /* 0x46C */ s16 unk_46C;
-    /* 0x46E */ s16 unk_46E;
-    /* 0x470 */ s8 currentAnimFrame;
-    /* 0x471 */ char unk_471[0x3];
+    /* 0x46C */ s32 unk_46C;
+    /* 0x470 */ s8 currentAnimFrame[4];
     /* 0x474 */ s16 animTimers[4];
     /* 0x47C */ s8 rewindArrowAnimState;
     /* 0x47D */ char unk_47D[0x1];
@@ -1103,7 +1100,7 @@ typedef struct MessagePrintState {
     /* 0x4DC */ s16 cursorPosY[6];
     /* 0x4E8 */ u8 currentOption;
     /* 0x4E9 */ s8 madeChoice;
-    /* 0x4EA */ s8 cancelOption;
+    /* 0x4EA */ u8 cancelOption;
     /* 0x4EB */ char unk_4EB[0x1];
     /* 0x4EC */ s8 targetOption;
     /* 0x4ED */ s8 unkCounter;
@@ -1123,10 +1120,10 @@ typedef struct MessagePrintState {
     /* 0x513 */ char unk_513[0x1];
     /* 0x514 */ Vec2s windowSize;
     /* 0x518 */ s8 speechSoundType;
-    /* 0x519 */ s8 volume;
-    /* 0x51A */ s8 unk_51A;
+    /* 0x519 */ u8 volume;
+    /* 0x51A */ s8 speechPan; // just pan?
     /* 0x51B */ char unk_51B[0x1];
-    /* 0x51C */ s16 speechVolumePitch;
+    /* 0x51C */ u16 speechVolumePitch;
     /* 0x51E */ char unk_51E[0x2];
     /* 0x520 */ s32 speedSoundIDA;
     /* 0x524 */ s32 speedSoundIDB;
@@ -1135,7 +1132,7 @@ typedef struct MessagePrintState {
     /* 0x52B */ u8 currentImageIndex;
     /* 0x52C */ Vec2s varImgeScreenPos; // in addition, posX=0 is taken as 'dont draw'
     /* 0x530 */ s8 varImgHasBorder;
-    /* 0x531 */ s8 varImgFinalAlpha;
+    /* 0x531 */ u8 varImgFinalAlpha;
     /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
     /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
     /* 0x534 */ s16 varImageFadeTimer; // frames faded in

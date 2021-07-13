@@ -20,7 +20,7 @@ glabel MessagePlural
 glabel MessageSingular
 .short 0xF0FD
 
-glabel D_8014C296
+glabel gNextMessageBuffer
 .short 0x0000
 
 glabel D_8014C298

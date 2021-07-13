@@ -1,11 +1,13 @@
 #include "common.h"
 
+extern s16 gNextMessageBuffer;
 extern Gfx D_8014C500[];
 extern s32 gMsgBGScrollAmtX;
 extern u16 gMsgGlobalWaveCounter;
 extern s32 gMsgVarImages; // message images?
 extern s32 gMsgBGScrollAmtY;
 extern s32 D_80151338;
+extern char gMessageBufferA[1024];
 extern char gMessageStringVars[3][32];
 extern s16 D_80155C98;
 
@@ -447,22 +449,161 @@ INCLUDE_ASM(s32, "msg", _update_message, MessagePrintState* msgPrintState);
 
 INCLUDE_ASM(s32, "msg", render_messages);
 
-INCLUDE_ASM(s32, "msg", msg_play_speech_sound);
+void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
+    f32 volTemp;
+    s16 volume;
+    s32 pitchShift;
+    s32 flag = 1;
+    s32 hundred = 100;
+
+    if (printer->stateFlags & 0x800000 && !(printer->delayFlags & 6) && printer->volume != 0) {
+        volTemp = (f32)printer->volume / 100.0;
+        pitchShift = ((character % 20) * 10) + (printer->speechVolumePitch - hundred);
+        volume = ((rand_int(15) + 78) * volTemp);
+
+        if (volume > 255) {
+            volume = 255;
+        }
+
+        if (character & flag) {
+            sfx_play_sound_with_params(printer->speedSoundIDA, volume, printer->speechPan, pitchShift);
+        } else {
+            sfx_play_sound_with_params(printer->speedSoundIDB, volume, printer->speechPan, pitchShift);
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 
-INCLUDE_ASM(s32, "msg", initialize_printer);
+void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
+    s32 i;
+
+    printer->printBufferSize = ARRAY_COUNT(printer->printBuffer);
+    printer->printBuffer[0] = 0xFB;
+    printer->printDelayTime = 1;
+    printer->charsPerChunk = 1;
+    printer->unk_464 = 6;
+    printer->srcBuffer = NULL;
+    printer->stringID = 0;
+    printer->currentPrintDelay = 0;
+    printer->windowOffsetPos.x = 0;
+    printer->windowOffsetPos.y = 0;
+    printer->windowBasePos.x = 0;
+    printer->windowBasePos.y = 0;
+    printer->rewindArrowAnimState = 0;
+    printer->rewindArrowBlinkCounter = 0;
+    printer->rewindArrowPos.x = 0;
+    printer->rewindArrowPos.y = 0;
+    printer->currentLine = 0;
+    printer->unkArraySize = 0;
+    printer->maxOption = 0;
+    printer->madeChoice = 0;
+    printer->currentOption = 0;
+    printer->selectedOption = 0;
+    printer->cancelOption = -1;
+    printer->windowState = 0;
+    printer->stateFlags = 0;
+    printer->delayFlags = 0;
+    printer->closedWritebackBool = NULL;
+    printer->printBufferPos = 0;
+    printer->srcBufferPos = 0;
+    printer->font = 0;
+    printer->fontVariant = 0;
+    printer->effectFrameCounter = 0;
+    printer->curLinePos = 0;
+    printer->unk_46C = 0;
+    printer->lineCount = 0;
+
+    for (i = 0; i < ARRAY_COUNT(printer->animTimers); i++) {
+        printer->currentAnimFrame[i] = 0;
+        printer->animTimers[i] = -1;
+    }
+
+    printer->initOpenPos.x = 160;
+    printer->initOpenPos.y = 40;
+    printer->speechSoundType = -1;
+    printer->speechPan = 64;
+    printer->volume = 75;
+    printer->rewindArrowBlinkCounter = 0;
+    printer->style = 0;
+    printer->fadeInCounter = 0;
+    printer->openStartPos.x = 0;
+    printer->openStartPos.y = 0;
+    printer->fadeOutCounter = 0;
+    printer->windowSize.y = 0;
+    printer->windowSize.x = 0;
+    printer->speechVolumePitch = 0;
+    printer->speedSoundIDA = 0;
+    printer->speedSoundIDB = 0;
+    printer->varBufferReadPos = 0;
+    printer->currentImageIndex = 0;
+    printer->varImgeScreenPos.x = 0;
+    printer->varImgeScreenPos.y = 0;
+    printer->varImgHasBorder = 0;
+    printer->varImgFinalAlpha = 255;
+    printer->varImageDisplayState = 0;
+    printer->varImageFadeTimer = 0;
+    printer->letterBackgroundImg = NULL;
+    printer->letterBackgroundPal = NULL;
+    printer->letterContentImg = NULL;
+    printer->letterContentPal = NULL;
+    printer->sizeScale = 1.0f;
+}
 
 INCLUDE_ASM(s32, "msg", dma_load_string);
 
 s32 load_message_to_buffer(s32 stringID);
 INCLUDE_ASM(s32, "msg", load_message_to_buffer, s32 stringID);
 
-MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1) {
-    return _msg_get_printer_for_string(stringID, a1, 0);
+MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* donePrintingWriteback) {
+    return _msg_get_printer_for_string(stringID, donePrintingWriteback, 0);
 }
 
-INCLUDE_ASM(s32, "msg", _get_printer_for_string);
+#ifdef NON_MATCHING
+MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWriteback, s32 arg2) {
+    if (stringID != 0) {
+        s8* srcBuffer = (s8*) stringID;
+        s32 i;
+
+        if (stringID >= 0) {
+            srcBuffer = load_message_to_buffer(srcBuffer);
+        }
+
+        for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
+            MessagePrintState* printer = &gMessagePrinters[i];
+
+            if (!(printer->stateFlags & 2)) {
+                s32 height;
+                s32 width;
+                s32 maxLineChars;
+                s32 numLines;
+                s32 maxLinesPerPage;
+
+                initialize_printer(printer, 1, arg2);
+                printer->windowState = 1;
+                printer->srcBuffer = srcBuffer;
+                printer->stringID = stringID;
+                printer->stateFlags |= 2;
+                get_string_properties(stringID, &height, &width, &maxLineChars, &numLines, &maxLinesPerPage, NULL, 0);
+                printer->stringHeight = height;
+                printer->stringWidth = width;
+                printer->maxLineChars = maxLineChars;
+                printer->numLines = numLines;
+                printer->maxLinesPerPage = maxLinesPerPage;
+                printer->closedWritebackBool = donePrintingWriteback;
+
+                if (donePrintingWriteback != NULL) {
+                    *donePrintingWriteback = FALSE;
+                }
+                return printer;
+            }
+        }
+    }
+    return NULL;
+}
+#else
+INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_string, s32 stringID, s32* donePrintingWriteback);
+#endif
 
 INCLUDE_ASM(s32, "msg", msg_printer_load_string);
 
