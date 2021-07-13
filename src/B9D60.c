@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define MSG_ROM_START 0x1B83000
+
 extern Gfx D_8014C500[];
 extern s32 D_801512F4; // message images?
 extern s16 D_80155C98;
@@ -26,7 +28,18 @@ INCLUDE_ASM(s32, "B9D60", msg_copy_to_print_buffer);
 
 INCLUDE_ASM(s32, "B9D60", initialize_printer);
 
-INCLUDE_ASM(s32, "B9D60", dma_load_string);
+void dma_load_string(u32 msgID, void* dest) {
+    u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
+    u8* offset[2]; // start, end
+
+    dma_copy(addr, addr + 4, &offset[0]); // Load section offset
+
+    addr = MSG_ROM_START + offset[0] + (msgID & 0xFFFF) * 4;
+    dma_copy(addr, addr + 8, &offset); // Load message start and end offsets
+
+    // Load the msg data
+    dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
+}
 
 INCLUDE_ASM(s32, "B9D60", load_message_to_buffer);
 
