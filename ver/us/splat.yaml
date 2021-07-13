@@ -245,8 +245,7 @@ segments:
     - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
-    - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
-    - [0x4DF30, c, 4DF30]
+    - [0x4DF30, c, battle/battle]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
     - [0x4F420, .data, main_loop]
@@ -330,7 +329,6 @@ segments:
     - [0x75340, .rodata, os/491c0_len_f80]
     - [0x75540, .rodata, os/49C70]
     - [0x75640, .rodata, battle/battle]
-    - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
     # - [0x75240, .bss, main_loop]
