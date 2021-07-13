@@ -481,7 +481,7 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     s32 i;
 
     printer->printBufferSize = ARRAY_COUNT(printer->printBuffer);
-    printer->printBuffer[0] = 0xFB;
+    printer->printBuffer[0] = 0xFB; // next (TODO: make enum for this)
     printer->printDelayTime = 1;
     printer->charsPerChunk = 1;
     printer->unk_464 = 6;
@@ -539,8 +539,8 @@ void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->speedSoundIDB = 0;
     printer->varBufferReadPos = 0;
     printer->currentImageIndex = 0;
-    printer->varImgeScreenPos.x = 0;
-    printer->varImgeScreenPos.y = 0;
+    printer->varImageScreenPos.x = 0;
+    printer->varImageScreenPos.y = 0;
     printer->varImgHasBorder = 0;
     printer->varImgFinalAlpha = 255;
     printer->varImageDisplayState = 0;

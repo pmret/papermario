@@ -1130,7 +1130,7 @@ typedef struct MessagePrintState {
     /* 0x528 */ s16 varBufferReadPos;
     /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 currentImageIndex;
-    /* 0x52C */ Vec2s varImgeScreenPos; // in addition, posX=0 is taken as 'dont draw'
+    /* 0x52C */ Vec2s varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'
     /* 0x530 */ s8 varImgHasBorder;
     /* 0x531 */ u8 varImgFinalAlpha;
     /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
