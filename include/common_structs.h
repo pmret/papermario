@@ -27,6 +27,11 @@ typedef struct Vec2bu {
     /* 0x01 */ u8 y;
 } Vec2bu; // size = 0x02
 
+typedef struct Vec2f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} Vec2f; // size = 0x08
+
 typedef struct Vec3b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
@@ -1149,6 +1154,53 @@ typedef struct MessagePrintState {
     /* 0x550 */ s32* letterContentPal;
     /* 0x554 */ char unk_554[0x4];
 } MessagePrintState; // size = 0x558
+
+typedef struct MessageDrawState {
+    /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped
+    /* 0x08 */ s32 clipY[2]; // characters beyond this pos get skipped
+    /* 0x10 */ Vec2f stringScale;
+    /* 0x18 */ Vec2f charScale;
+    /* 0x20 */ s32 drawBufferPos; // string gets printed here and read for display
+    /* 0x24 */ s16 savedPos[2];
+    /* 0x28 */ s8 savedColor;
+    /* 0x29 */ u8 unk_29;
+    /* 0x2A */ char unk_2A[0x1];
+    /* 0x2B */ s8 framePalette;
+    /* 0x2C */ s8 unk_2C;
+    /* 0x2D */ char unk_2D[0x1];
+    /* 0x2E */ s8 centerPos;
+    /* 0x2F */ char unk_2F[0x1];
+    /* 0x30 */ s32 visiblePrintedCount;
+    /* 0x34 */ s16 printModeFlags; // C0 = center, 10 = drawing image
+    /* 0x36 */ char unk_36[0x2];
+    /* 0x38 */ s32 effectFlags;
+    /* 0x3C */ s16 font; // 0 or 1
+    /* 0x3E */ s16 fontVariant;
+    /* 0x40 */ s16 currentPosX;
+    /* 0x42 */ s16 nextPos[2];
+    /* 0x46 */ s16 textStartPos[2]; // relative to textbox
+    /* 0x4A */ s16 textColor;
+    /* 0x4C */ s8* printBuffer;
+    /* 0x50 */ s8 nextCounter; // related to closing mssages and cmd FA
+    /* 0x51 */ char unk_51[0x3];
+} MessageDrawState; // size = 0x54
+
+typedef struct MessageCharData {
+    /* 0x0 */ s32* beginRasters;
+    /* 0x4 */ s8* charWidthTable;
+    /* 0x8 */ s8 monospaceWidth;
+    /* 0x9 */ s8 baseHeightOffset;
+    /* 0xA */ char unk_0A[0x2];
+} MessageCharData; // size = 0xC
+
+typedef struct MessageCharset {
+    /* 0x0 */ Vec2b texSize;
+    /* 0x2 */ s8 unk_02;
+    /* 0x3 */ s8 newLineY;
+    /* 0x4 */ s16 charRasterSize; // in bytes
+    /* 0x6 */ char unk_06[0x2];
+    /* 0x8 */ MessageCharData* rasters;
+} MessageCharset; // size = 0xA;
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;

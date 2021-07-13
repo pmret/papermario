@@ -10,11 +10,13 @@ extern s32 gMsgVarImages; // message images?
 extern s32 gMsgBGScrollAmtY;
 extern s32 D_80151338;
 extern char gMessageBufferA[1024];
-extern char gMessageStringVars[3][32];
+extern u8 gMessageStringVars[3][32];
 extern s16 D_80155C98;
+extern MessageDrawState* gMessageDrawStatePtr;
 
 extern s32 D_802ED970;
 extern s32 D_802EE8D0;
+extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
 extern s32 D_802F4560;
 
@@ -618,7 +620,20 @@ MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWr
 INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_string, s32 stringID, s32* donePrintingWriteback, s32 arg2);
 #endif
 
-INCLUDE_ASM(s32, "msg", msg_printer_load_string);
+s32 msg_printer_load_string(s32 stringID, MessagePrintState* printer) {
+    s32* buffer;
+
+    if (stringID >= 0) {
+        buffer = load_message_to_buffer(stringID);
+    } else {
+        buffer = (s32*) stringID;
+    }
+
+    printer->srcBuffer = buffer;
+    printer->srcBufferPos = 0;
+    printer->stateFlags &= ~0x40;
+    return 1;
+}
 
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s16 x, s16 y) {
     msgPrintState->initOpenPos.x = x;
@@ -651,7 +666,35 @@ void set_message_images(s32* images) {
     gMsgVarImages = images;
 }
 
+// loop crap
+#ifdef NON_MATCHING
+void set_message_string(s32 stringID, s32 index) {
+    u8* buffer = stringID;
+    u8* mallocSpace = NULL;
+    u8* it;
+    s32 i;
+    s32 new_var;
+
+    if (stringID >= 0) {
+        buffer = general_heap_malloc(0x400);
+        dma_load_string(stringID, buffer);
+        mallocSpace = buffer;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gMessageStringVars[index]); i++) {
+        gMessageStringVars[index][i] = buffer[i];
+        if (buffer[i] == 0xFD) {
+            break;
+        }
+    }
+
+    if (mallocSpace != NULL) {
+        general_heap_free(mallocSpace);
+    }
+}
+#else
 INCLUDE_ASM(s32, "msg", set_message_string);
+#endif
 
 INCLUDE_ASM(s32, "msg", set_message_value);
 
@@ -659,7 +702,8 @@ void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~0x40;
 }
 
-INCLUDE_ASM(s32, "msg", msg_get_print_char_width);
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, s32 flags);
+INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, s32 flags);
 
 INCLUDE_ASM(s32, "msg", msg_get_draw_char_width);
 
@@ -709,8 +753,37 @@ void msg_reset_gfx_state(void) {
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 
 INCLUDE_ASM(s32, "msg", msg_draw_prim_rect);
+// void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY) {
+//   appendGfx_msg_prim_rect(r, g, b, a, ulX, ulY, ulX + lrX, ulY + lrY);
+// }
 
-INCLUDE_ASM(s32, "msg", appendGfx_msg_prim_rect);
+void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY) {
+    gDPPipeSync(gMasterGfxPos++);
+
+    if (a == 255) {
+        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+    } else {
+        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    }
+
+    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, a);
+    gDPFillRectangle(gMasterGfxPos++, ulX, ulY, lrX, lrY);
+    gDPPipeSync(gMasterGfxPos++);
+    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+    switch (gMessageDrawStatePtr->unk_29) {
+        case 0:
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            break;
+        case 1:
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
+            break;
+        default:
+            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "msg", msg_draw_speech_bubble);
 

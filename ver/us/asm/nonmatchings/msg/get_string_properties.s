@@ -240,8 +240,8 @@ glabel L80126268_BC968
 /* BC96C 8012626C 26100001 */  addiu     $s0, $s0, 1
 /* BC970 80126270 90440000 */  lbu       $a0, ($v0)
 /* BC974 80126274 0000282D */  daddu     $a1, $zero, $zero
-/* BC978 80126278 3C098015 */  lui       $t1, %hi(D_80155C38)
-/* BC97C 8012627C 25295C38 */  addiu     $t1, $t1, %lo(D_80155C38)
+/* BC978 80126278 3C098015 */  lui       $t1, %hi(gMessageStringVars)
+/* BC97C 8012627C 25295C38 */  addiu     $t1, $t1, %lo(gMessageStringVars)
 /* BC980 80126280 00042140 */  sll       $a0, $a0, 5
 /* BC984 80126284 0C04991D */  jal       get_string_width
 /* BC988 80126288 00892021 */   addu     $a0, $a0, $t1
@@ -340,9 +340,9 @@ glabel L801262E8_BC9E8
 /* BCAC0 801263C0 00000000 */   nop
 /* BCAC4 801263C4 97A900EE */  lhu       $t1, 0xee($sp)
 /* BCAC8 801263C8 00091080 */  sll       $v0, $t1, 2
-/* BCACC 801263CC 3C01802F */  lui       $at, %hi(D_802EB5A8)
+/* BCACC 801263CC 3C01802F */  lui       $at, %hi(gMsgCharsets)
 /* BCAD0 801263D0 00220821 */  addu      $at, $at, $v0
-/* BCAD4 801263D4 8C22B5A8 */  lw        $v0, %lo(D_802EB5A8)($at)
+/* BCAD4 801263D4 8C22B5A8 */  lw        $v0, %lo(gMsgCharsets)($at)
 /* BCAD8 801263D8 8FA800D8 */  lw        $t0, 0xd8($sp)
 /* BCADC 801263DC 90420003 */  lbu       $v0, 3($v0)
 /* BCAE0 801263E0 01020018 */  mult      $t0, $v0
