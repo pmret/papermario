@@ -8,6 +8,8 @@ extern Stage* D_800DC064;
 extern BattleList b_area_kmr_part_1_formationTable;
 extern StageList b_area_kmr_part_1_stageTable;
 
+static BattleStatus gBattleStatus;
+
 BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
@@ -312,7 +314,18 @@ void load_battle_section(void) {
 INCLUDE_ASM(s32, "battle/battle", load_battle_section);
 #endif
 
+// gBattleStatus is possibly shorter than we think
+#ifdef NON_MATCHING
+void load_battle(s32 arg0) {
+    gBattleStatus.unk_478 = arg0;
+    set_game_mode(8);
+    gBattleState = 0;
+    gBattleStatus.unk_460 = 0;
+    gBattleStatus.battleState = 0;
+}
+#else
 INCLUDE_ASM(s32, "battle/battle", load_battle);
+#endif
 
 void set_battle_stage(s32 arg0) {
     gBattleStatus.unk_47C = arg0;
