@@ -49,7 +49,7 @@ void load_font_data(s32 start, u16 size, s32* dest) {
     dma_copy(temp_a0, temp_a0 + size, dest);
 }
 #else
-INCLUDE_ASM(void, "B9D60", load_font_data, s32 start, u16 size, s32* dest);
+INCLUDE_ASM(void, "msg", load_font_data, s32 start, u16 size, s32* dest);
 #endif
 
 // Needs symbols for font offsets
@@ -67,7 +67,7 @@ void load_font(s32 font) {
     }
 }
 #else
-INCLUDE_ASM(void, "B9D60", load_font, s32 font);
+INCLUDE_ASM(void, "msg", load_font, s32 font);
 #endif
 void load_font(s32 font);
 
@@ -442,29 +442,29 @@ block_65:
     return printer->windowState;
 }
 #else
-INCLUDE_ASM(s32, "B9D60", _update_message, MessagePrintState* msgPrintState);
+INCLUDE_ASM(s32, "msg", _update_message, MessagePrintState* msgPrintState);
 #endif
 
-INCLUDE_ASM(s32, "B9D60", render_messages);
+INCLUDE_ASM(s32, "msg", render_messages);
 
-INCLUDE_ASM(s32, "B9D60", msg_play_speech_sound);
+INCLUDE_ASM(s32, "msg", msg_play_speech_sound);
 
-INCLUDE_ASM(s32, "B9D60", msg_copy_to_print_buffer);
+INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 
-INCLUDE_ASM(s32, "B9D60", initialize_printer);
+INCLUDE_ASM(s32, "msg", initialize_printer);
 
-INCLUDE_ASM(s32, "B9D60", dma_load_string);
+INCLUDE_ASM(s32, "msg", dma_load_string);
 
 s32 load_message_to_buffer(s32 stringID);
-INCLUDE_ASM(s32, "B9D60", load_message_to_buffer, s32 stringID);
+INCLUDE_ASM(s32, "msg", load_message_to_buffer, s32 stringID);
 
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1) {
     return _msg_get_printer_for_string(stringID, a1, 0);
 }
 
-INCLUDE_ASM(s32, "B9D60", _get_printer_for_string);
+INCLUDE_ASM(s32, "msg", _get_printer_for_string);
 
-INCLUDE_ASM(s32, "B9D60", msg_printer_load_string);
+INCLUDE_ASM(s32, "msg", msg_printer_load_string);
 
 void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s16 x, s16 y) {
     msgPrintState->initOpenPos.x = x;
@@ -497,19 +497,19 @@ void set_message_images(s32* images) {
     gMsgVarImages = images;
 }
 
-INCLUDE_ASM(s32, "B9D60", set_message_string);
+INCLUDE_ASM(s32, "msg", set_message_string);
 
-INCLUDE_ASM(s32, "B9D60", set_message_value);
+INCLUDE_ASM(s32, "msg", set_message_value);
 
 void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~0x40;
 }
 
-INCLUDE_ASM(s32, "B9D60", msg_get_print_char_width);
+INCLUDE_ASM(s32, "msg", msg_get_print_char_width);
 
-INCLUDE_ASM(s32, "B9D60", msg_get_draw_char_width);
+INCLUDE_ASM(s32, "msg", msg_get_draw_char_width);
 
-INCLUDE_ASM(void, "B9D60", get_string_properties);
+INCLUDE_ASM(void, "msg", get_string_properties);
 
 s32 get_string_width(s32 stringID, u16 charset) {
     s32 width;
@@ -526,25 +526,25 @@ s32 get_string_lines(s32 stringID) {
 }
 
 void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
-INCLUDE_ASM(void, "B9D60", draw_string, s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+INCLUDE_ASM(void, "msg", draw_string, s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 
-INCLUDE_ASM(s32, "B9D60", msg_update_rewind_arrow);
+INCLUDE_ASM(s32, "msg", msg_update_rewind_arrow);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_rewind_arrow);
+INCLUDE_ASM(s32, "msg", msg_draw_rewind_arrow);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_choice_pointer);
+INCLUDE_ASM(s32, "msg", msg_draw_choice_pointer);
 
-INCLUDE_ASM(s32, "B9D60", draw_digit);
+INCLUDE_ASM(s32, "msg", draw_digit);
 
-INCLUDE_ASM(void, "B9D60", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
+INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
 void drawbox_message_delegate(s32 arg0) {
     appendGfx_message(arg0, 0, 0, 0, 0, 4, 0);
 }
 
-INCLUDE_ASM(s32, "B9D60", draw_message_window);
+INCLUDE_ASM(s32, "msg", draw_message_window);
 
-INCLUDE_ASM(s32, "B9D60", appendGfx_message);
+INCLUDE_ASM(s32, "msg", appendGfx_message);
 
 
 void msg_reset_gfx_state(void) {
@@ -552,16 +552,16 @@ void msg_reset_gfx_state(void) {
     gSPDisplayList(gMasterGfxPos++, D_8014C500);
 }
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_char);
+INCLUDE_ASM(s32, "msg", msg_draw_char);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_prim_rect);
+INCLUDE_ASM(s32, "msg", msg_draw_prim_rect);
 
-INCLUDE_ASM(s32, "B9D60", appendGfx_msg_prim_rect);
+INCLUDE_ASM(s32, "msg", appendGfx_msg_prim_rect);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_speech_bubble);
+INCLUDE_ASM(s32, "msg", msg_draw_speech_bubble);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_speech_arrow);
+INCLUDE_ASM(s32, "msg", msg_draw_speech_arrow);
 
-INCLUDE_ASM(s32, "B9D60", msg_draw_frame);
+INCLUDE_ASM(s32, "msg", msg_draw_frame);
 
-INCLUDE_ASM(s32, "B9D60", msg_get_glyph);
+INCLUDE_ASM(s32, "msg", msg_get_glyph);
