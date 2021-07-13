@@ -8,8 +8,6 @@ extern Stage* D_800DC064;
 extern BattleList b_area_kmr_part_1_formationTable;
 extern StageList b_area_kmr_part_1_stageTable;
 
-static BattleStatus gBattleStatus;
-
 BattleArea gBattleAreas[0x30] = {
     {
         AREA(area_kmr_part_1),
