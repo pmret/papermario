@@ -29,8 +29,8 @@ INCLUDE_ASM(s32, "B9D60", msg_copy_to_print_buffer);
 INCLUDE_ASM(s32, "B9D60", initialize_printer);
 
 void dma_load_string(u32 msgID, void* dest) {
-    u32 addr = MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
-    u32 offset[2]; // start, end
+    u8* addr = (u8*) MSG_ROM_START + (msgID >> 14); // (msgID >> 16) * 4
+    u8* offset[2]; // start, end
 
     dma_copy(addr, addr + 4, &offset[0]); // Load section offset
 
