@@ -602,7 +602,7 @@ MessagePrintState* _msg_get_printer_for_string(s32 stringID, s32* donePrintingWr
     return NULL;
 }
 #else
-INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_string, s32 stringID, s32* donePrintingWriteback);
+INCLUDE_ASM(MessagePrintState*, "msg", _msg_get_printer_for_string, s32 stringID, s32* donePrintingWriteback, s32 arg2);
 #endif
 
 INCLUDE_ASM(s32, "msg", msg_printer_load_string);
