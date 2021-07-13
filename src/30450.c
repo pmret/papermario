@@ -606,3 +606,5 @@ void func_80056204(void) {
 void func_80056228(void) {
     func_8004BA54(D_8009A640, 1);
 }
+
+static const f32 rodata = 0.0f;

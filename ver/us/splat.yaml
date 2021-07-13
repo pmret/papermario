@@ -42,7 +42,7 @@ segments:
     - [0x1000, hasm, entry_point]
     - [0x1060, c, 1060_len_310]
     - [0x1370, c, 1370_len_7d0]
-    - [0x1b40, c, main_loop]
+    - [0x1b40, c, main_loop, padfix]
     - [0x3bf0, c, input]
     - [0x42e0, c, rumble]
     - [0x43F0, c]
@@ -62,7 +62,7 @@ segments:
     - [0xe940, c, state_startup]
     - [0xebd0, c, intro_logos]
     - [0xecd0, c, state_battle]
-    - [0xf270, c, state_logos]
+    - [0xf270, c, state_logos, padfix]
     - [0xfd40, c, state_pause]
     - [0x10400, c, state_file_select]
     - [0x11130, c, state_world]
@@ -81,9 +81,9 @@ segments:
     - [0x28910, c, 28910_len_5090]
     - [0x2BF90, c]
     - [0x2d9a0, c, 2d9a0_len_890]
-    - [0x2e230, c, 2e230_len_2190]
+    - [0x2e230, c, 2e230_len_2190, padfix]
     - [0x303c0, c, 303c0_len_3e10]
-    - [0x30450, c]
+    - [0x30450, c, 30450, padfix]
     - [0x31650, c, 31650]
     - [0x33450, c]
     - [0x341d0, c, 341d0]
@@ -245,7 +245,7 @@ segments:
     - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
-    - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
+    - [0x4DF30, c, battle/battle, padfix] # DUMMY ROM location - not sure where it should go
     - [0x4DF30, c, 4DF30]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
@@ -289,7 +289,7 @@ segments:
     - [0x6FA40, .data, os/41170_len_f0]
     - [0x6FA50, .data, os/osSetThreadPri]
     - [0x6FA70, data] # has scripts?
-    - [0x70E30, .data, battle/battle]
+    - [0x70E30, .data, battle/battle, padfix]
     - [0x71430, data]
     - [0x73130, .rodata, 1060_len_310]
     - [0x73148, .rodata, main_loop]

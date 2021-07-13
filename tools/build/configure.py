@@ -87,6 +87,13 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
         deps="gcc",
     )
 
+    ninja.rule("cc_padfix",
+        description="cc($version) $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS} -o - | sed -e \"s/[.]rdata/.section .rodata/\" | {nu64as} {ASFLAGS} - -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
     ninja.rule("cc_nusys",
         description="cc($version) $in",
         command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_NUSYS} -o - | {nu64as} {ASFLAGS} - -o $out'",
@@ -315,6 +322,8 @@ class Configure:
                     task = "cc_nusys"
                 elif "os" in entry.src_paths[0].parts:
                     task = "cc_libultra"
+                elif "padfix" in seg.args:
+                    task = "cc_padfix"
                 else:
                     with entry.src_paths[0].open() as f:
                         s = f.read()
