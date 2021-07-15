@@ -10385,7 +10385,7 @@ segments:
   - [0x19E5950, Yay0]
   - [0x19E62A0, Yay0]
   - start: 0x19E67B8
-    type: PaperMarioNpcSprites
+    type: pm_npc_sprites
     dir: sprite
     name: npc
     files:
@@ -10624,7 +10624,7 @@ segments:
       - leaf
   - [0x1B82208, bin]
   - start: 0x1B83000
-    type: PaperMarioMessages
+    type: pm_msg
     files:
       - 00_introduction
       - 01_postgame_celebration
@@ -10676,7 +10676,7 @@ segments:
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - name: mapfs
-    type: PaperMarioMapFS
+    type: pm_map_data
     start: 0x1E40000
     files:
       - dro_01_shape

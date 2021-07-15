@@ -195,7 +195,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "PaperMarioMapFS", "PaperMarioMessages", "PaperMarioNpcSprites"])
+            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset", "pm_charset_palettes"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -385,7 +385,7 @@ class Configure:
                     "img_flags": "",
                 })
                 build(entry.object_path, [bin_path], "bin")
-            elif seg.type == "PaperMarioNpcSprites":
+            elif seg.type == "pm_npc_sprites":
                 sprite_yay0s = []
 
                 for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
@@ -412,7 +412,7 @@ class Configure:
 
                 build(entry.object_path.with_suffix(".bin"), sprite_yay0s, "sprite_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMessages":
+            elif seg.type == "pm_msg":
                 msg_bins = []
 
                 for section_idx, msg_path in enumerate(entry.src_paths):
@@ -425,7 +425,7 @@ class Configure:
                     self.build_path() / "include" / "message_ids.h",
                 ], msg_bins, "msg_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMapFS":
+            elif seg.type == "pm_map_data":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
                 src_dir = Path("assets/x") / seg.name
 
