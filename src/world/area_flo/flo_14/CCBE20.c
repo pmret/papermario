@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-static s32 N(D_802453B0_EF79C0)[91];
+s32 N(D_802453B0_EF79C0)[91] BSS;
 
 f32 N(D_802444C0_CCF7D0)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
@@ -572,8 +572,6 @@ ApiStatus N(func_80242288_CCD598)(ScriptInstance* script, s32 isInitialCall) {
     N(D_802445FC_CCF90C) = TRUE;
     return ApiStatus_DONE2;
 }
-
-extern s32 N(D_802453B0_EF79C0)[91];
 
 ApiStatus N(func_802422C0_CCD5D0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

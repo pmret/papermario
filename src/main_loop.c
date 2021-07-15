@@ -2,8 +2,6 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-// TODO: timeFreezeMode is probably bss here
-
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
@@ -40,7 +38,7 @@ Gfx D_80074230[] = {
 };
 
 // BSS
-//s32 timeFreezeMode __attribute__ ((section (".bss")));
+//s32 timeFreezeMode BSS;
 
 extern s16 D_8009A690;
 

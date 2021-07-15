@@ -26,7 +26,7 @@ typedef struct {
     s32 unk_74;
 } N(EffectStruct);
 
-struct N(temp) {
+typedef struct N(temp) {
     char unk_00[0xC];
     N(EffectStruct)* unk_0C;
 } N(temp);

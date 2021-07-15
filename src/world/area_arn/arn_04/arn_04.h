@@ -9,9 +9,9 @@ ApiStatus N(func_80240B94_BE4344)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_8024219C_BE594C)(ScriptInstance* script, s32 isInitialCall);
 ApiStatus N(func_80243018_BE67C8)(ScriptInstance* script, s32 isInitialCall);
 
-Script N(main);
-Script N(802433D0);
-NpcGroupList N(npcGroupList_80244000);
-Script N(makeEntities);
+extern Script N(main);
+extern Script N(802433D0);
+extern NpcGroupList N(npcGroupList_80244000);
+extern Script N(makeEntities);
 
 extern s16 gCurrentCamID;

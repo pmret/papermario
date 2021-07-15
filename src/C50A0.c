@@ -5,7 +5,7 @@ extern s32 D_80155D84;
 extern s32 D_80155D88;
 extern ItemEntity* D_80155DA0;
 extern ItemEntity* D_801561A0;
-ItemEntity** D_801565A0; // item entity list
+extern ItemEntity** D_801565A0; // item entity list
 extern s16 D_801565A4;
 extern s16 D_801565A8;
 
