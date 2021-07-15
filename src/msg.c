@@ -1,5 +1,7 @@
 #include "common.h"
+#include "ld_addrs.h"
 
+// TODO consider symbol
 #define MSG_ROM_START 0x1B83000
 
 extern s16 gNextMessageBuffer;
@@ -18,7 +20,8 @@ extern s32 D_802EE8D0;
 extern s32 D_802F39D0;
 extern s32 D_802F4560;
 
-s32 _update_message(MessagePrintState*);
+void load_font(s32 font);
+s32 _update_message(MessagePrintState* printer);
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -43,18 +46,11 @@ void clear_printers(void) {
     load_font(0);
 }
 
-// needs rom split around 0x10F1B0
-void load_font_data(s32 start, u16 size, s32* dest);
-#ifdef NON_MATCHING
-void load_font_data(s32 start, u16 size, s32* dest) {
-    u8* temp_a0;
+void load_font_data(s32 offset, u16 size, s32* dest) {
+    u8* base = font_ROM_START + offset;
 
-    temp_a0 = start + 0x10F1B0;
-    dma_copy(temp_a0, temp_a0 + size, dest);
+    dma_copy(base, base + size, dest);
 }
-#else
-INCLUDE_ASM(void, "msg", load_font_data, s32 start, u16 size, s32* dest);
-#endif
 
 // Needs symbols for font offsets
 #ifdef NON_MATCHING
@@ -73,7 +69,6 @@ void load_font(s32 font) {
 #else
 INCLUDE_ASM(void, "msg", load_font, s32 font);
 #endif
-void load_font(s32 font);
 
 void update_messages(void) {
     s32 i;

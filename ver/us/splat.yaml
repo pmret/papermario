@@ -459,7 +459,9 @@ segments:
     vram: 0x802EB3D0
     subsegments:
     - [0x10CC10, data]
-  - [0x10F1B0, bin]
+  - type: bin
+    dir: font
+    start: 0x10F1B0
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
