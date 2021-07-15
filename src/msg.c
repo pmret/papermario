@@ -52,23 +52,18 @@ void load_font_data(s32 offset, u16 size, s32* dest) {
     dma_copy(base, base + size, dest);
 }
 
-// Needs symbols for font offsets
-#ifdef NON_MATCHING
 void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
-            load_font_data(0, 0x5100, &D_802EE8D0);
-            load_font_data(0x5300, 0x500, &D_802F4560);
+            load_font_data(charset_standard_OFFSET, 0x5100, &D_802EE8D0);
+            load_font_data(charset_standard_pal_OFFSET, 0x500, &D_802F4560);
         } else if (font == 1) {
-            load_font_data(0x5800, 0xF60, &D_802ED970);
-            load_font_data(0x6760, 0xB88, &D_802F39D0);
-            load_font_data(0x72E8, 0x80, &D_802F4560);
+            load_font_data(charset_title_OFFSET, 0xF60, &D_802ED970);
+            load_font_data(charset_subtitle_OFFSET, 0xB88, &D_802F39D0);
+            load_font_data(charset_credits_pal_OFFSET, 0x80, &D_802F4560);
         }
     }
 }
-#else
-INCLUDE_ASM(void, "msg", load_font, s32 font);
-#endif
 
 void update_messages(void) {
     s32 i;

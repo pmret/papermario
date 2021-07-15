@@ -541,7 +541,7 @@ class Configure:
 
                 build(entry.object_path.with_suffix(""), palettes, "pm_charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
-            elif seg.type == "linker":
+            elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
