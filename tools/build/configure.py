@@ -175,6 +175,10 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
 
+    ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
+
+    ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
+
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
         description="cc_tool $in",
@@ -510,6 +514,32 @@ class Configure:
 
                 # combine
                 build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset":
+                rasters = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "ci4",
+                        "img_flags": "",
+                    })
+                    rasters.append(out_path)
+
+                build(entry.object_path.with_suffix(""), rasters, "pm_charset")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset_palettes":
+                palettes = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "palette",
+                        "img_flags": "",
+                    })
+                    palettes.append(out_path)
+
+                build(entry.object_path.with_suffix(""), palettes, "pm_charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")

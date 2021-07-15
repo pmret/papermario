@@ -463,12 +463,12 @@ segments:
     dir: charset
     start: 0x10F1B0
     subsegments:
-    - [0x10F1B0, pm_charset,          standard, 16, 16]
-    - [0x1144B0, pm_charset_palettes, standard]
-    - [0x1149B0, pm_charset,          title,    12, 15]
-    - [0x115910, pm_charset,          subtitle, 12, 12]
-    - [0x116498, pm_charset_palettes, subtitle]
-    - [0x1164A8, pm_charset_palettes, title]
+    - [0x10F1B0, pm_charset,          standard, 16, 16, 0xA6]
+    - [0x1144B0, pm_charset_palettes, standard,         0x50]
+    - [0x1149B0, pm_charset,          title,    12, 15, 0x29]
+    - [0x115910, pm_charset,          subtitle, 12, 12, 0x29]
+    - [0x116498, pm_charset_palettes, subtitle,         1]
+    - [0x1164A8, pm_charset_palettes, title,            1]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]

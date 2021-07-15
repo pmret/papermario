@@ -21,7 +21,7 @@ class N64SegPm_charset(N64Segment):
     def scan(self, rom_bytes):#
         data = rom_bytes[self.rom_start:self.rom_end]
 
-        # start, type, name, WIDTH, HEIGHT
+        # start, type, name, WIDTH, HEIGHT, NUM_RASTERS
         self.width = self.yaml[3]
         self.height = self.yaml[4]
 
@@ -48,17 +48,14 @@ class N64SegPm_charset(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
+        # start, type, name, WIDTH, HEIGHT
+        self.width = self.yaml[3]
+        self.height = self.yaml[4]
+
         fs_dir = options.get_asset_path() / self.dir / self.name
 
         return [LinkerEntry(
             self,
-            [fs_dir / f"{i:02X}.png" for i in range(len(self.rasters))],
+            [fs_dir / f"{i:02X}.png" for i in range(self.yaml[5])],
             fs_dir.with_suffix(".dat"), ".data"),
         ]
-
-    def cache(self): # TEMP
-        import random
-        return random.random()
-
-    def should_split(self): # TEMP
-        return True

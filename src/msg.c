@@ -47,7 +47,7 @@ void clear_printers(void) {
 }
 
 void load_font_data(s32 offset, u16 size, s32* dest) {
-    u8* base = font_ROM_START + offset;
+    u8* base = charset_ROM_START + offset;
 
     dma_copy(base, base + size, dest);
 }

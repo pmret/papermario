@@ -39,17 +39,10 @@ class N64SegPm_charset_palettes(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        fs_dir = options.get_asset_path() / self.dir / self.name
+        fs_dir = options.get_asset_path() / self.dir / self.name / "palette"
 
         return [LinkerEntry(
             self,
-            [fs_dir / f"{i:02X}.png" for i in range(len(self.palettes))],
-            fs_dir.with_suffix(".pal"), ".data"),
+            [fs_dir / f"{i:02X}.png" for i in range(self.yaml[3])],
+            fs_dir.with_suffix(".dat"), ".data"),
         ]
-
-    def cache(self): # TEMP
-        import random
-        return random.random()
-
-    def should_split(self): # TEMP
-        return True
