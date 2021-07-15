@@ -165,7 +165,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("mapfs",
         description="mapfs $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
+        command=f"$python {BUILD_TOOLS}/mapfs/combine.py $version $out $in",
     )
 
     ninja.rule("pack_title_data",
@@ -441,7 +441,7 @@ class Configure:
                             "img_type": "party",
                             "img_flags": "",
                         })
-                    elif name == "title_data":
+                    elif name == "title_data" and self.version == "us": # TODO jp
                         compress = True
 
                         logotype_path = out_dir / "title_logotype.bin"

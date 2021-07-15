@@ -79,7 +79,7 @@ class N64SegPaperMarioMapFS(N64Segment):
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
-            elif name == "title_data":
+            elif name == "title_data" and False: # TEMP
                 with open(fs_dir / "title/logotype.png", "wb") as f:
                     width = 200
                     height = 112
