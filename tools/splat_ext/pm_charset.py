@@ -18,7 +18,7 @@ def next_8(n):
         return n
 
 class N64SegPm_charset(N64Segment):
-    def scan(self, rom_bytes):#
+    def scan(self, rom_bytes):
         data = rom_bytes[self.rom_start:self.rom_end]
 
         # start, type, name, WIDTH, HEIGHT, NUM_RASTERS

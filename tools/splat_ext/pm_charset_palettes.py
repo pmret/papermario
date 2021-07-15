@@ -13,6 +13,8 @@ def parse_palette(data):
     return palette
 
 class N64SegPm_charset_palettes(N64Segment):
+    require_unique_name = False
+
     def scan(self, rom_bytes):
         data = rom_bytes[self.rom_start:self.rom_end]
 
