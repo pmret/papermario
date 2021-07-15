@@ -6,8 +6,8 @@ glabel draw_number
 /* BDDA0 801276A0 AFB200A8 */  sw        $s2, 0xa8($sp)
 /* BDDA4 801276A4 AFB500B4 */  sw        $s5, 0xb4($sp)
 /* BDDA8 801276A8 00E0A82D */  daddu     $s5, $a3, $zero
-/* BDDAC 801276AC 3C028015 */  lui       $v0, %hi(D_8014C340)
-/* BDDB0 801276B0 2442C340 */  addiu     $v0, $v0, %lo(D_8014C340)
+/* BDDAC 801276AC 3C028015 */  lui       $v0, %hi(gMsgNumbers)
+/* BDDB0 801276B0 2442C340 */  addiu     $v0, $v0, %lo(gMsgNumbers)
 /* BDDB4 801276B4 00151880 */  sll       $v1, $s5, 2
 /* BDDB8 801276B8 00751821 */  addu      $v1, $v1, $s5
 /* BDDBC 801276BC 00031880 */  sll       $v1, $v1, 2
@@ -69,8 +69,8 @@ glabel draw_number
 /* BDE90 80127790 06000035 */  bltz      $s0, .L80127868
 /* BDE94 80127794 00151080 */   sll      $v0, $s5, 2
 /* BDE98 80127798 32290002 */  andi      $t1, $s1, 2
-/* BDE9C 8012779C 3C058015 */  lui       $a1, %hi(D_8014C340)
-/* BDEA0 801277A0 24A5C340 */  addiu     $a1, $a1, %lo(D_8014C340)
+/* BDE9C 8012779C 3C058015 */  lui       $a1, %hi(gMsgNumbers)
+/* BDEA0 801277A0 24A5C340 */  addiu     $a1, $a1, %lo(gMsgNumbers)
 /* BDEA4 801277A4 00551021 */  addu      $v0, $v0, $s5
 /* BDEA8 801277A8 00022080 */  sll       $a0, $v0, 2
 /* BDEAC 801277AC 00854021 */  addu      $t0, $a0, $a1
@@ -101,8 +101,8 @@ glabel draw_number
 /* BDF00 80127800 1A600019 */  blez      $s3, .L80127868
 /* BDF04 80127804 0000802D */   daddu    $s0, $zero, $zero
 /* BDF08 80127808 32290002 */  andi      $t1, $s1, 2
-/* BDF0C 8012780C 3C058015 */  lui       $a1, %hi(D_8014C340)
-/* BDF10 80127810 24A5C340 */  addiu     $a1, $a1, %lo(D_8014C340)
+/* BDF0C 8012780C 3C058015 */  lui       $a1, %hi(gMsgNumbers)
+/* BDF10 80127810 24A5C340 */  addiu     $a1, $a1, %lo(gMsgNumbers)
 /* BDF14 80127814 00151080 */  sll       $v0, $s5, 2
 /* BDF18 80127818 00551021 */  addu      $v0, $v0, $s5
 /* BDF1C 8012781C 00022080 */  sll       $a0, $v0, 2

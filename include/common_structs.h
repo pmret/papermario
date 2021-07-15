@@ -1186,9 +1186,9 @@ typedef struct MessageDrawState {
 } MessageDrawState; // size = 0x54
 
 typedef struct MessageCharData {
-    /* 0x0 */ s32* beginRasters;
-    /* 0x4 */ s8* charWidthTable;
-    /* 0x8 */ s8 monospaceWidth;
+    /* 0x0 */ s8* raster;
+    /* 0x4 */ u8* charWidthTable;
+    /* 0x8 */ u8 monospaceWidth;
     /* 0x9 */ s8 baseHeightOffset;
     /* 0xA */ char unk_0A[0x2];
 } MessageCharData; // size = 0xC
@@ -1201,6 +1201,24 @@ typedef struct MessageCharset {
     /* 0x6 */ char unk_06[0x2];
     /* 0x8 */ MessageCharData* rasters;
 } MessageCharset; // size = 0xA;
+
+typedef struct MesasgeFontGlyphData {
+    /* 0x0 */ s8* raster;
+    /* 0x4 */ s16* palette;
+    /* 0x8 */ Vec2b texSize;
+    /* 0xA */ s8 charWidth;
+    /* 0xB */ s8 charHeight;
+} MesasgeFontGlyphData; // size = 0xC
+
+typedef struct MessageNumber {
+    /* 0x00 */ s32* rasters;
+    /* 0x04 */ s8 texSize;
+    /* 0x05 */ u8 texWidth;
+    /* 0x06 */ u8 texHeight;
+    /* 0x07 */ s8 digitWidth[10];
+    /* 0x11 */ s8 fixedWidth;
+    /* 0x12 */ char unk_12[0x2];
+} MessageNumber; // size = 0x14
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;

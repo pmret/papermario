@@ -9,16 +9,18 @@ extern u16 gMsgGlobalWaveCounter;
 extern s32 gMsgVarImages; // message images?
 extern s32 gMsgBGScrollAmtY;
 extern s32 D_80151338;
-extern char gMessageBufferA[1024];
+extern char gMessageBuffers[][1024];
 extern u8 gMessageStringVars[3][32];
 extern s16 D_80155C98;
 extern MessageDrawState* gMessageDrawStatePtr;
 
+extern s32 D_802ED550;
+extern s32 D_802ED670;
 extern s32 D_802ED970;
 extern s32 D_802EE8D0;
 extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
-extern s32 D_802F4560;
+extern s32* D_802F4560;
 
 s32 _update_message(MessagePrintState*);
 
@@ -567,8 +569,19 @@ void dma_load_string(u32 msgID, void* dest) {
     dma_copy(MSG_ROM_START + offset[0], MSG_ROM_START + offset[1], dest);
 }
 
-s32 load_message_to_buffer(s32 stringID);
-INCLUDE_ASM(s32, "msg", load_message_to_buffer, s32 stringID);
+s32* load_message_to_buffer(s32 stringID) {
+    s32* prevBufferPos;
+
+    dma_load_string(stringID, &gMessageBuffers[gNextMessageBuffer]);
+    prevBufferPos = gMessageBuffers[gNextMessageBuffer];
+
+    gNextMessageBuffer++;
+    if (gNextMessageBuffer >= 2) {
+        gNextMessageBuffer = 0;
+    }
+
+    return prevBufferPos;
+}
 
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* donePrintingWriteback) {
     return _msg_get_printer_for_string(stringID, donePrintingWriteback, 0);
@@ -696,16 +709,73 @@ void set_message_string(s32 stringID, s32 index) {
 INCLUDE_ASM(s32, "msg", set_message_string);
 #endif
 
-INCLUDE_ASM(s32, "msg", set_message_value);
+void set_message_value(s32 value, s32 index) {
+    s8 strBuffer[ARRAY_COUNT(gMessageStringVars[index])];
+    s8* bufferIt;
+    s32 i;
+
+    int_to_string(value, &strBuffer, 10);
+
+    for (i = 0, bufferIt = strBuffer; i < ARRAY_COUNT(gMessageStringVars[index]) - 1; i++) {
+        s8 thisChar = bufferIt[i];
+
+        if (thisChar == 0) {
+            break;
+        }
+        gMessageStringVars[index][i] = thisChar - 0x20;
+    }
+    gMessageStringVars[index][i] = 0xFD;
+}
 
 void close_message(MessagePrintState* msgPrintState) {
     msgPrintState->stateFlags &= ~0x40;
 }
 
-s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, s32 flags);
-INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, s32 flags);
+// so close, just some dumb control flow thing at the beginning
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags);
+#ifdef NON_MATCHING
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags) {
+    u8* charWidthTable;
+    f32 baseWidth;
+    f64 charWidth;
+    f64 modifier;
 
-INCLUDE_ASM(s32, "msg", msg_get_draw_char_width);
+    if (character < 0xF0 || (character == 0xF7 || character == 0xF8 || character == 0xF9)) {
+        if (overrideCharWidth != 0) {
+            baseWidth = overrideCharWidth;
+        } else if (flags != 0 && gMsgCharsets[charset]->rasters[variation].charWidthTable != NULL &&
+                    character != 0xF7 && character != 0xF8 && character != 0xF9) {
+            baseWidth = gMsgCharsets[charset]->rasters[variation].charWidthTable[character];
+        } else {
+            baseWidth = gMsgCharsets[charset]->rasters[variation].monospaceWidth;
+        }
+
+        if (character == 0xF7) {
+            charWidth = baseWidth * stringScale;
+            modifier = 0.6;
+            return charWidth * modifier;
+        }
+        if (character == 0xF8) {
+            charWidth = baseWidth * stringScale;
+            return charWidth;
+        }
+        if (character == 0xF9) {
+            charWidth = baseWidth * stringScale;
+            modifier = 0.5;
+            return charWidth * modifier;
+        }
+        if (character < 0xF0) {
+            return baseWidth * stringScale;
+        }
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s32 variation, f32 stringScale, s32 overrideCharWidth, u8 flags);
+#endif
+
+s32 msg_get_draw_char_width(s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
+INCLUDE_ASM(s32, "msg", msg_get_draw_char_width, s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
 
 INCLUDE_ASM(void, "msg", get_string_properties);
 
@@ -728,9 +798,24 @@ INCLUDE_ASM(void, "msg", draw_string, s32 stringID, s32 posX, s32 posY, s32 opac
 
 INCLUDE_ASM(s32, "msg", msg_update_rewind_arrow);
 
-INCLUDE_ASM(s32, "msg", msg_draw_rewind_arrow);
+void msg_draw_rewind_arrow(s32 printerIndex) {
+    MessagePrintState* printer = &gMessagePrinters[printerIndex];
+
+    if (printer->rewindArrowBlinkCounter < 6) {
+        draw_ci_image_with_clipping(&D_802ED550, 0x18, 0x18, 2, 0, &D_802ED670, printer->rewindArrowPos.x,
+                                    printer->rewindArrowPos.y, 0xA, 0xA, 0x12C, 0xDC, 0xFF);
+    }
+
+    printer->rewindArrowBlinkCounter++;
+    if (printer->rewindArrowBlinkCounter >= 12) {
+        printer->rewindArrowBlinkCounter = 0;
+    }
+}
 
 INCLUDE_ASM(s32, "msg", msg_draw_choice_pointer);
+
+
+extern MessageNumber gMsgNumbers[2];
 
 INCLUDE_ASM(s32, "msg", draw_digit);
 
@@ -791,4 +876,5 @@ INCLUDE_ASM(s32, "msg", msg_draw_speech_arrow);
 
 INCLUDE_ASM(s32, "msg", msg_draw_frame);
 
-INCLUDE_ASM(s32, "msg", msg_get_glyph);
+void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
+INCLUDE_ASM(void, "msg", msg_get_glyph, s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
