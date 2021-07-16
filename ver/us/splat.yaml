@@ -72,7 +72,7 @@ segments:
     - [0x13480, c, state_demo]
     - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
-    - [0x1f580, c, 1f580_len_1940]
+    - [0x1f580, c, encounter_api]
     - [0x20ec0, c, 20ec0_len_5040]
     - [0x23680, c]
     - [0x25AF0, c]
