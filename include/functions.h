@@ -102,6 +102,9 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
+// todo remove once we have libultra's def
+extern void guOrtho(Mtx *m, float l, float r, float b, float t,
+		    float n, float f, float scale);
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 

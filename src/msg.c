@@ -1,11 +1,101 @@
 #include "common.h"
 
-#define MSG_ROM_START 0x1B83000
+#define MSG_ROM_START 0x1B83000 // todo remove or move
 
-extern s16 gNextMessageBuffer;
-extern Gfx D_8014C500[];
-extern u8 D_8014C580[];
-extern u8 D_8014C588[];
+extern s32 D_802EF0D0;
+
+s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
+
+s32 MessagePlural = 0x53FD0000;
+
+s16 MessageSingular = 0xF0FD;
+
+s16 gNextMessageBuffer = 0;
+
+s32 D_8014C298[] = { 0xFFF00009, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00100009, 0x00000000, 0x04000000, 0xFFFFFFFF, 0xFFF0FFF7, 0x00000000, 0x00000240, 0xFFFFFFFF, 0x0010FFF7, 0x00000000, 0x04000240, 0xFFFFFFFF, };
+
+Gfx D_8014C2D8[] = {
+    gsDPSetCycleType(G_CYC_2CYCLE),
+    gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
+    gsSPSetGeometryMode(G_SHADE | G_SHADING_SMOOTH),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetTexturePersp(G_TP_PERSP),
+    gsDPSetTextureLUT(G_TT_NONE),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsDPSetRenderMode(IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | G_RM_PASS, IM_RD | CVG_DST_SAVE | ZMODE_XLU |
+                      FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
+    gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsSPEndDisplayList(),
+};
+
+MessageNumber gMsgNumbers[] = {
+    {
+        .rasters = &D_802EF0D0,
+        .texSize = 128,
+        .texWidth = 16,
+        .texHeight = 16,
+        .digitWidth = {11, 8, 11, 11, 11, 11, 11, 11, 11, 11},
+        .fixedWidth = 11
+    },{
+        .rasters = &D_802EF0D0,
+        .texSize = 128,
+        .texWidth = 16,
+        .texHeight = 16,
+        .digitWidth = {9, 8, 9, 9, 9, 9, 9, 9, 9, 9},
+        .fixedWidth = 9
+    }
+};
+
+Gfx D_8014C368[] = {
+    gsDPPipeSync(),
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetTextureFilter(G_TF_POINT),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
+    gsSPEndDisplayList(),
+};
+
+s32 D_8014C3C0[] = { 0x00010000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x00200000, 0x00000000, 0x04000000, 0xFFFFF8FF, 0x0001FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x0020FFC0, 0x00000000, 0x04000800, 0xBFB8B0FF, };
+
+s32 D_8014C400[] = { 0x00200000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x00E10000, 0x00000000, 0x01000000, 0xFFFFF8FF, 0x0020FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x00E1FFC0, 0x00000000, 0x01000800, 0xBFB8B0FF, };
+
+s32 D_8014C440[] = { 0x00E10000, 0x00000000, 0x00000000, 0xFFFFF8FF, 0x01000000, 0x00000000, 0x04000000, 0xFFFFF8FF, 0x00E1FFC0, 0x00000000, 0x00000800, 0xBFB8B0FF, 0x0100FFC0, 0x00000000, 0x04000800, 0xBFB8B0FF, };
+
+s32 D_8014C480[] = { 0xFFF1001E, 0x00000000, 0x00000000, 0xBFB8B0FF, 0x000F001E, 0x00000000, 0x01E00000, 0xBFB8B0FF, 0xFFFF0000, 0x00000000, 0x000001E0, 0xBFB8B0FF, 0x00010000, 0x00000000, 0x01E001E0, 0xBFB8B0FF, };
+
+s32 D_8014C4C0[] = { 0xFFF1001E, 0x00000000, 0x00000000, 0xBFB8B0FF, 0x000F001E, 0x00000000, 0x01E00000, 0xBFB8B0FF, 0xFFFF0000, 0x00000000, 0x000001E0, 0xBFB8B0FF, 0x00010000, 0x00000000, 0x01E001E0, 0xBFB8B0FF, };
+
+Gfx D_8014C500[] = {
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetRenderMode(G_RM_TEX_EDGE, G_RM_TEX_EDGE2),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetTextureFilter(G_TF_AVERAGE),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetTexturePersp(G_TP_NONE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetTextureLOD(G_TL_TILE),
+    gsDPSetTextureLUT(G_TT_RGBA16),
+    gsDPSetTextureDetail(G_TD_CLAMP),
+    gsDPSetTextureConvert(G_TC_FILT),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPNoOp(),
+    gsSPEndDisplayList(),
+};
+
+u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
+u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+// BSS
 extern s32 gMsgBGScrollAmtX;
 extern u16 gMsgGlobalWaveCounter;
 extern s32 gMsgVarImages; // message images?
@@ -14,8 +104,10 @@ extern s32 D_80151338;
 extern char gMessageBuffers[][1024];
 extern u8 gMessageStringVars[3][32];
 extern s16 D_80155C98;
+extern Matrix4s gMessageWindowProjMatrix[2];
 extern MessageDrawState* gMessageDrawStatePtr;
 
+// another file?
 extern s32 D_802ED550;
 extern s32 D_802ED670;
 extern s32 D_802ED970;
@@ -456,7 +548,41 @@ block_65:
 INCLUDE_ASM(s32, "msg", _update_message, MessagePrintState* msgPrintState);
 #endif
 
-INCLUDE_ASM(s32, "msg", render_messages);
+void render_messages(void) {
+    Matrix4s* matrix = &gMessageWindowProjMatrix[gCurrentDisplayContextIndex];
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
+        if (gMessagePrinters[i].stateFlags & 0x2) {
+            gSPViewport(gMasterGfxPos++, D_8014C280);
+            guOrtho(matrix, 0.0f, 319.0f, -240.0f, 0.0f, -500.0f, 500.0f, 1.0f);
+            gSPMatrix(gMasterGfxPos++, OS_K0_TO_PHYSICAL(matrix), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+                                 G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+            gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+            break;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(gMessagePrinters); i++) {
+        if (gMessagePrinters[i].stateFlags & 0x2) {
+            draw_message_window(&gMessagePrinters[i]);
+
+            if (gMessagePrinters[i].windowState == 5) {
+                if (!(gMessagePrinters[i].stateFlags & 0x8000) && !(gMessagePrinters[i].stateFlags & 0x40)) {
+                    msg_update_rewind_arrow(i);
+                }
+            } else if (gMessagePrinters[i].windowState == 0xC) {
+                msg_draw_rewind_arrow(i);
+            } else if (gMessagePrinters[i].windowState == 7 || gMessagePrinters[i].windowState == 8 ||
+                gMessagePrinters[i].stateFlags & 0x10000 || gMessagePrinters[i].stateFlags & 0x20000) {
+                msg_draw_choice_pointer(&gMessagePrinters[i]);
+            }
+        }
+    }
+}
 
 void msg_play_speech_sound(MessagePrintState* printer, u8 character) {
     f32 volTemp;
@@ -817,9 +943,6 @@ void msg_draw_rewind_arrow(s32 printerIndex) {
 
 INCLUDE_ASM(s32, "msg", msg_draw_choice_pointer);
 
-
-extern MessageNumber gMsgNumbers[2];
-
 INCLUDE_ASM(s32, "msg", draw_digit);
 
 INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
@@ -867,7 +990,6 @@ void draw_message_window(MessagePrintState* printer) {
 }
 
 INCLUDE_ASM(void, "msg", appendGfx_message, MessagePrintState* printer, s16 arg1, s16 arg2, u16 arg3, u16 arg4, s32 arg5, s32 arg6);
-
 
 void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
