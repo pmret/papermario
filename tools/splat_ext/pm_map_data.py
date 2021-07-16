@@ -80,7 +80,7 @@ class N64SegPm_map_data(N64Segment):
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
-            elif name == "title_data" and "ver/us" in options.opts["target_path"]:
+            elif name == "title_data":
                 if "ver/us" in options.opts["target_path"]:
                     with open(fs_dir / "title/logotype.png", "wb") as f:
                         width = 200
