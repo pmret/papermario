@@ -7,5 +7,5 @@ void N(UnkNpcAIFunc16)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
 
     npc->duration = enemy->varTable[10];
     npc->currentAnim.w = enemy->animList[13];
-    script->functionTemp[0].s = 21;
+    script->functionTemp[0] = 21;
 }

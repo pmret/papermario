@@ -11,6 +11,6 @@ void N(NpcJumpFunc)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerr
         npc->pos.y = npc->moveToPos.y;
         npc->jumpVelocity = 0.0f;
         npc->flags &= ~0x800;
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }

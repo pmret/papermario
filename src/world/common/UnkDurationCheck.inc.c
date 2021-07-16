@@ -6,6 +6,6 @@ void N(UnkDurationCheck)(ScriptInstance* script, NpcAISettings* aiSettings, Enem
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 }

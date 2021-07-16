@@ -9,6 +9,6 @@ void N(UnkFunc45)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
     if (npc->duration <= 0) {
         enemy->varTable[2] = 0;
         npc->duration = 0;
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 }

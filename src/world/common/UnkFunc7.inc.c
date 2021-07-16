@@ -10,7 +10,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall) {
     s32 func;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags |= 0x102;
         enemy->flags |= 0x1F300000;
@@ -22,7 +22,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    func = script->functionTemp[0].s;
+    func = script->functionTemp[0];
     switch (func) {
         case 0:
             enemy2 = get_enemy(enemy->npcID - 1);
@@ -48,7 +48,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall) {
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
                 enemy->flags &= 0xE0EFFFFF;
                 npc->duration = 0;
-                script->functionTemp[0].s = 1;
+                script->functionTemp[0] = 1;
             }
             break;
 
@@ -65,7 +65,7 @@ ApiStatus N(UnkFunc7)(ScriptInstance* script, s32 isInitialCall) {
                 npc->pos.y = -1000.0f;
                 npc->pos.z = 0.0f;
                 enemy->unk_07 = func;
-                script->functionTemp[0].s = 0;
+                script->functionTemp[0] = 0;
             }
             break;
     }

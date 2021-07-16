@@ -64,14 +64,14 @@ ApiStatus N(func_80238A20_6F1B00)(ScriptInstance* script, s32 isInitialCall) {
     Vec3f* pos = &partnerActor->walk.currentPos;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         partnerActor->walk.currentPos.x = partnerActor->currentPos.x;
         partnerActor->walk.currentPos.y = partnerActor->currentPos.y;
         partnerActor->walk.currentPos.z = partnerActor->currentPos.z;
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
     if (partnerActor->walk.velocity > 0.0f) {

@@ -286,7 +286,7 @@ static s32 D_801512C0;
 static s32 D_801512C4;
 static s32 D_801512C8[6];
 static ModelTransformGroupList* gCurrentTransformGroups;
-static s8 D_801512E4[0x4];
+static s8 gMsgGlobalWaveCounter[0x4];
 static s8 D_801512E8[0x8];
 static s8 B_801512F0[0x410];
 static GameMode gMainGameState[2]; // TODO rename

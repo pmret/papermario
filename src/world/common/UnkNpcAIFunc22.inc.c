@@ -7,6 +7,6 @@ void N(UnkNpcAIFunc22)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
 
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
     npc->currentAnim.w = enemy->animList[0];
-    script->functionTemp[1].s = rand_int(1000) % 2 + 2;
-    script->functionTemp[0].s = 5;
+    script->functionTemp[1] = rand_int(1000) % 2 + 2;
+    script->functionTemp[0] = 5;
 }

@@ -50,16 +50,16 @@ ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
             }
         }
 
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    script->functionTemp[0].s += 8;
-    if (script->functionTemp[0].s > 255) {
-        script->functionTemp[0].s = 255;
+    script->functionTemp[0] += 8;
+    if (script->functionTemp[0] > 255) {
+        script->functionTemp[0] = 255;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
-    return (script->functionTemp[0].s == 255) * ApiStatus_DONE2;
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+    return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
 }
 
 ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall) {
@@ -67,19 +67,19 @@ ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         set_background_color_blend(0, 0, 0, 255);
-        script->functionTemp[0].s = 255;
-        script->functionTemp[1].s = 0;
+        script->functionTemp[0] = 255;
+        script->functionTemp[1] = 0;
     }
 
-    script->functionTemp[0].s -= 8;
-    if (script->functionTemp[0].s < 0) {
-        script->functionTemp[0].s = 0;
+    script->functionTemp[0] -= 8;
+    if (script->functionTemp[0] < 0) {
+        script->functionTemp[0] = 0;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
-    if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
-        script->functionTemp[1].s = 1;
-    } else if (script->functionTemp[1].s == 1) {
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
+    if (script->functionTemp[0] == 0 && script->functionTemp[1] == 0) {
+        script->functionTemp[1] = 1;
+    } else if (script->functionTemp[1] == 1) {
         mdl_set_all_fog_mode(0);
         *D_801512F0 = 0;
 

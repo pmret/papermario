@@ -2,7 +2,7 @@
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/tubbas_heart.h"
 
-struct N(temp) {
+typedef struct N(temp) {
     char unk_00[0xC];
     EffectInstanceDataThing* unk_0C;
 } N(temp);

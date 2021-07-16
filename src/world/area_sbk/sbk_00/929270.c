@@ -3,9 +3,6 @@
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-Script N(main);
-s32 N(npcGroupList_80240768)[];
-
 EntryList N(entryList) = {
     { -475.0f, 0.0f, 0.0f, 90.0f },
     { 475.0f, 0.0f, 0.0f, 270.0f },

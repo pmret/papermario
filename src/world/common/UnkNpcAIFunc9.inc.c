@@ -11,6 +11,6 @@ void N(UnkNpcAIFunc9)(ScriptInstance* script) {
     if (enemy2->varTable[0] == 0) {
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = enemy->varTable[2];
-        script->functionTemp[0].s = 33;
+        script->functionTemp[0] = 33;
     }
 }
