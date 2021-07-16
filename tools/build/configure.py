@@ -440,7 +440,6 @@ class Configure:
 
                     if name.startswith("party_"):
                         compress = True
-                        yay0_path = bin_path.with_suffix(".Yay0")
                         build(bin_path, [path], "img", variables={
                             "img_type": "party",
                             "img_flags": "",
@@ -514,7 +513,7 @@ class Configure:
                         bin_path = path
 
                     if compress:
-                        yay0_path = bin_path.with_suffix(".Yay0")
+                        yay0_path = out_dir / f"{name}.Yay0"
                         build(yay0_path, [bin_path], "yay0")
                     else:
                         yay0_path = bin_path
