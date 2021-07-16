@@ -108,8 +108,8 @@ glabel state_step_end_battle
 /* F158 80033D58 80440012 */   lb       $a0, 0x12($v0)
 /* F15C 80033D5C 0C0169B0 */  jal       load_map_script_lib
 /* F160 80033D60 00000000 */   nop
-/* F164 80033D64 3C04800E */  lui       $a0, %hi(D_800D9230)
-/* F168 80033D68 24849230 */  addiu     $a0, $a0, %lo(D_800D9230)
+/* F164 80033D64 3C04800E */  lui       $a0, %hi(mapShapeName)
+/* F168 80033D68 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
 /* F16C 80033D6C 0C016B3A */  jal       load_asset_by_name
 /* F170 80033D70 27A50010 */   addiu    $a1, $sp, 0x10
 /* F174 80033D74 0040802D */  daddu     $s0, $v0, $zero
@@ -145,8 +145,8 @@ glabel state_step_end_battle
 /* F1E4 80033DE4 0C05179C */  jal       set_background_size
 /* F1E8 80033DE8 24070014 */   addiu    $a3, $zero, 0x14
 .L80033DEC:
-/* F1EC 80033DEC 3C04800B */  lui       $a0, %hi(D_800B0CF0)
-/* F1F0 80033DF0 24840CF0 */  addiu     $a0, $a0, %lo(D_800B0CF0)
+/* F1EC 80033DEC 3C04800B */  lui       $a0, %hi(mapTexName)
+/* F1F0 80033DF0 24840CF0 */  addiu     $a0, $a0, %lo(mapTexName)
 /* F1F4 80033DF4 0C016B74 */  jal       get_asset_offset
 /* F1F8 80033DF8 27A50010 */   addiu    $a1, $sp, 0x10
 /* F1FC 80033DFC 8E440000 */  lw        $a0, ($s2)

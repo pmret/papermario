@@ -462,4 +462,6 @@ void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
 void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
 
+void* load_asset_by_name(const char* assetName, u32* decompressedSize);
+
 #endif

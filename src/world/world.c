@@ -73,11 +73,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     map = &gAreas[areaID].maps[mapID];
 
-    sprintf(&D_800D9230, "%s_shape", map->id);
-    sprintf(&D_800D91E0, "%s_hit", map->id);
+    sprintf(&mapShapeName, "%s_shape", map->id);
+    sprintf(&mapHitName, "%s_hit", map->id);
     strcpy(texStr, map->id);
     texStr[3] = '\0';
-    sprintf(&D_800B0CF0, "%s_tex", texStr);
+    sprintf(&mapTexName, "%s_tex", texStr);
 
     D_800A41E0 = map;
     if (map->bgName != NULL) {
@@ -98,7 +98,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
-        s32 yay0Asset = load_asset_by_name(&D_800D9230, &decompressedSize);
+        s32 yay0Asset = load_asset_by_name(&mapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);
@@ -154,7 +154,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
-        s32 thing = get_asset_offset(&D_800B0CF0, &decompressedSize);
+        s32 thing = get_asset_offset(&mapTexName, &decompressedSize);
 
         if (temp800A41E8->modelTreeRoot != NULL) {
             load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
@@ -217,7 +217,7 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
 #endif
 
-void* load_asset_by_name(char* assetName, s32* decompressedSize) {
+void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
     AssetHeader* curAsset;

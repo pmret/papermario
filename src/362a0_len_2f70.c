@@ -2,6 +2,13 @@
 
 extern s16 D_800D91DC;
 
+typedef struct {
+    UNK_PTR collision;
+    UNK_PTR unk_08;
+} HitAsset;
+
+void load_hit_data(s32 idx, HitAsset* hit);
+
 INCLUDE_ASM(s32, "362a0_len_2f70", allocate_hit_tables);
 
 void func_8005AF84(void) {
@@ -16,13 +23,29 @@ void initialize_collision(void) {
     collision_heap_create();
 }
 
-INCLUDE_ASM(s32, "362a0_len_2f70", load_hit_asset);
+void load_hit_asset(void) {
+    u32 assetSize;
+    MapConfig* map = get_current_map_header();
+    void* compressedData = load_asset_by_name(&mapHitName, &assetSize);
+    HitAsset* uncompressedData = heap_malloc(assetSize);
+
+    decode_yay0(compressedData, uncompressedData);
+    general_heap_free(compressedData);
+
+    map->collision = uncompressedData->collision;
+    map->unk_08 = uncompressedData->unk_08;
+
+    load_hit_data(0, uncompressedData);
+    load_hit_data(1, uncompressedData);
+
+    heap_free(uncompressedData);
+}
 
 INCLUDE_ASM(s32, "362a0_len_2f70", load_collision);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", load_stage_collision);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", load_hit_data);
+INCLUDE_ASM(void, "362a0_len_2f70", load_hit_data, s32 idx, HitAsset* hit);
 
 INCLUDE_ASM(void, "362a0_len_2f70", parent_collider_to_model, s32 colliderID, s16 modelIndex);
 
