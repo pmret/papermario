@@ -23,6 +23,7 @@ extern s32 D_802F39D0;
 extern s32* D_802F4560;
 
 s32 _update_message(MessagePrintState*);
+void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -837,10 +838,12 @@ void msg_reset_gfx_state(void) {
 
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 
-INCLUDE_ASM(s32, "msg", msg_draw_prim_rect);
-// void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY) {
-//   appendGfx_msg_prim_rect(r, g, b, a, ulX, ulY, ulX + lrX, ulY + lrY);
-// }
+void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, s32 posX, s32 posY, s32 sizeX, s32 sizeY) {
+    u16 lrX = posX + sizeX;
+    u16 lrY = posY + sizeY;
+
+    appendGfx_msg_prim_rect(r, g, b, a, posX, posY, lrX, lrY);
+}
 
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY) {
     gDPPipeSync(gMasterGfxPos++);
