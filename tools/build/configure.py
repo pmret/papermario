@@ -175,6 +175,10 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
 
+    ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
+
+    ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
+
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
         description="cc_tool $in",
@@ -195,7 +199,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "PaperMarioMapFS", "PaperMarioMessages", "PaperMarioNpcSprites"])
+            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset", "pm_charset_palettes"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -385,7 +389,7 @@ class Configure:
                     "img_flags": "",
                 })
                 build(entry.object_path, [bin_path], "bin")
-            elif seg.type == "PaperMarioNpcSprites":
+            elif seg.type == "pm_npc_sprites":
                 sprite_yay0s = []
 
                 for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
@@ -412,7 +416,7 @@ class Configure:
 
                 build(entry.object_path.with_suffix(".bin"), sprite_yay0s, "sprite_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMessages":
+            elif seg.type == "pm_msg":
                 msg_bins = []
 
                 for section_idx, msg_path in enumerate(entry.src_paths):
@@ -425,7 +429,7 @@ class Configure:
                     self.build_path() / "include" / "message_ids.h",
                 ], msg_bins, "msg_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMapFS":
+            elif seg.type == "pm_map_data":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
                 src_dir = Path("assets/x") / seg.name
 
@@ -511,6 +515,34 @@ class Configure:
                 # combine
                 build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset":
+                rasters = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "ci4",
+                        "img_flags": "",
+                    })
+                    rasters.append(out_path)
+
+                build(entry.object_path.with_suffix(""), rasters, "pm_charset")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset_palettes":
+                palettes = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "palette",
+                        "img_flags": "",
+                    })
+                    palettes.append(out_path)
+
+                build(entry.object_path.with_suffix(""), palettes, "pm_charset_palettes")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "linker" or seg.type == "linker_offset":
+                pass
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
