@@ -445,19 +445,16 @@ class Configure:
                             "img_type": "party",
                             "img_flags": "",
                         })
-                    elif name == "title_data" and self.version == "us": # TODO jp
+                    elif name == "title_data":
                         compress = True
 
                         logotype_path = out_dir / "title_logotype.bin"
                         copyright_path = out_dir / "title_copyright.bin"
+                        copyright_pal_path = out_dir / "title_copyright.pal" # jp only
                         press_start_path = out_dir / "title_press_start.bin"
 
                         build(logotype_path, [src_dir / "title/logotype.png"], "img", variables={
                             "img_type": "rgba32",
-                            "img_flags": "",
-                        })
-                        build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
-                            "img_type": "ia8",
                             "img_flags": "",
                         })
                         build(press_start_path, [src_dir / "title/press_start.png"], "img", variables={
@@ -465,11 +462,24 @@ class Configure:
                             "img_flags": "",
                         })
 
-                        build(bin_path, [
-                            logotype_path,
-                            copyright_path,
-                            press_start_path,
-                        ], "pack_title_data")
+                        if self.version == "jp":
+                            build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "ci4",
+                                "img_flags": "",
+                            })
+                            build(copyright_pal_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "palette",
+                                "img_flags": "",
+                            })
+                            imgs = [logotype_path, copyright_path, press_start_path, copyright_pal_path]
+                        else:
+                            build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "ia8",
+                                "img_flags": "",
+                            })
+                            imgs = [logotype_path, copyright_path, press_start_path]
+
+                        build(bin_path, imgs, "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
                         bin_path = self.build_path() / bin_path
