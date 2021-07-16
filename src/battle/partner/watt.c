@@ -2,19 +2,52 @@
 
 #include "common.h"
 
+extern s32 D_8023C1B8;
+extern s32 D_8023C1BC;
+extern s32 D_8023C1C4;
+extern s32 D_8023C1C8;
+extern s32 D_8023C1CC;
+extern s32 D_8023C1D0;
+extern s32* D_80239A0C_7054FC;
+
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238370_703E60);
+ApiStatus func_80238370_703E60(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1B8 = 0;
+    if (D_8023C1CC != 0) {
+        remove_effect(D_8023C1CC);
+    }
+    if (D_8023C1D0 != 0) {
+        remove_effect(D_8023C1D0);
+    }
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_802383C0_703EB0);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_802383D4_703EC4);
+ApiStatus func_802383C0_703EB0(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1BC = 1;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_802383E4_703ED4);
+ApiStatus func_802383D4_703EC4(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1BC = 0;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_802383F8_703EE8);
+ApiStatus func_802383E4_703ED4(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1C4 = 1;
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238408_703EF8);
+ApiStatus func_802383F8_703EE8(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1C4 = 0;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80238408_703EF8(ScriptInstance* script, s32 isInitialCall) {
+    D_8023C1C8 = get_variable(script, *script->ptrReadPos);
+    return ApiStatus_DONE2;
+}
 
 #include "common/UnkBackgroundFunc3.inc.c"
 
@@ -22,7 +55,16 @@ INCLUDE_ASM(s32, "battle/partner/watt", func_80238408_703EF8);
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_802384B0_703FA0);
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_80238570_704060);
+ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
+    s32* var = D_80239A0C_7054FC;
+
+    if (var != 0) {
+        *var |= 0x10;
+    }
+    D_80239A0C_7054FC = 0;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_8023859C_70408C);
 
