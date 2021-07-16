@@ -6,8 +6,8 @@ glabel msg_get_glyph
 /* C4FE4 8012E8E4 0080502D */  daddu     $t2, $a0, $zero
 /* C4FE8 8012E8E8 00A0482D */  daddu     $t1, $a1, $zero
 /* C4FEC 8012E8EC 00C0202D */  daddu     $a0, $a2, $zero
-/* C4FF0 8012E8F0 3C02802F */  lui       $v0, %hi(D_802EB5A8)
-/* C4FF4 8012E8F4 2442B5A8 */  addiu     $v0, $v0, %lo(D_802EB5A8)
+/* C4FF0 8012E8F0 3C02802F */  lui       $v0, %hi(gMsgCharsets)
+/* C4FF4 8012E8F4 2442B5A8 */  addiu     $v0, $v0, %lo(gMsgCharsets)
 /* C4FF8 8012E8F8 000A2880 */  sll       $a1, $t2, 2
 /* C4FFC 8012E8FC 00A22821 */  addu      $a1, $a1, $v0
 /* C5000 8012E900 00091040 */  sll       $v0, $t1, 1

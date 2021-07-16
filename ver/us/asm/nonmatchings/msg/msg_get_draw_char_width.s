@@ -30,9 +30,9 @@ glabel msg_get_draw_char_width
 /* BC534 80125E34 10400015 */  beqz      $v0, .L80125E8C
 /* BC538 80125E38 00051880 */   sll      $v1, $a1, 2
 /* BC53C 80125E3C 00061040 */  sll       $v0, $a2, 1
-/* BC540 80125E40 3C01802F */  lui       $at, %hi(D_802EB5A8)
+/* BC540 80125E40 3C01802F */  lui       $at, %hi(gMsgCharsets)
 /* BC544 80125E44 00230821 */  addu      $at, $at, $v1
-/* BC548 80125E48 8C23B5A8 */  lw        $v1, %lo(D_802EB5A8)($at)
+/* BC548 80125E48 8C23B5A8 */  lw        $v1, %lo(gMsgCharsets)($at)
 /* BC54C 80125E4C 00461021 */  addu      $v0, $v0, $a2
 /* BC550 80125E50 8C630008 */  lw        $v1, 8($v1)
 /* BC554 80125E54 00021080 */  sll       $v0, $v0, 2
@@ -52,9 +52,9 @@ glabel msg_get_draw_char_width
 .L80125E8C:
 /* BC58C 80125E8C 00051880 */  sll       $v1, $a1, 2
 /* BC590 80125E90 00061040 */  sll       $v0, $a2, 1
-/* BC594 80125E94 3C01802F */  lui       $at, %hi(D_802EB5A8)
+/* BC594 80125E94 3C01802F */  lui       $at, %hi(gMsgCharsets)
 /* BC598 80125E98 00230821 */  addu      $at, $at, $v1
-/* BC59C 80125E9C 8C23B5A8 */  lw        $v1, %lo(D_802EB5A8)($at)
+/* BC59C 80125E9C 8C23B5A8 */  lw        $v1, %lo(gMsgCharsets)($at)
 /* BC5A0 80125EA0 00461021 */  addu      $v0, $v0, $a2
 /* BC5A4 80125EA4 8C630008 */  lw        $v1, 8($v1)
 /* BC5A8 80125EA8 00021080 */  sll       $v0, $v0, 2

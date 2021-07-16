@@ -70,6 +70,9 @@ f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 
+void* general_heap_malloc(s32 size);
+s32 general_heap_free(s32 size);
+
 void entity_Shadow_init(Shadow* entity);
 void entity_SaveBlock_idle(Entity* entity);
 void entity_SaveBlock_pause_game(void);
@@ -99,6 +102,9 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
+// todo remove once we have libultra's def
+extern void guOrtho(Mtx *m, float l, float r, float b, float t,
+		    float n, float f, float scale);
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
@@ -114,6 +120,10 @@ void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* cen
 s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
+
+void draw_box(s32 flags, s32 windowStyle, s16 posX, s16 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+              s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
+              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
