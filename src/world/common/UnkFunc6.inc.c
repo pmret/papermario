@@ -36,10 +36,10 @@ void N(UnkFunc6)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
             temp_f2 = posY + temp_f20;
             if (temp_f2 <= npc->pos.y) {
                 npc->pos.y = temp_f2;
-                script->functionTemp[0].s = 0;
+                script->functionTemp[0] = 0;
             }
         } else if (npc->pos.y >= npc->moveToPos.y) {
-            script->functionTemp[0].s = 0;
+            script->functionTemp[0] = 0;
         }
     } else if (npc->jumpVelocity < 0.0) {
         npc->duration++;

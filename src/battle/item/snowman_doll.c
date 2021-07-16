@@ -69,13 +69,13 @@ ApiStatus N(func_802A123C_71C06C)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A13B8_71C1E8)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 20;
+        script->functionTemp[0] = 20;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 254);
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 254);
 
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == 0) {
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] == 0) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }

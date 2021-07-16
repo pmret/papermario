@@ -73,7 +73,7 @@ s32 shop_owner_continue_speech(s32 messageIndex) {
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -98,7 +98,7 @@ s32 shop_owner_continue_speech_with_quantity(s32 messageIndex, s32 amount) {
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -111,7 +111,7 @@ s32 shop_owner_reset_speech(s32 messageIndex) {
     script->varTable[0] = shopStringID;
     script->varTable[1] = shop->owner->npcID;
     script->varTable[2] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[3] = shop->owner->idleAnim;
+    script->functionTemp[3] = script->varTable[3] = shop->owner->idleAnim;
 
     return script->id;
 }
@@ -122,7 +122,7 @@ s32 shop_owner_end_speech(void) {
 
     script->varTable[0] = shop->owner->npcID;
     script->varTable[1] = shop->owner->talkAnim;
-    script->functionTemp[3].s = script->varTable[2] = shop->owner->idleAnim;
+    script->functionTemp[3] = script->varTable[2] = shop->owner->idleAnim;
 
     return script->id;
 }

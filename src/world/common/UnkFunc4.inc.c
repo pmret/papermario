@@ -44,9 +44,9 @@ void N(UnkFunc4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
             npc->moveToPos.y = npc->pos.y;
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             if (enemy->npcSettings->unk_2A & 1) {
-                script->functionTemp[0].s = 10;
+                script->functionTemp[0] = 10;
             } else {
-                script->functionTemp[0].s = 12;
+                script->functionTemp[0] = 12;
             }
             return;
         }
@@ -55,14 +55,14 @@ void N(UnkFunc4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
     }
 
     if ((npc->turnAroundYawAdjustment == 0) && (npc->duration <= 0)) {
-        script->functionTemp[1].s--;
-        if (script->functionTemp[1].s > 0) {
+        script->functionTemp[1]--;
+        if (script->functionTemp[1] > 0) {
             if (!(enemy->npcSettings->unk_2A & 0x10)) {
                 npc->yaw = clamp_angle(npc->yaw + 180.0f);
             }
             npc->duration = (rand_int(1000) % 11) + 5;
         } else {
-            script->functionTemp[0].s = 0;
+            script->functionTemp[0] = 0;
         }
     }
 }

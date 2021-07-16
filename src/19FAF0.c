@@ -120,14 +120,14 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
     ActorMovementWalk* walkMovement = &player->walk;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         walkMovement->currentPos.x = player->currentPos.x;
         walkMovement->currentPos.y = player->currentPos.y;
         walkMovement->currentPos.z = player->currentPos.z;
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
     if (walkMovement->velocity > 0.0f) {
