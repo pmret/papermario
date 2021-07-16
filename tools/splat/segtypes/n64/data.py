@@ -29,7 +29,7 @@ class N64SegData(N64SegCodeSubsegment, N64SegGroup):
     def split(self, rom_bytes: bytes):
         N64SegGroup.split(self, rom_bytes)
 
-        if self.file_text:
+        if not self.type.startswith(".") and self.file_text:
             path = self.out_path()
             
             if path:
