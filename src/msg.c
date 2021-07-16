@@ -117,8 +117,10 @@ extern s32 D_802F39D0;
 extern s32* D_802F4560;
 
 s32 _update_message(MessagePrintState*);
-void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, s32, s32);
+void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
+void get_string_properties(s32 stringID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+                           s32* maxLinesPerPage, s32* arg6, s32 charset);
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -577,7 +579,7 @@ void render_messages(void) {
             } else if (gMessagePrinters[i].windowState == 0xC) {
                 msg_draw_rewind_arrow(i);
             } else if (gMessagePrinters[i].windowState == 7 || gMessagePrinters[i].windowState == 8 ||
-                gMessagePrinters[i].stateFlags & 0x10000 || gMessagePrinters[i].stateFlags & 0x20000) {
+                       gMessagePrinters[i].stateFlags & 0x10000 || gMessagePrinters[i].stateFlags & 0x20000) {
                 msg_draw_choice_pointer(&gMessagePrinters[i]);
             }
         }
@@ -906,24 +908,101 @@ INCLUDE_ASM(s32, "msg", msg_get_print_char_width, s32 character, s32 charset, s3
 s32 msg_get_draw_char_width(s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
 INCLUDE_ASM(s32, "msg", msg_get_draw_char_width, s32 character, s32 charset, s32 varaition, f32 stringScale, s32 overrideCharWidth, s32 flags);
 
-INCLUDE_ASM(void, "msg", get_string_properties);
+INCLUDE_ASM(void, "msg", get_string_properties, s32 stringID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
+            s32* maxLinesPerPage, s32* arg6, s32 charset);
 
 s32 get_string_width(s32 stringID, u16 charset) {
     s32 width;
 
-    get_string_properties(stringID, 0, &width, 0, 0, 0, 0, charset);
+    get_string_properties(stringID, NULL, &width, NULL, NULL, NULL, NULL, charset);
     return width;
 }
 
 s32 get_string_lines(s32 stringID) {
     s32 numLines;
 
-    get_string_properties(stringID, 0, 0, 0, &numLines, 0, 0, 0);
+    get_string_properties(stringID, NULL, NULL, NULL, &numLines, NULL, NULL, 0);
     return numLines;
 }
 
-void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+// some weird stacky stringIDy stuff
+#ifdef NON_MATCHING
+void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, u8 style) {
+    s32 width;
+    MessagePrintState stackPrinter;
+    MessagePrintState* printer;
+    u16 bufferPos;
+    s32* mallocSpace;
+    s32 charset;
+    s32 flags;
+
+    flags = 0;
+    bufferPos = 0;
+    mallocSpace = NULL;
+    charset = 0;
+
+    if (stringID != 0) {
+        if (style & 1) {
+            flags = 2;
+            charset = 1;
+        }
+
+        if (opacity < 0xFF) {
+            flags |= 1;
+        }
+
+        printer = &stackPrinter;
+        initialize_printer(printer, 1, 0);
+
+        if (stringID < 0) {
+            printer = (MessagePrintState*)stringID;
+        } else {
+            mallocSpace = general_heap_malloc(0x400);
+            dma_load_string(stringID, mallocSpace);
+            printer->srcBuffer = mallocSpace;
+            get_string_properties(stringID, 0, &width, 0, 0, 0, 0, charset);
+            printer->stringWidth = width;
+        }
+
+        if (palette >= 0) {
+            printer->printBuffer[bufferPos++] = 0xFF;
+            printer->printBuffer[bufferPos++] = 4;
+            printer->printBuffer[bufferPos++] = palette;
+            printer->printBufferPos += 3;
+        }
+
+        if (style & 2) {
+            printer->printBuffer[bufferPos++] = 0xFF;
+            printer->printBuffer[bufferPos++] = 0x1C;
+            printer->printBuffer[bufferPos++] = 8;
+            printer->printBufferPos += 3;
+        }
+
+        if (style & 4) {
+            printer->printBuffer[bufferPos++] = 0xFF;
+            printer->printBuffer[bufferPos++] = 0x1C;
+            printer->printBuffer[bufferPos++] = 9;
+            printer->printBufferPos += 3;
+        }
+
+        if (style & 8) {
+            printer->printBuffer[bufferPos++] = 0xFF;
+            printer->printBuffer[bufferPos++] = 0x1C;
+            printer->printBuffer[bufferPos++] = 0xE;
+            printer->printBufferPos += 3;
+        }
+
+        msg_copy_to_print_buffer(printer, 10000, 1);
+        appendGfx_message(printer, posX, posY, 0, 0, flags, opacity);
+
+        if (mallocSpace != NULL) {
+            general_heap_free(mallocSpace);
+        }
+    }
+}
+#else
 INCLUDE_ASM(void, "msg", draw_string, s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+#endif
 
 INCLUDE_ASM(s32, "msg", msg_update_rewind_arrow);
 
@@ -989,7 +1068,7 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
-INCLUDE_ASM(void, "msg", appendGfx_message, MessagePrintState* printer, s16 arg1, s16 arg2, u16 arg3, u16 arg4, s32 arg5, s32 arg6);
+INCLUDE_ASM(void, "msg", appendGfx_message, MessagePrintState* printer, s16 arg1, s16 arg2, u16 arg3, u16 arg4, u16 arg5, u8 arg6);
 
 void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
