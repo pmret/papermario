@@ -2910,7 +2910,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -2921,11 +2921,11 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
 
@@ -2939,7 +2939,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
         case 1:
@@ -3262,8 +3262,8 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
     s32 res;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = (Unk_Struct_1*)heap_malloc(0x3C);
-        ptr = script->functionTemp[1].s;
+        script->functionTemp[1] = (Unk_Struct_1*)heap_malloc(0x3C);
+        ptr = script->functionTemp[1];
         ptr->unk_00 = temp_s1->unk_00;
         ptr->unk_04 = temp_s1->unk_04;
         ptr->unk_08 = temp_s1->unk_08;
@@ -3281,7 +3281,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_38 = 0;
     }
 
-    ptr = script->functionTemp[1].s;
+    ptr = script->functionTemp[1];
     switch (ptr->unk_20) {
         case 0:
             res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);

@@ -110,7 +110,7 @@ void N(func_80240260_D9B150)(ScriptInstance *script, NpcAISettings *npcAISetting
         npc->duration = 0xA;
         npc->currentAnim = enemy->animList[8];
     }
-    script->functionTemp[0].s = 0xD;
+    script->functionTemp[0] = 0xD;
 }
 */
 
@@ -125,7 +125,7 @@ void N(func_80240844_D9B734)(ScriptInstance *script, NpcAISettings *npcAISetting
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim = enemy->animList[0];
         npc->duration = 25;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
     } else {
         if (npc->currentAnim != enemy->animList[8]) {
             if (npc->moveSpeed < 4.0) {
@@ -139,7 +139,7 @@ void N(func_80240844_D9B734)(ScriptInstance *script, NpcAISettings *npcAISetting
             npc->duration--;
             return;
         } else {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
         }
     }
 }
@@ -153,7 +153,7 @@ void N(func_802409A8_D9B898)(ScriptInstance *script, NpcAISettings *npcAISetting
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0] = NULL;
     }
 }
 */

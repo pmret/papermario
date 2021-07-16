@@ -4,7 +4,7 @@ RUN_ME = False
 if not RUN_ME:
     print(f"Are you sure yo uwant to run this? Edit RUN_ME in the script if so")
     exit()
-    
+
 FUNC="""    Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -12,7 +12,7 @@ FUNC="""    Enemy* enemy = script->owner1.enemy;
     if (npc->duration <= 0) {
         enemy->varTable[2] = 0;
         npc->duration = 0;
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 }""".splitlines()
 
@@ -34,8 +34,8 @@ def parse_folder(path):
 
         i = 0
         while i < len(fd):
-            if (#i+2 < len(fd) and 
-                fd[i].startswith("INCLUDE_ASM") or 
+            if (#i+2 < len(fd) and
+                fd[i].startswith("INCLUDE_ASM") or
                 fd[i].startswith("ApiStatus N(") or
                 fd[i].startswith("void N(")):
                 #and fd[i+1] == "/*"):
@@ -65,7 +65,7 @@ def parse_folder(path):
                         name_start = fd[base_name].find("N(")
                         name_end = fd[base_name].find("(",name_start+2)
                         new_file_name = fd[base_name][:name_start] + "N(" + NEW_FUNC_NAME + ")" + fd[base_name][name_end:]
-                        
+
                         new_fd = ["#include \"common.h\"",
                                   "#include \"map.h\"",
                                   "",

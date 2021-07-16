@@ -11,6 +11,6 @@ void N(UnkNpcAIFunc21)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         enable_npc_shadow(npc);
         npc->currentAnim.w = enemy->animList[10];
         npc->duration = 8;
-        script->functionTemp[0].s = 3;
+        script->functionTemp[0] = 3;
     }
 }

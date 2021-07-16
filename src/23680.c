@@ -148,7 +148,7 @@ void func_80049550(ScriptInstance* script, s32 arg1) {
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->functionTemp[0].s = arg1;
+        script->functionTemp[0] = arg1;
     }
 }
 
@@ -171,7 +171,7 @@ void func_80049E3C(ScriptInstance* script) {
     npc->jumpScale = 2.5f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= 0x800;
-    script->functionTemp[0].s = 11;
+    script->functionTemp[0] = 11;
 }
 
 void func_80049ECC(ScriptInstance* script) {
@@ -191,7 +191,7 @@ void func_80049ECC(ScriptInstance* script) {
     } else {
         npc->jumpVelocity = 0.0f;
         npc->flags &= ~0x800;
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 
@@ -207,7 +207,7 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
     if (npc->duration == 0) {
         npc->yaw = clamp_angle(atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
                                      enemy->territory->wander.point.z));
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 }
 

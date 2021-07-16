@@ -10,5 +10,5 @@ void N(NpcJumpFunc2)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTer
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= 0x800;
-    script->functionTemp[0].s = 11;
+    script->functionTemp[0] = 11;
 }

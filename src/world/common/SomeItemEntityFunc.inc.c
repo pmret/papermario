@@ -3,27 +3,28 @@
 
 ApiStatus N(SomeItemEntityFunc)(ScriptInstance* script, s32 isInitialCall) {
     ItemEntity* itemEntity = get_item_entity(script->varTable[0]);
+    f32* y = (f32*) &script->functionTemp[2];
 
     if (isInitialCall) {
-        script->functionTemp[2].f = itemEntity->position.y;
-        script->functionTemp[1].s = 0;
-        script->functionTemp[3].s = 0;
+        *y = itemEntity->position.y;
+        script->functionTemp[1] = 0;
+        script->functionTemp[3] = 0;
     }
 
-    switch (script->functionTemp[1].s) {
+    switch (script->functionTemp[1]) {
         case 0:
-            itemEntity->position.y = script->functionTemp[2].f + ((1.0f - cos_rad((script->functionTemp[3].s *
+            itemEntity->position.y = *y + ((1.0f - cos_rad((script->functionTemp[3] *
                                      (PI / 2)) / 30.0f)) * 20.0f);
-            if (script->functionTemp[3].s == 30) {
-                script->functionTemp[1].s = 1;
-                script->functionTemp[3].s = 0;
+            if (script->functionTemp[3] == 30) {
+                script->functionTemp[1] = 1;
+                script->functionTemp[3] = 0;
             } else {
-                script->functionTemp[3].s++;
+                script->functionTemp[3]++;
             }
             break;
         case 1:
-            itemEntity->position.y = script->functionTemp[2].f + 17.0f + (cos_deg(script->functionTemp[3].s) * 3.0f);
-            script->functionTemp[3].s = clamp_angle(script->functionTemp[3].s + 9);
+            itemEntity->position.y = *y + 17.0f + (cos_deg(script->functionTemp[3]) * 3.0f);
+            script->functionTemp[3] = clamp_angle(script->functionTemp[3] + 9);
             break;
     }
 

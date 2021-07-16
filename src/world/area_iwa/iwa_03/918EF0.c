@@ -11,18 +11,18 @@ void N(func_80240514_9190C4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
 
-    if (script->functionTemp[1].s <= 0) {
-        script->functionTemp[1].s = aiSettings->unk_14;
+    if (script->functionTemp[1] <= 0) {
+        script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.85, aiSettings->unk_10.f, 0)) {
             npc->currentAnim = enemy->animList[9];
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->duration = 12;
-            script->functionTemp[0].s = 2;
+            script->functionTemp[0] = 2;
         }
     }
 
-    script->functionTemp[1].s--;
+    script->functionTemp[1]--;
 }
 */
 
@@ -61,7 +61,7 @@ void N(func_802409D4_919584)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (npc->duration < 15) {
             npc->duration = 15;
         }
-        script->functionTemp[0].s = 0x16;
+        script->functionTemp[0] = 0x16;
     }
 }
 */
@@ -82,7 +82,7 @@ void N(func_80240CC4_919874)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
         }
-        script->functionTemp[0].s = 0x29;
+        script->functionTemp[0] = 0x29;
     }
 }
 */

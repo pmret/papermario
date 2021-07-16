@@ -58,7 +58,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         }
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         gOverrideFlags |= 0x10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
@@ -66,7 +66,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         increment_status_menu_disabled();
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         actor = gSpeakingActor;
         part = gSpeakingActorPart;
 
@@ -116,11 +116,11 @@ ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 stringID = get_variable(script, *args);
 
-        script->functionTemp[1].s = 0;
-        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1].s);
+        script->functionTemp[1] = 0;
+        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1]);
     }
 
-    if (script->functionTemp[1].s == 1) {
+    if (script->functionTemp[1] == 1) {
         u8 currentOption = D_8029FA64->currentOption;
 
         gSpeakingActorPrintCtx->currentOption = D_8029FA64->currentOption;

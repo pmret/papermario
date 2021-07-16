@@ -9,6 +9,6 @@ void N(UnkNpcAIFunc20)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         npc->collisionHeight = 26;
         npc->collisionRadius = 24;
-        script->functionTemp[0].s = 4;
+        script->functionTemp[0] = 4;
     }
 }

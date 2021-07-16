@@ -19,10 +19,10 @@ void N(UnkNpcAIFunc14)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
 
     if (enemy->npcSettings->unk_2A & 2) {
         npc->duration = 3;
-        script->functionTemp[0].s = 13;
+        script->functionTemp[0] = 13;
     } else {
         npc->duration = 1;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
         enemy->unk_10.x = npc->pos.x;
         enemy->unk_10.y = npc->pos.y;
         enemy->unk_10.z = npc->pos.z;
