@@ -226,7 +226,7 @@ segments:
     - [0x4AC70, c]
   - [0x4E580, bin]
   - name: mapfs
-    type: PaperMarioMapFS
+    type: pm_map_data
     start: 0x1E00000
     files:
     - dro_01_shape

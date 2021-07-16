@@ -5,7 +5,7 @@ from sys import argv, path
 from pathlib import Path
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from PaperMarioNpcSprites import Sprite
+from pm_npc_sprites import Sprite
 
 def pack_color(r, g, b, a):
     r = floor(31 * (r / 255))

@@ -4,7 +4,7 @@ from sys import argv, path
 from pathlib import Path
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from PaperMarioNpcSprites import Sprite
+from pm_npc_sprites import Sprite
 
 if __name__ == "__main__":
     if len(argv) < 4:

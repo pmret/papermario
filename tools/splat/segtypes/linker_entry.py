@@ -42,7 +42,7 @@ class LinkerEntry:
         self.segment = segment
         self.src_paths = [clean_up_path(p) for p in src_paths]
         self.section = section
-        if self.section == "linker":
+        if self.section == "linker" or self.section == "linker_offset":
             self.object_path = None
         else:
             self.object_path = path_to_object_path(object_path)
@@ -83,6 +83,9 @@ class LinkerWriter():
             if cur_section == "linker": # TODO: isinstance is preferable
                 self._end_block()
                 self._begin_segment(entry.segment)
+                continue
+            elif cur_section == "linker_offset":
+                self._write_symbol(f"{get_segment_cname(entry.segment)}_OFFSET", f". - {get_segment_cname(segment)}_ROM_START")
                 continue
 
             # text/data/bss START/END labels

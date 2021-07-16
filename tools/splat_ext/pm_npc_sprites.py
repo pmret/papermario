@@ -250,7 +250,7 @@ class Component:
 
         return self
 
-class N64SegPaperMarioNpcSprites(N64Segment):
+class N64SegPm_npc_sprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
 
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
