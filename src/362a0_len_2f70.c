@@ -43,7 +43,25 @@ void load_hit_asset(void) {
 
 INCLUDE_ASM(s32, "362a0_len_2f70", load_collision);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", load_stage_collision);
+void load_stage_collision(const char* hitName) {
+    if (hitName == NULL) {
+        gCollisionData.numColliders = 0;
+    } else {
+        u32 assetSize;
+        MapConfig* map = get_current_map_header();
+        void* compressedData = load_asset_by_name(hitName, &assetSize);
+        HitAsset* uncompressedData = heap_malloc(assetSize);
+
+        decode_yay0(compressedData, uncompressedData);
+        general_heap_free(compressedData);
+
+        map->collision = uncompressedData->collision;
+
+        load_hit_data(0, uncompressedData);
+
+        heap_free(uncompressedData);
+    }
+}
 
 INCLUDE_ASM(void, "362a0_len_2f70", load_hit_data, s32 idx, HitAsset* hit);
 
