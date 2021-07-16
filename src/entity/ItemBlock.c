@@ -30,9 +30,9 @@ void entity_HiddenItemBlock_idle(Entity* entity) {
     }
 }
 
-INCLUDE_ASM(s32, "105700_len_2130", entity_HitItemBlock_appear);
+INCLUDE_ASM(s32, "entity/ItemBlock", entity_HitItemBlock_appear);
 
-INCLUDE_ASM(void, "105700_len_2130", entity_ItemBlock_spawn_item, Entity* entity);
+INCLUDE_ASM(void, "entity/ItemBlock", entity_ItemBlock_spawn_item, Entity* entity);
 
 void entity_TriggerBlock_start_bound_script_2(Entity* entity) {
     entity_start_script(entity);

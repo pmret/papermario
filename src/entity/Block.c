@@ -51,7 +51,7 @@ void entity_block_hit_animate_scale(Entity* entity) {
     entity_base_block_idle(entity);
 }
 
-INCLUDE_ASM(s32, "104940_len_dc0", entity_base_block_update_slow_sinking);
+INCLUDE_ASM(s32, "entity/Block", entity_base_block_update_slow_sinking);
 
 s32 entity_base_block_idle(Entity* entity) {
     struct802E3650* temp = (struct802E3650*)entity->dataBuf;
@@ -319,7 +319,7 @@ s32 entity_block_handle_collision(Entity* entity) {
     return 1;
 }
 #else
-INCLUDE_ASM(s32, "104940_len_dc0", entity_block_handle_collision, Entity* entity);
+INCLUDE_ASM(s32, "entity/Block", entity_block_handle_collision, Entity* entity);
 #endif
 
 void entity_init_Hammer1Block_normal(Entity* entity) {

@@ -5,9 +5,9 @@ extern u32* D_802EA760;
 extern StaticEntityData D_802EA7BC;
 extern UNK_TYPE D_802EB3C0;
 
-INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_get_previous_yaw);
+INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent_get_previous_yaw);
 
-INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent__setupGfx);
+INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent__setupGfx);
 
 void entity_HeartBlockContent_setupGfx(s32 entityIndex) {
     entity_HeartBlockContent__setupGfx(entityIndex, &D_0A000808);
@@ -52,7 +52,7 @@ void entity_HeartBlockContent__reset(Entity* entity) {
     entity_HeartBlockContent_set_initial_pos(entity);
 }
 
-INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_anim_idle);
+INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent_anim_idle);
 
 void func_802E4DE0(Entity* entity) {
     struct802E4B10* temp = entity->dataBuf;
@@ -64,13 +64,13 @@ void func_802E4DE0(Entity* entity) {
     entity->rotation.z = 0.0f;
 }
 
-INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent__anim_heal);
+INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent__anim_heal);
 
 void entity_HeartBlock_idle(Entity* entity) {
     entity_base_block_idle(entity);
 }
 
-INCLUDE_ASM(s32, "105F90", entity_HeartBlockContent_anim_beating);
+INCLUDE_ASM(s32, "entity/HeartBlock", entity_HeartBlockContent_anim_beating);
 
 void entity_HeartBlockContent_init(Entity* entity) {
     entity_HeartBlockContent_set_initial_pos(entity);

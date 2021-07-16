@@ -311,7 +311,7 @@ s32 entity_RedSwitch_animate_scale(Entity* entity) {
     }
 }
 #else
-INCLUDE_ASM(s32, "102C80", entity_RedSwitch_animate_scale, Entity* entity);
+INCLUDE_ASM(s32, "entity/Switch", entity_RedSwitch_animate_scale, Entity* entity);
 #endif
 
 void entity_base_switch_start_bound_script(Entity* entity) {
@@ -462,7 +462,7 @@ void entity_base_switch_animate_scale(Entity* entity) {
     }
 }
 #else
-INCLUDE_ASM(void, "102C80", entity_base_switch_animate_scale, Entity* entity);
+INCLUDE_ASM(void, "entity/Switch", entity_base_switch_animate_scale, Entity* entity);
 #endif
 
 void entity_base_switch_init(Entity* entity) {
@@ -514,9 +514,9 @@ void entity_BrickBlock_idle(Entity* entity) {
 }
 
 
-INCLUDE_ASM(void, "102C80", entity_shattering_init_pieces, Entity* entity, void* arg1, void* arg2);
+INCLUDE_ASM(void, "entity/Switch", entity_shattering_init_pieces, Entity* entity, void* arg1, void* arg2);
 
-INCLUDE_ASM(void, "102C80", entity_shattering_idle, Entity* entity);
+INCLUDE_ASM(void, "entity/Switch", entity_shattering_idle, Entity* entity);
 
 #ifdef NON_MATCHING
 // display list issues
@@ -570,5 +570,5 @@ void entity_shattering_setupGfx(s32 entityIndex) {
     gMasterGfxPos = temp_s2;
 }
 #else
-INCLUDE_ASM(s32, "102C80", entity_shattering_setupGfx);
+INCLUDE_ASM(s32, "entity/Switch", entity_shattering_setupGfx);
 #endif
