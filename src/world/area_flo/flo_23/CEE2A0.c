@@ -537,7 +537,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -550,12 +550,12 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &var);
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
     }
@@ -571,7 +571,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];

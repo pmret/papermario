@@ -72,7 +72,7 @@ segments:
     - [0x13480, c, state_demo]
     - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
-    - [0x1f580, c, 1f580_len_1940]
+    - [0x1f580, c, encounter_api]
     - [0x20ec0, c, 20ec0_len_5040]
     - [0x23680, c]
     - [0x25AF0, c]
@@ -436,18 +436,18 @@ segments:
     start: 0x102610
     vram: 0x802E0D90
     subsegments:
-    - [0x102610, c, 102610_len_2330]
-    - [0x102C80, c, 102C80]
+    - [0x102610, c, entity/SaveBlock]
+    - [0x102C80, c, entity/Switch]
     - [0x104730, c, 104730]
-    - [0x104940, c, 104940_len_dc0]
-    - [0x105700, c, 105700_len_2130]
-    - [0x105F90, c, 105F90]
-    - [0x106EF0, c]
-    - [0x107830, c, 107830_len_e70]
-    - [0x1086a0, c, 1086a0_len_fc0]
-    - [0x109660, c, 109660_len_1270]
-    - [0x10A230, c, 10A230]
-    - [0x10A8D0, c, 10A8D0]
+    - [0x104940, c, entity/Block]
+    - [0x105700, c, entity/ItemBlock]
+    - [0x105F90, c, entity/HeartBlock]
+    - [0x106EF0, c, entity/SuperBlock]
+    - [0x107830, c, entity/SimpleSpring]
+    - [0x1086a0, c, entity/Chest]
+    - [0x109660, c, entity/WoodenCrate]
+    - [0x10A230, c, entity/BlueWarpPipe]
+    - [0x10A8D0, c, entity/Signpost]
     - [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
@@ -461,8 +461,22 @@ segments:
     start: 0x10CC10
     vram: 0x802EB3D0
     subsegments:
-    - [0x10CC10, data]
-  - [0x10F1B0, bin]
+    - [0x10CC10, data] # font width data
+  - type: group
+    dir: charset
+    start: 0x10F1B0
+    subsegments:
+    - [0x10F1B0, linker_offset,       standard]
+    - [0x10F1B0, pm_charset,          standard, 16, 16, 0xA6]
+    - [0x1144B0, linker_offset,       standard_pal]
+    - [0x1144B0, pm_charset_palettes, standard,         0x50]
+    - [0x1149B0, linker_offset,       title]
+    - [0x1149B0, pm_charset,          title,    12, 15, 0x29]
+    - [0x115910, linker_offset,       subtitle]
+    - [0x115910, pm_charset,          subtitle, 12, 12, 0x29]
+    - [0x116498, linker_offset,       credits_pal]
+    - [0x116498, pm_charset_palettes, subtitle,         1]
+    - [0x1164A8, pm_charset_palettes, title,            1]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
@@ -10379,7 +10393,7 @@ segments:
   - [0x19E5950, Yay0]
   - [0x19E62A0, Yay0]
   - start: 0x19E67B8
-    type: PaperMarioNpcSprites
+    type: pm_npc_sprites
     dir: sprite
     name: npc
     files:
@@ -10618,7 +10632,7 @@ segments:
       - leaf
   - [0x1B82208, bin]
   - start: 0x1B83000
-    type: PaperMarioMessages
+    type: pm_msg
     files:
       - 00_introduction
       - 01_postgame_celebration
@@ -10670,7 +10684,7 @@ segments:
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - name: mapfs
-    type: PaperMarioMapFS
+    type: pm_map_data
     start: 0x1E40000
     files:
       - dro_01_shape

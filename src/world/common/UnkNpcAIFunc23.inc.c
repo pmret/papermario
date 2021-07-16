@@ -15,12 +15,12 @@ void N(UnkNpcAIFunc23)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     }
     npc->currentAnim.w = enemy->animList[1];
-    script->functionTemp[1].s = 0;
+    script->functionTemp[1] = 0;
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->moveSpeed;
     } else {
         npc->moveSpeed = enemy->territory->wander.moveSpeedOverride / 32767.0;
     }
     enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[0].s = 1;
+    script->functionTemp[0] = 1;
 }

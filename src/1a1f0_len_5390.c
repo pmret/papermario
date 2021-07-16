@@ -52,24 +52,24 @@ ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 25;
+        script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 254);
-    script->functionTemp[0].s--;
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
+    script->functionTemp[0]--;
     do {} while (0);
-    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 25;
+        script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 0xFE);
-    script->functionTemp[0].s -= 5;
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 0xFE);
+    script->functionTemp[0] -= 5;
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     } else {
@@ -112,7 +112,7 @@ ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceData* effectInstanceData;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = 0;
+        script->functionTemp[1] = 0;
         D_800A0BA4 = merlee->pos.y;
         D_800A0BA8 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
         D_800A0BAC = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
@@ -121,10 +121,10 @@ ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
         sfx_play_sound(0x2074);
     }
 
-    merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1].s * TAU) / 360.0f) * 3.0f);
+    merlee->pos.y = D_800A0BA4 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
 
-    script->functionTemp[1].s += 10;
-    script->functionTemp[1].s = clamp_angle(script->functionTemp[1].s);
+    script->functionTemp[1] += 10;
+    script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
     effectInstanceData = D_800A0BA8->data;
     effectInstanceData->pos.x = merlee->pos.x;
@@ -212,32 +212,32 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
     s32 temp1;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 20;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 20;
     }
 
-    if (script->functionTemp[1].s & 1) {
+    if (script->functionTemp[1] & 1) {
         npc->flags &= ~2;
     } else {
         npc->flags |= 2;
     }
 
-    if (script->functionTemp[1].s == 15) {
+    if (script->functionTemp[1] == 15) {
         sfx_play_sound(SOUND_DEATH);
         playFX_18(1, npc->pos.x, npc->pos.y + (npc->collisionHeight / 2), npc->pos.z, 0, -1.0f, 0, 10);
     }
 
-    temp1 = script->functionTemp[1].s;
-    if (script->functionTemp[1].s == 10) {
+    temp1 = script->functionTemp[1];
+    if (script->functionTemp[1] == 10) {
         playFX_01(npc->pos.x, npc->pos.y + 10.0f, npc->pos.z + 10.0f);
-        if (script->functionTemp[1].s == temp1) { // what? (never can be false, seemingly)
+        if (script->functionTemp[1] == temp1) { // what? (never can be false, seemingly)
             spawn_drops(enemy);
         }
     }
 
-    script->functionTemp[1].s -= 1;
+    script->functionTemp[1] -= 1;
 
-    if (script->functionTemp[1].s == 0) {
+    if (script->functionTemp[1] == 0) {
         npc->flags |= 2;
         return ApiStatus_DONE1;
     }
@@ -250,13 +250,13 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 40;
-        script->functionTemp[2].s = 0;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 40;
+        script->functionTemp[2] = 0;
     }
 
-    script->functionTemp[2].s++;
-    if (script->functionTemp[2].s >= 5) {
+    script->functionTemp[2]++;
+    if (script->functionTemp[2] >= 5) {
         if (rand_int(100) < 50) {
             if (playerData->coins != 0) {
                 playerData->coins--;
@@ -264,10 +264,10 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
                                          playerStatus->position.z, 3, 0, 0);
             }
         }
-        script->functionTemp[2].s = 0;
+        script->functionTemp[2] = 0;
     }
 
-    return --script->functionTemp[1].s == 0;
+    return --script->functionTemp[1] == 0;
 }
 
 /// Default/neutral state during world gameplay; checks for player-enemy collisions and initiates battles when they occur.

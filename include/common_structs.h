@@ -303,7 +303,7 @@ typedef struct ScriptInstance {
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
-    /* 0x070 */ X32 functionTemp[4];
+    /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];

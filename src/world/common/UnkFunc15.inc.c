@@ -10,14 +10,14 @@ ApiStatus N(UnkFunc15)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &var);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
     } else {
         func_8003D660(npc, 1);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (npc->duration > 0) {
             npc->duration--;
         } else {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
         }
     }
 }

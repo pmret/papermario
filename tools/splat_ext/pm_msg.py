@@ -366,7 +366,7 @@ CHARSET_CREDITS = {
     0xF7: " ",
 }
 
-class N64SegPaperMarioMessages(N64Segment):
+class N64SegPm_msg(N64Segment):
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
         super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
 

@@ -68,7 +68,7 @@ void entity_SuperBlock_HitEffect_attach_to_parent(Entity* entity) {
 }
 
 // display list func
-INCLUDE_ASM(s32, "106EF0", entity_SuperBlock_HitEffect_setupGfx);
+INCLUDE_ASM(s32, "entity/SuperBlock", entity_SuperBlock_HitEffect_setupGfx);
 
 void entity_SuperBlock_HitEffect_idle(Entity* entity) {
     struct802E4B10* temp_s0 = entity->dataBuf;

@@ -119,7 +119,7 @@ ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 stringID = get_variable(script, *args++);
 
-        script->functionTemp[1].s = 0;
+        script->functionTemp[1] = 0;
         D_802DB268 = msg_get_printer_for_string(stringID, &script->functionTemp[1]);
     }
 
@@ -130,7 +130,7 @@ ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE1;
     }
 
-    return script->functionTemp[1].s == 1;
+    return script->functionTemp[1] == 1;
 }
 
 ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {

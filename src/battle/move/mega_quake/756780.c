@@ -8,24 +8,24 @@
 
 ApiStatus func_802A10A4_756824(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s != 0) {
-        if (script->functionTemp[0].s != 1) {
+    if (script->functionTemp[0] != 0) {
+        if (script->functionTemp[0] != 1) {
             return ApiStatus_BLOCK;
         }
     } else {
-        script->functionTemp[1].s = 30;
-        script->functionTemp[0].s = 1;
+        script->functionTemp[1] = 30;
+        script->functionTemp[0] = 1;
     }
 
     set_screen_overlay_center(1, 0, 0, 0);
     set_screen_overlay_center(1, 1, 320, 240);
     set_screen_overlay_params_back(12, 160.0f);
 
-    if (script->functionTemp[1].s != 0) {
-        script->functionTemp[1].s--;
+    if (script->functionTemp[1] != 0) {
+        script->functionTemp[1]--;
         return ApiStatus_BLOCK;
     } else {
         set_screen_overlay_center(1, 0, 0, 0);

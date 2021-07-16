@@ -7,11 +7,11 @@ void N(UnkFunc9)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrito
 
     if (func_800490B4(territory, enemy, aiSettings->chaseRadius, aiSettings->unk_28.f, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x,
                       enemy->territory->wander.point.z) <= npc->moveSpeed) {
         npc->duration = 10;
-        script->functionTemp[0].s = 50;
+        script->functionTemp[0] = 50;
     } else if (npc->turnAroundYawAdjustment == 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);

@@ -45,8 +45,8 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
     s32 idx;
 
     if (isInitialCall) {
-        script->functionTemp[2].s = heap_malloc(0x330);
-        ptr = script->functionTemp[2].s;
+        script->functionTemp[2] = heap_malloc(0x330);
+        ptr = script->functionTemp[2];
 
         partnerActiveCount = 0;
         var = script->varTable[12] >= 0;
@@ -76,34 +76,34 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
         create_popup_menu(ptr);
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    ptr = script->functionTemp[2].s;
-    if (script->functionTemp[0].s == 0) {
-        script->functionTemp[1].s = ptr->unk_32C;
-        if (script->functionTemp[1].s != 0) {
+    ptr = script->functionTemp[2];
+    if (script->functionTemp[0] == 0) {
+        script->functionTemp[1] = ptr->unk_32C;
+        if (script->functionTemp[1] != 0) {
             hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
         }
     }
 
-    script->functionTemp[0].s++;
+    script->functionTemp[0]++;
 
-    if (script->functionTemp[0].s < 15) {
+    if (script->functionTemp[0] < 15) {
         return ApiStatus_BLOCK;
     }
 
     destroy_popup_menu();
-    if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
+    if (script->functionTemp[1] != 0xFF) {
+        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
     }
 
-    heap_free(script->functionTemp[2].s);
+    heap_free(script->functionTemp[2]);
 
     return ApiStatus_DONE2;
 }

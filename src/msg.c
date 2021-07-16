@@ -1,6 +1,8 @@
 #include "common.h"
+#include "ld_addrs.h"
 
-#define MSG_ROM_START 0x1B83000 // todo remove or move
+// todo consider symbol
+#define MSG_ROM_START 0x1B83000
 
 extern s32 D_802EF0D0;
 
@@ -116,11 +118,13 @@ extern MessageCharset* gMsgCharsets[5];
 extern s32 D_802F39D0;
 extern s32* D_802F4560;
 
+void load_font(s32 font);
 s32 _update_message(MessagePrintState*);
 void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, u16, u8);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
 void get_string_properties(s32 stringID, s32* height, s32* width, s32* maxLineChars, s32* numLines,
                            s32* maxLinesPerPage, s32* arg6, s32 charset);
+
 
 void clear_character_set(void) {
     D_80155C98 = -1;
@@ -145,37 +149,24 @@ void clear_printers(void) {
     load_font(0);
 }
 
-// needs rom split around 0x10F1B0
-void load_font_data(s32 start, u16 size, s32* dest);
-#ifdef NON_MATCHING
-void load_font_data(s32 start, u16 size, s32* dest) {
-    u8* temp_a0;
+void load_font_data(Addr offset, u16 size, void* dest) {
+    u8* base = charset_ROM_START + (s32) offset;
 
-    temp_a0 = start + 0x10F1B0;
-    dma_copy(temp_a0, temp_a0 + size, dest);
+    dma_copy(base, base + size, dest);
 }
-#else
-INCLUDE_ASM(void, "msg", load_font_data, s32 start, u16 size, s32* dest);
-#endif
 
-// Needs symbols for font offsets
-#ifdef NON_MATCHING
 void load_font(s32 font) {
     if (font != D_80155C98) {
         if (font == 0) {
-            load_font_data(0, 0x5100, &D_802EE8D0);
-            load_font_data(0x5300, 0x500, &D_802F4560);
+            load_font_data(charset_standard_OFFSET, 0x5100, &D_802EE8D0);
+            load_font_data(charset_standard_pal_OFFSET, 0x500, &D_802F4560);
         } else if (font == 1) {
-            load_font_data(0x5800, 0xF60, &D_802ED970);
-            load_font_data(0x6760, 0xB88, &D_802F39D0);
-            load_font_data(0x72E8, 0x80, &D_802F4560);
+            load_font_data(charset_title_OFFSET, 0xF60, &D_802ED970);
+            load_font_data(charset_subtitle_OFFSET, 0xB88, &D_802F39D0);
+            load_font_data(charset_credits_pal_OFFSET, 0x80, &D_802F4560);
         }
     }
 }
-#else
-INCLUDE_ASM(void, "msg", load_font, s32 font);
-#endif
-void load_font(s32 font);
 
 void update_messages(void) {
     s32 i;

@@ -40,16 +40,16 @@ ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             make_npcs(get_variable(script, *args++), gGameStatusPtr->mapID, get_variable(script, *args++));
-            script->functionTemp[0].s = 1;
+            script->functionTemp[0] = 1;
             break;
         case 1:
-            if (gGameState != script->functionTemp[0].s) {
+            if (gGameState != script->functionTemp[0]) {
                 return ApiStatus_DONE2;
             }
     }
@@ -57,9 +57,9 @@ ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "1f580_len_1940", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "encounter_api", RemoveNpc, ScriptInstance* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "1f580_len_1940", RemoveEncounter, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "encounter_api", RemoveEncounter, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus GetBattleOutcome(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gCurrentEncounter.battleOutcome);
@@ -98,7 +98,7 @@ ApiStatus DoNpcDefeat(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_FINISH;
 }
 
-INCLUDE_ASM(s32, "1f580_len_1940", start_battle);
+INCLUDE_ASM(s32, "encounter_api", start_battle);
 
 ApiStatus StartBattle(ScriptInstance* script, s32 isInitialCall) {
     start_battle(script, -1);
@@ -110,7 +110,7 @@ ApiStatus StartBattleWith(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "1f580_len_1940", StartBossBattle, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "encounter_api", StartBossBattle, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
     Bytecode songID = get_variable(script, *script->ptrReadPos);
@@ -122,7 +122,7 @@ ApiStatus SetBattleMusic(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1f580_len_1940", BindNpcAI, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "encounter_api", BindNpcAI, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus BindNpcIdle(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -197,7 +197,7 @@ ApiStatus EnableNpcAI(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1f580_len_1940", SetNpcAux, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "encounter_api", SetNpcAux, ScriptInstance* script, s32 isInitialCall);
 
 ApiStatus BindNpcAux(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

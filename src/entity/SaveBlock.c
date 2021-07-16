@@ -19,7 +19,7 @@ s32 entity_can_collide_with_jumping_player(Shadow* shadow) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "102610_len_2330", entity_SaveBlock_setupGfx);
+INCLUDE_ASM(s32, "entity/SaveBlock", entity_SaveBlock_setupGfx);
 
 void entity_SaveBlock_idle(Entity* entity) {
     struct802E10F4* temp;

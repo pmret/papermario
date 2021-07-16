@@ -1,6 +1,7 @@
 from segtypes.n64.segment import N64Segment
 from segtypes.n64.ia8 import N64SegIa8
 from segtypes.n64.rgba32 import N64SegRgba32
+from segtypes.n64.ci4 import N64SegCi4
 from util.n64 import Yay0decompress
 from util.color import unpack_color
 from util.iter import iter_in_groups
@@ -36,7 +37,7 @@ def add_file_ext(name: str) -> str:
     else:
         return name + ".bin"
 
-class N64SegPaperMarioMapFS(N64Segment):
+class N64SegPm_map_data(N64Segment):
     def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml):
         super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
 
@@ -80,20 +81,38 @@ class N64SegPaperMarioMapFS(N64Segment):
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif name == "title_data":
-                with open(fs_dir / "title/logotype.png", "wb") as f:
-                    width = 200
-                    height = 112
-                    N64SegRgba32.get_writer(width, height).write_array(f, N64SegRgba32.parse_image(bytes[0x2210 : 0x2210 + width * height * 4], width, height))
+                if "ver/us" in options.opts["target_path"]:
+                    with open(fs_dir / "title/logotype.png", "wb") as f:
+                        width = 200
+                        height = 112
+                        N64SegRgba32.get_writer(width, height).write_array(f, N64SegRgba32.parse_image(bytes[0x2210 : 0x2210 + width * height * 4], width, height))
 
-                with open(fs_dir / "title/copyright.png", "wb") as f:
-                    width = 144
-                    height = 32
-                    N64SegIa8.get_writer(width, height).write_array(f, N64SegIa8.parse_image(bytes[0x10 : 0x10 + width * height], width, height))
+                    with open(fs_dir / "title/copyright.png", "wb") as f:
+                        width = 144
+                        height = 32
+                        N64SegIa8.get_writer(width, height).write_array(f, N64SegIa8.parse_image(bytes[0x10 : 0x10 + width * height], width, height))
 
-                with open(fs_dir / "title/press_start.png", "wb") as f:
-                    width = 128
-                    height = 32
-                    N64SegIa8.get_writer(width, height).write_array(f, N64SegIa8.parse_image(bytes[0x1210 : 0x1210 + width * height], width, height))
+                    with open(fs_dir / "title/press_start.png", "wb") as f:
+                        width = 128
+                        height = 32
+                        N64SegIa8.get_writer(width, height).write_array(f, N64SegIa8.parse_image(bytes[0x1210 : 0x1210 + width * height], width, height))
+                else:
+                    with open(fs_dir / "title/logotype.png", "wb") as f:
+                        width = 272
+                        height = 88
+                        N64SegRgba32.get_writer(width, height).write_array(f, N64SegRgba32.parse_image(bytes[0x1830 : 0x1830 + width * height * 4], width, height))
+
+                    with open(fs_dir / "title/copyright.png", "wb") as f:
+                        width = 128
+                        height = 32
+
+                        w = png.Writer(width, height, palette=parse_palette(bytes[0x810:0x830]))
+                        w.write_array(f, N64SegCi4.parse_image(bytes[0x10 : 0x10 + width * height], width, height))
+
+                    with open(fs_dir / "title/press_start.png", "wb") as f:
+                        width = 128
+                        height = 32
+                        N64SegIa8.get_writer(width, height).write_array(f, N64SegIa8.parse_image(bytes[0x830 : 0x830 + width * height], width, height))
             elif name.endswith("_bg"):
                 def write_bg_png(bytes, path, header_offset=0):
                     header = bytes[header_offset:header_offset+0x10]
