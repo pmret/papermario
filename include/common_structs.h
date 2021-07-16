@@ -55,6 +55,11 @@ typedef struct Vec2s {
     /* 0x02 */ s16 y;
 } Vec2s; // size = 0x04
 
+typedef struct Vec2su {
+    /* 0x00 */ u16 x;
+    /* 0x02 */ u16 y;
+} Vec2su; // size = 0x04
+
 typedef struct Vec3s {
     /* 0x00 */ s16 x;
     /* 0x02 */ s16 y;
@@ -1118,12 +1123,12 @@ typedef struct MessagePrintState {
     /* 0x502 */ char unk_502[0x2];
     /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
     /* 0x508 */ s8 style;
-    /* 0x509 */ s8 fadeInCounter;
+    /* 0x509 */ u8 fadeInCounter;
     /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
     /* 0x50E */ Vec2s openStartPos;
-    /* 0x512 */ s8 fadeOutCounter;
+    /* 0x512 */ u8 fadeOutCounter;
     /* 0x513 */ char unk_513[0x1];
-    /* 0x514 */ Vec2s windowSize;
+    /* 0x514 */ Vec2su windowSize;
     /* 0x518 */ s8 speechSoundType;
     /* 0x519 */ u8 volume;
     /* 0x51A */ s8 speechPan; // just pan?

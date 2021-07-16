@@ -118,6 +118,10 @@ s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 
+void draw_box(s32 flags, s32 windowStyle, s16 posX, s16 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+              s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
+              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
 s32 disable_player_input(void);

@@ -4,6 +4,8 @@
 
 extern s16 gNextMessageBuffer;
 extern Gfx D_8014C500[];
+extern u8 D_8014C580[];
+extern u8 D_8014C588[];
 extern s32 gMsgBGScrollAmtX;
 extern u16 gMsgGlobalWaveCounter;
 extern s32 gMsgVarImages; // message images?
@@ -23,6 +25,7 @@ extern s32 D_802F39D0;
 extern s32* D_802F4560;
 
 s32 _update_message(MessagePrintState*);
+void appendGfx_message(MessagePrintState*, s16, s16, u16, u16, s32, s32);
 void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, u16 lrY);
 
 void clear_character_set(void) {
@@ -110,7 +113,6 @@ s32 _update_message(MessagePrintState* printer) {
     f32 temp_f4;
     s32 temp_a1_3;
     s32 temp_v0_2;
-    u32 temp_v1;
     u8 temp_v1_2;
     s32 phi_a3;
     s32 phi_a0;
@@ -822,13 +824,49 @@ INCLUDE_ASM(s32, "msg", draw_digit);
 
 INCLUDE_ASM(void, "msg", draw_number, s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
-void drawbox_message_delegate(s32 arg0) {
-    appendGfx_message(arg0, 0, 0, 0, 0, 4, 0);
+void drawbox_message_delegate(MessagePrintState* printer) {
+    appendGfx_message(printer, 0, 0, 0, 0, 4, 0);
 }
 
-INCLUDE_ASM(s32, "msg", draw_message_window);
+void draw_message_window(MessagePrintState* printer) {
+    f32 scale = 1.0f;
+    s32 rotZ = 0;
 
-INCLUDE_ASM(s32, "msg", appendGfx_message);
+    switch (printer->windowState) {
+        case 0xD:
+            scale = (f32)D_8014C580[printer->fadeInCounter] / 100.0;
+            rotZ = (4 - printer->fadeInCounter) * 3;
+            printer->fadeInCounter++;
+            if (D_8014C580[printer->fadeInCounter] == 0) {
+                printer->windowState = 4;
+            }
+            break;
+        case 0xE:
+            scale = (f32)D_8014C588[printer->fadeOutCounter] / 100.0;
+            rotZ = -printer->fadeOutCounter;
+            printer->fadeOutCounter++;
+            if (D_8014C588[printer->fadeOutCounter] == 0) {
+                printer->stateFlags |= 1;
+            }
+            break;
+    }
+
+    switch (printer->windowState) {
+        case 0xD:
+        case 0xE:
+            printer->windowBasePos.x = 160 - (printer->windowSize.x / 2);
+            printer->windowBasePos.y = 56;
+            draw_box(1, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
+                     scale, scale, 0.0f, 0.0f, rotZ, drawbox_message_delegate, printer, NULL, 320, 240, NULL);
+            break;
+        default:
+            appendGfx_message(printer, printer->windowOffsetPos.x, printer->windowOffsetPos.y, printer->unk_46C,
+                              printer->curLinePos, 4, 0);
+            break;
+    }
+}
+
+INCLUDE_ASM(void, "msg", appendGfx_message, MessagePrintState* printer, s16 arg1, s16 arg2, u16 arg3, u16 arg4, s32 arg5, s32 arg6);
 
 
 void msg_reset_gfx_state(void) {
