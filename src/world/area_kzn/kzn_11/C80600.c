@@ -18,7 +18,7 @@ void N(func_802410B4_C81254)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_802436D0_C83870)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 */
@@ -63,7 +63,7 @@ ApiStatus N(func_8024176C_C8190C)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
 #include "world/common/UnkNpcAIFunc23.inc.c"
         case 1:
@@ -110,7 +110,7 @@ void N(func_80241A88_C81C28)(ScriptInstance *script, NpcAISettings *aiSettings, 
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim = enemy->animList[0];
         npc->duration = 30;
-        script->functionTemp[0].s = 20;
+        script->functionTemp[0] = 20;
         enemy->varTable[9] = 30;
         return;
     }
@@ -140,7 +140,7 @@ void N(func_80241A88_C81C28)(ScriptInstance *script, NpcAISettings *aiSettings, 
         npc->duration--;
         return;
     }
-    script->functionTemp[0].s = 12;
+    script->functionTemp[0] = 12;
 }
 */
 
@@ -178,7 +178,7 @@ ApiStatus N(func_80241D64_C81F04)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
 #include "world/common/UnkNpcAIFunc23.inc.c"
         case 1:

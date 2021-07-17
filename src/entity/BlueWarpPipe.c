@@ -145,7 +145,7 @@ void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
     entity_start_script(entity);
 }
 
-INCLUDE_ASM(s32, "10A230", entity_BlueWarpPipe_setupGfx);
+INCLUDE_ASM(s32, "entity/BlueWarpPipe", entity_BlueWarpPipe_setupGfx);
 
 f32 entity_init_BlueWarpPipe(Entity* entity) {
     struct802E89B0* temp_s0;

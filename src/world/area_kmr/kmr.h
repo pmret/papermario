@@ -77,22 +77,22 @@
 #define KMR20_ChasedOffShyGuy SI_SAVE_FLAG(0x06D)
 #define KMR10_KnockedSpringOutOfTree SI_SAVE_FLAG(0x06E)
 
-MapConfig kmr_00_config;
-MapConfig kmr_02_config;
-MapConfig kmr_03_config;
-MapConfig kmr_04_config;
-MapConfig kmr_05_config;
-MapConfig kmr_06_config;
-MapConfig kmr_07_config;
-MapConfig kmr_09_config;
-MapConfig kmr_10_config;
-MapConfig kmr_11_config;
-MapConfig kmr_12_config;
-MapConfig kmr_20_config;
-MapConfig kmr_21_config;
-MapConfig kmr_22_config;
-MapConfig kmr_23_config;
-MapConfig kmr_24_config;
-MapConfig kmr_30_config;
+extern MapConfig kmr_00_config;
+extern MapConfig kmr_02_config;
+extern MapConfig kmr_03_config;
+extern MapConfig kmr_04_config;
+extern MapConfig kmr_05_config;
+extern MapConfig kmr_06_config;
+extern MapConfig kmr_07_config;
+extern MapConfig kmr_09_config;
+extern MapConfig kmr_10_config;
+extern MapConfig kmr_11_config;
+extern MapConfig kmr_12_config;
+extern MapConfig kmr_20_config;
+extern MapConfig kmr_21_config;
+extern MapConfig kmr_22_config;
+extern MapConfig kmr_23_config;
+extern MapConfig kmr_24_config;
+extern MapConfig kmr_30_config;
 
 #endif

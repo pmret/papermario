@@ -1050,7 +1050,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
         npc->duration = 0xA;
         npc->currentAnim.w = enemy->animList[8];
     }
-    script->functionTemp[0].s = 0xD;
+    script->functionTemp[0] = 0xD;
 }
 
 void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
@@ -1062,7 +1062,7 @@ void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISetting
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
     } else {
         if (npc->currentAnim.w != enemy->animList[8]) {
             if (npc->moveSpeed < 4.0) {
@@ -1076,7 +1076,7 @@ void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISetting
             npc->duration--;
             return;
         } else {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
         }
     }
 }
@@ -1087,7 +1087,7 @@ void N(func_802414C8_CB0208)(ScriptInstance* script, NpcAISettings* npcAISetting
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0] = NULL;
     }
 }
 
@@ -1109,7 +1109,7 @@ ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -1119,13 +1119,13 @@ ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, npcAISettings, territoryPtr);
         case 1:

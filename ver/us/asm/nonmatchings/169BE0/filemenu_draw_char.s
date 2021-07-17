@@ -31,9 +31,9 @@ glabel filemenu_draw_char
 /* 169C44 802493E4 00031880 */  sll       $v1, $v1, 2
 /* 169C48 802493E8 00041040 */  sll       $v0, $a0, 1
 /* 169C4C 802493EC 00441021 */  addu      $v0, $v0, $a0
-/* 169C50 802493F0 3C01802F */  lui       $at, %hi(D_802EB5A8)
+/* 169C50 802493F0 3C01802F */  lui       $at, %hi(gMsgCharsets)
 /* 169C54 802493F4 00230821 */  addu      $at, $at, $v1
-/* 169C58 802493F8 8C23B5A8 */  lw        $v1, %lo(D_802EB5A8)($at)
+/* 169C58 802493F8 8C23B5A8 */  lw        $v1, %lo(gMsgCharsets)($at)
 /* 169C5C 802493FC 00021080 */  sll       $v0, $v0, 2
 /* 169C60 80249400 8C640008 */  lw        $a0, 8($v1)
 /* 169C64 80249404 90720000 */  lbu       $s2, ($v1)

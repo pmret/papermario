@@ -23,13 +23,13 @@ ApiStatus func_802A2468_798428(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_802A247C_79843C(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 230;
+        script->functionTemp[0] = 230;
     }
 
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
 
-    script->functionTemp[0].s -= 5;
-    if (script->functionTemp[0].s <= 200) {
+    script->functionTemp[0] -= 5;
+    if (script->functionTemp[0] <= 200) {
         set_background_color_blend(0, 0, 0, 200);
         return ApiStatus_DONE2;
     }

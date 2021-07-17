@@ -32,7 +32,7 @@ void N(UnkFunc10)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerrit
         phi_s1 = 1;
     }
     if (phi_s1) {
-        script->functionTemp[0].s = 4;
+        script->functionTemp[0] = 4;
         enemy->unk_07 = 0;
     }
 }

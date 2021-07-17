@@ -6,15 +6,15 @@ ApiStatus N(func_80240000_BF47A0)(ScriptInstance* script, s32 isInitialCall) {
     s32 colliderID;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         suggest_player_anim_clearUnkFlag(0x10007);
     }
 
     temp_f20 = func_800E34D8();
     playerStatus->position.y = player_check_collision_below(temp_f20, &colliderID);
-    script->functionTemp[0].s += fabsf(temp_f20);
+    script->functionTemp[0] += fabsf(temp_f20);
     do {} while (0);
-    return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;
+    return (script->functionTemp[0] > 50) * ApiStatus_DONE2;
 }
 
 ApiStatus N(func_8024008C_BF482C)(ScriptInstance* script, s32 isInitialCall) {

@@ -5,7 +5,7 @@ ApiStatus N(UnkRotatePlayer)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 60;
+        script->functionTemp[0] = 60;
     }
 
     playerStatus->targetYaw += 30.0f;
@@ -13,7 +13,7 @@ ApiStatus N(UnkRotatePlayer)(ScriptInstance* script, s32 isInitialCall) {
         playerStatus->targetYaw -= 360.0f;
     }
 
-    script->functionTemp[0].s--;
+    script->functionTemp[0]--;
 
-    return (script->functionTemp[0].s >> 0x1F) & ApiStatus_DONE2;
+    return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }

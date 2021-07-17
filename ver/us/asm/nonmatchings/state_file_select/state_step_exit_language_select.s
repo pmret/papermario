@@ -164,8 +164,8 @@ glabel L80035814_10C14
 /* 10D44 80035944 00000000 */   nop
 /* 10D48 80035948 0C0515CA */  jal       init_trigger_list
 /* 10D4C 8003594C 00000000 */   nop
-/* 10D50 80035950 3C04800E */  lui       $a0, %hi(D_800D9230)
-/* 10D54 80035954 24849230 */  addiu     $a0, $a0, %lo(D_800D9230)
+/* 10D50 80035950 3C04800E */  lui       $a0, %hi(mapShapeName)
+/* 10D54 80035954 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
 /* 10D58 80035958 0C016B3A */  jal       load_asset_by_name
 /* 10D5C 8003595C 27A50010 */   addiu    $a1, $sp, 0x10
 /* 10D60 80035960 0040802D */  daddu     $s0, $v0, $zero
