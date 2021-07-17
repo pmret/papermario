@@ -900,7 +900,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -911,11 +911,11 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
 
@@ -929,7 +929,7 @@ ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
         case 1:
@@ -974,18 +974,18 @@ void N(func_80240E90_BDFC20)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     posX = npc->pos.x;
     posZ = npc->pos.z;
-    temp_f22 = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).x;
-    temp_f20 = (*(enemy->territory->patrol.points + script->functionTemp[2].s)).z;
+    temp_f22 = (*(enemy->territory->patrol.points + script->functionTemp[2])).x;
+    temp_f20 = (*(enemy->territory->patrol.points + script->functionTemp[2])).z;
 
     npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     posX = npc->pos.x;
-    posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2].s)).y;
+    posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
     posZ = npc->pos.z;
     posW = 1000.0f;
     npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-    posY += (*(enemy->territory->patrol.points + script->functionTemp[2].s)).y;
+    posY += (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {
         npc->pos.y += 2.0;
@@ -997,7 +997,7 @@ void N(func_80240E90_BDFC20)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     posW = dist2D(npc->pos.x, npc->pos.z, temp_f22, temp_f20);
     if (!(posW > npc->moveSpeed)) {
-        script->functionTemp[0].s = 2;
+        script->functionTemp[0] = 2;
     }
 }
 
@@ -1007,12 +1007,12 @@ void N(func_80241068_BDFDF8)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration--;
     if (npc->duration < 0) {
-        script->functionTemp[1].s--;
-        if (script->functionTemp[1].s >= 0) {
+        script->functionTemp[1]--;
+        if (script->functionTemp[1] >= 0) {
             npc->yaw = clamp_angle(npc->yaw + 180.0f);
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
-            script->functionTemp[0].s = 4;
+            script->functionTemp[0] = 4;
             npc->currentAnim.w = enemy->animList[0];
         }
     }
@@ -1036,12 +1036,12 @@ ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags &= ~0x800;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
         case 1:

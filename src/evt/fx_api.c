@@ -75,19 +75,19 @@ ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
     f32 t1;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = var6;
+        script->functionTemp[0] = var6;
         get_screen_overlay_params(1, &t0, &t1);
-        script->functionTemp[1].s = t1;
+        script->functionTemp[1] = t1;
         set_screen_overlay_center(1, 0, var1, var2);
         set_screen_overlay_center(1, 1, var3, var4);
     }
 
     get_screen_overlay_params(1, &t0, &t1);
-    temp = (script->functionTemp[1].s - var5) * script->functionTemp[0].s;
+    temp = (script->functionTemp[1] - var5) * script->functionTemp[0];
     set_screen_overlay_params_back(12, (temp / var6) + var5);
 
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s < 0) {
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] < 0) {
         set_screen_overlay_params_back(12, var5);
         return ApiStatus_DONE2;
     }

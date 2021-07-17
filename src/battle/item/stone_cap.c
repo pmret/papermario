@@ -59,15 +59,15 @@ ApiStatus N(func_802A123C_7217DC)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             inflict_status(player, STATUS_STONE, script->varTable[0]);
             player->status = 0;
-            script->functionTemp[1].s = 3;
-            script->functionTemp[0].s = 1;
+            script->functionTemp[1] = 3;
+            script->functionTemp[0] = 1;
             break;
 
         case 1:
@@ -78,7 +78,7 @@ ApiStatus N(func_802A123C_7217DC)(ScriptInstance* script, s32 isInitialCall) {
                 playFX_69(0, x, y, z, 1.0f, 25);
             }
 
-            if (script->functionTemp[1].s == 0) {
+            if (script->functionTemp[1] == 0) {
                 BattleStatus* battleStatus2 = &gBattleStatus;
 
                 battleStatus2->flags1 &= ~0x04000000;
@@ -88,7 +88,7 @@ ApiStatus N(func_802A123C_7217DC)(ScriptInstance* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            script->functionTemp[1].s--;
+            script->functionTemp[1]--;
             break;
     }
 

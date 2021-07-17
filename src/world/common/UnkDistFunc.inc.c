@@ -18,7 +18,7 @@ ApiStatus N(UnkDistFunc)(ScriptInstance* script, NpcAISettings* aiSettings, Enem
                 npc->duration = enemy->varTable[3];
             }
             enemy->varTable[4] = npc->duration;
-            script->functionTemp[0].s = 14;
+            script->functionTemp[0] = 14;
         }
     }
 }

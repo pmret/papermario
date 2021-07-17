@@ -86,9 +86,9 @@ ApiStatus AwaitPlayerApproach(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    s32* targetX = &script->functionTemp[0].s;
-    s32* targetZ = &script->functionTemp[1].s;
-    s32* distanceRequired = &script->functionTemp[2].s;
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
 
@@ -114,9 +114,9 @@ ApiStatus IsPlayerWithin(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    s32* targetX = &script->functionTemp[0].s;
-    s32* targetZ = &script->functionTemp[1].s;
-    s32* distanceRequired = &script->functionTemp[2].s;
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
     Bytecode outVar = SI_VAR(0);
@@ -145,9 +145,9 @@ ApiStatus AwaitPlayerLeave(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    s32* targetX = &script->functionTemp[0].s;
-    s32* targetZ = &script->functionTemp[1].s;
-    s32* distanceRequired = &script->functionTemp[2].s;
+    s32* targetX = &script->functionTemp[0];
+    s32* targetZ = &script->functionTemp[1];
+    s32* distanceRequired = &script->functionTemp[2];
 
     f32 distance;
 
@@ -189,8 +189,8 @@ ApiStatus AddVectorPolar(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
-    s32* t0 = &script->functionTemp[0].s;
-    s32* t1 = &script->functionTemp[1].s;
+    s32* t0 = &script->functionTemp[0];
+    s32* t1 = &script->functionTemp[1];
     s32 t1v;
 
     if (initialCall) {
@@ -217,8 +217,8 @@ ApiStatus func_802D4BDC(ScriptInstance* script, s32 initialCall) {
 }
 
 ApiStatus func_802D4C4C(ScriptInstance* script, s32 initialCall) {
-    s32* t0 = &script->functionTemp[0].s;
-    s32* t1 = &script->functionTemp[1].s;
+    s32* t0 = &script->functionTemp[0];
+    s32* t1 = &script->functionTemp[1];
     s32 t1v;
 
     if (initialCall) {

@@ -1,5 +1,7 @@
 #include "common.h"
 
+s32 D_8014C250[] = {0x0001003C, 0x00000000, 0x00000000, 0x00000000};
+
 INCLUDE_ASM(s32, "B4580", animator_copy_vertices_to_buffer);
 
 INCLUDE_ASM(s32, "B4580", animator_make_mirrorZ);

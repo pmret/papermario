@@ -4,6 +4,8 @@
 #include "common.h"
 #include "include_asm.h"
 
+#define BSS __attribute__ ((section (".bss")))
+
 #define ALIGN16(val) (((val) + 0xF) & ~0xF)
 
 #define N(sym) NS(NAMESPACE, sym)

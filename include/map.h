@@ -15,7 +15,8 @@ typedef Vec4f EntryList[];
 typedef struct MapConfig {
     /* 0x00 */ ModelNode* modelTreeRoot;
     /* 0x04 */ UNK_PTR collision;
-    /* 0x08 */ char unk_08[8];
+    /* 0x08 */ UNK_PTR unk_08;
+    /* 0x0C */ char unk_0C[4];
     /* 0x10 */ Script* main;
     /* 0x14 */ EntryList* entryList;
     /* 0x18 */ s32 entryCount;

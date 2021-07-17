@@ -55,13 +55,13 @@ ApiStatus func_80218170_4CF320(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 10;
+        script->functionTemp[0] = 10;
     }
 
     battleStatus->flags2 &= ~0x2;
 
-    if (script->functionTemp[0].s != 0) {
-        script->functionTemp[0].s--;
+    if (script->functionTemp[0] != 0) {
+        script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 
@@ -72,13 +72,13 @@ ApiStatus func_802181B4_4CF364(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 10;
+        script->functionTemp[0] = 10;
     }
 
     battleStatus->flags2 &= ~0x4;
 
-    if (script->functionTemp[0].s != 0) {
-        script->functionTemp[0].s--;
+    if (script->functionTemp[0] != 0) {
+        script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 

@@ -6,6 +6,6 @@ void N(UnkNpcAIFunc10)(ScriptInstance* script) {
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0].s = 15;
+        script->functionTemp[0] = 15;
     }
 }

@@ -88,32 +88,32 @@ ApiStatus si_handle_wait(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0].s = get_variable(script, *ptrReadPos);
+        script->functionTemp[0] = get_variable(script, *ptrReadPos);
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0].s -= 1;
-    return !script->functionTemp[0].s;
+    script->functionTemp[0] -= 1;
+    return !script->functionTemp[0];
 }
 
 ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0].s = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
+        script->functionTemp[0] = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0].s--;
-    return !script->functionTemp[0].s;
+    script->functionTemp[0]--;
+    return !script->functionTemp[0];
 }
 
 ApiStatus si_handle_if_equal(ScriptInstance* script) {

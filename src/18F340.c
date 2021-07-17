@@ -157,26 +157,26 @@ ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 20;
+        script->functionTemp[0] = 20;
     }
 
-    set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0].s) * 12) & 0xFC);
+    set_background_color_blend(0, 0, 0, ((20 - script->functionTemp[0]) * 12) & 0xFC);
 
-    script->functionTemp[0].s -= 1;
+    script->functionTemp[0] -= 1;
     do {} while(0); // TODO required to match
-    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 20;
+        script->functionTemp[0] = 20;
         btl_cam_unfreeze();
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 12) & 0xFC);
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 12) & 0xFC);
 
-    script->functionTemp[0].s -= 1;
-    if (script->functionTemp[0].s == 0) {
+    script->functionTemp[0] -= 1;
+    if (script->functionTemp[0] == 0) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
@@ -267,25 +267,25 @@ ApiStatus func_80261530(ScriptInstance* script, s32 isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 25;
+        script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0].s) * 10) & 0xFE);
+    set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 0xFE);
 
-    script->functionTemp[0].s--;
+    script->functionTemp[0]--;
     do {} while(0); // TODO required to match
-    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus func_802615C8(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 25;
+        script->functionTemp[0] = 25;
     }
 
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 10) & 0xFF);
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 10) & 0xFF);
 
-    script->functionTemp[0].s -= 5;
-    if (script->functionTemp[0].s == 0) {
+    script->functionTemp[0] -= 5;
+    if (script->functionTemp[0] == 0) {
         set_background_color_blend(0, 0, 0, 0);
         return ApiStatus_DONE2;
     }
@@ -327,7 +327,7 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
     EffectInstanceData* effectInstanceData;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = 0;
+        script->functionTemp[1] = 0;
         D_8029FB94 = merlee->pos.y;
         D_8029FB98 = playFX_52(0, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.4f, 0);
         D_8029FB9C = playFX_52(3, merlee->pos.x, merlee->pos.y, merlee->pos.z, 0.00001f, 0);
@@ -335,10 +335,10 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
         D_8029FB90 = 12;
         sfx_play_sound(0x2074);
     }
-    merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1].s * TAU) / 360.0f) * 3.0f);
+    merlee->pos.y = D_8029FB94 + (sin_rad((script->functionTemp[1] * TAU) / 360.0f) * 3.0f);
 
-    script->functionTemp[1].s += 10;
-    script->functionTemp[1].s = clamp_angle(script->functionTemp[1].s);
+    script->functionTemp[1] += 10;
+    script->functionTemp[1] = clamp_angle(script->functionTemp[1]);
 
     effectInstanceData = D_8029FB98->data;
     effectInstanceData->pos.x = merlee->pos.x;
@@ -497,13 +497,13 @@ ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
     f32 deltaZ;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 10;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 10;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
-            ft1 = script->functionTemp[1].s;
+            ft1 = script->functionTemp[1];
             deltaX = player->currentPos.x - item->position.x;
             deltaY = player->currentPos.y + 12.0f - item->position.y;
             deltaZ = player->currentPos.z - 5.0f - item->position.z;
@@ -515,11 +515,11 @@ ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
             item->position.y += dist2D(item->position.x, item->position.y, player->currentPos.x,
                                        player->currentPos.y + 12.0f) / 5.0f;
 
-            if (script->functionTemp[1].s == 1) {
-                script->functionTemp[0].s = script->functionTemp[1].s;
+            if (script->functionTemp[1] == 1) {
+                script->functionTemp[0] = script->functionTemp[1];
             }
 
-            script->functionTemp[1].s--;
+            script->functionTemp[1]--;
             break;
         case 1:
             return ApiStatus_DONE2;

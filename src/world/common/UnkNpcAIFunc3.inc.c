@@ -7,7 +7,7 @@ void N(UnkNpcAIFunc3)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTe
     if ((npc->duration <= 0) || (--npc->duration <= 0)) {
         if (npc->turnAroundYawAdjustment == 0) {
             npc->duration = 0;
-            script->functionTemp[0].s = 14;
+            script->functionTemp[0] = 14;
         }
     }
 }
