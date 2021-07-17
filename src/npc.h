@@ -184,11 +184,11 @@ void func_8003DA38(Npc* npc, s32 arg1);
 
 s32 func_8003DC38();
 
-s32 func_8003DFA0();
+void func_8003DFA0(Npc* npc);
 
 s32 func_8003E0D4();
 
-s32 func_8003E1D0();
+void func_8003E1D0(Npc* npc);
 
 /// Duplicate of set_defeated().
 void COPY_set_defeated(s32 mapID, s32 encounterID);
