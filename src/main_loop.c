@@ -359,9 +359,9 @@ s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 x, s32 y, u8* 
     s32 pixel = (x * SCREEN_WIDTH) + y;
 
     out[3] = (framebuf2[pixel] >> 2) & 0xF;
-    out[0] = framebuf1[pixel] >> 11;
-    out[1] = (framebuf1[pixel] >> 6) & 0x1F;
-    out[2] = (framebuf1[pixel] >> 1) & 0x1F;
+    out[0] = framebuf1[pixel] >> 11; // red
+    out[1] = (framebuf1[pixel] >> 6) & 0x1F; // green
+    out[2] = (framebuf1[pixel] >> 1) & 0x1F; // blue
 }
 
 INCLUDE_ASM(s32, "main_loop", func_8002725C);
@@ -370,11 +370,9 @@ INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
-// alex: mystery t0=0x140 temp and a few missing loads, but mostly there
+// alex: mystery t0=SCREEN_WIDTH temp and weirdness with the `pixel` calculation
 #ifdef NON_MATCHING
-// arg0 and arg1 probably framebuffer voidptrs
-void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
-    s32 temp_s4;
+void func_800279B4(const u16* framebuf1, u16* framebuf2, u16* arg2) {
     s32 x;
     s32 y;
     s32 subroutine_argE;
@@ -388,20 +386,22 @@ void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
 
     for (y = 1; y < SCREEN_HEIGHT - 1; y++) {
         for (x = 2; x < SCREEN_WIDTH - 2; x++) {
-            temp_s4 = (subroutine_argF + x) * 2;
-            // Wii U VC changes this condition to FALSE to fix pause menu lag
-            if (((*(temp_s4 + arg1) >> 2) & 0xF) < 8) {
-                func_800271FC(arg0, arg1, y - 1, x - 1, &subroutine_argE);
-                func_800271FC(arg0, arg1, y - 1, x + 1, &subroutine_arg7);
-                func_800271FC(arg0, arg1, y,     x - 2, &subroutine_arg8);
-                func_800271FC(arg0, arg1, y,     x + 2, &subroutine_arg9);
-                func_800271FC(arg0, arg1, y + 1, x - 1, &subroutine_argA);
-                func_800271FC(arg0, arg1, y + 1, x + 1, &subroutine_argB);
-                func_800271FC(arg0, arg1, y,     x,     &subroutine_argC);
+            s32 pixel = (subroutine_argF + x) * 2;
 
-                func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, arg2 + temp_s4);
+            // Wii U VC changes this condition to FALSE to fix pause menu lag
+            if (((framebuf2[pixel] >> 2) & 0xF) < 8) {
+                func_800271FC(framebuf1, framebuf2, y - 1, x - 1, &subroutine_argE);
+                func_800271FC(framebuf1, framebuf2, y - 1, x + 1, &subroutine_arg7);
+                func_800271FC(framebuf1, framebuf2, y,     x - 2, &subroutine_arg8);
+                func_800271FC(framebuf1, framebuf2, y,     x + 2, &subroutine_arg9);
+                func_800271FC(framebuf1, framebuf2, y + 1, x - 1, &subroutine_argA);
+                func_800271FC(framebuf1, framebuf2, y + 1, x + 1, &subroutine_argB);
+                func_800271FC(framebuf1, framebuf2, y,     x,     &subroutine_argC);
+
+                func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, &framebuf2[pixel]);
             } else {
-                *(temp_s4 + arg2) = *(temp_s4 + arg0) | 1;
+                // Edge
+                framebuf2[pixel] = framebuf1[pixel] | 1;
             }
         }
     }
