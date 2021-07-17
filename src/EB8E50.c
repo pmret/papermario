@@ -9,4 +9,7 @@ const char ascii_EC2028[] = "flo_09";
 const char ascii_EC2030[] = "flo_08";
 static const f64 rodata_alignment = 0.0;
 
-INCLUDE_ASM(s32, "EB8E50", func_80240000_EB8E50);
+ApiStatus func_80240000_EB8E50(void) {
+    func_80077BD0(0, 0, 0, 0, 0, 0);
+    return ApiStatus_DONE2;
+}

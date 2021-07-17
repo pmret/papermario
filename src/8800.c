@@ -45,18 +45,18 @@ void update_cameras(void) {
 
             guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0],  cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
-            if (!(cam->flags & CAM_FLAG_ORTHO)) { // TODO: 'ortho' flag
-                if (cam->flags & CAM_FLAG_LEAD_PLAYER) { // TODO: 'leadplayer' flag
+            if (!(cam->flags & CAM_FLAG_ORTHO)) {
+                if (cam->flags & CAM_FLAG_LEAD_PLAYER) {
                     create_camera_leadplayer_matrix(cam);
                 }
 
                 guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
 
-                if (cam->flags & CAM_FLAG_SHAKING) { // TODO: 'shaking' flag
+                if (cam->flags & CAM_FLAG_SHAKING) {
                     guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 
-                if (cam->flags & CAM_FLAG_LEAD_PLAYER) { // TODO: 'leadplayer' flag
+                if (cam->flags & CAM_FLAG_LEAD_PLAYER) {
                     guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 

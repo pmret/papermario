@@ -350,8 +350,6 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-//void func_800271FC(s16*, u32*, s32, s32, void*);
-
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 

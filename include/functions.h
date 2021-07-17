@@ -421,6 +421,8 @@ void fx_land(s32, f32, f32, f32, f32);
 EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
 void playFX_26(s32, f32, f32, f32);
+EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
+EffectInstance* playFX_23(u32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;
