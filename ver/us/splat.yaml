@@ -3468,7 +3468,7 @@ segments:
     overlay: True
     subsegments:
     - [0x70BD10, c, lakilester]
-    - [0x70DED0, data]
+    - [0x70DEE0, data, 70DED0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
