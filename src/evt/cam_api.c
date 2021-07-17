@@ -17,9 +17,9 @@ ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        CAM(id)->flags |= CAM_FLAG_ENABLED;
+        gCameras[id].flags |= CAM_FLAG_ENABLED;
     } else {
-        CAM(id)->flags &= ~CAM_FLAG_ENABLED;
+        gCameras[id].flags &= ~CAM_FLAG_ENABLED;
     }
     return ApiStatus_DONE2;
 }
@@ -30,9 +30,9 @@ ApiStatus SetCamFlag80(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        CAM(id)->flags |= CAM_FLAG_80;
+        gCameras[id].flags |= CAM_FLAG_80;
     } else {
-        CAM(id)->flags &= ~CAM_FLAG_80;
+        gCameras[id].flags &= ~CAM_FLAG_80;
     }
     return ApiStatus_DONE2;
 }
@@ -77,25 +77,25 @@ ApiStatus func_802CA988(ScriptInstance* script, s32 isInitialCall) {
     Bytecode outVar4 = *args++;
     f32 temp1, temp2, temp3;
 
-    CAM(id)->mode = 2;
-    CAM(id)->unk_06 = 0;
-    CAM(id)->unk_1C = -round(CAM(id)->currentPitch);
-    CAM(id)->unk_1E = -CAM(id)->currentBlendedYawNegated;
+    gCameras[id].mode = 2;
+    gCameras[id].unk_06 = 0;
+    gCameras[id].unk_1C = -round(gCameras[id].currentPitch);
+    gCameras[id].unk_1E = -gCameras[id].currentBlendedYawNegated;
 
-    temp1 = CAM(id)->lookAt_obj.x - CAM(id)->lookAt_eye.x;
-    temp2 = CAM(id)->lookAt_obj.y - CAM(id)->lookAt_eye.y;
-    temp3 = CAM(id)->lookAt_obj.z - CAM(id)->lookAt_eye.z;
+    temp1 = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
+    temp2 = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;
+    temp3 = gCameras[id].lookAt_obj.z - gCameras[id].lookAt_eye.z;
 
-    CAM(id)->unk_20 = round(sqrtf(SQ(temp1) + SQ(temp2) + SQ(temp3)));
-    CAM(id)->unk_22 = 0;
-    CAM(id)->unk_54 = CAM(id)->lookAt_obj.x;
-    CAM(id)->unk_58 = CAM(id)->lookAt_obj.y;
-    CAM(id)->unk_5C = CAM(id)->lookAt_obj.z;
+    gCameras[id].unk_20 = round(sqrtf(SQ(temp1) + SQ(temp2) + SQ(temp3)));
+    gCameras[id].unk_22 = 0;
+    gCameras[id].unk_54 = gCameras[id].lookAt_obj.x;
+    gCameras[id].unk_58 = gCameras[id].lookAt_obj.y;
+    gCameras[id].unk_5C = gCameras[id].lookAt_obj.z;
 
-    set_variable(script, outVar1, CAM(id)->unk_1C);
-    set_variable(script, outVar2, CAM(id)->unk_1E);
-    set_variable(script, outVar3, CAM(id)->unk_20);
-    set_variable(script, outVar4, CAM(id)->unk_22);
+    set_variable(script, outVar1, gCameras[id].unk_1C);
+    set_variable(script, outVar2, gCameras[id].unk_1E);
+    set_variable(script, outVar3, gCameras[id].unk_20);
+    set_variable(script, outVar4, gCameras[id].unk_22);
     return ApiStatus_DONE2;
 }
 

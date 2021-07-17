@@ -195,19 +195,19 @@ INCLUDE_ASM(void, "8800", initialize_next_camera, CameraInitData* data);
 INCLUDE_ASM(void, "8800", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
 
 void get_cam_viewport(s32 camID, u16* x, u16* y, u16* width, u16* height) {
-    *width = CAM(camID)->viewportW;
-    *height = CAM(camID)->viewportH;
-    *x = CAM(camID)->viewportStartX;
-    *y = CAM(camID)->viewportStartY;
+    *width = gCameras[camID].viewportW;
+    *height = gCameras[camID].viewportH;
+    *x = gCameras[camID].viewportStartX;
+    *y = gCameras[camID].viewportStartY;
 }
 
 INCLUDE_ASM(void, "8800", get_screen_coords, Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 s32 func_8002E754(s32 camID, s32 x, s32 y) {
-    s32 startX = CAM(camID)->viewportStartX;
-    s32 startY = CAM(camID)->viewportStartY;
-    s32 endX = startX + CAM(camID)->viewportW;
-    s32 endY = startY + CAM(camID)->viewportH;
+    s32 startX = gCameras[camID].viewportStartX;
+    s32 startY = gCameras[camID].viewportStartY;
+    s32 endX = startX + gCameras[camID].viewportW;
+    s32 endY = startY + gCameras[camID].viewportH;
 
     if (x < startX) {
         return TRUE;
@@ -223,10 +223,10 @@ s32 func_8002E754(s32 camID, s32 x, s32 y) {
 }
 
 void func_8002E7CC(s32 camID, s32* x, s32* y, s32* width, s32* height) {
-    *x = CAM(camID)->viewportStartX;
-    *y = CAM(camID)->viewportStartY;
-    *width = CAM(camID)->viewportStartX + CAM(camID)->viewportW;
-    *height = CAM(camID)->viewportStartY + CAM(camID)->viewportH;
+    *x = gCameras[camID].viewportStartX;
+    *y = gCameras[camID].viewportStartY;
+    *width = gCameras[camID].viewportStartX + gCameras[camID].viewportW;
+    *height = gCameras[camID].viewportStartY + gCameras[camID].viewportH;
 }
 
 INCLUDE_ASM(s32, "8800", func_8002E82C);
