@@ -523,7 +523,7 @@ typedef struct CameraInitData {
 } CameraInitData; // size = 0x12;
 
 typedef struct Camera {
-    /* 0x000 */ s16 flags;
+    /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
     /* 0x006 */ s16 unk_06;

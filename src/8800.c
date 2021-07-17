@@ -5,7 +5,79 @@
 
 void initialize_next_camera(CameraInitData* data);
 
-INCLUDE_ASM(s32, "8800", update_cameras);
+//INCLUDE_ASM(s32, "8800", update_cameras);
+void update_cameras(void) {
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
+        Camera* cam = &gCameras[i];
+
+        if (cam->flags != 0 && !(cam->flags & 2)) {
+            s32 sx;
+            s32 sy;
+            s32 sz;
+
+            gCurrentCamID = i;
+
+            switch (cam->mode) {
+                case 3:
+                    update_camera_zone_interp(cam);
+                    break;
+                case 0:
+                    update_camera_mode_0(cam);
+                    break;
+                case 1:
+                    update_camera_mode_1(cam);
+                    break;
+                case 2:
+                    update_camera_mode_2(cam);
+                    break;
+                case 4:
+                    update_camera_mode_4(cam);
+                    break;
+                case 5:
+                    update_camera_mode_5(cam);
+                    break;
+                case 6:
+                default:
+                    update_camera_mode_6(cam);
+                    break;
+            }
+
+            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0],  cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
+
+            if (!(cam->flags & 0x10)) { // TODO: 'ortho' flag
+                if (cam->flags & 4) { // TODO: 'leadplayer' flag
+                    create_camera_leadplayer_matrix(cam);
+                }
+
+                guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
+
+                if (cam->flags & 8) { // TODO: 'shaking' flag
+                    guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
+                }
+
+                if (cam->flags & 4) { // TODO: 'leadplayer' flag
+                    guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
+                }
+
+                guMtxCatF(cam->viewMtxPlayer, cam->perspectiveMatrix, cam->perspectiveMatrix);
+            } else {
+                f32 w = cam->viewportW;
+                f32 h = cam->viewportH;
+
+                guOrthoF(cam->perspectiveMatrix, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
+            }
+
+            get_screen_coords(0, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
+            cam->targetScreenCoords[0] = sx;
+            cam->targetScreenCoords[1] = sy;
+            cam->targetScreenCoords[2] = sz;
+        }
+    }
+
+    gCurrentCamID = 0;
+}
 
 INCLUDE_ASM(void, "8800", render_frame);
 
