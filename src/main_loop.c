@@ -350,9 +350,19 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-void func_800271FC(s16*, u32*, s32, s32, void*);
+//void func_800271FC(s16*, u32*, s32, s32, void*);
 
-INCLUDE_ASM(void, "main_loop", func_800271FC, s16*, u32*, s32, s32, void*);
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
+s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 x, s32 y, u8* out) {
+    s32 pixel = (x * SCREEN_WIDTH) + y;
+
+    out[3] = (framebuf2[pixel] >> 2) & 0xF;
+    out[0] = framebuf1[pixel] >> 11;
+    out[1] = (framebuf1[pixel] >> 6) & 0x1F;
+    out[2] = (framebuf1[pixel] >> 1) & 0x1F;
+}
 
 INCLUDE_ASM(s32, "main_loop", func_8002725C);
 
@@ -365,8 +375,8 @@ INCLUDE_ASM(s32, "main_loop", func_80027774);
 // arg0 and arg1 probably framebuffer voidptrs
 void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
     s32 temp_s4;
-    s32 j;
-    s32 i;
+    s32 x;
+    s32 y;
     s32 subroutine_argE;
     s32 subroutine_arg7;
     s32 subroutine_arg8;
@@ -376,18 +386,19 @@ void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
     s32 subroutine_argC;
     s32 subroutine_argF;
 
-    for (i = 1; i < 0xEF; i++) {
-        for (j = 2; j < 0x13E; j++) {
-            temp_s4 = (subroutine_argF + j) * 2;
+    for (y = 1; y < SCREEN_HEIGHT - 1; y++) {
+        for (x = 2; x < SCREEN_WIDTH - 2; x++) {
+            temp_s4 = (subroutine_argF + x) * 2;
             // Wii U VC changes this condition to FALSE to fix pause menu lag
             if (((*(temp_s4 + arg1) >> 2) & 0xF) < 8) {
-                func_800271FC(arg0, arg1, i - 1, j - 1, &subroutine_argE);
-                func_800271FC(arg0, arg1, i - 1, j + 1, &subroutine_arg7);
-                func_800271FC(arg0, arg1, i, j - 2, &subroutine_arg8);
-                func_800271FC(arg0, arg1, i, j + 2, &subroutine_arg9);
-                func_800271FC(arg0, arg1, i + 1, j - 1, &subroutine_argA);
-                func_800271FC(arg0, arg1, i + 1, j + 1, &subroutine_argB);
-                func_800271FC(arg0, arg1, i, j, &subroutine_argC);
+                func_800271FC(arg0, arg1, y - 1, x - 1, &subroutine_argE);
+                func_800271FC(arg0, arg1, y - 1, x + 1, &subroutine_arg7);
+                func_800271FC(arg0, arg1, y,     x - 2, &subroutine_arg8);
+                func_800271FC(arg0, arg1, y,     x + 2, &subroutine_arg9);
+                func_800271FC(arg0, arg1, y + 1, x - 1, &subroutine_argA);
+                func_800271FC(arg0, arg1, y + 1, x + 1, &subroutine_argB);
+                func_800271FC(arg0, arg1, y,     x,     &subroutine_argC);
+
                 func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, arg2 + temp_s4);
             } else {
                 *(temp_s4 + arg2) = *(temp_s4 + arg0) | 1;
