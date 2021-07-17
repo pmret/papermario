@@ -400,7 +400,85 @@ ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1A5830", EnemyDamageTarget);
+ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor *actor;
+    s32 outVar2;
+    s32 outVar1;
+    s32 hitResult;
+    u8 attackStatus;
+    s32 actorID;
+    s32 battleStatusFlags1Temp;
+    s32 battleFlagsModifier;
+
+
+    outVar1 = get_variable(script, *args++);
+    actorID = outVar1;
+
+    if (outVar1 == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    actor = get_actor(actorID);
+    outVar2 = *args++;
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = *args++;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleFlagsModifier = *args++;
+    
+    if (battleFlagsModifier & 0x10) {
+        gBattleStatus.flags1 |= 0x10;
+        gBattleStatus.flags1 &= ~0x20;
+    } else if (battleFlagsModifier & 0x20) {
+        gBattleStatus.flags1 &= ~0x10;
+        gBattleStatus.flags1 |= 0x20;
+    } else {
+        gBattleStatus.flags1 &= ~0x10;
+        gBattleStatus.flags1 &= ~0x20;
+    }
+
+    if (battleFlagsModifier & 0x40) {
+        gBattleStatus.flags1 |= 0x40;
+    } else {
+        gBattleStatus.flags1 &= ~0x40;
+    }
+    if (battleFlagsModifier & 0x200) {
+        gBattleStatus.flags1 |= 0x200;
+    } else {
+        gBattleStatus.flags1 &= ~0x200;
+    }
+    if (battleFlagsModifier & 0x80) {
+        gBattleStatus.flags1 |= 0x80;
+    } else {
+        gBattleStatus.flags1 &= ~0x80;
+    }
+
+    attackStatus = battleStatus->currentAttackStatus;
+    battleStatus->currentTargetID = actor->targetActorID;
+    
+    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = attackStatus;
+    
+    if ((attackStatus & 0xFF) == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    hitResult = calc_enemy_damage_target(actor);
+
+    if (hitResult < 0) {
+        return ApiStatus_FINISH;
+    }
+
+    set_variable(script, outVar2, hitResult);
+    if (!(does_script_exist_by_ref(script))) {
+        return ApiStatus_FINISH;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -440,8 +518,82 @@ ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) 
     return ApiStatus_DONE2;
 }
 
+ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor *actor;
+    s32 outVar2;
+    s32 outVar1;
+    s32 hitResult;
+    u8 attackStatus;
+    s32 actorID;
+    s32 battleStatusFlags1Temp;
+    s32 battleFlagsModifier;
 
-INCLUDE_ASM(s32, "1A5830", EnemyTestTarget);
+
+    outVar1 = get_variable(script, *args++);
+    actorID = outVar1;
+
+    if (outVar1 == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+
+    actor = get_actor(actorID);
+    outVar2 = *args++;
+    battleStatus->currentAttackElement = *args++;
+    battleStatus->currentAttackEventSuppression = 0;
+    battleStatus->currentAttackStatus = *args++;
+    battleStatus->currentAttackDamage = get_variable(script, *args++);
+    battleFlagsModifier = *args++;
+    
+    if (battleFlagsModifier & 0x10) {
+        gBattleStatus.flags1 |= 0x10;
+        gBattleStatus.flags1 &= ~0x20;
+    } else if (battleFlagsModifier & 0x20) {
+        gBattleStatus.flags1 &= ~0x10;
+        gBattleStatus.flags1 |= 0x20;
+    } else {
+        gBattleStatus.flags1 &= ~0x10;
+        gBattleStatus.flags1 &= ~0x20;
+    }
+
+    if (battleFlagsModifier & 0x40) {
+        gBattleStatus.flags1 |= 0x40;
+    } else {
+        gBattleStatus.flags1 &= ~0x40;
+    }
+    if (battleFlagsModifier & 0x200) {
+        gBattleStatus.flags1 |= 0x200;
+    } else {
+        gBattleStatus.flags1 &= ~0x200;
+    }
+    if (battleFlagsModifier & 0x80) {
+        gBattleStatus.flags1 |= 0x80;
+    } else {
+        gBattleStatus.flags1 &= ~0x80;
+    }
+
+    attackStatus = battleStatus->currentAttackStatus;
+    battleStatus->currentTargetID = actor->targetActorID;
+    
+    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = attackStatus;
+    
+    if ((attackStatus & 0xFF) == 0xFF) {
+        battleStatus->statusChance = 0;
+    }
+
+    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    hitResult = calc_enemy_test_target(actor);
+
+    if (hitResult < 0) {
+        return ApiStatus_FINISH;
+    }
+
+    set_variable(script, outVar2, hitResult);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus DispatchDamageEvent(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

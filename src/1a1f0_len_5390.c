@@ -334,7 +334,7 @@ void draw_encounters_pre_battle(void) {
     }
 }
 
-extern s16 D_8009A668;
+extern s16* D_8009A668;
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", show_first_strike_message);
 
