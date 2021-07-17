@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s32 D_8023D334;
+
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238000_70BD10);
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023803C_70BD4C);
@@ -24,4 +26,7 @@ INCLUDE_ASM(s32, "battle/partner/lakilester", func_80239F84_70DC94);
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023A19C_70DEAC);
 
-INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023A1B0_70DEC0);
+ApiStatus func_8023A1B0_70DEC0(ScriptInstance* script, s32 isInitialCall) {
+    script->varTable[0] = D_8023D334;
+    return ApiStatus_DONE2;
+}

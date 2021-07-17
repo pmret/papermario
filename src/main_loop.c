@@ -350,7 +350,9 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-INCLUDE_ASM(s32, "main_loop", func_800271FC);
+void func_800271FC(s16*, u32*, s32, s32, void*);
+
+INCLUDE_ASM(void, "main_loop", func_800271FC, s16*, u32*, s32, s32, void*);
 
 INCLUDE_ASM(s32, "main_loop", func_8002725C);
 
@@ -358,7 +360,44 @@ INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
+// alex: mystery t0=0x140 temp and a few missing loads, but mostly there
+#ifdef NON_MATCHING
+// arg0 and arg1 probably framebuffer voidptrs
+void func_800279B4(u16* arg0, u16* arg1, u16* arg2) {
+    s32 temp_s4;
+    s32 j;
+    s32 i;
+    s32 subroutine_argE;
+    s32 subroutine_arg7;
+    s32 subroutine_arg8;
+    s32 subroutine_arg9;
+    s32 subroutine_argA;
+    s32 subroutine_argB;
+    s32 subroutine_argC;
+    s32 subroutine_argF;
+
+    for (i = 1; i < 0xEF; i++) {
+        for (j = 2; j < 0x13E; j++) {
+            temp_s4 = (subroutine_argF + j) * 2;
+            // Wii U VC changes this condition to FALSE to fix pause menu lag
+            if (((*(temp_s4 + arg1) >> 2) & 0xF) < 8) {
+                func_800271FC(arg0, arg1, i - 1, j - 1, &subroutine_argE);
+                func_800271FC(arg0, arg1, i - 1, j + 1, &subroutine_arg7);
+                func_800271FC(arg0, arg1, i, j - 2, &subroutine_arg8);
+                func_800271FC(arg0, arg1, i, j + 2, &subroutine_arg9);
+                func_800271FC(arg0, arg1, i + 1, j - 1, &subroutine_argA);
+                func_800271FC(arg0, arg1, i + 1, j + 1, &subroutine_argB);
+                func_800271FC(arg0, arg1, i, j, &subroutine_argC);
+                func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, arg2 + temp_s4);
+            } else {
+                *(temp_s4 + arg2) = *(temp_s4 + arg0) | 1;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "main_loop", func_800279B4);
+#endif
 
 void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;
