@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "map.h"
+#include "camera.h"
 
 #define ASSET_TABLE_ROM_START 0x1E40000
 #define ASSET_TABLE_HEADER_SIZE 0x20
@@ -168,10 +169,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     }
 
     gCurrentCameraID = 0;
-    gCameras[0].flags |= 0x2;
-    gCameras[1].flags |= 0x2;
-    gCameras[2].flags |= 0x2;
-    gCameras[3].flags |= 0x2;
+    gCameras[0].flags |= CAM_FLAG_ENABLED;
+    gCameras[1].flags |= CAM_FLAG_ENABLED;
+    gCameras[2].flags |= CAM_FLAG_ENABLED;
+    gCameras[3].flags |= CAM_FLAG_ENABLED;
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);

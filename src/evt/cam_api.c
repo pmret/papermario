@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camera.h"
 
 Script ShakeCam1 = SCRIPT({
     group 0;
@@ -16,9 +17,9 @@ ApiStatus SetCamEnabled(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        CAM(id)->flags |= 0x2;
+        CAM(id)->flags |= CAM_FLAG_ENABLED;
     } else {
-        CAM(id)->flags &= ~0x2;
+        CAM(id)->flags &= ~CAM_FLAG_ENABLED;
     }
     return ApiStatus_DONE2;
 }
@@ -29,9 +30,9 @@ ApiStatus SetCamFlag80(ScriptInstance* script, s32 isInitialCall) {
     s32 enabled = get_variable(script, *args++);
 
     if (!enabled) {
-        CAM(id)->flags |= 0x80;
+        CAM(id)->flags |= CAM_FLAG_80;
     } else {
-        CAM(id)->flags &= ~0x80;
+        CAM(id)->flags &= ~CAM_FLAG_80;
     }
     return ApiStatus_DONE2;
 }
@@ -220,9 +221,9 @@ ApiStatus SetCamLeadPlayer(ScriptInstance* script, s32 isInitialCall) {
     Camera* camera = &cameras[id];
 
     if (enabled) {
-        camera->flags |= 0x4;
+        camera->flags |= CAM_FLAG_LEAD_PLAYER;
     } else {
-        camera->flags &= ~0x4;
+        camera->flags &= ~CAM_FLAG_LEAD_PLAYER;
     }
     return ApiStatus_DONE2;
 }

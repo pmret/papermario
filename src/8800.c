@@ -5,14 +5,13 @@
 
 void initialize_next_camera(CameraInitData* data);
 
-//INCLUDE_ASM(s32, "8800", update_cameras);
 void update_cameras(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
         Camera* cam = &gCameras[i];
 
-        if (cam->flags != 0 && !(cam->flags & 2)) {
+        if (cam->flags != 0 && !(cam->flags & CAM_FLAG_ENABLED)) {
             s32 sx;
             s32 sy;
             s32 sz;
@@ -46,18 +45,18 @@ void update_cameras(void) {
 
             guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0],  cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
-            if (!(cam->flags & 0x10)) { // TODO: 'ortho' flag
-                if (cam->flags & 4) { // TODO: 'leadplayer' flag
+            if (!(cam->flags & CAM_FLAG_ORTHO)) { // TODO: 'ortho' flag
+                if (cam->flags & CAM_FLAG_LEAD_PLAYER) { // TODO: 'leadplayer' flag
                     create_camera_leadplayer_matrix(cam);
                 }
 
                 guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
 
-                if (cam->flags & 8) { // TODO: 'shaking' flag
+                if (cam->flags & CAM_FLAG_SHAKING) { // TODO: 'shaking' flag
                     guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 
-                if (cam->flags & 4) { // TODO: 'leadplayer' flag
+                if (cam->flags & CAM_FLAG_LEAD_PLAYER) { // TODO: 'leadplayer' flag
                     guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
                 }
 
