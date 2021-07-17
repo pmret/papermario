@@ -2,6 +2,7 @@
 
 #define NAMESPACE battle_star_chill_out
 
+extern s32 D_8029C890;
 extern s32 D_802A2CC0;
 
 #include "common/UnkStarFuncs.inc.c"

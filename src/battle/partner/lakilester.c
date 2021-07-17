@@ -19,7 +19,19 @@ ApiStatus func_80238000_70BD10(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023803C_70BD4C);
 
-INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238A6C_70C77C);
+ApiStatus func_80238A6C_70C77C(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+    f32 xPos = partnerActor->currentPos.x + 5;
+    f32 yPos = partnerActor->currentPos.y + partnerActor->size.y + 20;
+    f32 zPos = partnerActor->currentPos.z;
+    f32 var = rand_int(140) + 10;
+    f32 var2 = rand_int(80) + 10;
+
+    playFX_64(0, xPos, yPos, zPos, var, var2, 20, 1.5f, 30);
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238B50_70C860);
 
