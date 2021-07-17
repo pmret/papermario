@@ -15,3 +15,7 @@ glabel func_802A11C0_743FB0
 /* 743FD8 802A11E8 A4A202A0 */  sh        $v0, 0x2a0($a1)
 .L802A11EC:
 /* 743FDC 802A11EC 03E00008 */  jr        $ra
+/* 743FE0 802A11F0 24020002 */  addiu     $v0, $zero, 2
+nop
+nop
+nop
