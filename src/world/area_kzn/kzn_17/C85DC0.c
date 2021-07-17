@@ -14,7 +14,7 @@ s32 N(func_80240518_C85FC8)(ScriptInstance *script) {
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM(gCurrentCamID);
+    Camera* camera = &gCameras[gCurrentCamID];
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;

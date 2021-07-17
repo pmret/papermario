@@ -1,10 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
-
-// todo remove here and from undefined_syms
-extern Addr _163400_BSS_START;
-extern Addr _163400_BSS_END;
+#include "camera.h"
 
 s32 D_80077980[] = { &D_8038F800, &D_803B5000, &D_803DA800, };
 
@@ -43,11 +40,11 @@ void state_init_file_select(void) {
     gCameras[0].unk_06 = 1;
     gCameras[0].nearClip = 16;
     gCameras[0].farClip = 4096;
-    gCameras[0].flags |= 2;
+    gCameras[0].flags |= CAM_FLAG_ENABLED;
     gCurrentCameraID = 0;
-    gCameras[1].flags |= 2;
-    gCameras[2].flags |= 2;
-    gCameras[3].flags |= 2;
+    gCameras[1].flags |= CAM_FLAG_ENABLED;
+    gCameras[2].flags |= CAM_FLAG_ENABLED;
+    gCameras[3].flags |= CAM_FLAG_ENABLED;
     gCameras[0].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 40;
