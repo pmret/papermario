@@ -13,6 +13,12 @@ extern s16 D_80077C1C;
 extern s16 D_80077C1E;
 extern s32 D_80077C20;
 
+s32 playFX_0C(f32, f32, f32, f32, f32); // extern
+extern u16 D_80077C30;
+extern s32 D_80077C34;
+s32 playFX_23(u32, f32, f32, f32, f32); // extern
+extern u16 D_80077C3A;
+
 void STUB_npc_callback(void) {
 }
 
@@ -1331,11 +1337,42 @@ INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 
 INCLUDE_ASM(s32, "npc", func_8003DC38);
 
-INCLUDE_ASM(s32, "npc", func_8003DFA0);
+void func_8003DFA0(Npc* npc) {
+    f32 temp_f20;
+    f32 subroutine_argA;
+    f32 subroutine_argB;
+    u32 phi_v0;
+
+    phi_v0 = (s32) (s16) (D_80077C30++) < 4;
+    if (phi_v0 == 0) {
+        D_80077C30 = 0U;
+        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        subroutine_argA = sin_rad(temp_f20);
+        subroutine_argB = cos_rad(temp_f20);
+        playFX_0C(npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 1.5f, npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), -npc->yaw, (f32) D_80077C34);
+        phi_v0 = D_80077C34 == 0;
+        D_80077C34 = phi_v0;
+    }
+}
+
 
 INCLUDE_ASM(s32, "npc", func_8003E0D4);
 
-INCLUDE_ASM(s32, "npc", func_8003E1D0);
+void func_8003E1D0(Npc* npc) {
+    f32 temp_f20;
+    f32 subroutine_argA;
+    f32 subroutine_argB;
+    u32 phi_v0;
+
+    phi_v0 = (s32) (s16) (D_80077C3A++) < 4;
+    if (phi_v0 == 0) {
+        D_80077C3A = 0U;
+        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        subroutine_argA = sin_rad(temp_f20);
+        subroutine_argB = cos_rad(temp_f20);
+        playFX_23(0, npc->pos.x + (npc->collisionRadius * subroutine_argA * 0.2f), npc->pos.y + 0.0f, npc->pos.z + (npc->collisionRadius * subroutine_argB * 0.2f), 0.0f);
+    }
+}
 
 void COPY_set_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
