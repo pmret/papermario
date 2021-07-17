@@ -1,5 +1,9 @@
 #include "common.h"
 
+s32 D_8014C260[] = { 0x00000000, 0x00000000, 0xFFFFFF00, 0xFFFFFF00 };
+
+s32 D_8014C270[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
+
 extern EntityModelList gWorldEntityModelList;
 extern EntityModelList gBattleEntityModelList;
 extern EntityModelList* gCurrentEntityModelList;

@@ -6,15 +6,15 @@ void N(UnkFunc16_copy)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 i;
 
-    for (i = script->functionTemp[2].s; i < enemy->territory->patrol.numPoints; i++) {
+    for (i = script->functionTemp[2]; i < enemy->territory->patrol.numPoints; i++) {
         if (i[enemy->territory->patrol.points].y <= npc->pos.y) {
-            script->functionTemp[2].s = i;
+            script->functionTemp[2] = i;
             break;
         }
     }
 
     npc->moveSpeed = aiSettings->moveSpeed;
     npc->currentAnim.w = enemy->animList[1];
-    script->functionTemp[1].s = 0;
-    script->functionTemp[0].s = 1;
+    script->functionTemp[1] = 0;
+    script->functionTemp[0] = 1;
 }

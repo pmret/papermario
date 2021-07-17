@@ -3370,16 +3370,16 @@ ApiStatus N(func_802414C0_96A680)(ScriptInstance* script, s32 isInitialCall) {
                 npc->flags |= 0x800000;
             }
         }
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    script->functionTemp[0].s += 8;
-    if (script->functionTemp[0].s >= 0x100) {
-        script->functionTemp[0].s = 255;
+    script->functionTemp[0] += 8;
+    if (script->functionTemp[0] >= 0x100) {
+        script->functionTemp[0] = 255;
     }
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
 
-    return (script->functionTemp[0].s == 255) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
 }
 
 ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
@@ -3387,18 +3387,18 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         set_background_color_blend(0, 0, 0, 0xFF);
-        script->functionTemp[0].s = 255;
-        script->functionTemp[1].s = 0;
+        script->functionTemp[0] = 255;
+        script->functionTemp[1] = 0;
     }
-    script->functionTemp[0].s -= 8;
-    if (script->functionTemp[0].s < 0) {
-        script->functionTemp[0].s = 0;
+    script->functionTemp[0] -= 8;
+    if (script->functionTemp[0] < 0) {
+        script->functionTemp[0] = 0;
     }
-    set_background_color_blend(0, 0, 0, script->functionTemp[0].s);
+    set_background_color_blend(0, 0, 0, script->functionTemp[0]);
 
-    if (script->functionTemp[0].s == 0 && script->functionTemp[1].s == 0) {
-        script->functionTemp[1].s = 1;
-    } else if (script->functionTemp[1].s == 1) {
+    if (script->functionTemp[0] == 0 && script->functionTemp[1] == 0) {
+        script->functionTemp[1] = 1;
+    } else if (script->functionTemp[1] == 1) {
         mdl_set_all_fog_mode(0);
         *D_801512F0 = 0;
         for (i = 0; i < 64; i++) {

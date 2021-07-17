@@ -8,8 +8,8 @@ void N(UnkNpcAIFunc18)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     disable_npc_shadow(npc);
     npc->collisionHeight = 22;
     npc->collisionRadius = 24;
-    script->functionTemp[1].s = 0;
+    script->functionTemp[1] = 0;
     npc->duration = 0;
     npc->currentAnim.w = enemy->animList[8];
-    script->functionTemp[0].s = 1;
+    script->functionTemp[0] = 1;
 }

@@ -1343,7 +1343,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID deco
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -1356,7 +1356,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
             remove_part_decoration(part, decorationIndex);
         }
     }
@@ -1369,7 +1369,7 @@ s32 player_team_is_ability_active(Actor* actor, Ability ability) {
     if (actorGenus != 0x100) {
         // Separate ifs required to match
         if (actorGenus <= 0x100) {
-            if (actorGenus == 0 && (gBattleStatus.flags2 & 0x40) == 0) {
+            if (actorGenus == 0 && !(gBattleStatus.flags2 & 0x40)) {
                 hasAbility = is_ability_active(ability);
             }
         }

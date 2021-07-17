@@ -16,5 +16,5 @@ void N(set_script_owner_npc_col_height)(ScriptInstance* script, NpcAISettings* a
     }
 
     npc->collisionHeight = enemy->varTable[6];
-    script->functionTemp[0].s = 0;
+    script->functionTemp[0] = 0;
 }

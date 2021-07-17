@@ -55,16 +55,16 @@ ApiStatus func_80240BD8_8ACB68(ScriptInstance* script, s32 isInitialCall) {
     Npc* npc;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = get_variable(script, *args);
-        npc = get_npc_unsafe(script->functionTemp[1].s);
+        script->functionTemp[1] = get_variable(script, *args);
+        npc = get_npc_unsafe(script->functionTemp[1]);
         sfx_play_sound_at_position(0xB000001E, 0, npc->pos.x, npc->pos.y, npc->pos.z);
         playFX_11(0, npc->pos.x, npc->pos.y + 20.0f, npc->pos.z, 10.0f);
-        script->functionTemp[0].s = 3;
+        script->functionTemp[0] = 3;
     }
 
-    npc = get_npc_unsafe(script->functionTemp[1].s);
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == -1) {
+    npc = get_npc_unsafe(script->functionTemp[1]);
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] == -1) {
         npc->pos.y = -1000.0f;
         return ApiStatus_DONE2;
     }

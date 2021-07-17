@@ -9,6 +9,6 @@ void N(UnkNpcAIFunc17)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     if (npc->duration <= 0) {
         npc->duration = 8;
         npc->currentAnim.w = enemy->animList[14];
-        script->functionTemp[0].s = 52;
+        script->functionTemp[0] = 52;
     }
 }

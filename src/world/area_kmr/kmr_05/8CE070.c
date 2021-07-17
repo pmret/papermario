@@ -21,7 +21,7 @@ void N(func_80240C54_8CECC4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_80241B2C_8CFB9C)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 */

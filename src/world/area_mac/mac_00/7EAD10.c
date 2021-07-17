@@ -5,6 +5,7 @@ static char* N(exit_str_1) = "mac_01";
 static char* N(exit_str_2) = "tik_19";
 static char* N(exit_str_3) = "kmr_20";
 static char* N(exit_str_4) = "mac_00";
+static char* N(exit_str_5) = "\0\0\0\0";
 
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 

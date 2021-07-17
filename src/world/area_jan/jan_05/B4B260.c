@@ -93,7 +93,7 @@ ApiStatus N(func_80241EE8_B4C958)(ScriptInstance *script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -103,18 +103,18 @@ ApiStatus N(func_80241EE8_B4C958)(ScriptInstance *script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         }
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0].s < 30) && (enemy->varTable[0] == 0) && N(func_80241AD4_B4C544)(script)) {
-        script->functionTemp[0].s = 30;
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80241AD4_B4C544)(script)) {
+        script->functionTemp[0] = 30;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, npcAISettings, territoryPtr);
         case 1:
@@ -142,12 +142,12 @@ ApiStatus N(func_80241EE8_B4C958)(ScriptInstance *script, s32 isInitialCall) {
             N(UnkNpcAIFunc6)(script);
         case 31:
             N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0].s != 32) {
+            if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
             N(UnkNpcAIFunc8)(script);
-            if (script->functionTemp[0].s != 33) {
+            if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:
@@ -181,7 +181,7 @@ ApiStatus N(func_8024219C_B4CC0C)(ScriptInstance *script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -191,18 +191,18 @@ ApiStatus N(func_8024219C_B4CC0C)(ScriptInstance *script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         }
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0].s < 30) && (enemy->varTable[0] == 0) && N(func_80241AD4_B4C544)(script)) {
-        script->functionTemp[0].s = 30;
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80241AD4_B4C544)(script)) {
+        script->functionTemp[0] = 30;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, npcAISettings, territoryPtr);
         case 1:
@@ -230,12 +230,12 @@ ApiStatus N(func_8024219C_B4CC0C)(ScriptInstance *script, s32 isInitialCall) {
             N(UnkNpcAIFunc6)(script);
         case 31:
             N(UnkNpcAIFunc7)(script);
-            if (script->functionTemp[0].s != 32) {
+            if (script->functionTemp[0] != 32) {
                 break;
             }
         case 32:
             N(UnkNpcAIFunc8)(script);
-            if (script->functionTemp[0].s != 33) {
+            if (script->functionTemp[0] != 33) {
                 break;
             }
         case 33:

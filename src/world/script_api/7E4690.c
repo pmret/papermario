@@ -80,12 +80,12 @@ ApiStatus PlayerMoveToDoor(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = get_variable(script, *args++);
-        move_player(script->functionTemp[0].s, playerStatus->targetYaw, playerStatus->runSpeed);
+        script->functionTemp[0] = get_variable(script, *args++);
+        move_player(script->functionTemp[0], playerStatus->targetYaw, playerStatus->runSpeed);
     }
 
-    script->functionTemp[0].s--;
-    return script->functionTemp[0].s < 0;
+    script->functionTemp[0]--;
+    return script->functionTemp[0] < 0;
 }
 
 INCLUDE_ASM(s32, "world/script_api/7E4690", GetEntryCoords);

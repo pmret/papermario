@@ -6,7 +6,7 @@ void func_8004A6F0(ScriptInstance* script) {
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->functionTemp[0].s = script->functionTemp[1].s;
+        script->functionTemp[0] = script->functionTemp[1];
     }
 }
 
@@ -15,7 +15,7 @@ void func_8004A73C(ScriptInstance* script) {
 
     get_npc_unsafe(enemy->npcID);
     if (enemy->unk_B4 == 0) {
-        script->functionTemp[0].s = script->functionTemp[1].s;
+        script->functionTemp[0] = script->functionTemp[1];
     }
 }
 
