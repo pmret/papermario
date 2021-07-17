@@ -6,8 +6,8 @@
 #include "message_ids.h"
 #include "sprite/npc/battle_goombario.h"
 
-extern Actor* D_8023CDA0;
-extern f32 D_8023CDA4;
+extern Actor D_8023CDA0;
+extern s32 D_8023CDA4;
 extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
 
 extern Script N(init);
@@ -118,6 +118,7 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238BCC_6F1CAC);
 
