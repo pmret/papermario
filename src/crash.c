@@ -66,20 +66,6 @@ INCLUDE_ASM(s32, "crash", func_8002C1D4);
 INCLUDE_ASM(s32, "crash", crash_printf_string);
 
 INCLUDE_ASM(s32, "crash", crash_print_fpr);
-/*
-void crash_print_fpr(s32 x, s32 y, s32 regNum, void *addr) {
-    u32 bits;
-    s32 exponent;
-
-    bits = *(u32 *) addr;
-    exponent = ((bits & 0x7f800000U) >> 0x17) - 0x7f;
-    if ((exponent >= -0x7e && exponent <= 0x7f) || bits == 0) {
-        crash_printf_string(x, y, "F%02d:%.3e", regNum, *(f32 *) addr);
-    } else {
-        crash_printf_string(x, y, "F%02d:---------", regNum);
-    }
-}
-*/
 
 INCLUDE_ASM(s32, "crash", func_8002C324);
 

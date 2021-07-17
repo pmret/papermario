@@ -403,25 +403,20 @@ ApiStatus func_8027CC10(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
-    Actor *actor;
-    s32 outVar2;
-    s32 outVar1;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 outVar;
     s32 hitResult;
     u8 attackStatus;
-    s32 actorID;
     s32 battleStatusFlags1Temp;
     s32 battleFlagsModifier;
 
-
-    outVar1 = get_variable(script, *args++);
-    actorID = outVar1;
-
-    if (outVar1 == ACTOR_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
 
     actor = get_actor(actorID);
-    outVar2 = *args++;
+    outVar = *args++;
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = *args++;
     battleStatus->currentAttackStatus = *args++;
@@ -472,7 +467,7 @@ ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, outVar2, hitResult);
+    set_variable(script, outVar, hitResult);
     if (!(does_script_exist_by_ref(script))) {
         return ApiStatus_FINISH;
     }
@@ -521,25 +516,20 @@ ApiStatus EnemyFollowupAfflictTarget(ScriptInstance* script, s32 isInitialCall) 
 ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
+    ActorID actorID = get_variable(script, *args++);
     Actor *actor;
-    s32 outVar2;
-    s32 outVar1;
+    s32 outVar;
     s32 hitResult;
     u8 attackStatus;
-    s32 actorID;
     s32 battleStatusFlags1Temp;
     s32 battleFlagsModifier;
 
-
-    outVar1 = get_variable(script, *args++);
-    actorID = outVar1;
-
-    if (outVar1 == ACTOR_SELF) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
 
     actor = get_actor(actorID);
-    outVar2 = *args++;
+    outVar = *args++;
     battleStatus->currentAttackElement = *args++;
     battleStatus->currentAttackEventSuppression = 0;
     battleStatus->currentAttackStatus = *args++;
@@ -590,7 +580,7 @@ ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
         return ApiStatus_FINISH;
     }
 
-    set_variable(script, outVar2, hitResult);
+    set_variable(script, outVar, hitResult);
 
     return ApiStatus_DONE2;
 }
