@@ -13,9 +13,9 @@ extern s16 D_80077C1C;
 extern s16 D_80077C1E;
 extern s32 D_80077C20;
 
-extern u16 D_80077C30;
+extern s16 D_80077C30;
 extern s32 D_80077C34;
-extern u16 D_80077C3A;
+extern s16 D_80077C3A;
 
 void STUB_npc_callback(void) {
 }
@@ -1336,19 +1336,18 @@ INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 INCLUDE_ASM(s32, "npc", func_8003DC38);
 
 void func_8003DFA0(Npc* npc) {
-    f32 temp_f20;
-    f32 x;
-    f32 z;
-    u32 phi_v0;
+    if (D_80077C30++ >= 4) {
+        f32 temp_f20;
+        f32 x;
+        f32 z;
 
-    phi_v0 =  (s16) (D_80077C30++) < 4;
-    if (phi_v0 == FALSE) {
         D_80077C30 = 0;
         temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        playFX_0C(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f, npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
-        D_80077C34 = D_80077C34 == 0;
+        playFX_0C(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
+                  npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
+        D_80077C34 = !D_80077C34;
     }
 }
 
@@ -1356,18 +1355,17 @@ void func_8003DFA0(Npc* npc) {
 INCLUDE_ASM(s32, "npc", func_8003E0D4);
 
 void func_8003E1D0(Npc* npc) {
-    f32 temp_f20;
-    f32 x;
-    f32 z;
-    u32 phi_v0;
+    if (D_80077C3A++ >= 4) {
+        f32 temp_f20;
+        f32 x;
+        f32 z;
 
-    phi_v0 = (s16) (D_80077C3A++) < 4;
-    if (phi_v0 == FALSE) {
         D_80077C3A = 0;
         temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        playFX_23(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f, npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
+        playFX_23(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,
+                  npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
     }
 }
 
