@@ -203,7 +203,7 @@ NpcGroupList N(npcGroupList_80241A9C) = {
 s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM(gCurrentCamID);
+    Camera* camera = &gCameras[gCurrentCamID];
     f32 phi_f20;
     s32 ret = FALSE;
 
