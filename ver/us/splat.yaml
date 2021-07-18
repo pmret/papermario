@@ -40,7 +40,7 @@ segments:
     vram: 0x80025C00
     subsegments:
     - [0x1000, hasm, entry_point]
-    - [0x1060, c, 1060_len_310]
+    - [0x1060, c, is_debug]
     - [0x1370, c, 1370_len_7d0]
     - [0x1b40, c, main_loop]
     - [0x3bf0, c, input]
@@ -290,7 +290,7 @@ segments:
     - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, .rodata, 1060_len_310]
+    - [0x73130, .rodata, is_debug]
     - [0x73148, .rodata, main_loop]
     - [0x73160, .rodata, 43F0]
     - [0x73200, .rodata, curtains]
