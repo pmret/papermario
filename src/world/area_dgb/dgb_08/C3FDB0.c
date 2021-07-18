@@ -1071,7 +1071,7 @@ ApiStatus N(func_80240B94_C40944)(ScriptInstance* script, s32 isInitialCall) {
 s32 N(func_80241098_C40E48)(ScriptInstance* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = CAM(gCurrentCamID);
+    Camera* camera = &gCameras[gCurrentCamID];
     Enemy* enemy2 = get_enemy(enemy->npcID + 1);
     f32 phi_f20;
     s32 ret = TRUE;
