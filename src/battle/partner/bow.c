@@ -4,6 +4,7 @@
 #include "battle/battle.h"
 
 extern s32 bMarioIdleAnims[];
+extern s32 bMarioHideAnims[];
 
 ApiStatus func_80238000_710EF0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -24,7 +25,20 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "battle/partner/bow", func_8023808C_710F7C, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
+    ActorPart* playerActorPartTable = gBattleStatus.playerActor->partsTable;
+
+    gBattleStatus.outtaSightActive = 1;
+    if (!(gBattleStatus.flags2 & 2)) {
+        gBattleStatus.outtaSightActive = -1;
+    } 
+
+    playerActorPartTable->idleAnimations = &bMarioHideAnims;
+    gBattleStatus.hustleTurns = 0;
+    gBattleStatus.flags1 &= ~0x04000000;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;

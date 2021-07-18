@@ -894,7 +894,7 @@ typedef struct AnimatedMesh {
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ struct EffectInstanceDataThing* unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
