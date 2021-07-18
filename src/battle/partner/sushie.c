@@ -50,8 +50,8 @@ ApiStatus func_802381EC_707E8C(ScriptInstance* script, s32 isInitialCall) {
     s32 temp_v0;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 6;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 6;
     }
 
     xScale = partnerActor->scale.x;
@@ -61,9 +61,9 @@ ApiStatus func_802381EC_707E8C(ScriptInstance* script, s32 isInitialCall) {
     partnerActor->scale.y = yScale + ((1.0 - yScale) / 3.0);
     partnerActor->scale.z = zScale + ((1.0 - zScale) / 3.0);
 
-    temp_v0 = script->functionTemp[1].s;
+    temp_v0 = script->functionTemp[1];
     if (temp_v0) {
-        script->functionTemp[1].s = (s32) (temp_v0 - 1);
+        script->functionTemp[1] = (s32) (temp_v0 - 1);
 
         return ApiStatus_BLOCK;
     }

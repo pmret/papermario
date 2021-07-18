@@ -9,7 +9,7 @@ extern s32 D_8023C1C4;
 extern s32 D_8023C1C8;
 extern EffectInstance* D_8023C1CC;
 extern EffectInstance* D_8023C1D0;
-extern EffectInstance* D_80239A0C_7054FC;
+extern s32* D_80239A0C_7054FC;
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
 
@@ -57,7 +57,7 @@ ApiStatus func_80238408_703EF8(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/partner/watt", func_802384B0_703FA0);
 
 ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
-    EffectInstance* var = D_80239A0C_7054FC;
+    s32* var = D_80239A0C_7054FC;
 
     if (var != NULL) {
         *var |= 0x10;
@@ -127,7 +127,7 @@ ApiStatus func_80238C08_7046F8(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (gBattleStatus.flags2 & 2) {
-        gBattleStatus.flags2 |= 0x100);
+        gBattleStatus.flags2 |= 0x100;
     }
 
     return ApiStatus_DONE2;
