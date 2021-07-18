@@ -523,7 +523,7 @@ typedef struct CameraInitData {
 } CameraInitData; // size = 0x12;
 
 typedef struct Camera {
-    /* 0x000 */ s16 flags;
+    /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
     /* 0x006 */ s16 unk_06;
@@ -894,7 +894,7 @@ typedef struct AnimatedMesh {
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ struct EffectInstanceDataThing* unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
