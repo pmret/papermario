@@ -29,7 +29,7 @@ ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
     ActorPart* playerActorPartTable = gBattleStatus.playerActor->partsTable;
 
     gBattleStatus.outtaSightActive = 1;
-    if ((gBattleStatus.flags2 & 2) == 0) {
+    if (!(gBattleStatus.flags2 & 2)) {
         gBattleStatus.outtaSightActive = -1;
     } 
 

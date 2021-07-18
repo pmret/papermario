@@ -5,7 +5,7 @@ extern s32 D_8023D330;
 extern s32 D_8023D334;
 
 ApiStatus func_80238000_70BD10(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         D_8023D2C8 = 0;
     }
 
@@ -36,10 +36,10 @@ ApiStatus func_80238A6C_70C77C(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238B50_70C860);
 
 ApiStatus func_80238C14_70C924(ScriptInstance* script, s32 isInitialCall) {
-    s32 temp_a0 = gBattleStatus.cloudNineEffect;
+    s32 effect = gBattleStatus.cloudNineEffect;
 
-    if (temp_a0 != 0) {
-        remove_effect(temp_a0);
+    if (effect != NULL) {
+        remove_effect(effect);
         gBattleStatus.cloudNineEffect = 0;
         gBattleStatus.cloudNineTurnsLeft = 0;
         return ApiStatus_DONE2;

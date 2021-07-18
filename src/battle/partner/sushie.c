@@ -57,9 +57,9 @@ ApiStatus func_802381EC_707E8C(ScriptInstance* script, s32 isInitialCall) {
     xScale = partnerActor->scale.x;
     yScale = partnerActor->scale.y;
     zScale = partnerActor->scale.z;
-    partnerActor->scale.x = (f32) (xScale + ((1.0 - xScale) / 3.0));
-    partnerActor->scale.y = (f32) (yScale + ((1.0 - yScale) / 3.0));
-    partnerActor->scale.z = (f32) (zScale + ((1.0 - zScale) / 3.0));
+    partnerActor->scale.x = xScale + ((1.0 - xScale) / 3.0);
+    partnerActor->scale.y = yScale + ((1.0 - yScale) / 3.0);
+    partnerActor->scale.z = zScale + ((1.0 - zScale) / 3.0);
 
     temp_v0 = script->functionTemp[1].s;
     if (temp_v0) {
@@ -126,7 +126,7 @@ ApiStatus func_80238480_708120(ScriptInstance* script, s32 isInitialCall) {
     f32 var3 = get_float_variable(script, *args++);
     s32 effect = battleStatus->unk_A0;
 
-    if (effect) {
+    if (effect != NULL) {
         remove_effect(effect);
     }
 
@@ -140,7 +140,7 @@ INCLUDE_ASM(s32, "battle/partner/sushie", func_80238540_7081E0);
 ApiStatus func_80238E30_708AD0(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    f32 var = ((((f64) script->varTable[0] * 3) / 100) + 1);
+    f32 var = (((f64) script->varTable[0] * 3) / 100) + 1;
     f32 xScale = partnerActor->scale.x;
     f32 yScale = partnerActor->scale.y;
     f32 zScale = partnerActor->scale.z;
