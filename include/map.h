@@ -291,8 +291,9 @@ typedef struct Enemy {
     /* 0xB4 */ s8 unk_B4;
     /* 0xB5 */ s8 unk_B5;
     /* 0xB6 */ char unk_B6[2];
-    /* 0xB8 */ s32 unkSettings24;
-    /* 0xBC */ char unk_BC[8];
+    /* 0xB8 */ Script* unk_B8; // some bytecode
+    /* 0xBC */ struct ScriptInstance* unk_BC; // some script
+    /* 0xC0 */ s32 unk_C0; // some script ID
     /* 0xC4 */ s32 unk_C4;
     /* 0xC8 */ s32 unk_C8;
     /* 0xCC */ s32* animList;
