@@ -3468,7 +3468,7 @@ segments:
     overlay: True
     subsegments:
     - [0x70BD10, c, lakilester]
-    - [0x70DED0, data]
+    - [0x70DEE0, data, 70DED0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -3880,7 +3880,7 @@ segments:
     overlay: True
     subsegments:
     - [0x743DF0, c]
-    - [0x743FE0, data]
+    - [0x743FF0, data]
   - dir: battle/move/sleep_stomp
     type: code
     start: 0x746E10
@@ -4056,7 +4056,7 @@ segments:
     overlay: True
     subsegments:
     - [0x779C90, c]
-    - [0x779E20, data]
+    - [0x779E30, data]
   - dir: battle/move/shrink_smash
     type: code
     start: 0x77CB80

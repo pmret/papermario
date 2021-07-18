@@ -72,9 +72,7 @@ ApiStatus func_8023A19C_70DEAC(ScriptInstance* script, s32 isInitialCall) {
     return (D_8023D330 == 0) * 2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023A1B0_70DEC0);
-/* Should work, but there seems to be an issue with the split?
-void func_8023A1B0_70DEC0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023A1B0_70DEC0(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = D_8023D334;
+    return ApiStatus_DONE2;
 }
-*/

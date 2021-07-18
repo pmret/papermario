@@ -211,8 +211,6 @@ extern s32 gItemMenuScrollUpIcon;
 
 // Stats
 extern s32 gStatsMenuIconIDs[12];
-
-
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 D_8009A64C;

@@ -129,7 +129,6 @@ INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, ScriptInstance* script, s32 
 s32 fx_sleep_bubble(s32, f32, f32, f32, f32, f32, EffectInstanceData**); // extern
 s32 playFX_0A(f32, f32, s32, s32, f32, f32); // extern
 s32 playFX_0B(s32, f32, f32, f32); // extern
-s32 playFX_0C(f32, f32, s32, s32, f32, f32, f32); // extern
 s32 playFX_0D(s32, f32, f32, f32, s32); // extern
 s32 playFX_0E(f32, f32, s32, s32, f32, s32); // extern
 s32 playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32); // extern
@@ -145,7 +144,6 @@ s32 playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*); // extern
 s32 playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32); // extern
 s32 playFX_20(s32, f32, f32, f32, f32, EffectInstanceData**); // extern
 s32 playFX_21(s32, f32, f32, f32, f32, f32, s32); // extern
-s32 playFX_23(s32, f32, f32, f32, f32); // extern
 s32 playFX_24(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_25(s32, f32, f32, f32); // extern
 s32 playFX_27(s32, f32, f32, f32, f32, s32); // extern
