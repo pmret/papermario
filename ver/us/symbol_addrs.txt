@@ -1,9 +1,9 @@
 entry_point = 0x80025C00; // type:func rom:0x1000
-func_80025C60 = 0x80025C60; // type:func rom:0x1060
-func_80025CC0 = 0x80025CC0; // type:func rom:0x10C0
-func_80025CFC = 0x80025CFC; // type:func rom:0x10FC
-func_80025D38 = 0x80025D38; // type:func rom:0x1138
-func_80025D74 = 0x80025D74; // type:func rom:0x1174
+is_debug_init = 0x80025C60; // type:func rom:0x1060
+printf = 0x80025CC0; // type:func rom:0x10C0
+osSyncPrintf = 0x80025CFC; // type:func rom:0x10FC
+rmonPrintf = 0x80025D38; // type:func rom:0x1138
+is_debug_print = 0x80025D74; // type:func rom:0x1174
 func_80025F44 = 0x80025F44; // type:func rom:0x1344
 boot_main = 0x80025F70; // type:func rom:0x1370
 gfxRetrace_Callback = 0x8002605C; // type:func rom:0x145C

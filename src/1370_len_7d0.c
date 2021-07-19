@@ -31,7 +31,7 @@ void boot_main(void) {
 
     nuGfxDisplayOff();
     crash_create_monitor();
-    func_80025C60();
+    is_debug_init();
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
     func_8002D160();

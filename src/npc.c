@@ -194,10 +194,9 @@ void free_npc_by_index(s32 listIndex) {
             }
 
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-                if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID)) {
-                    PANIC();
-                }
+                ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
             }
+
             delete_shadow(npc->shadowIndex);
 
             for (i = 0; i < 2; i++) {
@@ -224,10 +223,9 @@ void free_npc(Npc* npc) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID) != 0) {
-            PANIC();
-        }
+        ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
     }
+
     delete_shadow(npc->shadowIndex);
 
     for (i = 0; i < 2; i++) {
