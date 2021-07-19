@@ -185,56 +185,56 @@ INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_00_SetVolume);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_01_SetPan);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_01_SetPan, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_02_SetInstrument);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_02_SetInstrument, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_03_SetReverb);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_03_SetReverb, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_04);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_04, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_05);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_05, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_06);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_06, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_07);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_07, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_08);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_08, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_09_StartLoop);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_09_StartLoop, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0A_EndLoop);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0A_EndLoop, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0B);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0B, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0C);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0C, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0D);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0D, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0E);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0E, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_0F);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0F, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_10_Jump);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_10_Jump, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_11_Restart);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_11_Restart, SoundManager* manager, SoundPlayer* player);
 
-void snd_SEFCmd_12_NOP(void) {
+void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player) {
 }
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_13);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_13, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_14);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_14, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_15);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_15, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_16);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_16, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_17);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_17, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(s32, "26840_len_20d0", snd_SEFCmd_18);
+INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_18, SoundManager* manager, SoundPlayer* player);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004D428);
 

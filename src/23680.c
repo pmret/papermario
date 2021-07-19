@@ -57,7 +57,37 @@ s32 get_coin_drop_amount(Enemy* enemy) {
 INCLUDE_ASM(s32, "23680", get_coin_drop_amount);
 #endif
 
-INCLUDE_ASM(s32, "23680", func_80048E34);
+void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
+    ScriptInstance* newScript;
+
+    if (enemy->aiScript != NULL) {
+        kill_script_by_ID(enemy->aiScriptID);
+        enemy->aiScript = NULL;
+    }
+
+    if (enemy->unk_BC != 0) {
+        kill_script_by_ID(enemy->unk_C0);
+        enemy->unk_BC = NULL;
+    }
+
+    if (enemy->aiBytecode != NULL) {
+        enemy->unk_C8 = arg2;
+        newScript = start_script(enemy->aiBytecode, 10, 0x20);
+        enemy->aiScript = newScript;
+        enemy->aiScriptID = newScript->id;
+        newScript->owner2.npcID = enemy->npcID;
+        newScript->owner1.enemy = enemy;
+    }
+
+    if (enemy->unk_B8 != NULL) {
+        enemy->unk_C4 = arg1;
+        newScript = start_script(enemy->unk_B8, 10, 0x20);
+        enemy->unk_BC = newScript;
+        enemy->unk_C0 = newScript->id;
+        newScript->owner2.npcID = enemy->npcID;
+        newScript->owner1.enemy = enemy;
+    }
+}
 
 s32 func_80048F0C(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
