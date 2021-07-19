@@ -84,7 +84,7 @@ Script N(searchBush) = SCRIPT({
     GetPlayerPos(SI_VAR(5), SI_VAR(15), SI_VAR(7));
     spawn {
         SI_FLAG(0) = 0;
-        if (SI_VAR(1) != 0) {
+        if (SI_VAR(1) != NULL) {
             loop 5 {
                 buf_use SI_VAR(1);
                 buf_read SI_VAR(2);
@@ -115,7 +115,7 @@ Script N(searchBush) = SCRIPT({
         }
     }
     spawn {
-        if (SI_VAR(2) != 0) {
+        if (SI_VAR(2) != NULL) {
             buf_use SI_VAR(2);
             buf_read SI_VAR(3);
             loop SI_VAR(3) {
@@ -135,8 +135,8 @@ Script N(searchBush) = SCRIPT({
         }
     }
     sleep 15;
-    if (SI_VAR(4) != 0) {
-        await 0xFE363C84;
+    if (SI_VAR(4) != NULL) {
+        await SI_VAR(4);
     }
 });
 
@@ -150,7 +150,7 @@ Script N(shakeTree) = SCRIPT({
     PlaySound(0x166);
     spawn {
         SI_FLAG(0) = 0;
-        if (SI_VAR(1) != 0) {
+        if (SI_VAR(1) != NULL) {
             sleep 1;
             loop 5 {
                 buf_use SI_VAR(1);
@@ -183,7 +183,7 @@ Script N(shakeTree) = SCRIPT({
     }
     spawn {
         SI_FLAG(0) = 0;
-        if (SI_VAR(2) != 0) {
+        if (SI_VAR(2) != NULL) {
             loop 5 {
                 buf_use SI_VAR(2);
                 buf_read SI_VAR(3);
@@ -214,7 +214,7 @@ Script N(shakeTree) = SCRIPT({
         }
     }
     spawn {
-        if (SI_VAR(3) != 0) {
+        if (SI_VAR(3) != NULL) {
             buf_use SI_VAR(3);
             buf_read SI_VAR(4);
             loop SI_VAR(4) {
@@ -234,7 +234,7 @@ Script N(shakeTree) = SCRIPT({
         }
     }
     spawn {
-        if (SI_VAR(4) != 0) {
+        if (SI_VAR(4) != NULL) {
             buf_use SI_VAR(4);
             buf_read SI_VAR(5);
             loop SI_VAR(5) {
@@ -243,8 +243,8 @@ Script N(shakeTree) = SCRIPT({
             }
         }
     }
-    if (SI_VAR(5) != 0) {
-        await 0xFE363C85;
+    if (SI_VAR(5) != NULL) {
+        await SI_VAR(5);
     }
     sleep 15;
 });

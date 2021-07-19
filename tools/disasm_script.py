@@ -569,7 +569,7 @@ class ScriptDisassembler:
     def addr_ref(self, addr, isArg=False):
         if addr in self.symbol_map:
             return self.replace_star_rod_prefix(addr, isArg)
-        return f"0x{addr:08X}"
+        return var(addr) #f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
