@@ -411,13 +411,11 @@ Script N(80243090) = SCRIPT({
     unbind;
 });
 
-Script N(802431C4) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802419FC_CB073C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80243090), 0x10, 0, N(D_802462C0_B4AA30), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241970_CB06B0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(802431C4) = SCRIPT({
+    N(func_802419FC_CB073C)(SI_VAR(0));
+    bind_padlock N(80243090) 0x10 0 N(D_802462C0_B4AA30);
+    N(func_80241970_CB06B0)(SI_VAR(0));
+});
 
 Script N(interact_80243214) = SCRIPT({
     DisablePlayerInput(TRUE);

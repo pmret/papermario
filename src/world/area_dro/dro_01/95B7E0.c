@@ -1234,13 +1234,11 @@ Script N(802477E8) = SCRIPT({
     unbind;
 });
 
-Script N(8024792C) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802477E8), 0x10, 0, N(D_8024DFF0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024792C) = SCRIPT({
+    N(func_802427BC_95D9BC)(SI_VAR(0));
+    bind_padlock N(802477E8) 0x10 0 N(D_8024DFF0);
+    N(func_80242730_95D930)(SI_VAR(0));
+});
 
 Script N(8024797C) = SCRIPT({
     loop {
@@ -1300,15 +1298,13 @@ Script N(802479FC) = SCRIPT({
     unbind;
 });
 
-Script N(80247D20) = {
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(11)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802479FC), 0x10, 0, N(D_8024DFF0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80247D20) = SCRIPT({
+    SI_VAR(0) = SI_VAR(11);
+    SI_VAR(1) = SI_VAR(2);
+    N(func_802427BC_95D9BC)(SI_VAR(0));
+    bind_padlock N(802479FC) 0x10 0 N(D_8024DFF0);
+    N(func_80242730_95D930)(SI_VAR(0));
+});
 
 Script N(80247D90) = SCRIPT({
     SI_VAR(12) = 0;

@@ -2016,29 +2016,25 @@ Script N(80248D3C) = SCRIPT({
     N(func_802413BC_C9F2DC)();
 });
 
-// *INDENT-OFF*
-Script N(80248E30) = {
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 55),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(0), 54),
-                SI_CMD(ScriptOpcode_BREAK_LOOP),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1371), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1372), 0),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 89, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 88, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(11), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80248D3C), 0x10, 0, N(itemList_80248598), 0, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80248E30) = SCRIPT({
+    if (STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
+        loop {
+            sleep 1;
+            if (STORY_PROGRESS == STORY_CH6_WISTERWOOD_GAVE_HINT) {
+                break;
+            }
+        }
+        if (SI_SAVE_FLAG(1371) == 1) {
+            if (SI_SAVE_FLAG(1372) == 0) {
+                MakeItemEntity(ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0);
+            } else {
+                MakeItemEntity(ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0);
+            }
+            SI_MAP_VAR(11) = SI_VAR(0);
+        }
+        bind_padlock N(80248D3C) 0x10 0 N(itemList_80248598);
+    }
+});
 
 Script N(80248F48) = SCRIPT({
     bind N(802477EC) TRIGGER_FLOOR_TOUCH 46;

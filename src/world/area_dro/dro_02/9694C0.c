@@ -1559,13 +1559,11 @@ Script N(80248788) = SCRIPT({
     unbind;
 });
 
-Script N(802488CC) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_8024334C_96C50C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80248788), 0x10, 0, N(D_8024F080), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802432C0_96C480), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(802488CC) = SCRIPT({
+    N(func_8024334C_96C50C)(SI_VAR(0));
+    bind_padlock N(80248788) 0x10 0 N(D_8024F080);
+    N(func_802432C0_96C480)(SI_VAR(0));
+});
 
 Script N(8024891C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
@@ -1590,13 +1588,11 @@ Script N(8024891C) = SCRIPT({
     unbind;
 });
 
-Script N(80248A50) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802433E8_96C5A8), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(8024891C), 0x10, 0, N(D_8024F248), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802432C0_96C480), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80248A50) = SCRIPT({
+    N(func_802433E8_96C5A8)(SI_VAR(0));
+    bind_padlock N(8024891C) 0x10 0 N(D_8024F248);
+    N(func_802432C0_96C480)(SI_VAR(0));
+});
 
 Gfx N(D_8024A3B8_973578)[];
 s32 N(D_80248DD8_971F98)[];
@@ -2131,15 +2127,13 @@ Script N(8024B20C) = SCRIPT({
     unbind;
 });
 
-Script N(8024B530) = {
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(11)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, N(func_8024334C_96C50C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(8024B20C), 0x10, 0, N(D_8024F080), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802432C0_96C480), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024B530) = SCRIPT({
+    SI_VAR(0) = SI_VAR(11);
+    SI_VAR(1) = SI_VAR(2);
+    N(func_8024334C_96C50C)(SI_VAR(0));
+    bind_padlock N(8024B20C) 0x10 0 N(D_8024F080);
+    N(func_802432C0_96C480)(SI_VAR(0));
+});
 
 Script N(8024B5A0) = SCRIPT({
     SI_VAR(12) = 0;

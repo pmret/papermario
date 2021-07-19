@@ -91,19 +91,15 @@ Script N(exitSingleDoor_80241B30) = SCRIPT({
 
 const N(pad_XXXX)[] = { 0, 0 };
 
-// *INDENT-OFF*
-Script N(80241BE4) = {
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_802419C8), TRIGGER_WALL_PRESS_A, 19, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitSingleDoor_80241B30), TRIGGER_WALL_PRESS_A, 6, 1, 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1066), 0),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80242AD0), TRIGGER_WALL_PRESS_A, 16384, N(itemList_802419C0), 0, 1),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80241A7C), TRIGGER_WALL_PRESS_A, 10, 1, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80241BE4) = SCRIPT({
+    bind N(exitDoubleDoor_802419C8) TRIGGER_WALL_PRESS_A 19;
+    bind N(exitSingleDoor_80241B30) TRIGGER_WALL_PRESS_A 6;
+    if (SI_SAVE_FLAG(1066) == 0) {
+        bind_padlock N(80242AD0) TRIGGER_WALL_PRESS_A entity(0) N(itemList_802419C0);
+    } else {
+        bind N(exitDoubleDoor_80241A7C) TRIGGER_WALL_PRESS_A 10;
+    }
+});
 
 Script N(enterSingleDoor_80241C88) = SCRIPT({
     GetEntryID(SI_VAR(0));

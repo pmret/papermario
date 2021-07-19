@@ -135,13 +135,11 @@ Script N(80241CD4) = SCRIPT({
     unbind;
 });
 
-Script N(80241E18) = {
-    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) N(D_80244A20), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_802415F4_BE0384), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80241E18) = SCRIPT({
+    N(func_80241680_BE0410)(SI_VAR(0));
+    bind_padlock N(80241CD4) 0x10 0 N(D_80244A20);
+    N(func_802415F4_BE0384)(SI_VAR(0));
+});
 
 Script N(80241E68) = SCRIPT({
     SetPlayerAnimation(ANIM_10002);

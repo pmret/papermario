@@ -174,33 +174,29 @@ s32 N(itemList_80242F28)[] = {
     ITEM_NONE,
 };
 
-// *INDENT-OFF*
-Script N(main) = {
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(425), 15),
-    SI_CMD(ScriptOpcode_CALL, SetSpriteShading, -1),
-    SI_CMD(ScriptOpcode_CALL, SetCamPerspective, 0, 3, 25, 16, 4096),
-    SI_CMD(ScriptOpcode_CALL, SetCamBGColor, 0, 0, 0, 0),
-    SI_CMD(ScriptOpcode_CALL, SetCamEnabled, 0, 1),
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), -15),
-        SI_CMD(ScriptOpcode_CALL, MakeNpcs, 1, N(npcGroupList_80244988)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(makeEntities)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80243608)),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242910), TRIGGER_WALL_PRESS_A, 25, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_802429C4), TRIGGER_WALL_PRESS_A, 21, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242A78), TRIGGER_WALL_PRESS_A, 13, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitSingleDoor_80242B88), TRIGGER_WALL_PRESS_A, 33, 1, 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1043), 0),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80243740), TRIGGER_WALL_PRESS_A, 16384, N(itemList_80242F28), 0, 1),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242C3C), TRIGGER_WALL_PRESS_A, 17, 1, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80242870)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(enterDoubleDoor_80242D1C)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(main) = SCRIPT({
+    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamEnabled(0, 1);
+    if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+        MakeNpcs(1, N(npcGroupList_80244988));
+    }
+    await N(makeEntities);
+    spawn N(80243608);
+    bind N(exitDoubleDoor_80242910) TRIGGER_WALL_PRESS_A 25;
+    bind N(exitDoubleDoor_802429C4) TRIGGER_WALL_PRESS_A 21;
+    bind N(exitDoubleDoor_80242A78) TRIGGER_WALL_PRESS_A 13;
+    bind N(exitSingleDoor_80242B88) TRIGGER_WALL_PRESS_A 33;
+    if (SI_SAVE_FLAG(1043) == 0) {
+        bind_padlock N(80243740) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242F28);
+    } else {
+        bind N(exitDoubleDoor_80242C3C) TRIGGER_WALL_PRESS_A 17;
+    }
+    spawn N(80242870);
+    spawn N(enterDoubleDoor_80242D1C);
+});
 
 static s32 N(pad_30D8)[] = {
     0x00000000, 0x00000000,

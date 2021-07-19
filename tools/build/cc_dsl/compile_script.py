@@ -59,6 +59,7 @@ script_parser = Lark(r"""
          | lhs set_op "(const)" expr  -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
+         | "bind_padlock" expr expr collider_id expr -> bind_padlock_stmt
          | "unbind"             -> unbind_stmt
          | "priority" expr      -> set_priority
          | "timescale" expr     -> set_timescale
@@ -105,12 +106,15 @@ script_parser = Lark(r"""
                  | "others"   -> control_type_others
                  | ["script"] -> control_type_script
 
-    bind_stmt: "bind" expr expr expr
-    bind_set_stmt: lhs "=" "bind" expr expr expr
+    bind_stmt: "bind" expr expr collider_id
+    bind_set_stmt: lhs "=" "bind" expr expr collider_id
 
     loop_stmt: "loop" [expr] block
 
     var_decl: ("int"|"float") variable
+
+    ?collider_id: "entity" "(" expr ")" -> entity_id
+                | expr
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -511,6 +515,9 @@ class Compile(Transformer):
     def bind_set_stmt(self, tree):
         ret, script, trigger, target = tree.children
         return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, ret, meta=tree.meta)
+    def bind_padlock_stmt(self, tree):
+        script, trigger, target, items = tree.children
+        return Cmd("ScriptOpcode_BIND_PADLOCK", script, trigger, target, items, 0, 1, meta=tree.meta)
     def unbind_stmt(self, tree):
         return Cmd("ScriptOpcode_UNBIND", meta=tree.meta)
 
@@ -654,6 +661,10 @@ class Compile(Transformer):
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(ParallelCtx())
         return [ Cmd("ScriptOpcode_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_PARALLEL_THREAD") ]
+
+    def entity_id(self, tree):
+        expr, = tree.children
+        return f"({expr} + 0x4000)"
 
 def compile_script(s):
     tree = script_parser.parse(s)

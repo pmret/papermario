@@ -858,6 +858,13 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         else:
             return f"{arg}"
 
+    # TODO: use map's collider names when split
+    def collider_id(self, arg):
+        if arg >= 0x4000 and arg <= 0x5000:
+            return f"entity({arg - 0x4000})"
+        else:
+            return arg
+
     def is_float(self, var):
         try:
             float(var)
@@ -1189,9 +1196,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x47:
             assert argv[3] == 1
             if argv[4] != 0:
-                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
             else:
-                self.write_line(f"bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
         elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
@@ -1201,7 +1208,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x4E:
             assert argv[4] == 0
             assert argv[5] == 1
-            self.write_line(f"bind_padlock {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
+            self.write_line(f"bind_padlock {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])} {self.addr_ref(argv[3])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
         elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])};")

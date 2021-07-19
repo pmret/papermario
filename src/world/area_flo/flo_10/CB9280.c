@@ -614,11 +614,9 @@ Script N(8024339C) = SCRIPT({
     }
 });
 
-Script N(802435F8) = {
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(8024339C), TRIGGER_FLOOR_TOUCH, 15, N(itemList_80243394), 0, 1),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(802435F8) = SCRIPT({
+    bind_padlock N(8024339C) TRIGGER_FLOOR_TOUCH 15 N(itemList_80243394);
+});
 
 Script N(80243628) = SCRIPT({
     sleep 10;
