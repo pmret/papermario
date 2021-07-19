@@ -1401,7 +1401,7 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size[0] / 24.0;
 }
 
-void playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 void playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 
 void remove_player_buffs(PlayerBuff buffs) {

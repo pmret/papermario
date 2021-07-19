@@ -316,4 +316,6 @@ typedef struct ActorOffsets {
     /* 0x03 */ s8 shadow;
 } ActorOffsets; // size = 0x04
 
+extern BattleList* D_800DC4FC;
+
 #endif

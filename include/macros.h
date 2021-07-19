@@ -16,9 +16,19 @@
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
-#define ASSERT(condition) if (!(condition)) { while (1) {} }
-#define PANIC() ASSERT(0)
-#define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
+#ifdef DEBUG
+#define ASSERT(condition) \
+    if (!(condition)) { \
+        func_80025F44("Assertion failed: " #condition, __FILE__, __LINE__); \
+        while (TRUE) {} \
+    }
+#define PANIC() \
+    func_80025F44("Panic!", __FILE__, __LINE__); \
+    while (TRUE) {}
+#else
+#define ASSERT(condition) if (!(condition)) { while (TRUE) {} }
+#define PANIC() while (TRUE) {}
+#endif
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])

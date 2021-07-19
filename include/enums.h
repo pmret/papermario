@@ -605,6 +605,7 @@ enum SoundIDs {
     SOUND_SPELL_CAST4,
     SOUND_SPELL_CAST5,
     SOUND_UNKNOWN_20F6              = 8438,
+    SOUND_UNKNOWN_2106              = 8454,
 };
 
 typedef UNK_TYPE Cam;
