@@ -756,135 +756,127 @@ Script N(8024263C) = SCRIPT({
     sleep 100;
 });
 
-// *INDENT-OFF*
-Script N(80242918) = {
-    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024258C)),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 0, 8374, 0),
-            SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-            SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), SI_VAR(8), 11),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_802425D4)),
-            SI_CMD(ScriptOpcode_LOOP, 2),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 0, 8374, 0),
-                SI_CMD(ScriptOpcode_BUFFER_READ_2, SI_VAR(6), SI_VAR(7)),
-                SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), 4, 11),
-                SI_CMD(ScriptOpcode_LOOP, 0),
-                    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                        SI_CMD(ScriptOpcode_BREAK_LOOP),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_802425E4)),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-            SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), SI_VAR(8), 11),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024262C)),
-            SI_CMD(ScriptOpcode_LOOP, 2),
-                SI_CMD(ScriptOpcode_BUFFER_READ_2, SI_VAR(6), SI_VAR(7)),
-                SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), 4, 11),
-                SI_CMD(ScriptOpcode_LOOP, 0),
-                    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                        SI_CMD(ScriptOpcode_BREAK_LOOP),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_LOOP, 100),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 0, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 1, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 2, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80242918) = SCRIPT({
+    SI_MAP_VAR(11) = 1.0;
+    SI_MAP_VAR(12) = 1.0;
+    parallel {
+        buf_use N(intTable_8024258C);
+        loop 6 {
+            PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
+            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            loop {
+                UpdateLerp();
+                SI_VAR(0) /= (float) 10;
+                SI_MAP_VAR(11) = (float) SI_VAR(0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 1;
+        }
+        loop {
+            buf_use N(intTable_802425D4);
+            loop 2 {
+                PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
+                buf_read SI_VAR(6) SI_VAR(7);
+                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                loop {
+                    UpdateLerp();
+                    SI_VAR(0) /= (float) 10;
+                    SI_MAP_VAR(11) = (float) SI_VAR(0);
+                    sleep 1;
+                    if (SI_VAR(1) == 0) {
+                        break loop;
+                    }
+                }
+            }
+        }
+    }
+    parallel {
+        buf_use N(intTable_802425E4);
+        loop 6 {
+            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            loop {
+                UpdateLerp();
+                SI_VAR(0) /= (float) 10;
+                SI_MAP_VAR(12) = (float) SI_VAR(0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 1;
+        }
+        loop {
+            buf_use N(intTable_8024262C);
+            loop 2 {
+                buf_read SI_VAR(6) SI_VAR(7);
+                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                loop {
+                    UpdateLerp();
+                    SI_VAR(0) /= (float) 10;
+                    SI_MAP_VAR(12) = (float) SI_VAR(0);
+                    sleep 1;
+                    if (SI_VAR(1) == 0) {
+                        break loop;
+                    }
+                }
+            }
+        }
+    }
+    loop 100 {
+        SetNpcScale(NPC_HUFF_N_PUFF0, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF1, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF2, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        sleep 1;
+    }
+});
 
-// *INDENT-OFF*
-Script N(80242D34) = {
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 0),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_LOOP, 15),
-                SI_CMD(ScriptOpcode_CALL, SetNpcRotation, SI_VAR(0), 0, SI_VAR(1), 0),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 60),
-            SI_CMD(ScriptOpcode_IF_GT, SI_VAR(1), 360),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(1), -360),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024249C)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(8), 3),
-    SI_CMD(ScriptOpcode_LOOP, 14),
-        SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, RandInt, 5, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), SI_VAR(1), SI_VAR(2), -30),
-            SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(5), 8),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, SI_VAR(8), 981, 0),
-            SI_CMD(ScriptOpcode_CALL, NpcJump0, SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), 0, -1000, 0),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_ADD, SI_VAR(8), 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 0, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 1, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 2, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), SI_VAR(1), SI_VAR(2), -30),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, SI_VAR(8), 982, 0),
-    SI_CMD(ScriptOpcode_CALL, NpcJump0, SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, 10),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), 0, -1000, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80242D34) = SCRIPT({
+    parallel {
+        SI_VAR(1) = 0;
+        loop {
+            SI_VAR(0) = 3;
+            loop 15 {
+                SetNpcRotation(SI_VAR(0), 0, SI_VAR(1), 0);
+                SI_VAR(0) += 1;
+            }
+            SI_VAR(1) += 60;
+            if (SI_VAR(1) > 360) {
+                SI_VAR(1) += -360;
+            }
+            sleep 1;
+        }
+    }
+    buf_use N(intTable_8024249C);
+    SI_VAR(8) = 3;
+    loop 14 {
+        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+        spawn {
+            RandInt(5, SI_VAR(5));
+            sleep SI_VAR(5);
+            SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
+            RandInt(2, SI_VAR(5));
+            SI_VAR(5) += 8;
+            PlaySoundAtNpc(SI_VAR(8), 0x3D5, 0);
+            NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, SI_VAR(5));
+            SetNpcPos(SI_VAR(8), 0, -1000, 0);
+        }
+        SI_VAR(8) += 1;
+    }
+    SetNpcPos(NPC_HUFF_N_PUFF0, 0, -1000, 0);
+    SetNpcPos(NPC_HUFF_N_PUFF1, 0, -1000, 0);
+    SetNpcPos(NPC_HUFF_N_PUFF2, 0, -1000, 0);
+    buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+    sleep 5;
+    SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
+    PlaySoundAtNpc(SI_VAR(8), 0x3D6, 0);
+    NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, 10);
+    SetNpcPos(SI_VAR(8), 0, -1000, 0);
+});
 
 Script N(80243010) = SCRIPT({
     SetNpcAnimation(NPC_HUFF_N_PUFF1, NPC_ANIM(huff_n_puff, Palette_00, Anim_4));

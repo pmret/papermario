@@ -171,75 +171,71 @@ s32 N(intTable_80240988)[] = {
     0x00000000, 0x00000000, 0xFFFFD8F0, 0x00000000, 0x00000000,
 };
 
-// *INDENT-OFF*
-Script N(defeat_802409DC) = {
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetCamType, 0, 6, 1),
-        SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
-        SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 50),
-        SI_CMD(ScriptOpcode_CALL, UseSettingsFrom, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_CALL, SetPanTarget, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_CALL, SetCamDistance, 0, 450),
-        SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-    SI_CMD(ScriptOpcode_CALL, PlayerFaceNpc, 0, 1),
-    SI_CMD(ScriptOpcode_LOOP, 2),
-        SI_CMD(ScriptOpcode_CALL, GetNpcPos, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_CALL, SetNpcJumpscale, 0, SI_FIXED(2.5)),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, -1, 8392, 0),
-        SI_CMD(ScriptOpcode_CALL, NpcJump0, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-        SI_CMD(ScriptOpcode_CALL, SetCamType, 0, 4, 1),
-        SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(2.0)),
-        SI_CMD(ScriptOpcode_CALL, SetCamPitch, 0, SI_FIXED(17.0), SI_FIXED(-7.0)),
-        SI_CMD(ScriptOpcode_CALL, SetCamDistance, 0, 450),
-        SI_CMD(ScriptOpcode_CALL, SetCamPosA, 0, -56, 70),
-        SI_CMD(ScriptOpcode_CALL, SetCamPosB, 0, -90, 40),
-        SI_CMD(ScriptOpcode_CALL, SetCamPosC, 0, 0, 0),
-        SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, PlayerFaceNpc, 0, 1),
-    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80240988)),
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), -10000),
-            SI_CMD(ScriptOpcode_BREAK_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, -1, 8392, 0),
-        SI_CMD(ScriptOpcode_CALL, NpcJump0, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(8024081C)),
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), -10000),
-            SI_CMD(ScriptOpcode_BREAK_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, -1, 8392, 0),
-        SI_CMD(ScriptOpcode_CALL, NpcJump0, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(802408D8)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-    SI_CMD(ScriptOpcode_CALL, SetCamType, 0, 6, 1),
-    SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, UseSettingsFrom, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, SetPanTarget, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, SetCamDistance, 0, 450),
-    SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, WaitForCam, 0, SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 0),
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(0), -22),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(defeat_802409DC) = SCRIPT({
+    spawn {
+        SetCamType(0, 6, 1);
+        SetCamSpeed(0, 90.0);
+        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SI_VAR(0) += 50;
+        UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetCamDistance(0, 450);
+        PanToTarget(0, 0, 1);
+    }
+    sleep 10;
+    PlayerFaceNpc(0, 1);
+    loop 2 {
+        GetNpcPos(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
+        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
+        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        sleep 1;
+    }
+    spawn {
+        sleep 10;
+        SetCamType(0, 4, 1);
+        SetCamSpeed(0, 2.0);
+        SetCamPitch(0, 17.0, -7.0);
+        SetCamDistance(0, 450);
+        SetCamPosA(0, -56, 70);
+        SetCamPosB(0, -90, 40);
+        SetCamPosC(0, 0, 0);
+        PanToTarget(0, 0, 1);
+    }
+    PlayerFaceNpc(0, 1);
+    buf_use N(intTable_80240988);
+    loop {
+        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
+        if (SI_VAR(0) == -10000) {
+            break loop;
+        }
+        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
+        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        sleep 1;
+    }
+    spawn N(8024081C);
+    loop {
+        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
+        if (SI_VAR(0) == -10000) {
+            break loop;
+        }
+        PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
+        NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 12);
+        sleep 1;
+    }
+    spawn N(802408D8);
+    sleep 30;
+    SetCamType(0, 6, 1);
+    SetCamSpeed(0, 90.0);
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetCamDistance(0, 450);
+    PanToTarget(0, 0, 1);
+    WaitForCam(0, 1.0);
+    PanToTarget(0, 0, 0);
+    STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
+});
 
 Script N(init_80240E70) = SCRIPT({
     if (STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {

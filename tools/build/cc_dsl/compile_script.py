@@ -67,6 +67,15 @@ script_parser = Lark(r"""
          | suspend_stmt
          | resume_stmt
          | kill_stmt
+         | "buf_use" expr       -> buf_use
+         | "buf_read" expr+     -> buf_read
+         | "buf_peek" expr expr -> buf_peek
+         | "buf_usef" expr       -> buf_usef
+         | "buf_readf" expr+     -> buf_readf
+         | "buf_peekf" expr expr -> buf_peekf
+         | "arr_use" expr -> use_array
+         | "flags_use" expr -> use_flags
+         | "arr_new" expr expr -> new_array
 
     ?stmt_no_semi: label ":" -> label_decl
                  | if_stmt
@@ -665,6 +674,57 @@ class Compile(Transformer):
     def entity_id(self, tree):
         expr, = tree.children
         return f"({expr} + 0x4000)"
+
+    def buf_use(self, tree):
+        return Cmd("ScriptOpcode_USE_BUFFER", tree.children[0], meta=tree.meta)
+    def buf_read(self, tree):
+        args = tree.children
+        cmds = []
+
+        while args:
+            if len(args) >= 4:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 3:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 2:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2", args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 1:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1", args.pop(0), meta=tree.meta))
+            else:
+                break
+
+        return cmds
+    def buf_peek(self, tree):
+        return Cmd("ScriptOpcode_BUFFER_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def buf_usef(self, tree):
+        return Cmd("ScriptOpcode_USE_BUFFER_F", tree.children[0], meta=tree.meta)
+    def buf_readf(self, tree):
+        args = tree.children
+        cmds = []
+
+        while args:
+            if len(args) >= 4:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4_F", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 3:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3_F", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 2:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2_F", args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 1:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1_F", args.pop(0), meta=tree.meta))
+            else:
+                break
+
+        return cmds
+    def buf_peekf(self, tree):
+        return Cmd("ScriptOpcode_BUFFER_PEEK_F", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def use_array(self, tree):
+        return Cmd("ScriptOpcode_USE_ARRAY", tree.children[0], meta=tree.meta)
+    def use_flags(self, tree):
+        return Cmd("ScriptOpcode_USE_FLAGS", tree.children[0], meta=tree.meta)
+    def new_array(self, tree):
+        return Cmd("ScriptOpcode_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
 
 def compile_script(s):
     tree = script_parser.parse(s)

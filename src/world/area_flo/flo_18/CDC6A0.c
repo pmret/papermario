@@ -621,7 +621,7 @@ Script N(80242910) = {
                 SI_CMD(ScriptOpcode_GOTO, 0),
             SI_CMD(ScriptOpcode_END_IF),
         SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
+    SI_CMD(ScriptOpcode_END_IF), // BUG: extraneous END_IF
     SI_CMD(ScriptOpcode_CALL, TranslateModel, 29, 124, 17, 3),
     SI_CMD(ScriptOpcode_CALL, TranslateModel, 29, SI_VAR(0), SI_VAR(1), 0),
     SI_CMD(ScriptOpcode_CALL, RotateModel, 29, SI_VAR(2), 0, 0, -1),
@@ -682,127 +682,123 @@ s32 N(intTable_80242DC8)[] = {
     0x00000000, 0x0000001B, 0x00000055, 0x00000000, 0x0000001B, 0x00000050, 0x00000023, 0x0000001B,
 };
 
-// *INDENT-OFF*
-Script N(80242E28) = {
-    SI_CMD(ScriptOpcode_SET, SI_VAR(10), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_IF_LT, SI_VAR(0), -210),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 485),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802413F0)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(10)),
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 52),
-        SI_CMD(ScriptOpcode_SET, SI_MAP_FLAG(1), 1),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_FLAG(3), 1),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SET, SI_MAP_FLAG(3), 1),
-    SI_CMD(ScriptOpcode_IF_GT, SI_VAR(0), 2),
-        SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 2),
-        SI_CMD(ScriptOpcode_GOTO, 11),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LABEL, 11),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(252), 0),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(252), 1),
-            SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80241ED4)),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 1),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(253), 0),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(253), 1),
-            SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80242174)),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(252), 1),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(252), 2),
-            SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80242474)),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(252), 2),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(253), 1),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(253), 2),
-            SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80242620)),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(252), 2),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(253), 2),
-            SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 1),
-            SI_CMD(ScriptOpcode_CALL, UseSettingsFrom, 0, 40, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, SetPanTarget, 0, 40, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(1.5)),
-            SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(253), 3),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802413F0)),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802413F0)),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802413F0)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_CALL, GetModelCenter, 27),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 29, 0, SI_VAR(0), 50, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 29, 0, SI_VAR(0), 30, SI_VAR(2), 120, 20, 0, 30, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 29, 0, SI_VAR(0), 10, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-            SI_CMD(ScriptOpcode_SPAWN_THREAD),
-                SI_CMD(ScriptOpcode_SET, SI_VAR(3), 6),
-                SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80242DC8)),
-                SI_CMD(ScriptOpcode_LOOP, 8),
-                    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAt, 400, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_CALL, PlayEffect, 39, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 6, 0, 0, 0, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 2),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 5),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAt, 400, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-                    SI_CMD(ScriptOpcode_CALL, PlayEffect, 39, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 2, 15, 0, 0, 0, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(3), 1),
-                SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(2.0)),
-                SI_CMD(ScriptOpcode_LOOP, 2),
-                    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80242DC8)),
-                    SI_CMD(ScriptOpcode_LOOP, 8),
-                        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-                        SI_CMD(ScriptOpcode_CALL, PlaySoundAt, 400, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-                        SI_CMD(ScriptOpcode_CALL, PlayEffect, 39, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 25, 0, 0, 0, 0, 0, 0, 0),
-                        SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(3)),
-                        SI_CMD(ScriptOpcode_ADD, SI_VAR(3), SI_VAR(4)),
-                        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(4), SI_FIXED(0.5)),
-                    SI_CMD(ScriptOpcode_END_LOOP),
-                SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAt, 416, 0, 70, 40, 10),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 36, 0, 70, 40, 10, SI_FIXED(3.0), 30, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 0, 0, 20, SI_FIXED(1.0)),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAt, 416, 0, 0, 30, 30),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 36, 0, 0, 30, 30, SI_FIXED(4.0), 40, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 0, 0, 20, SI_FIXED(2.0)),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80242910)),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAtCollider, 20, 1169, 0),
-            SI_CMD(ScriptOpcode_CALL, FadeOutMusic, 0, 1000),
-            SI_CMD(ScriptOpcode_CALL, DisablePlayerPhysics, 1),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80242B18)),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(0), 53),
-            SI_CMD(ScriptOpcode_CALL, GotoMap, "flo_15", 1),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 70),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_LABEL, 0),
-    SI_CMD(ScriptOpcode_SET, SI_MAP_FLAG(3), 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80242E28) = SCRIPT({
+    SI_VAR(10) = SI_VAR(0);
+    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (SI_VAR(0) < -210) {
+        return;
+    }
+    PlaySound(0x1E5);
+    await N(802413F0);
+    SI_VAR(0) = SI_VAR(10);
+    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+        SI_MAP_FLAG(1) = 1;
+        return;
+    }
+    if (SI_MAP_FLAG(3) == 1) {
+        return;
+    }
+    SI_MAP_FLAG(3) = 1;
+    if (SI_VAR(0) > 2) {
+        goto 0;
+    }
+    if (SI_VAR(0) == 2) {
+        goto 11;
+    }
+    if (SI_VAR(0) == 0) {
+    11:
+        if (SI_SAVE_VAR(252) == 0) {
+            SI_SAVE_VAR(252) = 1;
+            spawn N(80241ED4);
+            goto 0;
+        }
+    }
+    if (SI_VAR(0) == 1) {
+        if (SI_SAVE_VAR(253) == 0) {
+            SI_SAVE_VAR(253) = 1;
+            spawn N(80242174);
+            goto 0;
+        }
+    }
+    if (SI_VAR(0) == 0) {
+        if (SI_SAVE_VAR(252) == 1) {
+            SI_SAVE_VAR(252) = 2;
+            spawn N(80242474);
+            goto 0;
+        }
+    }
+    if (SI_SAVE_VAR(252) == 2) {
+        if (SI_SAVE_VAR(253) == 1) {
+            SI_SAVE_VAR(253) = 2;
+            spawn N(80242620);
+            goto 0;
+        }
+    }
+    if (SI_SAVE_VAR(252) == 2) {
+        if (SI_SAVE_VAR(253) == 2) {
+            DisablePlayerInput(TRUE);
+            UseSettingsFrom(0, 40, 0, 0);
+            SetPanTarget(0, 40, 0, 0);
+            SetCamSpeed(0, 1.5);
+            PanToTarget(0, 0, 1);
+            SI_SAVE_VAR(253) = 3;
+            await N(802413F0);
+            await N(802413F0);
+            await N(802413F0);
+            sleep 30;
+            GetModelCenter(27);
+            PlayEffect(0x1D, 0, SI_VAR(0), 50, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
+            PlayEffect(0x1D, 0, SI_VAR(0), 30, SI_VAR(2), 120, 20, 0, 30, 0, 0, 0, 0, 0);
+            PlayEffect(0x1D, 0, SI_VAR(0), 10, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
+            sleep 15;
+            spawn {
+                SI_VAR(3) = 6;
+                buf_use N(intTable_80242DC8);
+                loop 8 {
+                    buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
+                    PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                    PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 6, 0, 0, 0, 0, 0, 0, 0);
+                    sleep 2;
+                    SI_VAR(1) += 5;
+                    PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                    PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 2, 15, 0, 0, 0, 0, 0, 0, 0);
+                    sleep SI_VAR(3);
+                    SI_VAR(3) += 1;
+                }
+                SI_VAR(4) = 2.0;
+                loop 2 {
+                    buf_use N(intTable_80242DC8);
+                    loop 8 {
+                        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
+                        PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                        PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 25, 0, 0, 0, 0, 0, 0, 0);
+                        sleep SI_VAR(3);
+                        SI_VAR(3) += SI_VAR(4);
+                        SI_VAR(4) += 0.5;
+                    }
+                }
+            }
+            PlaySoundAt(0x1A0, 0, 70, 40, 10);
+            PlayEffect(0x24, 0, 70, 40, 10, 3.0, 30, 0, 0, 0, 0, 0, 0, 0);
+            ShakeCam(0, 0, 20, 1.0);
+            PlaySoundAt(0x1A0, 0, 0, 30, 30);
+            PlayEffect(0x24, 0, 0, 30, 30, 4.0, 40, 0, 0, 0, 0, 0, 0, 0);
+            ShakeCam(0, 0, 20, 2.0);
+            await N(80242910);
+            PlaySoundAtCollider(20, 1169, 0);
+            FadeOutMusic(0, 1000);
+            DisablePlayerPhysics(TRUE);
+            sleep 30;
+            await N(80242B18);
+            STORY_PROGRESS = STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE;
+            GotoMap("flo_15", 1);
+            sleep 70;
+            return;
+        }
+    }
+0:
+    SI_MAP_FLAG(3) = 0;
+});
 
 Vec4f N(triggerCoord_8024367C) = { 5.0f, 0.0f, -10.0, 0.0f };
 
