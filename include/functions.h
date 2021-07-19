@@ -102,6 +102,8 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
+s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
+
 // todo remove once we have libultra's def
 extern void guOrtho(Mtx *m, float l, float r, float b, float t,
 		    float n, float f, float scale);
@@ -281,6 +283,7 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void sfx_play_sound(s32 soundID);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void func_801497FC(s32 arg0);
@@ -421,6 +424,14 @@ void fx_land(s32, f32, f32, f32, f32);
 EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
 void playFX_26(s32, f32, f32, f32);
+EffectInstance* playFX_64(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
+void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+EffectInstance* playFX_5A(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
+EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
+EffectInstance* playFX_23(u32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;
@@ -469,8 +480,7 @@ void guRotateRPYF(float mf[4][4], f32 x, f32 y, f32 z);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 

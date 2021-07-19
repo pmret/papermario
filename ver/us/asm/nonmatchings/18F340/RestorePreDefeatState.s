@@ -6,8 +6,8 @@ glabel RestorePreDefeatState
 /* 18FB60 80261280 3C04F7FF */  lui       $a0, 0xf7ff
 /* 18FB64 80261284 3C02800E */  lui       $v0, %hi(gBattleStatus+0x474)
 /* 18FB68 80261288 8C42C4E4 */  lw        $v0, %lo(gBattleStatus+0x474)($v0)
-/* 18FB6C 8026128C 3C03800E */  lui       $v1, %hi(gBattleStatus+0x468)
-/* 18FB70 80261290 8C63C4D8 */  lw        $v1, %lo(gBattleStatus+0x468)($v1)
+/* 18FB6C 8026128C 3C03800E */  lui       $v1, %hi(D_800DC4D8)
+/* 18FB70 80261290 8C63C4D8 */  lw        $v1, %lo(D_800DC4D8)($v1)
 /* 18FB74 80261294 3484FFFF */  ori       $a0, $a0, 0xffff
 /* 18FB78 80261298 AFB00010 */  sw        $s0, 0x10($sp)
 /* 18FB7C 8026129C 3C10800E */  lui       $s0, %hi(gBattleStatus)
@@ -20,8 +20,8 @@ glabel RestorePreDefeatState
 /* 18FB98 802612B8 8E020000 */  lw        $v0, ($s0)
 /* 18FB9C 802612BC 3C118011 */  lui       $s1, %hi(gPlayerData)
 /* 18FBA0 802612C0 2631F290 */  addiu     $s1, $s1, %lo(gPlayerData)
-/* 18FBA4 802612C4 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 18FBA8 802612C8 AC23C4DC */  sw        $v1, %lo(gBattleStatus+0x46C)($at)
+/* 18FBA4 802612C4 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 18FBA8 802612C8 AC23C4DC */  sw        $v1, %lo(gBattleState2)($at)
 /* 18FBAC 802612CC 8E030004 */  lw        $v1, 4($s0)
 /* 18FBB0 802612D0 34420008 */  ori       $v0, $v0, 8
 /* 18FBB4 802612D4 00642024 */  and       $a0, $v1, $a0

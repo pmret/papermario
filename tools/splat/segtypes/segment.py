@@ -141,10 +141,10 @@ class Segment:
                 sys.exit(1)
 
     @staticmethod
-    def from_yaml(cls: Type["Segment"], yaml: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr):
+    def from_yaml(cls: Type["Segment"], yaml: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr, vram=None):
         type = Segment.parse_segment_type(yaml)
         name = Segment.parse_segment_name(cls, rom_start, yaml)
-        vram_start = parse_segment_vram(yaml)
+        vram_start = vram if vram else parse_segment_vram(yaml)
         extract = bool(yaml.get("extract", True)) if isinstance(yaml, dict) else True
         given_subalign = parse_segment_subalign(yaml)
         given_is_overlay:Optional[bool] = yaml.get("overlay", False) if isinstance(yaml, dict) else False

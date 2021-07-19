@@ -149,7 +149,6 @@ gCurrentDynamicEntityListPtr = 0x80154420;
 gMessageBuffers = 0x80154430;
 gMessagePrinters = 0x80154C30;
 gMessageStringVars = 0x80155C38;
-gMessageStringVars = 0x80155C38;
 D_80155C98 = 0x80155C98;
 gMessageWindowProjMatrix = 0x80155CA0;
 D_80155D20 = 0x80155D20;

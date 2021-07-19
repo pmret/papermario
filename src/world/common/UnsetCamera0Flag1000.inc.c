@@ -1,9 +1,10 @@
 #include "common.h"
 #include "map.h"
+#include "camera.h"
 
 ApiStatus N(UnsetCamera0Flag1000)(ScriptInstance* script, s32 isInitialCall) {
-    Camera* camera = CAM(0);
+    Camera* camera = &gCameras[0];
 
-    camera->flags &= ~0x1000;
+    camera->flags &= ~CAM_FLAG_1000;
     return ApiStatus_DONE2;
 }

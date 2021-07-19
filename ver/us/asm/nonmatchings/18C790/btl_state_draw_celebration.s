@@ -9,8 +9,8 @@ glabel jtbl_8029D550
 .section .text
 
 glabel btl_state_draw_celebration
-/* 18EA9C 802601BC 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 18EAA0 802601C0 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 18EA9C 802601BC 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 18EAA0 802601C0 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 18EAA4 802601C4 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 18EAA8 802601C8 AFBF0028 */  sw        $ra, 0x28($sp)
 /* 18EAAC 802601CC AFB50024 */  sw        $s5, 0x24($sp)
@@ -453,8 +453,8 @@ glabel L80260810_18F0F0
 /* 18F110 80260830 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 18F114 80260834 0000202D */   daddu    $a0, $zero, $zero
 glabel L80260838_18F118
-/* 18F118 80260838 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 18F11C 8026083C 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 18F118 80260838 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 18F11C 8026083C 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 18F120 80260840 28620007 */  slti      $v0, $v1, 7
 /* 18F124 80260844 14400037 */  bnez      $v0, .L80260924
 /* 18F128 80260848 2862000A */   slti     $v0, $v1, 0xa

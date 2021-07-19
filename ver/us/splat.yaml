@@ -352,11 +352,69 @@ segments:
     - [0x90FE0, .data, 759b0_len_61b0]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
-    - [0x917F8, data]
+    - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
+    - [0x91D70, palette, ui/a_button_unpressed]
+    - [0x91D90, ci4,     ui/a_button_pressed, 48, 40]
+    - [0x92150, palette, ui/a_button_pressed]
+    - [0x92170, ci4,     ui/analog_stick, 32, 32]
+    - [0x92370, palette, ui/analog_stick]
+    - [0x92390, ci4,     ui/analog_stick_left, 40, 32]
+    - [0x92610, palette, ui/analog_stick_left]
+    - [0x92630, ci4,     ui/analog_stick2, 32, 32]
+    - [0x92830, palette, ui/analog_stick2]
+    - [0x92850, ci4,     ui/analog_stick_right, 40, 32]
+    - [0x92AD0, palette, ui/analog_stick_right]
+    - [0x92AF0, ci4,     ui/analog_stick3, 32, 32]
+    - [0x92CF0, palette, ui/analog_stick3]
+    - [0x92D10, ci4,     ui/analog_stick_down, 32, 32]
+    - [0x92F10, palette, ui/analog_stick_down]
+    - [0x92F30, ci4,     ui/analog_stick_up, 32, 32]
+    - [0x93130, palette, ui/analog_stick_up]
+    - [0x93150, ci4,     ui/unk_bar, 72, 16]
+    - [0x93390, palette, ui/unk_bar]
+    - [0x933B0, ci4,     ui/ok, 24, 16]
+    - [0x93470, palette, ui/ok]
+    - [0x93490, ci4,     ui/red_button, 48, 40]
+    - [0x93850, palette, ui/red_button]
+    - [0x93870, ci4,     ui/red_button2, 48, 40]
+    - [0x93C30, palette, ui/red_button2]
+    - [0x93C50, ci4,     ui/start, 24, 8]
+    - [0x93CB0, palette, ui/start]
     - [0x93CD0, ci4,     ui/hammer, 32, 32]
     - [0x93ED0, palette, ui/hammer]
     - [0x93EF0, palette, ui/hammer.disabled]
-    - [0x93FF0, data]
+    - [0x93F10, ci4,     ui/super_hammer, 32, 32]
+    - [0x94110, palette, ui/super_hammer]
+    - [0x94130, palette, ui/super_hammer.disabled]
+    - [0x94150, ci4,     ui/ultra_hammer, 32, 32]
+    - [0x94350, palette, ui/ultra_hammer]
+    - [0x94370, palette, ui/ultra_hammer.disabled]
+    - [0x94390, ci4,     ui/boots, 32, 32]
+    - [0x94590, palette, ui/boots]
+    - [0x945B0, palette, ui/boots.disabled]
+    - [0x945D0, ci4,     ui/super_boots, 32, 32]
+    - [0x947D0, palette, ui/super_boots]
+    - [0x947F0, palette, ui/super_boots.disabled]
+    - [0x94810, ci4,     ui/ultra_boots, 32, 32]
+    - [0x94A10, palette, ui/ultra_boots]
+    - [0x94A30, palette, ui/ultra_boots.disabled]
+    - [0x94A50, ci4,     ui/item, 32, 32]
+    - [0x94C50, palette, ui/item]
+    - [0x94C70, palette, ui/item.disabled]
+    - [0x94C90, ci4,     ui/star_spirit, 32, 32]
+    - [0x94E90, palette, ui/star_spirit]
+    - [0x94EB0, palette, ui/star_spirit.disabled]
+    - [0x94ED0, ci4,     ui/arrow_left, 16, 16]
+    - [0x94F50, palette, ui/arrow_left]
+    - [0x94F70, ci4,     ui/arrow_right, 16, 16]
+    - [0x94FF0, palette, ui/arrow_right]
+    - [0x95010, ci4,     ui/point_right, 16, 16]
+    - [0x95090, palette, ui/point_right]
+    - [0x950B0, ci4,     ui/pip, 8, 8]
+    - [0x950D0, palette, ui/pip]
+    - [0x950F0, ci4,     ui/pip2, 8, 8]
+    - [0x95110, palette, ui/pip2]
+    - [0x95130, data]
     - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
@@ -431,7 +489,7 @@ segments:
     subsegments:
     - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    # - [0x102480, .data, sprite]
+    - [0x102480]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
@@ -3441,7 +3499,7 @@ segments:
     overlay: True
     subsegments:
     - [0x70BD10, c, lakilester]
-    - [0x70DED0, data]
+    - [0x70DEE0, data, 70DED0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -3853,7 +3911,7 @@ segments:
     overlay: True
     subsegments:
     - [0x743DF0, c]
-    - [0x743FE0, data]
+    - [0x743FF0, data]
   - dir: battle/move/sleep_stomp
     type: code
     start: 0x746E10
@@ -4029,7 +4087,7 @@ segments:
     overlay: True
     subsegments:
     - [0x779C90, c]
-    - [0x779E20, data]
+    - [0x779E30, data]
   - dir: battle/move/shrink_smash
     type: code
     start: 0x77CB80

@@ -129,7 +129,6 @@ INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, ScriptInstance* script, s32 
 s32 fx_sleep_bubble(s32, f32, f32, f32, f32, f32, EffectInstanceData**); // extern
 s32 playFX_0A(f32, f32, s32, s32, f32, f32); // extern
 s32 playFX_0B(s32, f32, f32, f32); // extern
-s32 playFX_0C(f32, f32, s32, s32, f32, f32, f32); // extern
 s32 playFX_0D(s32, f32, f32, f32, s32); // extern
 s32 playFX_0E(f32, f32, s32, s32, f32, s32); // extern
 s32 playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32); // extern
@@ -145,7 +144,6 @@ s32 playFX_1E(s32, f32, f32, f32, f32, f32, s32, s32*); // extern
 s32 playFX_1F(s32, f32, f32, f32, f32, f32, f32, f32); // extern
 s32 playFX_20(s32, f32, f32, f32, f32, EffectInstanceData**); // extern
 s32 playFX_21(s32, f32, f32, f32, f32, f32, s32); // extern
-s32 playFX_23(s32, f32, f32, f32, f32); // extern
 s32 playFX_24(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_25(s32, f32, f32, f32); // extern
 s32 playFX_27(s32, f32, f32, f32, f32, s32); // extern
@@ -176,9 +174,9 @@ s32 playFX_4F(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_53(s32, f32, f32, f32); // extern
 s32 playFX_55(s32, f32, f32, f32); // extern
 s32 playFX_57(s32, f32, f32, f32, f32, s32); // extern
-s32 playFX_58(s32, f32, f32, f32, f32, s32); // extern
-s32 playFX_59(s32, f32, f32, f32, f32, f32, f32, f32, s32); // extern
-s32 playFX_5A(s32, f32, f32, f32, f32, s32); // extern
+//s32 playFX_58(s32, f32, f32, f32, f32, s32); // extern
+//s32 playFX_59(s32, f32, f32, f32, f32, f32, f32, f32, s32); // extern
+//s32 playFX_5A(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_5B(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_5C(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_5D(s32, f32, f32, f32, f32, s32); // extern
@@ -188,7 +186,7 @@ s32 playFX_60(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_61(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_62(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_63(s32, f32, f32, f32, f32, f32, f32, f32, s32, s32); // extern
-s32 playFX_64(s32, f32, f32, f32, f32, f32, f32, f32, s32); // extern
+//s32 playFX_64(s32, f32, f32, f32, f32, f32, f32, f32, s32); // extern
 s32 playFX_65(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_66(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_67(s32, f32, f32, f32, f32, s32); // extern
