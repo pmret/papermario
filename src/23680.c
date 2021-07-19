@@ -71,7 +71,6 @@ void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
     }
 
     if (enemy->aiBytecode != NULL) {
-
         enemy->unk_C8 = arg2;
         newScript = start_script(enemy->aiBytecode, 10, 0x20);
         enemy->aiScript = newScript;
@@ -79,8 +78,8 @@ void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
         newScript->owner2.npcID = enemy->npcID;
         newScript->owner1.enemy = enemy;
     }
-    if (enemy->unk_B8 != NULL) {
 
+    if (enemy->unk_B8 != NULL) {
         enemy->unk_C4 = arg1;
         newScript = start_script(enemy->unk_B8, 10, 0x20);
         enemy->unk_BC = newScript;
