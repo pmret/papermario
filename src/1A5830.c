@@ -33,7 +33,70 @@ void dispatch_event_general(Actor* actor, Event event) {
     }
 }
 
-INCLUDE_ASM(s32, "1A5830", play_hit_sound);
+void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
+    s32 actorType = actor->actorID & 0x700;
+
+    switch (hitSound) {
+        case 0:
+            sfx_play_sound_at_position(SOUND_268, 0, x, y, z);
+            break;
+        case 1:
+            sfx_play_sound_at_position(SOUND_269, 0, x, y, z);
+            break;
+        case 2:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_225, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_233, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_233, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 3:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_226, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_234, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_234, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 4:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_227, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_235, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_235, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 5:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_37A, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_37B, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_37B, 0, x, y, z);
+                    break;
+            }
+            break;
+    }
+}
 
 void dispatch_event_actor(Actor* actor, Event event) {
     ScriptInstance* onHitScript = actor->onHitScript;
@@ -208,7 +271,46 @@ INCLUDE_ASM(s32, "1A5830", JumpToGoalSimple2);
 
 INCLUDE_ASM(s32, "1A5830", JumpWithBounce);
 
-INCLUDE_ASM(s32, "1A5830", LandJump);
+ApiStatus LandJump(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        s32 actorID = get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32)actor;
+        actor->walk.currentPos.x = actor->currentPos.x;
+        actor->walk.currentPos.y = actor->currentPos.y;
+        actor->walk.currentPos.z = actor->currentPos.z;
+        script->functionTemp[0] = 1;
+    }
+
+    actor = (Actor*)script->functionTemp[1];
+    actor->walk.currentPos.y += actor->walk.velocity;
+    actor->walk.velocity -= actor->walk.acceleration;
+
+    add_xz_vec3f(&actor->walk.currentPos, actor->walk.speed, actor->walk.angle);
+    actor->currentPos.x = actor->walk.currentPos.x;
+    actor->currentPos.y = actor->walk.currentPos.y;
+    actor->currentPos.z = actor->walk.currentPos.z;
+
+    if (actor->currentPos.y < 0.0f) {
+        actor->currentPos.y = 0.0f;
+        play_movement_dust_effects(2, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, actor->yaw);
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "1A5830", FallToGoal);
 
