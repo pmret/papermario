@@ -2,20 +2,9 @@
 
 #define NAMESPACE battle_star_chill_out
 
-extern s32 D_8029C890;
 extern s32 D_802A2CC0;
 
-#include "common/UnkStarFuncs.inc.c"
-
-#include "common/FadeBackgroundToBlack.inc.c"
-
-#include "common/UnkBackgroundFunc2.inc.c"
-
-#include "common/UnkBackgroundFunc.inc.c"
-
-INCLUDE_ASM(s32, "battle/star/chill_out/7900D0", func_802A1494_790564);
-
-#include "common/SetNpcCollision32.inc.c"
+#include "common/StarPower.inc.c"
 
 ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
     D_802A2CC0 = 0;
