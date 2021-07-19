@@ -191,7 +191,7 @@ s32 playFX_65(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_66(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_67(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_68(s32, f32, f32, f32, f32, s32); // extern
-s32 playFX_6C(s32, f32, f32, f32, f32, s32); // extern
+//s32 playFX_6C(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_6D(s32, f32, f32, f32, f32, s32); // extern
 s32 playFX_6E(s32, f32, f32, f32, f32, f32, f32, s32); // extern
 s32 playFX_70(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32); // extern

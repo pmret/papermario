@@ -45,13 +45,17 @@ ApiStatus func_802A15B4_795894(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802A1628_795908(ScriptInstance* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
     s32 flags = targetActor->flags;
+    s32 var1 = flags & 0x4000;
+    s32 var2 = flags & 0x400000;
+    s32 var3 = flags & 0x2000;
 
     script->varTable[0] = 0;
 
-    if ((flags & 0x4000) == NULL && (flags & 0x400000) == NULL && (flags & 0x2000) == NULL && targetActor->staticActorData->upAndAwayChance != 0 && targetActor->staticActorData->upAndAwayChance >= rand_int(100)) {
-        script->varTable[0] = 1;
+    if (var1 == NULL && var2 == NULL && var3 == NULL && targetActor->staticActorData->upAndAwayChance != 0 && targetActor->staticActorData->upAndAwayChance >= rand_int(100)) {
+        return ApiStatus_DONE2;
     }
 
+    script->varTable[0] = 1;
     return ApiStatus_DONE2;
 }
 #else

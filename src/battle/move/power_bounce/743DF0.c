@@ -10,9 +10,8 @@ extern s32 D_802A4020;
 
 #ifdef NON_MATCHING
 ApiStatus func_802A10E4_743ED4(ScriptInstance* script, s32 isInitialCall) {
-    Actor* actor = get_actor(script->owner1.actorID);
-    Actor* targetActor = get_actor(actor->targetActorID);
-    u8 powerBounceChance;
+    Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
+    s32 powerBounceChance;
 
     script->varTable[0] = 99;
     powerBounceChance = targetActor->staticActorData->powerBounceChance;
@@ -41,4 +40,16 @@ ApiStatus func_802A11A4_743F94(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+#ifdef NON_MATCHING
+ApiStatus func_802A11C0_743FB0(ScriptInstance* script, s32 isInitialCall) {
+    PlayerData* playerData = &gPlayerData;
+
+    if (playerData->powerBounces < D_802A4020) {
+        playerData->powerBounces = D_802A4020;
+    }
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "battle/move/power_bounce/743DF0", func_802A11C0_743FB0);
+#endif
