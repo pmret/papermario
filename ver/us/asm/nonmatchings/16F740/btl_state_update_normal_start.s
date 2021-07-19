@@ -11,10 +11,10 @@ glabel jtbl_8029CA88
 glabel btl_state_update_normal_start
 /* 16FAF8 80241218 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 16FAFC 8024121C AFB60038 */  sw        $s6, 0x38($sp)
-/* 16FB00 80241220 3C16800E */  lui       $s6, %hi(gBattleStatus+0x48C)
-/* 16FB04 80241224 8ED6C4FC */  lw        $s6, %lo(gBattleStatus+0x48C)($s6)
-/* 16FB08 80241228 3C02800E */  lui       $v0, %hi(gBattleStatus+0x484)
-/* 16FB0C 8024122C 8C42C4F4 */  lw        $v0, %lo(gBattleStatus+0x484)($v0)
+/* 16FB00 80241220 3C16800E */  lui       $s6, %hi(D_800DC4FC)
+/* 16FB04 80241224 8ED6C4FC */  lw        $s6, %lo(D_800DC4FC)($s6)
+/* 16FB08 80241228 3C02800E */  lui       $v0, %hi(D_800DC4F4)
+/* 16FB0C 8024122C 8C42C4F4 */  lw        $v0, %lo(D_800DC4F4)($v0)
 /* 16FB10 80241230 AFB40030 */  sw        $s4, 0x30($sp)
 /* 16FB14 80241234 3C14800E */  lui       $s4, %hi(gBattleStatus)
 /* 16FB18 80241238 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)
@@ -40,8 +40,8 @@ glabel btl_state_update_normal_start
 .L80241284:
 /* 16FB64 80241284 8C950004 */  lw        $s5, 4($a0)
 .L80241288:
-/* 16FB68 80241288 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 16FB6C 8024128C 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 16FB68 80241288 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 16FB6C 8024128C 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 16FB70 80241290 2C620009 */  sltiu     $v0, $v1, 9
 /* 16FB74 80241294 104001FC */  beqz      $v0, L80241A88_170368
 /* 16FB78 80241298 AE950438 */   sw       $s5, 0x438($s4)
@@ -239,8 +239,8 @@ glabel L802412B4_16FB94
 /* 16FE54 80241574 0040182D */  daddu     $v1, $v0, $zero
 /* 16FE58 80241578 AE8300C4 */  sw        $v1, 0xc4($s4)
 /* 16FE5C 8024157C 8C620144 */  lw        $v0, 0x144($v1)
-/* 16FE60 80241580 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 16FE64 80241584 AC30C4DC */  sw        $s0, %lo(gBattleStatus+0x46C)($at)
+/* 16FE60 80241580 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 16FE64 80241584 AC30C4DC */  sw        $s0, %lo(gBattleState2)($at)
 /* 16FE68 80241588 080906A2 */  j         L80241A88_170368
 /* 16FE6C 8024158C AE8200C8 */   sw       $v0, 0xc8($s4)
 glabel L80241590_16FE70
@@ -400,8 +400,8 @@ glabel L80241590_16FE70
 /* 170098 802417B8 0C0992DD */  jal       load_partner_actor
 /* 17009C 802417BC AC600148 */   sw       $zero, 0x148($v1)
 /* 1700A0 802417C0 24020004 */  addiu     $v0, $zero, 4
-/* 1700A4 802417C4 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1700A8 802417C8 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1700A4 802417C4 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1700A8 802417C8 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 1700AC 802417CC 080906A2 */  j         L80241A88_170368
 /* 1700B0 802417D0 00000000 */   nop
 .L802417D4:
@@ -540,8 +540,8 @@ glabel L802417DC_1700BC
 /* 170290 802419B0 24020007 */  addiu     $v0, $zero, 7
 /* 170294 802419B4 3C01802A */  lui       $at, %hi(D_8029F248)
 /* 170298 802419B8 AC20F248 */  sw        $zero, %lo(D_8029F248)($at)
-/* 17029C 802419BC 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1702A0 802419C0 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 17029C 802419BC 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1702A0 802419C0 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 1702A4 802419C4 080906A2 */  j         L80241A88_170368
 /* 1702A8 802419C8 00000000 */   nop
 glabel L802419CC_1702AC
@@ -550,8 +550,8 @@ glabel L802419CC_1702AC
 /* 1702B4 802419D4 8E020000 */  lw        $v0, ($s0)
 /* 1702B8 802419D8 14400005 */  bnez      $v0, .L802419F0
 /* 1702BC 802419DC 24020008 */   addiu    $v0, $zero, 8
-/* 1702C0 802419E0 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1702C4 802419E4 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1702C0 802419E0 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1702C4 802419E4 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 1702C8 802419E8 080906A2 */  j         L80241A88_170368
 /* 1702CC 802419EC 00000000 */   nop
 .L802419F0:

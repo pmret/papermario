@@ -13,8 +13,8 @@ glabel btl_state_update_first_strike
 /* 176404 80247B24 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
 /* 176408 80247B28 26730F10 */  addiu     $s3, $s3, %lo(gCurrentEncounter)
 /* 17640C 80247B2C AFB60028 */  sw        $s6, 0x28($sp)
-/* 176410 80247B30 3C16800E */  lui       $s6, %hi(gBattleStatus+0x46C)
-/* 176414 80247B34 26D6C4DC */  addiu     $s6, $s6, %lo(gBattleStatus+0x46C)
+/* 176410 80247B30 3C16800E */  lui       $s6, %hi(gBattleState2)
+/* 176414 80247B34 26D6C4DC */  addiu     $s6, $s6, %lo(gBattleState2)
 /* 176418 80247B38 AFB20018 */  sw        $s2, 0x18($sp)
 /* 17641C 80247B3C 24120001 */  addiu     $s2, $zero, 1
 /* 176420 80247B40 AFBF002C */  sw        $ra, 0x2c($sp)
@@ -150,8 +150,8 @@ glabel btl_state_update_first_strike
 /* 176600 80247D20 AC830148 */  sw        $v1, 0x148($a0)
 .L80247D24:
 /* 176604 80247D24 24020001 */  addiu     $v0, $zero, 1
-/* 176608 80247D28 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 17660C 80247D2C AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 176608 80247D28 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 17660C 80247D2C AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 176610 80247D30 08092032 */  j         .L802480C8
 /* 176614 80247D34 00000000 */   nop
 .L80247D38:
@@ -364,8 +364,8 @@ glabel btl_state_update_first_strike
 .L80248034:
 /* 176914 80248034 24020003 */  addiu     $v0, $zero, 3
 .L80248038:
-/* 176918 80248038 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 17691C 8024803C AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 176918 80248038 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 17691C 8024803C AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 /* 176920 80248040 08092032 */  j         .L802480C8
 /* 176924 80248044 00000000 */   nop
 .L80248048:

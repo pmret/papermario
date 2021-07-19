@@ -11,12 +11,9 @@ INCLUDE_ASM(s32, "16F740", btl_merlee_on_first_strike);
 
 void btl_set_state(s32 battleState) {
     s32 flags = gBattleStatus.flags2;
-    if (0) { do { } while (1); }
     gBattleState = battleState;
-    gBattleStatus.unk_470 = 1;
-    if (0) { do { } while (1); }
-
-    gBattleStatus.battleState = 0;
+    D_800DC4E0 = 1;
+    gBattleState2 = 0;
 
     flags &= 0x40;
     if (flags) {
@@ -80,7 +77,6 @@ INCLUDE_ASM(s32, "16F740", func_80242FE0);
 void func_80243910(void) {
 }
 
-#ifdef NON_MATCHING
 void btl_state_update_prepare_menu(void) {
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -97,21 +93,15 @@ void btl_state_update_prepare_menu(void) {
 
     dma_copy(_415D90_ROM_START, _415D90_ROM_END, _415D90_VRAM);
 
-    // // TODO Needed to match
-    // if (0) { s32 new_var; do { } while (new_var); }
-
     if (battleStatus->flags1 & 0x80000) {
         btl_set_state(14);
-    } else if (battleStatus->battleState == 70) {
+    } else if (gBattleState2 == 70) {
         btl_set_state(13);
-        battleStatus->battleState = 70;
+        gBattleState2 = 70;
     } else {
         btl_set_state(13);
     }
 }
-#else
-INCLUDE_ASM(s32, "16F740", btl_state_update_prepare_menu);
-#endif
 
 void btl_state_draw_prepare_menu(void) {
 }
@@ -188,17 +178,10 @@ INCLUDE_ASM(s32, "16F740", btl_state_update_partner_move);
 void btl_state_draw_partner_move(void) {
 }
 
-// Something weird with using battleStatus twice but in specific ways
-#ifdef NON_MATCHING
-s32 btl_check_enemies_defeated(void);
 void btl_state_update_end_partner_turn(void) {
-    BattleStatus* battleStatus;
-    s32 battleState = gBattleStatus.battleState;
+    BattleStatus* battleStatus = &gBattleStatus;
 
-    if (0) { do {} while (1); }
-    battleStatus = &gBattleStatus;
-
-    if (battleState == 0) {
+    if (gBattleState2 == 0) {
         battleStatus->flags2 |= 0x4;
         if (!btl_check_enemies_defeated()) {
             battleStatus->flags1 &= ~0x80000;
@@ -213,10 +196,6 @@ void btl_state_update_end_partner_turn(void) {
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "16F740", btl_state_update_end_partner_turn);
-#endif
-
 
 void btl_state_draw_end_partner_turn(void) {
 }
