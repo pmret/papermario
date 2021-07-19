@@ -45,7 +45,7 @@ glabel load_battle_section
 /* 4E074 80072C74 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 4E078 80072C78 8FB10014 */  lw        $s1, 0x14($sp)
 /* 4E07C 80072C7C 8FB00010 */  lw        $s0, 0x10($sp)
-/* 4E080 80072C80 3C01800E */  lui       $at, %hi(gBattleStatus+0x460)
-/* 4E084 80072C84 AC20C4D0 */  sw        $zero, %lo(gBattleStatus+0x460)($at)
+/* 4E080 80072C80 3C01800E */  lui       $at, %hi(D_800DC4D0)
+/* 4E084 80072C84 AC20C4D0 */  sw        $zero, %lo(D_800DC4D0)($at)
 /* 4E088 80072C88 03E00008 */  jr        $ra
 /* 4E08C 80072C8C 27BD0020 */   addiu    $sp, $sp, 0x20

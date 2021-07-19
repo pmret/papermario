@@ -285,7 +285,7 @@ void ALT_reset_battle_status(void) {
 }
 
 void func_80072BCC(s32 arg0) {
-    gBattleStatus.unk_488 = arg0;
+    D_800DC4F8 = arg0;
 }
 
 //weird stuff with loading gBattleStatus
@@ -326,11 +326,11 @@ INCLUDE_ASM(s32, "battle/battle", load_battle);
 #endif
 
 void set_battle_stage(s32 arg0) {
-    gBattleStatus.unk_47C = arg0;
+    D_800DC4EC = arg0;
 }
 
 void set_battle_formation(s32 arg0) {
-    gBattleStatus.unk_484 = arg0;
+    D_800DC4F4 = arg0;
 }
 
 void func_80072CEC(f32 arg0, f32 arg1, f32 arg2) {

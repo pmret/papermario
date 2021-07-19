@@ -9,8 +9,8 @@ glabel D_802AC880
 .section .text
 
 glabel btl_state_draw_partner_menu
-/* 41E878 802A9AE8 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 41E87C 802A9AEC 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 41E878 802A9AE8 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 41E87C 802A9AEC 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 41E880 802A9AF0 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 41E884 802A9AF4 2443FFFE */  addiu     $v1, $v0, -2
 /* 41E888 802A9AF8 2C6200CC */  sltiu     $v0, $v1, 0xcc

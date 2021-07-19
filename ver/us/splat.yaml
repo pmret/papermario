@@ -489,7 +489,7 @@ segments:
     subsegments:
     - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    # - [0x102480, .data, sprite]
+    - [0x102480]
   - type: code
     start: 0x102610
     vram: 0x802E0D90

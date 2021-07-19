@@ -9,8 +9,8 @@ glabel D_802ACBE0
 .section .text
 
 glabel btl_state_draw_peach_menu
-/* 41EDEC 802AA05C 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 41EDF0 802AA060 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 41EDEC 802AA05C 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 41EDF0 802AA060 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 41EDF4 802AA064 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 41EDF8 802AA068 2443FFFF */  addiu     $v1, $v0, -1
 /* 41EDFC 802AA06C 2C620009 */  sltiu     $v0, $v1, 9

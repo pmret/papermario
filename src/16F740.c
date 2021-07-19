@@ -13,10 +13,10 @@ void btl_set_state(s32 battleState) {
     s32 flags = gBattleStatus.flags2;
     if (0) { do { } while (1); }
     gBattleState = battleState;
-    gBattleStatus.unk_470 = 1;
+    D_800DC4E0 = 1;
     if (0) { do { } while (1); }
 
-    gBattleStatus.battleState = 0;
+    gBattleState2 = 0;
 
     flags &= 0x40;
     if (flags) {

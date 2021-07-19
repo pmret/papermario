@@ -522,7 +522,7 @@ s32 func_802AA0A4(void) {
 INCLUDE_ASM(s32, "415D90", btl_state_update_twink_menu); // look into m2c bug
 
 void btl_state_draw_twink_menu(void) {
-    switch (gBattleStatus.battleState) {
+    switch (gBattleState2) {
         case 1:
             btl_draw_menu_wheel();
             break;
