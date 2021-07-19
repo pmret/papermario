@@ -706,7 +706,7 @@ typedef struct BattleStatus {
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
     /* 0x170 */ char unk_170;
-    /* 0x171 */ u8 numEnemyActors;
+    /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
     /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
@@ -1412,7 +1412,7 @@ typedef struct ActorPart {
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
-    /* 0x72 */ u8 size[2];
+    /* 0x72 */ Vec2bu size;
     /* 0x74 */ u8 verticalStretch;
     /* 0x75 */ s8 unk_75;
     /* 0x76 */ s8 unk_76;
@@ -1760,7 +1760,7 @@ typedef struct Actor {
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ char unk_204[3];
-    /* 0x207 */ u8 extraCoinBonus;
+    /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;

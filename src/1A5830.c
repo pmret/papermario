@@ -331,7 +331,38 @@ ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// battlestatus shtuff
+#ifdef NON_MATCHING
+ApiStatus RemoveActor(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 i;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    for (i = 0; i < battleStatus->numEnemyActors; i++) {
+        if (actor == battleStatus->enemyActors[(u8)battleStatus->enemyIDs[i]]) {
+            battleStatus->enemyIDs[i] = -1;
+        }
+    }
+
+    currentEncounter->coinsEarned += actor->extraCoinBonus;
+    currentEncounter->coinsEarned += actor->staticActorData->coinReward;
+    btl_delete_actor(actor);
+    battleStatus->enemyActors[(u8)actorID] = NULL;
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "1A5830", RemoveActor);
+#endif
 
 INCLUDE_ASM(s32, "1A5830", DropStarPoints);
 
@@ -422,7 +453,7 @@ ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
     battleStatus->currentAttackStatus = *args++;
     battleStatus->currentAttackDamage = get_variable(script, *args++);
     battleFlagsModifier = *args++;
-    
+
     if (battleFlagsModifier & 0x10) {
         gBattleStatus.flags1 |= 0x10;
         gBattleStatus.flags1 &= ~0x20;
@@ -452,10 +483,10 @@ ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
 
     attackStatus = battleStatus->currentAttackStatus;
     battleStatus->currentTargetID = actor->targetActorID;
-    
+
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = attackStatus;
-    
+
     if ((attackStatus & 0xFF) == 0xFF) {
         battleStatus->statusChance = 0;
     }
@@ -535,7 +566,7 @@ ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
     battleStatus->currentAttackStatus = *args++;
     battleStatus->currentAttackDamage = get_variable(script, *args++);
     battleFlagsModifier = *args++;
-    
+
     if (battleFlagsModifier & 0x10) {
         gBattleStatus.flags1 |= 0x10;
         gBattleStatus.flags1 &= ~0x20;
@@ -565,10 +596,10 @@ ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
 
     attackStatus = battleStatus->currentAttackStatus;
     battleStatus->currentTargetID = actor->targetActorID;
-    
+
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = attackStatus;
-    
+
     if ((attackStatus & 0xFF) == 0xFF) {
         battleStatus->statusChance = 0;
     }
@@ -813,10 +844,10 @@ ApiStatus SetActorSize(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (y != -250000000) {
+    if (y != SI_LIMIT) {
         actor->size.y = y;
     }
-    if (x != -250000000) {
+    if (x != SI_LIMIT) {
         actor->size.x = x;
     }
     actor->shadowScale = actor->size.x / 24.0;
@@ -841,7 +872,32 @@ ApiStatus GetActorSize(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1A5830", SetPartSize);
+ApiStatus SetPartSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    s32 sizeY = get_variable(script, *args++);
+    s32 sizeX = get_variable(script, *args++);
+    ActorPart* part;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    if (sizeY != SI_LIMIT) {
+        part->size.y = sizeY;
+    }
+
+    if (sizeX != SI_LIMIT) {
+        part->size.x = sizeX;
+    }
+
+    part->shadowScale = part->size.x / 24.0;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetOriginalActorType(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
