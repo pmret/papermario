@@ -5,9 +5,8 @@
 
 #include "common/StarPower.inc.c"
 
-//INCLUDE_ASM(s32, "battle/star/up_and_away/7952E0", func_802A1518_7957F8);
 ApiStatus func_802A1518_7957F8(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
@@ -26,7 +25,7 @@ ApiStatus func_802A1518_7957F8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802A15B4_795894(ScriptInstance* script, s32 isInitialCall) {
-    if (isInitialCall != 0) {
+    if (isInitialCall) {
         script->functionTemp[0] = 254;
     }
 
