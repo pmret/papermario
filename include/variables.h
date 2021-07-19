@@ -391,6 +391,8 @@ extern s16 gCurrentCamID;
 
 extern s32 gSpriteHeapPtr;
 
+extern s32 D_8029C890[12][5];
+
 // Heap?
 extern s32 D_8038F800;
 extern s32 D_803B5000;
