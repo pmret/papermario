@@ -1288,7 +1288,8 @@ typedef struct GameStatus {
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
-    /* 0x0BE */ char unk_BE[106];
+    /* 0x0BE */ char unk_BE[94];
+    /* 0x11C */ Vec3f unk_11C;
     /* 0x128 */ Vec3f playerTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
