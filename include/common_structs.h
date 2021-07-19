@@ -223,7 +223,8 @@ typedef struct PlayerData {
     /* 0x28E */ s8 maxStarPower;
     /* 0x28F */ char unk_28F;
     /* 0x290 */ s16 specialBarsFilled;
-    /* 0x292 */ char unk_292[2];
+    /* 0x292 */ s8 unk_292;
+    /* 0x293 */ char unk_293[0x1];
     /* 0x294 */ s16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 hitsTaken;

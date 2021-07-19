@@ -29,7 +29,7 @@ void clear_player_data(void) {
     playerData->merleeTurnCount = -1;
     playerData->maxStarPower = 0;
     playerData->specialBarsFilled = 0;
-    playerData->unk_292[0] = 0;
+    playerData->unk_292 = 0;
     playerData->currentPartner = 0;
 
     for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {

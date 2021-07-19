@@ -11,10 +11,10 @@ glabel jtbl_8029CA88
 glabel btl_state_update_normal_start
 /* 16FAF8 80241218 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 16FAFC 8024121C AFB60038 */  sw        $s6, 0x38($sp)
-/* 16FB00 80241220 3C16800E */  lui       $s6, %hi(gBattleStatus+0x48C)
-/* 16FB04 80241224 8ED6C4FC */  lw        $s6, %lo(gBattleStatus+0x48C)($s6)
-/* 16FB08 80241228 3C02800E */  lui       $v0, %hi(gBattleStatus+0x484)
-/* 16FB0C 8024122C 8C42C4F4 */  lw        $v0, %lo(gBattleStatus+0x484)($v0)
+/* 16FB00 80241220 3C16800E */  lui       $s6, %hi(D_800DC4FC)
+/* 16FB04 80241224 8ED6C4FC */  lw        $s6, %lo(D_800DC4FC)($s6)
+/* 16FB08 80241228 3C02800E */  lui       $v0, %hi(D_800DC4F4)
+/* 16FB0C 8024122C 8C42C4F4 */  lw        $v0, %lo(D_800DC4F4)($v0)
 /* 16FB10 80241230 AFB40030 */  sw        $s4, 0x30($sp)
 /* 16FB14 80241234 3C14800E */  lui       $s4, %hi(gBattleStatus)
 /* 16FB18 80241238 2694C070 */  addiu     $s4, $s4, %lo(gBattleStatus)

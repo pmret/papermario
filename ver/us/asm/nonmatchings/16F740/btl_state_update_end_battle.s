@@ -14,8 +14,8 @@ glabel jtbl_8029CAB8
 glabel btl_state_update_end_battle
 /* 173330 80244A50 3C03800E */  lui       $v1, %hi(gBattleState2)
 /* 173334 80244A54 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
-/* 173338 80244A58 3C06800E */  lui       $a2, %hi(gBattleStatus+0x48C)
-/* 17333C 80244A5C 8CC6C4FC */  lw        $a2, %lo(gBattleStatus+0x48C)($a2)
+/* 173338 80244A58 3C06800E */  lui       $a2, %hi(D_800DC4FC)
+/* 17333C 80244A5C 8CC6C4FC */  lw        $a2, %lo(D_800DC4FC)($a2)
 /* 173340 80244A60 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 173344 80244A64 AFB30024 */  sw        $s3, 0x24($sp)
 /* 173348 80244A68 3C13800B */  lui       $s3, %hi(gCurrentEncounter)
