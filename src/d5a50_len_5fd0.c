@@ -46,21 +46,33 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", render_hud_elements_world);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80143C48);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144218);
+void func_80144218 (s32 arg0) {
+    func_80143C48(arg0, 1, 3);
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144238);
+void func_80144238(s32 arg0) {
+    func_80143C48(arg0, 0, 3);
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144258);
+void func_80144258(s32 arg0) {
+    func_80143C48(arg0, 1, 1);
+}
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144278);
+void func_80144278(s32 arg0) {
+    func_80143C48 (arg0, 0, 1);
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element_clipped);
+void draw_hud_element_clipped (s32 arg0) {
+    draw_hud_element(arg0, 0);
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element_2);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_icon_2);
+void draw_icon_2(s32 iconID) {
+    draw_hud_element(iconID, 2);
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_script);
 
@@ -114,7 +126,13 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_size);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E4C);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E74);
+void func_80144E74(s32 iconIndex, s32 arg1) {
+    HudElement *hudElement;
+
+    hudElement = gHudElementList[iconIndex & ~0x800];
+    hudElement->flags &= ~0xF000000;
+    hudElement->flags |= arg1 << 24;
+}
 
 void set_hud_element_alpha(s32 iconIndex, s32 opacity) {
     HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
