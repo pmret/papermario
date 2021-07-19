@@ -116,8 +116,8 @@ Script N(main) = SCRIPT({
         }
     }
     await N(802469E0);
-    bind N(exitDoubleDoor_80243D90) to TRIGGER_WALL_PRESS_A 14;
-    bind N(exitDoubleDoor_80243E44) to TRIGGER_WALL_PRESS_A 18;
+    bind N(exitDoubleDoor_80243D90) TRIGGER_WALL_PRESS_A 14;
+    bind N(exitDoubleDoor_80243E44) TRIGGER_WALL_PRESS_A 18;
     spawn N(80243CF0);
     spawn N(enterDoubleDoor_80243EF8);
 });

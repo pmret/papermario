@@ -120,7 +120,7 @@ Script N(exitDoubleDoor_80242C3C) = SCRIPT({
 });
 
 Script N(80242CF0) = SCRIPT({
-    bind N(exitWalk_80242B2C) to TRIGGER_FLOOR_ABOVE 35;
+    bind N(exitWalk_80242B2C) TRIGGER_FLOOR_ABOVE 35;
 });
 
 Script N(enterDoubleDoor_80242D1C) = SCRIPT({
@@ -312,8 +312,8 @@ Script N(80243608) = SCRIPT({
     ParentColliderToModel(28, 51);
     ParentColliderToModel(29, 51);
     if (SI_SAVE_FLAG(1044) == 0) {
-        bind N(80243470) to TRIGGER_WALL_PUSH 27;
-        bind N(8024353C) to TRIGGER_WALL_PUSH 28;
+        bind N(80243470) TRIGGER_WALL_PUSH 27;
+        bind N(8024353C) TRIGGER_WALL_PUSH 28;
     } else {
         if (SI_SAVE_FLAG(1045) == 0) {
             SI_VAR(0) = 48;
@@ -359,7 +359,7 @@ Script N(80243740) = SCRIPT({
 });
 
 Script N(802438A8) = SCRIPT({
-    bind N(exitDoubleDoor_80242C3C) to TRIGGER_WALL_PRESS_A 17;
+    bind N(exitDoubleDoor_80242C3C) TRIGGER_WALL_PRESS_A 17;
 });
 
 Script N(makeEntities) = SCRIPT({

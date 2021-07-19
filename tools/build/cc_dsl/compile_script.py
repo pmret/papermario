@@ -60,6 +60,8 @@ script_parser = Lark(r"""
          | bind_stmt
          | bind_set_stmt
          | "unbind"             -> unbind_stmt
+         | "priority" expr      -> set_priority
+         | "timescale" expr     -> set_timescale
          | "group" expr         -> set_group
          | suspend_stmt
          | resume_stmt
@@ -69,7 +71,6 @@ script_parser = Lark(r"""
                  | if_stmt
                  | match_stmt
                  | loop_stmt
-                 | loop_until_stmt
                  | ["await"] block     -> block_stmt
                  | "spawn" block       -> spawn_block_stmt
                  | "parallel" block    -> parallel_block_stmt
@@ -93,7 +94,7 @@ script_parser = Lark(r"""
                | match_case
     ?match_case: "else" block -> case_else
                | cond_op expr ["," multi_case] block -> case_op
-               | expr ".." expr ["," multi_case] block -> case_range
+               | expr "..." expr ["," multi_case] block -> case_range
                | multi_case block -> case_multi
     multi_case: expr ("," expr)*
 
@@ -104,11 +105,10 @@ script_parser = Lark(r"""
                  | "others"   -> control_type_others
                  | ["script"] -> control_type_script
 
-    bind_stmt: "bind" expr "to" expr expr
-    bind_set_stmt: lhs "=" "bind" expr "to" expr expr
+    bind_stmt: "bind" expr expr expr
+    bind_set_stmt: lhs "=" "bind" expr expr expr
 
     loop_stmt: "loop" [expr] block
-    loop_until_stmt: "loop" block "until" "(" expr cond_op expr ")"
 
     var_decl: ("int"|"float") variable
 
@@ -223,10 +223,6 @@ class MatchCtx(CmdCtx):
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
         return "ScriptOpcode_BREAK_LOOP"
-
-class LoopUntilCtx(CmdCtx):
-    def break_opcode(self, meta):
-        raise CompileError("breaking out of a loop..until is not supported (hint: use a label)", meta)
 
 class LabelCtx(CmdCtx):
     def __init__(self, label):
@@ -442,24 +438,6 @@ class Compile(Transformer):
 
         return [ Cmd("ScriptOpcode_LOOP", expr, meta=tree.meta), *block, Cmd("ScriptOpcode_END_LOOP") ]
 
-    # loop..until pseudoinstruction
-    def loop_until_stmt(self, tree):
-        block, a, op, b = tree.children
-
-        for cmd in block:
-            if isinstance(cmd, BaseCmd):
-                cmd.add_context(LoopUntilCtx())
-
-        label = self.alloc.gen_label()
-
-        return [
-            Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
-            *block,
-            Cmd(op["if"], a, b, meta=tree.meta),
-            Cmd("ScriptOpcode_GOTO", label, meta=tree.meta),
-            Cmd("ScriptOpcode_END_IF", meta=tree.meta),
-        ]
-
     def return_stmt(self, tree):
         return Cmd("ScriptOpcode_RETURN", meta=tree.meta)
 
@@ -471,6 +449,12 @@ class Compile(Transformer):
 
     def break_loop_stmt(self, tree):
         return Cmd("ScriptOpcode_BREAK_LOOP", meta=tree.meta)
+
+    def set_priority(self, tree):
+        return Cmd("ScriptOpcode_SET_PRIORITY", tree.children[0], meta=tree.meta)
+
+    def set_timescale(self, tree):
+        return Cmd("ScriptOpcode_SET_TIMESCALE", tree.children[0], meta=tree.meta)
 
     def set_group(self, tree):
         return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)

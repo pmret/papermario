@@ -32,7 +32,7 @@ static s32 N(pad_E8)[] = {
 Script N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
 
 Script N(8024014C) = SCRIPT({
-    bind N(exitWalk_802400F0) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_802400F0) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(main) = SCRIPT({
@@ -130,5 +130,5 @@ Script N(80240610) = SCRIPT({
 
 Script N(80240680) = SCRIPT({
     ParentColliderToModel(13, 44);
-    bind N(80240610) to TRIGGER_WALL_PRESS_A 13;
+    bind N(80240610) TRIGGER_WALL_PRESS_A 13;
 });

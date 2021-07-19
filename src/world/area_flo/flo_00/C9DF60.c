@@ -204,12 +204,12 @@ Script N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
 const s32 N(pad_XXXX)[] = { 0, 0};
 
 Script N(80241FA4) = SCRIPT({
-    bind N(exitWalk_80241D7C) to TRIGGER_FLOOR_ABOVE 5;
-    bind N(exitWalk_80241DD8) to TRIGGER_FLOOR_ABOVE 9;
-    bind N(exitWalk_80241E34) to TRIGGER_FLOOR_ABOVE 13;
-    bind N(exitWalk_80241E90) to TRIGGER_FLOOR_ABOVE 17;
-    bind N(exitWalk_80241EEC) to TRIGGER_FLOOR_ABOVE 21;
-    bind N(exitWalk_80241F48) to TRIGGER_FLOOR_ABOVE 25;
+    bind N(exitWalk_80241D7C) TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80241DD8) TRIGGER_FLOOR_ABOVE 9;
+    bind N(exitWalk_80241E34) TRIGGER_FLOOR_ABOVE 13;
+    bind N(exitWalk_80241E90) TRIGGER_FLOOR_ABOVE 17;
+    bind N(exitWalk_80241EEC) TRIGGER_FLOOR_ABOVE 21;
+    bind N(exitWalk_80241F48) TRIGGER_FLOOR_ABOVE 25;
 });
 
 Script N(enterWalk_8024205C) = SCRIPT({
@@ -229,7 +229,7 @@ Script N(enterWalk_8024205C) = SCRIPT({
                     spawn N(80241FA4);
                 }
             }
-            1..6 {
+            1 ... 6 {
                 SI_VAR(0) = N(80241FA4);
                 spawn EnterWalk;
             }
@@ -258,7 +258,7 @@ Script N(enterWalk_8024205C) = SCRIPT({
             }
         }
     }
-    bind N(80242FCC) to TRIGGER_WALL_PRESS_A 2;
+    bind N(80242FCC) TRIGGER_WALL_PRESS_A 2;
 });
 
 Script N(main) = SCRIPT({
@@ -2041,7 +2041,7 @@ Script N(80248E30) = {
 // *INDENT-ON*
 
 Script N(80248F48) = SCRIPT({
-    bind N(802477EC) to TRIGGER_FLOOR_TOUCH 46;
+    bind N(802477EC) TRIGGER_FLOOR_TOUCH 46;
     EnableGroup(121, 1);
     EnableGroup(80, 1);
     match STORY_PROGRESS {

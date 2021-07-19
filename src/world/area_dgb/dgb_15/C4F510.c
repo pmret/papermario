@@ -432,7 +432,7 @@ Script N(80242AD0) = SCRIPT({
 });
 
 Script N(80242C38) = SCRIPT({
-    bind N(exitDoubleDoor_80241A7C) to TRIGGER_WALL_PRESS_A 10;
+    bind N(exitDoubleDoor_80241A7C) TRIGGER_WALL_PRESS_A 10;
 });
 
 Script N(makeEntities) = SCRIPT({

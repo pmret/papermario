@@ -70,8 +70,8 @@ Script N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
 Script N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
 
 Script N(802409F4) = SCRIPT({
-    bind N(exitWalk_8024093C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80240998) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_8024093C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240998) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
@@ -167,8 +167,8 @@ Script N(80241728) = SCRIPT({
     SI_AREA_FLAG(31) = 0;
     SI_AREA_FLAG(32) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 13;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80241718);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 13;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80241718);
 });
 
 Script N(updateTexturePan_802417A0) = SCRIPT({

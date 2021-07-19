@@ -33,7 +33,7 @@ static s32 N(pad_2E8)[] = {
 Script N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
 
 Script N(8024034C) = SCRIPT({
-    bind N(exitWalk_802402F0) to TRIGGER_FLOOR_ABOVE 8;
+    bind N(exitWalk_802402F0) TRIGGER_FLOOR_ABOVE 8;
 });
 
 Script N(enterWalk_80240378) = SCRIPT({

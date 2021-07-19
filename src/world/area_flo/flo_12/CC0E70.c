@@ -93,7 +93,7 @@ Script N(80240870) = SCRIPT({
 Script N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
 Script N(80240B78) = SCRIPT({
-    bind N(exitWalk_80240B1C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B1C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({

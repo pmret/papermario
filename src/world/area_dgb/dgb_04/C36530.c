@@ -96,8 +96,8 @@ Script N(main) = SCRIPT({
         MakeNpcs(1, N(npcGroupList_80243D18));
     }
     await N(makeEntities);
-    bind N(exitSingleDoor_80243210) to TRIGGER_WALL_PRESS_A 16;
-    bind N(exitDoubleDoor_802432C4) to TRIGGER_WALL_PRESS_A 20;
+    bind N(exitSingleDoor_80243210) TRIGGER_WALL_PRESS_A 16;
+    bind N(exitDoubleDoor_802432C4) TRIGGER_WALL_PRESS_A 20;
     spawn N(80243170);
     spawn N(enterSingleDoor_80243378);
 });

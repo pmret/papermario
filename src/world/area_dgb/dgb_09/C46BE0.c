@@ -90,7 +90,7 @@ Script N(exitSingleDoor_80243A88) = SCRIPT({
 Script N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
 
 Script N(80243B98) = SCRIPT({
-    bind N(exitWalk_80243B3C) to TRIGGER_FLOOR_ABOVE 11;
+    bind N(exitWalk_80243B3C) TRIGGER_FLOOR_ABOVE 11;
 });
 
 Script N(enterWalk_80243BC4) = SCRIPT({
@@ -135,9 +135,9 @@ Script N(main) = SCRIPT({
         MakeNpcs(1, N(npcGroupList_8024533C));
     }
     spawn N(80243F6C);
-    bind N(exitDoubleDoor_80243920) to TRIGGER_WALL_PRESS_A 5;
-    bind N(exitDoubleDoor_802439D4) to TRIGGER_WALL_PRESS_A 17;
-    bind N(exitSingleDoor_80243A88) to TRIGGER_WALL_PRESS_A 9;
+    bind N(exitDoubleDoor_80243920) TRIGGER_WALL_PRESS_A 5;
+    bind N(exitDoubleDoor_802439D4) TRIGGER_WALL_PRESS_A 17;
+    bind N(exitSingleDoor_80243A88) TRIGGER_WALL_PRESS_A 9;
     spawn N(80243880);
     spawn N(enterWalk_80243BC4);
 });
@@ -166,7 +166,7 @@ Script N(80243E60) = SCRIPT({
 
 Script N(80243F6C) = SCRIPT({
     if (SI_SAVE_FLAG(1051) == 0) {
-        bind N(80243E60) to TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
+        bind N(80243E60) TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
         EnableModel(29, 0);
     } else {
         EnableModel(25, 0);

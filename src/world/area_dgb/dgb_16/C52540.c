@@ -91,7 +91,7 @@ Script N(main) = SCRIPT({
     }
     await N(80241780);
     spawn N(80241480);
-    bind N(exitSingleDoor_80241520) to TRIGGER_WALL_PRESS_A 6;
+    bind N(exitSingleDoor_80241520) TRIGGER_WALL_PRESS_A 6;
     spawn N(enterSingleDoor_802415D4);
 });
 

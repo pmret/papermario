@@ -42,7 +42,7 @@ static s32 N(pad_11C) = {
 Script N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
 
 Script N(8024017C) = SCRIPT({
-    bind N(exitWalk_80240120) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240120) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({

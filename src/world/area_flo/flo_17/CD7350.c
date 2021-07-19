@@ -79,8 +79,8 @@ Script N(exitWalk_8024359C) = EXIT_WALK_SCRIPT(60,  0, "flo_16",  1);
 Script N(exitWalk_802435F8) = EXIT_WALK_SCRIPT(60,  1, "flo_18",  0);
 
 Script N(80243654) = SCRIPT({
-    bind N(exitWalk_8024359C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_802435F8) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_8024359C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_802435F8) TRIGGER_FLOOR_ABOVE 4;
 });
 
 s32 N(lavaResetList_8024369C)[] = {

@@ -130,7 +130,7 @@ static s32 N(pad_3C3C) = {
 Script N(exitWalk_80243C40) = EXIT_WALK_SCRIPT(60,  0, "dro_01",  1);
 
 Script N(80243C9C) = SCRIPT({
-    bind N(exitWalk_80243C40) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80243C40) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(80243CC8) = SCRIPT({
@@ -201,7 +201,7 @@ Script N(main) = SCRIPT({
         goto 123;
     }
     SI_MAP_FLAG(0) = 0;
-    bind N(80243CC8) to TRIGGER_WALL_PRESS_A 56;
+    bind N(80243CC8) TRIGGER_WALL_PRESS_A 56;
     spawn {
         loop {
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -416,8 +416,8 @@ Script N(80244C78) = SCRIPT({
     }
     MakeDoorAdvanced(4, N(openDoor_80244340), N(moveWalls_80244390), N(dropDoor_80244474), N(toggleVis_8024468C), 15, 16, 133, N(npcList_80244C64));
     if (STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
-        bind N(8024486C) to TRIGGER_WALL_PRESS_A 8;
-        bind N(80244A68) to TRIGGER_WALL_PRESS_A 10;
+        bind N(8024486C) TRIGGER_WALL_PRESS_A 8;
+        bind N(80244A68) TRIGGER_WALL_PRESS_A 10;
     }
     MakeDoorAdvanced(4101, N(openDoor_8024451C), N(moveWalls_8024454C), 0, N(toggleVis_80244600), 12, 13, 94, N(npcList_80244C70));
     SI_VAR(0) = 3;

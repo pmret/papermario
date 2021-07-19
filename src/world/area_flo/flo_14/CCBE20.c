@@ -145,7 +145,7 @@ Script N(interact_80244790) = SCRIPT({
             ResetCam(0, 4.0);
             SpeakToPlayer(NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063));
             SI_SAVE_FLAG(1412) = 1;
-            bind N(8024352C) to TRIGGER_FLOOR_PRESS_A 30;
+            bind N(8024352C) TRIGGER_FLOOR_PRESS_A 30;
         }
     }
     SI_AREA_FLAG(35) = 0;

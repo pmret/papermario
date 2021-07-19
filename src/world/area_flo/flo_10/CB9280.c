@@ -104,7 +104,7 @@ Script N(80241680) = SCRIPT({
 Script N(exitWalk_8024192C) = EXIT_WALK_SCRIPT(60,  0, "flo_24",  1);
 
 Script N(80241988) = SCRIPT({
-    bind N(exitWalk_8024192C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_8024192C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
@@ -634,7 +634,7 @@ Script N(80243628) = SCRIPT({
     SI_VAR(1) -= SI_VAR(6);
     SI_VAR(4) += SI_VAR(6);
     match SI_VAR(3) {
-        SI_VAR(1)..SI_VAR(4) {
+        SI_VAR(1) ... SI_VAR(4) {
             spawn {
                 if (SI_VAR(3) < SI_VAR(0)) {
                     SI_VAR(0) -= 40;

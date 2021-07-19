@@ -70,7 +70,7 @@ Script N(updateTexturePan_80240B00) = SCRIPT({
 Script N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
 
 Script N(80240BF8) = SCRIPT({
-    bind N(exitWalk_80240B9C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B9C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
@@ -281,10 +281,10 @@ Script N(80241780) = SCRIPT({
     SetModelFlags(36, 256, 1);
     SetModelFlags(40, 256, 1);
     spawn N(80241050);
-    bind N(80241650) to TRIGGER_FLOOR_TOUCH 8;
-    bind N(8024169C) to TRIGGER_FLOOR_TOUCH 9;
-    bind N(802416E8) to TRIGGER_FLOOR_TOUCH 7;
-    bind N(80241734) to TRIGGER_FLOOR_TOUCH 10;
+    bind N(80241650) TRIGGER_FLOOR_TOUCH 8;
+    bind N(8024169C) TRIGGER_FLOOR_TOUCH 9;
+    bind N(802416E8) TRIGGER_FLOOR_TOUCH 7;
+    bind N(80241734) TRIGGER_FLOOR_TOUCH 10;
     spawn {
         SI_VAR(15) = 0;
 0:
@@ -637,7 +637,7 @@ Script N(80242A2C) = SCRIPT({
 });
 
 Script N(80242FD0) = SCRIPT({
-    bind N(802423F8) to TRIGGER_FLOOR_TOUCH 12;
+    bind N(802423F8) TRIGGER_FLOOR_TOUCH 12;
 });
 
 #include "world/common/UnkTexturePanFunc.inc.c"

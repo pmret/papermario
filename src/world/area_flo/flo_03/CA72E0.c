@@ -111,8 +111,8 @@ Script N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 Script N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
 Script N(80240BE4) = SCRIPT({
-    bind N(exitWalk_80240B2C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80240B88) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80240B2C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B88) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
@@ -1199,8 +1199,8 @@ Script N(80244E54) = SCRIPT({
     SI_AREA_FLAG(27) = 0;
     SI_AREA_FLAG(28) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 16;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 16;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
 });
 
 static s32 N(pad_4ECC) = {

@@ -27,7 +27,7 @@ Script N(802403B0) = SCRIPT({
 });
 
 Script N(80240470) = SCRIPT({
-    bind N(802403B0) to TRIGGER_WALL_PRESS_A 6;
+    bind N(802403B0) TRIGGER_WALL_PRESS_A 6;
 });
 
 Script N(8024049C) = SCRIPT({

@@ -80,7 +80,7 @@ Script N(main) = SCRIPT({
     spawn N(802417F0);
     ModifyColliderFlags(0, 18, 0x7FFFFE00);
     EnableModel(20, 0);
-    bind N(exitSingleDoor_80241580) to TRIGGER_WALL_PRESS_A 16;
+    bind N(exitSingleDoor_80241580) TRIGGER_WALL_PRESS_A 16;
     spawn N(802414E0);
     spawn N(enterSingleDoor_80241634);
 });

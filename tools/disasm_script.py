@@ -1071,7 +1071,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
         elif opcode == 0x21:
             self.indent -= 1
-            self.write_line(f"{self.replace_enum(argv[0], True)}..{self.replace_enum(argv[1], True)}")
+            self.write_line(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
             self.indent += 1
         elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:
@@ -1143,6 +1143,21 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"{self.var(argv[0])} /= {lhs};")
             else:
                 self.write_line(f"{self.var(argv[0])} /= (float) {lhs};")
+        elif opcode == 0x30: self.write_line(f"buf_use({self.var(argv[0])});")
+        elif opcode == 0x31: self.write_line(f"buf_read({self.var(argv[0])});")
+        elif opcode == 0x32: self.write_line(f"buf_read({self.var(argv[0])}, {self.var(argv[1])});")
+        elif opcode == 0x33: self.write_line(f"buf_read({self.var(argv[0])}, {self.var(argv[1])}, {self.var(argv[2])});")
+        elif opcode == 0x34: self.write_line(f"buf_read({self.var(argv[0])}, {self.var(argv[1])}, {self.var(argv[2])}, {self.var(argv[3])});")
+        elif opcode == 0x35: self.write_line(f"buf_peek({self.var(argv[0])}, {self.var(argv[1])});")
+        elif opcode == 0x36: self.write_line(f"buf_usef({self.var(argv[0])});")
+        elif opcode == 0x37: self.write_line(f"buf_readf({self.var(argv[0])});")
+        elif opcode == 0x38: self.write_line(f"buf_readf({self.var(argv[0])}, {self.var(argv[1])});")
+        elif opcode == 0x39: self.write_line(f"buf_readf({self.var(argv[0])}, {self.var(argv[1])}, {self.var(argv[2])});")
+        elif opcode == 0x3A: self.write_line(f"buf_readf({self.var(argv[0])}, {self.var(argv[1])}, {self.var(argv[2])}, {self.var(argv[3])});")
+        elif opcode == 0x3B: self.write_line(f"buf_peekf({self.var(argv[0])}, {self.var(argv[1])});")
+        elif opcode == 0x3C: self.write_line(f"arr_use({self.var(argv[0])});")
+        elif opcode == 0x3D: self.write_line(f"flags_use({self.var(argv[0])});")
+        elif opcode == 0x3E: self.write_line(f"arr_new({self.var(argv[0])}, {self.var(argv[1])});")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
         elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &= (const) 0x{argv[1]:X};")
@@ -1174,13 +1189,19 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x47:
             assert argv[3] == 1
             if argv[4] != 0:
-                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])};")
             else:
-                self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
         elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
+        elif opcode == 0x4B: self.write_line(f"priority ({self.var(argv[0])};")
+        elif opcode == 0x4C: self.write_line(f"timescale {self.var(argv[0])};")
         elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
+        elif opcode == 0x4E:
+            assert argv[4] == 0
+            assert argv[5] == 1
+            self.write_line(f"bind_padlock {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
         elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])};")

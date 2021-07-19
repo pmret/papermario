@@ -362,8 +362,8 @@ Script N(exitWalk_80244960) = SCRIPT({
 Script N(exitWalk_802449CC) = EXIT_WALK_SCRIPT(60,  1, "dro_02",  0);
 
 Script N(80244A28) = SCRIPT({
-    bind N(exitWalk_80244960) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_802449CC) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80244960) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_802449CC) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(80244A70) = SCRIPT({
@@ -446,7 +446,7 @@ Script N(main) = SCRIPT({
         STORY_PROGRESS = STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST;
     }
     match STORY_PROGRESS {
-        -53..6 {
+        -53 ... 6 {
             MakeNpcs(0, N(npcGroupList_8024B47C));
         } else {
             MakeNpcs(0, N(npcGroupList_8024B464));

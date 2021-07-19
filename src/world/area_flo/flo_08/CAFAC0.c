@@ -229,8 +229,8 @@ Script N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
 Script N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
 
 Script N(802429E4) = SCRIPT({
-    bind N(exitWalk_8024292C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80242988) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_8024292C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80242988) TRIGGER_FLOOR_ABOVE 4;
 });
 
 s32 N(lavaResetList_80242A2C)[] = {
@@ -1286,8 +1286,8 @@ Script N(80245914) = SCRIPT({
     SI_AREA_FLAG(29) = 0;
     SI_AREA_FLAG(30) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 22;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80245904);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 22;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80245904);
 });
 
 static s32 N(pad_598C) = {
