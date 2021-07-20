@@ -569,7 +569,7 @@ class ScriptDisassembler:
     def addr_ref(self, addr, isArg=False):
         if addr in self.symbol_map:
             return self.replace_star_rod_prefix(addr, isArg)
-        return var(addr) #f"0x{addr:08X}"
+        return self.var(addr) #f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
@@ -1074,8 +1074,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.case_stack.append("CASE")
             self.write_line(f"? {self.replace_enum(argv[0], True)}")
         elif opcode == 0x20:
-            if not self.was_multi_case:
-                raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
+            #if not self.was_multi_case:
+            #    raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
+            pass
         elif opcode == 0x21:
             self.indent -= 1
             self.write_line(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
