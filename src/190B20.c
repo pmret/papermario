@@ -1102,21 +1102,24 @@ s32 btl_are_all_enemies_defeated(void) {
     s32 enemiesStillAlive;
 
     bs = &gBattleStatus;
-    enemyCounter2 = 0;
     enemiesStillAlive = 0;
+    enemyCounter2 = 0;
     do {
         currentEnemyFlags = bs->enemyActors;
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if ((currentEnemyFlags != 0) && ((*currentEnemyFlags & 0x404000) == 0)) {
-            // Countinue the battle
-            enemiesStillAlive = 1;
+        if (currentEnemyFlags != 0) {
+            if ((*currentEnemyFlags & 0x404000) == 0) {
+                // Countinue the battle
+                enemiesStillAlive = 1;
+            }
         }
         enemyCounter = enemyCounter2 + 1;
         bs += 4; // Advance to the next enemyActor
         enemyCounter2 = enemyCounter;
     } while ((enemyCounter < 24) != 0); // 24 because you can have 24 enemy actors
-    return enemiesStillAlive ^ 1; // returns 1 if enemiesStillAlive = 0
+    enemiesStillAlive ^= 1; // returns 1 if enemiesStillAlive = 0
+    return enemiesStillAlive;
 }
 
 
