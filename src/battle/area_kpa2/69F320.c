@@ -76,8 +76,6 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A804_6A1A04);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021ABD8_6A1DD8);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B02C_6A222C);
-
 #define NAMESPACE dup6_b_area_kpa2
 #include "common/UnkBattleFunc4.inc.c"
 #define NAMESPACE b_area_kpa2
