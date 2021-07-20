@@ -515,7 +515,7 @@ enum SoundIDs {
     SOUND_E1                        = 225,
     SOUND_E2,
     SOUND_E3,
-    SOUND_E9                       = 233,
+    SOUND_E9                        = 233,
     SOUND_EA,
     SOUND_EB,
     SOUND_10C                       = 268,
