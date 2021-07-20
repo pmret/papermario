@@ -232,7 +232,9 @@ s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
-
+f32 get_player_normal_yaw(void);
+void set_standard_shadow_scale(Shadow* shadow, f32 scale);
+void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_animator_by_index(s32 arg0);
@@ -398,7 +400,7 @@ void playFX_3D(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 v
 EffectInstance* playFX_40(s32, f32, f32, f32, s32);
 EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-void playFX_82(s32, f32, f32, f32, f32, s32 time);
+//EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
 EffectInstance* playFX_4E(s32, f32, f32, f32);
 EffectInstance* playFX_54(s32, f32, f32, f32);
 EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
@@ -410,7 +412,7 @@ EffectInstance* playFX_83(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 
 EffectInstance* playFX_7B(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void playFX_32(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 EffectInstance* playFX_56(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+void playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 EffectInstance* playFX_69(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void playFX_2D(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void playFX_2E(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
@@ -432,8 +434,8 @@ EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);
-EffectInstance* playFX_6C(s32, f32, f32, f32, f32, s32);
 void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;
