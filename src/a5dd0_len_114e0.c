@@ -914,11 +914,11 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* enti
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_standard_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_peach_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 

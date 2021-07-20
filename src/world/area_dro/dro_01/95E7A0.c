@@ -58,6 +58,6 @@ Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
 
 Script N(8024DD78) = SCRIPT({
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 11;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_8024DD68);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 11;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_8024DD68);
 });

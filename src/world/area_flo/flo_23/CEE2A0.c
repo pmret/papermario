@@ -81,8 +81,8 @@ Script N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
 Script N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
 
 Script N(80241104) = SCRIPT({
-    bind N(exitWalk_802410A8) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_8024104C) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_802410A8) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_8024104C) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
@@ -151,13 +151,11 @@ Script N(80241314) = SCRIPT({
     unbind;
 });
 
-Script N(80241448) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802402F8_CEE558), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241314), 0x10, 0, N(D_802426E0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_8024026C_CEE4CC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80241448) = SCRIPT({
+    N(func_802402F8_CEE558)(SI_VAR(0));
+    bind_padlock N(80241314) 0x10 0 0x802426E0; // TODO: fix raw ptr
+    N(func_8024026C_CEE4CC)(SI_VAR(0));
+});
 
 NpcAISettings N(npcAISettings_80241498) = {
     .moveSpeed = 1.5f,

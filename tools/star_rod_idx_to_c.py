@@ -163,7 +163,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 script_text = f"// Unable to use DSL: {e}\n"
 
                 bytes.seek(pos)
-                script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
+                script_text += disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
                 symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"

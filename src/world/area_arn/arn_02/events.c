@@ -7,8 +7,8 @@ Script N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 Script N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
 
 Script N(802411A8) = SCRIPT({
-    bind N(exitWalk_802410F0) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_8024114C) to TRIGGER_FLOOR_ABOVE 6;
+    bind N(exitWalk_802410F0) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024114C) TRIGGER_FLOOR_ABOVE 6;
 });
 
 Script N(main) = SCRIPT({

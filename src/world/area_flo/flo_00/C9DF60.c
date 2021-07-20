@@ -204,12 +204,12 @@ Script N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
 const s32 N(pad_XXXX)[] = { 0, 0};
 
 Script N(80241FA4) = SCRIPT({
-    bind N(exitWalk_80241D7C) to TRIGGER_FLOOR_ABOVE 5;
-    bind N(exitWalk_80241DD8) to TRIGGER_FLOOR_ABOVE 9;
-    bind N(exitWalk_80241E34) to TRIGGER_FLOOR_ABOVE 13;
-    bind N(exitWalk_80241E90) to TRIGGER_FLOOR_ABOVE 17;
-    bind N(exitWalk_80241EEC) to TRIGGER_FLOOR_ABOVE 21;
-    bind N(exitWalk_80241F48) to TRIGGER_FLOOR_ABOVE 25;
+    bind N(exitWalk_80241D7C) TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80241DD8) TRIGGER_FLOOR_ABOVE 9;
+    bind N(exitWalk_80241E34) TRIGGER_FLOOR_ABOVE 13;
+    bind N(exitWalk_80241E90) TRIGGER_FLOOR_ABOVE 17;
+    bind N(exitWalk_80241EEC) TRIGGER_FLOOR_ABOVE 21;
+    bind N(exitWalk_80241F48) TRIGGER_FLOOR_ABOVE 25;
 });
 
 Script N(enterWalk_8024205C) = SCRIPT({
@@ -229,7 +229,7 @@ Script N(enterWalk_8024205C) = SCRIPT({
                     spawn N(80241FA4);
                 }
             }
-            1..6 {
+            1 ... 6 {
                 SI_VAR(0) = N(80241FA4);
                 spawn EnterWalk;
             }
@@ -258,7 +258,7 @@ Script N(enterWalk_8024205C) = SCRIPT({
             }
         }
     }
-    bind N(80242FCC) to TRIGGER_WALL_PRESS_A 2;
+    bind N(80242FCC) TRIGGER_WALL_PRESS_A 2;
 });
 
 Script N(main) = SCRIPT({
@@ -2016,32 +2016,28 @@ Script N(80248D3C) = SCRIPT({
     N(func_802413BC_C9F2DC)();
 });
 
-// *INDENT-OFF*
-Script N(80248E30) = {
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 55),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(0), 54),
-                SI_CMD(ScriptOpcode_BREAK_LOOP),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1371), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1372), 0),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 89, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 88, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(11), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80248D3C), 0x10, 0, N(itemList_80248598), 0, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80248E30) = SCRIPT({
+    if (STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
+        loop {
+            sleep 1;
+            if (STORY_PROGRESS == STORY_CH6_WISTERWOOD_GAVE_HINT) {
+                break;
+            }
+        }
+        if (SI_SAVE_FLAG(1371) == 1) {
+            if (SI_SAVE_FLAG(1372) == 0) {
+                MakeItemEntity(ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0);
+            } else {
+                MakeItemEntity(ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0);
+            }
+            SI_MAP_VAR(11) = SI_VAR(0);
+        }
+        bind_padlock N(80248D3C) 0x10 0 N(itemList_80248598);
+    }
+});
 
 Script N(80248F48) = SCRIPT({
-    bind N(802477EC) to TRIGGER_FLOOR_TOUCH 46;
+    bind N(802477EC) TRIGGER_FLOOR_TOUCH 46;
     EnableGroup(121, 1);
     EnableGroup(80, 1);
     match STORY_PROGRESS {
