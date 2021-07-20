@@ -56,17 +56,17 @@ Script N(exitDoubleDoor_8024021C) = SCRIPT({
 });
 
 Script N(802402D0) = SCRIPT({
-    bind N(exitWalk_802401C0) to TRIGGER_FLOOR_ABOVE 15;
+    bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
-            bind N(exitDoubleDoor_8024021C) to TRIGGER_WALL_PRESS_A 18;
+            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
         < STORY_CH3_ESCAPED_TUBBAS_MANOR {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             spawn N(80240F50);
             await N(80241AA0);
         } else {
-            bind N(exitDoubleDoor_8024021C) to TRIGGER_WALL_PRESS_A 18;
+            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
     }
 });

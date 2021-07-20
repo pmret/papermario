@@ -322,7 +322,7 @@ class Configure:
                 else:
                     with entry.src_paths[0].open() as f:
                         s = f.read()
-                        if "SCRIPT(" in s or "#pragma SCRIPT" in s:
+                        if "SCRIPT(" in s or "#pragma SCRIPT" or "#include \"world/common/foliage.inc.c\"" in s:
                             task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)

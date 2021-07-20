@@ -82,8 +82,8 @@ Script N(exitWalk_8024264C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  3);
 Script N(exitWalk_802426A8) = EXIT_WALK_SCRIPT(60,  1, "flo_07",  0);
 
 Script N(80242704) = SCRIPT({
-    bind N(exitWalk_802426A8) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_8024264C) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_802426A8) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_8024264C) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
@@ -217,13 +217,11 @@ Script N(80242AD4) = SCRIPT({
     unbind;
 });
 
-Script N(80242C08) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_80241DE4_CF49B4), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80242AD4), 0x10, 0, N(D_80244A20), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241D58_CF4928), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80242C08) = SCRIPT({
+    N(func_80241DE4_CF49B4)(SI_VAR(0));
+    bind_padlock N(80242AD4) 0x10 0 N(D_80244A20);
+    N(func_80241D58_CF4928)(SI_VAR(0));
+});
 
 Script N(interact_80242C58) = SCRIPT({
     DisablePlayerInput(TRUE);

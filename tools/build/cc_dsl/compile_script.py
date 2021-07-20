@@ -53,23 +53,35 @@ script_parser = Lark(r"""
          | "await" expr         -> await_stmt
          | "jump" expr          -> jump_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
+         | lhs "=" "does_script_exist" expr -> does_script_exist
          | lhs set_op expr      -> set_stmt
          | lhs set_op "(int)" expr    -> set_int_stmt
          | lhs set_op "(float)" expr  -> set_float_stmt
          | lhs set_op "(const)" expr  -> set_const_stmt
          | bind_stmt
          | bind_set_stmt
+         | "bind_padlock" expr expr collider_id expr -> bind_padlock_stmt
          | "unbind"             -> unbind_stmt
+         | "priority" expr      -> set_priority
+         | "timescale" expr     -> set_timescale
          | "group" expr         -> set_group
          | suspend_stmt
          | resume_stmt
          | kill_stmt
+         | "buf_use" expr       -> buf_use
+         | "buf_read" expr+     -> buf_read
+         | "buf_peek" expr expr -> buf_peek
+         | "buf_usef" expr       -> buf_usef
+         | "buf_readf" expr+     -> buf_readf
+         | "buf_peekf" expr expr -> buf_peekf
+         | "arr_use" expr -> use_array
+         | "flags_use" expr -> use_flags
+         | "arr_new" expr expr -> new_array
 
     ?stmt_no_semi: label ":" -> label_decl
                  | if_stmt
                  | match_stmt
                  | loop_stmt
-                 | loop_until_stmt
                  | ["await"] block     -> block_stmt
                  | "spawn" block       -> spawn_block_stmt
                  | "parallel" block    -> parallel_block_stmt
@@ -93,7 +105,7 @@ script_parser = Lark(r"""
                | match_case
     ?match_case: "else" block -> case_else
                | cond_op expr ["," multi_case] block -> case_op
-               | expr ".." expr ["," multi_case] block -> case_range
+               | expr "..." expr ["," multi_case] block -> case_range
                | multi_case block -> case_multi
     multi_case: expr ("," expr)*
 
@@ -104,13 +116,15 @@ script_parser = Lark(r"""
                  | "others"   -> control_type_others
                  | ["script"] -> control_type_script
 
-    bind_stmt: "bind" expr "to" expr expr
-    bind_set_stmt: lhs "=" "bind" expr "to" expr expr
+    bind_stmt: "bind" expr expr collider_id
+    bind_set_stmt: lhs "=" "bind" expr expr collider_id
 
     loop_stmt: "loop" [expr] block
-    loop_until_stmt: "loop" block "until" "(" expr cond_op expr ")"
 
     var_decl: ("int"|"float") variable
+
+    ?collider_id: "entity" "(" expr ")" -> entity_id
+                | expr
 
     ?expr: c_const_expr
          | ESCAPED_STRING
@@ -223,10 +237,6 @@ class MatchCtx(CmdCtx):
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
         return "ScriptOpcode_BREAK_LOOP"
-
-class LoopUntilCtx(CmdCtx):
-    def break_opcode(self, meta):
-        raise CompileError("breaking out of a loop..until is not supported (hint: use a label)", meta)
 
 class LabelCtx(CmdCtx):
     def __init__(self, label):
@@ -442,24 +452,6 @@ class Compile(Transformer):
 
         return [ Cmd("ScriptOpcode_LOOP", expr, meta=tree.meta), *block, Cmd("ScriptOpcode_END_LOOP") ]
 
-    # loop..until pseudoinstruction
-    def loop_until_stmt(self, tree):
-        block, a, op, b = tree.children
-
-        for cmd in block:
-            if isinstance(cmd, BaseCmd):
-                cmd.add_context(LoopUntilCtx())
-
-        label = self.alloc.gen_label()
-
-        return [
-            Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
-            *block,
-            Cmd(op["if"], a, b, meta=tree.meta),
-            Cmd("ScriptOpcode_GOTO", label, meta=tree.meta),
-            Cmd("ScriptOpcode_END_IF", meta=tree.meta),
-        ]
-
     def return_stmt(self, tree):
         return Cmd("ScriptOpcode_RETURN", meta=tree.meta)
 
@@ -471,6 +463,12 @@ class Compile(Transformer):
 
     def break_loop_stmt(self, tree):
         return Cmd("ScriptOpcode_BREAK_LOOP", meta=tree.meta)
+
+    def set_priority(self, tree):
+        return Cmd("ScriptOpcode_SET_PRIORITY", tree.children[0], meta=tree.meta)
+
+    def set_timescale(self, tree):
+        return Cmd("ScriptOpcode_SET_TIMESCALE", tree.children[0], meta=tree.meta)
 
     def set_group(self, tree):
         return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)
@@ -527,6 +525,9 @@ class Compile(Transformer):
     def bind_set_stmt(self, tree):
         ret, script, trigger, target = tree.children
         return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, ret, meta=tree.meta)
+    def bind_padlock_stmt(self, tree):
+        script, trigger, target, items = tree.children
+        return Cmd("ScriptOpcode_BIND_PADLOCK", script, trigger, target, items, 0, 1, meta=tree.meta)
     def unbind_stmt(self, tree):
         return Cmd("ScriptOpcode_UNBIND", meta=tree.meta)
 
@@ -670,6 +671,64 @@ class Compile(Transformer):
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(ParallelCtx())
         return [ Cmd("ScriptOpcode_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_PARALLEL_THREAD") ]
+
+    def entity_id(self, tree):
+        expr, = tree.children
+        return f"({expr} + 0x4000)"
+
+    def buf_use(self, tree):
+        return Cmd("ScriptOpcode_USE_BUFFER", tree.children[0], meta=tree.meta)
+    def buf_read(self, tree):
+        args = tree.children
+        cmds = []
+
+        while args:
+            if len(args) >= 4:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 3:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 2:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2", args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 1:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1", args.pop(0), meta=tree.meta))
+            else:
+                break
+
+        return cmds
+    def buf_peek(self, tree):
+        return Cmd("ScriptOpcode_BUFFER_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def buf_usef(self, tree):
+        return Cmd("ScriptOpcode_USE_BUFFER_F", tree.children[0], meta=tree.meta)
+    def buf_readf(self, tree):
+        args = tree.children
+        cmds = []
+
+        while args:
+            if len(args) >= 4:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4_F", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 3:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3_F", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 2:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2_F", args.pop(0), args.pop(0), meta=tree.meta))
+            elif len(args) == 1:
+                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1_F", args.pop(0), meta=tree.meta))
+            else:
+                break
+
+        return cmds
+    def buf_peekf(self, tree):
+        return Cmd("ScriptOpcode_BUFFER_PEEK_F", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def use_array(self, tree):
+        return Cmd("ScriptOpcode_USE_ARRAY", tree.children[0], meta=tree.meta)
+    def use_flags(self, tree):
+        return Cmd("ScriptOpcode_USE_FLAGS", tree.children[0], meta=tree.meta)
+    def new_array(self, tree):
+        return Cmd("ScriptOpcode_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def does_script_exist(self, tree):
+        return Cmd("ScriptOpcode_DOES_SCRIPT_EXIST", tree.children[1], tree.children[0], meta=tree.meta)
 
 def compile_script(s):
     tree = script_parser.parse(s)

@@ -42,8 +42,8 @@ Script N(802446BC) = SCRIPT({
     SI_AREA_FLAG(33) = 0;
     SI_AREA_FLAG(34) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 12;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_802446AC);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 12;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_802446AC);
 });
 
 static s32 N(pad_4734)[] = {

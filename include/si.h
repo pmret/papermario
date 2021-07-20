@@ -91,7 +91,7 @@ typedef enum ScriptOpcode {
     ScriptOpcode_RESUME_OTHERS, ///< Args: group
     ScriptOpcode_SUSPEND_SCRIPT, ///< Args: ScriptID
     ScriptOpcode_RESUME_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_SCRIPT_EXISTS, ///< Args: ScriptID, container
+    ScriptOpcode_DOES_SCRIPT_EXIST, ///< Args: ScriptID, container
     ScriptOpcode_SPAWN_THREAD,
     ScriptOpcode_END_SPAWN_THREAD,
     ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.

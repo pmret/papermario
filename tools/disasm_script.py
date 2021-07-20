@@ -297,7 +297,7 @@ def fix_args(self, func, args, info):
                     new_args.append(f"{int(argNum)}")
                 else:
                     #Print the unknowns in hex
-                    new_args.append(f"0x{int(argNum):X}")
+                    new_args.append(self.var(argNum))
 
         else:
             new_args.append(f"{arg}")
@@ -569,7 +569,7 @@ class ScriptDisassembler:
     def addr_ref(self, addr, isArg=False):
         if addr in self.symbol_map:
             return self.replace_star_rod_prefix(addr, isArg)
-        return f"0x{addr:08X}"
+        return self.var(addr) #f"0x{addr:08X}"
 
     def trigger(self, trigger):
         if trigger == 0x00000040: trigger = "TRIGGER_WALL_PUSH"
@@ -780,7 +780,7 @@ class ScriptDisassembler:
         elif opcode == 0x52: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_OTHERS, {self.var(argv[0])}),")
         elif opcode == 0x53: self.write_line(f"SI_CMD(ScriptOpcode_SUSPEND_SCRIPT, {self.var(argv[0])}),")
         elif opcode == 0x54: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_SCRIPT, {self.var(argv[0])}),")
-        elif opcode == 0x55: self.write_line(f"SI_CMD(ScriptOpcode_SCRIPT_EXISTS, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x55: self.write_line(f"SI_CMD(ScriptOpcode_DOES_SCRIPT_EXIST, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x56:
             self.write_line("SI_CMD(ScriptOpcode_SPAWN_THREAD),")
             self.indent += 1
@@ -857,6 +857,13 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             return f"{arg - 0x100000000}"
         else:
             return f"{arg}"
+
+    # TODO: use map's collider names when split
+    def collider_id(self, arg):
+        if arg >= 0x4000 and arg <= 0x5000:
+            return f"entity({arg - 0x4000})"
+        else:
+            return arg
 
     def is_float(self, var):
         try:
@@ -1067,12 +1074,12 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.case_stack.append("CASE")
             self.write_line(f"? {self.replace_enum(argv[0], True)}")
         elif opcode == 0x20:
-            if not self.was_multi_case:
-                raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
+            #if not self.was_multi_case:
+            #    raise UnsupportedScript("unexpected END_MULTI_CASE")
+            pass
         elif opcode == 0x21:
-            self.indent -= 1
-            self.write_line(f"{self.replace_enum(argv[0], True)}..{self.replace_enum(argv[1], True)}")
-            self.indent += 1
+            self.case_stack.append("CASE")
+            self.write(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
         elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:
             # close open case if needed
@@ -1143,6 +1150,21 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"{self.var(argv[0])} /= {lhs};")
             else:
                 self.write_line(f"{self.var(argv[0])} /= (float) {lhs};")
+        elif opcode == 0x30: self.write_line(f"buf_use {self.addr_ref(argv[0])};")
+        elif opcode == 0x31: self.write_line(f"buf_read {self.var(argv[0])};")
+        elif opcode == 0x32: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])};")
+        elif opcode == 0x33: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
+        elif opcode == 0x34: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
+        elif opcode == 0x35: self.write_line(f"buf_peek {self.var(argv[0])} {self.var(argv[1])};")
+        elif opcode == 0x36: self.write_line(f"buf_usef {self.var(argv[0])};")
+        elif opcode == 0x37: self.write_line(f"buf_readf {self.var(argv[0])};")
+        elif opcode == 0x38: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])};")
+        elif opcode == 0x39: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
+        elif opcode == 0x3A: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
+        elif opcode == 0x3B: self.write_line(f"buf_peekf {self.var(argv[0])} {self.var(argv[1])};")
+        elif opcode == 0x3C: self.write_line(f"arr_use {self.addr_ref(argv[0])};")
+        elif opcode == 0x3D: self.write_line(f"flags_use {self.addr_ref(argv[0])};")
+        elif opcode == 0x3E: self.write_line(f"arr_new {self.var(argv[0])} {self.addr_ref(argv[1])};")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
         elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &= (const) 0x{argv[1]:X};")
@@ -1174,19 +1196,26 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x47:
             assert argv[3] == 1
             if argv[4] != 0:
-                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"{self.var(argv[4])} = bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
             else:
-                self.write_line(f"bind {self.addr_ref(argv[0])} to {self.trigger(argv[1])} {self.var(argv[2])};")
+                self.write_line(f"bind {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])};")
         elif opcode == 0x48: self.write_line(f"unbind;")
         elif opcode == 0x49: self.write_line(f"kill {self.var(argv[0])};")
         elif opcode == 0x4A: self.write_line(f"jump {self.var(argv[0])};")
+        elif opcode == 0x4B: self.write_line(f"priority ({self.var(argv[0])};")
+        elif opcode == 0x4C: self.write_line(f"timescale {self.var(argv[0])};")
         elif opcode == 0x4D: self.write_line(f"group {self.var(argv[0])};")
+        elif opcode == 0x4E:
+            assert argv[4] == 0
+            assert argv[5] == 1
+            self.write_line(f"bind_padlock {self.addr_ref(argv[0])} {self.trigger(argv[1])} {self.collider_id(argv[2])} {self.addr_ref(argv[3])};")
         elif opcode == 0x4F: self.write_line(f"suspend group {self.var(argv[0])};")
         elif opcode == 0x50: self.write_line(f"resume group {self.var(argv[0])};")
         elif opcode == 0x51: self.write_line(f"suspend others {self.var(argv[0])};")
         elif opcode == 0x52: self.write_line(f"resume others {self.var(argv[0])};")
         elif opcode == 0x53: self.write_line(f"suspend {self.var(argv[0])};")
         elif opcode == 0x54: self.write_line(f"resume {self.var(argv[0])};")
+        elif opcode == 0x55: self.write_line(f"{self.var(argv[1])} = does_script_exist {self.var(argv[0])};")
         elif opcode == 0x56:
             self.write_line("spawn {")
             self.indent += 1

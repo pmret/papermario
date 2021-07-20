@@ -29,8 +29,8 @@ Script N(exitSingleDoor_802401A4) = SCRIPT({
 });
 
 Script N(80240248) = SCRIPT({
-    bind N(exitSingleDoor_80240100) to TRIGGER_WALL_PRESS_A 2;
-    bind N(exitSingleDoor_802401A4) to TRIGGER_WALL_PRESS_A 7;
+    bind N(exitSingleDoor_80240100) TRIGGER_WALL_PRESS_A 2;
+    bind N(exitSingleDoor_802401A4) TRIGGER_WALL_PRESS_A 7;
 });
 
 Script N(enterSingleDoor_80240290) = SCRIPT({

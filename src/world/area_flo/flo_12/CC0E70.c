@@ -93,7 +93,7 @@ Script N(80240870) = SCRIPT({
 Script N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
 Script N(80240B78) = SCRIPT({
-    bind N(exitWalk_80240B1C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B1C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
@@ -200,13 +200,11 @@ Script N(80241858) = SCRIPT({
     unbind;
 });
 
-Script N(8024199C) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_8024064C_CC147C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241858), 0x10, 0, N(D_802429E0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802405C0_CC13F0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024199C) = SCRIPT({
+    N(func_8024064C_CC147C)(SI_VAR(0));
+    bind_padlock N(80241858) 0x10 0 N(D_802429E0);
+    N(func_802405C0_CC13F0)(SI_VAR(0));
+});
 
 s32 N(D_802419EC_CC281C)[] = {
     0x0000001E, 0x00000000,

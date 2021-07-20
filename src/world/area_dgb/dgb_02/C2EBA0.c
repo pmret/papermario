@@ -138,10 +138,10 @@ Script N(main) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_802425C8));
     }
-    bind N(exitDoubleDoor_80241550) to TRIGGER_WALL_PRESS_A 5;
-    bind N(exitDoubleDoor_80241604) to TRIGGER_WALL_PRESS_A 17;
-    bind N(exitSingleDoor_802416B8) to TRIGGER_WALL_PRESS_A 9;
-    bind N(exitSingleDoor_8024176C) to TRIGGER_WALL_PRESS_A 13;
+    bind N(exitDoubleDoor_80241550) TRIGGER_WALL_PRESS_A 5;
+    bind N(exitDoubleDoor_80241604) TRIGGER_WALL_PRESS_A 17;
+    bind N(exitSingleDoor_802416B8) TRIGGER_WALL_PRESS_A 9;
+    bind N(exitSingleDoor_8024176C) TRIGGER_WALL_PRESS_A 13;
     spawn N(802414B0);
     spawn N(enterSingleDoor_80241820);
 });
