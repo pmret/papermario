@@ -9,8 +9,8 @@ Script N(exitWalk_80241830) = EXIT_WALK_SCRIPT(60,  0, "arn_07",  1);
 Script N(exitWalk_8024188C) = EXIT_WALK_SCRIPT(60,  1, "arn_05",  0);
 
 Script N(802418E8) = SCRIPT({
-    bind N(exitWalk_80241830) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_8024188C) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80241830) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024188C) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(enterWalk_80241930) = SCRIPT({
@@ -135,13 +135,11 @@ Script N(80241CD4) = SCRIPT({
     unbind;
 });
 
-Script N(80241E18) = {
-    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_80241680_BE0410), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, (Bytecode) N(80241CD4), 0x10, 0, (Bytecode) N(D_80244A20), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, (Bytecode) N(func_802415F4_BE0384), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80241E18) = SCRIPT({
+    N(func_80241680_BE0410)(SI_VAR(0));
+    bind_padlock N(80241CD4) 0x10 0 N(D_80244A20);
+    N(func_802415F4_BE0384)(SI_VAR(0));
+});
 
 Script N(80241E68) = SCRIPT({
     SetPlayerAnimation(ANIM_10002);

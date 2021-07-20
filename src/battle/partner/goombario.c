@@ -612,339 +612,324 @@ Script N(8023A66C) = SCRIPT({
     SI_VAR(10) = SI_VAR(11);
 });
 
-// *INDENT-OFF*
-Script N(8023A754) = {
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A52C)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A66C)),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589831),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 18, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 8205),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 0),
-    SI_CMD(ScriptOpcode_CALL, PartnerTestEnemy, SI_VAR(0), 128, 20, 0, 1, 16),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 6),
-        SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-        SI_CMD(ScriptOpcode_CALL, N(func_80238A20_6F1B00)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 1, 0, 5, SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 354),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_GT, 0),
-            SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 80),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 48),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-        SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_CALL, func_802694A4, 0),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, 24, 3),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(10), 24),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 4),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), -30),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, 0, 0, SI_VAR(0)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 641),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-    SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 32),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_CALL, func_80269550, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A06C)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(8023A754) = SCRIPT({
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    await N(8023A52C);
+    await N(8023A66C);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
+    sleep 5;
+    SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
+    sleep 1;
+    UseBattleCamPreset(52);
+    func_802A9120_421B10(SI_VAR(10), 3);
+    UseBattleCamPreset(52);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
+    SetGoalToTarget(ACTOR_PARTNER);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
+    func_8023817C_6F125C(SI_VAR(10), 0);
+    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
+    if (SI_VAR(0) == 6) {
+        SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+        N(func_80238A20_6F1B00)();
+        spawn {
+            ShakeCam(1, 0, 5, 1.0);
+        }
+        PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_162);
+        sleep 20;
+        await N(80239CA8);
+        return;
+    }
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    GetActionCommandResult(SI_VAR(0));
+    match SI_VAR(0) {
+        > 0 {
+            N(IsGlowing)();
+            SI_VAR(0) += 1;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+        }
+        else {
+            N(StopGlowingAndGet)();
+            SI_VAR(0) += 1;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+        }
+    }
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    match SI_VAR(0) {
+        0, 2 {
+            await N(80239CA8);
+            return;
+        }
+        1, 3 {}
+    }
+    spawn {
+        UseBattleCamPreset(50);
+        sleep 5;
+        SetGoalToTarget(ACTOR_PARTNER);
+        UseBattleCamPreset(53);
+    }
+    func_80269524(SI_VAR(15));
+    CloseActionCommandInfo();
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    func_802694A4(0);
+    func_802A9120_421B10(24, 3);
+    SI_VAR(10) = 24;
+    spawn {
+        sleep 4;
+        SI_VAR(0) = 0;
+        loop 6 {
+            SI_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+            sleep 1;
+        }
+    }
+    SetGoalToTarget(ACTOR_PARTNER);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, 0x281);
+    func_8023817C_6F125C(SI_VAR(10), 3);
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    N(StopGlowingAndGet)();
+    SI_VAR(0) += 1;
+    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    func_80269550(SI_VAR(15));
+    await N(8023A06C);
+});
 
-// *INDENT-OFF*
-Script N(8023ADC4) = {
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A52C)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A66C)),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589831),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 18, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 8205),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 0),
-    SI_CMD(ScriptOpcode_CALL, PartnerTestEnemy, SI_VAR(0), 128, 20, 0, 1, 16),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 6),
-        SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-        SI_CMD(ScriptOpcode_CALL, N(func_80238A20_6F1B00)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 1, 0, 5, SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 354),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_GT, 0),
-            SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 2),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 80),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 2),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 48),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-        SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_CALL, func_802694A4, 0),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, 24, 3),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(10), 24),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 4),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), -30),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, 0, 0, SI_VAR(0)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, 1),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 641),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, -1),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 2),
-    SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 32),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_CALL, func_80269550, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A06C)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(8023ADC4) = SCRIPT({
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    await N(8023A52C);
+    await N(8023A66C);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
+    sleep 5;
+    SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
+    sleep 1;
+    UseBattleCamPreset(52);
+    func_802A9120_421B10(SI_VAR(10), 3);
+    UseBattleCamPreset(52);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
+    SetGoalToTarget(ACTOR_PARTNER);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
+    func_8023817C_6F125C(SI_VAR(10), 0);
+    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
+    if (SI_VAR(0) == 6) {
+        SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+        N(func_80238A20_6F1B00)();
+        spawn {
+            ShakeCam(1, 0, 5, 1.0);
+        }
+        PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_162);
+        sleep 20;
+        await N(80239CA8);
+        return;
+    }
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    GetActionCommandResult(SI_VAR(0));
+    match SI_VAR(0) {
+        > 0 {
+            N(IsGlowing)();
+            SI_VAR(0) += 2;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+        }
+        else {
+            N(StopGlowingAndGet)();
+            SI_VAR(0) += 2;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+        }
+    }
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    match SI_VAR(0) {
+        0, 2 {
+            await N(80239CA8);
+            return;
+        }
+        1, 3 {}
+    }
+    spawn {
+        UseBattleCamPreset(50);
+        sleep 5;
+        SetGoalToTarget(ACTOR_PARTNER);
+        UseBattleCamPreset(53);
+    }
+    func_80269524(SI_VAR(15));
+    CloseActionCommandInfo();
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    func_802694A4(0);
+    func_802A9120_421B10(24, 3);
+    SI_VAR(10) = 24;
+    spawn {
+        sleep 4;
+        SI_VAR(0) = 0;
+        loop 6 {
+            SI_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+            sleep 1;
+        }
+    }
+    SetGoalToTarget(ACTOR_PARTNER);
+    EnableActorBlur(256, 1);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, 0x281);
+    func_8023817C_6F125C(SI_VAR(10), 3);
+    EnableActorBlur(256, -1);
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    N(StopGlowingAndGet)();
+    SI_VAR(0) += 2;
+    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    func_80269550(SI_VAR(15));
+    await N(8023A06C);
+});
 
-// *INDENT-OFF*
-Script N(8023B45C) = {
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A52C)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A66C)),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589831),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 18, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 8205),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 0),
-    SI_CMD(ScriptOpcode_CALL, PartnerTestEnemy, SI_VAR(0), 128, 20, 0, 1, 16),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 6),
-        SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-        SI_CMD(ScriptOpcode_CALL, N(func_80238A20_6F1B00)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 1, 0, 5, SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 354),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_GT, 0),
-            SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 80),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 48),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-        SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_CALL, func_802694A4, 0),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, 24, 3),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(10), 24),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 4),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), -30),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, 0, SI_LIMIT, SI_VAR(0)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, SI_VAR(10)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 133),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, SI_LIMIT, SI_VAR(0), SI_LIMIT),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, 1),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 641),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, -1),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-    SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 128, 0, 0, SI_VAR(0), 32),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_CALL, func_80269550, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A06C)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(8023B45C) = SCRIPT({
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    await N(8023A52C);
+    await N(8023A66C);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
+    sleep 5;
+    SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
+    sleep 1;
+    UseBattleCamPreset(52);
+    func_802A9120_421B10(SI_VAR(10), 3);
+    UseBattleCamPreset(52);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
+    SetGoalToTarget(ACTOR_PARTNER);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
+    func_8023817C_6F125C(SI_VAR(10), 0);
+    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
+    if (SI_VAR(0) == 6) {
+        SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+        N(func_80238A20_6F1B00)();
+        spawn {
+            ShakeCam(1, 0, 5, 1.0);
+        }
+        PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_162);
+        sleep 20;
+        await N(80239CA8);
+        return;
+    }
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    GetActionCommandResult(SI_VAR(0));
+    match SI_VAR(0) {
+        > 0 {
+            N(IsGlowing)();
+            SI_VAR(0) += 3;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+        }
+        else {
+            N(StopGlowingAndGet)();
+            SI_VAR(0) += 3;
+            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+        }
+    }
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    match SI_VAR(0) {
+        0, 2 {
+            await N(80239CA8);
+            return;
+        }
+        1, 3 {}
+    }
+    spawn {
+        UseBattleCamPreset(50);
+        sleep 5;
+        SetGoalToTarget(ACTOR_PARTNER);
+        UseBattleCamPreset(53);
+    }
+    func_80269524(SI_VAR(15));
+    CloseActionCommandInfo();
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    func_802694A4(0);
+    func_802A9120_421B10(24, 3);
+    SI_VAR(10) = 24;
+    spawn {
+        sleep 4;
+        SI_VAR(0) = 0;
+        loop 6 {
+            SI_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, -250000000, SI_VAR(0));
+            sleep 1;
+        }
+        SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    }
+    spawn {
+        SI_VAR(0) = 0;
+        loop SI_VAR(10) {
+            SI_VAR(0) += 133;
+            SetActorRotation(ACTOR_SELF, -250000000, SI_VAR(0), -250000000);
+            sleep 1;
+        }
+    }
+    SetGoalToTarget(ACTOR_PARTNER);
+    EnableActorBlur(256, 1);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, 0x281);
+    func_8023817C_6F125C(SI_VAR(10), 3);
+    EnableActorBlur(256, -1);
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    N(StopGlowingAndGet)();
+    SI_VAR(0) += 3;
+    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    func_80269550(SI_VAR(15));
+    await N(8023A06C);
+});
 
 s32 N(D_8023BB78_6ECC58)[] = {
     0x00000007, 0x00000006, 0x00000005, 0x00000004, 0x00000003, 0x00000002, 0x00000001, 0x00000000,
@@ -952,179 +937,179 @@ s32 N(D_8023BB78_6ECC58)[] = {
 
 s32 D_8023BB98_6ECC78 = 0x000000C8;
 
-// *INDENT-OFF*
-Script N(8023BB9C) = {
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A52C)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A66C)),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589831),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 18, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 19, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 1),
-    SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 52),
-    SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_CALL, SetActorDispOffset, 256, 0, 9, 0),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 8205),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 0),
-    SI_CMD(ScriptOpcode_CALL, PartnerTestEnemy, SI_VAR(0), 1048704, 20, 0, 1, 16),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 6),
-        SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-        SI_CMD(ScriptOpcode_CALL, N(func_80238A20_6F1B00)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, ShakeCam, 1, 0, 5, SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 354),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_GT, 0),
-            SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 80),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_CALL, PartnerDamageEnemy, SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 48),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-        SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, func_80269524, SI_VAR(15)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(13), 0),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_LABEL, 10),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 50),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-        SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-        SI_CMD(ScriptOpcode_CALL, UseBattleCamPreset, 53),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, CloseActionCommandInfo),
-    SI_CMD(ScriptOpcode_CALL, func_8026919C, N(D_8023BB78_6ECC58)),
-    SI_CMD(ScriptOpcode_CALL, LoadActionCommand, 1),
-    SI_CMD(ScriptOpcode_CALL, func_802A9000_430020),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(10), 24),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(15)),
-        SI_CMD(ScriptOpcode_CASE_EQ, 0),
-            SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 1),
-        SI_CMD(ScriptOpcode_CASE_EQ, 1),
-            SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 2),
-        SI_CMD(ScriptOpcode_CASE_EQ, 2),
-            SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 3),
-        SI_CMD(ScriptOpcode_CASE_EQ, 3),
-            SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 4),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, func_802A9120_421B10, SI_VAR(10), 5),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 4),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), -30),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, 0, SI_LIMIT, SI_VAR(0)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_CALL, SetAnimation, -127, 1, 589830),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_LOOP, SI_VAR(10)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 133),
-            SI_CMD(ScriptOpcode_CALL, SetActorRotation, -127, SI_LIMIT, SI_VAR(0), SI_LIMIT),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, SetGoalToTarget, 256),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, 1),
-    SI_CMD(ScriptOpcode_CALL, SetJumpAnimations, 256, 0, 589830, 589830, 589830),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 641),
-    SI_CMD(ScriptOpcode_CALL, func_8023817C_6F125C, SI_VAR(10), 3),
-    SI_CMD(ScriptOpcode_CALL, EnableActorBlur, 256, -1),
-    SI_CMD(ScriptOpcode_SUB, SI_VAR(13), 1),
-    SI_CMD(ScriptOpcode_CALL, func_802380E4_6F11C4),
-    SI_CMD(ScriptOpcode_IF_GE, SI_VAR(15), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.1005859375), SI_FIXED(0.80078125), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.30078125), SI_FIXED(0.5), SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, SetActorScale, 256, SI_FIXED(1.0), SI_FIXED(1.0), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_CALL, GetActionCommandResult, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_GT, 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-                SI_CMD(ScriptOpcode_CALL, N(IsGlowing)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-                SI_CMD(ScriptOpcode_CALL, PartnerPowerBounceEnemy, SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 64),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-                SI_CMD(ScriptOpcode_CALL, PartnerPowerBounceEnemy, SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, N(StopGlowingAndGet)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_CALL, PartnerPowerBounceEnemy, SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32),
-            SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtActor, 256, 0),
-    SI_CMD(ScriptOpcode_CALL, func_80269550, SI_VAR(14)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80239CA8)),
-            SI_CMD(ScriptOpcode_RETURN),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 1),
-                SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(8023A06C)),
-                SI_CMD(ScriptOpcode_RETURN),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(15), 1),
-    SI_CMD(ScriptOpcode_GOTO, 10),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(8023BB9C) = SCRIPT({
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    await N(8023A52C);
+    await N(8023A66C);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, charge));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
+    sleep 5;
+    SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
+    sleep 1;
+    UseBattleCamPreset(52);
+    func_802A9120_421B10(SI_VAR(10), 1);
+    UseBattleCamPreset(52);
+    SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
+    SetGoalToTarget(ACTOR_PARTNER);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
+    func_8023817C_6F125C(SI_VAR(10), 0);
+    PartnerTestEnemy(SI_VAR(0), 1048704, 20, 0, 1, 16);
+    if (SI_VAR(0) == 6) {
+        SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+        N(func_80238A20_6F1B00)();
+        spawn {
+            ShakeCam(1, 0, 5, 1.0);
+        }
+        PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_162);
+        sleep 20;
+        await N(80239CA8);
+        return;
+    }
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    GetActionCommandResult(SI_VAR(0));
+    match SI_VAR(0) {
+        > 0 {
+            N(IsGlowing)();
+            SI_VAR(0) += 3;
+            PartnerDamageEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 80);
+        }
+        else {
+            N(StopGlowingAndGet)();
+            SI_VAR(0) += 3;
+            PartnerDamageEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 48);
+        }
+    }
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    match SI_VAR(0) {
+        0, 2 {
+            await N(80239CA8);
+            return;
+        }
+        1, 3 {}
+    }
+    spawn {
+        UseBattleCamPreset(50);
+        sleep 5;
+        SetGoalToTarget(ACTOR_PARTNER);
+        UseBattleCamPreset(53);
+    }
+    func_80269524(SI_VAR(15));
+    SI_VAR(13) = 0;
+    SI_VAR(15) = 0;
+    SI_FLAG(0) = 0;
+10:
+    spawn {
+        UseBattleCamPreset(50);
+        sleep 5;
+        SetGoalToTarget(ACTOR_PARTNER);
+        UseBattleCamPreset(53);
+    }
+    CloseActionCommandInfo();
+    func_8026919C(N(D_8023BB78_6ECC58));
+    LoadActionCommand(1);
+    func_802A9000_430020();
+    SI_VAR(10) = 24;
+    match SI_VAR(15) {
+        == 0 {
+            func_802A9120_421B10(SI_VAR(10), 1);
+        }
+        == 1 {
+            func_802A9120_421B10(SI_VAR(10), 2);
+        }
+        == 2 {
+            func_802A9120_421B10(SI_VAR(10), 3);
+        }
+        == 3 {
+            func_802A9120_421B10(SI_VAR(10), 4);
+        }
+        else {
+            func_802A9120_421B10(SI_VAR(10), 5);
+        }
+    }
+    spawn {
+        sleep 4;
+        SI_VAR(0) = 0;
+        loop 6 {
+            SI_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, -250000000, SI_VAR(0));
+            sleep 1;
+        }
+        SetAnimation(ACTOR_SELF, 1, NPC_ANIM(battle_goombario, default, headbonk));
+    }
+    spawn {
+        SI_VAR(0) = 0;
+        loop SI_VAR(10) {
+            SI_VAR(0) += 133;
+            SetActorRotation(ACTOR_SELF, -250000000, SI_VAR(0), -250000000);
+            sleep 1;
+        }
+    }
+    SetGoalToTarget(ACTOR_PARTNER);
+    EnableActorBlur(256, 1);
+    SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
+    PlaySoundAtActor(ACTOR_PARTNER, 0x281);
+    func_8023817C_6F125C(SI_VAR(10), 3);
+    EnableActorBlur(256, -1);
+    SI_VAR(13) -= 1;
+    func_802380E4_6F11C4();
+    if (SI_VAR(15) >= SI_VAR(0)) {
+        SI_FLAG(0) = 1;
+    }
+    parallel {
+        SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.3, 0.5, 1.0);
+        sleep 1;
+        SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
+    }
+    sleep 1;
+    GetActionCommandResult(SI_VAR(0));
+    match SI_VAR(0) {
+        > 0 {
+            if (SI_FLAG(0) == 0) {
+                N(IsGlowing)();
+                SI_VAR(0) += 3;
+                PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 64);
+            } else {
+                N(StopGlowingAndGet)();
+                SI_VAR(0) += 3;
+                PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32);
+            }
+        }
+        else {
+            N(StopGlowingAndGet)();
+            SI_VAR(0) += 3;
+            PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32);
+            SI_FLAG(0) = 0;
+        }
+    }
+    PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
+    func_80269550(SI_VAR(14));
+    match SI_VAR(0) {
+        0, 2 {
+            await N(80239CA8);
+            return;
+        }
+        1, 3 {
+            if (SI_FLAG(0) == 1) {
+                await N(8023A06C);
+                return;
+            }
+        }
+    }
+    SI_VAR(15) += 1;
+    goto 10;
+});
 
 Script N(8023C5B8) = SCRIPT({
     GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

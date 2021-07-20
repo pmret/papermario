@@ -106,7 +106,7 @@ Script N(8024096C) = SCRIPT({
 Script N(exitWalk_80240C18) = EXIT_WALK_SCRIPT(60,  0, "flo_25",  1);
 
 Script N(80240C74) = SCRIPT({
-    bind N(exitWalk_80240C18) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240C18) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
@@ -460,8 +460,8 @@ Vec4f N(triggerCoord_802428B4) = { -309.0f, 0.0f, 31.0f, 0.0f };
 
 Script N(802428C4) = SCRIPT({
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 4;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_802428B4);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 4;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_802428B4);
 });
 
 StaticNpc N(npcGroup_8024291C) = {

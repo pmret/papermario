@@ -89,13 +89,12 @@ Script N(80244604) = SCRIPT({
     unbind;
 });
 
-Script N(80244738) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802422C0_CCD5D0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80244604), 0x10, 0, N(D_802453B0_EF79C0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242234_CCD544), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80244738) = SCRIPT({
+    N(func_802422C0_CCD5D0)(SI_VAR(0));
+    bind_padlock N(80244604) 0x10 0 N(D_802453B0_EF79C0);
+    N(func_80242234_CCD544)(SI_VAR(0));
+});
+
 
 s32 N(D_80244788_CCFA98)[] = {
     0x000000A1, 0x00000000,
@@ -145,7 +144,7 @@ Script N(interact_80244790) = SCRIPT({
             ResetCam(0, 4.0);
             SpeakToPlayer(NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063));
             SI_SAVE_FLAG(1412) = 1;
-            bind N(8024352C) to TRIGGER_FLOOR_PRESS_A 30;
+            bind N(8024352C) TRIGGER_FLOOR_PRESS_A 30;
         }
     }
     SI_AREA_FLAG(35) = 0;

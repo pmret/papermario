@@ -44,8 +44,8 @@ Script N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
 Script N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
 
 Script N(802425B4) = SCRIPT({
-    bind N(exitWalk_80242558) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_802424FC) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80242558) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_802424FC) TRIGGER_FLOOR_ABOVE 4;
 });
 
 s32 N(lavaResetList_802425FC)[] = {
@@ -395,66 +395,63 @@ s32 N(D_80243B18_CCEE28) = {
     0x0000005A,
 };
 
-// *INDENT-OFF*
-Script N(80243B1C) = {
-    SI_CMD(ScriptOpcode_SET_GROUP, 0),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(15), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_LABEL, 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(35), 1),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-        SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_USE_BUFFER, &N(D_802431CC_CCE4DC)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_CALL, RandInt, 10, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, EnableModel, SI_VAR(15), 1),
-    SI_CMD(ScriptOpcode_CALL, RandInt, 4, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_ADD_F, SI_VAR(0), SI_FIXED(4.0)),
-    SI_CMD(ScriptOpcode_MUL_F, SI_VAR(0), SI_FIXED(-1.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), SI_FIXED(2.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(2), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(2), SI_FIXED(10.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(3), SI_FIXED(0.400390625)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(591.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(5), SI_FIXED(60.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(6), SI_FIXED(121.0)),
-    SI_CMD(ScriptOpcode_CALL, RandInt, 3, SI_VAR(7)),
-    SI_CMD(ScriptOpcode_ADD_F, SI_VAR(7), SI_FIXED(3.0)),
-    SI_CMD(ScriptOpcode_MUL_F, SI_VAR(7), SI_FIXED(0.0400390625)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(9), SI_VAR(7)),
-    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(9), SI_FIXED(5.0)),
-    SI_CMD(ScriptOpcode_CALL, RandInt, 50, SI_VAR(8)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(8), 50),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(8)),
-        SI_CMD(ScriptOpcode_SET_F, SI_VAR(14), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_SUB_F, SI_VAR(14), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_MUL_F, SI_VAR(14), SI_FIXED(0.046875)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(0), SI_VAR(14)),
-        SI_CMD(ScriptOpcode_SET_F, SI_VAR(14), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_SUB_F, SI_VAR(14), SI_VAR(1)),
-        SI_CMD(ScriptOpcode_MUL_F, SI_VAR(14), SI_FIXED(0.046875)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(1), SI_VAR(14)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(4), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(5), SI_VAR(1)),
-        SI_CMD(ScriptOpcode_SET_F, SI_VAR(14), SI_VAR(7)),
-        SI_CMD(ScriptOpcode_SUB_F, SI_VAR(14), SI_VAR(9)),
-        SI_CMD(ScriptOpcode_MUL_F, SI_VAR(14), SI_FIXED(0.203125)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(9), SI_VAR(14)),
-        SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(15), SI_VAR(4), SI_VAR(5), SI_VAR(6)),
-        SI_CMD(ScriptOpcode_CALL, ScaleModel, SI_VAR(15), SI_VAR(9), SI_VAR(9), SI_VAR(9)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_CALL, EnableModel, SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80243B1C) = SCRIPT({
+    group 0;
+    SI_VAR(15) = SI_VAR(0);
+0:
+    if (SI_AREA_FLAG(35) == 1) {
+        sleep 10;
+        goto 0;
+    }
+    buf_use N(D_802431CC_CCE4DC);
+    buf_read SI_VAR(0);
+    if (SI_VAR(0) == 0) {
+        RandInt(10, SI_VAR(0));
+        SI_VAR(0) += 1;
+        sleep SI_VAR(0);
+        goto 0;
+    }
+    EnableModel(SI_VAR(15), 1);
+    RandInt(4, SI_VAR(0));
+    SI_VAR(0) += 4.0;
+    SI_VAR(0) *= -1.0;
+    SI_VAR(1) = 2.0;
+    SI_VAR(2) = (float) SI_VAR(0);
+    SI_VAR(2) /= 10.0;
+    SI_VAR(3) = 0.4;
+    SI_VAR(4) = 591.0;
+    SI_VAR(5) = 60.0;
+    SI_VAR(6) = 121.0;
+    RandInt(3, SI_VAR(7));
+    SI_VAR(7) += 3.0;
+    SI_VAR(7) *= 0.04;
+    SI_VAR(9) = (float) SI_VAR(7);
+    SI_VAR(9) /= 5.0;
+    RandInt(50, SI_VAR(8));
+    SI_VAR(8) += 50;
+    loop SI_VAR(8) {
+        SI_VAR(14) = (float) SI_VAR(2);
+        SI_VAR(14) -= (float) SI_VAR(0);
+        SI_VAR(14) *= 0.046875;
+        SI_VAR(0) += (float) SI_VAR(14);
+        SI_VAR(14) = (float) SI_VAR(3);
+        SI_VAR(14) -= (float) SI_VAR(1);
+        SI_VAR(14) *= 0.046875;
+        SI_VAR(1) += (float) SI_VAR(14);
+        SI_VAR(4) += (float) SI_VAR(0);
+        SI_VAR(5) += (float) SI_VAR(1);
+        SI_VAR(14) = (float) SI_VAR(7);
+        SI_VAR(14) -= (float) SI_VAR(9);
+        SI_VAR(14) *= 0.203125;
+        SI_VAR(9) += (float) SI_VAR(14);
+        TranslateModel(SI_VAR(15), SI_VAR(4), SI_VAR(5), SI_VAR(6));
+        ScaleModel(SI_VAR(15), SI_VAR(9), SI_VAR(9), SI_VAR(9));
+        sleep 1;
+    }
+    EnableModel(SI_VAR(15), 0);
+    goto 0;
+});
+
 
 Script N(80243E78) = SCRIPT({
     ModifyColliderFlags(3, 31, 0x00000006);
