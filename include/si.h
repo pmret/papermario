@@ -114,6 +114,7 @@ typedef enum ScriptOpcode {
 #define SI_ARRAY(v)         ((v - 190000000))
 #define SI_ARRAY_FLAG(v)    ((v - 210000000))
 #define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
+#define SI_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
 #define STORY_PROGRESS SI_SAVE_VAR(0)

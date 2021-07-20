@@ -33,7 +33,70 @@ void dispatch_event_general(Actor* actor, Event event) {
     }
 }
 
-INCLUDE_ASM(s32, "1A5830", play_hit_sound);
+void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
+    s32 actorType = actor->actorID & 0x700;
+
+    switch (hitSound) {
+        case 0:
+            sfx_play_sound_at_position(SOUND_10C, 0, x, y, z);
+            break;
+        case 1:
+            sfx_play_sound_at_position(SOUND_10D, 0, x, y, z);
+            break;
+        case 2:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_E1, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 3:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_E2, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_EA, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_EA, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 4:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_E3, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_EB, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_EB, 0, x, y, z);
+                    break;
+            }
+            break;
+        case 5:
+            switch (actorType) {
+                case 0:
+                    sfx_play_sound_at_position(SOUND_37A, 0, x, y, z);
+                    break;
+                case 0x100:
+                    sfx_play_sound_at_position(SOUND_37B, 0, x, y, z);
+                    break;
+                case 0x200:
+                    sfx_play_sound_at_position(SOUND_37B, 0, x, y, z);
+                    break;
+            }
+            break;
+    }
+}
 
 void dispatch_event_actor(Actor* actor, Event event) {
     ScriptInstance* onHitScript = actor->onHitScript;
@@ -208,7 +271,46 @@ INCLUDE_ASM(s32, "1A5830", JumpToGoalSimple2);
 
 INCLUDE_ASM(s32, "1A5830", JumpWithBounce);
 
-INCLUDE_ASM(s32, "1A5830", LandJump);
+ApiStatus LandJump(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+    }
+
+    if (script->functionTemp[0] == 0) {
+        s32 actorID = get_variable(script, *args++);
+
+        if (actorID == ACTOR_SELF) {
+            actorID = script->owner1.actorID;
+        }
+
+        actor = get_actor(actorID);
+        script->functionTemp[1] = (s32)actor;
+        actor->walk.currentPos.x = actor->currentPos.x;
+        actor->walk.currentPos.y = actor->currentPos.y;
+        actor->walk.currentPos.z = actor->currentPos.z;
+        script->functionTemp[0] = 1;
+    }
+
+    actor = (Actor*)script->functionTemp[1];
+    actor->walk.currentPos.y += actor->walk.velocity;
+    actor->walk.velocity -= actor->walk.acceleration;
+
+    add_xz_vec3f(&actor->walk.currentPos, actor->walk.speed, actor->walk.angle);
+    actor->currentPos.x = actor->walk.currentPos.x;
+    actor->currentPos.y = actor->walk.currentPos.y;
+    actor->currentPos.z = actor->walk.currentPos.z;
+
+    if (actor->currentPos.y < 0.0f) {
+        actor->currentPos.y = 0.0f;
+        play_movement_dust_effects(2, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, actor->yaw);
+        return ApiStatus_DONE1;
+    }
+
+    return ApiStatus_BLOCK;
+}
 
 INCLUDE_ASM(s32, "1A5830", FallToGoal);
 
@@ -331,7 +433,38 @@ ApiStatus GetEnemyMaxHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// battlestatus shtuff
+#ifdef NON_MATCHING
+ApiStatus RemoveActor(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    Actor* actor;
+    s32 i;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    actor = get_actor(actorID);
+
+    for (i = 0; i < battleStatus->numEnemyActors; i++) {
+        if (actor == battleStatus->enemyActors[(u8)battleStatus->enemyIDs[i]]) {
+            battleStatus->enemyIDs[i] = -1;
+        }
+    }
+
+    currentEncounter->coinsEarned += actor->extraCoinBonus;
+    currentEncounter->coinsEarned += actor->staticActorData->coinReward;
+    btl_delete_actor(actor);
+    battleStatus->enemyActors[(u8)actorID] = NULL;
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "1A5830", RemoveActor);
+#endif
 
 INCLUDE_ASM(s32, "1A5830", DropStarPoints);
 
@@ -422,7 +555,7 @@ ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
     battleStatus->currentAttackStatus = *args++;
     battleStatus->currentAttackDamage = get_variable(script, *args++);
     battleFlagsModifier = *args++;
-    
+
     if (battleFlagsModifier & 0x10) {
         gBattleStatus.flags1 |= 0x10;
         gBattleStatus.flags1 &= ~0x20;
@@ -452,10 +585,10 @@ ApiStatus EnemyDamageTarget(ScriptInstance *script, s32 isInitialCall) {
 
     attackStatus = battleStatus->currentAttackStatus;
     battleStatus->currentTargetID = actor->targetActorID;
-    
+
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = attackStatus;
-    
+
     if ((attackStatus & 0xFF) == 0xFF) {
         battleStatus->statusChance = 0;
     }
@@ -535,7 +668,7 @@ ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
     battleStatus->currentAttackStatus = *args++;
     battleStatus->currentAttackDamage = get_variable(script, *args++);
     battleFlagsModifier = *args++;
-    
+
     if (battleFlagsModifier & 0x10) {
         gBattleStatus.flags1 |= 0x10;
         gBattleStatus.flags1 &= ~0x20;
@@ -565,10 +698,10 @@ ApiStatus EnemyTestTarget(ScriptInstance *script, s32 isInitialCall) {
 
     attackStatus = battleStatus->currentAttackStatus;
     battleStatus->currentTargetID = actor->targetActorID;
-    
+
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = attackStatus;
-    
+
     if ((attackStatus & 0xFF) == 0xFF) {
         battleStatus->statusChance = 0;
     }
@@ -813,10 +946,10 @@ ApiStatus SetActorSize(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (y != -250000000) {
+    if (y != SI_LIMIT) {
         actor->size.y = y;
     }
-    if (x != -250000000) {
+    if (x != SI_LIMIT) {
         actor->size.x = x;
     }
     actor->shadowScale = actor->size.x / 24.0;
@@ -841,7 +974,32 @@ ApiStatus GetActorSize(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "1A5830", SetPartSize);
+ApiStatus SetPartSize(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    ActorID actorID = get_variable(script, *args++);
+    s32 partIndex = get_variable(script, *args++);
+    s32 sizeY = get_variable(script, *args++);
+    s32 sizeX = get_variable(script, *args++);
+    ActorPart* part;
+
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.actorID;
+    }
+
+    part = get_actor_part(get_actor(actorID), partIndex);
+
+    if (sizeY != SI_LIMIT) {
+        part->size.y = sizeY;
+    }
+
+    if (sizeX != SI_LIMIT) {
+        part->size.x = sizeX;
+    }
+
+    part->shadowScale = part->size.x / 24.0;
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetOriginalActorType(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
