@@ -398,7 +398,7 @@ void playFX_3D(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 v
 EffectInstance* playFX_40(s32, f32, f32, f32, s32);
 EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-//EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
+EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
 EffectInstance* playFX_4E(s32, f32, f32, f32);
 EffectInstance* playFX_54(s32, f32, f32, f32);
 EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
