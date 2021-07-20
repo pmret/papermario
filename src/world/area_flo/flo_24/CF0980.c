@@ -188,7 +188,48 @@ Script N(updateTexturePan_802417A0) = SCRIPT({
 
 const char N(flo_10_name_hack)[];
 
-// *INDENT-OFF*
+// BUG: missing END_SPAWN_THREADs
+#ifdef NON_MATCHING
+Script N(8024183C) = SCRIPT({
+    DisablePlayerInput(TRUE);
+    TranslateGroup(100, 0, 45, 0);
+    UseSettingsFrom(0, 170, 0, 160);
+    SetPanTarget(0, 170, -90, 160);
+    SetCamDistance(0, 800);
+    SetCamPitch(0, 18.5, -7.5);
+    SetCamPosA(0, -300.0, 200.0);
+    SetCamPosB(0, 300.0, -150.0);
+    SetCamSpeed(0, 90.0);
+    PanToTarget(0, 0, 1);
+    PlaySound(0x80000050);
+    spawn {
+        MakeLerp(80, 90, 10, 0);
+    0:
+        UpdateLerp();
+        RotateModel(101, SI_VAR(0), 1, 0, 0);
+        RotateModel(103, SI_VAR(0), 1, 0, 0);
+        if (SI_VAR(1) == 1) {
+            sleep 1;
+            goto 0;
+        }
+        spawn {
+            MakeLerp(45, 100, 150, 0);
+            loop {
+                UpdateLerp();
+                TranslateGroup(100, 0, SI_VAR(0), 0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 30;
+            STORY_PROGRESS = STORY_CH6_FILLED_SPRING_WITH_WATER;
+            GotoMap("flo_10", 2);
+            sleep 100;
+        }
+    }
+});
+#else
 Script N(8024183C) = {
     SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 1),
     SI_CMD(ScriptOpcode_CALL, TranslateGroup, 100, 0, 45, 0),
@@ -222,13 +263,13 @@ Script N(8024183C) = {
                 SI_CMD(ScriptOpcode_END_IF),
             SI_CMD(ScriptOpcode_END_LOOP),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(0), 49),
+            SI_CMD(ScriptOpcode_SET, STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
             SI_CMD(ScriptOpcode_CALL, GotoMap, N(flo_10_name_hack), 2),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 100),
             SI_CMD(ScriptOpcode_RETURN),
             SI_CMD(ScriptOpcode_END)
         };
-        // *INDENT-ON*
+#endif
 
 Script N(80241ABC) = SCRIPT({
     if (STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {

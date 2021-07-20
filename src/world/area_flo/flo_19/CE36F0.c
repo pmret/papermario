@@ -16,13 +16,31 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_19_tattle },
 };
 
-// *INDENT-OFF*
+// Extraneous END_CASE_MULTI
+#ifdef NON_MATCHING
+Script N(802409C0) = SCRIPT({
+    GetEntryID(SI_VAR(0));
+    match SI_VAR(0) {
+        0, 1 {
+            SetMusicTrack(0, SONG_CLOUDY_CLIMB, 0, 8);
+        }
+        2, 7 {}
+        == 3 {
+            if (SI_AREA_FLAG(44) != 0) {
+            } else {
+                FadeOutMusic(1, 3000);
+                FadeInMusic(0, 50, 0, 3000, 0, 127);
+            }
+        }
+    }
+});
+#else
 Script N(802409C0) = {
     SI_CMD(ScriptOpcode_CALL, GetEntryID, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, 50, 0, 8),
+            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8),
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 7),
@@ -38,7 +56,7 @@ Script N(802409C0) = {
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 static s32 N(pad_ABC) = {
     0x00000000,

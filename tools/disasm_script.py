@@ -297,7 +297,7 @@ def fix_args(self, func, args, info):
                     new_args.append(f"{int(argNum)}")
                 else:
                     #Print the unknowns in hex
-                    new_args.append(f"0x{int(argNum):X}")
+                    new_args.append(self.var(argNum))
 
         else:
             new_args.append(f"{arg}")
@@ -780,7 +780,7 @@ class ScriptDisassembler:
         elif opcode == 0x52: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_OTHERS, {self.var(argv[0])}),")
         elif opcode == 0x53: self.write_line(f"SI_CMD(ScriptOpcode_SUSPEND_SCRIPT, {self.var(argv[0])}),")
         elif opcode == 0x54: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_SCRIPT, {self.var(argv[0])}),")
-        elif opcode == 0x55: self.write_line(f"SI_CMD(ScriptOpcode_SCRIPT_EXISTS, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x55: self.write_line(f"SI_CMD(ScriptOpcode_DOES_SCRIPT_EXIST, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x56:
             self.write_line("SI_CMD(ScriptOpcode_SPAWN_THREAD),")
             self.indent += 1
@@ -1075,12 +1075,11 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             self.write_line(f"? {self.replace_enum(argv[0], True)}")
         elif opcode == 0x20:
             #if not self.was_multi_case:
-            #    raise UnsupportedScript("unexpected SI_END_MULTI_CASE")
+            #    raise UnsupportedScript("unexpected END_MULTI_CASE")
             pass
         elif opcode == 0x21:
-            self.indent -= 1
-            self.write_line(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
-            self.indent += 1
+            self.case_stack.append("CASE")
+            self.write(f"{self.replace_enum(argv[0], True)} ... {self.replace_enum(argv[1], True)}")
         elif opcode == 0x22: self.write_line("break match;")
         elif opcode == 0x23:
             # close open case if needed
@@ -1151,7 +1150,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
                 self.write_line(f"{self.var(argv[0])} /= {lhs};")
             else:
                 self.write_line(f"{self.var(argv[0])} /= (float) {lhs};")
-        elif opcode == 0x30: self.write_line(f"buf_use {self.var(argv[0])};")
+        elif opcode == 0x30: self.write_line(f"buf_use {self.addr_ref(argv[0])};")
         elif opcode == 0x31: self.write_line(f"buf_read {self.var(argv[0])};")
         elif opcode == 0x32: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])};")
         elif opcode == 0x33: self.write_line(f"buf_read {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
@@ -1163,9 +1162,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x39: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])};")
         elif opcode == 0x3A: self.write_line(f"buf_readf {self.var(argv[0])} {self.var(argv[1])} {self.var(argv[2])} {self.var(argv[3])};")
         elif opcode == 0x3B: self.write_line(f"buf_peekf {self.var(argv[0])} {self.var(argv[1])};")
-        elif opcode == 0x3C: self.write_line(f"arr_use {self.var(argv[0])};")
-        elif opcode == 0x3D: self.write_line(f"flags_use {self.var(argv[0])};")
-        elif opcode == 0x3E: self.write_line(f"arr_new {self.var(argv[0])} {self.var(argv[1])};")
+        elif opcode == 0x3C: self.write_line(f"arr_use {self.addr_ref(argv[0])};")
+        elif opcode == 0x3D: self.write_line(f"flags_use {self.addr_ref(argv[0])};")
+        elif opcode == 0x3E: self.write_line(f"arr_new {self.var(argv[0])} {self.addr_ref(argv[1])};")
         elif opcode == 0x3F: self.write_line(f"{self.var(argv[0])} &= {self.var(argv[1])};")
         elif opcode == 0x40: self.write_line(f"{self.var(argv[0])} |= {self.var(argv[1])};")
         elif opcode == 0x41: self.write_line(f"{self.var(argv[0])} &= (const) 0x{argv[1]:X};")
@@ -1216,6 +1215,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
         elif opcode == 0x52: self.write_line(f"resume others {self.var(argv[0])};")
         elif opcode == 0x53: self.write_line(f"suspend {self.var(argv[0])};")
         elif opcode == 0x54: self.write_line(f"resume {self.var(argv[0])};")
+        elif opcode == 0x55: self.write_line(f"{self.var(argv[1])} = does_script_exist {self.var(argv[0])};")
         elif opcode == 0x56:
             self.write_line("spawn {")
             self.indent += 1

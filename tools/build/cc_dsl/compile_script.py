@@ -53,6 +53,7 @@ script_parser = Lark(r"""
          | "await" expr         -> await_stmt
          | "jump" expr          -> jump_stmt
          | lhs "=" "spawn" expr -> spawn_set_stmt
+         | lhs "=" "does_script_exist" expr -> does_script_exist
          | lhs set_op expr      -> set_stmt
          | lhs set_op "(int)" expr    -> set_int_stmt
          | lhs set_op "(float)" expr  -> set_float_stmt
@@ -725,6 +726,9 @@ class Compile(Transformer):
         return Cmd("ScriptOpcode_USE_FLAGS", tree.children[0], meta=tree.meta)
     def new_array(self, tree):
         return Cmd("ScriptOpcode_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
+
+    def does_script_exist(self, tree):
+        return Cmd("ScriptOpcode_DOES_SCRIPT_EXIST", tree.children[1], tree.children[0], meta=tree.meta)
 
 def compile_script(s):
     tree = script_parser.parse(s)

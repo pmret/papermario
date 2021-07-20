@@ -357,7 +357,7 @@ Script N(802413F0) = SCRIPT({
     SI_MAP_FLAG(2) = 0;
 });
 
-/*
+#ifdef NON_MATCHING
 Script N(80241ED4) = SCRIPT({
     SI_VAR(0) = 0;
     SI_VAR(1) = 0;
@@ -398,8 +398,7 @@ Script N(80241ED4) = SCRIPT({
     sleep 30;
     ModifyColliderFlags(0, 19, 0x7FFFFE00);
 });
-*/
-// *INDENT-OFF*
+#else
 Script N(80241ED4) = {
     SI_CMD(ScriptOpcode_SET_F, SI_VAR(0), 0),
     SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), 0),
@@ -425,7 +424,7 @@ Script N(80241ED4) = {
                 SI_CMD(ScriptOpcode_GOTO, 0),
             SI_CMD(ScriptOpcode_END_IF),
         SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
+    SI_CMD(ScriptOpcode_END_IF), // BUG: extraneous END_IF
     SI_CMD(ScriptOpcode_CALL, TranslateModel, 31, -78, 19, 2),
     SI_CMD(ScriptOpcode_CALL, TranslateModel, 32, -78, 19, 2),
     SI_CMD(ScriptOpcode_CALL, TranslateModel, 31, SI_VAR(0), SI_VAR(1), 0),
@@ -442,7 +441,7 @@ SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
 SI_CMD(ScriptOpcode_RETURN),
 SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 Script N(80242174) = SCRIPT({
     SI_VAR(0) = (float) 0;
@@ -559,7 +558,7 @@ Script N(80242620) = SCRIPT({
     sleep 30;
 });
 
-/*
+#ifdef NON_MATCHING
 Script N(80242910) = SCRIPT({
     SI_VAR(0) = 0;
     SI_VAR(1) = 0;
@@ -593,9 +592,10 @@ Script N(80242910) = SCRIPT({
     sleep 1;
 }
 0:
+    return;
+    break;
 });
-*/
-// *INDENT-OFF*
+#else
 Script N(80242910) = {
     SI_CMD(ScriptOpcode_SET_F, SI_VAR(0), 0),
     SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), 0),
@@ -632,7 +632,7 @@ SI_CMD(ScriptOpcode_LABEL, 0),
 SI_CMD(ScriptOpcode_RETURN),
 SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 Script N(80242B18) = SCRIPT({
     ModifyColliderFlags(0, 18, 0x7FFFFE00);

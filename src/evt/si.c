@@ -1446,7 +1446,7 @@ s32 si_execute_next_command(ScriptInstance *script) {
             case ScriptOpcode_RESUME_SCRIPT:
                 status = si_handle_resume(script);
                 break;
-            case ScriptOpcode_SCRIPT_EXISTS:
+            case ScriptOpcode_DOES_SCRIPT_EXIST:
                 status = si_handle_does_script_exist(script);
                 break;
             case ScriptOpcode_SPAWN_THREAD:
