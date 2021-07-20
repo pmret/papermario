@@ -64,7 +64,7 @@ void func_80144278(s32 arg0) {
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element);
 
-void draw_hud_element_clipped (s32 arg0) {
+void draw_hud_element_clipped(s32 arg0) {
     draw_hud_element(arg0, 0);
 }
 
