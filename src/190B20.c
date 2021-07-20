@@ -1072,7 +1072,53 @@ INCLUDE_ASM(s32, "190B20", func_80263268);
 
 INCLUDE_ASM(s32, "190B20", func_80263300);
 
-INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
+// INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
+// s32 btl_are_all_enemies_defeated(void) {
+//     s32 *temp_v0;
+//     s32 temp_a0;
+//     ? *phi_v1;
+//     s32 phi_a0;
+//     s32 phi_a1;
+
+//     phi_v1 = &gBattleStatus;
+//     phi_a0 = 0;
+//     phi_a1 = 0;
+//     do {
+//         temp_v0 = phi_v1->unkE0;
+//         if ((temp_v0 != 0) && ((*temp_v0 & 0x404000) == 0)) {
+//             phi_a1 = 1;
+//         }
+//         temp_a0 = phi_a0 + 1;
+//         phi_v1 += 4;
+//         phi_a0 = temp_a0;
+//     } while ((temp_a0 < 0x18) != 0);
+//     return phi_a1 ^ 1;
+// }
+s32 btl_are_all_enemies_defeated(void) {
+    s32* currentEnemyFlags;
+    s32 enemyCounter;
+    BattleStatus* bs;
+    s32 enemyCounter2;
+    s32 enemiesStillAlive;
+
+    bs = &gBattleStatus;
+    enemyCounter2 = 0;
+    enemiesStillAlive = 0;
+    do {
+        currentEnemyFlags = bs->enemyActors;
+
+        // If currentEnemyFlags signify that the enemy isn't dead yet...
+        if ((currentEnemyFlags != 0) && ((*currentEnemyFlags & 0x404000) == 0)) {
+            // Countinue the battle
+            enemiesStillAlive = 1;
+        }
+        enemyCounter = enemyCounter2 + 1;
+        bs += 4; // Advance to the next enemyActor
+        enemyCounter2 = enemyCounter;
+    } while ((enemyCounter < 24) != 0); // 24 because you can have 24 enemy actors
+    return enemiesStillAlive ^ 1; // returns 1 if enemiesStillAlive = 0
+}
+
 
 INCLUDE_ASM(s32, "190B20", btl_check_enemies_defeated);
 
