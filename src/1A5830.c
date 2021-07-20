@@ -38,47 +38,47 @@ void play_hit_sound(Actor* actor, f32 x, f32 y, f32 z, u32 hitSound) {
 
     switch (hitSound) {
         case 0:
-            sfx_play_sound_at_position(SOUND_268, 0, x, y, z);
+            sfx_play_sound_at_position(SOUND_10C, 0, x, y, z);
             break;
         case 1:
-            sfx_play_sound_at_position(SOUND_269, 0, x, y, z);
+            sfx_play_sound_at_position(SOUND_10D, 0, x, y, z);
             break;
         case 2:
             switch (actorType) {
                 case 0:
-                    sfx_play_sound_at_position(SOUND_225, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_E1, 0, x, y, z);
                     break;
                 case 0x100:
-                    sfx_play_sound_at_position(SOUND_233, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
                     break;
                 case 0x200:
-                    sfx_play_sound_at_position(SOUND_233, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_E9, 0, x, y, z);
                     break;
             }
             break;
         case 3:
             switch (actorType) {
                 case 0:
-                    sfx_play_sound_at_position(SOUND_226, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_E2, 0, x, y, z);
                     break;
                 case 0x100:
-                    sfx_play_sound_at_position(SOUND_234, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_EA, 0, x, y, z);
                     break;
                 case 0x200:
-                    sfx_play_sound_at_position(SOUND_234, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_EA, 0, x, y, z);
                     break;
             }
             break;
         case 4:
             switch (actorType) {
                 case 0:
-                    sfx_play_sound_at_position(SOUND_227, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_E3, 0, x, y, z);
                     break;
                 case 0x100:
-                    sfx_play_sound_at_position(SOUND_235, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_EB, 0, x, y, z);
                     break;
                 case 0x200:
-                    sfx_play_sound_at_position(SOUND_235, 0, x, y, z);
+                    sfx_play_sound_at_position(SOUND_EB, 0, x, y, z);
                     break;
             }
             break;
