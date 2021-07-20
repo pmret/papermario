@@ -358,7 +358,7 @@ glabel func_80240B10_ED4D30
 /* ED5270 80241050 3C058024 */  lui       $a1, %hi(D_80244BEC_ED8E0C)
 /* ED5274 80241054 24A54BEC */  addiu     $a1, $a1, %lo(D_80244BEC_ED8E0C)
 /* ED5278 80241058 240600AF */  addiu     $a2, $zero, 0xaf
-/* ED527C 8024105C 0C00973F */  jal       func_80025CFC
+/* ED527C 8024105C 0C00973F */  jal       osSyncPrintf
 /* ED5280 80241060 0040382D */   daddu    $a3, $v0, $zero
 .L80241064:
 /* ED5284 80241064 36B5013F */  ori       $s5, $s5, 0x13f
@@ -417,7 +417,7 @@ glabel func_80240B10_ED4D30
 /* ED5358 80241138 3C058024 */  lui       $a1, %hi(D_80244BEC_ED8E0C)
 /* ED535C 8024113C 24A54BEC */  addiu     $a1, $a1, %lo(D_80244BEC_ED8E0C)
 /* ED5360 80241140 240600BA */  addiu     $a2, $zero, 0xba
-/* ED5364 80241144 0C00973F */  jal       func_80025CFC
+/* ED5364 80241144 0C00973F */  jal       osSyncPrintf
 /* ED5368 80241148 0040382D */   daddu    $a3, $v0, $zero
 .L8024114C:
 /* ED536C 8024114C 8E840000 */  lw        $a0, ($s4)

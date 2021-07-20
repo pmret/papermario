@@ -102,6 +102,8 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
+s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
+
 // todo remove once we have libultra's def
 extern void guOrtho(Mtx *m, float l, float r, float b, float t,
 		    float n, float f, float scale);
@@ -230,7 +232,9 @@ s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
-
+f32 get_player_normal_yaw(void);
+void set_standard_shadow_scale(Shadow* shadow, f32 scale);
+void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_animator_by_index(s32 arg0);
@@ -281,6 +285,7 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void sfx_play_sound(s32 soundID);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void func_801497FC(s32 arg0);
@@ -429,6 +434,7 @@ EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
 EffectInstance* playFX_23(u32, f32, f32, f32, f32);
+void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;

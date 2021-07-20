@@ -12,8 +12,8 @@ glabel jtbl_8029CBC0
 .section .text
 
 glabel btl_state_update_enemy_move
-/* 175E50 80247570 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 175E54 80247574 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 175E50 80247570 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 175E54 80247574 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 175E58 80247578 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 175E5C 8024757C AFB60028 */  sw        $s6, 0x28($sp)
 /* 175E60 80247580 3C16800E */  lui       $s6, %hi(gBattleStatus)
@@ -288,8 +288,8 @@ glabel L80247944_176224
 glabel L8024794C_17622C
 /* 17622C 8024794C 0000202D */  daddu     $a0, $zero, $zero
 /* 176230 80247950 24020014 */  addiu     $v0, $zero, 0x14
-/* 176234 80247954 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 176238 80247958 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 176234 80247954 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 176238 80247958 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L8024795C:
 /* 17623C 8024795C 0C093E58 */  jal       btl_show_battle_message
 /* 176240 80247960 2405003C */   addiu    $a1, $zero, 0x3c
@@ -321,11 +321,11 @@ glabel L802479A4_176284
 .L802479C0:
 /* 1762A0 802479C0 24020014 */  addiu     $v0, $zero, 0x14
 .L802479C4:
-/* 1762A4 802479C4 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1762A8 802479C8 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1762A4 802479C4 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1762A8 802479C8 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 glabel L802479CC_1762AC
-/* 1762AC 802479CC 3C10800E */  lui       $s0, %hi(gBattleStatus+0x46C)
-/* 1762B0 802479D0 2610C4DC */  addiu     $s0, $s0, %lo(gBattleStatus+0x46C)
+/* 1762AC 802479CC 3C10800E */  lui       $s0, %hi(gBattleState2)
+/* 1762B0 802479D0 2610C4DC */  addiu     $s0, $s0, %lo(gBattleState2)
 /* 1762B4 802479D4 8E030000 */  lw        $v1, ($s0)
 /* 1762B8 802479D8 24110015 */  addiu     $s1, $zero, 0x15
 /* 1762BC 802479DC 10710020 */  beq       $v1, $s1, .L80247A60
@@ -390,8 +390,8 @@ glabel L802479CC_1762AC
 .L80247AB4:
 /* 176394 80247AB4 AE020000 */  sw        $v0, ($s0)
 .L80247AB8:
-/* 176398 80247AB8 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 17639C 80247ABC 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 176398 80247AB8 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 17639C 80247ABC 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 1763A0 80247AC0 2402001E */  addiu     $v0, $zero, 0x1e
 /* 1763A4 80247AC4 14620003 */  bne       $v1, $v0, .L80247AD4
 /* 1763A8 80247AC8 00000000 */   nop

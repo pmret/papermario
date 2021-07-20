@@ -13,7 +13,125 @@ void func_802B72C0_E22870();
 
 void func_800E0514(void);
 
-INCLUDE_ASM(s32, "77480", player_raycast_below);
+s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ, f32* outLength, f32* hitRx, f32* hitRz,
+                         f32* hitDirX, f32* hitDirZ) {
+    f32 x, y, z, length;
+    f32 inputX, inputY, inputZ, inputLength;
+    f32 cosTheta;
+    f32 sinTheta;
+    f32 temp_f20;
+    f32 cosTemp;
+    f32 sinTemp;
+    s32 hitObjectID;
+    s32 ret;
+
+    *hitRx = 0.0f;
+    *hitRz = 0.0f;
+    *hitDirX = 0.0f;
+    *hitDirZ = 0.0f;
+    inputLength = *outLength;
+    temp_f20 = diameter * 0.28f;
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    sinTemp = temp_f20 * sinTheta;
+    cosTemp = -temp_f20 * cosTheta;
+    inputX = *outX;
+    inputY = *outY;
+    inputZ = *outZ;
+
+    x = inputX + sinTemp;
+    y = inputY;
+    z = inputZ + cosTemp;
+    length = inputLength;
+    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    ret = -1;
+    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+        *hitRx = -gGameStatusPtr->unk_11C.x;
+        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+        *outLength = length;
+        *hitDirX = sinTemp;
+        *hitDirZ = cosTemp;
+        ret = hitObjectID;
+    }
+
+    x = inputX - sinTemp;
+    y = inputY;
+    z = inputZ - cosTemp;
+    length = inputLength;
+    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+        *hitRx = -gGameStatusPtr->unk_11C.x;
+        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+        *outLength = length;
+        *hitDirX = -sinTemp;
+        *hitDirZ = -cosTemp;
+        ret = hitObjectID;
+    }
+
+    x = inputX + cosTemp;
+    y = inputY;
+    z = inputZ + sinTemp;
+    length = inputLength;
+    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+        *hitRx = -gGameStatusPtr->unk_11C.x;
+        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+        *outLength = length;
+        *hitDirX = sinTemp;
+        *hitDirZ = cosTemp;
+        ret = hitObjectID;
+    }
+
+    x = inputX - cosTemp;
+    y = inputY;
+    z = inputZ - sinTemp;
+    length = inputLength;
+    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+        *hitRx = -gGameStatusPtr->unk_11C.x;
+        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+        *outLength = length;
+        *hitDirX = -sinTemp;
+        *hitDirZ = -cosTemp;
+        ret = hitObjectID;
+    }
+
+    x = inputX;
+    y = inputY;
+    z = inputZ;
+    length = inputLength;
+    hitObjectID = player_raycast_down(&x, &y, &z, &length);
+    if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
+        *hitRx = -gGameStatusPtr->unk_11C.x;
+        *hitRz = -gGameStatusPtr->unk_11C.z;
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+        *outLength = length;
+        *hitDirX = 0.0f;
+        *hitDirZ = 0.0f;
+        ret = hitObjectID;
+    }
+
+    if (ret < 0) {
+        *outX = x;
+        *outY = y;
+        *outZ = z;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "77480", player_raycast_below_cam_relative);
 
@@ -359,20 +477,16 @@ void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (D_8015A57A != 0) {
-        UnkFunc* temp8010C93C = &D_8010C93C;
-
-        if (*temp8010C93C == NULL) {
+        if (D_8010C93C == 0) {
             if (!(playerStatus->animFlags & 0x30)) {
                 dma_copy(E225B0_ROM_START, E225B0_ROM_END, E225B0_VRAM);
-                *temp8010C93C = func_802B72C0_E22870;
+                D_8010C93C = func_802B72C0_E22870;
             }
-        } else {
-            (*temp8010C93C)();
+        } if (D_8010C93C == 0) {
             return;
         }
     }
-
-    if (D_8010C93C != NULL) {
+    if (D_8010C93C != 0) {
         D_8010C93C();
     }
 }
@@ -478,7 +592,167 @@ INCLUDE_ASM(void, "77480", render_player_model);
 INCLUDE_ASM(s32, "77480", appendGfx_player);
 
 /// Only used when speedy spinning.
+// Close-ish, but needs work. Started and then got intimidated - Ethan
+#ifdef NON_MATCHING
+void func_802DDEE4(s32, s32, s32, s32, s32, s32, s32, s32); // extern
+void func_802DDFF8(s32, s32, s32, s32, s32, s32, s32); // extern
+
+void appendGfx_player_spin(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 z;
+    s32 y;
+    s32 x;
+    Matrix4f sp20;
+    Matrix4f sp60;
+    Matrix4f spA0;
+    Matrix4f spE0;
+    f32 temp_f0;
+    f32 temp_f20;
+    f32 temp_f26;
+    f32 temp_f28;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f30;
+    s32 temp_a2;
+    s32 i;
+    s32 i;
+    f32 phi_f20;
+    s32 phi_a2;
+    f32 phi_f20_2;
+    f32 phi_f30;
+    f32 phi_f24;
+    f32 phi_f28;
+    s32 phi_a0;
+
+    i = 0;
+    do {
+        temp_f20 = -gCameras[gCurrentCamID].currentYaw;
+        phi_f20_2 = temp_f20;
+        if (i == 0) {
+            temp_f2 = playerStatus->spriteFacingAngle;
+            if ((temp_f2 > 90.0f) && (temp_f2 <= 180.0f)) {
+                phi_f20 = 180.0f - temp_f2;
+            } else {
+                temp_f0 = playerStatus->spriteFacingAngle;
+                if (temp_f0 > 180.0f) {
+                    if (temp_f0 <= 270.0f) {
+                        phi_f20 = temp_f0 - 180.0f;
+                    } else {
+                        goto block_9;
+                    }
+                } else {
+block_9:
+                    if ((temp_f0 > 270.0f) && (temp_f0 <= 360.0f)) {
+                        phi_f20 = 360.0f - temp_f0;
+                    } else {
+                        phi_f20 = playerStatus->spriteFacingAngle;
+                    }
+                }
+            }
+            temp_a2 = 0xFF - ((s32) (phi_f20 / 25.0f) * 60);
+            phi_a2 = temp_a2;
+            phi_f20_2 = phi_f20;
+            if (temp_a2 < 100) {
+                phi_a2 = 100;
+            }
+            func_802DDFF8(0, 6, phi_a2, phi_a2, phi_a2, 0xFF, 0);
+            guRotateF(spA0, phi_f20, 0.0f, -1.0f, 0.0f);
+            guRotateF(sp20, clamp_angle(playerStatus->unk_8C), 0.0f, 0.0f, 1.0f);
+            guMtxCatF(spA0, sp20, sp20);
+            phi_f30 = playerStatus->position.x;
+            phi_f24 = playerStatus->position.y;
+            phi_f28 = playerStatus->position.z;
+        } else {
+            temp_f26 = phys_get_spin_history(i, &x, &y, &z);
+            if (y == 0x80000000) {
+                phi_f24 = playerStatus->position.y;
+            } else {
+                phi_f24 = (f32) y;
+            }
+            temp_f30 = playerStatus->position.x;
+            temp_f28 = playerStatus->position.z;
+            func_802DDEE4(0, -1, 7, 0, 0, 0, 0x40, 0);
+            guRotateF(sp20, temp_f20, 0.0f, -1.0f, 0.0f);
+            guRotateF(spA0, temp_f20, 0.0f, -1.0f, 0.0f);
+            guRotateF(sp20, temp_f26, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(spA0, sp20, sp20);
+            phi_f30 = temp_f30;
+            phi_f28 = temp_f28;
+        }
+        guTranslateF(sp60, 0.0f, -playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
+        guRotateF(spA0, phi_f20_2, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp20, spA0, sp20);
+        guRotateF(spA0, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp20, spA0, sp20);
+        guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
+        guMtxCatF(sp20, sp60, sp20);
+        guScaleF(spE0, 0.71428573f, 0.71428573f, 0.71428573f);
+        guMtxCatF(sp20, spE0, sp20);
+        guTranslateF(sp60, phi_f30, phi_f24, phi_f28);
+        guMtxCatF(sp20, sp60, sp20);
+        temp_f2_2 = playerStatus->spriteFacingAngle;
+        phi_a0 = 0;
+        if (temp_f2_2 >= 90.0f && (temp_f2_2 < 270.0f)) {
+            phi_a0 = 0x10000000;
+        }
+        spr_draw_player_sprite(phi_a0, 0, 0, 0, &sp20);
+        i++;
+    } while (i < 2);
+}
+#else
 INCLUDE_ASM(s32, "77480", appendGfx_player_spin);
+#endif
 
-INCLUDE_ASM(s32, "77480", update_player_shadow);
+void update_player_shadow(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Shadow* shadow = get_shadow_by_index(gPlayerStatusPtr->shadowID);
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 shadowScale = 0.0f;
+    f32 yawTemp = 0.0f;
+    f32 hitDirX, hitDirZ;
+    f32 hitRx, hitRz;
+    f32 x, y, z;
+    f32 playerX, playerZ;
+    s32 dist;
+    f32 raycastYaw;
 
+    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+        yawTemp = 180.0f;
+    }
+
+    raycastYaw = (yawTemp - 90.0f) + gCameras[gCurrentCameraID].currentYaw;
+    shadow->position.x = playerX = playerStatus->position.x;
+    shadow->position.z = playerZ = playerStatus->position.z;
+    x = playerX;
+    y = playerStatus->position.y + (playerStatus->colliderHeight / 3.5f);
+    z = playerZ;
+    shadowScale = 1024.0f;
+    gCollisionStatus.floorBelow = player_raycast_below(raycastYaw, playerStatus->colliderDiameter, &x, &y, &z,
+                                                       &shadowScale, &hitRx, &hitRz, &hitDirX, &hitDirZ);
+    shadow->rotation.x = hitRx;
+    shadow->rotation.z = hitRz;
+    shadow->rotation.y = clamp_angle(-camera->currentYaw);
+    hitRx += 180.0f;
+    hitRz += 180.0f;
+
+    if (hitRx != 0.0f || hitRz != 0.0f) {
+        s32 dist = dist2D(x, z, playerStatus->position.x, playerStatus->position.z);
+        f32 tan = atan2(playerStatus->position.x, playerStatus->position.z, x, z);
+        s32 angleTemp = clamp_angle((-90.0f - tan) + get_player_normal_yaw());
+
+        if (gGameStatusPtr->playerTraceNormal.y != 0.0f) {
+            y -= sqrtf(SQ(gGameStatusPtr->playerTraceNormal.x) + SQ(gGameStatusPtr->playerTraceNormal.z)) /
+                       gGameStatusPtr->playerTraceNormal.y * dist * sin_deg(angleTemp);
+        }
+    }
+
+    shadow->position.y = y;
+    shadow->unk_05 = (f64)playerStatus->alpha1 / 2;
+
+    if (!(gGameStatusPtr->peachFlags & 1)) {
+        set_standard_shadow_scale(shadow, shadowScale);
+    } else {
+        set_peach_shadow_scale(shadow, shadowScale);
+    }
+}

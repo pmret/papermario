@@ -1385,7 +1385,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex) {
 
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
-    part->shadowScale = part->size[0] / 24.0;
+    part->shadowScale = part->size.x / 24.0;
 }
 
 void remove_part_shadow(ActorID actorID, s32 partIndex) {
@@ -1398,7 +1398,7 @@ void remove_part_shadow(ActorID actorID, s32 partIndex) {
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
-    part->shadowScale = part->size[0] / 24.0;
+    part->shadowScale = part->size.x / 24.0;
 }
 
 EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);

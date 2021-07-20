@@ -20,8 +20,8 @@ glabel btl_state_update_end_turn
 /* 1722F4 80243A14 F7B60040 */  sdc1      $f22, 0x40($sp)
 /* 1722F8 80243A18 F7B40038 */  sdc1      $f20, 0x38($sp)
 /* 1722FC 80243A1C 8ED500D8 */  lw        $s5, 0xd8($s6)
-/* 172300 80243A20 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 172304 80243A24 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 172300 80243A20 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 172304 80243A24 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 172308 80243A28 8ED300DC */  lw        $s3, 0xdc($s6)
 /* 17230C 80243A2C 1440002E */  bnez      $v0, .L80243AE8
 /* 172310 80243A30 0000A02D */   daddu    $s4, $zero, $zero
@@ -74,11 +74,11 @@ glabel btl_state_update_end_turn
 /* 1723B4 80243AD4 0C093903 */  jal       func_8024E40C
 /* 1723B8 80243AD8 24040002 */   addiu    $a0, $zero, 2
 /* 1723BC 80243ADC 24020001 */  addiu     $v0, $zero, 1
-/* 1723C0 80243AE0 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1723C4 80243AE4 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1723C0 80243AE0 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1723C4 80243AE4 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L80243AE8:
-/* 1723C8 80243AE8 3C04800E */  lui       $a0, %hi(gBattleStatus+0x46C)
-/* 1723CC 80243AEC 2484C4DC */  addiu     $a0, $a0, %lo(gBattleStatus+0x46C)
+/* 1723C8 80243AE8 3C04800E */  lui       $a0, %hi(gBattleState2)
+/* 1723CC 80243AEC 2484C4DC */  addiu     $a0, $a0, %lo(gBattleState2)
 /* 1723D0 80243AF0 8C830000 */  lw        $v1, ($a0)
 /* 1723D4 80243AF4 24020001 */  addiu     $v0, $zero, 1
 /* 1723D8 80243AF8 1462002A */  bne       $v1, $v0, .L80243BA4
@@ -127,8 +127,8 @@ glabel btl_state_update_end_turn
 /* 17247C 80243B9C AE600054 */  sw        $zero, 0x54($s3)
 /* 172480 80243BA0 E6600020 */  swc1      $f0, 0x20($s3)
 .L80243BA4:
-/* 172484 80243BA4 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 172488 80243BA8 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 172484 80243BA4 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 172488 80243BA8 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 17248C 80243BAC 2402000B */  addiu     $v0, $zero, 0xb
 /* 172490 80243BB0 1462007D */  bne       $v1, $v0, .L80243DA8
 /* 172494 80243BB4 2402000C */   addiu    $v0, $zero, 0xc
@@ -255,11 +255,11 @@ glabel btl_state_update_end_turn
 .L80243D8C:
 /* 17266C 80243D8C AC820000 */  sw        $v0, ($a0)
 /* 172670 80243D90 2402000C */  addiu     $v0, $zero, 0xc
-/* 172674 80243D94 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 172678 80243D98 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 172674 80243D94 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 172678 80243D98 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L80243D9C:
-/* 17267C 80243D9C 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 172680 80243DA0 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 17267C 80243D9C 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 172680 80243DA0 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 172684 80243DA4 2402000C */  addiu     $v0, $zero, 0xc
 .L80243DA8:
 /* 172688 80243DA8 1462004C */  bne       $v1, $v0, .L80243EDC
@@ -343,11 +343,11 @@ glabel btl_state_update_end_turn
 .L80243ED0:
 /* 1727B0 80243ED0 24020002 */  addiu     $v0, $zero, 2
 .L80243ED4:
-/* 1727B4 80243ED4 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1727B8 80243ED8 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1727B4 80243ED4 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1727B8 80243ED8 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L80243EDC:
-/* 1727BC 80243EDC 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 1727C0 80243EE0 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 1727BC 80243EDC 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 1727C0 80243EE0 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 1727C4 80243EE4 24020002 */  addiu     $v0, $zero, 2
 /* 1727C8 80243EE8 14620026 */  bne       $v1, $v0, .L80243F84
 /* 1727CC 80243EEC 28620005 */   slti     $v0, $v1, 5
@@ -387,11 +387,11 @@ glabel btl_state_update_end_turn
 /* 172844 80243F64 0C093903 */  jal       func_8024E40C
 /* 172848 80243F68 24040002 */   addiu    $a0, $zero, 2
 /* 17284C 80243F6C 24020003 */  addiu     $v0, $zero, 3
-/* 172850 80243F70 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 172854 80243F74 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 172850 80243F70 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 172854 80243F74 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L80243F78:
-/* 172858 80243F78 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 17285C 80243F7C 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 172858 80243F78 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 17285C 80243F7C 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 172860 80243F80 28620005 */  slti      $v0, $v1, 5
 .L80243F84:
 /* 172864 80243F84 10400005 */  beqz      $v0, .L80243F9C

@@ -22,6 +22,17 @@ extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
+extern s32 D_800DC4D0;
+extern s32 D_800DC4D4;
+extern s32 gBattleState2;
+extern s32 D_800DC4E8;
+extern u8 gCurrentBattleSection; // in the middle of the previous var
+extern u8 D_800DC4EB; // in the middle of the previous var
+extern s32 D_800DC4E0;
+extern s32 D_800DC4EC;
+extern s32 D_800DC4F0;
+extern s32 D_800DC4F4;
+extern s32 D_800DC4F8;
 extern s32 gBattleDmaDest;
 
 extern ScriptList gWorldScriptList;
@@ -379,6 +390,8 @@ extern s32 D_802C05CC;
 extern s16 gCurrentCamID;
 
 extern s32 gSpriteHeapPtr;
+
+extern s32 D_8029C890[12][5];
 
 // Heap?
 extern s32 D_8038F800;

@@ -223,7 +223,8 @@ typedef struct PlayerData {
     /* 0x28E */ s8 maxStarPower;
     /* 0x28F */ char unk_28F;
     /* 0x290 */ s16 specialBarsFilled;
-    /* 0x292 */ char unk_292[2];
+    /* 0x292 */ s8 unk_292;
+    /* 0x293 */ char unk_293[0x1];
     /* 0x294 */ s16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 hitsTaken;
@@ -705,7 +706,7 @@ typedef struct BattleStatus {
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
     /* 0x170 */ char unk_170;
-    /* 0x171 */ u8 numEnemyActors;
+    /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
     /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
@@ -758,22 +759,7 @@ typedef struct BattleStatus {
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[5];
-    /* 0x460 */ s32 unk_460;
-    /* 0x464 */ s32 unk_464;
-    /* 0x468 */ s32 unk_468;
-    /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
-    /* 0x470 */ s32 unk_470;
-    /* 0x474 */ s32 unk_474;
-    /* 0x478 */ s8 unk_478;
-    /* 0x479 */ char unk_479;
-    /* 0x47A */ u8 currentBattleSection;
-    /* 0x47B */ u8 unk_47B;
-    /* 0x47C */ s32 unk_47C;
-    /* 0x480 */ s32 unk_480;
-    /* 0x484 */ s32 unk_484;
-    /* 0x488 */ s32 unk_488;
-    /* 0x48C */ struct BattleList* unk_48C;
-} BattleStatus; // size = 0x490
+} BattleStatus; // size = 0x460
 
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
@@ -1302,7 +1288,8 @@ typedef struct GameStatus {
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
-    /* 0x0BE */ char unk_BE[106];
+    /* 0x0BE */ char unk_BE[94];
+    /* 0x11C */ Vec3f unk_11C;
     /* 0x128 */ Vec3f playerTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
@@ -1425,7 +1412,7 @@ typedef struct ActorPart {
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
-    /* 0x72 */ u8 size[2];
+    /* 0x72 */ Vec2bu size;
     /* 0x74 */ u8 verticalStretch;
     /* 0x75 */ s8 unk_75;
     /* 0x76 */ s8 unk_76;
@@ -1773,7 +1760,7 @@ typedef struct Actor {
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ char unk_204[3];
-    /* 0x207 */ u8 extraCoinBonus;
+    /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;
