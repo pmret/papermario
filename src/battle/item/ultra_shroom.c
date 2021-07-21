@@ -1,4 +1,5 @@
 #include "ultra_shroom.h"
+#include "effects.h"
 
 static HudElement* D_802A1AC0;
 

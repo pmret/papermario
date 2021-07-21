@@ -1,4 +1,5 @@
 #include "food.h"
+#include "effects.h"
 
 static HudElement* D_802A24D0;
 

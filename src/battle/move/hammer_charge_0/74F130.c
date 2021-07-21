@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE battle_move_hammer_charge_0
 

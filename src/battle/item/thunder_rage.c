@@ -1,4 +1,5 @@
 #include "thunder_rage.h"
+#include "effects.h"
 
 static HudElement* D_802A1C90;
 

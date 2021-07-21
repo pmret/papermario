@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 extern StaticEntityData D_802EA934;
 

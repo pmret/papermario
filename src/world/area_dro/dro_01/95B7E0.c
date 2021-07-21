@@ -1,4 +1,5 @@
 #include "dro_01.h"
+#include "effects.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
 #include "sprite/npc/artist_toad.h"

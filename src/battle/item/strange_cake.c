@@ -1,4 +1,5 @@
 #include "strange_cake.h"
+#include "effects.h"
 #include "battle/item/strange_cake1.png.h"
 #include "battle/item/strange_cake2.png.h"
 #include "battle/item/strange_cake3.png.h"

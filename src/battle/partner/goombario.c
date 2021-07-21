@@ -1,6 +1,7 @@
 #define NAMESPACE battle_partner_goombario
 
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
