@@ -88,32 +88,32 @@ ApiStatus si_handle_wait(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0].s = get_variable(script, *ptrReadPos);
+        script->functionTemp[0] = get_variable(script, *ptrReadPos);
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0].s -= 1;
-    return !script->functionTemp[0].s;
+    script->functionTemp[0] -= 1;
+    return !script->functionTemp[0];
 }
 
 ApiStatus si_handle_wait_seconds(ScriptInstance* script) {
     Bytecode* ptrReadPos = script->ptrReadPos;
 
     if (!script->blocked) {
-        script->functionTemp[0].s = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
+        script->functionTemp[0] = get_float_variable(script, *ptrReadPos) * 30.0f + 0.5;
         script->blocked = 1;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         return ApiStatus_DONE2;
     }
 
-    script->functionTemp[0].s--;
-    return !script->functionTemp[0].s;
+    script->functionTemp[0]--;
+    return !script->functionTemp[0];
 }
 
 ApiStatus si_handle_if_equal(ScriptInstance* script) {
@@ -1446,7 +1446,7 @@ s32 si_execute_next_command(ScriptInstance *script) {
             case ScriptOpcode_RESUME_SCRIPT:
                 status = si_handle_resume(script);
                 break;
-            case ScriptOpcode_SCRIPT_EXISTS:
+            case ScriptOpcode_DOES_SCRIPT_EXIST:
                 status = si_handle_does_script_exist(script);
                 break;
             case ScriptOpcode_SPAWN_THREAD:
@@ -1520,7 +1520,7 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
 
     if (var <= -270000000) {
         return var;
-    } else if (var <= -250000000) {
+    } else if (var <= SI_LIMIT) {
         return var;
     } else if (var <= -220000000) {
         return fixed_var_to_float(var);
@@ -1575,7 +1575,7 @@ s32 get_variable_index(ScriptInstance* script, s32 var) {
     if (-270000000 >= var) {
         return var;
     }
-    if (-250000000 >= var) {
+    if (SI_LIMIT >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1618,7 +1618,7 @@ s32 get_variable_index_alt(s32 var) {
     if (-270000000 >= var) {
         return var;
     }
-    if (-250000000 >= var) {
+    if (SI_LIMIT >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1666,7 +1666,7 @@ f32 get_float_variable(ScriptInstance* script, Bytecode var) {
 
     if (var <= -270000000) {
         return var;
-    } else if (var <= -250000000) {
+    } else if (var <= SI_LIMIT) {
         return var;
     } else if (var <= -220000000) {
         return fixed_var_to_float(var);

@@ -1074,9 +1074,23 @@ INCLUDE_ASM(s32, "190B20", func_80263300);
 
 INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
 
-INCLUDE_ASM(s32, "190B20", btl_check_enemies_defeated);
+s32 btl_check_enemies_defeated(void) {
+    if (btl_are_all_enemies_defeated()) {
+        btl_set_state(0x1A);
+        return TRUE;
+    }
+    return FALSE;
+}
 
-INCLUDE_ASM(s32, "190B20", btl_check_player_defeated);
+s32 btl_check_player_defeated(void) {
+    if (gPlayerData.curHP > 0) {
+        return FALSE;
+    }
+    D_800DC4E4 = gBattleState;
+    D_800DC4D8 = gBattleState2;
+    btl_set_state(0x1B);
+    return TRUE;
+}
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
 
@@ -1343,7 +1357,7 @@ void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID deco
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
             add_part_decoration(part, decorationIndex, decorationType);
         }
     }
@@ -1356,7 +1370,7 @@ void remove_part_decoration(ActorPart* part, s32 decorationIndex) {
 void remove_actor_decoration(Actor* actor, s32 decorationIndex) {
     ActorPart* part;
     for (part = actor->partsTable; part != NULL; part = part->nextPart) {
-        if ((part->flags & 0x100001) == 0 && part->idleAnimations && (part->flags & 2) == 0) {
+        if ((part->flags & 0x100001) == 0 && part->idleAnimations && !(part->flags & 2)) {
             remove_part_decoration(part, decorationIndex);
         }
     }
@@ -1369,7 +1383,7 @@ s32 player_team_is_ability_active(Actor* actor, Ability ability) {
     if (actorGenus != 0x100) {
         // Separate ifs required to match
         if (actorGenus <= 0x100) {
-            if (actorGenus == 0 && (gBattleStatus.flags2 & 0x40) == 0) {
+            if (actorGenus == 0 && !(gBattleStatus.flags2 & 0x40)) {
                 hasAbility = is_ability_active(ability);
             }
         }
@@ -1385,7 +1399,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex) {
 
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
-    part->shadowScale = part->size[0] / 24.0;
+    part->shadowScale = part->size.x / 24.0;
 }
 
 void remove_part_shadow(ActorID actorID, s32 partIndex) {
@@ -1398,10 +1412,10 @@ void remove_part_shadow(ActorID actorID, s32 partIndex) {
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->flags &= ~4;
     part->shadow = create_shadow_type(0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
-    part->shadowScale = part->size[0] / 24.0;
+    part->shadowScale = part->size.x / 24.0;
 }
 
-void playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
+EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 void playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
 
 void remove_player_buffs(PlayerBuff buffs) {

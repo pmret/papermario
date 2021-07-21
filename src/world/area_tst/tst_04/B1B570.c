@@ -99,7 +99,7 @@ void func_8024029C_B1B80C(void) {
 }
 
 void func_80240360_B1B8D0(PlayerStatus* playerStatus) {
-    f32 yaw = -CAM(gCurrentCamID)->currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;

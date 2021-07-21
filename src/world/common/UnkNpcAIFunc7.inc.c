@@ -10,6 +10,6 @@ void N(UnkNpcAIFunc7)(ScriptInstance* script) {
         enemy->varTable[0] = 3;
         npc->duration = enemy->varTable[2];
         npc->currentAnim.w = enemy->animList[9];
-        script->functionTemp[0].s = 32;
+        script->functionTemp[0] = 32;
     }
 }

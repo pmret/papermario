@@ -10,7 +10,7 @@
 ApiStatus N(func_802A13E4_72C994)(ScriptInstance *script, s32 isInitialCall);
 ApiStatus N(func_802A188C_72CE3C)(ScriptInstance *script, s32 isInitialCall);
 
-struct N(tempStc) {
+typedef struct N(tempStc) {
     s32 iconId;
     s32 unk_04;
 } N(tempStc);

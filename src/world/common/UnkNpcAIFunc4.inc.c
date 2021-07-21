@@ -8,5 +8,5 @@ void N(UnkNpcAIFunc4)(ScriptInstance* script) {
     npc->duration = 0;
     set_npc_yaw(npc, 270.0f);
     enemy->varTable[0] = 0;
-    script->functionTemp[0].s = 3;
+    script->functionTemp[0] = 3;
 }

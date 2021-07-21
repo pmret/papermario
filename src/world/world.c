@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "map.h"
+#include "camera.h"
 
 #define ASSET_TABLE_ROM_START 0x1E40000
 #define ASSET_TABLE_HEADER_SIZE 0x20
@@ -20,8 +21,8 @@ const s32 D_800989A0[] = {
 };
 
 // bss
-extern MapConfig D_800A41E8; // gMapHeader?
-extern s32 D_800A41E0; // gMapConfig?
+extern MapConfig gMapConfig;
+extern s32 gMap;
 
 
 extern s32 D_800D9668;
@@ -40,7 +41,7 @@ void load_map_script_lib(void) {
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     s32 initStatus = 0;
     Map* map;
-    MapConfig* temp800A41E8;
+    MapConfig* mapConfig;
     char texStr[17];
     s32 decompressedSize;
 
@@ -73,13 +74,13 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     map = &gAreas[areaID].maps[mapID];
 
-    sprintf(&D_800D9230, "%s_shape", map->id);
-    sprintf(&D_800D91E0, "%s_hit", map->id);
+    sprintf(&mapShapeName, "%s_shape", map->id);
+    sprintf(&mapHitName, "%s_hit", map->id);
     strcpy(texStr, map->id);
     texStr[3] = '\0';
-    sprintf(&D_800B0CF0, "%s_tex", texStr);
+    sprintf(&mapTexName, "%s_tex", texStr);
 
-    D_800A41E0 = map;
+    gMap = map;
     if (map->bgName != NULL) {
         strcpy(&D_800D9668, map->bgName);
     }
@@ -89,24 +90,24 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
     }
 
-    D_800A41E8 = *map->config;
+    gMapConfig = *map->config;
 
-    temp800A41E8 = &D_800A41E8;
+    mapConfig = &gMapConfig;
     if (map->init != 0) {
         initStatus = map->init();
     }
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
-        s32 yay0Asset = load_asset_by_name(&D_800D9230, &decompressedSize);
+        s32 yay0Asset = load_asset_by_name(&mapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);
 
-        temp800A41E8->modelTreeRoot = place[0];
-        temp800A41E8->modelNameList = place[2];
-        temp800A41E8->colliderNameList = place[3];
-        temp800A41E8->zoneNameList = place[4];
+        mapConfig->modelTreeRoot = place[0];
+        mapConfig->modelNameList = place[2];
+        mapConfig->colliderNameList = place[3];
+        mapConfig->zoneNameList = place[4];
     }
 
     if (map->bgName != NULL) {
@@ -154,24 +155,24 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
-        s32 thing = get_asset_offset(&D_800B0CF0, &decompressedSize);
+        s32 thing = get_asset_offset(&mapTexName, &decompressedSize);
 
-        if (temp800A41E8->modelTreeRoot != NULL) {
-            load_data_for_models(temp800A41E8->modelTreeRoot, thing, decompressedSize);
+        if (mapConfig->modelTreeRoot != NULL) {
+            load_data_for_models(mapConfig->modelTreeRoot, thing, decompressedSize);
         }
     }
 
-    if (temp800A41E8->background != NULL) {
-        read_background_size(temp800A41E8->background);
+    if (mapConfig->background != NULL) {
+        read_background_size(mapConfig->background);
     } else {
         set_background_size(296, 200, 12, 20);
     }
 
     gCurrentCameraID = 0;
-    gCameras[0].flags |= 0x2;
-    gCameras[1].flags |= 0x2;
-    gCameras[2].flags |= 0x2;
-    gCameras[3].flags |= 0x2;
+    gCameras[0].flags |= CAM_FLAG_ENABLED;
+    gCameras[1].flags |= CAM_FLAG_ENABLED;
+    gCameras[2].flags |= CAM_FLAG_ENABLED;
+    gCameras[3].flags |= CAM_FLAG_ENABLED;
 
     if (gGameStatusPtr->creditsViewportMode == -1) {
         set_cam_viewport(0, 12, 20, 296, 200);
@@ -182,15 +183,15 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     initialize_status_menu();
     gGameStatusPtr->unk_90 = 1000;
     gGameStatusPtr->unk_92 = 1000;
-    gGameStatusPtr->mainScriptID = start_script_in_group(temp800A41E8->main, 0, 0, 0)->id;
+    gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, 0, 0, 0)->id;
 }
 
 s32 get_current_map_config() {
-    return D_800A41E0;
+    return gMap;
 }
 
 MapConfig* get_current_map_header() {
-    return &D_800A41E8;
+    return &gMapConfig;
 }
 
 // weirdness with gAreas loading, extra lw
@@ -217,7 +218,7 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID) {
 INCLUDE_ASM(s32, "world/world", get_map_IDs_by_name);
 #endif
 
-void* load_asset_by_name(char* assetName, s32* decompressedSize) {
+void* load_asset_by_name(const char* assetName, u32* decompressedSize) {
     AssetHeader firstHeader;
     AssetHeader* assetTableBuffer;
     AssetHeader* curAsset;

@@ -15,8 +15,8 @@ glabel btl_state_update_begin_turn
 /* 17041C 80241B3C AFB10014 */  sw        $s1, 0x14($sp)
 /* 170420 80241B40 AFB00010 */  sw        $s0, 0x10($sp)
 /* 170424 80241B44 8E9500DC */  lw        $s5, 0xdc($s4)
-/* 170428 80241B48 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 17042C 80241B4C 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 170428 80241B48 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 17042C 80241B4C 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 170430 80241B50 8E8500D8 */  lw        $a1, 0xd8($s4)
 /* 170434 80241B54 144000E9 */  bnez      $v0, .L80241EFC
 /* 170438 80241B58 3C04FEFF */   lui      $a0, 0xfeff
@@ -273,11 +273,11 @@ glabel btl_state_update_begin_turn
 .L80241EF0:
 /* 1707D0 80241EF0 24020005 */  addiu     $v0, $zero, 5
 .L80241EF4:
-/* 1707D4 80241EF4 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 1707D8 80241EF8 AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 1707D4 80241EF4 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 1707D8 80241EF8 AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L80241EFC:
-/* 1707DC 80241EFC 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 1707E0 80241F00 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 1707DC 80241EFC 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 1707E0 80241F00 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 /* 1707E4 80241F04 24020005 */  addiu     $v0, $zero, 5
 /* 1707E8 80241F08 14620020 */  bne       $v1, $v0, .L80241F8C
 /* 1707EC 80241F0C 2402000A */   addiu    $v0, $zero, 0xa
@@ -314,8 +314,8 @@ glabel btl_state_update_begin_turn
 .L80241F7C:
 /* 17085C 80241F7C 12600018 */  beqz      $s3, .L80241FE0
 /* 170860 80241F80 2402000A */   addiu    $v0, $zero, 0xa
-/* 170864 80241F84 3C03800E */  lui       $v1, %hi(gBattleStatus+0x46C)
-/* 170868 80241F88 8C63C4DC */  lw        $v1, %lo(gBattleStatus+0x46C)($v1)
+/* 170864 80241F84 3C03800E */  lui       $v1, %hi(gBattleState2)
+/* 170868 80241F88 8C63C4DC */  lw        $v1, %lo(gBattleState2)($v1)
 .L80241F8C:
 /* 17086C 80241F8C 1462001A */  bne       $v1, $v0, .L80241FF8
 /* 170870 80241F90 0000982D */   daddu    $s3, $zero, $zero

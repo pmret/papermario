@@ -2,9 +2,9 @@
 #include "message_ids.h"
 
 ApiStatus N(func_80240000_BFA0A0)(ScriptInstance* script, s32 isInitialCall) {
-    sprintf(&D_800D9230, "arn_20_shape");
-    sprintf(&D_800D91E0, "arn_20_hit");
-    sprintf(&D_800B0CF0, "arn_tex");
+    sprintf(&mapShapeName, "arn_20_shape");
+    sprintf(&mapHitName, "arn_20_hit");
+    sprintf(&mapTexName, "arn_tex");
     return ApiStatus_BLOCK;
 }
 
@@ -56,17 +56,17 @@ Script N(exitDoubleDoor_8024021C) = SCRIPT({
 });
 
 Script N(802402D0) = SCRIPT({
-    bind N(exitWalk_802401C0) to TRIGGER_FLOOR_ABOVE 15;
+    bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
     match STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
-            bind N(exitDoubleDoor_8024021C) to TRIGGER_WALL_PRESS_A 18;
+            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
         < STORY_CH3_ESCAPED_TUBBAS_MANOR {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
             spawn N(80240F50);
             await N(80241AA0);
         } else {
-            bind N(exitDoubleDoor_8024021C) to TRIGGER_WALL_PRESS_A 18;
+            bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
     }
 });

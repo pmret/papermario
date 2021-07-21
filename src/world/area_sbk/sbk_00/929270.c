@@ -3,9 +3,6 @@
 
 #include "world/common/SpawnSunEffect.inc.c"
 
-Script N(main);
-s32 N(npcGroupList_80240768)[];
-
 EntryList N(entryList) = {
     { -475.0f, 0.0f, 0.0f, 90.0f },
     { 475.0f, 0.0f, 0.0f, 270.0f },
@@ -26,8 +23,8 @@ Script N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  1, "sbk_01",  0);
 Script N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  3, "sbk_10",  2);
 
 Script N(80240198) = SCRIPT({
-    bind N(exitWalk_802400E0) to TRIGGER_FLOOR_ABOVE 3;
-    bind N(exitWalk_8024013C) to TRIGGER_FLOOR_ABOVE 6;
+    bind N(exitWalk_802400E0) TRIGGER_FLOOR_ABOVE 3;
+    bind N(exitWalk_8024013C) TRIGGER_FLOOR_ABOVE 6;
 });
 
 Script N(main) = SCRIPT({

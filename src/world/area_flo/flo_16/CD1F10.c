@@ -33,8 +33,8 @@ Script N(exitWalk_80242A40) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  4);
 Script N(exitWalk_80242A9C) = EXIT_WALK_SCRIPT(60,  1, "flo_17",  0);
 
 Script N(80242AF8) = SCRIPT({
-    bind N(exitWalk_80242A40) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80242A9C) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80242A40) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80242A9C) TRIGGER_FLOOR_ABOVE 4;
 });
 
 s32 N(lavaResetList_80242B40)[] = {
@@ -392,7 +392,7 @@ Script N(80243E80) = SCRIPT({
         }
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         match SI_VAR(0) {
-            620..660 {
+            620 ... 660 {
                 MakeItemEntity(ITEM_STAR_PIECE, 640, 145, -100, 13, SI_SAVE_FLAG(1388));
                 SI_AREA_FLAG(39) = 1;
             }
@@ -402,7 +402,7 @@ Script N(80243E80) = SCRIPT({
 
 Script N(makeEntities) = SCRIPT({
     SI_AREA_FLAG(39) = 0;
-    bind N(80243E80) to TRIGGER_FLOOR_TOUCH 20;
+    bind N(80243E80) TRIGGER_FLOOR_TOUCH 20;
     MakeEntity(0x802EA910, 350, 240, -100, 0, MAKE_ENTITY_END);
     SI_MAP_VAR(0) = SI_VAR(0);
     AssignBlockFlag(SI_SAVE_FLAG(1403));
@@ -452,8 +452,8 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
     s32 idx;
 
     if (isInitialCall) {
-        script->functionTemp[2].s = heap_malloc(0x330);
-        ptr = script->functionTemp[2].s;
+        script->functionTemp[2] = heap_malloc(0x330);
+        ptr = script->functionTemp[2];
 
         partnerActiveCount = 0;
         var = script->varTable[12] >= 0;
@@ -483,34 +483,34 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
         create_popup_menu(ptr);
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    ptr = script->functionTemp[2].s;
-    if (script->functionTemp[0].s == 0) {
-        script->functionTemp[1].s = ptr->unk_32C;
-        if (script->functionTemp[1].s != 0) {
+    ptr = script->functionTemp[2];
+    if (script->functionTemp[0] == 0) {
+        script->functionTemp[1] = ptr->unk_32C;
+        if (script->functionTemp[1] != 0) {
             hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
         }
     }
 
-    script->functionTemp[0].s++;
+    script->functionTemp[0]++;
 
-    if (script->functionTemp[0].s < 15) {
+    if (script->functionTemp[0] < 15) {
         return ApiStatus_BLOCK;
     }
 
     destroy_popup_menu();
-    if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
+    if (script->functionTemp[1] != 0xFF) {
+        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
     }
 
-    heap_free(script->functionTemp[2].s);
+    heap_free(script->functionTemp[2]);
 
     return ApiStatus_DONE2;
 }

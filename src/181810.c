@@ -1,14 +1,14 @@
 #include "common.h"
 
-extern PrintContext* gSpeakingActorPrintCtx;
-extern PrintContext* D_8029FA64;
+extern MessagePrintState* gSpeakingActorPrintCtx;
+extern MessagePrintState* D_8029FA64;
 extern s32 gSpeakingActorPrintIsDone; // unk_08
 extern s32 gSpeakingActorTalkAnim;
 extern s32 gSpeakingActorIdleAnim;
 extern Actor* gSpeakingActor;
 extern ActorPart* gSpeakingActorPart;
 
-void msg_printer_set_origin_pos(PrintContext* printer, s32 x, s32 y);
+void msg_printer_set_origin_pos(MessagePrintState* printer, s32 x, s32 y);
 
 ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -17,7 +17,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
     s32 stringID;
     ActorID actorID;
     s32 partIndex;
-    PrintContext** printContext;
+    MessagePrintState** printContext;
     s32 anim;
 
     f32 headX, headY, headZ;
@@ -58,7 +58,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         }
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         gOverrideFlags |= 0x10;
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
@@ -66,7 +66,7 @@ ApiStatus ActorSpeak(ScriptInstance* script, s32 isInitialCall) {
         increment_status_menu_disabled();
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         actor = gSpeakingActor;
         part = gSpeakingActorPart;
 
@@ -116,11 +116,11 @@ ApiStatus ShowBattleChoice(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 stringID = get_variable(script, *args);
 
-        script->functionTemp[1].s = 0;
-        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1].s);
+        script->functionTemp[1] = 0;
+        D_8029FA64 = msg_get_printer_for_string(stringID, &script->functionTemp[1]);
     }
 
-    if (script->functionTemp[1].s == 1) {
+    if (script->functionTemp[1] == 1) {
         u8 currentOption = D_8029FA64->currentOption;
 
         gSpeakingActorPrintCtx->currentOption = D_8029FA64->currentOption;

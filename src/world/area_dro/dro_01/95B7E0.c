@@ -107,7 +107,18 @@ MapConfig N(config) = {
     .tattle = { MSG_dro_01_tattle },
 };
 
-// *INDENT-OFF*
+// Extraneous END_CASE_MULTI
+#ifdef NON_MATCHING
+Script N(80243BB0) = SCRIPT({
+    GetEntryID(SI_VAR(0));
+    match SI_VAR(0) {
+        3, 4 {}
+        else {
+            SetMusicTrack(0, SONG_DRY_DRY_OUTPOST, 0, 8);
+        }
+    }
+});
+#else
 Script N(80243BB0) = {
     SI_CMD(ScriptOpcode_CALL, GetEntryID, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
@@ -115,13 +126,13 @@ Script N(80243BB0) = {
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 4),
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
         SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, 21, 0, 8),
+            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, SONG_DRY_DRY_OUTPOST, 0, 8),
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
     SI_CMD(ScriptOpcode_END_MATCH),
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 Script N(80243C30) = SCRIPT({
     DisablePlayerInput(TRUE);
@@ -362,8 +373,8 @@ Script N(exitWalk_80244960) = SCRIPT({
 Script N(exitWalk_802449CC) = EXIT_WALK_SCRIPT(60,  1, "dro_02",  0);
 
 Script N(80244A28) = SCRIPT({
-    bind N(exitWalk_80244960) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_802449CC) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80244960) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_802449CC) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(80244A70) = SCRIPT({
@@ -446,7 +457,7 @@ Script N(main) = SCRIPT({
         STORY_PROGRESS = STORY_CH2_ARRIVED_AT_DRY_DRY_OUTPOST;
     }
     match STORY_PROGRESS {
-        -53..6 {
+        -53 ... 6 {
             MakeNpcs(0, N(npcGroupList_8024B47C));
         } else {
             MakeNpcs(0, N(npcGroupList_8024B464));
@@ -936,209 +947,205 @@ Script N(80246848) = SCRIPT({
     await N(802466BC);
 });
 
-// *INDENT-OFF*
-Script N(802468F8) = {
-    SI_CMD(ScriptOpcode_IF_GT, SI_SAVE_VAR(352), 63),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_ARRAY(1), SI_ARRAY(2), SI_ARRAY(3)),
-    SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, -1, 16),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(352), 63),
-        SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524298),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1767), 1),
-            SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524297),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524296),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_FLAG(1767), 1),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, ShowChoice, 1966093),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 1),
-        SI_CMD(ScriptOpcode_CALL, ContinueSpeech, -1, 11468804, 11468801, 0, 524300),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802452AC)),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_FLAG(1793), 1),
-    SI_CMD(ScriptOpcode_CALL, N(Set80151310_1)),
-    SI_CMD(ScriptOpcode_CALL, N(UnkAlphaFunc)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(8024535C)),
-    SI_CMD(ScriptOpcode_CALL, DisablePartnerAI, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, -4, 512, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 10, 512, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, -4, 328, 1),
-    SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 10, 256, 1),
-    SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, -4, 262),
-    SI_CMD(ScriptOpcode_SPAWN_GET_ID, N(80245A84), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_CALL, ContinueSpeech, -1, 11468804, 11468801, 0, 524299),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 137),
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_SCRIPT_EXISTS, SI_VAR(1), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-            SI_CMD(ScriptOpcode_BREAK_LOOP),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241BE0_95CDE0)),
-    SI_CMD(ScriptOpcode_LOOP, 5),
-        SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 1),
-        SI_CMD(ScriptOpcode_CALL, SetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 2),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), 2883584),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), SI_SAVE_VAR(352)),
-    SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468805, 11468806, 0, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_CALL, SetPlayerAnimation, 65576),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), 2949120),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), SI_SAVE_VAR(352)),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 142),
-    SI_CMD(ScriptOpcode_CALL, ShowChoice, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_KILL_SCRIPT, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_CALL, StopSound, 142),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80245AF8)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 141),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241EE0_95D0E0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), 0),
-    SI_CMD(ScriptOpcode_CALL, N(func_802424D4_95D6D4)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 40),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241B5C_95CD5C)),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 110),
-        SI_CMD(ScriptOpcode_CALL, CloseChoice),
-        SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), 0),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 1),
-        SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468807),
-        SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), 1),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241EAC_95D0AC), 1),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241EAC_95D0AC), 2),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, PlaySound, 540),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_CALL, PlaySound, 540),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_CALL, PlaySound, 540),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 6),
-            SI_CMD(ScriptOpcode_CALL, PlaySound, 540),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, PlaySound, 138),
-        SI_CMD(ScriptOpcode_CALL, N(func_80241F78_95D178)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-            SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 50),
-            SI_CMD(ScriptOpcode_CALL, N(UnkCameraFunc), 0, 0, 83, SI_VAR(0), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 68, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(1), -3),
-            SI_CMD(ScriptOpcode_CALL, N(UnkCameraFunc), 0, 0, 58, SI_VAR(0), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 68, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 30),
-            SI_CMD(ScriptOpcode_CALL, N(UnkCameraFunc), 0, 0, 93, SI_VAR(0), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 68, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-        SI_CMD(ScriptOpcode_SPAWN_GET_ID, N(80246798), SI_VAR(1)),
-        SI_CMD(ScriptOpcode_ADD, SI_SAVE_VAR(352), 1),
-        SI_CMD(ScriptOpcode_IF_GT, SI_SAVE_VAR(352), 63),
-            SI_CMD(ScriptOpcode_CALL, ContinueSpeech, -1, -1, -1, 0, 524304),
-            SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468806),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_SCRIPT_EXISTS, SI_VAR(1), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468805),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(0), 348),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(1), 3),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802451BC)),
-            SI_CMD(ScriptOpcode_CALL, AddStarPieces, 1),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241EAC_95D0AC), 15),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241F60_95D160)),
-            SI_CMD(ScriptOpcode_CALL, SetMessageValue, SI_SAVE_VAR(352), 0),
-            SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524305),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_CALL, ContinueSpeech, -1, -1, -1, 0, 524302),
-            SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468806),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_SCRIPT_EXISTS, SI_VAR(1), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468805),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(0), 348),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(1), 1),
-            SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802451BC)),
-            SI_CMD(ScriptOpcode_CALL, AddStarPieces, 1),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241EAC_95D0AC), 15),
-            SI_CMD(ScriptOpcode_CALL, N(func_80241F60_95D160)),
-            SI_CMD(ScriptOpcode_CALL, SetMessageValue, SI_SAVE_VAR(352), 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(352), 1),
-                SI_CMD(ScriptOpcode_CALL, SetMessageString, &MessageSingular, 1),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, SetMessageString, &MessagePlural, 1),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_CALL, SpeakToPlayer, -1, 11468804, 11468801, 0, 524303),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 1),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468809),
-        SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), 2),
-        SI_CMD(ScriptOpcode_CALL, PlaySound, 541),
-        SI_CMD(ScriptOpcode_CALL, PlaySound, 139),
-        SI_CMD(ScriptOpcode_SPAWN_GET_ID, N(80246848), SI_VAR(1)),
-        SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-        SI_CMD(ScriptOpcode_CALL, PlayEffect, 43, 0, SI_VAR(2), SI_VAR(3), SI_VAR(4), 0, 0, 0, 0, 0, 0, 0, 0, 0),
-        SI_CMD(ScriptOpcode_CALL, ContinueSpeech, -1, -1, -1, 0, 524301),
-        SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 10, 11468810),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SCRIPT_EXISTS, SI_VAR(1), SI_VAR(0)),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-                SI_CMD(ScriptOpcode_BREAK_LOOP),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241EE0_95D0E0), -1),
-    SI_CMD(ScriptOpcode_CALL, EnablePartnerAI),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-        SI_CMD(ScriptOpcode_CALL, PlaySound, 143),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 45),
-        SI_CMD(ScriptOpcode_CALL, StopSound, 137),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241F94_95D194)),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241DF8_95CFF8)),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802452AC)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(802455F4)),
-    SI_CMD(ScriptOpcode_CALL, N(UnkFunc29)),
-    SI_CMD(ScriptOpcode_CALL, N(Set80151310_0)),
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_FLAG(1793), 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(802468F8) = SCRIPT({
+    if (SI_SAVE_VAR(352) > 63) {
+        SI_VAR(0) = 0;
+        return;
+    }
+    GetPlayerPos(SI_ARRAY(1), SI_ARRAY(2), SI_ARRAY(3));
+    NpcFacePlayer(NPC_SELF, 16);
+    if (SI_SAVE_VAR(352) == 63) {
+        SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x000A));
+    } else {
+        if (SI_SAVE_FLAG(1767) == 1) {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x0009));
+        } else {
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x0008));
+            SI_SAVE_FLAG(1767) = 1;
+        }
+    }
+    ShowChoice(MESSAGE_ID(0x1E, 0x000D));
+    if (SI_VAR(0) == 1) {
+        ContinueSpeech(-1, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x000C));
+        await N(802452AC);
+        SI_VAR(0) = 0;
+        return;
+    }
+    SI_SAVE_FLAG(1793) = 1;
+    N(Set80151310_1)();
+    N(UnkAlphaFunc)();
+    spawn N(8024535C);
+    DisablePartnerAI(0);
+    SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_GRAVITY)), FALSE);
+    SetNpcFlagBits(NPC_CHUCK_QUIZMO, ((NPC_FLAG_GRAVITY)), FALSE);
+    SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100)), TRUE);
+    SetNpcFlagBits(NPC_CHUCK_QUIZMO, ((NPC_FLAG_100)), TRUE);
+    SetNpcAnimation(NPC_PARTNER, 0x106);
+    SI_VAR(1) = spawn N(80245A84);
+    ContinueSpeech(-1, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x000B));
+    PlaySound(0x89);
+    loop {
+        SI_VAR(0) = does_script_exist SI_VAR(1);
+        if (SI_VAR(0) == 0) {
+            break loop;
+        }
+        sleep 1;
+    }
+    N(func_80241BE0_95CDE0)();
+    loop 5 {
+        GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SI_VAR(1) += 1;
+        SetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        sleep 2;
+    }
+    SI_VAR(0) = 2883584;
+    SI_VAR(0) += SI_SAVE_VAR(352);
+    SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_5), NPC_ANIM(chuck_quizmo, Palette_00, Anim_6), 0, SI_VAR(0));
+    SetPlayerAnimation(ANIM_QUESTION);
+    SI_VAR(0) = 2949120;
+    SI_VAR(0) += SI_SAVE_VAR(352);
+    PlaySound(0x8E);
+    ShowChoice(SI_VAR(0));
+    kill SI_VAR(1);
+    StopSound(142);
+    spawn N(80245AF8);
+    sleep 15;
+    PlaySound(0x8D);
+    N(func_80241EE0_95D0E0)(SI_VAR(0));
+    SI_ARRAY(4) = 0;
+    N(func_802424D4_95D6D4)();
+    sleep 40;
+    N(func_80241B5C_95CD5C)();
+    spawn {
+        sleep 110;
+        CloseChoice();
+        SI_ARRAY(4) = 0;
+    }
+    if (SI_VAR(0) == 1) {
+        SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_7));
+        SI_ARRAY(4) = 1;
+        spawn {
+            N(func_80241EAC_95D0AC)(1);
+            sleep 6;
+            sleep 6;
+            sleep 6;
+            N(func_80241EAC_95D0AC)(2);
+        }
+        spawn {
+            PlaySound(0x21C);
+            sleep 6;
+            PlaySound(0x21C);
+            sleep 6;
+            PlaySound(0x21C);
+            sleep 6;
+            PlaySound(0x21C);
+        }
+        PlaySound(0x8A);
+        N(func_80241F78_95D178)();
+        spawn {
+            sleep 15;
+            GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            SI_VAR(1) += 50;
+            N(UnkCameraFunc)(0, 0, 83, SI_VAR(0), SI_VAR(2));
+            PlayEffect(0x7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0x44, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0);
+            sleep 15;
+            SI_VAR(1) += -3;
+            N(UnkCameraFunc)(0, 0, 58, SI_VAR(0), SI_VAR(2));
+            PlayEffect(0x7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0x44, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0);
+            sleep 15;
+            SI_VAR(1) += 30;
+            N(UnkCameraFunc)(0, 0, 93, SI_VAR(0), SI_VAR(2));
+            PlayEffect(0x7, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0x44, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 60, 0, 0, 0, 0, 0, 0, 0);
+            sleep 15;
+        }
+        sleep 20;
+        SI_VAR(1) = spawn N(80246798);
+        SI_SAVE_VAR(352) += 1;
+        if (SI_SAVE_VAR(352) > 63) {
+            ContinueSpeech(-1, -1, -1, 0, MESSAGE_ID(0x08, 0x0010));
+            SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_6));
+            loop {
+                SI_VAR(0) = does_script_exist SI_VAR(1);
+                if (SI_VAR(0) == 0) {
+                    break loop;
+                }
+                sleep 1;
+            }
+            SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_5));
+            SI_VAR(0) = 348;
+            SI_VAR(1) = 3;
+            await N(802451BC);
+            AddStarPieces(1);
+            N(func_80241EAC_95D0AC)(15);
+            N(func_80241F60_95D160)();
+            SetMessageValue(SI_SAVE_VAR(352), 0);
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x0011));
+        } else {
+            ContinueSpeech(-1, -1, -1, 0, MESSAGE_ID(0x08, 0x000E));
+            SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_6));
+            loop {
+                SI_VAR(0) = does_script_exist SI_VAR(1);
+                if (SI_VAR(0) == 0) {
+                    break loop;
+                }
+                sleep 1;
+            }
+            SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_5));
+            SI_VAR(0) = 348;
+            SI_VAR(1) = 1;
+            await N(802451BC);
+            AddStarPieces(1);
+            N(func_80241EAC_95D0AC)(15);
+            N(func_80241F60_95D160)();
+            SetMessageValue(SI_SAVE_VAR(352), 0);
+            if (SI_SAVE_VAR(352) == 1) {
+                SetMessageString(2148844180, 1);
+            } else {
+                SetMessageString(2148844176, 1);
+            }
+            SpeakToPlayer(NPC_SELF, NPC_ANIM(chuck_quizmo, Palette_00, Anim_4), NPC_ANIM(chuck_quizmo, Palette_00, Anim_1), 0, MESSAGE_ID(0x08, 0x000F));
+        }
+        SI_VAR(0) = 1;
+    } else {
+        SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_9));
+        SI_ARRAY(4) = 2;
+        PlaySound(0x21D);
+        PlaySound(0x8B);
+        SI_VAR(1) = spawn N(80246848);
+        GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
+        PlayEffect(0x2B, 0, SI_VAR(2), SI_VAR(3), SI_VAR(4), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        ContinueSpeech(-1, -1, -1, 0, MESSAGE_ID(0x08, 0x000D));
+        SetNpcAnimation(NPC_CHUCK_QUIZMO, NPC_ANIM(chuck_quizmo, Palette_00, Anim_A));
+        loop {
+            SI_VAR(0) = does_script_exist SI_VAR(1);
+            if (SI_VAR(0) == 0) {
+                break loop;
+            }
+            sleep 1;
+        }
+        SI_VAR(0) = 0;
+    }
+    N(func_80241EE0_95D0E0)(-1);
+    EnablePartnerAI();
+    spawn {
+        sleep 30;
+        PlaySound(0x8F);
+    }
+    spawn {
+        sleep 45;
+        StopSound(137);
+    }
+    N(func_80241F94_95D194)();
+    N(func_80241DF8_95CFF8)();
+    await N(802452AC);
+    spawn N(802455F4);
+    N(UnkFunc29)();
+    N(Set80151310_0)();
+    SI_SAVE_FLAG(1793) = 0;
+});
 
 Script N(80247628) = SCRIPT({
     N(func_802415AC_95C7AC)();
@@ -1150,17 +1157,15 @@ Script N(80247628) = SCRIPT({
     N(UnkFunc31)();
 });
 
-Script N(8024769C) = {
-    SI_CMD(ScriptOpcode_USE_ARRAY, 0x8024DFC8),
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_FLAG(1769), 1),
-    SI_CMD(ScriptOpcode_CALL, DisablePlayerPhysics, 1),
-    SI_CMD(ScriptOpcode_CALL, SetPlayerFlagBits, 4194304, 1),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(802468F8)),
-    SI_CMD(ScriptOpcode_CALL, DisablePlayerPhysics, 0),
-    SI_CMD(ScriptOpcode_CALL, SetPlayerFlagBits, 4194304, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024769C) = SCRIPT({
+    arr_use 0x8024DFC8; // TODO rawptr
+    SI_SAVE_FLAG(1769) = 1;
+    DisablePlayerPhysics(TRUE);
+    SetPlayerFlagBits(4194304, 1);
+    await N(802468F8);
+    DisablePlayerPhysics(FALSE);
+    SetPlayerFlagBits(4194304, 0);
+});
 
 Script N(8024771C) = SCRIPT({
     N(GetNpcUnsafeOwner2)();
@@ -1234,13 +1239,11 @@ Script N(802477E8) = SCRIPT({
     unbind;
 });
 
-Script N(8024792C) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802477E8), 0x10, 0, N(D_8024DFF0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024792C) = SCRIPT({
+    N(func_802427BC_95D9BC)(SI_VAR(0));
+    bind_padlock N(802477E8) 0x10 0 N(D_8024DFF0);
+    N(func_80242730_95D930)(SI_VAR(0));
+});
 
 Script N(8024797C) = SCRIPT({
     loop {
@@ -1300,15 +1303,13 @@ Script N(802479FC) = SCRIPT({
     unbind;
 });
 
-Script N(80247D20) = {
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(11)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(1), SI_VAR(2)),
-    SI_CMD(ScriptOpcode_CALL, N(func_802427BC_95D9BC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802479FC), 0x10, 0, N(D_8024DFF0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242730_95D930), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80247D20) = SCRIPT({
+    SI_VAR(0) = SI_VAR(11);
+    SI_VAR(1) = SI_VAR(2);
+    N(func_802427BC_95D9BC)(SI_VAR(0));
+    bind_padlock N(802479FC) 0x10 0 N(D_8024DFF0);
+    N(func_80242730_95D930)(SI_VAR(0));
+});
 
 Script N(80247D90) = SCRIPT({
     SI_VAR(12) = 0;
@@ -2306,8 +2307,8 @@ Script N(8024B664) = SCRIPT({
     NpcJump0(NPC_MOUSER1, 20, 0, -259, 4);
 });
 
-// extra END_IF
-/*
+// Extraneous END_IF
+#ifdef NON_MATCHING
 Script N(8024B6B4) = SCRIPT({
     N(func_80243578_95E778)();
     func_802D2C14(1);
@@ -2323,11 +2324,8 @@ Script N(8024B6B4) = SCRIPT({
     STORY_PROGRESS = STORY_CH2_BOUGHT_SECRET_ITEMS;
     func_802D2C14(0);
     await N(8024B664);
-    }
 });
-*/
-
-// *INDENT-OFF*
+#else
 Script N(8024B6B4) = {
     SI_CMD(ScriptOpcode_CALL, N(func_80243578_95E778)),
     SI_CMD(ScriptOpcode_CALL, func_802D2C14, 1),
@@ -2347,7 +2345,7 @@ SI_CMD(ScriptOpcode_END_IF),
 SI_CMD(ScriptOpcode_RETURN),
 SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 Script N(8024B7B0) = SCRIPT({
     if (SI_SAVE_FLAG(758) == 0) {
@@ -2910,7 +2908,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -2921,11 +2919,11 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
 
@@ -2939,7 +2937,7 @@ ApiStatus N(func_80241174_95C374)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
         case 1:
@@ -3262,8 +3260,8 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
     s32 res;
 
     if (isInitialCall) {
-        script->functionTemp[1].s = (Unk_Struct_1*)heap_malloc(0x3C);
-        ptr = script->functionTemp[1].s;
+        script->functionTemp[1] = (Unk_Struct_1*)heap_malloc(0x3C);
+        ptr = script->functionTemp[1];
         ptr->unk_00 = temp_s1->unk_00;
         ptr->unk_04 = temp_s1->unk_04;
         ptr->unk_08 = temp_s1->unk_08;
@@ -3281,7 +3279,7 @@ ApiStatus N(func_80242858_95DA58)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_38 = 0;
     }
 
-    ptr = script->functionTemp[1].s;
+    ptr = script->functionTemp[1];
     switch (ptr->unk_20) {
         case 0:
             res = get_xz_dist_to_player(ptr->unk_00, ptr->unk_08);

@@ -233,10 +233,10 @@ ApiStatus NpcMoveTo(ScriptInstance* script, s32 isInitialCall) {
     f32 moveSpeed;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         NpcID npcID = get_variable(script, *args++);
         f32 targetX = get_variable(script, *args++);
         f32 targetZ = get_variable(script, *args++);
@@ -247,7 +247,7 @@ ApiStatus NpcMoveTo(ScriptInstance* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1].s = (s32)npc;
+        script->functionTemp[1] = (s32)npc;
         npc->moveToPos.x = targetX;
         npc->moveToPos.z = targetZ;
         npc->duration = duration;
@@ -261,10 +261,10 @@ ApiStatus NpcMoveTo(ScriptInstance* script, s32 isInitialCall) {
         if (npc->duration == 0) {
             npc->duration = 1;
         }
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
-    npc = (Npc*)script->functionTemp[1].s;
+    npc = (Npc*)script->functionTemp[1];
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
@@ -289,14 +289,14 @@ ApiStatus NpcMoveTo(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus _npc_jump_to(ScriptInstance* script, s32 isInitialCall, s32 snapYaw) {
     Bytecode* args = script->ptrReadPos;
-    f32* yaw = &script->functionTemp[2].f;
+    f32* yaw = (f32*) &script->functionTemp[2];
     Npc* npc;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         NpcID npcID = get_variable(script, *args++);
         f32 xTemp = get_variable(script, *args++);
         f32 yTemp = get_variable(script, *args++);
@@ -310,7 +310,7 @@ ApiStatus _npc_jump_to(ScriptInstance* script, s32 isInitialCall, s32 snapYaw) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1].s = (s32)npc;
+        script->functionTemp[1] = (s32)npc;
         npc->moveToPos.x = xTemp;
         npc->moveToPos.y = yTemp;
         npc->moveToPos.z = zTemp;
@@ -335,10 +335,10 @@ ApiStatus _npc_jump_to(ScriptInstance* script, s32 isInitialCall, s32 snapYaw) {
 
         npc->flags |= 0x800;
         npc->jumpVelocity = (npc->jumpScale * npc->duration * 0.5f) + (yTemp / npc->duration);
-        script->functionTemp[0].s =1;
+        script->functionTemp[0] =1;
     }
 
-    npc = (Npc*)script->functionTemp[1].s;
+    npc = (Npc*)script->functionTemp[1];
     npc_move_heading(npc, npc->moveSpeed, *yaw);
 
     npc->pos.y += npc->jumpVelocity;
@@ -380,13 +380,13 @@ ApiStatus NpcFlyTo(ScriptInstance* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        script->functionTemp[1].s = (s32)npc;
+        script->functionTemp[1] = (s32)npc;
         npc->moveToPos.x = get_float_variable(script, *args++);
         npc->moveToPos.y = get_float_variable(script, *args++);
         npc->moveToPos.z = get_float_variable(script, *args++);
         script->varTable[6] = get_variable(script, *args++);
-        script->functionTemp[2].s = get_variable(script, *args++);
-        script->functionTemp[3].s = get_variable(script, *args++);
+        script->functionTemp[2] = get_variable(script, *args++);
+        script->functionTemp[3] = get_variable(script, *args++);
         npc->duration = 0;
         *outX = npc->pos.x;
         *outY = npc->pos.y;
@@ -402,10 +402,10 @@ ApiStatus NpcFlyTo(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[1].s;
-    npc->pos.x = update_lerp(script->functionTemp[3].s, *outX, npc->moveToPos.x, npc->duration, script->varTable[6]);
-    npc->pos.y = update_lerp(script->functionTemp[3].s, *outY, npc->moveToPos.y, npc->duration, script->varTable[6]);
-    npc->pos.z = update_lerp(script->functionTemp[3].s, *outZ, npc->moveToPos.z, npc->duration, script->varTable[6]);
+    npc = (Npc*)script->functionTemp[1];
+    npc->pos.x = update_lerp(script->functionTemp[3], *outX, npc->moveToPos.x, npc->duration, script->varTable[6]);
+    npc->pos.y = update_lerp(script->functionTemp[3], *outY, npc->moveToPos.y, npc->duration, script->varTable[6]);
+    npc->pos.z = update_lerp(script->functionTemp[3], *outZ, npc->moveToPos.z, npc->duration, script->varTable[6]);
 
     npc->duration++;
     if (npc->duration >= script->varTable[6]) {
@@ -424,14 +424,14 @@ ApiStatus NpcFlyTo(ScriptInstance* script, s32 isInitialCall) {
     }
 
     yDelta = sin_deg((1.0 - (dist / npc->planarFlyDist)) * 180.0);
-    if (script->functionTemp[2].s == 0) {
+    if (script->functionTemp[2] == 0) {
         yDelta = 0.0f;
     }
-    if (script->functionTemp[2].s < 0) {
-        yDelta = -yDelta * -script->functionTemp[2].s;
+    if (script->functionTemp[2] < 0) {
+        yDelta = -yDelta * -script->functionTemp[2];
     }
-    if (script->functionTemp[2].s > 0) {
-        yDelta *= script->functionTemp[2].s;
+    if (script->functionTemp[2] > 0) {
+        yDelta *= script->functionTemp[2];
     }
     npc->pos.y += yDelta;
     return ApiStatus_BLOCK;
@@ -467,9 +467,9 @@ ApiStatus SetNpcYaw(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus InterpNpcYaw(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    f32* t1 = &script->functionTemp[1].f;
-    f32* t2 = &script->functionTemp[2].f;
-    s32* t3 = &script->functionTemp[3].s;
+    f32* t1 = (f32*) &script->functionTemp[1];
+    f32* t2 = (f32*) &script->functionTemp[2];
+    s32* t3 = &script->functionTemp[3];
     Npc* npc;
 
     if (isInitialCall) {
@@ -482,7 +482,7 @@ ApiStatus InterpNpcYaw(ScriptInstance* script, s32 isInitialCall) {
 
         *t1 = npc->yaw;
         *t2 = get_variable(script, *args++) - *t1;
-        script->functionTemp[0].s = (s32)npc;
+        script->functionTemp[0] = (s32)npc;
         *t3 = get_variable(script, *args++);
 
         if (*t3 == 0) {
@@ -500,7 +500,7 @@ ApiStatus InterpNpcYaw(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[0].s;
+    npc = (Npc*)script->functionTemp[0];
     if (*t3 > 0) {
         npc->duration++;
         npc->yaw = *t1 + ((*t2 * npc->duration) / *t3);
@@ -515,9 +515,9 @@ ApiStatus InterpNpcYaw(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus NpcFacePlayer(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
-    f32* t1 = &script->functionTemp[1].f;
-    f32* t2 = &script->functionTemp[2].f;
-    s32* t3 = &script->functionTemp[3].s;
+    f32* t1 = (f32*) &script->functionTemp[1];
+    f32* t2 = (f32*) &script->functionTemp[2];
+    s32* t3 = &script->functionTemp[3];
     Npc* npc;
 
     if (isInitialCall) {
@@ -530,7 +530,7 @@ ApiStatus NpcFacePlayer(ScriptInstance* script, s32 isInitialCall) {
 
         *t1 = npc->yaw;
         *t2 = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) - *t1;
-        script->functionTemp[0].s = (s32)npc;
+        script->functionTemp[0] = (s32)npc;
         *t3 = get_variable(script, *args++);
         npc->duration = 0;
 
@@ -542,7 +542,7 @@ ApiStatus NpcFacePlayer(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    npc = (Npc*)script->functionTemp[0].s;
+    npc = (Npc*)script->functionTemp[0];
     if (*t3 > 0) {
         npc->duration++;
         npc->yaw = *t1 + ((*t2 * npc->duration) / *t3);
@@ -556,9 +556,9 @@ ApiStatus NpcFacePlayer(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus NpcFaceNpc(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32* t1 = &script->functionTemp[1].f;
-    f32* t2 = &script->functionTemp[2].f;
-    s32* t3 = &script->functionTemp[3].s;
+    f32* t1 = (f32*) &script->functionTemp[1];
+    f32* t2 = (f32*) &script->functionTemp[2];
+    s32* t3 = &script->functionTemp[3];
     Npc* npc;
     Npc* npc2;
 
@@ -578,7 +578,7 @@ ApiStatus NpcFaceNpc(ScriptInstance* script, s32 isInitialCall) {
 
         *t1 = npc2->yaw;
         *t2 = atan2(npc2->pos.x, npc2->pos.z, npc->pos.x, npc->pos.z) - *t1;
-        script->functionTemp[0].s = (s32)npc2;
+        script->functionTemp[0] = (s32)npc2;
         *t3 = get_variable(script, *args++);
         npc2->duration = 0;
 
@@ -590,7 +590,7 @@ ApiStatus NpcFaceNpc(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    npc2 = (Npc*)script->functionTemp[0].s;
+    npc2 = (Npc*)script->functionTemp[0];
     if (*t3 > 0) {
         npc2->duration++;
         npc2->yaw = *t1 + ((*t2 * npc2->duration) / *t3);

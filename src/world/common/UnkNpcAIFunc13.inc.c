@@ -25,5 +25,5 @@ void N(UnkNpcAIFunc13)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     }
 
     npc->yaw = clamp_angle(tempAngle);
-    script->functionTemp[0].s = 13;
+    script->functionTemp[0] = 13;
 }

@@ -22,6 +22,19 @@ extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
+extern s32 D_800DC4D0;
+extern s32 D_800DC4D4;
+extern s32 D_800DC4D8;
+extern s32 gBattleState2;
+extern s32 D_800DC4E4;
+extern s32 D_800DC4E8;
+extern u8 gCurrentBattleSection; // in the middle of the previous var
+extern u8 D_800DC4EB; // in the middle of the previous var
+extern s32 D_800DC4E0;
+extern s32 D_800DC4EC;
+extern s32 D_800DC4F0;
+extern s32 D_800DC4F4;
+extern s32 D_800DC4F8;
 extern s32 gBattleDmaDest;
 
 extern ScriptList gWorldScriptList;
@@ -87,14 +100,14 @@ extern s32 D_8010CD20;
 extern s32 D_801595A0;
 extern BackgroundHeader gBackgroundImage;
 
-extern PrintContext* gCurrentPrintContext;
+extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
-extern PrintContext* D_802DB268;
+extern MessagePrintState* D_802DB268;
 
 extern s32 D_802EB390;
 extern s32 D_802EB394;
-extern PrintContext* D_802EB398;
-extern PrintContext* D_802EB39C;
+extern MessagePrintState* D_802EB398;
+extern MessagePrintState* D_802EB39C;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
@@ -211,8 +224,6 @@ extern s32 gItemMenuScrollUpIcon;
 
 // Stats
 extern s32 gStatsMenuIconIDs[12];
-
-
 extern s32 gGameState;
 extern s16 gNpcCount;
 extern s32 D_8009A64C;
@@ -230,14 +241,16 @@ extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
-extern s32 D_800B0CF0;
-extern s32 D_800D91E0;
-extern s32 D_800D9230;
+extern s32 mapTexName;
+extern char* mapHitName;
+extern s32 mapShapeName;
 extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
 
 extern DisplayContext D_80164000[];
+
+extern MessagePrintState gMessagePrinters[3];
 
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;
@@ -304,7 +317,6 @@ extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
-extern s32 timeFreezeMode;
 extern u8 D_800A0963;
 
 extern s32 D_8009A5D0;
@@ -380,6 +392,8 @@ extern s32 D_802C05CC;
 extern s16 gCurrentCamID;
 
 extern s32 gSpriteHeapPtr;
+
+extern s32 D_8029C890[12][5];
 
 // Heap?
 extern s32 D_8038F800;

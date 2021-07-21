@@ -41,17 +41,17 @@ INCLUDE_ASM(ApiStatus, "world/script_api/7E2AA0", MakeDoorAdvanced, ScriptInstan
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802822A8);
 
 ApiStatus func_80282314(ScriptInstance* script, s32 isInitialCall) {
-    script->functionTemp[1].s = script->varTable[1];
+    script->functionTemp[1] = script->varTable[1];
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80282324(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[0] = *(UNK_TYPE*)script->functionTemp[1].s;
+    script->varTable[0] = *(UNK_TYPE*)script->functionTemp[1];
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80282338(ScriptInstance* script, s32 isInitialCall) {
-    UNK_TYPE* temp_s0 = script->functionTemp[1].s;
+    UNK_TYPE* temp_s0 = script->functionTemp[1];
 
     *temp_s0 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
@@ -70,7 +70,7 @@ ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
     f32 temp_f0;
 
     temp_f0 = get_float_variable(script, *script->ptrReadPos);
-    camera = CAM(0);
+    camera = &gCameras[0];
 
     if (temp_f0 >= 0.0f) {
         D_80286540 = camera->moveSpeed;
@@ -106,7 +106,7 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282634);
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282700);
 
 ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
-    DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1].s;
+    DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1];
 
     doorStuff->unk_0A = func_80134240();
     func_80134230(doorStuff->unk_08);
@@ -114,12 +114,12 @@ ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802827A8(ScriptInstance* script, s32 isInitialCall) {
-    func_80134230(((DoorStuff*)script->functionTemp[1].s)->unk_0A);
+    func_80134230(((DoorStuff*)script->functionTemp[1])->unk_0A);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
-    DoorStuff* temp = script->functionTemp[1].s;
+    DoorStuff* temp = script->functionTemp[1];
 
     script->varTable[2] = temp->unk_04;
     script->varTable[3] = temp->unk_0C;
@@ -139,6 +139,6 @@ ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_80282868(ScriptInstance* script, s32 isInitialCall) {
-    script->varTable[1] = script->functionTemp[1].s;
+    script->varTable[1] = script->functionTemp[1];
     return ApiStatus_DONE2;
 }

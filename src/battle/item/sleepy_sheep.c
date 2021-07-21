@@ -106,10 +106,10 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
     s32* D_802A3F58_ptr;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0: {
             s32* D_802A3F28_721578_ptr = &N(D_802A3F28_721578);
             s32 loop1, loop2, loop3;
@@ -134,16 +134,16 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
                 D_802A3E88_7214D8_ptr2 += i * 3 + 1;
                 D_802A3E88_7214D8_ptr3 += i * 3 + 2;
             }
-            script->functionTemp[0].s = 1;
-            script->functionTemp[1].s = gGameStatusPtr->frameCounter % 10;
+            script->functionTemp[0] = 1;
+            script->functionTemp[1] = gGameStatusPtr->frameCounter % 10;
         }
         break;
 
         case 1:
             D_802A3F88.x += 6.0f;
             if (gGameStatusPtr->frameCounter % 3 == 0) {
-                script->functionTemp[1].s++;
-                script->functionTemp[1].s %= 10;
+                script->functionTemp[1]++;
+                script->functionTemp[1] %= 10;
             }
 
             flag = 0;
@@ -164,7 +164,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
 
                 virtual_entity_set_pos(D_802A3F58_ptr[i], x, y, z);
 
-                if (flag == 0 && script->functionTemp[1].s == i) {
+                if (flag == 0 && script->functionTemp[1] == i) {
                     f32 x2, y2;
                     if (gGameStatusPtr->frameCounter % 5 == 0) {
 
@@ -195,7 +195,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
                               N(D_802A3E88_7214D8)[randIdx * 3 + 2] + D_802A3F88_ptr->z, 0);
             }
             if (D_802A3F88_ptr->x >= 320.0f) {
-                script->functionTemp[0].s = 2;
+                script->functionTemp[0] = 2;
                 break;
             }
             return ApiStatus_DONE2;
@@ -221,8 +221,8 @@ ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 0x5A;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 0x5A;
     }
 
     for (i = 0; i < player->targetListLength; i++) {
@@ -237,8 +237,8 @@ ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    if (script->functionTemp[1].s != 0) {
-        script->functionTemp[1].s--;
+    if (script->functionTemp[1] != 0) {
+        script->functionTemp[1]--;
         return ApiStatus_BLOCK;
     }
 
@@ -252,7 +252,7 @@ ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall) {
     s32 ret;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
     ret = 0;

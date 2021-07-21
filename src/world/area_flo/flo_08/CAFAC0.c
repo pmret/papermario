@@ -229,8 +229,8 @@ Script N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
 Script N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
 
 Script N(802429E4) = SCRIPT({
-    bind N(exitWalk_8024292C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80242988) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_8024292C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80242988) TRIGGER_FLOOR_ABOVE 4;
 });
 
 s32 N(lavaResetList_80242A2C)[] = {
@@ -411,13 +411,11 @@ Script N(80243090) = SCRIPT({
     unbind;
 });
 
-Script N(802431C4) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802419FC_CB073C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80243090), 0x10, 0, N(D_802462C0_B4AA30), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80241970_CB06B0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(802431C4) = SCRIPT({
+    N(func_802419FC_CB073C)(SI_VAR(0));
+    bind_padlock N(80243090) 0x10 0 N(D_802462C0_B4AA30);
+    N(func_80241970_CB06B0)(SI_VAR(0));
+});
 
 Script N(interact_80243214) = SCRIPT({
     DisablePlayerInput(TRUE);
@@ -1050,7 +1048,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
         npc->duration = 0xA;
         npc->currentAnim.w = enemy->animList[8];
     }
-    script->functionTemp[0].s = 0xD;
+    script->functionTemp[0] = 0xD;
 }
 
 void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
@@ -1062,7 +1060,7 @@ void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISetting
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
     } else {
         if (npc->currentAnim.w != enemy->animList[8]) {
             if (npc->moveSpeed < 4.0) {
@@ -1076,7 +1074,7 @@ void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISetting
             npc->duration--;
             return;
         } else {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
         }
     }
 }
@@ -1087,7 +1085,7 @@ void N(func_802414C8_CB0208)(ScriptInstance* script, NpcAISettings* npcAISetting
 
     npc->duration--;
     if (npc->duration == 0) {
-        script->functionTemp[0].s = NULL;
+        script->functionTemp[0] = NULL;
     }
 }
 
@@ -1109,7 +1107,7 @@ ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -1119,13 +1117,13 @@ ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 0x8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, npcAISettings, territoryPtr);
         case 1:
@@ -1286,8 +1284,8 @@ Script N(80245914) = SCRIPT({
     SI_AREA_FLAG(29) = 0;
     SI_AREA_FLAG(30) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 22;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80245904);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 22;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80245904);
 });
 
 static s32 N(pad_598C) = {

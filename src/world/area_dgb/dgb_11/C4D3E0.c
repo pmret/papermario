@@ -100,7 +100,7 @@ Script N(main) = SCRIPT({
     SetCamEnabled(0, 1);
     await N(makeEntities);
     spawn N(802400D0);
-    bind N(exitSingleDoor_80240170) to TRIGGER_WALL_PRESS_A 11;
+    bind N(exitSingleDoor_80240170) TRIGGER_WALL_PRESS_A 11;
     spawn N(enterSingleDoor_80240224);
 });
 

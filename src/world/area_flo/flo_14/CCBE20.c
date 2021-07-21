@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-static s32 N(D_802453B0_EF79C0)[91];
+s32 N(D_802453B0_EF79C0)[91] BSS;
 
 f32 N(D_802444C0_CCF7D0)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
@@ -89,13 +89,12 @@ Script N(80244604) = SCRIPT({
     unbind;
 });
 
-Script N(80244738) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802422C0_CCD5D0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80244604), 0x10, 0, N(D_802453B0_EF79C0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_80242234_CCD544), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80244738) = SCRIPT({
+    N(func_802422C0_CCD5D0)(SI_VAR(0));
+    bind_padlock N(80244604) 0x10 0 N(D_802453B0_EF79C0);
+    N(func_80242234_CCD544)(SI_VAR(0));
+});
+
 
 s32 N(D_80244788_CCFA98)[] = {
     0x000000A1, 0x00000000,
@@ -145,7 +144,7 @@ Script N(interact_80244790) = SCRIPT({
             ResetCam(0, 4.0);
             SpeakToPlayer(NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063));
             SI_SAVE_FLAG(1412) = 1;
-            bind N(8024352C) to TRIGGER_FLOOR_PRESS_A 30;
+            bind N(8024352C) TRIGGER_FLOOR_PRESS_A 30;
         }
     }
     SI_AREA_FLAG(35) = 0;
@@ -405,22 +404,22 @@ void N(func_80240CC0_CCBFD0)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     if (enemy->varTable[9] <= 0) {
         if (aiSettings->unk_14 >= 0) {
-            if (script->functionTemp[1].s <= 0) {
-                script->functionTemp[1].s = aiSettings->unk_14;
+            if (script->functionTemp[1] <= 0) {
+                script->functionTemp[1] = aiSettings->unk_14;
                 if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     if (enemy->npcSettings->unk_2A & 1) {
-                        script->functionTemp[0].s = 10;
+                        script->functionTemp[0] = 10;
                     } else {
-                        script->functionTemp[0].s = 12;
+                        script->functionTemp[0] = 12;
                     }
                     return;
                 }
             }
-            script->functionTemp[1].s--;
+            script->functionTemp[1]--;
         }
     } else {
         enemy->varTable[9]--;
@@ -448,10 +447,10 @@ void N(func_80240CC0_CCBFD0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     enemy->varTable[4] = npc->pos.y * 100.0;
     if (aiSettings->moveTime > 0) {
         if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0].s = 2;
-            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1].s < 3)) {
-                script->functionTemp[0].s = 0;
+            script->functionTemp[0] = 2;
+            script->functionTemp[1] = (rand_int(1000) % 3) + 2;
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1] < 3)) {
+                script->functionTemp[0] = 0;
             }
         }
     }
@@ -473,7 +472,7 @@ void N(func_80241764_CCCA74)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_802444C0_CCF7D0)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 
@@ -515,7 +514,7 @@ ApiStatus N(func_80241E1C_CCD12C)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
         case 1:
@@ -572,8 +571,6 @@ ApiStatus N(func_80242288_CCD598)(ScriptInstance* script, s32 isInitialCall) {
     N(D_802445FC_CCF90C) = TRUE;
     return ApiStatus_DONE2;
 }
-
-extern s32 N(D_802453B0_EF79C0)[91];
 
 ApiStatus N(func_802422C0_CCD5D0)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -8,14 +8,22 @@ from itertools import tee
 def next_multiple(pos, multiple):
     return pos + pos % multiple
 
-def build_mapfs(out_bin, assets):
+def get_version_date(version):
+    if version == "us":
+        return "Map Ver.00/11/07 15:36"
+    elif version == "jp":
+        return "Map Ver.00/07/05 19:13"
+    else:
+        return "Map Ver.??/??/?? ??:??"
+
+def build_mapfs(out_bin, assets, version):
     # every TOC entry's name field has data after the null terminator made up from all the previous name fields.
     # we probably don't have to do this for the game to read the data properly (it doesn't read past the null terminator
     # of `string`), but the original devs' equivalent of this script had this bug so we need to replicate it to match.
     written_names = []
 
     with open(out_bin, "wb") as f:
-        f.write("Map Ver.00/11/07 15:36".encode("ascii"))
+        f.write(get_version_date(version).encode("ascii"))
 
         next_data_pos = (len(assets) + 1) * 0x1C
 
@@ -63,6 +71,7 @@ def build_mapfs(out_bin, assets):
 
 if __name__ == "__main__":
     argv.pop(0) # python3
+    version = argv.pop(0)
     out = argv.pop(0)
 
     assets = []
@@ -71,4 +80,4 @@ if __name__ == "__main__":
     for i in range(0, len(argv), 2):
         assets.append((Path(argv[i]), Path(argv[i+1])))
 
-    build_mapfs(out, assets)
+    build_mapfs(out, assets, version)

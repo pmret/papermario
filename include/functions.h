@@ -70,6 +70,9 @@ f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_802667F0(s32, Actor*, f32, f32, f32);
 
+void* general_heap_malloc(s32 size);
+s32 general_heap_free(s32 size);
+
 void entity_Shadow_init(Shadow* entity);
 void entity_SaveBlock_idle(Entity* entity);
 void entity_SaveBlock_pause_game(void);
@@ -99,8 +102,13 @@ s32 entity_block_handle_collision(Entity* entity);
 void entity_BlueSwitch_init(Entity* entity);
 void entity_HugeBlueSwitch_init(Entity* entity);
 
+s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
+
+// todo remove once we have libultra's def
+extern void guOrtho(Mtx *m, float l, float r, float b, float t,
+		    float n, float f, float scale);
 // Text
-PrintContext* msg_get_printer_for_string(s32 stringID, s32* a1);
+MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
 void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
@@ -114,6 +122,10 @@ void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* cen
 s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
+
+void draw_box(s32 flags, s32 windowStyle, s16 posX, s16 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+              s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
+              s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
@@ -220,7 +232,9 @@ s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
-
+f32 get_player_normal_yaw(void);
+void set_standard_shadow_scale(Shadow* shadow, f32 scale);
+void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_animator_by_index(s32 arg0);
@@ -271,6 +285,7 @@ f32 dist3D(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
 void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void sfx_play_sound(s32 soundID);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void func_801497FC(s32 arg0);
@@ -385,7 +400,7 @@ void playFX_3D(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 v
 EffectInstance* playFX_40(s32, f32, f32, f32, s32);
 EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-//EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
+void playFX_82(s32, f32, f32, f32, f32, s32 time);
 EffectInstance* playFX_4E(s32, f32, f32, f32);
 EffectInstance* playFX_54(s32, f32, f32, f32);
 EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
@@ -397,7 +412,7 @@ EffectInstance* playFX_83(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 
 EffectInstance* playFX_7B(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void playFX_32(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 EffectInstance* playFX_56(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 EffectInstance* playFX_69(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
 void playFX_2D(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
 void playFX_2E(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
@@ -411,6 +426,16 @@ void fx_land(s32, f32, f32, f32, f32);
 EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
 void playFX_26(s32, f32, f32, f32);
+EffectInstance* playFX_64(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
+void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
+void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+EffectInstance* playFX_5A(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
+EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
+EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
+EffectInstance* playFX_23(u32, f32, f32, f32, f32);
+void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
+EffectInstance* playFX_6C(s32, f32, f32, f32, f32, s32);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;
@@ -459,7 +484,8 @@ void guRotateRPYF(float mf[4][4], f32 x, f32 y, f32 z);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
-void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+
+
+void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
 #endif

@@ -501,16 +501,16 @@ ApiStatus ShowGotItem(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
-            script->functionTemp[1].s = init_got_item(get_variable(script, *args++), get_variable(script, *args++), *args++);
-            script->functionTemp[0].s = 1;
+            script->functionTemp[1] = init_got_item(get_variable(script, *args++), get_variable(script, *args++), *args++);
+            script->functionTemp[0] = 1;
             break;
         case 1:
-            if (get_item_entity(script->functionTemp[1].s) == NULL) {
+            if (get_item_entity(script->functionTemp[1]) == NULL) {
                 return ApiStatus_DONE2;
             }
     }

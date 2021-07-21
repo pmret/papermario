@@ -120,22 +120,22 @@ ApiStatus N(func_802A1444_71DBB4)(ScriptInstance* script, s32 isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
         set_background_color_blend(0, 0, 0, 0);
-        script->functionTemp[0].s = 10;
+        script->functionTemp[0] = 10;
     }
 
-    set_background_color_blend(0, 0, 0, ((10 - script->functionTemp[0].s) * 16) & 240);
-    script->functionTemp[0].s--;
+    set_background_color_blend(0, 0, 0, ((10 - script->functionTemp[0]) * 16) & 240);
+    script->functionTemp[0]--;
     do {} while (0);
-    return (script->functionTemp[0].s == 0) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
 ApiStatus N(func_802A14D4_71DC44)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
-        script->functionTemp[0].s = 10;
+        script->functionTemp[0] = 10;
     }
-    set_background_color_blend(0, 0, 0, (script->functionTemp[0].s * 16) & 240);
-    script->functionTemp[0].s--;
-    if (script->functionTemp[0].s == 0) {
+    set_background_color_blend(0, 0, 0, (script->functionTemp[0] * 16) & 240);
+    script->functionTemp[0]--;
+    if (script->functionTemp[0] == 0) {
         set_background_color_blend(0, 0, 0, 0);
 
         return ApiStatus_DONE2;

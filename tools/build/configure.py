@@ -13,9 +13,9 @@ DO_SHA1_CHECK = True
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
 
-CFLAGS          = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -fforce-addr"
-CFLAGS_NUSYS    = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
-CFLAGS_LIBULTRA = "-O2 -quiet -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
+CFLAGS          = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -fforce-addr"
+CFLAGS_NUSYS    = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
+CFLAGS_LIBULTRA = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
 
 ASFLAGS = "-EB -G 0"
 
@@ -165,7 +165,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("mapfs",
         description="mapfs $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/combine.py $out $in",
+        command=f"$python {BUILD_TOOLS}/mapfs/combine.py $version $out $in",
     )
 
     ninja.rule("pack_title_data",
@@ -174,6 +174,10 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     )
 
     ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
+
+    ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
+
+    ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
@@ -195,7 +199,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "PaperMarioMapFS", "PaperMarioMessages", "PaperMarioNpcSprites"])
+            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset", "pm_charset_palettes"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -318,7 +322,7 @@ class Configure:
                 else:
                     with entry.src_paths[0].open() as f:
                         s = f.read()
-                        if "SCRIPT(" in s or "#pragma SCRIPT" in s:
+                        if "SCRIPT(" in s or "#pragma SCRIPT" or "#include \"world/common/foliage.inc.c\"" in s:
                             task = "cc_dsl"
 
                 build(entry.object_path, entry.src_paths, task)
@@ -385,7 +389,7 @@ class Configure:
                     "img_flags": "",
                 })
                 build(entry.object_path, [bin_path], "bin")
-            elif seg.type == "PaperMarioNpcSprites":
+            elif seg.type == "pm_npc_sprites":
                 sprite_yay0s = []
 
                 for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
@@ -412,7 +416,7 @@ class Configure:
 
                 build(entry.object_path.with_suffix(".bin"), sprite_yay0s, "sprite_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMessages":
+            elif seg.type == "pm_msg":
                 msg_bins = []
 
                 for section_idx, msg_path in enumerate(entry.src_paths):
@@ -425,7 +429,7 @@ class Configure:
                     self.build_path() / "include" / "message_ids.h",
                 ], msg_bins, "msg_combine")
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "PaperMarioMapFS":
+            elif seg.type == "pm_map_data":
                 bin_yay0s: List[Path] = [] # flat list of (uncompressed path, compressed? path) pairs
                 src_dir = Path("assets/x") / seg.name
 
@@ -436,7 +440,6 @@ class Configure:
 
                     if name.startswith("party_"):
                         compress = True
-                        yay0_path = bin_path.with_suffix(".Yay0")
                         build(bin_path, [path], "img", variables={
                             "img_type": "party",
                             "img_flags": "",
@@ -446,14 +449,11 @@ class Configure:
 
                         logotype_path = out_dir / "title_logotype.bin"
                         copyright_path = out_dir / "title_copyright.bin"
+                        copyright_pal_path = out_dir / "title_copyright.pal" # jp only
                         press_start_path = out_dir / "title_press_start.bin"
 
                         build(logotype_path, [src_dir / "title/logotype.png"], "img", variables={
                             "img_type": "rgba32",
-                            "img_flags": "",
-                        })
-                        build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
-                            "img_type": "ia8",
                             "img_flags": "",
                         })
                         build(press_start_path, [src_dir / "title/press_start.png"], "img", variables={
@@ -461,11 +461,24 @@ class Configure:
                             "img_flags": "",
                         })
 
-                        build(bin_path, [
-                            logotype_path,
-                            copyright_path,
-                            press_start_path,
-                        ], "pack_title_data")
+                        if self.version == "jp":
+                            build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "ci4",
+                                "img_flags": "",
+                            })
+                            build(copyright_pal_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "palette",
+                                "img_flags": "",
+                            })
+                            imgs = [logotype_path, copyright_path, press_start_path, copyright_pal_path]
+                        else:
+                            build(copyright_path, [src_dir / "title/copyright.png"], "img", variables={
+                                "img_type": "ia8",
+                                "img_flags": "",
+                            })
+                            imgs = [logotype_path, copyright_path, press_start_path]
+
+                        build(bin_path, imgs, "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
                         bin_path = self.build_path() / bin_path
@@ -500,7 +513,7 @@ class Configure:
                         bin_path = path
 
                     if compress:
-                        yay0_path = bin_path.with_suffix(".Yay0")
+                        yay0_path = out_dir / f"{name}.Yay0"
                         build(yay0_path, [bin_path], "yay0")
                     else:
                         yay0_path = bin_path
@@ -511,6 +524,34 @@ class Configure:
                 # combine
                 build(entry.object_path.with_suffix(""), bin_yay0s, "mapfs")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset":
+                rasters = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "ci4",
+                        "img_flags": "",
+                    })
+                    rasters.append(out_path)
+
+                build(entry.object_path.with_suffix(""), rasters, "pm_charset")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_charset_palettes":
+                palettes = []
+
+                for src_path in entry.src_paths:
+                    out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
+                    build(out_path, [src_path], "img", variables={
+                        "img_type": "palette",
+                        "img_flags": "",
+                    })
+                    palettes.append(out_path)
+
+                build(entry.object_path.with_suffix(""), palettes, "pm_charset_palettes")
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "linker" or seg.type == "linker_offset":
+                pass
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 

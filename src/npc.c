@@ -13,6 +13,10 @@ extern s16 D_80077C1C;
 extern s16 D_80077C1E;
 extern s32 D_80077C20;
 
+extern s16 D_80077C30;
+extern s32 D_80077C34;
+extern s16 D_80077C3A;
+
 void STUB_npc_callback(void) {
 }
 
@@ -190,10 +194,9 @@ void free_npc_by_index(s32 listIndex) {
             }
 
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-                if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID)) {
-                    PANIC();
-                }
+                ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
             }
+
             delete_shadow(npc->shadowIndex);
 
             for (i = 0; i < 2; i++) {
@@ -220,10 +223,9 @@ void free_npc(Npc* npc) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID) != 0) {
-            PANIC();
-        }
+        ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
     }
+
     delete_shadow(npc->shadowIndex);
 
     for (i = 0; i < 2; i++) {
@@ -1331,11 +1333,39 @@ INCLUDE_ASM(void, "npc", func_8003DA38, Npc* npc, s32 arg1);
 
 INCLUDE_ASM(s32, "npc", func_8003DC38);
 
-INCLUDE_ASM(s32, "npc", func_8003DFA0);
+void func_8003DFA0(Npc* npc) {
+    if (D_80077C30++ >= 4) {
+        f32 temp_f20;
+        f32 x;
+        f32 z;
+
+        D_80077C30 = 0;
+        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        x = sin_rad(temp_f20);
+        z = cos_rad(temp_f20);
+        playFX_0C(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
+                  npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
+        D_80077C34 = !D_80077C34;
+    }
+}
+
 
 INCLUDE_ASM(s32, "npc", func_8003E0D4);
 
-INCLUDE_ASM(s32, "npc", func_8003E1D0);
+void func_8003E1D0(Npc* npc) {
+    if (D_80077C3A++ >= 4) {
+        f32 temp_f20;
+        f32 x;
+        f32 z;
+
+        D_80077C3A = 0;
+        temp_f20 = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        x = sin_rad(temp_f20);
+        z = cos_rad(temp_f20);
+        playFX_23(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,
+                  npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
+    }
+}
 
 void COPY_set_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;

@@ -2,8 +2,6 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-// TODO: timeFreezeMode is probably bss here
-
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
@@ -38,6 +36,9 @@ Gfx D_80074230[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
+
+// BSS
+extern s32 timeFreezeMode BSS;
 
 extern s16 D_8009A690;
 
@@ -349,7 +350,17 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-INCLUDE_ASM(s32, "main_loop", func_800271FC);
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
+s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 x, s32 y, u8* out) {
+    s32 pixel = (x * SCREEN_WIDTH) + y;
+
+    out[3] = (framebuf2[pixel] >> 2) & 0xF;
+    out[0] = framebuf1[pixel] >> 11; // red
+    out[1] = (framebuf1[pixel] >> 6) & 0x1F; // green
+    out[2] = (framebuf1[pixel] >> 1) & 0x1F; // blue
+}
 
 INCLUDE_ASM(s32, "main_loop", func_8002725C);
 
@@ -357,7 +368,45 @@ INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
+// alex: mystery t0=SCREEN_WIDTH temp and weirdness with the `pixel` calculation
+#ifdef NON_MATCHING
+void func_800279B4(const u16* framebuf1, u16* framebuf2, u16* arg2) {
+    s32 x;
+    s32 y;
+    s32 subroutine_argE;
+    s32 subroutine_arg7;
+    s32 subroutine_arg8;
+    s32 subroutine_arg9;
+    s32 subroutine_argA;
+    s32 subroutine_argB;
+    s32 subroutine_argC;
+    s32 subroutine_argF;
+
+    for (y = 1; y < SCREEN_HEIGHT - 1; y++) {
+        for (x = 2; x < SCREEN_WIDTH - 2; x++) {
+            s32 pixel = (subroutine_argF + x) * 2;
+
+            // Wii U VC changes this condition to FALSE to fix pause menu lag
+            if (((framebuf2[pixel] >> 2) & 0xF) < 8) {
+                func_800271FC(framebuf1, framebuf2, y - 1, x - 1, &subroutine_argE);
+                func_800271FC(framebuf1, framebuf2, y - 1, x + 1, &subroutine_arg7);
+                func_800271FC(framebuf1, framebuf2, y,     x - 2, &subroutine_arg8);
+                func_800271FC(framebuf1, framebuf2, y,     x + 2, &subroutine_arg9);
+                func_800271FC(framebuf1, framebuf2, y + 1, x - 1, &subroutine_argA);
+                func_800271FC(framebuf1, framebuf2, y + 1, x + 1, &subroutine_argB);
+                func_800271FC(framebuf1, framebuf2, y,     x,     &subroutine_argC);
+
+                func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, &framebuf2[pixel]);
+            } else {
+                // Edge
+                framebuf2[pixel] = framebuf1[pixel] | 1;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "main_loop", func_800279B4);
+#endif
 
 void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;

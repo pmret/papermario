@@ -286,7 +286,7 @@ static s32 D_801512C0;
 static s32 D_801512C4;
 static s32 D_801512C8[6];
 static ModelTransformGroupList* gCurrentTransformGroups;
-static s8 D_801512E4[0x4];
+static s8 gMsgGlobalWaveCounter[0x4];
 static s8 D_801512E8[0x8];
 static s8 B_801512F0[0x410];
 static GameMode gMainGameState[2]; // TODO rename
@@ -914,11 +914,11 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* enti
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_standard_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_peach_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 

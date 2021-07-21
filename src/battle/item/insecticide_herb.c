@@ -76,7 +76,7 @@ ApiStatus N(func_802A1280_72A9D0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-struct N(temp) {
+typedef struct N(temp) {
     char unk_00[0xC];
     EffectInstanceDataThing* unk_0C;
 } N(temp);

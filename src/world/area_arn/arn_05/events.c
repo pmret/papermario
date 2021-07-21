@@ -21,8 +21,8 @@ Script N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
 Script N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
 
 Script N(802414E8) = SCRIPT({
-    bind N(exitWalk_80241430) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_8024148C) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80241430) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_8024148C) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(enterWalk_80241530) = SCRIPT({
@@ -1042,7 +1042,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -1053,11 +1053,11 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
 
@@ -1071,7 +1071,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:
@@ -1117,18 +1117,18 @@ void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     posX = npc->pos.x;
     posZ = npc->pos.z;
-    temp_f22 = script->functionTemp[2].s[enemy->territory->patrol.points].x;
-    temp_f20 = script->functionTemp[2].s[enemy->territory->patrol.points].z;
+    temp_f22 = script->functionTemp[2][enemy->territory->patrol.points].x;
+    temp_f20 = script->functionTemp[2][enemy->territory->patrol.points].z;
 
     npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     posX = npc->pos.x;
-    posY = npc->pos.y + script->functionTemp[2].s[enemy->territory->patrol.points].y;
+    posY = npc->pos.y + script->functionTemp[2][enemy->territory->patrol.points].y;
     posZ = npc->pos.z;
     posW = 1000.0f;
     npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-    posY += script->functionTemp[2].s[enemy->territory->patrol.points].y;
+    posY += script->functionTemp[2][enemy->territory->patrol.points].y;
     posW = posY - npc->pos.y;
     if (posW > 2.0) {
         npc->pos.y += 2.0;
@@ -1140,7 +1140,7 @@ void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     posW = dist2D(npc->pos.x, npc->pos.z, temp_f22, temp_f20);
     if (!(posW > npc->moveSpeed)) {
-        script->functionTemp[0].s = 2;
+        script->functionTemp[0] = 2;
     }
 }
 
@@ -1150,12 +1150,12 @@ void N(func_80241068_BE8C48)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration--;
     if (npc->duration < 0) {
-        script->functionTemp[1].s--;
-        if (script->functionTemp[1].s >= 0) {
+        script->functionTemp[1]--;
+        if (script->functionTemp[1] >= 0) {
             npc->yaw = clamp_angle(npc->yaw + 180.0f);
             npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
         } else {
-            script->functionTemp[0].s = 4;
+            script->functionTemp[0] = 4;
             npc->currentAnim.w = enemy->animList[0];
         }
     }
@@ -1179,12 +1179,12 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->flags &= ~0x800;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, aiSettings, territoryPtr);
         case 1:

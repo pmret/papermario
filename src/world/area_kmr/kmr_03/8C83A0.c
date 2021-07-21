@@ -65,10 +65,10 @@ Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
 
 Script N(802422B8) = SCRIPT({
     SI_VAR(0) = N(bush1);
-    bind N(searchBush) to TRIGGER_WALL_PRESS_A 53;
+    bind N(searchBush) TRIGGER_WALL_PRESS_A 53;
 
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 52;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(tree1Point);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 52;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(tree1Point);
 });
 

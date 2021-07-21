@@ -20,7 +20,7 @@ void N(func_80241904_A1CA04)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_802457F4_A208F4)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 */
@@ -65,7 +65,7 @@ ApiStatus N(func_80241FBC_A1D0BC)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
 #include "world/common/UnkNpcAIFunc23.inc.c"
         case 1:
