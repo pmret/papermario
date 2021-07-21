@@ -1,10 +1,12 @@
+from segtypes.n64.code import N64SegCode
 from segtypes.n64.codesubsegment import N64SegCodeSubsegment
+from segtypes.n64.group import N64SegGroup
 from pathlib import Path
 from typing import List, Optional
 from util.symbols import Symbol
 from util import floats, options
 
-class N64SegData(N64SegCodeSubsegment):
+class N64SegData(N64SegCodeSubsegment, N64SegGroup):
     def out_path(self) -> Optional[Path]:
         if self.type.startswith("."):
             if self.sibling:
@@ -18,10 +20,17 @@ class N64SegData(N64SegCodeSubsegment):
             return options.get_asm_path() / "data" / self.dir / f"{self.name}.{self.type}.s"
 
     def scan(self, rom_bytes: bytes):
-        self.file_text = self.disassemble_data(rom_bytes)
+        N64SegGroup.scan(self, rom_bytes)
+
+        if super().should_scan():
+            self.file_text = self.disassemble_data(rom_bytes)
+        else:
+            self.file_text = None
 
     def split(self, rom_bytes: bytes):
-        if self.file_text:
+        N64SegGroup.split(self, rom_bytes)
+
+        if not self.type.startswith(".") and self.file_text:
             path = self.out_path()
             
             if path:
@@ -30,15 +39,27 @@ class N64SegData(N64SegCodeSubsegment):
                 with open(path, "w", newline="\n") as f:
                     f.write(self.file_text)
 
+    def should_split(self) -> bool:
+        return True
+
+    def should_scan(self) -> bool:
+        return True
+
+    def cache(self):
+        return [N64SegCodeSubsegment.cache(self), N64SegGroup.cache(self)]
+
     def get_linker_section(self) -> str:
         return ".data"
+
+    def get_linker_entries(self):
+        return N64SegCodeSubsegment.get_linker_entries(self)
 
     def check_jtbls(self, rom_bytes, syms: List[Symbol]):
         for i, sym in enumerate(syms):
             if sym.type == "jtbl":
-                start = self.parent.ram_to_rom(syms[i].vram_start)
+                start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
                 assert isinstance(start, int)
-                end = self.parent.ram_to_rom(syms[i + 1].vram_start)
+                end = self.get_most_parent().ram_to_rom(syms[i + 1].vram_start)
                 sym_bytes = rom_bytes[start:end]
 
                 b = 0
@@ -48,10 +69,10 @@ class N64SegData(N64SegCodeSubsegment):
 
                     if last_bits != 0 and bits != 0 and abs(last_bits - bits) > 0x100000:
                         new_sym_rom_start = start + b
-                        new_sym_ram_start = self.parent.rom_to_ram(new_sym_rom_start)
+                        new_sym_ram_start = self.get_most_parent().rom_to_ram(new_sym_rom_start)
                         sym.size = new_sym_rom_start - sym.rom
 
-                        syms.insert(i + 1, self.parent.get_symbol(new_sym_ram_start, create=True, define=True, local_only=True))
+                        syms.insert(i + 1, self.get_most_parent().get_symbol(new_sym_ram_start, create=True, define=True, local_only=True))
                         return False
 
                     if bits != 0:
@@ -67,7 +88,7 @@ class N64SegData(N64SegCodeSubsegment):
         for i in range(self.rom_start, self.rom_end, 4):
             bits = int.from_bytes(rom_bytes[i : i + 4], "big")
             if self.contains_vram(bits):
-                symset.add(self.parent.get_symbol(bits, create=True, define=True, local_only=True))
+                symset.add(self.get_most_parent().get_symbol(bits, create=True, define=True, local_only=True))
 
         for symbol_addr in self.seg_symbols:
             for symbol in self.seg_symbols[symbol_addr]:
@@ -79,7 +100,7 @@ class N64SegData(N64SegCodeSubsegment):
 
         # Ensure we start at the beginning
         if len(ret) == 0 or ret[0].vram_start != self.vram_start:
-            ret.insert(0, self.parent.get_symbol(self.vram_start, create=True, define=True, local_only=True))
+            ret.insert(0, self.get_most_parent().get_symbol(self.vram_start, create=True, define=True, local_only=True))
 
         # Make a dummy symbol here that marks the end of the previous symbol's disasm range
         ret.append(Symbol(self.vram_end))
@@ -197,14 +218,14 @@ class N64SegData(N64SegCodeSubsegment):
                 if bits == 0:
                     byte_str = "0"
                 else:
-                    rom_addr = self.parent.ram_to_rom(bits)
+                    rom_addr = self.get_most_parent().ram_to_rom(bits)
 
                     if rom_addr:
                         byte_str = f"L{bits:X}_{rom_addr:X}"
                     else:
                         byte_str = f"0x{bits:X}"
             elif slen == 4 and bits >= 0x80000000:
-                sym = self.parent.get_symbol(bits, reference=True)
+                sym = self.get_most_parent().get_symbol(bits, reference=True)
                 if sym:
                     byte_str = sym.name
                 else:
@@ -246,11 +267,11 @@ class N64SegData(N64SegCodeSubsegment):
 
         for i in range(len(syms) - 1):
             mnemonic = syms[i].access_mnemonic
-            sym = self.parent.get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
+            sym = self.get_most_parent().get_symbol(syms[i].vram_start, create=True, define=True, local_only=True)
             
             sym_str = f"\n\nglabel {sym.name}\n"
-            dis_start = self.parent.ram_to_rom(syms[i].vram_start)
-            dis_end = self.parent.ram_to_rom(syms[i + 1].vram_start)
+            dis_start = self.get_most_parent().ram_to_rom(syms[i].vram_start)
+            dis_end = self.get_most_parent().ram_to_rom(syms[i + 1].vram_start)
             sym_len = dis_end - dis_start
 
             if self.type == "bss":

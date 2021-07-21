@@ -74,7 +74,7 @@ Script N(802439B0) = SCRIPT({
 });
 
 Script N(80243B28) = SCRIPT({
-    bind N(exitSingleDoor_802428D4) to TRIGGER_WALL_PRESS_A 10;
+    bind N(exitSingleDoor_802428D4) TRIGGER_WALL_PRESS_A 10;
 });
 
 Script N(makeEntities) = SCRIPT({
@@ -1253,22 +1253,22 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     if (enemy->varTable[9] <= 0) {
         if (aiSettings->unk_14 >= 0) {
-            if (script->functionTemp[1].s <= 0) {
-                script->functionTemp[1].s = aiSettings->unk_14;
+            if (script->functionTemp[1] <= 0) {
+                script->functionTemp[1] = aiSettings->unk_14;
                 if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     if (enemy->npcSettings->unk_2A & 1) {
-                        script->functionTemp[0].s = 10;
+                        script->functionTemp[0] = 10;
                     } else {
-                        script->functionTemp[0].s = 12;
+                        script->functionTemp[0] = 12;
                     }
                     return;
                 }
             }
-            script->functionTemp[1].s--;
+            script->functionTemp[1]--;
         }
     } else {
         enemy->varTable[9]--;
@@ -1296,10 +1296,10 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     enemy->varTable[4] = npc->pos.y * 100.0;
     if (aiSettings->moveTime > 0) {
         if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0].s = 2;
-            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1].s < 3)) {
-                script->functionTemp[0].s = 0;
+            script->functionTemp[0] = 2;
+            script->functionTemp[1] = (rand_int(1000) % 3) + 2;
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1] < 3)) {
+                script->functionTemp[0] = 0;
             }
         }
     }
@@ -1321,7 +1321,7 @@ void N(func_802415A4_BEE394)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_80243BC0_BF09B0)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 
@@ -1363,7 +1363,7 @@ ApiStatus N(func_80241C5C_BEEA4C)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
         case 1:

@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s32 D_800A0950;
+
 void state_init_intro(void) {
     s8 unk_A8;
 
@@ -68,7 +70,184 @@ void state_init_intro(void) {
     intro_logos_update_fade();
 }
 
+// WIP
+#ifdef NON_MATCHING
+void state_step_intro(void) {
+    PlayerData* playerData = &gPlayerData;
+    s32 loadMenuState;
+    s32 viewportMode;
+    s32 i;
+
+    if (gGameStatusPtr->creditsViewportMode != -1) {
+        if (D_800A0964 == 0 && gGameStatusPtr->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_START | BUTTON_Z)) {
+            D_800A0964 = 1;
+        }
+
+        if (D_800A0964 == 1) {
+            viewportMode = 100;
+            if (gGameStatusPtr->loadMenuState >= 2U) {
+                if (gGameStatusPtr->loadMenuState == 4) {
+block_13:
+                    gGameStatusPtr->creditsViewportMode = viewportMode;
+                    state_init_intro();
+                    return;
+                }
+block_9:
+                if ((D_800A0964 == 2) && ((gGameStatusPtr->loadMenuState < 2U) || (gGameStatusPtr->loadMenuState == 4))) {
+                    viewportMode = gGameStatusPtr->creditsViewportMode + 1;
+                    goto block_13;
+                }
+block_14:
+                loadMenuState = gGameStatusPtr->loadMenuState;
+
+                switch (gGameStatusPtr->loadMenuState) {
+
+                    case 0:
+                        update_effects();
+                        update_cameras();
+                        if (gGameStatusPtr->creditsViewportMode == -1) {
+                            set_curtain_fade_goal(0.0f);
+                            if (intro_logos_fade_out(D_800A0956) != 0) {
+                                gGameStatusPtr->loadMenuState = 1;
+                                set_curtain_draw_callback(NULL);
+                            }
+                        } else {
+                            D_800A0954 += D_800A0956;
+                            if (D_800A0954 >= 0xFF) {
+                                D_800A0954 = 0xFF;
+                                gGameStatusPtr->loadMenuState = 1;
+                                set_curtain_draw_callback(NULL);
+                            }
+                        }
+                        break;
+
+                    case 21:
+                        D_800A0950--;
+                        if (D_800A0950 <= 0) {
+                            gOverrideFlags &= -9;
+                            gGameStatusPtr->loadMenuState = 2;
+                        }
+                        goto block_39;
+
+                    case 1:
+                        D_800A0950 = 4;
+                        gOverrideFlags |= 8;
+                        if (D_800A0960 != 0xE) {
+                            gGameStatusPtr->loadMenuState = 2;
+                        }
+                        goto block_39;
+                    case 2:
+                        set_curtain_draw_callback(NULL);
+                        gGameStatusPtr->isBattle = 0;
+                        gGameStatusPtr->unk_76 = 0;
+                        gGameStatusPtr->disableScripts = 0;
+                        gGameStatusPtr->unk_7D = 0;
+                        if (gGameStatusPtr->creditsViewportMode == -1) {
+                            general_heap_create();
+                            clear_render_tasks();
+                            clear_generic_entity_list();
+                            clear_script_list();
+                            create_cameras_a();
+                            spr_init_sprites(0);
+                            clear_entity_models();
+                            clear_animator_list();
+                            clear_model_data();
+                            clear_sprite_shading_data();
+                            reset_background_settings();
+                            clear_hud_element_cache();
+                            clear_trigger_data();
+                            clear_printers();
+                            clear_entity_data(0);
+                            clear_screen_overlays();
+                            clear_player_status();
+                            clear_npcs();
+                            clear_player_data();
+                            reset_battle_status();
+                            init_encounter_status();
+                            clear_effect_data();
+                            clear_item_entity_data();
+                            clear_saved_variables();
+                            initialize_collision();
+                            set_game_mode(2);
+                            return;
+                        }
+                        playerData->curHP = 10;
+                        playerData->curMaxHP = 10;
+                        playerData->hardMaxHP = 10;
+                        playerData->curFP = 5;
+                        playerData->curMaxFP = 5;
+                        playerData->hardMaxFP = 5;
+                        playerData->maxBP = 2;
+                        playerData->bootsLevel = 0;
+                        playerData->hammerLevel = -1;
+                        playerData->fortressKeyCount = 0;
+                        playerData->level = 0;
+
+                        for (i = 0; i < ARRAY_COUNT(playerData->partners); i++) {
+                            playerData->partners[i].enabled = 0;
+                        }
+
+                        playerData->currentPartner = 0;
+                        load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
+                        gGameStatusPtr->loadMenuState = 3;
+                        disable_player_input();
+                        goto block_39;
+                    case 3:
+                        if (D_800A0960 == 0xE) {
+                            D_800A0960 = 0xF;
+                        }
+                        D_800A0954 = 0xFF - D_800A0958;
+                        gOverrideFlags &= ~0x8;
+                        gCameras->flags &= ~0x2;
+                        gOverrideFlags &= ~0x2;
+                        update_player(&gOverrideFlags, -9, gCameras);
+                        update_encounters();
+                        update_npcs();
+                        update_effects();
+                        update_cameras();
+                        if (!does_script_exist(gGameStatusPtr->mainScriptID)) {
+                            gGameStatusPtr->loadMenuState = 4;
+                            gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
+                            goto block_39;
+                        }
+                        // Duplicate return node #40. Try simplifying control flow for better match
+                        return;
+                    case 4:
+                        update_effects();
+                        update_cameras();
+                        update_npcs();
+                        if (D_800A0954 == 0) {
+                            set_screen_overlay_params_front(0xFF, -1.0f);
+                            set_screen_overlay_params_back(0xFF, -1.0f);
+                        } else {
+                            D_800A0954 -= D_800A0958;
+                            if (D_800A0954 & 0x8000) {
+                                D_800A0954 = 0;
+                            }
+                        }
+                        goto block_39;
+                    default:
+    block_39:
+                        set_screen_overlay_params_back(D_800A0963, D_800A0954);
+                        set_screen_overlay_color(1, D_800A095B, D_800A095D, D_800A095F);
+                        intro_logos_update_fade();
+                        return;
+                }
+
+
+            } else {
+                goto block_13;
+            }
+        } else {
+            goto block_9;
+        }
+    } else {
+        goto block_14;
+    }
+}
+#else
 INCLUDE_ASM(void, "state_intro", state_step_intro, void);
+#endif
 
 void state_drawUI_intro(void) {
 }

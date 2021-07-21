@@ -27,7 +27,7 @@ Script N(802403B0) = SCRIPT({
 });
 
 Script N(80240470) = SCRIPT({
-    bind N(802403B0) to TRIGGER_WALL_PRESS_A 6;
+    bind N(802403B0) TRIGGER_WALL_PRESS_A 6;
 });
 
 Script N(8024049C) = SCRIPT({
@@ -431,7 +431,7 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
     if (!(playerStatus->position.y > -10.0f)) {
@@ -439,9 +439,9 @@ ApiStatus N(func_802400F4_BF4894)(ScriptInstance* script, s32 isInitialCall) {
         s32 colliderID;
 
         playerStatus->position.y = player_check_collision_below(temp_f20, &colliderID);
-        script->functionTemp[0].s += fabsf(temp_f20);
+        script->functionTemp[0] += fabsf(temp_f20);
 
-        return (script->functionTemp[0].s > 50) * ApiStatus_DONE2;
+        return (script->functionTemp[0] > 50) * ApiStatus_DONE2;
     }
 
     return ApiStatus_BLOCK;

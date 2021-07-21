@@ -9,8 +9,8 @@ glabel D_802AC090
 .section .text
 
 glabel btl_state_draw_player_menu
-/* 41CF10 802A8180 3C02800E */  lui       $v0, %hi(gBattleStatus+0x46C)
-/* 41CF14 802A8184 8C42C4DC */  lw        $v0, %lo(gBattleStatus+0x46C)($v0)
+/* 41CF10 802A8180 3C02800E */  lui       $v0, %hi(gBattleState2)
+/* 41CF14 802A8184 8C42C4DC */  lw        $v0, %lo(gBattleState2)($v0)
 /* 41CF18 802A8188 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 41CF1C 802A818C 2443FFFF */  addiu     $v1, $v0, -1
 /* 41CF20 802A8190 2C6200CD */  sltiu     $v0, $v1, 0xcd

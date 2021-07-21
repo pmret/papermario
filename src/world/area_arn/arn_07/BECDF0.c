@@ -2,7 +2,7 @@
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/tubbas_heart.h"
 
-struct N(temp) {
+typedef struct N(temp) {
     char unk_00[0xC];
     EffectInstanceDataThing* unk_0C;
 } N(temp);
@@ -506,19 +506,15 @@ Script N(80242A30) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-// *INDENT-OFF*
-Script N(802433C8) = {
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitWalk_80242978), TRIGGER_FLOOR_ABOVE, 5, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitWalk_802429D4), TRIGGER_FLOOR_ABOVE, 1, 1, 0),
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), -24),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(802439B0), TRIGGER_WALL_PRESS_A, 16384, N(itemList_80242040), 0, 1),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitSingleDoor_802428D4), TRIGGER_WALL_PRESS_A, 10, 1, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(802433C8) = SCRIPT({
+    bind N(exitWalk_80242978) TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_802429D4) TRIGGER_FLOOR_ABOVE 1;
+    if (STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
+        bind_padlock N(802439B0) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242040);
+    } else {
+        bind N(exitSingleDoor_802428D4) TRIGGER_WALL_PRESS_A 10;
+    }
+});
 
 Script N(enterWalk_8024346C) = SCRIPT({
     GetEntryID(SI_VAR(0));

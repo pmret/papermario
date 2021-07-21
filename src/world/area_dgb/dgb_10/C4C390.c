@@ -33,7 +33,7 @@ static s32 N(pad_2E8)[] = {
 Script N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
 
 Script N(8024034C) = SCRIPT({
-    bind N(exitWalk_802402F0) to TRIGGER_FLOOR_ABOVE 8;
+    bind N(exitWalk_802402F0) TRIGGER_FLOOR_ABOVE 8;
 });
 
 Script N(enterWalk_80240378) = SCRIPT({
@@ -88,168 +88,150 @@ static s32 N(pad_66C) = {
     0x00000000,
 };
 
-Script N(80240670) = {
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_NEW_ARRAY, 6, SI_VAR(10)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(1), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(2), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(3), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(5), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(0), SI_VAR(10)),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(80240770), TRIGGER_FLOOR_TOUCH, SI_ARRAY(0), 1, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80240670) = SCRIPT({
+    buf_use SI_VAR(0);
+    arr_new 6 SI_VAR(10);
+    buf_read SI_VAR(0);
+    SI_ARRAY(0) = SI_VAR(0);
+    buf_read SI_VAR(0);
+    SI_ARRAY(1) = SI_VAR(0);
+    buf_read SI_VAR(0);
+    SI_ARRAY(2) = SI_VAR(0);
+    buf_read SI_VAR(0);
+    SI_ARRAY(3) = SI_VAR(0);
+    buf_read SI_VAR(0);
+    SI_ARRAY(4) = SI_VAR(0);
+    buf_read SI_VAR(0);
+    SI_ARRAY(5) = SI_VAR(0);
+    SI_VAR(0) = SI_VAR(10);
+    bind N(80240770) TRIGGER_FLOOR_TOUCH 0xF4ACD480; // TODO: what is this id? see also below TODO
+});
 
-// *INDENT-OFF*
-Script N(80240770) = {
-    SI_CMD(ScriptOpcode_USE_ARRAY, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_CALL, N(func_80240000_C4C390)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 0),
-        SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_LOOP, 5),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 1, SI_ARRAY(0), 2147483136),
-        SI_CMD(ScriptOpcode_CALL, EnableModel, SI_ARRAY(1), 1),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 0, SI_ARRAY(0), 2147483136),
-        SI_CMD(ScriptOpcode_CALL, EnableModel, SI_ARRAY(1), 0),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_IF_NE, SI_ARRAY(5), 0),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, 0xF4ACD485),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80240770) = SCRIPT({
+    arr_use SI_VAR(0);
+    N(func_80240000_C4C390)();
+    if (SI_VAR(0) == 0) {
+        return;
+    }
+    loop 5 {
+        ModifyColliderFlags(1, SI_ARRAY(0), 0x7FFFFE00);
+        EnableModel(SI_ARRAY(1), 1);
+        sleep 1;
+        ModifyColliderFlags(0, SI_ARRAY(0), 0x7FFFFE00);
+        EnableModel(SI_ARRAY(1), 0);
+        sleep 1;
+    }
+    if (SI_ARRAY(5) != 0) {
+        await 0xF4ACD485; // TODO: what is this?
+    }
+});
 
-// *INDENT-OFF*
-Script N(80240860) = {
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_NEW_ARRAY, 6, SI_VAR(9)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(0), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(1), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(2), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(3), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(4), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_SET, SI_ARRAY(5), SI_VAR(1)),
-    SI_CMD(ScriptOpcode_CALL, ParentColliderToModel, SI_ARRAY(1), SI_ARRAY(0)),
-    SI_CMD(ScriptOpcode_LABEL, 0),
-    SI_CMD(ScriptOpcode_LABEL, 1),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerActionState, SI_VAR(10)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(10), 13),
-        SI_CMD(ScriptOpcode_GOTO, 2),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(10), 15),
-        SI_CMD(ScriptOpcode_GOTO, 2),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_LABEL, 2),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(2), SI_ARRAY(3)),
-        SI_CMD(ScriptOpcode_GOTO, 2),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, N(func_802400A0_C4C430)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 1),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80240AF4)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 2),
-        SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(80240CB8)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_LABEL, 3),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerActionState, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 13),
-        SI_CMD(ScriptOpcode_GOTO, 3),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(0), 15),
-        SI_CMD(ScriptOpcode_GOTO, 3),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_GOTO, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80240860) = SCRIPT({
+    buf_use SI_VAR(0);
+    arr_new 6 SI_VAR(9);
+    buf_read SI_VAR(1);
+    SI_ARRAY(0) = SI_VAR(1);
+    buf_read SI_VAR(1);
+    SI_ARRAY(1) = SI_VAR(1);
+    buf_read SI_VAR(1);
+    SI_ARRAY(2) = SI_VAR(1);
+    buf_read SI_VAR(1);
+    SI_ARRAY(3) = SI_VAR(1);
+    buf_read SI_VAR(1);
+    SI_ARRAY(4) = SI_VAR(1);
+    buf_read SI_VAR(1);
+    SI_ARRAY(5) = SI_VAR(1);
+    ParentColliderToModel(SI_ARRAY(1), SI_ARRAY(0));
+0:
+1:
+    GetPlayerActionState(SI_VAR(10));
+    if (SI_VAR(10) == 13) {
+        goto 2;
+    }
+    if (SI_VAR(10) == 15) {
+        goto 2;
+    }
+    sleep 1;
+    goto 0;
+2:
+    GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    sleep 1;
+    if (SI_VAR(2) != SI_ARRAY(3)) {
+        goto 2;
+    }
+    N(func_802400A0_C4C430)();
+    if (SI_VAR(0) == 1) {
+        await N(80240AF4);
+    }
+    if (SI_VAR(0) == 2) {
+        await N(80240CB8);
+    }
+3:
+    GetPlayerActionState(SI_VAR(0));
+    sleep 1;
+    if (SI_VAR(0) == 13) {
+        goto 3;
+    }
+    if (SI_VAR(0) == 15) {
+        goto 3;
+    }
+    goto 0;
+});
 
-// *INDENT-OFF*
-Script N(80240AF4) = {
-    SI_CMD(ScriptOpcode_USE_ARRAY, SI_VAR(9)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, MakeLerp, 0, 5, 3, 1),
-    SI_CMD(ScriptOpcode_LABEL, 2),
-    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_ARRAY(0), 0, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(5), SI_VAR(3)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(5), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_CALL, SetPlayerPos, SI_VAR(2), SI_VAR(5), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, UpdateColliderTransform, SI_ARRAY(1)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 1),
-        SI_CMD(ScriptOpcode_GOTO, 2),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, MakeLerp, 5, 0, 3, 1),
-    SI_CMD(ScriptOpcode_LABEL, 3),
-    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_ARRAY(0), 0, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(5), SI_VAR(3)),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(5), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_CALL, SetPlayerPos, SI_VAR(2), SI_VAR(5), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, UpdateColliderTransform, SI_ARRAY(1)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 1),
-        SI_CMD(ScriptOpcode_GOTO, 3),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80240AF4) = SCRIPT({
+    arr_use SI_VAR(9);
+    GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
+    MakeLerp(0, 5, 3, 1);
+2:
+    UpdateLerp();
+    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
+    SI_VAR(5) = SI_VAR(3);
+    SI_VAR(5) += SI_VAR(0);
+    SetPlayerPos(SI_VAR(2), SI_VAR(5), SI_VAR(4));
+    UpdateColliderTransform(SI_ARRAY(1));
+    sleep 1;
+    if (SI_VAR(1) == 1) {
+        goto 2;
+    }
+    MakeLerp(5, 0, 3, 1);
+3:
+    UpdateLerp();
+    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
+    SI_VAR(5) = SI_VAR(3);
+    SI_VAR(5) += SI_VAR(0);
+    SetPlayerPos(SI_VAR(2), SI_VAR(5), SI_VAR(4));
+    UpdateColliderTransform(SI_ARRAY(1));
+    sleep 1;
+    if (SI_VAR(1) == 1) {
+        goto 3;
+    }
+});
 
-// *INDENT-OFF*
-Script N(80240CB8) = {
-    SI_CMD(ScriptOpcode_USE_ARRAY, SI_VAR(9)),
-    SI_CMD(ScriptOpcode_CALL, MakeItemEntity, SI_ARRAY(5), SI_ARRAY(2), SI_ARRAY(3), SI_ARRAY(4), 3, 0),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(2), 0),
-    SI_CMD(ScriptOpcode_CALL, MakeLerp, 0, 150, 19, 4),
-    SI_CMD(ScriptOpcode_LABEL, 2),
-    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_ARRAY(0), 0, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(2), 45),
-    SI_CMD(ScriptOpcode_CALL, RotateModel, SI_ARRAY(0), SI_VAR(2), 1, 0, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 1),
-        SI_CMD(ScriptOpcode_GOTO, 2),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_CALL, MakeLerp, 150, 0, 19, 4),
-    SI_CMD(ScriptOpcode_LABEL, 3),
-    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_ARRAY(0), 0, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_ADD, SI_VAR(2), 45),
-    SI_CMD(ScriptOpcode_CALL, RotateModel, SI_ARRAY(0), SI_VAR(2), 1, 0, 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 1),
-        SI_CMD(ScriptOpcode_GOTO, 3),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80240CB8) = SCRIPT({
+    arr_use SI_VAR(9);
+    MakeItemEntity(SI_ARRAY(5), SI_ARRAY(2), SI_ARRAY(3), SI_ARRAY(4), 3, 0);
+    SI_VAR(2) = 0;
+    MakeLerp(0, 150, 19, 4);
+2:
+    UpdateLerp();
+    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
+    SI_VAR(2) += 45;
+    RotateModel(SI_ARRAY(0), SI_VAR(2), 1, 0, 0);
+    sleep 1;
+    if (SI_VAR(1) == 1) {
+        goto 2;
+    }
+    MakeLerp(150, 0, 19, 4);
+3:
+    UpdateLerp();
+    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
+    SI_VAR(2) += 45;
+    RotateModel(SI_ARRAY(0), SI_VAR(2), 1, 0, 0);
+    sleep 1;
+    if (SI_VAR(1) == 1) {
+        goto 3;
+    }
+});
 
 Script N(80240E68) = SCRIPT({
     N(func_8024013C_C4C4CC)();

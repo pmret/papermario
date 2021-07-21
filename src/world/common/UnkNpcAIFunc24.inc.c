@@ -11,17 +11,17 @@ void N(UnkNpcAIFunc24)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
     s32 i;
     s32 j;
 
-    script->functionTemp[1].s = 0;
+    script->functionTemp[1] = 0;
     max = 32767.0f;
     posX = npc->pos.x;
     posZ = npc->pos.z;
-    script->functionTemp[2].s = 0;
+    script->functionTemp[2] = 0;
 
     for (i = 0, j = 0; i < enemy->territory->patrol.numPoints; i++, j++) {
         ret = dist2D(posX, posZ, i[enemy->territory->patrol.points].x, i[enemy->territory->patrol.points].z);
         if (ret < max) {
             max = ret;
-            script->functionTemp[2].s = j;
+            script->functionTemp[2] = j;
         }
     }
 
@@ -32,5 +32,5 @@ void N(UnkNpcAIFunc24)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         npc->moveSpeed = enemy->territory->patrol.moveSpeedOverride / 32767.0;
     }
 
-    script->functionTemp[0].s = 1;
+    script->functionTemp[0] = 1;
 }

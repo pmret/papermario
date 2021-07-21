@@ -1,5 +1,6 @@
 #include "common.h"
 #include "ld_addrs.h"
+#include "camera.h"
 
 void appendGfx_intro_logos();
 
@@ -41,15 +42,15 @@ void state_init_logos(void) {
     gCameras[0].farClip = 0x1000;
     gCurrentCameraID = 0;
     gCameras[0].vfov = 25.0f;
-    gCameras[0].flags |= 0x2;
-    gCameras[1].flags |= 0x2;
-    gCameras[2].flags |= 0x2;
-    gCameras[3].flags |= 0x2;
+    gCameras[0].flags |= CAM_FLAG_ENABLED;
+    gCameras[1].flags |= CAM_FLAG_ENABLED;
+    gCameras[2].flags |= CAM_FLAG_ENABLED;
+    gCameras[3].flags |= CAM_FLAG_ENABLED;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 0x28;
-    gCameras[0].backgroundColor[0] = 0;
-    gCameras[0].backgroundColor[1] = 0;
-    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].bgColor[0] = 0;
+    gCameras[0].bgColor[1] = 0;
+    gCameras[0].bgColor[2] = 0;
     gCameras[0].unk_54 = 25.0f;
     gCameras[0].unk_58 = 25.0f;
     gCameras[0].unk_1C = 0;

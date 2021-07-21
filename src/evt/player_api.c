@@ -135,22 +135,22 @@ ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
         f32 targetZ = get_variable(script, *args++);
         f32 moveSpeed;
 
-        script->functionTemp[0].s = get_variable(script, *args++);
+        script->functionTemp[0] = get_variable(script, *args++);
         playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
 
-        if (script->functionTemp[0].s == 0) {
-            script->functionTemp[0].s = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
+        if (script->functionTemp[0] == 0) {
+            script->functionTemp[0] = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
                                                targetZ) / playerNpc->moveSpeed;
             moveSpeed = playerNpc->moveSpeed;
         } else {
-            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0].s;
+            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0];
         }
-        move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
+        move_player(script->functionTemp[0], playerStatus->targetYaw, moveSpeed);
     }
 
     // functionTemp 0 is the time left
-    script->functionTemp[0].s--;
-    return script->functionTemp[0].s < 0;
+    script->functionTemp[0]--;
+    return script->functionTemp[0] < 0;
 }
 
 ApiStatus func_802D1270(ScriptInstance* script, s32 isInitialCall) {
@@ -166,15 +166,15 @@ ApiStatus func_802D1270(ScriptInstance* script, s32 isInitialCall) {
 
         playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
         dist = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
-        script->functionTemp[0].s = dist / var3;
-        moveSpeed = dist / script->functionTemp[0].s;
+        script->functionTemp[0] = dist / var3;
+        moveSpeed = dist / script->functionTemp[0];
 
-        move_player(script->functionTemp[0].s, playerStatus->targetYaw, moveSpeed);
+        move_player(script->functionTemp[0], playerStatus->targetYaw, moveSpeed);
     }
 
     // functionTemp 0 is the time left
-    script->functionTemp[0].s--;
-    return (script->functionTemp[0].s < 0) * ApiStatus_DONE2;
+    script->functionTemp[0]--;
+    return (script->functionTemp[0] < 0) * ApiStatus_DONE2;
 }
 
 ApiStatus func_802D1380(ScriptInstance* script, s32 isInitialCall) {
@@ -215,10 +215,10 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
     f32 dist;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         xTemp = get_variable(script, *args++);
         yTemp = get_variable(script, *args++);
         zTemp = get_variable(script, *args++);
@@ -263,7 +263,7 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
             suggest_player_anim_clearUnkFlag(animID);
             sfx_play_sound_at_player(SOUND_JUMP_2081, 0);
         }
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
     npc_move_heading(playerNpc, playerNpc->moveSpeed, playerNpc->yaw);
@@ -342,9 +342,9 @@ ApiStatus PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* initialYaw = &script->functionTemp[1].f;
-    f32* deltaYaw = &script->functionTemp[2].f;
-    s32* time = &script->functionTemp[3].s;
+    f32* initialYaw = (f32*) &script->functionTemp[1];
+    f32* deltaYaw = (f32*) &script->functionTemp[2];
+    s32* time = &script->functionTemp[3];
 
     if (isInitialCall) {
         playerNpc->yaw = playerStatus->targetYaw;
@@ -380,9 +380,9 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus PlayerFaceNpc(ScriptInstance* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* args = script->ptrReadPos;
-    f32* playerTargetYaw = &script->functionTemp[1].f;
-    f32* angle = &script->functionTemp[2].f;
-    s32* ft3 = &script->functionTemp[3].s;
+    f32* playerTargetYaw = (f32*) &script->functionTemp[1];
+    f32* angle = (f32*) &script->functionTemp[2];
+    s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
         NpcID npcID = get_variable(script, *args++);
@@ -701,9 +701,9 @@ ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_802D2884(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32* ft1 = &script->functionTemp[1].f;
-    f32* angle = &script->functionTemp[2].f;
-    s32* ft3 = &script->functionTemp[3].s;
+    f32* ft1 = (f32*) &script->functionTemp[1];
+    f32* angle = (f32*) &script->functionTemp[2];
+    s32* ft3 = &script->functionTemp[3];
 
     if (isInitialCall) {
         f32 x = get_float_variable(script, *args++);
@@ -1070,10 +1070,10 @@ ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
     VirtualEntity* virtualEntity;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         s32 index = get_variable(script, *args++);
         f32 xTemp = get_variable(script, *args++);
         f32 yTemp = get_variable(script, *args++);
@@ -1083,7 +1083,7 @@ ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
         f32 goalPosZ;
 
         virtualEntity = (*D_802DB7C0)[index];
-        script->functionTemp[1].s = index;
+        script->functionTemp[1] = index;
 
         virtualEntity->goalPos.x = xTemp;
         virtualEntity->goalPos.y = yTemp;
@@ -1105,10 +1105,10 @@ ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
             virtualEntity->moveSpeed = virtualEntity->moveDist / virtualEntity->moveTime;
         }
 
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
-    virtualEntity = (*D_802DB7C0)[script->functionTemp[1].s];
+    virtualEntity = (*D_802DB7C0)[script->functionTemp[1]];
     virtual_entity_move_polar(virtualEntity, virtualEntity->moveSpeed, virtualEntity->moveAngle);
     virtualEntity->moveTime--;
 
@@ -1136,10 +1136,10 @@ ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
     f32 goalPosZ;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
+    if (script->functionTemp[0] == 0) {
         index = get_variable(script, *args++);
         xTemp = get_variable(script, *args++);
         yTemp = get_variable(script, *args++);
@@ -1147,7 +1147,7 @@ ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
         moveTime = get_variable(script, *args++);
 
         virtualEntity = (*D_802DB7C0)[index];
-        script->functionTemp[1].s = index;
+        script->functionTemp[1] = index;
 
         virtualEntity->goalPos.x = xTemp;
         virtualEntity->goalPos.y = yTemp;
@@ -1175,10 +1175,10 @@ ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
 
         virtualEntity->jumpVelocity = (virtualEntity->jumpGravity * virtualEntity->moveTime / 2) +
                                       (goalPosY / virtualEntity->moveTime);
-        script->functionTemp[0].s = 1;
+        script->functionTemp[0] = 1;
     }
 
-    virtualEntity = (*D_802DB7C0)[script->functionTemp[1].s];
+    virtualEntity = (*D_802DB7C0)[script->functionTemp[1]];
     virtualEntity->pos.y += virtualEntity->jumpVelocity;
     virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
 
@@ -1203,15 +1203,15 @@ ApiStatus VirtualEntityLandJump(ScriptInstance* script, s32 isInitialCall) {
     VirtualEntity* virtualEntity;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    if (script->functionTemp[0].s == 0) {
-        script->functionTemp[1].s = get_variable(script, *args++);
-        script->functionTemp[0].s = 1;
+    if (script->functionTemp[0] == 0) {
+        script->functionTemp[1] = get_variable(script, *args++);
+        script->functionTemp[0] = 1;
     }
 
-    virtualEntity = (*D_802DB7C0)[script->functionTemp[1].s];
+    virtualEntity = (*D_802DB7C0)[script->functionTemp[1]];
     virtualEntity->pos.y += virtualEntity->jumpVelocity;
     virtualEntity->jumpVelocity -= virtualEntity->jumpGravity;
 

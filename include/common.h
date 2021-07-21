@@ -11,4 +11,7 @@
 #include "si.h"
 #include "messages.h"
 
+// these are just for the permuter
+extern int TEXEL0, TEXEL1, PRIMITIVE, PRIMITIVE_ALPHA;
+
 #endif

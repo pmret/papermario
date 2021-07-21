@@ -38,10 +38,9 @@ segments:
   - type: code
     start: 0x1000
     vram: 0x80025C00
-    subalign: 4
     subsegments:
     - [0x1000, hasm, entry_point]
-    - [0x1060, c, 1060_len_310]
+    - [0x1060, c, is_debug]
     - [0x1370, c, 1370_len_7d0]
     - [0x1b40, c, main_loop]
     - [0x3bf0, c, input]
@@ -73,7 +72,7 @@ segments:
     - [0x13480, c, state_demo]
     - [0x13870, c, npc]
     - [0x1a1f0, c, 1a1f0_len_5390]
-    - [0x1f580, c, 1f580_len_1940]
+    - [0x1f580, c, encounter_api]
     - [0x20ec0, c, 20ec0_len_5040]
     - [0x23680, c]
     - [0x25AF0, c]
@@ -246,8 +245,7 @@ segments:
     - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
     - [0x4ac90, c, 4ac90_len_3910]
-    - [0x4DF30, c, battle/battle] # DUMMY ROM location - not sure where it should go
-    - [0x4DF30, c, 4DF30]
+    - [0x4DF30, c, battle/battle]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]
     - [0x4F420, .data, main_loop]
@@ -261,9 +259,9 @@ segments:
     - [0x527F0, .data, os/nusys/7e40_len_3f0]
     - [0x52800, .data, os/nusys/nuSiMgr]
     - [0x52810, .data, camera]
-    - [auto,    .data, game_modes]
+    - [0x52820, .data, game_modes]
     - [0x52CA0, .data, state_battle]
-    - [0x52D08, .data, state_pause]
+    - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
     - [0x52EE0, data] # Start of 13480_len_3f0's data
@@ -276,7 +274,6 @@ segments:
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
     - [0x6F110, .data, os/nusys/nuGfxFuncSet]
-    - [0x6F114, .data, os/nusys/nuGfxPreNMIFuncSet]
     - [0x6F120, .data, os/nuContMgr]
     - [0x6F120, .data, os/osCreatePiManager]
     - [0x6F180, .data, os/osCartRomInit]
@@ -293,7 +290,7 @@ segments:
     - [0x6FA70, data] # has scripts?
     - [0x70E30, .data, battle/battle]
     - [0x71430, data]
-    - [0x73130, .rodata, 1060_len_310]
+    - [0x73130, .rodata, is_debug]
     - [0x73148, .rodata, main_loop]
     - [0x73160, .rodata, 43F0]
     - [0x73200, .rodata, curtains]
@@ -332,7 +329,6 @@ segments:
     - [0x75340, .rodata, os/491c0_len_f80]
     - [0x75540, .rodata, os/49C70]
     - [0x75640, .rodata, battle/battle]
-    - [0x75978, .rodata, 4DF30]
     # bss starts at 0x8009A5B0
     # 0x800 of bss until...
     # - [0x75240, .bss, main_loop]
@@ -340,7 +336,6 @@ segments:
   - type: code
     start: 0x759B0
     vram: 0x800DC500
-    subalign: 4
     subsegments:
     - [0x759b0, c, 759b0_len_61b0]
     - [0x77480, c, 77480]
@@ -357,24 +352,311 @@ segments:
     - [0x90FE0, .data, 759b0_len_61b0]
     - [0x913B0, .data, world/actions]
     - [0x914E0, .data, world/partners]
-    - [0x917F8, data]
+    - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
+    - [0x91D70, palette, ui/a_button_unpressed]
+    - [0x91D90, ci4,     ui/a_button_pressed, 48, 40]
+    - [0x92150, palette, ui/a_button_pressed]
+    - [0x92170, ci4,     ui/analog_stick, 32, 32]
+    - [0x92370, palette, ui/analog_stick]
+    - [0x92390, ci4,     ui/analog_stick_left, 40, 32]
+    - [0x92610, palette, ui/analog_stick_left]
+    - [0x92630, ci4,     ui/analog_stick2, 32, 32]
+    - [0x92830, palette, ui/analog_stick2]
+    - [0x92850, ci4,     ui/analog_stick_right, 40, 32]
+    - [0x92AD0, palette, ui/analog_stick_right]
+    - [0x92AF0, ci4,     ui/analog_stick3, 32, 32]
+    - [0x92CF0, palette, ui/analog_stick3]
+    - [0x92D10, ci4,     ui/analog_stick_down, 32, 32]
+    - [0x92F10, palette, ui/analog_stick_down]
+    - [0x92F30, ci4,     ui/analog_stick_up, 32, 32]
+    - [0x93130, palette, ui/analog_stick_up]
+    - [0x93150, ci4,     ui/unk_bar, 72, 16]
+    - [0x93390, palette, ui/unk_bar]
+    - [0x933B0, ci4,     ui/ok, 24, 16]
+    - [0x93470, palette, ui/ok]
+    - [0x93490, ci4,     ui/red_button, 48, 40]
+    - [0x93850, palette, ui/red_button]
+    - [0x93870, ci4,     ui/red_button2, 48, 40]
+    - [0x93C30, palette, ui/red_button2]
+    - [0x93C50, ci4,     ui/start, 24, 8]
+    - [0x93CB0, palette, ui/start]
     - [0x93CD0, ci4,     ui/hammer, 32, 32]
     - [0x93ED0, palette, ui/hammer]
     - [0x93EF0, palette, ui/hammer.disabled]
-    - [0x93FF0, data]
+    - [0x93F10, ci4,     ui/super_hammer, 32, 32]
+    - [0x94110, palette, ui/super_hammer]
+    - [0x94130, palette, ui/super_hammer.disabled]
+    - [0x94150, ci4,     ui/ultra_hammer, 32, 32]
+    - [0x94350, palette, ui/ultra_hammer]
+    - [0x94370, palette, ui/ultra_hammer.disabled]
+    - [0x94390, ci4,     ui/boots, 32, 32]
+    - [0x94590, palette, ui/boots]
+    - [0x945B0, palette, ui/boots.disabled]
+    - [0x945D0, ci4,     ui/super_boots, 32, 32]
+    - [0x947D0, palette, ui/super_boots]
+    - [0x947F0, palette, ui/super_boots.disabled]
+    - [0x94810, ci4,     ui/ultra_boots, 32, 32]
+    - [0x94A10, palette, ui/ultra_boots]
+    - [0x94A30, palette, ui/ultra_boots.disabled]
+    - [0x94A50, ci4,     ui/item, 32, 32]
+    - [0x94C50, palette, ui/item]
+    - [0x94C70, palette, ui/item.disabled]
+    - [0x94C90, ci4,     ui/star_spirit, 32, 32]
+    - [0x94E90, palette, ui/star_spirit]
+    - [0x94EB0, palette, ui/star_spirit.disabled]
+    - [0x94ED0, ci4,     ui/arrow_left, 16, 16]
+    - [0x94F50, palette, ui/arrow_left]
+    - [0x94F70, ci4,     ui/arrow_right, 16, 16]
+    - [0x94FF0, palette, ui/arrow_right]
+    - [0x95010, ci4,     ui/point_right, 16, 16]
+    - [0x95090, palette, ui/point_right]
+    - [0x950B0, ci4,     ui/pip, 8, 8]
+    - [0x950D0, palette, ui/pip]
+    - [0x950F0, ci4,     ui/pip2, 8, 8]
+    - [0x95110, palette, ui/pip2]
+    - [0x95130, data]
+    - [0x95990, ci4,     ui/kaime, 56, 24]
+    - [0x95C30, palette, ui/kaime]
+    - [0x95C50, ci4,     ui/unused_1, 16, 16]
+    - [0x95CD0, palette, ui/unused_1]
+    - [0x95CF0, ci4,     ui/unused_2, 16, 16]
+    - [0x95D70, palette, ui/unused_2]
+    - [0x95D90, ci4,     ui/unused_3, 16, 16]
+    - [0x95E10, palette, ui/unused_3]
+    - [0x95E30, data]
+    - [0x963B0, ci4,     ui/eldstar, 32, 32]
+    - [0x965B0, palette, ui/eldstar]
+    - [0x965D0, palette, ui/eldstar.disabled]
+    - [0x965F0, ci4,     ui/mamar, 32, 32]
+    - [0x967F0, palette, ui/mamar]
+    - [0x96810, palette, ui/mamar.disabled]
+    - [0x96830, ci4,     ui/skolar, 32, 32]
+    - [0x96A30, palette, ui/skolar]
+    - [0x96A50, palette, ui/skolar.disabled]
+    - [0x96A70, ci4,     ui/muskular, 32, 32]
+    - [0x96C70, palette, ui/muskular]
+    - [0x96C90, palette, ui/muskular.disabled]
+    - [0x96CB0, ci4,     ui/misstar, 32, 32]
+    - [0x96EB0, palette, ui/misstar]
+    - [0x96ED0, palette, ui/misstar.disabled]
+    - [0x96EF0, ci4,     ui/klevar, 32, 32]
+    - [0x970F0, palette, ui/klevar]
+    - [0x97110, palette, ui/klevar.disabled]
+    - [0x97130, ci4,     ui/kalmar, 32, 32]
+    - [0x97330, palette, ui/kalmar]
+    - [0x97350, palette, ui/kalmar.disabled]
+    - [0x97370, ci4,     ui/all_spirits, 32, 32]
+    - [0x97570, palette, ui/all_spirits]
+    - [0x97590, palette, ui/all_spirits.disabled]
+    - [0x975B0, ci4,     ui/peach_beam, 32, 32]
+    - [0x977B0, palette, ui/peach_beam]
+    - [0x977D0, palette, ui/peach_beam.disabled]
+    - [0x977F0, ci4,     ui/mario_head, 16, 16]
+    - [0x97870, palette, ui/mario_head]
+    - [0x97890, ci4,     ui/partner0, 32, 32]
+    - [0x97A90, palette, ui/partner0]
+    - [0x97AB0, palette, ui/partner0.disabled]
+    - [0x97AD0, ci4,     ui/goombario, 32, 32]
+    - [0x97CD0, palette, ui/goombario]
+    - [0x97CF0, palette, ui/goombario.disabled]
+    - [0x97D10, ci4,     ui/kooper, 32, 32]
+    - [0x97F10, palette, ui/kooper]
+    - [0x97F30, palette, ui/kooper.disabled]
+    - [0x97F50, ci4,     ui/bombette, 32, 32]
+    - [0x98150, palette, ui/bombette]
+    - [0x98170, palette, ui/bombette.disabled]
+    - [0x98190, ci4,     ui/parakarry, 32, 32]
+    - [0x98390, palette, ui/parakarry]
+    - [0x983B0, palette, ui/parakarry.disabled]
+    - [0x983D0, ci4,     ui/bow, 32, 32]
+    - [0x985D0, palette, ui/bow]
+    - [0x985F0, palette, ui/bow.disabled]
+    - [0x98610, ci4,     ui/watt, 32, 32]
+    - [0x98810, palette, ui/watt]
+    - [0x98830, palette, ui/watt.disabled]
+    - [0x98850, ci4,     ui/sushie, 32, 32]
+    - [0x98A50, palette, ui/sushie]
+    - [0x98A70, palette, ui/sushie.disabled]
+    - [0x98A90, ci4,     ui/lakilester, 32, 32]
+    - [0x98C90, palette, ui/lakilester]
+    - [0x98CB0, palette, ui/lakilester.disabled]
+    - [0x98CD0, ci4,     ui/partner9, 32, 32]
+    - [0x98ED0, palette, ui/partner9]
+    - [0x98EF0, palette, ui/partner9.disabled]
+    - [0x98F10, ci4,     ui/partner10, 32, 32]
+    - [0x99110, palette, ui/partner10]
+    - [0x99130, palette, ui/partner10.disabled]
+    - [0x99150, ci4,     ui/partner11, 32, 32]
+    - [0x99350, palette, ui/partner11]
+    - [0x99370, palette, ui/partner11.disabled]
+    - [0x99390, data]
+    - [0x99430, ci4,     ui/0, 16, 16]
+    - [0x994B0, palette, ui/0]
+    - [0x994D0, ci4,     ui/1, 16, 16]
+    - [0x99550, palette, ui/1]
+    - [0x99570, ci4,     ui/2, 16, 16]
+    - [0x995F0, palette, ui/2]
+    - [0x99610, ci4,     ui/3, 16, 16]
+    - [0x99690, palette, ui/3]
+    - [0x996B0, ci4,     ui/4, 16, 16]
+    - [0x99730, palette, ui/4]
+    - [0x99750, ci4,     ui/5, 16, 16]
+    - [0x997D0, palette, ui/5]
+    - [0x997F0, ci4,     ui/6, 16, 16]
+    - [0x99870, palette, ui/6]
+    - [0x99890, ci4,     ui/7, 16, 16]
+    - [0x99910, palette, ui/7]
+    - [0x99930, ci4,     ui/8, 16, 16]
+    - [0x999B0, palette, ui/8]
+    - [0x999D0, ci4,     ui/9, 16, 16]
+    - [0x99A50, palette, ui/9]
+    - [0x99A70, ci4,     ui/hp, 16, 16]
+    - [0x99AF0, palette, ui/hp]
+    - [0x99B10, ci4,     ui/fp, 16, 16]
+    - [0x99B90, palette, ui/fp]
+    - [0x99BB0, data]
+    - [0x99FB0, ci4,     ui/coins0, 16, 16]
+    - [0x9A030, palette, ui/coins0]
+    - [0x9A050, ci4,     ui/coins1, 16, 16]
+    - [0x9A0D0, palette, ui/coins1]
+    - [0x9A0F0, ci4,     ui/coins2, 16, 16]
+    - [0x9A170, palette, ui/coins2]
+    - [0x9A190, ci4,     ui/coins3, 16, 16]
+    - [0x9A210, palette, ui/coins3]
+    - [0x9A230, ci4,     ui/coins4, 16, 16]
+    - [0x9A2B0, palette, ui/coins4]
+    - [0x9A2D0, ci4,     ui/coins5, 16, 16]
+    - [0x9A350, palette, ui/coins5]
+    - [0x9A370, ci4,     ui/coins6, 16, 16]
+    - [0x9A3F0, palette, ui/coins6]
+    - [0x9A410, ci4,     ui/coins7, 16, 16]
+    - [0x9A490, palette, ui/coins7]
+    - [0x9A4B0, ci4,     ui/coins8, 16, 16]
+    - [0x9A530, palette, ui/coins8]
+    - [0x9A550, ci4,     ui/coins9, 16, 16]
+    - [0x9A5D0, palette, ui/coins9]
+    - [0x9A5F0, ci4,     ui/star_points0, 16, 16]
+    - [0x9A670, palette, ui/star_points0]
+    - [0x9A690, ci4,     ui/star_points1, 16, 16]
+    - [0x9A710, palette, ui/star_points1]
+    - [0x9A730, ci4,     ui/star_points2, 16, 16]
+    - [0x9A7B0, palette, ui/star_points2]
+    - [0x9A7D0, ci4,     ui/star_points3, 16, 16]
+    - [0x9A850, palette, ui/star_points3]
+    - [0x9A870, ci4,     ui/star_points4, 16, 16]
+    - [0x9A8F0, palette, ui/star_points4]
+    - [0x9A910, ci4,     ui/star_points5, 16, 16]
+    - [0x9A990, palette, ui/star_points5]
+    - [0x9A9B0, ci4,     ui/star_points6, 16, 16]
+    - [0x9AA30, palette, ui/star_points6]
+    - [0x9AA50, ci4,     ui/star_points7, 16, 16]
+    - [0x9AAD0, palette, ui/star_points7]
+    - [0x9AAF0, ci4,     ui/bluepip, 16, 16]
+    - [0x9AB70, palette, ui/bluepip]
+    - [0x9AB90, ci4,     ui/bluepip2, 16, 16]
+    - [0x9AC10, palette, ui/bluepip2]
+    - [0x9AC30, ci4,     ui/charge_jump, 24, 24]
+    - [0x9AD50, palette, ui/charge_jump]
+    - [0x9AD70, ci4,     ui/charge_hammer, 24, 24]
+    - [0x9AE90, palette, ui/charge_hammer]
+    - [0x9AEB0, ci4,     ui/charge_goombario, 24, 24]
+    - [0x9AFD0, palette, ui/charge_goombario]
+    - [0x9AFF0, ci4,     ui/exclamation, 24, 24]
+    - [0x9B110, palette, ui/exclamation]
+    - [0x9B130, ci4,     ui/sleeping, 16, 16]
+    - [0x9B1B0, palette, ui/sleeping]
+    - [0x9B1D0, ci4,     ui/sleeping2, 16, 16]
+    - [0x9B250, palette, ui/sleeping2]
+    - [0x9B270, ci4,     ui/sleeping3, 16, 16]
+    - [0x9B2F0, palette, ui/sleeping3]
+    - [0x9B310, ci4,     ui/shocked, 16, 16]
+    - [0x9B390, palette, ui/shocked]
+    - [0x9B3B0, ci4,     ui/shocked2, 16, 16]
+    - [0x9B430, palette, ui/shocked2]
+    - [0x9B450, ci4,     ui/shocked3, 16, 16]
+    - [0x9B4D0, palette, ui/shocked3]
+    - [0x9B4F0, ci4,     ui/shocked4, 16, 16]
+    - [0x9B570, palette, ui/shocked4]
+    - [0x9B590, ci4,     ui/dizzy, 16, 16]
+    - [0x9B610, palette, ui/dizzy]
+    - [0x9B630, ci4,     ui/dizzy2, 16, 16]
+    - [0x9B6B0, palette, ui/dizzy2]
+    - [0x9B6D0, ci4,     ui/dizzy3, 16, 16]
+    - [0x9B750, palette, ui/dizzy3]
+    - [0x9B770, ci4,     ui/dizzy4, 16, 16]
+    - [0x9B7F0, palette, ui/dizzy4]
+    - [0x9B810, ci4,     ui/poisoned, 16, 16]
+    - [0x9B890, palette, ui/poisoned]
+    - [0x9B8B0, ci4,     ui/poisoned2, 16, 16]
+    - [0x9B930, palette, ui/poisoned2]
+    - [0x9B950, ci4,     ui/frozen, 16, 16]
+    - [0x9B9D0, palette, ui/frozen]
+    - [0x9B9F0, ci4,     ui/frozen2, 16, 16]
+    - [0x9BA70, palette, ui/frozen2]
+    - [0x9BA90, ci4,     ui/frozen3, 16, 16]
+    - [0x9BB10, palette, ui/frozen3]
+    - [0x9BB30, ci4,     ui/frozen4, 16, 16]
+    - [0x9BBB0, palette, ui/frozen4]
+    - [0x9BBD0, ci4,     ui/timed, 16, 16]
+    - [0x9BC50, palette, ui/timed]
+    - [0x9BC70, ci4,     ui/timed2, 16, 16]
+    - [0x9BCF0, palette, ui/timed2]
+    - [0x9BD10, ci4,     ui/timed3, 16, 16]
+    - [0x9BD90, palette, ui/timed3]
+    - [0x9BDB0, ci4,     ui/timed4, 16, 16]
+    - [0x9BE30, palette, ui/timed4]
+    - [0x9BE50, ci4,     ui/downed, 16, 16]
+    - [0x9BED0, palette, ui/downed]
+    - [0x9BEF0, ci4,     ui/downed2, 16, 16]
+    - [0x9BF70, palette, ui/downed2]
+    - [0x9BF90, ci4,     ui/some_effect, 16, 16]
+    - [0x9C010, palette, ui/some_effect]
+    - [0x9C030, ci4,     ui/some_effect2, 16, 16]
+    - [0x9C0B0, palette, ui/some_effect2]
+    - [0x9C0D0, ci4,     ui/some_effect3, 16, 16]
+    - [0x9C150, palette, ui/some_effect3]
+    - [0x9C170, ci4,     ui/some_effect4, 16, 16]
+    - [0x9C1F0, palette, ui/some_effect4]
+    - [0x9C210, ci4,     ui/other_effect, 16, 16]
+    - [0x9C290, palette, ui/other_effect]
+    - [0x9C2B0, ci4,     ui/other_effect2, 16, 16]
+    - [0x9C330, palette, ui/other_effect2]
+    - [0x9C350, ci4,     ui/other_effect3, 16, 16]
+    - [0x9C3D0, palette, ui/other_effect3]
+    - [0x9C3F0, ci4,     ui/other_effect4, 16, 16]
+    - [0x9C470, palette, ui/other_effect4]
+    - [0x9C490, ci4,     ui/other_effect5, 16, 16]
+    - [0x9C510, palette, ui/other_effect5]
+    - [0x9C530, ci4,     ui/other_effect6, 16, 16]
+    - [0x9C5B0, palette, ui/other_effect6]
+    - [0x9C5D0, ci4,     ui/peril, 40, 16]
+    - [0x9C710, palette, ui/peril]
+    - [0x9C730, ci4,     ui/danger, 40, 16]
+    - [0x9C870, palette, ui/danger]
+    - [0x9C890, ci4,     ui/refund, 40, 24]
+    - [0x9CA70, palette, ui/refund]
+    - [0x9CA90, ci4,     ui/happy, 40, 16]
+    - [0x9CBD0, palette, ui/happy]
+    - [0x9CBF0, ci4,     ui/hp_drain, 40, 16]
+    - [0x9CD30, palette, ui/hp_drain]
+    - [0x9CD50, ci4,     ui/diamond, 32, 32]
+    - [0x9CF50, palette, ui/diamond]
+    - [0x9CF70, palette, ui/diamond.disabled]
+    - [0x9CF90, ci4,     ui/orb_blue, 32, 32]
+    - [0x9D190, palette, ui/orb_blue]
+    - [0x9D1B0, palette, ui/orb_blue.disabled]
+    - [0x9D1D0, ci4,     ui/orb_green, 32, 32]
+    - [0x9D3D0, palette, ui/orb_green]
+    - [0x9D3F0, palette, ui/orb_green.disabled]
+    - [0x9D410, ci4,     ui/orb_red, 32, 32]
+    - [0x9D610, palette, ui/orb_red]
+    - [0x9D630, palette, ui/orb_red.disabled]
+    - [0x9D650, data]
     - [0x9D658, rgba32,  ui/stat_heart, 16, 16]
     - [0x9DA58, data]
     - [0x9DA60, rgba32,  ui/stat_flower, 16, 16]
     - [0x9DE60, data]
-    - [0xA5100, .rodata, 77480]
-    - [0xA51E0, .rodata, 7B440]
-    - [0xA5230, .rodata, 7bb60_len_41b0]
-    - [0xA53E0, .rodata, 7fd10_len_b40]
-    - [0xA5410, .rodata, 80850_len_3060]
-    - [0xA54F0, .rodata, world/partners]
-    - [0xA5798, .rodata, 891b0_len_fb0]
-    - [0xA57C0, .rodata, 8a160_len_700]
-    - [0xA57E0, .rodata, 8a860_len_3f30] # bss at 8010C920
+    - [0xA5100] # bss at 8010C920
   - type: code
     start: 0xA5DD0
     vram: 0x8010F6D0
@@ -382,7 +664,7 @@ segments:
     - [0xa5dd0, c, a5dd0_len_114e0]
     - [0xB4580, c, B4580]
     - [0xb72b0, c, entity]
-    - [0xB9D60, c, B9D60]
+    - [0xB9D60, c, msg]
     - [0xC50A0, c, C50A0]
     - [0xcd180, c, cd180_len_38f0]
     - [0xCEE40, c, CEE40]
@@ -397,7 +679,10 @@ segments:
     - [0xDF950, c, DF950]
     - [0xe0b30, c, e0b30_len_b80]
     - [0xE16B0, .data, a5dd0_len_114e0]
-    - [0xE2950, data]
+    - [0xE2950, .data, B4580]
+    - [0xE2960, .data, entity]
+    - [0xE2980, .data, msg]
+    - [0xE2CA0, data]
     - [0xE5510, .data, d0a70_len_4fe0]
     - [0xE56C0, .data, d5a50_len_5fd0]
     - [0xE5820, .data, dc470_len_14c0]
@@ -441,23 +726,23 @@ segments:
     subsegments:
     - [0x0fee30, c, sprite]
     - [0x101b90, c, 101b90_len_8f0]
-    # - [0x102480, .data, sprite]
+    - [0x102480]
   - type: code
     start: 0x102610
     vram: 0x802E0D90
     subsegments:
-    - [0x102610, c, 102610_len_2330]
-    - [0x102C80, c, 102C80]
+    - [0x102610, c, entity/SaveBlock]
+    - [0x102C80, c, entity/Switch]
     - [0x104730, c, 104730]
-    - [0x104940, c, 104940_len_dc0]
-    - [0x105700, c, 105700_len_2130]
-    - [0x105F90, c, 105F90]
-    - [0x106EF0, c]
-    - [0x107830, c, 107830_len_e70]
-    - [0x1086a0, c, 1086a0_len_fc0]
-    - [0x109660, c, 109660_len_1270]
-    - [0x10A230, c, 10A230]
-    - [0x10A8D0, c, 10A8D0]
+    - [0x104940, c, entity/Block]
+    - [0x105700, c, entity/ItemBlock]
+    - [0x105F90, c, entity/HeartBlock]
+    - [0x106EF0, c, entity/SuperBlock]
+    - [0x107830, c, entity/SimpleSpring]
+    - [0x1086a0, c, entity/Chest]
+    - [0x109660, c, entity/WoodenCrate]
+    - [0x10A230, c, entity/BlueWarpPipe]
+    - [0x10A8D0, c, entity/Signpost]
     - [0x10A9F0, data]
     #- [0x10A9F0, i4,      shadow/square, 16, 16]
     #- [0x10AA70, i4,      shadow/circle, 16, 16]
@@ -466,20 +751,27 @@ segments:
     #- [0x10AD70, i4,      shadow/10AD70, 32, 32]
     - [0x10AF70, .data, 104730]
     - [0x10B610, data]
-    - [0x10C880, .rodata, 102C80]
-    - [0x10C9E0, .rodata, 104730]
-    - [0x10CA50, .rodata, 104940_len_dc0]
-    - [0x10CAF0, .rodata, 105F90]
-    - [0x10CB30, .rodata, 107830_len_e70]
-    - [0x10CB70, .rodata, 1086a0_len_fc0]
-    - [0x10CBD0, .rodata, 109660_len_1270]
-    - [0x10CC00, .rodata, 10A230]
+    - [0x10C880]
   - type: code
     start: 0x10CC10
     vram: 0x802EB3D0
     subsegments:
-    - [0x10CC10, data]
-  - [0x10F1B0, bin]
+    - [0x10CC10, data] # font width data
+  - type: group
+    dir: charset
+    start: 0x10F1B0
+    subsegments:
+    - [0x10F1B0, linker_offset,       standard]
+    - [0x10F1B0, pm_charset,          standard, 16, 16, 0xA6]
+    - [0x1144B0, linker_offset,       standard_pal]
+    - [0x1144B0, pm_charset_palettes, standard,         0x50]
+    - [0x1149B0, linker_offset,       title]
+    - [0x1149B0, pm_charset,          title,    12, 15, 0x29]
+    - [0x115910, linker_offset,       subtitle]
+    - [0x115910, pm_charset,          subtitle, 12, 12, 0x29]
+    - [0x116498, linker_offset,       credits_pal]
+    - [0x116498, pm_charset_palettes, subtitle,         1]
+    - [0x1164A8, pm_charset_palettes, title,            1]
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
@@ -2859,21 +3151,33 @@ segments:
     type: code
     start: 0x4309A0
     vram: 0x80218000
-    overlay: True
     subalign: 4
+    overlay: True
     subsegments:
-    - [0x4309A0, c, battles] # DUMMY ROM
-    - [0x4309A0, c, goomba] # DUMMY ROM
-    - [0x4309A0, c]
-    - [0x431180, c]
-    - [0x4313F0, c]
-    - [0x431660, c]
-    - [0x4318D0, c]
-    - [0x431B80, .data, battles]
-    - [0x431FB0, .data, goomba]
-    - [0x433970, data]
-    - [0x4398A0, .rodata, battles]
-    - [0x439984, rodata] # TODO change
+    - [0x4309A0, c, area]
+    - [0x4309A0, c, actor/goomba]
+    - [0x430C20, c, actor/spiked_goomba]
+    - [0x430EA0, c, actor/paragoomba]
+    - [0x431180, c, stage/kmr_02]
+    - [0x431180, c, stage/kmr_03]
+    - [0x4313F0, c, stage/kmr_04]
+    - [0x431660, c, stage/kmr_05]
+    - [0x4318D0, c, stage/kmr_06]
+    - [0x431B80, .data, area]
+    - [0x431FB0, .data, actor/goomba]
+    - [0x433970, .data, actor/spiked_goomba]
+    - [0x4354A0, .data, actor/paragoomba]
+    - [0x438740, .data, stage/kmr_02]
+    - [0x4387A0, .data, stage/kmr_03]
+    - [0x438BF0, .data, stage/kmr_04]
+    - [0x439040, .data, stage/kmr_05]
+    - [0x439440, .data, stage/kmr_06]
+    - [0x4398A0, .rodata, area]
+    - [0x4399AC, .rodata, stage/kmr_02] # FIXME: fucky rodata alignment
+    - [0x4399CC, .rodata, stage/kmr_03]
+    - [0x4399FC, .rodata, stage/kmr_04]
+    - [0x439A2C, .rodata, stage/kmr_05]
+    - [0x439A5C, .rodata, stage/kmr_06]
   - dir: battle/area_kmr_part_2
     type: code
     start: 0x439A90
@@ -3376,8 +3680,9 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F10E0, c]
-    - [0x6F2290, data]
+    - [0x6F10E0, c, goombario]
+    - [0x6F2290, .data, goombario]
+    - [0x6F5E30, data, 6F2290] # rodata
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
@@ -3385,7 +3690,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6F5E80, c]
+    - [0x6F5E80, c, kooper]
     - [0x6F62B0, data]
   - name: battle_partner_bombette
     dir: battle/partner
@@ -3394,7 +3699,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6FAD10, c]
+    - [0x6FAD10, c, bombette]
     - [0x6FB350, data]
   - name: battle_partner_parakarry
     dir: battle/partner
@@ -3403,7 +3708,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x6FFD80, c]
+    - [0x6FFD80, c, parakarry]
     - [0x701590, data]
   - name: battle_partner_watt
     dir: battle/partner
@@ -3412,7 +3717,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x703AF0, c]
+    - [0x703AF0, c, watt]
     - [0x704A80, data]
   - name: battle_partner_sushie
     dir: battle/partner
@@ -3421,7 +3726,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x707CA0, c]
+    - [0x707CA0, c, sushie]
     - [0x708B70, data]
   - name: battle_partner_lakilester
     dir: battle/partner
@@ -3430,8 +3735,8 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x70BD10, c]
-    - [0x70DED0, data]
+    - [0x70BD10, c, lakilester]
+    - [0x70DEE0, data, 70DED0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -3439,7 +3744,7 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x710EF0, c]
+    - [0x710EF0, c, bow]
     - [0x7111F0, data]
   - name: battle_partner_twink
     dir: battle/partner
@@ -3448,347 +3753,354 @@ segments:
     vram: 0x80238000
     overlay: True
     subsegments:
-    - [0x714CF0, c]
+    - [0x714CF0, c, twink]
     - [0x714DC0, data]
-  - dir: battle/item/mushroom
+  - name: mushroom
+    dir: battle/item
     type: code
     start: 0x715850
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x715850,     c, lib]
-    - [0x715E50,     c, mushroom] # DUMMY ROM
-    - [0x715E50, .data, lib]
-    - [0x71640C, .data, mushroom]
-  - dir: battle/item/fire_flower
+    - [0x715850, c, mushroom] # TODO fix auto_all for .data
+    - [0x715E50]
+  - name: fire_flower
+    dir: battle/item
     type: code
     start: 0x716C60
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x716C60,     c, lib]
-    - [0x717060,     c, fire_flower] # DUMMY ROM
-    - [0x717060, .data, lib]
-    - [0x71761C, .data, fire_flower]
-  - dir: battle/item/dusty_hammer
+    - [0x716C60, c, fire_flower]
+    - [0x717060]
+  - name: dusty_hammer
+    dir: battle/item
     type: code
     start: 0x7179D0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x7179D0,       c, lib]
-    - [0x717C10,       c, dusty_hammer] # DUMMY ROM
-    - [0x717C10,   .data, lib]
-    - [0x7181D0,     ci4, dusty_hammer, 32, 32]
-    - [0x7183D0, palette, dusty_hammer]
-    - [0x7183F0,   .data, dusty_hammer]
-  - dir: battle/item/pow_block
+    - [0x7179D0, c, dusty_hammer]
+    - start: 0x717C10
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x7181D0, ci4, dusty_hammer, 32, 32]
+      - [0x7183D0, palette, dusty_hammer]
+      - [0x7183F0]
+  - name: pow_block
+    dir: battle/item
     type: code
     start: 0x718850
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x718850,     c, lib]
-    - [0x718BF0, .data, lib]
-    - [0x7191AC, .data, pow_block]
-  - dir: battle/item/pebble
+    - [0x718850, c, pow_block]
+    - [0x718BF0]
+  - name: pebble
+    dir: battle/item
     type: code
     start: 0x719970
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x719970,       c, lib]
-    - [0x719BB0,   .data, lib]
-    - [0x71A170,     ci4, pebble, 32, 32]
-    - [0x71A370, palette, pebble]
-    - [0x71A390,   .data, pebble]
-  - dir: battle/item/volt_shroom
+    - [0x719970, c, pebble]
+    - start: 0x719BB0
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x71A170, ci4, pebble, 32, 32]
+      - [0x71A370, palette, pebble]
+      - [0x71A390]
+  - name: volt_shroom
+    dir: battle/item
     type: code
     start: 0x71A7F0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71A7F0,     c, lib]
-    - [0x71AA70, .data, lib]
-    - [0x71B02C, .data, volt_shroom]
-  - dir: battle/item/thunder_rage
+    - [0x71A7F0, c, volt_shroom]
+    - [0x71AA70]
+  - name: thunder_rage
+    dir: battle/item
     type: code
     start: 0x71B1A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71B1A0,     c, lib]
-    - [0x71B640, .data, lib]
-    - [0x71BBFC, .data, thunder_rage]
-  - dir: battle/item/snowman_doll
+    - [0x71B1A0, c, thunder_rage]
+    - [0x71B640]
+  - name: snowman_doll
+    dir: battle/item
     type: code
     start: 0x71BE30
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71BE30,     c, lib]
-    - [0x71C270, .data, lib]
-    - [0x71C82C, .data, snowman_doll]
-  - dir: battle/item/dried_shroom
+    - [0x71BE30, c, snowman_doll]
+    - [0x71C270]
+  - name: dried_shroom
+    dir: battle/item
     type: code
     start: 0x71CCE0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71CCE0,     c, lib]
-    - [0x71D010, .data, lib]
-    - [0x71D5DC, .data, dried_shroom]
-  - dir: battle/item/shooting_star
+    - [0x71CCE0, c, dried_shroom]
+    - [0x71D010]
+  - name: shooting_star
+    dir: battle/item
     type: code
     start: 0x71D770
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x71D770,     c, lib]
-    - [0x71DCC0, .data, lib]
-    - [0x71E27C, .data, shooting_star]
-  - dir: battle/item/sleepy_sheep
+    - [0x71D770, c, shooting_star]
+    - [0x71DCC0]
+  - name: sleepy_sheep
+    dir: battle/item
     type: code
     start: 0x71E650
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x71E650,       c, lib]
-    - [0x71EFC0,   .data, lib]
-    - [0x71F580,     ci4, sleepy_sheep1, 56, 48]
-    - [0x71FAC0, palette, sleepy_sheep1]
-    - [0x71FAE0,     ci4, sleepy_sheep2, 56, 48]
-    - [0x720020, palette, sleepy_sheep2]
-    - [0x720040,     ci4, sleepy_sheep3, 56, 48]
-    - [0x720580, palette, sleepy_sheep3]
-    - [0x7205A0,   .data, sleepy_sheep]
-    - [0x7214D8, .rodata, lib]
-  - dir: battle/item/stone_cap
+    - [0x71E650, c, sleepy_sheep]
+    - start: 0x71EFC0
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x71EFC0, .data, sleepy_sheep]
+      - [0x71F580, ci4, sleepy_sheep1, 56, 48]
+      - [0x71FAC0, palette, sleepy_sheep1]
+      - [0x71FAE0, ci4, sleepy_sheep2, 56, 48]
+      - [0x720020, palette, sleepy_sheep2]
+      - [0x720040, ci4, sleepy_sheep3, 56, 48]
+      - [0x720580, palette, sleepy_sheep3]
+      - [0x7205A0]
+  - name: stone_cap
+    dir: battle/item
     type: code
     start: 0x7215A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7215A0,     c, lib]
-    - [0x721970, .data, lib]
-    - [0x721F2C, .data, stone_cap]
-  - dir: battle/item/tasty_tonic
+    - [0x7215A0, c, stone_cap]
+    - [0x721970]
+  - name: tasty_tonic
+    dir: battle/item
     type: code
     start: 0x722000
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x722000,     c, lib]
-    - [0x7222D0, .data, lib]
-    - [0x72289C, .data, tasty_tonic]
-  - dir: battle/item/thunder_bolt
+    - [0x722000, c, tasty_tonic]
+    - [0x7222D0]
+  - name: thunder_bolt
+    dir: battle/item
     type: code
     start: 0x722B40
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x722B40,     c, lib]
-    - [0x722FE0, .data, lib]
-    - [0x72359C, .data, thunder_bolt]
-  - dir: battle/item/ultra_shroom
+    - [0x722B40, c, thunder_bolt]
+    - [0x722FE0]
+  - name: ultra_shroom
+    dir: battle/item
     type: code
     start: 0x723780
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x723780,     c, lib]
-    - [0x723AB0, .data, lib]
-    - [0x72407C, .data, ultra_shroom]
-  - dir: battle/item/unknown_item
+    - [0x723780, c, ultra_shroom]
+    - [0x723AB0]
+  - name: unknown_item
+    dir: battle/item
     type: code
     start: 0x724240
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x724240,     c, lib]
-    - [0x724570, .data, lib]
-    - [0x724B3C, .data, unknown_item]
-  - dir: battle/item/super_soda
+    - [0x724240, c, unknown_item]
+    - [0x724570]
+  - name: super_soda
+    dir: battle/item
     type: code
     start: 0x724CE0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x724CE0,     c, lib]
-    - [0x725210, .data, lib]
-    - [0x7257CC, .data, super_soda]
-  - dir: battle/item/hustle_drink
+    - [0x724CE0, c, super_soda]
+    - [0x725210]
+  - name: hustle_drink
+    dir: battle/item
     type: code
     start: 0x725F60
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x725F60,     c, lib]
-    - [0x726240, .data, lib]
-    - [0x7267FC, .data, hustle_drink]
-  - dir: battle/item/stop_watch
+    - [0x725F60, c, hustle_drink]
+    - [0x726240]
+  - name: stop_watch
+    dir: battle/item
     type: code
     start: 0x726DD0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x726DD0,     c, lib]
-    - [0x727120, .data, lib]
-    - [0x7276EC, .data, stop_watch]
-  - dir: battle/item/dizzy_dial
+    - [0x726DD0, c, stop_watch]
+    - [0x727120]
+  - name: dizzy_dial
+    dir: battle/item
     type: code
     start: 0x727910
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x727910,       c, lib]
-    - [0x727CE0,   .data, lib]
-    - [0x72829C,   .data, dizzy_dial]
-    - [0x7285D0, .rodata, lib]
-  - dir: battle/item/please_come_back
+    - [0x727910, c, dizzy_dial]
+    - [0x727CE0]
+  - name: please_come_back
+    dir: battle/item
     type: code
     start: 0x7285E0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7285E0,     c, lib]
-    - [0x728820, .data, lib]
-    - [0x728DDC, .data, please_come_back]
-  - dir: battle/item/egg_missile
+    - [0x7285E0, c, please_come_back]
+    - [0x728820]
+  - name: egg_missile
+    dir: battle/item
     type: code
     start: 0x728EC0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x728EC0,       c, lib]
-    - [0x7291D0,   .data, lib]
-    - [0x729790,     ci4, egg_missile1, 32, 32]
-    - [0x729990, palette, egg_missile1]
-    - [0x7299B0,     ci4, egg_missile2, 32, 32]
-    - [0x729BB0, palette, egg_missile2]
-    - [0x729BD0,     ci4, egg_missile3, 32, 32]
-    - [0x729DD0, palette, egg_missile3]
-    - [0x729DF0,     ci4, egg_missile4, 32, 32]
-    - [0x729FF0, palette, egg_missile4]
-    - [0x72A010,   .data, egg_missile]
-  - dir: battle/item/insecticide_herb
+    - [0x728EC0, c, egg_missile]
+    - start: 0x7291D0
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x7291D0, .data, egg_missile]
+      - [0x729790, ci4, egg_missile1, 32, 32]
+      - [0x729990, palette, egg_missile1]
+      - [0x7299B0, ci4, egg_missile2, 32, 32]
+      - [0x729BB0, palette, egg_missile2]
+      - [0x729BD0, ci4, egg_missile3, 32, 32]
+      - [0x729DD0, palette, egg_missile3]
+      - [0x729DF0, ci4, egg_missile4, 32, 32]
+      - [0x729FF0, palette, egg_missile4]
+      - [0x72A010]
+  - name: insecticide_herb
+    dir: battle/item
     type: code
     start: 0x72A750
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72A750,       c, lib]
-    - [0x72AB70,   .data, lib]
-    - [0x72B130,     ci4, insecticide_herb, 32, 32]
-    - [0x72B330, palette, insecticide_herb]
-    - [0x72B350,   .data, insecticide_herb]
-  - dir: battle/item/fright_jar
+    - [0x72A750, c, insecticide_herb]
+    - start: 0x72B130
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x72B130, ci4, insecticide_herb, 32, 32]
+      - [0x72B330, palette, insecticide_herb]
+      - [0x72B350]
+  - name: fright_jar
+    dir: battle/item
     type: code
     start: 0x72B910
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72B910,     c, lib]
-    - [0x72BC60, .data, lib]
-    - [0x72C22C, .data, fright_jar]
-  - dir: battle/item/mystery
+    - [0x72B910, c, fright_jar]
+    - [0x72BC60]
+  - name: mystery
+    dir: battle/item
     type: code
     start: 0x72C5B0
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72C5B0,       c, lib]
-    - [0x72CF00,   .data, lib]
-    - [0x72D4C0,     ci4, mystery, 32, 32]
-    - [0x72D6C0, palette, mystery]
-    - [0x72D6E0,   .data, mystery]
-    - [0x72DB50, .rodata, lib]
-  - dir: battle/item/repel_gel
+    - [0x72C5B0, c, mystery]
+    - start: 0x72CF00
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x72CF00, .data, mystery]
+      - [0x72D4C0, ci4, mystery, 32, 32]
+      - [0x72D6C0, palette, mystery]
+      - [0x72D6E0]
+  - name: repel_gel
+    dir: battle/item
     type: code
     start: 0x72DB70
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72DB70,     c, lib]
-    - [0x72DE00, .data, lib]
-    - [0x72E3CC, .data, repel_gel]
-  - dir: battle/item/life_shroom
+    - [0x72DB70, c, repel_gel]
+    - [0x72DE00]
+  - name: life_shroom
+    dir: battle/item
     type: code
     start: 0x72E530
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x72E530,     c, lib]
-    - [0x72EA20, .data, lib]
-    - [0x72EFEC, .data, life_shroom]
-  - dir: battle/item/coconut
+    - [0x72E530, c, life_shroom]
+    - [0x72EA20]
+  - name: coconut
+    dir: battle/item
     type: code
     start: 0x72F720
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x72F720, c,       lib]
-    - [0x72F960, .data,   lib]
-    - [0x72FF20, ci4,     coconut, 32, 32]
-    - [0x730120, palette, coconut]
-    - [0x730140, .data,   coconut]
-  - dir: battle/item/electro_pop
+    - [0x72F720, c, coconut]
+    - start: 0x72F960
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x72F960, .data, coconut]
+      - [0x72FF20, ci4, coconut, 32, 32]
+      - [0x730120, palette, coconut]
+      - [0x730140]
+  - name: electro_pop
+    dir: battle/item
     type: code
     start: 0x7305A0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7305A0,     c, lib]
-    - [0x730AE0, .data, lib]
-    - [0x73109C, .data, electro_pop]
-  - dir: battle/item/strange_cake
+    - [0x7305A0, c, electro_pop]
+    - [0x730AE0]
+  - name: strange_cake
+    dir: battle/item
     type: code
     start: 0x731300
     vram: 0x802A1000
     overlay: True
     subsegments:
-    - [0x731300,       c, lib]
-    - [0x731EA0,   .data, lib]
-    - [0x732470,     ci4, strange_cake1, 32, 32]
-    - [0x732670, palette, strange_cake1]
-    - [0x732690,     ci4, strange_cake2, 32, 32]
-    - [0x732890, palette, strange_cake2]
-    - [0x7328B0,     ci4, strange_cake3, 32, 32]
-    - [0x732AB0, palette, strange_cake3]
-    - [0x732AD0,   .data, strange_cake]
-    - [0x7330B0, .rodata, lib]
-  - dir: battle/item/food
+    - [0x731300, c, strange_cake]
+    - start: 0x731EA0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x731EA0, .data, strange_cake]
+      - [0x732470, ci4, strange_cake1, 32, 32]
+      - [0x732670, palette, strange_cake1]
+      - [0x732690, ci4, strange_cake2, 32, 32]
+      - [0x732890, palette, strange_cake2]
+      - [0x7328B0, ci4, strange_cake3, 32, 32]
+      - [0x732AB0, palette, strange_cake3]
+      - [0x732AD0]
+  - name: food
+    dir: battle/item
     type: code
     start: 0x7330D0
     vram: 0x802A1000
     overlay: True
-    subalign: 4
     subsegments:
-    - [0x7330D0,     c, lib]
-    - [0x733700, .data, lib]
-    - [0x733CBC, .data, food]
+    - [0x7330D0, c, food]
+    - [0x733700]
   - dir: battle/move/hammer
     type: code
     start: 0x7345A0
@@ -3836,7 +4148,7 @@ segments:
     overlay: True
     subsegments:
     - [0x743DF0, c]
-    - [0x743FE0, data]
+    - [0x743FF0, data]
   - dir: battle/move/sleep_stomp
     type: code
     start: 0x746E10
@@ -4012,7 +4324,7 @@ segments:
     overlay: True
     subsegments:
     - [0x779C90, c]
-    - [0x779E20, data]
+    - [0x779E30, data]
   - dir: battle/move/shrink_smash
     type: code
     start: 0x77CB80
@@ -4802,7 +5114,6 @@ segments:
     - [0x8DB2F0, data]
     - [0x8DC270, data]
     - [0x8DE400, data]
-    - [0x8DFB88, data]
     - [0x8DFBB0, data]
     - [0x8E0190, data]
     - [0x8EB190]
@@ -5011,7 +5322,7 @@ segments:
     subsegments:
     - [0x929270, c]
     - [0x9292B0, c]
-    - [0x9292D0, .data, "929270"]
+    - [0x9292D0, .data, 929270]
     - [0x929A00, .data, 9292B0]
     - [0x929A80]
   - name: sbk_01
@@ -6021,7 +6332,6 @@ segments:
     - [0x9C8350, data]
     - [0x9C8920, data]
     - [0x9C89E0, data]
-    - [0x9CB328, data]
     - [0x9D4EF0, data]
     - [0x9D5110, data]
     - [0x9D5BF0, data]
@@ -7211,7 +7521,6 @@ segments:
     - [0xAF7950, c]
     - [0xAF7C00, c]
     - [0xAF8660, data]
-    - [0xAF8808, data]
     - [0xAF8B40, data]
     - [0xAF9050, data]
     - [0xAF9460, data]
@@ -8254,8 +8563,8 @@ segments:
     - [0xC20C70]
     # rodata seemingly in 3 different parts:
     # dgb_00-18, 1x 32767.0, 2 jump tables
-    # "dgb_00", 2x 32767.0, jump table
-    # "dgb_08" only
+    # dgb_00, 2x 32767.0, jump table
+    # dgb_08 only
   - type: code
     start: 0xC20F40
     vram: 0x80200000
@@ -8925,7 +9234,6 @@ segments:
     - [0xD07440, data]
     - [0xD09570, data]
     - [0xD09AD0, data]
-    #- [0xD0C294, data]
     - [0xD10DA0, data]
     - [0xD110A0]
   - name: sam_03
@@ -10380,7 +10688,7 @@ segments:
   - [0x19E5950, Yay0]
   - [0x19E62A0, Yay0]
   - start: 0x19E67B8
-    type: PaperMarioNpcSprites
+    type: pm_npc_sprites
     dir: sprite
     name: npc
     files:
@@ -10619,7 +10927,7 @@ segments:
       - leaf
   - [0x1B82208, bin]
   - start: 0x1B83000
-    type: PaperMarioMessages
+    type: pm_msg
     files:
       - 00_introduction
       - 01_postgame_celebration
@@ -10671,7 +10979,7 @@ segments:
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - name: mapfs
-    type: PaperMarioMapFS
+    type: pm_map_data
     start: 0x1E40000
     files:
       - dro_01_shape

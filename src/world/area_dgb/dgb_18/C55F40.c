@@ -77,7 +77,7 @@ Script N(main) = SCRIPT({
     MakeNpcs(1, N(npcGroupList_802436B4));
     await N(makeEntities);
     spawn N(802412C0);
-    bind N(exitDoubleDoor_80241360) to TRIGGER_WALL_PRESS_A 17;
+    bind N(exitDoubleDoor_80241360) TRIGGER_WALL_PRESS_A 17;
     spawn N(enterDoubleDoor_80241414);
 });
 
@@ -724,7 +724,7 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
@@ -735,11 +735,11 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
         }
 
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
 
@@ -753,7 +753,7 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
         case 1:
@@ -801,11 +801,11 @@ ApiStatus N(func_80240EBC_C56DFC)(ScriptInstance* script, s32 isInitialCall) {
         posZ = npc->pos.z;
         npc->moveSpeed = 3.7f;
         npc->yaw = atan2(posX, posZ, playerStatus->position.x, playerStatus->position.z);
-        script->functionTemp[1].s = 0;
+        script->functionTemp[1] = 0;
         npc->duration = 15;
     }
 
-    if (script->functionTemp[1].s == 0) {
+    if (script->functionTemp[1] == 0) {
         if (npc->duration == 0) {
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             npc->duration = 15;

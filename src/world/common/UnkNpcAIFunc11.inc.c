@@ -11,13 +11,13 @@ void N(UnkNpcAIFunc11)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyT
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &something);
         npc->currentAnim.w = enemy->animList[0];
         npc->duration = 25;
-        script->functionTemp[0].s = 14;
+        script->functionTemp[0] = 14;
     } else {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         func_8003D660(npc, 1);
         npc->duration--;
         if (npc->duration == 0) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
         }
     }
 }

@@ -1,5 +1,8 @@
 #include "common.h"
 
+// TODO this is the bss for the whole segment - break it up
+static char bss[0xA0];
+
 INCLUDE_ASM(s32, "163400", mainmenu_draw_rect);
 
 INCLUDE_ASM(s32, "163400", filemenu_set_selected);

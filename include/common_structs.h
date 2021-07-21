@@ -27,6 +27,11 @@ typedef struct Vec2bu {
     /* 0x01 */ u8 y;
 } Vec2bu; // size = 0x02
 
+typedef struct Vec2f {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+} Vec2f; // size = 0x08
+
 typedef struct Vec3b {
     /* 0x00 */ s8 x;
     /* 0x01 */ s8 y;
@@ -49,6 +54,11 @@ typedef struct Vec2s {
     /* 0x00 */ s16 x;
     /* 0x02 */ s16 y;
 } Vec2s; // size = 0x04
+
+typedef struct Vec2su {
+    /* 0x00 */ u16 x;
+    /* 0x02 */ u16 y;
+} Vec2su; // size = 0x04
 
 typedef struct Vec3s {
     /* 0x00 */ s16 x;
@@ -213,14 +223,15 @@ typedef struct PlayerData {
     /* 0x28E */ s8 maxStarPower;
     /* 0x28F */ char unk_28F;
     /* 0x290 */ s16 specialBarsFilled;
-    /* 0x292 */ char unk_292[2];
+    /* 0x292 */ s8 unk_292;
+    /* 0x293 */ char unk_293[0x1];
     /* 0x294 */ s16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
     /* 0x298 */ s16 hitsTaken;
     /* 0x29A */ s16 hitsBlocked;
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
-    /* 0x2A0 */ s16 powerBounces;
+    /* 0x2A0 */ u16 powerBounces;
     /* 0x2A2 */ s16 battlesCount;
     /* 0x2A4 */ s16 unk_2A4[4];
     /* 0x2AC */ s32 unk_2AC;
@@ -293,7 +304,7 @@ typedef struct ScriptInstance {
     /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
     /* 0x068 */ struct ScriptInstance* childScript;
     /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
-    /* 0x070 */ X32 functionTemp[4];
+    /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
     /* 0x0C4 */ s32 varFlags[3];
@@ -513,7 +524,7 @@ typedef struct CameraInitData {
 } CameraInitData; // size = 0x12;
 
 typedef struct Camera {
-    /* 0x000 */ s16 flags;
+    /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
     /* 0x006 */ s16 unk_06;
@@ -534,7 +545,7 @@ typedef struct Camera {
     /* 0x026 */ s16 unk_26;
     /* 0x028 */ s16 unk_28;
     /* 0x02A */ s16 zoomPercent;
-    /* 0x02C */ s16 backgroundColor[3];
+    /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
     /* 0x038 */ s16 perspNorm;
     /* 0x03A */ char unk_3A[2];
@@ -653,7 +664,7 @@ typedef struct BattleStatus {
     /* 0x087 */ s8 blockResult; /* 0 = fail, 1 = success, -1 = mashed */
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
-    /* 0x08A */ char unk_8A;
+    /* 0x08A */ s8 unk_8A;
     /* 0x08B */ u8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
@@ -695,7 +706,7 @@ typedef struct BattleStatus {
     /* 0x0E0 */ struct Actor* enemyActors[24];
     /* 0x140 */ s16 enemyIDs[24];
     /* 0x170 */ char unk_170;
-    /* 0x171 */ u8 numEnemyActors;
+    /* 0x171 */ s8 numEnemyActors;
     /* 0x172 */ char unk_172[6];
     /* 0x178 */ s8 moveCategory;
     /* 0x179 */ char unk_179;
@@ -748,22 +759,7 @@ typedef struct BattleStatus {
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
     /* 0x45B */ char unk_45B[5];
-    /* 0x460 */ s32 unk_460;
-    /* 0x464 */ s32 unk_464;
-    /* 0x468 */ s32 unk_468;
-    /* 0x46C */ s32 battleState; /* 0 = load assets, 1 = create actors, 4 = start scripts, 7 & 8 = unk */
-    /* 0x470 */ s32 unk_470;
-    /* 0x474 */ s32 unk_474;
-    /* 0x478 */ s8 unk_478;
-    /* 0x479 */ char unk_479;
-    /* 0x47A */ u8 currentBattleSection;
-    /* 0x47B */ u8 unk_47B;
-    /* 0x47C */ s32 unk_47C;
-    /* 0x480 */ s32 unk_480;
-    /* 0x484 */ s32 unk_484;
-    /* 0x488 */ s32 unk_488;
-    /* 0x48C */ struct BattleList* unk_48C;
-} BattleStatus; // size = 0x490
+} BattleStatus; // size = 0x460
 
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
@@ -884,7 +880,7 @@ typedef struct AnimatedMesh {
 typedef AnimatedMesh* AnimatedMeshList[MAX_ANIMATED_MESHES];
 
 typedef struct EffectInstanceData {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ struct EffectInstanceDataThing* unk_00;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
@@ -1057,39 +1053,163 @@ typedef struct SpriteComponent {
     /* 0x4C */ char unk_4C[4];
 } SpriteComponent; // size = 0x50
 
-typedef struct PrintContext {
-    /* 0x000 */ s8* string;
-    /* 0x004 */ s16 bufPos;
+typedef struct MessagePrintState {
+    /* 0x000 */ s8* srcBuffer;
+    /* 0x004 */ s16 printBufferPos;
     /* 0x006 */ char unk_06[2];
     /* 0x008 */ s32 stringID;
-    /* 0x00C */ char unk_0C[4];
-    /* 0x010 */ u8 buffer[1024];
-    /* 0x410 */ char unk_410[68];
+    /* 0x00C */ s16 srcBufferPos;
+    /* 0x00E */ s16 currentPrintDelay;
+    /* 0x010 */ u8 printBuffer[1088]; // slightly larger than source buffer
+    /* 0x450 */ s16 printBufferSize;
+    /* 0x452 */ u16 effectFrameCounter;
     /* 0x454 */ u8 font;
-    /* 0x455 */ char unk_455;
-    /* 0x456 */ s16 startPosX;
-    /* 0x458 */ s16 startPosY;
-    /* 0x45A */ char unk_45A[45];
+    /* 0x455 */ s8 fontVariant;
+    /* 0x456 */ Vec2s windowOffsetPos; // offset from baseWindowPos. used to animated window pos?
+    /* 0x45A */ Vec2s windowBasePos; // ex: set by the parameters for choice style
+    /* 0x45E */ s8 printDelayTime; // delay to print each chunk
+    /* 0x45F */ s8 charsPerChunk; // how many chars to print at once
+    /* 0x460 */ s32 curLinePos; // position along current line
+    /* 0x464 */ s8 unk_464;
+    /* 0x465 */ char unk_465;
+    /* 0x466 */ s16 nextLinePos; // ?
+    /* 0x468 */ s8 lineCount;
+    /* 0x469 */ char unk_469[0x3];
+    /* 0x46C */ s32 unk_46C;
+    /* 0x470 */ s8 currentAnimFrame[4];
+    /* 0x474 */ s16 animTimers[4];
+    /* 0x47C */ s8 rewindArrowAnimState;
+    /* 0x47D */ char unk_47D[0x1];
+    /* 0x47E */ s16 rewindArrowBlinkCounter;
+    /* 0x480 */ s16 unk_480;
+    /* 0x482 */ Vec2s rewindArrowPos;
+    /* 0x486 */ s8 currentLine;
     /* 0x487 */ u8 unkArraySize;
-    /* 0x488 */ s16 unkArrayunkLength[4];
-    /* 0x490 */ char unk_490[0x58];
+    /* 0x488 */ s16 lineEndPos[4];
+    /* 0x490 */ char unk_490[0x38];
+    /* 0x4C8 */ s16 unk_4C8;
+    /* 0x4CA */ s16 unk_4CA;
+    /* 0x4CC */ s16 unk_4CC;
+    /* 0x4CE */ s8 maxOption;
+    /* 0x4CF */ char unk_4CF[0x1];
+    /* 0x4D0 */ s16 cursorPosX[6];
+    /* 0x4DC */ s16 cursorPosY[6];
     /* 0x4E8 */ u8 currentOption;
-    /* 0x4E9 */ char unk_4E9[19];
+    /* 0x4E9 */ s8 madeChoice;
+    /* 0x4EA */ u8 cancelOption;
+    /* 0x4EB */ char unk_4EB[0x1];
+    /* 0x4EC */ s8 targetOption;
+    /* 0x4ED */ s8 unkCounter;
+    /* 0x4EE */ s8 selectedOption;
+    /* 0x4EF */ char unk_4EF[0x9];
+    /* 0x4F8 */ u8 windowState;
+    /* 0x4F9 */ char unk_4F9[0x3];
     /* 0x4FC */ s32 stateFlags;
-    /* 0x500 */ char unk_500[9];
-    /* 0x509 */ u8 lerpElpasedTime;
-    /* 0x50A */ s16 startX;
-    /* 0x50C */ s16 startY;
-    /* 0x50E */ char unk_50E[6];
-    /* 0x514 */ s16 sizeY;
-    /* 0x516 */ s16 sizeX;
-    /* 0x518 */ char unk_518[19];
+    /* 0x500 */ s16 delayFlags; // ?
+    /* 0x502 */ char unk_502[0x2];
+    /* 0x504 */ s32* closedWritebackBool; // if not null, writes 1 here when message closes
+    /* 0x508 */ s8 style;
+    /* 0x509 */ u8 fadeInCounter;
+    /* 0x50A */ Vec2s initOpenPos; // where the message originates from, in screen-space coords
+    /* 0x50E */ Vec2s openStartPos;
+    /* 0x512 */ u8 fadeOutCounter;
+    /* 0x513 */ char unk_513[0x1];
+    /* 0x514 */ Vec2su windowSize;
+    /* 0x518 */ s8 speechSoundType;
+    /* 0x519 */ u8 volume;
+    /* 0x51A */ s8 speechPan; // just pan?
+    /* 0x51B */ char unk_51B[0x1];
+    /* 0x51C */ u16 speechVolumePitch;
+    /* 0x51E */ char unk_51E[0x2];
+    /* 0x520 */ s32 speedSoundIDA;
+    /* 0x524 */ s32 speedSoundIDB;
+    /* 0x528 */ s16 varBufferReadPos;
+    /* 0x52A */ s8 unk_52A;
     /* 0x52B */ u8 currentImageIndex;
-    /* 0x52C */ char unk_52C[10];
-    /* 0x536 */ s16 height;
-    /* 0x538 */ s16 width;
-    /* 0x53A */ char unk_53A[30];
-} PrintContext; // size = 0x558
+    /* 0x52C */ Vec2s varImageScreenPos; // in addition, posX=0 is taken as 'dont draw'
+    /* 0x530 */ s8 varImgHasBorder;
+    /* 0x531 */ u8 varImgFinalAlpha;
+    /* 0x532 */ s8 varImgAlphaFadeStep; // how much to fade in per frame
+    /* 0x533 */ s8 varImageDisplayState; // 0 = fade in, 1 = fully visible, 2 = fade out
+    /* 0x534 */ s16 varImageFadeTimer; // frames faded in
+    /* 0x536 */ s16 stringHeight;
+    /* 0x538 */ s16 stringWidth;
+    /* 0x53A */ s8 maxLineChars;
+    /* 0x53B */ s8 numLines;
+    /* 0x53C */ s8 maxLinesPerPage;
+    /* 0x53D */ char unk_53D[0x3];
+    /* 0x540 */ f32 sizeScale;
+    /* 0x544 */ s32* letterBackgroundImg;
+    /* 0x548 */ s32* letterBackgroundPal;
+    /* 0x54C */ s32* letterContentImg;
+    /* 0x550 */ s32* letterContentPal;
+    /* 0x554 */ char unk_554[0x4];
+} MessagePrintState; // size = 0x558
+
+typedef struct MessageDrawState {
+    /* 0x00 */ s32 clipX[2]; // characters beyond this pos get skipped
+    /* 0x08 */ s32 clipY[2]; // characters beyond this pos get skipped
+    /* 0x10 */ Vec2f stringScale;
+    /* 0x18 */ Vec2f charScale;
+    /* 0x20 */ s32 drawBufferPos; // string gets printed here and read for display
+    /* 0x24 */ s16 savedPos[2];
+    /* 0x28 */ s8 savedColor;
+    /* 0x29 */ u8 unk_29;
+    /* 0x2A */ char unk_2A[0x1];
+    /* 0x2B */ s8 framePalette;
+    /* 0x2C */ s8 unk_2C;
+    /* 0x2D */ char unk_2D[0x1];
+    /* 0x2E */ s8 centerPos;
+    /* 0x2F */ char unk_2F[0x1];
+    /* 0x30 */ s32 visiblePrintedCount;
+    /* 0x34 */ s16 printModeFlags; // C0 = center, 10 = drawing image
+    /* 0x36 */ char unk_36[0x2];
+    /* 0x38 */ s32 effectFlags;
+    /* 0x3C */ s16 font; // 0 or 1
+    /* 0x3E */ s16 fontVariant;
+    /* 0x40 */ s16 currentPosX;
+    /* 0x42 */ s16 nextPos[2];
+    /* 0x46 */ s16 textStartPos[2]; // relative to textbox
+    /* 0x4A */ s16 textColor;
+    /* 0x4C */ s8* printBuffer;
+    /* 0x50 */ s8 nextCounter; // related to closing mssages and cmd FA
+    /* 0x51 */ char unk_51[0x3];
+} MessageDrawState; // size = 0x54
+
+typedef struct MessageCharData {
+    /* 0x0 */ s8* raster;
+    /* 0x4 */ u8* charWidthTable;
+    /* 0x8 */ u8 monospaceWidth;
+    /* 0x9 */ s8 baseHeightOffset;
+    /* 0xA */ char unk_0A[0x2];
+} MessageCharData; // size = 0xC
+
+typedef struct MessageCharset {
+    /* 0x0 */ Vec2b texSize;
+    /* 0x2 */ s8 unk_02;
+    /* 0x3 */ s8 newLineY;
+    /* 0x4 */ s16 charRasterSize; // in bytes
+    /* 0x6 */ char unk_06[0x2];
+    /* 0x8 */ MessageCharData* rasters;
+} MessageCharset; // size = 0xA;
+
+typedef struct MesasgeFontGlyphData {
+    /* 0x0 */ s8* raster;
+    /* 0x4 */ s16* palette;
+    /* 0x8 */ Vec2b texSize;
+    /* 0xA */ s8 charWidth;
+    /* 0xB */ s8 charHeight;
+} MesasgeFontGlyphData; // size = 0xC
+
+typedef struct MessageNumber {
+    /* 0x00 */ s32* rasters;
+    /* 0x04 */ s8 texSize;
+    /* 0x05 */ u8 texWidth;
+    /* 0x06 */ u8 texHeight;
+    /* 0x07 */ s8 digitWidth[10];
+    /* 0x11 */ s8 fixedWidth;
+    /* 0x12 */ char unk_12[0x2];
+} MessageNumber; // size = 0x14
 
 typedef struct ShopItemEntity {
     /* 0x00 */ s32 index;
@@ -1168,7 +1288,8 @@ typedef struct GameStatus {
     /* 0x0B8 */ s16 bootBlue;
     /* 0x0BA */ s16 bootGreen;
     /* 0x0BC */ s16 bootRed;
-    /* 0x0BE */ char unk_BE[106];
+    /* 0x0BE */ char unk_BE[94];
+    /* 0x11C */ Vec3f unk_11C;
     /* 0x128 */ Vec3f playerTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
@@ -1291,7 +1412,7 @@ typedef struct ActorPart {
     /* 0x68 */ s16 unkOffset[2];
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
-    /* 0x72 */ u8 size[2];
+    /* 0x72 */ Vec2bu size;
     /* 0x74 */ u8 verticalStretch;
     /* 0x75 */ s8 unk_75;
     /* 0x76 */ s8 unk_76;
@@ -1639,7 +1760,7 @@ typedef struct Actor {
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
     /* 0x204 */ char unk_204[3];
-    /* 0x207 */ u8 extraCoinBonus;
+    /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 unk_208;
     /* 0x209 */ char unk_209[3];
     /* 0x20C */ u32* statusTable;

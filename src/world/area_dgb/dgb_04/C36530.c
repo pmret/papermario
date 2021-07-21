@@ -96,8 +96,8 @@ Script N(main) = SCRIPT({
         MakeNpcs(1, N(npcGroupList_80243D18));
     }
     await N(makeEntities);
-    bind N(exitSingleDoor_80243210) to TRIGGER_WALL_PRESS_A 16;
-    bind N(exitDoubleDoor_802432C4) to TRIGGER_WALL_PRESS_A 20;
+    bind N(exitSingleDoor_80243210) TRIGGER_WALL_PRESS_A 16;
+    bind N(exitDoubleDoor_802432C4) TRIGGER_WALL_PRESS_A 20;
     spawn N(80243170);
     spawn N(enterSingleDoor_80243378);
 });
@@ -486,22 +486,22 @@ void N(func_802401B0_C366E0)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     if (enemy->varTable[9] <= 0) {
         if (aiSettings->unk_14 >= 0) {
-            if (script->functionTemp[1].s <= 0) {
-                script->functionTemp[1].s = aiSettings->unk_14;
+            if (script->functionTemp[1] <= 0) {
+                script->functionTemp[1] = aiSettings->unk_14;
                 if ((gPlayerStatusPtr->position.y < ((npc->pos.y + npc->collisionHeight) + 10.0)) &&
                     func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0)) {
                     fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, 0x2F4, 0x200000);
                     if (enemy->npcSettings->unk_2A & 1) {
-                        script->functionTemp[0].s = 10;
+                        script->functionTemp[0] = 10;
                     } else {
-                        script->functionTemp[0].s = 12;
+                        script->functionTemp[0] = 12;
                     }
                     return;
                 }
             }
-            script->functionTemp[1].s--;
+            script->functionTemp[1]--;
         }
     } else {
         enemy->varTable[9]--;
@@ -529,10 +529,10 @@ void N(func_802401B0_C366E0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     enemy->varTable[4] = npc->pos.y * 100.0;
     if (aiSettings->moveTime > 0) {
         if ((npc->duration <= 0) || (--npc->duration <= 0)) {
-            script->functionTemp[0].s = 2;
-            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1].s < 3)) {
-                script->functionTemp[0].s = 0;
+            script->functionTemp[0] = 2;
+            script->functionTemp[1] = (rand_int(1000) % 3) + 2;
+            if ((aiSettings->unk_2C <= 0) || (aiSettings->waitTime <= 0) || (script->functionTemp[1] < 3)) {
+                script->functionTemp[0] = 0;
             }
         }
     }
@@ -554,7 +554,7 @@ void N(func_80240C54_C37184)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->pos.y += N(D_80243560_C39A90)[npc->duration++];
     if (npc->duration >= 5) {
-        script->functionTemp[0].s = 12;
+        script->functionTemp[0] = 12;
     }
 }
 
@@ -596,7 +596,7 @@ ApiStatus N(func_8024130C_C3783C)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
         case 1:
@@ -648,7 +648,7 @@ void N(func_802414F8_C37A28)(ScriptInstance* script, NpcAISettings* aiSettings, 
             }
         }
         npc->yaw = clamp_angle(phi_f20);
-        script->functionTemp[0].s = 13;
+        script->functionTemp[0] = 13;
     }
 }
 
@@ -661,16 +661,16 @@ void N(func_80241650_C37B80)(ScriptInstance* script, NpcAISettings* aiSettings, 
         if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
                    gPlayerStatusPtr->position.z) <= (npc->moveSpeed * 2.5)) {
             npc->duration = 0;
-            script->functionTemp[0].s = 14;
+            script->functionTemp[0] = 14;
         } else {
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags |= 0x200000;
-                script->functionTemp[0].s = 12;
+                script->functionTemp[0] = 12;
             }
         }
     } else {
-        script->functionTemp[0].s = 16;
+        script->functionTemp[0] = 16;
     }
 
 }
@@ -686,7 +686,7 @@ void N(func_80241754_C37C84)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
     sfx_play_sound_at_position(0x80000011, 2, npc->pos.x, npc->pos.y, npc->pos.z);
     npc->duration = 0;
-    script->functionTemp[0].s = 15;
+    script->functionTemp[0] = 15;
 }
 
 void N(func_802417F8_C37D28)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -700,7 +700,7 @@ void N(func_802417F8_C37D28)(ScriptInstance* script, NpcAISettings* aiSettings, 
         enemy->varTable[0] &= ~0x100;
         npc->rotation.y = 0.0f;
         npc->flags &= ~0x00200000;
-        script->functionTemp[0].s = 16;
+        script->functionTemp[0] = 16;
     } else {
         npc->pos.x = gPlayerStatusPtr->position.x;
         npc->pos.z = gPlayerStatusPtr->position.z + 2.0f;
@@ -725,9 +725,9 @@ void N(func_802417F8_C37D28)(ScriptInstance* script, NpcAISettings* aiSettings, 
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
-                script->functionTemp[0].s = 20;
+                script->functionTemp[0] = 20;
             } else {
-                script->functionTemp[0].s = 16;
+                script->functionTemp[0] = 16;
             }
         }
     }
@@ -745,7 +745,7 @@ void N(func_80241A94_C37FC4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
     npc->currentAnim.w = enemy->animList[9];
     npc->duration = 20;
-    script->functionTemp[0].s = 17;
+    script->functionTemp[0] = 17;
 }
 
 void N(func_80241B4C_C3807C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -767,7 +767,7 @@ void N(func_80241B4C_C3807C)(ScriptInstance* script, NpcAISettings* aiSettings, 
         npc->pos.y = posY + temp_f20;
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &var);
         npc->duration = 10;
-        script->functionTemp[0].s = 18;
+        script->functionTemp[0] = 18;
     }
 }
 
@@ -777,7 +777,7 @@ void N(func_80241CCC_C381FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration--;
     if (npc->duration <= 0) {
-        script->functionTemp[0].s = 30;
+        script->functionTemp[0] = 30;
     }
 }
 
@@ -789,11 +789,11 @@ void N(func_80241D14_C38244)(ScriptInstance* script, NpcAISettings* aiSettings, 
     if (npc->duration >= 3) {
         if (D_8010EBB0.unk_03 != 9) {
             npc->duration = 0;
-            script->functionTemp[0].s = 100;
+            script->functionTemp[0] = 100;
         } else {
             enable_player_input();
             partner_enable_input();
-            script->functionTemp[0].s = 16;
+            script->functionTemp[0] = 16;
         }
     }
 }
@@ -807,7 +807,7 @@ void N(func_80241D94_C382C4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     npc->moveSpeed = 2.0 * aiSettings->moveSpeed;
     enemy->varTable[2] = 0;
     enemy->varTable[4] = npc->pos.y * 100.0;
-    script->functionTemp[1].s = 0x1E;
+    script->functionTemp[1] = 0x1E;
 }
 
 void N(func_80241E3C_C3836C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
@@ -831,25 +831,25 @@ void N(func_80241E3C_C3836C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 
     enemy->varTable[2] = clamp_angle(enemy->varTable[2] + 12);
-    if (script->functionTemp[1].s <= 0) {
-        script->functionTemp[1].s = aiSettings->unk_14;
+    if (script->functionTemp[1] <= 0) {
+        script->functionTemp[1] = aiSettings->unk_14;
         if (func_800490B4(territory, enemy, aiSettings->alertRadius * 0.5, aiSettings->unk_10.f * 0.5, 0)) {
             fx_emote(0, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             ai_enemy_play_sound(npc, 0x2F4, 0x200000);
             npc->moveToPos.y = npc->pos.y;
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             return;
         }
     }
 
-    script->functionTemp[1].s--;
+    script->functionTemp[1]--;
     if (npc->turnAroundYawAdjustment == 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         posW = dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.point.x, enemy->territory->wander.point.z);
         if (posW <= (2.0f * npc->moveSpeed)) {
-            script->functionTemp[1].s = (rand_int(1000) % 3) + 2;
-            script->functionTemp[0].s = 2;
+            script->functionTemp[1] = (rand_int(1000) % 3) + 2;
+            script->functionTemp[0] = 2;
         }
     }
 }
@@ -872,17 +872,17 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance* script, s32 isInitialCall) {
     territory.unk_1C = 0;
 
     if (isInitialCall) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         N(UnkFunc5)(npc, enemy, script, aiSettings);
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             N(UnkNpcAIFunc23)(script, aiSettings, territoryPtr);
             func_802DE894(npc->spriteInstanceID, 0, 0, 0, 0, 0, 0);
         case 1:
             N(func_802401B0_C366E0)(script, aiSettings, territoryPtr);
-            if (script->functionTemp[0].s == 12) {
+            if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
             break;
@@ -890,13 +890,13 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance* script, s32 isInitialCall) {
             N(UnkNpcAIFunc1)(script, aiSettings, territoryPtr);
         case 3:
             N(UnkFunc4)(script, aiSettings, territoryPtr);
-            if (script->functionTemp[0].s == 12) {
+            if (script->functionTemp[0] == 12) {
                 npc->duration = 6;
             }
             break;
         case 12:
             N(func_802414F8_C37A28)(script, aiSettings, territoryPtr);
-            if (script->functionTemp[0].s != 13) {
+            if (script->functionTemp[0] != 13) {
                 break;
             }
         case 13:
@@ -904,7 +904,7 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance* script, s32 isInitialCall) {
             break;
         case 14:
             N(func_80241754_C37C84)(script, aiSettings, territoryPtr);
-            if (script->functionTemp[0].s != 15) {
+            if (script->functionTemp[0] != 15) {
                 break;
             }
         case 15:
@@ -927,7 +927,7 @@ ApiStatus N(func_80242154_C38684)(ScriptInstance* script, s32 isInitialCall) {
             N(func_80241E3C_C3836C)(script, aiSettings, territoryPtr);
     }
 
-    return (script->functionTemp[0].s == 100) * ApiStatus_DONE2;
+    return (script->functionTemp[0] == 100) * ApiStatus_DONE2;
 }
 
 #include "world/common/SetOverrideFlags_40.inc.c"
@@ -973,8 +973,8 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance* script, s32 isInitialCall) {
     s32 idx;
 
     if (isInitialCall) {
-        script->functionTemp[2].s = heap_malloc(0x330);
-        ptr = script->functionTemp[2].s;
+        script->functionTemp[2] = heap_malloc(0x330);
+        ptr = script->functionTemp[2];
 
         partnerActiveCount = 0;
         var = script->varTable[12] >= 0;
@@ -1004,34 +1004,34 @@ ApiStatus N(func_8024259C_C38ACC)(ScriptInstance* script, s32 isInitialCall) {
         ptr->unk_324 = partnerActiveCount;
         ptr->unk_328 = 0;
         create_popup_menu(ptr);
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
     }
 
-    ptr = script->functionTemp[2].s;
-    if (script->functionTemp[0].s == 0) {
-        script->functionTemp[1].s = ptr->unk_32C;
-        if (script->functionTemp[1].s != 0) {
+    ptr = script->functionTemp[2];
+    if (script->functionTemp[0] == 0) {
+        script->functionTemp[1] = ptr->unk_32C;
+        if (script->functionTemp[1] != 0) {
             hide_popup_menu();
         } else {
             return ApiStatus_BLOCK;
         }
     }
 
-    script->functionTemp[0].s++;
+    script->functionTemp[0]++;
 
-    if (script->functionTemp[0].s < 15) {
+    if (script->functionTemp[0] < 15) {
         return ApiStatus_BLOCK;
     }
 
     destroy_popup_menu();
-    if (script->functionTemp[1].s != 0xFF) {
-        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1].s - 1]][0];
-        script->varTable[1] = ptr->unk_108[script->functionTemp[1].s - 1];
+    if (script->functionTemp[1] != 0xFF) {
+        script->varTable[0] = D_8008EF20[ptr->unk_108[script->functionTemp[1] - 1]][0];
+        script->varTable[1] = ptr->unk_108[script->functionTemp[1] - 1];
     } else {
         script->varTable[0] = -1;
     }
 
-    heap_free(script->functionTemp[2].s);
+    heap_free(script->functionTemp[2]);
 
     return ApiStatus_DONE2;
 }
@@ -1202,42 +1202,42 @@ s32 N(func_80242F08_C39438)(ScriptInstance* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->varTable[0] = get_variable(script, *args++);
         script->varTable[1] = get_variable(script, *args++);
-        script->functionTemp[0].s = 0;
-        script->functionTemp[1].s = 0;
+        script->functionTemp[0] = 0;
+        script->functionTemp[1] = 0;
         set_screen_overlay_color(0, 0xD0, 0xD0, 0xD0);
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
-            if (script->functionTemp[1].s == 0xFF) {
-                script->functionTemp[0].s = 1;
-                script->functionTemp[2].s = 0;
+            if (script->functionTemp[1] == 0xFF) {
+                script->functionTemp[0] = 1;
+                script->functionTemp[2] = 0;
             }
-            script->functionTemp[1].s += script->varTable[0];
-            if (script->functionTemp[1].s >= 0x100) {
-                script->functionTemp[1].s = 0xFF;
+            script->functionTemp[1] += script->varTable[0];
+            if (script->functionTemp[1] >= 0x100) {
+                script->functionTemp[1] = 0xFF;
             }
             break;
 
         case 1:
-            script->functionTemp[2].s++;
-            if (script->functionTemp[2].s >= 2) {
-                script->functionTemp[0].s = 2;
+            script->functionTemp[2]++;
+            if (script->functionTemp[2] >= 2) {
+                script->functionTemp[0] = 2;
             }
             break;
 
         case 2:
-            if (script->functionTemp[1].s == 0) {
+            if (script->functionTemp[1] == 0) {
                 ret = 1;
             }
-            script->functionTemp[1].s -= script->varTable[1];
-            if (script->functionTemp[1].s < 0) {
-                script->functionTemp[1].s = 0;
+            script->functionTemp[1] -= script->varTable[1];
+            if (script->functionTemp[1] < 0) {
+                script->functionTemp[1] = 0;
             }
             break;
     }
 
-    set_screen_overlay_params_front(1, script->functionTemp[1].s);
+    set_screen_overlay_params_front(1, script->functionTemp[1]);
 
     return ret;
 }

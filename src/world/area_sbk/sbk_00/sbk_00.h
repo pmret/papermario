@@ -3,4 +3,6 @@
 
 #define NAMESPACE sbk_00
 
-Script N(makeEntities);
+extern Script N(main);
+extern NpcGroupList N(npcGroupList_80240768);
+extern Script N(makeEntities);

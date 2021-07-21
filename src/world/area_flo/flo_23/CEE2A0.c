@@ -81,8 +81,8 @@ Script N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
 Script N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
 
 Script N(80241104) = SCRIPT({
-    bind N(exitWalk_802410A8) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_8024104C) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_802410A8) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_8024104C) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
@@ -151,13 +151,11 @@ Script N(80241314) = SCRIPT({
     unbind;
 });
 
-Script N(80241448) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_802402F8_CEE558), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241314), 0x10, 0, N(D_802426E0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_8024026C_CEE4CC), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(80241448) = SCRIPT({
+    N(func_802402F8_CEE558)(SI_VAR(0));
+    bind_padlock N(80241314) 0x10 0 0x802426E0; // TODO: fix raw ptr
+    N(func_8024026C_CEE4CC)(SI_VAR(0));
+});
 
 NpcAISettings N(npcAISettings_80241498) = {
     .moveSpeed = 1.5f,
@@ -537,7 +535,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     if (isInitialCall || (enemy->unk_B0 & 4)) {
-        script->functionTemp[0].s = 0;
+        script->functionTemp[0] = 0;
         npc->duration = 0;
         enemy->unk_07 = 0;
         npc->currentAnim.w = enemy->animList[0];
@@ -550,12 +548,12 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
             npc->flags = (npc->flags & ~0x200) | 8;
         }
         if (enemy->unk_B0 & 4) {
-            script->functionTemp[0].s = 99;
-            script->functionTemp[1].s = 0;
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &var);
             enemy->unk_B0 &= ~4;
         } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0].s = 12;
+            script->functionTemp[0] = 12;
             enemy->flags &= ~0x40000000;
         }
     }
@@ -571,7 +569,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    switch (script->functionTemp[0].s) {
+    switch (script->functionTemp[0]) {
         case 0:
             func_800495A0(script, aiSettings, territoryPtr);
             npc->collisionHeight = enemy->varTable[6];

@@ -3,35 +3,18 @@
 #include "map.h"
 #include "nu/nusys.h"
 
-Gfx D_80077908[] = {
-    gsDPPipeSync(),
-    gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetTexturePersp(G_TP_NONE),
-    gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetCombineMode(G_CC_DECALRGB, G_CC_DECALRGB),
-    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetTextureFilter(G_TF_POINT),
-    gsSPEndDisplayList(),
-};
-
-// probably a file split
-static s32 padding[] = {0, 0};
-
 s32 D_80077950[] = { 0x8038F800, 0x803B5000, &D_803DA800 };
 
-// TODO the gPauseMenuIconScripts should be DATA_START
-// TODO the gPauseMenuHeldButtons should be BSS_START
-// TODO 80278640 is BSS_END
 NUPiOverlaySegment D_8007795C = {
     .romStart = pause_ROM_START,
     .romEnd = pause_ROM_END,
     .ramStart = pause_VRAM,
-    .textStart = pause_VRAM,
-    .textEnd = gPauseMenuIconScripts,
-    .dataStart = gPauseMenuIconScripts,
-    .dataEnd = &gPauseMenuHeldButtons,
-    .bssStart = &gPauseMenuHeldButtons,
-    .bssEnd = 0x80278640
+    .textStart = pause_TEXT_START,
+    .textEnd = pause_TEXT_END,
+    .dataStart = pause_DATA_START,
+    .dataEnd = pause_DATA_END,
+    .bssStart = pause_BSS_START,
+    .bssEnd = pause_BSS_END,
 };
 
 void state_init_pause(void) {
@@ -176,7 +159,7 @@ void state_step_unpause(void) {
                         func_801497FC(D_800A0924);
                         bgm_reset_max_volume();
                         load_map_script_lib();
-                        assetData = load_asset_by_name(&D_800D9230, &assetSize);
+                        assetData = load_asset_by_name(&mapShapeName, &assetSize);
                         decode_yay0(assetData, &D_80210000);
                         general_heap_free(assetData);
                         initialize_collision();

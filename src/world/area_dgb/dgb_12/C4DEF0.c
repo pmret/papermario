@@ -65,7 +65,7 @@ Script N(main) = SCRIPT({
     await N(makeEntities);
     spawn N(802405E0);
     spawn N(80240310);
-    bind N(exitSingleDoor_802403B0) to TRIGGER_WALL_PRESS_A 8;
+    bind N(exitSingleDoor_802403B0) TRIGGER_WALL_PRESS_A 8;
     spawn N(enterSingleDoor_80240464);
 });
 

@@ -2,8 +2,6 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-// TODO: timeFreezeMode is probably bss here
-
 s8 D_80074020 = 1;
 s8 D_80074021 = 5;
 
@@ -38,6 +36,9 @@ Gfx D_80074230[] = {
     gsSPTexture(0, 0, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
+
+// BSS
+extern s32 timeFreezeMode BSS;
 
 extern s16 D_8009A690;
 
@@ -349,7 +350,17 @@ void gfx_init_state(void) {
     gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
-INCLUDE_ASM(s32, "main_loop", func_800271FC);
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
+s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 x, s32 y, u8* out) {
+    s32 pixel = (x * SCREEN_WIDTH) + y;
+
+    out[3] = (framebuf2[pixel] >> 2) & 0xF;
+    out[0] = framebuf1[pixel] >> 11; // red
+    out[1] = (framebuf1[pixel] >> 6) & 0x1F; // green
+    out[2] = (framebuf1[pixel] >> 1) & 0x1F; // blue
+}
 
 INCLUDE_ASM(s32, "main_loop", func_8002725C);
 
@@ -357,7 +368,45 @@ INCLUDE_ASM(s32, "main_loop", func_80027600);
 
 INCLUDE_ASM(s32, "main_loop", func_80027774);
 
+// alex: mystery t0=SCREEN_WIDTH temp and weirdness with the `pixel` calculation
+#ifdef NON_MATCHING
+void func_800279B4(const u16* framebuf1, u16* framebuf2, u16* arg2) {
+    s32 x;
+    s32 y;
+    s32 subroutine_argE;
+    s32 subroutine_arg7;
+    s32 subroutine_arg8;
+    s32 subroutine_arg9;
+    s32 subroutine_argA;
+    s32 subroutine_argB;
+    s32 subroutine_argC;
+    s32 subroutine_argF;
+
+    for (y = 1; y < SCREEN_HEIGHT - 1; y++) {
+        for (x = 2; x < SCREEN_WIDTH - 2; x++) {
+            s32 pixel = (subroutine_argF + x) * 2;
+
+            // Wii U VC changes this condition to FALSE to fix pause menu lag
+            if (((framebuf2[pixel] >> 2) & 0xF) < 8) {
+                func_800271FC(framebuf1, framebuf2, y - 1, x - 1, &subroutine_argE);
+                func_800271FC(framebuf1, framebuf2, y - 1, x + 1, &subroutine_arg7);
+                func_800271FC(framebuf1, framebuf2, y,     x - 2, &subroutine_arg8);
+                func_800271FC(framebuf1, framebuf2, y,     x + 2, &subroutine_arg9);
+                func_800271FC(framebuf1, framebuf2, y + 1, x - 1, &subroutine_argA);
+                func_800271FC(framebuf1, framebuf2, y + 1, x + 1, &subroutine_argB);
+                func_800271FC(framebuf1, framebuf2, y,     x,     &subroutine_argC);
+
+                func_8002725C(&subroutine_argE, (subroutine_argC << 24) | (subroutine_argC << 16) | (subroutine_argC << 8) | subroutine_argC, &framebuf2[pixel]);
+            } else {
+                // Edge
+                framebuf2[pixel] = framebuf1[pixel] | 1;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "main_loop", func_800279B4);
+#endif
 
 void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;
@@ -389,4 +438,183 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(void, "main_loop", gfx_draw_background);
+void gfx_draw_background(void) {
+    Camera* camera;
+    s32 bgFlags;
+    s32 backgroundMinW;
+    s32 backgroundSumW;
+    s32 backgroundMinH;
+    s32 backgroundSumH;
+    s32 viewportStartX;
+    s32 i;
+    s32 a = 0x18;
+
+    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+
+    camera = &gCameras[gCurrentCameraID];
+    bgFlags = gGameStatusPtr->enableBackground & 0xF0;
+
+    switch (bgFlags) {
+        case 0x10:
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_8009A658[1]);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            gDPSetBlendColor(gMasterGfxPos++, 0x80, 0x80, 0x80, 0xFF);
+            gDPSetPrimDepth(gMasterGfxPos++, -1, -1);
+            gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_VISCVG, G_RM_VISCVG2);
+            gDPFillRectangle(gMasterGfxPos++, 0, 0, 320, 240);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
+            gGameStatusPtr->enableBackground &= ~0xF0;
+            gGameStatusPtr->enableBackground |= 0x20;
+            break;
+        case 0x20:
+            func_800279B4(D_8009A658[0], D_8009A658[1], nuGfxZBuffer);
+            D_800741F8 = 0;
+            gGameStatusPtr->enableBackground &= ~0xF0;
+            gGameStatusPtr->enableBackground |= 0x30;
+        case 0x30:
+            D_800741F8 += 0x10;
+            if (D_800741F8 > 0x80) {
+                D_800741F8 = 0x80;
+            }
+
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, D_8009A64C);
+            gDPSetFillColor(gMasterGfxPos++, 0x00010001);
+            gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, 239);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+            gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+            gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE,
+                              TEXEL1, PRIMITIVE_ALPHA, TEXEL1, 0, 0, 0, 1);
+            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0x28, 0x28, 0x28, D_800741F8);
+            gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+
+            for (i = 0; i < 40; i++) {
+                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, nuGfxZBuffer + (i * 0x780));
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD);
+                gDPLoadSync(gMasterGfxPos++);
+                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
+                gDPPipeSync(gMasterGfxPos++);
+                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
+                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
+                           G_TX_NOLOD);
+                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+                gSPTextureRectangle(gMasterGfxPos++, 0, i * a, 0x0500, a + (i * 0x18), G_TX_RENDERTILE,
+                                    -0x0020, 0, 0x0400, 0x0400);
+                gDPPipeSync(gMasterGfxPos++);
+            }
+            break;
+        default:
+            if (gOverrideFlags & 8) {
+                gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
+                return;
+            }
+
+            gDPSetDepthImage(gMasterGfxPos++, OS_PHYSICAL_TO_K0(nuGfxZBuffer)); // TODO: or OS_K0_TO_PHYSICAL
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, OS_PHYSICAL_TO_K0(nuGfxZBuffer));
+            gDPSetFillColor(gMasterGfxPos++, 0xFFFCFFFC);
+            gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, 239);
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
+            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(camera->bgColor[0], camera->bgColor[1], camera->bgColor[2], 1));
+
+            backgroundMinW = gGameStatusPtr->backgroundMinW;
+            backgroundSumW = backgroundMinW + gGameStatusPtr->backgroundMaxW;
+            backgroundMinH = gGameStatusPtr->backgroundMinH;
+            backgroundSumH = backgroundMinH + gGameStatusPtr->backgroundMaxH;
+            viewportStartX = camera->viewportStartX;
+
+            if (backgroundMinW < viewportStartX) {
+                backgroundMinW = viewportStartX;
+            }
+
+            if (backgroundMinH < camera->viewportStartY) {
+                backgroundMinH = camera->viewportStartY;
+            }
+
+            if (backgroundSumW > viewportStartX + camera->viewportW) {
+                backgroundSumW = viewportStartX + camera->viewportW;
+            }
+
+            if (backgroundSumH > camera->viewportStartY + camera->viewportH) {
+                backgroundSumH = camera->viewportStartY + camera->viewportH;
+            }
+
+            if (backgroundMinW < 0) {
+                backgroundMinW = 0;
+            }
+
+            if (backgroundMinH < 0) {
+                backgroundMinH = 0;
+            }
+
+            if (backgroundSumW < 1) {
+                backgroundSumW = 1;
+            }
+
+            if (backgroundSumH < 1) {
+                backgroundSumH = 1;
+            }
+
+            if (backgroundMinW > 319) {
+                backgroundMinW = 319;
+            }
+
+            if (backgroundMinH > 239) {
+                backgroundMinH = 239;
+            }
+
+            if (backgroundSumW > 320) {
+                backgroundSumW = 320;
+            }
+
+            if (backgroundSumH > 240) {
+                backgroundSumH = 240;
+            }
+
+            if (!(gGameStatusPtr->enableBackground & 1)) {
+                gDPFillRectangle(gMasterGfxPos++, backgroundMinW, backgroundMinH, backgroundSumW - 1, backgroundSumH - 1);
+            } else {
+                appendGfx_background_texture();
+            }
+
+            gDPPipeSync(gMasterGfxPos++);
+            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetFillColor(gMasterGfxPos++, 0x00010001);
+            gDPPipeSync(gMasterGfxPos++);
+
+            if (backgroundMinH > 0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, 0, 319, backgroundMinH - 1);
+                gDPNoOp(gMasterGfxPos++);
+            }
+
+            if (backgroundMinW > 0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMinH, backgroundMinW - 1, backgroundSumH - 1);
+                gDPNoOp(gMasterGfxPos++);
+            }
+
+            if (backgroundSumW < 0x140) {
+                gDPFillRectangle(gMasterGfxPos++, backgroundSumW, backgroundMinH, 319, backgroundSumH - 1);
+                gDPNoOp(gMasterGfxPos++);
+            }
+
+            if (backgroundSumH < 0xF0) {
+                gDPFillRectangle(gMasterGfxPos++, 0, backgroundSumH, 319, 239);
+                gDPNoOp(gMasterGfxPos++);
+            }
+            break;
+    }
+    gDPPipeSync(gMasterGfxPos++);
+}

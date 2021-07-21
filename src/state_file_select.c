@@ -1,10 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
-
-// todo remove here and from undefined_syms
-extern Addr _163400_BSS_START;
-extern Addr _163400_BSS_END;
+#include "camera.h"
 
 s32 D_80077980[] = { &D_8038F800, &D_803B5000, &D_803DA800, };
 
@@ -12,10 +9,10 @@ NUPiOverlaySegment D_8007798C = {
     .romStart = _163400_ROM_START,
     .romEnd = _163400_ROM_END,
     .ramStart = _163400_VRAM,
-    .textStart = _163400_VRAM,
-    .textEnd = _16A3E0_data__s,
-    .dataStart = _16A3E0_data__s,
-    .dataEnd = _163400_BSS_START,
+    .textStart = _163400_TEXT_START,
+    .textEnd = _163400_TEXT_END,
+    .dataStart = _163400_DATA_START,
+    .dataEnd = _163400_DATA_END,
     .bssStart = _163400_BSS_START,
     .bssEnd = _163400_BSS_END,
 };
@@ -43,11 +40,11 @@ void state_init_file_select(void) {
     gCameras[0].unk_06 = 1;
     gCameras[0].nearClip = 16;
     gCameras[0].farClip = 4096;
-    gCameras[0].flags |= 2;
+    gCameras[0].flags |= CAM_FLAG_ENABLED;
     gCurrentCameraID = 0;
-    gCameras[1].flags |= 2;
-    gCameras[2].flags |= 2;
-    gCameras[3].flags |= 2;
+    gCameras[1].flags |= CAM_FLAG_ENABLED;
+    gCameras[2].flags |= CAM_FLAG_ENABLED;
+    gCameras[3].flags |= CAM_FLAG_ENABLED;
     gCameras[0].vfov = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[0].unk_1E = 40;
@@ -55,9 +52,9 @@ void state_init_file_select(void) {
     gCameras[0].lookAt_eye.y = 1000.0f;
     gCameras[0].lookAt_eye.z = 1500.0f;
     gCameras[0].unk_5C = 150.0f;
-    gCameras[0].backgroundColor[0] = 0;
-    gCameras[0].backgroundColor[1] = 0;
-    gCameras[0].backgroundColor[2] = 0;
+    gCameras[0].bgColor[0] = 0;
+    gCameras[0].bgColor[1] = 0;
+    gCameras[0].bgColor[2] = 0;
     gCameras[0].unk_54 = 25.0f;
     gCameras[0].unk_58 = 25.0f;
     gCameras[0].unk_1C = 0;

@@ -15,6 +15,6 @@ void N(UnkNpcAIFunc8)(ScriptInstance* script) {
 
             fx_emote(3, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, enemy->varTable[3] - 1, &something);
         }
-        script->functionTemp[0].s = 33;
+        script->functionTemp[0] = 33;
     }
 }

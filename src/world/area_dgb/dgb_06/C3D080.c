@@ -75,7 +75,7 @@ Script N(main) = SCRIPT({
     } else {
         EnableGroup(25, 0);
     }
-    bind N(exitSingleDoor_802403C0) to TRIGGER_WALL_PRESS_A 12;
+    bind N(exitSingleDoor_802403C0) TRIGGER_WALL_PRESS_A 12;
     spawn N(80240320);
     spawn N(enterSingleDoor_80240474);
 });

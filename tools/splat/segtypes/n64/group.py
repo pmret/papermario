@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from typing import List, Dict, Optional
+from typing import List, Dict
 import sys
 from util.range import Range
 from util import log, options
@@ -13,10 +13,16 @@ class N64SegGroup(N64Segment):
 
         self.rodata_syms: Dict[int, List[Symbol]] = {}
 
-        # TODO Note: These start/end vram options don't really do anything yet
-        data_vram = Range(yaml.get("data_vram_start"), yaml.get("data_vram_end"))
-        rodata_vram = Range(yaml.get("rodata_vram_start"), yaml.get("rodata_vram_end"))
-        bss_vram = Range(yaml.get("bss_vram_start"), yaml.get("bss_vram_end"))
+        # TODO: move this to N64SegCode
+        if isinstance(yaml, dict):
+            # TODO Note: These start/end vram options don't really do anything yet
+            data_vram = Range(yaml.get("data_vram_start"), yaml.get("data_vram_end"))
+            rodata_vram = Range(yaml.get("rodata_vram_start"), yaml.get("rodata_vram_end"))
+            bss_vram = Range(yaml.get("bss_vram_start"), yaml.get("bss_vram_end"))
+        else:
+            data_vram = Range()
+            rodata_vram = Range()
+            bss_vram = Range()
 
         self.section_boundaries = {
             "data": data_vram,
@@ -47,7 +53,7 @@ class N64SegGroup(N64Segment):
                         vram_start = elem.rom_start - self.rom_start + self.vram_start
                     else:
                         vram_start = "auto"
-                    rep = replace_class(elem.rom_start, elem.rom_end, rep_type, base[0], vram_start, extract=False)
+                    rep = replace_class(elem.rom_start, elem.rom_end, rep_type, base[0], vram_start, False, self.given_subalign, self.given_is_overlay, self.given_dir, [], {})
                     rep.sibling = base[1]
                     rep.parent = self
                     alls.append(rep)
@@ -88,8 +94,7 @@ class N64SegGroup(N64Segment):
         found_sections = {"data": Range(), "rodata": Range(), "bss": Range()} # Stores yaml index where a section was first found
 
         if "subsegments" not in segment_yaml:
-            print(f"Error: Group segment {self.name} is missing a 'subsegments' field")
-            sys.exit(2)
+            return []
 
         # Mark any manually added dot types
         if options.get("auto_all_sections"):
@@ -155,13 +160,14 @@ class N64SegGroup(N64Segment):
                 print(f"Error: Code segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})")
                 sys.exit(1)
 
-            segment: Segment = Segment.from_yaml(segment_class, subsection_yaml, start, end)
+            vram = None
+            if start != "auto":
+                assert isinstance(start, int)
+                vram = self.get_most_parent().rom_to_ram(start)
+
+            segment: Segment = Segment.from_yaml(segment_class, subsection_yaml, start, end, vram)
             segment.sibling = base_segments.get(segment.name, None)
             segment.parent = self
-
-            if segment.rom_start != "auto":
-                assert isinstance(segment.rom_start, int)
-                segment.vram_start = self.rom_to_ram(segment.rom_start)
 
             # TODO: assumes section order - generalize and stuff
             if not self.section_boundaries["data"].has_start() and "data" in segment.type:
@@ -182,11 +188,12 @@ class N64SegGroup(N64Segment):
             prev_start = start
 
         # Add the automatic all_ sections
+        orig_len = len(ret)
         for section in reversed(inserts):
             idx = inserts[section]
 
             if idx == -1:
-                idx = len(ret)
+                idx = orig_len
 
             # bss hack TODO maybe rethink
             if section == "bss" and self.vram_start is not None:
@@ -234,3 +241,11 @@ class N64SegGroup(N64Segment):
             c.append(sub.cache())
         
         return c
+
+    def get_most_parent(self):
+        seg = self
+
+        while seg.parent:
+            seg = seg.parent
+
+        return seg

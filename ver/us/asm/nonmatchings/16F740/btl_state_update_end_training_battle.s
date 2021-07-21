@@ -10,8 +10,8 @@ glabel btl_state_update_end_training_battle
 /* 173004 80244724 3C158011 */  lui       $s5, %hi(gPlayerData)
 /* 173008 80244728 26B5F290 */  addiu     $s5, $s5, %lo(gPlayerData)
 /* 17300C 8024472C AFB20020 */  sw        $s2, 0x20($sp)
-/* 173010 80244730 3C12800E */  lui       $s2, %hi(gBattleStatus+0x46C)
-/* 173014 80244734 2652C4DC */  addiu     $s2, $s2, %lo(gBattleStatus+0x46C)
+/* 173010 80244730 3C12800E */  lui       $s2, %hi(gBattleState2)
+/* 173014 80244734 2652C4DC */  addiu     $s2, $s2, %lo(gBattleState2)
 /* 173018 80244738 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 17301C 8024473C AFB40028 */  sw        $s4, 0x28($sp)
 /* 173020 80244740 AFB1001C */  sw        $s1, 0x1c($sp)
@@ -107,11 +107,11 @@ glabel btl_state_update_end_training_battle
 /* 173170 80244890 AE2001D8 */  sw        $zero, 0x1d8($s1)
 .L80244894:
 /* 173174 80244894 2402000B */  addiu     $v0, $zero, 0xb
-/* 173178 80244898 3C01800E */  lui       $at, %hi(gBattleStatus+0x46C)
-/* 17317C 8024489C AC22C4DC */  sw        $v0, %lo(gBattleStatus+0x46C)($at)
+/* 173178 80244898 3C01800E */  lui       $at, %hi(gBattleState2)
+/* 17317C 8024489C AC22C4DC */  sw        $v0, %lo(gBattleState2)($at)
 .L802448A0:
-/* 173180 802448A0 3C12800E */  lui       $s2, %hi(gBattleStatus+0x46C)
-/* 173184 802448A4 2652C4DC */  addiu     $s2, $s2, %lo(gBattleStatus+0x46C)
+/* 173180 802448A0 3C12800E */  lui       $s2, %hi(gBattleState2)
+/* 173184 802448A4 2652C4DC */  addiu     $s2, $s2, %lo(gBattleState2)
 /* 173188 802448A8 8E500000 */  lw        $s0, ($s2)
 /* 17318C 802448AC 2402000B */  addiu     $v0, $zero, 0xb
 /* 173190 802448B0 12020005 */  beq       $s0, $v0, .L802448C8
@@ -163,8 +163,8 @@ glabel btl_state_update_end_training_battle
 /* 17323C 8024495C A260009A */  sb        $zero, 0x9a($s3)
 /* 173240 80244960 AE500000 */  sw        $s0, ($s2)
 .L80244964:
-/* 173244 80244964 3C10800E */  lui       $s0, %hi(gBattleStatus+0x46C)
-/* 173248 80244968 2610C4DC */  addiu     $s0, $s0, %lo(gBattleStatus+0x46C)
+/* 173244 80244964 3C10800E */  lui       $s0, %hi(gBattleState2)
+/* 173248 80244968 2610C4DC */  addiu     $s0, $s0, %lo(gBattleState2)
 /* 17324C 8024496C 8E030000 */  lw        $v1, ($s0)
 /* 173250 80244970 2402000D */  addiu     $v0, $zero, 0xd
 /* 173254 80244974 10620005 */  beq       $v1, $v0, .L8024498C

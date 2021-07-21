@@ -332,7 +332,6 @@ void func_802A4718(void) {
     D_802AD604 = 10;
 }
 
-//INCLUDE_ASM(s32, "415D90", func_802A472C);
 void func_802A472C(void) {
     s32* temp = &D_802AD628;
     s32 i;
@@ -489,31 +488,35 @@ s32 func_802A9B30(void) {
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_peach_menu);
 
+// Needs the above jtbl to be decompiled and then this will work
+#ifdef NON_MATCHING
+void btl_state_draw_peach_menu(void) {
+    switch (gBattleState2) {
+        case 1:
+            btl_draw_menu_wheel();
+            break;
+        case 2:
+            btl_draw_menu_wheel();
+            break;
+        case 3:
+            btl_draw_menu_wheel();
+            break;
+        case 4:
+            btl_draw_menu_wheel();
+            break;
+        case 5:
+            btl_draw_menu_wheel();
+            break;
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "415D90", btl_state_draw_peach_menu);
-// void btl_state_draw_peach_menu(void) {
-//     switch (gBattleStatus.battleState) {
-//         case 1:
-//             btl_draw_menu_wheel();
-//             break;
-//         case 2:
-//             btl_draw_menu_wheel();
-//             break;
-//         case 3:
-//             btl_draw_menu_wheel();
-//             break;
-//         case 4:
-//             btl_draw_menu_wheel();
-//             break;
-//         case 5:
-//             btl_draw_menu_wheel();
-//             break;
-//         case 6:
-//         case 7:
-//         case 8:
-//         case 9:
-//             break;
-//     }
-// }
+#endif
 
 s32 func_802AA0A4(void) {
     return (gBattleStatus.flags2 & 2) <= 0;
@@ -522,7 +525,7 @@ s32 func_802AA0A4(void) {
 INCLUDE_ASM(s32, "415D90", btl_state_update_twink_menu); // look into m2c bug
 
 void btl_state_draw_twink_menu(void) {
-    switch (gBattleStatus.battleState) {
+    switch (gBattleState2) {
         case 1:
             btl_draw_menu_wheel();
             break;

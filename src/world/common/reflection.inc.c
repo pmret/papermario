@@ -118,7 +118,7 @@ void N(reflection_setup_wall)(void) {
 }
 
 void N(reflection_render_wall)(PlayerStatus* playerStatus) {
-    f32 yaw = -CAM(gCurrentCamID)->currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -196,7 +196,7 @@ void N(reflection_setup_floor)(void) {
 }
 
 void N(reflection_render_floor)(PlayerStatus* playerStatus) {
-    f32 yaw = -CAM(gCurrentCamID)->currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -242,7 +242,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
     s32 flags;
 
     for (i = 0; i < 2; i++) {
-        yaw = -CAM(gCurrentCamID)->currentYaw;
+        yaw = -gCameras[gCurrentCamID].currentYaw;
 
         if (i == 0) {
             if ((playerStatus->spriteFacingAngle > 90.0f) && (playerStatus->spriteFacingAngle <= 180.0f)) {

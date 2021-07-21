@@ -1224,15 +1224,15 @@ ApiStatus SetActorRotation(ScriptInstance* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (x != -250000000) {
+    if (x != SI_LIMIT) {
         actor->rotation.x = x;
     }
 
-    if (y != -250000000) {
+    if (y != SI_LIMIT) {
         actor->rotation.y = y;
     }
 
-    if (z != -250000000) {
+    if (z != SI_LIMIT) {
         actor->rotation.z = z;
     }
 
