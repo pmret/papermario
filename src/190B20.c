@@ -1097,18 +1097,16 @@ INCLUDE_ASM(s32, "190B20", func_80263300);
 s32 btl_are_all_enemies_defeated(void) {
     s32* currentEnemyFlags;
     s32 i;
-    BattleStatus* aPointer;
-    s32 enemyCounter;
+    BattleStatus* bs;
     s32 enemiesStillAlive;
     s32 flagEnemyDefeated;
 
     enemiesStillAlive = FALSE;
     i = 0;
-    enemyCounter = 0;
     flagEnemyDefeated = 0x404000;
-    aPointer = &gBattleStatus;
-    for (; i < ARRAY_COUNT(aPointer->enemyActors); i++) {
-        currentEnemyFlags = aPointer->enemyActors[i];
+    bs = &gBattleStatus;
+    for (; i < ARRAY_COUNT(bs->enemyActors); i++) {
+        currentEnemyFlags = bs->enemyActors[i];
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
         if (currentEnemyFlags != 0) {
@@ -1117,11 +1115,8 @@ s32 btl_are_all_enemies_defeated(void) {
                 enemiesStillAlive = TRUE;
             }
         }
-        // enemyCounter += 1;
-        // someNumber = enemyCounter + 1;
-        // aPointer += 1; // Advance to the next enemyActor
-    }// while ((enemyCounter < 24) != 0); // 24 because you can have 24 enemy actors
-    enemiesStillAlive ^= 1; // returns 1 if enemiesStillAlive = 0
+    }
+    enemiesStillAlive ^= 1; // if enemiesStillAlive = 0, then enemiesStillAlive will be TRUE
     return enemiesStillAlive;
 }
 
