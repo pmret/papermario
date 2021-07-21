@@ -55,5 +55,5 @@ ApiStatus func_802A1628_795908(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-    INCLUDE_ASM(s32, "battle/star/up_and_away/7952E0", func_802A1628_795908);
+INCLUDE_ASM(s32, "battle/star/up_and_away/7952E0", func_802A1628_795908);
 #endif

@@ -92,7 +92,7 @@ ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake/lib", battle_item_strange_cake_func_802A123C_73153C);
+INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A123C_73153C);
 #endif
 
 #ifdef NON_MATCHING
@@ -252,7 +252,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/strange_cake/lib", battle_item_strange_cake_func_802A13E4_7316E4,
+INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A13E4_7316E4,
             ScriptInstance* script, s32 isInitialCall);
 #endif
 
