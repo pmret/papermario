@@ -1076,7 +1076,15 @@ INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
 
 INCLUDE_ASM(s32, "190B20", btl_check_enemies_defeated);
 
-INCLUDE_ASM(s32, "190B20", btl_check_player_defeated);
+s32 btl_check_player_defeated(void) {
+    if (gPlayerData.curHP > 0) {
+        return FALSE;
+    }
+    D_800DC4E4 = gBattleState;
+    D_800DC4D8 = gBattleState2;
+    btl_set_state(0x1B);
+    return TRUE;
+}
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
 
