@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "battle/area_flo/5B20F0", func_80218C40_5B20F0);
 
 INCLUDE_ASM(s32, "battle/area_flo/5B20F0", func_80218EE8_5B2398);
 
-#include "common/UnkBattleFunc3.inc.c"
+#include "common/GetBootsHammerLevel.inc.c"
 
 #include "common/UnkBattleFunc5.inc.c"
 

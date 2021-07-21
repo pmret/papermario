@@ -4,4 +4,4 @@
 
 INCLUDE_ASM(s32, "battle/area_dig/6DE1F0", func_80218430_6DE1F0);
 
-#include "common/UnkAreaFunc.inc.c"
+#include "common/GetModelPos.inc.c"

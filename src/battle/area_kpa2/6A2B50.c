@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C14C_6A334C);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C520_6A3720);
 
-#include "common/UnkBattleFunc4.inc.c"
+#include "common/GetJumpHammerCharge.inc.c"
 
 INCLUDE_ASM(s32, "battle/area_kpa2/6A2B50", func_8021C9D4_6A3BD4);
 

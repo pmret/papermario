@@ -156,22 +156,22 @@ ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
 
-    script->varTable[0] = 0;
+    script->varTable[0] = FALSE;
 
     switch(battleStatus->selectedMoveID) {
         case 134:
             if (partnerActor->isGlowing >= 99) {
-                script->varTable[0] = 1;
+                script->varTable[0] = TRUE;
             }
             break;
         case 135:
             if (partnerActor->isGlowing >= 99) {
-                script->varTable[0] = 1;
+                script->varTable[0] = TRUE;
             }
             break;
         case 136:
             if (partnerActor->isGlowing >= 99) {
-                script->varTable[0] = 1;
+                script->varTable[0] = TRUE;
             }
             break;
         default:

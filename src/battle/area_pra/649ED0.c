@@ -18,6 +18,6 @@ INCLUDE_ASM(s32, "battle/area_pra/649ED0", func_802190C0_649ED0);
 
 INCLUDE_ASM(s32, "battle/area_pra/649ED0", func_80219368_64A178);
 
-#include "common/UnkBattleFunc3.inc.c"
+#include "common/GetBootsHammerLevel.inc.c"
 
 #include "common/UnkBattleFunc5.inc.c"

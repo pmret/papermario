@@ -5,7 +5,7 @@ ApiStatus N(UnkBattleFunc5)(ScriptInstance* script, s32 isInitialCall) {
     s32 actorID = get_variable(script, *args++);
     s32 partID = get_variable(script, *args++);
 
-    if (actorID == -127) {
+    if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
