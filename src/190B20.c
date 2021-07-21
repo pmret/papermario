@@ -1073,21 +1073,21 @@ INCLUDE_ASM(s32, "190B20", func_80263268);
 INCLUDE_ASM(s32, "190B20", func_80263300);
 
 s32 btl_are_all_enemies_defeated(void) {
-    s32* currentEnemyFlags;
-    s32 i;
     BattleStatus* bs;
+    Actor* enemy;
     s32 enemiesStillAlive;
     s32 flagEnemyDefeated;
+    s32 i;
 
     enemiesStillAlive = FALSE;
     for (i = 0; i < ARRAY_COUNT(bs->enemyActors); i++) {
         flagEnemyDefeated = 0x404000;
         bs = &gBattleStatus;
-        currentEnemyFlags = bs->enemyActors[i];
+        enemy = bs->enemyActors[i];
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
-        if (currentEnemyFlags != 0) {
-            if ((*currentEnemyFlags & flagEnemyDefeated) == 0) {
+        if (enemy != 0) {
+            if ((enemy->flags & flagEnemyDefeated) == 0) {
                 // Countinue the battle
                 enemiesStillAlive = TRUE;
             }
