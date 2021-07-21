@@ -687,7 +687,7 @@ block_9:
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, 0.71428573f, 0.71428573f, 0.71428573f);
+        guScaleF(spE0, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE, SPRITE_WORLD_SCALE);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, phi_f30, phi_f24, phi_f28);
         guMtxCatF(sp20, sp60, sp20);
