@@ -1,4 +1,5 @@
 #include "fire_flower.h"
+#include "effects.h"
 
 static HudElement* D_802A1D70;
 

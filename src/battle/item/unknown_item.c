@@ -1,4 +1,5 @@
 #include "unknown_item.h"
+#include "effects.h"
 
 static HudElement* D_802A1AA0;
 

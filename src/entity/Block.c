@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 void entity_base_block_setupGfx(s32 entityIndex) {
     Gfx* gfx = gMasterGfxPos;

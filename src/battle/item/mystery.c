@@ -1,4 +1,5 @@
 #include "mystery.h"
+#include "effects.h"
 #include "ld_addrs.h"
 #include "battle/item/mystery.png.h"
 

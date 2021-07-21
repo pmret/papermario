@@ -1,6 +1,7 @@
-#define NAMESPACE battle_partner_watt
-
 #include "common.h"
+#include "effects.h"
+
+#define NAMESPACE battle_partner_watt
 
 extern EffectInstance* D_8023C1B4;
 extern s32 D_8023C1B8;

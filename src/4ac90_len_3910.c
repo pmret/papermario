@@ -6,13 +6,13 @@ INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_00);
 
 INCLUDE_ASM(void, "4ac90_len_3910", playFX_01, f32 arg0, f32 arg1, f32 arg2);
 
-INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_02);
+INCLUDE_ASM(void, "4ac90_len_3910", playFX_02, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 
-INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_03);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_03, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 
-INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_04);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_04, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 
-INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_05);
+INCLUDE_ASM(EffectInstance*, "4ac90_len_3910", playFX_05, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 
 INCLUDE_ASM(void, "4ac90_len_3910", fx_land, s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 

@@ -1,4 +1,5 @@
 #include "flo_21.h"
+#include "effects.h"
 #include "message_ids.h"
 #include "sprite/npc/huff_n_puff.h"
 #include "sprite/npc/tuff_puff.h"
