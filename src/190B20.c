@@ -1096,31 +1096,30 @@ INCLUDE_ASM(s32, "190B20", func_80263300);
 // }
 s32 btl_are_all_enemies_defeated(void) {
     s32* currentEnemyFlags;
+    s32 someNumber;
+    Actor* aPointer;
     s32 enemyCounter;
-    Actor* enemyActors;
-    s32 enemyCounter2;
     s32 enemiesStillAlive;
-    s32 theHit;
+    s32 flagEnemyDefeated;
 
     enemiesStillAlive = FALSE;
-    enemyCounter2 = 0;
-    theHit = 0x404000;
-    enemyActors = &(gBattleStatus.enemyActors);
+    enemyCounter = 0;
+    flagEnemyDefeated = 0x404000;
+    aPointer = &(gBattleStatus.aPointer);
     do {
-        currentEnemyFlags = (*enemyActors).flags;
+        currentEnemyFlags = (*aPointer).flags;
 
         // If currentEnemyFlags signify that the enemy isn't dead yet...
         if (currentEnemyFlags != 0) {
-            if ((*currentEnemyFlags & theHit) == 0) {
+            if ((*currentEnemyFlags & flagEnemyDefeated) == 0) {
                 // Countinue the battle
                 enemiesStillAlive = TRUE;
             }
         }
-        enemyCounter2 += 1;
-        enemyCounter = enemyCounter2 + 1;
-        enemyActors += 1; // Advance to the next enemyActor
-        // enemyCounter2 = enemyCounter;
-    } while ((enemyCounter2 < 24) != 0); // 24 because you can have 24 enemy actors
+        enemyCounter += 1;
+        someNumber = enemyCounter + 1;
+        aPointer += 1; // Advance to the next enemyActor
+    } while ((enemyCounter < 24) != 0); // 24 because you can have 24 enemy actors
     enemiesStillAlive ^= 1; // returns 1 if enemiesStillAlive = 0
     return enemiesStillAlive;
 }
