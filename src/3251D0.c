@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

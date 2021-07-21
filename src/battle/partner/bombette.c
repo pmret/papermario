@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 
 ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {

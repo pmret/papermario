@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "effects.h"
 
 ApiStatus N(UnkFunc20)(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

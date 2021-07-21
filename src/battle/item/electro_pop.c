@@ -1,4 +1,5 @@
 #include "electro_pop.h"
+#include "effects.h"
 
 static HudElement* D_802A1D60;
 

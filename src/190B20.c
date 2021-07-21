@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 #include "message_ids.h"
 
@@ -1072,11 +1073,44 @@ INCLUDE_ASM(s32, "190B20", func_80263268);
 
 INCLUDE_ASM(s32, "190B20", func_80263300);
 
-INCLUDE_ASM(s32, "190B20", btl_are_all_enemies_defeated);
+s32 btl_are_all_enemies_defeated(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* enemy;
+    s32 enemiesStillAlive = FALSE;
+    s32 i;
 
-INCLUDE_ASM(s32, "190B20", btl_check_enemies_defeated);
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        s32 flagEnemyDefeated = 0x404000;
+        enemy = battleStatus->enemyActors[i];
 
-INCLUDE_ASM(s32, "190B20", btl_check_player_defeated);
+        // If currentEnemyFlags signify that the enemy isn't dead yet...
+        if (enemy != NULL) {
+            if (!(enemy->flags & flagEnemyDefeated)) {
+                // Countinue the battle
+                enemiesStillAlive = TRUE;
+            }
+        }
+    }
+    return !enemiesStillAlive;
+}
+
+s32 btl_check_enemies_defeated(void) {
+    if (btl_are_all_enemies_defeated()) {
+        btl_set_state(0x1A);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+s32 btl_check_player_defeated(void) {
+    if (gPlayerData.curHP > 0) {
+        return FALSE;
+    }
+    D_800DC4E4 = gBattleState;
+    D_800DC4D8 = gBattleState2;
+    btl_set_state(0x1B);
+    return TRUE;
+}
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
 
@@ -1401,9 +1435,6 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part) {
     part->shadowScale = part->size.x / 24.0;
 }
 
-EffectInstance* playFX_5A(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-void playFX_5F(s32, f32 x, f32 y, f32 z, f32 scale /* maybe */, s32);
-
 void remove_player_buffs(PlayerBuff buffs) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
@@ -1426,18 +1457,18 @@ void remove_player_buffs(PlayerBuff buffs) {
         battleStatus->hustleTurns = 0;
         battleStatus->flags1 &= ~0x04000000;
     }
-    if ((buffs & 0x20) && (player->staticStatus != 0)) {
+    if (buffs & 0x20 && (player->staticStatus != 0)) {
         player->staticDuration = 0;
         player->staticStatus = 0;
         remove_status_2(player->unk_436);
     }
-    if ((buffs & 0x40) && (player->transStatus != 0)) {
+    if (buffs & 0x40 && (player->transStatus != 0)) {
         player->transDuration = 0;
         player->transStatus = 0;
         playerPartsTable->flags &= ~0x100;
         remove_status_3(player->unk_436);
     }
-    if ((buffs & 0x200) && (battleStatus->waterBlockTurnsLeft != 0)) {
+    if (buffs & 0x200 && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_10 = 0;
         battleStatus->unk_A0[0] |= 0x10;
@@ -1450,22 +1481,20 @@ void remove_player_buffs(PlayerBuff buffs) {
         battleStatus->unk_A0 = NULL;
         sfx_play_sound(0x299);
     }
-    if ((buffs & 0x100) && (battleStatus->turboChargeTurnsLeft != 0)) {
+    if (buffs & 0x100 && (battleStatus->turboChargeTurnsLeft != 0)) {
         battleStatus->turboChargeTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_24 = 0;
     }
-    if ((buffs & 0x80) && (battleStatus->cloudNineTurnsLeft != 0)) {
+    if (buffs & 0x80 && (battleStatus->cloudNineTurnsLeft != 0)) {
         battleStatus->cloudNineTurnsLeft = 0;
         battleStatus->unk_43C->unk_0C->unk_1A = 0;
         remove_effect(battleStatus->cloudNineEffect);
         battleStatus->cloudNineEffect = 0;
     }
 
-    if ((partner != NULL) && (buffs & 0x10000)) {
-        BattleStatus* bs = &gBattleStatus;
-
+    if (partner != NULL && (buffs & 0x10000)) {
         partner->isGlowing = FALSE;
-        bs->flags1 &= ~0x40000000;
+        gBattleStatus.flags1 &= ~0x40000000;
     }
 }
 

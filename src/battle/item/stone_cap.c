@@ -1,4 +1,5 @@
 #include "stone_cap.h"
+#include "effects.h"
 
 static HudElement* D_802A1A60;
 

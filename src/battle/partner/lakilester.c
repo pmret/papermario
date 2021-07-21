@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 extern s32 D_8023D2C8;
 extern s32 D_8023D330;

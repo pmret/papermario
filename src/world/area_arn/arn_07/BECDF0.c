@@ -1,4 +1,5 @@
 #include "arn_07.h"
+#include "effects.h"
 #include "sprite/npc/world_tubba.h"
 #include "sprite/npc/tubbas_heart.h"
 

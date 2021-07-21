@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 typedef struct struct802E3F0C {
     /* 0x00 */ char unk_00[10];

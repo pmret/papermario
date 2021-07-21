@@ -19,8 +19,6 @@ void boot_main(void);
 
 void osCleanupThread(void);
 
-void playFX_30(s32, f32, f32, f32);
-void playFX_31(s32, f32, f32, f32);
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
@@ -44,7 +42,6 @@ void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
-void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 void entity_shattering_idle(Entity* entity);
 void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
 
@@ -391,51 +388,6 @@ void state_drawUI_intro(void);
 void state_init_demo(void);
 void state_step_demo(void);
 void state_drawUI_demo(void);
-
-// Effect funcs
-void playFX_01(f32, f32, f32);
-void playFX_11(s32, f32, f32, f32, f32);
-void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
-void playFX_3D(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
-EffectInstance* playFX_40(s32, f32, f32, f32, s32);
-EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-void playFX_82(s32, f32, f32, f32, f32, s32 time);
-EffectInstance* playFX_4E(s32, f32, f32, f32);
-EffectInstance* playFX_54(s32, f32, f32, f32);
-EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_51(s32, f32, f32, f32, f32, s32);
-void playFX_50(s32, f32, f32, f32);
-EffectInstance* playFX_3F(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
-EffectInstance* playFX_36(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_83(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_7B(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_32(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
-EffectInstance* playFX_56(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_69(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_2D(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
-void playFX_2E(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_17(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_19(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
-void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
-void playFX_2F(s32, f32, f32, f32, f32, s32, EffectInstanceData**);
-void playFX_3B(s32, f32, f32, f32, f32, EffectInstanceData**);
-void fx_land(s32, f32, f32, f32, f32);
-EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-void playFX_26(s32, f32, f32, f32);
-EffectInstance* playFX_64(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
-void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
-EffectInstance* playFX_5A(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
-EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
-EffectInstance* playFX_23(u32, f32, f32, f32, f32);
-void playFX_0F(s32, f32, f32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_6C(s32, f32, f32, f32, f32, s32);
 
 void func_802B2078(void);
 extern f32 gCurtainScale;

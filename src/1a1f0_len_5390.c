@@ -1,5 +1,6 @@
 #include "common.h"
 #include "map.h"
+#include "effects.h"
 
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;

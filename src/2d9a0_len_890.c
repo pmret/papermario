@@ -53,4 +53,6 @@ INCLUDE_ASM(void, "2d9a0_len_890", func_80052BF8, UnkAl48* arg0, s32* arg1);
 
 INCLUDE_ASM(s32, "2d9a0_len_890", func_80052CFC, UnkAl48* arg0);
 
-INCLUDE_ASM(s32, "2d9a0_len_890", func_80052E18);
+void func_80052E18(UnkAl48* arg0) {
+    arg0->unk_3D |= 0x20;
+}

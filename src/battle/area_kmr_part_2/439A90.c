@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE b_area_kmr_part_2
 
