@@ -110,7 +110,6 @@ INCLUDE_ASM(s32, "16F740", btl_state_update_begin_player_turn);
 void btl_state_draw_begin_player_turn(void) {
 }
 
-//INCLUDE_ASM(s32, "16F740", btl_state_update_switch_to_player);
 void btl_state_update_switch_to_player(void) {
     Actor* player = gBattleStatus.playerActor;
     Actor* partner = gBattleStatus.partnerActor;
