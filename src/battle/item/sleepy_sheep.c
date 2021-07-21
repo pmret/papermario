@@ -211,7 +211,7 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep/lib", battle_item_sleepy_sheep_func_802A123C_71E88C,
+INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep", battle_item_sleepy_sheep_func_802A123C_71E88C,
             ScriptInstance* script, s32 isInitialCall);
 #endif
 

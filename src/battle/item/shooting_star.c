@@ -98,7 +98,7 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/shooting_star/lib", battle_item_shooting_star_func_802A123C_71D9AC,
+INCLUDE_ASM(ApiStatus, "battle/item/shooting_star", battle_item_shooting_star_func_802A123C_71D9AC,
             ScriptInstance* script, s32 isInitialCall);
 #endif
 
