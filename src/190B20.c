@@ -1105,7 +1105,7 @@ s32 btl_are_all_enemies_defeated(void) {
     enemiesStillAlive = FALSE;
     enemyCounter = 0;
     flagEnemyDefeated = 0x404000;
-    aPointer = &(gBattleStatus.aPointer);
+    aPointer = &(gBattleStatus.enemyActors);
     do {
         currentEnemyFlags = (*aPointer).flags;
 
