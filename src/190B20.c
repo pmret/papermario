@@ -1116,10 +1116,11 @@ s32 btl_are_all_enemies_defeated(void) {
                 enemiesStillAlive = TRUE;
             }
         }
+        enemyCounter2 += 1;
         enemyCounter = enemyCounter2 + 1;
         enemyActors += 1; // Advance to the next enemyActor
-        enemyCounter2 = enemyCounter;
-    } while ((enemyCounter < 24) != 0); // 24 because you can have 24 enemy actors
+        // enemyCounter2 = enemyCounter;
+    } while ((enemyCounter2 < 24) != 0); // 24 because you can have 24 enemy actors
     enemiesStillAlive ^= 1; // returns 1 if enemiesStillAlive = 0
     return enemiesStillAlive;
 }
