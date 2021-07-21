@@ -199,7 +199,8 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset", "pm_charset_palettes"])
+            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
+                          "pm_charset_palettes", "pm_effects"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -550,6 +551,8 @@ class Configure:
 
                 build(entry.object_path.with_suffix(""), palettes, "pm_charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_effects":
+                build(entry.object_path, entry.src_paths, "as")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             else:

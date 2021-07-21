@@ -4,9 +4,6 @@
 #include "types.h"
 #include "common_structs.h"
 
-// Function declarations in this file will be picked up by splat upon running ./configure
-// and it will generate effect functions for each declaration, given the name.
-
 extern EffectTableEntry gEffectTable[135];
 
 void playFX_00(s32, f32, f32, f32, s32);
