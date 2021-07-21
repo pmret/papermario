@@ -40,7 +40,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219444_6A0644);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219818_6A0A18);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219C74_6A0E74);
+#define NAMESPACE dup3_b_area_kpa2
+#include "common/GetJumpHammerCharge.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_80219CD4_6A0ED4);
 
@@ -74,7 +76,9 @@ INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021A804_6A1A04);
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021ABD8_6A1DD8);
 
-INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B02C_6A222C);
+#define NAMESPACE dup6_b_area_kpa2
+#include "common/GetJumpHammerCharge.inc.c"
+#define NAMESPACE b_area_kpa2
 
 INCLUDE_ASM(s32, "battle/area_kpa2/69F320", func_8021B08C_6A228C);
 

@@ -6,8 +6,9 @@
 #include "message_ids.h"
 #include "sprite/npc/battle_goombario.h"
 
-extern Actor D_8023CDA0;
+extern EffectInstance* D_8023CDA0;
 extern s32 D_8023CDA4;
+extern s32 D_8023BB98_6ECC78;
 extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
 
 extern Script N(init);
@@ -54,7 +55,21 @@ ApiStatus N(func_80238000_6F10E0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+#ifdef NON_MATCHING
+ApiStatus func_802380E4_6F11C4(ScriptInstance* script, s32 isInitialCall) {
+    Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
+
+    script->varTable[0] = 99;
+    D_8023BB98_6ECC78 = ((D_8023BB98_6ECC78 * targetActor->staticActorData->powerBounceChance) * 0x51EB851F) >> 5 - (D_8023BB98_6ECC78 * targetActor->staticActorData->powerBounceChance >> 31);
+    if (D_8023BB98_6ECC78 < rand_int(100)) {
+        script->varTable[0] = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(s32, "battle/partner/goombario", func_802380E4_6F11C4);
+#endif
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_8023817C_6F125C);
 
@@ -122,11 +137,49 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238BCC_6F1CAC);
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_80238E04_6F1EE4);
+ApiStatus func_80238E04_6F1EE4(ScriptInstance* script, s32 isInitialCall) {
+    D_8023CDA0 = playFX_6C(0, 206, 144, 0, 1.0f, 0);
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_80238E48_6F1F28);
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_80238E74_6F1F54);
+ApiStatus func_80238E48_6F1F28(ScriptInstance* script, s32 isInitialCall) {
+    EffectInstance* effect = D_8023CDA0;
+
+    effect->data->pos.y = 144.0f;
+    effect->flags |= 0x10;
+
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    Actor* partnerActor = battleStatus->partnerActor;
+
+    script->varTable[0] = FALSE;
+
+    switch(battleStatus->selectedMoveID) {
+        case 134:
+            if (partnerActor->isGlowing >= 99) {
+                script->varTable[0] = TRUE;
+            }
+            break;
+        case 135:
+            if (partnerActor->isGlowing >= 99) {
+                script->varTable[0] = TRUE;
+            }
+            break;
+        case 136:
+            if (partnerActor->isGlowing >= 99) {
+                script->varTable[0] = TRUE;
+            }
+            break;
+        default:
+            break;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238EDC_6F1FBC);
 
@@ -161,7 +214,17 @@ ApiStatus N(IsGlowing)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/goombario", func_802390C8_6F21A8);
+ApiStatus func_802390C8_6F21A8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    f32 var4 = get_float_variable(script, *args++);
+
+    playFX_6B(6, var1, var2, var3, var4, 45);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus N(func_80239190_6F2270)(ScriptInstance* script, s32 isInitialCall) {
     if (D_8023CDA4 == 0) {
