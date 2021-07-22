@@ -85,7 +85,7 @@ ApiStatus N(func_802404CC_8B053C)(ScriptInstance *script, s32 isInitialCall) {
     set_variable(script, SI_SAVE_FLAG(1768), phi_s0);
     set_variable(script, SI_SAVE_FLAG(1769), phi_s7);
     temp_s0_2 = get_variable(NULL, SI_SAVE_VAR(352));
-    temp_v0 = get_variable(NULL, SI_SAVE_VAR(0));
+    temp_v0 = get_variable(NULL, SI_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
         if (temp_v0 < (*(N(quizRequirements) + i)).unk_00) {

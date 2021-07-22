@@ -33,7 +33,7 @@ MapConfig N(config) = {
 };
 
 Script N(80243CF0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -99,12 +99,12 @@ Script N(enterDoubleDoor_80243EF8) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
             MakeNpcs(1, N(npcGroupList_80246958));
         }
@@ -382,7 +382,7 @@ Script N(idle_80244A54) = SCRIPT({
         sleep 1;
     }
     SI_SAVE_VAR(203) = 8;
-    STORY_PROGRESS = STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL;
+    SI_STORY_PROGRESS = STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL;
     PlaySoundAtCollider(18, 455, 0);
     MakeLerp(0, 80, 10, 0);
     loop {
@@ -451,12 +451,12 @@ Script N(defeat_80244E58) = SCRIPT({
 });
 
 Script N(init_80244E94) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
+    if (SI_STORY_PROGRESS < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_4)), TRUE);
         return;
     }
-    if (STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
+    if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_4)), TRUE);
         return;

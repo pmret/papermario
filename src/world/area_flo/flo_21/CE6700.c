@@ -94,7 +94,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240D40) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         FadeOutMusic(0, 500);
     } else {
         SetMusicTrack(0, SONG_CLOUDY_CLIMB, 0, 8);
@@ -296,13 +296,13 @@ Script N(80240DA0) = SCRIPT({
 });
 
 Script N(80240E3C) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         == STORY_CH6_GREW_MAGIC_BEANSTALK {
             SI_VAR(0) = 0;
             if (SI_MAP_VAR(10) == 0) {
                 return;
             }
-            STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
+            SI_STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
         }
         == STORY_CH6_DEFEATED_HUFF_N_PUFF {
             SI_VAR(0) = 1;
@@ -369,7 +369,7 @@ Script N(80240E3C) = SCRIPT({
     N(func_802405BC_CE6CBC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
+    SI_STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 5, 14);
     sleep 100;
 });
@@ -381,7 +381,7 @@ Script N(80241350) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
+    SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -398,7 +398,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80241350);
     spawn EnterWalk;
     await N(80240D40);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240B00_CE7200)();
     }
     spawn N(80240E3C);
@@ -544,7 +544,7 @@ Script N(80241920) = SCRIPT({
 });
 
 Script N(80241B98) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         return;
     }
     AwaitPlayerApproach(650, 0, 30);
@@ -966,7 +966,7 @@ Script N(defeat_802435D4) = SCRIPT({
 });
 
 Script N(init_802435E4) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcIdle(NPC_SELF, N(idle_80243428));
         BindNpcDefeat(NPC_SELF, N(defeat_802434D8));
@@ -977,7 +977,7 @@ Script N(init_802435E4) = SCRIPT({
 });
 
 Script N(init_80243684) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM(huff_n_puff, Palette_00, Anim_1));
@@ -988,7 +988,7 @@ Script N(init_80243684) = SCRIPT({
 });
 
 Script N(init_8024371C) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM(huff_n_puff, Palette_00, Anim_19));

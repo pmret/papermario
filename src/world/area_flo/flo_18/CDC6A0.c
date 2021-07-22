@@ -27,7 +27,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240830) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_PUFF_PUFF_MACHINE, 0, 8);
             PlaySoundAtCollider(20, 0x80000025, 0);
@@ -68,7 +68,7 @@ s32 N(lavaResetList_802409E4)[] = {
 };
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -135,7 +135,7 @@ Script N(main) = SCRIPT({
         spawn N(802409B8);
     }
     await N(80240830);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_8024030C_CDC9AC)();
     }
 });
@@ -691,7 +691,7 @@ Script N(80242E28) = SCRIPT({
     PlaySound(0x1E5);
     await N(802413F0);
     SI_VAR(0) = SI_VAR(10);
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         SI_MAP_FLAG(1) = 1;
         return;
     }
@@ -790,7 +790,7 @@ Script N(80242E28) = SCRIPT({
             DisablePlayerPhysics(TRUE);
             sleep 30;
             await N(80242B18);
-            STORY_PROGRESS = STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE;
+            SI_STORY_PROGRESS = STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE;
             GotoMap("flo_15", 1);
             sleep 70;
             return;
@@ -809,7 +809,7 @@ Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 Script N(802436BC) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         EnableModel(49, 0);
         ModifyColliderFlags(0, 19, 0x7FFFFE00);
         EnableModel(31, 0);
@@ -1114,7 +1114,7 @@ Script N(80244774) = SCRIPT({
     sleep 20;
     PutPartnerAway();
     ResetCam(0, 4.0);
-    STORY_PROGRESS = STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS;
+    SI_STORY_PROGRESS = STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS;
     DisablePlayerInput(FALSE);
     AwaitPlayerApproach(-250, 0, 50);
     DisablePlayerInput(TRUE);
@@ -1245,7 +1245,7 @@ Script N(80245004) = SCRIPT({
 });
 
 Script N(80245108) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
     DisablePlayerInput(TRUE);
@@ -1300,7 +1300,7 @@ Script N(80245324) = SCRIPT({
 });
 
 Script N(80245378) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
     DisablePlayerInput(TRUE);
@@ -1430,7 +1430,7 @@ Script N(interact_802457D4) = SCRIPT({
 });
 
 Script N(init_80245AA8) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcIdle(NPC_SELF, N(idle_80244B3C));
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
@@ -1440,7 +1440,7 @@ Script N(init_80245AA8) = SCRIPT({
 });
 
 Script N(init_80245B30) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
@@ -1448,7 +1448,7 @@ Script N(init_80245B30) = SCRIPT({
 });
 
 Script N(init_80245B90) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
@@ -1457,7 +1457,7 @@ Script N(init_80245B90) = SCRIPT({
 });
 
 Script N(init_80245C04) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
@@ -1466,7 +1466,7 @@ Script N(init_80245C04) = SCRIPT({
 });
 
 Script N(init_80245C78) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {

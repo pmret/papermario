@@ -31,7 +31,7 @@ MapConfig N(config) = {
 };
 
 Script N(80242870) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -175,12 +175,12 @@ s32 N(itemList_80242F28)[] = {
 };
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_80244988));
     }
     await N(makeEntities);

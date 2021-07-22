@@ -1220,7 +1220,10 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx);
+void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {
+    gCurrentModelSpecialDlsPtr[customGfxIndex].pre = pre;
+    gCurrentModelSpecialDlsPtr[customGfxIndex].post = post;
+}
 
 void set_custom_gfx_builders(s32 customGfxIndex, CustomModelGfxBuilderFunc pre, CustomModelGfxBuilderFunc post) {
     gCurrentCustomModelGfxBuilders[customGfxIndex].pre = pre;

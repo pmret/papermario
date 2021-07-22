@@ -49,6 +49,9 @@
 #define MAX_TEX_PANNERS 16
 #define MAX_ITEM_ENTITIES 256
 
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI      3.141592f
 #define PI_D    3.141592

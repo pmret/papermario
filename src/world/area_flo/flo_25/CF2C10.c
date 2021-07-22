@@ -29,7 +29,7 @@ MapConfig N(config) = {
 };
 
 Script N(80242330) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -87,7 +87,7 @@ Script N(80242704) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -108,7 +108,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80242704);
     spawn EnterWalk;
     await N(80242330);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CF2BD0)();
     }
 });
@@ -351,7 +351,7 @@ Script N(interact_80242C58) = SCRIPT({
         }
         sleep 10;
     } else {
-        if (STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
+        if (SI_STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_01, Anim_9), NPC_ANIM(gate_flower, Palette_01, Anim_8), 0,
                           MESSAGE_ID(0x11, 0x0040));
         } else {

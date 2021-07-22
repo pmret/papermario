@@ -16,12 +16,12 @@ MapConfig N(config) = {
 };
 
 Script N(80240600) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
     } else {
         SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
     }
-    if (STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         PlaySound(0x80000022);
     }
 });
@@ -75,7 +75,7 @@ Script N(802409F4) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -116,7 +116,7 @@ Script N(main) = SCRIPT({
         spawn EnterWalk;
     }
     await N(80240600);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CF0940)();
     }
 });
@@ -223,7 +223,7 @@ Script N(8024183C) = SCRIPT({
                 }
             }
             sleep 30;
-            STORY_PROGRESS = STORY_CH6_FILLED_SPRING_WITH_WATER;
+            SI_STORY_PROGRESS = STORY_CH6_FILLED_SPRING_WITH_WATER;
             GotoMap("flo_10", 2);
             sleep 100;
         }
@@ -263,7 +263,7 @@ Script N(8024183C) = {
                 SI_CMD(ScriptOpcode_END_IF),
             SI_CMD(ScriptOpcode_END_LOOP),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_SET, STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
+            SI_CMD(ScriptOpcode_SET, SI_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
             SI_CMD(ScriptOpcode_CALL, GotoMap, N(flo_10_name_hack), 2),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 100),
             SI_CMD(ScriptOpcode_RETURN),
@@ -272,7 +272,7 @@ Script N(8024183C) = {
 #endif
 
 Script N(80241ABC) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(94, 0);
         ModifyColliderFlags(0, 30, 0x7FFFFE00);
     } else {

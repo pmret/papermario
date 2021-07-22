@@ -32,7 +32,7 @@ Script N(802406A0) = SCRIPT({
     if (SI_VAR(0) == 2) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             <= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
                 if (SI_SAVE_FLAG(1411) == 0) {
                     SetMusicTrack(0, SONG_MONTY_MOLE_ASSAULT, 0, 8);
@@ -50,7 +50,7 @@ Script N(802406A0) = SCRIPT({
 });
 
 Script N(802407C0) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             PushSong(137, 0);
         }
@@ -58,7 +58,7 @@ Script N(802407C0) = SCRIPT({
 });
 
 Script N(80240814) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
             sleep 10;
@@ -116,7 +116,7 @@ Script N(80240BE4) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -152,7 +152,7 @@ Script N(main) = SCRIPT({
         spawn EnterWalk;
     }
     await N(802406A0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CA72A0)();
     }
 });
@@ -254,7 +254,7 @@ Script N(8024122C) = SCRIPT({
 
 Script N(interact_802412BC) = SCRIPT({
     await N(802407C0);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SI_MAP_VAR(14) = 1;
             SI_VAR(4) = (int) 3.5;
@@ -348,7 +348,7 @@ Script N(interact_802412BC) = SCRIPT({
             BindNpcAI(NPC_DAYZEE, N(npcAI_8024119C));
             SI_MAP_VAR(14) = 0;
             SI_MAP_VAR(15) = 60;
-            STORY_PROGRESS = STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES;
+            SI_STORY_PROGRESS = STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES;
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1411) == 0) {
@@ -372,7 +372,7 @@ Script N(interact_802412BC) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
                               MESSAGE_ID(0x11, 0x005A));
                 EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0);
-                STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
+                SI_STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
             }
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
@@ -407,7 +407,7 @@ Script N(init_80241DA4) = SCRIPT({
 Script N(init_80241E10) = SCRIPT({
     BindNpcDefeat(NPC_SELF, N(defeat_802411B8));
     EnableNpcShadow(NPC_DAYZEE, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SetNpcPos(NPC_DAYZEE, 0, -1000, 0);
         } else {
@@ -473,7 +473,7 @@ Script N(defeat_80241F64) = SCRIPT({
 });
 
 Script N(hit_80242138) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         GetOwnerEncounterTrigger(SI_VAR(0));
         if (SI_VAR(0) != 1) {
             SetNpcAnimation(NPC_SELF, NPC_ANIM(monty_mole, Palette_01, Anim_5));
@@ -507,7 +507,7 @@ Script N(idle_8024219C) = SCRIPT({
                 sleep 1;
                 SI_AREA_FLAG(23) = 1;
                 if (SI_MAP_VAR(10) != 0) {
-                    if (STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
                         SI_VAR(1) = 4;
                     } else {
                         SI_VAR(1) = 10;
@@ -583,7 +583,7 @@ Script N(idle_80242618) = SCRIPT({
                 sleep 1;
                 SI_AREA_FLAG(24) = 1;
                 if (SI_MAP_VAR(11) != 0) {
-                    if (STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
                         SI_VAR(1) = 4;
                     } else {
                         SI_VAR(1) = 10;
@@ -659,7 +659,7 @@ Script N(idle_80242A94) = SCRIPT({
                 sleep 1;
                 SI_AREA_FLAG(25) = 1;
                 if (SI_MAP_VAR(12) != 0) {
-                    if (STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
                         SI_VAR(1) = 4;
                     } else {
                         SI_VAR(1) = 10;
@@ -735,7 +735,7 @@ Script N(idle_80242F10) = SCRIPT({
                 sleep 1;
                 SI_AREA_FLAG(26) = 1;
                 if (SI_MAP_VAR(13) != 0) {
-                    if (STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
                         SI_VAR(1) = 4;
                     } else {
                         SI_VAR(1) = 10;
@@ -789,7 +789,7 @@ Script N(init_8024338C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE0, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_8024219C));
             SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -812,7 +812,7 @@ Script N(init_802434CC) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE1, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242618));
             SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -835,7 +835,7 @@ Script N(init_8024360C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE2, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242A94));
             SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -858,7 +858,7 @@ Script N(init_8024374C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE3, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242F10));
             SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));

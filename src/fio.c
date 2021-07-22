@@ -1,11 +1,6 @@
 #include "common.h"
 
-u32 magicSaveString[] = {
-    ASCII_TO_U32('M','a','r','i'),
-    ASCII_TO_U32('o',' ','S','t'),
-    ASCII_TO_U32('o','r','y',' '),
-    ASCII_TO_U32('0','0','6',0),
-}; // "Mario Story 006";
+char magicSaveString[] = "Mario Story 006";
 
 extern s32 logicalSaveInfo[4][2]; // 0x8009BA30
 extern s32 physicalSaveInfo[6][2]; // 0x8009BA50
@@ -15,7 +10,7 @@ extern s32 D_800D95E8[];
 void fio_serialize_state(void);
 
 s32 get_spirits_rescued(void) {
-    s32 storyProgress = get_variable(NULL, STORY_PROGRESS);
+    s32 storyProgress = get_variable(NULL, SI_STORY_PROGRESS);
     s32 ret = 7;
 
     if (storyProgress < get_variable(NULL, STORY_CH1_STAR_SPIRIT_RESCUED)) {

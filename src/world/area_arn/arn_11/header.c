@@ -13,7 +13,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240050) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_WENT_DOWN_THE_WELL {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
         }

@@ -37,6 +37,7 @@ s16 get_game_mode(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
+s32 intro_logos_fade_out(s16 addAlpha);
 
 void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
@@ -426,7 +427,7 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
-void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
+s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
