@@ -1373,6 +1373,11 @@ typedef struct CustomModelGfxBuilder {
     /* 0x00 */ CustomModelGfxBuilderFunc post;
 } CustomModelGfxBuilder; // size = 0x8
 
+typedef struct CustomModelGfx {
+    /* 0x00 */ Gfx* pre;
+    /* 0x00 */ Gfx* post;
+} CustomModelGfx; // size = 0x8
+
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
