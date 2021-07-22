@@ -528,7 +528,7 @@ typedef struct Camera {
     /* 0x002 */ s16 moveFlags;
     /* 0x004 */ s16 mode;
     /* 0x006 */ s16 unk_06;
-    /* 0x008 */ u16 unk_08;
+    /* 0x008 */ s16 unk_08;
     /* 0x00A */ s16 viewportW;
     /* 0x00C */ s16 viewportH;
     /* 0x00E */ s16 viewportStartX;
@@ -700,7 +700,7 @@ typedef struct BattleStatus {
     /* 0x0C0 */ ScriptID controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
     /* 0x0C8 */ ScriptID camMovementScriptID;
-    /* 0x0CC */ char unk_CC[12];
+    /* 0x0CC */ Vec3f unk_CC;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
     /* 0x0E0 */ struct Actor* enemyActors[24];

@@ -66,7 +66,7 @@ void render_curtains(void) {
         s8 rgb;
 
         gDPPipeSync(gMasterGfxPos++);
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(D_8009A64C));
         gSPDisplayList(gMasterGfxPos++, &D_800760C0);
 
         guFrustumF(m.m[0], -80.0f, 80.0f, -60.0f, 60.0f, 160.0f, 640.0f, 1.0f);
