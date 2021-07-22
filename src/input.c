@@ -1,4 +1,7 @@
 #include "common.h"
+#include "nu/nusys.h"
+
+extern OSContPad D_8009A5B8;
 
 void func_800287F0(void) {
     gGameStatusPtr->currentButtons = 0;

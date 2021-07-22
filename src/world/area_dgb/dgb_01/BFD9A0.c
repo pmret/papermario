@@ -21,7 +21,7 @@ MapConfig N(config) = {
 };
 
 Script N(802434A0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -143,7 +143,7 @@ Script N(enterDoubleDoor_80243A3C) = SCRIPT({
         == 0 {
             if (SI_SAVE_FLAG(1041) == 0) {
                 SI_SAVE_FLAG(1041) = 1;
-                STORY_PROGRESS = STORY_CH3_ARRIVED_AT_TUBBAS_MANOR;
+                SI_STORY_PROGRESS = STORY_CH3_ARRIVED_AT_TUBBAS_MANOR;
             }
             SI_VAR(2) = 54;
             SI_VAR(3) = 57;
@@ -188,7 +188,7 @@ s32 N(itemList_80243C40)[] = {
 };
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -209,7 +209,7 @@ Script N(main) = SCRIPT({
     } else {
         bind N(exitDoubleDoor_802436B8) TRIGGER_WALL_PRESS_A 20;
     }
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             MakeNpcs(1, N(npcGroupList_80246E50));
         }
@@ -376,7 +376,7 @@ Script N(80243EF0) = SCRIPT({
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    STORY_PROGRESS = STORY_CH3_TUBBA_SMASHED_THE_BRIDGES;
+    SI_STORY_PROGRESS = STORY_CH3_TUBBA_SMASHED_THE_BRIDGES;
     SetGroupEnabled(210, 1);
     DeleteAnimatedModel(0);
     spawn {
@@ -404,7 +404,7 @@ Script N(80243EF0) = SCRIPT({
 });
 
 Script N(802449C4) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetGroupEnabled(210, 0);
             ModifyColliderFlags(0, 50, 0x7FFFFE00);
@@ -1356,7 +1356,7 @@ Script N(init_80245814) = SCRIPT({
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_4)), TRUE);
         return;
     }
-    if (STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL) {
+    if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_HALL) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_4)), TRUE);
         return;
@@ -1377,7 +1377,7 @@ Script N(init_80245814) = SCRIPT({
 Script N(idle_8024598C) = SCRIPT({
     AwaitPlayerApproach(0, 420, 400);
     SI_SAVE_VAR(203) = 1;
-    STORY_PROGRESS = STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER;
+    SI_STORY_PROGRESS = STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER;
     PlaySoundAtCollider(20, 455, 0);
     MakeLerp(0, 80, 10, 0);
     loop {
@@ -1439,7 +1439,7 @@ Script N(init_80245CF0) = SCRIPT({
 });
 
 Script N(init_80245D80) = SCRIPT({
-    SI_VAR(0) = STORY_PROGRESS;
+    SI_VAR(0) = SI_STORY_PROGRESS;
     if (SI_VAR(0) >= -29) {
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | 0x00000040)), TRUE);
         EnableNpcShadow(NPC_SELF, FALSE);
@@ -1451,7 +1451,7 @@ Script N(init_80245D80) = SCRIPT({
 });
 
 Script N(init_80245E44) = SCRIPT({
-    SI_VAR(0) = STORY_PROGRESS;
+    SI_VAR(0) = SI_STORY_PROGRESS;
     if (SI_VAR(0) >= -29) {
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | 0x00000040)), TRUE);
         EnableNpcShadow(NPC_SELF, FALSE);
@@ -1463,7 +1463,7 @@ Script N(init_80245E44) = SCRIPT({
 });
 
 Script N(init_80245F08) = SCRIPT({
-    SI_VAR(0) = STORY_PROGRESS;
+    SI_VAR(0) = SI_STORY_PROGRESS;
     if (SI_VAR(0) >= -29) {
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | 0x00000040)), TRUE);
         EnableNpcShadow(NPC_SELF, FALSE);
@@ -1475,7 +1475,7 @@ Script N(init_80245F08) = SCRIPT({
 });
 
 Script N(init_80245FCC) = SCRIPT({
-    SI_VAR(0) = STORY_PROGRESS;
+    SI_VAR(0) = SI_STORY_PROGRESS;
     if (SI_VAR(0) >= -29) {
         SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_ENABLE_HIT_SCRIPT | 0x00000040)), TRUE);
         EnableNpcShadow(NPC_SELF, FALSE);

@@ -26,7 +26,7 @@ MapConfig N(config) = {
 };
 
 Script N(80243280) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -97,7 +97,7 @@ s32 N(lavaResetList_8024369C)[] = {
 };
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -209,7 +209,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80243654);
     spawn EnterWalk;
     await N(80243280);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CD72E0)();
     }
 });

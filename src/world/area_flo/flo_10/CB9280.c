@@ -25,7 +25,7 @@ Script N(802414E0) = SCRIPT({
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
             } else {
@@ -33,7 +33,7 @@ Script N(802414E0) = SCRIPT({
             }
         }
     }
-    if (STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         PlaySound(0x80000022);
     }
 });
@@ -53,7 +53,7 @@ static s32 N(pad_1624)[] = {
 };
 
 Script N(80241630) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         MakeItemEntity(ITEM_WATER_STONE, 0, -60, 6, 1, 0);
     }
 });
@@ -108,7 +108,7 @@ Script N(80241988) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -155,7 +155,7 @@ Script N(main) = SCRIPT({
         }
     }
     await N(802414E0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240040_CB9240)();
     }
 });
@@ -419,7 +419,7 @@ Script N(802427EC) = SCRIPT({
 });
 
 Script N(80242AE8) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(52, 0);
         EnableGroup(61, 0);
         ModifyColliderFlags(0, 21, 0x7FFFFE00);
@@ -534,7 +534,7 @@ Script N(80242AE8) = SCRIPT({
         SI_VAR(12) = 0;
         spawn N(updateTexturePan_80241D14);
     }
-    if (STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         spawn N(80241F20);
     }
 });
@@ -650,7 +650,7 @@ Script N(80243628) = SCRIPT({
 
 Script N(interact_802437C8) = SCRIPT({
     await N(802415C4);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             spawn N(80243628);
             GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -736,7 +736,7 @@ Script N(interact_802437C8) = SCRIPT({
 
 Script N(init_80243D78) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_802437C8));
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_WATER_STONE {
             if (SI_SAVE_FLAG(1375) == 0) {
                 SetNpcAnimation(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_8));

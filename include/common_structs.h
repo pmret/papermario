@@ -1246,7 +1246,7 @@ typedef struct GameStatus {
     /* 0x06C */ ScriptID mainScriptID;
     /* 0x070 */ s8 isBattle;
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
-    /* 0x072 */ u8 nextDemoScene; /* which part of the demo to play next */
+    /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ s8 debugEnemyContact;
     /* 0x075 */ s8 debugQuizmo;

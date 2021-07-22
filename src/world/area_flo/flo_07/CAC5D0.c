@@ -24,7 +24,7 @@ Script N(802407A0) = SCRIPT({
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
             } else {
@@ -110,7 +110,7 @@ Script N(80240C74) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -195,7 +195,7 @@ Script N(main) = SCRIPT({
         spawn N(802424F4);
     }
     await N(802407A0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(SpawnSunEffect)();
     }
     N(func_80240344_CAC534)();
@@ -285,13 +285,13 @@ Script N(80241DBC) = SCRIPT({
     SI_AREA_FLAG(6) = 1;
     sleep 20;
     SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006A));
-    STORY_PROGRESS = STORY_CH6_GOT_CRYSTAL_BERRY;
+    SI_STORY_PROGRESS = STORY_CH6_GOT_CRYSTAL_BERRY;
 });
 
 Script N(interact_80242044) = SCRIPT({
     await N(8024086C);
     NpcFacePlayer(NPC_SELF, 1);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             if (SI_AREA_FLAG(5) == 0) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
@@ -312,7 +312,7 @@ Script N(interact_80242044) = SCRIPT({
             SI_VAR(1) = 1;
             await N(80241BB4);
             AddKeyItem(ITEM_FERTILE_SOIL);
-            STORY_PROGRESS = STORY_CH6_GOT_FERTILE_SOIL;
+            SI_STORY_PROGRESS = STORY_CH6_GOT_FERTILE_SOIL;
             SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0066));
             if (SI_SAVE_FLAG(1379) == 1) {
                 await N(80241DBC);
@@ -339,7 +339,7 @@ Script N(interact_80242044) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
                               0x0072));
             } else {
-                if (STORY_PROGRESS < STORY_CH6_GOT_WATER_STONE) {
+                if (SI_STORY_PROGRESS < STORY_CH6_GOT_WATER_STONE) {
                     SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
                                   0x0073));
                 } else {
@@ -361,7 +361,7 @@ Script N(interact_80242044) = SCRIPT({
 });
 
 Script N(init_80242428) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_GOT_CRYSTAL_BERRY) {
+    if (SI_STORY_PROGRESS == STORY_CH6_GOT_CRYSTAL_BERRY) {
         if (SI_SAVE_FLAG(1374) == 0) {
             if (SI_SAVE_FLAG(1396) == 0) {
                 MakeItemEntity(ITEM_CRYSTAL_BERRY, -225, 0, -25, 17, SI_SAVE_FLAG(1374));
@@ -397,12 +397,12 @@ const char N(flo_25_name_hack)[];
 
 Script N(tree1_Callback) = SCRIPT({
     DisablePlayerInput(TRUE);
-    if (STORY_PROGRESS < STORY_CH6_GOT_CRYSTAL_BERRY) {
+    if (SI_STORY_PROGRESS < STORY_CH6_GOT_CRYSTAL_BERRY) {
         NpcFacePlayer(NPC_POSIE, 1);
         sleep 10;
         SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
                       0x0067));
-        if (STORY_PROGRESS == STORY_CH6_GOT_FERTILE_SOIL) {
+        if (SI_STORY_PROGRESS == STORY_CH6_GOT_FERTILE_SOIL) {
             if (SI_SAVE_FLAG(1379) == 1) {
                 UseSettingsFrom(0, -250, 0, 0);
                 SetPanTarget(0, -250, 0, 0);

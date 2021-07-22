@@ -264,7 +264,9 @@ segments:
     - [0x52D50, .data, state_pause]
     - [0x52D80, .data, state_file_select]
     - [0x52DC0, .data, state_title_screen]
-    - [0x52EE0, data] # Start of 13480_len_3f0's data
+    - [0x52EE0, data]
+    #- [0x52EE0, .data, state_demo]
+    #- [0x52FF0, data]
     - [0x53570, .data, 25f00_len_940]
     - [0x53590, data, 26840_len_20d0]
     - [0x541B0, .data, 30450]
