@@ -37,6 +37,7 @@ s16 get_game_mode(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
+s32 intro_logos_fade_out(s16 addAlpha);
 
 void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
