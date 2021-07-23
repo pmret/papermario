@@ -23,7 +23,7 @@ void state_init_language_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    set_time_freeze_mode(2);
+    set_time_freeze_mode(TIME_FREEZE_FULL);
     set_screen_overlay_params_front(0, D_800A0932[0]);
 }
 
@@ -31,7 +31,7 @@ void state_init_file_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
     disable_player_input();
-    set_time_freeze_mode(2);
+    set_time_freeze_mode(TIME_FREEZE_FULL);
     general_heap_create();
     set_hud_element_nonworld_cache(0, 0);
     clear_hud_element_cache();
