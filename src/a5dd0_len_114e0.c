@@ -863,10 +863,23 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
 
-
 INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", UseDynamicShadow);
+ApiStatus UseDynamicShadow(ScriptInstance* script, s32 isInitialCall) {
+    Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+
+    if (get_variable(script, *script->ptrReadPos) != 0) {
+        Shadow* shadow;
+
+        entity->flags |= 4;
+        shadow = get_shadow_by_index(entity->shadowIndex);
+        shadow->flags |= 0x400000;
+    } else {
+        entity->flags &= ~4;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

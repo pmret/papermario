@@ -365,7 +365,7 @@ typedef struct Entity {
     /* 0x30 */ char unk_30[0x8];
     /* 0x38 */ struct StaticEntityData* staticData;
     /* 0x3C */ UNK_PTR renderSetupFunc; // pointer to draw func(?)
-    /* 0x40 */ void* dataBuf;
+    /* 0x40 */ s32* dataBuf;
     /* 0x44 */ Mtx* vertexData;
     /* 0x48 */ Vec3f position;
     /* 0x54 */ Vec3f scale;
