@@ -1097,7 +1097,7 @@ s32 btl_are_all_enemies_defeated(void) {
 s32 btl_check_enemies_defeated(void) {
     if (btl_are_all_enemies_defeated()) {
         btl_set_state(0x1A);
-        return TRUE;
+        return TRUE;;
     }
     return FALSE;
 }
@@ -1109,7 +1109,7 @@ s32 btl_check_player_defeated(void) {
     D_800DC4E4 = gBattleState;
     D_800DC4D8 = gBattleState2;
     btl_set_state(0x1B);
-    return TRUE;
+    return TRUE;;
 }
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
@@ -1202,7 +1202,124 @@ INCLUDE_ASM(s32, "190B20", lookup_status_chance); // exactly (?) the same as loo
 
 INCLUDE_ASM(s32, "190B20", lookup_status_duration_mod); // exactly (?) the same as lookup_defense
 
-INCLUDE_ASM(s32, "190B20", inflict_status);
+s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    EffectInstance* effect;
+
+    switch (statusTypeKey) {
+        case STATUS_FEAR:
+        case STATUS_DIZZY:
+        case STATUS_PARALYZE:
+        case STATUS_SLEEP:
+        case STATUS_FROZEN:
+        case STATUS_STOP:
+        case STATUS_POISON:
+        case STATUS_SHRINK:
+            if (target->actorID != ACTOR_PLAYER || (!is_ability_active(ABILITY_FEELING_FINE) &&
+                !is_ability_active(ABILITY_BERSERKER) && battleStatus->hustleTurns == 0)) {
+
+                if (target->actorID != ACTOR_PARTNER) {
+                    if (target->debuff != statusTypeKey) {
+                        target->status = statusTypeKey;
+                    }
+                    target->ptrDefuffIcon->ptrPropertyList[15] = 0;
+                    target->debuff = statusTypeKey;
+                    target->debuffDuration = duration;
+                    if ((s8)duration > 9) {
+                        target->debuffDuration = 9;
+                    }
+
+                    switch (statusTypeKey) {
+                        case STATUS_FROZEN:
+                            if (target->actorID != ACTOR_PARTNER) {
+                                effect = target->unk_228;
+                                if (effect != NULL) {
+                                    effect->flags |= 0x10;
+                                }
+                                target->unk_228 = playFX_81(0, target->currentPos.x, target->currentPos.y,
+                                                            target->currentPos.z, 1.0f, 0);
+                                func_80047820(target->unk_436, STATUS_FROZEN);
+                            }
+                            return TRUE;
+                        case STATUS_SLEEP:
+                            func_80266DAC(target, 3);
+                            func_80047820(target->unk_436, STATUS_SLEEP);
+                            return TRUE;
+                        case STATUS_PARALYZE:
+                            func_80266DAC(target, 7);
+                            func_80047820(target->unk_436, STATUS_PARALYZE);
+                            return TRUE;
+                        case STATUS_DIZZY:
+                            func_80047820(target->unk_436, STATUS_DIZZY);
+                            return TRUE;
+                        case STATUS_FEAR:
+                            func_80266DAC(target, 5);
+                            func_80047820(target->unk_436, STATUS_FEAR);
+                            return TRUE;
+                        case STATUS_POISON:
+                            func_80266DAC(target, 6);
+                            func_80047820(target->unk_436, STATUS_POISON);
+                            return TRUE;
+                        case STATUS_SHRINK:
+                            func_80047820(target->unk_436, STATUS_SHRINK);
+                            return TRUE;
+                    }
+                }
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+            break;
+        case STATUS_STATIC:
+            if (target->actorID != ACTOR_PARTNER) {
+                target->staticStatus = statusTypeKey;
+                target->staticDuration = duration;
+                if ((s8)duration > 9) {
+                    target->staticDuration = 9;
+                }
+                target->status = STATUS_STATIC;
+                func_80266DAC(target, 4);
+                func_80047928(target->unk_436, STATUS_STATIC);
+            }
+            return TRUE;
+        case STATUS_STONE:
+            if (target->actorID != ACTOR_PARTNER) {
+                target->stoneStatus = STATUS_STONE;
+                target->stoneDuration = duration;
+                if ((s8)duration > 9) {
+                    target->stoneDuration = 9;
+                }
+                target->status = STATUS_STONE;
+            }
+            return TRUE;
+        case STATUS_DAZE:
+            if (target->koStatus < statusTypeKey) {
+                target->koStatus = STATUS_DAZE;
+                target->koDuration = duration;
+                if ((s8)duration > 9) {
+                    target->koDuration = 9;
+                }
+                target->status = STATUS_DAZE;
+            }
+            return TRUE;
+        case STATUS_E:
+            if (target->actorID != ACTOR_PARTNER) {
+                target->transStatus = STATUS_E;
+                target->transDuration = duration;
+                if ((s8)duration > 9) {
+                    target->transDuration = 9;
+                }
+                target->status = STATUS_E;
+                func_80047A30(target->unk_436, STATUS_E);
+            }
+            return TRUE;
+        case STATUS_END:
+        case STATUS_NORMAL:
+        case STATUS_DEFAULT:
+        default:
+            return TRUE;
+    }
+}
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
     if (statusTypeKey == STATUS_DAZE) {
@@ -1217,7 +1334,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
         }
     }
 
-    return TRUE;
+    return TRUE;;
 }
 
 s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {

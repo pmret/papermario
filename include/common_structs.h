@@ -665,7 +665,7 @@ typedef struct BattleStatus {
     /* 0x088 */ u8 itemUsesLeft; /* set to 2 for doublke dip, 3 for triple */
     /* 0x089 */ u8 hpDrainCount;
     /* 0x08A */ s8 unk_8A;
-    /* 0x08B */ u8 hustleTurns; /* numTurns from hustle drink, normally 0 */
+    /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
@@ -1787,7 +1787,8 @@ typedef struct Actor {
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ u8 chillOutAmount; /* attack reduction */
     /* 0x224 */ u8 chillOutTurns;
-    /* 0x225 */ char unk_225[7];
+    /* 0x225 */ char unk_225[3];
+    /* 0x228 */ EffectInstance* unk_228;
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
     /* 0x40D */ s8 targetIndexList[24]; /* into targetData */
