@@ -204,22 +204,22 @@ void btl_update(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* partner = battleStatus->partnerActor;
-    f32 dpadMagnitude;
     f32 dpadAngle;
-    s32 inputBitmask;
-    s32 inputBitmask2;
+    f32 dpadMagnitude;
     s32 cond;
 
     if (battleStatus->inputBitmask != -1) {
         if (battleStatus->flags1 & 0x80000 && gGameStatusPtr->unk_81 != 0) {
-            inputBitmask = battleStatus->inputBitmask;
+            s32 inputBitmask = battleStatus->inputBitmask;
+
             battleStatus->currentButtonsDown = gGameStatusPtr->altCurrentButtons & inputBitmask;
             battleStatus->currentButtonsPressed = gGameStatusPtr->altPressedButtons & inputBitmask;
             battleStatus->currentButtonsHeld = gGameStatusPtr->altHeldButtons & inputBitmask;
             battleStatus->stickX = gGameStatusPtr->altStickX;
             battleStatus->stickY = gGameStatusPtr->altStickY;
         } else {
-            inputBitmask2 = battleStatus->inputBitmask;
+            s32 inputBitmask2 = battleStatus->inputBitmask;
+
             battleStatus->currentButtonsDown = gGameStatusPtr->currentButtons & inputBitmask2;
             battleStatus->currentButtonsPressed = gGameStatusPtr->pressedButtons & inputBitmask2;
             battleStatus->currentButtonsHeld = gGameStatusPtr->heldButtons & inputBitmask2;
