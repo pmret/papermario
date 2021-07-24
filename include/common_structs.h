@@ -695,7 +695,7 @@ typedef struct BattleStatus {
     /* 0x0B0 */ u8 itemLossTurns;
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
-    /* 0x0B8 */ char unk_B8[4];
+    /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
     /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
     /* 0x0C0 */ ScriptID controlScriptID;
     /* 0x0C4 */ struct ScriptInstance* camMovementScript;
@@ -1544,7 +1544,7 @@ typedef struct DecorationTable {
     /* 0x8AC */ u8 effectType; /* 0 =  blur, 14 = none? */
     /* 0x8AD */ char unk_8AD[3];
     /* 0x8B0 */ struct Temp8025D160* unk_8B0[2];
-    /* 0x8B8 */ u8 decorationType[2];
+    /* 0x8B8 */ s8 decorationType[2];
     /* 0x8BA */ u8 unk_8BA[2];
     /* 0x8BC */ u8 unk_8BC[2];
     /* 0x8C0 */ s16 unk_8C0[6];
@@ -2219,5 +2219,12 @@ typedef struct TempSetZoneEnabled {
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ char unk_14[0x8];
 } TempSetZoneEnabled; // size = 0x1C
+
+typedef struct RenderTaskEntry {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ void* appendGfxArg;
+    /* 0x0C */ void (*appendGfx)(void*);
+} RenderTaskEntry; // size = 0x10
 
 #endif

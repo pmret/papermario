@@ -62,6 +62,18 @@ void set_entity_model_flags(s32 idx, s32 newFlags);
 void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
 s32 load_entity_model(s32* cmdList);
+RenderTaskEntry* queue_render_task(RenderTask* task);
+
+// append gfx funcs
+void func_80257B28(s32);
+void func_8025595C(Actor*);
+void func_80257B68(Actor*);
+void func_80257B48(s32);
+void func_8025599C(s32);
+void func_80257B88(void);
+void func_80257DA4(void);
+void func_80254C50(void);
+void func_80258E14(void);
 
 f32 func_800E34D8(void);
 f32 player_check_collision_below(f32, s32* colliderID);

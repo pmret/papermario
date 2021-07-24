@@ -11,13 +11,6 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
-typedef struct RenderTaskEntry {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ void* appendGfxArg;
-    /* 0x0C */ void (*appendGfx)(void*);
-} RenderTaskEntry; // size = 0x10
-
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
     /* 0x04 */ void (*init)(void);

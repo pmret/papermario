@@ -15,6 +15,13 @@ void* D_802809FC[] = {
 
 s32 D_80280A30 = 0xFF;
 
+extern PartnerID D_8029DA33;
+extern s32 D_8029DA34;
+extern Camera D_8029DA50[ARRAY_COUNT(gCameras)];
+extern f32 D_8029EFB0;
+extern f32 D_8029EFB4;
+extern f32 D_8029EFB8;
+
 Script BtlPutPartnerAway = SCRIPT({
     DispatchEvent(ACTOR_PARTNER, 62);
     parallel {
@@ -197,7 +204,103 @@ INCLUDE_ASM(s32, "16c8e0", btl_update);
 
 INCLUDE_ASM(s32, "16c8e0", btl_draw_ui);
 
-INCLUDE_ASM(s32, "16c8e0", func_8023ED5C);
+void func_8023ED5C(void) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    RenderTask renderTask;
+    RenderTask* renderTaskPtr = &renderTask;
+    Actor* actor;
+    s32 i;
+
+    if (gBattleState != 0) {
+        func_8024EEA8();
+        if (battleStatus->unk_B8 != NULL) {
+            battleStatus->unk_B8();
+        }
+        if (battleStatus->flags1 & 1) {
+            func_80255FD8();
+
+            if (gCurrentCamID == 1 || gCurrentCamID == 2) {
+                for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                    actor = battleStatus->enemyActors[i];
+
+                    if (actor != NULL && !(actor->flags & 1)) {
+                        renderTaskPtr->appendGfxArg = i;
+                        renderTaskPtr->appendGfx = func_80257B28;
+                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->renderMode = actor->renderMode;
+                        queue_render_task(renderTaskPtr);
+
+                        if (actor->flags & 0x10000000) {
+                            renderTaskPtr->appendGfxArg = actor;
+                            renderTaskPtr->appendGfx = func_8025595C;
+                            renderTaskPtr->distance = actor->currentPos.z;
+                            renderTaskPtr->renderMode = 0x22;
+                            queue_render_task(renderTaskPtr);
+                        }
+
+                        if (battleStatus->unk_92 & 1) {
+                            renderTaskPtr->appendGfxArg = actor;
+                            renderTaskPtr->appendGfx = func_80257B68;
+                            renderTaskPtr->distance = actor->currentPos.z;
+                            renderTaskPtr->renderMode = actor->renderMode;
+                            queue_render_task(renderTaskPtr);
+                        }
+                    }
+                }
+
+                actor = battleStatus->partnerActor;
+                if (actor != NULL && !(actor->flags & 1)) {
+                    renderTaskPtr->appendGfxArg = NULL;
+                    renderTaskPtr->appendGfx = func_80257B48;
+                    renderTaskPtr->distance = actor->currentPos.z;
+                    renderTaskPtr->renderMode = actor->renderMode;
+                    queue_render_task(renderTaskPtr);
+
+                    if (actor->flags & 0x10000000) {
+                        renderTaskPtr->appendGfxArg = actor;
+                        renderTaskPtr->appendGfx = func_8025599C;
+                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->renderMode = 0x22;
+                        queue_render_task(renderTaskPtr);
+                    }
+
+                    if (battleStatus->unk_92 & 1) {
+                        renderTaskPtr->appendGfxArg = NULL;
+                        renderTaskPtr->appendGfx = func_80257B88;
+                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->renderMode = actor->renderMode;
+                        queue_render_task(renderTaskPtr);
+                    }
+                }
+
+                actor = battleStatus->playerActor;
+                if (actor != NULL && !(actor->flags & 1)) {
+                    renderTaskPtr->appendGfxArg = NULL;
+                    renderTaskPtr->appendGfx = func_80257DA4;
+                    renderTaskPtr->distance = actor->currentPos.z;
+                    renderTaskPtr->renderMode = actor->renderMode;
+                    queue_render_task(renderTaskPtr);
+
+                    if (actor->flags & 0x10000000) {
+                        renderTaskPtr->appendGfxArg = actor;
+                        renderTaskPtr->appendGfx = func_80254C50;
+                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->renderMode = 0x22;
+                        queue_render_task(renderTaskPtr);
+                    }
+
+                    if (battleStatus->unk_92 & 1) {
+                        renderTaskPtr->appendGfxArg = NULL;
+                        renderTaskPtr->appendGfx = func_80258E14;
+                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->renderMode = actor->renderMode;
+                        queue_render_task(renderTaskPtr);
+                    }
+                }
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(s32, "16c8e0", func_8023F060);
 
@@ -211,9 +314,46 @@ INCLUDE_ASM(s32, "16c8e0", btl_draw_enemy_health_bars);
 
 INCLUDE_ASM(s32, "16c8e0", btl_update_starpoints_display);
 
-INCLUDE_ASM(s32, "16c8e0", btl_save_world_cameras);
+void btl_save_world_cameras(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 i;
 
-INCLUDE_ASM(s32, "16c8e0", btl_restore_world_cameras);
+    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
+        D_8029DA50[i] = gCameras[i];
+    }
+
+    D_8029EFB0 = playerStatus->position.x;
+    D_8029EFB4 = playerStatus->position.y;
+    D_8029EFB8 = playerStatus->position.z;
+    playerStatus->position.x = 0.0f;
+    playerStatus->position.y = -1000.0f;
+    playerStatus->position.z = 0.0f;
+}
+
+void btl_restore_world_cameras(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
+        gCameras[i] = D_8029DA50[i];
+    }
+
+    gCurrentCameraID = 0;
+    playerStatus->position.x = D_8029EFB0;
+    playerStatus->position.y = D_8029EFB4;
+    playerStatus->position.z = D_8029EFB8;
+
+    if (D_8029DA34 & 0x80) {
+        gOverrideFlags |= 0x80;
+    } else {
+        gOverrideFlags &= ~0x80;
+    }
+
+    if (gBattleStatus.flags2 & 0x40) {
+        playerData->currentPartner = D_8029DA33;
+    }
+}
 
 void btl_delete_actor(Actor* actor) {
     ActorPart* partsTable;
