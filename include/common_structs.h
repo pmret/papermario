@@ -669,7 +669,8 @@ typedef struct BattleStatus {
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
     /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
-    /* 0x08F */ char unk_8F[3];
+    /* 0x08F */ char unk_8F[1];
+    /* 0x090 */ s16 unk_90;
     /* 0x092 */ s8 unk_92;
     /* 0x093 */ char unk_93;
     /* 0x094 */ s8 unk_94;
@@ -751,7 +752,7 @@ typedef struct BattleStatus {
     /* 0x230 */ s32 holdInputBuffer[64];
     /* 0x330 */ s32 pushInputBuffer[64];
     /* 0x430 */ u8 holdInputBufferPos;
-    /* 0x431 */ u8 inputBufferPos;
+    /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
     /* 0x434 */ s32 unk_434;
@@ -1229,10 +1230,10 @@ typedef struct GameStatus {
     /* 0x030 */ u32 prevButtons; /* from previous frame */
     /* 0x034 */ char unk_34[12];
     /* 0x040 */ s8 stickX; /* with deadzone */
-    /* 0x041 */ u8 altStickX; /* input used for batte when flag 80000 set */
+    /* 0x041 */ s8 altStickX; /* input used for batte when flag 80000 set */
     /* 0x042 */ char unk_42[2];
     /* 0x044 */ s8 stickY; /* with deadzone */
-    /* 0x045 */ u8 altStickY; /* input used for batte when flag 80000 set */
+    /* 0x045 */ s8 altStickY; /* input used for batte when flag 80000 set */
     /* 0x046 */ char unk_46[2];
     /* 0x048 */ s16 unk_48[4];
     /* 0x050 */ s16 unk_50[4];

@@ -206,7 +206,7 @@ void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
-void btl_state_update_switch_to_partner(s32);
+void btl_state_update_switch_to_partner(void);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
