@@ -373,10 +373,10 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
             return 0;
         }
 
-        temp_v1 = fabsf(arg1)+16;
+        temp_v1 = fabsf(arg1) + 16;
         subroutine_arg = temp_v1;
         x = npc->pos.x;
-        y = npc->pos.y+13;
+        y = npc->pos.y + 13;
         z = npc->pos.z;
 
         if (!(npc->flags & 0x4000000)) {
