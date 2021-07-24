@@ -1675,4 +1675,12 @@ enum PartnerAnims {
     PARTNER_ANIM_HURT,
 };
 
+enum TimeFreezeMode {
+    TIME_FREEZE_NORMAL,
+    TIME_FREEZE_PARTIAL,
+    TIME_FREEZE_FULL,
+    TIME_FREEZE_PARTNER_MENU,
+    TIME_FREEZE_EXIT,
+};
+
 #endif
