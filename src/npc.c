@@ -359,7 +359,7 @@ INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
 
 s32 func_800397E8(Npc* npc, f32 arg1) {
-    if (!(npc->flags & 0x208)) {
+    if (!(npc->flags & NPC_FLAG_208)) {
         f32 x;
         f32 y;
         f32 z;
@@ -367,8 +367,8 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
         f32 temp_v1;
         s32 phi_v0;
 
-        if (npc->flags & 0x800) {
-            npc->flags &= ~0x1000;
+        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+            npc->flags &= ~NPC_FLAG_1000;
             return 0;
         }
 
@@ -378,7 +378,7 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
         y = npc->pos.y + 13;
         z = npc->pos.z;
 
-        if (!(npc->flags & 0x4000000)) {
+        if (!(npc->flags & NPC_FLAG_PARTICLE)) {
             phi_v0 = npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &subroutine_arg);
         } else {
             phi_v0 = npc_raycast_down_ahead(npc->unk_80, &x, &y, &z, &subroutine_arg, npc->yaw,
@@ -388,14 +388,14 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
         if (phi_v0 != 0 && subroutine_arg <= temp_v1) {
             npc->pos.y = y;
             npc->unk_84 = D_8010C97A;
-            npc->flags |= 0x1000;
+            npc->flags |= NPC_FLAG_1000;
             return 1;
         }
     } else {
         return 0;
     }
 
-    npc->flags &= ~0x1000;
+    npc->flags &= ~NPC_FLAG_1000;
     return 0;
 }
 
