@@ -359,8 +359,7 @@ INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
 
 s32 func_800397E8(Npc* npc, f32 arg1) {
-    if (!(npc->flags & 0x208))
-    {
+    if (!(npc->flags & 0x208)) {
         f32 x;
         f32 y;
         f32 z;
@@ -386,13 +385,15 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
                                             npc->collisionRadius);
         }
 
-        if (phi_v0 && subroutine_arg <= temp_v1) {
+        if (phi_v0 != 0 && subroutine_arg <= temp_v1) {
             npc->pos.y = y;
             npc->unk_84 = D_8010C97A;
             npc->flags |= 0x1000;
             return 1;
         }
-    } else return 0;
+    } else {
+        return 0;
+    }
 
     npc->flags &= ~0x1000;
     return 0;
