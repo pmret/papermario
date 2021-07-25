@@ -1936,7 +1936,7 @@ typedef struct AnimatedModelNode {
 
 typedef struct EncounterStatus {
     /* 0x000 */ s32 flags;
-    /* 0x004 */ u8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
+    /* 0x004 */ s8 eFirstStrike; /* 0 = none, 1 = player, 2 = enemy */
     /* 0x005 */ s8 hitType; /* 1 = none/enemy, 2 = jump */
     /* 0x006 */ s8 hitTier; /* 0 = normal, 1 = super, 2 = ultra */
     /* 0x007 */ char unk_07;

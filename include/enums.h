@@ -1675,4 +1675,10 @@ enum PartnerAnims {
     PARTNER_ANIM_HURT,
 };
 
+enum FirstStrikes {
+    FIRST_STRIKE_NONE,
+    FIRST_STRIKE_PLAYER,
+    FIRST_STRIKE_ENEMY,
+};
+
 #endif
