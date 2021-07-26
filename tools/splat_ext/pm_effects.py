@@ -47,7 +47,9 @@ glabel {name}
     def effect_path(self, effect):
         return options.get_build_path() / "asm" / "effects" / f"{effect}.s"
 
-    def scan(self, rom_bytes):
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml):
+        super().__init__(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yml)
+
         with open(options.get_asm_path() / ".." / "effects.yaml") as f:
             self.effects = yaml.load(f.read(), Loader=yaml.SafeLoader)
 
