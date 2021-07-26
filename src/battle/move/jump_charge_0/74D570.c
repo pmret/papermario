@@ -15,10 +15,10 @@ ApiStatus func_802A1108_74D678(ScriptInstance* script, s32 isInitialCall) {
     s32 var3 = get_variable(script, *args++);
 
     playFX_56(0, var1, var2, var3, 1.0f, 60);
-    battleStatus->jumpCharge += 1;
 
+    battleStatus->jumpCharge++;
     if (battleStatus->jumpCharge > 99) {
-        (* &battleStatus)->jumpCharge = 99; // TODO: macro?
+        battleStatus->jumpCharge = 99;
     }
 
     battleStatus->hammerCharge = 0;
