@@ -58,7 +58,7 @@ extern ModelList* gCurrentModelListPtr;
 // TODO: potentially a display list, figure this out
 extern u32* gWorldModelSpecialDls[32];
 extern u32* gBattleModelSpecialDls[32];
-extern u32** gCurrentModelSpecialDlsPtr[32];
+extern CustomModelGfx* gCurrentModelSpecialDlsPtr;
 
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;

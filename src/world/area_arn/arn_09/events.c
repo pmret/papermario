@@ -38,7 +38,7 @@ Script N(80240220) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_WINDY_MILL;
+    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524288);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -130,11 +130,11 @@ Script N(idle_802405FC) = SCRIPT({
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, 0, 200, 0, 15);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WELL;
+    SI_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WELL;
 });
 
 Script N(init_80240730) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_HEART_FLED_SECOND_TUNNEL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_FLED_SECOND_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
         BindNpcIdle(NPC_SELF, N(idle_802405FC));

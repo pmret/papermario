@@ -22,7 +22,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240110) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
         }
@@ -57,7 +57,7 @@ Script N(exitDoubleDoor_8024021C) = SCRIPT({
 
 Script N(802402D0) = SCRIPT({
     bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
             bind N(exitDoubleDoor_8024021C) TRIGGER_WALL_PRESS_A 18;
         }
@@ -86,8 +86,8 @@ Script N(enterDoubleDoor_8024038C) = SCRIPT({
             sleep 1;
         }
         == 1 {
-            if (STORY_PROGRESS >= STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
-                if (STORY_PROGRESS < STORY_CH3_ESCAPED_TUBBAS_MANOR) {
+            if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_SMASHED_THE_BRIDGES) {
+                if (SI_STORY_PROGRESS < STORY_CH3_ESCAPED_TUBBAS_MANOR) {
                     spawn N(802402D0);
                     spawn {
                         await N(8024103C);
@@ -110,7 +110,7 @@ Script N(enterDoubleDoor_8024038C) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SI_SAVE_FLAG(1978) = 1;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);

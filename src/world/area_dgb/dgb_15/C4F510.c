@@ -22,7 +22,7 @@ MapConfig N(config) = {
 };
 
 Script N(802418E0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             if (SI_SAVE_VAR(203) == 15) {
                 SetMusicTrack(0, SONG_TUBBA_BLUBBA_THEME, 0, 8);
@@ -127,7 +127,7 @@ Script N(enterSingleDoor_80241C88) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SI_AREA_FLAG(1) = 0;
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -339,7 +339,7 @@ Script N(defeat_802427B0) = SCRIPT({
 });
 
 Script N(init_802427EC) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_ARRIVED_AT_TUBBAS_MANOR) {
+    if (SI_STORY_PROGRESS != STORY_CH3_ARRIVED_AT_TUBBAS_MANOR) {
         RemoveNpc(NPC_SELF);
         return;
     }

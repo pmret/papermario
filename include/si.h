@@ -117,8 +117,8 @@ typedef enum ScriptOpcode {
 #define SI_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
-#define STORY_PROGRESS SI_SAVE_VAR(0)
-#define WORLD_LOCATION SI_SAVE_VAR(425)
+#define SI_STORY_PROGRESS SI_SAVE_VAR(0)
+#define SI_WORLD_LOCATION SI_SAVE_VAR(425)
 
 /* Return type of si_execute_next_command */
 #define SI_CONTINUE 0   /* Continue to next command */

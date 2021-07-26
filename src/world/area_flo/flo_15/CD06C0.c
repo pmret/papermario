@@ -25,7 +25,7 @@ Script N(80240060) = SCRIPT({
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
             } else {
@@ -46,7 +46,7 @@ Script N(8024017C) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -78,7 +78,7 @@ NpcSettings N(npcSettings_80240300) = {
 };
 
 Script N(8024032C) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SI_VAR(3) = 7;
         SI_VAR(4) = 5;
     } else {
@@ -203,7 +203,7 @@ Script N(8024094C) = SCRIPT({
 });
 
 Script N(interact_80240B28) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_SPOKE_WITH_THE_SUN {
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009A));
             SetPlayerAnimation(ANIM_THINKING);
@@ -212,7 +212,7 @@ Script N(interact_80240B28) = SCRIPT({
             sleep 20;
             SetPlayerAnimation(ANIM_10002);
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009B));
-            STORY_PROGRESS = STORY_CH6_SPOKE_WITH_THE_SUN;
+            SI_STORY_PROGRESS = STORY_CH6_SPOKE_WITH_THE_SUN;
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009C));
@@ -237,7 +237,7 @@ Script N(interact_80240B28) = SCRIPT({
 Script N(init_80240CD0) = SCRIPT({
     SetNpcCollisionSize(10, 64, 40);
     EnableNpcShadow(NPC_SUN0, FALSE);
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN0, 0, 270, 0);
         BindNpcInteract(NPC_SELF, N(interact_80240B28));
         spawn N(8024032C);
@@ -256,7 +256,7 @@ Script N(init_80240DB4) = SCRIPT({
     SetNpcPaletteSwapMode(11, 3);
     SetNpcPaletteSwapping(10, 0, 1, 5, 5, 13, 5, 0, 0);
     SetNpcPaletteSwapping(11, 0, 1, 5, 5, 13, 5, 0, 0);
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN1, 0, 270, -5);
     } else {
         SetNpcPos(NPC_SUN1, 0, 450, -5);

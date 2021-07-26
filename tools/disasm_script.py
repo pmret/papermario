@@ -91,7 +91,7 @@ def get_constants():
     CONSTANTS["NPC_SPRITE"] = {}
     CONSTANTS["MAP_NPCS"] = {}
 
-    [SAVE_VARS.add(x) for x in ["WORLD_LOCATION", "STORY_PROGRESS"]]
+    [SAVE_VARS.add(x) for x in ["SI_WORLD_LOCATION", "SI_STORY_PROGRESS"]]
 
     include_path = Path(Path(__file__).resolve().parent.parent / "include")
     enums = Path(include_path / "enums.h").read_text().splitlines()
@@ -835,9 +835,9 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
             elif v <= -160000000:
                 if v + 170000000 == 0:
-                    self.save_variable = "STORY_PROGRESS"
+                    self.save_variable = "SI_STORY_PROGRESS"
                 elif v + 170000000 == 425:
-                    self.save_variable = "WORLD_LOCATION"
+                    self.save_variable = "SI_WORLD_LOCATION"
                 else:
                     self.save_variable = f"SI_SAVE_VAR({v + 170000000})"
                 return self.save_variable
@@ -891,12 +891,12 @@ class ScriptDSLDisassembler(ScriptDisassembler):
             return CONSTANTS["Events"][var]
         elif case and "takeTurn" in self.script_name and var in CONSTANTS["HitResults"]:
             return CONSTANTS["HitResults"][var]
-        elif ((    case and self.case_variable == "STORY_PROGRESS") or
-            (not case and self.save_variable == "STORY_PROGRESS")):
+        elif ((    case and self.case_variable == "SI_STORY_PROGRESS") or
+            (not case and self.save_variable == "SI_STORY_PROGRESS")):
             if var in CONSTANTS["StoryProgress"]:
                 return CONSTANTS["StoryProgress"][var]
-        elif ((    case and self.case_variable == "WORLD_LOCATION") or
-              (not case and self.save_variable == "WORLD_LOCATION")):
+        elif ((    case and self.case_variable == "SI_WORLD_LOCATION") or
+              (not case and self.save_variable == "SI_WORLD_LOCATION")):
             if var in CONSTANTS["Locations"]:
                 return CONSTANTS["Locations"][var]
 
@@ -936,8 +936,8 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
         #print(f"Op 0x{opcode:2X} saved_var \"{self.save_variable}\" case_var \"{self.case_variable}\"")
         # case variables need to be saved ahead of time, since they span many instructions
-        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "STORY_PROGRESS") or
-            (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "WORLD_LOCATION")):
+        if ((self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "SI_STORY_PROGRESS") or
+            (self.in_case and 0x16 <= opcode <= 0x1B and self.case_variable == "SI_WORLD_LOCATION")):
             argv[0] = self.replace_enum(argv[0], case=True)
 
         if opcode == 0x01:

@@ -27,7 +27,7 @@ MapConfig N(config) = {
 };
 
 Script N(802403E0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -379,7 +379,7 @@ Script N(80241698) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -402,7 +402,7 @@ Script N(main) = SCRIPT({
         sleep 1;
     }
     await N(802403E0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_802402E0_CBDFB0)();
     }
     ModifyColliderFlags(3, 9, 0x00000009);
@@ -578,7 +578,7 @@ Script N(80242240) = SCRIPT({
     if (SI_SAVE_FLAG(1377) == 1) {
         return;
     }
-    if (STORY_PROGRESS < STORY_CH6_GOT_MAGICAL_BEAN) {
+    if (SI_STORY_PROGRESS < STORY_CH6_GOT_MAGICAL_BEAN) {
         return;
     }
     if (SI_SAVE_FLAG(1375) == 0) {
@@ -718,7 +718,7 @@ Script N(defeat_80242AC4) = SCRIPT({
 Script N(init_80242B58) = SCRIPT({
     SetNpcPos(NPC_LAKITU0, 0, -1000, 0);
     if (SI_SAVE_FLAG(1377) == 0) {
-        if (STORY_PROGRESS >= STORY_CH6_GOT_MAGICAL_BEAN) {
+        if (SI_STORY_PROGRESS >= STORY_CH6_GOT_MAGICAL_BEAN) {
             if (SI_SAVE_FLAG(1375) == 1) {
                 SI_MAP_VAR(0) = 0;
                 BindNpcIdle(NPC_SELF, N(idle_80242810));
@@ -733,7 +733,7 @@ Script N(init_80242B58) = SCRIPT({
 Script N(init_80242C38) = SCRIPT({
     SetNpcPos(NPC_LAKITU1, 0, -1000, 0);
     if (SI_SAVE_FLAG(1377) == 0) {
-        if (STORY_PROGRESS >= STORY_CH6_GOT_MAGICAL_BEAN) {
+        if (SI_STORY_PROGRESS >= STORY_CH6_GOT_MAGICAL_BEAN) {
             if (SI_SAVE_FLAG(1375) == 1) {
                 BindNpcDefeat(NPC_SELF, N(defeat_80242AC4));
                 SetNpcPos(NPC_LAKITU1, 200, 110, 29);

@@ -50,7 +50,7 @@ Script N(8024049C) = SCRIPT({
         == 1 {
             DisablePlayerInput(TRUE);
             DisablePlayerPhysics(TRUE);
-            if (STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WELL) {
+            if (SI_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WELL) {
                 SetPlayerPos(1000, 1000, 0);
                 SetNpcPos(NPC_PARTNER, 1000, 1000, 0);
                 RotateModel(0, 80, 0, -1, 0);
@@ -85,7 +85,7 @@ Script N(8024049C) = SCRIPT({
                 sleep 20;
                 SetPlayerPos(0, 0, 0);
                 SetNpcPos(NPC_PARTNER, 0, 0, 0);
-                STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WINDY_MILL;
+                SI_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WINDY_MILL;
             }
             DisablePlayerPhysics(FALSE);
             SetPlayerJumpscale(2.0);
@@ -97,14 +97,14 @@ Script N(8024049C) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_WINDY_MILL;
+    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
     SI_SAVE_FLAG(1979) = 1;
-    if (STORY_PROGRESS >= STORY_CH4_FRYING_PAN_STOLEN) {
+    if (SI_STORY_PROGRESS >= STORY_CH4_FRYING_PAN_STOLEN) {
         SI_SAVE_FLAG(1016) = 0;
         SI_SAVE_FLAG(1017) = 0;
         SI_SAVE_FLAG(1018) = 0;
@@ -128,7 +128,7 @@ static s32 N(pad_A6C) = {
 
 Script N(80240A70) = SCRIPT({
     loop {
-        if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+        if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
             break loop;
         }
         sleep 1;
@@ -138,8 +138,8 @@ Script N(80240A70) = SCRIPT({
     DisablePlayerPhysics(TRUE);
     N(func_80240000_BF47A0)();
     SI_AREA_FLAG(1) = 1;
-    if (STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
-        STORY_PROGRESS = STORY_CH3_WENT_DOWN_THE_WELL;
+    if (SI_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+        SI_STORY_PROGRESS = STORY_CH3_WENT_DOWN_THE_WELL;
     }
     GotoMap("arn_09", 1);
     sleep 100;
@@ -305,7 +305,7 @@ Script N(idle_80241278) = SCRIPT({
 });
 
 Script N(init_80241288) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     } else {
         BindNpcIdle(NPC_SELF, N(idle_80241278));
@@ -313,7 +313,7 @@ Script N(init_80241288) = SCRIPT({
 });
 
 Script N(interact_802412E8) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH5_WHALE_MOUTH_OPEN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BA));
         }
@@ -333,7 +333,7 @@ Script N(interact_802412E8) = SCRIPT({
 });
 
 Script N(init_802413E8) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
+    if (SI_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     } else {
         BindNpcInteract(NPC_SELF, N(interact_802412E8));
@@ -412,7 +412,7 @@ static s32 N(pad_184C) = {
 };
 
 Script N(makeEntities) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+    if (SI_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
         MakeEntity(0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END);
     }
 });

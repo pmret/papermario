@@ -21,7 +21,7 @@ void state_init_pause(void) {
     D_800A0921 = 0;
     D_800A0922 = 0;
     disable_player_input();
-    set_time_freeze_mode(3);
+    set_time_freeze_mode(TIME_FREEZE_PARTNER_MENU);
     set_windows_visible(2);
 }
 
@@ -181,7 +181,7 @@ void state_step_unpause(void) {
                         npc_reload_all();
                         set_windows_visible(0);
                         func_800E98C4();
-                        set_time_freeze_mode(1);
+                        set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                         D_800A0921 = 3;
                         gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;
                         D_802D9D71 = D_802D9D70 + 1;
@@ -215,7 +215,7 @@ void state_step_unpause(void) {
             }
             break;
         case 4:
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             update_encounters();
             update_npcs();
             update_player();

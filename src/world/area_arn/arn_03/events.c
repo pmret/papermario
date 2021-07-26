@@ -20,7 +20,7 @@ Script N(enterWalk_80241930) = SCRIPT({
         spawn N(802418E8);
         return;
     }
-    if (STORY_PROGRESS < STORY_CH3_ARRIVED_AT_GHOST_TOWN) {
+    if (SI_STORY_PROGRESS < STORY_CH3_ARRIVED_AT_GHOST_TOWN) {
         SetPlayerPos(-175, 165, 160);
         InterpPlayerYaw(90, 0);
         SetNpcPos(NPC_PARTNER, -175, 165, 160);
@@ -35,7 +35,7 @@ Script N(enterWalk_80241930) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -43,7 +43,7 @@ Script N(main) = SCRIPT({
     SI_AREA_FLAG(3) = 0;
     SI_AREA_FLAG(4) = 0;
     SI_AREA_FLAG(5) = 0;
-    if (STORY_PROGRESS < STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
+    if (SI_STORY_PROGRESS < STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
         MakeNpcs(0, N(npcGroupList_80244740));
     } else {
         MakeNpcs(0, N(npcGroupList_80244788));
@@ -149,7 +149,7 @@ Script N(80241E68) = SCRIPT({
 });
 
 Script N(interact_80241EB0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(2) == 0) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
@@ -235,7 +235,7 @@ Script N(idle_80242064) = SCRIPT({
     }
     func_802CF56C(2);
     sleep 15;
-    STORY_PROGRESS = STORY_CH3_ARRIVED_AT_GHOST_TOWN;
+    SI_STORY_PROGRESS = STORY_CH3_ARRIVED_AT_GHOST_TOWN;
     DisablePlayerInput(FALSE);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -246,7 +246,7 @@ Script N(idle_80242064) = SCRIPT({
 });
 
 Script N(init_802424E0) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH3_ARRIVED_AT_GHOST_TOWN) {
+    if (SI_STORY_PROGRESS < STORY_CH3_ARRIVED_AT_GHOST_TOWN) {
         SetNpcPos(NPC_SELF, 175, 240, 145);
         BindNpcIdle(NPC_SELF, N(idle_80242064));
     }
@@ -272,7 +272,7 @@ Script N(interact_8024254C) = SCRIPT({
             return;
         }
     }
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(3) == 0) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
@@ -410,7 +410,7 @@ Script N(80242C60) = SCRIPT({
 });
 
 Script N(interact_80242DC4) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(4) == 0) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
@@ -476,7 +476,7 @@ Script N(init_802431A4) = SCRIPT({
 });
 
 Script N(interact_802431C8) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(5) == 0) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,

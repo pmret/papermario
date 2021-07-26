@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240060) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_HEART_FLED_FIRST_TUNNEL {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);
         }

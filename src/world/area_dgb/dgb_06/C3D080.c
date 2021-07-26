@@ -19,7 +19,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240320) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -62,7 +62,7 @@ Script N(enterSingleDoor_80240474) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(589824);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -149,7 +149,7 @@ Script N(interact_8024086C) = SCRIPT({
 });
 
 Script N(init_802408FC) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
+    if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     }
     BindNpcInteract(NPC_SELF, N(interact_8024086C));
