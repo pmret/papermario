@@ -199,7 +199,7 @@ typedef struct PlayerData {
     /* 0x006 */ s8 curMaxFP;
     /* 0x007 */ u8 hardMaxFP;
     /* 0x008 */ u8 maxBP;
-    /* 0x009 */ u8 level;
+    /* 0x009 */ s8 level;
     /* 0x00A */ s8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
@@ -668,7 +668,7 @@ typedef struct BattleStatus {
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
     /* 0x08C */ char unk_8C;
     /* 0x08D */ s8 unk_8D;
-    /* 0x08E */ u8 initialEnemyCount; /* used for SP award bonus */
+    /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
     /* 0x092 */ s8 unk_92;

@@ -1,6 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 
+extern s32 D_802946E0[];
+
 void dispatch_event_actor(Actor* actor, Event event);
 
 s32 has_enchanted_part(Actor* actor) {
@@ -466,7 +468,62 @@ ApiStatus RemoveActor(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "1A5830", RemoveActor);
 #endif
 
-INCLUDE_ASM(s32, "1A5830", DropStarPoints);
+ApiStatus DropStarPoints(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Bytecode* args = script->ptrReadPos;
+    Actor* enemy;
+    f32 playerLevel;
+    f32 enemyLevel;
+    ActorID actorID;
+    f32 ntd;
+    s32 numToDrop;
+
+    actorID = get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+    enemy = get_actor(actorID);
+
+    enemyLevel = enemy->staticActorData->level;
+    if (enemy->staticActorData->level == 0.0f) {
+        enemyLevel = 1.0f;
+    }
+
+    playerLevel = playerData->level;
+    if (playerLevel == 0.0f) {
+        playerLevel = 1.0f;
+    }
+
+    ntd = 0.0f;
+    if (!(enemyLevel < playerLevel)) {
+        ntd = ((enemyLevel - playerLevel) * 0.5f) * D_802946E0[battleStatus->initialEnemyCount];
+        ntd = (ntd + 50.0f) / 100.0f;
+    }
+    numToDrop = ntd;
+
+    if (playerData->level < 27) {
+        s32 spawnMode;
+        s32 i;
+
+        if (enemy->flags & 0x800) {
+            spawnMode = 25;
+        } else {
+            spawnMode = 23;
+        }
+
+        for (i = 0; i < numToDrop; i++) {
+            make_item_entity_delayed(ITEM_STAR_POINT, enemy->currentPos.x, enemy->currentPos.y, enemy->currentPos.z,
+                                     spawnMode, i, 0);
+        }
+
+        battleStatus->incrementStarPointDelay = 40;
+        battleStatus->pendingStarPoints += numToDrop;
+    }
+
+    gBattleStatus.flags1 |= 0x1000000;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
