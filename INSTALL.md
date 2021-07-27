@@ -9,14 +9,15 @@ This repository supports:
 
 If you encounter any issues setting up the repo, please feel free to [reach out to us on Discord](https://discord.gg/urUm3VG).
 
-
-## Unix
+## Common
 
 Clone the repository:
 ```sh
 git clone https://github.com/pmret/papermario
 cd papermario
 ```
+
+## Unix
 
 Install build dependencies:
 ```sh
@@ -64,4 +65,4 @@ docker build . -t pm
 docker run --rm -ti -v $(pwd):/papermario pm
 ```
 
-Then continue with [the instructions for Linux](#unix).
+Then continue with [the instructions for Linux](#unix), but you can skip the install.sh!
