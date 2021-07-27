@@ -4,6 +4,8 @@
 extern s32 D_802946E0[];
 
 void dispatch_event_actor(Actor* actor, Event event);
+s32 func_80263230(Actor*, Actor*);
+void func_80267018(Actor* actor, s32 arg1);
 
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
@@ -129,7 +131,82 @@ INCLUDE_ASM(s32, "1A5830", calc_enemy_test_target);
 
 INCLUDE_ASM(s32, "1A5830", calc_enemy_damage_target);
 
+
+// part before the first conditional needs work
+#ifdef NON_MATCHING
+s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    ActorMovementWalk* walk;
+    s32 dispatchEvent;
+
+    u16 temp_v1;
+
+    battleStatus->currentAttackDamage = damageAmount;
+    temp_v1 = actor->hpChangeCounter + battleStatus->currentAttackDamage;
+    actor->hpChangeCounter += temp_v1;
+    actor->damageCounter += temp_v1;
+    battleStatus->lastAttackDamage = 0;
+    actor->hpChangeCounter -= temp_v1;
+    actor->currentHP -= temp_v1;
+
+    dispatchEvent = originalEvent;
+
+    walk = &actor->walk;
+    if (actor->currentHP <= 0) {
+        battleStatus->lastAttackDamage += actor->currentHP;
+        actor->currentHP = 0;
+        dispatchEvent = EVENT_DEATH;
+    }
+
+    battleStatus->lastAttackDamage += temp_v1;
+    actor->lastDamageTaken = battleStatus->lastAttackDamage;
+    battleStatus->unk_19A = 0;
+
+    if (battleStatus->flags1 & 0x20) {
+        if (dispatchEvent == EVENT_HIT_COMBO) {
+            dispatchEvent = EVENT_HIT;
+        }
+        if (dispatchEvent == EVENT_23) {
+            dispatchEvent = EVENT_IMMUNE;
+        }
+    }
+
+    if (dispatchEvent == EVENT_DEATH) {
+        if (originalEvent == EVENT_SPIN_SMASH_LAUNCH_HIT) {
+            dispatchEvent = EVENT_SPIN_SMASH_LAUNCH_DEATH;
+        }
+        if (originalEvent == EVENT_SHOCK_HIT) {
+            dispatchEvent = EVENT_SHOCK_DEATH;
+        }
+    }
+
+    if (stopMotion == 0) {
+        s32 targetActorID = actor->targetActorID; // why?
+
+        if (func_80263230(actor, actor) != 0) {
+            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
+                              battleStatus->lastAttackDamage, 0);
+            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
+                          battleStatus->lastAttackDamage);
+            actor->targetActorID = targetActorID;
+        } else {
+            actor->targetActorID = targetActorID;
+        }
+    } else {
+        show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage, 0);
+        func_802666E4(actor, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage);
+    }
+
+    if (battleStatus->lastAttackDamage > 0) {
+        func_80267018(actor, 1);
+    }
+    actor->flags |= 0x80000;
+    dispatch_event_actor(actor, dispatchEvent);
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "1A5830", dispatch_damage_event_actor);
+#endif
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
     return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);

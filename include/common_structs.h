@@ -1382,7 +1382,7 @@ typedef struct CustomModelGfx {
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
-    /* 0x04 */ s16 pos[3];
+    /* 0x04 */ Vec3s pos;
     /* 0x0A */ char unk_0A[7];
     /* 0x11 */ u8 homeCol; /* from xpos --> 0-3 */
     /* 0x12 */ u8 homeRow; /* from ypos --> 0-3 */
@@ -1761,7 +1761,7 @@ typedef struct Actor {
     /* 0x1F3 */ u8 numParts;
     /* 0x1F4 */ struct ActorPart* partsTable;
     /* 0x1F8 */ s16 lastDamageTaken;
-    /* 0x1FA */ s16 hpChangeCounter;
+    /* 0x1FA */ u16 hpChangeCounter;
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ s32** unk_200; // Probably a struct but not sure what yet
