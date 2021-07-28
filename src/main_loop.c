@@ -359,7 +359,8 @@ s32 func_800271FC(const u16* framebuf1, const u16* framebuf2, s32 y, s32 x, u8* 
     out[2] = (framebuf1[pixel] >> 1) & 0x1F; // blue
 }
 
-INCLUDE_ASM(s32, "main_loop", func_8002725C);
+void func_8002725C(u8*, u32, u16*);
+INCLUDE_ASM(void, "main_loop", func_8002725C, u8* arg0, u32 arg1, u16* arg2);
 
 INCLUDE_ASM(s32, "main_loop", func_80027600);
 

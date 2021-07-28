@@ -50,7 +50,7 @@ segments:
     - [0x6240, c, fio]
     - [0x6e40, c, curtains]
     - [0x7340, c, crash]
-    - [0x7e40, c, os/nusys/7e40_len_3f0]
+    - [0x7e40, c, os/nusys/7e40_len_3f0, -fforce-addr]
     - [0x8230, c, os/nusys/nuSiMgr]
     - [0x8560, c]
     - [0x8800, c]
