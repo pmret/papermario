@@ -1,5 +1,12 @@
 #include "common.h"
 
+extern s32 D_800F7FA8;
+extern s32 D_800F7F80[10];
+
+void set_hud_element_script(s32, s32);
+void clear_hud_element_flags(s32, s32);
+void draw_hud_element_2(s32);
+
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
@@ -385,7 +392,51 @@ void initialize_status_menu(void) {
     func_800F0D5C();
 }
 
+// close but maybe just regalloc remaining?
+#ifdef NON_MATCHING
+void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits) {
+    s8 digits[4];
+    s32 i;
+    s32 y2;
+    s32 keepDrawing;
+    s32 digit;
+    s32 place;
+
+    set_hud_element_script(iconID, D_800F7FA8);
+    x += 8;
+    y2 = y + 8;
+    set_hud_element_render_pos(iconID, x, y + 7);
+    clear_hud_element_flags(iconID, 2);
+    draw_hud_element_2(iconID);
+
+    // Write each digit of the input number into the digits array
+    for (i = 0; i < numDigits; i++) {
+        digit = value / 10;
+        place = (digit) * 10;
+        digit = value - place;
+        digits[(numDigits - i) - 1] = digit;
+        value /= 10;
+    }
+
+    x += 13;
+    keepDrawing = FALSE;
+
+    for (i = 0; i < numDigits; i++, x += 8) {
+        digit = digits[i];
+
+        // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
+        if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
+            keepDrawing = TRUE;
+            set_hud_element_script(iconID, D_800F7F80[digit]);
+            set_hud_element_render_pos(iconID, x, y2);
+            clear_hud_element_flags(iconID, 2);
+            draw_hud_element_2(iconID);
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
+#endif
 
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
 
