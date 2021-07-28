@@ -13,10 +13,6 @@ DO_SHA1_CHECK = True
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
 
-CFLAGS          = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -fforce-addr"
-CFLAGS_NUSYS    = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
-CFLAGS_LIBULTRA = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
-
 ASFLAGS = "-EB -G 0"
 
 # Paths:
@@ -63,6 +59,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
     nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
 
+    cflags = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
+
     ninja.variable("python", sys.executable)
 
     ninja.rule("ld",
@@ -81,29 +79,15 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     )
 
     ninja.rule("cc",
-        description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
-        depfile="$out.d",
-        deps="gcc",
-    )
-
-    ninja.rule("cc_nusys",
-        description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_NUSYS} -o - | {nu64as} {ASFLAGS} - -o $out'",
-        depfile="$out.d",
-        deps="gcc",
-    )
-
-    ninja.rule("cc_libultra",
-        description="cc($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {CFLAGS_LIBULTRA} -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc($version) $in $cflags",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
-        description="cc_dsl($version) $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {CFLAGS} -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc_dsl($version) $in $cflags",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -294,7 +278,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl", "cc_nusys", "cc_libultra"]:
+                elif task in ["cc", "cc_dsl"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -315,18 +299,29 @@ class Configure:
             elif isinstance(seg, segtypes.n64.asm.N64SegAsm) or (isinstance(seg, segtypes.n64.data.N64SegData) and not seg.type[0] == "."):
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.n64.c.N64SegC) or (isinstance(seg, segtypes.n64.data.N64SegData) and seg.type[0] == "."):
-                task = "cc"
-                if "nusys" in entry.src_paths[0].parts:
-                    task = "cc_nusys"
-                elif "os" in entry.src_paths[0].parts:
-                    task = "cc_libultra"
-                else:
-                    with entry.src_paths[0].open() as f:
-                        s = f.read()
-                        if "SCRIPT(" in s or "#pragma SCRIPT" or "#include \"world/common/foliage.inc.c\"" in s:
-                            task = "cc_dsl"
+                cflags = None
+                if isinstance(seg.yaml, dict):
+                    cflags = seg.yaml.get("cflags")
+                elif len(seg.yaml) >= 4:
+                    cflags = seg.yaml[3]
 
-                build(entry.object_path, entry.src_paths, task)
+                # default cflags where not specified
+                if cflags is None:
+                    if "nusys" in entry.src_paths[0].parts:
+                        cflags = ""
+                    elif "os" in entry.src_paths[0].parts: # libultra
+                        cflags = ""
+                    else: # papermario
+                        cflags = "-fforce-addr"
+
+                # check for dsl
+                task = "cc"
+                with entry.src_paths[0].open() as f:
+                    s = f.read()
+                    if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
+                        task = "cc_dsl"
+
+                build(entry.object_path, entry.src_paths, task, variables={"cflags": cflags})
 
                 # images embedded inside data aren't linked, but they do need to be built into .inc.c files
                 if isinstance(seg, segtypes.n64.group.N64SegGroup):
