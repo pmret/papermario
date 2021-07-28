@@ -37,7 +37,7 @@ def exec_shell(command: List[str]) -> str:
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
-def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
+def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str):
     # platform-specific
     if sys.platform  == "darwin":
         os_dir = "mac"
@@ -59,7 +59,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
     cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
     nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
 
-    cflags = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces"
+    cflags = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces " + extra_cflags
 
     ninja.variable("python", sys.executable)
 
@@ -80,14 +80,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str):
 
     ninja.rule("cc",
         description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -598,6 +598,8 @@ if __name__ == "__main__":
     parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
     parser.add_argument("--split-code", action="store_true", help="Re-split code segments to asm files")
     parser.add_argument("--no-split-assets", action="store_true", help="Don't split assets from the baserom(s)")
+    parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
+    parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -642,12 +644,24 @@ if __name__ == "__main__":
             rm_recursive(ROOT / f"ver/{version}/build")
             rm_recursive(ROOT / f"ver/{version}/.splat_cache")
 
+    cflags = ""
+    cppflags = ""
+    if args.non_matching:
+        cppflags += " -DNON_MATCHING"
+
+        if args.debug:
+            cflags += " -ggdb3" # we can generate more accurate debug info in non-matching mode
+            cppflags += " -DDEBUG" # e.g. affects ASSERT macro
+    elif args.debug:
+        # g1 doesn't affect codegen
+        cflags += " -g1"
+
     # add splat to python import path
     sys.path.append(str((ROOT / args.splat).resolve()))
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
-    write_ninja_rules(ninja, args.cpp or "cpp")
+    write_ninja_rules(ninja, args.cpp or "cpp", cppflags, cflags)
     write_ninja_for_tools(ninja)
 
     skip_files = set()
