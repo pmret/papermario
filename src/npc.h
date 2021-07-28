@@ -43,7 +43,7 @@ s32 npc_do_player_collision(Npc* npc);
 
 void npc_do_gravity(Npc* npc);
 
-s32 func_800397E8();
+s32 func_800397E8(Npc* npc, f32 arg1);
 
 /// Updates all NPCs.
 void update_npcs(void);
