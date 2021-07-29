@@ -1097,7 +1097,7 @@ s32 btl_are_all_enemies_defeated(void) {
 s32 btl_check_enemies_defeated(void) {
     if (btl_are_all_enemies_defeated()) {
         btl_set_state(0x1A);
-        return TRUE;;
+        return TRUE;
     }
     return FALSE;
 }
@@ -1109,7 +1109,7 @@ s32 btl_check_player_defeated(void) {
     D_800DC4E4 = gBattleState;
     D_800DC4D8 = gBattleState2;
     btl_set_state(0x1B);
-    return TRUE;;
+    return TRUE;
 }
 
 INCLUDE_ASM(s32, "190B20", func_802634B8);
@@ -1334,7 +1334,7 @@ s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
         }
     }
 
-    return TRUE;;
+    return TRUE;
 }
 
 s32 get_defense(Actor* actor, s32* defenseTable, s32 elementFlags) {
