@@ -244,7 +244,7 @@ segments:
     - [0x4a1b0, c, os/4a1b0_len_40]
     - [0x4a1f0, c, os/4a1f0_len_170] # yay0 decompression - some or all is hand-written
     - [0x4a360, c, os/4a360_len_930] # osFlash* - IDO O2 -g
-    - [0x4ac90, pm_effects, effects]
+    - [0x4ac90, pm_effect_loads, effect_loads]
     - [0x4DF30, c, battle/battle]
     - [0x4E5A0, data, 1000_len_60]
     - [0x4F410, .data, 1370_len_7d0]

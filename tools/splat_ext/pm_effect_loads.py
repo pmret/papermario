@@ -3,7 +3,7 @@ from segtypes.n64.segment import N64Segment
 from util import options
 import yaml
 
-class N64SegPm_effects(N64Segment):
+class N64SegPm_effect_loads(N64Segment):
     effects = []
 
     @staticmethod
@@ -55,7 +55,7 @@ glabel {name}
 
     def split(self, rom_bytes):
         for i, effect in enumerate(self.effects):
-            effect_asm = N64SegPm_effects.get_effect_asm(i, effect)
+            effect_asm = N64SegPm_effect_loads.get_effect_asm(i, effect)
 
             self.effect_path("").parent.mkdir(parents=True, exist_ok=True)
 
