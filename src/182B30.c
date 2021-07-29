@@ -391,7 +391,7 @@ void func_8025D3C4(ActorPart* part, s32 decorationIndex) {
 INCLUDE_ASM(s32, "182B30", func_8025D3CC);
 
 void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
-    remove_effect(part->decorationTable->unk_8B0[decorationIndex], decorationIndex * 4);
+    remove_effect(part->decorationTable->unk_8B0[decorationIndex]);
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);

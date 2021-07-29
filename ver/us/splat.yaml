@@ -2041,9 +2041,9 @@ segments:
     start: 0x325ad0
     vram: 0xE0200000
     subsegments:
-    - [0x325ad0, c]
-    - [0x325ee0, c]
-    - [0x326160, data]
+    - [0x325AD0, c]
+    - [0x325EE0, pm_effect_shims, effect_shims]
+    - [0x326160, .data, 325AD0]
   - [0x326410, bin]
   - type: code
     start: 0x3278f0

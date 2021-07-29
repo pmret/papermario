@@ -3237,7 +3237,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
 
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
-        remove_effect(N(D_8024EFC0), effectPtr);
+        remove_effect(N(D_8024EFC0));
         free_generic_entity(gPauseMenuCursorPosY);
         return ApiStatus_DONE2;
     }

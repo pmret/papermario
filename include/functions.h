@@ -456,4 +456,14 @@ void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 
+EffectInstance* func_8005A2BC(EffectBlueprint* effectBp);
+void remove_effect(EffectInstance* arg0);
+s32 load_effect(s32 effectIndex);
+void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
+s32 func_8011CFBC(void);
+s32 set_screen_overlay_center_worldpos(void);
+s32 mdl_get_next_texture_address(void);
+void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
+
 #endif
