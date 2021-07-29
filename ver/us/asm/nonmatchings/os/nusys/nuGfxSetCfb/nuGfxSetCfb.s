@@ -9,13 +9,13 @@ glabel nuGfxSetCfb
 /* 3A700 8005F300 AFB00010 */  sw        $s0, 0x10($sp)
 /* 3A704 8005F304 3C01800A */  lui       $at, %hi(D_8009A658)
 /* 3A708 8005F308 AC24A658 */  sw        $a0, %lo(D_8009A658)($at)
-/* 3A70C 8005F30C 3C018007 */  lui       $at, %hi(D_800773F0)
-/* 3A710 8005F310 AC3173F0 */  sw        $s1, %lo(D_800773F0)($at)
-/* 3A714 8005F314 3C01800A */  lui       $at, %hi(D_8009A5F0)
-/* 3A718 8005F318 AC20A5F0 */  sw        $zero, %lo(D_8009A5F0)($at)
+/* 3A70C 8005F30C 3C018007 */  lui       $at, %hi(nuGfxCfbNum)
+/* 3A710 8005F310 AC3173F0 */  sw        $s1, %lo(nuGfxCfbNum)($at)
+/* 3A714 8005F314 3C01800A */  lui       $at, %hi(nuGfxCfbCounter)
+/* 3A718 8005F318 AC20A5F0 */  sw        $zero, %lo(nuGfxCfbCounter)($at)
 /* 3A71C 8005F31C 8C820000 */  lw        $v0, ($a0)
-/* 3A720 8005F320 3C01800A */  lui       $at, %hi(D_8009A64C)
-/* 3A724 8005F324 AC22A64C */  sw        $v0, %lo(D_8009A64C)($at)
+/* 3A720 8005F320 3C01800A */  lui       $at, %hi(nuGfxCfb_ptr)
+/* 3A724 8005F324 AC22A64C */  sw        $v0, %lo(nuGfxCfb_ptr)($at)
 /* 3A728 8005F328 0C0180DC */  jal       nuGfxRetraceWait
 /* 3A72C 8005F32C 24040001 */   addiu    $a0, $zero, 1
 /* 3A730 8005F330 0C017BE4 */  jal       nuScSetFrameBufferNum
@@ -47,10 +47,10 @@ glabel nuGfxSetCfb
 /* 3A78C 8005F38C 00000000 */   nop
 .L8005F390:
 /* 3A790 8005F390 8C820000 */  lw        $v0, ($a0)
-/* 3A794 8005F394 3C01800A */  lui       $at, %hi(D_8009A5F0)
-/* 3A798 8005F398 AC30A5F0 */  sw        $s0, %lo(D_8009A5F0)($at)
-/* 3A79C 8005F39C 3C01800A */  lui       $at, %hi(D_8009A64C)
-/* 3A7A0 8005F3A0 AC22A64C */  sw        $v0, %lo(D_8009A64C)($at)
+/* 3A794 8005F394 3C01800A */  lui       $at, %hi(nuGfxCfbCounter)
+/* 3A798 8005F398 AC30A5F0 */  sw        $s0, %lo(nuGfxCfbCounter)($at)
+/* 3A79C 8005F39C 3C01800A */  lui       $at, %hi(nuGfxCfb_ptr)
+/* 3A7A0 8005F3A0 AC22A64C */  sw        $v0, %lo(nuGfxCfb_ptr)($at)
 /* 3A7A4 8005F3A4 08017CFA */  j         .L8005F3E8
 /* 3A7A8 8005F3A8 00000000 */   nop
 .L8005F3AC:

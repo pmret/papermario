@@ -14,8 +14,8 @@ glabel state_step_battle
 /* ED08 80033908 3C02800A */  lui       $v0, %hi(D_8009A658)
 /* ED0C 8003390C 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
 /* ED10 80033910 8C430004 */  lw        $v1, 4($v0)
-/* ED14 80033914 3C02800A */  lui       $v0, %hi(D_8009A64C)
-/* ED18 80033918 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
+/* ED14 80033914 3C02800A */  lui       $v0, %hi(nuGfxCfb_ptr)
+/* ED18 80033918 8C42A64C */  lw        $v0, %lo(nuGfxCfb_ptr)($v0)
 /* ED1C 8003391C 14620089 */  bne       $v1, $v0, .L80033B44
 /* ED20 80033920 2484FFFF */   addiu    $a0, $a0, -1
 /* ED24 80033924 3C02800A */  lui       $v0, %hi(gOverrideFlags)

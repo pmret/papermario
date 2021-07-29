@@ -2,7 +2,6 @@
 #include "nu/nusys.h"
 
 extern u16* FrameBuf[3];
-extern UNK_PTR D_8009A610;
 extern UNK_PTR D_80093BA0;
 extern Gfx rdpstateinit_dl[];
 
@@ -14,7 +13,7 @@ void nuGfxInitEX2(void) {
     nuGfxSetCfb(FrameBuf, NU_GFX_FRAMEBUFFER_NUM);
     nuGfxSetZBuffer((u16*) NU_GFX_ZBUFFER_ADDR);
     nuGfxSwapCfbFuncSet(nuGfxSwapCfb);
-    D_8009A610 = &D_80093BA0;
+    nuGfxUcode = &D_80093BA0;
     nuGfxTaskMgrInit();
 
     ptr = gfx;

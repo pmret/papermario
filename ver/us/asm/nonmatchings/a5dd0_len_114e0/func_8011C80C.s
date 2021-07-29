@@ -375,8 +375,8 @@ glabel func_8011C80C
 /* B34CC 8011CDCC AE02008C */  sw        $v0, 0x8c($s0)
 /* B34D0 8011CDD0 3C02F100 */  lui       $v0, 0xf100
 /* B34D4 8011CDD4 AE0200A0 */  sw        $v0, 0xa0($s0)
-/* B34D8 8011CDD8 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* B34DC 8011CDDC 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* B34D8 8011CDD8 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* B34DC 8011CDDC 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* B34E0 8011CDE0 260200B0 */  addiu     $v0, $s0, 0xb0
 /* B34E4 8011CDE4 AE1900A4 */  sw        $t9, 0xa4($s0)
 /* B34E8 8011CDE8 AE220000 */  sw        $v0, ($s1)

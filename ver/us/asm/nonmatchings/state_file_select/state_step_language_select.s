@@ -93,8 +93,8 @@ glabel state_step_language_select
 /* 10710 80035310 3C02800A */  lui       $v0, %hi(D_8009A658)
 /* 10714 80035314 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
 /* 10718 80035318 8C430008 */  lw        $v1, 8($v0)
-/* 1071C 8003531C 3C02800A */  lui       $v0, %hi(D_8009A64C)
-/* 10720 80035320 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
+/* 1071C 8003531C 3C02800A */  lui       $v0, %hi(nuGfxCfb_ptr)
+/* 10720 80035320 8C42A64C */  lw        $v0, %lo(nuGfxCfb_ptr)($v0)
 /* 10724 80035324 14620008 */  bne       $v1, $v0, .L80035348
 /* 10728 80035328 24040003 */   addiu    $a0, $zero, 3
 /* 1072C 8003532C 3C02800A */  lui       $v0, %hi(gOverrideFlags)
