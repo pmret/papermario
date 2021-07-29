@@ -779,7 +779,7 @@ segments:
   - type: code
     start: 0x131340
     vram: 0x8023E000
-    subsections:
+    subsegments:
     - [0x131340, bin] # TODO images
     - [0x135140, bin, pause_icon_table] # TODO data
   - type: code
