@@ -56,7 +56,7 @@ glabel func_802414CC_DF7ECC
 /* DF7F98 80241598 8E050008 */  lw        $a1, 8($s0)
 /* DF7F9C 8024159C 8E060000 */  lw        $a2, ($s0)
 /* DF7FA0 802415A0 8E07000C */  lw        $a3, 0xc($s0)
-/* DF7FA4 802415A4 0C04BA38 */  jal       func_8012E8E0
+/* DF7FA4 802415A4 0C04BA38 */  jal       msg_get_glyph
 /* DF7FA8 802415A8 46000586 */   mov.s    $f22, $f0
 /* DF7FAC 802415AC 93A20042 */  lbu       $v0, 0x42($sp)
 /* DF7FB0 802415B0 3C013FE0 */  lui       $at, 0x3fe0

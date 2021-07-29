@@ -23,7 +23,7 @@ glabel func_80241B74_A3B054
 /* A3B094 80241BB4 AFA00010 */  sw        $zero, 0x10($sp)
 /* A3B098 80241BB8 AFA00014 */  sw        $zero, 0x14($sp)
 /* A3B09C 80241BBC 0080282D */  daddu     $a1, $a0, $zero
-/* A3B0A0 80241BC0 0C046FE6 */  jal       func_8011BF98
+/* A3B0A0 80241BC0 0C046FE6 */  jal       set_model_env_color_parameters
 /* A3B0A4 80241BC4 0080302D */   daddu    $a2, $a0, $zero
 /* A3B0A8 80241BC8 8E030070 */  lw        $v1, 0x70($s0)
 /* A3B0AC 80241BCC 240200FF */  addiu     $v0, $zero, 0xff
@@ -35,7 +35,7 @@ glabel func_80241B74_A3B054
 /* A3B0C4 80241BE4 0040202D */   daddu    $a0, $v0, $zero
 /* A3B0C8 80241BE8 0040202D */  daddu     $a0, $v0, $zero
 /* A3B0CC 80241BEC 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B0D0 80241BF0 0C046F1F */  jal       func_8011BC7C
+/* A3B0D0 80241BF0 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B0D4 80241BF4 0000302D */   daddu    $a2, $zero, $zero
 /* A3B0D8 80241BF8 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B0DC 80241BFC 2404007A */   addiu    $a0, $zero, 0x7a
@@ -43,7 +43,7 @@ glabel func_80241B74_A3B054
 /* A3B0E4 80241C04 0040202D */   daddu    $a0, $v0, $zero
 /* A3B0E8 80241C08 0040202D */  daddu     $a0, $v0, $zero
 /* A3B0EC 80241C0C 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B0F0 80241C10 0C046F1F */  jal       func_8011BC7C
+/* A3B0F0 80241C10 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B0F4 80241C14 0000302D */   daddu    $a2, $zero, $zero
 /* A3B0F8 80241C18 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B0FC 80241C1C 2404007B */   addiu    $a0, $zero, 0x7b
@@ -51,7 +51,7 @@ glabel func_80241B74_A3B054
 /* A3B104 80241C24 0040202D */   daddu    $a0, $v0, $zero
 /* A3B108 80241C28 0040202D */  daddu     $a0, $v0, $zero
 /* A3B10C 80241C2C 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B110 80241C30 0C046F1F */  jal       func_8011BC7C
+/* A3B110 80241C30 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B114 80241C34 0000302D */   daddu    $a2, $zero, $zero
 /* A3B118 80241C38 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B11C 80241C3C 2404007C */   addiu    $a0, $zero, 0x7c
@@ -59,7 +59,7 @@ glabel func_80241B74_A3B054
 /* A3B124 80241C44 0040202D */   daddu    $a0, $v0, $zero
 /* A3B128 80241C48 0040202D */  daddu     $a0, $v0, $zero
 /* A3B12C 80241C4C 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B130 80241C50 0C046F1F */  jal       func_8011BC7C
+/* A3B130 80241C50 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B134 80241C54 0000302D */   daddu    $a2, $zero, $zero
 /* A3B138 80241C58 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B13C 80241C5C 2404007D */   addiu    $a0, $zero, 0x7d
@@ -67,7 +67,7 @@ glabel func_80241B74_A3B054
 /* A3B144 80241C64 0040202D */   daddu    $a0, $v0, $zero
 /* A3B148 80241C68 0040202D */  daddu     $a0, $v0, $zero
 /* A3B14C 80241C6C 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B150 80241C70 0C046F1F */  jal       func_8011BC7C
+/* A3B150 80241C70 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B154 80241C74 0000302D */   daddu    $a2, $zero, $zero
 /* A3B158 80241C78 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B15C 80241C7C 2404007F */   addiu    $a0, $zero, 0x7f
@@ -75,7 +75,7 @@ glabel func_80241B74_A3B054
 /* A3B164 80241C84 0040202D */   daddu    $a0, $v0, $zero
 /* A3B168 80241C88 0040202D */  daddu     $a0, $v0, $zero
 /* A3B16C 80241C8C 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B170 80241C90 0C046F1F */  jal       func_8011BC7C
+/* A3B170 80241C90 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B174 80241C94 0000302D */   daddu    $a2, $zero, $zero
 /* A3B178 80241C98 0C046C04 */  jal       get_model_list_index_from_tree_index
 /* A3B17C 80241C9C 240400D0 */   addiu    $a0, $zero, 0xd0
@@ -83,7 +83,7 @@ glabel func_80241B74_A3B054
 /* A3B184 80241CA4 0040202D */   daddu    $a0, $v0, $zero
 /* A3B188 80241CA8 0040202D */  daddu     $a0, $v0, $zero
 /* A3B18C 80241CAC 2405FFFF */  addiu     $a1, $zero, -1
-/* A3B190 80241CB0 0C046F1F */  jal       func_8011BC7C
+/* A3B190 80241CB0 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* A3B194 80241CB4 0000302D */   daddu    $a2, $zero, $zero
 /* A3B198 80241CB8 24020002 */  addiu     $v0, $zero, 2
 .L80241CBC:

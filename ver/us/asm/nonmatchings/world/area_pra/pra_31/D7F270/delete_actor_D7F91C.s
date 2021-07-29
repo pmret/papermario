@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel delete_actor_D7F91C
+glabel btl_delete_actor_D7F91C
 /* D7F91C 80240BBC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D7F920 80240BC0 AFB10014 */  sw        $s1, 0x14($sp)
 /* D7F924 80240BC4 0080882D */  daddu     $s1, $a0, $zero

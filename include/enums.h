@@ -409,19 +409,19 @@ enum SongIDs {
 
 typedef UNK_TYPE Ability;
 enum Abilities {
-    ABILITY_DODGE_MASTER = 0,
+    ABILITY_DODGE_MASTER,
     ABILITY_UNUSED,
     ABILITY_SPIKE_SHIELD,
     ABILITY_FIRST_ATTACK,
-    ABILITY_H_P_PLUS,
+    ABILITY_HP_PLUS,
     ABILITY_DOUBLE_DIP,
     ABILITY_MYSTERY_SCROLL,
     ABILITY_FIRE_SHIELD,
     ABILITY_PRETTY_LUCKY,
-    ABILITY_H_P_DRAIN,
+    ABILITY_HP_DRAIN,
     ABILITY_ALL_OR_NOTHING,
     ABILITY_SLOW_GO,
-    ABILITY_F_P_PLUS,
+    ABILITY_FP_PLUS,
     ABILITY_ICE_POWER,
     ABILITY_FEELING_FINE,
     ABILITY_ATTACK_F_X,
@@ -445,7 +445,7 @@ enum Abilities {
     ABILITY_CLOSE_CALL,
     ABILITY_P_UP_D_DOWN,
     ABILITY_LUCKY_DAY,
-    ABILITY_MEGA_H_P_DRAIN,
+    ABILITY_MEGA_HP_DRAIN,
     ABILITY_P_DOWN_D_UP,
     ABILITY_FLOWER_FANATIC,
     ABILITY_SPEEDY_SPIN,
@@ -469,7 +469,7 @@ enum Abilities {
 
 typedef UNK_TYPE Emote;
 enum Emotes {
-    EMOTE_EXCLAMATION = 0,
+    EMOTE_EXCLAMATION,
     EMOTE_SHOCK,
     EMOTE_QUESTION,
     EMOTE_FRUSTRATION,
@@ -479,7 +479,7 @@ enum Emotes {
 
 typedef UNK_TYPE Easing;
 enum Easings {
-    EASING_LINEAR = 0,
+    EASING_LINEAR,
     EASING_QUADRATIC_IN,
     EASING_CUBIC_IN,
     EASING_QUARTIC_IN,
@@ -496,12 +496,14 @@ enum Easings {
 
 typedef UNK_TYPE SoundID;
 enum SoundIDs {
+    SOUND_UNKNOWN_0,
     SOUND_UNKNOWN_D                 = 13,
     SOUND_UNKNOWN_E                 = 14,
     SOUND_UNKNOWN_43                = 67,
     SOUND_JR_TROOPA_SPLASH          = 69,
     SOUND_JR_TROOPA_SWIM,
     SOUND_BOO_SPOOK,
+    SOUND_UNKNOWN_B4                = 180,
     SOUND_BOO_VANISH                = 193,
     SOUND_BOO_APPEAR                = 195,
     SOUND_MENU_OPEN                 = 197,
@@ -510,6 +512,14 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB,
     SOUND_MENU_NEXT,
     SOUND_MENU_BACK,
+    SOUND_E1                        = 225,
+    SOUND_E2,
+    SOUND_E3,
+    SOUND_E9                        = 233,
+    SOUND_EA,
+    SOUND_EB,
+    SOUND_10C                       = 268,
+    SOUND_10D,
     SOUND_STEP1                     = 321,
     SOUND_STEP2,
     SOUND_TORNADO_JUMP              = 327,
@@ -517,6 +527,7 @@ enum SoundIDs {
     SOUND_LAND                      = 331,
     SOUND_HIT_BLOCK                 = 334,
     SOUND_SEARCH_BUSH               = 339,
+    SOUND_UNKNOWN_162               = 354,
     SOUND_BASIC_DOOR_OPEN           = 449,
     SOUND_BASIC_DOOR_CLOSE,
     SOUND_METAL_DOOR_OPEN,
@@ -532,20 +543,26 @@ enum SoundIDs {
     SOUND_UNKNOWN_25A,
     SOUND_UNKNOWN_25C               = 604,
     SOUND_UNKNOWN_25D,
+    SOUND_UNKNOWN_262               = 610,
+    SOUND_UNKNOWN_282               = 642,
     SOUND_BOW_SPOOK                 = 657,
     SOUND_UNUSED_2C1                = 705,
     SOUND_SMOKE_BURST               = 717,
     SOUND_DAYZEE_SONG               = 727,
     SOUND_POWER_UP,
+    SOUND_UNKNOWN_2F1               = 753,
+    SOUND_UNKNOWN_2F7               = 759,
     SOUND_CLOSE_SHELL               = 767,
     SOUND_SHY_GUY_SCREAMS1          = 780,
     SOUND_SHY_GUY_SCREAMS2,
     SOUND_SHY_GUY_SCREAMS3,
     SOUND_TOY_TANK_MOVE1,
     SOUND_TOY_TANK_MOVE2,
+    SOUND_UNKNOWN_315               = 789,
     SOUND_MOLE_SURFACE              = 801,
     SOUND_MOLE_DIG,
     SOUND_MOLE_POP,
+    SOUND_UNKNOWN_32E               = 814,
     SOUND_UNKNOWN_361               = 865,
     SOUND_UNKNOWN_362,
     SOUND_UNKNOWN_363,
@@ -559,6 +576,8 @@ enum SoundIDs {
     SOUND_UNKNOWN_376,
     SOUND_UNKNOWN_377,
     SOUND_UNKNOWN_379               = 889,
+    SOUND_37A                       = 890,
+    SOUND_37B,
     SOUND_GENERAL_WHISTLE           = 917,
     SOUND_OPEN_SHELL                = 980,
     SOUND_JUMP_3E2                  = 994,
@@ -568,7 +587,9 @@ enum SoundIDs {
     SOUND_MOLE_THROW                = 1000,
     SOUND_UNKNOWN_3F3               = 1011,
     SOUND_THROW                     = 1018,
-    SOUND_BOW_VANISH                = 8206,
+    SOUND_UNKNOWN_2003              = 8195,
+    SOUND_UNKNOWN_200D              = 8205,
+    SOUND_BOW_VANISH,
     SOUND_BOW_APPEAR,
     SOUND_UNKNOWN_2010,
     SOUND_CANNON1                   = 8214,
@@ -579,21 +600,27 @@ enum SoundIDs {
     SOUND_UNKNOWN_202E,
     SOUND_UNKNOWN_202F,
     SOUND_UNKNOWN_2030,
+    SOUND_UNKNOWN_2038              = 8248,
+    SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
     SOUND_JUMP_2081                 = 8321,
-    SOUND_UNKNOWN_208D              = 8333,
+    SOUND_UNKNOWN_208C              = 8332,
+    SOUND_UNKNOWN_208D,
     SOUND_UNKNOWN_208E,
+    SOUND_UNKNOWN_208F,
     SOUND_UNKNOWN_2095              = 8341,
     SOUND_SPELL_CAST1               = 8404,
     SOUND_SPELL_CAST2,
     SOUND_SPELL_CAST3,
     SOUND_SPELL_CAST4,
     SOUND_SPELL_CAST5,
+    SOUND_UNKNOWN_20F6              = 8438,
+    SOUND_UNKNOWN_2106              = 8454,
 };
 
 typedef UNK_TYPE Cam;
 enum Cams {
-    CAM_DEFAULT = 0,
+    CAM_DEFAULT,
     CAM_BATTLE,
     CAM_TATTLE,
     CAM_CAM3,
@@ -603,7 +630,8 @@ enum Cams {
 
 typedef s16 ItemID;
 enum ItemIDs {
-    ITEM_JUMP                   = 1,
+    ITEM_NONE,
+    ITEM_JUMP,
     ITEM_SPIN_JUMP,
     ITEM_TORNADO_JUMP,
     ITEM_HAMMER,
@@ -826,7 +854,7 @@ enum ItemIDs {
     ITEM_POWER_BOUNCE,
     ITEM_SPIKE_SHIELD,
     ITEM_FIRST_ATTACK,
-    ITEM_H_P_PLUS_A,
+    ITEM_HP_PLUS_A,
     ITEM_QUAKE_HAMMER,
     ITEM_DOUBLE_DIP,
     ITEM_MYSTERY_SCROLL,
@@ -840,10 +868,10 @@ enum ItemIDs {
     ITEM_FEELING_FINE,
     ITEM_ATTACK_F_X_A,
     ITEM_ALLOR_NOTHING,
-    ITEM_H_P_DRAIN,
+    ITEM_HP_DRAIN,
     ITEM_JUMP_CHARGE0,
     ITEM_SLOW_GO,
-    ITEM_F_P_PLUS_A,
+    ITEM_FP_PLUS_A,
     ITEM_MEGA_RUSH,
     ITEM_ICE_POWER,
     ITEM_DEFEND_PLUS_A,
@@ -872,7 +900,7 @@ enum ItemIDs {
     ITEM_CLOSE_CALL,
     ITEM_P_UP_D_DOWN,
     ITEM_LUCKY_DAY,
-    ITEM_MEGA_H_P_DRAIN,
+    ITEM_MEGA_HP_DRAIN,
     ITEM_P_DOWN_D_UP,
     ITEM_POWER_QUAKE,
     ITEM_AUTO_MULTIBOUNCE,
@@ -903,8 +931,8 @@ enum ItemIDs {
     ITEM_EARTHQUAKE_JUMP,
     ITEM_DEEP_FOCUS2,
     ITEM_DEEP_FOCUS3,
-    ITEM_H_P_PLUS_B,
-    ITEM_F_P_PLUS_B,
+    ITEM_HP_PLUS_B,
+    ITEM_FP_PLUS_B,
     ITEM_HAPPY_HEART_B,
     ITEM_HAPPY_HEART_X,
     ITEM_FLOWER_SAVER_B,
@@ -925,12 +953,12 @@ enum ItemIDs {
     ITEM_ATTACK_F_X_E,
     ITEM_ATTACK_F_X_C,
     ITEM_ATTACK_F_X_F,
-    ITEM_H_P_PLUS_C,
-    ITEM_H_P_PLUS_X,
-    ITEM_H_P_PLUS_Y,
-    ITEM_F_P_PLUS_C,
-    ITEM_F_P_PLUS_X,
-    ITEM_F_P_PLUS_Y,
+    ITEM_HP_PLUS_C,
+    ITEM_HP_PLUS_X,
+    ITEM_HP_PLUS_Y,
+    ITEM_FP_PLUS_C,
+    ITEM_FP_PLUS_X,
+    ITEM_FP_PLUS_Y,
     ITEM_HEALTHY_HEALTHY,
     ITEM_ATTACK_F_X_F2,
     ITEM_ATTACK_F_X_F3,
@@ -962,8 +990,10 @@ enum ItemIDs {
     ITEM_ITEMS_ICON,
 };
 
+// TODO: use NPC_ANIM-like macro for player animations
 typedef UNK_TYPE PlayerAnim;
 enum PlayerAnims {
+    ANIM_1                      = 1, // XXX
     ANIM_STAND_STILL            = 0x10000,
     ANIM_CROUCH_STILL,
     ANIM_10002,
@@ -1009,12 +1039,22 @@ enum PlayerAnims {
     ANIM_30004                  = 0x30004,
     ANIM_30008                  = 0x30008,
     ANIM_30009,
+    ANIM_80003                  = 0x80003,
+    ANIM_80007                  = 0x80007,
     ANIM_8000B                  = 0x8000B,
+    ANIM_8000C,
+    ANIM_80017                  = 0x80017,
+    ANIM_8001B                  = 0x8001B,
+    ANIM_8001D                  = 0x8001D,
+    ANIM_8001E,
+    ANIM_90004                  = 0x90004,
+    ANIM_90005,
+    ANIM_90006,
 };
 
 typedef UNK_TYPE AmbientSound;
 enum AmbientSounds {
-    AMBIENT_SPOOKY      = 0,
+    AMBIENT_SPOOKY,
     AMBIENT_WIND,
     AMBIENT_BEACH,
     AMBIENT_JUNGLE,
@@ -1033,7 +1073,7 @@ enum AmbientSounds {
 
 typedef UNK_TYPE EncounterOutcome;
 enum EncounterOutcomes {
-    OUTCOME_PLAYER_WON  = 0,
+    OUTCOME_PLAYER_WON,
     OUTCOME_PLAYER_LOST,
     OUTCOME_PLAYER_FLED,
     OUTCOME_ENEMY_FLED,
@@ -1073,7 +1113,7 @@ enum Iters {
 
 typedef UNK_TYPE ActorSoundID;
 enum ActorSoundIDs {
-    ACTOR_SOUND_WALK            = 0,
+    ACTOR_SOUND_WALK,
     ACTOR_SOUND_FLY,
     ACTOR_SOUND_JUMP,
     ACTOR_SOUND_HURT,
@@ -1083,7 +1123,7 @@ enum ActorSoundIDs {
 
 typedef UNK_TYPE Phase;
 enum Phases {
-    PHASE_EXECUTE_ACTION        = 0,
+    PHASE_EXECUTE_ACTION,
     PHASE_FIRST_STRIKE,
     PHASE_RUN_AWAY_START        = 3,
     PHASE_RUN_AWAY_RESET,
@@ -1133,7 +1173,7 @@ enum ActorIDs {
 
 typedef UNK_TYPE Element;
 enum Elements {
-    ELEMENT_END         = 0,
+    ELEMENT_END,
     ELEMENT_NORMAL,
     ELEMENT_FIRE,
     ELEMENT_WATER,
@@ -1190,7 +1230,7 @@ enum Events {
 
 typedef UNK_TYPE HitSound;
 enum HitSounds {
-    HIT_SOUND_MISS      = 0,
+    HIT_SOUND_MISS,
     HIT_SOUND_BONES,
     HIT_SOUND_NORMAL,
     HIT_SOUND_FIRE,
@@ -1200,7 +1240,7 @@ enum HitSounds {
 
 typedef s8 Status;
 enum Statuses {
-    STATUS_END                  = 0,
+    STATUS_END,
     STATUS_NORMAL,
     STATUS_DEFAULT,
     STATUS_FEAR,
@@ -1241,7 +1281,7 @@ enum DoorSwings {
 
 typedef UNK_TYPE ItemSpawnMode;
 enum ItemSpawnModes {
-    ITEM_SPAWN_MODE_UNKNOWN_0                           = 0,
+    ITEM_SPAWN_MODE_UNKNOWN_0,
     ITEM_SPAWN_MODE_DECORATION,
     ITEM_SPAWN_MODE_UNKNOWN_2,
     ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS,
@@ -1313,7 +1353,7 @@ enum Locations {
 
 typedef UNK_TYPE DoorSound;
 enum DoorSounds {
-    DOOR_SOUND_BASIC            = 0,
+    DOOR_SOUND_BASIC,
     DOOR_SOUND_METAL,
     DOOR_SOUND_LARGE,
     DOOR_SOUND_CREAKY,
@@ -1324,110 +1364,122 @@ enum DoorSounds {
 
 typedef s8 ActionState;
 enum ActionStates {
-    ACTION_STATE_IDLE                   = 0,
+    ACTION_STATE_IDLE,
     ACTION_STATE_WALK,
     ACTION_STATE_RUN,
     ACTION_STATE_JUMP,
-    ACTION_STATE_BOUNCE,
-    ACTION_STATE_ABORTED_JUMP,
-    ACTION_STATE_LAUNCH,
-    ACTION_STATE_7,
+    ACTION_STATE_BOUNCE,            ///< Used with Kooper
+    ACTION_STATE_HOP,               ///< Released A before apex of jump
+    ACTION_STATE_LAUNCH,            ///< Shy Guy Toybox jack-in-the-boxes
+    ACTION_STATE_LAND_ON_SWITCH,    ///< Small red/blue ! switches
     ACTION_STATE_FALLING,
     ACTION_STATE_STEP_DOWN,
     ACTION_STATE_LAND,
     ACTION_STATE_STEP_DOWN_LAND,
-    ACTION_STATE_CONVERSATION,              // This and following states prohibit normal movement.
+
+    // Following action states prohibit movement (see set_action_state())
+    ACTION_STATE_TALK,              ///< Reading signs doesn't count
     ACTION_STATE_SPIN_JUMP,
     ACTION_STATE_GROUND_POUND,
     ACTION_STATE_ULTRA_JUMP,
     ACTION_STATE_ULTRA_POUND,
-    ACTION_STATE_SLIDING,
+    ACTION_STATE_SLIDE,
     ACTION_STATE_HAMMER,
-    ACTION_STATE_HIT_HAZARD             = 21,
-    ACTION_STATE_UNKNOWN_16,
+    ACTION_STATE_13,
+    ACTION_STATE_14,
+    ACTION_STATE_HIT_FIRE,            ///< Causes Mario to fly up and take damage. Used for fire bars.
+    ACTION_STATE_UNKNOWN_16, // some kind of knockback, does no damage
     ACTION_STATE_HIT_LAVA,
     ACTION_STATE_18,
-    ACTION_STATE_SPIN                   = 26,
+    ACTION_STATE_SNEAKY_PARASOL,
+    ACTION_STATE_SPIN,
     ACTION_STATE_ENEMY_FIRST_STRIKE,
-    ACTION_STATE_SPINNING_FLOWER        = 29,
-    ACTION_STATE_USE_TWEESTER           = 31,
-    ACTION_STATE_RIDE                   = 33,
+    ACTION_STATE_GET_STAR_SPIRIT,
+    ACTION_STATE_USE_SPINNING_FLOWER,
+    ACTION_STATE_USE_MUNCHLESIA,      ///< Set by the jan_09 squishy flower entity; throws the player in the air.
+    ACTION_STATE_USE_TWEESTER,
+    ACTION_STATE_BOUNCE_OFF_SWITCH,   ///< Small red/blue ! switches
+    ACTION_STATE_RIDE,
     ACTION_STATE_STEP_UP,
-    ACTION_STATE_USE_SPRING             = 38,
+    ACTION_STATE_23,
+    ACTION_STATE_24,
+    ACTION_STATE_25,
+    ACTION_STATE_USE_SPRING,
 };
 
 typedef s32 NpcID;
 enum NpcIDs {
     NPC_SELF         = -1,
-    NPC_PLAYER,
+    NPC_PLAYER       = -2,
     NPC_PARTNER      = -4,
+    NPC_BTL_MERLEE   = -10,
 };
 
 typedef UNK_TYPE TriggerFlag;
 enum TriggerFlags {
-    TRIGGER_WALL_PUSH           = 0x40,
-    TRIGGER_FLOOR_TOUCH         = 0x80,
-    TRIGGER_WALL_PRESS_A        = 0x100,
-    TRIGGER_FLOOR_JUMP          = 0x200,
-    TRIGGER_WALL_TOUCH          = 0x400,
-    TRIGGER_FLOOR_PRESS_A       = 0x800,
-    TRIGGER_WALL_HAMMER         = 0x1000,
-    TRIGGER_GAME_FLAG_SET       = 0x10000,
-    TRIGGER_AREA_FLAG_SET       = 0x20000,
-    TRIGGER_CEILING_TOUCH       = 0x40000,
-    TRIGGER_FLOOR_ABOVE         = 0x80000,
-    TRIGGER_POINT_BOMB          = 0x100000,
+    TRIGGER_WALL_PUSH           = 0x00000040,
+    TRIGGER_FLOOR_TOUCH         = 0x00000080,
+    TRIGGER_WALL_PRESS_A        = 0x00000100,
+    TRIGGER_FLOOR_JUMP          = 0x00000200,
+    TRIGGER_WALL_TOUCH          = 0x00000400,
+    TRIGGER_FLOOR_PRESS_A       = 0x00000800,
+    TRIGGER_WALL_HAMMER         = 0x00001000,
+    TRIGGER_GAME_FLAG_SET       = 0x00010000,
+    TRIGGER_AREA_FLAG_SET       = 0x00020000,
+    TRIGGER_CEILING_TOUCH       = 0x00040000,
+    TRIGGER_FLOOR_ABOVE         = 0x00080000,
+    TRIGGER_POINT_BOMB          = 0x00100000,
 };
 
 typedef UNK_TYPE Button;
 enum Buttons {
-    BUTTON_C_RIGHT      = 0x1,
-    BUTTON_C_LEFT       = 0x2,
-    BUTTON_C_DOWN       = 0x4,
-    BUTTON_C_UP         = 0x8,
-    BUTTON_R            = 0x10,
-    BUTTON_L            = 0x20,
-    BUTTON_D_RIGHT      = 0x100,
-    BUTTON_D_LEFT       = 0x200,
-    BUTTON_D_DOWN       = 0x400,
-    BUTTON_D_UP         = 0x800,
-    BUTTON_START        = 0x1000,
-    BUTTON_Z            = 0x2000,
-    BUTTON_B            = 0x4000,
-    BUTTON_A            = 0x8000,
+    BUTTON_C_RIGHT      = 0x00000001,
+    BUTTON_C_LEFT       = 0x00000002,
+    BUTTON_C_DOWN       = 0x00000004,
+    BUTTON_C_UP         = 0x00000008,
+    BUTTON_R            = 0x00000010,
+    BUTTON_L            = 0x00000020,
+    BUTTON_D_RIGHT      = 0x00000100,
+    BUTTON_D_LEFT       = 0x00000200,
+    BUTTON_D_DOWN       = 0x00000400,
+    BUTTON_D_UP         = 0x00000800,
+    BUTTON_START        = 0x00001000,
+    BUTTON_Z            = 0x00002000,
+    BUTTON_B            = 0x00004000,
+    BUTTON_A            = 0x00008000,
 };
 
 typedef UNK_TYPE PlayerBuff;
 enum PlayerBuffs {
-    PLAYER_BUFF_JUMP_CHARGE     = 0x1,
-    PLAYER_BUFF_HAMMER_CHARGE   = 0x2,
-    PLAYER_BUFF_STONE           = 0x8,
-    PLAYER_BUFF_HUSTLE          = 0x10,
-    PLAYER_BUFF_STATIC          = 0x20,
-    PLAYER_BUFF_TRANSPARENT     = 0x40,
-    PLAYER_BUFF_CLOUD_NINE      = 0x80,
-    PLAYER_BUFF_TURBO_CHARGE    = 0x100,
-    PLAYER_BUFF_WATER_BLOCK     = 0x200,
-    PLAYER_BUFF_PARTNER_GLOWING = 0x10000,
-    PLAYER_BUFF_ALL             = 0xFFFFFFF,
+    PLAYER_BUFF_JUMP_CHARGE     = 0x00000001,
+    PLAYER_BUFF_HAMMER_CHARGE   = 0x00000002,
+    PLAYER_BUFF_STONE           = 0x00000008,
+    PLAYER_BUFF_HUSTLE          = 0x00000010,
+    PLAYER_BUFF_STATIC          = 0x00000020,
+    PLAYER_BUFF_TRANSPARENT     = 0x00000040,
+    PLAYER_BUFF_CLOUD_NINE      = 0x00000080,
+    PLAYER_BUFF_TURBO_CHARGE    = 0x00000100,
+    PLAYER_BUFF_WATER_BLOCK     = 0x00000200,
+    PLAYER_BUFF_PARTNER_GLOWING = 0x00010000,
+    PLAYER_BUFF_ALL             = 0xFFFFFFFF,
 };
 
 typedef UNK_TYPE StatusFlag;
 enum StatusFlags {
-    STATUS_FLAG_SLEEP           = 0x1000,
-    STATUS_FLAG_STATIC          = 0x2000,
-    STATUS_FLAG_FROZEN          = 0x4000,
-    STATUS_FLAG_UNKNOWN_STATUS3 = 0x8000,
-    STATUS_FLAG_PARALYZE        = 0x10000,
-    STATUS_FLAG_POISON          = 0x20000,
-    STATUS_FLAG_DIZZY           = 0x40000,
-    STATUS_FLAG_SHRINK          = 0x80000,
-    STATUS_FLAG_STONE           = 0x100000,
-    STATUS_FLAG_STOP            = 0x200000,
-    STATUS_FLAG_K_O             = 0x1000000,
-    STATUS_FLAG_GLOWING         = 0x2000000,
-    STATUS_FLAG_TRANSPARENT     = 0x4000000,
-    STATUS_FLAG_ATTACK_BOOST    = 0x8000000,
+    STATUS_FLAG_SLEEP           = 0x00001000,
+    STATUS_FLAG_STATIC          = 0x00002000,
+    STATUS_FLAG_FROZEN          = 0x00004000,
+    STATUS_FLAG_UNKNOWN_STATUS3 = 0x00008000,
+    STATUS_FLAG_PARALYZE        = 0x00010000,
+    STATUS_FLAG_POISON          = 0x00020000,
+    STATUS_FLAG_DIZZY           = 0x00040000,
+    STATUS_FLAG_SHRINK          = 0x00080000,
+    STATUS_FLAG_STONE           = 0x00100000,
+    STATUS_FLAG_STOP            = 0x00200000,
+    STATUS_FLAG_KO              = 0x01000000,
+    STATUS_FLAG_GLOWING         = 0x02000000,
+    STATUS_FLAG_TRANSPARENT     = 0x04000000,
+    STATUS_FLAG_ATTACK_BOOST    = 0x08000000,
     STATUS_FLAG_DEFENSE_BOOST   = 0x10000000,
     STATUS_FLAG_CHILL_OUT       = 0x20000000,
     STATUS_FLAG_RIGHT_ON        = 0x40000000,
@@ -1435,19 +1487,19 @@ enum StatusFlags {
 
 typedef UNK_TYPE DamageType;
 enum DamageTypes {
-    DAMAGE_TYPE_FIRE            = 0x2,
-    DAMAGE_TYPE_WATER           = 0x4,
-    DAMAGE_TYPE_ICE             = 0x8,
-    DAMAGE_TYPE_MAGIC           = 0x10,
-    DAMAGE_TYPE_ELECTRIC        = 0x20,
-    DAMAGE_TYPE_SMASH           = 0x40,
-    DAMAGE_TYPE_JUMP            = 0x80,
-    DAMAGE_TYPE_COSMIC          = 0x100,
-    DAMAGE_TYPE_BLAST           = 0x200,
-    DAMAGE_TYPE_P_O_W           = 0x400,
-    DAMAGE_TYPE_QUAKE           = 0x800,
-    DAMAGE_TYPE_THROW           = 0x40000,
-    DAMAGE_TYPE_IGNORE_DEFENSE  = 0x8000000,
+    DAMAGE_TYPE_FIRE            = 0x00000002,
+    DAMAGE_TYPE_WATER           = 0x00000004,
+    DAMAGE_TYPE_ICE             = 0x00000008,
+    DAMAGE_TYPE_MAGIC           = 0x00000010,
+    DAMAGE_TYPE_ELECTRIC        = 0x00000020,
+    DAMAGE_TYPE_SMASH           = 0x00000040,
+    DAMAGE_TYPE_JUMP            = 0x00000080,
+    DAMAGE_TYPE_COSMIC          = 0x00000100,
+    DAMAGE_TYPE_BLAST           = 0x00000200,
+    DAMAGE_TYPE_POW             = 0x00000400,
+    DAMAGE_TYPE_QUAKE           = 0x00000800,
+    DAMAGE_TYPE_THROW           = 0x00040000,
+    DAMAGE_TYPE_IGNORE_DEFENSE  = 0x08000000,
     DAMAGE_TYPE_NO_CONTACT      = 0x10000000,
     DAMAGE_TYPE_UNBLOCKABLE     = 0x20000000,
     DAMAGE_TYPE_TRIGGER_LUCKY   = 0x80000000,
@@ -1455,7 +1507,7 @@ enum DamageTypes {
 
 typedef s8 PartnerID;
 enum PartnerIDs {
-    PARTNER_NONE        = 0,
+    PARTNER_NONE,
     PARTNER_GOOMBARIO,
     PARTNER_KOOPER,
     PARTNER_BOMBETTE,
@@ -1471,7 +1523,7 @@ enum PartnerIDs {
 
 /// @see gAreas
 enum Areas {
-    AREA_KMR    = 0,
+    AREA_KMR,
     AREA_MAC,
     AREA_TIK,
     AREA_KGR,
@@ -1501,240 +1553,136 @@ enum Areas {
     AREA_TST,
 };
 
-enum Sprites {
-    SPRITE_WORLD_GOOMBARIO              = 1,
-    SPRITE_WORLD_KOOPER,
-    SPRITE_WORLD_BOMBETTE,
-    SPRITE_WORLD_PARAKARRY,
-    SPRITE_WORLD_BOW,
-    SPRITE_WORLD_WATT,
-    SPRITE_WORLD_SUSHIE,
-    SPRITE_WORLD_LAKILESTER,
-    SPRITE_BATTLE_GOOMBARIO,
-    SPRITE_BATTLE_KOOPER,
-    SPRITE_BATTLE_BOMBETTE,
-    SPRITE_BATTLE_PARAKARRY,
-    SPRITE_BATTLE_BOW,
-    SPRITE_BATTLE_WATT,
-    SPRITE_BATTLE_SUSHIE,
-    SPRITE_BATTLE_LAKILESTER,
-    SPRITE_KOOPER_WITHOUT_SHELL,
-    SPRITE_WORLD_ELDSTAR,
-    SPRITE_WORLD_MAMAR,
-    SPRITE_WORLD_SKOLAR,
-    SPRITE_WORLD_MUSKULAR,
-    SPRITE_WORLD_MISSTAR,
-    SPRITE_WORLD_KLEVAR,
-    SPRITE_WORLD_KALMAR,
-    SPRITE_BATTLE_ELDSTAR,
-    SPRITE_BATTLE_MAMAR,
-    SPRITE_BATTLE_SKOLAR,
-    SPRITE_BATTLE_MUSKULAR,
-    SPRITE_BATTLE_MISSTAR,
-    SPRITE_BATTLE_KLEVAR,
-    SPRITE_BATTLE_KALMAR,
-    SPRITE_TWINK,
-    SPRITE_JR_TROOPA,
-    SPRITE_SPIKED_JR_TROOPA,
-    SPRITE_SPIKED_PARA_JR_TROOPA,
-    SPRITE_MAGE_JR_TROOPA,
-    SPRITE_PARA_JR_TROOPA,
-    SPRITE_GOOMBA,
-    SPRITE_SPIKED_GOOMBA,
-    SPRITE_PARAGOOMBA,
-    SPRITE_KOOPA_TROOPA,
-    SPRITE_PARA_TROOPA,
-    SPRITE_FUZZY,
-    SPRITE_BOMBOMB,
-    SPRITE_BULLET_BILL,
-    SPRITE_BILL_BLASTER,
-    SPRITE_MONTY_MOLE,
-    SPRITE_CLEFT,
-    SPRITE_POKEY,
-    SPRITE_BANDIT,
-    SPRITE_BUZZY_BEETLE,
-    SPRITE_SWOOPER,
-    SPRITE_STONE_CHOMP,
-    SPRITE_PUTRID_PIRANHA,
-    SPRITE_PIRANHA_PLANT,
-    SPRITE_SENTINEL,
-    SPRITE_WORLD_CLUBBA,
-    SPRITE_BATTLE_CLUBBA,
-    SPRITE_SHY_GUY,
-    SPRITE_GROOVE_GUY,
-    SPRITE_SKY_GUY,
-    SPRITE_PYRO_GUY,
-    SPRITE_SPY_GUY,
-    SPRITE_MEDI_GUY,
-    SPRITE_FUZZIPEDE,
-    SPRITE_JUNGLE_GUY,
-    SPRITE_HEART_PLANT,
-    SPRITE_HURT_PLANT,
-    SPRITE_M_BUSH,
-    SPRITE_BUBBLE,
-    SPRITE_KENT_C_KOOPA,
-    SPRITE_DAYZEE,
-    SPRITE_LAKITU,
-    SPRITE_SPINY,
-    SPRITE_BZZAP,
-    SPRITE_RUFF_PUFF,
-    SPRITE_SPIKE_TOP,
-    SPRITE_DUPLIGHOST,
-    SPRITE_ALBINO_DINO,
-    SPRITE_BLOOPER,
-    SPRITE_BABY_BLOOPER,
-    SPRITE_GULPIT,
-    SPRITE_DRY_BONES,
-    SPRITE_THROWN_BONE,
-    SPRITE_BONY_BEETLE,
-    SPRITE_MAGIKOOPA,
-    SPRITE_FLYING_MAGIKOOPA,
-    SPRITE_WORLD_KOOPATROL,
-    SPRITE_KOOPATROL,
-    SPRITE_HAMMER_BROS,
-    SPRITE_BUSH_BASIC,
-    SPRITE_BUSH_BLOCKY,
-    SPRITE_BUSH_DRY,
-    SPRITE_BUSH_LEAFY,
-    SPRITE_BUSH_MATTED,
-    SPRITE_WORLD_KAMMY,
-    SPRITE_BATTLE_KAMMY,
-    SPRITE_GOOMBA_BROS,
-    SPRITE_GOOMBA_KING,
-    SPRITE_SPIKY_GOOMNUT,
-    SPRITE_DARK_TOAD,
-    SPRITE_KOOPA_BROS,
-    SPRITE_BUZZAR,
-    SPRITE_TUTANKOOPA,
-    SPRITE_CHAIN_CHOMP,
-    SPRITE_WORLD_TUBBA,
-    SPRITE_BATTLE_TUBBA,
-    SPRITE_TUBBAS_HEART,
-    SPRITE_BIG_LANTERN_GHOST,
-    SPRITE_SHY_SQUAD_GUY,
-    SPRITE_MARSHAL_GUY,
-    SPRITE_STILT_GUY,
-    SPRITE_STILT_GUY_UNFOLD,
-    SPRITE_SHY_STACK_GUY,
-    SPRITE_SHY_STACK_UNFOLD,
-    SPRITE_SHY_STACK_DAMAGE,
-    SPRITE_SHY_STACK_ROCK,
-    SPRITE_GENERAL_GUY,
-    SPRITE_GENERAL_GUY_BOMB,
-    SPRITE_TANK_GUY,
-    SPRITE_LAVA_PIRANHA_HEAD,
-    SPRITE_PETIT_PIRANHA,
-    SPRITE_LAVA_BUD,
-    SPRITE_HUFF_N_PUFF,
-    SPRITE_TUFF_PUFF,
-    SPRITE_MONSTAR,
-    SPRITE_CRYSTAL_KING,
-    SPRITE_WORLD_BOWSER,
-    SPRITE_BATTLE_BOWSER,
-    SPRITE_LUIGI,
-    SPRITE_TOAD,
-    SPRITE_THREE_SISTERS,
-    SPRITE_VANNA_T,
-    SPRITE_TOAD_KID,
-    SPRITE_TOAD_GUARD,
-    SPRITE_HARRY_T,
-    SPRITE_TOAD_MINISTER,
-    SPRITE_POSTMASTER,
-    SPRITE_CONDUCTOR_TOAD,
-    SPRITE_TRAIN_STATION_TOAD,
-    SPRITE_FISHMAEL,
-    SPRITE_ARTIST_TOAD,
-    SPRITE_KOOPA,
-    SPRITE_KOOPA_WITHOUT_SHELL,
-    SPRITE_WORLD_BOMBOMB,
-    SPRITE_WHACKA,
-    SPRITE_DRYITE,
-    SPRITE_MOUSER,
-    SPRITE_BOO,
-    SPRITE_YOSHI,
-    SPRITE_YOSHI_KID,
-    SPRITE_RAVEN,
-    SPRITE_BUBULB,
-    SPRITE_PENGUIN,
-    SPRITE_SHIVER_TOAD,
-    SPRITE_ALT_BANDIT,
-    SPRITE_GOOMPA,
-    SPRITE_GOOMBARIA,
-    SPRITE_GOOMA,
-    SPRITE_GOOMPAPA,
-    SPRITE_GOOMAMA,
-    SPRITE_THE_MASTER,
-    SPRITE_CHAN,
-    SPRITE_LEE,
-    SPRITE_MERLON,
-    SPRITE_CHET_RIPPO,
-    SPRITE_ROWF,
-    SPRITE_MINH_T,
-    SPRITE_RUSS_T,
-    SPRITE_TAYCE_T,
-    SPRITE_FICE_T,
-    SPRITE_BARTENDER,
-    SPRITE_CHANTERELLE,
-    SPRITE_RIP_CHEATO,
-    SPRITE_CHUCK_QUIZMO,
-    SPRITE_MERLUVLEE,
-    SPRITE_MERLAR,
-    SPRITE_MERLOW,
-    SPRITE_STAR_KID,
-    SPRITE_KOLORADO_WIFE,
-    SPRITE_KOOPA_KOOT,
-    SPRITE_KOLORADO,
-    SPRITE_BATTLE_KOLORADO,
-    SPRITE_ARCHEOLOGIST,
-    SPRITE_NOMADIMOUSE,
-    SPRITE_WORLD_MERLEE,
-    SPRITE_BATTLE_MERLEE,
-    SPRITE_DISGUISED_MOUSTAFA,
-    SPRITE_MOUSTAFA,
-    SPRITE_OAKLIE,
-    SPRITE_BOOTLER,
-    SPRITE_YAKKEY,
-    SPRITE_GOURMET_GUY,
-    SPRITE_VILLAGE_LEADER,
-    SPRITE_LEADERS_FRIEND,
-    SPRITE_RAFAEL_RAVEN,
-    SPRITE_TOLIELUP,
-    SPRITE_GATE_FLOWER,
-    SPRITE_PETUNIA,
-    SPRITE_POSIE,
-    SPRITE_LILY,
-    SPRITE_ROSIE,
-    SPRITE_SUN,
-    SPRITE_LAKILULU,
-    SPRITE_NINJI,
-    SPRITE_MAYOR_PENGUIN,
-    SPRITE_MAYOR_PENGUIN_WIFE,
-    SPRITE_PENGUIN_PATROL,
-    SPRITE_HERRINGWAY,
-    SPRITE_MERLE,
-    SPRITE_STAR_ROD,
-    SPRITE_FIRE,
-    SPRITE_COIN,
-    SPRITE_PARADE_PEACH,
-    SPRITE_PARADE_KOOPAS,
-    SPRITE_PARADE_BURNT_BOWSER,
-    SPRITE_PARADE_LUIGI,
-    SPRITE_PARADE_PARTNERS,
-    SPRITE_PARADE_YOSHIS,
-    SPRITE_PARADE_KOLORADOS,
-    SPRITE_PARADE_CHICKS,
-    SPRITE_PARADE_ICE_SHOW,
-    SPRITE_PARADE_TOADS,
-    SPRITE_PARADE_BATONS,
-    SPRITE_PARADE_DRUMS,
-    SPRITE_PARADE_FLAGS,
-    SPRITE_PARADE_HORNS,
-    SPRITE_PARADE_TUBBA_BALLOON,
-    SPRITE_PARADE_WIZARDS,
-    SPRITE_PARADE_MARIO,
-    SPRITE_PARADE_SHY_GUYS,
-    SPRITE_PARADE_TWINK,
-    SPRITE_LEAF,
+enum NpcFlags {
+    NPC_FLAG_PASSIVE           = 0x00000001, ///< Collision does not trigger battle
+    NPC_FLAG_2                 = 0x00000002,
+    NPC_FLAG_4                 = 0x00000004,
+    NPC_FLAG_ENABLE_HIT_SCRIPT = 0x00000008,
+    NPC_FLAG_HAS_SHADOW        = 0x00000010, ///< Set by default and by enable_npc_shadow
+    NPC_FLAG_NO_AI             = 0x00000020, ///< Disable movement AI and collision (idle animation plays)
+    NPC_FLAG_80                = 0x00000080, // TODO
+    NPC_FLAG_40                = 0x00000040,
+    NPC_FLAG_100               = 0x00000100, // TODO
+    NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
+    NPC_FLAG_208               = 0x00000208,
+    NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
+    NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_1000              = 0x00001000,
+    NPC_FLAG_NO_PROJECT_SHADOW = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
+    NPC_FLAG_4000              = 0x00004000,
+    NPC_FLAG_8000              = 0x00008000,
+    NPC_FLAG_DIRTY_SHADOW      = 0x00010000, ///< Set if shadow model is dirty (needs to be repositioned etc.)
+    NPC_FLAG_REFLECT_WALL      = 0x00020000, ///< Mirror rendering across z=0
+    NPC_FLAG_40000             = 0x00040000, ///< Yaw?
+    NPC_FLAG_REFLECT_FLOOR     = 0x00080000, ///< Mirror rendering across y=0
+    NPC_FLAG_MOTION_BLUR       = 0x00100000, ///< Gives motion blur effect as NPC moves. Set by enable_npc_blur
+    NPC_FLAG_200000            = 0x00200000,
+    NPC_FLAG_400000            = 0x00400000,
+    NPC_FLAG_NO_DROPS          = 0x00800000, ///< Do not drop hearts, flowers, or coins on defeat
+    NPC_FLAG_1000000           = 0x01000000, // TODO. fails assert in set_npc_sprite
+
+    /// Use simpler, faster physics calculations:
+    ///  - Perform only one lateral collision test during motion
+    ///  - Allow falling below Y=-2000 (by default, NPC_FLAG_NO_Y_MOVEMENT is set when an NPC falls out-of-bounds)
+    NPC_FLAG_PARTICLE          = 0x04000000,
+    NPC_FLAG_8000000           = 0x08000000,
+    NPC_FLAG_NO_ANIMS_LOADED   = 0x40000000, ///< Npc has no animations loaded
+    NPC_FLAG_80000000          = 0x80000000,
+};
+
+// XXX bad name
+/// @see PlayerStatus::animFlags
+enum PlayerAnimFlags {
+    PLAYER_ANIM_FLAG_HOLDING_ITEM    = 0x00000001,
+    PLAYER_ANIM_FLAG_2               = 0x00000002,
+    PLAYER_ANIM_FLAG_4               = 0x00000004,
+    PLAYER_ANIM_FLAG_8               = 0x00000008,
+    PLAYER_ANIM_FLAG_INTERACT_PROMPT = 0x00000010, ///< ! prompt
+    PLAYER_ANIM_FLAG_SPEECH_PROMPT   = 0x00000020, ///< (...) prompt
+    PLAYER_ANIM_FLAG_40              = 0x00000040,
+    PLAYER_ANIM_FLAG_PULSE_STONE     = 0x00000080,
+    PLAYER_ANIM_FLAG_100             = 0x00000100,
+    PLAYER_ANIM_FLAG_GET_STAR_SPIRIT = 0x00000200, ///< Sets action state to ACTION_STATE_GET_STAR_SPIRIT on idle
+    PLAYER_ANIM_FLAG_SHIVER          = 0x00000400,
+    PLAYER_ANIM_FLAG_PEACH_PHYSICS   = 0x00001000,
+    PLAYER_ANIM_FLAG_IN_DISGUISE     = 0x00002000,
+    PLAYER_ANIM_FLAG_8BIT_MARIO      = 0x00004000,
+};
+
+/// not really
+enum RenderMode {
+    RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0 = 0x00,
+    RENDER_MODE_SURFACE_OPA             = 0x01,
+    RENDER_MODE_SURFACE_OPA_NO_AA       = 0x03,
+    RENDER_MODE_SURFACE_OPA_NO_ZB       = 0x04,
+    RENDER_MODE_DECAL_OPA               = 0x05,
+    RENDER_MODE_DECAL_OPA_NO_AA         = 0x07,
+    RENDER_MODE_INTERSECTING_OPA        = 0x09,
+    RENDER_MODE_ALPHATEST               = 0x0D,
+    RENDER_MODE_ALPHATEST_ONESIDED      = 0x0F,
+    RENDER_MODE_ALPHATEST_NO_ZB         = 0x10,
+    RENDER_MODE_SURFACE_XLU_LAYER1      = 0x11,
+    RENDER_MODE_SURFACE_XLU_NO_AA       = 0x13,
+    RENDER_MODE_SURFACE_XLU_NO_ZB       = 0x14,
+    RENDER_MODE_SURF_XLU_ZB_ZUPD        = 0x15,
+    RENDER_MODE_SURFACE_XLU_LAYER2      = 0x16,
+    RENDER_MODE_DECAL_XLU               = 0x1A,
+    RENDER_MODE_DECAL_XLU_NO_AA         = 0x1C,
+    RENDER_MODE_SHADOW                  = 0x20,
+    RENDER_MODE_SURFACE_XLU_LAYER3      = 0x22,
+    RENDER_MODE_INTERSECTING_XLU        = 0x26,
+    RENDER_MODE_SURF_XLU_AA_ZB_ZUPD     = 0x29,
+    RENDER_MODE_CLOUD                   = 0x2E,
+    RENDER_MODE_CLOUD_NO_ZB             = 0x2F,
+};
+
+enum ActorFlags {
+    ACTOR_FLAG_NO_SHADOW        = 0x00000004, ///< Hide shadow.
+    ACTOR_FLAG_FLYING           = 0x00000200, ///< Quake Hammer can't hit.
+    ACTOR_FLAG_HP_OFFSET_BELOW  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
+    ACTOR_FLAG_TARGET_ONLY      = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
+    ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
+};
+
+enum ActorPartFlags {
+    PART_FLAG_INVISIBLE         = 0x00000001,
+    PART_FLAG_NO_TARGET         = 0x00020000, ///< Cannot be targeted.
+    PART_FLAG_MULTI_TARGET      = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
+};
+
+enum ActorEventFlags {
+    EVENT_FLAG_FIREY            = 0x00000002, ///< Player takes burn damage upon contact.
+    EVENT_FLAG_ICY              = 0x00000008, ///< No known effect, but is used.
+    EVENT_FLAG_SPIKY_TOP        = 0x00000010, ///< Player takes spike damage from jump attacks.
+    EVENT_FLAG_ILLUSORY         = 0x00000020, ///< Player attacks pass through and miss.
+    EVENT_FLAG_ELECTRIFIED      = 0x00000080, ///< Player takes shock damage upon contact.
+    EVENT_FLAG_EXPLOSIVE        = 0x00000200, ///< Blast and fire attacks trigger an explosion.
+    EVENT_FLAG_FLIPABLE         = 0x00001000, ///< Actor can be flipped; triggered by jump and quake attacks.
+    EVENT_FLAG_GROUNDABLE       = 0x00004000, ///< Actor can be knocked down from flight; triggered by jump attacks.
+    EVENT_FLAG_SPIKY_FRONT      = 0x00010000, ///< Player takes spike damage from hammer attacks.
+    EVENT_FLAG_ENCHANTED        = 0x00040000, ///< Actor glows and listens for the Star Beam event.
+    EVENT_FLAG_POWER_BOUNCE     = 0x00100000, ///< Actor listens for Power Bounce events.
+};
+
+enum PartnerAnims {
+    PARTNER_ANIM_STILL,
+    PARTNER_ANIM_WALK,
+    PARTNER_ANIM_JUMP,
+    PARTNER_ANIM_FALL,
+    PARTNER_ANIM_FLY,
+    PARTNER_ANIM_IDLE,
+    PARTNER_ANIM_RUN,
+    PARTNER_ANIM_TALK,
+    PARTNER_ANIM_HURT,
+};
+
+enum TimeFreezeMode {
+    TIME_FREEZE_NORMAL,
+    TIME_FREEZE_PARTIAL,
+    TIME_FREEZE_FULL,
+    TIME_FREEZE_PARTNER_MENU,
+    TIME_FREEZE_EXIT,
 };
 
 #endif

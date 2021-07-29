@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242B90_BB5990
+.double 1.2
+
+.section .text
+
 glabel func_802402D0_BB30D0
 /* BB30D0 802402D0 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* BB30D4 802402D4 AFB3004C */  sw        $s3, 0x4c($sp)
@@ -54,7 +61,7 @@ glabel func_802402D0_BB30D0
 /* BB3194 80240394 E7A40018 */   swc1     $f4, 0x18($sp)
 /* BB3198 80240398 0200202D */  daddu     $a0, $s0, $zero
 /* BB319C 8024039C 240502F4 */  addiu     $a1, $zero, 0x2f4
-/* BB31A0 802403A0 0C012530 */  jal       func_800494C0
+/* BB31A0 802403A0 0C012530 */  jal       ai_enemy_play_sound
 /* BB31A4 802403A4 3C060020 */   lui      $a2, 0x20
 /* BB31A8 802403A8 3C02800F */  lui       $v0, %hi(gPlayerStatusPtr)
 /* BB31AC 802403AC 8C427B30 */  lw        $v0, %lo(gPlayerStatusPtr)($v0)
@@ -109,7 +116,7 @@ glabel func_802402D0_BB30D0
 /* BB3264 80240464 46200020 */  cvt.s.d   $f0, $f0
 /* BB3268 80240468 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BB326C 8024046C 8E040080 */  lw        $a0, 0x80($s0)
-/* BB3270 80240470 0C037711 */  jal       func_800DDC44
+/* BB3270 80240470 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BB3274 80240474 27A70034 */   addiu    $a3, $sp, 0x34
 /* BB3278 80240478 54400005 */  bnel      $v0, $zero, .L80240490
 /* BB327C 8024047C AE000018 */   sw       $zero, 0x18($s0)
@@ -151,7 +158,7 @@ glabel func_802402D0_BB30D0
 /* BB3308 80240508 E7A00038 */  swc1      $f0, 0x38($sp)
 /* BB330C 8024050C AFA20010 */  sw        $v0, 0x10($sp)
 /* BB3310 80240510 8E040080 */  lw        $a0, 0x80($s0)
-/* BB3314 80240514 0C0372DF */  jal       func_800DCB7C
+/* BB3314 80240514 0C0372DF */  jal       npc_raycast_down_sides
 /* BB3318 80240518 27A70034 */   addiu    $a3, $sp, 0x34
 /* BB331C 8024051C 1040002A */  beqz      $v0, .L802405C8
 /* BB3320 80240520 00000000 */   nop

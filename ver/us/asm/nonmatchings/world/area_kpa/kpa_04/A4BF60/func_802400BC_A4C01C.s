@@ -36,7 +36,7 @@ glabel func_802400BC_A4C01C
 /* A4C090 80240130 E7A60024 */  swc1      $f6, 0x24($sp)
 /* A4C094 80240134 E7A40020 */  swc1      $f4, 0x20($sp)
 /* A4C098 80240138 E7A0001C */  swc1      $f0, 0x1c($sp)
-/* A4C09C 8024013C 0C0372DF */  jal       func_800DCB7C
+/* A4C09C 8024013C 0C0372DF */  jal       npc_raycast_down_sides
 /* A4C0A0 80240140 AFA20010 */   sw       $v0, 0x10($sp)
 /* A4C0A4 80240144 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* A4C0A8 80240148 C7A2001C */  lwc1      $f2, 0x1c($sp)

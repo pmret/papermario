@@ -1,25 +1,63 @@
 #include "dro_01.h"
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 #define NAMESPACE dro_01
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/GetCurrentFloor.inc.c"
 #define NAMESPACE dro_01
 
-INCLUDE_ASM(s32, "world/area_dro/dro_01/95E7A0", func_802435D4_95E7D4);
+#define NAMESPACE dro_01_dup
+#include "world/common/UnkFunc25.inc.c"
+#define NAMESPACE dro_01
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/GetEntryPos.inc.c"
 #define NAMESPACE dro_01
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/GetCurrentCameraYawClamped180.inc.c"
 #define NAMESPACE dro_01
 
-#define NAMESPACE dup_dro_01
+#define NAMESPACE dro_01_dup
 #include "world/common/SomeXYZFunc2.inc.c"
 #define NAMESPACE dro_01
 
-#include "world/common/SomeMatrixOperations.inc.c"
+#include "world/common/foliage.inc.c"
+
+FoliageModelList N(tree1_Leaves) = {
+    .count = 1,
+    .models = { 13 }
+};
+
+FoliageModelList N(tree1_Trunk) = {
+    .count = 1,
+    .models = { 14 }
+};
+
+FoliageDropList N(tree1_Drops) = {
+    .count = 1,
+    .drops = {
+        {
+            .itemID = ITEM_COIN,
+            .pos = { 120, 92, -18 },
+            .spawnMode = 0xF,
+            .pickupFlag = SI_SAVE_FLAG(760),
+        },
+    }
+};
+
+ShakeTreeConfig N(tree1) = {
+    .leaves = &N(tree1_Leaves),
+    .trunk = &N(tree1_Trunk),
+    .drops = &N(tree1_Drops),
+};
+
+Vec4f N(triggerCoord_8024DD68) = { 120.0f, 0.0f, -43.0f, 0.0f };
+
+Script N(8024DD78) = SCRIPT({
+    SI_VAR(0) = N(tree1);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 11;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_8024DD68);
+});

@@ -1,14 +1,27 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802479B8_DF6858
+.double 180.0
+
+glabel D_802479C0_DF6860
+.double 90.0
+
+glabel D_802479C8_DF6868
+.double 1.2
+
+.section .text
+
 glabel func_80242F44_DF1DE4
 /* DF1DE4 80242F44 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* DF1DE8 80242F48 AFB3003C */  sw        $s3, 0x3c($sp)
 /* DF1DEC 80242F4C 0080982D */  daddu     $s3, $a0, $zero
 /* DF1DF0 80242F50 AFB40040 */  sw        $s4, 0x40($sp)
 /* DF1DF4 80242F54 0000A02D */  daddu     $s4, $zero, $zero
-/* DF1DF8 80242F58 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* DF1DFC 80242F5C 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* DF1DF8 80242F58 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* DF1DFC 80242F5C 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* DF1E00 80242F60 3C04800B */  lui       $a0, %hi(gCameras)
 /* DF1E04 80242F64 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* DF1E08 80242F68 AFBF0044 */  sw        $ra, 0x44($sp)
@@ -75,7 +88,7 @@ glabel func_80242F44_DF1DE4
 /* DF1EE8 80243048 8E050038 */  lw        $a1, 0x38($s0)
 /* DF1EEC 8024304C 8E06003C */  lw        $a2, 0x3c($s0)
 /* DF1EF0 80243050 8E070040 */  lw        $a3, 0x40($s0)
-/* DF1EF4 80243054 0C01BECC */  jal       fx_walk_normal
+/* DF1EF4 80243054 0C01BECC */  jal       fx_walk
 /* DF1EF8 80243058 24040002 */   addiu    $a0, $zero, 2
 /* DF1EFC 8024305C C64C006C */  lwc1      $f12, 0x6c($s2)
 /* DF1F00 80243060 0C00A6C9 */  jal       clamp_angle
@@ -155,7 +168,7 @@ glabel func_80242F44_DF1DE4
 /* DF2020 80243180 44820000 */  mtc1      $v0, $f0
 /* DF2024 80243184 00000000 */  nop
 /* DF2028 80243188 46800020 */  cvt.s.w   $f0, $f0
-/* DF202C 8024318C 0C037711 */  jal       func_800DDC44
+/* DF202C 8024318C 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* DF2030 80243190 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* DF2034 80243194 54400007 */  bnel      $v0, $zero, .L802431B4
 /* DF2038 80243198 24140001 */   addiu    $s4, $zero, 1
@@ -201,7 +214,7 @@ glabel func_80242F44_DF1DE4
 /* DF20D0 80243230 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* DF20D4 80243234 AFA20010 */  sw        $v0, 0x10($sp)
 /* DF20D8 80243238 8E040080 */  lw        $a0, 0x80($s0)
-/* DF20DC 8024323C 0C0372DF */  jal       func_800DCB7C
+/* DF20DC 8024323C 0C0372DF */  jal       npc_raycast_down_sides
 /* DF20E0 80243240 27A70028 */   addiu    $a3, $sp, 0x28
 /* DF20E4 80243244 1040000B */  beqz      $v0, .L80243274
 /* DF20E8 80243248 00000000 */   nop
@@ -240,7 +253,7 @@ glabel func_80242F44_DF1DE4
 /* DF2160 802432C0 8E050038 */  lw        $a1, 0x38($s0)
 /* DF2164 802432C4 8E06003C */  lw        $a2, 0x3c($s0)
 /* DF2168 802432C8 8E070040 */  lw        $a3, 0x40($s0)
-/* DF216C 802432CC 0C01BECC */  jal       fx_walk_normal
+/* DF216C 802432CC 0C01BECC */  jal       fx_walk
 /* DF2170 802432D0 24040002 */   addiu    $a0, $zero, 2
 /* DF2174 802432D4 3C01C47A */  lui       $at, 0xc47a
 /* DF2178 802432D8 44810000 */  mtc1      $at, $f0

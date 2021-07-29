@@ -1,42 +1,84 @@
 #include "pra_19.h"
 
-#include "world/common/UnkFunc2.inc.c"
-
-#include "world/common/UnkFunc3.inc.c"
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_802400EC_D6EA9C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80240128_D6EAD8);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_802402F0_D6ECA0);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_8024049C_D6EE4C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80240500_D6EEB0);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_8024068C_D6F03C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80240870_D6F220);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80240D3C_D6F6EC);
-
-#include "world/common/SetPartnerFlagsA0000.inc.c"
-
-#include "world/common/SetPartnerFlags80000.inc.c"
-
-#include "world/common/SetPartnerFlags20000.inc.c"
+#include "world/common/reflection.inc.c"
 
 #include "world/common/GetNpcCollisionHeight.inc.c"
 
-#include "world/common/SomeXYZFuncTodoRename.inc.c"
+#include "world/common/AddPlayerHandsOffset.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_8024114C_D6FAFC);
+/*
+ApiStatus N(func_8024114C_D6FAFC)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    if (isInitialCall) {
+        N(D_8024219C_D70B4C) = FALSE;
+    }
+
+    if (N(D_8024219C_D70B4C)) {
+        N(D_8024219C_D70B4C) = FALSE;
+        set_variable(script, *args, N(D_802421A0_D70B50));
+        return ApiStatus_DONE2;
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_802411A0_D6FB50);
+/*
+ApiStatus N(func_802411A0_D6FB50)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    N(D_802421A0_D70B50) = get_variable(script, *args);
+    N(D_8024219C_D70B4C) = TRUE;
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_802411D8_D6FB88);
+/*
+ApiStatus N(func_802411D8_D6FB88)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
+        }
+        N(D_80244A20)[i] = 0;
+    } else {
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80241274_D6FC24);
+/*
+ApiStatus N(func_80241274_D6FC24)(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32* ptr = get_variable(script, *args);
+    s32 i;
+
+    if (ptr != NULL) {
+        for (i = 0; ptr[i] != 0; i++) {
+            N(D_80244A20)[i] = ptr[i];
+        }
+        N(D_80244A20)[i] = 0;
+    } else {
+        for (i = 0; i < 0x70; i++) {
+            N(D_80244A20)[i] = i + 16;
+            N(D_80244A20)[112] = 0;
+        }
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 INCLUDE_ASM(s32, "world/area_pra/pra_19/D6E9D0", func_80241310_D6FCC0);
 

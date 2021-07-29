@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80241204_A94944);
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_802415D8_A94D18);
+#include "world/common/UnkDistFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 

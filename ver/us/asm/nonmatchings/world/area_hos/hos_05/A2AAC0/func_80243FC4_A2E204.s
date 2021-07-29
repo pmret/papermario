@@ -7,14 +7,14 @@ glabel func_80243FC4_A2E204
 /* A2E20C 80243FCC 3C058024 */  lui       $a1, %hi(func_80243CC0_A2DF00)
 /* A2E210 80243FD0 24A53CC0 */  addiu     $a1, $a1, %lo(func_80243CC0_A2DF00)
 /* A2E214 80243FD4 AFBF0014 */  sw        $ra, 0x14($sp)
-/* A2E218 80243FD8 0C048C8F */  jal       bind_dynamic_entity_7
+/* A2E218 80243FD8 0C048C8F */  jal       create_generic_entity_frontUI
 /* A2E21C 80243FDC AFB00010 */   sw       $s0, 0x10($sp)
 /* A2E220 80243FE0 3C040001 */  lui       $a0, 1
 /* A2E224 80243FE4 3C108025 */  lui       $s0, %hi(D_8024AA20_A34C60)
 /* A2E228 80243FE8 2610AA20 */  addiu     $s0, $s0, %lo(D_8024AA20_A34C60)
 /* A2E22C 80243FEC 8E030000 */  lw        $v1, ($s0)
 /* A2E230 80243FF0 3484D420 */  ori       $a0, $a0, 0xd420
-/* A2E234 80243FF4 0C0475F9 */  jal       func_8011D7E4
+/* A2E234 80243FF4 0C0475F9 */  jal       mdl_get_next_texture_address
 /* A2E238 80243FF8 AC620000 */   sw       $v0, ($v1)
 /* A2E23C 80243FFC 3407A710 */  ori       $a3, $zero, 0xa710
 /* A2E240 80244000 00471821 */  addu      $v1, $v0, $a3

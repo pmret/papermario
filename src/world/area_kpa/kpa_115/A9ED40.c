@@ -1,8 +1,13 @@
 #include "kpa_115.h"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80240000_A9ED40);
+static char* N(exit_str_0) = "kpa_114";
+static char* N(exit_str_1) = "kpa_116";
+static char* N(exit_str_2) = "kpa_118";
+static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_802400BC_A9EDFC);
+#include "world/common/UnkFunc11.inc.c"
+
+#include "world/common/UnkFunc12.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_115/A9ED40", func_80240170_A9EEB0);
 

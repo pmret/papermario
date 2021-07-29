@@ -45,7 +45,7 @@ glabel func_80240740_B52F70
 /* B53010 802407E0 0000302D */  daddu     $a2, $zero, $zero
 /* B53014 802407E4 E6020014 */  swc1      $f2, 0x14($s0)
 /* B53018 802407E8 46200020 */  cvt.s.d   $f0, $f0
-/* B5301C 802407EC 0C012530 */  jal       func_800494C0
+/* B5301C 802407EC 0C012530 */  jal       ai_enemy_play_sound
 /* B53020 802407F0 E600001C */   swc1     $f0, 0x1c($s0)
 /* B53024 802407F4 8E6300D0 */  lw        $v1, 0xd0($s3)
 /* B53028 802407F8 C6000040 */  lwc1      $f0, 0x40($s0)
@@ -109,7 +109,7 @@ glabel func_80240740_B52F70
 /* B5310C 802408DC 46800020 */  cvt.s.w   $f0, $f0
 /* B53110 802408E0 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* B53114 802408E4 8E040080 */  lw        $a0, 0x80($s0)
-/* B53118 802408E8 0C037711 */  jal       func_800DDC44
+/* B53118 802408E8 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* B5311C 802408EC 27A70028 */   addiu    $a3, $sp, 0x28
 /* B53120 802408F0 10400016 */  beqz      $v0, .L8024094C
 /* B53124 802408F4 26310001 */   addiu    $s1, $s1, 1

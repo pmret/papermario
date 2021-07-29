@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802BEBC0_31CBE0
+.double 0.8
+
+.section .text
+
 glabel func_802BD260_31B280
 /* 31B280 802BD260 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 31B284 802BD264 AFB00018 */  sw        $s0, 0x18($sp)
@@ -14,7 +21,7 @@ glabel func_802BD260_31B280
 /* 31B2A4 802BD284 8C91014C */  lw        $s1, 0x14c($a0)
 /* 31B2A8 802BD288 10A00009 */  beqz      $a1, .L802BD2B0
 /* 31B2AC 802BD28C 0220202D */   daddu    $a0, $s1, $zero
-/* 31B2B0 802BD290 0C03AE2A */  jal       enable_partner_walking
+/* 31B2B0 802BD290 0C03AE2A */  jal       partner_walking_enable
 /* 31B2B4 802BD294 24050001 */   addiu    $a1, $zero, 1
 /* 31B2B8 802BD298 3C04802C */  lui       $a0, %hi(D_802BEB60_31CB80)
 /* 31B2BC 802BD29C 8C84EB60 */  lw        $a0, %lo(D_802BEB60_31CB80)($a0)
@@ -30,9 +37,9 @@ glabel func_802BD260_31B280
 /* 31B2E0 802BD2C0 24420001 */  addiu     $v0, $v0, 1
 /* 31B2E4 802BD2C4 16400007 */  bnez      $s2, .L802BD2E4
 /* 31B2E8 802BD2C8 AE0202FC */   sw       $v0, 0x2fc($s0)
-/* 31B2EC 802BD2CC 0C03AE8F */  jal       func_800EBA3C
+/* 31B2EC 802BD2CC 0C03AE8F */  jal       partner_walking_update_player_tracking
 /* 31B2F0 802BD2D0 0220202D */   daddu    $a0, $s1, $zero
-/* 31B2F4 802BD2D4 0C03AED0 */  jal       func_800EBB40
+/* 31B2F4 802BD2D4 0C03AED0 */  jal       partner_walking_update_motion
 /* 31B2F8 802BD2D8 0220202D */   daddu    $a0, $s1, $zero
 /* 31B2FC 802BD2DC 080AF575 */  j         .L802BD5D4
 /* 31B300 802BD2E0 0000102D */   daddu    $v0, $zero, $zero
@@ -223,9 +230,9 @@ glabel func_802BD260_31B280
 /* 31B5BC 802BD59C 080AF574 */  j         .L802BD5D0
 /* 31B5C0 802BD5A0 AC820004 */   sw       $v0, 4($a0)
 .L802BD5A4:
-/* 31B5C4 802BD5A4 0C03AE8F */  jal       func_800EBA3C
+/* 31B5C4 802BD5A4 0C03AE8F */  jal       partner_walking_update_player_tracking
 /* 31B5C8 802BD5A8 0220202D */   daddu    $a0, $s1, $zero
-/* 31B5CC 802BD5AC 0C03AED0 */  jal       func_800EBB40
+/* 31B5CC 802BD5AC 0C03AED0 */  jal       partner_walking_update_motion
 /* 31B5D0 802BD5B0 0220202D */   daddu    $a0, $s1, $zero
 /* 31B5D4 802BD5B4 8E030000 */  lw        $v1, ($s0)
 /* 31B5D8 802BD5B8 8C620000 */  lw        $v0, ($v1)

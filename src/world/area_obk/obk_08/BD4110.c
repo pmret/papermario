@@ -1,5 +1,7 @@
 #include "obk_08.h"
 
+static char* N(exit_str_0) = "obk_01";
+
 INCLUDE_ASM(s32, "world/area_obk/obk_08/BD4110", func_802408A0_BD4110);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_08/BD4110", func_80240920_BD4190);

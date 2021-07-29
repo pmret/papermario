@@ -22,7 +22,7 @@ glabel func_802BF4F0_323040
 .L802BF534:
 /* 323084 802BF534 3C01802C */  lui       $at, %hi(D_802BFF00)
 /* 323088 802BF538 AC23FF00 */  sw        $v1, %lo(D_802BFF00)($at)
-/* 32308C 802BF53C 0C03BA65 */  jal       func_800EE994
+/* 32308C 802BF53C 0C03BA65 */  jal       partner_init_put_away
 /* 323090 802BF540 0200202D */   daddu    $a0, $s0, $zero
 /* 323094 802BF544 0C0AF5F7 */  jal       func_802BD7DC
 /* 323098 802BF548 00000000 */   nop
@@ -133,7 +133,7 @@ glabel func_802BF4F0_323040
 /* 323220 802BF6D0 C64E0030 */   lwc1     $f14, 0x30($s2)
 /* 323224 802BF6D4 3C040001 */  lui       $a0, 1
 /* 323228 802BF6D8 34840006 */  ori       $a0, $a0, 6
-/* 32322C 802BF6DC 0C037FBF */  jal       func_800DFEFC
+/* 32322C 802BF6DC 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 323230 802BF6E0 E600000C */   swc1     $f0, 0xc($s0)
 /* 323234 802BF6E4 3C03802C */  lui       $v1, %hi(D_802BFF00)
 /* 323238 802BF6E8 2463FF00 */  addiu     $v1, $v1, %lo(D_802BFF00)
@@ -143,7 +143,7 @@ glabel func_802BF4F0_323040
 /* 323248 802BF6F8 AC620000 */   sw       $v0, ($v1)
 .L802BF6FC:
 /* 32324C 802BF6FC 3C040001 */  lui       $a0, 1
-/* 323250 802BF700 0C037FBF */  jal       func_800DFEFC
+/* 323250 802BF700 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 323254 802BF704 34840007 */   ori      $a0, $a0, 7
 /* 323258 802BF708 8E220000 */  lw        $v0, ($s1)
 /* 32325C 802BF70C 24420001 */  addiu     $v0, $v0, 1
@@ -215,7 +215,7 @@ glabel func_802BF4F0_323040
 /* 32335C 802BF80C 44820000 */  mtc1      $v0, $f0
 /* 323360 802BF810 00000000 */  nop
 /* 323364 802BF814 46800020 */  cvt.s.w   $f0, $f0
-/* 323368 802BF818 0C0371DE */  jal       func_800DC778
+/* 323368 802BF818 0C0371DE */  jal       npc_raycast_down_ahead
 /* 32336C 802BF81C E7A00018 */   swc1     $f0, 0x18($sp)
 /* 323370 802BF820 10400005 */  beqz      $v0, .L802BF838
 /* 323374 802BF824 24020003 */   addiu    $v0, $zero, 3
@@ -282,7 +282,7 @@ glabel func_802BF4F0_323040
 /* 323454 802BF904 A040007D */  sb        $zero, 0x7d($v0)
 /* 323458 802BF908 3C01802C */  lui       $at, %hi(D_802BFF0C)
 /* 32345C 802BF90C AC20FF0C */  sw        $zero, %lo(D_802BFF0C)($at)
-/* 323460 802BF910 0C03BD17 */  jal       clear_partner_move_history
+/* 323460 802BF910 0C03BD17 */  jal       partner_clear_player_tracking
 /* 323464 802BF914 0200202D */   daddu    $a0, $s0, $zero
 /* 323468 802BF918 0C039769 */  jal       set_action_state
 /* 32346C 802BF91C 24040015 */   addiu    $a0, $zero, 0x15
@@ -293,14 +293,14 @@ glabel func_802BF4F0_323040
 /* 32347C 802BF92C 8C42FF0C */  lw        $v0, %lo(D_802BFF0C)($v0)
 /* 323480 802BF930 14400005 */  bnez      $v0, .L802BF948
 /* 323484 802BF934 00000000 */   nop
-/* 323488 802BF938 0C0391D1 */  jal       func_800E4744
+/* 323488 802BF938 0C0391D1 */  jal       phys_main_collision_below
 /* 32348C 802BF93C 00000000 */   nop
 /* 323490 802BF940 080AFE56 */  j         .L802BF958
 /* 323494 802BF944 00000000 */   nop
 .L802BF948:
 /* 323498 802BF948 0C039769 */  jal       set_action_state
 /* 32349C 802BF94C 24040008 */   addiu    $a0, $zero, 8
-/* 3234A0 802BF950 0C038C1B */  jal       gravity_use_fall_params
+/* 3234A0 802BF950 0C038C1B */  jal       gravity_use_fall_parms
 /* 3234A4 802BF954 00000000 */   nop
 .L802BF958:
 /* 3234A8 802BF958 3C03802C */  lui       $v1, %hi(D_802BFF00)
@@ -328,14 +328,14 @@ glabel func_802BF4F0_323040
 /* 3234F8 802BF9A8 A040007D */  sb        $zero, 0x7d($v0)
 /* 3234FC 802BF9AC 3C01802C */  lui       $at, %hi(D_802BFF0C)
 /* 323500 802BF9B0 AC20FF0C */  sw        $zero, %lo(D_802BFF0C)($at)
-/* 323504 802BF9B4 0C03BD17 */  jal       clear_partner_move_history
+/* 323504 802BF9B4 0C03BD17 */  jal       partner_clear_player_tracking
 /* 323508 802BF9B8 0200202D */   daddu    $a0, $s0, $zero
 /* 32350C 802BF9BC 8E220000 */  lw        $v0, ($s1)
 /* 323510 802BF9C0 24420001 */  addiu     $v0, $v0, 1
 /* 323514 802BF9C4 080AFE78 */  j         .L802BF9E0
 /* 323518 802BF9C8 AE220000 */   sw       $v0, ($s1)
 .L802BF9CC:
-/* 32351C 802BF9CC 0C03BA6E */  jal       func_800EE9B8
+/* 32351C 802BF9CC 0C03BA6E */  jal       partner_put_away
 /* 323520 802BF9D0 0200202D */   daddu    $a0, $s0, $zero
 /* 323524 802BF9D4 0040182D */  daddu     $v1, $v0, $zero
 /* 323528 802BF9D8 14600002 */  bnez      $v1, .L802BF9E4

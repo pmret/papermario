@@ -10,7 +10,7 @@ glabel func_8024030C_AACB3C
 /* AACB50 80240320 AFA00014 */  sw        $zero, 0x14($sp)
 /* AACB54 80240324 E7A00010 */  swc1      $f0, 0x10($sp)
 /* AACB58 80240328 00A0302D */  daddu     $a2, $a1, $zero
-/* AACB5C 8024032C 0C01CA54 */  jal       func_80072950
+/* AACB5C 8024032C 0C01CA54 */  jal       playFX_82
 /* AACB60 80240330 00A0382D */   daddu    $a3, $a1, $zero
 /* AACB64 80240334 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AACB68 80240338 24020002 */  addiu     $v0, $zero, 2

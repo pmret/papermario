@@ -43,8 +43,7 @@ def main():
         arg = sys.argv[1]
         if arg == "-h" or arg == "--help":
             sys.exit("Usage: ./m2ctx.py path/to/file.c\n" \
-            "or ./m2ctx.py (from an actor or gamestate's asm dir)\n" \
-            "Output will be saved in oot/ctx.c")
+            "Output will be saved in the project root as ctx.c")
         c_file_path = Path.cwd() / sys.argv[1]
     else:
         this_dir = Path.cwd()

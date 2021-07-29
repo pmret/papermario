@@ -11,7 +11,7 @@ glabel func_80242510_E07870
 /* E07888 80242528 AFBF0014 */  sw        $ra, 0x14($sp)
 /* E0788C 8024252C 3C018025 */  lui       $at, %hi(D_8024A2C4)
 /* E07890 80242530 AC30A2C4 */  sw        $s0, %lo(D_8024A2C4)($at)
-/* E07894 80242534 0C048C8F */  jal       bind_dynamic_entity_7
+/* E07894 80242534 0C048C8F */  jal       create_generic_entity_frontUI
 /* E07898 80242538 0000202D */   daddu    $a0, $zero, $zero
 /* E0789C 8024253C 2404001F */  addiu     $a0, $zero, 0x1f
 /* E078A0 80242540 26030E0C */  addiu     $v1, $s0, 0xe0c

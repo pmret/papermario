@@ -1,5 +1,10 @@
 #include "jan_16.h"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_16/B80000", func_80240000_B80000);
+static char* N(exit_str_0) = "jan_15";
+static char* N(exit_str_1) = "jan_22";
+static char* N(exit_str_2) = "jan_17";
+static char* N(exit_str_3) = "";
 
-INCLUDE_ASM(s32, "world/area_jan/jan_16/B80000", func_80240124_B80124);
+#include "world/common/UnkFunc27.inc.c"
+
+#include "world/common/UnkFunc26.inc.c"

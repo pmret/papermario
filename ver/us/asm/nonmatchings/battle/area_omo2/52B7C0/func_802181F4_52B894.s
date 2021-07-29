@@ -17,7 +17,7 @@ glabel func_802181F4_52B894
 /* 52B8C4 80218224 00000000 */  nop
 /* 52B8C8 80218228 46800020 */  cvt.s.w   $f0, $f0
 /* 52B8CC 8021822C 44050000 */  mfc1      $a1, $f0
-/* 52B8D0 80218230 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* 52B8D0 80218230 0C04DF69 */  jal       set_screen_overlay_params_back
 /* 52B8D4 80218234 2404000D */   addiu    $a0, $zero, 0xd
 /* 52B8D8 80218238 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 52B8DC 8021823C 8FB10014 */  lw        $s1, 0x14($sp)

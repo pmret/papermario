@@ -21,7 +21,7 @@ glabel func_80242D4C_C887FC
 /* C8883C 80242D8C E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C88840 80242D90 AFA00020 */  sw        $zero, 0x20($sp)
 /* C88844 80242D94 E7A20024 */  swc1      $f2, 0x24($sp)
-/* C88848 80242D98 0C0372DF */  jal       func_800DCB7C
+/* C88848 80242D98 0C0372DF */  jal       npc_raycast_down_sides
 /* C8884C 80242D9C AFA20010 */   sw       $v0, 0x10($sp)
 /* C88850 80242DA0 1040000B */  beqz      $v0, .L80242DD0
 /* C88854 80242DA4 00000000 */   nop

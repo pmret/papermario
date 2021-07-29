@@ -1,7 +1,29 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80240AA8_BA11D8
+.section .rodata
+
+glabel D_80244018_BA4748
+.double 380.0
+
+glabel D_80244020_BA4750
+.double -380.0
+
+glabel D_80244028_BA4758
+.double 305.0
+
+glabel D_80244030_BA4760
+.double 375.0
+
+glabel D_80244038_BA4768
+.double 45.0
+
+glabel D_80244040_BA4770
+.double 150.0, 0.0
+
+.section .text
+
+glabel btl_restore_world_cameras_BA11D8
 /* BA11D8 80240AA8 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* BA11DC 80240AAC AFBF0064 */  sw        $ra, 0x64($sp)
 /* BA11E0 80240AB0 AFBE0060 */  sw        $fp, 0x60($sp)
@@ -291,7 +313,7 @@ glabel func_80240AA8_BA11D8
 /* BA1614 80240EE4 46800020 */  cvt.s.w   $f0, $f0
 /* BA1618 80240EE8 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BA161C 80240EEC 8E240080 */  lw        $a0, 0x80($s1)
-/* BA1620 80240EF0 0C037711 */  jal       func_800DDC44
+/* BA1620 80240EF0 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BA1624 80240EF4 0200382D */   daddu    $a3, $s0, $zero
 /* BA1628 80240EF8 104000CA */  beqz      $v0, .L80241224
 /* BA162C 80240EFC 0280282D */   daddu    $a1, $s4, $zero
@@ -321,7 +343,7 @@ glabel func_80240AA8_BA11D8
 /* BA168C 80240F5C 46800020 */  cvt.s.w   $f0, $f0
 /* BA1690 80240F60 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BA1694 80240F64 8E240080 */  lw        $a0, 0x80($s1)
-/* BA1698 80240F68 0C037711 */  jal       func_800DDC44
+/* BA1698 80240F68 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BA169C 80240F6C 0200382D */   daddu    $a3, $s0, $zero
 /* BA16A0 80240F70 27A5002C */  addiu     $a1, $sp, 0x2c
 /* BA16A4 80240F74 27A60030 */  addiu     $a2, $sp, 0x30
@@ -344,7 +366,7 @@ glabel func_80240AA8_BA11D8
 /* BA16E8 80240FB8 E7A00030 */  swc1      $f0, 0x30($sp)
 /* BA16EC 80240FBC AFA30010 */  sw        $v1, 0x10($sp)
 /* BA16F0 80240FC0 8E240080 */  lw        $a0, 0x80($s1)
-/* BA16F4 80240FC4 0C0372DF */  jal       func_800DCB7C
+/* BA16F4 80240FC4 0C0372DF */  jal       npc_raycast_down_sides
 /* BA16F8 80240FC8 0040802D */   daddu    $s0, $v0, $zero
 /* BA16FC 80240FCC 1600001C */  bnez      $s0, .L80241040
 /* BA1700 80240FD0 00000000 */   nop
@@ -406,7 +428,7 @@ glabel func_80240AA8_BA11D8
 /* BA17DC 802410AC 46800020 */  cvt.s.w   $f0, $f0
 /* BA17E0 802410B0 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BA17E4 802410B4 8E240080 */  lw        $a0, 0x80($s1)
-/* BA17E8 802410B8 0C037711 */  jal       func_800DDC44
+/* BA17E8 802410B8 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BA17EC 802410BC 27A70028 */   addiu    $a3, $sp, 0x28
 /* BA17F0 802410C0 8FA60020 */  lw        $a2, 0x20($sp)
 /* BA17F4 802410C4 8E020000 */  lw        $v0, ($s0)
@@ -464,7 +486,7 @@ glabel func_80240AA8_BA11D8
 /* BA18C0 80241190 46800020 */  cvt.s.w   $f0, $f0
 /* BA18C4 80241194 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BA18C8 80241198 8E240080 */  lw        $a0, 0x80($s1)
-/* BA18CC 8024119C 0C037711 */  jal       func_800DDC44
+/* BA18CC 8024119C 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BA18D0 802411A0 27A70028 */   addiu    $a3, $sp, 0x28
 /* BA18D4 802411A4 1040001F */  beqz      $v0, .L80241224
 /* BA18D8 802411A8 00000000 */   nop
@@ -643,7 +665,7 @@ glabel func_80240AA8_BA11D8
 /* BA1B68 80241438 E7A00024 */  swc1      $f0, 0x24($sp)
 /* BA1B6C 8024143C AFA20010 */  sw        $v0, 0x10($sp)
 /* BA1B70 80241440 8E240080 */  lw        $a0, 0x80($s1)
-/* BA1B74 80241444 0C0372DF */  jal       func_800DCB7C
+/* BA1B74 80241444 0C0372DF */  jal       npc_raycast_down_sides
 /* BA1B78 80241448 27A70028 */   addiu    $a3, $sp, 0x28
 /* BA1B7C 8024144C 10400003 */  beqz      $v0, .L8024145C
 /* BA1B80 80241450 00000000 */   nop
@@ -660,7 +682,7 @@ glabel func_80240AA8_BA11D8
 /* BA1BA8 80241478 0220202D */  daddu     $a0, $s1, $zero
 /* BA1BAC 8024147C 24050321 */  addiu     $a1, $zero, 0x321
 /* BA1BB0 80241480 0000302D */  daddu     $a2, $zero, $zero
-/* BA1BB4 80241484 0C012530 */  jal       func_800494C0
+/* BA1BB4 80241484 0C012530 */  jal       ai_enemy_play_sound
 /* BA1BB8 80241488 E620000C */   swc1     $f0, 0xc($s1)
 /* BA1BBC 8024148C 8EC200CC */  lw        $v0, 0xcc($s6)
 /* BA1BC0 80241490 8C420024 */  lw        $v0, 0x24($v0)

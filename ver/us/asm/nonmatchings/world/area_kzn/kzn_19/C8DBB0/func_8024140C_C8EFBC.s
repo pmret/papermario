@@ -18,7 +18,7 @@ glabel func_8024140C_C8EFBC
 /* C8EFF0 80241440 24A513C0 */  addiu     $a1, $a1, %lo(func_802413C0_C8EF70)
 /* C8EFF4 80241444 3C018025 */  lui       $at, %hi(D_80248380)
 /* C8EFF8 80241448 AC228380 */  sw        $v0, %lo(D_80248380)($at)
-/* C8EFFC 8024144C 0C048C56 */  jal       bind_dynamic_entity_3
+/* C8EFFC 8024144C 0C048C56 */  jal       create_generic_entity_world
 /* C8F000 80241450 0000202D */   daddu    $a0, $zero, $zero
 /* C8F004 80241454 8FBF0014 */  lw        $ra, 0x14($sp)
 /* C8F008 80241458 8FB00010 */  lw        $s0, 0x10($sp)

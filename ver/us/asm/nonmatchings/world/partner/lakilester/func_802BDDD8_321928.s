@@ -127,7 +127,7 @@ glabel func_802BDDD8_321928
 /* 321AF8 802BDFA8 46800020 */  cvt.s.w   $f0, $f0
 /* 321AFC 802BDFAC E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321B00 802BDFB0 8E440080 */  lw        $a0, 0x80($s2)
-/* 321B04 802BDFB4 0C0376B9 */  jal       func_800DDAE4
+/* 321B04 802BDFB4 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321B08 802BDFB8 27A70038 */   addiu    $a3, $sp, 0x38
 /* 321B0C 802BDFBC 1040000D */  beqz      $v0, .L802BDFF4
 /* 321B10 802BDFC0 00000000 */   nop
@@ -177,7 +177,7 @@ glabel func_802BDDD8_321928
 /* 321BB8 802BE068 46800020 */  cvt.s.w   $f0, $f0
 /* 321BBC 802BE06C E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321BC0 802BE070 8E440080 */  lw        $a0, 0x80($s2)
-/* 321BC4 802BE074 0C037765 */  jal       func_800DDD94
+/* 321BC4 802BE074 0C037765 */  jal       npc_test_move_complex_with_slipping
 /* 321BC8 802BE078 27A70038 */   addiu    $a3, $sp, 0x38
 /* 321BCC 802BE07C 10400017 */  beqz      $v0, .L802BE0DC
 /* 321BD0 802BE080 00000000 */   nop
@@ -246,7 +246,7 @@ glabel func_802BDDD8_321928
 /* 321CC0 802BE170 46800020 */  cvt.s.w   $f0, $f0
 /* 321CC4 802BE174 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321CC8 802BE178 8E440080 */  lw        $a0, 0x80($s2)
-/* 321CCC 802BE17C 0C0376B9 */  jal       func_800DDAE4
+/* 321CCC 802BE17C 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321CD0 802BE180 0200382D */   daddu    $a3, $s0, $zero
 /* 321CD4 802BE184 1040000F */  beqz      $v0, .L802BE1C4
 /* 321CD8 802BE188 00000000 */   nop
@@ -291,7 +291,7 @@ glabel func_802BDDD8_321928
 /* 321D70 802BE220 46800020 */  cvt.s.w   $f0, $f0
 /* 321D74 802BE224 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321D78 802BE228 8E440080 */  lw        $a0, 0x80($s2)
-/* 321D7C 802BE22C 0C0376B9 */  jal       func_800DDAE4
+/* 321D7C 802BE22C 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321D80 802BE230 0200382D */   daddu    $a3, $s0, $zero
 /* 321D84 802BE234 1040000F */  beqz      $v0, .L802BE274
 /* 321D88 802BE238 0240202D */   daddu    $a0, $s2, $zero
@@ -343,7 +343,7 @@ glabel func_802BDDD8_321928
 /* 321E38 802BE2E8 46800020 */  cvt.s.w   $f0, $f0
 /* 321E3C 802BE2EC E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321E40 802BE2F0 8E440080 */  lw        $a0, 0x80($s2)
-/* 321E44 802BE2F4 0C0376B9 */  jal       func_800DDAE4
+/* 321E44 802BE2F4 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321E48 802BE2F8 0200382D */   daddu    $a3, $s0, $zero
 /* 321E4C 802BE2FC 1040000F */  beqz      $v0, .L802BE33C
 /* 321E50 802BE300 00000000 */   nop
@@ -386,7 +386,7 @@ glabel func_802BDDD8_321928
 /* 321EE0 802BE390 46800020 */  cvt.s.w   $f0, $f0
 /* 321EE4 802BE394 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* 321EE8 802BE398 8E440080 */  lw        $a0, 0x80($s2)
-/* 321EEC 802BE39C 0C0376B9 */  jal       func_800DDAE4
+/* 321EEC 802BE39C 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 321EF0 802BE3A0 0200382D */   daddu    $a3, $s0, $zero
 /* 321EF4 802BE3A4 1040000F */  beqz      $v0, .L802BE3E4
 /* 321EF8 802BE3A8 00000000 */   nop
@@ -458,7 +458,7 @@ glabel func_802BDDD8_321928
 /* 321FFC 802BE4AC 27A20048 */  addiu     $v0, $sp, 0x48
 /* 322000 802BE4B0 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 322004 802BE4B4 27A2004C */  addiu     $v0, $sp, 0x4c
-/* 322008 802BE4B8 0C03791B */  jal       func_800DE46C
+/* 322008 802BE4B8 0C03791B */  jal       player_raycast_below_cam_relative
 /* 32200C 802BE4BC AFA20020 */   sw       $v0, 0x20($sp)
 /* 322010 802BE4C0 0C00A794 */  jal       get_player_normal_pitch
 /* 322014 802BE4C4 0040802D */   daddu    $s0, $v0, $zero

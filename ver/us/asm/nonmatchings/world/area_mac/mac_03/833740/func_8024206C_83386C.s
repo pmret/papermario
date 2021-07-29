@@ -28,7 +28,7 @@ glabel func_8024206C_83386C
 /* 8338C8 802420C8 AFA00014 */  sw        $zero, 0x14($sp)
 /* 8338CC 802420CC 00A0302D */  daddu     $a2, $a1, $zero
 /* 8338D0 802420D0 00A0382D */  daddu     $a3, $a1, $zero
-/* 8338D4 802420D4 0C01C9C4 */  jal       func_80072710
+/* 8338D4 802420D4 0C01C9C4 */  jal       playFX_7C
 /* 8338D8 802420D8 AFA50010 */   sw       $a1, 0x10($sp)
 /* 8338DC 802420DC 0200202D */  daddu     $a0, $s0, $zero
 /* 8338E0 802420E0 3C05FD05 */  lui       $a1, 0xfd05

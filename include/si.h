@@ -75,7 +75,7 @@ typedef enum ScriptOpcode {
     ScriptOpcode_OR_CONST, ///< Args: container, value to bitwise OR with
     ScriptOpcode_CALL, ///< Args: *function, ...
     ScriptOpcode_SPAWN_SCRIPT, ///< Args: Script*
-    ScriptOpcode_SPAWN_SCRIPT_GET_ID, ///< Args: Script*, container
+    ScriptOpcode_SPAWN_GET_ID, ///< Args: Script*, container
     ScriptOpcode_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: Script*
     ScriptOpcode_BIND_TRIGGER, ///< Args: Script*, trigger flags, s32 target, 1, Trigger*
     ScriptOpcode_UNBIND, ///< Unbinds any triggers bound to this script.
@@ -91,28 +91,34 @@ typedef enum ScriptOpcode {
     ScriptOpcode_RESUME_OTHERS, ///< Args: group
     ScriptOpcode_SUSPEND_SCRIPT, ///< Args: ScriptID
     ScriptOpcode_RESUME_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_SCRIPT_EXISTS, ///< Args: ScriptID, container
+    ScriptOpcode_DOES_SCRIPT_EXIST, ///< Args: ScriptID, container
     ScriptOpcode_SPAWN_THREAD,
     ScriptOpcode_END_SPAWN_THREAD,
     ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
     ScriptOpcode_END_PARALLEL_THREAD,
-    ScriptOpcode_DEBUG_PRINT = 0x5B, ///< Args: expression
+    ScriptOpcode_90,
+    ScriptOpcode_DEBUG_PRINT, ///< Args: expression
+    ScriptOpcode_92,
+    ScriptOpcode_93,
+    ScriptOpcode_94,
 } ScriptOpcode;
 
-#define SI_VAR(v) ((v - 30000000))
-#define SI_MAP_VAR(v) ((v - 50000000))
-#define SI_FLAG(v) ((v - 70000000))
-#define SI_MAP_FLAG(v) ((v - 90000000))
-#define SI_AREA_FLAG(v) ((v - 110000000))
-#define SI_SAVE_FLAG(v) ((v - 130000000))
-#define SI_AREA_VAR(v) ((v - 150000000))
-#define SI_SAVE_VAR(v) ((v - 170000000))
-#define SI_ARRAY(v) ((v - 190000000))
-#define SI_ARRAY_FLAG(v) ((v - 210000000))
+#define SI_VAR(v)           ((v -  30000000))
+#define SI_MAP_VAR(v)       ((v -  50000000))
+#define SI_FLAG(v)          ((v -  70000000))
+#define SI_MAP_FLAG(v)      ((v -  90000000))
+#define SI_AREA_FLAG(v)     ((v - 110000000))
+#define SI_SAVE_FLAG(v)     ((v - 130000000))
+#define SI_AREA_VAR(v)      ((v - 150000000))
+#define SI_SAVE_VAR(v)      ((v - 170000000))
+#define SI_ARRAY(v)         ((v - 190000000))
+#define SI_ARRAY_FLAG(v)    ((v - 210000000))
 #define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
+#define SI_LIMIT        -250000000 // TODO better name
+#define MAKE_ENTITY_END 0x80000000
 
-#define STORY_PROGRESS SI_SAVE_VAR(0)
-#define WORLD_LOCATION SI_SAVE_VAR(425)
+#define SI_STORY_PROGRESS SI_SAVE_VAR(0)
+#define SI_WORLD_LOCATION SI_SAVE_VAR(425)
 
 /* Return type of si_execute_next_command */
 #define SI_CONTINUE 0   /* Continue to next command */

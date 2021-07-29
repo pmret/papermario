@@ -18,6 +18,7 @@ ignores_path = os.path.join(root_dir, "tools", "ignored_funcs.txt")
 
 map_symbols = {}
 symbol_addrs = []
+dead_symbols = []
 elf_symbols = []
 
 ignores = set()
@@ -76,13 +77,16 @@ def read_symbol_addrs():
                 unique_lines.add(line)
 
         for line in unique_lines:
+            if "_ROM_START" in line or "_ROM_END" in line:
+                continue
+
             main, ext = line.rstrip().split(";")
             opt = ext.split("//")[-1].strip().split(" ")
 
-            type = None
+            dead = False
+            type = ""
             rom = -1
 
-            args = []
             for thing in list(opt):
                 if thing.strip() == "":
                     opt.remove(thing)
@@ -92,10 +96,20 @@ def read_symbol_addrs():
                 elif "rom:" in thing:
                     rom = int(thing.split(":")[1], 16)
                     opt.remove(thing)
+                elif "dead:" in thing:
+                    dead = True
+
+            eqsplit = main.split(" = ")
+            if len(eqsplit) != 2:
+                print(f"Line malformed: '{main}'")
+                sys.exit(1)
 
             name, addr = main.split(" = ")
 
-            symbol_addrs.append([name, int(addr, 0), type, rom, opt])
+            if not dead:
+                symbol_addrs.append([name, int(addr, 0), type, rom, opt])
+            else:
+                dead_symbols.append([name, int(addr, 0), type, rom, opt])
 
 def read_elf():
     try:
@@ -109,6 +123,9 @@ def read_elf():
         if " F " in line or " O " in line or " *ABS*" in line:
             components = line.split()
             name = components[-1]
+
+            if "_ROM_START" in name or "_ROM_END" in name:
+                continue
 
             if "/" in name or \
                name in ignores or \
@@ -178,7 +195,17 @@ def write_new_symbol_addrs():
     with open(symbol_addrs_path, "w", newline="\n") as f:
         for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
-            if symbol[2]:
+            if symbol[2] and len(symbol[2]) > 0:
+                line += f" type:{symbol[2]}"
+            if symbol[3] >= 0:
+                line += f" rom:0x{symbol[3]:X}"
+            if len(symbol[4]) > 0:
+                for thing in symbol[4]:
+                    line += f" {thing}"
+            f.write(line + "\n")
+        for symbol in sorted(dead_symbols, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
+            line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
+            if symbol[2] and len(symbol[2]) > 0:
                 line += f" type:{symbol[2]}"
             if symbol[3] >= 0:
                 line += f" rom:0x{symbol[3]:X}"

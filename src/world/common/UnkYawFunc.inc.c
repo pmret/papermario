@@ -10,7 +10,7 @@ ApiStatus N(UnkYawFunc)(ScriptInstance* script, s32 isInitialCall) {
     s32 a2 = *args++;
     f32 c = get_variable(script, a2);
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    f32 currentCamYaw = clamp_angle(CURRENT_CAM->currentYaw + 180.0f);
+    f32 currentCamYaw = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 180.0f);
 
     add_vec2D_polar(&a, &c, 15.0f, partner->yaw);
     add_vec2D_polar(&a, &c, 10.0f, currentCamYaw);

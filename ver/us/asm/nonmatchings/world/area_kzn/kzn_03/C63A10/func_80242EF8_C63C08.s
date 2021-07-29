@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_80242EF8_C63C08
+glabel btl_state_draw_begin_partner_turn_C63C08
 /* C63C08 80242EF8 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* C63C0C 80242EFC AFB10014 */  sw        $s1, 0x14($sp)
 /* C63C10 80242F00 0080882D */  daddu     $s1, $a0, $zero

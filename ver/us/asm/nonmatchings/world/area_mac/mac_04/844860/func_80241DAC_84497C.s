@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_8024F580_852150
+.double 0.7142857142857143, 5.578423069507728e+228, 3.0252731672874824e+209, 0.0
+
+.section .text
+
 glabel func_80241DAC_84497C
 /* 84497C 80241DAC 27BDFF48 */  addiu     $sp, $sp, -0xb8
 /* 844980 80241DB0 AFB1009C */  sw        $s1, 0x9c($sp)
@@ -50,7 +57,7 @@ glabel func_80241DAC_84497C
 /* 844A30 80241E60 0080302D */   daddu    $a2, $a0, $zero
 /* 844A34 80241E64 8E2500A4 */  lw        $a1, 0xa4($s1)
 /* 844A38 80241E68 4406B000 */  mfc1      $a2, $f22
-/* 844A3C 80241E6C 0C0B76A3 */  jal       func_802DDA8C
+/* 844A3C 80241E6C 0C0B76A3 */  jal       spr_update_player_sprite
 /* 844A40 80241E70 0000202D */   daddu    $a0, $zero, $zero
 /* 844A44 80241E74 0000202D */  daddu     $a0, $zero, $zero
 /* 844A48 80241E78 0080282D */  daddu     $a1, $a0, $zero
@@ -58,7 +65,7 @@ glabel func_80241DAC_84497C
 /* 844A50 80241E80 0080382D */  daddu     $a3, $a0, $zero
 /* 844A54 80241E84 A62200BC */  sh        $v0, 0xbc($s1)
 /* 844A58 80241E88 27A20018 */  addiu     $v0, $sp, 0x18
-/* 844A5C 80241E8C 0C0B7710 */  jal       render_sprite
+/* 844A5C 80241E8C 0C0B7710 */  jal       spr_draw_player_sprite
 /* 844A60 80241E90 AFA20010 */   sw       $v0, 0x10($sp)
 /* 844A64 80241E94 8FBF00A0 */  lw        $ra, 0xa0($sp)
 /* 844A68 80241E98 8FB1009C */  lw        $s1, 0x9c($sp)

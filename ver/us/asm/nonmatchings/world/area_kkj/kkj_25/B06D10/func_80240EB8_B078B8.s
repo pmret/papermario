@@ -22,7 +22,7 @@ glabel func_80240EB8_B078B8
 /* B078FC 80240EFC 44073000 */  mfc1      $a3, $f6
 /* B07900 80240F00 0000202D */  daddu     $a0, $zero, $zero
 /* B07904 80240F04 AFA20018 */  sw        $v0, 0x18($sp)
-/* B07908 80240F08 0C01C28C */  jal       func_80070A30
+/* B07908 80240F08 0C01C28C */  jal       playFX_2F
 /* B0790C 80240F0C AFA30014 */   sw       $v1, 0x14($sp)
 /* B07910 80240F10 8FA20020 */  lw        $v0, 0x20($sp)
 /* B07914 80240F14 AE020084 */  sw        $v0, 0x84($s0)

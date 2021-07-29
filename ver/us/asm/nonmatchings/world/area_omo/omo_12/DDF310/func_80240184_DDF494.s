@@ -32,7 +32,7 @@ glabel func_80240184_DDF494
 /* DDF4FC 802401EC 44063000 */  mfc1      $a2, $f6
 /* DDF500 802401F0 4600018D */  trunc.w.s $f6, $f0
 /* DDF504 802401F4 44073000 */  mfc1      $a3, $f6
-/* DDF508 802401F8 0C04DFB0 */  jal       set_transition_stencil_center_worldpos
+/* DDF508 802401F8 0C04DFB0 */  jal       set_screen_overlay_center_worldpos
 /* DDF50C 802401FC 0080282D */   daddu    $a1, $a0, $zero
 /* DDF510 80240200 3C028011 */  lui       $v0, %hi(D_8010EBB0)
 /* DDF514 80240204 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
@@ -82,10 +82,10 @@ glabel func_80240184_DDF494
 /* DDF5B0 802402A0 C6060070 */  lwc1      $f6, 0x70($s0)
 /* DDF5B4 802402A4 468031A0 */  cvt.s.w   $f6, $f6
 /* DDF5B8 802402A8 44053000 */  mfc1      $a1, $f6
-/* DDF5BC 802402AC 0C04E035 */  jal       set_transition_stencil_alpha
+/* DDF5BC 802402AC 0C04E035 */  jal       set_screen_overlay_alpha
 /* DDF5C0 802402B0 24040001 */   addiu    $a0, $zero, 1
 /* DDF5C4 802402B4 3C05437F */  lui       $a1, 0x437f
-/* DDF5C8 802402B8 0C04DF69 */  jal       set_transition_stencil_zoom_1
+/* DDF5C8 802402B8 0C04DF69 */  jal       set_screen_overlay_params_back
 /* DDF5CC 802402BC 2404000B */   addiu    $a0, $zero, 0xb
 /* DDF5D0 802402C0 8FBF0024 */  lw        $ra, 0x24($sp)
 /* DDF5D4 802402C4 8FB20020 */  lw        $s2, 0x20($sp)

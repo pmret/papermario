@@ -1,32 +1,27 @@
 #include "pra_11.h"
 
-#include "world/common/UnkFunc2.inc.c"
-
-#include "world/common/UnkFunc3.inc.c"
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_802400EC_D615EC);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240128_D61628);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_802402F0_D617F0);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_8024049C_D6199C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240500_D61A00);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_8024068C_D61B8C);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240870_D61D70);
-
-INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240D3C_D6223C);
-
-#include "world/common/SetPartnerFlagsA0000.inc.c"
-
-#include "world/common/SetPartnerFlags80000.inc.c"
-
-#include "world/common/SetPartnerFlags20000.inc.c"
+#include "world/common/reflection.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_11/D61520", func_80240F20_D62420);
+/*
+ApiStatus N(func_80240F20_D62420)(ScriptInstance* script, s32 isInitialCall) {
+    s32 i;
+
+    if (N(D_80241610_D62B10) == NULL) {
+        N(D_80241610_D62B10) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80241610_D62B10)[i] = script->varTable[i];
+        }
+    } else {
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80241610_D62B10)[i];
+        }
+        heap_free(N(D_80241610_D62B10));
+        N(D_80241610_D62B10) = NULL;
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/GetItemName.inc.c"
 

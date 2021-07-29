@@ -102,7 +102,7 @@ glabel func_802BE520_319270
 /* 3193E8 802BE698 E7A00010 */  swc1      $f0, 0x10($sp)
 /* 3193EC 802BE69C E7B40014 */  swc1      $f20, 0x14($sp)
 /* 3193F0 802BE6A0 E7BE0018 */  swc1      $f30, 0x18($sp)
-/* 3193F4 802BE6A4 0C0376B9 */  jal       func_800DDAE4
+/* 3193F4 802BE6A4 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 3193F8 802BE6A8 E7A8001C */   swc1     $f8, 0x1c($sp)
 /* 3193FC 802BE6AC 0040182D */  daddu     $v1, $v0, $zero
 /* 319400 802BE6B0 14600002 */  bnez      $v1, .L802BE6BC

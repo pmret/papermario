@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802455F8_DB78B8
+.double 0.09
+
+glabel D_80245600_DB78C0
+.byte 0x3F, 0xB7, 0x0A, 0x3D, 0x70, 0xA3, 0xD7, 0x0A
+
+.section .text
+
 glabel func_80240C04_DB2EC4
 /* DB2EC4 80240C04 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* DB2EC8 80240C08 AFB3004C */  sw        $s3, 0x4c($sp)
@@ -82,7 +92,7 @@ glabel func_80240C04_DB2EC4
 /* DB2FF4 80240D34 E7A60034 */  swc1      $f6, 0x34($sp)
 /* DB2FF8 80240D38 AFA20010 */  sw        $v0, 0x10($sp)
 /* DB2FFC 80240D3C 8E040080 */  lw        $a0, 0x80($s0)
-/* DB3000 80240D40 0C0372DF */  jal       func_800DCB7C
+/* DB3000 80240D40 0C0372DF */  jal       npc_raycast_down_sides
 /* DB3004 80240D44 27A70030 */   addiu    $a3, $sp, 0x30
 /* DB3008 80240D48 C7A00034 */  lwc1      $f0, 0x34($sp)
 /* DB300C 80240D4C 4600D001 */  sub.s     $f0, $f26, $f0
@@ -126,7 +136,7 @@ glabel func_80240C04_DB2EC4
 /* DB309C 80240DDC E7A40034 */  swc1      $f4, 0x34($sp)
 /* DB30A0 80240DE0 AFA20010 */  sw        $v0, 0x10($sp)
 /* DB30A4 80240DE4 8E040080 */  lw        $a0, 0x80($s0)
-/* DB30A8 80240DE8 0C0372DF */  jal       func_800DCB7C
+/* DB30A8 80240DE8 0C0372DF */  jal       npc_raycast_down_sides
 /* DB30AC 80240DEC 27A70030 */   addiu    $a3, $sp, 0x30
 /* DB30B0 80240DF0 C7A4002C */  lwc1      $f4, 0x2c($sp)
 /* DB30B4 80240DF4 461A2100 */  add.s     $f4, $f4, $f26
@@ -185,7 +195,7 @@ glabel func_80240C04_DB2EC4
 /* DB317C 80240EBC E7A60034 */  swc1      $f6, 0x34($sp)
 /* DB3180 80240EC0 AFA20010 */  sw        $v0, 0x10($sp)
 /* DB3184 80240EC4 8E040080 */  lw        $a0, 0x80($s0)
-/* DB3188 80240EC8 0C0372DF */  jal       func_800DCB7C
+/* DB3188 80240EC8 0C0372DF */  jal       npc_raycast_down_sides
 /* DB318C 80240ECC 27A70030 */   addiu    $a3, $sp, 0x30
 .L80240ED0:
 /* DB3190 80240ED0 10400007 */  beqz      $v0, .L80240EF0
@@ -272,7 +282,7 @@ glabel func_80240C04_DB2EC4
 /* DB32C8 80241008 240502F4 */  addiu     $a1, $zero, 0x2f4
 /* DB32CC 8024100C C480003C */  lwc1      $f0, 0x3c($a0)
 /* DB32D0 80241010 3C060020 */  lui       $a2, 0x20
-/* DB32D4 80241014 0C012530 */  jal       func_800494C0
+/* DB32D4 80241014 0C012530 */  jal       ai_enemy_play_sound
 /* DB32D8 80241018 E4800064 */   swc1     $f0, 0x64($a0)
 /* DB32DC 8024101C 8E220018 */  lw        $v0, 0x18($s1)
 /* DB32E0 80241020 9442002A */  lhu       $v0, 0x2a($v0)

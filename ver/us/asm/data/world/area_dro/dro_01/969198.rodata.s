@@ -1,6 +1,0 @@
-.include "macro.inc"
-
-.section .rodata
-
-glabel jtbl_8024DF98_969198
-.word L80243198_95E398, L80243198_95E398, L8024310C_95E30C, L80243198_95E398, L80243198_95E398, 0

@@ -1,7 +1,10 @@
 #include "kzn_22.h"
 
+static char* N(exit_str_0) = "kzn_20";
+static char* N(exit_str_1) = "kzn_23";
+
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_22/C9A200", func_8024030C_C9A50C);
+#include "world/common/GetFloorCollider.inc.c"

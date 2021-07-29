@@ -4,20 +4,20 @@
 
 #include "world/common/Call800E98C4SyncStatusMenu.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240308_AFDE48);
+#include "world/common/UnkFunc32.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240384_AFDEC4);
+#include "world/common/CamSetFOV.inc.c"
 
 #include "world/common/AwaitScriptComplete.inc.c"
 
 #include "world/common/PartnerToggleAbilityScript.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_80240480_AFDFC0);
+#include "world/common/DoesPlayerNeedSleep.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_802404D4_AFE014);
+#include "world/common/UnkFunc35.inc.c"
 
 #include "world/common/GetPartnerCall800EB168.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_802405B4_AFE0F4);
+#include "world/common/UnkFunc36.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_20/AFDE00", func_802405BC_AFE0FC);

@@ -66,7 +66,7 @@ glabel func_802417E0_8D2CF0
 /* 8D2DE4 802418D4 0000202D */  daddu     $a0, $zero, $zero
 /* 8D2DE8 802418D8 3C058024 */  lui       $a1, %hi(func_802417A8_8D2CB8)
 /* 8D2DEC 802418DC 24A517A8 */  addiu     $a1, $a1, %lo(func_802417A8_8D2CB8)
-/* 8D2DF0 802418E0 0C048C56 */  jal       bind_dynamic_entity_3
+/* 8D2DF0 802418E0 0C048C56 */  jal       create_generic_entity_world
 /* 8D2DF4 802418E4 AE020000 */   sw       $v0, ($s0)
 /* 8D2DF8 802418E8 0260202D */  daddu     $a0, $s3, $zero
 /* 8D2DFC 802418EC 3C05FD05 */  lui       $a1, 0xfd05

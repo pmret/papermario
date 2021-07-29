@@ -42,7 +42,7 @@ glabel func_802BD100_317E50
 /* 317EE0 802BD190 44820000 */  mtc1      $v0, $f0
 /* 317EE4 802BD194 00000000 */  nop
 /* 317EE8 802BD198 46800020 */  cvt.s.w   $f0, $f0
-/* 317EEC 802BD19C 0C0376B9 */  jal       func_800DDAE4
+/* 317EEC 802BD19C 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 317EF0 802BD1A0 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 317EF4 802BD1A4 14400006 */  bnez      $v0, .L802BD1C0
 /* 317EF8 802BD1A8 00000000 */   nop
@@ -90,7 +90,7 @@ glabel func_802BD100_317E50
 /* 317F98 802BD248 44820000 */  mtc1      $v0, $f0
 /* 317F9C 802BD24C 00000000 */  nop
 /* 317FA0 802BD250 46800020 */  cvt.s.w   $f0, $f0
-/* 317FA4 802BD254 0C0376B9 */  jal       func_800DDAE4
+/* 317FA4 802BD254 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* 317FA8 802BD258 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* 317FAC 802BD25C 14400006 */  bnez      $v0, .L802BD278
 /* 317FB0 802BD260 00000000 */   nop
@@ -115,7 +115,7 @@ glabel func_802BD100_317E50
 /* 317FF4 802BD2A4 10400004 */  beqz      $v0, .L802BD2B8
 /* 317FF8 802BD2A8 00000000 */   nop
 /* 317FFC 802BD2AC 2404BFFF */  addiu     $a0, $zero, -0x4001
-/* 318000 802BD2B0 0C044277 */  jal       func_801109DC
+/* 318000 802BD2B0 0C044277 */  jal       entity_interacts_with_current_partner
 /* 318004 802BD2B4 00642024 */   and      $a0, $v1, $a0
 .L802BD2B8:
 /* 318008 802BD2B8 8FBF0034 */  lw        $ra, 0x34($sp)

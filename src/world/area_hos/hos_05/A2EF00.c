@@ -4,11 +4,11 @@ extern u8 D_8024DCCF_A37F0F;
 extern u8 D_8024DCD3_A37F13;
 extern u8 D_802D9D73;
 
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", pause_tabs_draw_badges_A2EF00);
-
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2EF00", func_80244DE4_A2F024);
-
 #define NAMESPACE dup_hos_05
+#include "world/common/UnkFunc27.inc.c"
+
+#include "world/common/UnkFunc26.inc.c"
+
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"

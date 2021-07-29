@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80244678_A06EB8
+.word L802422E4_A04B24, L802422F4_A04B34, L80242314_A04B54, L80242324_A04B64, L802423F4_A04C34, L802423F4_A04C34, L802423F4_A04C34, L802423F4_A04C34, L802423F4_A04C34, L802423F4_A04C34, L80242344_A04B84, L80242364_A04BA4, L80242384_A04BC4, L802423A4_A04BE4, L802423C4_A04C04, L802423E4_A04C24, 0, 0
+
+.section .text
+
 glabel func_802421CC_A04A0C
 /* A04A0C 802421CC 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* A04A10 802421D0 AFB3003C */  sw        $s3, 0x3c($sp)
@@ -46,7 +53,7 @@ glabel func_802421CC_A04A0C
 /* A04AB0 80242270 02A0202D */  daddu     $a0, $s5, $zero
 /* A04AB4 80242274 0240282D */  daddu     $a1, $s2, $zero
 /* A04AB8 80242278 0260302D */  daddu     $a2, $s3, $zero
-/* A04ABC 8024227C 0C0906DF */  jal       func_80241B7C_A043BC
+/* A04ABC 8024227C 0C0906DF */  jal       nok_14_UnkFunc5
 /* A04AC0 80242280 0200382D */   daddu    $a3, $s0, $zero
 /* A04AC4 80242284 86A200A8 */  lh        $v0, 0xa8($s5)
 /* A04AC8 80242288 AE42008C */  sw        $v0, 0x8c($s2)
@@ -77,7 +84,7 @@ glabel func_802421CC_A04A0C
 glabel L802422E4_A04B24
 /* A04B24 802422E4 0260202D */  daddu     $a0, $s3, $zero
 /* A04B28 802422E8 0200282D */  daddu     $a1, $s0, $zero
-/* A04B2C 802422EC 0C090265 */  jal       func_80240994_A031D4
+/* A04B2C 802422EC 0C090265 */  jal       nok_14_UnkNpcAIFunc23
 /* A04B30 802422F0 0280302D */   daddu    $a2, $s4, $zero
 glabel L802422F4_A04B34
 /* A04B34 802422F4 0260202D */  daddu     $a0, $s3, $zero
@@ -96,7 +103,7 @@ glabel L80242314_A04B54
 glabel L80242324_A04B64
 /* A04B64 80242324 0260202D */  daddu     $a0, $s3, $zero
 /* A04B68 80242328 0200282D */  daddu     $a1, $s0, $zero
-/* A04B6C 8024232C 0C09048B */  jal       func_8024122C_A03A6C
+/* A04B6C 8024232C 0C09048B */  jal       nok_14_UnkFunc4
 /* A04B70 80242330 0280302D */   daddu    $a2, $s4, $zero
 /* A04B74 80242334 8E630070 */  lw        $v1, 0x70($s3)
 /* A04B78 80242338 2402000A */  addiu     $v0, $zero, 0xa

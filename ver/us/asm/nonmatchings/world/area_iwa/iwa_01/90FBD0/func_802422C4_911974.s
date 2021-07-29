@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802465C0_915C70
+.double 180.0
+
+glabel D_802465C8_915C78
+.double 75.0
+
+.section .text
+
 glabel func_802422C4_911974
 /* 911974 802422C4 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 911978 802422C8 AFBF001C */  sw        $ra, 0x1c($sp)
@@ -20,8 +30,8 @@ glabel func_802422C4_911974
 /* 9119B0 80242300 0040882D */  daddu     $s1, $v0, $zero
 /* 9119B4 80242304 3C03800B */  lui       $v1, %hi(gCameras)
 /* 9119B8 80242308 24631D80 */  addiu     $v1, $v1, %lo(gCameras)
-/* 9119BC 8024230C 3C02800A */  lui       $v0, %hi(D_8009A634)
-/* 9119C0 80242310 8442A634 */  lh        $v0, %lo(D_8009A634)($v0)
+/* 9119BC 8024230C 3C02800A */  lui       $v0, %hi(gCurrentCamID)
+/* 9119C0 80242310 8442A634 */  lh        $v0, %lo(gCurrentCamID)($v0)
 /* 9119C4 80242314 0000282D */  daddu     $a1, $zero, $zero
 /* 9119C8 80242318 00028080 */  sll       $s0, $v0, 2
 /* 9119CC 8024231C 02028021 */  addu      $s0, $s0, $v0

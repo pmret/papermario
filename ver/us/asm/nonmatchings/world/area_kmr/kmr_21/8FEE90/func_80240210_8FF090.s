@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802407D0_8FF650
+.ascii "title_data\0\0kmr_22\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+
+.section .text
+
 glabel func_80240210_8FF090
 /* 8FF090 80240210 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 8FF094 80240214 3C048024 */  lui       $a0, %hi(D_802407D0_8FF650)
@@ -15,8 +22,8 @@ glabel func_80240210_8FF090
 /* 8FF0B8 80240238 0040882D */   daddu    $s1, $v0, $zero
 /* 8FF0BC 8024023C 0220202D */  daddu     $a0, $s1, $zero
 /* 8FF0C0 80240240 0040282D */  daddu     $a1, $v0, $zero
-/* 8FF0C4 80240244 3C108024 */  lui       $s0, %hi(func_802407F0_87A3D0)
-/* 8FF0C8 80240248 261007F0 */  addiu     $s0, $s0, %lo(func_802407F0_87A3D0)
+/* 8FF0C4 80240244 3C108024 */  lui       $s0, %hi(tik_07_UnkFunc39)
+/* 8FF0C8 80240248 261007F0 */  addiu     $s0, $s0, %lo(tik_07_UnkFunc39)
 /* 8FF0CC 8024024C 0C01BB7C */  jal       decode_yay0
 /* 8FF0D0 80240250 AE050000 */   sw       $a1, ($s0)
 /* 8FF0D4 80240254 0C00AB1E */  jal       general_heap_free
@@ -28,7 +35,7 @@ glabel func_80240210_8FF090
 /* 8FF0EC 8024026C 00431021 */  addu      $v0, $v0, $v1
 /* 8FF0F0 80240270 3C018024 */  lui       $at, %hi(func_802407F4_8D45B4)
 /* 8FF0F4 80240274 AC2207F4 */  sw        $v0, %lo(func_802407F4_8D45B4)($at)
-/* 8FF0F8 80240278 0C048C8F */  jal       bind_dynamic_entity_7
+/* 8FF0F8 80240278 0C048C8F */  jal       create_generic_entity_frontUI
 /* 8FF0FC 8024027C 0000202D */   daddu    $a0, $zero, $zero
 /* 8FF100 80240280 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 8FF104 80240284 8FB1001C */  lw        $s1, 0x1c($sp)

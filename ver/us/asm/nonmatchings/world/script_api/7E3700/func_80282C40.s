@@ -36,7 +36,7 @@ glabel func_80282C40
 /* 7E3B3C 80282CBC E7A60018 */  swc1      $f6, 0x18($sp)
 /* 7E3B40 80282CC0 E7A40020 */  swc1      $f4, 0x20($sp)
 /* 7E3B44 80282CC4 E7A0001C */  swc1      $f0, 0x1c($sp)
-/* 7E3B48 80282CC8 0C0372DF */  jal       func_800DCB7C
+/* 7E3B48 80282CC8 0C0372DF */  jal       npc_raycast_down_sides
 /* 7E3B4C 80282CCC AFA20010 */   sw       $v0, 0x10($sp)
 /* 7E3B50 80282CD0 C7A20024 */  lwc1      $f2, 0x24($sp)
 /* 7E3B54 80282CD4 4600120D */  trunc.w.s $f8, $f2
@@ -82,9 +82,9 @@ glabel func_80282C40
 /* 7E3BEC 80282D6C 3C0141C8 */  lui       $at, 0x41c8
 /* 7E3BF0 80282D70 44813000 */  mtc1      $at, $f6
 /* 7E3BF4 80282D74 00021080 */  sll       $v0, $v0, 2
-/* 7E3BF8 80282D78 3C018028 */  lui       $at, %hi(D_80285640)
+/* 7E3BF8 80282D78 3C018028 */  lui       $at, %hi(D_80285640_7E64C0)
 /* 7E3BFC 80282D7C 00220821 */  addu      $at, $at, $v0
-/* 7E3C00 80282D80 C4225640 */  lwc1      $f2, %lo(D_80285640)($at)
+/* 7E3C00 80282D80 C4225640 */  lwc1      $f2, %lo(D_80285640_7E64C0)($at)
 /* 7E3C04 80282D84 46061082 */  mul.s     $f2, $f2, $f6
 /* 7E3C08 80282D88 00000000 */  nop
 /* 7E3C0C 80282D8C C6600084 */  lwc1      $f0, 0x84($s3)

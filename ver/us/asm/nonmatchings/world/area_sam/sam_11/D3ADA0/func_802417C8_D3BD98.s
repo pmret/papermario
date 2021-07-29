@@ -26,7 +26,7 @@ glabel func_802417C8_D3BD98
 /* D3BDE8 80241818 00000000 */  nop
 .L8024181C:
 /* D3BDEC 8024181C 00A0302D */  daddu     $a2, $a1, $zero
-/* D3BDF0 80241820 0C01C5A4 */  jal       func_80071690
+/* D3BDF0 80241820 0C01C5A4 */  jal       playFX_50
 /* D3BDF4 80241824 00A0382D */   daddu    $a3, $a1, $zero
 .L80241828:
 /* D3BDF8 80241828 8FBF0010 */  lw        $ra, 0x10($sp)

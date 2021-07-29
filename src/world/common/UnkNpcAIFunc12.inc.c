@@ -20,15 +20,15 @@ void N(UnkNpcAIFunc12)(ScriptInstance* script, NpcAISettings* aiSettings, s32 ar
     f2 = npc->pos.y;
     f3 = npc->pos.z;
 
-    temp = func_800DDC44(npc->unk_80, &f1, &f2, &f3, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius);
+    temp = npc_test_move_simple_with_slipping(npc->unk_80, &f1, &f2, &f3, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius);
     if (temp == 0) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
 
     if ((npc->duration <= 0) || (--npc->duration <= 0) || (temp != 0)) {
         enemy->unk_07 = 0;
-        npc->currentAnim = enemy->animList[10];
+        npc->currentAnim.w = enemy->animList[10];
         npc->duration = 0;
-        script->functionTemp[0].s = 15;
+        script->functionTemp[0] = 15;
     }
 }

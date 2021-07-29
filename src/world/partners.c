@@ -30,8 +30,15 @@
 #include "partner/twink.h"
 #include "sprite/npc/twink.h"
 
-s32 world_partner_can_use_ability_default(Npc* partner);
+extern f32 D_8010CFC0;
+extern s16 D_8010CFC8;
+extern s16 D_8010CFCA;
+extern s16 D_8010CFCE;
+extern s32 D_802C0000;
+
+s32 partner_is_idle(Npc* partner);
 s32 world_partner_can_player_pause_default(Npc* partner);
+NpcID _create_npc_basic(NpcBlueprint* blueprint);
 
 // Partner icons
 s32 D_800F7F00[] = {
@@ -55,7 +62,7 @@ s32 D_800F7FF4 = 4;
 s32 D_800F7FF8 = 5;
 s32 D_800F7FFC = 7;
 s32 D_800F8000[] = { 8, 0, 0, 0 };
-s32 D_800F8010[] = { &code_code_3251D0_ROM_START, &code_code_3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
+s32 D_800F8010[] = { _3251D0_ROM_START, _3251D0_ROM_END, (s32) &D_802C05CC, 0x00000000 };
 s32 D_800F8020 = 0;
 s32 D_800F8024 = 0;
 s32 D_800F8028 = 0;
@@ -63,11 +70,6 @@ s32 D_800F802C = 0;
 f32 D_800F8030 = 0.0f;
 s8 D_800F8034[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 s16 D_800F803A = 0;
-
-extern f32 D_8010CFC0;
-extern s16 D_8010CFC8;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCE;
 
 WorldPartner wPartners[12] = {
     {}, // None
@@ -100,8 +102,8 @@ WorldPartner wPartners[12] = {
         .putAway = 0x802BEB9C,
         .idle = NPC_ANIM(world_kooper, normal, idle),
         .testFirstStrike = 0x802BE818,
-        .canUseAbility = world_partner_can_use_ability_default,
-        .canPlayerPause = world_partner_can_use_ability_default,
+        .canUseAbility = partner_is_idle,
+        .canPlayerPause = partner_is_idle,
         .preBattle = 0x802BEA24,
         .postBattle = 0x802BEB10,
     },
@@ -134,7 +136,7 @@ WorldPartner wPartners[12] = {
         .useAbility = 0x802BEACC,
         .putAway = 0x802BEAE8,
         .idle = NPC_ANIM(world_parakarry, Palette_00, Anim_1),
-        .canPlayerPause = world_partner_can_use_ability_default,
+        .canPlayerPause = partner_is_idle,
         .preBattle = 0x802BE90C,
         .postBattle = 0x802BE9D0,
     },
@@ -214,7 +216,7 @@ WorldPartner wPartners[12] = {
         .useAbility = 0x802BE01C,
         .putAway = 0x802BE038,
         .idle = NPC_ANIM(world_bow, Palette_00, Anim_1),
-        .canUseAbility = world_partner_can_use_ability_default,
+        .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BDF64,
     },
@@ -230,8 +232,8 @@ WorldPartner wPartners[12] = {
         .useAbility = world_goombaria_use_ability,
         .putAway = world_goombaria_put_away,
         .idle = NPC_ANIM(goombaria, Palette_00, Anim_1),
-        .canUseAbility = world_partner_can_use_ability_default,
-        .canPlayerPause = world_partner_can_use_ability_default,
+        .canUseAbility = partner_is_idle,
+        .canPlayerPause = partner_is_idle,
     },
     {
         // Twink
@@ -245,8 +247,8 @@ WorldPartner wPartners[12] = {
         .useAbility = world_twink_use_ability,
         .putAway = world_twink_put_away,
         .idle = NPC_ANIM(twink, Palette_00, Anim_1),
-        .canUseAbility = world_partner_can_use_ability_default,
-        .canPlayerPause = world_partner_can_use_ability_default,
+        .canUseAbility = partner_is_idle,
+        .canPlayerPause = partner_is_idle,
     },
 };
 
@@ -254,9 +256,22 @@ f32 D_800F833C = 0;
 f32 D_800F8340 = 0;
 f32 D_800F8344 = 0;
 
-NpcID create_basic_npc(NpcBlueprint* blueprint);
+PartnerAnimations gPartnerAnimations[] = {
+    {0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000},
+    {0x00010000, 0x00010002, 0x00010004, 0x00010005, 0x00010001, 0x00010001, 0x00010003, 0x00010008, 0x00010007},
+    {0x00020000, 0x00020004, 0x00020006, 0x00020007, 0x00020000, 0x00020003, 0x00020005, 0x0002000D, 0x0002000C},
+    {0x00030000, 0x00030005, 0x00030009, 0x0003000A, 0x00030000, 0x00030003, 0x00030007, 0x0003000E, 0x0003000D},
+    {0x00040000, 0x00040002, 0x00040008, 0x00040002, 0x00040002, 0x00040001, 0x00040003, 0x00040006, 0x00040005},
+    {0x009D0000, 0x009D0002, 0x009D0004, 0x009D0005, 0x009D0001, 0x009D0001, 0x009D0003, 0x009D0008, 0x009D0001},
+    {0x00060000, 0x00060002, 0x00060002, 0x00060002, 0x00060000, 0x00060001, 0x00060003, 0x00060004, 0x00060007},
+    {0x00070000, 0x00070002, 0x00070002, 0x00070002, 0x00070000, 0x00070001, 0x00070003, 0x00070004, 0x00070008},
+    {0x00080000, 0x00080005, 0x00080005, 0x00080005, 0x00080000, 0x00080001, 0x00080007, 0x00080009, 0x0008000A},
+    {0x00050000, 0x00050002, 0x00050002, 0x00050002, 0x00050000, 0x00050001, 0x00050003, 0x00050004, 0x0005000C},
+    {0x009E0000, 0x009E0005, 0x009E0012, 0x009E0013, 0x009E0001, 0x009E0001, 0x009E0007, 0x009E000B, 0x009E0001},
+    {0x00200000, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200001, 0x00200009, 0x00200020},
+};
 
-extern s32 D_802C0000;
+s32 D_800F84F8 = { 0x00000000, 0x00000000, };
 
 s32 use_consumable(s32 arg0) {
     ScriptInstance* script;
@@ -276,7 +291,7 @@ void remove_consumable(void) {
 
 INCLUDE_ASM(s32, "world/partners", func_800EA4B0);
 
-s32 world_partner_can_use_ability_default(Npc* partner) {
+s32 partner_is_idle(Npc* partner) {
     return D_8010EBB0.unk_00 == 0;
 }
 
@@ -286,7 +301,7 @@ s32 world_partner_can_player_pause_default(Npc* partner) {
 
 INCLUDE_ASM(s32, "world/partners", func_800EA52C);
 
-s32 is_current_partner_flying(void) {
+s32 partner_is_flying(void) {
     return !wPartner->isFlying;
 }
 
@@ -294,7 +309,7 @@ void func_800EA5B8(s32* arg0) {
     *arg0 &= ~0x2007800;
 }
 
-void load_partner_npc(void) {
+void partner_create_npc(void) {
     WorldPartner* partnerEntry = &wPartners[D_8010CFD8];
     Npc** partnerNpcPtr = &wPartnerNpc;
     WorldPartner** partner = &wPartner;
@@ -310,7 +325,7 @@ void load_partner_npc(void) {
     blueprint.initialAnim = (*partner)->idle;
     blueprint.onUpdate = NULL;
     blueprint.onRender = NULL;
-    D_8010CFD0 = npcIndex = create_basic_npc(blueprintPtr);
+    D_8010CFD0 = npcIndex = _create_npc_basic(blueprintPtr);
 
     *partnerNpcPtr = get_npc_by_index(npcIndex);
 
@@ -334,13 +349,13 @@ void load_partner_npc(void) {
     D_8010C954 = 0;
 }
 
-void func_800EA6A8(void) {
+void partner_free_npc(void) {
     free_npc_by_index(D_8010CFD0);
 }
 
 INCLUDE_ASM(s32, "world/partners", _use_partner_ability);
 
-void func_800EB168(s32 arg0) {
+void switch_to_partner(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (D_8010CFD8 != arg0) {
@@ -360,7 +375,7 @@ void func_800EB168(s32 arg0) {
     }
 }
 
-void func_800EB200(s32 arg0) {
+void partner_init_after_battle(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
 
@@ -432,20 +447,14 @@ s32 partner_can_use_ability(void) {
 
 void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32* temp8010CFD8;
-    s32* temp8010CFE8;
-    s32 temp_s0;
+    s32 currentPartner = gPlayerData.currentPartner;
 
-    temp_s0 = gPlayerData.currentPartner;
     mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
-    get_dynamic_entity(bind_dynamic_entity_7(_use_partner_ability, NULL));
-
-    temp8010CFD8 = &D_8010CFD8;
-    temp8010CFE8 = &D_8010CFE8;
+    get_generic_entity(create_generic_entity_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
-    *temp8010CFE8 = 9;
-    *temp8010CFD8 = temp_s0;
+    D_8010CFE8 = 9;
+    D_8010CFD8 = currentPartner;
 
     if (gGameStatusPtr->unk_7D != 0) {
         D_8010EBB0.unk_00 = 1;
@@ -457,10 +466,10 @@ void partner_reset_data(void) {
     D_800F8340 = playerStatus->position.y;
     D_800F8344 = playerStatus->position.z;
 
-    if (*temp8010CFD8 == 0) {
-        *temp8010CFE8 = 1;
+    if (D_8010CFD8 == 0) {
+        D_8010CFE8 = 1;
     } else {
-        load_partner_npc();
+        partner_create_npc();
         wPartnerNpc->scale.x = 1.0f;
         wPartnerNpc->scale.y = 1.0f;
         wPartnerNpc->scale.z = 1.0f;
@@ -518,27 +527,25 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    s8* temp8010EBB0 = &D_8010EBB0;
+    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PlayerData* playerData = &gPlayerData;
 
     if (D_8010CFD8 != 0) {
-        ScriptID* scriptID = &D_8010CFDC;
-        PlayerData* playerData = &gPlayerData;
-
-        if (does_script_exist(*scriptID) != 0) {
-            kill_script_by_ID(*scriptID);
+        if (does_script_exist(D_8010CFDC) != 0) {
+            kill_script_by_ID(D_8010CFDC);
         }
 
         D_8010CFD4 = start_script(wPartner->update, 20, 0x20);
         D_8010CFD4->owner2.npc = wPartnerNpc;
-        *scriptID = D_8010CFD4->id;
+        D_8010CFDC = D_8010CFD4->id;
         D_8010CFD4->groupFlags = 0xA;
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0[3] == 6) {
+        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0->unk_03 == 6) {
             gPlayerStatusPtr->animFlags &= ~1;
             gPlayerStatusPtr->animFlags &= ~2;
-            temp8010EBB0[3] = 0;
+            temp8010EBB0->unk_03 = 0;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -576,18 +583,18 @@ void partner_resume_ability_script(void) {
     }
 }
 
-INCLUDE_ASM(void, "world/partners", enable_partner_walking, Npc* partner, s32 val);
+INCLUDE_ASM(void, "world/partners", partner_walking_enable, Npc* partner, s32 val);
 
-INCLUDE_ASM(void, "world/partners", func_800EBA3C, Npc* partner);
+INCLUDE_ASM(void, "world/partners", partner_walking_update_player_tracking, Npc* partner);
 
-void func_800EBB40(Npc* partner) {
+void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
 
     if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0
         || temp8010EBB0->unk_02 != 0) {
         if (!(playerStatus->animFlags & 0x800)) {
-            func_800EBC74(partner);
+            partner_walking_follow_player(partner);
         }
         if (temp8010EBB0->unk_0C & 0x6006) {
             temp8010EBB0->unk_02 = 0;
@@ -603,39 +610,39 @@ void func_800EBB40(Npc* partner) {
         partner->flags = partner->flags & ~0x800;
     }
 
-    func_800EF640(partner);
+    partner_do_player_collision(partner);
     D_800F833C = partner->pos.x;
     D_800F8340 = partner->pos.y;
     D_800F8344 = partner->pos.z;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EBC74);
+INCLUDE_ASM(void, "world/partners", partner_walking_follow_player, Npc* partner);
 
-INCLUDE_ASM(void, "world/partners", enable_partner_flying, Npc* partner, s32 val);
+INCLUDE_ASM(void, "world/partners", partner_flying_enable, Npc* partner, s32 val);
 
-INCLUDE_ASM(void, "world/partners", update_player_move_history, Npc* partner);
+INCLUDE_ASM(void, "world/partners", partner_flying_update_player_tracking, Npc* partner);
 
-INCLUDE_ASM(void, "world/partners", func_800ED5D0, Npc* partner);
+INCLUDE_ASM(void, "world/partners", partner_flying_update_motion, Npc* partner);
 
-INCLUDE_ASM(s32, "world/partners", func_800ED9F8);
+INCLUDE_ASM(s32, "world/partners", partner_flying_follow_player);
 
-s32 func_800EE994(Npc* arg0) {
+s32 partner_init_put_away(Npc* arg0) {
     arg0->unk_80 = 0x10000;
     D_8010CFC8 = 0;
     arg0->flags |= 0x100;
     return D_8010CFC8;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EE9B8);
+INCLUDE_ASM(s32, "world/partners", partner_put_away);
 
-s32 func_800EECC4(Npc* arg0) {
+s32 partner_init_get_out(Npc* arg0) {
     arg0->unk_80 = 0x10000;
     D_8010CFC8 = 0;
     arg0->flags |= 0x100;
     return D_8010CFC8;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EECE8);
+INCLUDE_ASM(s32, "world/partners", partner_get_out);
 
 void func_800EF300(void) {
     D_8010CFC8 = 40;
@@ -646,27 +653,25 @@ void func_800EF314(void) {
 }
 
 void enable_partner_ai(void) {
-    WorldPartner** partner = &wPartnerNpc;
-
     D_8010CFC8 = 0;
-    clear_partner_move_history(*partner);
+    partner_clear_player_tracking(wPartnerNpc);
 
     if (!wPartner->isFlying) {
-        enable_partner_walking(*partner, FALSE);
+        partner_walking_enable(wPartnerNpc, FALSE);
     } else {
-        enable_partner_flying(*partner, FALSE);
+        partner_flying_enable(wPartnerNpc, FALSE);
     }
 }
 
-void set_parter_tether_distance(f32 arg0) {
+void partner_set_tether_distance(f32 arg0) {
     D_8010CFC0 = arg0;
 }
 
-void reset_parter_tether_distance(void) {
+void repartner_set_tether_distance(void) {
     D_8010CFC0 = 40.0f;
 }
 
-void func_800EF3C0(s32 arg0, s32 arg1) {
+void partner_set_goal_pos(s32 arg0, s32 arg1) {
     D_800F8024 = arg0;
     D_800F8028 = arg1;
 }
@@ -683,7 +688,7 @@ void func_800EF3E4(void) {
 }
 
 void func_800EF414(s32 arg0, s32 arg1) {
-    func_800EF3C0(arg0, arg1);
+    partner_set_goal_pos(arg0, arg1);
     D_8010CFC8 = 20;
 }
 
@@ -693,14 +698,13 @@ void func_800EF43C(void) {
     D_8010CFCE = 0;
 }
 
-INCLUDE_ASM(void, "world/partners", clear_partner_move_history, Npc* partner);
+INCLUDE_ASM(void, "world/partners", partner_clear_player_tracking, Npc* partner);
 
 // Saves at the end
 #ifdef NON_MATCHING
 s32 func_800EF4E0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = &gCameras;
-    Camera* cameras2 = cameras;
     f32 yaw;
     s32 ret;
 
@@ -714,10 +718,10 @@ s32 func_800EF4E0(void) {
         }
     } else if (get_clamped_angle_diff(cameras[0].currentYaw, playerStatus->targetYaw) < 0.0f) {
         ret = 1;
-        yaw = clamp_angle(cameras2[0].currentYaw - 90.0f);
+        yaw = clamp_angle(cameras[0].currentYaw - 90.0f);
     } else {
-        yaw = clamp_angle(cameras2[0].currentYaw + 90.0f);
         ret = 0;
+        yaw = clamp_angle(cameras[0].currentYaw + 90.0f);
     }
 
     playerStatus->targetYaw = yaw;
@@ -728,7 +732,7 @@ s32 func_800EF4E0(void) {
 INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
 #endif
 
-void func_800EF600(void) {
+void partner_enable_input(void) {
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
     temp_8010EBB0->unk_14--;
@@ -737,12 +741,12 @@ void func_800EF600(void) {
     }
 }
 
-void func_800EF628(void) {
+void partner_disable_input(void) {
     Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
 
     temp_8010EBB0->unk_14++;
 }
 
-INCLUDE_ASM(s32, "world/partners", func_800EF640);
+INCLUDE_ASM(void, "world/partners", partner_do_player_collision, Npc* partner);
 
-INCLUDE_ASM(s32, "world/partners", func_800EF82C);
+INCLUDE_ASM(s32, "world/partners", partner_move_to_goal);

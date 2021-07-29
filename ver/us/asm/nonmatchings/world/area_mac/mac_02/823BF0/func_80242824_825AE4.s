@@ -6,7 +6,7 @@ glabel func_80242824_825AE4
 /* 825AE8 80242828 3C058024 */  lui       $a1, %hi(func_802427B8_825A78)
 /* 825AEC 8024282C 24A527B8 */  addiu     $a1, $a1, %lo(func_802427B8_825A78)
 /* 825AF0 80242830 AFBF0010 */  sw        $ra, 0x10($sp)
-/* 825AF4 80242834 0C048C8F */  jal       bind_dynamic_entity_7
+/* 825AF4 80242834 0C048C8F */  jal       create_generic_entity_frontUI
 /* 825AF8 80242838 0000202D */   daddu    $a0, $zero, $zero
 /* 825AFC 8024283C 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 825B00 80242840 3C018025 */  lui       $at, %hi(D_8024E540)

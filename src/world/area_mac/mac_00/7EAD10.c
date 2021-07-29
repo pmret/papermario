@@ -1,32 +1,17 @@
 #include "mac_00.h"
 
+static char* N(exit_str_0) = "kmr_10";
+static char* N(exit_str_1) = "mac_01";
+static char* N(exit_str_2) = "tik_19";
+static char* N(exit_str_3) = "kmr_20";
+static char* N(exit_str_4) = "mac_00";
+static char* N(exit_str_5) = "\0\0\0\0";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-ApiStatus func_80240034_7EAD44(ScriptInstance* script, s32 isInitialCall) {
-    s32 stickX;
-    s32 stickY;
-
-    if (gCollisionStatus.currentFloor != script->varTable[11]) {
-        script->varTable[0] = 0;
-        return ApiStatus_DONE2;
-    }
-
-    stickX = abs(gGameStatusPtr->stickX);
-    stickY = gGameStatusPtr->stickY;
-
-    if (stickX == 0 && stickY == 0) {
-        return ApiStatus_BLOCK;
-    }
-
-    if (!(atan2(0.0f, 0.0f, stickX, stickY) < 60.0f)) {
-        return ApiStatus_BLOCK;
-    }
-
-    script->varTable[0] = 1;
-    return ApiStatus_DONE2;
-}
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 

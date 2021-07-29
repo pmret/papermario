@@ -2,7 +2,7 @@
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_09/882BF0", func_80240AAC_882C6C);
+#include "world/common/UnkDistFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 

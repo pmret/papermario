@@ -84,11 +84,11 @@ glabel func_80243164_A2D3A4
 /* A2D4D8 80243298 24040001 */  addiu     $a0, $zero, 1
 /* A2D4DC 8024329C 27B00010 */  addiu     $s0, $sp, 0x10
 /* A2D4E0 802432A0 0200282D */  daddu     $a1, $s0, $zero
-/* A2D4E4 802432A4 0C04DF70 */  jal       func_80137DC0
+/* A2D4E4 802432A4 0C04DF70 */  jal       get_screen_overlay_params
 /* A2D4E8 802432A8 27A60014 */   addiu    $a2, $sp, 0x14
 /* A2D4EC 802432AC 0000202D */  daddu     $a0, $zero, $zero
 /* A2D4F0 802432B0 0200282D */  daddu     $a1, $s0, $zero
-/* A2D4F4 802432B4 0C04DF70 */  jal       func_80137DC0
+/* A2D4F4 802432B4 0C04DF70 */  jal       get_screen_overlay_params
 /* A2D4F8 802432B8 27A60018 */   addiu    $a2, $sp, 0x18
 /* A2D4FC 802432BC C7A20014 */  lwc1      $f2, 0x14($sp)
 /* A2D500 802432C0 3C01437F */  lui       $at, 0x437f

@@ -13,7 +13,7 @@ glabel func_80241C90_844860
 /* 844880 80241CB0 3C058024 */  lui       $a1, %hi(func_80241D30_844900)
 /* 844884 80241CB4 24A51D30 */  addiu     $a1, $a1, %lo(func_80241D30_844900)
 /* 844888 80241CB8 34422000 */  ori       $v0, $v0, 0x2000
-/* 84488C 80241CBC 0C048C56 */  jal       bind_dynamic_entity_3
+/* 84488C 80241CBC 0C048C56 */  jal       create_generic_entity_world
 /* 844890 80241CC0 AC620004 */   sw       $v0, 4($v1)
 /* 844894 80241CC4 0200202D */  daddu     $a0, $s0, $zero
 /* 844898 80241CC8 3C05FD05 */  lui       $a1, 0xfd05

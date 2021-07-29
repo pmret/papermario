@@ -26,7 +26,7 @@ glabel func_802416F8_CF9268
 /* CF92B8 80241748 00000000 */  nop
 .L8024174C:
 /* CF92BC 8024174C 00A0302D */  daddu     $a2, $a1, $zero
-/* CF92C0 80241750 0C01C5A4 */  jal       func_80071690
+/* CF92C0 80241750 0C01C5A4 */  jal       playFX_50
 /* CF92C4 80241754 00A0382D */   daddu    $a3, $a1, $zero
 .L80241758:
 /* CF92C8 80241758 8FBF0010 */  lw        $ra, 0x10($sp)

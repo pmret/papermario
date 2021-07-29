@@ -45,7 +45,7 @@ glabel func_80240270_BAA3B0
 /* BAA450 80240310 0000302D */  daddu     $a2, $zero, $zero
 /* BAA454 80240314 E6020014 */  swc1      $f2, 0x14($s0)
 /* BAA458 80240318 46200020 */  cvt.s.d   $f0, $f0
-/* BAA45C 8024031C 0C012530 */  jal       func_800494C0
+/* BAA45C 8024031C 0C012530 */  jal       ai_enemy_play_sound
 /* BAA460 80240320 E600001C */   swc1     $f0, 0x1c($s0)
 /* BAA464 80240324 8E6300D0 */  lw        $v1, 0xd0($s3)
 /* BAA468 80240328 C6000040 */  lwc1      $f0, 0x40($s0)
@@ -109,7 +109,7 @@ glabel func_80240270_BAA3B0
 /* BAA54C 8024040C 46800020 */  cvt.s.w   $f0, $f0
 /* BAA550 80240410 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* BAA554 80240414 8E040080 */  lw        $a0, 0x80($s0)
-/* BAA558 80240418 0C037711 */  jal       func_800DDC44
+/* BAA558 80240418 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* BAA55C 8024041C 27A70028 */   addiu    $a3, $sp, 0x28
 /* BAA560 80240420 10400016 */  beqz      $v0, .L8024047C
 /* BAA564 80240424 26310001 */   addiu    $s1, $s1, 1

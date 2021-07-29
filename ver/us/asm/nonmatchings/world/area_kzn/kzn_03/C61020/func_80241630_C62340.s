@@ -1,6 +1,28 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802473D8_C680E8
+.double 380.0
+
+glabel D_802473E0_C680F0
+.double -380.0
+
+glabel D_802473E8_C680F8
+.double 305.0
+
+glabel D_802473F0_C68100
+.double 375.0
+
+glabel D_802473F8_C68108
+.double 45.0
+
+glabel D_80247400_C68110
+.double 150.0, 0.0
+
+.section .text
+
 glabel func_80241630_C62340
 /* C62340 80241630 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* C62344 80241634 AFBF0064 */  sw        $ra, 0x64($sp)
@@ -291,7 +313,7 @@ glabel func_80241630_C62340
 /* C6277C 80241A6C 46800020 */  cvt.s.w   $f0, $f0
 /* C62780 80241A70 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C62784 80241A74 8E240080 */  lw        $a0, 0x80($s1)
-/* C62788 80241A78 0C037711 */  jal       func_800DDC44
+/* C62788 80241A78 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C6278C 80241A7C 0200382D */   daddu    $a3, $s0, $zero
 /* C62790 80241A80 104000CA */  beqz      $v0, .L80241DAC
 /* C62794 80241A84 0280282D */   daddu    $a1, $s4, $zero
@@ -321,7 +343,7 @@ glabel func_80241630_C62340
 /* C627F4 80241AE4 46800020 */  cvt.s.w   $f0, $f0
 /* C627F8 80241AE8 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C627FC 80241AEC 8E240080 */  lw        $a0, 0x80($s1)
-/* C62800 80241AF0 0C037711 */  jal       func_800DDC44
+/* C62800 80241AF0 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C62804 80241AF4 0200382D */   daddu    $a3, $s0, $zero
 /* C62808 80241AF8 27A5002C */  addiu     $a1, $sp, 0x2c
 /* C6280C 80241AFC 27A60030 */  addiu     $a2, $sp, 0x30
@@ -344,7 +366,7 @@ glabel func_80241630_C62340
 /* C62850 80241B40 E7A00030 */  swc1      $f0, 0x30($sp)
 /* C62854 80241B44 AFA30010 */  sw        $v1, 0x10($sp)
 /* C62858 80241B48 8E240080 */  lw        $a0, 0x80($s1)
-/* C6285C 80241B4C 0C0372DF */  jal       func_800DCB7C
+/* C6285C 80241B4C 0C0372DF */  jal       npc_raycast_down_sides
 /* C62860 80241B50 0040802D */   daddu    $s0, $v0, $zero
 /* C62864 80241B54 1600001C */  bnez      $s0, .L80241BC8
 /* C62868 80241B58 00000000 */   nop
@@ -406,7 +428,7 @@ glabel func_80241630_C62340
 /* C62944 80241C34 46800020 */  cvt.s.w   $f0, $f0
 /* C62948 80241C38 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C6294C 80241C3C 8E240080 */  lw        $a0, 0x80($s1)
-/* C62950 80241C40 0C037711 */  jal       func_800DDC44
+/* C62950 80241C40 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C62954 80241C44 27A70028 */   addiu    $a3, $sp, 0x28
 /* C62958 80241C48 8FA60020 */  lw        $a2, 0x20($sp)
 /* C6295C 80241C4C 8E020000 */  lw        $v0, ($s0)
@@ -464,7 +486,7 @@ glabel func_80241630_C62340
 /* C62A28 80241D18 46800020 */  cvt.s.w   $f0, $f0
 /* C62A2C 80241D1C E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C62A30 80241D20 8E240080 */  lw        $a0, 0x80($s1)
-/* C62A34 80241D24 0C037711 */  jal       func_800DDC44
+/* C62A34 80241D24 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C62A38 80241D28 27A70028 */   addiu    $a3, $sp, 0x28
 /* C62A3C 80241D2C 1040001F */  beqz      $v0, .L80241DAC
 /* C62A40 80241D30 00000000 */   nop
@@ -643,7 +665,7 @@ glabel func_80241630_C62340
 /* C62CD0 80241FC0 E7A00024 */  swc1      $f0, 0x24($sp)
 /* C62CD4 80241FC4 AFA20010 */  sw        $v0, 0x10($sp)
 /* C62CD8 80241FC8 8E240080 */  lw        $a0, 0x80($s1)
-/* C62CDC 80241FCC 0C0372DF */  jal       func_800DCB7C
+/* C62CDC 80241FCC 0C0372DF */  jal       npc_raycast_down_sides
 /* C62CE0 80241FD0 27A70028 */   addiu    $a3, $sp, 0x28
 /* C62CE4 80241FD4 10400003 */  beqz      $v0, .L80241FE4
 /* C62CE8 80241FD8 00000000 */   nop
@@ -660,7 +682,7 @@ glabel func_80241630_C62340
 /* C62D10 80242000 0220202D */  daddu     $a0, $s1, $zero
 /* C62D14 80242004 24050321 */  addiu     $a1, $zero, 0x321
 /* C62D18 80242008 0000302D */  daddu     $a2, $zero, $zero
-/* C62D1C 8024200C 0C012530 */  jal       func_800494C0
+/* C62D1C 8024200C 0C012530 */  jal       ai_enemy_play_sound
 /* C62D20 80242010 E620000C */   swc1     $f0, 0xc($s1)
 /* C62D24 80242014 8EC200CC */  lw        $v0, 0xcc($s6)
 /* C62D28 80242018 8C420024 */  lw        $v0, 0x24($v0)

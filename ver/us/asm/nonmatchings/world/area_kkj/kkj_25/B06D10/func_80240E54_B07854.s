@@ -13,7 +13,7 @@ glabel func_80240E54_B07854
 /* B07870 80240E70 C6000074 */  lwc1      $f0, 0x74($s0)
 /* B07874 80240E74 46800020 */  cvt.s.w   $f0, $f0
 /* B07878 80240E78 44050000 */  mfc1      $a1, $f0
-/* B0787C 80240E7C 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* B0787C 80240E7C 0C04DF62 */  jal       set_screen_overlay_params_front
 /* B07880 80240E80 24040001 */   addiu    $a0, $zero, 1
 /* B07884 80240E84 8E020074 */  lw        $v0, 0x74($s0)
 /* B07888 80240E88 14400003 */  bnez      $v0, .L80240E98

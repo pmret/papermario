@@ -1,61 +1,111 @@
 #include "sbk_01.h"
+#include "sprite/npc/pokey.h"
 
 #include "world/common/SetNpcB5_3.inc.c"
 
-s32 N(aISettings_80240370)[] = {
-    0x3FE66666, 0x00000032, 0x0000000A, 0x437A0000, 0x00000000, 0x00000002, 0x40600000, 0x0000002D,
-    0x00000006, 0x43960000, 0x00000000, 0x00000001,
+NpcAISettings N(npcAISettings_80240370) = {
+    .moveSpeed = 1.8f,
+    .moveTime = 50,
+    .waitTime = 10,
+    .alertRadius = 250.0f,
+    .unk_14 = 2,
+    .chaseSpeed = 3.5f,
+    .unk_1C = { .s = 45 },
+    .unk_20 = 6,
+    .chaseRadius = 300.0f,
+    .unk_2C = 1,
 };
 
-Script N(NpcAI_802403A0) = SCRIPT({
+Script N(npcAI_802403A0) = SCRIPT({
     N(SetNpcB5_3)();
-    DoBasicAI(N(aISettings_80240370));
+    DoBasicAI(N(npcAISettings_80240370));
 });
 
-s32 N(npcSettings_802403CC)[] = {
-    0x00000000, 0x0048000F, 0x00000000, 0x00000000, N(NpcAI_802403A0), 0x80077F70, 0x00000000, 0x8007809C,
-    0x00000000, 0x00000000, 0x00090000,
+NpcSettings N(npcSettings_802403CC) = {
+    .height = 72,
+    .radius = 15,
+    .ai = &N(npcAI_802403A0),
+    .onHit = &EnemyNpcHit,
+    .onDefeat = &EnemyNpcDefeat,
+    .level = 9,
 };
 
-s32 N(npcGroup_802403F8)[] = {
-    0x00000000, N(npcSettings_802403CC), 0x434D0000, 0x00000000, 0xC2700000, 0x00002C00, 0x00000000, 0x00000000,
-    0x00000000, 0x0000005A, 0x800F00A8, 0x00090000, 0x00890001, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00001999, 0x59980002,
-    0x3FFF2666, 0x4CCC0002, 0x3FFF3FFF, 0x3FFF0002, 0x33326665, 0x33320002, 0x33327FFF, 0x26660002,
-    0x26660000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00001999, 0x3FFF0002,
-    0x33322666, 0x33320002, 0x33323FFF, 0x33320002, 0x33326665, 0x33320002, 0x33327FFF, 0x26660002,
-    0x33320000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010000,
-    0x000000CD, 0x00000000, 0xFFFFFFC4, 0x00000064, 0x00000000, 0xFFFF8001, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x000003E8, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00310004, 0x00310008, 0x00310008, 0x00310008, 0x00310004, 0x00310004, 0x0031000C, 0x0031000C,
-    0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008,
-    0x00000001, 0x00000000, 0x00000000, 0x00000000,
+StaticNpc N(npcGroup_802403F8) = {
+    .id = 0,
+    .settings = &N(npcSettings_802403CC),
+    .pos = { 205.0f, 0.0f, -60.0f },
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .yaw = 90,
+    .dropFlags = 0x80,
+    .itemDropChance = 15,
+    .itemDrops = {
+        { ITEM_DRIED_FRUIT, 9, 0 },
+        { ITEM_TASTY_TONIC, 1, 0 },
+    },
+    .heartDrops = STANDARD_HEART_DROPS(2),
+    .flowerDrops = STANDARD_FLOWER_DROPS(2),
+    .maxCoinBonus = 1,
+    .movement = { 205, 0, -60, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 },
+    .animations = {
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_C),
+        NPC_ANIM(pokey, Palette_00, Anim_C),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+    },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-s32 N(npcGroup_802405E8)[] = {
-    0x00000001, N(npcSettings_802403CC), 0xC3480000, 0x00000000, 0x43340000, 0x00002C00, 0x00000000, 0x00000000,
-    0x00000000, 0x0000010E, 0x800F00A8, 0x00090000, 0x00890001, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00001999, 0x59980002,
-    0x3FFF2666, 0x4CCC0002, 0x3FFF3FFF, 0x3FFF0002, 0x33326665, 0x33320002, 0x33327FFF, 0x26660002,
-    0x26660000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00001999, 0x3FFF0002,
-    0x33322666, 0x33320002, 0x33323FFF, 0x33320002, 0x33326665, 0x33320002, 0x33327FFF, 0x26660002,
-    0x33320000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010000,
-    0xFFFFFF38, 0x00000000, 0x000000B4, 0x00000064, 0x00000000, 0xFFFF8001, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x000003E8, 0x00000000, 0x00000000, 0x00000001, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00310004, 0x00310008, 0x00310008, 0x00310008, 0x00310004, 0x00310004, 0x0031000C, 0x0031000C,
-    0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008,
-    0x00000001, 0x00000000, 0x00000000, 0x00000000,
+StaticNpc N(npcGroup_802405E8) = {
+    .id = 1,
+    .settings = &N(npcSettings_802403CC),
+    .pos = { -200.0f, 0.0f, 180.0f },
+    .flags = NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT | NPC_FLAG_NO_PROJECT_SHADOW,
+    .yaw = 270,
+    .dropFlags = 0x80,
+    .itemDropChance = 15,
+    .itemDrops = {
+        { ITEM_DRIED_FRUIT, 9, 0 },
+        { ITEM_TASTY_TONIC, 1, 0 },
+    },
+    .heartDrops = STANDARD_HEART_DROPS(2),
+    .flowerDrops = STANDARD_FLOWER_DROPS(2),
+    .maxCoinBonus = 1,
+    .movement = { -200, 0, 180, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 },
+    .animations = {
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_4),
+        NPC_ANIM(pokey, Palette_00, Anim_C),
+        NPC_ANIM(pokey, Palette_00, Anim_C),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM(pokey, Palette_00, Anim_8),
+    },
+    .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
 
-s32 N(npcGroupList_802407D8)[] = {
-    0x00000001, N(npcGroup_802403F8), 0x0A030001, 0x00000001, N(npcGroup_802405E8), 0x0A010001, 0x00000000, 0x00000000,
-    0x00000000,
+NpcGroupList N(npcGroupList_802407D8) = {
+    NPC_GROUP(N(npcGroup_802403F8), BATTLE_ID(10, 3, 0, 1)),
+    NPC_GROUP(N(npcGroup_802405E8), BATTLE_ID(10, 1, 0, 1)),
+    {},
 };

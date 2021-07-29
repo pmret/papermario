@@ -1,5 +1,8 @@
 #include "isk_05.h"
 
+static char* N(exit_str_0) = "isk_04";
+static char* N(exit_str_1) = "";
+
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240000_97DAD0);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_05/97DAD0", func_80240230_97DD00);

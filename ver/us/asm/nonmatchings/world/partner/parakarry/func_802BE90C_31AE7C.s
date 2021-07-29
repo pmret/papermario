@@ -45,7 +45,7 @@ glabel func_802BE90C_31AE7C
 /* 31AF10 802BE9A0 24630010 */   addiu    $v1, $v1, 0x10
 /* 31AF14 802BE9A4 24020001 */  addiu     $v0, $zero, 1
 /* 31AF18 802BE9A8 A2220001 */  sb        $v0, 1($s1)
-/* 31AF1C 802BE9AC 0C03BD17 */  jal       clear_partner_move_history
+/* 31AF1C 802BE9AC 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31AF20 802BE9B0 0200202D */   daddu    $a0, $s0, $zero
 .L802BE9B4:
 /* 31AF24 802BE9B4 24020004 */  addiu     $v0, $zero, 4

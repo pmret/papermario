@@ -1,18 +1,21 @@
 #include "kmr_07.h"
 
+static char* N(exit_str_0) = "kmr_06";
+static char* N(exit_str_1) = "kmr_12";
+
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240000_8D3DC0);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_802400B4_8D3E74);
 
-# include "world/common/NpcJumpFunc3.inc.c"
+#include "world/common/NpcJumpFunc3.inc.c"
 
-# include "world/common/NpcJumpFunc.inc.c"
+#include "world/common/NpcJumpFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc13_2.inc.c"
 
-# include "world/common/UnkNpcAIFunc11.inc.c"
+#include "world/common/UnkNpcAIFunc11.inc.c"
 
-# include "world/common/UnkNpcAIFunc10.inc.c"
+#include "world/common/UnkNpcAIFunc10.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240540_8D4300);
 
@@ -34,4 +37,17 @@ ApiStatus func_80240A6C_8D482C(ScriptInstance* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(s32, "world/area_kmr/kmr_07/8D3DC0", func_80240A6C_8D482C);
+/*
+ApiStatus N(func_80240A6C_8D482C)(void) {
+    Entity* entity = get_entity_by_index(get_variable(NULL, 0xFD050F80));
+
+    if (entity == NULL) {
+        return ApiStatus_BLOCK;
+    }
+
+    play_model_animation(entity->virtualModelIndex, &D_000001E4);
+
+    return ApiStatus_DONE2;
+}
+*/
 #endif

@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802451D8_9B6968
+.ascii "party_pinki\0\0\0\0\0\0\0\0\0\0\0\0\0"
+
+.section .text
+
 glabel func_80240C80_9B2410
 /* 9B2410 80240C80 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 9B2414 80240C84 3C048024 */  lui       $a0, %hi(D_802451D8_9B6968)

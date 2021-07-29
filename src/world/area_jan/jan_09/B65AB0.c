@@ -1,10 +1,15 @@
 #include "jan_09.h"
 
+static char* N(exit_str_0) = "jan_10";
+static char* N(exit_str_1) = "jan_08";
+static char* N(exit_str_2) = "jan_06";
+static char* N(exit_str_3) = "jan_11";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_09/B65AB0", func_80240034_B65AE4);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 

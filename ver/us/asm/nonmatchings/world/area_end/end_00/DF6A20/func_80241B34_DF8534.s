@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8024E900_E05300
+.word L80241DE4_DF87E4, L80241E18_DF8818, L80241E18_DF8818, L80241DD8_DF87D8, L80241DD8_DF87D8, L80241DD8_DF87D8, L80241E18_DF8818, L80241E18_DF8818, L80241E18_DF8818, L80241E18_DF8818, L80241E18_DF8818, L80241E18_DF8818, L80241E18_DF8818, L80241DE4_DF87E4, L80241E18_DF8818, L80241DF0_DF87F0
+
+glabel jtbl_8024E940_E05340
+.word L80241F28_DF8928, L80241ED8_DF88D8, L80241EEC_DF88EC, L80241F00_DF8900, L80241F14_DF8914, L80241F28_DF8928
+
+.section .text
+
 glabel func_80241B34_DF8534
 /* DF8534 80241B34 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* DF8538 80241B38 AFB30064 */  sw        $s3, 0x64($sp)
@@ -80,7 +90,7 @@ glabel func_80241B34_DF8534
 /* DF8654 80241C54 8E050004 */  lw        $a1, 4($s0)
 /* DF8658 80241C58 8E060008 */  lw        $a2, 8($s0)
 /* DF865C 80241C5C 3C073F80 */  lui       $a3, 0x3f80
-/* DF8660 80241C60 0C049721 */  jal       func_80125C84
+/* DF8660 80241C60 0C049721 */  jal       msg_get_print_char_width
 /* DF8664 80241C64 0240202D */   daddu    $a0, $s2, $zero
 /* DF8668 80241C68 8FA30044 */  lw        $v1, 0x44($sp)
 /* DF866C 80241C6C 8E040004 */  lw        $a0, 4($s0)
@@ -367,7 +377,7 @@ glabel L80241F28_DF8928
 /* DF8A40 80242040 8E050004 */  lw        $a1, 4($s0)
 /* DF8A44 80242044 8E060008 */  lw        $a2, 8($s0)
 /* DF8A48 80242048 3C073F80 */  lui       $a3, 0x3f80
-/* DF8A4C 8024204C 0C049721 */  jal       func_80125C84
+/* DF8A4C 8024204C 0C049721 */  jal       msg_get_print_char_width
 /* DF8A50 80242050 0240202D */   daddu    $a0, $s2, $zero
 /* DF8A54 80242054 26A3FFFF */  addiu     $v1, $s5, -1
 /* DF8A58 80242058 8E040004 */  lw        $a0, 4($s0)

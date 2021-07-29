@@ -43,7 +43,7 @@ glabel func_80242524_B370F4
 /* B37184 802425B4 ACA00018 */   sw       $zero, 0x18($a1)
 /* B37188 802425B8 3C048025 */  lui       $a0, %hi(D_8024FED8)
 /* B3718C 802425BC 8C84FED8 */  lw        $a0, %lo(D_8024FED8)($a0)
-/* B37190 802425C0 0C048D70 */  jal       func_801235C0
+/* B37190 802425C0 0C048D70 */  jal       free_generic_entity
 /* B37194 802425C4 00000000 */   nop
 /* B37198 802425C8 24020002 */  addiu     $v0, $zero, 2
 .L802425CC:

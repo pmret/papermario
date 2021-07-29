@@ -15,9 +15,9 @@ glabel func_802401FC_AF7B4C
 /* AF7B74 80240224 AC200E8C */  sw        $zero, %lo(D_80240E8C_AF87DC)($at)
 /* AF7B78 80240228 3C018024 */  lui       $at, %hi(D_80240E90_AF87E0)
 /* AF7B7C 8024022C AC200E90 */  sw        $zero, %lo(D_80240E90_AF87E0)($at)
-/* AF7B80 80240230 0C048C8F */  jal       bind_dynamic_entity_7
+/* AF7B80 80240230 0C048C8F */  jal       create_generic_entity_frontUI
 /* AF7B84 80240234 0000282D */   daddu    $a1, $zero, $zero
-/* AF7B88 80240238 0C048D8F */  jal       get_dynamic_entity
+/* AF7B88 80240238 0C048D8F */  jal       get_generic_entity
 /* AF7B8C 8024023C 0040202D */   daddu    $a0, $v0, $zero
 /* AF7B90 80240240 3C048024 */  lui       $a0, %hi(D_80240EF0_AF8840)
 /* AF7B94 80240244 24840EF0 */  addiu     $a0, $a0, %lo(D_80240EF0_AF8840)

@@ -18,7 +18,7 @@ glabel func_80240048_7E73E8
 /* 7E7418 80240078 C6000074 */  lwc1      $f0, 0x74($s0)
 /* 7E741C 8024007C 46800020 */  cvt.s.w   $f0, $f0
 /* 7E7420 80240080 44050000 */  mfc1      $a1, $f0
-/* 7E7424 80240084 0C04DF62 */  jal       set_transition_stencil_zoom_0
+/* 7E7424 80240084 0C04DF62 */  jal       set_screen_overlay_params_front
 /* 7E7428 80240088 0000202D */   daddu    $a0, $zero, $zero
 /* 7E742C 8024008C 8E020074 */  lw        $v0, 0x74($s0)
 /* 7E7430 80240090 240300FF */  addiu     $v1, $zero, 0xff

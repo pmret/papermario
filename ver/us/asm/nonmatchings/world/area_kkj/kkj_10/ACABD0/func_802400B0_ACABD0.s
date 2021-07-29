@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802435E0_ACE100
+.double 90.0
+
+glabel D_802435E8_ACE108
+.double 270.0
+
+.section .text
+
 glabel func_802400B0_ACABD0
 /* ACABD0 802400B0 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* ACABD4 802400B4 AFB3003C */  sw        $s3, 0x3c($sp)
@@ -118,7 +128,7 @@ glabel func_802400B0_ACABD0
 /* ACAD84 80240264 44820000 */  mtc1      $v0, $f0
 /* ACAD88 80240268 00000000 */  nop
 /* ACAD8C 8024026C 46800020 */  cvt.s.w   $f0, $f0
-/* ACAD90 80240270 0C0376B9 */  jal       func_800DDAE4
+/* ACAD90 80240270 0C0376B9 */  jal       npc_test_move_taller_with_slipping
 /* ACAD94 80240274 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* ACAD98 80240278 54400001 */  bnel      $v0, $zero, .L80240280
 /* ACAD9C 8024027C 0000882D */   daddu    $s1, $zero, $zero

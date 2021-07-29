@@ -203,7 +203,7 @@ glabel func_80240020_9AE720
 /* 9AEA30 80240330 AE62000C */  sw        $v0, 0xc($s3)
 /* 9AEA34 80240334 8E650008 */  lw        $a1, 8($s3)
 /* 9AEA38 80240338 8E66000C */  lw        $a2, 0xc($s3)
-/* 9AEA3C 8024033C 0C0B7811 */  jal       func_802DE044
+/* 9AEA3C 8024033C 0C0B7811 */  jal       spr_get_player_raster_info
 /* 9AEA40 80240340 27A40030 */   addiu    $a0, $sp, 0x30
 /* 9AEA44 80240344 27A50018 */  addiu     $a1, $sp, 0x18
 /* 9AEA48 80240348 0000302D */  daddu     $a2, $zero, $zero

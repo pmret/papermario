@@ -8,9 +8,9 @@ ApiStatus func_802BD300_318050(ScriptInstance* script, s32 isInitialCall) {
     Npc* unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {
-        func_800EECC4(unk);
+        partner_init_get_out(unk);
     }
-    return func_800EECE8(unk) != 0;
+    return partner_get_out(unk) != 0;
 }
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD338_318088);
@@ -29,9 +29,9 @@ ApiStatus func_802BE4E8_319238(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {
-        func_800EE994(unk);
+        partner_init_put_away(unk);
     }
-    return func_800EE9B8(unk) != 0;
+    return partner_put_away(unk) != 0;
 }
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BE520_319270);

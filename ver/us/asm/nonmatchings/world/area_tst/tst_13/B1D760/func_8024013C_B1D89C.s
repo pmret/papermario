@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242D00_B20460
+.double 0.1, 0.0
+
+.section .text
+
 glabel func_8024013C_B1D89C
 /* B1D89C 8024013C 27BDFF38 */  addiu     $sp, $sp, -0xc8
 /* B1D8A0 80240140 27A40010 */  addiu     $a0, $sp, 0x10
@@ -92,7 +99,7 @@ glabel func_8024013C_B1D89C
 /* B1D9F8 80240298 26732860 */  addiu     $s3, $s3, %lo(D_80242860_B1FFC0)
 /* B1D9FC 8024029C 0260282D */  daddu     $a1, $s3, $zero
 /* B1DA00 802402A0 27A60010 */  addiu     $a2, $sp, 0x10
-/* B1DA04 802402A4 0C0470CB */  jal       func_8011C32C
+/* B1DA04 802402A4 0C0470CB */  jal       mdl_project_tex_coords
 /* B1DA08 802402A8 0000382D */   daddu    $a3, $zero, $zero
 /* B1DA0C 802402AC 3C07E300 */  lui       $a3, 0xe300
 /* B1DA10 802402B0 34E70A01 */  ori       $a3, $a3, 0xa01
@@ -118,7 +125,7 @@ glabel func_8024013C_B1D89C
 /* B1DA60 80240300 AC400004 */  sw        $zero, 4($v0)
 /* B1DA64 80240304 AE030000 */  sw        $v1, ($s0)
 /* B1DA68 80240308 AC490008 */  sw        $t1, 8($v0)
-/* B1DA6C 8024030C 0C0475CB */  jal       func_8011D72C
+/* B1DA6C 8024030C 0C0475CB */  jal       mdl_draw_hidden_panel_surface
 /* B1DA70 80240310 AC48000C */   sw       $t0, 0xc($v0)
 /* B1DA74 80240314 3C03DA38 */  lui       $v1, 0xda38
 /* B1DA78 80240318 34630002 */  ori       $v1, $v1, 2

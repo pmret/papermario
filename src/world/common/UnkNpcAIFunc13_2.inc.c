@@ -8,7 +8,7 @@ void N(UnkNpcAIFunc13_2)(ScriptInstance* script, NpcAISettings* aiSettings, s32 
     f32 angleDiff;
 
     npc->duration = (aiSettings->unk_14 / 2) + rand_int(aiSettings->unk_14 / 2 + 1);
-    npc->currentAnim = enemy->animList[3];
+    npc->currentAnim.w = enemy->animList[3];
     npc->moveSpeed = aiSettings->alertRadius;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -25,5 +25,5 @@ void N(UnkNpcAIFunc13_2)(ScriptInstance* script, NpcAISettings* aiSettings, s32 
     }
 
     npc->yaw = clamp_angle(tempAngle);
-    script->functionTemp[0].s = 13;
+    script->functionTemp[0] = 13;
 }

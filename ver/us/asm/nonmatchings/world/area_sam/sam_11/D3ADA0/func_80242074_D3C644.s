@@ -42,7 +42,7 @@ glabel func_80242074_D3C644
 /* D3C6D8 80242108 46800020 */  cvt.s.w   $f0, $f0
 /* D3C6DC 8024210C E7A00018 */  swc1      $f0, 0x18($sp)
 /* D3C6E0 80242110 8C840080 */  lw        $a0, 0x80($a0)
-/* D3C6E4 80242114 0C0371DE */  jal       func_800DC778
+/* D3C6E4 80242114 0C0371DE */  jal       npc_raycast_down_ahead
 /* D3C6E8 80242118 27A70028 */   addiu    $a3, $sp, 0x28
 /* D3C6EC 8024211C 10400009 */  beqz      $v0, .L80242144
 /* D3C6F0 80242120 0240202D */   daddu    $a0, $s2, $zero

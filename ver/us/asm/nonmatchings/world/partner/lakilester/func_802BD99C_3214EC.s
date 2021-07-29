@@ -33,7 +33,7 @@ glabel func_802BD99C_3214EC
 /* 32155C 802BDA0C 27A20040 */  addiu     $v0, $sp, 0x40
 /* 321560 802BDA10 AFA2001C */  sw        $v0, 0x1c($sp)
 /* 321564 802BDA14 27A20044 */  addiu     $v0, $sp, 0x44
-/* 321568 802BDA18 0C03791B */  jal       func_800DE46C
+/* 321568 802BDA18 0C03791B */  jal       player_raycast_below_cam_relative
 /* 32156C 802BDA1C AFA20020 */   sw       $v0, 0x20($sp)
 /* 321570 802BDA20 04420016 */  bltzl     $v0, .L802BDA7C
 /* 321574 802BDA24 0000102D */   daddu    $v0, $zero, $zero

@@ -1,7 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-void N(set_script_owner_npc_col_height)(ScriptInstance* script) {
+void N(set_script_owner_npc_col_height)(ScriptInstance* script, NpcAISettings* aiSettings,
+                                        EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -15,5 +16,5 @@ void N(set_script_owner_npc_col_height)(ScriptInstance* script) {
     }
 
     npc->collisionHeight = enemy->varTable[6];
-    script->functionTemp[0].s = 0;
+    script->functionTemp[0] = 0;
 }

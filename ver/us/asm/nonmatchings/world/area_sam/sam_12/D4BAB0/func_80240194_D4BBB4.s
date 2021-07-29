@@ -34,7 +34,7 @@ glabel func_80240194_D4BBB4
 /* D4BC28 80240208 46800020 */  cvt.s.w   $f0, $f0
 /* D4BC2C 8024020C 44070000 */  mfc1      $a3, $f0
 /* D4BC30 80240210 0000202D */  daddu     $a0, $zero, $zero
-/* D4BC34 80240214 0C01C16C */  jal       func_800705B0
+/* D4BC34 80240214 0C01C16C */  jal       playFX_23
 /* D4BC38 80240218 AFA00010 */   sw       $zero, 0x10($sp)
 /* D4BC3C 8024021C 8FBF0024 */  lw        $ra, 0x24($sp)
 /* D4BC40 80240220 8FB20020 */  lw        $s2, 0x20($sp)

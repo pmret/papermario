@@ -32,7 +32,7 @@ glabel func_802402A0_8DA3A0
 /* 8DA40C 8024030C 4406B000 */  mfc1      $a2, $f22
 /* 8DA410 80240310 4407A000 */  mfc1      $a3, $f20
 /* 8DA414 80240314 0000202D */  daddu     $a0, $zero, $zero
-/* 8DA418 80240318 0C01C094 */  jal       func_80070250
+/* 8DA418 80240318 0C01C094 */  jal       playFX_1A
 /* 8DA41C 8024031C AFA20010 */   sw       $v0, 0x10($sp)
 /* 8DA420 80240320 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 8DA424 80240324 8FB1001C */  lw        $s1, 0x1c($sp)

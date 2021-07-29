@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80244D68_A0BC68
+.word L80241ECC_A08DCC, L80241EDC_A08DDC, L80241EF4_A08DF4, L80241F04_A08E04, L80241F84_A08E84, L80241F84_A08E84, L80241F84_A08E84, L80241F84_A08E84, L80241F84_A08E84, L80241F84_A08E84, L80241F1C_A08E1C, L80241F2C_A08E2C, L80241F44_A08E44, L80241F5C_A08E5C, L80241F74_A08E74, 0
+
+.section .text
+
 glabel func_80241DC0_A08CC0
 /* A08CC0 80241DC0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* A08CC4 80241DC4 AFB40040 */  sw        $s4, 0x40($sp)
@@ -46,7 +53,7 @@ glabel func_80241DC0_A08CC0
 /* A08D64 80241E64 02A0202D */  daddu     $a0, $s5, $zero
 /* A08D68 80241E68 0240282D */  daddu     $a1, $s2, $zero
 /* A08D6C 80241E6C 0280302D */  daddu     $a2, $s4, $zero
-/* A08D70 80241E70 0C090727 */  jal       func_80241C9C_A08B9C
+/* A08D70 80241E70 0C090727 */  jal       nok_15_UnkFunc5
 /* A08D74 80241E74 0200382D */   daddu    $a3, $s0, $zero
 .L80241E78:
 /* A08D78 80241E78 2402FFFE */  addiu     $v0, $zero, -2
@@ -74,7 +81,7 @@ glabel func_80241DC0_A08CC0
 glabel L80241ECC_A08DCC
 /* A08DCC 80241ECC 0280202D */  daddu     $a0, $s4, $zero
 /* A08DD0 80241ED0 0200282D */  daddu     $a1, $s0, $zero
-/* A08DD4 80241ED4 0C0902AD */  jal       func_80240AB4_A079B4
+/* A08DD4 80241ED4 0C0902AD */  jal       nok_15_UnkNpcAIFunc23
 /* A08DD8 80241ED8 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241EDC_A08DDC
 /* A08DDC 80241EDC 0280202D */  daddu     $a0, $s4, $zero
@@ -91,7 +98,7 @@ glabel L80241EF4_A08DF4
 glabel L80241F04_A08E04
 /* A08E04 80241F04 0280202D */  daddu     $a0, $s4, $zero
 /* A08E08 80241F08 0200282D */  daddu     $a1, $s0, $zero
-/* A08E0C 80241F0C 0C0904D3 */  jal       func_8024134C_A0824C
+/* A08E0C 80241F0C 0C0904D3 */  jal       nok_15_UnkFunc4
 /* A08E10 80241F10 0260302D */   daddu    $a2, $s3, $zero
 /* A08E14 80241F14 080907E2 */  j         .L80241F88
 /* A08E18 80241F18 0000102D */   daddu    $v0, $zero, $zero
@@ -124,7 +131,7 @@ glabel L80241F5C_A08E5C
 glabel L80241F74_A08E74
 /* A08E74 80241F74 0280202D */  daddu     $a0, $s4, $zero
 /* A08E78 80241F78 0200282D */  daddu     $a1, $s0, $zero
-/* A08E7C 80241F7C 0C090643 */  jal       func_8024190C_A0880C
+/* A08E7C 80241F7C 0C090643 */  jal       nok_15_UnkFunc6
 /* A08E80 80241F80 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F84_A08E84
 /* A08E84 80241F84 0000102D */  daddu     $v0, $zero, $zero

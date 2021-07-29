@@ -1,6 +1,9 @@
 #! /usr/bin/python3
 
 import argparse
+from capstone import *
+from capstone.mips import *
+import hashlib
 import zlib
 
 parser = argparse.ArgumentParser(description='Gives information on n64 roms')
@@ -58,8 +61,11 @@ def get_entry_point(program_counter, cic):
     return program_counter - cic["offset"]
 
 
-def get_info(rom_path, encoding="ASCII"):
-    return get_info_bytes(read_rom(rom_path), encoding)
+def get_info(rom_path, encoding="ASCII", bytes=None):
+    if not bytes:
+        return get_info_bytes(read_rom(rom_path), encoding)
+    else:
+        return get_info_bytes(bytes, encoding)
 
 
 def get_info_bytes(rom_bytes, encoding):
@@ -85,11 +91,15 @@ def get_info_bytes(rom_bytes, encoding):
     #     if rom_bytes.find(bytes(format, "ASCII")) != -1:
     #         compression_formats.append(format)
 
-    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes))
+    compiler = get_compiler_info(rom_bytes, entry_point, print_result=False)
+
+    sha1 = hashlib.sha1(rom_bytes).hexdigest()
+
+    return N64Rom(name, country_code, libultra_version, crc1, crc2, cic, entry_point, len(rom_bytes), compiler, sha1)
 
 
 class N64Rom:
-    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size):
+    def __init__(self, name, country_code, libultra_version, crc1, crc2, cic, entry_point, size, compiler, sha1):
         self.name = name
         self.country_code = country_code
         self.libultra_version = libultra_version
@@ -98,14 +108,36 @@ class N64Rom:
         self.cic = cic
         self.entry_point = entry_point
         self.size = size
+        self.compiler = compiler
+        self.sha1 = sha1
 
     def get_country_name(self):
         return country_codes[self.country_code]
 
+def get_compiler_info(rom_bytes, entry_point, print_result=True):
+    md = Cs(CS_ARCH_MIPS, CS_MODE_MIPS64 + CS_MODE_BIG_ENDIAN)
+    md.detail = True
+
+    jumps = 0
+    branches = 0
+
+    for insn in md.disasm(rom_bytes[0x1000:], entry_point):
+        if insn.mnemonic == "j":
+            jumps += 1
+        elif insn.mnemonic == "b":
+            branches += 1
+
+    compiler = "IDO" if branches > jumps else "GCC"
+    if (print_result):
+        print(f"{branches} branches and {jumps} jumps detected in the first code segment. Compiler is most likely {compiler}")
+    return compiler
+
 # TODO: support .n64 extension
 def main():
     args = parser.parse_args()
-    rom = get_info(args.rom, args.encoding)
+    rom_bytes = read_rom(args.rom)
+    rom = get_info(args.rom, args.encoding, rom_bytes)
+
     print("Image name: " + rom.name)
     print("Country code: " + chr(rom.country_code) + " - " + rom.get_country_name())
     print("Libultra version: " + rom.libultra_version)
@@ -113,7 +145,9 @@ def main():
     print("CRC2: " + rom.crc2)
     print("CIC: " + rom.cic["ntsc-name"] + " / " + rom.cic["pal-name"])
     print("RAM entry point: " + hex(rom.entry_point))
+    print("")
 
+    get_compiler_info(rom_bytes, rom.entry_point)
 
 if __name__ == "__main__":
     main()

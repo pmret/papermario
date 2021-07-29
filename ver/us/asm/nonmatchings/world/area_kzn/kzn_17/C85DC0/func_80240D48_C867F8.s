@@ -1,6 +1,28 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80246538_C8BFE8
+.double 380.0
+
+glabel D_80246540_C8BFF0
+.double -380.0
+
+glabel D_80246548_C8BFF8
+.double 305.0
+
+glabel D_80246550_C8C000
+.double 375.0
+
+glabel D_80246558_C8C008
+.double 45.0
+
+glabel D_80246560_C8C010
+.double 150.0
+
+.section .text
+
 glabel func_80240D48_C867F8
 /* C867F8 80240D48 27BDFF80 */  addiu     $sp, $sp, -0x80
 /* C867FC 80240D4C AFBF0064 */  sw        $ra, 0x64($sp)
@@ -291,7 +313,7 @@ glabel func_80240D48_C867F8
 /* C86C34 80241184 46800020 */  cvt.s.w   $f0, $f0
 /* C86C38 80241188 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C86C3C 8024118C 8E240080 */  lw        $a0, 0x80($s1)
-/* C86C40 80241190 0C037711 */  jal       func_800DDC44
+/* C86C40 80241190 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C86C44 80241194 0200382D */   daddu    $a3, $s0, $zero
 /* C86C48 80241198 104000CA */  beqz      $v0, .L802414C4
 /* C86C4C 8024119C 0280282D */   daddu    $a1, $s4, $zero
@@ -321,7 +343,7 @@ glabel func_80240D48_C867F8
 /* C86CAC 802411FC 46800020 */  cvt.s.w   $f0, $f0
 /* C86CB0 80241200 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C86CB4 80241204 8E240080 */  lw        $a0, 0x80($s1)
-/* C86CB8 80241208 0C037711 */  jal       func_800DDC44
+/* C86CB8 80241208 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C86CBC 8024120C 0200382D */   daddu    $a3, $s0, $zero
 /* C86CC0 80241210 27A5002C */  addiu     $a1, $sp, 0x2c
 /* C86CC4 80241214 27A60030 */  addiu     $a2, $sp, 0x30
@@ -344,7 +366,7 @@ glabel func_80240D48_C867F8
 /* C86D08 80241258 E7A00030 */  swc1      $f0, 0x30($sp)
 /* C86D0C 8024125C AFA30010 */  sw        $v1, 0x10($sp)
 /* C86D10 80241260 8E240080 */  lw        $a0, 0x80($s1)
-/* C86D14 80241264 0C0372DF */  jal       func_800DCB7C
+/* C86D14 80241264 0C0372DF */  jal       npc_raycast_down_sides
 /* C86D18 80241268 0040802D */   daddu    $s0, $v0, $zero
 /* C86D1C 8024126C 1600001C */  bnez      $s0, .L802412E0
 /* C86D20 80241270 00000000 */   nop
@@ -406,7 +428,7 @@ glabel func_80240D48_C867F8
 /* C86DFC 8024134C 46800020 */  cvt.s.w   $f0, $f0
 /* C86E00 80241350 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C86E04 80241354 8E240080 */  lw        $a0, 0x80($s1)
-/* C86E08 80241358 0C037711 */  jal       func_800DDC44
+/* C86E08 80241358 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C86E0C 8024135C 27A70028 */   addiu    $a3, $sp, 0x28
 /* C86E10 80241360 8FA60020 */  lw        $a2, 0x20($sp)
 /* C86E14 80241364 8E020000 */  lw        $v0, ($s0)
@@ -464,7 +486,7 @@ glabel func_80240D48_C867F8
 /* C86EE0 80241430 46800020 */  cvt.s.w   $f0, $f0
 /* C86EE4 80241434 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* C86EE8 80241438 8E240080 */  lw        $a0, 0x80($s1)
-/* C86EEC 8024143C 0C037711 */  jal       func_800DDC44
+/* C86EEC 8024143C 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* C86EF0 80241440 27A70028 */   addiu    $a3, $sp, 0x28
 /* C86EF4 80241444 1040001F */  beqz      $v0, .L802414C4
 /* C86EF8 80241448 00000000 */   nop
@@ -643,7 +665,7 @@ glabel func_80240D48_C867F8
 /* C87188 802416D8 E7A00024 */  swc1      $f0, 0x24($sp)
 /* C8718C 802416DC AFA20010 */  sw        $v0, 0x10($sp)
 /* C87190 802416E0 8E240080 */  lw        $a0, 0x80($s1)
-/* C87194 802416E4 0C0372DF */  jal       func_800DCB7C
+/* C87194 802416E4 0C0372DF */  jal       npc_raycast_down_sides
 /* C87198 802416E8 27A70028 */   addiu    $a3, $sp, 0x28
 /* C8719C 802416EC 10400003 */  beqz      $v0, .L802416FC
 /* C871A0 802416F0 00000000 */   nop
@@ -660,7 +682,7 @@ glabel func_80240D48_C867F8
 /* C871C8 80241718 0220202D */  daddu     $a0, $s1, $zero
 /* C871CC 8024171C 24050321 */  addiu     $a1, $zero, 0x321
 /* C871D0 80241720 0000302D */  daddu     $a2, $zero, $zero
-/* C871D4 80241724 0C012530 */  jal       func_800494C0
+/* C871D4 80241724 0C012530 */  jal       ai_enemy_play_sound
 /* C871D8 80241728 E620000C */   swc1     $f0, 0xc($s1)
 /* C871DC 8024172C 8EC200CC */  lw        $v0, 0xcc($s6)
 /* C871E0 80241730 8C420024 */  lw        $v0, 0x24($v0)

@@ -1,3 +1,8 @@
 #include "flo_14.h"
 
-INCLUDE_ASM(s32, "world/area_flo/flo_14/CCD670", func_80242360_CCD670);
+ApiStatus N(func_80242360_CCD670)(ScriptInstance* script, s32 isInitialCall) {
+    CollisionStatus* collisionStatus = &gCollisionStatus;
+
+    set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);
+    return ApiStatus_DONE2;
+}

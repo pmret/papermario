@@ -35,7 +35,7 @@ s32 world_goombario_can_pause(Npc* partner) {
 
     if ((partner->flags & 0x1800) != 0x1000) {
         return new_var = 0;
-        do { } while(new_var); // why though
+        do { } while (new_var); // why though
     }
 
     return TRUE;
@@ -51,28 +51,25 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
 
     if (isInitialCall) {
-        func_800EE994(unk);
+        partner_init_put_away(unk);
     }
 
-    return func_800EE9B8(unk) != 0;
+    return partner_put_away(unk) != 0;
 }
 
 void world_goombario_pre_battle(Npc* partner) {
-    // TODO fake match nonsense
-    s8* new_var = &D_8010EBB0.unk_00;
-    s8* new_var2 = &D_8010EBB0.unk_00;
-    new_var = new_var2;
+    Temp8010EBB0* temp = &D_8010EBB0;
 
-    if (*new_var != 0) {
-        func_80027088(0);
+    if (temp->unk_00 != 0) {
+        set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         CancelMessageAndBlock();
-        clear_partner_move_history(partner);
-        D_8010EBB0.unk_00 = 0;
-        D_8010EBB0.unk_03 = 0;
+        partner_clear_player_tracking(partner);
+        temp->unk_00 = 0;
+        temp->unk_03 = 0;
         disable_npc_blur(partner);
     }
-    D_8010EBB0.unk_03 = 1;
+    temp->unk_03 = 1;
 }
 
 s32 D_802BDC40_317B60[] = {

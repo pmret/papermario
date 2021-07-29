@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80242220_A02820
+.word L80240EEC_A014EC, L80240F3C_A0153C, L80240FF8_A015F8, L8024118C_A0178C, L8024131C_A0191C, 0, 0, 0
+
+.section .text
+
 glabel func_80240E20_A01420
 /* A01420 80240E20 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* A01424 80240E24 AFB20018 */  sw        $s2, 0x18($sp)
@@ -58,7 +65,7 @@ glabel L80240EEC_A014EC
 /* A014EC 80240EEC C60C0000 */  lwc1      $f12, ($s0)
 /* A014F0 80240EF0 46806320 */  cvt.s.w   $f12, $f12
 /* A014F4 80240EF4 C60E0008 */  lwc1      $f14, 8($s0)
-/* A014F8 80240EF8 0C038022 */  jal       func_800E0088
+/* A014F8 80240EF8 0C038022 */  jal       get_xz_dist_to_player
 /* A014FC 80240EFC 468073A0 */   cvt.s.w  $f14, $f14
 /* A01500 80240F00 8E02000C */  lw        $v0, 0xc($s0)
 /* A01504 80240F04 4600010D */  trunc.w.s $f4, $f0
@@ -79,7 +86,7 @@ glabel L80240F3C_A0153C
 /* A0153C 80240F3C C60C0000 */  lwc1      $f12, ($s0)
 /* A01540 80240F40 46806320 */  cvt.s.w   $f12, $f12
 /* A01544 80240F44 C60E0008 */  lwc1      $f14, 8($s0)
-/* A01548 80240F48 0C038022 */  jal       func_800E0088
+/* A01548 80240F48 0C038022 */  jal       get_xz_dist_to_player
 /* A0154C 80240F4C 468073A0 */   cvt.s.w  $f14, $f14
 /* A01550 80240F50 8E02000C */  lw        $v0, 0xc($s0)
 /* A01554 80240F54 4600010D */  trunc.w.s $f4, $f0
@@ -127,7 +134,7 @@ glabel L80240FF8_A015F8
 /* A015F8 80240FF8 C60C0000 */  lwc1      $f12, ($s0)
 /* A015FC 80240FFC 46806320 */  cvt.s.w   $f12, $f12
 /* A01600 80241000 C60E0008 */  lwc1      $f14, 8($s0)
-/* A01604 80241004 0C038022 */  jal       func_800E0088
+/* A01604 80241004 0C038022 */  jal       get_xz_dist_to_player
 /* A01608 80241008 468073A0 */   cvt.s.w  $f14, $f14
 /* A0160C 8024100C 8E02000C */  lw        $v0, 0xc($s0)
 /* A01610 80241010 4600010D */  trunc.w.s $f4, $f0
@@ -230,7 +237,7 @@ glabel L8024118C_A0178C
 /* A0178C 8024118C C60C0000 */  lwc1      $f12, ($s0)
 /* A01790 80241190 46806320 */  cvt.s.w   $f12, $f12
 /* A01794 80241194 C60E0008 */  lwc1      $f14, 8($s0)
-/* A01798 80241198 0C038022 */  jal       func_800E0088
+/* A01798 80241198 0C038022 */  jal       get_xz_dist_to_player
 /* A0179C 8024119C 468073A0 */   cvt.s.w  $f14, $f14
 /* A017A0 802411A0 8E020010 */  lw        $v0, 0x10($s0)
 /* A017A4 802411A4 4600010D */  trunc.w.s $f4, $f0

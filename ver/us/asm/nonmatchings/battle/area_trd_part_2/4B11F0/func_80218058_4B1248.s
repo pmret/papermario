@@ -25,7 +25,7 @@ glabel func_80218058_4B1248
 /* 4B1298 802180A8 2402FFFF */  addiu     $v0, $zero, -1
 /* 4B129C 802180AC 16020005 */  bne       $s0, $v0, .L802180C4
 /* 4B12A0 802180B0 24020001 */   addiu    $v0, $zero, 1
-/* 4B12A4 802180B4 0C04760B */  jal       func_8011D82C
+/* 4B12A4 802180B4 0C04760B */  jal       mdl_set_all_fog_mode
 /* 4B12A8 802180B8 0220202D */   daddu    $a0, $s1, $zero
 /* 4B12AC 802180BC 08086059 */  j         .L80218164
 /* 4B12B0 802180C0 24020002 */   addiu    $v0, $zero, 2
@@ -53,7 +53,7 @@ glabel func_80218058_4B1248
 /* 4B12FC 8021810C 0040202D */   daddu    $a0, $v0, $zero
 /* 4B1300 80218110 0040202D */  daddu     $a0, $v0, $zero
 /* 4B1304 80218114 2405FFFF */  addiu     $a1, $zero, -1
-/* 4B1308 80218118 0C046F1F */  jal       func_8011BC7C
+/* 4B1308 80218118 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* 4B130C 8021811C 0220302D */   daddu    $a2, $s1, $zero
 /* 4B1310 80218120 0808603D */  j         .L802180F4
 /* 4B1314 80218124 00000000 */   nop

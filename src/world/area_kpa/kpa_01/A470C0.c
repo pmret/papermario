@@ -2,7 +2,7 @@
 
 #include "world/common/set_script_owner_npc_anim.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kpa/kpa_01/A470C0", func_802401DC_A4713C);
+#include "world/common/UnkDistFunc.inc.c"
 
 #include "world/common/UnkNpcAIFunc12.inc.c"
 

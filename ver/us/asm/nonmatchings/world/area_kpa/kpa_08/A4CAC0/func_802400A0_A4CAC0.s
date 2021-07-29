@@ -1,6 +1,22 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242520_A4EF40
+.double 180.0
+
+glabel D_80242528_A4EF48
+.double 75.0
+
+glabel D_80242530_A4EF50
+.double 90.0
+
+glabel D_80242538_A4EF58
+.double 70.0
+
+.section .text
+
 glabel func_802400A0_A4CAC0
 /* A4CAC0 802400A0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* A4CAC4 802400A4 AFB00018 */  sw        $s0, 0x18($sp)
@@ -19,8 +35,8 @@ glabel func_802400A0_A4CAC0
 /* A4CAF8 802400D8 0040882D */  daddu     $s1, $v0, $zero
 /* A4CAFC 802400DC 4406A000 */  mfc1      $a2, $f20
 /* A4CB00 802400E0 4407B000 */  mfc1      $a3, $f22
-/* A4CB04 802400E4 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A4CB08 802400E8 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A4CB04 802400E4 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A4CB08 802400E8 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A4CB0C 802400EC 3C05800B */  lui       $a1, %hi(gCameras)
 /* A4CB10 802400F0 24A51D80 */  addiu     $a1, $a1, %lo(gCameras)
 /* A4CB14 802400F4 AFA00010 */  sw        $zero, 0x10($sp)

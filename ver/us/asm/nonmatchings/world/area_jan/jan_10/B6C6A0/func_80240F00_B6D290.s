@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_80244488_B70818
+.word L80241064_B6D3F4, L80241074_B6D404, L8024108C_B6D41C, L802410AC_B6D43C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410FC_B6D48C, L802410C4_B6D454, L802410D4_B6D464, L802410EC_B6D47C, 0, 0, 0
+
+.section .text
+
 glabel func_80240F00_B6D290
 /* B6D290 80240F00 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* B6D294 80240F04 AFB3003C */  sw        $s3, 0x3c($sp)
@@ -129,7 +136,7 @@ glabel L802410C4_B6D454
 glabel L802410D4_B6D464
 /* B6D464 802410D4 0260202D */  daddu     $a0, $s3, $zero
 /* B6D468 802410D8 0280282D */  daddu     $a1, $s4, $zero
-/* B6D46C 802410DC 0C0902EF */  jal       delete_actor_B6CF4C
+/* B6D46C 802410DC 0C0902EF */  jal       btl_delete_actor_B6CF4C
 /* B6D470 802410E0 0200302D */   daddu    $a2, $s0, $zero
 /* B6D474 802410E4 08090440 */  j         .L80241100
 /* B6D478 802410E8 0000102D */   daddu    $v0, $zero, $zero

@@ -66,7 +66,7 @@ glabel func_802413CC_A4998C
 /* A49A80 802414C0 E7A0001C */  swc1      $f0, 0x1c($sp)
 /* A49A84 802414C4 AFA20010 */  sw        $v0, 0x10($sp)
 /* A49A88 802414C8 8E440080 */  lw        $a0, 0x80($s2)
-/* A49A8C 802414CC 0C0372DF */  jal       func_800DCB7C
+/* A49A8C 802414CC 0C0372DF */  jal       npc_raycast_down_sides
 /* A49A90 802414D0 27A50018 */   addiu    $a1, $sp, 0x18
 /* A49A94 802414D4 10400004 */  beqz      $v0, .L802414E8
 /* A49A98 802414D8 2402000B */   addiu    $v0, $zero, 0xb

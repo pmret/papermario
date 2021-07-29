@@ -1,6 +1,30 @@
 #include "sam_10.h"
 
+static char* N(exit_str_0) = "sam_09";
+static char* N(exit_str_1) = "pra_01";
+static char* N(exit_str_2) = "sam_12";
+static char* N(exit_str_3) = "";
+
 INCLUDE_ASM(s32, "world/area_sam/sam_10/D37800", func_80240000_D37800);
+/*
+ApiStatus N(func_80240000_D37800)(ScriptInstance* script, s32 isInitialCall) {
+    s32 i;
+
+    if (N(D_80241040_D38840) == NULL) {
+        N(D_80241040_D38840) = heap_malloc(16 * sizeof(s32));
+        for (i = 0; i < 16; i++) {
+            N(D_80241040_D38840)[i] = script->varTable[i];
+        }
+    } else {
+        for (i = 0; i < 16; i++) {
+            script->varTable[i] = N(D_80241040_D38840)[i];
+        }
+        heap_free(N(D_80241040_D38840));
+        N(D_80241040_D38840) = NULL;
+    }
+    return ApiStatus_DONE2;
+}
+*/
 
 #include "world/common/GetItemName.inc.c"
 

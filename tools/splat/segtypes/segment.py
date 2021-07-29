@@ -1,190 +1,279 @@
-from pathlib import Path, PurePath
+import importlib
+from typing import Dict, TYPE_CHECKING, Type, Union, Optional, List
+from pathlib import Path
+
 from util import log
 from util import options
-import re
+from util.symbols import Symbol
 import sys
 
-default_subalign = 16
+# circular import
+if TYPE_CHECKING:
+    from segtypes.linker_entry import LinkerEntry
+
+RomAddr = Union[int, str]
 
 
-def parse_segment_start(segment):
-    return segment[0] if "start" not in segment else segment["start"]
-
-
-def parse_segment_type(segment):
-    if type(segment) is dict:
-        return segment["type"]
+def parse_segment_vram(segment: Union[dict, list]) -> Optional[int]:
+    if isinstance(segment, dict) and "vram" in segment:
+        return int(segment["vram"])
     else:
-        return segment[1]
+        return None
 
 
-def parse_segment_name(segment, segment_class):
-    if type(segment) is dict and "name" in segment:
-        return segment["name"]
-    elif type(segment) is list and len(segment) >= 3 and type(segment[2]) is str:
-        return segment[2]
-    else:
-        return segment_class.get_default_name(parse_segment_start(segment))
-
-
-def parse_segment_vram(segment):
-    if type(segment) is dict:
-        return segment.get("vram", 0)
-    else:
-        return 0
-
-
-def parse_segment_subalign(segment):
-    default = options.get("subalign", default_subalign)
-    if type(segment) is dict:
-        return segment.get("subalign", default)
+def parse_segment_subalign(segment: Union[dict, list]) -> int:
+    default = options.get_subalign()
+    if isinstance(segment, dict):
+        return int(segment.get("subalign", default))
     return default
 
 
 class Segment:
     require_unique_name = True
 
-    def __init__(self, segment, next_segment):
-        self.rom_start = parse_segment_start(segment)
-        self.rom_end = parse_segment_start(next_segment)
-        self.type = parse_segment_type(segment)
-        self.name = parse_segment_name(segment, self.__class__)
-        self.vram_start = parse_segment_vram(segment)
-        self.ld_name_override = segment.get("ld_name", None) if type(segment) is dict else None
-        self.config = segment
-        self.subalign = parse_segment_subalign(segment)
+    @staticmethod
+    def get_class_for_type(seg_type):
+        # so .data loads SegData, for example
+        if seg_type.startswith("."):
+            seg_type = seg_type[1:]
 
-        self.errors = []
-        self.warnings = []
+        segment_class = Segment.get_base_segment_class(seg_type)
+        if segment_class == None:
+            # Look in extensions
+            segment_class = Segment.get_extension_segment_class(seg_type)
+        return segment_class
+
+    @staticmethod
+    def get_base_segment_class(seg_type):
+        platform = options.get_platform()
+
+        try:
+            segmodule = importlib.import_module(f"segtypes.{platform}.{seg_type}")
+        except ModuleNotFoundError:
+            return None
+
+        return getattr(segmodule, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
+
+    @staticmethod
+    def get_extension_segment_class(seg_type):
+        platform = options.get_platform()
+
+        ext_path = options.get_extensions_path()
+        if not ext_path:
+            log.error(f"could not load presumed extended segment type '{seg_type}' because no extensions path is configured")
+
+        try:
+            ext_spec = importlib.util.spec_from_file_location(f"{platform}.segtypes.{seg_type}", ext_path / f"{seg_type}.py")
+            ext_mod = importlib.util.module_from_spec(ext_spec)
+            ext_spec.loader.exec_module(ext_mod)
+        except Exception as err:
+            log.write(err, status="error")
+            log.error(f"could not load segment type '{seg_type}'\n(hint: confirm your extension directory is configured correctly)")
+
+        return getattr(ext_mod, f"{platform.upper()}Seg{seg_type[0].upper()}{seg_type[1:]}")
+
+    @staticmethod
+    def parse_segment_start(segment: Union[dict, list]) -> RomAddr:
+        if isinstance(segment, dict):
+            s = segment.get("start", "auto")
+        else:
+            s = segment[0]
+
+        if s == "auto":
+            return "auto"
+        else:
+            return int(s)
+
+    @staticmethod
+    def parse_segment_type(segment: Union[dict, list]) -> str:
+        if isinstance(segment, dict):
+            return str(segment["type"])
+        else:
+            return str(segment[1])
+
+    @staticmethod
+    def parse_segment_name(cls, rom_start, segment: Union[dict, list]) -> str:
+        if isinstance(segment, dict) and "name" in segment:
+            return str(segment["name"])
+        elif isinstance(segment, dict) and "dir" in segment:
+            return str(segment["dir"])
+        elif isinstance(segment, list) and len(segment) >= 3:
+            return str(segment[2])
+        else:
+            return str(cls.get_default_name(rom_start))
+
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True, 
+                 given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml = {}):
+        self.rom_start = rom_start
+        self.rom_end = rom_end
+        self.type = type
+        self.name = name
+        self.vram_start = vram_start
+        self.extract = extract
+
+        self.given_subalign = given_subalign
+        self.given_is_overlay = given_is_overlay
+        self.given_dir = given_dir
+        self.given_seg_symbols: Dict[int, List[Symbol]] = {} # Symbols known to be in this segment
+        self.given_ext_symbols: Dict[int, List[Symbol]] = {} # Symbols not in this segment but also not from other overlapping ram address ranges
+
+        self.parent:Optional[Segment] = None
+        self.sibling:Optional[Segment] = None
+
+        self.args:List[str] = args
+        self.yaml = yaml
+
+        if "skip" in self.args:
+            self.extract = False
+
+        if self.rom_start == "auto":
+            self.extract = False
+        
+        if self.type.startswith("."):
+            self.extract = False
+
+        self.warnings: List[str] = []
         self.did_run = False
 
-        if self.rom_start > self.rom_end:
-            print(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
-            sys.exit(1)
-
-    @property
-    def size(self):
-        return self.rom_end - self.rom_start
-
-    @property
-    def vram_end(self):
-        return self.vram_start + self.size
-
-    def contains_vram(self, vram):
-        return vram >= self.vram_start and vram < self.vram_end
-
-    def contains_rom(self, rom):
-        return rom >= self.rom_start and rom < self.rom_end
-
-    def rom_to_ram(self, rom_addr):
-        if rom_addr < self.rom_start or rom_addr > self.rom_end:
-            return None
-
-        return self.vram_start + rom_addr - self.rom_start
-
-    def ram_to_rom(self, ram_addr):
-        if ram_addr < self.vram_start or ram_addr > self.vram_end:
-            return None
-
-        return self.rom_start + ram_addr - self.vram_start
+        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+            if self.rom_start > self.rom_end:
+                print(f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})")
+                sys.exit(1)
 
     @staticmethod
-    def create_split_dir(base_path, subdir):
-        out_dir = Path(base_path, subdir)
-        out_dir.mkdir(parents=True, exist_ok=True)
-        return out_dir
+    def from_yaml(cls: Type["Segment"], yaml: Union[dict, list], rom_start: RomAddr, rom_end: RomAddr, vram=None):
+        type = Segment.parse_segment_type(yaml)
+        name = Segment.parse_segment_name(cls, rom_start, yaml)
+        vram_start = vram if vram else parse_segment_vram(yaml)
+        extract = bool(yaml.get("extract", True)) if isinstance(yaml, dict) else True
+        given_subalign = parse_segment_subalign(yaml)
+        given_is_overlay:Optional[bool] = yaml.get("overlay", False) if isinstance(yaml, dict) else False
+        given_dir = Path(yaml.get("dir", "")) if isinstance(yaml, dict) else Path()
+        args:List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
-    @staticmethod
-    def create_parent_dir(base_path, filename):
-        out_dir = Path(base_path, filename).parent
-        out_dir.mkdir(parents=True, exist_ok=True)
-        return out_dir
+        return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
+    
+    @property
+    def needs_symbols(self) -> bool:
+        return False
 
-    def should_run(self):
-        return options.mode_active(self.type)
+    @property
+    def dir(self) -> Path:
+        if self.parent:
+            return self.parent.dir / self.given_dir
+        else:
+            return self.given_dir
+    
+    @property
+    def subalign(self) -> int:
+        if self.parent:
+            return self.parent.subalign
+        else:
+            return self.given_subalign
+    
+    @property
+    def is_overlay(self) -> bool:
+        if self.parent:
+            return self.parent.is_overlay
+        if self.given_is_overlay is not None:
+            return self.given_is_overlay
+        return False
 
-    def split(self, rom_bytes, base_path):
+    @property
+    def seg_symbols(self) -> Dict[int, List[Symbol]]:
+        if self.parent:
+            return self.parent.seg_symbols
+        else:
+            return self.given_seg_symbols
+
+    @property
+    def ext_symbols(self) -> Dict[int, List[Symbol]]:
+        if self.parent:
+            return self.parent.ext_symbols
+        else:
+            return self.given_ext_symbols
+
+    @property
+    def size(self) -> Optional[int]:
+        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+            return self.rom_end - self.rom_start
+        else:
+            return None
+
+    @property
+    def vram_end(self) -> Optional[int]:
+        if self.vram_start is not None and self.size is not None:
+            return self.vram_start + self.size
+        else:
+            return None
+
+    def contains_vram(self, vram: int) -> bool:
+        if self.vram_start is not None and self.vram_end is not None:
+            return vram >= self.vram_start and vram < self.vram_end
+        else:
+            return False
+
+    def contains_rom(self, rom: int) -> bool:
+        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+            return rom >= self.rom_start and rom < self.rom_end
+        else:
+            return False
+
+    def rom_to_ram(self, rom_addr: int) -> Optional[int]:
+        if not self.contains_rom(rom_addr) and rom_addr != self.rom_end:
+            return None
+
+        if self.vram_start is not None and isinstance(self.rom_start, int):
+            return self.vram_start + rom_addr - self.rom_start
+        else:
+            return None
+
+    def ram_to_rom(self, ram_addr: int) -> Optional[int]:
+        if not self.contains_vram(ram_addr) and ram_addr != self.vram_end:
+            return None
+
+        if self.vram_start is not None and isinstance(self.rom_start, int):
+            return self.rom_start + ram_addr - self.vram_start
+        else:
+            return None
+
+    def should_scan(self) -> bool:
+        return self.should_split()
+    
+    def should_split(self) -> bool:
+        return self.extract and options.mode_active(self.type)
+    
+    def scan(self, rom_bytes: bytes):
         pass
 
-    def postsplit(self, segments):
+    def split(self, rom_bytes: bytes):
         pass
 
     def cache(self):
-        return (self.config, self.rom_end)
+        return (self.yaml, self.rom_end)
 
-    def get_ld_section(self):
-        replace_ext = options.get("ld_o_replace_extension", True)
-        sect_name = self.ld_name_override if self.ld_name_override else self.get_ld_section_name()
-        vram_or_rom = self.rom_start if self.vram_start == 0 else self.vram_start
-        subalign_str = f"SUBALIGN({self.subalign})"
+    def get_linker_section(self) -> str:
+        return ".data"
 
-        s = (
-            f"SPLAT_BEGIN_SEG({sect_name}, 0x{self.rom_start:X}, 0x{vram_or_rom:X}, {subalign_str})\n"
-        )
+    def out_path(self) -> Optional[Path]:
+        return None
 
-        i = 0
-        do_next = False
-        for subdir, path, obj_type, start in self.get_ld_files():
-            # Manual linker segment creation
-            if obj_type == "linker":
-                s += (
-                    "}\n"
-                    f"SPLAT_BEGIN_SEG({path}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
-                )
+    def get_linker_entries(self) -> "List[LinkerEntry]":
+        from segtypes.linker_entry import LinkerEntry
 
-            # Create new sections for non-0x10 alignment (hack)
-            if start % 0x10 != 0 and i != 0 or do_next:
-                tmp_sect_name = path.replace(".", "_")
-                tmp_sect_name = tmp_sect_name.replace("/", "_")
-                s += (
-                    "}\n"
-                    f"SPLAT_BEGIN_SEG({tmp_sect_name}, 0x{start:X}, 0x{self.rom_to_ram(start):X}, {subalign_str})\n"
-                )
-                do_next = False
+        path = self.out_path()
 
-            if start % 0x10 != 0 and i != 0:
-                do_next = True
-
-            path_cname = re.sub(r"[^0-9a-zA-Z_]", "_", path)
-            s += f"    {path_cname} = .;\n"
-
-            if subdir == options.get("assets_dir"):
-                path = PurePath(path)
-            else:
-                path = PurePath(subdir) / PurePath(path)
-
-            # Remove leading ..s
-            while path.parts[0] == "..":
-                path = path.relative_to("..")
-
-            path = path.with_suffix(".o" if replace_ext else path.suffix + ".o")
-
-            if obj_type != "linker":
-                s += f"    BUILD_DIR/{path}({obj_type});\n"
-            i += 1
-
-        s += (
-            f"SPLAT_END_SEG({sect_name}, 0x{self.rom_end:X})\n"
-        )
-
-        return s
-
-    def get_ld_section_name(self):
-        return f"data_{self.rom_start:X}"
-
-    # returns list of (basedir, filename, obj_type)
-    def get_ld_files(self):
-        return []
+        if path:
+            return [LinkerEntry(self, [path], path, self.get_linker_section())]
+        else:
+            return []
 
     def log(self, msg):
         if options.get("verbose", False):
             log.write(f"{self.type} {self.name}: {msg}")
 
-    def warn(self, msg):
+    def warn(self, msg: str):
         self.warnings.append(msg)
-
-    def error(self, msg):
-        self.errors.append(msg)
 
     def max_length(self):
         return None
@@ -193,12 +282,15 @@ class Segment:
         return self.name == self.get_default_name(self.rom_start)
 
     def unique_id(self):
-        return self.type + "_" + self.name
+        if self.parent:
+            s = self.parent.unique_id() + "_"
+        else:
+            s = ""
+
+        return s + self.type + "_" + self.name
 
     def status(self):
-        if len(self.errors) > 0:
-            return "error"
-        elif len(self.warnings) > 0:
+        if len(self.warnings) > 0:
             return "warn"
         elif self.did_run:
             return "ok"
@@ -206,5 +298,5 @@ class Segment:
             return "skip"
 
     @staticmethod
-    def get_default_name(addr):
-        return "{:X}".format(addr)
+    def get_default_name(addr) -> str:
+        return f"{addr:X}"

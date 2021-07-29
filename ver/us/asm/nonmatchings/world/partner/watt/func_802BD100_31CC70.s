@@ -27,7 +27,7 @@ glabel func_802BD100_31CC70
 /* 31CCC8 802BD158 8C850038 */  lw        $a1, 0x38($a0)
 /* 31CCCC 802BD15C 8C870040 */  lw        $a3, 0x40($a0)
 /* 31CCD0 802BD160 44062000 */  mfc1      $a2, $f4
-/* 31CCD4 802BD164 0C01C8EC */  jal       func_800723B0
+/* 31CCD4 802BD164 0C01C8EC */  jal       playFX_73
 /* 31CCD8 802BD168 0000202D */   daddu    $a0, $zero, $zero
 /* 31CCDC 802BD16C AE020000 */  sw        $v0, ($s0)
 .L802BD170:

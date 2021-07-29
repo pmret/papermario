@@ -11,13 +11,13 @@ glabel func_80241AF0_994220
 /* 994238 80241B08 84440008 */   lh       $a0, 8($v0)
 /* 99423C 80241B0C 27A40010 */  addiu     $a0, $sp, 0x10
 /* 994240 80241B10 24050035 */  addiu     $a1, $zero, 0x35
-/* 994244 80241B14 3C108024 */  lui       $s0, %hi(func_80242AC0)
-/* 994248 80241B18 26102AC0 */  addiu     $s0, $s0, %lo(func_80242AC0)
+/* 994244 80241B14 3C108024 */  lui       $s0, %hi(btl_state_draw_begin_player_turn)
+/* 994248 80241B18 26102AC0 */  addiu     $s0, $s0, %lo(btl_state_draw_begin_player_turn)
 /* 99424C 80241B1C 00A0182D */  daddu     $v1, $a1, $zero
 /* 994250 80241B20 0040882D */  daddu     $s1, $v0, $zero
 /* 994254 80241B24 0000302D */  daddu     $a2, $zero, $zero
 /* 994258 80241B28 AE030008 */  sw        $v1, 8($s0)
-/* 99425C 80241B2C 0C0B7A76 */  jal       func_802DE9D8
+/* 99425C 80241B2C 0C0B7A76 */  jal       spr_get_npc_raster_info
 /* 994260 80241B30 AE00000C */   sw       $zero, 0xc($s0)
 /* 994264 80241B34 C7A00018 */  lwc1      $f0, 0x18($sp)
 /* 994268 80241B38 46800020 */  cvt.s.w   $f0, $f0
@@ -46,7 +46,7 @@ glabel func_80241AF0_994220
 /* 9942C4 80241B94 E6000028 */  swc1      $f0, 0x28($s0)
 /* 9942C8 80241B98 E600002C */  swc1      $f0, 0x2c($s0)
 /* 9942CC 80241B9C E6000030 */  swc1      $f0, 0x30($s0)
-/* 9942D0 80241BA0 0C048C8F */  jal       bind_dynamic_entity_7
+/* 9942D0 80241BA0 0C048C8F */  jal       create_generic_entity_frontUI
 /* 9942D4 80241BA4 E6040018 */   swc1     $f4, 0x18($s0)
 /* 9942D8 80241BA8 AE020004 */  sw        $v0, 4($s0)
 /* 9942DC 80241BAC 8FBF0028 */  lw        $ra, 0x28($sp)

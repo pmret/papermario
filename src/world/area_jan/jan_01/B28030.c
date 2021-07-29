@@ -1,5 +1,8 @@
 #include "jan_01.h"
 
+static char* N(exit_str_0) = "jan_00";
+static char* N(exit_str_1) = "jan_02";
+
 #include "world/common/UnkTexturePanFunc.inc.c"
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
@@ -24,4 +27,4 @@ INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_80240F30_B28F60);
 
 INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_80241154_B29184);
 
-INCLUDE_ASM(s32, "world/area_jan/jan_01/B28030", func_80241170_B291A0);
+#include "world/common/UnsetCamera0Flag1000.inc.c"

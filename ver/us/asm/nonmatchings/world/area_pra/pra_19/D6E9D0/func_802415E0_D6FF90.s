@@ -7,11 +7,11 @@ glabel func_802415E0_D6FF90
 /* D6FF98 802415E8 AFBF00E0 */  sw        $ra, 0xe0($sp)
 /* D6FF9C 802415EC AFB000D8 */  sw        $s0, 0xd8($sp)
 /* D6FFA0 802415F0 F7B400E8 */  sdc1      $f20, 0xe8($sp)
-/* D6FFA4 802415F4 0C00E769 */  jal       func_80039DA4
+/* D6FFA4 802415F4 0C00E769 */  jal       npc_get_render_yaw
 /* D6FFA8 802415F8 0080882D */   daddu    $s1, $a0, $zero
 /* D6FFAC 802415FC 44800000 */  mtc1      $zero, $f0
-/* D6FFB0 80241600 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D6FFB4 80241604 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D6FFB0 80241600 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D6FFB4 80241604 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D6FFB8 80241608 C6220034 */  lwc1      $f2, 0x34($s1)
 /* D6FFBC 8024160C 00031080 */  sll       $v0, $v1, 2
 /* D6FFC0 80241610 00431021 */  addu      $v0, $v0, $v1
@@ -57,14 +57,14 @@ glabel func_802415E0_D6FF90
 /* D70060 802416B0 0080302D */   daddu    $a2, $a0, $zero
 /* D70064 802416B4 8E250028 */  lw        $a1, 0x28($s1)
 /* D70068 802416B8 4406A000 */  mfc1      $a2, $f20
-/* D7006C 802416BC 0C0B76A3 */  jal       func_802DDA8C
+/* D7006C 802416BC 0C0B76A3 */  jal       spr_update_player_sprite
 /* D70070 802416C0 24040002 */   addiu    $a0, $zero, 2
 /* D70074 802416C4 24040002 */  addiu     $a0, $zero, 2
 /* D70078 802416C8 0000282D */  daddu     $a1, $zero, $zero
 /* D7007C 802416CC 00A0302D */  daddu     $a2, $a1, $zero
 /* D70080 802416D0 00A0382D */  daddu     $a3, $a1, $zero
 /* D70084 802416D4 27A20018 */  addiu     $v0, $sp, 0x18
-/* D70088 802416D8 0C0B7710 */  jal       render_sprite
+/* D70088 802416D8 0C0B7710 */  jal       spr_draw_player_sprite
 /* D7008C 802416DC AFA20010 */   sw       $v0, 0x10($sp)
 /* D70090 802416E0 8FBF00E0 */  lw        $ra, 0xe0($sp)
 /* D70094 802416E4 8FB100DC */  lw        $s1, 0xdc($sp)

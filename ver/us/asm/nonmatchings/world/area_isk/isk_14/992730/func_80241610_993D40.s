@@ -40,8 +40,8 @@ glabel func_80241610_993D40
 /* 993DCC 8024169C 24C200A0 */  addiu     $v0, $a2, 0xa0
 /* 993DD0 802416A0 AC820004 */  sw        $v0, 4($a0)
 /* 993DD4 802416A4 94C20000 */  lhu       $v0, ($a2)
-/* 993DD8 802416A8 3C1E8024 */  lui       $fp, %hi(func_80242AC0)
-/* 993DDC 802416AC 27DE2AC0 */  addiu     $fp, $fp, %lo(func_80242AC0)
+/* 993DD8 802416A8 3C1E8024 */  lui       $fp, %hi(btl_state_draw_begin_player_turn)
+/* 993DDC 802416AC 27DE2AC0 */  addiu     $fp, $fp, %lo(btl_state_draw_begin_player_turn)
 /* 993DE0 802416B0 30420010 */  andi      $v0, $v0, 0x10
 /* 993DE4 802416B4 14400007 */  bnez      $v0, .L802416D4
 /* 993DE8 802416B8 24C400D4 */   addiu    $a0, $a2, 0xd4
@@ -258,7 +258,7 @@ glabel func_80241610_993D40
 /* 994130 80241A00 8FC6000C */  lw        $a2, 0xc($fp)
 /* 994134 80241A04 25080001 */  addiu     $t0, $t0, 1
 /* 994138 80241A08 AEE70000 */  sw        $a3, ($s7)
-/* 99413C 80241A0C 0C0B7A76 */  jal       func_802DE9D8
+/* 99413C 80241A0C 0C0B7A76 */  jal       spr_get_npc_raster_info
 /* 994140 80241A10 A6080000 */   sh       $t0, ($s0)
 /* 994144 80241A14 27A50018 */  addiu     $a1, $sp, 0x18
 /* 994148 80241A18 0000302D */  daddu     $a2, $zero, $zero

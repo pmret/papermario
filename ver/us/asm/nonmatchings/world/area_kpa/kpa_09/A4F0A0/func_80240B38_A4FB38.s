@@ -1,14 +1,27 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802427D0_A517D0
+.double 180.0
+
+glabel D_802427D8_A517D8
+.double 90.0
+
+glabel D_802427E0_A517E0
+.double 1.2
+
+.section .text
+
 glabel func_80240B38_A4FB38
 /* A4FB38 80240B38 27BDFFA0 */  addiu     $sp, $sp, -0x60
 /* A4FB3C 80240B3C AFB3003C */  sw        $s3, 0x3c($sp)
 /* A4FB40 80240B40 0080982D */  daddu     $s3, $a0, $zero
 /* A4FB44 80240B44 AFB40040 */  sw        $s4, 0x40($sp)
 /* A4FB48 80240B48 0000A02D */  daddu     $s4, $zero, $zero
-/* A4FB4C 80240B4C 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* A4FB50 80240B50 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* A4FB4C 80240B4C 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* A4FB50 80240B50 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* A4FB54 80240B54 3C04800B */  lui       $a0, %hi(gCameras)
 /* A4FB58 80240B58 24841D80 */  addiu     $a0, $a0, %lo(gCameras)
 /* A4FB5C 80240B5C AFBF0044 */  sw        $ra, 0x44($sp)
@@ -75,7 +88,7 @@ glabel func_80240B38_A4FB38
 /* A4FC3C 80240C3C 8E050038 */  lw        $a1, 0x38($s0)
 /* A4FC40 80240C40 8E06003C */  lw        $a2, 0x3c($s0)
 /* A4FC44 80240C44 8E070040 */  lw        $a3, 0x40($s0)
-/* A4FC48 80240C48 0C01BECC */  jal       fx_walk_normal
+/* A4FC48 80240C48 0C01BECC */  jal       fx_walk
 /* A4FC4C 80240C4C 24040002 */   addiu    $a0, $zero, 2
 /* A4FC50 80240C50 C64C006C */  lwc1      $f12, 0x6c($s2)
 /* A4FC54 80240C54 0C00A6C9 */  jal       clamp_angle
@@ -155,7 +168,7 @@ glabel func_80240B38_A4FB38
 /* A4FD74 80240D74 44820000 */  mtc1      $v0, $f0
 /* A4FD78 80240D78 00000000 */  nop
 /* A4FD7C 80240D7C 46800020 */  cvt.s.w   $f0, $f0
-/* A4FD80 80240D80 0C037711 */  jal       func_800DDC44
+/* A4FD80 80240D80 0C037711 */  jal       npc_test_move_simple_with_slipping
 /* A4FD84 80240D84 E7A0001C */   swc1     $f0, 0x1c($sp)
 /* A4FD88 80240D88 54400007 */  bnel      $v0, $zero, .L80240DA8
 /* A4FD8C 80240D8C 24140001 */   addiu    $s4, $zero, 1
@@ -201,7 +214,7 @@ glabel func_80240B38_A4FB38
 /* A4FE24 80240E24 E7A0002C */  swc1      $f0, 0x2c($sp)
 /* A4FE28 80240E28 AFA20010 */  sw        $v0, 0x10($sp)
 /* A4FE2C 80240E2C 8E040080 */  lw        $a0, 0x80($s0)
-/* A4FE30 80240E30 0C0372DF */  jal       func_800DCB7C
+/* A4FE30 80240E30 0C0372DF */  jal       npc_raycast_down_sides
 /* A4FE34 80240E34 27A70028 */   addiu    $a3, $sp, 0x28
 /* A4FE38 80240E38 1040000B */  beqz      $v0, .L80240E68
 /* A4FE3C 80240E3C 00000000 */   nop
@@ -240,7 +253,7 @@ glabel func_80240B38_A4FB38
 /* A4FEB4 80240EB4 8E050038 */  lw        $a1, 0x38($s0)
 /* A4FEB8 80240EB8 8E06003C */  lw        $a2, 0x3c($s0)
 /* A4FEBC 80240EBC 8E070040 */  lw        $a3, 0x40($s0)
-/* A4FEC0 80240EC0 0C01BECC */  jal       fx_walk_normal
+/* A4FEC0 80240EC0 0C01BECC */  jal       fx_walk
 /* A4FEC4 80240EC4 24040002 */   addiu    $a0, $zero, 2
 /* A4FEC8 80240EC8 3C01C47A */  lui       $at, 0xc47a
 /* A4FECC 80240ECC 44810000 */  mtc1      $at, $f0

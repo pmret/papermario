@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80244758_AA7478
+.double 190.0
+
+.section .text
+
 glabel func_802404AC_AA31CC
 /* AA31CC 802404AC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* AA31D0 802404B0 AFB40020 */  sw        $s4, 0x20($sp)
@@ -131,7 +138,7 @@ glabel func_802404AC_AA31CC
 /* AA33B0 80240690 24050328 */  addiu     $a1, $zero, 0x328
 /* AA33B4 80240694 24030002 */  addiu     $v1, $zero, 2
 /* AA33B8 80240698 3C060020 */  lui       $a2, 0x20
-/* AA33BC 8024069C 0C012530 */  jal       func_800494C0
+/* AA33BC 8024069C 0C012530 */  jal       ai_enemy_play_sound
 /* AA33C0 802406A0 AC43006C */   sw       $v1, 0x6c($v0)
 /* AA33C4 802406A4 24020005 */  addiu     $v0, $zero, 5
 /* AA33C8 802406A8 A662008E */  sh        $v0, 0x8e($s3)

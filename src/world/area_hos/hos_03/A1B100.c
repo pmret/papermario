@@ -1,3 +1,6 @@
 #include "hos_03.h"
 
-INCLUDE_ASM(s32, "world/area_hos/hos_03/A1B100", func_80240000_A1B100);
+static char* N(exit_str_0) = "hos_02";
+static char* N(exit_str_1) = "hos_04";
+
+#include "world/common/GetFloorCollider.inc.c"

@@ -206,7 +206,7 @@ glabel func_80240310_9B1AA0
 .L8024062C:
 /* 9B1DBC 8024062C 8E65000C */  lw        $a1, 0xc($s3)
 /* 9B1DC0 80240630 8E660010 */  lw        $a2, 0x10($s3)
-/* 9B1DC4 80240634 0C0B7811 */  jal       func_802DE044
+/* 9B1DC4 80240634 0C0B7811 */  jal       spr_get_player_raster_info
 /* 9B1DC8 80240638 27A40030 */   addiu    $a0, $sp, 0x30
 /* 9B1DCC 8024063C 27A50018 */  addiu     $a1, $sp, 0x18
 /* 9B1DD0 80240640 0000302D */  daddu     $a2, $zero, $zero

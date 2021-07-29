@@ -27,7 +27,7 @@ glabel func_80240EC0_E06220
 /* E06278 80240F18 8E050008 */  lw        $a1, 8($s0)
 /* E0627C 80240F1C 8E060000 */  lw        $a2, ($s0)
 /* E06280 80240F20 8E07000C */  lw        $a3, 0xc($s0)
-/* E06284 80240F24 0C04BA38 */  jal       func_8012E8E0
+/* E06284 80240F24 0C04BA38 */  jal       msg_get_glyph
 /* E06288 80240F28 46000606 */   mov.s    $f24, $f0
 /* E0628C 80240F2C 4600A08D */  trunc.w.s $f2, $f20
 /* E06290 80240F30 44021000 */  mfc1      $v0, $f2
@@ -73,7 +73,7 @@ glabel func_80240EC0_E06220
 .L80240FCC:
 /* E0632C 80240FCC AFA20030 */  sw        $v0, 0x30($sp)
 /* E06330 80240FD0 8E240000 */  lw        $a0, ($s1)
-/* E06334 80240FD4 0C04BA68 */  jal       func_8012E9A0
+/* E06334 80240FD4 0C04BA68 */  jal       draw_ci_image_with_clipping
 /* E06338 80240FD8 24070002 */   addiu    $a3, $zero, 2
 /* E0633C 80240FDC 8FBF0050 */  lw        $ra, 0x50($sp)
 /* E06340 80240FE0 8FB1004C */  lw        $s1, 0x4c($sp)

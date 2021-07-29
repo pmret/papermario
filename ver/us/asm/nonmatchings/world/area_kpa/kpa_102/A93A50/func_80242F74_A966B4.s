@@ -62,7 +62,7 @@ glabel func_80242F74_A966B4
 .L80243058:
 /* A96798 80243058 0200202D */  daddu     $a0, $s0, $zero
 /* A9679C 8024305C 240520D5 */  addiu     $a1, $zero, 0x20d5
-/* A967A0 80243060 0C012530 */  jal       func_800494C0
+/* A967A0 80243060 0C012530 */  jal       ai_enemy_play_sound
 /* A967A4 80243064 0000302D */   daddu    $a2, $zero, $zero
 /* A967A8 80243068 86440008 */  lh        $a0, 8($s2)
 /* A967AC 8024306C 0C00FB3A */  jal       get_enemy

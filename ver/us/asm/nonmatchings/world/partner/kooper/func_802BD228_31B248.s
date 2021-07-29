@@ -7,10 +7,10 @@ glabel func_802BD228_31B248
 /* 31B250 802BD230 AFB00010 */  sw        $s0, 0x10($sp)
 /* 31B254 802BD234 10A00003 */  beqz      $a1, .L802BD244
 /* 31B258 802BD238 8C90014C */   lw       $s0, 0x14c($a0)
-/* 31B25C 802BD23C 0C03BB31 */  jal       func_800EECC4
+/* 31B25C 802BD23C 0C03BB31 */  jal       partner_init_get_out
 /* 31B260 802BD240 0200202D */   daddu    $a0, $s0, $zero
 .L802BD244:
-/* 31B264 802BD244 0C03BB3A */  jal       func_800EECE8
+/* 31B264 802BD244 0C03BB3A */  jal       partner_get_out
 /* 31B268 802BD248 0200202D */   daddu    $a0, $s0, $zero
 /* 31B26C 802BD24C 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 31B270 802BD250 8FB00010 */  lw        $s0, 0x10($sp)

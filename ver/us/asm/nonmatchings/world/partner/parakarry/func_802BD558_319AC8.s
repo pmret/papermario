@@ -45,7 +45,7 @@ glabel func_802BD558_319AC8
 /* 319B68 802BD5F8 27A20040 */  addiu     $v0, $sp, 0x40
 /* 319B6C 802BD5FC AFA2001C */  sw        $v0, 0x1c($sp)
 /* 319B70 802BD600 27A20044 */  addiu     $v0, $sp, 0x44
-/* 319B74 802BD604 0C03791B */  jal       func_800DE46C
+/* 319B74 802BD604 0C03791B */  jal       player_raycast_below_cam_relative
 /* 319B78 802BD608 AFA20020 */   sw       $v0, 0x20($sp)
 /* 319B7C 802BD60C 0040882D */  daddu     $s1, $v0, $zero
 /* 319B80 802BD610 0C016F6A */  jal       get_collider_type_by_id
@@ -58,8 +58,8 @@ glabel func_802BD558_319AC8
 /* 319B9C 802BD62C A20200BF */  sb        $v0, 0xbf($s0)
 /* 319BA0 802BD630 8E020000 */  lw        $v0, ($s0)
 /* 319BA4 802BD634 24030015 */  addiu     $v1, $zero, 0x15
-/* 319BA8 802BD638 3C01802C */  lui       $at, %hi(D_802BEBC0)
-/* 319BAC 802BD63C AC23EBC0 */  sw        $v1, %lo(D_802BEBC0)($at)
+/* 319BA8 802BD638 3C01802C */  lui       $at, %hi(D_802BEBC0_31CBE0)
+/* 319BAC 802BD63C AC23EBC0 */  sw        $v1, %lo(D_802BEBC0_31CBE0)($at)
 /* 319BB0 802BD640 34420800 */  ori       $v0, $v0, 0x800
 /* 319BB4 802BD644 AE020000 */  sw        $v0, ($s0)
 .L802BD648:

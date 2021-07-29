@@ -111,7 +111,7 @@ glabel func_802BFAB8_320828
 /* 3209C8 802BFC58 080AFF2F */  j         .L802BFCBC
 /* 3209CC 802BFC5C 24020019 */   addiu    $v0, $zero, 0x19
 .L802BFC60:
-/* 3209D0 802BFC60 0C037FDE */  jal       func_800DFF78
+/* 3209D0 802BFC60 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* 3209D4 802BFC64 3484000F */   ori      $a0, $a0, 0xf
 /* 3209D8 802BFC68 C622000C */  lwc1      $f2, 0xc($s1)
 /* 3209DC 802BFC6C 44800000 */  mtc1      $zero, $f0
@@ -165,7 +165,7 @@ glabel func_802BFAB8_320828
 /* 320A90 802BFD20 8E250038 */  lw        $a1, 0x38($s1)
 /* 320A94 802BFD24 8E270040 */  lw        $a3, 0x40($s1)
 /* 320A98 802BFD28 44061000 */  mfc1      $a2, $f2
-/* 320A9C 802BFD2C 0C01C16C */  jal       func_800705B0
+/* 320A9C 802BFD2C 0C01C16C */  jal       playFX_23
 /* 320AA0 802BFD30 0000202D */   daddu    $a0, $zero, $zero
 .L802BFD34:
 /* 320AA4 802BFD34 8E620074 */  lw        $v0, 0x74($s3)

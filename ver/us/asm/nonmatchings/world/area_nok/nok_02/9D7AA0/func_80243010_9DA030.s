@@ -35,7 +35,7 @@ glabel func_80243010_9DA030
 /* 9DA0A8 80243088 4405B000 */  mfc1      $a1, $f22
 /* 9DA0AC 8024308C 44071000 */  mfc1      $a3, $f2
 /* 9DA0B0 80243090 4406A000 */  mfc1      $a2, $f20
-/* 9DA0B4 80243094 0C01C07C */  jal       func_800701F0
+/* 9DA0B4 80243094 0C01C07C */  jal       playFX_19
 /* 9DA0B8 80243098 0000202D */   daddu    $a0, $zero, $zero
 /* 9DA0BC 8024309C 0000202D */  daddu     $a0, $zero, $zero
 /* 9DA0C0 802430A0 0080282D */  daddu     $a1, $a0, $zero

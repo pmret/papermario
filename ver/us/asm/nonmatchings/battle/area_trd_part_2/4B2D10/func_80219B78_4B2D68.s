@@ -46,7 +46,7 @@ glabel func_80219B78_4B2D68
 /* 4B2E0C 80219C1C 00000000 */  nop
 /* 4B2E10 80219C20 468010A0 */  cvt.s.w   $f2, $f2
 /* 4B2E14 80219C24 E4A20030 */  swc1      $f2, 0x30($a1)
-/* 4B2E18 80219C28 0C01C4B4 */  jal       func_800712D0
+/* 4B2E18 80219C28 0C01C4B4 */  jal       playFX_46_whirlwind
 /* 4B2E1C 80219C2C E4A0002C */   swc1     $f0, 0x2c($a1)
 /* 4B2E20 80219C30 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 4B2E24 80219C34 8FB3001C */  lw        $s3, 0x1c($sp)

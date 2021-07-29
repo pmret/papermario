@@ -1,15 +1,76 @@
 # splat Release Notes
 
-## 0.5
-* n64splat name changed to splat
-  * Some refactoring was done to support other platforms besides n64 in the future 
-    * New `platform` option, which defaults to `n64`
-  * This will cause breaking changes in custom segments, so please refer to one of the changes in one of the n64 base segments for details
-* Support for custom artifact paths 
-  * New `undefined_syms_auto_path` option
-  * New `undefined_funcs_auto_path` option
-  * New `cache_path` option
-  * (All path-like options' names now end with `_path`)
+### 0.7.5: all_ types and auto_all_sections
+
+If you have a group segment with multiple c files and want splat to automatically create linker entries at a given position for each code object (c, asm, hasm) in the segment, you can use an `all_` type for that section. For example, you can add `[auto, all_bss]` as the last subsegment in a segment. This will direct splat to create a linker entry for each code object in the segment. This saves a lot of time when it comes to manually adding .bss subsegments for bss support, for example. The same thing can be done for data and rodata sections, but note this should probably be done later into a project when all data / rodata is migrated to c files, as the `all_` types lose the rom positioning information that's necessary for splat to do proper disassembly.
+
+The `auto_all_sections` option, when set to true, will automatically add `all_` types into every group. This is only done for a section in a group if no other manual declarations for that section exist. For example, if you have 30 c files in a group and a .data later on for one of them, `auto_all_sections` will not interfere with your `.data` subsegment. If you remove this, however, splat will use `auto_all_sections` to implicitly `.data` subsegments for all of your code objects behind the scenes. This feature is again particualrly helpful for bss support, as it will create bss linker entries for every file in your project (assuming you don't have any manual .bss subsegments), which eliminates the need to create dummy .bss subsegments just for the sake of configuring the linker script.
+
+### 0.7.2
+
+* Data disassembly changes:
+  * String detection has been improved. Please send me false positives / negatives as you see them and I can try to improve it further!
+  * Symbols in a data segment pointed to by other symbols will now properly be split out as their own symbols
+
+### 0.7.1
+
+* Image segment changes:
+  * Added `flip_x` and `flip_y` boolean parameters to replace `flip`.
+    * `flip` is deprecated and will produce a warning when used.
+    * Fixed flipping of `ci4` and `ci8` images.
+  * Fixed `extract: false` (and `start: auto`) behaviour.
+
+## 0.7.0: The Path Update
+
+* Significantly better performance, especially when using the cache feature (`--use-cache` CLI arg).
+* BREAKING: Some cli args for splat have been renamed. Please consult the usage output (-h or no args) for more information.
+  * `--new` has been renamed to `--use-cache`
+  * `--modes` arg changes:
+    * Image modes have been combined into the `img` mode
+    * Code and ASM modes have been combined into the `code` mode
+* BREAKING: The `name` attribute of a segment now should no longer be a subdirectory but rather a meaningful name for the segment which will be used as the name of the linker section. If your `name` was previously a directory, please change it into a `dir`.
+* BREAKING: `subsections` has been renamed to `subsegments`
+* New `dir` segment attribute specifies a subdirectory into which files will be saved. You can combine `dir` ("foo") with a subsection file name containing a subdirectory ("bar/out"), and the paths will be joined (foo/bar/out.c)
+  * If the `dir` attribute is specified but the `name` isn't, the `name` becomes `dir` with directory separation slashes replaced with underscores (foo/bar/baz -> foo_bar_baz)
+* BREAKING: Many configuration options have been renamed. `_dir` options have been changed to the suffix `_path`.
+* BREAKING: Assets (non-code, like `bin` and images) are now placed in the directory `asset_path` (defaults to `assets`).
+* Linker symbol header generation. Set the `linker_symbol_header_path` option to use.
+  * `typedef u8[] Addr;` is recommended in your `common.h` header.
+* You can now provide `auto` as the `start` attribute for a segment, e.g. `[auto, c, my_file]`. This causes the segment to not be extracted, but linked. This feature is intended for modding.
+* Providing just a ROM address but no type or name for a segment is now valid anywhere in `segments` or `subsegments` rather than just at the end of the ROM. It specifies the end of the previous segment for types that need it (`palette`, `bin`, `Yay0`) and causes the linker to simply write padding until that address.
+* The linker script file is left untouched if the contents have not changed since the previous split.
+* You can now group together segments with `type: group` (similar to `code`). Note that any ASM or C segments must live under a `type: code` segment, not a basic `group`.
+
+### 0.6.5: Bugfixes, rodata migration, and made options static
+
+If you wrote a custom extension, options should be imported and statically referenced
+`from util import options`
+
+see options.py for more info on how to now get and set options
+
+BREAKING: vram can only be specified on a segment if the segment is defined as a dict in the config
+
+### 0.6.3: More refactoring
+**Breaking Change**: The command line args to split.py have changed. Currently, only the config path is now a required argument to splat. The old `rom` and `outdir` parameters are now optional (`--rom`, `--outdir`). Now, you can add rom and out directory paths in the yaml.
+
+The `out_dir` option specifies a directory relative to the config file. If your config file is in a subdirectory of the main repo, you can set `out_dir: ../`, for example.
+
+The `target_path` option spcifies a path to the binary file to split, relative to the `out_dir`. If your `baserom.z64` is in the top-level of the repo, you can set `target_path: baserom.z64`, for example.
+
+### 0.6.2: subsegments
+I've begun a refactor of the code "files" code, which makes everything cleaner and easier to extend.
+There's also a new option, `create_new_c_files`, which disables the creation of nonexistent c files. This behavior is on by default, but if you want to disable it for any reason, you now have the option to do so.
+
+I am also working on adding bss support as well. It should almost be all set, aside from the changes needed in the linker script.
+
+**Breaking change**: The `files` field in `code` segments should now be renamed to `subsegments`.
+
+### 0.6.1: `assets_dir` option
+
+This release adds a new `assets_dir` option in `splat.yaml`s that allows you to override the default `img`, `bin`, and other directories that segments output to.
+
+Want to interdisperse split assets with your sourcecode? `assets_dir: src`!
+Want to have all assets live in a single directory? `assets_dir: assets`!
 
 ## 0.6: The Symbol Update
 Internally, there's a new Symbol class which stores information about a symbol and is stored in a couple places during disassembly. Many things should be improved, such as reconciling symbols within overlays, things being named functions vs data symbols, and more.
@@ -23,33 +84,13 @@ Internally, there's a new Symbol class which stores information about a symbol a
 
 **data example**: `gSomeDataVar = 0x80024233; // type:data size:0x100`
 
-### 0.6.1: `assets_dir` option
-
-This release adds a new `assets_dir` option in `splat.yaml`s that allows you to override the default `img`, `bin`, and other directories that segments output to.
-
-Want to interdisperse split assets with your sourcecode? `assets_dir: src`!
-Want to have all assets live in a single directory? `assets_dir: assets`!
-
-### 0.6.2: Subsections
-I've begun a refactor of the code "files" code, which makes everything cleaner and easier to extend.
-There's also a new option, `create_new_c_files`, which disables the creation of nonexistent c files. This behavior is on by default, but if you want to disable it for any reason, you now have the option to do so.
-
-I am also working on adding bss support as well. It should almost be all set, aside from the changes needed in the linker script.
-
-**Breaking change**: The `files` field in `code` segments should now be renamed to `subsections`.
-
-### 0.6.3: More refactoring
-**Breaking Change**: The command line args to split.py have changed. Currently, only the config path is now a required argument to splat. The old `rom` and `outdir` parameters are now optional (`--rom`, `--outdir`). Now, you can add rom and out directory paths in the yaml.
-
-The `out_dir` option specifies a directory relative to the config file. If your config file is in a subdirectory of the main repo, you can set `out_dir: ../`, for example.
-
-The `target_path` option spcifies a path to the binary file to split, relative to the `out_dir`. If your `baserom.z64` is in the top-level of the repo, you can set `target_path: baserom.z64`, for example.
-
-### 0.6.5: Bugfixes, rodata migration, and made options static
-
-If you wrote a custom extension, options should be imported and statically referenced
-`from util import options`
-
-see options.py for more info on how to now get and set options
-
-BREAKING: vram can only be specified on a segment if the segment is defined as a dict in the config
+## 0.5 The Rename Update
+* n64splat name changed to splat
+  * Some refactoring was done to support other platforms besides n64 in the future 
+    * New `platform` option, which defaults to `n64`
+  * This will cause breaking changes in custom segments, so please refer to one of the changes in one of the n64 base segments for details
+* Support for custom artifact paths 
+  * New `undefined_syms_auto_path` option
+  * New `undefined_funcs_auto_path` option
+  * New `cache_path` option
+  * (All path-like options' names now end with `_path`)

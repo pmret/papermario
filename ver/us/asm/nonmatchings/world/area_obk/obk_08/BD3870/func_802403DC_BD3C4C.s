@@ -55,7 +55,7 @@ glabel func_802403DC_BD3C4C
 /* BD3D14 802404A4 0000202D */  daddu     $a0, $zero, $zero
 /* BD3D18 802404A8 3C058024 */  lui       $a1, %hi(func_80240000_BD3870)
 /* BD3D1C 802404AC 24A50000 */  addiu     $a1, $a1, %lo(func_80240000_BD3870)
-/* BD3D20 802404B0 0C048C56 */  jal       bind_dynamic_entity_3
+/* BD3D20 802404B0 0C048C56 */  jal       create_generic_entity_world
 /* BD3D24 802404B4 AE020000 */   sw       $v0, ($s0)
 /* BD3D28 802404B8 0260202D */  daddu     $a0, $s3, $zero
 /* BD3D2C 802404BC 3C05FD05 */  lui       $a1, 0xfd05

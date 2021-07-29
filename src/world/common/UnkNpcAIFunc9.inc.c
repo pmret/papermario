@@ -9,8 +9,8 @@ void N(UnkNpcAIFunc9)(ScriptInstance* script) {
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
     if (enemy2->varTable[0] == 0) {
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->duration = enemy->varTable[2];
-        script->functionTemp[0].s = 33;
+        script->functionTemp[0] = 33;
     }
 }

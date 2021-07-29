@@ -1,25 +1,33 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE b_area_kmr_part_2
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218000_439A90);
+#include "common/BattleAreaAngleStuff.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_8021818C_439C1C);
+#define NAMESPACE dup_b_area_kmr_part_2
+#include "common/BattleAreaAngleStuff.inc.c"
+#define NAMESPACE b_area_kmr_part_2
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218280_439D10);
+#define NAMESPACE dup2_b_area_kmr_part_2
+#include "common/BattleAreaAngleStuff.inc.c"
+#define NAMESPACE b_area_kmr_part_2
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_8021840C_439E9C);
+#include "common/DivActorLevel4.inc.c"
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218500_439F90);
+#define NAMESPACE dup3_b_area_kmr_part_2
+#include "common/BattleAreaAngleStuff.inc.c"
+#define NAMESPACE b_area_kmr_part_2
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_8021868C_43A11C);
+#define NAMESPACE dup_b_area_kmr_part_2
+#include "common/DivActorLevel4.inc.c"
+#define NAMESPACE b_area_kmr_part_2
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218780_43A210);
+ApiStatus func_80218A60_43A4F0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
 
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_802187B0_43A240);
-
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_8021893C_43A3CC);
-
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218A30_43A4C0);
-
-INCLUDE_ASM(s32, "battle/area_kmr_part_2/439A90", func_80218A60_43A4F0);
+    fx_land(2, var1, var2, get_variable(script, *args++), 0);
+    return ApiStatus_DONE2;
+}

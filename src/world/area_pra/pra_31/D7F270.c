@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", delete_actor_D7F91C);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240C70_D7F9D0);
 
-INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240DBC_D7FB1C);
+#include "world/common/UnkFunc12.inc.c"
 
 INCLUDE_ASM(s32, "world/area_pra/pra_31/D7F270", func_80240E70_D7FBD0);
 

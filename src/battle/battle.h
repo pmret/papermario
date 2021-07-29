@@ -198,9 +198,9 @@
 #define ACTOR_TYPE_COUNT 0xD4
 
 #define AREA(id) \
-    .dmaStart = &code_##id##_ROM_START, \
-    .dmaEnd = &code_##id##_ROM_END, \
-    .dmaDest = &code_##id##_VRAM
+    .dmaStart = battle_##id##_ROM_START, \
+    .dmaEnd = battle_##id##_ROM_END, \
+    .dmaDest = battle_##id##_VRAM
 
 typedef struct ActorPartDesc {
     /* 0x00 */ s32 flags;
@@ -212,7 +212,8 @@ typedef struct ActorPartDesc {
     /* 0x10 */ s32* defenseTable;
     /* 0x14 */ s32 eventFlags;
     /* 0x18 */ s32 elementImmunityFlags;
-    /* 0x1C */ char unk_1C[8];
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ char unk_1E[6];
 } ActorPartDesc; // size = 0x24
 
 typedef struct ActorDesc {
@@ -223,7 +224,7 @@ typedef struct ActorDesc {
     /* 0x07 */ u8 maxHP;
     /* 0x08 */ s16 partCount;
     /* 0x0A */ char unk_0A[2];
-    /* 0x0C */ struct ActorPartDesc** partsData;
+    /* 0x0C */ struct ActorPartDesc* partsData;
     /* 0x10 */ Bytecode* script;
     /* 0x14 */ s32* statusTable;
     /* 0x18 */ u8 escapeChance;
@@ -257,7 +258,7 @@ typedef struct Stage {
     /* 0x0C */ Bytecode* preBattle;
     /* 0x10 */ Bytecode* postBattle;
     /* 0x14 */ const char* bg;
-    /* 0x18 */ s32 unk_18;
+    /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 unk_1C;
     /* 0x20 */ s32 unk_20;
     /* 0x24 */ s32 unk_24;
@@ -291,7 +292,7 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), formation, stage }
+#define BATTLE(name, formation, stage) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 
@@ -314,5 +315,7 @@ typedef struct ActorOffsets {
     /* 0x00 */ Vec3b tattleCam;
     /* 0x03 */ s8 shadow;
 } ActorOffsets; // size = 0x04
+
+extern BattleList* D_800DC4FC;
 
 #endif

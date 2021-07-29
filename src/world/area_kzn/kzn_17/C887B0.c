@@ -15,3 +15,14 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C887B0", func_80242EBC_C8896C);
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C887B0", func_80242F74_C88A24);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C887B0", func_80243004_C88AB4);
+/*
+ApiStatus N(func_80243004_C88AB4)(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    script->functionTemp[0] = get_variable(script, *args++);
+    script->functionTemp[1] = get_variable(script, *args++);
+    script->functionTemp[2] = get_variable(script, *args++);
+    sfx_adjust_env_sound_pos(0x194, 0, script->functionTemp[0], script->functionTemp[1], script->functionTemp[2]);
+    return ApiStatus_DONE2;
+}
+*/

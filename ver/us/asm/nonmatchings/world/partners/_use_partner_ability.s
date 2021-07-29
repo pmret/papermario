@@ -156,7 +156,7 @@ glabel L800EA83C_83CEC
 /* 83D9C 800EA8EC 24040001 */  addiu     $a0, $zero, 1
 /* 83DA0 800EA8F0 00641821 */  addu      $v1, $v1, $a0
 /* 83DA4 800EA8F4 AC45014C */  sw        $a1, 0x14c($v0)
-/* 83DA8 800EA8F8 0C009C22 */  jal       func_80027088
+/* 83DA8 800EA8F8 0C009C22 */  jal       set_time_freeze_mode
 /* 83DAC 800EA8FC AE230000 */   sw       $v1, ($s1)
 /* 83DB0 800EA900 0803AC53 */  j         L800EB14C_845FC
 /* 83DB4 800EA904 00000000 */   nop
@@ -167,15 +167,15 @@ glabel L800EA83C_83CEC
 /* 83DC4 800EA914 00000000 */   nop
 /* 83DC8 800EA918 1440020C */  bnez      $v0, L800EB14C_845FC
 /* 83DCC 800EA91C 00000000 */   nop
-/* 83DD0 800EA920 0C009C22 */  jal       func_80027088
+/* 83DD0 800EA920 0C009C22 */  jal       set_time_freeze_mode
 /* 83DD4 800EA924 0000202D */   daddu    $a0, $zero, $zero
-/* 83DD8 800EA928 0C03A9AA */  jal       func_800EA6A8
+/* 83DD8 800EA928 0C03A9AA */  jal       partner_free_npc
 /* 83DDC 800EA92C 00000000 */   nop
 /* 83DE0 800EA930 3C028011 */  lui       $v0, %hi(D_8010CFE4)
 /* 83DE4 800EA934 8C42CFE4 */  lw        $v0, %lo(D_8010CFE4)($v0)
 /* 83DE8 800EA938 3C018011 */  lui       $at, %hi(D_8010CFD8)
 /* 83DEC 800EA93C AC22CFD8 */  sw        $v0, %lo(D_8010CFD8)($at)
-/* 83DF0 800EA940 0C03A974 */  jal       load_partner_npc
+/* 83DF0 800EA940 0C03A974 */  jal       partner_create_npc
 /* 83DF4 800EA944 A2620012 */   sb       $v0, 0x12($s3)
 /* 83DF8 800EA948 0C05272D */  jal       sfx_play_sound
 /* 83DFC 800EA94C 2404000E */   addiu    $a0, $zero, 0xe
@@ -211,7 +211,7 @@ glabel L800EA83C_83CEC
 /* 83E70 800EA9C0 24040001 */  addiu     $a0, $zero, 1
 /* 83E74 800EA9C4 AC46014C */  sw        $a2, 0x14c($v0)
 /* 83E78 800EA9C8 00641821 */  addu      $v1, $v1, $a0
-/* 83E7C 800EA9CC 0C009C22 */  jal       func_80027088
+/* 83E7C 800EA9CC 0C009C22 */  jal       set_time_freeze_mode
 /* 83E80 800EA9D0 ACA30000 */   sw       $v1, ($a1)
 /* 83E84 800EA9D4 0803AC53 */  j         L800EB14C_845FC
 /* 83E88 800EA9D8 00000000 */   nop
@@ -239,7 +239,7 @@ glabel L800EA83C_83CEC
 /* 83EDC 800EAA2C 3C018011 */  lui       $at, %hi(D_8010CD30)
 /* 83EE0 800EAA30 0C038069 */  jal       enable_player_input
 /* 83EE4 800EAA34 AC32CD30 */   sw       $s2, %lo(D_8010CD30)($at)
-/* 83EE8 800EAA38 0C009C22 */  jal       func_80027088
+/* 83EE8 800EAA38 0C009C22 */  jal       set_time_freeze_mode
 /* 83EEC 800EAA3C 0000202D */   daddu    $a0, $zero, $zero
 /* 83EF0 800EAA40 0803AC53 */  j         L800EB14C_845FC
 /* 83EF4 800EAA44 00000000 */   nop
@@ -275,13 +275,13 @@ glabel L800EAA48_83EF8
 /* 83F60 800EAAB0 24420001 */  addiu     $v0, $v0, 1
 /* 83F64 800EAAB4 AE020000 */  sw        $v0, ($s0)
 .L800EAAB8:
-/* 83F68 800EAAB8 0C03A9AA */  jal       func_800EA6A8
+/* 83F68 800EAAB8 0C03A9AA */  jal       partner_free_npc
 /* 83F6C 800EAABC 00000000 */   nop
 /* 83F70 800EAAC0 3C028011 */  lui       $v0, %hi(D_8010CFE4)
 /* 83F74 800EAAC4 8C42CFE4 */  lw        $v0, %lo(D_8010CFE4)($v0)
 /* 83F78 800EAAC8 3C018011 */  lui       $at, %hi(D_8010CFD8)
 /* 83F7C 800EAACC AC22CFD8 */  sw        $v0, %lo(D_8010CFD8)($at)
-/* 83F80 800EAAD0 0C03A974 */  jal       load_partner_npc
+/* 83F80 800EAAD0 0C03A974 */  jal       partner_create_npc
 /* 83F84 800EAAD4 A2620012 */   sb       $v0, 0x12($s3)
 /* 83F88 800EAAD8 3C048011 */  lui       $a0, %hi(wPartnerNpc)
 /* 83F8C 800EAADC 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)
@@ -361,7 +361,7 @@ glabel L800EAB90_84040
 /* 840A4 800EABF4 00000000 */   nop
 /* 840A8 800EABF8 14400154 */  bnez      $v0, L800EB14C_845FC
 /* 840AC 800EABFC 00000000 */   nop
-/* 840B0 800EAC00 0C03A9AA */  jal       func_800EA6A8
+/* 840B0 800EAC00 0C03A9AA */  jal       partner_free_npc
 /* 840B4 800EAC04 00000000 */   nop
 /* 840B8 800EAC08 3C028011 */  lui       $v0, %hi(D_8010CFE4)
 /* 840BC 800EAC0C 8C42CFE4 */  lw        $v0, %lo(D_8010CFE4)($v0)
@@ -382,7 +382,7 @@ glabel L800EAC30_840E0
 /* 840F4 800EAC44 8C84CFDC */  lw        $a0, %lo(D_8010CFDC)($a0)
 /* 840F8 800EAC48 0C0B102B */  jal       kill_script_by_ID
 /* 840FC 800EAC4C 00000000 */   nop
-/* 84100 800EAC50 0C03A9AA */  jal       func_800EA6A8
+/* 84100 800EAC50 0C03A9AA */  jal       partner_free_npc
 /* 84104 800EAC54 00000000 */   nop
 /* 84108 800EAC58 3C038011 */  lui       $v1, %hi(D_8010CFE4)
 /* 8410C 800EAC5C 8C63CFE4 */  lw        $v1, %lo(D_8010CFE4)($v1)
@@ -418,7 +418,7 @@ glabel L800EAC7C_8412C
 /* 84178 800EACC8 8C42CFE4 */  lw        $v0, %lo(D_8010CFE4)($v0)
 /* 8417C 800EACCC 3C018011 */  lui       $at, %hi(D_8010CFD8)
 /* 84180 800EACD0 AC22CFD8 */  sw        $v0, %lo(D_8010CFD8)($at)
-/* 84184 800EACD4 0C03A974 */  jal       load_partner_npc
+/* 84184 800EACD4 0C03A974 */  jal       partner_create_npc
 /* 84188 800EACD8 A2620012 */   sb       $v0, 0x12($s3)
 /* 8418C 800EACDC 3C028011 */  lui       $v0, %hi(wPartner)
 /* 84190 800EACE0 8C42CFEC */  lw        $v0, %lo(wPartner)($v0)
@@ -499,7 +499,7 @@ glabel L800EADC0_84270
 /* 842AC 800EADFC 8C42CFE4 */  lw        $v0, %lo(D_8010CFE4)($v0)
 /* 842B0 800EAE00 3C018011 */  lui       $at, %hi(D_8010CFD8)
 /* 842B4 800EAE04 AC22CFD8 */  sw        $v0, %lo(D_8010CFD8)($at)
-/* 842B8 800EAE08 0C03A974 */  jal       load_partner_npc
+/* 842B8 800EAE08 0C03A974 */  jal       partner_create_npc
 /* 842BC 800EAE0C A2620012 */   sb       $v0, 0x12($s3)
 /* 842C0 800EAE10 3C048011 */  lui       $a0, %hi(wPartnerNpc)
 /* 842C4 800EAE14 8C84C930 */  lw        $a0, %lo(wPartnerNpc)($a0)

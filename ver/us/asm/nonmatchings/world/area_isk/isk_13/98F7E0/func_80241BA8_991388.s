@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80242F38_992718
+.double 0.7142857142857143
+
+.section .text
+
 glabel func_80241BA8_991388
 /* 991388 80241BA8 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 99138C 80241BAC AFB20028 */  sw        $s2, 0x28($sp)
@@ -21,7 +28,7 @@ glabel func_80241BA8_991388
 /* 9913C8 80241BE8 0040282D */  daddu     $a1, $v0, $zero
 /* 9913CC 80241BEC 0000302D */  daddu     $a2, $zero, $zero
 /* 9913D0 80241BF0 AE000000 */  sw        $zero, ($s0)
-/* 9913D4 80241BF4 0C0B7A76 */  jal       func_802DE9D8
+/* 9913D4 80241BF4 0C0B7A76 */  jal       spr_get_npc_raster_info
 /* 9913D8 80241BF8 AE000010 */   sw       $zero, 0x10($s0)
 /* 9913DC 80241BFC C7A00018 */  lwc1      $f0, 0x18($sp)
 /* 9913E0 80241C00 46800020 */  cvt.s.w   $f0, $f0
@@ -75,7 +82,7 @@ glabel func_80241BA8_991388
 /* 9914A0 80241CC0 E600002C */  swc1      $f0, 0x2c($s0)
 /* 9914A4 80241CC4 E6000030 */  swc1      $f0, 0x30($s0)
 /* 9914A8 80241CC8 E6000034 */  swc1      $f0, 0x34($s0)
-/* 9914AC 80241CCC 0C048C8F */  jal       bind_dynamic_entity_7
+/* 9914AC 80241CCC 0C048C8F */  jal       create_generic_entity_frontUI
 /* 9914B0 80241CD0 E60A001C */   swc1     $f10, 0x1c($s0)
 /* 9914B4 80241CD4 0240202D */  daddu     $a0, $s2, $zero
 /* 9914B8 80241CD8 3C05FD05 */  lui       $a1, 0xfd05

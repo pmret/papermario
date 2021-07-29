@@ -7,7 +7,7 @@ glabel func_80240068_BB2E68
 /* BB2E70 80240070 AFB00010 */  sw        $s0, 0x10($sp)
 /* BB2E74 80240074 0080802D */  daddu     $s0, $a0, $zero
 /* BB2E78 80240078 AFBF0014 */  sw        $ra, 0x14($sp)
-/* BB2E7C 8024007C 0C038022 */  jal       func_800E0088
+/* BB2E7C 8024007C 0C038022 */  jal       get_xz_dist_to_player
 /* BB2E80 80240080 46006386 */   mov.s    $f14, $f12
 /* BB2E84 80240084 4600008D */  trunc.w.s $f2, $f0
 /* BB2E88 80240088 E6020084 */  swc1      $f2, 0x84($s0)

@@ -3,7 +3,6 @@
 
 ApiStatus N(UnkMoveFunc1)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
-    BattleStatus* secondBattleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 posX = playerActor->currentPos.x;
     f32 posY = playerActor->currentPos.y;
@@ -18,7 +17,7 @@ ApiStatus N(UnkMoveFunc1)(ScriptInstance* script, s32 isInitialCall) {
         script->varTable[0] = 20;
     }
 
-    if (secondBattleStatus->unk_83 != 0) {
+    if (battleStatus->unk_83 != 0) {
         if (script->varTable[0] < 6) {
             script->varTable[0] = 6;
         }

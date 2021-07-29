@@ -34,7 +34,7 @@ glabel func_802BF9B8_320728
 /* 320798 802BFA28 00000000 */   nop
 /* 32079C 802BFA2C 0C039769 */  jal       set_action_state
 /* 3207A0 802BFA30 0000202D */   daddu    $a0, $zero, $zero
-/* 3207A4 802BFA34 0C03BD17 */  jal       clear_partner_move_history
+/* 3207A4 802BFA34 0C03BD17 */  jal       partner_clear_player_tracking
 /* 3207A8 802BFA38 0200202D */   daddu    $a0, $s0, $zero
 .L802BFA3C:
 /* 3207AC 802BFA3C 24020007 */  addiu     $v0, $zero, 7

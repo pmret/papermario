@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802463B8_915A68
+.double 1.1
+
+glabel D_802463C0_915A70
+.double 180.0
+
+.section .text
+
 glabel func_80241414_910AC4
 /* 910AC4 80241414 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* 910AC8 80241418 AFB00018 */  sw        $s0, 0x18($sp)
@@ -26,8 +36,8 @@ glabel func_80241414_910AC4
 /* 910B18 80241468 3C014387 */  lui       $at, 0x4387
 /* 910B1C 8024146C 4481C000 */  mtc1      $at, $f24
 /* 910B20 80241470 4407B000 */  mfc1      $a3, $f22
-/* 910B24 80241474 3C02800A */  lui       $v0, %hi(D_8009A634)
-/* 910B28 80241478 8442A634 */  lh        $v0, %lo(D_8009A634)($v0)
+/* 910B24 80241474 3C02800A */  lui       $v0, %hi(gCurrentCamID)
+/* 910B28 80241478 8442A634 */  lh        $v0, %lo(gCurrentCamID)($v0)
 /* 910B2C 8024147C 0220282D */  daddu     $a1, $s1, $zero
 /* 910B30 80241480 AFA00010 */  sw        $zero, 0x10($sp)
 /* 910B34 80241484 4620A502 */  mul.d     $f20, $f20, $f0
@@ -81,7 +91,7 @@ glabel func_80241414_910AC4
 /* 910BF0 80241540 0000802D */   daddu    $s0, $zero, $zero
 .L80241544:
 /* 910BF4 80241544 C64C0038 */  lwc1      $f12, 0x38($s2)
-/* 910BF8 80241548 0C038022 */  jal       func_800E0088
+/* 910BF8 80241548 0C038022 */  jal       get_xz_dist_to_player
 /* 910BFC 8024154C C64E0040 */   lwc1     $f14, 0x40($s2)
 /* 910C00 80241550 8E240000 */  lw        $a0, ($s1)
 /* 910C04 80241554 864300A6 */  lh        $v1, 0xa6($s2)

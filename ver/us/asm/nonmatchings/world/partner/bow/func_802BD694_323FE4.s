@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_802BE068_3249B8
+.word L802BDB88_3244D8, L802BDC64_3245B4, L802BDD74_3246C4, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BDDC4_324714, L802BD894_3241E4, L802BDA20_324370, 0
+
+.section .text
+
 glabel func_802BD694_323FE4
 /* 323FE4 802BD694 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* 323FE8 802BD698 AFB40030 */  sw        $s4, 0x30($sp)
@@ -238,7 +245,7 @@ glabel L802BD894_3241E4
 /* 32434C 802BD9FC 0C039769 */  jal       set_action_state
 /* 324350 802BDA00 E640000C */   swc1     $f0, 0xc($s2)
 /* 324354 802BDA04 3C040001 */  lui       $a0, 1
-/* 324358 802BDA08 0C037FBF */  jal       func_800DFEFC
+/* 324358 802BDA08 0C037FBF */  jal       suggest_player_anim_clearUnkFlag
 /* 32435C 802BDA0C 34840002 */   ori      $a0, $a0, 2
 /* 324360 802BDA10 8E820070 */  lw        $v0, 0x70($s4)
 /* 324364 802BDA14 24420001 */  addiu     $v0, $v0, 1
@@ -326,7 +333,7 @@ glabel L802BDA20_324370
 /* 3244A8 802BDB58 0C00F589 */  jal       func_8003D624
 /* 3244AC 802BDB5C AFA00018 */   sw       $zero, 0x18($sp)
 /* 3244B0 802BDB60 3C040001 */  lui       $a0, 1
-/* 3244B4 802BDB64 0C037FDE */  jal       func_800DFF78
+/* 3244B4 802BDB64 0C037FDE */  jal       suggest_player_anim_setUnkFlag
 /* 3244B8 802BDB68 34840014 */   ori      $a0, $a0, 0x14
 /* 3244BC 802BDB6C 2404200E */  addiu     $a0, $zero, 0x200e
 /* 3244C0 802BDB70 0000282D */  daddu     $a1, $zero, $zero

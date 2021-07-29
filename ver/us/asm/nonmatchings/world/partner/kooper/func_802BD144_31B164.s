@@ -11,7 +11,7 @@ glabel func_802BD144_31B164
 /* 31B17C 802BD15C 10400004 */  beqz      $v0, .L802BD170
 /* 31B180 802BD160 00000000 */   nop
 /* 31B184 802BD164 2404BFFF */  addiu     $a0, $zero, -0x4001
-/* 31B188 802BD168 0C044277 */  jal       func_801109DC
+/* 31B188 802BD168 0C044277 */  jal       entity_interacts_with_current_partner
 /* 31B18C 802BD16C 00642024 */   and      $a0, $v1, $a0
 .L802BD170:
 /* 31B190 802BD170 8FBF0010 */  lw        $ra, 0x10($sp)

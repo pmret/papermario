@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80243168_DE2478
+.ascii "party_akari\0\0\0\0\0\0\0\0\0\0\0\0\0"
+
+.section .text
+
 glabel func_80240420_DDF730
 /* DDF730 80240420 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* DDF734 80240424 3C048024 */  lui       $a0, %hi(D_80243168_DE2478)
@@ -20,8 +27,8 @@ glabel func_80240420_DDF730
 /* DDF76C 8024045C 0200202D */   daddu    $a0, $s0, $zero
 /* DDF770 80240460 3C048024 */  lui       $a0, %hi(D_80247120)
 /* DDF774 80240464 24847120 */  addiu     $a0, $a0, %lo(D_80247120)
-/* DDF778 80240468 3C028024 */  lui       $v0, %hi(D_80243390_88BF60)
-/* DDF77C 8024046C 24423390 */  addiu     $v0, $v0, %lo(D_80243390_88BF60)
+/* DDF778 80240468 3C028024 */  lui       $v0, %hi(arn_04_config)
+/* DDF77C 8024046C 24423390 */  addiu     $v0, $v0, %lo(arn_04_config)
 /* DDF780 80240470 AC820000 */  sw        $v0, ($a0)
 /* DDF784 80240474 24020096 */  addiu     $v0, $zero, 0x96
 /* DDF788 80240478 A4820008 */  sh        $v0, 8($a0)

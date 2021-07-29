@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802462C0_B4AA30
+.ascii "party_opuku\0flo_00\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+
+.section .text
+
 glabel func_802409E0_B45150
 /* B45150 802409E0 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* B45154 802409E4 3C048024 */  lui       $a0, %hi(D_802462C0_B4AA30)
@@ -20,8 +27,8 @@ glabel func_802409E0_B45150
 /* B4518C 80240A1C 0200202D */   daddu    $a0, $s0, $zero
 /* B45190 80240A20 3C048025 */  lui       $a0, %hi(D_8024A2A0)
 /* B45194 80240A24 2484A2A0 */  addiu     $a0, $a0, %lo(D_8024A2A0)
-/* B45198 80240A28 3C028024 */  lui       $v0, %hi(func_80246500_806D80)
-/* B4519C 80240A2C 24426500 */  addiu     $v0, $v0, %lo(func_80246500_806D80)
+/* B45198 80240A28 3C028024 */  lui       $v0, %hi(mac_01_TransformFoliage)
+/* B4519C 80240A2C 24426500 */  addiu     $v0, $v0, %lo(mac_01_TransformFoliage)
 /* B451A0 80240A30 AC820000 */  sw        $v0, ($a0)
 /* B451A4 80240A34 24020096 */  addiu     $v0, $zero, 0x96
 /* B451A8 80240A38 A4820008 */  sh        $v0, 8($a0)

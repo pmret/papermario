@@ -25,7 +25,7 @@ glabel func_802BDD9C_31D90C
 /* 31D958 802BDDE8 1445FFF6 */  bne       $v0, $a1, .L802BDDC4
 /* 31D95C 802BDDEC 24630010 */   addiu    $v1, $v1, 0x10
 /* 31D960 802BDDF0 24020001 */  addiu     $v0, $zero, 1
-/* 31D964 802BDDF4 0C03BD17 */  jal       clear_partner_move_history
+/* 31D964 802BDDF4 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31D968 802BDDF8 A0C20001 */   sb       $v0, 1($a2)
 .L802BDDFC:
 /* 31D96C 802BDDFC 0C0AF460 */  jal       func_802BD180_31CCF0

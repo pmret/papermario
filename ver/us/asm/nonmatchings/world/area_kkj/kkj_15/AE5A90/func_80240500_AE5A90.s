@@ -43,7 +43,7 @@ glabel func_80240500_AE5A90
 /* AE5B28 80240598 AFA20018 */  sw        $v0, 0x18($sp)
 /* AE5B2C 8024059C AFA2001C */  sw        $v0, 0x1c($sp)
 /* AE5B30 802405A0 AFA00024 */  sw        $zero, 0x24($sp)
-/* AE5B34 802405A4 0C052055 */  jal       func_80148154
+/* AE5B34 802405A4 0C052055 */  jal       sprite_shading_set_light_source
 /* AE5B38 802405A8 E7A00020 */   swc1     $f0, 0x20($sp)
 /* AE5B3C 802405AC 8FBF0034 */  lw        $ra, 0x34($sp)
 /* AE5B40 802405B0 8FB20030 */  lw        $s2, 0x30($sp)

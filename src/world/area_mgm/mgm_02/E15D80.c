@@ -20,6 +20,8 @@ INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240790_E16510);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80240BB0_E16930);
 
+static char* N(exit_str_0) = "mgm_00";
+
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241DCC_E17B4C);
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_02/E15D80", func_80241F38_E17CB8);

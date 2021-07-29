@@ -36,7 +36,7 @@ glabel func_802BE6E8_319438
 /* 3194B0 802BE760 00431024 */  and       $v0, $v0, $v1
 /* 3194B4 802BE764 0C039769 */  jal       set_action_state
 /* 3194B8 802BE768 AE020000 */   sw       $v0, ($s0)
-/* 3194BC 802BE76C 0C03BD17 */  jal       clear_partner_move_history
+/* 3194BC 802BE76C 0C03BD17 */  jal       partner_clear_player_tracking
 /* 3194C0 802BE770 0200202D */   daddu    $a0, $s0, $zero
 /* 3194C4 802BE774 C6200028 */  lwc1      $f0, 0x28($s1)
 /* 3194C8 802BE778 A2400000 */  sb        $zero, ($s2)
@@ -86,7 +86,7 @@ glabel func_802BE6E8_319438
 /* 31956C 802BE81C AE000044 */  sw        $zero, 0x44($s0)
 /* 319570 802BE820 AE00004C */  sw        $zero, 0x4c($s0)
 /* 319574 802BE824 AE020028 */  sw        $v0, 0x28($s0)
-/* 319578 802BE828 0C03BD17 */  jal       clear_partner_move_history
+/* 319578 802BE828 0C03BD17 */  jal       partner_clear_player_tracking
 /* 31957C 802BE82C E600003C */   swc1     $f0, 0x3c($s0)
 /* 319580 802BE830 0C00EB6B */  jal       disable_npc_blur
 /* 319584 802BE834 0200202D */   daddu    $a0, $s0, $zero

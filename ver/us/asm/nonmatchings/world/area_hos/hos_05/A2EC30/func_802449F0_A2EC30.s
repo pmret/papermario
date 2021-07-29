@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8024F260_A394A0
+.word L80244A58_A2EC98, L80244AC4_A2ED04, L80244AEC_A2ED2C, L80244B80_A2EDC0, L80244B2C_A2ED6C, 0, 0, 0
+
+.section .text
+
 glabel func_802449F0_A2EC30
 /* A2EC30 802449F0 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* A2EC34 802449F4 3C038025 */  lui       $v1, %hi(D_8024DA98_A37CD8)
@@ -118,11 +125,11 @@ glabel L80244B80_A2EDC0
 .L80244B84:
 /* A2EDC4 80244B84 27B00018 */  addiu     $s0, $sp, 0x18
 /* A2EDC8 80244B88 0200282D */  daddu     $a1, $s0, $zero
-/* A2EDCC 80244B8C 0C04DF70 */  jal       func_80137DC0
+/* A2EDCC 80244B8C 0C04DF70 */  jal       get_screen_overlay_params
 /* A2EDD0 80244B90 27A6001C */   addiu    $a2, $sp, 0x1c
 /* A2EDD4 80244B94 0000202D */  daddu     $a0, $zero, $zero
 /* A2EDD8 80244B98 0200282D */  daddu     $a1, $s0, $zero
-/* A2EDDC 80244B9C 0C04DF70 */  jal       func_80137DC0
+/* A2EDDC 80244B9C 0C04DF70 */  jal       get_screen_overlay_params
 /* A2EDE0 80244BA0 27A60020 */   addiu    $a2, $sp, 0x20
 /* A2EDE4 80244BA4 C7A2001C */  lwc1      $f2, 0x1c($sp)
 /* A2EDE8 80244BA8 3C01437F */  lui       $at, 0x437f
@@ -151,7 +158,7 @@ glabel L80244B80_A2EDC0
 /* A2EE44 80244C04 8C440000 */  lw        $a0, ($v0)
 /* A2EE48 80244C08 1080000F */  beqz      $a0, .L80244C48
 /* A2EE4C 80244C0C 00000000 */   nop
-/* A2EE50 80244C10 0C04992C */  jal       get_msg_lines
+/* A2EE50 80244C10 0C04992C */  jal       get_string_lines
 /* A2EE54 80244C14 0000802D */   daddu    $s0, $zero, $zero
 /* A2EE58 80244C18 28420002 */  slti      $v0, $v0, 2
 /* A2EE5C 80244C1C 50400001 */  beql      $v0, $zero, .L80244C24
@@ -164,7 +171,7 @@ glabel L80244B80_A2EDC0
 /* A2EE74 80244C34 AFA20010 */  sw        $v0, 0x10($sp)
 /* A2EE78 80244C38 AFA00014 */  sw        $zero, 0x14($sp)
 /* A2EE7C 80244C3C 8C640000 */  lw        $a0, ($v1)
-/* A2EE80 80244C40 0C04993B */  jal       draw_msg
+/* A2EE80 80244C40 0C04993B */  jal       draw_string
 /* A2EE84 80244C44 0220382D */   daddu    $a3, $s1, $zero
 .L80244C48:
 /* A2EE88 80244C48 8FBF0034 */  lw        $ra, 0x34($sp)

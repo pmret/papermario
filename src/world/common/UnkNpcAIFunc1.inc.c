@@ -1,12 +1,12 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkNpcAIFunc1)(ScriptInstance* script, NpcAISettings* aiSettings) {
+void N(UnkNpcAIFunc1)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->duration = (aiSettings->waitTime / 2) + rand_int((aiSettings->waitTime / 2) + 1);
     npc->yaw = clamp_angle(npc->yaw + rand_int(180) - 90.0f);
-    npc->currentAnim = *enemy->animList;
-    script->functionTemp[0].s = 3;
+    npc->currentAnim.w = *enemy->animList;
+    script->functionTemp[0] = 3;
 }

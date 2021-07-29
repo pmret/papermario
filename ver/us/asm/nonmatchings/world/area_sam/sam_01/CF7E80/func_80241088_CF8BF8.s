@@ -41,9 +41,9 @@ glabel func_80241088_CF8BF8
 .L80241114:
 /* CF8C84 80241114 0C016914 */  jal       remove_effect
 /* CF8C88 80241118 ACA00018 */   sw       $zero, 0x18($a1)
-/* CF8C8C 8024111C 3C048025 */  lui       $a0, %hi(D_8024DEF8)
-/* CF8C90 80241120 8C84DEF8 */  lw        $a0, %lo(D_8024DEF8)($a0)
-/* CF8C94 80241124 0C048D70 */  jal       func_801235C0
+/* CF8C8C 8024111C 3C048025 */  lui       $a0, %hi(D_8024DEF8_C0B778)
+/* CF8C90 80241120 8C84DEF8 */  lw        $a0, %lo(D_8024DEF8_C0B778)($a0)
+/* CF8C94 80241124 0C048D70 */  jal       free_generic_entity
 /* CF8C98 80241128 00000000 */   nop
 /* CF8C9C 8024112C 24020002 */  addiu     $v0, $zero, 2
 .L80241130:

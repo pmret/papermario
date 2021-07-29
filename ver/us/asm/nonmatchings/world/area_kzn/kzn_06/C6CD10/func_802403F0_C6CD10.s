@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80241A00_C6E320
+.double 0.2, 0.0
+
+.section .text
+
 glabel func_802403F0_C6CD10
 /* C6CD10 802403F0 27BDFFB0 */  addiu     $sp, $sp, -0x50
 /* C6CD14 802403F4 AFB1002C */  sw        $s1, 0x2c($sp)
@@ -36,7 +43,7 @@ glabel func_802403F0_C6CD10
 /* C6CD88 80240468 0040202D */   daddu    $a0, $v0, $zero
 /* C6CD8C 8024046C 0040202D */  daddu     $a0, $v0, $zero
 /* C6CD90 80240470 2405FFFF */  addiu     $a1, $zero, -1
-/* C6CD94 80240474 0C046F1F */  jal       func_8011BC7C
+/* C6CD94 80240474 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6CD98 80240478 24060002 */   addiu    $a2, $zero, 2
 /* C6CD9C 8024047C 96620000 */  lhu       $v0, ($s3)
 /* C6CDA0 80240480 0202102A */  slt       $v0, $s0, $v0
@@ -53,7 +60,7 @@ glabel func_802403F0_C6CD10
 /* C6CDC4 802404A4 50800005 */  beql      $a0, $zero, .L802404BC
 /* C6CDC8 802404A8 26100001 */   addiu    $s0, $s0, 1
 /* C6CDCC 802404AC 2405FFFF */  addiu     $a1, $zero, -1
-/* C6CDD0 802404B0 0C046F1F */  jal       func_8011BC7C
+/* C6CDD0 802404B0 0C046F1F */  jal       set_mdl_custom_gfx_set
 /* C6CDD4 802404B4 24060002 */   addiu    $a2, $zero, 2
 /* C6CDD8 802404B8 26100001 */  addiu     $s0, $s0, 1
 .L802404BC:
@@ -214,7 +221,7 @@ glabel func_802403F0_C6CD10
 /* C6D018 802406F8 240203E8 */  addiu     $v0, $zero, 0x3e8
 /* C6D01C 802406FC 30E700FF */  andi      $a3, $a3, 0xff
 /* C6D020 80240700 AFB1001C */  sw        $s1, 0x1c($sp)
-/* C6D024 80240704 0C046FAD */  jal       func_8011BEB4
+/* C6D024 80240704 0C046FAD */  jal       set_model_fog_color_parameters
 /* C6D028 80240708 AFA20020 */   sw       $v0, 0x20($sp)
 /* C6D02C 8024070C 0000102D */  daddu     $v0, $zero, $zero
 .L80240710:

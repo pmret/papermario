@@ -22,6 +22,19 @@ extern UNK_FUN_PTR(gCurrentUpdateFunction);
 
 extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
+extern s32 D_800DC4D0;
+extern s32 D_800DC4D4;
+extern s32 D_800DC4D8;
+extern s32 gBattleState2;
+extern s32 D_800DC4E4;
+extern s32 D_800DC4E8;
+extern u8 gCurrentBattleSection; // in the middle of the previous var
+extern u8 D_800DC4EB; // in the middle of the previous var
+extern s32 D_800DC4E0;
+extern s32 D_800DC4EC;
+extern s32 D_800DC4F0;
+extern s32 D_800DC4F4;
+extern s32 D_800DC4F8;
 extern s32 gBattleDmaDest;
 
 extern ScriptList gWorldScriptList;
@@ -45,7 +58,7 @@ extern ModelList* gCurrentModelListPtr;
 // TODO: potentially a display list, figure this out
 extern u32* gWorldModelSpecialDls[32];
 extern u32* gBattleModelSpecialDls[32];
-extern u32** gCurrentModelSpecialDlsPtr[32];
+extern CustomModelGfx* gCurrentModelSpecialDlsPtr;
 
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
@@ -63,11 +76,10 @@ extern NpcList* gCurrentNpcListPtr;
 extern ShadowList gWorldShadowList;
 extern ShadowList gBattleShadowList;
 extern ShadowList* gCurrentShadowListPtr;
+extern HudElement** gHudElementList;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
-
-extern Npc* gPlayerNpcPtr;
 
 extern CollisionData gCollisionData;
 
@@ -88,18 +100,22 @@ extern s32 D_8010CD20;
 extern s32 D_801595A0;
 extern BackgroundHeader gBackgroundImage;
 
-extern PrintContext* gCurrentPrintContext;
+extern MessagePrintState* gCurrentPrintContext;
 extern s32 D_802DB264;
-extern PrintContext* D_802DB268;
+extern MessagePrintState* D_802DB268;
 
 extern s32 D_802EB390;
 extern s32 D_802EB394;
-extern PrintContext* D_802EB398;
-extern PrintContext* D_802EB39C;
+extern MessagePrintState* D_802EB398;
+extern MessagePrintState* D_802EB39C;
 extern s32 D_802E99DC;
 
 extern Entity* D_802EB3A0;
 extern s32 D_8015C7D0[3]; // not size 3
+
+extern f32 D_800F7B70[4];
+
+extern TempSetZoneEnabled* D_800D91D4;
 
 extern UNK_TYPE D_0A0031E0;
 extern UNK_TYPE D_0A001508;
@@ -157,13 +173,13 @@ extern s32 D_802A3838;
 extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
-extern Bytecode* gPauseMenuCurrentDescIconScript;
+extern s32* gPauseMenuCurrentDescIconScript;
 extern s8 gPauseMenuCurrentTab;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
 extern s32 gPauseMenuIconScripts[8];
-extern MenuTab* gPauseMenuTabs[7];
+extern MenuTab gPauseMenuTabs[7];
 extern s32 gPauseMenuCursorPosX;
 extern s32 gPauseMenuCursorPosY;
 extern s32 gPauseMenuCursorOpacity;
@@ -200,24 +216,47 @@ extern s16 gItemMenuNumItems;
 extern s32 D_802705D0;
 extern s32 gItemMenuCurrentScrollPos;
 extern s32 gItemMenuTargetScrollPos;
-extern u32 D_802705DC;
+extern s32 D_802705DC;
 extern s32 gItemMenuLevel;
 extern s32 gItemMenuCurrentTab;
-extern MenuIcon* gItemIcons[20];
+extern HudElement* gItemIcons[20];
 extern s32 gItemMenuScrollUpIcon;
 
 // Stats
 extern s32 gStatsMenuIconIDs[12];
-
-
 extern s32 gGameState;
-extern s16 D_8009A604;
+extern s16 gNpcCount;
 extern s32 D_8009A64C;
+extern s32* D_8009A658;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;
 extern u16 D_8009A6A6;
+
+extern s32* D_800A0914;
+extern s32* D_800A0918;
+extern s32* D_800A091C;
+extern s8 D_800A0920;
+extern s32 D_800A0924;
+extern s8 D_800A0921;
+extern s16 D_800A0922;
+extern s32 mapTexName;
+extern char* mapHitName;
+extern s32 mapShapeName;
+extern s32* D_80210000;
+extern u8 D_802D9D70; // player alpha1 copy?
+extern u8 D_802D9D71; // player alpha2 copy?
+
+extern DisplayContext D_80164000[];
+
+extern MessagePrintState gMessagePrinters[3];
+
+extern f32 gCurtainScale;
+extern f32 gCurtainScaleGoal;
+extern f32 gCurtainFade;
+extern f32 gCurtainFadeGoal;
+extern UNK_FUN_PTR(gCurtainDrawCallback);
 
 extern s16 gCurrentDoorSoundsSet;
 
@@ -226,6 +265,7 @@ extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
 extern UNK_TYPE D_80109270;
 extern UNK_TYPE D_80108558;
+
 extern s32 D_80108248;
 extern s32 D_80108518;
 extern s32 D_80108270;
@@ -235,6 +275,20 @@ extern s32 D_801086AC;
 extern s32 D_801083D8;
 extern s32 D_80108068;
 extern s32 D_80104BEC;
+
+extern s32 D_8010C920;
+extern s32 D_8010C940;
+extern s32 D_8010C954;
+extern s32 D_8010C958;
+extern s32 D_8010C95C;
+extern s32 D_8010C96C;
+extern s32 D_8010C980;
+extern s32 D_8010C9A0;
+extern f32 D_800F7B40;
+extern s32 D_800F7B44;
+extern f32 D_8010C938;
+extern f32 D_8010C990;
+
 extern Temp8010EBB0 D_8010EBB0; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
@@ -257,12 +311,16 @@ extern u32 gBattleMapVars[MAX_MAPVARS];
 extern u32 gWorldMapFlags[MAX_MAPFLAGS];
 extern u32 gBattleMapFlags[MAX_MAPFLAGS];
 
-extern s32 D_8009A5D8;
+extern s32 D_8009A5D0;
+extern s32 timeFreezeMode;
+extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
-extern s32 D_8009A5D8;
 extern u8 D_800A0963;
+
+extern s32 D_8009A5D0;
+extern s32 D_8009A678;
 
 extern UNK_TYPE D_802EB3B0;
 extern UNK_TYPE D_00000094;
@@ -282,17 +340,16 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern Bytecode* SCRIPT_NpcDefeat;
-extern Bytecode* ShakeCam1;
-extern Bytecode* ShakeCamX;
-extern Bytecode* D_802D9D50;
+extern Script* SCRIPT_NpcDefeat;
+extern Script ShakeCam1;
+extern Script ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
 extern s16 gMusicCurrentVolume;
 extern s16 gMusicTargetVolume;
-extern MusicPlayer gMusicPlayers[4];
-extern MusicPlayer D_8014F6F0;
+extern MusicSettings gMusicSettings[4];
+extern MusicSettings D_8014F6F0;
 
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
@@ -311,7 +368,7 @@ extern s32 gCurrentDisplayContextIndex;
 
 extern UNK_TYPE D_0A004350;
 extern UNK_TYPE D_0A0026F0;
-extern UNK_TYPE D_802EAE7C;
+extern u32* D_802EAE7C;
 
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
@@ -327,12 +384,28 @@ extern s32 D_802920E8[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 
-extern UNK_PTR D_800F7BE8;
-extern UNK_PTR D_800F7BBC;
+extern s32 D_800F7BE8[];
+extern s32 D_800F7BBC[];
 
 extern s32 D_802C05CC;
 
+extern s16 gCurrentCamID;
+
+extern s32 gSpriteHeapPtr;
+
+extern s32 D_8029C890[12][5];
+
+// Heap?
+extern s32 D_8038F800;
+extern s32 D_803B5000;
+extern s32 D_803DA800;
+
 // Dead code
-extern PlayerStatus* D_800FFC90; // gPlayerStatusPtr
+extern PlayerStatus* dead_gPlayerStatusPtr;
+
+extern s32 D_80108A64;
+extern s32 bMarioIdleAnims[];
+extern s32 bMarioDefendAnims[];
+extern s32 bPeachIdleAnims[];
 
 #endif

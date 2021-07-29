@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
                 sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
-                sh './configure.py'
+                sh './configure'
             }
         }
         stage('Build') {
@@ -49,9 +49,9 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            cleanWs()
-        }
-    }
+   post {
+       always {
+           cleanWs()
+       }
+   }
 }

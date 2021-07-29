@@ -7,11 +7,11 @@ glabel func_802414BC_D65A9C
 /* D65AA4 802414C4 AFBF0120 */  sw        $ra, 0x120($sp)
 /* D65AA8 802414C8 AFB00118 */  sw        $s0, 0x118($sp)
 /* D65AAC 802414CC F7B40128 */  sdc1      $f20, 0x128($sp)
-/* D65AB0 802414D0 0C00E769 */  jal       func_80039DA4
+/* D65AB0 802414D0 0C00E769 */  jal       npc_get_render_yaw
 /* D65AB4 802414D4 0080882D */   daddu    $s1, $a0, $zero
 /* D65AB8 802414D8 44800000 */  mtc1      $zero, $f0
-/* D65ABC 802414DC 3C03800A */  lui       $v1, %hi(D_8009A634)
-/* D65AC0 802414E0 8463A634 */  lh        $v1, %lo(D_8009A634)($v1)
+/* D65ABC 802414DC 3C03800A */  lui       $v1, %hi(gCurrentCamID)
+/* D65AC0 802414E0 8463A634 */  lh        $v1, %lo(gCurrentCamID)($v1)
 /* D65AC4 802414E4 C6220034 */  lwc1      $f2, 0x34($s1)
 /* D65AC8 802414E8 00031080 */  sll       $v0, $v1, 2
 /* D65ACC 802414EC 00431021 */  addu      $v0, $v0, $v1
@@ -57,14 +57,14 @@ glabel func_802414BC_D65A9C
 /* D65B6C 8024158C 0080302D */   daddu    $a2, $a0, $zero
 /* D65B70 80241590 8E250028 */  lw        $a1, 0x28($s1)
 /* D65B74 80241594 4406A000 */  mfc1      $a2, $f20
-/* D65B78 80241598 0C0B76A3 */  jal       func_802DDA8C
+/* D65B78 80241598 0C0B76A3 */  jal       spr_update_player_sprite
 /* D65B7C 8024159C 24040002 */   addiu    $a0, $zero, 2
 /* D65B80 802415A0 24040002 */  addiu     $a0, $zero, 2
 /* D65B84 802415A4 0000282D */  daddu     $a1, $zero, $zero
 /* D65B88 802415A8 00A0302D */  daddu     $a2, $a1, $zero
 /* D65B8C 802415AC 00A0382D */  daddu     $a3, $a1, $zero
 /* D65B90 802415B0 27A20018 */  addiu     $v0, $sp, 0x18
-/* D65B94 802415B4 0C0B7710 */  jal       render_sprite
+/* D65B94 802415B4 0C0B7710 */  jal       spr_draw_player_sprite
 /* D65B98 802415B8 AFA20010 */   sw       $v0, 0x10($sp)
 /* D65B9C 802415BC 8FBF0120 */  lw        $ra, 0x120($sp)
 /* D65BA0 802415C0 8FB1011C */  lw        $s1, 0x11c($sp)

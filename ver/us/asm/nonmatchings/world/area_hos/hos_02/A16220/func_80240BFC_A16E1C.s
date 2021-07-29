@@ -1,6 +1,16 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80244E10_A1B030
+.double 80.3921568627451
+
+glabel D_80244E18_A1B038
+.double 96.07843137254902
+
+.section .text
+
 glabel func_80240BFC_A16E1C
 /* A16E1C 80240BFC 27BDFFC0 */  addiu     $sp, $sp, -0x40
 /* A16E20 80240C00 24040003 */  addiu     $a0, $zero, 3
@@ -13,7 +23,7 @@ glabel func_80240BFC_A16E1C
 /* A16E3C 80240C1C AFB10024 */  sw        $s1, 0x24($sp)
 /* A16E40 80240C20 AFB00020 */  sw        $s0, 0x20($sp)
 /* A16E44 80240C24 F7B40038 */  sdc1      $f20, 0x38($sp)
-/* A16E48 80240C28 0C0470AC */  jal       func_8011C2B0
+/* A16E48 80240C28 0C0470AC */  jal       mdl_get_copied_vertices
 /* A16E4C 80240C2C 27A70018 */   addiu    $a3, $sp, 0x18
 /* A16E50 80240C30 8FA20018 */  lw        $v0, 0x18($sp)
 /* A16E54 80240C34 18400096 */  blez      $v0, .L80240E90
@@ -186,7 +196,7 @@ glabel func_80240BFC_A16E1C
 /* A170C4 80240EA4 24420008 */  addiu     $v0, $v0, 8
 /* A170C8 80240EA8 AC620000 */  sw        $v0, ($v1)
 /* A170CC 80240EAC 3C02DE00 */  lui       $v0, 0xde00
-/* A170D0 80240EB0 0C0470BB */  jal       func_8011C2EC
+/* A170D0 80240EB0 0C0470BB */  jal       mdl_get_copied_gfx
 /* A170D4 80240EB4 AE020000 */   sw       $v0, ($s0)
 /* A170D8 80240EB8 3C048024 */  lui       $a0, %hi(D_802433B4_A195D4)
 /* A170DC 80240EBC 248433B4 */  addiu     $a0, $a0, %lo(D_802433B4_A195D4)

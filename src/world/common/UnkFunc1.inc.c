@@ -3,6 +3,6 @@
 
 ApiStatus N(UnkFunc1)(ScriptInstance* script, s32 isInitialCall) {
     increment_status_menu_disabled();
-    set_transition_stencil_zoom_1(0, 255.0f);
+    set_screen_overlay_params_back(0, 255.0f);
     return ApiStatus_DONE2;
 }

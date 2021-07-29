@@ -1,6 +1,34 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel jtbl_8024F1F0_A39430
+.word L8024297C_A2CBBC, L802429EC_A2CC2C, L80242A5C_A2CC9C, L80242ACC_A2CD0C, L80242BB8_A2CDF8, L80242C28_A2CE68
+
+glabel D_8024F208_A39448
+.double 51.43
+
+glabel D_8024F210_A39450
+.double 360.01
+
+glabel D_8024F218_A39458
+.double 154.29
+
+glabel D_8024F220_A39460
+.double 205.72
+
+glabel D_8024F228_A39468
+.double 308.58
+
+glabel D_8024F230_A39470
+.double 102.86
+
+glabel D_8024F238_A39478
+.double 257.15
+
+.section .text
+
 glabel func_802428C8_A2CB08
 /* A2CB08 802428C8 27BDFF98 */  addiu     $sp, $sp, -0x68
 /* A2CB0C 802428CC AFB30024 */  sw        $s3, 0x24($sp)
@@ -78,8 +106,8 @@ glabel L8024297C_A2CBBC
 /* A2CC24 802429E4 08090B41 */  j         .L80242D04
 /* A2CC28 802429E8 4600A521 */   cvt.d.s  $f20, $f20
 glabel L802429EC_A2CC2C
-/* A2CC2C 802429EC 3C108025 */  lui       $s0, %hi(D_8024F420)
-/* A2CC30 802429F0 2610F420 */  addiu     $s0, $s0, %lo(D_8024F420)
+/* A2CC2C 802429EC 3C108025 */  lui       $s0, %hi(D_8024F420_C0CCA0)
+/* A2CC30 802429F0 2610F420 */  addiu     $s0, $s0, %lo(D_8024F420_C0CCA0)
 /* A2CC34 802429F4 0200902D */  daddu     $s2, $s0, $zero
 /* A2CC38 802429F8 2415001E */  addiu     $s5, $zero, 0x1e
 /* A2CC3C 802429FC 8E22000C */  lw        $v0, 0xc($s1)
@@ -229,8 +257,8 @@ glabel L80242BB8_A2CDF8
 /* A2CE60 80242C20 08090B41 */  j         .L80242D04
 /* A2CE64 80242C24 4600A521 */   cvt.d.s  $f20, $f20
 glabel L80242C28_A2CE68
-/* A2CE68 80242C28 3C108025 */  lui       $s0, %hi(D_8024F4C0)
-/* A2CE6C 80242C2C 2610F4C0 */  addiu     $s0, $s0, %lo(D_8024F4C0)
+/* A2CE68 80242C28 3C108025 */  lui       $s0, %hi(D_8024F4C0_C0CD40)
+/* A2CE6C 80242C2C 2610F4C0 */  addiu     $s0, $s0, %lo(D_8024F4C0_C0CD40)
 /* A2CE70 80242C30 0200902D */  daddu     $s2, $s0, $zero
 /* A2CE74 80242C34 2415001E */  addiu     $s5, $zero, 0x1e
 /* A2CE78 80242C38 8E22000C */  lw        $v0, 0xc($s1)

@@ -1,0 +1,15 @@
+.include "macro.inc"
+
+.section .data
+
+glabel D_E0024CC0
+.word 0x00FFD01A, 0x09001128, 0x090011A0, 0x784DD0FE, 0x09001150, 0x090011C8, 0xF0FE4C6E, 0x09001178, 0x090011F0, 0x00000000, 0x00000000, 0x00000000
+
+glabel D_E0024CF0
+.double 0.9
+
+glabel D_E0024CF8
+.double 0.83
+
+glabel D_E0024D00
+.double 1.2048192771084338, 0.0

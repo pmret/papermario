@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_80246E40_9F4A30
+.ascii "party_kameki\0\0\0\0"
+
+.section .text
+
 glabel func_80240E90_9EEA80
 /* 9EEA80 80240E90 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 9EEA84 80240E94 3C048024 */  lui       $a0, %hi(D_80246E40_9F4A30)
@@ -12,8 +19,8 @@ glabel func_80240E90_9EEA80
 /* 9EEA9C 80240EAC AFB00018 */   sw       $s0, 0x18($sp)
 /* 9EEAA0 80240EB0 0040802D */  daddu     $s0, $v0, $zero
 /* 9EEAA4 80240EB4 0200202D */  daddu     $a0, $s0, $zero
-/* 9EEAA8 80240EB8 3C118024 */  lui       $s1, %hi(D_80246E50)
-/* 9EEAAC 80240EBC 26316E50 */  addiu     $s1, $s1, %lo(D_80246E50)
+/* 9EEAA8 80240EB8 3C118024 */  lui       $s1, %hi(dgb_01_npcGroupList_80246E50)
+/* 9EEAAC 80240EBC 26316E50 */  addiu     $s1, $s1, %lo(dgb_01_npcGroupList_80246E50)
 /* 9EEAB0 80240EC0 0C01BB7C */  jal       decode_yay0
 /* 9EEAB4 80240EC4 0220282D */   daddu    $a1, $s1, $zero
 /* 9EEAB8 80240EC8 0C00AB1E */  jal       general_heap_free

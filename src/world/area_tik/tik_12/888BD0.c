@@ -1,10 +1,13 @@
 #include "tik_12.h"
 
+static char* N(exit_str_0) = "tik_04";
+static char* N(exit_str_1) = "";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_12/888BD0", func_80240034_888C04);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 

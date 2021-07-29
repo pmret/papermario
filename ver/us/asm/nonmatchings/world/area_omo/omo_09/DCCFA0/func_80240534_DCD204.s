@@ -73,7 +73,7 @@ glabel func_80240534_DCD204
 /* DCD308 80240638 E7A6002C */  swc1      $f6, 0x2c($sp)
 /* DCD30C 8024063C AFA20010 */  sw        $v0, 0x10($sp)
 /* DCD310 80240640 27A2002C */  addiu     $v0, $sp, 0x2c
-/* DCD314 80240644 0C04497A */  jal       func_801125E8
+/* DCD314 80240644 0C04497A */  jal       entity_raycast_down
 /* DCD318 80240648 AFA20014 */   sw       $v0, 0x14($sp)
 /* DCD31C 8024064C 8FA5002C */  lw        $a1, 0x2c($sp)
 /* DCD320 80240650 0C044A17 */  jal       set_standard_shadow_scale

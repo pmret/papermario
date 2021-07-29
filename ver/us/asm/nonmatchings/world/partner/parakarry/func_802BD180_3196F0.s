@@ -1,6 +1,13 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
+.section .rodata
+
+glabel D_802BEB10_31B080
+.double 0.8
+
+.section .text
+
 glabel func_802BD180_3196F0
 /* 3196F0 802BD180 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 3196F4 802BD184 AFB00018 */  sw        $s0, 0x18($sp)
@@ -14,7 +21,7 @@ glabel func_802BD180_3196F0
 /* 319714 802BD1A4 8C91014C */  lw        $s1, 0x14c($a0)
 /* 319718 802BD1A8 10A00009 */  beqz      $a1, .L802BD1D0
 /* 31971C 802BD1AC 0220202D */   daddu    $a0, $s1, $zero
-/* 319720 802BD1B0 0C03B4C4 */  jal       enable_partner_flying
+/* 319720 802BD1B0 0C03B4C4 */  jal       partner_flying_enable
 /* 319724 802BD1B4 24050001 */   addiu    $a1, $zero, 1
 /* 319728 802BD1B8 3C04802C */  lui       $a0, %hi(D_802BEAAC_31B01C)
 /* 31972C 802BD1BC 8C84EAAC */  lw        $a0, %lo(D_802BEAAC_31B01C)($a0)
@@ -30,9 +37,9 @@ glabel func_802BD180_3196F0
 /* 319750 802BD1E0 24420001 */  addiu     $v0, $v0, 1
 /* 319754 802BD1E4 16400007 */  bnez      $s2, .L802BD204
 /* 319758 802BD1E8 AE020304 */   sw       $v0, 0x304($s0)
-/* 31975C 802BD1EC 0C03B52E */  jal       update_player_move_history
+/* 31975C 802BD1EC 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 319760 802BD1F0 0220202D */   daddu    $a0, $s1, $zero
-/* 319764 802BD1F4 0C03B574 */  jal       func_800ED5D0
+/* 319764 802BD1F4 0C03B574 */  jal       partner_flying_update_motion
 /* 319768 802BD1F8 0220202D */   daddu    $a0, $s1, $zero
 /* 31976C 802BD1FC 080AF53D */  j         .L802BD4F4
 /* 319770 802BD200 0000102D */   daddu    $v0, $zero, $zero
@@ -223,9 +230,9 @@ glabel func_802BD180_3196F0
 /* 319A2C 802BD4BC 080AF53C */  j         .L802BD4F0
 /* 319A30 802BD4C0 AC820004 */   sw       $v0, 4($a0)
 .L802BD4C4:
-/* 319A34 802BD4C4 0C03B52E */  jal       update_player_move_history
+/* 319A34 802BD4C4 0C03B52E */  jal       partner_flying_update_player_tracking
 /* 319A38 802BD4C8 0220202D */   daddu    $a0, $s1, $zero
-/* 319A3C 802BD4CC 0C03B574 */  jal       func_800ED5D0
+/* 319A3C 802BD4CC 0C03B574 */  jal       partner_flying_update_motion
 /* 319A40 802BD4D0 0220202D */   daddu    $a0, $s1, $zero
 /* 319A44 802BD4D4 8E030000 */  lw        $v1, ($s0)
 /* 319A48 802BD4D8 8C620000 */  lw        $v0, ($v1)

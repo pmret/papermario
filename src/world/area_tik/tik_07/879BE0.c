@@ -1,10 +1,13 @@
 #include "tik_07.h"
 
+static char* N(exit_str_0) = "tik_04";
+static char* N(exit_str_1) = "tik_07";
+
 #include "world/common/SetPlayerStatusAnimFlags100000.inc.c"
 
 #include "world/common/GetCurrentFloor.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240034_879C14);
+#include "world/common/UnkFunc25.inc.c"
 
 #include "world/common/GetEntryPos.inc.c"
 
@@ -14,34 +17,164 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240034_879C14);
 
 #include "world/common/SetOverrideFlags_40.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802402FC_879EDC);
+#include "world/common/UnkFunc17.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024031C_879EFC);
+/*
+ApiStatus N(func_8024031C_879EFC)(ScriptInstance* script, s32 isInitialCall) {
+    switch_to_partner(get_variable(script, *script->ptrReadPos));
+    return ApiStatus_DONE2;
+}
+*/
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240348_879F28);
-
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802403B4_879F94);
-
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240400_879FE0);
+#include "world/common/UnkFunc18.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802404AC_87A08C);
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802406FC_87A2DC);
+#include "world/common/SwitchToPartner.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240728_87A308);
+#include "world/common/UnkFunc19.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240760_87A340);
+#include "world/common/UnkFunc20.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802407F0_87A3D0);
+#include "world/common/UnkFunc39.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240824_87A404);
+#include "world/common/UnkFunc21.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240888_87A468);
+#include "world/common/UnkFunc22.inc.c"
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802408E0_87A4C0);
+/*
+ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
+    Bytecode *args = script->ptrReadPos;
+    Npc* npc = get_npc_safe(-4);
+    f32 sinTheta, cosTheta;
+    s32 i;
+    f32 var;
+    N(UserData)* userDataPtr;
+    N(UserData)* scriptPtr;
+    f32 save, save2;
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240E18_87A9F8);
+    sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
+
+    if (isInitialCall) {
+        script->userData = (N(UserData)*)general_heap_malloc(0x68);
+        scriptPtr = (N(UserData)*)script->userData;
+
+        scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
+
+        for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
+            userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f, scriptPtr->unk_5C->position.z, 1.0f, -1);
+            save = 0.0f;
+            userDataPtr->unk_2C[i] = save;
+            userDataPtr->unk_20[i] = save;
+            userDataPtr->unk_14[i] = save;
+            userDataPtr->unk_50[i] = save;
+            userDataPtr->unk_44[i] = save;
+            userDataPtr->unk_38[i] = save;
+        }
+
+        scriptPtr->unk_00 = 0;
+        scriptPtr->unk_04 = 0;
+        scriptPtr->unk_60 = 0;
+        scriptPtr->unk_64 = 0;
+
+        userDataPtr = scriptPtr;
+        for (i = 0, save = 50.0f; i < 3; i++) {
+            var = 0;
+            add_vec2D_polar(&var, &scriptPtr->unk_44[i], save, N(D_80243A48_87D628)[i]);
+            userDataPtr->unk_38[i] = cosTheta * var;
+            userDataPtr->unk_50[i] = sinTheta * var;
+            userDataPtr->unk_38[i] = npc->pos.x - (scriptPtr->unk_5C->position.x + userDataPtr->unk_38[i]);
+            userDataPtr->unk_44[i] = npc->pos.y - (scriptPtr->unk_5C->position.y + userDataPtr->unk_44[i]);
+            userDataPtr->unk_50[i] = npc->pos.z - (scriptPtr->unk_5C->position.z + userDataPtr->unk_50[i]);
+        }
+    }
+
+    scriptPtr = (N(UserData)*)script->userData;
+    switch (scriptPtr->unk_00) {
+        case 0:
+            save = update_lerp(5, 0.0f, 50.0f, scriptPtr->unk_60, 0x14);
+            save2 = 0.0f;
+            for (i = 0; i < 3; i++) {
+                scriptPtr->unk_20[i] = save2;
+                var = save2;
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243A48_87D628)[i]);
+                scriptPtr->unk_14[i] = cosTheta * var;
+                scriptPtr->unk_2C[i] = sinTheta * var;
+            }
+
+            scriptPtr->unk_60++;
+            if (scriptPtr->unk_60 >= 0x15) {
+                scriptPtr->unk_00 = 1;
+                scriptPtr->unk_60 = 0;
+            }
+            break;
+
+        case 1:
+            save = 50.0f;
+            save2 = 0.0f;
+            for (i = 0; i < 3; i++) {
+                scriptPtr->unk_20[i] = save2;
+                var = save2;
+                add_vec2D_polar(&var, &scriptPtr->unk_20[i], save, N(D_80243A48_87D628)[i]);
+                scriptPtr->unk_14[i] = cosTheta * var;
+                scriptPtr->unk_2C[i] = sinTheta * var;
+            }
+
+            scriptPtr->unk_60++;
+            if (scriptPtr->unk_60 >= 0x10) {
+                scriptPtr->unk_60 = 0xF;
+                scriptPtr->unk_00 = 2;
+            }
+            break;
+
+        case 2:
+            scriptPtr->unk_60++;
+            if (scriptPtr->unk_60 >= 0x1F) {
+                for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
+                    userDataPtr->unk_08[i]->flags |= 0x10;
+                }
+                return ApiStatus_DONE2;
+            }
+    }
+
+    switch (scriptPtr->unk_04) {
+        case 0:
+            scriptPtr->unk_64++;
+            if (scriptPtr->unk_64 >= 0x10) {
+                scriptPtr->unk_04 = 1;
+                scriptPtr->unk_64 = 0;
+            }
+            break;
+
+        case 1:
+            for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
+                userDataPtr->unk_14[i] = userDataPtr->unk_14[i] + update_lerp(1, 0.0f, userDataPtr->unk_38[i], scriptPtr->unk_64, 0x14);
+                userDataPtr->unk_20[i] = userDataPtr->unk_20[i] + update_lerp(1, 0.0f, userDataPtr->unk_44[i], scriptPtr->unk_64, 0x14);
+                userDataPtr->unk_2C[i] = userDataPtr->unk_2C[i] + update_lerp(1, 0.0f, userDataPtr->unk_50[i], scriptPtr->unk_64, 0x14);
+            }
+
+            scriptPtr->unk_64++;
+            if (scriptPtr->unk_64 >= 0x15) {
+                scriptPtr->unk_04 = 2;
+                scriptPtr->unk_64 = 0;
+            }
+            break;
+    }
+
+    for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.x = userDataPtr->unk_14[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.y = userDataPtr->unk_20[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->unk_0C)->rotation.z = userDataPtr->unk_2C[i];
+    }
+
+    return ApiStatus_BLOCK;
+}
+*/
+
+#include "world/common/UnkFunc23.inc.c"
 
 #include "world/common/UnkPartnerPosFuncs.inc.c"
 
-INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_80240FE8_87ABC8);
+#include "world/common/UnkFunc40.inc.c"

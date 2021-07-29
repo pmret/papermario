@@ -34,6 +34,14 @@ typedef struct UnkAl1 {
     /* 0x1A */ s16 unk_1A;
 } UnkAl1; // size unknown (currently 0x1C)
 
+typedef struct Fade {
+    /* 0x0 */ UnkField currentVolume;
+    /* 0x4 */ s32 fadeStep;
+    /* 0x8 */ s16 endVolume;
+    /* 0xA */ s16 fadeTime;
+    /* 0xC */ UnkFuncAl fpFadeCallback;
+} Fade; // size = 0x10
+
 typedef struct InstrumentCFG { // maybe same as UnkAlC?
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ u8 unk_02;
@@ -210,7 +218,7 @@ typedef struct Instrument {
     /* 0x2C */ s32 unkOffset;
 } Instrument;
 
-typedef Instrument* Instruments[16];
+typedef Instrument* InstrumentGroup[16];
 
 typedef struct UnkAl48 { // Track?
     /* 0x00 */ s32 unk_00; // pointer to something
@@ -303,10 +311,7 @@ typedef struct UnkAl19E0 {
     /* 0x0053 */ u8 unk_53;
     /* 0x0054 */ s32* dataPER;
     /* 0x0058 */ s32* dataPRG;
-    /* 0x005C */ s32* unk_5C;
-    /* 0x0060 */ s32* unk_60;
-    /* 0x0064 */ s32* unk_64;
-    /* 0x0068 */ s32* unk_68;
+    /* 0x005C */ s32* currentTrackData[4];
     /* 0x006C */ UnkAl19E0Sub3 unk_6C[1];
     /* 0x0074 */ char unk_74[0x8];
     /* 0x007C */ s32 unkSongName;
@@ -314,20 +319,20 @@ typedef struct UnkAl19E0 {
     /* 0x0084 */ s32 unkFadeTime;
     /* 0x0088 */ s32 unkFadeStart;
     /* 0x008C */ s32 unkFadeEnd;
-    /* 0x0090 */ s32* unk_90;
+    /* 0x0090 */ s32 unk_90;
     /* 0x0094 */ s32* unk_94;
-    /* 0x0098 */ s32* unk_98;
+    /* 0x0098 */ u32 unk_98;
     /* 0x009C */ s32 unk_9C;
     /* 0x00A0 */ s32* dataSEF;
     /* 0x00A4 */ UnkFuncAl unk_A4[2];
-    /* 0x00AC */ Instruments instrumentGroupX[1];
-    /* 0x00EC */ Instruments instrumentGroup3[16];
-    /* 0x04EC */ Instruments instrumentGroup1[4];
-    /* 0x05EC */ Instruments instrumentGroup2[16];
-    /* 0x09EC */ Instruments instrumentGroup4[16];
-    /* 0x0DEC */ Instruments instrumentGroup5[16];
-    /* 0x11EC */ Instruments instrumentGroup6[4];
-    /* 0x12EC */ Instruments* instrumentGroups[8];
+    /* 0x00AC */ InstrumentGroup instrumentGroupX[1];
+    /* 0x00EC */ InstrumentGroup instrumentGroup3[16];
+    /* 0x04EC */ InstrumentGroup instrumentGroup1[4];
+    /* 0x05EC */ InstrumentGroup instrumentGroup2[16];
+    /* 0x09EC */ InstrumentGroup instrumentGroup4[16];
+    /* 0x0DEC */ InstrumentGroup instrumentGroup5[16];
+    /* 0x11EC */ InstrumentGroup instrumentGroup6[4];
+    /* 0x12EC */ InstrumentGroup* instrumentGroups[8];
     /* 0x130C */ u8 unk_130C;
     /* 0x130D */ char unk_130D[3];
     /* 0x1310 */ s32* banks[3];
@@ -385,14 +390,6 @@ typedef struct UnkAl24 {
     /* 0x17 */ u8 unk_17;
 } UnkAl24; // size = 0x18;
 
-typedef struct Fade {
-    /* 0x0 */ UnkField currentVolume;
-    /* 0x4 */ s32 fadeStep;
-    /* 0x8 */ s16 endVolume;
-    /* 0xA */ s16 fadeTime;
-    /* 0xC */ UnkFuncAl fpFadeCallback;
-} Fade; // size = 0x10
-
 typedef struct BGMPlayer {
     /* 0x000 */ UnkAl19E0* data;
     /* 0x004 */ SoundManager* soundManager;
@@ -436,7 +433,7 @@ typedef struct BGMPlayer {
     /* 0x168 */ s32 unk_168;
     /* 0x16C */ char unk_16C[0x98];
     /* 0x204 */ s32 unk_204;
-    /* 0x208 */ s16 unk_208;
+    /* 0x208 */ u16 unk_208;
     /* 0x20A */ u16 unk_20A;
     /* 0x20C */ s16 unk_20C;
     /* 0x20E */ s16 unk_20E;
@@ -463,10 +460,10 @@ typedef struct BGMPlayer {
     /* 0x235 */ u8 unk_235;
     /* 0x236 */ char unk_236[0x2];
     /* 0x238 */ s32 unk_238[8];
-    /* 0x258 */ s8 unk_258;
+    /* 0x258 */ u8 unk_258;
     /* 0x259 */ s8 unk_259;
-    /* 0x25A */ s8 unk_25A;
-    /* 0x25B */ s8 unk_25B;
+    /* 0x25A */ u8 unk_25A;
+    /* 0x25B */ u8 unk_25B;
     /* 0x25C */ BGMPlayerTrack unk_25C[16];
     /* 0x85C */ UnkAl24 unk_85C[24];
 } BGMPlayer; // size = 0xA9C
@@ -543,7 +540,7 @@ extern s8 D_800A3FEC;
 extern s16 D_800A3FEE;
 extern s32 D_800A3FF0;
 
-void snd_load_BK_headers(UnkAl19E0* arg0, ALHeap* arg1);
+void snd_load_BK_headers(UnkAl19E0* arg0, ALHeap*);
 
 void func_8004B440(SoundManager*, u8, u8, UnkAl19E0*, u8);
 void snd_load_sfx_groups_from_SEF(SoundManager*);
@@ -592,6 +589,9 @@ void snd_BGMCmd_FE(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_FC_Jump(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_FF(BGMPlayer*, BGMPlayerTrack*);
 void snd_BGMCmd_NOP(BGMPlayer*, BGMPlayerTrack*);
+void func_80050770(BGMPlayer*, f32);
+void func_80050818(BGMPlayer*, s32);
+void func_8005087C(BGMPlayer*, s32*, s32);
 s32 func_80056068(s32, u8);
 s32 func_800506C8(s32, s32);
 s32 func_80050C30(u32);
@@ -613,8 +613,8 @@ void snd_reset_instrument(Instrument*);
 void func_80053370(UnkAlC*);
 void func_800533A8(InstrumentCFG*);
 void func_80053654(UnkAl19E0*);
-//void snd_initialize_fade(Fade*, s32, s32, s16);
-void func_80053A18(UnkAl1*);
+//void snd_initialize_bgm_fade(Fade*, s32, s32, s16);
+void snd_clear_bgm_fade(Fade*);
 void func_80053A28(UnkAl1*);
 void func_80053A98(u8, u16, s32);
 void func_80053AEC(UnkAl1*, s16);

@@ -21,8 +21,7 @@ If you use Visual Studio Code, you can use _Run Build Task_ (Ctrl+Shift+B) to ru
 Once you've created a successful (`OK`) build, copy `ver/us/build/` to `ver/us/expected/build/`:
 
 ```sh
-$ mkdir -p ver/us/expected
-$ cp -r ver/us/build ver/us/expected
+./make_expected.sh
 ```
 
 (If you're working with other versions of the game, replace `us` in the file paths.)
@@ -33,11 +32,11 @@ Decide on a function to match. These can be found in the subdirectories of `ver/
 
 Take the relevant `.s` file and pass it to [mips_to_c](https://github.com/matt-kempster/mips_to_c) ([online version](https://simonsoftware.se/other/mips_to_c.py)).
 
-Open up the `.c` file that uses your function and replace the function's `INCLUDE_ASM` macro with the output from mips_to_c. For example, for a function `asm/nonmatchings/code_FOO/func_DEADBEEF`:
+Open up the `.c` file that uses your function and replace the function's `INCLUDE_ASM` macro with the output from mips_to_c. For example, for a function `asm/nonmatchings/FOO/func_DEADBEEF`:
 
 ```diff
-  // src/code_FOO.c
-- INCLUDE_ASM("code_FOO", func_DEADBEEF);
+  // src/FOO.c
+- INCLUDE_ASM("FOO", func_DEADBEEF);
 + s32 func_DEADBEEF() {
 +    // ...
 + }
