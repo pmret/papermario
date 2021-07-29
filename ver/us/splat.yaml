@@ -776,7 +776,12 @@ segments:
   - [0x1164B8, ci8,     peach_letter, 150, 105]
   - [0x11A240, palette, peach_letter]
   - [0x11A440, bin]
-  - [0x131340, bin]
+  - type: code
+    start: 0x131340
+    vram: 0x8023E000
+    subsegments:
+    - [0x131340, bin] # TODO images
+    - [0x135140, bin, pause_icon_table] # TODO data
   - type: code
     dir: pause
     start: 0x135EE0
