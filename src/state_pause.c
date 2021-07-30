@@ -34,7 +34,7 @@ void state_step_pause(void) {
             update_npcs();
             update_player();
             update_effects();
-            if (D_8009A658[1] == nuGfxCfb_ptr) {
+            if (nuGfxCfb[1] == nuGfxCfb_ptr) {
                 D_800A0920 = 4;
                 D_800A0921 = 2;
                 gOverrideFlags |= 0x8;

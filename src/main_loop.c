@@ -442,7 +442,7 @@ void gfx_draw_background(void) {
     switch (bgFlags) {
         case 0x10:
             gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, D_8009A658[1]);
+            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
             gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
             gDPSetBlendColor(gMasterGfxPos++, 0x80, 0x80, 0x80, 0xFF);
             gDPSetPrimDepth(gMasterGfxPos++, -1, -1);
@@ -455,7 +455,7 @@ void gfx_draw_background(void) {
             gGameStatusPtr->enableBackground |= 0x20;
             break;
         case 0x20:
-            func_800279B4(D_8009A658[0], D_8009A658[1], nuGfxZBuffer);
+            func_800279B4(nuGfxCfb[0], nuGfxCfb[1], nuGfxZBuffer);
             D_800741F8 = 0;
             gGameStatusPtr->enableBackground &= ~0xF0;
             gGameStatusPtr->enableBackground |= 0x30;

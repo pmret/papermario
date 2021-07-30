@@ -90,8 +90,8 @@ glabel state_step_language_select
 /* 10704 80035304 24847980 */  addiu     $a0, $a0, %lo(D_80077980)
 /* 10708 80035308 0C017CBC */  jal       nuGfxSetCfb
 /* 1070C 8003530C 24050002 */   addiu    $a1, $zero, 2
-/* 10710 80035310 3C02800A */  lui       $v0, %hi(D_8009A658)
-/* 10714 80035314 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
+/* 10710 80035310 3C02800A */  lui       $v0, %hi(nuGfxCfb)
+/* 10714 80035314 8C42A658 */  lw        $v0, %lo(nuGfxCfb)($v0)
 /* 10718 80035318 8C430008 */  lw        $v1, 8($v0)
 /* 1071C 8003531C 3C02800A */  lui       $v0, %hi(nuGfxCfb_ptr)
 /* 10720 80035320 8C42A64C */  lw        $v0, %lo(nuGfxCfb_ptr)($v0)

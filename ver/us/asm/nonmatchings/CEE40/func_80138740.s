@@ -52,8 +52,8 @@ glabel func_80138740
 /* CEEF4 801387F4 1060001A */  beqz      $v1, .L80138860
 /* CEEF8 801387F8 AFA40010 */   sw       $a0, 0x10($sp)
 /* CEEFC 801387FC 00A0382D */  daddu     $a3, $a1, $zero
-/* CEF00 80138800 3C05800A */  lui       $a1, %hi(D_8009A658)
-/* CEF04 80138804 8CA5A658 */  lw        $a1, %lo(D_8009A658)($a1)
+/* CEF00 80138800 3C05800A */  lui       $a1, %hi(nuGfxCfb)
+/* CEF04 80138804 8CA5A658 */  lw        $a1, %lo(nuGfxCfb)($a1)
 /* CEF08 80138808 3C06800A */  lui       $a2, %hi(nuGfxCfb_ptr)
 /* CEF0C 8013880C 8CC6A64C */  lw        $a2, %lo(nuGfxCfb_ptr)($a2)
 /* CEF10 80138810 00A0202D */  daddu     $a0, $a1, $zero

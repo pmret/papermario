@@ -44,7 +44,7 @@ void state_step_battle(void) {
     u32 unk_47B;
 
     if (D_800A0900 == 5) {
-        if (D_8009A658[1] != nuGfxCfb_ptr) {
+        if (nuGfxCfb[1] != nuGfxCfb_ptr) {
             return;
         }
         D_800A0900--;

@@ -226,15 +226,11 @@ extern s32 gItemMenuScrollUpIcon;
 extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 gNpcCount;
-extern s32* D_8009A658;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
 extern u16 D_8009A6A4;
 extern u16 D_8009A6A6;
-
-// todo remove since this is in nusys
-extern u32 nuGfxCfbNum;
 
 extern s32* D_800A0914;
 extern s32* D_800A0918;

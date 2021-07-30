@@ -109,7 +109,7 @@ void nuGfxTaskStart(Gfx* gfxList_ptr, u32 gfxListSize, u32 ucode, u32 flag) {
     if (flag & NU_SC_SWAPBUFFER) {
         nuGfxTask_ptr->msg = (void*) &swapBufMsg;
         nuGfxCfbCounter = (nuGfxCfbCounter + 1) % nuGfxCfbNum;
-        nuGfxCfb_ptr = D_8009A658[nuGfxCfbCounter];
+        nuGfxCfb_ptr = nuGfxCfb[nuGfxCfbCounter];
     } else {
         nuGfxTask_ptr->msg = (void*) &taskDoneMsg;
     }
