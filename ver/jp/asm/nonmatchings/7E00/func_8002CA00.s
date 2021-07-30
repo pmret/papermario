@@ -16,8 +16,8 @@ glabel func_8002CA00
 /* 7E2C 8002CA2C 0000802D */  daddu     $s0, $zero, $zero
 /* 7E30 8002CA30 3C05B000 */  lui       $a1, 0xb000
 /* 7E34 8002CA34 34A50D10 */  ori       $a1, $a1, 0xd10
-/* 7E38 8002CA38 3C04800A */  lui       $a0, %hi(carthandle)
-/* 7E3C 8002CA3C 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 7E38 8002CA38 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 7E3C 8002CA3C 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 7E40 8002CA40 27A60010 */  addiu     $a2, $sp, 0x10
 /* 7E44 8002CA44 AFB20020 */  sw        $s2, 0x20($sp)
 /* 7E48 8002CA48 0200902D */  daddu     $s2, $s0, $zero
@@ -41,8 +41,8 @@ glabel func_8002CA00
 /* 7E90 8002CA90 0060B82D */  daddu     $s7, $v1, $zero
 .L8002CA94:
 /* 7E94 8002CA94 0220282D */  daddu     $a1, $s1, $zero
-/* 7E98 8002CA98 3C04800A */  lui       $a0, %hi(carthandle)
-/* 7E9C 8002CA9C 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 7E98 8002CA98 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 7E9C 8002CA9C 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 7EA0 8002CAA0 0280F809 */  jalr      $s4
 /* 7EA4 8002CAA4 27A60010 */   addiu    $a2, $sp, 0x10
 /* 7EA8 8002CAA8 8FA30010 */  lw        $v1, 0x10($sp)
@@ -96,8 +96,8 @@ glabel func_8002CA00
 /* 7F58 8002CB58 3C05B000 */  lui       $a1, 0xb000
 /* 7F5C 8002CB5C 34A50E38 */  ori       $a1, $a1, 0xe38
 /* 7F60 8002CB60 27A60014 */  addiu     $a2, $sp, 0x14
-/* 7F64 8002CB64 3C04800A */  lui       $a0, %hi(carthandle)
-/* 7F68 8002CB68 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 7F64 8002CB64 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 7F68 8002CB68 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 7F6C 8002CB6C 3C148006 */  lui       $s4, %hi(osEPiReadIo)
 /* 7F70 8002CB70 26940D90 */  addiu     $s4, $s4, %lo(osEPiReadIo)
 /* 7F74 8002CB74 0280F809 */  jalr      $s4
@@ -114,8 +114,8 @@ glabel func_8002CA00
 /* 7FA0 8002CBA0 0060B82D */  daddu     $s7, $v1, $zero
 .L8002CBA4:
 /* 7FA4 8002CBA4 0220282D */  daddu     $a1, $s1, $zero
-/* 7FA8 8002CBA8 3C04800A */  lui       $a0, %hi(carthandle)
-/* 7FAC 8002CBAC 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 7FA8 8002CBA8 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 7FAC 8002CBAC 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 7FB0 8002CBB0 0280F809 */  jalr      $s4
 /* 7FB4 8002CBB4 27A60014 */   addiu    $a2, $sp, 0x14
 /* 7FB8 8002CBB8 8FA30014 */  lw        $v1, 0x14($sp)

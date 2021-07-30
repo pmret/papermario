@@ -1,5 +1,6 @@
 #include "common.h"
 #include "stdlib/stdarg.h"
+#include "nu/nusys.h"
 
 typedef struct {
     /* 0x00 */ u32 magic;
@@ -15,9 +16,9 @@ typedef struct {
 u32 is_debug_print(void* arg0, const unsigned char* str, s32 count);
 
 void is_debug_init(void) {
-    osEPiWriteIo(carthandle, (u32) &gISVDbgPrnAdrs->put, 0);
-    osEPiWriteIo(carthandle, (u32) &gISVDbgPrnAdrs->get, 0);
-    osEPiWriteIo(carthandle, (u32) &gISVDbgPrnAdrs->magic, ASCII_TO_U32('I', 'S', '6', '4'));
+    osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->put, 0);
+    osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->get, 0);
+    osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->magic, ASCII_TO_U32('I', 'S', '6', '4'));
 }
 
 void printf(const char* fmt, ...) {
@@ -47,13 +48,13 @@ u32 is_debug_print(void* arg0, const unsigned char* str, s32 count) {
     s32 start;
     s32 end;
 
-    osEPiReadIo(carthandle, (u32) &gISVDbgPrnAdrs->magic, &data);
+    osEPiReadIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->magic, &data);
     if (data != ASCII_TO_U32('I', 'S', '6', '4')) {
         return 1;
     }
-    osEPiReadIo(carthandle, (u32) &gISVDbgPrnAdrs->get, &data);
+    osEPiReadIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->get, &data);
     pos = data;
-    osEPiReadIo(carthandle, (u32) &gISVDbgPrnAdrs->put, &data);
+    osEPiReadIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->put, &data);
     start = data;
     end = start + count;
     if (end >= 0xffe0) {
@@ -71,8 +72,8 @@ u32 is_debug_print(void* arg0, const unsigned char* str, s32 count) {
             u32 addr = (u32) &gISVDbgPrnAdrs->data + (start & 0xffffffc);
             s32 shift = ((3 - (start & 3)) * 8);
 
-            osEPiReadIo(carthandle, addr, &data);
-            osEPiWriteIo(carthandle, addr, (data & ~(0xff << shift)) | (*str << shift));
+            osEPiReadIo(nuPiCartHandle, addr, &data);
+            osEPiWriteIo(nuPiCartHandle, addr, (data & ~(0xff << shift)) | (*str << shift));
 
             start++;
             if (start >= 0xffe0) {
@@ -82,7 +83,7 @@ u32 is_debug_print(void* arg0, const unsigned char* str, s32 count) {
         count--;
         str++;
     }
-    osEPiWriteIo(carthandle, (u32)&gISVDbgPrnAdrs->put, start);
+    osEPiWriteIo(nuPiCartHandle, (u32)&gISVDbgPrnAdrs->put, start);
     return 1;
 }
 

@@ -297,9 +297,6 @@ extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 // Effects
 extern EffectTableEntry gEffectTable[135];
 
-//nusys
-extern OSPiHandle* carthandle;
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;

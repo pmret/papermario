@@ -14,7 +14,7 @@ glabel func_8005F100
 /* 3A524 8005F124 0C0183B8 */  jal       func_80060EE0
 /* 3A528 8005F128 00000000 */   nop
 /* 3A52C 8005F12C 8FBF0010 */  lw        $ra, 0x10($sp)
-/* 3A530 8005F130 3C01800A */  lui       $at, %hi(carthandle)
-/* 3A534 8005F134 AC22A618 */  sw        $v0, %lo(carthandle)($at)
+/* 3A530 8005F130 3C01800A */  lui       $at, %hi(nuPiCartHandle)
+/* 3A534 8005F134 AC22A618 */  sw        $v0, %lo(nuPiCartHandle)($at)
 /* 3A538 8005F138 03E00008 */  jr        $ra
 /* 3A53C 8005F13C 27BD0018 */   addiu    $sp, $sp, 0x18
