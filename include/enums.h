@@ -517,7 +517,7 @@ enum SoundIDs {
     SOUND_E3,
     SOUND_E9                        = 233,
     SOUND_EA,
-    SOUND_EB,
+    SOUND_FREEZE,
     SOUND_10C                       = 268,
     SOUND_10D,
     SOUND_STEP1                     = 321,
@@ -528,6 +528,7 @@ enum SoundIDs {
     SOUND_HIT_BLOCK                 = 334,
     SOUND_SEARCH_BUSH               = 339,
     SOUND_UNKNOWN_162               = 354,
+    SOUND_SMASH_GOOMNUT_TREE        = 357,
     SOUND_BASIC_DOOR_OPEN           = 449,
     SOUND_BASIC_DOOR_CLOSE,
     SOUND_METAL_DOOR_OPEN,
@@ -600,6 +601,8 @@ enum SoundIDs {
     SOUND_UNKNOWN_202E,
     SOUND_UNKNOWN_202F,
     SOUND_UNKNOWN_2030,
+    SOUND_INFLICT_SLEEP,
+    SOUND_INFLICT_STATUS, //< Stop, poison, paralyze
     SOUND_UNKNOWN_2038              = 8248,
     SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
@@ -1096,6 +1099,7 @@ typedef UNK_TYPE HitResult;
 enum HitResults {
     HIT_RESULT_TRIGGERED_EXPLODE        = -1,
     HIT_RESULT_HIT,
+    HIT_RESULT_MISS_QUAKE               = 2,
     HIT_RESULT_LANDED_ON_SPIKE          = 4,
     HIT_RESULT_LUCKY,
     HIT_RESULT_MISS,
@@ -1201,6 +1205,8 @@ enum Events {
     EVENT_STAR_BEAM             = 19,
     EVENT_POWER_BOUNCE_HIT      = 21,
     EVENT_BLOW_AWAY,
+    EVENT_23,
+    EVENT_24,
     EVENT_IMMUNE                = 25,
     EVENT_BLOCK,
     EVENT_SPIKE_TAUNT,
@@ -1213,7 +1219,8 @@ enum Events {
     EVENT_SHOCK_DEATH           = 38,
     EVENT_SPIKE_DEATH,
     EVENT_POWER_BOUNCE_DEATH,
-    EVENT_SPIKE_CONTACT         = 42,
+    EVENT_41, // burn death copy?
+    EVENT_SPIKE_CONTACT,
     EVENT_BURN_CONTACT          = 44,
     EVENT_SHOCK_HIT             = 47,
     EVENT_RECOVER_STATUS        = 49,
@@ -1255,6 +1262,7 @@ enum Statuses {
     STATUS_STONE,
     STATUS_DAZE,
     STATUS_E,
+    STATUS_KO,
     STATUS_BERSERK              = 16,
     STATUS_TURN_DONE            = 18,
     STATUS_HUSTLE               = 25,
@@ -1270,7 +1278,8 @@ enum Statuses {
     STATUS_POISON_TURN_MOD,
     STATUS_PARALYZE_TURN_MOD,
     STATUS_SHRINK_TURN_MOD,
-    STATUS_STOP_TURN_MOD        = 41,
+    STATUS_STONE_TURN_MOD,
+    STATUS_STOP_TURN_MOD,
 };
 
 typedef UNK_TYPE DoorSwing;
@@ -1468,8 +1477,8 @@ typedef UNK_TYPE StatusFlag;
 enum StatusFlags {
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
-    STATUS_FLAG_FROZEN          = 0x00004000,
-    STATUS_FLAG_UNKNOWN_STATUS3 = 0x00008000,
+    STATUS_FLAG_FROZEN          = 0x00004000, // TODO: rename to "freeze"
+    STATUS_FLAG_FEAR            = 0x00008000,
     STATUS_FLAG_PARALYZE        = 0x00010000,
     STATUS_FLAG_POISON          = 0x00020000,
     STATUS_FLAG_DIZZY           = 0x00040000,
@@ -1498,6 +1507,7 @@ enum DamageTypes {
     DAMAGE_TYPE_BLAST           = 0x00000200,
     DAMAGE_TYPE_POW             = 0x00000400,
     DAMAGE_TYPE_QUAKE           = 0x00000800,
+    DAMAGE_TYPE_4000            = 0x00004000,
     DAMAGE_TYPE_THROW           = 0x00040000,
     DAMAGE_TYPE_IGNORE_DEFENSE  = 0x08000000,
     DAMAGE_TYPE_NO_CONTACT      = 0x10000000,
@@ -1641,12 +1651,14 @@ enum ActorFlags {
     ACTOR_FLAG_FLYING           = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_HP_OFFSET_BELOW  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
     ACTOR_FLAG_TARGET_ONLY      = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_NO_DMG_APPLY     = 0x00400000, ///< Damage is not applied to actor HP.
     ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
 };
 
 enum ActorPartFlags {
     PART_FLAG_INVISIBLE         = 0x00000001,
+    PART_FLAG_2000              = 0x00002000, ///< Plays extra hurt SFX?
     PART_FLAG_NO_TARGET         = 0x00020000, ///< Cannot be targeted.
     PART_FLAG_MULTI_TARGET      = 0x00800000, ///< Can be targeted with multi-target attacks (e.g. Star Storm).
 };

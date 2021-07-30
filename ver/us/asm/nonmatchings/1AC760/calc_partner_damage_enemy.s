@@ -1478,8 +1478,8 @@ glabel calc_partner_damage_enemy
 /* 1AE10C 8027F82C 00000000 */   nop
 /* 1AE110 8027F830 12A00017 */  beqz      $s5, .L8027F890
 /* 1AE114 8027F834 00000000 */   nop
-/* 1AE118 8027F838 3C048029 */  lui       $a0, %hi(DoShinkHit)
-/* 1AE11C 8027F83C 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
+/* 1AE118 8027F838 3C048029 */  lui       $a0, %hi(DoShrinkHit)
+/* 1AE11C 8027F83C 248446B8 */  addiu     $a0, $a0, %lo(DoShrinkHit)
 /* 1AE120 8027F840 2405000A */  addiu     $a1, $zero, 0xa
 /* 1AE124 8027F844 0C0B0CF8 */  jal       start_script
 /* 1AE128 8027F848 0000302D */   daddu    $a2, $zero, $zero

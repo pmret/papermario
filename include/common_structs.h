@@ -689,7 +689,8 @@ typedef struct BattleStatus {
     /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ s32 cloudNineEffect;
-    /* 0x0AC */ char unk_AC[2];
+    /* 0x0AC */ char unk_AC;
+    /* 0x0AD */ s8 unk_AD;
     /* 0x0AE */ u8 hammerLossTurns;
     /* 0x0AF */ u8 jumpLossTurns;
     /* 0x0B0 */ u8 itemLossTurns;
@@ -1735,7 +1736,7 @@ typedef struct Actor {
     /* 0x198 */ Vec2b unk_198;
     /* 0x19A */ s8 unk_19A;
     /* 0x19B */ char unk_19B[1];
-    /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
+    /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
