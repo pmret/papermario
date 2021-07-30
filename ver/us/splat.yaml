@@ -352,7 +352,7 @@ segments:
     - [0x8e790, c, 8e790_len_2850]
     - [0x90FE0, .data, 759b0_len_61b0]
     - [0x913B0, .data, world/actions]
-    - [0x914E0, .data, world/partners]
+    - [0x914E0, .data, world/partners] # TODO shiftability: include following images in c file to fix padding issues
     - [0x919B0, ci4,     ui/a_button_unpressed, 48, 40]
     - [0x91D70, palette, ui/a_button_unpressed]
     - [0x91D90, ci4,     ui/a_button_pressed, 48, 40]
@@ -761,7 +761,7 @@ segments:
   - type: group
     dir: charset
     start: 0x10F1B0
-    subsegments:
+    subsegments: # TODO shiftability: what is going on here
     - [0x10F1B0, linker_offset,       standard]
     - [0x10F1B0, pm_charset,          standard, 16, 16, 0xA6]
     - [0x1144B0, linker_offset,       standard_pal]
@@ -10806,7 +10806,7 @@ segments:
   - [0xFAE860, bin] # sfx
   - [0x1943000, bin] # duplicate of 0x1E00000
   - [0x1983000, bin]
-  - [0x19E09A8, Yay0]
+  - [0x19E09A8, Yay0] # TODO shiftability - figure out what these are and if they have any pointers in them
   - [0x19E1390, Yay0]
   - [0x19E1888, Yay0]
   - [0x19E2330, Yay0]
@@ -10819,7 +10819,7 @@ segments:
   - [0x19E5758, Yay0]
   - [0x19E5950, Yay0]
   - [0x19E62A0, Yay0]
-  - start: 0x19E67B8
+  - start: 0x19E67B8 # TODO shiftability
     type: pm_npc_sprites
     dir: sprite
     name: npc
@@ -11057,7 +11057,7 @@ segments:
       - parade_shy_guys
       - parade_twink
       - leaf
-  - [0x1B82208, bin]
+  - [0x1B82208, bin] # todo: figure out what this is
   - start: 0x1B83000
     type: pm_msg
     files:
@@ -12148,6 +12148,6 @@ segments:
       - party_opuku
       - party_pokopi
   - type: bin
-    start: 0x27FEE22
+    start: 0x27FEE22 # TODO shiftability
     subalign: 2
   - [0x2800000]
