@@ -1,8 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-// INCLUDE_ASM(void, "os/nusys/3B4A0", nuPiReadRomOverlay, NUPiOverlaySegment* segment);
-
 void nuPiReadRomOverlay(NUPiOverlaySegment* segment) {
     OSIoMesg dmaIoMesgBuf;
     OSMesgQueue dmaMesgQ;
