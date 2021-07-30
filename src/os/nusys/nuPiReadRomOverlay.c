@@ -30,7 +30,7 @@ void nuPiReadRomOverlay(NUPiOverlaySegment* segment) {
         }
 
         dmaIoMesgBuf.dramAddr = bufPtr;
-        dmaIoMesgBuf.devAddr = romAddr;
+        dmaIoMesgBuf.devAddr = (u32)romAddr;
         dmaIoMesgBuf.size = readSize;
 
         osEPiStartDma(nuPiCartHandle, &dmaIoMesgBuf, OS_READ);

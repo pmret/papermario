@@ -24,13 +24,52 @@ NUCallBackList nuContCallBack = {
     0,
 };
 
-INCLUDE_ASM(u8, "os/nusys/nuContMgr", nuContMgrInit);
+extern OSMesg nuContWaitMesgBuf;
+extern OSMesg nuContDataMutexBuf;
+extern OSMesgQueue nuContDataMutexQ;
 
-INCLUDE_ASM(void, "os/nusys/nuContMgr", nuContMgrRemove);
+u8 nuContMgrInit(void) {
+    s32 i;
+    u8 pattern;
+    u8 bitmask;
 
-INCLUDE_ASM(void, "os/nusys/nuContMgr", nuContDataClose);
+    nuContDataUnLock();
+    osCreateMesgQueue(&nuContWaitMesgQ, &nuContWaitMesgBuf, 1);
+    osCreateMesgQueue(&nuContDataMutexQ, &nuContDataMutexBuf, 1);
+    nuSiCallBackAdd(&nuContCallBack);
+    nuContQueryRead();
 
-INCLUDE_ASM(void, "os/nusys/nuContMgr", nuContDataOpen);
+    nuContNum = 0;
+    bitmask = 1;
+    pattern = 0;
+
+    for (i = 0; i < NU_CONT_MAXCONTROLLERS; i++) {
+        if (nuContStatus[i].errno != 0) {
+            continue;
+        }
+
+        if ((nuContStatus[i].type & CONT_TYPE_MASK) == CONT_TYPE_NORMAL) {
+            nuContNum++;
+            pattern |= bitmask;
+        }
+        bitmask <<= 1;
+    }
+
+    return pattern;
+}
+
+void nuContMgrRemove(void) {
+    nuSiCallBackRemove(&nuContCallBack);
+}
+
+void nuContDataClose(void) {
+    osSendMesg(&nuContDataMutexQ, NULL, OS_MESG_BLOCK);
+
+}
+
+void nuContDataOpen(void) {
+    osRecvMesg(&nuContDataMutexQ, NULL, OS_MESG_BLOCK);
+}
 
 INCLUDE_ASM(s32, "os/nusys/nuContMgr", contRetrace);
 
@@ -38,8 +77,20 @@ INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadData);
 
 INCLUDE_ASM(s32, "os/nusys/nuContMgr", contReadNW);
 
+// nuContStatus needs to be declared in this file.
+#ifdef NON_MATCHING
+s32 contQuery(void) {
+    s32 ret = osContStartQuery(&nuSiMesgQ);
+
+    if (ret != 0) {
+        return ret;
+    }
+
+    osRecvMesg(&nuSiMesgQ, NULL, OS_MESG_BLOCK);
+    osContGetQuery(nuContStatus);
+
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "os/nusys/nuContMgr", contQuery);
-
-INCLUDE_ASM(void, "os/nusys/nuContMgr", nuContDataLock);
-
-INCLUDE_ASM(void, "os/nusys/nuContMgr", nuContDataUnLock);
+#endif

@@ -5,8 +5,8 @@ glabel contReadNW
 /* 3BBB4 800607B4 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 3BBB8 800607B8 AFB00010 */  sw        $s0, 0x10($sp)
 /* 3BBBC 800607BC 0080802D */  daddu     $s0, $a0, $zero
-/* 3BBC0 800607C0 3C04800B */  lui       $a0, %hi(D_800B0EB8)
-/* 3BBC4 800607C4 24840EB8 */  addiu     $a0, $a0, %lo(D_800B0EB8)
+/* 3BBC0 800607C0 3C04800B */  lui       $a0, %hi(nuContWaitMesgQ)
+/* 3BBC4 800607C4 24840EB8 */  addiu     $a0, $a0, %lo(nuContWaitMesgQ)
 /* 3BBC8 800607C8 0000282D */  daddu     $a1, $zero, $zero
 /* 3BBCC 800607CC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 3BBD0 800607D0 0C0195BC */  jal       osRecvMesg
@@ -21,16 +21,16 @@ glabel contReadNW
 /* 3BBF4 800607F4 2484AC78 */  addiu     $a0, $a0, %lo(nuSiMesgQ)
 /* 3BBF8 800607F8 0C0195BC */  jal       osRecvMesg
 /* 3BBFC 800607FC 24060001 */   addiu    $a2, $zero, 1
-/* 3BC00 80060800 3C04800E */  lui       $a0, %hi(D_800DC040)
-/* 3BC04 80060804 2484C040 */  addiu     $a0, $a0, %lo(D_800DC040)
+/* 3BC00 80060800 3C04800E */  lui       $a0, %hi(nuContDataMutexQ)
+/* 3BC04 80060804 2484C040 */  addiu     $a0, $a0, %lo(nuContDataMutexQ)
 /* 3BC08 80060808 0000282D */  daddu     $a1, $zero, $zero
 /* 3BC0C 8006080C 0C019608 */  jal       osSendMesg
 /* 3BC10 80060810 24060001 */   addiu    $a2, $zero, 1
 /* 3BC14 80060814 3C04800B */  lui       $a0, %hi(nuContData)
 /* 3BC18 80060818 0C01868A */  jal       osContGetReadData
 /* 3BC1C 8006081C 24841D68 */   addiu    $a0, $a0, %lo(nuContData)
-/* 3BC20 80060820 3C04800E */  lui       $a0, %hi(D_800DC040)
-/* 3BC24 80060824 2484C040 */  addiu     $a0, $a0, %lo(D_800DC040)
+/* 3BC20 80060820 3C04800E */  lui       $a0, %hi(nuContDataMutexQ)
+/* 3BC24 80060824 2484C040 */  addiu     $a0, $a0, %lo(nuContDataMutexQ)
 /* 3BC28 80060828 0000282D */  daddu     $a1, $zero, $zero
 /* 3BC2C 8006082C 0C0195BC */  jal       osRecvMesg
 /* 3BC30 80060830 24060001 */   addiu    $a2, $zero, 1

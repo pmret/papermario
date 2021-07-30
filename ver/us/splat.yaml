@@ -117,6 +117,7 @@ segments:
     - [0x3B770, c, os/3b770_len_80]
     - [0x3B7F0, c, os/nusys/nuSiCallBack]
     - [0x3B910, c, os/nusys/nuContMgr]
+    - [0x3BCC0, c, os/nusys/nuContDataLock]
     - [0x3BD20, c, os/3bd20_len_c0]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]

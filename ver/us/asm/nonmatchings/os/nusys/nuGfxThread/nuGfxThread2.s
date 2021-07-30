@@ -1,14 +1,14 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel nuGfxThread2
+glabel gfxThread
 /* 3B648 80060248 27BDFFC8 */  addiu     $sp, $sp, -0x38
 /* 3B64C 8006024C AFB00028 */  sw        $s0, 0x28($sp)
-/* 3B650 80060250 3C10800B */  lui       $s0, %hi(D_800B42F0)
-/* 3B654 80060254 261042F0 */  addiu     $s0, $s0, %lo(D_800B42F0)
+/* 3B650 80060250 3C10800B */  lui       $s0, %hi(nuGfxMesgQ)
+/* 3B654 80060254 261042F0 */  addiu     $s0, $s0, %lo(nuGfxMesgQ)
 /* 3B658 80060258 0200202D */  daddu     $a0, $s0, $zero
-/* 3B65C 8006025C 3C05800B */  lui       $a1, %hi(D_800AC6B0)
-/* 3B660 80060260 24A5C6B0 */  addiu     $a1, $a1, %lo(D_800AC6B0)
+/* 3B65C 8006025C 3C05800B */  lui       $a1, %hi(nuGfxMesgBuf)
+/* 3B660 80060260 24A5C6B0 */  addiu     $a1, $a1, %lo(nuGfxMesgBuf)
 /* 3B664 80060264 24060008 */  addiu     $a2, $zero, 8
 /* 3B668 80060268 AFBF0030 */  sw        $ra, 0x30($sp)
 /* 3B66C 8006026C 0C019560 */  jal       osCreateMesgQueue
@@ -20,8 +20,8 @@ glabel nuGfxThread2
 /* 3B684 80060284 24110001 */  addiu     $s1, $zero, 1
 /* 3B688 80060288 24100002 */  addiu     $s0, $zero, 2
 .L8006028C:
-/* 3B68C 8006028C 3C04800B */  lui       $a0, %hi(D_800B42F0)
-/* 3B690 80060290 248442F0 */  addiu     $a0, $a0, %lo(D_800B42F0)
+/* 3B68C 8006028C 3C04800B */  lui       $a0, %hi(nuGfxMesgQ)
+/* 3B690 80060290 248442F0 */  addiu     $a0, $a0, %lo(nuGfxMesgQ)
 /* 3B694 80060294 27A50020 */  addiu     $a1, $sp, 0x20
 /* 3B698 80060298 0C0195BC */  jal       osRecvMesg
 /* 3B69C 8006029C 24060001 */   addiu    $a2, $zero, 1
