@@ -1,5 +1,5 @@
 #include "common.h"
-#include "no_controller.png.h"
+#include "ui/no_controller.png.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
 
@@ -18,7 +18,7 @@ Gfx D_80077140[] = {
     gsDPSetCombineMode(G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
     gsDPSetTextureLUT(G_TT_NONE),
-    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, no_controller_png_width, no_controller_png),
+    gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, ui_no_controller_png_width, ui_no_controller_png),
     gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 5, G_TX_NOLOD,
                 G_TX_NOMIRROR | G_TX_CLAMP, 7, G_TX_NOLOD),
     gsDPLoadSync(),
