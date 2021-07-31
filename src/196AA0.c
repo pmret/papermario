@@ -73,6 +73,8 @@ s32 check_block_input(s32 buttonMask) {
         return TRUE;
     }
 
+    block = FALSE;
+
     if (battleStatus->unk_83 && !(gGameStatusPtr->demoFlags & 1)) {
         if (playerData->hitsTaken < 9999) {
             playerData->hitsTaken += 1;
@@ -138,7 +140,7 @@ s32 check_block_input(s32 buttonMask) {
                 bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
             for (i = 0; i < ignoreWindow; i++) {
-                block = FALSE; // this should be a different var
+                //block = FALSE; // this should be a different var
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
