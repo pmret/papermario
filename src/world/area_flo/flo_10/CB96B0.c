@@ -1,4 +1,5 @@
 #include "flo_10.h"
+#include "nu/nusys.h"
 
 extern u16* nuGfxZBuffer;
 
@@ -68,7 +69,7 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
             }
             subroutine_arg5 = phi_s4 / 6;
             subroutine_arg4 = phi_s4 / 6;
-            subroutine_arg6 = D_8009A64C;
+            subroutine_arg6 = nuGfxCfb_ptr;
 
             for (i = 0; i < subroutine_arg4; i++) {
                 phi_s5 = arg1 - ((i + 1) * 6);
@@ -300,7 +301,7 @@ void N(func_80240A98_CB9C98)(void) {
         gSPDisplayList(gMasterGfxPos++, model->modelNode->displayData->displayList);
         gDPPipeSync(gMasterGfxPos++);
 
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(D_8009A64C));
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
         gDPSetPrimDepth(gMasterGfxPos++, 32734, 0);
         gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);

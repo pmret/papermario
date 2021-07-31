@@ -91,8 +91,8 @@ glabel func_E0040348
 /* 3537A0 E00404A0 ACE20014 */  sw        $v0, 0x14($a3)
 /* 3537A4 E00404A4 3C020900 */  lui       $v0, 0x900
 /* 3537A8 E00404A8 244209E0 */  addiu     $v0, $v0, 0x9e0
-/* 3537AC E00404AC 3C03800A */  lui       $v1, %hi(D_8009A64C)
-/* 3537B0 E00404B0 8C63A64C */  lw        $v1, %lo(D_8009A64C)($v1)
+/* 3537AC E00404AC 3C03800A */  lui       $v1, %hi(nuGfxCfb_ptr)
+/* 3537B0 E00404B0 8C63A64C */  lw        $v1, %lo(nuGfxCfb_ptr)($v1)
 /* 3537B4 E00404B4 3C04ED00 */  lui       $a0, 0xed00
 /* 3537B8 E00404B8 ACE50008 */  sw        $a1, 8($a3)
 /* 3537BC E00404BC ACE50018 */  sw        $a1, 0x18($a3)

@@ -359,8 +359,8 @@ glabel func_8011CFBC
 /* B3C3C 8011D53C AE02008C */  sw        $v0, 0x8c($s0)
 /* B3C40 8011D540 3C02F100 */  lui       $v0, 0xf100
 /* B3C44 8011D544 AE0200A0 */  sw        $v0, 0xa0($s0)
-/* B3C48 8011D548 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* B3C4C 8011D54C 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* B3C48 8011D548 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* B3C4C 8011D54C 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* B3C50 8011D550 260200B0 */  addiu     $v0, $s0, 0xb0
 /* B3C54 8011D554 AE1900A4 */  sw        $t9, 0xa4($s0)
 /* B3C58 8011D558 AE220000 */  sw        $v0, ($s1)

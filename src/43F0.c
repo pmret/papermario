@@ -1,4 +1,5 @@
 #include "common.h"
+#include "nu/nusys.h"
 
 s32 D_80074270 = 0;
 
@@ -224,7 +225,7 @@ void dma_write_block(s32 dramAddr, s32 devAddr, s32 size) {
     osIoMesg.devAddr = devAddr;
     osIoMesg.size = size;
 
-    osEPiStartDma(carthandle, &osIoMesg, 1);
+    osEPiStartDma(nuPiCartHandle, &osIoMesg, 1);
     osRecvMesg(&osMesgQueue, &osMesg, 1);
 }
 

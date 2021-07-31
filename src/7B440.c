@@ -179,4 +179,60 @@ void game_input_to_move_vector(f32* arg0, f32* arg1) {
     *arg1 = temp1;
 }
 
+// tail merge crap
+#ifdef NON_MATCHING
+void func_800E24F8(void) {
+    Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
+    Camera* camera = &gCameras[0];
+    f32 x = playerShadow->rotation.x + 180.0;
+    f32 z = playerShadow->rotation.z + 180.0;
+
+    if (x != 0.0f || z != 0.0f) {
+        switch (gPlayerStatus.actionState) {
+            case 3:
+            case 8:
+                camera->unk_49C = 32.0f;
+                break;
+            case 1:
+            case 2:
+                if (camera->targetScreenCoords[1] < 130) {
+                    camera->unk_49C = 3.0f;
+                    return;
+                }
+
+                if (D_8010C9A0++ > 10) {
+                    D_8010C9A0 = 10;
+                    camera->unk_49C -= 2.0f;
+                    if (camera->unk_49C < 3.0f) {
+                        camera->unk_49C = 3.0f;
+                    }
+                }
+                break;
+            case 17:
+                camera->unk_49C = 3.0f;
+                break;
+            default:
+                D_8010C9A0 = 0;
+                camera->unk_49C -= 2.0f;
+                if (camera->unk_49C < 3.0f) {
+                    camera->unk_49C = 3.0f;
+                }
+                break;
+        }
+    } else {
+        switch (gPlayerStatus.actionState) {
+            case 1:
+            case 2:
+            case 3:
+            case 0x11:
+                camera->unk_49C = 7.2f;
+                break;
+            default:
+                camera->unk_49C = 24.0f;
+                break;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "7B440", func_800E24F8);
+#endif

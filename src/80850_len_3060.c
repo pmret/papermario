@@ -1,5 +1,12 @@
 #include "common.h"
 
+extern s32 D_800F7FA8;
+extern s32 D_800F7F80[10];
+
+void set_hud_element_script(s32, s32);
+void clear_hud_element_flags(s32, s32);
+void draw_hud_element_2(s32);
+
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
@@ -385,7 +392,51 @@ void initialize_status_menu(void) {
     func_800F0D5C();
 }
 
+// close but maybe just regalloc remaining?
+#ifdef NON_MATCHING
+void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits) {
+    s8 digits[4];
+    s32 i;
+    s32 y2;
+    s32 keepDrawing;
+    s32 digit;
+    s32 place;
+
+    set_hud_element_script(iconID, D_800F7FA8);
+    x += 8;
+    y2 = y + 8;
+    set_hud_element_render_pos(iconID, x, y + 7);
+    clear_hud_element_flags(iconID, 2);
+    draw_hud_element_2(iconID);
+
+    // Write each digit of the input number into the digits array
+    for (i = 0; i < numDigits; i++) {
+        digit = value / 10;
+        place = (digit) * 10;
+        digit = value - place;
+        digits[(numDigits - i) - 1] = digit;
+        value /= 10;
+    }
+
+    x += 13;
+    keepDrawing = FALSE;
+
+    for (i = 0; i < numDigits; i++, x += 8) {
+        digit = digits[i];
+
+        // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
+        if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
+            keepDrawing = TRUE;
+            set_hud_element_script(iconID, D_800F7F80[digit]);
+            set_hud_element_render_pos(iconID, x, y2);
+            clear_hud_element_flags(iconID, 2);
+            draw_hud_element_2(iconID);
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_number);
+#endif
 
 INCLUDE_ASM(s32, "80850_len_3060", status_menu_draw_stat);
 
@@ -822,261 +873,247 @@ void reset_status_menu(void) {
     copy_world_hud_element_ref_to_battle(uiStatus->iconIndexC, uiStatus->iconIndexC);
 }
 
+// Weird order of loading stuff
 #ifdef NON_MATCHING
-// uses a jumptable, which we need .rodata support for.
-// Somewhat close. Needs work.
-/*
-s32 is_ability_active(s32 arg0) {
-    s32 iVar2;
-    u32 uVar3;
-    s32 iVar5;
-    s32 piVar6;
+s32 is_ability_active(Ability ability) {
+    s32 abilityMoveID;
+    PlayerData* playerData = &gPlayerData;
+    s32 attackFXArray[6];
+    s32 ret;
+    s32 attackFXIndex;
+    s32 badgeMoveID;
     s32 i;
-    s32 local_20[6];
-    s32 badge;
-    player_data* playerData = &gPlayerData;
-    s32 iVar7 = 0;
-    u32 uVar4;
 
-    iVar5 = 0;
-    //iVar7 = 0;
+    ret = 0;
+    attackFXIndex = 0;
 
-    for (i = 5; i >= 0; i--) {
-        local_20[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(attackFXArray); i++) {
+        attackFXArray[i] = 0;
     }
 
-    if ((gGameStatusPtr->unk_7E & 1) == 0) {
-        iVar2 = 0;
-        iVar7 = 0;
-        piVar6 = 0;
-        for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
-            s32 index = i;
-            badge = playerData->equippedBadges[index];
-            if (playerData->equippedBadges[index] != 0) {
-                uVar4 = gItemTable[badge].moveID;
-            }
-            switch (arg0) {
-                case 0:
-                    uVar3 = 0x4c;
-                    break;
-                default:
-                    continue;
-                case 2:
-                    uVar3 = 0x40;
-                    break;
-                case 3:
-                    uVar3 = 0x4d;
-                    break;
-                case 4:
-                    uVar3 = 0x52;
-                    break;
-                case 5:
-                    uVar3 = 0x35;
-                    break;
-                case 6:
-                    if (uVar4 == 0x53) {
-                        iVar7++;
-                    }
-                    if (playerData->hasActionCommands != 0) {
-                        iVar7++;
-                    }
-                    continue;
-                case 7:
-                    uVar3 = 0x41;
-                    break;
-                case 8:
-                    uVar3 = 0x42;
-                    break;
-                case 9:
-                    uVar3 = 0x5a;
-                    break;
-                case 10:
-                    uVar3 = 0x3c;
-                    break;
-                case 0xb:
-                    uVar3 = 0x4e;
-                    break;
-                case 0xc:
-                    uVar3 = 0x5b;
-                    break;
-                case 0xd:
-                    uVar3 = 0x3d;
-                    break;
-                case 0xe:
-                    uVar3 = 0x43;
-                    break;
-                case 0xf:
-                    if (uVar4 == 0x54) {
-                        local_20[piVar6] = 1;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    if (uVar4 == 0x55) {
-                        local_20[piVar6] = 2;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    if (uVar4 == 0x56) {
-                        local_20[piVar6] = 3;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    if (uVar4 == 0x57) {
-                        local_20[piVar6] = 4;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    if (uVar4 == 0x58) {
-                        local_20[piVar6] = 5;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    if (uVar4 == 0x59) {
-                        local_20[piVar6] = 6;
-                        piVar6++;
-                        iVar5++;
-                        iVar7 = -1;
-                    }
-                    continue;
-                case 0x10:
-                    uVar3 = 0x5c;
-                    break;
-                case 0x11:
-                    uVar3 = 0x5d;
-                    break;
-                case 0x12:
-                    uVar3 = 0x5e;
-                    break;
-                case 0x13:
-                    uVar3 = 0x44;
-                    break;
-                case 0x14:
-                    uVar3 = 0x5f;
-                    break;
-                case 0x15:
-                    uVar3 = 0x60;
-                    break;
-                case 0x16:
-                    uVar3 = 0x4f;
-                    break;
-                case 0x17:
-                    uVar3 = 0x61;
-                    break;
-                case 0x18:
-                    uVar3 = 0x62;
-                    break;
-                case 0x19:
-                    uVar3 = 99;
-                    break;
-                case 0x1b:
-                    uVar3 = 0x45;
-                    break;
-                case 0x1c:
-                    uVar3 = 0x3b;
-                    break;
-                case 0x1d:
-                    uVar3 = 0x6e;
-                    break;
-                case 0x1e:
-                    uVar3 = 100;
-                    break;
-                case 0x1f:
-                    uVar3 = 0x65;
-                    break;
-                case 0x20:
-                    uVar3 = 0x46;
-                    break;
-                case 0x21:
-                    uVar3 = 0x47;
-                    break;
-                case 0x22:
-                    uVar3 = 0x3e;
-                    break;
-                case 0x23:
-                    uVar3 = 0x48;
-                    break;
-                case 0x24:
-                    uVar3 = 0x66;
-                    break;
-                case 0x25:
-                    uVar3 = 0x49;
-                    break;
-                case 0x26:
-                    uVar3 = 0x67;
-                    break;
-                case 0x27:
-                    uVar3 = 0x6d;
-                    break;
-                case 0x28:
-                    uVar3 = 0x6a;
-                    break;
-                case 0x29:
-                    uVar3 = 0x6c;
-                    break;
-                case 0x2a:
-                    uVar3 = 0x50;
-                    break;
-                case 0x1a:
-                    uVar3 = 0x38;
-                    break;
-                case 0x2b:
-                    uVar3 = 0x68;
-                    break;
-                case 0x2c:
-                    uVar3 = 0x69;
-                    break;
-                case 0x2d:
-                    uVar3 = 0x6b;
-                    break;
-                case 0x2e:
-                    uVar3 = 0x6f;
-                    break;
-                case 0x2f:
-                    uVar3 = 0x70;
-                    break;
-                case 0x30:
-                    uVar3 = 0x71;
-                    break;
-                case 0x31:
-                    uVar3 = 0x72;
-                    break;
-                case 0x32:
-                    uVar3 = 0x73;
-                    break;
-                case 0x33:
-                    uVar3 = 0x33;
-                    break;
-                case 0x34:
-                    uVar3 = 0x74;
-                    break;
-                case 0x35:
-                    uVar3 = 0x75;
-                    break;
-                case 0x36:
-                    uVar3 = 0x76;
-                    break;
-                case 0x37:
-                    uVar3 = 0x4a;
-            }
-            if (uVar4 == uVar3) {
-                iVar7++;
-            }
-        }
-        if (iVar7 < 0) {
-            iVar7 = local_20[rand_int(iVar5 - 1)];
-        }
-        return iVar7;
+    if (gGameStatusPtr->peachFlags & 1) {
+        return 0;
     }
+
+
+    for (i = 0; i < ARRAY_COUNT(playerData->equippedBadges); i++) {
+        s32 b = playerData->equippedBadges[i];
+
+        if (b != 0) {
+            badgeMoveID = gItemTable[b].moveID;
+        }
+
+        switch (ability) {
+            default:
+                continue;
+            case ABILITY_DODGE_MASTER:
+                abilityMoveID = 0x4c;
+                break;
+            case ABILITY_SPIKE_SHIELD:
+                abilityMoveID = 0x40;
+                break;
+            case ABILITY_FIRST_ATTACK:
+                abilityMoveID = 0x4d;
+                break;
+            case ABILITY_HP_PLUS:
+                abilityMoveID = 0x52;
+                break;
+            case ABILITY_DOUBLE_DIP:
+                abilityMoveID = 0x35;
+                break;
+            case ABILITY_MYSTERY_SCROLL:
+                if (badgeMoveID == 0x53) {
+                    ret++;
+                }
+                if (playerData->hasActionCommands) {
+                    ret++;
+                }
+                continue;
+            case ABILITY_FIRE_SHIELD:
+                abilityMoveID = 0x41;
+                break;
+            case ABILITY_PRETTY_LUCKY:
+                abilityMoveID = 0x42;
+                break;
+            case ABILITY_HP_DRAIN:
+                abilityMoveID = 0x5a;
+                break;
+            case ABILITY_ALL_OR_NOTHING:
+                abilityMoveID = 0x3c;
+                break;
+            case ABILITY_SLOW_GO:
+                abilityMoveID = 0x4e;
+                break;
+            case ABILITY_FP_PLUS:
+                abilityMoveID = 0x5b;
+                break;
+            case ABILITY_ICE_POWER:
+                abilityMoveID = 0x3d;
+                break;
+            case ABILITY_FEELING_FINE:
+                abilityMoveID = 0x43;
+                break;
+            case ABILITY_ATTACK_F_X:
+                if (badgeMoveID == 0x54) {
+                    attackFXArray[attackFXIndex++] = 1;
+                    ret = -1;
+                }
+                if (badgeMoveID == 0x55) {
+                    attackFXArray[attackFXIndex++] = 2;
+                    ret = -1;
+                }
+                if (badgeMoveID == 0x56) {
+                    attackFXArray[attackFXIndex++] = 3;
+                    ret = -1;
+                }
+                if (badgeMoveID == 0x57) {
+                    attackFXArray[attackFXIndex++] = 4;
+                    ret = -1;
+                }
+                if (badgeMoveID == 0x58) {
+                    attackFXArray[attackFXIndex++] = 5;
+                    ret = -1;
+                }
+                if (badgeMoveID == 0x59) {
+                    attackFXArray[attackFXIndex++] = 6;
+                    ret = -1;
+                }
+                continue;
+            case ABILITY_MONEY_MONEY:
+                abilityMoveID = 0x5c;
+                break;
+            case ABILITY_CHILL_OUT:
+                abilityMoveID = 0x5d;
+                break;
+            case ABILITY_HAPPY_HEART:
+                abilityMoveID = 0x5e;
+                break;
+            case ABILITY_ZAP_TAP:
+                abilityMoveID = 0x44;
+                break;
+            case ABILITY_MEGA_RUSH:
+                abilityMoveID = 0x5f;
+                break;
+            case ABILITY_BERSERKER:
+                abilityMoveID = 0x60;
+                break;
+            case ABILITY_RIGHT_ON:
+                abilityMoveID = 0x4f;
+                break;
+            case ABILITY_RUNAWAY_PAY:
+                abilityMoveID = 0x61;
+                break;
+            case ABILITY_FLOWER_SAVER:
+                abilityMoveID = 0x62;
+                break;
+            case ABILITY_PAY_OFF:
+                abilityMoveID = 99;
+                break;
+            case ABILITY_DEFEND_PLUS:
+                abilityMoveID = 0x45;
+                break;
+            case ABILITY_POWER_PLUS:
+                abilityMoveID = 0x3b;
+                break;
+            case ABILITY_REFUND:
+                abilityMoveID = 0x6e;
+                break;
+            case ABILITY_POWER_RUSH:
+                abilityMoveID = 100;
+                break;
+            case ABILITY_CRAZY_HEART:
+                abilityMoveID = 0x65;
+                break;
+            case ABILITY_LAST_STAND:
+                abilityMoveID = 0x46;
+                break;
+            case ABILITY_CLOSE_CALL:
+                abilityMoveID = 0x47;
+                break;
+            case ABILITY_P_UP_D_DOWN:
+                abilityMoveID = 0x3e;
+                break;
+            case ABILITY_LUCKY_DAY:
+                abilityMoveID = 0x48;
+                break;
+            case ABILITY_MEGA_HP_DRAIN:
+                abilityMoveID = 0x66;
+                break;
+            case ABILITY_P_DOWN_D_UP:
+                abilityMoveID = 0x49;
+                break;
+            case ABILITY_FLOWER_FANATIC:
+                abilityMoveID = 0x67;
+                break;
+            case ABILITY_SPEEDY_SPIN:
+                abilityMoveID = 0x6d;
+                break;
+            case ABILITY_SPIN_ATTACK:
+                abilityMoveID = 0x6a;
+                break;
+            case ABILITY_I_SPY:
+                abilityMoveID = 0x6c;
+                break;
+            case ABILITY_BUMP_ATTACK:
+                abilityMoveID = 0x50;
+                break;
+            case ABILITY_QUICK_CHANGE:
+                abilityMoveID = 0x38;
+                break;
+            case ABILITY_HEART_FINDER:
+                abilityMoveID = 0x68;
+                break;
+            case ABILITY_FLOWER_FINDER:
+                abilityMoveID = 0x69;
+                break;
+            case ABILITY_DIZZY_ATTACK:
+                abilityMoveID = 0x6b;
+                break;
+            case ABILITY_FINAL_GOOMPA:
+                abilityMoveID = 0x6f;
+                break;
+            case ABILITY_FINAL_BOMBOMB:
+                abilityMoveID = 0x70;
+                break;
+            case ABILITY_DEEP_FOCUS:
+                abilityMoveID = 0x71;
+                break;
+            case ABILITY_SUPER_FOCUS:
+                abilityMoveID = 0x72;
+                break;
+            case ABILITY_KAIDEN:
+                abilityMoveID = 0x73;
+                break;
+            case ABILITY_DAMAGE_DODGE:
+                abilityMoveID = 0x33;
+                break;
+            case ABILITY_HAPPY_FLOWER:
+                abilityMoveID = 0x74;
+                break;
+            case ABILITY_GROUP_FOCUS:
+                abilityMoveID = 0x75;
+                break;
+            case ABILITY_PEEKABOO:
+                abilityMoveID = 0x76;
+                break;
+            case ABILITY_HEALTHY_HEALTHY:
+                abilityMoveID = 0x4a;
+                break;
+        }
+        if (badgeMoveID == abilityMoveID) {
+            ret++;
+        }
+    }
+
+    if (ret < 0) {
+        ret = attackFXArray[rand_int(attackFXIndex - 1)];
+    }
+    return ret;
 }
-*/
 #else
-INCLUDE_ASM(s32, "80850_len_3060", is_ability_active, s32 arg0);
+INCLUDE_ASM(s32, "80850_len_3060", is_ability_active);
 #endif
+
 
 s32 is_partner_ability_active(void) {
     return 0;

@@ -135,7 +135,7 @@ EffectInstance* playFX_7D(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_7E(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_7F(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_81(s32, f32, f32, f32, f32, s32);
+EffectInstance* playFX_81(s32, f32 x, f32 y, f32 z, f32, s32);
 void playFX_82(s32, f32, f32, f32, f32, s32 time);
 EffectInstance* playFX_83(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_84(s32, f32, f32, f32, f32, f32);

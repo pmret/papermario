@@ -346,8 +346,8 @@ glabel appendGfx_shaded_sprite
 /* DF5CC 80148ECC 26020060 */  addiu     $v0, $s0, 0x60
 /* DF5D0 80148ED0 AE0E0054 */  sw        $t6, 0x54($s0)
 /* DF5D4 80148ED4 AEE20000 */  sw        $v0, ($s7)
-/* DF5D8 80148ED8 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* DF5DC 80148EDC 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* DF5D8 80148ED8 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* DF5DC 80148EDC 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* DF5E0 80148EE0 26020068 */  addiu     $v0, $s0, 0x68
 /* DF5E4 80148EE4 AE110058 */  sw        $s1, 0x58($s0)
 /* DF5E8 80148EE8 AE00005C */  sw        $zero, 0x5c($s0)
