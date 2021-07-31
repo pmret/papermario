@@ -35,7 +35,7 @@ INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 INCLUDE_ASM(s32, "196AA0", func_80268E88);
 
 // ARRAY_COUNT possibly placed in a temp var
-#ifdef NON_MATCHING
+#ifndef NON_MATCHING
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -46,6 +46,7 @@ s32 check_block_input(s32 buttonMask) {
     s32 mash = FALSE;
     s32 bufferPos;
     s32 i;
+    s32 blah;
 
     battleStatus->blockResult = 0; // Fail
 
@@ -71,7 +72,7 @@ s32 check_block_input(s32 buttonMask) {
         }
 
         // Pre-window mashing check
-        bufferPos = battleStatus->inputBufferPos - (blockWindow + mashWindow);
+        bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
 
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
@@ -85,6 +86,7 @@ s32 check_block_input(s32 buttonMask) {
                 mash = TRUE;
                 break;
             }
+            bufferPos++;
         }
 
         // Block check
@@ -92,7 +94,7 @@ s32 check_block_input(s32 buttonMask) {
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
-        for (i = 0; i < blockWindow; i++) {
+        for (i = 0; i <= blockWindow; i++) {
             if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                 bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
@@ -102,24 +104,28 @@ s32 check_block_input(s32 buttonMask) {
                 block = TRUE;
                 break;
             }
+            bufferPos++;
         }
 
         if (mash) {
             battleStatus->blockResult = -1; // Mash
+            block = FALSE;
         }
+
+        blah = mashWindow + blockWindow;
 
         // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
         if (block == TRUE) {
-            bufferPos = battleStatus->inputBufferPos - (blockWindow + mashWindow);
+            bufferPos = battleStatus->inputBufferPos - blah;
             if (bufferPos < 0) {
                 bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
-            for (i = 0; i < mashWindow; i++) {
+            for (i = 0; i < blah; i++) {
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
-
                 battleStatus->pushInputBuffer[bufferPos] = 0;
+                bufferPos++;
             }
         }
 
