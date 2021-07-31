@@ -1,5 +1,7 @@
 #include "common.h"
 
+// TODO: move to src/battle/action_cmd.c
+
 // action command state
 extern struct D_8029FBE0 {
     /* 0x00 */ char unk_00[0x6D];
@@ -51,7 +53,7 @@ INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 INCLUDE_ASM(s32, "196AA0", func_80268E88);
 
 // ARRAY_COUNT possibly placed in a temp var
-#ifndef NON_MATCHING
+//#ifndef NON_MATCHING
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -110,7 +112,7 @@ s32 check_block_input(s32 buttonMask) {
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
-        for (i = 0; i <= blockWindow; i++) {
+        for (i = 0; i < blockWindow; i++) {
             if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                 bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
@@ -128,15 +130,16 @@ s32 check_block_input(s32 buttonMask) {
             block = FALSE;
         }
 
-        blah = mashWindow + blockWindow;
+        //blah = mashWindow + blockWindow;
 
         // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
         if (block == TRUE) {
-            bufferPos = battleStatus->inputBufferPos - blah;
+            bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
             if (bufferPos < 0) {
                 bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
-            for (i = 0; i < blah; i++) {
+            for (i = 0; i < mashWindow; i++) {
+                block = FALSE; // this should be a different var
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
                 }
@@ -152,9 +155,9 @@ s32 check_block_input(s32 buttonMask) {
 
     return block;
 }
-#else
-INCLUDE_ASM(s32, "196AA0", check_block_input);
-#endif
+//#else
+//INCLUDE_ASM(s32, "196AA0", check_block_input);
+//#endif
 
 INCLUDE_ASM(s32, "196AA0", func_80269118);
 
