@@ -3152,10 +3152,10 @@ segments:
     start: 0x4233F0
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_break_flee
+    name: action_cmd_break_free
     overlay: True
     subsegments:
-    - [0x4233F0, c, break_flee]
+    - [0x4233F0, c, break_free]
     - [0x423C30, data]
   - type: code
     start: 0x423C70
@@ -3170,10 +3170,10 @@ segments:
     start: 0x425590
     vram: 0x802A9000
     dir: battle/action_cmd
-    name: action_cmd_leech
+    name: action_cmd_stop_leech
     overlay: True
     subsegments:
-    - [0x425590, c, leech]
+    - [0x425590, c, stop_leech]
     - [0x425B10, data]
   - type: code
     start: 0x425B50
