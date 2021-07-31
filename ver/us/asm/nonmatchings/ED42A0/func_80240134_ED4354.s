@@ -16,9 +16,9 @@ glabel func_80240134_ED4354
 /* ED4380 80240160 0200202D */  daddu     $a0, $s0, $zero
 /* ED4384 80240164 00431024 */  and       $v0, $v0, $v1
 /* ED4388 80240168 00021140 */  sll       $v0, $v0, 5
-/* ED438C 8024016C 3C068009 */  lui       $a2, %hi(D_8008D2C0)
+/* ED438C 8024016C 3C068009 */  lui       $a2, %hi(dead_gItemTable)
 /* ED4390 80240170 00C23021 */  addu      $a2, $a2, $v0
-/* ED4394 80240174 8CC6D2C0 */  lw        $a2, %lo(D_8008D2C0)($a2)
+/* ED4394 80240174 8CC6D2C0 */  lw        $a2, %lo(dead_gItemTable)($a2)
 /* ED4398 80240178 0C0B551A */  jal       dead_set_variable
 /* ED439C 8024017C 0220282D */   daddu    $a1, $s1, $zero
 /* ED43A0 80240180 8FBF0018 */  lw        $ra, 0x18($sp)

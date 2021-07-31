@@ -402,6 +402,7 @@ extern s32 D_803DA800;
 
 // Dead code
 extern PlayerStatus* dead_gPlayerStatusPtr;
+extern StaticItem dead_gItemTable[364]; // dead_gItemTable
 
 extern s32 D_80108A64;
 extern s32 bMarioIdleAnims[];

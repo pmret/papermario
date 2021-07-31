@@ -16,9 +16,9 @@ glabel func_802403C4_EB1224
 /* EB1250 802403F0 0200202D */  daddu     $a0, $s0, $zero
 /* EB1254 802403F4 00431024 */  and       $v0, $v0, $v1
 /* EB1258 802403F8 00021140 */  sll       $v0, $v0, 5
-/* EB125C 802403FC 3C068009 */  lui       $a2, %hi(D_8008D2C0)
+/* EB125C 802403FC 3C068009 */  lui       $a2, %hi(dead_gItemTable)
 /* EB1260 80240400 00C23021 */  addu      $a2, $a2, $v0
-/* EB1264 80240404 8CC6D2C0 */  lw        $a2, %lo(D_8008D2C0)($a2)
+/* EB1264 80240404 8CC6D2C0 */  lw        $a2, %lo(dead_gItemTable)($a2)
 /* EB1268 80240408 0C0B551A */  jal       dead_set_variable
 /* EB126C 8024040C 0220282D */   daddu    $a1, $s1, $zero
 /* EB1270 80240410 8FBF0018 */  lw        $ra, 0x18($sp)

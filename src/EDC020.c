@@ -1,12 +1,14 @@
 #include "common.h"
 
+#define NAMESPACE EDC020
+
 INCLUDE_ASM(s32, "EDC020", func_80240040_EDC020);
 
 INCLUDE_ASM(s32, "EDC020", func_802400B0_EDC090);
 
 INCLUDE_ASM(s32, "EDC020", func_8024027C_EDC25C);
 
-INCLUDE_ASM(s32, "EDC020", func_80240330_EDC310);
+#include "world/common/DeadGetItemName.inc.c"
 
 INCLUDE_ASM(s32, "EDC020", func_80240394_EDC374);
 

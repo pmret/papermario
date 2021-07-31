@@ -416,6 +416,9 @@ s32 dead_get_variable(ScriptInstance* script, Bytecode var);
 f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
 s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
 f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+f32 func_8002AE14(f32 theta);
+s32 func_8002ACEC(s32);
+Npc* func_8003E4BC(NpcID npcId);
 
 f32 dead_cos_rad(f32 x);
 f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);

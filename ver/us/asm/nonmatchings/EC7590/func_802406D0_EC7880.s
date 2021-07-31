@@ -16,9 +16,9 @@ glabel func_802406D0_EC7880
 /* EC78AC 802406FC 0200202D */  daddu     $a0, $s0, $zero
 /* EC78B0 80240700 00431024 */  and       $v0, $v0, $v1
 /* EC78B4 80240704 00021140 */  sll       $v0, $v0, 5
-/* EC78B8 80240708 3C068009 */  lui       $a2, %hi(D_8008D2C0)
+/* EC78B8 80240708 3C068009 */  lui       $a2, %hi(dead_gItemTable)
 /* EC78BC 8024070C 00C23021 */  addu      $a2, $a2, $v0
-/* EC78C0 80240710 8CC6D2C0 */  lw        $a2, %lo(D_8008D2C0)($a2)
+/* EC78C0 80240710 8CC6D2C0 */  lw        $a2, %lo(dead_gItemTable)($a2)
 /* EC78C4 80240714 0C0B551A */  jal       dead_set_variable
 /* EC78C8 80240718 0220282D */   daddu    $a1, $s1, $zero
 /* EC78CC 8024071C 8FBF0018 */  lw        $ra, 0x18($sp)

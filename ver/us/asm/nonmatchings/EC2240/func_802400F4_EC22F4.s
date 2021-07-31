@@ -16,9 +16,9 @@ glabel func_802400F4_EC22F4
 /* EC2320 80240120 0200202D */  daddu     $a0, $s0, $zero
 /* EC2324 80240124 00431024 */  and       $v0, $v0, $v1
 /* EC2328 80240128 00021140 */  sll       $v0, $v0, 5
-/* EC232C 8024012C 3C068009 */  lui       $a2, %hi(D_8008D2C0)
+/* EC232C 8024012C 3C068009 */  lui       $a2, %hi(dead_gItemTable)
 /* EC2330 80240130 00C23021 */  addu      $a2, $a2, $v0
-/* EC2334 80240134 8CC6D2C0 */  lw        $a2, %lo(D_8008D2C0)($a2)
+/* EC2334 80240134 8CC6D2C0 */  lw        $a2, %lo(dead_gItemTable)($a2)
 /* EC2338 80240138 0C0B551A */  jal       dead_set_variable
 /* EC233C 8024013C 0220282D */   daddu    $a1, $s1, $zero
 /* EC2340 80240140 8FBF0018 */  lw        $ra, 0x18($sp)

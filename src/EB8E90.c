@@ -1,10 +1,12 @@
 #include "common.h"
 
+#define NAMESPACE EB8E90
+
 INCLUDE_ASM(s32, "EB8E90", func_80240040_EB8E90);
 
 INCLUDE_ASM(s32, "EB8E90", func_80240198_EB8FE8);
 
-INCLUDE_ASM(s32, "EB8E90", func_80240440_EB9290);
+#include "world/common/DeadUnkNpcAIFunc1.inc.c"
 
 INCLUDE_ASM(s32, "EB8E90", func_80240500_EB9350);
 

@@ -1,8 +1,10 @@
 #include "common.h"
 
+#define NAMESPACE EB1170
+
 INCLUDE_ASM(s32, "EB1170", func_80240310_EB1170);
 
-INCLUDE_ASM(s32, "EB1170", func_802403C4_EB1224);
+#include "world/common/DeadGetItemName.inc.c"
 
 INCLUDE_ASM(s32, "EB1170", func_80240428_EB1288);
 
