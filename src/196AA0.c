@@ -52,8 +52,8 @@ INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 
 INCLUDE_ASM(s32, "196AA0", func_80268E88);
 
-// ARRAY_COUNT possibly placed in a temp var
-//#ifndef NON_MATCHING
+// regalloc + some logical difference, instructions are correct
+#ifdef NON_MATCHING
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -154,9 +154,9 @@ s32 check_block_input(s32 buttonMask) {
 
     return block;
 }
-//#else
-//INCLUDE_ASM(s32, "196AA0", check_block_input);
-//#endif
+#else
+INCLUDE_ASM(s32, "196AA0", check_block_input);
+#endif
 
 INCLUDE_ASM(s32, "196AA0", func_80269118);
 
