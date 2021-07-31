@@ -51,7 +51,7 @@ void reset_actor_blur(Actor* actor) {
         if (decorationTable->unk_7DB != 0) {
             decorationTable->unk_7DB--;
             if (decorationTable->unk_7DB == 0) {
-                actor->flags &= ~0x10000000;
+                actor->flags &= ~ACTOR_FLAG_10000000;
                 decorationTable->effectType = 1;
             }
         }
@@ -93,7 +93,7 @@ void enable_player_blur(void) {
 
     decorationTable->effectType = 0;
     decorationTable->unk_7DB++;
-    playerActor->flags |= 0x10000000;
+    playerActor->flags |= ACTOR_FLAG_10000000;
     decorationTable->unk_7D8 = 0;
     decorationTable->unk_7D9 = 0;
 
@@ -129,7 +129,7 @@ void func_80254950(void) {
     if (decorationTable->unk_7DB != 0) {
         decorationTable->unk_7DB--;
         if (decorationTable->unk_7DB == 0) {
-            playerActor->flags &= ~0x10000000;
+            playerActor->flags &= ~ACTOR_FLAG_10000000;
             decorationTable->effectType = 1;
         }
     }
@@ -146,7 +146,7 @@ void func_802549C0(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
 
-    playerActor->flags &= ~0x10000000;
+    playerActor->flags &= ~ACTOR_FLAG_10000000;
     decorationTable->unk_7DB = 0;
     decorationTable->effectType = 1;
 }

@@ -235,7 +235,7 @@ void btl_update(void) {
     battleStatus->holdInputBuffer[battleStatus->inputBufferPos] = battleStatus->currentButtonsDown;
 
     battleStatus->inputBufferPos++;
-    if (battleStatus->inputBufferPos >= 64) {
+    if (battleStatus->inputBufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
         battleStatus->inputBufferPos = 0;
     }
 
@@ -453,14 +453,14 @@ void func_8023ED5C(void) {
                 for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                     actor = battleStatus->enemyActors[i];
 
-                    if (actor != NULL && !(actor->flags & 1)) {
+                    if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                         renderTaskPtr->appendGfxArg = i;
                         renderTaskPtr->appendGfx = func_80257B28;
                         renderTaskPtr->distance = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
 
-                        if (actor->flags & 0x10000000) {
+                        if (actor->flags & ACTOR_FLAG_10000000) {
                             renderTaskPtr->appendGfxArg = actor;
                             renderTaskPtr->appendGfx = func_8025595C;
                             renderTaskPtr->distance = actor->currentPos.z;
@@ -479,14 +479,14 @@ void func_8023ED5C(void) {
                 }
 
                 actor = battleStatus->partnerActor;
-                if (actor != NULL && !(actor->flags & 1)) {
+                if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = func_80257B48;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & 0x10000000) {
+                    if (actor->flags & ACTOR_FLAG_10000000) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = func_8025599C;
                         renderTaskPtr->distance = actor->currentPos.z;
@@ -504,14 +504,14 @@ void func_8023ED5C(void) {
                 }
 
                 actor = battleStatus->playerActor;
-                if (actor != NULL && !(actor->flags & 1)) {
+                if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = func_80257DA4;
                     renderTaskPtr->distance = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
-                    if (actor->flags & 0x10000000) {
+                    if (actor->flags & ACTOR_FLAG_10000000) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = func_80254C50;
                         renderTaskPtr->distance = actor->currentPos.z;

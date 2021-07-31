@@ -32,13 +32,13 @@ void func_802B65E8_E23CC8(void) {
     phys_update_interact_collider();
 
     if (magnitude == 0.0f) {
-        set_action_state(0);
+        set_action_state(ACTION_STATE_IDLE);
         return;
     }
 
     playerStatus->targetYaw = angle;
     if (gGameStatusPtr->peachAnimIdx == 0 && sqrtf(SQ(playerStatus->stickAxis[0]) + SQ(playerStatus->stickAxis[1])) > 55.0f) {
-        set_action_state(2);
+        set_action_state(ACTION_STATE_RUN);
         return;
     }
 

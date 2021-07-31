@@ -200,7 +200,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     if (battleStatus->lastAttackDamage > 0) {
         func_80267018(actor, 1);
     }
-    actor->flags |= 0x80000;
+    actor->flags |= ACTOR_FLAG_80000;
     dispatch_event_actor(actor, dispatchEvent);
     return 0;
 }
@@ -549,7 +549,7 @@ ApiStatus DropStarPoints(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
-    Actor* enemy;
+    Actor* dropper;
     f32 playerLevel;
     f32 enemyLevel;
     ActorID actorID;
@@ -560,10 +560,10 @@ ApiStatus DropStarPoints(ScriptInstance* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
-    enemy = get_actor(actorID);
+    dropper = get_actor(actorID);
 
-    enemyLevel = enemy->staticActorData->level;
-    if (enemy->staticActorData->level == 0.0f) {
+    enemyLevel = dropper->staticActorData->level;
+    if (dropper->staticActorData->level == 0.0f) {
         enemyLevel = 1.0f;
     }
 
@@ -583,15 +583,15 @@ ApiStatus DropStarPoints(ScriptInstance* script, s32 isInitialCall) {
         s32 spawnMode;
         s32 i;
 
-        if (enemy->flags & 0x800) {
-            spawnMode = 25;
+        if (dropper->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_19;
         } else {
-            spawnMode = 23;
+            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_17;
         }
 
         for (i = 0; i < numToDrop; i++) {
-            make_item_entity_delayed(ITEM_STAR_POINT, enemy->currentPos.x, enemy->currentPos.y, enemy->currentPos.z,
-                                     spawnMode, i, 0);
+            make_item_entity_delayed(ITEM_STAR_POINT, dropper->currentPos.x, dropper->currentPos.y,
+                                     dropper->currentPos.z, spawnMode, i, 0);
         }
 
         battleStatus->incrementStarPointDelay = 40;

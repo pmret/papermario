@@ -861,7 +861,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 ApiStatus UseDynamicShadow(ScriptInstance* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
 
-    if (get_variable(script, *script->ptrReadPos) != 0) {
+    if (get_variable(script, *script->ptrReadPos)) {
         Shadow* shadow;
 
         entity->flags |= 4;
