@@ -65,8 +65,6 @@ INCLUDE_ASM(s32, "196AA0", func_80268C9C);
 
 INCLUDE_ASM(s32, "196AA0", func_80268E88);
 
-// regalloc + some logical difference, instructions are correct
-#ifdef NON_MATCHING
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
@@ -90,8 +88,6 @@ s32 check_block_input(s32 buttonMask) {
         return FALSE;
     }
 
-    block = FALSE;
-
     if (playerData->hitsTaken < 9999) {
         playerData->hitsTaken += 1;
         d8029FBE0->hitsTakenIsMax = FALSE;
@@ -108,7 +104,8 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     // Pre-window mashing check
-    bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
+    bufferPos = battleStatus->inputBufferPos;
+    bufferPos -= mashWindow + blockWindow;
 
     if (bufferPos < 0) {
         bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
@@ -126,7 +123,8 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     // Block check
-    bufferPos = battleStatus->inputBufferPos - blockWindow;
+    bufferPos = battleStatus->inputBufferPos;
+    bufferPos -= blockWindow;
     if (bufferPos < 0) {
         bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
     }
@@ -149,13 +147,14 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
-    ignoreWindow = mashWindow + blockWindow;
     if (block == TRUE) {
-        bufferPos = battleStatus->inputBufferPos - ignoreWindow;
+        bufferPos = battleStatus->inputBufferPos;
+        bufferPos -= mashWindow + blockWindow;
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
-        for (i = 0; i < ignoreWindow; i++) {
+
+        for (i = 0; i < mashWindow + blockWindow; i++) {
             if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                 bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
@@ -170,9 +169,6 @@ s32 check_block_input(s32 buttonMask) {
 
     return block;
 }
-#else
-INCLUDE_ASM(s32, "196AA0", check_block_input);
-#endif
 
 INCLUDE_ASM(s32, "196AA0", func_80269118);
 
