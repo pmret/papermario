@@ -258,13 +258,11 @@ s32 check_block_input(s32 buttonMask) {
         return TRUE;
     }
 
-    if (battleStatus->unk_83 == 0 || (gGameStatusPtr->demoFlags & 1)) {
+    if (!battleStatus->unk_83 || (gGameStatusPtr->demoFlags & 1)) {
         return FALSE;
     }
 
-    block = FALSE;
-
-    if (playerData->hitsTaken < 9999) {
+    if (playerData->hitsTaken < 9999U) {
         playerData->hitsTaken += 1;
         d8029FBE0->hitsTakenIsMax = FALSE;
     } else {
@@ -280,7 +278,8 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     // Pre-window mashing check
-    bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
+    bufferPos = battleStatus->inputBufferPos;
+    bufferPos -= mashWindow + blockWindow;
 
     if (bufferPos < 0) {
         bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
@@ -298,7 +297,8 @@ s32 check_block_input(s32 buttonMask) {
     }
 
     // Block check
-    bufferPos = battleStatus->inputBufferPos - blockWindow;
+    bufferPos = battleStatus->inputBufferPos;
+    bufferPos -= blockWindow;
     if (bufferPos < 0) {
         bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
     }
@@ -323,10 +323,12 @@ s32 check_block_input(s32 buttonMask) {
     // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
     ignoreWindow = mashWindow + blockWindow;
     if (block == TRUE) {
-        bufferPos = battleStatus->inputBufferPos - ignoreWindow;
+        bufferPos = battleStatus->inputBufferPos;
+        bufferPos -= ignoreWindow;
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
+
         for (i = 0; i < ignoreWindow; i++) {
             if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                 bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
@@ -335,7 +337,6 @@ s32 check_block_input(s32 buttonMask) {
             bufferPos++;
         }
     }
-
     if (block && !d8029FBE0->hitsTakenIsMax) {
         playerData->hitsBlocked += 1;
     }
