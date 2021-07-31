@@ -227,8 +227,8 @@ typedef struct PlayerData {
     /* 0x293 */ char unk_293[0x1];
     /* 0x294 */ s16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
-    /* 0x298 */ s16 hitsTaken;
-    /* 0x29A */ s16 hitsBlocked;
+    /* 0x298 */ u16 hitsTaken;
+    /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
@@ -751,8 +751,8 @@ typedef struct BattleStatus {
     /* 0x22C */ s32 dpadY; /* 0-60 */
     /* 0x230 */ s32 holdInputBuffer[64];
     /* 0x330 */ s32 pushInputBuffer[64];
-    /* 0x430 */ u8 holdInputBufferPos;
-    /* 0x431 */ u8 inputBufferPos;
+    /* 0x430 */ s8 holdInputBufferPos;
+    /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
     /* 0x434 */ s32 unk_434;
