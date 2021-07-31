@@ -105,7 +105,7 @@ glabel L802428CC_EEF9CC
 glabel L802428E4_EEF9E4
 /* EEF9E4 802428E4 0280202D */  daddu     $a0, $s4, $zero
 /* EEF9E8 802428E8 0200282D */  daddu     $a1, $s0, $zero
-/* EEF9EC 802428EC 0C09058A */  jal       func_80241628_EEE728
+/* EEF9EC 802428EC 0C09058A */  jal       EEDF50_DeadUnkNpcAIFunc1
 /* EEF9F0 802428F0 0260302D */   daddu    $a2, $s3, $zero
 glabel L802428F4_EEF9F4
 /* EEF9F4 802428F4 0280202D */  daddu     $a0, $s4, $zero
