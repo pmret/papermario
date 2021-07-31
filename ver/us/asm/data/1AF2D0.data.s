@@ -993,7 +993,33 @@ glabel D_802944A0
 .word 0x00000082, 0x00000078, 0x0000006E, 0x00000064, 0x0000005A, 0x00000050, 0x00000046, 0x0000003C
 
 glabel actionCommandDmaTable
-.word 0x00000000, 0x00000000, 0x00000000, 0x004219F0, 0x00422000, func_802A9000_4219F0, 0x00422000, 0x00422AD0, func_802A9000_4219F0, 0x00422AD0, 0x004233F0, func_802A9000_4219F0, 0x004233F0, 0x00423C70, func_802A9000_4219F0, 0x00423C70, 0x00425590, func_802A9000_4219F0, 0x00425590, 0x00425B50, func_802A9000_4219F0, 0x00425B50, 0x00426170, func_802A9000_4219F0, 0x00426170, 0x004269D0, func_802A9000_4219F0, 0x004269D0, 0x004273B0, func_802A9000_4219F0, 0x004273B0, 0x00427A70, func_802A9000_4219F0, 0x00427A70, 0x004282E0, func_802A9000_4219F0, 0x004282E0, 0x00428A70, func_802A9000_4219F0, 0x00428A70, 0x00429320, func_802A9000_4219F0, 0x00429320, 0x00429D20, func_802A9000_4219F0, 0x00429D20, 0x0042A4F0, func_802A9000_4219F0, 0x0042CF10, 0x0042DA10, func_802A9000_4219F0, 0x0042DA10, 0x0042E3A0, func_802A9000_4219F0, 0x0042E3A0, 0x0042EE20, func_802A9000_4219F0, 0x0042EE20, 0x0042F6E0, func_802A9000_4219F0, 0x0042F6E0, 0x00430020, func_802A9000_4219F0, 0x00430020, 0x004309A0, func_802A9000_4219F0, 0x0042A4F0, 0x0042C6F0, func_802A9000_4219F0, 0x0042C6F0, 0x0042CF10, func_802A9000_4219F0
+.word 0x00000000, 0x00000000, 0x00000000
+.word action_cmd_jump_ROM_START, action_cmd_jump_ROM_END, action_cmd_jump_VRAM
+.word action_cmd_hammer_ROM_START, action_cmd_hammer_ROM_END, action_cmd_hammer_VRAM
+.word action_cmd_flee_ROM_START, action_cmd_flee_ROM_END, action_cmd_flee_VRAM
+.word action_cmd_break_flee_ROM_START, action_cmd_break_flee_ROM_END, action_cmd_break_flee_VRAM
+.word action_cmd_whirlwind_ROM_START, action_cmd_whirlwind_ROM_END, action_cmd_whirlwind_VRAM
+.word action_cmd_leech_ROM_START, action_cmd_leech_ROM_END, action_cmd_leech_VRAM
+.word action_cmd_07_ROM_START, action_cmd_07_ROM_END, action_cmd_07_VRAM
+.word action_cmd_dizzy_shell_ROM_START, action_cmd_dizzy_shell_ROM_END, action_cmd_dizzy_shell_VRAM
+.word action_cmd_fire_shell_ROM_START, action_cmd_fire_shell_ROM_END, action_cmd_fire_shell_VRAM
+.word action_cmd_0A_ROM_START, action_cmd_0A_ROM_END, action_cmd_0A_VRAM
+.word action_cmd_bomb_ROM_START, action_cmd_bomb_ROM_END, action_cmd_bomb_VRAM
+.word action_cmd_body_slam_ROM_START, action_cmd_body_slam_ROM_END, action_cmd_body_slam_VRAM
+.word action_cmd_air_lift_ROM_START, action_cmd_air_lift_ROM_END, action_cmd_air_lift_VRAM
+.word action_cmd_air_raid_ROM_START, action_cmd_air_raid_ROM_END, action_cmd_air_raid_VRAM
+.word action_cmd_squirt_ROM_START, action_cmd_squirt_ROM_END, action_cmd_squirt_VRAM
+
+.word action_cmd_power_shock_ROM_START, action_cmd_power_shock_ROM_END, action_cmd_power_shock_VRAM
+.word action_cmd_mega_shock_ROM_START, action_cmd_mega_shock_ROM_END, action_cmd_mega_shock_VRAM
+.word action_cmd_smack_ROM_START, action_cmd_smack_ROM_END, action_cmd_smack_VRAM
+.word action_cmd_spiny_surge_ROM_START, action_cmd_spiny_surge_ROM_END, action_cmd_spiny_surge_VRAM
+.word action_cmd_hurricane_ROM_START, action_cmd_hurricane_ROM_END, action_cmd_hurricane_VRAM
+.word action_cmd_spook_ROM_START, action_cmd_spook_ROM_END, action_cmd_spook_VRAM
+/*.word action_cmd__ROM_START, action_cmd__ROM_END, action_cmd__VRAM*/
+
+.word action_cmd_water_block_ROM_START, action_cmd_water_block_ROM_END, action_cmd_water_block_VRAM
+.word action_cmd_tidal_wave_ROM_START, action_cmd_tidal_wave_ROM_END, action_cmd_tidal_wave_VRAM
 
 glabel DoSleepHit
 .word 0x00000043, 0x00000001, func_80271210, 0x00000002, 0x00000000, 0x00000001, 0x00000000
