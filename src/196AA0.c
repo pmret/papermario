@@ -1,12 +1,28 @@
 #include "common.h"
 
-// playerData status?
+// action command state
 extern struct D_8029FBE0 {
     /* 0x00 */ char unk_00[0x6D];
     /* 0x6E */ s16 hitsTakenIsMax;
+    /* 0x70 */ char unk_70[2];
+    /* 0x72 */ char unk_72[2];
+    /* 0x74 */ s16 unk_74;
+    /* 0x76 */ s16 unk_76;
+    /* 0x78 */ s16 unk_78;
+    /* 0x7A */ s16 unk_7A;
+    /* 0x7C */ s16 unk_7C;
+    /* 0x7E */ s16 unk_7E;
+    /* 0x80 */ s8 unk_80;
 } D_8029FBE0; // size unknown
 
-INCLUDE_ASM(s32, "196AA0", LoadActionCommand);
+extern void* actionCommandDmaTable[23];
+
+ApiStatus LoadActionCommand(ScriptInstance* script, s32 isInitialCall) {
+    s32 cmd = get_variable(script, *script->ptrReadPos);
+
+    dma_copy(actionCommandDmaTable[cmd * 3], actionCommandDmaTable[cmd * 3 + 1], actionCommandDmaTable[cmd * 3 + 2]);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "196AA0", func_80268224);
 
@@ -149,7 +165,17 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "196AA0", SetupMashMeter);
+ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    D_8029FBE0.unk_80 = get_variable(script, *args++);
+    D_8029FBE0.unk_76 = get_variable(script, *args++);
+    D_8029FBE0.unk_78 = get_variable(script, *args++);
+    D_8029FBE0.unk_7A = get_variable(script, *args++);
+    D_8029FBE0.unk_7C = get_variable(script, *args++);
+    D_8029FBE0.unk_7E = get_variable(script, *args++);
+    D_8029FBE0.unk_74 = D_8029FBE0.unk_76 / 2;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus GetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
