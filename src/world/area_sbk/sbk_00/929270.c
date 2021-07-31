@@ -28,9 +28,9 @@ Script N(80240198) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
+    SI_WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
     SetSpriteShading(-1);
-    if (STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
+    if (SI_STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
         DisablePulseStone(0);
     }
     SetCamPerspective(0, 3, 25, 16, 4096);

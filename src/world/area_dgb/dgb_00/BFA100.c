@@ -319,7 +319,7 @@ Script N(802413F4) = SCRIPT({
     SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 5, MESSAGE_ID(0x0E, 0x00E8));
     SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
     spawn N(80240F50);
-    STORY_PROGRESS = STORY_CH3_ESCAPED_TUBBAS_MANOR;
+    SI_STORY_PROGRESS = STORY_CH3_ESCAPED_TUBBAS_MANOR;
     DisablePlayerInput(FALSE);
 });
 

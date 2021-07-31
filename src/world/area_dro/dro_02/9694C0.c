@@ -179,7 +179,7 @@ Script N(80243D10) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_DRY_DRY_OUTPOST;
+    SI_WORLD_LOCATION = LOCATION_DRY_DRY_OUTPOST;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -422,12 +422,12 @@ s32 N(npcList_80244C70)[] = {
 Script N(80244C78) = SCRIPT({
     spawn N(802441C0);
     ParentColliderToModel(8, 21);
-    if (STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
+    if (SI_STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
         RotateModel(21, 18, 0, 1, 0);
         UpdateColliderTransform(8);
     }
     MakeDoorAdvanced(4, N(openDoor_80244340), N(moveWalls_80244390), N(dropDoor_80244474), N(toggleVis_8024468C), 15, 16, 133, N(npcList_80244C64));
-    if (STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
+    if (SI_STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
         bind N(8024486C) TRIGGER_WALL_PRESS_A 8;
         bind N(80244A68) TRIGGER_WALL_PRESS_A 10;
     }
@@ -2137,7 +2137,7 @@ Script N(8024B530) = SCRIPT({
 
 Script N(8024B5A0) = SCRIPT({
     SI_VAR(12) = 0;
-    if (STORY_PROGRESS < STORY_CH2_PARAKARRY_JOINED_PARTY) {
+    if (SI_STORY_PROGRESS < STORY_CH2_PARAKARRY_JOINED_PARTY) {
         return;
     }
     N(func_802439FC_96CBBC)();
@@ -2195,7 +2195,7 @@ Script N(8024B8A0) = SCRIPT({
 });
 
 Script N(interact_8024B8F0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(787) == 1) {
                 SpeakToPlayer(NPC_SELF, 0xB80004, 0xB80001, 0, MESSAGE_ID(0x0D, 0x00B2));
@@ -2223,13 +2223,13 @@ Script N(interact_8024B8F0) = SCRIPT({
 
 Script N(init_8024BA50) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024B8F0));
-    if (STORY_PROGRESS >= STORY_UNUSED_FFFFFFCC) {
+    if (SI_STORY_PROGRESS >= STORY_UNUSED_FFFFFFCC) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 Script N(interact_8024BA9C) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(747) == 0) {
                 SpeakToPlayer(NPC_SELF, 0x930204, 0x930201, 0, MESSAGE_ID(0x0D, 0x0091));
@@ -2254,7 +2254,7 @@ Script N(init_8024BBAC) = SCRIPT({
 });
 
 Script N(interact_8024BBD0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(3) == 0) {
                 SpeakToPlayer(NPC_SELF, 0x930004, 0x930001, 0, MESSAGE_ID(0x0D, 0x00A1));
@@ -2285,7 +2285,7 @@ Script N(init_8024BD28) = SCRIPT({
 });
 
 Script N(interact_8024BD4C) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(4) == 0) {
                 SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00A5));
@@ -2320,7 +2320,7 @@ Script N(init_8024BF10) = SCRIPT({
 });
 
 Script N(interact_8024BF34) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(5) == 0) {
                 SpeakToPlayer(NPC_SELF, 0x940005, 0x940001, 0, MESSAGE_ID(0x0D, 0x00AB));
@@ -2405,7 +2405,7 @@ Script N(8024C248) = SCRIPT({
 });
 
 Script N(idle_8024C450) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_BOUGHT_SECRET_ITEMS {}
         < STORY_CH2_GOT_PULSE_STONE {
             SetNpcPos(NPC_SELF, -335, 163, -260);
@@ -2422,7 +2422,7 @@ Script N(interact_8024C4EC) = SCRIPT({
         SpeakToPlayer(NPC_MOUSTAFA, 0xBD0005, 0xBD0001, 0, MESSAGE_ID(0x0D, 0x00CF));
         return;
     }
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH2_BOUGHT_SECRET_ITEMS {
             SI_VAR(11) = 0;
             SpeakToPlayer(NPC_DISGUISED_MOUSTAFA, 0xBC0004, 0xBC0001, 0, MESSAGE_ID(0x0D, 0x00B4));
@@ -2565,18 +2565,18 @@ Script N(interact_8024C4EC) = SCRIPT({
             SI_VAR(1) = 1;
             await N(80244DE4);
             AddKeyItem(ITEM_PULSE_STONE);
-            STORY_PROGRESS = STORY_CH2_GOT_PULSE_STONE;
+            SI_STORY_PROGRESS = STORY_CH2_GOT_PULSE_STONE;
             SpeakToPlayer(NPC_MOUSTAFA, 0xBD0005, 0xBD0001, 0, MESSAGE_ID(0x0D, 0x00CA));
             kill SI_VAR(10);
             spawn N(80243AF0);
         }
         >= -63 {
-            match STORY_PROGRESS {
+            match SI_STORY_PROGRESS {
                 < STORY_CH2_UNCOVERED_DRY_DRY_RUINS {
                     SpeakToPlayer(NPC_MOUSTAFA, 0xBD0005, 0xBD0001, 0, MESSAGE_ID(0x0D, 0x00CB));
                 }
                 >= STORY_CH2_UNCOVERED_DRY_DRY_RUINS {
-                    if (STORY_PROGRESS >= STORY_CH2_DEFEATED_TUTANKOOPA) {
+                    if (SI_STORY_PROGRESS >= STORY_CH2_DEFEATED_TUTANKOOPA) {
                         if (SI_SAVE_FLAG(751) == 0) {
                             SpeakToPlayer(NPC_MOUSTAFA, 0xBD0005, 0xBD0001, 0, MESSAGE_ID(0x0D, 0x00CD));
                             SetPlayerAnimation(ANIM_10002);
@@ -2651,12 +2651,12 @@ Script N(idle_8024D154) = SCRIPT({
     NpcMoveTo(NPC_SELF, -371, 5, 20);
     NpcMoveTo(NPC_SELF, -487, 5, 20);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    STORY_PROGRESS = STORY_CH2_SPOKE_WITH_SHEEK;
+    SI_STORY_PROGRESS = STORY_CH2_SPOKE_WITH_SHEEK;
 });
 
 Script N(init_8024D3E8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024D154));
-    if (STORY_PROGRESS >= STORY_CH2_SPOKE_WITH_SHEEK) {
+    if (SI_STORY_PROGRESS >= STORY_CH2_SPOKE_WITH_SHEEK) {
         RemoveNpc(NPC_SELF);
     }
 });
@@ -3145,7 +3145,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance* script, s32 isInitialCall) {
     set_variable(script, SI_SAVE_FLAG(1768), phi_s0);
     set_variable(script, SI_SAVE_FLAG(1769), phi_s7);
     temp_s0_2 = get_variable(NULL, SI_SAVE_VAR(352));
-    temp_v0 = get_variable(NULL, SI_SAVE_VAR(0));
+    temp_v0 = get_variable(NULL, SI_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
         if (temp_v0 < (*(N(quizRequirements) + i)).unk_00) {
@@ -3237,7 +3237,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
 
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
-        remove_effect(N(D_8024EFC0), effectPtr);
+        remove_effect(N(D_8024EFC0));
         free_generic_entity(gPauseMenuCursorPosY);
         return ApiStatus_DONE2;
     }
@@ -3562,8 +3562,9 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
     Matrix4f sp60;
     Matrix4f spA0;
 
-    guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(*CC_ptr, SI_ARRAY(4)),
-                get_variable(*CC_ptr, SI_ARRAY(5)), get_variable(*CC_ptr, SI_ARRAY(6)));
+    guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
+                get_variable(*CC_ptr, SI_ARRAY(4)), get_variable(*CC_ptr, SI_ARRAY(5)),
+                get_variable(*CC_ptr, SI_ARRAY(6)));
 
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
@@ -3898,8 +3899,9 @@ void N(func_80242EAC_96C06C)(ScriptInstance* script, s32 isInitialCall) {
     Matrix4f sp20;
     u32 temp_s1;
 
-    guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 0.71428573f, get_variable(N(D_8024EFCC),
-                SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)), get_variable(N(D_8024EFCC), SI_ARRAY(6)));
+    guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
+                get_variable(N(D_8024EFCC), SI_ARRAY(4)), get_variable(N(D_8024EFCC), SI_ARRAY(5)),
+                get_variable(N(D_8024EFCC), SI_ARRAY(6)));
 
     temp_s1 = N(func_8024190C_96AACC)(&N(D_8024F010)[0], &sp20);
     N(func_8024190C_96AACC)(&N(D_8024F010)[1], &sp20);

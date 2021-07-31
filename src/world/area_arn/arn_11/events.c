@@ -74,7 +74,7 @@ Script N(enterSingleDoor_802404F8) = SCRIPT({
     SI_VAR(3) = -1;
     await EnterSingleDoor;
     spawn N(802404CC);
-    if (STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
+    if (SI_STORY_PROGRESS < STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         sleep 10;
         spawn N(802400F0);
         spawn N(802401BC);
@@ -84,7 +84,7 @@ Script N(enterSingleDoor_802404F8) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_WINDY_MILL;
+    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524290);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -234,11 +234,11 @@ Script N(defeat_802409DC) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
+    SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
 });
 
 Script N(init_80240E70) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
+    if (SI_STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
         SetSelfVar(0, 0);

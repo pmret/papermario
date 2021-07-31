@@ -13,8 +13,8 @@ glabel func_802AE000_316C00
 /* 316C20 802AE020 0000802D */  daddu     $s0, $zero, $zero
 /* 316C24 802AE024 3C05B000 */  lui       $a1, 0xb000
 /* 316C28 802AE028 34A50574 */  ori       $a1, $a1, 0x574
-/* 316C2C 802AE02C 3C04800A */  lui       $a0, %hi(carthandle)
-/* 316C30 802AE030 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
+/* 316C2C 802AE02C 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 316C30 802AE030 8C84A638 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 316C34 802AE034 27A60010 */  addiu     $a2, $sp, 0x10
 /* 316C38 802AE038 AFB20020 */  sw        $s2, 0x20($sp)
 /* 316C3C 802AE03C 0200902D */  daddu     $s2, $s0, $zero
@@ -40,8 +40,8 @@ glabel func_802AE000_316C00
 /* 316C8C 802AE08C 0060B02D */  daddu     $s6, $v1, $zero
 .L802AE090:
 /* 316C90 802AE090 0220282D */  daddu     $a1, $s1, $zero
-/* 316C94 802AE094 3C04800A */  lui       $a0, %hi(carthandle)
-/* 316C98 802AE098 8C84A638 */  lw        $a0, %lo(carthandle)($a0)
+/* 316C94 802AE094 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 316C98 802AE098 8C84A638 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 316C9C 802AE09C 02A0F809 */  jalr      $s5
 /* 316CA0 802AE0A0 27A60010 */   addiu    $a2, $sp, 0x10
 /* 316CA4 802AE0A4 8FA30010 */  lw        $v1, 0x10($sp)

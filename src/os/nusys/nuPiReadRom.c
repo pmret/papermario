@@ -25,7 +25,7 @@ void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size) {
         ioMesg.devAddr = rom_addr;
         ioMesg.size = mesgSize;
 
-        osEPiStartDma(carthandle, &ioMesg, OS_READ);
+        osEPiStartDma(nuPiCartHandle, &ioMesg, OS_READ);
         osRecvMesg(&queue, &mesg, OS_MESG_BLOCK);
 
         rom_addr += mesgSize;

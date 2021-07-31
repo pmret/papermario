@@ -21,8 +21,8 @@ glabel func_80029820
 /* 4C60 80029860 0C019554 */  jal       func_80065550
 /* 4C64 80029864 24060001 */   addiu    $a2, $zero, 1
 /* 4C68 80029868 27A50010 */  addiu     $a1, $sp, 0x10
-/* 4C6C 8002986C 3C04800A */  lui       $a0, %hi(carthandle)
-/* 4C70 80029870 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 4C6C 8002986C 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 4C70 80029870 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 4C74 80029874 24060001 */  addiu     $a2, $zero, 1
 /* 4C78 80029878 A3A00012 */  sb        $zero, 0x12($sp)
 /* 4C7C 8002987C AFB00014 */  sw        $s0, 0x14($sp)

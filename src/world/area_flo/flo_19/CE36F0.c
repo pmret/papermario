@@ -92,7 +92,7 @@ Script N(80240BF8) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
+    SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -162,7 +162,7 @@ Script N(main) = SCRIPT({
         }
     }
     await N(802409C0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_8024030C_CE39FC)();
     }
 });
@@ -650,7 +650,7 @@ Script N(80242A2C) = SCRIPT({
         sleep 1;
     }
     sleep 15;
-    STORY_PROGRESS = STORY_CH6_GREW_MAGIC_BEANSTALK;
+    SI_STORY_PROGRESS = STORY_CH6_GREW_MAGIC_BEANSTALK;
     GotoMap("flo_00", 7);
 });
 

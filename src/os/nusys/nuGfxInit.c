@@ -2,8 +2,7 @@
 #include "nu/nusys.h"
 
 extern u16* FrameBuf[3];
-extern UNK_PTR D_8009A610;
-extern UNK_PTR D_80093BA0;
+extern UNK_PTR nugfx_ucode;
 extern Gfx rdpstateinit_dl[];
 
 void nuGfxInitEX2(void) {
@@ -14,11 +13,10 @@ void nuGfxInitEX2(void) {
     nuGfxSetCfb(FrameBuf, NU_GFX_FRAMEBUFFER_NUM);
     nuGfxSetZBuffer((u16*) NU_GFX_ZBUFFER_ADDR);
     nuGfxSwapCfbFuncSet(nuGfxSwapCfb);
-    D_8009A610 = &D_80093BA0;
+    nuGfxUcode = &nugfx_ucode;
     nuGfxTaskMgrInit();
 
     ptr = gfx;
-    // TODO: Verify that this macro call works in PM64.
     gSPDisplayList(ptr++, OS_K0_TO_PHYSICAL(&rdpstateinit_dl));
     gDPFullSync(ptr++);
     gSPEndDisplayList(ptr++);

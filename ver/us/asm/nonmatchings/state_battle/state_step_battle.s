@@ -11,11 +11,11 @@ glabel state_step_battle
 /* ECFC 800338FC 82020000 */  lb        $v0, ($s0)
 /* ED00 80033900 1443000F */  bne       $v0, $v1, .L80033940
 /* ED04 80033904 92040000 */   lbu      $a0, ($s0)
-/* ED08 80033908 3C02800A */  lui       $v0, %hi(D_8009A658)
-/* ED0C 8003390C 8C42A658 */  lw        $v0, %lo(D_8009A658)($v0)
+/* ED08 80033908 3C02800A */  lui       $v0, %hi(nuGfxCfb)
+/* ED0C 8003390C 8C42A658 */  lw        $v0, %lo(nuGfxCfb)($v0)
 /* ED10 80033910 8C430004 */  lw        $v1, 4($v0)
-/* ED14 80033914 3C02800A */  lui       $v0, %hi(D_8009A64C)
-/* ED18 80033918 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
+/* ED14 80033914 3C02800A */  lui       $v0, %hi(nuGfxCfb_ptr)
+/* ED18 80033918 8C42A64C */  lw        $v0, %lo(nuGfxCfb_ptr)($v0)
 /* ED1C 8003391C 14620089 */  bne       $v1, $v0, .L80033B44
 /* ED20 80033920 2484FFFF */   addiu    $a0, $a0, -1
 /* ED24 80033924 3C02800A */  lui       $v0, %hi(gOverrideFlags)

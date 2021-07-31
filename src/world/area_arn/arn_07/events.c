@@ -64,7 +64,7 @@ Script N(802439B0) = SCRIPT({
     FindKeyItem(31, SI_VAR(0));
     RemoveKeyItemAt(SI_VAR(0));
     CloseChoicePopup();
-    STORY_PROGRESS = STORY_CH3_UNLOCKED_WINDY_MILL;
+    SI_STORY_PROGRESS = STORY_CH3_UNLOCKED_WINDY_MILL;
     N(GetEntityPosition)(SI_MAP_VAR(0), SI_VAR(0), SI_VAR(1), SI_VAR(2));
     PlaySoundAt(0x269, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) = SI_MAP_VAR(0);
@@ -78,7 +78,7 @@ Script N(80243B28) = SCRIPT({
 });
 
 Script N(makeEntities) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
         MakeEntity(0x802BCD68, 10, 30, -155, 0, MAKE_ENTITY_END);
         AssignScript(N(80243B28));
         SI_MAP_VAR(0) = SI_VAR(0);
@@ -265,7 +265,7 @@ Script N(80243FE8) = SCRIPT({
     kill SI_VAR(10);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
     EnableNpcShadow(NPC_SELF, FALSE);
-    STORY_PROGRESS = STORY_CH3_DEFEATED_TUBBA_BLUBBA;
+    SI_STORY_PROGRESS = STORY_CH3_DEFEATED_TUBBA_BLUBBA;
     SetMusicTrack(0, SONG_CHEERFUL_BOOS_MANSION, 0, 8);
     GetCurrentPartnerID(SI_VAR(6));
     if (SI_VAR(6) == 9) {
@@ -466,7 +466,7 @@ Script N(defeat_80244FB8) = SCRIPT({
 });
 
 Script N(init_80245058) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
@@ -475,7 +475,7 @@ Script N(init_80245090) = SCRIPT({
     SetSelfVar(0, 0);
     BindNpcIdle(NPC_SELF, N(idle_80244C54));
     BindNpcDefeat(NPC_SELF, N(defeat_80244FB8));
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
@@ -483,19 +483,19 @@ Script N(init_80245090) = SCRIPT({
 Script N(init_80245104) = SCRIPT({
     SetSelfVar(0, 0);
     BindNpcIdle(NPC_SELF, N(idle_80244CC8));
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 Script N(init_80245164) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 Script N(init_8024519C) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
@@ -672,7 +672,7 @@ Script N(80245304) = SCRIPT({
     ResetCam(0, 3);
     sleep 20;
     SetPlayerAnimation(ANIM_10002);
-    STORY_PROGRESS = STORY_CH3_STAR_SPRIT_DEPARTED;
+    SI_STORY_PROGRESS = STORY_CH3_STAR_SPRIT_DEPARTED;
     spawn N(80241F10);
     EnablePartnerAI();
     DisablePlayerInput(FALSE);
@@ -995,8 +995,8 @@ StaticNpc N(npcGroup_80246E7C) = {
 };
 
 Script N(init_8024706C) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
-        if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
+        if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
             RemoveNpc(NPC_SELF);
         }
     }

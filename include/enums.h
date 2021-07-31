@@ -1192,39 +1192,41 @@ enum Elements {
 
 typedef UNK_TYPE Event;
 enum Events {
-    EVENT_HIT_COMBO             = 9,
+    EVENT_HIT_COMBO               = 9,
     EVENT_HIT,
     EVENT_SPIN_SMASH_HIT,
     EVENT_FALL_TRIGGER,
     EVENT_FLIP_TRIGGER,
     EVENT_BURN_HIT,
-    EVENT_SPIN_SMASH_LAUNCH_HIT = 17,
-    EVENT_STAR_BEAM             = 19,
-    EVENT_POWER_BOUNCE_HIT      = 21,
+    EVENT_SPIN_SMASH_LAUNCH_HIT   = 17,
+    EVENT_STAR_BEAM               = 19,
+    EVENT_POWER_BOUNCE_HIT        = 21,
     EVENT_BLOW_AWAY,
-    EVENT_IMMUNE                = 25,
+    EVENT_23                      = 23,
+    EVENT_IMMUNE                  = 25,
     EVENT_BLOCK,
     EVENT_SPIKE_TAUNT,
     EVENT_BURN_TAUNT,
-    EVENT_AIR_LIFT_FAILED       = 31,
+    EVENT_AIR_LIFT_FAILED         = 31,
     EVENT_DEATH,
     EVENT_SPIN_SMASH_DEATH,
     EVENT_EXPLODE_TRIGGER,
-    EVENT_BURN_DEATH            = 36,
-    EVENT_SHOCK_DEATH           = 38,
+    EVENT_BURN_DEATH              = 36,
+    EVENT_SPIN_SMASH_LAUNCH_DEATH = 37,
+    EVENT_SHOCK_DEATH             = 38,
     EVENT_SPIKE_DEATH,
     EVENT_POWER_BOUNCE_DEATH,
-    EVENT_SPIKE_CONTACT         = 42,
-    EVENT_BURN_CONTACT          = 44,
-    EVENT_SHOCK_HIT             = 47,
-    EVENT_RECOVER_STATUS        = 49,
-    EVENT_END_FIRST_STRIKE      = 53,
-    EVENT_LUCKY                 = 55,
+    EVENT_SPIKE_CONTACT           = 42,
+    EVENT_BURN_CONTACT            = 44,
+    EVENT_SHOCK_HIT               = 47,
+    EVENT_RECOVER_STATUS          = 49,
+    EVENT_END_FIRST_STRIKE        = 53,
+    EVENT_LUCKY                   = 55,
     EVENT_BEGIN_FIRST_STRIKE,
     EVENT_SCARE_AWAY,
     EVENT_BEGIN_AIR_LIFT,
-    EVENT_UP_AND_AWAY           = 61,
-    EVENT_SWAP_PARTNER          = 63,
+    EVENT_UP_AND_AWAY             = 61,
+    EVENT_SWAP_PARTNER            = 63,
     EVENT_LIFE_SHROOM_PROC,
     EVENT_REVIVE,
 };
@@ -1565,8 +1567,10 @@ enum NpcFlags {
     NPC_FLAG_40                = 0x00000040,
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
+    NPC_FLAG_208               = 0x00000208,
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
     NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
+    NPC_FLAG_1000              = 0x00001000,
     NPC_FLAG_NO_PROJECT_SHADOW = 0x00002000, ///< Draw shadow at base of sprite instead of projecting to ground
     NPC_FLAG_4000              = 0x00004000,
     NPC_FLAG_8000              = 0x00008000,
@@ -1636,12 +1640,15 @@ enum RenderMode {
 };
 
 enum ActorFlags {
+    ACTOR_FLAG_DISABLED         = 0x00000001, ///< Disables the actor.
     ACTOR_FLAG_NO_SHADOW        = 0x00000004, ///< Hide shadow.
     ACTOR_FLAG_FLYING           = 0x00000200, ///< Quake Hammer can't hit.
     ACTOR_FLAG_HP_OFFSET_BELOW  = 0x00000800, ///< HP bar offset below actor (e.g. Swooper when upside-down).
     ACTOR_FLAG_TARGET_ONLY      = 0x00004000, ///< Battle ends even if undefeated. No turn.
+    ACTOR_FLAG_80000            = 0x00080000,
     ACTOR_FLAG_NO_ATTACK        = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_POPUP     = 0x02000000, ///< Hide damage popup.
+    ACTOR_FLAG_10000000         = 0x10000000,
 };
 
 enum ActorPartFlags {
@@ -1674,6 +1681,20 @@ enum PartnerAnims {
     PARTNER_ANIM_RUN,
     PARTNER_ANIM_TALK,
     PARTNER_ANIM_HURT,
+};
+
+enum FirstStrikes {
+    FIRST_STRIKE_NONE,
+    FIRST_STRIKE_PLAYER,
+    FIRST_STRIKE_ENEMY,
+};
+
+enum TimeFreezeMode {
+    TIME_FREEZE_NORMAL,
+    TIME_FREEZE_PARTIAL,
+    TIME_FREEZE_FULL,
+    TIME_FREEZE_PARTNER_MENU,
+    TIME_FREEZE_EXIT,
 };
 
 #endif

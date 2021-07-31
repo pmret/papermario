@@ -37,8 +37,8 @@ glabel func_80138740
 /* CEEB8 801387B8 00830018 */  mult      $a0, $v1
 /* CEEBC 801387BC 24540004 */  addiu     $s4, $v0, 4
 /* CEEC0 801387C0 0000902D */  daddu     $s2, $zero, $zero
-/* CEEC4 801387C4 3C058007 */  lui       $a1, %hi(D_800773F0)
-/* CEEC8 801387C8 24A573F0 */  addiu     $a1, $a1, %lo(D_800773F0)
+/* CEEC4 801387C4 3C058007 */  lui       $a1, %hi(nuGfxCfbNum)
+/* CEEC8 801387C8 24A573F0 */  addiu     $a1, $a1, %lo(nuGfxCfbNum)
 /* CEECC 801387CC 000417C3 */  sra       $v0, $a0, 0x1f
 /* CEED0 801387D0 0000C810 */  mfhi      $t9
 /* CEED4 801387D4 0322C823 */  subu      $t9, $t9, $v0
@@ -52,10 +52,10 @@ glabel func_80138740
 /* CEEF4 801387F4 1060001A */  beqz      $v1, .L80138860
 /* CEEF8 801387F8 AFA40010 */   sw       $a0, 0x10($sp)
 /* CEEFC 801387FC 00A0382D */  daddu     $a3, $a1, $zero
-/* CEF00 80138800 3C05800A */  lui       $a1, %hi(D_8009A658)
-/* CEF04 80138804 8CA5A658 */  lw        $a1, %lo(D_8009A658)($a1)
-/* CEF08 80138808 3C06800A */  lui       $a2, %hi(D_8009A64C)
-/* CEF0C 8013880C 8CC6A64C */  lw        $a2, %lo(D_8009A64C)($a2)
+/* CEF00 80138800 3C05800A */  lui       $a1, %hi(nuGfxCfb)
+/* CEF04 80138804 8CA5A658 */  lw        $a1, %lo(nuGfxCfb)($a1)
+/* CEF08 80138808 3C06800A */  lui       $a2, %hi(nuGfxCfb_ptr)
+/* CEF0C 8013880C 8CC6A64C */  lw        $a2, %lo(nuGfxCfb_ptr)($a2)
 /* CEF10 80138810 00A0202D */  daddu     $a0, $a1, $zero
 .L80138814:
 /* CEF14 80138814 8C820000 */  lw        $v0, ($a0)
@@ -73,8 +73,8 @@ glabel func_80138740
 /* CEF40 80138840 00651821 */  addu      $v1, $v1, $a1
 /* CEF44 80138844 8C780000 */  lw        $t8, ($v1)
 .L80138848:
-/* CEF48 80138848 3C028007 */  lui       $v0, %hi(D_800773F0)
-/* CEF4C 8013884C 8C4273F0 */  lw        $v0, %lo(D_800773F0)($v0)
+/* CEF48 80138848 3C028007 */  lui       $v0, %hi(nuGfxCfbNum)
+/* CEF4C 8013884C 8C4273F0 */  lw        $v0, %lo(nuGfxCfbNum)($v0)
 /* CEF50 80138850 26520001 */  addiu     $s2, $s2, 1
 /* CEF54 80138854 0242102B */  sltu      $v0, $s2, $v0
 /* CEF58 80138858 1440FFEE */  bnez      $v0, .L80138814

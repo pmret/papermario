@@ -29,17 +29,17 @@ void func_E00D8288(s32 l, s32 r, s32 t, s32 b) {
         b = 0;
     }
 
-    if (l > 319) {
-        l = 319;
+    if (l > SCREEN_WIDTH - 1) {
+        l = SCREEN_WIDTH - 1;
     }
-    if (r > 239) {
-        r = 239;
+    if (r > SCREEN_HEIGHT - 1) {
+        r = SCREEN_HEIGHT - 1;
     }
-    if (t > 319) {
-        t = 319;
+    if (t > SCREEN_WIDTH - 1) {
+        t = SCREEN_WIDTH - 1;
     }
-    if (b > 239) {
-        b = 239;
+    if (b > SCREEN_HEIGHT - 1) {
+        b = SCREEN_HEIGHT - 1;
     }
 
     gDPFillRectangle(gMasterGfxPos++, l, r, t, b);

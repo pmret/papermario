@@ -282,7 +282,7 @@ Script N(80242048) = SCRIPT({
     N(func_802405BC_BED3AC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
+    SI_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 2, 14);
     sleep 100;
 });
@@ -348,7 +348,7 @@ Script N(80242498) = SCRIPT({
     N(func_802405BC_BED3AC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
+    SI_STORY_PROGRESS = STORY_CH3_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 2, 14);
     sleep 100;
 });
@@ -510,7 +510,7 @@ Script N(80242A30) = SCRIPT({
 Script N(802433C8) = SCRIPT({
     bind N(exitWalk_80242978) TRIGGER_FLOOR_ABOVE 5;
     bind N(exitWalk_802429D4) TRIGGER_FLOOR_ABOVE 1;
-    if (STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
+    if (SI_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
         bind_padlock N(802439B0) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242040);
     } else {
         bind N(exitSingleDoor_802428D4) TRIGGER_WALL_PRESS_A 10;
@@ -521,7 +521,7 @@ Script N(enterWalk_8024346C) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
-            if (STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
+            if (SI_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
                 await N(80242A30);
                 spawn N(802433C8);
             } else {
@@ -549,14 +549,14 @@ Script N(enterWalk_8024346C) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
     SI_SAVE_FLAG(1977) = 1;
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             MakeNpcs(0, N(npcGroupList_802478B8));
         }
@@ -570,7 +570,7 @@ Script N(main) = SCRIPT({
         }
     }
     await N(makeEntities);
-    if (STORY_PROGRESS == STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
+    if (SI_STORY_PROGRESS == STORY_CH3_DEFEATED_TUBBA_BLUBBA) {
         spawn N(80242498);
     }
     spawn N(enterWalk_8024346C);
