@@ -64,7 +64,6 @@ s32 check_block_input(s32 buttonMask) {
     s32 mash = FALSE;
     s32 bufferPos;
     s32 i;
-    s32 blah;
 
     battleStatus->blockResult = 0; // Fail
 
@@ -130,15 +129,13 @@ s32 check_block_input(s32 buttonMask) {
             block = FALSE;
         }
 
-        //blah = mashWindow + blockWindow;
-
         // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
         if (block == TRUE) {
             bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
             if (bufferPos < 0) {
                 bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
-            for (i = 0; i < mashWindow; i++) {
+            for (i = 0; i < (mashWindow + blockWindow); i++) {
                 block = FALSE; // this should be a different var
                 if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                     bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
