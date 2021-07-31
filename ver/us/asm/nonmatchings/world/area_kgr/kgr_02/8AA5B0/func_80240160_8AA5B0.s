@@ -101,8 +101,8 @@ glabel func_80240160_8AA5B0
 /* 8AA708 802402B8 000D1040 */  sll       $v0, $t5, 1
 /* 8AA70C 802402BC 004D1021 */  addu      $v0, $v0, $t5
 /* 8AA710 802402C0 00021040 */  sll       $v0, $v0, 1
-/* 8AA714 802402C4 3C0C800A */  lui       $t4, %hi(D_8009A64C)
-/* 8AA718 802402C8 8D8CA64C */  lw        $t4, %lo(D_8009A64C)($t4)
+/* 8AA714 802402C4 3C0C800A */  lui       $t4, %hi(nuGfxCfb_ptr)
+/* 8AA718 802402C8 8D8CA64C */  lw        $t4, %lo(nuGfxCfb_ptr)($t4)
 /* 8AA71C 802402CC 00621823 */  subu      $v1, $v1, $v0
 /* 8AA720 802402D0 AFAD0010 */  sw        $t5, 0x10($sp)
 /* 8AA724 802402D4 AFA30014 */  sw        $v1, 0x14($sp)

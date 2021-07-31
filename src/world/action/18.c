@@ -63,7 +63,7 @@ void func_802B6198_E24768(void) {
         if (!(gGameStatusPtr->peachFlags & 0x10)) {
             suggest_player_anim_clearUnkFlag((D_802B6300_E248D0)[gGameStatusPtr->peachAnimIdx]);
         } else {
-            suggest_player_anim_clearUnkFlag(0xD000D); // dood
+            suggest_player_anim_clearUnkFlag(0xD000D); // doood
         }
     } else {
         peach_set_disguise_anim(world_actions_peachDisguises[gPlayerStatus.peachDisguise].unk_04);

@@ -2388,8 +2388,8 @@ glabel draw_box
 /* 90AD0 800F7620 0040182D */  daddu     $v1, $v0, $zero
 /* 90AD4 800F7624 24420008 */  addiu     $v0, $v0, 8
 /* 90AD8 800F7628 AF020000 */  sw        $v0, ($t8)
-/* 90ADC 800F762C 3C08800A */  lui       $t0, %hi(D_8009A64C)
-/* 90AE0 800F7630 8D08A64C */  lw        $t0, %lo(D_8009A64C)($t0)
+/* 90ADC 800F762C 3C08800A */  lui       $t0, %hi(nuGfxCfb_ptr)
+/* 90AE0 800F7630 8D08A64C */  lw        $t0, %lo(nuGfxCfb_ptr)($t0)
 /* 90AE4 800F7634 27B000A0 */  addiu     $s0, $sp, 0xa0
 /* 90AE8 800F7638 AC710000 */  sw        $s1, ($v1)
 /* 90AEC 800F763C AC600004 */  sw        $zero, 4($v1)

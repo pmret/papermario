@@ -1,12 +1,13 @@
 #include "common.h"
 #include "stdlib/stdarg.h"
+#include "nu/nusys.h"
 
 // TODO: use src/is_debug.c instead as this file is identical between versions
 
 u32 func_80025D74(void* arg0, const unsigned char* str, s32 count);
 
 void func_80025C60(void) {
-    OSPiHandle** handle = &carthandle;
+    OSPiHandle** handle = &nuPiCartHandle;
 
     osEPiWriteIo(*handle, 0xB3FF0014, 0);
     osEPiWriteIo(*handle, 0xB3FF0004, 0);
@@ -40,13 +41,13 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
     s32 start;
     s32 end;
 
-    osEPiReadIo(carthandle, 0xB3FF0000, &data);
+    osEPiReadIo(nuPiCartHandle, 0xB3FF0000, &data);
     if (data != ASCII_TO_U32('I', 'S', '6', '4')) {
         return 1;
     }
-    osEPiReadIo(carthandle, 0xB3FF0004, &data);
+    osEPiReadIo(nuPiCartHandle, 0xB3FF0004, &data);
     pos = data;
-    osEPiReadIo(carthandle, 0xB3FF0014, &data);
+    osEPiReadIo(nuPiCartHandle, 0xB3FF0014, &data);
     start = data;
     end = start + count;
     if (end >= 0xffe0) {
@@ -64,8 +65,8 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
             u32 addr = 0xB3FF0020 + (start & 0xffffffc);
             s32 shift = ((3 - (start & 3)) * 8);
 
-            osEPiReadIo(carthandle, addr, &data);
-            osEPiWriteIo(carthandle, addr, (data & ~(0xff << shift)) | (*str << shift));
+            osEPiReadIo(nuPiCartHandle, addr, &data);
+            osEPiWriteIo(nuPiCartHandle, addr, (data & ~(0xff << shift)) | (*str << shift));
 
             start++;
             if (start >= 0xffe0) {
@@ -75,7 +76,7 @@ u32 func_80025D74(void* arg0, const unsigned char* str, s32 count) {
         count--;
         str++;
     }
-    osEPiWriteIo(carthandle, 0xB3FF0014, start);
+    osEPiWriteIo(nuPiCartHandle, 0xB3FF0014, start);
     return 1;
 }
 

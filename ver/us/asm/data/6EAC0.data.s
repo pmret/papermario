@@ -17,7 +17,7 @@ glabel D_80093B84
 glabel D_80093B94
 .word D_80093B84, 0x00000000, 0x00000000
 
-glabel D_80093BA0
+glabel nugfx_ucode
 .word 0x80096030, 0x80097660
 
 glabel FrameBuf

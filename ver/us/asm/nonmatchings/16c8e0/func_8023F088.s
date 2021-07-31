@@ -831,8 +831,8 @@ glabel func_8023F088
 /* 16E614 8023FD34 AE0200B4 */  sw        $v0, 0xb4($s0)
 /* 16E618 8023FD38 3C10F700 */  lui       $s0, 0xf700
 /* 16E61C 8023FD3C 3C14F600 */  lui       $s4, 0xf600
-/* 16E620 8023FD40 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* 16E624 8023FD44 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* 16E620 8023FD40 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* 16E624 8023FD44 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* 16E628 8023FD48 0220102D */  daddu     $v0, $s1, $zero
 /* 16E62C 8023FD4C 26310008 */  addiu     $s1, $s1, 8
 /* 16E630 8023FD50 AFD10000 */  sw        $s1, ($fp)

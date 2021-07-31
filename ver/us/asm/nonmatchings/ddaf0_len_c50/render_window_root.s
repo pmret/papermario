@@ -60,8 +60,8 @@ glabel render_window_root
 /* DE294 80147B94 2631A66C */  addiu     $s1, $s1, %lo(gMasterGfxPos)
 /* DE298 80147B98 3C02D900 */  lui       $v0, 0xd900
 /* DE29C 80147B9C 8E300000 */  lw        $s0, ($s1)
-/* DE2A0 80147BA0 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* DE2A4 80147BA4 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* DE2A0 80147BA0 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* DE2A4 80147BA4 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* DE2A8 80147BA8 0200182D */  daddu     $v1, $s0, $zero
 /* DE2AC 80147BAC 26100008 */  addiu     $s0, $s0, 8
 /* DE2B0 80147BB0 AE300000 */  sw        $s0, ($s1)

@@ -147,7 +147,7 @@ INCLUDE_ASM(s32, "16F740", btl_state_update_begin_partner_turn);
 void btl_state_draw_begin_partner_turn(void) {
 }
 
-void btl_state_update_switch_to_partner(s32 arg0) {
+void btl_state_update_switch_to_partner(void) {
     Actor* player = gBattleStatus.playerActor;
     Actor* partner = gBattleStatus.partnerActor;
     s32 i;

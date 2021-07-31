@@ -140,8 +140,8 @@ glabel func_80143C48
 /* DA564 80143E64 34A5FFFC */  ori       $a1, $a1, 0xfffc
 /* DA568 80143E68 AE02006C */  sw        $v0, 0x6c($s0)
 /* DA56C 80143E6C 3C02F700 */  lui       $v0, 0xf700
-/* DA570 80143E70 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* DA574 80143E74 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* DA570 80143E70 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* DA574 80143E74 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* DA578 80143E78 0220182D */  daddu     $v1, $s1, $zero
 /* DA57C 80143E7C 26310008 */  addiu     $s1, $s1, 8
 /* DA580 80143E80 AE510000 */  sw        $s1, ($s2)

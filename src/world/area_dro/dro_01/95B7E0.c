@@ -3124,7 +3124,7 @@ ApiStatus N(func_80241DF8_95CFF8)(ScriptInstance* script, s32 isInitialCall) {
 
     if (effectPtr->unk_18 <= 0) {
         effectPtr->unk_18 = 0;
-        remove_effect(N(D_8024DFE0), effectPtr);
+        remove_effect(N(D_8024DFE0));
         free_generic_entity(N(D_8024DFC0));
         return ApiStatus_DONE2;
     }

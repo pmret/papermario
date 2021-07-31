@@ -168,8 +168,8 @@ glabel func_E00BE5BC
 /* 3BC794 E00BE834 30C60FFF */  andi      $a2, $a2, 0xfff
 /* 3BC798 E00BE838 0100202D */  daddu     $a0, $t0, $zero
 /* 3BC79C E00BE83C AC820000 */  sw        $v0, ($a0)
-/* 3BC7A0 E00BE840 3C02800A */  lui       $v0, %hi(D_8009A64C)
-/* 3BC7A4 E00BE844 8C42A64C */  lw        $v0, %lo(D_8009A64C)($v0)
+/* 3BC7A0 E00BE840 3C02800A */  lui       $v0, %hi(nuGfxCfb_ptr)
+/* 3BC7A4 E00BE844 8C42A64C */  lw        $v0, %lo(nuGfxCfb_ptr)($v0)
 /* 3BC7A8 E00BE848 25080008 */  addiu     $t0, $t0, 8
 /* 3BC7AC E00BE84C 00431021 */  addu      $v0, $v0, $v1
 /* 3BC7B0 E00BE850 AC820004 */  sw        $v0, 4($a0)
