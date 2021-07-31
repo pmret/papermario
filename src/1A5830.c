@@ -133,51 +133,21 @@ INCLUDE_ASM(s32, "1A5830", calc_enemy_test_target);
 #ifdef NON_MATCHING
 // attacker needs to be in 0x58(sp) not a save register
 s32 calc_enemy_damage_target(Actor* attacker) {
-    Actor *temp_ret;
     Actor *target;
-    ScriptInstance *temp_v0_10;
-    ScriptInstance *temp_v0_11;
-    ScriptInstance *temp_v0_5;
-    ScriptInstance *temp_v0_6;
-    ScriptInstance *temp_v0_7;
-    ScriptInstance *temp_v0_8;
-    ScriptInstance *temp_v0_9;
-    s16 temp_a2;
-    s16 temp_a3;
-    s16 temp_a3_2;
     s32 attack;
-    s16 temp_v0_4;
     s32 eventFlags;
-    s32 temp_a0_2;
-    s32 temp_s0_3;
-    s32 temp_s0_4;
-    s32 temp_s0_5;
-    s32 temp_s0_6;
     s32 targetID;
     s32 defense;
-    s32 temp_v1;
     s32 attackElement;
-    s32 temp_v1_3;
     s32 targetPartIdx;
-    s8 temp_v0_3;
-    u32 temp_s0_7;
     ActorMovementWalk* walk;
-    s32 phi_a0;
-    s32 phi_s0;
-    s32 phi_v0;
-    s32 phi_s0_2;
-    s32 phi_s0_3;
-    s32 phi_v0_2;
-    s32 phi_s0_4;
     s32 phi_s2;
     s8 phi_s5;
     s8 phi_s7;
     s32 isFire = FALSE;
     s32 isElectric = FALSE;
     s32 isEnchanted = FALSE;
-    s32 phi_return;
     s32 damage;
-    s32 phi_a0_3;
     ActorPart* targetPart;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult = HIT_RESULT_HIT; // ?
@@ -187,10 +157,10 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     battleStatus->wasStatusInflicted = FALSE;
     battleStatus->lastAttackDamage = 0;
-    walk = &attacker->walk;
     battleStatus->currentTargetID2 = targetID;
-    battleStatus->currentTargetPart2 = targetPartIdx;
     battleStatus->attackerActorID = attacker->actorID;
+    battleStatus->currentTargetPart2 = targetPartIdx;
+    walk = &attacker->walk;
 
     target = get_actor(targetID);
     if (target == NULL) {
@@ -219,11 +189,9 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         case ACTOR_PARTNER:
             target->currentHP = 127;
             break;
-
     }
 
     eventFlags = targetPart->eventFlags;
-    phi_return = 6;
     if ((eventFlags & 0x20) == 0) {
         if (target->transStatus == 0xE) {
             return HIT_RESULT_MISS;
@@ -238,8 +206,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             dispatch_event_general(target, EVENT_IMMUNE);
             return HIT_RESULT_HIT;
         }
-        temp_v1 = battleStatus->currentAttackElement;
-        if (((temp_v1 & DAMAGE_TYPE_BLAST) != 0) && !(temp_v1 & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & EVENT_FLAG_EXPLOSIVE)) {
+        if ((battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT) && (targetPart->eventFlags & EVENT_FLAG_EXPLOSIVE)) {
             play_hit_sound(attacker, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, 3);
             dispatch_event_general(target, EVENT_EXPLODE_TRIGGER);
             return HIT_RESULT_TRIGGERED_EXPLODE;
@@ -263,29 +230,19 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             playFX_30(0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z + 5.0f);
         }
 
-        /*
         // TODO: if/else ordering
         if (attacker->staticStatus == STATUS_STATIC) {
-            phi_a0 = 0x7FFFFFFF;
-        } else if (target->staticStatus != STATUS_STATIC) {
-            if (!(targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED)) {
-            } else if (!(battleStatus->currentAttackElement & 0x10000020)) {
-                if (!(battleStatus->currentAttackEventSuppression & 8)) {
-                    if (!has_enchanted_part(attacker)) {
-                        battleStatus->flags1 |= 0x20;
-                    }
+            gBattleStatus.flags1 &= ~1;
+        } else if ((targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED) && !(battleStatus->currentAttackElement & 0x10000020)) {
+            if (!(battleStatus->currentAttackEventSuppression & 8)) {
+                if (!has_enchanted_part(attacker)) {
+                    battleStatus->flags1 |= 0x20;
                 }
+                gBattleStatus.flags1 &= ~1;
             }
+        } else {
+            gBattleStatus.flags1 &= ~1;
         }
-        */
-        if (!(battleStatus->currentAttackElement & 0x10000020) && !(battleStatus->currentAttackEventSuppression & 8)) {
-            if (has_enchanted_part(attacker) == 0) {
-                isEnchanted = TRUE;
-                gBattleStatus.flags1 |= 0x20;
-            }
-        }
-
-        gBattleStatus.flags1 &= ~0x80000000;
 
         defense = get_defense(target, targetPart->defenseTable, gBattleStatus.currentAttackElement);
         attackElement = gBattleStatus.currentAttackElement;
@@ -508,7 +465,6 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             }
         }
 
-        //temp_v1_3 = battleStatus->flags1;
         phi_s5 = FALSE;
         phi_s7 = FALSE; // what is this for
         if (gBattleStatus.flags1 & 0x20) {
