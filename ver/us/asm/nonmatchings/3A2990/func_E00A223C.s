@@ -382,8 +382,8 @@ glabel func_E00A223C
 /* 3A3170 E00A27E0 35080400 */  ori       $t0, $t0, 0x400
 /* 3A3174 E00A27E4 258C0001 */  addiu     $t4, $t4, 1
 /* 3A3178 E00A27E8 8E050000 */  lw        $a1, ($s0)
-/* 3A317C E00A27EC 3C03800A */  lui       $v1, %hi(D_8009A64C)
-/* 3A3180 E00A27F0 8C63A64C */  lw        $v1, %lo(D_8009A64C)($v1)
+/* 3A317C E00A27EC 3C03800A */  lui       $v1, %hi(nuGfxCfb_ptr)
+/* 3A3180 E00A27F0 8C63A64C */  lw        $v1, %lo(nuGfxCfb_ptr)($v1)
 /* 3A3184 E00A27F4 00A0202D */  daddu     $a0, $a1, $zero
 /* 3A3188 E00A27F8 24A50008 */  addiu     $a1, $a1, 8
 /* 3A318C E00A27FC AE050000 */  sw        $a1, ($s0)

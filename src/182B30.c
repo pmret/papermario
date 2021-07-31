@@ -51,7 +51,7 @@ void reset_actor_blur(Actor* actor) {
         if (decorationTable->unk_7DB != 0) {
             decorationTable->unk_7DB--;
             if (decorationTable->unk_7DB == 0) {
-                actor->flags &= ~0x10000000;
+                actor->flags &= ~ACTOR_FLAG_10000000;
                 decorationTable->effectType = 1;
             }
         }
@@ -93,7 +93,7 @@ void enable_player_blur(void) {
 
     decorationTable->effectType = 0;
     decorationTable->unk_7DB++;
-    playerActor->flags |= 0x10000000;
+    playerActor->flags |= ACTOR_FLAG_10000000;
     decorationTable->unk_7D8 = 0;
     decorationTable->unk_7D9 = 0;
 
@@ -129,7 +129,7 @@ void func_80254950(void) {
     if (decorationTable->unk_7DB != 0) {
         decorationTable->unk_7DB--;
         if (decorationTable->unk_7DB == 0) {
-            playerActor->flags &= ~0x10000000;
+            playerActor->flags &= ~ACTOR_FLAG_10000000;
             decorationTable->effectType = 1;
         }
     }
@@ -146,14 +146,14 @@ void func_802549C0(void) {
     Actor* playerActor = gBattleStatus.playerActor;
     DecorationTable* decorationTable = playerActor->partsTable->decorationTable;
 
-    playerActor->flags &= ~0x10000000;
+    playerActor->flags &= ~ACTOR_FLAG_10000000;
     decorationTable->unk_7DB = 0;
     decorationTable->effectType = 1;
 }
 
 INCLUDE_ASM(s32, "182B30", func_802549F4);
 
-INCLUDE_ASM(s32, "182B30", func_80254C50);
+INCLUDE_ASM(void, "182B30", func_80254C50);
 
 INCLUDE_ASM(s32, "182B30", func_802550BC);
 
@@ -163,8 +163,8 @@ void func_8025593C(s32 arg0) {
     func_802550BC(0, arg0);
 }
 
-void func_8025595C(s32 arg0) {
-    func_802552EC(0, arg0);
+void func_8025595C(Actor* actor) {
+    func_802552EC(0, actor);
 }
 
 void func_8025597C(s32 arg0) {
@@ -206,8 +206,8 @@ void func_80257B48(s32 arg0) {
     func_80255FE0(1, arg0);
 }
 
-void func_80257B68(s32 arg0) {
-    func_802571F0(0, arg0);
+void func_80257B68(Actor* actor) {
+    func_802571F0(0, actor);
 }
 
 void func_80257B88(void) {
@@ -216,9 +216,9 @@ void func_80257B88(void) {
 
 INCLUDE_ASM(s32, "182B30", update_player_actor_shadow);
 
-INCLUDE_ASM(s32, "182B30", func_80257DA4);
+INCLUDE_ASM(void, "182B30", func_80257DA4);
 
-INCLUDE_ASM(s32, "182B30", func_80258E14);
+INCLUDE_ASM(void, "182B30", func_80258E14);
 
 INCLUDE_ASM(s32, "182B30", func_802591EC);
 
@@ -326,62 +326,117 @@ INCLUDE_ASM(s32, "182B30", func_8025CD40);
 
 INCLUDE_ASM(s32, "182B30", func_8025CEC8);
 
-INCLUDE_ASM(s32, "182B30", _remove_part_decoration);
+void _remove_part_decoration(ActorPart* part, s32 decorationIndex) {
+    DecorationTable* decorationTable = part->decorationTable;
+
+    switch (decorationTable->decorationType[decorationIndex]) {
+        case 0:
+            func_8025D158(part, decorationIndex);
+            break;
+        case 1:
+            func_8025D290(part, decorationIndex);
+            break;
+        case 2:
+            func_8025D3C4(part, decorationIndex);
+            break;
+        case 3:
+            func_8025D4A0(part, decorationIndex);
+            break;
+        case 4:
+            func_8025D620(part, decorationIndex);
+            break;
+        case 5:
+            func_8025D6FC(part, decorationIndex);
+            break;
+        case 6:
+            func_8025D810(part, decorationIndex);
+            break;
+        case 7:
+            func_8025D8EC(part, decorationIndex);
+            break;
+        case 8:
+            func_8025DA60(part, decorationIndex);
+            break;
+        case 9:
+            func_8025DBC8(part, decorationIndex);
+            break;
+        case 10:
+            func_8025DD40(part, decorationIndex);
+            break;
+        case 11:
+            func_8025DE88(part, decorationIndex);
+            break;
+    }
+
+    decorationTable->decorationType[decorationIndex] = 0;
+}
 
 void func_8025D150(void) {
 }
 
-void func_8025D158(void) {
+void func_8025D158(ActorPart* part, s32 decorationIndex) {
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D160);
 
-INCLUDE_ASM(s32, "182B30", func_8025D290);
+void func_8025D290(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D2B0);
 
-void func_8025D3C4(void) {
+void func_8025D3C4(ActorPart* part, s32 decorationIndex) {
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025D3CC);
 
-INCLUDE_ASM(s32, "182B30", func_8025D4A0);
+void func_8025D4A0(ActorPart* part, s32 decorationIndex) {
+    remove_effect(part->decorationTable->unk_8B0[decorationIndex]);
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D4C8);
 
-INCLUDE_ASM(s32, "182B30", func_8025D620);
+void func_8025D620(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D640);
 
-INCLUDE_ASM(s32, "182B30", func_8025D6FC);
+void func_8025D6FC(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D71C);
 
-INCLUDE_ASM(s32, "182B30", func_8025D810);
+void func_8025D810(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D830);
 
-INCLUDE_ASM(s32, "182B30", func_8025D8EC);
+void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
+    part->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
+}
 
 INCLUDE_ASM(s32, "182B30", func_8025D90C);
 
-void func_8025DA60(void) {
+void func_8025DA60(ActorPart* part, s32 decorationIndex) {
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DA68);
 
-void func_8025DBC8(void) {
+void func_8025DBC8(ActorPart* part, s32 decorationIndex) {
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DBD0);
 
-void func_8025DD40(ActorPart* actorPart, s32 arg1) {
-    actorPart->decorationTable->unk_8B0[arg1]->unk_0C->unk_2C = 5;
+void func_8025DD40(ActorPart* actorPart, s32 decorationIndex) {
+    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_0C->unk_2C = 5;
 }
 
 INCLUDE_ASM(s32, "182B30", func_8025DD60);
 
-void func_8025DE88(ActorPart* actorPart, s32 arg1) {
-    actorPart->decorationTable->unk_8B0[arg1]->unk_00 |= 0x10;
+void func_8025DE88(ActorPart* actorPart, s32 decorationIndex) {
+    actorPart->decorationTable->unk_8B0[decorationIndex]->unk_00 |= 0x10;
 }
 

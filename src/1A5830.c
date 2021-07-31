@@ -3,10 +3,14 @@
 #include "script_api/battle.h"
 #include "effects.h"
 
+extern s32 D_802946E0[];
+
 void dispatch_event_actor(Actor* actor, Event event);
 void func_8024EFE0(f32 x, f32 y, f32 z, s32 a, s32 b);
 void func_802664DC(f32 x, f32 y, f32 z, s32 damage);
 s32 dispatch_damage_event_actor_1(Actor* actor, s32 damageAmount, s32 event);
+s32 func_80263230(Actor*, Actor*);
+void func_80267018(Actor* actor, s32 arg1);
 
 s32 has_enchanted_part(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
@@ -704,7 +708,82 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 INCLUDE_ASM(s32, "1A5830", calc_enemy_damage_target);
 #endif
 
+
+// part before the first conditional needs work
+#ifdef NON_MATCHING
+s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    ActorMovementWalk* walk;
+    s32 dispatchEvent;
+
+    u16 temp_v1;
+
+    battleStatus->currentAttackDamage = damageAmount;
+    temp_v1 = actor->hpChangeCounter + battleStatus->currentAttackDamage;
+    actor->hpChangeCounter += temp_v1;
+    actor->damageCounter += temp_v1;
+    battleStatus->lastAttackDamage = 0;
+    actor->hpChangeCounter -= temp_v1;
+    actor->currentHP -= temp_v1;
+
+    dispatchEvent = originalEvent;
+
+    walk = &actor->walk;
+    if (actor->currentHP <= 0) {
+        battleStatus->lastAttackDamage += actor->currentHP;
+        actor->currentHP = 0;
+        dispatchEvent = EVENT_DEATH;
+    }
+
+    battleStatus->lastAttackDamage += temp_v1;
+    actor->lastDamageTaken = battleStatus->lastAttackDamage;
+    battleStatus->unk_19A = 0;
+
+    if (battleStatus->flags1 & 0x20) {
+        if (dispatchEvent == EVENT_HIT_COMBO) {
+            dispatchEvent = EVENT_HIT;
+        }
+        if (dispatchEvent == EVENT_23) {
+            dispatchEvent = EVENT_IMMUNE;
+        }
+    }
+
+    if (dispatchEvent == EVENT_DEATH) {
+        if (originalEvent == EVENT_SPIN_SMASH_LAUNCH_HIT) {
+            dispatchEvent = EVENT_SPIN_SMASH_LAUNCH_DEATH;
+        }
+        if (originalEvent == EVENT_SHOCK_HIT) {
+            dispatchEvent = EVENT_SHOCK_DEATH;
+        }
+    }
+
+    if (stopMotion == 0) {
+        s32 targetActorID = actor->targetActorID; // why?
+
+        if (func_80263230(actor, actor) != 0) {
+            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
+                              battleStatus->lastAttackDamage, 0);
+            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z,
+                          battleStatus->lastAttackDamage);
+            actor->targetActorID = targetActorID;
+        } else {
+            actor->targetActorID = targetActorID;
+        }
+    } else {
+        show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage, 0);
+        func_802666E4(actor, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, battleStatus->lastAttackDamage);
+    }
+
+    if (battleStatus->lastAttackDamage > 0) {
+        func_80267018(actor, 1);
+    }
+    actor->flags |= ACTOR_FLAG_80000;
+    dispatch_event_actor(actor, dispatchEvent);
+    return 0;
+}
+#else
 INCLUDE_ASM(s32, "1A5830", dispatch_damage_event_actor);
+#endif
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
     return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);
@@ -1043,7 +1122,62 @@ ApiStatus RemoveActor(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "1A5830", RemoveActor);
 #endif
 
-INCLUDE_ASM(s32, "1A5830", DropStarPoints);
+ApiStatus DropStarPoints(ScriptInstance* script, s32 isInitialCall) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    PlayerData* playerData = &gPlayerData;
+    Bytecode* args = script->ptrReadPos;
+    Actor* dropper;
+    f32 playerLevel;
+    f32 enemyLevel;
+    ActorID actorID;
+    f32 ntd;
+    s32 numToDrop;
+
+    actorID = get_variable(script, *args++);
+    if (actorID == ACTOR_SELF) {
+        actorID = script->owner1.enemyID;
+    }
+    dropper = get_actor(actorID);
+
+    enemyLevel = dropper->staticActorData->level;
+    if (dropper->staticActorData->level == 0.0f) {
+        enemyLevel = 1.0f;
+    }
+
+    playerLevel = playerData->level;
+    if (playerLevel == 0.0f) {
+        playerLevel = 1.0f;
+    }
+
+    ntd = 0.0f;
+    if (!(enemyLevel < playerLevel)) {
+        ntd = ((enemyLevel - playerLevel) * 0.5f) * D_802946E0[battleStatus->initialEnemyCount];
+        ntd = (ntd + 50.0f) / 100.0f;
+    }
+    numToDrop = ntd;
+
+    if (playerData->level < 27) {
+        s32 spawnMode;
+        s32 i;
+
+        if (dropper->flags & ACTOR_FLAG_HP_OFFSET_BELOW) {
+            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_19;
+        } else {
+            spawnMode = ITEM_SPAWN_MODE_UNKNOWN_17;
+        }
+
+        for (i = 0; i < numToDrop; i++) {
+            make_item_entity_delayed(ITEM_STAR_POINT, dropper->currentPos.x, dropper->currentPos.y,
+                                     dropper->currentPos.z, spawnMode, i, 0);
+        }
+
+        battleStatus->incrementStarPointDelay = 40;
+        battleStatus->pendingStarPoints += numToDrop;
+    }
+
+    gBattleStatus.flags1 |= 0x1000000;
+    return ApiStatus_DONE2;
+}
 
 ApiStatus SetDefenseTable(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

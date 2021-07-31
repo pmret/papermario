@@ -21,7 +21,7 @@ void boot_idle(void) {
     nuPiInit();
     nuScCreateScheduler(OS_VI_NTSC_LAN1, 1);
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
-    osCreateThread(&D_800A4420, NU_MAIN_THREAD_ID, boot_main, NULL, &D_800B8590, NU_MAIN_THREAD_PRI);
+    osCreateThread(&D_800A4420, NU_MAIN_THREAD_ID, boot_main, NULL, &nuYieldBuf, NU_MAIN_THREAD_PRI);
     osStartThread(&D_800A4420);
     osSetThreadPri(&D_800A4270, NU_IDLE_THREAD_PRI);
 

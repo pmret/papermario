@@ -2,6 +2,7 @@
 #include "map.h"
 #include "effects.h"
 
+extern s16 D_8009A668;
 extern s32 D_800A0BA0;
 extern f32 D_800A0BA4;
 extern EffectInstance* D_800A0BA8;
@@ -59,7 +60,11 @@ ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
     set_background_color_blend(0, 0, 0, ((25 - script->functionTemp[0]) * 10) & 254);
     script->functionTemp[0]--;
     do {} while (0);
-    return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
+
+    if (script->functionTemp[0] == 0) {
+        return ApiStatus_DONE2;
+    }
+    return ApiStatus_BLOCK;
 }
 
 ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
@@ -335,9 +340,61 @@ void draw_encounters_pre_battle(void) {
     }
 }
 
-extern s16* D_8009A668;
+void show_first_strike_message(void) {
+    EncounterStatus* currentEncounter = &gCurrentEncounter;
+    s32 posX;
+    s32 width;
+    s32 xOffset;
+    s32 screenWidthHalf;
 
-INCLUDE_ASM(s32, "1a1f0_len_5390", show_first_strike_message);
+    if (currentEncounter->unk_94 == 0) {
+        D_8009A668 = -200;
+        return;
+    }
+
+    D_8009A668 += 40;
+    xOffset = D_8009A668;
+    if (xOffset > 0) {
+        if (xOffset < 1600) {
+            xOffset = 0;
+        } else {
+            xOffset -= 1600;
+        }
+    }
+
+    screenWidthHalf = SCREEN_WIDTH / 2;
+
+    switch (currentEncounter->eFirstStrike) {
+        case FIRST_STRIKE_PLAYER:
+            switch (currentEncounter->hitType) {
+                case 2:
+                case 4:
+                    width = get_string_width(0x1D00AC, 0) + 24;
+                    posX = (xOffset + screenWidthHalf) - (width / 2);
+                    draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                    draw_string(0x1D00AC, posX + 11, 75, 0xFF, 0xA, 0);
+                    break;
+                case 6:
+                    width = get_string_width(0x1D00AD, 0) + 24;
+                    posX = (xOffset + screenWidthHalf) - (width / 2);
+                    draw_box(0, 0x14, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                             SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                    draw_string(0x1D00AD, posX + 11, 75, 0xFF, 0xA, 0);
+                    break;
+            }
+            break;
+        case FIRST_STRIKE_ENEMY:
+            if (!is_ability_active(ABILITY_CHILL_OUT)) {
+                width = get_string_width(0x1D00AE, 0) + 24;
+                posX = (xOffset + screenWidthHalf) - (width / 2);
+                draw_box(0, 4, posX, 69, 0, width, 28, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, 0, NULL,
+                         SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+                draw_string(0x1D00AE, posX + 11, 75, 0xFF, 0xA, 0);
+            }
+            break;
+    }
+}
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_post_battle);
 

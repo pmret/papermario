@@ -101,7 +101,7 @@ s32 nuAuDmaCallBack(s32 addr, s32 len, void *state, u8 arg3) {
     mesg->dramAddr = temp_s2;
     mesg->devAddr = temp_s3;
     mesg->size = 0x500;
-    osEPiStartDma(carthandle, mesg, 0);
+    osEPiStartDma(nuPiCartHandle, mesg, 0);
     return osVirtualToPhysical(temp_s2) + temp_s0;
 }
 #else

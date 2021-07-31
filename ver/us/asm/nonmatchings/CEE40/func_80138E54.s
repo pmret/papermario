@@ -632,8 +632,8 @@ glabel func_80138E54
 /* CFEC4 801397C4 34E7013F */  ori       $a3, $a3, 0x13f
 /* CFEC8 801397C8 AE02004C */  sw        $v0, 0x4c($s0)
 /* CFECC 801397CC 3C02F700 */  lui       $v0, 0xf700
-/* CFED0 801397D0 3C04800A */  lui       $a0, %hi(D_8009A64C)
-/* CFED4 801397D4 8C84A64C */  lw        $a0, %lo(D_8009A64C)($a0)
+/* CFED0 801397D0 3C04800A */  lui       $a0, %hi(nuGfxCfb_ptr)
+/* CFED4 801397D4 8C84A64C */  lw        $a0, %lo(nuGfxCfb_ptr)($a0)
 /* CFED8 801397D8 0220182D */  daddu     $v1, $s1, $zero
 /* CFEDC 801397DC 26310008 */  addiu     $s1, $s1, 8
 /* CFEE0 801397E0 AED10000 */  sw        $s1, ($s6)
