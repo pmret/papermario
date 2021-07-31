@@ -1623,8 +1623,8 @@ glabel L80271E88_1A0768
 /* 1A1908 80273028 00000000 */   nop
 /* 1A190C 8027302C 12E00017 */  beqz      $s7, .L8027308C
 /* 1A1910 80273030 00000000 */   nop
-/* 1A1914 80273034 3C048029 */  lui       $a0, %hi(DoShinkHit)
-/* 1A1918 80273038 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
+/* 1A1914 80273034 3C048029 */  lui       $a0, %hi(DoShrinkHit)
+/* 1A1918 80273038 248446B8 */  addiu     $a0, $a0, %lo(DoShrinkHit)
 /* 1A191C 8027303C 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A1920 80273040 0C0B0CF8 */  jal       start_script
 /* 1A1924 80273044 0000302D */   daddu    $a2, $zero, $zero
