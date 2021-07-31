@@ -3125,163 +3125,208 @@ segments:
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_jump
     overlay: True
     subsegments:
-    - [0x4219F0, c, 4219F0]
-    - [0x421FC0]
+    - [0x4219F0, c, jump]
   - type: code
     start: 0x422000
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hammer
     overlay: True
     subsegments:
-    - [0x422000, c]
+    - [0x422000, c, hammer]
     - [0x422A90, data]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_flee
     overlay: True
     subsegments:
-    - [0x422AD0, c]
+    - [0x422AD0, c, flee]
     - [0x4233B0, data]
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_break_free
     overlay: True
     subsegments:
-    - [0x4233F0, c]
+    - [0x4233F0, c, break_free]
     - [0x423C30, data]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_whirlwind
     overlay: True
     subsegments:
-    - [0x423C70, c]
+    - [0x423C70, c, whirlwind]
     - [0x424550, data]
   - type: code
     start: 0x425590
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_stop_leech
     overlay: True
     subsegments:
-    - [0x425590, c]
+    - [0x425590, c, stop_leech]
     - [0x425B10, data]
   - type: code
     start: 0x425B50
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_07
     overlay: True
     subsegments:
-    - [0x425B50, c]
+    - [0x425B50, c, "07"]
     - [0x426130, data]
   - type: code
     start: 0x426170
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_dizzy_shell
     overlay: True
     subsegments:
-    - [0x426170, c]
+    - [0x426170, c, dizzy_shell]
     - [0x426970, data]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_fire_shell
     overlay: True
     subsegments:
-    - [0x4269D0, c]
+    - [0x4269D0, c, fire_shell]
     - [0x427320, data]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_0A
     overlay: True
     subsegments:
-    - [0x4273B0, c]
+    - [0x4273B0, c, 0A]
     - [0x427A30, data]
   - type: code
     start: 0x427A70
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_bomb
     overlay: True
     subsegments:
-    - [0x427A70, c]
+    - [0x427A70, c, bomb]
     - [0x428280, data]
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_body_slam
     overlay: True
     subsegments:
-    - [0x4282E0, c]
+    - [0x4282E0, c, body_slam]
     - [0x428A30, data]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_lift
     overlay: True
     subsegments:
-    - [0x428A70, c]
+    - [0x428A70, c, air_lift]
     - [0x4292C0, data]
   - type: code
     start: 0x429320
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_air_raid
     overlay: True
     subsegments:
-    - [0x429320, c]
+    - [0x429320, c, air_raid]
     - [0x429C90, data]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_squirt
     overlay: True
     subsegments:
-    - [0x429D20, c]
+    - [0x429D20, c, squirt]
     - [0x42A480, data]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_water_block
     overlay: True
     subsegments:
-    - [0x42A4F0, c]
+    - [0x42A4F0, c, water_block]
     - [0x42B650, data]
   - type: code
     start: 0x42C6F0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_tidal_wave
     overlay: True
     subsegments:
-    - [0x42C6F0, c]
+    - [0x42C6F0, c, tidal_wave]
     - [0x42CEB0, data]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_power_shock
     overlay: True
     subsegments:
-    - [0x42CF10, c]
+    - [0x42CF10, c, power_shock]
     - [0x42D9B0, data]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_mega_shock
     overlay: True
     subsegments:
-    - [0x42DA10, c]
+    - [0x42DA10, c, mega_shock]
     - [0x42E330, data]
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_smack
     overlay: True
     subsegments:
-    - [0x42E3A0, c]
+    - [0x42E3A0, c, smack]
     - [0x42ED70, data]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spiny_surge
     overlay: True
     subsegments:
-    - [0x42EE20, c]
+    - [0x42EE20, c, spiny_surge]
     - [0x42F680, data]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_hurricane
     overlay: True
     subsegments:
-    - [0x42F6E0, c]
+    - [0x42F6E0, c, hurricane]
     - [0x42FFC0, data]
   - type: code
     start: 0x430020
     vram: 0x802A9000
+    dir: battle/action_cmd
+    name: action_cmd_spook
     overlay: True
     subsegments:
-    - [0x430020, c]
+    - [0x430020, c, spook]
     - [0x430940, data]
   - dir: battle/area_kmr_part_1
     type: code

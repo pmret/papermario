@@ -1206,8 +1206,8 @@ glabel calc_enemy_damage_target
 /* 1A6E2C 8027854C 00000000 */   nop
 /* 1A6E30 80278550 12A00017 */  beqz      $s5, .L802785B0
 /* 1A6E34 80278554 00000000 */   nop
-/* 1A6E38 80278558 3C048029 */  lui       $a0, %hi(DoShinkHit)
-/* 1A6E3C 8027855C 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
+/* 1A6E38 80278558 3C048029 */  lui       $a0, %hi(DoShrinkHit)
+/* 1A6E3C 8027855C 248446B8 */  addiu     $a0, $a0, %lo(DoShrinkHit)
 /* 1A6E40 80278560 2405000A */  addiu     $a1, $zero, 0xa
 /* 1A6E44 80278564 0C0B0CF8 */  jal       start_script
 /* 1A6E48 80278568 0000302D */   daddu    $a2, $zero, $zero

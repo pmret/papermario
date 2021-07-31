@@ -227,8 +227,8 @@ typedef struct PlayerData {
     /* 0x293 */ char unk_293[0x1];
     /* 0x294 */ s16 otherHitsTaken;
     /* 0x296 */ s16 unk_296;
-    /* 0x298 */ s16 hitsTaken;
-    /* 0x29A */ s16 hitsBlocked;
+    /* 0x298 */ u16 hitsTaken;
+    /* 0x29A */ u16 hitsBlocked;
     /* 0x29C */ s16 playerFirstStrikes;
     /* 0x29E */ s16 enemyFirstStrikes;
     /* 0x2A0 */ u16 powerBounces;
@@ -690,7 +690,8 @@ typedef struct BattleStatus {
     /* 0x0A5 */ u8 cloudNineDodgeChance; /* = 50% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ s32 cloudNineEffect;
-    /* 0x0AC */ char unk_AC[2];
+    /* 0x0AC */ char unk_AC;
+    /* 0x0AD */ s8 unk_AD;
     /* 0x0AE */ u8 hammerLossTurns;
     /* 0x0AF */ u8 jumpLossTurns;
     /* 0x0B0 */ u8 itemLossTurns;
@@ -729,10 +730,10 @@ typedef struct BattleStatus {
     /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
-    /* 0x1A2 */ u8 currentTargetPart; /* selected? */
+    /* 0x1A2 */ s8 currentTargetPart; /* selected? */
     /* 0x1A3 */ char unk_1A3;
     /* 0x1A4 */ s16 currentTargetID2;
-    /* 0x1A6 */ u8 currentTargetPart2;
+    /* 0x1A6 */ s8 currentTargetPart2;
     /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
     /* 0x1AA */ char unk_1AA[4];
@@ -751,7 +752,7 @@ typedef struct BattleStatus {
     /* 0x22C */ s32 dpadY; /* 0-60 */
     /* 0x230 */ s32 holdInputBuffer[64];
     /* 0x330 */ s32 pushInputBuffer[64];
-    /* 0x430 */ u8 holdInputBufferPos;
+    /* 0x430 */ s8 holdInputBufferPos;
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
@@ -1736,7 +1737,7 @@ typedef struct Actor {
     /* 0x198 */ Vec2b unk_198;
     /* 0x19A */ s8 unk_19A;
     /* 0x19B */ char unk_19B[1];
-    /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound */
+    /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
     /* 0x1B4 */ s16 actorTypeData1b[2];
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
@@ -1784,10 +1785,10 @@ typedef struct Actor {
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];
     /* 0x220 */ s8 isGlowing;
-    /* 0x221 */ u8 attackBoost;
+    /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
-    /* 0x223 */ u8 chillOutAmount; /* attack reduction */
-    /* 0x224 */ u8 chillOutTurns;
+    /* 0x223 */ s8 chillOutAmount; /* attack reduction */
+    /* 0x224 */ s8 chillOutTurns;
     /* 0x225 */ char unk_225[3];
     /* 0x228 */ EffectInstance* unk_228;
     /* 0x22C */ struct SelectableTarget targetData[24];
