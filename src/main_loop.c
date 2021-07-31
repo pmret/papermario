@@ -293,7 +293,7 @@ void load_engine_data(void) {
     initialize_curtains();
     poll_rumble();
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < ARRAY_COUNT(gGameStatusPtr->unk_50); i++) {
         gGameStatusPtr->unk_50[i] = 3;
         gGameStatusPtr->unk_48[i] = 12;
     }
