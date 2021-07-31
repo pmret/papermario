@@ -2,9 +2,48 @@
 
 // TODO: move to src/battle/action_cmd.c
 
+enum ActionCommand {
+    ACTION_COMMAND_JUMP = 1,
+    ACTION_COMMAND_SMASH,
+    ACTION_COMMAND_FLEE,
+    ACTION_COMMAND_BREAK_FREE,
+    ACTION_COMMAND_WHIRLWIND,
+    ACTION_COMMAND_STOP_LEECH,
+    ACTION_COMMAND_07,
+    ACTION_COMMAND_DIZZY_SHELL,
+    ACTION_COMMAND_FIRE_SHELL,
+    ACTION_COMMAND_0A,
+    ACTION_COMMAND_BOMB,
+    ACTION_COMMAND_BODY_SLAM,
+    ACTION_COMMAND_AIR_LIFT,
+    ACTION_COMMAND_AIR_RAID,
+    ACTION_COMMAND_SQUIRT,
+    ACTION_COMMAND_POWER_SHOCK,
+    ACTION_COMMAND_MEGA_SHOCK,
+    ACTION_COMMAND_SMACK,
+    ACTION_COMMAND_SPINY_SURGE,
+    ACTION_COMMAND_HURRICANE,
+    ACTION_COMMAND_SPOOK,
+    ACTION_COMMAND_WATER_BLOCK,
+    ACTION_COMMAND_TIDAL_WAVE,
+};
+
 // action command state
 extern struct D_8029FBE0 {
-    /* 0x00 */ char unk_00[0x6D];
+    /* 0x00 */ char unk_00[0x4A];
+    /* 0x4A */ s16 unk_4A; // current action command id?
+    /* 0x4C */ s16 unk_4C;
+    /* 0x4E */ char unk_4E[0x10];
+    /* 0x5E */ s8 unk_5E;
+    /* 0x5F */ s8 unk_5F;
+    /* 0x60 */ s8 unk_60;
+    /* 0x61 */ s8 unk_61;
+    /* 0x62 */ s16 unk_62;
+    /* 0x64 */ s16 unk_64;
+    /* 0x66 */ s16 unk_66;
+    /* 0x68 */ s16 unk_68;
+    /* 0x6A */ s16 unk_6A;
+    /* 0x6C */ s16 unk_6C;
     /* 0x6E */ s16 hitsTakenIsMax;
     /* 0x70 */ char unk_70[2];
     /* 0x72 */ char unk_72[2];
@@ -74,9 +113,123 @@ void func_80268834(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_80268284(arg0, arg1, arg2, -1);
 }
 
-INCLUDE_ASM(s32, "196AA0", func_80268858);
+void func_80268858(void) {
+    struct D_8029FBE0* d8029FBE0 = &D_8029FBE0;
 
+    d8029FBE0->unk_5E = FALSE;
+    d8029FBE0->unk_6A = FALSE;
+
+    if (!(gBattleStatus.flags1 & 0x80000)) {
+        if (is_ability_active(ABILITY_RIGHT_ON)) {
+            d8029FBE0->unk_5E = TRUE;
+        }
+
+        if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_BERSERKER)) {
+            d8029FBE0->unk_61 = FALSE;
+            d8029FBE0->unk_6A = TRUE;
+
+            if (rand_int(100) < 25) {
+                d8029FBE0->unk_5E = TRUE;
+            }
+        }
+    }
+
+    if (gGameStatusPtr->demoFlags & 1) {
+        d8029FBE0->unk_5E = TRUE;
+    }
+
+    if (gBattleStatus.flags1 & 0x1000) {
+        d8029FBE0->unk_5E = TRUE;
+        d8029FBE0->unk_61 = FALSE;
+    }
+}
+
+// action_cmd_current_main - calls current action command's main func
+#ifdef NON_MATCHING
+void func_80268938(void) {
+    enum ActionCommand ac;
+
+    if (gBattleStatus.flags1 & 0x8000) {
+        func_80268C9C();
+    }
+
+    ac = D_8029FBE0.unk_4A;
+
+    switch (ac) {
+        case ACTION_COMMAND_JUMP:
+            func_802A9234_421C24();
+            return;
+        case ACTION_COMMAND_SMASH:
+            func_802A936C_42236C();
+            return;
+        case ACTION_COMMAND_FLEE:
+            func_802A9378_422E48();
+            return;
+        case ACTION_COMMAND_BREAK_FREE:
+            func_802A92DC_4236CC();
+            return;
+        case ACTION_COMMAND_WHIRLWIND:
+            func_802A92F0_423F60();
+            return;
+        case ACTION_COMMAND_STOP_LEECH:
+            func_802A91F8_425788();
+            return;
+        case ACTION_COMMAND_07:
+            func_802A9228_425D78();
+            return;
+        case ACTION_COMMAND_DIZZY_SHELL:
+            func_802A928C_4263FC();
+            return;
+        case ACTION_COMMAND_FIRE_SHELL:
+            func_802A9294_426C64();
+            return;
+        case ACTION_COMMAND_0A:
+            func_802A928C_4263FC();
+            return;
+        case ACTION_COMMAND_BOMB:
+            func_802A928C_4263FC();
+            return;
+        case ACTION_COMMAND_BODY_SLAM:
+            func_802A92D4_4285B4();
+            return;
+        case ACTION_COMMAND_AIR_LIFT:
+            func_802A9278_428CE8();
+            return;
+        case ACTION_COMMAND_AIR_RAID:
+            func_802A9294_426C64();
+            return;
+        case ACTION_COMMAND_SQUIRT:
+            func_802A9208_429F28();
+            return;
+        case ACTION_COMMAND_POWER_SHOCK:
+            func_802A9310_42D220();
+            return;
+        case ACTION_COMMAND_MEGA_SHOCK:
+            func_802A92A0_422D70();
+            return;
+        case ACTION_COMMAND_SMACK:
+            func_802A9298_42E638();
+            return;
+        case ACTION_COMMAND_SPINY_SURGE:
+            func_802A9254_42F074();
+            return;
+        case ACTION_COMMAND_HURRICANE:
+            func_802A92A0_422D70();
+            return;
+        case ACTION_COMMAND_SPOOK:
+            func_802A9298_42E638();
+            return;
+        case ACTION_COMMAND_WATER_BLOCK:
+            func_802A948C_42A97C();
+            return;
+        case ACTION_COMMAND_TIDAL_WAVE:
+            func_802A9228_425D78();
+            return;
+    }
+}
+#else
 INCLUDE_ASM(s32, "196AA0", func_80268938);
+#endif
 
 INCLUDE_ASM(s32, "196AA0", func_80268AF8);
 
