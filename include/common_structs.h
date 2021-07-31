@@ -729,10 +729,10 @@ typedef struct BattleStatus {
     /* 0x19A */ u8 unk_19A;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
-    /* 0x1A2 */ u8 currentTargetPart; /* selected? */
+    /* 0x1A2 */ s8 currentTargetPart; /* selected? */
     /* 0x1A3 */ char unk_1A3;
     /* 0x1A4 */ s16 currentTargetID2;
-    /* 0x1A6 */ u8 currentTargetPart2;
+    /* 0x1A6 */ s8 currentTargetPart2;
     /* 0x1A7 */ s8 battlePhase;
     /* 0x1A8 */ s16 attackerActorID;
     /* 0x1AA */ char unk_1AA[4];
@@ -1784,10 +1784,10 @@ typedef struct Actor {
     /* 0x21C */ u8 status;
     /* 0x21D */ char unk_21D[3];
     /* 0x220 */ s8 isGlowing;
-    /* 0x221 */ u8 attackBoost;
+    /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
-    /* 0x223 */ u8 chillOutAmount; /* attack reduction */
-    /* 0x224 */ u8 chillOutTurns;
+    /* 0x223 */ s8 chillOutAmount; /* attack reduction */
+    /* 0x224 */ s8 chillOutTurns;
     /* 0x225 */ char unk_225[7];
     /* 0x22C */ struct SelectableTarget targetData[24];
     /* 0x40C */ s8 targetListLength;
