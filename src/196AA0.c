@@ -6,7 +6,14 @@ extern struct D_8029FBE0 {
     /* 0x6E */ s16 hitsTakenIsMax;
 } D_8029FBE0; // size unknown
 
-INCLUDE_ASM(s32, "196AA0", LoadActionCommand);
+extern void* actionCommandDmaTable[23];
+
+ApiStatus LoadActionCommand(ScriptInstance* script, s32 isInitialCall) {
+    s32 cmd = get_variable(script, *script->ptrReadPos);
+
+    dma_copy(actionCommandDmaTable[cmd * 3], actionCommandDmaTable[cmd * 3 + 1], actionCommandDmaTable[cmd * 3 + 2]);
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "196AA0", func_80268224);
 
