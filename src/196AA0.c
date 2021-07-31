@@ -18,6 +18,7 @@ extern struct D_8029FBE0 {
 } D_8029FBE0; // size unknown
 
 extern void* actionCommandDmaTable[23];
+extern s32 D_8029FBC0;
 
 ApiStatus LoadActionCommand(ScriptInstance* script, s32 isInitialCall) {
     s32 cmd = get_variable(script, *script->ptrReadPos);
@@ -43,17 +44,35 @@ s32 func_80268224(s32 arg0) {
 
 INCLUDE_ASM(s32, "196AA0", func_80268284);
 
-INCLUDE_ASM(s32, "196AA0", func_80268770);
+void func_80268770(s32 arg0, s32 arg1, s32 arg2) {
+    D_8029FBC0 = 2;
+    func_80268284(arg0, arg1, arg2, 0);
+}
 
-INCLUDE_ASM(s32, "196AA0", func_80268798);
+void func_80268798(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    D_8029FBC0 = arg3;
+    func_80268284(arg0, arg1, arg2, 0);
+}
 
-INCLUDE_ASM(s32, "196AA0", func_802687BC);
+void func_802687BC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    D_8029FBC0 = 2;
+    func_80268284(arg0, arg1, arg2, arg3);
+}
 
-INCLUDE_ASM(s32, "196AA0", func_802687E4);
+void func_802687E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    D_8029FBC0 = arg3;
+    func_80268284(arg0, arg1, arg2, arg4);
+}
 
-INCLUDE_ASM(s32, "196AA0", func_8026880C);
+void func_8026880C(s32 arg0, s32 arg1, s32 arg2) {
+    D_8029FBC0 = 2;
+    func_80268284(arg0, arg1, arg2, -1);
+}
 
-INCLUDE_ASM(s32, "196AA0", func_80268834);
+void func_80268834(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    D_8029FBC0 = arg3;
+    func_80268284(arg0, arg1, arg2, -1);
+}
 
 INCLUDE_ASM(s32, "196AA0", func_80268858);
 
