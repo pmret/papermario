@@ -258,85 +258,86 @@ s32 check_block_input(s32 buttonMask) {
         return TRUE;
     }
 
+    if (battleStatus->unk_83 == 0 || (gGameStatusPtr->demoFlags & 1)) {
+        return FALSE;
+    }
+
     block = FALSE;
 
-    if (battleStatus->unk_83 && !(gGameStatusPtr->demoFlags & 1)) {
-        if (playerData->hitsTaken < 9999) {
-            playerData->hitsTaken += 1;
-            d8029FBE0->hitsTakenIsMax = FALSE;
-        } else {
-            d8029FBE0->hitsTakenIsMax = TRUE;
+    if (playerData->hitsTaken < 9999) {
+        playerData->hitsTaken += 1;
+        d8029FBE0->hitsTakenIsMax = FALSE;
+    } else {
+        d8029FBE0->hitsTakenIsMax = TRUE;
+    }
+
+    block = FALSE;
+    blockWindow = 3;
+    mashWindow = 10;
+
+    if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_DODGE_MASTER)) {
+        blockWindow = 5;
+    }
+
+    // Pre-window mashing check
+    bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
+
+    if (bufferPos < 0) {
+        bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
+    }
+    for (i = 0; i < mashWindow; i++) {
+        if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
+            bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
 
+        if (battleStatus->pushInputBuffer[bufferPos] & buttonMask) {
+            mash = TRUE;
+            break;
+        }
+        bufferPos++;
+    }
+
+    // Block check
+    bufferPos = battleStatus->inputBufferPos - blockWindow;
+    if (bufferPos < 0) {
+        bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
+    }
+    for (i = 0; i < blockWindow; i++) {
+        if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
+            bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
+        }
+
+        if (battleStatus->pushInputBuffer[bufferPos] & buttonMask) {
+            battleStatus->blockResult = 1; // Block
+            block = TRUE;
+            break;
+        }
+        bufferPos++;
+    }
+
+    if (mash) {
+        battleStatus->blockResult = -1; // Mash
         block = FALSE;
-        blockWindow = 3;
-        mashWindow = 10;
+    }
 
-        if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_DODGE_MASTER)) {
-            blockWindow = 5;
-        }
-
-        // Pre-window mashing check
-        bufferPos = battleStatus->inputBufferPos - (mashWindow + blockWindow);
-
+    // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
+    ignoreWindow = mashWindow + blockWindow;
+    if (block == TRUE) {
+        bufferPos = battleStatus->inputBufferPos - ignoreWindow;
         if (bufferPos < 0) {
             bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
         }
-        for (i = 0; i < mashWindow; i++) {
+        for (i = 0; i < ignoreWindow; i++) {
             if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
                 bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
             }
-
-            if (battleStatus->pushInputBuffer[bufferPos] & buttonMask) {
-                mash = TRUE;
-                break;
-            }
+            battleStatus->pushInputBuffer[bufferPos] = 0;
             bufferPos++;
         }
+    }
 
-        // Block check
-        bufferPos = battleStatus->inputBufferPos - blockWindow;
-        if (bufferPos < 0) {
-            bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
-        }
-        for (i = 0; i < blockWindow; i++) {
-            if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
-                bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
-            }
-
-            if (battleStatus->pushInputBuffer[bufferPos] & buttonMask) {
-                battleStatus->blockResult = 1; // Block
-                block = TRUE;
-                break;
-            }
-            bufferPos++;
-        }
-
-        if (mash) {
-            battleStatus->blockResult = -1; // Mash
-            block = FALSE;
-        }
-
-        // Ignore inputs until another mash window has passed, so check_block_input() can be called in quick succession
-        ignoreWindow = mashWindow + blockWindow;
-        if (block == TRUE) {
-            bufferPos = battleStatus->inputBufferPos - ignoreWindow;
-            if (bufferPos < 0) {
-                bufferPos += ARRAY_COUNT(battleStatus->pushInputBuffer);
-            }
-            for (i = 0; i < ignoreWindow; i++) {
-                //block = FALSE; // this should be a different var
-                if (bufferPos >= ARRAY_COUNT(battleStatus->pushInputBuffer)) {
-                    bufferPos -= ARRAY_COUNT(battleStatus->pushInputBuffer);
-                }
-                battleStatus->pushInputBuffer[bufferPos] = 0;
-                bufferPos++;
-            }
-        }
-
-        if (block && !d8029FBE0->hitsTakenIsMax) {
-            playerData->hitsBlocked += 1;
-        }
+    if (block && !d8029FBE0->hitsTakenIsMax) {
+        playerData->hitsBlocked += 1;
     }
 
     return block;
