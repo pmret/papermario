@@ -26,7 +26,20 @@ ApiStatus LoadActionCommand(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "196AA0", func_80268224);
+s32 func_80268224(s32 arg0) {
+    if (!(gBattleStatus.flags1 & 0x80000)) {
+        arg0 -= is_ability_active(ABILITY_DODGE_MASTER) * 3;
+    }
+
+    if (arg0 < 0) {
+        arg0 = 0;
+    }
+    if (arg0 > 7) {
+        arg0 = 7;
+    }
+
+    return arg0;
+}
 
 INCLUDE_ASM(s32, "196AA0", func_80268284);
 
