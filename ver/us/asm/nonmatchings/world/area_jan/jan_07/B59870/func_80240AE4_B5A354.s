@@ -97,7 +97,7 @@ glabel func_80240AE4_B5A354
 /* B5A494 80240C24 8E22006C */  lw        $v0, 0x6c($s1)
 /* B5A498 80240C28 14400006 */  bnez      $v0, .L80240C44
 /* B5A49C 80240C2C 00000000 */   nop
-/* B5A4A0 80240C30 0C090107 */  jal       func_8024041C_B59C8C
+/* B5A4A0 80240C30 0C090107 */  jal       jan_07_UnkNpcAIFunc26
 /* B5A4A4 80240C34 0240202D */   daddu    $a0, $s2, $zero
 /* B5A4A8 80240C38 10400002 */  beqz      $v0, .L80240C44
 /* B5A4AC 80240C3C 2402001E */   addiu    $v0, $zero, 0x1e

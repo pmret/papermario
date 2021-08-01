@@ -14,46 +14,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_802414A4_B5F754);
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_08/B5F650", func_80241870_B5FB20);
-/*
-s32 N(func_80241870_B5FB20)(ScriptInstance *script) {
-    PlayerStatus** playerStatus = &gPlayerStatusPtr;
-    Enemy* enemy = script->owner1.enemy;
-    Npc *npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = &gCameras[gCurrentCamID];
-    Enemy* enemy2 = get_enemy(enemy->npcID + 1);
-    f32 phi_f20;
-    s32 ret = TRUE;
-
-    if (dist2D(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z) > enemy2->varTable[2]) {
-        ret = FALSE;
-    }
-
-    if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
-        phi_f20 = 90.0f;
-    } else {
-        phi_f20 = 270.0f;
-    }
-
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, (*playerStatus)->position.x, (*playerStatus)->position.z))) > enemy2->varTable[3]) {
-        ret = FALSE;
-    }
-
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - (*playerStatus)->position.y)) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 9) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 7) {
-        ret = FALSE;
-    }
-
-    return ret;
-}
-*/
+#include "world/common/UnkNpcAIFunc26.inc.c"
 
 #include "world/common/UnkFunc7.inc.c"
 
@@ -94,7 +55,7 @@ ApiStatus N(func_80241C84_B5FF34)(ScriptInstance *script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80241870_B5FB20)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -182,7 +143,7 @@ ApiStatus N(func_80241F38_B601E8)(ScriptInstance *script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80241870_B5FB20)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 

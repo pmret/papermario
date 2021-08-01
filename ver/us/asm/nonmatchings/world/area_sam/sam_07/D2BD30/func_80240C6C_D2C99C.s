@@ -97,7 +97,7 @@ glabel func_80240C6C_D2C99C
 /* D2CADC 80240DAC 8E22006C */  lw        $v0, 0x6c($s1)
 /* D2CAE0 80240DB0 14400006 */  bnez      $v0, .L80240DCC
 /* D2CAE4 80240DB4 00000000 */   nop
-/* D2CAE8 80240DB8 0C090216 */  jal       func_80240858_D2C588
+/* D2CAE8 80240DB8 0C090216 */  jal       sam_07_UnkNpcAIFunc26
 /* D2CAEC 80240DBC 0240202D */   daddu    $a0, $s2, $zero
 /* D2CAF0 80240DC0 10400002 */  beqz      $v0, .L80240DCC
 /* D2CAF4 80240DC4 2402001E */   addiu    $v0, $zero, 0x1e

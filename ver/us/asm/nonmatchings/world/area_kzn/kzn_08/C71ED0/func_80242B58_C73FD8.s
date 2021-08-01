@@ -97,7 +97,7 @@ glabel func_80242B58_C73FD8
 /* C74118 80242C98 8E22006C */  lw        $v0, 0x6c($s1)
 /* C7411C 80242C9C 14400006 */  bnez      $v0, .L80242CB8
 /* C74120 80242CA0 00000000 */   nop
-/* C74124 80242CA4 0C0909D1 */  jal       func_80242744_C73BC4
+/* C74124 80242CA4 0C0909D1 */  jal       kzn_08_UnkNpcAIFunc26
 /* C74128 80242CA8 0240202D */   daddu    $a0, $s2, $zero
 /* C7412C 80242CAC 10400002 */  beqz      $v0, .L80242CB8
 /* C74130 80242CB0 2402001E */   addiu    $v0, $zero, 0x1e

@@ -97,7 +97,7 @@ glabel func_8024135C_D30FDC
 /* D3111C 8024149C 8E22006C */  lw        $v0, 0x6c($s1)
 /* D31120 802414A0 14400006 */  bnez      $v0, .L802414BC
 /* D31124 802414A4 00000000 */   nop
-/* D31128 802414A8 0C0903D2 */  jal       func_80240F48_D30BC8
+/* D31128 802414A8 0C0903D2 */  jal       sam_08_UnkNpcAIFunc26
 /* D3112C 802414AC 0240202D */   daddu    $a0, $s2, $zero
 /* D31130 802414B0 10400002 */  beqz      $v0, .L802414BC
 /* D31134 802414B4 2402001E */   addiu    $v0, $zero, 0x1e
