@@ -1,26 +1,7 @@
-#include "jan_12.h"
+#include "common.h"
+#include "map.h"
 
-#include "world/common/UnkNpcAIFunc4.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_80240510_B735C0);
-
-#include "world/common/UnkNpcAIFunc6.inc.c"
-
-#include "world/common/UnkNpcAIFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc8.inc.c"
-
-#include "world/common/UnkNpcAIFunc5.inc.c"
-
-#include "world/common/UnkNpcAIFunc26.inc.c"
-
-#include "world/common/UnkFunc7.inc.c"
-
-#include "world/common/UnkNpcAIFunc27.inc.c"
-
-INCLUDE_ASM(s32, "world/area_jan/jan_12/B73570", func_80240FA4_B74054);
-/*
-ApiStatus N(func_80240FA4_B74054)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(UnkNpcAIFunc27)(ScriptInstance *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -40,7 +21,7 @@ ApiStatus N(func_80240FA4_B74054)(ScriptInstance *script, s32 isInitialCall) {
     if (isInitialCall || (enemy->unk_B0 & 4)) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[0];
+        npc->currentAnim.w = enemy->animList[0];
         npc->flags &= ~0x800;
         if (!enemy->territory->wander.isFlying) {
             npc->flags = (npc->flags | 0x200) & ~0x8;
@@ -66,9 +47,9 @@ ApiStatus N(func_80240FA4_B74054)(ScriptInstance *script, s32 isInitialCall) {
             func_800496B8(script, npcAISettings, territoryPtr);
             break;
         case 2:
-            N(UnkNpcAIFunc4)(script, npcAISettings, territoryPtr);
+            base_UnkNpcAIFunc1(script, npcAISettings, territoryPtr);
         case 3:
-            N(func_80240510_B735C0)(script, npcAISettings, territoryPtr);
+            func_80049C04(script, npcAISettings, territoryPtr);
             break;
         case 10:
             func_80049E3C(script, npcAISettings, territoryPtr);
@@ -104,4 +85,3 @@ ApiStatus N(func_80240FA4_B74054)(ScriptInstance *script, s32 isInitialCall) {
 
     return ApiStatus_BLOCK;
 }
-*/
