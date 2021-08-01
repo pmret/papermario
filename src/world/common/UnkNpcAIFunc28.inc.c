@@ -49,7 +49,7 @@ ApiStatus N(UnkNpcAIFunc28)(ScriptInstance *script, s32 isInitialCall) {
         case 2:
             N(UnkNpcAIFunc4)(script, npcAISettings, territoryPtr);
         case 3:
-            func_80049C04(script, npcAISettings, territoryPtr);
+            N(UnkNpcAIFunc29)(script, npcAISettings, territoryPtr);
             break;
         case 10:
             func_80049E3C(script, npcAISettings, territoryPtr);

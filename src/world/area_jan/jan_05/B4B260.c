@@ -20,7 +20,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241494_B4BF04);
 
 #include "world/common/UnkNpcAIFunc4.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241708_B4C178);
+#include "world/common/UnkNpcAIFunc29.inc.c"
 
 #include "world/common/UnkNpcAIFunc6.inc.c"
 
@@ -36,12 +36,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241708_B4C178);
 
 #include "world/common/UnkNpcAIFunc27.inc.c"
 
-// Is a duplicate but points to non-duplicated funcs...we should figure this out
-// #define NAMESPACE dup_jan_05
-// #include "world/common/UnkNpcAIFunc27.inc.c"
-// #define NAMESPACE jan_05
-//#include "world/common/UnkNpcAIFunc28.inc.c"
-INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_8024219C_B4CC0C);
+#include "world/common/UnkNpcAIFunc28.inc.c"
 
 #define NAMESPACE dup_jan_05
 #include "world/common/foliage.inc.c"
