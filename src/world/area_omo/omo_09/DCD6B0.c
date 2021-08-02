@@ -149,12 +149,14 @@ INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024324C_DCFF1C);
 
 static char* N(exit_str_0) = "omo_09";
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_8024356C_DD023C);
+#include "world/common/SetNpcB5_3.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435B8_DD0288);
+#define NAMESPACE dup_omo_09
+#include "world/common/SetNpcB5_3.inc.c"
+#define NAMESPACE omo_09
 
-INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD6B0", func_802435CC_DD029C);
+#include "world/common/SetCamera0Flag1000.inc.c"
 
 #include "world/common/UnsetCamera0Flag1000.inc.c"

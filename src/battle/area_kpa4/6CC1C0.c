@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_kpa4
 
-INCLUDE_ASM(s32, "battle/area_kpa4/6CC1C0", func_80218150_6CC1C0);
+#include "common/ShrinkActor.inc.c"
 
 #include "common/UnkFloatFunc.inc.c"
 

@@ -137,7 +137,7 @@ ApiStatus N(func_80240E90_B85010)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240FA8_B85128);
+#include "world/common/SetCamera0Flag1000.inc.c"
 
 #include "world/common/UnsetCamera0Flag1000.inc.c"
 

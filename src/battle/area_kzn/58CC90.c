@@ -2,7 +2,9 @@
 
 #define NAMESPACE b_area_kzn
 
-INCLUDE_ASM(s32, "battle/area_kzn/58CC90", func_802189A0_58CC90);
+#define NAMESPACE dup_b_area_kzn
+#include "common/ShrinkActor.inc.c"
+#define NAMESPACE b_area_kzn
 
 #define NAMESPACE dup_b_area_kzn
 #include "common/GetSelectedMoveID.inc.c"

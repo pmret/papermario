@@ -1,8 +1,8 @@
 
-func_80126064 = 0x80126064;
-func_8012607C = 0x8012607C;
-func_80126094 = 0x80126094;
-func_801260AC = 0x801260AC;
+dead_set_main_pan_u = 0x80126064;
+dead_set_main_pan_v = 0x8012607C;
+dead_set_aux_pan_u = 0x80126094;
+dead_set_aux_pan_v = 0x801260AC;
 dead_get_npc_unsafe = 0x8003E4BC; // get_npc_safe
 func_80075110 = 0x80075110;
 func_80042AF4 = 0x80042AF4;

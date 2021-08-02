@@ -58,7 +58,8 @@ INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80243198_A968D8);
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80243270_A969B0);
 
-// Should be #include "world/common/GetEncounterEnemyIsOwner.inc.c"
-INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_80243504_A96C44);
+#define NAMESPACE dup_kpa_102
+#include "world/common/GetEncounterEnemyIsOwner.inc.c"
+#define NAMESPACE kpa_102
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_102/A93A50", func_8024353C_A96C7C);

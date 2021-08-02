@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_sam
 
-INCLUDE_ASM(s32, "battle/area_sam/6253E0", func_80219840_6253E0);
+#include "common/ShrinkActor.inc.c"
 
 #include "common/GetSelectedMoveID.inc.c"
 
