@@ -1873,9 +1873,11 @@ typedef struct PlayerStatus {
     /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ Vec3f extraVelocity;
     /* 0x028 */ Vec3f position;
-    /* 0x034 */ char unk_34[16];
+    /* 0x034 */ char unk_34[8];
+    /* 0x03C */ f32 unk_3C;
+    /* 0x040 */ f32 unk_40;
     /* 0x044 */ f32 decorationPos[2];
-    /* 0x04C */ char unk_4C[4];
+    /* 0x04C */ f32 unk_4C;
     /* 0x050 */ f32 jumpApexHeight;
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;
