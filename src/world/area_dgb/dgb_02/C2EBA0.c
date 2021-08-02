@@ -420,43 +420,7 @@ NpcGroupList N(npcGroupList_802425C8) = {
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-s32 N(func_80240208_C2EDA8)(ScriptInstance* script) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = &gCameras[gCurrentCamID];
-    Enemy* enemy2 = get_enemy(enemy->npcID + 1);
-    f32 phi_f20;
-    s32 ret = TRUE;
-
-    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > enemy2->varTable[2]) {
-        ret = FALSE;
-    }
-
-    if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
-        phi_f20 = 90.0f;
-    } else {
-        phi_f20 = 270.0f;
-    }
-
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                     gPlayerStatusPtr->position.z))) > enemy2->varTable[3]) {
-        ret = FALSE;
-    }
-
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 9) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 7) {
-        ret = FALSE;
-    }
-
-    return ret;
-}
+#include "world/common/UnkNpcAIFunc26.inc.c"
 
 #include "world/common/UnkFunc7.inc.c"
 
@@ -495,7 +459,7 @@ ApiStatus N(func_8024061C_C2F1BC)(ScriptInstance* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80240208_C2EDA8)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -759,7 +723,7 @@ ApiStatus N(func_802410D4_C2FC74)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(func_80240208_C2EDA8)(script)) {
+    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
