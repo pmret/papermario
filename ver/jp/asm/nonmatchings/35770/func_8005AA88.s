@@ -43,7 +43,7 @@ glabel func_8005AA88
 /* 35F18 8005AB18 AE620000 */  sw        $v0, ($s3)
 /* 35F1C 8005AB1C 8E100010 */  lw        $s0, 0x10($s0)
 /* 35F20 8005AB20 0220202D */  daddu     $a0, $s1, $zero
-/* 35F24 8005AB24 0C00AB3B */  jal       dead_rand_int
+/* 35F24 8005AB24 0C00AB3B */  jal       func_8002ACEC
 /* 35F28 8005AB28 02038021 */   addu     $s0, $s0, $v1
 /* 35F2C 8005AB2C 0200102D */  daddu     $v0, $s0, $zero
 /* 35F30 8005AB30 8FBF0040 */  lw        $ra, 0x40($sp)

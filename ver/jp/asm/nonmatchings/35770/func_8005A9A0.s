@@ -52,7 +52,7 @@ glabel func_8005A9A0
 /* 35E54 8005AA54 00A32821 */  addu      $a1, $a1, $v1
 /* 35E58 8005AA58 0C00A5BF */  jal       func_800296FC
 /* 35E5C 8005AA5C 00452821 */   addu     $a1, $v0, $a1
-/* 35E60 8005AA60 0C00AB3B */  jal       dead_rand_int
+/* 35E60 8005AA60 0C00AB3B */  jal       func_8002ACEC
 /* 35E64 8005AA64 0240202D */   daddu    $a0, $s2, $zero
 /* 35E68 8005AA68 0200102D */  daddu     $v0, $s0, $zero
 /* 35E6C 8005AA6C 8FBF0040 */  lw        $ra, 0x40($sp)

@@ -34,7 +34,7 @@ glabel func_8005AE50
 /* 362C0 8005AEC0 0200282D */  daddu     $a1, $s0, $zero
 /* 362C4 8005AEC4 0C016BBB */  jal       func_8005AEEC
 /* 362C8 8005AEC8 AE420004 */   sw       $v0, 4($s2)
-/* 362CC 8005AECC 0C00AB3B */  jal       dead_rand_int
+/* 362CC 8005AECC 0C00AB3B */  jal       func_8002ACEC
 /* 362D0 8005AED0 0200202D */   daddu    $a0, $s0, $zero
 .L8005AED4:
 /* 362D4 8005AED4 8FBF0024 */  lw        $ra, 0x24($sp)
