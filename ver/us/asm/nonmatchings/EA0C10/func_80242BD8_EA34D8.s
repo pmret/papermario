@@ -39,7 +39,7 @@ glabel func_80242BD8_EA34D8
 /* EA3560 80242C60 44820000 */  mtc1      $v0, $f0
 /* EA3564 80242C64 00000000 */  nop
 /* EA3568 80242C68 46800020 */  cvt.s.w   $f0, $f0
-/* EA356C 80242C6C 0C00F92F */  jal       func_8003E4BC
+/* EA356C 80242C6C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA3570 80242C70 E7A00014 */   swc1     $f0, 0x14($sp)
 /* EA3574 80242C74 3C048008 */  lui       $a0, %hi(D_8007C760)
 /* EA3578 80242C78 8C84C760 */  lw        $a0, %lo(D_8007C760)($a0)
@@ -56,7 +56,7 @@ glabel func_80242BD8_EA34D8
 /* EA35A4 80242CA4 00230821 */  addu      $at, $at, $v1
 /* EA35A8 80242CA8 C4208DEC */  lwc1      $f0, %lo(D_800B8DEC)($at)
 /* EA35AC 80242CAC 460C0300 */  add.s     $f12, $f0, $f12
-/* EA35B0 80242CB0 0C00AB85 */  jal       func_8002AE14
+/* EA35B0 80242CB0 0C00AB85 */  jal       dead_clamp_angle
 /* EA35B4 80242CB4 0040982D */   daddu    $s3, $v0, $zero
 /* EA35B8 80242CB8 27B00010 */  addiu     $s0, $sp, 0x10
 /* EA35BC 80242CBC 0200202D */  daddu     $a0, $s0, $zero

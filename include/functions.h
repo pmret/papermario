@@ -423,7 +423,7 @@ void set_curtain_fade_goal(f32 fade);
 void set_curtain_fade(f32 fade);
 
 // Dead functions:
-Npc* func_8003E4BC(NpcID npcId); // get_npc_safe
+Npc* dead_get_npc_unsafe(NpcID npcId); // get_npc_safe
 Npc* func_8003E534(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 
@@ -432,8 +432,8 @@ s32 dead_get_variable(ScriptInstance* script, Bytecode var);
 f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
 s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
 f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
-f32 func_8002AE14(f32 theta);
-s32 func_8002ACEC(s32);
+f32 dead_clamp_angle(f32 theta);
+s32 dead_rand_int(s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
 
 f32 dead_cos_rad(f32 x);

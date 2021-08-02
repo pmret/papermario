@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel func_8002ACEC
+glabel dead_rand_int
 /* 60EC 8002ACEC 3C028007 */  lui       $v0, %hi(D_8007417C)
 /* 60F0 8002ACF0 8C42417C */  lw        $v0, %lo(D_8007417C)($v0)
 /* 60F4 8002ACF4 27BDFFE8 */  addiu     $sp, $sp, -0x18

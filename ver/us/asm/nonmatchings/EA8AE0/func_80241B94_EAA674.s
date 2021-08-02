@@ -4,7 +4,7 @@
 glabel func_80241B94_EAA674
 /* EAA674 80241B94 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EAA678 80241B98 AFBF0010 */  sw        $ra, 0x10($sp)
-/* EAA67C 80241B9C 0C00F92F */  jal       func_8003E4BC
+/* EAA67C 80241B9C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EAA680 80241BA0 8C84008C */   lw       $a0, 0x8c($a0)
 /* EAA684 80241BA4 3C038025 */  lui       $v1, %hi(D_8024854C)
 /* EAA688 80241BA8 8C63854C */  lw        $v1, %lo(D_8024854C)($v1)

@@ -10,7 +10,7 @@ glabel func_8024234C_EF495C
 /* EF4970 80242360 AFB10034 */  sw        $s1, 0x34($sp)
 /* EF4974 80242364 AFB00030 */  sw        $s0, 0x30($sp)
 /* EF4978 80242368 8E710148 */  lw        $s1, 0x148($s3)
-/* EF497C 8024236C 0C00F92F */  jal       func_8003E4BC
+/* EF497C 8024236C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF4980 80242370 86240008 */   lh       $a0, 8($s1)
 /* EF4984 80242374 0040802D */  daddu     $s0, $v0, $zero
 /* EF4988 80242378 8E22007C */  lw        $v0, 0x7c($s1)

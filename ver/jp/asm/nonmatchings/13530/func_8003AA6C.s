@@ -14,7 +14,7 @@ glabel func_8003AA6C
 /* 15E90 8003AA90 3442FFFF */  ori       $v0, $v0, 0xffff
 /* 15E94 8003AA94 8E040020 */  lw        $a0, 0x20($s0)
 /* 15E98 8003AA98 00621024 */  and       $v0, $v1, $v0
-/* 15E9C 8003AA9C 0C00AB3B */  jal       func_8002ACEC
+/* 15E9C 8003AA9C 0C00AB3B */  jal       dead_rand_int
 /* 15EA0 8003AAA0 AE020000 */   sw       $v0, ($s0)
 /* 15EA4 8003AAA4 AE000020 */  sw        $zero, 0x20($s0)
 .L8003AAA8:

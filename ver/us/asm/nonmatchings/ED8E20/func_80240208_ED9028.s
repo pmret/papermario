@@ -20,7 +20,7 @@ glabel func_80240208_ED9028
 /* ED9064 80240244 00220821 */  addu      $at, $at, $v0
 /* ED9068 80240248 C4208DEC */  lwc1      $f0, %lo(D_800B8DEC)($at)
 /* ED906C 8024024C 460C0300 */  add.s     $f12, $f0, $f12
-/* ED9070 80240250 0C00AB85 */  jal       func_8002AE14
+/* ED9070 80240250 0C00AB85 */  jal       dead_clamp_angle
 /* ED9074 80240254 0080802D */   daddu    $s0, $a0, $zero
 /* ED9078 80240258 4600008D */  trunc.w.s $f2, $f0
 /* ED907C 8024025C E6020084 */  swc1      $f2, 0x84($s0)

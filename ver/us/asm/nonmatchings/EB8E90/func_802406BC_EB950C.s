@@ -17,7 +17,7 @@ glabel func_802406BC_EB950C
 /* EB9520 802406D0 AFB00010 */  sw        $s0, 0x10($sp)
 /* EB9524 802406D4 8E300148 */  lw        $s0, 0x148($s1)
 /* EB9528 802406D8 86040008 */  lh        $a0, 8($s0)
-/* EB952C 802406DC 0C00F92F */  jal       func_8003E4BC
+/* EB952C 802406DC 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB9530 802406E0 00A0902D */   daddu    $s2, $a1, $zero
 /* EB9534 802406E4 8E230078 */  lw        $v1, 0x78($s1)
 /* EB9538 802406E8 24630001 */  addiu     $v1, $v1, 1

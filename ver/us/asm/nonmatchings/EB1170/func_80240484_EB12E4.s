@@ -67,7 +67,7 @@ glabel func_80240484_EB12E4
 /* EB13D8 80240578 00000000 */  nop
 /* EB13DC 8024057C 4600B580 */  add.s     $f22, $f22, $f0
 .L80240580:
-/* EB13E0 80240580 0C00AB85 */  jal       func_8002AE14
+/* EB13E0 80240580 0C00AB85 */  jal       dead_clamp_angle
 /* EB13E4 80240584 4600B306 */   mov.s    $f12, $f22
 /* EB13E8 80240588 46000586 */  mov.s     $f22, $f0
 /* EB13EC 8024058C 3C014170 */  lui       $at, 0x4170

@@ -67,7 +67,7 @@ glabel func_802415DC_EAA0BC
 /* EAA1B0 802416D0 00000000 */  nop
 /* EAA1B4 802416D4 4600B580 */  add.s     $f22, $f22, $f0
 .L802416D8:
-/* EAA1B8 802416D8 0C00AB85 */  jal       func_8002AE14
+/* EAA1B8 802416D8 0C00AB85 */  jal       dead_clamp_angle
 /* EAA1BC 802416DC 4600B306 */   mov.s    $f12, $f22
 /* EAA1C0 802416E0 46000586 */  mov.s     $f22, $f0
 /* EAA1C4 802416E4 3C014170 */  lui       $at, 0x4170

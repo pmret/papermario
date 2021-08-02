@@ -18,7 +18,7 @@ glabel func_80241DE4_EA26E4
 /* EA26FC 80241DFC AFB00010 */  sw        $s0, 0x10($sp)
 /* EA2700 80241E00 8E710148 */  lw        $s1, 0x148($s3)
 /* EA2704 80241E04 86240008 */  lh        $a0, 8($s1)
-/* EA2708 80241E08 0C00F92F */  jal       func_8003E4BC
+/* EA2708 80241E08 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA270C 80241E0C 00A0902D */   daddu    $s2, $a1, $zero
 /* EA2710 80241E10 0040802D */  daddu     $s0, $v0, $zero
 /* EA2714 80241E14 8602008E */  lh        $v0, 0x8e($s0)

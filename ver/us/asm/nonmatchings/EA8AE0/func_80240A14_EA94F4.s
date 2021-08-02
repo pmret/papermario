@@ -23,7 +23,7 @@ glabel func_80240A14_EA94F4
 /* EA953C 80240A5C 44826000 */  mtc1      $v0, $f12
 /* EA9540 80240A60 00000000 */  nop
 /* EA9544 80240A64 46806320 */  cvt.s.w   $f12, $f12
-/* EA9548 80240A68 0C00AB85 */  jal       func_8002AE14
+/* EA9548 80240A68 0C00AB85 */  jal       dead_clamp_angle
 /* EA954C 80240A6C E6020004 */   swc1     $f2, 4($s0)
 /* EA9550 80240A70 4600010D */  trunc.w.s $f4, $f0
 /* EA9554 80240A74 44022000 */  mfc1      $v0, $f4

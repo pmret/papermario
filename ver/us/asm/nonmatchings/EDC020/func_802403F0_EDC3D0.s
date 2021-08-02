@@ -67,7 +67,7 @@ glabel func_802403F0_EDC3D0
 /* EDC4C4 802404E4 00000000 */  nop
 /* EDC4C8 802404E8 4600B580 */  add.s     $f22, $f22, $f0
 .L802404EC:
-/* EDC4CC 802404EC 0C00AB85 */  jal       func_8002AE14
+/* EDC4CC 802404EC 0C00AB85 */  jal       dead_clamp_angle
 /* EDC4D0 802404F0 4600B306 */   mov.s    $f12, $f22
 /* EDC4D4 802404F4 46000586 */  mov.s     $f22, $f0
 /* EDC4D8 802404F8 3C014170 */  lui       $at, 0x4170

@@ -13,7 +13,7 @@ glabel func_800457D0
 /* 20BEC 800457EC 8E040018 */  lw        $a0, 0x18($s0)
 /* 20BF0 800457F0 50800004 */  beql      $a0, $zero, .L80045804
 /* 20BF4 800457F4 A6000010 */   sh       $zero, 0x10($s0)
-/* 20BF8 800457F8 0C00AB3B */  jal       func_8002ACEC
+/* 20BF8 800457F8 0C00AB3B */  jal       dead_rand_int
 /* 20BFC 800457FC 00000000 */   nop
 /* 20C00 80045800 A6000010 */  sh        $zero, 0x10($s0)
 .L80045804:

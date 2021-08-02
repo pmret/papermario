@@ -18,7 +18,7 @@ glabel func_80240CC0_EE7270
 /* EE72A4 80240CF4 8E710148 */  lw        $s1, 0x148($s3)
 /* EE72A8 80240CF8 00A0902D */  daddu     $s2, $a1, $zero
 /* EE72AC 80240CFC 86240008 */  lh        $a0, 8($s1)
-/* EE72B0 80240D00 0C00F92F */  jal       func_8003E4BC
+/* EE72B0 80240D00 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE72B4 80240D04 00C0A82D */   daddu    $s5, $a2, $zero
 /* EE72B8 80240D08 0040802D */  daddu     $s0, $v0, $zero
 /* EE72BC 80240D0C 0000A02D */  daddu     $s4, $zero, $zero
@@ -206,7 +206,7 @@ glabel func_80240CC0_EE7270
 /* EE7570 80240FC0 2442000A */  addiu     $v0, $v0, 0xa
 /* EE7574 80240FC4 44826000 */  mtc1      $v0, $f12
 /* EE7578 80240FC8 00000000 */  nop
-/* EE757C 80240FCC 0C00AB85 */  jal       func_8002AE14
+/* EE757C 80240FCC 0C00AB85 */  jal       dead_clamp_angle
 /* EE7580 80240FD0 46806320 */   cvt.s.w  $f12, $f12
 /* EE7584 80240FD4 4600020D */  trunc.w.s $f8, $f0
 /* EE7588 80240FD8 E6280074 */  swc1      $f8, 0x74($s1)
@@ -379,7 +379,7 @@ glabel func_80240CC0_EE7270
 .L80241254:
 /* EE7804 80241254 240403E8 */  addiu     $a0, $zero, 0x3e8
 /* EE7808 80241258 24020002 */  addiu     $v0, $zero, 2
-/* EE780C 8024125C 0C00AB3B */  jal       func_8002ACEC
+/* EE780C 8024125C 0C00AB3B */  jal       dead_rand_int
 /* EE7810 80241260 AE620070 */   sw       $v0, 0x70($s3)
 /* EE7814 80241264 3C035555 */  lui       $v1, 0x5555
 /* EE7818 80241268 34635556 */  ori       $v1, $v1, 0x5556

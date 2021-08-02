@@ -216,7 +216,7 @@ glabel L80240708_EA91E8
 /* EA92AC 802407CC 44826000 */  mtc1      $v0, $f12
 /* EA92B0 802407D0 00000000 */  nop
 /* EA92B4 802407D4 46806320 */  cvt.s.w   $f12, $f12
-/* EA92B8 802407D8 0C00AB85 */  jal       func_8002AE14
+/* EA92B8 802407D8 0C00AB85 */  jal       dead_clamp_angle
 /* EA92BC 802407DC E6220004 */   swc1     $f2, 4($s1)
 /* EA92C0 802407E0 4600010D */  trunc.w.s $f4, $f0
 /* EA92C4 802407E4 44022000 */  mfc1      $v0, $f4
@@ -254,7 +254,7 @@ glabel L80240708_EA91E8
 .L8024085C:
 /* EA933C 8024085C C620002C */  lwc1      $f0, 0x2c($s1)
 /* EA9340 80240860 C62C0030 */  lwc1      $f12, 0x30($s1)
-/* EA9344 80240864 0C00AB85 */  jal       func_8002AE14
+/* EA9344 80240864 0C00AB85 */  jal       dead_clamp_angle
 /* EA9348 80240868 460C0300 */   add.s    $f12, $f0, $f12
 /* EA934C 8024086C E620002C */  swc1      $f0, 0x2c($s1)
 .L80240870:

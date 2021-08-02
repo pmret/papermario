@@ -7,7 +7,7 @@ glabel func_80241114_ED1104
 /* ED110C 8024111C 0080802D */  daddu     $s0, $a0, $zero
 /* ED1110 80241120 AFBF0014 */  sw        $ra, 0x14($sp)
 /* ED1114 80241124 8E020148 */  lw        $v0, 0x148($s0)
-/* ED1118 80241128 0C00F92F */  jal       func_8003E4BC
+/* ED1118 80241128 0C00F92F */  jal       dead_get_npc_unsafe
 /* ED111C 8024112C 84440008 */   lh       $a0, 8($v0)
 /* ED1120 80241130 0040202D */  daddu     $a0, $v0, $zero
 /* ED1124 80241134 8482008E */  lh        $v0, 0x8e($a0)

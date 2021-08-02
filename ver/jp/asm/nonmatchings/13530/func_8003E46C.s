@@ -77,7 +77,7 @@ glabel func_8003E46C
 /* 1996C 8003E56C 8E040064 */  lw        $a0, 0x64($s0)
 /* 19970 8003E570 50800004 */  beql      $a0, $zero, .L8003E584
 /* 19974 8003E574 0000202D */   daddu    $a0, $zero, $zero
-/* 19978 8003E578 0C00AB3B */  jal       func_8002ACEC
+/* 19978 8003E578 0C00AB3B */  jal       dead_rand_int
 /* 1997C 8003E57C 00000000 */   nop
 /* 19980 8003E580 0000202D */  daddu     $a0, $zero, $zero
 .L8003E584:
@@ -110,7 +110,7 @@ glabel func_8003E46C
 /* 199E0 8003E5E0 0C00F7E8 */  jal       func_8003DFA0
 /* 199E4 8003E5E4 00B12821 */   addu     $a1, $a1, $s1
 .L8003E5E8:
-/* 199E8 8003E5E8 0C00AB3B */  jal       func_8002ACEC
+/* 199E8 8003E5E8 0C00AB3B */  jal       dead_rand_int
 /* 199EC 8003E5EC 0200202D */   daddu    $a0, $s0, $zero
 /* 199F0 8003E5F0 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 199F4 8003E5F4 8FB3001C */  lw        $s3, 0x1c($sp)

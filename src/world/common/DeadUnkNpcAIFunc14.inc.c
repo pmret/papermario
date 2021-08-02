@@ -3,7 +3,7 @@
 
 void N(DeadUnkNpcAIFunc14)(ScriptInstance* script, NpcAISettings* aiSettings) {
     Enemy* enemy = script->owner1.enemy;
-    Npc* npc = func_8003E4BC(enemy->npcID);
+    Npc* npc = dead_get_npc_unsafe(enemy->npcID);
     f32 vt5 = enemy->varTable[5];
     f32 jumpVelocity = vt5 / 100.0;
     f32 vt6 = enemy->varTable[6];

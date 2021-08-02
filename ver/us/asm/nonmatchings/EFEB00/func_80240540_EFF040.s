@@ -36,7 +36,7 @@ glabel func_80240540_EFF040
 /* EFF0BC 802405BC 44071000 */  mfc1      $a3, $f2
 /* EFF0C0 802405C0 0C00ABDC */  jal       fio_validate_header_checksums
 /* EFF0C4 802405C4 46000606 */   mov.s    $f24, $f0
-/* EFF0C8 802405C8 0C00AB85 */  jal       func_8002AE14
+/* EFF0C8 802405C8 0C00AB85 */  jal       dead_clamp_angle
 /* EFF0CC 802405CC 46140301 */   sub.s    $f12, $f0, $f20
 /* EFF0D0 802405D0 46000506 */  mov.s     $f20, $f0
 /* EFF0D4 802405D4 0C00AD77 */  jal       func_8002B5DC

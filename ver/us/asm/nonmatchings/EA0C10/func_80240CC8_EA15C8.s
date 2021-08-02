@@ -12,7 +12,7 @@ glabel func_80240CC8_EA15C8
 /* EA15E4 80240CE4 8E720148 */  lw        $s2, 0x148($s3)
 /* EA15E8 80240CE8 00A0882D */  daddu     $s1, $a1, $zero
 /* EA15EC 80240CEC 86440008 */  lh        $a0, 8($s2)
-/* EA15F0 80240CF0 0C00F92F */  jal       func_8003E4BC
+/* EA15F0 80240CF0 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA15F4 80240CF4 00C0802D */   daddu    $s0, $a2, $zero
 /* EA15F8 80240CF8 0200202D */  daddu     $a0, $s0, $zero
 /* EA15FC 80240CFC 0240282D */  daddu     $a1, $s2, $zero

@@ -4,7 +4,7 @@
 glabel func_80242DA8_EA36A8
 /* EA36A8 80242DA8 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EA36AC 80242DAC AFBF0010 */  sw        $ra, 0x10($sp)
-/* EA36B0 80242DB0 0C00F92F */  jal       func_8003E4BC
+/* EA36B0 80242DB0 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA36B4 80242DB4 8C84008C */   lw       $a0, 0x8c($a0)
 /* EA36B8 80242DB8 3C038024 */  lui       $v1, %hi(D_80246894)
 /* EA36BC 80242DBC 8C636894 */  lw        $v1, %lo(D_80246894)($v1)

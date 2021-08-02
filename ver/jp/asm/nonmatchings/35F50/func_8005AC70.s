@@ -32,7 +32,7 @@ glabel func_8005AC70
 /* 360DC 8005ACDC 24040001 */  addiu     $a0, $zero, 1
 /* 360E0 8005ACE0 0C016BBB */  jal       func_8005AEEC
 /* 360E4 8005ACE4 0200282D */   daddu    $a1, $s0, $zero
-/* 360E8 8005ACE8 0C00AB3B */  jal       func_8002ACEC
+/* 360E8 8005ACE8 0C00AB3B */  jal       dead_rand_int
 /* 360EC 8005ACEC 0200202D */   daddu    $a0, $s0, $zero
 /* 360F0 8005ACF0 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 360F4 8005ACF4 8FB20020 */  lw        $s2, 0x20($sp)

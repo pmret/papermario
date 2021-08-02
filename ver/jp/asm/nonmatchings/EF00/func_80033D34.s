@@ -181,7 +181,7 @@ glabel func_80033D34
 /* F3D8 80033FD8 A06200AD */   sb       $v0, 0xad($v1)
 /* F3DC 80033FDC 3C10800A */  lui       $s0, %hi(D_8009E720)
 /* F3E0 80033FE0 2610E720 */  addiu     $s0, $s0, %lo(D_8009E720)
-/* F3E4 80033FE4 0C00AB3B */  jal       func_8002ACEC
+/* F3E4 80033FE4 0C00AB3B */  jal       dead_rand_int
 /* F3E8 80033FE8 8E040000 */   lw       $a0, ($s0)
 /* F3EC 80033FEC 240400FF */  addiu     $a0, $zero, 0xff
 /* F3F0 80033FF0 0C00CD18 */  jal       func_80033460

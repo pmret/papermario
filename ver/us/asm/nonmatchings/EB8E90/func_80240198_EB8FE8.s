@@ -15,7 +15,7 @@ glabel func_80240198_EB8FE8
 /* EB9010 802401C0 8E510148 */  lw        $s1, 0x148($s2)
 /* EB9014 802401C4 00A0982D */  daddu     $s3, $a1, $zero
 /* EB9018 802401C8 86240008 */  lh        $a0, 8($s1)
-/* EB901C 802401CC 0C00F92F */  jal       func_8003E4BC
+/* EB901C 802401CC 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB9020 802401D0 00C0A02D */   daddu    $s4, $a2, $zero
 /* EB9024 802401D4 8E630014 */  lw        $v1, 0x14($s3)
 /* EB9028 802401D8 04600030 */  bltz      $v1, .L8024029C
@@ -122,7 +122,7 @@ glabel func_80240198_EB8FE8
 /* EB91A8 80240358 4500002F */  bc1f      .L80240418
 /* EB91AC 8024035C 240403E8 */   addiu    $a0, $zero, 0x3e8
 /* EB91B0 80240360 24020002 */  addiu     $v0, $zero, 2
-/* EB91B4 80240364 0C00AB3B */  jal       func_8002ACEC
+/* EB91B4 80240364 0C00AB3B */  jal       dead_rand_int
 /* EB91B8 80240368 AE420070 */   sw       $v0, 0x70($s2)
 /* EB91BC 8024036C 3C035555 */  lui       $v1, 0x5555
 /* EB91C0 80240370 34635556 */  ori       $v1, $v1, 0x5556
@@ -149,7 +149,7 @@ glabel func_80240198_EB8FE8
 .L802403C4:
 /* EB9214 802403C4 AE420070 */  sw        $v0, 0x70($s2)
 .L802403C8:
-/* EB9218 802403C8 0C00AB3B */  jal       func_8002ACEC
+/* EB9218 802403C8 0C00AB3B */  jal       dead_rand_int
 /* EB921C 802403CC 24042710 */   addiu    $a0, $zero, 0x2710
 /* EB9220 802403D0 3C0351EB */  lui       $v1, 0x51eb
 /* EB9224 802403D4 3463851F */  ori       $v1, $v1, 0x851f

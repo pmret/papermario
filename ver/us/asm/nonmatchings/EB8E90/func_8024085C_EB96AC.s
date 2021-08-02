@@ -12,14 +12,14 @@ glabel func_8024085C_EB96AC
 /* EB96C8 80240878 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* EB96CC 8024087C 8E710148 */  lw        $s1, 0x148($s3)
 /* EB96D0 80240880 86240008 */  lh        $a0, 8($s1)
-/* EB96D4 80240884 0C00F92F */  jal       func_8003E4BC
+/* EB96D4 80240884 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB96D8 80240888 00A0802D */   daddu    $s0, $a1, $zero
 /* EB96DC 8024088C 8E040020 */  lw        $a0, 0x20($s0)
 /* EB96E0 80240890 0040902D */  daddu     $s2, $v0, $zero
 /* EB96E4 80240894 00041FC2 */  srl       $v1, $a0, 0x1f
 /* EB96E8 80240898 00832021 */  addu      $a0, $a0, $v1
 /* EB96EC 8024089C 00042043 */  sra       $a0, $a0, 1
-/* EB96F0 802408A0 0C00AB3B */  jal       func_8002ACEC
+/* EB96F0 802408A0 0C00AB3B */  jal       dead_rand_int
 /* EB96F4 802408A4 24840001 */   addiu    $a0, $a0, 1
 /* EB96F8 802408A8 8E030020 */  lw        $v1, 0x20($s0)
 /* EB96FC 802408AC C64C0038 */  lwc1      $f12, 0x38($s2)
@@ -67,7 +67,7 @@ glabel func_8024085C_EB96AC
 .L80240954:
 /* EB97A4 80240954 4604A500 */  add.s     $f20, $f20, $f4
 .L80240958:
-/* EB97A8 80240958 0C00AB85 */  jal       func_8002AE14
+/* EB97A8 80240958 0C00AB85 */  jal       dead_clamp_angle
 /* EB97AC 8024095C 4600A306 */   mov.s    $f12, $f20
 /* EB97B0 80240960 2402000D */  addiu     $v0, $zero, 0xd
 /* EB97B4 80240964 E640000C */  swc1      $f0, 0xc($s2)

@@ -8,7 +8,7 @@ glabel func_80240C5C_EA155C
 /* EA1568 80240C68 AFBF0018 */  sw        $ra, 0x18($sp)
 /* EA156C 80240C6C AFB00010 */  sw        $s0, 0x10($sp)
 /* EA1570 80240C70 8E300148 */  lw        $s0, 0x148($s1)
-/* EA1574 80240C74 0C00F92F */  jal       func_8003E4BC
+/* EA1574 80240C74 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA1578 80240C78 86040008 */   lh       $a0, 8($s0)
 /* EA157C 80240C7C 0040202D */  daddu     $a0, $v0, $zero
 /* EA1580 80240C80 8482008E */  lh        $v0, 0x8e($a0)

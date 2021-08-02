@@ -16,7 +16,7 @@ glabel func_80241C90_EF42A0
 /* EF42CC 80241CBC 8E930148 */  lw        $s3, 0x148($s4)
 /* EF42D0 80241CC0 86640008 */  lh        $a0, 8($s3)
 /* EF42D4 80241CC4 8E90000C */  lw        $s0, 0xc($s4)
-/* EF42D8 80241CC8 0C00F92F */  jal       func_8003E4BC
+/* EF42D8 80241CC8 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF42DC 80241CCC 00A0882D */   daddu    $s1, $a1, $zero
 /* EF42E0 80241CD0 0280202D */  daddu     $a0, $s4, $zero
 /* EF42E4 80241CD4 8E050000 */  lw        $a1, ($s0)

@@ -18,7 +18,7 @@ glabel func_8024236C_EE0D2C
 /* EE0D44 80242384 AFB00010 */  sw        $s0, 0x10($sp)
 /* EE0D48 80242388 8E710148 */  lw        $s1, 0x148($s3)
 /* EE0D4C 8024238C 86240008 */  lh        $a0, 8($s1)
-/* EE0D50 80242390 0C00F92F */  jal       func_8003E4BC
+/* EE0D50 80242390 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE0D54 80242394 00A0902D */   daddu    $s2, $a1, $zero
 /* EE0D58 80242398 0040802D */  daddu     $s0, $v0, $zero
 /* EE0D5C 8024239C 8602008E */  lh        $v0, 0x8e($s0)

@@ -9,7 +9,7 @@ glabel func_8024219C_EF47AC
 /* EF47BC 802421AC AFB10014 */  sw        $s1, 0x14($sp)
 /* EF47C0 802421B0 AFB00010 */  sw        $s0, 0x10($sp)
 /* EF47C4 802421B4 8E510148 */  lw        $s1, 0x148($s2)
-/* EF47C8 802421B8 0C00F92F */  jal       func_8003E4BC
+/* EF47C8 802421B8 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF47CC 802421BC 86240008 */   lh       $a0, 8($s1)
 /* EF47D0 802421C0 0040802D */  daddu     $s0, $v0, $zero
 /* EF47D4 802421C4 8E2300CC */  lw        $v1, 0xcc($s1)

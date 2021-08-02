@@ -24,7 +24,7 @@ glabel func_802414D0_EDFE90
 /* EDFEB4 802414F4 8EB20148 */  lw        $s2, 0x148($s5)
 /* EDFEB8 802414F8 86440008 */  lh        $a0, 8($s2)
 /* EDFEBC 802414FC 8EB0000C */  lw        $s0, 0xc($s5)
-/* EDFEC0 80241500 0C00F92F */  jal       func_8003E4BC
+/* EDFEC0 80241500 0C00F92F */  jal       dead_get_npc_unsafe
 /* EDFEC4 80241504 00A0882D */   daddu    $s1, $a1, $zero
 /* EDFEC8 80241508 02A0202D */  daddu     $a0, $s5, $zero
 /* EDFECC 8024150C 8E050000 */  lw        $a1, ($s0)

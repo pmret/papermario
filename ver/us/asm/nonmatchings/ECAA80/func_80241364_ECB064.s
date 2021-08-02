@@ -12,7 +12,7 @@ glabel func_80241364_ECB064
 /* ECB080 80241380 8E720148 */  lw        $s2, 0x148($s3)
 /* ECB084 80241384 00A0882D */  daddu     $s1, $a1, $zero
 /* ECB088 80241388 86440008 */  lh        $a0, 8($s2)
-/* ECB08C 8024138C 0C00F92F */  jal       func_8003E4BC
+/* ECB08C 8024138C 0C00F92F */  jal       dead_get_npc_unsafe
 /* ECB090 80241390 00C0802D */   daddu    $s0, $a2, $zero
 /* ECB094 80241394 0200202D */  daddu     $a0, $s0, $zero
 /* ECB098 80241398 0240282D */  daddu     $a1, $s2, $zero

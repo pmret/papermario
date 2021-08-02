@@ -20,7 +20,7 @@ glabel func_8024150C_ECB20C
 /* ECB22C 8024152C AFB00030 */  sw        $s0, 0x30($sp)
 /* ECB230 80241530 8EB10148 */  lw        $s1, 0x148($s5)
 /* ECB234 80241534 86240008 */  lh        $a0, 8($s1)
-/* ECB238 80241538 0C00F92F */  jal       func_8003E4BC
+/* ECB238 80241538 0C00F92F */  jal       dead_get_npc_unsafe
 /* ECB23C 8024153C 00A0802D */   daddu    $s0, $a1, $zero
 /* ECB240 80241540 8EA3000C */  lw        $v1, 0xc($s5)
 /* ECB244 80241544 02A0202D */  daddu     $a0, $s5, $zero
