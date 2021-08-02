@@ -45,10 +45,10 @@ ApiStatus N(DeadUnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
         }
     }
 
-    func_80126064(script->varTable[0], script->varTable[9]);
-    func_8012607C(script->varTable[0], script->varTable[10]);
-    func_80126094(script->varTable[0], script->varTable[11]);
-    func_801260AC(script->varTable[0], script->varTable[12]);
+    dead_set_main_pan_u(script->varTable[0], script->varTable[9]);
+    dead_set_main_pan_v(script->varTable[0], script->varTable[10]);
+    dead_set_aux_pan_u(script->varTable[0], script->varTable[11]);
+    dead_set_aux_pan_v(script->varTable[0], script->varTable[12]);
 
     script->functionTemp[0]++;
     script->functionTemp[1]++;

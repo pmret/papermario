@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/area_hos/47F0D0", func_80218020_47F0D0);
 
-INCLUDE_ASM(s32, "battle/area_hos/47F0D0", func_80218150_47F200);
+#include "common/ShrinkActor.inc.c"
 
 #include "common/GetSelectedMoveID.inc.c"
 

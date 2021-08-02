@@ -2,7 +2,7 @@
 
 #define NAMESPACE b_area_flo
 
-INCLUDE_ASM(s32, "battle/area_flo/5B1A10", func_80218560_5B1A10);
+#include "common/ShrinkActor.inc.c"
 
 #define NAMESPACE dup_b_area_flo
 #include "common/GetSelectedMoveID.inc.c"

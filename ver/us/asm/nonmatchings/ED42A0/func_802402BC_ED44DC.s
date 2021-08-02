@@ -89,16 +89,16 @@ glabel func_802402BC_ED44DC
 /* ED45FC 802403DC AE0200B4 */  sw        $v0, 0xb4($s0)
 .L802403E0:
 /* ED4600 802403E0 8E040084 */  lw        $a0, 0x84($s0)
-/* ED4604 802403E4 0C049819 */  jal       func_80126064
+/* ED4604 802403E4 0C049819 */  jal       dead_set_main_pan_u
 /* ED4608 802403E8 8E0500A8 */   lw       $a1, 0xa8($s0)
 /* ED460C 802403EC 8E040084 */  lw        $a0, 0x84($s0)
-/* ED4610 802403F0 0C04981F */  jal       func_8012607C
+/* ED4610 802403F0 0C04981F */  jal       dead_set_main_pan_v
 /* ED4614 802403F4 8E0500AC */   lw       $a1, 0xac($s0)
 /* ED4618 802403F8 8E040084 */  lw        $a0, 0x84($s0)
-/* ED461C 802403FC 0C049825 */  jal       func_80126094
+/* ED461C 802403FC 0C049825 */  jal       dead_set_aux_pan_u
 /* ED4620 80240400 8E0500B0 */   lw       $a1, 0xb0($s0)
 /* ED4624 80240404 8E040084 */  lw        $a0, 0x84($s0)
-/* ED4628 80240408 0C04982B */  jal       func_801260AC
+/* ED4628 80240408 0C04982B */  jal       dead_set_aux_pan_v
 /* ED462C 8024040C 8E0500B4 */   lw       $a1, 0xb4($s0)
 /* ED4630 80240410 8E020070 */  lw        $v0, 0x70($s0)
 /* ED4634 80240414 8E030078 */  lw        $v1, 0x78($s0)

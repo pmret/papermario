@@ -128,6 +128,6 @@ INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_80242F44_DF1DE4);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802433A0_DF2240);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_17/DEF400", func_802436C0_DF2560);
+#include "world/common/SetNpcB5_3.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
