@@ -1607,7 +1607,6 @@ enum NpcFlags {
 enum PlayerAnimFlags {
     PLAYER_ANIM_FLAG_HOLDING_ITEM    = 0x00000001,
     PLAYER_ANIM_FLAG_2               = 0x00000002,
-    PLAYER_ANIM_FLAG_3               = 0x00000003,
     PLAYER_ANIM_FLAG_4               = 0x00000004,
     PLAYER_ANIM_FLAG_8               = 0x00000008,
     PLAYER_ANIM_FLAG_INTERACT_PROMPT = 0x00000010, ///< ! prompt
