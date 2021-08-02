@@ -64,7 +64,51 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E2BB0);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_init_integrator_for_current_state);
+
+#ifdef NON_MATCHING
+// Rodata issue.
+extern s32 D_800F7B50;
+
+void phys_init_integrator_for_current_state() {
+    f32* temp_a0;
+    s8 temp_v0;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+
+    temp_v0 = playerStatus->actionState - 3;
+    switch (temp_v0) {
+    case 4:
+        playerStatus->gravityIntegrator[0] = 10.0f;
+        playerStatus->gravityIntegrator[1] = -5.0f;
+        playerStatus->gravityIntegrator[2] = 1.5f;
+        playerStatus->gravityIntegrator[3] = -0.3f;
+        return;
+    case 0:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 18:
+    case 20:
+            temp_a0 = &D_800F7B50 ;
+        if ((playerStatus->flags & 0x40000) == 0) {
+            playerStatus->gravityIntegrator[0] = *temp_a0++;
+            playerStatus->gravityIntegrator[1] = *temp_a0++;
+            playerStatus->gravityIntegrator[2] = *temp_a0++;
+            playerStatus->gravityIntegrator[3] = *temp_a0;
+            return;
+        }
+
+        playerStatus->gravityIntegrator[0] = *temp_a0++ * 0.5f;
+        playerStatus->gravityIntegrator[1] = *temp_a0++ * 0.5f;
+        playerStatus->gravityIntegrator[2] = *temp_a0++ * 0.5f;
+        playerStatus->gravityIntegrator[3] = *temp_a0++ * 0.5f;
+    default:
+        return;
+    }
+}
+#else
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state);
+#endif // NON_MATCHING
 
 #ifdef NON_MATCHING
 // void gravity_use_fall_parms(void) {
@@ -340,7 +384,7 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_adjust_cam_on_landing);
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing);
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_clear_spin_history);
 
