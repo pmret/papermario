@@ -46,7 +46,7 @@ EffectInstance* playFX_24(s32, f32, f32, f32, f32, s32);
 EffectInstance* playFX_25(s32, f32, f32, f32);
 void playFX_26(s32, f32, f32, f32);
 EffectInstance* playFX_27(s32, f32, f32, f32, f32, s32);
-void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
+void fx_sweat(s32, f32 x, f32 y, f32 z, f32, f32, s32);
 void fx_sleep_bubble(s32, f32, f32, f32, f32, f32, EffectInstanceData**);
 EffectInstance* playFX_2A(s32, f32, f32, f32);
 EffectInstance* playFX_2B(s32, f32, f32, f32);
