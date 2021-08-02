@@ -6,7 +6,7 @@ COPY requirements.txt /
 COPY requirements_extra.txt /
 COPY install.sh /
 
-RUN apt-get update && apt-get install -y sudo && ./install.sh --extra
+RUN apt-get update && ./install.sh --extra
 
 RUN mkdir /papermario
 WORKDIR /papermario

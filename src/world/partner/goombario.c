@@ -61,7 +61,7 @@ void world_goombario_pre_battle(Npc* partner) {
     Temp8010EBB0* temp = &D_8010EBB0;
 
     if (temp->unk_00 != 0) {
-        set_time_freeze_mode(0);
+        set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         CancelMessageAndBlock();
         partner_clear_player_tracking(partner);

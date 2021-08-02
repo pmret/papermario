@@ -1,4 +1,5 @@
 #include "flo_21.h"
+#include "effects.h"
 #include "message_ids.h"
 #include "sprite/npc/huff_n_puff.h"
 #include "sprite/npc/tuff_puff.h"
@@ -93,7 +94,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240D40) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         FadeOutMusic(0, 500);
     } else {
         SetMusicTrack(0, SONG_CLOUDY_CLIMB, 0, 8);
@@ -295,13 +296,13 @@ Script N(80240DA0) = SCRIPT({
 });
 
 Script N(80240E3C) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         == STORY_CH6_GREW_MAGIC_BEANSTALK {
             SI_VAR(0) = 0;
             if (SI_MAP_VAR(10) == 0) {
                 return;
             }
-            STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
+            SI_STORY_PROGRESS = STORY_CH6_DEFEATED_HUFF_N_PUFF;
         }
         == STORY_CH6_DEFEATED_HUFF_N_PUFF {
             SI_VAR(0) = 1;
@@ -368,7 +369,7 @@ Script N(80240E3C) = SCRIPT({
     N(func_802405BC_CE6CBC)(3);
     PlaySoundAtPlayer(312, 0);
     DisablePlayerInput(TRUE);
-    STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
+    SI_STORY_PROGRESS = STORY_CH6_STAR_SPIRIT_RESCUED;
     GotoMapSpecial("kmr_23", 5, 14);
     sleep 100;
 });
@@ -376,11 +377,11 @@ Script N(80240E3C) = SCRIPT({
 Script N(exitWalk_802412F4) = EXIT_WALK_SCRIPT(60,  0, "flo_19",  1);
 
 Script N(80241350) = SCRIPT({
-    bind N(exitWalk_802412F4) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_802412F4) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
+    SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -397,7 +398,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80241350);
     spawn EnterWalk;
     await N(80240D40);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240B00_CE7200)();
     }
     spawn N(80240E3C);
@@ -543,7 +544,7 @@ Script N(80241920) = SCRIPT({
 });
 
 Script N(80241B98) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         return;
     }
     AwaitPlayerApproach(650, 0, 30);
@@ -756,135 +757,127 @@ Script N(8024263C) = SCRIPT({
     sleep 100;
 });
 
-// *INDENT-OFF*
-Script N(80242918) = {
-    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_FIXED(1.0)),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024258C)),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 0, 8374, 0),
-            SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-            SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), SI_VAR(8), 11),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_802425D4)),
-            SI_CMD(ScriptOpcode_LOOP, 2),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 0, 8374, 0),
-                SI_CMD(ScriptOpcode_BUFFER_READ_2, SI_VAR(6), SI_VAR(7)),
-                SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), 4, 11),
-                SI_CMD(ScriptOpcode_LOOP, 0),
-                    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(11), SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                        SI_CMD(ScriptOpcode_BREAK_LOOP),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_802425E4)),
-        SI_CMD(ScriptOpcode_LOOP, 6),
-            SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-            SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), SI_VAR(8), 11),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_VAR(0)),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024262C)),
-            SI_CMD(ScriptOpcode_LOOP, 2),
-                SI_CMD(ScriptOpcode_BUFFER_READ_2, SI_VAR(6), SI_VAR(7)),
-                SI_CMD(ScriptOpcode_CALL, MakeLerp, SI_VAR(6), SI_VAR(7), 4, 11),
-                SI_CMD(ScriptOpcode_LOOP, 0),
-                    SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                    SI_CMD(ScriptOpcode_DIV_F, SI_VAR(0), 10),
-                    SI_CMD(ScriptOpcode_SET_F, SI_MAP_VAR(12), SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                        SI_CMD(ScriptOpcode_BREAK_LOOP),
-                    SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_LOOP, 100),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 0, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 1, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_CALL, SetNpcScale, 2, SI_MAP_VAR(11), SI_MAP_VAR(12), 1),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80242918) = SCRIPT({
+    SI_MAP_VAR(11) = 1.0;
+    SI_MAP_VAR(12) = 1.0;
+    parallel {
+        buf_use N(intTable_8024258C);
+        loop 6 {
+            PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
+            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            loop {
+                UpdateLerp();
+                SI_VAR(0) /= (float) 10;
+                SI_MAP_VAR(11) = (float) SI_VAR(0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 1;
+        }
+        loop {
+            buf_use N(intTable_802425D4);
+            loop 2 {
+                PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x20B6, 0);
+                buf_read SI_VAR(6) SI_VAR(7);
+                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                loop {
+                    UpdateLerp();
+                    SI_VAR(0) /= (float) 10;
+                    SI_MAP_VAR(11) = (float) SI_VAR(0);
+                    sleep 1;
+                    if (SI_VAR(1) == 0) {
+                        break loop;
+                    }
+                }
+            }
+        }
+    }
+    parallel {
+        buf_use N(intTable_802425E4);
+        loop 6 {
+            buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+            MakeLerp(SI_VAR(6), SI_VAR(7), SI_VAR(8), 11);
+            loop {
+                UpdateLerp();
+                SI_VAR(0) /= (float) 10;
+                SI_MAP_VAR(12) = (float) SI_VAR(0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 1;
+        }
+        loop {
+            buf_use N(intTable_8024262C);
+            loop 2 {
+                buf_read SI_VAR(6) SI_VAR(7);
+                MakeLerp(SI_VAR(6), SI_VAR(7), 4, 11);
+                loop {
+                    UpdateLerp();
+                    SI_VAR(0) /= (float) 10;
+                    SI_MAP_VAR(12) = (float) SI_VAR(0);
+                    sleep 1;
+                    if (SI_VAR(1) == 0) {
+                        break loop;
+                    }
+                }
+            }
+        }
+    }
+    loop 100 {
+        SetNpcScale(NPC_HUFF_N_PUFF0, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF1, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        SetNpcScale(NPC_HUFF_N_PUFF2, SI_MAP_VAR(11), SI_MAP_VAR(12), 1);
+        sleep 1;
+    }
+});
 
-// *INDENT-OFF*
-Script N(80242D34) = {
-    SI_CMD(ScriptOpcode_PARALLEL_THREAD),
-        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 0),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(0), 3),
-            SI_CMD(ScriptOpcode_LOOP, 15),
-                SI_CMD(ScriptOpcode_CALL, SetNpcRotation, SI_VAR(0), 0, SI_VAR(1), 0),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(1), 60),
-            SI_CMD(ScriptOpcode_IF_GT, SI_VAR(1), 360),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(1), -360),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-        SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),
-    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_8024249C)),
-    SI_CMD(ScriptOpcode_SET, SI_VAR(8), 3),
-    SI_CMD(ScriptOpcode_LOOP, 14),
-        SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, RandInt, 5, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), SI_VAR(1), SI_VAR(2), -30),
-            SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_ADD, SI_VAR(5), 8),
-            SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, SI_VAR(8), 981, 0),
-            SI_CMD(ScriptOpcode_CALL, NpcJump0, SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, SI_VAR(5)),
-            SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), 0, -1000, 0),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_ADD, SI_VAR(8), 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 0, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 1, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 2, 0, -1000, 0),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 5),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), SI_VAR(1), SI_VAR(2), -30),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, SI_VAR(8), 982, 0),
-    SI_CMD(ScriptOpcode_CALL, NpcJump0, SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, 10),
-    SI_CMD(ScriptOpcode_CALL, SetNpcPos, SI_VAR(8), 0, -1000, 0),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80242D34) = SCRIPT({
+    parallel {
+        SI_VAR(1) = 0;
+        loop {
+            SI_VAR(0) = 3;
+            loop 15 {
+                SetNpcRotation(SI_VAR(0), 0, SI_VAR(1), 0);
+                SI_VAR(0) += 1;
+            }
+            SI_VAR(1) += 60;
+            if (SI_VAR(1) > 360) {
+                SI_VAR(1) += -360;
+            }
+            sleep 1;
+        }
+    }
+    buf_use N(intTable_8024249C);
+    SI_VAR(8) = 3;
+    loop 14 {
+        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+        spawn {
+            RandInt(5, SI_VAR(5));
+            sleep SI_VAR(5);
+            SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
+            RandInt(2, SI_VAR(5));
+            SI_VAR(5) += 8;
+            PlaySoundAtNpc(SI_VAR(8), 0x3D5, 0);
+            NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, SI_VAR(5));
+            SetNpcPos(SI_VAR(8), 0, -1000, 0);
+        }
+        SI_VAR(8) += 1;
+    }
+    SetNpcPos(NPC_HUFF_N_PUFF0, 0, -1000, 0);
+    SetNpcPos(NPC_HUFF_N_PUFF1, 0, -1000, 0);
+    SetNpcPos(NPC_HUFF_N_PUFF2, 0, -1000, 0);
+    buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+    sleep 5;
+    SetNpcPos(SI_VAR(8), SI_VAR(1), SI_VAR(2), -30);
+    PlaySoundAtNpc(SI_VAR(8), 0x3D6, 0);
+    NpcJump0(SI_VAR(8), SI_VAR(3), SI_VAR(4), -15, 10);
+    SetNpcPos(SI_VAR(8), 0, -1000, 0);
+});
 
 Script N(80243010) = SCRIPT({
     SetNpcAnimation(NPC_HUFF_N_PUFF1, NPC_ANIM(huff_n_puff, Palette_00, Anim_4));
@@ -973,7 +966,7 @@ Script N(defeat_802435D4) = SCRIPT({
 });
 
 Script N(init_802435E4) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcIdle(NPC_SELF, N(idle_80243428));
         BindNpcDefeat(NPC_SELF, N(defeat_802434D8));
@@ -984,7 +977,7 @@ Script N(init_802435E4) = SCRIPT({
 });
 
 Script N(init_80243684) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM(huff_n_puff, Palette_00, Anim_1));
@@ -995,7 +988,7 @@ Script N(init_80243684) = SCRIPT({
 });
 
 Script N(init_8024371C) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
         SetNpcAnimation(NPC_SELF, NPC_ANIM(huff_n_puff, Palette_00, Anim_19));

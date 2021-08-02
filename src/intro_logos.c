@@ -22,7 +22,7 @@ s16 intro_logos_fade_in(s16 subtractAlpha) {
     return 0;
 }
 
-s16 intro_logos_fade_out(s16 addAlpha) {
+s32 intro_logos_fade_out(s16 addAlpha) {
     if (gGameStatusPtr->bootAlpha != 255) {
         gGameStatusPtr->bootAlpha += addAlpha;
         if (gGameStatusPtr->bootAlpha > 255) {

@@ -6,12 +6,12 @@ Script N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
 Script N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
 Script N(BindExits) = SCRIPT({
-    bind N(ExitWest) to TRIGGER_FLOOR_ABOVE 0; // deili1
-    bind N(ExitEast) to TRIGGER_FLOOR_ABOVE 3; // deili2
+    bind N(ExitWest) TRIGGER_FLOOR_ABOVE 0; // deili1
+    bind N(ExitEast) TRIGGER_FLOOR_ABOVE 3; // deili2
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
+    SI_WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -22,7 +22,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(BindExits);
     spawn EnterWalk;
     sleep 1;
-    bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
+    bind N(ReadWestSign) TRIGGER_WALL_PRESS_A 10;
 });
 
 NpcAISettings N(goombaAISettings) = {
@@ -92,10 +92,12 @@ Script N(GoombaIdle) = SCRIPT({
     SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, TRUE);
 
     // Wait until read_sign sets NPC var 0
-    loop {
-        GetSelfVar(0, SI_VAR(0));
-        sleep 1;
-    } until(SI_VAR(0) == FALSE)
+0:
+    GetSelfVar(0, SI_VAR(0));
+    sleep 1;
+    if (SI_VAR(0) == FALSE) {
+        goto 0;
+    }
 
     // Peel and jump off the sign
     SetNpcFlagBits(NPC_SELF, 0x240000, TRUE);
@@ -131,7 +133,7 @@ Script N(GoombaIdle) = SCRIPT({
     SetSelfEnemyFlagBits(NPC_FLAG_NO_ANIMS_LOADED, TRUE);
 
     // We're done jumping off; the player can read the sign again
-    bind N(ReadWestSign) to TRIGGER_WALL_PRESS_A 10;
+    bind N(ReadWestSign) TRIGGER_WALL_PRESS_A 10;
 
     // Behave like a normal enemy from now on
     BindNpcAI(NPC_SELF, N(GoombaAI));

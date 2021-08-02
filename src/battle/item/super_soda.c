@@ -1,4 +1,5 @@
 #include "super_soda.h"
+#include "effects.h"
 
 static HudElement* D_802A2280;
 

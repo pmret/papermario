@@ -1,4 +1,5 @@
 #include "flo_07.h"
+#include "effects.h"
 
 #include "world/common/UnkTexturePanFunc.inc.c"
 

@@ -24,7 +24,9 @@ extern s32 gBattleState;
 extern BattleStatus gBattleStatus;
 extern s32 D_800DC4D0;
 extern s32 D_800DC4D4;
+extern s32 D_800DC4D8;
 extern s32 gBattleState2;
+extern s32 D_800DC4E4;
 extern s32 D_800DC4E8;
 extern u8 gCurrentBattleSection; // in the middle of the previous var
 extern u8 D_800DC4EB; // in the middle of the previous var
@@ -56,7 +58,7 @@ extern ModelList* gCurrentModelListPtr;
 // TODO: potentially a display list, figure this out
 extern u32* gWorldModelSpecialDls[32];
 extern u32* gBattleModelSpecialDls[32];
-extern u32** gCurrentModelSpecialDlsPtr[32];
+extern CustomModelGfx* gCurrentModelSpecialDlsPtr;
 
 extern EntityList gWorldEntityList;
 extern EntityList gBattleEntityList;
@@ -224,8 +226,6 @@ extern s32 gItemMenuScrollUpIcon;
 extern s32 gStatsMenuIconIDs[12];
 extern s32 gGameState;
 extern s16 gNpcCount;
-extern s32 D_8009A64C;
-extern s32* D_8009A658;
 extern s32 gOverrideFlags;
 extern u16 D_8009A6A0;
 extern u16 D_8009A6A2;
@@ -293,9 +293,6 @@ extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 // Effects
 extern EffectTableEntry gEffectTable[135];
 
-//nusys
-extern OSPiHandle* carthandle;
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
@@ -352,7 +349,6 @@ extern MusicSettings D_8014F6F0;
 // OS
 extern OSThread D_800A4270; // idle thread, id 1
 extern OSThread D_800A4420; // id 3
-extern s32 D_800B8590;
 extern OSThread* __osActiveQueue;
 extern OSThread* __osRunningThread;
 extern OSThread* __osRunQueue;
@@ -390,6 +386,8 @@ extern s32 D_802C05CC;
 extern s16 gCurrentCamID;
 
 extern s32 gSpriteHeapPtr;
+
+extern s32 D_8029C890[12][5];
 
 // Heap?
 extern s32 D_8038F800;

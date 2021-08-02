@@ -17,8 +17,8 @@ glabel boot_idle
 /* 39D3C 8005E93C 26104420 */  addiu     $s0, $s0, %lo(D_800A4420)
 /* 39D40 8005E940 0200202D */  daddu     $a0, $s0, $zero
 /* 39D44 8005E944 24050003 */  addiu     $a1, $zero, 3
-/* 39D48 8005E948 3C02800C */  lui       $v0, %hi(D_800B8590)
-/* 39D4C 8005E94C 24428590 */  addiu     $v0, $v0, %lo(D_800B8590)
+/* 39D48 8005E948 3C02800C */  lui       $v0, %hi(nuYieldBuf)
+/* 39D4C 8005E94C 24428590 */  addiu     $v0, $v0, %lo(nuYieldBuf)
 /* 39D50 8005E950 AFA20010 */  sw        $v0, 0x10($sp)
 /* 39D54 8005E954 2402000A */  addiu     $v0, $zero, 0xa
 /* 39D58 8005E958 3C068002 */  lui       $a2, %hi(boot_main)

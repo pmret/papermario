@@ -777,8 +777,8 @@ void msg_printer_set_origin_pos(MessagePrintState* msgPrintState, s16 x, s16 y) 
     if (msgPrintState->initOpenPos.x < 0) {
         msgPrintState->initOpenPos.x = 0;
     }
-    if (msgPrintState->initOpenPos.x > 320) {
-        msgPrintState->initOpenPos.x = 320;
+    if (msgPrintState->initOpenPos.x > SCREEN_WIDTH) {
+        msgPrintState->initOpenPos.x = SCREEN_WIDTH;
     }
     if (msgPrintState->initOpenPos.y < 0) {
         msgPrintState->initOpenPos.y = 0;
@@ -1050,7 +1050,8 @@ void draw_message_window(MessagePrintState* printer) {
             printer->windowBasePos.x = 160 - (printer->windowSize.x / 2);
             printer->windowBasePos.y = 56;
             draw_box(1, 0, printer->windowBasePos.x, 56, 0, printer->windowSize.x, printer->windowSize.y, 255, 0,
-                     scale, scale, 0.0f, 0.0f, rotZ, drawbox_message_delegate, printer, NULL, 320, 240, NULL);
+                     scale, scale, 0.0f, 0.0f, rotZ, drawbox_message_delegate, printer, NULL, SCREEN_WIDTH,
+                     SCREEN_HEIGHT, NULL);
             break;
         default:
             appendGfx_message(printer, printer->windowOffsetPos.x, printer->windowOffsetPos.y, printer->unk_46C,

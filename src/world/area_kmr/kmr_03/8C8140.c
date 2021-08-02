@@ -19,12 +19,12 @@ Script N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
 Script N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
 
 Script N(802407A8) = SCRIPT({
-    bind N(exitWalk_802406F0) to TRIGGER_FLOOR_ABOVE 3;
-    bind N(exitWalk_8024074C) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_802406F0) TRIGGER_FLOOR_ABOVE 3;
+    bind N(exitWalk_8024074C) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
+    SI_WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -89,7 +89,7 @@ Script N(8024097C) = SCRIPT({
 
 Script N(npcAI_80240B50) = SCRIPT({
 1:
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
 89:
             N(UnkPositionFunc)(-118, 86, -70, -15);
@@ -129,7 +129,7 @@ Script N(npcAI_80240B50) = SCRIPT({
             sleep 30;
             SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A8));
             N(UnkFunc41)(0, 5);
-            STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
+            SI_STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, -220, 20, -72);
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
             SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -188,7 +188,7 @@ Script N(init_802411A8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(npcAI_80240B50));
     BindNpcAux(-1, N(8024097C));
     BindNpcHit(-1, N(hit_80240F64));
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         >= STORY_CH0_GOOMPA_JOINED_PARTY {
             SetNpcFlagBits(NPC_SELF, NPC_FLAG_GRAVITY, FALSE);
             SetNpcFlagBits(NPC_SELF, NPC_FLAG_ENABLE_HIT_SCRIPT, TRUE);
@@ -239,7 +239,7 @@ static s32 N(pad_1468)[] = {
 
 Script N(80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
-    STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
+    SI_STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
 Script N(802414A8) = SCRIPT({
@@ -255,7 +255,7 @@ Script N(802414C8) = SCRIPT({
 });
 
 Script N(makeEntities) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
+    if (SI_STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END);
         AssignScript(N(80241470));
     } else {

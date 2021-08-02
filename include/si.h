@@ -91,7 +91,7 @@ typedef enum ScriptOpcode {
     ScriptOpcode_RESUME_OTHERS, ///< Args: group
     ScriptOpcode_SUSPEND_SCRIPT, ///< Args: ScriptID
     ScriptOpcode_RESUME_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_SCRIPT_EXISTS, ///< Args: ScriptID, container
+    ScriptOpcode_DOES_SCRIPT_EXIST, ///< Args: ScriptID, container
     ScriptOpcode_SPAWN_THREAD,
     ScriptOpcode_END_SPAWN_THREAD,
     ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
@@ -114,10 +114,11 @@ typedef enum ScriptOpcode {
 #define SI_ARRAY(v)         ((v - 190000000))
 #define SI_ARRAY_FLAG(v)    ((v - 210000000))
 #define SI_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
+#define SI_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
-#define STORY_PROGRESS SI_SAVE_VAR(0)
-#define WORLD_LOCATION SI_SAVE_VAR(425)
+#define SI_STORY_PROGRESS SI_SAVE_VAR(0)
+#define SI_WORLD_LOCATION SI_SAVE_VAR(425)
 
 /* Return type of si_execute_next_command */
 #define SI_CONTINUE 0   /* Continue to next command */

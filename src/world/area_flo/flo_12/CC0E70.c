@@ -27,7 +27,7 @@ Script N(80240750) = SCRIPT({
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
             } else {
@@ -93,11 +93,11 @@ Script N(80240870) = SCRIPT({
 Script N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
 Script N(80240B78) = SCRIPT({
-    bind N(exitWalk_80240B1C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B1C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -133,7 +133,7 @@ Script N(main) = SCRIPT({
         spawn EnterWalk;
     }
     await N(80240750);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CC0E30)();
     }
 });
@@ -200,13 +200,11 @@ Script N(80241858) = SCRIPT({
     unbind;
 });
 
-Script N(8024199C) = {
-    SI_CMD(ScriptOpcode_CALL, N(func_8024064C_CC147C), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241858), 0x10, 0, N(D_802429E0), 0, 1),
-    SI_CMD(ScriptOpcode_CALL, N(func_802405C0_CC13F0), SI_VAR(0)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(8024199C) = SCRIPT({
+    N(func_8024064C_CC147C)(SI_VAR(0));
+    bind_padlock N(80241858) 0x10 0 N(D_802429E0);
+    N(func_802405C0_CC13F0)(SI_VAR(0));
+});
 
 s32 N(D_802419EC_CC281C)[] = {
     0x0000001E, 0x00000000,
@@ -252,7 +250,7 @@ Script N(80241BE4) = SCRIPT({
 
 Script N(interact_80241C8C) = SCRIPT({
     await N(8024080C);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
             match SI_SAVE_FLAG(1378) {
                 == 0 {
@@ -351,7 +349,7 @@ Script N(interact_80241C8C) = SCRIPT({
                     SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
                                   0x0096));
                     SI_AREA_FLAG(22) = 1;
-                    STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
+                    SI_STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
                 }
             }
         }
@@ -383,7 +381,7 @@ Script N(init_802423D0) = SCRIPT({
     SetNpcPos(NPC_ROSIE1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetNpcFlagBits(NPC_ROSIE1, ((0x00000002)), TRUE);
     SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_HAS_SHADOW)), TRUE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
             if (SI_SAVE_FLAG(1378) == 1) {
                 SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);

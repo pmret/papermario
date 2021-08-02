@@ -11,13 +11,6 @@ typedef struct Fog {
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
 
-typedef struct RenderTaskEntry {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
-    /* 0x08 */ void* appendGfxArg;
-    /* 0x0C */ void (*appendGfx)(void*);
-} RenderTaskEntry; // size = 0x10
-
 typedef struct GameMode {
     /* 0x00 */ u16 flags;
     /* 0x04 */ void (*init)(void);
@@ -863,10 +856,23 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
 
-
 INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", UseDynamicShadow);
+ApiStatus UseDynamicShadow(ScriptInstance* script, s32 isInitialCall) {
+    Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
+
+    if (get_variable(script, *script->ptrReadPos)) {
+        Shadow* shadow;
+
+        entity->flags |= 4;
+        shadow = get_shadow_by_index(entity->shadowIndex);
+        shadow->flags |= 0x400000;
+    } else {
+        entity->flags &= ~4;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -914,11 +920,11 @@ INCLUDE_ASM(void, "a5dd0_len_114e0", update_entity_shadow_position, Entity* enti
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", entity_raycast_down);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_standard_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_standard_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_npc_shadow_scale);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_peach_shadow_scale);
+INCLUDE_ASM(void, "a5dd0_len_114e0", set_peach_shadow_scale, Shadow* shadow, f32 scale);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", is_block_on_ground);
 
@@ -1220,7 +1226,10 @@ void set_aux_pan_v(s32 texPannerID, s32 value) {
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", set_mdl_custom_gfx_set);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", set_custom_gfx);
+void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post) {
+    gCurrentModelSpecialDlsPtr[customGfxIndex].pre = pre;
+    gCurrentModelSpecialDlsPtr[customGfxIndex].post = post;
+}
 
 void set_custom_gfx_builders(s32 customGfxIndex, CustomModelGfxBuilderFunc pre, CustomModelGfxBuilderFunc post) {
     gCurrentCustomModelGfxBuilders[customGfxIndex].pre = pre;

@@ -187,8 +187,8 @@ glabel func_80240628_800EA8
 /* 801168 802408E8 3C03FFFD */  lui       $v1, 0xfffd
 /* 80116C 802408EC 3463FEFF */  ori       $v1, $v1, 0xfeff
 /* 801170 802408F0 3C05F8F0 */  lui       $a1, 0xf8f0
-/* 801174 802408F4 3C1E800A */  lui       $fp, %hi(D_8009A64C)
-/* 801178 802408F8 27DEA64C */  addiu     $fp, $fp, %lo(D_8009A64C)
+/* 801174 802408F4 3C1E800A */  lui       $fp, %hi(nuGfxCfb_ptr)
+/* 801178 802408F8 27DEA64C */  addiu     $fp, $fp, %lo(nuGfxCfb_ptr)
 /* 80117C 802408FC 34A5F000 */  ori       $a1, $a1, 0xf000
 /* 801180 80240900 8E900000 */  lw        $s0, ($s4)
 /* 801184 80240904 8FC40000 */  lw        $a0, ($fp)

@@ -2,17 +2,7 @@
 
 #define NAMESPACE battle_star_focus
 
-#include "common/UnkStarFuncs.inc.c"
-
-#include "common/FadeBackgroundToBlack.inc.c"
-
-#include "common/UnkBackgroundFunc2.inc.c"
-
-#include "common/UnkBackgroundFunc.inc.c"
-
-INCLUDE_ASM(s32, "battle/star/focus/789E60", func_802A1494_78A2F4);
-
-#include "common/SetNpcCollision32.inc.c"
+#include "common/StarPower.inc.c"
 
 ApiStatus func_802A1518_78A378(ScriptInstance* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;

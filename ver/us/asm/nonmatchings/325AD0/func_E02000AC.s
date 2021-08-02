@@ -85,8 +85,8 @@ glabel func_E02000AC
 /* 325CB8 E02001E8 00021080 */  sll       $v0, $v0, 2
 /* 325CBC E02001EC 30580FFF */  andi      $t8, $v0, 0xfff
 /* 325CC0 E02001F0 8D430000 */  lw        $v1, ($t2)
-/* 325CC4 E02001F4 3C0E800A */  lui       $t6, %hi(D_8009A64C)
-/* 325CC8 E02001F8 8DCEA64C */  lw        $t6, %lo(D_8009A64C)($t6)
+/* 325CC4 E02001F4 3C0E800A */  lui       $t6, %hi(nuGfxCfb_ptr)
+/* 325CC8 E02001F8 8DCEA64C */  lw        $t6, %lo(nuGfxCfb_ptr)($t6)
 /* 325CCC E02001FC 0060102D */  daddu     $v0, $v1, $zero
 /* 325CD0 E0200200 01C0202D */  daddu     $a0, $t6, $zero
 /* 325CD4 E0200204 24630008 */  addiu     $v1, $v1, 8

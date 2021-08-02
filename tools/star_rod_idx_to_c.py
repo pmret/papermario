@@ -32,9 +32,9 @@ def get_flag_name(arg):
         elif v <= -180000000: return f"SI_ARRAY({v + 190000000})"
         elif v <= -160000000:
             if v + 170000000 == 0:
-                return "STORY_PROGRESS"
+                return "SI_STORY_PROGRESS"
             elif v + 170000000 == 425:
-                return "WORLD_LOCATION"
+                return "SI_WORLD_LOCATION"
             else:
                 return f"SI_SAVE_VAR({v + 170000000})"
         elif v <= -140000000: return f"SI_AREA_VAR({v + 150000000})"
@@ -163,7 +163,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 script_text = f"// Unable to use DSL: {e}\n"
 
                 bytes.seek(pos)
-                script_text = disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
+                script_text += disasm_script.ScriptDisassembler(bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED).disassemble()
 
             if "shakeTree" in name or "searchBush" in name:
                 symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"

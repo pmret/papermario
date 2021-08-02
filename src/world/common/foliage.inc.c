@@ -78,177 +78,173 @@ ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-Script N(searchBush) = {
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(5), SI_VAR(15), SI_VAR(7)),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_LOOP, 5),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), 1, SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 339, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), -1, SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(3), 0, 0, 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(2), 0),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(5), SI_VAR(6), SI_VAR(7)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(10), 0),
-    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9)),
-    SI_CMD(ScriptOpcode_ELSE),
-    SI_CMD(ScriptOpcode_CALL, GetValueByRef, SI_VAR(10), SI_VAR(11)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(11), 0),
-    SI_CMD(ScriptOpcode_CALL, SetValueByRef, SI_VAR(10), 1),
-    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(4), 0),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, 0xFE363C84),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(searchBush) = SCRIPT({
+    buf_use SI_VAR(0);
+    buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+    GetPlayerPos(SI_VAR(5), SI_VAR(15), SI_VAR(7));
+    spawn {
+        SI_FLAG(0) = 0;
+        if (SI_VAR(1) != NULL) {
+            loop 5 {
+                buf_use SI_VAR(1);
+                buf_read SI_VAR(2);
+                loop SI_VAR(2) {
+                    buf_read SI_VAR(3);
+                    N(TransformFoliage)(SI_VAR(3), 0.1, 1, SI_VAR(15), 0);
+                    if (SI_FLAG(0) == 0) {
+                        SI_FLAG(0) = 1;
+                        PlaySoundAtModel(SI_VAR(3), 339, 0);
+                    }
+                }
+                sleep 1;
+                buf_use SI_VAR(1);
+                buf_read SI_VAR(2);
+                loop SI_VAR(2) {
+                    buf_read SI_VAR(3);
+                    N(TransformFoliage)(SI_VAR(3), 0.1, -1, SI_VAR(15), 0);
+                }
+                sleep 1;
+            }
+            buf_use SI_VAR(1);
+            buf_read SI_VAR(2);
+            loop SI_VAR(2) {
+                buf_read SI_VAR(3);
+                TranslateModel(SI_VAR(3), 0, 0, 0);
+            }
+            sleep 1;
+        }
+    }
+    spawn {
+        if (SI_VAR(2) != NULL) {
+            buf_use SI_VAR(2);
+            buf_read SI_VAR(3);
+            loop SI_VAR(3) {
+                buf_read SI_VAR(4);
+                buf_read SI_VAR(5) SI_VAR(6) SI_VAR(7);
+                buf_read SI_VAR(8) SI_VAR(9) SI_VAR(10);
+                if (SI_VAR(10) == 0) {
+                    DropItemEntity(SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9));
+                } else {
+                    GetValueByRef(SI_VAR(10), SI_VAR(11));
+                    if (SI_VAR(11) == 0) {
+                        SetValueByRef(SI_VAR(10), 1);
+                        DropItemEntity(SI_VAR(4), SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9));
+                    }
+                }
+            }
+        }
+    }
+    sleep 15;
+    if (SI_VAR(4) != NULL) {
+        await SI_VAR(4);
+    }
+});
 
-Script N(shakeTree) = {
-    SI_CMD(ScriptOpcode_SET_TIMESCALE, SI_FIXED(2.0)),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_4, SI_VAR(1), SI_VAR(2), SI_VAR(3), SI_VAR(4)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-    SI_CMD(ScriptOpcode_CALL, GetPlayerPos, SI_VAR(6), SI_VAR(15), SI_VAR(8)),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 357),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 358),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_LOOP, 5),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(3), 358, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(3), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(1)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(3), 0, 0, 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(2), 0),
-    SI_CMD(ScriptOpcode_LOOP, 5),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(0.2001953125), SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_FLAG(0), 0),
-    SI_CMD(ScriptOpcode_SET, SI_FLAG(0), 1),
-    SI_CMD(ScriptOpcode_CALL, PlaySoundAtModel, SI_VAR(4), 357, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, N(TransformFoliage), SI_VAR(4), SI_FIXED(0.1005859375), SI_FIXED(-0.19921875), SI_VAR(15), 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(2)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, SI_VAR(4), 0, 0, 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(3), 0),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(3)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(9), SI_VAR(10), SI_VAR(11)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(11), 0),
-    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-    SI_CMD(ScriptOpcode_ELSE),
-    SI_CMD(ScriptOpcode_CALL, GetValueByRef, SI_VAR(11), SI_VAR(12)),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(12), 0),
-    SI_CMD(ScriptOpcode_CALL, SetValueByRef, SI_VAR(11), 1),
-    SI_CMD(ScriptOpcode_CALL, DropItemEntity, SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(4), 0),
-    SI_CMD(ScriptOpcode_USE_BUFFER, SI_VAR(4)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_1, SI_VAR(5)),
-    SI_CMD(ScriptOpcode_LOOP, SI_VAR(5)),
-    SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(6), SI_VAR(7), SI_VAR(8)),
-    SI_CMD(ScriptOpcode_CALL, PlayEffect, 20, 0, SI_VAR(6), SI_VAR(7), SI_VAR(8), 100, 0, 0, 0, 0, 0, 0, 0, 0),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_IF_NE, SI_VAR(5), 0),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, 0xFE363C85),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
+Script N(shakeTree) = SCRIPT({
+    timescale 2.0;
+    buf_use SI_VAR(0);
+    buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
+    buf_read SI_VAR(5);
+    GetPlayerPos(SI_VAR(6), SI_VAR(15), SI_VAR(8));
+    PlaySound(0x165);
+    PlaySound(0x166);
+    spawn {
+        SI_FLAG(0) = 0;
+        if (SI_VAR(1) != NULL) {
+            sleep 1;
+            loop 5 {
+                buf_use SI_VAR(1);
+                buf_read SI_VAR(2);
+                loop SI_VAR(2) {
+                    buf_read SI_VAR(3);
+                    N(TransformFoliage)(SI_VAR(3), 0.1, 0.2, SI_VAR(15), 0);
+                    if (SI_FLAG(0) == 0) {
+                        SI_FLAG(0) = 1;
+                        PlaySoundAtModel(SI_VAR(3), 358, 0);
+                    }
+                }
+                sleep 1;
+                buf_use SI_VAR(1);
+                buf_read SI_VAR(2);
+                loop SI_VAR(2) {
+                    buf_read SI_VAR(3);
+                    N(TransformFoliage)(SI_VAR(3), 0.1, -0.2, SI_VAR(15), 0);
+                }
+                sleep 1;
+            }
+            buf_use SI_VAR(1);
+            buf_read SI_VAR(2);
+            loop SI_VAR(2) {
+                buf_read SI_VAR(3);
+                TranslateModel(SI_VAR(3), 0, 0, 0);
+            }
+            sleep 1;
+        }
+    }
+    spawn {
+        SI_FLAG(0) = 0;
+        if (SI_VAR(2) != NULL) {
+            loop 5 {
+                buf_use SI_VAR(2);
+                buf_read SI_VAR(3);
+                loop SI_VAR(3) {
+                    buf_read SI_VAR(4);
+                    N(TransformFoliage)(SI_VAR(4), 0.1, 0.2, SI_VAR(15), 0);
+                    if (SI_FLAG(0) == 0) {
+                        SI_FLAG(0) = 1;
+                        PlaySoundAtModel(SI_VAR(4), 357, 0);
+                    }
+                }
+                sleep 1;
+                buf_use SI_VAR(2);
+                buf_read SI_VAR(3);
+                loop SI_VAR(3) {
+                    buf_read SI_VAR(4);
+                    N(TransformFoliage)(SI_VAR(4), 0.1, -0.2, SI_VAR(15), 0);
+                }
+                sleep 1;
+            }
+            buf_use SI_VAR(2);
+            buf_read SI_VAR(3);
+            loop SI_VAR(3) {
+                buf_read SI_VAR(4);
+                TranslateModel(SI_VAR(4), 0, 0, 0);
+            }
+            sleep 1;
+        }
+    }
+    spawn {
+        if (SI_VAR(3) != NULL) {
+            buf_use SI_VAR(3);
+            buf_read SI_VAR(4);
+            loop SI_VAR(4) {
+                buf_read SI_VAR(5);
+                buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+                buf_read SI_VAR(9) SI_VAR(10) SI_VAR(11);
+                if (SI_VAR(11) == 0) {
+                    DropItemEntity(SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10));
+                } else {
+                    GetValueByRef(SI_VAR(11), SI_VAR(12));
+                    if (SI_VAR(12) == 0) {
+                        SetValueByRef(SI_VAR(11), 1);
+                        DropItemEntity(SI_VAR(5), SI_VAR(6), SI_VAR(7), SI_VAR(8), SI_VAR(9), SI_VAR(10));
+                    }
+                }
+            }
+        }
+    }
+    spawn {
+        if (SI_VAR(4) != NULL) {
+            buf_use SI_VAR(4);
+            buf_read SI_VAR(5);
+            loop SI_VAR(5) {
+                buf_read SI_VAR(6) SI_VAR(7) SI_VAR(8);
+                PlayEffect(0x14, 0, SI_VAR(6), SI_VAR(7), SI_VAR(8), 100, 0, 0, 0, 0, 0, 0, 0, 0);
+            }
+        }
+    }
+    if (SI_VAR(5) != NULL) {
+        await SI_VAR(5);
+    }
+    sleep 15;
+});

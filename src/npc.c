@@ -1,6 +1,7 @@
 #include "common.h"
 #include "map.h"
 #include "npc.h"
+#include "effects.h"
 
 extern s16 D_8010C97A;
 extern s32 D_8010C978;
@@ -194,10 +195,9 @@ void free_npc_by_index(s32 listIndex) {
             }
 
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-                if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID)) {
-                    PANIC();
-                }
+                ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
             }
+
             delete_shadow(npc->shadowIndex);
 
             for (i = 0; i < 2; i++) {
@@ -224,10 +224,9 @@ void free_npc(Npc* npc) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        if (!(npc->flags & NPC_FLAG_1000000) && spr_free_sprite(npc->spriteInstanceID) != 0) {
-            PANIC();
-        }
+        ASSERT((npc->flags & NPC_FLAG_1000000) || !spr_free_sprite(npc->spriteInstanceID));
     }
+
     delete_shadow(npc->shadowIndex);
 
     for (i = 0; i < 2; i++) {
@@ -359,7 +358,46 @@ INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 
 INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
 
-INCLUDE_ASM(s32, "npc", func_800397E8);
+s32 func_800397E8(Npc* npc, f32 arg1) {
+    if (!(npc->flags & NPC_FLAG_208)) {
+        f32 x;
+        f32 y;
+        f32 z;
+        f32 subroutine_arg;
+        f32 temp_v1;
+        s32 phi_v0;
+
+        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+            npc->flags &= ~NPC_FLAG_1000;
+            return 0;
+        }
+
+        temp_v1 = fabsf(arg1) + 16;
+        subroutine_arg = temp_v1;
+        x = npc->pos.x;
+        y = npc->pos.y + 13;
+        z = npc->pos.z;
+
+        if (!(npc->flags & NPC_FLAG_PARTICLE)) {
+            phi_v0 = npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &subroutine_arg);
+        } else {
+            phi_v0 = npc_raycast_down_ahead(npc->unk_80, &x, &y, &z, &subroutine_arg, npc->yaw,
+                                            npc->collisionRadius);
+        }
+
+        if (phi_v0 != 0 && subroutine_arg <= temp_v1) {
+            npc->pos.y = y;
+            npc->unk_84 = D_8010C97A;
+            npc->flags |= NPC_FLAG_1000;
+            return 1;
+        }
+    } else {
+        return 0;
+    }
+
+    npc->flags &= ~NPC_FLAG_1000;
+    return 0;
+}
 
 INCLUDE_ASM(void, "npc", update_npcs, void);
 

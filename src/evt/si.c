@@ -8,6 +8,11 @@ Bytecode* si_goto_next_case(ScriptInstance* script);
 Bytecode* si_goto_end_loop(ScriptInstance* script);
 s32 get_variable_index(ScriptInstance* script, s32 var);
 
+u8 D_802D9D70 = 0xFE;
+u8 D_802D9D71 = 0xFE;
+u8 D_802D9D72 = 0x00;
+u8 D_802D9D73 = 0xFF;
+
 f32 fixed_var_to_float(Bytecode scriptVar) {
     if (scriptVar <= -220000000) {
         return (scriptVar + 230000000) / 1024.0f;
@@ -1446,7 +1451,7 @@ s32 si_execute_next_command(ScriptInstance *script) {
             case ScriptOpcode_RESUME_SCRIPT:
                 status = si_handle_resume(script);
                 break;
-            case ScriptOpcode_SCRIPT_EXISTS:
+            case ScriptOpcode_DOES_SCRIPT_EXIST:
                 status = si_handle_does_script_exist(script);
                 break;
             case ScriptOpcode_SPAWN_THREAD:
@@ -1520,7 +1525,7 @@ s32 get_variable(ScriptInstance* script, Bytecode var) {
 
     if (var <= -270000000) {
         return var;
-    } else if (var <= -250000000) {
+    } else if (var <= SI_LIMIT) {
         return var;
     } else if (var <= -220000000) {
         return fixed_var_to_float(var);
@@ -1575,7 +1580,7 @@ s32 get_variable_index(ScriptInstance* script, s32 var) {
     if (-270000000 >= var) {
         return var;
     }
-    if (-250000000 >= var) {
+    if (SI_LIMIT >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1618,7 +1623,7 @@ s32 get_variable_index_alt(s32 var) {
     if (-270000000 >= var) {
         return var;
     }
-    if (-250000000 >= var) {
+    if (SI_LIMIT >= var) {
         return var;
     }
     if (-220000000 >= var) {
@@ -1666,7 +1671,7 @@ f32 get_float_variable(ScriptInstance* script, Bytecode var) {
 
     if (var <= -270000000) {
         return var;
-    } else if (var <= -250000000) {
+    } else if (var <= SI_LIMIT) {
         return var;
     } else if (var <= -220000000) {
         return fixed_var_to_float(var);

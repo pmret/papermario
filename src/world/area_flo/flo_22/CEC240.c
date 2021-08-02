@@ -21,7 +21,7 @@ MapConfig N(config) = {
 };
 
 Script N(802402E0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -33,11 +33,11 @@ Script N(802402E0) = SCRIPT({
 Script N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
 
 Script N(802403AC) = SCRIPT({
-    bind N(exitWalk_80240350) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240350) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -52,7 +52,7 @@ Script N(main) = SCRIPT({
     spawn EnterWalk;
     spawn N(80240E24);
     await N(802402E0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CEC240)();
     }
 });
@@ -356,16 +356,12 @@ Script N(80241028) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-// *INDENT-OFF*
-Script N(80241528) = {
-    SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80241028), TRIGGER_WALL_PRESS_A, 9, N(itemList_80240E10), 0, 1),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1395), 1),
-        SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 312, -83, 0, 0, 0, SI_SAVE_FLAG(1392)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80241528) = SCRIPT({
+    bind_padlock N(80241028) TRIGGER_WALL_PRESS_A 9 N(itemList_80240E10);
+    if (SI_SAVE_FLAG(1395) == 1) {
+        MakeItemEntity(ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, SI_SAVE_FLAG(1392));
+    }
+});
 
 static s32 N(pad_1594)[] = {
     0x00000000, 0x00000000, 0x00000000,

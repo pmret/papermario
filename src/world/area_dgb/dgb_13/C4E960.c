@@ -13,7 +13,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240050) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -32,11 +32,11 @@ static s32 N(pad_E8)[] = {
 Script N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
 
 Script N(8024014C) = SCRIPT({
-    bind N(exitWalk_802400F0) to TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_802400F0) TRIGGER_FLOOR_ABOVE 5;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -130,5 +130,5 @@ Script N(80240610) = SCRIPT({
 
 Script N(80240680) = SCRIPT({
     ParentColliderToModel(13, 44);
-    bind N(80240610) to TRIGGER_WALL_PRESS_A 13;
+    bind N(80240610) TRIGGER_WALL_PRESS_A 13;
 });

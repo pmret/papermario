@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
@@ -67,13 +68,13 @@ ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802BD3E4(ScriptInstance* script, s32 isInitialCall) {
-    set_time_freeze_mode(2);
+    set_time_freeze_mode(TIME_FREEZE_FULL);
     gOverrideFlags |= 0x200000;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802BD41C(ScriptInstance* script, s32 isInitialCall) {
-    set_time_freeze_mode(0);
+    set_time_freeze_mode(TIME_FREEZE_NORMAL);
     gOverrideFlags &= ~0x200000;
     return ApiStatus_DONE2;
 }

@@ -1,5 +1,6 @@
 #include "dgb_12.h"
 #include "message_ids.h"
+#include "common.h"
 
 EntryList N(entryList) = {
     { -500.0f, 0.0f, -40.0f, 0.0f },
@@ -13,7 +14,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240310) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -56,7 +57,7 @@ Script N(enterSingleDoor_80240464) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -65,7 +66,7 @@ Script N(main) = SCRIPT({
     await N(makeEntities);
     spawn N(802405E0);
     spawn N(80240310);
-    bind N(exitSingleDoor_802403B0) to TRIGGER_WALL_PRESS_A 8;
+    bind N(exitSingleDoor_802403B0) TRIGGER_WALL_PRESS_A 8;
     spawn N(enterSingleDoor_80240464);
 });
 
@@ -126,10 +127,10 @@ s32** N(D_80240870_C4E760) = NULL;
 
 Script N(80240874) = SCRIPT({
     group 0;
-    SetTimeFreezeMode(2);
+    SetTimeFreezeMode(TIME_FREEZE_FULL);
     sleep 40;
     ShowGotItem(SI_VAR(0), 0, 0);
-    SetTimeFreezeMode(0);
+    SetTimeFreezeMode(TIME_FREEZE_NORMAL);
     return;
 });
 

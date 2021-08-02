@@ -25,7 +25,7 @@ MapConfig N(config) = {
 };
 
 Script N(802412C0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -68,7 +68,7 @@ Script N(enterDoubleDoor_80241414) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -77,7 +77,7 @@ Script N(main) = SCRIPT({
     MakeNpcs(1, N(npcGroupList_802436B4));
     await N(makeEntities);
     spawn N(802412C0);
-    bind N(exitDoubleDoor_80241360) to TRIGGER_WALL_PRESS_A 17;
+    bind N(exitDoubleDoor_80241360) TRIGGER_WALL_PRESS_A 17;
     spawn N(enterDoubleDoor_80241414);
 });
 
@@ -338,7 +338,7 @@ Script N(idle_80241654) = SCRIPT({
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     WaitForCam(0, 1.0);
     PanToTarget(0, 0, 0);
-    STORY_PROGRESS = STORY_CH3_TUBBA_BEGAN_NAPPING;
+    SI_STORY_PROGRESS = STORY_CH3_TUBBA_BEGAN_NAPPING;
     DisablePlayerInput(FALSE);
 });
 
@@ -424,7 +424,7 @@ const char N(pad_XXX)[] = { 0, 0 };
 Script N(init_80242924) = SCRIPT({
     SetNpcScale(NPC_SELF, 1.25, 1.25, 1.25);
     BindNpcDefeat(NPC_SELF, N(defeat_802428E8));
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_BEGAN_NAPPING {
             BindNpcIdle(NPC_SELF, N(idle_80241654));
         }
@@ -559,7 +559,7 @@ Script N(idle_80242A24) = SCRIPT({
     SI_VAR(1) -= 10;
     NpcJump0(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    STORY_PROGRESS = STORY_CH3_TUBBA_WOKE_UP;
+    SI_STORY_PROGRESS = STORY_CH3_TUBBA_WOKE_UP;
     DisablePlayerInput(FALSE);
 });
 

@@ -38,7 +38,7 @@ Script N(802436D0) = SCRIPT({
         goto 10;
     }
 0:
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -53,7 +53,7 @@ Script N(802436D0) = SCRIPT({
         sleep 1;
     }
 10:
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
         } else {
@@ -151,12 +151,12 @@ Script N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
 Script N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
 
 Script N(80243DA4) = SCRIPT({
-    bind N(exitWalk_80243D48) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80243CEC) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80243D48) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80243CEC) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -200,7 +200,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80243DA4);
     spawn EnterWalk;
     await N(802438B0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CC3810)();
     }
 });
@@ -343,7 +343,7 @@ Script N(80244560) = SCRIPT({
     SI_VAR(2) = SI_VAR(5);
     GetAngleBetweenNPCs(-4, 1, SI_VAR(10));
     InterpNpcYaw(NPC_PARTNER, SI_VAR(10), 0);
-    if (STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
+    if (SI_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
         GetAngleBetweenNPCs(0, 1, SI_VAR(11));
         InterpNpcYaw(NPC_WORLD_LAKILESTER, SI_VAR(11), 0);
     }
@@ -439,7 +439,7 @@ Script N(80244888) = SCRIPT({
 });
 
 Script N(idle_80244BF8) = SCRIPT({
-    if (STORY_PROGRESS != STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (SI_STORY_PROGRESS != STORY_CH6_SPOKE_WITH_THE_SUN) {
         return;
     }
     AwaitPlayerApproach(200, 20, 275);
@@ -716,7 +716,7 @@ Script N(80245444) = SCRIPT({
     spawn N(802438F8);
     sleep 10;
     PanToTarget(0, 0, 0);
-    STORY_PROGRESS = STORY_CH6_LAKILESTER_JOINED_PARTY;
+    SI_STORY_PROGRESS = STORY_CH6_LAKILESTER_JOINED_PARTY;
     EnablePartnerAI();
     DisablePlayerInput(FALSE);
     await N(80245014);
@@ -748,7 +748,7 @@ Script N(defeat_80246038) = SCRIPT({
 });
 
 Script N(interact_802461C0) = SCRIPT({
-    if (STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
                       MESSAGE_ID(0x11, 0x0032));
     } else {
@@ -764,17 +764,17 @@ Script N(interact_802461C0) = SCRIPT({
 });
 
 Script N(init_80246280) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
+    if (SI_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
         BindNpcIdle(NPC_SELF, N(idle_80244BF8));
         BindNpcDefeat(NPC_SELF, N(defeat_80246038));
     }
 });
 
 Script N(init_802462D0) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_BEGAN_PEACH_MISSION) {
+    if (SI_STORY_PROGRESS < STORY_CH6_BEGAN_PEACH_MISSION) {
         BindNpcInteract(NPC_SELF, N(interact_802461C0));
         SetNpcCollisionSize(-1, 36, 28);
-        if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+        if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
             SetNpcPos(NPC_SELF, -50, 180, -50);
         }
     } else {
@@ -788,13 +788,13 @@ Script N(init_80246370) = SCRIPT({
 });
 
 Script N(init_802463B0) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 Script N(init_802463E8) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
+    if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
     SetSelfVar(13, 1);

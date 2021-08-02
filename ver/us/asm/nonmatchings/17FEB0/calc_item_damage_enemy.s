@@ -1072,8 +1072,8 @@ glabel calc_item_damage_enemy
 /* 180F0C 8025262C 00000000 */   nop
 /* 180F10 80252630 12A00017 */  beqz      $s5, .L80252690
 /* 180F14 80252634 00000000 */   nop
-/* 180F18 80252638 3C048029 */  lui       $a0, %hi(DoShinkHit)
-/* 180F1C 8025263C 248446B8 */  addiu     $a0, $a0, %lo(DoShinkHit)
+/* 180F18 80252638 3C048029 */  lui       $a0, %hi(DoShrinkHit)
+/* 180F1C 8025263C 248446B8 */  addiu     $a0, $a0, %lo(DoShrinkHit)
 /* 180F20 80252640 2405000A */  addiu     $a1, $zero, 0xa
 /* 180F24 80252644 0C0B0CF8 */  jal       start_script
 /* 180F28 80252648 0000302D */   daddu    $a2, $zero, $zero

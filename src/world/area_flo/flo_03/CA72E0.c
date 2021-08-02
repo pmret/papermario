@@ -32,7 +32,7 @@ Script N(802406A0) = SCRIPT({
     if (SI_VAR(0) == 2) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             <= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
                 if (SI_SAVE_FLAG(1411) == 0) {
                     SetMusicTrack(0, SONG_MONTY_MOLE_ASSAULT, 0, 8);
@@ -50,7 +50,7 @@ Script N(802406A0) = SCRIPT({
 });
 
 Script N(802407C0) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             PushSong(137, 0);
         }
@@ -58,7 +58,7 @@ Script N(802407C0) = SCRIPT({
 });
 
 Script N(80240814) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
             sleep 10;
@@ -111,12 +111,12 @@ Script N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 Script N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
 Script N(80240BE4) = SCRIPT({
-    bind N(exitWalk_80240B2C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80240B88) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80240B2C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B88) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -152,7 +152,7 @@ Script N(main) = SCRIPT({
         spawn EnterWalk;
     }
     await N(802406A0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CA72A0)();
     }
 });
@@ -254,7 +254,7 @@ Script N(8024122C) = SCRIPT({
 
 Script N(interact_802412BC) = SCRIPT({
     await N(802407C0);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SI_MAP_VAR(14) = 1;
             SI_VAR(4) = (int) 3.5;
@@ -348,7 +348,7 @@ Script N(interact_802412BC) = SCRIPT({
             BindNpcAI(NPC_DAYZEE, N(npcAI_8024119C));
             SI_MAP_VAR(14) = 0;
             SI_MAP_VAR(15) = 60;
-            STORY_PROGRESS = STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES;
+            SI_STORY_PROGRESS = STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES;
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1411) == 0) {
@@ -372,7 +372,7 @@ Script N(interact_802412BC) = SCRIPT({
                 SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
                               MESSAGE_ID(0x11, 0x005A));
                 EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0);
-                STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
+                SI_STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
             }
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
@@ -407,7 +407,7 @@ Script N(init_80241DA4) = SCRIPT({
 Script N(init_80241E10) = SCRIPT({
     BindNpcDefeat(NPC_SELF, N(defeat_802411B8));
     EnableNpcShadow(NPC_DAYZEE, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SetNpcPos(NPC_DAYZEE, 0, -1000, 0);
         } else {
@@ -473,7 +473,7 @@ Script N(defeat_80241F64) = SCRIPT({
 });
 
 Script N(hit_80242138) = SCRIPT({
-    if (STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+    if (SI_STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         GetOwnerEncounterTrigger(SI_VAR(0));
         if (SI_VAR(0) != 1) {
             SetNpcAnimation(NPC_SELF, NPC_ANIM(monty_mole, Palette_01, Anim_5));
@@ -481,331 +481,315 @@ Script N(hit_80242138) = SCRIPT({
     }
 });
 
-// *INDENT-OFF*
-Script N(idle_8024219C) = {
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(10), 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(23), 1),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 1),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_LABEL, 0),
-            SI_CMD(ScriptOpcode_CALL, GetNpcPos, 2, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, IsPlayerWithin, SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, GetCurrentPartner, SI_VAR(9)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(9), 9),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(14), 1),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(3), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(23), 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 2, 32840, 1),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 2, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(23), 1),
-                SI_CMD(ScriptOpcode_IF_NE, SI_MAP_VAR(10), 0),
-                    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 44),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 4),
-                    SI_CMD(ScriptOpcode_ELSE),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 10),
-                    SI_CMD(ScriptOpcode_END_IF),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 2, 610, 0),
-                    SI_CMD(ScriptOpcode_CALL, ShowEmote, 2, 0, 0, SI_VAR(1), 1, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(1)),
-                    SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 1),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 2, 802, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 2, 3080465),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1367), 0),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 2, 0, -50, 0),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 45),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(23), 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1367), 0),
-                    SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-                    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80240F6C)),
-                    SI_CMD(ScriptOpcode_LOOP, SI_VAR(0)),
-                        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_END_LOOP),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 2, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 2, 32840, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(23), 0),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 2, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 2, 801, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 2, 3080464),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-                SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 0),
-                SI_CMD(ScriptOpcode_CALL, RandInt, 30, SI_VAR(0)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 60),
-                SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(10), SI_VAR(0)),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_IF_GT, SI_MAP_VAR(10), 0),
-                    SI_CMD(ScriptOpcode_SUB, SI_MAP_VAR(10), 1),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(idle_8024219C) = SCRIPT({
+    loop {
+        if (SI_MAP_VAR(10) == 0) {
+            if (SI_AREA_FLAG(23) == 1) {
+                goto 0;
+            }
+            SI_VAR(3) = 1;
+        } else {
+        0:
+            GetNpcPos(NPC_MONTY_MOLE0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            IsPlayerWithin(SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3));
+        }
+        GetCurrentPartner(SI_VAR(9));
+        if (SI_VAR(9) == 9) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_MAP_VAR(14) == 1) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_VAR(3) == 1) {
+            if (SI_AREA_FLAG(23) == 0) {
+                SetNpcFlagBits(NPC_MONTY_MOLE0, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                NpcFacePlayer(NPC_MONTY_MOLE0, 1);
+                sleep 1;
+                SI_AREA_FLAG(23) = 1;
+                if (SI_MAP_VAR(10) != 0) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                        SI_VAR(1) = 4;
+                    } else {
+                        SI_VAR(1) = 10;
+                    }
+                    PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_UNKNOWN_262, 0);
+                    ShowEmote(2, EMOTE_EXCLAMATION, 0, SI_VAR(1), 1, 0, 0, 0, 0);
+                    sleep SI_VAR(1);
+                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
+                }
+                PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_DIG, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                sleep 20;
+                if (SI_SAVE_FLAG(1367) == 0) {
+                    SetNpcPos(NPC_MONTY_MOLE0, 0, -50, 0);
+                }
+                sleep 45;
+            }
+        } else {
+            if (SI_AREA_FLAG(23) == 1) {
+                if (SI_SAVE_FLAG(1367) == 0) {
+                    RandInt(2, SI_VAR(0));
+                    SI_VAR(0) += 1;
+                    buf_use N(intTable_80240F6C);
+                    loop SI_VAR(0) {
+                        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3);
+                    }
+                    SetNpcPos(NPC_MONTY_MOLE0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+                }
+                SetNpcFlagBits(NPC_MONTY_MOLE0, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                SI_AREA_FLAG(23) = 0;
+                NpcFacePlayer(NPC_MONTY_MOLE0, 1);
+                sleep 1;
+                PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_SURFACE, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                sleep 10;
+                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
+                RandInt(30, SI_VAR(0));
+                SI_VAR(0) += 60;
+                SI_MAP_VAR(10) = SI_VAR(0);
+            } else {
+                if (SI_MAP_VAR(10) > 0) {
+                    SI_MAP_VAR(10) -= 1;
+                }
+            }
+        }
+        sleep 1;
+    }
+});
 
-// *INDENT-OFF*
-Script N(idle_80242618) = {
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(11), 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(24), 1),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 1),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_LABEL, 0),
-            SI_CMD(ScriptOpcode_CALL, GetNpcPos, 3, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, IsPlayerWithin, SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, GetCurrentPartner, SI_VAR(9)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(9), 9),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(14), 1),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(3), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(24), 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 3, 32840, 1),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 3, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(24), 1),
-                SI_CMD(ScriptOpcode_IF_NE, SI_MAP_VAR(11), 0),
-                    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 44),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 4),
-                    SI_CMD(ScriptOpcode_ELSE),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 10),
-                    SI_CMD(ScriptOpcode_END_IF),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 3, 610, 0),
-                    SI_CMD(ScriptOpcode_CALL, ShowEmote, 3, 0, 0, SI_VAR(1), 1, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(1)),
-                    SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 1),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 3, 802, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 3, 3080465),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1368), 0),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 3, 0, -50, 0),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 45),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(24), 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1368), 0),
-                    SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-                    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80240F90)),
-                    SI_CMD(ScriptOpcode_LOOP, SI_VAR(0)),
-                        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_END_LOOP),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 3, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 3, 32840, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(24), 0),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 3, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 3, 801, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 3, 3080464),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-                SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 0),
-                SI_CMD(ScriptOpcode_CALL, RandInt, 35, SI_VAR(0)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 55),
-                SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(11), SI_VAR(0)),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_IF_GT, SI_MAP_VAR(11), 0),
-                    SI_CMD(ScriptOpcode_SUB, SI_MAP_VAR(11), 1),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(idle_80242618) = SCRIPT({
+    loop {
+        if (SI_MAP_VAR(11) == 0) {
+            if (SI_AREA_FLAG(24) == 1) {
+                goto 0;
+            }
+            SI_VAR(3) = 1;
+        } else {
+        0:
+            GetNpcPos(NPC_MONTY_MOLE1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            IsPlayerWithin(SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3));
+        }
+        GetCurrentPartner(SI_VAR(9));
+        if (SI_VAR(9) == 9) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_MAP_VAR(14) == 1) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_VAR(3) == 1) {
+            if (SI_AREA_FLAG(24) == 0) {
+                SetNpcFlagBits(NPC_MONTY_MOLE1, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                NpcFacePlayer(NPC_MONTY_MOLE1, 1);
+                sleep 1;
+                SI_AREA_FLAG(24) = 1;
+                if (SI_MAP_VAR(11) != 0) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                        SI_VAR(1) = 4;
+                    } else {
+                        SI_VAR(1) = 10;
+                    }
+                    PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_UNKNOWN_262, 0);
+                    ShowEmote(3, EMOTE_EXCLAMATION, 0, SI_VAR(1), 1, 0, 0, 0, 0);
+                    sleep SI_VAR(1);
+                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
+                }
+                PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_DIG, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                sleep 20;
+                if (SI_SAVE_FLAG(1368) == 0) {
+                    SetNpcPos(NPC_MONTY_MOLE1, 0, -50, 0);
+                }
+                sleep 45;
+            }
+        } else {
+            if (SI_AREA_FLAG(24) == 1) {
+                if (SI_SAVE_FLAG(1368) == 0) {
+                    RandInt(2, SI_VAR(0));
+                    SI_VAR(0) += 1;
+                    buf_use N(intTable_80240F90);
+                    loop SI_VAR(0) {
+                        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3);
+                    }
+                    SetNpcPos(NPC_MONTY_MOLE1, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+                }
+                SetNpcFlagBits(NPC_MONTY_MOLE1, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                SI_AREA_FLAG(24) = 0;
+                NpcFacePlayer(NPC_MONTY_MOLE1, 1);
+                sleep 1;
+                PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_SURFACE, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                sleep 10;
+                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
+                RandInt(35, SI_VAR(0));
+                SI_VAR(0) += 55;
+                SI_MAP_VAR(11) = SI_VAR(0);
+            } else {
+                if (SI_MAP_VAR(11) > 0) {
+                    SI_MAP_VAR(11) -= 1;
+                }
+            }
+        }
+        sleep 1;
+    }
+});
 
-// *INDENT-OFF*
-Script N(idle_80242A94) = {
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(12), 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(25), 1),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 1),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_LABEL, 0),
-            SI_CMD(ScriptOpcode_CALL, GetNpcPos, 4, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, IsPlayerWithin, SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, GetCurrentPartner, SI_VAR(9)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(9), 9),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(14), 1),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(3), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(25), 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 4, 32840, 1),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 4, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(25), 1),
-                SI_CMD(ScriptOpcode_IF_NE, SI_MAP_VAR(12), 0),
-                    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 44),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 4),
-                    SI_CMD(ScriptOpcode_ELSE),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 10),
-                    SI_CMD(ScriptOpcode_END_IF),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 4, 610, 0),
-                    SI_CMD(ScriptOpcode_CALL, ShowEmote, 4, 0, 0, SI_VAR(1), 1, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(1)),
-                    SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 1),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 4, 802, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 4, 3080465),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1369), 0),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 4, 0, -50, 0),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 45),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(25), 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1369), 0),
-                    SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-                    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80240FB4)),
-                    SI_CMD(ScriptOpcode_LOOP, SI_VAR(0)),
-                        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_END_LOOP),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 4, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 4, 32840, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(25), 0),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 4, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 4, 801, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 4, 3080464),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-                SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 0),
-                SI_CMD(ScriptOpcode_CALL, RandInt, 40, SI_VAR(0)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 50),
-                SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(12), SI_VAR(0)),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_IF_GT, SI_MAP_VAR(12), 0),
-                    SI_CMD(ScriptOpcode_SUB, SI_MAP_VAR(12), 1),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(idle_80242A94) = SCRIPT({
+    loop {
+        if (SI_MAP_VAR(12) == 0) {
+            if (SI_AREA_FLAG(25) == 1) {
+                goto 0;
+            }
+            SI_VAR(3) = 1;
+        } else {
+        0:
+            GetNpcPos(NPC_MONTY_MOLE2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            IsPlayerWithin(SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3));
+        }
+        GetCurrentPartner(SI_VAR(9));
+        if (SI_VAR(9) == 9) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_MAP_VAR(14) == 1) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_VAR(3) == 1) {
+            if (SI_AREA_FLAG(25) == 0) {
+                SetNpcFlagBits(NPC_MONTY_MOLE2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                NpcFacePlayer(NPC_MONTY_MOLE2, 1);
+                sleep 1;
+                SI_AREA_FLAG(25) = 1;
+                if (SI_MAP_VAR(12) != 0) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                        SI_VAR(1) = 4;
+                    } else {
+                        SI_VAR(1) = 10;
+                    }
+                    PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_UNKNOWN_262, 0);
+                    ShowEmote(4, EMOTE_EXCLAMATION, 0, SI_VAR(1), 1, 0, 0, 0, 0);
+                    sleep SI_VAR(1);
+                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
+                }
+                PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_DIG, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                sleep 20;
+                if (SI_SAVE_FLAG(1369) == 0) {
+                    SetNpcPos(NPC_MONTY_MOLE2, 0, -50, 0);
+                }
+                sleep 45;
+            }
+        } else {
+            if (SI_AREA_FLAG(25) == 1) {
+                if (SI_SAVE_FLAG(1369) == 0) {
+                    RandInt(2, SI_VAR(0));
+                    SI_VAR(0) += 1;
+                    buf_use N(intTable_80240FB4);
+                    loop SI_VAR(0) {
+                        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3);
+                    }
+                    SetNpcPos(NPC_MONTY_MOLE2, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+                }
+                SetNpcFlagBits(NPC_MONTY_MOLE2, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                SI_AREA_FLAG(25) = 0;
+                NpcFacePlayer(NPC_MONTY_MOLE2, 1);
+                sleep 1;
+                PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_SURFACE, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                sleep 10;
+                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
+                RandInt(40, SI_VAR(0));
+                SI_VAR(0) += 50;
+                SI_MAP_VAR(12) = SI_VAR(0);
+            } else {
+                if (SI_MAP_VAR(12) > 0) {
+                    SI_MAP_VAR(12) -= 1;
+                }
+            }
+        }
+        sleep 1;
+    }
+});
 
-// *INDENT-OFF*
-Script N(idle_80242F10) = {
-    SI_CMD(ScriptOpcode_LOOP, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(13), 0),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(26), 1),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 1),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_LABEL, 0),
-            SI_CMD(ScriptOpcode_CALL, GetNpcPos, 5, SI_VAR(0), SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_CALL, IsPlayerWithin, SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, GetCurrentPartner, SI_VAR(9)),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(9), 9),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_MAP_VAR(14), 1),
-            SI_CMD(ScriptOpcode_SET, SI_VAR(3), 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(3), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(26), 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 5, 32840, 1),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 5, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(26), 1),
-                SI_CMD(ScriptOpcode_IF_NE, SI_MAP_VAR(13), 0),
-                    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 44),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 4),
-                    SI_CMD(ScriptOpcode_ELSE),
-                        SI_CMD(ScriptOpcode_SET, SI_VAR(1), 10),
-                    SI_CMD(ScriptOpcode_END_IF),
-                    SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 5, 610, 0),
-                    SI_CMD(ScriptOpcode_CALL, ShowEmote, 5, 0, 0, SI_VAR(1), 1, 0, 0, 0, 0),
-                    SI_CMD(ScriptOpcode_SLEEP_FRAMES, SI_VAR(1)),
-                    SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 1),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 5, 802, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 5, 3080465),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1370), 0),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 5, 0, -50, 0),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 45),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_ELSE),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_AREA_FLAG(26), 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1370), 0),
-                    SI_CMD(ScriptOpcode_CALL, RandInt, 2, SI_VAR(0)),
-                    SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 1),
-                    SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80240FD8)),
-                    SI_CMD(ScriptOpcode_LOOP, SI_VAR(0)),
-                        SI_CMD(ScriptOpcode_BUFFER_READ_3, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                    SI_CMD(ScriptOpcode_END_LOOP),
-                    SI_CMD(ScriptOpcode_CALL, SetNpcPos, 5, SI_VAR(1), SI_VAR(2), SI_VAR(3)),
-                SI_CMD(ScriptOpcode_END_IF),
-                SI_CMD(ScriptOpcode_CALL, SetNpcFlagBits, 5, 32840, 1),
-                SI_CMD(ScriptOpcode_SET, SI_AREA_FLAG(26), 0),
-                SI_CMD(ScriptOpcode_CALL, NpcFacePlayer, 5, 1),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtNpc, 5, 801, 0),
-                SI_CMD(ScriptOpcode_CALL, SetNpcAnimation, 5, 3080464),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-                SI_CMD(ScriptOpcode_CALL, SetSelfEnemyFlagBits, 386924544, 0),
-                SI_CMD(ScriptOpcode_CALL, RandInt, 45, SI_VAR(0)),
-                SI_CMD(ScriptOpcode_ADD, SI_VAR(0), 45),
-                SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(13), SI_VAR(0)),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_IF_GT, SI_MAP_VAR(13), 0),
-                    SI_CMD(ScriptOpcode_SUB, SI_MAP_VAR(13), 1),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-    SI_CMD(ScriptOpcode_END_LOOP),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(idle_80242F10) = SCRIPT({
+    loop {
+        if (SI_MAP_VAR(13) == 0) {
+            if (SI_AREA_FLAG(26) == 1) {
+                goto 0;
+            }
+            SI_VAR(3) = 1;
+        } else {
+        0:
+            GetNpcPos(NPC_MONTY_MOLE3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+            IsPlayerWithin(SI_VAR(0), SI_VAR(2), SI_MAP_VAR(15), SI_VAR(3));
+        }
+        GetCurrentPartner(SI_VAR(9));
+        if (SI_VAR(9) == 9) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_MAP_VAR(14) == 1) {
+            SI_VAR(3) = 0;
+        }
+        if (SI_VAR(3) == 1) {
+            if (SI_AREA_FLAG(26) == 0) {
+                SetNpcFlagBits(NPC_MONTY_MOLE3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                NpcFacePlayer(NPC_MONTY_MOLE3, 1);
+                sleep 1;
+                SI_AREA_FLAG(26) = 1;
+                if (SI_MAP_VAR(13) != 0) {
+                    if (SI_STORY_PROGRESS < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
+                        SI_VAR(1) = 4;
+                    } else {
+                        SI_VAR(1) = 10;
+                    }
+                    PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_UNKNOWN_262, 0);
+                    ShowEmote(5, EMOTE_EXCLAMATION, 0, SI_VAR(1), 1, 0, 0, 0, 0);
+                    sleep SI_VAR(1);
+                    SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
+                }
+                PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_DIG, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                sleep 20;
+                if (SI_SAVE_FLAG(1370) == 0) {
+                    SetNpcPos(NPC_MONTY_MOLE3, 0, -50, 0);
+                }
+                sleep 45;
+            }
+        } else {
+            if (SI_AREA_FLAG(26) == 1) {
+                if (SI_SAVE_FLAG(1370) == 0) {
+                    RandInt(2, SI_VAR(0));
+                    SI_VAR(0) += 1;
+                    buf_use N(intTable_80240FD8);
+                    loop SI_VAR(0) {
+                        buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3);
+                    }
+                    SetNpcPos(NPC_MONTY_MOLE3, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+                }
+                SetNpcFlagBits(NPC_MONTY_MOLE3, ((NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_8000)), TRUE);
+                SI_AREA_FLAG(26) = 0;
+                NpcFacePlayer(NPC_MONTY_MOLE3, 1);
+                sleep 1;
+                PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_SURFACE, 0);
+                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                sleep 10;
+                SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
+                RandInt(45, SI_VAR(0));
+                SI_VAR(0) += 45;
+                SI_MAP_VAR(13) = SI_VAR(0);
+            } else {
+                if (SI_MAP_VAR(13) > 0) {
+                    SI_MAP_VAR(13) -= 1;
+                }
+            }
+        }
+        sleep 1;
+    }
+});
 
 Script N(init_8024338C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE0, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_8024219C));
             SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -828,7 +812,7 @@ Script N(init_802434CC) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE1, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242618));
             SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -851,7 +835,7 @@ Script N(init_8024360C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE2, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242A94));
             SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -874,7 +858,7 @@ Script N(init_8024374C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE3, FALSE);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242F10));
             SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));
@@ -1199,8 +1183,8 @@ Script N(80244E54) = SCRIPT({
     SI_AREA_FLAG(27) = 0;
     SI_AREA_FLAG(28) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 16;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 16;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80244E44);
 });
 
 static s32 N(pad_4ECC) = {

@@ -16,12 +16,12 @@ MapConfig N(config) = {
 };
 
 Script N(80240600) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
     } else {
         SetMusicTrack(0, SONG_FLOWER_FIELDS_SUNNY, 0, 8);
     }
-    if (STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_FILLED_SPRING_WITH_WATER) {
         PlaySound(0x80000022);
     }
 });
@@ -70,12 +70,12 @@ Script N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
 Script N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
 
 Script N(802409F4) = SCRIPT({
-    bind N(exitWalk_8024093C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80240998) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_8024093C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240998) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -116,7 +116,7 @@ Script N(main) = SCRIPT({
         spawn EnterWalk;
     }
     await N(80240600);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CF0940)();
     }
 });
@@ -167,8 +167,8 @@ Script N(80241728) = SCRIPT({
     SI_AREA_FLAG(31) = 0;
     SI_AREA_FLAG(32) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 13;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80241718);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 13;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80241718);
 });
 
 Script N(updateTexturePan_802417A0) = SCRIPT({
@@ -188,7 +188,48 @@ Script N(updateTexturePan_802417A0) = SCRIPT({
 
 const char N(flo_10_name_hack)[];
 
-// *INDENT-OFF*
+// BUG: missing END_SPAWN_THREADs
+#ifdef NON_MATCHING
+Script N(8024183C) = SCRIPT({
+    DisablePlayerInput(TRUE);
+    TranslateGroup(100, 0, 45, 0);
+    UseSettingsFrom(0, 170, 0, 160);
+    SetPanTarget(0, 170, -90, 160);
+    SetCamDistance(0, 800);
+    SetCamPitch(0, 18.5, -7.5);
+    SetCamPosA(0, -300.0, 200.0);
+    SetCamPosB(0, 300.0, -150.0);
+    SetCamSpeed(0, 90.0);
+    PanToTarget(0, 0, 1);
+    PlaySound(0x80000050);
+    spawn {
+        MakeLerp(80, 90, 10, 0);
+    0:
+        UpdateLerp();
+        RotateModel(101, SI_VAR(0), 1, 0, 0);
+        RotateModel(103, SI_VAR(0), 1, 0, 0);
+        if (SI_VAR(1) == 1) {
+            sleep 1;
+            goto 0;
+        }
+        spawn {
+            MakeLerp(45, 100, 150, 0);
+            loop {
+                UpdateLerp();
+                TranslateGroup(100, 0, SI_VAR(0), 0);
+                sleep 1;
+                if (SI_VAR(1) == 0) {
+                    break loop;
+                }
+            }
+            sleep 30;
+            SI_STORY_PROGRESS = STORY_CH6_FILLED_SPRING_WITH_WATER;
+            GotoMap("flo_10", 2);
+            sleep 100;
+        }
+    }
+});
+#else
 Script N(8024183C) = {
     SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 1),
     SI_CMD(ScriptOpcode_CALL, TranslateGroup, 100, 0, 45, 0),
@@ -222,16 +263,16 @@ Script N(8024183C) = {
                 SI_CMD(ScriptOpcode_END_IF),
             SI_CMD(ScriptOpcode_END_LOOP),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(0), 49),
+            SI_CMD(ScriptOpcode_SET, SI_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
             SI_CMD(ScriptOpcode_CALL, GotoMap, N(flo_10_name_hack), 2),
             SI_CMD(ScriptOpcode_SLEEP_FRAMES, 100),
             SI_CMD(ScriptOpcode_RETURN),
             SI_CMD(ScriptOpcode_END)
         };
-        // *INDENT-ON*
+#endif
 
 Script N(80241ABC) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
+    if (SI_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(94, 0);
         ModifyColliderFlags(0, 30, 0x7FFFFE00);
     } else {

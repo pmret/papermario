@@ -11,14 +11,23 @@
 #define N(sym) NS(NAMESPACE, sym)
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
-#define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 
 #define PHYSICAL_TO_VIRTUAL(addr) (void*)((u32)(addr) + 0x80000000)
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
-#define ASSERT(condition) if (!(condition)) { while (1) {} }
-#define PANIC() ASSERT(0)
-#define STATIC_ASSERT(condition) enum { static_assert_fail = 1/(!!(condition)) } // Causes division by zero ("not integer constant") if false
+#ifdef DEBUG
+#define ASSERT(condition) \
+    if (!(condition)) { \
+        func_80025F44("Assertion failed: " #condition, __FILE__, __LINE__); \
+        while (TRUE) {} \
+    }
+#define PANIC() \
+    func_80025F44("Panic!", __FILE__, __LINE__); \
+    while (TRUE) {}
+#else
+#define ASSERT(condition) if (!(condition)) { while (TRUE) {} }
+#define PANIC() while (TRUE) {}
+#endif
 
 #define BADGE_MENU_PAGE(index) (&gBadgeMenuPages[index])
 #define ITEM_MENU_PAGE(index) (&gItemMenuPages[index])
@@ -39,6 +48,9 @@
 #define MAX_DYNAMIC_ENTITIES 16
 #define MAX_TEX_PANNERS 16
 #define MAX_ITEM_ENTITIES 256
+
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
 
 // Alternative to libultra's M_PI: non-float version; more digits cause issues
 #define PI      3.141592f

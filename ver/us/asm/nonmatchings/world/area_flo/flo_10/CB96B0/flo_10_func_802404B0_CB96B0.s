@@ -90,8 +90,8 @@ glabel flo_10_func_802404B0_CB96B0
 /* CB97DC 802405DC 004A1021 */  addu      $v0, $v0, $t2
 /* CB97E0 802405E0 AFAA0014 */  sw        $t2, 0x14($sp)
 /* CB97E4 802405E4 AFAA0010 */  sw        $t2, 0x10($sp)
-/* CB97E8 802405E8 3C0A800A */  lui       $t2, %hi(D_8009A64C)
-/* CB97EC 802405EC 8D4AA64C */  lw        $t2, %lo(D_8009A64C)($t2)
+/* CB97E8 802405E8 3C0A800A */  lui       $t2, %hi(nuGfxCfb_ptr)
+/* CB97EC 802405EC 8D4AA64C */  lw        $t2, %lo(nuGfxCfb_ptr)($t2)
 /* CB97F0 802405F0 00021040 */  sll       $v0, $v0, 1
 /* CB97F4 802405F4 AFAA0018 */  sw        $t2, 0x18($sp)
 /* CB97F8 802405F8 8FAA0010 */  lw        $t2, 0x10($sp)

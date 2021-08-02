@@ -1,6 +1,7 @@
-#define NAMESPACE battle_partner_watt
-
 #include "common.h"
+#include "effects.h"
+
+#define NAMESPACE battle_partner_watt
 
 extern EffectInstance* D_8023C1B4;
 extern s32 D_8023C1B8;
@@ -9,7 +10,7 @@ extern s32 D_8023C1C4;
 extern s32 D_8023C1C8;
 extern EffectInstance* D_8023C1CC;
 extern EffectInstance* D_8023C1D0;
-extern s32* D_80239A0C_7054FC;
+extern EffectInstance* D_80239A0C_7054FC;
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
 
@@ -54,7 +55,16 @@ ApiStatus func_80238408_703EF8(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_802384B0_703FA0);
+ApiStatus func_802384B0_703FA0(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+
+    D_80239A0C_7054FC = playFX_33(8, var1, var2, var3, 1.3f, 55);
+
+    return ApiStatus_DONE2;
+}
 
 ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
     s32* var = D_80239A0C_7054FC;
@@ -67,7 +77,21 @@ ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/partner/watt", func_8023859C_70408C);
+// Beware this demon because "EffectInstanceDataThing" is one hell of a
+// janky solution, but this does match.
+ApiStatus func_8023859C_70408C(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
+    EffectInstanceDataThing* dataThing;
+
+    D_8023C1B4 = playFX_58(0, var1, var2, var3, 1.0f, 10);
+    dataThing = D_8023C1B4->data;
+    dataThing->unk_30 = 3;
+
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238668_704158);
 

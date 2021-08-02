@@ -8,12 +8,12 @@ Script N(exitWalk_80243480) = EXIT_WALK_SCRIPT(60,  0, "arn_02",  1);
 Script N(exitWalk_802434DC) = EXIT_WALK_SCRIPT(60,  1, "dgb_00",  0);
 
 Script N(80243538) = SCRIPT({
-    bind N(exitWalk_80243480) to TRIGGER_FLOOR_ABOVE 1;
-    bind N(exitWalk_802434DC) to TRIGGER_FLOOR_ABOVE 6;
+    bind N(exitWalk_80243480) TRIGGER_FLOOR_ABOVE 1;
+    bind N(exitWalk_802434DC) TRIGGER_FLOOR_ABOVE 6;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_GUSTY_GULCH;
+    SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);

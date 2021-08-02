@@ -25,7 +25,7 @@ Script N(80240060) = SCRIPT({
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
     } else {
-        match STORY_PROGRESS {
+        match SI_STORY_PROGRESS {
             < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                 SetMusicTrack(0, SONG_SUN_TOWER_CLOUDY, 0, 8);
             } else {
@@ -42,11 +42,11 @@ static s32 N(pad_11C) = {
 Script N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
 
 Script N(8024017C) = SCRIPT({
-    bind N(exitWalk_80240120) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240120) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -78,7 +78,7 @@ NpcSettings N(npcSettings_80240300) = {
 };
 
 Script N(8024032C) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SI_VAR(3) = 7;
         SI_VAR(4) = 5;
     } else {
@@ -203,7 +203,7 @@ Script N(8024094C) = SCRIPT({
 });
 
 Script N(interact_80240B28) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_SPOKE_WITH_THE_SUN {
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009A));
             SetPlayerAnimation(ANIM_THINKING);
@@ -212,7 +212,7 @@ Script N(interact_80240B28) = SCRIPT({
             sleep 20;
             SetPlayerAnimation(ANIM_10002);
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009B));
-            STORY_PROGRESS = STORY_CH6_SPOKE_WITH_THE_SUN;
+            SI_STORY_PROGRESS = STORY_CH6_SPOKE_WITH_THE_SUN;
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009C));
@@ -237,7 +237,7 @@ Script N(interact_80240B28) = SCRIPT({
 Script N(init_80240CD0) = SCRIPT({
     SetNpcCollisionSize(10, 64, 40);
     EnableNpcShadow(NPC_SUN0, FALSE);
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN0, 0, 270, 0);
         BindNpcInteract(NPC_SELF, N(interact_80240B28));
         spawn N(8024032C);
@@ -256,7 +256,7 @@ Script N(init_80240DB4) = SCRIPT({
     SetNpcPaletteSwapMode(11, 3);
     SetNpcPaletteSwapping(10, 0, 1, 5, 5, 13, 5, 0, 0);
     SetNpcPaletteSwapping(11, 0, 1, 5, 5, 13, 5, 0, 0);
-    if (STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetNpcPos(NPC_SUN1, 0, 270, -5);
     } else {
         SetNpcPos(NPC_SUN1, 0, 450, -5);
@@ -357,61 +357,57 @@ s32 N(intTable_80241360)[] = {
     0x00000018, 0xF24A7CE7, 0x0000000A, 0xF24A814D,
 };
 
-// *INDENT-OFF*
-Script N(802413B0) = {
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1401), 0),
-        SI_CMD(ScriptOpcode_LABEL, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1401), 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 1),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_USE_BUFFER, N(intTable_80241360)),
-            SI_CMD(ScriptOpcode_LOOP, 10),
-                SI_CMD(ScriptOpcode_BUFFER_READ_2, SI_VAR(1), SI_VAR(2)),
-                SI_CMD(ScriptOpcode_CALL, ShakeCam, 0, 0, SI_VAR(1), SI_VAR(2)),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, UseSettingsFrom, 0, -170, 0, 35),
-        SI_CMD(ScriptOpcode_CALL, SetPanTarget, 0, -170, 0, 35),
-        SI_CMD(ScriptOpcode_CALL, SetCamDistance, 0, 600),
-        SI_CMD(ScriptOpcode_CALL, SetCamPitch, 0, SI_FIXED(25.0), SI_FIXED(-9.0)),
-        SI_CMD(ScriptOpcode_CALL, SetCamPosA, 0, SI_FIXED(-50.0), SI_FIXED(25.0)),
-        SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(1.5)),
-        SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-        SI_CMD(ScriptOpcode_CALL, WaitForCam, 0, SI_FIXED(1.0)),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 100),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 6, 4, -180, 0, -15, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-            SI_CMD(ScriptOpcode_CALL, PlayEffect, 6, 4, -190, 0, -35, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_LOOP, 6),
-                SI_CMD(ScriptOpcode_CALL, PlaySoundAtCollider, 11, 391, 0),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 20),
-            SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, MakeLerp, 0, -50, 120, 2),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-            SI_CMD(ScriptOpcode_CALL, TranslateGroup, 16, 0, SI_VAR(0), 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                SI_CMD(ScriptOpcode_BREAK_LOOP),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 0, 12, 2147483136),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 1, 14, 2147483136),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-        SI_CMD(ScriptOpcode_CALL, ResetCam, 0, SI_FIXED(90.0)),
-        SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 0),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 0, 12, 2147483136),
-        SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 1, 14, 2147483136),
-        SI_CMD(ScriptOpcode_CALL, TranslateGroup, 16, 0, -50, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(802413B0) = SCRIPT({
+    if (SI_SAVE_FLAG(1401) == 0) {
+    0:
+        if (SI_SAVE_FLAG(1401) == 0) {
+            sleep 1;
+            goto 0;
+        }
+        DisablePlayerInput(TRUE);
+        spawn {
+            buf_use N(intTable_80241360);
+            loop 10 {
+                buf_read SI_VAR(1) SI_VAR(2);
+                ShakeCam(0, 0, SI_VAR(1), SI_VAR(2));
+            }
+        }
+        UseSettingsFrom(0, -170, 0, 35);
+        SetPanTarget(0, -170, 0, 35);
+        SetCamDistance(0, 600);
+        SetCamPitch(0, 25.0, -9.0);
+        SetCamPosA(0, -50.0, 25.0);
+        SetCamSpeed(0, 1.5);
+        PanToTarget(0, 0, 1);
+        WaitForCam(0, 1.0);
+        spawn {
+            sleep 100;
+            PlayEffect(0x6, 4, -180, 0, -15, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            PlayEffect(0x6, 4, -190, 0, -35, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        spawn {
+            loop 6 {
+                PlaySoundAtCollider(11, 391, 0);
+                sleep 20;
+            }
+        }
+        MakeLerp(0, -50, 120, 2);
+        loop {
+            UpdateLerp();
+            TranslateGroup(16, 0, SI_VAR(0), 0);
+            sleep 1;
+            if (SI_VAR(1) == 0) {
+                break loop;
+            }
+        }
+        ModifyColliderFlags(0, 12, 0x7FFFFE00);
+        ModifyColliderFlags(1, 14, 0x7FFFFE00);
+        sleep 15;
+        ResetCam(0, 90.0);
+        DisablePlayerInput(FALSE);
+    } else {
+        ModifyColliderFlags(0, 12, 0x7FFFFE00);
+        ModifyColliderFlags(1, 14, 0x7FFFFE00);
+        TranslateGroup(16, 0, -50, 0);
+    }
+});

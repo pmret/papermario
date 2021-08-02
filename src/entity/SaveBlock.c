@@ -30,13 +30,13 @@ void entity_SaveBlock_idle(Entity* entity) {
 }
 
 void entity_SaveBlock_pause_game(void) {
-    set_time_freeze_mode(1);
+    set_time_freeze_mode(TIME_FREEZE_PARTIAL);
     disable_player_input();
     gPlayerStatusPtr->currentSpeed = 0.0f;
 }
 
 void entity_SaveBlock_resume_game(void) {
-    set_time_freeze_mode(0);
+    set_time_freeze_mode(TIME_FREEZE_NORMAL);
     enable_player_input();
 }
 

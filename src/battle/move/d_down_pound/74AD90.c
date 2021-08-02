@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 #define NAMESPACE battle_move_d_down_pound
 

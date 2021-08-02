@@ -31,7 +31,7 @@ MapConfig N(config) = {
 };
 
 Script N(80242870) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -120,7 +120,7 @@ Script N(exitDoubleDoor_80242C3C) = SCRIPT({
 });
 
 Script N(80242CF0) = SCRIPT({
-    bind N(exitWalk_80242B2C) to TRIGGER_FLOOR_ABOVE 35;
+    bind N(exitWalk_80242B2C) TRIGGER_FLOOR_ABOVE 35;
 });
 
 Script N(enterDoubleDoor_80242D1C) = SCRIPT({
@@ -174,33 +174,29 @@ s32 N(itemList_80242F28)[] = {
     ITEM_NONE,
 };
 
-// *INDENT-OFF*
-Script N(main) = {
-    SI_CMD(ScriptOpcode_SET, SI_SAVE_VAR(425), 15),
-    SI_CMD(ScriptOpcode_CALL, SetSpriteShading, -1),
-    SI_CMD(ScriptOpcode_CALL, SetCamPerspective, 0, 3, 25, 16, 4096),
-    SI_CMD(ScriptOpcode_CALL, SetCamBGColor, 0, 0, 0, 0),
-    SI_CMD(ScriptOpcode_CALL, SetCamEnabled, 0, 1),
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), -15),
-        SI_CMD(ScriptOpcode_CALL, MakeNpcs, 1, N(npcGroupList_80244988)),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_AWAIT_SCRIPT, N(makeEntities)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80243608)),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242910), TRIGGER_WALL_PRESS_A, 25, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_802429C4), TRIGGER_WALL_PRESS_A, 21, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242A78), TRIGGER_WALL_PRESS_A, 13, 1, 0),
-    SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitSingleDoor_80242B88), TRIGGER_WALL_PRESS_A, 33, 1, 0),
-    SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1043), 0),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80243740), TRIGGER_WALL_PRESS_A, 16384, N(itemList_80242F28), 0, 1),
-    SI_CMD(ScriptOpcode_ELSE),
-        SI_CMD(ScriptOpcode_BIND_TRIGGER, N(exitDoubleDoor_80242C3C), TRIGGER_WALL_PRESS_A, 17, 1, 0),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(80242870)),
-    SI_CMD(ScriptOpcode_SPAWN_SCRIPT, N(enterDoubleDoor_80242D1C)),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(main) = SCRIPT({
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SetSpriteShading(-1);
+    SetCamPerspective(0, 3, 25, 16, 4096);
+    SetCamBGColor(0, 0, 0, 0);
+    SetCamEnabled(0, 1);
+    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+        MakeNpcs(1, N(npcGroupList_80244988));
+    }
+    await N(makeEntities);
+    spawn N(80243608);
+    bind N(exitDoubleDoor_80242910) TRIGGER_WALL_PRESS_A 25;
+    bind N(exitDoubleDoor_802429C4) TRIGGER_WALL_PRESS_A 21;
+    bind N(exitDoubleDoor_80242A78) TRIGGER_WALL_PRESS_A 13;
+    bind N(exitSingleDoor_80242B88) TRIGGER_WALL_PRESS_A 33;
+    if (SI_SAVE_FLAG(1043) == 0) {
+        bind_padlock N(80243740) TRIGGER_WALL_PRESS_A entity(0) N(itemList_80242F28);
+    } else {
+        bind N(exitDoubleDoor_80242C3C) TRIGGER_WALL_PRESS_A 17;
+    }
+    spawn N(80242870);
+    spawn N(enterDoubleDoor_80242D1C);
+});
 
 static s32 N(pad_30D8)[] = {
     0x00000000, 0x00000000,
@@ -312,8 +308,8 @@ Script N(80243608) = SCRIPT({
     ParentColliderToModel(28, 51);
     ParentColliderToModel(29, 51);
     if (SI_SAVE_FLAG(1044) == 0) {
-        bind N(80243470) to TRIGGER_WALL_PUSH 27;
-        bind N(8024353C) to TRIGGER_WALL_PUSH 28;
+        bind N(80243470) TRIGGER_WALL_PUSH 27;
+        bind N(8024353C) TRIGGER_WALL_PUSH 28;
     } else {
         if (SI_SAVE_FLAG(1045) == 0) {
             SI_VAR(0) = 48;
@@ -359,7 +355,7 @@ Script N(80243740) = SCRIPT({
 });
 
 Script N(802438A8) = SCRIPT({
-    bind N(exitDoubleDoor_80242C3C) to TRIGGER_WALL_PRESS_A 17;
+    bind N(exitDoubleDoor_80242C3C) TRIGGER_WALL_PRESS_A 17;
 });
 
 Script N(makeEntities) = SCRIPT({
@@ -745,43 +741,7 @@ NpcGroupList N(npcGroupList_80244988) = {
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-s32 N(func_80240458_C31938)(ScriptInstance* script) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = &gCameras[gCurrentCamID];
-    Enemy* enemy2 = get_enemy(enemy->npcID + 1);
-    f32 phi_f20;
-    s32 ret = TRUE;
-
-    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > enemy2->varTable[2]) {
-        ret = FALSE;
-    }
-
-    if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
-        phi_f20 = 90.0f;
-    } else {
-        phi_f20 = 270.0f;
-    }
-
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                     gPlayerStatusPtr->position.z))) > enemy2->varTable[3]) {
-        ret = FALSE;
-    }
-
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 9) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 7) {
-        ret = FALSE;
-    }
-
-    return ret;
-}
+#include "world/common/UnkNpcAIFunc26.inc.c"
 
 #include "world/common/UnkFunc7.inc.c"
 
@@ -820,7 +780,7 @@ ApiStatus N(func_8024086C_C31D4C)(ScriptInstance* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80240458_C31938)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -1012,7 +972,7 @@ ApiStatus N(func_802419B0_C32E90)(ScriptInstance* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80240458_C31938)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -1279,7 +1239,7 @@ ApiStatus N(func_80242480_C33960)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(func_80240458_C31938)(script)) {
+    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 

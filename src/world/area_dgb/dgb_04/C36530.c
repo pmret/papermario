@@ -23,7 +23,7 @@ MapConfig N(config) = {
 };
 
 Script N(80243170) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -86,18 +86,18 @@ Script N(enterSingleDoor_80243378) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
-    if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_80243D18));
     }
     await N(makeEntities);
-    bind N(exitSingleDoor_80243210) to TRIGGER_WALL_PRESS_A 16;
-    bind N(exitDoubleDoor_802432C4) to TRIGGER_WALL_PRESS_A 20;
+    bind N(exitSingleDoor_80243210) TRIGGER_WALL_PRESS_A 16;
+    bind N(exitDoubleDoor_802432C4) TRIGGER_WALL_PRESS_A 20;
     spawn N(80243170);
     spawn N(enterSingleDoor_80243378);
 });

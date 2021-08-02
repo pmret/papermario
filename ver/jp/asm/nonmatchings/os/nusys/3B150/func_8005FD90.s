@@ -40,8 +40,8 @@ glabel func_8005FD90
 /* 3B218 8005FE18 24104000 */  addiu     $s0, $zero, 0x4000
 .L8005FE1C:
 /* 3B21C 8005FE1C 27A50010 */  addiu     $a1, $sp, 0x10
-/* 3B220 8005FE20 3C04800A */  lui       $a0, %hi(carthandle)
-/* 3B224 8005FE24 8C84A618 */  lw        $a0, %lo(carthandle)($a0)
+/* 3B220 8005FE20 3C04800A */  lui       $a0, %hi(nuPiCartHandle)
+/* 3B224 8005FE24 8C84A618 */  lw        $a0, %lo(nuPiCartHandle)($a0)
 /* 3B228 8005FE28 0000302D */  daddu     $a2, $zero, $zero
 /* 3B22C 8005FE2C AFB30018 */  sw        $s3, 0x18($sp)
 /* 3B230 8005FE30 AFB2001C */  sw        $s2, 0x1c($sp)

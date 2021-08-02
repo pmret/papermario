@@ -44,7 +44,7 @@ asm_dir = script_dir + "/../ver/current/asm/nonmatchings"
 
 for root, dirs, files in os.walk(asm_dir):
     for asm_dir in dirs:
-        if "/os" not in root and "/world/" not in root and "/battle/" not in root:
+        if "/os" not in root and "/world/" not in root:
             do_dir(root, asm_dir)
 
 for thing in sorted(sizes.keys(), key=lambda x: sizes[x][4]):

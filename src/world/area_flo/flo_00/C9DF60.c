@@ -59,7 +59,7 @@ Script N(802414D0) = SCRIPT({
             spawn {
                 loop {
                     sleep 1;
-                    if (STORY_PROGRESS >= STORY_CH6_STAR_SPRIT_DEPARTED) {
+                    if (SI_STORY_PROGRESS >= STORY_CH6_STAR_SPRIT_DEPARTED) {
                         break loop;
                     }
                 }
@@ -69,7 +69,7 @@ Script N(802414D0) = SCRIPT({
         == 11 {
             FadeInMusic(0, 49, 0, 3000, 0, 127);
         } else {
-            match STORY_PROGRESS {
+            match SI_STORY_PROGRESS {
                 < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
                     SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
                 } else {
@@ -141,8 +141,8 @@ Script N(8024196C) = SCRIPT({
     func_802D2C14(1);
     PlayerMoveTo(0, -310, 30);
     func_802D2C14(0);
-    if (STORY_PROGRESS == STORY_CH6_STAR_SPRIT_DEPARTED) {
-        STORY_PROGRESS = STORY_CH6_RETURNED_TO_TOAD_TOWN;
+    if (SI_STORY_PROGRESS == STORY_CH6_STAR_SPRIT_DEPARTED) {
+        SI_STORY_PROGRESS = STORY_CH6_RETURNED_TO_TOAD_TOWN;
     }
     MakeLerp(-100, 0, 30, 1);
     loop {
@@ -204,12 +204,12 @@ Script N(exitWalk_80241F48) = EXIT_WALK_SCRIPT(60,  6, "flo_08",  0);
 const s32 N(pad_XXXX)[] = { 0, 0};
 
 Script N(80241FA4) = SCRIPT({
-    bind N(exitWalk_80241D7C) to TRIGGER_FLOOR_ABOVE 5;
-    bind N(exitWalk_80241DD8) to TRIGGER_FLOOR_ABOVE 9;
-    bind N(exitWalk_80241E34) to TRIGGER_FLOOR_ABOVE 13;
-    bind N(exitWalk_80241E90) to TRIGGER_FLOOR_ABOVE 17;
-    bind N(exitWalk_80241EEC) to TRIGGER_FLOOR_ABOVE 21;
-    bind N(exitWalk_80241F48) to TRIGGER_FLOOR_ABOVE 25;
+    bind N(exitWalk_80241D7C) TRIGGER_FLOOR_ABOVE 5;
+    bind N(exitWalk_80241DD8) TRIGGER_FLOOR_ABOVE 9;
+    bind N(exitWalk_80241E34) TRIGGER_FLOOR_ABOVE 13;
+    bind N(exitWalk_80241E90) TRIGGER_FLOOR_ABOVE 17;
+    bind N(exitWalk_80241EEC) TRIGGER_FLOOR_ABOVE 21;
+    bind N(exitWalk_80241F48) TRIGGER_FLOOR_ABOVE 25;
 });
 
 Script N(enterWalk_8024205C) = SCRIPT({
@@ -229,7 +229,7 @@ Script N(enterWalk_8024205C) = SCRIPT({
                     spawn N(80241FA4);
                 }
             }
-            1..6 {
+            1 ... 6 {
                 SI_VAR(0) = N(80241FA4);
                 spawn EnterWalk;
             }
@@ -258,18 +258,18 @@ Script N(enterWalk_8024205C) = SCRIPT({
             }
         }
     }
-    bind N(80242FCC) to TRIGGER_WALL_PRESS_A 2;
+    bind N(80242FCC) TRIGGER_WALL_PRESS_A 2;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
     SI_SAVE_FLAG(1984) = 1;
-    if (STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
+    if (SI_STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
         ModifyColliderFlags(0, 48, 0x7FFFFE00);
     }
     SI_SAVE_FLAG(263) = 0;
@@ -322,7 +322,7 @@ Script N(main) = SCRIPT({
         }
     }
     await N(802414D0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_C9DF20)();
     }
     spawn {
@@ -485,7 +485,7 @@ Script N(80242AF0) = SCRIPT({
     sleep 10;
     ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x0005), 0, 70, -200);
     ResetCam(0, 90.0);
-    STORY_PROGRESS = STORY_CH6_ARRIVED_AT_FLOWER_FIELDS;
+    SI_STORY_PROGRESS = STORY_CH6_ARRIVED_AT_FLOWER_FIELDS;
     func_802D2C14(0);
     DisablePlayerInput(FALSE);
 });
@@ -508,19 +508,19 @@ Script N(80242FCC) = SCRIPT({
         DisablePlayerInput(FALSE);
         return;
     }
-    if (STORY_PROGRESS == STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS == STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x0006), 0, 50, -200);
-        STORY_PROGRESS = STORY_CH6_WISTERWOOD_GAVE_HINT;
+        SI_STORY_PROGRESS = STORY_CH6_WISTERWOOD_GAVE_HINT;
         DisablePlayerInput(FALSE);
         return;
     }
-    if (STORY_PROGRESS < STORY_CH6_RETURNED_TO_TOAD_TOWN) {
+    if (SI_STORY_PROGRESS < STORY_CH6_RETURNED_TO_TOAD_TOWN) {
         ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x000D), 0, 50, -200);
         ShowChoice(MESSAGE_ID(0x1E, 0x001F));
         sleep 10;
         match SI_VAR(0) {
             == 0 {
-                match STORY_PROGRESS {
+                match SI_STORY_PROGRESS {
                     < STORY_CH6_GOT_MAGICAL_BEAN {
                         SwitchMessage(MESSAGE_ID(0x11, 0x000E));
                     }
@@ -594,13 +594,13 @@ Script N(init_80243474) = SCRIPT({
     SetNpcPos(NPC_SELF, 50, 70, -230);
     SetNpcFlagBits(NPC_SELF, ((0x00000002)), TRUE);
     EnableNpcShadow(NPC_SELF, FALSE);
-    if (STORY_PROGRESS < STORY_CH6_ARRIVED_AT_FLOWER_FIELDS) {
+    if (SI_STORY_PROGRESS < STORY_CH6_ARRIVED_AT_FLOWER_FIELDS) {
         spawn N(80242AF0);
     }
 });
 
 Script N(interact_8024352C) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(bubulb, Palette_00, Anim_3), NPC_ANIM(bubulb, Palette_00, Anim_2), 0, MESSAGE_ID(0x11, 0x0016));
         }
@@ -632,7 +632,7 @@ Script N(interact_8024352C) = SCRIPT({
 });
 
 Script N(interact_802436C0) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(bubulb, Palette_01, Anim_3), NPC_ANIM(bubulb, Palette_01, Anim_2), 0, MESSAGE_ID(0x11, 0x001D));
         }
@@ -664,7 +664,7 @@ Script N(interact_802436C0) = SCRIPT({
 });
 
 Script N(interact_80243854) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(bubulb, Palette_02, Anim_3), NPC_ANIM(bubulb, Palette_02, Anim_2), 0, MESSAGE_ID(0x11, 0x0024));
         }
@@ -696,7 +696,7 @@ Script N(interact_80243854) = SCRIPT({
 });
 
 Script N(interact_802439E8) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM(bubulb, Palette_03, Anim_3), NPC_ANIM(bubulb, Palette_03, Anim_2), 0, MESSAGE_ID(0x11, 0x002B));
         }
@@ -752,7 +752,7 @@ Script N(interact_80243C4C) = SCRIPT({
         AdjustCam(0, 4.0, -30, 300, 20.0, -9.5);
         SI_SAVE_FLAG(1373) = 1;
     }
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             match SI_AREA_VAR(0) {
                 == 0 {
@@ -979,7 +979,7 @@ Script N(8024427C) = SCRIPT({
     SetPlayerAnimation(0x1002A);
     sleep 110;
     SetPlayerAnimation(ANIM_10002);
-    STORY_PROGRESS = STORY_CH6_STAR_SPRIT_DEPARTED;
+    SI_STORY_PROGRESS = STORY_CH6_STAR_SPRIT_DEPARTED;
     await N(80243368);
     EnablePartnerAI();
     DisablePlayerInput(FALSE);
@@ -999,7 +999,7 @@ Script N(init_80244BF4) = SCRIPT({
 });
 
 Script N(interact_80244C98) = SCRIPT({
-    if (STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SpeakToPlayer(NPC_LAKILULU, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
                       MESSAGE_ID(0x11, 0x0032));
     } else {
@@ -1022,7 +1022,7 @@ Script N(interact_80244C98) = SCRIPT({
 });
 
 Script N(init_80244DD0) = SCRIPT({
-    if (STORY_PROGRESS >= STORY_CH6_BEGAN_PEACH_MISSION) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_BEGAN_PEACH_MISSION) {
         BindNpcInteract(NPC_SELF, N(interact_80244C98));
         SetNpcCollisionSize(-1, 36, 28);
         SetNpcPos(NPC_SELF, -200, 15, -300);
@@ -2016,35 +2016,31 @@ Script N(80248D3C) = SCRIPT({
     N(func_802413BC_C9F2DC)();
 });
 
-// *INDENT-OFF*
-Script N(80248E30) = {
-    SI_CMD(ScriptOpcode_IF_LT, SI_SAVE_VAR(0), 55),
-        SI_CMD(ScriptOpcode_LOOP, 0),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_VAR(0), 54),
-                SI_CMD(ScriptOpcode_BREAK_LOOP),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_LOOP),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1371), 1),
-            SI_CMD(ScriptOpcode_IF_EQ, SI_SAVE_FLAG(1372), 0),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 89, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, MakeItemEntity, 88, -83, 0, 87, 1, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_SET, SI_MAP_VAR(11), SI_VAR(0)),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_BIND_PADLOCK, N(80248D3C), 0x10, 0, N(itemList_80248598), 0, 1),
-    SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
-};
-// *INDENT-ON*
+Script N(80248E30) = SCRIPT({
+    if (SI_STORY_PROGRESS < STORY_CH6_GREW_MAGIC_BEANSTALK) {
+        loop {
+            sleep 1;
+            if (SI_STORY_PROGRESS == STORY_CH6_WISTERWOOD_GAVE_HINT) {
+                break;
+            }
+        }
+        if (SI_SAVE_FLAG(1371) == 1) {
+            if (SI_SAVE_FLAG(1372) == 0) {
+                MakeItemEntity(ITEM_FERTILE_SOIL, -83, 0, 87, 1, 0);
+            } else {
+                MakeItemEntity(ITEM_MAGICAL_BEAN, -83, 0, 87, 1, 0);
+            }
+            SI_MAP_VAR(11) = SI_VAR(0);
+        }
+        bind_padlock N(80248D3C) 0x10 0 N(itemList_80248598);
+    }
+});
 
 Script N(80248F48) = SCRIPT({
-    bind N(802477EC) to TRIGGER_FLOOR_TOUCH 46;
+    bind N(802477EC) TRIGGER_FLOOR_TOUCH 46;
     EnableGroup(121, 1);
     EnableGroup(80, 1);
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         == STORY_CH6_WISTERWOOD_GAVE_HINT {
             SI_VAR(0) = -700;
             spawn N(80246850);
@@ -2080,7 +2076,7 @@ static s32 N(pad_9128)[] = {
 };
 
 Script N(makeEntities) = SCRIPT({
-    if (STORY_PROGRESS < STORY_EPILOGUE) {
+    if (SI_STORY_PROGRESS < STORY_EPILOGUE) {
         MakeEntity(0x802E9A18, 110, 60, -100, 0, MAKE_ENTITY_END);
     }
 });

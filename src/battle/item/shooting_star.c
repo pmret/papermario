@@ -1,4 +1,5 @@
 #include "shooting_star.h"
+#include "effects.h"
 
 static HudElement* D_802A1EE0;
 
@@ -54,9 +55,6 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-
-void playFX_0F(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7);
-
 ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     s32 c8 = 200;
     s32 temp_s1 = 100 + rand_int(c8);
@@ -98,7 +96,7 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/shooting_star/lib", battle_item_shooting_star_func_802A123C_71D9AC,
+INCLUDE_ASM(ApiStatus, "battle/item/shooting_star", battle_item_shooting_star_func_802A123C_71D9AC,
             ScriptInstance* script, s32 isInitialCall);
 #endif
 

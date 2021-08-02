@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 Script N(80240060) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -84,7 +84,7 @@ Script N(enterDoubleDoor_80240268) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -92,8 +92,8 @@ Script N(main) = SCRIPT({
     SetCamEnabled(0, 1);
     await N(makeEntities);
     spawn N(80240060);
-    bind N(exitDoubleDoor_80240100) to TRIGGER_WALL_PRESS_A 14;
-    bind N(exitDoubleDoor_802401B4) to TRIGGER_WALL_PRESS_A 18;
+    bind N(exitDoubleDoor_80240100) TRIGGER_WALL_PRESS_A 14;
+    bind N(exitDoubleDoor_802401B4) TRIGGER_WALL_PRESS_A 18;
     spawn N(enterDoubleDoor_80240268);
 });
 

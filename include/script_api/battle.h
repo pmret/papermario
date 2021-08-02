@@ -321,7 +321,7 @@ extern Script DoParalyzeHit;
 extern Script DoPoisonHit;
 extern Script DoStopHit;
 extern Script DoFreezeHit;
-extern Script DoShinkHit;
+extern Script DoShrinkHit;
 extern Script ForceNextTarget;
 extern Script DoNormalHit;
 extern Script DoBurnHit;

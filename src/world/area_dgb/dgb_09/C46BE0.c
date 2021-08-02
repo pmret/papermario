@@ -29,7 +29,7 @@ MapConfig N(config) = {
 };
 
 Script N(80243880) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -90,7 +90,7 @@ Script N(exitSingleDoor_80243A88) = SCRIPT({
 Script N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
 
 Script N(80243B98) = SCRIPT({
-    bind N(exitWalk_80243B3C) to TRIGGER_FLOOR_ABOVE 11;
+    bind N(exitWalk_80243B3C) TRIGGER_FLOOR_ABOVE 11;
 });
 
 Script N(enterWalk_80243BC4) = SCRIPT({
@@ -126,18 +126,18 @@ Script N(enterWalk_80243BC4) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    if (STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_8024533C));
     }
     spawn N(80243F6C);
-    bind N(exitDoubleDoor_80243920) to TRIGGER_WALL_PRESS_A 5;
-    bind N(exitDoubleDoor_802439D4) to TRIGGER_WALL_PRESS_A 17;
-    bind N(exitSingleDoor_80243A88) to TRIGGER_WALL_PRESS_A 9;
+    bind N(exitDoubleDoor_80243920) TRIGGER_WALL_PRESS_A 5;
+    bind N(exitDoubleDoor_802439D4) TRIGGER_WALL_PRESS_A 17;
+    bind N(exitSingleDoor_80243A88) TRIGGER_WALL_PRESS_A 9;
     spawn N(80243880);
     spawn N(enterWalk_80243BC4);
 });
@@ -166,7 +166,7 @@ Script N(80243E60) = SCRIPT({
 
 Script N(80243F6C) = SCRIPT({
     if (SI_SAVE_FLAG(1051) == 0) {
-        bind N(80243E60) to TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
+        bind N(80243E60) TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
         EnableModel(29, 0);
     } else {
         EnableModel(25, 0);
@@ -603,43 +603,7 @@ NpcGroupList N(npcGroupList_8024533C) = {
 
 #include "world/common/UnkNpcAIFunc5.inc.c"
 
-s32 N(func_80240208_C46DE8)(ScriptInstance* script) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Camera* camera = &gCameras[gCurrentCamID];
-    Enemy* enemy2 = get_enemy(enemy->npcID + 1);
-    f32 phi_f20;
-    s32 ret = TRUE;
-
-    if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > enemy2->varTable[2]) {
-        ret = FALSE;
-    }
-
-    if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
-        phi_f20 = 90.0f;
-    } else {
-        phi_f20 = 270.0f;
-    }
-
-    if (fabsf(get_clamped_angle_diff(phi_f20, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                     gPlayerStatusPtr->position.z))) > enemy2->varTable[3]) {
-        ret = FALSE;
-    }
-
-    if ((2.0 * npc->collisionHeight) <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y)) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 9) {
-        ret = FALSE;
-    }
-
-    if (D_8010EBB0.unk_03 == 7) {
-        ret = FALSE;
-    }
-
-    return ret;
-}
+#include "world/common/UnkNpcAIFunc26.inc.c"
 
 #include "world/common/UnkFunc7.inc.c"
 
@@ -678,7 +642,7 @@ ApiStatus N(func_8024061C_C471FC)(ScriptInstance* script, s32 isInitialCall) {
         enemy->varTable[0] = 0;
     }
 
-    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(func_80240208_C46DE8)(script)) {
+    if ((script->functionTemp[0] < 30) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 
@@ -942,7 +906,7 @@ ApiStatus N(func_802410D4_C47CB4)(ScriptInstance* script, s32 isInitialCall) {
         enemy->unk_B0 &= ~4;
     }
 
-    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(func_80240208_C46DE8)(script)) {
+    if (((u32)script->functionTemp[0] - 10 < 20) && (enemy->varTable[0] == 0) && N(UnkNpcAIFunc26)(script)) {
         script->functionTemp[0] = 30;
     }
 

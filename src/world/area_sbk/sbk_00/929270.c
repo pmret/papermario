@@ -23,14 +23,14 @@ Script N(exitWalk_802400E0) = EXIT_WALK_SCRIPT(60,  1, "sbk_01",  0);
 Script N(exitWalk_8024013C) = EXIT_WALK_SCRIPT(60,  3, "sbk_10",  2);
 
 Script N(80240198) = SCRIPT({
-    bind N(exitWalk_802400E0) to TRIGGER_FLOOR_ABOVE 3;
-    bind N(exitWalk_8024013C) to TRIGGER_FLOOR_ABOVE 6;
+    bind N(exitWalk_802400E0) TRIGGER_FLOOR_ABOVE 3;
+    bind N(exitWalk_8024013C) TRIGGER_FLOOR_ABOVE 6;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
+    SI_WORLD_LOCATION = LOCATION_DRY_DRY_DESERT;
     SetSpriteShading(-1);
-    if (STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
+    if (SI_STORY_PROGRESS == STORY_CH2_GOT_PULSE_STONE) {
         DisablePulseStone(0);
     }
     SetCamPerspective(0, 3, 25, 16, 4096);

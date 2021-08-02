@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 typedef struct HammerUnk {
     /* 0x00 */ Vec3f unk_00;

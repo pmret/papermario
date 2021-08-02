@@ -1,4 +1,5 @@
 #include "flo_10.h"
+#include "nu/nusys.h"
 
 extern u16* nuGfxZBuffer;
 
@@ -68,7 +69,7 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
             }
             subroutine_arg5 = phi_s4 / 6;
             subroutine_arg4 = phi_s4 / 6;
-            subroutine_arg6 = D_8009A64C;
+            subroutine_arg6 = nuGfxCfb_ptr;
 
             for (i = 0; i < subroutine_arg4; i++) {
                 phi_s5 = arg1 - ((i + 1) * 6);
@@ -81,7 +82,7 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                     }
 
                     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, phi_a2);
-                    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(subroutine_arg6));
+                    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(subroutine_arg6));
 
                     gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0,
                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
@@ -114,7 +115,7 @@ void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
                     }
 
                     gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, phi_a2);
-                    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(subroutine_arg6));
+                    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(subroutine_arg6));
                     gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, (phi_s4 - phi_s6) / 6, G_TX_LOADTILE, 0,
                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, 9, G_TX_NOLOD);
                     gDPLoadSync(gMasterGfxPos++);
@@ -292,7 +293,7 @@ void N(func_80240A98_CB9C98)(void) {
         gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
         gDPSetRenderMode(gMasterGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                          Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxZBuffer));
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
         gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
         gDPSetPrimColor(gMasterGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMasterGfxPos++);
@@ -300,7 +301,7 @@ void N(func_80240A98_CB9C98)(void) {
         gSPDisplayList(gMasterGfxPos++, model->modelNode->displayData->displayList);
         gDPPipeSync(gMasterGfxPos++);
 
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(D_8009A64C));
+        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
         gDPSetPrimDepth(gMasterGfxPos++, 32734, 0);
         gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);

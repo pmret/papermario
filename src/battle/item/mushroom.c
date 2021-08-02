@@ -1,4 +1,5 @@
 #include "mushroom.h"
+#include "effects.h"
 
 static HudElement* D_802A2410;
 

@@ -44,7 +44,7 @@ void state_step_battle(void) {
     u32 unk_47B;
 
     if (D_800A0900 == 5) {
-        if (D_8009A658[1] != D_8009A64C) {
+        if (nuGfxCfb[1] != nuGfxCfb_ptr) {
             return;
         }
         D_800A0900--;
@@ -100,7 +100,7 @@ void state_step_battle(void) {
             D_800A0904 = gPlayerStatusPtr->animFlags;
             gPlayerStatusPtr->animFlags &= ~0x40;
             D_800A0908 = get_time_freeze_mode();
-            set_time_freeze_mode(0);
+            set_time_freeze_mode(TIME_FREEZE_NORMAL);
             gOverrideFlags &= ~0x8;
 
             if (D_800A0900 >= 0) {

@@ -24,7 +24,7 @@ MapConfig N(config) = {
 };
 
 Script N(80241880) = SCRIPT({
-    match STORY_PROGRESS {
+    match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -77,12 +77,12 @@ Script N(exitWalk_80241B9C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  5);
 Script N(exitWalk_80241BF8) = EXIT_WALK_SCRIPT(60,  1, "flo_03",  0);
 
 Script N(80241C54) = SCRIPT({
-    bind N(exitWalk_80241B9C) to TRIGGER_FLOOR_ABOVE 0;
-    bind N(exitWalk_80241BF8) to TRIGGER_FLOOR_ABOVE 4;
+    bind N(exitWalk_80241B9C) TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80241BF8) TRIGGER_FLOOR_ABOVE 4;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -132,7 +132,7 @@ Script N(main) = SCRIPT({
     SI_VAR(0) = N(80241C54);
     spawn EnterWalk;
     await N(80241880);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CB5000)();
     }
 });
@@ -383,14 +383,14 @@ Script N(802434A8) = SCRIPT({
     SI_AREA_VAR(4) = 0;
     SI_AREA_VAR(5) = 0;
     SI_VAR(0) = N(tree1);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 15;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243428);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 15;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243428);
     SI_VAR(0) = N(tree2);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 16;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243460);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 16;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243460);
     SI_VAR(0) = N(tree3);
-    bind N(shakeTree) to TRIGGER_WALL_HAMMER 17;
-    bind N(shakeTree) to TRIGGER_POINT_BOMB N(triggerCoord_80243498);
+    bind N(shakeTree) TRIGGER_WALL_HAMMER 17;
+    bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80243498);
 });
 
 NpcAISettings N(npcAISettings_802435B0) = {

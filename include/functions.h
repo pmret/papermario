@@ -19,8 +19,6 @@ void boot_main(void);
 
 void osCleanupThread(void);
 
-void playFX_30(s32, f32, f32, f32);
-void playFX_31(s32, f32, f32, f32);
 f32 signF(f32 val);
 
 void* heap_malloc(s32 size);
@@ -39,14 +37,14 @@ s16 get_game_mode(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
+s32 intro_logos_fade_out(s16 addAlpha);
 
 void _render_transition_stencil(s32, f32, s32);
 u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(StaticEntityData*, s32, s32, s32, s32, s32);
-void playFX_22(s32, f32, f32, f32, f32, f32, s32, s32);
 void entity_shattering_idle(Entity* entity);
-void func_802666E4(Actor* actor, f32 arg1, f32 arg2, f32 arg3, s16);
+void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s16 damage);
 
 void step_game_loop(void);
 s32 resume_all_group(s32 groupFlags);
@@ -64,6 +62,18 @@ void set_entity_model_flags(s32 idx, s32 newFlags);
 void clear_entity_model_flags(s32 idx, s32 newFlags);
 void exec_entity_model_commandlist(s32 idx);
 s32 load_entity_model(s32* cmdList);
+RenderTaskEntry* queue_render_task(RenderTask* task);
+
+// append gfx funcs
+void func_80257B28(s32);
+void func_8025595C(Actor*);
+void func_80257B68(Actor*);
+void func_80257B48(s32);
+void func_8025599C(s32);
+void func_80257B88(void);
+void func_80257DA4(void);
+void func_80254C50(void);
+void func_80258E14(void);
 
 f32 func_800E34D8(void);
 f32 player_check_collision_below(f32, s32* colliderID);
@@ -123,9 +133,10 @@ s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
 
-void draw_box(s32 flags, s32 windowStyle, s16 posX, s16 posY, s32 posZ, s32 width, s32 height, s32 opacity,
+void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
               s32 drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f* outMtx);
+s32 get_string_width(s32 stringID, u16 charset);
 
 s32 partner_player_can_pause(void);
 s32 disable_player_static_collisions(void);
@@ -137,6 +148,8 @@ s32 get_map_IDs_by_name(const char* mapName, s16* areaID, s16* mapID);
 
 void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
+void try_player_footstep_sounds(s32 arg0);
+void phys_update_interact_collider(void);
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -196,7 +209,7 @@ void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
-void btl_state_update_switch_to_partner(s32);
+void btl_state_update_switch_to_partner(void);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
@@ -232,7 +245,9 @@ s32 does_script_exist(s32 id);
 s32 does_script_exist_by_ref(ScriptInstance* script);
 ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
 ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
-
+f32 get_player_normal_yaw(void);
+void set_standard_shadow_scale(Shadow* shadow, f32 scale);
+void set_peach_shadow_scale(Shadow* shadow, f32 scale);
 void set_animation_rate(ActorID actorID, s32 partIndex, f32 rate);
 void func_8011B7C0(u16, s32, s32);
 AnimatedMesh* get_animator_by_index(s32 arg0);
@@ -390,49 +405,6 @@ void state_init_demo(void);
 void state_step_demo(void);
 void state_drawUI_demo(void);
 
-// Effect funcs
-void playFX_01(f32, f32, f32);
-void playFX_11(s32, f32, f32, f32, f32);
-void playFX_18(s32, f32, f32, f32, f32, f32, f32, s32);
-void playFX_3D(s32 var1, f32 var2, f32 var3, f32 var4, f32 var5, f32 var6, f32 var7, s32 var8, s32* unk);
-EffectInstance* playFX_40(s32, f32, f32, f32, s32);
-EffectInstance* playFX_52(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_6B(s32, f32, f32, f32, f32, s32);
-//EffectInstance* playFX_82(s32, f32, f32, f32, f32, s32 time);
-EffectInstance* playFX_4E(s32, f32, f32, f32);
-EffectInstance* playFX_54(s32, f32, f32, f32);
-EffectInstance* playFX_80(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_51(s32, f32, f32, f32, f32, s32);
-void playFX_50(s32, f32, f32, f32);
-EffectInstance* playFX_3F(s32 a0, f32 a1, f32 a2, f32 a3, s32 a4);
-EffectInstance* playFX_36(s32, f32, f32, f32, f32, f32);
-EffectInstance* playFX_83(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_7B(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_32(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
-EffectInstance* playFX_56(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_33(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_69(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_2D(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4, s32 arg5);
-void playFX_2E(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-void playFX_17(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_19(s32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_1D(s32, f32, f32, f32, f32, s32, f32, s32);
-void fx_sweat(s32, f32, f32, f32, f32, f32, s32);
-void playFX_2F(s32, f32, f32, f32, f32, s32, EffectInstanceData**);
-void playFX_3B(s32, f32, f32, f32, f32, EffectInstanceData**);
-void fx_land(s32, f32, f32, f32, f32);
-EffectInstance* playFX_6F(s32, f32, f32, f32, f32, s32);
-EffectInstance* playFX_72(s32, f32, f32, f32, f32, f32, f32, s32, s32);
-void playFX_26(s32, f32, f32, f32);
-EffectInstance* playFX_64(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
-void playFX_08(f32 arg0, f32 arg1, f32 arg2, f32 arg3);
-void playFX_09(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
-EffectInstance* playFX_5A(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_59(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, s32 arg8);
-EffectInstance* playFX_58(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5);
-EffectInstance* playFX_0C(f32, f32, f32, f32, f32);
-EffectInstance* playFX_23(u32, f32, f32, f32, f32);
-
 void func_802B2078(void);
 extern f32 gCurtainScale;
 extern f32 gCurtainScaleGoal;
@@ -470,7 +442,7 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
-void func_8004A784(Npc* npc, f32 arg1, f32* arg2, s32* arg3, s32* arg4, s32* arg5);
+s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
@@ -483,5 +455,15 @@ void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
+
+EffectInstance* func_8005A2BC(EffectBlueprint* effectBp);
+void remove_effect(EffectInstance* arg0);
+s32 load_effect(s32 effectIndex);
+void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex);
+s32 func_8011CFBC(void);
+s32 set_screen_overlay_center_worldpos(void);
+s32 mdl_get_next_texture_address(void);
+void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
+void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
 
 #endif

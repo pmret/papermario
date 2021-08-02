@@ -1,4 +1,5 @@
 #include "common.h"
+#include "effects.h"
 
 ApiStatus N(PlayFX3D)(ScriptInstance* script, s32 isInitialStatus) {
     Bytecode* args = script->ptrReadPos;

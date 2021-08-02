@@ -1,4 +1,5 @@
 #include "snowman_doll.h"
+#include "effects.h"
 
 static HudElement* D_802A1EB0;
 

@@ -2,18 +2,32 @@
 
 #define NAMESPACE battle_star_star_storm
 
-#include "common/UnkStarFuncs.inc.c"
+#include "common/StarPower.inc.c"
 
-#include "common/FadeBackgroundToBlack.inc.c"
+ApiStatus func_802A1518_78ECE8(ScriptInstance* script, s32 isInitialCall) {
+    s32 var1 = -50 - rand_int(200);
+    s32 var2 = 200;
+    s32 var3 = rand_int(40);
+    f32 var4;
 
-#include "common/UnkBackgroundFunc2.inc.c"
+    if (script->varTable[0] % 4) {
+        var4 = var1 + (rand_int(50) + var2);
+        playFX_0F(2, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+    } else {
+        var4 = var1 + (rand_int(50) + var2);
+        playFX_0F(3, var1, var2, var3, var4, 0, var3, rand_int(10) + 7);
+    }
 
-#include "common/UnkBackgroundFunc.inc.c"
+    return ApiStatus_DONE2;
+}
 
-INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1494_78EC64);
+ApiStatus func_802A1628_78EDF8(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var1 = get_variable(script, *args++);
+    s32 var2 = get_variable(script, *args++);
+    s32 var3 = get_variable(script, *args++);
 
-#include "common/SetNpcCollision32.inc.c"
+    playFX_18(2, var1, var2, var3, 0, -1.0f, 0, 5);
 
-INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1518_78ECE8);
-
-INCLUDE_ASM(s32, "battle/star/star_storm/78E7D0", func_802A1628_78EDF8);
+    return ApiStatus_DONE2;
+}

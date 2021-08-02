@@ -29,8 +29,8 @@ Script N(exitSingleDoor_802401A4) = SCRIPT({
 });
 
 Script N(80240248) = SCRIPT({
-    bind N(exitSingleDoor_80240100) to TRIGGER_WALL_PRESS_A 6;
-    bind N(exitSingleDoor_802401A4) to TRIGGER_WALL_PRESS_A 11;
+    bind N(exitSingleDoor_80240100) TRIGGER_WALL_PRESS_A 6;
+    bind N(exitSingleDoor_802401A4) TRIGGER_WALL_PRESS_A 11;
 });
 
 Script N(enterSingleDoor_80240290) = SCRIPT({
@@ -52,7 +52,7 @@ Script N(enterSingleDoor_80240290) = SCRIPT({
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_WINDY_MILL;
+    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524289);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -134,7 +134,7 @@ Script N(idle_802404F8) = SCRIPT({
     NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 12);
     EnableNpcShadow(NPC_SELF, FALSE);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
+    SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
 });
 
 Script N(defeat_802406F4) = SCRIPT({
@@ -144,13 +144,13 @@ Script N(defeat_802406F4) = SCRIPT({
 
 Script N(init_80240720) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_802404F8));
-    if (STORY_PROGRESS != STORY_UNUSED_FFFFFFEC) {
+    if (SI_STORY_PROGRESS != STORY_UNUSED_FFFFFFEC) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 Script N(init_8024076C) = SCRIPT({
-    if (STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
+    if (SI_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
         if (SI_SAVE_FLAG(1016) == 1) {
             RemoveNpc(NPC_SELF);
             return;

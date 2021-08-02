@@ -16,13 +16,31 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_19_tattle },
 };
 
-// *INDENT-OFF*
+// Extraneous END_CASE_MULTI
+#ifdef NON_MATCHING
+Script N(802409C0) = SCRIPT({
+    GetEntryID(SI_VAR(0));
+    match SI_VAR(0) {
+        0, 1 {
+            SetMusicTrack(0, SONG_CLOUDY_CLIMB, 0, 8);
+        }
+        2, 7 {}
+        == 3 {
+            if (SI_AREA_FLAG(44) != 0) {
+            } else {
+                FadeOutMusic(1, 3000);
+                FadeInMusic(0, 50, 0, 3000, 0, 127);
+            }
+        }
+    }
+});
+#else
 Script N(802409C0) = {
     SI_CMD(ScriptOpcode_CALL, GetEntryID, SI_VAR(0)),
     SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, 50, 0, 8),
+            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8),
         SI_CMD(ScriptOpcode_END_CASE_MULTI),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
         SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 7),
@@ -38,7 +56,7 @@ Script N(802409C0) = {
     SI_CMD(ScriptOpcode_RETURN),
     SI_CMD(ScriptOpcode_END)
 };
-// *INDENT-ON*
+#endif
 
 static s32 N(pad_ABC) = {
     0x00000000,
@@ -70,11 +88,11 @@ Script N(updateTexturePan_80240B00) = SCRIPT({
 Script N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
 
 Script N(80240BF8) = SCRIPT({
-    bind N(exitWalk_80240B9C) to TRIGGER_FLOOR_ABOVE 0;
+    bind N(exitWalk_80240B9C) TRIGGER_FLOOR_ABOVE 0;
 });
 
 Script N(main) = SCRIPT({
-    WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
+    SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -144,7 +162,7 @@ Script N(main) = SCRIPT({
         }
     }
     await N(802409C0);
-    if (STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_8024030C_CE39FC)();
     }
 });
@@ -281,10 +299,10 @@ Script N(80241780) = SCRIPT({
     SetModelFlags(36, 256, 1);
     SetModelFlags(40, 256, 1);
     spawn N(80241050);
-    bind N(80241650) to TRIGGER_FLOOR_TOUCH 8;
-    bind N(8024169C) to TRIGGER_FLOOR_TOUCH 9;
-    bind N(802416E8) to TRIGGER_FLOOR_TOUCH 7;
-    bind N(80241734) to TRIGGER_FLOOR_TOUCH 10;
+    bind N(80241650) TRIGGER_FLOOR_TOUCH 8;
+    bind N(8024169C) TRIGGER_FLOOR_TOUCH 9;
+    bind N(802416E8) TRIGGER_FLOOR_TOUCH 7;
+    bind N(80241734) TRIGGER_FLOOR_TOUCH 10;
     spawn {
         SI_VAR(15) = 0;
 0:
@@ -632,12 +650,12 @@ Script N(80242A2C) = SCRIPT({
         sleep 1;
     }
     sleep 15;
-    STORY_PROGRESS = STORY_CH6_GREW_MAGIC_BEANSTALK;
+    SI_STORY_PROGRESS = STORY_CH6_GREW_MAGIC_BEANSTALK;
     GotoMap("flo_00", 7);
 });
 
 Script N(80242FD0) = SCRIPT({
-    bind N(802423F8) to TRIGGER_FLOOR_TOUCH 12;
+    bind N(802423F8) TRIGGER_FLOOR_TOUCH 12;
 });
 
 #include "world/common/UnkTexturePanFunc.inc.c"
