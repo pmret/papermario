@@ -12,7 +12,7 @@ glabel func_802406CC_EA0FCC
 /* EA0FE8 802406E8 AFB00018 */  sw        $s0, 0x18($sp)
 /* EA0FEC 802406EC 8E910148 */  lw        $s1, 0x148($s4)
 /* EA0FF0 802406F0 86240008 */  lh        $a0, 8($s1)
-/* EA0FF4 802406F4 0C00F92F */  jal       func_8003E4BC
+/* EA0FF4 802406F4 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA0FF8 802406F8 00A0802D */   daddu    $s0, $a1, $zero
 /* EA0FFC 802406FC 0040902D */  daddu     $s2, $v0, $zero
 /* EA1000 80240700 C6400038 */  lwc1      $f0, 0x38($s2)
@@ -65,7 +65,7 @@ glabel func_802406CC_EA0FCC
 /* EA10B0 802407B0 0C010ABD */  jal       func_80042AF4
 /* EA10B4 802407B4 2484FFFF */   addiu    $a0, $a0, -1
 /* EA10B8 802407B8 0040802D */  daddu     $s0, $v0, $zero
-/* EA10BC 802407BC 0C00F92F */  jal       func_8003E4BC
+/* EA10BC 802407BC 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA10C0 802407C0 86040008 */   lh       $a0, 8($s0)
 /* EA10C4 802407C4 24030001 */  addiu     $v1, $zero, 1
 /* EA10C8 802407C8 0040982D */  daddu     $s3, $v0, $zero
@@ -136,7 +136,7 @@ glabel func_802406CC_EA0FCC
 /* EA11C4 802408C4 0C010ABD */  jal       func_80042AF4
 /* EA11C8 802408C8 2484FFFF */   addiu    $a0, $a0, -1
 /* EA11CC 802408CC 0040802D */  daddu     $s0, $v0, $zero
-/* EA11D0 802408D0 0C00F92F */  jal       func_8003E4BC
+/* EA11D0 802408D0 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA11D4 802408D4 86040008 */   lh       $a0, 8($s0)
 /* EA11D8 802408D8 9642008E */  lhu       $v0, 0x8e($s2)
 /* EA11DC 802408DC 24420001 */  addiu     $v0, $v0, 1

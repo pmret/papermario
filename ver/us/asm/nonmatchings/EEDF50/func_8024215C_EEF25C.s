@@ -21,7 +21,7 @@ glabel func_8024215C_EEF25C
 /* EEF280 80242180 8EB20148 */  lw        $s2, 0x148($s5)
 /* EEF284 80242184 86440008 */  lh        $a0, 8($s2)
 /* EEF288 80242188 8EB0000C */  lw        $s0, 0xc($s5)
-/* EEF28C 8024218C 0C00F92F */  jal       func_8003E4BC
+/* EEF28C 8024218C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EEF290 80242190 00A0882D */   daddu    $s1, $a1, $zero
 /* EEF294 80242194 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF298 80242198 8E050000 */  lw        $a1, ($s0)
@@ -104,7 +104,7 @@ glabel L802422A4_EEF3A4
 glabel L802422BC_EEF3BC
 /* EEF3BC 802422BC 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF3C0 802422C0 0200282D */  daddu     $a1, $s0, $zero
-/* EEF3C4 802422C4 0C09058A */  jal       func_80241628_EEE728
+/* EEF3C4 802422C4 0C09058A */  jal       EEDF50_DeadUnkNpcAIFunc1
 /* EEF3C8 802422C8 0260302D */   daddu    $a2, $s3, $zero
 glabel L802422CC_EEF3CC
 /* EEF3CC 802422CC 02A0202D */  daddu     $a0, $s5, $zero

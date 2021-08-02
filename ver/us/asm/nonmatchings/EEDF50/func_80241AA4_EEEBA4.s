@@ -7,7 +7,7 @@ glabel func_80241AA4_EEEBA4
 /* EEEBAC 80241AAC 0080802D */  daddu     $s0, $a0, $zero
 /* EEEBB0 80241AB0 AFBF0014 */  sw        $ra, 0x14($sp)
 /* EEEBB4 80241AB4 8E020148 */  lw        $v0, 0x148($s0)
-/* EEEBB8 80241AB8 0C00F92F */  jal       func_8003E4BC
+/* EEEBB8 80241AB8 0C00F92F */  jal       dead_get_npc_unsafe
 /* EEEBBC 80241ABC 84440008 */   lh       $a0, 8($v0)
 /* EEEBC0 80241AC0 9443008E */  lhu       $v1, 0x8e($v0)
 /* EEEBC4 80241AC4 C440003C */  lwc1      $f0, 0x3c($v0)

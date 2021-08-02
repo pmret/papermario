@@ -13,7 +13,7 @@ glabel func_80240EC8_EF34D8
 /* EF34F8 80240EE8 F7B40040 */  sdc1      $f20, 0x40($sp)
 /* EF34FC 80240EEC 8E510148 */  lw        $s1, 0x148($s2)
 /* EF3500 80240EF0 86240008 */  lh        $a0, 8($s1)
-/* EF3504 80240EF4 0C00F92F */  jal       func_8003E4BC
+/* EF3504 80240EF4 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF3508 80240EF8 00A0982D */   daddu    $s3, $a1, $zero
 /* EF350C 80240EFC 0040802D */  daddu     $s0, $v0, $zero
 /* EF3510 80240F00 0200202D */  daddu     $a0, $s0, $zero
@@ -144,7 +144,7 @@ glabel func_80240EC8_EF34D8
 .L802410E8:
 /* EF36F8 802410E8 4604A500 */  add.s     $f20, $f20, $f4
 .L802410EC:
-/* EF36FC 802410EC 0C00AB85 */  jal       func_8002AE14
+/* EF36FC 802410EC 0C00AB85 */  jal       dead_clamp_angle
 /* EF3700 802410F0 4600A306 */   mov.s    $f12, $f20
 /* EF3704 802410F4 E600000C */  swc1      $f0, 0xc($s0)
 .L802410F8:

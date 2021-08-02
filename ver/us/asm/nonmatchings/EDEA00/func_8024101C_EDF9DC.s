@@ -13,7 +13,7 @@ glabel func_8024101C_EDF9DC
 /* EDF9FC 8024103C F7B40040 */  sdc1      $f20, 0x40($sp)
 /* EDFA00 80241040 8E510148 */  lw        $s1, 0x148($s2)
 /* EDFA04 80241044 86240008 */  lh        $a0, 8($s1)
-/* EDFA08 80241048 0C00F92F */  jal       func_8003E4BC
+/* EDFA08 80241048 0C00F92F */  jal       dead_get_npc_unsafe
 /* EDFA0C 8024104C 00A0982D */   daddu    $s3, $a1, $zero
 /* EDFA10 80241050 0040802D */  daddu     $s0, $v0, $zero
 /* EDFA14 80241054 0200202D */  daddu     $a0, $s0, $zero
@@ -144,7 +144,7 @@ glabel func_8024101C_EDF9DC
 .L8024123C:
 /* EDFBFC 8024123C 4604A500 */  add.s     $f20, $f20, $f4
 .L80241240:
-/* EDFC00 80241240 0C00AB85 */  jal       func_8002AE14
+/* EDFC00 80241240 0C00AB85 */  jal       dead_clamp_angle
 /* EDFC04 80241244 4600A306 */   mov.s    $f12, $f20
 /* EDFC08 80241248 E600000C */  swc1      $f0, 0xc($s0)
 .L8024124C:

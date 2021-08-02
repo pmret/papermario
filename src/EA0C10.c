@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE EA0C10
+
 const char ascii_EA6D70[] = "kzn_11";
 const char ascii_EA6D78[] = "kzn_18";
 
@@ -51,7 +53,7 @@ INCLUDE_ASM(s32, "EA0C10", func_80242608_EA2F08);
 
 INCLUDE_ASM(s32, "EA0C10", func_8024267C_EA2F7C);
 
-INCLUDE_ASM(s32, "EA0C10", func_80242730_EA3030);
+#include "world/common/DeadGetItemName.inc.c"
 
 INCLUDE_ASM(s32, "EA0C10", func_80242794_EA3094);
 

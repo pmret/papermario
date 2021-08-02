@@ -14,7 +14,7 @@ glabel func_80241E1C_EE83CC
 /* EE83F0 80241E40 8EB20148 */  lw        $s2, 0x148($s5)
 /* EE83F4 80241E44 86440008 */  lh        $a0, 8($s2)
 /* EE83F8 80241E48 8EB0000C */  lw        $s0, 0xc($s5)
-/* EE83FC 80241E4C 0C00F92F */  jal       func_8003E4BC
+/* EE83FC 80241E4C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE8400 80241E50 00A0882D */   daddu    $s1, $a1, $zero
 /* EE8404 80241E54 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8408 80241E58 8E050000 */  lw        $a1, ($s0)
@@ -97,7 +97,7 @@ glabel L80241F64_EE8514
 glabel L80241F7C_EE852C
 /* EE852C 80241F7C 02A0202D */  daddu     $a0, $s5, $zero
 /* EE8530 80241F80 0200282D */  daddu     $a1, $s0, $zero
-/* EE8534 80241F84 0C0904BA */  jal       func_802412E8_EE7898
+/* EE8534 80241F84 0C0904BA */  jal       EE70C0_DeadUnkNpcAIFunc1
 /* EE8538 80241F88 0260302D */   daddu    $a2, $s3, $zero
 glabel L80241F8C_EE853C
 /* EE853C 80241F8C 02A0202D */  daddu     $a0, $s5, $zero

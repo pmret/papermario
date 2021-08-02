@@ -5,7 +5,7 @@ glabel func_8024042C_EE69DC
 /* EE69DC 8024042C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EE69E0 80240430 2404FFFC */  addiu     $a0, $zero, -4
 /* EE69E4 80240434 AFBF0014 */  sw        $ra, 0x14($sp)
-/* EE69E8 80240438 0C00F92F */  jal       func_8003E4BC
+/* EE69E8 80240438 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE69EC 8024043C AFB00010 */   sw       $s0, 0x10($sp)
 /* EE69F0 80240440 0000202D */  daddu     $a0, $zero, $zero
 /* EE69F4 80240444 3C05FD05 */  lui       $a1, 0xfd05

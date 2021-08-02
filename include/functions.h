@@ -423,7 +423,7 @@ void set_curtain_fade_goal(f32 fade);
 void set_curtain_fade(f32 fade);
 
 // Dead functions:
-Npc* func_8003E4BC(NpcID npcId); // get_npc_safe
+Npc* dead_get_npc_unsafe(NpcID npcId); // get_npc_safe
 Npc* func_8003E534(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 
@@ -432,6 +432,9 @@ s32 dead_get_variable(ScriptInstance* script, Bytecode var);
 f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
 s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
 f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+f32 dead_clamp_angle(f32 theta);
+s32 dead_rand_int(s32);
+void func_8006CAC0(float mf[4][4], float x, float y, float z);
 
 f32 dead_cos_rad(f32 x);
 f32 dead_atan2(f32 startX, f32 startZ, f32 endX, f32 endZ);
@@ -444,6 +447,7 @@ void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
 void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void DeadUnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

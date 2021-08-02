@@ -12,7 +12,7 @@ glabel func_8024098C_EB97DC
 /* EB97F8 802409A8 8E720148 */  lw        $s2, 0x148($s3)
 /* EB97FC 802409AC 00A0882D */  daddu     $s1, $a1, $zero
 /* EB9800 802409B0 86440008 */  lh        $a0, 8($s2)
-/* EB9804 802409B4 0C00F92F */  jal       func_8003E4BC
+/* EB9804 802409B4 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB9808 802409B8 00C0802D */   daddu    $s0, $a2, $zero
 /* EB980C 802409BC 0200202D */  daddu     $a0, $s0, $zero
 /* EB9810 802409C0 0240282D */  daddu     $a1, $s2, $zero

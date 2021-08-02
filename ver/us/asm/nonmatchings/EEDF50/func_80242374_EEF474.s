@@ -12,14 +12,14 @@ glabel func_80242374_EEF474
 /* EEF490 80242390 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* EEF494 80242394 8E710148 */  lw        $s1, 0x148($s3)
 /* EEF498 80242398 86240008 */  lh        $a0, 8($s1)
-/* EEF49C 8024239C 0C00F92F */  jal       func_8003E4BC
+/* EEF49C 8024239C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EEF4A0 802423A0 00A0802D */   daddu    $s0, $a1, $zero
 /* EEF4A4 802423A4 8E040020 */  lw        $a0, 0x20($s0)
 /* EEF4A8 802423A8 0040902D */  daddu     $s2, $v0, $zero
 /* EEF4AC 802423AC 00041FC2 */  srl       $v1, $a0, 0x1f
 /* EEF4B0 802423B0 00832021 */  addu      $a0, $a0, $v1
 /* EEF4B4 802423B4 00042043 */  sra       $a0, $a0, 1
-/* EEF4B8 802423B8 0C00AB3B */  jal       func_8002ACEC
+/* EEF4B8 802423B8 0C00AB3B */  jal       dead_rand_int
 /* EEF4BC 802423BC 24840001 */   addiu    $a0, $a0, 1
 /* EEF4C0 802423C0 8E030020 */  lw        $v1, 0x20($s0)
 /* EEF4C4 802423C4 C64C0038 */  lwc1      $f12, 0x38($s2)
@@ -67,7 +67,7 @@ glabel func_80242374_EEF474
 .L8024246C:
 /* EEF56C 8024246C 4604A500 */  add.s     $f20, $f20, $f4
 .L80242470:
-/* EEF570 80242470 0C00AB85 */  jal       func_8002AE14
+/* EEF570 80242470 0C00AB85 */  jal       dead_clamp_angle
 /* EEF574 80242474 4600A306 */   mov.s    $f12, $f20
 /* EEF578 80242478 2402000D */  addiu     $v0, $zero, 0xd
 /* EEF57C 8024247C E640000C */  swc1      $f0, 0xc($s2)

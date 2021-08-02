@@ -19,7 +19,7 @@ glabel func_802424A4_EEF5A4
 /* EEF5C0 802424C0 8E720148 */  lw        $s2, 0x148($s3)
 /* EEF5C4 802424C4 00A0882D */  daddu     $s1, $a1, $zero
 /* EEF5C8 802424C8 86440008 */  lh        $a0, 8($s2)
-/* EEF5CC 802424CC 0C00F92F */  jal       func_8003E4BC
+/* EEF5CC 802424CC 0C00F92F */  jal       dead_get_npc_unsafe
 /* EEF5D0 802424D0 00C0802D */   daddu    $s0, $a2, $zero
 /* EEF5D4 802424D4 0200202D */  daddu     $a0, $s0, $zero
 /* EEF5D8 802424D8 0240282D */  daddu     $a1, $s2, $zero

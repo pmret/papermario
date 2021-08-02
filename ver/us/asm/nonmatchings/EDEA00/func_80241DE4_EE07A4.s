@@ -16,7 +16,7 @@ glabel func_80241DE4_EE07A4
 /* EE07D0 80241E10 8E930148 */  lw        $s3, 0x148($s4)
 /* EE07D4 80241E14 86640008 */  lh        $a0, 8($s3)
 /* EE07D8 80241E18 8E90000C */  lw        $s0, 0xc($s4)
-/* EE07DC 80241E1C 0C00F92F */  jal       func_8003E4BC
+/* EE07DC 80241E1C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE07E0 80241E20 00A0882D */   daddu    $s1, $a1, $zero
 /* EE07E4 80241E24 0280202D */  daddu     $a0, $s4, $zero
 /* EE07E8 80241E28 8E050000 */  lw        $a1, ($s0)
@@ -108,7 +108,7 @@ glabel func_80241DE4_EE07A4
 .L80241F6C:
 /* EE092C 80241F6C 0280202D */  daddu     $a0, $s4, $zero
 /* EE0930 80241F70 02C0282D */  daddu     $a1, $s6, $zero
-/* EE0934 80241F74 0C090267 */  jal       func_8024099C_EDF35C
+/* EE0934 80241F74 0C090267 */  jal       EDEA00_DeadUnkNpcAIFunc1
 /* EE0938 80241F78 02A0302D */   daddu    $a2, $s5, $zero
 /* EE093C 80241F7C 0280202D */  daddu     $a0, $s4, $zero
 .L80241F80:

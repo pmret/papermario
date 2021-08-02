@@ -20,7 +20,7 @@ glabel func_802420FC_EA29FC
 /* EA2A1C 8024211C AFB00050 */  sw        $s0, 0x50($sp)
 /* EA2A20 80242120 8E710148 */  lw        $s1, 0x148($s3)
 /* EA2A24 80242124 86240008 */  lh        $a0, 8($s1)
-/* EA2A28 80242128 0C00F92F */  jal       func_8003E4BC
+/* EA2A28 80242128 0C00F92F */  jal       dead_get_npc_unsafe
 /* EA2A2C 8024212C 00A0802D */   daddu    $s0, $a1, $zero
 /* EA2A30 80242130 8E63000C */  lw        $v1, 0xc($s3)
 /* EA2A34 80242134 0260202D */  daddu     $a0, $s3, $zero
@@ -220,7 +220,7 @@ glabel func_802420FC_EA29FC
 /* EA2D0C 8024240C 24020006 */  addiu     $v0, $zero, 6
 /* EA2D10 80242410 14620014 */  bne       $v1, $v0, .L80242464
 /* EA2D14 80242414 0260202D */   daddu    $a0, $s3, $zero
-/* EA2D18 80242418 0C00AB3B */  jal       func_8002ACEC
+/* EA2D18 80242418 0C00AB3B */  jal       dead_rand_int
 /* EA2D1C 8024241C 24040064 */   addiu    $a0, $zero, 0x64
 /* EA2D20 80242420 28420021 */  slti      $v0, $v0, 0x21
 /* EA2D24 80242424 5040000F */  beql      $v0, $zero, .L80242464

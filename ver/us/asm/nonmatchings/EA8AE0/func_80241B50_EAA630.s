@@ -6,7 +6,7 @@ glabel func_80241B50_EAA630
 /* EAA634 80241B54 AFB00010 */  sw        $s0, 0x10($sp)
 /* EAA638 80241B58 0080802D */  daddu     $s0, $a0, $zero
 /* EAA63C 80241B5C AFBF0014 */  sw        $ra, 0x14($sp)
-/* EAA640 80241B60 0C00F92F */  jal       func_8003E4BC
+/* EAA640 80241B60 0C00F92F */  jal       dead_get_npc_unsafe
 /* EAA644 80241B64 8E04008C */   lw       $a0, 0x8c($s0)
 /* EAA648 80241B68 0040282D */  daddu     $a1, $v0, $zero
 /* EAA64C 80241B6C 8E040094 */  lw        $a0, 0x94($s0)

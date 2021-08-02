@@ -21,7 +21,7 @@ glabel func_802415DC_EF3BEC
 /* EF3C2C 8024161C 8E510148 */  lw        $s1, 0x148($s2)
 /* EF3C30 80241620 00A0B82D */  daddu     $s7, $a1, $zero
 /* EF3C34 80241624 86240008 */  lh        $a0, 8($s1)
-/* EF3C38 80241628 0C00F92F */  jal       func_8003E4BC
+/* EF3C38 80241628 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF3C3C 8024162C 00C0F02D */   daddu    $fp, $a2, $zero
 /* EF3C40 80241630 C620007C */  lwc1      $f0, 0x7c($s1)
 /* EF3C44 80241634 46800020 */  cvt.s.w   $f0, $f0
@@ -80,7 +80,7 @@ glabel func_802415DC_EF3BEC
 /* EF3D14 80241704 2442000C */  addiu     $v0, $v0, 0xc
 /* EF3D18 80241708 44826000 */  mtc1      $v0, $f12
 /* EF3D1C 8024170C 00000000 */  nop
-/* EF3D20 80241710 0C00AB85 */  jal       func_8002AE14
+/* EF3D20 80241710 0C00AB85 */  jal       dead_clamp_angle
 /* EF3D24 80241714 46806320 */   cvt.s.w  $f12, $f12
 /* EF3D28 80241718 4600020D */  trunc.w.s $f8, $f0
 /* EF3D2C 8024171C E6280074 */  swc1      $f8, 0x74($s1)
@@ -255,7 +255,7 @@ glabel func_802415DC_EF3BEC
 /* EF3FB4 802419A4 240403E8 */   addiu    $a0, $zero, 0x3e8
 .L802419A8:
 /* EF3FB8 802419A8 24020002 */  addiu     $v0, $zero, 2
-/* EF3FBC 802419AC 0C00AB3B */  jal       func_8002ACEC
+/* EF3FBC 802419AC 0C00AB3B */  jal       dead_rand_int
 /* EF3FC0 802419B0 AE420070 */   sw       $v0, 0x70($s2)
 /* EF3FC4 802419B4 3C035555 */  lui       $v1, 0x5555
 /* EF3FC8 802419B8 34635556 */  ori       $v1, $v1, 0x5556

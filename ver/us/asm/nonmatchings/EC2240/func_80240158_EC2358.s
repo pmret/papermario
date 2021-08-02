@@ -24,7 +24,7 @@ glabel func_80240158_EC2358
 /* EC2370 80240170 F7B60030 */  sdc1      $f22, 0x30($sp)
 /* EC2374 80240174 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* EC2378 80240178 8C910148 */  lw        $s1, 0x148($a0)
-/* EC237C 8024017C 0C00F92F */  jal       func_8003E4BC
+/* EC237C 8024017C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EC2380 80240180 86240008 */   lh       $a0, 8($s1)
 /* EC2384 80240184 3C038011 */  lui       $v1, %hi(D_80117578)
 /* EC2388 80240188 24637578 */  addiu     $v1, $v1, %lo(D_80117578)
@@ -40,7 +40,7 @@ glabel func_80240158_EC2358
 /* EC23B0 802401B0 4600B306 */  mov.s     $f12, $f22
 /* EC23B4 802401B4 0C00ABDC */  jal       fio_validate_header_checksums
 /* EC23B8 802401B8 4600C386 */   mov.s    $f14, $f24
-/* EC23BC 802401BC 0C00AB85 */  jal       func_8002AE14
+/* EC23BC 802401BC 0C00AB85 */  jal       dead_clamp_angle
 /* EC23C0 802401C0 461A0300 */   add.s    $f12, $f0, $f26
 /* EC23C4 802401C4 27A40010 */  addiu     $a0, $sp, 0x10
 /* EC23C8 802401C8 3C064238 */  lui       $a2, 0x4238
@@ -66,7 +66,7 @@ glabel func_80240158_EC2358
 /* EC2418 80240218 8E070040 */  lw        $a3, 0x40($s0)
 /* EC241C 8024021C 0C00ABDC */  jal       fio_validate_header_checksums
 /* EC2420 80240220 4600C386 */   mov.s    $f14, $f24
-/* EC2424 80240224 0C00AB85 */  jal       func_8002AE14
+/* EC2424 80240224 0C00AB85 */  jal       dead_clamp_angle
 /* EC2428 80240228 46000306 */   mov.s    $f12, $f0
 /* EC242C 8024022C 4600B306 */  mov.s     $f12, $f22
 /* EC2430 80240230 4600C386 */  mov.s     $f14, $f24
@@ -74,7 +74,7 @@ glabel func_80240158_EC2358
 /* EC2438 80240238 8FA70014 */  lw        $a3, 0x14($sp)
 /* EC243C 8024023C 0C00ABDC */  jal       fio_validate_header_checksums
 /* EC2440 80240240 46000506 */   mov.s    $f20, $f0
-/* EC2444 80240244 0C00AB85 */  jal       func_8002AE14
+/* EC2444 80240244 0C00AB85 */  jal       dead_clamp_angle
 /* EC2448 80240248 46000306 */   mov.s    $f12, $f0
 /* EC244C 8024024C 4600A101 */  sub.s     $f4, $f20, $f0
 /* EC2450 80240250 4600218D */  trunc.w.s $f6, $f4
@@ -127,7 +127,7 @@ glabel func_80240158_EC2358
 /* EC24FC 802402FC 00000000 */  nop
 /* EC2500 80240300 460CA300 */  add.s     $f12, $f20, $f12
 .L80240304:
-/* EC2504 80240304 0C00AB85 */  jal       func_8002AE14
+/* EC2504 80240304 0C00AB85 */  jal       dead_clamp_angle
 /* EC2508 80240308 00000000 */   nop
 /* EC250C 8024030C 27A40010 */  addiu     $a0, $sp, 0x10
 /* EC2510 80240310 3C064238 */  lui       $a2, 0x4238

@@ -39,7 +39,7 @@ glabel func_80240660_EFF160
 /* EFF1E8 802406E8 44071000 */  mfc1      $a3, $f2
 /* EFF1EC 802406EC 0C00ABDC */  jal       fio_validate_header_checksums
 /* EFF1F0 802406F0 46000606 */   mov.s    $f24, $f0
-/* EFF1F4 802406F4 0C00AB85 */  jal       func_8002AE14
+/* EFF1F4 802406F4 0C00AB85 */  jal       dead_clamp_angle
 /* EFF1F8 802406F8 46140301 */   sub.s    $f12, $f0, $f20
 /* EFF1FC 802406FC 46000506 */  mov.s     $f20, $f0
 /* EFF200 80240700 0C00AD77 */  jal       func_8002B5DC

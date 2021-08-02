@@ -7,7 +7,7 @@ glabel func_80240E18_EDF7D8
 /* EDF7E0 80240E20 0080802D */  daddu     $s0, $a0, $zero
 /* EDF7E4 80240E24 AFBF0014 */  sw        $ra, 0x14($sp)
 /* EDF7E8 80240E28 8E020148 */  lw        $v0, 0x148($s0)
-/* EDF7EC 80240E2C 0C00F92F */  jal       func_8003E4BC
+/* EDF7EC 80240E2C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EDF7F0 80240E30 84440008 */   lh       $a0, 8($v0)
 /* EDF7F4 80240E34 9443008E */  lhu       $v1, 0x8e($v0)
 /* EDF7F8 80240E38 C440003C */  lwc1      $f0, 0x3c($v0)

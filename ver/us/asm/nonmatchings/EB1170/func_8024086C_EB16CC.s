@@ -39,7 +39,7 @@ glabel func_8024086C_EB16CC
 /* EB1754 802408F4 44820000 */  mtc1      $v0, $f0
 /* EB1758 802408F8 00000000 */  nop
 /* EB175C 802408FC 46800020 */  cvt.s.w   $f0, $f0
-/* EB1760 80240900 0C00F92F */  jal       func_8003E4BC
+/* EB1760 80240900 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB1764 80240904 E7A00014 */   swc1     $f0, 0x14($sp)
 /* EB1768 80240908 3C048008 */  lui       $a0, %hi(D_8007C760)
 /* EB176C 8024090C 8C84C760 */  lw        $a0, %lo(D_8007C760)($a0)
@@ -56,7 +56,7 @@ glabel func_8024086C_EB16CC
 /* EB1798 80240938 00230821 */  addu      $at, $at, $v1
 /* EB179C 8024093C C4208DEC */  lwc1      $f0, %lo(D_800B8DEC)($at)
 /* EB17A0 80240940 460C0300 */  add.s     $f12, $f0, $f12
-/* EB17A4 80240944 0C00AB85 */  jal       func_8002AE14
+/* EB17A4 80240944 0C00AB85 */  jal       dead_clamp_angle
 /* EB17A8 80240948 0040982D */   daddu    $s3, $v0, $zero
 /* EB17AC 8024094C 27B00010 */  addiu     $s0, $sp, 0x10
 /* EB17B0 80240950 0200202D */  daddu     $a0, $s0, $zero

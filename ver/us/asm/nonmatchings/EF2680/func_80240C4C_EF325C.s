@@ -9,7 +9,7 @@ glabel func_80240C4C_EF325C
 /* EF326C 80240C5C AFB10014 */  sw        $s1, 0x14($sp)
 /* EF3270 80240C60 AFB00010 */  sw        $s0, 0x10($sp)
 /* EF3274 80240C64 8E510148 */  lw        $s1, 0x148($s2)
-/* EF3278 80240C68 0C00F92F */  jal       func_8003E4BC
+/* EF3278 80240C68 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF327C 80240C6C 86240008 */   lh       $a0, 8($s1)
 /* EF3280 80240C70 0040802D */  daddu     $s0, $v0, $zero
 /* EF3284 80240C74 3C028010 */  lui       $v0, %hi(dead_gPlayerStatusPtr)

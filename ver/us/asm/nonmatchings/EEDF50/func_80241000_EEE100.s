@@ -28,7 +28,7 @@ glabel func_80241000_EEE100
 /* EEE134 80241034 8E710148 */  lw        $s1, 0x148($s3)
 /* EEE138 80241038 00A0902D */  daddu     $s2, $a1, $zero
 /* EEE13C 8024103C 86240008 */  lh        $a0, 8($s1)
-/* EEE140 80241040 0C00F92F */  jal       func_8003E4BC
+/* EEE140 80241040 0C00F92F */  jal       dead_get_npc_unsafe
 /* EEE144 80241044 00C0A82D */   daddu    $s5, $a2, $zero
 /* EEE148 80241048 0040802D */  daddu     $s0, $v0, $zero
 /* EEE14C 8024104C 0000A02D */  daddu     $s4, $zero, $zero
@@ -216,7 +216,7 @@ glabel func_80241000_EEE100
 /* EEE400 80241300 2442000A */  addiu     $v0, $v0, 0xa
 /* EEE404 80241304 44826000 */  mtc1      $v0, $f12
 /* EEE408 80241308 00000000 */  nop
-/* EEE40C 8024130C 0C00AB85 */  jal       func_8002AE14
+/* EEE40C 8024130C 0C00AB85 */  jal       dead_clamp_angle
 /* EEE410 80241310 46806320 */   cvt.s.w  $f12, $f12
 /* EEE414 80241314 4600020D */  trunc.w.s $f8, $f0
 /* EEE418 80241318 E6280074 */  swc1      $f8, 0x74($s1)
@@ -389,7 +389,7 @@ glabel func_80241000_EEE100
 .L80241594:
 /* EEE694 80241594 240403E8 */  addiu     $a0, $zero, 0x3e8
 /* EEE698 80241598 24020002 */  addiu     $v0, $zero, 2
-/* EEE69C 8024159C 0C00AB3B */  jal       func_8002ACEC
+/* EEE69C 8024159C 0C00AB3B */  jal       dead_rand_int
 /* EEE6A0 802415A0 AE620070 */   sw       $v0, 0x70($s3)
 /* EEE6A4 802415A4 3C035555 */  lui       $v1, 0x5555
 /* EEE6A8 802415A8 34635556 */  ori       $v1, $v1, 0x5556

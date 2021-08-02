@@ -2,6 +2,8 @@
 
 import argparse
 from collections import Counter, OrderedDict
+from datetime import datetime
+
 from Levenshtein import ratio
 import os
 import re
@@ -11,6 +13,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
 asm_dir = root_dir + "ver/current/asm/nonmatchings/"
 build_dir = root_dir + "build/"
+
 
 def read_rom():
     with open("ver/current/baserom.z64", "rb") as f:
@@ -175,6 +178,85 @@ def do_query(query):
     print()
 
 
+def all_matches(all_funcs_flag):
+    match_dict = dict()
+    to_match_files = list(s_files.copy())
+
+    # assumption that after half the functions have been matched, nothing of significance is left
+    # since duplicates that already have been discovered are removed from tp_match_files
+    if all_funcs_flag:
+        iter_limit = 0
+    else:
+        iter_limit = len(s_files) / 2
+
+    num_decomped_dupes = 0
+    num_undecomped_dupes = 0
+    num_perfect_dupes = 0
+
+    i = 0
+    while len(to_match_files) > iter_limit:
+        file = to_match_files[0]
+
+        i += 1
+        print("File matching progress: {:%}".format(i / (len(s_files) - iter_limit)), end='\r')
+
+        if get_symbol_length(file) < 16:
+            to_match_files.remove(file)
+            continue
+
+        matches = get_matches(file)
+        num_matches = len(matches)
+        if num_matches == 0:
+            to_match_files.remove(file)
+            continue
+
+        num_undecomped_dupes += 1
+
+        match_list = []
+        for match in matches:
+            if match in to_match_files:
+                i += 1
+                to_match_files.remove(match)
+
+            match_str = "{:.2f} - {}".format(matches[match], match)
+            if matches[match] >= 0.995:
+                num_perfect_dupes += 1
+
+            if match not in s_files:
+                num_decomped_dupes += 1
+                match_str += " (decompiled)"
+            else:
+                num_undecomped_dupes += 1
+
+            match_list.append(match_str)
+
+        match_dict.update({file: (num_matches, match_list)})
+        to_match_files.remove(file)
+
+    output_match_dict(match_dict, num_decomped_dupes, num_undecomped_dupes, num_perfect_dupes, i)
+
+
+def output_match_dict(match_dict, num_decomped_dupes, num_undecomped_dupes, num_perfect_dupes, num_checked_files):
+    out_file = open(datetime.today().strftime('%Y-%m-%d-%H-%M-%S') + "_all_matches.txt", "w+")
+
+    out_file.write("Number of s-files: " + str(len(s_files)) + "\n"
+                   "Number of checked s-files: " + str(round(num_checked_files)) + "\n"
+                   "Number of decompiled duplicates found: " + str(num_decomped_dupes) + "\n"
+                   "Number of undecompiled duplicates found: " + str(num_undecomped_dupes) + "\n"
+                   "Number of overall exact duplicates found: " + str(num_perfect_dupes) + "\n\n")
+
+    sorted_dict = OrderedDict(sorted(match_dict.items(), key=lambda item: item[1][0], reverse=True))
+
+    print("Creating output file: " + out_file.name, end='\n')
+    for file_name, matches in sorted_dict.items():
+        out_file.write(file_name + " - found " + str(matches[0]) + " matches total:\n")
+        for match in matches[1]:
+            out_file.write(match + "\n")
+        out_file.write("\n")
+
+    out_file.close()
+
+
 def do_cross_query():
     ccount = Counter()
     clusters = []
@@ -216,6 +298,7 @@ parser = argparse.ArgumentParser(description="Tools to assist with decomp")
 parser.add_argument("query", help="function or file")
 parser.add_argument("--threshold", help="score threshold between 0 and 1 (higher is more restrictive)", type=float, default=0.9, required=False)
 parser.add_argument("--num-out", help="number of functions to display", type=int, default=100, required=False)
+parser.add_argument("--generate-templates", help="automatically generate templates in `all` and `short` mode", action='store_true', required=False)
 
 args = parser.parse_args()
 
@@ -235,5 +318,11 @@ else:
     if args.query == "cross":
         args.threshold = 0.985
         do_cross_query()
+    elif args.query == "all":
+        args.threshold = 0.985
+        all_matches(True)
+    elif args.query == "short":
+        args.threshold = 0.985
+        all_matches(False)
     else:
         do_query(args.query)

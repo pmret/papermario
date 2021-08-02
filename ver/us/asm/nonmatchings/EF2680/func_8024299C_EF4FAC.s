@@ -22,7 +22,7 @@ glabel func_8024299C_EF4FAC
 /* EF4FD4 802429C4 F7B40088 */  sdc1      $f20, 0x88($sp)
 /* EF4FD8 802429C8 8EB20148 */  lw        $s2, 0x148($s5)
 /* EF4FDC 802429CC 86440008 */  lh        $a0, 8($s2)
-/* EF4FE0 802429D0 0C00F92F */  jal       func_8003E4BC
+/* EF4FE0 802429D0 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF4FE4 802429D4 00A0802D */   daddu    $s0, $a1, $zero
 /* EF4FE8 802429D8 8EA3000C */  lw        $v1, 0xc($s5)
 /* EF4FEC 802429DC 02A0202D */  daddu     $a0, $s5, $zero
@@ -316,7 +316,7 @@ glabel func_8024299C_EF4FAC
 /* EF5410 80242E00 00000000 */   nop
 /* EF5414 80242E04 0C010ABD */  jal       func_80042AF4
 /* EF5418 80242E08 8E440098 */   lw       $a0, 0x98($s2)
-/* EF541C 80242E0C 0C00F92F */  jal       func_8003E4BC
+/* EF541C 80242E0C 0C00F92F */  jal       dead_get_npc_unsafe
 /* EF5420 80242E10 84440008 */   lh       $a0, 8($v0)
 /* EF5424 80242E14 C440000C */  lwc1      $f0, 0xc($v0)
 /* EF5428 80242E18 3C018024 */  lui       $at, %hi(D_80245468_EF7A78)

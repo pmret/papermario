@@ -39,7 +39,7 @@ glabel func_802419C4_EAA4A4
 /* EAA52C 80241A4C 44820000 */  mtc1      $v0, $f0
 /* EAA530 80241A50 00000000 */  nop
 /* EAA534 80241A54 46800020 */  cvt.s.w   $f0, $f0
-/* EAA538 80241A58 0C00F92F */  jal       func_8003E4BC
+/* EAA538 80241A58 0C00F92F */  jal       dead_get_npc_unsafe
 /* EAA53C 80241A5C E7A00014 */   swc1     $f0, 0x14($sp)
 /* EAA540 80241A60 3C048008 */  lui       $a0, %hi(D_8007C760)
 /* EAA544 80241A64 8C84C760 */  lw        $a0, %lo(D_8007C760)($a0)
@@ -56,7 +56,7 @@ glabel func_802419C4_EAA4A4
 /* EAA570 80241A90 00230821 */  addu      $at, $at, $v1
 /* EAA574 80241A94 C4208DEC */  lwc1      $f0, %lo(D_800B8DEC)($at)
 /* EAA578 80241A98 460C0300 */  add.s     $f12, $f0, $f12
-/* EAA57C 80241A9C 0C00AB85 */  jal       func_8002AE14
+/* EAA57C 80241A9C 0C00AB85 */  jal       dead_clamp_angle
 /* EAA580 80241AA0 0040982D */   daddu    $s3, $v0, $zero
 /* EAA584 80241AA4 27B00010 */  addiu     $s0, $sp, 0x10
 /* EAA588 80241AA8 0200202D */  daddu     $a0, $s0, $zero

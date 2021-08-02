@@ -630,6 +630,7 @@ enum Cams {
 };
 
 #define LOOKUP_ITEM(itemID) gItemTable[itemID & ~0xF0000]
+#define DEAD_LOOKUP_ITEM(itemID) dead_gItemTable[itemID & ~0xF0000] // Dead gItemTable
 
 typedef s16 ItemID;
 enum ItemIDs {

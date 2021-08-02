@@ -10,7 +10,7 @@ glabel func_80243470_EE1E30
 /* EE1E44 80243484 24040001 */  addiu     $a0, $zero, 1
 /* EE1E48 80243488 AFBF0030 */  sw        $ra, 0x30($sp)
 /* EE1E4C 8024348C AFB20028 */  sw        $s2, 0x28($sp)
-/* EE1E50 80243490 0C00F92F */  jal       func_8003E4BC
+/* EE1E50 80243490 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE1E54 80243494 AFB10024 */   sw       $s1, 0x24($sp)
 /* EE1E58 80243498 8E63000C */  lw        $v1, 0xc($s3)
 /* EE1E5C 8024349C 0260202D */  daddu     $a0, $s3, $zero

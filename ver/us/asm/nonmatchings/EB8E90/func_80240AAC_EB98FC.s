@@ -8,7 +8,7 @@ glabel func_80240AAC_EB98FC
 /* EB9908 80240AB8 AFBF0018 */  sw        $ra, 0x18($sp)
 /* EB990C 80240ABC AFB00010 */  sw        $s0, 0x10($sp)
 /* EB9910 80240AC0 8E300148 */  lw        $s0, 0x148($s1)
-/* EB9914 80240AC4 0C00F92F */  jal       func_8003E4BC
+/* EB9914 80240AC4 0C00F92F */  jal       dead_get_npc_unsafe
 /* EB9918 80240AC8 86040008 */   lh       $a0, 8($s0)
 /* EB991C 80240ACC 9443008E */  lhu       $v1, 0x8e($v0)
 /* EB9920 80240AD0 2463FFFF */  addiu     $v1, $v1, -1

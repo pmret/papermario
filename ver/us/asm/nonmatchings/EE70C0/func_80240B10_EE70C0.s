@@ -11,14 +11,14 @@ glabel func_80240B10_EE70C0
 /* EE70D8 80240B28 AFB00020 */  sw        $s0, 0x20($sp)
 /* EE70DC 80240B2C 8E710148 */  lw        $s1, 0x148($s3)
 /* EE70E0 80240B30 86240008 */  lh        $a0, 8($s1)
-/* EE70E4 80240B34 0C00F92F */  jal       func_8003E4BC
+/* EE70E4 80240B34 0C00F92F */  jal       dead_get_npc_unsafe
 /* EE70E8 80240B38 00A0902D */   daddu    $s2, $a1, $zero
 /* EE70EC 80240B3C 8E440004 */  lw        $a0, 4($s2)
 /* EE70F0 80240B40 0040802D */  daddu     $s0, $v0, $zero
 /* EE70F4 80240B44 00041FC2 */  srl       $v1, $a0, 0x1f
 /* EE70F8 80240B48 00832021 */  addu      $a0, $a0, $v1
 /* EE70FC 80240B4C 00042043 */  sra       $a0, $a0, 1
-/* EE7100 80240B50 0C00AB3B */  jal       func_8002ACEC
+/* EE7100 80240B50 0C00AB3B */  jal       dead_rand_int
 /* EE7104 80240B54 24840001 */   addiu    $a0, $a0, 1
 /* EE7108 80240B58 8E430004 */  lw        $v1, 4($s2)
 /* EE710C 80240B5C 000327C2 */  srl       $a0, $v1, 0x1f
@@ -62,7 +62,7 @@ glabel func_80240B10_EE70C0
 /* EE71A4 80240BF4 0809030B */  j         .L80240C2C
 /* EE71A8 80240BF8 E600000C */   swc1     $f0, 0xc($s0)
 .L80240BFC:
-/* EE71AC 80240BFC 0C00AB3B */  jal       func_8002ACEC
+/* EE71AC 80240BFC 0C00AB3B */  jal       dead_rand_int
 /* EE71B0 80240C00 2404003C */   addiu    $a0, $zero, 0x3c
 /* EE71B4 80240C04 C60C000C */  lwc1      $f12, 0xc($s0)
 /* EE71B8 80240C08 44820000 */  mtc1      $v0, $f0
@@ -71,7 +71,7 @@ glabel func_80240B10_EE70C0
 /* EE71C4 80240C14 46006300 */  add.s     $f12, $f12, $f0
 /* EE71C8 80240C18 3C0141F0 */  lui       $at, 0x41f0
 /* EE71CC 80240C1C 44810000 */  mtc1      $at, $f0
-/* EE71D0 80240C20 0C00AB85 */  jal       func_8002AE14
+/* EE71D0 80240C20 0C00AB85 */  jal       dead_clamp_angle
 /* EE71D4 80240C24 46006301 */   sub.s    $f12, $f12, $f0
 /* EE71D8 80240C28 E600000C */  swc1      $f0, 0xc($s0)
 .L80240C2C:

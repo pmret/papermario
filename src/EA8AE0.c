@@ -40,7 +40,7 @@ INCLUDE_ASM(s32, "EA8AE0", func_8024140C_EA9EEC);
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241468_EA9F48);
 
-INCLUDE_ASM(s32, "EA8AE0", func_8024151C_EA9FFC);
+#include "world/common/DeadGetItemName.inc.c"
 
 INCLUDE_ASM(s32, "EA8AE0", func_80241580_EAA060);
 

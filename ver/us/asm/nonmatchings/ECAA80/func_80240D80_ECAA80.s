@@ -21,14 +21,14 @@ glabel func_80240D80_ECAA80
 /* ECAAC0 80240DC0 8ED20148 */  lw        $s2, 0x148($s6)
 /* ECAAC4 80240DC4 00A0882D */  daddu     $s1, $a1, $zero
 /* ECAAC8 80240DC8 86440008 */  lh        $a0, 8($s2)
-/* ECAACC 80240DCC 0C00F92F */  jal       func_8003E4BC
+/* ECAACC 80240DCC 0C00F92F */  jal       dead_get_npc_unsafe
 /* ECAAD0 80240DD0 00C0A82D */   daddu    $s5, $a2, $zero
 /* ECAAD4 80240DD4 8E240020 */  lw        $a0, 0x20($s1)
 /* ECAAD8 80240DD8 0040802D */  daddu     $s0, $v0, $zero
 /* ECAADC 80240DDC 00041FC2 */  srl       $v1, $a0, 0x1f
 /* ECAAE0 80240DE0 00832021 */  addu      $a0, $a0, $v1
 /* ECAAE4 80240DE4 00042043 */  sra       $a0, $a0, 1
-/* ECAAE8 80240DE8 0C00AB3B */  jal       func_8002ACEC
+/* ECAAE8 80240DE8 0C00AB3B */  jal       dead_rand_int
 /* ECAAEC 80240DEC 24840001 */   addiu    $a0, $a0, 1
 /* ECAAF0 80240DF0 8E230020 */  lw        $v1, 0x20($s1)
 /* ECAAF4 80240DF4 C60C0038 */  lwc1      $f12, 0x38($s0)
@@ -51,7 +51,7 @@ glabel func_80240D80_ECAA80
 /* ECAB38 80240E38 0000982D */   daddu    $s3, $zero, $zero
 /* ECAB3C 80240E3C 3C014334 */  lui       $at, 0x4334
 /* ECAB40 80240E40 44816000 */  mtc1      $at, $f12
-/* ECAB44 80240E44 0C00AB85 */  jal       func_8002AE14
+/* ECAB44 80240E44 0C00AB85 */  jal       dead_clamp_angle
 /* ECAB48 80240E48 460C0300 */   add.s    $f12, $f0, $f12
 /* ECAB4C 80240E4C 46000506 */  mov.s     $f20, $f0
 /* ECAB50 80240E50 C60C000C */  lwc1      $f12, 0xc($s0)
@@ -81,7 +81,7 @@ glabel func_80240D80_ECAA80
 .L80240EB0:
 /* ECABB0 80240EB0 4604A500 */  add.s     $f20, $f20, $f4
 .L80240EB4:
-/* ECABB4 80240EB4 0C00AB85 */  jal       func_8002AE14
+/* ECABB4 80240EB4 0C00AB85 */  jal       dead_clamp_angle
 /* ECABB8 80240EB8 4600A306 */   mov.s    $f12, $f20
 /* ECABBC 80240EBC 3C148010 */  lui       $s4, %hi(dead_gPlayerStatusPtr)
 /* ECABC0 80240EC0 2694FC90 */  addiu     $s4, $s4, %lo(dead_gPlayerStatusPtr)
@@ -100,7 +100,7 @@ glabel func_80240D80_ECAA80
 /* ECABF4 80240EF4 E7A40028 */   swc1     $f4, 0x28($sp)
 /* ECABF8 80240EF8 3C014334 */  lui       $at, 0x4334
 /* ECABFC 80240EFC 44816000 */  mtc1      $at, $f12
-/* ECAC00 80240F00 0C00AB85 */  jal       func_8002AE14
+/* ECAC00 80240F00 0C00AB85 */  jal       dead_clamp_angle
 /* ECAC04 80240F04 460C0300 */   add.s    $f12, $f0, $f12
 /* ECAC08 80240F08 C6020018 */  lwc1      $f2, 0x18($s0)
 /* ECAC0C 80240F0C 3C014012 */  lui       $at, 0x4012
@@ -147,7 +147,7 @@ glabel func_80240D80_ECAA80
 /* ECACB0 80240FB0 461EA300 */  add.s     $f12, $f20, $f30
 /* ECACB4 80240FB4 E7A2002C */  swc1      $f2, 0x2c($sp)
 /* ECACB8 80240FB8 E7A40030 */  swc1      $f4, 0x30($sp)
-/* ECACBC 80240FBC 0C00AB85 */  jal       func_8002AE14
+/* ECACBC 80240FBC 0C00AB85 */  jal       dead_clamp_angle
 /* ECACC0 80240FC0 E7A00034 */   swc1     $f0, 0x34($sp)
 /* ECACC4 80240FC4 C6020018 */  lwc1      $f2, 0x18($s0)
 /* ECACC8 80240FC8 460010A1 */  cvt.d.s   $f2, $f2
@@ -186,7 +186,7 @@ glabel func_80240D80_ECAA80
 /* ECAD48 80241048 461EA301 */  sub.s     $f12, $f20, $f30
 /* ECAD4C 8024104C E7A00038 */  swc1      $f0, 0x38($sp)
 /* ECAD50 80241050 E7A2003C */  swc1      $f2, 0x3c($sp)
-/* ECAD54 80241054 0C00AB85 */  jal       func_8002AE14
+/* ECAD54 80241054 0C00AB85 */  jal       dead_clamp_angle
 /* ECAD58 80241058 E7A40040 */   swc1     $f4, 0x40($sp)
 /* ECAD5C 8024105C C6020018 */  lwc1      $f2, 0x18($s0)
 /* ECAD60 80241060 460010A1 */  cvt.d.s   $f2, $f2
@@ -369,7 +369,7 @@ glabel func_80240D80_ECAA80
 .L802412F4:
 /* ECAFF4 802412F4 4604A500 */  add.s     $f20, $f20, $f4
 .L802412F8:
-/* ECAFF8 802412F8 0C00AB85 */  jal       func_8002AE14
+/* ECAFF8 802412F8 0C00AB85 */  jal       dead_clamp_angle
 /* ECAFFC 802412FC 4600A306 */   mov.s    $f12, $f20
 /* ECB000 80241300 E600000C */  swc1      $f0, 0xc($s0)
 .L80241304:
