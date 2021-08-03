@@ -5,4 +5,6 @@ static char* N(exit_str_1) = "mim_01";
 static char* N(exit_str_2) = "mim_06";
 static char* N(exit_str_3) = "mim_11";
 
-INCLUDE_ASM(s32, "world/area_mim/mim_07/BAA140", func_80240000_BAA140);
+#define NAMESPACE dup_mim_07
+#include "world/common/SetWorldAndEntityFog.inc.c"
+#define NAMESPACE mim_07

@@ -9,7 +9,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240070_DBD320);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240140_DBD3F0);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802401D8_DBD488);
+#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80240238_DBD4E8);
 
@@ -128,7 +128,9 @@ INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024146C_DBE71C);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_8024153C_DBE7EC);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_802415D4_DBE884);
+#define NAMESPACE dup_omo_07
+#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
+#define NAMESPACE omo_07
 
 INCLUDE_ASM(s32, "world/area_omo/omo_07/DBD2B0", func_80241634_DBE8E4);
 

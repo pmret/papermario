@@ -216,7 +216,7 @@ glabel L80240504_DBD7B4
 glabel L80240524_DBD7D4
 /* DBD7D4 80240524 0260202D */  daddu     $a0, $s3, $zero
 /* DBD7D8 80240528 0280282D */  daddu     $a1, $s4, $zero
-/* DBD7DC 8024052C 0C090076 */  jal       func_802401D8_DBD488
+/* DBD7DC 8024052C 0C090076 */  jal       omo_07_UnkNpcDurationAnimationFunc
 /* DBD7E0 80240530 02A0302D */   daddu    $a2, $s5, $zero
 /* DBD7E4 80240534 08090151 */  j         L80240544_DBD7F4
 /* DBD7E8 80240538 00000000 */   nop

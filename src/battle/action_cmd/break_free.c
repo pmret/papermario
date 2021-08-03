@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE action_command_break_free
+
 INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A9000_4233F0);
 
 INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A91B0_4235A0);

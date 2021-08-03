@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE action_command_water_block
+
 INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A9000_42A4F0);
 
 INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A9398_42A888);

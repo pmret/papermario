@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE action_command_mega_shock
+
 INCLUDE_ASM(s32, "battle/action_cmd/mega_shock", func_802A9000_42DA10);
 
 INCLUDE_ASM(s32, "battle/action_cmd/mega_shock", func_802A91A0_42DBB0);

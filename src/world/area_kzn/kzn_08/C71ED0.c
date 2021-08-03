@@ -229,13 +229,13 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242E78_C742F8);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80242F74_C743F4);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_802439B4_C74E34);
+#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80243A44_C74EC4);
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80243B44_C74FC4);
+#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80243BA4_C75024);
+#include "world/common/UnkNpcAIFunc30.inc.c"
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71ED0", func_80243C90_C75110);
 

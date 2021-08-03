@@ -9,7 +9,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240070_DB2330);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240140_DB2400);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_802401D8_DB2498);
+#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_05/DB22C0", func_80240238_DB24F8);
 
