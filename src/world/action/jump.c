@@ -40,7 +40,7 @@ void func_802B60B4_E240F4() {
     s32 phi_a0;
 
     if (playerStatus->flags < 0) {
-        playerStatus->flags &= (~0x80000000);
+        playerStatus->flags &= ~0x80000000;
         func_802B6000_E24040();
 
         if (playerStatus->actionState == ACTION_STATE_LAUNCH) {
@@ -123,7 +123,7 @@ void func_802B6294_E242D4() {
         return;
     }
 
-    if ( playerStatus->flags < 0) {
+    if (playerStatus->flags < 0) {
         playerStatus->flags &= 0x7FFFFFF5;
         playerStatus->flags |= 4;
 
