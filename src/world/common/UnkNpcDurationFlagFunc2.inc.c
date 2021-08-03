@@ -5,7 +5,7 @@ void N(UnkNpcDurationFlagFunc2)(ScriptInstance* script, NpcAISettings* aiSetting
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->duration -= 1;
+    npc->duration--;
     if (npc->duration == 0) {
         npc->duration = enemy->varTable[15];
         script->functionTemp[0] = 14;

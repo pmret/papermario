@@ -5,7 +5,7 @@ void N(UnkNpcDurationFlagFunc3)(ScriptInstance* script, NpcAISettings* aiSetting
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->duration -= 1;
+    npc->duration--;
     if (enemy->varTable[11] >= npc->duration) {
         enemy->flags &= ~0x1F100000;
     }

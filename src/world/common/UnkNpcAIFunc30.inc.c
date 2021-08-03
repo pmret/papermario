@@ -7,7 +7,7 @@ void N(UnkNpcAIFunc30)(ScriptInstance *script, NpcAISettings* aiSettings, EnemyT
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 retVal;
 
-    npc->duration -= 1;
+    npc->duration--;
     if (npc->duration == 0) {
         if (func_800490B4(territory, enemy, aiSettings->alertRadius, aiSettings->unk_10.f, 0) == 0) {
             fx_emote(2, npc, 0, npc->collisionHeight, 1, 2, -20, 15, &retVal);
