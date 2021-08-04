@@ -137,6 +137,8 @@ INCLUDE_ASM(s32, "1A5830", calc_enemy_test_target);
 #ifdef NON_MATCHING
 // attacker needs to be in 0x58(sp) not a save register
 s32 calc_enemy_damage_target(Actor* attacker) {
+    BattleStatus* battleStatus = &gBattleStatus;
+    ActorMovementWalk* walk = &attacker->walk;
     Actor *target;
     s32 attack;
     s32 eventFlags;
@@ -144,7 +146,6 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     s32 defense;
     s32 attackElement;
     s32 targetPartIdx;
-    ActorMovementWalk* walk;
     s32 phi_s2;
     s8 phi_s5;
     s8 phi_s7;
@@ -153,7 +154,6 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     s32 isEnchanted = FALSE;
     s32 damage;
     ActorPart* targetPart;
-    BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult = HIT_RESULT_HIT; // ?
 
     targetID = battleStatus->currentTargetID;
@@ -162,9 +162,9 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     battleStatus->wasStatusInflicted = FALSE;
     battleStatus->lastAttackDamage = 0;
     battleStatus->currentTargetID2 = targetID;
-    battleStatus->attackerActorID = attacker->actorID;
     battleStatus->currentTargetPart2 = targetPartIdx;
-    walk = &attacker->walk;
+    battleStatus->attackerActorID = attacker->actorID;
+    //walk = &attacker->walk;
 
     target = get_actor(targetID);
     if (target == NULL) {
@@ -174,8 +174,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
     targetPart = get_actor_part(target, targetPartIdx);
     ASSERT(targetPart != NULL);
 
-    targetID &= 0x700;
-    target->lastDamageTaken = 0;
+    targetID = battleStatus->currentTargetID2 & 0x700;
+    target->lastDamageTaken = 256;
 
     /*
     if (targetID != ACTOR_PARTNER) {
@@ -197,14 +197,14 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
     eventFlags = targetPart->eventFlags;
     if ((eventFlags & 0x20) == 0) {
-        if (target->transStatus == 0xE) {
+        if (target->transStatus == 6) {
             return HIT_RESULT_MISS;
         }
-        if (((eventFlags & 0x800) != 0) && ((battleStatus->currentAttackElement & 0x800) == 0)) {
+        if (((eventFlags & 0x800) != 0) && ((battleStatus->currentAttackElement & 0x800) != 1)) {
             return HIT_RESULT_MISS;
         }
         if (target->stoneStatus == STATUS_STONE) {
-            func_8024EFE0(walk->goalPos.x, walk->goalPos.y, /*eventFlags,*/ walk->goalPos.z, /*0,*/ 1, -1);
+            func_8024EFE0(walk->goalPos.x, walk->goalPos.y, /*eventFlags,*/ walk->goalPos.z, /*0,*/ 0, -1);
             show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, 0, 0);
             play_hit_sound(attacker, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, 0);
             dispatch_event_general(target, EVENT_IMMUNE);
@@ -236,11 +236,11 @@ s32 calc_enemy_damage_target(Actor* attacker) {
 
         // TODO: if/else ordering
         if (attacker->staticStatus == STATUS_STATIC) {
-            gBattleStatus.flags1 &= ~1;
-        } else if ((targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED) && !(battleStatus->currentAttackElement & 0x10000020)) {
+            battleStatus->flags1 &= ~1;
+        } else if ((targetPart->eventFlags & EVENT_FLAG_ELECTRIFIED) && !(battleStatus->currentAttackElement & ~0x80008000)) {
             if (!(battleStatus->currentAttackEventSuppression & 8)) {
                 if (!has_enchanted_part(attacker)) {
-                    battleStatus->flags1 |= 0x20;
+                    gBattleStatus.flags1 |= ~0x80000000;
                 }
                 gBattleStatus.flags1 &= ~1;
             }
@@ -248,8 +248,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             gBattleStatus.flags1 &= ~1;
         }
 
-        defense = get_defense(target, targetPart->defenseTable, gBattleStatus.currentAttackElement);
-        attackElement = gBattleStatus.currentAttackElement;
+        defense = get_defense(target, targetPart->defenseTable, battleStatus->currentAttackElement);
+        attackElement = battleStatus->currentAttackElement;
 
         if (!(attackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
             defense += target->defenseBoost;
@@ -257,9 +257,9 @@ s32 calc_enemy_damage_target(Actor* attacker) {
             if (targetID == ACTOR_PLAYER) {
                 if (battleStatus->waterBlockTurnsLeft > 0) {
                     if (!(attackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))) {
-                        defense += 1;
-                    } else {
                         defense += 2;
+                    } else {
+                        defense += 1;
                     }
                 }
 
@@ -331,7 +331,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                     }
 
                     if (blocked) {
-                        damage = damage - 1 - player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
+                        damage--;
+                        damage = damage - player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
                         sfx_play_sound_at_position(0x231, 0, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         func_802667F0(0, target, walk->goalPos.x, walk->goalPos.y, walk->goalPos.z);
                         gBattleStatus.flags1 |= 0x80000000;
@@ -359,8 +360,8 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         }
 
         if (damage <= 0) {
-            target->hpChangeCounter = 0;
-            if ((battleStatus->currentAttackElement & 0x40000000) == 0) {
+            target->hpChangeCounter = 9;
+            if ((gBattleStatus.currentAttackElement & 0x40000000) == 0) {
                 hitResult = HIT_RESULT_MISS_QUAKE;
                 phi_s2 = 0x17;
             } else {
@@ -472,10 +473,10 @@ s32 calc_enemy_damage_target(Actor* attacker) {
         phi_s5 = FALSE;
         phi_s7 = FALSE; // what is this for
         if (gBattleStatus.flags1 & 0x20) {
-            if (battleStatus->lastAttackDamage >= 0 && phi_s2 != EVENT_DEATH && phi_s2 != EVENT_SPIN_SMASH_DEATH) {
+            if (gBattleStatus.lastAttackDamage >= 0 && phi_s2 != EVENT_DEATH && phi_s2 != EVENT_SPIN_SMASH_DEATH) {
                 if (phi_s2 != EVENT_EXPLODE_TRIGGER) {
-                    if (!(battleStatus->flags1 & 0x80000000)) {
-                        if (!(battleStatus->flags2 & 0x1000000)) {
+                    if (!(gBattleStatus.flags1 & 0x80000000)) {
+                        if (!(gBattleStatus.flags2 & 0x1000000)) {
                             if (targetID != ACTOR_PLAYER || !is_ability_active(ABILITY_HEALTHY_HEALTHY) || !(rand_int(100) < 20)) {
                                 if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && try_inflict_status(target, STATUS_SHRINK, STATUS_SHRINK_TURN_MOD)) {
                                     phi_s5 = TRUE;
@@ -571,6 +572,7 @@ s32 calc_enemy_damage_target(Actor* attacker) {
                         if (!phi_s7 && !phi_s5) {
                             // immune star fx?
                             func_8024EFE0(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, 0, -3);
+                            show_damage_popup(walk->goalPos.x, walk->goalPos.y, walk->goalPos.z, 0, 0);
                         }
                     } else {
                         if (battleStatus->currentAttackElement & 0x20000040) { // TODO flags

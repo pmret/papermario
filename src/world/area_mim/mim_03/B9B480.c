@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "mim_04";
 static char* N(exit_str_2) = "mim_02";
 static char* N(exit_str_3) = "";
 
-#include "world/common/SetWorldAndEntityFog.inc.c"
+#include "world/common/SetForeverForestFog.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_03/B9B480", func_80240068_B9B4E8);
 

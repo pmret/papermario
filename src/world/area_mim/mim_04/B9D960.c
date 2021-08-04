@@ -5,4 +5,4 @@ static char* N(exit_str_1) = "mim_01";
 static char* N(exit_str_2) = "mim_03";
 static char* N(exit_str_3) = "";
 
-#include "world/common/SetWorldAndEntityFog.inc.c"
+#include "world/common/SetForeverForestFog.inc.c"

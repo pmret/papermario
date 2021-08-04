@@ -6,5 +6,5 @@ static char* N(exit_str_2) = "mim_06";
 static char* N(exit_str_3) = "mim_11";
 
 #define NAMESPACE dup_mim_07
-#include "world/common/SetWorldAndEntityFog.inc.c"
+#include "world/common/SetForeverForestFog.inc.c"
 #define NAMESPACE mim_07
