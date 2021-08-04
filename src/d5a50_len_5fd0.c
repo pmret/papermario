@@ -79,9 +79,8 @@ void draw_icon_2(s32 iconID) {
 }
 
 void set_hud_element_script(s32 arg0, s32 *arg1) {
-    HudElement *hudElement;
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
 
-    hudElement = gHudElementList[arg0 & ~0x800];
     if (arg1 == NULL) {
         arg1 = D_8014EFC8;
     }
@@ -152,9 +151,8 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", ALT_clear_hud_element_cache);
 INCLUDE_ASM(void, "d5a50_len_5fd0", set_hud_element_scale, s32 index, f32 scale);
 
 void set_hud_element_size(s32 arg0, s8 arg1) {
-    HudElement *hudElement;
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
 
-    hudElement = gHudElementList[arg0 & ~0x800];
     hudElement->widthScale = 0x400;
     hudElement->heightScale = 0x400;
     hudElement->tileSizePreset = arg1;
@@ -198,19 +196,16 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_B);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_C);
 
-void free_hud_element_transform(s32 arg0) {
-    HudElement* hudElement;
-    s32* hudTransform;
+void free_hud_element_transform(s32 arg0) {  
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+    s32* hudTransform = hudElement->hudTransform;
     
-    hudElement = gHudElementList[arg0 & (~0x800)];
-    hudTransform = hudElement->hudTransform;
-    
-    if ((hudElement->flags & 0x20000) == 0) {
+    if (!(hudElement->flags & 0x20000)) {
         func_8013A854(*hudTransform);
     }
 
     heap_free(hudElement->hudTransform);
-    hudElement->hudTransform = 0;
+    hudElement->hudTransform = NULL;
     hudElement->flags &= ~0x40030000;
 }
 
