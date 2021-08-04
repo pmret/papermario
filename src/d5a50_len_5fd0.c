@@ -1,5 +1,7 @@
 #include "common.h"
 
+void free_hud_element_transform (s32 arg0);
+
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
 s32 D_8014EFC8[] = { 0x00000000, };
