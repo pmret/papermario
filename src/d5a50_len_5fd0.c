@@ -105,7 +105,7 @@ void set_hud_element_script(s32 arg0, s32 *arg1) {
 }
 
 
-HudElement* get_hud_element_script(s32 arg0) {
+s32* get_hud_element_script(s32 arg0) {
     return gHudElementList[arg0 & ~0x800]->startReadPos;
 }
 
