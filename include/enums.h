@@ -607,6 +607,7 @@ enum SoundIDs {
     SOUND_UNKNOWN_2039,
     SOUND_BOMB_BLAST                = 8310,
     SOUND_JUMP_2081                 = 8321,
+    SOUND_JUMP_8BIT_MARIO           = 8322,
     SOUND_UNKNOWN_208C              = 8332,
     SOUND_UNKNOWN_208D,
     SOUND_UNKNOWN_208E,
