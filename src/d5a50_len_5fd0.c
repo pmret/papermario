@@ -64,7 +64,7 @@ void func_80144278(s32 arg0) {
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element);
 
-void draw_hud_element_clipped(s32 arg0) {
+void draw_hud_element_clipped (s32 arg0) {
     draw_hud_element(arg0, 0);
 }
 
@@ -158,7 +158,21 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_B);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_C);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", free_hud_element_transform);
+void free_hud_element_transform(s32 arg0) {
+    HudElement* hudElement;
+    s32* hudTransform;
+    
+    hudElement = gHudElementList[arg0 & (~0x800)];
+    hudTransform = hudElement->hudTransform;
+    
+    if ((hudElement->flags & 0x20000) == 0) {
+        func_8013A854(*hudTransform);
+    }
+
+    heap_free(hudElement->hudTransform);
+    hudElement->hudTransform = 0;
+    hudElement->flags &= ~0x40030000;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_pos);
 
