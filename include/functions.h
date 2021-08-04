@@ -150,6 +150,8 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
+void phys_adjust_cam_on_landing();
+void phys_init_integrator_for_current_state();
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -221,6 +223,7 @@ void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32
 
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32, f32*, f32*, f32*, f32*);
+s32 player_raycast_below_cam_relative(PlayerStatus*, f32*, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
 s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -285,6 +288,7 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
+s32 check_input_jump();
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
@@ -300,6 +304,7 @@ void add_vec2D_polar(f32* x, f32* y, f32 r, f32 theta);
 s32 sfx_adjust_env_sound_pos(s32 soundID, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void sfx_play_sound(s32 soundID);
 s32 sfx_play_sound_at_position(s32 soundID, s32 value2, f32 posX, f32 posY, f32 posZ);
+void sfx_play_sound_at_player(s32 soundID, s32 arg0);
 s32 bgm_set_song(s32 playerIndex, s32 songID, s32 variation, s32 fadeOutTime, s16 volume);
 void func_801497FC(s32 arg0);
 s32 func_8014AA54(s32 playerIndex, s32 arg1, s16 arg2);
@@ -331,6 +336,7 @@ ScriptInstance* get_script_by_index(s32 index);
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
 void suggest_player_anim_setUnkFlag(s32 arg0);
+void suggest_player_anim_clearUnkFlag(s32 arg0);
 void subtract_hp(s32 amt);
 void open_status_menu_long(void);
 
