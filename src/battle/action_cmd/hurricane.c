@@ -1,5 +1,7 @@
 #include "common.h"
 
+#define NAMESPACE action_command_hurricane
+
 INCLUDE_ASM(s32, "battle/action_cmd/hurricane", func_802A9000_42F6E0);
 
 INCLUDE_ASM(s32, "battle/action_cmd/hurricane", func_802A91A0_42F880);

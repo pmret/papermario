@@ -20,13 +20,13 @@ INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80240EAC_BA562C);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80240FA8_BA5728);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_802419E8_BA6168);
+#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80241A78_BA61F8);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80241B78_BA62F8);
+#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80241BD8_BA6358);
+#include "world/common/UnkNpcAIFunc30.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_06/BA4CF0", func_80241CC4_BA6444);
 

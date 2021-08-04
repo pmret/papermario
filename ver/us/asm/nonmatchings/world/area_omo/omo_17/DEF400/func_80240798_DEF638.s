@@ -216,7 +216,7 @@ glabel L80240A64_DEF904
 glabel L80240A84_DEF924
 /* DEF924 80240A84 0260202D */  daddu     $a0, $s3, $zero
 /* DEF928 80240A88 0280282D */  daddu     $a1, $s4, $zero
-/* DEF92C 80240A8C 0C0901CE */  jal       func_80240738_DEF5D8
+/* DEF92C 80240A8C 0C0901CE */  jal       omo_17_UnkNpcDurationAnimationFunc
 /* DEF930 80240A90 02A0302D */   daddu    $a2, $s5, $zero
 /* DEF934 80240A94 080902A9 */  j         L80240AA4_DEF944
 /* DEF938 80240A98 00000000 */   nop

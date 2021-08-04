@@ -118,7 +118,7 @@ glabel func_802417C4_BA1EF4
 .L8024196C:
 /* BA209C 8024196C 0240202D */  daddu     $a0, $s2, $zero
 /* BA20A0 80241970 0260282D */  daddu     $a1, $s3, $zero
-/* BA20A4 80241974 0C09053A */  jal       func_802414E8_BA1C18
+/* BA20A4 80241974 0C09053A */  jal       mim_05_UnkNpcDurationFlagFunc3
 /* BA20A8 80241978 0280302D */   daddu    $a2, $s4, $zero
 /* BA20AC 8024197C 8E430070 */  lw        $v1, 0x70($s2)
 /* BA20B0 80241980 2402000C */  addiu     $v0, $zero, 0xc
@@ -136,7 +136,7 @@ glabel func_802417C4_BA1EF4
 .L802419AC:
 /* BA20DC 802419AC 0240202D */  daddu     $a0, $s2, $zero
 /* BA20E0 802419B0 0260282D */  daddu     $a1, $s3, $zero
-/* BA20E4 802419B4 0C09059E */  jal       func_80241678_BA1DA8
+/* BA20E4 802419B4 0C09059E */  jal       mim_05_UnkNpcDurationFlagFunc2
 /* BA20E8 802419B8 0280302D */   daddu    $a2, $s4, $zero
 /* BA20EC 802419BC 8E430070 */  lw        $v1, 0x70($s2)
 /* BA20F0 802419C0 2402000E */  addiu     $v0, $zero, 0xe
@@ -145,7 +145,7 @@ glabel func_802417C4_BA1EF4
 /* BA20FC 802419CC 0240202D */  daddu     $a0, $s2, $zero
 .L802419D0:
 /* BA2100 802419D0 0260282D */  daddu     $a1, $s3, $zero
-/* BA2104 802419D4 0C0905B6 */  jal       func_802416D8_BA1E08
+/* BA2104 802419D4 0C0905B6 */  jal       mim_05_UnkNpcAIFunc30
 /* BA2108 802419D8 0280302D */   daddu    $a2, $s4, $zero
 /* BA210C 802419DC 0809067B */  j         .L802419EC
 /* BA2110 802419E0 00000000 */   nop

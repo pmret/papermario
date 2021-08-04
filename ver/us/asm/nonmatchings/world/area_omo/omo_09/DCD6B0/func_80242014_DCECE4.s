@@ -221,7 +221,7 @@ glabel L802422F0_DCEFC0
 glabel L80242310_DCEFE0
 /* DCEFE0 80242310 0260202D */  daddu     $a0, $s3, $zero
 /* DCEFE4 80242314 0280282D */  daddu     $a1, $s4, $zero
-/* DCEFE8 80242318 0C0907ED */  jal       func_80241FB4_DCEC84
+/* DCEFE8 80242318 0C0907ED */  jal       dup_omo_09_UnkNpcDurationAnimationFunc
 /* DCEFEC 8024231C 02A0302D */   daddu    $a2, $s5, $zero
 /* DCEFF0 80242320 080908CC */  j         L80242330_DCF000
 /* DCEFF4 80242324 00000000 */   nop
