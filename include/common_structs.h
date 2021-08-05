@@ -692,9 +692,9 @@ typedef struct BattleStatus {
     /* 0x0A8 */ s32 cloudNineEffect;
     /* 0x0AC */ char unk_AC;
     /* 0x0AD */ s8 unk_AD;
-    /* 0x0AE */ u8 hammerLossTurns;
-    /* 0x0AF */ u8 jumpLossTurns;
-    /* 0x0B0 */ u8 itemLossTurns;
+    /* 0x0AE */ s8 hammerLossTurns;
+    /* 0x0AF */ s8 jumpLossTurns;
+    /* 0x0B0 */ s8 itemLossTurns;
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
