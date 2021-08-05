@@ -432,8 +432,8 @@ typedef struct HudElement {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unkImgScale[2];
     /* 0x30 */ f32 uniformScale;
-    /* 0x34 */ f32 widthScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x38 */ f32 heightScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
+    /* 0x34 */ s32 widthScale; /* X.10 fmt (divide by 1024.0 to get float) */
+    /* 0x38 */ s32 heightScale; /* X.10 fmt (divide by 1024.0 to get float) */
     /* 0x3C */ s16 renderPosX;
     /* 0x3E */ s16 renderPosY;
     /* 0x40 */ u8 screenPosOffset[2];
