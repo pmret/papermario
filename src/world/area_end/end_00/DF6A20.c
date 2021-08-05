@@ -70,24 +70,23 @@ ApiStatus func_802427D8_DF91D8(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus func_80242830_DF9230(ScriptInstance* script, s32 isInitialCall) {
     s32 npcID;
     f32 newShadowScale;
-    s32 *ptrReadPos;
 
-    ptrReadPos = script->ptrReadPos;
-    npcID = get_variable(script, *ptrReadPos++);
-    newShadowScale = get_float_variable(script, *ptrReadPos);
+    Bytecode* args = script->ptrReadPos;
+    npcID = get_variable(script, *args++);
+    newShadowScale = get_float_variable(script, *args);
 
     resolve_npc(script, npcID)->shadowScale = newShadowScale;
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_80242898_DF9298(ScriptInstance* script, s32 isInitialCall) {
-    Npc *npc;
-    s32* ptrReadPos = script->ptrReadPos;
+    Npc* npc;
+    Bytecode* args = script->ptrReadPos;
     if (isInitialCall != 0) {
-        script->functionTemp[1] = get_npc_unsafe(get_variable(script, *ptrReadPos));
+        script->functionTemp[1] = get_npc_unsafe(get_variable(script, *args));
     }
     npc = (Npc*)script->functionTemp[1];
-    npc->pos.x = (f32) (npc->pos.x + 0.6666667f);
+    npc->pos.x += 0.6666667f;
 
     return ApiStatus_BLOCK;
 }

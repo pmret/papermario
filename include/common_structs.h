@@ -2256,8 +2256,7 @@ typedef struct ActionCommandStatus {
     /* 0x6A */ s16 unk_6A;
     /* 0x6C */ s16 unk_6C;
     /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ char unk_70[2];
-    /* 0x72 */ char unk_72[2];
+    /* 0x70 */ char unk_70[4];
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;

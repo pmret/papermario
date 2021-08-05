@@ -12,14 +12,14 @@ INCLUDE_ASM(s32, "battle/area_omo/512E50", func_80218B38_513108);
 // used by Spy Guys
 ApiStatus func_80218CF4_5132C4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* status = &gBattleStatus;
-    s32* readPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if ((status->hammerLossTurns == -1) || 
         (status->jumpLossTurns == -1) || 
         (status->itemLossTurns == -1)) {
-        set_variable(script, *readPos, 0);
+        set_variable(script, *args, 0);
     } else {
-        set_variable(script, *readPos, -1);
+        set_variable(script, *args, -1);
     }
 
     return ApiStatus_DONE2;

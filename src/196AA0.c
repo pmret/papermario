@@ -86,33 +86,33 @@ void func_80268834(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void func_80268858(void) {
-    ActionCommandStatus *d8029FBE0 = &gActionCommandStatus;
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
-    d8029FBE0->autoSucceed = FALSE;
-    d8029FBE0->unk_6A = FALSE;
+    actionCommandStatus->autoSucceed = FALSE;
+    actionCommandStatus->unk_6A = FALSE;
 
     if (!(gBattleStatus.flags1 & 0x80000)) {
         if (is_ability_active(ABILITY_RIGHT_ON)) {
-            d8029FBE0->autoSucceed = TRUE;
+            actionCommandStatus->autoSucceed = TRUE;
         }
 
         if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_BERSERKER)) {
-            d8029FBE0->unk_61 = FALSE;
-            d8029FBE0->unk_6A = TRUE;
+            actionCommandStatus->unk_61 = FALSE;
+            actionCommandStatus->unk_6A = TRUE;
 
             if (rand_int(100) < 25) {
-                d8029FBE0->autoSucceed = TRUE;
+                actionCommandStatus->autoSucceed = TRUE;
             }
         }
     }
 
     if (gGameStatusPtr->demoFlags & 1) {
-        d8029FBE0->autoSucceed = TRUE;
+        actionCommandStatus->autoSucceed = TRUE;
     }
 
     if (gBattleStatus.flags1 & 0x1000) {
-        d8029FBE0->autoSucceed = TRUE;
-        d8029FBE0->unk_61 = FALSE;
+        actionCommandStatus->autoSucceed = TRUE;
+        actionCommandStatus->unk_61 = FALSE;
     }
 }
 
@@ -212,7 +212,7 @@ INCLUDE_ASM(s32, "196AA0", func_80268E88);
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
-    ActionCommandStatus *d8029FBE0 = &gActionCommandStatus;
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 mashWindow;
     s32 blockWindow;
     s32 block;
@@ -234,9 +234,9 @@ s32 check_block_input(s32 buttonMask) {
 
     if (playerData->hitsTaken < 9999) {
         playerData->hitsTaken += 1;
-        d8029FBE0->hitsTakenIsMax = FALSE;
+        actionCommandStatus->hitsTakenIsMax = FALSE;
     } else {
-        d8029FBE0->hitsTakenIsMax = TRUE;
+        actionCommandStatus->hitsTakenIsMax = TRUE;
     }
 
     block = FALSE;
@@ -306,7 +306,7 @@ s32 check_block_input(s32 buttonMask) {
             bufferPos++;
         }
     }
-    if (block && !d8029FBE0->hitsTakenIsMax) {
+    if (block && !actionCommandStatus->hitsTakenIsMax) {
         playerData->hitsBlocked += 1;
     }
 

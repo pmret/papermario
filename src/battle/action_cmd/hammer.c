@@ -86,7 +86,7 @@ ApiStatus func_802A9000_422000(void) {
 ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 *ptrReadPos = script->ptrReadPos;
+    Bytecode* args = script->ptrReadPos;
 
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
@@ -95,9 +95,9 @@ ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
     }
 
     func_80268858();
-    actionCommandStatus->unk_4E = get_variable(script, *ptrReadPos++);
-    actionCommandStatus->unk_52 = get_variable(script, *ptrReadPos++);
-    actionCommandStatus->unk_50 = get_variable(script, *ptrReadPos);
+    actionCommandStatus->unk_4E = get_variable(script, *args++);
+    actionCommandStatus->unk_52 = get_variable(script, *args++);
+    actionCommandStatus->unk_50 = get_variable(script, *args);
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->unk_62 = 1;

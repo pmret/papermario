@@ -12,16 +12,16 @@ ApiStatus func_802180CC_5B157C(ScriptInstance* script, s32 isInitialCall) {
     s32 prevX;
     s32 prevZ;
 
-    s32* ptrReadPos = script->ptrReadPos;
-    prevX = get_variable(script, *ptrReadPos++);
-    prevZ = get_variable(script, *ptrReadPos++);
-    length = get_variable(script, *ptrReadPos++);
-    angle = get_variable(script, *ptrReadPos++);
+    Bytecode* args = script->ptrReadPos;
+    prevX = get_variable(script, *args++);
+    prevZ = get_variable(script, *args++);
+    length = get_variable(script, *args++);
+    angle = get_variable(script, *args++);
 
     outX = prevX + (length * cos_deg(angle));
     outZ = prevZ - (length * sin_deg(angle));
 
-    set_float_variable(script, *ptrReadPos++, outX);
-    set_float_variable(script, *ptrReadPos++, outZ);
+    set_float_variable(script, *args++, outX);
+    set_float_variable(script, *args++, outZ);
     return 2;
 }
