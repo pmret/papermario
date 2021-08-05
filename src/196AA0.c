@@ -28,34 +28,6 @@ enum ActionCommand {
     ACTION_COMMAND_TIDAL_WAVE,
 };
 
-// action command state
-extern struct D_8029FBE0 {
-    /* 0x00 */ char unk_00[0x4A];
-    /* 0x4A */ s16 unk_4A; // current action command id?
-    /* 0x4C */ s16 unk_4C;
-    /* 0x4E */ char unk_4E[0x10];
-    /* 0x5E */ s8 unk_5E;
-    /* 0x5F */ s8 unk_5F;
-    /* 0x60 */ s8 unk_60;
-    /* 0x61 */ s8 unk_61;
-    /* 0x62 */ s16 unk_62;
-    /* 0x64 */ s16 unk_64;
-    /* 0x66 */ s16 unk_66;
-    /* 0x68 */ s16 unk_68;
-    /* 0x6A */ s16 unk_6A;
-    /* 0x6C */ s16 unk_6C;
-    /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ char unk_70[2];
-    /* 0x72 */ char unk_72[2];
-    /* 0x74 */ s16 unk_74;
-    /* 0x76 */ s16 unk_76;
-    /* 0x78 */ s16 unk_78;
-    /* 0x7A */ s16 unk_7A;
-    /* 0x7C */ s16 unk_7C;
-    /* 0x7E */ s16 unk_7E;
-    /* 0x80 */ s8 unk_80;
-} D_8029FBE0; // size unknown
-
 extern void* actionCommandDmaTable[23];
 extern s32 D_8029FBC0;
 
@@ -114,14 +86,14 @@ void func_80268834(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void func_80268858(void) {
-    struct D_8029FBE0* d8029FBE0 = &D_8029FBE0;
+    ActionCommandStatus *d8029FBE0 = &gActionCommandStatus;
 
-    d8029FBE0->unk_5E = FALSE;
+    d8029FBE0->autoSucceed = FALSE;
     d8029FBE0->unk_6A = FALSE;
 
     if (!(gBattleStatus.flags1 & 0x80000)) {
         if (is_ability_active(ABILITY_RIGHT_ON)) {
-            d8029FBE0->unk_5E = TRUE;
+            d8029FBE0->autoSucceed = TRUE;
         }
 
         if (!(gBattleStatus.flags1 & 0x80000) && is_ability_active(ABILITY_BERSERKER)) {
@@ -129,17 +101,17 @@ void func_80268858(void) {
             d8029FBE0->unk_6A = TRUE;
 
             if (rand_int(100) < 25) {
-                d8029FBE0->unk_5E = TRUE;
+                d8029FBE0->autoSucceed = TRUE;
             }
         }
     }
 
     if (gGameStatusPtr->demoFlags & 1) {
-        d8029FBE0->unk_5E = TRUE;
+        d8029FBE0->autoSucceed = TRUE;
     }
 
     if (gBattleStatus.flags1 & 0x1000) {
-        d8029FBE0->unk_5E = TRUE;
+        d8029FBE0->autoSucceed = TRUE;
         d8029FBE0->unk_61 = FALSE;
     }
 }
@@ -153,7 +125,7 @@ void func_80268938(void) {
         func_80268C9C();
     }
 
-    ac = D_8029FBE0.unk_4A;
+    ac = gActionCommandStatus.unk_4A;
 
     switch (ac) {
         case ACTION_COMMAND_JUMP:
@@ -240,7 +212,7 @@ INCLUDE_ASM(s32, "196AA0", func_80268E88);
 s32 check_block_input(s32 buttonMask) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
-    struct D_8029FBE0* d8029FBE0 = &D_8029FBE0;
+    ActionCommandStatus *d8029FBE0 = &gActionCommandStatus;
     s32 mashWindow;
     s32 blockWindow;
     s32 block;
@@ -352,13 +324,13 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    D_8029FBE0.unk_80 = get_variable(script, *args++);
-    D_8029FBE0.unk_76 = get_variable(script, *args++);
-    D_8029FBE0.unk_78 = get_variable(script, *args++);
-    D_8029FBE0.unk_7A = get_variable(script, *args++);
-    D_8029FBE0.unk_7C = get_variable(script, *args++);
-    D_8029FBE0.unk_7E = get_variable(script, *args++);
-    D_8029FBE0.unk_74 = D_8029FBE0.unk_76 / 2;
+    gActionCommandStatus.mashMeterIntervals = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[0] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[1] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[2] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[3] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[4] = get_variable(script, *args++);
+    gActionCommandStatus.unk_74 = gActionCommandStatus.mashMeterCutoffs[0] / 2;
     return ApiStatus_DONE2;
 }
 

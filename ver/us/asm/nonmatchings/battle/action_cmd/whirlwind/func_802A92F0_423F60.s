@@ -4,8 +4,8 @@
 glabel func_802A92F0_423F60
 /* 423F60 802A92F0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 423F64 802A92F4 AFB10014 */  sw        $s1, 0x14($sp)
-/* 423F68 802A92F8 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 423F6C 802A92FC 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 423F68 802A92F8 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 423F6C 802A92FC 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 423F70 802A9300 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 423F74 802A9304 AFB20018 */  sw        $s2, 0x18($sp)
 /* 423F78 802A9308 AFB00010 */  sw        $s0, 0x10($sp)

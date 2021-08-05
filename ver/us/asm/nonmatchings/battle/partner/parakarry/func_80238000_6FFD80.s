@@ -19,8 +19,8 @@ glabel func_80238000_6FFD80
 /* 6FFDB8 80238038 F7B60070 */  sdc1      $f22, 0x70($sp)
 /* 6FFDBC 8023803C F7B40068 */  sdc1      $f20, 0x68($sp)
 /* 6FFDC0 80238040 8ED500DC */  lw        $s5, 0xdc($s6)
-/* 6FFDC4 80238044 3C04802A */  lui       $a0, %hi(D_8029FBE0)
-/* 6FFDC8 80238048 2484FBE0 */  addiu     $a0, $a0, %lo(D_8029FBE0)
+/* 6FFDC4 80238044 3C04802A */  lui       $a0, %hi(gActionCommandStatus)
+/* 6FFDC8 80238048 2484FBE0 */  addiu     $a0, $a0, %lo(gActionCommandStatus)
 /* 6FFDCC 8023804C 10A00002 */  beqz      $a1, .L80238058
 /* 6FFDD0 80238050 26B4000C */   addiu    $s4, $s5, 0xc
 /* 6FFDD4 80238054 AEE00070 */  sw        $zero, 0x70($s7)

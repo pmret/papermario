@@ -5,8 +5,8 @@ glabel CloseActionCommandInfo
 /* 197CF0 80269410 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 197CF4 80269414 10A0000D */  beqz      $a1, .L8026944C
 /* 197CF8 80269418 AFBF0010 */   sw       $ra, 0x10($sp)
-/* 197CFC 8026941C 3C02802A */  lui       $v0, %hi(D_8029FBE0)
-/* 197D00 80269420 2442FBE0 */  addiu     $v0, $v0, %lo(D_8029FBE0)
+/* 197CFC 8026941C 3C02802A */  lui       $v0, %hi(gActionCommandStatus)
+/* 197D00 80269420 2442FBE0 */  addiu     $v0, $v0, %lo(gActionCommandStatus)
 /* 197D04 80269424 8443004A */  lh        $v1, 0x4a($v0)
 /* 197D08 80269428 28620007 */  slti      $v0, $v1, 7
 /* 197D0C 8026942C 10400003 */  beqz      $v0, .L8026943C

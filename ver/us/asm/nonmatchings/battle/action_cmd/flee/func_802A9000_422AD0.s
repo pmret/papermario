@@ -22,8 +22,8 @@ glabel func_802A9000_422AD0
 /* 422B14 802A9044 0C0B1EAF */  jal       get_variable
 /* 422B18 802A9048 0200202D */   daddu    $a0, $s0, $zero
 /* 422B1C 802A904C 24040032 */  addiu     $a0, $zero, 0x32
-/* 422B20 802A9050 3C10802A */  lui       $s0, %hi(D_8029FBE0)
-/* 422B24 802A9054 2610FBE0 */  addiu     $s0, $s0, %lo(D_8029FBE0)
+/* 422B20 802A9050 3C10802A */  lui       $s0, %hi(gActionCommandStatus)
+/* 422B24 802A9054 2610FBE0 */  addiu     $s0, $s0, %lo(gActionCommandStatus)
 /* 422B28 802A9058 24030003 */  addiu     $v1, $zero, 3
 /* 422B2C 802A905C A602005A */  sh        $v0, 0x5a($s0)
 /* 422B30 802A9060 00021400 */  sll       $v0, $v0, 0x10

@@ -3,8 +3,8 @@
 
 glabel func_802A9744_4243B4
 /* 4243B4 802A9744 27BDFFD0 */  addiu     $sp, $sp, -0x30
-/* 4243B8 802A9748 3C03802A */  lui       $v1, %hi(D_8029FBE0)
-/* 4243BC 802A974C 2463FBE0 */  addiu     $v1, $v1, %lo(D_8029FBE0)
+/* 4243B8 802A9748 3C03802A */  lui       $v1, %hi(gActionCommandStatus)
+/* 4243BC 802A974C 2463FBE0 */  addiu     $v1, $v1, %lo(gActionCommandStatus)
 /* 4243C0 802A9750 AFB00018 */  sw        $s0, 0x18($sp)
 /* 4243C4 802A9754 0060802D */  daddu     $s0, $v1, $zero
 /* 4243C8 802A9758 AFB30024 */  sw        $s3, 0x24($sp)
