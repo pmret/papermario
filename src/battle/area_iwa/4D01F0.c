@@ -3,8 +3,7 @@
 
 #define NAMESPACE b_area_iwa
 
-// allow_spin_smash
-ApiStatus func_80218000_4D01F0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(SetSpinSmashable)(ScriptInstance* script, s32 isInitialCall) {
     s32 canSpinSmash = get_variable(script, *script->ptrReadPos);
     Actor* actor = get_actor(script->owner1.actorID);
     if (canSpinSmash == FALSE) {

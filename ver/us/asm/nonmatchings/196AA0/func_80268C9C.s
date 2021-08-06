@@ -29,7 +29,7 @@ glabel L80268CD4_1975B4
 /* 1975BC 80268CDC 0809A390 */  j         .L80268E40
 /* 1975C0 80268CE0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268CE4_1975C4
-/* 1975C4 80268CE4 0C0AA68C */  jal       func_802A9A30_422A30
+/* 1975C4 80268CE4 0C0AA68C */  jal       action_command_hammer_FreeHudElements
 /* 1975C8 80268CE8 00000000 */   nop
 /* 1975CC 80268CEC 0809A390 */  j         .L80268E40
 /* 1975D0 80268CF0 3C05FFFF */   lui      $a1, 0xffff
