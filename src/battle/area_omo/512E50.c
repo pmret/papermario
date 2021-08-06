@@ -14,9 +14,10 @@ ApiStatus func_80218CF4_5132C4(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* status = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
-    if ((status->hammerLossTurns == -1) || 
-        (status->jumpLossTurns == -1) || 
-        (status->itemLossTurns == -1)) {
+    if (status->hammerLossTurns == -1 || 
+        status->jumpLossTurns == -1 || 
+        status->itemLossTurns == -1
+    ) {
         set_variable(script, *args++, 0);
     } else {
         set_variable(script, *args++, -1);
