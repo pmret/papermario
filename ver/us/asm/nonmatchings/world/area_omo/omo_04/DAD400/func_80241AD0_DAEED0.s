@@ -216,7 +216,7 @@ glabel L80241D9C_DAF19C
 glabel L80241DBC_DAF1BC
 /* DAF1BC 80241DBC 0260202D */  daddu     $a0, $s3, $zero
 /* DAF1C0 80241DC0 0280282D */  daddu     $a1, $s4, $zero
-/* DAF1C4 80241DC4 0C09069C */  jal       func_80241A70_DAEE70
+/* DAF1C4 80241DC4 0C09069C */  jal       omo_04_UnkNpcDurationAnimationFunc
 /* DAF1C8 80241DC8 02A0302D */   daddu    $a2, $s5, $zero
 /* DAF1CC 80241DCC 08090777 */  j         L80241DDC_DAF1DC
 /* DAF1D0 80241DD0 00000000 */   nop

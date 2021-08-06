@@ -23,8 +23,8 @@ glabel func_80240518_EA0E18
 /* EA0E44 80240544 24110001 */   addiu    $s1, $zero, 1
 /* EA0E48 80240548 86040008 */  lh        $a0, 8($s0)
 /* EA0E4C 8024054C 0040802D */  daddu     $s0, $v0, $zero
-/* EA0E50 80240550 3C05800C */  lui       $a1, %hi(D_800B8D80)
-/* EA0E54 80240554 24A58D80 */  addiu     $a1, $a1, %lo(D_800B8D80)
+/* EA0E50 80240550 3C05800C */  lui       $a1, %hi(dead_gCameras)
+/* EA0E54 80240554 24A58D80 */  addiu     $a1, $a1, %lo(dead_gCameras)
 /* EA0E58 80240558 3C03800A */  lui       $v1, %hi(D_800A158C)
 /* EA0E5C 8024055C 8463158C */  lh        $v1, %lo(D_800A158C)($v1)
 /* EA0E60 80240560 00912021 */  addu      $a0, $a0, $s1

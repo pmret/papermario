@@ -2,7 +2,9 @@
 
 #define NAMESPACE b_area_pra
 
-INCLUDE_ASM(s32, "battle/area_pra/649480", func_80218670_649480);
+#define NAMESPACE dup_b_area_pra
+#include "common/ShrinkActor.inc.c"
+#define NAMESPACE b_area_pra
 
 #define NAMESPACE dup4_b_area_pra
 #include "common/GetSelectedMoveID.inc.c"

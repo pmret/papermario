@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "mim_01";
 static char* N(exit_str_1) = "mim_05";
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80240000_BAD940);
+#include "world/common/SetForeverForestFog.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80240068_BAD9A8);
 
@@ -121,12 +121,12 @@ INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80241ED4_BAF814);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80241FD0_BAF910);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242A10_BB0350);
+#include "world/common/UnkNpcDurationFlagFunc3.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242AA0_BB03E0);
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242BA0_BB04E0);
+#include "world/common/UnkNpcDurationFlagFunc2.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242C00_BB0540);
+#include "world/common/UnkNpcAIFunc30.inc.c"
 
 INCLUDE_ASM(s32, "world/area_mim/mim_08/BAD940", func_80242CEC_BB062C);

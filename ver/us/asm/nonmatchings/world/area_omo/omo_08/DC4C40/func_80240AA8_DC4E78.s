@@ -216,7 +216,7 @@ glabel L80240D74_DC5144
 glabel L80240D94_DC5164
 /* DC5164 80240D94 0260202D */  daddu     $a0, $s3, $zero
 /* DC5168 80240D98 0280282D */  daddu     $a1, $s4, $zero
-/* DC516C 80240D9C 0C090292 */  jal       func_80240A48_DC4E18
+/* DC516C 80240D9C 0C090292 */  jal       omo_08_UnkNpcDurationAnimationFunc
 /* DC5170 80240DA0 02A0302D */   daddu    $a2, $s5, $zero
 /* DC5174 80240DA4 0809036D */  j         L80240DB4_DC5184
 /* DC5178 80240DA8 00000000 */   nop

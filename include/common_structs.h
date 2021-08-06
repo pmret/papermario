@@ -432,8 +432,8 @@ typedef struct HudElement {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unkImgScale[2];
     /* 0x30 */ f32 uniformScale;
-    /* 0x34 */ f32 widthScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x38 */ f32 heightScaleF; /* X.10 fmt (divide by 1024.0 to get float) */
+    /* 0x34 */ s32 widthScale; /* X.10 fmt (divide by 1024.0 to get float) */
+    /* 0x38 */ s32 heightScale; /* X.10 fmt (divide by 1024.0 to get float) */
     /* 0x3C */ s16 renderPosX;
     /* 0x3E */ s16 renderPosY;
     /* 0x40 */ u8 screenPosOffset[2];
@@ -886,7 +886,7 @@ typedef struct EffectInstanceData {
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ char unk_28[0x4];
+    /* 0x28 */ f32 unk_28;
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ f32 unk_30;
     /* 0x34 */ char unk_34[0x30];
@@ -1873,9 +1873,11 @@ typedef struct PlayerStatus {
     /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ Vec3f extraVelocity;
     /* 0x028 */ Vec3f position;
-    /* 0x034 */ char unk_34[16];
+    /* 0x034 */ char unk_34[8];
+    /* 0x03C */ f32 unk_3C;
+    /* 0x040 */ f32 unk_40;
     /* 0x044 */ f32 decorationPos[2];
-    /* 0x04C */ char unk_4C[4];
+    /* 0x04C */ f32 unk_4C;
     /* 0x050 */ f32 jumpApexHeight;
     /* 0x054 */ f32 currentSpeed;
     /* 0x058 */ f32 walkSpeed;

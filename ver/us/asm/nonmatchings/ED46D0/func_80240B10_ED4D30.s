@@ -6,8 +6,8 @@ glabel func_80240B10_ED4D30
 /* ED4D34 80240B14 24040030 */  addiu     $a0, $zero, 0x30
 /* ED4D38 80240B18 3C038008 */  lui       $v1, %hi(D_8007C760)
 /* ED4D3C 80240B1C 8C63C760 */  lw        $v1, %lo(D_8007C760)($v1)
-/* ED4D40 80240B20 3C05800C */  lui       $a1, %hi(D_800B8D80)
-/* ED4D44 80240B24 24A58D80 */  addiu     $a1, $a1, %lo(D_800B8D80)
+/* ED4D40 80240B20 3C05800C */  lui       $a1, %hi(dead_gCameras)
+/* ED4D44 80240B24 24A58D80 */  addiu     $a1, $a1, %lo(dead_gCameras)
 /* ED4D48 80240B28 AFBF0064 */  sw        $ra, 0x64($sp)
 /* ED4D4C 80240B2C AFBE0060 */  sw        $fp, 0x60($sp)
 /* ED4D50 80240B30 AFB7005C */  sw        $s7, 0x5c($sp)

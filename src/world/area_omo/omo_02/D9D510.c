@@ -12,7 +12,7 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_802409E0_D9DEB0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240AB0_D9DF80);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240B48_D9E018);
+#include "world/common/UnkNpcDurationAnimationFunc.inc.c"
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80240BA8_D9E078);
 
@@ -54,6 +54,6 @@ INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_802423E0_D9F8B0);
 
 INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_8024283C_D9FD0C);
 
-INCLUDE_ASM(s32, "world/area_omo/omo_02/D9D510", func_80242B5C_DA002C);
+#include "world/common/SetNpcB5_3.inc.c"
 
 #include "world/common/GetEncounterEnemyIsOwner.inc.c"
