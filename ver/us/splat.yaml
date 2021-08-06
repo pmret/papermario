@@ -346,6 +346,7 @@ segments:
     - [0x77480, c, 77480]
     - [0x7B440, c, 7B440]
     - [0x7BB60, c, 7bb60_len_41b0]
+    - [0x7E9D0, c, 7E9D0]
     - [0x7FD10, c, 7fd10_len_b40]
     - [0x80850, c, 80850_len_3060]
     - [0x838B0, c, world/actions] # DUMMY ROM
