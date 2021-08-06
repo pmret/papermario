@@ -16,5 +16,5 @@ ApiStatus func_802180CC_5B157C(ScriptInstance* script, s32 isInitialCall) {
 
     set_float_variable(script, *args++, outX);
     set_float_variable(script, *args++, outZ);
-    return 2;
+    return ApiStatus_DONE2;
 }
