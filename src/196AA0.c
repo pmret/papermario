@@ -129,7 +129,7 @@ void func_80268938(void) {
 
     switch (ac) {
         case ACTION_COMMAND_JUMP:
-            func_802A9234_421C24();
+            action_command_jump_Update();
             return;
         case ACTION_COMMAND_SMASH:
             func_802A936C_42236C();

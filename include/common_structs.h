@@ -2233,17 +2233,22 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ HudElement* hudElements[7];
-    /* 0x20 */ char unk_20[0x2A];
+    /* 0x04 */ HudElement* hudElements[15];
+    /* 0x40 */ char unk_40[0x4];
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s16 unk_48;
     /* 0x4A */ s16 actionCommandID; // current action command id?
-    /* 0x4C */ s16 unk_4C;
+    /* 0x4C */ s16 state;
     /* 0x4E */ s16 unk_4E;
     /* 0x50 */ s16 unk_50;
     /* 0x52 */ s16 unk_52;
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 hudElementX;
     /* 0x58 */ s16 hudElementY;
-    /* 0x59 */ char unk_59[4];
+    /* 0x59 */ char unk_59[2];
+    /* 0x5C */ s8 unk_5C;
+    /* 0x5D */ s8 unk_5D;
     /* 0x5E */ s8 autoSucceed;
     /* 0x5F */ s8 unk_5F;
     /* 0x60 */ s8 unk_60;
@@ -2256,9 +2261,10 @@ typedef struct ActionCommandStatus {
     /* 0x6A */ s16 unk_6A;
     /* 0x6C */ s16 unk_6C;
     /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ char unk_70[4];
+    /* 0x70 */ s16 unk_70;
+    /* 0x72 */ s16 unk_72;
     /* 0x74 */ s16 unk_74;
     /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
-} ActionCommandStatus; // size unknown
+} ActionCommandStatus;
 #endif
