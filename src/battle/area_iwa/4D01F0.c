@@ -1,7 +1,19 @@
 #include "common.h"
+#include "battle/battle.h"
 
 #define NAMESPACE b_area_iwa
 
-INCLUDE_ASM(s32, "battle/area_iwa/4D01F0", func_80218000_4D01F0);
+ApiStatus N(SetSpinSmashable)(ScriptInstance* script, s32 isInitialCall) {
+    s32 canSpinSmash = get_variable(script, *script->ptrReadPos);
+    Actor* actor = get_actor(script->owner1.actorID);
+
+    if (canSpinSmash == FALSE) {
+        actor->staticActorData->spinSmashReq = 4;
+    } else {
+        actor->staticActorData->spinSmashReq = 0;
+    }
+
+    return ApiStatus_DONE2;
+}
 
 #include "common/StartRumbleWithParams.inc.c"

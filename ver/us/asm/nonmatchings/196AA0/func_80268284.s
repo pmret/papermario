@@ -3,8 +3,8 @@
 
 glabel func_80268284
 /* 196B64 80268284 27BDFF98 */  addiu     $sp, $sp, -0x68
-/* 196B68 80268288 3C0B802A */  lui       $t3, %hi(D_8029FBE0)
-/* 196B6C 8026828C 256BFBE0 */  addiu     $t3, $t3, %lo(D_8029FBE0)
+/* 196B68 80268288 3C0B802A */  lui       $t3, %hi(gActionCommandStatus)
+/* 196B6C 8026828C 256BFBE0 */  addiu     $t3, $t3, %lo(gActionCommandStatus)
 /* 196B70 80268290 AFBF0064 */  sw        $ra, 0x64($sp)
 /* 196B74 80268294 AFBE0060 */  sw        $fp, 0x60($sp)
 /* 196B78 80268298 AFB7005C */  sw        $s7, 0x5c($sp)

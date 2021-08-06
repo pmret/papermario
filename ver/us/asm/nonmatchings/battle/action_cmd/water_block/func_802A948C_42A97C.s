@@ -4,8 +4,8 @@
 glabel func_802A948C_42A97C
 /* 42A97C 802A948C 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 42A980 802A9490 AFB10014 */  sw        $s1, 0x14($sp)
-/* 42A984 802A9494 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 42A988 802A9498 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 42A984 802A9494 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 42A988 802A9498 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 42A98C 802A949C AFBF0018 */  sw        $ra, 0x18($sp)
 /* 42A990 802A94A0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 42A994 802A94A4 8623004C */  lh        $v1, 0x4c($s1)

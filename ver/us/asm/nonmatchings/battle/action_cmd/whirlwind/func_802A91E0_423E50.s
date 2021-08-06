@@ -6,8 +6,8 @@ glabel func_802A91E0_423E50
 /* 423E54 802A91E4 AFB20018 */  sw        $s2, 0x18($sp)
 /* 423E58 802A91E8 0080902D */  daddu     $s2, $a0, $zero
 /* 423E5C 802A91EC AFB10014 */  sw        $s1, 0x14($sp)
-/* 423E60 802A91F0 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 423E64 802A91F4 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 423E60 802A91F0 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 423E64 802A91F4 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 423E68 802A91F8 AFB3001C */  sw        $s3, 0x1c($sp)
 /* 423E6C 802A91FC 3C13800E */  lui       $s3, %hi(gBattleStatus)
 /* 423E70 802A9200 2673C070 */  addiu     $s3, $s3, %lo(gBattleStatus)

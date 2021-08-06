@@ -18,8 +18,8 @@ glabel func_80268938
 /* 197230 80268950 0C09A327 */  jal       func_80268C9C
 /* 197234 80268954 00000000 */   nop
 .L80268958:
-/* 197238 80268958 3C02802A */  lui       $v0, %hi(D_8029FBE0)
-/* 19723C 8026895C 2442FBE0 */  addiu     $v0, $v0, %lo(D_8029FBE0)
+/* 197238 80268958 3C02802A */  lui       $v0, %hi(gActionCommandStatus)
+/* 19723C 8026895C 2442FBE0 */  addiu     $v0, $v0, %lo(gActionCommandStatus)
 /* 197240 80268960 8443004A */  lh        $v1, 0x4a($v0)
 /* 197244 80268964 2C620018 */  sltiu     $v0, $v1, 0x18
 /* 197248 80268968 10400060 */  beqz      $v0, L80268AEC_1973CC

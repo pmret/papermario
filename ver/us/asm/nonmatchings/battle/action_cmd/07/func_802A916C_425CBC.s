@@ -9,8 +9,8 @@ glabel func_802A916C_425CBC
 /* 425CCC 802A917C AFB10014 */  sw        $s1, 0x14($sp)
 /* 425CD0 802A9180 AFB00010 */  sw        $s0, 0x10($sp)
 /* 425CD4 802A9184 8E50000C */  lw        $s0, 0xc($s2)
-/* 425CD8 802A9188 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 425CDC 802A918C 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 425CD8 802A9188 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 425CDC 802A918C 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 425CE0 802A9190 A220005E */  sb        $zero, 0x5e($s1)
 /* 425CE4 802A9194 8E050000 */  lw        $a1, ($s0)
 /* 425CE8 802A9198 0C0B1EAF */  jal       get_variable

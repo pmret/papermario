@@ -692,9 +692,9 @@ typedef struct BattleStatus {
     /* 0x0A8 */ s32 cloudNineEffect;
     /* 0x0AC */ char unk_AC;
     /* 0x0AD */ s8 unk_AD;
-    /* 0x0AE */ u8 hammerLossTurns;
-    /* 0x0AF */ u8 jumpLossTurns;
-    /* 0x0B0 */ u8 itemLossTurns;
+    /* 0x0AE */ s8 hammerLossTurns;
+    /* 0x0AF */ s8 jumpLossTurns;
+    /* 0x0B0 */ s8 itemLossTurns;
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
@@ -2231,4 +2231,34 @@ typedef struct RenderTaskEntry {
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTaskEntry; // size = 0x10
 
+typedef struct ActionCommandStatus {
+    /* 0x00 */ s32 unk_00;
+    /* 0x04 */ HudElement* hudElements[7];
+    /* 0x20 */ char unk_20[0x2A];
+    /* 0x4A */ s16 actionCommandID; // current action command id?
+    /* 0x4C */ s16 unk_4C;
+    /* 0x4E */ s16 unk_4E;
+    /* 0x50 */ s16 unk_50;
+    /* 0x52 */ s16 unk_52;
+    /* 0x54 */ s16 unk_54;
+    /* 0x56 */ s16 hudElementX;
+    /* 0x58 */ s16 hudElementY;
+    /* 0x59 */ char unk_59[4];
+    /* 0x5E */ s8 autoSucceed;
+    /* 0x5F */ s8 unk_5F;
+    /* 0x60 */ s8 unk_60;
+    /* 0x61 */ s8 unk_61;
+    /* 0x62 */ s8 unk_62;
+    /* 0x63 */ s8 unk_63;
+    /* 0x64 */ s16 unk_64;
+    /* 0x66 */ s16 unk_66;
+    /* 0x68 */ s16 unk_68;
+    /* 0x6A */ s16 unk_6A;
+    /* 0x6C */ s16 unk_6C;
+    /* 0x6E */ s16 hitsTakenIsMax;
+    /* 0x70 */ char unk_70[4];
+    /* 0x74 */ s16 unk_74;
+    /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
+    /* 0x80 */ s8 mashMeterIntervals;
+} ActionCommandStatus; // size unknown
 #endif

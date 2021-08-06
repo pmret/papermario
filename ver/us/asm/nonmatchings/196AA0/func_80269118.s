@@ -4,8 +4,8 @@
 glabel func_80269118
 /* 1979F8 80269118 3C058011 */  lui       $a1, %hi(gPlayerData)
 /* 1979FC 8026911C 24A5F290 */  addiu     $a1, $a1, %lo(gPlayerData)
-/* 197A00 80269120 3C04802A */  lui       $a0, %hi(D_8029FBE0)
-/* 197A04 80269124 2484FBE0 */  addiu     $a0, $a0, %lo(D_8029FBE0)
+/* 197A00 80269120 3C04802A */  lui       $a0, %hi(gActionCommandStatus)
+/* 197A04 80269124 2484FBE0 */  addiu     $a0, $a0, %lo(gActionCommandStatus)
 /* 197A08 80269128 8082005E */  lb        $v0, 0x5e($a0)
 /* 197A0C 8026912C 1440000A */  bnez      $v0, .L80269158
 /* 197A10 80269130 0080302D */   daddu    $a2, $a0, $zero

@@ -11,8 +11,8 @@ glabel jtbl_802A95D0_421FC0
 glabel func_802A9234_421C24
 /* 421C24 802A9234 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 421C28 802A9238 AFB10014 */  sw        $s1, 0x14($sp)
-/* 421C2C 802A923C 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 421C30 802A9240 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 421C2C 802A923C 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 421C30 802A9240 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 421C34 802A9244 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 421C38 802A9248 AFB20018 */  sw        $s2, 0x18($sp)
 /* 421C3C 802A924C AFB00010 */  sw        $s0, 0x10($sp)
