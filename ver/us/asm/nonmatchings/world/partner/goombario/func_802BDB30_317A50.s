@@ -10,8 +10,8 @@ glabel func_802BDB30_317A50
 /* 317A64 802BDB44 3C03802C */  lui       $v1, %hi(func_802BDF64_3248B4)
 /* 317A68 802BDB48 2463DF64 */  addiu     $v1, $v1, %lo(func_802BDF64_3248B4)
 /* 317A6C 802BDB4C 8C620000 */  lw        $v0, ($v1)
-/* 317A70 802BDB50 3C108011 */  lui       $s0, %hi(D_8010EBB0)
-/* 317A74 802BDB54 2610EBB0 */  addiu     $s0, $s0, %lo(D_8010EBB0)
+/* 317A70 802BDB50 3C108011 */  lui       $s0, %hi(gPartnerActionStatus)
+/* 317A74 802BDB54 2610EBB0 */  addiu     $s0, $s0, %lo(gPartnerActionStatus)
 /* 317A78 802BDB58 50400004 */  beql      $v0, $zero, .L802BDB6C
 /* 317A7C 802BDB5C A2000000 */   sb       $zero, ($s0)
 /* 317A80 802BDB60 0C038069 */  jal       enable_player_input

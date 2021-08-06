@@ -3,8 +3,8 @@
 
 glabel func_802BFA58_3207C8
 /* 3207C8 802BFA58 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 3207CC 802BFA5C 3C038011 */  lui       $v1, %hi(D_8010EBB0)
-/* 3207D0 802BFA60 2463EBB0 */  addiu     $v1, $v1, %lo(D_8010EBB0)
+/* 3207CC 802BFA5C 3C038011 */  lui       $v1, %hi(gPartnerActionStatus)
+/* 3207D0 802BFA60 2463EBB0 */  addiu     $v1, $v1, %lo(gPartnerActionStatus)
 /* 3207D4 802BFA64 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 3207D8 802BFA68 80620001 */  lb        $v0, 1($v1)
 /* 3207DC 802BFA6C 1040000F */  beqz      $v0, .L802BFAAC

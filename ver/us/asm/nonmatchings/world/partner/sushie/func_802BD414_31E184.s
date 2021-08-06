@@ -33,8 +33,8 @@ glabel func_802BD414_31E184
 /* 31E1C0 802BD450 27A50024 */   addiu    $a1, $sp, 0x24
 /* 31E1C4 802BD454 3C148011 */  lui       $s4, %hi(gPlayerStatus)
 /* 31E1C8 802BD458 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)
-/* 31E1CC 802BD45C 3C158011 */  lui       $s5, %hi(D_8010EBB0)
-/* 31E1D0 802BD460 26B5EBB0 */  addiu     $s5, $s5, %lo(D_8010EBB0)
+/* 31E1CC 802BD45C 3C158011 */  lui       $s5, %hi(gPartnerActionStatus)
+/* 31E1D0 802BD460 26B5EBB0 */  addiu     $s5, $s5, %lo(gPartnerActionStatus)
 /* 31E1D4 802BD464 3C118016 */  lui       $s1, %hi(gCollisionStatus)
 /* 31E1D8 802BD468 2631A550 */  addiu     $s1, $s1, %lo(gCollisionStatus)
 /* 31E1DC 802BD46C 3C02802C */  lui       $v0, %hi(D_802BFEE4)

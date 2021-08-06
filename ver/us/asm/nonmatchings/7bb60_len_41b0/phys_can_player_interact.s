@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel phys_can_player_interact
-/* 7E7A8 800E52F8 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 7E7AC 800E52FC 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
+/* 7E7A8 800E52F8 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 7E7AC 800E52FC 2442EBB0 */  addiu     $v0, $v0, %lo(gPartnerActionStatus)
 /* 7E7B0 800E5300 80440000 */  lb        $a0, ($v0)
 /* 7E7B4 800E5304 10800008 */  beqz      $a0, .L800E5328
 /* 7E7B8 800E5308 24030001 */   addiu    $v1, $zero, 1

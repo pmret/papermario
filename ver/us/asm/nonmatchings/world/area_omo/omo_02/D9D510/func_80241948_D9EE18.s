@@ -99,8 +99,8 @@ glabel func_80241948_D9EE18
 /* D9EF64 80241A94 00000000 */  nop
 /* D9EF68 80241A98 4501001F */  bc1t      .L80241B18
 /* D9EF6C 80241A9C 2402FFFF */   addiu    $v0, $zero, -1
-/* D9EF70 80241AA0 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
-/* D9EF74 80241AA4 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
+/* D9EF70 80241AA0 3C038011 */  lui       $v1, %hi(gPartnerActionStatus+0x3)
+/* D9EF74 80241AA4 8063EBB3 */  lb        $v1, %lo(gPartnerActionStatus+0x3)($v1)
 /* D9EF78 80241AA8 24020009 */  addiu     $v0, $zero, 9
 /* D9EF7C 80241AAC 10620019 */  beq       $v1, $v0, .L80241B14
 /* D9EF80 80241AB0 24020007 */   addiu    $v0, $zero, 7

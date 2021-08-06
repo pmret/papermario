@@ -436,8 +436,8 @@ glabel update_encounters_neutral
 /* 1B1E8 8003FDE8 30820040 */  andi      $v0, $a0, 0x40
 /* 1B1EC 8003FDEC 144002B6 */  bnez      $v0, .L800408C8
 /* 1B1F0 8003FDF0 24020009 */   addiu    $v0, $zero, 9
-/* 1B1F4 8003FDF4 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
-/* 1B1F8 8003FDF8 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
+/* 1B1F4 8003FDF4 3C038011 */  lui       $v1, %hi(gPartnerActionStatus+0x3)
+/* 1B1F8 8003FDF8 8063EBB3 */  lb        $v1, %lo(gPartnerActionStatus+0x3)($v1)
 /* 1B1FC 8003FDFC 106202B2 */  beq       $v1, $v0, .L800408C8
 /* 1B200 8003FE00 00000000 */   nop
 /* 1B204 8003FE04 8E220000 */  lw        $v0, ($s1)

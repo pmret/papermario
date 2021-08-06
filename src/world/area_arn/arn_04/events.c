@@ -671,7 +671,7 @@ s32 N(func_80242388_BE5B38)(ScriptInstance* script, NpcAISettings* aiSettings, E
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         ret = FALSE;
     }
-    if (D_8010EBB0.unk_03 == 9) {
+    if (gPartnerActionStatus.actionState.b[3]  == 9) {
         ret = FALSE;
     }
     return ret;

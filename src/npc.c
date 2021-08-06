@@ -1295,7 +1295,7 @@ void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 #ifdef NON_MATCHING
 // Rodata padding issue. Most likely belongs to a separate TU than the function above with the switch.
 void func_8003D660(Npc* npc, s32 arg1) {
-    Temp8010EBB0* temp = &D_8010EBB0;
+    Temp8010EBB0* temp = &gPartnerActionStatus;
 
     if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {

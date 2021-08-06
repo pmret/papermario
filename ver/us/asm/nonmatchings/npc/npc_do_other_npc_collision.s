@@ -110,8 +110,8 @@ glabel npc_do_other_npc_collision
 /* 145A8 800391A8 00531024 */  and       $v0, $v0, $s3
 /* 145AC 800391AC 10400005 */  beqz      $v0, .L800391C4
 /* 145B0 800391B0 0000182D */   daddu    $v1, $zero, $zero
-/* 145B4 800391B4 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 145B8 800391B8 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* 145B4 800391B4 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 145B8 800391B8 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* 145BC 800391BC 0800E479 */  j         .L800391E4
 /* 145C0 800391C0 2C430001 */   sltiu    $v1, $v0, 1
 .L800391C4:
@@ -119,8 +119,8 @@ glabel npc_do_other_npc_collision
 /* 145C8 800391C8 00531024 */  and       $v0, $v0, $s3
 /* 145CC 800391CC 50400005 */  beql      $v0, $zero, .L800391E4
 /* 145D0 800391D0 24030001 */   addiu    $v1, $zero, 1
-/* 145D4 800391D4 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 145D8 800391D8 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* 145D4 800391D4 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 145D8 800391D8 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* 145DC 800391DC 50400001 */  beql      $v0, $zero, .L800391E4
 /* 145E0 800391E0 24030001 */   addiu    $v1, $zero, 1
 .L800391E4:

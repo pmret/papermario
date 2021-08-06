@@ -2147,20 +2147,21 @@ typedef struct Temp8010F250 {
     /* 0x30 */ SoundID unk_30;
 } Temp8010F250; // size = 0x34
 
-typedef struct Temp8010EBB0 {
-    /* 0x000 */ s8 unk_00;
-    /* 0x001 */ s8 unk_01;
-    /* 0x002 */ s8 unk_02;
-    /* 0x003 */ s8 unk_03;
-    /* 0x004 */ char unk_04[0x4];
-    /* 0x008 */ s32 unk_08;
-    /* 0x009 */ s32 unk_0C;
-    /* 0x010 */ char unk_10[0x4];
-    /* 0x014 */ s8 unk_14;
+typedef struct PartnerActionStatus {
+    /* 0x000 */ union {
+        /*       */     s32 i;
+        /*       */     s8 b[4];
+    } actionState;
+    /* 0x004 */ s16 stickX;
+    /* 0x006 */ s16 stickY;
+    /* 0x008 */ s32 currentButtons;
+    /* 0x00C */ s32 pressedButtons;
+    /* 0x010 */ s32 heldButtons;
+    /* 0x014 */ s8 inputDisabled;
     /* 0x015 */ char unk_15[0x343];
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
-} Temp8010EBB0; // size = 0x360
+} PartnerActionStatus; // size = 0x360
 
 typedef struct Temp8025D160 {
     /* 0x00 */ s32 unk_00;

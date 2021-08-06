@@ -16,8 +16,8 @@ glabel partner_flying_update_motion
 /* 86AAC 800ED5FC AFB3003C */  sw        $s3, 0x3c($sp)
 /* 86AB0 800ED600 AFB10034 */  sw        $s1, 0x34($sp)
 /* 86AB4 800ED604 80420081 */  lb        $v0, 0x81($v0)
-/* 86AB8 800ED608 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 86ABC 800ED60C 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 86AB8 800ED608 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 86ABC 800ED60C 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 86AC0 800ED610 1040000B */  beqz      $v0, .L800ED640
 /* 86AC4 800ED614 0080802D */   daddu    $s0, $a0, $zero
 /* 86AC8 800ED618 8E420000 */  lw        $v0, ($s2)

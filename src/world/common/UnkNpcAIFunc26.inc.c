@@ -28,11 +28,11 @@ s32 N(UnkNpcAIFunc26)(ScriptInstance* script) {
         ret = FALSE;
     }
 
-    if (D_8010EBB0.unk_03 == 9) {
+    if (gPartnerActionStatus.actionState.b[3]  == 9) {
         ret = FALSE;
     }
 
-    if (D_8010EBB0.unk_03 == 7) {
+    if (gPartnerActionStatus.actionState.b[3]  == 7) {
         ret = FALSE;
     }
 

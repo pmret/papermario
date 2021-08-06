@@ -56,8 +56,8 @@ glabel func_8005DB00
 /* 38FC4 8005DBC4 0801774D */  j         .L8005DD34
 /* 38FC8 8005DBC8 AE420070 */   sw       $v0, 0x70($s2)
 .L8005DBCC:
-/* 38FCC 8005DBCC 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 38FD0 8005DBD0 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
+/* 38FCC 8005DBCC 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 38FD0 8005DBD0 2442EBB0 */  addiu     $v0, $v0, %lo(gPartnerActionStatus)
 /* 38FD4 8005DBD4 80430003 */  lb        $v1, 3($v0)
 /* 38FD8 8005DBD8 24020009 */  addiu     $v0, $zero, 9
 /* 38FDC 8005DBDC 10620056 */  beq       $v1, $v0, .L8005DD38

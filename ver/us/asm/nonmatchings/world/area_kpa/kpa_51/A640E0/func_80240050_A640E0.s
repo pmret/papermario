@@ -113,8 +113,8 @@ glabel func_80240050_A640E0
 /* A6424C 802401BC 00000000 */  nop
 /* A64250 802401C0 4501000F */  bc1t      .L80240200
 /* A64254 802401C4 2402FFFF */   addiu    $v0, $zero, -1
-/* A64258 802401C8 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
-/* A6425C 802401CC 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
+/* A64258 802401C8 3C038011 */  lui       $v1, %hi(gPartnerActionStatus+0x3)
+/* A6425C 802401CC 8063EBB3 */  lb        $v1, %lo(gPartnerActionStatus+0x3)($v1)
 /* A64260 802401D0 24020009 */  addiu     $v0, $zero, 9
 /* A64264 802401D4 10620009 */  beq       $v1, $v0, .L802401FC
 /* A64268 802401D8 24020007 */   addiu    $v0, $zero, 7

@@ -19,8 +19,8 @@ glabel func_80240078_DCCD48
 /* DCCD80 802400B0 3C158011 */  lui       $s5, %hi(gPlayerStatus)
 /* DCCD84 802400B4 26B5EFC8 */  addiu     $s5, $s5, %lo(gPlayerStatus)
 /* DCCD88 802400B8 0040982D */  daddu     $s3, $v0, $zero
-/* DCCD8C 802400BC 3C148011 */  lui       $s4, %hi(D_8010EBB0)
-/* DCCD90 802400C0 2694EBB0 */  addiu     $s4, $s4, %lo(D_8010EBB0)
+/* DCCD8C 802400BC 3C148011 */  lui       $s4, %hi(gPartnerActionStatus)
+/* DCCD90 802400C0 2694EBB0 */  addiu     $s4, $s4, %lo(gPartnerActionStatus)
 /* DCCD94 802400C4 0C090000 */  jal       func_80240000_DCCCD0
 /* DCCD98 802400C8 AE000084 */   sw       $zero, 0x84($s0)
 /* DCCD9C 802400CC 14400073 */  bnez      $v0, .L8024029C

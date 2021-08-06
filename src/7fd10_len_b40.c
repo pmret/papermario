@@ -3,7 +3,7 @@
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8010EBB0.unk_00 != 0 && D_8010EBB0.unk_03 == 9) {
+    if (gPartnerActionStatus.actionState.b[0] != 0 && gPartnerActionStatus.actionState.b[3]  == 9) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
         func_802DDEE4(0, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
@@ -15,25 +15,25 @@ void func_800E6860(void) {
 // playerStatus getting coppied to a0 - how? inlining?
 #ifdef NON_MATCHING
 s32 func_800E6904(void) {
-    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
-    PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 actionState = playerStatus->actionState;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    //PlayerStatus* playerStatus = &gPlayerStatus; // doesn't change codegen to use it, so commented out for now
+    s32 actionState = gPlayerStatus.actionState;
 
-    if (!(playerStatus->animFlags & 0x100000)) {
-        if (temp_8010EBB0->unk_00 == 0) {
-            if (!(playerStatus->flags & 0x1000)) {
+    if (!(gPlayerStatus.animFlags & 0x100000)) {
+        if (partnerActionStatus->actionState.b[0] == 0) {
+            if (!(gPlayerStatus.flags & 0x1000)) {
                 if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
                     return 1;
                 }
             }
         } else if (partner_player_can_pause()) {
-            if (temp_8010EBB0->unk_03 == 6) {
+            if (partnerActionStatus->actionState.b[3] == 6) {
                 return 1;
-            } else if (temp_8010EBB0->unk_03 == 9) {
+            } else if (partnerActionStatus->actionState.b[3] == 9) {
                 if (actionState == ACTION_STATE_RIDE) {
                     return 1;
                 }
-            } else if (temp_8010EBB0->unk_03 == 8) {
+            } else if (partnerActionStatus->actionState.b[3] == 8) {
                 if (actionState != ACTION_STATE_RIDE) {
                     sfx_play_sound(0x21D);
                 } else {

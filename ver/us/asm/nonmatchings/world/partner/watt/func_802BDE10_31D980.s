@@ -5,8 +5,8 @@ glabel func_802BDE10_31D980
 /* 31D980 802BDE10 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 31D984 802BDE14 AFB00010 */  sw        $s0, 0x10($sp)
 /* 31D988 802BDE18 0080802D */  daddu     $s0, $a0, $zero
-/* 31D98C 802BDE1C 3C048011 */  lui       $a0, %hi(D_8010EBB0)
-/* 31D990 802BDE20 2484EBB0 */  addiu     $a0, $a0, %lo(D_8010EBB0)
+/* 31D98C 802BDE1C 3C048011 */  lui       $a0, %hi(gPartnerActionStatus)
+/* 31D990 802BDE20 2484EBB0 */  addiu     $a0, $a0, %lo(gPartnerActionStatus)
 /* 31D994 802BDE24 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 31D998 802BDE28 80820001 */  lb        $v0, 1($a0)
 /* 31D99C 802BDE2C 10400012 */  beqz      $v0, .L802BDE78

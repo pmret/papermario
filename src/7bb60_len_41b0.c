@@ -11,7 +11,7 @@ void record_jump_apex(void) {
 s32 can_trigger_loading_zone(void) {
     PlayerData* playerData = &gPlayerData;
     s32 actionState = gPlayerStatusPtr->actionState;
-    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     if (actionState == ACTION_STATE_IDLE ||
         actionState == ACTION_STATE_WALK ||
@@ -24,17 +24,17 @@ s32 can_trigger_loading_zone(void) {
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
-            if (temp_8010EBB0->unk_00 != 0) {
+            if (partnerActionStatus->actionState.b[0] != 0) {
                 return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= 4;
                 return FALSE;
             }
         } else {
-            if (temp_8010EBB0->unk_03 == 6 || temp_8010EBB0->unk_03 == 7) {
-                return temp_8010EBB0->unk_00 != 0;
+            if (partnerActionStatus->actionState.b[3] == 6 || partnerActionStatus->actionState.b[3] == 7) {
+                return partnerActionStatus->actionState.b[0] != 0;
             }
-            if (temp_8010EBB0->unk_03 == 4) {
+            if (partnerActionStatus->actionState.b[3] == 4) {
                 gPlayerStatusPtr->animFlags |= 4;
                 return FALSE;
             }
@@ -42,8 +42,6 @@ s32 can_trigger_loading_zone(void) {
     }
     return FALSE;
 }
-
-void set_action_state(s32 actionState);
 
 void move_player(s32 duration, f32 heading, f32 speed) {
     gPlayerStatus.flags |= 0x4000;
@@ -94,7 +92,7 @@ void phys_init_integrator_for_current_state() {
             playerStatus->gravityIntegrator[0] = *temp_a0++;
             playerStatus->gravityIntegrator[1] = *temp_a0++;
             playerStatus->gravityIntegrator[2] = *temp_a0++;
-            playerStatus->gravityIntegrator[3] = *temp_a0;
+            playerStatus->gravityIntegrator[3] = *temp_a0++;
             return;
         }
 
@@ -110,32 +108,18 @@ void phys_init_integrator_for_current_state() {
 INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state);
 #endif // NON_MATCHING
 
-#ifdef NON_MATCHING
-// void gravity_use_fall_parms(void) {
-//     f32* floats = D_800F7B60;
-// do { } while (0);
-//     if (gPlayerStatus.flags & 0x40000) {
-//         gPlayerStatus.gravityIntegrator[0] = *floats++ / 12.0f;
-//         gPlayerStatus.gravityIntegrator[1] = *floats++ / 12.0f;
-//         gPlayerStatus.gravityIntegrator[2] = *floats++ / 12.0f;
-//         gPlayerStatus.gravityIntegrator[3] = *floats++ / 12.0f;
-//     } else {
-//         gPlayerStatus.gravityIntegrator[0] = *floats++;
-//         gPlayerStatus.gravityIntegrator[1] = *floats++;
-//         gPlayerStatus.gravityIntegrator[2] = *floats++;
-//         gPlayerStatus.gravityIntegrator[3] = *floats++;
-//     }
-// }
+// This function is wack. This weird stuff is needed to match
 void gravity_use_fall_parms(void) {
-    PlayerStatus* playerStatus;
     f32* floats = D_800F7B60;
+    PlayerStatus* playerStatus;
     do {} while (0);
     playerStatus = &gPlayerStatus;
+
     if (playerStatus->flags & 0x40000) {
-        playerStatus->gravityIntegrator[0] = (*(floats++)) / 12.0f;
-        playerStatus->gravityIntegrator[1] = (*(floats++)) / 12.0f;
-        playerStatus->gravityIntegrator[2] = (*(floats++)) / 12.0f;
-        playerStatus->gravityIntegrator[3] = (*(floats++)) / 12.0f;
+        playerStatus->gravityIntegrator[0] = *(floats++) / 12.0f;
+        playerStatus->gravityIntegrator[1] = *(floats++) / 12.0f;
+        playerStatus->gravityIntegrator[2] = *(floats++) / 12.0f;
+        playerStatus->gravityIntegrator[3] = *(floats++) / 12.0f;
     } else {
         playerStatus->gravityIntegrator[0] = *(floats++);
         playerStatus->gravityIntegrator[1] = *(floats++);
@@ -143,9 +127,6 @@ void gravity_use_fall_parms(void) {
         playerStatus->gravityIntegrator[3] = *(floats++);
     }
 }
-#else
-INCLUDE_ASM(s32, "7bb60_len_41b0", gravity_use_fall_parms);
-#endif
 
 void phys_update_falling(void) {
     if (gPlayerStatus.actionState != ACTION_STATE_LAND_ON_SWITCH && gPlayerStatus.actionState != ACTION_STATE_BOUNCE) {
@@ -157,7 +138,54 @@ void phys_update_falling(void) {
     }
 }
 
+// Matches but we need to decomp collision_main_lateral since there's a rodata padding issue
+#ifdef NON_MATCHING
+void func_800E315C(s32 colliderID) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+
+    if (colliderID >= 0) {
+        u8 colliderType = get_collider_type_by_id(colliderID);
+
+        switch (colliderType) {
+            case 1:
+            case 4:
+            case 5:
+                set_action_state(ACTION_STATE_LAND);
+                break;
+            case 3:
+                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                    if (playerStatus->unk_10 == 0) {
+                        if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
+                            playerStatus->unk_BF = 1;
+                            set_action_state(ACTION_STATE_HIT_LAVA);
+                        }
+                    } else {
+                        set_action_state(ACTION_STATE_UNKNOWN_16);
+                    }
+                }
+                break;
+            case 2:
+                if ((partnerActionStatus->actionState.i & 0xFF0000FF) != 0x01000009) {
+                    if (playerStatus->unk_10 == 0) {
+                        if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
+                            playerStatus->unk_BF = 2;
+                            set_action_state(ACTION_STATE_HIT_LAVA);
+                        }
+                        break;
+                    }
+                    set_action_state(ACTION_STATE_UNKNOWN_16);
+                }
+                break;
+            default:
+                phys_player_land();
+                break;
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E315C);
+#endif
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_player_land);
 
@@ -439,7 +467,7 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
-            if (D_8010EBB0.unk_00 != 0) {
+            if (gPartnerActionStatus.actionState.b[0] != 0) {
                 playerStatus->animFlags |= 0x4;
                 playerStatus->flags |= 0x800;
                 return;
@@ -526,7 +554,7 @@ s32 check_input_hammer(void) {
 
     if (gPlayerStatus.pressedButtons & BUTTON_B) {
         if (!(gPlayerStatus.flags & 4)) {
-            if (D_8010EBB0.unk_00 != 1 || gPlayerData.currentPartner != PARTNER_WATT) {
+            if (gPartnerActionStatus.actionState.b[0] != 1 || gPlayerData.currentPartner != PARTNER_WATT) {
                 if (gPlayerData.hammerLevel != -1) {
                     set_action_state(ACTION_STATE_HAMMER);
                     return TRUE;

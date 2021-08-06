@@ -31,8 +31,8 @@ glabel func_802BDDF0_324740
 /* 3247A8 802BDE58 00031842 */  srl       $v1, $v1, 1
 /* 3247AC 802BDE5C A0430005 */  sb        $v1, 5($v0)
 /* 3247B0 802BDE60 8E420000 */  lw        $v0, ($s2)
-/* 3247B4 802BDE64 3C138011 */  lui       $s3, %hi(D_8010EBB0)
-/* 3247B8 802BDE68 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
+/* 3247B4 802BDE64 3C138011 */  lui       $s3, %hi(gPartnerActionStatus)
+/* 3247B8 802BDE68 2673EBB0 */  addiu     $s3, $s3, %lo(gPartnerActionStatus)
 /* 3247BC 802BDE6C 10400003 */  beqz      $v0, .L802BDE7C
 /* 3247C0 802BDE70 0200A02D */   daddu    $s4, $s0, $zero
 /* 3247C4 802BDE74 0C038069 */  jal       enable_player_input

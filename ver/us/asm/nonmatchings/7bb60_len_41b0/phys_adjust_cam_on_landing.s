@@ -12,8 +12,8 @@ glabel phys_adjust_cam_on_landing
 /* 7E9E0 800E5530 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7E9E4 800E5534 AFB00010 */  sw        $s0, 0x10($sp)
 /* 7E9E8 800E5538 AFB10014 */  sw        $s1, 0x14($sp)
-/* 7E9EC 800E553C 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 7E9F0 800E5540 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 7E9EC 800E553C 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 7E9F0 800E5540 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 7E9F4 800E5544 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
 /* 7E9F8 800E5548 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 7E9FC 800E554C 3C058011 */  lui       $a1, %hi(gPlayerStatus)
