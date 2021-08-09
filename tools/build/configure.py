@@ -606,11 +606,14 @@ if __name__ == "__main__":
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
-        print("error: system C preprocessor is not GNU!")
-        print("This is a known issue on macOS - only clang's cpp is installed by default.")
-        print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-        print("    ./configure --cpp cpp-11")
-        exit(1)
+        if "Free Software Foundation" in exec_shell(["cpp-11", "--version"]):
+            args.cpp = "cpp-11"
+        else:
+            print("error: system C preprocessor is not GNU!")
+            print("This is a known issue on macOS - only clang's cpp is installed by default.")
+            print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
+            print("    ./configure --cpp cpp-11")
+            exit(1)
 
     # default version behaviour is to only do those that exist
     if len(args.version) > 0:
