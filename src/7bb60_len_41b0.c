@@ -291,7 +291,18 @@ void collision_check_player_overlaps(void) {
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_should_player_be_sliding);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_is_on_sloped_ground);
+s32 phys_is_on_sloped_ground(void) {
+    Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
+    f32 rotZ = playerShadow->rotation.z + 180.0;
+    f32 rotX = playerShadow->rotation.x + 180.0;
+    s32 ret = TRUE;
+
+    if (fabsf(rotZ) < 20.0f && fabsf(rotX) < 20.0f) {
+        ret = FALSE;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_main_collision_below);
 
@@ -381,7 +392,26 @@ void phys_update_interact_collider(void) {
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_check_interactable_collision);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_can_player_interact);
+s32 phys_can_player_interact(void) {
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    s32 ret = TRUE;
+
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
+        if (gPartnerActionStatus.actionState.b[3] == 3) {
+            if (gPartnerActionStatus.actionState.b[0] < 3) {
+                ret = FALSE;
+            }
+        } else {
+            ret = FALSE;
+        }
+    } else if (!(gPlayerStatus.actionState == ACTION_STATE_IDLE ||
+                 gPlayerStatus.actionState == ACTION_STATE_WALK ||
+                 gPlayerStatus.actionState == ACTION_STATE_RUN)) {
+        ret = FALSE;
+    }
+    return ret;
+}
 
 INCLUDE_ASM(f32, "7bb60_len_41b0", func_800E5348, void);
 

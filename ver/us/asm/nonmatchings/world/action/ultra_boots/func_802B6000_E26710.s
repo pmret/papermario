@@ -126,26 +126,26 @@ glabel func_802B6000_E26710
 /* E268C8 802B61B8 00000000 */  nop
 /* E268CC 802B61BC 45000009 */  bc1f      .L802B61E4
 /* E268D0 802B61C0 00000000 */   nop
-/* E268D4 802B61C4 3C028011 */  lui       $v0, %hi(D_8010C944)
-/* E268D8 802B61C8 8C42C944 */  lw        $v0, %lo(D_8010C944)($v0)
+/* E268D4 802B61C4 3C028011 */  lui       $v0, %hi(gSpinHistoryBufferPos)
+/* E268D8 802B61C8 8C42C944 */  lw        $v0, %lo(gSpinHistoryBufferPos)($v0)
 /* E268DC 802B61CC C600002C */  lwc1      $f0, 0x2c($s0)
 /* E268E0 802B61D0 00021080 */  sll       $v0, $v0, 2
 /* E268E4 802B61D4 4600020D */  trunc.w.s $f8, $f0
-/* E268E8 802B61D8 3C018011 */  lui       $at, %hi(D_8010EF10)
+/* E268E8 802B61D8 3C018011 */  lui       $at, %hi(gSpinHistoryPosY)
 /* E268EC 802B61DC 00220821 */  addu      $at, $at, $v0
-/* E268F0 802B61E0 E428EF10 */  swc1      $f8, %lo(D_8010EF10)($at)
+/* E268F0 802B61E0 E428EF10 */  swc1      $f8, %lo(gSpinHistoryPosY)($at)
 .L802B61E4:
-/* E268F4 802B61E4 3C058011 */  lui       $a1, %hi(D_8010C944)
-/* E268F8 802B61E8 24A5C944 */  addiu     $a1, $a1, %lo(D_8010C944)
+/* E268F4 802B61E4 3C058011 */  lui       $a1, %hi(gSpinHistoryBufferPos)
+/* E268F8 802B61E8 24A5C944 */  addiu     $a1, $a1, %lo(gSpinHistoryBufferPos)
 /* E268FC 802B61EC 8CA20000 */  lw        $v0, ($a1)
 /* E26900 802B61F0 C60000A8 */  lwc1      $f0, 0xa8($s0)
 /* E26904 802B61F4 00022040 */  sll       $a0, $v0, 1
 /* E26908 802B61F8 24420001 */  addiu     $v0, $v0, 1
 /* E2690C 802B61FC 4600020D */  trunc.w.s $f8, $f0
 /* E26910 802B6200 44034000 */  mfc1      $v1, $f8
-/* E26914 802B6204 3C018011 */  lui       $at, %hi(D_8010F6B8)
+/* E26914 802B6204 3C018011 */  lui       $at, %hi(gSpinHistoryPosAngle)
 /* E26918 802B6208 00240821 */  addu      $at, $at, $a0
-/* E2691C 802B620C A423F6B8 */  sh        $v1, %lo(D_8010F6B8)($at)
+/* E2691C 802B620C A423F6B8 */  sh        $v1, %lo(gSpinHistoryPosAngle)($at)
 /* E26920 802B6210 ACA20000 */  sw        $v0, ($a1)
 /* E26924 802B6214 28420006 */  slti      $v0, $v0, 6
 /* E26928 802B6218 50400001 */  beql      $v0, $zero, .L802B6220

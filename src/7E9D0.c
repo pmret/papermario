@@ -1,8 +1,15 @@
 #include "common.h"
 #include "world/partners.h"
 
+extern s32 D_8010C924;
+extern s32 D_8010C964;
 extern s32 D_8010C96C; // npc list index
+extern s32 gSpinHistoryBufferPos; // SpinHistoryBufferPos
 extern s16 D_8010C9B0;
+extern s32 gSpinHistoryPosY[5]; // SpinHistoryPosY
+extern s32 gSpinHistoryPosX[5]; // SpinHistoryPosX
+extern s32 gSpinHistoryPosZ[5]; // SpinHistoryPosZ
+extern s16 gSpinHistoryPosAngle[5]; // SpinHistoryAngle
 
 void func_800E5520(void) {
     D_8010C9B0 = 0;
@@ -10,11 +17,49 @@ void func_800E5520(void) {
 
 INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing);
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_clear_spin_history);
+void phys_clear_spin_history(void) {
+    s32 i;
 
-INCLUDE_ASM(f32, "7bb60_len_41b0", phys_get_spin_history, s32 lag, s32* x, s32* y, s32* z);
+    gSpinHistoryBufferPos = 0;
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_reset_spin_history);
+    for (i = 0; i < ARRAY_COUNT(gSpinHistoryPosY); i++) {
+        gSpinHistoryPosAngle[i] = 180;
+        gSpinHistoryPosY[i] = 0x80000000;
+    }
+}
+
+f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z) {
+    s32 idx = gSpinHistoryBufferPos;
+
+    // Can't get this if/else to match otherwise...
+    if (idx - lag >= 0) {
+        idx -= lag;
+    } else {
+        idx = gSpinHistoryBufferPos - lag + 5;
+    }
+
+    *x = gSpinHistoryPosX[idx];
+    *y = gSpinHistoryPosY[idx];
+    *z = gSpinHistoryPosZ[idx];
+    return gSpinHistoryPosAngle[idx];
+}
+
+void phys_reset_spin_history(void) {
+    s32 i;
+
+    mem_clear(&D_8010F250, sizeof(Temp8010F250));
+    gSpinHistoryBufferPos = 0;
+
+    for (i = 0; i < ARRAY_COUNT(gSpinHistoryPosAngle); i++) {
+        gSpinHistoryPosAngle[i] = 0;
+        gSpinHistoryPosX[i] = 0;
+        gSpinHistoryPosY[i] = 0;
+        gSpinHistoryPosZ[i] = 0;
+    }
+
+    D_8010C964 = 0;
+    D_8010C924 = 0;
+}
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_action_state);
 
