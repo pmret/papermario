@@ -256,9 +256,13 @@ segments:
     - [0x4F660, .data, rumble]
     - [0x4F670, .data, 43F0]
     - [0x4F9D0, .data, fio]
-    - [0x4F9E0, data, 6e40_beginning_data]
-    - [0x51540, ia8, ui/no_controller, 128, 32]
-    - [0x52540, .data, curtains]
+    - start: 0x4F9E0
+      type: .data
+      name: curtains
+      subsegments:
+      - [0x4F9E0, .data, curtains]
+      - [0x51540, ia8, ui/no_controller, 128, 32]
+      - [0x52540]
     - [0x52610, .data, crash]
     - [0x527F0, .data, os/nusys/nuGfxTaskMgr]
     - [0x52800, .data, os/nusys/nuSiMgr]
