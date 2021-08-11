@@ -79,7 +79,7 @@ glabel L80268D74_197654
 /* 19765C 80268D7C 0809A390 */  j         .L80268E40
 /* 197660 80268D80 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D84_197664
-/* 197664 80268D84 0C0AA5C2 */  jal       func_802A9708_4289E8
+/* 197664 80268D84 0C0AA5C2 */  jal       action_command_body_slam_FreeHudElements
 /* 197668 80268D88 00000000 */   nop
 /* 19766C 80268D8C 0809A390 */  j         .L80268E40
 /* 197670 80268D90 3C05FFFF */   lui      $a1, 0xffff

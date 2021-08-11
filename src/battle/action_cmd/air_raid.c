@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A9000_429320);
 
-INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A9178_429498);
+#include "common/MashActionCommandInit.inc.c"
 
 INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A9294_4295B4);
 

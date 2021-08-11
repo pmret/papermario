@@ -325,12 +325,12 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     gActionCommandStatus.mashMeterIntervals = get_variable(script, *args++);
-    gActionCommandStatus.mashMeterCutoffs[0] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[1] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[2] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[3] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[4] = get_variable(script, *args++);
-    gActionCommandStatus.unk_74 = gActionCommandStatus.mashMeterCutoffs[0] / 2;
+    gActionCommandStatus.mashMeterCutoffs[5] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[0] = gActionCommandStatus.mashMeterCutoffs[1] / 2;
     return ApiStatus_DONE2;
 }
 

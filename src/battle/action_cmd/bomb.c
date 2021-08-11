@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/action_cmd/bomb", func_802A9000_427A70);
 
-INCLUDE_ASM(s32, "battle/action_cmd/bomb", func_802A9170_427BE0);
+#include "common/MashActionCommandInit.inc.c"
 
 INCLUDE_ASM(s32, "battle/action_cmd/bomb", func_802A928C_427CFC);
 

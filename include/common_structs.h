@@ -2246,7 +2246,7 @@ typedef struct ActionCommandStatus {
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 hudElementX;
     /* 0x58 */ s16 hudElementY;
-    /* 0x59 */ char unk_59[2];
+    /* 0x5A */ s16 unk_5A;
     /* 0x5C */ s8 unk_5C;
     /* 0x5D */ s8 unk_5D;
     /* 0x5E */ s8 autoSucceed;
@@ -2263,8 +2263,7 @@ typedef struct ActionCommandStatus {
     /* 0x6E */ s16 hitsTakenIsMax;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ s16 unk_72;
-    /* 0x74 */ s16 unk_74;
-    /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
+    /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
 } ActionCommandStatus;
 #endif

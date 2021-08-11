@@ -4,7 +4,7 @@
 
 INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A9000_426170);
 
-INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A9170_4262E0);
+#include "common/MashActionCommandInit.inc.c"
 
 INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A928C_4263FC);
 

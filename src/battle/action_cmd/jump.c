@@ -176,7 +176,7 @@ void N(Update)(void) {
                 btl_set_popup_duration(0);
             }
             actionCommandStatus->unk_54 = 5;
-            actionCommandStatus->state = 0xC;
+            actionCommandStatus->state = 12;
             return;
         }
         actionCommandStatus->unk_54 -= 1;
