@@ -9,9 +9,9 @@ extern s32 D_802944A0;
 ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     HudElement* hudElement;
     s32 i;
-
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_802944A0;
     
@@ -78,6 +78,7 @@ INCLUDE_ASM(s32, "battle/action_cmd/tidal_wave", func_802A9228_42C918);
 
 void N(DrawHudElements)(void) {
     s32 i;
+
     for (i = 1; i < 15; i++) {
         draw_hud_element_clipped(gActionCommandStatus.hudElements[i]);
     }

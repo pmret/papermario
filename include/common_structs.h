@@ -756,7 +756,7 @@ typedef struct BattleStatus {
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
-    /* 0x434 */ s32 unk_434;
+    /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];

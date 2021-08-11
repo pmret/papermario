@@ -125,7 +125,7 @@ void N(Update)(void) {
             btl_set_popup_duration(0x63);
         }
 
-        temp_s0_3 = *(s32*)((actionCommandStatus->unk_50 * 4) + battleStatus->unk_434);
+        temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
         if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
             set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B54);
         }
@@ -138,7 +138,7 @@ void N(Update)(void) {
             return;
         }
         
-        actionCommandStatus->unk_54 = ((s32*)((actionCommandStatus->unk_50 * 4) + battleStatus->unk_434))[0];
+        actionCommandStatus->unk_54 = battleStatus->unk_434[actionCommandStatus->unk_50];
         battleStatus->actionSuccess = -1;
         actionCommandStatus->state = 11;
     case 11:
