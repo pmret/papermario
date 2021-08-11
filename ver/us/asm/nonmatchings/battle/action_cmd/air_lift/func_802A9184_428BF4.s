@@ -14,8 +14,8 @@ glabel func_802A9184_428BF4
 /* 428C18 802A91A8 8E050000 */  lw        $a1, ($s0)
 /* 428C1C 802A91AC 0C0B1EAF */  jal       get_variable
 /* 428C20 802A91B0 26100004 */   addiu    $s0, $s0, 4
-/* 428C24 802A91B4 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 428C28 802A91B8 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 428C24 802A91B4 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 428C28 802A91B8 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 428C2C 802A91BC A622004E */  sh        $v0, 0x4e($s1)
 /* 428C30 802A91C0 8E050000 */  lw        $a1, ($s0)
 /* 428C34 802A91C4 26100004 */  addiu     $s0, $s0, 4

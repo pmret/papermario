@@ -14,8 +14,8 @@ glabel func_802A9000_4219F0
 /* 421A14 802A9024 244241C0 */  addiu     $v0, $v0, %lo(D_802941C0)
 /* 421A18 802A9028 AC620434 */  sw        $v0, 0x434($v1)
 /* 421A1C 802A902C 80620083 */  lb        $v0, 0x83($v1)
-/* 421A20 802A9030 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 421A24 802A9034 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 421A20 802A9030 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 421A24 802A9034 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 421A28 802A9038 10400032 */  beqz      $v0, .L802A9104
 /* 421A2C 802A903C A0600086 */   sb       $zero, 0x86($v1)
 /* 421A30 802A9040 0C09A216 */  jal       func_80268858

@@ -4,8 +4,8 @@
 glabel func_802A94D8_426028
 /* 426028 802A94D8 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 42602C 802A94DC AFB1001C */  sw        $s1, 0x1c($sp)
-/* 426030 802A94E0 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 426034 802A94E4 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 426030 802A94E0 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 426034 802A94E4 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 426038 802A94E8 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 42603C 802A94EC AFB00018 */  sw        $s0, 0x18($sp)
 /* 426040 802A94F0 0C0511EA */  jal       draw_hud_element_clipped

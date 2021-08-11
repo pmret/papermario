@@ -3,8 +3,8 @@
 
 glabel func_802A94A4_425A34
 /* 425A34 802A94A4 27BDFFD8 */  addiu     $sp, $sp, -0x28
-/* 425A38 802A94A8 3C03802A */  lui       $v1, %hi(D_8029FBE0)
-/* 425A3C 802A94AC 2463FBE0 */  addiu     $v1, $v1, %lo(D_8029FBE0)
+/* 425A38 802A94A8 3C03802A */  lui       $v1, %hi(gActionCommandStatus)
+/* 425A3C 802A94AC 2463FBE0 */  addiu     $v1, $v1, %lo(gActionCommandStatus)
 /* 425A40 802A94B0 AFBF0020 */  sw        $ra, 0x20($sp)
 /* 425A44 802A94B4 AFB1001C */  sw        $s1, 0x1c($sp)
 /* 425A48 802A94B8 AFB00018 */  sw        $s0, 0x18($sp)

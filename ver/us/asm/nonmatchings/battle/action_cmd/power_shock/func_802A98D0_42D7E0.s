@@ -6,8 +6,8 @@ glabel func_802A98D0_42D7E0
 /* 42D7E4 802A98D4 AFB40028 */  sw        $s4, 0x28($sp)
 /* 42D7E8 802A98D8 3C1451EB */  lui       $s4, 0x51eb
 /* 42D7EC 802A98DC AFB30024 */  sw        $s3, 0x24($sp)
-/* 42D7F0 802A98E0 3C13802A */  lui       $s3, %hi(D_8029FBE0)
-/* 42D7F4 802A98E4 2673FBE0 */  addiu     $s3, $s3, %lo(D_8029FBE0)
+/* 42D7F0 802A98E0 3C13802A */  lui       $s3, %hi(gActionCommandStatus)
+/* 42D7F4 802A98E4 2673FBE0 */  addiu     $s3, $s3, %lo(gActionCommandStatus)
 /* 42D7F8 802A98E8 AFBF002C */  sw        $ra, 0x2c($sp)
 /* 42D7FC 802A98EC AFB20020 */  sw        $s2, 0x20($sp)
 /* 42D800 802A98F0 AFB1001C */  sw        $s1, 0x1c($sp)

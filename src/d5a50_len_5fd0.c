@@ -1,5 +1,7 @@
 #include "common.h"
 
+void free_hud_element_transform(s32 arg0);
+
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
 s32 D_8014EFC8[] = { 0x00000000, };
@@ -68,13 +70,39 @@ void draw_hud_element_clipped(s32 arg0) {
     draw_hud_element(arg0, 0);
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element_2);
+void draw_hud_element_2(s32 arg0) {
+    draw_hud_element(arg0, 1);
+}
 
 void draw_icon_2(s32 iconID) {
     draw_hud_element(iconID, 2);
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_script);
+void set_hud_element_script(s32 arg0, s32 *arg1) {
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+
+    if (arg1 == NULL) {
+        arg1 = D_8014EFC8;
+    }
+
+    hudElement->updateTimer = 1;
+    hudElement->widthScale = 1024;
+    hudElement->heightScale = 1024;
+    hudElement->readPos = arg1;
+    hudElement->startReadPos = arg1;
+    hudElement->ptrPropertyList = arg1;
+    hudElement->screenPosOffset[0] = 0;
+    hudElement->screenPosOffset[1] = 0;
+    hudElement->worldPosOffset[0] = 0;
+    hudElement->worldPosOffset[1] = 0;
+    hudElement->flags &= ~4;
+    hudElement->uniformScale = 1.0f;
+    hudElement->flags &= ~0x930;
+    load_hud_element(hudElement, arg1);
+    
+    while (hud_element_update(hudElement) != 0) {}
+}
+
 
 s32* get_hud_element_script(s32 arg0) {
     return gHudElementList[arg0 & ~0x800]->startReadPos;
@@ -122,7 +150,17 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", ALT_clear_hud_element_cache);
 
 INCLUDE_ASM(void, "d5a50_len_5fd0", set_hud_element_scale, s32 index, f32 scale);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_size);
+void set_hud_element_size(s32 arg0, s8 arg1) {
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+
+    hudElement->widthScale = 0x400;
+    hudElement->heightScale = 0x400;
+    hudElement->tileSizePreset = arg1;
+    hudElement->drawSizePreset = arg1;
+    hudElement->uniformScale = 1.0f;
+    hudElement->flags &= ~0x100;
+    hudElement->flags &= ~0x810;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E4C);
 
@@ -158,7 +196,18 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_B);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_C);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", free_hud_element_transform);
+void free_hud_element_transform(s32 arg0) {  
+    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+    s32* hudTransform = hudElement->hudTransform;
+    
+    if (!(hudElement->flags & 0x20000)) {
+        func_8013A854(*hudTransform);
+    }
+
+    heap_free(hudElement->hudTransform);
+    hudElement->hudTransform = NULL;
+    hudElement->flags &= ~0x40030000;
+}
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_pos);
 

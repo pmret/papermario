@@ -4,8 +4,8 @@
 glabel func_802A92DC_4236CC
 /* 4236CC 802A92DC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 4236D0 802A92E0 AFB10014 */  sw        $s1, 0x14($sp)
-/* 4236D4 802A92E4 3C11802A */  lui       $s1, %hi(D_8029FBE0)
-/* 4236D8 802A92E8 2631FBE0 */  addiu     $s1, $s1, %lo(D_8029FBE0)
+/* 4236D4 802A92E4 3C11802A */  lui       $s1, %hi(gActionCommandStatus)
+/* 4236D8 802A92E8 2631FBE0 */  addiu     $s1, $s1, %lo(gActionCommandStatus)
 /* 4236DC 802A92EC AFBF0018 */  sw        $ra, 0x18($sp)
 /* 4236E0 802A92F0 AFB00010 */  sw        $s0, 0x10($sp)
 /* 4236E4 802A92F4 8623004C */  lh        $v1, 0x4c($s1)
