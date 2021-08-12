@@ -20,12 +20,12 @@ ApiStatus func_802A9000_425590(void) {
 
     func_80268858();
     actionCommandStatus->actionCommandID = 6;
-    actionCommandStatus->hudElementX = -0x30;
+    actionCommandStatus->hudElementX = -48;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->unk_44 = 0;
     actionCommandStatus->unk_48 = 0;
-    actionCommandStatus->hudElementY = 0x50;
+    actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
@@ -35,7 +35,7 @@ ApiStatus func_802A9000_425590(void) {
 
     hudElement = create_hud_element(&D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
     return ApiStatus_DONE2;
@@ -68,12 +68,9 @@ ApiStatus func_802A9110_4256A0(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-//INCLUDE_ASM(s32, "battle/action_cmd/stop_leech", func_802A91F8_425788);
 extern s32 D_80108B80;
 
 void func_802A91F8_425788(void) {
-// changed BattleStatus unk_434
-    
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     HudElement* hudElement;
@@ -81,7 +78,7 @@ void func_802A91F8_425788(void) {
 
     switch (actionCommandStatus->state) {
     case 0:
-        btl_set_popup_duration(0x63);
+        btl_set_popup_duration(99);
         hudElement = actionCommandStatus->hudElements[0];
         if (actionCommandStatus->unk_61 != 0) {
             clear_hud_element_flags(hudElement, 2);
@@ -95,34 +92,34 @@ void func_802A91F8_425788(void) {
         actionCommandStatus->state = 1;
         return;
     case 1:
-        btl_set_popup_duration(0x63);
-        hudElementX = actionCommandStatus->hudElementX + 0x14;
+        btl_set_popup_duration(99);
+        hudElementX = actionCommandStatus->hudElementX + 20;
         actionCommandStatus->hudElementX = hudElementX;
-        if (hudElementX >= 0x33) {
-            actionCommandStatus->hudElementX = 0x32U;
+        if (hudElementX > 50) {
+            actionCommandStatus->hudElementX = 50;
         }
-        set_hud_element_render_pos(actionCommandStatus->hudElements[0], (s16) actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-        set_hud_element_render_pos(actionCommandStatus->hudElements[1], (s16) actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+        set_hud_element_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+        set_hud_element_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         return;
     case 10:
-        btl_set_popup_duration(0x63);
+        btl_set_popup_duration(99);
         if (actionCommandStatus->unk_4E != 0) {
             actionCommandStatus->unk_4E -= 1;
             return;
         }
         set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B80);
-        actionCommandStatus->unk_44 = 0U;
-        actionCommandStatus->state = 0xB;
-        actionCommandStatus->unk_54 = (u16) actionCommandStatus->unk_52;
+        actionCommandStatus->unk_44 = 0;
+        actionCommandStatus->state = 11;
+        actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
     case 11:
-        btl_set_popup_duration(0x63);
+        btl_set_popup_duration(99);
         if (actionCommandStatus->unk_6A == 0) {
             if ((battleStatus->currentButtonsPressed & 0x8000) != 0) {
-                actionCommandStatus->unk_44 += (s32)battleStatus->unk_434[actionCommandStatus->unk_50];
+                actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50];
             }
         } else {
-            actionCommandStatus->unk_44 += (s32)battleStatus->unk_434[actionCommandStatus->unk_50] / 6;
-            actionCommandStatus->unk_44 += rand_int(((s32)battleStatus->unk_434[actionCommandStatus->unk_50]) / 6);
+            actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50] / 6;
+            actionCommandStatus->unk_44 += rand_int((battleStatus->unk_434[actionCommandStatus->unk_50]) / 6);
         }
         battleStatus->unk_84 = (s16)(actionCommandStatus->unk_44 / 100);
         if (actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals] <= (s16)battleStatus->unk_84) {
@@ -132,7 +129,7 @@ void func_802A91F8_425788(void) {
         if (actionCommandStatus->unk_54 == 0) {
             btl_set_popup_duration(0);
             actionCommandStatus->unk_54 = 5;
-            actionCommandStatus->state = 0xC;
+            actionCommandStatus->state = 12;
             return;
         }
         actionCommandStatus->unk_54 -= 1;
