@@ -23,8 +23,8 @@ glabel func_802A9000_428A70
 /* 428AB8 802A9048 0200202D */   daddu    $a0, $s0, $zero
 /* 428ABC 802A904C 3C048011 */  lui       $a0, %hi(D_80108B28)
 /* 428AC0 802A9050 24848B28 */  addiu     $a0, $a0, %lo(D_80108B28)
-/* 428AC4 802A9054 3C10802A */  lui       $s0, %hi(D_8029FBE0)
-/* 428AC8 802A9058 2610FBE0 */  addiu     $s0, $s0, %lo(D_8029FBE0)
+/* 428AC4 802A9054 3C10802A */  lui       $s0, %hi(gActionCommandStatus)
+/* 428AC8 802A9058 2610FBE0 */  addiu     $s0, $s0, %lo(gActionCommandStatus)
 /* 428ACC 802A905C A602005A */  sh        $v0, 0x5a($s0)
 /* 428AD0 802A9060 2402000D */  addiu     $v0, $zero, 0xd
 /* 428AD4 802A9064 A602004A */  sh        $v0, 0x4a($s0)

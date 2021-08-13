@@ -8,4 +8,4 @@
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_flo
 
-INCLUDE_ASM(s32, "battle/area_flo/5B16A0", func_8021844C_5B18FC);
+#include "common/MediGuySpriteRotationFunc.inc.c"

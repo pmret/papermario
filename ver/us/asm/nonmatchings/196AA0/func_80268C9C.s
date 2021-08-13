@@ -11,8 +11,8 @@ glabel jtbl_8029D760
 glabel func_80268C9C
 /* 19757C 80268C9C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* 197580 80268CA0 AFB00010 */  sw        $s0, 0x10($sp)
-/* 197584 80268CA4 3C10802A */  lui       $s0, %hi(D_8029FBE0)
-/* 197588 80268CA8 2610FBE0 */  addiu     $s0, $s0, %lo(D_8029FBE0)
+/* 197584 80268CA4 3C10802A */  lui       $s0, %hi(gActionCommandStatus)
+/* 197588 80268CA8 2610FBE0 */  addiu     $s0, $s0, %lo(gActionCommandStatus)
 /* 19758C 80268CAC AFBF0014 */  sw        $ra, 0x14($sp)
 /* 197590 80268CB0 8603004A */  lh        $v1, 0x4a($s0)
 /* 197594 80268CB4 2C620018 */  sltiu     $v0, $v1, 0x18
@@ -29,7 +29,7 @@ glabel L80268CD4_1975B4
 /* 1975BC 80268CDC 0809A390 */  j         .L80268E40
 /* 1975C0 80268CE0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268CE4_1975C4
-/* 1975C4 80268CE4 0C0AA68C */  jal       func_802A9A30_422A30
+/* 1975C4 80268CE4 0C0AA68C */  jal       action_command_hammer_FreeHudElements
 /* 1975C8 80268CE8 00000000 */   nop
 /* 1975CC 80268CEC 0809A390 */  j         .L80268E40
 /* 1975D0 80268CF0 3C05FFFF */   lui      $a1, 0xffff

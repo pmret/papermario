@@ -37,6 +37,8 @@ extern s32 D_800DC4F4;
 extern s32 D_800DC4F8;
 extern s32 gBattleDmaDest;
 
+extern ActionCommandStatus gActionCommandStatus;
+
 extern ScriptList gWorldScriptList;
 extern ScriptList gBattleScriptList;
 extern ScriptList* gCurrentScriptListPtr;

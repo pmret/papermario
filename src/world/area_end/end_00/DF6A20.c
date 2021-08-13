@@ -66,6 +66,27 @@ ApiStatus func_802427D8_DF91D8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242830_DF9230);
+ApiStatus N(SetNpcShadowScale)(ScriptInstance* script, s32 isInitialCall) {
+    s32 npcID;
+    f32 newShadowScale;
 
-INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242898_DF9298);
+    Bytecode* args = script->ptrReadPos;
+    npcID = get_variable(script, *args++);
+    newShadowScale = get_float_variable(script, *args++);
+
+    resolve_npc(script, npcID)->shadowScale = newShadowScale;
+    return ApiStatus_DONE2;
+}
+
+ApiStatus func_80242898_DF9298(ScriptInstance* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    Npc** npc = &script->functionTemp[1];
+
+    if (isInitialCall) {
+        *npc = get_npc_unsafe(get_variable(script, *args++));
+    }
+
+    (*npc)->pos.x += 0.6666667f;
+
+    return ApiStatus_BLOCK;
+}
