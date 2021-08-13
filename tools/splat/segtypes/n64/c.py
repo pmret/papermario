@@ -10,6 +10,7 @@ from util import options
 
 class N64SegC(N64SegCodeSubsegment):
     defined_funcs: Set[str] = set()
+    global_asm_funcs: Set[str] = set()
 
     STRIP_C_COMMENTS_RE = re.compile(
         r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
@@ -18,6 +19,11 @@ class N64SegC(N64SegCodeSubsegment):
 
     C_FUNC_RE = re.compile(
         r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+?{",
+        re.MULTILINE
+    )
+
+    C_GLOBAL_ASM_RE = re.compile(
+        r"(INCLUDE|GLOBAL)_ASM\(\"(\w+\/)*(\w+)\.s\"\)",
         re.MULTILINE
     )
 
@@ -38,6 +44,12 @@ class N64SegC(N64SegCodeSubsegment):
 
         return set(m.group(2) for m in N64SegC.C_FUNC_RE.finditer(text))
 
+    @staticmethod
+    def get_global_asm_funcs(c_file):
+        with open(c_file, "r") as f:
+            text = N64SegC.strip_c_comments(f.read())
+        return set(m.group(3) for m in N64SegC.C_GLOBAL_ASM_RE.finditer(text))
+
     def out_path(self) -> Optional[Path]:
         return options.get_src_path() / self.dir / f"{self.name}.c"
 
@@ -49,6 +61,7 @@ class N64SegC(N64SegCodeSubsegment):
                     # TODO run cpp?
                     self.defined_funcs = self.get_funcs_defined_in_c(path)
                     self.mark_c_funcs_as_defined(self.defined_funcs)
+                    self.global_asm_funcs = self.get_global_asm_funcs(path)
 
             self.funcs_text = self.disassemble_code(rom_bytes)
 
@@ -60,7 +73,7 @@ class N64SegC(N64SegCodeSubsegment):
             for func in self.funcs_text:
                 func_name = self.parent.get_symbol(func, type="func", local_only=True).name
 
-                if func_name not in self.defined_funcs:
+                if func_name in self.global_asm_funcs:
                     self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
 
             c_path = self.out_path()
@@ -79,7 +92,7 @@ class N64SegC(N64SegCodeSubsegment):
     def get_c_preamble(self):
         ret = []
 
-        preamble = options.get("generated_c_preamble", "#include \"common.h\"")
+        preamble = options.get_generated_c_premble()
         ret.append(preamble)
         ret.append("")
 
