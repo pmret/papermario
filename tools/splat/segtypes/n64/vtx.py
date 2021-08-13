@@ -24,7 +24,7 @@ class N64SegVtx(N64SegCodeSubsegment):
     def get_linker_section(self) -> str:
         return '.data'
 
-    def out_path(self) -> Optional[Path]:
+    def out_path(self) -> Path:
         return options.get_asset_path() / self.dir / f"{self.name}.vtx.inc.c"
 
     def scan(self, rom_bytes: bytes):
@@ -59,12 +59,11 @@ class N64SegVtx(N64SegCodeSubsegment):
         return "\n".join(lines)
 
     def split(self, rom_bytes: bytes):
-        if self.file_text:
-            if path := self.out_path():
-                path.parent.mkdir(parents=True, exist_ok=True)
+        if self.file_text and self.out_path():
+            self.out_path().parent.mkdir(parents=True, exist_ok=True)
                 
-                with open(path, "w", newline="\n") as f:
-                    f.write(self.file_text)
+            with open(self.out_path(), "w", newline="\n") as f:
+                f.write(self.file_text)
 
     def should_scan(self) -> bool:
         return options.mode_active("vtx") and self.rom_start != "auto" and self.rom_end != "auto"
