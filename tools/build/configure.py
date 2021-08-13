@@ -10,7 +10,7 @@ from glob import glob
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
 
-CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
+CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
 
 ASFLAGS = "-EB -G 0"
@@ -183,7 +183,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
+            modes.extend(["bin", "Yay0", "img", "vtx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
                           "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])

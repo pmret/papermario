@@ -108,9 +108,9 @@ s32 get_collider_type_by_id(s32 colliderID) {
 void get_flat_collider_normal(s32 colliderID, f32* x, f32* y, f32* z) {
     ColliderTriangle* triangle = &gCollisionData.colliderList[colliderID].triangleTable[0];
 
-    *x = triangle->e21[0];
-    *y = triangle->e21[1];
-    *z = triangle->e21[2];
+    *x = triangle->normal.x;
+    *y = triangle->normal.y;
+    *z = triangle->normal.z;
 }
 
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z) {
@@ -125,56 +125,63 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_triangle_general);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_down_ray_triangle);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_triangle);
+s32 test_up_ray_triangle(ColliderTriangle* triangle, f32* vertices);
+INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_triangle, ColliderTriangle* triangle, f32* vertices);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX,
             f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5, f32* arg6, f32* arg7, f32* arg8, f32* arg9);
 
-s32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
+//s32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
+// Close, but no cigar
+extern f32 D_800A4230;
+extern f32 D_800A4234;
+extern f32 D_800A4238;
+extern f32 D_800A423C;
+extern s32 D_800A4240;
+extern f32 D_800A4244;
+extern f32 D_800A4254;
+
+#ifdef NON_MATCHING
+f32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
+    CollisionData* collisionData = &gCollisionData;
+    f32 cosTheta;
+    f32 sinTheta;
+    Collider* collider;
+    ColliderTriangle* triangleTable;
+    s32 i;
+    f32 ret;
+
+    sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
+    collider = &collisionData->colliderList[colliderID];
+
+    D_800A4240 = 0;
+    D_800A4230 = x;
+    D_800A4234 = y;
+    D_800A4238 = z;
+    D_800A4254 = length;
+    D_800A423C = sinTheta;
+    D_800A4244 = -cosTheta;
+    ret = -1.0f;
+
+
+    if (!(collider->flags & ignoreFlags)) {
+        if (collider->numTriangles != 0) {
+            triangleTable = collider->triangleTable;
+
+            for (i = 0; i < collider->numTriangles; i++) {
+                if (test_up_ray_triangle(&triangleTable[i], collisionData->vertices)) {
+                    ret = D_800A4254;
+                }
+            }
+        }
+    }
+    return ret;
+}
+#else
 INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_collider, s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
-// extern f32 D_800A4230;
-// extern f32 D_800A4234;
-// extern f32 D_800A4238;
-// extern f32 D_800A423C;
-// extern s32 D_800A4240;
-// extern f32 D_800A4244;
-// extern f32 D_800A4254;
-
-// s32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw) {
-//     CollisionData* collisionData = &gCollisionData;
-//     f32 cosTheta;
-//     f32 sinTheta;
-//     Collider* collider;
-//     s32 i;
-//     s32 phi_f0;
-//     s32 phi_f28;
-
-//     sin_cos_rad(yaw * TAU / 360.0f, &sinTheta, &cosTheta);
-//     collider = &collisionData->colliderList[colliderID];
-
-//     D_800A4240 = 0;
-//     D_800A4230 = x;
-//     D_800A4234 = y;
-//     D_800A4238 = z;
-//     D_800A4254 = length;
-//     D_800A423C = sinTheta;
-//     D_800A4244 = -cosTheta;
-//     phi_f0 = -1.0f;
-//     phi_f28 = -1.0f;
-
-//     if (!(collider->flags & ignoreFlags)) {
-//         if (collider->numTriangles != 0) {
-//             for (i = 0; i < collider->numTriangles; i++) {
-//                 if (test_up_ray_triangle(&collider->triangleTable[i], collisionData->vertices)) {
-//                     phi_f0 = D_800A4254;
-//                 }
-//             }
-//         }
-//     }
-//     return phi_f0;
-// }
+#endif
 
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_entities, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
             f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
