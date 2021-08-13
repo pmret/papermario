@@ -4,12 +4,12 @@
 extern s32 D_8010C924;
 extern s32 D_8010C964;
 extern s32 D_8010C96C; // npc list index
-extern s32 gSpinHistoryBufferPos; // SpinHistoryBufferPos
+extern s32 gSpinHistoryBufferPos;
 extern s16 D_8010C9B0;
-extern s32 gSpinHistoryPosY[5]; // SpinHistoryPosY
-extern s32 gSpinHistoryPosX[5]; // SpinHistoryPosX
-extern s32 gSpinHistoryPosZ[5]; // SpinHistoryPosZ
-extern s16 gSpinHistoryPosAngle[5]; // SpinHistoryAngle
+extern s32 gSpinHistoryPosY[5];
+extern s32 gSpinHistoryPosX[5];
+extern s32 gSpinHistoryPosZ[5];
+extern s16 gSpinHistoryPosAngle[5];
 
 void func_800E5520(void) {
     D_8010C9B0 = 0;

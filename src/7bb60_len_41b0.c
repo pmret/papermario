@@ -113,15 +113,15 @@ void gravity_use_fall_parms(void) {
     playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags & 0x40000) {
-        playerStatus->gravityIntegrator[0] = *(floats++) / 12.0f;
-        playerStatus->gravityIntegrator[1] = *(floats++) / 12.0f;
-        playerStatus->gravityIntegrator[2] = *(floats++) / 12.0f;
-        playerStatus->gravityIntegrator[3] = *(floats++) / 12.0f;
+        playerStatus->gravityIntegrator[0] = *floats++ / 12.0f;
+        playerStatus->gravityIntegrator[1] = *floats++ / 12.0f;
+        playerStatus->gravityIntegrator[2] = *floats++ / 12.0f;
+        playerStatus->gravityIntegrator[3] = *floats++ / 12.0f;
     } else {
-        playerStatus->gravityIntegrator[0] = *(floats++);
-        playerStatus->gravityIntegrator[1] = *(floats++);
-        playerStatus->gravityIntegrator[2] = *(floats++);
-        playerStatus->gravityIntegrator[3] = *(floats++);
+        playerStatus->gravityIntegrator[0] = *floats++;
+        playerStatus->gravityIntegrator[1] = *floats++;
+        playerStatus->gravityIntegrator[2] = *floats++;
+        playerStatus->gravityIntegrator[3] = *floats++;
     }
 }
 

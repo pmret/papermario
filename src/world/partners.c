@@ -292,7 +292,7 @@ void remove_consumable(void) {
 INCLUDE_ASM(s32, "world/partners", func_800EA4B0);
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.actionState.b[0] == ACTION_STATE_IDLE;
+    return gPartnerActionStatus.actionState.b[0] == 0;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -382,7 +382,7 @@ void partner_init_after_battle(s32 arg0) {
     if (D_8010CFD8 != arg0) {
         D_8010CFE0 = 1;
         D_8010CFE4 = arg0;
-        actionStatus->actionState.b[0] = ACTION_STATE_IDLE;
+        actionStatus->actionState.b[0] = 0;
         actionStatus->actionState.b[1] = 0;
 
         if (D_8010CFD8 != 0 && arg0 != 0) {

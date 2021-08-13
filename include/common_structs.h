@@ -1445,9 +1445,9 @@ typedef struct ColliderTriangle {
     /* 0x00 */ Vec3f* v1; /* note: the order of v1,2,3 is reversed from the ijk in the hit file */
     /* 0x04 */ Vec3f* v2;
     /* 0x08 */ Vec3f* v3;
-    /* 0x0C */ f32 e13[3]; /* = v3 - v1 */
-    /* 0x18 */ f32 e21[3]; /* = v1 - v2 */
-    /* 0x24 */ f32 e32[3]; /* = v2 - v3 */
+    /* 0x0C */ Vec3f e13; /* = v3 - v1 */
+    /* 0x18 */ Vec3f e21; /* = v1 - v2 */
+    /* 0x24 */ Vec3f e32; /* = v2 - v3 */
     /* 0x30 */ Vec3f normal;
     /* 0x3C */ s16 oneSided; /* 1 = yes, 0 = no */
     /* 0x3E */ char unk_3E[2];
