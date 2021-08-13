@@ -34,8 +34,8 @@ glabel func_80240000_B70860
 /* B708D0 80240070 44073000 */  mfc1      $a3, $f6
 /* B708D4 80240074 0C04DFB0 */  jal       set_screen_overlay_center_worldpos
 /* B708D8 80240078 0080282D */   daddu    $a1, $a0, $zero
-/* B708DC 8024007C 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* B708E0 80240080 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* B708DC 8024007C 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* B708E0 80240080 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* B708E4 80240084 10400012 */  beqz      $v0, .L802400D0
 /* B708E8 80240088 24020006 */   addiu    $v0, $zero, 6
 /* B708EC 8024008C 82230012 */  lb        $v1, 0x12($s1)

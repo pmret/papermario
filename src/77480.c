@@ -350,9 +350,10 @@ void player_reset_data(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (D_8010EBB0.unk_00 == 1 &&
-        (D_8010EBB0.unk_03 == 6 || D_8010EBB0.unk_03 == 9 || D_8010EBB0.unk_03 == 7 || D_8010EBB0.unk_03 == 4 ||
-         D_8010EBB0.unk_03 == 8)) {
+    if (gPartnerActionStatus.actionState.b[0] == 1 &&
+        (gPartnerActionStatus.actionState.b[3]  == 6 || gPartnerActionStatus.actionState.b[3]  == 9 ||
+         gPartnerActionStatus.actionState.b[3]  == 7 || gPartnerActionStatus.actionState.b[3]  == 4 ||
+         gPartnerActionStatus.actionState.b[3]  == 8)) {
         return 0;
     }
     return 1;
@@ -455,7 +456,7 @@ s32 func_800E0208(void) {
     s32 ret = 0;
 
     if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons & 0x10)) {
-        if (D_8010EBB0.unk_00 == 0) {
+        if (gPartnerActionStatus.actionState.b[0] == 0) {
             set_action_state(ACTION_STATE_IDLE);
         }
         ret = 1;

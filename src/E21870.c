@@ -1,11 +1,11 @@
 #include "common.h"
 
 s32 func_802B7000_2(void) {
-    Temp8010EBB0* something = &D_8010EBB0;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     ActionState actionState = gPlayerActionState;
 
     if (actionState != ACTION_STATE_USE_TWEESTER) {
-        if (something->unk_00 != 1 || (something->unk_03 != 9 && something->unk_03 != 4)) {
+        if (partnerActionStatus->actionState.b[0] != 1 || (partnerActionStatus->actionState.b[3] != 9 && partnerActionStatus->actionState.b[3] != 4)) {
             return 0;
         }
     }

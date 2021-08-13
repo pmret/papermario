@@ -4,8 +4,8 @@
 glabel func_800E6904
 /* 7FDB4 800E6904 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7FDB8 800E6908 AFB10014 */  sw        $s1, 0x14($sp)
-/* 7FDBC 800E690C 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 7FDC0 800E6910 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 7FDBC 800E690C 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 7FDC0 800E6910 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 7FDC4 800E6914 3C028011 */  lui       $v0, %hi(gPlayerStatus)
 /* 7FDC8 800E6918 2442EFC8 */  addiu     $v0, $v0, %lo(gPlayerStatus)
 /* 7FDCC 800E691C 0040202D */  daddu     $a0, $v0, $zero

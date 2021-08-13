@@ -288,8 +288,9 @@ extern f32 D_800F7B40;
 extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
+extern s32 D_8010C978;
 
-extern Temp8010EBB0 D_8010EBB0; // something with partners
+extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
 // Effects

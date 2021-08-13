@@ -30,8 +30,8 @@ glabel func_80240310_9BB5B0
 /* 9BB614 80240374 2404FFFC */   addiu    $a0, $zero, -4
 /* 9BB618 80240378 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* 9BB61C 8024037C 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
-/* 9BB620 80240380 3C168011 */  lui       $s6, %hi(D_8010EBB0)
-/* 9BB624 80240384 26D6EBB0 */  addiu     $s6, $s6, %lo(D_8010EBB0)
+/* 9BB620 80240380 3C168011 */  lui       $s6, %hi(gPartnerActionStatus)
+/* 9BB624 80240384 26D6EBB0 */  addiu     $s6, $s6, %lo(gPartnerActionStatus)
 /* 9BB628 80240388 1200001C */  beqz      $s0, .L802403FC
 /* 9BB62C 8024038C 0040B82D */   daddu    $s7, $v0, $zero
 /* 9BB630 80240390 0C00AB39 */  jal       heap_malloc

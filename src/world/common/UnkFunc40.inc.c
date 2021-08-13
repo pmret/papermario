@@ -3,7 +3,7 @@
 
 ApiStatus N(UnkFunc40)(ScriptInstance* script, s32 isInitialCall) {
     script->varTable[0] = 0;
-    if ((D_8010EBB0.unk_00 != 0) && (D_8010EBB0.unk_03 == 3)) {
+    if ((gPartnerActionStatus.actionState.b[0] != 0) && (gPartnerActionStatus.actionState.b[3]  == 3)) {
         script->varTable[0] = 1;
     }
     return ApiStatus_DONE2;

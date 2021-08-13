@@ -17,7 +17,7 @@ void func_802B203C(void) {
 
 void func_802B2078(void) {
     dma_copy(_316C00_ROM_START, _316C00_ROM_END, _316C00_VRAM);
-    func_802AE000();
+    func_802AE000_316C00();
 }
 
 void func_802B20B4(void) {

@@ -38,6 +38,9 @@ def get_header_encoding() -> str:
 def get_subalign() -> int:
     return opts.get("subalign", 16)
 
+def get_generated_c_premble() -> str:
+    return opts.get("generated_c_preamble", '#include "common.h"')
+
 def mode_active(mode):
     return mode in opts["modes"] or "all" in opts["modes"]
 

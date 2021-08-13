@@ -78,7 +78,7 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
 void entity_small_switch_idle(Entity* entity) {
     struct802E1400* temp = entity->dataBuf;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Temp8010EBB0* temp2 = &D_8010EBB0;
+    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
     entity_switch_fall_down(entity);
 
@@ -102,7 +102,7 @@ void entity_small_switch_idle(Entity* entity) {
         return;
     }
 
-    if (temp2->unk_03 == 4 && temp2->unk_00 != 0) {
+    if (partnerActionStatus->actionState.b[3] == 4 && partnerActionStatus->actionState.b[0] != 0) {
         return;
     }
 

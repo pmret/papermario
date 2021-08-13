@@ -727,14 +727,14 @@ void N(func_80240958_C47538)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         if (playerData->currentPartner == 2) {
-            if (D_8010EBB0.unk_00 == playerData->currentPartner) {
+            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (D_8010EBB0.unk_00 != 0)) ||
-        ((playerData->currentPartner == 3) && (D_8010EBB0.unk_00 == 2))) {
+    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
+        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
@@ -1303,7 +1303,7 @@ void N(func_80242C1C_C497FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~0x00200000;
-            if (D_8010EBB0.unk_03 != 9) {
+            if (gPartnerActionStatus.actionState.b[3]  != 9) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -1369,7 +1369,7 @@ void N(func_80243138_C49D18)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (D_8010EBB0.unk_03 != 9) {
+        if (gPartnerActionStatus.actionState.b[3]  != 9) {
             npc->duration = 0;
             script->functionTemp[0] = 100;
         } else {

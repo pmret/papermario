@@ -13,7 +13,8 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/ver/us/build/include",
-                "${workspaceFolder}/src"
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/assets/us",
             ],
             "defines": [
                 "F3DEX_GBI_2",

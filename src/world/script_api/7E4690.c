@@ -6,7 +6,7 @@ ApiStatus CheckRideScriptForEnterExit(ScriptInstance* script, s32 isInitialCall)
 
     script->varTable[10] = 0;
     if (partner_get_ride_script() != NULL) {
-        if (D_8010EBB0.unk_00 == 0) {
+        if (gPartnerActionStatus.actionState.b[0] == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;

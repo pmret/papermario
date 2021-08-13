@@ -1,4 +1,6 @@
 import importlib
+import importlib.util
+
 from typing import Dict, TYPE_CHECKING, Type, Union, Optional, List
 from pathlib import Path
 
@@ -102,7 +104,7 @@ class Segment:
         else:
             return str(cls.get_default_name(rom_start))
 
-    def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True, 
+    def __init__(self, rom_start, rom_end, type, name, vram_start, extract = True,
                  given_subalign = options.get_subalign(), given_is_overlay: Optional[bool] = False, given_dir: Path = Path(), args = [], yaml = {}):
         self.rom_start = rom_start
         self.rom_end = rom_end
@@ -128,7 +130,7 @@ class Segment:
 
         if self.rom_start == "auto":
             self.extract = False
-        
+
         if self.type.startswith("."):
             self.extract = False
 
@@ -152,7 +154,7 @@ class Segment:
         args:List[str] = [] if isinstance(yaml, dict) else yaml[3:]
 
         return cls(rom_start, rom_end, type, name, vram_start, extract, given_subalign, given_is_overlay, given_dir, args, yaml)
-    
+
     @property
     def needs_symbols(self) -> bool:
         return False
@@ -163,14 +165,14 @@ class Segment:
             return self.parent.dir / self.given_dir
         else:
             return self.given_dir
-    
+
     @property
     def subalign(self) -> int:
         if self.parent:
             return self.parent.subalign
         else:
             return self.given_subalign
-    
+
     @property
     def is_overlay(self) -> bool:
         if self.parent:
@@ -239,10 +241,10 @@ class Segment:
 
     def should_scan(self) -> bool:
         return self.should_split()
-    
+
     def should_split(self) -> bool:
         return self.extract and options.mode_active(self.type)
-    
+
     def scan(self, rom_bytes: bytes):
         pass
 

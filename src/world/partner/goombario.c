@@ -29,7 +29,7 @@ INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 s32 world_goombario_can_pause(Npc* partner) {
     s32 new_var;
 
-    if (D_8010EBB0.unk_00) {
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
         return FALSE;
     }
 
@@ -58,18 +58,18 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 }
 
 void world_goombario_pre_battle(Npc* partner) {
-    Temp8010EBB0* temp = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (temp->unk_00 != 0) {
+    if (actionStatus->actionState.b[0] != 0) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         CancelMessageAndBlock();
         partner_clear_player_tracking(partner);
-        temp->unk_00 = 0;
-        temp->unk_03 = 0;
+        actionStatus->actionState.b[0] = 0;
+        actionStatus->actionState.b[3] = 0;
         disable_npc_blur(partner);
     }
-    temp->unk_03 = 1;
+    actionStatus->actionState.b[3] = 1;
 }
 
 s32 D_802BDC40_317B60[] = {

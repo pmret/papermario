@@ -13,8 +13,8 @@ glabel check_input_open_menus
 /* 80198 800E6CE8 8C63419C */  lw        $v1, %lo(gGameStatusPtr)($v1)
 /* 8019C 800E6CEC 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* 801A0 800E6CF0 AFB3001C */  sw        $s3, 0x1c($sp)
-/* 801A4 800E6CF4 3C138011 */  lui       $s3, %hi(D_8010EBB0)
-/* 801A8 800E6CF8 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
+/* 801A4 800E6CF4 3C138011 */  lui       $s3, %hi(gPartnerActionStatus)
+/* 801A8 800E6CF8 2673EBB0 */  addiu     $s3, $s3, %lo(gPartnerActionStatus)
 /* 801AC 800E6CFC AFB40020 */  sw        $s4, 0x20($sp)
 /* 801B0 800E6D00 3C148011 */  lui       $s4, %hi(gPlayerStatus)
 /* 801B4 800E6D04 2694EFC8 */  addiu     $s4, $s4, %lo(gPlayerStatus)

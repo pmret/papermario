@@ -99,8 +99,8 @@ glabel func_802400A0_A4F0A0
 /* A4F1EC 802401EC 00000000 */  nop
 /* A4F1F0 802401F0 4501001F */  bc1t      .L80240270
 /* A4F1F4 802401F4 2402FFFF */   addiu    $v0, $zero, -1
-/* A4F1F8 802401F8 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
-/* A4F1FC 802401FC 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
+/* A4F1F8 802401F8 3C038011 */  lui       $v1, %hi(gPartnerActionStatus+0x3)
+/* A4F1FC 802401FC 8063EBB3 */  lb        $v1, %lo(gPartnerActionStatus+0x3)($v1)
 /* A4F200 80240200 24020009 */  addiu     $v0, $zero, 9
 /* A4F204 80240204 10620019 */  beq       $v1, $v0, .L8024026C
 /* A4F208 80240208 24020007 */   addiu    $v0, $zero, 7
