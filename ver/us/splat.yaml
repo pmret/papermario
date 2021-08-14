@@ -294,6 +294,8 @@ segments:
     - [0x541B0, .data, 30450]
     - [0x54250, .data, 31650]
     - [0x542E0, data]
+    - [0x5A3E0, .data, 341d0]
+    - [0x5B320, data]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, data] # has scripts
     - [0x6F0E0, .data, os/nusys/nuContRmbMgr]
@@ -2199,109 +2201,113 @@ segments:
     - [0x325AD0, c]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
-  - [0x326410, bin]
-  - type: code
+  - [0x326410, bin] # effect 1 gfx
+  - type: code # effect 1
     start: 0x3278f0
     vram: 0xE0002000
     subsegments:
     - [0x3278f0, c]
     - [0x328050, data]
-  - type: code
+  - type: code # effect 6
     start: 0x328110
     vram: 0xE000C000
     subsegments:
     - [0x328110, c]
     - [0x328d20, data]
-  - [0x328EA0, bin]
-  - type: code
+  - [0x328EA0, bin] # effect 6/7 gfx
+  - type: code # effect 7
     start: 0x32C110
     vram: 0xE000E000
     subsegments:
     - [0x32C110, c]
     - [0x32c770, data]
-  - type: code
+  - type: code # effect 8
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
     - [0x32C7A0, c]
     - [0x32CEB0, data]
-  - type: code
+  - [0x32CEC0, bin] # effect 8/9 gfx
+  - type: code # effect 9
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
     - [0x32DD10, c]
-  - type: code
+  - type: code # effect 10
     start: 0x32E490
     vram: 0xE0014000
     subsegments:
     - [0x32E490, c]
     - [0x32EC10, data]
-  - type: code
+  - [0x32EC50, bin] # effect 10/11 gfx
+  - type: code # effect 11
     start: 0x32EE30
     vram: 0xE0016000
     subsegments:
     - [0x32EE30, c]
     - [0x32F550, data]
-  - type: code
+  - type: code # effect 12
     start: 0x32F580
     vram: 0xE0018000
     subsegments:
     - [0x32F580, c]
-  - [0x32fb50, bin] # data/rodata section for above.
-  - type: code
+  - [0x32FB50, bin] # effect 12 gfx
+  - type: code # effect 13
     start: 0x32FE30
     vram: 0xE001A000
     subsegments:
     - [0x32FE30, c]
     - [0x330440, data]
-  - type: code
+  - [0x330460, bin] # effect 13 gfx
+  - type: code # effect 14
     start: 0x330910
     vram: 0xE001C000
     subsegments:
     - [0x330910, c]
-  - [0x330ef0, bin] # data/rodata section for above.
-  - type: code
+    - [0x330EF0, data]
+  - [0x330F00, bin] # effect 14 gfx
+  - type: code # effect 15
     start: 0x331940
     vram: 0xE001E000
     subsegments:
     - [0x331940, c]
     - [0x332690, data]
-  - [0x3326A0, bin]
-  - type: code
-    start: 0x333ec0
+  - [0x3326A0, bin] # effect 15 gfx
+  - type: code # effect 16
+    start: 0x333EC0
     vram: 0xE0020000
     subsegments:
     - [0x333ec0, c]
     - [0x334b50, data]
-  - [0x334C70, bin]
-  - type: code
+  - [0x334C70, bin] # effect 16 gfx
+  - type: code # effect 17
     start: 0x337240
     vram: 0xE0022000
     subsegments:
     - [0x337240, c]
     - [0x337f10, data]
-  - [0x337FC0, bin]
-  - type: code
+  - [0x337FC0, bin] # effect 17 gfx
+  - type: code # effect 18
     start: 0x339250
     vram: 0xE0024000
     subsegments:
     - [0x339250, c]
     - [0x339f10, data]
-  - [0x339F60, bin]
-  - type: code
+  - [0x339F60, bin] # effect 18 gfx
+  - type: code # effect 19
     start: 0x33B180
     vram: 0xE0026000
     subsegments:
     - [0x33B180, c]
     - [0x33bb70, data]
-  - [0x33BBD0, bin]
-  - type: code
+  - [0x33BBD0, bin] # effect 19 gfx
+  - type: code # effect 20
     start: 0x33CDF0
     vram: 0xE0028000
     subsegments:
     - [0x33CDF0, c]
     - [0x33d5d0, data]
-  - [0x33D610, bin]
+  - [0x33D610, bin] # effect 20 gfx
   - type: code
     start: 0x33E8C0
     vram: 0xE002A000

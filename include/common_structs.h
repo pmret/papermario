@@ -1001,8 +1001,8 @@ typedef struct EffectTableEntry {
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
-    /* 0x10 */ void* unkStartRom;
-    /* 0x14 */ void* unkEndRom;
+    /* 0x10 */ void* graphicsDmaStart;
+    /* 0x14 */ void* graphicsDmaEnd;
 } EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
