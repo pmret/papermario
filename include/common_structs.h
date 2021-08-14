@@ -547,7 +547,7 @@ typedef struct Camera {
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
-    /* 0x038 */ s16 perspNorm;
+    /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
@@ -938,7 +938,7 @@ typedef struct EffectInstance {
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 totalMatricies;
     /* 0x0C */ struct EffectInstanceData* data;
-    /* 0x10 */ struct Effect* effect;
+    /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;
 
 typedef struct EffectBlueprint {
@@ -985,16 +985,16 @@ typedef struct {
     s32 unk_74;
 } EffectInstanceDataThing;
 
-typedef struct Effect {
+typedef struct EffectGraphics {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ s32 freeDelay;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
-    /* 0x1C */ void* unk_1C;
-} Effect; // size = 0x20
+    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
+    /* 0x1C */ s32* data;
+} EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
     /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);

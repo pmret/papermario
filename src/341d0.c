@@ -10,8 +10,8 @@ extern EffectTableEntry gEffectTable[135];
 #define EFFECT_LOADED 1
 
 extern void* D_80059C80;
-extern Effect D_800A4000[15];
-extern EffectInstance* D_800B4398[96]; //effectInstanceList
+extern EffectGraphics gEffectGraphicsData[15];
+extern EffectInstance* gEffectInstances[96];
 extern s32 D_801A6000;
 
 
@@ -223,8 +223,8 @@ INCLUDE_ASM(s32, "341d0", func_80059BD4);
 void stub_effect_delegate(EffectInstance* effectInst) {
 }
 
-void set_effect_pos_offset(Effect* effect, f32 x, f32 y, f32 z) {
-    EffectInstanceData* instanceData = effect->instanceData;
+void set_effect_pos_offset(EffectGraphics* effect, f32 x, f32 y, f32 z) {
+    EffectInstanceData* instanceData = effect->freeDelay;
 
     instanceData->pos.x = x;
     instanceData->pos.y = y;
@@ -234,12 +234,12 @@ void set_effect_pos_offset(Effect* effect, f32 x, f32 y, f32 z) {
 void clear_effect_data(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
-        D_800A4000[i].flags = 0;
+    for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
+        gEffectGraphicsData[i].flags = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        D_800B4398[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        gEffectInstances[i] = 0;
     }
 
     osUnmapTLBAll();
@@ -250,57 +250,171 @@ void clear_effect_data(void) {
 void func_80059D48(void) {
 }
 
+// The third loop is doing some negative reference bs
+#ifdef NON_MATCHING
+void update_effects(void) {
+    EffectGraphics* effectGraphics;
+    s32 i;
+
+    if (!(gOverrideFlags & 0xC00)) {
+        for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
+            effectGraphics = &gEffectGraphicsData[i];
+
+            if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
+                if (!(effectGraphics->flags & 2)) {
+                    effectGraphics->flags |= 2;
+                    effectGraphics->freeDelay = 3;
+                }
+            }
+        }
+
+        for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+            EffectInstance* effectInstance = gEffectInstances[i];
+
+            if (effectInstance != NULL && (effectInstance->flags & 1)) {
+                effectInstance->effect->flags &= ~0x2;
+
+                if (gGameStatusPtr->isBattle) {
+                    if (effectInstance->flags & 4) {
+                        effectInstance->effect->update(effectInstance);
+                        effectInstance->flags |= 8;
+                    }
+                } else {
+                    if (!(effectInstance->flags & 4)) {
+                        effectInstance->effect->update(effectInstance);
+                        effectInstance->flags |= 8;
+                    }
+                }
+            }
+        }
+
+        for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
+            effectGraphics = &gEffectGraphicsData[i];
+
+            if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
+                if (effectGraphics->flags & 2) {
+                    if (effectGraphics->freeDelay != 0) {
+                        effectGraphics->freeDelay--;
+                    } else {
+                        if (effectGraphics->data[0] != NULL) {
+                            general_heap_free(effectGraphics->data);
+                            effectGraphics->data[0] = NULL;
+                        }
+                        effectGraphics->flags = FX_GRAPHICS_DISABLED;
+                        osUnmapTLB(i);
+                    }
+                }
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM(s32, "341d0", update_effects);
+#endif
 
 s32 render_effects_world(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if ((D_800B4398[i] != NULL) && (D_800B4398[i]->flags & 1) && (D_800B4398[i]->flags & 8)) {
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        if (gEffectInstances[i] != NULL && gEffectInstances[i]->flags & 1 && gEffectInstances[i]->flags & 8) {
             if (gGameStatusPtr->isBattle) {
-                if (D_800B4398[i]->flags & 4) {
-                    D_800B4398[i]->effect->renderWorld(D_800B4398[i]);
+                if (gEffectInstances[i]->flags & 4) {
+                    gEffectInstances[i]->effect->renderWorld(gEffectInstances[i]);
                 }
-            } else if (!(D_800B4398[i]->flags & 4)) {
-                D_800B4398[i]->effect->renderWorld(D_800B4398[i]);
+            } else {
+                if (!(gEffectInstances[i]->flags & 4)) {
+                    gEffectInstances[i]->effect->renderWorld(gEffectInstances[i]);
+                }
             }
         }
     }
 }
 
-INCLUDE_ASM(s32, "341d0", render_effects_UI);
+void render_effects_UI(void) {
+    s32 cond = TRUE;
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        EffectInstance* effectInstance = gEffectInstances[i];
+
+        if (effectInstance != NULL) {
+            if (effectInstance->flags & 1) {
+                if (effectInstance->flags & 8) {
+                    void (*renderUI)(EffectInstance* effectInst);
+
+                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & 4)) {
+                        continue;
+                    }
+
+                    if (!gGameStatusPtr->isBattle && effectInstance->flags & 4) {
+                        continue;
+                    }
+
+                    renderUI = effectInstance->effect->renderUI;
+                    if (renderUI != stub_effect_delegate) {
+                        if (cond) {
+                            Camera* camera = &gCameras[gCurrentCameraID];
+
+                            gDPPipeSync(gMasterGfxPos++);
+                            gSPViewport(gMasterGfxPos++, &camera->viewport);
+                            gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
+                                                G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
+                                                G_SHADING_SMOOTH | G_CLIPPING | 0x0040F9FA);
+                            gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
+                            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                                              camera->viewportStartX,
+                                              camera->viewportStartY,
+                                              camera->viewportStartX + camera->viewportW,
+                                              camera->viewportStartY + camera->viewportH);
+                            gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
+
+                            cond = FALSE;
+                            if (!(camera->flags & 0x10)) {
+                                gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
+                                gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+                                          G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+                            }
+                        }
+
+                        renderUI(effectInstance);
+                    }
+                }
+            }
+        }
+    }
+}
 
 EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
-    Effect* curEffect;
+    EffectGraphics* curEffect;
     s32 i;
 
     // Search for an unused instance
-    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if (D_800B4398[i] == NULL) {
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        if (gEffectInstances[i] == NULL) {
             break;
         }
     }
 
-    ASSERT(i < ARRAY_COUNT(D_800B4398));
+    ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
     // Allocate space for the new instance
-    D_800B4398[i] = newEffectInst = general_heap_malloc(sizeof(EffectInstance));
+    gEffectInstances[i] = newEffectInst = general_heap_malloc(sizeof(EffectInstance));
     ASSERT(newEffectInst != NULL);
 
-    curEffect = &D_800A4000[0];
+    curEffect = &gEffectGraphicsData[0];
     newEffectInst->effectIndex = effectBp->effectIndex;
     newEffectInst->flags = 1;
 
     // Look for a loaded effect of the proper index
-    for (i = 0; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
         if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectIndex)) {
             break;
         }
         curEffect++;
     }
 
-    ASSERT(i < ARRAY_COUNT(D_800A4000));
+    ASSERT(i < ARRAY_COUNT(gEffectGraphicsData));
 
     // If this is the first new instance of the effect, initialize the function pointers
     if (curEffect->instanceCounter == 0) {
@@ -310,13 +424,13 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
         }
 
         curEffect->renderWorld = effectBp->renderWorld;
-        if (curEffect->unk_18 == NULL) {
-            curEffect->unk_18 = stub_effect_delegate;
+        if (curEffect->renderUI == NULL) {
+            curEffect->renderUI = stub_effect_delegate;
         }
 
-        curEffect->unk_18 = effectBp->unk_14;
-        if (curEffect->unk_18 == NULL) {
-            curEffect->unk_18 = stub_effect_delegate;
+        curEffect->renderUI = effectBp->unk_14;
+        if (curEffect->renderUI == NULL) {
+            curEffect->renderUI = stub_effect_delegate;
         }
     }
 
@@ -333,52 +447,51 @@ EffectInstance* func_8005A2BC(EffectBlueprint* effectBp) {
     return newEffectInst;
 }
 
-void remove_effect(EffectInstance* arg0) {
+void remove_effect(EffectInstance* effectInstsance) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        if (D_800B4398[i] == arg0) {
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        if (gEffectInstances[i] == effectInstsance) {
             break;
         }
     }
 
-    ASSERT(i < ARRAY_COUNT(D_800B4398));
+    ASSERT(i < ARRAY_COUNT(gEffectInstances));
 
-    if (arg0->data == NULL) {
-        general_heap_free(arg0);
-        D_800B4398[i] = NULL;
-        return;
+    if (effectInstsance->data == NULL) {
+        general_heap_free(effectInstsance);
+        gEffectInstances[i] = NULL;
+    } else {
+        general_heap_free(effectInstsance->data);
+        general_heap_free(effectInstsance);
+        gEffectInstances[i] = NULL;
     }
-
-    general_heap_free(arg0->data);
-    general_heap_free(arg0);
-    D_800B4398[i] = NULL;
 }
 
 void remove_all_effects(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_800B4398); i++) {
-        EffectInstance* temp2 = D_800B4398[i];
+    for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
+        EffectInstance* effect = gEffectInstances[i];
 
-        if (temp2 != NULL && temp2->flags & 4) {
-            if (temp2->data != NULL) {
-                general_heap_free(temp2->data);
+        if (effect != NULL && effect->flags & 4) {
+            if (effect->data != NULL) {
+                general_heap_free(effect->data);
             }
-            general_heap_free(temp2);
-            D_800B4398[i] = NULL;
+            general_heap_free(effect);
+            gEffectInstances[i] = NULL;
         }
     }
 }
 
 s32 load_effect(s32 effectIndex) {
     EffectTableEntry* effectEntry = &gEffectTable[effectIndex];
-    Effect* curEffect;
+    EffectGraphics* curEffect;
     TlbMappablePage* tlbMappablePages;
     s32 i;
 
     // Look for a loaded effect matching the desired index
-    for (i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0, curEffect = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
         if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectIndex)) {
             break;
         }
@@ -386,7 +499,7 @@ s32 load_effect(s32 effectIndex) {
     }
 
     // If an effect was found within the table, initialize it and return
-    if (i < ARRAY_COUNT(D_800A4000)) {
+    if (i < ARRAY_COUNT(gEffectGraphicsData)) {
         curEffect->effectIndex = effectIndex;
         curEffect->instanceCounter = 0;
         curEffect->flags = EFFECT_LOADED;
@@ -394,7 +507,7 @@ s32 load_effect(s32 effectIndex) {
     }
 
     // If a loaded effect wasn't found, look for the first empty space
-    for (i = 0, curEffect = &D_800A4000[0]; i < ARRAY_COUNT(D_800A4000); i++) {
+    for (i = 0, curEffect = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
         if (!(curEffect->flags & EFFECT_LOADED)) {
             break;
         }
@@ -402,7 +515,7 @@ s32 load_effect(s32 effectIndex) {
     }
 
     // If no empty space was found, panic
-    ASSERT(i < ARRAY_COUNT(D_800A4000));
+    ASSERT(i < ARRAY_COUNT(gEffectGraphicsData));
 
     // Map space for the effect
     tlbMappablePages = &D_80197000;
@@ -414,9 +527,9 @@ s32 load_effect(s32 effectIndex) {
     // If there's extra data the effect normally loads, allocate space and copy into the new space
     if (effectEntry->graphicsDmaStart != NULL) {
         void* effectDataBuf = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
-        curEffect->unk_1C = effectDataBuf;
+        curEffect->data = effectDataBuf;
         ASSERT(effectDataBuf != NULL);
-        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->unk_1C);
+        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
     }
 
     // Initialize the newly loaded effect data
