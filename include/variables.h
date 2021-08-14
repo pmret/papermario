@@ -284,7 +284,7 @@ extern s32 D_8010C95C;
 extern s32 D_8010C96C;
 extern s32 D_8010C980;
 extern s32 D_8010C9A0;
-extern f32 D_800F7B40;
+extern s32 D_800F7B40;
 extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
