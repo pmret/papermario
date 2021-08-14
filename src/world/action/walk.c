@@ -157,8 +157,7 @@ void func_802B65E8_E23CC8(void) {
     try_player_footstep_sounds(8);
 }
 
-void func_802B6738_E23E18(void)
-{
+void func_802B6738_E23E18(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     GameStatus* gameStatus;
     f32 sp14;
