@@ -481,5 +481,10 @@ s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(void);
 void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
+void set_hud_element_script(s32 arg0, s32 *arg1);
+void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3);
+void set_window_update(s32 panelIndex, s32 arg1);
+void set_hud_element_alpha(s32 iconIndex, s32 opacity);
+void draw_hud_element_clipped(s32 arg0);
 
 #endif
