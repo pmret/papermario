@@ -85,30 +85,28 @@ void render_frame(s32 arg0) {
     s32 uly;
     s32 lrx;
     s32 lry;
-    u16 matrixListPos;
 
     if (arg0 == 0) {
         gCurrentCamID = 0;
         func_80116698();
     }
+
     camID = CAM_DEFAULT;
     if (arg0 != 0) {
         camID = CAM_CAM3;
     }
     arg0 = 1 - arg0;
 
-
     for (; camID < 4 - arg0; camID++) {
         Camera* camera = &gCameras[camID];
 
         if (camera->flags != 0 && !(camera->flags & (0x80 | 0x2))) {
-            void (*fpDoPreRender)(Camera*) = camera->fpDoPreRender;
-            Matrix4s* mtxTemp;
+            u16 matrixListPos;
 
             gCurrentCamID = camID;
 
-            if (fpDoPreRender != NULL) {
-                fpDoPreRender(camera);
+            if (camera->fpDoPreRender != NULL) {
+                camera->fpDoPreRender(camera);
             } else {
                 gSPViewport(gMasterGfxPos++, &camera->viewport);
                 gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
@@ -379,8 +377,8 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->targetPos.z = 0;
     camera->unk_98 = 0;
     camera->unk_9C = 0;
-    camera->fpDoPreRender = 0;
-    camera->fpDoPostRender = 0;
+    camera->fpDoPreRender = NULL;
+    camera->fpDoPostRender = NULL;
     camera->leadAmount = 0;
     camera->unk_510 = 0.0f;
     camera->unk_514 = 0.0f;
