@@ -21367,7 +21367,6 @@ D_E0200728 = 0xE0200728; // type:data
 D_E020072C = 0xE020072C; // type:data
 D_E0200730 = 0xE0200730; // type:data
 D_E1000010 = 0xE1000010; // type:data
-D_E7000001 = 0xE7000001; // type:data
 D_E7000008 = 0xE7000008; // type:data
 D_E8000008 = 0xE8000008; // type:data
 D_F0000008 = 0xF0000008; // type:data

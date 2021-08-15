@@ -622,7 +622,6 @@ enum SoundIDs {
     SOUND_UNKNOWN_2106              = 8454,
 };
 
-typedef UNK_TYPE Cam;
 enum Cams {
     CAM_DEFAULT,
     CAM_BATTLE,

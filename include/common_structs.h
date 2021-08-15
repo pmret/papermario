@@ -523,6 +523,16 @@ typedef struct CameraInitData {
     /* 0x10 */ s16 vfov;
 } CameraInitData; // size = 0x12;
 
+typedef struct CameraUnk {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ char unk_04[0x8];
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x54];
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ char unk_68[0x24];
+} CameraUnk; // size = 0x8C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
@@ -567,14 +577,23 @@ typedef struct Camera {
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
-    /* 0x0B0 */ char unk_B0[0x24];
+    /* 0x0B0 */ Vp vpAlt;
+    /* 0x0C0 */ s32 unk_C0;
+    /* 0x0C4 */ f32 unk_C4;
+    /* 0x0C8 */ char unk_C8[0xC];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
     /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
     /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
-    /* 0x1D4 */ char unk_1D4[48];
+    /* 0x1D4 */ char unk_1D4[0x28];
+    /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
+    /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
     /* 0x204 */ struct Matrix4s* unkMatrix;
-    /* 0x208 */ char unk_208[572];
+    /* 0x208 */ s32 unk_208;
+    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x210 */ char unk_210[0x2];
+    /* 0x212 */ s16 unk_212;
+    /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ struct Zone* prevZone;
     /* 0x448 */ struct Zone* currentZone;
     /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
@@ -599,9 +618,15 @@ typedef struct Camera {
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[16];
+    /* 0x510 */ f32 unk_510;
+    /* 0x514 */ f32 unk_514;
+    /* 0x518 */ f32 unk_518;
+    /* 0x51C */ s32 unk_51C;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ char unk_524[16];
+    /* 0x524 */ f32 unk_524;
+    /* 0x528 */ f32 unk_528;
+    /* 0x52C */ s32 unk_52C;
+    /* 0x530 */ s32 unk_530;
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
     /* 0x538 */ char unk_538[32];
 } Camera; // size = 0x558

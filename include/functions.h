@@ -120,7 +120,7 @@ extern void guOrtho(Mtx *m, float l, float r, float b, float t,
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
-void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
+void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
