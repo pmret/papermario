@@ -87,6 +87,7 @@ segments:
     - [0x31650, c, 31650]
     - [0x33450, c]
     - [0x341D0, c, 341d0]
+    - [0x35080, c, effects]
     - [0x35AC0, c, world/world]
     - [0x362A0, c, 362a0_len_2f70]
     - [0x39210, c, 39210_len_aa0]
@@ -295,6 +296,7 @@ segments:
     - [0x54250, .data, 31650]
     - [0x542E0, data]
     - [0x5A3E0, .data, 341d0]
+    - [0x5A610, .data, effects]
     - [0x5B320, data]
     - [0x6B360, .data, world/world]
     - [0x6EAC0, data] # has scripts
