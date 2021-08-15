@@ -44,7 +44,7 @@ void update_cameras(void) {
                     break;
             }
 
-            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0],  cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
+            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt[0], cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
 
             if (!(cam->flags & CAM_FLAG_ORTHO)) {
                 if (cam->flags & CAM_FLAG_LEAD_PLAYER) {
@@ -330,17 +330,17 @@ void create_cameras_b(void) {
 
 Camera* initialize_next_camera(CameraInitData* initData) {
     Camera* camera;
-    s32 i;
+    s32 camID;
 
-    for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
-        camera = &gCameras[i];
+    for (camID = 0; camID < ARRAY_COUNT(gCameras); camID++) {
+        camera = &gCameras[camID];
 
         if (camera->flags == 0) {
             break;
         }
     }
 
-    ASSERT(i < 4);
+    ASSERT(camID < 4);
 
     camera->flags = initData->flags | 5;
     camera->moveFlags = 0;
@@ -362,7 +362,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;
     camera->zoomPercent = 100;
-    set_cam_viewport(i, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
+    set_cam_viewport(camID, initData->viewStartX, initData->viewStartY, initData->viewWidth, initData->viewHeight);
     camera->unk_212 = -1;
     camera->unk_530 = 1;
     camera->bgColor[0] = 0;
@@ -396,7 +396,39 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     return camera;
 }
 
+// Ordering shtuff
+#ifdef NON_MATCHING
+void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height) {
+    Camera* camera = &gCameras[id];
+
+    camera->viewportW = width;
+    camera->viewportH = height;
+    camera->viewportStartX = x;
+    camera->viewportStartY = y;
+
+    camera->viewport.vp.vscale[0] = 2.0f * camera->viewportW;
+    camera->viewport.vp.vscale[1] = 2.0f * camera->viewportH;
+    camera->viewport.vp.vscale[2] = 0x1FF;
+    camera->viewport.vp.vscale[3] = 0;
+
+    camera->viewport.vp.vtrans[0] = (((camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
+    camera->viewport.vp.vtrans[1] = (((camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->viewport.vp.vtrans[2] = 0x1FF;
+    camera->viewport.vp.vtrans[3] = 0;
+
+    camera->vpAlt.vp.vscale[0] = 2.0f * camera->viewportW;
+    camera->vpAlt.vp.vscale[1] = 2.0f * camera->viewportH;
+    camera->vpAlt.vp.vscale[2] = 0x1FF;
+    camera->vpAlt.vp.vscale[3] = 0;
+
+    camera->vpAlt.vp.vtrans[0] = gGameStatusPtr->unk_82 + ((((u16) camera->viewportStartX + (camera->viewportW / 2)) << 16) >> 14);
+    camera->vpAlt.vp.vtrans[1] = gGameStatusPtr->unk_83 + ((((u16) camera->viewportStartY + (camera->viewportH / 2)) << 16) >> 14);
+    camera->vpAlt.vp.vtrans[2] = 0x200;
+    camera->vpAlt.vp.vtrans[3] = 0;
+}
+#else
 INCLUDE_ASM(void, "8800", set_cam_viewport, s16 id, s16 x, s16 y, s16 width, s16 height);
+#endif
 
 void get_cam_viewport(s32 camID, u16* x, u16* y, u16* width, u16* height) {
     *width = gCameras[camID].viewportW;
