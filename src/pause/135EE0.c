@@ -7,7 +7,7 @@ s32* gPauseMenuCurrentDescIconScript BSS;
 s32 D_802700D0 BSS;
 s8 gPauseMenuCurrentTab BSS;
 char D_802700D[8] BSS;
-s32 D_802700E0 BSS;
+BSS s32 D_802700E0;
 #define BSS_END 0x802700E4
 
 // TODO this is the bss for the whole segment - break it up
