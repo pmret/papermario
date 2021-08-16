@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-s32 N(D_802453B0_EF79C0)[91] BSS;
+BSS s32 N(D_802453B0_EF79C0)[91];
 
 f32 N(D_802444C0_CCF7D0)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
