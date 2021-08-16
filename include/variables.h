@@ -144,7 +144,7 @@ extern TriggerList gTriggerList2;
 extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
-extern u16 gMapTransitionAlpha;
+extern s16 gMapTransitionAlpha;
 extern s8 D_800A0930;
 extern s8 D_800A0931;
 extern s16 D_800A0932[1];
