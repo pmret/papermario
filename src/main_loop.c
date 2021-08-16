@@ -38,7 +38,7 @@ Gfx D_80074230[] = {
 };
 
 // BSS
-extern s32 timeFreezeMode BSS;
+extern BSS s32 timeFreezeMode;
 
 extern s16 D_8009A690;
 

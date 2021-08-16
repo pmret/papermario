@@ -1,12 +1,12 @@
 #include "common.h"
 
-s32 gPauseMenuHeldButtons BSS;
-s32 gPauseMenuPressedButtons BSS;
-s32 gPauseMenuCurrentDescString BSS;
-s32* gPauseMenuCurrentDescIconScript BSS;
-s32 D_802700D0 BSS;
-s8 gPauseMenuCurrentTab BSS;
-char D_802700D[8] BSS;
+BSS s32 gPauseMenuHeldButtons;
+BSS s32 gPauseMenuPressedButtons;
+BSS s32 gPauseMenuCurrentDescString;
+BSS s32* gPauseMenuCurrentDescIconScript;
+BSS s32 D_802700D0;
+BSS s8 gPauseMenuCurrentTab;
+BSS char D_802700D[8];
 BSS s32 D_802700E0;
 #define BSS_END 0x802700E4
 
