@@ -289,7 +289,76 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
     return newScript;
 }
 
-INCLUDE_ASM(s32, "evt/script_list", start_child_script);
+ScriptInstance* start_child_script(ScriptInstance* parentScript, Script* source, s32 initialState) {
+    s32 i;
+    s32 curScriptIndex;
+    s32 scriptListCount;
+    s32* tempCounter;
+    ScriptInstance* child;
+
+    for (i = 0; i < MAX_SCRIPTS; i++) {
+        if ((*gCurrentScriptListPtr)[i] == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(i < MAX_SCRIPTS);
+
+    curScriptIndex = i;
+    SCRIPT_ALLOC(child, curScriptIndex);
+    ASSERT(child != NULL);
+
+    parentScript->childScript = child;
+    parentScript->state |= 0x10;
+    child->state = initialState | 1;
+    child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = source;
+
+
+    child->currentOpcode = 0;
+    child->userData = NULL;
+    child->blockingParent = parentScript;
+    child->childScript = NULL;
+    child->parentScript = NULL;
+    child->priority = parentScript->priority + 1;
+    child->id = gStaticScriptCounter++;
+    child->owner1 = parentScript->owner1;
+    child->owner2 = parentScript->owner2;
+    child->loopDepth = -1;
+    child->switchDepth = -1;
+    child->groupFlags = parentScript->groupFlags;
+    child->ptrSavedPosition = NULL;
+    child->array = parentScript->array;
+    child->flagArray = parentScript->flagArray;
+    child->timeScale = gGlobalTimeSpace;
+    child->frameCounter = 0.0f;
+    child->unk_158 = 0;
+
+    scriptListCount = 0;
+
+    for (i = 0; i < ARRAY_COUNT(child->varTable); i++) {
+        child->varTable[i] = parentScript->varTable[i];
+    }
+
+    for (i = 0; i < ARRAY_COUNT(child->varFlags); i++) {
+        child->varFlags[i] = parentScript->varFlags[i];
+    }
+
+    find_script_labels(child);
+    if (gIsUpdatingScripts) {
+        scriptListCount = gScriptListCount++;
+        gScriptIndexList[scriptListCount] = curScriptIndex;
+        gScriptIdList[scriptListCount] = child->id;
+    }
+
+    suspend_frozen_scripts(child);
+
+    tempCounter = &gStaticScriptCounter;
+    if (*tempCounter == 0) {
+        *tempCounter = 1;
+    }
+
+    return child;
+}
 
 ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
     ScriptInstance* child;
