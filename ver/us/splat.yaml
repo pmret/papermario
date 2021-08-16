@@ -2195,7 +2195,7 @@ segments:
     overlay: True
     subsegments:
     - [0x3251d0, c]
-    - [0x3255e0, data]
+    - [0x3255E0, data]
   - type: code
     start: 0x325ad0
     vram: 0xE0200000
@@ -2204,744 +2204,1017 @@ segments:
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160, .data, 325AD0]
   - [0x326410, bin] # effect 1 gfx
-  - type: code # effect 1
-    start: 0x3278f0
+  - name: effect_1
+    dir: effects
+    type: code
+    start: 0x3278F0
     vram: 0xE0002000
     subsegments:
-    - [0x3278f0, c]
+    - [0x3278F0, c, effect_1]
     - [0x328050, data]
-  - type: code # effect 6
+  - name: effect_6
+    dir: effects
+    type: code
     start: 0x328110
     vram: 0xE000C000
     subsegments:
-    - [0x328110, c]
-    - [0x328d20, data]
-  - [0x328EA0, bin] # effect 6/7 gfx
-  - type: code # effect 7
+    - [0x328110, c, effect_6]
+    - [0x328D20, data]
+  - [0x328EA0, bin] # effect 6,7,23,29,39 gfx
+  - name: effect_7
+    dir: effects
+    type: code
     start: 0x32C110
     vram: 0xE000E000
     subsegments:
-    - [0x32C110, c]
+    - [0x32C110, c, effect_7]
     - [0x32c770, data]
-  - type: code # effect 8
+  - name: effect_8
+    dir: effects
+    type: code
     start: 0x32C7A0
     vram: 0xE0010000
     subsegments:
-    - [0x32C7A0, c]
+    - [0x32C7A0, c, effect_8]
     - [0x32CEB0, data]
-  - [0x32CEC0, bin] # effect 8/9 gfx
-  - type: code # effect 9
+  - [0x32CEC0, bin] # effect 8,9 gfx
+  - name: effect_9
+    dir: effects
+    type: code
     start: 0x32DD10
     vram: 0xE0012000
     subsegments:
-    - [0x32DD10, c]
-  - type: code # effect 10
+    - [0x32DD10, c, effect_9]
+  - name: effect_10
+    dir: effects
+    type: code
     start: 0x32E490
     vram: 0xE0014000
     subsegments:
-    - [0x32E490, c]
+    - [0x32E490, c, effect_10]
     - [0x32EC10, data]
-  - [0x32EC50, bin] # effect 10/11 gfx
-  - type: code # effect 11
+  - [0x32EC50, bin] # effect 10,11 gfx
+  - name: effect_11
+    dir: effects
+    type: code
     start: 0x32EE30
     vram: 0xE0016000
     subsegments:
-    - [0x32EE30, c]
+    - [0x32EE30, c, effect_11]
     - [0x32F550, data]
-  - type: code # effect 12
+  - name: effect_12
+    dir: effects
+    type: code
     start: 0x32F580
     vram: 0xE0018000
     subsegments:
-    - [0x32F580, c]
+    - [0x32F580, c, effect_12]
   - [0x32FB50, bin] # effect 12 gfx
-  - type: code # effect 13
+  - name: effect_13
+    dir: effects
+    type: code
     start: 0x32FE30
     vram: 0xE001A000
     subsegments:
-    - [0x32FE30, c]
+    - [0x32FE30, c, effect_13]
     - [0x330440, data]
   - [0x330460, bin] # effect 13 gfx
-  - type: code # effect 14
+  - name: effect_14
+    dir: effects
+    type: code
     start: 0x330910
     vram: 0xE001C000
     subsegments:
-    - [0x330910, c]
+    - [0x330910, c, effect_14]
     - [0x330EF0, data]
   - [0x330F00, bin] # effect 14 gfx
-  - type: code # effect 15
+  - name: effect_15
+    dir: effects
+    type: code
     start: 0x331940
     vram: 0xE001E000
     subsegments:
-    - [0x331940, c]
+    - [0x331940, c, effect_15]
     - [0x332690, data]
   - [0x3326A0, bin] # effect 15 gfx
-  - type: code # effect 16
+  - name: effect_16
+    dir: effects
+    type: code
     start: 0x333EC0
     vram: 0xE0020000
     subsegments:
-    - [0x333ec0, c]
-    - [0x334b50, data]
+    - [0x333EC0, c, effect_16]
+    - [0x334B50, data]
   - [0x334C70, bin] # effect 16 gfx
-  - type: code # effect 17
+  - name: effect_17
+    dir: effects
+    type: code
     start: 0x337240
     vram: 0xE0022000
     subsegments:
-    - [0x337240, c]
-    - [0x337f10, data]
-  - [0x337FC0, bin] # effect 17 gfx
-  - type: code # effect 18
+    - [0x337240, c, effect_17]
+    - [0x337F10, data]
+  - [0x337FC0, bin] # effect 17,34,56,58,132 gfx
+  - name: effect_18
+    dir: effects
+    type: code
     start: 0x339250
     vram: 0xE0024000
     subsegments:
-    - [0x339250, c]
-    - [0x339f10, data]
+    - [0x339250, c, effect_18]
+    - [0x339F10, data]
   - [0x339F60, bin] # effect 18 gfx
-  - type: code # effect 19
+  - name: effect_19
+    dir: effects
+    type: code
     start: 0x33B180
     vram: 0xE0026000
     subsegments:
-    - [0x33B180, c]
-    - [0x33bb70, data]
+    - [0x33B180, c, effect_19]
+    - [0x33BB70, data]
   - [0x33BBD0, bin] # effect 19 gfx
-  - type: code # effect 20
+  - name: effect_20
+    dir: effects
+    type: code
     start: 0x33CDF0
     vram: 0xE0028000
     subsegments:
-    - [0x33CDF0, c]
-    - [0x33d5d0, data]
-  - [0x33D610, bin] # effect 20 gfx
-  - type: code # effect 21
+    - [0x33CDF0, c, effect_20]
+    - [0x33D5D0, data]
+  - [0x33D610, bin] # effect 20,43 gfx
+  - name: effect_21
+    dir: effects
+    type: code
     start: 0x33E8C0
     vram: 0xE002A000
     subsegments:
-    - [0x33E8C0, c]
-    - [0x33efe0, data]
+    - [0x33E8C0, c, effect_21]
+    - [0x33EFE0, data]
   - [0x33F000, bin] # effect 21 gfx
-  - type: code # effect 22
+  - name: effect_22
+    dir: effects
+    type: code
     start: 0x33FE80
     vram: 0xE002C000
     subsegments:
-    - [0x33FE80, c]
-    - [0x3407c0, data]
+    - [0x33FE80, c, effect_22]
+    - [0x3407C0, data]
   - [0x340880, bin] # effect 22 gfx
-  - type: code # effect 23
+  - name: effect_23
+    dir: effects
+    type: code
     start: 0x3419E0
     vram: 0xE002E000
     subsegments:
-    - [0x3419E0, c]
+    - [0x3419E0, c, effect_23]
     - [0x342120, data]
-  - type: code # effect 24
+  - name: effect_24
+    dir: effects
+    type: code
     start: 0x342140
     vram: 0xE0030000
     subsegments:
-    - [0x342140, c]
-    - [0x342fd0, data]
-  - [0x343040, bin]
-  - type: code # effect 25
+    - [0x342140, c, effect_24]
+    - [0x342FD0, data]
+  - [0x343040, bin] # effect 24,33 gfx
+  - name: effect_25
+    dir: effects
+    type: code
     start: 0x343680
     vram: 0xE0032000
     subsegments:
-    - [0x343680, c]
-    - [0x343f30, data]
-  - [0x343F70, bin]
-  - type: code # effect 26
-    start: 0x344a10
+    - [0x343680, c, effect_25]
+    - [0x343F30, data]
+  - [0x343F70, bin] # effect 25 gfx
+  - name: effect_26
+    dir: effects
+    type: code
+    start: 0x344A10
     vram: 0xE0034000
     subsegments:
-    - [0x344a10, c]
+    - [0x344A10, c, effect_26]
     - [0x345190, data]
-  - [0x3451E0, bin]
-  - type: code # effect 27
+  - [0x3451E0, bin] # effect 26 gfx
+  - name: effect_27
+    dir: effects
+    type: code
     start: 0x3454E0
     vram: 0xE0036000
     subsegments:
-    - [0x3454E0, c]
-    - [0x345b10, data]
-  - [0x345B40, bin]
-  - type: code # effect 28
+    - [0x3454E0, c, effect_27]
+    - [0x345B10, data]
+  - [0x345B40, bin] # effect 27 gfx
+  - name: effect_28
+    dir: effects
+    type: code
     start: 0x34DD20
     vram: 0xE0038000
     subsegments:
-    - [0x34DD20, c]
+    - [0x34DD20, c, effect_28]
     - [0x34E710, data]
-  - type: code # effect 29
+  - [0x34E770, bin] # effect 28 gfx
+  - name: effect_29
+    dir: effects
+    type: code
     start: 0x34EC80
     vram: 0xE003A000
     subsegments:
-    - [0x34EC80, c]
-    - [0x34f480, data]
-  - type: code # effect 30
+    - [0x34EC80, c, effect_29]
+    - [0x34F480, data]
+  - name: effect_30
+    dir: effects
+    type: code
     start: 0x34F4C0
     vram: 0xE003C000
     subsegments:
-    - [0x34F4C0, c]
+    - [0x34F4C0, c, effect_30]
     - [0x350160, data]
-  - [0x350220, bin]
-  - type: code # effect 31
+  - [0x350220, bin] # effect 30 gfx
+  - name: effect_31
+    dir: effects
+    type: code
     start: 0x352440
     vram: 0xE003E000
     subsegments:
-    - [0x352440, c]
-    - [0x352cb0, data]
-  - [0x352CE0, bin]
-  - type: code # effect 32
+    - [0x352440, c, effect_31]
+    - [0x352CB0, data]
+  - [0x352CE0, bin] # effect 31 gfx
+  - name: effect_32
+    dir: effects
+    type: code
     start: 0x353300
     vram: 0xE0040000
     subsegments:
-    - [0x353300, c]
+    - [0x353300, c, effect_32]
     - [0x353B40, data]
-  - type: code # effect 33
+  - [0x353BB0, bin] # effect 32 gfx
+  - name: effect_33
+    dir: effects
+    type: code
     start: 0x3547A0
     vram: 0xE0042000
     subsegments:
-    - [0x3547A0, c]
+    - [0x3547A0, c, effect_33]
     - [0x354F20, data]
-  - type: code # effect 34
+  - name: effect_34
+    dir: effects
+    type: code
     start: 0x354F60
     vram: 0xE0044000
     subsegments:
-    - [0x354F60, c]
-    - [0x355d10, data]
-  - type: code # effect 35
+    - [0x354F60, c, effect_34]
+    - [0x355D10, data]
+  - name: effect_35
+    dir: effects
+    type: code
     start: 0x355EE0
     vram: 0xE0046000
     subsegments:
-    - [0x355EE0, c]
-    - [0x3564e0, data]
-  - [0x356530, bin]
-  - type: code # effect 36
+    - [0x355EE0, c, effect_35]
+    - [0x3564E0, data]
+  - [0x356530, bin] # effect 35 gfx
+  - name: effect_36
+    dir: effects
+    type: code
     start: 0x356980
     vram: 0xE0048000
     subsegments:
-    - [0x356980, c]
+    - [0x356980, c, effect_36]
     - [0x357380, data]
-  - [0x3573A0, bin]
-  - type: code # effect 37
+  - [0x3573A0, bin] # effect 36 gfx
+  - name: effect_37
+    dir: effects
+    type: code
     start: 0x3584C0
     vram: 0xE004A000
     subsegments:
-    - [0x3584C0, c]
+    - [0x3584C0, c, effect_37]
     - [0x359320, data]
-  - [0x3593B0, bin]
-  - type: code # effect 38
+  - [0x3593B0, bin] # effect 37,104 gfx
+  - name: effect_38
+    dir: effects
+    type: code
     start: 0x359F20
     vram: 0xE004C000
     subsegments:
-    - [0x359F20, c]
+    - [0x359F20, c, effect_38]
     - [0x35A580, data]
-  - type: code # effect 39
+  - [0x35A5E0, bin] # effect 38 gfx
+  - name: effect_39
+    dir: effects
+    type: code
     start: 0x35B9D0
     vram: 0xE004E000
     subsegments:
-    - [0x35B9D0, c]
-    - [0x35bfb0, data]
-  - type: code # effect 40
+    - [0x35B9D0, c, effect_39]
+    - [0x35BFB0, data]
+  - name: effect_40
+    dir: effects
+    type: code
     start: 0x35BFD0
     vram: 0xE0050000
     subsegments:
-    - [0x35BFD0, c]
-    - [0x35c530, data]
-  - [0x35C550, bin]
-  - type: code # effect 41
+    - [0x35BFD0, c, effect_40]
+    - [0x35C530, data]
+  - [0x35C550, bin] # effect 40 gfx
+  - name: effect_41
+    dir: effects
+    type: code
     start: 0x35CA80
     vram: 0xE0052000
     subsegments:
-    - [0x35CA80, c]
+    - [0x35CA80, c, effect_41]
     - [0x35D460, data]
-  - type: code # effect 43
+  - [0x35D510, bin] # effect 41 gfx
+  - name: effect_43
+    dir: effects
+    type: code
     start: 0x35DA00
     vram: 0xE0056000
     subsegments:
-    - [0x35DA00, c]
+    - [0x35DA00, c, effect_43]
     - [0x35E8A0, data]
-  - type: code # effect 44
+  - name: effect_44
+    dir: effects
+    type: code
     start: 0x35E920
     vram: 0xE0058000
     subsegments:
-    - [0x35E920, c]
+    - [0x35E920, c, effect_44]
     - [0x35F0A0, data]
-  - type: code # effect 45
+  - [0x35F0E0, bin] # effect 44 gfx
+  - name: effect_45
+    dir: effects
+    type: code
     start: 0x3602C0
     vram: 0xE005A000
     subsegments:
-    - [0x3602C0, c]
-    - [0x360a10, data]
-  - [0x360A30, bin]
-  - type: code # effect 46
+    - [0x3602C0, c, effect_45]
+    - [0x360A10, data]
+  - [0x360A30, bin] # effect 45 gfx
+  - name: effect_46
+    dir: effects
+    type: code
     start: 0x360F40
     vram: 0xE005C000
     subsegments:
-    - [0x360F40, c]
+    - [0x360F40, c, effect_46]
     - [0x361640, data]
-  - type: code # effect 47
+  - [0x361670, bin] # effect 46 gfx
+  - name: effect_47
+    dir: effects
+    type: code
     start: 0x3625C0
     vram: 0xE005E000
     subsegments:
-    - [0x3625C0, c]
+    - [0x3625C0, c, effect_47]
     - [0x362C30, data]
-  - type: code # effect 48
+  - [0x362C50, bin] # effect 47 gfx
+  - name: effect_48
+    dir: effects
+    type: code
     start: 0x363160
     vram: 0xE0060000
     subsegments:
-    - [0x363160, c]
+    - [0x363160, c, effect_48]
     - [0x363890, data]
-  - type: code # effect 49
+  - [0x3638C0, bin] # effect 48 gfx
+  - name: effect_49
+    dir: effects
+    type: code
     start: 0x364300
     vram: 0xE0062000
     subsegments:
-    - [0x364300, c]
+    - [0x364300, c, effect_49]
     - [0x364BC0, data]
-  - type: code # effect 50
+  - [0x364C00, bin] # effect 49 gfx
+  - name: effect_50
+    dir: effects
+    type: code
     start: 0x364F10
     vram: 0xE0064000
     subsegments:
-    - [0x364F10, c]
+    - [0x364F10, c, effect_50]
     - [0x365970, data]
-  - type: code # effect 51
+  - [0x3659B0, bin] # effect 50 gfx
+  - name: effect_51
+    dir: effects
+    type: code
     start: 0x366030
     vram: 0xE0066000
     subsegments:
-    - [0x366030, c]
-    - [0x366c80, data]
-  - [0x366D60, bin]
-  - type: code # effect 52
+    - [0x366030, c, effect_51]
+    - [0x366C80, data]
+  - [0x366D60, bin] # effect 51 gfx
+  - name: effect_52
+    dir: effects
+    type: code
     start: 0x36A8D0
     vram: 0xE0068000
     subsegments:
-    - [0x36A8D0, c]
-    - [0x36ae80, data]
-  - [0x36AEE0, bin]
-  - type: code # effect 53
+    - [0x36A8D0, c, effect_52]
+    - [0x36AE80, data]
+  - [0x36AEE0, bin] # effect 52 gfx
+  - name: effect_53
+    dir: effects
+    type: code
     start: 0x36D020
     vram: 0xE006A000
     subsegments:
-    - [0x36D020, c]
-    - [0x36de10, data]
-  - [0x36DF90, bin]
-  - type: code # effect 54
+    - [0x36D020, c, effect_53]
+    - [0x36DE10, data]
+  - [0x36DF90, bin] # effect 53 gfx
+  - name: effect_54
+    dir: effects
+    type: code
     start: 0x36E1D0
     vram: 0xE006C000
     subsegments:
-    - [0x36E1D0, c]
-    - [0x36ed30, data]
-  - [0x36ED60, bin]
-  - type: code # effect 55
+    - [0x36E1D0, c, effect_54]
+    - [0x36ED30, data]
+  - [0x36ED60, bin] # effect 54 gfx
+  - name: effect_55
+    dir: effects
+    type: code
     start: 0x372790
     vram: 0xE006E000
     subsegments:
-    - [0x372790, c]
+    - [0x372790, c, effect_55]
     - [0x373390, data]
-  - [0x3733E0, bin]
-  - type: code # effect 56
+  - [0x3733E0, bin] # effect 55 gfx
+  - name: effect_56
+    dir: effects
+    type: code
     start: 0x3740B0
     vram: 0xE0070000
     subsegments:
-    - [0x3740B0, c]
-    - [0x374d80, data]
-  - type: code # effect 57
+    - [0x3740B0, c, effect_56]
+    - [0x374D80, data]
+  - name: effect_57
+    dir: effects
+    type: code
     start: 0x374E50
     vram: 0xE0072000
     subsegments:
-    - [0x374E50, c]
+    - [0x374E50, c, effect_57]
     - [0x375500, data]
-  - [0x375510, bin]
-  - type: code # effect 58
+  - [0x375510, bin] # effect 57 gfx
+  - name: effect_58
+    dir: effects
+    type: code
     start: 0x376460
     vram: 0xE0074000
     subsegments:
-    - [0x376460, c]
-    - [0x376fc0, data]
-  - type: code # effect 59
+    - [0x376460, c, effect_58]
+    - [0x376FC0, data]
+  - name: effect_59
+    dir: effects
+    type: code
     start: 0x377070
     vram: 0xE0076000
     subsegments:
-    - [0x377070, c]
-    - [0x377f00, data]
-  - [0x377F80, bin]
-  - type: code # effect 60
+    - [0x377070, c, effect_59]
+    - [0x377F00, data]
+  - [0x377F80, bin] # effect 59 gfx
+  - name: effect_60
+    dir: effects
+    type: code
     start: 0x37A3F0
     vram: 0xE0078000
     subsegments:
-    - [0x37A3F0, c]
-    - [0x37acf0, data]
-  - [0x37ADD0, bin]
-  - type: code
+    - [0x37A3F0, c, effect_60]
+    - [0x37ACF0, data]
+  - [0x37ADD0, bin] # effect 60 gfx
+  - name: effect_61
+    dir: effects
+    type: code
     start: 0x37C540
     vram: 0xE007A000
     subsegments:
-    - [0x37C540, c]
+    - [0x37C540, c, effect_61]
     - [0x37D140, data]
-  - type: code
+  - [0x37D180, bin] # effect 61 gfx
+  - name: effect_62
+    dir: effects
+    type: code
     start: 0x37D490
     vram: 0xE007C000
     subsegments:
-    - [0x37D490, c]
+    - [0x37D490, c, effect_62]
     - [0x37D9A0, data]
-  - [0x37D9D0, bin]
-  - type: code
+  - [0x37D9D0, bin] # effect 62,66 gfx
+  - name: effect_63
+    dir: effects
+    type: code
     start: 0x37F720
     vram: 0xE007E000
     subsegments:
-    - [0x37F720, c]
+    - [0x37F720, c, effect_63]
     - [0x380350, data]
-  - [0x3803A0, bin]
-  - type: code
+  - [0x3803A0, bin] # effect 63 gfx
+  - name: effect_64
+    dir: effects
+    type: code
     start: 0x3812C0
     vram: 0xE0080000
     subsegments:
-    - [0x3812C0, c]
-    - [0x381d80, data]
-  - [0x381E00, bin]
-  - type: code
+    - [0x3812C0, c, effect_64]
+    - [0x381D80, data]
+  - [0x381E00, bin] # effect 64 gfx
+  - name: effect_65
+    dir: effects
+    type: code
     start: 0x385640
     vram: 0xE0082000
     subsegments:
-    - [0x385640, c]
+    - [0x385640, c, effect_65]
     - [0x386340, data]
-  - [0x3863B0, bin]
-  - type: code
+  - [0x3863B0, bin] # effect 65 gfx
+  - name: effect_66
+    dir: effects
+    type: code
     start: 0x3889D0
     vram: 0xE0084000
     subsegments:
-    - [0x3889D0, c]
-    - [0x3897e0, data]
-  - type: code
+    - [0x3889D0, c, effect_66]
+    - [0x3897E0, data]
+  - name: effect_67
+    dir: effects
+    type: code
     start: 0x389850
     vram: 0xE0086000
     subsegments:
-    - [0x389850, c]
-    - [0x38a2f0, data]
-  - [0x38A350, bin]
-  - type: code
+    - [0x389850, c, effect_67]
+    - [0x38A2F0, data]
+  - [0x38A350, bin] # effect 67 gfx
+  - name: effect_68
+    dir: effects
+    type: code
     start: 0x38ADF0
     vram: 0xE0088000
     subsegments:
-    - [0x38ADF0, c]
-    - [0x38bab0, data]
-  - [0x38BBA0, bin]
-  - type: code
+    - [0x38ADF0, c, effect_68]
+    - [0x38BAB0, data]
+  - [0x38BBA0, bin] # effect 68 gfx
+  - name: effect_69
+    dir: effects
+    type: code
     start: 0x38C5F0
     vram: 0xE008A000
     subsegments:
-    - [0x38C5F0, c]
+    - [0x38C5F0, c, effect_69]
     - [0x38D040, data]
-  - type: code
+  - [0x38D070, bin] # effect 69 gfx
+  - name: effect_70
+    dir: effects
+    type: code
     start: 0x38DE00
     vram: 0xE008C000
     subsegments:
-    - [0x38DE00, c]
+    - [0x38DE00, c, effect_70]
     - [0x38E8F0, data]
-  - type: code
+  - [0x38E990, bin] # effect 70 gfx
+  - name: effect_71
+    dir: effects
+    type: code
     start: 0x38EE60
     vram: 0xE008E000
     subsegments:
-    - [0x38EE60, c]
-    - [0x38f6f0, data]
-  - [0x38F710, bin]
-  - type: code
+    - [0x38EE60, c, effect_71]
+    - [0x38F6F0, data]
+  - [0x38F710, bin] # effect 71 gfx
+  - name: effect_72
+    dir: effects
+    type: code
     start: 0x38F900
     vram: 0xE0090000
     subsegments:
-    - [0x38F900, c]
+    - [0x38F900, c, effect_72]
     - [0x390340, data]
-  - [0x3903D0, ia4, battle/lucky, 64, 32]
+  - [0x3903D0, ia4, battle/lucky, 64, 32] # effect 72 gfx TODO put these images + the bin in one group
   - [0x3907D0, ia4, battle/miss,  64, 32]
   - [0x390BD0, ia4, battle/good,  64, 32]
   - [0x390FD0, ia4, battle/nice,  64, 32]
   - [0x3913D0, ia4, battle/super, 64, 32]
   - [0x3917D0, bin]
-  - type: code
+  - name: effect_73
+    dir: effects
+    type: code
     start: 0x391D30
     vram: 0xE0092000
     subsegments:
-    - [0x391D30, c]
-    - [0x3923c0, data]
-  - [0x392440, bin]
-  - type: code
+    - [0x391D30, c, effect_73]
+    - [0x3923C0, data]
+  - [0x392440, bin] # effect 73 gfx
+  - name: effect_74
+    dir: effects
+    type: code
     start: 0x3928D0
     vram: 0xE0094000
     subsegments:
-    - [0x3928D0, c]
+    - [0x3928D0, c, effect_74]
     - [0x393080, data]
-  - [0x3930A0, bin]
-  - type: code
+  - [0x3930A0, bin] # effect 74 gfx
+  - name: effect_75
+    dir: effects
+    type: code
     start: 0x394280
     vram: 0xE0096000
     subsegments:
-    - [0x394280, c]
-  - [0x394660, bin] # data/rodata for the above, and some extra unknown data.
-  - type: code
+    - [0x394280, c, effect_75]
+    - [0x394660, data]
+  - [0x394670, bin] # effect 75 gfx
+  - name: effect_76
+    dir: effects
+    type: code
     start: 0x395BB0
     vram: 0xE0098000
     subsegments:
-    - [0x395BB0, c]
+    - [0x395BB0, c, effect_76]
     - [0x3960C0, data]
-  - type: code
+  - [0x3960F0, bin] # effect 76 gfx
+  - name: effect_77
+    dir: effects
+    type: code
     start: 0x3965B0
     vram: 0xE009A000
     subsegments:
-    - [0x3965B0, c]
+    - [0x3965B0, c, effect_77]
     - [0x397010, data]
-  - type: code
+  - [0x397040, bin] # effect 77 gfx
+  - name: effect_78
+    dir: effects
+    type: code
     start: 0x3981F0
     vram: 0xE009C000
     subsegments:
-    - [0x3981F0, c]
-  - [0x398bc0, bin] # data/rodata for the above, and some extra unknown data.
-  - type: code
+    - [0x3981F0, c, effect_78]
+  - [0x398BC0, bin] # effect 78 gfx
+  - name: effect_79
+    dir: effects
+    type: code
     start: 0x39FF20
     vram: 0xE009E000
     subsegments:
-    - [0x39FF20, c]
+    - [0x39FF20, c, effect_79]
     - [0x3A0D10, data]
-  - type: code
+  - [0x3A0D60, bin] # effect 79 gfx
+  - name: effect_80
+    dir: effects
+    type: code
     start: 0x3A2290
     vram: 0xE00A0000
     subsegments:
-    - [0x3A2290, c]
-  - [0x3a2440, bin] # data/rodata for the above, and some extra unknown data.
-  - type: code
+    - [0x3A2290, c, effect_80]
+  - [0x3A2440, bin] # effect 80 gfx
+  - name: effect_81
+    dir: effects
+    type: code
     start: 0x3A2990
     vram: 0xE00A2000
     subsegments:
-    - [0x3A2990, c]
+    - [0x3A2990, c, effect_81]
     - [0x3A3360, data]
-  - type: code
+  - [0x3A33D0, bin] # effect 81 gfx
+  - name: effect_82
+    dir: effects
+    type: code
     start: 0x3A37E0
     vram: 0xE00A4000
     subsegments:
-    - [0x3A37E0, c]
-    - [0x3a42b0, data]
-  - [0x3A4320, bin]
-  - type: code
+    - [0x3A37E0, c, effect_82]
+    - [0x3A42B0, data]
+  - [0x3A4320, bin] # effect 82 gfx
+  - name: effect_83
+    dir: effects
+    type: code
     start: 0x3A5550
     vram: 0xE00A6000
     subsegments:
-    - [0x3A5550, c]
-    - [0x3A5BE0, data]
-  - type: code
+    - [0x3A5550, c, effect_83]
+  - [0x3A5BE0, bin] # effect 83 gfx
+  - name: effect_84
+    dir: effects
+    type: code
     start: 0x3A70F0
     vram: 0xE00A8000
     subsegments:
-    - [0x3A70F0, c]
+    - [0x3A70F0, c, effect_84]
     - [0x3A7710, data]
-  - [0x3A77A0, bin] # split further
-  - type: code
+  - [0x3A77A0, bin] # effect 84 gfx
+  - name: effect_85
+    dir: effects
+    type: code
     start: 0x3AA920
     vram: 0xE00AA000
     subsegments:
-    - [0x3AA920, c]
+    - [0x3AA920, c, effect_85]
     - [0x3AAFE0, data]
-  - [0x3AB030, bin] # todo split this further
-  - type: code
+  - [0x3AB030, bin] # effect 85 gfx
+  - name: effect_86
+    dir: effects
+    type: code
     start: 0x3AEE20
     vram: 0xE00AC000
     subsegments:
-    - [0x3AEE20, c]
+    - [0x3AEE20, c, effect_86]
     - [0x3AF5D0, data]
-  - [0x3AF700, bin] # todo split this further
-  - type: code
+  - [0x3AF700, bin] # effect 86 gfx
+  - name: effect_87
+    dir: effects
+    type: code
     start: 0x3B2350
     vram: 0xE00AE000
     subsegments:
-    - [0x3B2350, c]
-  - [0x3B2D90, bin] # todo split this further
-  - type: code
+    - [0x3B2350, c, effect_87]
+  - [0x3B2D90, bin] # effect 87 gfx
+  - name: effect_88
+    dir: effects
+    type: code
     start: 0x3B3EB0
     vram: 0xE00B0000
     subsegments:
-    - [0x3B3EB0, c]
+    - [0x3B3EB0, c, effect_88]
     - [0x3B4690, data]
-  - [0x3B46A0, bin] # todo split this further
-  - type: code
+  - [0x3B46A0, bin] # effect 88 gfx
+  - name: effect_89
+    dir: effects
+    type: code
     start: 0x3B4790
     vram: 0xE00B2000
     subsegments:
-    - [0x3B4790, c]
+    - [0x3B4790, c, effect_89]
     - [0x3B5330, data]
-  - type: code
+  - [0x3B5340, bin] # effect 89 gfx
+  - name: effect_90
+    dir: effects
+    type: code
     start: 0x3B5CF0
     vram: 0xE00B4000
     subsegments:
-    - [0x3B5CF0, c]
+    - [0x3B5CF0, c, effect_90]
     - [0x3B69E0, data]
-  - type: code
+  - [0x3B6BF0, bin] # effect 90 gfx
+  - name: effect_91
+    dir: effects
+    type: code
     start: 0x3B7160
     vram: 0xE00B6000
     subsegments:
-    - [0x3B7160, c]
+    - [0x3B7160, c, effect_91]
     - [0x3B78B0, data]
-  - type: code
+  - [0x3B78D0, bin] # effect 91 gfx
+  - name: effect_92
+    dir: effects
+    type: code
     start: 0x3B7B80
     vram: 0xE00B8000
     subsegments:
-    - [0x3B7B80, c]
+    - [0x3B7B80, c, effect_92]
     - [0x3B8470, data]
-  - [0x3B8860, bin] # todo split this further
-  - type: code
+  - [0x3B8860, bin] # effect 92 gfx
+  - name: effect_93
+    dir: effects
+    type: code
     start: 0x3B8BD0
     vram: 0xE00BA000
     subsegments:
-    - [0x3B8BD0, c]
+    - [0x3B8BD0, c, effect_93]
     - [0x3B9A50, data]
-  - type: code
+  - [0x3B9A70, bin] # effect 93 gfx
+  - name: effect_94
+    dir: effects
+    type: code
     start: 0x3BA030
     vram: 0xE00BC000
     subsegments:
-    - [0x3BA030, c]
+    - [0x3BA030, c, effect_94]
     - [0x3BAC60, data]
-  - [0x3BAEA0, bin] # todo split this further ADD STUFF AFTER HERE
-  - type: code
+  - [0x3BAEA0, bin] # effect 94 gfx
+  - name: effect_95
+    dir: effects
+    type: code
     start: 0x3BBF60
     vram: 0xE00BE000
     subsegments:
-    - [0x3BBF60, c]
+    - [0x3BBF60, c, effect_95]
     - [0x3BCA50, data]
-  - type: code
+  - [0x3BCA90, bin] # effect 95 gfx
+  - name: effect_96
+    dir: effects
+    type: code
     start: 0x3BCD60
     vram: 0xE00C0000
     subsegments:
-    - [0x3BCD60, c]
+    - [0x3BCD60, c, effect_96]
     - [0x3BD770, data]
-  - type: code
+  - [0x3BD9A0, bin] # effect 96 gfx
+  - name: effect_97
+    dir: effects
+    type: code
     start: 0x3C11D0
     vram: 0xE00C2000
     subsegments:
-    - [0x3C11D0, c]
+    - [0x3C11D0, c, effect_97]
     - [0x3C1B60, data]
-  - type: code
+  - [0x3C1BA0, bin] # effect 97 gfx
+  - name: effect_98
+    dir: effects
+    type: code
     start: 0x3CADF0
     vram: 0xE00C4000
     subsegments:
-    - [0x3CADF0, c]
+    - [0x3CADF0, c, effect_98]
     - [0x3CB7C0, data]
-  - type: code
+  - [0x3CB890, bin] # effect 98 gfx
+  - name: effect_99
+    dir: effects
+    type: code
     start: 0x3CC9E0
     vram: 0xE00C6000
     subsegments:
-    - [0x3CC9E0, c]
+    - [0x3CC9E0, c, effect_99]
     - [0x3CD670, data]
-  - type: code
+  - [0x3CD6E0, bin] # effect 99 gfx
+  - name: effect_100
+    dir: effects
+    type: code
     start: 0x3CF3A0
     vram: 0xE00C8000
     subsegments:
-    - [0x3CF3A0, c]
+    - [0x3CF3A0, c, effect_100]
     - [0x3CFAB0, data]
-  - type: code
+  - [0x3CFAF0, bin] # effect 100 gfx
+  - name: effect_101
+    dir: effects
+    type: code
     start: 0x3D0500
     vram: 0xE00CA000
     subsegments:
-    - [0x3D0500, c]
+    - [0x3D0500, c, effect_101]
     - [0x3D11B0, data]
-  - type: code
+  - [0x3D11E0, bin] # effect 101 gfx
+  - name: effect_102
+    dir: effects
+    type: code
     start: 0x3D1690
     vram: 0xE00CC000
     subsegments:
-    - [0x3D1690, c]
+    - [0x3D1690, c, effect_102]
     - [0x3D2460, data]
-  - type: code
+  - [0x3D2580, bin] # effect 102 gfx
+  - name: effect_103
+    dir: effects
+    type: code
     start: 0x3D2AC0
     vram: 0xE00CE000
     subsegments:
-    - [0x3D2AC0, c]
+    - [0x3D2AC0, c, effect_103]
     - [0x3D3910, data]
-  - type: code
+  - [0x3D3930, bin] # effect 103 gfx
+  - name: effect_104
+    dir: effects
+    type: code
     start: 0x3D3E20
     vram: 0xE00D0000
     subsegments:
-    - [0x3D3E20, c]
+    - [0x3D3E20, c, effect_104]
     - [0x3D4930, data]
-  - type: code
+  - name: effect_105
+    dir: effects
+    type: code
     start: 0x3D4970
     vram: 0xE00D2000
     subsegments:
-    - [0x3D4970, c]
+    - [0x3D4970, c, effect_105]
     - [0x3D4E70, data]
-  - type: code
+  - [0x3D4E90, bin] # effect 105 gfx
+  - name: effect_107
+    dir: effects
+    type: code
     start: 0x3D5020
     vram: 0xE00D6000
     subsegments:
-    - [0x3D5020, c]
+    - [0x3D5020, c, effect_107]
     - [0x3D5E60, data]
-  - type: code
+  - [0x3D5F30, bin] # effect 107 gfx
+  - name: effect_108
+    dir: effects
+    type: code
     start: 0x3D67C0
     vram: 0xE00D8000
     subsegments:
-    - [0x3D67C0, c]
+    - [0x3D67C0, c, effect_108]
     - [0x3D6FA0, data]
-  - type: code
+  - [0x3D7040, bin] # effect 108 gfx
+  - name: effect_109
+    dir: effects
+    type: code
     start: 0x3D7240
     vram: 0xE00DA000
     subsegments:
-    - [0x3D7240, c]
+    - [0x3D7240, c, effect_109]
     - [0x3D7740, data]
-  - type: code
+  - [0x3D7770, bin] # effect 109 gfx
+  - name: effect_110
+    dir: effects
+    type: code
     start: 0x3D7A70
     vram: 0xE00DC000
     subsegments:
-    - [0x3D7A70, c]
+    - [0x3D7A70, c, effect_110]
     - [0x3D80B0, data]
-  - type: code
+  - [0x3D80C0, bin] # effect 110 gfx
+  - name: effect_111
+    dir: effects
+    type: code
     start: 0x3D8720
     vram: 0xE00DE000
     subsegments:
-    - [0x3D8720, c]
+    - [0x3D8720, c, effect_111]
     - [0x3D8F30, data]
-  - type: code
+  - [0x3D9100, bin] # effect 111 gfx
+  - name: effect_112
+    dir: effects
+    type: code
     start: 0x3DB460
     vram: 0xE00E0000
     subsegments:
-    - [0x3DB460, c]
+    - [0x3DB460, c, effect_112]
     - [0x3DBEA0, data]
-  - type: code
+  - [0x3DBF40, bin] # effect 112 gfx
+  - name: effect_113
+    dir: effects
+    type: code
     start: 0x3DC310
     vram: 0xE00E2000
     subsegments:
-    - [0x3DC310, c]
+    - [0x3DC310, c, effect_113]
     - [0x3DCD00, data]
-  - type: code
+  - [0x3DCD50, bin] # effect 113 gfx
+  - name: effect_114
+    dir: effects
+    type: code
     start: 0x3DE000
     vram: 0xE00E4000
     subsegments:
-    - [0x3DE000, c]
+    - [0x3DE000, c, effect_114]
     - [0x3DED90, data]
-  - type: code
+  - [0x3DEE60, bin] # effect 114 gfx
+  - name: effect_115
+    dir: effects
+    type: code
     start: 0x3E0930
     vram: 0xE00E6000
     subsegments:
-    - [0x3E0930, c]
+    - [0x3E0930, c, effect_115]
     - [0x3E11B0, data]
-  - type: code
+  - [0x3E12D0, bin] # effect 115 gfx
+  - name: effect_116
+    dir: effects
+    type: code
     start: 0x3E1690
     vram: 0xE00E8000
     subsegments:
-    - [0x3E1690, c]
+    - [0x3E1690, c, effect_116]
     - [0x3E1CC0, data]
-  - type: code
+  - [0x3E1CD0, bin] # effect 116 gfx
+  - name: effect_117
+    dir: effects
+    type: code
     start: 0x3E1EE0
     vram: 0xE00EA000
     subsegments:
-    - [0x3E1EE0, c]
+    - [0x3E1EE0, c, effect_117]
     - [0x3E2930, data]
-  - type: code
+  - [0x3E2960, bin] # effect 117 gfx
+  - name: effect_119
+    dir: effects
+    type: code
     start: 0x3E43A0
     vram: 0xE010A000
     subsegments:
-    - [0x3E43A0, c]
+    - [0x3E43A0, c, effect_119]
     - [0x3E5060, data]
-  - type: code
+  - [0x3E5350, bin] # effect 119 gfx
+  - name: effect_120
+    dir: effects
+    type: code
     start: 0x3E54C0
     vram: 0xE010C000
     subsegments:
-    - [0x3E54C0, c]
+    - [0x3E54C0, c, effect_120]
     - [0x3E5ED0, data]
-  - type: code
+  - [0x3E5F30, bin] # effect 120 gfx
+  - name: effect_121
+    dir: effects
+    type: code
     start: 0x3EB4E0
     vram: 0xE010E000
     subsegments:
-    - [0x3EB4E0, c]
+    - [0x3EB4E0, c, effect_121]
     - [0x3EBC30, data]
-  - [0x3EBE60, ia8,    world/ch0,               144, 40]
+  - [0x3EBE60, ia8,    world/ch0,               144, 40] # effect 121 gfx TODO put these and the bin into a group
   - [0x3ED4E0, ia8,    world/text_chapter,      128, 40]
   - [0x3EE8E0, ia8,    world/text_end_of,       104, 40]
   - [0x3EF920, ia8,    world/exclamation_point, 16,  40]
@@ -2955,21 +3228,24 @@ segments:
   - [0x3F6BA0, ia8,    world/ch8,               64,  64]
   - [0x3F7BA0, rgba16, world/chapter_rainbow,   8,  16]
   - [0x3F7CA0, bin]
-  - type: code
+  - name: effect_122
+    dir: effects
+    type: code
     start: 0x3F83F0
     vram: 0xE0110000
     subsegments:
-    - [0x3F83F0, c]
+    - [0x3F83F0, c, effect_122]
     - [0x3F8CA0, data]
-  - [0x3F8CC0, i4, ice_smash, 64, 128]
-  - [0x3F9CC0, bin]
-  - type: code
+  - [0x3F8CC0, bin] # effect 122 gfx
+  - name: effect_123
+    dir: effects
+    type: code
     start: 0x3F9E50
     vram: 0xE0112000
     subsegments:
-    - [0x3F9E50, c]
+    - [0x3F9E50, c, effect_123]
     - [0x3FA480, data]
-  - start: 0x3FA4B0
+  - start: 0x3FA4B0 # effect 123,125 gfx (from here until the empty line) TODO put these into a group
     type: ci4
     name: star_cards/card_front
     flip_y: true
@@ -3049,31 +3325,42 @@ segments:
     height: 48
   - [0x3FE0B0, palette, star_cards/klevar]
   - [0x3FE0D0, bin]
-  - type: code
+# end of effect 123,125 gfx TODO put the above (up to the previous comment) into a group
+  - name: effect_124
+    dir: effects
+    type: code
     start: 0x3FEAE0
     vram: 0xE0114000
     subsegments:
-    - [0x3FEAE0, c]
+    - [0x3FEAE0, c, effect_124]
     - [0x3FF180, data]
-  - type: code
+  - [0x3FF250, bin] # effect 124 gfx
+  - name: effect_125
+    dir: effects
+    type: code
     start: 0x402640
     vram: 0xE0116000
     subsegments:
-    - [0x402640, c]
+    - [0x402640, c, effect_125]
     - [0x4032A0, data]
-  - type: code
+  - name: effect_126
+    dir: effects
+    type: code
     start: 0x403400
     vram: 0xE0118000
     subsegments:
-    - [0x403400, c]
+    - [0x403400, c, effect_126]
     - [0x403BB0, data]
-  - type: code
+  - [0x403BF0, bin] # effect 126 gfx
+  - name: effect_127
+    dir: effects
+    type: code
     start: 0x404220
     vram: 0xE011A000
     subsegments:
-    - [0x404220, c]
+    - [0x404220, c, effect_127]
     - [0x404E40, data]
-  - start: 0x404F40
+  - start: 0x404F40  # effect 127 gfx (this until the next comment TODO put them all in a group)
     type: ci4
     name: world/cloud
     flip_y: true
@@ -3102,48 +3389,69 @@ segments:
     height: 160
   - [0x406540, palette, world/numbers]
   - [0x406740, bin]
-  - type: code
+# end of effect 127 gfx
+  - name: effect_128
+    dir: effects
+    type: code
     start: 0x406B40
     vram: 0xE011C000
     subsegments:
-    - [0x406B40, c]
+    - [0x406B40, c, effect_128]
     - [0x407040, data]
-  - type: code
+  - [0x407080, bin] # effect 128 gfx
+  - name: effect_129
+    dir: effects
+    type: code
     start: 0x409990
     vram: 0xE011E000
     subsegments:
-    - [0x409990, c]
+    - [0x409990, c, effect_129]
     - [0x40A180, data]
-  - type: code
+  - [0x40A1C0, bin] # effect 129 gfx
+  - name: effect_130
+    dir: effects
+    type: code
     start: 0x40B3F0
     vram: 0xE0120000
     subsegments:
-    - [0x40B3F0, c]
+    - [0x40B3F0, c, effect_130]
     - [0x40BB70, data]
-  - type: code
+  - [0x40BBA0, bin] # effect 130 gfx
+  - name: effect_131
+    dir: effects
+    type: code
     start: 0x40C5A0
     vram: 0xE0122000
     subsegments:
-    - [0x40C5A0, c]
+    - [0x40C5A0, c, effect_131]
     - [0x40D130, data]
-  - type: code
+  - [0x40D290, bin] # effect 131 gfx
+  - name: effect_132
+    dir: effects
+    type: code
     start: 0x412730
     vram: 0xE0124000
     subsegments:
-    - [0x412730, c]
+    - [0x412730, c, effect_132]
     - [0x412FD0, data]
-  - type: code
+  - name: effect_133
+    dir: effects
+    type: code
     start: 0x413360
     vram: 0xE0126000
     subsegments:
-    - [0x413360, c]
+    - [0x413360, c, effect_133]
     - [0x413F20, data]
-  - type: code
+  - [0x413FA0, bin] # effect 133 gfx
+  - name: effect_134
+    dir: effects
+    type: code
     start: 0x414BA0
     vram: 0xE0128000
     subsegments:
-    - [0x414BA0, c]
+    - [0x414BA0, c, effect_134]
     - [0x415020, data]
+  - [0x415060, bin] # effect 134 gfx
   - type: code
     start: 0x415D90
     vram: 0x802A1000

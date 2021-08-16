@@ -1177,7 +1177,7 @@ u8 add_star_pieces(s32 amt) {
     return playerData->starPieces;
 }
 
-void increment_max_SP() {
+void increment_max_SP(void) {
     gPlayerData.maxStarPower++;
     gPlayerData.specialBarsFilled = gPlayerData.maxStarPower * 256;
 }
