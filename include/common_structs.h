@@ -571,7 +571,7 @@ typedef struct Camera {
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ f32 trueRotation[3];
+    /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
@@ -628,7 +628,10 @@ typedef struct Camera {
     /* 0x52C */ s32 unk_52C;
     /* 0x530 */ s32 unk_530;
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
-    /* 0x538 */ char unk_538[32];
+    /* 0x538 */ char unk_538[0x18];
+    /* 0x550 */ f32 unk_550;
+    /* 0x554 */ s16 unk_554;
+    /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
 typedef struct BattleStatusUnkInner {

@@ -79,25 +79,23 @@ void update_cameras(void) {
     gCurrentCamID = 0;
 }
 
-void render_frame(s32 arg0) {
+void render_frame(s32 flag) {
     s32 camID;
-    s32 ulx;
-    s32 uly;
-    s32 lrx;
-    s32 lry;
 
-    if (arg0 == 0) {
+    if (!flag) {
         gCurrentCamID = 0;
         func_80116698();
     }
 
-    camID = CAM_DEFAULT;
-    if (arg0 != 0) {
+    if (flag) {
         camID = CAM_CAM3;
+    } else {
+        camID = CAM_DEFAULT;
     }
-    arg0 = 1 - arg0;
 
-    for (; camID < 4 - arg0; camID++) {
+    flag = 1 - flag; // toggle flag 0/1
+
+    for (; camID < ARRAY_COUNT(gCameras) - flag; camID++) {
         Camera* camera = &gCameras[camID];
 
         if (camera->flags != 0 && !(camera->flags & (0x80 | 0x2))) {
@@ -108,6 +106,11 @@ void render_frame(s32 arg0) {
             if (camera->fpDoPreRender != NULL) {
                 camera->fpDoPreRender(camera);
             } else {
+                s32 ulx;
+                s32 uly;
+                s32 lrx;
+                s32 lry;
+
                 gSPViewport(gMasterGfxPos++, &camera->viewport);
                 gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
                                      G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
@@ -174,7 +177,7 @@ void render_frame(s32 arg0) {
 
             camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
             matrixListPos = gMatrixListPos++;
-            guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation[0], 0.0f, 1.0f, 0.0f);
+            guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation.x, 0.0f, 1.0f, 0.0f);
             camera->vpAlt.vp.vtrans[0] = camera->viewport.vp.vtrans[0] + gGameStatusPtr->unk_82;
             camera->vpAlt.vp.vtrans[1] = camera->viewport.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
@@ -340,7 +343,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
         }
     }
 
-    ASSERT(camID < 4);
+    ASSERT(camID < ARRAY_COUNT(gCameras));
 
     camera->flags = initData->flags | 5;
     camera->moveFlags = 0;
@@ -353,9 +356,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->currentYaw = 0;
     camera->currentBoomLength = 0;
     camera->currentYOffset = 0;
-    camera->trueRotation[0] = 0;
-    camera->trueRotation[1] = 0;
-    camera->trueRotation[2] = 0;
+    camera->trueRotation.x = 0.0f;
+    camera->trueRotation.y = 0.0f;
+    camera->trueRotation.z = 0.0f;
     camera->mode = initData->type;
     camera->unk_06 = 1;
     camera->nearClip = initData->nearClip;
