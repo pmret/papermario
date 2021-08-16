@@ -125,11 +125,11 @@ void func_80268938(void) {
         func_80268C9C();
     }
 
-    ac = gActionCommandStatus.unk_4A;
+    ac = gActionCommandStatus.actionCommandID;
 
     switch (ac) {
         case ACTION_COMMAND_JUMP:
-            action_command_jump_Update();
+            action_command_jump_update();
             return;
         case ACTION_COMMAND_SMASH:
             func_802A936C_42236C();

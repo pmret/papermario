@@ -156,7 +156,7 @@ void func_802A9378_422E48(void) {
             hudElement = actionCommandStatus->hudElements[4];
             actionCommandStatus->unk_44 = 10000;
             actionCommandStatus->unk_68 = 1;
-            set_hud_element_render_pos(hudElement, (s16) actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
+            set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
             clear_hud_element_flags(hudElement, 2);
         }
 

@@ -63,7 +63,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/body_slam", func_802A92D4_4285B4);
 
-void N(DrawHudElements)(void) {
+void N(draw_hud_elements)(void) {
     s32 sp14;
     s32 sp10;
     HudElement* hudElement;
@@ -77,7 +77,7 @@ void N(DrawHudElements)(void) {
     draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
 }
 
-void N(FreeHudElements)(void) {
+void N(free_hud_elements)(void) {
 	free_hud_element(gActionCommandStatus.hudElements[0]);
 	free_hud_element(gActionCommandStatus.hudElements[1]);
 	free_hud_element(gActionCommandStatus.hudElements[2]);

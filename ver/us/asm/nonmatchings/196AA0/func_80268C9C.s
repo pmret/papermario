@@ -24,12 +24,12 @@ glabel func_80268C9C
 /* 1975AC 80268CCC 00400008 */  jr        $v0
 /* 1975B0 80268CD0 00000000 */   nop
 glabel L80268CD4_1975B4
-/* 1975B4 80268CD4 0C0AA564 */  jal       action_command_jump_FreeHudElements
+/* 1975B4 80268CD4 0C0AA564 */  jal       action_command_jump_free_hud_elements
 /* 1975B8 80268CD8 00000000 */   nop
 /* 1975BC 80268CDC 0809A390 */  j         .L80268E40
 /* 1975C0 80268CE0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268CE4_1975C4
-/* 1975C4 80268CE4 0C0AA68C */  jal       action_command_hammer_FreeHudElements
+/* 1975C4 80268CE4 0C0AA68C */  jal       action_command_hammer_free_hud_elements
 /* 1975C8 80268CE8 00000000 */   nop
 /* 1975CC 80268CEC 0809A390 */  j         .L80268E40
 /* 1975D0 80268CF0 3C05FFFF */   lui      $a1, 0xffff
@@ -49,47 +49,47 @@ glabel L80268D14_1975F4
 /* 1975FC 80268D1C 0809A390 */  j         .L80268E40
 /* 197600 80268D20 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D24_197604
-/* 197604 80268D24 0C0AA551 */  jal       action_command_jump_DrawHudElements
+/* 197604 80268D24 0C0AA551 */  jal       action_command_jump_draw_hud_elements
 /* 197608 80268D28 00000000 */   nop
 /* 19760C 80268D2C 0809A390 */  j         .L80268E40
 /* 197610 80268D30 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D34_197614
-/* 197614 80268D34 0C0AA567 */  jal       action_command_07_FreeHudElements
+/* 197614 80268D34 0C0AA567 */  jal       action_command_07_free_hud_elements
 /* 197618 80268D38 00000000 */   nop
 /* 19761C 80268D3C 0809A390 */  j         .L80268E40
 /* 197620 80268D40 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D44_197624
-/* 197624 80268D44 0C0AA5EF */  jal       action_command_dizzy_shell_FreeHudElements
+/* 197624 80268D44 0C0AA5EF */  jal       action_command_dizzy_shell_free_hud_elements
 /* 197628 80268D48 00000000 */   nop
 /* 19762C 80268D4C 0809A390 */  j         .L80268E40
 /* 197630 80268D50 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D54_197634
-/* 197634 80268D54 0C0AA645 */  jal       action_command_fire_shell_FreeHudElements
+/* 197634 80268D54 0C0AA645 */  jal       action_command_fire_shell_free_hud_elements
 /* 197638 80268D58 00000000 */   nop
 /* 19763C 80268D5C 0809A390 */  j         .L80268E40
 /* 197640 80268D60 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D64_197644
-/* 197644 80268D64 0C0AA58F */  jal       action_command_0A_FreeHudElements
+/* 197644 80268D64 0C0AA58F */  jal       action_command_0A_free_hud_elements
 /* 197648 80268D68 00000000 */   nop
 /* 19764C 80268D6C 0809A390 */  j         .L80268E40
 /* 197650 80268D70 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D74_197654
-/* 197654 80268D74 0C0AA5F3 */  jal       action_command_bomb_FreeHudElements
+/* 197654 80268D74 0C0AA5F3 */  jal       action_command_bomb_free_hud_elements
 /* 197658 80268D78 00000000 */   nop
 /* 19765C 80268D7C 0809A390 */  j         .L80268E40
 /* 197660 80268D80 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D84_197664
-/* 197664 80268D84 0C0AA5C2 */  jal       action_command_body_slam_FreeHudElements
+/* 197664 80268D84 0C0AA5C2 */  jal       action_command_body_slam_free_hud_elements
 /* 197668 80268D88 00000000 */   nop
 /* 19766C 80268D8C 0809A390 */  j         .L80268E40
 /* 197670 80268D90 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268D94_197674
-/* 197674 80268D94 0C0AA604 */  jal       action_command_air_lift_FreeHudElements
+/* 197674 80268D94 0C0AA604 */  jal       action_command_air_lift_free_hud_elements
 /* 197678 80268D98 00000000 */   nop
 /* 19767C 80268D9C 0809A390 */  j         .L80268E40
 /* 197680 80268DA0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268DA4_197684
-/* 197684 80268DA4 0C0AA64B */  jal       action_command_air_raid_FreeHudElements
+/* 197684 80268DA4 0C0AA64B */  jal       action_command_air_raid_free_hud_elements
 /* 197688 80268DA8 00000000 */   nop
 /* 19768C 80268DAC 0809A390 */  j         .L80268E40
 /* 197690 80268DB0 3C05FFFF */   lui      $a1, 0xffff
@@ -109,12 +109,12 @@ glabel L80268DD4_1976B4
 /* 1976BC 80268DDC 0809A390 */  j         .L80268E40
 /* 1976C0 80268DE0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268DE4_1976C4
-/* 1976C4 80268DE4 0C0AA664 */  jal       action_command_smack_FreeHudElements
+/* 1976C4 80268DE4 0C0AA664 */  jal       action_command_smack_free_hud_elements
 /* 1976C8 80268DE8 00000000 */   nop
 /* 1976CC 80268DEC 0809A390 */  j         .L80268E40
 /* 1976D0 80268DF0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268DF4_1976D4
-/* 1976D4 80268DF4 0C0AA607 */  jal       action_command_spiny_surge_FreeHudElements
+/* 1976D4 80268DF4 0C0AA607 */  jal       action_command_spiny_surge_free_hud_elements
 /* 1976D8 80268DF8 00000000 */   nop
 /* 1976DC 80268DFC 0809A390 */  j         .L80268E40
 /* 1976E0 80268E00 3C05FFFF */   lui      $a1, 0xffff
@@ -124,7 +124,7 @@ glabel L80268E04_1976E4
 /* 1976EC 80268E0C 0809A390 */  j         .L80268E40
 /* 1976F0 80268E10 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268E14_1976F4
-/* 1976F4 80268E14 0C0AA637 */  jal       action_command_spook_FreeHudElements
+/* 1976F4 80268E14 0C0AA637 */  jal       action_command_spook_free_hud_elements
 /* 1976F8 80268E18 00000000 */   nop
 /* 1976FC 80268E1C 0809A390 */  j         .L80268E40
 /* 197700 80268E20 3C05FFFF */   lui      $a1, 0xffff
@@ -134,7 +134,7 @@ glabel L80268E24_197704
 /* 19770C 80268E2C 0809A390 */  j         .L80268E40
 /* 197710 80268E30 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268E34_197714
-/* 197714 80268E34 0C0AA5D9 */  jal       action_command_tidal_wave_FreeHudElements
+/* 197714 80268E34 0C0AA5D9 */  jal       action_command_tidal_wave_free_hud_elements
 /* 197718 80268E38 00000000 */   nop
 glabel L80268E3C_19771C
 /* 19771C 80268E3C 3C05FFFF */  lui       $a1, 0xffff

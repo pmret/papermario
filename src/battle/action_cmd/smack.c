@@ -10,4 +10,4 @@ INCLUDE_ASM(s32, "battle/action_cmd/smack", func_802A9298_42E638);
 
 INCLUDE_ASM(s32, "battle/action_cmd/smack", func_802A98B0_42EC50);
 
-#include "common/FreeHudElements.inc.c"
+#include "common/free_hud_elements.inc.c"

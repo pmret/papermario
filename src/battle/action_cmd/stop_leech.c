@@ -121,8 +121,8 @@ void func_802A91F8_425788(void) {
             actionCommandStatus->unk_44 += battleStatus->unk_434[actionCommandStatus->unk_50] / 6;
             actionCommandStatus->unk_44 += rand_int((battleStatus->unk_434[actionCommandStatus->unk_50]) / 6);
         }
-        battleStatus->unk_84 = (s16)(actionCommandStatus->unk_44 / 100);
-        if (actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals] <= (s16)battleStatus->unk_84) {
+        battleStatus->unk_84 = actionCommandStatus->unk_44 / 100;
+        if (actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals] <= battleStatus->unk_84) {
             actionCommandStatus->unk_54 = 0;
         }
 

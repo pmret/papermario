@@ -10,4 +10,4 @@ INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A9294_4295B4);
 
 INCLUDE_ASM(s32, "battle/action_cmd/air_raid", func_802A984C_429B6C);
 
-#include "common/FreeHudElements.inc.c"
+#include "common/free_hud_elements.inc.c"

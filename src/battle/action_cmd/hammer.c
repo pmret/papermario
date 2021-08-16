@@ -117,7 +117,7 @@ ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/hammer", func_802A936C_42236C);
 
-void N(DrawHudElements)(void) {
+void N(draw_hud_elements)(void) {
     draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[1]);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
@@ -127,7 +127,7 @@ void N(DrawHudElements)(void) {
     draw_hud_element_clipped(gActionCommandStatus.hudElements[6]);
 }
 
-void N(FreeHudElements)(void) {
+void N(free_hud_elements)(void) {
     free_hud_element(gActionCommandStatus.hudElements[0]);
     free_hud_element(gActionCommandStatus.hudElements[1]);
     free_hud_element(gActionCommandStatus.hudElements[2]);

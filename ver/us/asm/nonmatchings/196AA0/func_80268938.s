@@ -30,7 +30,7 @@ glabel func_80268938
 /* 19725C 8026897C 00400008 */  jr        $v0
 /* 197260 80268980 00000000 */   nop
 glabel L80268984_197264
-/* 197264 80268984 0C0AA48D */  jal       action_command_jump_Update
+/* 197264 80268984 0C0AA48D */  jal       action_command_jump_update
 /* 197268 80268988 00000000 */   nop
 /* 19726C 8026898C 0809A2BB */  j         L80268AEC_1973CC
 /* 197270 80268990 00000000 */   nop

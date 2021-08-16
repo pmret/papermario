@@ -80,7 +80,7 @@ ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-void N(Update)(void) {
+void N(update)(void) {
     HudElement* hudElement;
     s32 temp_s0_3;
 
@@ -191,14 +191,14 @@ void N(Update)(void) {
     }
 }
 
-void N(DrawHudElements)(void) {
+void N(draw_hud_elements)(void) {
 	draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
 	if (!(gGameStatusPtr->demoFlags & 1)) {
 		draw_hud_element_clipped(gActionCommandStatus.hudElements[1]);
 	}
 }
 
-void N(FreeHudElements)(void) {
+void N(free_hud_elements)(void) {
 	free_hud_element(gActionCommandStatus.hudElements[0]);
 	free_hud_element(gActionCommandStatus.hudElements[1]);
 }

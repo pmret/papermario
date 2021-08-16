@@ -79,4 +79,4 @@ void func_802A97FC_43081C(void) {
     draw_hud_element_clipped(actionCommandStatus->hudElements[2]);
 }
 
-#include "common/FreeHudElements.inc.c"
+#include "common/free_hud_elements.inc.c"

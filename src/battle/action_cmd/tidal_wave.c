@@ -76,7 +76,7 @@ ApiStatus func_802A9138_42C828(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/tidal_wave", func_802A9228_42C918);
 
-void N(DrawHudElements)(void) {
+void N(draw_hud_elements)(void) {
     s32 i;
 
     for (i = 1; i < 15; i++) {
@@ -84,7 +84,7 @@ void N(DrawHudElements)(void) {
     }
 }
 
-void N(FreeHudElements)(void) {
+void N(free_hud_elements)(void) {
     s32 i;
 
     free_hud_element(gActionCommandStatus.hudElements[0]);

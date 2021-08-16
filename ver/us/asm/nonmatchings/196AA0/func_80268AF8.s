@@ -22,12 +22,12 @@ glabel func_80268AF8
 /* 197400 80268B20 00400008 */  jr        $v0
 /* 197404 80268B24 00000000 */   nop
 glabel L80268B28_197408
-/* 197408 80268B28 0C0AA551 */  jal       action_command_jump_DrawHudElements
+/* 197408 80268B28 0C0AA551 */  jal       action_command_jump_draw_hud_elements
 /* 19740C 80268B2C 00000000 */   nop
 /* 197410 80268B30 0809A324 */  j         L80268C90_197570
 /* 197414 80268B34 00000000 */   nop
 glabel L80268B38_197418
-/* 197418 80268B38 0C0AA675 */  jal       action_command_hammer_DrawHudElements
+/* 197418 80268B38 0C0AA675 */  jal       action_command_hammer_draw_hud_elements
 /* 19741C 80268B3C 00000000 */   nop
 /* 197420 80268B40 0809A324 */  j         L80268C90_197570
 /* 197424 80268B44 00000000 */   nop
@@ -77,7 +77,7 @@ glabel L80268BC8_1974A8
 /* 1974B0 80268BD0 0809A324 */  j         L80268C90_197570
 /* 1974B4 80268BD4 00000000 */   nop
 glabel L80268BD8_1974B8
-/* 1974B8 80268BD8 0C0AA599 */  jal       action_command_body_slam_DrawHudElements
+/* 1974B8 80268BD8 0C0AA599 */  jal       action_command_body_slam_draw_hud_elements
 /* 1974BC 80268BDC 00000000 */   nop
 /* 1974C0 80268BE0 0809A324 */  j         L80268C90_197570
 /* 1974C4 80268BE4 00000000 */   nop
@@ -132,7 +132,7 @@ glabel L80268C78_197558
 /* 197560 80268C80 0809A324 */  j         L80268C90_197570
 /* 197564 80268C84 00000000 */   nop
 glabel L80268C88_197568
-/* 197568 80268C88 0C0AA5C6 */  jal       action_command_tidal_wave_DrawHudElements
+/* 197568 80268C88 0C0AA5C6 */  jal       action_command_tidal_wave_draw_hud_elements
 /* 19756C 80268C8C 00000000 */   nop
 glabel L80268C90_197570
 /* 197570 80268C90 8FBF0010 */  lw        $ra, 0x10($sp)

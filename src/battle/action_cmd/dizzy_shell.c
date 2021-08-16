@@ -10,4 +10,4 @@ INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A928C_4263FC);
 
 INCLUDE_ASM(s32, "battle/action_cmd/dizzy_shell", func_802A96DC_42684C);
 
-#include "common/FreeHudElements.inc.c"
+#include "common/free_hud_elements.inc.c"
