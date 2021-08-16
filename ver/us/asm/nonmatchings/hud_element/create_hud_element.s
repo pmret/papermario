@@ -49,8 +49,8 @@ glabel create_hud_element
 /* D7C3C 8014153C AE030000 */  sw        $v1, ($s0)
 /* D7C40 80141540 16400004 */  bnez      $s2, .L80141554
 /* D7C44 80141544 AE120004 */   sw       $s2, 4($s0)
-/* D7C48 80141548 3C028015 */  lui       $v0, %hi(D_8014EFC8)
-/* D7C4C 8014154C 2442EFC8 */  addiu     $v0, $v0, %lo(D_8014EFC8)
+/* D7C48 80141548 3C028015 */  lui       $v0, %hi(hud_element_defaultAnim)
+/* D7C4C 8014154C 2442EFC8 */  addiu     $v0, $v0, %lo(hud_element_defaultAnim)
 /* D7C50 80141550 AE020004 */  sw        $v0, 4($s0)
 .L80141554:
 /* D7C54 80141554 A2030047 */  sb        $v1, 0x47($s0)

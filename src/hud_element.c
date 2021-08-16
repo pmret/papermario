@@ -3,7 +3,11 @@
 
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
-s32 D_8014EFC8[] = { 0x00000000, };
+
+HudElementAnimation hud_element_defaultAnim = {
+    he_End,
+};
+
 s32 D_8014EFCC[] = { 0x00080008, 0x00200010, 0x00100080, 0x00180018, 0x01200020, 0x00200200, 0x00300030, 0x04800040,
                      0x00400800, 0x00080010, 0x00400010, 0x00080040, 0x00100018, 0x00C00010, 0x00200100, 0x00400020,
                      0x04000020, 0x00100100, 0x000C000C, 0x00480030, 0x00180240, 0x00200008, 0x00800018, 0x00080060,
@@ -77,19 +81,19 @@ void draw_icon_2(s32 iconID) {
     draw_hud_element(iconID, 2);
 }
 
-void set_hud_element_script(s32 arg0, s32 *arg1) {
+void set_hud_element_script(s32 arg0, HudElementAnimation* animation) {
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
 
-    if (arg1 == NULL) {
-        arg1 = D_8014EFC8;
+    if (animation == NULL) {
+        animation = hud_element_defaultAnim;
     }
 
     hudElement->updateTimer = 1;
     hudElement->widthScale = 1024;
     hudElement->heightScale = 1024;
-    hudElement->readPos = arg1;
-    hudElement->startReadPos = arg1;
-    hudElement->ptrPropertyList = arg1;
+    hudElement->readPos = animation;
+    hudElement->startReadPos = animation;
+    hudElement->ptrPropertyList = animation;
     hudElement->screenPosOffset[0] = 0;
     hudElement->screenPosOffset[1] = 0;
     hudElement->worldPosOffset[0] = 0;
@@ -97,12 +101,12 @@ void set_hud_element_script(s32 arg0, s32 *arg1) {
     hudElement->flags &= ~4;
     hudElement->uniformScale = 1.0f;
     hudElement->flags &= ~0x930;
-    load_hud_element(hudElement, arg1);
+    load_hud_element(hudElement, animation);
 
     while (hud_element_update(hudElement) != 0) {}
 }
 
-s32* get_hud_element_script(s32 arg0) {
+HudElementAnimation* get_hud_element_script(s32 arg0) {
     return gHudElementList[arg0 & ~0x800]->startReadPos;
 }
 
