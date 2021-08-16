@@ -1,6 +1,5 @@
 #include "common.h"
-
-void free_hud_element_transform(s32 arg0);
+#include "hud_element.h"
 
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
@@ -48,7 +47,7 @@ INCLUDE_ASM(s32, "hud_element", render_hud_elements_world);
 
 INCLUDE_ASM(s32, "hud_element", func_80143C48);
 
-void func_80144218 (s32 arg0) {
+void func_80144218(s32 arg0) {
     func_80143C48(arg0, 1, 3);
 }
 
@@ -99,10 +98,9 @@ void set_hud_element_script(s32 arg0, s32 *arg1) {
     hudElement->uniformScale = 1.0f;
     hudElement->flags &= ~0x930;
     load_hud_element(hudElement, arg1);
-    
+
     while (hud_element_update(hudElement) != 0) {}
 }
-
 
 s32* get_hud_element_script(s32 arg0) {
     return gHudElementList[arg0 & ~0x800]->startReadPos;
@@ -196,10 +194,10 @@ INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_B);
 
 INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_C);
 
-void free_hud_element_transform(s32 arg0) {  
+void free_hud_element_transform(s32 arg0) {
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
     s32* hudTransform = hudElement->hudTransform;
-    
+
     if (!(hudElement->flags & 0x20000)) {
         func_8013A854(*hudTransform);
     }

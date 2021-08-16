@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 extern s32 D_80104A28;
 extern s32 D_80107D48;
