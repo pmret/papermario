@@ -25,8 +25,8 @@ glabel func_802B6000_E28A30
 /* E28A7C 802B604C 00431024 */  and       $v0, $v0, $v1
 /* E28A80 802B6050 1040000F */  beqz      $v0, .L802B6090
 /* E28A84 802B6054 00000000 */   nop
-/* E28A88 802B6058 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* E28A8C 802B605C 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
+/* E28A88 802B6058 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* E28A8C 802B605C 2442EBB0 */  addiu     $v0, $v0, %lo(gPartnerActionStatus)
 /* E28A90 802B6060 80430003 */  lb        $v1, 3($v0)
 /* E28A94 802B6064 24020008 */  addiu     $v0, $zero, 8
 /* E28A98 802B6068 14620005 */  bne       $v1, $v0, .L802B6080

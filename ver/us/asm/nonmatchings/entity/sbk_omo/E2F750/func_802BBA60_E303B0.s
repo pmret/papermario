@@ -19,8 +19,8 @@ glabel func_802BBA60_E303B0
 /* E303C0 802BBA70 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* E303C4 802BBA74 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* E303C8 802BBA78 AFB3001C */  sw        $s3, 0x1c($sp)
-/* E303CC 802BBA7C 3C138011 */  lui       $s3, %hi(D_8010EBB0)
-/* E303D0 802BBA80 2673EBB0 */  addiu     $s3, $s3, %lo(D_8010EBB0)
+/* E303CC 802BBA7C 3C138011 */  lui       $s3, %hi(gPartnerActionStatus)
+/* E303D0 802BBA80 2673EBB0 */  addiu     $s3, $s3, %lo(gPartnerActionStatus)
 /* E303D4 802BBA84 AFBF0020 */  sw        $ra, 0x20($sp)
 /* E303D8 802BBA88 AFB00010 */  sw        $s0, 0x10($sp)
 /* E303DC 802BBA8C 0C009C64 */  jal       get_time_freeze_mode

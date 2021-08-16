@@ -199,19 +199,19 @@ glabel func_802B6000_E25D60
 /* E26010 802B62B0 E6200080 */  swc1      $f0, 0x80($s1)
 /* E26014 802B62B4 E602001C */  swc1      $f2, 0x1c($s0)
 .L802B62B8:
-/* E26018 802B62B8 3C058011 */  lui       $a1, %hi(D_8010C944)
-/* E2601C 802B62BC 24A5C944 */  addiu     $a1, $a1, %lo(D_8010C944)
-/* E26020 802B62C0 3C068011 */  lui       $a2, %hi(D_8010F6B8)
-/* E26024 802B62C4 24C6F6B8 */  addiu     $a2, $a2, %lo(D_8010F6B8)
+/* E26018 802B62B8 3C058011 */  lui       $a1, %hi(gSpinHistoryBufferPos)
+/* E2601C 802B62BC 24A5C944 */  addiu     $a1, $a1, %lo(gSpinHistoryBufferPos)
+/* E26020 802B62C0 3C068011 */  lui       $a2, %hi(gSpinHistoryPosAngle)
+/* E26024 802B62C4 24C6F6B8 */  addiu     $a2, $a2, %lo(gSpinHistoryPosAngle)
 /* E26028 802B62C8 8CA20000 */  lw        $v0, ($a1)
 /* E2602C 802B62CC C62000A8 */  lwc1      $f0, 0xa8($s1)
 /* E26030 802B62D0 00022040 */  sll       $a0, $v0, 1
 /* E26034 802B62D4 24420001 */  addiu     $v0, $v0, 1
 /* E26038 802B62D8 4600018D */  trunc.w.s $f6, $f0
 /* E2603C 802B62DC 44033000 */  mfc1      $v1, $f6
-/* E26040 802B62E0 3C018011 */  lui       $at, %hi(D_8010F6B8)
+/* E26040 802B62E0 3C018011 */  lui       $at, %hi(gSpinHistoryPosAngle)
 /* E26044 802B62E4 00240821 */  addu      $at, $at, $a0
-/* E26048 802B62E8 A423F6B8 */  sh        $v1, %lo(D_8010F6B8)($at)
+/* E26048 802B62E8 A423F6B8 */  sh        $v1, %lo(gSpinHistoryPosAngle)($at)
 /* E2604C 802B62EC ACA20000 */  sw        $v0, ($a1)
 /* E26050 802B62F0 28420006 */  slti      $v0, $v0, 6
 /* E26054 802B62F4 50400001 */  beql      $v0, $zero, .L802B62FC
@@ -221,23 +221,23 @@ glabel func_802B6000_E25D60
 /* E26060 802B6300 C6200028 */  lwc1      $f0, 0x28($s1)
 /* E26064 802B6304 00031080 */  sll       $v0, $v1, 2
 /* E26068 802B6308 4600018D */  trunc.w.s $f6, $f0
-/* E2606C 802B630C 3C018011 */  lui       $at, %hi(D_8010EF28)
+/* E2606C 802B630C 3C018011 */  lui       $at, %hi(gSpinHistoryPosX)
 /* E26070 802B6310 00220821 */  addu      $at, $at, $v0
-/* E26074 802B6314 E426EF28 */  swc1      $f6, %lo(D_8010EF28)($at)
+/* E26074 802B6314 E426EF28 */  swc1      $f6, %lo(gSpinHistoryPosX)($at)
 /* E26078 802B6318 24640001 */  addiu     $a0, $v1, 1
 /* E2607C 802B631C C620002C */  lwc1      $f0, 0x2c($s1)
 /* E26080 802B6320 00031840 */  sll       $v1, $v1, 1
 /* E26084 802B6324 4600018D */  trunc.w.s $f6, $f0
-/* E26088 802B6328 3C018011 */  lui       $at, %hi(D_8010EF10)
+/* E26088 802B6328 3C018011 */  lui       $at, %hi(gSpinHistoryPosY)
 /* E2608C 802B632C 00220821 */  addu      $at, $at, $v0
-/* E26090 802B6330 E426EF10 */  swc1      $f6, %lo(D_8010EF10)($at)
+/* E26090 802B6330 E426EF10 */  swc1      $f6, %lo(gSpinHistoryPosY)($at)
 /* E26094 802B6334 C6200030 */  lwc1      $f0, 0x30($s1)
 /* E26098 802B6338 00661821 */  addu      $v1, $v1, $a2
 /* E2609C 802B633C ACA40000 */  sw        $a0, ($a1)
 /* E260A0 802B6340 4600018D */  trunc.w.s $f6, $f0
-/* E260A4 802B6344 3C018011 */  lui       $at, %hi(D_8010EF40)
+/* E260A4 802B6344 3C018011 */  lui       $at, %hi(gSpinHistoryPosZ)
 /* E260A8 802B6348 00220821 */  addu      $at, $at, $v0
-/* E260AC 802B634C E426EF40 */  swc1      $f6, %lo(D_8010EF40)($at)
+/* E260AC 802B634C E426EF40 */  swc1      $f6, %lo(gSpinHistoryPosZ)($at)
 /* E260B0 802B6350 C62000A8 */  lwc1      $f0, 0xa8($s1)
 /* E260B4 802B6354 28840006 */  slti      $a0, $a0, 6
 /* E260B8 802B6358 4600018D */  trunc.w.s $f6, $f0

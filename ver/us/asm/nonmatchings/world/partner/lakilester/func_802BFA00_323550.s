@@ -8,8 +8,8 @@ glabel func_802BFA00_323550
 /* 32355C 802BFA0C AFB00010 */  sw        $s0, 0x10($sp)
 /* 323560 802BFA10 0080802D */  daddu     $s0, $a0, $zero
 /* 323564 802BFA14 AFB10014 */  sw        $s1, 0x14($sp)
-/* 323568 802BFA18 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 32356C 802BFA1C 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 323568 802BFA18 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 32356C 802BFA1C 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 323570 802BFA20 10400018 */  beqz      $v0, .L802BFA84
 /* 323574 802BFA24 AFBF0018 */   sw       $ra, 0x18($sp)
 /* 323578 802BFA28 26230018 */  addiu     $v1, $s1, 0x18

@@ -90,8 +90,8 @@ glabel func_802422C4_911974
 /* 911A98 802423E8 45030001 */  bc1tl     .L802423F0
 /* 911A9C 802423EC 0000802D */   daddu    $s0, $zero, $zero
 .L802423F0:
-/* 911AA0 802423F0 3C038011 */  lui       $v1, %hi(D_8010EBB0+0x3)
-/* 911AA4 802423F4 8063EBB3 */  lb        $v1, %lo(D_8010EBB0+0x3)($v1)
+/* 911AA0 802423F0 3C038011 */  lui       $v1, %hi(gPartnerActionStatus+0x3)
+/* 911AA4 802423F4 8063EBB3 */  lb        $v1, %lo(gPartnerActionStatus+0x3)($v1)
 /* 911AA8 802423F8 24020009 */  addiu     $v0, $zero, 9
 /* 911AAC 802423FC 50620001 */  beql      $v1, $v0, .L80242404
 /* 911AB0 80242400 0000802D */   daddu    $s0, $zero, $zero

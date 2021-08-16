@@ -30,8 +30,8 @@ glabel func_80241F4C_C820EC
 /* C82150 80241FB0 2404FFFC */   addiu    $a0, $zero, -4
 /* C82154 80241FB4 3C138011 */  lui       $s3, %hi(gPlayerStatus)
 /* C82158 80241FB8 2673EFC8 */  addiu     $s3, $s3, %lo(gPlayerStatus)
-/* C8215C 80241FBC 3C168011 */  lui       $s6, %hi(D_8010EBB0)
-/* C82160 80241FC0 26D6EBB0 */  addiu     $s6, $s6, %lo(D_8010EBB0)
+/* C8215C 80241FBC 3C168011 */  lui       $s6, %hi(gPartnerActionStatus)
+/* C82160 80241FC0 26D6EBB0 */  addiu     $s6, $s6, %lo(gPartnerActionStatus)
 /* C82164 80241FC4 1200001C */  beqz      $s0, .L80242038
 /* C82168 80241FC8 0040B82D */   daddu    $s7, $v0, $zero
 /* C8216C 80241FCC 0C00AB39 */  jal       heap_malloc

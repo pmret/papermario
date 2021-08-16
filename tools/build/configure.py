@@ -10,7 +10,7 @@ from glob import glob
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
 
-CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
+CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
 
 ASFLAGS = "-EB -G 0"
@@ -183,7 +183,7 @@ class Configure:
 
         modes = ["ld"]
         if assets:
-            modes.extend(["bin", "Yay0", "img", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
+            modes.extend(["bin", "Yay0", "img", "vtx", "pm_map_data", "pm_msg", "pm_npc_sprites", "pm_charset",
                           "pm_charset_palettes", "pm_effect_loads", "pm_effect_shims"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
@@ -606,11 +606,14 @@ if __name__ == "__main__":
 
     # on macOS, /usr/bin/cpp defaults to clang rather than gcc (but we need gcc's)
     if args.cpp is None and sys.platform == "darwin" and "Free Software Foundation" not in exec_shell(["cpp", "--version"]):
-        print("error: system C preprocessor is not GNU!")
-        print("This is a known issue on macOS - only clang's cpp is installed by default.")
-        print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
-        print("    ./configure --cpp cpp-11")
-        exit(1)
+        if "Free Software Foundation" in exec_shell(["cpp-11", "--version"]):
+            args.cpp = "cpp-11"
+        else:
+            print("error: system C preprocessor is not GNU!")
+            print("This is a known issue on macOS - only clang's cpp is installed by default.")
+            print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
+            print("    ./configure --cpp cpp-11")
+            exit(1)
 
     # default version behaviour is to only do those that exist
     if len(args.version) > 0:

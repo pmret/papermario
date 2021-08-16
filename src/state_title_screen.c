@@ -27,7 +27,7 @@ Gfx D_80077A50[] = {
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
     gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
     gsDPSetTextureFilter(G_TF_POINT),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetColorDither(G_CD_DISABLE),
     gsDPSetAlphaDither(G_AD_DISABLE),

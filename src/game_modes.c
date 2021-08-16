@@ -74,13 +74,13 @@ StateFunc gameModeMap[] = {
 };
 
 // BSS
-extern s16 D_800A08F0;
+extern s16 gameMode;
 
-void set_game_mode(s16 idx) {
-    D_800A08F0 = idx;
-    set_game_mode_slot(0, gameModeMap[idx]);
+void set_game_mode(s16 mode) {
+    gameMode = mode;
+    set_game_mode_slot(0, gameModeMap[mode]);
 }
 
 s16 get_game_mode(void) {
-    return D_800A08F0;
+    return gameMode;
 }

@@ -92,8 +92,8 @@ glabel func_80243EE0_C75360
 /* C754B0 80244030 0809103C */  j         .L802440F0
 /* C754B4 80244034 00000000 */   nop
 .L80244038:
-/* C754B8 80244038 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* C754BC 8024403C 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* C754B8 80244038 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* C754BC 8024403C 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* C754C0 80244040 10400012 */  beqz      $v0, .L8024408C
 /* C754C4 80244044 24020006 */   addiu    $v0, $zero, 6
 /* C754C8 80244048 82230012 */  lb        $v1, 0x12($s1)

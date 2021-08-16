@@ -39,31 +39,55 @@ extern s32 D_802AD054;
 extern s32 D_802AD058;
 extern s8 D_802AD068;
 extern s32 main_menu_numOptions;
+extern s8 D_802AD10A;
+extern s8 D_802AD10D;
+extern s8 D_802AD10E;
 extern s8 D_802AD10F;
+extern s16 D_802AD112;
+extern s32 battle_menu_moveOptionActive;
+extern s8 battle_menu_moveScrollLine;
+extern s16 battle_menu_moveScrollOffset;
 extern u8 battle_menu_moveState;
+extern s8 battle_menu_moveCursorPos;
+extern s32 battle_menu_moveOptionDescriptions[24];
+extern s32 battle_menu_moveOptionIndexMap[24];
 extern s16 battle_menu_moveTextColor;
 extern s16 battle_menu_moveTextOpacity;
 extern s32 battle_menu_moveCursorIcon;
 extern s32 battle_menu_moveUpArrowIcon;
 extern s32 battle_menu_moveDownArrowIcon;
-extern s32* battle_menu_moveOptionIconIDs;
+extern s32 battle_menu_moveOptionIconIDs[24];
 extern s32 battle_menu_moveTitleIcon;
-extern s32* battle_menu_moveOptionCostUnitIconIDs;
+extern s32 battle_menu_moveOptionCostUnitIconIDs[24];
+
 extern s32 D_802AD258;
+extern s32 D_802AD4A8;
 extern s32 battle_menu_hasSpiritsMenu;
 extern s32 battle_menu_moveOptionCount;
 extern s8 D_802AD604;
 extern s8 D_802AD605;
+extern u8 D_802AD606;
+extern s8 D_802AD607;
+extern s8 D_802AD608;
+extern s8 D_802AD609;
+extern s8 D_802AD60A;
 extern s8 D_802AD60B;
-extern s32 D_802AD610;
+extern s16 D_802AD60C;
+extern s16 D_802AD60E;
+extern s16 D_802AD610;
 extern s8 D_802AD614;
 extern s32 D_802AD618;
 extern s32 D_802AD61C;
 extern s32 D_802AD620;
 extern s32 D_802AD624;
-extern s32 D_802AD628;
+extern s32 D_802AD628[];
+extern s32 D_802AD658[]; // string IDs
 extern s32 D_802AD66C;
+extern s8 D_802AD673;
+extern s32 D_802AD678[];
+extern s32 D_802AD690[];
 extern s32* D_802AD6C0[];
+extern s32 D_802AD6D4;
 
 s16 D_802AB340[] = { 0x001C, 0x0028 };
 
@@ -178,13 +202,79 @@ INCLUDE_ASM(s32, "415D90", func_802A11B0);
 
 INCLUDE_ASM(s32, "415D90", btl_draw_menu_wheel);
 
-INCLUDE_ASM(s32, "415D90", func_802A2684);
+// Very similar to func_802A45D8 - maybe can be used to reduce fake matches there
+void func_802A2684(void) {
+    if (D_802AD4A8 >= battle_menu_moveOptionCount) {
+        D_802AD4A8 = battle_menu_moveOptionCount - 1;
+    }
+
+    battle_menu_moveState = 0;
+    battle_menu_moveScrollLine = 0;
+    battle_menu_moveCursorPos = D_802AD4A8;
+    D_802AD10A = D_802AD4A8;
+    D_802AD10E = battle_menu_moveOptionCount;
+
+    if (D_802AD10E > 6) {
+        D_802AD10E = 6;
+    }
+
+    D_802AD10D = 6;
+    if (battle_menu_moveOptionCount < 6) {
+        D_802AD10D = battle_menu_moveOptionCount;
+    }
+
+    battle_menu_moveTextOpacity = 255;
+    D_802AD10F = 1;
+
+    if (D_802AD10A < 0) {
+        battle_menu_moveScrollLine = D_802AD10A;
+    }
+    if (D_802AD10A >= D_802AD10D) {
+        battle_menu_moveScrollLine = D_802AD10A + 1 - D_802AD10E;
+    }
+
+    D_802AD10D = battle_menu_moveScrollLine + 6;
+    if (D_802AD10D > battle_menu_moveOptionCount) {
+        D_802AD10D = battle_menu_moveOptionCount;
+    }
+
+    battle_menu_moveScrollOffset = -battle_menu_moveScrollLine * 13;
+    D_802AD112 = (D_802AD10A - battle_menu_moveScrollLine) * 13;
+    battle_menu_moveOptionActive = 0;
+}
 
 void func_802A27D0(void) {
     battle_menu_moveState = 10;
 }
 
-INCLUDE_ASM(s32, "415D90", func_802A27E4);
+void func_802A27E4(void) {
+    s32 i;
+
+    set_window_update(1, 2);
+
+    if (!battle_menu_hasSpiritsMenu) {
+        set_window_update(2, 2);
+        set_window_update(3, 2);
+    } else {
+        set_window_update(4, 2);
+        set_window_update(5, 2);
+    }
+
+    set_window_update(8, 2);
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        free_hud_element(battle_menu_moveOptionIconIDs[i]);
+    }
+
+    free_hud_element(battle_menu_moveCursorIcon);
+    free_hud_element(battle_menu_moveUpArrowIcon);
+    free_hud_element(battle_menu_moveDownArrowIcon);
+    free_hud_element(battle_menu_moveTitleIcon);
+
+    for (i = 0; i < battle_menu_moveOptionCount; i++) {
+        free_hud_element(battle_menu_moveOptionCostUnitIconIDs[i]);
+    }
+}
 
 void func_802A2910(void) {
     s32* moveOptionIconIDs;
@@ -274,66 +364,117 @@ INCLUDE_ASM(s32, "415D90", func_802A2C84);
 
 INCLUDE_ASM(s32, "415D90", func_802A3C98);
 
-void func_802A43DC(s32 arg0, s32 arg1, s32 arg2) {
-    s32 phi_a0;
-    s32 phi_a1;
-    s32 phi_a2;
-    s32 phi_a3;
-    s32 phi_v0;
+void func_802A43DC(s32 arg0, s32 x, s32 y) {
+    s32 stringID;
+    s32 posX;
+    s32 posY;
+    s32 opacity;
+    s32 palette;
 
     if (!battle_menu_hasSpiritsMenu) {
-        phi_a0 = 0x1D0045;
-        phi_a1 = arg1 + 0x10;
-        phi_a2 = arg2 + 2;
-        phi_a3 = battle_menu_moveTextOpacity;
-        phi_v0 = 0x30;
+        stringID = 0x1D0045;
+        posX = x + 16;
+        posY = y + 2;
+        opacity = battle_menu_moveTextOpacity;
+        palette = 0x30;
     } else {
-        phi_a0 = 0x1D003A;
-        phi_a1 = arg1 + 6;
-        phi_a2 = arg2 + 2;
-        phi_a3 = battle_menu_moveTextOpacity;
-        phi_v0 = 0x31;
+        stringID = 0x1D003A;
+        posX = x + 6;
+        posY = y + 2;
+        opacity = battle_menu_moveTextOpacity;
+        palette = 0x31;
     }
-    draw_string(phi_a0, phi_a1, phi_a2, phi_a3, phi_v0, 1);
+    draw_string(stringID, posX, posY, opacity, palette, 1);
 }
 
-void func_802A4448(s32 arg0, s32 arg1, s32 arg2) {
+void func_802A4448(s32 arg0, s32 x, s32 y) {
     s32 icon = battle_menu_moveTitleIcon;
 
-    set_hud_element_render_pos(icon, arg1 + 0x10, arg2 + 0xF);
+    set_hud_element_render_pos(icon, x + 16, y + 15);
     set_hud_element_alpha(icon, battle_menu_moveTextOpacity);
     draw_hud_element_clipped(icon);
 }
 
-INCLUDE_ASM(s32, "415D90", func_802A4494);
-
-void func_802A4534(s32 arg0, s32 arg1, s32 arg2) {
-    s32 temp2 = arg2;
-    s32 temp1;
-    s32 phi_s0;
-
-    temp2 += 6;
-    temp1 = arg1 + 11;
-
-    if (D_802AD258 != 0) {
-        phi_s0 = 0x1D00C3;
-    } else if (battle_menu_hasSpiritsMenu == 0) {
-        phi_s0 = 0x1D009F;
-    } else {
-        phi_s0 = 0x1D00A0;
+void func_802A4494(s32 arg0, s32 x, s32 y) {
+    switch ((s8)battle_menu_moveState) {
+        case -1:
+        case 1:
+        case 10:
+        case 20:
+        case 30:
+            if (D_802AD10F != 0) {
+                draw_string(battle_menu_moveOptionDescriptions[battle_menu_moveOptionIndexMap[battle_menu_moveCursorPos]],
+                            x + 8, y, battle_menu_moveTextOpacity, battle_menu_moveTextColor, 0);
+            }
+            break;
     }
-    draw_string(phi_s0, temp1, temp2 + D_802AB344[get_string_lines(phi_s0) - 1], 255, 0xF, 0);
 }
 
-INCLUDE_ASM(s32, "415D90", func_802A45D8);
+void func_802A4534(s32 arg0, s32 x, s32 y) {
+    s32 posY = y;
+    s32 posX;
+    s32 stringID;
 
+    posY += 6;
+    posX = x + 11;
+
+    if (D_802AD258 != 0) {
+        stringID = 0x1D00C3;
+    } else if (battle_menu_hasSpiritsMenu == FALSE) {
+        stringID = 0x1D009F;
+    } else {
+        stringID = 0x1D00A0;
+    }
+    draw_string(stringID, posX, posY + D_802AB344[get_string_lines(stringID) - 1], 255, 0xF, 0);
+}
+
+void func_802A45D8(void) {
+    s32 sixTemp;
+    s8 temp802AD673;
+
+    D_802AD604 = 0;
+    D_802AD605 = D_802AD673;
+    D_802AD606 = D_802AD673;
+    D_802AD608 = 0;
+    D_802AD60A = D_802AD66C;
+
+    if (D_802AD60A > 6) {
+        D_802AD60A = 6;
+    }
+
+    D_802AD609 = sixTemp = 6;
+
+    if (D_802AD609 > D_802AD66C) {
+        D_802AD609 = D_802AD66C;
+    }
+
+    D_802AD624 = 255;
+    D_802AD60B = 1;
+    temp802AD673 = D_802AD673;
+
+    if (D_802AD673 < 0) {
+        D_802AD608 = D_802AD673;
+    }
+    if (D_802AD673 >= D_802AD609) {
+        D_802AD608 = (temp802AD673 + 1 - D_802AD60A);
+    }
+
+    D_802AD609 = D_802AD608 + sixTemp;
+    if (D_802AD609 > D_802AD66C) {
+        D_802AD609 = D_802AD66C;
+    }
+
+    D_802AD60C = -D_802AD608 * 13;
+    D_802AD60E = (D_802AD673 - D_802AD608) * 13;
+    D_802AD607 = 0;
+    D_802AD6D4 = 0;
+}
 
 void func_802A4718(void) {
     D_802AD604 = 10;
 }
 
 void func_802A472C(void) {
-    s32* temp = &D_802AD628;
     s32 i;
 
     set_window_update(6, 2);
@@ -341,7 +482,7 @@ void func_802A472C(void) {
     set_window_update(8, 2);
 
     for (i = 0; i < D_802AD66C; i++) {
-        free_hud_element(temp[i]);
+        free_hud_element(D_802AD628[i]);
     }
 
     free_hud_element(D_802AD618);
@@ -349,9 +490,45 @@ void func_802A472C(void) {
     free_hud_element(D_802AD620);
 }
 
-INCLUDE_ASM(s32, "415D90", func_802A47E0);
+void func_802A47E0(void) {
+    s32 i;
 
-INCLUDE_ASM(s32, "415D90", func_802A48FC);
+    for (i = 0; i < D_802AD66C; i++) {
+        set_hud_element_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
+    }
+
+    set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
+    set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
+    set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
+    set_hud_element_script(D_802AD618, &D_80104A28);
+    set_window_update(6, 5);
+    set_window_update(7, 5);
+    set_window_update(8, 1);
+    D_802AD614 = 10;
+    D_802AD60B = 1;
+    D_802AD624 = 255;
+    D_802AD604 = 1;
+}
+
+void func_802A48FC(void) {
+    s32 i;
+
+    set_window_update(6, 5);
+    set_window_update(7, 5);
+    set_window_update(8, 1);
+
+    for (i = 0; i < D_802AD66C; i++) {
+        set_hud_element_tint(D_802AD628[i], 0xFF, 0xFF, 0xFF);
+    }
+
+    set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
+    set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
+    set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
+    set_hud_element_script(D_802AD618, &D_80104A28);
+    D_802AD614 = 10;
+    D_802AD60B = 1;
+    D_802AD604 = 20;
+}
 
 void func_802A4A10(void) {
     set_window_update(6, 5);
@@ -362,15 +539,24 @@ void func_802A4A10(void) {
 
 INCLUDE_ASM(s32, "415D90", func_802A4A54);
 
-INCLUDE_ASM(s32, "415D90", func_802A5290);
-
-void func_802A56F8(s32 arg0, s32 arg1, s32 arg2) {
-    draw_string(0x1D0043, arg1 + 0xF, arg2 + 2, D_802AD624, 0x33, 1);
-}
-
+// getting there but needs work
 #ifdef NON_MATCHING
-void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
-    s32 id;
+void func_802A5290(s32 arg0, s32 x, s32 y) {
+    s16 temp_s1;
+    s16 temp_s1_3;
+    s32 temp_f6;
+    s32 temp_f6_2;
+    s32 phi_s1;
+    s32 phi_s1_2;
+    s32 t1;
+    s32 xt;
+
+    s32 lry;
+    s32 yOffset;
+    s32 uly;
+    s32 xTemp;
+    s32 iconIndex;
+    s32 i;
 
     switch (D_802AD604) {
         case -1:
@@ -378,17 +564,113 @@ void func_802A5738(s32 arg0, s32 arg1, s32 arg2) {
         case 10:
         case 20:
         case 30:
-            if (D_802AD60B != 0) {
-                draw_string(D_802AD6C0[D_802AD605], arg1 + 8, arg2, D_802AD624, D_802AD614, 0);
+        case 40:
+        case 41:
+            temp_s1 = -D_802AD608 * 13;
+            temp_f6 = (temp_s1 - D_802AD60C) * 0.5;
+            D_802AD60C += temp_f6;
+            if (temp_f6 == 0) {
+                D_802AD60C = temp_s1;
             }
+            t1 = D_802AD60A * 13;
+
+            xTemp = x + 4;
+            uly = y + 18;
+            yOffset = 1 + t1;
+            lry = yOffset + uly;
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, xTemp, uly, x + 142, lry);
+
+            xTemp = x + 33;
+            phi_s1 = y + (D_802AD60C + 19);
+            for (i = 0; i < D_802AD66C; i++, phi_s1 += 0xD) {
+                s32 palette = D_802AD614;
+
+                if (D_802AD678[i] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
+                    palette = 0x37;
+                }
+                if (D_802AD690[i] == 0) {
+                    palette = 0xB;
+                }
+                draw_string(D_802AD658[i], xTemp, phi_s1, D_802AD624, palette, 1);
+            }
+
+            xTemp = x + 24;
+            phi_s1_2 = D_802AD60C + y + 24;
+            for (i = 0; i < D_802AD66C; i++, phi_s1_2 += 0xD) {
+                iconIndex = D_802AD628[i];
+
+                set_hud_element_render_pos(iconIndex, xTemp, phi_s1_2);
+                set_hud_element_alpha(iconIndex, D_802AD624);
+                draw_icon_2(iconIndex);
+            }
+
+            temp_s1_3 = (D_802AD605 - D_802AD608) * 13;
+            temp_f6_2 = (f64) (temp_s1_3 - D_802AD60E);
+            if (temp_f6_2 != 0) {
+                D_802AD60E += temp_f6_2;
+            } else {
+                D_802AD60E = temp_s1_3;
+            }
+
+            iconIndex = D_802AD618;
+            set_hud_element_render_pos(iconIndex, x + 10, y + (D_802AD60E + 26));
+            set_hud_element_alpha(iconIndex, D_802AD624);
+            draw_hud_element_clipped(iconIndex);
+
+            if (D_802AD608 > 0) {
+                iconIndex = D_802AD61C;
+                set_hud_element_render_pos(iconIndex, x + 67, y + 16);
+                set_hud_element_alpha(iconIndex, D_802AD624);
+                draw_hud_element_clipped(iconIndex);
+            }
+
+            if (D_802AD609 < D_802AD66C) {
+                iconIndex = D_802AD620;
+                set_hud_element_render_pos(iconIndex, x + 67, y + 100);
+                set_hud_element_alpha(iconIndex, D_802AD624);
+                draw_hud_element_clipped(iconIndex);
+            }
+
             break;
     }
 }
 #else
-INCLUDE_ASM(s32, "415D90", func_802A5738);
+INCLUDE_ASM(s32, "415D90", func_802A5290);
 #endif
 
+void func_802A56F8(s32 arg0, s32 x, s32 y) {
+    draw_string(0x1D0043, x + 15, y + 2, D_802AD624, 0x33, 1);
+}
+
+void func_802A5738(s32 arg0, s32 x, s32 y) {
+    switch (D_802AD604) {
+        case -1:
+        case 1:
+        case 10:
+        case 20:
+        case 30:
+            if (D_802AD60B != 0) {
+                draw_string(D_802AD6C0[D_802AD605], x + 8, y, D_802AD624, D_802AD614, 0);
+            }
+            break;
+    }
+}
+
+// regalloc, arg setting order dumbness
+#ifdef NON_MATCHING
+void func_802A57C8(s32 arg0, s32 x, s32 y) {
+    x += 11;
+    y += 6;
+
+    if (D_802AD610 == 0) {
+        draw_string(0x1D00CB, x, y, 255, 15, 0);
+    } else {
+        draw_string(0x1D00CC, x, y, 255, 15, 0);
+    }
+}
+#else
 INCLUDE_ASM(s32, "415D90", func_802A57C8);
+#endif
 
 s32 can_btl_state_update_switch_to_player(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -476,11 +758,126 @@ s32 func_802A58D0(void) {
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 
+//requires above to be decomped
+#ifdef NON_MATCHING
+void btl_state_draw_player_menu(void) {
+    switch (gBattleState2) {
+        case 1:
+            btl_draw_menu_wheel();
+            break;
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 30:
+        case 31:
+        case 32:
+        case 33:
+        case 34:
+        case 40:
+        case 41:
+        case 42:
+        case 43:
+        case 44:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 61:
+        case 62:
+        case 63:
+        case 64:
+        case 65:
+        case 200:
+        case 201:
+            btl_draw_menu_wheel();
+            break;
+        case 202:
+            btl_draw_menu_wheel();
+            break;
+        case 203:
+            btl_draw_menu_wheel();
+            break;
+        case 204:
+            btl_draw_menu_wheel();
+            break;
+        case 205:
+            btl_draw_menu_wheel();
+            break;
+    }
+}
+#else
 INCLUDE_ASM(s32, "415D90", btl_state_draw_player_menu);
+#endif
 
 INCLUDE_ASM(s32, "415D90", btl_state_update_partner_menu);
 
-INCLUDE_ASM(s32, "415D90", btl_state_draw_partner_menu);
+void btl_state_draw_partner_menu(void) {
+    switch (gBattleState2) {
+        case 2:
+            btl_draw_menu_wheel();
+            break;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        case 14:
+        case 20:
+        case 21:
+        case 22:
+        case 23:
+        case 24:
+        case 30:
+        case 31:
+        case 32:
+        case 33:
+        case 34:
+        case 40:
+        case 41:
+        case 42:
+        case 43:
+        case 44:
+        case 51:
+        case 52:
+        case 53:
+        case 54:
+        case 61:
+        case 62:
+        case 63:
+        case 64:
+        case 65:
+        case 200:
+        case 201:
+            btl_draw_menu_wheel();
+            break;
+        case 202:
+            btl_draw_menu_wheel();
+            break;
+        case 203:
+            btl_draw_menu_wheel();
+            break;
+        case 204:
+            btl_draw_menu_wheel();
+            break;
+        case 205:
+            btl_draw_menu_wheel();
+            break;
+    }
+}
 
 s32 func_802A9B30(void) {
     return (gBattleStatus.flags2 & 4) <= 0;

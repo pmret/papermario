@@ -27,8 +27,8 @@ glabel func_802B735C_E2290C
 /* E22964 802B73B4 8C830024 */  lw        $v1, 0x24($a0)
 /* E22968 802B73B8 E4820004 */  swc1      $f2, 4($a0)
 /* E2296C 802B73BC C4A00028 */  lwc1      $f0, 0x28($a1)
-/* E22970 802B73C0 3C068011 */  lui       $a2, %hi(D_8010EBB0)
-/* E22974 802B73C4 24C6EBB0 */  addiu     $a2, $a2, %lo(D_8010EBB0)
+/* E22970 802B73C0 3C068011 */  lui       $a2, %hi(gPartnerActionStatus)
+/* E22974 802B73C4 24C6EBB0 */  addiu     $a2, $a2, %lo(gPartnerActionStatus)
 /* E22978 802B73C8 E4800000 */  swc1      $f0, ($a0)
 /* E2297C 802B73CC C4A00030 */  lwc1      $f0, 0x30($a1)
 /* E22980 802B73D0 24020001 */  addiu     $v0, $zero, 1

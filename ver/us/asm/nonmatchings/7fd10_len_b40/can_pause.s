@@ -4,8 +4,8 @@
 glabel can_pause
 /* 7FE8C 800E69DC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 7FE90 800E69E0 AFB20018 */  sw        $s2, 0x18($sp)
-/* 7FE94 800E69E4 3C128011 */  lui       $s2, %hi(D_8010EBB0)
-/* 7FE98 800E69E8 2652EBB0 */  addiu     $s2, $s2, %lo(D_8010EBB0)
+/* 7FE94 800E69E4 3C128011 */  lui       $s2, %hi(gPartnerActionStatus)
+/* 7FE98 800E69E8 2652EBB0 */  addiu     $s2, $s2, %lo(gPartnerActionStatus)
 /* 7FE9C 800E69EC AFB10014 */  sw        $s1, 0x14($sp)
 /* 7FEA0 800E69F0 3C118011 */  lui       $s1, %hi(gPlayerStatus)
 /* 7FEA4 800E69F4 2631EFC8 */  addiu     $s1, $s1, %lo(gPlayerStatus)

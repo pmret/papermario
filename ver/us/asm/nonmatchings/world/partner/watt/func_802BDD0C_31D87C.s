@@ -7,8 +7,8 @@ glabel func_802BDD0C_31D87C
 /* 31D884 802BDD14 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* 31D888 802BDD18 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 31D88C 802BDD1C AFB10014 */  sw        $s1, 0x14($sp)
-/* 31D890 802BDD20 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 31D894 802BDD24 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 31D890 802BDD20 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 31D894 802BDD24 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 31D898 802BDD28 AFBF001C */  sw        $ra, 0x1c($sp)
 /* 31D89C 802BDD2C AFB00010 */  sw        $s0, 0x10($sp)
 /* 31D8A0 802BDD30 10A00011 */  beqz      $a1, .L802BDD78

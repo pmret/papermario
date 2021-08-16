@@ -4,8 +4,8 @@
 glabel func_802BE9D0_31AF40
 /* 31AF40 802BE9D0 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* 31AF44 802BE9D4 AFB00010 */  sw        $s0, 0x10($sp)
-/* 31AF48 802BE9D8 3C108011 */  lui       $s0, %hi(D_8010EBB0)
-/* 31AF4C 802BE9DC 2610EBB0 */  addiu     $s0, $s0, %lo(D_8010EBB0)
+/* 31AF48 802BE9D8 3C108011 */  lui       $s0, %hi(gPartnerActionStatus)
+/* 31AF4C 802BE9DC 2610EBB0 */  addiu     $s0, $s0, %lo(gPartnerActionStatus)
 /* 31AF50 802BE9E0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 31AF54 802BE9E4 AFB10014 */  sw        $s1, 0x14($sp)
 /* 31AF58 802BE9E8 82020001 */  lb        $v0, 1($s0)

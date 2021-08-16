@@ -13,8 +13,8 @@ glabel D_80241E30_A6CAD0
 
 glabel func_80240000_A6ACA0
 /* A6ACA0 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A6ACA4 80240004 3C04800E */  lui       $a0, %hi(mapShapeName)
-/* A6ACA8 80240008 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
+/* A6ACA4 80240004 3C04800E */  lui       $a0, %hi(wMapShapeName)
+/* A6ACA8 80240008 24849230 */  addiu     $a0, $a0, %lo(wMapShapeName)
 /* A6ACAC 8024000C 3C058024 */  lui       $a1, %hi(D_80241E20_A6CAC0)
 /* A6ACB0 80240010 24A51E20 */  addiu     $a1, $a1, %lo(D_80241E20_A6CAC0)
 /* A6ACB4 80240014 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
@@ -23,8 +23,8 @@ glabel func_80240000_A6ACA0
 /* A6ACC0 80240020 AFBF0010 */  sw        $ra, 0x10($sp)
 /* A6ACC4 80240024 0C01953C */  jal       sprintf
 /* A6ACC8 80240028 A0620084 */   sb       $v0, 0x84($v1)
-/* A6ACCC 8024002C 3C04800E */  lui       $a0, %hi(mapHitName)
-/* A6ACD0 80240030 248491E0 */  addiu     $a0, $a0, %lo(mapHitName)
+/* A6ACCC 8024002C 3C04800E */  lui       $a0, %hi(wMapHitName)
+/* A6ACD0 80240030 248491E0 */  addiu     $a0, $a0, %lo(wMapHitName)
 /* A6ACD4 80240034 3C058024 */  lui       $a1, %hi(D_80241E30_A6CAD0)
 /* A6ACD8 80240038 0C01953C */  jal       sprintf
 /* A6ACDC 8024003C 24A51E30 */   addiu    $a1, $a1, %lo(D_80241E30_A6CAD0)

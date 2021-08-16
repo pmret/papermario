@@ -22,7 +22,7 @@ void func_802B6478_E28EA8(void);
 void func_802B60A4_E29514(void);
 void func_802B609C_E28ACC(void);
 
-f32 D_800F7B40 = 0.0f;
+s32 D_800F7B40 = 0;
 s32 D_800F7B44 = 0;
 f32 D_800F7B48 = 0.0f;
 s32 D_800F7B4C = 0;

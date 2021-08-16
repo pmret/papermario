@@ -622,7 +622,6 @@ enum SoundIDs {
     SOUND_UNKNOWN_2106              = 8454,
 };
 
-typedef UNK_TYPE Cam;
 enum Cams {
     CAM_DEFAULT,
     CAM_BATTLE,
@@ -1733,6 +1732,12 @@ enum ActionCommand {
     ACTION_COMMAND_SPOOK,
     ACTION_COMMAND_WATER_BLOCK,
     ACTION_COMMAND_TIDAL_WAVE,
+};
+
+enum EffectGfxDataFlags {
+    FX_GRAPHICS_DISABLED = 0,
+    FX_GRAPHICS_ENABLED = 1,
+    FX_GRAPHICS_2 = 2,
 };
 
 #endif

@@ -120,7 +120,7 @@ extern void guOrtho(Mtx *m, float l, float r, float b, float t,
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
-void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
+void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
@@ -132,6 +132,7 @@ void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* cen
 s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
+void peach_set_disguise_anim(s32);
 
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
@@ -193,7 +194,12 @@ s32 osGetId();
 s32 battle_heap_create(void);
 void filemenu_init(s32);
 
-s32 test_ray_zones(f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
+                   f32* hitDepth, f32* nx, f32* ny, f32* nz);
+s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
+                       f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
+s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
+                      f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
 void mem_clear(s8* data, s32 numBytes);
 
@@ -289,6 +295,7 @@ void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
 s32 check_input_jump();
+s32 check_input_hammer();
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
@@ -475,5 +482,10 @@ s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(void);
 void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
+void set_hud_element_script(s32 arg0, s32 *arg1);
+void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3);
+void set_window_update(s32 panelIndex, s32 arg1);
+void set_hud_element_alpha(s32 iconIndex, s32 opacity);
+void draw_hud_element_clipped(s32 arg0);
 
 #endif

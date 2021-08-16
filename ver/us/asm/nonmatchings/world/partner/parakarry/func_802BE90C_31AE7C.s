@@ -8,8 +8,8 @@ glabel func_802BE90C_31AE7C
 /* 31AE88 802BE918 AFB00010 */  sw        $s0, 0x10($sp)
 /* 31AE8C 802BE91C 0080802D */  daddu     $s0, $a0, $zero
 /* 31AE90 802BE920 AFB10014 */  sw        $s1, 0x14($sp)
-/* 31AE94 802BE924 3C118011 */  lui       $s1, %hi(D_8010EBB0)
-/* 31AE98 802BE928 2631EBB0 */  addiu     $s1, $s1, %lo(D_8010EBB0)
+/* 31AE94 802BE924 3C118011 */  lui       $s1, %hi(gPartnerActionStatus)
+/* 31AE98 802BE928 2631EBB0 */  addiu     $s1, $s1, %lo(gPartnerActionStatus)
 /* 31AE9C 802BE92C 10400021 */  beqz      $v0, .L802BE9B4
 /* 31AEA0 802BE930 AFBF0018 */   sw       $ra, 0x18($sp)
 /* 31AEA4 802BE934 3C02802C */  lui       $v0, %hi(D_802BEBB8)

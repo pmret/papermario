@@ -149,8 +149,8 @@ glabel update_encounters_post_battle
 /* 1D510 80042110 0C03ADB1 */  jal       partner_handle_after_battle
 /* 1D514 80042114 00000000 */   nop
 .L80042118:
-/* 1D518 80042118 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 1D51C 8004211C 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
+/* 1D518 80042118 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 1D51C 8004211C 2442EBB0 */  addiu     $v0, $v0, %lo(gPartnerActionStatus)
 /* 1D520 80042120 80420001 */  lb        $v0, 1($v0)
 /* 1D524 80042124 3C03800A */  lui       $v1, %hi(D_8009A63C)
 /* 1D528 80042128 2463A63C */  addiu     $v1, $v1, %lo(D_8009A63C)

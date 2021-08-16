@@ -523,6 +523,16 @@ typedef struct CameraInitData {
     /* 0x10 */ s16 vfov;
 } CameraInitData; // size = 0x12;
 
+typedef struct CameraUnk {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ char unk_04[0x8];
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x54];
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ char unk_68[0x24];
+} CameraUnk; // size = 0x8C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
@@ -547,7 +557,7 @@ typedef struct Camera {
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
-    /* 0x038 */ s16 perspNorm;
+    /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
@@ -561,20 +571,29 @@ typedef struct Camera {
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ f32 trueRotation[3];
+    /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
-    /* 0x0B0 */ char unk_B0[0x24];
+    /* 0x0B0 */ Vp vpAlt;
+    /* 0x0C0 */ s32 unk_C0;
+    /* 0x0C4 */ f32 unk_C4;
+    /* 0x0C8 */ char unk_C8[0xC];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
     /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
     /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
-    /* 0x1D4 */ char unk_1D4[48];
+    /* 0x1D4 */ char unk_1D4[0x28];
+    /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
+    /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
     /* 0x204 */ struct Matrix4s* unkMatrix;
-    /* 0x208 */ char unk_208[572];
+    /* 0x208 */ s32 unk_208;
+    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x210 */ char unk_210[0x2];
+    /* 0x212 */ s16 unk_212;
+    /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ struct Zone* prevZone;
     /* 0x448 */ struct Zone* currentZone;
     /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
@@ -599,11 +618,20 @@ typedef struct Camera {
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[16];
+    /* 0x510 */ f32 unk_510;
+    /* 0x514 */ f32 unk_514;
+    /* 0x518 */ f32 unk_518;
+    /* 0x51C */ s32 unk_51C;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ char unk_524[16];
+    /* 0x524 */ f32 unk_524;
+    /* 0x528 */ f32 unk_528;
+    /* 0x52C */ s32 unk_52C;
+    /* 0x530 */ s32 unk_530;
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
-    /* 0x538 */ char unk_538[32];
+    /* 0x538 */ char unk_538[0x18];
+    /* 0x550 */ f32 unk_550;
+    /* 0x554 */ s16 unk_554;
+    /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
 typedef struct BattleStatusUnkInner {
@@ -938,7 +966,7 @@ typedef struct EffectInstance {
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 totalMatricies;
     /* 0x0C */ struct EffectInstanceData* data;
-    /* 0x10 */ struct Effect* effect;
+    /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;
 
 typedef struct EffectBlueprint {
@@ -985,24 +1013,24 @@ typedef struct {
     s32 unk_74;
 } EffectInstanceDataThing;
 
-typedef struct Effect {
+typedef struct EffectGraphics {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ s32 freeDelay;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
-    /* 0x1C */ void* unk_1C;
-} Effect; // size = 0x20
+    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
+    /* 0x1C */ s32* data;
+} EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
     /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
-    /* 0x10 */ void* unkStartRom;
-    /* 0x14 */ void* unkEndRom;
+    /* 0x10 */ void* graphicsDmaStart;
+    /* 0x14 */ void* graphicsDmaEnd;
 } EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
@@ -1442,13 +1470,13 @@ typedef struct ActorPart {
 } ActorPart; // size = 0xC4
 
 typedef struct ColliderTriangle {
-    /* 0x00 */ f32* v1[3]; /* note: the order of v1,2,3 is reversed from the ijk in the hit file */
-    /* 0x04 */ f32* v2[3];
-    /* 0x08 */ f32* v3[3];
-    /* 0x0C */ f32 e13[3]; /* = v3 - v1 */
-    /* 0x18 */ f32 e21[3]; /* = v1 - v2 */
-    /* 0x24 */ f32 e32[3]; /* = v2 - v3 */
-    /* 0x30 */ f32 normal[3];
+    /* 0x00 */ Vec3f* v1; /* note: the order of v1,2,3 is reversed from the ijk in the hit file */
+    /* 0x04 */ Vec3f* v2;
+    /* 0x08 */ Vec3f* v3;
+    /* 0x0C */ Vec3f e13; /* = v3 - v1 */
+    /* 0x18 */ Vec3f e21; /* = v1 - v2 */
+    /* 0x24 */ Vec3f e32; /* = v2 - v3 */
+    /* 0x30 */ Vec3f normal;
     /* 0x3C */ s16 oneSided; /* 1 = yes, 0 = no */
     /* 0x3E */ char unk_3E[2];
 } ColliderTriangle; // size = 0x40
@@ -2147,20 +2175,21 @@ typedef struct Temp8010F250 {
     /* 0x30 */ SoundID unk_30;
 } Temp8010F250; // size = 0x34
 
-typedef struct Temp8010EBB0 {
-    /* 0x000 */ s8 unk_00;
-    /* 0x001 */ s8 unk_01;
-    /* 0x002 */ s8 unk_02;
-    /* 0x003 */ s8 unk_03;
-    /* 0x004 */ char unk_04[0x4];
-    /* 0x008 */ s32 unk_08;
-    /* 0x009 */ s32 unk_0C;
-    /* 0x010 */ char unk_10[0x4];
-    /* 0x014 */ s8 unk_14;
+typedef struct PartnerActionStatus {
+    /* 0x000 */ union {
+        /*       */     s32 i;
+        /*       */     s8 b[4];
+    } actionState;
+    /* 0x004 */ s16 stickX;
+    /* 0x006 */ s16 stickY;
+    /* 0x008 */ s32 currentButtons;
+    /* 0x00C */ s32 pressedButtons;
+    /* 0x010 */ s32 heldButtons;
+    /* 0x014 */ s8 inputDisabled;
     /* 0x015 */ char unk_15[0x343];
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
-} Temp8010EBB0; // size = 0x360
+} PartnerActionStatus; // size = 0x360
 
 typedef struct Temp8025D160 {
     /* 0x00 */ s32 unk_00;

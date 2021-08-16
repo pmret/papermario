@@ -4,8 +4,8 @@
 glabel update_player_blink
 /* 7947C 800DFFCC 3C058011 */  lui       $a1, %hi(gPlayerStatus)
 /* 79480 800DFFD0 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
-/* 79484 800DFFD4 3C048011 */  lui       $a0, %hi(D_8010EBB0)
-/* 79488 800DFFD8 2484EBB0 */  addiu     $a0, $a0, %lo(D_8010EBB0)
+/* 79484 800DFFD4 3C048011 */  lui       $a0, %hi(gPartnerActionStatus)
+/* 79488 800DFFD8 2484EBB0 */  addiu     $a0, $a0, %lo(gPartnerActionStatus)
 /* 7948C 800DFFDC 80830003 */  lb        $v1, 3($a0)
 /* 79490 800DFFE0 24020009 */  addiu     $v0, $zero, 9
 /* 79494 800DFFE4 14620003 */  bne       $v1, $v0, .L800DFFF4

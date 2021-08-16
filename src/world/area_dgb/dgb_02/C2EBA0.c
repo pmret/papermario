@@ -544,14 +544,14 @@ void N(func_80240958_C2F4F8)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         if (playerData->currentPartner == 2) {
-            if (D_8010EBB0.unk_00 == playerData->currentPartner) {
+            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (D_8010EBB0.unk_00 != 0)) ||
-        ((playerData->currentPartner == 3) && (D_8010EBB0.unk_00 == 2))) {
+    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
+        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);

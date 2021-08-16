@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s32 D_802BE934;
+
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD100_317E50);
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD2D8_318028);
@@ -17,10 +19,16 @@ INCLUDE_ASM(s32, "world/partner/bombette", func_802BD338_318088);
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD6DC_31842C);
 
-INCLUDE_ASM(s32, "world/partner/bombette", func_802BD720_318470);
+s32 func_802BD720_318470(void) {
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
+        D_802BE934 = 1;
+        return FALSE;
+    }
+    return TRUE;
+}
 
 s32 func_802BD748(void) {
-    return D_8010EBB0.unk_00 == 0;
+    return gPartnerActionStatus.actionState.b[0] == 0;
 }
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD758_3184A8);

@@ -7,8 +7,8 @@ glabel get_overriding_player_anim
 /* 79200 800DFD50 0080802D */  daddu     $s0, $a0, $zero
 /* 79204 800DFD54 3C058011 */  lui       $a1, %hi(gPlayerStatus)
 /* 79208 800DFD58 24A5EFC8 */  addiu     $a1, $a1, %lo(gPlayerStatus)
-/* 7920C 800DFD5C 3C048011 */  lui       $a0, %hi(D_8010EBB0)
-/* 79210 800DFD60 2484EBB0 */  addiu     $a0, $a0, %lo(D_8010EBB0)
+/* 7920C 800DFD5C 3C048011 */  lui       $a0, %hi(gPartnerActionStatus)
+/* 79210 800DFD60 2484EBB0 */  addiu     $a0, $a0, %lo(gPartnerActionStatus)
 /* 79214 800DFD64 AFBF0014 */  sw        $ra, 0x14($sp)
 /* 79218 800DFD68 80A300B4 */  lb        $v1, 0xb4($a1)
 /* 7921C 800DFD6C 2402001D */  addiu     $v0, $zero, 0x1d

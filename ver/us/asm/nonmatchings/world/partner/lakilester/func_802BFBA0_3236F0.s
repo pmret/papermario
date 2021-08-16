@@ -13,8 +13,8 @@ glabel func_802BFBA0_3236F0
 /* 323710 802BFBC0 AFB20018 */  sw        $s2, 0x18($sp)
 /* 323714 802BFBC4 0C00EABB */  jal       get_npc_unsafe
 /* 323718 802BFBC8 AFB10014 */   sw       $s1, 0x14($sp)
-/* 32371C 802BFBCC 3C148011 */  lui       $s4, %hi(D_8010EBB0)
-/* 323720 802BFBD0 2694EBB0 */  addiu     $s4, $s4, %lo(D_8010EBB0)
+/* 32371C 802BFBCC 3C148011 */  lui       $s4, %hi(gPartnerActionStatus)
+/* 323720 802BFBD0 2694EBB0 */  addiu     $s4, $s4, %lo(gPartnerActionStatus)
 /* 323724 802BFBD4 3C128011 */  lui       $s2, %hi(gPlayerStatus)
 /* 323728 802BFBD8 2652EFC8 */  addiu     $s2, $s2, %lo(gPlayerStatus)
 /* 32372C 802BFBDC 12000002 */  beqz      $s0, .L802BFBE8
