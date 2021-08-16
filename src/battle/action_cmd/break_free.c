@@ -70,7 +70,7 @@ INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A92DC_4236CC);
 INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A96B8_423AA8);
 
 void func_802A97FC_423BEC(void) {
-	free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
     free_hud_element(gActionCommandStatus.hudElements[1]);
     free_hud_element(gActionCommandStatus.hudElements[2]);
     free_hud_element(gActionCommandStatus.hudElements[3]);

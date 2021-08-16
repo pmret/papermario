@@ -33,8 +33,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
         set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
         set_hud_element_render_depth(hudElement, 0);
         set_hud_element_flags(hudElement, 0x82);
-        
-        i = 1;
+
         for (i = 1; i < 15; i++) {
             hudElement = create_hud_element(&D_80108B28);
             actionCommandStatus->hudElements[i] = hudElement;

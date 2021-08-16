@@ -148,7 +148,7 @@ void func_802A91F8_425788(void) {
 }
 
 void func_802A94A4_425A34(void) {
-	s32 x, y;
+    s32 x, y;
     HudElement* hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 

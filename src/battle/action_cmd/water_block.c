@@ -55,14 +55,14 @@ void func_802AA014_42B504(void) {
     if (get_hud_element_script(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
         set_hud_element_script(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
     }
-    draw_hud_element_clipped(hudElement);
 
+    draw_hud_element_clipped(hudElement);
     draw_hud_element_clipped(actionCommandStatus->hudElements[11]);
     draw_hud_element_clipped(actionCommandStatus->hudElements[12]);
 }
 
 void func_802AA0D8_42B5C8(void) {
-	free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
     free_hud_element(gActionCommandStatus.hudElements[1]);
     free_hud_element(gActionCommandStatus.hudElements[2]);
     free_hud_element(gActionCommandStatus.hudElements[3]);
