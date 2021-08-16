@@ -19747,7 +19747,6 @@ D_802700A0 = 0x802700A0; // type:data
 D_802700A8 = 0x802700A8; // type:data
 D_802700B0 = 0x802700B0; // type:data
 D_802700B8 = 0x802700B8; // type:data
-bss = 0x802700C0; // type:data
 gPauseMenuHeldButtons = 0x802700C0; // type:data
 gPauseMenuPressedButtons = 0x802700C4; // type:data
 gPauseMenuCurrentDescString = 0x802700C8; // type:data
