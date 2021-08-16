@@ -709,7 +709,7 @@ Script N(80245444) = SCRIPT({
     SetNpcSpeed(NPC_WORLD_LAKILESTER, 3.5);
     NpcMoveTo(NPC_WORLD_LAKILESTER, SI_VAR(0), 60, 0);
     N(UnkFunc41)(0, 8);
-    N(func_802435D0_CC6DE0)();
+    N(LoadPartyImage)();
     spawn N(802438CC);
     sleep 15;
     ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x0190), 160, 40);

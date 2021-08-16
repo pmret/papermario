@@ -91,7 +91,209 @@ NpcSettings N(npcSettings_80241C3C) = {
     .level = 99,
 };
 
-s32** N(D_80241C68_BE09F8) = NULL;
+#include "world/common/UnkNpcAIFunc24.inc.c"
+
+#include "world/common/UnkFunc13.inc.c"
+
+#include "world/common/UnkNpcAIFunc1.inc.c"
+
+#include "world/common/UnkFunc14.inc.c"
+
+#include "world/common/UnkNpcAIFunc25.inc.c"
+
+#include "world/common/NpcJumpFunc2.inc.c"
+
+#include "world/common/NpcJumpFunc.inc.c"
+
+#include "world/common/UnkNpcAIFunc13.inc.c"
+
+#include "world/common/UnkFunc15.inc.c"
+
+#include "world/common/UnkNpcDurationFlagFunc.inc.c"
+
+#include "world/common/UnkFunc16.inc.c"
+
+ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    Bytecode* args = script->ptrReadPos;
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    f32 posX, posY, posZ, posW;
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->patrol.detectShape;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.unk_18 = 65.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall || enemy->unk_B0 & 4) {
+        script->functionTemp[0] = 0;
+        npc->duration = 0;
+        npc->currentAnim.w = enemy->animList[0];
+        npc->flags &= ~0x800;
+        if (!enemy->territory->patrol.isFlying) {
+            npc->flags = (npc->flags | 0x200) & ~8;
+        } else {
+            npc->flags = (npc->flags & ~0x200) | 8;
+        }
+
+        if (enemy->unk_B0 & 4) {
+            script->functionTemp[0] = 99;
+            script->functionTemp[1] = 0;
+            enemy->unk_B0 &= ~4;
+        } else if (enemy->flags & 0x40000000) {
+            script->functionTemp[0] = 12;
+            enemy->flags &= ~0x40000000;
+        }
+
+        posX = npc->pos.x;
+        posY = npc->pos.y + npc->collisionHeight;
+        posZ = npc->pos.z;
+        posW = 100.0f;
+
+        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
+            npc->pos.y = posY;
+        }
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
+        case 1:
+            N(UnkFunc13)(script, npcAISettings, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+        case 3:
+            N(UnkFunc14)(script, npcAISettings, territoryPtr);
+            break;
+        case 4:
+            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+            break;
+        case 10:
+            N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
+        case 11:
+            N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
+            break;
+        case 12:
+            N(UnkNpcAIFunc13)(script, npcAISettings, territoryPtr);
+        case 13:
+            N(UnkFunc15)(script, npcAISettings, territoryPtr);
+            break;
+        case 14:
+            N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
+            break;
+        case 15:
+            N(UnkFunc16)(script, npcAISettings, territoryPtr);
+            break;
+        case 99:
+            func_8004A73C(script);
+    }
+    return ApiStatus_BLOCK;
+}
+
+void N(func_80240E90_BDFC20)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    f32 posX, posY, posZ, posW;
+    f32 temp_f20;
+    f32 temp_f22;
+
+    posX = npc->pos.x;
+    posZ = npc->pos.z;
+    temp_f22 = (*(enemy->territory->patrol.points + script->functionTemp[2])).x;
+    temp_f20 = (*(enemy->territory->patrol.points + script->functionTemp[2])).z;
+
+    npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
+    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
+
+    posX = npc->pos.x;
+    posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
+    posZ = npc->pos.z;
+    posW = 1000.0f;
+    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
+    posY += (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
+    posW = posY - npc->pos.y;
+    if (posW > 2.0) {
+        npc->pos.y += 2.0;
+    } else if (posW < -2.0) {
+        npc->pos.y -= 2.0;
+    } else {
+        npc->pos.y = posY;
+    }
+
+    posW = dist2D(npc->pos.x, npc->pos.z, temp_f22, temp_f20);
+    if (!(posW > npc->moveSpeed)) {
+        script->functionTemp[0] = 2;
+    }
+}
+
+void N(func_80241068_BDFDF8)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+    Enemy* enemy = script->owner1.enemy;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+
+    npc->duration--;
+    if (npc->duration < 0) {
+        script->functionTemp[1]--;
+        if (script->functionTemp[1] >= 0) {
+            npc->yaw = clamp_angle(npc->yaw + 180.0f);
+            npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
+        } else {
+            script->functionTemp[0] = 4;
+            npc->currentAnim.w = enemy->animList[0];
+        }
+    }
+}
+
+ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+    Bytecode* args = script->ptrReadPos;
+    Npc* npc = get_npc_unsafe(enemy->npcID);
+    EnemyTerritoryThing territory;
+    EnemyTerritoryThing* territoryPtr = &territory;
+    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+
+    territory.unk_00 = 0;
+    territory.shape = enemy->territory->patrol.detectShape;
+    territory.pointX = enemy->territory->patrol.detect.x;
+    territory.pointZ = enemy->territory->patrol.detect.z;
+    territory.sizeX = enemy->territory->patrol.detectSizeX;
+    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
+    territory.unk_18 = 100.0f;
+    territory.unk_1C = 0;
+
+    if (isInitialCall) {
+        script->functionTemp[0] = 0;
+        npc->duration = 0;
+        npc->flags &= ~0x800;
+    }
+
+    switch (script->functionTemp[0]) {
+        case 0:
+            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
+        case 1:
+            N(func_80240E90_BDFC20)(script, npcAISettings, territoryPtr);
+            break;
+        case 2:
+            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
+        case 3:
+            N(func_80241068_BDFDF8)(script, npcAISettings, territoryPtr);
+            break;
+        case 4:
+            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
+            break;
+    }
+
+    enemy->varTable[0] = npc->pos.y;
+    return ApiStatus_BLOCK;
+}
+
+#include "world/common/StashVars.inc.c"
 
 Script N(80241C6C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
@@ -856,227 +1058,6 @@ Script N(makeEntities) = SCRIPT({
     AssignBlockFlag(SI_SAVE_FLAG(1007));
     MakeEntity(0x802E9A18, 250, 237, 125, 0, MAKE_ENTITY_END);
 });
-
-#include "world/common/UnkNpcAIFunc24.inc.c"
-
-#include "world/common/UnkFunc13.inc.c"
-
-#include "world/common/UnkNpcAIFunc1.inc.c"
-
-#include "world/common/UnkFunc14.inc.c"
-
-#include "world/common/UnkNpcAIFunc25.inc.c"
-
-#include "world/common/NpcJumpFunc2.inc.c"
-
-#include "world/common/NpcJumpFunc.inc.c"
-
-#include "world/common/UnkNpcAIFunc13.inc.c"
-
-#include "world/common/UnkFunc15.inc.c"
-
-#include "world/common/UnkNpcDurationFlagFunc.inc.c"
-
-#include "world/common/UnkFunc16.inc.c"
-
-ApiStatus N(func_80240B94_BDF924)(ScriptInstance* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    Bytecode* args = script->ptrReadPos;
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
-    f32 posX, posY, posZ, posW;
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.detectShape;
-    territory.pointX = enemy->territory->patrol.detect.x;
-    territory.pointZ = enemy->territory->patrol.detect.z;
-    territory.sizeX = enemy->territory->patrol.detectSizeX;
-    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 65.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall || enemy->unk_B0 & 4) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->currentAnim.w = enemy->animList[0];
-        npc->flags &= ~0x800;
-        if (!enemy->territory->patrol.isFlying) {
-            npc->flags = (npc->flags | 0x200) & ~8;
-        } else {
-            npc->flags = (npc->flags & ~0x200) | 8;
-        }
-
-        if (enemy->unk_B0 & 4) {
-            script->functionTemp[0] = 99;
-            script->functionTemp[1] = 0;
-            enemy->unk_B0 &= ~4;
-        } else if (enemy->flags & 0x40000000) {
-            script->functionTemp[0] = 12;
-            enemy->flags &= ~0x40000000;
-        }
-
-        posX = npc->pos.x;
-        posY = npc->pos.y + npc->collisionHeight;
-        posZ = npc->pos.z;
-        posW = 100.0f;
-
-        if (npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW)) {
-            npc->pos.y = posY;
-        }
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
-        case 1:
-            N(UnkFunc13)(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
-        case 3:
-            N(UnkFunc14)(script, npcAISettings, territoryPtr);
-            break;
-        case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
-            break;
-        case 10:
-            N(NpcJumpFunc2)(script, npcAISettings, territoryPtr);
-        case 11:
-            N(NpcJumpFunc)(script, npcAISettings, territoryPtr);
-            break;
-        case 12:
-            N(UnkNpcAIFunc13)(script, npcAISettings, territoryPtr);
-        case 13:
-            N(UnkFunc15)(script, npcAISettings, territoryPtr);
-            break;
-        case 14:
-            N(UnkNpcDurationFlagFunc)(script, npcAISettings, territoryPtr);
-            break;
-        case 15:
-            N(UnkFunc16)(script, npcAISettings, territoryPtr);
-            break;
-        case 99:
-            func_8004A73C(script);
-    }
-    return ApiStatus_BLOCK;
-}
-
-void N(func_80240E90_BDFC20)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 posX, posY, posZ, posW;
-    f32 temp_f20;
-    f32 temp_f22;
-
-    posX = npc->pos.x;
-    posZ = npc->pos.z;
-    temp_f22 = (*(enemy->territory->patrol.points + script->functionTemp[2])).x;
-    temp_f20 = (*(enemy->territory->patrol.points + script->functionTemp[2])).z;
-
-    npc->yaw = atan2(posX, posZ, temp_f22, temp_f20);
-    npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-
-    posX = npc->pos.x;
-    posY = npc->pos.y + (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
-    posZ = npc->pos.z;
-    posW = 1000.0f;
-    npc_raycast_down_sides(npc->unk_80, &posX, &posY, &posZ, &posW);
-    posY += (*(enemy->territory->patrol.points + script->functionTemp[2])).y;
-    posW = posY - npc->pos.y;
-    if (posW > 2.0) {
-        npc->pos.y += 2.0;
-    } else if (posW < -2.0) {
-        npc->pos.y -= 2.0;
-    } else {
-        npc->pos.y = posY;
-    }
-
-    posW = dist2D(npc->pos.x, npc->pos.z, temp_f22, temp_f20);
-    if (!(posW > npc->moveSpeed)) {
-        script->functionTemp[0] = 2;
-    }
-}
-
-void N(func_80241068_BDFDF8)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
-    Enemy* enemy = script->owner1.enemy;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-
-    npc->duration--;
-    if (npc->duration < 0) {
-        script->functionTemp[1]--;
-        if (script->functionTemp[1] >= 0) {
-            npc->yaw = clamp_angle(npc->yaw + 180.0f);
-            npc->duration = aiSettings->waitTime / 2 + rand_int(aiSettings->waitTime / 2 + 1);
-        } else {
-            script->functionTemp[0] = 4;
-            npc->currentAnim.w = enemy->animList[0];
-        }
-    }
-}
-
-ApiStatus N(func_8024113C_BDFECC)(ScriptInstance* script, s32 isInitialCall) {
-    Enemy* enemy = script->owner1.enemy;
-    Bytecode* args = script->ptrReadPos;
-    Npc* npc = get_npc_unsafe(enemy->npcID);
-    EnemyTerritoryThing territory;
-    EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
-
-    territory.unk_00 = 0;
-    territory.shape = enemy->territory->patrol.detectShape;
-    territory.pointX = enemy->territory->patrol.detect.x;
-    territory.pointZ = enemy->territory->patrol.detect.z;
-    territory.sizeX = enemy->territory->patrol.detectSizeX;
-    territory.sizeZ = enemy->territory->patrol.detectSizeZ;
-    territory.unk_18 = 100.0f;
-    territory.unk_1C = 0;
-
-    if (isInitialCall) {
-        script->functionTemp[0] = 0;
-        npc->duration = 0;
-        npc->flags &= ~0x800;
-    }
-
-    switch (script->functionTemp[0]) {
-        case 0:
-            N(UnkNpcAIFunc24)(script, npcAISettings, territoryPtr);
-        case 1:
-            N(func_80240E90_BDFC20)(script, npcAISettings, territoryPtr);
-            break;
-        case 2:
-            N(UnkNpcAIFunc1)(script, npcAISettings, territoryPtr);
-        case 3:
-            N(func_80241068_BDFDF8)(script, npcAISettings, territoryPtr);
-            break;
-        case 4:
-            N(UnkNpcAIFunc25)(script, npcAISettings, territoryPtr);
-            break;
-    }
-
-    enemy->varTable[0] = npc->pos.y;
-    return ApiStatus_BLOCK;
-}
-
-/// Pushes/pops script local variables to D_80241C68_BE09F8
-ApiStatus N(func_802412B0_BE0040)(ScriptInstance* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80241C68_BE09F8) == NULL) {
-        N(D_80241C68_BE09F8) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80241C68_BE09F8)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80241C68_BE09F8)[i];
-        }
-        heap_free(N(D_80241C68_BE09F8));
-        N(D_80241C68_BE09F8) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
 
 #include "world/common/GetItemName.inc.c"
 

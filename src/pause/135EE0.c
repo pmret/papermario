@@ -1,7 +1,17 @@
 #include "common.h"
 
+BSS s32 gPauseMenuHeldButtons;
+BSS s32 gPauseMenuPressedButtons;
+BSS s32 gPauseMenuCurrentDescString;
+BSS s32* gPauseMenuCurrentDescIconScript;
+BSS s32 D_802700D0;
+BSS s8 gPauseMenuCurrentTab;
+BSS char D_802700D[8];
+BSS s32 D_802700E0;
+#define BSS_END 0x802700E4
+
 // TODO this is the bss for the whole segment - break it up
-static char bss[0x8580];
+static char bss[0x80278640 - BSS_END];
 
 // Need data segment and vars declared above
 #ifdef NON_MATCHING
