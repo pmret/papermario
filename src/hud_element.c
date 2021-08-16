@@ -22,31 +22,31 @@ s32 D_8014F110[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 
 extern s32 D_801512B4;
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", load_hud_element);
+INCLUDE_ASM(s32, "hud_element", load_hud_element);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_rect_hud_element);
+INCLUDE_ASM(s32, "hud_element", draw_rect_hud_element);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", clear_hud_element_cache);
+INCLUDE_ASM(s32, "hud_element", clear_hud_element_cache);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", init_hud_element_list);
+INCLUDE_ASM(s32, "hud_element", init_hud_element_list);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_801413F8);
+INCLUDE_ASM(s32, "hud_element", func_801413F8);
 
-INCLUDE_ASM(HudElement*, "d5a50_len_5fd0", create_hud_element, s32* iconIndex);
+INCLUDE_ASM(HudElement*, "hud_element", create_hud_element, s32* iconIndex);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", update_hud_elements);
+INCLUDE_ASM(s32, "hud_element", update_hud_elements);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", hud_element_update);
+INCLUDE_ASM(s32, "hud_element", hud_element_update);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", render_hud_elements_backUI);
+INCLUDE_ASM(s32, "hud_element", render_hud_elements_backUI);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", render_hud_elements_frontUI);
+INCLUDE_ASM(s32, "hud_element", render_hud_elements_frontUI);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", render_hud_element);
+INCLUDE_ASM(s32, "hud_element", render_hud_element);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", render_hud_elements_world);
+INCLUDE_ASM(s32, "hud_element", render_hud_elements_world);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80143C48);
+INCLUDE_ASM(s32, "hud_element", func_80143C48);
 
 void func_80144218 (s32 arg0) {
     func_80143C48(arg0, 1, 3);
@@ -64,7 +64,7 @@ void func_80144278(s32 arg0) {
     func_80143C48(arg0, 0, 1);
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", draw_hud_element);
+INCLUDE_ASM(s32, "hud_element", draw_hud_element);
 
 void draw_hud_element_clipped(s32 arg0) {
     draw_hud_element(arg0, 0);
@@ -136,7 +136,7 @@ void get_hud_element_render_pos(s32 iconIndex, s32* x, s32* y) {
     *y = hudElement->renderPosY;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_render_depth);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_render_depth);
 
 void set_hud_element_flags(s32 iconIndex, s32 flags) {
     gHudElementList[iconIndex & ~0x800]->flags |= flags;
@@ -146,9 +146,9 @@ void clear_hud_element_flags(s32 iconIndex, s32 flags) {
     gHudElementList[iconIndex & ~0x800]->flags &= ~flags;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", ALT_clear_hud_element_cache);
+INCLUDE_ASM(s32, "hud_element", ALT_clear_hud_element_cache);
 
-INCLUDE_ASM(void, "d5a50_len_5fd0", set_hud_element_scale, s32 index, f32 scale);
+INCLUDE_ASM(void, "hud_element", set_hud_element_scale, s32 index, f32 scale);
 
 void set_hud_element_size(s32 arg0, s8 arg1) {
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
@@ -162,7 +162,7 @@ void set_hud_element_size(s32 arg0, s8 arg1) {
     hudElement->flags &= ~0x810;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", func_80144E4C);
+INCLUDE_ASM(s32, "hud_element", func_80144E4C);
 
 void func_80144E74(s32 iconIndex, s32 arg1) {
     HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
@@ -190,11 +190,11 @@ void set_hud_element_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3) {
     hudElement->tint[2] = tint3;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_A);
+INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_A);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_B);
+INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_B);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_C);
+INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_C);
 
 void free_hud_element_transform(s32 arg0) {  
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
@@ -209,14 +209,14 @@ void free_hud_element_transform(s32 arg0) {
     hudElement->flags &= ~0x40030000;
 }
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_pos);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_pos);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_scale);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_scale);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_rotation);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_rotation);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_transform_rotation_pivot);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_rotation_pivot);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", copy_world_hud_element_ref_to_battle);
+INCLUDE_ASM(s32, "hud_element", copy_world_hud_element_ref_to_battle);
 
-INCLUDE_ASM(s32, "d5a50_len_5fd0", set_hud_element_nonworld_cache);
+INCLUDE_ASM(s32, "hud_element", set_hud_element_nonworld_cache);
