@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "effects/effect_8", func_E0010000);
 
 INCLUDE_ASM(s32, "effects/effect_8", func_E0010104);
 
-INCLUDE_ASM(s32, "effects/effect_8", func_E00101E8);
+INCLUDE_ASM(s32, "effects/effect_8", fx_8_main);
 
 void func_E00103EC(void) {
 }

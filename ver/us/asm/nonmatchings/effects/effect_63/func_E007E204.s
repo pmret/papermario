@@ -44,7 +44,7 @@ glabel LE007E270_37F990
 /* 37F9B8 E007E298 8E06000C */  lw        $a2, 0xc($s0)
 /* 37F9BC E007E29C 8E070010 */  lw        $a3, 0x10($s0)
 /* 37F9C0 E007E2A0 44051000 */  mfc1      $a1, $f2
-/* 37F9C4 E007E2A4 0C016800 */  jal       func_E005A000
+/* 37F9C4 E007E2A4 0C016800 */  jal       fx_45_main
 /* 37F9C8 E007E2A8 0000202D */   daddu    $a0, $zero, $zero
 /* 37F9CC E007E2AC 8E020004 */  lw        $v0, 4($s0)
 /* 37F9D0 E007E2B0 AE000034 */  sw        $zero, 0x34($s0)

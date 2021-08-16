@@ -442,7 +442,7 @@ glabel LE00CC870_3D1F00
 /* 3D1F78 E00CC8E8 44071000 */  mfc1      $a3, $f2
 /* 3D1F7C E00CC8EC 24020010 */  addiu     $v0, $zero, 0x10
 /* 3D1F80 E00CC8F0 E7BC0010 */  swc1      $f28, 0x10($sp)
-/* 3D1F84 E00CC8F4 0C034800 */  jal       func_E00D2000
+/* 3D1F84 E00CC8F4 0C034800 */  jal       fx_105_main
 /* 3D1F88 E00CC8F8 AFA20014 */   sw       $v0, 0x14($sp)
 /* 3D1F8C E00CC8FC 8C44000C */  lw        $a0, 0xc($v0)
 /* 3D1F90 E00CC900 24030064 */  addiu     $v1, $zero, 0x64

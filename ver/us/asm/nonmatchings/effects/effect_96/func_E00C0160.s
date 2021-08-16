@@ -354,7 +354,7 @@ glabel LE00C0570_3BD2D0
 /* 3BD3C4 E00C0664 44061000 */  mfc1      $a2, $f2
 /* 3BD3C8 E00C0668 24020028 */  addiu     $v0, $zero, 0x28
 /* 3BD3CC E00C066C AFA20014 */  sw        $v0, 0x14($sp)
-/* 3BD3D0 E00C0670 0C037800 */  jal       func_E00DE000
+/* 3BD3D0 E00C0670 0C037800 */  jal       fx_111_main
 /* 3BD3D4 E00C0674 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 3BD3D8 E00C0678 0C080150 */  jal       func_E0200540
 /* 3BD3DC E00C067C 24040072 */   addiu    $a0, $zero, 0x72
@@ -387,7 +387,7 @@ glabel LE00C0570_3BD2D0
 /* 3BD448 E00C06E8 AFA20020 */  sw        $v0, 0x20($sp)
 /* 3BD44C E00C06EC E7A60010 */  swc1      $f6, 0x10($sp)
 /* 3BD450 E00C06F0 E7A40018 */  swc1      $f4, 0x18($sp)
-/* 3BD454 E00C06F4 0C039000 */  jal       func_E00E4000
+/* 3BD454 E00C06F4 0C039000 */  jal       fx_114_main
 /* 3BD458 E00C06F8 E7A20014 */   swc1     $f2, 0x14($sp)
 .LE00C06FC:
 /* 3BD45C E00C06FC 8FBF002C */  lw        $ra, 0x2c($sp)

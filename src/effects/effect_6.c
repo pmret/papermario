@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "effects/effect_6", func_E000C094);
 
 INCLUDE_ASM(s32, "effects/effect_6", func_E000C0C8);
 
-INCLUDE_ASM(s32, "effects/effect_6", func_E000C160);
+INCLUDE_ASM(s32, "effects/effect_6", fx_6_main);
 
 void func_E000C64C(void) {
 }

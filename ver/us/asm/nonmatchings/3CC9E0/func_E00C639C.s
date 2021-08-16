@@ -53,7 +53,7 @@ glabel func_E00C639C
 /* 3CCE34 E00C6454 8E050004 */  lw        $a1, 4($s0)
 /* 3CCE38 E00C6458 8E060008 */  lw        $a2, 8($s0)
 /* 3CCE3C E00C645C 8E07000C */  lw        $a3, 0xc($s0)
-/* 3CCE40 E00C6460 0C031800 */  jal       func_E00C6000
+/* 3CCE40 E00C6460 0C031800 */  jal       fx_99_main
 /* 3CCE44 E00C6464 24040002 */   addiu    $a0, $zero, 2
 .LE00C6468:
 /* 3CCE48 E00C6468 8E020020 */  lw        $v0, 0x20($s0)
@@ -99,7 +99,7 @@ glabel func_E00C639C
 /* 3CCEDC E00C64FC 8E050004 */  lw        $a1, 4($s0)
 /* 3CCEE0 E00C6500 8E060008 */  lw        $a2, 8($s0)
 /* 3CCEE4 E00C6504 8E07000C */  lw        $a3, 0xc($s0)
-/* 3CCEE8 E00C6508 0C031800 */  jal       func_E00C6000
+/* 3CCEE8 E00C6508 0C031800 */  jal       fx_99_main
 /* 3CCEEC E00C650C 24040001 */   addiu    $a0, $zero, 1
 /* 3CCEF0 E00C6510 080319D2 */  j         .LE00C6748
 /* 3CCEF4 E00C6514 00000000 */   nop

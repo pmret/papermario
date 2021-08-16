@@ -115,7 +115,7 @@ glabel LE009A28C_39683C
 /* 396894 E009A2E4 8E260008 */  lw        $a2, 8($s1)
 /* 396898 E009A2E8 8E27000C */  lw        $a3, 0xc($s1)
 /* 39689C E009A2EC 44050000 */  mfc1      $a1, $f0
-/* 3968A0 E009A2F0 0C00A800 */  jal       func_E002A000
+/* 3968A0 E009A2F0 0C00A800 */  jal       fx_21_main
 /* 3968A4 E009A2F4 24040002 */   addiu    $a0, $zero, 2
 /* 3968A8 E009A2F8 C6200004 */  lwc1      $f0, 4($s1)
 /* 3968AC E009A2FC AFB00010 */  sw        $s0, 0x10($sp)
@@ -123,7 +123,7 @@ glabel LE009A28C_39683C
 /* 3968B4 E009A304 8E260008 */  lw        $a2, 8($s1)
 /* 3968B8 E009A308 8E27000C */  lw        $a3, 0xc($s1)
 /* 3968BC E009A30C 44050000 */  mfc1      $a1, $f0
-/* 3968C0 E009A310 0C00A800 */  jal       func_E002A000
+/* 3968C0 E009A310 0C00A800 */  jal       fx_21_main
 /* 3968C4 E009A314 24040002 */   addiu    $a0, $zero, 2
 /* 3968C8 E009A318 24020004 */  addiu     $v0, $zero, 4
 /* 3968CC E009A31C AE22002C */  sw        $v0, 0x2c($s1)

@@ -1,6 +1,6 @@
 #include "common.h"
 
-INCLUDE_ASM(s32, "effects/effect_81", func_E00A2000);
+INCLUDE_ASM(s32, "effects/effect_81", fx_81_main);
 
 void func_E00A2118(void) {
 }

@@ -66,7 +66,7 @@ glabel func_E00B413C
 /* 3B5F0C E00B421C 8E250004 */  lw        $a1, 4($s1)
 /* 3B5F10 E00B4220 8E27000C */  lw        $a3, 0xc($s1)
 /* 3B5F14 E00B4224 44060000 */  mfc1      $a2, $f0
-/* 3B5F18 E00B4228 0C02F800 */  jal       func_E00BE000
+/* 3B5F18 E00B4228 0C02F800 */  jal       fx_95_main
 /* 3B5F1C E00B422C 0000202D */   daddu    $a0, $zero, $zero
 /* 3B5F20 E00B4230 C6200008 */  lwc1      $f0, 8($s1)
 /* 3B5F24 E00B4234 E7B40010 */  swc1      $f20, 0x10($sp)
@@ -75,7 +75,7 @@ glabel func_E00B413C
 /* 3B5F30 E00B4240 8E250004 */  lw        $a1, 4($s1)
 /* 3B5F34 E00B4244 8E27000C */  lw        $a3, 0xc($s1)
 /* 3B5F38 E00B4248 44060000 */  mfc1      $a2, $f0
-/* 3B5F3C E00B424C 0C02F800 */  jal       func_E00BE000
+/* 3B5F3C E00B424C 0C02F800 */  jal       fx_95_main
 /* 3B5F40 E00B4250 24040001 */   addiu    $a0, $zero, 1
 .LE00B4254:
 /* 3B5F44 E00B4254 0C080128 */  jal       func_E02004A0

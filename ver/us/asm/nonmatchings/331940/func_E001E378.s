@@ -140,7 +140,7 @@ glabel func_E001E378
 /* 331ED0 E001E590 8E050004 */  lw        $a1, 4($s0)
 /* 331ED4 E001E594 8E07000C */  lw        $a3, 0xc($s0)
 /* 331ED8 E001E598 44061000 */  mfc1      $a2, $f2
-/* 331EDC E001E59C 0C003058 */  jal       func_E000C160
+/* 331EDC E001E59C 0C003058 */  jal       fx_6_main
 /* 331EE0 E001E5A0 0000202D */   daddu    $a0, $zero, $zero
 /* 331EE4 E001E5A4 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* 331EE8 E001E5A8 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)

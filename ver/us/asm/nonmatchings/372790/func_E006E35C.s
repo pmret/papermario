@@ -130,7 +130,7 @@ glabel func_E006E35C
 /* 372CD4 E006E544 8E040000 */  lw        $a0, ($s0)
 /* 372CD8 E006E548 8E050018 */  lw        $a1, 0x18($s0)
 /* 372CDC E006E54C 8E06001C */  lw        $a2, 0x1c($s0)
-/* 372CE0 E006E550 0C01B800 */  jal       func_E006E000
+/* 372CE0 E006E550 0C01B800 */  jal       fx_55_main
 /* 372CE4 E006E554 8E070020 */   lw       $a3, 0x20($s0)
 /* 372CE8 E006E558 8C44000C */  lw        $a0, 0xc($v0)
 /* 372CEC E006E55C 8E030064 */  lw        $v1, 0x64($s0)

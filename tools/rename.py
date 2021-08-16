@@ -36,7 +36,7 @@ with open(os.path.join(script_dir, "to_rename.txt")) as f:
 # Create dict of old -> new names
 for line in renames_text:
     split = line.split()
-    renames[split[2]] = split[4]
+    renames[split[0]] = split[1]
 
 # Walk through asm files and rename stuff
 print("Walking through asm files")

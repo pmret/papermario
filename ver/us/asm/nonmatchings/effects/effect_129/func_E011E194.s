@@ -93,7 +93,7 @@ glabel func_E011E194
 /* 409C78 E011E2E8 AFA20014 */  sw        $v0, 0x14($sp)
 /* 409C7C E011E2EC 44071000 */  mfc1      $a3, $f2
 /* 409C80 E011E2F0 46202120 */  cvt.s.d   $f4, $f4
-/* 409C84 E011E2F4 0C044000 */  jal       func_E0110000
+/* 409C84 E011E2F4 0C044000 */  jal       fx_122_main
 /* 409C88 E011E2F8 E7A40010 */   swc1     $f4, 0x10($sp)
 /* 409C8C E011E2FC 2404000A */  addiu     $a0, $zero, 0xa
 /* 409C90 E011E300 0C080138 */  jal       func_E02004E0
@@ -213,7 +213,7 @@ glabel func_E011E194
 /* 409E48 E011E4B8 8E250004 */  lw        $a1, 4($s1)
 /* 409E4C E011E4BC 8E27000C */  lw        $a3, 0xc($s1)
 /* 409E50 E011E4C0 44062000 */  mfc1      $a2, $f4
-/* 409E54 E011E4C4 0C037800 */  jal       func_E00DE000
+/* 409E54 E011E4C4 0C037800 */  jal       fx_111_main
 /* 409E58 E011E4C8 24040002 */   addiu    $a0, $zero, 2
 .LE011E4CC:
 /* 409E5C E011E4CC 8E220028 */  lw        $v0, 0x28($s1)
