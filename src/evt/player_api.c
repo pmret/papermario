@@ -680,8 +680,6 @@ ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall) {
             get_variable(script, *args++);
             func_802DDFF8(a0, 13, a2, a3, 0, 0, 0);
             break;
-        default:
-            break;
     }
 
     D_802DB5B0 = 0;

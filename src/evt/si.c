@@ -1746,7 +1746,7 @@ Bytecode* si_skip_if(ScriptInstance* script) {
         nargs = *pos++;
         pos += nargs;
 
-        switch(opcode) {
+        switch (opcode) {
             case ScriptOpcode_END:
                 PANIC();
             case ScriptOpcode_END_IF:
@@ -1785,7 +1785,7 @@ Bytecode* si_skip_else(ScriptInstance* script) {
         nargs = *pos++;
         pos += nargs;
 
-        switch(opcode) {
+        switch (opcode) {
             case ScriptOpcode_END:
                 PANIC();
             case ScriptOpcode_END_IF:

@@ -159,7 +159,7 @@ void state_step_unpause(void) {
                         func_801497FC(D_800A0924);
                         bgm_reset_max_volume();
                         load_map_script_lib();
-                        assetData = load_asset_by_name(&gMapShapeName, &assetSize);
+                        assetData = load_asset_by_name(&wMapShapeName, &assetSize);
                         decode_yay0(assetData, &D_80210000);
                         general_heap_free(assetData);
                         initialize_collision();

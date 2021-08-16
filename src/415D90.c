@@ -761,7 +761,7 @@ INCLUDE_ASM(s32, "415D90", btl_state_update_player_menu);
 //requires above to be decomped
 #ifdef NON_MATCHING
 void btl_state_draw_player_menu(void) {
-    switch(gBattleState2) {
+    switch (gBattleState2) {
         case 1:
             btl_draw_menu_wheel();
             break;
@@ -823,7 +823,7 @@ INCLUDE_ASM(s32, "415D90", btl_state_draw_player_menu);
 INCLUDE_ASM(s32, "415D90", btl_state_update_partner_menu);
 
 void btl_state_draw_partner_menu(void) {
-    switch(gBattleState2) {
+    switch (gBattleState2) {
         case 2:
             btl_draw_menu_wheel();
             break;

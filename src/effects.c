@@ -202,8 +202,8 @@ void update_effects(void) {
             effectGraphics = &gEffectGraphicsData[i];
 
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (!(effectGraphics->flags & 2)) {
-                    effectGraphics->flags |= 2;
+                if (!(effectGraphics->flags & FX_GRAPHICS_2)) {
+                    effectGraphics->flags |= FX_GRAPHICS_2;
                     effectGraphics->freeDelay = 3;
                 }
             }
@@ -233,7 +233,7 @@ void update_effects(void) {
             effectGraphics = &gEffectGraphicsData[i];
 
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (effectGraphics->flags & 2) {
+                if (effectGraphics->flags & FX_GRAPHICS_2) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
                     } else {
