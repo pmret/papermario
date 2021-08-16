@@ -123,7 +123,7 @@ static s32 N(pad_868)[] = {
     0x00000000, 0x00000000,
 };
 
-s32** N(D_80240870_C4E760) = NULL;
+#include "world/common/StashVars.inc.c"
 
 Script N(80240874) = SCRIPT({
     group 0;
@@ -167,24 +167,6 @@ Script N(makeEntities) = SCRIPT({
     AssignFlag(SI_SAVE_FLAG(1057));
     AssignScript(N(802409BC));
 });
-
-ApiStatus N(func_80240000_C4DEF0)(ScriptInstance* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80240870_C4E760) == NULL) {
-        N(D_80240870_C4E760) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80240870_C4E760)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80240870_C4E760)[i];
-        }
-        heap_free(N(D_80240870_C4E760));
-        N(D_80240870_C4E760) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
 
 #include "world/common/GetItemName.inc.c"
 

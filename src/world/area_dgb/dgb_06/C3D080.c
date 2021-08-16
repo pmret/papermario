@@ -80,7 +80,7 @@ Script N(main) = SCRIPT({
     spawn N(enterSingleDoor_80240474);
 });
 
-s32** N(D_80240620_C3D6A0) = NULL;
+#include "world/common/StashVars.inc.c"
 
 Script N(80240624) = SCRIPT({
     group 0;
@@ -190,24 +190,6 @@ NpcGroupList N(npcGroupList_80240B44) = {
     NPC_GROUP(N(npcGroup_80240954), BATTLE_ID(0, 0, 0, 0)),
     {},
 };
-
-ApiStatus N(func_80240000_C3D080)(ScriptInstance* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80240620_C3D6A0) == NULL) {
-        N(D_80240620_C3D6A0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80240620_C3D6A0)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80240620_C3D6A0)[i];
-        }
-        heap_free(N(D_80240620_C3D6A0));
-        N(D_80240620_C3D6A0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
 
 #include "world/common/GetItemName.inc.c"
 
