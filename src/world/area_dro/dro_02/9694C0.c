@@ -60,9 +60,9 @@ static N(temp)* N(D_8024EF90)[4]; // possibly bigger?
 static s8 N(pad_D_8024EF94)[0x18];
 static s32 N(D_8024EFB8);
 static s8 N(pad_D_8024EFBC)[0x4];
-static Effect* N(D_8024EFC0);
-static Effect* N(D_8024EFC4);
-static Effect* N(D_8024EFC8);
+static EffectGraphics* N(D_8024EFC0);
+static EffectGraphics* N(D_8024EFC4);
+static EffectGraphics* N(D_8024EFC8);
 static ScriptInstance* N(D_8024EFCC);
 static s32 N(D_8024EFD0)[16];
 static D_8024F010_Struct N(D_8024F010)[3];
@@ -3197,7 +3197,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
         N(D_8024EFC8) = playFX_80(0, get_variable(script, SI_ARRAY(1)), get_variable(script, SI_ARRAY(2)),
                                       get_variable(script, SI_ARRAY(3)), 1.0f, 0);
 
-        effectPtr = N(D_8024EFC0)->instanceData;
+        effectPtr = N(D_8024EFC0)->freeDelay; // TODO this is wrong
         effectPtr->unk_18 = 0;
         effectPtr->unk_20 = 0;
         effectPtr->unk_24.s = 0;
@@ -3205,7 +3205,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
         effectPtr->unk_1C = 0;
     }
 
-    effectPtr = N(D_8024EFC0)->instanceData;
+    effectPtr = N(D_8024EFC0)->freeDelay; // TODO this is wrong
 
     effectPtr->unk_20 += 10;
     effectPtr->unk_28 += 10;
@@ -3228,7 +3228,7 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
         N(D_8024EFC8)->flags |= 0x10;
     }
 
-    effectPtr = N(D_8024EFC0)->instanceData;
+    effectPtr = N(D_8024EFC0)->freeDelay;
     effectPtr->unk_18 -= 10;
     effectPtr->unk_20 -= 10;
     effectPtr->unk_24.s -= 10;
@@ -3252,7 +3252,7 @@ ApiStatus N(func_80240D3C_969EFC)(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240D70_969F30)(ScriptInstance* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
-    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->instanceData;
+    EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->freeDelay;
 
     switch (var) {
         case 0:

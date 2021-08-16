@@ -1274,8 +1274,6 @@ void func_8003D3BC(Npc* npc) {
             npc->renderMode = 22;
             func_802DE894(npc->spriteInstanceID, 15, temp_s0, temp_s5, 0, temp_s5, temp_s3);
             break;
-        default:
-            break;
     }
 }
 #else

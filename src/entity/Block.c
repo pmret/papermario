@@ -263,8 +263,6 @@ s32 entity_block_handle_collision(Entity* entity) {
     }
 
     switch (get_entity_type(entity->listIndex)) {
-        default:
-            break;
         case 0x15:
         case 0x18:
             if (bVar2) {

@@ -37,7 +37,7 @@ void update_camera_mode_6(Camera* camera) {
 
     if (camera->unk_1C == 0) {
         temp_lo = 10000 / camera->unk_20;
-        camera->trueRotation[0] = camera->unk_24;
+        camera->trueRotation.x = camera->unk_24;
         camera->lookAt_obj.x = camera->unk_54 + camera->targetPos.x;
         camera->currentBoomYaw = camera->unk_22;
         camera->currentBoomLength = camera->unk_1E;
@@ -55,7 +55,7 @@ void update_camera_mode_6(Camera* camera) {
         temp_f30 = (cosBoom * 0.0f) + (camera->currentBoomLength * sinBoom);
         temp_f24_2 = (sinBoom * -0.0f) + (camera->currentBoomLength * cosBoom);
 
-        rotation = (camera->trueRotation[0] * TAU) / 360.0f;
+        rotation = (camera->trueRotation.x * TAU) / 360.0f;
         sinRotation = sin_rad(rotation);
         cosRotation = cos_rad(rotation);
 

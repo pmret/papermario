@@ -3,7 +3,6 @@
 extern s32 D_800F7FA8;
 extern s32 D_800F7F80[10];
 
-void set_hud_element_script(s32, s32);
 void clear_hud_element_flags(s32, s32);
 void draw_hud_element_2(s32);
 

@@ -99,7 +99,7 @@ void set_hud_element_script(s32 arg0, s32 *arg1) {
     hudElement->uniformScale = 1.0f;
     hudElement->flags &= ~0x930;
     load_hud_element(hudElement, arg1);
-    
+
     while (hud_element_update(hudElement) != 0) {}
 }
 
@@ -182,7 +182,7 @@ void set_hud_element_alpha(s32 iconIndex, s32 opacity) {
     }
 }
 
-void set_hud_element_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3) {
+void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3) {
     HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
 
     hudElement->tint[0] = tint1;
@@ -196,10 +196,10 @@ INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_B);
 
 INCLUDE_ASM(s32, "d5a50_len_5fd0", create_hud_element_transform_C);
 
-void free_hud_element_transform(s32 arg0) {  
+void free_hud_element_transform(s32 arg0) {
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
     s32* hudTransform = hudElement->hudTransform;
-    
+
     if (!(hudElement->flags & 0x20000)) {
         func_8013A854(*hudTransform);
     }

@@ -6,22 +6,16 @@
 extern s32 D_7012BC11[];
 
 void func_802AE000_316C00(void) {
-    s32(*readFunc)(OSPiHandle*, u32, u32*);
-    UNK_FUN_PTR(generalHeapCreate);
+    s32(*readFunc)(OSPiHandle*, u32, u32*) = osEPiReadIo;
+    s32 seed = 0x3C016C07 + 0xFEFEFEF;
+    HeapNode*(*generalHeapCreate)(void) = D_7012BC11; // general_heap_create - 0xFEFEFEF
+    u32 hash = 0;
     u32 thisInsn;
     u32* it;
     u32 prevInsn;
-    s32 seed;
-    u32 blah;
-    u32 hash;
-
-    readFunc = osEPiReadIo;
-    seed = 0x4BF15BF6; // 0x3C016C07 + 0xFEFEFEF;
-    generalHeapCreate = D_7012BC11; // 0x8002AC00 - 0xFEFEFEF (the former address being that of general_heap_create)
-    hash = 0;
 
     readFunc(nuPiCartHandle, 0xB0000574, &thisInsn);
-    seed -= thisInsn; // thisInsn = 0x3C016C07 here
+    seed -= thisInsn; // thisInsn = 0x3C016C07 here, so seed becomes 0xFEFEFEF
 
     prevInsn = 0;
 
@@ -43,11 +37,12 @@ void func_802AE000_316C00(void) {
         prevInsn = thisInsn;
     }
 
+    // 0x2499BF - hash == 0, so we add back 0xFEFEFEF (seed) and we end up with the address of general_heap_create!
     generalHeapCreate += seed + 0x2499BF - hash;
 
     // If the function's address is 0x8XXXXXXX
     if (((u32)generalHeapCreate >> 0x1C) == 8) {
-        // Call the function that ends up being generalHeapCreate
+        // Call the function that ends up being general_heap_create
         (generalHeapCreate)();
     }
 }

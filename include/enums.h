@@ -622,7 +622,6 @@ enum SoundIDs {
     SOUND_UNKNOWN_2106              = 8454,
 };
 
-typedef UNK_TYPE Cam;
 enum Cams {
     CAM_DEFAULT,
     CAM_BATTLE,
@@ -1707,6 +1706,12 @@ enum TimeFreezeMode {
     TIME_FREEZE_FULL,
     TIME_FREEZE_PARTNER_MENU,
     TIME_FREEZE_EXIT,
+};
+
+enum EffectGfxDataFlags {
+    FX_GRAPHICS_DISABLED = 0,
+    FX_GRAPHICS_ENABLED = 1,
+    FX_GRAPHICS_2 = 2,
 };
 
 #endif
