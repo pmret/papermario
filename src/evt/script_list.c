@@ -192,11 +192,11 @@ ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
 
     scriptListCount = 0;
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(newScript->varTable); i++) {
         newScript->varTable[i] = 0;
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(newScript->varFlags); i++) {
         newScript->varFlags[i] = 0;
     }
 
@@ -207,6 +207,7 @@ ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
         gScriptIndexList[scriptListCount] = curScriptIndex;
         gScriptIdList[scriptListCount] = newScript->id;
     }
+
     suspend_frozen_scripts(newScript);
 
     if (gStaticScriptCounter == 0) {
@@ -262,10 +263,10 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
         newScript->timeScale = gGlobalTimeSpace;
         scriptListCount = 0;
 
-        for (i = 0; i < ((s32)((sizeof(newScript->varTable)) / (sizeof(newScript->varTable[0])))); i++) {
+        for (i = 0; i < ARRAY_COUNT(newScript->varTable); i++) {
             newScript->varTable[i] = 0;
         }
-        for (i = 0; i < ((s32)((sizeof(newScript->varFlags)) / (sizeof(newScript->varFlags[0])))); i++) {
+        for (i = 0; i < ARRAY_COUNT(newScript->varFlags); i++) {
             newScript->varFlags[i] = 0;
         }
 
