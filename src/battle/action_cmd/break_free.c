@@ -9,10 +9,9 @@ extern s32 D_802928F8;
 extern s32 D_80109244;
 
 ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
-    HudElement* hudElement;
-
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
 
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294220;
@@ -24,7 +23,7 @@ ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
     }
 
     func_80268858();
-    actionCommandStatus->actionCommandID = 4;
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_BREAK_FREE;
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
@@ -32,8 +31,8 @@ ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
     actionCommandStatus->unk_46 = 0;
     actionCommandStatus->unk_48 = 0;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudElementX = -0x30;
-    actionCommandStatus->hudElementY = 0x50;
+    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
@@ -43,19 +42,19 @@ ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
 
     hudElement = create_hud_element(&D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_802928F8);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_80109244);
     actionCommandStatus->hudElements[3] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 

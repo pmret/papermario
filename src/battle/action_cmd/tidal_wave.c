@@ -7,10 +7,10 @@ extern s32 D_80108B28;
 extern s32 D_802944A0;
 
 ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
-    HudElement* hudElement;
-    s32 i;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
+    s32 i;
 
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_802944A0;
@@ -20,17 +20,17 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     } else {
         func_80268858();
-        actionCommandStatus->actionCommandID = 0x17;
+        actionCommandStatus->actionCommandID = ACTION_COMMAND_TIDAL_WAVE;
         actionCommandStatus->state = 0;
         actionCommandStatus->unk_60 = 0;
         actionCommandStatus->unk_44 = 0;
         actionCommandStatus->unk_48 = 0;
         battleStatus->unk_84 = 0;
-        actionCommandStatus->hudElementX = -0x30;
-        actionCommandStatus->hudElementY = 0x50;
+        actionCommandStatus->hudElementX = -48;
+        actionCommandStatus->hudElementY = 80;
         hudElement = create_hud_element(&D_80108AFC);
         actionCommandStatus->hudElements[0] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         set_hud_element_render_depth(hudElement, 0);
         set_hud_element_flags(hudElement, 0x82);
 

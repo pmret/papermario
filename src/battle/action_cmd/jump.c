@@ -23,11 +23,11 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     }
     
     func_80268858();
-    actionCommandStatus->actionCommandID = 1;
-    actionCommandStatus->hudElementX = -0x30;
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_JUMP;
+    actionCommandStatus->hudElementX = -48;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->hudElementY = 0x50;
+    actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
@@ -65,7 +65,7 @@ ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall) {
         battleStatus->actionSuccess = 0;
 
         hudElement = actionCommandStatus->hudElements[0];
-        actionCommandStatus->hudElementX = 0x32;
+        actionCommandStatus->hudElementX = 50;
         battleStatus->flags1 &= ~0x8000;
         battleStatus->flags1 &= ~0x2000;
         set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
@@ -81,113 +81,111 @@ ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall) {
 }
 
 void N(update)(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
     HudElement* hudElement;
     s32 temp_s0_3;
 
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    BattleStatus* battleStatus = &gBattleStatus;
-
     switch (actionCommandStatus->state) {
-    case 0:
-        if (battleStatus->unk_83 == 2) {
-            btl_set_popup_duration(0x63);
-        }
-        actionCommandStatus->state = 1;
-        return;
-    case 1:
-        if (battleStatus->unk_83 == 2) {
-            btl_set_popup_duration(0x63);
-        }
+        case 0:
+            if (battleStatus->unk_83 == 2) {
+                btl_set_popup_duration(0x63);
+            }
+            actionCommandStatus->state = 1;
+            break;
+        case 1:
+            if (battleStatus->unk_83 == 2) {
+                btl_set_popup_duration(0x63);
+            }
+    
+            actionCommandStatus->hudElementX += 20;
+            if (actionCommandStatus->hudElementX > 50) {
+                actionCommandStatus->hudElementX = 50;
+            }
 
-        actionCommandStatus->hudElementX += 0x14;
-        if (actionCommandStatus->hudElementX > 0x32) {
-            actionCommandStatus->hudElementX = 0x32;
-        }
-
-        hudElement = actionCommandStatus->hudElements[0];
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-        if (actionCommandStatus->unk_61) {
-            clear_hud_element_flags(hudElement, 2);
-        }
-
-        if (actionCommandStatus->autoSucceed) {
-            hudElement = actionCommandStatus->hudElements[1];
-            set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 0x32, actionCommandStatus->hudElementY);
+            hudElement = actionCommandStatus->hudElements[0];
+            set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
             if (actionCommandStatus->unk_61) {
                 clear_hud_element_flags(hudElement, 2);
-                return;
             }
-        }
-    default:
-        return;
-    case 10:
-        if (battleStatus->unk_83 == 2) {
-            btl_set_popup_duration(0x63);
-        }
 
-        temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
-        if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
-            set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B54);
-        }
-        if (((battleStatus->currentButtonsPressed & 0x8000) != 0) && (actionCommandStatus->autoSucceed == 0)) {
-            actionCommandStatus->unk_60 = 1;
-            battleStatus->unk_86 = -1;
-        }
-        if ((actionCommandStatus->unk_4E - temp_s0_3) > 0) {
-            actionCommandStatus->unk_4E -= 1;
-            return;
-        }
-        
-        actionCommandStatus->unk_54 = battleStatus->unk_434[actionCommandStatus->unk_50];
-        battleStatus->actionSuccess = -1;
-        actionCommandStatus->state = 11;
-    case 11:
-        if (battleStatus->unk_83 == 2) {
-            btl_set_popup_duration(0x63);
-        }
-        if (battleStatus->unk_83 >= 2) {
-            if (actionCommandStatus->unk_54 == 0) {
-                return;
-            }
-        } else {
-            if (battleStatus->actionSuccess >= 0) {
-                hudElement = actionCommandStatus->hudElements[0];
-                if (actionCommandStatus->unk_61 != 0) {
-                    set_hud_element_flags(hudElement, 2);
+            if (actionCommandStatus->autoSucceed) {
+                hudElement = actionCommandStatus->hudElements[1];
+                set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY);
+                if (actionCommandStatus->unk_61) {
+                    clear_hud_element_flags(hudElement, 2);
+                    break;
                 }
-            } 
-        }
-
-        if (battleStatus->actionSuccess < 0) {
-            if ((((battleStatus->currentButtonsPressed & 0x8000) != 0) &&
-                (actionCommandStatus->unk_60 == 0)) || 
-                (actionCommandStatus->autoSucceed != 0)) {
-                battleStatus->actionSuccess = 1;
-                battleStatus->unk_86 = 1;
-                gBattleStatus.flags1 |= 0x2000;
             }
-        }
-
-        if (actionCommandStatus->unk_54 == 0) {
-            if (battleStatus->actionSuccess == 1) {
-                func_80269160();
-            }
+            break;
+        case 10:
             if (battleStatus->unk_83 == 2) {
-                btl_set_popup_duration(0);
+                btl_set_popup_duration(0x63);
             }
-            actionCommandStatus->unk_54 = 5;
-            actionCommandStatus->state = 12;
-            return;
-        }
-        actionCommandStatus->unk_54 -= 1;
-        return;
-    case 12:
-        if (actionCommandStatus->unk_54 != 0) {
+
+            temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
+            if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
+                set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B54);
+            }
+            if (((battleStatus->currentButtonsPressed & 0x8000) != 0) && (actionCommandStatus->autoSucceed == 0)) {
+                actionCommandStatus->unk_60 = 1;
+                battleStatus->unk_86 = -1;
+            }
+            if ((actionCommandStatus->unk_4E - temp_s0_3) > 0) {
+                actionCommandStatus->unk_4E -= 1;
+                break;
+            }
+        
+            actionCommandStatus->unk_54 = battleStatus->unk_434[actionCommandStatus->unk_50];
+            battleStatus->actionSuccess = -1;
+            actionCommandStatus->state = 11;
+        case 11:
+            if (battleStatus->unk_83 == 2) {
+                btl_set_popup_duration(0x63);
+            }
+            if (battleStatus->unk_83 >= 2) {
+                if (actionCommandStatus->unk_54 == 0) {
+                    break;
+                }
+            } else {
+                if (battleStatus->actionSuccess >= 0) {
+                    hudElement = actionCommandStatus->hudElements[0];
+                    if (actionCommandStatus->unk_61 != 0) {
+                        set_hud_element_flags(hudElement, 2);
+                    }
+                } 
+            }
+
+            if (battleStatus->actionSuccess < 0) {
+                if ((((battleStatus->currentButtonsPressed & 0x8000) != 0) &&
+                    (actionCommandStatus->unk_60 == 0)) || 
+                    (actionCommandStatus->autoSucceed != 0)) {
+                    battleStatus->actionSuccess = 1;
+                    battleStatus->unk_86 = 1;
+                    gBattleStatus.flags1 |= 0x2000;
+                }
+            }
+
+            if (actionCommandStatus->unk_54 == 0) {
+                if (battleStatus->actionSuccess == 1) {
+                    func_80269160();
+                }
+                if (battleStatus->unk_83 == 2) {
+                    btl_set_popup_duration(0);
+                }
+                actionCommandStatus->unk_54 = 5;
+                actionCommandStatus->state = 12;
+                break;
+            }
             actionCommandStatus->unk_54 -= 1;
-            return;
-        }
-        func_80268C9C();
-        return;
+            break;
+        case 12:
+            if (actionCommandStatus->unk_54 != 0) {
+                actionCommandStatus->unk_54 -= 1;
+                break;
+            }
+            func_80268C9C();
+            break;
     }
 }
 

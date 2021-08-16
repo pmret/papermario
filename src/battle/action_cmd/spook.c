@@ -8,10 +8,9 @@ extern s32 D_80292974;
 extern s32 D_80294440;
 
 ApiStatus func_802A9000_430020(void) {
-    HudElement* hudElement;
-
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
 
     battleStatus->unk_82 = 0x64;
     battleStatus->unk_434 = &D_80294440;
@@ -21,7 +20,7 @@ ApiStatus func_802A9000_430020(void) {
         return ApiStatus_DONE2;
     }
     func_80268858();
-    actionCommandStatus->actionCommandID = 0x15;
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_SPOOK;
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->unk_6C = 0x1E;
     actionCommandStatus->state = 0;
@@ -31,8 +30,8 @@ ApiStatus func_802A9000_430020(void) {
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
-    actionCommandStatus->hudElementX = -0x30;
-    actionCommandStatus->hudElementY = 0x50;
+    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108E1C);
     actionCommandStatus->hudElements[0] = hudElement;
@@ -42,13 +41,13 @@ ApiStatus func_802A9000_430020(void) {
 
     hudElement = create_hud_element(&D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_80292974);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
@@ -61,11 +60,10 @@ ApiStatus func_802A9000_430020(void) {
 INCLUDE_ASM(s32, "battle/action_cmd/spook", func_802A9298_4302B8);
 
 void func_802A97FC_43081C(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 renderPosY;
     s32 renderPosX;
     HudElement* hudElement;
-
-    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
     draw_hud_element_clipped(actionCommandStatus->hudElements[0]);
     hudElement = actionCommandStatus->hudElements[1];

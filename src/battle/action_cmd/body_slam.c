@@ -9,9 +9,9 @@ extern s32 D_80292BAC;
 extern s32 D_80294320;
 
 ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
-    HudElement* hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
 
     battleStatus->unk_82 = 0x64;
     battleStatus->unk_434 = &D_80294320;
@@ -22,7 +22,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     }
         
     func_80268858();
-    actionCommandStatus->actionCommandID = 0xC;
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_BODY_SLAM;
     actionCommandStatus->unk_61 = 1;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
@@ -30,8 +30,8 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     actionCommandStatus->unk_48 = 0;
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
-    actionCommandStatus->hudElementX = -0x30;
-    actionCommandStatus->hudElementY = 0x50;
+    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->hudElementY = 80;
 
     hudElement = create_hud_element(&D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
@@ -41,19 +41,19 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
 
     hudElement = create_hud_element(&D_80108AFC);
     actionCommandStatus->hudElements[1] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_80292BAC);
     actionCommandStatus->hudElements[3] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x82);
 
     hudElement = create_hud_element(&D_8029275C);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 0x29, actionCommandStatus->hudElementY + 0x16);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 0x29, actionCommandStatus->hudElementY + 22);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x80);
     return ApiStatus_DONE2;
@@ -64,16 +64,15 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "battle/action_cmd/body_slam", func_802A92D4_4285B4);
 
 void N(draw_hud_elements)(void) {
-    s32 sp14;
-    s32 sp10;
+    s32 x, y;
     HudElement* hudElement;
 
     draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
     hudElement = gActionCommandStatus.hudElements[1];
     draw_hud_element_clipped(hudElement);
-    get_hud_element_render_pos(hudElement, &sp10, &sp14);
+    get_hud_element_render_pos(hudElement, &x, &y);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[3]);
-    func_80268770(sp10, sp14, gActionCommandStatus.unk_44 / 100);
+    func_80268770(x, y, gActionCommandStatus.unk_44 / 100);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
 }
 
