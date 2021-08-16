@@ -2,32 +2,6 @@
 
 // TODO: move to src/battle/action_cmd.c
 
-enum ActionCommand {
-    ACTION_COMMAND_JUMP = 1,
-    ACTION_COMMAND_SMASH,
-    ACTION_COMMAND_FLEE,
-    ACTION_COMMAND_BREAK_FREE,
-    ACTION_COMMAND_WHIRLWIND,
-    ACTION_COMMAND_STOP_LEECH,
-    ACTION_COMMAND_07,
-    ACTION_COMMAND_DIZZY_SHELL,
-    ACTION_COMMAND_FIRE_SHELL,
-    ACTION_COMMAND_0A,
-    ACTION_COMMAND_BOMB,
-    ACTION_COMMAND_BODY_SLAM,
-    ACTION_COMMAND_AIR_LIFT,
-    ACTION_COMMAND_AIR_RAID,
-    ACTION_COMMAND_SQUIRT,
-    ACTION_COMMAND_POWER_SHOCK,
-    ACTION_COMMAND_MEGA_SHOCK,
-    ACTION_COMMAND_SMACK,
-    ACTION_COMMAND_SPINY_SURGE,
-    ACTION_COMMAND_HURRICANE,
-    ACTION_COMMAND_SPOOK,
-    ACTION_COMMAND_WATER_BLOCK,
-    ACTION_COMMAND_TIDAL_WAVE,
-};
-
 extern void* actionCommandDmaTable[23];
 extern s32 D_8029FBC0;
 
@@ -125,11 +99,11 @@ void func_80268938(void) {
         func_80268C9C();
     }
 
-    ac = gActionCommandStatus.unk_4A;
+    ac = gActionCommandStatus.actionCommandID;
 
     switch (ac) {
         case ACTION_COMMAND_JUMP:
-            func_802A9234_421C24();
+            action_command_jump_update();
             return;
         case ACTION_COMMAND_SMASH:
             func_802A936C_42236C();
@@ -325,12 +299,12 @@ ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
 ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     gActionCommandStatus.mashMeterIntervals = get_variable(script, *args++);
-    gActionCommandStatus.mashMeterCutoffs[0] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[1] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[2] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[3] = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[4] = get_variable(script, *args++);
-    gActionCommandStatus.unk_74 = gActionCommandStatus.mashMeterCutoffs[0] / 2;
+    gActionCommandStatus.mashMeterCutoffs[5] = get_variable(script, *args++);
+    gActionCommandStatus.mashMeterCutoffs[0] = gActionCommandStatus.mashMeterCutoffs[1] / 2;
     return ApiStatus_DONE2;
 }
 
