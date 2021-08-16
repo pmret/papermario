@@ -180,7 +180,7 @@ void set_hud_element_alpha(s32 iconIndex, s32 opacity) {
     }
 }
 
-void set_hud_element_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3) {
+void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3) {
     HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
 
     hudElement->tint[0] = tint1;

@@ -37,7 +37,7 @@ void set_hud_element_size(s32 arg0, s8 arg1);
 s32 func_80144E4C();
 void func_80144E74(s32 iconIndex, s32 arg1);
 void set_hud_element_alpha(s32 iconIndex, s32 opacity);
-void set_hud_element_tint(s32 iconIndex, s8 tint1, s8 tint2, s8 tint3);
+void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3);
 s32 create_hud_element_transform_A();
 s32 create_hud_element_transform_B();
 s32 create_hud_element_transform_C();
