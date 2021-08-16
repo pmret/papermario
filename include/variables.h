@@ -243,7 +243,7 @@ extern s8 D_800A0921;
 extern s16 D_800A0922;
 extern s32 mapTexName;
 extern char* mapHitName;
-extern s32 mapShapeName;
+extern s32 gMapShapeName;
 extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?

@@ -13,8 +13,8 @@ glabel D_80243300_A86790
 
 glabel func_80240000_A83490
 /* A83490 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A83494 80240004 3C04800E */  lui       $a0, %hi(mapShapeName)
-/* A83498 80240008 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
+/* A83494 80240004 3C04800E */  lui       $a0, %hi(gMapShapeName)
+/* A83498 80240008 24849230 */  addiu     $a0, $a0, %lo(gMapShapeName)
 /* A8349C 8024000C 3C058024 */  lui       $a1, %hi(D_802432F0_A86780)
 /* A834A0 80240010 24A532F0 */  addiu     $a1, $a1, %lo(D_802432F0_A86780)
 /* A834A4 80240014 AFBF0010 */  sw        $ra, 0x10($sp)

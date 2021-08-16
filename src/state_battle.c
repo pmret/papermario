@@ -1,8 +1,12 @@
 #include "common.h"
+#include "nu/nusys.h"
 
 s32 D_800778A0[] = {
-    &D_8038F800, &D_803B5000, &D_803DA800, 0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000,
+    &D_8038F800, &D_803B5000, &D_803DA800,
+};
+
+s32 D_800778AC[] = {
+    0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 
 Gfx D_800778C8[] = {
@@ -134,7 +138,84 @@ void state_init_end_battle(void) {
     D_800A0900 = 5;
 }
 
-INCLUDE_ASM(void, "state_battle", state_step_end_battle, void);
+void state_step_end_battle(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    PlayerData* playerData = &gPlayerData;
+
+    if (D_800A0900 >= 0) {
+        D_800A0900--;
+        if (D_800A0900 == 0) {
+            MapConfig* mapConfig;
+            Map* map;
+
+            D_800A0900 = -1;
+            nuGfxSetCfb(D_800778A0, 3);
+            gOverrideFlags &= ~0x8;
+            nuContRmbForceStopEnd();
+            sfx_stop_env_sounds();
+            mapConfig = get_current_map_header();
+            map = &gAreas[gGameStatusPtr->areaID].maps[gGameStatusPtr->mapID];
+            btl_restore_world_cameras(gGameStatusPtr);
+            gGameStatusPtr->isBattle = FALSE;
+            func_8005AF84();
+            func_8002ACDC();
+            sfx_clear_env_sounds(1);
+            gGameStatusPtr->peachFlags &= ~0x1;
+            battle_heap_create();
+            spr_init_sprites(gGameStatusPtr->playerSpriteSet);
+            init_model_data();
+            init_sprite_shading_data();
+            init_entity_models();
+            reset_animator_list();
+            init_generic_entity_list();
+            set_hud_element_nonworld_cache(0, 0);
+            init_hud_element_list();
+            init_item_entity_list();
+            init_script_list();
+            init_npc_list();
+            func_80110E58();
+            init_trigger_list();
+
+            if (gGameStatusPtr->demoFlags & 1) {
+                npc_reload_all();
+                playerStatus->animFlags = D_800A0904;
+                set_game_mode(17);
+            } else {
+                void* mapShape;
+                u32 sizeTemp;
+
+                partner_init_after_battle(playerData->currentPartner);
+                load_map_script_lib();
+                mapShape = load_asset_by_name(&gMapShapeName, &sizeTemp);
+                decode_yay0(mapShape, &D_80210000);
+                general_heap_free(mapShape);
+                initialize_collision();
+                load_collision();
+
+                if (map->dmaStart != NULL) {
+                    dma_copy(map->dmaStart, map->dmaEnd, map->dmaDest);
+                }
+
+                load_map_bg(map->bgName);
+                if (mapConfig->background != NULL) {
+                    read_background_size(mapConfig->background);
+                } else {
+                    set_background_size(296, 200, 12, 20);
+                }
+
+                load_model_textures(mapConfig->modelTreeRoot, get_asset_offset(&mapTexName, &sizeTemp), sizeTemp);
+                calculate_model_sizes();
+                npc_reload_all();
+
+                playerStatus->animFlags = D_800A0904;
+                if (D_800A0908 != 0) {
+                    set_time_freeze_mode(D_800A0908);
+                }
+                set_game_mode(4);
+            }
+        }
+    }
+}
 
 void state_drawUI_end_battle(void) {
 }

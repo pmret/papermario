@@ -13,8 +13,8 @@ glabel D_802420B0_D99940
 
 glabel func_80240000_D97890
 /* D97890 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* D97894 80240004 3C04800E */  lui       $a0, %hi(mapShapeName)
-/* D97898 80240008 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
+/* D97894 80240004 3C04800E */  lui       $a0, %hi(gMapShapeName)
+/* D97898 80240008 24849230 */  addiu     $a0, $a0, %lo(gMapShapeName)
 /* D9789C 8024000C 3C058024 */  lui       $a1, %hi(D_802420A0_D99930)
 /* D978A0 80240010 24A520A0 */  addiu     $a1, $a1, %lo(D_802420A0_D99930)
 /* D978A4 80240014 3C038007 */  lui       $v1, %hi(gGameStatusPtr)

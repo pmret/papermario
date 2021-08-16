@@ -13,8 +13,8 @@ glabel D_80242010_A7A4D0
 
 glabel func_80240000_A784C0
 /* A784C0 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* A784C4 80240004 3C04800E */  lui       $a0, %hi(mapShapeName)
-/* A784C8 80240008 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
+/* A784C4 80240004 3C04800E */  lui       $a0, %hi(gMapShapeName)
+/* A784C8 80240008 24849230 */  addiu     $a0, $a0, %lo(gMapShapeName)
 /* A784CC 8024000C 3C058024 */  lui       $a1, %hi(D_80242000_A7A4C0)
 /* A784D0 80240010 24A52000 */  addiu     $a1, $a1, %lo(D_80242000_A7A4C0)
 /* A784D4 80240014 AFBF0010 */  sw        $ra, 0x10($sp)

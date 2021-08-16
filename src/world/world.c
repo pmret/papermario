@@ -74,7 +74,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     map = &gAreas[areaID].maps[mapID];
 
-    sprintf(&mapShapeName, "%s_shape", map->id);
+    sprintf(&gMapShapeName, "%s_shape", map->id);
     sprintf(&mapHitName, "%s_hit", map->id);
     strcpy(texStr, map->id);
     texStr[3] = '\0';
@@ -99,7 +99,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
-        s32 yay0Asset = load_asset_by_name(&mapShapeName, &decompressedSize);
+        s32 yay0Asset = load_asset_by_name(&gMapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);

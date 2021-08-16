@@ -2,7 +2,7 @@
 #include "message_ids.h"
 
 ApiStatus N(func_80240000_BFA0A0)(ScriptInstance* script, s32 isInitialCall) {
-    sprintf(&mapShapeName, "arn_20_shape");
+    sprintf(&gMapShapeName, "arn_20_shape");
     sprintf(&mapHitName, "arn_20_hit");
     sprintf(&mapTexName, "arn_tex");
     return ApiStatus_BLOCK;

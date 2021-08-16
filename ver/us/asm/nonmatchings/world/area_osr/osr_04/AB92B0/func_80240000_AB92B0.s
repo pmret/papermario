@@ -13,8 +13,8 @@ glabel D_80241FC0_ABB270
 
 glabel func_80240000_AB92B0
 /* AB92B0 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* AB92B4 80240004 3C04800E */  lui       $a0, %hi(mapShapeName)
-/* AB92B8 80240008 24849230 */  addiu     $a0, $a0, %lo(mapShapeName)
+/* AB92B4 80240004 3C04800E */  lui       $a0, %hi(gMapShapeName)
+/* AB92B8 80240008 24849230 */  addiu     $a0, $a0, %lo(gMapShapeName)
 /* AB92BC 8024000C 3C058024 */  lui       $a1, %hi(D_80241FB0_ABB260)
 /* AB92C0 80240010 24A51FB0 */  addiu     $a1, $a1, %lo(D_80241FB0_ABB260)
 /* AB92C4 80240014 3C038007 */  lui       $v1, %hi(gGameStatusPtr)
