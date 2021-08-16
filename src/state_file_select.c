@@ -284,7 +284,7 @@ void state_step_exit_language_select(void) {
                     init_npc_list();
                     func_80110E58();
                     init_trigger_list();
-                    mapShape = load_asset_by_name(&gMapShapeName, &mapShapeSize);
+                    mapShape = load_asset_by_name(&wMapShapeName, &mapShapeSize);
                     decode_yay0(mapShape, &D_80210000);
                     general_heap_free(mapShape);
                     initialize_collision();
@@ -357,8 +357,6 @@ void state_step_exit_file_select(void) {
     s32 i;
 
     switch (D_800A0931) {
-        default:
-            break;
         case 0:
             flagSum = 0;
 

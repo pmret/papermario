@@ -1711,6 +1711,7 @@ enum TimeFreezeMode {
 enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED = 0,
     FX_GRAPHICS_ENABLED = 1,
+    FX_GRAPHICS_2 = 2,
 };
 
 #endif

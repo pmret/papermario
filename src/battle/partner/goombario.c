@@ -159,7 +159,7 @@ ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
 
     script->varTable[0] = FALSE;
 
-    switch(battleStatus->selectedMoveID) {
+    switch (battleStatus->selectedMoveID) {
         case 134:
             if (partnerActor->isGlowing >= 99) {
                 script->varTable[0] = TRUE;
@@ -174,8 +174,6 @@ ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
             if (partnerActor->isGlowing >= 99) {
                 script->varTable[0] = TRUE;
             }
-            break;
-        default:
             break;
     }
 

@@ -18,7 +18,7 @@ void update_camera_mode_unused(Camera* camera) {
     f32 lookYDelta;
     f32 lookZDelta;
 
-    if ((camera->unk_06 != 0) || (camera->unk_08 != 0)) {
+    if (camera->unk_06 != 0 || camera->unk_08 != 0) {
         camera->unk_06 = 0;
         camera->unk_08 = 0;
         camera->unk_1C = 0;

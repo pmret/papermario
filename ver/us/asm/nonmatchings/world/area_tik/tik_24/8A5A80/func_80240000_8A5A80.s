@@ -13,15 +13,15 @@ glabel D_80242480_8A7F00
 
 glabel func_80240000_8A5A80
 /* 8A5A80 80240000 27BDFFE8 */  addiu     $sp, $sp, -0x18
-/* 8A5A84 80240004 3C04800E */  lui       $a0, %hi(gMapShapeName)
-/* 8A5A88 80240008 24849230 */  addiu     $a0, $a0, %lo(gMapShapeName)
+/* 8A5A84 80240004 3C04800E */  lui       $a0, %hi(wMapShapeName)
+/* 8A5A88 80240008 24849230 */  addiu     $a0, $a0, %lo(wMapShapeName)
 /* 8A5A8C 8024000C 3C058024 */  lui       $a1, %hi(D_80242470_8A7EF0)
 /* 8A5A90 80240010 24A52470 */  addiu     $a1, $a1, %lo(D_80242470_8A7EF0)
 /* 8A5A94 80240014 AFBF0010 */  sw        $ra, 0x10($sp)
 /* 8A5A98 80240018 0C01953C */  jal       sprintf
 /* 8A5A9C 8024001C 00000000 */   nop
-/* 8A5AA0 80240020 3C04800E */  lui       $a0, %hi(mapHitName)
-/* 8A5AA4 80240024 248491E0 */  addiu     $a0, $a0, %lo(mapHitName)
+/* 8A5AA0 80240020 3C04800E */  lui       $a0, %hi(wMapHitName)
+/* 8A5AA4 80240024 248491E0 */  addiu     $a0, $a0, %lo(wMapHitName)
 /* 8A5AA8 80240028 3C058024 */  lui       $a1, %hi(D_80242480_8A7F00)
 /* 8A5AAC 8024002C 0C01953C */  jal       sprintf
 /* 8A5AB0 80240030 24A52480 */   addiu    $a1, $a1, %lo(D_80242480_8A7F00)

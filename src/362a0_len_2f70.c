@@ -26,7 +26,7 @@ void initialize_collision(void) {
 void load_hit_asset(void) {
     u32 assetSize;
     MapConfig* map = get_current_map_header();
-    void* compressedData = load_asset_by_name(&mapHitName, &assetSize);
+    void* compressedData = load_asset_by_name(&wMapHitName, &assetSize);
     HitAsset* uncompressedData = heap_malloc(assetSize);
 
     decode_yay0(compressedData, uncompressedData);

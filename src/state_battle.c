@@ -186,7 +186,7 @@ void state_step_end_battle(void) {
 
                 partner_init_after_battle(playerData->currentPartner);
                 load_map_script_lib();
-                mapShape = load_asset_by_name(&gMapShapeName, &sizeTemp);
+                mapShape = load_asset_by_name(&wMapShapeName, &sizeTemp);
                 decode_yay0(mapShape, &D_80210000);
                 general_heap_free(mapShape);
                 initialize_collision();
@@ -203,7 +203,7 @@ void state_step_end_battle(void) {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapConfig->modelTreeRoot, get_asset_offset(&mapTexName, &sizeTemp), sizeTemp);
+                load_model_textures(mapConfig->modelTreeRoot, get_asset_offset(&wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 

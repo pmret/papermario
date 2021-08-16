@@ -74,13 +74,13 @@ StateFunc gameModeMap[] = {
 };
 
 // BSS
-extern s16 gGameMode;
+extern s16 gameMode;
 
-void set_game_mode(s16 gameMode) {
-    gGameMode = gameMode;
-    set_game_mode_slot(0, gameModeMap[gameMode]);
+void set_game_mode(s16 mode) {
+    gameMode = mode;
+    set_game_mode_slot(0, gameModeMap[mode]);
 }
 
 s16 get_game_mode(void) {
-    return gGameMode;
+    return gameMode;
 }
