@@ -12,9 +12,9 @@ ApiStatus func_802A9000_430020(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     HudElement* hudElement;
 
-    battleStatus->unk_82 = 0x64;
+    battleStatus->unk_82 = 100;
     battleStatus->unk_434 = &D_80294440;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
@@ -22,7 +22,7 @@ ApiStatus func_802A9000_430020(void) {
     func_80268858();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_SPOOK;
     actionCommandStatus->unk_61 = 1;
-    actionCommandStatus->unk_6C = 0x1E;
+    actionCommandStatus->unk_6C = 30;
     actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
     actionCommandStatus->unk_44 = 0;

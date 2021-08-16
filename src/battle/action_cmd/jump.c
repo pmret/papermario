@@ -75,7 +75,7 @@ ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall) {
 
         actionCommandStatus->state = 10;
         func_80269118();
-        btl_set_popup_duration(0xA);
+        btl_set_popup_duration(10);
         return ApiStatus_DONE2;
     }
 }
@@ -89,13 +89,13 @@ void N(update)(void) {
     switch (actionCommandStatus->state) {
         case 0:
             if (battleStatus->unk_83 == 2) {
-                btl_set_popup_duration(0x63);
+                btl_set_popup_duration(99);
             }
             actionCommandStatus->state = 1;
             break;
         case 1:
             if (battleStatus->unk_83 == 2) {
-                btl_set_popup_duration(0x63);
+                btl_set_popup_duration(99);
             }
     
             actionCommandStatus->hudElementX += 20;
@@ -120,7 +120,7 @@ void N(update)(void) {
             break;
         case 10:
             if (battleStatus->unk_83 == 2) {
-                btl_set_popup_duration(0x63);
+                btl_set_popup_duration(99);
             }
 
             temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
@@ -141,7 +141,7 @@ void N(update)(void) {
             actionCommandStatus->state = 11;
         case 11:
             if (battleStatus->unk_83 == 2) {
-                btl_set_popup_duration(0x63);
+                btl_set_popup_duration(99);
             }
             if (battleStatus->unk_83 >= 2) {
                 if (actionCommandStatus->unk_54 == 0) {

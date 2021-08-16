@@ -22,7 +22,7 @@ ApiStatus func_802A9000_422AD0(ScriptInstance* script, s32 isInitialCall) {
 
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294200;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     func_80268858();
     actionCommandStatus->unk_5A = get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_FLEE;
@@ -88,7 +88,7 @@ ApiStatus func_802A92A0_422D70(ScriptInstance* script) {
     actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
     actionCommandStatus->unk_60 = 0;
     battleStatus->actionSuccess = 0;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     battleStatus->unk_82 = actionCommandStatus->mashMeterCutoffs[actionCommandStatus->mashMeterIntervals - 1];
     battleStatus->flags1 &= ~0x8000;
     actionCommandStatus->state = 10;
@@ -135,7 +135,7 @@ void func_802A9378_422E48(void) {
                 actionCommandStatus->hudElementX = 50;
             }
             set_hud_element_render_pos(actionCommandStatus->hudElements[0], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-            set_hud_element_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 0x1C);
+            set_hud_element_render_pos(actionCommandStatus->hudElements[1], actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
             break;
         case 10:
             if (actionCommandStatus->unk_4E != 0) {
@@ -218,7 +218,7 @@ void func_802A96F4_4231C4(void) {
     x = 60 - temp_v1 / 100;
     temp_a1 = x - 31;
 
-    set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - temp_a1, actionCommandStatus->hudElementY + 0x11);
+    set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - temp_a1, actionCommandStatus->hudElementY + 17);
     set_hud_element_render_pos(actionCommandStatus->hudElements[2], actionCommandStatus->hudElementX + 31 - x, actionCommandStatus->hudElementY - 1);
 
     if (battleStatus->unk_83 != 0) {

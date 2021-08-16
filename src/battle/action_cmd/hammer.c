@@ -39,7 +39,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0xA);
+    set_hud_element_render_depth(hudElement, 10);
 
     hudElement = create_hud_element(&D_8029275C);
     actionCommandStatus->hudElements[1] = hudElement;
@@ -108,7 +108,7 @@ ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
     battleStatus->unk_86 = 0;
-    actionCommandStatus->state = 0xA;
+    actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~0x8000;
     func_80269118();
     return ApiStatus_DONE2;

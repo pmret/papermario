@@ -67,7 +67,7 @@ ApiStatus func_802A9138_42C828(ScriptInstance* script, s32 isInitialCall) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
     battleStatus->unk_86 = 0;
-    actionCommandStatus->state = 0xA;
+    actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~0x8000;
     func_80269118();
     return ApiStatus_DONE2;

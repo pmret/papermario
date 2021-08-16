@@ -139,7 +139,7 @@ void func_802A91F8_425788(void) {
                 break;
             }
             battleStatus->actionSuccess = 1;
-            battleStatus->unk_86 = 0x7F;
+            battleStatus->unk_86 = 127;
             func_80268C9C();
         default:
             break;

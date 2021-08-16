@@ -16,7 +16,7 @@ ApiStatus func_802A9000_428A70(ScriptInstance* script, s32 isInitialCall) {
 
     battleStatus->unk_434 = &D_80294340;
     battleStatus->unk_82 = 0;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     func_80268858();
     actionCommandStatus->unk_5A = get_variable(script, *args++);
     actionCommandStatus->actionCommandID = ACTION_COMMAND_AIR_LIFT;
@@ -28,7 +28,7 @@ ApiStatus func_802A9000_428A70(ScriptInstance* script, s32 isInitialCall) {
     actionCommandStatus->unk_68 = 0;
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
-    actionCommandStatus->unk_6C = 0x1E;
+    actionCommandStatus->unk_6C = 30;
     actionCommandStatus->hudElementX = -48;
     func_802A98B0_42EC50 = 0;
     actionCommandStatus->hudElementY = 80;

@@ -15,7 +15,7 @@ ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
 
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294220;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;

@@ -13,9 +13,9 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     HudElement* hudElement;
 
-    battleStatus->unk_82 = 0x64;
+    battleStatus->unk_82 = 100;
     battleStatus->unk_434 = &D_80294320;
-    battleStatus->unk_86 = 0x7F;
+    battleStatus->unk_86 = 127;
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
@@ -53,7 +53,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
 
     hudElement = create_hud_element(&D_8029275C);
     actionCommandStatus->hudElements[2] = hudElement;
-    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 0x29, actionCommandStatus->hudElementY + 22);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 41, actionCommandStatus->hudElementY + 22);
     set_hud_element_render_depth(hudElement, 0);
     set_hud_element_flags(hudElement, 0x80);
     return ApiStatus_DONE2;
