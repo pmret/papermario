@@ -62,8 +62,14 @@ def get_asm_path() -> Path:
 def get_cache_path():
     return get_base_path() / opts.get("cache_path", ".splat_cache")
 
+def get_create_undefined_funcs_auto() -> bool:
+    return opts.get("create_undefined_funcs_auto", True)
+
 def get_undefined_funcs_auto_path():
     return get_base_path() / opts.get("undefined_funcs_auto_path", "undefined_funcs_auto.txt")
+
+def get_create_undefined_syms_auto() -> bool:
+    return opts.get("create_undefined_syms_auto", True)
 
 def get_undefined_syms_auto_path():
     return get_base_path() / opts.get("undefined_syms_auto_path", "undefined_syms_auto.txt")
