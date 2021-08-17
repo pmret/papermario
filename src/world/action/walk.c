@@ -9,7 +9,7 @@ s32 D_802B6910_E23FF0[] = {0x000A0002, 0x000A002B, 0x000A002D, 0x000A002F, 0x000
 INCLUDE_ASM(void, "world/action/walk", func_802B6000_E236E0, void);
 
 // run
-void func_802B6288_E23968() {
+void func_802B6288_E23968(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     f32 moveX;

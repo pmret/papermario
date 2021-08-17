@@ -186,11 +186,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, 0, 0, 0)->id;
 }
 
-s32 get_current_map_config() {
+s32 get_current_map_config(void) {
     return gMap;
 }
 
-MapConfig* get_current_map_header() {
+MapConfig* get_current_map_header(void) {
     return &gMapConfig;
 }
 

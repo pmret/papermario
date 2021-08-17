@@ -64,7 +64,7 @@ INCLUDE_ASM(s32, "7bb60_len_41b0", phys_update_jump);
 // Rodata issue.
 extern s32 D_800F7B50;
 
-void phys_init_integrator_for_current_state() {
+void phys_init_integrator_for_current_state(void) {
     f32* temp_a0;
     s8 temp_v0;
     PlayerStatus* playerStatus = &gPlayerStatus;

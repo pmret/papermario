@@ -279,7 +279,7 @@ ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
 /// Default/neutral state during world gameplay; checks for player-enemy collisions and initiates battles when they occur.
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_neutral);
 
-void draw_encounters_neutral() {
+void draw_encounters_neutral(void) {
 }
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", update_encounters_pre_battle);
@@ -466,14 +466,14 @@ void update_encounters_conversation(void) {
     }
 }
 
-void draw_encounters_conversation() {
+void draw_encounters_conversation(void) {
 }
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", check_conversation_trigger);
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", create_encounters);
 
-void init_encounters_ui() {
+void init_encounters_ui(void) {
 }
 
 s32 is_starting_conversation(void) {
