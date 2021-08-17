@@ -19,7 +19,6 @@ extern s32 D_801A6000;
                                    effect_##name##_VRAM, gfx_name##_ROM_START, gfx_name##_ROM_END }
 
 FX_MAIN(fx_1_main);
-FX_MAIN(fx_1_main);
 FX_MAIN(fx_6_main);
 FX_MAIN(fx_7_main);
 FX_MAIN(fx_8_main);
@@ -220,7 +219,7 @@ EffectTableEntry gEffectTable[] = {
     /* 0x45 */ FX_ENTRY(69, _38D070),
     /* 0x46 */ FX_ENTRY(70, _38E990),
     /* 0x47 */ FX_ENTRY(71, _38F710),
-    /* 0x48 */ {fx_72_main, effect_72_ROM_START, effect_72_ROM_END, effect_72_VRAM, 0x003903D0, 0x00391D30 },
+    /* 0x48 */ FX_ENTRY(72, _3903D0),
     /* 0x49 */ FX_ENTRY(73, _392440),
     /* 0x4A */ FX_ENTRY(74, _3930A0),
     /* 0x4B */ FX_ENTRY(75, _394670),
@@ -269,13 +268,13 @@ EffectTableEntry gEffectTable[] = {
     /* 0x76 */ {},
     /* 0x77 */ FX_ENTRY(119, _3E5350),
     /* 0x78 */ FX_ENTRY(120, _3E5F30),
-    /* 0x79 */ { fx_121_main, effect_121_ROM_START, effect_121_ROM_END, effect_121_VRAM, 0x3EBE60, 0x3F83F0 },
+    /* 0x79 */ FX_ENTRY(121, _3EBE60),
     /* 0x7A */ FX_ENTRY(122, _3F8CC0),
-    /* 0x7B */ { fx_123_main, effect_123_ROM_START, effect_123_ROM_END, effect_123_VRAM, 0x3FA4B0, 0x3FEAE0 },
+    /* 0x7B */ FX_ENTRY(123, _3FA4B0),
     /* 0x7C */ FX_ENTRY(124, _3FF250),
-    /* 0x7D */ { fx_125_main, effect_125_ROM_START, effect_125_ROM_END, effect_125_VRAM, 0x3FA4B0, 0x3FEAE0 },
+    /* 0x7D */ FX_ENTRY(125, _3FA4B0),
     /* 0x7E */ FX_ENTRY(126, _403BF0),
-    /* 0x7F */ { fx_127_main, effect_127_ROM_START, effect_127_ROM_END, effect_127_VRAM, 0x404F40, 0x406B40 },
+    /* 0x7F */ FX_ENTRY(127, _404F40),
     /* 0x80 */ FX_ENTRY(128, _407080),
     /* 0x81 */ FX_ENTRY(129, _40A1C0),
     /* 0x82 */ FX_ENTRY(130, _40BBA0),
