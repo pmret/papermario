@@ -5,11 +5,9 @@ typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
 extern TlbMappablePage D_80197000;
-extern EffectTableEntry gEffectTable[135];
 
 #define EFFECT_LOADED 1
 
-extern void* D_80059C80;
 extern EffectGraphics gEffectGraphicsData[15];
 extern EffectInstance* gEffectInstances[96];
 extern s32 D_801A6000;
