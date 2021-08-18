@@ -362,7 +362,7 @@ glabel pause_items_draw_contents
 /* 13D200 80249EC0 000210C0 */  sll       $v0, $v0, 3
 /* 13D204 80249EC4 004B1021 */  addu      $v0, $v0, $t3
 /* 13D208 80249EC8 8C450000 */  lw        $a1, ($v0)
-/* 13D20C 80249ECC 0C0511FF */  jal       set_hud_element_script
+/* 13D20C 80249ECC 0C0511FF */  jal       set_hud_element_anim
 /* 13D210 80249ED0 0220202D */   daddu    $a0, $s1, $zero
 /* 13D214 80249ED4 3C053F2B */  lui       $a1, 0x3f2b
 /* 13D218 80249ED8 34A5BA99 */  ori       $a1, $a1, 0xba99

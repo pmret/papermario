@@ -90,7 +90,7 @@ glabel L802A938C_428DFC
 /* 428E1C 802A93AC 8E240004 */  lw        $a0, 4($s1)
 /* 428E20 802A93B0 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* 428E24 802A93B4 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* 428E28 802A93B8 0C0511FF */  jal       set_hud_element_script
+/* 428E28 802A93B8 0C0511FF */  jal       set_hud_element_anim
 /* 428E2C 802A93BC 00000000 */   nop
 /* 428E30 802A93C0 3C048000 */  lui       $a0, 0x8000
 /* 428E34 802A93C4 34840041 */  ori       $a0, $a0, 0x41

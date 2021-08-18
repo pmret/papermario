@@ -131,7 +131,7 @@ glabel btl_draw_enemy_health_bars
 /* 16EA5C 8024017C AFA20024 */   sw       $v0, 0x24($sp)
 /* 16EA60 80240180 3C058029 */  lui       $a1, %hi(D_80291F80)
 /* 16EA64 80240184 24A51F80 */  addiu     $a1, $a1, %lo(D_80291F80)
-/* 16EA68 80240188 0C0511FF */  jal       set_hud_element_script
+/* 16EA68 80240188 0C0511FF */  jal       set_hud_element_anim
 /* 16EA6C 8024018C 0200202D */   daddu    $a0, $s0, $zero
 /* 16EA70 80240190 8FA50020 */  lw        $a1, 0x20($sp)
 /* 16EA74 80240194 8FA60024 */  lw        $a2, 0x24($sp)
@@ -160,7 +160,7 @@ glabel btl_draw_enemy_health_bars
 /* 16EAD0 802401F0 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
 /* 16EAD4 802401F4 02481021 */  addu      $v0, $s2, $t0
 /* 16EAD8 802401F8 8C450000 */  lw        $a1, ($v0)
-/* 16EADC 802401FC 0C0511FF */  jal       set_hud_element_script
+/* 16EADC 802401FC 0C0511FF */  jal       set_hud_element_anim
 /* 16EAE0 80240200 0200202D */   daddu    $a0, $s0, $zero
 /* 16EAE4 80240204 0000202D */  daddu     $a0, $zero, $zero
 /* 16EAE8 80240208 0080282D */  daddu     $a1, $a0, $zero
@@ -194,7 +194,7 @@ glabel btl_draw_enemy_health_bars
 /* 16EB54 80240274 250809FC */  addiu     $t0, $t0, %lo(D_802809FC)
 /* 16EB58 80240278 00481021 */  addu      $v0, $v0, $t0
 /* 16EB5C 8024027C 8C450000 */  lw        $a1, ($v0)
-/* 16EB60 80240280 0C0511FF */  jal       set_hud_element_script
+/* 16EB60 80240280 0C0511FF */  jal       set_hud_element_anim
 /* 16EB64 80240284 0200202D */   daddu    $a0, $s0, $zero
 /* 16EB68 80240288 0000202D */  daddu     $a0, $zero, $zero
 /* 16EB6C 8024028C 0080282D */  daddu     $a1, $a0, $zero

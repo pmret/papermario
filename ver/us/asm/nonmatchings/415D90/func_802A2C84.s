@@ -799,7 +799,7 @@ glabel L802A3718_4184A8
 /* 41859C 802A380C 8C84D118 */  lw        $a0, %lo(battle_menu_moveCursorIcon)($a0)
 /* 4185A0 802A3810 3C058010 */  lui       $a1, %hi(D_80104A00)
 /* 4185A4 802A3814 24A54A00 */  addiu     $a1, $a1, %lo(D_80104A00)
-/* 4185A8 802A3818 0C0511FF */  jal       set_hud_element_script
+/* 4185A8 802A3818 0C0511FF */  jal       set_hud_element_anim
 /* 4185AC 802A381C 00000000 */   nop
 /* 4185B0 802A3820 24040001 */  addiu     $a0, $zero, 1
 /* 4185B4 802A3824 2402000D */  addiu     $v0, $zero, 0xd

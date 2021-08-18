@@ -299,7 +299,7 @@ void func_802A2910(void) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_script(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, &D_80104A28);
     set_window_update(1, 5);
 
     if (!battle_menu_hasSpiritsMenu) {
@@ -350,7 +350,7 @@ void func_802A2AB8(void) {
         set_hud_element_tint(moveOptionCostUnitIconIDs[i], 255, 255, 255);
     }
 
-    set_hud_element_script(battle_menu_moveCursorIcon, &D_80104A28);
+    set_hud_element_anim(battle_menu_moveCursorIcon, &D_80104A28);
     battle_menu_moveTextColor = 10;
     D_802AD10F = 1;
     battle_menu_moveState = 20;
@@ -501,7 +501,7 @@ void func_802A47E0(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_script(D_802AD618, &D_80104A28);
+    set_hud_element_anim(D_802AD618, &D_80104A28);
     set_window_update(6, 5);
     set_window_update(7, 5);
     set_window_update(8, 1);
@@ -525,7 +525,7 @@ void func_802A48FC(void) {
     set_hud_element_tint(D_802AD618, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD61C, 0xFF, 0xFF, 0xFF);
     set_hud_element_tint(D_802AD620, 0xFF, 0xFF, 0xFF);
-    set_hud_element_script(D_802AD618, &D_80104A28);
+    set_hud_element_anim(D_802AD618, &D_80104A28);
     D_802AD614 = 10;
     D_802AD60B = 1;
     D_802AD604 = 20;

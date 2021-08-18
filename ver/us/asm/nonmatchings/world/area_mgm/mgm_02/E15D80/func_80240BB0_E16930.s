@@ -191,7 +191,7 @@ glabel L80240E60_E16BE0
 /* E16BE0 80240E60 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16BE4 80240E64 3C058011 */  lui       $a1, %hi(D_80108B28)
 /* E16BE8 80240E68 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
-/* E16BEC 80240E6C 0C0511FF */  jal       set_hud_element_script
+/* E16BEC 80240E6C 0C0511FF */  jal       set_hud_element_anim
 /* E16BF0 80240E70 00000000 */   nop
 /* E16BF4 80240E74 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16BF8 80240E78 0C0513AC */  jal       set_hud_element_alpha
@@ -404,7 +404,7 @@ glabel L80241048_E16DC8
 /* E16F30 802411B0 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16F34 802411B4 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* E16F38 802411B8 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* E16F3C 802411BC 0C0511FF */  jal       set_hud_element_script
+/* E16F3C 802411BC 0C0511FF */  jal       set_hud_element_anim
 /* E16F40 802411C0 00000000 */   nop
 /* E16F44 802411C4 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16F48 802411C8 0C0513AC */  jal       set_hud_element_alpha
@@ -452,7 +452,7 @@ glabel L802411E8_E16F68
 /* E16FE8 80241268 8EA4000C */  lw        $a0, 0xc($s5)
 /* E16FEC 8024126C 3C058011 */  lui       $a1, %hi(D_80108B28)
 /* E16FF0 80241270 24A58B28 */  addiu     $a1, $a1, %lo(D_80108B28)
-/* E16FF4 80241274 0C0511FF */  jal       set_hud_element_script
+/* E16FF4 80241274 0C0511FF */  jal       set_hud_element_anim
 /* E16FF8 80241278 2694001C */   addiu    $s4, $s4, 0x1c
 /* E16FFC 8024127C 8EA4000C */  lw        $a0, 0xc($s5)
 /* E17000 80241280 0C0513AC */  jal       set_hud_element_alpha
