@@ -495,6 +495,16 @@ typedef struct CameraInitData {
     /* 0x10 */ s16 vfov;
 } CameraInitData; // size = 0x12;
 
+typedef struct CameraUnk {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ char unk_04[0x8];
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x54];
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ char unk_68[0x24];
+} CameraUnk; // size = 0x8C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
@@ -519,7 +529,7 @@ typedef struct Camera {
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
-    /* 0x038 */ s16 perspNorm;
+    /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
@@ -533,20 +543,29 @@ typedef struct Camera {
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ f32 trueRotation[3];
+    /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
-    /* 0x0B0 */ char unk_B0[0x24];
+    /* 0x0B0 */ Vp vpAlt;
+    /* 0x0C0 */ s32 unk_C0;
+    /* 0x0C4 */ f32 unk_C4;
+    /* 0x0C8 */ char unk_C8[0xC];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
     /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
     /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
-    /* 0x1D4 */ char unk_1D4[48];
+    /* 0x1D4 */ char unk_1D4[0x28];
+    /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
+    /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
     /* 0x204 */ struct Matrix4s* unkMatrix;
-    /* 0x208 */ char unk_208[572];
+    /* 0x208 */ s32 unk_208;
+    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x210 */ char unk_210[0x2];
+    /* 0x212 */ s16 unk_212;
+    /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ struct Zone* prevZone;
     /* 0x448 */ struct Zone* currentZone;
     /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
@@ -571,11 +590,20 @@ typedef struct Camera {
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[16];
+    /* 0x510 */ f32 unk_510;
+    /* 0x514 */ f32 unk_514;
+    /* 0x518 */ f32 unk_518;
+    /* 0x51C */ s32 unk_51C;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ char unk_524[16];
+    /* 0x524 */ f32 unk_524;
+    /* 0x528 */ f32 unk_528;
+    /* 0x52C */ s32 unk_52C;
+    /* 0x530 */ s32 unk_530;
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
-    /* 0x538 */ char unk_538[32];
+    /* 0x538 */ char unk_538[0x18];
+    /* 0x550 */ f32 unk_550;
+    /* 0x554 */ s16 unk_554;
+    /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
 typedef struct BattleStatusUnkInner {
@@ -728,7 +756,7 @@ typedef struct BattleStatus {
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
-    /* 0x434 */ s32 unk_434;
+    /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
@@ -910,7 +938,7 @@ typedef struct EffectInstance {
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 totalMatricies;
     /* 0x0C */ struct EffectInstanceData* data;
-    /* 0x10 */ struct Effect* effect;
+    /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;
 
 typedef struct EffectBlueprint {
@@ -957,24 +985,24 @@ typedef struct {
     s32 unk_74;
 } EffectInstanceDataThing;
 
-typedef struct Effect {
+typedef struct EffectGraphics {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ s32 freeDelay;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
-    /* 0x1C */ void* unk_1C;
-} Effect; // size = 0x20
+    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
+    /* 0x1C */ s32* data;
+} EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
     /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
-    /* 0x10 */ void* unkStartRom;
-    /* 0x14 */ void* unkEndRom;
+    /* 0x10 */ void* graphicsDmaStart;
+    /* 0x14 */ void* graphicsDmaEnd;
 } EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
@@ -2206,17 +2234,22 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ HudElement* hudElements[7];
-    /* 0x20 */ char unk_20[0x2A];
+    /* 0x04 */ HudElement* hudElements[15];
+    /* 0x40 */ char unk_40[0x4];
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s16 unk_48;
     /* 0x4A */ s16 actionCommandID; // current action command id?
-    /* 0x4C */ s16 unk_4C;
+    /* 0x4C */ s16 state;
     /* 0x4E */ s16 unk_4E;
     /* 0x50 */ s16 unk_50;
     /* 0x52 */ s16 unk_52;
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 hudElementX;
     /* 0x58 */ s16 hudElementY;
-    /* 0x59 */ char unk_59[4];
+    /* 0x5A */ s16 unk_5A;
+    /* 0x5C */ s8 unk_5C;
+    /* 0x5D */ s8 unk_5D;
     /* 0x5E */ s8 autoSucceed;
     /* 0x5F */ s8 unk_5F;
     /* 0x60 */ s8 unk_60;
@@ -2229,9 +2262,9 @@ typedef struct ActionCommandStatus {
     /* 0x6A */ s16 unk_6A;
     /* 0x6C */ s16 unk_6C;
     /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ char unk_70[4];
-    /* 0x74 */ s16 unk_74;
-    /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
+    /* 0x70 */ s16 unk_70;
+    /* 0x72 */ s16 unk_72;
+    /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
-} ActionCommandStatus; // size unknown
+} ActionCommandStatus;
 #endif

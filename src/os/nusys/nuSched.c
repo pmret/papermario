@@ -5,8 +5,6 @@ void nuScEventHandler(void);
 void nuScExecuteAudio(void);
 void nuScExecuteGraphics(void);
 
-extern u8 D_8009A5B0;
-
 extern u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
 extern u64 nuScAudioStack[NU_SC_STACK_SIZE / sizeof(u64)];
 extern u64 nuScGraphicsStack[NU_SC_STACK_SIZE / sizeof(u64)];
@@ -28,7 +26,7 @@ void nuScCreateScheduler(u8 videoMode, u8 numFields) {
         nusched.frameRate = 60;
     }
 
-    D_8009A5B0 = 0;
+    nuScPreNMIFlag = NU_SC_PRENMI_YET;
 
     osCreateMesgQueue(&nusched.retraceMQ,         nusched.retraceMsgBuf,      NU_SC_MAX_MESGS);
     osCreateMesgQueue(&nusched.rspMQ,             nusched.rspMsgBuf,          NU_SC_MAX_MESGS);
@@ -74,7 +72,7 @@ void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
 
     nusched.clientList = c;
 
-    if ((msgType & NU_SC_PRENMI_MSG) && D_8009A5B0) {
+    if ((msgType & NU_SC_PRENMI_MSG) && nuScPreNMIFlag) {
         osSendMesg(mq, &nusched.prenmiMsg, OS_MESG_NOBLOCK);
     }
 

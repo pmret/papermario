@@ -144,7 +144,7 @@ extern TriggerList gTriggerList2;
 extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
-extern u16 gMapTransitionAlpha;
+extern s16 gMapTransitionAlpha;
 extern s8 D_800A0930;
 extern s8 D_800A0931;
 extern s16 D_800A0932[1];
@@ -176,7 +176,10 @@ extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
 extern s32* gPauseMenuCurrentDescIconScript;
+extern s32 D_802700D0;
 extern s8 gPauseMenuCurrentTab;
+extern char D_802700D[8];
+extern s32 D_802700E0;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
@@ -241,9 +244,9 @@ extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
-extern s32 mapTexName;
-extern char* mapHitName;
-extern s32 mapShapeName;
+extern s32 wMapTexName;
+extern char* wMapHitName;
+extern s32 wMapShapeName;
 extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?

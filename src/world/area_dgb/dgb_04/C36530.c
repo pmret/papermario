@@ -1055,7 +1055,7 @@ INCLUDE_ASM(ApiStatus, "world/area_dgb/dgb_04/C36530", dgb_04_func_8024259C_C38A
 typedef struct {
     s32 unk_00;
     s32 unk_04;
-    Effect* unk_08[3];
+    EffectGraphics* unk_08[3]; // TODO this is wrong
     f32 unk_14[3];
     f32 unk_20[3];
     f32 unk_2C[3];
@@ -1187,9 +1187,9 @@ ApiStatus N(func_802429D0_C38F00)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.x = userDataPtr->unk_14[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.y = userDataPtr->unk_20[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.z = userDataPtr->unk_2C[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.x = userDataPtr->unk_14[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.y = userDataPtr->unk_20[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.z = userDataPtr->unk_2C[i];
     }
 
     return ApiStatus_BLOCK;

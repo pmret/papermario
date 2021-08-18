@@ -14,11 +14,10 @@ extern s32 D_80292A2C;
 
 extern s32 D_802941E0;
 
-ApiStatus N(CreateHudElements)(void) {
-    HudElement* hudElement;
-
+ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
 
     battleStatus->unk_82 = 1;
     battleStatus->unk_434 = &D_802941E0;
@@ -31,17 +30,17 @@ ApiStatus N(CreateHudElements)(void) {
     }
 
     func_80268858();
-    actionCommandStatus->actionCommandID = 2;
-    actionCommandStatus->hudElementX = -0x30;
-    actionCommandStatus->unk_4C = 0;
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_SMASH;
+    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->state = 0;
     actionCommandStatus->unk_60 = 0;
-    actionCommandStatus->hudElementY = 0x60;
+    actionCommandStatus->hudElementY = 96;
 
     hudElement = create_hud_element(&D_802922F0);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-    set_hud_element_render_depth(hudElement, 0xA);
+    set_hud_element_render_depth(hudElement, 10);
 
     hudElement = create_hud_element(&D_8029275C);
     actionCommandStatus->hudElements[1] = hudElement;
@@ -110,7 +109,7 @@ ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
     battleStatus->actionSuccess = 0;
     battleStatus->unk_84 = 0;
     battleStatus->unk_86 = 0;
-    actionCommandStatus->unk_4C = 0xA;
+    actionCommandStatus->state = 10;
     battleStatus->flags1 &= ~0x8000;
     func_80269118();
     return ApiStatus_DONE2;
@@ -118,7 +117,7 @@ ApiStatus func_802A9258_422258(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/action_cmd/hammer", func_802A936C_42236C);
 
-void N(DrawHudElements)(void) {
+void N(draw_hud_elements)(void) {
     draw_hud_element_clipped(gActionCommandStatus.hudElements[0]);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[1]);
     draw_hud_element_clipped(gActionCommandStatus.hudElements[2]);
@@ -128,7 +127,7 @@ void N(DrawHudElements)(void) {
     draw_hud_element_clipped(gActionCommandStatus.hudElements[6]);
 }
 
-void N(FreeHudElements)(void) {
+void N(free_hud_elements)(void) {
     free_hud_element(gActionCommandStatus.hudElements[0]);
     free_hud_element(gActionCommandStatus.hudElements[1]);
     free_hud_element(gActionCommandStatus.hudElements[2]);
