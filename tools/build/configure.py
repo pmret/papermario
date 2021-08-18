@@ -11,7 +11,7 @@ VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
 
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
-            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
+            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
 ASFLAGS = "-EB -G 0"
 
@@ -80,14 +80,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -162,6 +162,20 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
+
+    with Path("tools/permuter_settings.toml").open("w") as f:
+        f.write(f"compiler_command = \"{cpp} {CPPFLAGS} {cppflags} -DPERMUTER | {iconv} | {cc1} {cflags} -o - | {nu64as} {ASFLAGS}\"\n")
+        f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(
+"""
+[preserve_macros]
+"gs?[DS]P.*" = "void"
+OVERRIDE_FLAG_CHECK = "int"
+OS_K0_TO_PHYSICAL = "int"
+"G_.*" = "int"
+"TEXEL.*" = "int"
+PRIMITIVE = "int"
+""")
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
