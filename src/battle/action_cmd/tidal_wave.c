@@ -9,7 +9,7 @@ extern s32 D_802944A0;
 ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 i;
 
     battleStatus->unk_82 = 5;
@@ -28,13 +28,14 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
         battleStatus->unk_84 = 0;
         actionCommandStatus->hudElementX = -48;
         actionCommandStatus->hudElementY = 80;
+
         hudElement = create_hud_element(&D_80108AFC);
         actionCommandStatus->hudElements[0] = hudElement;
         set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
         set_hud_element_render_depth(hudElement, 0);
         set_hud_element_flags(hudElement, 0x82);
 
-        for (i = 1; i < 15; i++) {
+        for (i = 1; i < ARRAY_COUNT(actionCommandStatus->hudElements); i++) {
             hudElement = create_hud_element(&D_80108B28);
             actionCommandStatus->hudElements[i] = hudElement;
             set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);

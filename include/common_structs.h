@@ -419,8 +419,6 @@ typedef struct MusicSettings {
     /* 0x2C */ s32 unk_2C;
 } MusicSettings; // size = 0x30
 
-#include "hud_element.h" // TEMP for Actor
-
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndexes[2];
     /* 0x08 */ s32 fpIconIndexes[2];
@@ -2234,7 +2232,7 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ HudElement* hudElements[15];
+    /* 0x04 */ struct HudElement* hudElements[15];
     /* 0x40 */ char unk_40[0x4];
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;

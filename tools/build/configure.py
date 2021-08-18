@@ -12,7 +12,8 @@ DO_SHA1_CHECK = True
 
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
-
+CFLAGS = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 " \
+         "-Wuninitialized -Wshadow -Wmissing-braces"
 ASFLAGS = "-EB -G 0"
 
 # Paths:
@@ -59,7 +60,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
     nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
 
-    cflags = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces " + extra_cflags
+    cflags = CFLAGS + " " + extra_cflags
 
     ninja.variable("python", sys.executable)
 
