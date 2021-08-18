@@ -114,7 +114,7 @@ HudElement* get_hud_element(s32 arg0) {
     return gHudElementList[arg0 & ~0x800];
 }
 
-void free_hud_element(s32 arg0) {
+void hud_element_free(s32 arg0) {
     if (gHudElementList[arg0 & ~0x800]->flags & 0x10000) {
         free_hud_element_transform(arg0 & ~0x800);
     }

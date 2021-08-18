@@ -51,7 +51,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
-        free_hud_element(D_802A2DD0);
+        hud_element_free(D_802A2DD0);
     }
 
     return ApiStatus_DONE2;
@@ -243,7 +243,7 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
             script->varTable[0] = g;
             free_generic_entity(D_802A2E00);
             for (i = 0; i < 5; i++) {
-                free_hud_element(*iconPtr++);
+                hud_element_free(*iconPtr++);
             }
         }
         return ApiStatus_DONE2;

@@ -86,9 +86,9 @@ void N(draw_hud_elements)(void) {
 void N(free_hud_elements)(void) {
     s32 i;
 
-    free_hud_element(gActionCommandStatus.hudElements[0]);
+    hud_element_free(gActionCommandStatus.hudElements[0]);
     
     for (i = 1; i < 15; i++) {
-        free_hud_element(gActionCommandStatus.hudElements[i]);
+        hud_element_free(gActionCommandStatus.hudElements[i]);
     }
 }

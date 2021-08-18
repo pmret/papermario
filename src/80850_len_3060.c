@@ -467,8 +467,8 @@ void update_coin_counter(void) {
     if (uiStatus->unk_6C[1] != 0) {
         uiStatus->unk_6C[1] -= 1;
         if (((uiStatus->unk_6C[1] << 24) == 0) && (uiStatus->iconIndex12 >= 0)) {
-            free_hud_element(uiStatus->iconIndex12);
-            free_hud_element(uiStatus->iconIndex13);
+            hud_element_free(uiStatus->iconIndex12);
+            hud_element_free(uiStatus->iconIndex13);
             uiStatus->iconIndex12 = -1;
         }
         D_8010CD12 = 0;
@@ -505,8 +505,8 @@ void show_coin_counter(void) {
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
         set_window_update(0x14, 2);
         if (uiStatus->iconIndex12 > -1) {
-            free_hud_element(uiStatus->iconIndex10);
-            free_hud_element(uiStatus->iconIndex11);
+            hud_element_free(uiStatus->iconIndex10);
+            hud_element_free(uiStatus->iconIndex11);
             uiStatus->iconIndex12 = -1;
         }
         uiStatus->unk_6C[0] = 0;

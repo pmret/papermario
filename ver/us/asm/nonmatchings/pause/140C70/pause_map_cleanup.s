@@ -12,7 +12,7 @@ glabel pause_map_cleanup
 .L8024EE48:
 /* 142188 8024EE48 8E040000 */  lw        $a0, ($s0)
 /* 14218C 8024EE4C 26100004 */  addiu     $s0, $s0, 4
-/* 142190 8024EE50 0C05123D */  jal       free_hud_element
+/* 142190 8024EE50 0C05123D */  jal       hud_element_free
 /* 142194 8024EE54 26310001 */   addiu    $s1, $s1, 1
 /* 142198 8024EE58 1A20FFFB */  blez      $s1, .L8024EE48
 /* 14219C 8024EE5C 00000000 */   nop

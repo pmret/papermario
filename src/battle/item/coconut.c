@@ -55,7 +55,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
 
     if (player_team_is_ability_active(battleStatus->playerActor, ABILITY_REFUND) && sellValue > 0) {
-        free_hud_element(D_802A1E80);
+        hud_element_free(D_802A1E80);
     }
 
     return ApiStatus_DONE2;

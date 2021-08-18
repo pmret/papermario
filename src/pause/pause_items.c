@@ -182,6 +182,6 @@ void pause_items_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gItemIcons); i++) {
-        free_hud_element(gItemIcons[i]);
+        hud_element_free(gItemIcons[i]);
     }
 }

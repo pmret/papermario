@@ -307,7 +307,7 @@ glabel btl_state_update_select_target
 .L802AAAD4:
 /* 41F864 802AAAD4 8E240000 */  lw        $a0, ($s1)
 /* 41F868 802AAAD8 26310004 */  addiu     $s1, $s1, 4
-/* 41F86C 802AAADC 0C05123D */  jal       free_hud_element
+/* 41F86C 802AAADC 0C05123D */  jal       hud_element_free
 /* 41F870 802AAAE0 26100001 */   addiu    $s0, $s0, 1
 /* 41F874 802AAAE4 0213102A */  slt       $v0, $s0, $s3
 /* 41F878 802AAAE8 1440FFFA */  bnez      $v0, .L802AAAD4
@@ -368,7 +368,7 @@ glabel btl_state_update_select_target
 .L802AABA4:
 /* 41F934 802AABA4 8E240000 */  lw        $a0, ($s1)
 /* 41F938 802AABA8 26310004 */  addiu     $s1, $s1, 4
-/* 41F93C 802AABAC 0C05123D */  jal       free_hud_element
+/* 41F93C 802AABAC 0C05123D */  jal       hud_element_free
 /* 41F940 802AABB0 26100001 */   addiu    $s0, $s0, 1
 /* 41F944 802AABB4 0213102A */  slt       $v0, $s0, $s3
 /* 41F948 802AABB8 1440FFFA */  bnez      $v0, .L802AABA4

@@ -12,7 +12,7 @@ glabel filemenu_choose_name_cleanup
 .L80249348:
 /* 169BA8 80249348 8E040000 */  lw        $a0, ($s0)
 /* 169BAC 8024934C 26100004 */  addiu     $s0, $s0, 4
-/* 169BB0 80249350 0C05123D */  jal       free_hud_element
+/* 169BB0 80249350 0C05123D */  jal       hud_element_free
 /* 169BB4 80249354 26310001 */   addiu    $s1, $s1, 1
 /* 169BB8 80249358 2A220003 */  slti      $v0, $s1, 3
 /* 169BBC 8024935C 1440FFFA */  bnez      $v0, .L80249348

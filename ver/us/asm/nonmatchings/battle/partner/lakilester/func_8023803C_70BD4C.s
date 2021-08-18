@@ -532,22 +532,22 @@ glabel func_8023803C_70BD4C
 .L8023880C:
 /* 70C51C 8023880C 3C048024 */  lui       $a0, %hi(D_8023D28C)
 /* 70C520 80238810 8C84D28C */  lw        $a0, %lo(D_8023D28C)($a0)
-/* 70C524 80238814 0C05123D */  jal       free_hud_element
+/* 70C524 80238814 0C05123D */  jal       hud_element_free
 /* 70C528 80238818 0000902D */   daddu    $s2, $zero, $zero
 /* 70C52C 8023881C 3C048024 */  lui       $a0, %hi(D_8023D288)
 /* 70C530 80238820 8C84D288 */  lw        $a0, %lo(D_8023D288)($a0)
-/* 70C534 80238824 0C05123D */  jal       free_hud_element
+/* 70C534 80238824 0C05123D */  jal       hud_element_free
 /* 70C538 80238828 00000000 */   nop
 /* 70C53C 8023882C 3C048024 */  lui       $a0, %hi(D_8023D2BC)
 /* 70C540 80238830 8C84D2BC */  lw        $a0, %lo(D_8023D2BC)($a0)
 /* 70C544 80238834 3C108024 */  lui       $s0, %hi(D_8023D2B8)
 /* 70C548 80238838 2610D2B8 */  addiu     $s0, $s0, %lo(D_8023D2B8)
-/* 70C54C 8023883C 0C05123D */  jal       free_hud_element
+/* 70C54C 8023883C 0C05123D */  jal       hud_element_free
 /* 70C550 80238840 00000000 */   nop
 .L80238844:
 /* 70C554 80238844 8E040000 */  lw        $a0, ($s0)
 /* 70C558 80238848 26100004 */  addiu     $s0, $s0, 4
-/* 70C55C 8023884C 0C05123D */  jal       free_hud_element
+/* 70C55C 8023884C 0C05123D */  jal       hud_element_free
 /* 70C560 80238850 26520001 */   addiu    $s2, $s2, 1
 /* 70C564 80238854 1A40FFFB */  blez      $s2, .L80238844
 /* 70C568 80238858 00000000 */   nop

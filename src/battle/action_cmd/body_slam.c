@@ -77,8 +77,8 @@ void N(draw_hud_elements)(void) {
 }
 
 void N(free_hud_elements)(void) {
-	free_hud_element(gActionCommandStatus.hudElements[0]);
-	free_hud_element(gActionCommandStatus.hudElements[1]);
-	free_hud_element(gActionCommandStatus.hudElements[2]);
-	free_hud_element(gActionCommandStatus.hudElements[3]);
+	hud_element_free(gActionCommandStatus.hudElements[0]);
+	hud_element_free(gActionCommandStatus.hudElements[1]);
+	hud_element_free(gActionCommandStatus.hudElements[2]);
+	hud_element_free(gActionCommandStatus.hudElements[3]);
 }
