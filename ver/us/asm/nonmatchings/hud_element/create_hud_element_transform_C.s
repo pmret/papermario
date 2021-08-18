@@ -6,8 +6,8 @@ glabel create_hud_element_transform_C
 /* DB774 80145074 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB778 80145078 00821024 */  and       $v0, $a0, $v0
 /* DB77C 8014507C 00021080 */  sll       $v0, $v0, 2
-/* DB780 80145080 3C038015 */  lui       $v1, %hi(gHudElementList)
-/* DB784 80145084 8C637960 */  lw        $v1, %lo(gHudElementList)($v1)
+/* DB780 80145080 3C038015 */  lui       $v1, %hi(hudElements)
+/* DB784 80145084 8C637960 */  lw        $v1, %lo(hudElements)($v1)
 /* DB788 80145088 AFBF0014 */  sw        $ra, 0x14($sp)
 /* DB78C 8014508C AFB00010 */  sw        $s0, 0x10($sp)
 /* DB790 80145090 00431021 */  addu      $v0, $v0, $v1

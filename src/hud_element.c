@@ -1,6 +1,9 @@
 #include "common.h"
 #include "hud_element.h"
 
+// TODO: probably BSS
+extern HudElement** hudElements;
+
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
 
@@ -82,7 +85,7 @@ void draw_icon_2(s32 iconID) {
 }
 
 void set_hud_element_script(s32 arg0, HudElementAnim* animation) {
-    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+    HudElement* hudElement = hudElements[arg0 & ~0x800];
 
     if (animation == NULL) {
         animation = hud_element_defaultAnim;
@@ -107,32 +110,32 @@ void set_hud_element_script(s32 arg0, HudElementAnim* animation) {
 }
 
 HudElementAnim* get_hud_element_script(s32 arg0) {
-    return gHudElementList[arg0 & ~0x800]->startReadPos;
+    return hudElements[arg0 & ~0x800]->startReadPos;
 }
 
 HudElement* get_hud_element(s32 arg0) {
-    return gHudElementList[arg0 & ~0x800];
+    return hudElements[arg0 & ~0x800];
 }
 
 void hud_element_free(s32 arg0) {
-    if (gHudElementList[arg0 & ~0x800]->flags & 0x10000) {
+    if (hudElements[arg0 & ~0x800]->flags & 0x10000) {
         free_hud_element_transform(arg0 & ~0x800);
     }
 
-    heap_free(gHudElementList[arg0 & ~0x800]);
-    gHudElementList[arg0 & ~0x800] = NULL;
+    heap_free(hudElements[arg0 & ~0x800]);
+    hudElements[arg0 & ~0x800] = NULL;
     D_801512B4--;
 }
 
 void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY) {
-    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+    HudElement* hudElement = hudElements[iconIndex & ~0x800];
 
     hudElement->renderPosX = posX;
     hudElement->renderPosY = posY;
 }
 
 void get_hud_element_render_pos(s32 iconIndex, s32* x, s32* y) {
-    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+    HudElement* hudElement = hudElements[iconIndex & ~0x800];
 
     *x = hudElement->renderPosX;
     *y = hudElement->renderPosY;
@@ -141,11 +144,11 @@ void get_hud_element_render_pos(s32 iconIndex, s32* x, s32* y) {
 INCLUDE_ASM(s32, "hud_element", set_hud_element_render_depth);
 
 void set_hud_element_flags(s32 iconIndex, s32 flags) {
-    gHudElementList[iconIndex & ~0x800]->flags |= flags;
+    hudElements[iconIndex & ~0x800]->flags |= flags;
 }
 
 void clear_hud_element_flags(s32 iconIndex, s32 flags) {
-    gHudElementList[iconIndex & ~0x800]->flags &= ~flags;
+    hudElements[iconIndex & ~0x800]->flags &= ~flags;
 }
 
 INCLUDE_ASM(s32, "hud_element", ALT_clear_hud_element_cache);
@@ -153,7 +156,7 @@ INCLUDE_ASM(s32, "hud_element", ALT_clear_hud_element_cache);
 INCLUDE_ASM(void, "hud_element", set_hud_element_scale, s32 index, f32 scale);
 
 void set_hud_element_size(s32 arg0, s8 arg1) {
-    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+    HudElement* hudElement = hudElements[arg0 & ~0x800];
 
     hudElement->widthScale = 0x400;
     hudElement->heightScale = 0x400;
@@ -167,14 +170,14 @@ void set_hud_element_size(s32 arg0, s8 arg1) {
 INCLUDE_ASM(s32, "hud_element", func_80144E4C);
 
 void func_80144E74(s32 iconIndex, s32 arg1) {
-    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+    HudElement* hudElement = hudElements[iconIndex & ~0x800];
 
     hudElement->flags &= ~0xF000000;
     hudElement->flags |= arg1 << 24;
 }
 
 void set_hud_element_alpha(s32 iconIndex, s32 opacity) {
-    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+    HudElement* hudElement = hudElements[iconIndex & ~0x800];
 
     hudElement->flags |= 0x20;
     hudElement->opacity = opacity;
@@ -185,7 +188,7 @@ void set_hud_element_alpha(s32 iconIndex, s32 opacity) {
 }
 
 void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3) {
-    HudElement* hudElement = gHudElementList[iconIndex & ~0x800];
+    HudElement* hudElement = hudElements[iconIndex & ~0x800];
 
     hudElement->tint[0] = tint1;
     hudElement->tint[1] = tint2;
@@ -199,7 +202,7 @@ INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_B);
 INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_C);
 
 void free_hud_element_transform(s32 arg0) {
-    HudElement* hudElement = gHudElementList[arg0 & ~0x800];
+    HudElement* hudElement = hudElements[arg0 & ~0x800];
     s32* hudTransform = hudElement->hudTransform;
 
     if (!(hudElement->flags & 0x20000)) {

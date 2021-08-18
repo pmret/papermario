@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel init_hud_element_list
+glabel init_hudElements
 /* D7A00 80141300 3C028007 */  lui       $v0, %hi(gGameStatusPtr)
 /* D7A04 80141304 8C42419C */  lw        $v0, %lo(gGameStatusPtr)($v0)
 /* D7A08 80141308 27BDFFE8 */  addiu     $sp, $sp, -0x18
@@ -23,8 +23,8 @@ glabel init_hud_element_list
 /* D7A44 80141344 8C637964 */  lw        $v1, %lo(D_80157964)($v1)
 /* D7A48 80141348 3C028015 */  lui       $v0, %hi(D_80156F60)
 /* D7A4C 8014134C 24426F60 */  addiu     $v0, $v0, %lo(D_80156F60)
-/* D7A50 80141350 3C018015 */  lui       $at, %hi(gHudElementList)
-/* D7A54 80141354 AC227960 */  sw        $v0, %lo(gHudElementList)($at)
+/* D7A50 80141350 3C018015 */  lui       $at, %hi(hudElements)
+/* D7A54 80141354 AC227960 */  sw        $v0, %lo(hudElements)($at)
 /* D7A58 80141358 3C028015 */  lui       $v0, %hi(D_80157968)
 /* D7A5C 8014135C 24427968 */  addiu     $v0, $v0, %lo(D_80157968)
 /* D7A60 80141360 3C018015 */  lui       $at, %hi(D_8015133C)
@@ -42,8 +42,8 @@ glabel init_hud_element_list
 /* D7A8C 8014138C 8C638570 */  lw        $v1, %lo(D_80158570)($v1)
 /* D7A90 80141390 3C028015 */  lui       $v0, %hi(D_80157460)
 /* D7A94 80141394 24427460 */  addiu     $v0, $v0, %lo(D_80157460)
-/* D7A98 80141398 3C018015 */  lui       $at, %hi(gHudElementList)
-/* D7A9C 8014139C AC227960 */  sw        $v0, %lo(gHudElementList)($at)
+/* D7A98 80141398 3C018015 */  lui       $at, %hi(hudElements)
+/* D7A9C 8014139C AC227960 */  sw        $v0, %lo(hudElements)($at)
 /* D7AA0 801413A0 3C028016 */  lui       $v0, %hi(D_80158574)
 /* D7AA4 801413A4 24428574 */  addiu     $v0, $v0, %lo(D_80158574)
 /* D7AA8 801413A8 3C018015 */  lui       $at, %hi(D_8015133C)

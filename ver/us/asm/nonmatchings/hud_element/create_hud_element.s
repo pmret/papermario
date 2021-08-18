@@ -2,8 +2,8 @@
 .set noreorder # don't insert nops after branches
 
 glabel create_hud_element
-/* D7BA4 801414A4 3C038015 */  lui       $v1, %hi(gHudElementList)
-/* D7BA8 801414A8 8C637960 */  lw        $v1, %lo(gHudElementList)($v1)
+/* D7BA4 801414A4 3C038015 */  lui       $v1, %hi(hudElements)
+/* D7BA8 801414A8 8C637960 */  lw        $v1, %lo(hudElements)($v1)
 /* D7BAC 801414AC 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* D7BB0 801414B0 AFB20018 */  sw        $s2, 0x18($sp)
 /* D7BB4 801414B4 0080902D */  daddu     $s2, $a0, $zero
@@ -30,8 +30,8 @@ glabel create_hud_element
 /* D7BF8 801414F8 0C00AB39 */  jal       heap_malloc
 /* D7BFC 801414FC 24040054 */   addiu    $a0, $zero, 0x54
 /* D7C00 80141500 00112080 */  sll       $a0, $s1, 2
-/* D7C04 80141504 3C038015 */  lui       $v1, %hi(gHudElementList)
-/* D7C08 80141508 8C637960 */  lw        $v1, %lo(gHudElementList)($v1)
+/* D7C04 80141504 3C038015 */  lui       $v1, %hi(hudElements)
+/* D7C08 80141508 8C637960 */  lw        $v1, %lo(hudElements)($v1)
 /* D7C0C 8014150C 3C058015 */  lui       $a1, %hi(D_801512B4)
 /* D7C10 80141510 24A512B4 */  addiu     $a1, $a1, %lo(D_801512B4)
 /* D7C14 80141514 00832021 */  addu      $a0, $a0, $v1

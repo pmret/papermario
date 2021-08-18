@@ -5,8 +5,8 @@ glabel draw_hud_element
 /* DA998 80144298 27BDFFB8 */  addiu     $sp, $sp, -0x48
 /* DA99C 8014429C 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DA9A0 801442A0 00822024 */  and       $a0, $a0, $v0
-/* DA9A4 801442A4 3C028015 */  lui       $v0, %hi(gHudElementList)
-/* DA9A8 801442A8 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
+/* DA9A4 801442A4 3C028015 */  lui       $v0, %hi(hudElements)
+/* DA9A8 801442A8 8C427960 */  lw        $v0, %lo(hudElements)($v0)
 /* DA9AC 801442AC 00042080 */  sll       $a0, $a0, 2
 /* DA9B0 801442B0 AFBF0044 */  sw        $ra, 0x44($sp)
 /* DA9B4 801442B4 AFB60040 */  sw        $s6, 0x40($sp)

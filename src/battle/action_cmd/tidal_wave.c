@@ -14,7 +14,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
 
     battleStatus->unk_82 = 5;
     battleStatus->unk_434 = &D_802944A0;
-    
+
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
@@ -87,7 +87,7 @@ void N(free_hud_elements)(void) {
     s32 i;
 
     hud_element_free(gActionCommandStatus.hudElements[0]);
-    
+
     for (i = 1; i < 15; i++) {
         hud_element_free(gActionCommandStatus.hudElements[i]);
     }

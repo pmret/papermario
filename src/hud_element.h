@@ -126,7 +126,7 @@ typedef struct HudElement {
 s32 load_hud_element();
 s32 draw_rect_hud_element();
 s32 clear_hud_element_cache();
-s32 init_hud_element_list();
+s32 init_hudElements();
 HudElement* create_hud_element(s32* iconIndex);
 s32 update_hud_elements();
 s32 hud_element_update();
