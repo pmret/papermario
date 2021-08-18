@@ -32,7 +32,7 @@ typedef enum {
     HUD_ELEMENT_OP_ClearFlags,
     HUD_ELEMENT_OP_PlaySound,
     HUD_ELEMENT_OP_op_1B,
-} HudElementAnimation[0];
+} HudElementAnim[0];
 
 enum {
     HUD_ELEMENT_SIZE_8x8,
@@ -64,8 +64,8 @@ enum {
 
 typedef struct HudElement {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ HudElementAnimation* readPos;
-    /* 0x08 */ HudElementAnimation* startReadPos;
+    /* 0x04 */ HudElementAnim* readPos;
+    /* 0x08 */ HudElementAnim* startReadPos;
     /* 0x0C */ s32* ptrPropertyList;
     /* 0x10 */ s32* imageAddr;
     /* 0x14 */ s32* paletteAddr;
@@ -142,8 +142,8 @@ s32 draw_hud_element();
 void draw_hud_element_clipped(s32 arg0);
 void draw_hud_element_2(s32 arg0);
 void draw_icon_2(s32 iconID);
-void set_hud_element_script(s32 arg0, HudElementAnimation* animation); // TODO: rename to set_hud_element_animation
-HudElementAnimation* get_hud_element_script(s32 arg0); // TODO: rename to get_hud_element_animation
+void set_hud_element_script(s32 arg0, HudElementAnim* animation); // TODO: rename to set_hud_element_animation
+HudElementAnim* get_hud_element_script(s32 arg0); // TODO: rename to get_hud_element_animation
 HudElement* get_hud_element(s32 arg0);
 void hud_element_free(s32 arg0);
 void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY);

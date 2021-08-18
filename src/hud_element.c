@@ -4,7 +4,7 @@
 s32 D_8014EFC0[] = { 0x00000000, };
 s32 D_8014EFC4[] = { 0x00011000, };
 
-HudElementAnimation hud_element_defaultAnim = {
+HudElementAnim hud_element_defaultAnim = {
     he_End,
 };
 
@@ -81,7 +81,7 @@ void draw_icon_2(s32 iconID) {
     draw_hud_element(iconID, 2);
 }
 
-void set_hud_element_script(s32 arg0, HudElementAnimation* animation) {
+void set_hud_element_script(s32 arg0, HudElementAnim* animation) {
     HudElement* hudElement = gHudElementList[arg0 & ~0x800];
 
     if (animation == NULL) {
@@ -106,7 +106,7 @@ void set_hud_element_script(s32 arg0, HudElementAnimation* animation) {
     while (hud_element_update(hudElement) != 0) {}
 }
 
-HudElementAnimation* get_hud_element_script(s32 arg0) {
+HudElementAnim* get_hud_element_script(s32 arg0) {
     return gHudElementList[arg0 & ~0x800]->startReadPos;
 }
 
