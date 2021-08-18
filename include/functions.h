@@ -152,6 +152,7 @@ void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
 void phys_adjust_cam_on_landing();
 void phys_init_integrator_for_current_state();
+void phys_player_land();
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
