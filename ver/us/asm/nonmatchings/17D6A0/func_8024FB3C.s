@@ -750,7 +750,7 @@ glabel L802505A4_17EE84
 glabel L802505B4_17EE94
 /* 17EE94 802505B4 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EE98 802505B8 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EE9C 802505BC 0C05123D */  jal       hud_element_free
+/* 17EE9C 802505BC 0C05123D */  jal       free_hud_element
 /* 17EEA0 802505C0 00000000 */   nop
 /* 17EEA4 802505C4 3C04802A */  lui       $a0, %hi(D_8029F644)
 /* 17EEA8 802505C8 8484F644 */  lh        $a0, %lo(D_8029F644)($a0)
@@ -759,11 +759,11 @@ glabel L802505B4_17EE94
 glabel L802505D4_17EEB4
 /* 17EEB4 802505D4 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EEB8 802505D8 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EEBC 802505DC 0C05123D */  jal       hud_element_free
+/* 17EEBC 802505DC 0C05123D */  jal       free_hud_element
 /* 17EEC0 802505E0 00000000 */   nop
 /* 17EEC4 802505E4 3C04802A */  lui       $a0, %hi(D_8029F644)
 /* 17EEC8 802505E8 8484F644 */  lh        $a0, %lo(D_8029F644)($a0)
-/* 17EECC 802505EC 0C05123D */  jal       hud_element_free
+/* 17EECC 802505EC 0C05123D */  jal       free_hud_element
 /* 17EED0 802505F0 00000000 */   nop
 /* 17EED4 802505F4 3C04802A */  lui       $a0, %hi(D_8029F646)
 /* 17EED8 802505F8 8484F646 */  lh        $a0, %lo(D_8029F646)($a0)
@@ -772,20 +772,20 @@ glabel L802505D4_17EEB4
 glabel L80250604_17EEE4
 /* 17EEE4 80250604 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17EEE8 80250608 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17EEEC 8025060C 0C05123D */  jal       hud_element_free
+/* 17EEEC 8025060C 0C05123D */  jal       free_hud_element
 /* 17EEF0 80250610 00000000 */   nop
 /* 17EEF4 80250614 3C04802A */  lui       $a0, %hi(D_8029F644)
 /* 17EEF8 80250618 8484F644 */  lh        $a0, %lo(D_8029F644)($a0)
-/* 17EEFC 8025061C 0C05123D */  jal       hud_element_free
+/* 17EEFC 8025061C 0C05123D */  jal       free_hud_element
 /* 17EF00 80250620 00000000 */   nop
 /* 17EF04 80250624 3C04802A */  lui       $a0, %hi(D_8029F646)
 /* 17EF08 80250628 8484F646 */  lh        $a0, %lo(D_8029F646)($a0)
-/* 17EF0C 8025062C 0C05123D */  jal       hud_element_free
+/* 17EF0C 8025062C 0C05123D */  jal       free_hud_element
 /* 17EF10 80250630 00000000 */   nop
 /* 17EF14 80250634 3C04802A */  lui       $a0, %hi(D_8029F648)
 /* 17EF18 80250638 8484F648 */  lh        $a0, %lo(D_8029F648)($a0)
 .L8025063C:
-/* 17EF1C 8025063C 0C05123D */  jal       hud_element_free
+/* 17EF1C 8025063C 0C05123D */  jal       free_hud_element
 /* 17EF20 80250640 00000000 */   nop
 .L80250644:
 /* 17EF24 80250644 3C01802A */  lui       $at, %hi(D_8029F64A)
@@ -911,7 +911,7 @@ glabel L802507A8_17F088
 .L802507CC:
 /* 17F0AC 802507CC 3C04802A */  lui       $a0, %hi(D_8029F642)
 /* 17F0B0 802507D0 8484F642 */  lh        $a0, %lo(D_8029F642)($a0)
-/* 17F0B4 802507D4 0C05123D */  jal       hud_element_free
+/* 17F0B4 802507D4 0C05123D */  jal       free_hud_element
 /* 17F0B8 802507D8 24120001 */   addiu    $s2, $zero, 1
 .L802507DC:
 /* 17F0BC 802507DC 12400008 */  beqz      $s2, .L80250800

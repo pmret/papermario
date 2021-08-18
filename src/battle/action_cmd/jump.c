@@ -197,6 +197,6 @@ void N(draw_hud_elements)(void) {
 }
 
 void N(free_hud_elements)(void) {
-	hud_element_free(gActionCommandStatus.hudElements[0]);
-	hud_element_free(gActionCommandStatus.hudElements[1]);
+	free_hud_element(gActionCommandStatus.hudElements[0]);
+	free_hud_element(gActionCommandStatus.hudElements[1]);
 }

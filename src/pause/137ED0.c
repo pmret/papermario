@@ -26,6 +26,6 @@ void pause_tabs_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gPauseMenuTabIconIDs); i++) {
-        hud_element_free(iconIDs[i]);
+        free_hud_element(iconIDs[i]);
     }
 }

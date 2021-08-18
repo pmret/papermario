@@ -12,7 +12,7 @@ glabel pause_badges_cleanup
 .L80249774:
 /* 13CAB4 80249774 8E040000 */  lw        $a0, ($s0)
 /* 13CAB8 80249778 26100004 */  addiu     $s0, $s0, 4
-/* 13CABC 8024977C 0C05123D */  jal       hud_element_free
+/* 13CABC 8024977C 0C05123D */  jal       free_hud_element
 /* 13CAC0 80249780 26310001 */   addiu    $s1, $s1, 1
 /* 13CAC4 80249784 2A220016 */  slti      $v0, $s1, 0x16
 /* 13CAC8 80249788 1440FFFA */  bnez      $v0, .L80249774

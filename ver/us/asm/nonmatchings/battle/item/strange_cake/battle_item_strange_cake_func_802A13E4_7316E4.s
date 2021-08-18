@@ -284,7 +284,7 @@ glabel L802A1754_731A54
 .L802A17D4:
 /* 731AD4 802A17D4 8E240000 */  lw        $a0, ($s1)
 /* 731AD8 802A17D8 26310004 */  addiu     $s1, $s1, 4
-/* 731ADC 802A17DC 0C05123D */  jal       hud_element_free
+/* 731ADC 802A17DC 0C05123D */  jal       free_hud_element
 /* 731AE0 802A17E0 26100001 */   addiu    $s0, $s0, 1
 /* 731AE4 802A17E4 2A020005 */  slti      $v0, $s0, 5
 /* 731AE8 802A17E8 1440FFFA */  bnez      $v0, .L802A17D4

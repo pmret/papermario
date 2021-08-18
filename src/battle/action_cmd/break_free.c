@@ -69,8 +69,8 @@ INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A92DC_4236CC);
 INCLUDE_ASM(s32, "battle/action_cmd/break_free", func_802A96B8_423AA8);
 
 void func_802A97FC_423BEC(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[3]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[1]);
+    free_hud_element(gActionCommandStatus.hudElements[2]);
+    free_hud_element(gActionCommandStatus.hudElements[3]);
 }

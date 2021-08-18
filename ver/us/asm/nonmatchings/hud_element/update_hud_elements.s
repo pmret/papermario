@@ -25,7 +25,7 @@ glabel update_hud_elements
 /* D7D5C 8014165C 00721024 */  and       $v0, $v1, $s2
 /* D7D60 80141660 10400005 */  beqz      $v0, .L80141678
 /* D7D64 80141664 00000000 */   nop
-/* D7D68 80141668 0C05123D */  jal       hud_element_free
+/* D7D68 80141668 0C05123D */  jal       free_hud_element
 /* D7D6C 8014166C 0220202D */   daddu    $a0, $s1, $zero
 /* D7D70 80141670 080505B8 */  j         .L801416E0
 /* D7D74 80141674 26310001 */   addiu    $s1, $s1, 1

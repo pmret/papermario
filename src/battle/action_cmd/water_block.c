@@ -62,16 +62,16 @@ void func_802AA014_42B504(void) {
 }
 
 void func_802AA0D8_42B5C8(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[3]);
-    hud_element_free(gActionCommandStatus.hudElements[4]);
-    hud_element_free(gActionCommandStatus.hudElements[6]);
-    hud_element_free(gActionCommandStatus.hudElements[7]);
-    hud_element_free(gActionCommandStatus.hudElements[8]);
-    hud_element_free(gActionCommandStatus.hudElements[10]);
-    hud_element_free(gActionCommandStatus.hudElements[11]);
-    hud_element_free(gActionCommandStatus.hudElements[12]);
-    hud_element_free(gActionCommandStatus.hudElements[13]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[1]);
+    free_hud_element(gActionCommandStatus.hudElements[2]);
+    free_hud_element(gActionCommandStatus.hudElements[3]);
+    free_hud_element(gActionCommandStatus.hudElements[4]);
+    free_hud_element(gActionCommandStatus.hudElements[6]);
+    free_hud_element(gActionCommandStatus.hudElements[7]);
+    free_hud_element(gActionCommandStatus.hudElements[8]);
+    free_hud_element(gActionCommandStatus.hudElements[10]);
+    free_hud_element(gActionCommandStatus.hudElements[11]);
+    free_hud_element(gActionCommandStatus.hudElements[12]);
+    free_hud_element(gActionCommandStatus.hudElements[13]);
 }

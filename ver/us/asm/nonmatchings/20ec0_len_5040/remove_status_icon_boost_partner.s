@@ -16,7 +16,7 @@ glabel remove_status_icon_boost_partner
 /* 23308 80047F08 10400004 */  beqz      $v0, .L80047F1C
 /* 2330C 80047F0C 00000000 */   nop
 /* 23310 80047F10 8C640094 */  lw        $a0, 0x94($v1)
-/* 23314 80047F14 0C05123D */  jal       hud_element_free
+/* 23314 80047F14 0C05123D */  jal       free_hud_element
 /* 23318 80047F18 A0600090 */   sb       $zero, 0x90($v1)
 .L80047F1C:
 /* 2331C 80047F1C 8FBF0010 */  lw        $ra, 0x10($sp)

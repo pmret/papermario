@@ -15,12 +15,12 @@ glabel func_802413D0_BCFFC0
 /* BCFFE8 802413F8 8CA20000 */  lw        $v0, ($a1)
 /* BCFFEC 802413FC 8E04003C */  lw        $a0, 0x3c($s0)
 /* BCFFF0 80241400 00431024 */  and       $v0, $v0, $v1
-/* BCFFF4 80241404 0C05123D */  jal       hud_element_free
+/* BCFFF4 80241404 0C05123D */  jal       free_hud_element
 /* BCFFF8 80241408 ACA20000 */   sw       $v0, ($a1)
 /* BCFFFC 8024140C 8E040040 */  lw        $a0, 0x40($s0)
-/* BD0000 80241410 0C05123D */  jal       hud_element_free
+/* BD0000 80241410 0C05123D */  jal       free_hud_element
 /* BD0004 80241414 00000000 */   nop
-/* BD0008 80241418 0C05123D */  jal       hud_element_free
+/* BD0008 80241418 0C05123D */  jal       free_hud_element
 /* BD000C 8024141C 8E040044 */   lw       $a0, 0x44($s0)
 /* BD0010 80241420 0C048D70 */  jal       free_generic_entity
 /* BD0014 80241424 8E04002C */   lw       $a0, 0x2c($s0)

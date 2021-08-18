@@ -872,7 +872,7 @@ glabel L80136310_CCA10
 /* CCA4C 8013634C 00651824 */  and       $v1, $v1, $a1
 /* CCA50 80136350 AC430000 */  sw        $v1, ($v0)
 .L80136354:
-/* CCA54 80136354 0C05123D */  jal       hud_element_free
+/* CCA54 80136354 0C05123D */  jal       free_hud_element
 /* CCA58 80136358 00000000 */   nop
 /* CCA5C 8013635C 0C04CE4C */  jal       remove_item_entity_by_reference
 /* CCA60 80136360 0220202D */   daddu    $a0, $s1, $zero

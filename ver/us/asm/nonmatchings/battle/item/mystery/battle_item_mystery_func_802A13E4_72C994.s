@@ -315,7 +315,7 @@ glabel L802A17CC_72CD7C
 .L802A1848:
 /* 72CDF8 802A1848 8E240000 */  lw        $a0, ($s1)
 /* 72CDFC 802A184C 26310004 */  addiu     $s1, $s1, 4
-/* 72CE00 802A1850 0C05123D */  jal       hud_element_free
+/* 72CE00 802A1850 0C05123D */  jal       free_hud_element
 /* 72CE04 802A1854 26100001 */   addiu    $s0, $s0, 1
 /* 72CE08 802A1858 2A020007 */  slti      $v0, $s0, 7
 /* 72CE0C 802A185C 1440FFFA */  bnez      $v0, .L802A1848

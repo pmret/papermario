@@ -16,7 +16,7 @@ glabel remove_status_icon_surprise
 /* 23414 80048014 10400004 */  beqz      $v0, .L80048028
 /* 23418 80048018 00000000 */   nop
 /* 2341C 8004801C 8C64009C */  lw        $a0, 0x9c($v1)
-/* 23420 80048020 0C05123D */  jal       hud_element_free
+/* 23420 80048020 0C05123D */  jal       free_hud_element
 /* 23424 80048024 A0600098 */   sb       $zero, 0x98($v1)
 .L80048028:
 /* 23428 80048028 8FBF0010 */  lw        $ra, 0x10($sp)

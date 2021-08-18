@@ -148,7 +148,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        hud_element_free(D_8029FBA0);
+        free_hud_element(D_8029FBA0);
     }
 
     return ApiStatus_DONE2;
@@ -424,10 +424,10 @@ ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
 
 ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
     if (script->varTable[10] > 0) {
-        hud_element_free(D_8029FBAC);
+        free_hud_element(D_8029FBAC);
     }
     if (script->varTable[11] > 0 || script->varTable[12] > 0) {
-        hud_element_free(D_8029FBA8);
+        free_hud_element(D_8029FBA8);
     }
     return ApiStatus_DONE2;
 }

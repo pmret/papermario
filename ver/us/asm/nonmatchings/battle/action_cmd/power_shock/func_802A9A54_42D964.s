@@ -7,13 +7,13 @@ glabel func_802A9A54_42D964
 /* 42D96C 802A9A5C 3C10802A */  lui       $s0, %hi(gActionCommandStatus)
 /* 42D970 802A9A60 2610FBE0 */  addiu     $s0, $s0, %lo(gActionCommandStatus)
 /* 42D974 802A9A64 AFBF0014 */  sw        $ra, 0x14($sp)
-/* 42D978 802A9A68 0C05123D */  jal       hud_element_free
+/* 42D978 802A9A68 0C05123D */  jal       free_hud_element
 /* 42D97C 802A9A6C 8E040004 */   lw       $a0, 4($s0)
-/* 42D980 802A9A70 0C05123D */  jal       hud_element_free
+/* 42D980 802A9A70 0C05123D */  jal       free_hud_element
 /* 42D984 802A9A74 8E040008 */   lw       $a0, 8($s0)
-/* 42D988 802A9A78 0C05123D */  jal       hud_element_free
+/* 42D988 802A9A78 0C05123D */  jal       free_hud_element
 /* 42D98C 802A9A7C 8E040010 */   lw       $a0, 0x10($s0)
-/* 42D990 802A9A80 0C05123D */  jal       hud_element_free
+/* 42D990 802A9A80 0C05123D */  jal       free_hud_element
 /* 42D994 802A9A84 8E040014 */   lw       $a0, 0x14($s0)
 /* 42D998 802A9A88 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 42D99C 802A9A8C 8FB00010 */  lw        $s0, 0x10($sp)

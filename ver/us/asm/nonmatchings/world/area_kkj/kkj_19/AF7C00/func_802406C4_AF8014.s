@@ -272,9 +272,9 @@ glabel L80240A78_AF83C8
 /* AF83E4 80240A94 3C108024 */  lui       $s0, %hi(D_80246568_C8C018)
 /* AF83E8 80240A98 26106568 */  addiu     $s0, $s0, %lo(D_80246568_C8C018)
 /* AF83EC 80240A9C AEA20084 */  sw        $v0, 0x84($s5)
-/* AF83F0 80240AA0 0C05123D */  jal       hud_element_free
+/* AF83F0 80240AA0 0C05123D */  jal       free_hud_element
 /* AF83F4 80240AA4 8E040000 */   lw       $a0, ($s0)
-/* AF83F8 80240AA8 0C05123D */  jal       hud_element_free
+/* AF83F8 80240AA8 0C05123D */  jal       free_hud_element
 /* AF83FC 80240AAC 8E040004 */   lw       $a0, 4($s0)
 /* AF8400 80240AB0 3C048024 */  lui       $a0, %hi(D_80246554)
 /* AF8404 80240AB4 8C846554 */  lw        $a0, %lo(D_80246554)($a0)

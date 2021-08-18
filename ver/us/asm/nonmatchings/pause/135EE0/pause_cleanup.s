@@ -12,7 +12,7 @@ glabel pause_cleanup
 .L80244724:
 /* 137A64 80244724 8E240000 */  lw        $a0, ($s1)
 /* 137A68 80244728 26310004 */  addiu     $s1, $s1, 4
-/* 137A6C 8024472C 0C05123D */  jal       hud_element_free
+/* 137A6C 8024472C 0C05123D */  jal       free_hud_element
 /* 137A70 80244730 26100001 */   addiu    $s0, $s0, 1
 /* 137A74 80244734 2A020008 */  slti      $v0, $s0, 8
 /* 137A78 80244738 1440FFFA */  bnez      $v0, .L80244724

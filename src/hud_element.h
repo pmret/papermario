@@ -145,7 +145,7 @@ void draw_icon_2(s32 iconID);
 void set_hud_element_script(s32 arg0, HudElementAnim* animation); // TODO: rename to set_hud_element_animation
 HudElementAnim* get_hud_element_script(s32 arg0); // TODO: rename to get_hud_element_animation
 HudElement* get_hud_element(s32 arg0);
-void hud_element_free(s32 arg0);
+void free_hud_element(s32 arg0);
 void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY);
 void get_hud_element_render_pos(s32 iconIndex, s32* x, s32* y);
 s32 set_hud_element_render_depth();

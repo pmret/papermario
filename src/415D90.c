@@ -185,18 +185,18 @@ void func_802A10B8(void) {
         s32* icons1 = &D_802AD010;
         s32* icons2 = &D_802AD028;
 
-        hud_element_free(icons1[i]);
-        hud_element_free(icons2[i]);
+        free_hud_element(icons1[i]);
+        free_hud_element(icons2[i]);
     }
 
-    hud_element_free(D_802AD040);
-    hud_element_free(D_802AD044);
-    hud_element_free(D_802AD048);
-    hud_element_free(D_802AD04C);
-    hud_element_free(D_802AD05C);
-    hud_element_free(D_802AD050);
-    hud_element_free(D_802AD054);
-    hud_element_free(D_802AD058);
+    free_hud_element(D_802AD040);
+    free_hud_element(D_802AD044);
+    free_hud_element(D_802AD048);
+    free_hud_element(D_802AD04C);
+    free_hud_element(D_802AD05C);
+    free_hud_element(D_802AD050);
+    free_hud_element(D_802AD054);
+    free_hud_element(D_802AD058);
 }
 
 INCLUDE_ASM(s32, "415D90", func_802A11B0);
@@ -264,16 +264,16 @@ void func_802A27E4(void) {
     set_window_update(8, 2);
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        hud_element_free(battle_menu_moveOptionIconIDs[i]);
+        free_hud_element(battle_menu_moveOptionIconIDs[i]);
     }
 
-    hud_element_free(battle_menu_moveCursorIcon);
-    hud_element_free(battle_menu_moveUpArrowIcon);
-    hud_element_free(battle_menu_moveDownArrowIcon);
-    hud_element_free(battle_menu_moveTitleIcon);
+    free_hud_element(battle_menu_moveCursorIcon);
+    free_hud_element(battle_menu_moveUpArrowIcon);
+    free_hud_element(battle_menu_moveDownArrowIcon);
+    free_hud_element(battle_menu_moveTitleIcon);
 
     for (i = 0; i < battle_menu_moveOptionCount; i++) {
-        hud_element_free(battle_menu_moveOptionCostUnitIconIDs[i]);
+        free_hud_element(battle_menu_moveOptionCostUnitIconIDs[i]);
     }
 }
 
@@ -483,12 +483,12 @@ void func_802A472C(void) {
     set_window_update(8, 2);
 
     for (i = 0; i < D_802AD66C; i++) {
-        hud_element_free(D_802AD628[i]);
+        free_hud_element(D_802AD628[i]);
     }
 
-    hud_element_free(D_802AD618);
-    hud_element_free(D_802AD61C);
-    hud_element_free(D_802AD620);
+    free_hud_element(D_802AD618);
+    free_hud_element(D_802AD61C);
+    free_hud_element(D_802AD620);
 }
 
 void func_802A47E0(void) {

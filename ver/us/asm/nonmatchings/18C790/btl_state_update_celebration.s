@@ -1573,7 +1573,7 @@ glabel L8025F824_18E104
 glabel L8025F924_18E204
 /* 18E204 8025F924 3C04802A */  lui       $a0, %hi(D_8029FAE8)
 /* 18E208 8025F928 8C84FAE8 */  lw        $a0, %lo(D_8029FAE8)($a0)
-/* 18E20C 8025F92C 0C05123D */  jal       hud_element_free
+/* 18E20C 8025F92C 0C05123D */  jal       free_hud_element
 /* 18E210 8025F930 00000000 */   nop
 /* 18E214 8025F934 24040008 */  addiu     $a0, $zero, 8
 /* 18E218 8025F938 0C051F9F */  jal       set_window_update
@@ -1784,17 +1784,17 @@ glabel L8025FC04_18E4E4
 /* 18E4E4 8025FC04 3C10802A */  lui       $s0, %hi(D_8029FA80)
 /* 18E4E8 8025FC08 2610FA80 */  addiu     $s0, $s0, %lo(D_8029FA80)
 /* 18E4EC 8025FC0C 8E040000 */  lw        $a0, ($s0)
-/* 18E4F0 8025FC10 0C05123D */  jal       hud_element_free
+/* 18E4F0 8025FC10 0C05123D */  jal       free_hud_element
 /* 18E4F4 8025FC14 0000982D */   daddu    $s3, $zero, $zero
 /* 18E4F8 8025FC18 8E040004 */  lw        $a0, 4($s0)
-/* 18E4FC 8025FC1C 0C05123D */  jal       hud_element_free
+/* 18E4FC 8025FC1C 0C05123D */  jal       free_hud_element
 /* 18E500 8025FC20 0260902D */   daddu    $s2, $s3, $zero
 /* 18E504 8025FC24 8E04000C */  lw        $a0, 0xc($s0)
 /* 18E508 8025FC28 3C14802A */  lui       $s4, %hi(D_8029FA90)
 /* 18E50C 8025FC2C 2694FA90 */  addiu     $s4, $s4, %lo(D_8029FA90)
-/* 18E510 8025FC30 0C05123D */  jal       hud_element_free
+/* 18E510 8025FC30 0C05123D */  jal       free_hud_element
 /* 18E514 8025FC34 00000000 */   nop
-/* 18E518 8025FC38 0C05123D */  jal       hud_element_free
+/* 18E518 8025FC38 0C05123D */  jal       free_hud_element
 /* 18E51C 8025FC3C 8E040008 */   lw       $a0, 8($s0)
 .L8025FC40:
 /* 18E520 8025FC40 0000882D */  daddu     $s1, $zero, $zero
@@ -1803,7 +1803,7 @@ glabel L8025FC04_18E4E4
 .L8025FC4C:
 /* 18E52C 8025FC4C 8C440000 */  lw        $a0, ($v0)
 /* 18E530 8025FC50 26100004 */  addiu     $s0, $s0, 4
-/* 18E534 8025FC54 0C05123D */  jal       hud_element_free
+/* 18E534 8025FC54 0C05123D */  jal       free_hud_element
 /* 18E538 8025FC58 26310001 */   addiu    $s1, $s1, 1
 /* 18E53C 8025FC5C 2A220007 */  slti      $v0, $s1, 7
 /* 18E540 8025FC60 1440FFFA */  bnez      $v0, .L8025FC4C
@@ -1814,7 +1814,7 @@ glabel L8025FC04_18E4E4
 /* 18E554 8025FC74 2652001C */   addiu    $s2, $s2, 0x1c
 /* 18E558 8025FC78 3C04802A */  lui       $a0, %hi(D_8029FB48)
 /* 18E55C 8025FC7C 8C84FB48 */  lw        $a0, %lo(D_8029FB48)($a0)
-/* 18E560 8025FC80 0C05123D */  jal       hud_element_free
+/* 18E560 8025FC80 0C05123D */  jal       free_hud_element
 /* 18E564 8025FC84 00000000 */   nop
 /* 18E568 8025FC88 0000202D */  daddu     $a0, $zero, $zero
 /* 18E56C 8025FC8C 0080282D */  daddu     $a1, $a0, $zero

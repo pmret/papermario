@@ -245,9 +245,9 @@ void func_802A96F4_4231C4(void) {
 }
 
 void func_802A9894_423364(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[3]);
-    hud_element_free(gActionCommandStatus.hudElements[4]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[1]);
+    free_hud_element(gActionCommandStatus.hudElements[2]);
+    free_hud_element(gActionCommandStatus.hudElements[3]);
+    free_hud_element(gActionCommandStatus.hudElements[4]);
 }

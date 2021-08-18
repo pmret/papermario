@@ -16,7 +16,7 @@ glabel remove_status_icon_danger
 /* 2362C 8004822C 10400004 */  beqz      $v0, .L80048240
 /* 23630 80048230 00000000 */   nop
 /* 23634 80048234 8C6400AC */  lw        $a0, 0xac($v1)
-/* 23638 80048238 0C05123D */  jal       hud_element_free
+/* 23638 80048238 0C05123D */  jal       free_hud_element
 /* 2363C 8004823C A06000A8 */   sb       $zero, 0xa8($v1)
 .L80048240:
 /* 23640 80048240 8FBF0010 */  lw        $ra, 0x10($sp)

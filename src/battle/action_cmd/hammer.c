@@ -128,11 +128,11 @@ void N(draw_hud_elements)(void) {
 }
 
 void N(free_hud_elements)(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
-    hud_element_free(gActionCommandStatus.hudElements[2]);
-    hud_element_free(gActionCommandStatus.hudElements[3]);
-    hud_element_free(gActionCommandStatus.hudElements[4]);
-    hud_element_free(gActionCommandStatus.hudElements[5]);
-    hud_element_free(gActionCommandStatus.hudElements[6]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[1]);
+    free_hud_element(gActionCommandStatus.hudElements[2]);
+    free_hud_element(gActionCommandStatus.hudElements[3]);
+    free_hud_element(gActionCommandStatus.hudElements[4]);
+    free_hud_element(gActionCommandStatus.hudElements[5]);
+    free_hud_element(gActionCommandStatus.hudElements[6]);
 }

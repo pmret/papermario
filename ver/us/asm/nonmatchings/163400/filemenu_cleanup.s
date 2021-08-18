@@ -12,7 +12,7 @@ glabel filemenu_cleanup
 .L80244B1C:
 /* 16537C 80244B1C 8E240000 */  lw        $a0, ($s1)
 /* 165380 80244B20 26310004 */  addiu     $s1, $s1, 4
-/* 165384 80244B24 0C05123D */  jal       hud_element_free
+/* 165384 80244B24 0C05123D */  jal       free_hud_element
 /* 165388 80244B28 26100001 */   addiu    $s0, $s0, 1
 /* 16538C 80244B2C 1A00FFFB */  blez      $s0, .L80244B1C
 /* 165390 80244B30 00000000 */   nop

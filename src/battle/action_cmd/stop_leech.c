@@ -162,6 +162,6 @@ void func_802A94A4_425A34(void) {
 }
 
 void func_802A9544_425AD4(void) {
-    hud_element_free(gActionCommandStatus.hudElements[0]);
-    hud_element_free(gActionCommandStatus.hudElements[1]);
+    free_hud_element(gActionCommandStatus.hudElements[0]);
+    free_hud_element(gActionCommandStatus.hudElements[1]);
 }
