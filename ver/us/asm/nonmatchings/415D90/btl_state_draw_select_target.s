@@ -72,7 +72,7 @@ glabel btl_state_draw_select_target
 /* 41FB6C 802AADDC 10400008 */  beqz      $v0, .L802AAE00
 /* 41FB70 802AADE0 24140010 */   addiu    $s4, $zero, 0x10
 /* 41FB74 802AADE4 24130002 */  addiu     $s3, $zero, 2
-/* 41FB78 802AADE8 0C05122C */  jal       get_hud_element_script
+/* 41FB78 802AADE8 0C05122C */  jal       get_hud_element_anim
 /* 41FB7C 802AADEC 0200202D */   daddu    $a0, $s0, $zero
 /* 41FB80 802AADF0 3C058008 */  lui       $a1, %hi(D_80080208)
 /* 41FB84 802AADF4 24A50208 */  addiu     $a1, $a1, %lo(D_80080208)
@@ -81,14 +81,14 @@ glabel btl_state_draw_select_target
 .L802AAE00:
 /* 41FB90 802AAE00 24140005 */  addiu     $s4, $zero, 5
 /* 41FB94 802AAE04 2413FFF5 */  addiu     $s3, $zero, -0xb
-/* 41FB98 802AAE08 0C05122C */  jal       get_hud_element_script
+/* 41FB98 802AAE08 0C05122C */  jal       get_hud_element_anim
 /* 41FB9C 802AAE0C 0200202D */   daddu    $a0, $s0, $zero
 /* 41FBA0 802AAE10 3C058008 */  lui       $a1, %hi(D_8007FF20)
 /* 41FBA4 802AAE14 24A5FF20 */  addiu     $a1, $a1, %lo(D_8007FF20)
 .L802AAE18:
 /* 41FBA8 802AAE18 50450004 */  beql      $v0, $a1, .L802AAE2C
 /* 41FBAC 802AAE1C 24040001 */   addiu    $a0, $zero, 1
-/* 41FBB0 802AAE20 0C0511FF */  jal       set_hud_element_script
+/* 41FBB0 802AAE20 0C0511FF */  jal       set_hud_element_anim
 /* 41FBB4 802AAE24 0200202D */   daddu    $a0, $s0, $zero
 /* 41FBB8 802AAE28 24040001 */  addiu     $a0, $zero, 1
 .L802AAE2C:
@@ -149,7 +149,7 @@ glabel btl_state_draw_select_target
 /* 41FC8C 802AAEFC 1040000A */  beqz      $v0, .L802AAF28
 /* 41FC90 802AAF00 24140010 */   addiu    $s4, $zero, 0x10
 /* 41FC94 802AAF04 24130002 */  addiu     $s3, $zero, 2
-/* 41FC98 802AAF08 0C05122C */  jal       get_hud_element_script
+/* 41FC98 802AAF08 0C05122C */  jal       get_hud_element_anim
 /* 41FC9C 802AAF0C 0200202D */   daddu    $a0, $s0, $zero
 /* 41FCA0 802AAF10 3C098008 */  lui       $t1, %hi(D_80080208)
 /* 41FCA4 802AAF14 25290208 */  addiu     $t1, $t1, %lo(D_80080208)
@@ -160,13 +160,13 @@ glabel btl_state_draw_select_target
 .L802AAF28:
 /* 41FCB8 802AAF28 24140005 */  addiu     $s4, $zero, 5
 /* 41FCBC 802AAF2C 2413FFF5 */  addiu     $s3, $zero, -0xb
-/* 41FCC0 802AAF30 0C05122C */  jal       get_hud_element_script
+/* 41FCC0 802AAF30 0C05122C */  jal       get_hud_element_anim
 /* 41FCC4 802AAF34 0200202D */   daddu    $a0, $s0, $zero
 /* 41FCC8 802AAF38 105E0004 */  beq       $v0, $fp, .L802AAF4C
 /* 41FCCC 802AAF3C 03C0282D */   daddu    $a1, $fp, $zero
 /* 41FCD0 802AAF40 0200202D */  daddu     $a0, $s0, $zero
 .L802AAF44:
-/* 41FCD4 802AAF44 0C0511FF */  jal       set_hud_element_script
+/* 41FCD4 802AAF44 0C0511FF */  jal       set_hud_element_anim
 /* 41FCD8 802AAF48 00000000 */   nop
 .L802AAF4C:
 /* 41FCDC 802AAF4C 24040001 */  addiu     $a0, $zero, 1

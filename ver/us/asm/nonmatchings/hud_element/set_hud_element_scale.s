@@ -5,8 +5,8 @@ glabel set_hud_element_scale
 /* DB320 80144C20 2402F7FF */  addiu     $v0, $zero, -0x801
 /* DB324 80144C24 00822024 */  and       $a0, $a0, $v0
 /* DB328 80144C28 00042080 */  sll       $a0, $a0, 2
-/* DB32C 80144C2C 3C028015 */  lui       $v0, %hi(gHudElementList)
-/* DB330 80144C30 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
+/* DB32C 80144C2C 3C028015 */  lui       $v0, %hi(hudElements)
+/* DB330 80144C30 8C427960 */  lw        $v0, %lo(hudElements)($v0)
 /* DB334 80144C34 44853000 */  mtc1      $a1, $f6
 /* DB338 80144C38 00822021 */  addu      $a0, $a0, $v0
 /* DB33C 80144C3C 8C850000 */  lw        $a1, ($a0)

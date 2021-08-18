@@ -274,7 +274,7 @@ glabel btl_state_update_select_target
 /* 41F7EC 802AAA5C 3C058008 */  lui       $a1, %hi(D_8007FF20)
 /* 41F7F0 802AAA60 24A5FF20 */  addiu     $a1, $a1, %lo(D_8007FF20)
 .L802AAA64:
-/* 41F7F4 802AAA64 0C0511FF */  jal       set_hud_element_script
+/* 41F7F4 802AAA64 0C0511FF */  jal       set_hud_element_anim
 /* 41F7F8 802AAA68 00000000 */   nop
 /* 41F7FC 802AAA6C 0C05272D */  jal       sfx_play_sound
 /* 41F800 802AAA70 240400C7 */   addiu    $a0, $zero, 0xc7

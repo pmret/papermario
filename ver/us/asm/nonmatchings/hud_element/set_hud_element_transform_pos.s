@@ -6,8 +6,8 @@ glabel set_hud_element_transform_pos
 /* DB888 80145188 00822024 */  and       $a0, $a0, $v0
 /* DB88C 8014518C 00042080 */  sll       $a0, $a0, 2
 /* DB890 80145190 3C030001 */  lui       $v1, 1
-/* DB894 80145194 3C028015 */  lui       $v0, %hi(gHudElementList)
-/* DB898 80145198 8C427960 */  lw        $v0, %lo(gHudElementList)($v0)
+/* DB894 80145194 3C028015 */  lui       $v0, %hi(hudElements)
+/* DB898 80145198 8C427960 */  lw        $v0, %lo(hudElements)($v0)
 /* DB89C 8014519C 44850000 */  mtc1      $a1, $f0
 /* DB8A0 801451A0 00822021 */  addu      $a0, $a0, $v0
 /* DB8A4 801451A4 8C840000 */  lw        $a0, ($a0)

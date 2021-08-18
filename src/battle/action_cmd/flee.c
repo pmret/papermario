@@ -143,7 +143,7 @@ void func_802A9378_422E48(void) {
                 break;
             }
 
-            set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

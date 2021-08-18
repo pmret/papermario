@@ -11,6 +11,7 @@ ctx.c
 expected/
 .vscode/launch.json
 /tools/star-rod
+/tools/to_rename.txt
 /ver/current
 /ver/*/assets
 
@@ -34,6 +35,7 @@ build/
 /include/message_ids.h
 /include/sprite/
 /include/map
+/tools/permuter_settings.toml
 
 # Assets
 /assets/*

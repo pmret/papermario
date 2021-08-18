@@ -110,7 +110,7 @@ glabel L802A9354_42CA44
 /* 42CA80 802A9390 3C05802B */  lui       $a1, %hi(D_802A97C0_42CEB0)
 /* 42CA84 802A9394 00A22821 */  addu      $a1, $a1, $v0
 /* 42CA88 802A9398 8CA597C0 */  lw        $a1, %lo(D_802A97C0_42CEB0)($a1)
-/* 42CA8C 802A939C 0C0511FF */  jal       set_hud_element_script
+/* 42CA8C 802A939C 0C0511FF */  jal       set_hud_element_anim
 /* 42CA90 802A93A0 0200202D */   daddu    $a0, $s0, $zero
 /* 42CA94 802A93A4 0200202D */  daddu     $a0, $s0, $zero
 /* 42CA98 802A93A8 8223005D */  lb        $v1, 0x5d($s1)
@@ -257,7 +257,7 @@ glabel L802A93F4_42CAE4
 /* 42CC90 802A95A0 007E1821 */  addu      $v1, $v1, $fp
 /* 42CC94 802A95A4 8C500004 */  lw        $s0, 4($v0)
 /* 42CC98 802A95A8 8C650000 */  lw        $a1, ($v1)
-/* 42CC9C 802A95AC 0C0511FF */  jal       set_hud_element_script
+/* 42CC9C 802A95AC 0C0511FF */  jal       set_hud_element_anim
 /* 42CCA0 802A95B0 0200202D */   daddu    $a0, $s0, $zero
 /* 42CCA4 802A95B4 3C053F00 */  lui       $a1, 0x3f00
 /* 42CCA8 802A95B8 0C051308 */  jal       set_hud_element_scale
