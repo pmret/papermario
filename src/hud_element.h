@@ -126,7 +126,7 @@ typedef struct HudElement {
 s32 load_hud_element();
 s32 draw_rect_hud_element();
 s32 clear_hud_element_cache();
-s32 init_hudElements();
+void init_hud_element_list(void);
 
 /// Creates a new HUD element and returns its ID.
 s32 create_hud_element(const HudElementAnim* anim);

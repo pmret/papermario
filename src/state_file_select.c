@@ -278,7 +278,7 @@ void state_step_exit_language_select(void) {
                     reset_animator_list();
                     init_generic_entity_list();
                     set_hud_element_nonworld_cache(0, 0);
-                    init_hudElements();
+                    init_hud_element_list();
                     init_item_entity_list();
                     init_script_list();
                     init_npc_list();

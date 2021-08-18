@@ -26,7 +26,22 @@ s32 D_8014F0C8[] = { 0xFFF40000, 0x00000000, 0x08000800, 0x000000FF, 0x00330000,
                    };
 s32 D_8014F110[] = { 0x00000000, 0x00000000, 0x00000000, 0x00000000 };
 
-extern s32 D_801512B4;
+extern s32 D_801512B4; // no of hud elements?
+extern s32 D_80159180;
+extern HudElement* D_80156F60;
+extern HudElement* D_80157460;
+extern void* D_8015133C;
+extern void* D_80157968;
+extern void* D_801512C8;
+extern void* D_80157970;
+extern void* D_801512D0;
+extern void* D_80157F70;
+extern void* D_80158574;
+extern void* D_80158580;
+extern void* D_80158B80;
+extern void* D_80157964;
+extern void* D_80158570;
+extern void* D_80151314;
 
 INCLUDE_ASM(s32, "hud_element", load_hud_element);
 
@@ -34,7 +49,29 @@ INCLUDE_ASM(s32, "hud_element", draw_rect_hud_element);
 
 INCLUDE_ASM(s32, "hud_element", clear_hud_element_cache);
 
-INCLUDE_ASM(s32, "hud_element", init_hud_element_list);
+void init_hud_element_list(void) {
+    if (!gGameStatusPtr->isBattle) {
+        if (D_80158570 != NULL) {
+            general_heap_free(D_80158570);
+            D_80158570 = NULL;
+        }
+
+        hudElements = &D_80156F60;
+        D_8015133C = &D_80157968;
+        D_801512C8 = &D_80157970;
+        D_801512D0 = &D_80157F70;
+        D_80151314 = D_80157964;
+    } else {
+        hudElements = &D_80157460;
+        D_8015133C = &D_80158574;
+        D_801512C8 = &D_80158580;
+        D_801512D0 = &D_80158B80;
+        D_80151314 = D_80158570;
+    }
+
+    D_801512B4 = 0;
+    D_80159180 = 0;
+}
 
 INCLUDE_ASM(s32, "hud_element", func_801413F8);
 
