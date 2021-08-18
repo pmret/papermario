@@ -18,7 +18,7 @@ ASFLAGS = "-EB -G 0"
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
+BUILD_TOOLS = (ROOT / "tools" / "build").relative_to(ROOT)
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
@@ -639,7 +639,7 @@ if __name__ == "__main__":
         for version in VERSIONS:
             rom = ROOT / f"ver/{version}/baserom.z64"
 
-            print(f"configure: looking for baserom {rom}", end="")
+            print(f"configure: looking for baserom {rom.relative_to(ROOT)}", end="")
 
             if rom.exists():
                 print("...found")
