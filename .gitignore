@@ -11,7 +11,7 @@ ctx.c
 expected/
 .vscode/launch.json
 /tools/star-rod
-/tools/to_rename.txt\
+/tools/to_rename.txt
 /ver/current
 /ver/*/assets
 
