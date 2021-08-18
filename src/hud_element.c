@@ -75,7 +75,62 @@ void init_hud_element_list(void) {
 
 INCLUDE_ASM(s32, "hud_element", func_801413F8);
 
+#ifdef NON_MATCHING
+s32 create_hud_element(const HudElementAnim* anim) {
+    HudElement *hudElement;
+    s32 id;
+
+    for (id = 0; id < 320; id++) {
+        if (hudElements[id] == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(id < 320);
+
+    hudElements[id] = hudElement = heap_malloc(sizeof(HudElement));
+    D_801512B4 += 1;
+
+    ASSERT(hudElement != NULL);
+
+    hudElement->flags = 1;
+    hudElement->readPos = anim;
+    if (anim == NULL) {
+        hudElement->readPos = hud_element_defaultAnim;
+    }
+    hudElement->updateTimer = 1;
+    hudElement->drawSizePreset = -1;
+    hudElement->tileSizePreset = -1;
+    hudElement->screenPosOffset.x = 0;
+    hudElement->screenPosOffset.y = 0;
+    hudElement->worldPosOffset.x = 0;
+    hudElement->worldPosOffset.y = 0;
+    hudElement->worldPosOffset.z = 0;
+    hudElement->opacity = 255;
+    hudElement->tint.r = 255;
+    hudElement->tint.b = 255;
+    hudElement->tint.g = 255;
+    hudElement->renderPosX = 0;
+    hudElement->renderPosY = 0;
+    hudElement->ptrPropertyList = (s32*) anim; // TODO: what
+    hudElement->widthScale = X10(1.0f);
+    hudElement->heightScale = X10(1.0f);
+    hudElement->anim = hudElement->readPos;
+    hudElement->uniformScale = 1.0f;
+
+    if (gGameStatusPtr->isBattle) {
+        hudElement->flags |= 0x400;
+        id |= 0x800;
+    }
+
+    load_hud_element(hudElement, hudElement->readPos);
+    while (hud_element_update(hudElement) != 0) {}
+
+    return id;
+}
+#else
 INCLUDE_ASM(s32, "hud_element", create_hud_element, const HudElementAnim* anim);
+#endif
 
 INCLUDE_ASM(s32, "hud_element", update_hud_elements);
 
@@ -134,10 +189,10 @@ void set_hud_element_anim(s32 id, const HudElementAnim* anim) {
     hudElement->readPos = anim;
     hudElement->anim = anim;
     hudElement->ptrPropertyList = anim;
-    hudElement->screenPosOffset[0] = 0;
-    hudElement->screenPosOffset[1] = 0;
-    hudElement->worldPosOffset[0] = 0;
-    hudElement->worldPosOffset[1] = 0;
+    hudElement->screenPosOffset.x = 0;
+    hudElement->screenPosOffset.y = 0;
+    hudElement->worldPosOffset.x = 0;
+    hudElement->worldPosOffset.y = 0;
     hudElement->flags &= ~4;
     hudElement->uniformScale = 1.0f;
     hudElement->flags &= ~0x930;
@@ -227,9 +282,9 @@ void set_hud_element_alpha(s32 id, s32 opacity) {
 void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b) {
     HudElement* hudElement = hudElements[id & ~0x800];
 
-    hudElement->tint[0] = r;
-    hudElement->tint[1] = g;
-    hudElement->tint[2] = b;
+    hudElement->tint.r = r;
+    hudElement->tint.g = g;
+    hudElement->tint.b = b;
 }
 
 INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_A);

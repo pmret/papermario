@@ -75,21 +75,21 @@ typedef struct HudElement {
     /* 0x24 */ f32 unk_24;
     /* 0x28 */ f32 unkImgScale[2];
     /* 0x30 */ f32 uniformScale;
-    /* 0x34 */ s32 widthScale; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x38 */ s32 heightScale; /* X.10 fmt (divide by 1024.0 to get float) */
+    /* 0x34 */ s32 widthScale; ///< X10
+    /* 0x38 */ s32 heightScale; ///< X10
     /* 0x3C */ s16 renderPosX;
     /* 0x3E */ s16 renderPosY;
-    /* 0x40 */ u8 screenPosOffset[2];
-    /* 0x42 */ u8 worldPosOffset[3];
+    /* 0x40 */ Vec2b screenPosOffset;
+    /* 0x42 */ Vec3b worldPosOffset;
     /* 0x45 */ s8 drawSizePreset;
     /* 0x46 */ s8 tileSizePreset;
     /* 0x47 */ u8 updateTimer;
     /* 0x48 */ u8 sizeX; /* screen size? */
     /* 0x49 */ u8 sizeY; /* screen size? */
     /* 0x4A */ u8 opacity;
-    /* 0x4B */ s8 tint[3];
-    /* 0x4E */ s8 customImageSize[2];
-    /* 0x40 */ s8 customDrawSize[2];
+    /* 0x4B */ struct { s8 r; s8 g; s8 b; } tint;
+    /* 0x4E */ Vec2b customImageSize;
+    /* 0x40 */ Vec2b customDrawSize;
 } HudElement; // size = 0x54
 
 #define he_End HUD_ELEMENT_OP_End
