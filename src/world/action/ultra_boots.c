@@ -180,7 +180,6 @@ void func_802B6000_E26710(void) {
             collisionStatus->currentFloor = sp10;
         }
     }
-    return;
 }
 
 void func_802B65F8_E26D08(void) {
