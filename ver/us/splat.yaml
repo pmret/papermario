@@ -122,7 +122,7 @@ segments:
     - [0x3B890, c, os/nusys/nuSiCallBackRemove]
     - [0x3B910, c, os/nusys/nuContMgr]
     - [0x3BCC0, c, os/nusys/nuContDataLock]
-    - [0x3BD20, c, os/3bd20_len_c0]
+    - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
     - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU

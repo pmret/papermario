@@ -34,6 +34,7 @@ Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
 void render_player_model();
 s16 get_game_mode(void);
+s32 is_picking_up_item(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
