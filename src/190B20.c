@@ -1144,11 +1144,47 @@ INCLUDE_ASM(s32, "190B20", func_80263FE8);
 
 INCLUDE_ASM(s32, "190B20", func_80264084);
 
-INCLUDE_ASM(void, "190B20", add_xz_vec3f, Vec3f* vector, f32 speed, f32 angleDeg);
+void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
+    f32 newVectorZ;
+    f32 angleRad;
+    f32 sinAngleRad;
 
-INCLUDE_ASM(void, "190B20", add_xz_vec3f_copy1, Vec3f* vector, f32 speed, f32 angleDeg);
+    angleRad = angleDeg * 6.28318f;
+    angleRad /= 360.0f;
+    sinAngleRad = sin_rad(angleRad);
+    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
+    angleRad = speed * sinAngleRad;
+    vector->x = vector->x + angleRad;
+    vector->z = newVectorZ;
+}
 
-INCLUDE_ASM(void, "190B20", add_xz_vec3f_copy2, Vec3f* vector, f32 speed, f32 angleDeg);
+void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
+    f32 newVectorZ;
+    f32 angleRad;
+    f32 sinAngleRad;
+
+    angleRad = angleDeg * 6.28318f;
+    angleRad /= 360.0f;
+    sinAngleRad = sin_rad(angleRad);
+    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
+    angleRad = speed * sinAngleRad;
+    vector->x = vector->x + angleRad;
+    vector->z = newVectorZ;
+}
+
+void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
+    f32 newVectorZ;
+    f32 angleRad;
+    f32 sinAngleRad;
+
+    angleRad = angleDeg * 6.28318f;
+    angleRad /= 360.0f;
+    sinAngleRad = sin_rad(angleRad);
+    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
+    angleRad = speed * sinAngleRad;
+    vector->x = vector->x + angleRad;
+    vector->z = newVectorZ;
+}
 
 INCLUDE_ASM(void, "190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
@@ -1471,9 +1507,38 @@ INCLUDE_ASM(s32, "190B20", func_80266F60);
 
 INCLUDE_ASM(s32, "190B20", func_80266F8C);
 
-INCLUDE_ASM(s32, "190B20", func_80266FD8);
+void func_80266FD8(ActorPart* part, s32 arg1) {
+    DecorationTable* decorationTable;
 
-INCLUDE_ASM(s32, "190B20", func_80267018);
+    if ((part->idleAnimations != NULL) && !(part->flags & 2)) {
+        decorationTable = part->decorationTable;
+        if (decorationTable->unk_764 != arg1) {
+            decorationTable->unk_764 = arg1;
+            decorationTable->unk_766 = 0;
+            decorationTable->unk_765 = 1;
+        }
+    }
+}
+
+void func_80267018(Actor* actor, s32 arg1) {
+    ActorPart* actorPartsTable;
+    ActorPart* actorNextPart;
+    ActorPart* actorPartTemp;
+    s32 flags;
+
+    actorPartsTable = actor->partsTable;
+    if (actorPartsTable != NULL) {
+        do {
+            flags = actorPartsTable->flags;
+            if (!(flags & 0x100001) && (actorPartsTable->decorationTable != NULL) && !(flags & 2) && (actorPartsTable->idleAnimations != NULL)) {
+                func_80266FD8(actorPartsTable, arg1);
+            }
+            actorPartTemp = actorPartsTable->nextPart;
+            actorNextPart = actorPartTemp;
+            actorPartsTable = actorNextPart;
+        } while (actorNextPart != NULL);
+    }
+}
 
 INCLUDE_ASM(s32, "190B20", func_8026709C);
 
@@ -1640,7 +1705,14 @@ INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad);
 //     gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 // }
 
-INCLUDE_ASM(s32, "190B20", btl_draw_prim_quad);
+void btl_draw_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    u16 new_var;
+    u16 new_var2;
+
+    new_var = (arg4 + arg6) & 0xFFFF;
+    new_var2 = (arg5 + arg7) & 0xFFFF;
+    btl_appendGfx_prim_quad(arg0 & 0xFF, arg1 & 0xFF, arg2 & 0xFF, arg3 & 0xFF, arg4 & 0xFFFF, arg5 & 0xFFFF, new_var, new_var2);
+}
 
 INCLUDE_ASM(s32, "190B20", reset_all_actor_sounds);
 
