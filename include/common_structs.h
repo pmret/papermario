@@ -1914,7 +1914,8 @@ typedef struct PlayerStatus {
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D0 */ char unk_D0[4];
+    /* 0x0D4 */ f32 unk_D4;
     /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
