@@ -1145,45 +1145,30 @@ INCLUDE_ASM(s32, "190B20", func_80263FE8);
 INCLUDE_ASM(s32, "190B20", func_80264084);
 
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 newVectorZ;
-    f32 angleRad;
-    f32 sinAngleRad;
+    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 sinAngleRad = sin_rad(angleRad);
+    f32 cosAngleRad = cos_rad(angleRad);
 
-    angleRad = angleDeg * 6.28318f;
-    angleRad /= 360.0f;
-    sinAngleRad = sin_rad(angleRad);
-    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
-    angleRad = speed * sinAngleRad;
-    vector->x = vector->x + angleRad;
-    vector->z = newVectorZ;
+    vector->x += speed * sinAngleRad;
+    vector->z += -speed * cosAngleRad;
 }
 
 void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 newVectorZ;
-    f32 angleRad;
-    f32 sinAngleRad;
+    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 sinAngleRad = sin_rad(angleRad);
+    f32 cosAngleRad = cos_rad(angleRad);
 
-    angleRad = angleDeg * 6.28318f;
-    angleRad /= 360.0f;
-    sinAngleRad = sin_rad(angleRad);
-    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
-    angleRad = speed * sinAngleRad;
-    vector->x = vector->x + angleRad;
-    vector->z = newVectorZ;
+    vector->x += speed * sinAngleRad;
+    vector->z += -speed * cosAngleRad;
 }
 
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg) {
-    f32 newVectorZ;
-    f32 angleRad;
-    f32 sinAngleRad;
+    f32 angleRad = angleDeg * TAU / 360.0f;
+    f32 sinAngleRad = sin_rad(angleRad);
+    f32 cosAngleRad = cos_rad(angleRad);
 
-    angleRad = angleDeg * 6.28318f;
-    angleRad /= 360.0f;
-    sinAngleRad = sin_rad(angleRad);
-    newVectorZ = vector->z + (-speed * cos_rad(angleRad));
-    angleRad = speed * sinAngleRad;
-    vector->x = vector->x + angleRad;
-    vector->z = newVectorZ;
+    vector->x += speed * sinAngleRad;
+    vector->z += -speed * cosAngleRad;
 }
 
 INCLUDE_ASM(void, "190B20", play_movement_dust_effects, s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
@@ -1521,23 +1506,14 @@ void func_80266FD8(ActorPart* part, s32 arg1) {
 }
 
 void func_80267018(Actor* actor, s32 arg1) {
-    ActorPart* actorPartsTable;
-    ActorPart* actorNextPart;
-    ActorPart* actorPartTemp;
-    s32 flags;
+    ActorPart* actorPart = &actor->partsTable[0];
 
-    actorPartsTable = actor->partsTable;
-    if (actorPartsTable != NULL) {
-        do {
-            flags = actorPartsTable->flags;
-            if (!(flags & 0x100001) && (actorPartsTable->decorationTable != NULL) && !(flags & 2) && (actorPartsTable->idleAnimations != NULL)) {
-                func_80266FD8(actorPartsTable, arg1);
+        while (actorPart != NULL) {
+            if (!(actorPart->flags & 0x100001) && (actorPart->decorationTable != NULL) && !(actorPart->flags & 2) && (actorPart->idleAnimations != NULL)) {
+                func_80266FD8(actorPart, arg1);
             }
-            actorPartTemp = actorPartsTable->nextPart;
-            actorNextPart = actorPartTemp;
-            actorPartsTable = actorNextPart;
-        } while (actorNextPart != NULL);
-    }
+            actorPart = actorPart->nextPart;
+        }
 }
 
 INCLUDE_ASM(s32, "190B20", func_8026709C);
@@ -1682,7 +1658,7 @@ void remove_player_buffs(PlayerBuff buffs) {
 
 INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
 
-INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad);
+INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 // extern s32 D_80293970;
 
 // void btl_appendGfx_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, s16 arg7) {
@@ -1706,12 +1682,10 @@ INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad);
 // }
 
 void btl_draw_prim_quad(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    u16 new_var;
-    u16 new_var2;
+    u16 new_var = arg4 + arg6;
+    u16 new_var2 = arg5 + arg7;
 
-    new_var = (arg4 + arg6) & 0xFFFF;
-    new_var2 = (arg5 + arg7) & 0xFFFF;
-    btl_appendGfx_prim_quad(arg0 & 0xFF, arg1 & 0xFF, arg2 & 0xFF, arg3 & 0xFF, arg4 & 0xFFFF, arg5 & 0xFFFF, new_var, new_var2);
+    btl_appendGfx_prim_quad(arg0, arg1, arg2, arg3, arg4, arg5, new_var, new_var2);
 }
 
 INCLUDE_ASM(s32, "190B20", reset_all_actor_sounds);
