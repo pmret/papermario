@@ -53,7 +53,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     gcc = f"{BUILD_TOOLS}/{os_dir}/gcc"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
+    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
                 "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
     cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/{os_dir}/ {extra_cflags}"
@@ -166,7 +166,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
-        f.write(f"compiler_command = \"{gcc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -D SCRIPT(...)={{}} -fforce-addr\"\n")
+        f.write(f"compiler_command = \"{gcc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
         f.write(
 """
