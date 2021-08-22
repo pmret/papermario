@@ -2,6 +2,7 @@
 
 from typing import List, Dict, Set, Union
 from pathlib import Path
+import subprocess
 import sys
 import ninja_syntax
 from glob import glob
@@ -27,8 +28,6 @@ def rm_recursive(path: Path):
             path.unlink()
 
 def exec_shell(command: List[str]) -> str:
-    import subprocess
-
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
@@ -49,8 +48,15 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
+    ccache = "ccache "
+
+    try:
+        subprocess.call(["ccache"])
+    except FileNotFoundError:
+        ccache = ""
+
     cross = "mips-linux-gnu-"
-    gcc = f"{BUILD_TOOLS}/{os_dir}/gcc"
+    gcc = f"{ccache}{BUILD_TOOLS}/{os_dir}/gcc"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
@@ -82,7 +88,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {gcc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && ccache {gcc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
