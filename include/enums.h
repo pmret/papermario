@@ -1576,7 +1576,6 @@ enum NpcFlags {
     NPC_FLAG_40                = 0x00000040,
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
-    NPC_FLAG_208               = 0x00000208,
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
     NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
     NPC_FLAG_1000              = 0x00001000,

@@ -20,6 +20,8 @@ options:
   asset_path: assets/us
   build_path: ver/us/build
   cache_path: ver/us/.splat_cache
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
 asset_stack:
@@ -120,7 +122,7 @@ segments:
     - [0x3B890, c, os/nusys/nuSiCallBackRemove]
     - [0x3B910, c, os/nusys/nuContMgr]
     - [0x3BCC0, c, os/nusys/nuContDataLock]
-    - [0x3BD20, c, os/3bd20_len_c0]
+    - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
     - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU

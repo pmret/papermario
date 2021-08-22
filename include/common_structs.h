@@ -176,7 +176,14 @@ typedef struct Npc {
     /* 0x0C4 */ s32* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
-    /* 0x308 */ char unk_308[16];
+    /* 0x308 */ s16 unk_308;
+    /* 0x30A */ s16 unk_30A;
+    /* 0x30C */ s16 unk_30C;
+    /* 0x30E */ s16 unk_30E;
+    /* 0x310 */ s16 unk_310;
+    /* 0x312 */ s16 unk_312;
+    /* 0x314 */ s16 unk_314;
+    /* 0x316 */ s16 unk_316;
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
     /* 0x324 */ struct EffectInstance* decorations[2];
