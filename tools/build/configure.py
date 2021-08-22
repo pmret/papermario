@@ -13,8 +13,6 @@ DO_SHA1_CHECK = True
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
             "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-ASFLAGS = "-EB -G0"
-
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
@@ -57,10 +55,9 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cross = "mips-linux-gnu-"
 
     gcc = f"{BUILD_TOOLS}/{os_dir}/gcc"
-    cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
-    nu64as = f"{BUILD_TOOLS}/{os_dir}/as"
+    compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    cflags = f"-O2 -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -E -B {BUILD_TOOLS}/{os_dir}/" + extra_cflags
+    cflags = f"-c -O2 -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces -B {BUILD_TOOLS}/{os_dir}/" + extra_cflags
 
     ninja.variable("python", sys.executable)
 
@@ -86,14 +83,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} | {gcc} -fpreprocessed {ASFLAGS} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} > $out.i && {gcc} -o $out {cflags} $cflags $out.i'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {gcc} -fpreprocessed {ASFLAGS} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {compile_script} | {iconv} > $out.i && {gcc} -o $out {cflags} $cflags $out.i'",
         depfile="$out.d",
         deps="gcc",
     )
