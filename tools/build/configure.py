@@ -165,19 +165,19 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
 
-#     with Path("tools/permuter_settings.toml").open("w") as f:
-#         f.write(f"compiler_command = \"{cpp} {CPPFLAGS} {cppflags} -DPERMUTER | {iconv} | {cc1} {cflags} -o - | {nu64as} {ASFLAGS}\"\n")
-#         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
-#         f.write(
-# """
-# [preserve_macros]
-# "gs?[DS]P.*" = "void"
-# OVERRIDE_FLAG_CHECK = "int"
-# OS_K0_TO_PHYSICAL = "int"
-# "G_.*" = "int"
-# "TEXEL.*" = "int"
-# PRIMITIVE = "int"
-# """)
+    with Path("tools/permuter_settings.toml").open("w") as f:
+        f.write(f"compiler_command = \"{gcc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -D SCRIPT(...)={{}} -fforce-addr\"\n")
+        f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(
+"""
+[preserve_macros]
+"gs?[DS]P.*" = "void"
+OVERRIDE_FLAG_CHECK = "int"
+OS_K0_TO_PHYSICAL = "int"
+"G_.*" = "int"
+"TEXEL.*" = "int"
+PRIMITIVE = "int"
+""")
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
