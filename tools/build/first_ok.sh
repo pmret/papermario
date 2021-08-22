@@ -1,4 +1,4 @@
-if [ -f "first_ok" ]; then
+if [ -f "tools/build/first_ok" ]; then
     exit
 fi
 touch tools/build/first_ok
