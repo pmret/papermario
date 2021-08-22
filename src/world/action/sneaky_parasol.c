@@ -71,15 +71,15 @@ void func_802B6120_E2A7D0(void) {
         tempUnk_1C = &parasolStruct->unk_1C;
         playerStatus->decorationList = 0;
         playerStatus->unk_C2 = 0;
-        playerStatus->currentSpeed = 0.0f;
+        playerStatus->currentSpeed = 0;
         playerStatus->unk_8C = 0;
-        phi_f4 = -2.0f;
+        phi_f4 = -2;
 
-        if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-            phi_f4 = 2.0f;
+        if (playerStatus->spriteFacingAngle >= 90 && playerStatus->spriteFacingAngle < 270) {
+            phi_f4 = 2;
         }
         *tempUnk_1C = phi_f4;
-        if ((playerStatus->animFlags & 0x2000) == 0) {
+        if (!(playerStatus->animFlags & 0x2000)) {
             playerStatus->framesOnGround = 0x14;
             playerStatus->fallState = 0;
             parasolStruct->unk_08 = 0xF;
@@ -98,7 +98,7 @@ void func_802B6120_E2A7D0(void) {
 
     switch (playerStatus->fallState) {
         case 0:
-            if (playerStatus->unk_90 == 0.0f) {
+            if (playerStatus->unk_90 == 0) {
                 if (peach_disguise_check_overlaps() < 0) {
                     suggest_player_anim_clearUnkFlag(0xC0024);
                     sfx_play_sound_at_player(0x92, 0);
@@ -140,15 +140,15 @@ void func_802B6120_E2A7D0(void) {
         case 4:
             temp_f20 = playerStatus->spriteFacingAngle;
             func_802B6CF0_E2B3A0();
-            playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90.0f);
+            playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
             if (playerStatus->framesOnGround == 0) {
                 phi_v0 = 0;
-                if (parasolStruct->unk_1C > 0.0f) {
-                    if (temp_f20 < 270.0f && playerStatus->spriteFacingAngle >= 270.0f) {
+                if (parasolStruct->unk_1C > 0) {
+                    if (temp_f20 < 270 && playerStatus->spriteFacingAngle >= 270) {
                         phi_v0 = 1;
                     }
                 }
-                if (parasolStruct->unk_1C < 0.0f && temp_f20 > 270.0f && playerStatus->spriteFacingAngle <= 270.0f) {
+                if (parasolStruct->unk_1C < 0 && temp_f20 > 270 && playerStatus->spriteFacingAngle <= 270) {
                     phi_v0 = 1;
                 }
                 if (phi_v0 != 0) {
@@ -177,28 +177,28 @@ void func_802B6120_E2A7D0(void) {
         case 7:
             if (parasolStruct->unk_1C > 0.0f) {
                 parasolStruct->unk_20 -= 2.35;
-                if (parasolStruct->unk_20 <= 0.0f) {
-                    parasolStruct->unk_20 = 0.0f;
+                if (parasolStruct->unk_20 <= 0) {
+                    parasolStruct->unk_20 = 0;
                     playerStatus->framesOnGround = 0xA;
                     playerStatus->fallState++;
-                    playerStatus->spriteFacingAngle = 180.0f;
+                    playerStatus->spriteFacingAngle = 180;
                     temp_v0 = get_npc_by_index(D_8010C96C);
                     temp_v0->isFacingAway = 1;
-                    temp_f0_3 = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90.0f);
+                    temp_f0_3 = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
                     temp_v0_4 = temp_f0_3;
                     temp_v0->yaw = temp_f0_3;
                     temp_v0->yawCamOffset = temp_v0_4;
                 }
             } else {
                 parasolStruct->unk_20 += 2.35;
-                if (parasolStruct->unk_20 >= 0.0f) {
-                    parasolStruct->unk_20 = 0.0f;
+                if (parasolStruct->unk_20 >= 0) {
+                    parasolStruct->unk_20 = 0;
                     playerStatus->framesOnGround = 0xA;
-                    playerStatus->spriteFacingAngle = 0.0f;
+                    playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     temp_v0 = get_npc_by_index(D_8010C96C);
                     temp_v0->isFacingAway = 0;
-                    temp_f0_3 = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90.0f);
+                    temp_f0_3 = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
                     temp_v0_4 = temp_f0_3;
                     temp_v0->yaw = temp_f0_3;
                     temp_v0->yawCamOffset = temp_v0_4;
@@ -208,7 +208,7 @@ void func_802B6120_E2A7D0(void) {
             temp_f0_3 = clamp_angle(playerStatus->spriteFacingAngle + parasolStruct->unk_20);
             playerStatus->spriteFacingAngle = temp_f0_3;
             phi_f12_2 = cam->currentYaw - temp_f0_3;
-            playerStatus->targetYaw = clamp_angle(phi_f12_2 - 90.0f);
+            playerStatus->targetYaw = clamp_angle(phi_f12_2 - 90);
             break;
         case 8:
             if (--playerStatus->framesOnGround == 0) {
@@ -225,20 +225,20 @@ void func_802B6120_E2A7D0(void) {
                 playerStatus->fallState++;
             }
             func_802B6CF0_E2B3A0();
-            playerStatus->targetYaw = clamp_angle(cam->currentYaw - playerStatus->spriteFacingAngle - 90.0f);
+            playerStatus->targetYaw = clamp_angle(cam->currentYaw - playerStatus->spriteFacingAngle - 90);
             break;
         case 21:
             temp_f20_2 = playerStatus->spriteFacingAngle;
             func_802B6CF0_E2B3A0();
-            playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90.0f);
+            playerStatus->targetYaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
             if (playerStatus->framesOnGround == 0) {
                 phi_v0_2 = 0;
                 if (parasolStruct->unk_1C > 0) {
-                    if (temp_f20_2 < 270.0f && playerStatus->spriteFacingAngle >= 270.0f) {
+                    if (temp_f20_2 < 270 && playerStatus->spriteFacingAngle >= 270) {
                         phi_v0_2 = 1;
                     }
                 }
-                if (parasolStruct->unk_1C < 0.0f && temp_f20_2 > 270.0f && playerStatus->spriteFacingAngle <= 270.0f) {
+                if (parasolStruct->unk_1C < 0 && temp_f20_2 > 270 && playerStatus->spriteFacingAngle <= 270) {
                     phi_v0_2 = 1;
                 }
                 if (phi_v0_2 != 0) {
@@ -263,28 +263,28 @@ void func_802B6120_E2A7D0(void) {
             func_802B6CF0_E2B3A0();
             break;
         case 23:
-            if (parasolStruct->unk_1C > 0.0f) {
+            if (parasolStruct->unk_1C > 0) {
                 parasolStruct->unk_20 -= 2.35;
-                if (parasolStruct->unk_20 <= 0.0f) {
-                    parasolStruct->unk_20 = 0.0f;
+                if (parasolStruct->unk_20 <= 0) {
+                    parasolStruct->unk_20 = 0;
                     playerStatus->framesOnGround = 0xA;
                     playerStatus->fallState++;
-                    playerStatus->spriteFacingAngle = 180.0f;
+                    playerStatus->spriteFacingAngle = 180;
                     D_8010C95C = 1;
-                    phi_f12 = (cam->currentYaw - 180.0f) - 90.0f;
-                    temp_f0_3 = clamp_angle((cam->currentYaw - 180.0f) - 90.0f);
+                    phi_f12 = (cam->currentYaw - 180) - 90;
+                    temp_f0_3 = clamp_angle((cam->currentYaw - 180) - 90);
                     D_800F7B40 = temp_f0_3;
                     playerStatus->currentYaw = temp_f0_3;
                 }
             } else {
                 parasolStruct->unk_20 += 2.35;
-                if (parasolStruct->unk_20 >= 0.0f) {
-                    parasolStruct->unk_20 = 0.0f;
+                if (parasolStruct->unk_20 >= 0) {
+                    parasolStruct->unk_20 = 0;
                     playerStatus->framesOnGround = 0xA;
-                    playerStatus->spriteFacingAngle = 0.0f;
+                    playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     D_8010C95C = 0;
-                    phi_f12 = (cam->currentYaw - 0.0f) - 90.0f;
+                    phi_f12 = (cam->currentYaw - 0) - 90;
                     temp_f0_3 = clamp_angle(phi_f12);
                     D_800F7B40 = temp_f0_3;
                     playerStatus->currentYaw = temp_f0_3;
@@ -292,7 +292,7 @@ void func_802B6120_E2A7D0(void) {
             }
             temp_f0_3 = clamp_angle(playerStatus->spriteFacingAngle + parasolStruct->unk_20);
             playerStatus->spriteFacingAngle = temp_f0_3;
-            playerStatus->targetYaw = clamp_angle(cam->currentYaw - temp_f0_3 - 90.0f);
+            playerStatus->targetYaw = clamp_angle(cam->currentYaw - temp_f0_3 - 90);
             break;
         case 24:
             if (--playerStatus->framesOnGround == 0) {
@@ -322,21 +322,21 @@ void func_802B6120_E2A7D0(void) {
 
     if (parasolStruct->unk_08 > 0) {
         if (--parasolStruct->unk_08 == 0xA) {
-            if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-                phi_f20 = ((cam->currentYaw - 270.0f) * TAU) / 360.0f;
-                phi_f22 = 46.0f;
+            if (playerStatus->spriteFacingAngle >= 90 && playerStatus->spriteFacingAngle < 270) {
+                phi_f20 = ((cam->currentYaw - 270) * TAU) / 360;
+                phi_f22 = 46;
             } else {
-                phi_f20 = ((cam->currentYaw - 90.0f) * TAU) / 360.0f;
-                phi_f22 = 30.0f;
+                phi_f20 = ((cam->currentYaw - 90) * TAU) / 360;
+                phi_f22 = 30;
             }
             parasolStruct->position.x = playerStatus->position.x + (phi_f22 * sin_rad(phi_f20));
             parasolStruct->position.z = playerStatus->position.z - (phi_f22 * cos_rad(phi_f20));
-            parasolStruct->position.y = playerStatus->position.y - 20.0f;
+            parasolStruct->position.y = playerStatus->position.y - 20;
         }
         if (parasolStruct->unk_08 < 0xB && parasolStruct->unk_08 & 1) {
-            playFX_11(3, parasolStruct->position.x - 8.0f, parasolStruct->position.y + 50.0f, parasolStruct->position.z, 2.0f);
+            playFX_11(3, parasolStruct->position.x - 8, parasolStruct->position.y + 50, parasolStruct->position.z, 2);
             temp_f22 = parasolStruct->position.x;
-            tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90.0f) * TAU) / 360.0f;
+            tempX = (((cam->currentYaw + playerStatus->spriteFacingAngle) - 90) * TAU) / 360;
 
             phi_f20 = tempX;
             tempX = temp_f22 + (sin_rad(phi_f20) * 10.0);
@@ -348,7 +348,7 @@ void func_802B6120_E2A7D0(void) {
     } else if (parasolStruct->unk_08 == 0) {
         parasolStruct->unk_08 = -1;
         if (parasolStruct->npc != NULL) {
-            playFX_84(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1.0f, parasolStruct->npc->yawCamOffset);
+            playFX_84(playerStatus->unk_0D - 1, parasolStruct->npc->pos.x, parasolStruct->npc->pos.y, parasolStruct->npc->pos.z, 1, parasolStruct->npc->yawCamOffset);
         }
     }
     if (parasolStruct->unk_0C != 0) {
@@ -357,7 +357,7 @@ void func_802B6120_E2A7D0(void) {
                 sfx_play_sound_at_player(0xFE, 0);
             }
             if ((parasolStruct->unk_0C & 3) == 0) {
-                playFX_22(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50.0f, 50.0f, 0x28, 0x1E);
+                playFX_22(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
             }
         }
         parasolStruct->unk_0C += -1;
