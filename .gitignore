@@ -36,6 +36,7 @@ build/
 /include/sprite/
 /include/map
 /tools/permuter_settings.toml
+/tools/build/first_ok
 
 # Assets
 /assets/*

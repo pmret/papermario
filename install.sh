@@ -8,6 +8,10 @@ fi
 
 uname=`uname`
 if [[ "$uname" == "Darwin" ]]; then
+    echo "Downloading gcc/binutils for macOS"
+    curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
+    curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/mac.tar.gz" | tar zx -C tools/build/cc/gcc
+
     echo "Installing packages for macOS"
 
     if ! command -v brew >/dev/null 2>&1; then
@@ -27,6 +31,10 @@ if [[ "$uname" == "Darwin" ]]; then
     echo "Done"
     exit
 fi
+
+echo "Downloading gcc/binutils for Linux"
+curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
+curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
 
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then

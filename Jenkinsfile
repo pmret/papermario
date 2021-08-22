@@ -8,6 +8,8 @@ pipeline {
             steps {
                 sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
                 sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
+                sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
+                sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh './configure'
             }
         }

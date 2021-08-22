@@ -71,6 +71,14 @@ class N64SegC(N64SegCodeSubsegment):
             asm_out_dir = options.get_asm_path() / "nonmatchings" / self.dir
             asm_out_dir.mkdir(parents=True, exist_ok=True)
 
+            is_new_c_file = False
+
+            c_path = self.out_path()
+            if c_path:
+                if not os.path.exists(c_path) and options.get("create_new_c_files", True):
+                    self.create_c_file(self.funcs_text, asm_out_dir, c_path)
+                    is_new_c_file = True
+
             for func in self.funcs_text:
                 func_name = self.parent.get_symbol(func, type="func", local_only=True).name
 
@@ -78,13 +86,8 @@ class N64SegC(N64SegCodeSubsegment):
                     if func_name not in self.defined_funcs:
                         self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
                 else:
-                    if func_name in self.global_asm_funcs:
+                    if func_name in self.global_asm_funcs or is_new_c_file:
                         self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
-
-            c_path = self.out_path()
-            if c_path:
-                if not os.path.exists(c_path) and options.get("create_new_c_files", True):
-                    self.create_c_file(self.funcs_text, asm_out_dir, c_path)
 
     def get_gcc_inc_header(self):
         ret = []

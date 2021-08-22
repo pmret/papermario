@@ -94,4 +94,8 @@
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
 
+#ifdef PERMUTER
+#define SCRIPT(...) {}
+#endif
+
 #endif

@@ -2,6 +2,7 @@
 
 from typing import List, Dict, Set, Union
 from pathlib import Path
+import subprocess
 import sys
 import ninja_syntax
 from glob import glob
@@ -9,11 +10,7 @@ from glob import glob
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
-
-CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
-            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
-CFLAGS = "-G0 -O2 -quiet -fno-common -Wuninitialized -Wmissing-braces"
-ASFLAGS = "-G0"
+DO_FIRST_OK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
@@ -32,34 +29,34 @@ def rm_recursive(path: Path):
             path.unlink()
 
 def exec_shell(command: List[str]) -> str:
-    import subprocess
-
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str):
     # platform-specific
     if sys.platform  == "darwin":
-        os_dir = "mac"
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
     elif sys.platform == "linux":
-        from os import uname
-
-        if uname()[4] == "aarch64":
-            os_dir = "arm"
-        else:
-            os_dir = "linux"
-
         iconv = "iconv --from UTF-8 --to SHIFT-JIS"
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
+    ccache = ""
+
+    try:
+        subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except FileNotFoundError:
+        ccache = ""
+
     cross = "mips-linux-gnu-"
+    cc = f"{ccache}{BUILD_TOOLS}/cc/gcc/gcc"
+    cxx = f"{ccache}{BUILD_TOOLS}/cc/gcc/g++"
+    compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
-    nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
+    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
+                "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = CFLAGS + " " + extra_cflags
+    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -75,7 +72,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("sha1sum",
         description="check $in",
-        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+        command="sha1sum -c $in && touch $out" + ("&& bash tools/build/first_ok.sh" if DO_FIRST_OK else "") if DO_SHA1_CHECK else "touch $out",
     )
 
     ninja.rule("cpp",
@@ -84,15 +81,22 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     )
 
     ninja.rule("cc",
-        description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
-        description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc $in $cflags",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cxx",
+        description="cxx $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cxx} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -169,7 +173,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
-        f.write(f"compiler_command = \"{cpp} {CPPFLAGS} {cppflags} -DPERMUTER | {iconv} | {cc1} {cflags} -o - | {nu64as} {ASFLAGS}\"\n")
+        f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
         f.write(
 """
@@ -268,7 +272,8 @@ class Configure:
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
-        import segtypes.n64.data # Doesn't get imported on jp for some odd reason (should maybe be a * import?)
+        import segtypes.n64.data
+        import segtypes.n64.Yay0
 
         assert self.linker_entries is not None
 
@@ -300,7 +305,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl"]:
+                elif task in ["cc", "cc_dsl", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -338,6 +343,8 @@ class Configure:
 
                 # check for dsl
                 task = "cc"
+                if entry.src_paths[0].suffixes[-1] == ".cpp":
+                    task = "cxx"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
                     if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:

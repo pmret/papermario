@@ -967,7 +967,7 @@ typedef struct {
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData
 // Search for "struct N(temp)" for examples
-typedef struct {
+typedef struct EffectInstanceDataThing {
     char unk_00[0x4];
     f32 unk_04;
     f32 unk_08;
