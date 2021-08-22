@@ -8,6 +8,9 @@ fi
 
 uname=`uname`
 if [[ "$uname" == "Darwin" ]]; then
+    echo "Downloading gcc-papermario for macOS"
+    curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/mac.tar.gz" | tar x -C tools/build
+
     echo "Installing packages for macOS"
 
     if ! command -v brew >/dev/null 2>&1; then
@@ -27,6 +30,9 @@ if [[ "$uname" == "Darwin" ]]; then
     echo "Done"
     exit
 fi
+
+echo "Downloading gcc-papermario for Linux"
+curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar x -C tools/build
 
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then

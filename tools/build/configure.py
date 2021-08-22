@@ -34,16 +34,8 @@ def exec_shell(command: List[str]) -> str:
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str):
     # platform-specific
     if sys.platform  == "darwin":
-        os_dir = "mac"
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
     elif sys.platform == "linux":
-        from os import uname
-
-        if uname()[4] == "aarch64":
-            os_dir = "arm"
-        else:
-            os_dir = "linux"
-
         iconv = "iconv --from UTF-8 --to SHIFT-JIS"
     else:
         raise Exception(f"unsupported platform {sys.platform}")
@@ -56,14 +48,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         ccache = ""
 
     cross = "mips-linux-gnu-"
-    cc = f"{ccache}{BUILD_TOOLS}/{os_dir}/gcc"
-    cxx = f"{ccache}{BUILD_TOOLS}/{os_dir}/g++"
+    cc = f"{ccache}{BUILD_TOOLS}/gcc"
+    cxx = f"{ccache}{BUILD_TOOLS}/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
                 "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/{os_dir}/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
