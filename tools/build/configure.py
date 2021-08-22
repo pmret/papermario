@@ -51,7 +51,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ccache = "ccache "
 
     try:
-        subprocess.call(["ccache"])
+        subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except FileNotFoundError:
         ccache = ""
 
