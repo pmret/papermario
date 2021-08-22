@@ -32,7 +32,7 @@ if [[ "$uname" == "Darwin" ]]; then
 fi
 
 echo "Downloading gcc-papermario for Linux"
-curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar x -C tools/build
+curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build
 
 # Debian and derivatives (apt)
 if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then
