@@ -14,7 +14,7 @@ typedef struct SneakyParasolUnk {
 
 extern SneakyParasolUnk D_802B6E80;
 
-Npc *func_802B6000_E2A6B0(void) {
+Npc* func_802B6000_E2A6B0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 angle;
     Npc* ret = NULL;
