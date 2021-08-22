@@ -53,8 +53,3 @@ crash.xml
 
 /tools/Yay0compress
 /tools/n64crc
-/tools/build/cc1
-/tools/build/cc1plus
-/tools/build/cpp
-/tools/build/gcc
-/tools/build/g++

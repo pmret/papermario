@@ -40,7 +40,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
-    ccache = "ccache "
+    ccache = ""
 
     try:
         subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -48,14 +48,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         ccache = ""
 
     cross = "mips-linux-gnu-"
-    cc = f"{ccache}{BUILD_TOOLS}/gcc"
-    cxx = f"{ccache}{BUILD_TOOLS}/g++"
+    cc = f"{ccache}{BUILD_TOOLS}/cc/gcc/gcc"
+    cxx = f"{ccache}{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
                 "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
