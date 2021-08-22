@@ -6,12 +6,11 @@ import subprocess
 import sys
 import ninja_syntax
 from glob import glob
-import os
 
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
-DO_FIRST_OK = os.get_terminal_size().columns >= 80
+DO_FIRST_OK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
