@@ -14,12 +14,11 @@ typedef struct SneakyParasolUnk {
 
 extern SneakyParasolUnk D_802B6E80;
 
-Npc *func_802B6000_E2A6B0(void)
-{
-  PlayerStatus *playerStatus = &gPlayerStatus;
-  f32 angle;
-  Npc *ret = 0;
-    do {
+Npc *func_802B6000_E2A6B0(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    f32 angle;
+    Npc* ret = NULL;
+    do {                // TODO fix this do...while
         if (playerStatus->unk_0D != 0) {
             if (gGameStatusPtr->peachFlags & 8) {
                 gGameStatusPtr->peachFlags &= ~0x8;
@@ -66,7 +65,7 @@ void func_802B6120_E2A7D0(void) {
 
     if (playerStatus->flags < 0) {
         playerStatus->flags &= ~0x80000000;
-        mem_clear(&D_802B6E80, 0x24);
+        mem_clear(&D_802B6E80, sizeof(D_802B6E80));
         disable_player_static_collisions();
         tempUnk_1C = &parasolStruct->unk_1C;
         playerStatus->decorationList = 0;
@@ -80,13 +79,13 @@ void func_802B6120_E2A7D0(void) {
         }
         *tempUnk_1C = phi_f4;
         if (!(playerStatus->animFlags & 0x2000)) {
-            playerStatus->framesOnGround = 0x14;
+            playerStatus->framesOnGround = 20;
             playerStatus->fallState = 0;
             parasolStruct->unk_08 = 0xF;
             parasolStruct->npc = func_802B6000_E2A6B0();
         } else {
             playerStatus->fallState = 0x14;
-            playerStatus->framesOnGround = 0x28;
+            playerStatus->framesOnGround = 40;
             parasolStruct->unk_04 = 1;
             parasolStruct->unk_0C = 0xC;
             temp_v0 = get_npc_by_index(D_8010C96C);
@@ -106,7 +105,7 @@ void func_802B6120_E2A7D0(void) {
                 } else {
                     suggest_player_anim_clearUnkFlag(0xC0027);
                     playerStatus->fallState = 0x32;
-                    playerStatus->framesOnGround = 0xA;
+                    playerStatus->framesOnGround = 10;
                     parasolStruct->unk_08 = 0;
                 }
             }
@@ -123,7 +122,7 @@ void func_802B6120_E2A7D0(void) {
             break;
         case 2:
             if (playerStatus->unk_BC != 0) {
-                playerStatus->framesOnGround = 0xC;
+                playerStatus->framesOnGround = 12;
                 playerStatus->flags |= 0x100000;
                 playerStatus->fallState++;
                 sfx_play_sound_at_player(0xFD, 0);
@@ -131,7 +130,7 @@ void func_802B6120_E2A7D0(void) {
             break;
         case 3:
             if (--playerStatus->framesOnGround == 0) {
-                playerStatus->framesOnGround = 0xA;
+                playerStatus->framesOnGround = 10;
                 parasolStruct->unk_0C = 0xA;
                 playerStatus->fallState++;
             }
@@ -179,7 +178,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 -= 2.35;
                 if (parasolStruct->unk_20 <= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 0xA;
+                    playerStatus->framesOnGround = 10;
                     playerStatus->fallState++;
                     playerStatus->spriteFacingAngle = 180;
                     temp_v0 = get_npc_by_index(D_8010C96C);
@@ -193,7 +192,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 += 2.35;
                 if (parasolStruct->unk_20 >= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 0xA;
+                    playerStatus->framesOnGround = 10;
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     temp_v0 = get_npc_by_index(D_8010C96C);
@@ -267,7 +266,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 -= 2.35;
                 if (parasolStruct->unk_20 <= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 0xA;
+                    playerStatus->framesOnGround = 10;
                     playerStatus->fallState++;
                     playerStatus->spriteFacingAngle = 180;
                     D_8010C95C = 1;
@@ -280,7 +279,7 @@ void func_802B6120_E2A7D0(void) {
                 parasolStruct->unk_20 += 2.35;
                 if (parasolStruct->unk_20 >= 0) {
                     parasolStruct->unk_20 = 0;
-                    playerStatus->framesOnGround = 0xA;
+                    playerStatus->framesOnGround = 10;
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->fallState++;
                     D_8010C95C = 0;
