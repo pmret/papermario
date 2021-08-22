@@ -359,7 +359,7 @@ void func_802B6120_E2A7D0(void) {
                 playFX_22(4, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 50, 50, 0x28, 0x1E);
             }
         }
-        parasolStruct->unk_0C += -1;
+        parasolStruct->unk_0C--;
     }
 }
 
