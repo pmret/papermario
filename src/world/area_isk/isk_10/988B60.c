@@ -11,7 +11,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_8024003C_988B9C);
 /*
-ApiStatus N(func_8024003C_988B9C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024003C_988B9C)(Evt* script, s32 isInitialCall) {
     switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -35,7 +35,7 @@ INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_802401CC_988D2C);
 
 INCLUDE_ASM(s32, "world/area_isk/isk_10/988B60", func_80240600_989160);
 /*
-ApiStatus N(func_80240600_989160)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240600_989160)(Evt *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

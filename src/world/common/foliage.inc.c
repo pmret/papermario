@@ -26,7 +26,7 @@ typedef struct SearchBushConfig {
     FoliageModelList* bush;
     FoliageDropList* drops;
     FoliageVectorList* vectors;
-    Script* callback;
+    EvtSource* callback;
 } SearchBushConfig;
 
 typedef struct ShakeTreeConfig {
@@ -34,7 +34,7 @@ typedef struct ShakeTreeConfig {
     FoliageModelList* trunk;
     FoliageDropList* drops;
     FoliageVectorList* vectors;
-    Script* callback;
+    EvtSource* callback;
 } ShakeTreeConfig;
 
 void N(foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 zAmount) {
@@ -49,7 +49,7 @@ void N(foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 zAmoun
 /// @apiparam float dx
 /// @apiparam float dy
 /// @apiparam float dz
-ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(TransformFoliage)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelListIndex = get_model_list_index_from_tree_index(get_variable(script, *args++));
     f32 scale = get_float_variable(script, *args++);
@@ -78,7 +78,7 @@ ApiStatus N(TransformFoliage)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-Script N(searchBush) = SCRIPT({
+EvtSource N(searchBush) = SCRIPT({
     buf_use SI_VAR(0);
     buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);
     GetPlayerPos(SI_VAR(5), SI_VAR(15), SI_VAR(7));
@@ -140,7 +140,7 @@ Script N(searchBush) = SCRIPT({
     }
 });
 
-Script N(shakeTree) = SCRIPT({
+EvtSource N(shakeTree) = SCRIPT({
     timescale 2.0;
     buf_use SI_VAR(0);
     buf_read SI_VAR(1) SI_VAR(2) SI_VAR(3) SI_VAR(4);

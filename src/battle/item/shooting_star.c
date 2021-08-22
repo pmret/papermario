@@ -3,7 +3,7 @@
 
 static HudElement* D_802A1EE0;
 
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -42,7 +42,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -55,7 +55,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_71D9AC)(Evt* script, s32 isInitialCall) {
     s32 c8 = 200;
     s32 temp_s1 = 100 + rand_int(c8);
     s32 temp_s0 = rand_int(40);
@@ -97,10 +97,10 @@ ApiStatus N(func_802A123C_71D9AC)(ScriptInstance* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(ApiStatus, "battle/item/shooting_star", battle_item_shooting_star_func_802A123C_71D9AC,
-            ScriptInstance* script, s32 isInitialCall);
+            Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -111,7 +111,7 @@ ApiStatus N(func_802A1388_71DAF8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1444_71DBB4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1444_71DBB4)(Evt* script, s32 isInitialCall) {
     s32 ret;
 
     if (isInitialCall) {
@@ -127,7 +127,7 @@ ApiStatus N(func_802A1444_71DBB4)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A14D4_71DC44)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A14D4_71DC44)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 10;
     }
@@ -142,7 +142,7 @@ ApiStatus N(func_802A14D4_71DC44)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-Script N(UseItemWithEffect) = SCRIPT({
+EvtSource N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseBattleCamPreset(69);
         sleep 10;
@@ -189,7 +189,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     }
 });
 
-Script N(UseItem) = SCRIPT({
+EvtSource N(UseItem) = SCRIPT({
     UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
@@ -212,7 +212,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+EvtSource N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 0);
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
@@ -223,7 +223,7 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
-Script N(EatItem) = SCRIPT({
+EvtSource N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -234,7 +234,7 @@ Script N(EatItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(DrinkItem) = SCRIPT({
+EvtSource N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -245,7 +245,7 @@ Script N(DrinkItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_SHOOTING_STAR;
     await N(UseItemWithEffect);
     spawn {

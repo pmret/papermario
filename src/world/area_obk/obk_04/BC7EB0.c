@@ -22,7 +22,7 @@ INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240910_BC8770);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240940_BC87A0);
 /*
-ApiStatus N(func_80240940_BC87A0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240940_BC87A0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80243A10_BCB870) == NULL) {

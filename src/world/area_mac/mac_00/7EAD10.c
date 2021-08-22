@@ -23,7 +23,7 @@ static char* N(exit_str_5) = "\0\0\0\0";
 
 #include "world/common/UnkTexturePanFunc2.inc.c"
 
-ApiStatus func_802405EC_7EB2FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802405EC_7EB2FC(Evt* script, s32 isInitialCall) {
     f32 x;
     f32 y;
     f32 z;
@@ -32,6 +32,6 @@ ApiStatus func_802405EC_7EB2FC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240624_7EB334(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240624_7EB334(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }

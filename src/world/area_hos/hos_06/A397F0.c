@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240310_A397F0);
 /*
-ApiStatus N(func_80240310_A397F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240310_A397F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80242C08_A3C0E8) == NULL) {
@@ -33,7 +33,7 @@ ApiStatus N(func_80240310_A397F0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240654_A39B34);
 /*
-ApiStatus N(func_80240654_A39B34)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240654_A39B34)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -52,7 +52,7 @@ ApiStatus N(func_80240654_A39B34)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406A8_A39B88);
 /*
-ApiStatus N(func_802406A8_A39B88)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802406A8_A39B88)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80242C70_A3C150) = get_variable(script, *args);
@@ -63,7 +63,7 @@ ApiStatus N(func_802406A8_A39B88)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802406E0_A39BC0);
 /*
-ApiStatus N(func_802406E0_A39BC0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802406E0_A39BC0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -89,7 +89,7 @@ ApiStatus N(func_802406E0_A39BC0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_802409F8_A39ED8);
 /*
-ApiStatus N(func_802409F8_A39ED8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802409F8_A39ED8)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
     D_8024E1B4 = npc->currentAnim;
@@ -100,7 +100,7 @@ ApiStatus N(func_802409F8_A39ED8)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_hos/hos_06/A397F0", func_80240A3C_A39F1C);
 /*
-ApiStatus N(func_80240A3C_A39F1C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240A3C_A39F1C)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }

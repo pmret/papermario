@@ -5,12 +5,12 @@
 
 #include "clouds.inc.c"
 
-Script N(beforeBattle_80220A28) = SCRIPT({
+EvtSource N(beforeBattle_80220A28) = SCRIPT({
     SetSpriteShading(-1);
     EnableModel(27, 0);
 });
 
-Script N(afterBattle_80220A5C) = SCRIPT({
+EvtSource N(afterBattle_80220A5C) = SCRIPT({
 
 });
 

@@ -5,7 +5,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_7957F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1518_7957F8(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -24,7 +24,7 @@ ApiStatus func_802A1518_7957F8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802A15B4_795894(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A15B4_795894(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 254;
     }
@@ -42,7 +42,7 @@ ApiStatus func_802A15B4_795894(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-ApiStatus func_802A1628_795908(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1628_795908(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
     s32 flags = targetActor->flags;
 

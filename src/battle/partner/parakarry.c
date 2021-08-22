@@ -3,7 +3,7 @@
 
 INCLUDE_ASM(s32, "battle/partner/parakarry", func_80238000_6FFD80);
 
-ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238C88_700A08(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var0 = 0;
 
@@ -23,7 +23,7 @@ ApiStatus func_80238C88_700A08(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238CE0_700A60(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238CE0_700A60(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -64,7 +64,7 @@ INCLUDE_ASM(s32, "battle/partner/parakarry", func_80238E24_700BA4);
 
 INCLUDE_ASM(s32, "battle/partner/parakarry", func_802390B4_700E34);
 
-ApiStatus func_802397C8_701548(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802397C8_701548(Evt* script, s32 isInitialCall) {
     script->varTable[15] = ((script->varTable[0] * 100) / 2499) + 2;
 
     return ApiStatus_DONE2;

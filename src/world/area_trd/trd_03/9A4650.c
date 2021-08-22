@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "trd_02";
 static char* N(exit_str_1) = "trd_04";
 
-ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240000_9A4650(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     u32 stickX;
 
@@ -19,7 +19,7 @@ ApiStatus func_80240000_9A4650(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetFrameCounter(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetFrameCounter(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gGameStatusPtr->frameCounter);
     return ApiStatus_DONE2;
 }

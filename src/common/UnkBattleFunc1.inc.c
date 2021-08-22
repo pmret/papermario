@@ -1,6 +1,6 @@
 #include "battle/battle.h"
 
-ApiStatus N(UnkBattleFunc1)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkBattleFunc1)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);

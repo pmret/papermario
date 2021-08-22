@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_20/8ED440", func_80241620_8ED440);
 /*
-ApiStatus N(func_80241620_8ED440)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241620_8ED440)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_8024A908_8F6728) == NULL) {

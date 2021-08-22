@@ -225,18 +225,18 @@ class CmdCtx():
 
 class RootCtx(CmdCtx):
     def break_opcode(self, meta):
-        return "ScriptOpcode_END"
+        return "EVT_OP_END"
 
 class IfCtx(CmdCtx):
     pass
 
 class MatchCtx(CmdCtx):
     def break_opcode(self, meta):
-        return "ScriptOpcode_BREAK_MATCH"
+        return "EVT_OP_BREAK_MATCH"
 
 class LoopCtx(CmdCtx):
     def break_opcode(self, meta):
-        return "ScriptOpcode_BREAK_LOOP"
+        return "EVT_OP_BREAK_LOOP"
 
 class LabelCtx(CmdCtx):
     def __init__(self, label):
@@ -350,7 +350,7 @@ class Compile(Transformer):
 
     def call(self, tree):
         # TODO: type checking etc
-        return Cmd("ScriptOpcode_CALL", *tree.children, meta=tree.meta)
+        return Cmd("EVT_OP_CALL", *tree.children, meta=tree.meta)
 
     def if_stmt(self, tree):
         if len(tree.children) == 4: # no else
@@ -358,7 +358,7 @@ class Compile(Transformer):
             for cmd in block:
                 if isinstance(cmd, BaseCmd):
                     cmd.add_context(IfCtx())
-            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("ScriptOpcode_END_IF") ]
+            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("EVT_OP_END_IF") ]
         else:
             a, op, b, block, else_block = tree.children
             for cmd in block:
@@ -367,16 +367,16 @@ class Compile(Transformer):
             for cmd in else_block:
                 if isinstance(cmd, BaseCmd):
                     cmd.add_context(IfCtx())
-            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("ScriptOpcode_ELSE"), *else_block, Cmd("ScriptOpcode_END_IF") ]
+            return [ Cmd(op["if"], a, b, meta=tree.meta), *block, Cmd("EVT_OP_ELSE"), *else_block, Cmd("EVT_OP_END_IF") ]
 
-    def cond_op_eq(self, tree): return { "if": "ScriptOpcode_IF_EQ", "case": "ScriptOpcode_CASE_EQ" }
-    def cond_op_ne(self, tree): return { "if": "ScriptOpcode_IF_NE", "case": "ScriptOpcode_CASE_NE" }
-    def cond_op_lt(self, tree): return { "if": "ScriptOpcode_IF_LT", "case": "ScriptOpcode_CASE_LT" }
-    def cond_op_gt(self, tree): return { "if": "ScriptOpcode_IF_GT", "case": "ScriptOpcode_CASE_GT" }
-    def cond_op_le(self, tree): return { "if": "ScriptOpcode_IF_LE", "case": "ScriptOpcode_CASE_LE" }
-    def cond_op_ge(self, tree): return { "if": "ScriptOpcode_IF_GE", "case": "ScriptOpcode_CASE_GE" }
-    def cond_op_flag(self, tree): return { "__op__": "&", "if": "ScriptOpcode_IF_FLAG", "case": "ScriptOpcode_CASE_FLAG" }
-    def cond_op_not_flag(self, tree): return { "__op__": "!&", "if": "ScriptOpcode_IF_NOT_FLAG" }
+    def cond_op_eq(self, tree): return { "if": "EVT_OP_IF_EQ", "case": "EVT_OP_CASE_EQ" }
+    def cond_op_ne(self, tree): return { "if": "EVT_OP_IF_NE", "case": "EVT_OP_CASE_NE" }
+    def cond_op_lt(self, tree): return { "if": "EVT_OP_IF_LT", "case": "EVT_OP_CASE_LT" }
+    def cond_op_gt(self, tree): return { "if": "EVT_OP_IF_GT", "case": "EVT_OP_CASE_GT" }
+    def cond_op_le(self, tree): return { "if": "EVT_OP_IF_LE", "case": "EVT_OP_CASE_LE" }
+    def cond_op_ge(self, tree): return { "if": "EVT_OP_IF_GE", "case": "EVT_OP_CASE_GE" }
+    def cond_op_flag(self, tree): return { "__op__": "&", "if": "EVT_OP_IF_FLAG", "case": "EVT_OP_CASE_FLAG" }
+    def cond_op_not_flag(self, tree): return { "__op__": "!&", "if": "EVT_OP_IF_NOT_FLAG" }
 
     def match_stmt(self, tree):
         expr = tree.children[0]
@@ -397,13 +397,13 @@ class Compile(Transformer):
                 raise Exception(f"uncompiled match case: {cmd}")
 
         return [
-            Cmd("ScriptOpcode_MATCH", expr, meta=tree.meta),
+            Cmd("EVT_OP_MATCH", expr, meta=tree.meta),
             *cases,
-            Cmd("ScriptOpcode_END_MATCH"),
+            Cmd("EVT_OP_END_MATCH"),
         ]
     def match_const_stmt(self, tree):
         commands = self.match_stmt(tree)
-        commands[0].opcode = "ScriptOpcode_MATCH_CONST"
+        commands[0].opcode = "EVT_OP_MATCH_CONST"
         return commands
     def match_cases(self, tree):
         if len(tree.children) == 1:
@@ -412,7 +412,7 @@ class Compile(Transformer):
             return [tree.children[0], *tree.children[1]]
 
     def case_else(self, tree):
-        return [Cmd("ScriptOpcode_CASE_ELSE"), *tree.children[0]]
+        return [Cmd("EVT_OP_CASE_ELSE"), *tree.children[0]]
     def case_op(self, tree):
         if len(tree.children) == 4:
             op, expr, multi_case, block = tree.children
@@ -420,7 +420,7 @@ class Compile(Transformer):
             if not "case" in op:
                 raise CompileError(f"operation `{opcodes['__op__']}' not supported in match cases", tree.meta)
 
-            return [Cmd(op["case"], expr), *multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
+            return [Cmd(op["case"], expr), *multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
         else:
             op, expr, block = tree.children
 
@@ -431,16 +431,16 @@ class Compile(Transformer):
     def case_range(self, tree):
         if len(tree.children) == 4:
             a, b, multi_case, block = tree.children
-            return [Cmd("ScriptOpcode_CASE_RANGE", a, b), *multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
+            return [Cmd("EVT_OP_CASE_RANGE", a, b), *multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
         else:
             a, b, block = tree.children
-            return [Cmd("ScriptOpcode_CASE_RANGE", a, b), *block]
+            return [Cmd("EVT_OP_CASE_RANGE", a, b), *block]
     def case_multi(self, tree):
         multi_case, block = tree.children
-        return [*multi_case, *block, Cmd("ScriptOpcode_END_CASE_MULTI")]
+        return [*multi_case, *block, Cmd("EVT_OP_END_CASE_MULTI")]
 
     def multi_case(self, tree):
-        return [Cmd("ScriptOpcode_CASE_MULTI_OR_EQ", expr) for expr in tree.children]
+        return [Cmd("EVT_OP_CASE_MULTI_OR_EQ", expr) for expr in tree.children]
 
     def loop_stmt(self, tree):
         expr = tree.children.pop(0) if len(tree.children) > 1 else 0
@@ -450,28 +450,28 @@ class Compile(Transformer):
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(LoopCtx())
 
-        return [ Cmd("ScriptOpcode_LOOP", expr, meta=tree.meta), *block, Cmd("ScriptOpcode_END_LOOP") ]
+        return [ Cmd("EVT_OP_LOOP", expr, meta=tree.meta), *block, Cmd("EVT_OP_END_LOOP") ]
 
     def return_stmt(self, tree):
-        return Cmd("ScriptOpcode_RETURN", meta=tree.meta)
+        return Cmd("EVT_OP_RETURN", meta=tree.meta)
 
     def break_stmt(self, tree):
         return BreakCmd(meta=tree.meta)
 
     def break_match_stmt(self, tree):
-        return Cmd("ScriptOpcode_BREAK_MATCH", meta=tree.meta)
+        return Cmd("EVT_OP_BREAK_MATCH", meta=tree.meta)
 
     def break_loop_stmt(self, tree):
-        return Cmd("ScriptOpcode_BREAK_LOOP", meta=tree.meta)
+        return Cmd("EVT_OP_BREAK_LOOP", meta=tree.meta)
 
     def set_priority(self, tree):
-        return Cmd("ScriptOpcode_SET_PRIORITY", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SET_PRIORITY", tree.children[0], meta=tree.meta)
 
     def set_timescale(self, tree):
-        return Cmd("ScriptOpcode_SET_TIMESCALE", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SET_TIMESCALE", tree.children[0], meta=tree.meta)
 
     def set_group(self, tree):
-        return Cmd("ScriptOpcode_SET_GROUP", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SET_GROUP", tree.children[0], meta=tree.meta)
 
     def suspend_stmt(self, tree):
         commands = []
@@ -497,49 +497,49 @@ class Compile(Transformer):
     def control_type_group(self, tree):
         return {
             "__control_type__": "group",
-            "suspend": "ScriptOpcode_SUSPEND_GROUP",
-            "resume": "ScriptOpcode_RESUME_GROUP",
+            "suspend": "EVT_OP_SUSPEND_GROUP",
+            "resume": "EVT_OP_RESUME_GROUP",
         }
     def control_type_others(self, tree):
         return {
             "__control_type__": "others",
-            "suspend": "ScriptOpcode_SUSPEND_OTHERS",
-            "resume": "ScriptOpcode_RESUME_OTHERS",
+            "suspend": "EVT_OP_SUSPEND_OTHERS",
+            "resume": "EVT_OP_RESUME_OTHERS",
         }
     def control_type_script(self, tree):
         return {
             "__control_type__": "script",
-            "suspend": "ScriptOpcode_SUSPEND_SCRIPT",
-            "resume": "ScriptOpcode_RESUME_SCRIPT",
-            "kill": "ScriptOpcode_KILL_SCRIPT",
+            "suspend": "EVT_OP_SUSPEND_SCRIPT",
+            "resume": "EVT_OP_RESUME_SCRIPT",
+            "kill": "EVT_OP_KILL_SCRIPT",
         }
 
     def sleep_stmt(self, tree):
-        return Cmd("ScriptOpcode_SLEEP_FRAMES", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SLEEP_FRAMES", tree.children[0], meta=tree.meta)
     def sleep_secs_stmt(self, tree):
-        return Cmd("ScriptOpcode_SLEEP_SECS", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SLEEP_SECS", tree.children[0], meta=tree.meta)
 
     def bind_stmt(self, tree):
         script, trigger, target = tree.children
-        return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, 0, meta=tree.meta)
+        return Cmd("EVT_OP_BIND_TRIGGER", script, trigger, target, 1, 0, meta=tree.meta)
     def bind_set_stmt(self, tree):
         ret, script, trigger, target = tree.children
-        return Cmd("ScriptOpcode_BIND_TRIGGER", script, trigger, target, 1, ret, meta=tree.meta)
+        return Cmd("EVT_OP_BIND_TRIGGER", script, trigger, target, 1, ret, meta=tree.meta)
     def bind_padlock_stmt(self, tree):
         script, trigger, target, items = tree.children
-        return Cmd("ScriptOpcode_BIND_PADLOCK", script, trigger, target, items, 0, 1, meta=tree.meta)
+        return Cmd("EVT_OP_BIND_PADLOCK", script, trigger, target, items, 0, 1, meta=tree.meta)
     def unbind_stmt(self, tree):
-        return Cmd("ScriptOpcode_UNBIND", meta=tree.meta)
+        return Cmd("EVT_OP_UNBIND", meta=tree.meta)
 
     def spawn_stmt(self, tree):
-        return Cmd("ScriptOpcode_SPAWN_SCRIPT", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_SPAWN_SCRIPT", tree.children[0], meta=tree.meta)
     def spawn_set_stmt(self, tree):
         lhs, script = tree.children
-        return Cmd("ScriptOpcode_SPAWN_GET_ID", script, lhs, meta=tree.meta)
+        return Cmd("EVT_OP_SPAWN_GET_ID", script, lhs, meta=tree.meta)
     def await_stmt(self, tree):
-        return Cmd("ScriptOpcode_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_AWAIT_SCRIPT", tree.children[0], meta=tree.meta)
     def jump_stmt(self, tree):
-        return Cmd("ScriptOpcode_JUMP", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_JUMP", tree.children[0], meta=tree.meta)
 
     def set_stmt(self, tree):
         lhs, opcodes, rhs = tree.children
@@ -573,50 +573,50 @@ class Compile(Transformer):
     def set_op_eq(self, tree):
         return {
             "__op__": "=",
-            "int": "ScriptOpcode_SET",
-            "const": "ScriptOpcode_SET_CONST",
-            "float": "ScriptOpcode_SET_F",
+            "int": "EVT_OP_SET",
+            "const": "EVT_OP_SET_CONST",
+            "float": "EVT_OP_SET_F",
         }
     def set_op_add(self, tree):
         return {
             "__op__": "+",
-            "int": "ScriptOpcode_ADD",
-            "float": "ScriptOpcode_ADD_F",
+            "int": "EVT_OP_ADD",
+            "float": "EVT_OP_ADD_F",
         }
     def set_op_sub(self, tree):
         return {
             "__op__": "-",
-            "int": "ScriptOpcode_SUB",
-            "float": "ScriptOpcode_SUB_F",
+            "int": "EVT_OP_SUB",
+            "float": "EVT_OP_SUB_F",
         }
     def set_op_mul(self, tree):
         return {
             "__op__": "*",
-            "int": "ScriptOpcode_MUL",
-            "float": "ScriptOpcode_MUL_F",
+            "int": "EVT_OP_MUL",
+            "float": "EVT_OP_MUL_F",
         }
     def set_op_div(self, tree):
         return {
             "__op__": "/",
-            "int": "ScriptOpcode_DIV",
-            "float": "ScriptOpcode_DIV_F",
+            "int": "EVT_OP_DIV",
+            "float": "EVT_OP_DIV_F",
         }
     def set_op_mod(self, tree):
         return {
             "__op__": "%",
-            "int": "ScriptOpcode_MOD",
+            "int": "EVT_OP_MOD",
         }
     def set_op_and(self, tree):
         return {
             "__op__": "&",
-            "int": "ScriptOpcode_AND",
-            "const": "ScriptOpcode_AND_CONST",
+            "int": "EVT_OP_AND",
+            "const": "EVT_OP_AND_CONST",
         }
     def set_op_or(self, tree):
         return {
             "__op__": "|",
-            "int": "ScriptOpcode_OR",
-            "const": "ScriptOpcode_OR_CONST",
+            "int": "EVT_OP_OR",
+            "const": "EVT_OP_OR_CONST",
         }
 
     def variable(self, tree):
@@ -629,7 +629,7 @@ class Compile(Transformer):
     def label_decl(self, tree):
         if len(tree.children) == 1:
             label = tree.children[0]
-            return Cmd("ScriptOpcode_LABEL", label, meta=tree.meta)
+            return Cmd("EVT_OP_LABEL", label, meta=tree.meta)
         else:
             label, cmd_or_block = tree.children
 
@@ -641,12 +641,12 @@ class Compile(Transformer):
                     cmd.add_context(LabelCtx(label))
 
             return [
-                Cmd("ScriptOpcode_LABEL", label, meta=tree.meta),
+                Cmd("EVT_OP_LABEL", label, meta=tree.meta),
                 *cmd_or_block
             ]
     def label_goto(self, tree):
         label = tree.children[0]
-        return Cmd("ScriptOpcode_GOTO", label, meta=tree.meta)
+        return Cmd("EVT_OP_GOTO", label, meta=tree.meta)
     def label(self, tree):
         name = tree.children[0]
         if name in self.alloc.labels:
@@ -664,71 +664,71 @@ class Compile(Transformer):
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(SpawnCtx())
-        return [ Cmd("ScriptOpcode_SPAWN_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_SPAWN_THREAD") ]
+        return [ Cmd("EVT_OP_SPAWN_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_SPAWN_THREAD") ]
     def parallel_block_stmt(self, tree):
         block, = tree.children
         for cmd in block:
             if isinstance(cmd, BaseCmd):
                 cmd.add_context(ParallelCtx())
-        return [ Cmd("ScriptOpcode_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("ScriptOpcode_END_PARALLEL_THREAD") ]
+        return [ Cmd("EVT_OP_PARALLEL_THREAD", meta=tree.meta), *block, Cmd("EVT_OP_END_PARALLEL_THREAD") ]
 
     def entity_id(self, tree):
         expr, = tree.children
         return f"({expr} + 0x4000)"
 
     def buf_use(self, tree):
-        return Cmd("ScriptOpcode_USE_BUFFER", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_BUFFER", tree.children[0], meta=tree.meta)
     def buf_read(self, tree):
         args = tree.children
         cmds = []
 
         while args:
             if len(args) >= 4:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_4", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 3:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_3", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 2:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2", args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_2", args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 1:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1", args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_1", args.pop(0), meta=tree.meta))
             else:
                 break
 
         return cmds
     def buf_peek(self, tree):
-        return Cmd("ScriptOpcode_BUFFER_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
+        return Cmd("EVT_OP_BUFFER_PEEK", tree.children[0], tree.children[1], meta=tree.meta)
 
     def buf_usef(self, tree):
-        return Cmd("ScriptOpcode_USE_BUFFER_F", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_BUFFER_F", tree.children[0], meta=tree.meta)
     def buf_readf(self, tree):
         args = tree.children
         cmds = []
 
         while args:
             if len(args) >= 4:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_4_F", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_4_F", args.pop(0), args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 3:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_3_F", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_3_F", args.pop(0), args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 2:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_2_F", args.pop(0), args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_2_F", args.pop(0), args.pop(0), meta=tree.meta))
             elif len(args) == 1:
-                cmds.append(Cmd("ScriptOpcode_BUFFER_READ_1_F", args.pop(0), meta=tree.meta))
+                cmds.append(Cmd("EVT_OP_BUFFER_READ_1_F", args.pop(0), meta=tree.meta))
             else:
                 break
 
         return cmds
     def buf_peekf(self, tree):
-        return Cmd("ScriptOpcode_BUFFER_PEEK_F", tree.children[0], tree.children[1], meta=tree.meta)
+        return Cmd("EVT_OP_BUFFER_PEEK_F", tree.children[0], tree.children[1], meta=tree.meta)
 
     def use_array(self, tree):
-        return Cmd("ScriptOpcode_USE_ARRAY", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_ARRAY", tree.children[0], meta=tree.meta)
     def use_flags(self, tree):
-        return Cmd("ScriptOpcode_USE_FLAGS", tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_USE_FLAGS", tree.children[0], meta=tree.meta)
     def new_array(self, tree):
-        return Cmd("ScriptOpcode_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
+        return Cmd("EVT_OP_NEW_ARRAY", tree.children[0], tree.children[1], meta=tree.meta)
 
     def does_script_exist(self, tree):
-        return Cmd("ScriptOpcode_DOES_SCRIPT_EXIST", tree.children[1], tree.children[0], meta=tree.meta)
+        return Cmd("EVT_OP_DOES_SCRIPT_EXIST", tree.children[1], tree.children[0], meta=tree.meta)
 
 def compile_script(s):
     tree = script_parser.parse(s)
@@ -738,8 +738,8 @@ def compile_script(s):
     commands = Compile().transform(tree)
 
     # add RETURN END if no explicit END (top-level `break') was given
-    if next((cmd for cmd in commands if cmd.opcode() == "ScriptOpcode_END"), None) == None:
-        commands += (Cmd("ScriptOpcode_RETURN"), Cmd("ScriptOpcode_END"))
+    if next((cmd for cmd in commands if cmd.opcode() == "EVT_OP_END"), None) == None:
+        commands += (Cmd("EVT_OP_RETURN"), Cmd("EVT_OP_END"))
 
     return commands
 

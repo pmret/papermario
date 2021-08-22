@@ -26,7 +26,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_18_tattle },
 };
 
-Script N(80240830) = SCRIPT({
+EvtSource N(80240830) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_PUFF_PUFF_MACHINE, 0, 8);
@@ -41,7 +41,7 @@ static s32 N(pad_8B8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(updateTexturePan_802408C0) = SCRIPT({
+EvtSource N(updateTexturePan_802408C0) = SCRIPT({
     group 0;
     if (SI_VAR(5) == 1) {
         if (SI_VAR(6) == 1) {
@@ -56,9 +56,9 @@ Script N(updateTexturePan_802408C0) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-Script N(exitWalk_8024095C) = EXIT_WALK_SCRIPT(60,  0, "flo_17",  1);
+EvtSource N(exitWalk_8024095C) = EXIT_WALK_SCRIPT(60,  0, "flo_17",  1);
 
-Script N(802409B8) = SCRIPT({
+EvtSource N(802409B8) = SCRIPT({
     bind N(exitWalk_8024095C) TRIGGER_FLOOR_ABOVE 0;
 });
 
@@ -67,7 +67,7 @@ s32 N(lavaResetList_802409E4)[] = {
     0x0000000D, 0x432A0000, 0x00000000, 0x42F00000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -144,7 +144,7 @@ static s32 N(pad_E88)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80240E90) = SCRIPT({
+EvtSource N(80240E90) = SCRIPT({
     group 11;
     loop {
         PlayEffect(0x5E, 0, -16.0, 102.0, -4.099609375, 80.900390625, 102.0, -4.099609375, 0.5, 6, 0, 0, 0, 0);
@@ -170,7 +170,7 @@ Script N(80240E90) = SCRIPT({
     }
 });
 
-Script N(80241094) = SCRIPT({
+EvtSource N(80241094) = SCRIPT({
     EnableModel(SI_VAR(15), 1);
     SI_VAR(14) = 159;
     loop SI_VAR(14) {
@@ -198,7 +198,7 @@ Script N(80241094) = SCRIPT({
     EnableModel(SI_VAR(15), 0);
 });
 
-Script N(80241284) = SCRIPT({
+EvtSource N(80241284) = SCRIPT({
     SI_VAR(14) = 0;
 0:
     if (SI_SAVE_VAR(253) >= 3) {
@@ -225,7 +225,7 @@ Script N(80241284) = SCRIPT({
     goto 0;
 });
 
-Script N(802413F0) = SCRIPT({
+EvtSource N(802413F0) = SCRIPT({
     if (SI_MAP_FLAG(2) == 1) {
         return;
     }
@@ -358,7 +358,7 @@ Script N(802413F0) = SCRIPT({
 });
 
 #ifdef NON_MATCHING
-Script N(80241ED4) = SCRIPT({
+EvtSource N(80241ED4) = SCRIPT({
     SI_VAR(0) = 0;
     SI_VAR(1) = 0;
     SI_VAR(2) = 0;
@@ -399,51 +399,51 @@ Script N(80241ED4) = SCRIPT({
     ModifyColliderFlags(0, 19, 0x7FFFFE00);
 });
 #else
-Script N(80241ED4) = {
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(2), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(5), SI_FIXED(3.0)),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 10),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtCollider, 19, 486, 0),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_LOOP, 300),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(0), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(1), SI_VAR(4)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(2), SI_VAR(5)),
-        SI_CMD(ScriptOpcode_IF_LT, SI_VAR(1), -10),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), SI_FIXED(-10.0)),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(3), SI_FIXED(0.0)),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-            SI_CMD(ScriptOpcode_IF_GE, SI_VAR(2), 80),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF), // BUG: extraneous END_IF
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 31, -78, 19, 2),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 32, -78, 19, 2),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 31, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 32, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_CALL, RotateModel, 31, SI_VAR(2), 0, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, RotateModel, 32, SI_VAR(2), 0, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 31, 78, -19, -2),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 32, 78, -19, -2),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-SI_CMD(ScriptOpcode_END_LOOP),
-SI_CMD(ScriptOpcode_LABEL, 0),
-SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-SI_CMD(ScriptOpcode_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
-SI_CMD(ScriptOpcode_RETURN),
-SI_CMD(ScriptOpcode_END)
+EvtSource N(80241ED4) = {
+    SI_CMD(EVT_OP_SET_F, SI_VAR(0), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(1), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(2), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(5), SI_FIXED(3.0)),
+    SI_CMD(EVT_OP_SPAWN_THREAD),
+        SI_CMD(EVT_OP_SLEEP_FRAMES, 10),
+        SI_CMD(EVT_OP_CALL, PlaySoundAtCollider, 19, 486, 0),
+    SI_CMD(EVT_OP_END_SPAWN_THREAD),
+    SI_CMD(EVT_OP_LOOP, 300),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(0), SI_VAR(3)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(1), SI_VAR(4)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(2), SI_VAR(5)),
+        SI_CMD(EVT_OP_IF_LT, SI_VAR(1), -10),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(1), SI_FIXED(-10.0)),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(0.0)),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
+            SI_CMD(EVT_OP_IF_GE, SI_VAR(2), 80),
+                SI_CMD(EVT_OP_GOTO, 0),
+            SI_CMD(EVT_OP_END_IF),
+        SI_CMD(EVT_OP_END_IF),
+    SI_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
+    SI_CMD(EVT_OP_CALL, TranslateModel, 31, -78, 19, 2),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 32, -78, 19, 2),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 31, SI_VAR(0), SI_VAR(1), 0),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 32, SI_VAR(0), SI_VAR(1), 0),
+    SI_CMD(EVT_OP_CALL, RotateModel, 31, SI_VAR(2), 0, 0, 1),
+    SI_CMD(EVT_OP_CALL, RotateModel, 32, SI_VAR(2), 0, 0, 1),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 31, 78, -19, -2),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 32, 78, -19, -2),
+    SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
+SI_CMD(EVT_OP_END_LOOP),
+SI_CMD(EVT_OP_LABEL, 0),
+SI_CMD(EVT_OP_SLEEP_FRAMES, 30),
+SI_CMD(EVT_OP_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
+SI_CMD(EVT_OP_RETURN),
+SI_CMD(EVT_OP_END)
 };
 #endif
 
-Script N(80242174) = SCRIPT({
+EvtSource N(80242174) = SCRIPT({
     SI_VAR(0) = (float) 0;
     SI_VAR(1) = (float) 0;
     SI_VAR(2) = (float) 0;
@@ -489,7 +489,7 @@ Script N(80242174) = SCRIPT({
     sleep 30;
 });
 
-Script N(80242474) = SCRIPT({
+EvtSource N(80242474) = SCRIPT({
     SI_VAR(2) = (float) 0;
     SI_VAR(1) = (float) 0;
     SI_VAR(0) = (float) 0;
@@ -518,7 +518,7 @@ Script N(80242474) = SCRIPT({
     sleep 30;
 });
 
-Script N(80242620) = SCRIPT({
+EvtSource N(80242620) = SCRIPT({
     SI_VAR(2) = (float) 0;
     SI_VAR(1) = (float) 0;
     SI_VAR(0) = (float) 0;
@@ -559,7 +559,7 @@ Script N(80242620) = SCRIPT({
 });
 
 #ifdef NON_MATCHING
-Script N(80242910) = SCRIPT({
+EvtSource N(80242910) = SCRIPT({
     SI_VAR(0) = 0;
     SI_VAR(1) = 0;
     SI_VAR(2) = 0;
@@ -596,45 +596,45 @@ Script N(80242910) = SCRIPT({
     break;
 });
 #else
-Script N(80242910) = {
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(0), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(2), 0),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-    SI_CMD(ScriptOpcode_SET_F, SI_VAR(5), SI_FIXED(3.0)),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_SLEEP_FRAMES, 15),
-        SI_CMD(ScriptOpcode_CALL, PlaySoundAtCollider, 18, 486, 0),
-    SI_CMD(ScriptOpcode_END_SPAWN_THREAD),
-    SI_CMD(ScriptOpcode_LOOP, 300),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(0), SI_VAR(3)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(1), SI_VAR(4)),
-        SI_CMD(ScriptOpcode_ADD_F, SI_VAR(2), SI_VAR(5)),
-        SI_CMD(ScriptOpcode_IF_LT, SI_VAR(1), -25),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(1), SI_FIXED(-25.0)),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(3), SI_FIXED(0.0)),
-            SI_CMD(ScriptOpcode_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-            SI_CMD(ScriptOpcode_IF_GE, SI_VAR(2), 80),
-                SI_CMD(ScriptOpcode_GOTO, 0),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_IF),
-    SI_CMD(ScriptOpcode_END_IF), // BUG: extraneous END_IF
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 29, 124, 17, 3),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 29, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(ScriptOpcode_CALL, RotateModel, 29, SI_VAR(2), 0, 0, -1),
-    SI_CMD(ScriptOpcode_CALL, TranslateModel, 29, -124, -17, -3),
-    SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-SI_CMD(ScriptOpcode_END_LOOP),
-SI_CMD(ScriptOpcode_LABEL, 0),
-SI_CMD(ScriptOpcode_RETURN),
-SI_CMD(ScriptOpcode_END)
+EvtSource N(80242910) = {
+    SI_CMD(EVT_OP_SET_F, SI_VAR(0), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(1), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(2), 0),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
+    SI_CMD(EVT_OP_SET_F, SI_VAR(5), SI_FIXED(3.0)),
+    SI_CMD(EVT_OP_SPAWN_THREAD),
+        SI_CMD(EVT_OP_SLEEP_FRAMES, 15),
+        SI_CMD(EVT_OP_CALL, PlaySoundAtCollider, 18, 486, 0),
+    SI_CMD(EVT_OP_END_SPAWN_THREAD),
+    SI_CMD(EVT_OP_LOOP, 300),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(0), SI_VAR(3)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(1), SI_VAR(4)),
+        SI_CMD(EVT_OP_ADD_F, SI_VAR(2), SI_VAR(5)),
+        SI_CMD(EVT_OP_IF_LT, SI_VAR(1), -25),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(1), SI_FIXED(-25.0)),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(0.0)),
+            SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
+            SI_CMD(EVT_OP_IF_GE, SI_VAR(2), 80),
+                SI_CMD(EVT_OP_GOTO, 0),
+            SI_CMD(EVT_OP_END_IF),
+        SI_CMD(EVT_OP_END_IF),
+    SI_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
+    SI_CMD(EVT_OP_CALL, TranslateModel, 29, 124, 17, 3),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 29, SI_VAR(0), SI_VAR(1), 0),
+    SI_CMD(EVT_OP_CALL, RotateModel, 29, SI_VAR(2), 0, 0, -1),
+    SI_CMD(EVT_OP_CALL, TranslateModel, 29, -124, -17, -3),
+    SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
+SI_CMD(EVT_OP_END_LOOP),
+SI_CMD(EVT_OP_LABEL, 0),
+SI_CMD(EVT_OP_RETURN),
+SI_CMD(EVT_OP_END)
 };
 #endif
 
-Script N(80242B18) = SCRIPT({
+EvtSource N(80242B18) = SCRIPT({
     ModifyColliderFlags(0, 18, 0x7FFFFE00);
     SI_VAR(0) = (float) 0;
     SI_VAR(1) = (float) 0;
@@ -682,7 +682,7 @@ s32 N(intTable_80242DC8)[] = {
     0x00000000, 0x0000001B, 0x00000055, 0x00000000, 0x0000001B, 0x00000050, 0x00000023, 0x0000001B,
 };
 
-Script N(80242E28) = SCRIPT({
+EvtSource N(80242E28) = SCRIPT({
     SI_VAR(10) = SI_VAR(0);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(0) < -210) {
@@ -808,7 +808,7 @@ Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 
 Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
-Script N(802436BC) = SCRIPT({
+EvtSource N(802436BC) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         EnableModel(49, 0);
         ModifyColliderFlags(0, 19, 0x7FFFFE00);
@@ -969,7 +969,7 @@ Vec3f N(vectorList_8024401C)[] = {
     { -280.0, 315.0, 30.0 },
 };
 
-Script N(80244058) = SCRIPT({
+EvtSource N(80244058) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     SetPlayerPos(30, 0, 50);
@@ -1000,7 +1000,7 @@ Script N(80244058) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80244270) = SCRIPT({
+EvtSource N(80244270) = SCRIPT({
     spawn {
         PlaySoundAtNpc(NPC_FLYING_MAGIKOOPA, 0x19E, 0);
         SetNpcFlagBits(NPC_FLYING_MAGIKOOPA, ((NPC_FLAG_100)), TRUE);
@@ -1057,7 +1057,7 @@ Script N(80244270) = SCRIPT({
     }
 });
 
-Script N(802445D4) = SCRIPT({
+EvtSource N(802445D4) = SCRIPT({
     sleep 5;
     IsPlayerWithin(40, 0, 200, SI_VAR(0));
     if (SI_VAR(0) == 0) {
@@ -1085,7 +1085,7 @@ Script N(802445D4) = SCRIPT({
     }
 });
 
-Script N(80244774) = SCRIPT({
+EvtSource N(80244774) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1138,7 +1138,7 @@ Script N(80244774) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(idle_80244B3C) = SCRIPT({
+EvtSource N(idle_80244B3C) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         if (SI_VAR(0) != 0) {
@@ -1159,7 +1159,7 @@ Script N(idle_80244B3C) = SCRIPT({
     StartBossBattle(3);
 });
 
-Script N(defeat_80244C84) = SCRIPT({
+EvtSource N(defeat_80244C84) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -1186,7 +1186,7 @@ Script N(defeat_80244C84) = SCRIPT({
     }
 });
 
-Script N(80244E2C) = SCRIPT({
+EvtSource N(80244E2C) = SCRIPT({
     match SI_MAP_VAR(10) {
         == 0 {
             NpcFacePlayer(NPC_MAGIKOOPA, 1);
@@ -1203,7 +1203,7 @@ Script N(80244E2C) = SCRIPT({
     }
 });
 
-Script N(80244ED0) = SCRIPT({
+EvtSource N(80244ED0) = SCRIPT({
     match SI_MAP_VAR(10) {
         == 0 {
             SpeakToPlayer(NPC_MAGIKOOPA, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 16, MESSAGE_ID(0x11, 0x00B9));
@@ -1224,7 +1224,7 @@ Script N(80244ED0) = SCRIPT({
     }
 });
 
-Script N(80245004) = SCRIPT({
+EvtSource N(80245004) = SCRIPT({
     match SI_MAP_VAR(10) {
         == 0 {
             SpeakToPlayer(NPC_MAGIKOOPA, NPC_ANIM(magikoopa, Palette_02, Anim_2), NPC_ANIM(magikoopa, Palette_02, Anim_1), 16, MESSAGE_ID(0x11, 0x00BA));
@@ -1244,7 +1244,7 @@ Script N(80245004) = SCRIPT({
     spawn N(802445D4);
 });
 
-Script N(80245108) = SCRIPT({
+EvtSource N(80245108) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
@@ -1267,7 +1267,7 @@ Script N(80245108) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80245228) = SCRIPT({
+EvtSource N(80245228) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 0;
         await N(80245108);
@@ -1275,7 +1275,7 @@ Script N(80245228) = SCRIPT({
     }
 });
 
-Script N(8024527C) = SCRIPT({
+EvtSource N(8024527C) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 1;
         await N(80245108);
@@ -1283,7 +1283,7 @@ Script N(8024527C) = SCRIPT({
     }
 });
 
-Script N(802452D0) = SCRIPT({
+EvtSource N(802452D0) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 2;
         await N(80245108);
@@ -1291,7 +1291,7 @@ Script N(802452D0) = SCRIPT({
     }
 });
 
-Script N(80245324) = SCRIPT({
+EvtSource N(80245324) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 3;
         await N(80245108);
@@ -1299,7 +1299,7 @@ Script N(80245324) = SCRIPT({
     }
 });
 
-Script N(80245378) = SCRIPT({
+EvtSource N(80245378) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
@@ -1322,7 +1322,7 @@ Script N(80245378) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(802454D4) = SCRIPT({
+EvtSource N(802454D4) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 0;
         GetNpcPos(NPC_MAGIKOOPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1331,7 +1331,7 @@ Script N(802454D4) = SCRIPT({
     }
 });
 
-Script N(80245544) = SCRIPT({
+EvtSource N(80245544) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 1;
         GetNpcPos(NPC_LAKITU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1340,7 +1340,7 @@ Script N(80245544) = SCRIPT({
     }
 });
 
-Script N(802455B4) = SCRIPT({
+EvtSource N(802455B4) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 2;
         GetNpcPos(NPC_LAKITU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1349,7 +1349,7 @@ Script N(802455B4) = SCRIPT({
     }
 });
 
-Script N(80245624) = SCRIPT({
+EvtSource N(80245624) = SCRIPT({
     if (SI_MAP_VAR(10) == -1) {
         SI_MAP_VAR(10) = 3;
         GetNpcPos(NPC_LAKITU2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -1366,7 +1366,7 @@ Vec4f N(triggerCoord_802456B4) = { 50.0f, 0.0f, -10.0, 0.0f };
 
 Vec4f N(triggerCoord_802456C4) = { 105.0f, 0.0f, -10.0, 0.0f };
 
-Script N(802456D4) = SCRIPT({
+EvtSource N(802456D4) = SCRIPT({
     SI_MAP_VAR(10) = -1;
     bind N(80245228) TRIGGER_WALL_HAMMER 23;
     bind N(80245228) TRIGGER_WALL_HAMMER 19;
@@ -1378,7 +1378,7 @@ Script N(802456D4) = SCRIPT({
     bind N(80245624) TRIGGER_POINT_BOMB N(triggerCoord_802456C4);
 });
 
-Script N(interact_802457D4) = SCRIPT({
+EvtSource N(interact_802457D4) = SCRIPT({
     match SI_AREA_VAR(6) {
         == 0 {
             GetSelfNpcID(SI_VAR(0));
@@ -1429,7 +1429,7 @@ Script N(interact_802457D4) = SCRIPT({
     }
 });
 
-Script N(init_80245AA8) = SCRIPT({
+EvtSource N(init_80245AA8) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcIdle(NPC_SELF, N(idle_80244B3C));
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
@@ -1439,7 +1439,7 @@ Script N(init_80245AA8) = SCRIPT({
     }
 });
 
-Script N(init_80245B30) = SCRIPT({
+EvtSource N(init_80245B30) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
@@ -1447,16 +1447,7 @@ Script N(init_80245B30) = SCRIPT({
     }
 });
 
-Script N(init_80245B90) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
-        BindNpcInteract(NPC_SELF, N(interact_802457D4));
-        BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
-    } else {
-        SetNpcPos(NPC_SELF, 0, -1000, 0);
-    }
-});
-
-Script N(init_80245C04) = SCRIPT({
+EvtSource N(init_80245B90) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
@@ -1465,7 +1456,16 @@ Script N(init_80245C04) = SCRIPT({
     }
 });
 
-Script N(init_80245C78) = SCRIPT({
+EvtSource N(init_80245C04) = SCRIPT({
+    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+        BindNpcInteract(NPC_SELF, N(interact_802457D4));
+        BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
+    } else {
+        SetNpcPos(NPC_SELF, 0, -1000, 0);
+    }
+});
+
+EvtSource N(init_80245C78) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
@@ -1682,7 +1682,7 @@ static s32 N(pad_66B4)[] = {
 
 void playFX_82();
 
-ApiStatus N(func_8024030C_CDC9AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024030C_CDC9AC)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
@@ -1703,7 +1703,7 @@ typedef struct N(temp) {
     N(unk_effect)* unk_0C;
 } N(temp);
 
-ApiStatus N(func_80240340_CDC9E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240340_CDC9E0)(Evt* script, s32 isInitialCall) {
     N(temp)* ptr = script->varTable[15];
 
     ptr->unk_0C->unk_30 = 69;

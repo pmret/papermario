@@ -29,7 +29,7 @@ NpcSettings N(npcSettings_8024066C) = {
     .level = 99,
 };
 
-Script N(80240698) = SCRIPT({
+EvtSource N(80240698) = SCRIPT({
     SI_VAR(3) = 0;
     SI_VAR(3) -= SI_VAR(2);
     ModifyColliderFlags(0, 18, 0x7FFFFE00);
@@ -45,7 +45,7 @@ Script N(80240698) = SCRIPT({
     }
 });
 
-Script N(8024079C) = SCRIPT({
+EvtSource N(8024079C) = SCRIPT({
     SI_VAR(3) = 0;
     SI_VAR(3) -= SI_VAR(2);
     MakeLerp(80, 0, 12, 0);
@@ -61,43 +61,43 @@ Script N(8024079C) = SCRIPT({
     PlaySoundAtCollider(18, 456, 0);
 });
 
-Script N(802408A0) = SCRIPT({
+EvtSource N(802408A0) = SCRIPT({
     GetNpcPos(NPC_BOO0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO0, SI_VAR(0), SI_VAR(2), 46);
 });
 
-Script N(802408F8) = SCRIPT({
+EvtSource N(802408F8) = SCRIPT({
     GetNpcPos(NPC_BOO1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO1, SI_VAR(0), SI_VAR(2), 50);
 });
 
-Script N(80240950) = SCRIPT({
+EvtSource N(80240950) = SCRIPT({
     GetNpcPos(NPC_BOO2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO2, SI_VAR(0), SI_VAR(2), 53);
 });
 
-Script N(802409A8) = SCRIPT({
+EvtSource N(802409A8) = SCRIPT({
     GetNpcPos(NPC_BOO3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO3, SI_VAR(0), SI_VAR(2), 46);
 });
 
-Script N(80240A00) = SCRIPT({
+EvtSource N(80240A00) = SCRIPT({
     GetNpcPos(NPC_BOO4, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO4, SI_VAR(0), SI_VAR(2), 50);
 });
 
-Script N(80240A58) = SCRIPT({
+EvtSource N(80240A58) = SCRIPT({
     GetNpcPos(NPC_BOO5, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO5, SI_VAR(0), SI_VAR(2), 53);
 });
 
-Script N(80240AB0) = SCRIPT({
+EvtSource N(80240AB0) = SCRIPT({
     spawn N(802408A0);
     spawn N(802408F8);
     spawn N(80240950);
@@ -106,49 +106,49 @@ Script N(80240AB0) = SCRIPT({
     spawn N(80240A58);
 });
 
-Script N(80240B08) = SCRIPT({
+EvtSource N(80240B08) = SCRIPT({
     SetNpcJumpscale(NPC_BOO0, -0.19921875);
     NpcJump0(NPC_BOO0, 257, 30, -90, 5);
     EnableNpcShadow(NPC_BOO0, FALSE);
     SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240B74) = SCRIPT({
+EvtSource N(80240B74) = SCRIPT({
     SetNpcJumpscale(NPC_BOO1, -0.2998046875);
     NpcJump0(NPC_BOO1, 272, 112, -81, 12);
     EnableNpcShadow(NPC_BOO1, FALSE);
     SetNpcAnimation(NPC_BOO1, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240BE0) = SCRIPT({
+EvtSource N(80240BE0) = SCRIPT({
     SetNpcJumpscale(NPC_BOO2, -0.3994140625);
     NpcJump0(NPC_BOO2, 237, 120, -118, 10);
     EnableNpcShadow(NPC_BOO2, FALSE);
     SetNpcAnimation(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240C4C) = SCRIPT({
+EvtSource N(80240C4C) = SCRIPT({
     SetNpcJumpscale(NPC_BOO3, -0.2998046875);
     NpcJump0(NPC_BOO3, 280, 60, -79, 8);
     EnableNpcShadow(NPC_BOO3, FALSE);
     SetNpcAnimation(NPC_BOO3, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240CB8) = SCRIPT({
+EvtSource N(80240CB8) = SCRIPT({
     SetNpcJumpscale(NPC_BOO4, -0.3994140625);
     NpcJump0(NPC_BOO4, 250, 81, -97, 9);
     EnableNpcShadow(NPC_BOO4, FALSE);
     SetNpcAnimation(NPC_BOO4, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240D24) = SCRIPT({
+EvtSource N(80240D24) = SCRIPT({
     SetNpcJumpscale(NPC_BOO5, -0.5);
     NpcJump0(NPC_BOO5, 227, 43, -123, 15);
     EnableNpcShadow(NPC_BOO5, FALSE);
     SetNpcAnimation(NPC_BOO5, NPC_ANIM(boo, Palette_01, Anim_6));
 });
 
-Script N(80240D90) = SCRIPT({
+EvtSource N(80240D90) = SCRIPT({
     spawn N(80240B74);
     spawn N(80240BE0);
     spawn N(80240C4C);
@@ -156,7 +156,7 @@ Script N(80240D90) = SCRIPT({
     spawn N(80240D24);
 });
 
-Script N(80240DDC) = SCRIPT({
+EvtSource N(80240DDC) = SCRIPT({
     GetNpcPos(NPC_BOO0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     loop {
         RandInt(5, SI_VAR(10));
@@ -181,7 +181,7 @@ Script N(80240DDC) = SCRIPT({
     }
 });
 
-Script N(80240F50) = SCRIPT({
+EvtSource N(80240F50) = SCRIPT({
     group 239;
     loop {
         RandInt(50, SI_VAR(0));
@@ -197,7 +197,7 @@ Script N(80240F50) = SCRIPT({
     }
 });
 
-Script N(8024103C) = SCRIPT({
+EvtSource N(8024103C) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     SetPlayerPos(350, 10, -150);
@@ -241,7 +241,7 @@ Script N(8024103C) = SCRIPT({
     await N(80240698);
 });
 
-Script N(802413F4) = SCRIPT({
+EvtSource N(802413F4) = SCRIPT({
     SetPlayerSpeed(8.0);
     PlayerMoveTo(184, -44, 0);
     PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
@@ -323,7 +323,7 @@ Script N(802413F4) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80241AA0) = SCRIPT({
+EvtSource N(80241AA0) = SCRIPT({
     SetNpcPos(NPC_BOO0, 246, 30, -110);
     SetNpcPos(NPC_BOO1, 276, 120, -80);
     SetNpcPos(NPC_BOO2, 216, 120, -140);
@@ -350,7 +350,7 @@ Script N(80241AA0) = SCRIPT({
     EnableNpcShadow(NPC_BOO5, FALSE);
 });
 
-Script N(interact_80241CD8) = SCRIPT({
+EvtSource N(interact_80241CD8) = SCRIPT({
     SI_MAP_VAR(0) = 1;
     SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 5, MESSAGE_ID(0x0E, 0x00E9));
     SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
@@ -387,27 +387,27 @@ Script N(interact_80241CD8) = SCRIPT({
     SI_MAP_VAR(0) = 0;
 });
 
-Script N(init_80241F70) = SCRIPT({
+EvtSource N(init_80241F70) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241CD8));
 });
 
-Script N(init_80241F94) = SCRIPT({
+EvtSource N(init_80241F94) = SCRIPT({
 
 });
 
-Script N(init_80241FA4) = SCRIPT({
+EvtSource N(init_80241FA4) = SCRIPT({
 
 });
 
-Script N(init_80241FB4) = SCRIPT({
+EvtSource N(init_80241FB4) = SCRIPT({
 
 });
 
-Script N(init_80241FC4) = SCRIPT({
+EvtSource N(init_80241FC4) = SCRIPT({
 
 });
 
-Script N(init_80241FD4) = SCRIPT({
+EvtSource N(init_80241FD4) = SCRIPT({
 
 });
 
@@ -592,7 +592,7 @@ StaticNpc N(npcGroup_80242994) = {
     },
 };
 
-Script N(80242B84) = SCRIPT({
+EvtSource N(80242B84) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     DisablePartnerAI(0);
@@ -739,7 +739,7 @@ Script N(80242B84) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(init_802434EC) = SCRIPT({
+EvtSource N(init_802434EC) = SCRIPT({
 
 });
 
@@ -792,11 +792,11 @@ static s32 N(pad_3758)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802E9A18, -65, 60, -240, 0, MAKE_ENTITY_END);
 });
 
-ApiStatus N(func_80240060_BFA100)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240060_BFA100)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(get_enemy(6)->npcID);
 
     sfx_adjust_env_sound_pos(0x32E, 0, npc->pos.x, npc->pos.y, npc->pos.z);

@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_pra/pra_12/D62D10", func_80240000_D62D10);
 
 INCLUDE_ASM(s32, "world/area_pra/pra_12/D62D10", func_80240F50_D63C60);
 /*
-ApiStatus N(func_80240F50_D63C60)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240F50_D63C60)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802416B0_D643C0) == NULL) {

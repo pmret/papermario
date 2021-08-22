@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_15_tattle },
 };
 
-Script N(80240060) = SCRIPT({
+EvtSource N(80240060) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -39,13 +39,13 @@ static s32 N(pad_11C) = {
     0x00000000,
 };
 
-Script N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
+EvtSource N(exitWalk_80240120) = EXIT_WALK_SCRIPT(60,  0, "flo_13",  1);
 
-Script N(8024017C) = SCRIPT({
+EvtSource N(8024017C) = SCRIPT({
     bind N(exitWalk_80240120) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -77,7 +77,7 @@ NpcSettings N(npcSettings_80240300) = {
     .level = 99,
 };
 
-Script N(8024032C) = SCRIPT({
+EvtSource N(8024032C) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SI_VAR(3) = 7;
         SI_VAR(4) = 5;
@@ -105,7 +105,7 @@ Script N(8024032C) = SCRIPT({
     }
 });
 
-Script N(802404D8) = SCRIPT({
+EvtSource N(802404D8) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetNpcPos(NPC_SUN0, 0, 270, 0);
@@ -141,7 +141,7 @@ Script N(802404D8) = SCRIPT({
     sleep 70;
 });
 
-Script N(aux_8024079C) = SCRIPT({
+EvtSource N(aux_8024079C) = SCRIPT({
     func_802CDE68(11, 48);
     loop {
         MakeLerp(-30, 30, 20, 11);
@@ -169,7 +169,7 @@ Script N(aux_8024079C) = SCRIPT({
     }
 });
 
-Script N(8024094C) = SCRIPT({
+EvtSource N(8024094C) = SCRIPT({
     loop {
         sleep 1;
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -202,7 +202,7 @@ Script N(8024094C) = SCRIPT({
     unbind;
 });
 
-Script N(interact_80240B28) = SCRIPT({
+EvtSource N(interact_80240B28) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_SPOKE_WITH_THE_SUN {
             SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009A));
@@ -234,7 +234,7 @@ Script N(interact_80240B28) = SCRIPT({
     SI_AREA_FLAG(38) = 1;
 });
 
-Script N(init_80240CD0) = SCRIPT({
+EvtSource N(init_80240CD0) = SCRIPT({
     SetNpcCollisionSize(10, 64, 40);
     EnableNpcShadow(NPC_SUN0, FALSE);
     if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
@@ -249,7 +249,7 @@ Script N(init_80240CD0) = SCRIPT({
     }
 });
 
-Script N(init_80240DB4) = SCRIPT({
+EvtSource N(init_80240DB4) = SCRIPT({
     EnableNpcShadow(NPC_SUN1, FALSE);
     SetNpcAnimation(NPC_SUN1, NPC_ANIM(sun, Palette_00, Anim_2));
     SetNpcPaletteSwapMode(10, 3);
@@ -336,11 +336,11 @@ static s32 N(pad_12D8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(802412E0) = SCRIPT({
+EvtSource N(802412E0) = SCRIPT({
     SI_SAVE_FLAG(1401) = 1;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_SAVE_FLAG(1401) == 0) {
         MakeEntity(0x802BCF00, -180, 0, -18, 0, MAKE_ENTITY_END);
         AssignScript(N(802412E0));
@@ -357,7 +357,7 @@ s32 N(intTable_80241360)[] = {
     0x00000018, 0xF24A7CE7, 0x0000000A, 0xF24A814D,
 };
 
-Script N(802413B0) = SCRIPT({
+EvtSource N(802413B0) = SCRIPT({
     if (SI_SAVE_FLAG(1401) == 0) {
     0:
         if (SI_SAVE_FLAG(1401) == 0) {

@@ -7,11 +7,11 @@
 #include "si.h"
 #include "enums.h"
 
-struct ScriptInstance;
+struct Evt;
 
-typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
+typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
-typedef Bytecode Script[0];
+typedef Bytecode EvtSource[0];
 
 typedef struct {
     u8 r, g, b, a;
@@ -276,15 +276,15 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ Script* scriptSource;
-    /* 0x14 */ struct ScriptInstance* runningScript;
+    /* 0x10 */ EvtSource* scriptSource;
+    /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
     /* 0x28 */ char unk_28[4];
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
-    /* 0x34 */ ScriptID runningScriptID;
+    /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
 typedef Trigger* TriggerList[MAX_TRIGGERS];
@@ -294,7 +294,7 @@ typedef union X32 {
     f32 f;
 } X32;
 
-typedef struct ScriptInstance {
+typedef struct Evt {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
@@ -308,9 +308,9 @@ typedef struct ScriptInstance {
     /* 0x010 */ s8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
     /* 0x060 */ UNK_PTR userData; /* unknown pointer; allocated on the heap, free'd in kill_script() */
-    /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
-    /* 0x068 */ struct ScriptInstance* childScript;
-    /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
+    /* 0x064 */ struct Evt* blockingParent; /* parent? */
+    /* 0x068 */ struct Evt* childScript;
+    /* 0x06C */ struct Evt* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
@@ -322,7 +322,7 @@ typedef struct ScriptInstance {
     /* 0x138 */ s32* buffer;
     /* 0x13C */ s32* array;
     /* 0x140 */ s32* flagArray;
-    /* 0x144 */ ScriptID id;
+    /* 0x144 */ s32 id;
     /* 0x148 */ union {
         s32 enemyID;
         ActorID actorID;
@@ -341,9 +341,9 @@ typedef struct ScriptInstance {
     /* 0x15C */ Bytecode* ptrFirstLine;
     /* 0x160 */ Bytecode* ptrSavedPosition;
     /* 0x164 */ Bytecode* ptrCurrentLine;
-} ScriptInstance; // size = 0x168
+} Evt; // size = 0x168
 
-typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
+typedef Evt* ScriptList[MAX_SCRIPTS];
 
 struct Entity;
 
@@ -366,7 +366,7 @@ typedef struct Entity {
     /* 0x18 */ s32* scriptReadPos;
     /* 0x1C */ EntityCallback updateScriptCallback;
     /* 0x20 */ EntityCallback updateMatrixOverride;
-    /* 0x24 */ ScriptInstance* boundScript;
+    /* 0x24 */ Evt* boundScript;
     /* 0x28 */ Bytecode* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
     /* 0x30 */ char unk_30[0x8];
@@ -703,10 +703,10 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
-    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
-    /* 0x0C0 */ ScriptID controlScriptID;
-    /* 0x0C4 */ struct ScriptInstance* camMovementScript;
-    /* 0x0C8 */ ScriptID camMovementScriptID;
+    /* 0x0BC */ struct Evt* controlScript; /* control handed over to this when changing partners */
+    /* 0x0C0 */ s32 controlScriptID;
+    /* 0x0C4 */ struct Evt* camMovementScript;
+    /* 0x0C8 */ s32 camMovementScriptID;
     /* 0x0CC */ Vec3f unk_CC;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
@@ -1250,7 +1250,7 @@ typedef struct GameStatus {
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
-    /* 0x06C */ ScriptID mainScriptID;
+    /* 0x06C */ s32 mainScriptID;
     /* 0x070 */ s8 isBattle;
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
@@ -1749,18 +1749,18 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ Script* idleScriptSource;
-    /* 0x1C4 */ Script* takeTurnScriptSource;
-    /* 0x1C8 */ Script* onHitScriptSource;
-    /* 0x1CC */ Script* onTurnChanceScriptSource;
-    /* 0x1D0 */ struct ScriptInstance* idleScript;
-    /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
-    /* 0x1D8 */ struct ScriptInstance* onHitScript;
-    /* 0x1DC */ struct ScriptInstance* onTurnChangeScript;
-    /* 0x1E0 */ ScriptID idleScriptID;
-    /* 0x1E4 */ ScriptID takeTurnID;
-    /* 0x1E8 */ ScriptID onHitID;
-    /* 0x1EC */ ScriptID onTurnChangeID;
+    /* 0x1C0 */ EvtSource* idleScriptSource;
+    /* 0x1C4 */ EvtSource* takeTurnScriptSource;
+    /* 0x1C8 */ EvtSource* onHitScriptSource;
+    /* 0x1CC */ EvtSource* onTurnChanceScriptSource;
+    /* 0x1D0 */ struct Evt* idleScript;
+    /* 0x1D4 */ struct Evt* takeTurnScript;
+    /* 0x1D8 */ struct Evt* onHitScript;
+    /* 0x1DC */ struct Evt* onTurnChangeScript;
+    /* 0x1E0 */ s32 idleScriptID;
+    /* 0x1E4 */ s32 takeTurnID;
+    /* 0x1E8 */ s32 onHitID;
+    /* 0x1EC */ s32 onTurnChangeID;
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ u8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */

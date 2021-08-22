@@ -5,7 +5,7 @@
 
 #include "clouds.inc.c"
 
-Script N(beforeBattle_802205D8) = SCRIPT({
+EvtSource N(beforeBattle_802205D8) = SCRIPT({
     SetSpriteShading(-1);
 
     SI_VAR(0) = 1;
@@ -17,7 +17,7 @@ Script N(beforeBattle_802205D8) = SCRIPT({
     spawn N(clouds1);
 });
 
-Script N(afterBattle_80220650) = SCRIPT({
+EvtSource N(afterBattle_80220650) = SCRIPT({
 
 });
 

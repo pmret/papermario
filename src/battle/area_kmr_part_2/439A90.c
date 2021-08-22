@@ -23,7 +23,7 @@
 #include "common/DivActorLevel4.inc.c"
 #define NAMESPACE b_area_kmr_part_2
 
-ApiStatus func_80218A60_43A4F0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218A60_43A4F0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "iwa_01";
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_00/90CC40", func_80240000_90CC40);
 /*
-ApiStatus N(func_80240000_90CC40)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_90CC40)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80240FF8_90DC38) == NULL) {

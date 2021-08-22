@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(ShrinkActor)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(ShrinkActor)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 var1 = get_float_variable(script, *args++);
     f32 var2 = get_float_variable(script, *args++);

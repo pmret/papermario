@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkFunc5)(Npc* npc, Enemy* enemy, ScriptInstance* script, NpcAISettings* aiSettings) {
+void N(UnkFunc5)(Npc* npc, Enemy* enemy, Evt* script, NpcAISettings* aiSettings) {
     f32 posX, posY, posZ, posW;
     s32 temp_a1;
     s32 temp_v1;

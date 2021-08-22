@@ -7,10 +7,10 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_coconut
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
-ApiStatus func_802A1000_72F720(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_802A11D4_72F8F4(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802A1000_72F720(Evt* script, s32 isInitialCall);
+ApiStatus func_802A11D4_72F8F4(Evt* script, s32 isInitialCall);
 
 #endif

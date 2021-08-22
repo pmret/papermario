@@ -5,7 +5,7 @@
 // requires .data migration
 INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A9000_42A4F0);
 
-ApiStatus func_802A9398_42A888(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9398_42A888(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

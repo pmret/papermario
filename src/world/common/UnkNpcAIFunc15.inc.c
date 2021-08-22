@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkNpcAIFunc15)(ScriptInstance* script, NpcAISettings* aiSettings, s32 arg2) {
+void N(UnkNpcAIFunc15)(Evt* script, NpcAISettings* aiSettings, s32 arg2) {
     Npc* enemy = get_npc_unsafe(script->owner1.enemy->npcID);
 
     func_80049F7C(script, aiSettings, arg2);

@@ -18,7 +18,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_16_tattle },
 };
 
-Script N(802429D0) = SCRIPT({
+EvtSource N(802429D0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -28,11 +28,11 @@ Script N(802429D0) = SCRIPT({
     }
 });
 
-Script N(exitWalk_80242A40) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  4);
+EvtSource N(exitWalk_80242A40) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  4);
 
-Script N(exitWalk_80242A9C) = EXIT_WALK_SCRIPT(60,  1, "flo_17",  0);
+EvtSource N(exitWalk_80242A9C) = EXIT_WALK_SCRIPT(60,  1, "flo_17",  0);
 
-Script N(80242AF8) = SCRIPT({
+EvtSource N(80242AF8) = SCRIPT({
     bind N(exitWalk_80242A40) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80242A9C) TRIGGER_FLOOR_ABOVE 4;
 });
@@ -42,7 +42,7 @@ s32 N(lavaResetList_80242B40)[] = {
     0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -93,7 +93,7 @@ Script N(main) = SCRIPT({
     }
 });
 
-Script N(80242EA0) = SCRIPT({
+EvtSource N(80242EA0) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -132,7 +132,7 @@ Script N(80242EA0) = SCRIPT({
     goto 0;
 });
 
-Script N(8024314C) = SCRIPT({
+EvtSource N(8024314C) = SCRIPT({
     SI_VAR(9) = SI_VAR(6);
     SI_VAR(8) = SI_VAR(5);
     SI_VAR(7) = SI_VAR(4);
@@ -182,7 +182,7 @@ Script N(8024314C) = SCRIPT({
     EnableModel(SI_VAR(7), 0);
 });
 
-Script N(8024346C) = SCRIPT({
+EvtSource N(8024346C) = SCRIPT({
     ModifyColliderFlags(3, 20, 0x00000006);
     SI_VAR(0) = -740;
     SI_VAR(1) = -140;
@@ -250,7 +250,7 @@ f32 N(D_80243758_CD5588)[] = {
     140.0f, 180.0f, 220.0f,
 };
 
-Script N(80243764) = SCRIPT({
+EvtSource N(80243764) = SCRIPT({
     sleep 10;
     PlaySound(0x212D);
     N(UnkFunc21)(SI_MAP_VAR(0));
@@ -280,7 +280,7 @@ Script N(80243764) = SCRIPT({
     sleep 30;
 });
 
-Script N(802438C8) = SCRIPT({
+EvtSource N(802438C8) = SCRIPT({
     if (SI_SAVE_FLAG(1403) == 1) {
         return;
     }
@@ -362,7 +362,7 @@ Script N(802438C8) = SCRIPT({
     N(UnkFunc17)();
 });
 
-Script N(80243D48) = SCRIPT({
+EvtSource N(80243D48) = SCRIPT({
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -370,7 +370,7 @@ Script N(80243D48) = SCRIPT({
     goto 0;
 });
 
-Script N(80243DB0) = SCRIPT({
+EvtSource N(80243DB0) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetPlayerActionState(6);
@@ -384,7 +384,7 @@ Script N(80243DB0) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80243E80) = SCRIPT({
+EvtSource N(80243E80) = SCRIPT({
     if (SI_AREA_FLAG(39) == 0) {
         N(UnkFunc44)();
         if (SI_VAR(0) == 0) {
@@ -400,7 +400,7 @@ Script N(80243E80) = SCRIPT({
     }
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     SI_AREA_FLAG(39) = 0;
     bind N(80243E80) TRIGGER_FLOOR_TOUCH 20;
     MakeEntity(0x802EA910, 350, 240, -100, 0, MAKE_ENTITY_END);
@@ -415,7 +415,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkFunc17.inc.c"
 
-ApiStatus N(func_8024011C_CD1F4C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024011C_CD1F4C)(Evt* script, s32 isInitialCall) {
     entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -443,7 +443,7 @@ typedef struct {
     s16 unk_32C;
 } N(UnkStruct);
 
-ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402AC_CD20DC)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     N(UnkStruct)* ptr;
     s32 i;
@@ -515,7 +515,7 @@ ApiStatus N(func_802402AC_CD20DC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_16/CD1F10", flo_16_func_802402AC_CD20DC, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_16/CD1F10", flo_16_func_802402AC_CD20DC, Evt* script,
             s32 isInitialCall);
 #endif
 
@@ -546,7 +546,7 @@ typedef struct {
     s32 unk_64;
 } N(UserData);
 
-ApiStatus N(func_802406E0_CD2510)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802406E0_CD2510)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

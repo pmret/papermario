@@ -189,7 +189,7 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_entities, f32 startX, f32 startY, f3
 
 INCLUDE_ASM(s32, "362a0_len_2f70", func_8005DB00);
 
-ApiStatus func_8005DD54(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8005DD54(Evt* script, s32 isInitialCall) {
     f32 angle = clamp_angle(script->varTable[0]);
 
     script->varTable[0] = angle;

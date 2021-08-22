@@ -6,7 +6,7 @@
 
 static HudElement* D_802A3F50;
 
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -45,7 +45,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -95,7 +95,7 @@ void virtual_entity_set_pos(s32, s32, s32, s32);
 void virtual_entity_set_scale(s32, f32, f32, f32);
 void virtual_entity_delete_by_index(s32);
 
-ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A123C_71E88C(Evt* script, s32 isInitialCall) {
     s32 i;
     Vec3f vecf;
     s32 flag;
@@ -212,10 +212,10 @@ ApiStatus func_802A123C_71E88C(ScriptInstance* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(ApiStatus, "battle/item/sleepy_sheep", battle_item_sleepy_sheep_func_802A123C_71E88C,
-            ScriptInstance* script, s32 isInitialCall);
+            Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
@@ -245,7 +245,7 @@ ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 i;
@@ -279,7 +279,7 @@ ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall) {
     return (ret == 0) * ApiStatus_DONE2;
 }
 
-Script N(UseItemWithEffect) = SCRIPT({
+EvtSource N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseBattleCamPreset(69);
         sleep 10;
@@ -326,7 +326,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     }
 });
 
-Script N(UseItem) = SCRIPT({
+EvtSource N(UseItem) = SCRIPT({
     UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
@@ -349,7 +349,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+EvtSource N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 0);
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
@@ -360,7 +360,7 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
-Script N(EatItem) = SCRIPT({
+EvtSource N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -371,7 +371,7 @@ Script N(EatItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(DrinkItem) = SCRIPT({
+EvtSource N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -487,7 +487,7 @@ s32 N(modelCommandList)[] = {
     0x00000002, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_SLEEPY_SHEEP;
     await N(UseItemWithEffect);
     UseBattleCamPreset(19);

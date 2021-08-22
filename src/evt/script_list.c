@@ -8,7 +8,7 @@ void sort_scripts(void) {
     s32 temp_a0;
     s32 temp_a1;
     s32 tempID;
-    ScriptInstance* curScript;
+    Evt* curScript;
     ScriptList** currentScriptListPtr;
     s32 i;
     s32 j;
@@ -48,7 +48,7 @@ void sort_scripts(void) {
     }
 }
 
-void find_script_labels(ScriptInstance* script) {
+void find_script_labels(Evt* script) {
     Bytecode* curLine;
     s32 type;
     s32 label;
@@ -133,7 +133,7 @@ void init_script_list(void) {
     init_model_animators();
 }
 
-void suspend_frozen_scripts(ScriptInstance* script) {
+void suspend_frozen_scripts(Evt* script) {
     s32 arg;
 
     switch (timeFreezeMode) {
@@ -152,8 +152,8 @@ void suspend_frozen_scripts(ScriptInstance* script) {
     suspend_all_group(arg);
 }
 
-ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
-    ScriptInstance* newScript;
+Evt* start_script(EvtSource* source, s32 priority, s32 initialState) {
+    Evt* newScript;
     s32 curScriptIndex;
     s32 scriptListCount;
     s32 i;
@@ -217,8 +217,8 @@ ScriptInstance* start_script(Script* source, s32 priority, s32 initialState) {
     return newScript;
 }
 
-ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags) {
-    ScriptInstance* newScript;
+Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 groupFlags) {
+    Evt* newScript;
     s32 scriptListCount;
     s32 i;
     s32 curScriptIndex;
@@ -234,7 +234,7 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
     ASSERT(i < MAX_SCRIPTS);
     curScriptIndex = i;
 
-    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(ScriptInstance));
+    (*gCurrentScriptListPtr)[curScriptIndex] = newScript = heap_malloc(sizeof(Evt));
     numScripts = &gNumScripts;
     (*numScripts)++;
     ASSERT(newScript != NULL);
@@ -289,12 +289,12 @@ ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialSta
     return newScript;
 }
 
-ScriptInstance* start_child_script(ScriptInstance* parentScript, Script* source, s32 initialState) {
+Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) {
     s32 i;
     s32 curScriptIndex;
     s32 scriptListCount;
     s32* tempCounter;
-    ScriptInstance* child;
+    Evt* child;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] == NULL) {
@@ -360,8 +360,8 @@ ScriptInstance* start_child_script(ScriptInstance* parentScript, Script* source,
     return child;
 }
 
-ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, s32 newState) {
-    ScriptInstance* child;
+Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState) {
+    Evt* child;
     s32 curScriptIndex;
     s32 i;
     s32 scriptListCount;
@@ -424,8 +424,8 @@ ScriptInstance* func_802C39F8(ScriptInstance* parentScript, Bytecode* nextLine, 
     return child;
 }
 
-ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) {
-    ScriptInstance* curScript;
+Evt* func_802C3C10(Evt* script, Bytecode* line, s32 arg2) {
+    Evt* curScript;
     s32 i;
 
     script->ptrNextLine = line;
@@ -465,7 +465,7 @@ ScriptInstance* func_802C3C10(ScriptInstance* script, Bytecode* line, s32 arg2) 
     return script;
 }
 
-ScriptInstance* restart_script(ScriptInstance* script) {
+Evt* restart_script(Evt* script) {
     Bytecode* ptrFirstLine = script->ptrFirstLine;
 
     // frameCounter gets set to 0 twice which makes me think a macro is being used here
@@ -496,7 +496,7 @@ void update_scripts(void) {
         sort_scripts();
 
         for (i = 0; i < gScriptListCount; i++) {
-            ScriptInstance* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
+            Evt* script = (*gCurrentScriptListPtr)[gScriptIndexList[i]];
 
             if (script != NULL && script->id == gScriptIdList[i] && script->state != 0 && !(script->state & 0x92)) {
                 s32 stop = FALSE;
@@ -530,9 +530,9 @@ void update_scripts(void) {
 // this function is evil.
 INCLUDE_ASM(s32, "evt/script_list", func_802C3EE4);
 
-void kill_script(ScriptInstance* instanceToKill) {
-    ScriptInstance* childScript;
-    ScriptInstance* blockingParent;
+void kill_script(Evt* instanceToKill) {
+    Evt* childScript;
+    Evt* blockingParent;
     s32 j;
     s32 i;
 
@@ -552,7 +552,7 @@ void kill_script(ScriptInstance* instanceToKill) {
     }
 
     for (j = 0; j < MAX_SCRIPTS; j++) {
-        ScriptInstance* tempScriptInstance = (*gCurrentScriptListPtr)[j];
+        Evt* tempScriptInstance = (*gCurrentScriptListPtr)[j];
         if (tempScriptInstance != NULL) {
             if (tempScriptInstance->parentScript == instanceToKill) {
                 kill_script(tempScriptInstance);
@@ -584,7 +584,7 @@ void kill_script(ScriptInstance* instanceToKill) {
 
 void kill_script_by_ID(s32 id) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -596,7 +596,7 @@ void kill_script_by_ID(s32 id) {
 
 void kill_all_scripts(void) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -608,7 +608,7 @@ void kill_all_scripts(void) {
 
 s32 does_script_exist(s32 id) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -619,7 +619,7 @@ s32 does_script_exist(s32 id) {
     return FALSE;
 }
 
-s32 does_script_exist_by_ref(ScriptInstance* script) {
+s32 does_script_exist_by_ref(Evt* script) {
     s32 i;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
@@ -630,11 +630,11 @@ s32 does_script_exist_by_ref(ScriptInstance* script) {
     return FALSE;
 }
 
-void set_script_priority(ScriptInstance* script, s8 priority) {
+void set_script_priority(Evt* script, s8 priority) {
     script->priority = priority;
 }
 
-void set_script_timescale(ScriptInstance* script, f32 timescale) {
+void set_script_timescale(Evt* script, f32 timescale) {
     script->timeScale = timescale * gGlobalTimeSpace;
 }
 
@@ -646,7 +646,7 @@ f32 get_global_timespace(void) {
     return gGlobalTimeSpace;
 }
 
-void set_script_group(ScriptInstance* script, s8 groupFlags) {
+void set_script_group(Evt* script, s8 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
@@ -675,10 +675,10 @@ Trigger* bind_trigger_1(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 t
     return bind_trigger(script, flags, triggerFlagIndex, triggerVar0, triggerVar1, priority, 1);
 }
 
-void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
+void suspend_group_script(Evt* script, s32 groupFlags) {
     int i;
-    ScriptInstance* scriptContextPtr;
-    ScriptInstance* childScript = script->childScript;
+    Evt* scriptContextPtr;
+    Evt* childScript = script->childScript;
 
     if (childScript != NULL) {
         suspend_group_script(childScript, groupFlags);
@@ -696,10 +696,10 @@ void suspend_group_script(ScriptInstance* script, s32 groupFlags) {
     }
 }
 
-void resume_group_script(ScriptInstance* script, s32 groupFlags) {
+void resume_group_script(Evt* script, s32 groupFlags) {
     int i;
-    ScriptInstance* scriptContextPtr;
-    ScriptInstance* childScript = script->childScript;
+    Evt* scriptContextPtr;
+    Evt* childScript = script->childScript;
 
     if (childScript != NULL) {
         resume_group_script(childScript, groupFlags);
@@ -719,7 +719,7 @@ void resume_group_script(ScriptInstance* script, s32 groupFlags) {
 
 s32 suspend_all_script(s32 id) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -731,7 +731,7 @@ s32 suspend_all_script(s32 id) {
 
 s32 resume_all_script(s32 id) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -743,7 +743,7 @@ s32 resume_all_script(s32 id) {
 
 void suspend_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -755,7 +755,7 @@ void suspend_group_script_index(s32 id, s32 groupFlags) {
 
 void resume_group_script_index(s32 id, s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -767,7 +767,7 @@ void resume_group_script_index(s32 id, s32 groupFlags) {
 
 void suspend_all_group(s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -779,7 +779,7 @@ void suspend_all_group(s32 groupFlags) {
 
 s32 resume_all_group(s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -789,9 +789,9 @@ s32 resume_all_group(s32 groupFlags) {
     }
 }
 
-void suspend_group_others(ScriptInstance* script, s32 groupFlags) {
+void suspend_group_others(Evt* script, s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -801,9 +801,9 @@ void suspend_group_others(ScriptInstance* script, s32 groupFlags) {
     }
 }
 
-void resume_group_others(ScriptInstance* script, s32 groupFlags) {
+void resume_group_others(Evt* script, s32 groupFlags) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         scriptContextPtr = (*gCurrentScriptListPtr)[i];
@@ -813,13 +813,13 @@ void resume_group_others(ScriptInstance* script, s32 groupFlags) {
     }
 }
 
-ScriptInstance* get_script_by_index(s32 index) {
+Evt* get_script_by_index(s32 index) {
     return (*gCurrentScriptListPtr)[index];
 }
 
-ScriptInstance* get_script_by_id(s32 id) {
+Evt* get_script_by_id(s32 id) {
     s32 i;
-    ScriptInstance* scriptContextPtr;
+    Evt* scriptContextPtr;
 
     for (i = 0; i < MAX_SCRIPTS; i++) {
         if ((*gCurrentScriptListPtr)[i] != NULL) {
@@ -832,10 +832,10 @@ ScriptInstance* get_script_by_id(s32 id) {
     return 0;
 }
 
-void set_script_flags(ScriptInstance* script, s32 flags) {
+void set_script_flags(Evt* script, s32 flags) {
     int i;
-    ScriptInstance* scriptContextPtr;
-    ScriptInstance* childScript = script->childScript;
+    Evt* scriptContextPtr;
+    Evt* childScript = script->childScript;
 
     script->state |= flags;
     if (childScript != NULL) {
@@ -850,10 +850,10 @@ void set_script_flags(ScriptInstance* script, s32 flags) {
     }
 }
 
-void clear_script_flags(ScriptInstance* script, s32 flags) {
+void clear_script_flags(Evt* script, s32 flags) {
     int i;
-    ScriptInstance* scriptContextPtr;
-    ScriptInstance* childScript = script->childScript;
+    Evt* scriptContextPtr;
+    Evt* childScript = script->childScript;
 
     script->state &= ~flags;
     if (childScript != NULL) {

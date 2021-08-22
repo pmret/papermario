@@ -219,37 +219,37 @@ void kill_enemy(Enemy* enemy);
 ///
 /// @param enemy               pointer to the enemy to bind the script to
 /// @param aiScriptBytecode    pointer to the script to be bound.
-s32 bind_enemy_ai(Enemy* enemy, Script* aiScriptBytecode);
+s32 bind_enemy_ai(Enemy* enemy, EvtSource* aiScriptBytecode);
 
 /// Binds the specified auxillary script to the specified enemy
 ///
 /// @param enemy               pointer to the enemy to bind the script to
 /// @param auxScriptBytecode   pointer to the script to be bound.
-s32 bind_enemy_aux(Enemy* enemy, Script* auxScriptBytecode);
+s32 bind_enemy_aux(Enemy* enemy, EvtSource* auxScriptBytecode);
 
 /// Binds the specified interact script to the specified enemy
 ///
 /// @param enemy                    pointer to the enemy to bind the script to
 /// @param interactScriptBytecode   pointer to the script to be bound.
-s32 bind_enemy_interact(Enemy* enemy, Script* interactScriptBytecode);
+s32 bind_enemy_interact(Enemy* enemy, EvtSource* interactScriptBytecode);
 
 /// Binds the specified ai script to the npc matching the specified npcId
 ///
 /// @param npcID           ID of the desired npc
 /// @param npcAiBytecode   pointer to the script to be bound.
-void bind_npc_ai(s32 npcID, Script* npcAiBytecode);
+void bind_npc_ai(s32 npcID, EvtSource* npcAiBytecode);
 
 /// Binds the specified auxillary script to the npc matching the specified npcId
 ///
 /// @param npcID           ID of the desired npc
 /// @param npcAuxBytecode  pointer to the script to be bound.
-void bind_npc_aux(s32 npcID, Script* npcAuxBytecode);
+void bind_npc_aux(s32 npcID, EvtSource* npcAuxBytecode);
 
 /// Binds the specified interact script to the npc matching the specified npcId
 ///
 /// @param npcID                ID of the desired npc
 /// @param npcInteractBytecode  pointer to the script to be bound.
-void bind_npc_interact(s32 npcID, Script* npcInteractBytecode);
+void bind_npc_interact(s32 npcID, EvtSource* npcInteractBytecode);
 
 /// Looks for an enemy matching the specified npcID.
 ///

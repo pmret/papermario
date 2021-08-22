@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(StartRumbleWithParams)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(StartRumbleWithParams)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     start_rumble(get_variable(script, *args++), get_variable(script, *args++));

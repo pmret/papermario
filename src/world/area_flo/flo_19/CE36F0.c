@@ -18,7 +18,7 @@ MapConfig N(config) = {
 
 // Extraneous END_CASE_MULTI
 #ifdef NON_MATCHING
-Script N(802409C0) = SCRIPT({
+EvtSource N(802409C0) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         0, 1 {
@@ -35,26 +35,26 @@ Script N(802409C0) = SCRIPT({
     }
 });
 #else
-Script N(802409C0) = {
-    SI_CMD(ScriptOpcode_CALL, GetEntryID, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 0),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 1),
-            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 7),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_EQ, 3),
-            SI_CMD(ScriptOpcode_IF_NE, SI_AREA_FLAG(44), 0),
-            SI_CMD(ScriptOpcode_ELSE),
-                SI_CMD(ScriptOpcode_CALL, FadeOutMusic, 1, 3000),
-                SI_CMD(ScriptOpcode_CALL, FadeInMusic, 0, 50, 0, 3000, 0, 127),
-            SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
+EvtSource N(802409C0) = {
+    SI_CMD(EVT_OP_CALL, GetEntryID, SI_VAR(0)),
+    SI_CMD(EVT_OP_MATCH, SI_VAR(0)),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 0),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 1),
+            SI_CMD(EVT_OP_CALL, SetMusicTrack, 0, SONG_CLOUDY_CLIMB, 0, 8),
+        SI_CMD(EVT_OP_END_CASE_MULTI),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 2),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 7),
+        SI_CMD(EVT_OP_END_CASE_MULTI),
+        SI_CMD(EVT_OP_CASE_EQ, 3),
+            SI_CMD(EVT_OP_IF_NE, SI_AREA_FLAG(44), 0),
+            SI_CMD(EVT_OP_ELSE),
+                SI_CMD(EVT_OP_CALL, FadeOutMusic, 1, 3000),
+                SI_CMD(EVT_OP_CALL, FadeInMusic, 0, 50, 0, 3000, 0, 127),
+            SI_CMD(EVT_OP_END_IF),
+        SI_CMD(EVT_OP_END_CASE_MULTI),
+    SI_CMD(EVT_OP_END_MATCH),
+    SI_CMD(EVT_OP_RETURN),
+    SI_CMD(EVT_OP_END)
 };
 #endif
 
@@ -62,7 +62,7 @@ static s32 N(pad_ABC) = {
     0x00000000,
 };
 
-Script N(80240AC0) = SCRIPT({
+EvtSource N(80240AC0) = SCRIPT({
     MakeItemEntity(ITEM_S_JUMP_CHG, -200, 160, -213, 17, SI_SAVE_FLAG(1391));
 });
 
@@ -70,7 +70,7 @@ static s32 N(pad_AF4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(updateTexturePan_80240B00) = SCRIPT({
+EvtSource N(updateTexturePan_80240B00) = SCRIPT({
     group 0;
     if (SI_VAR(5) == 1) {
         if (SI_VAR(6) == 1) {
@@ -85,13 +85,13 @@ Script N(updateTexturePan_80240B00) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-Script N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
+EvtSource N(exitWalk_80240B9C) = EXIT_WALK_SCRIPT(60,  1, "flo_21",  0);
 
-Script N(80240BF8) = SCRIPT({
+EvtSource N(80240BF8) = SCRIPT({
     bind N(exitWalk_80240B9C) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -171,7 +171,7 @@ static s32 N(pad_1044)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80241050) = SCRIPT({
+EvtSource N(80241050) = SCRIPT({
     group 239;
     SI_VAR(15) = 0;
 0:
@@ -257,7 +257,7 @@ Script N(80241050) = SCRIPT({
     goto 0;
 });
 
-Script N(80241650) = SCRIPT({
+EvtSource N(80241650) = SCRIPT({
     spawn {
         SI_MAP_VAR(12) += -1.5;
         sleep 1;
@@ -265,7 +265,7 @@ Script N(80241650) = SCRIPT({
     }
 });
 
-Script N(8024169C) = SCRIPT({
+EvtSource N(8024169C) = SCRIPT({
     spawn {
         SI_MAP_VAR(13) += -1.5;
         sleep 1;
@@ -273,7 +273,7 @@ Script N(8024169C) = SCRIPT({
     }
 });
 
-Script N(802416E8) = SCRIPT({
+EvtSource N(802416E8) = SCRIPT({
     spawn {
         SI_MAP_VAR(14) += -1.5;
         sleep 1;
@@ -281,7 +281,7 @@ Script N(802416E8) = SCRIPT({
     }
 });
 
-Script N(80241734) = SCRIPT({
+EvtSource N(80241734) = SCRIPT({
     spawn {
         SI_MAP_VAR(15) += -1.5;
         sleep 1;
@@ -289,7 +289,7 @@ Script N(80241734) = SCRIPT({
     }
 });
 
-Script N(80241780) = SCRIPT({
+EvtSource N(80241780) = SCRIPT({
     ParentColliderToModel(8, 28);
     ParentColliderToModel(9, 32);
     ParentColliderToModel(7, 36);
@@ -329,7 +329,7 @@ static s32 N(pad_1A68)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80241A70) = SCRIPT({
+EvtSource N(80241A70) = SCRIPT({
     SI_VAR(0) = 0;
 10:
     N(func_80240784_CE3E74)();
@@ -343,7 +343,7 @@ Script N(80241A70) = SCRIPT({
     sleep 1;
 });
 
-Script N(80241B10) = SCRIPT({
+EvtSource N(80241B10) = SCRIPT({
     SI_VAR(0) = 255;
 10:
     N(func_80240784_CE3E74)();
@@ -357,7 +357,7 @@ Script N(80241B10) = SCRIPT({
     sleep 1;
 });
 
-Script N(80241BB0) = SCRIPT({
+EvtSource N(80241BB0) = SCRIPT({
     TranslateGroup(79, 0, SI_VAR(0), 0);
     TranslateGroup(92, 0, SI_VAR(0), 0);
     SI_VAR(1) = (float) SI_VAR(0);
@@ -366,14 +366,14 @@ Script N(80241BB0) = SCRIPT({
     RotateGroup(92, SI_VAR(1), 0, 1, 0);
 });
 
-Script N(80241C58) = SCRIPT({
+EvtSource N(80241C58) = SCRIPT({
     TranslateGroup(84, 0, SI_VAR(0), 0);
     SI_VAR(1) = (float) SI_VAR(0);
     SI_VAR(1) *= -12.0;
     RotateGroup(84, SI_VAR(1), 0, 1, 0);
 });
 
-Script N(80241CC4) = SCRIPT({
+EvtSource N(80241CC4) = SCRIPT({
     DisablePlayerInput(TRUE);
     SetPlayerActionState(10);
     DisablePartnerAI(0);
@@ -480,7 +480,7 @@ Script N(80241CC4) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(802423F8) = SCRIPT({
+EvtSource N(802423F8) = SCRIPT({
     if (SI_AREA_FLAG(44) == 0) {
         DisablePlayerInput(TRUE);
         func_802D2B6C();
@@ -578,7 +578,7 @@ Script N(802423F8) = SCRIPT({
     }
 });
 
-Script N(80242A2C) = SCRIPT({
+EvtSource N(80242A2C) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetPlayerActionState(10);
@@ -654,7 +654,7 @@ Script N(80242A2C) = SCRIPT({
     GotoMap("flo_00", 7);
 });
 
-Script N(80242FD0) = SCRIPT({
+EvtSource N(80242FD0) = SCRIPT({
     bind N(802423F8) TRIGGER_FLOOR_TOUCH 12;
 });
 
@@ -664,13 +664,13 @@ Script N(80242FD0) = SCRIPT({
 
 void playFX_82();
 
-ApiStatus N(func_8024030C_CE39FC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
 // Identical to UnkFloatFunc except for the presence of the fabsf
-ApiStatus N(func_80240340_CE3A30)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240340_CE3A30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
     s32 var0 = get_variable(script, a1);
@@ -692,7 +692,7 @@ ApiStatus N(func_80240340_CE3A30)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802404D0_CE3BC0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = *args++;
     s32 var2 = *args++;
@@ -703,7 +703,7 @@ ApiStatus N(func_802404D0_CE3BC0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240540_CE3C30)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240540_CE3C30)(Evt* script, s32 isInitialCall) {
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
     f32 temp_f22 = clamp_angle(atan2(0.0f, 0.0f, script->varTable[9], script->varTable[11]) - temp_f20);
@@ -717,7 +717,7 @@ ApiStatus N(func_80240540_CE3C30)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240660_CE3D50)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_by_index(0);
     f32 temp_f20 = get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
@@ -732,7 +732,7 @@ ApiStatus N(func_80240660_CE3D50)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240784_CE3E74)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240784_CE3E74)(Evt* script, s32 isInitialCall) {
     set_screen_overlay_params_back(1, script->varTable[0]);
     return ApiStatus_DONE2;
 }

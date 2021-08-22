@@ -8,7 +8,7 @@ extern s32 D_8029275C;
 extern s32 D_80292BAC;
 extern s32 D_80294320;
 
-ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     HudElement* hudElement;
@@ -20,7 +20,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
     }
-        
+
     func_80268858();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_BODY_SLAM;
     actionCommandStatus->unk_61 = 1;

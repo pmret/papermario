@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_02/8B3A10", func_802439A0_8B3A10);
 /*
-ApiStatus N(func_802439A0_8B3A10)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802439A0_8B3A10)(Evt *script, s32 isInitialCall) {
     s32 var;
     void* temp_s0 = load_asset_by_name("party_pokopi", &var);
 

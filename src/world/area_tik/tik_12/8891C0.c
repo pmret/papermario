@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_802405F0_8891C0);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240960_889530);
 /*
-ApiStatus N(func_80240960_889530)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240960_889530)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80243C40_88C810) == NULL) {
@@ -35,7 +35,7 @@ ApiStatus N(func_80240960_889530)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240C58_889828);
 /*
-ApiStatus N(func_80240C58_889828)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C58_889828)(Evt* script, s32 isInitialCall) {
     switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -59,7 +59,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_80240DE8_8899B8);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_12/8891C0", func_8024121C_889DEC);
 /*
-ApiStatus N(func_8024121C_889DEC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024121C_889DEC)(Evt *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

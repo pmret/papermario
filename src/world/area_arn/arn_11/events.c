@@ -5,7 +5,7 @@ enum {
     NPC_TUBBAS_HEART,
 };
 
-Script N(802400F0) = SCRIPT({
+EvtSource N(802400F0) = SCRIPT({
     SetCamType(0, 6, 1);
     SetCamSpeed(0, 3.0);
     UseSettingsFrom(0, 60, 30, 0);
@@ -16,7 +16,7 @@ Script N(802400F0) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-Script N(802401BC) = SCRIPT({
+EvtSource N(802401BC) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 30;
     SetPlayerSpeed(3.0);
@@ -51,7 +51,7 @@ Script N(802401BC) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(exitSingleDoor_80240428) = SCRIPT({
+EvtSource N(exitSingleDoor_80240428) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -64,11 +64,11 @@ Script N(exitSingleDoor_80240428) = SCRIPT({
     sleep 100;
 });
 
-Script N(802404CC) = SCRIPT({
+EvtSource N(802404CC) = SCRIPT({
     bind N(exitSingleDoor_80240428) TRIGGER_WALL_PRESS_A 2;
 });
 
-Script N(enterSingleDoor_802404F8) = SCRIPT({
+EvtSource N(enterSingleDoor_802404F8) = SCRIPT({
     DisablePlayerInput(TRUE);
     SI_VAR(2) = 0;
     SI_VAR(3) = -1;
@@ -83,7 +83,7 @@ Script N(enterSingleDoor_802404F8) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524290);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -100,11 +100,11 @@ static s32 N(pad_674)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80240680) = SCRIPT({
+EvtSource N(80240680) = SCRIPT({
 
 });
 
-Script N(80240690) = SCRIPT({
+EvtSource N(80240690) = SCRIPT({
 
 });
 
@@ -116,7 +116,7 @@ NpcSettings N(npcSettings_802406A0) = {
     .level = 13,
 };
 
-Script N(idle_802406CC) = SCRIPT({
+EvtSource N(idle_802406CC) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         if (SI_VAR(0) != 0) {
@@ -138,7 +138,7 @@ Script N(idle_802406CC) = SCRIPT({
     StartBossBattle(11);
 });
 
-Script N(8024081C) = SCRIPT({
+EvtSource N(8024081C) = SCRIPT({
     sleep 15;
     PlaySoundAtCollider(2, 449, 0);
     MakeLerp(0, 80, 10, 0);
@@ -152,7 +152,7 @@ Script N(8024081C) = SCRIPT({
     }
 });
 
-Script N(802408D8) = SCRIPT({
+EvtSource N(802408D8) = SCRIPT({
     MakeLerp(80, 0, 10, 0);
     loop {
         UpdateLerp();
@@ -171,7 +171,7 @@ s32 N(intTable_80240988)[] = {
     0x00000000, 0x00000000, 0xFFFFD8F0, 0x00000000, 0x00000000,
 };
 
-Script N(defeat_802409DC) = SCRIPT({
+EvtSource N(defeat_802409DC) = SCRIPT({
     spawn {
         SetCamType(0, 6, 1);
         SetCamSpeed(0, 90.0);
@@ -237,7 +237,7 @@ Script N(defeat_802409DC) = SCRIPT({
     SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_FIRST_TUNNEL;
 });
 
-Script N(init_80240E70) = SCRIPT({
+EvtSource N(init_80240E70) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {

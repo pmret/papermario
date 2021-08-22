@@ -8,7 +8,7 @@ extern s32 D_80108AFC;
 extern s32 D_802928F8;
 extern s32 D_80109244;
 
-ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9000_4233F0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     HudElement* hudElement;
@@ -16,7 +16,7 @@ ApiStatus func_802A9000_4233F0(ScriptInstance* script, s32 isInitialCall) {
     battleStatus->unk_82 = 0;
     battleStatus->unk_434 = &D_80294220;
     battleStatus->unk_86 = 127;
-    
+
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;

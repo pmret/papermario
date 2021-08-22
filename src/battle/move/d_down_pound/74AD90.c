@@ -7,7 +7,7 @@
 
 #include "world/common/IsRightOnEquipped.inc.c"
 
-ApiStatus func_802A10A4_74AE34(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A10A4_74AE34(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);

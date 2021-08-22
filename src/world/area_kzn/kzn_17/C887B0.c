@@ -16,7 +16,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C887B0", func_80242F74_C88A24);
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_17/C887B0", func_80243004_C88AB4);
 /*
-ApiStatus N(func_80243004_C88AB4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80243004_C88AB4)(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->functionTemp[0] = get_variable(script, *args++);

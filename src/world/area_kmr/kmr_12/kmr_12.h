@@ -7,11 +7,11 @@
 #define NPC_GOOMBA 0
 
 #define GetGoomba N(GetGoomba)
-ApiStatus GetGoomba(ScriptInstance* script, s32 isInitialCall);
+ApiStatus GetGoomba(Evt* script, s32 isInitialCall);
 
 extern  MapConfig N(config);
-extern  Script N(main);
-extern  Script N(PlayMusic);
-extern  Script N(MakeEntities);
-extern  Script N(ReadWestSign);
+extern  EvtSource N(main);
+extern  EvtSource N(PlayMusic);
+extern  EvtSource N(MakeEntities);
+extern  EvtSource N(ReadWestSign);
 extern NpcGroupList N(npcGroupList);

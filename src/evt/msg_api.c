@@ -1,26 +1,26 @@
 #include "common.h"
 
-ApiStatus _show_message(ScriptInstance* script, s32 isInitialCall, s32 arg2);
+ApiStatus _show_message(Evt* script, s32 isInitialCall, s32 arg2);
 
-ApiStatus SpeakToPlayer(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SpeakToPlayer(Evt* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 0);
 }
 
-ApiStatus EndSpeech(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EndSpeech(Evt* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 1);
 }
 
-ApiStatus ContinueSpeech(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ContinueSpeech(Evt* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 2);
 }
 
-ApiStatus SpeakToNpc(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SpeakToNpc(Evt* script, s32 isInitialCall) {
     return _show_message(script, isInitialCall, 3);
 }
 
-INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, ScriptInstance* script, s32 isInitialCall, s32 arg2);
+INCLUDE_ASM(ApiStatus, "evt/msg_api", _show_message, Evt* script, s32 isInitialCall, s32 arg2);
 
-ApiStatus ShowMessageAtScreenPos(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMessageAtScreenPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -46,7 +46,7 @@ ApiStatus ShowMessageAtScreenPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus ShowMessageAtWorldPos(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMessageAtWorldPos(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MessagePrintState** currentPrintContext;
     s32* currentCameraID = &gCurrentCameraID;
@@ -80,7 +80,7 @@ ApiStatus ShowMessageAtWorldPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CloseMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         close_message(gCurrentPrintContext);
     }
@@ -95,7 +95,7 @@ ApiStatus CloseMessage(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SwitchMessage(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -112,7 +112,7 @@ ApiStatus SwitchMessage(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowChoice(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MessagePrintState** temp802DB268;
 
@@ -133,12 +133,12 @@ ApiStatus ShowChoice(ScriptInstance* script, s32 isInitialCall) {
     return script->functionTemp[1] == 1;
 }
 
-ApiStatus CloseChoice(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CloseChoice(Evt* script, s32 isInitialCall) {
     close_message(D_802DB268);
     return ApiStatus_DONE1;
 }
 
-ApiStatus CancelMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CancelMessage(Evt* script, s32 isInitialCall) {
     cancel_message(gCurrentPrintContext);
     return ApiStatus_DONE2;
 }
@@ -148,12 +148,12 @@ ApiStatus CancelMessageAndBlock(void) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus SetMessageImages(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetMessageImages(Evt* script, s32 isInitialCall) {
     set_message_images(*script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D0C94(ScriptInstance* script, s32 initialCall) {
+ApiStatus func_802D0C94(Evt* script, s32 initialCall) {
     if (get_variable(script, *script->ptrReadPos) == 0) {
         gOverrideFlags |= 0x10;
     } else {
@@ -162,7 +162,7 @@ ApiStatus func_802D0C94(ScriptInstance* script, s32 initialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetMessageString(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 string = get_variable(script, *args++);
     s32 index = get_variable(script, *args++);
@@ -171,7 +171,7 @@ ApiStatus SetMessageString(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetMessageValue(ScriptInstance* script, s32 initialCall) {
+ApiStatus SetMessageValue(Evt* script, s32 initialCall) {
     Bytecode* ptrReadPos = script->ptrReadPos;
     s32 value = get_variable(script, *ptrReadPos++);
     s32 index = get_variable(script, *ptrReadPos);

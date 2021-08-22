@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 
-ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_6FAD10(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 x = get_variable(script, *args++);
@@ -48,7 +48,7 @@ ApiStatus func_80238000_6FAD10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238244_6FAF54(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238244_6FAF54(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ActorMovement* partnerActorMovement = &partnerActor->walk;
@@ -82,7 +82,7 @@ ApiStatus func_80238244_6FAF54(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80238358_6FB068(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238358_6FB068(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -143,7 +143,7 @@ ApiStatus func_80238358_6FB068(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8023849C_6FB1AC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023849C_6FB1AC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -190,7 +190,7 @@ ApiStatus func_8023849C_6FB1AC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238590_6FB2A0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238590_6FB2A0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;

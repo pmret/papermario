@@ -22,7 +22,7 @@ typedef struct StarPowerDesc {
 
 extern StarPowerDesc D_8008F071[];
 
-ApiStatus LoadStarPowerScript(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus LoadStarPowerScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     s16 selectedItemID;

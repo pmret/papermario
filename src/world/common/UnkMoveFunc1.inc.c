@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkMoveFunc1)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkMoveFunc1)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 posX = playerActor->currentPos.x;

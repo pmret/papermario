@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_22_tattle },
 };
 
-Script N(802402E0) = SCRIPT({
+EvtSource N(802402E0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -30,13 +30,13 @@ Script N(802402E0) = SCRIPT({
     }
 });
 
-Script N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
+EvtSource N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
 
-Script N(802403AC) = SCRIPT({
+EvtSource N(802403AC) = SCRIPT({
     bind N(exitWalk_80240350) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -67,7 +67,7 @@ NpcSettings N(npcSettings_80240520) = {
     .level = 99,
 };
 
-Script N(idle_8024054C) = SCRIPT({
+EvtSource N(idle_8024054C) = SCRIPT({
     SI_MAP_VAR(10) = 0;
     loop {
         match SI_MAP_VAR(10) {
@@ -82,7 +82,7 @@ Script N(idle_8024054C) = SCRIPT({
     }
 });
 
-Script N(defeat_802405E4) = SCRIPT({
+EvtSource N(defeat_802405E4) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -107,12 +107,12 @@ Script N(defeat_802405E4) = SCRIPT({
     }
 });
 
-Script N(init_80240740) = SCRIPT({
+EvtSource N(init_80240740) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024054C));
     BindNpcDefeat(NPC_SELF, N(defeat_802405E4));
 });
 
-Script N(idle_80240778) = SCRIPT({
+EvtSource N(idle_80240778) = SCRIPT({
     SI_MAP_VAR(11) = 0;
     loop {
         match SI_MAP_VAR(11) {
@@ -127,7 +127,7 @@ Script N(idle_80240778) = SCRIPT({
     }
 });
 
-Script N(defeat_80240810) = SCRIPT({
+EvtSource N(defeat_80240810) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -158,7 +158,7 @@ Script N(defeat_80240810) = SCRIPT({
     }
 });
 
-Script N(init_802409CC) = SCRIPT({
+EvtSource N(init_802409CC) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_80240778));
     BindNpcDefeat(NPC_SELF, N(defeat_80240810));
 });
@@ -248,7 +248,7 @@ s32 N(itemList_80240E10)[] = {
     ITEM_NONE,
 };
 
-Script N(80240E24) = SCRIPT({
+EvtSource N(80240E24) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 20;
     ShowMessageAtScreenPos(MESSAGE_ID(0x11, 0x00DB), 300, 120);
@@ -256,7 +256,7 @@ Script N(80240E24) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80240E84) = SCRIPT({
+EvtSource N(80240E84) = SCRIPT({
     SetPlayerAnimation(0x6000E);
     spawn {
         GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
@@ -284,7 +284,7 @@ Script N(80240E84) = SCRIPT({
     sleep 10;
 });
 
-Script N(80241028) = SCRIPT({
+EvtSource N(80241028) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerInput(FALSE);
     ShowConsumableChoicePopup();
@@ -356,7 +356,7 @@ Script N(80241028) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80241528) = SCRIPT({
+EvtSource N(80241528) = SCRIPT({
     bind_padlock N(80241028) TRIGGER_WALL_PRESS_A 9 N(itemList_80240E10);
     if (SI_SAVE_FLAG(1395) == 1) {
         MakeItemEntity(ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, SI_SAVE_FLAG(1392));
@@ -369,7 +369,7 @@ static s32 N(pad_1594)[] = {
 
 void playFX_82();
 
-ApiStatus N(func_80240000_CEC240)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

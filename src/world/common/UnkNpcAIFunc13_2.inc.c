@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkNpcAIFunc13_2)(ScriptInstance* script, NpcAISettings* aiSettings, s32 arg2) {
+void N(UnkNpcAIFunc13_2)(Evt* script, NpcAISettings* aiSettings, s32 arg2) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 tempAngle;

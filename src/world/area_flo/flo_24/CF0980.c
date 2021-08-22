@@ -15,7 +15,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_24_tattle },
 };
 
-Script N(80240600) = SCRIPT({
+EvtSource N(80240600) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
     } else {
@@ -26,7 +26,7 @@ Script N(80240600) = SCRIPT({
     }
 });
 
-Script N(80240690) = SCRIPT({
+EvtSource N(80240690) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -65,16 +65,16 @@ Script N(80240690) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
+EvtSource N(exitWalk_8024093C) = EXIT_WALK_SCRIPT(60,  0, "flo_08",  1);
 
-Script N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
+EvtSource N(exitWalk_80240998) = EXIT_WALK_SCRIPT(60,  1, "flo_10",  0);
 
-Script N(802409F4) = SCRIPT({
+EvtSource N(802409F4) = SCRIPT({
     bind N(exitWalk_8024093C) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80240998) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -163,7 +163,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80241718) = { 1.0f, 0.0f, -192.0f, 0.0f };
 
-Script N(80241728) = SCRIPT({
+EvtSource N(80241728) = SCRIPT({
     SI_AREA_FLAG(31) = 0;
     SI_AREA_FLAG(32) = 0;
     SI_VAR(0) = N(tree1);
@@ -171,7 +171,7 @@ Script N(80241728) = SCRIPT({
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80241718);
 });
 
-Script N(updateTexturePan_802417A0) = SCRIPT({
+EvtSource N(updateTexturePan_802417A0) = SCRIPT({
     group 0;
     if (SI_VAR(5) == 1) {
         if (SI_VAR(6) == 1) {
@@ -190,7 +190,7 @@ const char N(flo_10_name_hack)[];
 
 // BUG: missing END_SPAWN_THREADs
 #ifdef NON_MATCHING
-Script N(8024183C) = SCRIPT({
+EvtSource N(8024183C) = SCRIPT({
     DisablePlayerInput(TRUE);
     TranslateGroup(100, 0, 45, 0);
     UseSettingsFrom(0, 170, 0, 160);
@@ -230,48 +230,48 @@ Script N(8024183C) = SCRIPT({
     }
 });
 #else
-Script N(8024183C) = {
-    SI_CMD(ScriptOpcode_CALL, DisablePlayerInput, 1),
-    SI_CMD(ScriptOpcode_CALL, TranslateGroup, 100, 0, 45, 0),
-    SI_CMD(ScriptOpcode_CALL, UseSettingsFrom, 0, 170, 0, 160),
-    SI_CMD(ScriptOpcode_CALL, SetPanTarget, 0, 170, -90, 160),
-    SI_CMD(ScriptOpcode_CALL, SetCamDistance, 0, 800),
-    SI_CMD(ScriptOpcode_CALL, SetCamPitch, 0, SI_FIXED(18.5), SI_FIXED(-7.5)),
-    SI_CMD(ScriptOpcode_CALL, SetCamPosA, 0, SI_FIXED(-300.0), SI_FIXED(200.0)),
-    SI_CMD(ScriptOpcode_CALL, SetCamPosB, 0, SI_FIXED(300.0), SI_FIXED(-150.0)),
-    SI_CMD(ScriptOpcode_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
-    SI_CMD(ScriptOpcode_CALL, PanToTarget, 0, 0, 1),
-    SI_CMD(ScriptOpcode_CALL, PlaySound, 0x80000050),
-    SI_CMD(ScriptOpcode_SPAWN_THREAD),
-        SI_CMD(ScriptOpcode_CALL, MakeLerp, 80, 90, 10, 0),
-        SI_CMD(ScriptOpcode_LABEL, 0),
-        SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-        SI_CMD(ScriptOpcode_CALL, RotateModel, 101, SI_VAR(0), 1, 0, 0),
-        SI_CMD(ScriptOpcode_CALL, RotateModel, 103, SI_VAR(0), 1, 0, 0),
-        SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 1),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-            SI_CMD(ScriptOpcode_GOTO, 0),
-        SI_CMD(ScriptOpcode_END_IF),
-        SI_CMD(ScriptOpcode_SPAWN_THREAD),
-            SI_CMD(ScriptOpcode_CALL, MakeLerp, 45, 100, 150, 0),
-            SI_CMD(ScriptOpcode_LOOP, 0),
-                SI_CMD(ScriptOpcode_CALL, UpdateLerp),
-                SI_CMD(ScriptOpcode_CALL, TranslateGroup, 100, 0, SI_VAR(0), 0),
-                SI_CMD(ScriptOpcode_SLEEP_FRAMES, 1),
-                SI_CMD(ScriptOpcode_IF_EQ, SI_VAR(1), 0),
-                    SI_CMD(ScriptOpcode_BREAK_LOOP),
-                SI_CMD(ScriptOpcode_END_IF),
-            SI_CMD(ScriptOpcode_END_LOOP),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 30),
-            SI_CMD(ScriptOpcode_SET, SI_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
-            SI_CMD(ScriptOpcode_CALL, GotoMap, N(flo_10_name_hack), 2),
-            SI_CMD(ScriptOpcode_SLEEP_FRAMES, 100),
-            SI_CMD(ScriptOpcode_RETURN),
-            SI_CMD(ScriptOpcode_END)
+EvtSource N(8024183C) = {
+    SI_CMD(EVT_OP_CALL, DisablePlayerInput, 1),
+    SI_CMD(EVT_OP_CALL, TranslateGroup, 100, 0, 45, 0),
+    SI_CMD(EVT_OP_CALL, UseSettingsFrom, 0, 170, 0, 160),
+    SI_CMD(EVT_OP_CALL, SetPanTarget, 0, 170, -90, 160),
+    SI_CMD(EVT_OP_CALL, SetCamDistance, 0, 800),
+    SI_CMD(EVT_OP_CALL, SetCamPitch, 0, SI_FIXED(18.5), SI_FIXED(-7.5)),
+    SI_CMD(EVT_OP_CALL, SetCamPosA, 0, SI_FIXED(-300.0), SI_FIXED(200.0)),
+    SI_CMD(EVT_OP_CALL, SetCamPosB, 0, SI_FIXED(300.0), SI_FIXED(-150.0)),
+    SI_CMD(EVT_OP_CALL, SetCamSpeed, 0, SI_FIXED(90.0)),
+    SI_CMD(EVT_OP_CALL, PanToTarget, 0, 0, 1),
+    SI_CMD(EVT_OP_CALL, PlaySound, 0x80000050),
+    SI_CMD(EVT_OP_SPAWN_THREAD),
+        SI_CMD(EVT_OP_CALL, MakeLerp, 80, 90, 10, 0),
+        SI_CMD(EVT_OP_LABEL, 0),
+        SI_CMD(EVT_OP_CALL, UpdateLerp),
+        SI_CMD(EVT_OP_CALL, RotateModel, 101, SI_VAR(0), 1, 0, 0),
+        SI_CMD(EVT_OP_CALL, RotateModel, 103, SI_VAR(0), 1, 0, 0),
+        SI_CMD(EVT_OP_IF_EQ, SI_VAR(1), 1),
+            SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
+            SI_CMD(EVT_OP_GOTO, 0),
+        SI_CMD(EVT_OP_END_IF),
+        SI_CMD(EVT_OP_SPAWN_THREAD),
+            SI_CMD(EVT_OP_CALL, MakeLerp, 45, 100, 150, 0),
+            SI_CMD(EVT_OP_LOOP, 0),
+                SI_CMD(EVT_OP_CALL, UpdateLerp),
+                SI_CMD(EVT_OP_CALL, TranslateGroup, 100, 0, SI_VAR(0), 0),
+                SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
+                SI_CMD(EVT_OP_IF_EQ, SI_VAR(1), 0),
+                    SI_CMD(EVT_OP_BREAK_LOOP),
+                SI_CMD(EVT_OP_END_IF),
+            SI_CMD(EVT_OP_END_LOOP),
+            SI_CMD(EVT_OP_SLEEP_FRAMES, 30),
+            SI_CMD(EVT_OP_SET, SI_STORY_PROGRESS, STORY_CH6_FILLED_SPRING_WITH_WATER),
+            SI_CMD(EVT_OP_CALL, GotoMap, N(flo_10_name_hack), 2),
+            SI_CMD(EVT_OP_SLEEP_FRAMES, 100),
+            SI_CMD(EVT_OP_RETURN),
+            SI_CMD(EVT_OP_END)
         };
 #endif
 
-Script N(80241ABC) = SCRIPT({
+EvtSource N(80241ABC) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_FILLED_SPRING_WITH_WATER) {
         EnableGroup(94, 0);
         ModifyColliderFlags(0, 30, 0x7FFFFE00);
@@ -393,7 +393,7 @@ static s32 N(pad_21A4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, -325, 60, -140, 0, ITEM_DIZZY_DIAL, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1393));
     MakeEntity(0x802EA588, 325, 60, -140, 0, ITEM_MAPLE_SYRUP, MAKE_ENTITY_END);

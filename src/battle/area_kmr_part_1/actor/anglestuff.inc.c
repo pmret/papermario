@@ -55,7 +55,7 @@ u32 N(angle_calculate)(f32 x, f32 y) {
     return ret;
 }
 
-ApiStatus N(AngleCalculate)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

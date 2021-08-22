@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc12)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc12)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 posX, posY, posZ, posW;
 

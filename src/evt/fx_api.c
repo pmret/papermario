@@ -5,7 +5,7 @@ INCLUDE_ASM(void, "evt/fx_api", func_802D7460, f32 x, f32 y, f32 z, s32 arg3);
 
 INCLUDE_ASM(void, "evt/fx_api", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
 
-ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D7520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
@@ -16,7 +16,7 @@ ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D75D8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_float_variable(script, *args++);
     f32 y = get_float_variable(script, *args++);
@@ -29,16 +29,16 @@ ApiStatus func_802D75D8(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "evt/fx_api", func_802D7690);
 
-INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, Evt* script, s32 isInitialCall);
 
-ApiStatus RemoveEffect(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus RemoveEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     remove_effect(get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptrValue = (s32*) get_variable(script, *args++);
 
@@ -46,7 +46,7 @@ ApiStatus func_802D7B10(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32** ptrValue = (s32**) get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
@@ -55,7 +55,7 @@ ApiStatus func_802D7B44(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32** ptrValue = (s32**) get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
@@ -64,7 +64,7 @@ ApiStatus func_802D7B74(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D7BA4(Evt* script, s32 isInitialCall) {
     s32 var1 = script->varTable[1];
     s32 var2 = script->varTable[2];
     s32 var3 = script->varTable[3];
@@ -95,11 +95,11 @@ ApiStatus func_802D7BA4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-Script D_802D9D50 = SCRIPT({
+EvtSource D_802D9D50 = SCRIPT({
     func_802D7BA4();
 });
 
-ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -109,7 +109,7 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
     s32 var5 = get_variable(script, *args++);
     s32 var6 = get_variable(script, *args++);
 
-    ScriptInstance* newScript = start_script(D_802D9D50, 1, 0);
+    Evt* newScript = start_script(D_802D9D50, 1, 0);
     newScript->varTable[0] = var0;
     newScript->varTable[1] = var1;
     newScript->varTable[2] = var2;
@@ -123,13 +123,13 @@ ApiStatus Spawn802D9D50(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "evt/fx_api", func_802D7E08);
 
-INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", ShowSleepBubble, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", func_802D8248, Evt* script, s32 isInitialCall);
 
 // So close aside from regalloc at the beginning
 #ifdef NON_MATCHING
-ApiStatus PlayEffect(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args;
     Bytecode* intArgs;
     Bytecode* floatArgs;
@@ -622,5 +622,5 @@ ApiStatus PlayEffect(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "evt/fx_api", PlayEffect, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/fx_api", PlayEffect, Evt* script, s32 isInitialCall);
 #endif

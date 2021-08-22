@@ -6,7 +6,7 @@ extern s32 D_80108AFC;
 extern s32 D_80108B28;
 extern s32 D_802944A0;
 
-ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hudElement;
@@ -47,7 +47,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus func_802A9138_42C828(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9138_42C828(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

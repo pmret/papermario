@@ -21,7 +21,7 @@ static char* N(exit_str_1) = "tik_07";
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_8024031C_879EFC);
 /*
-ApiStatus N(func_8024031C_879EFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024031C_879EFC)(Evt* script, s32 isInitialCall) {
     switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -45,7 +45,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802404AC_87A08C);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_07/879BE0", func_802408E0_87A4C0);
 /*
-ApiStatus N(func_802408E0_87A4C0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802408E0_87A4C0)(Evt *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

@@ -16,16 +16,16 @@ enum {
     NPC_BOO8,
 };
 
-Script N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
+EvtSource N(exitWalk_80241430) = EXIT_WALK_SCRIPT(60,  0, "arn_03",  1);
 
-Script N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
+EvtSource N(exitWalk_8024148C) = EXIT_WALK_SCRIPT(60,  1, "arn_02",  0);
 
-Script N(802414E8) = SCRIPT({
+EvtSource N(802414E8) = SCRIPT({
     bind N(exitWalk_80241430) TRIGGER_FLOOR_ABOVE 1;
     bind N(exitWalk_8024148C) TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(enterWalk_80241530) = SCRIPT({
+EvtSource N(enterWalk_80241530) = SCRIPT({
     GetLoadType(SI_VAR(1));
     if (SI_VAR(1) == 1) {
         spawn EnterSavePoint;
@@ -37,7 +37,7 @@ Script N(enterWalk_80241530) = SCRIPT({
     sleep 1;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -78,7 +78,7 @@ NpcAISettings N(npcAISettings_802416DC) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_8024170C) = SCRIPT({
+EvtSource N(npcAI_8024170C) = SCRIPT({
     N(func_8024113C_BE8D1C)(N(npcAISettings_802416DC));
 });
 
@@ -95,11 +95,11 @@ NpcSettings N(npcSettings_80241758) = {
     .level = 99,
 };
 
-Script N(idle_80241784) = SCRIPT({
+EvtSource N(idle_80241784) = SCRIPT({
 
 });
 
-Script N(interact_80241794) = SCRIPT({
+EvtSource N(interact_80241794) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(6) == 0) {
@@ -127,11 +127,11 @@ Script N(interact_80241794) = SCRIPT({
     }
 });
 
-Script N(interact_802418F4) = SCRIPT({
+EvtSource N(interact_802418F4) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0094));
 });
 
-Script N(interact_80241924) = SCRIPT({
+EvtSource N(interact_80241924) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(7) == 0) {
@@ -159,11 +159,11 @@ Script N(interact_80241924) = SCRIPT({
     }
 });
 
-Script N(interact_80241A84) = SCRIPT({
+EvtSource N(interact_80241A84) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x009B));
 });
 
-Script N(interact_80241AB4) = SCRIPT({
+EvtSource N(interact_80241AB4) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
@@ -213,7 +213,7 @@ Script N(interact_80241AB4) = SCRIPT({
     }
 });
 
-Script N(interact_80241D88) = SCRIPT({
+EvtSource N(interact_80241D88) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {}
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {}
@@ -227,7 +227,7 @@ Script N(interact_80241D88) = SCRIPT({
     }
 });
 
-Script N(interact_80241E28) = SCRIPT({
+EvtSource N(interact_80241E28) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(8) == 0) {
@@ -255,22 +255,22 @@ Script N(interact_80241E28) = SCRIPT({
     }
 });
 
-Script N(interact_80241F88) = SCRIPT({
+EvtSource N(interact_80241F88) = SCRIPT({
     SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00B5));
 });
 
-Script N(init_80241FB8) = SCRIPT({
+EvtSource N(init_80241FB8) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
         BindNpcIdle(NPC_SELF, N(idle_80241784));
     }
     BindNpcInteract(NPC_SELF, N(interact_80241794));
 });
 
-Script N(init_80242008) = SCRIPT({
+EvtSource N(init_80242008) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241924));
 });
 
-Script N(init_8024202C) = SCRIPT({
+EvtSource N(init_8024202C) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241AB4));
     match SI_STORY_PROGRESS {
         < STORY_CH3_SAW_TUBBA_EAT_BOO {
@@ -293,7 +293,7 @@ Script N(init_8024202C) = SCRIPT({
     }
 });
 
-Script N(init_8024212C) = SCRIPT({
+EvtSource N(init_8024212C) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241D88));
     match SI_STORY_PROGRESS {
         < STORY_CH3_SAW_TUBBA_EAT_BOO {
@@ -314,7 +314,7 @@ Script N(init_8024212C) = SCRIPT({
     }
 });
 
-Script N(init_802421EC) = SCRIPT({
+EvtSource N(init_802421EC) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
         BindNpcIdle(NPC_SELF, N(idle_80241784));
     }
@@ -476,7 +476,7 @@ StaticNpc N(npcGroup_8024223C)[] = {
     },
 };
 
-Script N(80242BEC) = SCRIPT({
+EvtSource N(80242BEC) = SCRIPT({
     loop SI_VAR(0) {
         PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
         ShakeCam(0, 0, 10, 0.5);
@@ -484,7 +484,7 @@ Script N(80242BEC) = SCRIPT({
     }
 });
 
-Script N(80242C50) = SCRIPT({
+EvtSource N(80242C50) = SCRIPT({
     DisablePlayerInput(TRUE);
     NpcFacePlayer(NPC_BOO2, 1);
     PlaySoundAtNpc(NPC_BOO2, SOUND_UNKNOWN_262, 0);
@@ -746,7 +746,7 @@ Script N(80242C50) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(802441FC) = SCRIPT({
+EvtSource N(802441FC) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH3_SAW_TUBBA_EAT_BOO) {
         SetNpcPos(NPC_BOO2, 330, 184, 240);
         loop {
@@ -772,7 +772,7 @@ Script N(802441FC) = SCRIPT({
     }
 });
 
-Script N(init_80244358) = SCRIPT({
+EvtSource N(init_80244358) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH3_SAW_TUBBA_EAT_BOO) {
         RemoveNpc(NPC_SELF);
     }
@@ -819,7 +819,7 @@ StaticNpc N(npcGroup_802443AC) = {
     .extraAnimations = N(extraAnimationList_80244390),
 };
 
-Script N(idle_8024459C) = SCRIPT({
+EvtSource N(idle_8024459C) = SCRIPT({
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(3) = SI_VAR(0);
     SI_VAR(3) += -60;
@@ -841,22 +841,22 @@ Script N(idle_8024459C) = SCRIPT({
     }
 });
 
-Script N(init_80244704) = SCRIPT({
+EvtSource N(init_80244704) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(init_8024473C) = SCRIPT({
+EvtSource N(init_8024473C) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(init_80244774) = SCRIPT({
+EvtSource N(init_80244774) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
 
-Script N(init_802447AC) = SCRIPT({
+EvtSource N(init_802447AC) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024459C));
     EnableNpcShadow(NPC_SELF, FALSE);
 });
@@ -997,7 +997,7 @@ static s32 N(pad_4FF8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA7E0, 17, 238, 80, 0, MAKE_ENTITY_END);
 });
 
@@ -1023,7 +1023,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkFunc16.inc.c"
 
-ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B94_BE8774)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -1108,7 +1108,7 @@ ApiStatus N(func_80240B94_BE8774)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E90_BE8A70)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -1144,7 +1144,7 @@ void N(func_80240E90_BE8A70)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80241068_BE8C48)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241068_BE8C48)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1161,7 +1161,7 @@ void N(func_80241068_BE8C48)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024113C_BE8D1C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1203,7 +1203,7 @@ ApiStatus N(func_8024113C_BE8D1C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802412B0_BE8E90)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802412B0_BE8E90)(Evt* script, s32 isInitialCall) {
     return (gGameStatusPtr->pressedButtons >> 1) & ApiStatus_DONE2;
 }
 

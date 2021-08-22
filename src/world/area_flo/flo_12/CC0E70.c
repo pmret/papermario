@@ -22,7 +22,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_12_tattle },
 };
 
-Script N(80240750) = SCRIPT({
+EvtSource N(80240750) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -37,11 +37,11 @@ Script N(80240750) = SCRIPT({
     }
 });
 
-Script N(8024080C) = SCRIPT({
+EvtSource N(8024080C) = SCRIPT({
     PushSong(137, 3);
 });
 
-Script N(80240830) = SCRIPT({
+EvtSource N(80240830) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
     PopSong();
@@ -51,7 +51,7 @@ static s32 N(pad_86C) = {
     0x00000000,
 };
 
-Script N(80240870) = SCRIPT({
+EvtSource N(80240870) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -90,13 +90,13 @@ Script N(80240870) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
+EvtSource N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
-Script N(80240B78) = SCRIPT({
+EvtSource N(80240B78) = SCRIPT({
     bind N(exitWalk_80240B1C) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -158,12 +158,12 @@ NpcSettings N(npcSettings_80240E5C) = {
 
 s32** N(D_802417EC_CC261C) = NULL;
 
-Script N(802417F0) = SCRIPT({
+EvtSource N(802417F0) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
     return;
 });
 
-Script N(80241820) = SCRIPT({
+EvtSource N(80241820) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 16);
     return;
 });
@@ -176,7 +176,7 @@ s32 N(D_80241854_CC2684) = {
     0x00000000,
 };
 
-Script N(80241858) = SCRIPT({
+EvtSource N(80241858) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -200,7 +200,7 @@ Script N(80241858) = SCRIPT({
     unbind;
 });
 
-Script N(8024199C) = SCRIPT({
+EvtSource N(8024199C) = SCRIPT({
     N(func_8024064C_CC147C)(SI_VAR(0));
     bind_padlock N(80241858) 0x10 0 N(D_802429E0);
     N(func_802405C0_CC13F0)(SI_VAR(0));
@@ -210,7 +210,7 @@ s32 N(D_802419EC_CC281C)[] = {
     0x0000001E, 0x00000000,
 };
 
-Script N(802419F4) = SCRIPT({
+EvtSource N(802419F4) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     GetNpcPos(NPC_ROSIE0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -230,7 +230,7 @@ Script N(802419F4) = SCRIPT({
     sleep 100;
 });
 
-Script N(80241B6C) = SCRIPT({
+EvtSource N(80241B6C) = SCRIPT({
     sleep 10;
     SetNpcFlagBits(NPC_ROSIE0, ((NPC_FLAG_100)), TRUE);
     PlayerMoveTo(-5, 20, 20);
@@ -238,7 +238,7 @@ Script N(80241B6C) = SCRIPT({
     PlayerFaceNpc(0, 1);
 });
 
-Script N(80241BE4) = SCRIPT({
+EvtSource N(80241BE4) = SCRIPT({
     sleep 10;
     SetNpcFlagBits(NPC_ROSIE0, ((NPC_FLAG_100)), TRUE);
     SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), TRUE);
@@ -248,7 +248,7 @@ Script N(80241BE4) = SCRIPT({
     PlayerFaceNpc(0, 1);
 });
 
-Script N(interact_80241C8C) = SCRIPT({
+EvtSource N(interact_80241C8C) = SCRIPT({
     await N(8024080C);
     match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
@@ -374,7 +374,7 @@ Script N(interact_80241C8C) = SCRIPT({
     await N(80240830);
 });
 
-Script N(init_802423D0) = SCRIPT({
+EvtSource N(init_802423D0) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241C8C));
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 35;
@@ -470,7 +470,7 @@ NpcGroupList N(npcGroupList_802429B8) = {
     {},
 };
 
-ApiStatus N(func_8024027C_CC10AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024027C_CC10AC)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802417EC_CC261C) == NULL) {
@@ -494,7 +494,7 @@ ApiStatus N(func_8024027C_CC10AC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -510,7 +510,7 @@ ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80241854_CC2684) = get_variable(script, *args);
@@ -518,7 +518,7 @@ ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024064C_CC147C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;

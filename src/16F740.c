@@ -240,7 +240,7 @@ INCLUDE_ASM(s32, "16F740", btl_state_draw_end_battle);
 
 void btl_state_update_defend(void) {
     Actor* player = gBattleStatus.playerActor;
-    ScriptInstance* script;
+    Evt* script;
 
     switch (gBattleState2) {
         case 0:
@@ -272,12 +272,12 @@ INCLUDE_ASM(s32, "16F740", btl_state_update_defeat);
 void btl_state_draw_defeat(void) {
 }
 
-ApiStatus EnablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EnablePartnerBlur(Evt* script, s32 isInitialCall) {
     enable_partner_blur();
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePartnerBlur(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DisablePartnerBlur(Evt* script, s32 isInitialCall) {
     disable_partner_blur();
     return ApiStatus_DONE2;
 }

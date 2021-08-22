@@ -1,4 +1,4 @@
-ApiStatus N(MashActionCommandInit)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(MashActionCommandInit)(Evt* script, s32 isInitialCall) {
     u8 mashMeterCutoff;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
