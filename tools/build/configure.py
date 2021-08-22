@@ -6,10 +6,12 @@ import subprocess
 import sys
 import ninja_syntax
 from glob import glob
+import os
 
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
+DO_FIRST_OK = os.get_terminal_size().columns >= 80
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
@@ -71,7 +73,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("sha1sum",
         description="check $in",
-        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+        command="sha1sum -c $in && touch $out" + ("&& bash tools/build/first_ok.sh" if DO_FIRST_OK else "") if DO_SHA1_CHECK else "touch $out",
     )
 
     ninja.rule("cpp",
