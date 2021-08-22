@@ -1426,8 +1426,7 @@ enum NpcIDs {
     NPC_BTL_MERLEE   = -10,
 };
 
-typedef UNK_TYPE TriggerFlag;
-enum TriggerFlags {
+enum {
     TRIGGER_WALL_PUSH           = 0x00000040,
     TRIGGER_FLOOR_TOUCH         = 0x00000080,
     TRIGGER_WALL_PRESS_A        = 0x00000100,
