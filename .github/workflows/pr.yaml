@@ -1,8 +1,8 @@
-name: Coverage
-on: [push, pull_request]
+name: PR
+on: [pull_request]
 
 jobs:
-  build:
+  delete-matched-asm:
     name: Check matched assembly files are deleted
     runs-on: ubuntu-latest
     steps:

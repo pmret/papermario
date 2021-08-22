@@ -18,6 +18,16 @@ pipeline {
                 sh 'ninja'
             }
         }
+        stage('Check Warnings') {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
+            steps {
+                sh './tools/warnings_count/check_new_warnings.sh'
+            }
+        }
         stage('Report Progress') {
             when {
                 branch 'master'
