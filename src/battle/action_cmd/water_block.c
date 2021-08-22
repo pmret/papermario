@@ -52,8 +52,8 @@ void func_802AA014_42B504(void) {
     draw_hud_element_clipped(actionCommandStatus->hudElements[13]);
 
     hudElement = actionCommandStatus->hudElements[10];
-    if (get_hud_element_script(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
-        set_hud_element_script(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
+    if (get_hud_element_anim(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
+        set_hud_element_anim(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
     }
 
     draw_hud_element_clipped(hudElement);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "hud_element.h"
 
 extern s32 MessagePlural;
 extern s32 MessageSingular;

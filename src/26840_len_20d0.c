@@ -211,7 +211,6 @@ void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manager, SoundPlayer* player);
 
-//INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_01_SetPan, SoundManager* manager, SoundPlayer* player);
 void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
     s8 sfxPan = *player->sefDataReadPos;
 

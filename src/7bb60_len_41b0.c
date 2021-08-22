@@ -184,7 +184,7 @@ void func_800E315C(s32 colliderID) {
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E315C);
 #endif
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", phys_player_land);
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_player_land);
 
 f32 integrate_gravity(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

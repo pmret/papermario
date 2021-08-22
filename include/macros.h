@@ -83,8 +83,11 @@
 #define CUBE(x) (x*x*x)
 #define QUART(x) (x*x*x*x)
 
-// Fixed-point short literal
+/// Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
+
+/// X.10 fixed-point literal
+#define X10(f) (s32)(f * 1024.0f)
 
 #define _NS(x, y) x ## _ ## y
 #define NS(x, y) _NS(x, y)

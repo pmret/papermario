@@ -177,7 +177,7 @@ glabel L80240938_AF8288
 /* AF828C 8024093C 8C846568 */  lw        $a0, %lo(D_80246568_C8C018)($a0)
 /* AF8290 80240940 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* AF8294 80240944 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* AF8298 80240948 0C0511FF */  jal       set_hud_element_script
+/* AF8298 80240948 0C0511FF */  jal       set_hud_element_anim
 /* AF829C 8024094C 00000000 */   nop
 /* AF82A0 80240950 2402000B */  addiu     $v0, $zero, 0xb
 /* AF82A4 80240954 3C018024 */  lui       $at, %hi(dgb_08_npcGroup_80246528)

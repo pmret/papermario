@@ -125,7 +125,7 @@ void N(update)(void) {
 
             temp_s0_3 = battleStatus->unk_434[actionCommandStatus->unk_50];
             if (((actionCommandStatus->unk_4E - temp_s0_3) - 2) <= 0) {
-                set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B54);
+                set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B54);
             }
             if (((battleStatus->currentButtonsPressed & 0x8000) != 0) && (actionCommandStatus->autoSucceed == 0)) {
                 actionCommandStatus->unk_60 = 1;

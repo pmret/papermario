@@ -426,36 +426,6 @@ typedef struct MusicSettings {
     /* 0x2C */ s32 unk_2C;
 } MusicSettings; // size = 0x30
 
-typedef struct HudElement {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32* readPos;
-    /* 0x08 */ s32* startReadPos;
-    /* 0x0C */ s32* ptrPropertyList;
-    /* 0x10 */ s32* imageAddr;
-    /* 0x14 */ s32* paletteAddr;
-    /* 0x18 */ s32 memOffset;
-    /* 0x1C */ s32* hudTransform;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unkImgScale[2];
-    /* 0x30 */ f32 uniformScale;
-    /* 0x34 */ s32 widthScale; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x38 */ s32 heightScale; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x3C */ s16 renderPosX;
-    /* 0x3E */ s16 renderPosY;
-    /* 0x40 */ u8 screenPosOffset[2];
-    /* 0x42 */ u8 worldPosOffset[3];
-    /* 0x45 */ s8 drawSizePreset;
-    /* 0x46 */ s8 tileSizePreset;
-    /* 0x47 */ u8 updateTimer;
-    /* 0x48 */ u8 sizeX; /* screen size? */
-    /* 0x49 */ u8 sizeY; /* screen size? */
-    /* 0x4A */ u8 opacity;
-    /* 0x4B */ s8 tint[3];
-    /* 0x4E */ s8 customImageSize[2];
-    /* 0x40 */ s8 customDrawSize[2];
-} HudElement; // size = 0x54
-
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndexes[2];
     /* 0x08 */ s32 fpIconIndexes[2];
@@ -1951,7 +1921,8 @@ typedef struct PlayerStatus {
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D0 */ char unk_D0[4];
+    /* 0x0D4 */ f32 unk_D4;
     /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
@@ -2269,7 +2240,7 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ HudElement* hudElements[15];
+    /* 0x04 */ struct HudElement* hudElements[15];
     /* 0x40 */ char unk_40[0x4];
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;

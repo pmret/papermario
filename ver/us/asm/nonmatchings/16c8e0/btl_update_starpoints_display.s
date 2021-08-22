@@ -235,11 +235,11 @@ glabel btl_update_starpoints_display
 /* 16EFFC 8024071C 2673EFC0 */  addiu     $s3, $s3, %lo(D_8029EFC0)
 .L80240720:
 /* 16F000 80240720 8E700000 */  lw        $s0, ($s3)
-/* 16F004 80240724 0C05122C */  jal       get_hud_element_script
+/* 16F004 80240724 0C05122C */  jal       get_hud_element_anim
 /* 16F008 80240728 0200202D */   daddu    $a0, $s0, $zero
 /* 16F00C 8024072C 105E0004 */  beq       $v0, $fp, .L80240740
 /* 16F010 80240730 0200202D */   daddu    $a0, $s0, $zero
-/* 16F014 80240734 0C0511FF */  jal       set_hud_element_script
+/* 16F014 80240734 0C0511FF */  jal       set_hud_element_anim
 /* 16F018 80240738 03C0282D */   daddu    $a1, $fp, $zero
 /* 16F01C 8024073C 0200202D */  daddu     $a0, $s0, $zero
 .L80240740:
@@ -252,11 +252,11 @@ glabel btl_update_starpoints_display
 /* 16F038 80240758 0C0511EA */  jal       draw_hud_element_clipped
 /* 16F03C 8024075C 0200202D */   daddu    $a0, $s0, $zero
 /* 16F040 80240760 8E900000 */  lw        $s0, ($s4)
-/* 16F044 80240764 0C05122C */  jal       get_hud_element_script
+/* 16F044 80240764 0C05122C */  jal       get_hud_element_anim
 /* 16F048 80240768 0200202D */   daddu    $a0, $s0, $zero
 /* 16F04C 8024076C 10570004 */  beq       $v0, $s7, .L80240780
 /* 16F050 80240770 0200202D */   daddu    $a0, $s0, $zero
-/* 16F054 80240774 0C0511FF */  jal       set_hud_element_script
+/* 16F054 80240774 0C0511FF */  jal       set_hud_element_anim
 /* 16F058 80240778 02E0282D */   daddu    $a1, $s7, $zero
 /* 16F05C 8024077C 0200202D */  daddu     $a0, $s0, $zero
 .L80240780:
@@ -367,11 +367,11 @@ glabel btl_update_starpoints_display
 /* 16F1EC 8024090C 2673F010 */  addiu     $s3, $s3, %lo(D_8029F010)
 .L80240910:
 /* 16F1F0 80240910 8E700000 */  lw        $s0, ($s3)
-/* 16F1F4 80240914 0C05122C */  jal       get_hud_element_script
+/* 16F1F4 80240914 0C05122C */  jal       get_hud_element_anim
 /* 16F1F8 80240918 0200202D */   daddu    $a0, $s0, $zero
 /* 16F1FC 8024091C 10540004 */  beq       $v0, $s4, .L80240930
 /* 16F200 80240920 0200202D */   daddu    $a0, $s0, $zero
-/* 16F204 80240924 0C0511FF */  jal       set_hud_element_script
+/* 16F204 80240924 0C0511FF */  jal       set_hud_element_anim
 /* 16F208 80240928 0280282D */   daddu    $a1, $s4, $zero
 /* 16F20C 8024092C 0200202D */  daddu     $a0, $s0, $zero
 .L80240930:
