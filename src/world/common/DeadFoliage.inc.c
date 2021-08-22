@@ -8,7 +8,7 @@ void N(dead_foliage_setup_shear_mtx)(Matrix4f mtx, f32 scale, f32 xAmount, f32 z
     mtx[1][2] = scale * zAmount;
 }
 
-ApiStatus N(DeadTransformFoliage)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadTransformFoliage)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 modelListIndex = func_80125270(dead_get_variable(script, *args++));
     f32 scale = dead_get_float_variable(script, *args++);

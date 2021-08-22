@@ -38,7 +38,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_802446AC) = { -388.0f, 0.0f, -92.0f, 0.0f };
 
-Script N(802446BC) = SCRIPT({
+EvtSource N(802446BC) = SCRIPT({
     SI_AREA_FLAG(33) = 0;
     SI_AREA_FLAG(34) = 0;
     SI_VAR(0) = N(tree1);
@@ -50,7 +50,7 @@ static s32 N(pad_4734)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80244740) = SCRIPT({
+EvtSource N(80244740) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -89,7 +89,7 @@ Script N(80244740) = SCRIPT({
     goto 0;
 });
 
-Script N(802449EC) = SCRIPT({
+EvtSource N(802449EC) = SCRIPT({
     SI_VAR(9) = SI_VAR(6);
     SI_VAR(8) = SI_VAR(5);
     SI_VAR(7) = SI_VAR(4);
@@ -139,7 +139,7 @@ Script N(802449EC) = SCRIPT({
     EnableModel(SI_VAR(7), 0);
 });
 
-Script N(80244D0C) = SCRIPT({
+EvtSource N(80244D0C) = SCRIPT({
     GetModelCenter(57);
     SI_VAR(3) = 57;
     SI_VAR(4) = 58;

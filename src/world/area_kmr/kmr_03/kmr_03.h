@@ -4,13 +4,13 @@
 
 #define NAMESPACE kmr_03
 
-ApiStatus N(UnkPositionFunc)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(UnkFunc41)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(UnkPositionFunc)(Evt* script, s32 isInitialCall);
+ApiStatus N(UnkFunc41)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall);
 
 extern NpcGroupList N(npcGroupList_80241450);
-extern Script N(802422B8);
-extern Script N(80242340);
-extern Script N(802406C0);
-extern Script N(main);
-extern Script N(makeEntities);
+extern EvtSource N(802422B8);
+extern EvtSource N(80242340);
+extern EvtSource N(802406C0);
+extern EvtSource N(main);
+extern EvtSource N(makeEntities);

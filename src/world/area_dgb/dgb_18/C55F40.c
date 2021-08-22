@@ -24,7 +24,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_18_tattle },
 };
 
-Script N(802412C0) = SCRIPT({
+EvtSource N(802412C0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -41,7 +41,7 @@ static s32 N(pad_1358)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitDoubleDoor_80241360) = SCRIPT({
+EvtSource N(exitDoubleDoor_80241360) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -55,7 +55,7 @@ Script N(exitDoubleDoor_80241360) = SCRIPT({
     sleep 100;
 });
 
-Script N(enterDoubleDoor_80241414) = SCRIPT({
+EvtSource N(enterDoubleDoor_80241414) = SCRIPT({
     UseDoorSounds(3);
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
@@ -67,7 +67,7 @@ Script N(enterDoubleDoor_80241414) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -98,7 +98,7 @@ NpcAISettings N(npcAISettings_80241580) = {
     .unk_2C = 1,
 };
 
-Script N(802415B0) = SCRIPT({
+EvtSource N(802415B0) = SCRIPT({
     N(func_80240B94_C56AD4)(N(npcAISettings_80241580));
 });
 
@@ -125,7 +125,7 @@ NpcSettings N(npcSettings_80241628) = {
     .level = 13,
 };
 
-Script N(idle_80241654) = SCRIPT({
+EvtSource N(idle_80241654) = SCRIPT({
 10:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     sleep 1;
@@ -342,7 +342,7 @@ Script N(idle_80241654) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(idle_80242494) = SCRIPT({
+EvtSource N(idle_80242494) = SCRIPT({
     SetNpcScale(NPC_SELF, 1.25, 1.25, 1.25);
     SetNpcPos(NPC_SELF, 600, 50, 115);
     func_802CDE68(-1, 0);
@@ -374,7 +374,7 @@ Script N(idle_80242494) = SCRIPT({
     }
 });
 
-Script N(npcAI_802426B0) = SCRIPT({
+EvtSource N(npcAI_802426B0) = SCRIPT({
     group 11;
     PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2039, 0);
     ShowSleepBubble(0, 0, 50, 2, 552, 111, 128, 30, SI_VAR(0));
@@ -397,7 +397,7 @@ Script N(npcAI_802426B0) = SCRIPT({
     BindNpcAI(NPC_WORLD_TUBBA, N(npcAI_80242834));
 });
 
-Script N(npcAI_80242834) = SCRIPT({
+EvtSource N(npcAI_80242834) = SCRIPT({
     group 11;
     SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_D));
     spawn {
@@ -413,7 +413,7 @@ Script N(npcAI_80242834) = SCRIPT({
 
 const char N(dgb_01_name_hack)[];
 
-Script N(defeat_802428E8) = SCRIPT({
+EvtSource N(defeat_802428E8) = SCRIPT({
     N(UnkFunc1)();
     GotoMap(N(dgb_01_name_hack), 6);
     sleep 100;
@@ -421,7 +421,7 @@ Script N(defeat_802428E8) = SCRIPT({
 
 const char N(pad_XXX)[] = { 0, 0 };
 
-Script N(init_80242924) = SCRIPT({
+EvtSource N(init_80242924) = SCRIPT({
     SetNpcScale(NPC_SELF, 1.25, 1.25, 1.25);
     BindNpcDefeat(NPC_SELF, N(defeat_802428E8));
     match SI_STORY_PROGRESS {
@@ -442,7 +442,7 @@ Script N(init_80242924) = SCRIPT({
     }
 });
 
-Script N(idle_80242A24) = SCRIPT({
+EvtSource N(idle_80242A24) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         if (SI_VAR(0) == 1) {
@@ -563,7 +563,7 @@ Script N(idle_80242A24) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(init_8024329C) = SCRIPT({
+EvtSource N(init_8024329C) = SCRIPT({
     SetSelfVar(0, 0);
     BindNpcIdle(NPC_SELF, N(idle_80242A24));
 });
@@ -641,7 +641,7 @@ static s32 N(pad_36D8)[] = {
 
 s32** N(D_802436E0_C59620) = NULL; // StashVars.inc.c data
 
-Script N(802436E4) = SCRIPT({
+EvtSource N(802436E4) = SCRIPT({
     group 0;
     SetTimeFreezeMode(2);
     sleep 40;
@@ -650,7 +650,7 @@ Script N(802436E4) = SCRIPT({
     return;
 });
 
-Script N(8024374C) = SCRIPT({
+EvtSource N(8024374C) = SCRIPT({
     DisablePlayerInput(TRUE);
     SI_VAR(0) = SI_VAR(10);
     if (SI_VAR(10) != 0) {
@@ -671,13 +671,13 @@ Script N(8024374C) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(8024382C) = SCRIPT({
+EvtSource N(8024382C) = SCRIPT({
     SI_SAVE_FLAG(1071) = 1;
     AddKeyItem(ITEM_MYSTICAL_KEY);
     SetNpcVar(1, 0, 1);
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAE30, 845, 0, 145, -35, ITEM_NONE, MAKE_ENTITY_END);
     AssignFlag(SI_SAVE_FLAG(1071));
     AssignScript(N(8024382C));
@@ -705,7 +705,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkFunc16.inc.c"
 
-ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B94_C56AD4)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -791,7 +791,7 @@ ApiStatus N(func_80240B94_C56AD4)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc1.inc.c"
 
-ApiStatus N(func_80240EBC_C56DFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240EBC_C56DFC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(0);
     f32 posX, posZ;

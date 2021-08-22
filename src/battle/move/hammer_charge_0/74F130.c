@@ -9,7 +9,7 @@
 
 #include "world/common/IsHammerMaxCharged.inc.c"
 
-ApiStatus func_802A10C8_74F1F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A10C8_74F1F8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = get_variable(script, *args++);
@@ -30,7 +30,7 @@ ApiStatus func_802A10C8_74F1F8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A11CC_74F2FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A11CC_74F2FC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);

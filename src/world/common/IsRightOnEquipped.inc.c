@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(IsRightOnEquipped)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(IsRightOnEquipped)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;
 
     if (is_ability_active(ABILITY_RIGHT_ON)) {

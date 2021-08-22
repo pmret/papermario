@@ -2,7 +2,7 @@
 
 extern s32* D_802382F8_714FE8[];
 
-ApiStatus func_80238000_714CF0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_714CF0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (battleStatus->flags2 & 0x40) {
@@ -15,7 +15,7 @@ ApiStatus func_80238000_714CF0(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-ApiStatus func_80238028_714D18(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238028_714D18(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32* var0 = &D_802382F8_714FE8[0];
     s32 var4 = *D_802382F8_714FE8[1];

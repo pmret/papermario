@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(SomeItemEntityFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(SomeItemEntityFunc)(Evt* script, s32 isInitialCall) {
     ItemEntity* itemEntity = get_item_entity(script->varTable[0]);
     f32* y = (f32*) &script->functionTemp[2];
 

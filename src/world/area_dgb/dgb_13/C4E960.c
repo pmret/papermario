@@ -12,7 +12,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_13_tattle },
 };
 
-Script N(80240050) = SCRIPT({
+EvtSource N(80240050) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -29,13 +29,13 @@ static s32 N(pad_E8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
+EvtSource N(exitWalk_802400F0) = EXIT_WALK_SCRIPT(26,  0, "dgb_03",  5);
 
-Script N(8024014C) = SCRIPT({
+EvtSource N(8024014C) = SCRIPT({
     bind N(exitWalk_802400F0) TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -51,7 +51,7 @@ Script N(main) = SCRIPT({
     sleep 1;
 });
 
-Script N(80240270) = SCRIPT({
+EvtSource N(80240270) = SCRIPT({
     MakeItemEntity(ITEM_MEGA_RUSH, -910, 50, -206, 17, SI_SAVE_FLAG(1058));
     MakeItemEntity(ITEM_COIN, -530, 55, -190, 17, SI_SAVE_FLAG(1059));
     MakeItemEntity(ITEM_COIN, -510, 55, -175, 17, SI_SAVE_FLAG(1060));
@@ -65,7 +65,7 @@ static s32 N(pad_37C) = {
     0x00000000,
 };
 
-Script N(80240380) = SCRIPT({
+EvtSource N(80240380) = SCRIPT({
     MakeLerp(0, 30, 15, 0);
     loop {
         UpdateLerp();
@@ -78,7 +78,7 @@ Script N(80240380) = SCRIPT({
     }
 });
 
-Script N(80240424) = SCRIPT({
+EvtSource N(80240424) = SCRIPT({
     MakeLerp(30, 0, 15, 0);
     loop {
         UpdateLerp();
@@ -91,7 +91,7 @@ Script N(80240424) = SCRIPT({
     }
 });
 
-Script N(802404C8) = SCRIPT({
+EvtSource N(802404C8) = SCRIPT({
     MakeLerp(0, 30, 15, 0);
     loop {
         UpdateLerp();
@@ -104,7 +104,7 @@ Script N(802404C8) = SCRIPT({
     }
 });
 
-Script N(8024056C) = SCRIPT({
+EvtSource N(8024056C) = SCRIPT({
     MakeLerp(30, 0, 15, 0);
     loop {
         UpdateLerp();
@@ -117,7 +117,7 @@ Script N(8024056C) = SCRIPT({
     }
 });
 
-Script N(80240610) = SCRIPT({
+EvtSource N(80240610) = SCRIPT({
     if (SI_MAP_VAR(0) == 0) {
         await N(80240380);
         SI_MAP_VAR(0) = 1;
@@ -128,7 +128,7 @@ Script N(80240610) = SCRIPT({
     unbind;
 });
 
-Script N(80240680) = SCRIPT({
+EvtSource N(80240680) = SCRIPT({
     ParentColliderToModel(13, 44);
     bind N(80240610) TRIGGER_WALL_PRESS_A 13;
 });

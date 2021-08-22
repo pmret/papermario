@@ -8,7 +8,7 @@ extern s32 D_8008EF20[11][4];
 
 #include "world/common/UnkFunc17.inc.c"
 
-ApiStatus N(func_8024003C_CAED7C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024003C_CAED7C)(Evt* script, s32 isInitialCall) {
     entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -36,7 +36,7 @@ typedef struct {
     s16 unk_32C;
 } N(UnkStruct);
 
-ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     N(UnkStruct)* ptr;
     s32 i;
@@ -108,7 +108,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, Evt* script,
             s32 isInitialCall);
 #endif
 
@@ -139,7 +139,7 @@ typedef struct {
     s32 unk_64;
 } N(UserData);
 
-ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240600_CAF340)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

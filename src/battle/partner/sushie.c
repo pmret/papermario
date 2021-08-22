@@ -5,7 +5,7 @@ extern f64 D_8023C060_70BD00;
 extern s32 D_8023C070;
 
 #ifdef NON_MATCHING
-ApiStatus func_80238000_707CA0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_707CA0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ActorPart* partsTable;
@@ -42,7 +42,7 @@ INCLUDE_ASM(s32, "battle/partner/sushie", func_80238000_707CA0);
 
 INCLUDE_ASM(s32, "battle/partner/sushie", func_80238114_707DB4);
 
-ApiStatus func_802381EC_707E8C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802381EC_707E8C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 xScale;
@@ -76,7 +76,7 @@ ApiStatus func_802381EC_707E8C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802382A4_707F44(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802382A4_707F44(Evt* script, s32 isInitialCall) {
     f32 var1 = script->varTable[0];
     f32 var2 = script->varTable[1];
 
@@ -88,7 +88,7 @@ ApiStatus func_802382A4_707F44(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238328_707FC8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238328_707FC8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var = script->varTable[0];
 
@@ -109,7 +109,7 @@ ApiStatus func_80238328_707FC8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238388_708028(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238388_708028(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* playerActor = battleStatus->playerActor;
@@ -119,7 +119,7 @@ ApiStatus func_80238388_708028(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238480_708120(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238480_708120(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     f32 var1 = get_float_variable(script, *args++);
@@ -138,7 +138,7 @@ ApiStatus func_80238480_708120(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/sushie", func_80238540_7081E0);
 
-ApiStatus func_80238E30_708AD0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238E30_708AD0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 var = (((f64) script->varTable[0] * 3) / 100) + 1;

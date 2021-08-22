@@ -9,7 +9,7 @@ extern s32 D_80108B28;
 extern s32 D_80292A2C;
 extern s32 D_80108B54;
 
-ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     HudElement* hudElement;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
 
@@ -21,7 +21,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
         gBattleStatus.actionSuccess = 0;
         return ApiStatus_DONE2;
     }
-    
+
     func_80268858();
     actionCommandStatus->actionCommandID = ACTION_COMMAND_JUMP;
     actionCommandStatus->hudElementX = -48;
@@ -46,7 +46,7 @@ ApiStatus N(CreateHudElements)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9120_421B10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall) {
     HudElement* hudElement;
 
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
@@ -97,7 +97,7 @@ void N(update)(void) {
             if (battleStatus->unk_83 == 2) {
                 btl_set_popup_duration(99);
             }
-    
+
             actionCommandStatus->hudElementX += 20;
             if (actionCommandStatus->hudElementX > 50) {
                 actionCommandStatus->hudElementX = 50;
@@ -135,7 +135,7 @@ void N(update)(void) {
                 actionCommandStatus->unk_4E -= 1;
                 break;
             }
-        
+
             actionCommandStatus->unk_54 = battleStatus->unk_434[actionCommandStatus->unk_50];
             battleStatus->actionSuccess = -1;
             actionCommandStatus->state = 11;
@@ -153,12 +153,12 @@ void N(update)(void) {
                     if (actionCommandStatus->unk_61 != 0) {
                         set_hud_element_flags(hudElement, 2);
                     }
-                } 
+                }
             }
 
             if (battleStatus->actionSuccess < 0) {
                 if ((((battleStatus->currentButtonsPressed & 0x8000) != 0) &&
-                    (actionCommandStatus->unk_60 == 0)) || 
+                    (actionCommandStatus->unk_60 == 0)) ||
                     (actionCommandStatus->autoSucceed != 0)) {
                     battleStatus->actionSuccess = 1;
                     battleStatus->unk_86 = 1;

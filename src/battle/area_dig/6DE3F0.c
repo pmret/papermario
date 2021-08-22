@@ -6,7 +6,7 @@
 
 extern s32 D_8008F0A0;
 
-ApiStatus func_80218644_6DE404(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218644_6DE404(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;

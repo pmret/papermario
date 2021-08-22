@@ -6,17 +6,17 @@ extern s32 D_802A2CC0;
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_7905E8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1518_7905E8(Evt* script, s32 isInitialCall) {
     D_802A2CC0 = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1528_7905F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1528_7905F8(Evt* script, s32 isInitialCall) {
     script->varTable[0] = D_802A2CC0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A153C_79060C(Evt* script, s32 isInitialCall) {
     f32 a = rand_int(200) - 25;
     f32 b = rand_int(120) + 7;
     f32 c = rand_int(50) - 25;
@@ -31,7 +31,7 @@ ApiStatus func_802A153C_79060C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A163C_79070C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A163C_79070C(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     Actor* target = get_actor(actor->targetActorID);
     ActorPart* part = get_actor_part(target, actor->targetPartIndex);

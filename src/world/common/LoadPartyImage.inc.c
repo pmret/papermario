@@ -5,7 +5,7 @@
 #error "Define PARTY_IMAGE to the asset name to use LoadPartyImage."
 #endif
 
-ApiStatus N(LoadPartyImage)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(LoadPartyImage)(Evt* script, s32 isInitialCall) {
     static u16 palette[256];
     static u8 raster[0x3D90];
     static struct {

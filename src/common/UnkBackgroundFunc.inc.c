@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkBackgroundFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkBackgroundFunc)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }

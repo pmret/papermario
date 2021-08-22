@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(FadeBackgroundToBlack)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;

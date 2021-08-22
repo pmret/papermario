@@ -32,7 +32,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_13_tattle },
 };
 
-Script N(802436D0) = SCRIPT({
+EvtSource N(802436D0) = SCRIPT({
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(0) < -500) {
         goto 10;
@@ -70,15 +70,15 @@ Script N(802436D0) = SCRIPT({
     goto 0;
 });
 
-Script N(802438B0) = SCRIPT({
+EvtSource N(802438B0) = SCRIPT({
     spawn N(802436D0);
 });
 
-Script N(802438CC) = SCRIPT({
+EvtSource N(802438CC) = SCRIPT({
     SetMusicTrack(0, SONG_NEW_PARTNER, 0, 8);
 });
 
-Script N(802438F8) = SCRIPT({
+EvtSource N(802438F8) = SCRIPT({
     FadeOutMusic(0, 500);
     sleep 15;
     SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -88,11 +88,11 @@ static s32 N(pad_3944)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80243950) = SCRIPT({
+EvtSource N(80243950) = SCRIPT({
     ModifyColliderFlags(0, 14, 0x7FFFFE00);
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_MEGA_SMASH, -61, 60, -85, 17, SI_SAVE_FLAG(1385));
     MakeItemEntity(ITEM_SHOOTING_STAR, 128, 0, 157, 17, SI_SAVE_FLAG(1386));
     if (SI_SAVE_FLAG(1385) == 0) {
@@ -107,7 +107,7 @@ static s32 N(pad_3A3C) = {
     0x00000000,
 };
 
-Script N(80243A40) = SCRIPT({
+EvtSource N(80243A40) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -146,16 +146,16 @@ Script N(80243A40) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
+EvtSource N(exitWalk_80243CEC) = EXIT_WALK_SCRIPT(60,  0, "flo_14",  1);
 
-Script N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
+EvtSource N(exitWalk_80243D48) = EXIT_WALK_SCRIPT(60,  1, "flo_15",  0);
 
-Script N(80243DA4) = SCRIPT({
+EvtSource N(80243DA4) = SCRIPT({
     bind N(exitWalk_80243D48) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80243CEC) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -233,7 +233,7 @@ NpcAISettings N(npcAISettings_80244144) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80244174) = SCRIPT({
+EvtSource N(npcAI_80244174) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(5, -650);
     SetSelfVar(6, 30);
@@ -263,7 +263,7 @@ NpcAISettings N(npcAISettings_80244210) = {
     .unk_2C = 3,
 };
 
-Script N(npcAI_80244240) = SCRIPT({
+EvtSource N(npcAI_80244240) = SCRIPT({
     SetSelfVar(2, 3);
     SetSelfVar(3, 18);
     SetSelfVar(5, 3);
@@ -271,7 +271,7 @@ Script N(npcAI_80244240) = SCRIPT({
     N(func_80242A6C_CC627C)(N(npcAISettings_80244210));
 });
 
-Script N(802442B0) = SCRIPT({
+EvtSource N(802442B0) = SCRIPT({
     SetNpcRotation(NPC_SELF, 0, 0, 0);
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
@@ -316,7 +316,7 @@ Vec3f N(vectorList_80244420)[] = {
     { -390.0, 300.0, 45.0 },
 };
 
-Script N(8024445C) = SCRIPT({
+EvtSource N(8024445C) = SCRIPT({
     GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 0:
     GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
@@ -332,7 +332,7 @@ Script N(8024445C) = SCRIPT({
     goto 0;
 });
 
-Script N(80244560) = SCRIPT({
+EvtSource N(80244560) = SCRIPT({
     GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
 0:
     GetNpcPos(NPC_LAKILULU0, SI_VAR(3), SI_VAR(4), SI_VAR(5));
@@ -352,7 +352,7 @@ Script N(80244560) = SCRIPT({
     goto 0;
 });
 
-Script N(802446AC) = SCRIPT({
+EvtSource N(802446AC) = SCRIPT({
     SI_MAP_VAR(10) = 0;
     loop {
         loop 2 {
@@ -382,7 +382,7 @@ Script N(802446AC) = SCRIPT({
     }
 });
 
-Script N(80244888) = SCRIPT({
+EvtSource N(80244888) = SCRIPT({
     spawn N(802446AC);
     SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_C));
     GetNpcPos(NPC_LAKILULU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
@@ -438,7 +438,7 @@ Script N(80244888) = SCRIPT({
     SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_1));
 });
 
-Script N(idle_80244BF8) = SCRIPT({
+EvtSource N(idle_80244BF8) = SCRIPT({
     if (SI_STORY_PROGRESS != STORY_CH6_SPOKE_WITH_THE_SUN) {
         return;
     }
@@ -500,7 +500,7 @@ Script N(idle_80244BF8) = SCRIPT({
     StartBossBattle(3);
 });
 
-Script N(80245014) = SCRIPT({
+EvtSource N(80245014) = SCRIPT({
     GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     AwaitPlayerLeave(SI_VAR(0), SI_VAR(2), 120);
     DisablePlayerInput(TRUE);
@@ -557,7 +557,7 @@ Script N(80245014) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80245444) = SCRIPT({
+EvtSource N(80245444) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 30;
     SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_A), NPC_ANIM(world_lakilester, Palette_00, Anim_4), 0, MESSAGE_ID(0x11, 0x00A2));
@@ -722,7 +722,7 @@ Script N(80245444) = SCRIPT({
     await N(80245014);
 });
 
-Script N(defeat_80246038) = SCRIPT({
+EvtSource N(defeat_80246038) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -747,7 +747,7 @@ Script N(defeat_80246038) = SCRIPT({
     }
 });
 
-Script N(interact_802461C0) = SCRIPT({
+EvtSource N(interact_802461C0) = SCRIPT({
     if (SI_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
                       MESSAGE_ID(0x11, 0x0032));
@@ -763,14 +763,14 @@ Script N(interact_802461C0) = SCRIPT({
     }
 });
 
-Script N(init_80246280) = SCRIPT({
+EvtSource N(init_80246280) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_LAKILESTER_JOINED_PARTY) {
         BindNpcIdle(NPC_SELF, N(idle_80244BF8));
         BindNpcDefeat(NPC_SELF, N(defeat_80246038));
     }
 });
 
-Script N(init_802462D0) = SCRIPT({
+EvtSource N(init_802462D0) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_BEGAN_PEACH_MISSION) {
         BindNpcInteract(NPC_SELF, N(interact_802461C0));
         SetNpcCollisionSize(-1, 36, 28);
@@ -782,18 +782,18 @@ Script N(init_802462D0) = SCRIPT({
     }
 });
 
-Script N(init_80246370) = SCRIPT({
+EvtSource N(init_80246370) = SCRIPT({
     SetNpcPos(NPC_LAKILULU1, 0, -1000, 0);
     SetNpcAnimation(NPC_LAKILULU1, NPC_ANIM(lakilulu, Palette_00, Anim_B));
 });
 
-Script N(init_802463B0) = SCRIPT({
+EvtSource N(init_802463B0) = SCRIPT({
     if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(init_802463E8) = SCRIPT({
+EvtSource N(init_802463E8) = SCRIPT({
     if (SI_STORY_PROGRESS == STORY_CH6_SPOKE_WITH_THE_SUN) {
         RemoveNpc(NPC_SELF);
     }
@@ -1189,7 +1189,7 @@ NpcGroupList N(npcGroupList_80247984) = {
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
 #ifdef NON_MATCHING
-void N(func_802404D0_CB54D0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802404D0_CB54D0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
@@ -1333,7 +1333,7 @@ void N(func_802404D0_CB54D0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_flo/flo_13/CC3850", flo_13_func_80240374_CC3B84, ScriptInstance* script,
+INCLUDE_ASM(void, "world/area_flo/flo_13/CC3850", flo_13_func_80240374_CC3B84, Evt* script,
             NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
@@ -1343,7 +1343,7 @@ INCLUDE_ASM(void, "world/area_flo/flo_13/CC3850", flo_13_func_80240374_CC3B84, S
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80240E18_CC4628)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E18_CC4628)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1361,7 +1361,7 @@ void N(func_80240E18_CC4628)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_802414D0_CC4CE0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802414D0_CC4CE0)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1433,7 +1433,7 @@ s32 N(func_802416BC_CC4ECC)(void) {
     return -1;
 }
 
-void N(func_80241704_CC4F14)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241704_CC4F14)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -1519,7 +1519,7 @@ void N(func_80241704_CC4F14)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80241B68_CC5378)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241B68_CC5378)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
@@ -1564,7 +1564,7 @@ void N(func_80241B68_CC5378)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 // enemy2 is being copied to a0
 #ifdef NON_MATCHING
-ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241DB8_CC55C8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1694,7 +1694,7 @@ ApiStatus N(func_80241DB8_CC55C8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55C8, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55C8, Evt* script,
             s32 isInitialCall);
 #endif
 
@@ -1706,7 +1706,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_13/CC3850", flo_13_func_80241DB8_CC55
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024262C_CC5E3C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -1842,7 +1842,7 @@ ApiStatus N(func_8024262C_CC5E3C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80242A6C_CC627C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242A6C_CC627C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -2064,7 +2064,7 @@ ApiStatus N(func_80242A6C_CC627C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc42.inc.c"
 
-ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802433C0_CC6BD0)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(1);
     s16 param1;
     s16 param2;
@@ -2087,7 +2087,7 @@ ApiStatus N(func_802433C0_CC6BD0)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[1] < script->functionTemp[0]) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802434D4_CC6CE4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802434D4_CC6CE4)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
     s16 param1;
     s16 param2;

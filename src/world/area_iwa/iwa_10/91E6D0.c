@@ -8,7 +8,7 @@
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_8024032C_91E89C);
 /*
-ApiStatus N(func_8024032C_91E89C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024032C_91E89C)(Evt* script, s32 isInitialCall) {
     switch_to_partner(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -32,7 +32,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802404BC_91EA2C);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_10/91E6D0", func_802408F0_91EE60);
 /*
-ApiStatus N(func_802408F0_91EE60)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802408F0_91EE60)(Evt *script, s32 isInitialCall) {
     Bytecode *args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;

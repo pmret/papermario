@@ -22,7 +22,7 @@ typedef struct {
     /* 0x4C */ s32* unk_4C;
 } DoorStuff;
 
-ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80281C20(Evt* script, s32 isInitialCall) {
     Bytecode* thisPos = script->ptrReadPos;
 
     func_800EF414(get_variable(script, *thisPos++), get_variable(script, *thisPos++));
@@ -30,27 +30,27 @@ ApiStatus func_80281C20(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80281C84(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80281C84(Evt* script, s32 isInitialCall) {
     func_800EF3E4();
     repartner_set_tether_distance();
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(ApiStatus, "world/script_api/7E2AA0", MakeDoorAdvanced, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/script_api/7E2AA0", MakeDoorAdvanced, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_802822A8);
 
-ApiStatus func_80282314(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282314(Evt* script, s32 isInitialCall) {
     script->functionTemp[1] = script->varTable[1];
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80282324(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282324(Evt* script, s32 isInitialCall) {
     script->varTable[0] = *(UNK_TYPE*)script->functionTemp[1];
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80282338(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282338(Evt* script, s32 isInitialCall) {
     UNK_TYPE* temp_s0 = script->functionTemp[1];
 
     *temp_s0 = get_variable(script, *script->ptrReadPos);
@@ -65,7 +65,7 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282414);
 
 // D_80286540 needs to be defined wherever it's meant to be, and this matches
 #ifdef NON_MATCHING
-ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282594(Evt* script, s32 isInitialCall) {
     Camera* camera;
     f32 temp_f0;
 
@@ -85,18 +85,18 @@ ApiStatus func_80282594(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282594);
 #endif
 
-ApiStatus SetEntityHideMode1(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode1(Evt* script, s32 isInitialCall) {
     D_80151310 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetEntityHideMode2(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode2(Evt* script, s32 isInitialCall) {
     D_80151310 = 2;
     return ApiStatus_DONE2;
 }
 
 // common probably
-ApiStatus SetEntityHideMode0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetEntityHideMode0(Evt* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;
 }
@@ -105,7 +105,7 @@ INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282634);
 
 INCLUDE_ASM(s32, "world/script_api/7E2AA0", func_80282700);
 
-ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282774(Evt* script, s32 isInitialCall) {
     DoorStuff* doorStuff = (DoorStuff*)script->functionTemp[1];
 
     doorStuff->unk_0A = func_80134240();
@@ -113,12 +113,12 @@ ApiStatus func_80282774(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802827A8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802827A8(Evt* script, s32 isInitialCall) {
     func_80134230(((DoorStuff*)script->functionTemp[1])->unk_0A);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802827CC(Evt* script, s32 isInitialCall) {
     DoorStuff* temp = script->functionTemp[1];
 
     script->varTable[2] = temp->unk_04;
@@ -138,7 +138,7 @@ ApiStatus func_802827CC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80282868(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80282868(Evt* script, s32 isInitialCall) {
     script->varTable[1] = script->functionTemp[1];
     return ApiStatus_DONE2;
 }

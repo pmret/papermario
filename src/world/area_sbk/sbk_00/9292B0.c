@@ -16,7 +16,7 @@ NpcAISettings N(npcAISettings_80240300) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80240330) = SCRIPT({
+EvtSource N(npcAI_80240330) = SCRIPT({
     N(SetNpcB5_3)();
     DoBasicAI(N(npcAISettings_80240300));
 });
@@ -114,7 +114,7 @@ static s32 N(pad_78C) = {
     0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, -230, 0, 155, 0, ITEM_FRIGHT_JAR, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(797));
     MakeEntity(0x802EA564, 160, 0, 205, 0, ITEM_COIN, MAKE_ENTITY_END);

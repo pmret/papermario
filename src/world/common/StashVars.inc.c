@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(StashVars)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(StashVars)(Evt* script, s32 isInitialCall) {
     static s32** varTable = NULL;
     s32 i;
 

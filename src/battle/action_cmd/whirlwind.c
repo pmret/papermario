@@ -4,7 +4,7 @@
 
 // requires .data migration
 #ifdef NON_MATCHING
-ApiStatus func_802A9000_423C70(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;

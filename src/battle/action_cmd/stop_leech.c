@@ -41,7 +41,7 @@ ApiStatus func_802A9000_425590(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9110_4256A0(ScriptInstance* script) {
+ApiStatus func_802A9110_4256A0(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;

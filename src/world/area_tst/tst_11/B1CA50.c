@@ -6,7 +6,7 @@ void func_802402F4_B1CD44(void);
 void func_802403B8_B1CE08(RenderTask*);
 void N(SetPartnerFlagsA0000)(void);
 
-ApiStatus func_80240000_B1CA50(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240000_B1CA50(Evt* script, s32 isInitialCall) {
     script->array[0] = (s32) create_generic_entity_frontUI(NULL, func_8024003C_B1CA8C);
     return ApiStatus_DONE2;
 }
@@ -57,7 +57,7 @@ void func_80240100_B1CB50(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 
-ApiStatus func_802402B8_B1CD08(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802402B8_B1CD08(Evt* script, s32 isInitialCall) {
     script->array[0] = (s32) create_generic_entity_frontUI(NULL, func_802402F4_B1CD44);
     return ApiStatus_DONE2;
 }
@@ -88,7 +88,7 @@ void func_802402F4_B1CD44(void) {
 
 INCLUDE_ASM(void, "world/area_tst/tst_11/B1CA50", func_802403B8_B1CE08, RenderTask* arg0);
 
-ApiStatus func_802406D4_B1D124(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802406D4_B1D124(Evt* script, s32 isInitialCall) {
     Npc* npc;
 
     script->array[1] = create_generic_entity_world(N(SetPartnerFlagsA0000), NULL);

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(DeadUnkTexturePanFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadUnkTexturePanFunc)(Evt* script, s32 isInitialCall) {
     script->varTable[9] += script->varTable[1];
     if (script->varTable[9] < 0) {
         script->varTable[9] += 0x20000;

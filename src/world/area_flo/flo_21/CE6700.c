@@ -93,7 +93,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_21_tattle },
 };
 
-Script N(80240D40) = SCRIPT({
+EvtSource N(80240D40) = SCRIPT({
     if (SI_STORY_PROGRESS == STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         FadeOutMusic(0, 500);
     } else {
@@ -101,14 +101,14 @@ Script N(80240D40) = SCRIPT({
     }
 });
 
-ApiStatus N(func_80240000_CE6700)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_CE6700)(Evt* script, s32 isInitialCall) {
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
     return ((ptr->unk_44 < 2) == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024004C_CE674C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024004C_CE674C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -136,7 +136,7 @@ ApiStatus N(func_8024004C_CE674C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802401AC_CE68AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401AC_CE68AC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
@@ -235,14 +235,14 @@ ApiStatus N(func_802401AC_CE68AC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802405BC_CE6CBC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405BC_CE6CBC)(Evt* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802405FC_CE6CFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405FC_CE6CFC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -263,7 +263,7 @@ ApiStatus N(func_802405FC_CE6CFC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240708_CE6E08)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240708_CE6E08)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     N(Unk_effect_struct)* ptr = (N(Unk_effect_struct)*)script->varTable[0];
 
@@ -280,7 +280,7 @@ ApiStatus N(func_80240708_CE6E08)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-Script N(80240DA0) = SCRIPT({
+EvtSource N(80240DA0) = SCRIPT({
     group 0;
     if (SI_VAR(5) == 1) {
         if (SI_VAR(6) == 1) {
@@ -295,7 +295,7 @@ Script N(80240DA0) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-Script N(80240E3C) = SCRIPT({
+EvtSource N(80240E3C) = SCRIPT({
     match SI_STORY_PROGRESS {
         == STORY_CH6_GREW_MAGIC_BEANSTALK {
             SI_VAR(0) = 0;
@@ -374,13 +374,13 @@ Script N(80240E3C) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitWalk_802412F4) = EXIT_WALK_SCRIPT(60,  0, "flo_19",  1);
+EvtSource N(exitWalk_802412F4) = EXIT_WALK_SCRIPT(60,  0, "flo_19",  1);
 
-Script N(80241350) = SCRIPT({
+EvtSource N(80241350) = SCRIPT({
     bind N(exitWalk_802412F4) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_CLOUDY_CLIMB;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -416,27 +416,27 @@ s32 N(D_802414FC_CE7BFC)[] = {
     SI_FIXED(0.900390625), SI_FIXED(0.900390625), SI_FIXED(0.900390625),
 };
 
-Script N(80241560) = SCRIPT({
+EvtSource N(80241560) = SCRIPT({
     SI_MAP_VAR(0) += -1.5;
 });
 
-Script N(80241580) = SCRIPT({
+EvtSource N(80241580) = SCRIPT({
     SI_MAP_VAR(1) += -1.5;
 });
 
-Script N(802415A0) = SCRIPT({
+EvtSource N(802415A0) = SCRIPT({
     SI_MAP_VAR(2) += -1.5;
 });
 
-Script N(802415C0) = SCRIPT({
+EvtSource N(802415C0) = SCRIPT({
     SI_MAP_VAR(3) += -1.5;
 });
 
-Script N(802415E0) = SCRIPT({
+EvtSource N(802415E0) = SCRIPT({
     SI_MAP_VAR(4) += -1.5;
 });
 
-Script N(80241600) = SCRIPT({
+EvtSource N(80241600) = SCRIPT({
     spawn {
         SI_VAR(15) = 0;
 0:
@@ -500,7 +500,7 @@ Vec3f N(vectorList_8024189C)[] = {
     { 550.0, 104.0, 0.0 },
 };
 
-Script N(802418C0) = SCRIPT({
+EvtSource N(802418C0) = SCRIPT({
 0:
     PlaySound(0x20B6);
     ShakeCam(0, 0, 15, 1.0);
@@ -508,7 +508,7 @@ Script N(802418C0) = SCRIPT({
     goto 0;
 });
 
-Script N(80241920) = SCRIPT({
+EvtSource N(80241920) = SCRIPT({
     PlaySoundAtNpc(NPC_HUFF_N_PUFF0, 0x3C0, 0);
     PlayEffect(0x25, 3, 650, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     sleep 15;
@@ -543,7 +543,7 @@ Script N(80241920) = SCRIPT({
     SetPlayerAnimation(ANIM_1002B);
 });
 
-Script N(80241B98) = SCRIPT({
+EvtSource N(80241B98) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         return;
     }
@@ -644,7 +644,7 @@ Script N(80241B98) = SCRIPT({
     sleep 15;
 });
 
-Script N(80242290) = SCRIPT({
+EvtSource N(80242290) = SCRIPT({
     SI_VAR(0) = 0.9501953125;
     SI_VAR(1) = 1.1005859375;
 0:
@@ -712,7 +712,7 @@ s32 N(intTable_8024262C)[] = {
     0x0000000A, 0x00000006, 0x00000006, 0x0000000A,
 };
 
-Script N(8024263C) = SCRIPT({
+EvtSource N(8024263C) = SCRIPT({
     SI_VAR(0) = (float) 10;
     SI_VAR(1) = (float) 1;
     parallel {
@@ -757,7 +757,7 @@ Script N(8024263C) = SCRIPT({
     sleep 100;
 });
 
-Script N(80242918) = SCRIPT({
+EvtSource N(80242918) = SCRIPT({
     SI_MAP_VAR(11) = 1.0;
     SI_MAP_VAR(12) = 1.0;
     parallel {
@@ -836,7 +836,7 @@ Script N(80242918) = SCRIPT({
     }
 });
 
-Script N(80242D34) = SCRIPT({
+EvtSource N(80242D34) = SCRIPT({
     parallel {
         SI_VAR(1) = 0;
         loop {
@@ -879,7 +879,7 @@ Script N(80242D34) = SCRIPT({
     SetNpcPos(SI_VAR(8), 0, -1000, 0);
 });
 
-Script N(80243010) = SCRIPT({
+EvtSource N(80243010) = SCRIPT({
     SetNpcAnimation(NPC_HUFF_N_PUFF1, NPC_ANIM(huff_n_puff, Palette_00, Anim_4));
     SetNpcAnimation(NPC_HUFF_N_PUFF0, NPC_ANIM(huff_n_puff, Palette_00, Anim_5));
     SetNpcAnimation(NPC_HUFF_N_PUFF2, NPC_ANIM(huff_n_puff, Palette_00, Anim_6));
@@ -928,7 +928,7 @@ Script N(80243010) = SCRIPT({
     sleep 10;
 });
 
-Script N(idle_80243428) = SCRIPT({
+EvtSource N(idle_80243428) = SCRIPT({
 0:
     SetSelfVar(0, 0);
     loop {
@@ -943,7 +943,7 @@ Script N(idle_80243428) = SCRIPT({
     goto 0;
 });
 
-Script N(defeat_802434D8) = SCRIPT({
+EvtSource N(defeat_802434D8) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -961,11 +961,11 @@ Script N(defeat_802434D8) = SCRIPT({
     }
 });
 
-Script N(defeat_802435D4) = SCRIPT({
+EvtSource N(defeat_802435D4) = SCRIPT({
 
 });
 
-Script N(init_802435E4) = SCRIPT({
+EvtSource N(init_802435E4) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcIdle(NPC_SELF, N(idle_80243428));
@@ -976,7 +976,7 @@ Script N(init_802435E4) = SCRIPT({
     }
 });
 
-Script N(init_80243684) = SCRIPT({
+EvtSource N(init_80243684) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
@@ -987,7 +987,7 @@ Script N(init_80243684) = SCRIPT({
     }
 });
 
-Script N(init_8024371C) = SCRIPT({
+EvtSource N(init_8024371C) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_HUFF_N_PUFF) {
         SetEnemyFlagBits(-1, 4194304, 1);
         BindNpcDefeat(NPC_SELF, N(defeat_802435D4));
@@ -997,7 +997,7 @@ Script N(init_8024371C) = SCRIPT({
     }
 });
 
-Script N(init_802437A8) = SCRIPT({
+EvtSource N(init_802437A8) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM(tuff_puff, Palette_00, Anim_B));
     SetNpcJumpscale(NPC_SELF, 0);
 });
@@ -1577,7 +1577,7 @@ NpcGroupList N(npcGroupList_80245AEC) = {
 
 EffectInstance* playFX_82();
 
-ApiStatus N(func_80240B00_CE7200)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B00_CE7200)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

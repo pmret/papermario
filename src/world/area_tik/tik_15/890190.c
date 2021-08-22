@@ -4,7 +4,7 @@ INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_802405F0_890190);
 
 INCLUDE_ASM(s32, "world/area_tik/tik_15/890190", func_80240960_890500);
 /*
-ApiStatus N(func_80240960_890500)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240960_890500)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80242758_8922F8) == NULL) {

@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "mac_00";
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_10/8D84D0", func_80240000_8D84D0);
 /*
-ApiStatus N(func_80240000_8D84D0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_8D84D0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80240C20_8D90F0) == NULL) {
@@ -33,7 +33,7 @@ ApiStatus N(func_80240000_8D84D0)(ScriptInstance* script, s32 isInitialCall) {
 #ifdef NON_MATCHING
 // 0x1E4 is probably a linker constant. We need to learn more about animations,
 // play_model_animation, and entity->unk_14 before we can tackle this
-ApiStatus func_802402BC_8D878C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802402BC_8D878C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Entity* entity = get_entity_by_index(get_variable(script, *args++));
 

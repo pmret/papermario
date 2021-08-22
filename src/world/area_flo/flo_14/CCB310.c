@@ -14,7 +14,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_14_tattle },
 };
 
-Script N(802423F0) = SCRIPT({
+EvtSource N(802423F0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -24,7 +24,7 @@ Script N(802423F0) = SCRIPT({
     }
 });
 
-Script N(updateTexturePan_80242460) = SCRIPT({
+EvtSource N(updateTexturePan_80242460) = SCRIPT({
     group 0;
     if (SI_VAR(5) == 1) {
         if (SI_VAR(6) == 1) {
@@ -39,11 +39,11 @@ Script N(updateTexturePan_80242460) = SCRIPT({
     N(UnkTexturePanFunc2)();
 });
 
-Script N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
+EvtSource N(exitWalk_802424FC) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  1);
 
-Script N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
+EvtSource N(exitWalk_80242558) = EXIT_WALK_SCRIPT(60,  1, "flo_13",  0);
 
-Script N(802425B4) = SCRIPT({
+EvtSource N(802425B4) = SCRIPT({
     bind N(exitWalk_80242558) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_802424FC) TRIGGER_FLOOR_ABOVE 4;
 });
@@ -57,7 +57,7 @@ s32 N(lavaResetList_802425FC)[] = {
     0x00000023, 0xC2480000, 0x00000000, 0x42DC0000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -142,7 +142,7 @@ static s32 N(pad_2BF4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80242C00) = SCRIPT({
+EvtSource N(80242C00) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -181,7 +181,7 @@ Script N(80242C00) = SCRIPT({
     goto 0;
 });
 
-Script N(80242EAC) = SCRIPT({
+EvtSource N(80242EAC) = SCRIPT({
     SI_VAR(9) = SI_VAR(6);
     SI_VAR(8) = SI_VAR(5);
     SI_VAR(7) = SI_VAR(4);
@@ -235,7 +235,7 @@ s32 N(D_802431CC_CCE4DC) = {
     0x00000000,
 };
 
-Script N(802431D0) = SCRIPT({
+EvtSource N(802431D0) = SCRIPT({
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     MakeLerp(SI_VAR(1), 48, 15, 0);
     loop {
@@ -254,7 +254,7 @@ Script N(802431D0) = SCRIPT({
     }
 });
 
-Script N(802432E8) = SCRIPT({
+EvtSource N(802432E8) = SCRIPT({
     SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_GRAVITY)), FALSE);
     loop {
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -275,7 +275,7 @@ Vec3f N(vectorList_80243384)[] = {
     { -69.0, 75.0, 81.0 },
 };
 
-Script N(80243420) = SCRIPT({
+EvtSource N(80243420) = SCRIPT({
     sleep 20;
     PlaySound(0x80000023);
     LoadPath(165, N(vectorList_80243384), 13, 10);
@@ -293,7 +293,7 @@ Script N(80243420) = SCRIPT({
     StopSound(0x80000023);
 });
 
-Script N(8024352C) = SCRIPT({
+EvtSource N(8024352C) = SCRIPT({
     IsPlayerWithin(531, 81, 30, SI_VAR(0));
     if (SI_VAR(0) == 0) {
         return;
@@ -346,7 +346,7 @@ Script N(8024352C) = SCRIPT({
     unbind;
 });
 
-Script N(80243870) = SCRIPT({
+EvtSource N(80243870) = SCRIPT({
     PlaySoundAt(0x193, 0, 591, 55, 121);
     EnableModel(123, 1);
     SI_VAR(2) = 1.0;
@@ -395,7 +395,7 @@ s32 N(D_80243B18_CCEE28) = {
     0x0000005A,
 };
 
-Script N(80243B1C) = SCRIPT({
+EvtSource N(80243B1C) = SCRIPT({
     group 0;
     SI_VAR(15) = SI_VAR(0);
 0:
@@ -453,7 +453,7 @@ Script N(80243B1C) = SCRIPT({
 });
 
 
-Script N(80243E78) = SCRIPT({
+EvtSource N(80243E78) = SCRIPT({
     ModifyColliderFlags(3, 31, 0x00000006);
     ModifyColliderFlags(3, 32, 0x00000006);
     ModifyColliderFlags(3, 33, 0x00000006);
@@ -553,14 +553,14 @@ Script N(80243E78) = SCRIPT({
 
 void playFX_82();
 
-ApiStatus N(func_8024030C_CCB61C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024030C_CCB61C)(Evt* script, s32 isInitialCall) {
     playFX_82(0, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 
 #include "world/common/UnkFunc43.inc.c"
 
-ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802403D4_CCB6E4)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
         script->varTable[14] = 0;
         return ApiStatus_DONE2;
@@ -571,14 +571,14 @@ ApiStatus N(func_802403D4_CCB6E4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024042C_CCB73C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024042C_CCB73C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(-4);
 
     npc->flags = get_variable(NULL, SI_MAP_VAR(0));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024046C_CCB77C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024046C_CCB77C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     script->functionTemp[0] = get_variable(script, *args++);

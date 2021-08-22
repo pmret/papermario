@@ -65,7 +65,7 @@
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
 { \
-    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
+    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(Evt)); \
     gNumScripts++; \
     ASSERT(new != NULL); \
 }

@@ -62,7 +62,7 @@ s32 N(reflection_unk_change_anim_facing)(s32 playerAnim) {
     return playerAnim | 0x1000000;
 }
 
-ApiStatus N(ReflectWall)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(ReflectWall)(Evt* script, s32 isInitialCall) {
     script->array[0] = (s32) create_generic_entity_world(NULL, N(reflection_setup_wall));
     return ApiStatus_DONE2;
 }
@@ -138,7 +138,7 @@ void N(reflection_render_wall)(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(2, 0, 0, NULL, main);
 }
 
-ApiStatus N(ReflectFloor)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(ReflectFloor)(Evt* script, s32 isInitialCall) {
     switch (script->varTable[0]) {
         case REFLECTION_FLOOR_WALL:
         case REFLECTION_FLOOR:
@@ -316,7 +316,7 @@ void N(reflection_render_floor_fancy)(PlayerStatus* playerStatus) {
 
 /// int var0 = reflection type
 /// bool var1 = enable wall reflection
-ApiStatus N(ReflectPartner)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(ReflectPartner)(Evt* script, s32 isInitialCall) {
     Npc* partner;
 
     if (script->varTable[1] == FALSE) {
@@ -402,7 +402,7 @@ void N(SetPartnerFlags20000)(void) {
 // Requires most of area_pra to have its data decomped.
 
 /*
-#new:Script $Script_802415D0
+#new:EvtSource $Script_802415D0
 {
     0:  NewArray  00000010 *VarA
    10:  If  *Var1  ==  00000000

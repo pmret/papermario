@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_trd/trd_00/999F80", func_80240310_999F80);
 /*
-ApiStatus N(func_80240310_999F80)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240310_999F80)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80241340_99AFB0) == NULL) {

@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_kmr_part_1_paragoomba
 
-ApiStatus N(AngleCalculate)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(AngleCalculate)(Evt* script, s32 isInitialCall);
 
 s32 N(defenseTable_8021CB00)[] = {
     ELEMENT_NORMAL, 0,
@@ -72,7 +72,7 @@ s32 N(idleAnimations_8021E4EC)[];
 s32 N(idleAnimations_8021CD28)[];
 s32 N(idleAnimations_8021CDC0)[];
 s32 N(idleAnimations_8021CDCC)[];
-Script N(init_8021CDD8);
+EvtSource N(init_8021CDD8);
 
 ActorPartDesc N(partsTable_8021CC70)[] = {
     {
@@ -184,17 +184,17 @@ s32 N(idleAnimations_8021CDCC)[] = {
     STATUS_END,
 };
 
-Script N(takeTurn_8021D74C);
-Script N(idle_8021CE24);
-Script N(handleEvent_8021D158);
+EvtSource N(takeTurn_8021D74C);
+EvtSource N(idle_8021CE24);
+EvtSource N(handleEvent_8021D158);
 
-Script N(init_8021CDD8) = SCRIPT({
+EvtSource N(init_8021CDD8) = SCRIPT({
     BindTakeTurn(ACTOR_SELF, N(takeTurn_8021D74C));
     BindIdle(ACTOR_SELF, N(idle_8021CE24));
     BindHandleEvent(ACTOR_SELF, N(handleEvent_8021D158));
 });
 
-Script N(idle_8021CE24) = SCRIPT({
+EvtSource N(idle_8021CE24) = SCRIPT({
 10:
     RandInt(80, SI_VAR(0));
     SI_VAR(0) += 80;
@@ -240,7 +240,7 @@ Script N(idle_8021CE24) = SCRIPT({
     goto 10;
 });
 
-Script N(8021D0E0) = SCRIPT({
+EvtSource N(8021D0E0) = SCRIPT({
     ResetAllActorSounds(ACTOR_SELF);
     SetGoalToHome(ACTOR_SELF);
     SetActorSpeed(ACTOR_SELF, 7.0);
@@ -248,9 +248,9 @@ Script N(8021D0E0) = SCRIPT({
     SetAnimation(ACTOR_SELF, 2, NPC_ANIM(paragoomba, default, idle));
 });
 
-Script N(8021DF64);
+EvtSource N(8021DF64);
 
-Script N(handleEvent_8021D158) = SCRIPT({
+EvtSource N(handleEvent_8021D158) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, 0);
     GetLastEvent(ACTOR_SELF, SI_VAR(0));
@@ -370,7 +370,7 @@ Script N(handleEvent_8021D158) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, TRUE);
 });
 
-Script N(takeTurn_8021D74C) = SCRIPT({
+EvtSource N(takeTurn_8021D74C) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, 0);
     SetTargetActor(ACTOR_SELF, ACTOR_PLAYER);
@@ -479,11 +479,11 @@ Script N(takeTurn_8021D74C) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, TRUE);
 });
 
-Script N(8021E584);
+EvtSource N(8021E584);
 
 #include "common/StartRumbleWithParams.inc.c"
 
-Script N(8021DF64) = SCRIPT({
+EvtSource N(8021DF64) = SCRIPT({
     func_8027D32C(-127);
     SetPartFlags(ACTOR_SELF, 2, 131077);
     SetPartFlags(ACTOR_SELF, 3, 1179652);
@@ -577,17 +577,17 @@ s32 N(idleAnimations_8021E538)[] = {
     STATUS_END,
 };
 
-Script N(takeTurn_8021F0D8);
-Script N(idle_8021E5D0);
-Script N(handleEvent_8021E8AC);
+EvtSource N(takeTurn_8021F0D8);
+EvtSource N(idle_8021E5D0);
+EvtSource N(handleEvent_8021E8AC);
 
-Script N(8021E584) = SCRIPT({
+EvtSource N(8021E584) = SCRIPT({
     BindTakeTurn(ACTOR_SELF, N(takeTurn_8021F0D8));
     BindIdle(ACTOR_SELF, N(idle_8021E5D0));
     BindHandleEvent(ACTOR_SELF, N(handleEvent_8021E8AC));
 });
 
-Script N(idle_8021E5D0) = SCRIPT({
+EvtSource N(idle_8021E5D0) = SCRIPT({
 10:
     RandInt(80, SI_VAR(0));
     SI_VAR(0) += 80;
@@ -635,7 +635,7 @@ Script N(idle_8021E5D0) = SCRIPT({
     goto 10;
 });
 
-Script N(handleEvent_8021E8AC) = SCRIPT({
+EvtSource N(handleEvent_8021E8AC) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, FALSE);
     SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
@@ -761,7 +761,7 @@ Script N(handleEvent_8021E8AC) = SCRIPT({
 
 #include "anglestuff.inc.c"
 
-Script N(takeTurn_8021F0D8) = SCRIPT({
+EvtSource N(takeTurn_8021F0D8) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, FALSE);
     SetTargetActor(ACTOR_SELF, ACTOR_PLAYER);

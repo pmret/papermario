@@ -7,11 +7,11 @@
 #include "sprite/npc/boo.h"
 #include "sprite/npc/bootler.h"
 
-Script N(80243790) = SCRIPT({
+EvtSource N(80243790) = SCRIPT({
     spawn N(802437AC);
 });
 
-Script N(802437AC) = SCRIPT({
+EvtSource N(802437AC) = SCRIPT({
     SI_VAR(0) = 0.0;
     SI_VAR(1) = 30;
     PlaySoundAtModel(23, 0x8000004A, 0);
@@ -46,7 +46,7 @@ Script N(802437AC) = SCRIPT({
     goto 0;
 });
 
-Script N(802439B0) = SCRIPT({
+EvtSource N(802439B0) = SCRIPT({
     group 0;
     SetTimeFreezeMode(1);
     ShowKeyChoicePopup();
@@ -73,11 +73,11 @@ Script N(802439B0) = SCRIPT({
     unbind;
 });
 
-Script N(80243B28) = SCRIPT({
+EvtSource N(80243B28) = SCRIPT({
     bind N(exitSingleDoor_802428D4) TRIGGER_WALL_PRESS_A 10;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
         MakeEntity(0x802BCD68, 10, 30, -155, 0, MAKE_ENTITY_END);
         AssignScript(N(80243B28));
@@ -103,7 +103,7 @@ NpcAISettings N(npcAISettings_80243BD8) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80243C08) = SCRIPT({
+EvtSource N(npcAI_80243C08) = SCRIPT({
     SetSelfVar(0, 1);
     SetSelfVar(5, -850);
     SetSelfVar(6, 60);
@@ -121,11 +121,11 @@ NpcSettings N(npcSettings_80243C78) = {
     .unk_2A = 1,
 };
 
-Script N(80243CA4) = SCRIPT({
+EvtSource N(80243CA4) = SCRIPT({
 
 });
 
-Script N(80243CB4) = SCRIPT({
+EvtSource N(80243CB4) = SCRIPT({
 
 });
 
@@ -169,14 +169,14 @@ NpcSettings N(npcSettings_80243DA0) = {
     .level = 99,
 };
 
-Script N(80243DCC) = SCRIPT({
+EvtSource N(80243DCC) = SCRIPT({
     loop {
         PlaySoundAtNpc(NPC_WORLD_TUBBA, SOUND_UNKNOWN_20F6, 0);
         ShakeCam(0, 0, 3, 0.80078125);
     }
 });
 
-Script N(80243E24) = SCRIPT({
+EvtSource N(80243E24) = SCRIPT({
     DisablePlayerInput(TRUE);
     UseSettingsFrom(0, 236, 0, -46);
     SetCamSpeed(0, 90.0);
@@ -199,7 +199,7 @@ Script N(80243E24) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-Script N(80243FE8) = SCRIPT({
+EvtSource N(80243FE8) = SCRIPT({
     sleep 10;
     SetNpcAnimation(NPC_SELF, NPC_ANIM(world_tubba, Palette_00, Anim_22));
     sleep 15;
@@ -389,7 +389,7 @@ Script N(80243FE8) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(idle_80244C54) = SCRIPT({
+EvtSource N(idle_80244C54) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         if (SI_VAR(0) == 1) {
@@ -400,7 +400,7 @@ Script N(idle_80244C54) = SCRIPT({
     StartBossBattle(11);
 });
 
-Script N(idle_80244CC8) = SCRIPT({
+EvtSource N(idle_80244CC8) = SCRIPT({
 10:
     loop {
         GetSelfVar(0, SI_VAR(0));
@@ -450,7 +450,7 @@ Script N(idle_80244CC8) = SCRIPT({
     goto 10;
 });
 
-Script N(defeat_80244FB8) = SCRIPT({
+EvtSource N(defeat_80244FB8) = SCRIPT({
     SetEncounterStatusFlags(2, 1);
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
@@ -465,13 +465,13 @@ Script N(defeat_80244FB8) = SCRIPT({
     }
 });
 
-Script N(init_80245058) = SCRIPT({
+EvtSource N(init_80245058) = SCRIPT({
     if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(init_80245090) = SCRIPT({
+EvtSource N(init_80245090) = SCRIPT({
     SetSelfVar(0, 0);
     BindNpcIdle(NPC_SELF, N(idle_80244C54));
     BindNpcDefeat(NPC_SELF, N(defeat_80244FB8));
@@ -480,7 +480,7 @@ Script N(init_80245090) = SCRIPT({
     }
 });
 
-Script N(init_80245104) = SCRIPT({
+EvtSource N(init_80245104) = SCRIPT({
     SetSelfVar(0, 0);
     BindNpcIdle(NPC_SELF, N(idle_80244CC8));
     if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
@@ -488,13 +488,13 @@ Script N(init_80245104) = SCRIPT({
     }
 });
 
-Script N(init_80245164) = SCRIPT({
+EvtSource N(init_80245164) = SCRIPT({
     if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(init_8024519C) = SCRIPT({
+EvtSource N(init_8024519C) = SCRIPT({
     if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WINDY_MILL) {
         RemoveNpc(NPC_SELF);
     }
@@ -527,7 +527,7 @@ NpcAnimID N(extraAnimationList_80245208)[] = {
     ANIM_END,
 };
 
-Script N(idle_80245210) = SCRIPT({
+EvtSource N(idle_80245210) = SCRIPT({
     loop {
         loop 10 {
             GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -544,7 +544,7 @@ Script N(idle_80245210) = SCRIPT({
     }
 });
 
-Script N(80245304) = SCRIPT({
+EvtSource N(80245304) = SCRIPT({
     DisablePartnerAI(0);
     func_802CF56C(2);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -678,7 +678,7 @@ Script N(80245304) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(init_80245C9C) = SCRIPT({
+EvtSource N(init_80245C9C) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 3) {
         BindNpcIdle(NPC_SELF, N(idle_80245210));
@@ -994,7 +994,7 @@ StaticNpc N(npcGroup_80246E7C) = {
     .extraAnimations = N(extraAnimationList_80245208),
 };
 
-Script N(init_8024706C) = SCRIPT({
+EvtSource N(init_8024706C) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
         if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
             RemoveNpc(NPC_SELF);
@@ -1166,7 +1166,7 @@ NpcGroupList N(npcGroupList_802478E8) = {
 #include "world/common/UnkNpcAIFunc23.inc.c"
 
 #ifdef NON_MATCHING
-void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240B00_BED8F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
@@ -1305,7 +1305,7 @@ void N(func_80240B00_BED8F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_arn/arn_07/events", arn_07_func_80240B00_BED8F0, ScriptInstance* script,
+INCLUDE_ASM(void, "world/area_arn/arn_07/events", arn_07_func_80240B00_BED8F0, Evt* script,
             NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
@@ -1315,7 +1315,7 @@ INCLUDE_ASM(void, "world/area_arn/arn_07/events", arn_07_func_80240B00_BED8F0, S
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_802415A4_BEE394)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802415A4_BEE394)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1333,7 +1333,7 @@ void N(func_802415A4_BEE394)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_80241C5C_BEEA4C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241C5C_BEEA4C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1393,7 +1393,7 @@ ApiStatus N(func_80241C5C_BEEA4C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus PostChapter3StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter3StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(3);

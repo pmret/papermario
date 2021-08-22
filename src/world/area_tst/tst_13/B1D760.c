@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_80240000_B1D760);
 /*
-ApiStatus N(func_80240000_B1D760)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240000_B1D760)(Evt *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 *array = script->array;
     f32 distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[3]);
@@ -21,7 +21,7 @@ ApiStatus N(func_80240000_B1D760)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_tst/tst_13/B1D760", func_802400A0_B1D800);
 /*
-ApiStatus N(func_802400A0_B1D800)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_802400A0_B1D800)(Evt *script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance;
     s32 *array = script->array;

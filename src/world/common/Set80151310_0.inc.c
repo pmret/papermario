@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(Set80151310_0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(Set80151310_0)(Evt* script, s32 isInitialCall) {
     D_80151310 = 0;
     return ApiStatus_DONE2;
 }

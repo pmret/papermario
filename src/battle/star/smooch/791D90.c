@@ -6,7 +6,7 @@
 
 #include "common/AddHP.inc.c"
 
-ApiStatus func_802A156C_7922FC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A156C_7922FC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

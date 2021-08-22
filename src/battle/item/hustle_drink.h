@@ -7,12 +7,12 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_hustle_drink
 
-ApiStatus func_802D7520(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A12C4_726224)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A123C_72619C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802D7520(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A12C4_726224)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_72619C)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
-Script N(DrinkItem);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
+EvtSource N(DrinkItem);
 
 #endif

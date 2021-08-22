@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc18)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc18)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
     s32 partnerIdx = get_variable(script, *args++);
@@ -25,7 +25,7 @@ s32 N(UnkFunc37)(s32 idx, s16 arg1) {
     return -1;
 }
 
-ApiStatus N(UnkFunc38)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc38)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     s32 i;
     s16 var = script->varTable[12] >= 0;

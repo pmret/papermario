@@ -19,7 +19,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802402E0_9D7300);
 /*
-ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402E0_9D7300)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802453D0_9DC3F0) == NULL) {
@@ -52,7 +52,7 @@ ApiStatus N(func_802402E0_9D7300)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240624_9D7644);
 /*
-ApiStatus N(func_80240624_9D7644)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240624_9D7644)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -71,7 +71,7 @@ ApiStatus N(func_80240624_9D7644)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_80240678_9D7698);
 /*
-ApiStatus N(func_80240678_9D7698)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240678_9D7698)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80245438_9DC458) = get_variable(script, *args);
@@ -82,7 +82,7 @@ ApiStatus N(func_80240678_9D7698)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_nok/nok_02/9D7020", func_802406B0_9D76D0);
 /*
-ApiStatus N(func_802406B0_9D76D0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802406B0_9D76D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;

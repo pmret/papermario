@@ -7,8 +7,8 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_please_come_back
 
-ApiStatus func_80273444(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
+EvtSource N(UseItemWithEffect);
 
 #endif

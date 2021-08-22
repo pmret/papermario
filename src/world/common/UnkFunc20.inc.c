@@ -2,7 +2,7 @@
 #include "map.h"
 #include "effects.h"
 
-ApiStatus N(UnkFunc20)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc20)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 entityIdx = get_variable(script, *args++);
     Entity* entity = get_entity_by_index(entityIdx);

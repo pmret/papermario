@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(GetItemEntityPosition)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GetItemEntityPosition)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ItemEntity* entity = get_item_entity(get_variable(script, *args++));
 

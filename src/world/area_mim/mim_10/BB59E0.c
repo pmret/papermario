@@ -7,7 +7,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_mim/mim_10/BB59E0", func_80240000_BB59E0);
 /*
-ApiStatus N(func_80240000_BB59E0)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BB59E0)(Evt *script, s32 isInitialCall) {
     if (gPlayerStatus.position.y >= -210.0f) {
         return ApiStatus_BLOCK;
     }

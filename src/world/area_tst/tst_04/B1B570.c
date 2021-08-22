@@ -10,7 +10,7 @@ void func_80240574_B1BAE4(void);
 // BSS
 static s32 B_80240FD0_tst_04;
 
-ApiStatus func_80240000_B1B570(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240000_B1B570(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_safe(0);
 
     if (npc != NULL && npc->unk_84 == 5) {
@@ -33,7 +33,7 @@ ApiStatus func_80240000_B1B570(ScriptInstance* script, s32 isInitialCall) {
 
 // float shenanigans
 #ifdef NON_MATCHING
-ApiStatus func_802400FC_B1B66C(ScriptInstance* script,  s32 isInitialCall) {
+ApiStatus func_802400FC_B1B66C(Evt* script,  s32 isInitialCall) {
     Npc* npc = get_npc_safe(NPC_PARTNER);
 
     if (npc != NULL) {
@@ -69,7 +69,7 @@ ApiStatus func_802400FC_B1B66C(ScriptInstance* script,  s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_tst/tst_04/B1B570", func_802400FC_B1B66C);
 #endif
 
-ApiStatus func_80240260_B1B7D0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240260_B1B7D0(Evt* script, s32 isInitialCall) {
     script->array[0] = (s32) create_generic_entity_frontUI(NULL, func_8024029C_B1B80C);
     return ApiStatus_DONE2;
 }
@@ -120,7 +120,7 @@ void func_80240360_B1B8D0(PlayerStatus* playerStatus) {
     spr_draw_player_sprite(1, 0, 0, NULL, main);
 }
 
-ApiStatus func_80240510_B1BA80(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240510_B1BA80(Evt* script, s32 isInitialCall) {
     Npc* partner;
 
     script->array[1] = create_generic_entity_world(func_80240574_B1BAE4, NULL);
@@ -163,7 +163,7 @@ void func_802405D4_B1BB44(void) {
     render_animated_model(B_80240FD0_tst_04, m4);
 }
 
-ApiStatus func_80240628_B1BB98(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240628_B1BB98(Evt* script, s32 isInitialCall) {
     create_generic_entity_world(func_802405B0_B1BB20, func_802405D4_B1BB44);
     return ApiStatus_DONE2;
 }

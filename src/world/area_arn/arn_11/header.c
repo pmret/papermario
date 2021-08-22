@@ -12,7 +12,7 @@ MapConfig N(config) = {
     .tattle = { MSG_arn_11_tattle },
 };
 
-Script N(80240050) = SCRIPT({
+EvtSource N(80240050) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_WENT_DOWN_THE_WELL {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);

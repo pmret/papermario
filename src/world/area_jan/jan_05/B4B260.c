@@ -42,7 +42,7 @@ INCLUDE_ASM(s32, "world/area_jan/jan_05/B4B260", func_80241494_B4BF04);
 #include "world/common/foliage.inc.c"
 #define NAMESPACE jan_05
 
-ApiStatus func_8024268C_B4D0FC(ScriptInstance* script) {
+ApiStatus func_8024268C_B4D0FC(Evt* script) {
     if (get_enemy_safe(0) == NULL) {
         script->varTable[0] = FALSE;
     } else {

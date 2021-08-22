@@ -29,7 +29,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240B94_B84D14);
 /*
-ApiStatus N(func_80240B94_B84D14)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B94_B84D14)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -116,7 +116,7 @@ ApiStatus N(func_80240B94_B84D14)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_jan/jan_22/B84180", func_80240E90_B85010);
 /*
-ApiStatus N(func_80240E90_B85010)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240E90_B85010)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802425BC_B8673C) == NULL) {
@@ -141,7 +141,7 @@ ApiStatus N(func_80240E90_B85010)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnsetCamera0Flag1000.inc.c"
 
-ApiStatus PostChapter5StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter5StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(5);

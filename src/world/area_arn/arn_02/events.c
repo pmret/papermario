@@ -2,16 +2,16 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 
-Script N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
+EvtSource N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
-Script N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+EvtSource N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
 
-Script N(802411A8) = SCRIPT({
+EvtSource N(802411A8) = SCRIPT({
     bind N(exitWalk_802410F0) TRIGGER_FLOOR_ABOVE 1;
     bind N(exitWalk_8024114C) TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -29,7 +29,7 @@ static s32 N(pad_12C4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
     MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
     MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
@@ -53,7 +53,7 @@ NpcAISettings N(npcAISettings_802413D0) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80241400) = SCRIPT({
+EvtSource N(npcAI_80241400) = SCRIPT({
     DoBasicAI(N(npcAISettings_802413D0));
 });
 
@@ -80,7 +80,7 @@ NpcAISettings N(npcAISettings_8024144C) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_8024147C) = SCRIPT({
+EvtSource N(npcAI_8024147C) = SCRIPT({
     N(func_80240C90_BDDE40)(N(npcAISettings_8024144C), 8);
 });
 
@@ -200,7 +200,7 @@ NpcGroupList N(npcGroupList_80241A9C) = {
     {},
 };
 
-s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+s32 N(func_80240000_BDD1B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -232,7 +232,7 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 
-void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802401D4_BDD384)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -261,7 +261,7 @@ void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
-void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240694_BDD844)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -288,7 +288,7 @@ void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc10.inc.c"
 
-void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240984_BDDB34)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -312,7 +312,7 @@ void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-s32 N(func_80240C90_BDDE40)(ScriptInstance* script, s32 isInitialCall) {
+s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

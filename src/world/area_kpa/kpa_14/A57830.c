@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kpa/kpa_14/A57830", func_80240380_A57830);
 /*
-ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240380_A57830)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80241900_A58DB0) == NULL) {
@@ -31,7 +31,7 @@ ApiStatus N(func_80240380_A57830)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetEntityPosition.inc.c"
 
-ApiStatus N(func_80240710_A57BC0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240710_A57BC0)(Evt* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
     set_variable(script, *script->ptrReadPos, collisionStatus->floorBelow);

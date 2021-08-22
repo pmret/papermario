@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void N(UnkNpcAIFunc20)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(UnkNpcAIFunc20)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;

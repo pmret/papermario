@@ -40,7 +40,7 @@ u32 N(BattleAreaAngleStuff1)(f32 x, f32 y) {
     return ret;
 }
 
-ApiStatus N(BattleAreaAngleStuff2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(BattleAreaAngleStuff2)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

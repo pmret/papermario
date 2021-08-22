@@ -3,7 +3,7 @@
 
 #define NAMESPACE battle_move_spin_smash
 
-ApiStatus func_802A1000_737890(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1000_737890(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 xPos = playerActor->currentPos.x + 20.0f;
@@ -15,7 +15,7 @@ ApiStatus func_802A1000_737890(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1074_737904(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1074_737904(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     f32 xPos = playerActor->currentPos.x + 20.0f;

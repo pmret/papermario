@@ -2,7 +2,7 @@
 #include "sprite/npc/goomba.h"
 #include "sprite/npc/tubbas_heart.h"
 
-Script N(exitSingleDoor_80240100) = SCRIPT({
+EvtSource N(exitSingleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -15,7 +15,7 @@ Script N(exitSingleDoor_80240100) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitSingleDoor_802401A4) = SCRIPT({
+EvtSource N(exitSingleDoor_802401A4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 1;
@@ -28,12 +28,12 @@ Script N(exitSingleDoor_802401A4) = SCRIPT({
     sleep 100;
 });
 
-Script N(80240248) = SCRIPT({
+EvtSource N(80240248) = SCRIPT({
     bind N(exitSingleDoor_80240100) TRIGGER_WALL_PRESS_A 2;
     bind N(exitSingleDoor_802401A4) TRIGGER_WALL_PRESS_A 7;
 });
 
-Script N(enterSingleDoor_80240290) = SCRIPT({
+EvtSource N(enterSingleDoor_80240290) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -51,7 +51,7 @@ Script N(enterSingleDoor_80240290) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524292);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -69,11 +69,11 @@ static s32 N(pad_424)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80240430) = SCRIPT({
+EvtSource N(80240430) = SCRIPT({
 
 });
 
-Script N(80240440) = SCRIPT({
+EvtSource N(80240440) = SCRIPT({
 
 });
 
@@ -98,7 +98,7 @@ NpcAISettings N(npcAISettings_8024047C) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802404AC) = SCRIPT({
+EvtSource N(npcAI_802404AC) = SCRIPT({
     DoBasicAI(N(npcAISettings_8024047C));
 });
 
@@ -111,7 +111,7 @@ NpcSettings N(npcSettings_802404CC) = {
     .level = 12,
 };
 
-Script N(idle_802404F8) = SCRIPT({
+EvtSource N(idle_802404F8) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
     SetNpcJumpscale(NPC_SELF, 3.0);
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -137,19 +137,19 @@ Script N(idle_802404F8) = SCRIPT({
     SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
 });
 
-Script N(defeat_802406F4) = SCRIPT({
+EvtSource N(defeat_802406F4) = SCRIPT({
     SI_SAVE_FLAG(1018) = 1;
     DoNpcDefeat();
 });
 
-Script N(init_80240720) = SCRIPT({
+EvtSource N(init_80240720) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_802404F8));
     if (SI_STORY_PROGRESS != STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(init_8024076C) = SCRIPT({
+EvtSource N(init_8024076C) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
         if (SI_SAVE_FLAG(1018) == 1) {
             RemoveNpc(NPC_SELF);
@@ -230,13 +230,13 @@ NpcGroupList N(npcGroupList_80240BCC) = {
     {},
 };
 
-Script N(80240BF0) = SCRIPT({
+EvtSource N(80240BF0) = SCRIPT({
     DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x0184), 160, 40);
     DisablePlayerInput(FALSE);
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAFDC, 200, 0, -40, 0, MAKE_ENTITY_END);
     AssignScript(N(80240BF0));
 });

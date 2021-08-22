@@ -18,7 +18,7 @@ extern char* D_802350D4_5EB764[11];
 #include "common/UnkFloatFunc.inc.c"
 #define NAMESPACE b_area_flo2
 
-ApiStatus func_80218DD0_5CF460(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218DD0_5CF460(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -34,7 +34,7 @@ ApiStatus func_80218DD0_5CF460(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218E90_5CF520(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218E90_5CF520(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -50,7 +50,7 @@ ApiStatus func_80218E90_5CF520(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218F50_5CF5E0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218F50_5CF5E0(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -66,7 +66,7 @@ ApiStatus func_80218F50_5CF5E0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219010_5CF6A0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80219010_5CF6A0(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -82,7 +82,7 @@ ApiStatus func_80219010_5CF6A0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802190D0_5CF760(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802190D0_5CF760(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -98,7 +98,7 @@ ApiStatus func_802190D0_5CF760(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219190_5CF820(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80219190_5CF820(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -114,7 +114,7 @@ ApiStatus func_80219190_5CF820(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80219250_5CF8E0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80219250_5CF8E0(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -138,7 +138,7 @@ ApiStatus func_80219250_5CF8E0(ScriptInstance* script, s32 isInitialCall) {
 #include "common/UnkFloatFunc.inc.c"
 #define NAMESPACE b_area_flo2
 
-ApiStatus func_80219630_5CFCC0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80219630_5CFCC0(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -154,7 +154,7 @@ ApiStatus func_80219630_5CFCC0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802196F0_5CFD80(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802196F0_5CFD80(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 
@@ -170,7 +170,7 @@ ApiStatus func_802196F0_5CFD80(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802197B0_5CFE40(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802197B0_5CFE40(Evt* script, s32 isInitialCall) {
     s32 var1 = 0;
     u32 i;
 

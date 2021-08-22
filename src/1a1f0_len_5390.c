@@ -35,21 +35,21 @@ void set_defeated(s32 mapID, s32 encounterID) {
     currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
-ApiStatus ShowMerleeCoinMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(0, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus ShowMerleeRanOutMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(1, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -67,7 +67,7 @@ ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -83,7 +83,7 @@ ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
@@ -100,7 +100,7 @@ ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     npc->alpha -= 17;
@@ -113,7 +113,7 @@ ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
 }
 
 // same as func_802616F4 aside from syms
-ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
     EffectInstanceData* effectInstanceData;
 
@@ -170,12 +170,12 @@ ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall) {
     D_800A0BB8 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetCamLookAtObjVector(Evt* script, s32 isInitialCall) {
     script->varTable[0] = gCameras[gCurrentCameraID].lookAt_obj.x;
     script->varTable[1] = gCameras[gCurrentCameraID].lookAt_obj.y;
     script->varTable[2] = gCameras[gCurrentCameraID].lookAt_obj.z;
@@ -183,7 +183,7 @@ ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;
     if (gPlayerData.merleeCastsLeft > 0) {
         script->varTable[0] = TRUE;
@@ -192,7 +192,7 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -202,7 +202,7 @@ ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -212,7 +212,7 @@ ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp1;
@@ -251,7 +251,7 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 

@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240340_918EF0);
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240514_9190C4);
 /*
-void N(func_80240514_9190C4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240514_9190C4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -38,7 +38,7 @@ void N(func_80240514_9190C4)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_802409D4_919584);
 /*
-void N(func_802409D4_919584)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802409D4_919584)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus** playerStatus = &gPlayerStatusPtr;
@@ -70,7 +70,7 @@ void N(func_802409D4_919584)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_iwa/iwa_03/918EF0", func_80240CC4_919874);
 /*
-void N(func_80240CC4_919874)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240CC4_919874)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 

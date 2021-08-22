@@ -340,9 +340,9 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern Script* SCRIPT_NpcDefeat;
-extern Script ShakeCam1;
-extern Script ShakeCamX;
+extern EvtSource* SCRIPT_NpcDefeat;
+extern EvtSource ShakeCam1;
+extern EvtSource ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;

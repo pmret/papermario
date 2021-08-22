@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(UnkStarFunc1)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkStarFunc1)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -11,7 +11,7 @@ ApiStatus N(UnkStarFunc1)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkStarFunc2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkStarFunc2)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -21,7 +21,7 @@ ApiStatus N(UnkStarFunc2)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkStarFunc3)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkStarFunc3)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -31,7 +31,7 @@ ApiStatus N(UnkStarFunc3)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkStarFunc4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkStarFunc4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

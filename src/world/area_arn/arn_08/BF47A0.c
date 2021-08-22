@@ -1,6 +1,6 @@
 #include "arn_08.h"
 
-ApiStatus N(func_80240000_BF47A0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BF47A0)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 temp_f20;
     s32 colliderID;
@@ -17,7 +17,7 @@ ApiStatus N(func_80240000_BF47A0)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] > 50) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024008C_BF482C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024008C_BF482C)(Evt* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y < -10.0f) {
         return ApiStatus_DONE2;
     }

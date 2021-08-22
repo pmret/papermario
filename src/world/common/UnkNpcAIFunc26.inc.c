@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-s32 N(UnkNpcAIFunc26)(ScriptInstance* script) {
+s32 N(UnkNpcAIFunc26)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];

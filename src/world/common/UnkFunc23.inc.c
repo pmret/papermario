@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-s32 N(UnkFunc23)(ScriptInstance* script, s32 isInitialCall) {
+s32 N(UnkFunc23)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 ret = 0;
 
