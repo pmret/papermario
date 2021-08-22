@@ -86,9 +86,9 @@ void npc_set_palswap_mode_B(Npc* npc, s32 arg1);
 
 void func_8003B420(Npc* npc);
 
-s32 npc_set_palswap_1();
+void npc_set_palswap_1(Npc* npc, s32 palIndexA, s32 palIndexB, s32 timeHoldA, s32 timeAB);
 
-s32 npc_set_palswap_2();
+void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 palIndexD);
 
 void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2);
 
@@ -186,7 +186,7 @@ s32 func_8003DC38();
 
 void func_8003DFA0(Npc* npc);
 
-s32 func_8003E0D4();
+void func_8003E0D4();
 
 void func_8003E1D0(Npc* npc);
 

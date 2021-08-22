@@ -622,7 +622,6 @@ enum SoundIDs {
     SOUND_UNKNOWN_2106              = 8454,
 };
 
-typedef UNK_TYPE Cam;
 enum Cams {
     CAM_DEFAULT,
     CAM_BATTLE,
@@ -1577,7 +1576,6 @@ enum NpcFlags {
     NPC_FLAG_40                = 0x00000040,
     NPC_FLAG_100               = 0x00000100, // TODO
     NPC_FLAG_GRAVITY           = 0x00000200, ///< Enables gravity. Does nothing if NPC_FLAG_NO_Y_MOVEMENT is set.
-    NPC_FLAG_208               = 0x00000208,
     NPC_FLAG_LOCK_ANIMS        = 0x00000400, ///< Do not allow scripts to change animation
     NPC_FLAG_NO_Y_MOVEMENT     = 0x00000800, ///< Causes NpcMoveTo() to ignore stairs
     NPC_FLAG_1000              = 0x00001000,
@@ -1709,9 +1707,36 @@ enum TimeFreezeMode {
     TIME_FREEZE_EXIT,
 };
 
+enum ActionCommand {
+    ACTION_COMMAND_JUMP = 1,
+    ACTION_COMMAND_SMASH,
+    ACTION_COMMAND_FLEE,
+    ACTION_COMMAND_BREAK_FREE,
+    ACTION_COMMAND_WHIRLWIND,
+    ACTION_COMMAND_STOP_LEECH,
+    ACTION_COMMAND_07,
+    ACTION_COMMAND_DIZZY_SHELL,
+    ACTION_COMMAND_FIRE_SHELL,
+    ACTION_COMMAND_0A,
+    ACTION_COMMAND_BOMB,
+    ACTION_COMMAND_BODY_SLAM,
+    ACTION_COMMAND_AIR_LIFT,
+    ACTION_COMMAND_AIR_RAID,
+    ACTION_COMMAND_SQUIRT,
+    ACTION_COMMAND_POWER_SHOCK,
+    ACTION_COMMAND_MEGA_SHOCK,
+    ACTION_COMMAND_SMACK,
+    ACTION_COMMAND_SPINY_SURGE,
+    ACTION_COMMAND_HURRICANE,
+    ACTION_COMMAND_SPOOK,
+    ACTION_COMMAND_WATER_BLOCK,
+    ACTION_COMMAND_TIDAL_WAVE,
+};
+
 enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED = 0,
     FX_GRAPHICS_ENABLED = 1,
+    FX_GRAPHICS_2 = 2,
 };
 
 #endif

@@ -1,0 +1,39 @@
+.include "macro.inc"
+
+.section .data
+
+glabel D_E008CAF0
+.word 0xFEACACFE, 0xACD5FEB4, 0x9AD5B4FE, 0xB4B4FEB4, 0xDDFEB4FE, 0xFEB4FED5, 0xB4FEB4D5, 0xFEB4FEFE, 0xB4FED5AC
+
+glabel D_E008CB14
+.byte 0xFF, 0xFF, 0x40, 0x00
+
+glabel D_E008CB18
+.byte 0xFF, 0x40, 0x40, 0x00
+
+glabel D_E008CB1C
+.byte 0xFF, 0x40, 0xFF, 0x00
+
+glabel D_E008CB20
+.double 1.2
+
+glabel D_E008CB28
+.word 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC, 0xE008C180, 0xE008C1CC
+
+glabel D_E008CB48
+.word 0xE008C34C, 0xE008C34C, 0xE008C354, 0xE008C354, 0xE008C35C, 0xE008C35C
+
+glabel D_E008CB60
+.double 0.05
+
+glabel D_E008CB68
+.double 0.3
+
+glabel D_E008CB70
+.double 0.8
+
+glabel D_E008CB78
+.double 0.1
+
+glabel D_E008CB80
+.double 0.2, 0.0

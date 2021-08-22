@@ -10,4 +10,4 @@ INCLUDE_ASM(s32, "battle/action_cmd/spiny_surge", func_802A9254_42F074);
 
 INCLUDE_ASM(s32, "battle/action_cmd/spiny_surge", func_802A973C_42F55C);
 
-#include "common/FreeHudElements.inc.c"
+#include "common/free_hud_elements.inc.c"

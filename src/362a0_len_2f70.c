@@ -26,7 +26,7 @@ void initialize_collision(void) {
 void load_hit_asset(void) {
     u32 assetSize;
     MapConfig* map = get_current_map_header();
-    void* compressedData = load_asset_by_name(&mapHitName, &assetSize);
+    void* compressedData = load_asset_by_name(&wMapHitName, &assetSize);
     HitAsset* uncompressedData = heap_malloc(assetSize);
 
     decode_yay0(compressedData, uncompressedData);
@@ -131,7 +131,8 @@ INCLUDE_ASM(s32, "362a0_len_2f70", test_up_ray_triangle, ColliderTriangle* trian
 INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_colliders, s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX,
             f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
-INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 arg0, f32 arg1, f32 arg2, f32* arg3, f32* arg4, f32* arg5, f32* arg6, f32* arg7, f32* arg8, f32* arg9);
+INCLUDE_ASM(s32, "362a0_len_2f70", test_ray_zones, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ,
+            f32* hitX, f32* hitY, f32* hitZ, f32* hitDepth, f32* nx, f32* ny, f32* nz);
 
 //s32 test_up_ray_collider(s32 ignoreFlags, s32 colliderID, f32 x, f32 y, f32 z, f32 length, f32 yaw);
 // Close, but no cigar

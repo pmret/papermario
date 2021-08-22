@@ -25,15 +25,15 @@ void func_8004B440(SoundManager* manager, u8 arg1, u8 arg2, UnkAl19E0* arg3, u8 
     for (i = 0; i < ARRAY_COUNT(manager->unk_16C); i++) {
         SoundPlayer* sub = &manager->unk_16C[i];
 
-        sub->counter = 0;
-        sub->unk_5C = 0;
+        sub->sefDataReadPos = 0;
+        sub->sfxVolume = 0;
         sub->unk_8E = 0;
         sub->unk_90 = 0;
         sub->unk_92 = 0;
         sub->unk_94 = 0;
-        sub->unk_9B = 0;
-        sub->unk_9C = 0;
-        sub->unk_9D = 0;
+        sub->sfxPan = 0;
+        sub->reverb = 0;
+        sub->instrumentIndex = 0;
         sub->unk_9E = 0;
         sub->unk_9F = 0;
         sub->unk_99 = 0;
@@ -185,9 +185,40 @@ INCLUDE_ASM(s32, "26840_len_20d0", snd_set_voice_volume);
 
 INCLUDE_ASM(s32, "26840_len_20d0", func_8004CDF8);
 
+void snd_SEFCmd_00_SetVolume(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_02_SetInstrument(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_03_SetReverb(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_04(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_07(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_08(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0A_EndLoop(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0C(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0D(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0E(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0F(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_10_Jump(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_13(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_14(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_15(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_16(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_17(SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_18(SoundManager* manager, SoundPlayer* player);
+
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_00_SetVolume, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_01_SetPan, SoundManager* manager, SoundPlayer* player);
+//INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_01_SetPan, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_01_SetPan(SoundManager* manager, SoundPlayer* player) {
+    s8 sfxPan = *player->sefDataReadPos;
+
+    player->sefDataReadPos++;
+    player->changedPan = TRUE;
+    player->sfxPan = sfxPan;
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_02_SetInstrument, SoundManager* manager, SoundPlayer* player);
 
@@ -195,19 +226,40 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_03_SetReverb, SoundManager* manag
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_04, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_05, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_05(SoundManager* manager, SoundPlayer* player) {
+    s32 temp_v1 = *player->sefDataReadPos;
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_06, SoundManager* manager, SoundPlayer* player);
+    player->sefDataReadPos++;
+    player->unk_92 = temp_v1 * 100;
+}
+
+void snd_SEFCmd_06(SoundManager* manager, SoundPlayer* player) {
+    s8 temp_v1 = *player->sefDataReadPos;
+
+    player->sefDataReadPos++;
+    player->unk_94 = temp_v1;
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_07, SoundManager* manager, SoundPlayer* player);
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_08, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_09_StartLoop, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_09_StartLoop(SoundManager* manager, SoundPlayer* player) {
+    s8 loopIterCount = *player->sefDataReadPos;
+
+    player->sefDataReadPos++;
+    player->loopStartPos = player->sefDataReadPos;
+    player->loopIterCount = loopIterCount;
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0A_EndLoop, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0B, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_0B(SoundManager* manager, SoundPlayer* player) {
+    if (player->unk_90 != 0) {
+        player->unk_8E = 3;
+        player->sefDataReadPos--;
+    }
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0C, SoundManager* manager, SoundPlayer* player);
 
@@ -219,16 +271,33 @@ INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_0F, SoundManager* manager, SoundP
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_10_Jump, SoundManager* manager, SoundPlayer* player);
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_11_Restart, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_11_Restart(SoundManager* manager, SoundPlayer* player) {
+    player->sefDataReadPos = player->sefReadStart;
+}
 
 void snd_SEFCmd_12_NOP(SoundManager* manager, SoundPlayer* player) {
 }
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_13, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_13(SoundManager* manager, SoundPlayer* player) {
+    s8 temp_v1 = *player->sefDataReadPos;
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_14, SoundManager* manager, SoundPlayer* player);
+    player->sefDataReadPos++;
+    player->unk_A1 = temp_v1;
+}
 
-INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_15, SoundManager* manager, SoundPlayer* player);
+void snd_SEFCmd_14(SoundManager* manager, SoundPlayer* player) {
+    s8 temp_v1 = *player->sefDataReadPos;
+
+    player->sefDataReadPos++;
+    player->unk_A2 = temp_v1;
+}
+
+void snd_SEFCmd_15(SoundManager* manager, SoundPlayer* player) {
+    s8 temp_v1 = *player->sefDataReadPos;
+
+    player->sefDataReadPos++;
+    player->unk_A3 = temp_v1;
+}
 
 INCLUDE_ASM(void, "26840_len_20d0", snd_SEFCmd_16, SoundManager* manager, SoundPlayer* player);
 

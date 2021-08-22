@@ -20,8 +20,8 @@ glabel nuScExecuteAudio
 /* 3A018 8005EC18 27A50010 */  addiu     $a1, $sp, 0x10
 /* 3A01C 8005EC1C 0C0195BC */  jal       osRecvMesg
 /* 3A020 8005EC20 24060001 */   addiu    $a2, $zero, 1
-/* 3A024 8005EC24 3C02800A */  lui       $v0, %hi(D_8009A5B0)
-/* 3A028 8005EC28 9042A5B0 */  lbu       $v0, %lo(D_8009A5B0)($v0)
+/* 3A024 8005EC24 3C02800A */  lui       $v0, %hi(nuScPreNMIFlag)
+/* 3A028 8005EC28 9042A5B0 */  lbu       $v0, %lo(nuScPreNMIFlag)($v0)
 /* 3A02C 8005EC2C 30420002 */  andi      $v0, $v0, 2
 /* 3A030 8005EC30 14400031 */  bnez      $v0, .L8005ECF8
 /* 3A034 8005EC34 00000000 */   nop

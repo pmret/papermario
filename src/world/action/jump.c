@@ -3,7 +3,7 @@
 extern f32 D_8010C960;
 extern f32 D_8010C97C;
 
-void func_802B6000_E24040() {
+void func_802B6000_E24040(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 temp_v1;
@@ -32,7 +32,7 @@ void func_802B6000_E24040() {
     collisionStatus->currentFloor = -1;
 }
 
-void func_802B60B4_E240F4() {
+void func_802B60B4_E240F4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 phi_a0;
 
@@ -68,7 +68,7 @@ void func_802B60B4_E240F4() {
     playerStatus->decorationList++;
 }
 
-void func_802B6198_E241D8() {
+void func_802B6198_E241D8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 temp_s1;
@@ -111,7 +111,7 @@ void func_802B6198_E241D8() {
     playerStatus->fallState++;
 }
 
-void func_802B6294_E242D4() {
+void func_802B6294_E242D4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
@@ -138,7 +138,7 @@ void func_802B6294_E242D4() {
     playerStatus->decorationList++;
 }
 
-void func_802B6348_E24388() {
+void func_802B6348_E24388(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sub_arg5;
     f32 sub_arg6;
@@ -176,7 +176,7 @@ void func_802B6348_E24388() {
     }
 }
 
-void func_802B647C_E244BC() {
+void func_802B647C_E244BC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 temp_v1;
 
@@ -197,7 +197,7 @@ void func_802B647C_E244BC() {
     playerStatus->decorationList++;
 }
 
-void func_802B6508_E24548() {
+void func_802B6508_E24548(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags < 0) {

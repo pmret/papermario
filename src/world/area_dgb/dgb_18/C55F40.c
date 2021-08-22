@@ -639,7 +639,7 @@ static s32 N(pad_36D8)[] = {
     0x00000000, 0x00000000,
 };
 
-s32** N(D_802436E0_C59620) = NULL;
+s32** N(D_802436E0_C59620) = NULL; // StashVars.inc.c data
 
 Script N(802436E4) = SCRIPT({
     group 0;

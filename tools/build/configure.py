@@ -66,7 +66,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("ld",
         description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -T ver/$version/main_bss_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+        command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
     ninja.rule("z64",
@@ -77,6 +77,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("sha1sum",
         description="check $in",
         command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+    )
+
+    ninja.rule("cpp",
+        description="cpp $in",
+        command=f"{cpp} $in {cppflags} -P -o $out"
     )
 
     ninja.rule("cc",
@@ -201,6 +206,9 @@ class Configure:
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
+
+    def undefined_syms_path(self) -> Path:
+        return self.build_path() / "undefined_syms.txt"
 
     def elf_path(self) -> Path:
         # TODO: read basename and build_path from splat.yaml
@@ -554,12 +562,19 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
+        # Run undefined_syms through cpp
+        ninja.build(
+            str(self.undefined_syms_path()),
+            "cpp",
+            str(self.version_path / "undefined_syms.txt")
+        )
+
         # Build elf, z64, ok
         ninja.build(
             str(self.elf_path()),
             "ld",
             str(self.linker_script_path()),
-            implicit=[str(obj) for obj in built_objects],
+            implicit=[str(obj) for obj in built_objects] + [str(self.undefined_syms_path())],
             variables={ "version": self.version, "mapfile": str(self.map_path()) },
         )
         ninja.build(
