@@ -1,0 +1,2 @@
+get_hud_element_script get_hud_element_anim
+set_hud_element_script set_hud_element_anim

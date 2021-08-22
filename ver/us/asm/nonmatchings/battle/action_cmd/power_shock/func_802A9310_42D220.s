@@ -121,7 +121,7 @@ glabel L802A949C_42D3AC
 /* 42D3CC 802A94BC 8E240004 */  lw        $a0, 4($s1)
 /* 42D3D0 802A94C0 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* 42D3D4 802A94C4 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* 42D3D8 802A94C8 0C0511FF */  jal       set_hud_element_script
+/* 42D3D8 802A94C8 0C0511FF */  jal       set_hud_element_anim
 /* 42D3DC 802A94CC 00000000 */   nop
 /* 42D3E0 802A94D0 3C048000 */  lui       $a0, 0x8000
 /* 42D3E4 802A94D4 34840041 */  ori       $a0, $a0, 0x41

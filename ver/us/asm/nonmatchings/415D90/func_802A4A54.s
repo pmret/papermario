@@ -396,7 +396,7 @@ glabel L802A4F74_419D04
 /* 419D98 802A5008 8E040000 */  lw        $a0, ($s0)
 /* 419D9C 802A500C 3C058010 */  lui       $a1, %hi(D_80104A00)
 /* 419DA0 802A5010 24A54A00 */  addiu     $a1, $a1, %lo(D_80104A00)
-/* 419DA4 802A5014 0C0511FF */  jal       set_hud_element_script
+/* 419DA4 802A5014 0C0511FF */  jal       set_hud_element_anim
 /* 419DA8 802A5018 00000000 */   nop
 /* 419DAC 802A501C 24040006 */  addiu     $a0, $zero, 6
 /* 419DB0 802A5020 2402000D */  addiu     $v0, $zero, 0xd

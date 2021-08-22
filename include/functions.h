@@ -56,7 +56,6 @@ f32 func_800E5348(void);
 
 void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
-void set_hud_element_scale(s32 index, f32 scale);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
@@ -154,6 +153,7 @@ void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
 void phys_adjust_cam_on_landing();
 void phys_init_integrator_for_current_state();
+void phys_player_land();
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -203,9 +203,6 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                       f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
 void mem_clear(s8* data, s32 numBytes);
-
-HudElement* create_hud_element(s32* iconIndex);
-void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);
@@ -483,10 +480,5 @@ s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(void);
 void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
-void set_hud_element_script(s32 arg0, s32 *arg1);
-void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3);
-void set_window_update(s32 panelIndex, s32 arg1);
-void set_hud_element_alpha(s32 iconIndex, s32 opacity);
-void draw_hud_element_clipped(s32 arg0);
 
 #endif

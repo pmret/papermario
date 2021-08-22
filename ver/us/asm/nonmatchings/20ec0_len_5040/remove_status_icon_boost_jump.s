@@ -20,7 +20,7 @@ glabel remove_status_icon_boost_jump
 /* 230E0 80047CE0 24A5717C */  addiu     $a1, $a1, %lo(D_8010717C)
 /* 230E4 80047CE4 A0600078 */  sb        $zero, 0x78($v1)
 /* 230E8 80047CE8 A0620079 */  sb        $v0, 0x79($v1)
-/* 230EC 80047CEC 0C0511FF */  jal       set_hud_element_script
+/* 230EC 80047CEC 0C0511FF */  jal       set_hud_element_anim
 /* 230F0 80047CF0 AC640080 */   sw       $a0, 0x80($v1)
 .L80047CF4:
 /* 230F4 80047CF4 8FBF0010 */  lw        $ra, 0x10($sp)

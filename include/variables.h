@@ -78,7 +78,6 @@ extern NpcList* gCurrentNpcListPtr;
 extern ShadowList gWorldShadowList;
 extern ShadowList gBattleShadowList;
 extern ShadowList* gCurrentShadowListPtr;
-extern HudElement** gHudElementList;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;

@@ -83,7 +83,7 @@ glabel L802A9388_427DF8
 /* 427E18 802A93A8 8E240004 */  lw        $a0, 4($s1)
 /* 427E1C 802A93AC 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* 427E20 802A93B0 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* 427E24 802A93B4 0C0511FF */  jal       set_hud_element_script
+/* 427E24 802A93B4 0C0511FF */  jal       set_hud_element_anim
 /* 427E28 802A93B8 00000000 */   nop
 /* 427E2C 802A93BC 3C048000 */  lui       $a0, 0x8000
 /* 427E30 802A93C0 34840041 */  ori       $a0, $a0, 0x41

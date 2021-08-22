@@ -11,13 +11,13 @@ VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
 
 CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
-            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
-
+            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
+CFLAGS = "-G0 -O2 -quiet -fno-common -Wuninitialized -Wmissing-braces"
 ASFLAGS = "-G0"
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
+BUILD_TOOLS = (ROOT / "tools" / "build").relative_to(ROOT)
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
@@ -59,7 +59,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
     nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
 
-    cflags = "-O2 -quiet -fno-common -G0 -Wuninitialized -Wshadow -Wmissing-braces " + extra_cflags
+    cflags = CFLAGS + " " + extra_cflags
 
     ninja.variable("python", sys.executable)
 
@@ -85,14 +85,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
         description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -167,6 +167,20 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
+
+    with Path("tools/permuter_settings.toml").open("w") as f:
+        f.write(f"compiler_command = \"{cpp} {CPPFLAGS} {cppflags} -DPERMUTER | {iconv} | {cc1} {cflags} -o - | {nu64as} {ASFLAGS}\"\n")
+        f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(
+"""
+[preserve_macros]
+"gs?[DS]P.*" = "void"
+OVERRIDE_FLAG_CHECK = "int"
+OS_K0_TO_PHYSICAL = "int"
+"G_.*" = "int"
+"TEXEL.*" = "int"
+PRIMITIVE = "int"
+""")
 
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
@@ -639,7 +653,7 @@ if __name__ == "__main__":
         for version in VERSIONS:
             rom = ROOT / f"ver/{version}/baserom.z64"
 
-            print(f"configure: looking for baserom {rom}", end="")
+            print(f"configure: looking for baserom {rom.relative_to(ROOT)}", end="")
 
             if rom.exists():
                 print("...found")

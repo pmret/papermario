@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "hud_element.h"
 
 extern s32 D_80108AAC;
 extern s32 D_80108AD4;
