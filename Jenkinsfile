@@ -18,6 +18,11 @@ pipeline {
                 sh 'ninja'
             }
         }
+        stage("Comment") {
+            if (env.CHANGE_ID) {
+                pullRequest.comment("hello from jenkins")
+            }
+        }
         stage('Report Progress') {
             when {
                 branch 'master'
@@ -51,9 +56,9 @@ pipeline {
             }
         }
     }
-   post {
-       always {
-           cleanWs()
-       }
-   }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
