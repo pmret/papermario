@@ -22,7 +22,24 @@ pipeline {
             steps {
                 script {
                     if (env.CHANGE_ID) {
-                        pullRequest.comment("hello from jenkins")
+                        def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
+                        def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
+                        def comment_id = -1
+
+                        for (comment in pullRequest.comments) {
+                            if (comment.user == "BowserSlug") {
+                                comment_id = comment.id
+                            }
+                        }
+
+                        def message = "This PR:\n- ${us_progress}\n- ${jp_progress}"
+
+                        if (comment_id == -1) {
+                            pullRequest.comment(message)
+                        } else {
+                            pullRequest.editComment(comment_id, message)
+                        }
+
                     }
                 }
             }
