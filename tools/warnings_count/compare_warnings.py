@@ -30,7 +30,7 @@ def main():
                 current = current.readlines()
                 for newLine in new:
                     if newLine not in current:
-                        print("New warning: " + newLine)
+                        print("New warning: " + newLine.strip())
         print()
         exit(-1)
     print("There are no new warnings. Good Job!")
