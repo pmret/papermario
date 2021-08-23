@@ -61,21 +61,18 @@ ApiStatus N(func_80238000_6F10E0)(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-#ifdef NON_MATCHING
 ApiStatus func_802380E4_6F11C4(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
-    D_8023BB98_6ECC78 = ((D_8023BB98_6ECC78 * targetActor->staticActorData->powerBounceChance) * 0x51EB851F) >> 5 - (D_8023BB98_6ECC78 * targetActor->staticActorData->powerBounceChance >> 31);
+    D_8023BB98_6ECC78 *= targetActor->staticActorData->powerBounceChance;
+    D_8023BB98_6ECC78 /= 100;
     if (D_8023BB98_6ECC78 < rand_int(100)) {
         script->varTable[0] = 0;
     }
 
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "battle/partner/goombario", func_802380E4_6F11C4);
-#endif
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_8023817C_6F125C);
 
