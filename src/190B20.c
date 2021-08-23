@@ -1493,10 +1493,9 @@ INCLUDE_ASM(s32, "190B20", func_80266F60);
 INCLUDE_ASM(s32, "190B20", func_80266F8C);
 
 void func_80266FD8(ActorPart* part, s32 arg1) {
-    DecorationTable* decorationTable;
-
     if (part->idleAnimations != NULL && !(part->flags & 2)) {
-        decorationTable = part->decorationTable;
+        DecorationTable* decorationTable = part->decorationTable;
+
         if (decorationTable->unk_764 != arg1) {
             decorationTable->unk_764 = arg1;
             decorationTable->unk_766 = 0;
@@ -1508,12 +1507,13 @@ void func_80266FD8(ActorPart* part, s32 arg1) {
 void func_80267018(Actor* actor, s32 arg1) {
     ActorPart* actorPart = &actor->partsTable[0];
 
-        while (actorPart != NULL) {
-            if (!(actorPart->flags & 0x100001) && actorPart->decorationTable != NULL && !(actorPart->flags & 2) && actorPart->idleAnimations != NULL) {
-                func_80266FD8(actorPart, arg1);
-            }
-            actorPart = actorPart->nextPart;
+    while (actorPart != NULL) {
+        if (!(actorPart->flags & 0x100001) && actorPart->decorationTable != NULL && !(actorPart->flags & 2) &&
+            actorPart->idleAnimations != NULL) {
+            func_80266FD8(actorPart, arg1);
         }
+        actorPart = actorPart->nextPart;
+    }
 }
 
 INCLUDE_ASM(s32, "190B20", func_8026709C);
