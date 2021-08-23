@@ -19,6 +19,11 @@ pipeline {
             }
         }
         stage("Comment") {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
             steps {
                 script {
                     if (env.CHANGE_ID) {
