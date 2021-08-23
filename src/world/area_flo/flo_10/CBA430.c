@@ -32,7 +32,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80244A40) = { 137.0f, 0.0f, -283.0f, 0.0f };
 
-Script N(80244A50) = SCRIPT({
+EvtSource N(80244A50) = SCRIPT({
     SI_VAR(0) = N(tree1);
     bind N(shakeTree) TRIGGER_WALL_HAMMER 9;
     bind N(shakeTree) TRIGGER_POINT_BOMB N(triggerCoord_80244A40);

@@ -1,6 +1,6 @@
 #include "common/UnkAngleFunc2.inc.c"
 
-Script N(clouds1) = SCRIPT({
+EvtSource N(clouds1) = SCRIPT({
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(7) = SI_VAR(2);
     SI_VAR(7) *= 10;
@@ -16,7 +16,7 @@ Script N(clouds1) = SCRIPT({
     goto 0;
 });
 
-Script N(clouds2) = SCRIPT({
+EvtSource N(clouds2) = SCRIPT({
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(3);
     SI_VAR(12) = SI_VAR(4);
@@ -36,7 +36,7 @@ Script N(clouds2) = SCRIPT({
     goto 0;
 });
 
-Script N(clouds3) = SCRIPT({
+EvtSource N(clouds3) = SCRIPT({
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(3);
     SI_VAR(12) = SI_VAR(4);

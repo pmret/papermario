@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(GetBootsHammerLevel)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GetBootsHammerLevel)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     set_variable(script, *args++, gPlayerData.bootsLevel);

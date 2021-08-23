@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(DoesPlayerNeedSleep)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DoesPlayerNeedSleep)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[1] = FALSE;

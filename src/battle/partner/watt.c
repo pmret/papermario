@@ -14,7 +14,7 @@ extern EffectInstance* D_80239A0C_7054FC;
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238000_703AF0);
 
-ApiStatus func_80238370_703E60(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238370_703E60(Evt* script, s32 isInitialCall) {
     D_8023C1B8 = 0;
     if (D_8023C1CC != NULL) {
         remove_effect(D_8023C1CC);
@@ -26,27 +26,27 @@ ApiStatus func_80238370_703E60(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802383C0_703EB0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802383C0_703EB0(Evt* script, s32 isInitialCall) {
     D_8023C1BC = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802383D4_703EC4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802383D4_703EC4(Evt* script, s32 isInitialCall) {
     D_8023C1BC = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802383E4_703ED4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802383E4_703ED4(Evt* script, s32 isInitialCall) {
     D_8023C1C4 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802383F8_703EE8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802383F8_703EE8(Evt* script, s32 isInitialCall) {
     D_8023C1C4 = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238408_703EF8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238408_703EF8(Evt* script, s32 isInitialCall) {
     D_8023C1C8 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
@@ -55,7 +55,7 @@ ApiStatus func_80238408_703EF8(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/SetBackgroundAlpha.inc.c"
 
-ApiStatus func_802384B0_703FA0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802384B0_703FA0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -66,7 +66,7 @@ ApiStatus func_802384B0_703FA0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238570_704060(Evt* script, s32 isInitialCall) {
     s32* var = D_80239A0C_7054FC;
 
     if (var != NULL) {
@@ -79,7 +79,7 @@ ApiStatus func_80238570_704060(ScriptInstance* script, s32 isInitialCall) {
 
 // Beware this demon because "EffectInstanceDataThing" is one hell of a
 // janky solution, but this does match.
-ApiStatus func_8023859C_70408C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023859C_70408C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -95,7 +95,7 @@ ApiStatus func_8023859C_70408C(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238668_704158);
 
-ApiStatus func_80238784_704274(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238784_704274(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -118,7 +118,7 @@ INCLUDE_ASM(s32, "battle/partner/watt", func_80238810_704300);
 
 // Beware this demon because "EffectInstanceDataThing" is one hell of a
 // janky solution, but this does match.
-ApiStatus func_80238B3C_70462C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238B3C_70462C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -132,7 +132,7 @@ ApiStatus func_80238B3C_70462C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238C08_7046F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238C08_7046F8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = script->varTable[0];
 
@@ -159,7 +159,7 @@ ApiStatus func_80238C08_7046F8(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/watt", func_80238C84_704774);
 
-ApiStatus N(AverageTargetParalyzeChance)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AverageTargetParalyzeChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;

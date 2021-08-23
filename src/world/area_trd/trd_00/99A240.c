@@ -1,6 +1,6 @@
 #include "trd_00.h"
 
-ApiStatus PostChapter1StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter1StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(1);

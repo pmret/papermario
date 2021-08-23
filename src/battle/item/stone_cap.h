@@ -7,11 +7,11 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_stone_cap
 
-ApiStatus N(func_802A123C_7217DC)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_7217DC)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif
- 
- 
+
+

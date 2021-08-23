@@ -8,7 +8,7 @@ extern s32 D_80292974;
 extern s32 D_80294340;
 extern s32 func_802A98B0_42EC50;
 
-ApiStatus func_802A9000_428A70(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9000_428A70(Evt* script, s32 isInitialCall) {
     s32 *args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;

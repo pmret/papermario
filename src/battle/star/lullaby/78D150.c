@@ -4,7 +4,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78D668(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1518_78D668(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }

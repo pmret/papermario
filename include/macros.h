@@ -65,7 +65,7 @@
 //NOTE: SCRIPT_ALLOC is probably not quite correct, but this is the closest thing to matching for the functions its used in. Needs more work.
 #define SCRIPT_ALLOC(new, index) \
 { \
-    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(ScriptInstance)); \
+    (*gCurrentScriptListPtr)[index] = new = heap_malloc(sizeof(Evt)); \
     gNumScripts++; \
     ASSERT(new != NULL); \
 }
@@ -83,12 +83,19 @@
 #define CUBE(x) (x*x*x)
 #define QUART(x) (x*x*x*x)
 
-// Fixed-point short literal
+/// Fixed-point short literal
 #define F16(f) (s16)(f * 327.67f)
+
+/// X.10 fixed-point literal
+#define X10(f) (s32)(f * 1024.0f)
 
 #define _NS(x, y) x ## _ ## y
 #define NS(x, y) _NS(x, y)
 
 #define ASCII_TO_U32(a, b, c, d) ((u32)((a << 24) | (b << 16) | (c << 8) | (d << 0)))
+
+#ifdef PERMUTER
+#define SCRIPT(...) {}
+#endif
 
 #endif

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import re
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = script_dir + "/../"
@@ -22,7 +23,7 @@ def handle_file(f_path, try_rename_file=False):
 
     f_text = f_text_orig
     for rename in renames:
-        f_text = f_text.replace(rename, renames[rename])
+        f_text = re.sub(r"(?:\b)" + rename + r"(?:\b)", renames[rename], f_text)
 
     if f_text != f_text_orig:
         with open(f_path, "w", newline="\n") as f:

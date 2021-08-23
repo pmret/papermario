@@ -6,7 +6,7 @@ INCLUDE_ASM(s32, "world/partner/bombette", func_802BD100_317E50);
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD2D8_318028);
 
-ApiStatus func_802BD300_318050(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD300_318050(Evt* script, s32 isInitialCall) {
     Npc* unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {
@@ -33,7 +33,7 @@ s32 func_802BD748(void) {
 
 INCLUDE_ASM(s32, "world/partner/bombette", func_802BD758_3184A8);
 
-ApiStatus func_802BE4E8_319238(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BE4E8_319238(Evt* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this
 
     if (isInitialCall) {

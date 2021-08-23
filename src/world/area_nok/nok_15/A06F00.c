@@ -39,7 +39,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80240C64_A07B64);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241708_A08608);
 /*
-void N(func_80241708_A08608)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241708_A08608)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -60,7 +60,7 @@ void N(func_80241708_A08608)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 INCLUDE_ASM(s32, "world/area_nok/nok_15/A06F00", func_80241DC0_A08CC0);
 /*
-ApiStatus N(func_80241DC0_A08CC0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241DC0_A08CC0)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);

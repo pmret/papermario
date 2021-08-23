@@ -774,7 +774,7 @@ glabel L8013614C_CC84C
 /* CC8D4 801361D4 8C420108 */  lw        $v0, 0x108($v0)
 /* CC8D8 801361D8 3C108015 */  lui       $s0, %hi(D_801568EC)
 /* CC8DC 801361DC 261068EC */  addiu     $s0, $s0, %lo(D_801568EC)
-/* CC8E0 801361E0 0C0511FF */  jal       set_hud_element_script
+/* CC8E0 801361E0 0C0511FF */  jal       set_hud_element_anim
 /* CC8E4 801361E4 AE020000 */   sw       $v0, ($s0)
 /* CC8E8 801361E8 8E040000 */  lw        $a0, ($s0)
 /* CC8EC 801361EC 8E650028 */  lw        $a1, 0x28($s3)

@@ -7,10 +7,10 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_volt_shroom
 
-ApiStatus N(func_802A123C_71AA2C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_71AA2C)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
-Script N(EatItem);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
+EvtSource N(EatItem);
 
 #endif

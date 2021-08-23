@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_10_tattle },
 };
 
-Script N(80240250) = SCRIPT({
+EvtSource N(80240250) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -30,13 +30,13 @@ static s32 N(pad_2E8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
+EvtSource N(exitWalk_802402F0) = EXIT_WALK_SCRIPT(40,  0, "dgb_09",  3);
 
-Script N(8024034C) = SCRIPT({
+EvtSource N(8024034C) = SCRIPT({
     bind N(exitWalk_802402F0) TRIGGER_FLOOR_ABOVE 8;
 });
 
-Script N(enterWalk_80240378) = SCRIPT({
+EvtSource N(enterWalk_80240378) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -64,7 +64,7 @@ Script N(enterWalk_80240378) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -88,7 +88,7 @@ static s32 N(pad_66C) = {
     0x00000000,
 };
 
-Script N(80240670) = SCRIPT({
+EvtSource N(80240670) = SCRIPT({
     buf_use SI_VAR(0);
     arr_new 6 SI_VAR(10);
     buf_read SI_VAR(0);
@@ -107,7 +107,7 @@ Script N(80240670) = SCRIPT({
     bind N(80240770) TRIGGER_FLOOR_TOUCH 0xF4ACD480; // TODO: what is this id? see also below TODO
 });
 
-Script N(80240770) = SCRIPT({
+EvtSource N(80240770) = SCRIPT({
     arr_use SI_VAR(0);
     N(func_80240000_C4C390)();
     if (SI_VAR(0) == 0) {
@@ -126,7 +126,7 @@ Script N(80240770) = SCRIPT({
     }
 });
 
-Script N(80240860) = SCRIPT({
+EvtSource N(80240860) = SCRIPT({
     buf_use SI_VAR(0);
     arr_new 6 SI_VAR(9);
     buf_read SI_VAR(1);
@@ -178,7 +178,7 @@ Script N(80240860) = SCRIPT({
     goto 0;
 });
 
-Script N(80240AF4) = SCRIPT({
+EvtSource N(80240AF4) = SCRIPT({
     arr_use SI_VAR(9);
     GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
     MakeLerp(0, 5, 3, 1);
@@ -207,7 +207,7 @@ Script N(80240AF4) = SCRIPT({
     }
 });
 
-Script N(80240CB8) = SCRIPT({
+EvtSource N(80240CB8) = SCRIPT({
     arr_use SI_VAR(9);
     MakeItemEntity(SI_ARRAY(5), SI_ARRAY(2), SI_ARRAY(3), SI_ARRAY(4), 3, 0);
     SI_VAR(2) = 0;
@@ -233,7 +233,7 @@ Script N(80240CB8) = SCRIPT({
     }
 });
 
-Script N(80240E68) = SCRIPT({
+EvtSource N(80240E68) = SCRIPT({
     N(func_8024013C_C4C4CC)();
     func_802CA988(0, SI_VAR(2), SI_VAR(3), SI_VAR(4), SI_VAR(5));
     N(func_802401C0_C4C550)();
@@ -246,19 +246,19 @@ static s32 N(pad_EDC) = {
     0x00000000,
 };
 
-Script N(80240EE0) = SCRIPT({
+EvtSource N(80240EE0) = SCRIPT({
     SI_SAVE_FLAG(1052) = 1;
 });
 
-Script N(80240F00) = SCRIPT({
+EvtSource N(80240F00) = SCRIPT({
     SI_SAVE_FLAG(1053) = 1;
 });
 
-Script N(80240F20) = SCRIPT({
+EvtSource N(80240F20) = SCRIPT({
     SI_SAVE_FLAG(1054) = 1;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_SAVE_FLAG(1052) == 0) {
         MakeEntity(0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END);
         AssignScript(N(80240EE0));
@@ -273,7 +273,7 @@ Script N(makeEntities) = SCRIPT({
     }
 });
 
-ApiStatus N(func_80240000_C4C390)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_C4C390)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* array = script->array;
     f32 distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[3]);
@@ -289,7 +289,7 @@ ApiStatus N(func_80240000_C4C390)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802400A0_C4C430)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802400A0_C4C430)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance;
     s32* array = script->array;
@@ -306,7 +306,7 @@ ApiStatus N(func_802400A0_C4C430)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024013C_C4C4CC)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 var;
 
@@ -326,7 +326,7 @@ ApiStatus N(func_8024013C_C4C4CC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802401C0_C4C550)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401C0_C4C550)(Evt* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y > -60.0f) {
         return ApiStatus_BLOCK;
     }

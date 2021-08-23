@@ -20,6 +20,8 @@ options:
   asset_path: assets/us
   build_path: ver/us/build
   cache_path: ver/us/.splat_cache
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
   undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
   undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
 asset_stack:
@@ -120,7 +122,7 @@ segments:
     - [0x3B890, c, os/nusys/nuSiCallBackRemove]
     - [0x3B910, c, os/nusys/nuContMgr]
     - [0x3BCC0, c, os/nusys/nuContDataLock]
-    - [0x3BD20, c, os/3bd20_len_c0]
+    - [0x3BD20, c, os/nusys/nuContQueryRead]
     - [0x3BD40, hasm, os/osSetIntMask]
     - [0x3BDE0, c, os/osCreatePiManager]
     - [0x3C160, c, os/osEPiWriteIo] # MOVE_ADDU
@@ -698,7 +700,7 @@ segments:
     - [0xcd180, c, cd180_len_38f0]
     - [0xCEE40, c, CEE40]
     - [0xd0a70, c, d0a70_len_4fe0]
-    - [0xd5a50, c, d5a50_len_5fd0]
+    - [0xd5a50, c, hud_element]
     - [0xdba20, c, dba20_len_350]
     - [0xdbd70, c, dbd70_len_700]
     - [0xdc470, c, dc470_len_14c0]
@@ -713,7 +715,7 @@ segments:
     - [0xE2980, .data, msg]
     - [0xE2CA0, data]
     - [0xE5510, .data, d0a70_len_4fe0]
-    - [0xE56C0, .data, d5a50_len_5fd0]
+    - [0xE56C0, .data, hud_element]
     - [0xE5820, .data, dc470_len_14c0]
     - [0xE5840, .data, dd930_len_1c0]
     - [0xE5850, .data, ddaf0_len_c50]

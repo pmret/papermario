@@ -20,9 +20,9 @@ void world_goombario_init(Npc* partner) {
     partner->collisionRadius = 20;
 }
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 
@@ -43,11 +43,11 @@ s32 world_goombario_can_pause(Npc* partner) {
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* script, s32 isInitialCall);
 
-ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
 
     if (isInitialCall) {
@@ -85,17 +85,17 @@ s32 D_802BDC40_317B60[] = {
     0x00000039, 0x001B0024, 0xFFFFFFFF
 };
 
-Script world_goombario_take_out = SCRIPT({
+EvtSource world_goombario_take_out = SCRIPT({
     func_802BD188_3170A8();
 });
 
 s32 D_802BDD88_317CA8 = 0x802BDF40;
 
-Script world_goombario_update = SCRIPT({
+EvtSource world_goombario_update = SCRIPT({
     func_802BD1D0_3170F0();
 });
 
-Script world_goombario_use_ability = SCRIPT({
+EvtSource world_goombario_use_ability = SCRIPT({
     func_802BD5D8_3174F8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
 
     if (SI_VAR(0) == -1) {
@@ -117,6 +117,6 @@ Script world_goombario_use_ability = SCRIPT({
     func_802BDB30_317A50();
 });
 
-Script world_goombario_put_away = SCRIPT({
+EvtSource world_goombario_put_away = SCRIPT({
     func_802BDB84();
 });

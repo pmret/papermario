@@ -26,7 +26,7 @@ extern s8 D_8029F2A4;
 extern s8 D_8029F2A5;
 extern s8 D_8029F2A6;
 
-ApiStatus func_80248DD0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80248DD0(Evt* script, s32 isInitialCall) {
     D_8029F29C = 1;
     return ApiStatus_BLOCK;
 }
@@ -51,7 +51,7 @@ INCLUDE_ASM(s32, "1776B0", func_8024C180);
 
 INCLUDE_ASM(s32, "1776B0", func_8024C570);
 
-ApiStatus func_8024C944(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024C944(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[1];
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -119,7 +119,7 @@ ApiStatus func_8024C944(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "1776B0", func_8024CB68);
 
-ApiStatus func_8024CE9C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024CE9C(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[1];
 
     D_8029F284 = 8;
@@ -241,7 +241,7 @@ void func_8024E60C(void) {
     D_8029F2A6 = 0;
 }
 
-ApiStatus UseBattleCamPreset(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 preset;
 
@@ -256,7 +256,7 @@ ApiStatus UseBattleCamPreset(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024E664(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024E664(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 preset;
 
@@ -271,7 +271,7 @@ ApiStatus func_8024E664(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024E6B4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024E6B4(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -296,7 +296,7 @@ ApiStatus func_8024E6B4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_8024E748(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024E748(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[1];
     Bytecode* args = script->ptrReadPos;
     s32 mode;
@@ -338,7 +338,7 @@ ApiStatus func_8024E748(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024E820(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024E820(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[1];
 
@@ -358,7 +358,7 @@ ApiStatus func_8024E820(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamTarget(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetBattleCamTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -371,7 +371,7 @@ ApiStatus SetBattleCamTarget(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024E9B0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024E9B0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Camera* camera = &gCameras[1];
 
@@ -386,7 +386,7 @@ ApiStatus func_8024E9B0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -397,7 +397,7 @@ ApiStatus SetBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AddBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -408,7 +408,7 @@ ApiStatus AddBattleCamOffsetZ(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamYaw(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetBattleCamYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -419,7 +419,7 @@ ApiStatus SetBattleCamYaw(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus BattleCamTargetActor(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID;
 
@@ -438,7 +438,7 @@ ApiStatus BattleCamTargetActor(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024EB84(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024EB84(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID;
 
@@ -457,7 +457,7 @@ ApiStatus func_8024EB84(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus MoveBattleCamOver(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MoveBattleCamOver(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
 
@@ -475,7 +475,7 @@ ApiStatus MoveBattleCamOver(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleCamZoom(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetBattleCamZoom(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -486,7 +486,7 @@ ApiStatus SetBattleCamZoom(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AddBattleCamZoom(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AddBattleCamZoom(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -497,7 +497,7 @@ ApiStatus AddBattleCamZoom(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (D_80280CE0 != 0) {
@@ -510,12 +510,12 @@ ApiStatus func_8024ECF8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FreezeBattleCam(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FreezeBattleCam(Evt* script, s32 isInitialCall) {
     D_80280CE0 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024EDA4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8024EDA4(Evt* script, s32 isInitialCall) {
     D_8029F2A6 = 0;
     return ApiStatus_DONE2;
 }

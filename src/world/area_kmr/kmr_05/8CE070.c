@@ -15,7 +15,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CE070", func_802401B0_8CE220);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_05/8CE070", func_80240C54_8CECC4);
 /*
-void N(func_80240C54_8CECC4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240C54_8CECC4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 

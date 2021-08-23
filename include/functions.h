@@ -34,6 +34,7 @@ Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
 void render_player_model();
 s16 get_game_mode(void);
+s32 is_picking_up_item(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
@@ -55,7 +56,6 @@ f32 func_800E5348(void);
 
 void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
-void set_hud_element_scale(s32 index, f32 scale);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
@@ -153,6 +153,7 @@ void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
 void phys_adjust_cam_on_landing();
 void phys_init_integrator_for_current_state();
+void phys_player_land();
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -173,11 +174,11 @@ void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
-s32 get_variable(ScriptInstance* script, Bytecode var);
-s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
-f32 get_float_variable(ScriptInstance* script, Bytecode var);
-f32 set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
-void set_script_timescale(ScriptInstance* script, f32 timescale);
+s32 get_variable(Evt* script, Bytecode var);
+s32 set_variable(Evt* script, Bytecode var, s32 value);
+f32 get_float_variable(Evt* script, Bytecode var);
+f32 set_float_variable(Evt* script, Bytecode var, f32 value);
+void set_script_timescale(Evt* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 f32 sin_rad(f32 x);
@@ -202,9 +203,6 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                       f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
 void mem_clear(s8* data, s32 numBytes);
-
-HudElement* create_hud_element(s32* iconIndex);
-void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);
@@ -251,9 +249,9 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
 void partner_set_tether_distance(f32);
 s32 does_script_exist(s32 id);
-s32 does_script_exist_by_ref(ScriptInstance* script);
-ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
+s32 does_script_exist_by_ref(Evt* script);
+Evt* start_script(EvtSource* source, s32 priority, s32 initialState);
+Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 groupFlags);
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
@@ -299,7 +297,7 @@ s32 check_input_hammer();
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
-Npc* resolve_npc(ScriptInstance* script, NpcID npcIdOrPtr);
+Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 void disable_npc_blur(Npc* npc);
@@ -338,7 +336,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex);
 void remove_part_shadow(ActorID actorID, s32 partIndex);
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
-ScriptInstance* get_script_by_index(s32 index);
+Evt* get_script_by_index(s32 index);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
@@ -348,7 +346,7 @@ void subtract_hp(s32 amt);
 void open_status_menu_long(void);
 
 void suspend_all_group(s32 groupFlags);
-void kill_script(ScriptInstance* instanceToKill);
+void kill_script(Evt* instanceToKill);
 void exec_entity_commandlist(Entity* entity);
 
 void sfx_reset_door_sounds(void);
@@ -441,10 +439,10 @@ Npc* func_8003E534(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 
 void dead_playFX_11(s32, f32, f32, f32, f32);
-s32 dead_get_variable(ScriptInstance* script, Bytecode var);
-f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
-s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
-f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+s32 dead_get_variable(Evt* script, Bytecode var);
+f32 dead_get_float_variable(Evt* script, Bytecode var);
+s32 dead_set_variable(Evt* script, Bytecode var, s32 value);
+f32 dead_set_float_variable(Evt* script, Bytecode var, f32 value);
 f32 dead_clamp_angle(f32 theta);
 s32 dead_rand_int(s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
@@ -459,8 +457,8 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
-void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-void DeadUnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -482,10 +480,5 @@ s32 set_screen_overlay_center_worldpos(void);
 s32 mdl_get_next_texture_address(void);
 void draw_string(s32 stringID, s32 posX, s32 posY, s32 opacity, s32 palette, s32 style);
 void get_background_color_blend(u8* r, u8* g, u8* b, u8* a);
-void set_hud_element_script(s32 arg0, s32 *arg1);
-void set_hud_element_tint(s32 iconIndex, s32 tint1, s32 tint2, s32 tint3);
-void set_window_update(s32 panelIndex, s32 arg1);
-void set_hud_element_alpha(s32 iconIndex, s32 opacity);
-void draw_hud_element_clipped(s32 arg0);
 
 #endif

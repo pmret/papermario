@@ -37,7 +37,7 @@ FoliageVectorList N(treeEffectVectors_Tree1) = {
     },
 };
 
-Script N(tree1_Callback) = SCRIPT({
+EvtSource N(tree1_Callback) = SCRIPT({
     if (SI_SAVE_FLAG(53) == TRUE) {
         return;
     }
@@ -63,7 +63,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(tree1Point) = { -42.0f, 0.0f, -13.0f, 0.0f };
 
-Script N(802422B8) = SCRIPT({
+EvtSource N(802422B8) = SCRIPT({
     SI_VAR(0) = N(bush1);
     bind N(searchBush) TRIGGER_WALL_PRESS_A 53;
 

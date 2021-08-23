@@ -16,7 +16,7 @@ NpcAISettings N(npcAISettings_80240370) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802403A0) = SCRIPT({
+EvtSource N(npcAI_802403A0) = SCRIPT({
     N(SetNpcB5_3)();
     DoBasicAI(N(npcAISettings_80240370));
 });

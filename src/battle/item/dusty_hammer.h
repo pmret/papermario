@@ -7,7 +7,7 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_dusty_hammer
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif

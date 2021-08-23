@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(IsBerserkerEquipped)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(IsBerserkerEquipped)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = gBattleStatus.unk_83;
     script->varTable[1] = 15;
 

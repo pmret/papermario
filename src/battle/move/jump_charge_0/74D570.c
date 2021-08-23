@@ -7,7 +7,7 @@
 
 #include "world/common/IsJumpMaxCharged.inc.c"
 
-ApiStatus func_802A1108_74D678(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1108_74D678(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var1 = get_variable(script, *args++);
@@ -28,7 +28,7 @@ ApiStatus func_802A1108_74D678(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A120C_74D77C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A120C_74D77C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkRotatePlayer)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkRotatePlayer)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (isInitialCall) {

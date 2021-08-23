@@ -1,7 +1,7 @@
 #include "dgb_00.h"
 #include "message_ids.h"
 
-ApiStatus N(func_80240000_BFA0A0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BFA0A0)(Evt* script, s32 isInitialCall) {
     sprintf(&wMapShapeName, "arn_20_shape");
     sprintf(&wMapHitName, "arn_20_hit");
     sprintf(&wMapTexName, "arn_tex");
@@ -21,7 +21,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_00_tattle },
 };
 
-Script N(80240110) = SCRIPT({
+EvtSource N(80240110) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_GUSTY_GULCH, 0, 8);
@@ -39,9 +39,9 @@ static s32 N(pad_1B8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
+EvtSource N(exitWalk_802401C0) = EXIT_WALK_SCRIPT(60,  0, "arn_04",  1);
 
-Script N(exitDoubleDoor_8024021C) = SCRIPT({
+EvtSource N(exitDoubleDoor_8024021C) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -55,7 +55,7 @@ Script N(exitDoubleDoor_8024021C) = SCRIPT({
     sleep 100;
 });
 
-Script N(802402D0) = SCRIPT({
+EvtSource N(802402D0) = SCRIPT({
     bind N(exitWalk_802401C0) TRIGGER_FLOOR_ABOVE 15;
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_SMASHED_THE_BRIDGES {
@@ -71,7 +71,7 @@ Script N(802402D0) = SCRIPT({
     }
 });
 
-Script N(enterDoubleDoor_8024038C) = SCRIPT({
+EvtSource N(enterDoubleDoor_8024038C) = SCRIPT({
     GetLoadType(SI_VAR(1));
     if (SI_VAR(1) == 1) {
         spawn EnterSavePoint;
@@ -109,7 +109,7 @@ Script N(enterDoubleDoor_8024038C) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SI_SAVE_FLAG(1978) = 1;
     SetSpriteShading(-1);

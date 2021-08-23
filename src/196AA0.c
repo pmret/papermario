@@ -5,7 +5,7 @@
 extern void* actionCommandDmaTable[23];
 extern s32 D_8029FBC0;
 
-ApiStatus LoadActionCommand(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus LoadActionCommand(Evt* script, s32 isInitialCall) {
     s32 cmd = get_variable(script, *script->ptrReadPos);
 
     dma_copy(actionCommandDmaTable[cmd * 3], actionCommandDmaTable[cmd * 3 + 1], actionCommandDmaTable[cmd * 3 + 2]);
@@ -291,12 +291,12 @@ INCLUDE_ASM(s32, "196AA0", func_80269118);
 
 INCLUDE_ASM(s32, "196AA0", func_80269160);
 
-ApiStatus func_8026919C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8026919C(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_434 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetupMashMeter(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     gActionCommandStatus.mashMeterIntervals = get_variable(script, *args++);
     gActionCommandStatus.mashMeterCutoffs[1] = get_variable(script, *args++);
@@ -308,22 +308,22 @@ ApiStatus SetupMashMeter(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionSuccess(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionSuccess(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetActionSuccess(Evt* script, s32 isInitialCall) {
     gBattleStatus.actionSuccess = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionCommandMode(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetActionCommandMode(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_83 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionCommandMode(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionCommandMode(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_83);
     return ApiStatus_DONE2;
 }
@@ -334,7 +334,7 @@ INCLUDE_ASM(s32, "196AA0", SetCommandAutoSuccess);
 
 INCLUDE_ASM(s32, "196AA0", GetCommandAutoSuccess);
 
-ApiStatus func_802693F0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802693F0(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 &= ~0x4000;
     return ApiStatus_DONE2;
 }
@@ -345,42 +345,42 @@ INCLUDE_ASM(s32, "196AA0", func_80269470);
 
 INCLUDE_ASM(s32, "196AA0", func_802694A4);
 
-ApiStatus GetActionSuccessCopy(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionSuccessCopy(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.actionSuccess);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269524(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80269524(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_86);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269550(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80269550(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_86 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetBlockResult(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetBlockResult(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.blockResult);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionResult(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionResult(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_84);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetActionResult(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetActionResult(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_84 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269600(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80269600(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gBattleStatus.unk_85);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026962C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8026962C(Evt* script, s32 isInitialCall) {
     gBattleStatus.unk_85 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }

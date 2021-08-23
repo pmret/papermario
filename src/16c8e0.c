@@ -22,7 +22,7 @@ extern f32 D_8029EFB0;
 extern f32 D_8029EFB4;
 extern f32 D_8029EFB8;
 
-Script BtlPutPartnerAway = SCRIPT({
+EvtSource BtlPutPartnerAway = SCRIPT({
     DispatchEvent(ACTOR_PARTNER, 62);
     parallel {
         SI_VAR(0) = 1.0;
@@ -42,7 +42,7 @@ Script BtlPutPartnerAway = SCRIPT({
     DisablePartnerBlur();
 });
 
-Script BtlBringPartnerOut = SCRIPT({
+EvtSource BtlBringPartnerOut = SCRIPT({
     parallel {
         SI_VAR(0) = 0.1005859375;
         loop 20 {
@@ -67,66 +67,66 @@ Script BtlBringPartnerOut = SCRIPT({
 s8 D_80280CE0[] = { 0, 0, 0, 0 };
 s32 D_80280CE4 = -1;
 
-Script CamPreset_B = SCRIPT({
+EvtSource CamPreset_B = SCRIPT({
     func_80248DD0();
 });
 
-Script CamPreset_F = SCRIPT({
+EvtSource CamPreset_F = SCRIPT({
     func_80248DE4();
 });
 
-Script CamPreset_M = SCRIPT({
+EvtSource CamPreset_M = SCRIPT({
     func_80249804();
 });
 
-Script CamPreset_G = SCRIPT({
+EvtSource CamPreset_G = SCRIPT({
     func_8024A214();
 });
 
-Script CamPreset_I = SCRIPT({
+EvtSource CamPreset_I = SCRIPT({
     func_8024A990();
 });
 
-Script CamPreset_H = SCRIPT({
+EvtSource CamPreset_H = SCRIPT({
     func_8024AFE4();
 });
 
-Script CamPreset_N = SCRIPT({
+EvtSource CamPreset_N = SCRIPT({
     func_8024B5FC();
 });
 
-Script CamPreset_C = SCRIPT({
+EvtSource CamPreset_C = SCRIPT({
     func_8024B9A0();
 });
 
-Script CamPreset_D = SCRIPT({
+EvtSource CamPreset_D = SCRIPT({
     func_8024BDA4();
 });
 
-Script CamPreset_E = SCRIPT({
+EvtSource CamPreset_E = SCRIPT({
     func_8024C180();
 });
 
-Script CamPreset_J = SCRIPT({
+EvtSource CamPreset_J = SCRIPT({
     func_8024C570();
 });
 
-Script CamPreset_K = SCRIPT({
+EvtSource CamPreset_K = SCRIPT({
     func_8024C944();
 });
 
-Script CamPreset_L = SCRIPT({
+EvtSource CamPreset_L = SCRIPT({
     func_8024CB68();
 });
 
-Script CamPreset_A = SCRIPT({
+EvtSource CamPreset_A = SCRIPT({
     func_8024E9B0(0, 15, 0);
     func_8024E748(2, 550);
     func_8024E748(3, 100);
     func_8024E748(4, 8);
 });
 
-Script D_80280EB8 = SCRIPT({
+EvtSource D_80280EB8 = SCRIPT({
     SetCamPerspective(CAM_BATTLE, 6, 25, 16, 1024);
     SetCamViewport(CAM_BATTLE, 12, 20, 296, 200);
     SetCamBGColor(CAM_BATTLE, 0, 0, 0);

@@ -41,7 +41,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_mgm/mgm_00/E0E7A0", func_80240E74_E0F614);
 /*
-ApiStatus N(func_80240E74_E0F614)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240E74_E0F614)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

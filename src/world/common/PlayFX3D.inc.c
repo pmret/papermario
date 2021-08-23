@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus N(PlayFX3D)(ScriptInstance* script, s32 isInitialStatus) {
+ApiStatus N(PlayFX3D)(Evt* script, s32 isInitialStatus) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     f32 var2 = get_float_variable(script, *args++);

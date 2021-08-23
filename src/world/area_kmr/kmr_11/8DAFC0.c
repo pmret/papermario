@@ -1,6 +1,6 @@
 #include "kmr_11.h"
 
-ApiStatus func_80240EC0_8DAFC0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240EC0_8DAFC0(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
     entity->position.x = script->varTable[0];

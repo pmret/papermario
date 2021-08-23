@@ -228,7 +228,7 @@ glabel L800F17E8_8AC98
 /* 8AE7C 800F19CC 8C84D66C */  lw        $a0, %lo(D_8010D66C)($a0)
 /* 8AE80 800F19D0 3C058010 */  lui       $a1, %hi(D_80104A28)
 /* 8AE84 800F19D4 24A54A28 */  addiu     $a1, $a1, %lo(D_80104A28)
-/* 8AE88 800F19D8 0C0511FF */  jal       set_hud_element_script
+/* 8AE88 800F19D8 0C0511FF */  jal       set_hud_element_anim
 /* 8AE8C 800F19DC 00000000 */   nop
 /* 8AE90 800F19E0 8FBF001C */  lw        $ra, 0x1c($sp)
 /* 8AE94 800F19E4 8FB20018 */  lw        $s2, 0x18($sp)

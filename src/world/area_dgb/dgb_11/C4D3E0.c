@@ -17,7 +17,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_11_tattle },
 };
 
-Script N(802400D0) = SCRIPT({
+EvtSource N(802400D0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -34,7 +34,7 @@ static s32 N(pad_168)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitSingleDoor_80240170) = SCRIPT({
+EvtSource N(exitSingleDoor_80240170) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
@@ -48,7 +48,7 @@ Script N(exitSingleDoor_80240170) = SCRIPT({
     sleep 100;
 });
 
-Script N(enterSingleDoor_80240224) = SCRIPT({
+EvtSource N(enterSingleDoor_80240224) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -91,7 +91,7 @@ Script N(enterSingleDoor_80240224) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -108,7 +108,7 @@ static s32 N(pad_56C) = {
     0x00000000,
 };
 
-Script N(80240570) = SCRIPT({
+EvtSource N(80240570) = SCRIPT({
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) >= SI_VAR(3)) {
@@ -119,11 +119,11 @@ Script N(80240570) = SCRIPT({
     goto 0;
 });
 
-Script N(80240600) = SCRIPT({
+EvtSource N(80240600) = SCRIPT({
     PlayerJump(375, 270, -250, 20);
 });
 
-Script N(8024062C) = SCRIPT({
+EvtSource N(8024062C) = SCRIPT({
     if (SI_AREA_FLAG(3) == 1) {
         return;
     }
@@ -197,14 +197,14 @@ Script N(8024062C) = SCRIPT({
     }
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_D_DOWN_JUMP, 250, 75, -100, 17, SI_SAVE_FLAG(1055));
     MakeEntity(0x802EAA30, 375, 0, -250, 0, MAKE_ENTITY_END);
     AssignScript(N(8024062C));
     SI_MAP_VAR(0) = SI_VAR(0);
 });
 
-ApiStatus N(func_80240000_C4D3E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(get_variable(NULL, 0xFD050F80));
 
     if (entity == NULL) {

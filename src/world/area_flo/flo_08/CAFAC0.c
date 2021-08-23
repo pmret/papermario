@@ -35,7 +35,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_08_tattle },
 };
 
-Script N(80241F40) = SCRIPT({
+EvtSource N(80241F40) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -65,7 +65,7 @@ f32 N(D_80242008_CB0D48)[3] = {
     140.0f, 180.0f, 220.0f
 };
 
-Script N(80242014) = SCRIPT({
+EvtSource N(80242014) = SCRIPT({
     sleep 10;
     PlaySound(0x212D);
     N(UnkFunc21)(SI_MAP_VAR(0));
@@ -95,7 +95,7 @@ Script N(80242014) = SCRIPT({
     sleep 30;
 });
 
-Script N(80242178) = SCRIPT({
+EvtSource N(80242178) = SCRIPT({
     if (SI_SAVE_FLAG(1402) == 1) {
         return;
     }
@@ -177,7 +177,7 @@ Script N(80242178) = SCRIPT({
     N(UnkFunc17)();
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA910, -780, 120, -110, 0, MAKE_ENTITY_END);
     SI_MAP_VAR(0) = SI_VAR(0);
     AssignBlockFlag(SI_SAVE_FLAG(1402));
@@ -185,7 +185,7 @@ Script N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_STAR_PIECE, 510, 0, -90, 17, SI_SAVE_FLAG(1381));
 });
 
-Script N(80242680) = SCRIPT({
+EvtSource N(80242680) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -224,11 +224,11 @@ Script N(80242680) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
+EvtSource N(exitWalk_8024292C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  6);
 
-Script N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
+EvtSource N(exitWalk_80242988) = EXIT_WALK_SCRIPT(60,  1, "flo_24",  0);
 
-Script N(802429E4) = SCRIPT({
+EvtSource N(802429E4) = SCRIPT({
     bind N(exitWalk_8024292C) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80242988) TRIGGER_FLOOR_ABOVE 4;
 });
@@ -238,7 +238,7 @@ s32 N(lavaResetList_80242A2C)[] = {
     0x0000000F, 0x42700000, 0x00000000, 0x42480000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -324,11 +324,11 @@ NpcAISettings N(npcAISettings_80242EB0) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80242EE0) = SCRIPT({
+EvtSource N(npcAI_80242EE0) = SCRIPT({
     N(func_8024150C_CB024C)(N(npcAISettings_80242EB0));
 });
 
-Script N(80242F00) = SCRIPT({
+EvtSource N(80242F00) = SCRIPT({
 0:
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 30;
@@ -369,7 +369,7 @@ NpcAISettings N(npcAISettings_8024300C) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_8024303C) = SCRIPT({
+EvtSource N(npcAI_8024303C) = SCRIPT({
     DoBasicAI(N(npcAISettings_8024300C));
 });
 
@@ -388,7 +388,7 @@ s32 N(D_8024308C_CB1DCC) = {
     0x00000000,
 };
 
-Script N(80243090) = SCRIPT({
+EvtSource N(80243090) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -411,13 +411,13 @@ Script N(80243090) = SCRIPT({
     unbind;
 });
 
-Script N(802431C4) = SCRIPT({
+EvtSource N(802431C4) = SCRIPT({
     N(func_802419FC_CB073C)(SI_VAR(0));
     bind_padlock N(80243090) 0x10 0 N(D_802462C0_B4AA30);
     N(func_80241970_CB06B0)(SI_VAR(0));
 });
 
-Script N(interact_80243214) = SCRIPT({
+EvtSource N(interact_80243214) = SCRIPT({
     DisablePlayerInput(TRUE);
     if (SI_SAVE_FLAG(1364) == 0) {
         GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -557,7 +557,7 @@ Script N(interact_80243214) = SCRIPT({
     unbind;
 });
 
-Script N(init_80243B20) = SCRIPT({
+EvtSource N(init_80243B20) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80243214));
     if (SI_SAVE_FLAG(1364) == 1) {
         SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_5));
@@ -861,7 +861,7 @@ StaticNpc N(npcGroup_802449D8) = {
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
 
-Script N(init_80244BC8) = SCRIPT({
+EvtSource N(init_80244BC8) = SCRIPT({
     spawn {
         sleep 2;
         GetNpcPointer(2, SI_VAR(0));
@@ -937,7 +937,7 @@ static s32 N(pad_4F3C) = {
     0x00000000,
 };
 
-void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void N(func_80240D80_CAFAC0)(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1051,7 +1051,7 @@ void N(func_80240D80_CAFAC0)(ScriptInstance* script, NpcAISettings* npcAISetting
     script->functionTemp[0] = 0xD;
 }
 
-void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void N(func_80241364_CB00A4)(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -1079,7 +1079,7 @@ void N(func_80241364_CB00A4)(ScriptInstance* script, NpcAISettings* npcAISetting
     }
 }
 
-void N(func_802414C8_CB0208)(ScriptInstance* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
+void N(func_802414C8_CB0208)(Evt* script, NpcAISettings* npcAISettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1089,7 +1089,7 @@ void N(func_802414C8_CB0208)(ScriptInstance* script, NpcAISettings* npcAISetting
     }
 }
 
-ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024150C_CB024C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -1158,7 +1158,7 @@ ApiStatus N(func_8024150C_CB024C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_80241970_CB06B0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241970_CB06B0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -1174,7 +1174,7 @@ ApiStatus N(func_80241970_CB06B0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802419C4_CB0704)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802419C4_CB0704)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_8024308C_CB1DCC) = get_variable(script, *args);
@@ -1182,7 +1182,7 @@ ApiStatus N(func_802419C4_CB0704)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802419FC_CB073C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802419FC_CB073C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -1201,7 +1201,7 @@ ApiStatus N(func_802419FC_CB073C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241A98_CB07D8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241A98_CB07D8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -1216,7 +1216,7 @@ ApiStatus N(func_80241A98_CB07D8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241B5C_CB089C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241B5C_CB089C)(Evt* script, s32 isInitialCall) {
     s32 itemId = get_variable(script, *script->ptrReadPos);
     StaticItem* item = &gItemTable[itemId];
 
@@ -1231,7 +1231,7 @@ ApiStatus N(func_80241B5C_CB089C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241BCC_CB090C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241BCC_CB090C)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i <= 90; i++) {
@@ -1280,7 +1280,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80245904) = { 391.0f, 0.0f, -102.0f, 0.0f };
 
-Script N(80245914) = SCRIPT({
+EvtSource N(80245914) = SCRIPT({
     SI_AREA_FLAG(29) = 0;
     SI_AREA_FLAG(30) = 0;
     SI_VAR(0) = N(tree1);
@@ -1292,7 +1292,7 @@ static s32 N(pad_598C) = {
     0x00000000,
 };
 
-Script N(80245990) = SCRIPT({
+EvtSource N(80245990) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -1331,7 +1331,7 @@ Script N(80245990) = SCRIPT({
     goto 0;
 });
 
-Script N(80245C3C) = SCRIPT({
+EvtSource N(80245C3C) = SCRIPT({
     SI_VAR(9) = SI_VAR(6);
     SI_VAR(8) = SI_VAR(5);
     SI_VAR(7) = SI_VAR(4);
@@ -1381,7 +1381,7 @@ Script N(80245C3C) = SCRIPT({
     EnableModel(SI_VAR(7), 0);
 });
 
-Script N(80245F5C) = SCRIPT({
+EvtSource N(80245F5C) = SCRIPT({
     GetModelCenter(60);
     SI_VAR(3) = 60;
     SI_VAR(4) = 61;

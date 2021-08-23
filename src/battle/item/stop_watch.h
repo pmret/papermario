@@ -7,14 +7,14 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_stop_watch
 
-ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80252B3C(Evt* script, s32 isInitialCall);
 
-ApiStatus N(FadeBackgroundToBlack)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A12D4_7270A4)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A12D4_7270A4)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif
- 
- 
+
+

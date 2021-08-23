@@ -8,7 +8,7 @@ extern s32 D_80104A28;
 #include "common/UnkBattleFunc1.inc.c"
 #define NAMESPACE b_area_kmr_part_3
 
-ApiStatus func_802189DC_447E1C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802189DC_447E1C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     f32 posX = get_float_variable(script, *args++);
     f32 posY = get_float_variable(script, *args++);

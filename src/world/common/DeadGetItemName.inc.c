@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(DeadGetItemName)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadGetItemName)(Evt* script, s32 isInitialCall) {
     Bytecode args = *script->ptrReadPos;
     s32 itemID = dead_get_variable(script, args);
 

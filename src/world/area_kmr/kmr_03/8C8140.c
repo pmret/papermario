@@ -5,7 +5,7 @@ enum {
     NPC_GOOMPA,
 };
 
-ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
 
     script->varTable[1] = get_xz_dist_to_player(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
@@ -14,16 +14,16 @@ ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-Script N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
+EvtSource N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
 
-Script N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
+EvtSource N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
 
-Script N(802407A8) = SCRIPT({
+EvtSource N(802407A8) = SCRIPT({
     bind N(exitWalk_802406F0) TRIGGER_FLOOR_ABOVE 3;
     bind N(exitWalk_8024074C) TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -58,7 +58,7 @@ NpcSettings N(npcSettings_80240950) = {
     .unk_2A = 16,
 };
 
-Script N(8024097C) = SCRIPT({
+EvtSource N(8024097C) = SCRIPT({
 1:
     if (SI_AREA_FLAG(8) == 1) {
 100:
@@ -87,7 +87,7 @@ Script N(8024097C) = SCRIPT({
     goto 1;
 });
 
-Script N(npcAI_80240B50) = SCRIPT({
+EvtSource N(npcAI_80240B50) = SCRIPT({
 1:
     match SI_STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
@@ -144,7 +144,7 @@ Script N(npcAI_80240B50) = SCRIPT({
     }
 });
 
-Script N(hit_80240F64) = SCRIPT({
+EvtSource N(hit_80240F64) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_7));
     sleep 10;
     SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_1));
@@ -184,7 +184,7 @@ Script N(hit_80240F64) = SCRIPT({
     }
 });
 
-Script N(init_802411A8) = SCRIPT({
+EvtSource N(init_802411A8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(npcAI_80240B50));
     BindNpcAux(-1, N(8024097C));
     BindNpcHit(-1, N(hit_80240F64));
@@ -237,16 +237,16 @@ static s32 N(pad_1468)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80241470) = SCRIPT({
+EvtSource N(80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
     SI_STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
-Script N(802414A8) = SCRIPT({
+EvtSource N(802414A8) = SCRIPT({
     SI_SAVE_FLAG(54) = 1;
 });
 
-Script N(802414C8) = SCRIPT({
+EvtSource N(802414C8) = SCRIPT({
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -254,7 +254,7 @@ Script N(802414C8) = SCRIPT({
     goto 0;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END);
         AssignScript(N(80241470));

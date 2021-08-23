@@ -18,7 +18,7 @@ INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80240DF0_B9E750);
 
 INCLUDE_ASM(s32, "world/area_mim/mim_04/B9DB60", func_80241014_B9E974);
 /*
-ApiStatus N(func_80241014_B9E974)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241014_B9E974)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80242614_B9FF74) == NULL) {

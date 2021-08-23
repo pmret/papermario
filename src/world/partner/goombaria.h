@@ -6,9 +6,9 @@
 
 void world_goombaria_init(Npc* partner);
 
-extern Script world_goombaria_take_out;
-extern Script world_goombaria_update;
-extern Script world_goombaria_use_ability;
-extern Script world_goombaria_put_away;
+extern EvtSource world_goombaria_take_out;
+extern EvtSource world_goombaria_update;
+extern EvtSource world_goombaria_use_ability;
+extern EvtSource world_goombaria_put_away;
 
 #endif

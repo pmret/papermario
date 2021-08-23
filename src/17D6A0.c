@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s16 D_8029F64C;
+
 INCLUDE_ASM(s32, "17D6A0", func_8024EDC0);
 
 INCLUDE_ASM(s32, "17D6A0", func_8024EDEC);
@@ -36,7 +38,9 @@ INCLUDE_ASM(s32, "17D6A0", btl_is_popup_displayed);
 
 INCLUDE_ASM(s32, "17D6A0", btl_set_popup_duration);
 
-INCLUDE_ASM(s32, "17D6A0", func_8024FAE8);
+void func_8024FAE8(void) {
+    D_8029F64C = 1;
+}
 
 INCLUDE_ASM(s32, "17D6A0", func_8024FAFC);
 
@@ -52,7 +56,7 @@ INCLUDE_ASM(s32, "17D6A0", ShowMessageBox);
 
 INCLUDE_ASM(s32, "17D6A0", ShowVariableMessageBox);
 
-ApiStatus IsMessageBoxDisplayed(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IsMessageBoxDisplayed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
@@ -60,7 +64,7 @@ ApiStatus IsMessageBoxDisplayed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WaitForMessageBoxDone(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForMessageBoxDone(Evt* script, s32 isInitialCall) {
     return !btl_is_popup_displayed() * ApiStatus_DONE2;
 }
 

@@ -3,5 +3,5 @@
 
 #define NAMESPACE dgb_14
 
-Script N(main);
-Script N(makeEntities);
+EvtSource N(main);
+EvtSource N(makeEntities);

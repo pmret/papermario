@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240170_BC43F0);
 /*
-ApiStatus N(func_80240170_BC43F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240170_BC43F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80242ECC_BC714C) == NULL) {
@@ -29,7 +29,7 @@ ApiStatus N(func_80240170_BC43F0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_802404B4_BC4734);
 /*
-ApiStatus N(func_802404B4_BC4734)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802404B4_BC4734)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -48,7 +48,7 @@ ApiStatus N(func_802404B4_BC4734)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240508_BC4788);
 /*
-ApiStatus N(func_80240508_BC4788)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240508_BC4788)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80242F34_BC71B4) = get_variable(script, *args);
@@ -59,7 +59,7 @@ ApiStatus N(func_80240508_BC4788)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240540_BC47C0);
 /*
-ApiStatus N(func_80240540_BC47C0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240540_BC47C0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -85,7 +85,7 @@ ApiStatus N(func_80240540_BC47C0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_80240858_BC4AD8);
 /*
-ApiStatus N(func_80240858_BC4AD8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80240858_BC4AD8)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
     D_8024E1B4 = npc->currentAnim;
@@ -96,7 +96,7 @@ ApiStatus N(func_80240858_BC4AD8)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_obk/obk_03/BC43F0", func_8024089C_BC4B1C);
 /*
-ApiStatus N(func_8024089C_BC4B1C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024089C_BC4B1C)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }

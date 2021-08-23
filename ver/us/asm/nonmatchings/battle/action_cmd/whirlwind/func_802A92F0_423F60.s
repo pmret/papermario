@@ -115,7 +115,7 @@ glabel L802A9464_4240D4
 /* 4240F4 802A9484 8E240004 */  lw        $a0, 4($s1)
 /* 4240F8 802A9488 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* 4240FC 802A948C 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* 424100 802A9490 0C0511FF */  jal       set_hud_element_script
+/* 424100 802A9490 0C0511FF */  jal       set_hud_element_anim
 /* 424104 802A9494 00000000 */   nop
 /* 424108 802A9498 96230052 */  lhu       $v1, 0x52($s1)
 /* 42410C 802A949C 2402000B */  addiu     $v0, $zero, 0xb

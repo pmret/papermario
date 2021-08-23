@@ -4,7 +4,7 @@
 
 // requires .data migration
 #ifdef NON_MATCHING
-ApiStatus func_802A9000_423C70(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9000_423C70(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -89,12 +89,12 @@ void func_802A9744_4243B4(void) {
     draw_hud_element_clipped(actionCommandStatus->hudElements[3]);
     hudElement = actionCommandStatus->hudElements[2];
     if (actionCommandStatus->unk_64 == 0) {
-        if (D_802AA888_4254F8[battleStatus->unk_84] != get_hud_element_script(hudElement)) {
-            set_hud_element_script(hudElement, D_802AA888_4254F8[battleStatus->unk_84]);
+        if (D_802AA888_4254F8[battleStatus->unk_84] != get_hud_element_anim(hudElement)) {
+            set_hud_element_anim(hudElement, D_802AA888_4254F8[battleStatus->unk_84]);
         }
     } else {
-        if (D_802AA8A0_425510[battleStatus->unk_84] != get_hud_element_script(hudElement)) {
-            set_hud_element_script(hudElement, D_802AA8A0_425510[battleStatus->unk_84]);
+        if (D_802AA8A0_425510[battleStatus->unk_84] != get_hud_element_anim(hudElement)) {
+            set_hud_element_anim(hudElement, D_802AA8A0_425510[battleStatus->unk_84]);
         }
     }
     draw_hud_element_clipped(hudElement);

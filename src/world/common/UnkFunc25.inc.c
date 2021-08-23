@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc25)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc25)(Evt* script, s32 isInitialCall) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 stickX, stickY;
 

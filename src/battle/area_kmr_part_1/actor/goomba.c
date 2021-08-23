@@ -36,7 +36,7 @@ s32 N(statusTable_8021961C)[] = {
 };
 
 s32 N(idleAnimations_80219714)[];
-Script N(init_802197AC);
+EvtSource N(init_802197AC);
 
 ActorPartDesc N(partsTable_802196C8)[] = {
     {
@@ -102,17 +102,17 @@ s32 N(idleAnimations_80219760)[] = {
     STATUS_END,
 };
 
-Script N(takeTurn_8021A300);
-Script N(idle_802197F8);
-Script N(handleEvent_80219AD4);
+EvtSource N(takeTurn_8021A300);
+EvtSource N(idle_802197F8);
+EvtSource N(handleEvent_80219AD4);
 
-Script N(init_802197AC) = SCRIPT({
+EvtSource N(init_802197AC) = SCRIPT({
     BindTakeTurn(ACTOR_SELF, N(takeTurn_8021A300));
     BindIdle(ACTOR_SELF, N(idle_802197F8));
     BindHandleEvent(ACTOR_SELF, N(handleEvent_80219AD4));
 });
 
-Script N(idle_802197F8) = SCRIPT({
+EvtSource N(idle_802197F8) = SCRIPT({
 10:
     RandInt(80, SI_VAR(0));
     SI_VAR(0) += 80;
@@ -160,7 +160,7 @@ Script N(idle_802197F8) = SCRIPT({
     goto 10;
 });
 
-Script N(handleEvent_80219AD4) = SCRIPT({
+EvtSource N(handleEvent_80219AD4) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, FALSE);
     SetActorScale(ACTOR_SELF, 1.0, 1.0, 1.0);
@@ -286,7 +286,7 @@ Script N(handleEvent_80219AD4) = SCRIPT({
 
 #include "anglestuff.inc.c"
 
-Script N(takeTurn_8021A300) = SCRIPT({
+EvtSource N(takeTurn_8021A300) = SCRIPT({
     UseIdleAnimation(ACTOR_SELF, FALSE);
     EnableIdleScript(ACTOR_SELF, FALSE);
     SetTargetActor(ACTOR_SELF, ACTOR_PLAYER);

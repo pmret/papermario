@@ -1,6 +1,6 @@
 #include "dro_01.h"
 
-ApiStatus N(func_80243460_95E660)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243460_95E660)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_8024B5B0_9667B0) == NULL) {
@@ -22,7 +22,7 @@ ApiStatus N(func_80243460_95E660)(ScriptInstance* script, s32 isInitialCall) {
 #include "world/common/GetItemName.inc.c"
 #define NAMESPACE dro_01
 
-ApiStatus N(func_80243578_95E778)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243578_95E778)(Evt* script, s32 isInitialCall) {
     func_800E96C8();
     return ApiStatus_DONE2;
 }

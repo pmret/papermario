@@ -686,7 +686,7 @@ glabel func_80238000_6FFD80
 /* 7007AC 80238A2C 3C058011 */  lui       $a1, %hi(D_80108E48)
 /* 7007B0 80238A30 24A58E48 */  addiu     $a1, $a1, %lo(D_80108E48)
 .L80238A34:
-/* 7007B4 80238A34 0C0511FF */  jal       set_hud_element_script
+/* 7007B4 80238A34 0C0511FF */  jal       set_hud_element_anim
 /* 7007B8 80238A38 00000000 */   nop
 /* 7007BC 80238A3C 3C058024 */  lui       $a1, %hi(D_8023BDC4)
 /* 7007C0 80238A40 24A5BDC4 */  addiu     $a1, $a1, %lo(D_8023BDC4)

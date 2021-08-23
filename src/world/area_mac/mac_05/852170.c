@@ -37,7 +37,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024047C_8525EC);
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241024_853194);
 /*
-ApiStatus N(func_80241024_853194)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241024_853194)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -124,7 +124,7 @@ ApiStatus N(func_80241024_853194)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241320_853490);
 /*
-ApiStatus N(func_80241320_853490)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241320_853490)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802450B0_857220) == NULL) {
@@ -149,7 +149,7 @@ ApiStatus N(func_80241320_853490)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024145C_8535CC);
 /*
-ApiStatus N(func_8024145C_8535CC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_8024145C_8535CC)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
     u16 phi_s0 = get_variable(script, SI_SAVE_FLAG(1768));
     u16 phi_s7 = get_variable(script, SI_SAVE_FLAG(1769));
@@ -211,7 +211,7 @@ ApiStatus N(func_8024145C_8535CC)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241A0C_853B7C);
 /*
-ApiStatus N(func_80241A0C_853B7C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241A0C_853B7C)(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
@@ -232,7 +232,7 @@ ApiStatus N(func_80241A0C_853B7C)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241A90_853C00);
 /*
-ApiStatus N(func_80241A90_853C00)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241A90_853C00)(Evt *script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -268,7 +268,7 @@ ApiStatus N(func_80241A90_853C00)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241CA8_853E18);
 /*
-ApiStatus N(func_80241CA8_853E18)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241CA8_853E18)(Evt *script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -296,7 +296,7 @@ ApiStatus N(func_80241CA8_853E18)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241D5C_853ECC);
 /*
-ApiStatus N(func_80241D5C_853ECC)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241D5C_853ECC)(Evt *script, s32 isInitialCall) {
     D_8024DFE0->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
@@ -304,7 +304,7 @@ ApiStatus N(func_80241D5C_853ECC)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241D90_853F00);
 /*
-ApiStatus N(func_80241D90_853F00)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241D90_853F00)(Evt *script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = D_8024DFE0->unk_0C;
 
@@ -329,7 +329,7 @@ ApiStatus N(func_80241D90_853F00)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E10_853F80);
 /*
-ApiStatus N(func_80241E10_853F80)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241E10_853F80)(Evt *script, s32 isInitialCall) {
     D_8024DFE8->unk_0C->unk_1C = 0;
     return ApiStatus_DONE2;
 }
@@ -337,7 +337,7 @@ ApiStatus N(func_80241E10_853F80)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E28_853F98);
 /*
-ApiStatus N(func_80241E28_853F98)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241E28_853F98)(Evt *script, s32 isInitialCall) {
     D_8024DFE8->unk_0C->unk_1C = 1;
     return ApiStatus_DONE2;
 }
@@ -345,7 +345,7 @@ ApiStatus N(func_80241E28_853F98)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80241E44_853FB4);
 /*
-ApiStatus N(func_80241E44_853FB4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80241E44_853FB4)(Evt *script, s32 isInitialCall) {
     D_8024DFE8->unk_0C->unk_1C = 2;
     return ApiStatus_DONE2;
 }
@@ -378,7 +378,7 @@ void N(func_80242318_854488)(void) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242384_8544F4);
 /*
-ApiStatus N(func_80242384_8544F4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80242384_8544F4)(Evt *script, s32 isInitialCall) {
     D_8024DFC0 = create_generic_entity_frontUI(NULL, N(func_80242468_95D668));
     return ApiStatus_DONE2;
 }
@@ -390,7 +390,7 @@ ApiStatus N(func_80242384_8544F4)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_802425E0_854750);
 /*
-ApiStatus N(func_802425E0_854750)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802425E0_854750)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -409,7 +409,7 @@ ApiStatus N(func_802425E0_854750)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242634_8547A4);
 /*
-ApiStatus N(func_80242634_8547A4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242634_8547A4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_802476DC_85984C) = get_variable(script, *args);
@@ -420,7 +420,7 @@ ApiStatus N(func_80242634_8547A4)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_8024266C_8547DC);
 /*
-ApiStatus N(func_8024266C_8547DC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024266C_8547DC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -442,7 +442,7 @@ ApiStatus N(func_8024266C_8547DC)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242708_854878);
 /*
-ApiStatus N(func_80242708_854878)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242708_854878)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -468,7 +468,7 @@ ApiStatus N(func_80242708_854878)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A20_854B90);
 /*
-ApiStatus N(func_80242A20_854B90)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80242A20_854B90)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
     D_8024E1B4 = npc->currentAnim;
@@ -479,7 +479,7 @@ ApiStatus N(func_80242A20_854B90)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_05/852170", func_80242A64_854BD4);
 /*
-ApiStatus N(func_80242A64_854BD4)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80242A64_854BD4)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }

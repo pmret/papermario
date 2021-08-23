@@ -9,7 +9,7 @@ extern s32 D_802A2C50;
 
 #include "world/common/IsJumpMaxCharged.inc.c"
 
-ApiStatus func_802A1108_75CA88(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1108_75CA88(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* battleStatus2 = battleStatus;
@@ -40,7 +40,7 @@ ApiStatus func_802A1108_75CA88(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkMoveFunc2.inc.c"
 
-ApiStatus func_802A133C_75CCBC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A133C_75CCBC(Evt* script, s32 isInitialCall) {
     if (D_802A2C50 == 0) {
         script->varTable[0] = 6;
     } else {

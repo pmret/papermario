@@ -142,7 +142,7 @@ glabel pause_textbox_draw_contents
 /* 136ACC 8024378C 0C051261 */  jal       set_hud_element_render_pos
 /* 136AD0 80243790 AE230000 */   sw       $v1, ($s1)
 /* 136AD4 80243794 8E04000C */  lw        $a0, 0xc($s0)
-/* 136AD8 80243798 0C0511FF */  jal       set_hud_element_script
+/* 136AD8 80243798 0C0511FF */  jal       set_hud_element_anim
 /* 136ADC 8024379C 8E450000 */   lw       $a1, ($s2)
 /* 136AE0 802437A0 8E04000C */  lw        $a0, 0xc($s0)
 /* 136AE4 802437A4 0C051280 */  jal       set_hud_element_flags

@@ -41,7 +41,7 @@ ApiStatus func_802A9000_425590(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A9110_4256A0(ScriptInstance* script) {
+ApiStatus func_802A9110_4256A0(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -106,7 +106,7 @@ void func_802A91F8_425788(void) {
                 actionCommandStatus->unk_4E -= 1;
                 break;
             }
-            set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
             actionCommandStatus->unk_44 = 0;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;

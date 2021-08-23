@@ -4,7 +4,7 @@
 
 #include "world/common/UnkMoveFunc1.inc.c"
 
-ApiStatus func_802A10E4_73D944(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A10E4_73D944(Evt* script, s32 isInitialCall) {
     script->varTable[15] = 1;
 
     switch (gPlayerData.bootsLevel) {

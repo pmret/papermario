@@ -7,9 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_repel_gel
 
-ApiStatus N(func_802A123C_72DDAC)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_72DDAC)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif

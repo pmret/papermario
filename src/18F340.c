@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "hud_element.h"
 
 extern s32 D_80108AAC;
 extern s32 D_80108AD4;
@@ -26,7 +27,7 @@ void func_80260A60(void) {
     }
 }
 
-ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IsPartnerImmobile(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == STATUS_FEAR
@@ -44,7 +45,7 @@ ApiStatus IsPartnerImmobile(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus activate_defend_command(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus activate_defend_command(Evt* script, s32 isInitialCall) {
     ActorPart* actorPart = &gBattleStatus.playerActor->partsTable[0];
 
     deduct_current_move_fp();
@@ -54,7 +55,7 @@ ApiStatus activate_defend_command(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260B70(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80260B70(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
 
     func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
@@ -69,12 +70,12 @@ ApiStatus func_80260B70(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "18F340", func_80260BF4);
 
-ApiStatus func_80260DB8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80260DB8(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= 0x40000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80260DD8(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
     s32 var;
 
@@ -91,12 +92,12 @@ ApiStatus func_80260DD8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260E38(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80260E38(Evt* script, s32 isInitialCall) {
     btl_show_battle_message(0x31, 60);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80260E5C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80260E5C(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 &= ~0x8000;
     gBattleStatus.flags1 &= ~0x2000;
     gBattleStatus.flags1 &= ~0x4000;
@@ -104,7 +105,7 @@ ApiStatus func_80260E5C(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #define NAMESPACE base
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -143,7 +144,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     s32 sellValue = gItemTable[gBattleStatus.selectedItemID].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
@@ -153,7 +154,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802610CC(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -168,7 +169,7 @@ ApiStatus func_802610CC(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261164(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         btl_cam_unfreeze();
@@ -185,7 +186,7 @@ ApiStatus func_80261164(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus ConsumeLifeShroom(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus ConsumeLifeShroom(Evt *script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     StaticItem* item = &gItemTable[0x95];
 
@@ -202,7 +203,7 @@ ApiStatus ConsumeLifeShroom(ScriptInstance *script, s32 isInitialCall) {
 
 // TODO something wrong with the struct breakdown for BattleStatus
 #ifdef NON_MATCHING
-ApiStatus RestorePreDefeatState(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus RestorePreDefeatState(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -228,7 +229,7 @@ ApiStatus RestorePreDefeatState(ScriptInstance* script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "18F340", RestorePreDefeatState);
 #endif
 
-ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261388(Evt* script, s32 isInitialCall) {
     s32 partnerActorExists = gBattleStatus.partnerActor != NULL;
 
     script->varTable[0] = FALSE;
@@ -238,12 +239,12 @@ ApiStatus func_80261388(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802613A8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802613A8(Evt* script, s32 isInitialCall) {
     gBattleStatus.selectedItemID = ITEM_LIFE_SHROOM;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802613BC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802613BC(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -253,7 +254,7 @@ ApiStatus func_802613BC(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261478(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261478(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -263,7 +264,7 @@ ApiStatus func_80261478(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261530(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261530(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -278,7 +279,7 @@ ApiStatus func_80261530(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_802615C8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802615C8(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -294,7 +295,7 @@ ApiStatus func_802615C8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80261648(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261648(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
@@ -311,7 +312,7 @@ ApiStatus func_80261648(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616B4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802616B4(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
 
     merlee->alpha -= 17;
@@ -323,7 +324,7 @@ ApiStatus func_802616B4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802616F4(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
     EffectInstanceData* effectInstanceData;
 
@@ -379,12 +380,12 @@ ApiStatus func_802616F4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802619B4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802619B4(Evt* script, s32 isInitialCall) {
     D_8029FBA4 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus HasMerleeCastsLeft(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus HasMerleeCastsLeft(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[0] = FALSE;
@@ -394,7 +395,7 @@ ApiStatus HasMerleeCastsLeft(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802619E8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 x = get_variable(script, *args++);
     s32 y = get_variable(script, *args++);
@@ -421,7 +422,7 @@ ApiStatus func_802619E8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261B40(Evt* script, s32 isInitialCall) {
     if (script->varTable[10] > 0) {
         free_hud_element(D_8029FBAC);
     }
@@ -431,7 +432,7 @@ ApiStatus func_80261B40(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FXRecoverHP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FXRecoverHP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -442,7 +443,7 @@ ApiStatus FXRecoverHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FXRecoverFP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FXRecoverFP(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -453,7 +454,7 @@ ApiStatus FXRecoverFP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IncrementPlayerHP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IncrementPlayerHP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP++;
@@ -463,7 +464,7 @@ ApiStatus IncrementPlayerHP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus IncrementPlayerFP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IncrementPlayerFP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curFP++;
@@ -473,13 +474,13 @@ ApiStatus IncrementPlayerFP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261D98(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261D98(Evt* script, s32 isInitialCall) {
     inflict_status_set_duration(get_actor(script->owner1.actorID), 4, 0, 1);
     btl_update_ko_status();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80261DD4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261DD4(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     script->varTable[11] = playerData->bootsLevel;
@@ -489,7 +490,7 @@ ApiStatus func_80261DD4(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "18F340", func_80261DF4);
 
-ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80261FB4(Evt* script, s32 isInitialCall) {
     ItemEntity* item = get_item_entity(script->varTable[10]);
     Actor* player = gBattleStatus.playerActor;
     s32 ft1;
@@ -528,7 +529,7 @@ ApiStatus func_80261FB4(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802620F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802620F8(Evt* script, s32 isInitialCall) {
     // TODO get type correct
     s32* temp_v1 = &D_8029FBB0[script->varTable[14]];
 

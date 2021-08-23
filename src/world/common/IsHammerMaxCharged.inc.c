@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(IsHammerMaxCharged)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(IsHammerMaxCharged)(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;
 
     if (gBattleStatus.hammerCharge >= 99) {

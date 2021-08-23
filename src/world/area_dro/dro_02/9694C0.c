@@ -63,7 +63,7 @@ static s8 N(pad_D_8024EFBC)[0x4];
 static EffectGraphics* N(D_8024EFC0);
 static EffectGraphics* N(D_8024EFC4);
 static EffectGraphics* N(D_8024EFC8);
-static ScriptInstance* N(D_8024EFCC);
+static Evt* N(D_8024EFCC);
 static s32 N(D_8024EFD0)[16];
 static D_8024F010_Struct N(D_8024F010)[3];
 static s8 N(pad_D_8024F07C)[0x4];
@@ -92,7 +92,7 @@ MapConfig N(config) = {
 
 // Extraneous END_CASE_MULTI
 #ifdef NON_MATCHING
-Script N(80243AF0) = SCRIPT({
+EvtSource N(80243AF0) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         2, 3 {}
@@ -102,26 +102,26 @@ Script N(80243AF0) = SCRIPT({
     }
 });
 #else
-Script N(80243AF0) = {
-    SI_CMD(ScriptOpcode_CALL, GetEntryID, SI_VAR(0)),
-    SI_CMD(ScriptOpcode_MATCH, SI_VAR(0)),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 2),
-        SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, 3),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-        SI_CMD(ScriptOpcode_CASE_ELSE),
-            SI_CMD(ScriptOpcode_CALL, SetMusicTrack, 0, 21, 0, 8),
-        SI_CMD(ScriptOpcode_END_CASE_MULTI),
-    SI_CMD(ScriptOpcode_END_MATCH),
-    SI_CMD(ScriptOpcode_RETURN),
-    SI_CMD(ScriptOpcode_END)
+EvtSource N(80243AF0) = {
+    SI_CMD(EVT_OP_CALL, GetEntryID, SI_VAR(0)),
+    SI_CMD(EVT_OP_MATCH, SI_VAR(0)),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 2),
+        SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, 3),
+        SI_CMD(EVT_OP_END_CASE_MULTI),
+        SI_CMD(EVT_OP_CASE_ELSE),
+            SI_CMD(EVT_OP_CALL, SetMusicTrack, 0, 21, 0, 8),
+        SI_CMD(EVT_OP_END_CASE_MULTI),
+    SI_CMD(EVT_OP_END_MATCH),
+    SI_CMD(EVT_OP_RETURN),
+    SI_CMD(EVT_OP_END)
 };
 #endif
 
-Script N(80243B70) = SCRIPT({
+EvtSource N(80243B70) = SCRIPT({
     SetMusicTrack(0, SONG_TAKING_REST, 0, 8);
 });
 
-Script N(80243B9C) = SCRIPT({
+EvtSource N(80243B9C) = SCRIPT({
     SetMusicTrack(0, SONG_MOUSTAFA_THEME, 0, 8);
 });
 
@@ -129,7 +129,7 @@ static s32 N(pad_3BC8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_LETTER08, -135, 160, -245, 17, SI_SAVE_FLAG(757));
     MakeEntity(0x802EAB04, 180, 173, -200, 0, ITEM_STOREROOM_KEY, MAKE_ENTITY_END);
     AssignPanelFlag(SI_SAVE_FLAG(756));
@@ -139,19 +139,19 @@ static s32 N(pad_3C3C) = {
     0x00000000,
 };
 
-Script N(exitWalk_80243C40) = EXIT_WALK_SCRIPT(60,  0, "dro_01",  1);
+EvtSource N(exitWalk_80243C40) = EXIT_WALK_SCRIPT(60,  0, "dro_01",  1);
 
-Script N(80243C9C) = SCRIPT({
+EvtSource N(80243C9C) = SCRIPT({
     bind N(exitWalk_80243C40) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(80243CC8) = SCRIPT({
+EvtSource N(80243CC8) = SCRIPT({
     DisablePlayerInput(TRUE);
     ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x017C), 160, 40);
     DisablePlayerInput(FALSE);
 });
 
-Script N(80243D10) = SCRIPT({
+EvtSource N(80243D10) = SCRIPT({
     PlaySound(0x80000060);
     UseSettingsFrom(0, 190, 0, -37);
     SetPanTarget(0, 190, 0, -37);
@@ -178,7 +178,7 @@ Script N(80243D10) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_DRY_DRY_OUTPOST;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -232,7 +232,7 @@ static s32 N(pad_41B4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(802441C0) = SCRIPT({
+EvtSource N(802441C0) = SCRIPT({
 9:
     MakeLerp(10, -10, 30, 10);
 10:
@@ -253,18 +253,18 @@ Script N(802441C0) = SCRIPT({
     goto 9;
 });
 
-Script N(802442F0) = SCRIPT({
+EvtSource N(802442F0) = SCRIPT({
     SI_VAR(0) /= 2;
     SI_VAR(0) += 18;
     RotateModel(21, SI_VAR(0), 0, 1, 0);
 });
 
-Script N(openDoor_80244340) = SCRIPT({
+EvtSource N(openDoor_80244340) = SCRIPT({
     RotateModel(108, SI_VAR(0), 0, -1, 0);
     RotateModel(110, SI_VAR(0), 0, 1, 0);
 });
 
-Script N(moveWalls_80244390) = SCRIPT({
+EvtSource N(moveWalls_80244390) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
     SI_VAR(1) /= (float) 50;
     TranslateModel(104, 0, SI_VAR(1), 0);
@@ -275,7 +275,7 @@ Script N(moveWalls_80244390) = SCRIPT({
     RotateModel(106, SI_VAR(0), 1, 0, 0);
 });
 
-Script N(dropDoor_80244474) = SCRIPT({
+EvtSource N(dropDoor_80244474) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
     SI_VAR(1) /= (float) 50;
     TranslateModel(108, 0, SI_VAR(1), 0);
@@ -284,17 +284,17 @@ Script N(dropDoor_80244474) = SCRIPT({
     RotateModel(110, SI_VAR(0), 1, 0, 0);
 });
 
-Script N(openDoor_8024451C) = SCRIPT({
+EvtSource N(openDoor_8024451C) = SCRIPT({
     RotateModel(62, SI_VAR(0), 0, 1, 0);
 });
 
-Script N(moveWalls_8024454C) = SCRIPT({
+EvtSource N(moveWalls_8024454C) = SCRIPT({
     SI_VAR(1) = SI_VAR(0);
     SI_VAR(1) /= (float) 50;
     RotateGroup(61, SI_VAR(0), 0, 0, -1);
 });
 
-Script N(8024459C) = SCRIPT({
+EvtSource N(8024459C) = SCRIPT({
     match SI_VAR(0) {
         == 0 {
             SetCamSpeed(0, 3.0);
@@ -305,7 +305,7 @@ Script N(8024459C) = SCRIPT({
     }
 });
 
-Script N(toggleVis_80244600) = SCRIPT({
+EvtSource N(toggleVis_80244600) = SCRIPT({
     match SI_VAR(0) {
         == 0 {
             SetGroupEnabled(87, 1);
@@ -318,7 +318,7 @@ Script N(toggleVis_80244600) = SCRIPT({
     }
 });
 
-Script N(toggleVis_8024468C) = SCRIPT({
+EvtSource N(toggleVis_8024468C) = SCRIPT({
     match SI_VAR(0) {
         == 0 {
             SetGroupEnabled(132, 1);
@@ -347,7 +347,7 @@ Script N(toggleVis_8024468C) = SCRIPT({
     }
 });
 
-Script N(8024486C) = SCRIPT({
+EvtSource N(8024486C) = SCRIPT({
     group 0;
     DisablePlayerInput(TRUE);
     func_802D2C14(1);
@@ -379,7 +379,7 @@ Script N(8024486C) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80244A68) = SCRIPT({
+EvtSource N(80244A68) = SCRIPT({
     group 0;
     DisablePlayerInput(TRUE);
     func_802D2C14(1);
@@ -419,7 +419,7 @@ s32 N(npcList_80244C70)[] = {
     0x00000003, 0xFFFFFFFF,
 };
 
-Script N(80244C78) = SCRIPT({
+EvtSource N(80244C78) = SCRIPT({
     spawn N(802441C0);
     ParentColliderToModel(8, 21);
     if (SI_STORY_PROGRESS >= STORY_CH2_BOUGHT_SECRET_ITEMS) {
@@ -444,12 +444,12 @@ static s32 N(pad_4DD4)[] = {
 
 s32** N(D_80244DE0_96DFA0) = NULL;
 
-Script N(80244DE4) = SCRIPT({
+EvtSource N(80244DE4) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
     return;
 });
 
-Script N(80244E14) = SCRIPT({
+EvtSource N(80244E14) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 16);
     return;
 });
@@ -478,7 +478,7 @@ N(quizReqStruct) N(quizRequirements)[] = {
     {  96, 64 }, {   0, 64 },
 };
 
-Script N(80244ED4) = SCRIPT({
+EvtSource N(80244ED4) = SCRIPT({
     N(GetGameStatus75)();
     if (SI_VAR(0) <= 1) {
         GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -490,7 +490,7 @@ Script N(80244ED4) = SCRIPT({
     }
 });
 
-Script N(80244F84) = SCRIPT({
+EvtSource N(80244F84) = SCRIPT({
     N(GetCamVfov)(0, SI_ARRAY(0));
     N(SetCamVfov)(0, 25);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -513,7 +513,7 @@ Script N(80244F84) = SCRIPT({
     SetCamLeadPlayer(0, 0);
 });
 
-Script N(80245120) = SCRIPT({
+EvtSource N(80245120) = SCRIPT({
     GetNpcPos(NPC_CHUCK_QUIZMO, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 30;
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -529,12 +529,12 @@ Script N(80245120) = SCRIPT({
     SetCamSpeed(0, 1);
 });
 
-Script N(8024521C) = SCRIPT({
+EvtSource N(8024521C) = SCRIPT({
     N(SetCamVfov)(0, SI_ARRAY(0));
     PanToTarget(0, 0, 0);
 });
 
-Script N(80245258) = SCRIPT({
+EvtSource N(80245258) = SCRIPT({
     sleep 20;
     N(UnkCameraFunc)(SI_ARRAY(1), SI_ARRAY(3), 83, SI_VAR(0), SI_VAR(1));
     spawn {
@@ -563,7 +563,7 @@ Script N(80245258) = SCRIPT({
     SetPlayerAnimation(ANIM_10002);
 });
 
-Script N(80245408) = SCRIPT({
+EvtSource N(80245408) = SCRIPT({
     GetNpcPos(NPC_PARTNER, SI_VAR(10), SI_VAR(11), SI_VAR(12));
     N(UnkCameraFunc)(SI_VAR(10), SI_VAR(12), 108, SI_VAR(0), SI_VAR(1));
     SI_VAR(5) = (float) SI_ARRAY(2);
@@ -583,7 +583,7 @@ Script N(80245408) = SCRIPT({
     SetNpcAnimation(NPC_PARTNER, 0x106);
 });
 
-Script N(80245540) = SCRIPT({
+EvtSource N(80245540) = SCRIPT({
     GetNpcPos(NPC_CHUCK_QUIZMO, SI_VAR(10), SI_VAR(11), SI_VAR(12));
     N(UnkCameraFunc)(SI_VAR(10), SI_VAR(12), -70, SI_VAR(0), SI_VAR(1));
     spawn {
@@ -607,26 +607,26 @@ Script N(80245540) = SCRIPT({
     SetNpcAnimation(NPC_CHUCK_QUIZMO, 0xAF0001);
 });
 
-Script N(802456AC) = SCRIPT({
+EvtSource N(802456AC) = SCRIPT({
     spawn N(80245258);
     spawn N(80245408);
     await N(80245540);
 });
 
-Script N(802456E0) = SCRIPT({
+EvtSource N(802456E0) = SCRIPT({
     loop {
         SetPlayerAnimation(ANIM_QUESTION);
         sleep 20;
     }
 });
 
-Script N(80245720) = SCRIPT({
+EvtSource N(80245720) = SCRIPT({
     SetPlayerAnimation(ANIM_THROW);
     sleep 15;
     SetPlayerAnimation(ANIM_10002);
 });
 
-Script N(8024575C) = SCRIPT({
+EvtSource N(8024575C) = SCRIPT({
     loop {
         SetPlayerAnimation(ANIM_10002);
         sleep 1;
@@ -797,14 +797,14 @@ Script N(8024575C) = SCRIPT({
     sleep 1;
 });
 
-Script N(802462A4) = SCRIPT({
+EvtSource N(802462A4) = SCRIPT({
     SetPlayerAnimation(ANIM_SHOCK_STILL);
     loop {
         sleep 1;
     }
 });
 
-Script N(802462E4) = SCRIPT({
+EvtSource N(802462E4) = SCRIPT({
     spawn {
         N(UnkCameraFunc)(SI_ARRAY(1), SI_ARRAY(3), 25, SI_VAR(0), SI_VAR(1));
         SI_VAR(2) = (float) SI_ARRAY(1);
@@ -818,7 +818,7 @@ Script N(802462E4) = SCRIPT({
     PlayerMoveTo(SI_ARRAY(1), SI_ARRAY(3), 40);
 });
 
-Script N(802463C0) = SCRIPT({
+EvtSource N(802463C0) = SCRIPT({
     SI_VAR(1) = spawn N(8024575C);
     sleep 60;
     kill SI_VAR(1);
@@ -832,7 +832,7 @@ Script N(802463C0) = SCRIPT({
     await N(802462E4);
 });
 
-Script N(80246470) = SCRIPT({
+EvtSource N(80246470) = SCRIPT({
     SI_VAR(1) = spawn N(802462A4);
     sleep 60;
     loop 5 {
@@ -846,7 +846,7 @@ Script N(80246470) = SCRIPT({
     await N(802462E4);
 });
 
-Script N(80246520) = SCRIPT({
+EvtSource N(80246520) = SCRIPT({
     if (SI_SAVE_VAR(352) > 63) {
         SI_VAR(0) = 0;
         return;
@@ -1046,7 +1046,7 @@ Script N(80246520) = SCRIPT({
     SI_SAVE_FLAG(1793) = 0;
 });
 
-Script N(80247250) = SCRIPT({
+EvtSource N(80247250) = SCRIPT({
     N(func_8024043C_9695FC)();
     if (SI_VAR(0) == 0) {
         return;
@@ -1056,7 +1056,7 @@ Script N(80247250) = SCRIPT({
     N(UnkFunc31)();
 });
 
-Script N(802472C4) = SCRIPT({
+EvtSource N(802472C4) = SCRIPT({
     arr_use gPauseMenuTargetPosX;
     SI_SAVE_FLAG(1769) = 1;
     DisablePlayerPhysics(TRUE);
@@ -1066,7 +1066,7 @@ Script N(802472C4) = SCRIPT({
     SetPlayerFlagBits(4194304, 0);
 });
 
-Script N(80247344) = SCRIPT({
+EvtSource N(80247344) = SCRIPT({
     N(GetNpcUnsafeOwner2)();
 });
 
@@ -1078,7 +1078,7 @@ NpcAISettings N(npcAISettings_80247360) = {
     .unk_2C = 1,
 };
 
-Script N(80247390) = SCRIPT({
+EvtSource N(80247390) = SCRIPT({
     DoBasicAI(N(npcAISettings_80247360));
 });
 
@@ -1114,7 +1114,7 @@ NpcAISettings N(npcAISettings_80247408) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80247438) = SCRIPT({
+EvtSource N(npcAI_80247438) = SCRIPT({
     DoBasicAI(N(npcAISettings_80247408));
 });
 
@@ -1141,7 +1141,7 @@ NpcAISettings N(npcAISettings_802474B0) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802474E0) = SCRIPT({
+EvtSource N(npcAI_802474E0) = SCRIPT({
     DoBasicAI(N(npcAISettings_802474B0));
 });
 
@@ -1284,15 +1284,15 @@ Gfx N(D_80247A38_970BF8)[] = {
     gsSPEndDisplayList(),
 };
 
-Script N(init_80247A80) = SCRIPT({
+EvtSource N(init_80247A80) = SCRIPT({
 
 });
 
-Script N(npcAI_80247A90) = SCRIPT({
+EvtSource N(npcAI_80247A90) = SCRIPT({
 
 });
 
-Script N(80247AA0) = SCRIPT({
+EvtSource N(80247AA0) = SCRIPT({
     arr_use N(D_8024EFD0);
     SI_ARRAY(9) = 0;
     GetNpcPos(NPC_WORLD_MERLEE, SI_ARRAY(4), SI_ARRAY(5), SI_ARRAY(6));
@@ -1429,7 +1429,7 @@ Script N(80247AA0) = SCRIPT({
     }
 });
 
-Script N(802481D8) = SCRIPT({
+EvtSource N(802481D8) = SCRIPT({
     GetNpcPos(NPC_WORLD_MERLEE, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamDistance(0, 200);
@@ -1440,13 +1440,13 @@ Script N(802481D8) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-Script N(802482A8) = SCRIPT({
+EvtSource N(802482A8) = SCRIPT({
     PanToTarget(0, 0, 0);
     SetCamSpeed(0, 3.0);
     WaitForCam(0, 1.0);
 });
 
-Script N(802482F8) = SCRIPT({
+EvtSource N(802482F8) = SCRIPT({
     func_802D2C14(1);
     await N(802481D8);
     SI_VAR(0) = 0;
@@ -1535,7 +1535,7 @@ s32 N(D_80248784_971944) = {
     0x00000000,
 };
 
-Script N(80248788) = SCRIPT({
+EvtSource N(80248788) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -1559,13 +1559,13 @@ Script N(80248788) = SCRIPT({
     unbind;
 });
 
-Script N(802488CC) = SCRIPT({
+EvtSource N(802488CC) = SCRIPT({
     N(func_8024334C_96C50C)(SI_VAR(0));
     bind_padlock N(80248788) 0x10 0 N(D_8024F080);
     N(func_802432C0_96C480)(SI_VAR(0));
 });
 
-Script N(8024891C) = SCRIPT({
+EvtSource N(8024891C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -1588,7 +1588,7 @@ Script N(8024891C) = SCRIPT({
     unbind;
 });
 
-Script N(80248A50) = SCRIPT({
+EvtSource N(80248A50) = SCRIPT({
     N(func_802433E8_96C5A8)(SI_VAR(0));
     bind_padlock N(8024891C) 0x10 0 N(D_8024F248);
     N(func_802432C0_96C480)(SI_VAR(0));
@@ -1975,14 +1975,14 @@ s32 N(image2)[] = {
     0x00010001, 0x00010001, 0x00010001, 0x00010001, 0x00030000,
 };
 
-Script N(8024AC14) = SCRIPT({
+EvtSource N(8024AC14) = SCRIPT({
     EnableModel(SI_VAR(4), 0);
     EnableModel(SI_VAR(5), 1);
     RotateModel(SI_VAR(6), 0, 0, 0, 1);
     RotateModel(SI_VAR(7), 0, 0, 0, 1);
 });
 
-Script N(8024AC8C) = SCRIPT({
+EvtSource N(8024AC8C) = SCRIPT({
     SI_VAR(9) = SI_VAR(7);
     SI_VAR(8) = SI_VAR(6);
     SI_VAR(7) = SI_VAR(5);
@@ -2005,7 +2005,7 @@ Script N(8024AC8C) = SCRIPT({
     EnableModel(SI_VAR(7), 0);
 });
 
-Script N(interact_8024ADE4) = SCRIPT({
+EvtSource N(interact_8024ADE4) = SCRIPT({
     N(UnkFunc35)(0, 0, 0);
     await N(8024D434);
     if (SI_VAR(0) == 0) {
@@ -2069,7 +2069,7 @@ Script N(interact_8024ADE4) = SCRIPT({
     N(Call800E98C4SyncStatusMenu)();
 });
 
-Script N(8024B18C) = SCRIPT({
+EvtSource N(8024B18C) = SCRIPT({
     loop {
         GetNpcPos(NPC_PARTNER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
         N(UnkYawFunc)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
@@ -2078,7 +2078,7 @@ Script N(8024B18C) = SCRIPT({
     }
 });
 
-Script N(8024B20C) = SCRIPT({
+EvtSource N(8024B20C) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -2127,7 +2127,7 @@ Script N(8024B20C) = SCRIPT({
     unbind;
 });
 
-Script N(8024B530) = SCRIPT({
+EvtSource N(8024B530) = SCRIPT({
     SI_VAR(0) = SI_VAR(11);
     SI_VAR(1) = SI_VAR(2);
     N(func_8024334C_96C50C)(SI_VAR(0));
@@ -2135,7 +2135,7 @@ Script N(8024B530) = SCRIPT({
     N(func_802432C0_96C480)(SI_VAR(0));
 });
 
-Script N(8024B5A0) = SCRIPT({
+EvtSource N(8024B5A0) = SCRIPT({
     SI_VAR(12) = 0;
     if (SI_STORY_PROGRESS < STORY_CH2_PARAKARRY_JOINED_PARTY) {
         return;
@@ -2189,12 +2189,12 @@ s32 N(D_8024B898_974A58)[] = {
     0x0000004A, 0x00000000,
 };
 
-Script N(8024B8A0) = SCRIPT({
+EvtSource N(8024B8A0) = SCRIPT({
     N(SetManyVars)(1, 9634308, 9634305, 74, 75, 852117, 852118, 852119, 852120, N(D_8024B898_974A58));
     await N(8024B5A0);
 });
 
-Script N(interact_8024B8F0) = SCRIPT({
+EvtSource N(interact_8024B8F0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(787) == 1) {
@@ -2221,14 +2221,14 @@ Script N(interact_8024B8F0) = SCRIPT({
     }
 });
 
-Script N(init_8024BA50) = SCRIPT({
+EvtSource N(init_8024BA50) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024B8F0));
     if (SI_STORY_PROGRESS >= STORY_UNUSED_FFFFFFCC) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(interact_8024BA9C) = SCRIPT({
+EvtSource N(interact_8024BA9C) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_SAVE_FLAG(747) == 0) {
@@ -2249,11 +2249,11 @@ Script N(interact_8024BA9C) = SCRIPT({
     }
 });
 
-Script N(init_8024BBAC) = SCRIPT({
+EvtSource N(init_8024BBAC) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024BA9C));
 });
 
-Script N(interact_8024BBD0) = SCRIPT({
+EvtSource N(interact_8024BBD0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(3) == 0) {
@@ -2272,19 +2272,19 @@ Script N(interact_8024BBD0) = SCRIPT({
     }
 });
 
-Script N(init_8024BCD4) = SCRIPT({
+EvtSource N(init_8024BCD4) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024BBD0));
 });
 
-Script N(interact_8024BCF8) = SCRIPT({
+EvtSource N(interact_8024BCF8) = SCRIPT({
     SpeakToPlayer(NPC_SELF, 0x930004, 0x930001, 0, MESSAGE_ID(0x0D, 0x00A0));
 });
 
-Script N(init_8024BD28) = SCRIPT({
+EvtSource N(init_8024BD28) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024BCF8));
 });
 
-Script N(interact_8024BD4C) = SCRIPT({
+EvtSource N(interact_8024BD4C) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(4) == 0) {
@@ -2315,11 +2315,11 @@ Script N(interact_8024BD4C) = SCRIPT({
     }
 });
 
-Script N(init_8024BF10) = SCRIPT({
+EvtSource N(init_8024BF10) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024BD4C));
 });
 
-Script N(interact_8024BF34) = SCRIPT({
+EvtSource N(interact_8024BF34) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_STAR_SPRIT_DEPARTED {
             if (SI_AREA_FLAG(5) == 0) {
@@ -2338,11 +2338,11 @@ Script N(interact_8024BF34) = SCRIPT({
     }
 });
 
-Script N(init_8024C038) = SCRIPT({
+EvtSource N(init_8024C038) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024BF34));
 });
 
-Script N(8024C05C) = SCRIPT({
+EvtSource N(8024C05C) = SCRIPT({
     loop {
         PlayerFaceNpc(5, 0);
         NpcFaceNpc(NPC_PARTNER, NPC_MOUSTAFA, 0);
@@ -2350,7 +2350,7 @@ Script N(8024C05C) = SCRIPT({
     }
 });
 
-Script N(8024C0B8) = SCRIPT({
+EvtSource N(8024C0B8) = SCRIPT({
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamDistance(0, 275);
@@ -2368,13 +2368,13 @@ Script N(8024C0B8) = SCRIPT({
     WaitForCam(0, 1.0);
 });
 
-Script N(8024C1F8) = SCRIPT({
+EvtSource N(8024C1F8) = SCRIPT({
     PanToTarget(0, 0, 0);
     SetCamSpeed(0, 3.0);
     WaitForCam(0, 1.0);
 });
 
-Script N(8024C248) = SCRIPT({
+EvtSource N(8024C248) = SCRIPT({
     SetNpcYaw(NPC_MOUSTAFA, 270);
     SetNpcFlagBits(NPC_DISGUISED_MOUSTAFA, ((NPC_FLAG_100)), TRUE);
     SetNpcFlagBits(NPC_MOUSTAFA, ((NPC_FLAG_100)), TRUE);
@@ -2404,7 +2404,7 @@ Script N(8024C248) = SCRIPT({
     sleep 30;
 });
 
-Script N(idle_8024C450) = SCRIPT({
+EvtSource N(idle_8024C450) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH2_BOUGHT_SECRET_ITEMS {}
         < STORY_CH2_GOT_PULSE_STONE {
@@ -2417,7 +2417,7 @@ Script N(idle_8024C450) = SCRIPT({
     }
 });
 
-Script N(interact_8024C4EC) = SCRIPT({
+EvtSource N(interact_8024C4EC) = SCRIPT({
     if (SI_SAVE_FLAG(750) == 1) {
         SpeakToPlayer(NPC_MOUSTAFA, 0xBD0005, 0xBD0001, 0, MESSAGE_ID(0x0D, 0x00CF));
         return;
@@ -2597,7 +2597,7 @@ Script N(interact_8024C4EC) = SCRIPT({
     }
 });
 
-Script N(init_8024D04C) = SCRIPT({
+EvtSource N(init_8024D04C) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         2, 3 {
@@ -2612,11 +2612,11 @@ Script N(init_8024D04C) = SCRIPT({
     }
 });
 
-Script N(init_8024D130) = SCRIPT({
+EvtSource N(init_8024D130) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024C4EC));
 });
 
-Script N(idle_8024D154) = SCRIPT({
+EvtSource N(idle_8024D154) = SCRIPT({
     InterpNpcYaw(NPC_DISGUISED_MOUSTAFA, 270, 0);
 10:
     SetNpcAnimation(NPC_SELF, 0x940107);
@@ -2654,14 +2654,14 @@ Script N(idle_8024D154) = SCRIPT({
     SI_STORY_PROGRESS = STORY_CH2_SPOKE_WITH_SHEEK;
 });
 
-Script N(init_8024D3E8) = SCRIPT({
+EvtSource N(init_8024D3E8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024D154));
     if (SI_STORY_PROGRESS >= STORY_CH2_SPOKE_WITH_SHEEK) {
         RemoveNpc(NPC_SELF);
     }
 });
 
-Script N(8024D434) = SCRIPT({
+EvtSource N(8024D434) = SCRIPT({
     SI_VAR(0) = 852177;
     SI_VAR(8) = 852178;
     SI_VAR(1) = 852179;
@@ -2669,7 +2669,7 @@ Script N(8024D434) = SCRIPT({
     SI_VAR(3) = 852181;
 });
 
-Script N(8024D494) = SCRIPT({
+EvtSource N(8024D494) = SCRIPT({
     spawn N(80243B70);
     SetPlayerSpeed(3.0);
     PlayerMoveTo(-179, -198, 0);
@@ -2706,7 +2706,7 @@ Script N(8024D494) = SCRIPT({
     }
 });
 
-Script N(8024D700) = SCRIPT({
+EvtSource N(8024D700) = SCRIPT({
     HidePlayerShadow(FALSE);
     func_802D2520(ANIM_10002, 0, 0, 0, 0, 0);
     SetPlayerPos(-187, 0, -240);
@@ -2715,7 +2715,7 @@ Script N(8024D700) = SCRIPT({
     spawn N(80243AF0);
 });
 
-Script N(init_8024D790) = SCRIPT({
+EvtSource N(init_8024D790) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_8024ADE4));
 });
 
@@ -3088,7 +3088,7 @@ NpcGroupList N(npcGroupList_8024EEF4) = {
     {},
 };
 
-ApiStatus N(func_80240300_9694C0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240300_9694C0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80244DE0_96DFA0) == NULL) {
@@ -3110,7 +3110,7 @@ ApiStatus N(func_80240300_9694C0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/Set80151310.inc.c"
 
-ApiStatus N(func_8024043C_9695FC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024043C_9695FC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
     u16 phi_s0 = get_variable(script, SI_SAVE_FLAG(1768));
     u16 phi_s7 = get_variable(script, SI_SAVE_FLAG(1769));
@@ -3169,7 +3169,7 @@ ApiStatus N(func_8024043C_9695FC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc31.inc.c"
 
-ApiStatus N(func_802409EC_969BAC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802409EC_969BAC)(Evt* script, s32 isInitialCall) {
     u16 quizzesAnswered = gPlayerData.quizzesAnswered;
 
     if (quizzesAnswered < 999) {
@@ -3186,7 +3186,7 @@ ApiStatus N(func_802409EC_969BAC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240A70_969C30)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -3220,7 +3220,7 @@ ApiStatus N(func_80240A70_969C30)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C88_969E48)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
@@ -3245,12 +3245,12 @@ ApiStatus N(func_80240C88_969E48)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240D3C_969EFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240D3C_969EFC)(Evt* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC0))->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240D70_969F30)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240D70_969F30)(Evt* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->freeDelay;
 
@@ -3272,17 +3272,17 @@ ApiStatus N(func_80240D70_969F30)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240DF0_969FB0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240DF0_969FB0)(Evt* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240E08_969FC8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240E08_969FC8)(Evt* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240E24_969FE4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240E24_969FE4)(Evt* script, s32 isInitialCall) {
     ((N(temp)*)N(D_8024EFC8))->unk_0C->unk_1C = 2;
     return ApiStatus_DONE2;
 }
@@ -3309,12 +3309,12 @@ void N(func_802412F8_96A4B8)(void) {
     }
 }
 
-ApiStatus N(func_80241364_96A524)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241364_96A524)(Evt* script, s32 isInitialCall) {
     gPauseMenuCursorPosY = create_generic_entity_frontUI(NULL, N(func_802412F8_96A4B8));
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241394_96A554)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241394_96A554)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
@@ -3350,7 +3350,7 @@ ApiStatus N(func_80241394_96A554)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802414C0_96A680)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802414C0_96A680)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
@@ -3376,7 +3376,7 @@ ApiStatus N(func_802414C0_96A680)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802415CC_96A78C)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {
@@ -3407,7 +3407,7 @@ ApiStatus N(func_802415CC_96A78C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802416FC_96A8BC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802416FC_96A8BC)(Evt* script, s32 isInitialCall) {
     s32 ret;
 
     N(D_8024EFCC) = script;
@@ -3429,7 +3429,7 @@ ApiStatus N(func_802416FC_96A8BC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80241874_96AA34)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241874_96AA34)(Evt* script, s32 isInitialCall) {
     func_8013A854(get_variable(script, SI_ARRAY(0)));
     func_8013A854(get_variable(script, SI_ARRAY(1)));
     func_8013A854(get_variable(script, SI_ARRAY(2)));
@@ -3581,7 +3581,7 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
 
 // Too much work, maybe try again later
 #ifdef NON_MATCHING
-void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
+void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
     N(temp)** effect;
     N(temp)** effect2;
     N(temp)** effect3;
@@ -3891,11 +3891,11 @@ void func_8024240C_96B5CC(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, ScriptInstance* script,
+INCLUDE_ASM(void, "world/area_dro/dro_02/9694C0", dro_02_func_8024240C_96B5CC, Evt* script,
             s32 isInitialCall);
 #endif
 
-void N(func_80242EAC_96C06C)(ScriptInstance* script, s32 isInitialCall) {
+void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
     Matrix4f sp20;
     u32 temp_s1;
 
@@ -3914,12 +3914,12 @@ void N(func_80242EAC_96C06C)(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus N(func_8024303C_96C1FC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024303C_96C1FC)(Evt* script, s32 isInitialCall) {
     sfx_play_sound_with_params(0x202A, 0, 0x18, 0);
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243068_96C228)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243068_96C228)(Evt* script, s32 isInitialCall) {
     sfx_play_sound_with_params(0x202B, 0, 0x68, 0);
     return ApiStatus_DONE2;
 }
@@ -3928,7 +3928,7 @@ ApiStatus N(func_80243068_96C228)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_802432C0_96C480)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -3944,7 +3944,7 @@ ApiStatus N(func_802432C0_96C480)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80243314_96C4D4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243314_96C4D4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80248784_971944) = get_variable(script, *args);
@@ -3952,7 +3952,7 @@ ApiStatus N(func_80243314_96C4D4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024334C_96C50C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -3971,7 +3971,7 @@ ApiStatus N(func_8024334C_96C50C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -4014,7 +4014,7 @@ ApiStatus N(func_802433E8_96C5A8)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkYawFunc.inc.c"
 
-ApiStatus N(func_802439FC_96CBBC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802439FC_96CBBC)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->varTable[2]);
 
     N(D_8024F3B8) = npc->currentAnim.w;
@@ -4022,7 +4022,7 @@ ApiStatus N(func_802439FC_96CBBC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80243A40_96CC00)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243A40_96CC00)(Evt* script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim.w = N(D_8024F3B8);
     return ApiStatus_DONE2;
 }

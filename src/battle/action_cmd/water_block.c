@@ -5,7 +5,7 @@
 // requires .data migration
 INCLUDE_ASM(s32, "battle/action_cmd/water_block", func_802A9000_42A4F0);
 
-ApiStatus func_802A9398_42A888(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9398_42A888(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -52,8 +52,8 @@ void func_802AA014_42B504(void) {
     draw_hud_element_clipped(actionCommandStatus->hudElements[13]);
 
     hudElement = actionCommandStatus->hudElements[10];
-    if (get_hud_element_script(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
-        set_hud_element_script(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
+    if (get_hud_element_anim(hudElement) != D_802AB180_42C670[battleStatus->unk_84]) {
+        set_hud_element_anim(hudElement, D_802AB180_42C670[battleStatus->unk_84]);
     }
 
     draw_hud_element_clipped(hudElement);

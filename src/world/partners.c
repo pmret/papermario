@@ -274,7 +274,7 @@ PartnerAnimations gPartnerAnimations[] = {
 s32 D_800F84F8 = { 0x00000000, 0x00000000, };
 
 s32 use_consumable(s32 arg0) {
-    ScriptInstance* script;
+    Evt* script;
 
     D_8010CD20 = arg0;
     arg0 = gPlayerData.invItems[arg0];
@@ -514,7 +514,7 @@ Bytecode* partner_get_ride_script(void) {
 
 void partner_handle_before_battle(void) {
     if (D_8010CFD8 != 0) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             kill_script_by_ID(*scriptID);
@@ -555,7 +555,7 @@ void partner_handle_after_battle(void) {
 }
 
 void partner_kill_ability_script(void) {
-    ScriptID* scriptID = &D_8010CFDC;
+    s32* scriptID = &D_8010CFDC;
     D_8010CFE8 = 10;
 
     if (does_script_exist(*scriptID)) {
@@ -565,7 +565,7 @@ void partner_kill_ability_script(void) {
 
 void partner_suspend_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             suspend_all_script(*scriptID);
@@ -575,7 +575,7 @@ void partner_suspend_ability_script(void) {
 
 void partner_resume_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             resume_all_script(*scriptID);

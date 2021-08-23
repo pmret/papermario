@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkRotatePartner)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkRotatePartner)(Evt* script, s32 isInitialCall) {
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
     if (isInitialCall) {
@@ -18,7 +18,7 @@ ApiStatus N(UnkRotatePartner)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] >> 0x1F) & ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkMovePartner)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkMovePartner)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
     f32* x = (f32*) &script->functionTemp[1];
     f32* y = (f32*) &script->functionTemp[2];

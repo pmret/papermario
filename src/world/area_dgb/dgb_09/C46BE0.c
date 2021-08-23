@@ -28,7 +28,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_09_tattle },
 };
 
-Script N(80243880) = SCRIPT({
+EvtSource N(80243880) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -45,7 +45,7 @@ static s32 N(pad_3918)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitDoubleDoor_80243920) = SCRIPT({
+EvtSource N(exitDoubleDoor_80243920) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -59,7 +59,7 @@ Script N(exitDoubleDoor_80243920) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitDoubleDoor_802439D4) = SCRIPT({
+EvtSource N(exitDoubleDoor_802439D4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -73,7 +73,7 @@ Script N(exitDoubleDoor_802439D4) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitSingleDoor_80243A88) = SCRIPT({
+EvtSource N(exitSingleDoor_80243A88) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
@@ -87,13 +87,13 @@ Script N(exitSingleDoor_80243A88) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
+EvtSource N(exitWalk_80243B3C) = EXIT_WALK_SCRIPT(40,  3, "dgb_10",  0);
 
-Script N(80243B98) = SCRIPT({
+EvtSource N(80243B98) = SCRIPT({
     bind N(exitWalk_80243B3C) TRIGGER_FLOOR_ABOVE 11;
 });
 
-Script N(enterWalk_80243BC4) = SCRIPT({
+EvtSource N(enterWalk_80243BC4) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -125,7 +125,7 @@ Script N(enterWalk_80243BC4) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -148,7 +148,7 @@ static s32 N(pad_3E4C) = {
 
 Vec4f N(triggerCoord_80243E50) = { 300.0f, 0.0f, 88.0f, 0.0f };
 
-Script N(80243E60) = SCRIPT({
+EvtSource N(80243E60) = SCRIPT({
     sleep 2;
     PlayEffect(0x42, 1, 25, 3, 1, 10, 30, 0, 0, 0, 0, 0, 0, 0);
     loop 10 {
@@ -164,7 +164,7 @@ Script N(80243E60) = SCRIPT({
     unbind;
 });
 
-Script N(80243F6C) = SCRIPT({
+EvtSource N(80243F6C) = SCRIPT({
     if (SI_SAVE_FLAG(1051) == 0) {
         bind N(80243E60) TRIGGER_POINT_BOMB N(triggerCoord_80243E50);
         EnableModel(29, 0);
@@ -178,7 +178,7 @@ static s32 N(pad_3FF8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80244000) = SCRIPT({
+EvtSource N(80244000) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -228,7 +228,7 @@ NpcAISettings N(npcAISettings_802440EC) = {
     .unk_2C = 3,
 };
 
-Script N(npcAI_8024411C) = SCRIPT({
+EvtSource N(npcAI_8024411C) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(1, 5);
     SetSelfVar(2, 8);
@@ -260,7 +260,7 @@ NpcAISettings N(npcAISettings_802441B8) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802441E8) = SCRIPT({
+EvtSource N(npcAI_802441E8) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(1, 10);
     SetSelfVar(2, 14);
@@ -277,7 +277,7 @@ NpcSettings N(npcSettings_80244258) = {
     .level = 13,
 };
 
-Script N(npcAI_80244284) = SCRIPT({
+EvtSource N(npcAI_80244284) = SCRIPT({
     EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfVar(0, 4);
     SetSelfVar(1, 32);
@@ -302,7 +302,7 @@ f32 N(D_80244358_C4AF38)[] = {
     1.5f, 20.0f,
 };
 
-Script N(80244370) = SCRIPT({
+EvtSource N(80244370) = SCRIPT({
     SetSelfEnemyFlagBits(((0x00100000 | 0x01000000 | 0x02000000 | 0x04000000 | 0x08000000 | 0x10000000 | 0x20000000)), TRUE);
     SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100 | NPC_FLAG_LOCK_ANIMS | NPC_FLAG_NO_Y_MOVEMENT)), TRUE);
 });
@@ -322,7 +322,7 @@ NpcAISettings N(npcAISettings_802443AC) = {
 
 const char N(dgb_00_name_hack)[];
 
-Script N(npcAI_802443DC) = SCRIPT({
+EvtSource N(npcAI_802443DC) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(5, -650);
     SetSelfVar(6, 30);
@@ -381,7 +381,7 @@ Script N(npcAI_802443DC) = SCRIPT({
     sleep 100;
 });
 
-Script N(80244804) = SCRIPT({
+EvtSource N(80244804) = SCRIPT({
     GetOwnerEncounterTrigger(SI_VAR(0));
     match SI_VAR(0) {
         == 1, 2, 4, 6 {
@@ -391,7 +391,7 @@ Script N(80244804) = SCRIPT({
     }
 });
 
-Script N(80244890) = SCRIPT({
+EvtSource N(80244890) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -480,7 +480,7 @@ StaticNpc N(npcGroup_80244920)[] = {
     },
 };
 
-Script N(init_80244D00) = SCRIPT({
+EvtSource N(init_80244D00) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 3) {
         SetNpcPos(NPC_SELF, 240, 0, 88);
@@ -607,7 +607,7 @@ NpcGroupList N(npcGroupList_8024533C) = {
 
 #include "world/common/UnkFunc7.inc.c"
 
-ApiStatus N(func_8024061C_C471FC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024061C_C471FC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -692,7 +692,7 @@ ApiStatus N(func_8024061C_C471FC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void N(func_802408D0_C474B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802408D0_C474B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -709,7 +709,7 @@ void N(func_802408D0_C474B0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240958_C47538)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240958_C47538)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerData* playerData = get_player_data();
@@ -765,7 +765,7 @@ void N(func_80240958_C47538)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240C10_C477F0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240C10_C477F0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -777,7 +777,7 @@ void N(func_80240C10_C477F0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240C74_C47854)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240C74_C47854)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -787,7 +787,7 @@ void N(func_80240C74_C47854)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[0] = 4;
 }
 
-void N(func_80240D1C_C478FC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240D1C_C478FC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -818,7 +818,7 @@ void N(func_80240D1C_C478FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240E54_C47A34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E54_C47A34)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -834,7 +834,7 @@ void N(func_80240E54_C47A34)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240F00_C47AE0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240F00_C47AE0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 var;
@@ -857,7 +857,7 @@ void N(func_80240F00_C47AE0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80241078_C47C58)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241078_C47C58)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -870,7 +870,7 @@ void N(func_80241078_C47C58)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-ApiStatus N(func_802410D4_C47CB4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802410D4_C47CB4)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -978,7 +978,7 @@ ApiStatus N(func_802410D4_C47CB4)(ScriptInstance* script, s32 isInitialCall) {
 
 #ifdef NON_MATCHING
 // second npc_raycast_down_sides call
-void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802415D4_C481B4)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
@@ -1117,7 +1117,7 @@ void N(func_802415D4_C481B4)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_dgb/dgb_09/C46BE0", dgb_09_func_802415D4_C481B4, ScriptInstance* script,
+INCLUDE_ASM(void, "world/area_dgb/dgb_09/C46BE0", dgb_09_func_802415D4_C481B4, Evt* script,
             NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
@@ -1127,7 +1127,7 @@ INCLUDE_ASM(void, "world/area_dgb/dgb_09/C46BE0", dgb_09_func_802415D4_C481B4, S
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80242078_C48C58)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242078_C48C58)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1145,7 +1145,7 @@ void N(func_80242078_C48C58)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_80242730_C49310)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242730_C49310)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -1205,7 +1205,7 @@ ApiStatus N(func_80242730_C49310)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-void N(func_8024291C_C494FC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_8024291C_C494FC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f0;
@@ -1232,7 +1232,7 @@ void N(func_8024291C_C494FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80242A74_C49654)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242A74_C49654)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1255,7 +1255,7 @@ void N(func_80242A74_C49654)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 }
 
-void N(func_80242B78_C49758)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242B78_C49758)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1269,7 +1269,7 @@ void N(func_80242B78_C49758)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[0] = 15;
 }
 
-void N(func_80242C1C_C497FC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242C1C_C497FC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -1315,7 +1315,7 @@ void N(func_80242C1C_C497FC)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80242EB8_C49A98)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242EB8_C49A98)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1330,7 +1330,7 @@ void N(func_80242EB8_C49A98)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[0] = 17;
 }
 
-void N(func_80242F70_C49B50)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80242F70_C49B50)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
@@ -1353,7 +1353,7 @@ void N(func_80242F70_C49B50)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_802430F0_C49CD0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802430F0_C49CD0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1363,7 +1363,7 @@ void N(func_802430F0_C49CD0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80243138_C49D18)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80243138_C49D18)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1380,7 +1380,7 @@ void N(func_80243138_C49D18)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_802431B8_C49D98)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802431B8_C49D98)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1392,7 +1392,7 @@ void N(func_802431B8_C49D98)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[1] = 0x1E;
 }
 
-void N(func_80243260_C49E40)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80243260_C49E40)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX = npc->pos.x;
@@ -1436,7 +1436,7 @@ void N(func_80243260_C49E40)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-ApiStatus N(func_80243578_C4A158)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243578_C4A158)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

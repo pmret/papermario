@@ -35,21 +35,21 @@ void set_defeated(s32 mapID, s32 encounterID) {
     currentEncounter->defeatFlags[mapID][encounterIdx] |= (1 << encounterShift);*/
 }
 
-ApiStatus ShowMerleeCoinMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(0, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus ShowMerleeRanOutMessage(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         show_merlee_message(1, 60);
     }
     return (is_merlee_message_done() == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeBackgroundToBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;
@@ -67,7 +67,7 @@ ApiStatus FadeBackgroundToBlack(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UnfadeBackgroundFromBlack(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 25;
     }
@@ -83,7 +83,7 @@ ApiStatus UnfadeBackgroundFromBlack(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeInMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     if (isInitialCall) {
@@ -100,7 +100,7 @@ ApiStatus FadeInMerlee(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FadeOutMerlee(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(NPC_BTL_MERLEE);
 
     npc->alpha -= 17;
@@ -113,7 +113,7 @@ ApiStatus FadeOutMerlee(ScriptInstance* script, s32 isInitialCall) {
 }
 
 // same as func_802616F4 aside from syms
-ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     Npc* merlee = get_npc_unsafe(NPC_BTL_MERLEE);
     EffectInstanceData* effectInstanceData;
 
@@ -170,12 +170,12 @@ ApiStatus MerleeUpdateFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus MerleeStopFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MerleeStopFX(Evt* script, s32 isInitialCall) {
     D_800A0BB8 = 1;
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetCamLookAtObjVector(Evt* script, s32 isInitialCall) {
     script->varTable[0] = gCameras[gCurrentCameraID].lookAt_obj.x;
     script->varTable[1] = gCameras[gCurrentCameraID].lookAt_obj.y;
     script->varTable[2] = gCameras[gCurrentCameraID].lookAt_obj.z;
@@ -183,7 +183,7 @@ ApiStatus GetCamLookAtObjVector(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus HasMerleeCasts(Evt* script, s32 isInitialCall) {
     script->varTable[0] = FALSE;
     if (gPlayerData.merleeCastsLeft > 0) {
         script->varTable[0] = TRUE;
@@ -192,7 +192,7 @@ ApiStatus HasMerleeCasts(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeGatherFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -202,7 +202,7 @@ ApiStatus PlayMerleeGatherFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var0 = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -212,7 +212,7 @@ ApiStatus PlayMerleeOrbFX(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus OnDefeatEnemy(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp1;
@@ -251,7 +251,7 @@ ApiStatus OnDefeatEnemy(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus OnFleeBattleDrops(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
 
@@ -469,7 +469,146 @@ void update_encounters_conversation(void) {
 void draw_encounters_conversation(void) {
 }
 
+// Mostly stack diffs, some issues with accessing fields from EncounterStatus at the very end
+#ifdef NON_MATCHING
+s8 check_conversation_trigger(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    Camera* camera = &gCameras[gCurrentCameraID];
+    f32 npcX;
+    f32 npcY;
+    f32 npcZ;
+    f32 angle;
+    f32 playerColliderRadius;
+    f32 playerColliderHeight;
+    f32 deltaX;
+    f32 deltaZ;
+    f32 playerX;
+    f32 playerY;
+    f32 playerZ;
+    f32 length;
+    f32 npcCollisionHeight;
+    f32 npcCollisionRadius;
+    Encounter* encounter;
+    Encounter* encounterTemp;
+    Npc* npc;
+    Npc* encounterNpc;
+    Enemy* enemy;
+    Enemy* encounterEnemy;
+    f32 minLength;
+    f32 xTemp;
+    f32 yTemp;
+    f32 zTemp;
+
+    s32 i;
+    s32 j;
+
+    playerStatus->unk_C8 = NULL;
+    playerStatus->flags &= ~0x2000000;
+    playerColliderHeight = playerStatus->colliderHeight;
+    playerColliderRadius = playerStatus->colliderDiameter / 2;
+    playerX = playerStatus->position.x;
+    playerY = playerStatus->position.y;
+    playerZ = playerStatus->position.z;
+
+    if (gPartnerActionStatus.actionState.b[0] == 0) {
+        encounter = NULL;
+        npc = NULL;
+        enemy = NULL;
+        minLength = 65535.0f;
+
+        for (i = 0; i < gCurrentEncounter.numEncounters; i++) {
+            encounterTemp = gCurrentEncounter.encounterList[i];
+
+            if (encounterTemp == NULL) {
+                continue;
+            }
+
+            for (j = 0; j < encounterTemp->count; j++) {
+                encounterEnemy = encounterTemp->enemy[j];
+
+                if (encounterEnemy == NULL) {
+                    continue;
+                }
+
+                if (!(encounterEnemy->flags & 0x80000020)) {
+                    if (encounterEnemy->flags & 1) {
+                        if (!(encounterEnemy->flags & 0x8000000) && encounterEnemy->interactBytecode != NULL) {
+                            encounterNpc = get_npc_unsafe(encounterEnemy->npcID);
+
+                            npcX = encounterNpc->pos.x;
+                            npcY = encounterNpc->pos.y;
+                            npcZ = encounterNpc->pos.z;
+                            deltaX = npcX - playerX;
+                            deltaZ = npcZ - playerZ;
+                            npcCollisionHeight = encounterNpc->collisionHeight;
+                            npcCollisionRadius = encounterNpc->collisionRadius;
+                            length = sqrtf(SQ(deltaX) + SQ(deltaZ));
+
+                            if (!(playerColliderRadius + npcCollisionRadius <= length) &&
+                                !(npcY + npcCollisionHeight < playerY) &&
+                                !(playerY + playerColliderHeight < npcY)) {
+
+                                if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
+                                    angle = clamp_angle(camera->currentYaw - 120.0f);
+                                    if (playerStatus->trueAnimation & 0x1000000) {
+                                        angle = clamp_angle(angle + 60.0f);
+                                    }
+                                } else {
+                                    angle = clamp_angle(camera->currentYaw + 120.0f);
+                                    if (playerStatus->trueAnimation & 0x1000000) {
+                                        angle = clamp_angle(angle - 60.0f);
+                                    }
+                                }
+
+                                if (fabsf(get_clamped_angle_diff(angle, atan2(playerX, playerZ, npcX, npcZ))) > 90.0f) {
+                                    continue;
+                                }
+
+                                if (!(encounterEnemy->flags & 0x10000) && encounterNpc->flags & 0x20000000) {
+                                    xTemp = npcX;
+                                    yTemp = npcY;
+                                    zTemp = npcZ;
+
+                                    if (npc_test_move_taller_with_slipping(0, &xTemp, &yTemp, &zTemp, length,
+                                                                            atan2(npcX, npcZ, playerX, playerZ),
+                                                                            npcCollisionHeight,
+                                                                            2.0f * npcCollisionRadius) != 0) {
+                                        continue;
+                                    }
+                                }
+
+                                if (length < minLength) {
+                                    minLength = length;
+                                    encounter = encounterTemp;
+                                    npc = encounterNpc;
+                                    enemy = encounterEnemy;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!(playerStatus->animFlags & 0x4000) && npc != NULL && !is_picking_up_item()) {
+            playerStatus->unk_C8 = npc;
+            playerStatus->flags |= 0x2000000;
+            if (playerStatus->pressedButtons & BUTTON_A) {
+                close_status_menu();
+                enemy->encountered = 5;
+                gCurrentEncounter.hitType = 5;
+                gCurrentEncounter.currentEncounter = encounter;
+                gCurrentEncounter.currentEnemy = enemy;
+                gCurrentEncounter.eFirstStrike = FIRST_STRIKE_PLAYER;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+#else
 INCLUDE_ASM(s32, "1a1f0_len_5390", check_conversation_trigger);
+#endif
 
 INCLUDE_ASM(s32, "1a1f0_len_5390", create_encounters);
 

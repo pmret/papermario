@@ -27,7 +27,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_03_tattle },
 };
 
-Script N(802406A0) = SCRIPT({
+EvtSource N(802406A0) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 2) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -49,7 +49,7 @@ Script N(802406A0) = SCRIPT({
     }
 });
 
-Script N(802407C0) = SCRIPT({
+EvtSource N(802407C0) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             PushSong(137, 0);
@@ -57,7 +57,7 @@ Script N(802407C0) = SCRIPT({
     }
 });
 
-Script N(80240814) = SCRIPT({
+EvtSource N(80240814) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
@@ -67,7 +67,7 @@ Script N(80240814) = SCRIPT({
     }
 });
 
-Script N(80240880) = SCRIPT({
+EvtSource N(80240880) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -106,16 +106,16 @@ Script N(80240880) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
+EvtSource N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 
-Script N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
+EvtSource N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
-Script N(80240BE4) = SCRIPT({
+EvtSource N(80240BE4) = SCRIPT({
     bind N(exitWalk_80240B2C) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80240B88) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -175,12 +175,12 @@ NpcSettings N(npcSettings_80240EDC) = {
 
 s32** N(D_80240F08_CA81A8) = NULL;
 
-Script N(80240F0C) = SCRIPT({
+EvtSource N(80240F0C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
     return;
 });
 
-Script N(80240F3C) = SCRIPT({
+EvtSource N(80240F3C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 16);
     return;
 });
@@ -205,7 +205,7 @@ s32 N(intTable_80240FD8)[] = {
     0x0000008C,
 };
 
-Script N(80240FFC) = SCRIPT({
+EvtSource N(80240FFC) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetNpcYaw(NPC_PETUNIA, 90);
@@ -227,11 +227,11 @@ Script N(80240FFC) = SCRIPT({
     sleep 100;
 });
 
-Script N(npcAI_8024119C) = SCRIPT({
+EvtSource N(npcAI_8024119C) = SCRIPT({
     N(func_80240158_CA73F8)();
 });
 
-Script N(defeat_802411B8) = SCRIPT({
+EvtSource N(defeat_802411B8) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -244,7 +244,7 @@ Script N(defeat_802411B8) = SCRIPT({
     }
 });
 
-Script N(8024122C) = SCRIPT({
+EvtSource N(8024122C) = SCRIPT({
     GetPlayerPos(SI_VAR(3), SI_VAR(1), SI_VAR(2));
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += SI_VAR(3);
@@ -252,7 +252,7 @@ Script N(8024122C) = SCRIPT({
     SetCamProperties(0, SI_VAR(4), SI_VAR(0), SI_VAR(1), SI_VAR(2), 300, 20.0, -9.5);
 });
 
-Script N(interact_802412BC) = SCRIPT({
+EvtSource N(interact_802412BC) = SCRIPT({
     await N(802407C0);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
@@ -395,7 +395,7 @@ Script N(interact_802412BC) = SCRIPT({
     await N(80240814);
 });
 
-Script N(init_80241DA4) = SCRIPT({
+EvtSource N(init_80241DA4) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_802412BC));
     if (SI_SAVE_FLAG(1411) == 0) {
         SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_6));
@@ -404,7 +404,7 @@ Script N(init_80241DA4) = SCRIPT({
     }
 });
 
-Script N(init_80241E10) = SCRIPT({
+EvtSource N(init_80241E10) = SCRIPT({
     BindNpcDefeat(NPC_SELF, N(defeat_802411B8));
     EnableNpcShadow(NPC_DAYZEE, FALSE);
     match SI_STORY_PROGRESS {
@@ -421,7 +421,7 @@ Script N(init_80241E10) = SCRIPT({
     }
 });
 
-Script N(80241EF4) = SCRIPT({
+EvtSource N(80241EF4) = SCRIPT({
     SI_MAP_VAR(14) = 0;
     SI_MAP_VAR(10) = 0;
     SI_MAP_VAR(11) = 0;
@@ -430,7 +430,7 @@ Script N(80241EF4) = SCRIPT({
     SI_MAP_VAR(15) = 100;
 });
 
-Script N(defeat_80241F64) = SCRIPT({
+EvtSource N(defeat_80241F64) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -472,7 +472,7 @@ Script N(defeat_80241F64) = SCRIPT({
     }
 });
 
-Script N(hit_80242138) = SCRIPT({
+EvtSource N(hit_80242138) = SCRIPT({
     if (SI_STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         GetOwnerEncounterTrigger(SI_VAR(0));
         if (SI_VAR(0) != 1) {
@@ -481,7 +481,7 @@ Script N(hit_80242138) = SCRIPT({
     }
 });
 
-Script N(idle_8024219C) = SCRIPT({
+EvtSource N(idle_8024219C) = SCRIPT({
     loop {
         if (SI_MAP_VAR(10) == 0) {
             if (SI_AREA_FLAG(23) == 1) {
@@ -557,7 +557,7 @@ Script N(idle_8024219C) = SCRIPT({
     }
 });
 
-Script N(idle_80242618) = SCRIPT({
+EvtSource N(idle_80242618) = SCRIPT({
     loop {
         if (SI_MAP_VAR(11) == 0) {
             if (SI_AREA_FLAG(24) == 1) {
@@ -633,7 +633,7 @@ Script N(idle_80242618) = SCRIPT({
     }
 });
 
-Script N(idle_80242A94) = SCRIPT({
+EvtSource N(idle_80242A94) = SCRIPT({
     loop {
         if (SI_MAP_VAR(12) == 0) {
             if (SI_AREA_FLAG(25) == 1) {
@@ -709,7 +709,7 @@ Script N(idle_80242A94) = SCRIPT({
     }
 });
 
-Script N(idle_80242F10) = SCRIPT({
+EvtSource N(idle_80242F10) = SCRIPT({
     loop {
         if (SI_MAP_VAR(13) == 0) {
             if (SI_AREA_FLAG(26) == 1) {
@@ -785,7 +785,7 @@ Script N(idle_80242F10) = SCRIPT({
     }
 });
 
-Script N(init_8024338C) = SCRIPT({
+EvtSource N(init_8024338C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE0, FALSE);
@@ -808,7 +808,7 @@ Script N(init_8024338C) = SCRIPT({
     }
 });
 
-Script N(init_802434CC) = SCRIPT({
+EvtSource N(init_802434CC) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE1, FALSE);
@@ -831,7 +831,7 @@ Script N(init_802434CC) = SCRIPT({
     }
 });
 
-Script N(init_8024360C) = SCRIPT({
+EvtSource N(init_8024360C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE2, FALSE);
@@ -854,7 +854,7 @@ Script N(init_8024360C) = SCRIPT({
     }
 });
 
-Script N(init_8024374C) = SCRIPT({
+EvtSource N(init_8024374C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE3, FALSE);
@@ -1068,7 +1068,7 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240040_CA72E0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80240F08_CA81A8) == NULL) {
@@ -1088,7 +1088,7 @@ ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-ApiStatus N(func_80240158_CA73F8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1179,7 +1179,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80244E44) = { -208.0f, 0.0f, -182.0f, 0.0f };
 
-Script N(80244E54) = SCRIPT({
+EvtSource N(80244E54) = SCRIPT({
     SI_AREA_FLAG(27) = 0;
     SI_AREA_FLAG(28) = 0;
     SI_VAR(0) = N(tree1);
@@ -1191,11 +1191,11 @@ static s32 N(pad_4ECC) = {
     0x00000000,
 };
 
-Script N(80244ED0) = SCRIPT({
+EvtSource N(80244ED0) = SCRIPT({
 
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAB04, -175, 0, 150, 0, ITEM_MAP, MAKE_ENTITY_END);
     AssignPanelFlag(SI_SAVE_FLAG(1404));
 });

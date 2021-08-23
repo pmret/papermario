@@ -12,24 +12,24 @@ extern s32 D_8023CDA4;
 extern s32 D_8023BB98_6ECC78;
 extern MessageID bActorTattles[ACTOR_TYPE_COUNT];
 
-extern Script N(init);
-extern Script N(80239784);
-extern Script N(802397E0);
-extern Script N(8023993C);
-extern Script N(8023994C);
-extern Script N(80239988);
-extern Script N(8023A754);
-extern Script N(8023ADC4);
-extern Script N(8023B45C);
-extern Script N(8023BB9C);
-extern Script N(8023C5B8);
-extern Script N(8023C90C);
-extern Script N(handleEvent_80239360);
-extern Script N(idle_80239350);
-extern Script N(nextTurn_80239A3C);
-extern Script N(takeTurn_802396D8);
+extern EvtSource N(init);
+extern EvtSource N(80239784);
+extern EvtSource N(802397E0);
+extern EvtSource N(8023993C);
+extern EvtSource N(8023994C);
+extern EvtSource N(80239988);
+extern EvtSource N(8023A754);
+extern EvtSource N(8023ADC4);
+extern EvtSource N(8023B45C);
+extern EvtSource N(8023BB9C);
+extern EvtSource N(8023C5B8);
+extern EvtSource N(8023C90C);
+extern EvtSource N(handleEvent_80239360);
+extern EvtSource N(idle_80239350);
+extern EvtSource N(nextTurn_80239A3C);
+extern EvtSource N(takeTurn_802396D8);
 
-ApiStatus N(func_80238000_6F10E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80238000_6F10E0)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 posX = partnerActor->currentPos.x;
@@ -57,7 +57,7 @@ ApiStatus N(func_80238000_6F10E0)(ScriptInstance* script, s32 isInitialCall) {
 }
 
 #ifdef NON_MATCHING
-ApiStatus func_802380E4_6F11C4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802380E4_6F11C4(Evt* script, s32 isInitialCall) {
     Actor* targetActor = get_actor(get_actor(script->owner1.actorID)->targetActorID);
 
     script->varTable[0] = 99;
@@ -74,7 +74,7 @@ INCLUDE_ASM(s32, "battle/partner/goombario", func_802380E4_6F11C4);
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_8023817C_6F125C);
 
-ApiStatus N(func_80238A20_6F1B00)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80238A20_6F1B00)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = gBattleStatus.partnerActor;
     Vec3f* pos = &partnerActor->walk.currentPos;
@@ -118,7 +118,7 @@ ApiStatus N(func_80238A20_6F1B00)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238B60_6F1C40(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
@@ -138,13 +138,13 @@ ApiStatus func_80238B60_6F1C40(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238BCC_6F1CAC);
 
-ApiStatus func_80238E04_6F1EE4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238E04_6F1EE4(Evt* script, s32 isInitialCall) {
     D_8023CDA0 = playFX_6C(0, 206, 144, 0, 1.0f, 0);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238E48_6F1F28(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238E48_6F1F28(Evt* script, s32 isInitialCall) {
     EffectInstance* effect = D_8023CDA0;
 
     effect->data->pos.y = 144.0f;
@@ -153,7 +153,7 @@ ApiStatus func_80238E48_6F1F28(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238E74_6F1F54(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
 
@@ -182,7 +182,7 @@ ApiStatus func_80238E74_6F1F54(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/goombario", func_80238EDC_6F1FBC);
 
-ApiStatus N(StopGlowing)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(StopGlowing)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->partnerActor->isGlowing = FALSE;
@@ -191,7 +191,7 @@ ApiStatus N(StopGlowing)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(StopGlowingAndGet)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(StopGlowingAndGet)(Evt* script, s32 isInitialCall) {
     Actor* partnerActor = gBattleStatus.partnerActor;
 
     if (!(gBattleStatus.flags1 & 0x40000000)) {
@@ -205,7 +205,7 @@ ApiStatus N(StopGlowingAndGet)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(IsGlowing)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(IsGlowing)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     script->varTable[0] = battleStatus->partnerActor->isGlowing;
@@ -213,7 +213,7 @@ ApiStatus N(IsGlowing)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802390C8_6F21A8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802390C8_6F21A8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -225,7 +225,7 @@ ApiStatus func_802390C8_6F21A8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80239190_6F2270)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80239190_6F2270)(Evt* script, s32 isInitialCall) {
     if (D_8023CDA4 == 0) {
         script->varTable[0] = 36;
     } else {
@@ -290,7 +290,7 @@ ActorPartDesc N(partsTable_802392A4)[] = {
     },
 };
 
-Script N(init_802392F0);
+EvtSource N(init_802392F0);
 
 ActorDesc N(goombario) = {
     .flags = 0,
@@ -315,18 +315,18 @@ ActorDesc N(goombario) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-Script N(init_802392F0) = SCRIPT({
+EvtSource N(init_802392F0) = SCRIPT({
     BindTakeTurn(ACTOR_PARTNER, N(takeTurn_802396D8));
     BindIdle(ACTOR_PARTNER, N(idle_80239350));
     BindHandleEvent(ACTOR_PARTNER, N(handleEvent_80239360));
     BindNextTurn(256, N(nextTurn_80239A3C));
 });
 
-Script N(idle_80239350) = SCRIPT({
+EvtSource N(idle_80239350) = SCRIPT({
 
 });
 
-Script N(handleEvent_80239360) = SCRIPT({
+EvtSource N(handleEvent_80239360) = SCRIPT({
     UseIdleAnimation(ACTOR_PARTNER, FALSE);
     CloseActionCommandInfo();
     GetLastEvent(ACTOR_PARTNER, SI_VAR(0));
@@ -396,7 +396,7 @@ Script N(handleEvent_80239360) = SCRIPT({
     UseIdleAnimation(ACTOR_PARTNER, TRUE);
 });
 
-Script N(takeTurn_802396D8) = SCRIPT({
+EvtSource N(takeTurn_802396D8) = SCRIPT({
     GetBattlePhase(SI_VAR(0));
     match SI_VAR(0) {
         == 1 {
@@ -417,7 +417,7 @@ Script N(takeTurn_802396D8) = SCRIPT({
     }
 });
 
-Script N(80239784) = SCRIPT({
+EvtSource N(80239784) = SCRIPT({
     SI_VAR(0) = (const) 1;
     SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, celebrate);
     SI_VAR(2) = (const) NPC_ANIM(battle_goombario, default, celebrate_still);
@@ -425,7 +425,7 @@ Script N(80239784) = SCRIPT({
     await 0x80294720;
 });
 
-Script N(802397E0) = SCRIPT({
+EvtSource N(802397E0) = SCRIPT({
     GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_802694A4(1);
     SetBattleFlagBits(16384, 0);
@@ -463,17 +463,17 @@ Script N(802397E0) = SCRIPT({
     }
 });
 
-Script N(8023993C) = SCRIPT({
+EvtSource N(8023993C) = SCRIPT({
 
 });
 
-Script N(8023994C) = SCRIPT({
+EvtSource N(8023994C) = SCRIPT({
     SI_VAR(0) = (const) 1;
     SI_VAR(1) = (const) NPC_ANIM(battle_goombario, default, run);
     await 0x80294AFC;
 });
 
-Script N(80239988) = SCRIPT({
+EvtSource N(80239988) = SCRIPT({
     UseIdleAnimation(ACTOR_PARTNER, FALSE);
     SetGoalToHome(ACTOR_PARTNER);
     SetActorSpeed(ACTOR_PARTNER, 6.0);
@@ -484,7 +484,7 @@ Script N(80239988) = SCRIPT({
     UseIdleAnimation(ACTOR_PARTNER, 1);
 });
 
-Script N(nextTurn_80239A3C) = SCRIPT({
+EvtSource N(nextTurn_80239A3C) = SCRIPT({
     GetBattlePhase(SI_VAR(0));
     match SI_VAR(0) {
         == 10 {
@@ -526,7 +526,7 @@ Script N(nextTurn_80239A3C) = SCRIPT({
     }
 });
 
-Script N(80239CA8) = SCRIPT({
+EvtSource N(80239CA8) = SCRIPT({
     func_80280818();
     UseBattleCamPreset(51);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
@@ -575,7 +575,7 @@ Script N(80239CA8) = SCRIPT({
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
 });
 
-Script N(8023A06C) = SCRIPT({
+EvtSource N(8023A06C) = SCRIPT({
     func_80280818();
     UseBattleCamPreset(3);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
@@ -639,7 +639,7 @@ Script N(8023A06C) = SCRIPT({
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
 });
 
-Script N(8023A52C) = SCRIPT({
+EvtSource N(8023A52C) = SCRIPT({
     SetGoalToFirstTarget(-127);
     GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 40;
@@ -658,7 +658,7 @@ Script N(8023A52C) = SCRIPT({
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
 });
 
-Script N(8023A66C) = SCRIPT({
+EvtSource N(8023A66C) = SCRIPT({
     SetGoalToTarget(ACTOR_PARTNER);
     GetGoalPos(ACTOR_PARTNER, SI_VAR(11), SI_VAR(7), SI_VAR(13));
     GetActorPos(ACTOR_PARTNER, SI_VAR(7), SI_VAR(13), SI_VAR(14));
@@ -674,7 +674,7 @@ Script N(8023A66C) = SCRIPT({
     SI_VAR(10) = SI_VAR(11);
 });
 
-Script N(8023A754) = SCRIPT({
+EvtSource N(8023A754) = SCRIPT({
     LoadActionCommand(1);
     func_802A9000_430020();
     await N(8023A52C);
@@ -776,7 +776,7 @@ Script N(8023A754) = SCRIPT({
     await N(8023A06C);
 });
 
-Script N(8023ADC4) = SCRIPT({
+EvtSource N(8023ADC4) = SCRIPT({
     LoadActionCommand(1);
     func_802A9000_430020();
     await N(8023A52C);
@@ -880,7 +880,7 @@ Script N(8023ADC4) = SCRIPT({
     await N(8023A06C);
 });
 
-Script N(8023B45C) = SCRIPT({
+EvtSource N(8023B45C) = SCRIPT({
     LoadActionCommand(1);
     func_802A9000_430020();
     await N(8023A52C);
@@ -999,7 +999,7 @@ s32 N(D_8023BB78_6ECC58)[] = {
 
 s32 D_8023BB98_6ECC78 = 0x000000C8;
 
-Script N(8023BB9C) = SCRIPT({
+EvtSource N(8023BB9C) = SCRIPT({
     LoadActionCommand(1);
     func_802A9000_430020();
     await N(8023A52C);
@@ -1173,7 +1173,7 @@ Script N(8023BB9C) = SCRIPT({
     goto 10;
 });
 
-Script N(8023C5B8) = SCRIPT({
+EvtSource N(8023C5B8) = SCRIPT({
     GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 30;
     SetActorSpeed(ACTOR_PARTNER, 6.0);
@@ -1218,7 +1218,7 @@ Script N(8023C5B8) = SCRIPT({
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, idle));
 });
 
-Script N(8023C90C) = SCRIPT({
+EvtSource N(8023C90C) = SCRIPT({
     UseBattleCamPreset(55);
     sleep 10;
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM(battle_goombario, default, charge));

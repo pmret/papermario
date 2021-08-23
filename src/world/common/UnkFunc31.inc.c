@@ -3,7 +3,7 @@
 
 s32 N(UnkFunc28)(Npc* npc);
 
-ApiStatus N(UnkFunc31)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc31)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(script->owner2.npcID);
 
     npc->onRender = N(UnkFunc28);
@@ -13,7 +13,7 @@ ApiStatus N(UnkFunc31)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-ApiStatus N(GetNpcUnsafeOwner2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GetNpcUnsafeOwner2)(Evt* script, s32 isInitialCall) {
     get_npc_unsafe(script->owner2.npcID);
     return ApiStatus_BLOCK;
 }
@@ -26,7 +26,7 @@ s32 N(UnkFunc28)(Npc* npc) {
     }
 }
 
-ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkAlphaFunc)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         s32 i;
 
@@ -62,7 +62,7 @@ ApiStatus N(UnkAlphaFunc)(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] == 255) * ApiStatus_DONE2;
 }
 
-ApiStatus N(UnkFunc29)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkFunc29)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (isInitialCall) {

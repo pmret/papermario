@@ -24,7 +24,7 @@
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243104_7EDE14);
 /*
-ApiStatus N(func_80243104_7EDE14)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243104_7EDE14)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -113,7 +113,7 @@ static char* N(exit_str_0) = "mac_01";
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243400_7EE110);
 /*
-ApiStatus N(func_80243400_7EE110)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243400_7EE110)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_8024ECE8_7F99F8) == NULL) {
@@ -146,7 +146,7 @@ ApiStatus N(func_80243400_7EE110)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243744_7EE454);
 /*
-ApiStatus N(func_80243744_7EE454)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243744_7EE454)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -165,7 +165,7 @@ ApiStatus N(func_80243744_7EE454)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243798_7EE4A8);
 /*
-ApiStatus N(func_80243798_7EE4A8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80243798_7EE4A8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_8024ED50_7F9A60) = get_variable(script, *args);
@@ -176,7 +176,7 @@ ApiStatus N(func_80243798_7EE4A8)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_802437D0_7EE4E0);
 /*
-ApiStatus N(func_802437D0_7EE4E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802437D0_7EE4E0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -206,7 +206,7 @@ ApiStatus N(func_802437D0_7EE4E0)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243AE8_7EE7F8);
 /*
-ApiStatus N(func_80243AE8_7EE7F8)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80243AE8_7EE7F8)(Evt *script, s32 isInitialCall) {
     Npc *npc = get_npc_unsafe(script->varTable[2]);
 
     D_8024E1B4 = npc->currentAnim;
@@ -217,7 +217,7 @@ ApiStatus N(func_80243AE8_7EE7F8)(ScriptInstance *script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7ED280", func_80243B2C_7EE83C);
 /*
-ApiStatus N(func_80243B2C_7EE83C)(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus N(func_80243B2C_7EE83C)(Evt *script, s32 isInitialCall) {
     get_npc_unsafe(script->varTable[2])->currentAnim = D_8024E1B4;
     return ApiStatus_DONE2;
 }

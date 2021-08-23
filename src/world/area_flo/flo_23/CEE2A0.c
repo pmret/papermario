@@ -27,7 +27,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_23_tattle },
 };
 
-Script N(80240D30) = SCRIPT({
+EvtSource N(80240D30) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -37,7 +37,7 @@ Script N(80240D30) = SCRIPT({
     }
 });
 
-Script N(80240DA0) = SCRIPT({
+EvtSource N(80240DA0) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -76,16 +76,16 @@ Script N(80240DA0) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
+EvtSource N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
 
-Script N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
+EvtSource N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
 
-Script N(80241104) = SCRIPT({
+EvtSource N(80241104) = SCRIPT({
     bind N(exitWalk_802410A8) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_8024104C) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -128,7 +128,7 @@ s32 N(D_80241310_CEF570) = {
     0x00000000,
 };
 
-Script N(80241314) = SCRIPT({
+EvtSource N(80241314) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -151,7 +151,7 @@ Script N(80241314) = SCRIPT({
     unbind;
 });
 
-Script N(80241448) = SCRIPT({
+EvtSource N(80241448) = SCRIPT({
     N(func_802402F8_CEE558)(SI_VAR(0));
     bind_padlock N(80241314) 0x10 0 0x802426E0; // TODO: fix raw ptr
     N(func_8024026C_CEE4CC)(SI_VAR(0));
@@ -170,7 +170,7 @@ NpcAISettings N(npcAISettings_80241498) = {
     .unk_2C = 3,
 };
 
-Script N(npcAI_802414C8) = SCRIPT({
+EvtSource N(npcAI_802414C8) = SCRIPT({
     SetSelfVar(2, 3);
     SetSelfVar(3, 18);
     SetSelfVar(5, 3);
@@ -187,7 +187,7 @@ NpcSettings N(npcSettings_80241538) = {
     .level = 19,
 };
 
-Script N(interact_80241564) = SCRIPT({
+EvtSource N(interact_80241564) = SCRIPT({
     DisablePlayerInput(TRUE);
     if (SI_SAVE_FLAG(1365) == 0) {
         GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -327,7 +327,7 @@ Script N(interact_80241564) = SCRIPT({
     unbind;
 });
 
-Script N(init_80241E70) = SCRIPT({
+EvtSource N(init_80241E70) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241564));
     if (SI_SAVE_FLAG(1365) == 1) {
         SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_5));
@@ -445,7 +445,7 @@ static s32 N(pad_2598)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA0C4, 100, 60, 5, 0, MAKE_ENTITY_END);
     MakeEntity(0x802EA588, 100, 145, 0, 0, ITEM_SHOOTING_STAR, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1409));
@@ -458,7 +458,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_8024026C_CEE4CC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024026C_CEE4CC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -474,7 +474,7 @@ ApiStatus N(func_8024026C_CEE4CC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802402C0_CEE520)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80241310_CEF570) = get_variable(script, *args);
@@ -482,7 +482,7 @@ ApiStatus N(func_802402C0_CEE520)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802402F8_CEE558)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -509,7 +509,7 @@ ApiStatus N(func_802402F8_CEE558)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240728_CEE988)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -645,7 +645,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240B68_CEEDC8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B68_CEEDC8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -660,7 +660,7 @@ ApiStatus N(func_80240B68_CEEDC8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C2C_CEEE8C)(Evt* script, s32 isInitialCall) {
     s32 itemId = get_variable(script, *script->ptrReadPos);
     StaticItem* item = &gItemTable[itemId];
 
@@ -675,7 +675,7 @@ ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240C9C_CEEEFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C9C_CEEEFC)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i <= 90; i++) {

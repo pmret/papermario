@@ -2,7 +2,7 @@
 
 static HudElement* D_802A1CA0;
 
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -41,7 +41,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -55,7 +55,7 @@ ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
-ApiStatus N(func_802A12D4_72BBE4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A12D4_72BBE4)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
     }
@@ -71,7 +71,7 @@ ApiStatus N(func_802A12D4_72BBE4)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-Script N(UseItemWithEffect) = SCRIPT({
+EvtSource N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseBattleCamPreset(69);
         sleep 10;
@@ -118,7 +118,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     }
 });
 
-Script N(UseItem) = SCRIPT({
+EvtSource N(UseItem) = SCRIPT({
     UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
@@ -141,7 +141,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+EvtSource N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 0);
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
@@ -152,7 +152,7 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
-Script N(EatItem) = SCRIPT({
+EvtSource N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -163,7 +163,7 @@ Script N(EatItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(DrinkItem) = SCRIPT({
+EvtSource N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -174,7 +174,7 @@ Script N(DrinkItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_FRIGHT_JAR;
     await N(UseItemWithEffect);
     N(FadeBackgroundToBlack)();

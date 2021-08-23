@@ -4,7 +4,7 @@ static char* N(exit_str_0) = "omo_13";
 
 INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240260_D9B150);
 /*
-void N(func_80240260_D9B150)(ScriptInstance *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
+void N(func_80240260_D9B150)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -116,7 +116,7 @@ void N(func_80240260_D9B150)(ScriptInstance *script, NpcAISettings *npcAISetting
 
 INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_80240844_D9B734);
 /*
-void N(func_80240844_D9B734)(ScriptInstance *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
+void N(func_80240844_D9B734)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -147,7 +147,7 @@ void N(func_80240844_D9B734)(ScriptInstance *script, NpcAISettings *npcAISetting
 
 INCLUDE_ASM(s32, "world/area_omo/omo_01/D9B150", func_802409A8_D9B898);
 /*
-void N(func_802409A8_D9B898)(ScriptInstance *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
+void N(func_802409A8_D9B898)(Evt *script, NpcAISettings *npcAISettings, EnemyTerritoryThing *territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
 

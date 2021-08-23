@@ -1,7 +1,7 @@
 #include "dgb_18.h"
 
 // TODO: StashVars.inc.c
-ApiStatus N(func_80240FB0_C56EF0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240FB0_C56EF0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802436E0_C59620) == NULL) {

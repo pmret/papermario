@@ -14,7 +14,7 @@ INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D2A10", func_80241A68_8D2F78);
 
 INCLUDE_ASM(s32, "world/area_kmr/kmr_06/8D2A10", func_80241C78_8D3188);
 
-ApiStatus func_80241CC8_8D31D8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80241CC8_8D31D8(Evt* script, s32 isInitialCall) {
     // todo use correct types
     s32* mapVar10 = get_variable(script, SI_MAP_VAR(10));
     s32 mapVar11 = get_variable(script, SI_MAP_VAR(11));

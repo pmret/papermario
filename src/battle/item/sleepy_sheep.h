@@ -7,18 +7,18 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_sleepy_sheep
 
-ApiStatus func_80273444(ScriptInstance* script, s32 isInitialCall);
-ApiStatus SetVirtualEntityMoveSpeed(ScriptInstance* script, s32 isInitialCall);
-ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall);
-ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80273444(Evt* script, s32 isInitialCall);
+ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall);
+ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall);
+ApiStatus func_80252B3C(Evt* script, s32 isInitialCall);
 
-ApiStatus N(func_802A123C_71E88C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A1740_71ED90)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A1848_71EE98)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_71E88C)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A1740_71ED90)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A1848_71EE98)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif
- 
- 
+
+

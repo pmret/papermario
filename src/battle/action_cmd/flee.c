@@ -13,7 +13,7 @@ extern s32 D_80108B80;
 extern s32 D_802A9920;
 extern s32 D_802A9920;
 
-ApiStatus func_802A9000_422AD0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A9000_422AD0(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
@@ -76,7 +76,7 @@ ApiStatus func_802A9000_422AD0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A92A0_422D70(ScriptInstance* script) {
+ApiStatus func_802A92A0_422D70(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -100,7 +100,7 @@ void func_802A9378_422E48(void) {
     HudElement* hudElement;
     BattleStatus* battleStatus = &gBattleStatus;
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
-    
+
     switch (actionCommandStatus->state) {
         case 0:
             hudElement = actionCommandStatus->hudElements[0];
@@ -108,25 +108,25 @@ void func_802A9378_422E48(void) {
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-    
+
             hudElement = actionCommandStatus->hudElements[1];
             set_hud_element_alpha(hudElement, 0xFF);
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-    
+
             hudElement = actionCommandStatus->hudElements[2];
             set_hud_element_alpha(hudElement, 0xFF);
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-    
+
             hudElement = actionCommandStatus->hudElements[3];
             set_hud_element_alpha(hudElement, 0xFF);
             if (actionCommandStatus->unk_61 != 0) {
                 clear_hud_element_flags(hudElement, 2);
             }
-    
+
             actionCommandStatus->state = 1;
             break;
         case 1:
@@ -143,7 +143,7 @@ void func_802A9378_422E48(void) {
                 break;
             }
 
-            set_hud_element_script(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
             D_802A9920 = 1;
             actionCommandStatus->state = 11;
             actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
@@ -158,7 +158,7 @@ void func_802A9378_422E48(void) {
                 set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX + 50, actionCommandStatus->hudElementY + 28);
                 clear_hud_element_flags(hudElement, 2);
             }
-    
+
             battleStatus->actionSuccess = actionCommandStatus->unk_44 / 100;
             if (actionCommandStatus->unk_54 == 0) {
                 if (battleStatus->actionSuccess >= (100 - actionCommandStatus->unk_46)) {
@@ -182,7 +182,7 @@ void func_802A9378_422E48(void) {
             func_80268C9C();
             break;
     }
-    
+
     switch (actionCommandStatus->state) {
         case 1:
         case 10:

@@ -111,11 +111,53 @@ typedef struct SoundSFXEntry {
     /* 0x9 */ char unk_9[0x1];
 } SoundSFXEntry; // size = 0xA
 
+typedef struct Instrument {
+    /* 0x00 */ s32 wavOffset;
+    /* 0x04 */ s32 wavLength;
+    /* 0x08 */ s32 loopPredictorOffset;
+    /* 0x0C */ s32 loopStart;
+    /* 0x10 */ s32 loopEnd;
+    /* 0x14 */ s32 loopCount;
+    /* 0x18 */ s32 predictorOffset;
+    /* 0x1C */ s16 unk_1C;
+    /* 0x1E */ s16 unk_1E;
+    /* 0x20 */ f32 sampleRate;
+    /* 0x24 */ s8 skipLoopPredictor;
+    /* 0x25 */ s8 unk_25;
+    /* 0x26 */ s8 unk_26;
+    /* 0x27 */ s8 unk_27;
+    /* 0x28 */ s8 unk_28;
+    /* 0x29 */ s8 unk_29;
+    /* 0x2A */ s8 unk_2A;
+    /* 0x2B */ s8 unk_2B;
+    /* 0x2C */ s32 unkOffset;
+} Instrument; // size = 0x30;
+
+typedef Instrument* InstrumentGroup[16];
+
+typedef struct SoundLerp {
+    /* 0x0 */ s32 current;
+    /* 0x4 */ s32 step;
+    /* 0x8 */ s16 goal;
+    /* 0xA */ s16 time;
+} SoundLerp; // size = 0xC
+
 typedef struct SoundPlayer {
-    /* 0x00 */ s32 counter;
-    /* 0x04 */ char unk_04[0x58];
-    /* 0x5C */ u16 unk_5C;
-    /* 0x5E */ char unk_5E[0x1A];
+    /* 0x00 */ s8* sefDataReadPos;
+    /* 0x04 */ char unk_04[0x14];
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ Instrument* sfxInstrumentRef;
+    /* 0x20 */ Instrument sfxInstrument;
+    /* 0x50 */ s32 sefReadStart;
+    /* 0x54 */ s8 changedTune;
+    /* 0x55 */ u8 changedVolume;
+    /* 0x56 */ u8 changedPan;
+    /* 0x57 */ u8 changedReverb;
+    /* 0x58 */ f32 actualSampleRate;
+    /* 0x5C */ u16 sfxVolume;
+    /* 0x5E */ s16 unk_5E;
+    /* 0x60 */ SoundLerp tuneLerp;
+    /* 0x6C */ SoundLerp volumeLerp;
     /* 0x78 */ u8 locatorB;
     /* 0x79 */ u8 locatorC;
     /* 0x7A */ u8 locatorD;
@@ -124,20 +166,35 @@ typedef struct SoundPlayer {
     /* 0x7D */ u8 unk_7D;
     /* 0x7E */ u8 unk_7E;
     /* 0x7F */ u8 unk_7F;
-    /* 0x80 */ char unk_80[0xE];
+    /* 0x80 */ s32 unk_80;
+    /* 0x84 */ s8 unk_84;
+    /* 0x85 */ s8 soundC00;
+    /* 0x86 */ char unk_86[0x2];
+    /* 0x88 */ s8* loopStartPos;
+    /* 0x8C */ s8 loopIterCount;
+    /* 0x8D */ char unk_8D;
     /* 0x8E */ u16 unk_8E;
     /* 0x90 */ u16 unk_90;
     /* 0x92 */ u16 unk_92;
     /* 0x94 */ u8 unk_94;
-    /* 0x95 */ char unk_05[0x4];
+    /* 0x95 */ char unk_05;
+    /* 0x96 */ s16 currentSoundID;
+    /* 0x98 */ char unk_98[0x1];
     /* 0x99 */ u8 unk_99;
-    /* 0x9A */ char unk_9A[0x1];
-    /* 0x9B */ u8 unk_9B;
-    /* 0x9C */ u8 unk_9C;
-    /* 0x9D */ u8 unk_9D;
+    /* 0x9A */ s8 sfxParamsFlags;
+    /* 0x9B */ u8 sfxPan;
+    /* 0x9C */ u8 reverb;
+    /* 0x9D */ u8 instrumentIndex; // ?
     /* 0x9E */ u8 unk_9E;
     /* 0x9F */ u8 unk_9F;
-    /* 0xA0 */ char unk_A0[0xC];
+    /* 0xA0 */ char unk_A0[0x1];
+    /* 0xA1 */ s8 unk_A1;
+    /* 0xA2 */ s8 unk_A2;
+    /* 0xA3 */ s8 unk_A3;
+    /* 0xA4 */ s16 masterPitchShift;
+    /* 0xA6 */ s16 masterVolume;
+    /* 0xA8 */ s8 masterPan;
+    /* 0xA9 */ char unk_A9[0x3];
 } SoundPlayer; // size = 0xAC
 
 typedef struct SoundSefHeader {
@@ -171,7 +228,7 @@ typedef struct SoundManager {
     /* 0x0BC */ u8 unk_BC;
     /* 0x0BD */ u8 sfxPlayerSelector;
     /* 0x0BE */ u8 unk_BE;
-    /* 0x0BF */ char unk_BF[0x1];
+    /* 0x0BF */ u8 unk_BF;
     /* 0x0C0 */ s8 unk_C0;
     /* 0x0C1 */ char unk_C1[0x1];
     /* 0x0C2 */ SoundSFXEntry unk_C2[16];
@@ -195,30 +252,6 @@ typedef struct UnkAlC {
     /* 0x9 */ s8 unk_09;
     /* 0xA */ s8 unk_0A;
 } UnkAlC;
-
-typedef struct Instrument {
-    /* 0x00 */ s32 wavOffset;
-    /* 0x04 */ s32 wavLength;
-    /* 0x08 */ s32 loopPredictorOffset;
-    /* 0x0C */ s32 loopStart;
-    /* 0x10 */ s32 loopEnd;
-    /* 0x14 */ s32 loopCount;
-    /* 0x18 */ s32 predictorOffset;
-    /* 0x1C */ s16 unk_1C;
-    /* 0x1E */ s16 unk_1E;
-    /* 0x20 */ f32 sampleRate;
-    /* 0x24 */ s8 skipLoopPredictor;
-    /* 0x25 */ s8 unk_25;
-    /* 0x26 */ s8 unk_26;
-    /* 0x27 */ s8 unk_27;
-    /* 0x28 */ s8 unk_28;
-    /* 0x29 */ s8 unk_29;
-    /* 0x2A */ s8 unk_2A;
-    /* 0x2B */ s8 unk_2B;
-    /* 0x2C */ s32 unkOffset;
-} Instrument;
-
-typedef Instrument* InstrumentGroup[16];
 
 typedef struct UnkAl48 { // Track?
     /* 0x00 */ s32 unk_00; // pointer to something

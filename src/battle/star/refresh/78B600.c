@@ -6,7 +6,7 @@
 
 INCLUDE_ASM(s32, "battle/star/refresh/78B600", func_802A1518_78BB18);
 
-ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A17D4_78BDD4(Evt* script, s32 isInitialCall) {
     Actor* actor = gBattleStatus.playerActor;
 
     if (actor->debuff != STATUS_END) {
@@ -29,7 +29,7 @@ ApiStatus func_802A17D4_78BDD4(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/AddFP.inc.c"
 
-ApiStatus func_802A18E8_78BEE8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A18E8_78BEE8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -41,7 +41,7 @@ ApiStatus func_802A18E8_78BEE8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A19A8_78BFA8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A19A8_78BFA8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

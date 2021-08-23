@@ -3,11 +3,11 @@
 
 #define NAMESPACE b_area_kmr_part_1_kmr_02
 
-Script N(beforeBattle_8021FDA0) = SCRIPT({
+EvtSource N(beforeBattle_8021FDA0) = SCRIPT({
     SetSpriteShading(-1);
 });
 
-Script N(afterBattle_8021FDC0) = SCRIPT({
+EvtSource N(afterBattle_8021FDC0) = SCRIPT({
 });
 
 Stage NAMESPACE = {

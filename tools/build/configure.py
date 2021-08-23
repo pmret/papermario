@@ -2,6 +2,7 @@
 
 from typing import List, Dict, Set, Union
 from pathlib import Path
+import subprocess
 import sys
 import ninja_syntax
 from glob import glob
@@ -9,15 +10,11 @@ from glob import glob
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
-
-CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D _LANGUAGE_C -D _FINALROM -D VERSION=$version " \
-            "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -MD -MF $out.d"
-
-ASFLAGS = "-EB -G 0"
+DO_FIRST_OK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-BUILD_TOOLS = ROOT / "tools" / "build" # directory where this file is (TODO: use relative_to)
+BUILD_TOOLS = (ROOT / "tools" / "build").relative_to(ROOT)
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
@@ -32,40 +29,40 @@ def rm_recursive(path: Path):
             path.unlink()
 
 def exec_shell(command: List[str]) -> str:
-    import subprocess
-
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
 
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra_cflags: str):
     # platform-specific
     if sys.platform  == "darwin":
-        os_dir = "mac"
         iconv = "tools/iconv.py UTF-8 SHIFT-JIS"
     elif sys.platform == "linux":
-        from os import uname
-
-        if uname()[4] == "aarch64":
-            os_dir = "arm"
-        else:
-            os_dir = "linux"
-
         iconv = "iconv --from UTF-8 --to SHIFT-JIS"
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
+    ccache = ""
+
+    try:
+        subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except FileNotFoundError:
+        ccache = ""
+
     cross = "mips-linux-gnu-"
+    cc = f"{ccache}{BUILD_TOOLS}/cc/gcc/gcc"
+    cxx = f"{ccache}{BUILD_TOOLS}/cc/gcc/g++"
+    compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
-    cc1 = f"{BUILD_TOOLS}/{os_dir}/cc1"
-    nu64as = f"{BUILD_TOOLS}/{os_dir}/mips-nintendo-nu64-as"
+    CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
+                "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = "-O2 -quiet -fno-common -G0 -mcpu=vr4300 -mfix4300 -mips3 -mgp32 -mfp32 -Wuninitialized -Wshadow -Wmissing-braces " + extra_cflags
+    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
     ninja.rule("ld",
         description="link($version) $out",
-        command=f"{cross}ld -T ver/$version/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt  -T ver/$version/dead_syms.txt -T ver/$version/main_bss_syms.txt -Map $mapfile --no-check-sections -T $in -o $out",
+        command=f"{cross}ld -T ver/$version/build/undefined_syms.txt -T ver/$version/undefined_syms_auto.txt -T ver/$version/undefined_funcs_auto.txt -Map $mapfile --no-check-sections -T $in -o $out",
     )
 
     ninja.rule("z64",
@@ -75,19 +72,31 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("sha1sum",
         description="check $in",
-        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
+        command="sha1sum -c $in && touch $out" + ("&& bash tools/build/first_ok.sh" if DO_FIRST_OK else "") if DO_SHA1_CHECK else "touch $out",
+    )
+
+    ninja.rule("cpp",
+        description="cpp $in",
+        command=f"{cpp} $in {cppflags} -P -o $out"
     )
 
     ninja.rule("cc",
-        description="cc($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule("cc_dsl",
-        description="cc_dsl($version) $in $cflags",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} $in -o - | $python {BUILD_TOOLS}/cc_dsl/compile_script.py | {iconv} | {cc1} {cflags} $cflags -o - | {nu64as} {ASFLAGS} - -o $out'",
+        description="cc $in $cflags",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {compile_script} | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
+        depfile="$out.d",
+        deps="gcc",
+    )
+
+    ninja.rule("cxx",
+        description="cxx $in",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cxx} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -163,6 +172,20 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("pm_charset_palettes", command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in")
 
+    with Path("tools/permuter_settings.toml").open("w") as f:
+        f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
+        f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
+        f.write(
+"""
+[preserve_macros]
+"gs?[DS]P.*" = "void"
+OVERRIDE_FLAG_CHECK = "int"
+OS_K0_TO_PHYSICAL = "int"
+"G_.*" = "int"
+"TEXEL.*" = "int"
+PRIMITIVE = "int"
+""")
+
 def write_ninja_for_tools(ninja: ninja_syntax.Writer):
     ninja.rule("cc_tool",
         description="cc_tool $in",
@@ -200,6 +223,9 @@ class Configure:
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
+
+    def undefined_syms_path(self) -> Path:
+        return self.build_path() / "undefined_syms.txt"
 
     def elf_path(self) -> Path:
         # TODO: read basename and build_path from splat.yaml
@@ -246,7 +272,8 @@ class Configure:
 
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str]):
         import segtypes
-        import segtypes.n64.data # Doesn't get imported on jp for some odd reason (should maybe be a * import?)
+        import segtypes.n64.data
+        import segtypes.n64.Yay0
 
         assert self.linker_entries is not None
 
@@ -278,7 +305,7 @@ class Configure:
 
                 if task == "yay0":
                     implicit.append(YAY0_COMPRESS_TOOL)
-                elif task in ["cc", "cc_dsl"]:
+                elif task in ["cc", "cc_dsl", "cxx"]:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
@@ -316,6 +343,8 @@ class Configure:
 
                 # check for dsl
                 task = "cc"
+                if entry.src_paths[0].suffixes[-1] == ".cpp":
+                    task = "cxx"
                 with entry.src_paths[0].open() as f:
                     s = f.read()
                     if "SCRIPT(" in s or "#pragma SCRIPT" in s or "#include \"world/common/foliage.inc.c\"" in s:
@@ -553,12 +582,19 @@ class Configure:
             else:
                 raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
+        # Run undefined_syms through cpp
+        ninja.build(
+            str(self.undefined_syms_path()),
+            "cpp",
+            str(self.version_path / "undefined_syms.txt")
+        )
+
         # Build elf, z64, ok
         ninja.build(
             str(self.elf_path()),
             "ld",
             str(self.linker_script_path()),
-            implicit=[str(obj) for obj in built_objects],
+            implicit=[str(obj) for obj in built_objects] + [str(self.undefined_syms_path())],
             variables={ "version": self.version, "mapfile": str(self.map_path()) },
         )
         ninja.build(
@@ -624,7 +660,7 @@ if __name__ == "__main__":
         for version in VERSIONS:
             rom = ROOT / f"ver/{version}/baserom.z64"
 
-            print(f"configure: looking for baserom {rom}", end="")
+            print(f"configure: looking for baserom {rom.relative_to(ROOT)}", end="")
 
             if rom.exists():
                 print("...found")

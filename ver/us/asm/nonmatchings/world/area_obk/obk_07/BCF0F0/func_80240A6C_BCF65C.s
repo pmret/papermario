@@ -95,7 +95,7 @@ glabel func_80240A6C_BCF65C
 /* BCF7AC 80240BBC 8E24003C */  lw        $a0, 0x3c($s1)
 /* BCF7B0 80240BC0 3C058011 */  lui       $a1, %hi(D_80108C34)
 /* BCF7B4 80240BC4 24A58C34 */  addiu     $a1, $a1, %lo(D_80108C34)
-/* BCF7B8 80240BC8 0C0511FF */  jal       set_hud_element_script
+/* BCF7B8 80240BC8 0C0511FF */  jal       set_hud_element_anim
 /* BCF7BC 80240BCC 00000000 */   nop
 /* BCF7C0 80240BD0 2402000B */  addiu     $v0, $zero, 0xb
 /* BCF7C4 80240BD4 AE220030 */  sw        $v0, 0x30($s1)

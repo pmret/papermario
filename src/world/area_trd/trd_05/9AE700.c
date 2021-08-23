@@ -3,7 +3,7 @@
 static char* N(exit_str_0) = "trd_04";
 static char* N(exit_str_1) = "trd_00";
 
-ApiStatus func_80240000_9AE700(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240000_9AE700(Evt* script, s32 isInitialCall) {
     func_80035DF0(5);
     return ApiStatus_DONE2;
 }

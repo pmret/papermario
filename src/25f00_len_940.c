@@ -182,7 +182,7 @@ void func_8004B328(s16 arg0, s32 arg1) {
             func_80056D44(temp_s0);
 
             if (temp_s0 == 0) {
-                nuAuTaskStop = 0;
+                nuAuTaskStop = NU_AU_TASK_STOP;
             }
             break;
     }

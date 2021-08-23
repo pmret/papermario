@@ -551,7 +551,7 @@ glabel pause_badges_draw_contents
 /* 13B064 80247D24 004A1021 */  addu      $v0, $v0, $t2
 /* 13B068 80247D28 8C450000 */  lw        $a1, ($v0)
 .L80247D2C:
-/* 13B06C 80247D2C 0C0511FF */  jal       set_hud_element_script
+/* 13B06C 80247D2C 0C0511FF */  jal       set_hud_element_anim
 /* 13B070 80247D30 0220202D */   daddu    $a0, $s1, $zero
 /* 13B074 80247D34 3C053F2B */  lui       $a1, 0x3f2b
 /* 13B078 80247D38 34A5BA99 */  ori       $a1, $a1, 0xba99

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(DeadUnkTexturePanFunc2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadUnkTexturePanFunc2)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;

@@ -39,7 +39,7 @@ HitResult calc_item_check_hit(void) {
 
 INCLUDE_ASM(s32, "17FEB0", calc_item_damage_enemy);
 
-ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
@@ -106,7 +106,7 @@ ApiStatus ItemDamageEnemy(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
@@ -174,7 +174,7 @@ ApiStatus ItemAfflictEnemy(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80252B3C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;
@@ -241,7 +241,7 @@ ApiStatus func_80252B3C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus ItemCheckHit(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 itemDamageOut = *args++;

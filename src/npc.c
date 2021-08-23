@@ -16,6 +16,7 @@ extern s32 D_80077C20;
 
 extern s16 D_80077C30;
 extern s32 D_80077C34;
+extern s16 D_80077C38;
 extern s16 D_80077C3A;
 
 void STUB_npc_callback(void) {
@@ -260,7 +261,7 @@ void npc_do_world_collision(Npc* npc) {
     f32 temp_y;
     f32 temp_z;
 
-    if (npc->flags & 0x40) {
+    if (npc->flags & NPC_FLAG_40) {
         npc->flags |= NPC_FLAG_8000000;
     } else if ((npc->pos.x != npc->colliderPos.x) || (npc->pos.y != npc->colliderPos.y)
                || (npc->pos.z != npc->colliderPos.z) || npc->flags & NPC_FLAG_8000000) {
@@ -356,15 +357,53 @@ INCLUDE_ASM(void, "npc", npc_do_other_npc_collision, Npc* npc);
 
 INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 
-INCLUDE_ASM(void, "npc", npc_do_gravity, Npc* npc);
+void npc_do_gravity(Npc* npc) {
+    if (npc->flags & NPC_FLAG_GRAVITY) {
+        if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
+            npc->flags &= ~NPC_FLAG_1000;
+        } else {
+            f32 xTemp;
+            f32 yTemp;
+            f32 zTemp;
+            f32 length, oldLength;
+            s32 hit;
+
+            npc->jumpScale = 1.0f;
+            xTemp = npc->pos.x;
+            zTemp = npc->pos.z;
+
+            npc->jumpVelocity -= npc->jumpScale;
+            npc->pos.y += npc->jumpVelocity;
+            oldLength = length = fabsf(npc->jumpVelocity) + 16.0f;
+
+            yTemp = npc->pos.y + 13.0f;
+
+            if (!(npc->flags & NPC_FLAG_PARTICLE)) {
+                hit = npc_raycast_down_sides(npc->unk_80, &xTemp, &yTemp, &zTemp, &length);
+            } else {
+                hit = npc_raycast_down_ahead(npc->unk_80, &xTemp, &yTemp, &zTemp, &length, npc->yaw,
+                                             npc->collisionRadius);
+            }
+
+            if (hit && length <= oldLength) {
+                npc->jumpVelocity = 0.0f;
+                npc->flags |= NPC_FLAG_1000;
+                npc->pos.y = yTemp;
+                npc->unk_84 = D_8010C97A;
+            } else {
+                npc->flags &= ~NPC_FLAG_1000;
+            }
+        }
+    }
+}
 
 s32 func_800397E8(Npc* npc, f32 arg1) {
-    if (!(npc->flags & NPC_FLAG_208)) {
+    if (!(npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_ENABLE_HIT_SCRIPT))) {
         f32 x;
         f32 y;
         f32 z;
-        f32 subroutine_arg;
-        f32 temp_v1;
+        f32 length;
+        f32 oldLength;
         s32 phi_v0;
 
         if (npc->flags & NPC_FLAG_NO_Y_MOVEMENT) {
@@ -372,20 +411,18 @@ s32 func_800397E8(Npc* npc, f32 arg1) {
             return 0;
         }
 
-        temp_v1 = fabsf(arg1) + 16;
-        subroutine_arg = temp_v1;
+        length = oldLength = fabsf(arg1) + 16;
         x = npc->pos.x;
         y = npc->pos.y + 13;
         z = npc->pos.z;
 
         if (!(npc->flags & NPC_FLAG_PARTICLE)) {
-            phi_v0 = npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &subroutine_arg);
+            phi_v0 = npc_raycast_down_sides(npc->unk_80, &x, &y, &z, &length);
         } else {
-            phi_v0 = npc_raycast_down_ahead(npc->unk_80, &x, &y, &z, &subroutine_arg, npc->yaw,
-                                            npc->collisionRadius);
+            phi_v0 = npc_raycast_down_ahead(npc->unk_80, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
         }
 
-        if (phi_v0 != 0 && subroutine_arg <= temp_v1) {
+        if (phi_v0 != 0 && length <= oldLength) {
             npc->pos.y = y;
             npc->unk_84 = D_8010C97A;
             npc->flags |= NPC_FLAG_1000;
@@ -797,9 +834,19 @@ void func_8003B420(Npc* npc) {
     npc->unk_B6 = 1;
 }
 
-INCLUDE_ASM(s32, "npc", npc_set_palswap_1);
+void npc_set_palswap_1(Npc* npc, s32 palIndexA, s32 palIndexB, s32 timeHoldA, s32 timeAB) {
+    npc->unk_308 = palIndexA;
+    npc->unk_30A = palIndexB;
+    npc->unk_30C = timeHoldA;
+    npc->unk_30E = timeAB;
+}
 
-INCLUDE_ASM(s32, "npc", npc_set_palswap_2);
+void npc_set_palswap_2(Npc* npc, s32 timeHoldB, s32 timeBA, s32 palIndexC, s32 palIndexD) {
+    npc->unk_310 = timeHoldB;
+    npc->unk_312 = timeBA;
+    npc->unk_314 = palIndexC;
+    npc->unk_316 = palIndexD;
+}
 
 void npc_draw_with_palswap(Npc* npc, s32 arg1, s32 arg2) {
     switch (npc->unk_B4) {
@@ -1293,7 +1340,7 @@ void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
 #ifdef NON_MATCHING
 // Rodata padding issue. Most likely belongs to a separate TU than the function above with the switch.
 void func_8003D660(Npc* npc, s32 arg1) {
-    Temp8010EBB0* temp = &gPartnerActionStatus;
+    PartnerActionStatus* temp = &gPartnerActionStatus;
 
     if ((npc->flags & (NPC_FLAG_400000 | NPC_FLAG_2)) == NPC_FLAG_400000) {
         if (npc->moveSpeed != 0.0f) {
@@ -1387,8 +1434,20 @@ void func_8003DFA0(Npc* npc) {
     }
 }
 
+void func_8003E0D4(Npc* npc) {
+    if (D_80077C38++ >= 4) {
+        f32 theta;
+        f32 sinTheta;
+        f32 cosTheta;
 
-INCLUDE_ASM(s32, "npc", func_8003E0D4);
+        D_80077C38 = 0;
+        theta = (clamp_angle(-npc->yaw) * TAU) / 360.0f;
+        sinTheta = sin_rad(theta);
+        cosTheta = cos_rad(theta);
+        playFX_2C(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
+                  40.0f, npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f));
+    }
+}
 
 void func_8003E1D0(Npc* npc) {
     if (D_80077C3A++ >= 4) {
@@ -1674,8 +1733,8 @@ void kill_enemy(Enemy* enemy) {
 INCLUDE_ASM(void, "npc", kill_enemy);
 #endif
 
-s32 bind_enemy_ai(Enemy* enemy, Script* aiScriptBytecode) {
-    ScriptInstance* aiScript;
+s32 bind_enemy_ai(Enemy* enemy, EvtSource* aiScriptBytecode) {
+    Evt* aiScript;
     s32 id;
 
     if (enemy->aiScript != NULL) {
@@ -1688,8 +1747,8 @@ s32 bind_enemy_ai(Enemy* enemy, Script* aiScriptBytecode) {
     return id;
 }
 
-s32 bind_enemy_aux(Enemy* enemy, Script* auxScriptBytecode) {
-    ScriptInstance* auxScript;
+s32 bind_enemy_aux(Enemy* enemy, EvtSource* auxScriptBytecode) {
+    Evt* auxScript;
     s32 id;
 
     if (enemy->auxScript != NULL) {
@@ -1702,8 +1761,8 @@ s32 bind_enemy_aux(Enemy* enemy, Script* auxScriptBytecode) {
     return id;
 }
 
-s32 bind_enemy_interact(Enemy* enemy, Script* interactScriptBytecode) {
-    ScriptInstance* interactScript;
+s32 bind_enemy_interact(Enemy* enemy, EvtSource* interactScriptBytecode) {
+    Evt* interactScript;
     s32 id;
 
     if (enemy->interactScript != NULL) {
@@ -1716,7 +1775,7 @@ s32 bind_enemy_interact(Enemy* enemy, Script* interactScriptBytecode) {
     return id;
 }
 
-void bind_npc_ai(s32 npcID, Script* npcAiBytecode) {
+void bind_npc_ai(s32 npcID, EvtSource* npcAiBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;
@@ -1735,7 +1794,7 @@ void bind_npc_ai(s32 npcID, Script* npcAiBytecode) {
     }
 }
 
-void bind_npc_aux(s32 npcID, Script* npcAuxBytecode) {
+void bind_npc_aux(s32 npcID, EvtSource* npcAuxBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;
@@ -1754,7 +1813,7 @@ void bind_npc_aux(s32 npcID, Script* npcAuxBytecode) {
     }
 }
 
-void bind_npc_interact(s32 npcID, Script* npcInteractBytecode) {
+void bind_npc_interact(s32 npcID, EvtSource* npcInteractBytecode) {
     EncounterStatus* currentEncounterStatus = &gCurrentEncounter;
     s32 i;
     s32 j;
