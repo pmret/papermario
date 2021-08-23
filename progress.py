@@ -130,9 +130,7 @@ def main(args):
             else:
                 s = "s"
 
-            print(f"matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) on `{args.version}` {'🚀' * funcs_delta}")
-        else:
-            print(f"matches 0 functions on `{args.version}`")
+            print(f"{'🚀' * funcs_delta} matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) on `{args.version}`")
     else:
         if matching_size + nonmatching_size != total_size:
             print("Warning: category/total size mismatch!\n")

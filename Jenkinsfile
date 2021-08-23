@@ -37,14 +37,15 @@ pipeline {
                             }
                         }
 
-                        def message = "This PR:\n- ${us_progress}\n- ${jp_progress}"
+                        def message = "${us_progress}\n${jp_progress}"
 
-                        if (comment_id == -1) {
-                            pullRequest.comment(message)
-                        } else {
-                            pullRequest.editComment(comment_id, message)
+                        if (message != "\n") {
+                            if (comment_id == -1) {
+                                pullRequest.comment(message)
+                            } else {
+                                pullRequest.editComment(comment_id, message)
+                            }
                         }
-
                     }
                 }
             }
