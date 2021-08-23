@@ -6,7 +6,6 @@ extern s32 D_80108AFC;
 extern s32 D_80108B28;
 extern s32 D_802944A0;
 
-// Scripts for HUD elements
 extern s32* D_802A97C0_42CEB0[];
 extern s32* D_802A97CC_42CEBC[];
 
@@ -134,7 +133,7 @@ void N(update)(void) {
             } while (oldButton == newButton);
 
             hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-            set_hud_element_script(
+            set_hud_element_anim(
                 hudElement, D_802A97C0_42CEB0[newButton]);
             set_hud_element_render_pos(
                 hudElement,
@@ -251,7 +250,7 @@ void N(update)(void) {
                     if (success) {
                         // Correct; shrink button, set up next button press, etc.
                         hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
-                        set_hud_element_script(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
+                        set_hud_element_anim(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
                         set_hud_element_scale(hudElement, 0.5f);
                         set_hud_element_render_pos(
                             hudElement,
