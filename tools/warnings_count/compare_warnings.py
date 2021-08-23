@@ -24,8 +24,13 @@ def main():
         print()
         print("If these warnings are needed to produce a matching build, run `tools/warnings_count/update_current_warnings.sh` and commit the updated files in `tools/warnings_count/`.")
         print()
-        with open(args.newwarnings) as f:
-            print("Warnings:\n\n" + f.read())
+        with open(args.newwarnings) as new:
+            new = new.readlines()
+            with open(args.currentwarnings) as current:
+                current = current.readlines()
+                for newLine in new:
+                    if newLine not in current:
+                        print("New warning: " + newLine)
         print()
         exit(-1)
     print("There are no new warnings. Good Job!")
