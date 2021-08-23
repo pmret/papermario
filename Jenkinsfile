@@ -19,8 +19,12 @@ pipeline {
             }
         }
         stage("Comment") {
-            if (env.CHANGE_ID) {
-                pullRequest.comment("hello from jenkins")
+            steps {
+                script {
+                    if (env.CHANGE_ID) {
+                        pullRequest.comment("hello from jenkins")
+                    }
+                }
             }
         }
         stage('Report Progress') {
