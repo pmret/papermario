@@ -16,12 +16,13 @@ typedef struct DisguiseAnims {
     /* 0x08 */ s32 unk_08;
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x10 */ s32 unk_14;
+    /* 0x14 */ s32 unk_14;
 } DisguiseAnims; // size = 0x18
 
 extern f32 D_800F7B90;
 extern Action D_800F7C8C[39];
 
-extern DisguiseAnims world_actions_peachDisguises[];
+extern DisguiseAnims world_actions_peachDisguises[4];
+extern s32* D_800F7C7C[4];
 
 #endif

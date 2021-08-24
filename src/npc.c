@@ -173,7 +173,7 @@ s32 _create_npc_basic(NpcBlueprint* blueprint) {
     return _create_npc(blueprint, NULL, FALSE);
 }
 
-void _create_npc_standard(NpcBlueprint* blueprint, s32** animList) {
+s32 _create_npc_standard(NpcBlueprint* blueprint, s32** animList) {
     _create_npc(blueprint, animList, FALSE);
 }
 

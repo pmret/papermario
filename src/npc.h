@@ -24,7 +24,7 @@ s32 _create_npc(NpcBlueprint* blueprint, s32** animList, s32 skipLoadingAnims);
 
 s32 _create_npc_basic(NpcBlueprint* blueprint);
 
-void _create_npc_standard(NpcBlueprint* blueprint, s32** animList);
+s32 _create_npc_standard(NpcBlueprint* blueprint, s32** animList);
 
 void _create_npc_partner(NpcBlueprint* blueprint);
 
