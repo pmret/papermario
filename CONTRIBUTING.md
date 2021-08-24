@@ -24,7 +24,7 @@ Once you've created a successful (`OK`) build, run
 ./make_expected.sh
 ```
 
-to copy `ver/us/build/` to `ver/us/expected/build/`. (If you're working with other versions of the game, replace `us` in the file paths.)
+to copy `ver/us/build/` to `ver/us/expected/build/`.
 
 ### Roughly converting assembly to C
 
