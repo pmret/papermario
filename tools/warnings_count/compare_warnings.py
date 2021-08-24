@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import sys
 
 
 def countFileLines(filename: str) -> int:
@@ -18,9 +19,18 @@ def main():
     currentLines = countFileLines(args.currentwarnings)
     newLines = countFileLines(args.newwarnings)
     if newLines > currentLines:
+        stderr = False
         if args.pr_message:
             delta = newLines - currentLines
-            print(f"⚠️ This PR introduces {delta} warnings:")
+
+            if delta == 1:
+                print(f"⚠️ This PR introduces a warning:")
+            else:
+                print(f"⚠️ This PR introduces {delta} warnings:")
+
+            if delta > 100:
+                stderr = True
+                print("See log for details.")
         else:
             print()
             print("There are more warnings now. Go fix them!")
@@ -34,7 +44,10 @@ def main():
                 current = current.readlines()
                 for newLine in new:
                     if newLine not in current:
-                        print("- " + newLine.strip())
+                        if stderr:
+                            print(newLine.strip(), file=sys.stderr)
+                        else:
+                            print("- " + newLine.strip())
     elif newLines < currentLines:
         delta = currentLines - newLines
 
