@@ -18,6 +18,38 @@ pipeline {
                 sh 'ninja'
             }
         }
+        stage("Comment") {
+            when {
+                not {
+                    branch 'master'
+                }
+            }
+            steps {
+                script {
+                    if (env.CHANGE_ID) {
+                        def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
+                        def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
+                        def comment_id = -1
+
+                        for (comment in pullRequest.comments) {
+                            if (comment.user == "BowserSlug") {
+                                comment_id = comment.id
+                            }
+                        }
+
+                        def message = "${us_progress}\n${jp_progress}"
+
+                        if (message != "\n") {
+                            if (comment_id == -1) {
+                                pullRequest.comment(message)
+                            } else {
+                                pullRequest.editComment(comment_id, message)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         stage('Report Progress') {
             when {
                 branch 'master'
@@ -51,9 +83,9 @@ pipeline {
             }
         }
     }
-   post {
-       always {
-           cleanWs()
-       }
-   }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
