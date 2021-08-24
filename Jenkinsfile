@@ -64,6 +64,9 @@ pipeline {
                 sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
                 sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
 
+                sh './tools/warnings_count/check_new_warnings.sh'
+                sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
+
                 stash includes: 'reports/*', name: 'reports'
             }
         }
@@ -81,6 +84,8 @@ pipeline {
 
                 sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
                 sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
+
+                sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
             }
         }
     }

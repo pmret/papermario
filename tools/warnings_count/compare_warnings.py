@@ -12,28 +12,38 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('currentwarnings', help="Name of file which contains the current warnings of the repo.")
     parser.add_argument('newwarnings', help="Name of file which contains the *new* warnings of the repo.")
+    parser.add_argument("--pr-message", action="store_true")
     args = parser.parse_args()
 
     currentLines = countFileLines(args.currentwarnings)
     newLines = countFileLines(args.newwarnings)
     if newLines > currentLines:
-        print()
-        print("There are more warnings now. Go fix them!")
-        print("\tCurrent warnings: " + str(currentLines))
-        print("\tNew warnings: " + str(newLines))
-        print()
-        print("If these warnings are needed to produce a matching build, run `tools/warnings_count/update_current_warnings.sh` and commit the updated files in `tools/warnings_count/`.")
-        print()
+        if args.pr_message:
+            delta = newLines - currentLines
+            print(f"⚠️ This PR introduces {delta} warnings:")
+        else:
+            print()
+            print("There are more warnings now. Go fix them!")
+            print("\tCurrent warnings: " + str(currentLines))
+            print("\tNew warnings: " + str(newLines))
+            print()
+            print("If these warnings are needed to produce a matching build, run `tools/warnings_count/update_current_warnings.sh` and commit the updated files in `tools/warnings_count/`.")
+            print()
+
         with open(args.newwarnings) as new:
             new = new.readlines()
             with open(args.currentwarnings) as current:
                 current = current.readlines()
                 for newLine in new:
                     if newLine not in current:
-                        print("New warning: " + newLine.strip())
-        print()
-        exit(-1)
-    print("There are no new warnings. Good Job!")
+                        print("- " + newLine.strip())
+    elif newLines < currentLines:
+        delta = currentLines - newLines
+
+        if args.pr_message:
+            print(f"✅ This PR fixes {delta} warnings!")
+        else:
+            print(f"{delta} warnings fixed.")
 
 
 if __name__ == "__main__":
