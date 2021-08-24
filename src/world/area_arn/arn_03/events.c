@@ -354,26 +354,26 @@ EvtSource N(interact_80241EB0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(2) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x0073));
                 SI_AREA_FLAG(2) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x0074));
                 SI_AREA_FLAG(2) = 0;
             }
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0075));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0075));
         }
         < STORY_CH3_BEGAN_PEACH_MISSION {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0076));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0076));
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0077));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0077));
         }
         >= STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0078));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0078));
             SetPlayerAnimation(ANIM_10002);
             sleep 10;
             SetPlayerAnimation(0x80007);
@@ -418,13 +418,13 @@ EvtSource N(idle_80242064) = SCRIPT({
     sleep 15;
     DisablePartnerAI(0);
     InterpNpcYaw(NPC_SELF, -4, 0);
-    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x006E));
+    SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x006E));
     InterpNpcYaw(NPC_PARTNER, -1, 0);
-    SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bow, Palette_00, Anim_4), NPC_ANIM(world_bow, Palette_00, Anim_1), 5, MESSAGE_ID(0x0E, 0x006F));
-    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x0070));
+    SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bow_Palette_00_Anim_4, NPC_ANIM_world_bow_Palette_00_Anim_1, 5, MESSAGE_ID(0x0E, 0x006F));
+    SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x0070));
     InterpNpcYaw(NPC_PARTNER, -1, 0);
-    SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bow, Palette_00, Anim_4), NPC_ANIM(world_bow, Palette_00, Anim_1), 5, MESSAGE_ID(0x0E, 0x0071));
-    SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x0072));
+    SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bow_Palette_00_Anim_4, NPC_ANIM_world_bow_Palette_00_Anim_1, 5, MESSAGE_ID(0x0E, 0x0071));
+    SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x0072));
     EnablePartnerAI();
     sleep 10;
     GetCurrentPartnerID(SI_VAR(6));
@@ -458,7 +458,7 @@ EvtSource N(init_802424E0) = SCRIPT({
 EvtSource N(interact_8024254C) = SCRIPT({
     if (SI_MAP_VAR(0) != 0) {
         if (SI_MAP_VAR(0) >= SI_MAP_VAR(1)) {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                           0x0081));
             SI_VAR(0) = 118;
             SI_VAR(1) = 1;
@@ -469,7 +469,7 @@ EvtSource N(interact_8024254C) = SCRIPT({
             SI_SAVE_FLAG(1020) = 0;
             return;
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                           0x0080));
             return;
         }
@@ -477,32 +477,32 @@ EvtSource N(interact_8024254C) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(3) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x0079));
                 SI_AREA_FLAG(3) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x007A));
                 SI_AREA_FLAG(3) = 0;
             }
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x007B));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007B));
         }
         < STORY_CH3_BEGAN_PEACH_MISSION {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x007C));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007C));
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x007D));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007D));
         }
         >= STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x007E));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x007E));
         }
     }
     if (SI_SAVE_FLAG(1015) == 0) {
         if (SI_SAVE_VAR(348) == 18) {
             await N(80241E68);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                           0x007F));
             EndSpeech(-1, 9765124, 9765121, 0);
             SI_MAP_VAR(0) = 0;
@@ -591,7 +591,7 @@ EvtSource N(80242C60) = SCRIPT({
     spawn {
         sleep 25;
         SetPlayerAnimation(0x80017);
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_9));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_9);
         loop {
             if (SI_MAP_VAR(2) == 1) {
                 break loop;
@@ -599,12 +599,12 @@ EvtSource N(80242C60) = SCRIPT({
             sleep 1;
         }
         SetPlayerAnimation(ANIM_10002);
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_1));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_1);
     }
-    SetNpcAnimation(0x4, NPC_ANIM(boo, Palette_01, Anim_8));
+    SetNpcAnimation(0x4, NPC_ANIM_boo_Palette_01_Anim_8);
     EndSpeech(4, 9765128, 9765128, 5);
     sleep 30;
-    SetNpcAnimation(0x4, NPC_ANIM(boo, Palette_01, Anim_1));
+    SetNpcAnimation(0x4, NPC_ANIM_boo_Palette_01_Anim_1);
     sleep 10;
     await N(80242B0C);
     SI_MAP_VAR(2) = 1;
@@ -615,20 +615,20 @@ EvtSource N(interact_80242DC4) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(4) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x0082));
                 SI_AREA_FLAG(4) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x0083));
                 SI_AREA_FLAG(4) = 0;
             }
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0084));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0084));
         }
         < STORY_CH3_BEGAN_PEACH_MISSION {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0085));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0085));
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
             DisablePartnerAI(0);
@@ -640,13 +640,13 @@ EvtSource N(interact_80242DC4) = SCRIPT({
                 NpcMoveTo(NPC_PARTNER, SI_VAR(0), SI_VAR(2), 0);
                 NpcFaceNpc(NPC_PARTNER, NPC_SELF, 1);
             }
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0086));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0086));
             await N(802428CC);
             PlayerFaceNpc(4, 1);
             NpcFaceNpc(NPC_PARTNER, 0x4, 1);
-            SpeakToPlayer(0x4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x0087));
+            SpeakToPlayer(0x4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x0087));
             await N(80242C60);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0088));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0088));
             DisablePlayerPhysics(FALSE);
             EnablePartnerAI();
         }
@@ -660,13 +660,13 @@ EvtSource N(interact_80242DC4) = SCRIPT({
                 NpcMoveTo(NPC_PARTNER, SI_VAR(0), SI_VAR(2), 0);
                 NpcFaceNpc(NPC_PARTNER, NPC_SELF, 1);
             }
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0089));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0089));
             await N(802428CC);
             PlayerFaceNpc(4, 1);
             NpcFaceNpc(NPC_PARTNER, 0x4, 1);
-            SpeakToPlayer(0x4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x008A));
+            SpeakToPlayer(0x4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x008A));
             await N(80242C60);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x008B));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x008B));
             DisablePlayerPhysics(FALSE);
             EnablePartnerAI();
         }
@@ -681,26 +681,26 @@ EvtSource N(interact_802431C8) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER {
             if (SI_AREA_FLAG(5) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x008C));
                 SI_AREA_FLAG(5) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                               0x008D));
                 SI_AREA_FLAG(5) = 0;
             }
         }
         < STORY_CH3_DEFEATED_TUBBA_BLUBBA {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x008E));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x008E));
         }
         < STORY_CH3_BEGAN_PEACH_MISSION {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x008F));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x008F));
         }
         < STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0090));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0090));
         }
         >= STORY_CH5_STAR_SPRIT_DEPARTED {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x0091));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x0091));
         }
     }
 });
@@ -725,22 +725,22 @@ StaticNpc N(npcGroup_80243378) = {
     .flowerDrops = NO_DROPS,
     .movement = { 2, 36, 10, 185, 56, 10, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 479, 215, 198, 150 },
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00AA),
 };
@@ -756,22 +756,22 @@ StaticNpc N(npcGroup_80243568) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00AB),
 };
@@ -788,22 +788,22 @@ StaticNpc N(npcGroup_80243758) = {
     .flowerDrops = NO_DROPS,
     .movement = { 2, 379, 10, 186, 399, 10, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, 479, 215, 198, 150 },
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00AC),
 };
@@ -819,22 +819,22 @@ StaticNpc N(npcGroup_80243948) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00AD),
 };
@@ -850,22 +850,22 @@ StaticNpc N(npcGroup_80243B38) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
@@ -923,22 +923,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_2),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_A),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_2,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_A,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
         },
     },
     {
@@ -952,22 +952,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_2),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_A),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_2,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_A,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
         },
     },
     {
@@ -981,22 +981,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_2),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_A),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_2,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_A,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
         },
     },
     {
@@ -1010,22 +1010,22 @@ StaticNpc N(npcGroup_80243F80)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_2),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_1),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_0),
-            NPC_ANIM(boo, Palette_01, Anim_A),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
-            NPC_ANIM(boo, Palette_01, Anim_3),
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_2,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_1,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_0,
+            NPC_ANIM_boo_Palette_01_Anim_A,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
+            NPC_ANIM_boo_Palette_01_Anim_3,
         },
     },
 };

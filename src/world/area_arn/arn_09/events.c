@@ -119,13 +119,13 @@ NpcSettings N(npcSettings_802405D0) = {
 
 EvtSource N(idle_802405FC) = SCRIPT({
     EnableNpcShadow(NPC_SELF, FALSE);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, 0, 25, -10, 6);
     PlaySoundAtNpc(NPC_SELF, 0x2086, 0);
     N(func_80240000_BF6060)();
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, 0, 200, 0, 15);
@@ -152,22 +152,22 @@ StaticNpc N(npcGroup_80240784) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
     },
 };
 

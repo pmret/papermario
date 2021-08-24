@@ -399,19 +399,19 @@ EvtSource N(802427EC) = SCRIPT({
     sleep 10;
     await N(802415C4);
     sleep 10;
-    SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x0082));
+    SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x0082));
     NpcFacePlayer(NPC_LILY, 1);
-    SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_3), NPC_ANIM(lily, Palette_00, Anim_7), 0, MESSAGE_ID(0x11, 0x0083));
-    SetNpcAnimation(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_6));
+    SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x0083));
+    SetNpcAnimation(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_6);
     sleep 20;
-    SetNpcAnimation(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_1);
     SI_VAR(0) = 90;
     SI_VAR(1) = 1;
     await N(80241CB4);
     AddKeyItem(ITEM_MIRACLE_WATER);
-    SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_3), NPC_ANIM(lily, Palette_00, Anim_7), 0, MESSAGE_ID(0x11, 0x0084));
-    EndSpeech(0, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0);
-    SetNpcAnimation(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_1));
+    SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x0084));
+    EndSpeech(0, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0);
+    SetNpcAnimation(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_1);
     ResetCam(0, 4.0);
     await N(802415E8);
     DisablePlayerPhysics(FALSE);
@@ -563,7 +563,7 @@ EvtSource N(8024324C) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     sleep 20;
-    SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00C6));
+    SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C6));
     sleep 10;
     GotoMap("flo_12", 1);
     sleep 100;
@@ -591,7 +591,7 @@ EvtSource N(8024339C) = SCRIPT({
                 CloseChoicePopup();
                 SetTimeFreezeMode(0);
                 sleep 10;
-                SpeakToPlayer(NPC_LILY, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x0081));
+                SpeakToPlayer(NPC_LILY, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0081));
             } else {
                 GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
                 PlayerMoveTo(-17, -17, 20);
@@ -662,8 +662,8 @@ EvtSource N(interact_802437C8) = SCRIPT({
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
             sleep 10;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11, 0x0078));
-            EndSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_9), NPC_ANIM(lily, Palette_00, Anim_5), 5);
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11, 0x0078));
+            EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_9, NPC_ANIM_lily_Palette_00_Anim_5, 5);
         }
         < STORY_CH6_GOT_WATER_STONE {
             if (SI_SAVE_FLAG(1375) == 0) {
@@ -677,56 +677,56 @@ EvtSource N(interact_802437C8) = SCRIPT({
                 PanToTarget(0, 0, 1);
                 WaitForCam(0, 1.0);
                 sleep 10;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11,
                               0x0079));
                 NpcFacePlayer(NPC_SELF, 1);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_1));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1);
                 PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_262, 0);
                 ShowEmote(-1, EMOTE_EXCLAMATION, 0, 15, 1, 0, 0, 0, 0);
                 sleep 15;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_1), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_1, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x007A));
-                EndSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_5), NPC_ANIM(lily, Palette_00, Anim_1), 0);
+                EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_5, NPC_ANIM_lily_Palette_00_Anim_1, 0);
                 GetPlayerTargetYaw(SI_VAR(0));
                 InterpNpcYaw(NPC_SELF, SI_VAR(0), 1);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 5, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 5, MESSAGE_ID(0x11,
                               0x007B));
                 NpcFacePlayer(NPC_SELF, 1);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x007C));
                 ShowChoice(MESSAGE_ID(0x1E, 0x0011));
                 sleep 10;
                 match SI_VAR(0) {
                     == 0 {
-                        ContinueSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_3), NPC_ANIM(lily, Palette_00, Anim_7), 0, MESSAGE_ID(0x11, 0x007D));
+                        ContinueSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x007D));
                     }
                     == 1 {
-                        ContinueSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x007E));
+                        ContinueSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x007E));
                     }
                 }
                 sleep 10;
                 SI_SAVE_FLAG(1375) = 1;
                 SetEnemyFlagBits(-1, 4194304, 0);
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 5, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 5, MESSAGE_ID(0x11,
                               0x007F));
             }
         }
         < 49 {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0080));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0080));
             SI_SAVE_FLAG(1376) = 1;
         }
         < 53 {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x0085));
-            EndSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0);
-            EndSpeech(-1, NPC_ANIM(lily, Palette_00, Anim_4), NPC_ANIM(lily, Palette_00, Anim_8), 0);
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x0085));
+            EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0);
+            EndSpeech(-1, NPC_ANIM_lily_Palette_00_Anim_4, NPC_ANIM_lily_Palette_00_Anim_8, 0);
         }
         < 60 {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_3), NPC_ANIM(lily, Palette_00, Anim_7), 0, MESSAGE_ID(0x11, 0x0086));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_3, NPC_ANIM_lily_Palette_00_Anim_7, 0, MESSAGE_ID(0x11, 0x0086));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_2), NPC_ANIM(lily, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_2, NPC_ANIM_lily_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                           0x0087));
         }
     }
@@ -739,7 +739,7 @@ EvtSource N(init_80243D78) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_WATER_STONE {
             if (SI_SAVE_FLAG(1375) == 0) {
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(lily, Palette_00, Anim_8));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_lily_Palette_00_Anim_8);
                 InterpNpcYaw(NPC_SELF, 90, 1);
                 SetEnemyFlagBits(-1, 4194304, 1);
             }
@@ -764,22 +764,22 @@ StaticNpc N(npcGroup_80243E64) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
-        NPC_ANIM(lily, Palette_00, Anim_1),
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
+        NPC_ANIM_lily_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DF),
 };

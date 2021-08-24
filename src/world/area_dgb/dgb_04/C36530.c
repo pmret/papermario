@@ -158,7 +158,7 @@ EvtSource N(npcAI_802435E4) = SCRIPT({
     SI_VAR(2) += 2;
     SetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     func_80045838(-1, 759, 0);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(sentinel, Palette_00, Anim_8));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_sentinel_Palette_00_Anim_8);
     sleep 10;
     SetPlayerAnimation(ANIM_80017);
     sleep 10;
@@ -231,22 +231,22 @@ StaticNpc N(npcGroup_80243B28) = {
     .flowerDrops = NO_DROPS,
     .movement = { 70, -220, 186, 15, 40, -32767, 1, 80, -220, 170, 80, 150, 1 },
     .animations = {
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_2),
-        NPC_ANIM(sentinel, Palette_00, Anim_3),
-        NPC_ANIM(sentinel, Palette_00, Anim_3),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_5),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_8),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_2,
+        NPC_ANIM_sentinel_Palette_00_Anim_3,
+        NPC_ANIM_sentinel_Palette_00_Anim_3,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_5,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_8,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };

@@ -428,7 +428,7 @@ EvtSource N(interact_80243214) = SCRIPT({
         SetCamSpeed(0, 4.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_2), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0042));
         SetPlayerAnimation(ANIM_THINKING);
         N(func_80241BCC_CB090C)();
@@ -438,22 +438,22 @@ EvtSource N(interact_80243214) = SCRIPT({
         match SI_VAR(0) {
             <= 0 {
                 SetPlayerAnimation(ANIM_STAND_STILL);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_2), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0, MESSAGE_ID(0x11, 0x0043));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0043));
             } else {
                 SI_VAR(8) = SI_VAR(0);
                 N(func_80241B5C_CB089C)(SI_VAR(0));
                 MakeItemEntity(SI_VAR(8), -695, 20, -29, 1, 0);
                 SI_VAR(7) = SI_VAR(0);
                 PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2095, 0);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_3));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_3);
                 sleep 20;
                 RemoveItemEntity(SI_VAR(7));
                 match SI_VAR(8) {
                     == 160 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_4), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0, MESSAGE_ID(0x11, 0x0046));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0046));
                         PlaySoundAtNpc(NPC_SELF, 0x21C, 0);
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_02, Anim_9), NPC_ANIM(gate_flower, Palette_02, Anim_8), 0);
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_7));
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_7);
                         PlaySoundAtCollider(17, 457, 0);
                         ModifyColliderFlags(0, 17, 0x7FFFFE00);
                         MakeLerp(0, 100, 30, 1);
@@ -474,20 +474,20 @@ EvtSource N(interact_80243214) = SCRIPT({
                                 break loop;
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_5));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5);
                         SI_SAVE_FLAG(1364) = 1;
                     }
                     == 159 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_4), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0, MESSAGE_ID(0x11, 0x0045));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0045));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1);
                     }
                     == 158 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_4), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0, MESSAGE_ID(0x11, 0x0045));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x0045));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1);
                     } else {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_4), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0,
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_4, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0,
                                       MESSAGE_ID(0x11, 0x0044));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_6));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_6);
                         PlaySoundAtNpc(NPC_SELF, 0x2096, 0);
                         MakeItemEntity(SI_VAR(8), 125, 20, 0, 1, 0);
                         SI_VAR(7) = SI_VAR(0);
@@ -532,10 +532,10 @@ EvtSource N(interact_80243214) = SCRIPT({
                                 }
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_1));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1);
                         RemoveItemEntity(SI_VAR(7));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_1));
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_02, Anim_2), NPC_ANIM(gate_flower, Palette_02, Anim_1), 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_1);
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_02_Anim_2, NPC_ANIM_gate_flower_Palette_02_Anim_1, 0);
                     }
                 }
             }
@@ -546,10 +546,10 @@ EvtSource N(interact_80243214) = SCRIPT({
         sleep 10;
     } else {
         if (SI_STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_9), NPC_ANIM(gate_flower, Palette_02, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x0047));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_9), NPC_ANIM(gate_flower, Palette_02, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_9, NPC_ANIM_gate_flower_Palette_02_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x0048));
         }
     }
@@ -560,7 +560,7 @@ EvtSource N(interact_80243214) = SCRIPT({
 EvtSource N(init_80243B20) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80243214));
     if (SI_SAVE_FLAG(1364) == 1) {
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_02, Anim_5));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_02_Anim_5);
         ModifyColliderFlags(0, 17, 0x7FFFFE00);
         RotateModel(103, 50, 0, 1, 0);
         RotateModel(104, 50, 0, 1, 0);
@@ -582,22 +582,22 @@ StaticNpc N(npcGroup_80243C48) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
-        NPC_ANIM(gate_flower, Palette_02, Anim_1),
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
+        NPC_ANIM_gate_flower_Palette_02_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DB),
 };
@@ -619,22 +619,22 @@ StaticNpc N(npcGroup_80243E38) = {
     .maxCoinBonus = 3,
     .movement = { 205, 0, -80, 30, 0, -32767, 0, 205, 0, -80, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -656,22 +656,22 @@ StaticNpc N(npcGroup_80244028) = {
     .maxCoinBonus = 3,
     .movement = { 275, 0, -115, 30, 0, -32767, 0, 275, 0, -115, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -693,22 +693,22 @@ StaticNpc N(npcGroup_80244218) = {
     .maxCoinBonus = 3,
     .movement = { -230, 60, -110, 30, 0, -32767, 0, -230, 60, -110, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -730,22 +730,22 @@ StaticNpc N(npcGroup_80244408) = {
     .maxCoinBonus = 3,
     .movement = { -330, 60, -110, 30, 0, -32767, 0, -330, 60, -110, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -767,22 +767,22 @@ StaticNpc N(npcGroup_802445F8) = {
     .maxCoinBonus = 3,
     .movement = { -430, 60, -110, 30, 0, -32767, 0, -430, 60, -110, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -804,22 +804,22 @@ StaticNpc N(npcGroup_802447E8) = {
     .maxCoinBonus = 3,
     .movement = { -530, 60, -110, 30, 0, -32767, 0, -530, 60, -110, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -841,22 +841,22 @@ StaticNpc N(npcGroup_802449D8) = {
     .maxCoinBonus = 3,
     .movement = { -630, 60, -110, 30, 0, -32767, 0, -630, 60, -110, 150, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -900,22 +900,22 @@ StaticNpc N(npcGroup_80244CD4) = {
     .maxCoinBonus = 8,
     .movement = { 240, 0, -90, 30, 0, -32767, 0, 240, 0, -90, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_2),
-        NPC_ANIM(dayzee, Palette_01, Anim_3),
-        NPC_ANIM(dayzee, Palette_01, Anim_3),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_8),
-        NPC_ANIM(dayzee, Palette_01, Anim_8),
-        NPC_ANIM(dayzee, Palette_01, Anim_6),
-        NPC_ANIM(dayzee, Palette_01, Anim_7),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
-        NPC_ANIM(dayzee, Palette_01, Anim_1),
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_2,
+        NPC_ANIM_dayzee_Palette_01_Anim_3,
+        NPC_ANIM_dayzee_Palette_01_Anim_3,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_8,
+        NPC_ANIM_dayzee_Palette_01_Anim_8,
+        NPC_ANIM_dayzee_Palette_01_Anim_6,
+        NPC_ANIM_dayzee_Palette_01_Anim_7,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
+        NPC_ANIM_dayzee_Palette_01_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
 };

@@ -545,7 +545,7 @@ def MacroReplaceStaticNPC(fd):
                 sprite =  CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
                 palette = CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                 anim =    CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                new_line += "    " * (indent+1) + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                new_line += "    " * (indent+1) + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
             new_line += "    " * indent + "},"
             out.append(new_line)
             i = x

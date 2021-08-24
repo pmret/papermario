@@ -124,8 +124,8 @@ EvtSource N(802404D8) = SCRIPT({
     SetCamSpeed(0, 6.5);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_9), NPC_ANIM(sun, Palette_00, Anim_9), 517, MESSAGE_ID(0x11, 0x00C3));
-    SetNpcAnimation(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_9));
+    SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_9, NPC_ANIM_sun_Palette_00_Anim_9, 517, MESSAGE_ID(0x11, 0x00C3));
+    SetNpcAnimation(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_9);
     spawn {
         SetCamDistance(0, 1000);
         SetCamSpeed(0, 5.0);
@@ -205,29 +205,29 @@ EvtSource N(8024094C) = SCRIPT({
 EvtSource N(interact_80240B28) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_SPOKE_WITH_THE_SUN {
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009A));
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009A));
             SetPlayerAnimation(ANIM_THINKING);
             sleep 20;
             SetPlayerAnimation(ANIM_80007);
             sleep 20;
             SetPlayerAnimation(ANIM_10002);
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009B));
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009B));
             SI_STORY_PROGRESS = STORY_CH6_SPOKE_WITH_THE_SUN;
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11, 0x009C));
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11, 0x009C));
         }
         < STORY_CH6_STAR_SPIRIT_RESCUED {
             if (SI_SAVE_FLAG(1410) == 0) {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11,
                               0x009D));
                 SI_SAVE_FLAG(1410) = 1;
             } else {
-                SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11,
                               0x009E));
             }
         } else {
-            SpeakToPlayer(NPC_SUN0, NPC_ANIM(sun, Palette_00, Anim_7), NPC_ANIM(sun, Palette_00, Anim_1), 517, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_SUN0, NPC_ANIM_sun_Palette_00_Anim_7, NPC_ANIM_sun_Palette_00_Anim_1, 517, MESSAGE_ID(0x11,
                           0x009F));
         }
     }
@@ -251,7 +251,7 @@ EvtSource N(init_80240CD0) = SCRIPT({
 
 EvtSource N(init_80240DB4) = SCRIPT({
     EnableNpcShadow(NPC_SUN1, FALSE);
-    SetNpcAnimation(NPC_SUN1, NPC_ANIM(sun, Palette_00, Anim_2));
+    SetNpcAnimation(NPC_SUN1, NPC_ANIM_sun_Palette_00_Anim_2);
     SetNpcPaletteSwapMode(10, 3);
     SetNpcPaletteSwapMode(11, 3);
     SetNpcPaletteSwapping(10, 0, 1, 5, 5, 13, 5, 0, 0);
@@ -276,22 +276,22 @@ StaticNpc N(npcGroup_80240EE0)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
         },
         .tattle = MESSAGE_ID(0x1A, 0x00E1),
     },
@@ -306,22 +306,22 @@ StaticNpc N(npcGroup_80240EE0)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
-            NPC_ANIM(sun, Palette_00, Anim_1),
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
+            NPC_ANIM_sun_Palette_00_Anim_1,
         },
         .tattle = MESSAGE_ID(0x1A, 0x00E1),
     },

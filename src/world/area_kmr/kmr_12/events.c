@@ -87,7 +87,7 @@ EvtSource N(GoombaIdle) = SCRIPT({
     sleep 1;
 
     SetSelfVar(0, FALSE);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, fake_mushroom)); // TODO: work out why palette 0 is used here
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_fake_mushroom); // TODO: work out why palette 0 is used here
     EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, TRUE);
 
@@ -108,15 +108,15 @@ EvtSource N(GoombaIdle) = SCRIPT({
         SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, still));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_still);
     loop 9 {
         SI_VAR(0) += 10.0;
         SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, dizzy));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_dizzy);
     sleep 20;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, idle));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_idle);
     PlaySoundAtNpc(NPC_SELF, 248, 0);
     func_802CFE2C(NPC_SELF, 8192);
     func_802CFD30(NPC_SELF, 5, 6, 1, 1, 0);
@@ -170,22 +170,22 @@ StaticNpc N(goombaNpc) = {
         /* flying? */ TRUE,
     },
     .animations = {
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, walk),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, pain),
-        NPC_ANIM(goomba, normal, pain),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_walk,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_pain,
+        NPC_ANIM_goomba_normal_pain,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
     },
 };
 

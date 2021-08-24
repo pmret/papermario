@@ -138,11 +138,11 @@ NpcSettings N(npcSettings_80240840) = {
 
 EvtSource N(interact_8024086C) = SCRIPT({
     if (SI_AREA_FLAG(4) == 0) {
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                       0x00F0));
         SI_AREA_FLAG(4) = 1;
     } else {
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                       0x00F1));
         SI_AREA_FLAG(4) = 0;
     }
@@ -166,22 +166,22 @@ StaticNpc N(npcGroup_80240954) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00B3),
 };

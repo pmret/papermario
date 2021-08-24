@@ -18,8 +18,6 @@ typedef u8 Addr[];
 
 #define BATTLE_ID(unk, area, stage, index) ((unk << 24) + (area << 16) + (stage << 8) + index)
 
-#define NPC_ANIM(sprite, palette, anim) (((_NPC_SPRITE_##sprite << 16) + (_NPC_PALETTE_##sprite##_##palette << 8) + _NPC_ANIM_##sprite##_##anim))
-
 /// Terminates an extraAnimationList
 #define ANIM_END -1
 

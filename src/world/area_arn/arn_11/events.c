@@ -21,16 +21,16 @@ EvtSource N(802401BC) = SCRIPT({
     sleep 30;
     SetPlayerSpeed(3.0);
     PlayerMoveTo(6, 0, 0);
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BF));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BF));
     sleep 10;
     SetPlayerAnimation(ANIM_80007);
     sleep 40;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C0));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C0));
     SetPlayerAnimation(ANIM_10002);
     sleep 10;
     SetPlayerAnimation(0x90000);
     sleep 30;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C1));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C1));
     SetPlayerAnimation(ANIM_10002);
     sleep 20;
     SetPlayerAnimation(0x90000);
@@ -44,7 +44,7 @@ EvtSource N(802401BC) = SCRIPT({
         NpcJump0(NPC_TUBBAS_HEART, SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
     }
     sleep 40;
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_B), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00C2));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_B, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00C2));
     SetPlayerAnimation(0x90000);
     sleep 10;
     SetNpcVar(0, 0, 1);
@@ -258,22 +258,22 @@ StaticNpc N(npcGroup_80240EEC) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
     },
 };
 
