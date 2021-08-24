@@ -6,6 +6,9 @@ extern s32 D_80108AFC;
 extern s32 D_80108B28;
 extern s32 D_802944A0;
 
+extern s32* D_802A97C0_42CEB0[];
+extern s32* D_802A97CC_42CEBC[];
+
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
@@ -74,7 +77,224 @@ ApiStatus func_802A9138_42C828(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "battle/action_cmd/tidal_wave", func_802A9228_42C918);
+void N(update)(void) {
+    ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
+    BattleStatus* battleStatus = &gBattleStatus;
+    HudElement* hudElement;
+    s8 oldButton;
+    s8 newButton;
+    s32 numLookbackFrames;
+    s32 bufferPos;
+    s32 buttonsPressed;
+    s32 success;
+    s32 i;
+
+    switch (actionCommandStatus->state) {
+        case 0:
+            btl_set_popup_duration(99);
+            hudElement = actionCommandStatus->hudElements[0];
+            if (actionCommandStatus->unk_61 != 0) {
+                clear_hud_element_flags(hudElement, 2);
+            }
+            set_hud_element_alpha(hudElement, 0xFF);
+            actionCommandStatus->state = 1;
+            break;
+        case 1:
+            btl_set_popup_duration(99);
+            actionCommandStatus->hudElementX += 20;
+            if (actionCommandStatus->hudElementX > 50) {
+                actionCommandStatus->hudElementX = 50;
+            }
+            set_hud_element_render_pos(
+                actionCommandStatus->hudElements[0],
+                actionCommandStatus->hudElementX + 21,
+                actionCommandStatus->hudElementY + 28);
+            break;
+        case 10:
+            btl_set_popup_duration(99);
+            if (actionCommandStatus->unk_4E != 0) {
+                actionCommandStatus->unk_4E--;
+                break;
+            }
+            actionCommandStatus->unk_5D = 1;
+            actionCommandStatus->unk_54 = actionCommandStatus->unk_52;
+            actionCommandStatus->unk_5C = rand_int(2);
+            actionCommandStatus->state = 11;
+            actionCommandStatus->unk_72 = 0U;
+            // fallthrough
+        case 11:
+            btl_set_popup_duration(99);
+
+            // Pick a new button that doesn't match the old one.
+            oldButton = actionCommandStatus->unk_5C;
+            do {
+                newButton = rand_int(2);
+                actionCommandStatus->unk_5C = newButton;
+            } while (oldButton == newButton);
+
+            hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
+            set_hud_element_anim(
+                hudElement, D_802A97C0_42CEB0[newButton]);
+            set_hud_element_render_pos(
+                hudElement,
+                actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20) + 16,
+                actionCommandStatus->hudElementY);
+            clear_hud_element_flags(hudElement, 2);
+            sfx_play_sound(0x233);
+            actionCommandStatus->unk_70 = 1;
+            actionCommandStatus->state = 12;
+            // fallthrough
+        case 12:
+            btl_set_popup_duration(99);
+            if (--actionCommandStatus->unk_54 == 0) {
+                actionCommandStatus->state = 13;
+                break;
+            }
+
+            // Stops checking for input if on the 15th button.
+            if (actionCommandStatus->unk_5D == 15) {
+                break;
+            }
+
+            // Number of frames until input possible (if negative, used to look backward;
+            // allows correct presses to be buffered after an incorrect press).
+            actionCommandStatus->unk_70--;
+            // Wrong-input lockout frame counter
+            actionCommandStatus->unk_72--;
+
+            if (actionCommandStatus->unk_70 <= 0) {
+                // Determine number of frames to look back in input buffer (up to 20).
+                numLookbackFrames = abs(actionCommandStatus->unk_70);
+                if (numLookbackFrames > 20) {
+                    numLookbackFrames = 20;
+                }
+
+                // Determine starting point in input buffer.
+                bufferPos = battleStatus->inputBufferPos - numLookbackFrames;
+                if (bufferPos < 0) {
+                    bufferPos += 0x40;
+                }
+
+                // If determined that 0 frames should be searched, search a minimum of 1.
+                if (numLookbackFrames == 0) {
+                    numLookbackFrames = 1;
+                }
+
+                // Check buffer for past N frames' worth of button presses.
+                for (i = 0; i < numLookbackFrames; i++) {
+                    if (bufferPos >= 0x40) {
+                        bufferPos -= 0x40;
+                    }
+
+                    // If not locked out from previous wrong press...
+                    if (actionCommandStatus->unk_72 > 0) {
+                        break;
+                    };
+
+                    success = FALSE;
+                    actionCommandStatus->unk_60 = FALSE;
+
+                    // Check for presses of the current button.
+                    switch (actionCommandStatus->unk_5C) {
+                        case 0:
+                            if (actionCommandStatus->autoSucceed) {
+                                success = TRUE;
+                            } else {
+                                buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
+                                if (buttonsPressed != 0) {
+                                    if (buttonsPressed & ~0x8000) {
+                                        actionCommandStatus->unk_60 = TRUE;
+                                    } else {
+                                        success = TRUE;
+                                    }
+                                }
+                            }
+                            break;
+                        case 1:
+                            if (actionCommandStatus->autoSucceed) {
+                                success = TRUE;
+                            } else {
+                                buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
+                                if (buttonsPressed != 0) {
+                                    if (buttonsPressed & ~0x4000) {
+                                        actionCommandStatus->unk_60 = TRUE;
+                                    } else {
+                                        success = TRUE;
+                                    }
+                                }
+                            }
+                            break;
+                        case 2:
+                            if (actionCommandStatus->autoSucceed) {
+                                success = TRUE;
+                            } else {
+                                buttonsPressed = battleStatus->pushInputBuffer[bufferPos];
+                                if (buttonsPressed != 0) {
+                                    if (buttonsPressed & ~0x4) {
+                                        actionCommandStatus->unk_60 = TRUE;
+                                    } else {
+                                        success = TRUE;
+                                    }
+                                }
+                            }
+                            break;
+                    }
+
+                    if (actionCommandStatus->unk_60) {
+                        // Wrong; prevent successful inputs for 10 frames.
+                        actionCommandStatus->unk_72 = 10;
+                        sfx_play_sound(0x21D);
+                        actionCommandStatus->unk_70 = 0;
+                    }
+
+                    if (success) {
+                        // Correct; shrink button, set up next button press, etc.
+                        hudElement = actionCommandStatus->hudElements[actionCommandStatus->unk_5D];
+                        set_hud_element_anim(hudElement, D_802A97CC_42CEBC[actionCommandStatus->unk_5C]);
+                        set_hud_element_scale(hudElement, 0.5f);
+                        set_hud_element_render_pos(
+                            hudElement,
+                            actionCommandStatus->hudElementX + ((actionCommandStatus->unk_5D - 1) * 20),
+                            actionCommandStatus->hudElementY + 7);
+                        actionCommandStatus->unk_5D++;
+                        actionCommandStatus->unk_44 +=
+                            battleStatus->unk_434[actionCommandStatus->unk_50] * 0x12;
+                        if (actionCommandStatus->unk_44 > 10000) {
+                            actionCommandStatus->unk_44 = 10000;
+                        }
+                        actionCommandStatus->state = 11;
+                        battleStatus->unk_84++;
+                        sfx_play_sound(0x21C);
+                        return;
+                    }
+
+                    bufferPos++;
+                }
+            }
+            break;
+        case 13:
+            if (battleStatus->unk_84 == 0) {
+                battleStatus->actionSuccess = -1;
+            } else {
+                battleStatus->actionSuccess = battleStatus->unk_84;
+            }
+            battleStatus->unk_86 = 1;
+            if (battleStatus->actionSuccess >= 10) {
+                func_80269160();
+            }
+            btl_set_popup_duration(0);
+            actionCommandStatus->unk_54 = 5;
+            actionCommandStatus->state = 14;
+            break;
+        case 14:
+            if (actionCommandStatus->unk_54 != 0) {
+                actionCommandStatus->unk_54--;
+            } else {
+                func_80268C9C();
+            }
+            break;
+    }
+}
 
 void N(draw_hud_elements)(void) {
     s32 i;

@@ -15,9 +15,24 @@ def set_version(version):
     build_dir = os.path.join(root_dir, "build")
     elf_path = os.path.join(build_dir, "papermario.elf")
 
+def load_latest_progress(version):
+    from urllib.request import urlopen
+
+    if version == "current":
+        from pathlib import Path
+
+        version = Path("ver/current").resolve().parts[-1]
+
+    csv = urlopen(f"https://papermar.io/reports/progress_{version}.csv").read().decode('utf-8')
+    latest = csv.split("\n")[-2]
+
+    version, timestamp, git_hash, all_funcs, nonmatching_funcs, matching_funcs, total_size, nonmatching_size, matching_size = latest.split(",")
+
+    return (int(all_funcs), int(nonmatching_funcs), int(matching_funcs), int(total_size), int(nonmatching_size), int(matching_size))
+
 def get_func_sizes():
     try:
-        result = subprocess.run(['objdump', '-x', elf_path], stdout=subprocess.PIPE)
+        result = subprocess.run(['mips-linux-gnu-objdump', '-x', elf_path], stdout=subprocess.PIPE)
         nm_lines = result.stdout.decode().split("\n")
     except:
         print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
@@ -83,6 +98,12 @@ def main(args):
         funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
         matching_ratio = (matching_size / total_size) * 100
 
+    old_all_funcs, old_nonmatching_funcs, old_matching_funcs, old_total_size, old_nonmatching_size, old_matching_size = load_latest_progress(args.version)
+    old_matching_ratio = (old_matching_size / old_total_size) * 100
+
+    ratio_delta = matching_ratio - old_matching_ratio
+    funcs_delta = len(matching_funcs) - old_matching_funcs
+
     if args.csv:
         version = 1
         git_object = git.Repo().head.object
@@ -102,11 +123,27 @@ def main(args):
             "message": f"{matching_ratio:.2f}%",
             "color": color.hex,
         }))
+    elif args.pr_comment:
+        if funcs_delta > 0:
+            if funcs_delta == 1:
+                s = ""
+            else:
+                s = "s"
+
+            print(f"{'🚀' * funcs_delta} This PR matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) on `{args.version}`.")
     else:
         if matching_size + nonmatching_size != total_size:
             print("Warning: category/total size mismatch!\n")
         print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
         print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
+
+        if funcs_delta > 0:
+            if funcs_delta == 1:
+                s = ""
+            else:
+                s = "s"
+
+            print(f"This local build matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) over latest `{args.version}`.")
 
 
 if __name__ == "__main__":
@@ -114,6 +151,7 @@ if __name__ == "__main__":
     parser.add_argument("version", default="current", nargs="?")
     parser.add_argument("--csv", action="store_true")
     parser.add_argument("--shield-json", action="store_true")
+    parser.add_argument("--pr-comment", action="store_true")
     args = parser.parse_args()
 
     main(args)

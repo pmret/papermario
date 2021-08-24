@@ -18,14 +18,37 @@ pipeline {
                 sh 'ninja'
             }
         }
-        stage('Check Warnings') {
+        stage("Comment") {
             when {
                 not {
                     branch 'master'
                 }
             }
             steps {
-                sh './tools/warnings_count/check_new_warnings.sh'
+                script {
+                    if (env.CHANGE_ID) {
+                        def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
+                        def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
+                        def warnings = sh('./tools/warnings_count/check_new_warnings.sh').trim()
+                        def comment_id = -1
+
+                        for (comment in pullRequest.comments) {
+                            if (comment.user == "BowserSlug") {
+                                comment_id = comment.id
+                            }
+                        }
+
+                        def message = "${us_progress}\n${jp_progress}\n${warnings}"
+
+                        if (message != "\n\n") {
+                            if (comment_id == -1) {
+                                pullRequest.comment(message)
+                            } else {
+                                pullRequest.editComment(comment_id, message)
+                            }
+                        }
+                    }
+                }
             }
         }
         stage('Report Progress') {
@@ -61,9 +84,9 @@ pipeline {
             }
         }
     }
-   post {
-       always {
-           cleanWs()
-       }
-   }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
