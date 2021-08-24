@@ -393,7 +393,7 @@ s32 N(unk_missing_80243A2C)[] = {
     0x00390012, 0xFFFFFFFF,
 };
 
-NpcAnimID N(extraAnimationList_80243A54)[] = {
+s32 N(extraAnimationList_80243A54)[] = {
     NPC_ANIM(world_clubba, Palette_00, Anim_0),
     ANIM_END,
 };

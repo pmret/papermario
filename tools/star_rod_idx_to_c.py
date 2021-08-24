@@ -445,7 +445,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 curr_base += 0x1F0
             out += tmp_out
         elif struct["type"] == "ExtraAnimationList":
-            tmp_out = f"NpcAnimID {name}[] = {{\n"
+            tmp_out = f"s32 {name}[] = {{\n"
             extraAnimations = bytes.read(struct["length"])
 
             i = 0

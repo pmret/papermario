@@ -1610,7 +1610,7 @@ StaticNpc N(npcGroup_80246660) = {
     },
 };
 
-NpcAnimID N(extraAnimationList_80246850)[] = {
+s32 N(extraAnimationList_80246850)[] = {
     NPC_ANIM(world_tubba, Palette_00, Anim_6),
     NPC_ANIM(world_tubba, Palette_00, Anim_10),
     NPC_ANIM(world_tubba, Palette_00, Anim_9),

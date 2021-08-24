@@ -1002,7 +1002,7 @@ EvtSource N(init_802437A8) = SCRIPT({
     SetNpcJumpscale(NPC_SELF, 0);
 });
 
-NpcAnimID N(extraAnimationList_802437E0)[] = {
+s32 N(extraAnimationList_802437E0)[] = {
     NPC_ANIM(huff_n_puff, Palette_00, Anim_0),
     NPC_ANIM(huff_n_puff, Palette_00, Anim_1),
     NPC_ANIM(huff_n_puff, Palette_00, Anim_2),
@@ -1107,7 +1107,7 @@ StaticNpc N(npcGroup_80243804)[] = {
     },
 };
 
-NpcAnimID N(extraAnimationList_80243DD4)[] = {
+s32 N(extraAnimationList_80243DD4)[] = {
     NPC_ANIM(tuff_puff, Palette_00, Anim_B),
     ANIM_END,
 };

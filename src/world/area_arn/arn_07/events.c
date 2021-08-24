@@ -500,7 +500,7 @@ EvtSource N(init_8024519C) = SCRIPT({
     }
 });
 
-NpcAnimID N(extraAnimationList_802451D4)[] = {
+s32 N(extraAnimationList_802451D4)[] = {
     NPC_ANIM(world_tubba, Palette_00, Anim_0),
     NPC_ANIM(world_tubba, Palette_00, Anim_22),
     NPC_ANIM(world_tubba, Palette_00, Anim_23),
@@ -512,17 +512,17 @@ NpcAnimID N(extraAnimationList_802451D4)[] = {
     ANIM_END,
 };
 
-NpcAnimID N(extraAnimationList_802451F8)[] = {
+s32 N(extraAnimationList_802451F8)[] = {
     NPC_ANIM(boo, Palette_00, Anim_0),
     ANIM_END,
 };
 
-NpcAnimID N(extraAnimationList_80245200)[] = {
+s32 N(extraAnimationList_80245200)[] = {
     NPC_ANIM(boo, Palette_01, Anim_0),
     ANIM_END,
 };
 
-NpcAnimID N(extraAnimationList_80245208)[] = {
+s32 N(extraAnimationList_80245208)[] = {
     NPC_ANIM(bootler, Palette_00, Anim_1),
     ANIM_END,
 };
