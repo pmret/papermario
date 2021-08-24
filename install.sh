@@ -37,7 +37,7 @@ curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.
 curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc
 
 # Debian and derivatives (apt)
-if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=debian' &> /dev/null; then
+if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
     echo "Installing packages for Debian or derivative (apt)"
 
     # Add i386 arch for wine32
