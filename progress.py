@@ -18,7 +18,10 @@ def set_version(version):
 def load_latest_progress(version):
     from urllib.request import urlopen
 
-    assert version != "current"
+    if version == "current":
+        from pathlib import Path
+
+        version = Path("ver/current").resolve().parts[-1]
 
     csv = urlopen(f"https://papermar.io/reports/progress_{version}.csv").read().decode('utf-8')
     latest = csv.split("\n")[-2]
@@ -95,6 +98,12 @@ def main(args):
         funcs_matching_ratio = (len(matching_funcs) / len(all_funcs)) * 100
         matching_ratio = (matching_size / total_size) * 100
 
+    old_all_funcs, old_nonmatching_funcs, old_matching_funcs, old_total_size, old_nonmatching_size, old_matching_size = load_latest_progress(args.version)
+    old_matching_ratio = (old_matching_size / old_total_size) * 100
+
+    ratio_delta = matching_ratio - old_matching_ratio
+    funcs_delta = len(matching_funcs) - old_matching_funcs
+
     if args.csv:
         version = 1
         git_object = git.Repo().head.object
@@ -115,15 +124,6 @@ def main(args):
             "color": color.hex,
         }))
     elif args.pr_comment:
-        git_object = git.Repo().head.object
-        timestamp = git_object.committed_date
-
-        old_all_funcs, old_nonmatching_funcs, old_matching_funcs, old_total_size, old_nonmatching_size, old_matching_size = load_latest_progress(args.version)
-        old_matching_ratio = (old_matching_size / old_total_size) * 100
-
-        ratio_delta = matching_ratio - old_matching_ratio
-        funcs_delta = len(matching_funcs) - old_matching_funcs
-
         if funcs_delta > 0:
             if funcs_delta == 1:
                 s = ""
@@ -136,6 +136,14 @@ def main(args):
             print("Warning: category/total size mismatch!\n")
         print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
         print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
+
+        if funcs_delta > 0:
+            if funcs_delta == 1:
+                s = ""
+            else:
+                s = "s"
+
+            print(f"This local build matches {funcs_delta} function{s} (+{ ratio_delta:.2f}%) over latest `{args.version}`.")
 
 
 if __name__ == "__main__":
