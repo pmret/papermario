@@ -205,7 +205,24 @@ typedef struct StaticNpc {
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0E0 */ s32 movement[48]; // TODO: type
-    /* 0x1A0 */ s32 animations[16];
+    /* 0x1A0 */ struct {
+        /* 0x00 */ s32 idle;
+        /* 0x04 */ s32 walk;
+        /* 0x08 */ s32 run;
+        /* 0x0C */ s32 chase;
+        /* 0x10 */ s32 unk_10;
+        /* 0x14 */ s32 unk_14;
+        /* 0x18 */ s32 death;
+        /* 0x1C */ s32 hit;
+        /* 0x20 */ s32 unk_20;
+        /* 0x24 */ s32 unk_24;
+        /* 0x28 */ s32 unk_28;
+        /* 0x2C */ s32 unk_2C;
+        /* 0x30 */ s32 unk_30;
+        /* 0x34 */ s32 unk_34;
+        /* 0x38 */ s32 unk_38;
+        /* 0x3C */ s32 unk_3C;
+    } animations;
     /* 0x1E0 */ char unk_1E0[8];
     /* 0x1E8 */ s32* extraAnimations;
     /* 0x1EC */ MessageID tattle;
