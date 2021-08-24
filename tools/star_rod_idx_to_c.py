@@ -422,9 +422,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                                 palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                                 anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
                                 if numNpcs > 1:
-                                    tmp_out += INDENT + "    " + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                                    tmp_out += INDENT + "    " + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
                                 else:
-                                    tmp_out += INDENT*2 + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                                    tmp_out += INDENT*2 + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
                                 INCLUDES_NEEDED["sprites"].add(sprite)
                             i += 4
                         tmp_out += INDENT + f"}},\n"
@@ -445,7 +445,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 curr_base += 0x1F0
             out += tmp_out
         elif struct["type"] == "ExtraAnimationList":
-            tmp_out = f"NpcAnimID {name}[] = {{\n"
+            tmp_out = f"s32 {name}[] = {{\n"
             extraAnimations = bytes.read(struct["length"])
 
             i = 0
@@ -460,7 +460,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                     sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
                     palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                     anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                    tmp_out += INDENT + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                    tmp_out += INDENT + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
                     INCLUDES_NEEDED["sprites"].add(sprite)
                 i += 4
             tmp_out += f"}};\n"
@@ -825,7 +825,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0):
                 sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
                 palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                 anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                anim = f"NPC_ANIM({sprite}, {palette}, {anim})"
+                anim = f"NPC_ANIM_{sprite}_{palette}_{anim}"
                 INCLUDES_NEEDED["sprites"].add(sprite)
 
                 out += f"    {element}, "

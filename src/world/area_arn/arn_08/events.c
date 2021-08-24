@@ -55,21 +55,21 @@ EvtSource N(8024049C) = SCRIPT({
                 SetNpcPos(NPC_PARTNER, 1000, 1000, 0);
                 RotateModel(0, 80, 0, -1, 0);
                 RotateModel(1, 80, 0, -1, 0);
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
                 SetNpcJumpscale(NPC_TUBBAS_HEART, 2.5);
                 PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
                 NpcJump0(NPC_TUBBAS_HEART, -50, 0, 50, 10);
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
                 sleep 1;
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
                 PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
                 NpcJump0(NPC_TUBBAS_HEART, -110, 0, 110, 10);
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
                 sleep 1;
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_6));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_6);
                 PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
                 NpcJump0(NPC_TUBBAS_HEART, -180, 0, 180, 10);
-                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_7));
+                SetNpcAnimation(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_7);
                 sleep 1;
                 MakeLerp(80, 0, 10, 0);
                 loop {
@@ -315,19 +315,19 @@ EvtSource N(init_80241288) = SCRIPT({
 EvtSource N(interact_802412E8) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH5_WHALE_MOUTH_OPEN {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BA));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA));
         }
         < STORY_CH6_FLOWER_GATE_OPEN {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BB));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BB));
         }
         < STORY_CH7_INVITED_TO_STARBORN_VALLEY {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BC));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BC));
         }
         < STORY_CH8_OPENED_PATH_TO_STAR_WAY {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BD));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BD));
         }
         >= STORY_CH8_OPENED_PATH_TO_STAR_WAY {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(yakkey, Palette_00, Anim_2), NPC_ANIM(yakkey, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00BE));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BE));
         }
     }
 });
@@ -351,22 +351,22 @@ StaticNpc N(npcGroup_80241448) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
     },
 };
 
@@ -381,22 +381,22 @@ StaticNpc N(npcGroup_80241638) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
-        NPC_ANIM(yakkey, Palette_00, Anim_1),
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
+        NPC_ANIM_yakkey_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00B4),
 };

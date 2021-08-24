@@ -1,5 +1,9 @@
+// this file and world/actions.c are candidates for merging
+
 #include "common.h"
 #include "world/partners.h"
+#include "world/actions.h"
+#include "npc.h"
 
 extern s32 D_8010C924;
 extern s32 D_8010C964;
@@ -311,7 +315,48 @@ void peach_sync_disguise_npc(void) {
     }
 }
 
+
+#ifdef NON_MATCHING
+Npc* peach_make_disguise_npc(s32 peachDisguise) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
+    NpcBlueprint blueprint;
+    Npc* npc;
+    f32 yaw;
+
+    if (peachDisguise == 0) {
+        return NULL;
+    }
+
+    playerStatus->colliderHeight = 37;
+    playerStatus->colliderDiameter = 38;
+    playerStatus->peachDisguise = gGameStatusPtr->peachDisguise = peachDisguise;
+
+    blueprint.flags = NPC_FLAG_ENABLE_HIT_SCRIPT | NPC_FLAG_40 | NPC_FLAG_100 | NPC_FLAG_40000;
+    blueprint.initialAnim = world_actions_peachDisguises[playerStatus->peachDisguise].idle;
+    blueprint.onRender = NULL;
+    blueprint.onUpdate = NULL;
+    D_8010C96C = _create_npc_standard(&blueprint, &D_800F7C7C[playerStatus->peachDisguise]);
+    npc = get_npc_by_index(D_8010C96C);
+
+    disable_npc_shadow(npc);
+
+    if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
+        yaw = 180.0f;
+    } else {
+        yaw = 0.0f;
+    }
+
+    set_npc_yaw(npc, yaw);
+
+    npc->pos.x = playerStatus->position.x;
+    npc->pos.y = playerStatus->position.y;
+    npc->pos.z = playerStatus->position.z;
+
+    return npc;
+}
+#else
 INCLUDE_ASM(Npc*, "7bb60_len_41b0", peach_make_disguise_npc, s32 peachDisguise);
+#endif
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", peach_disguise_check_overlaps);
 

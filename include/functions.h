@@ -7,8 +7,6 @@
 #include "enums.h"
 
 f32 fabsf(f32 f);
-f32 sqrtf(f32 f);
-f64 sqrt(f64 d);
 f32 cosine(s16 arg0);
 
 s32 strcmp(const char* str1, const char* str2);
@@ -54,7 +52,6 @@ void player_input_to_move_vector(f32* angle, f32* magnitude);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 f32 func_800E5348(void);
 
-void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
@@ -114,9 +111,6 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
-// todo remove once we have libultra's def
-extern void guOrtho(Mtx *m, float l, float r, float b, float t,
-		    float n, float f, float scale);
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
@@ -323,8 +317,6 @@ void enemy_create_target_list(Actor* actor);
 void set_actor_yaw(ActorID actorID, s32 yaw);
 void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
 
-ActorPart* get_actor_part(Actor* actor, s32 partIndex);
-
 void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType);
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType);
 void remove_part_decoration(ActorPart* part, s32 decorationIndex);
@@ -380,7 +372,6 @@ void func_80036430(void);
 void func_8003646C(void);
 void func_80036640(void);
 void state_init_enter_world(void);
-void state_step_enter_world(void);
 void state_drawUI_enter_world(void);
 void state_init_world(void);
 void state_step_world(void);
@@ -417,11 +408,6 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 
 void func_802B2078(void);
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
 void spr_update_player_sprite(s32, s32, f32);
 
 void initialize_curtains(void);
@@ -463,7 +449,6 @@ void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
 s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
-void guRotateRPYF(float mf[4][4], f32 x, f32 y, f32 z);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
 s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);

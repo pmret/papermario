@@ -62,7 +62,7 @@ typedef struct Area {
 
 typedef struct NpcBlueprint {
     /* 0x00 */ s32 flags;
-    /* 0x04 */ NpcAnimID initialAnim;
+    /* 0x04 */ s32 initialAnim;
     /* 0x08 */ void (*onUpdate)(struct Npc*);
     /* 0x0C */ void (*onRender)(struct Npc*);
 } NpcBlueprint; // size = 0x10
@@ -205,9 +205,26 @@ typedef struct StaticNpc {
     /* 0x0DA */ s16 minCoinBonus;
     /* 0x0DC */ s16 maxCoinBonus;
     /* 0x0E0 */ s32 movement[48]; // TODO: type
-    /* 0x1A0 */ NpcAnimID animations[16];
+    /* 0x1A0 */ struct {
+        /* 0x00 */ s32 idle;
+        /* 0x04 */ s32 walk;
+        /* 0x08 */ s32 run;
+        /* 0x0C */ s32 chase;
+        /* 0x10 */ s32 unk_10;
+        /* 0x14 */ s32 unk_14;
+        /* 0x18 */ s32 death;
+        /* 0x1C */ s32 hit;
+        /* 0x20 */ s32 unk_20;
+        /* 0x24 */ s32 unk_24;
+        /* 0x28 */ s32 unk_28;
+        /* 0x2C */ s32 unk_2C;
+        /* 0x30 */ s32 unk_30;
+        /* 0x34 */ s32 unk_34;
+        /* 0x38 */ s32 unk_38;
+        /* 0x3C */ s32 unk_3C;
+    } animations;
     /* 0x1E0 */ char unk_1E0[8];
-    /* 0x1E8 */ NpcAnimID* extraAnimations;
+    /* 0x1E8 */ s32* extraAnimations;
     /* 0x1EC */ MessageID tattle;
 } StaticNpc; // size = 0x1F0
 
@@ -307,7 +324,7 @@ typedef struct Enemy {
 typedef struct {
     /* 0x00 */ s32 npcCount;
     /* 0x04 */ StaticNpc* npcs;
-    /* 0x08 */ BattleID battle;
+    /* 0x08 */ s32 battle;
 } NpcGroupList[]; // size = 0x0C
 
 #define NPC_GROUP(npcs, battle) { sizeof(npcs) / sizeof(StaticNpc), (StaticNpc*) &npcs, battle }

@@ -66,7 +66,7 @@ EvtSource N(8024097C) = SCRIPT({
         EnableNpcAI(0, 0);
         DisablePlayerInput(TRUE);
         SetNpcSpeed(NPC_GOOMPA, 4.0);
-        SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_3));
+        SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
         N(func_802401B0_8C8140)();
         GetAngleToPlayer(0, SI_VAR(2));
         loop SI_VAR(1) {
@@ -104,7 +104,7 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
             sleep 15;
             NpcFacePlayer(NPC_SELF, 5);
             sleep 10;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A6));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A6));
             UseSettingsFrom(0, -220, 20, -72);
             SetPanTarget(0, -20, 0, 68);
             SetCamPitch(0, 15.0, -8.5);
@@ -118,16 +118,16 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
             }
             GetNpcPos(NPC_GOOMPA, SI_VAR(7), SI_VAR(8), SI_VAR(9));
             SetNpcSpeed(NPC_GOOMPA, 4.0);
-            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_3));
+            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
             NpcMoveTo(NPC_GOOMPA, 0, 70, 0);
-            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_1);
             InterpNpcYaw(NPC_GOOMPA, 276, 20);
             sleep 30;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A7));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A7));
             sleep 5;
             SetPlayerAnimation(ANIM_80007);
             sleep 30;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A8));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8));
             N(UnkFunc41)(0, 5);
             SI_STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, -220, 20, -72);
@@ -145,9 +145,9 @@ EvtSource N(npcAI_80240B50) = SCRIPT({
 });
 
 EvtSource N(hit_80240F64) = SCRIPT({
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_7));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_7);
     sleep 10;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_1);
     SI_MAP_VAR(0) += 1;
     if (SI_MAP_VAR(0) < 3) {
         GetOwnerEncounterTrigger(SI_VAR(0));
@@ -170,7 +170,7 @@ EvtSource N(hit_80240F64) = SCRIPT({
             }
         }
         sleep 10;
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_3));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_3);
     } else {
         sleep 10;
         GetNpcPos(NPC_GOOMPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -208,22 +208,22 @@ StaticNpc N(npcGroup_80241260) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_2),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_0),
-        NPC_ANIM(goompa, Palette_00, Anim_0),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_2,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_0,
+        NPC_ANIM_goompa_Palette_00_Anim_0,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x0063),
 };

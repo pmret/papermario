@@ -632,13 +632,13 @@ EvtSource N(80242240) = SCRIPT({
     NpcFaceNpc(NPC_LAKITU1, NPC_LAKITU0, 1);
     spawn N(80241E4C);
     sleep 30;
-    SpeakToPlayer(NPC_LAKITU0, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0088));
+    SpeakToPlayer(NPC_LAKITU0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0088));
     NpcFaceNpc(NPC_LAKITU1, NPC_LAKITU0, 1);
-    SpeakToPlayer(NPC_LAKITU1, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0089));
+    SpeakToPlayer(NPC_LAKITU1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0089));
     InterpNpcYaw(NPC_LAKITU0, 0, 1);
     sleep 20;
-    SpeakToPlayer(NPC_LAKITU0, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x008A));
-    SpeakToPlayer(NPC_LAKITU1, NPC_ANIM(lakitu, Palette_00, Anim_16), NPC_ANIM(lakitu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x008B));
+    SpeakToPlayer(NPC_LAKITU0, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x008A));
+    SpeakToPlayer(NPC_LAKITU1, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x008B));
     SetCamType(0, 1, 0);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -763,22 +763,22 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
         .maxCoinBonus = 2,
         .animations = {
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_2),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_4),
-            NPC_ANIM(lakitu, Palette_00, Anim_4),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_2,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_4,
+            NPC_ANIM_lakitu_Palette_00_Anim_4,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
         },
     },
     {
@@ -800,22 +800,22 @@ StaticNpc N(npcGroup_80242CF4)[] = {
         .flowerDrops = STANDARD_FLOWER_DROPS(3),
         .maxCoinBonus = 2,
         .animations = {
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_2),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_4),
-            NPC_ANIM(lakitu, Palette_00, Anim_4),
-            NPC_ANIM(lakitu, Palette_00, Anim_3),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
-            NPC_ANIM(lakitu, Palette_00, Anim_1),
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_2,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_4,
+            NPC_ANIM_lakitu_Palette_00_Anim_4,
+            NPC_ANIM_lakitu_Palette_00_Anim_3,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
+            NPC_ANIM_lakitu_Palette_00_Anim_1,
         },
     },
 };

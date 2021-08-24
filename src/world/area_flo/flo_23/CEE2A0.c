@@ -198,7 +198,7 @@ EvtSource N(interact_80241564) = SCRIPT({
         SetCamSpeed(0, 4.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0049));
         SetPlayerAnimation(ANIM_THINKING);
         N(func_80240C9C_CEEEFC)();
@@ -208,22 +208,22 @@ EvtSource N(interact_80241564) = SCRIPT({
         match SI_VAR(0) {
             <= 0 {
                 SetPlayerAnimation(ANIM_STAND_STILL);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004A));
             } else {
                 SI_VAR(8) = SI_VAR(0);
                 N(func_80240C2C_CEEE8C)(SI_VAR(0));
                 MakeItemEntity(SI_VAR(8), 385, 20, -34, 1, 0);
                 SI_VAR(7) = SI_VAR(0);
                 PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2095, 0);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_3));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_3);
                 sleep 20;
                 RemoveItemEntity(SI_VAR(7));
                 match SI_VAR(8) {
                     == 158 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004D));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004D));
                         PlaySoundAtNpc(NPC_SELF, 0x21C, 0);
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0);
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_7));
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_7);
                         PlaySoundAtCollider(13, 457, 0);
                         ModifyColliderFlags(0, 13, 0x7FFFFE00);
                         MakeLerp(0, 100, 30, 1);
@@ -244,20 +244,20 @@ EvtSource N(interact_80241564) = SCRIPT({
                                 break loop;
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_5));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5);
                         SI_SAVE_FLAG(1365) = 1;
                     }
                     == 159 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004C));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                     }
                     == 160 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004C));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                     } else {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0,
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0,
                                       MESSAGE_ID(0x11, 0x004B));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_6));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_6);
                         PlaySoundAtNpc(NPC_SELF, 0x2096, 0);
                         MakeItemEntity(SI_VAR(8), 375, 20, 0, 1, 0);
                         SI_VAR(7) = SI_VAR(0);
@@ -302,10 +302,10 @@ EvtSource N(interact_80241564) = SCRIPT({
                                 }
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                         RemoveItemEntity(SI_VAR(7));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0);
                     }
                 }
             }
@@ -316,10 +316,10 @@ EvtSource N(interact_80241564) = SCRIPT({
         sleep 10;
     } else {
         if (SI_STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x004E));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x004F));
         }
     }
@@ -330,7 +330,7 @@ EvtSource N(interact_80241564) = SCRIPT({
 EvtSource N(init_80241E70) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241564));
     if (SI_SAVE_FLAG(1365) == 1) {
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_5));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5);
         ModifyColliderFlags(0, 13, 0x7FFFFE00);
         RotateModel(59, 50, 0, -1, 0);
         RotateModel(60, 50, 0, -1, 0);
@@ -352,22 +352,22 @@ StaticNpc N(npcGroup_80241F98) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DC),
 };
@@ -384,22 +384,22 @@ StaticNpc N(npcGroup_80242188) = {
     .maxCoinBonus = 1,
     .movement = { 80, 0, 0, 30, 0, -32767, 0, 80, 0, 0, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
 };
 
@@ -415,22 +415,22 @@ StaticNpc N(npcGroup_80242378) = {
     .maxCoinBonus = 1,
     .movement = { -320, 0, 0, 30, 0, -32767, 0, -320, 0, 0, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
 };
 
