@@ -1,7 +1,7 @@
 #include "common.h"
 
 // size unknown
-typedef struct GiantChest {
+typedef struct Chest {
     /* 0x00 */ u16 unk_00;
     /* 0x02 */ s16 unk_02;
     /* 0x04 */ u8 unk_04;
@@ -19,7 +19,7 @@ typedef struct GiantChest {
     /* 0x28 */ f32 unk_28;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ s8 unk_30;
-} GiantChest;
+} Chest;
 
 extern s32 D_802EAD7C;
 // requires data migration
@@ -55,7 +55,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_Chest_reset_camera);
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
 
 void entity_Chest_check_opened(Entity* entity) {
-	GiantChest* data = (GiantChest*)entity->dataBuf;
+	Chest* data = (Chest*)entity->dataBuf;
     if ((data->unk_00 != 0xFFFF) && (get_global_flag(data->unk_00) != 0)) {
         entity->flags |= 0x4000;
         data->unk_10 = -1;
@@ -67,7 +67,7 @@ void entity_Chest_check_opened(Entity* entity) {
 void entity_Chest_idle(Entity* entity) {
     f32 rotation;
     f32 angle; // angle from the Chest to the Player
-    GiantChest* data;
+    Chest* data;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     rotation = clamp_angle(180.0f - entity->rotation.y);
@@ -78,7 +78,7 @@ void entity_Chest_idle(Entity* entity) {
         entity->flags |= 0x1000;
         if ((playerStatus->animFlags & 0x10) && (entity->collisionFlags & 8)) {
             exec_entity_commandlist(entity);
-            data = (GiantChest*)entity->dataBuf;
+            data = (Chest*)entity->dataBuf;
             data->unk_04 = 0;
             entity->flags &= ~0x1000;
             if (data->unk_10 != 0) {
@@ -92,7 +92,7 @@ void entity_Chest_idle(Entity* entity) {
 }
 
 void entity_Chest_begin_opening(Entity* entity) {
-	GiantChest* data = (GiantChest*)entity->dataBuf;
+	Chest* data = (Chest*)entity->dataBuf;
     data->unk_06 = 10;
     data->unk_08 = 0;
     data->unk_05 = 0;
@@ -150,7 +150,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_GiantChest_open);
 // the function itself matches, but somehow it breaks other completely unrelated files
 #ifdef NON_MATCHING
 void entity_GiantChest_give_equipment(Entity* entity) {
-    GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     f32 angle;
     s32 flag;
 
@@ -198,14 +198,14 @@ void entity_Chest_start_bound_script(Npc* npc) {
 }
 
 void entity_Chest_enable_player_input(Entity* entity) {
-    GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     if (data->unk_10 != 0) {
         enable_player_input();
     }
 }
 
 void entity_GiantChest_await_got_item(Entity* entity) {
-    GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     if (data->unk_10 != 0) {
         if (data->unk_30 != 0) {
             exec_entity_commandlist(entity);
@@ -220,12 +220,12 @@ void entity_GiantChest_await_got_item(Entity* entity) {
 }
 
 void entity_Chest_clear_item_id(Entity* entity) {
-	GiantChest* data = (GiantChest*)entity->dataBuf;
+	Chest* data = (Chest*)entity->dataBuf;
 	data->unk_10 = -1;
 }
 
 void entity_Chest_readargs(Entity* entity) {
-    GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     data->unk_10 = *D_8015C7D0;
     data->unk_00 = 0xFFFF;
 }
@@ -236,7 +236,7 @@ void entity_GiantChest_init(Entity* entity) {
 }
 
 void entity_Chest_init(Entity* entity) {
-    GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     data->unk_07 = 1;
     entity_Chest_readargs(entity);
     entity->renderSetupFunc = &entity_Chest_setupGfx;
