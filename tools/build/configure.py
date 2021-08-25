@@ -40,9 +40,10 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
-    ccache = "ccache "
+    ccache = ""
 
     if use_ccache:
+        ccache = "ccache "
         try:
             subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except FileNotFoundError:
