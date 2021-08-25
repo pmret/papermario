@@ -5,6 +5,8 @@ typedef struct struct802E10F4 {
     s16 angle;
 } struct802E10F4;
 
+void entity_SaveBlock_setupGfx();
+
 void entity_Shadow_init(Shadow* shadow) {
     shadow->scale.x = 0.1f;
     shadow->scale.y = 0.1f;

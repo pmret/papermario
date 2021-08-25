@@ -202,9 +202,6 @@ void intro_logos_set_fade_alpha(s16 alpha);
 
 void set_game_mode(s16 idx);
 
-void fx_walk(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
-void fx_emote(s32, Npc*, f32, f32, f32, f32, f32, s32, s32*);
-
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);

@@ -1,10 +1,9 @@
 #include "flo_10.h"
 #include "nu/nusys.h"
 
-extern u16* nuGfxZBuffer;
-
 // in no way close at all, may as well start over
 // good luck have fun
+void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 #ifdef NON_MATCHING
 void N(func_802404B0_CB96B0)(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 i;

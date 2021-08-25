@@ -29,6 +29,11 @@ extern EvtSource N(idle_80239350);
 extern EvtSource N(nextTurn_80239A3C);
 extern EvtSource N(takeTurn_802396D8);
 
+void func_802380E4_6F11C4();
+void func_8023817C_6F125C();
+void func_80238BCC_6F1CAC();
+void func_80238EDC_6F1FBC();
+
 ApiStatus N(func_80238000_6F10E0)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;

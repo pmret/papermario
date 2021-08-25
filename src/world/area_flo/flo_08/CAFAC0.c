@@ -2,6 +2,7 @@
 #include "message_ids.h"
 #include "sprite/npc/dayzee.h"
 #include "sprite/npc/gate_flower.h"
+#include "effects.h"
 
 enum {
     NPC_GATE_FLOWER,

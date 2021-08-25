@@ -3,6 +3,8 @@
 
 static s32 goompa_802BD600;
 
+ApiStatus func_802BD14C_324A5C(Evt* script, s32 isInitialCall);
+
 void world_goompa_init(Npc* partner) {
     partner->collisionHeight = 24;
     partner->collisionRadius = 20;

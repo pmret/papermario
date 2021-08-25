@@ -1658,6 +1658,7 @@ void remove_player_buffs(PlayerBuff buffs) {
 
 INCLUDE_ASM(s32, "190B20", btl_update_ko_status);
 
+void btl_appendGfx_prim_quad(u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 INCLUDE_ASM(s32, "190B20", btl_appendGfx_prim_quad, u8 arg0, u8 arg1, u8 arg2, u8 arg3, u16 arg4, u16 arg5, u16 arg6, u16 arg7);
 // extern s32 D_80293970;
 
