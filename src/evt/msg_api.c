@@ -143,6 +143,7 @@ ApiStatus CancelMessage(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
+// XXX: possibly not an api function and should be renamed accordingly
 ApiStatus CancelMessageAndBlock(void) {
     cancel_message(gCurrentPrintContext);
     return ApiStatus_BLOCK;

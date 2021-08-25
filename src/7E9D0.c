@@ -19,7 +19,7 @@ void func_800E5520(void) {
     D_8010C9B0 = 0;
 }
 
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing);
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_adjust_cam_on_landing, void);
 
 void phys_clear_spin_history(void) {
     s32 i;
@@ -211,7 +211,7 @@ s32 check_input_hammer(void) {
     return FALSE;
 }
 
-INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump);
+INCLUDE_ASM(s32, "7bb60_len_41b0", check_input_jump, void);
 
 void check_input_spin(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;

@@ -30,7 +30,7 @@ s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
-void render_player_model();
+void render_player_model(void);
 s16 get_game_mode(void);
 s32 is_picking_up_item(void);
 
@@ -145,9 +145,9 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
-void phys_adjust_cam_on_landing();
-void phys_init_integrator_for_current_state();
-void phys_player_land();
+void phys_adjust_cam_on_landing(void);
+void phys_init_integrator_for_current_state(void);
+void phys_player_land(void);
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -184,7 +184,6 @@ s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 void func_800561A4(s32);
-s32 osGetId();
 
 s32 battle_heap_create(void);
 void filemenu_init(s32);
@@ -286,8 +285,8 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
-s32 check_input_jump();
-s32 check_input_hammer();
+s32 check_input_jump(void);
+s32 check_input_hammer(void);
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
@@ -364,7 +363,6 @@ void state_step_title_screen(void);
 void state_drawUI_title_screen(void);
 void state_init_enter_demo(void);
 void state_step_enter_world(void);
-void state_drawUI_enter_world(void);
 void state_init_change_map(void);
 void state_step_change_map(void);
 void state_drawUI_change_map(void);
@@ -450,7 +448,6 @@ s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 
