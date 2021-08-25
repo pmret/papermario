@@ -55,7 +55,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_Chest_reset_camera);
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
 
 void entity_Chest_check_opened(Entity* entity) {
-	Chest* data = (Chest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     if ((data->unk_00 != 0xFFFF) && (get_global_flag(data->unk_00) != 0)) {
         entity->flags |= 0x4000;
         data->unk_10 = -1;
@@ -87,12 +87,12 @@ void entity_Chest_idle(Entity* entity) {
             func_800EF3E4();
         }
     } else {
-    	entity->flags &= ~0x1000;
+        entity->flags &= ~0x1000;
     }
 }
 
 void entity_Chest_begin_opening(Entity* entity) {
-	Chest* data = (Chest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     data->unk_06 = 10;
     data->unk_08 = 0;
     data->unk_05 = 0;
@@ -105,7 +105,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_Chest_open);
 // regalloc after sin_rad
 #ifdef NON_MATCHING
 void entity_Chest_close(Entity* entity) {
-	GiantChest* data = (GiantChest*)entity->dataBuf;
+    Chest* data = (Chest*)entity->dataBuf;
     switch (data->unk_04) {
 	    case 0:
 	        data->unk_0C = 0.0f;
@@ -220,8 +220,8 @@ void entity_GiantChest_await_got_item(Entity* entity) {
 }
 
 void entity_Chest_clear_item_id(Entity* entity) {
-	Chest* data = (Chest*)entity->dataBuf;
-	data->unk_10 = -1;
+    Chest* data = (Chest*)entity->dataBuf;
+    data->unk_10 = -1;
 }
 
 void entity_Chest_readargs(Entity* entity) {
