@@ -1627,7 +1627,7 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x44 */ s16 battle;
+    /* 0x44 */ u16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
     /* 0x4A */ char unk_4C[0x12];
