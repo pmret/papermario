@@ -80,13 +80,13 @@ void N(func_802A123C_72C7EC)(void) {
                 var = (D_802A25EC / 100) - 0x68;
                 ptr++;
                 set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                draw_icon_2(var2);
+                draw_hud_element_3(var2);
             }
 
             var2 = D_802A25C8;
             var = (D_802A25EC / 100) - 0x68;
             set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            draw_icon_2(var2);
+            draw_hud_element_3(var2);
         }
     }
 }

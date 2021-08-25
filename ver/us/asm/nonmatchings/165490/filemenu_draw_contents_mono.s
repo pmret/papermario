@@ -26,7 +26,7 @@ glabel filemenu_draw_contents_mono
 /* 165610 80244DB0 24C6000A */   addiu    $a2, $a2, 0xa
 /* 165614 80244DB4 8E040044 */  lw        $a0, 0x44($s0)
 .L80244DB8:
-/* 165618 80244DB8 0C0511F8 */  jal       draw_icon_2
+/* 165618 80244DB8 0C0511F8 */  jal       draw_hud_element_3
 /* 16561C 80244DBC 00000000 */   nop
 /* 165620 80244DC0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 165624 80244DC4 8FB00010 */  lw        $s0, 0x10($sp)

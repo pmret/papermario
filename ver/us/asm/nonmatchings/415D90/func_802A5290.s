@@ -204,7 +204,7 @@ glabel L802A52F8_41A088
 /* 41A304 802A5574 8CA5D624 */  lw        $a1, %lo(D_802AD624)($a1)
 /* 41A308 802A5578 0C0513AC */  jal       set_hud_element_alpha
 /* 41A30C 802A557C 0200202D */   daddu    $a0, $s0, $zero
-/* 41A310 802A5580 0C0511F8 */  jal       draw_icon_2
+/* 41A310 802A5580 0C0511F8 */  jal       draw_hud_element_3
 /* 41A314 802A5584 0200202D */   daddu    $a0, $s0, $zero
 /* 41A318 802A5588 3C02802B */  lui       $v0, %hi(D_802AD66C)
 /* 41A31C 802A558C 8C42D66C */  lw        $v0, %lo(D_802AD66C)($v0)

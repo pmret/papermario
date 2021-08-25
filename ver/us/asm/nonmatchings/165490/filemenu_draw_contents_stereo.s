@@ -27,7 +27,7 @@ glabel filemenu_draw_contents_stereo
 /* 1655A0 80244D40 24C6000A */   addiu    $a2, $a2, 0xa
 /* 1655A4 80244D44 8E04004C */  lw        $a0, 0x4c($s0)
 .L80244D48:
-/* 1655A8 80244D48 0C0511F8 */  jal       draw_icon_2
+/* 1655A8 80244D48 0C0511F8 */  jal       draw_hud_element_3
 /* 1655AC 80244D4C 00000000 */   nop
 /* 1655B0 80244D50 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 1655B4 80244D54 8FB00010 */  lw        $s0, 0x10($sp)

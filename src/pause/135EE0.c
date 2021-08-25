@@ -129,7 +129,7 @@ void pause_update_cursor(s32 arg0, s32 offsetX, s32 offsetY) {
         }
         set_hud_element_alpha(gPauseMenuCommonIconIDs[0], opacity);
         set_hud_element_render_pos(gPauseMenuCommonIconIDs[0], offsetX + gPauseMenuCursorPosX, offsetY + gPauseMenuCursorPosY);
-        draw_icon_2(gPauseMenuCommonIconIDs[0]);
+        draw_hud_element_3(gPauseMenuCommonIconIDs[0]);
     }
 }
 

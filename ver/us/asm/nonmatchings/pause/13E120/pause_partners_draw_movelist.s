@@ -141,7 +141,7 @@ glabel pause_partners_draw_movelist
 /* 13F278 8024BF38 0C051261 */  jal       set_hud_element_render_pos
 /* 13F27C 8024BF3C 2505000C */   addiu    $a1, $t0, 0xc
 /* 13F280 8024BF40 8E040000 */  lw        $a0, ($s0)
-/* 13F284 8024BF44 0C0511F8 */  jal       draw_icon_2
+/* 13F284 8024BF44 0C0511F8 */  jal       draw_hud_element_3
 /* 13F288 8024BF48 00000000 */   nop
 /* 13F28C 8024BF4C 12200017 */  beqz      $s1, .L8024BFAC
 /* 13F290 8024BF50 0220202D */   daddu    $a0, $s1, $zero
@@ -165,7 +165,7 @@ glabel pause_partners_draw_movelist
 /* 13F2D8 8024BF98 25050086 */   addiu    $a1, $t0, 0x86
 /* 13F2DC 8024BF9C 3C048027 */  lui       $a0, %hi(D_80270640)
 /* 13F2E0 8024BFA0 8C840640 */  lw        $a0, %lo(D_80270640)($a0)
-/* 13F2E4 8024BFA4 0C0511F8 */  jal       draw_icon_2
+/* 13F2E4 8024BFA4 0C0511F8 */  jal       draw_hud_element_3
 /* 13F2E8 8024BFA8 00000000 */   nop
 .L8024BFAC:
 /* 13F2EC 8024BFAC 26F7000D */  addiu     $s7, $s7, 0xd
