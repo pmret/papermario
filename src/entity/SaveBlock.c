@@ -11,9 +11,8 @@ void entity_Shadow_init(Shadow* shadow) {
     shadow->scale.z = 0.1f;
 }
 
-//TODO: make sure this is the right struct for this.
-s32 entity_can_collide_with_jumping_player(Shadow* shadow) {
-    if ((shadow->unk_06 & 4) && (gPlayerStatus.flags & 2)) {
+s32 entity_can_collide_with_jumping_player(Entity* entity) {
+    if ((entity->collisionFlags & 4) && (gPlayerStatus.flags & 2)) {
         return TRUE;
     }
     return FALSE;
