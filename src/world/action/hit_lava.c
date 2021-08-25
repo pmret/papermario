@@ -14,9 +14,9 @@ void func_802B6000_E27F40(void) {
     f32 sp24;
     f32 sp28;
     s32 sp2C;
-    f32 temp_f12;
-    f32 temp_f2;
-    f32 temp_f4;
+    f32 tempGravityIntegrator;
+    f32 theta;
+    f32 tempCurrentSpeed;
 
     if (playerStatus->flags & (1 << 31)) {
         playerStatus->flags &= ~0x80000000;
@@ -123,11 +123,11 @@ void func_802B6000_E27F40(void) {
             break;
         case 5:
             D_802B68B8 = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
-            temp_f2 = D_802B68B8 * TAU  / 360.0f;
-            temp_f4 = playerStatus->currentSpeed * sin_rad(temp_f2);
-            playerStatus->position.x += temp_f4;
+            theta = D_802B68B8 * TAU  / 360.0f;
+            tempCurrentSpeed = playerStatus->currentSpeed * sin_rad(theta);
+            playerStatus->position.x += tempCurrentSpeed;
             sp2C = 0;
-            if (temp_f4 >= 0.0f) {
+            if (tempCurrentSpeed >= 0.0f) {
                 if (playerStatus->lastGoodPosition.x <= playerStatus->position.x) {
                     playerStatus->position.x = playerStatus->lastGoodPosition.x;
                     sp2C = 1;
@@ -138,9 +138,9 @@ void func_802B6000_E27F40(void) {
                     sp2C = 1;
                 }
             }
-            temp_f4 = playerStatus->currentSpeed * cos_rad(temp_f2);
-            playerStatus->position.z -= temp_f4;
-            if (temp_f4 >= 0.0f) {
+            tempCurrentSpeed = playerStatus->currentSpeed * cos_rad(theta);
+            playerStatus->position.z -= tempCurrentSpeed;
+            if (tempCurrentSpeed >= 0.0f) {
                 if (playerStatus->position.z <= playerStatus->lastGoodPosition.z) {
                     playerStatus->position.z = playerStatus->lastGoodPosition.z;
                     sp2C++;
@@ -176,9 +176,9 @@ void func_802B6000_E27F40(void) {
             }
             break;
         case 7:
-            temp_f12 = playerStatus->gravityIntegrator[0] - 1.0;
-            playerStatus->gravityIntegrator[0] = temp_f12;
-            playerStatus->position.y = player_check_collision_below(temp_f12, &sp2C);
+            tempGravityIntegrator = playerStatus->gravityIntegrator[0] - 1.0;
+            playerStatus->gravityIntegrator[0] = tempGravityIntegrator;
+            playerStatus->position.y = player_check_collision_below(tempGravityIntegrator, &sp2C);
             if (sp2C >= 0) {
                 playerStatus->framesOnGround = 0xA;
                 playerStatus->fallState++;

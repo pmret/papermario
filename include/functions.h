@@ -326,7 +326,8 @@ void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
 Evt* get_script_by_index(s32 index);
 
-s32 get_lava_reset_pos(f32*, f32*, f32*);
+s32 get_lava_reset_pos(f32* x, f32* y, f32* z);
+void start_rumble(s32, s32);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
