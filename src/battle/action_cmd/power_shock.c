@@ -2,12 +2,12 @@
 
 #define NAMESPACE action_command_power_shock
 
-extern s32 D_80108AFC;
-extern s32 D_80108B28;
-extern s32 D_80108B80;
-extern s32 D_80109244;
-extern s32 D_80292974;
-extern s32 D_802943A0;
+extern s32 D_80108AFC[];
+extern s32 D_80108B28[];
+extern s32 D_80108B80[];
+extern s32 D_80109244[];
+extern s32 D_80292974[];
+extern s32 D_802943A0[];
 extern s16 D_802A9AA2_42D9B2[];
 extern s32 D_802A9B00;
 
@@ -18,56 +18,56 @@ ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     s32 temp_v1;
 
     battleStatus->unk_82 = 0x64;
-    battleStatus->unk_434 = &D_802943A0;
+    battleStatus->unk_434 = D_802943A0;
 
     if (battleStatus->unk_83 == 0) {
         battleStatus->actionSuccess = 0;
         return ApiStatus_DONE2;
-    } else {
-        func_80268858();
-        actionCommandStatus->actionCommandID = ACTION_COMMAND_POWER_SHOCK;
-        actionCommandStatus->state = 0;
-        actionCommandStatus->unk_60 = 0;
-        actionCommandStatus->unk_44 = 0;
-        actionCommandStatus->unk_48 = 0;
-        actionCommandStatus->unk_46 = rand_int(100);
-        actionCommandStatus->unk_6C = 30;
-        actionCommandStatus->hudElementX = -48;
-        actionCommandStatus->unk_68 = 0;
-        actionCommandStatus->unk_66 = 0;
-        D_802A9B00 = 0;
-        actionCommandStatus->hudElementY = 80;
-
-        hudElement = create_hud_element(&D_80108B28);
-        actionCommandStatus->hudElements[0] = hudElement;
-        set_hud_element_flags(hudElement, 0x82);
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
-        set_hud_element_render_depth(hudElement, 0);
-
-        hudElement = create_hud_element(&D_80108AFC);
-        actionCommandStatus->hudElements[1] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-        set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, 0x82);
-
-        hudElement = create_hud_element(&D_80292974);
-        actionCommandStatus->hudElements[3] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-        set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, 0x82);
-
-        hudElement = create_hud_element(&D_80109244);
-        actionCommandStatus->hudElements[4] = hudElement;
-        set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
-        set_hud_element_render_depth(hudElement, 0);
-        set_hud_element_flags(hudElement, 0x82);
-
-        temp_v1 = (100 - actionCommandStatus->unk_46) * 60;
-        temp_v1 /= 100;
-        temp_v1 = 29 - temp_v1;
-        set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - temp_v1, actionCommandStatus->hudElementY + 17);
-        return ApiStatus_DONE2;
     }
+
+    func_80268858();
+    actionCommandStatus->actionCommandID = ACTION_COMMAND_POWER_SHOCK;
+    actionCommandStatus->state = 0;
+    actionCommandStatus->unk_60 = 0;
+    actionCommandStatus->unk_44 = 0;
+    actionCommandStatus->unk_48 = 0;
+    actionCommandStatus->unk_46 = rand_int(100);
+    actionCommandStatus->unk_6C = 30;
+    actionCommandStatus->hudElementX = -48;
+    actionCommandStatus->unk_68 = 0;
+    actionCommandStatus->unk_66 = 0;
+    D_802A9B00 = 0;
+    actionCommandStatus->hudElementY = 80;
+
+    hudElement = create_hud_element(D_80108B28);
+    actionCommandStatus->hudElements[0] = hudElement;
+    set_hud_element_flags(hudElement, 0x82);
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
+    set_hud_element_render_depth(hudElement, 0);
+
+    hudElement = create_hud_element(D_80108AFC);
+    actionCommandStatus->hudElements[1] = hudElement;
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    set_hud_element_render_depth(hudElement, 0);
+    set_hud_element_flags(hudElement, 0x82);
+
+    hudElement = create_hud_element(D_80292974);
+    actionCommandStatus->hudElements[3] = hudElement;
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    set_hud_element_render_depth(hudElement, 0);
+    set_hud_element_flags(hudElement, 0x82);
+
+    hudElement = create_hud_element(D_80109244);
+    actionCommandStatus->hudElements[4] = hudElement;
+    set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);
+    set_hud_element_render_depth(hudElement, 0);
+    set_hud_element_flags(hudElement, 0x82);
+
+    temp_v1 = (100 - actionCommandStatus->unk_46) * 60;
+    temp_v1 /= 100;
+    temp_v1 = 29 - temp_v1;
+    set_hud_element_render_pos(actionCommandStatus->hudElements[3], actionCommandStatus->hudElementX - temp_v1, actionCommandStatus->hudElementY + 17);
+    return ApiStatus_DONE2;
 }
 
 ApiStatus func_802A9210_42D120(Evt* script, s32 isInitialCall) {
@@ -159,7 +159,7 @@ void func_802A9310_42D220(void) {
                 actionCommandStatus->unk_4E--;
                 break;
             }
-            set_hud_element_anim(actionCommandStatus->hudElements[0], &D_80108B80);
+            set_hud_element_anim(actionCommandStatus->hudElements[0], D_80108B80);
             actionCommandStatus->unk_44 = 0;
             actionCommandStatus->unk_5C = 0;
             D_802A9B00 = 1;
@@ -260,6 +260,7 @@ void func_802A9310_42D220(void) {
     }
 
     // Invisible "run away"-like meter that determines success threshold.
+    // https://www.youtube.com/watch?v=FagUpV0c67s
     switch (actionCommandStatus->state) {
         case 1:
         case 10:
