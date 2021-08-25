@@ -1,3 +1,4 @@
+#include "dead.h"
 #include "common.h"
 
 INCLUDE_ASM(s32, "EA36E0", func_80242DE0_EA36E0);

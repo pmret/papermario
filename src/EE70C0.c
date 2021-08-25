@@ -1,3 +1,4 @@
+#include "dead.h"
 #include "common.h"
 
 #define NAMESPACE EE70C0

@@ -3,7 +3,7 @@
 
 void N(DeadUnkNpcAIFunc14)(Evt* script, NpcAISettings* aiSettings) {
     Enemy* enemy = script->owner1.enemy;
-    Npc* npc = dead_get_npc_unsafe(enemy->npcID);
+    Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 vt5 = enemy->varTable[5];
     f32 jumpVelocity = vt5 / 100.0;
     f32 vt6 = enemy->varTable[6];
@@ -13,7 +13,7 @@ void N(DeadUnkNpcAIFunc14)(Evt* script, NpcAISettings* aiSettings) {
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
-    npc->yaw = dead_atan2(npc->pos.x, npc->pos.z, dead_gPlayerStatusPtr->position.x, dead_gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
 
     enemy->varTable[2] = 0;
 

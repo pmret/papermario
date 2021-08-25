@@ -1,3 +1,4 @@
+#include "dead.h"
 #include "common.h"
 
 const char ascii_EC2000[] = "mac_01";
