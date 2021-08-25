@@ -2,11 +2,11 @@
 
 #define NAMESPACE action_command_power_shock
 
-extern const HudElementAnim D_80108AFC[];
-extern const HudElementAnim D_80108B28[];
-extern const HudElementAnim D_80108B80[];
-extern const HudElementAnim D_80109244[];
-extern const HudElementAnim D_80292974[];
+extern const HudElementAnim D_80108AFC;
+extern const HudElementAnim D_80108B28;
+extern const HudElementAnim D_80108B80;
+extern const HudElementAnim D_80109244;
+extern const HudElementAnim D_80292974;
 extern s32 D_802943A0[];
 extern s16 D_802A9AA2_42D9B2[];
 extern s32 D_802A9B00;
@@ -290,7 +290,7 @@ void func_802A9310_42D220(void) {
     }
 }
 #else
-INCLUDE_ASM(s32, "battle/action_cmd/power_shock", func_802A9310_42D220);
+INCLUDE_ASM(s32, "battle/action_cmd/power_shock", func_802A9310_42D220, void);
 #endif
 
 void N(draw_hud_elements)(void) {
