@@ -52,6 +52,7 @@ INCLUDE_ASM(s32, "entity/Chest", entity_Chest_adjust_camera);
 // requires data migration
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_reset_camera);
 
+s32 entity_Chest_setupGfx(void);
 INCLUDE_ASM(s32, "entity/Chest", entity_Chest_setupGfx);
 
 void entity_Chest_check_opened(Entity* entity) {

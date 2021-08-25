@@ -477,4 +477,5 @@ void func_800EF3E4(void);
 void func_80268858(void);
 void func_80269118(void);
 s32 func_80268224(s32);
+
 #endif
