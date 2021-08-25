@@ -3,105 +3,106 @@
 
 #include "ultra64.h"
 
+// Should be at least the width of a pointer i.e. intptr_t
 typedef s32 Bytecode;
-typedef s32 ScriptID;
 
-typedef enum ScriptOpcode {
-    ScriptOpcode_END = 0x01,
-    ScriptOpcode_RETURN,
-    ScriptOpcode_LABEL, ///< Args: index
-    ScriptOpcode_GOTO, ///< Args: index
-    ScriptOpcode_LOOP, ///< Args: number of repeats (0 = infinite)
-    ScriptOpcode_END_LOOP,
-    ScriptOpcode_BREAK_LOOP,
-    ScriptOpcode_SLEEP_FRAMES,
-    ScriptOpcode_SLEEP_SECS,
-    ScriptOpcode_IF_EQ, ///< Args: a, b
-    ScriptOpcode_IF_NE, ///< Args: a, b
-    ScriptOpcode_IF_LT, ///< Args: a, b
-    ScriptOpcode_IF_GT, ///< Args: a, b
-    ScriptOpcode_IF_LE, ///< Args: a, b
-    ScriptOpcode_IF_GE, ///< Args: a, b
-    ScriptOpcode_IF_FLAG, ///< Args: a, b
-    ScriptOpcode_IF_NOT_FLAG, ///< Args: a, b
-    ScriptOpcode_ELSE,
-    ScriptOpcode_END_IF,
-    ScriptOpcode_MATCH, ///< Args: expression to test against
-    ScriptOpcode_MATCH_CONST, ///< Args: value to test against
-    ScriptOpcode_CASE_EQ, ///< Args: expression to test for
-    ScriptOpcode_CASE_NE, ///< Args: expression to test for
-    ScriptOpcode_CASE_LT, ///< Args: expression to test for
-    ScriptOpcode_CASE_GT, ///< Args: expression to test for
-    ScriptOpcode_CASE_LE, ///< Args: expression to test for
-    ScriptOpcode_CASE_GE, ///< Args: expression to test for
-    ScriptOpcode_CASE_ELSE,
-    ScriptOpcode_CASE_MULTI_OR_EQ, ///< Args: expression to test for
-    ScriptOpcode_CASE_MULTI_AND_EQ, ///< Args: expression to test for
-    ScriptOpcode_CASE_FLAG, ///< Args: expression to test for
-    ScriptOpcode_END_CASE_MULTI, ///< Ends the case block of ScriptOpcode_CASE_MULTI_OR_EQ condition(s).
-    ScriptOpcode_CASE_RANGE, ///< Args: from, to
-    ScriptOpcode_BREAK_MATCH,
-    ScriptOpcode_END_MATCH,
-    ScriptOpcode_SET, ///< Args: container, expression
-    ScriptOpcode_SET_CONST, ///< Args: container, value
-    ScriptOpcode_SET_F, ///< Args: container, expression
-    ScriptOpcode_ADD, ///< Args: container, expression to increment by
-    ScriptOpcode_SUB, ///< Args: container, expression to decrement by
-    ScriptOpcode_MUL, ///< Args: container, expression to multiply by
-    ScriptOpcode_DIV, ///< Integer division. Args: container, expression to divide by
-    ScriptOpcode_MOD, ///< Args: container, expression to divide by
-    ScriptOpcode_ADD_F, ///< Args: container, expression to increment by
-    ScriptOpcode_SUB_F, ///< Args: container, expression to decrement by
-    ScriptOpcode_MUL_F, ///< Args: container, expression to multiply by
-    ScriptOpcode_DIV_F, ///< Args: container, expression to divide by
-    ScriptOpcode_USE_BUFFER, ///< Args: s32*
-    ScriptOpcode_BUFFER_READ_1, /// Args: container
-    ScriptOpcode_BUFFER_READ_2, /// Args: container, container
-    ScriptOpcode_BUFFER_READ_3, /// Args: container, container, container
-    ScriptOpcode_BUFFER_READ_4, /// Args: container, container, container, container
-    ScriptOpcode_BUFFER_PEEK, ///< Args: index, container
-    ScriptOpcode_USE_BUFFER_F, ///< Identical to USE_BUFFER. Args: f32*
-    ScriptOpcode_BUFFER_READ_1_F, /// Args: container
-    ScriptOpcode_BUFFER_READ_2_F, /// Args: container, container
-    ScriptOpcode_BUFFER_READ_3_F, /// Args: container, container, container
-    ScriptOpcode_BUFFER_READ_4_F, /// Args: container, container, container, container
-    ScriptOpcode_BUFFER_PEEK_F, ///< Args: index, container
-    ScriptOpcode_USE_ARRAY, ///< Args: *s32
-    ScriptOpcode_USE_FLAGS, ///< Args: *s32
-    ScriptOpcode_NEW_ARRAY, ///< Allocates a new array. Args: length, s32*
-    ScriptOpcode_AND, ///< Args: container, expression to bitwise AND with
-    ScriptOpcode_AND_CONST, ///< Args: container, value to bitwise AND with
-    ScriptOpcode_OR, ///< Args: container, expression to bitwise OR with
-    ScriptOpcode_OR_CONST, ///< Args: container, value to bitwise OR with
-    ScriptOpcode_CALL, ///< Args: *function, ...
-    ScriptOpcode_SPAWN_SCRIPT, ///< Args: Script*
-    ScriptOpcode_SPAWN_GET_ID, ///< Args: Script*, container
-    ScriptOpcode_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: Script*
-    ScriptOpcode_BIND_TRIGGER, ///< Args: Script*, trigger flags, s32 target, 1, Trigger*
-    ScriptOpcode_UNBIND, ///< Unbinds any triggers bound to this script.
-    ScriptOpcode_KILL_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_JUMP, ///< Args: Script*
-    ScriptOpcode_SET_PRIORITY, ///< Args: priority
-    ScriptOpcode_SET_TIMESCALE, ///< Args: timescale
-    ScriptOpcode_SET_GROUP, ///< Args: group
-    ScriptOpcode_BIND_PADLOCK, ///< Args: Script*, trigger flags, s32 target, ItemList*, 0, 1
-    ScriptOpcode_SUSPEND_GROUP, ///< Args: group
-    ScriptOpcode_RESUME_GROUP, ///< Args: group
-    ScriptOpcode_SUSPEND_OTHERS, ///< Args: group
-    ScriptOpcode_RESUME_OTHERS, ///< Args: group
-    ScriptOpcode_SUSPEND_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_RESUME_SCRIPT, ///< Args: ScriptID
-    ScriptOpcode_DOES_SCRIPT_EXIST, ///< Args: ScriptID, container
-    ScriptOpcode_SPAWN_THREAD,
-    ScriptOpcode_END_SPAWN_THREAD,
-    ScriptOpcode_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
-    ScriptOpcode_END_PARALLEL_THREAD,
-    ScriptOpcode_90,
-    ScriptOpcode_DEBUG_PRINT, ///< Args: expression
-    ScriptOpcode_92,
-    ScriptOpcode_93,
-    ScriptOpcode_94,
-} ScriptOpcode;
+enum {
+    EVT_OP_INTERNAL_FETCH,
+    EVT_OP_END,
+    EVT_OP_RETURN,
+    EVT_OP_LABEL, ///< Args: index
+    EVT_OP_GOTO, ///< Args: index
+    EVT_OP_LOOP, ///< Args: number of repeats (0 = infinite)
+    EVT_OP_END_LOOP,
+    EVT_OP_BREAK_LOOP,
+    EVT_OP_SLEEP_FRAMES,
+    EVT_OP_SLEEP_SECS,
+    EVT_OP_IF_EQ, ///< Args: a, b
+    EVT_OP_IF_NE, ///< Args: a, b
+    EVT_OP_IF_LT, ///< Args: a, b
+    EVT_OP_IF_GT, ///< Args: a, b
+    EVT_OP_IF_LE, ///< Args: a, b
+    EVT_OP_IF_GE, ///< Args: a, b
+    EVT_OP_IF_FLAG, ///< Args: a, b
+    EVT_OP_IF_NOT_FLAG, ///< Args: a, b
+    EVT_OP_ELSE,
+    EVT_OP_END_IF,
+    EVT_OP_MATCH, ///< Args: expression to test against
+    EVT_OP_MATCH_CONST, ///< Args: value to test against
+    EVT_OP_CASE_EQ, ///< Args: expression to test for
+    EVT_OP_CASE_NE, ///< Args: expression to test for
+    EVT_OP_CASE_LT, ///< Args: expression to test for
+    EVT_OP_CASE_GT, ///< Args: expression to test for
+    EVT_OP_CASE_LE, ///< Args: expression to test for
+    EVT_OP_CASE_GE, ///< Args: expression to test for
+    EVT_OP_CASE_ELSE,
+    EVT_OP_CASE_MULTI_OR_EQ, ///< Args: expression to test for
+    EVT_OP_CASE_MULTI_AND_EQ, ///< Args: expression to test for
+    EVT_OP_CASE_FLAG, ///< Args: expression to test for
+    EVT_OP_END_CASE_MULTI, ///< Ends the case block of EVT_OP_CASE_MULTI_OR_EQ condition(s).
+    EVT_OP_CASE_RANGE, ///< Args: from, to
+    EVT_OP_BREAK_MATCH,
+    EVT_OP_END_MATCH,
+    EVT_OP_SET, ///< Args: container, expression
+    EVT_OP_SET_CONST, ///< Args: container, value
+    EVT_OP_SET_F, ///< Args: container, expression
+    EVT_OP_ADD, ///< Args: container, expression to increment by
+    EVT_OP_SUB, ///< Args: container, expression to decrement by
+    EVT_OP_MUL, ///< Args: container, expression to multiply by
+    EVT_OP_DIV, ///< Integer division. Args: container, expression to divide by
+    EVT_OP_MOD, ///< Args: container, expression to divide by
+    EVT_OP_ADD_F, ///< Args: container, expression to increment by
+    EVT_OP_SUB_F, ///< Args: container, expression to decrement by
+    EVT_OP_MUL_F, ///< Args: container, expression to multiply by
+    EVT_OP_DIV_F, ///< Args: container, expression to divide by
+    EVT_OP_USE_BUFFER, ///< Args: s32*
+    EVT_OP_BUFFER_READ_1, /// Args: container
+    EVT_OP_BUFFER_READ_2, /// Args: container, container
+    EVT_OP_BUFFER_READ_3, /// Args: container, container, container
+    EVT_OP_BUFFER_READ_4, /// Args: container, container, container, container
+    EVT_OP_BUFFER_PEEK, ///< Args: index, container
+    EVT_OP_USE_BUFFER_F, ///< Identical to USE_BUFFER. Args: f32*
+    EVT_OP_BUFFER_READ_1_F, /// Args: container
+    EVT_OP_BUFFER_READ_2_F, /// Args: container, container
+    EVT_OP_BUFFER_READ_3_F, /// Args: container, container, container
+    EVT_OP_BUFFER_READ_4_F, /// Args: container, container, container, container
+    EVT_OP_BUFFER_PEEK_F, ///< Args: index, container
+    EVT_OP_USE_ARRAY, ///< Args: *s32
+    EVT_OP_USE_FLAGS, ///< Args: *s32
+    EVT_OP_NEW_ARRAY, ///< Allocates a new array. Args: length, s32*
+    EVT_OP_AND, ///< Args: container, expression to bitwise AND with
+    EVT_OP_AND_CONST, ///< Args: container, value to bitwise AND with
+    EVT_OP_OR, ///< Args: container, expression to bitwise OR with
+    EVT_OP_OR_CONST, ///< Args: container, value to bitwise OR with
+    EVT_OP_CALL, ///< Args: *function, ...
+    EVT_OP_SPAWN_SCRIPT, ///< Args: EvtSource*
+    EVT_OP_SPAWN_GET_ID, ///< Args: EvtSource*, container
+    EVT_OP_AWAIT_SCRIPT, ///< Spawns a script and waits for it to return before continuing. Args: EvtSource*
+    EVT_OP_BIND_TRIGGER, ///< Args: EvtSource*, trigger flags, s32 target, 1, Trigger*
+    EVT_OP_UNBIND, ///< Unbinds any triggers bound to this script.
+    EVT_OP_KILL_SCRIPT, ///< Args: ScriptID
+    EVT_OP_JUMP, ///< Args: EvtSource*
+    EVT_OP_SET_PRIORITY, ///< Args: priority
+    EVT_OP_SET_TIMESCALE, ///< Args: timescale
+    EVT_OP_SET_GROUP, ///< Args: group
+    EVT_OP_BIND_PADLOCK, ///< Args: EvtSource*, trigger flags, s32 target, ItemList*, 0, 1
+    EVT_OP_SUSPEND_GROUP, ///< Args: group
+    EVT_OP_RESUME_GROUP, ///< Args: group
+    EVT_OP_SUSPEND_OTHERS, ///< Args: group
+    EVT_OP_RESUME_OTHERS, ///< Args: group
+    EVT_OP_SUSPEND_SCRIPT, ///< Args: ScriptID
+    EVT_OP_RESUME_SCRIPT, ///< Args: ScriptID
+    EVT_OP_DOES_SCRIPT_EXIST, ///< Args: ScriptID, container
+    EVT_OP_SPAWN_THREAD,
+    EVT_OP_END_SPAWN_THREAD,
+    EVT_OP_PARALLEL_THREAD, ///< Parallel threads are killed as soon as the parent script returns.
+    EVT_OP_END_PARALLEL_THREAD,
+    EVT_OP_90,
+    EVT_OP_DEBUG_PRINT, ///< Args: expression
+    EVT_OP_92,
+    EVT_OP_93,
+    EVT_OP_94,
+};
 
 #define SI_VAR(v)           ((v -  30000000))
 #define SI_MAP_VAR(v)       ((v -  50000000))
@@ -129,7 +130,7 @@ typedef enum ScriptOpcode {
 typedef s32 ApiStatus;
 #define ApiStatus_BLOCK  0   /* Call again next frame */
 #define ApiStatus_DONE1  1   /* Unconditional. Probably only exists to return a bool from functions */
-#define ApiStatus_DONE2  2   /* Conditional on ScriptInstance->disableScripts */
+#define ApiStatus_DONE2  2   /* Conditional on Evt->disableScripts */
 #define ApiStatus_REPEAT 3   /* Call again immediately */
 #define ApiStatus_FINISH 255 /* Corresponds to SI_FINISH */
 

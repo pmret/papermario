@@ -7,14 +7,14 @@ static char* N(exit_str_3) = "osr_00";
 static char* N(exit_str_4) = "osr_01";
 static char* N(exit_str_5) = "mac_02";
 
-ApiStatus func_80240000_800880(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240000_800880(Evt* script, s32 isInitialCall) {
     s32 itemIndex = get_variable(script, *script->ptrReadPos);
 
     set_item_entity_flags(gGameStatusPtr->shopItemEntities[itemIndex].index, 0x40);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80240044_8008C4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240044_8008C4(Evt* script, s32 isInitialCall) {
     s32 itemIndex = get_variable(script, *script->ptrReadPos);
     s32* var1 = get_variable(NULL, SI_MAP_VAR(2));
 

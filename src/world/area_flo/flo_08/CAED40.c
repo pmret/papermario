@@ -8,7 +8,7 @@ extern s32 D_8008EF20[11][4];
 
 #include "world/common/UnkFunc17.inc.c"
 
-ApiStatus N(func_8024003C_CAED7C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024003C_CAED7C)(Evt* script, s32 isInitialCall) {
     entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
@@ -36,7 +36,7 @@ typedef struct {
     s16 unk_32C;
 } N(UnkStruct);
 
-ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401CC_CAEF0C)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     N(UnkStruct)* ptr;
     s32 i;
@@ -108,7 +108,7 @@ ApiStatus N(func_802401CC_CAEF0C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF0C, Evt* script,
             s32 isInitialCall);
 #endif
 
@@ -127,7 +127,7 @@ INCLUDE_ASM(ApiStatus, "world/area_flo/flo_08/CAED40", flo_08_func_802401CC_CAEF
 typedef struct {
     s32 unk_00;
     s32 unk_04;
-    Effect* unk_08[3];
+    EffectGraphics* unk_08[3]; // TODO this is wrong
     f32 unk_14[3];
     f32 unk_20[3];
     f32 unk_2C[3];
@@ -139,7 +139,7 @@ typedef struct {
     s32 unk_64;
 } N(UserData);
 
-ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240600_CAF340)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_safe(-4);
     f32 sinTheta, cosTheta;
@@ -259,9 +259,9 @@ ApiStatus N(func_80240600_CAF340)(ScriptInstance* script, s32 isInitialCall) {
     }
 
     for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.x = userDataPtr->unk_14[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.y = userDataPtr->unk_20[i];
-        ((EffectInstanceData*)userDataPtr->unk_08[i]->instanceData)->rotation.z = userDataPtr->unk_2C[i];
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.x = userDataPtr->unk_14[i]; // TODO this is wrong
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.y = userDataPtr->unk_20[i]; // TODO this is wrong
+        ((EffectInstanceData*)userDataPtr->unk_08[i]->freeDelay)->rotation.z = userDataPtr->unk_2C[i]; // TODO this is wrong
     }
 
     return ApiStatus_BLOCK;

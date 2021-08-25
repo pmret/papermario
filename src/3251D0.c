@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects.h"
 
-ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD100_3251D0(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -11,7 +11,7 @@ ApiStatus func_802BD100_3251D0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD1AC_32527C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD1AC_32527C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -22,7 +22,7 @@ ApiStatus func_802BD1AC_32527C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD26C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD26C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -33,7 +33,7 @@ ApiStatus func_802BD26C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD32C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD32C(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     s32 newHP = playerData->curHP + get_variable(script, *script->ptrReadPos);
@@ -50,7 +50,7 @@ ApiStatus func_802BD32C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD388(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     s32 newFP = playerData->curFP + get_variable(script, *script->ptrReadPos);
@@ -67,19 +67,19 @@ ApiStatus func_802BD388(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD3E4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD3E4(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_FULL);
     gOverrideFlags |= 0x200000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD41C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD41C(Evt* script, s32 isInitialCall) {
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
     gOverrideFlags &= ~0x200000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD458(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD458(Evt* script, s32 isInitialCall) {
     s32 itemIdx = get_variable(script, *script->ptrReadPos);
     s32 var15;
 
@@ -100,7 +100,7 @@ ApiStatus func_802BD458(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802BD4E8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BD4E8(Evt* script, s32 isInitialCall) {
     remove_consumable();
     return ApiStatus_DONE2;
 }

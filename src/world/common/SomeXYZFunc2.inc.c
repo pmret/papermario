@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(SomeXYZFunc2)(ScriptInstance* script, s32 isInitialStatus) {
+ApiStatus N(SomeXYZFunc2)(Evt* script, s32 isInitialStatus) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 r = get_float_variable(script, *script->ptrReadPos);
     f32 x = playerStatus->position.x;

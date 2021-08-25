@@ -5,7 +5,7 @@
 
 static HudElement* D_802A25C0;
 
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -44,7 +44,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -80,18 +80,18 @@ void N(func_802A123C_72C7EC)(void) {
                 var = (D_802A25EC / 100) - 0x68;
                 ptr++;
                 set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                draw_icon_2(var2);
+                draw_hud_element_3(var2);
             }
 
             var2 = D_802A25C8;
             var = (D_802A25EC / 100) - 0x68;
             set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            draw_icon_2(var2);
+            draw_hud_element_3(var2);
         }
     }
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A123C_72C7EC, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A123C_72C7EC, Evt* script,
             s32 isInitialCall);
 #endif
 
@@ -107,7 +107,7 @@ extern s16** D_802A25FC;
 extern HudElement** D_802A25C8;
 extern struct N(tempStc) D_8008A680[100];
 
-ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -259,11 +259,11 @@ ApiStatus N(func_802A13E4_72C994)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A13E4_72C994, ScriptInstance* script,
+INCLUDE_ASM(ApiStatus, "battle/item/mystery", battle_item_mystery_func_802A13E4_72C994, Evt* script,
             s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A188C_72CE3C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -274,7 +274,7 @@ ApiStatus N(func_802A188C_72CE3C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-Script N(UseItemWithEffect) = SCRIPT({
+EvtSource N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseBattleCamPreset(69);
         sleep 10;
@@ -321,7 +321,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     }
 });
 
-Script N(UseItem) = SCRIPT({
+EvtSource N(UseItem) = SCRIPT({
     UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
@@ -344,7 +344,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+EvtSource N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 0);
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
@@ -355,7 +355,7 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
-Script N(EatItem) = SCRIPT({
+EvtSource N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -366,7 +366,7 @@ Script N(EatItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(DrinkItem) = SCRIPT({
+EvtSource N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -425,7 +425,7 @@ s32 N(D_802A229C_72D84C)[8] = {
     0x0000008A, 0x0000008C, 0x00000085, 0x0000008A
 };
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_VAR(10) = (const) ITEM_MYSTERY;
     await N(UseItemWithEffect);
     spawn {

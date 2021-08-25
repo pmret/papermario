@@ -58,7 +58,7 @@ INCLUDE_ASM(s32, "23680", get_coin_drop_amount);
 #endif
 
 void func_80048E34(Enemy* enemy, s32 arg1, s32 arg2) {
-    ScriptInstance* newScript;
+    Evt* newScript;
 
     if (enemy->aiScript != NULL) {
         kill_script_by_ID(enemy->aiScriptID);
@@ -173,7 +173,7 @@ void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2) {
     sfx_play_sound_at_position(arg1, value2, npc->pos.x, npc->pos.y, npc->pos.z);
 }
 
-void func_80049550(ScriptInstance* script, s32 arg1) {
+void func_80049550(Evt* script, s32 arg1) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -191,7 +191,7 @@ INCLUDE_ASM(s32, "23680", func_800496B8);
 
 INCLUDE_ASM(s32, "23680", func_80049C04);
 
-void func_80049E3C(ScriptInstance* script) {
+void func_80049E3C(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -204,7 +204,7 @@ void func_80049E3C(ScriptInstance* script) {
     script->functionTemp[0] = 11;
 }
 
-void func_80049ECC(ScriptInstance* script) {
+void func_80049ECC(Evt* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     s32 flag = FALSE;
 
@@ -229,7 +229,7 @@ INCLUDE_ASM(s32, "23680", func_80049F7C);
 
 INCLUDE_ASM(s32, "23680", func_8004A124);
 
-void func_8004A3E8(ScriptInstance* script, s32 arg1) {
+void func_8004A3E8(Evt* script, s32 arg1) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -241,4 +241,4 @@ void func_8004A3E8(ScriptInstance* script, s32 arg1) {
     }
 }
 
-INCLUDE_ASM(s32, "23680", DoBasicAI, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "23680", DoBasicAI, Evt* script, s32 isInitialCall);

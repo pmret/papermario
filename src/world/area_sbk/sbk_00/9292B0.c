@@ -16,7 +16,7 @@ NpcAISettings N(npcAISettings_80240300) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80240330) = SCRIPT({
+EvtSource N(npcAI_80240330) = SCRIPT({
     N(SetNpcB5_3)();
     DoBasicAI(N(npcAISettings_80240300));
 });
@@ -47,22 +47,22 @@ StaticNpc N(npcGroup_80240388) = {
     .maxCoinBonus = 1,
     .movement = { -40, 0, 160, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_C),
-        NPC_ANIM(pokey, Palette_00, Anim_C),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_C,
+        NPC_ANIM_pokey_Palette_00_Anim_C,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -84,22 +84,22 @@ StaticNpc N(npcGroup_80240578) = {
     .maxCoinBonus = 1,
     .movement = { 245, 0, 75, 100, 0, -32767, 0, 0, 0, 0, 1000, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_4),
-        NPC_ANIM(pokey, Palette_00, Anim_C),
-        NPC_ANIM(pokey, Palette_00, Anim_C),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
-        NPC_ANIM(pokey, Palette_00, Anim_8),
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_4,
+        NPC_ANIM_pokey_Palette_00_Anim_C,
+        NPC_ANIM_pokey_Palette_00_Anim_C,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
+        NPC_ANIM_pokey_Palette_00_Anim_8,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -114,7 +114,7 @@ static s32 N(pad_78C) = {
     0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, -230, 0, 155, 0, ITEM_FRIGHT_JAR, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(797));
     MakeEntity(0x802EA564, 160, 0, 205, 0, ITEM_COIN, MAKE_ENTITY_END);

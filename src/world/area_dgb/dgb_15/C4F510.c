@@ -21,7 +21,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_15_tattle },
 };
 
-Script N(802418E0) = SCRIPT({
+EvtSource N(802418E0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             if (SI_SAVE_VAR(203) == 15) {
@@ -47,7 +47,7 @@ s32 N(itemList_802419C0)[] = {
     ITEM_NONE,
 };
 
-Script N(exitDoubleDoor_802419C8) = SCRIPT({
+EvtSource N(exitDoubleDoor_802419C8) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -61,7 +61,7 @@ Script N(exitDoubleDoor_802419C8) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitDoubleDoor_80241A7C) = SCRIPT({
+EvtSource N(exitDoubleDoor_80241A7C) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -75,7 +75,7 @@ Script N(exitDoubleDoor_80241A7C) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitSingleDoor_80241B30) = SCRIPT({
+EvtSource N(exitSingleDoor_80241B30) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
@@ -91,7 +91,7 @@ Script N(exitSingleDoor_80241B30) = SCRIPT({
 
 const N(pad_XXXX)[] = { 0, 0 };
 
-Script N(80241BE4) = SCRIPT({
+EvtSource N(80241BE4) = SCRIPT({
     bind N(exitDoubleDoor_802419C8) TRIGGER_WALL_PRESS_A 19;
     bind N(exitSingleDoor_80241B30) TRIGGER_WALL_PRESS_A 6;
     if (SI_SAVE_FLAG(1066) == 0) {
@@ -101,7 +101,7 @@ Script N(80241BE4) = SCRIPT({
     }
 });
 
-Script N(enterSingleDoor_80241C88) = SCRIPT({
+EvtSource N(enterSingleDoor_80241C88) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -126,7 +126,7 @@ Script N(enterSingleDoor_80241C88) = SCRIPT({
     spawn N(80241BE4);
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SI_AREA_FLAG(1) = 0;
@@ -146,7 +146,7 @@ static s32 N(pad_1E94)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80241EA0) = SCRIPT({
+EvtSource N(80241EA0) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -173,7 +173,7 @@ s32 N(D_80241F8C_C5149C)[] = {
     0x0000000C, 0x42DC0000, 0x42B40000, 0x00000003,
 };
 
-Script N(80241FBC) = SCRIPT({
+EvtSource N(80241FBC) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(1, 5);
     SetSelfVar(2, 8);
@@ -186,7 +186,7 @@ s32 N(unk_missing_8024202C)[] = {
     0x00000000, 0x00000000, 0x000D0000,
 };
 
-Script N(80242058) = SCRIPT({
+EvtSource N(80242058) = SCRIPT({
     EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfVar(0, 4);
     SetSelfVar(1, 32);
@@ -215,7 +215,7 @@ s32 N(unk_missing_80242158)[] = {
     0x00000000, 0x00000000, 0x000D0000,
 };
 
-Script N(80242184) = SCRIPT({
+EvtSource N(80242184) = SCRIPT({
     loop {
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         GetNpcPos(NPC_WORLD_TUBBA, SI_VAR(1), SI_VAR(2), SI_VAR(3));
@@ -229,7 +229,7 @@ Script N(80242184) = SCRIPT({
     SI_AREA_FLAG(1) = 1;
 });
 
-Script N(idle_80242238) = SCRIPT({
+EvtSource N(idle_80242238) = SCRIPT({
     loop {
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         if (SI_VAR(0) >= -1150) {
@@ -248,13 +248,13 @@ Script N(idle_80242238) = SCRIPT({
     }
     SI_SAVE_VAR(203) = 15;
     SetNpcPos(NPC_SELF, 0, 0, 88);
-    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_9);
     SetNpcYaw(NPC_SELF, 270);
     NpcMoveTo(NPC_SELF, -53, 180, 60);
     SetMusicTrack(0, SONG_TUBBA_BLUBBA_THEME, 0, 8);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_6);
     sleep 15;
-    SpeakToPlayer(NPC_SELF, NPC_ANIM(world_tubba, Palette_00, Anim_10), NPC_ANIM(world_tubba, Palette_00, Anim_6), 0, MESSAGE_ID(0x0E, 0x00F3));
+    SpeakToPlayer(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID(0x0E, 0x00F3));
     sleep 15;
     spawn {
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -268,7 +268,7 @@ Script N(idle_80242238) = SCRIPT({
     BindNpcAI(NPC_SELF, N(npcAI_8024274C));
 });
 
-Script N(802424E8) = SCRIPT({
+EvtSource N(802424E8) = SCRIPT({
     GetNpcPos(NPC_SELF, SI_VAR(6), SI_VAR(7), SI_VAR(8));
     loop {
         sleep 1;
@@ -322,23 +322,23 @@ NpcAISettings N(npcAISettings_8024271C) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_8024274C) = SCRIPT({
+EvtSource N(npcAI_8024274C) = SCRIPT({
     spawn N(80242184);
     SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE);
-    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_C));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_C);
     spawn N(802424E8);
     N(func_80241464_C50974)(N(npcAISettings_8024271C));
 });
 
 const char N(dgb_14_name_hack)[];
 
-Script N(defeat_802427B0) = SCRIPT({
+EvtSource N(defeat_802427B0) = SCRIPT({
     N(UnkFunc1)();
     GotoMap(N(dgb_14_name_hack), 1);
     sleep 100;
 });
 
-Script N(init_802427EC) = SCRIPT({
+EvtSource N(init_802427EC) = SCRIPT({
     if (SI_STORY_PROGRESS != STORY_CH3_ARRIVED_AT_TUBBAS_MANOR) {
         RemoveNpc(NPC_SELF);
         return;
@@ -371,22 +371,22 @@ StaticNpc N(npcGroup_802428C0) = {
     .maxCoinBonus = 3,
     .movement = { 7, -500, 0, 200, -700, 0, 200, -900, 0, 200, -1000, 0, 200, -800, 0, 200, -600, 0, 200, -400, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -500, 0, 200, 1000, 250, 1, 1 },
     .animations = {
-        NPC_ANIM(world_tubba, Palette_00, Anim_6),
-        NPC_ANIM(world_tubba, Palette_00, Anim_9),
-        NPC_ANIM(world_tubba, Palette_00, Anim_C),
-        NPC_ANIM(world_tubba, Palette_00, Anim_C),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM_world_tubba_Palette_00_Anim_6,
+        NPC_ANIM_world_tubba_Palette_00_Anim_9,
+        NPC_ANIM_world_tubba_Palette_00_Anim_C,
+        NPC_ANIM_world_tubba_Palette_00_Anim_C,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
     },
     .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
 };
@@ -400,7 +400,7 @@ static s32 N(pad_2AC8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80242AD0) = SCRIPT({
+EvtSource N(80242AD0) = SCRIPT({
     group 0;
     suspend group 1;
     ShowKeyChoicePopup();
@@ -427,11 +427,11 @@ Script N(80242AD0) = SCRIPT({
     unbind;
 });
 
-Script N(80242C38) = SCRIPT({
+EvtSource N(80242C38) = SCRIPT({
     bind N(exitDoubleDoor_80241A7C) TRIGGER_WALL_PRESS_A 10;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_SAVE_FLAG(1066) == 0) {
         MakeEntity(0x802BCD68, 130, 8, 175, -80, MAKE_ENTITY_END);
         AssignScript(N(80242C38));
@@ -451,7 +451,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/UnkFunc7.inc.c"
 
-ApiStatus N(func_8024061C_C4FB2C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024061C_C4FB2C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -558,7 +558,7 @@ ApiStatus N(func_8024061C_C4FB2C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc16.inc.c"
 
-ApiStatus N(func_80241464_C50974)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241464_C50974)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

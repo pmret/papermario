@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc15_copy)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+ApiStatus N(UnkFunc15_copy)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;

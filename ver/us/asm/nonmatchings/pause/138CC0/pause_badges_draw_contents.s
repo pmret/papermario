@@ -90,7 +90,7 @@ glabel pause_badges_draw_contents
 /* 13A994 80247654 2566000B */   addiu    $a2, $t3, 0xb
 /* 13A998 80247658 8E040050 */  lw        $a0, 0x50($s0)
 /* 13A99C 8024765C 240A000A */  addiu     $t2, $zero, 0xa
-/* 13A9A0 80247660 0C0511F8 */  jal       draw_icon_2
+/* 13A9A0 80247660 0C0511F8 */  jal       draw_hud_element_3
 /* 13A9A4 80247664 AFAA0068 */   sw       $t2, 0x68($sp)
 /* 13A9A8 80247668 8FAA00C8 */  lw        $t2, 0xc8($sp)
 /* 13A9AC 8024766C 8FAB00C4 */  lw        $t3, 0xc4($sp)
@@ -551,7 +551,7 @@ glabel pause_badges_draw_contents
 /* 13B064 80247D24 004A1021 */  addu      $v0, $v0, $t2
 /* 13B068 80247D28 8C450000 */  lw        $a1, ($v0)
 .L80247D2C:
-/* 13B06C 80247D2C 0C0511FF */  jal       set_hud_element_script
+/* 13B06C 80247D2C 0C0511FF */  jal       set_hud_element_anim
 /* 13B070 80247D30 0220202D */   daddu    $a0, $s1, $zero
 /* 13B074 80247D34 3C053F2B */  lui       $a1, 0x3f2b
 /* 13B078 80247D38 34A5BA99 */  ori       $a1, $a1, 0xba99
@@ -576,7 +576,7 @@ glabel pause_badges_draw_contents
 /* 13B0C0 80247D80 8FAB0058 */  lw        $t3, 0x58($sp)
 /* 13B0C4 80247D84 15600005 */  bnez      $t3, .L80247D9C
 /* 13B0C8 80247D88 00000000 */   nop
-/* 13B0CC 80247D8C 0C0511F8 */  jal       draw_icon_2
+/* 13B0CC 80247D8C 0C0511F8 */  jal       draw_hud_element_3
 /* 13B0D0 80247D90 0220202D */   daddu    $a0, $s1, $zero
 /* 13B0D4 80247D94 08091F69 */  j         .L80247DA4
 /* 13B0D8 80247D98 00000000 */   nop
@@ -959,7 +959,7 @@ glabel pause_badges_draw_contents
 /* 13B668 80248328 0C051261 */  jal       set_hud_element_render_pos
 /* 13B66C 8024832C 2546000E */   addiu    $a2, $t2, 0xe
 /* 13B670 80248330 8E040044 */  lw        $a0, 0x44($s0)
-/* 13B674 80248334 0C0511F8 */  jal       draw_icon_2
+/* 13B674 80248334 0C0511F8 */  jal       draw_hud_element_3
 /* 13B678 80248338 00000000 */   nop
 /* 13B67C 8024833C 8E220000 */  lw        $v0, ($s1)
 /* 13B680 80248340 24420001 */  addiu     $v0, $v0, 1
@@ -981,7 +981,7 @@ glabel pause_badges_draw_contents
 /* 13B6BC 8024837C 0C051261 */  jal       set_hud_element_render_pos
 /* 13B6C0 80248380 25460092 */   addiu    $a2, $t2, 0x92
 /* 13B6C4 80248384 8E040048 */  lw        $a0, 0x48($s0)
-/* 13B6C8 80248388 0C0511F8 */  jal       draw_icon_2
+/* 13B6C8 80248388 0C0511F8 */  jal       draw_hud_element_3
 /* 13B6CC 8024838C 00000000 */   nop
 .L80248390:
 /* 13B6D0 80248390 3C108027 */  lui       $s0, %hi(D_802703A8)
@@ -993,7 +993,7 @@ glabel pause_badges_draw_contents
 /* 13B6E8 802483A8 0C051261 */  jal       set_hud_element_render_pos
 /* 13B6EC 802483AC 25460051 */   addiu    $a2, $t2, 0x51
 /* 13B6F0 802483B0 8E040040 */  lw        $a0, 0x40($s0)
-/* 13B6F4 802483B4 0C0511F8 */  jal       draw_icon_2
+/* 13B6F4 802483B4 0C0511F8 */  jal       draw_hud_element_3
 /* 13B6F8 802483B8 2413000A */   addiu    $s3, $zero, 0xa
 /* 13B6FC 802483BC 0C093BA0 */  jal       pause_get_menu_string
 /* 13B700 802483C0 24040046 */   addiu    $a0, $zero, 0x46

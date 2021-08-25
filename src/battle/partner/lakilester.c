@@ -5,7 +5,7 @@ extern s32 D_8023D2C8;
 extern s32 D_8023D330;
 extern s32 D_8023D334;
 
-ApiStatus func_80238000_70BD10(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_70BD10(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         D_8023D2C8 = 0;
     }
@@ -20,7 +20,7 @@ ApiStatus func_80238000_70BD10(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_8023803C_70BD4C);
 
-ApiStatus func_80238A6C_70C77C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238A6C_70C77C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     f32 xPos = partnerActor->currentPos.x + 5;
@@ -36,7 +36,7 @@ ApiStatus func_80238A6C_70C77C(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238B50_70C860);
 
-ApiStatus func_80238C14_70C924(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238C14_70C924(Evt* script, s32 isInitialCall) {
     s32 effect = gBattleStatus.cloudNineEffect;
 
     if (effect != NULL) {
@@ -51,7 +51,7 @@ ApiStatus func_80238C14_70C924(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80238C58_70C968);
 
-ApiStatus func_80238D48_70CA58(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238D48_70CA58(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.cloudNineTurnsLeft < script->varTable[10]) {
         gBattleStatus.cloudNineTurnsLeft = script->varTable[10];
         gBattleStatus.cloudNineDodgeChance = 50;
@@ -69,11 +69,11 @@ INCLUDE_ASM(s32, "battle/partner/lakilester", func_80239140_70CE50);
 
 INCLUDE_ASM(s32, "battle/partner/lakilester", func_80239F84_70DC94);
 
-ApiStatus func_8023A19C_70DEAC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023A19C_70DEAC(Evt* script, s32 isInitialCall) {
     return (D_8023D330 == 0) * 2;
 }
 
-ApiStatus func_8023A1B0_70DEC0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023A1B0_70DEC0(Evt* script, s32 isInitialCall) {
     script->varTable[0] = D_8023D334;
     return ApiStatus_DONE2;
 }

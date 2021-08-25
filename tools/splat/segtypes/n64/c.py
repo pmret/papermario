@@ -10,6 +10,7 @@ from util import options
 
 class N64SegC(N64SegCodeSubsegment):
     defined_funcs: Set[str] = set()
+    global_asm_funcs: Set[str] = set()
 
     STRIP_C_COMMENTS_RE = re.compile(
         r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
@@ -18,6 +19,11 @@ class N64SegC(N64SegCodeSubsegment):
 
     C_FUNC_RE = re.compile(
         r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+?{",
+        re.MULTILINE
+    )
+
+    C_GLOBAL_ASM_RE = re.compile(
+        r"(INCLUDE|GLOBAL)_ASM\(\"(\w+\/)*(\w+)\.s\"\)",
         re.MULTILINE
     )
 
@@ -38,6 +44,12 @@ class N64SegC(N64SegCodeSubsegment):
 
         return set(m.group(2) for m in N64SegC.C_FUNC_RE.finditer(text))
 
+    @staticmethod
+    def get_global_asm_funcs(c_file):
+        with open(c_file, "r") as f:
+            text = N64SegC.strip_c_comments(f.read())
+        return set(m.group(3) for m in N64SegC.C_GLOBAL_ASM_RE.finditer(text))
+
     def out_path(self) -> Optional[Path]:
         return options.get_src_path() / self.dir / f"{self.name}.c"
 
@@ -49,24 +61,33 @@ class N64SegC(N64SegCodeSubsegment):
                     # TODO run cpp?
                     self.defined_funcs = self.get_funcs_defined_in_c(path)
                     self.mark_c_funcs_as_defined(self.defined_funcs)
+                    self.global_asm_funcs = self.get_global_asm_funcs(path)
 
             self.funcs_text = self.disassemble_code(rom_bytes)
 
     def split(self, rom_bytes: bytes):
         if not self.rom_start == self.rom_end:
+
             asm_out_dir = options.get_asm_path() / "nonmatchings" / self.dir
             asm_out_dir.mkdir(parents=True, exist_ok=True)
 
-            for func in self.funcs_text:
-                func_name = self.parent.get_symbol(func, type="func", local_only=True).name
-
-                if func_name not in self.defined_funcs:
-                    self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
+            is_new_c_file = False
 
             c_path = self.out_path()
             if c_path:
                 if not os.path.exists(c_path) and options.get("create_new_c_files", True):
                     self.create_c_file(self.funcs_text, asm_out_dir, c_path)
+                    is_new_c_file = True
+
+            for func in self.funcs_text:
+                func_name = self.parent.get_symbol(func, type="func", local_only=True).name
+
+                if options.get_compiler() == "GCC":
+                    if func_name not in self.defined_funcs:
+                        self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
+                else:
+                    if func_name in self.global_asm_funcs or is_new_c_file:
+                        self.create_c_asm_file(self.funcs_text, func, asm_out_dir, func_name)
 
     def get_gcc_inc_header(self):
         ret = []
@@ -79,7 +100,7 @@ class N64SegC(N64SegCodeSubsegment):
     def get_c_preamble(self):
         ret = []
 
-        preamble = options.get("generated_c_preamble", "#include \"common.h\"")
+        preamble = options.get_generated_c_premble()
         ret.append(preamble)
         ret.append("")
 
@@ -136,12 +157,19 @@ class N64SegC(N64SegCodeSubsegment):
 
         for func in funcs_text:
             func_name = self.parent.get_symbol(func, type="func", local_only=True).name
-            if options.get_compiler() == "GCC":
-                c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(self.name, func_name))
+
+            # Terrible hack to "auto-decompile" empty functions
+            # TODO move disassembly into funcs_text or somewhere we can access it from here
+            if len(funcs_text[func][0]) == 3 and funcs_text[func][0][1][-3:] == "$ra" and funcs_text[func][0][2][-3:] == "nop":
+                c_lines.append("void " + func_name + "(void) {")
+                c_lines.append("}")
             else:
-                asm_outpath = Path(os.path.join(asm_out_dir, self.name, func_name + ".s"))
-                rel_asm_outpath = os.path.relpath(asm_outpath, options.get_base_path())
-                c_lines.append(f"#pragma GLOBAL_ASM(\"{rel_asm_outpath}\")")
+                if options.get_compiler() == "GCC":
+                    c_lines.append("INCLUDE_ASM(s32, \"{}\", {});".format(self.name, func_name))
+                else:
+                    asm_outpath = Path(os.path.join(asm_out_dir, self.dir, self.name, func_name + ".s"))
+                    rel_asm_outpath = os.path.relpath(asm_outpath, options.get_base_path())
+                    c_lines.append(f"#pragma GLOBAL_ASM(\"{rel_asm_outpath}\")")
             c_lines.append("")
 
         Path(c_path).parent.mkdir(parents=True, exist_ok=True)

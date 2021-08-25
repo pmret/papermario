@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-void func_8004A6F0(ScriptInstance* script) {
+void func_8004A6F0(Evt* script) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
     npc->duration--;
@@ -10,7 +10,7 @@ void func_8004A6F0(ScriptInstance* script) {
     }
 }
 
-void func_8004A73C(ScriptInstance* script) {
+void func_8004A73C(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
 
     get_npc_unsafe(enemy->npcID);

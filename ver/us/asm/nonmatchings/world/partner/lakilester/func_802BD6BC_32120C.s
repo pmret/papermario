@@ -9,8 +9,8 @@ glabel func_802BD6BC_32120C
 /* 32121C 802BD6CC 00A0882D */  daddu     $s1, $a1, $zero
 /* 321220 802BD6D0 F7B40020 */  sdc1      $f20, 0x20($sp)
 /* 321224 802BD6D4 4480A000 */  mtc1      $zero, $f20
-/* 321228 802BD6D8 3C038011 */  lui       $v1, %hi(D_8010EBB0)
-/* 32122C 802BD6DC 2463EBB0 */  addiu     $v1, $v1, %lo(D_8010EBB0)
+/* 321228 802BD6D8 3C038011 */  lui       $v1, %hi(gPartnerActionStatus)
+/* 32122C 802BD6DC 2463EBB0 */  addiu     $v1, $v1, %lo(gPartnerActionStatus)
 /* 321230 802BD6E0 AFBF0018 */  sw        $ra, 0x18($sp)
 /* 321234 802BD6E4 F7BA0038 */  sdc1      $f26, 0x38($sp)
 /* 321238 802BD6E8 F7B80030 */  sdc1      $f24, 0x30($sp)

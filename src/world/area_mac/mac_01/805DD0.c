@@ -24,7 +24,7 @@
 
 INCLUDE_ASM(s32, "world/area_mac/mac_01/805DD0", func_802460E4_806964);
 /*
-ApiStatus N(func_802460E4_806964)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802460E4_806964)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

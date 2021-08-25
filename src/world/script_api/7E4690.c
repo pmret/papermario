@@ -1,12 +1,12 @@
 #include "common.h"
 #include "../partners.h"
 
-ApiStatus CheckRideScriptForEnterExit(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CheckRideScriptForEnterExit(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
     if (partner_get_ride_script() != NULL) {
-        if (D_8010EBB0.unk_00 == 0) {
+        if (gPartnerActionStatus.actionState.b[0] == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;
@@ -18,7 +18,7 @@ ApiStatus CheckRideScriptForEnterExit(ScriptInstance* script, s32 isInitialCall)
     return ApiStatus_DONE2;
 }
 
-ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus TeleportPartnerToPlayer(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* partner;
 
@@ -39,7 +39,7 @@ ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerPositionFromSaveData(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerPositionFromSaveData(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 currentPartner = gPlayerData.currentPartner;
@@ -65,17 +65,17 @@ ApiStatus SetPlayerPositionFromSaveData(ScriptInstance* script, s32 isInitialCal
 
 INCLUDE_ASM(s32, "world/script_api/7E4690", EnterPlayerPostPipe);
 
-ApiStatus ShortenPartnerTetherDistance(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShortenPartnerTetherDistance(Evt* script, s32 isInitialCall) {
     partner_set_tether_distance(20.0f);
     return ApiStatus_DONE2;
 }
 
-ApiStatus ResetPartnerTetherDistance(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ResetPartnerTetherDistance(Evt* script, s32 isInitialCall) {
     repartner_set_tether_distance();
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerMoveToDoor(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerMoveToDoor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 

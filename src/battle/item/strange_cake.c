@@ -6,7 +6,7 @@
 
 static HudElement* D_802A2DD0;
 
-ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefund)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -45,7 +45,7 @@ ApiStatus N(GiveRefund)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(GiveRefundCleanup)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GiveRefundCleanup)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->selectedItemID].sellValue;
@@ -63,7 +63,7 @@ extern s32 D_802A25E4;
 extern HudElement* D_802A2DF4;
 extern s32 D_802A2DD8;
 
-ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A123C_73153C)(Evt* script, s32 isInitialCall) {
     s32 i;
     HudElement** ptr;
     s32 var;
@@ -81,13 +81,13 @@ ApiStatus N(func_802A123C_73153C)(ScriptInstance* script, s32 isInitialCall) {
                 var = (D_802A2DD8 / 100) - 0x68;
                 ptr++;
                 set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-                draw_icon_2(var2);
+                draw_hud_element_3(var2);
             }
 
             var2 = D_802A2DF4;
             var = (D_802A2DD8 / 100) - 0x68;
             set_hud_element_render_pos(var2, 0x7C, (i * 0x1A) - var);
-            draw_icon_2(var2);
+            draw_hud_element_3(var2);
         }
     }
 }
@@ -114,7 +114,7 @@ s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001
 };
 
-ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -253,10 +253,10 @@ ApiStatus N(func_802A13E4_7316E4)(ScriptInstance* script, s32 isInitialCall) {
 }
 #else
 INCLUDE_ASM(ApiStatus, "battle/item/strange_cake", battle_item_strange_cake_func_802A13E4_7316E4,
-            ScriptInstance* script, s32 isInitialCall);
+            Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus N(func_802A1818_731B18)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1818_731B18)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -267,7 +267,7 @@ ApiStatus N(func_802A1818_731B18)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A18D8_731BD8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A18D8_731BD8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a = get_variable(script, *args++);
     s32 b = get_variable(script, *args++);
@@ -282,7 +282,7 @@ ApiStatus N(func_802A18D8_731BD8)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "common/AddFP.inc.c"
 
-ApiStatus N(func_802A1A40_731D40)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1A40_731D40)(Evt* script, s32 isInitialCall) {
     StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
@@ -296,7 +296,7 @@ ApiStatus N(func_802A1A40_731D40)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1A8C_731D8C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1A8C_731D8C)(Evt* script, s32 isInitialCall) {
     StaticItem* item = &gItemTable[ITEM_KOOKY_COOKIE];
     PlayerData* playerData = &gPlayerData;
 
@@ -310,7 +310,7 @@ ApiStatus N(func_802A1A8C_731D8C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1AD8_731DD8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1AD8_731DD8)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -320,7 +320,7 @@ ApiStatus N(func_802A1AD8_731DD8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B14_731E14)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1B14_731E14)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
@@ -332,7 +332,7 @@ ApiStatus N(func_802A1B14_731E14)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802A1B68_731E68)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802A1B68_731E68)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
@@ -342,7 +342,7 @@ ApiStatus N(func_802A1B68_731E68)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-Script N(UseItemWithEffect) = SCRIPT({
+EvtSource N(UseItemWithEffect) = SCRIPT({
     if (SI_VAR(1) == 0) {
         UseBattleCamPreset(69);
         sleep 10;
@@ -389,7 +389,7 @@ Script N(UseItemWithEffect) = SCRIPT({
     }
 });
 
-Script N(UseItem) = SCRIPT({
+EvtSource N(UseItem) = SCRIPT({
     UseBattleCamPreset(19);
     SetBattleCamTarget(-85, 1, 0);
     SetBattleCamOffsetZ(41);
@@ -412,7 +412,7 @@ Script N(UseItem) = SCRIPT({
     RemoveItemEntity(SI_VAR(14));
 });
 
-Script N(PlayerGoHome) = SCRIPT({
+EvtSource N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 0);
     SetGoalToHome(ACTOR_PLAYER);
     SetActorSpeed(ACTOR_PLAYER, 8.0);
@@ -423,7 +423,7 @@ Script N(PlayerGoHome) = SCRIPT({
     UseIdleAnimation(ACTOR_PLAYER, 1);
 });
 
-Script N(EatItem) = SCRIPT({
+EvtSource N(EatItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -434,7 +434,7 @@ Script N(EatItem) = SCRIPT({
     sleep 45;
 });
 
-Script N(DrinkItem) = SCRIPT({
+EvtSource N(DrinkItem) = SCRIPT({
     spawn {
         loop 4 {
             PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_2095);
@@ -473,7 +473,7 @@ s32 N(D_802A2858_732B58)[] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x000000000
 };
 
-Script N(script6) = SCRIPT({
+EvtSource N(script6) = SCRIPT({
     GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) == 211) {
         SI_VAR(10) = (const) ITEM_KOOKY_COOKIE;
@@ -526,7 +526,7 @@ Script N(script6) = SCRIPT({
     await N(PlayerGoHome);
 });
 
-Script N(script7) = SCRIPT({
+EvtSource N(script7) = SCRIPT({
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
@@ -537,7 +537,7 @@ Script N(script7) = SCRIPT({
     WaitForMessageBoxDone();
 });
 
-Script N(script8) = SCRIPT({
+EvtSource N(script8) = SCRIPT({
     SetAnimation(ACTOR_PLAYER, 0, ANIM_10002);
     GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(1) += 20;
@@ -548,7 +548,7 @@ Script N(script8) = SCRIPT({
     WaitForMessageBoxDone();
 });
 
-Script N(script9) = SCRIPT({
+EvtSource N(script9) = SCRIPT({
     SetAnimation(ACTOR_PLAYER, 0, ANIM_30004);
     SetGoalToTarget(ACTOR_PLAYER);
     GetGoalPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));

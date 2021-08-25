@@ -5,7 +5,7 @@ enum {
     NPC_GOOMPA,
 };
 
-ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401B0_8C8140)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(0);
 
     script->varTable[1] = get_xz_dist_to_player(npc->pos.x, npc->pos.z) / npc->moveSpeed * 0.8f;
@@ -14,16 +14,16 @@ ApiStatus N(func_802401B0_8C8140)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-Script N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
+EvtSource N(exitWalk_802406F0) = EXIT_WALK_SCRIPT(60,  0, "kmr_04",  0);
 
-Script N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
+EvtSource N(exitWalk_8024074C) = EXIT_WALK_SCRIPT(60,  1, "kmr_05",  0);
 
-Script N(802407A8) = SCRIPT({
+EvtSource N(802407A8) = SCRIPT({
     bind N(exitWalk_802406F0) TRIGGER_FLOOR_ABOVE 3;
     bind N(exitWalk_8024074C) TRIGGER_FLOOR_ABOVE 5;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GOOMBA_VILLAGE;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -58,7 +58,7 @@ NpcSettings N(npcSettings_80240950) = {
     .unk_2A = 16,
 };
 
-Script N(8024097C) = SCRIPT({
+EvtSource N(8024097C) = SCRIPT({
 1:
     if (SI_AREA_FLAG(8) == 1) {
 100:
@@ -66,7 +66,7 @@ Script N(8024097C) = SCRIPT({
         EnableNpcAI(0, 0);
         DisablePlayerInput(TRUE);
         SetNpcSpeed(NPC_GOOMPA, 4.0);
-        SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_3));
+        SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
         N(func_802401B0_8C8140)();
         GetAngleToPlayer(0, SI_VAR(2));
         loop SI_VAR(1) {
@@ -87,7 +87,7 @@ Script N(8024097C) = SCRIPT({
     goto 1;
 });
 
-Script N(npcAI_80240B50) = SCRIPT({
+EvtSource N(npcAI_80240B50) = SCRIPT({
 1:
     match SI_STORY_PROGRESS {
         == STORY_CH0_FELL_OFF_CLIFF {
@@ -104,7 +104,7 @@ Script N(npcAI_80240B50) = SCRIPT({
             sleep 15;
             NpcFacePlayer(NPC_SELF, 5);
             sleep 10;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A6));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A6));
             UseSettingsFrom(0, -220, 20, -72);
             SetPanTarget(0, -20, 0, 68);
             SetCamPitch(0, 15.0, -8.5);
@@ -118,16 +118,16 @@ Script N(npcAI_80240B50) = SCRIPT({
             }
             GetNpcPos(NPC_GOOMPA, SI_VAR(7), SI_VAR(8), SI_VAR(9));
             SetNpcSpeed(NPC_GOOMPA, 4.0);
-            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_3));
+            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_3);
             NpcMoveTo(NPC_GOOMPA, 0, 70, 0);
-            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_1);
             InterpNpcYaw(NPC_GOOMPA, 276, 20);
             sleep 30;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A7));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A7));
             sleep 5;
             SetPlayerAnimation(ANIM_80007);
             sleep 30;
-            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM(goompa, Palette_00, Anim_8), NPC_ANIM(goompa, Palette_00, Anim_1), 0, MESSAGE_ID(0x0B, 0x00A8));
+            SpeakToPlayer(NPC_GOOMPA, NPC_ANIM_goompa_Palette_00_Anim_8, NPC_ANIM_goompa_Palette_00_Anim_1, 0, MESSAGE_ID(0x0B, 0x00A8));
             N(UnkFunc41)(0, 5);
             SI_STORY_PROGRESS = STORY_CH0_GOOMPA_JOINED_PARTY;
             UseSettingsFrom(0, -220, 20, -72);
@@ -144,10 +144,10 @@ Script N(npcAI_80240B50) = SCRIPT({
     }
 });
 
-Script N(hit_80240F64) = SCRIPT({
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_7));
+EvtSource N(hit_80240F64) = SCRIPT({
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_7);
     sleep 10;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_1);
     SI_MAP_VAR(0) += 1;
     if (SI_MAP_VAR(0) < 3) {
         GetOwnerEncounterTrigger(SI_VAR(0));
@@ -170,7 +170,7 @@ Script N(hit_80240F64) = SCRIPT({
             }
         }
         sleep 10;
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(goompa, Palette_00, Anim_3));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_goompa_Palette_00_Anim_3);
     } else {
         sleep 10;
         GetNpcPos(NPC_GOOMPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -184,7 +184,7 @@ Script N(hit_80240F64) = SCRIPT({
     }
 });
 
-Script N(init_802411A8) = SCRIPT({
+EvtSource N(init_802411A8) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(npcAI_80240B50));
     BindNpcAux(-1, N(8024097C));
     BindNpcHit(-1, N(hit_80240F64));
@@ -208,22 +208,22 @@ StaticNpc N(npcGroup_80241260) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_2),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_1),
-        NPC_ANIM(goompa, Palette_00, Anim_0),
-        NPC_ANIM(goompa, Palette_00, Anim_0),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
-        NPC_ANIM(goompa, Palette_00, Anim_3),
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_2,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_1,
+        NPC_ANIM_goompa_Palette_00_Anim_0,
+        NPC_ANIM_goompa_Palette_00_Anim_0,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
+        NPC_ANIM_goompa_Palette_00_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x0063),
 };
@@ -237,16 +237,16 @@ static s32 N(pad_1468)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(80241470) = SCRIPT({
+EvtSource N(80241470) = SCRIPT({
     ModifyColliderFlags(0, 9, 0x7FFFFE00);
     SI_STORY_PROGRESS = STORY_CH0_LEFT_THE_PLAYGROUND;
 });
 
-Script N(802414A8) = SCRIPT({
+EvtSource N(802414A8) = SCRIPT({
     SI_SAVE_FLAG(54) = 1;
 });
 
-Script N(802414C8) = SCRIPT({
+EvtSource N(802414C8) = SCRIPT({
 0:
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SetCamTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -254,7 +254,7 @@ Script N(802414C8) = SCRIPT({
     goto 0;
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH0_LEFT_THE_PLAYGROUND) {
         MakeEntity(0x802EA10C, 45, 0, 70, 15, MAKE_ENTITY_END);
         AssignScript(N(80241470));

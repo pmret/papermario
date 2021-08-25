@@ -7,11 +7,11 @@
 #include "si.h"
 #include "enums.h"
 
-struct ScriptInstance;
+struct Evt;
 
-typedef ApiStatus(*ApiFunc)(struct ScriptInstance*, s32);
+typedef ApiStatus(*ApiFunc)(struct Evt*, s32);
 
-typedef Bytecode Script[0];
+typedef Bytecode EvtSource[0];
 
 typedef struct {
     u8 r, g, b, a;
@@ -176,7 +176,14 @@ typedef struct Npc {
     /* 0x0C4 */ s32* spritePaletteList;
     /* 0x0C8 */ Palette16 localPaletteData[16];
     /* 0x2C8 */ Palette16* localPalettes[16];
-    /* 0x308 */ char unk_308[16];
+    /* 0x308 */ s16 unk_308;
+    /* 0x30A */ s16 unk_30A;
+    /* 0x30C */ s16 unk_30C;
+    /* 0x30E */ s16 unk_30E;
+    /* 0x310 */ s16 unk_310;
+    /* 0x312 */ s16 unk_312;
+    /* 0x314 */ s16 unk_314;
+    /* 0x316 */ s16 unk_316;
     /* 0x318 */ f32 screenSpaceOffset2D[2];
     /* 0x320 */ f32 verticalStretch;
     /* 0x324 */ struct EffectInstance* decorations[2];
@@ -269,15 +276,15 @@ typedef struct Trigger {
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
     /* 0x0C */ UNK_FUN_PTR(functionHandler);
-    /* 0x10 */ Script* scriptSource;
-    /* 0x14 */ struct ScriptInstance* runningScript;
+    /* 0x10 */ EvtSource* scriptSource;
+    /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
     /* 0x1C */ s32 scriptVars[3];
     /* 0x28 */ char unk_28[4];
     /* 0x2C */ s32 unk_2C;
     /* 0x30 */ u8 unk_30;
     /* 0x31 */ char unk_31[3];
-    /* 0x34 */ ScriptID runningScriptID;
+    /* 0x34 */ s32 runningScriptID;
 } Trigger; // size = 0x38
 
 typedef Trigger* TriggerList[MAX_TRIGGERS];
@@ -287,7 +294,7 @@ typedef union X32 {
     f32 f;
 } X32;
 
-typedef struct ScriptInstance {
+typedef struct Evt {
     /* 0x000 */ u8 state;
     /* 0x001 */ u8 currentArgc;
     /* 0x002 */ u8 currentOpcode;
@@ -301,9 +308,9 @@ typedef struct ScriptInstance {
     /* 0x010 */ s8 labelIndices[16];
     /* 0x020 */ UNK_PTR labelPositions[16];
     /* 0x060 */ UNK_PTR userData; /* unknown pointer; allocated on the heap, free'd in kill_script() */
-    /* 0x064 */ struct ScriptInstance* blockingParent; /* parent? */
-    /* 0x068 */ struct ScriptInstance* childScript;
-    /* 0x06C */ struct ScriptInstance* parentScript; /* brother? */
+    /* 0x064 */ struct Evt* blockingParent; /* parent? */
+    /* 0x068 */ struct Evt* childScript;
+    /* 0x06C */ struct Evt* parentScript; /* brother? */
     /* 0x070 */ s32 functionTemp[4];
     /* 0x080 */ ApiFunc callFunction;
     /* 0x084 */ s32 varTable[16];
@@ -315,7 +322,7 @@ typedef struct ScriptInstance {
     /* 0x138 */ s32* buffer;
     /* 0x13C */ s32* array;
     /* 0x140 */ s32* flagArray;
-    /* 0x144 */ ScriptID id;
+    /* 0x144 */ s32 id;
     /* 0x148 */ union {
         s32 enemyID;
         ActorID actorID;
@@ -334,9 +341,9 @@ typedef struct ScriptInstance {
     /* 0x15C */ Bytecode* ptrFirstLine;
     /* 0x160 */ Bytecode* ptrSavedPosition;
     /* 0x164 */ Bytecode* ptrCurrentLine;
-} ScriptInstance; // size = 0x168
+} Evt; // size = 0x168
 
-typedef ScriptInstance* ScriptList[MAX_SCRIPTS];
+typedef Evt* ScriptList[MAX_SCRIPTS];
 
 struct Entity;
 
@@ -359,7 +366,7 @@ typedef struct Entity {
     /* 0x18 */ s32* scriptReadPos;
     /* 0x1C */ EntityCallback updateScriptCallback;
     /* 0x20 */ EntityCallback updateMatrixOverride;
-    /* 0x24 */ ScriptInstance* boundScript;
+    /* 0x24 */ Evt* boundScript;
     /* 0x28 */ Bytecode* boundScriptBytecode;
     /* 0x2C */ s32* savedReadPos;
     /* 0x30 */ char unk_30[0x8];
@@ -418,36 +425,6 @@ typedef struct MusicSettings {
     /* 0x28 */ s32 unk_28;
     /* 0x2C */ s32 unk_2C;
 } MusicSettings; // size = 0x30
-
-typedef struct HudElement {
-    /* 0x00 */ s32 flags;
-    /* 0x04 */ s32* readPos;
-    /* 0x08 */ s32* startReadPos;
-    /* 0x0C */ s32* ptrPropertyList;
-    /* 0x10 */ s32* imageAddr;
-    /* 0x14 */ s32* paletteAddr;
-    /* 0x18 */ s32 memOffset;
-    /* 0x1C */ s32* hudTransform;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ f32 unk_24;
-    /* 0x28 */ f32 unkImgScale[2];
-    /* 0x30 */ f32 uniformScale;
-    /* 0x34 */ s32 widthScale; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x38 */ s32 heightScale; /* X.10 fmt (divide by 1024.0 to get float) */
-    /* 0x3C */ s16 renderPosX;
-    /* 0x3E */ s16 renderPosY;
-    /* 0x40 */ u8 screenPosOffset[2];
-    /* 0x42 */ u8 worldPosOffset[3];
-    /* 0x45 */ s8 drawSizePreset;
-    /* 0x46 */ s8 tileSizePreset;
-    /* 0x47 */ u8 updateTimer;
-    /* 0x48 */ u8 sizeX; /* screen size? */
-    /* 0x49 */ u8 sizeY; /* screen size? */
-    /* 0x4A */ u8 opacity;
-    /* 0x4B */ s8 tint[3];
-    /* 0x4E */ s8 customImageSize[2];
-    /* 0x40 */ s8 customDrawSize[2];
-} HudElement; // size = 0x54
 
 typedef struct UiStatus {
     /* 0x00 */ s32 hpIconIndexes[2];
@@ -523,6 +500,16 @@ typedef struct CameraInitData {
     /* 0x10 */ s16 vfov;
 } CameraInitData; // size = 0x12;
 
+typedef struct CameraUnk {
+    /* 0x00 */ s16 unk_00;
+    /* 0x02 */ s16 unk_02;
+    /* 0x04 */ char unk_04[0x8];
+    /* 0x0C */ s32 unk_0C;
+    /* 0x10 */ char unk_10[0x54];
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ char unk_68[0x24];
+} CameraUnk; // size = 0x8C
+
 typedef struct Camera {
     /* 0x000 */ u16 flags;
     /* 0x002 */ s16 moveFlags;
@@ -547,7 +534,7 @@ typedef struct Camera {
     /* 0x02A */ s16 zoomPercent;
     /* 0x02C */ s16 bgColor[3];
     /* 0x032 */ s16 targetScreenCoords[3];
-    /* 0x038 */ s16 perspNorm;
+    /* 0x038 */ u16 perspNorm;
     /* 0x03A */ char unk_3A[2];
     /* 0x03C */ Vec3f lookAt_eye;
     /* 0x048 */ Vec3f lookAt_obj;
@@ -561,20 +548,29 @@ typedef struct Camera {
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ f32 trueRotation[3];
+    /* 0x084 */ Vec3f trueRotation;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ s32 unk_98;
     /* 0x09C */ s32 unk_9C;
     /* 0x0A0 */ Vp viewport;
-    /* 0x0B0 */ char unk_B0[0x24];
+    /* 0x0B0 */ Vp vpAlt;
+    /* 0x0C0 */ s32 unk_C0;
+    /* 0x0C4 */ f32 unk_C4;
+    /* 0x0C8 */ char unk_C8[0xC];
     /* 0x0D4 */ Matrix4f perspectiveMatrix;
     /* 0x114 */ Matrix4f viewMtxPlayer; /* centers on player */
     /* 0x154 */ Matrix4f viewMtxLeading; /* leads player slightly */
     /* 0x194 */ Matrix4f viewMtxShaking; /* used while ShakeCam is active */
-    /* 0x1D4 */ char unk_1D4[48];
+    /* 0x1D4 */ char unk_1D4[0x28];
+    /* 0x1FC */ void (*fpDoPreRender)(struct Camera*);
+    /* 0x200 */ void (*fpDoPostRender)(struct Camera*);
     /* 0x204 */ struct Matrix4s* unkMatrix;
-    /* 0x208 */ char unk_208[572];
+    /* 0x208 */ s32 unk_208;
+    /* 0x20C */ struct Matrix4s* unkEffectMatrix;
+    /* 0x210 */ char unk_210[0x2];
+    /* 0x212 */ s16 unk_212;
+    /* 0x214 */ CameraUnk unk_214[4];
     /* 0x444 */ struct Zone* prevZone;
     /* 0x448 */ struct Zone* currentZone;
     /* 0x44C */ struct CamPosSettings initialSettings; /* for start of blend between zones */
@@ -599,11 +595,20 @@ typedef struct Camera {
     /* 0x506 */ u16 unk_506;
     /* 0x508 */ f32 panPhase;
     /* 0x50C */ f32 leadAmount;
-    /* 0x510 */ char unk_510[16];
+    /* 0x510 */ f32 unk_510;
+    /* 0x514 */ f32 unk_514;
+    /* 0x518 */ f32 unk_518;
+    /* 0x51C */ s32 unk_51C;
     /* 0x520 */ f32 unk_520;
-    /* 0x524 */ char unk_524[16];
+    /* 0x524 */ f32 unk_524;
+    /* 0x528 */ f32 unk_528;
+    /* 0x52C */ s32 unk_52C;
+    /* 0x530 */ s32 unk_530;
     /* 0x534 */ struct ColliderBoundingBox* aabbForZoneBelow;
-    /* 0x538 */ char unk_538[32];
+    /* 0x538 */ char unk_538[0x18];
+    /* 0x550 */ f32 unk_550;
+    /* 0x554 */ s16 unk_554;
+    /* 0x556 */ s16 unk_556;
 } Camera; // size = 0x558
 
 typedef struct BattleStatusUnkInner {
@@ -698,10 +703,10 @@ typedef struct BattleStatus {
     /* 0x0B1 */ char unk_B1[3];
     /* 0x0B4 */ UNK_FUN_PTR(preUpdateCallback);
     /* 0x0B8 */ UNK_FUN_PTR(unk_B8);
-    /* 0x0BC */ struct ScriptInstance* controlScript; /* control handed over to this when changing partners */
-    /* 0x0C0 */ ScriptID controlScriptID;
-    /* 0x0C4 */ struct ScriptInstance* camMovementScript;
-    /* 0x0C8 */ ScriptID camMovementScriptID;
+    /* 0x0BC */ struct Evt* controlScript; /* control handed over to this when changing partners */
+    /* 0x0C0 */ s32 controlScriptID;
+    /* 0x0C4 */ struct Evt* camMovementScript;
+    /* 0x0C8 */ s32 camMovementScriptID;
     /* 0x0CC */ Vec3f unk_CC;
     /* 0x0D8 */ struct Actor* playerActor;
     /* 0x0DC */ struct Actor* partnerActor;
@@ -756,7 +761,7 @@ typedef struct BattleStatus {
     /* 0x431 */ s8 inputBufferPos;
     /* 0x432 */ s8 unk_432;
     /* 0x433 */ char unk_433;
-    /* 0x434 */ s32 unk_434;
+    /* 0x434 */ s32* unk_434;
     /* 0x438 */ FGModelData* foregroundModelData;
     /* 0x43C */ BattleStatusUnk* unk_43C;
     /* 0x440 */ u8 tattleFlags[27];
@@ -938,7 +943,7 @@ typedef struct EffectInstance {
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 totalMatricies;
     /* 0x0C */ struct EffectInstanceData* data;
-    /* 0x10 */ struct Effect* effect;
+    /* 0x10 */ struct EffectGraphics* effect;
 } EffectInstance;
 
 typedef struct EffectBlueprint {
@@ -962,7 +967,7 @@ typedef struct {
 // Assume they return an Effect*, and this struct is accessed at unk_0C,
 // but this struct differs from EffectInstanceData
 // Search for "struct N(temp)" for examples
-typedef struct {
+typedef struct EffectInstanceDataThing {
     char unk_00[0x4];
     f32 unk_04;
     f32 unk_08;
@@ -985,24 +990,24 @@ typedef struct {
     s32 unk_74;
 } EffectInstanceDataThing;
 
-typedef struct Effect {
+typedef struct EffectGraphics {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s32 effectIndex;
     /* 0x08 */ s32 instanceCounter;
-    /* 0x0C */ EffectInstanceData* instanceData;  //? Maybe EffectInstanceData too ?
+    /* 0x0C */ s32 freeDelay;
     /* 0x10 */ void (*update)(EffectInstance* effectInst);
     /* 0x14 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x18 */ void (*unk_18)(EffectInstance* effectInst);
-    /* 0x1C */ void* unk_1C;
-} Effect; // size = 0x20
+    /* 0x18 */ void (*renderUI)(EffectInstance* effectInst);
+    /* 0x1C */ s32* data;
+} EffectGraphics; // size = 0x20
 
 typedef struct EffectTableEntry {
     /* 0x00 */ void (*entryPoint)(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 x, f32 y, f32 z);
     /* 0x04 */ void* dmaStart;
     /* 0x08 */ void* dmaEnd;
     /* 0x0C */ void* dmaDest;
-    /* 0x10 */ void* unkStartRom;
-    /* 0x14 */ void* unkEndRom;
+    /* 0x10 */ void* graphicsDmaStart;
+    /* 0x14 */ void* graphicsDmaEnd;
 } EffectTableEntry; // size = 0x18
 
 typedef struct ItemEntity {
@@ -1245,7 +1250,7 @@ typedef struct GameStatus {
     /* 0x068 */ s16 demoButtonInput;
     /* 0x06A */ s8 demoStickX;
     /* 0x06B */ s8 demoStickY;
-    /* 0x06C */ ScriptID mainScriptID;
+    /* 0x06C */ s32 mainScriptID;
     /* 0x070 */ s8 isBattle;
     /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
@@ -1442,13 +1447,13 @@ typedef struct ActorPart {
 } ActorPart; // size = 0xC4
 
 typedef struct ColliderTriangle {
-    /* 0x00 */ f32* v1[3]; /* note: the order of v1,2,3 is reversed from the ijk in the hit file */
-    /* 0x04 */ f32* v2[3];
-    /* 0x08 */ f32* v3[3];
-    /* 0x0C */ f32 e13[3]; /* = v3 - v1 */
-    /* 0x18 */ f32 e21[3]; /* = v1 - v2 */
-    /* 0x24 */ f32 e32[3]; /* = v2 - v3 */
-    /* 0x30 */ f32 normal[3];
+    /* 0x00 */ Vec3f* v1; /* note: the order of v1,2,3 is reversed from the ijk in the hit file */
+    /* 0x04 */ Vec3f* v2;
+    /* 0x08 */ Vec3f* v3;
+    /* 0x0C */ Vec3f e13; /* = v3 - v1 */
+    /* 0x18 */ Vec3f e21; /* = v1 - v2 */
+    /* 0x24 */ Vec3f e32; /* = v2 - v3 */
+    /* 0x30 */ Vec3f normal;
     /* 0x3C */ s16 oneSided; /* 1 = yes, 0 = no */
     /* 0x3E */ char unk_3E[2];
 } ColliderTriangle; // size = 0x40
@@ -1622,7 +1627,7 @@ typedef struct Shop {
 typedef struct Encounter {
     /* 0x00 */ s32 count;
     /* 0x04 */ struct Enemy* enemy[16];
-    /* 0x44 */ s16 battle;
+    /* 0x44 */ u16 battle;
     /* 0x46 */ s16 stage;
     /* 0x48 */ s16 encounterID;
     /* 0x4A */ char unk_4C[0x12];
@@ -1744,18 +1749,18 @@ typedef struct Actor {
     /* 0x1BA */ char unk_1BA[2];
     /* 0x1BC */ u8 hpFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
-    /* 0x1C0 */ Script* idleScriptSource;
-    /* 0x1C4 */ Script* takeTurnScriptSource;
-    /* 0x1C8 */ Script* onHitScriptSource;
-    /* 0x1CC */ Script* onTurnChanceScriptSource;
-    /* 0x1D0 */ struct ScriptInstance* idleScript;
-    /* 0x1D4 */ struct ScriptInstance* takeTurnScript;
-    /* 0x1D8 */ struct ScriptInstance* onHitScript;
-    /* 0x1DC */ struct ScriptInstance* onTurnChangeScript;
-    /* 0x1E0 */ ScriptID idleScriptID;
-    /* 0x1E4 */ ScriptID takeTurnID;
-    /* 0x1E8 */ ScriptID onHitID;
-    /* 0x1EC */ ScriptID onTurnChangeID;
+    /* 0x1C0 */ EvtSource* idleScriptSource;
+    /* 0x1C4 */ EvtSource* takeTurnScriptSource;
+    /* 0x1C8 */ EvtSource* onHitScriptSource;
+    /* 0x1CC */ EvtSource* onTurnChanceScriptSource;
+    /* 0x1D0 */ struct Evt* idleScript;
+    /* 0x1D4 */ struct Evt* takeTurnScript;
+    /* 0x1D8 */ struct Evt* onHitScript;
+    /* 0x1DC */ struct Evt* onTurnChangeScript;
+    /* 0x1E0 */ s32 idleScriptID;
+    /* 0x1E4 */ s32 takeTurnID;
+    /* 0x1E8 */ s32 onHitID;
+    /* 0x1EC */ s32 onTurnChangeID;
     /* 0x1F0 */ s8 lastEventType;
     /* 0x1F1 */ u8 turnPriority;
     /* 0x1F2 */ u8 enemyIndex; /* actorID = this | 200 */
@@ -1916,7 +1921,8 @@ typedef struct PlayerStatus {
     /* 0x0C6 */ s16 unk_C6;
     /* 0x0C8 */ s32* unk_C8;
     /* 0x0CC */ s32 shadowID;
-    /* 0x0D0 */ char unk_D0[8];
+    /* 0x0D0 */ char unk_D0[4];
+    /* 0x0D4 */ f32 unk_D4;
     /* 0x0D8 */ UNK_PTR** unk_D8;
     /* 0x0DC */ s32 currentButtons;
     /* 0x0E0 */ s32 pressedButtons;
@@ -2147,20 +2153,21 @@ typedef struct Temp8010F250 {
     /* 0x30 */ SoundID unk_30;
 } Temp8010F250; // size = 0x34
 
-typedef struct Temp8010EBB0 {
-    /* 0x000 */ s8 unk_00;
-    /* 0x001 */ s8 unk_01;
-    /* 0x002 */ s8 unk_02;
-    /* 0x003 */ s8 unk_03;
-    /* 0x004 */ char unk_04[0x4];
-    /* 0x008 */ s32 unk_08;
-    /* 0x009 */ s32 unk_0C;
-    /* 0x010 */ char unk_10[0x4];
-    /* 0x014 */ s8 unk_14;
+typedef struct PartnerActionStatus {
+    /* 0x000 */ union {
+        /*       */     s32 i;
+        /*       */     s8 b[4];
+    } actionState;
+    /* 0x004 */ s16 stickX;
+    /* 0x006 */ s16 stickY;
+    /* 0x008 */ s32 currentButtons;
+    /* 0x00C */ s32 pressedButtons;
+    /* 0x010 */ s32 heldButtons;
+    /* 0x014 */ s8 inputDisabled;
     /* 0x015 */ char unk_15[0x343];
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
-} Temp8010EBB0; // size = 0x360
+} PartnerActionStatus; // size = 0x360
 
 typedef struct Temp8025D160 {
     /* 0x00 */ s32 unk_00;
@@ -2233,17 +2240,22 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ HudElement* hudElements[7];
-    /* 0x20 */ char unk_20[0x2A];
+    /* 0x04 */ struct HudElement* hudElements[15];
+    /* 0x40 */ char unk_40[0x4];
+    /* 0x44 */ s16 unk_44;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ s16 unk_48;
     /* 0x4A */ s16 actionCommandID; // current action command id?
-    /* 0x4C */ s16 unk_4C;
+    /* 0x4C */ s16 state;
     /* 0x4E */ s16 unk_4E;
     /* 0x50 */ s16 unk_50;
     /* 0x52 */ s16 unk_52;
     /* 0x54 */ s16 unk_54;
     /* 0x56 */ s16 hudElementX;
     /* 0x58 */ s16 hudElementY;
-    /* 0x59 */ char unk_59[4];
+    /* 0x5A */ s16 unk_5A;
+    /* 0x5C */ s8 unk_5C;
+    /* 0x5D */ s8 unk_5D;
     /* 0x5E */ s8 autoSucceed;
     /* 0x5F */ s8 unk_5F;
     /* 0x60 */ s8 unk_60;
@@ -2256,9 +2268,9 @@ typedef struct ActionCommandStatus {
     /* 0x6A */ s16 unk_6A;
     /* 0x6C */ s16 unk_6C;
     /* 0x6E */ s16 hitsTakenIsMax;
-    /* 0x70 */ char unk_70[4];
-    /* 0x74 */ s16 unk_74;
-    /* 0x76 */ s16 mashMeterCutoffs[5]; // upper bounds for each interval
+    /* 0x70 */ s16 unk_70;
+    /* 0x72 */ s16 unk_72;
+    /* 0x74 */ s16 mashMeterCutoffs[6]; // upper bounds for each interval
     /* 0x80 */ s8 mashMeterIntervals;
-} ActionCommandStatus; // size unknown
+} ActionCommandStatus;
 #endif

@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_17_tattle },
 };
 
-Script N(80240060) = SCRIPT({
+EvtSource N(80240060) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -30,7 +30,7 @@ static s32 N(pad_F8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitDoubleDoor_80240100) = SCRIPT({
+EvtSource N(exitDoubleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -44,7 +44,7 @@ Script N(exitDoubleDoor_80240100) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitDoubleDoor_802401B4) = SCRIPT({
+EvtSource N(exitDoubleDoor_802401B4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
@@ -58,12 +58,12 @@ Script N(exitDoubleDoor_802401B4) = SCRIPT({
     sleep 100;
 });
 
-Script N(80240268) = SCRIPT({
+EvtSource N(80240268) = SCRIPT({
     bind N(exitDoubleDoor_80240100) TRIGGER_WALL_PRESS_A 7;
     bind N(exitDoubleDoor_802401B4) TRIGGER_WALL_PRESS_A 11;
 });
 
-Script N(enterDoubleDoor_802402B0) = SCRIPT({
+EvtSource N(enterDoubleDoor_802402B0) = SCRIPT({
     GetLoadType(SI_VAR(1));
     if (SI_VAR(1) == 1) {
         spawn EnterSavePoint;
@@ -87,7 +87,7 @@ Script N(enterDoubleDoor_802402B0) = SCRIPT({
     spawn N(80240268);
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -99,7 +99,7 @@ Script N(main) = SCRIPT({
     spawn N(enterDoubleDoor_802402B0);
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802E9A18, -300, 60, 75, 0, MAKE_ENTITY_END);
     MakeEntity(0x802EA7E0, -450, 60, 75, 0, MAKE_ENTITY_END);
 });

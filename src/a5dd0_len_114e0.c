@@ -854,11 +854,11 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", MakeEntity, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", SetEntityCullMode);
 
-ApiStatus UseDynamicShadow(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UseDynamicShadow(Evt* script, s32 isInitialCall) {
     Entity* entity = get_entity_by_index(gLastCreatedEntityIndex);
 
     if (get_variable(script, *script->ptrReadPos)) {
@@ -874,7 +874,7 @@ ApiStatus UseDynamicShadow(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AssignScript(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
@@ -887,11 +887,11 @@ ApiStatus AssignScript(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignAreaFlag, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignAreaFlag, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignBlockFlag, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignBlockFlag, Evt* script, s32 isInitialCall);
 
-ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus AssignFlag(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall == TRUE) {
@@ -904,9 +904,9 @@ ApiStatus AssignFlag(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignPanelFlag, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignPanelFlag, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignCrateFlag, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "a5dd0_len_114e0", AssignCrateFlag, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity_shadow);
 

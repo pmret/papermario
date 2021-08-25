@@ -131,8 +131,8 @@ glabel func_802BDDD8_321928
 /* 321B08 802BDFB8 27A70038 */   addiu    $a3, $sp, 0x38
 /* 321B0C 802BDFBC 1040000D */  beqz      $v0, .L802BDFF4
 /* 321B10 802BDFC0 00000000 */   nop
-/* 321B14 802BDFC4 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 321B18 802BDFC8 2442EBB0 */  addiu     $v0, $v0, %lo(D_8010EBB0)
+/* 321B14 802BDFC4 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 321B18 802BDFC8 2442EBB0 */  addiu     $v0, $v0, %lo(gPartnerActionStatus)
 /* 321B1C 802BDFCC 8C42000C */  lw        $v0, 0xc($v0)
 /* 321B20 802BDFD0 30428000 */  andi      $v0, $v0, 0x8000
 /* 321B24 802BDFD4 10400005 */  beqz      $v0, .L802BDFEC

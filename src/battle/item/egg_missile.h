@@ -7,9 +7,9 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_egg_missile
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
-ApiStatus N(func_802A123C_71CF1C)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_71CF1C)(Evt* script, s32 isInitialCall);
 
 #endif

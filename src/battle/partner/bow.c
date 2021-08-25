@@ -6,14 +6,14 @@
 extern s32 bMarioIdleAnims[];
 extern s32 bMarioHideAnims[];
 
-ApiStatus func_80238000_710EF0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_710EF0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     script->varTable[0] = battleStatus->outtaSightActive;
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238014_710F04(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* partnerTargetActor = get_actor(partnerActor->targetActorID);
@@ -25,13 +25,13 @@ ApiStatus func_80238014_710F04(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8023808C_710F7C(Evt* script, s32 isInitialCall) {
     ActorPart* playerActorPartTable = gBattleStatus.playerActor->partsTable;
 
     gBattleStatus.outtaSightActive = 1;
     if (!(gBattleStatus.flags2 & 2)) {
         gBattleStatus.outtaSightActive = -1;
-    } 
+    }
 
     playerActorPartTable->idleAnimations = &bMarioHideAnims;
     gBattleStatus.hustleTurns = 0;
@@ -40,7 +40,7 @@ ApiStatus func_8023808C_710F7C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802380E4_710FD4(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* playerActor = battleStatus->playerActor;
@@ -58,7 +58,7 @@ ApiStatus func_802380E4_710FD4(ScriptInstance* script, s32 isInitialCall) {
 }
 
 /// Duplicate of IsPartnerImmobile
-ApiStatus N(IsPartnerImmobile)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(IsPartnerImmobile)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     s32 isImmobile = playerActor->debuff == STATUS_FEAR
@@ -76,7 +76,7 @@ ApiStatus N(IsPartnerImmobile)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802381C8_7110B8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802381C8_7110B8(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
     ActorPart* playerActorPartTable = battleStatus->playerActor->partsTable;
@@ -86,7 +86,7 @@ ApiStatus func_802381C8_7110B8(ScriptInstance* script, s32 isInitialCall) {
 }
 
 /// Averages the baseStatusChance of the hittable actors this partner is targeting.
-ApiStatus N(AverageTargetStatusChance)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AverageTargetStatusChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;

@@ -11,8 +11,8 @@ glabel func_80240000_DCCCD0
 /* DCCCE4 80240014 03E00008 */  jr        $ra
 /* DCCCE8 80240018 24020001 */   addiu    $v0, $zero, 1
 .L8024001C:
-/* DCCCEC 8024001C 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* DCCCF0 80240020 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* DCCCEC 8024001C 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* DCCCF0 80240020 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* DCCCF4 80240024 10400009 */  beqz      $v0, .L8024004C
 /* DCCCF8 80240028 00000000 */   nop
 /* DCCCFC 8024002C 3C028011 */  lui       $v0, %hi(gPlayerData)

@@ -53,7 +53,7 @@
 
 unsigned int crc_table[256];
 
-void gen_table() {
+void gen_table(void) {
 	unsigned int crc, poly;
 	int	i, j;
 

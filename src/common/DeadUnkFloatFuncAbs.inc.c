@@ -2,7 +2,7 @@
 #include "map.h"
 
 // Same as (Dead)UnkFloatFunc with an extra abs on diff
-ApiStatus N(DeadUnkFloatFuncAbs)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(DeadUnkFloatFuncAbs)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
     s32 var0 = dead_get_variable(script, a1);

@@ -13,7 +13,7 @@ MapConfig N(config) = {
     .tattle = { MSG_arn_09_tattle },
 };
 
-Script N(802400A0) = SCRIPT({
+EvtSource N(802400A0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_HEART_FLED_FIRST_TUNNEL {
             SetMusicTrack(0, SONG_TUBBA_ESCAPE, 0, 8);

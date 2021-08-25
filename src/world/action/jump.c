@@ -3,39 +3,36 @@
 extern f32 D_8010C960;
 extern f32 D_8010C97C;
 
-void func_802B6000_E24040() {
+void func_802B6000_E24040(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    CollisionStatus* collisionStatus;
+    CollisionStatus* collisionStatus = &gCollisionStatus;
     s32 temp_v1;
 
     playerStatus->fallState = 0;
     playerStatus->decorationList = 0;
     playerStatus->unk_C2 = 0;
-    playerStatus->flags &= 0x7FFFFFF7;
+    playerStatus->flags &= ~0x80000008;
     playerStatus->flags |= 2;
     playerStatus->unk_3C = playerStatus->position.x;
     playerStatus->unk_40 = playerStatus->position.z;
     playerStatus->unk_4C = playerStatus->position.y;
 
     phys_init_integrator_for_current_state();
-    collisionStatus = &gCollisionStatus;
 
     if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
         temp_v1 = 0x90005;
-    }
-    else {
-        if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
-            temp_v1 = 0x10007;
-        } else {
-            temp_v1 = 0x60009;
-        }
+    } else if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+        temp_v1 = 0x10007;
+    } else {
+        temp_v1 = 0x60009;
     }
     suggest_player_anim_clearUnkFlag(temp_v1);
+
     collisionStatus->lastTouchedFloor = collisionStatus->currentFloor;
     collisionStatus->currentFloor = -1;
 }
 
-void func_802B60B4_E240F4() {
+void func_802B60B4_E240F4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 phi_a0;
 
@@ -61,29 +58,27 @@ void func_802B60B4_E240F4() {
 
     if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
         phi_a0 = 0x90005;
+    } else if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+        phi_a0 = 0x10007;
     } else {
-        if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
-          phi_a0 = 0x10007;
-        }
-        else {
-            phi_a0 = 0x60009;
-        }
+        phi_a0 = 0x60009;
     }
-
     suggest_player_anim_clearUnkFlag(phi_a0);
+
     playerStatus->decorationList++;
 }
 
-void func_802B6198_E241D8() {
+void func_802B6198_E241D8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    Entity* entity;
     s32 temp_s1;
     s32 phi_a0;
 
-    temp_s1 = 0x80000000;
+    temp_s1 = 0x80000000; // weirdness with this - fake match
+
     if (playerStatus->flags < 0) {
-        entity = get_entity_by_index(collisionStatus->currentFloor);
+        Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
+
         D_8010C960 = entity->position.x;
         D_8010C97C = entity->position.z;
         func_802B6000_E24040();
@@ -92,31 +87,32 @@ void func_802B6198_E241D8() {
     }
 
     playerStatus->decorationList++;
-    if (playerStatus->fallState == 1) {
-        if (playerStatus->flags & 0x80000000) {
 
-          playerStatus->flags &= 0x7FFFFFF5;
-          playerStatus->flags |= 4;
-
-          phi_a0 = 0x6000A;
-
-          if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
-            phi_a0 = 0x10008;
-          }
-
-          temp_s1 = phi_a0;
-          suggest_player_anim_clearUnkFlag(temp_s1);
-          gCameras[0].moveFlags |= 1;
-        }
-    } else {
+    if (playerStatus->fallState != 1) {
         return;
     }
+
+    if (playerStatus->flags & 0x80000000) {
+        playerStatus->flags &= ~0x8000000A;
+        playerStatus->flags |= 4;
+
+
+        if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+            phi_a0 = 0x10008;
+        } else {
+            phi_a0 = 0x6000A;
+        }
+
+        temp_s1 = phi_a0;
+        suggest_player_anim_clearUnkFlag(temp_s1);
+        gCameras[0].moveFlags |= 1;
+    }
+
     playerStatus->fallState++;
 }
 
-void func_802B6294_E242D4() {
+void func_802B6294_E242D4(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 phi_a0;
 
     if (playerStatus->animFlags & PLAYER_ANIM_FLAG_PEACH_PHYSICS) {
         func_802B647C_E244BC();
@@ -124,18 +120,17 @@ void func_802B6294_E242D4() {
     }
 
     if (playerStatus->flags < 0) {
-        playerStatus->flags &= 0x7FFFFFF5;
+        s32 phi_a0;
+
+        playerStatus->flags &= ~0x8000000A;
         playerStatus->flags |= 4;
 
         if (playerStatus->animFlags & PLAYER_ANIM_FLAG_8BIT_MARIO) {
             phi_a0 = 0x90005;
+        } else  if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
+            phi_a0 = 0x10008;
         } else {
-            if (!(playerStatus->animFlags & (PLAYER_ANIM_FLAG_HOLDING_ITEM | PLAYER_ANIM_FLAG_2))) {
-                phi_a0 = 0x10008;
-            }
-            else {
-                phi_a0 = 0x6000A;
-            }
+            phi_a0 = 0x6000A;
         }
         suggest_player_anim_clearUnkFlag(phi_a0);
         gCameras[0].moveFlags |= 1;
@@ -143,7 +138,7 @@ void func_802B6294_E242D4() {
     playerStatus->decorationList++;
 }
 
-void func_802B6348_E24388() {
+void func_802B6348_E24388(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 sub_arg5;
     f32 sub_arg6;
@@ -176,12 +171,12 @@ void func_802B6348_E24388() {
                                     &sub_arg5, &sub_arg6, &sub_arg7, &sub_arg8)) & 0xFF) - 2 >= 2U) && check_input_jump()) {
 
         set_action_state(ACTION_STATE_JUMP);
-        playerStatus->flags &= -0xF;
+        playerStatus->flags &= ~0xE;
         func_802B60B4_E240F4();
     }
 }
 
-void func_802B647C_E244BC() {
+void func_802B647C_E244BC(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 temp_v1;
 
@@ -202,7 +197,7 @@ void func_802B647C_E244BC() {
     playerStatus->decorationList++;
 }
 
-void func_802B6508_E24548() {
+void func_802B6508_E24548(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->flags < 0) {

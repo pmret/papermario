@@ -34,8 +34,8 @@ glabel func_80240184_DDF494
 /* DDF504 802401F4 44073000 */  mfc1      $a3, $f6
 /* DDF508 802401F8 0C04DFB0 */  jal       set_screen_overlay_center_worldpos
 /* DDF50C 802401FC 0080282D */   daddu    $a1, $a0, $zero
-/* DDF510 80240200 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* DDF514 80240204 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* DDF510 80240200 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* DDF514 80240204 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* DDF518 80240208 10400012 */  beqz      $v0, .L80240254
 /* DDF51C 8024020C 24020006 */   addiu    $v0, $zero, 6
 /* DDF520 80240210 82230012 */  lb        $v1, 0x12($s1)

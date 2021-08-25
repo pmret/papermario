@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(AddHP)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AddHP)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     s32 amt = get_variable(script, *script->ptrReadPos);

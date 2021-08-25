@@ -34,8 +34,8 @@ glabel func_80240000_8A9A10
 /* 8A9A80 80240070 44073000 */  mfc1      $a3, $f6
 /* 8A9A84 80240074 0C04DFB0 */  jal       set_screen_overlay_center_worldpos
 /* 8A9A88 80240078 0080282D */   daddu    $a1, $a0, $zero
-/* 8A9A8C 8024007C 3C028011 */  lui       $v0, %hi(D_8010EBB0)
-/* 8A9A90 80240080 8042EBB0 */  lb        $v0, %lo(D_8010EBB0)($v0)
+/* 8A9A8C 8024007C 3C028011 */  lui       $v0, %hi(gPartnerActionStatus)
+/* 8A9A90 80240080 8042EBB0 */  lb        $v0, %lo(gPartnerActionStatus)($v0)
 /* 8A9A94 80240084 10400012 */  beqz      $v0, .L802400D0
 /* 8A9A98 80240088 24020006 */   addiu    $v0, $zero, 6
 /* 8A9A9C 8024008C 82230012 */  lb        $v1, 0x12($s1)

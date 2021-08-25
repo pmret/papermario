@@ -23,7 +23,7 @@ typedef struct N(temp) {
     N(unk_effect)* unk_0C;
 } N(temp);
 
-ApiStatus N(func_80240344_CAC534)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240344_CAC534)(Evt* script, s32 isInitialCall) {
     N(temp)* effect = playFX_72(3, -272.0f, 80.0f, 20.0f, 200.0f, 120.0f, 4.0f, 8, 0);
 
     effect->unk_0C->unk_38 = 0xF0;

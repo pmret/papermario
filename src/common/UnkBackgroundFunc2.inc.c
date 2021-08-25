@@ -1,6 +1,6 @@
 #include "common.h"
 
-ApiStatus N(UnkBackgroundFunc2)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkBackgroundFunc2)(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(1);
         *D_801512F0 = 1;

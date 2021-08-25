@@ -22,7 +22,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_12_tattle },
 };
 
-Script N(80240750) = SCRIPT({
+EvtSource N(80240750) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 1) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -37,11 +37,11 @@ Script N(80240750) = SCRIPT({
     }
 });
 
-Script N(8024080C) = SCRIPT({
+EvtSource N(8024080C) = SCRIPT({
     PushSong(137, 3);
 });
 
-Script N(80240830) = SCRIPT({
+EvtSource N(80240830) = SCRIPT({
     FadeOutMusic(0, 250);
     sleep 10;
     PopSong();
@@ -51,7 +51,7 @@ static s32 N(pad_86C) = {
     0x00000000,
 };
 
-Script N(80240870) = SCRIPT({
+EvtSource N(80240870) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -90,13 +90,13 @@ Script N(80240870) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
+EvtSource N(exitWalk_80240B1C) = EXIT_WALK_SCRIPT(60,  0, "flo_11",  1);
 
-Script N(80240B78) = SCRIPT({
+EvtSource N(80240B78) = SCRIPT({
     bind N(exitWalk_80240B1C) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -158,12 +158,12 @@ NpcSettings N(npcSettings_80240E5C) = {
 
 s32** N(D_802417EC_CC261C) = NULL;
 
-Script N(802417F0) = SCRIPT({
+EvtSource N(802417F0) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
     return;
 });
 
-Script N(80241820) = SCRIPT({
+EvtSource N(80241820) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 16);
     return;
 });
@@ -176,7 +176,7 @@ s32 N(D_80241854_CC2684) = {
     0x00000000,
 };
 
-Script N(80241858) = SCRIPT({
+EvtSource N(80241858) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowKeyChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -200,7 +200,7 @@ Script N(80241858) = SCRIPT({
     unbind;
 });
 
-Script N(8024199C) = SCRIPT({
+EvtSource N(8024199C) = SCRIPT({
     N(func_8024064C_CC147C)(SI_VAR(0));
     bind_padlock N(80241858) 0x10 0 N(D_802429E0);
     N(func_802405C0_CC13F0)(SI_VAR(0));
@@ -210,7 +210,7 @@ s32 N(D_802419EC_CC281C)[] = {
     0x0000001E, 0x00000000,
 };
 
-Script N(802419F4) = SCRIPT({
+EvtSource N(802419F4) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     GetNpcPos(NPC_ROSIE0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -224,13 +224,13 @@ Script N(802419F4) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     sleep 20;
-    SpeakToPlayer(NPC_ROSIE0, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x00C7));
+    SpeakToPlayer(NPC_ROSIE0, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x00C7));
     sleep 10;
     GotoMap("flo_03", 2);
     sleep 100;
 });
 
-Script N(80241B6C) = SCRIPT({
+EvtSource N(80241B6C) = SCRIPT({
     sleep 10;
     SetNpcFlagBits(NPC_ROSIE0, ((NPC_FLAG_100)), TRUE);
     PlayerMoveTo(-5, 20, 20);
@@ -238,7 +238,7 @@ Script N(80241B6C) = SCRIPT({
     PlayerFaceNpc(0, 1);
 });
 
-Script N(80241BE4) = SCRIPT({
+EvtSource N(80241BE4) = SCRIPT({
     sleep 10;
     SetNpcFlagBits(NPC_ROSIE0, ((NPC_FLAG_100)), TRUE);
     SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), TRUE);
@@ -248,7 +248,7 @@ Script N(80241BE4) = SCRIPT({
     PlayerFaceNpc(0, 1);
 });
 
-Script N(interact_80241C8C) = SCRIPT({
+EvtSource N(interact_80241C8C) = SCRIPT({
     await N(8024080C);
     match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_CRYSTAL_BERRY {
@@ -258,36 +258,36 @@ Script N(interact_80241C8C) = SCRIPT({
                     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
                     SI_VAR(0) += 30;
                     SetCamProperties(0, 4.0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 325, 19.0, -9.5);
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_3), NPC_ANIM(rosie, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x008C));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008C));
                     ShowChoice(MESSAGE_ID(0x1E, 0x0011));
                     sleep 10;
                     match SI_VAR(0) {
                         == 0 {
-                            ContinueSpeech(-1, NPC_ANIM(rosie, Palette_00, Anim_3), NPC_ANIM(rosie, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x008D));
+                            ContinueSpeech(-1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008D));
                         }
                         == 1 {
-                            ContinueSpeech(-1, NPC_ANIM(rosie, Palette_00, Anim_3), NPC_ANIM(rosie, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x008E));
+                            ContinueSpeech(-1, NPC_ANIM_rosie_Palette_00_Anim_3, NPC_ANIM_rosie_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x008E));
                         }
                     }
                     SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
-                    SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_5));
+                    SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_5);
                     sleep 10;
-                    SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
+                    SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
                     MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
                     sleep 10;
                     match SI_SAVE_FLAG(1375) {
                         == 0 {
-                            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11, 0x008F));
+                            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F));
                         }
                         == 1 {
                             SetPlayerAnimation(0x60002);
-                            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11, 0x008F));
+                            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11, 0x008F));
                             SetPlayerAnimation(0x60005);
-                            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0091));
+                            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0091));
                             SetPlayerAnimation(ANIM_PRAY);
                             sleep 40;
                             SetPlayerAnimation(ANIM_10002);
-                            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0092));
+                            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0092));
                             SI_SAVE_FLAG(1379) = 1;
                         }
                     }
@@ -298,24 +298,24 @@ Script N(interact_80241C8C) = SCRIPT({
                         == 0 {
                             if (SI_SAVE_FLAG(1375) == 1) {
                                 spawn N(80241BE4);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11,
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11,
                                               0x0090));
                                 SetPlayerAnimation(0x60005);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                               0x0091));
                                 SetPlayerAnimation(ANIM_PRAY);
                                 sleep 40;
                                 SetPlayerAnimation(ANIM_10002);
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                               0x0092));
                                 SI_SAVE_FLAG(1379) = 1;
                             } else {
-                                SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_4), 5, MESSAGE_ID(0x11,
+                                SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_4, 5, MESSAGE_ID(0x11,
                                               0x0090));
                             }
                         }
                         == 1 {
-                            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0093));
+                            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0093));
                         }
                     }
                 }
@@ -329,15 +329,15 @@ Script N(interact_80241C8C) = SCRIPT({
                 SI_VAR(0) += 30;
                 SetCamProperties(0, 4.0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 325, 19.0, -9.5);
             }
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0094));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0094));
             SI_VAR(0) = N(D_802419EC_CC281C);
             SI_VAR(1) = 0;
             await N(8024199C);
             match SI_VAR(0) {
                 <= 0 {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0093));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0093));
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                   0x0095));
                     RemoveItemEntity(SI_VAR(7));
                     MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);
@@ -346,7 +346,7 @@ Script N(interact_80241C8C) = SCRIPT({
                     await N(802417F0);
                     AddKeyItem(ITEM_WATER_STONE);
                     sleep 10;
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                                   0x0096));
                     SI_AREA_FLAG(22) = 1;
                     SI_STORY_PROGRESS = STORY_CH6_GOT_WATER_STONE;
@@ -356,17 +356,17 @@ Script N(interact_80241C8C) = SCRIPT({
         < 53 {
             match SI_AREA_FLAG(22) {
                 == 0 {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0097));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0097));
                 }
                 == 1 {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0096));
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0096));
                 }
             }
         }
         < 60 {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11, 0x0098));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11, 0x0098));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_4), NPC_ANIM(rosie, Palette_00, Anim_2), 5, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_4, NPC_ANIM_rosie_Palette_00_Anim_2, 5, MESSAGE_ID(0x11,
                           0x0099));
         }
     }
@@ -374,7 +374,7 @@ Script N(interact_80241C8C) = SCRIPT({
     await N(80240830);
 });
 
-Script N(init_802423D0) = SCRIPT({
+EvtSource N(init_802423D0) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241C8C));
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 35;
@@ -385,19 +385,19 @@ Script N(init_802423D0) = SCRIPT({
         < STORY_CH6_GOT_CRYSTAL_BERRY {
             if (SI_SAVE_FLAG(1378) == 1) {
                 SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
                 MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
                 SI_VAR(10) = SI_VAR(0);
             }
         }
         < STORY_CH6_GOT_WATER_STONE {
             SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
             MakeItemEntity(ITEM_WATER_STONE, -33, 14, 19, 1, 1380);
             SI_VAR(10) = SI_VAR(0);
         } else {
             SetNpcFlagBits(NPC_ROSIE1, ((NPC_FLAG_100)), FALSE);
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(rosie, Palette_00, Anim_2));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_rosie_Palette_00_Anim_2);
             MakeItemEntity(ITEM_CRYSTAL_BERRY, -33, 14, 19, 1, 1380);
             SI_VAR(10) = SI_VAR(0);
         }
@@ -416,22 +416,22 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
         },
         .tattle = MESSAGE_ID(0x1A, 0x00E0),
     },
@@ -445,22 +445,22 @@ StaticNpc N(npcGroup_802425D8)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
-            NPC_ANIM(rosie, Palette_00, Anim_1),
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
+            NPC_ANIM_rosie_Palette_00_Anim_1,
         },
     },
 };
@@ -470,7 +470,7 @@ NpcGroupList N(npcGroupList_802429B8) = {
     {},
 };
 
-ApiStatus N(func_8024027C_CC10AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024027C_CC10AC)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802417EC_CC261C) == NULL) {
@@ -494,7 +494,7 @@ ApiStatus N(func_8024027C_CC10AC)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405C0_CC13F0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -510,7 +510,7 @@ ApiStatus N(func_802405C0_CC13F0)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240614_CC1444)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80241854_CC2684) = get_variable(script, *args);
@@ -518,7 +518,7 @@ ApiStatus N(func_80240614_CC1444)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024064C_CC147C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024064C_CC147C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;

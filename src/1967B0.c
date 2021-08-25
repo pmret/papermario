@@ -15,7 +15,7 @@ extern BattleItemTableEntry gBattleItemTable[];
 
 INCLUDE_ASM(s32, "1967B0", LoadFreeItemScript);
 
-ApiStatus LoadMoveScript(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus LoadMoveScript(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32* moveScript = gMoveScriptTable[battleStatus->selectedMoveID];
 

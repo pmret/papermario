@@ -3,6 +3,6 @@
 
 #define NAMESPACE dgb_13
 
-Script N(80240270);
-Script N(80240680);
-Script N(main);
+EvtSource N(80240270);
+EvtSource N(80240680);
+EvtSource N(main);

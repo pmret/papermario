@@ -18,7 +18,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_06_tattle },
 };
 
-Script N(80240320) = SCRIPT({
+EvtSource N(80240320) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -35,7 +35,7 @@ static s32 N(pad_3B8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitSingleDoor_802403C0) = SCRIPT({
+EvtSource N(exitSingleDoor_802403C0) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
@@ -49,7 +49,7 @@ Script N(exitSingleDoor_802403C0) = SCRIPT({
     sleep 100;
 });
 
-Script N(enterSingleDoor_80240474) = SCRIPT({
+EvtSource N(enterSingleDoor_80240474) = SCRIPT({
     UseDoorSounds(0);
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
@@ -61,7 +61,7 @@ Script N(enterSingleDoor_80240474) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(589824);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -80,9 +80,9 @@ Script N(main) = SCRIPT({
     spawn N(enterSingleDoor_80240474);
 });
 
-s32** N(D_80240620_C3D6A0) = NULL;
+#include "world/common/StashVars.inc.c"
 
-Script N(80240624) = SCRIPT({
+EvtSource N(80240624) = SCRIPT({
     group 0;
     SetTimeFreezeMode(2);
     sleep 40;
@@ -91,7 +91,7 @@ Script N(80240624) = SCRIPT({
     return;
 });
 
-Script N(8024068C) = SCRIPT({
+EvtSource N(8024068C) = SCRIPT({
     DisablePlayerInput(TRUE);
     SI_VAR(0) = SI_VAR(10);
     if (SI_VAR(10) != 0) {
@@ -112,14 +112,14 @@ Script N(8024068C) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(8024076C) = SCRIPT({
+EvtSource N(8024076C) = SCRIPT({
     SI_VAR(10) = 19;
     SI_VAR(11) = 1;
     SI_SAVE_FLAG(1048) = 1;
     await N(8024068C);
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAE30, -300, 50, -200, 0, ITEM_NONE, MAKE_ENTITY_END);
     AssignFlag(SI_SAVE_FLAG(1048));
     AssignScript(N(8024076C));
@@ -136,19 +136,19 @@ NpcSettings N(npcSettings_80240840) = {
     .level = 99,
 };
 
-Script N(interact_8024086C) = SCRIPT({
+EvtSource N(interact_8024086C) = SCRIPT({
     if (SI_AREA_FLAG(4) == 0) {
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                       0x00F0));
         SI_AREA_FLAG(4) = 1;
     } else {
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E,
                       0x00F1));
         SI_AREA_FLAG(4) = 0;
     }
 });
 
-Script N(init_802408FC) = SCRIPT({
+EvtSource N(init_802408FC) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH3_TUBBA_CHASED_MARIO_IN_FOYER) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     }
@@ -166,22 +166,22 @@ StaticNpc N(npcGroup_80240954) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00B3),
 };
@@ -190,24 +190,6 @@ NpcGroupList N(npcGroupList_80240B44) = {
     NPC_GROUP(N(npcGroup_80240954), BATTLE_ID(0, 0, 0, 0)),
     {},
 };
-
-ApiStatus N(func_80240000_C3D080)(ScriptInstance* script, s32 isInitialCall) {
-    s32 i;
-
-    if (N(D_80240620_C3D6A0) == NULL) {
-        N(D_80240620_C3D6A0) = heap_malloc(16 * sizeof(s32));
-        for (i = 0; i < 16; i++) {
-            N(D_80240620_C3D6A0)[i] = script->varTable[i];
-        }
-    } else {
-        for (i = 0; i < 16; i++) {
-            script->varTable[i] = N(D_80240620_C3D6A0)[i];
-        }
-        heap_free(N(D_80240620_C3D6A0));
-        N(D_80240620_C3D6A0) = NULL;
-    }
-    return ApiStatus_DONE2;
-}
 
 #include "world/common/GetItemName.inc.c"
 

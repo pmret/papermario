@@ -23,7 +23,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_09_tattle },
 };
 
-Script N(80241880) = SCRIPT({
+EvtSource N(80241880) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -33,7 +33,7 @@ Script N(80241880) = SCRIPT({
     }
 });
 
-Script N(802418F0) = SCRIPT({
+EvtSource N(802418F0) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -72,16 +72,16 @@ Script N(802418F0) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80241B9C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  5);
+EvtSource N(exitWalk_80241B9C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  5);
 
-Script N(exitWalk_80241BF8) = EXIT_WALK_SCRIPT(60,  1, "flo_03",  0);
+EvtSource N(exitWalk_80241BF8) = EXIT_WALK_SCRIPT(60,  1, "flo_03",  0);
 
-Script N(80241C54) = SCRIPT({
+EvtSource N(80241C54) = SCRIPT({
     bind N(exitWalk_80241B9C) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80241BF8) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -141,7 +141,7 @@ static s32 N(pad_2004)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80242010) = SCRIPT({
+EvtSource N(80242010) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -180,7 +180,7 @@ Script N(80242010) = SCRIPT({
     goto 0;
 });
 
-Script N(802422BC) = SCRIPT({
+EvtSource N(802422BC) = SCRIPT({
     SI_VAR(9) = SI_VAR(6);
     SI_VAR(8) = SI_VAR(5);
     SI_VAR(7) = SI_VAR(4);
@@ -230,7 +230,7 @@ Script N(802422BC) = SCRIPT({
     EnableModel(SI_VAR(7), 0);
 });
 
-Script N(802425DC) = SCRIPT({
+EvtSource N(802425DC) = SCRIPT({
     GetModelCenter(69);
     SI_VAR(3) = 69;
     SI_VAR(4) = 70;
@@ -281,7 +281,7 @@ static s32 N(pad_2874)[] = {
 
 #include "world/common/foliage.inc.c"
 
-Script N(802431E4) = SCRIPT({
+EvtSource N(802431E4) = SCRIPT({
     GetNpcPos(NPC_BZZAP1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     if (SI_VAR(1) < 0) {
         GetModelCenter(SI_VAR(9));
@@ -290,7 +290,7 @@ Script N(802431E4) = SCRIPT({
     }
 });
 
-Script N(tree1_Callback) = SCRIPT({
+EvtSource N(tree1_Callback) = SCRIPT({
     if (SI_SAVE_FLAG(1382) == 0) {
         if (SI_AREA_VAR(5) == 1) {
             MakeItemEntity(ITEM_HAPPY_FLOWER_B, -250, 100, 0, 13, SI_SAVE_FLAG(1382));
@@ -303,14 +303,14 @@ Script N(tree1_Callback) = SCRIPT({
     }
 });
 
-Script N(tree2_Callback) = SCRIPT({
+EvtSource N(tree2_Callback) = SCRIPT({
     if (SI_SAVE_FLAG(1382) == 0) {
         SI_AREA_VAR(4) = 1;
         SI_AREA_VAR(5) = 0;
     }
 });
 
-Script N(tree3_Callback) = SCRIPT({
+EvtSource N(tree3_Callback) = SCRIPT({
     if (SI_SAVE_FLAG(1382) == 0) {
         if (SI_AREA_VAR(4) == 1) {
             if (SI_AREA_VAR(5) == 0) {
@@ -379,7 +379,7 @@ ShakeTreeConfig N(tree3) = {
 
 Vec4f N(triggerCoord_80243498) = { 200.0f, 0.0f, 1.0f, 0.0f };
 
-Script N(802434A8) = SCRIPT({
+EvtSource N(802434A8) = SCRIPT({
     SI_AREA_VAR(4) = 0;
     SI_AREA_VAR(5) = 0;
     SI_VAR(0) = N(tree1);
@@ -408,7 +408,7 @@ NpcAISettings N(npcAISettings_802435B0) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802435E0) = SCRIPT({
+EvtSource N(npcAI_802435E0) = SCRIPT({
     DoBasicAI(N(npcAISettings_802435B0));
 });
 
@@ -441,7 +441,7 @@ NpcAISettings N(npcAISettings_80243644) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80243674) = SCRIPT({
+EvtSource N(npcAI_80243674) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(5, -630);
     SetSelfVar(6, 50);
@@ -464,7 +464,7 @@ NpcSettings N(npcSettings_80243710) = {
     .level = 99,
 };
 
-Script N(npcAI_8024373C) = SCRIPT({
+EvtSource N(npcAI_8024373C) = SCRIPT({
     loop {
         GetSelfVar(0, SI_VAR(0));
         match SI_VAR(0) {
@@ -491,7 +491,7 @@ Script N(npcAI_8024373C) = SCRIPT({
     }
 });
 
-Script N(defeat_802438C8) = SCRIPT({
+EvtSource N(defeat_802438C8) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -505,7 +505,7 @@ Script N(defeat_802438C8) = SCRIPT({
     }
 });
 
-Script N(init_80243954) = SCRIPT({
+EvtSource N(init_80243954) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(npcAI_8024373C));
     BindNpcDefeat(NPC_SELF, N(defeat_802438C8));
 });
@@ -527,22 +527,22 @@ StaticNpc N(npcGroup_8024398C) = {
     .maxCoinBonus = 3,
     .movement = { -350, 0, 40, 30, 0, -32767, 0, -350, 0, 40, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -564,22 +564,22 @@ StaticNpc N(npcGroup_80243B7C) = {
     .maxCoinBonus = 3,
     .movement = { 260, 0, 75, 30, 0, -32767, 0, 260, 0, 75, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -602,22 +602,22 @@ StaticNpc N(npcGroup_80243D6C) = {
     .maxCoinBonus = 4,
     .movement = { -50, 55, 90, 30, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_4),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_4,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -641,22 +641,22 @@ StaticNpc N(npcGroup_80243F5C) = {
     .maxCoinBonus = 4,
     .movement = { -50, 55, 90, 100, 0, -32767, 0, -50, 50, 90, 250, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_4),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_4,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };

@@ -1,6 +1,6 @@
 #include "kmr_03.h"
 
-Script N(80242340) = SCRIPT({
+EvtSource N(80242340) = SCRIPT({
     UseSettingsFrom(0, -270, 20, -80);
     SetPanTarget(0, -270, 20, -80);
     SetCamDistance(0, 700.0);

@@ -106,12 +106,12 @@ glabel L802A93F0_42DE00
 /* 42DE20 802A9410 8E240004 */  lw        $a0, 4($s1)
 /* 42DE24 802A9414 3C058011 */  lui       $a1, %hi(D_80108B80)
 /* 42DE28 802A9418 24A58B80 */  addiu     $a1, $a1, %lo(D_80108B80)
-/* 42DE2C 802A941C 0C0511FF */  jal       set_hud_element_script
+/* 42DE2C 802A941C 0C0511FF */  jal       set_hud_element_anim
 /* 42DE30 802A9420 00000000 */   nop
 /* 42DE34 802A9424 8E24000C */  lw        $a0, 0xc($s1)
 /* 42DE38 802A9428 3C058029 */  lui       $a1, %hi(D_80292374)
 /* 42DE3C 802A942C 24A52374 */  addiu     $a1, $a1, %lo(D_80292374)
-/* 42DE40 802A9430 0C0511FF */  jal       set_hud_element_script
+/* 42DE40 802A9430 0C0511FF */  jal       set_hud_element_anim
 /* 42DE44 802A9434 00000000 */   nop
 /* 42DE48 802A9438 3C048000 */  lui       $a0, 0x8000
 /* 42DE4C 802A943C 34840041 */  ori       $a0, $a0, 0x41

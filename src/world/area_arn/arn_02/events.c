@@ -2,16 +2,16 @@
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
 
-Script N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
+EvtSource N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 
-Script N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
+EvtSource N(exitWalk_8024114C) = EXIT_WALK_SCRIPT(60,  1, "arn_04",  0);
 
-Script N(802411A8) = SCRIPT({
+EvtSource N(802411A8) = SCRIPT({
     bind N(exitWalk_802410F0) TRIGGER_FLOOR_ABOVE 1;
     bind N(exitWalk_8024114C) TRIGGER_FLOOR_ABOVE 6;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -29,7 +29,7 @@ static s32 N(pad_12C4)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeItemEntity(ITEM_DIZZY_DIAL, -248, 193, 45, 17, SI_SAVE_FLAG(1005));
     MakeItemEntity(ITEM_LETTER07, 536, 260, 227, 17, SI_SAVE_FLAG(1006));
     MakeEntity(0x802EA564, -350, 172, 170, 0, ITEM_COIN, MAKE_ENTITY_END);
@@ -53,7 +53,7 @@ NpcAISettings N(npcAISettings_802413D0) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80241400) = SCRIPT({
+EvtSource N(npcAI_80241400) = SCRIPT({
     DoBasicAI(N(npcAISettings_802413D0));
 });
 
@@ -80,7 +80,7 @@ NpcAISettings N(npcAISettings_8024144C) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_8024147C) = SCRIPT({
+EvtSource N(npcAI_8024147C) = SCRIPT({
     N(func_80240C90_BDDE40)(N(npcAISettings_8024144C), 8);
 });
 
@@ -106,22 +106,22 @@ StaticNpc N(npcGroup_802414CC) = {
     .maxCoinBonus = 3,
     .movement = { -196, 130, 104, 50, 30, -32767, 1, -196, 130, 104, 120 },
     .animations = {
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, walk),
-        NPC_ANIM(cleft, hyper, run),
-        NPC_ANIM(cleft, hyper, run),
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, skid),
-        NPC_ANIM(cleft, hyper, skid),
-        NPC_ANIM(cleft, hyper, rock),
-        NPC_ANIM(cleft, hyper, rock_darken),
-        NPC_ANIM(cleft, hyper, from_rock),
-        NPC_ANIM(cleft, hyper, into_rock),
-        NPC_ANIM(cleft, hyper, charge_still),
-        NPC_ANIM(cleft, hyper, charge),
-        NPC_ANIM(cleft, hyper, rock_lighten),
-        NPC_ANIM(cleft, hyper, still),
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_walk,
+        NPC_ANIM_cleft_hyper_run,
+        NPC_ANIM_cleft_hyper_run,
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_skid,
+        NPC_ANIM_cleft_hyper_skid,
+        NPC_ANIM_cleft_hyper_rock,
+        NPC_ANIM_cleft_hyper_rock_darken,
+        NPC_ANIM_cleft_hyper_from_rock,
+        NPC_ANIM_cleft_hyper_into_rock,
+        NPC_ANIM_cleft_hyper_charge_still,
+        NPC_ANIM_cleft_hyper_charge,
+        NPC_ANIM_cleft_hyper_rock_lighten,
+        NPC_ANIM_cleft_hyper_still,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -139,22 +139,22 @@ StaticNpc N(npcGroup_802416BC) = {
     .maxCoinBonus = 3,
     .movement = { 641, 268, 202, 50, 30, -32767, 1, 641, 268, 202, 120 },
     .animations = {
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, walk),
-        NPC_ANIM(cleft, hyper, run),
-        NPC_ANIM(cleft, hyper, run),
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, idle),
-        NPC_ANIM(cleft, hyper, skid),
-        NPC_ANIM(cleft, hyper, skid),
-        NPC_ANIM(cleft, hyper, rock),
-        NPC_ANIM(cleft, hyper, rock_darken),
-        NPC_ANIM(cleft, hyper, from_rock),
-        NPC_ANIM(cleft, hyper, into_rock),
-        NPC_ANIM(cleft, hyper, charge_still),
-        NPC_ANIM(cleft, hyper, charge),
-        NPC_ANIM(cleft, hyper, rock_lighten),
-        NPC_ANIM(cleft, hyper, still),
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_walk,
+        NPC_ANIM_cleft_hyper_run,
+        NPC_ANIM_cleft_hyper_run,
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_idle,
+        NPC_ANIM_cleft_hyper_skid,
+        NPC_ANIM_cleft_hyper_skid,
+        NPC_ANIM_cleft_hyper_rock,
+        NPC_ANIM_cleft_hyper_rock_darken,
+        NPC_ANIM_cleft_hyper_from_rock,
+        NPC_ANIM_cleft_hyper_into_rock,
+        NPC_ANIM_cleft_hyper_charge_still,
+        NPC_ANIM_cleft_hyper_charge,
+        NPC_ANIM_cleft_hyper_rock_lighten,
+        NPC_ANIM_cleft_hyper_still,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -173,22 +173,22 @@ StaticNpc N(npcGroup_802418AC) = {
     .maxCoinBonus = 2,
     .movement = { 333, 215, 85, 40, 30, -32767, 1, 360, 215, 150, 120, 137, 1 },
     .animations = {
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, walk),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, pain),
-        NPC_ANIM(goomba, hyper, pain),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_walk,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_pain,
+        NPC_ANIM_goomba_hyper_pain,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };
@@ -200,7 +200,7 @@ NpcGroupList N(npcGroupList_80241A9C) = {
     {},
 };
 
-s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+s32 N(func_80240000_BDD1B0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -224,7 +224,7 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         ret = FALSE;
     }
-    if (D_8010EBB0.unk_03 == 9) {
+    if (gPartnerActionStatus.actionState.b[3]  == 9) {
         ret = FALSE;
     }
     return ret;
@@ -232,7 +232,7 @@ s32 N(func_80240000_BDD1B0)(ScriptInstance* script, NpcAISettings* aiSettings, E
 
 #include "world/common/UnkNpcAIFunc18.inc.c"
 
-void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802401D4_BDD384)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -261,7 +261,7 @@ void N(func_802401D4_BDD384)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkNpcAIFunc16.inc.c"
 
-void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240694_BDD844)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -288,7 +288,7 @@ void N(func_80240694_BDD844)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc10.inc.c"
 
-void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240984_BDDB34)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -312,7 +312,7 @@ void N(func_80240984_BDDB34)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkDurationCheck.inc.c"
 
-s32 N(func_80240C90_BDDE40)(ScriptInstance* script, s32 isInitialCall) {
+s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

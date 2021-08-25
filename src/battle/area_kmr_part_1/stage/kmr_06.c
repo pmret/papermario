@@ -6,7 +6,7 @@
 #include "clouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
-Script N(beforeBattle_80220E28) = SCRIPT({
+EvtSource N(beforeBattle_80220E28) = SCRIPT({
     SetSpriteShading(-1);
 
     N(UnkFogFunc)();
@@ -20,7 +20,7 @@ Script N(beforeBattle_80220E28) = SCRIPT({
     spawn N(clouds1);
 });
 
-Script N(afterBattle_80220EAC) = SCRIPT({
+EvtSource N(afterBattle_80220EAC) = SCRIPT({
 
 });
 

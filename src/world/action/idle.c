@@ -7,7 +7,7 @@ s32 check_input_hammer(void);
 
 void func_802B61E4_E23444(void);
 
-NpcAnimID world_action_idle_peachAnims[] = {
+s32 world_action_idle_peachAnims[] = {
     0x000A0001, // Idle
 
     // Cooking:
@@ -29,7 +29,7 @@ void world_action_idle_update(void) {
     playerStatus->framesOnGround++;
 
     if (playerStatus->flags & 0x80000000) {
-        NpcAnimID anim;
+        s32 anim;
 
         playerStatus->flags &= ~0x8008000E;
         wasMoving = TRUE;

@@ -4,9 +4,9 @@
 void dispatch_event_partner(s32 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    ScriptInstance* onHitScript = partnerActor->onHitScript;
-    ScriptID onHitID = partnerActor->onHitID;
-    ScriptInstance* script;
+    Evt* onHitScript = partnerActor->onHitScript;
+    s32 onHitID = partnerActor->onHitID;
+    Evt* script;
 
     partnerActor->lastEventType = lastEventType;
     script = start_script(partnerActor->onHitScriptSource, 10, 0x20);
@@ -27,9 +27,9 @@ void dispatch_event_partner(s32 lastEventType) {
 void dispatch_event_partner_continue_turn(s8 lastEventType) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
-    ScriptInstance* onHitScript = partnerActor->onHitScript;
-    ScriptID onHitID = partnerActor->onHitID;
-    ScriptInstance* script;
+    Evt* onHitScript = partnerActor->onHitScript;
+    s32 onHitID = partnerActor->onHitID;
+    Evt* script;
 
     partnerActor->lastEventType = lastEventType;
     script = start_script(partnerActor->onHitScriptSource, 10, 0x20);
@@ -122,7 +122,7 @@ s32 dispatch_damage_event_partner_1(s32 damageAmount, s32 event, s32 stopMotion)
     return dispatch_damage_event_partner(damageAmount, event, TRUE);
 }
 
-ApiStatus MakeOwnerTargetIndex(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus MakeOwnerTargetIndex(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
     s32 numTargets = actor->targetListLength;
@@ -154,7 +154,7 @@ ApiStatus MakeOwnerTargetIndex(ScriptInstance* script, s32 isInitialCall) {
 
 s32 calc_partner_damage_enemy(void);
 
-ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 hitResult;
@@ -178,7 +178,7 @@ ApiStatus func_8027FC90(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActorLevel(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActorLevel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     ActorID actorID = get_variable(script, *args++);
     Bytecode* outVar;
@@ -201,7 +201,7 @@ INCLUDE_ASM(s32, "1AC760", PartnerPowerBounceEnemy);
 
 INCLUDE_ASM(s32, "1AC760", PartnerTestEnemy);
 
-ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8028070C(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(script->owner1.actorID);
@@ -218,14 +218,14 @@ ApiStatus func_8028070C(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus DeletePartner(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DeletePartner(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     btl_delete_actor(battleStatus->partnerActor);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetActionCommandResult(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 var = *script->ptrReadPos;
     s32 actionSuccess = battleStatus->actionSuccess;
@@ -244,7 +244,7 @@ ApiStatus GetActionCommandResult(ScriptInstance* script, s32 isInitialCall) {
 }
 
 /// Seems to be the same functionality as YieldTurn in 1A5830.c
-ApiStatus func_80280818(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80280818(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= 0x200000;
     return ApiStatus_DONE2;
 }

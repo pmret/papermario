@@ -7,8 +7,6 @@
 #include "enums.h"
 
 f32 fabsf(f32 f);
-f32 sqrtf(f32 f);
-f64 sqrt(f64 d);
 f32 cosine(s16 arg0);
 
 s32 strcmp(const char* str1, const char* str2);
@@ -32,8 +30,9 @@ s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
-void render_player_model();
+void render_player_model(void);
 s16 get_game_mode(void);
+s32 is_picking_up_item(void);
 
 f32 integrate_gravity(void);
 f32 get_clamped_angle_diff(f32, f32);
@@ -53,9 +52,7 @@ void player_input_to_move_vector(f32* angle, f32* magnitude);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 f32 func_800E5348(void);
 
-void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
-void set_hud_element_scale(s32 index, f32 scale);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
 void set_entity_model_flags(s32 idx, s32 newFlags);
@@ -114,13 +111,10 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
-// todo remove once we have libultra's def
-extern void guOrtho(Mtx *m, float l, float r, float b, float t,
-		    float n, float f, float scale);
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
-void get_screen_coords(Cam camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
+void get_screen_coords(s32 camID, f32 x, f32 y, f32 z, s32* screenX, s32* screenY, s32* screenZ);
 
 void parent_collider_to_model(s32 colliderID, s16 modelIndex);
 void clone_model(u16 srcModelID, u16 newModelID);
@@ -132,6 +126,7 @@ void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* cen
 s32 collision_main_above(void);
 s32 player_test_lateral_overlap(s32, PlayerStatus*, f32*, f32*, f32*, f32, f32);
 Npc* peach_make_disguise_npc(s32 peachDisguise);
+void peach_set_disguise_anim(s32);
 
 void draw_box(s32 flags, s32 windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, s32 opacity,
               s32 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32),
@@ -150,8 +145,9 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
-void phys_adjust_cam_on_landing();
-void phys_init_integrator_for_current_state();
+void phys_adjust_cam_on_landing(void);
+void phys_init_integrator_for_current_state(void);
+void phys_player_land(void);
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -172,11 +168,11 @@ void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
 
-s32 get_variable(ScriptInstance* script, Bytecode var);
-s32 set_variable(ScriptInstance* script, Bytecode var, s32 value);
-f32 get_float_variable(ScriptInstance* script, Bytecode var);
-f32 set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
-void set_script_timescale(ScriptInstance* script, f32 timescale);
+s32 get_variable(Evt* script, Bytecode var);
+s32 set_variable(Evt* script, Bytecode var, s32 value);
+f32 get_float_variable(Evt* script, Bytecode var);
+f32 set_float_variable(Evt* script, Bytecode var, f32 value);
+void set_script_timescale(Evt* script, f32 timescale);
 f32 sin_deg(f32 x);
 f32 cos_deg(f32 x);
 f32 sin_rad(f32 x);
@@ -188,17 +184,18 @@ s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 void func_800561A4(s32);
-s32 osGetId();
 
 s32 battle_heap_create(void);
 void filemenu_init(s32);
 
-s32 test_ray_zones(f32, f32, f32, f32*, f32*, f32*, f32*, f32*, f32*, f32*);
+s32 test_ray_zones(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
+                   f32* hitDepth, f32* nx, f32* ny, f32* nz);
+s32 test_ray_colliders(s32 ignoreFlags, f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX,
+                       f32* hitY, f32* hitZ, f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
+s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f32 dirZ, f32* hitX, f32* hitY, f32* hitZ,
+                      f32* hitDepth, f32* hitNx, f32* hitNy, f32* hitNz);
 
 void mem_clear(s8* data, s32 numBytes);
-
-HudElement* create_hud_element(s32* iconIndex);
-void set_hud_element_render_pos(s32 iconIndex, s32 posX, s32 posY);
 
 void intro_logos_set_fade_color(s16 color);
 void intro_logos_set_fade_alpha(s16 alpha);
@@ -245,9 +242,9 @@ void set_background_color_blend(u8 r, u8 g, u8 b, u8 a);
 
 void partner_set_tether_distance(f32);
 s32 does_script_exist(s32 id);
-s32 does_script_exist_by_ref(ScriptInstance* script);
-ScriptInstance* start_script(Script* source, s32 priority, s32 initialState);
-ScriptInstance* start_script_in_group(Script* source, u8 priority, u8 initialState, u8 groupFlags);
+s32 does_script_exist_by_ref(Evt* script);
+Evt* start_script(EvtSource* source, s32 priority, s32 initialState);
+Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 groupFlags);
 f32 get_player_normal_yaw(void);
 void set_standard_shadow_scale(Shadow* shadow, f32 scale);
 void set_peach_shadow_scale(Shadow* shadow, f32 scale);
@@ -288,11 +285,12 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
-s32 check_input_jump();
+s32 check_input_jump(void);
+s32 check_input_hammer(void);
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
-Npc* resolve_npc(ScriptInstance* script, NpcID npcIdOrPtr);
+Npc* resolve_npc(Evt* script, NpcID npcIdOrPtr);
 void set_npc_yaw(Npc* npcPtr, f32 angle);
 void npc_move_heading(Npc* npc, f32 speed, f32 yaw);
 void disable_npc_blur(Npc* npc);
@@ -318,8 +316,6 @@ void enemy_create_target_list(Actor* actor);
 void set_actor_yaw(ActorID actorID, s32 yaw);
 void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
 
-ActorPart* get_actor_part(Actor* actor, s32 partIndex);
-
 void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType);
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType);
 void remove_part_decoration(ActorPart* part, s32 decorationIndex);
@@ -331,7 +327,7 @@ void create_part_shadow(ActorID actorID, s32 partIndex);
 void remove_part_shadow(ActorID actorID, s32 partIndex);
 void create_part_shadow_by_ref(UNK_TYPE arg0, ActorPart* part); // arg0 unused
 
-ScriptInstance* get_script_by_index(s32 index);
+Evt* get_script_by_index(s32 index);
 
 void set_action_state(s32 actionState);
 s32 get_collider_type_by_id(s32 colliderID);
@@ -341,7 +337,7 @@ void subtract_hp(s32 amt);
 void open_status_menu_long(void);
 
 void suspend_all_group(s32 groupFlags);
-void kill_script(ScriptInstance* instanceToKill);
+void kill_script(Evt* instanceToKill);
 void exec_entity_commandlist(Entity* entity);
 
 void sfx_reset_door_sounds(void);
@@ -367,7 +363,6 @@ void state_step_title_screen(void);
 void state_drawUI_title_screen(void);
 void state_init_enter_demo(void);
 void state_step_enter_world(void);
-void state_drawUI_enter_world(void);
 void state_init_change_map(void);
 void state_step_change_map(void);
 void state_drawUI_change_map(void);
@@ -375,7 +370,6 @@ void func_80036430(void);
 void func_8003646C(void);
 void func_80036640(void);
 void state_init_enter_world(void);
-void state_step_enter_world(void);
 void state_drawUI_enter_world(void);
 void state_init_world(void);
 void state_step_world(void);
@@ -412,11 +406,6 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 
 void func_802B2078(void);
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
 void spr_update_player_sprite(s32, s32, f32);
 
 void initialize_curtains(void);
@@ -434,10 +423,10 @@ Npc* func_8003E534(NpcID npcId); // get_npc_safe
 void func_80077BD0(s32, s32, s32, s32, s32, s32);
 
 void dead_playFX_11(s32, f32, f32, f32, f32);
-s32 dead_get_variable(ScriptInstance* script, Bytecode var);
-f32 dead_get_float_variable(ScriptInstance* script, Bytecode var);
-s32 dead_set_variable(ScriptInstance* script, Bytecode var, s32 value);
-f32 dead_set_float_variable(ScriptInstance* script, Bytecode var, f32 value);
+s32 dead_get_variable(Evt* script, Bytecode var);
+f32 dead_get_float_variable(Evt* script, Bytecode var);
+s32 dead_set_variable(Evt* script, Bytecode var, s32 value);
+f32 dead_set_float_variable(Evt* script, Bytecode var, f32 value);
 f32 dead_clamp_angle(f32 theta);
 s32 dead_rand_int(s32);
 void func_8006CAC0(float mf[4][4], float x, float y, float z);
@@ -452,15 +441,13 @@ f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void sfx_get_spatialized_sound_params(f32 arg0, f32 arg1, f32 arg2, s16* arg3, s16* arg4, s32 arg5);
 void sfx_play_sound_with_params(s32 arg0, u8 arg1, u8 arg2, s16 arg3);
 s32 func_8004A784(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
-void base_UnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
-void DeadUnkNpcAIFunc1(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void base_UnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
+void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 
 s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
-void guRotateRPYF(float mf[4][4], f32 x, f32 y, f32 z);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 

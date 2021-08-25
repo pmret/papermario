@@ -20,16 +20,16 @@ void world_goombario_init(Npc* partner) {
     partner->collisionRadius = 20;
 }
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD188_3170A8, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD1D0_3170F0, Evt* script, s32 isInitialCall);
 
 INCLUDE_ASM(s32, "world/partner/goombario", func_802BD564_317484);
 
 s32 world_goombario_can_pause(Npc* partner) {
     s32 new_var;
 
-    if (D_8010EBB0.unk_00) {
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
         return FALSE;
     }
 
@@ -43,11 +43,11 @@ s32 world_goombario_can_pause(Npc* partner) {
 
 // get message for tattle routine
 // has big jumptable at rodata 802BDE88
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BD5D8_3174F8, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "world/partner/goombario", func_802BDB30_317A50, Evt* script, s32 isInitialCall);
 
-ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
     s32 unk = script->owner2.npc; // todo what is this?
 
     if (isInitialCall) {
@@ -58,18 +58,18 @@ ApiStatus func_802BDB84(ScriptInstance* script, s32 isInitialCall) {
 }
 
 void world_goombario_pre_battle(Npc* partner) {
-    Temp8010EBB0* temp = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (temp->unk_00 != 0) {
+    if (actionStatus->actionState.b[0] != 0) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         CancelMessageAndBlock();
         partner_clear_player_tracking(partner);
-        temp->unk_00 = 0;
-        temp->unk_03 = 0;
+        actionStatus->actionState.b[0] = 0;
+        actionStatus->actionState.b[3] = 0;
         disable_npc_blur(partner);
     }
-    temp->unk_03 = 1;
+    actionStatus->actionState.b[3] = 1;
 }
 
 s32 D_802BDC40_317B60[] = {
@@ -85,17 +85,17 @@ s32 D_802BDC40_317B60[] = {
     0x00000039, 0x001B0024, 0xFFFFFFFF
 };
 
-Script world_goombario_take_out = SCRIPT({
+EvtSource world_goombario_take_out = SCRIPT({
     func_802BD188_3170A8();
 });
 
 s32 D_802BDD88_317CA8 = 0x802BDF40;
 
-Script world_goombario_update = SCRIPT({
+EvtSource world_goombario_update = SCRIPT({
     func_802BD1D0_3170F0();
 });
 
-Script world_goombario_use_ability = SCRIPT({
+EvtSource world_goombario_use_ability = SCRIPT({
     func_802BD5D8_3174F8(); // returns tattle message id on SI_VAR(0), and something else on SI_VAR(1)
 
     if (SI_VAR(0) == -1) {
@@ -108,7 +108,7 @@ Script world_goombario_use_ability = SCRIPT({
     }
 
     if (SI_VAR(1) == 0) {
-        SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0,
+        SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0,
                       SI_VAR(0));
     }
 
@@ -117,6 +117,6 @@ Script world_goombario_use_ability = SCRIPT({
     func_802BDB30_317A50();
 });
 
-Script world_goombario_put_away = SCRIPT({
+EvtSource world_goombario_put_away = SCRIPT({
     func_802BDB84();
 });

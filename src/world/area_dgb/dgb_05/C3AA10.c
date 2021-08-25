@@ -23,7 +23,7 @@ MapConfig N(config) = {
     .tattle = { MSG_dgb_05_tattle },
 };
 
-Script N(802414E0) = SCRIPT({
+EvtSource N(802414E0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
@@ -40,7 +40,7 @@ static s32 N(pad_1578)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(exitSingleDoor_80241580) = SCRIPT({
+EvtSource N(exitSingleDoor_80241580) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
@@ -54,7 +54,7 @@ Script N(exitSingleDoor_80241580) = SCRIPT({
     sleep 100;
 });
 
-Script N(enterSingleDoor_80241634) = SCRIPT({
+EvtSource N(enterSingleDoor_80241634) = SCRIPT({
     UseDoorSounds(0);
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
@@ -66,7 +66,7 @@ Script N(enterSingleDoor_80241634) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -89,7 +89,7 @@ static s32 N(pad_17E8)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(802417F0) = SCRIPT({
+EvtSource N(802417F0) = SCRIPT({
     N(func_80240000_C3AA10)();
     func_802CA988(0, SI_VAR(2), SI_VAR(3), SI_VAR(4), SI_VAR(5));
     N(func_80240030_C3AA40)();
@@ -102,7 +102,7 @@ static s32 N(pad_1868)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     if (SI_SAVE_FLAG(1047) == 0) {
         MakeEntity(0x802BCE84, 510, -210, 100, 0, MAKE_ENTITY_END);
     }
@@ -112,7 +112,7 @@ static s32 N(pad_18BC) = {
     0x00000000,
 };
 
-Script N(802418C0) = SCRIPT({
+EvtSource N(802418C0) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -134,8 +134,8 @@ s32 N(unk_missing_8024197C)[] = {
     0x00390012, 0xFFFFFFFF,
 };
 
-NpcAnimID N(extraAnimationList_802419A4)[] = {
-    NPC_ANIM(world_clubba, Palette_00, Anim_0),
+s32 N(extraAnimationList_802419A4)[] = {
+    NPC_ANIM_world_clubba_Palette_00_Anim_0,
     ANIM_END,
 };
 
@@ -154,7 +154,7 @@ NpcAISettings N(npcAISettings_802419AC) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_802419DC) = SCRIPT({
+EvtSource N(npcAI_802419DC) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(1, 10);
     SetSelfVar(2, 14);
@@ -171,7 +171,7 @@ NpcSettings N(npcSettings_80241A4C) = {
     .level = 13,
 };
 
-Script N(npcAI_80241A78) = SCRIPT({
+EvtSource N(npcAI_80241A78) = SCRIPT({
     EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfVar(0, 4);
     SetSelfVar(1, 32);
@@ -209,22 +209,22 @@ StaticNpc N(npcGroup_80241B4C)[] = {
         .maxCoinBonus = 3,
         .movement = { 132, -110, 238, 0, 0, -32767, 0, 325, 0, 185, 200 },
         .animations = {
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_3),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_11),
-            NPC_ANIM(world_clubba, Palette_00, Anim_12),
-            NPC_ANIM(world_clubba, Palette_00, Anim_7),
-            NPC_ANIM(world_clubba, Palette_00, Anim_8),
-            NPC_ANIM(world_clubba, Palette_00, Anim_1),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_3,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_11,
+            NPC_ANIM_world_clubba_Palette_00_Anim_12,
+            NPC_ANIM_world_clubba_Palette_00_Anim_7,
+            NPC_ANIM_world_clubba_Palette_00_Anim_8,
+            NPC_ANIM_world_clubba_Palette_00_Anim_1,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
         .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
     },
@@ -238,22 +238,22 @@ StaticNpc N(npcGroup_80241B4C)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_3),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_11),
-            NPC_ANIM(world_clubba, Palette_00, Anim_12),
-            NPC_ANIM(world_clubba, Palette_00, Anim_7),
-            NPC_ANIM(world_clubba, Palette_00, Anim_8),
-            NPC_ANIM(world_clubba, Palette_00, Anim_1),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_3,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_11,
+            NPC_ANIM_world_clubba_Palette_00_Anim_12,
+            NPC_ANIM_world_clubba_Palette_00_Anim_7,
+            NPC_ANIM_world_clubba_Palette_00_Anim_8,
+            NPC_ANIM_world_clubba_Palette_00_Anim_1,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
         .extraAnimations = N(extraAnimationList_802419A4),
     },
@@ -277,22 +277,22 @@ StaticNpc N(npcGroup_80241F2C)[] = {
         .maxCoinBonus = 3,
         .movement = { 503, -210, 225, 0, 0, -32767, 0, 503, -210, 290, 200, 150, 1 },
         .animations = {
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_3),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_11),
-            NPC_ANIM(world_clubba, Palette_00, Anim_12),
-            NPC_ANIM(world_clubba, Palette_00, Anim_7),
-            NPC_ANIM(world_clubba, Palette_00, Anim_8),
-            NPC_ANIM(world_clubba, Palette_00, Anim_1),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_3,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_11,
+            NPC_ANIM_world_clubba_Palette_00_Anim_12,
+            NPC_ANIM_world_clubba_Palette_00_Anim_7,
+            NPC_ANIM_world_clubba_Palette_00_Anim_8,
+            NPC_ANIM_world_clubba_Palette_00_Anim_1,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
         .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
     },
@@ -306,22 +306,22 @@ StaticNpc N(npcGroup_80241F2C)[] = {
         .heartDrops = NO_DROPS,
         .flowerDrops = NO_DROPS,
         .animations = {
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_3),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_4),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_C),
-            NPC_ANIM(world_clubba, Palette_00, Anim_11),
-            NPC_ANIM(world_clubba, Palette_00, Anim_12),
-            NPC_ANIM(world_clubba, Palette_00, Anim_7),
-            NPC_ANIM(world_clubba, Palette_00, Anim_8),
-            NPC_ANIM(world_clubba, Palette_00, Anim_1),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
-            NPC_ANIM(world_clubba, Palette_00, Anim_2),
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_3,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_4,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_C,
+            NPC_ANIM_world_clubba_Palette_00_Anim_11,
+            NPC_ANIM_world_clubba_Palette_00_Anim_12,
+            NPC_ANIM_world_clubba_Palette_00_Anim_7,
+            NPC_ANIM_world_clubba_Palette_00_Anim_8,
+            NPC_ANIM_world_clubba_Palette_00_Anim_1,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
+            NPC_ANIM_world_clubba_Palette_00_Anim_2,
         },
         .extraAnimations = N(extraAnimationList_802419A4),
     },
@@ -333,14 +333,14 @@ NpcGroupList N(npcGroupList_8024230C) = {
     {},
 };
 
-ApiStatus N(func_80240000_C3AA10)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_C3AA10)(Evt* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y >= -210.0f) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240030_C3AA40)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240030_C3AA40)(Evt* script, s32 isInitialCall) {
     if (gPlayerStatus.position.y > -270.0f) {
         return ApiStatus_BLOCK;
     }
@@ -359,7 +359,7 @@ ApiStatus N(func_80240030_C3AA40)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/UnkFunc7.inc.c"
 
-void N(func_8024067C_C3B08C)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_8024067C_C3B08C)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -376,7 +376,7 @@ void N(func_8024067C_C3B08C)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240704_C3B114)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240704_C3B114)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerData* playerData = get_player_data();
@@ -394,14 +394,14 @@ void N(func_80240704_C3B114)(ScriptInstance* script, NpcAISettings* aiSettings, 
         }
 
         if (playerData->currentPartner == 2) {
-            if (D_8010EBB0.unk_00 == playerData->currentPartner) {
+            if (gPartnerActionStatus.actionState.b[0] == playerData->currentPartner) {
                 phi_s2 = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == 1) && (D_8010EBB0.unk_00 != 0)) ||
-        ((playerData->currentPartner == 3) && (D_8010EBB0.unk_00 == 2))) {
+    if (((playerData->currentPartner == 1) && (gPartnerActionStatus.actionState.b[0] != 0)) ||
+        ((playerData->currentPartner == 3) && (gPartnerActionStatus.actionState.b[0] == 2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);
@@ -432,7 +432,7 @@ void N(func_80240704_C3B114)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_802409BC_C3B3CC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_802409BC_C3B3CC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -444,7 +444,7 @@ void N(func_802409BC_C3B3CC)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240A20_C3B430)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240A20_C3B430)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -454,7 +454,7 @@ void N(func_80240A20_C3B430)(ScriptInstance* script, NpcAISettings* aiSettings, 
     script->functionTemp[0] = 4;
 }
 
-void N(func_80240AC8_C3B4D8)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240AC8_C3B4D8)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 var;
@@ -485,7 +485,7 @@ void N(func_80240AC8_C3B4D8)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240C00_C3B610)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240C00_C3B610)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -501,7 +501,7 @@ void N(func_80240C00_C3B610)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240CAC_C3B6BC)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240CAC_C3B6BC)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 var;
@@ -524,7 +524,7 @@ void N(func_80240CAC_C3B6BC)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-void N(func_80240E24_C3B834)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240E24_C3B834)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -537,7 +537,7 @@ void N(func_80240E24_C3B834)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 
-ApiStatus N(func_80240E80_C3B890)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240E80_C3B890)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -641,7 +641,7 @@ ApiStatus N(func_80240E80_C3B890)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802411D0_C3BBE0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802411D0_C3BBE0)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

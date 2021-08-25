@@ -7,13 +7,13 @@
 #undef NAMESPACE
 #define NAMESPACE battle_item_snowman_doll
 
-ApiStatus N(FadeBackgroundToBlack)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A123C_71C06C)(ScriptInstance* script, s32 isInitialCall);
-ApiStatus N(func_802A13B8_71C1E8)(ScriptInstance* script, s32 isInitialCall);
+ApiStatus N(FadeBackgroundToBlack)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A123C_71C06C)(Evt* script, s32 isInitialCall);
+ApiStatus N(func_802A13B8_71C1E8)(Evt* script, s32 isInitialCall);
 
-Script N(UseItemWithEffect);
-Script N(PlayerGoHome);
+EvtSource N(UseItemWithEffect);
+EvtSource N(PlayerGoHome);
 
 #endif
- 
- 
+
+

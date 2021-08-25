@@ -4,7 +4,7 @@
 
 #include "common/UnkBattleFunc1.inc.c"
 
-ApiStatus func_802180CC_5B157C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802180CC_5B157C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 prevX = get_variable(script, *args++);
     s32 prevZ = get_variable(script, *args++);

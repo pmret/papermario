@@ -5,7 +5,7 @@
 extern s32 D_8008F2E4;
 extern s32 D_8008FC44;
 
-ApiStatus func_802186E0_6DE4A0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802186E0_6DE4A0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     SelectableTarget* selectableTarget;
@@ -24,7 +24,7 @@ ApiStatus func_802186E0_6DE4A0(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80218770_6DE530(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
     SelectableTarget* selectableTarget;
@@ -44,7 +44,7 @@ ApiStatus func_80218770_6DE530(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802187F0_6DE5B0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802187F0_6DE5B0(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     s32 selectedItemID;

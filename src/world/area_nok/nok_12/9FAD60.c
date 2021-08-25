@@ -34,7 +34,7 @@ INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_80240904_9FB0F4);
 
 INCLUDE_ASM(s32, "world/area_nok/nok_12/9FAD60", func_802418D8_9FC0C8);
 /*
-ApiStatus N(func_802418D8_9FC0C8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802418D8_9FC0C8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

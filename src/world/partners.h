@@ -17,7 +17,7 @@ typedef struct WorldPartner {
     /* 0x18 */ Bytecode* update;
     /* 0x1C */ Bytecode* useAbility;
     /* 0x20 */ Bytecode* putAway;
-    /* 0x24 */ NpcAnimID idle;
+    /* 0x24 */ s32 idle;
     /* 0x28 */ PartnerUnkFunc testFirstStrike;
     /* 0x2C */ PartnerBoolFunc canUseAbility;
     /* 0x30 */ PartnerBoolFunc canPlayerPause;
@@ -28,9 +28,9 @@ typedef struct WorldPartner {
 
 extern s32 D_8010C954;
 extern s32 D_8010CFC4;
-extern ScriptInstance* D_8010CFD4;
+extern Evt* D_8010CFD4;
 extern s32 D_8010CFD8;
-extern ScriptID D_8010CFDC;
+extern s32 D_8010CFDC;
 extern s32 D_8010CFE0;
 extern s32 D_8010CFE4;
 extern s32 D_8010CFE8;

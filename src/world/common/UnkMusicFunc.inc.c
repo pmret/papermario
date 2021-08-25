@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkMusicFunc)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(UnkMusicFunc)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     X32* something;
     s32 cond = 0;

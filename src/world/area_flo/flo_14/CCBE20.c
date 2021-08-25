@@ -7,7 +7,7 @@ enum {
     NPC_BZZAP,
 };
 
-s32 N(D_802453B0_EF79C0)[91] BSS;
+BSS s32 N(D_802453B0_EF79C0)[91];
 
 f32 N(D_802444C0_CCF7D0)[] = {
     4.5f, 3.5f, 2.6f, 2.0f,
@@ -29,7 +29,7 @@ NpcAISettings N(npcAISettings_802444D8) = {
     .unk_2C = 1,
 };
 
-Script N(npcAI_80244508) = SCRIPT({
+EvtSource N(npcAI_80244508) = SCRIPT({
     SetSelfVar(0, 0);
     SetSelfVar(5, -630);
     SetSelfVar(6, 50);
@@ -66,7 +66,7 @@ s32 N(D_80244600_CCF910) = {
     0x00000000,
 };
 
-Script N(80244604) = SCRIPT({
+EvtSource N(80244604) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -89,7 +89,7 @@ Script N(80244604) = SCRIPT({
     unbind;
 });
 
-Script N(80244738) = SCRIPT({
+EvtSource N(80244738) = SCRIPT({
     N(func_802422C0_CCD5D0)(SI_VAR(0));
     bind_padlock N(80244604) 0x10 0 N(D_802453B0_EF79C0);
     N(func_80242234_CCD544)(SI_VAR(0));
@@ -100,7 +100,7 @@ s32 N(D_80244788_CCFA98)[] = {
     0x000000A1, 0x00000000,
 };
 
-Script N(interact_80244790) = SCRIPT({
+EvtSource N(interact_80244790) = SCRIPT({
     if (SI_AREA_FLAG(37) == 1) {
         SI_AREA_FLAG(35) = 1;
         SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0063));
@@ -150,7 +150,7 @@ Script N(interact_80244790) = SCRIPT({
     SI_AREA_FLAG(35) = 0;
 });
 
-Script N(init_80244ADC) = SCRIPT({
+EvtSource N(init_80244ADC) = SCRIPT({
     SI_AREA_FLAG(36) = 0;
     SI_AREA_FLAG(37) = 0;
     BindNpcInteract(NPC_SELF, N(interact_80244790));
@@ -167,22 +167,22 @@ StaticNpc N(npcGroup_80244B20) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_E),
-        NPC_ANIM(bubulb, Palette_00, Anim_E),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
-        NPC_ANIM(bubulb, Palette_00, Anim_2),
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_E,
+        NPC_ANIM_bubulb_Palette_00_Anim_E,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
+        NPC_ANIM_bubulb_Palette_00_Anim_2,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00E3),
 };
@@ -205,22 +205,22 @@ StaticNpc N(npcGroup_80244D10) = {
     .maxCoinBonus = 4,
     .movement = { -175, 55, 15, 30, 0, -32767, 0, -175, 55, 15, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_4),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_4,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -235,7 +235,7 @@ static s32 N(pad_4F24)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80244F30) = SCRIPT({
+EvtSource N(80244F30) = SCRIPT({
     MakeItemEntity(ITEM_STAR_PIECE, 675, 60, -100, 17, SI_SAVE_FLAG(1387));
 });
 
@@ -243,7 +243,7 @@ static s32 N(pad_4F64)[] = {
     0x00000000, 0x00000000, 0x00000000,
 };
 
-Script N(80244F70) = SCRIPT({
+EvtSource N(80244F70) = SCRIPT({
     loop {
         N(func_80242360_CCD670)(SI_VAR(0));
         if (SI_VAR(0) == SI_VAR(4)) {
@@ -291,7 +291,7 @@ Script N(80244F70) = SCRIPT({
     }
 });
 
-Script N(80245224) = SCRIPT({
+EvtSource N(80245224) = SCRIPT({
     SI_VAR(4) = 21;
     SI_VAR(5) = 21;
     SI_VAR(6) = 20;
@@ -312,7 +312,7 @@ Script N(80245224) = SCRIPT({
 
 #ifdef NON_MATCHING
 // second npc_raycast_down_sides call
-void N(func_80240CC0_CCBFD0)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80240CC0_CCBFD0)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 temp_f24;
@@ -456,7 +456,7 @@ void N(func_80240CC0_CCBFD0)(ScriptInstance* script, NpcAISettings* aiSettings, 
     }
 }
 #else
-INCLUDE_ASM(void, "world/area_flo/flo_14/CCBE20", flo_14_func_80240CC0_CCBFD0, ScriptInstance* script,
+INCLUDE_ASM(void, "world/area_flo/flo_14/CCBE20", flo_14_func_80240CC0_CCBFD0, Evt* script,
             NpcAISettings* aiSettings, EnemyTerritoryThing* territory);
 #endif
 
@@ -466,7 +466,7 @@ INCLUDE_ASM(void, "world/area_flo/flo_14/CCBE20", flo_14_func_80240CC0_CCBFD0, S
 
 #include "world/common/UnkNpcAIFunc2.inc.c"
 
-void N(func_80241764_CCCA74)(ScriptInstance* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
+void N(func_80241764_CCCA74)(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThing* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -484,7 +484,7 @@ void N(func_80241764_CCCA74)(ScriptInstance* script, NpcAISettings* aiSettings, 
 
 #include "world/common/UnkFunc5.inc.c"
 
-ApiStatus N(func_80241E1C_CCD12C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241E1C_CCD12C)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Bytecode* args = script->ptrReadPos;
     Npc* npc = get_npc_unsafe(enemy->npcID);
@@ -548,7 +548,7 @@ ApiStatus N(func_80241E1C_CCD12C)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_80242234_CCD544)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -564,7 +564,7 @@ ApiStatus N(func_80242234_CCD544)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80242288_CCD598)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80244600_CCF910) = get_variable(script, *args);
@@ -572,7 +572,7 @@ ApiStatus N(func_80242288_CCD598)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802422C0_CCD5D0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;

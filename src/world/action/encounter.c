@@ -19,9 +19,9 @@ void func_802B6000_E28A30(void) {
     }
 
     if (playerStatus->animFlags & 0x400000) {
-        if (D_8010EBB0.unk_03 == 8) {
+        if (gPartnerActionStatus.actionState.b[3]  == 8) {
             func_802BD100_317020(playerStatus->flags);
-        } else if (D_8010EBB0.unk_03 == 7) {
+        } else if (gPartnerActionStatus.actionState.b[3]  == 7) {
             func_802BD100_317020(playerStatus->flags);
         }
     }

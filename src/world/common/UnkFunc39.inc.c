@@ -1,8 +1,8 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(UnkFunc39)(ScriptInstance* script, s32 isInitialCall) {
-    Effect* effect = (Effect*)get_variable(script, *script->ptrReadPos);
+ApiStatus N(UnkFunc39)(Evt* script, s32 isInitialCall) {
+    EffectGraphics* effect = (EffectGraphics*)get_variable(script, *script->ptrReadPos);
 
     effect->flags |= 0x10;
 

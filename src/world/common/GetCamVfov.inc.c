@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-ApiStatus N(GetCamVfov)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(GetCamVfov)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 cameraID = get_variable(script, *args++);
 

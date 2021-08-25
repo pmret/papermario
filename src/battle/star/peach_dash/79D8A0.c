@@ -4,7 +4,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_79DDB8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1518_79DDB8(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     PlayerData* playerData2 = &gPlayerData;
 

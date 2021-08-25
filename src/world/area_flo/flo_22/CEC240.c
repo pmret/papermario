@@ -20,7 +20,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_22_tattle },
 };
 
-Script N(802402E0) = SCRIPT({
+EvtSource N(802402E0) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -30,13 +30,13 @@ Script N(802402E0) = SCRIPT({
     }
 });
 
-Script N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
+EvtSource N(exitWalk_80240350) = EXIT_WALK_SCRIPT(60,  0, "flo_03",  1);
 
-Script N(802403AC) = SCRIPT({
+EvtSource N(802403AC) = SCRIPT({
     bind N(exitWalk_80240350) TRIGGER_FLOOR_ABOVE 0;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -67,7 +67,7 @@ NpcSettings N(npcSettings_80240520) = {
     .level = 99,
 };
 
-Script N(idle_8024054C) = SCRIPT({
+EvtSource N(idle_8024054C) = SCRIPT({
     SI_MAP_VAR(10) = 0;
     loop {
         match SI_MAP_VAR(10) {
@@ -82,7 +82,7 @@ Script N(idle_8024054C) = SCRIPT({
     }
 });
 
-Script N(defeat_802405E4) = SCRIPT({
+EvtSource N(defeat_802405E4) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -97,7 +97,7 @@ Script N(defeat_802405E4) = SCRIPT({
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(bzzap, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_bzzap_Palette_00_Anim_1);
             SetNpcPos(NPC_SELF, 30, 60, 0);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 0);
@@ -107,12 +107,12 @@ Script N(defeat_802405E4) = SCRIPT({
     }
 });
 
-Script N(init_80240740) = SCRIPT({
+EvtSource N(init_80240740) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_8024054C));
     BindNpcDefeat(NPC_SELF, N(defeat_802405E4));
 });
 
-Script N(idle_80240778) = SCRIPT({
+EvtSource N(idle_80240778) = SCRIPT({
     SI_MAP_VAR(11) = 0;
     loop {
         match SI_MAP_VAR(11) {
@@ -127,7 +127,7 @@ Script N(idle_80240778) = SCRIPT({
     }
 });
 
-Script N(defeat_80240810) = SCRIPT({
+EvtSource N(defeat_80240810) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -142,14 +142,14 @@ Script N(defeat_80240810) = SCRIPT({
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 3 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(dayzee, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 2.0);
             NpcJump0(NPC_SELF, 30, 0, 0, 15);
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(dayzee, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 2.0);
             NpcJump0(NPC_SELF, 30, 0, 0, 15);
@@ -158,7 +158,7 @@ Script N(defeat_80240810) = SCRIPT({
     }
 });
 
-Script N(init_802409CC) = SCRIPT({
+EvtSource N(init_802409CC) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_80240778));
     BindNpcDefeat(NPC_SELF, N(defeat_80240810));
 });
@@ -174,22 +174,22 @@ StaticNpc N(npcGroup_80240A04) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_4),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_4,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
 };
 
@@ -210,22 +210,22 @@ StaticNpc N(npcGroup_80240BF4) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(4),
     .maxCoinBonus = 3,
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -248,7 +248,7 @@ s32 N(itemList_80240E10)[] = {
     ITEM_NONE,
 };
 
-Script N(80240E24) = SCRIPT({
+EvtSource N(80240E24) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 20;
     ShowMessageAtScreenPos(MESSAGE_ID(0x11, 0x00DB), 300, 120);
@@ -256,7 +256,7 @@ Script N(80240E24) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80240E84) = SCRIPT({
+EvtSource N(80240E84) = SCRIPT({
     SetPlayerAnimation(0x6000E);
     spawn {
         GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
@@ -284,7 +284,7 @@ Script N(80240E84) = SCRIPT({
     sleep 10;
 });
 
-Script N(80241028) = SCRIPT({
+EvtSource N(80241028) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerInput(FALSE);
     ShowConsumableChoicePopup();
@@ -334,17 +334,17 @@ Script N(80241028) = SCRIPT({
                 NpcFacePlayer(NPC_BZZAP, 0);
                 sleep 1;
                 SetNpcPos(NPC_BZZAP, 30, 0, 0);
-                SetNpcAnimation(NPC_BZZAP, NPC_ANIM(bzzap, Palette_00, Anim_1));
+                SetNpcAnimation(NPC_BZZAP, NPC_ANIM_bzzap_Palette_00_Anim_1);
                 NpcJump0(NPC_BZZAP, 30, 60, 0, 20);
                 sleep 10;
-                SetNpcAnimation(NPC_BZZAP, NPC_ANIM(bzzap, Palette_00, Anim_4));
+                SetNpcAnimation(NPC_BZZAP, NPC_ANIM_bzzap_Palette_00_Anim_4);
                 GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
                 SI_VAR(1) += 20;
                 NpcJump0(NPC_BZZAP, SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
                 SI_MAP_VAR(10) = 1;
             } else {
                 SetNpcPos(NPC_DAYZEE, 30, 0, 0);
-                SetNpcAnimation(NPC_DAYZEE, NPC_ANIM(dayzee, Palette_00, Anim_E));
+                SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_E);
                 GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
                 SI_VAR(1) += 20;
                 SetNpcJumpscale(NPC_DAYZEE, 2.0);
@@ -356,7 +356,7 @@ Script N(80241028) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(80241528) = SCRIPT({
+EvtSource N(80241528) = SCRIPT({
     bind_padlock N(80241028) TRIGGER_WALL_PRESS_A 9 N(itemList_80240E10);
     if (SI_SAVE_FLAG(1395) == 1) {
         MakeItemEntity(ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, SI_SAVE_FLAG(1392));
@@ -369,7 +369,7 @@ static s32 N(pad_1594)[] = {
 
 void playFX_82();
 
-ApiStatus N(func_80240000_CEC240)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_CEC240)(Evt* script, s32 isInitialCall) {
     playFX_82(1, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }

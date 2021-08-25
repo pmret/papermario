@@ -84,7 +84,7 @@ WorldPartner wPartners[12] = {
         .update = world_goombario_update,
         .useAbility = world_goombario_use_ability,
         .putAway = world_goombario_put_away,
-        .idle = NPC_ANIM(world_goombario, normal, idle),
+        .idle = NPC_ANIM_world_goombario_normal_idle,
         .canUseAbility = world_goombario_can_pause,
         .canPlayerPause = world_goombario_can_pause,
         .preBattle = world_goombario_pre_battle,
@@ -100,7 +100,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BEB64,
         .useAbility = 0x802BEB80,
         .putAway = 0x802BEB9C,
-        .idle = NPC_ANIM(world_kooper, normal, idle),
+        .idle = NPC_ANIM_world_kooper_normal_idle,
         .testFirstStrike = 0x802BE818,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -118,7 +118,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BE8A0,
         .useAbility = 0x802BE8BC,
         .putAway = 0x802BE8D8,
-        .idle = NPC_ANIM(world_bombette, normal, idle),
+        .idle = NPC_ANIM_world_bombette_normal_idle,
         .testFirstStrike = 0x802BE520,
         .canUseAbility = 0x802BD720,
         .canPlayerPause = 0x802BD748,
@@ -135,7 +135,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BEAB0,
         .useAbility = 0x802BEACC,
         .putAway = 0x802BEAE8,
-        .idle = NPC_ANIM(world_parakarry, Palette_00, Anim_1),
+        .idle = NPC_ANIM_world_parakarry_Palette_00_Anim_1,
         .canPlayerPause = partner_is_idle,
         .preBattle = 0x802BE90C,
         .postBattle = 0x802BE9D0,
@@ -151,7 +151,7 @@ WorldPartner wPartners[12] = {
         .update = world_goompa_update,
         .useAbility = world_goompa_use_ability,
         .putAway = world_goompa_put_away,
-        .idle = NPC_ANIM(goompa, Palette_00, Anim_1),
+        .idle = NPC_ANIM_goompa_Palette_00_Anim_1,
     },
     {
         // Watt
@@ -164,7 +164,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BE27C,
         .useAbility = 0x802BE298,
         .putAway = 0x802BE2B4,
-        .idle = NPC_ANIM(world_watt, Palette_00, Anim_1),
+        .idle = NPC_ANIM_world_watt_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BDD9C,
         .postBattle = 0x802BDE10,
@@ -181,7 +181,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BFDFC,
         .useAbility = 0x802BFDC0,
         .putAway = 0x802BFE18,
-        .idle = NPC_ANIM(world_sushie, Palette_00, Anim_1),
+        .idle = NPC_ANIM_world_sushie_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BF9B8,
         .postBattle = 0x802BFA58,
@@ -198,7 +198,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BFE80,
         .useAbility = 0x802BFE9C,
         .putAway = 0x802BFEB8,
-        .idle = NPC_ANIM(world_lakilester, Palette_00, Anim_1),
+        .idle = NPC_ANIM_world_lakilester_Palette_00_Anim_1,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BFA00,
         .postBattle = 0x802BFAA8,
@@ -215,7 +215,7 @@ WorldPartner wPartners[12] = {
         .update = 0x802BE000,
         .useAbility = 0x802BE01C,
         .putAway = 0x802BE038,
-        .idle = NPC_ANIM(world_bow, Palette_00, Anim_1),
+        .idle = NPC_ANIM_world_bow_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = 0x802BDF64,
@@ -231,7 +231,7 @@ WorldPartner wPartners[12] = {
         .update = world_goombaria_update,
         .useAbility = world_goombaria_use_ability,
         .putAway = world_goombaria_put_away,
-        .idle = NPC_ANIM(goombaria, Palette_00, Anim_1),
+        .idle = NPC_ANIM_goombaria_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -246,7 +246,7 @@ WorldPartner wPartners[12] = {
         .update = world_twink_update,
         .useAbility = world_twink_use_ability,
         .putAway = world_twink_put_away,
-        .idle = NPC_ANIM(twink, Palette_00, Anim_1),
+        .idle = NPC_ANIM_twink_Palette_00_Anim_1,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
@@ -274,7 +274,7 @@ PartnerAnimations gPartnerAnimations[] = {
 s32 D_800F84F8 = { 0x00000000, 0x00000000, };
 
 s32 use_consumable(s32 arg0) {
-    ScriptInstance* script;
+    Evt* script;
 
     D_8010CD20 = arg0;
     arg0 = gPlayerData.invItems[arg0];
@@ -292,7 +292,7 @@ void remove_consumable(void) {
 INCLUDE_ASM(s32, "world/partners", func_800EA4B0);
 
 s32 partner_is_idle(Npc* partner) {
-    return D_8010EBB0.unk_00 == 0;
+    return gPartnerActionStatus.actionState.b[0] == 0;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -377,13 +377,13 @@ void switch_to_partner(s32 arg0) {
 
 void partner_init_after_battle(s32 arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
     if (D_8010CFD8 != arg0) {
         D_8010CFE0 = 1;
         D_8010CFE4 = arg0;
-        temp8010EBB0->unk_00 = 0;
-        temp8010EBB0->unk_01 = 0;
+        actionStatus->actionState.b[0] = 0;
+        actionStatus->actionState.b[1] = 0;
 
         if (D_8010CFD8 != 0 && arg0 != 0) {
             D_8010CFE8 = 2;
@@ -414,12 +414,12 @@ void func_800EB2A4(s32 arg0) {
 }
 
 s32 partner_use_ability(void) {
-    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
     if (!is_starting_conversation() &&
         wPartner != NULL &&
         (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc))) {
-        if ((gGameStatusPtr->unk_81 != 0) && (temp8010EBB0->unk_08 & 0x4000)) {
+        if ((gGameStatusPtr->unk_81 != 0) && (actionStatus->currentButtons & 0x4000)) {
             sfx_play_sound(0x21D);
         } else if (D_8010CFD8 != 0) {
             D_8010CFE0 = 1;
@@ -449,7 +449,7 @@ void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 currentPartner = gPlayerData.currentPartner;
 
-    mem_clear(&D_8010EBB0, sizeof(D_8010EBB0));
+    mem_clear(&gPartnerActionStatus, sizeof(gPartnerActionStatus));
     get_generic_entity(create_generic_entity_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
@@ -457,7 +457,7 @@ void partner_reset_data(void) {
     D_8010CFD8 = currentPartner;
 
     if (gGameStatusPtr->unk_7D != 0) {
-        D_8010EBB0.unk_00 = 1;
+        gPartnerActionStatus.actionState.b[0] = 1;
         gGameStatusPtr->unk_7D = 0;
     }
 
@@ -478,18 +478,18 @@ void partner_reset_data(void) {
 }
 
 void partner_initialize_data(void) {
-    Temp8010EBB0* unk8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
     D_8010CFD8 = 0;
     D_8010CFE0 = 0;
     D_8010CFE8 = 0;
     D_8010CFC4 = 0;
-    unk8010EBB0->unk_03 = 0;
-    unk8010EBB0->unk_14 = 0;
-    unk8010EBB0->unk_01 = 0;
-    unk8010EBB0->unk_00 = 0;
-    unk8010EBB0->unk_358 = 0;
-    unk8010EBB0->unk_02 = 0;
+    actionStatus->actionState.b[3] = 0;
+    actionStatus->inputDisabled = 0;
+    actionStatus->actionState.b[1] = 0;
+    actionStatus->actionState.b[0] = 0;
+    actionStatus->unk_358 = 0;
+    actionStatus->actionState.b[2] = 0;
     wPartner = NULL;
     D_800F833C = 0;
     D_800F8340 = 0;
@@ -514,7 +514,7 @@ Bytecode* partner_get_ride_script(void) {
 
 void partner_handle_before_battle(void) {
     if (D_8010CFD8 != 0) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             kill_script_by_ID(*scriptID);
@@ -527,7 +527,7 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
     PlayerData* playerData = &gPlayerData;
 
     if (D_8010CFD8 != 0) {
@@ -542,10 +542,10 @@ void partner_handle_after_battle(void) {
 
         D_8010CFE8 = 1;
 
-        if (playerData->currentPartner != PARTNER_WATT && temp8010EBB0->unk_03 == 6) {
+        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actionState.b[3] == 6) {
             gPlayerStatusPtr->animFlags &= ~1;
             gPlayerStatusPtr->animFlags &= ~2;
-            temp8010EBB0->unk_03 = 0;
+            actionStatus->actionState.b[3] = 0;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -555,7 +555,7 @@ void partner_handle_after_battle(void) {
 }
 
 void partner_kill_ability_script(void) {
-    ScriptID* scriptID = &D_8010CFDC;
+    s32* scriptID = &D_8010CFDC;
     D_8010CFE8 = 10;
 
     if (does_script_exist(*scriptID)) {
@@ -565,7 +565,7 @@ void partner_kill_ability_script(void) {
 
 void partner_suspend_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             suspend_all_script(*scriptID);
@@ -575,7 +575,7 @@ void partner_suspend_ability_script(void) {
 
 void partner_resume_ability_script(void) {
     if (D_8010CFD8 != NULL) {
-        ScriptID* scriptID = &D_8010CFDC;
+        s32* scriptID = &D_8010CFDC;
 
         if (does_script_exist(*scriptID)) {
             resume_all_script(*scriptID);
@@ -589,15 +589,15 @@ INCLUDE_ASM(void, "world/partners", partner_walking_update_player_tracking, Npc*
 
 void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Temp8010EBB0* temp8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || temp8010EBB0->unk_14 != 0
-        || temp8010EBB0->unk_02 != 0) {
+    if (gGameStatusPtr->unk_81 == 0 || playerStatus->flags & 0x3000 || actionStatus->inputDisabled != 0
+        || actionStatus->actionState.b[2] != 0) {
         if (!(playerStatus->animFlags & 0x800)) {
             partner_walking_follow_player(partner);
         }
-        if (temp8010EBB0->unk_0C & 0x6006) {
-            temp8010EBB0->unk_02 = 0;
+        if (actionStatus->pressedButtons & 0x6006) {
+            actionStatus->actionState.b[2] = 0;
         }
     }
 
@@ -733,18 +733,18 @@ INCLUDE_ASM(s32, "world/partners", func_800EF4E0);
 #endif
 
 void partner_enable_input(void) {
-    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    temp_8010EBB0->unk_14--;
-    if (temp_8010EBB0->unk_14 < 0) {
-        temp_8010EBB0->unk_14 = 0;
+    actionStatus->inputDisabled--;
+    if (actionStatus->inputDisabled < 0) {
+        actionStatus->inputDisabled = 0;
     }
 }
 
 void partner_disable_input(void) {
-    Temp8010EBB0* temp_8010EBB0 = &D_8010EBB0;
+    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
 
-    temp_8010EBB0->unk_14++;
+    actionStatus->inputDisabled++;
 }
 
 INCLUDE_ASM(void, "world/partners", partner_do_player_collision, Npc* partner);

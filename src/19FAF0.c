@@ -3,41 +3,41 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 
-ApiStatus func_80271210(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80271210(Evt* script, s32 isInitialCall) {
     playFX_31(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271258(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
     playFX_31(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802712A0(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_802712A0, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802712A0(Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_802712A0, Evt* script, s32 isInitialCall);
 
-ApiStatus func_80271328(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271328, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80271328(Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271328, Evt* script, s32 isInitialCall);
 
-ApiStatus func_802713B0(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_802713B0(Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_802713B0, Evt* script, s32 isInitialCall);
 
-ApiStatus func_8027143C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_8027143C(Evt* script, s32 isInitialCall) {
     playFX_30(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271484(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80271484(Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271484, Evt* script, s32 isInitialCall);
 
-ApiStatus func_80271588(ScriptInstance* script, s32 isInitialCall);
-INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, ScriptInstance* script, s32 isInitialCall);
+ApiStatus func_80271588(Evt* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "19FAF0", func_80271588, Evt* script, s32 isInitialCall);
 
 void dispatch_event_player(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
-    ScriptInstance* oldOnHitScript;
+    Evt* oldOnHitScript;
     s32 oldOnHitID;
-    ScriptInstance* eventScript;
+    Evt* eventScript;
 
     player->lastEventType = eventType;
 
@@ -61,9 +61,9 @@ void dispatch_event_player(s32 eventType) {
 
 void dispatch_event_player_continue_turn(s32 eventType) {
     Actor* player = gBattleStatus.playerActor;
-    ScriptInstance* oldOnHitScript;
+    Evt* oldOnHitScript;
     s32 oldOnHitID;
-    ScriptInstance* eventScript;
+    Evt* eventScript;
 
     player->lastEventType = eventType;
 
@@ -98,7 +98,7 @@ void dispatch_damage_event_player_1(s32 damageAmount, Event event) {
     dispatch_damage_event_player(damageAmount, event, TRUE);
 }
 
-ApiStatus GetMenuSelection(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetMenuSelection(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
     s32 outVar1 = *args++;
@@ -114,9 +114,9 @@ ApiStatus GetMenuSelection(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "19FAF0", func_80273444);
 
-INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", PlayerFallToGoal, Evt* script, s32 isInitialCall);
 
-ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
     ActorMovementWalk* walkMovement = &player->walk;
 
@@ -164,22 +164,22 @@ ApiStatus PlayerLandJump(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-INCLUDE_ASM(s32, "19FAF0", PlayerRunToGoal, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", PlayerRunToGoal, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", CancelablePlayerRunToGoal, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", CancelablePlayerRunToGoal, Evt* script, s32 isInitialCall);
 
-ApiStatus GetPlayerHP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerHP(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerData.curHP);
     return ApiStatus_DONE2;
 }
 
-INCLUDE_ASM(s32, "19FAF0", PlayerDamageEnemy, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", PlayerDamageEnemy, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", PlayerPowerBounceEnemy, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", PlayerPowerBounceEnemy, Evt* script, s32 isInitialCall);
 
-INCLUDE_ASM(s32, "19FAF0", PlayerTestEnemy, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(s32, "19FAF0", PlayerTestEnemy, Evt* script, s32 isInitialCall);
 
-ApiStatus DispatchDamagePlayerEvent(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DispatchDamagePlayerEvent(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (dispatch_damage_event_player_0(get_variable(script, *args++), *args++) < 0) {
@@ -193,7 +193,7 @@ ApiStatus DispatchDamagePlayerEvent(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus EnablePlayerBlur(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EnablePlayerBlur(Evt* script, s32 isInitialCall) {
     s32 setting = get_variable(script, *script->ptrReadPos);
 
     if (setting == 0) {
@@ -207,12 +207,12 @@ ApiStatus EnablePlayerBlur(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802749D8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802749D8(Evt* script, s32 isInitialCall) {
     func_802549A0();
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802749F8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802749F8(Evt* script, s32 isInitialCall) {
     func_802549C0();
     return ApiStatus_DONE2;
 }
@@ -223,7 +223,7 @@ INCLUDE_ASM(s32, "19FAF0", func_802752AC);
 
 INCLUDE_ASM(s32, "19FAF0", func_80275F00);
 
-ApiStatus DidActionSucceed(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DidActionSucceed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32 actionSuccess = gBattleStatus.actionSuccess;
@@ -241,12 +241,12 @@ ApiStatus DidActionSucceed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80276EFC(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80276EFC(Evt* script, s32 isInitialCall) {
     gBattleStatus.flags1 |= 0x200000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus DispatchEventPlayer(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DispatchEventPlayer(Evt* script, s32 isInitialCall) {
     dispatch_event_player(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }

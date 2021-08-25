@@ -3,7 +3,7 @@
 #include "common.h"
 #include "battle/battle.h"
 
-ApiStatus func_80238000_6F5E80(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80238000_6F5E80(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     ActorMovement* partnerActorMovement = &partnerActor->walk;
@@ -39,7 +39,7 @@ ApiStatus func_80238000_6F5E80(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "battle/partner/kooper", func_80238114_6F5F94);
 
-ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(AverageTargetDizzyChance)(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor;
@@ -77,7 +77,7 @@ ApiStatus N(AverageTargetDizzyChance)(ScriptInstance* script, s32 isInitialCall)
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802383C0_6F6240(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802383C0_6F6240(Evt* script, s32 isInitialCall) {
     s32 var0 = script->varTable[0];
     s32 var1;
     s32 var2;

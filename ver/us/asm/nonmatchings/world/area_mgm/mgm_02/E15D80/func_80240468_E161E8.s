@@ -36,7 +36,7 @@ glabel func_80240468_E161E8
 /* E16264 802404E4 0C0513BF */  jal       set_hud_element_tint
 /* E16268 802404E8 00A0382D */   daddu    $a3, $a1, $zero
 /* E1626C 802404EC 0200202D */  daddu     $a0, $s0, $zero
-/* E16270 802404F0 0C0511FF */  jal       set_hud_element_script
+/* E16270 802404F0 0C0511FF */  jal       set_hud_element_anim
 /* E16274 802404F4 0220282D */   daddu    $a1, $s1, $zero
 /* E16278 802404F8 3C048011 */  lui       $a0, %hi(D_80108AFC)
 /* E1627C 802404FC 24848AFC */  addiu     $a0, $a0, %lo(D_80108AFC)

@@ -30,7 +30,7 @@ glabel filemenu_draw_cursor
 /* 1648F0 80244090 0C051261 */  jal       set_hud_element_render_pos
 /* 1648F4 80244094 02463021 */   addu     $a2, $s2, $a2
 /* 1648F8 80244098 8E040000 */  lw        $a0, ($s0)
-/* 1648FC 8024409C 0C0511F8 */  jal       draw_icon_2
+/* 1648FC 8024409C 0C0511F8 */  jal       draw_hud_element_3
 /* 164900 802440A0 00000000 */   nop
 .L802440A4:
 /* 164904 802440A4 8FBF001C */  lw        $ra, 0x1c($sp)

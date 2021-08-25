@@ -4,7 +4,7 @@
 
 #include "common/StarPower.inc.c"
 
-ApiStatus func_802A1518_78ECE8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1518_78ECE8(Evt* script, s32 isInitialCall) {
     s32 var1 = -50 - rand_int(200);
     s32 var2 = 200;
     s32 var3 = rand_int(40);
@@ -21,7 +21,7 @@ ApiStatus func_802A1518_78ECE8(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802A1628_78EDF8(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A1628_78EDF8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var1 = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

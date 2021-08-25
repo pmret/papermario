@@ -90,7 +90,7 @@ glabel L802A9368_42F188
 /* 42F1A8 802A9388 8E240004 */  lw        $a0, 4($s1)
 /* 42F1AC 802A938C 3C058011 */  lui       $a1, %hi(D_80108F30)
 /* 42F1B0 802A9390 24A58F30 */  addiu     $a1, $a1, %lo(D_80108F30)
-/* 42F1B4 802A9394 0C0511FF */  jal       set_hud_element_script
+/* 42F1B4 802A9394 0C0511FF */  jal       set_hud_element_anim
 /* 42F1B8 802A9398 00000000 */   nop
 /* 42F1BC 802A939C 3C048000 */  lui       $a0, 0x8000
 /* 42F1C0 802A93A0 34840041 */  ori       $a0, $a0, 0x41

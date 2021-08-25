@@ -6,7 +6,7 @@
 
 #include "world/common/IsRightOnEquipped.inc.c"
 
-ApiStatus func_802A10A4_756824(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802A10A4_756824(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }

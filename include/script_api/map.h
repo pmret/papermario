@@ -6,28 +6,28 @@
 
 #include "script_api/common.h"
 
-ApiStatus MakeNpcs(ScriptInstance* script, s32 isInitialCall);
-ApiStatus DoBasicAI(ScriptInstance* script, s32 isInitialCall);
-ApiStatus ResetFromLava(ScriptInstance* script, s32 isInitialCall);
-ApiStatus MakeShop(ScriptInstance* script, s32 isInitialCall);
-ApiStatus MakeShopOwner(ScriptInstance* script, s32 isInitialCall);
-ApiStatus MakeDoorAdvanced(ScriptInstance* script, s32 isInitialCall);
-ApiStatus CheckActionState(ScriptInstance* script, s32 isInitialCall);
-ApiStatus CreatePushBlockGrid(ScriptInstance* script, s32 isInitialCall);
-ApiStatus SetPushBlock(ScriptInstance* script, s32 isInitialCall);
-ApiStatus GetPushBlock(ScriptInstance* script, s32 isInitialCall);
-ApiStatus GetGridIndexFromPos(ScriptInstance* script, s32 isInitialCall);
-ApiStatus SetPushBlockFallEffect(ScriptInstance* script, s32 isInitialCall);
-ApiStatus TeleportPartnerToPlayer(ScriptInstance* script, s32 isInitialCall);
+ApiStatus MakeNpcs(Evt* script, s32 isInitialCall);
+ApiStatus DoBasicAI(Evt* script, s32 isInitialCall);
+ApiStatus ResetFromLava(Evt* script, s32 isInitialCall);
+ApiStatus MakeShop(Evt* script, s32 isInitialCall);
+ApiStatus MakeShopOwner(Evt* script, s32 isInitialCall);
+ApiStatus MakeDoorAdvanced(Evt* script, s32 isInitialCall);
+ApiStatus CheckActionState(Evt* script, s32 isInitialCall);
+ApiStatus CreatePushBlockGrid(Evt* script, s32 isInitialCall);
+ApiStatus SetPushBlock(Evt* script, s32 isInitialCall);
+ApiStatus GetPushBlock(Evt* script, s32 isInitialCall);
+ApiStatus GetGridIndexFromPos(Evt* script, s32 isInitialCall);
+ApiStatus SetPushBlockFallEffect(Evt* script, s32 isInitialCall);
+ApiStatus TeleportPartnerToPlayer(Evt* script, s32 isInitialCall);
 
-extern Script EnterWalk;
-extern Script EnterWalkShort;
-extern Script EnterSavePoint;
-extern Script ExitWalk;
-extern Script ExitSingleDoor;
-extern Script EnterSingleDoor;
-extern Script ExitDoubleDoor;
-extern Script EnterDoubleDoor;
+extern EvtSource EnterWalk;
+extern EvtSource EnterWalkShort;
+extern EvtSource EnterSavePoint;
+extern EvtSource ExitWalk;
+extern EvtSource ExitSingleDoor;
+extern EvtSource EnterSingleDoor;
+extern EvtSource ExitDoubleDoor;
+extern EvtSource EnterDoubleDoor;
 
 
 #endif

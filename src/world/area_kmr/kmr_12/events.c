@@ -2,15 +2,15 @@
 #include "message_ids.h"
 #include "sprite/npc/goomba.h"
 
-Script N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
-Script N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
+EvtSource N(ExitWest) = EXIT_WALK_SCRIPT(60, 0, "kmr_07", 1);
+EvtSource N(ExitEast) = EXIT_WALK_SCRIPT(60, 1, "kmr_11", 0);
 
-Script N(BindExits) = SCRIPT({
+EvtSource N(BindExits) = SCRIPT({
     bind N(ExitWest) TRIGGER_FLOOR_ABOVE 0; // deili1
     bind N(ExitEast) TRIGGER_FLOOR_ABOVE 3; // deili2
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GOOMBA_ROAD;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -40,7 +40,7 @@ NpcAISettings N(goombaAISettings) = {
     .unk_2C = TRUE,
 };
 
-Script N(GoombaAI) = SCRIPT({
+EvtSource N(GoombaAI) = SCRIPT({
     DoBasicAI(N(goombaAISettings));
 });
 
@@ -54,7 +54,7 @@ NpcSettings N(goombaNpcSettings) = {
 };
 
 /// @bug Never returns
-Script N(ReadWestSign) = SCRIPT({
+EvtSource N(ReadWestSign) = SCRIPT({
     group 0;
 
     // "Eat a Mushroom to regain your energy!"
@@ -83,11 +83,11 @@ Script N(ReadWestSign) = SCRIPT({
     return;
 });
 
-Script N(GoombaIdle) = SCRIPT({
+EvtSource N(GoombaIdle) = SCRIPT({
     sleep 1;
 
     SetSelfVar(0, FALSE);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, fake_mushroom)); // TODO: work out why palette 0 is used here
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_fake_mushroom); // TODO: work out why palette 0 is used here
     EnableNpcShadow(NPC_SELF, FALSE);
     SetSelfEnemyFlagBits(NPC_FLAG_NO_AI, TRUE);
 
@@ -108,15 +108,15 @@ Script N(GoombaIdle) = SCRIPT({
         SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, still));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_still);
     loop 9 {
         SI_VAR(0) += 10.0;
         SetNpcRotation(NPC_SELF, 0, SI_VAR(0), 0);
         sleep 1;
     }
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, dizzy));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_dizzy);
     sleep 20;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(goomba, normal, idle));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_goomba_normal_idle);
     PlaySoundAtNpc(NPC_SELF, 248, 0);
     func_802CFE2C(NPC_SELF, 8192);
     func_802CFD30(NPC_SELF, 5, 6, 1, 1, 0);
@@ -139,7 +139,7 @@ Script N(GoombaIdle) = SCRIPT({
     BindNpcAI(NPC_SELF, N(GoombaAI));
 });
 
-Script N(GoombaInit) = SCRIPT({
+EvtSource N(GoombaInit) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(GoombaIdle));
 });
 
@@ -170,22 +170,22 @@ StaticNpc N(goombaNpc) = {
         /* flying? */ TRUE,
     },
     .animations = {
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, walk),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, idle),
-        NPC_ANIM(goomba, normal, pain),
-        NPC_ANIM(goomba, normal, pain),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
-        NPC_ANIM(goomba, normal, run),
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_walk,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_idle,
+        NPC_ANIM_goomba_normal_pain,
+        NPC_ANIM_goomba_normal_pain,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
+        NPC_ANIM_goomba_normal_run,
     },
 };
 
@@ -194,7 +194,7 @@ NpcGroupList N(npcGroupList) = {
     {},
 };
 
-Script N(ReadEastSign) = SCRIPT({
+EvtSource N(ReadEastSign) = SCRIPT({
     IsStartingConversation($a);
     if ($a == 1) {
         return;
@@ -209,7 +209,7 @@ Script N(ReadEastSign) = SCRIPT({
     SetTimeFreezeMode(0);
 });
 
-Script N(MakeEntities) = SCRIPT({
+EvtSource N(MakeEntities) = SCRIPT({
     MakeEntity(0x802EAFDC, 436, 0, -42, 0, MAKE_ENTITY_END);
     AssignScript(N(ReadEastSign));
 });

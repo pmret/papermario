@@ -29,7 +29,7 @@ static char* N(exit_str_3) = "";
 
 INCLUDE_ASM(s32, "world/area_kkj/kkj_01/AC5170", func_80240B94_AC5D04);
 /*
-ApiStatus N(func_80240B94_AC5D04)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B94_AC5D04)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

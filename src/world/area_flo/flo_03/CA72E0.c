@@ -27,7 +27,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_03_tattle },
 };
 
-Script N(802406A0) = SCRIPT({
+EvtSource N(802406A0) = SCRIPT({
     GetEntryID(SI_VAR(0));
     if (SI_VAR(0) == 2) {
         SetMusicTrack(0, SONG_SUNSHINE_RETURNS, 0, 8);
@@ -49,7 +49,7 @@ Script N(802406A0) = SCRIPT({
     }
 });
 
-Script N(802407C0) = SCRIPT({
+EvtSource N(802407C0) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             PushSong(137, 0);
@@ -57,7 +57,7 @@ Script N(802407C0) = SCRIPT({
     }
 });
 
-Script N(80240814) = SCRIPT({
+EvtSource N(80240814) = SCRIPT({
     if (SI_STORY_PROGRESS >= STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         if (SI_SAVE_FLAG(1411) == 1) {
             FadeOutMusic(0, 250);
@@ -67,7 +67,7 @@ Script N(80240814) = SCRIPT({
     }
 });
 
-Script N(80240880) = SCRIPT({
+EvtSource N(80240880) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -106,16 +106,16 @@ Script N(80240880) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
+EvtSource N(exitWalk_80240B2C) = EXIT_WALK_SCRIPT(60,  0, "flo_09",  1);
 
-Script N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
+EvtSource N(exitWalk_80240B88) = EXIT_WALK_SCRIPT(60,  1, "flo_22",  0);
 
-Script N(80240BE4) = SCRIPT({
+EvtSource N(80240BE4) = SCRIPT({
     bind N(exitWalk_80240B2C) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_80240B88) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -175,12 +175,12 @@ NpcSettings N(npcSettings_80240EDC) = {
 
 s32** N(D_80240F08_CA81A8) = NULL;
 
-Script N(80240F0C) = SCRIPT({
+EvtSource N(80240F0C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 0);
     return;
 });
 
-Script N(80240F3C) = SCRIPT({
+EvtSource N(80240F3C) = SCRIPT({
     ShowGotItem(SI_VAR(0), 1, 16);
     return;
 });
@@ -205,7 +205,7 @@ s32 N(intTable_80240FD8)[] = {
     0x0000008C,
 };
 
-Script N(80240FFC) = SCRIPT({
+EvtSource N(80240FFC) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetNpcYaw(NPC_PETUNIA, 90);
@@ -220,18 +220,18 @@ Script N(80240FFC) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     sleep 20;
-    SpeakToPlayer(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00C8));
-    SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_3));
+    SpeakToPlayer(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C8));
+    SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_3);
     sleep 10;
     GotoMap("flo_18", 1);
     sleep 100;
 });
 
-Script N(npcAI_8024119C) = SCRIPT({
+EvtSource N(npcAI_8024119C) = SCRIPT({
     N(func_80240158_CA73F8)();
 });
 
-Script N(defeat_802411B8) = SCRIPT({
+EvtSource N(defeat_802411B8) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -244,7 +244,7 @@ Script N(defeat_802411B8) = SCRIPT({
     }
 });
 
-Script N(8024122C) = SCRIPT({
+EvtSource N(8024122C) = SCRIPT({
     GetPlayerPos(SI_VAR(3), SI_VAR(1), SI_VAR(2));
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += SI_VAR(3);
@@ -252,19 +252,19 @@ Script N(8024122C) = SCRIPT({
     SetCamProperties(0, SI_VAR(4), SI_VAR(0), SI_VAR(1), SI_VAR(2), 300, 20.0, -9.5);
 });
 
-Script N(interact_802412BC) = SCRIPT({
+EvtSource N(interact_802412BC) = SCRIPT({
     await N(802407C0);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             SI_MAP_VAR(14) = 1;
             SI_VAR(4) = (int) 3.5;
             await N(8024122C);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0050));
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_6));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0050));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6);
             SetPlayerAnimation(ANIM_NOD_YES);
             sleep 20;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0051));
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_12));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0051));
+            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_12);
             SetNpcYaw(NPC_MONTY_MOLE0, 270);
             GetNpcPos(NPC_MONTY_MOLE0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -276,12 +276,12 @@ Script N(interact_802412BC) = SCRIPT({
             WaitForCam(0, 1.0);
             sleep 20;
             PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_SURFACE, 0);
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_16));
+            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_16);
             sleep 10;
             PlaySoundAtNpc(NPC_MONTY_MOLE0, 0x263, 0);
             ShowEmote(2, EMOTE_QUESTION, -45, 30, 1, 0, 0, 0, 0);
             GetNpcPos(NPC_MONTY_MOLE1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0052));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0052));
             SetNpcYaw(NPC_MONTY_MOLE1, 90);
             SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
             UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -290,13 +290,13 @@ Script N(interact_802412BC) = SCRIPT({
             SetCamPitch(0, 17.0, -8.0);
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_0));
+            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_0);
             sleep 20;
             PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_SURFACE, 0);
             SetNpcPos(NPC_MONTY_MOLE1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
             sleep 20;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0053));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0053));
             SetNpcYaw(NPC_MONTY_MOLE2, 270);
             GetNpcPos(NPC_MONTY_MOLE2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -306,8 +306,8 @@ Script N(interact_802412BC) = SCRIPT({
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
             sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_14));
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0054));
+            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_14);
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0054));
             SetNpcYaw(NPC_MONTY_MOLE3, 270);
             GetNpcPos(NPC_MONTY_MOLE3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -316,14 +316,14 @@ Script N(interact_802412BC) = SCRIPT({
             SetCamPitch(0, 17.0, -9.0);
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_6));
+            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_6);
             sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_7));
+            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_7);
             sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_8));
+            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_8);
             sleep 20;
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_16));
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0055));
+            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_16);
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0055));
             SetNpcPos(NPC_DAYZEE, -233, 0, -217);
             GetNpcPos(NPC_DAYZEE, SI_VAR(0), SI_VAR(1), SI_VAR(2));
             UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -332,14 +332,14 @@ Script N(interact_802412BC) = SCRIPT({
             SetCamPitch(0, 17.0, -9.0);
             PanToTarget(0, 0, 1);
             WaitForCam(0, 1.0);
-            SetNpcAnimation(NPC_DAYZEE, NPC_ANIM(dayzee, Palette_00, Anim_D));
+            SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_D);
             PlaySoundAtNpc(NPC_DAYZEE, SOUND_UNKNOWN_262, 0);
             ShowEmote(1, EMOTE_EXCLAMATION, 45, 30, 1, 0, 0, 0, 0);
             sleep 15;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0056));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0056));
             SI_VAR(4) = (int) 90.0;
             await N(8024122C);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0057));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0057));
             SetEnemyFlagBits(1, 1, 0);
             SetEnemyFlagBits(2, 1, 0);
             SetEnemyFlagBits(3, 1, 0);
@@ -352,41 +352,41 @@ Script N(interact_802412BC) = SCRIPT({
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1411) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0,
                               MESSAGE_ID(0x11, 0x0058));
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_6));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_6);
             } else {
                 SI_VAR(4) = (int) 3.5;
                 await N(8024122C);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_8), NPC_ANIM(petunia, Palette_00, Anim_3), 0,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_8, NPC_ANIM_petunia_Palette_00_Anim_3, 0,
                               MESSAGE_ID(0x11, 0x0059));
-                EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_4));
+                EndSpeech(-1, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0);
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_4);
                 sleep 20;
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_1));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_1);
                 SI_VAR(0) = 88;
                 SI_VAR(1) = 1;
                 await N(80240F0C);
                 AddKeyItem(ITEM_MAGICAL_BEAN);
                 sleep 20;
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
                               MESSAGE_ID(0x11, 0x005A));
-                EndSpeech(-1, NPC_ANIM(petunia, Palette_00, Anim_7), NPC_ANIM(petunia, Palette_00, Anim_6), 0);
+                EndSpeech(-1, NPC_ANIM_petunia_Palette_00_Anim_7, NPC_ANIM_petunia_Palette_00_Anim_6, 0);
                 SI_STORY_PROGRESS = STORY_CH6_GOT_MAGICAL_BEAN;
             }
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005B));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005B));
         }
         < STORY_CH6_RETURNED_TO_TOAD_TOWN {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x005C));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x005C));
         } else {
             if (SI_AREA_VAR(1) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
                               MESSAGE_ID(0x11, 0x005D));
                 SI_AREA_VAR(1) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(petunia, Palette_00, Anim_2), NPC_ANIM(petunia, Palette_00, Anim_1), 0,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_petunia_Palette_00_Anim_2, NPC_ANIM_petunia_Palette_00_Anim_1, 0,
                               MESSAGE_ID(0x11, 0x005E));
             }
         }
@@ -395,16 +395,16 @@ Script N(interact_802412BC) = SCRIPT({
     await N(80240814);
 });
 
-Script N(init_80241DA4) = SCRIPT({
+EvtSource N(init_80241DA4) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_802412BC));
     if (SI_SAVE_FLAG(1411) == 0) {
-        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_6));
+        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_6);
     } else {
-        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_1));
+        SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_1);
     }
 });
 
-Script N(init_80241E10) = SCRIPT({
+EvtSource N(init_80241E10) = SCRIPT({
     BindNpcDefeat(NPC_SELF, N(defeat_802411B8));
     EnableNpcShadow(NPC_DAYZEE, FALSE);
     match SI_STORY_PROGRESS {
@@ -421,7 +421,7 @@ Script N(init_80241E10) = SCRIPT({
     }
 });
 
-Script N(80241EF4) = SCRIPT({
+EvtSource N(80241EF4) = SCRIPT({
     SI_MAP_VAR(14) = 0;
     SI_MAP_VAR(10) = 0;
     SI_MAP_VAR(11) = 0;
@@ -430,7 +430,7 @@ Script N(80241EF4) = SCRIPT({
     SI_MAP_VAR(15) = 100;
 });
 
-Script N(defeat_80241F64) = SCRIPT({
+EvtSource N(defeat_80241F64) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -455,33 +455,33 @@ Script N(defeat_80241F64) = SCRIPT({
             SI_VAR(0) += SI_SAVE_FLAG(1369);
             SI_VAR(0) += SI_SAVE_FLAG(1370);
             if (SI_VAR(0) != 4) {
-                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_6));
+                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_6);
             } else {
-                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM(petunia, Palette_00, Anim_1));
+                SetNpcAnimation(NPC_PETUNIA, NPC_ANIM_petunia_Palette_00_Anim_1);
                 SI_SAVE_FLAG(1411) = 1;
                 await N(802406A0);
             }
             DoNpcDefeat();
         }
         == 1 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(monty_mole, Palette_01, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1);
         }
         == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(monty_mole, Palette_01, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_1);
         }
     }
 });
 
-Script N(hit_80242138) = SCRIPT({
+EvtSource N(hit_80242138) = SCRIPT({
     if (SI_STORY_PROGRESS == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES) {
         GetOwnerEncounterTrigger(SI_VAR(0));
         if (SI_VAR(0) != 1) {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(monty_mole, Palette_01, Anim_5));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_monty_mole_Palette_01_Anim_5);
         }
     }
 });
 
-Script N(idle_8024219C) = SCRIPT({
+EvtSource N(idle_8024219C) = SCRIPT({
     loop {
         if (SI_MAP_VAR(10) == 0) {
             if (SI_AREA_FLAG(23) == 1) {
@@ -518,7 +518,7 @@ Script N(idle_8024219C) = SCRIPT({
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
                 }
                 PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_11);
                 sleep 20;
                 if (SI_SAVE_FLAG(1367) == 0) {
                     SetNpcPos(NPC_MONTY_MOLE0, 0, -50, 0);
@@ -541,7 +541,7 @@ Script N(idle_8024219C) = SCRIPT({
                 NpcFacePlayer(NPC_MONTY_MOLE0, 1);
                 sleep 1;
                 PlaySoundAtNpc(NPC_MONTY_MOLE0, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 sleep 10;
                 SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
                 RandInt(30, SI_VAR(0));
@@ -557,7 +557,7 @@ Script N(idle_8024219C) = SCRIPT({
     }
 });
 
-Script N(idle_80242618) = SCRIPT({
+EvtSource N(idle_80242618) = SCRIPT({
     loop {
         if (SI_MAP_VAR(11) == 0) {
             if (SI_AREA_FLAG(24) == 1) {
@@ -594,7 +594,7 @@ Script N(idle_80242618) = SCRIPT({
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
                 }
                 PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_11);
                 sleep 20;
                 if (SI_SAVE_FLAG(1368) == 0) {
                     SetNpcPos(NPC_MONTY_MOLE1, 0, -50, 0);
@@ -617,7 +617,7 @@ Script N(idle_80242618) = SCRIPT({
                 NpcFacePlayer(NPC_MONTY_MOLE1, 1);
                 sleep 1;
                 PlaySoundAtNpc(NPC_MONTY_MOLE1, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 sleep 10;
                 SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
                 RandInt(35, SI_VAR(0));
@@ -633,7 +633,7 @@ Script N(idle_80242618) = SCRIPT({
     }
 });
 
-Script N(idle_80242A94) = SCRIPT({
+EvtSource N(idle_80242A94) = SCRIPT({
     loop {
         if (SI_MAP_VAR(12) == 0) {
             if (SI_AREA_FLAG(25) == 1) {
@@ -670,7 +670,7 @@ Script N(idle_80242A94) = SCRIPT({
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
                 }
                 PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_11);
                 sleep 20;
                 if (SI_SAVE_FLAG(1369) == 0) {
                     SetNpcPos(NPC_MONTY_MOLE2, 0, -50, 0);
@@ -693,7 +693,7 @@ Script N(idle_80242A94) = SCRIPT({
                 NpcFacePlayer(NPC_MONTY_MOLE2, 1);
                 sleep 1;
                 PlaySoundAtNpc(NPC_MONTY_MOLE2, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 sleep 10;
                 SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
                 RandInt(40, SI_VAR(0));
@@ -709,7 +709,7 @@ Script N(idle_80242A94) = SCRIPT({
     }
 });
 
-Script N(idle_80242F10) = SCRIPT({
+EvtSource N(idle_80242F10) = SCRIPT({
     loop {
         if (SI_MAP_VAR(13) == 0) {
             if (SI_AREA_FLAG(26) == 1) {
@@ -746,7 +746,7 @@ Script N(idle_80242F10) = SCRIPT({
                     SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), TRUE);
                 }
                 PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_DIG, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_11));
+                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_11);
                 sleep 20;
                 if (SI_SAVE_FLAG(1370) == 0) {
                     SetNpcPos(NPC_MONTY_MOLE3, 0, -50, 0);
@@ -769,7 +769,7 @@ Script N(idle_80242F10) = SCRIPT({
                 NpcFacePlayer(NPC_MONTY_MOLE3, 1);
                 sleep 1;
                 PlaySoundAtNpc(NPC_MONTY_MOLE3, SOUND_MOLE_SURFACE, 0);
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 sleep 10;
                 SetSelfEnemyFlagBits(((NPC_FLAG_MOTION_BLUR | NPC_FLAG_1000000 | 0x02000000 | NPC_FLAG_PARTICLE | 0x10000000)), FALSE);
                 RandInt(45, SI_VAR(0));
@@ -785,19 +785,19 @@ Script N(idle_80242F10) = SCRIPT({
     }
 });
 
-Script N(init_8024338C) = SCRIPT({
+EvtSource N(init_8024338C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE0, FALSE);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_8024219C));
-            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+            SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1367) == 0) {
                 BindNpcIdle(NPC_SELF, N(idle_8024219C));
-                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE0, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 SetEnemyFlagBits(2, 1, 0);
             } else {
                 SetNpcPos(NPC_MONTY_MOLE0, 0, -1000, 0);
@@ -808,19 +808,19 @@ Script N(init_8024338C) = SCRIPT({
     }
 });
 
-Script N(init_802434CC) = SCRIPT({
+EvtSource N(init_802434CC) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE1, FALSE);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242618));
-            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+            SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1368) == 0) {
                 BindNpcIdle(NPC_SELF, N(idle_80242618));
-                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE1, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 SetEnemyFlagBits(3, 1, 0);
             } else {
                 SetNpcPos(NPC_MONTY_MOLE1, 0, -1000, 0);
@@ -831,19 +831,19 @@ Script N(init_802434CC) = SCRIPT({
     }
 });
 
-Script N(init_8024360C) = SCRIPT({
+EvtSource N(init_8024360C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE2, FALSE);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242A94));
-            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+            SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1369) == 0) {
                 BindNpcIdle(NPC_SELF, N(idle_80242A94));
-                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE2, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 SetEnemyFlagBits(4, 1, 0);
             } else {
                 SetNpcPos(NPC_MONTY_MOLE2, 0, -1000, 0);
@@ -854,19 +854,19 @@ Script N(init_8024360C) = SCRIPT({
     }
 });
 
-Script N(init_8024374C) = SCRIPT({
+EvtSource N(init_8024374C) = SCRIPT({
     BindNpcHit(-1, N(hit_80242138));
     BindNpcDefeat(NPC_SELF, N(defeat_80241F64));
     EnableNpcShadow(NPC_MONTY_MOLE3, FALSE);
     match SI_STORY_PROGRESS {
         < STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             BindNpcIdle(NPC_SELF, N(idle_80242F10));
-            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+            SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
         }
         == STORY_CH6_ASKED_TO_DEFEAT_MONTY_MOLES {
             if (SI_SAVE_FLAG(1370) == 0) {
                 BindNpcIdle(NPC_SELF, N(idle_80242F10));
-                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM(monty_mole, Palette_01, Anim_10));
+                SetNpcAnimation(NPC_MONTY_MOLE3, NPC_ANIM_monty_mole_Palette_01_Anim_10);
                 SetEnemyFlagBits(5, 1, 0);
             } else {
                 SetNpcPos(NPC_MONTY_MOLE3, 0, -1000, 0);
@@ -888,22 +888,22 @@ StaticNpc N(npcGroup_8024388C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
-        NPC_ANIM(petunia, Palette_00, Anim_1),
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
+        NPC_ANIM_petunia_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DD),
 };
@@ -919,22 +919,22 @@ StaticNpc N(npcGroup_80243A7C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
 };
 
@@ -949,22 +949,22 @@ StaticNpc N(npcGroup_80243C6C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_2),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_2,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
     },
 };
 
@@ -979,22 +979,22 @@ StaticNpc N(npcGroup_80243E5C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_2),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_2,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
     },
 };
 
@@ -1009,22 +1009,22 @@ StaticNpc N(npcGroup_8024404C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_2),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_2,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
     },
 };
 
@@ -1039,22 +1039,22 @@ StaticNpc N(npcGroup_8024423C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_2),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_3),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_1),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_5),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
-        NPC_ANIM(monty_mole, Palette_01, Anim_0),
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_2,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_3,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_1,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_5,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
+        NPC_ANIM_monty_mole_Palette_01_Anim_0,
     },
 };
 
@@ -1068,7 +1068,7 @@ NpcGroupList N(npcGroupList_8024442C) = {
     {},
 };
 
-ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240040_CA72E0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80240F08_CA81A8) == NULL) {
@@ -1088,7 +1088,7 @@ ApiStatus N(func_80240040_CA72E0)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/GetItemName.inc.c"
 
-ApiStatus N(func_80240158_CA73F8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240158_CA73F8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
@@ -1179,7 +1179,7 @@ ShakeTreeConfig N(tree1) = {
 
 Vec4f N(triggerCoord_80244E44) = { -208.0f, 0.0f, -182.0f, 0.0f };
 
-Script N(80244E54) = SCRIPT({
+EvtSource N(80244E54) = SCRIPT({
     SI_AREA_FLAG(27) = 0;
     SI_AREA_FLAG(28) = 0;
     SI_VAR(0) = N(tree1);
@@ -1191,11 +1191,11 @@ static s32 N(pad_4ECC) = {
     0x00000000,
 };
 
-Script N(80244ED0) = SCRIPT({
+EvtSource N(80244ED0) = SCRIPT({
 
 });
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAB04, -175, 0, 150, 0, ITEM_MAP, MAKE_ENTITY_END);
     AssignPanelFlag(SI_SAVE_FLAG(1404));
 });

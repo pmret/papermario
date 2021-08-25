@@ -29,7 +29,7 @@ NpcSettings N(npcSettings_8024066C) = {
     .level = 99,
 };
 
-Script N(80240698) = SCRIPT({
+EvtSource N(80240698) = SCRIPT({
     SI_VAR(3) = 0;
     SI_VAR(3) -= SI_VAR(2);
     ModifyColliderFlags(0, 18, 0x7FFFFE00);
@@ -45,7 +45,7 @@ Script N(80240698) = SCRIPT({
     }
 });
 
-Script N(8024079C) = SCRIPT({
+EvtSource N(8024079C) = SCRIPT({
     SI_VAR(3) = 0;
     SI_VAR(3) -= SI_VAR(2);
     MakeLerp(80, 0, 12, 0);
@@ -61,43 +61,43 @@ Script N(8024079C) = SCRIPT({
     PlaySoundAtCollider(18, 456, 0);
 });
 
-Script N(802408A0) = SCRIPT({
+EvtSource N(802408A0) = SCRIPT({
     GetNpcPos(NPC_BOO0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO0, SI_VAR(0), SI_VAR(2), 46);
 });
 
-Script N(802408F8) = SCRIPT({
+EvtSource N(802408F8) = SCRIPT({
     GetNpcPos(NPC_BOO1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO1, SI_VAR(0), SI_VAR(2), 50);
 });
 
-Script N(80240950) = SCRIPT({
+EvtSource N(80240950) = SCRIPT({
     GetNpcPos(NPC_BOO2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO2, SI_VAR(0), SI_VAR(2), 53);
 });
 
-Script N(802409A8) = SCRIPT({
+EvtSource N(802409A8) = SCRIPT({
     GetNpcPos(NPC_BOO3, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO3, SI_VAR(0), SI_VAR(2), 46);
 });
 
-Script N(80240A00) = SCRIPT({
+EvtSource N(80240A00) = SCRIPT({
     GetNpcPos(NPC_BOO4, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO4, SI_VAR(0), SI_VAR(2), 50);
 });
 
-Script N(80240A58) = SCRIPT({
+EvtSource N(80240A58) = SCRIPT({
     GetNpcPos(NPC_BOO5, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 200;
     NpcMoveTo(NPC_BOO5, SI_VAR(0), SI_VAR(2), 53);
 });
 
-Script N(80240AB0) = SCRIPT({
+EvtSource N(80240AB0) = SCRIPT({
     spawn N(802408A0);
     spawn N(802408F8);
     spawn N(80240950);
@@ -106,49 +106,49 @@ Script N(80240AB0) = SCRIPT({
     spawn N(80240A58);
 });
 
-Script N(80240B08) = SCRIPT({
+EvtSource N(80240B08) = SCRIPT({
     SetNpcJumpscale(NPC_BOO0, -0.19921875);
     NpcJump0(NPC_BOO0, 257, 30, -90, 5);
     EnableNpcShadow(NPC_BOO0, FALSE);
-    SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240B74) = SCRIPT({
+EvtSource N(80240B74) = SCRIPT({
     SetNpcJumpscale(NPC_BOO1, -0.2998046875);
     NpcJump0(NPC_BOO1, 272, 112, -81, 12);
     EnableNpcShadow(NPC_BOO1, FALSE);
-    SetNpcAnimation(NPC_BOO1, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO1, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240BE0) = SCRIPT({
+EvtSource N(80240BE0) = SCRIPT({
     SetNpcJumpscale(NPC_BOO2, -0.3994140625);
     NpcJump0(NPC_BOO2, 237, 120, -118, 10);
     EnableNpcShadow(NPC_BOO2, FALSE);
-    SetNpcAnimation(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO2, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240C4C) = SCRIPT({
+EvtSource N(80240C4C) = SCRIPT({
     SetNpcJumpscale(NPC_BOO3, -0.2998046875);
     NpcJump0(NPC_BOO3, 280, 60, -79, 8);
     EnableNpcShadow(NPC_BOO3, FALSE);
-    SetNpcAnimation(NPC_BOO3, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO3, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240CB8) = SCRIPT({
+EvtSource N(80240CB8) = SCRIPT({
     SetNpcJumpscale(NPC_BOO4, -0.3994140625);
     NpcJump0(NPC_BOO4, 250, 81, -97, 9);
     EnableNpcShadow(NPC_BOO4, FALSE);
-    SetNpcAnimation(NPC_BOO4, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO4, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240D24) = SCRIPT({
+EvtSource N(80240D24) = SCRIPT({
     SetNpcJumpscale(NPC_BOO5, -0.5);
     NpcJump0(NPC_BOO5, 227, 43, -123, 15);
     EnableNpcShadow(NPC_BOO5, FALSE);
-    SetNpcAnimation(NPC_BOO5, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO5, NPC_ANIM_boo_Palette_01_Anim_6);
 });
 
-Script N(80240D90) = SCRIPT({
+EvtSource N(80240D90) = SCRIPT({
     spawn N(80240B74);
     spawn N(80240BE0);
     spawn N(80240C4C);
@@ -156,7 +156,7 @@ Script N(80240D90) = SCRIPT({
     spawn N(80240D24);
 });
 
-Script N(80240DDC) = SCRIPT({
+EvtSource N(80240DDC) = SCRIPT({
     GetNpcPos(NPC_BOO0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     loop {
         RandInt(5, SI_VAR(10));
@@ -181,7 +181,7 @@ Script N(80240DDC) = SCRIPT({
     }
 });
 
-Script N(80240F50) = SCRIPT({
+EvtSource N(80240F50) = SCRIPT({
     group 239;
     loop {
         RandInt(50, SI_VAR(0));
@@ -197,7 +197,7 @@ Script N(80240F50) = SCRIPT({
     }
 });
 
-Script N(8024103C) = SCRIPT({
+EvtSource N(8024103C) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     SetPlayerPos(350, 10, -150);
@@ -224,9 +224,9 @@ Script N(8024103C) = SCRIPT({
     await N(80240AB0);
     sleep 60;
     InterpNpcYaw(NPC_BOO0, 270, 1);
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00DB));
-    SpeakToPlayer(NPC_BOO4, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00DC));
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 5, MESSAGE_ID(0x0E, 0x00DD));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DB));
+    SpeakToPlayer(NPC_BOO4, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DC));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 5, MESSAGE_ID(0x0E, 0x00DD));
     PlaySoundAt(SOUND_UNKNOWN_B4, 0, 240, 10, -125);
     ShakeCam(0, 0, 20, 2.0);
     sleep 10;
@@ -241,7 +241,7 @@ Script N(8024103C) = SCRIPT({
     await N(80240698);
 });
 
-Script N(802413F4) = SCRIPT({
+EvtSource N(802413F4) = SCRIPT({
     SetPlayerSpeed(8.0);
     PlayerMoveTo(184, -44, 0);
     PlaySoundAtNpc(NPC_BOO0, SOUND_UNKNOWN_262, 0);
@@ -271,32 +271,32 @@ Script N(802413F4) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     SI_VAR(10) = spawn N(80240DDC);
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00DF));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00DF));
     kill SI_VAR(10);
     SetPlayerAnimation(ANIM_80007);
     sleep 20;
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00E0));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E0));
     sleep 20;
     SetPlayerAnimation(ANIM_NOD_YES);
     sleep 20;
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_4), NPC_ANIM(boo, Palette_01, Anim_1), 0, MESSAGE_ID(0x0E, 0x00E1));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_4, NPC_ANIM_boo_Palette_01_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E1));
     DisablePartnerAI(0);
     GetCurrentPartnerID(SI_VAR(0));
     match SI_VAR(0) {
         == 1 {
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0, MESSAGE_ID(0x0E, 0x00E2));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0, MESSAGE_ID(0x0E, 0x00E2));
         }
         == 2 {
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_kooper, normal, talk), NPC_ANIM(world_kooper, normal, idle), 0, MESSAGE_ID(0x0E, 0x00E3));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_kooper_normal_talk, NPC_ANIM_world_kooper_normal_idle, 0, MESSAGE_ID(0x0E, 0x00E3));
         }
         == 3 {
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bombette, normal, idle_fast), NPC_ANIM(world_bombette, normal, idle), 0, MESSAGE_ID(0x0E, 0x00E4));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bombette_normal_idle_fast, NPC_ANIM_world_bombette_normal_idle, 0, MESSAGE_ID(0x0E, 0x00E4));
         }
         == 4 {
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_parakarry, Palette_00, Anim_6), NPC_ANIM(world_parakarry, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00E5));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E5));
         }
         == 9 {
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bow, Palette_00, Anim_4), NPC_ANIM(world_bow, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00E6));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bow_Palette_00_Anim_4, NPC_ANIM_world_bow_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00E6));
         }
     }
     EnablePartnerAI();
@@ -316,14 +316,14 @@ Script N(802413F4) = SCRIPT({
     ShowMessageAtScreenPos(MESSAGE_ID(0x0E, 0x00E7), 160, 40);
     await N(80240B08);
     sleep 10;
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 5, MESSAGE_ID(0x0E, 0x00E8));
-    SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6, NPC_ANIM_boo_Palette_01_Anim_6, 5, MESSAGE_ID(0x0E, 0x00E8));
+    SetNpcAnimation(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6);
     spawn N(80240F50);
     SI_STORY_PROGRESS = STORY_CH3_ESCAPED_TUBBAS_MANOR;
     DisablePlayerInput(FALSE);
 });
 
-Script N(80241AA0) = SCRIPT({
+EvtSource N(80241AA0) = SCRIPT({
     SetNpcPos(NPC_BOO0, 246, 30, -110);
     SetNpcPos(NPC_BOO1, 276, 120, -80);
     SetNpcPos(NPC_BOO2, 216, 120, -140);
@@ -336,12 +336,12 @@ Script N(80241AA0) = SCRIPT({
     InterpNpcYaw(NPC_BOO3, 74, 1);
     InterpNpcYaw(NPC_BOO4, 78, 1);
     InterpNpcYaw(NPC_BOO5, 81, 1);
-    SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
-    SetNpcAnimation(NPC_BOO1, NPC_ANIM(boo, Palette_01, Anim_6));
-    SetNpcAnimation(NPC_BOO2, NPC_ANIM(boo, Palette_01, Anim_6));
-    SetNpcAnimation(NPC_BOO3, NPC_ANIM(boo, Palette_01, Anim_6));
-    SetNpcAnimation(NPC_BOO4, NPC_ANIM(boo, Palette_01, Anim_6));
-    SetNpcAnimation(NPC_BOO5, NPC_ANIM(boo, Palette_01, Anim_6));
+    SetNpcAnimation(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6);
+    SetNpcAnimation(NPC_BOO1, NPC_ANIM_boo_Palette_01_Anim_6);
+    SetNpcAnimation(NPC_BOO2, NPC_ANIM_boo_Palette_01_Anim_6);
+    SetNpcAnimation(NPC_BOO3, NPC_ANIM_boo_Palette_01_Anim_6);
+    SetNpcAnimation(NPC_BOO4, NPC_ANIM_boo_Palette_01_Anim_6);
+    SetNpcAnimation(NPC_BOO5, NPC_ANIM_boo_Palette_01_Anim_6);
     EnableNpcShadow(NPC_BOO0, FALSE);
     EnableNpcShadow(NPC_BOO1, FALSE);
     EnableNpcShadow(NPC_BOO2, FALSE);
@@ -350,36 +350,36 @@ Script N(80241AA0) = SCRIPT({
     EnableNpcShadow(NPC_BOO5, FALSE);
 });
 
-Script N(interact_80241CD8) = SCRIPT({
+EvtSource N(interact_80241CD8) = SCRIPT({
     SI_MAP_VAR(0) = 1;
-    SpeakToPlayer(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6), NPC_ANIM(boo, Palette_01, Anim_6), 5, MESSAGE_ID(0x0E, 0x00E9));
-    SetNpcAnimation(NPC_BOO0, NPC_ANIM(boo, Palette_01, Anim_6));
+    SpeakToPlayer(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6, NPC_ANIM_boo_Palette_01_Anim_6, 5, MESSAGE_ID(0x0E, 0x00E9));
+    SetNpcAnimation(NPC_BOO0, NPC_ANIM_boo_Palette_01_Anim_6);
     DisablePartnerAI(0);
     GetCurrentPartnerID(SI_VAR(0));
     match SI_VAR(0) {
         == 1 {
             AdjustCam(0, 6.0, 0, -275.0, 15.0, -6.0);
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0, MESSAGE_ID(0x0E, 0x00EA));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EA));
             ResetCam(0, 6.0);
         }
         == 2 {
             AdjustCam(0, 6.0, 0, -275.0, 15.0, -6.0);
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_kooper, normal, talk), NPC_ANIM(world_kooper, normal, idle), 0, MESSAGE_ID(0x0E, 0x00EB));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_kooper_normal_talk, NPC_ANIM_world_kooper_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EB));
             ResetCam(0, 6.0);
         }
         == 3 {
             AdjustCam(0, 6.0, 0, -275.0, 15.0, -6.0);
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bombette, normal, idle_fast), NPC_ANIM(world_bombette, normal, idle), 0, MESSAGE_ID(0x0E, 0x00EC));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bombette_normal_idle_fast, NPC_ANIM_world_bombette_normal_idle, 0, MESSAGE_ID(0x0E, 0x00EC));
             ResetCam(0, 6.0);
         }
         == 4 {
             AdjustCam(0, 6.0, 0, -275.0, 15.0, -6.0);
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_parakarry, Palette_00, Anim_6), NPC_ANIM(world_parakarry, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00ED));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_parakarry_Palette_00_Anim_6, NPC_ANIM_world_parakarry_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00ED));
             ResetCam(0, 6.0);
         }
         == 9 {
             AdjustCam(0, 6.0, 0, -275.0, 15.0, -6.0);
-            SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_bow, Palette_00, Anim_4), NPC_ANIM(world_bow, Palette_00, Anim_1), 0, MESSAGE_ID(0x0E, 0x00EE));
+            SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_bow_Palette_00_Anim_4, NPC_ANIM_world_bow_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00EE));
             ResetCam(0, 6.0);
         }
     }
@@ -387,27 +387,27 @@ Script N(interact_80241CD8) = SCRIPT({
     SI_MAP_VAR(0) = 0;
 });
 
-Script N(init_80241F70) = SCRIPT({
+EvtSource N(init_80241F70) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241CD8));
 });
 
-Script N(init_80241F94) = SCRIPT({
+EvtSource N(init_80241F94) = SCRIPT({
 
 });
 
-Script N(init_80241FA4) = SCRIPT({
+EvtSource N(init_80241FA4) = SCRIPT({
 
 });
 
-Script N(init_80241FB4) = SCRIPT({
+EvtSource N(init_80241FB4) = SCRIPT({
 
 });
 
-Script N(init_80241FC4) = SCRIPT({
+EvtSource N(init_80241FC4) = SCRIPT({
 
 });
 
-Script N(init_80241FD4) = SCRIPT({
+EvtSource N(init_80241FD4) = SCRIPT({
 
 });
 
@@ -422,22 +422,22 @@ StaticNpc N(npcGroup_80241FE4) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00B5),
 };
@@ -453,22 +453,22 @@ StaticNpc N(npcGroup_802421D4) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
@@ -483,22 +483,22 @@ StaticNpc N(npcGroup_802423C4) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
@@ -513,22 +513,22 @@ StaticNpc N(npcGroup_802425B4) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
@@ -543,22 +543,22 @@ StaticNpc N(npcGroup_802427A4) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
@@ -573,26 +573,26 @@ StaticNpc N(npcGroup_80242994) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_2),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_1),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_0),
-        NPC_ANIM(boo, Palette_01, Anim_A),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
-        NPC_ANIM(boo, Palette_01, Anim_3),
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_2,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_1,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_0,
+        NPC_ANIM_boo_Palette_01_Anim_A,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
+        NPC_ANIM_boo_Palette_01_Anim_3,
     },
 };
 
-Script N(80242B84) = SCRIPT({
+EvtSource N(80242B84) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     DisablePartnerAI(0);
@@ -610,7 +610,7 @@ Script N(80242B84) = SCRIPT({
     SetPlayerAnimation(ANIM_80017);
     SetNpcPos(NPC_SENTINEL, 320, 70, -158);
     InterpNpcYaw(NPC_SENTINEL, 270, 0);
-    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM(sentinel, Palette_00, Anim_8));
+    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_8);
     UseSettingsFrom(0, 175, 0, -35);
     SetPanTarget(0, 175, 0, -35);
     SetCamDistance(0, 540.0);
@@ -639,14 +639,14 @@ Script N(80242B84) = SCRIPT({
     NpcMoveTo(NPC_SENTINEL, 175, -33, 40);
     sleep 20;
     SetNpcPos(NPC_SENTINEL, 175, 85, -33);
-    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM(sentinel, Palette_00, Anim_9));
+    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_9);
     sleep 20;
     PlaySoundAtNpc(NPC_SENTINEL, SOUND_UNKNOWN_2F7, 0);
-    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM(sentinel, Palette_00, Anim_2));
+    SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_2);
     SetNpcPos(NPC_SENTINEL, 175, 70, -33);
     spawn {
         sleep 40;
-        SetNpcAnimation(NPC_SENTINEL, NPC_ANIM(sentinel, Palette_00, Anim_3));
+        SetNpcAnimation(NPC_SENTINEL, NPC_ANIM_sentinel_Palette_00_Anim_3);
         NpcMoveTo(NPC_SENTINEL, 270, -120, 30);
         StopSound(814);
         SetNpcPos(NPC_SENTINEL, 0, -1000, 0);
@@ -739,7 +739,7 @@ Script N(80242B84) = SCRIPT({
     DisablePlayerInput(FALSE);
 });
 
-Script N(init_802434EC) = SCRIPT({
+EvtSource N(init_802434EC) = SCRIPT({
 
 });
 
@@ -754,22 +754,22 @@ StaticNpc N(npcGroup_802434FC) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_2),
-        NPC_ANIM(sentinel, Palette_00, Anim_3),
-        NPC_ANIM(sentinel, Palette_00, Anim_3),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_5),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_8),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
-        NPC_ANIM(sentinel, Palette_00, Anim_1),
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_2,
+        NPC_ANIM_sentinel_Palette_00_Anim_3,
+        NPC_ANIM_sentinel_Palette_00_Anim_3,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_5,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_8,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
+        NPC_ANIM_sentinel_Palette_00_Anim_1,
     },
 };
 
@@ -792,11 +792,11 @@ static s32 N(pad_3758)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802E9A18, -65, 60, -240, 0, MAKE_ENTITY_END);
 });
 
-ApiStatus N(func_80240060_BFA100)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240060_BFA100)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(get_enemy(6)->npcID);
 
     sfx_adjust_env_sound_pos(0x32E, 0, npc->pos.x, npc->pos.y, npc->pos.z);

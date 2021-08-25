@@ -84,7 +84,7 @@ glabel L802A9308_42A028
 /* 42A048 802A9328 8E240004 */  lw        $a0, 4($s1)
 /* 42A04C 802A932C 3C058011 */  lui       $a1, %hi(D_80108B54)
 /* 42A050 802A9330 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
-/* 42A054 802A9334 0C0511FF */  jal       set_hud_element_script
+/* 42A054 802A9334 0C0511FF */  jal       set_hud_element_anim
 /* 42A058 802A9338 00000000 */   nop
 /* 42A05C 802A933C 3C048000 */  lui       $a0, 0x8000
 /* 42A060 802A9340 34840041 */  ori       $a0, $a0, 0x41
@@ -213,21 +213,21 @@ glabel L802A936C_42A08C
 /* 42A230 802A9510 2A420050 */  slti      $v0, $s2, 0x50
 /* 42A234 802A9514 10400007 */  beqz      $v0, .L802A9534
 /* 42A238 802A9518 8E300004 */   lw       $s0, 4($s1)
-/* 42A23C 802A951C 0C05122C */  jal       get_hud_element_script
+/* 42A23C 802A951C 0C05122C */  jal       get_hud_element_anim
 /* 42A240 802A9520 0200202D */   daddu    $a0, $s0, $zero
 /* 42A244 802A9524 3C058011 */  lui       $a1, %hi(D_80108B54)
 /* 42A248 802A9528 24A58B54 */  addiu     $a1, $a1, %lo(D_80108B54)
 /* 42A24C 802A952C 080AA551 */  j         .L802A9544
 /* 42A250 802A9530 00000000 */   nop
 .L802A9534:
-/* 42A254 802A9534 0C05122C */  jal       get_hud_element_script
+/* 42A254 802A9534 0C05122C */  jal       get_hud_element_anim
 /* 42A258 802A9538 0200202D */   daddu    $a0, $s0, $zero
 /* 42A25C 802A953C 3C058011 */  lui       $a1, %hi(D_80108BBC)
 /* 42A260 802A9540 24A58BBC */  addiu     $a1, $a1, %lo(D_80108BBC)
 .L802A9544:
 /* 42A264 802A9544 10450003 */  beq       $v0, $a1, .L802A9554
 /* 42A268 802A9548 00000000 */   nop
-/* 42A26C 802A954C 0C0511FF */  jal       set_hud_element_script
+/* 42A26C 802A954C 0C0511FF */  jal       set_hud_element_anim
 /* 42A270 802A9550 0200202D */   daddu    $a0, $s0, $zero
 .L802A9554:
 /* 42A274 802A9554 86220054 */  lh        $v0, 0x54($s1)

@@ -2,7 +2,7 @@
 #include "../partners.h"
 #include "map.h"
 
-ApiStatus N(PartnerSuspendAbilityScript)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(PartnerSuspendAbilityScript)(Evt* script, s32 isInitialCall) {
     if (gPlayerData.currentPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
@@ -10,7 +10,7 @@ ApiStatus N(PartnerSuspendAbilityScript)(ScriptInstance* script, s32 isInitialCa
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(PartnerResumeAbilityScript)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(PartnerResumeAbilityScript)(Evt* script, s32 isInitialCall) {
     partner_resume_ability_script();
     return ApiStatus_DONE2;
 }

@@ -1,8 +1,8 @@
 #include "common.h"
 
-INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/demo_api", SetSpriteShading, Evt* script, s32 isInitialCall);
 
-ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EnableSpriteShading(Evt* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos) != 0) {
         *D_80151328 |= 1;
     } else {
@@ -11,27 +11,27 @@ ApiStatus EnableSpriteShading(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetDemoState(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetDemoState(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gGameStatusPtr->demoState);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoPressButton(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DemoPressButton(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->demoButtonInput |= get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoReleaseButton(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DemoReleaseButton(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->demoButtonInput &= ~get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoSetButtons(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DemoSetButtons(Evt* script, s32 isInitialCall) {
     gGameStatusPtr->demoButtonInput = get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DemoJoystickRadial(Evt* script, s32 isInitialCall) {
     GameStatus** gameStatus = &gGameStatusPtr;
     f32 a;
     f32 b;
@@ -46,7 +46,7 @@ ApiStatus DemoJoystickRadial(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DemoJoystickXY(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DemoJoystickXY(Evt* script, s32 isInitialCall) {
     GameStatus** gameStatus = &gGameStatusPtr;
     f32 x;
     f32 y;

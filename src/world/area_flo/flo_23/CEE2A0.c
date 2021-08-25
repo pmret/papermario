@@ -27,7 +27,7 @@ MapConfig N(config) = {
     .tattle = { MSG_flo_23_tattle },
 };
 
-Script N(80240D30) = SCRIPT({
+EvtSource N(80240D30) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
@@ -37,7 +37,7 @@ Script N(80240D30) = SCRIPT({
     }
 });
 
-Script N(80240DA0) = SCRIPT({
+EvtSource N(80240DA0) = SCRIPT({
     group 11;
     SI_VAR(10) = SI_VAR(0);
     SI_VAR(11) = SI_VAR(1);
@@ -76,16 +76,16 @@ Script N(80240DA0) = SCRIPT({
     goto 0;
 });
 
-Script N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
+EvtSource N(exitWalk_8024104C) = EXIT_WALK_SCRIPT(60,  0, "flo_00",  2);
 
-Script N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
+EvtSource N(exitWalk_802410A8) = EXIT_WALK_SCRIPT(60,  1, "flo_11",  0);
 
-Script N(80241104) = SCRIPT({
+EvtSource N(80241104) = SCRIPT({
     bind N(exitWalk_802410A8) TRIGGER_FLOOR_ABOVE 0;
     bind N(exitWalk_8024104C) TRIGGER_FLOOR_ABOVE 4;
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
@@ -128,7 +128,7 @@ s32 N(D_80241310_CEF570) = {
     0x00000000,
 };
 
-Script N(80241314) = SCRIPT({
+EvtSource N(80241314) = SCRIPT({
     SI_VAR(9) = SI_VAR(1);
     ShowConsumableChoicePopup();
     SI_VAR(10) = SI_VAR(0);
@@ -151,7 +151,7 @@ Script N(80241314) = SCRIPT({
     unbind;
 });
 
-Script N(80241448) = SCRIPT({
+EvtSource N(80241448) = SCRIPT({
     N(func_802402F8_CEE558)(SI_VAR(0));
     bind_padlock N(80241314) 0x10 0 0x802426E0; // TODO: fix raw ptr
     N(func_8024026C_CEE4CC)(SI_VAR(0));
@@ -170,7 +170,7 @@ NpcAISettings N(npcAISettings_80241498) = {
     .unk_2C = 3,
 };
 
-Script N(npcAI_802414C8) = SCRIPT({
+EvtSource N(npcAI_802414C8) = SCRIPT({
     SetSelfVar(2, 3);
     SetSelfVar(3, 18);
     SetSelfVar(5, 3);
@@ -187,7 +187,7 @@ NpcSettings N(npcSettings_80241538) = {
     .level = 19,
 };
 
-Script N(interact_80241564) = SCRIPT({
+EvtSource N(interact_80241564) = SCRIPT({
     DisablePlayerInput(TRUE);
     if (SI_SAVE_FLAG(1365) == 0) {
         GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -198,7 +198,7 @@ Script N(interact_80241564) = SCRIPT({
         SetCamSpeed(0, 4.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0,
+        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0049));
         SetPlayerAnimation(ANIM_THINKING);
         N(func_80240C9C_CEEEFC)();
@@ -208,22 +208,22 @@ Script N(interact_80241564) = SCRIPT({
         match SI_VAR(0) {
             <= 0 {
                 SetPlayerAnimation(ANIM_STAND_STILL);
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004A));
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004A));
             } else {
                 SI_VAR(8) = SI_VAR(0);
                 N(func_80240C2C_CEEE8C)(SI_VAR(0));
                 MakeItemEntity(SI_VAR(8), 385, 20, -34, 1, 0);
                 SI_VAR(7) = SI_VAR(0);
                 PlaySoundAtNpc(NPC_SELF, SOUND_UNKNOWN_2095, 0);
-                SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_3));
+                SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_3);
                 sleep 20;
                 RemoveItemEntity(SI_VAR(7));
                 match SI_VAR(8) {
                     == 158 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004D));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004D));
                         PlaySoundAtNpc(NPC_SELF, 0x21C, 0);
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0);
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_7));
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_7);
                         PlaySoundAtCollider(13, 457, 0);
                         ModifyColliderFlags(0, 13, 0x7FFFFE00);
                         MakeLerp(0, 100, 30, 1);
@@ -244,20 +244,20 @@ Script N(interact_80241564) = SCRIPT({
                                 break loop;
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_5));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5);
                         SI_SAVE_FLAG(1365) = 1;
                     }
                     == 159 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004C));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                     }
                     == 160 {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x004C));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x004C));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                     } else {
-                        SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_4), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0,
+                        SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_4, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0,
                                       MESSAGE_ID(0x11, 0x004B));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_6));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_6);
                         PlaySoundAtNpc(NPC_SELF, 0x2096, 0);
                         MakeItemEntity(SI_VAR(8), 375, 20, 0, 1, 0);
                         SI_VAR(7) = SI_VAR(0);
@@ -302,10 +302,10 @@ Script N(interact_80241564) = SCRIPT({
                                 }
                             }
                         }
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
                         RemoveItemEntity(SI_VAR(7));
-                        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_1));
-                        EndSpeech(-1, NPC_ANIM(gate_flower, Palette_00, Anim_2), NPC_ANIM(gate_flower, Palette_00, Anim_1), 0);
+                        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_1);
+                        EndSpeech(-1, NPC_ANIM_gate_flower_Palette_00_Anim_2, NPC_ANIM_gate_flower_Palette_00_Anim_1, 0);
                     }
                 }
             }
@@ -316,10 +316,10 @@ Script N(interact_80241564) = SCRIPT({
         sleep 10;
     } else {
         if (SI_STORY_PROGRESS < STORY_CH6_STAR_SPIRIT_RESCUED) {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x004E));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_9), NPC_ANIM(gate_flower, Palette_00, Anim_8), 0,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_9, NPC_ANIM_gate_flower_Palette_00_Anim_8, 0,
                           MESSAGE_ID(0x11, 0x004F));
         }
     }
@@ -327,10 +327,10 @@ Script N(interact_80241564) = SCRIPT({
     unbind;
 });
 
-Script N(init_80241E70) = SCRIPT({
+EvtSource N(init_80241E70) = SCRIPT({
     BindNpcInteract(NPC_SELF, N(interact_80241564));
     if (SI_SAVE_FLAG(1365) == 1) {
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(gate_flower, Palette_00, Anim_5));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_gate_flower_Palette_00_Anim_5);
         ModifyColliderFlags(0, 13, 0x7FFFFE00);
         RotateModel(59, 50, 0, -1, 0);
         RotateModel(60, 50, 0, -1, 0);
@@ -352,22 +352,22 @@ StaticNpc N(npcGroup_80241F98) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
-        NPC_ANIM(gate_flower, Palette_00, Anim_1),
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
+        NPC_ANIM_gate_flower_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DC),
 };
@@ -384,22 +384,22 @@ StaticNpc N(npcGroup_80242188) = {
     .maxCoinBonus = 1,
     .movement = { 80, 0, 0, 30, 0, -32767, 0, 80, 0, 0, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
 };
 
@@ -415,22 +415,22 @@ StaticNpc N(npcGroup_80242378) = {
     .maxCoinBonus = 1,
     .movement = { -320, 0, 0, 30, 0, -32767, 0, -320, 0, 0, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
 };
 
@@ -445,7 +445,7 @@ static s32 N(pad_2598)[] = {
     0x00000000, 0x00000000,
 };
 
-Script N(makeEntities) = SCRIPT({
+EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA0C4, 100, 60, 5, 0, MAKE_ENTITY_END);
     MakeEntity(0x802EA588, 100, 145, 0, 0, ITEM_SHOOTING_STAR, MAKE_ENTITY_END);
     AssignBlockFlag(SI_SAVE_FLAG(1409));
@@ -458,7 +458,7 @@ Script N(makeEntities) = SCRIPT({
 
 #include "world/common/AddPlayerHandsOffset.inc.c"
 
-ApiStatus N(func_8024026C_CEE4CC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024026C_CEE4CC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -474,7 +474,7 @@ ApiStatus N(func_8024026C_CEE4CC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802402C0_CEE520)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402C0_CEE520)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80241310_CEF570) = get_variable(script, *args);
@@ -482,7 +482,7 @@ ApiStatus N(func_802402C0_CEE520)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802402F8_CEE558)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802402F8_CEE558)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -509,7 +509,7 @@ ApiStatus N(func_802402F8_CEE558)(ScriptInstance* script, s32 isInitialCall) {
 
 #include "world/common/set_script_owner_npc_col_height.inc.c"
 
-ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240728_CEE988)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
@@ -645,7 +645,7 @@ ApiStatus N(func_80240728_CEE988)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_80240B68_CEEDC8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240B68_CEEDC8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 itemIdx = get_variable(script, *args++);
     s32 var1 = get_variable(script, *args++);
@@ -660,7 +660,7 @@ ApiStatus N(func_80240B68_CEEDC8)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C2C_CEEE8C)(Evt* script, s32 isInitialCall) {
     s32 itemId = get_variable(script, *script->ptrReadPos);
     StaticItem* item = &gItemTable[itemId];
 
@@ -675,7 +675,7 @@ ApiStatus N(func_80240C2C_CEEE8C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240C9C_CEEEFC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240C9C_CEEEFC)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i <= 90; i++) {

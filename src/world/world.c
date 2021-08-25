@@ -74,11 +74,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     map = &gAreas[areaID].maps[mapID];
 
-    sprintf(&mapShapeName, "%s_shape", map->id);
-    sprintf(&mapHitName, "%s_hit", map->id);
+    sprintf(&wMapShapeName, "%s_shape", map->id);
+    sprintf(&wMapHitName, "%s_hit", map->id);
     strcpy(texStr, map->id);
     texStr[3] = '\0';
-    sprintf(&mapTexName, "%s_tex", texStr);
+    sprintf(&wMapTexName, "%s_tex", texStr);
 
     gMap = map;
     if (map->bgName != NULL) {
@@ -99,7 +99,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     if (initStatus == 0) {
         s32* place = &D_80210000;
-        s32 yay0Asset = load_asset_by_name(&mapShapeName, &decompressedSize);
+        s32 yay0Asset = load_asset_by_name(&wMapShapeName, &decompressedSize);
 
         decode_yay0(yay0Asset, place);
         general_heap_free(yay0Asset);
@@ -151,11 +151,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gPlayerStatus.targetYaw = gPlayerStatus.currentYaw;
 
-    func_801497FC(D_8008FF60[map->unk_1C.u32 % 4]);
+    func_801497FC(D_8008FF60[map->unk_1C.word % 4]);
     sfx_reset_door_sounds();
 
     if (initStatus == 0) {
-        s32 thing = get_asset_offset(&mapTexName, &decompressedSize);
+        s32 thing = get_asset_offset(&wMapTexName, &decompressedSize);
 
         if (mapConfig->modelTreeRoot != NULL) {
             load_data_for_models(mapConfig->modelTreeRoot, thing, decompressedSize);
@@ -186,11 +186,11 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     gGameStatusPtr->mainScriptID = start_script_in_group(mapConfig->main, 0, 0, 0)->id;
 }
 
-s32 get_current_map_config() {
+s32 get_current_map_config(void) {
     return gMap;
 }
 
-MapConfig* get_current_map_header() {
+MapConfig* get_current_map_header(void) {
     return &gMapConfig;
 }
 

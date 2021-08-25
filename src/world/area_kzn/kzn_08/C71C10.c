@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_kzn/kzn_08/C71C10", func_80240790_C71C10);
 /*
-ApiStatus N(func_80240790_C71C10)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240790_C71C10)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80244BB0_C76030) == NULL) {

@@ -5,7 +5,7 @@ static char* N(exit_str_1) = "sam_10";
 
 INCLUDE_ASM(s32, "world/area_sam/sam_09/D362F0", func_80240000_D362F0);
 /*
-ApiStatus N(func_80240000_D362F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_D362F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_802406C0_D369B0) == NULL) {

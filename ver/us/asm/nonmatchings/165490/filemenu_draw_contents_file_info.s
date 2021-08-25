@@ -271,7 +271,7 @@ glabel filemenu_draw_contents_file_info
 /* 165C40 802453E0 2506002C */   addiu    $a2, $t0, 0x2c
 /* 165C44 802453E4 16800005 */  bnez      $s4, .L802453FC
 /* 165C48 802453E8 00000000 */   nop
-/* 165C4C 802453EC 0C0511F8 */  jal       draw_icon_2
+/* 165C4C 802453EC 0C0511F8 */  jal       draw_hud_element_3
 /* 165C50 802453F0 0200202D */   daddu    $a0, $s0, $zero
 /* 165C54 802453F4 08091502 */  j         .L80245408
 /* 165C58 802453F8 26F70010 */   addiu    $s7, $s7, 0x10

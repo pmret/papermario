@@ -78,7 +78,6 @@ extern NpcList* gCurrentNpcListPtr;
 extern ShadowList gWorldShadowList;
 extern ShadowList gBattleShadowList;
 extern ShadowList* gCurrentShadowListPtr;
-extern HudElement** gHudElementList;
 
 extern Camera gCameras[4];
 extern s32 gCurrentCameraID;
@@ -144,7 +143,7 @@ extern TriggerList gTriggerList2;
 extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct
-extern u16 gMapTransitionAlpha;
+extern s16 gMapTransitionAlpha;
 extern s8 D_800A0930;
 extern s8 D_800A0931;
 extern s16 D_800A0932[1];
@@ -176,7 +175,10 @@ extern s32 gPauseMenuHeldButtons;
 extern s32 gPauseMenuPressedButtons;
 extern s32 gPauseMenuCurrentDescString;
 extern s32* gPauseMenuCurrentDescIconScript;
+extern s32 D_802700D0;
 extern s8 gPauseMenuCurrentTab;
+extern char D_802700D[8];
+extern s32 D_802700E0;
 extern s32 gPauseMenuCommonIconIDs[8];
 extern s32 gPauseMenuTabIconIDs[6];
 extern s32 gPauseMenuStrings[348];
@@ -241,9 +243,9 @@ extern s8 D_800A0920;
 extern s32 D_800A0924;
 extern s8 D_800A0921;
 extern s16 D_800A0922;
-extern s32 mapTexName;
-extern char* mapHitName;
-extern s32 mapShapeName;
+extern s32 wMapTexName;
+extern char* wMapHitName;
+extern s32 wMapShapeName;
 extern s32* D_80210000;
 extern u8 D_802D9D70; // player alpha1 copy?
 extern u8 D_802D9D71; // player alpha2 copy?
@@ -284,12 +286,13 @@ extern s32 D_8010C95C;
 extern s32 D_8010C96C;
 extern s32 D_8010C980;
 extern s32 D_8010C9A0;
-extern f32 D_800F7B40;
+extern s32 D_800F7B40;
 extern s32 D_800F7B44;
 extern f32 D_8010C938;
 extern f32 D_8010C990;
+extern s32 D_8010C978;
 
-extern Temp8010EBB0 D_8010EBB0; // something with partners
+extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
 // Effects
@@ -316,9 +319,6 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern s32 D_8009A5D0;
-extern s32 D_8009A678;
-
 extern UNK_TYPE D_802EB3B0;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
@@ -337,9 +337,9 @@ extern UNK_TYPE D_0A000800;
 extern UNK_TYPE D_0A000808;
 
 // Scripts
-extern Script* SCRIPT_NpcDefeat;
-extern Script ShakeCam1;
-extern Script ShakeCamX;
+extern EvtSource* SCRIPT_NpcDefeat;
+extern EvtSource ShakeCam1;
+extern EvtSource ShakeCamX;
 
 extern s16 gMusicUnkVolume;
 extern s16 gMusicUnkVolume2;
@@ -369,14 +369,11 @@ extern u32* D_802EAE7C;
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
 extern s32 D_80291FF8[];
-extern s32 D_80291FF8[];
 extern s32 D_80292020[];
 extern s32 D_80292048[];
 extern s32 D_80292070[];
 extern s32 D_80292098[];
-extern s32 D_80292098[];
 extern s32 D_802920C0[];
-extern s32 D_802920E8[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 

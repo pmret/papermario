@@ -2,7 +2,7 @@
 
 INCLUDE_ASM(s32, "world/area_omo/omo_09/DCD3F0", func_80240720_DCD3F0);
 /*
-ApiStatus N(func_80240720_DCD3F0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240720_DCD3F0)(Evt* script, s32 isInitialCall) {
     s32 i;
 
     if (N(D_80247010_DD3CE0) == NULL) {

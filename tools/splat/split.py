@@ -233,18 +233,20 @@ def main(config_path, base_dir, target_path, modes, verbose, use_cache=True):
         linker_writer.save_symbol_header()
 
     # Write undefined_funcs_auto.txt
-    to_write = [s for s in symbols.all_symbols if s.referenced and not s.defined and not s.dead and s.type == "func"]
-    if len(to_write) > 0:
-        with open(options.get_undefined_funcs_auto_path(), "w", newline="\n") as f:
-            for symbol in to_write:
-                f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
+    if options.get_create_undefined_funcs_auto():
+        to_write = [s for s in symbols.all_symbols if s.referenced and not s.defined and not s.dead and s.type == "func"]
+        if len(to_write) > 0:
+            with open(options.get_undefined_funcs_auto_path(), "w", newline="\n") as f:
+                for symbol in to_write:
+                    f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
     # write undefined_syms_auto.txt
-    to_write = [s for s in symbols.all_symbols if s.referenced and not s.defined and not s.dead and not s.type == "func"]
-    if len(to_write) > 0:
-        with open(options.get_undefined_syms_auto_path(), "w", newline="\n") as f:
-            for symbol in to_write:
-                f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
+    if options.get_create_undefined_syms_auto():
+        to_write = [s for s in symbols.all_symbols if s.referenced and not s.defined and not s.dead and not s.type == "func"]
+        if len(to_write) > 0:
+            with open(options.get_undefined_syms_auto_path(), "w", newline="\n") as f:
+                for symbol in to_write:
+                    f.write(f"{symbol.name} = 0x{symbol.vram_start:X};\n")
 
     # print warnings during split
     for segment in all_segments:

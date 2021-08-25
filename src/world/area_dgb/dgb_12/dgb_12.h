@@ -3,6 +3,6 @@
 
 #define NAMESPACE dgb_12
 
-Script N(802405E0);
-Script N(main);
-Script N(makeEntities);
+EvtSource N(802405E0);
+EvtSource N(main);
+EvtSource N(makeEntities);

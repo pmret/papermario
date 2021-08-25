@@ -36,14 +36,14 @@ typedef struct {
     /* 0x54 */ struct N(temp)* unk_54;
 } arn_07_struct; // size = 0x58
 
-ApiStatus N(func_80240000_BECDF0)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240000_BECDF0)(Evt* script, s32 isInitialCall) {
     arn_07_struct* ptr = script->varTable[0];
 
     sfx_adjust_env_sound_pos(0xA2, 0, ptr->unk_00, ptr->unk_04, ptr->unk_08);
     return ((ptr->unk_44 < 2) == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_8024004C_BECE3C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_8024004C_BECE3C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -71,7 +71,7 @@ ApiStatus N(func_8024004C_BECE3C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802401AC_BECF9C)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 
@@ -170,14 +170,14 @@ ApiStatus N(func_802401AC_BECF9C)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus N(func_802405BC_BED3AC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405BC_BED3AC)(Evt* script, s32 isInitialCall) {
     s32 var = get_variable(script, *script->ptrReadPos);
     arn_07_struct* ptr = script->varTable[0];
 
     return (ptr->unk_4E == var) * ApiStatus_DONE2;
 }
 
-ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802405FC_BED3EC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -198,7 +198,7 @@ ApiStatus N(func_802405FC_BED3EC)(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus N(func_80240708_BED4F8)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80240708_BED4F8)(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     arn_07_struct* ptr = script->varTable[0];
 
@@ -220,7 +220,7 @@ s32 N(itemList_80242040)[] = {
     ITEM_NONE,
 };
 
-Script N(80242048) = SCRIPT({
+EvtSource N(80242048) = SCRIPT({
     FadeOutMusic(0, 1000);
     SI_VAR(0) = 0;
     if (SI_VAR(0) == 0) {
@@ -287,7 +287,7 @@ Script N(80242048) = SCRIPT({
     sleep 100;
 });
 
-Script N(80242498) = SCRIPT({
+EvtSource N(80242498) = SCRIPT({
     SI_VAR(0) = 1;
     if (SI_VAR(0) == 0) {
         DisablePlayerInput(TRUE);
@@ -353,7 +353,7 @@ Script N(80242498) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitSingleDoor_802428D4) = SCRIPT({
+EvtSource N(exitSingleDoor_802428D4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     SI_VAR(0) = 0;
@@ -366,13 +366,13 @@ Script N(exitSingleDoor_802428D4) = SCRIPT({
     sleep 100;
 });
 
-Script N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
+EvtSource N(exitWalk_80242978) = EXIT_WALK_SCRIPT(60,  1, "arn_03",  0);
 
-Script N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
+EvtSource N(exitWalk_802429D4) = EXIT_WALK_SCRIPT(60,  2, "mim_12",  1);
 
 static const f64 rodata_alignment = 0.0;
 
-Script N(80242A30) = SCRIPT({
+EvtSource N(80242A30) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
     SetPlayerPos(-28, 0, -333);
@@ -423,7 +423,7 @@ Script N(80242A30) = SCRIPT({
         PlaySoundAtCollider(10, 450, 0);
     }
     NpcFaceNpc(NPC_TUBBAS_HEART, NPC_WORLD_TUBBA, 0);
-    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM(tubbas_heart, Palette_00, Anim_A), NPC_ANIM(tubbas_heart, Palette_00, Anim_1), 5, MESSAGE_ID(0x0E, 0x00C7));
+    SpeakToPlayer(NPC_TUBBAS_HEART, NPC_ANIM_tubbas_heart_Palette_00_Anim_A, NPC_ANIM_tubbas_heart_Palette_00_Anim_1, 5, MESSAGE_ID(0x0E, 0x00C7));
     SetNpcVar(0, 0, 1);
     loop {
         GetNpcVar(0, 0, SI_VAR(0));
@@ -448,16 +448,16 @@ Script N(80242A30) = SCRIPT({
         SetCamPosC(0, 0, 0);
         SetPanTarget(0, 65, 0, -137);
         PanToTarget(0, 0, 1);
-        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_22));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_22);
     }
     PlaySoundAtNpc(NPC_TUBBAS_HEART, 0x20C8, 0);
     NpcJump0(NPC_TUBBAS_HEART, 298, 56, 31, 18);
     SetNpcPos(NPC_TUBBAS_HEART, 0, -1000, 0);
     EnableNpcShadow(NPC_TUBBAS_HEART, FALSE);
     spawn {
-        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_23));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_23);
         sleep 20;
-        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+        SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_6);
     }
     sleep 20;
     spawn {
@@ -501,13 +501,13 @@ Script N(80242A30) = SCRIPT({
     }
     PlayerMoveTo(200, 0, 35);
     sleep 5;
-    SpeakToPlayer(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_10), NPC_ANIM(world_tubba, Palette_00, Anim_6), 0, MESSAGE_ID(0x0E, 0x00C8));
+    SpeakToPlayer(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID(0x0E, 0x00C8));
     SetNpcVar(1, 0, 1);
     sleep 30;
     DisablePlayerInput(FALSE);
 });
 
-Script N(802433C8) = SCRIPT({
+EvtSource N(802433C8) = SCRIPT({
     bind N(exitWalk_80242978) TRIGGER_FLOOR_ABOVE 5;
     bind N(exitWalk_802429D4) TRIGGER_FLOOR_ABOVE 1;
     if (SI_STORY_PROGRESS < STORY_CH3_UNLOCKED_WINDY_MILL) {
@@ -517,7 +517,7 @@ Script N(802433C8) = SCRIPT({
     }
 });
 
-Script N(enterWalk_8024346C) = SCRIPT({
+EvtSource N(enterWalk_8024346C) = SCRIPT({
     GetEntryID(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
@@ -548,7 +548,7 @@ Script N(enterWalk_8024346C) = SCRIPT({
     }
 });
 
-Script N(main) = SCRIPT({
+EvtSource N(main) = SCRIPT({
     SI_WORLD_LOCATION = LOCATION_GUSTY_GULCH;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);

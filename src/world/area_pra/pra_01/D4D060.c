@@ -4,7 +4,7 @@
 
 #include "common/UnkFogFunc.inc.c"
 
-ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240F60_D4DFA0(Evt* script, s32 isInitialCall) {
     gOverrideFlags &= ~0x80;
     return ApiStatus_DONE2;
 }
@@ -15,7 +15,7 @@ ApiStatus func_80240F60_D4DFA0(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802411AC_D4E1EC);
 /*
-ApiStatus N(func_802411AC_D4E1EC)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802411AC_D4E1EC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     if (isInitialCall) {
@@ -34,7 +34,7 @@ ApiStatus N(func_802411AC_D4E1EC)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241200_D4E240);
 /*
-ApiStatus N(func_80241200_D4E240)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241200_D4E240)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
     N(D_80241F98_D4EFD8) = get_variable(script, *args);
@@ -45,7 +45,7 @@ ApiStatus N(func_80241200_D4E240)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_80241238_D4E278);
 /*
-ApiStatus N(func_80241238_D4E278)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_80241238_D4E278)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -67,7 +67,7 @@ ApiStatus N(func_80241238_D4E278)(ScriptInstance* script, s32 isInitialCall) {
 
 INCLUDE_ASM(s32, "world/area_pra/pra_01/D4D060", func_802412D4_D4E314);
 /*
-ApiStatus N(func_802412D4_D4E314)(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus N(func_802412D4_D4E314)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32* ptr = get_variable(script, *args);
     s32 i;
@@ -87,7 +87,7 @@ ApiStatus N(func_802412D4_D4E314)(ScriptInstance* script, s32 isInitialCall) {
 }
 */
 
-ApiStatus PostChapter7StatUpdate(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PostChapter7StatUpdate(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     set_max_SP(7);

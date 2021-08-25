@@ -536,10 +536,10 @@ class ScriptDisassembler:
             if name.startswith("N(func_"):
                 prefix = "ApiStatus "
                 name = self.replace_star_rod_function_name(name[2:-1])
-                suffix = "(ScriptInstance* script, s32 isInitialCall)"
+                suffix = "(Evt* script, s32 isInitialCall)"
             elif name[2:-1] in self.INCLUDED["includes"]:
                 prefix = "ApiStatus "
-                suffix = "(ScriptInstance* script, s32 isInitialCall)"
+                suffix = "(Evt* script, s32 isInitialCall)"
             elif name.startswith("N(npcAISettings_"):
                 prefix = "NpcAISettings "
             elif name.startswith("N(npcSettings_"):
@@ -551,7 +551,7 @@ class ScriptDisassembler:
             elif name.startswith("N(npcGroupList_"):
                 prefix = "NpcGroupList "
             elif name.startswith("N("):
-                prefix = "Script "
+                prefix = "EvtSource "
             else:
                 toReplace = False
 
@@ -591,208 +591,208 @@ class ScriptDisassembler:
 
     def disassemble_command(self, opcode, argc, argv):
         if opcode == 0x01:
-            self.write_line("SI_CMD(ScriptOpcode_END)")
+            self.write_line("SI_CMD(EVT_OP_END)")
             self.indent -= 1
 
             if self.indent_used:
                 self.prefix_line("// *INDENT-OFF*")
-                self.prefix_line(f"Script {self.script_name} = {{")
+                self.prefix_line(f"EvtSource {self.script_name} = {{")
                 self.write_line("};")
                 self.write_line("// *INDENT-ON*")
             else:
-                self.prefix_line(f"Script {self.script_name} = {{")
+                self.prefix_line(f"EvtSource {self.script_name} = {{")
                 self.write_line("};")
 
             self.done = True
-        elif opcode == 0x02: self.write_line(f"SI_CMD(ScriptOpcode_RETURN),")
-        elif opcode == 0x03: self.write_line(f"SI_CMD(ScriptOpcode_LABEL, {self.var(argv[0])}),")
-        elif opcode == 0x04: self.write_line(f"SI_CMD(ScriptOpcode_GOTO, {self.var(argv[0])}),")
+        elif opcode == 0x02: self.write_line(f"SI_CMD(EVT_OP_RETURN),")
+        elif opcode == 0x03: self.write_line(f"SI_CMD(EVT_OP_LABEL, {self.var(argv[0])}),")
+        elif opcode == 0x04: self.write_line(f"SI_CMD(EVT_OP_GOTO, {self.var(argv[0])}),")
         elif opcode == 0x05:
-            self.write_line(f"SI_CMD(ScriptOpcode_LOOP, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_LOOP, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x06:
             self.indent -= 1
-            self.write_line("SI_CMD(ScriptOpcode_END_LOOP),")
-        elif opcode == 0x07: self.write_line(f"SI_CMD(ScriptOpcode_BREAK_LOOP),")
-        elif opcode == 0x08: self.write_line(f"SI_CMD(ScriptOpcode_SLEEP_FRAMES, {self.var(argv[0])}),")
-        elif opcode == 0x09: self.write_line(f"SI_CMD(ScriptOpcode_SLEEP_SECS, {self.var(argv[0])}),")
+            self.write_line("SI_CMD(EVT_OP_END_LOOP),")
+        elif opcode == 0x07: self.write_line(f"SI_CMD(EVT_OP_BREAK_LOOP),")
+        elif opcode == 0x08: self.write_line(f"SI_CMD(EVT_OP_SLEEP_FRAMES, {self.var(argv[0])}),")
+        elif opcode == 0x09: self.write_line(f"SI_CMD(EVT_OP_SLEEP_SECS, {self.var(argv[0])}),")
         elif opcode == 0x0A:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_EQ, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_EQ, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x0B:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_NE, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_NE, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x0C:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_LT, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_LT, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x0D:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_GT, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_GT, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x0E:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_LE, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_LE, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x0F:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_GE, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_GE, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x10:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_FLAG, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_FLAG, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x11:
-            self.write_line(f"SI_CMD(ScriptOpcode_IF_NOT_FLAG, ({self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_IF_NOT_FLAG, ({self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
         elif opcode == 0x12:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_ELSE),")
+            self.write_line(f"SI_CMD(EVT_OP_ELSE),")
             self.indent += 1
         elif opcode == 0x13:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_END_IF),")
+            self.write_line(f"SI_CMD(EVT_OP_END_IF),")
         elif opcode == 0x14:
-            self.write_line(f"SI_CMD(ScriptOpcode_MATCH, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_MATCH, {self.var(argv[0])}),")
             self.indent += 2
         elif opcode == 0x15:
-            self.write_line(f"SI_CMD(ScriptOpcode_MATCH_CONST, 0x{argv[0]:X}),")
+            self.write_line(f"SI_CMD(EVT_OP_MATCH_CONST, 0x{argv[0]:X}),")
             self.indent += 2
         elif opcode == 0x16:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_EQ, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_EQ, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x17:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_NE, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_NE, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x18:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_LT, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_LT, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x19:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_GT, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_GT, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1A:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_LE, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_LE, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1B:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_GE, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_GE, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1C:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_ELSE),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_ELSE),")
             self.indent += 1
         elif opcode == 0x1D:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_OR_EQ, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_MULTI_OR_EQ, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1E:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_MULTI_AND_EQ, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_MULTI_AND_EQ, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x1F:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_FLAG, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_FLAG, {self.var(argv[0])}),")
             self.indent += 1
         elif opcode == 0x20:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_END_CASE_MULTI),")
+            self.write_line(f"SI_CMD(EVT_OP_END_CASE_MULTI),")
             self.indent += 1
         elif opcode == 0x21:
             self.indent -= 1
-            self.write_line(f"SI_CMD(ScriptOpcode_CASE_RANGE, {self.var(argv[0])}, {self.var(argv[1])}),")
+            self.write_line(f"SI_CMD(EVT_OP_CASE_RANGE, {self.var(argv[0])}, {self.var(argv[1])}),")
             self.indent += 1
-        elif opcode == 0x22: self.write_line(f"SI_CMD(ScriptOpcode_BREAK_CASE),")
+        elif opcode == 0x22: self.write_line(f"SI_CMD(EVT_OP_BREAK_CASE),")
         elif opcode == 0x23:
             self.indent -= 2
-            self.write_line(f"SI_CMD(ScriptOpcode_END_MATCH),")
-        elif opcode == 0x24: self.write_line(f"SI_CMD(ScriptOpcode_SET, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x25: self.write_line(f"SI_CMD(ScriptOpcode_SET_CONST, {self.var(argv[0])}, 0x{argv[1]:X}),")
-        elif opcode == 0x26: self.write_line(f"SI_CMD(ScriptOpcode_SET_F, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x27: self.write_line(f"SI_CMD(ScriptOpcode_ADD, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x28: self.write_line(f"SI_CMD(ScriptOpcode_SUB, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x29: self.write_line(f"SI_CMD(ScriptOpcode_MUL, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2A: self.write_line(f"SI_CMD(ScriptOpcode_DIV, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2B: self.write_line(f"SI_CMD(ScriptOpcode_MOD, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2C: self.write_line(f"SI_CMD(ScriptOpcode_ADD_F, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2D: self.write_line(f"SI_CMD(ScriptOpcode_SUB_F, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2E: self.write_line(f"SI_CMD(ScriptOpcode_MUL_F, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x2F: self.write_line(f"SI_CMD(ScriptOpcode_DIV_F, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x30: self.write_line(f"SI_CMD(ScriptOpcode_USE_BUFFER, {self.var(argv[0])}),")
+            self.write_line(f"SI_CMD(EVT_OP_END_MATCH),")
+        elif opcode == 0x24: self.write_line(f"SI_CMD(EVT_OP_SET, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x25: self.write_line(f"SI_CMD(EVT_OP_SET_CONST, {self.var(argv[0])}, 0x{argv[1]:X}),")
+        elif opcode == 0x26: self.write_line(f"SI_CMD(EVT_OP_SET_F, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x27: self.write_line(f"SI_CMD(EVT_OP_ADD, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x28: self.write_line(f"SI_CMD(EVT_OP_SUB, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x29: self.write_line(f"SI_CMD(EVT_OP_MUL, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2A: self.write_line(f"SI_CMD(EVT_OP_DIV, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2B: self.write_line(f"SI_CMD(EVT_OP_MOD, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2C: self.write_line(f"SI_CMD(EVT_OP_ADD_F, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2D: self.write_line(f"SI_CMD(EVT_OP_SUB_F, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2E: self.write_line(f"SI_CMD(EVT_OP_MUL_F, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x2F: self.write_line(f"SI_CMD(EVT_OP_DIV_F, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x30: self.write_line(f"SI_CMD(EVT_OP_USE_BUFFER, {self.var(argv[0])}),")
         elif opcode == 0x31:
-            args = ["ScriptOpcode_BUFFER_READ_1",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_1",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x32:
-            args = ["ScriptOpcode_BUFFER_READ_2",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_2",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x33:
-            args = ["ScriptOpcode_BUFFER_READ_3",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_3",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x34:
-            args = ["ScriptOpcode_BUFFER_READ_4",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_4",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x35:
-            args = ["ScriptOpcode_BUFFER_PEEK",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_PEEK",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x36: self.write_line(f"SI_CMD(ScriptOpcode_USE_BUFFER_f, {self.var(argv[0])}),")
+        elif opcode == 0x36: self.write_line(f"SI_CMD(EVT_OP_USE_BUFFER_f, {self.var(argv[0])}),")
         elif opcode == 0x37:
-            args = ["ScriptOpcode_BUFFER_READ_1_F",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_1_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x38:
-            args = ["ScriptOpcode_BUFFER_READ_2_F",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_2_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x39:
-            args = ["ScriptOpcode_BUFFER_READ_3_F",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_3_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x3A:
-            args = ["ScriptOpcode_BUFFER_READ_4_F",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_READ_4_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
         elif opcode == 0x3B:
-            args = ["ScriptOpcode_BUFFER_PEEK_F",*map(self.var, argv)]
+            args = ["EVT_OP_BUFFER_PEEK_F",*map(self.var, argv)]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x3C: self.write_line(f"SI_CMD(ScriptOpcode_USE_ARRAY, {self.var(argv[0])}),")
-        elif opcode == 0x3D: self.write_line(f"SI_CMD(ScriptOpcode_USE_FLAGS, {self.var(argv[0])}),")
-        elif opcode == 0x3E: self.write_line(f"SI_CMD(ScriptOpcode_NEW_ARRAY, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x3F: self.write_line(f"SI_CMD(ScriptOpcode_AND, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x40: self.write_line(f"SI_CMD(ScriptOpcode_OR, {self.var(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x41: self.write_line(f"SI_CMD(ScriptOpcode_AND_CONST, {self.var(argv[0])}, 0x{argv[1]:X})")
-        elif opcode == 0x42: self.write_line(f"SI_CMD(ScriptOpcode_OR_CONST, {self.var(argv[0])}, 0x{argv[1]:X})")
+        elif opcode == 0x3C: self.write_line(f"SI_CMD(EVT_OP_USE_ARRAY, {self.var(argv[0])}),")
+        elif opcode == 0x3D: self.write_line(f"SI_CMD(EVT_OP_USE_FLAGS, {self.var(argv[0])}),")
+        elif opcode == 0x3E: self.write_line(f"SI_CMD(EVT_OP_NEW_ARRAY, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x3F: self.write_line(f"SI_CMD(EVT_OP_AND, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x40: self.write_line(f"SI_CMD(EVT_OP_OR, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x41: self.write_line(f"SI_CMD(EVT_OP_AND_CONST, {self.var(argv[0])}, 0x{argv[1]:X})")
+        elif opcode == 0x42: self.write_line(f"SI_CMD(EVT_OP_OR_CONST, {self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x43:
-            args = ["ScriptOpcode_CALL", self.addr_ref(argv[0]), *map(self.var, argv[1:])]
+            args = ["EVT_OP_CALL", self.addr_ref(argv[0]), *map(self.var, argv[1:])]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x44: self.write_line(f"SI_CMD(ScriptOpcode_SPAWN_SCRIPT, {self.addr_ref(argv[0])}),")
-        elif opcode == 0x45: self.write_line(f"SI_CMD(ScriptOpcode_SPAWN_GET_ID, {self.addr_ref(argv[0])}, {self.var(argv[1])}),")
-        elif opcode == 0x46: self.write_line(f"SI_CMD(ScriptOpcode_AWAIT_SCRIPT, {self.addr_ref(argv[0])}),")
+        elif opcode == 0x44: self.write_line(f"SI_CMD(EVT_OP_SPAWN_SCRIPT, {self.addr_ref(argv[0])}),")
+        elif opcode == 0x45: self.write_line(f"SI_CMD(EVT_OP_SPAWN_GET_ID, {self.addr_ref(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x46: self.write_line(f"SI_CMD(EVT_OP_AWAIT_SCRIPT, {self.addr_ref(argv[0])}),")
         elif opcode == 0x47:
-            args = ["ScriptOpcode_BIND_TRIGGER", self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
+            args = ["EVT_OP_BIND_TRIGGER", self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x48: self.write_line(f"SI_CMD(ScriptOpcode_UNBIND),")
-        elif opcode == 0x49: self.write_line(f"SI_CMD(ScriptOpcode_KILL_SCRIPT, {self.var(argv[0])}),")
-        elif opcode == 0x4A: self.write_line(f"SI_CMD(ScriptOpcode_JUMP, {self.var(argv[0])}),")
-        elif opcode == 0x4B: self.write_line(f"SI_CMD(ScriptOpcode_SET_PRIORITY, {self.var(argv[0])}),")
-        elif opcode == 0x4C: self.write_line(f"SI_CMD(ScriptOpcode_SET_TIMESCALE, {self.var(argv[0])}),")
-        elif opcode == 0x4D: self.write_line(f"SI_CMD(ScriptOpcode_SET_GROUP, {self.var(argv[0])}),")
+        elif opcode == 0x48: self.write_line(f"SI_CMD(EVT_OP_UNBIND),")
+        elif opcode == 0x49: self.write_line(f"SI_CMD(EVT_OP_KILL_SCRIPT, {self.var(argv[0])}),")
+        elif opcode == 0x4A: self.write_line(f"SI_CMD(EVT_OP_JUMP, {self.var(argv[0])}),")
+        elif opcode == 0x4B: self.write_line(f"SI_CMD(EVT_OP_SET_PRIORITY, {self.var(argv[0])}),")
+        elif opcode == 0x4C: self.write_line(f"SI_CMD(EVT_OP_SET_TIMESCALE, {self.var(argv[0])}),")
+        elif opcode == 0x4D: self.write_line(f"SI_CMD(EVT_OP_SET_GROUP, {self.var(argv[0])}),")
         elif opcode == 0x4E:
-            args = ["ScriptOpcode_BIND_PADLOCK", self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
+            args = ["EVT_OP_BIND_PADLOCK", self.addr_ref(argv[0]), self.trigger(argv[1]), *map(self.var, argv[2:])]
             self.write_line(f"SI_CMD({', '.join(args)}),")
-        elif opcode == 0x4F: self.write_line(f"SI_CMD(ScriptOpcode_SUSPEND_GROUP, {self.var(argv[0])}),")
-        elif opcode == 0x50: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_GROUP, {self.var(argv[0])}),")
-        elif opcode == 0x51: self.write_line(f"SI_CMD(ScriptOpcode_SUSPEND_OTHERS, {self.var(argv[0])}),")
-        elif opcode == 0x52: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_OTHERS, {self.var(argv[0])}),")
-        elif opcode == 0x53: self.write_line(f"SI_CMD(ScriptOpcode_SUSPEND_SCRIPT, {self.var(argv[0])}),")
-        elif opcode == 0x54: self.write_line(f"SI_CMD(ScriptOpcode_RESUME_SCRIPT, {self.var(argv[0])}),")
-        elif opcode == 0x55: self.write_line(f"SI_CMD(ScriptOpcode_DOES_SCRIPT_EXIST, {self.var(argv[0])}, {self.var(argv[1])}),")
+        elif opcode == 0x4F: self.write_line(f"SI_CMD(EVT_OP_SUSPEND_GROUP, {self.var(argv[0])}),")
+        elif opcode == 0x50: self.write_line(f"SI_CMD(EVT_OP_RESUME_GROUP, {self.var(argv[0])}),")
+        elif opcode == 0x51: self.write_line(f"SI_CMD(EVT_OP_SUSPEND_OTHERS, {self.var(argv[0])}),")
+        elif opcode == 0x52: self.write_line(f"SI_CMD(EVT_OP_RESUME_OTHERS, {self.var(argv[0])}),")
+        elif opcode == 0x53: self.write_line(f"SI_CMD(EVT_OP_SUSPEND_SCRIPT, {self.var(argv[0])}),")
+        elif opcode == 0x54: self.write_line(f"SI_CMD(EVT_OP_RESUME_SCRIPT, {self.var(argv[0])}),")
+        elif opcode == 0x55: self.write_line(f"SI_CMD(EVT_OP_DOES_SCRIPT_EXIST, {self.var(argv[0])}, {self.var(argv[1])}),")
         elif opcode == 0x56:
-            self.write_line("SI_CMD(ScriptOpcode_SPAWN_THREAD),")
+            self.write_line("SI_CMD(EVT_OP_SPAWN_THREAD),")
             self.indent += 1
         elif opcode == 0x57:
             self.indent -= 1
-            self.write_line("SI_CMD(ScriptOpcode_END_SPAWN_THREAD),")
+            self.write_line("SI_CMD(EVT_OP_END_SPAWN_THREAD),")
         elif opcode == 0x58:
-            self.write_line("SI_CMD(ScriptOpcode_PARALLEL_THREAD),")
+            self.write_line("SI_CMD(EVT_OP_PARALLEL_THREAD),")
             self.indent += 1
         elif opcode == 0x59:
             self.indent -= 1
-            self.write_line("SI_CMD(ScriptOpcode_END_PARALLEL_THREAD),")
+            self.write_line("SI_CMD(EVT_OP_END_PARALLEL_THREAD),")
         else:
             # unknown opcode
             argv_str = ""
@@ -951,7 +951,7 @@ class ScriptDSLDisassembler(ScriptDisassembler):
 
             self.INCLUDED["functions"].add(self.script_name)
 
-            self.prefix_line(f"Script {self.script_name} = SCRIPT({{")
+            self.prefix_line(f"EvtSource {self.script_name} = SCRIPT({{")
             self.write_line("});")
 
             self.done = True
@@ -1285,11 +1285,11 @@ if __name__ == "__main__":
                             print(f"========== 0x{gap_size:X} byte gap ({potential_count} {potential_struct}?) 0x{gap_start:X} - 0x{args.offset:X} ==========")
                             print()
                             gap = False
-                        #print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                        #print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                         #      f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                         #print()
                         vram = f"{args.vram:X}_" if vram_base > 0 else f""
-                        script_text = script_text.replace("Script script = SCRIPT({", f"Script N(D_{vram}{args.offset:X}) = " + "SCRIPT({")
+                        script_text = script_text.replace("EvtSource script = SCRIPT({", f"EvtSource N(D_{vram}{args.offset:X}) = " + "SCRIPT({")
                         print(script_text, end="")
                         print()
                         #print(f"Valid script found at 0x{args.offset:X}")
@@ -1321,7 +1321,7 @@ if __name__ == "__main__":
                 try:
                     script_text = script.disassemble()
 
-                    print(f"Script read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
+                    print(f"EvtSource read from 0x{script.start_pos:X} to 0x{script.end_pos:X} "
                           f"(0x{script.end_pos - script.start_pos:X} bytes, {script.instructions} instructions)")
                     print()
                     print(script_text, end="")

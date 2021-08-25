@@ -1,7 +1,7 @@
 #include "common.h"
 #include "map.h"
 
-s32 N(UnkNpcAIFunc26)(ScriptInstance* script) {
+s32 N(UnkNpcAIFunc26)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Camera* camera = &gCameras[gCurrentCamID];
@@ -28,11 +28,11 @@ s32 N(UnkNpcAIFunc26)(ScriptInstance* script) {
         ret = FALSE;
     }
 
-    if (D_8010EBB0.unk_03 == 9) {
+    if (gPartnerActionStatus.actionState.b[3]  == 9) {
         ret = FALSE;
     }
 
-    if (D_8010EBB0.unk_03 == 7) {
+    if (gPartnerActionStatus.actionState.b[3]  == 7) {
         ret = FALSE;
     }
 

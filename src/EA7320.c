@@ -2,7 +2,7 @@
 
 #define NAMESPACE EA7320
 
-ApiStatus func_80240350_EA7320(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_80240350_EA7320(Evt* script, s32 isInitialCall) {
     Camera* camera = &dead_gCameras[0];
 
     camera->flags |= 0x1000;

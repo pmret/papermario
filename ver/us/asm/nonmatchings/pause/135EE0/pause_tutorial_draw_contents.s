@@ -497,7 +497,7 @@ glabel pause_tutorial_draw_contents
 /* 1372D0 80243F90 3C048027 */  lui       $a0, %hi(gPauseMenuCommonIconIDs)
 /* 1372D4 80243F94 00822021 */  addu      $a0, $a0, $v0
 /* 1372D8 80243F98 8C8400E8 */  lw        $a0, %lo(gPauseMenuCommonIconIDs)($a0)
-/* 1372DC 80243F9C 0C0511F8 */  jal       draw_icon_2
+/* 1372DC 80243F9C 0C0511F8 */  jal       draw_hud_element_3
 /* 1372E0 80243FA0 00000000 */   nop
 /* 1372E4 80243FA4 8EA20000 */  lw        $v0, ($s5)
 /* 1372E8 80243FA8 3C108027 */  lui       $s0, %hi(gPauseMenuCommonIconIDs)
@@ -514,7 +514,7 @@ glabel pause_tutorial_draw_contents
 /* 137314 80243FD4 0C051261 */  jal       set_hud_element_render_pos
 /* 137318 80243FD8 25E60032 */   addiu    $a2, $t7, 0x32
 /* 13731C 80243FDC 8E04001C */  lw        $a0, 0x1c($s0)
-/* 137320 80243FE0 0C0511F8 */  jal       draw_icon_2
+/* 137320 80243FE0 0C0511F8 */  jal       draw_hud_element_3
 /* 137324 80243FE4 00000000 */   nop
 .L80243FE8:
 /* 137328 80243FE8 8EA20000 */  lw        $v0, ($s5)

@@ -7,7 +7,7 @@ extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
 
-ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 hideShadow = get_variable(script, *args++);
 
@@ -19,7 +19,7 @@ ApiStatus HidePlayerShadow(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePlayerPhysics(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DisablePlayerPhysics(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 disable = get_variable(script, *args++);
 
@@ -31,7 +31,7 @@ ApiStatus DisablePlayerPhysics(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 enable = get_variable(script, *args++);
@@ -55,7 +55,7 @@ ApiStatus DisablePlayerInput(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerPos(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     f32 x = get_variable(script, *args++);
@@ -73,7 +73,7 @@ ApiStatus SetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     s32 height = get_variable(script, *args++);
@@ -88,17 +88,17 @@ ApiStatus SetPlayerCollisionSize(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerSpeed(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerSpeed(Evt* script, s32 isInitialCall) {
     playerNpc->moveSpeed = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerJumpscale(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerJumpscale(Evt* script, s32 isInitialCall) {
     playerNpc->jumpScale = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerAnim currentAnim = get_variable(script, *args++);
     s32 shakeAnim = 0x80003;
@@ -116,17 +116,17 @@ ApiStatus SetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerActionState(Evt* script, s32 isInitialCall) {
     set_action_state(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerAnimationSpeed(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerAnimationSpeed(Evt* script, s32 isInitialCall) {
     playerNpc->animationSpeed = get_float_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerMoveTo(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -153,7 +153,7 @@ ApiStatus PlayerMoveTo(ScriptInstance* script, s32 isInitialCall) {
     return script->functionTemp[0] < 0;
 }
 
-ApiStatus func_802D1270(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D1270(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -177,7 +177,7 @@ ApiStatus func_802D1270(ScriptInstance* script, s32 isInitialCall) {
     return (script->functionTemp[0] < 0) * ApiStatus_DONE2;
 }
 
-ApiStatus func_802D1380(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D1380(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -203,7 +203,7 @@ ApiStatus func_802D1380(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE1;
 }
 
-s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
+s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 xTemp;
@@ -327,19 +327,19 @@ s32 player_jump(ScriptInstance* script, s32 isInitialCall, s32 mode) {
     return FALSE;
 }
 
-ApiStatus PlayerJump(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerJump(Evt* script, s32 isInitialCall) {
     return player_jump(script, isInitialCall, 0);
 }
 
-ApiStatus PlayerJump1(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerJump1(Evt* script, s32 isInitialCall) {
     return player_jump(script, isInitialCall, 1);
 }
 
-ApiStatus PlayerJump2(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerJump2(Evt* script, s32 isInitialCall) {
     return player_jump(script, isInitialCall, 2);
 }
 
-ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus InterpPlayerYaw(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32* initialYaw = (f32*) &script->functionTemp[1];
@@ -377,7 +377,7 @@ ApiStatus InterpPlayerYaw(ScriptInstance* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus PlayerFaceNpc(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* args = script->ptrReadPos;
     f32* playerTargetYaw = (f32*) &script->functionTemp[1];
@@ -426,12 +426,12 @@ ApiStatus PlayerFaceNpc(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPlayerTargetYaw(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerTargetYaw(Evt* script, s32 isInitialCall) {
     set_variable(script, *script->ptrReadPos, gPlayerStatus.targetYaw);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerFlagBits(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetPlayerFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode bits = *args++;
@@ -446,13 +446,13 @@ ApiStatus SetPlayerFlagBits(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPlayerActionState(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerActionState(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
     set_variable(script, outVar, gPlayerActionState);
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerPos(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar1 = *args++;
@@ -465,14 +465,14 @@ ApiStatus GetPlayerPos(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetPlayerAnimation(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode outVar = *script->ptrReadPos;
 
     set_variable(script, outVar, gPlayerAnimation);
     return ApiStatus_DONE2;
 }
 
-ApiStatus FullyRestoreHPandFP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FullyRestoreHPandFP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->curHP = playerData->curMaxHP;
@@ -480,14 +480,14 @@ ApiStatus FullyRestoreHPandFP(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus FullyRestoreSP(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus FullyRestoreSP(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->specialBarsFilled = playerData->maxStarPower * 256;
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnablePartner(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus EnablePartner(Evt* script, s32 isInitialCall) {
     s32 partnerIdx = get_variable(script, *script->ptrReadPos) - 1;
     PartnerData* partner = &gPlayerData.partners[partnerIdx];
 
@@ -495,7 +495,7 @@ ApiStatus EnablePartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
     s32 partnerIdx = get_variable(script, *script->ptrReadPos) - 1;
     PartnerData* partner = &gPlayerData.partners[partnerIdx];
 
@@ -503,7 +503,7 @@ ApiStatus DisablePartner(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseEntryHeading(ScriptInstance *script, s32 isInitialCall) {
+ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MapConfig* mapConfig = get_current_map_header();
     s32 var1 = get_variable(script, *args++);
@@ -529,12 +529,12 @@ ApiStatus UseEntryHeading(ScriptInstance *script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2148(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2148(Evt* script, s32 isInitialCall) {
     gPlayerStatus.flags &= ~0x4000000;
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseExitHeading(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     MapConfig* mapConfig = get_current_map_header();
@@ -583,7 +583,7 @@ s32 func_802D23F8(void) {
     return FALSE;
 }
 
-ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
     if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
         return ApiStatus_DONE2;
     }
@@ -591,11 +591,11 @@ ApiStatus WaitForPlayerTouchingFloor(ScriptInstance* script, s32 isInitialCall) 
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802D2484(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
     return (gCollisionStatus.currentFloor >= 0) * ApiStatus_DONE2;
 }
 
-ApiStatus IsPlayerOnValidFloor(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 val = 0;
 
@@ -607,17 +607,17 @@ ApiStatus IsPlayerOnValidFloor(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus WaitForPlayerMoveToComplete(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerMoveToComplete(Evt* script, s32 isInitialCall) {
     return (gPlayerStatus.moveFrames == 0) * ApiStatus_DONE2;
 }
 
-ApiStatus WaitForPlayerInputEnabled(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
     return !(gPlayerStatus.flags & 0x2000) * ApiStatus_DONE2;
 }
 
 //regs, the global at the end
 #ifdef NON_MATCHING
-ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
@@ -680,25 +680,23 @@ ApiStatus func_802D2520(ScriptInstance* script, s32 isInitialCall) {
             get_variable(script, *args++);
             func_802DDFF8(a0, 13, a2, a3, 0, 0, 0);
             break;
-        default:
-            break;
     }
 
     D_802DB5B0 = 0;
     return ApiStatus_DONE2;
 }
 #else
-INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2520, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", func_802D2520, Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus func_802D286C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D286C(Evt* script, s32 isInitialCall) {
     s32 temp = *script->ptrReadPos;
 
     D_802DB5B0 = temp;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2884(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2884(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32* ft1 = (f32*) &script->functionTemp[1];
@@ -742,7 +740,7 @@ ApiStatus func_802D2884(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DisablePulseStone(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DisablePulseStone(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (get_variable(script, *script->ptrReadPos)) {
@@ -754,13 +752,13 @@ ApiStatus DisablePulseStone(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetCurrentPartner(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetCurrentPartner(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode a0 = *args;
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = 0;
 
-    if (D_8010EBB0.unk_00 != 0) {
+    if (gPartnerActionStatus.actionState.b[0] != 0) {
         currentPartner = playerData->currentPartner;
     }
 
@@ -775,14 +773,14 @@ ApiStatus func_802D2B50(void) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2B6C(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2B6C(Evt* script, s32 isInitialCall) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->animFlags |= 4;
     return ApiStatus_DONE2;
 }
 
-ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus Disable8bitMario(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -799,12 +797,12 @@ ApiStatus Disable8bitMario(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C14(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus func_802D2C14(Evt* script, s32 isInitialCall) {
     func_800EF3D4(get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802D2C40(ScriptInstance* script) {
+ApiStatus func_802D2C40(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     f32 x = get_variable(script, *args++);
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -818,7 +816,7 @@ ApiStatus func_802D2C40(ScriptInstance* script) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus PlaySoundAtPlayer(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus PlaySoundAtPlayer(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 var = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);
@@ -876,7 +874,7 @@ INCLUDE_ASM(void, "evt/player_api", virtual_entity_list_render_world, void);
 
 INCLUDE_ASM(s32, "evt/player_api", virtual_entity_list_render_UI);
 
-ApiStatus InitVirtualEntityList(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus InitVirtualEntityList(Evt* script, s32 isInitialCall) {
     if (!gGameStatusPtr->isBattle) {
         D_802DB7C0 = &D_802DB6C0;
     } else {
@@ -885,7 +883,7 @@ ApiStatus InitVirtualEntityList(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntityAt(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntityAt(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     u32* cmdList = (u32*)get_variable(script, *args++);
@@ -906,7 +904,7 @@ ApiStatus CreateVirtualEntityAt(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32* unkStructPtr = (s32*)get_variable(script, *args++);
@@ -941,7 +939,7 @@ ApiStatus CreateVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus CreateVirtualEntity_ALT(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus CreateVirtualEntity_ALT(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
     s32* unkStructPtr = (s32*)get_variable(script, *args++);
@@ -976,7 +974,7 @@ ApiStatus CreateVirtualEntity_ALT(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus DeleteVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus DeleteVirtualEntity(Evt* script, s32 isInitialCall) {
     VirtualEntity* virtualEntity = (*D_802DB7C0)[get_variable(script, *script->ptrReadPos)];
 
     free_entity_model_by_index(virtualEntity->entityModelIndex);
@@ -984,7 +982,7 @@ ApiStatus DeleteVirtualEntity(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRenderCommands(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRenderCommands(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     u32* commandList = (u32*)get_variable(script, *args++);
@@ -993,7 +991,7 @@ ApiStatus SetVirtualEntityRenderCommands(ScriptInstance* script, s32 isInitialCa
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1007,7 +1005,7 @@ ApiStatus SetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus GetVirtualEntityPosition(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     VirtualEntity* virtualEntity = (*D_802DB7C0)[index];
@@ -1021,7 +1019,7 @@ ApiStatus GetVirtualEntityPosition(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRotation(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRotation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1035,7 +1033,7 @@ ApiStatus SetVirtualEntityRotation(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityScale(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityScale(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     f32 x = get_float_variable(script, *args++);
@@ -1049,7 +1047,7 @@ ApiStatus SetVirtualEntityScale(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityMoveSpeed(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityMoveSpeed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
 
@@ -1057,7 +1055,7 @@ ApiStatus SetVirtualEntityMoveSpeed(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityJumpGravity(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityJumpGravity(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
 
@@ -1065,7 +1063,7 @@ ApiStatus SetVirtualEntityJumpGravity(ScriptInstance* script, s32 isInitialCall)
     return ApiStatus_DONE2;
 }
 
-ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityMoveTo(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -1123,7 +1121,7 @@ ApiStatus VirtualEntityMoveTo(ScriptInstance* script, s32 isInitialCall) {
 
 // float bs
 #ifdef NON_MATCHING
-ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityJumpTo(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
     s32 index;
@@ -1195,10 +1193,10 @@ ApiStatus VirtualEntityJumpTo(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 #else
-INCLUDE_ASM(ApiStatus, "evt/player_api", VirtualEntityJumpTo, ScriptInstance* script, s32 isInitialCall);
+INCLUDE_ASM(ApiStatus, "evt/player_api", VirtualEntityJumpTo, Evt* script, s32 isInitialCall);
 #endif
 
-ApiStatus VirtualEntityLandJump(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus VirtualEntityLandJump(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     VirtualEntity* virtualEntity;
 
@@ -1225,7 +1223,7 @@ ApiStatus VirtualEntityLandJump(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus SetVirtualEntityFlags(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
@@ -1234,7 +1232,7 @@ ApiStatus SetVirtualEntityFlags(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityFlagBits(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityFlagBits(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 flags = *args++;
@@ -1250,7 +1248,7 @@ ApiStatus SetVirtualEntityFlagBits(ScriptInstance* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetVirtualEntityRenderMode(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus SetVirtualEntityRenderMode(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 index = get_variable(script, *args++);
     s32 var2 = get_variable(script, *args++);

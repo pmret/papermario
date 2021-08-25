@@ -1,11 +1,8 @@
 #include "common.h"
+#include "hud_element.h"
 
 extern s32 D_800F7FA8;
 extern s32 D_800F7F80[10];
-
-void set_hud_element_script(s32, s32);
-void clear_hud_element_flags(s32, s32);
-void draw_hud_element_2(s32);
 
 void clear_player_data(void) {
     PlayerData* playerData = &gPlayerData;
@@ -402,7 +399,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
     s32 digit;
     s32 place;
 
-    set_hud_element_script(iconID, D_800F7FA8);
+    set_hud_element_anim(iconID, D_800F7FA8);
     x += 8;
     y2 = y + 8;
     set_hud_element_render_pos(iconID, x, y + 7);
@@ -427,7 +424,7 @@ void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits)
         // Once we have encountered our first non-zero digit, we need to keep drawing the remaining digits
         if (digit != 0 || keepDrawing || (i == numDigits - 1)) {
             keepDrawing = TRUE;
-            set_hud_element_script(iconID, D_800F7F80[digit]);
+            set_hud_element_anim(iconID, D_800F7F80[digit]);
             set_hud_element_render_pos(iconID, x, y2);
             clear_hud_element_flags(iconID, 2);
             draw_hud_element_2(iconID);
@@ -556,7 +553,7 @@ void func_800E96C8(void) {
     }
 }
 
-ApiStatus ShowCoinCounter(ScriptInstance* script, s32 isInitialCall) {
+ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall) {
     if (get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {
@@ -1178,7 +1175,7 @@ u8 add_star_pieces(s32 amt) {
     return playerData->starPieces;
 }
 
-void increment_max_SP() {
+void increment_max_SP(void) {
     gPlayerData.maxStarPower++;
     gPlayerData.specialBarsFilled = gPlayerData.maxStarPower * 256;
 }

@@ -5,7 +5,7 @@ from struct import unpack_from
 CONSTANTS = {}
 def get_constants():
     global CONSTANTS
-    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims", 
+    valid_enums = { "StoryProgress", "ItemIDs", "PlayerAnims",
         "ActorIDs", "Events", "SoundIDs", "SongIDs", "Locations",
         "AmbientSounds", "NpcIDs", "Emotes" }
     for enum in valid_enums:
@@ -219,7 +219,7 @@ def get_vals(fd, offset, var):
                 data = unpack_from('>H', fd, offset)[0]
                 fmt = "d"
                 offset += 2
-            elif var["type"]  == "s32" or var["type"] in ("NpcID", "NpcAnimID", "MessageID", "BattleID"):
+            elif var["type"]  == "s32" or var["type"] in ("NpcID", "s32", "MessageID", "s32"):
                 poff = offset
                 offset += offset % 4
                 data = unpack_from('>i', fd, offset)[0]
@@ -327,7 +327,7 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                 elif "tattle" in val["name"]:
                     val["fmt"] = "06X"
                     val["type"] = "hex"
-                
+
                 fmt = val["fmt"]
                 if val["type"] == "float":
                     line += f"{val['data']:{fmt}}f"
@@ -382,7 +382,7 @@ def recurse_check_list(vals):
             if check_list(val, 1):
                 return len(vals) - x
         elif val != 0:
-            return len(vals) - x 
+            return len(vals) - x
     return -1
 
 def get_single_struct_vals(fd, i):
@@ -509,10 +509,10 @@ def MacroReplaceStaticNPC(fd):
 
             indent = len(fd[i].split(".",1)[0]) // 4
             new_line = fd[i].split("{",1)[0] + "{\n"
-            
+
             if not vals:
                 i = x
-                i += 1 
+                i += 1
                 continue
 
             vals += "\n},\n."
@@ -526,7 +526,7 @@ def MacroReplaceStaticNPC(fd):
                 added_item = True
                 item_name = CONSTANTS["ItemIDs"][item[0]]
                 new_line += "    " * (indent+1) + "{ " + item_name + f", {item[1]}, {item[2]}" + " },\n"
-            
+
             if added_item:
                 new_line += "    " * indent + "},"
 
@@ -545,11 +545,11 @@ def MacroReplaceStaticNPC(fd):
                 sprite =  CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
                 palette = CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                 anim =    CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                new_line += "    " * (indent+1) + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                new_line += "    " * (indent+1) + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
             new_line += "    " * indent + "},"
             out.append(new_line)
             i = x
-            
+
         elif ".heartDrops" in fd[i] or ".flowerDrops" in fd[i]:
             vals, x = get_single_struct_vals(fd, i)
 
@@ -659,7 +659,7 @@ offset, out = output_type2(fd, args.count, args.offset, STRUCTS[args.type])
 for i,entry in enumerate(out):
     out[i] = "\n".join(entry)
 
-print(f"Script range 0x{args.offset:08X} - 0x{offset:08X}")
+print(f"EvtSource range 0x{args.offset:08X} - 0x{offset:08X}")
 print()
 
 if args.type.lower() == "staticnpc":

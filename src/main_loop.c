@@ -38,7 +38,7 @@ Gfx D_80074230[] = {
 };
 
 // BSS
-extern s32 timeFreezeMode BSS;
+extern BSS s32 timeFreezeMode;
 
 extern s16 D_8009A690;
 
@@ -232,7 +232,7 @@ void gfx_draw_frame(void) {
     nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
                    NU_SC_TASK_LODABLE | NU_SC_SWAPBUFFER);
     gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
-    func_8002C890(nuGfxCfb_ptr, 0x140, 0xF0);
+    func_8002C890(nuGfxCfb_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 void load_engine_data(void) {
