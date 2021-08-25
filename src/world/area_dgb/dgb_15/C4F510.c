@@ -248,13 +248,13 @@ EvtSource N(idle_80242238) = SCRIPT({
     }
     SI_SAVE_VAR(203) = 15;
     SetNpcPos(NPC_SELF, 0, 0, 88);
-    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_9));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_9);
     SetNpcYaw(NPC_SELF, 270);
     NpcMoveTo(NPC_SELF, -53, 180, 60);
     SetMusicTrack(0, SONG_TUBBA_BLUBBA_THEME, 0, 8);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(world_tubba, Palette_00, Anim_6));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_6);
     sleep 15;
-    SpeakToPlayer(NPC_SELF, NPC_ANIM(world_tubba, Palette_00, Anim_10), NPC_ANIM(world_tubba, Palette_00, Anim_6), 0, MESSAGE_ID(0x0E, 0x00F3));
+    SpeakToPlayer(NPC_SELF, NPC_ANIM_world_tubba_Palette_00_Anim_10, NPC_ANIM_world_tubba_Palette_00_Anim_6, 0, MESSAGE_ID(0x0E, 0x00F3));
     sleep 15;
     spawn {
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -325,7 +325,7 @@ NpcAISettings N(npcAISettings_8024271C) = {
 EvtSource N(npcAI_8024274C) = SCRIPT({
     spawn N(80242184);
     SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_GRAVITY)), TRUE);
-    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM(world_tubba, Palette_00, Anim_C));
+    SetNpcAnimation(NPC_WORLD_TUBBA, NPC_ANIM_world_tubba_Palette_00_Anim_C);
     spawn N(802424E8);
     N(func_80241464_C50974)(N(npcAISettings_8024271C));
 });
@@ -371,22 +371,22 @@ StaticNpc N(npcGroup_802428C0) = {
     .maxCoinBonus = 3,
     .movement = { 7, -500, 0, 200, -700, 0, 200, -900, 0, 200, -1000, 0, 200, -800, 0, 200, -600, 0, 200, -400, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, -32767, -500, 0, 200, 1000, 250, 1, 1 },
     .animations = {
-        NPC_ANIM(world_tubba, Palette_00, Anim_6),
-        NPC_ANIM(world_tubba, Palette_00, Anim_9),
-        NPC_ANIM(world_tubba, Palette_00, Anim_C),
-        NPC_ANIM(world_tubba, Palette_00, Anim_C),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
-        NPC_ANIM(world_tubba, Palette_00, Anim_0),
+        NPC_ANIM_world_tubba_Palette_00_Anim_6,
+        NPC_ANIM_world_tubba_Palette_00_Anim_9,
+        NPC_ANIM_world_tubba_Palette_00_Anim_C,
+        NPC_ANIM_world_tubba_Palette_00_Anim_C,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
+        NPC_ANIM_world_tubba_Palette_00_Anim_0,
     },
     .unk_1E0 = { 00, 00, 00, 02, 00, 00, 00, 00},
 };

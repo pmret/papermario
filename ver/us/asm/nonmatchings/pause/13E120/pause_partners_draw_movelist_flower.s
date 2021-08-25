@@ -12,7 +12,7 @@ glabel pause_partners_draw_movelist_flower
 /* 13F3FC 8024C0BC 0C051261 */  jal       set_hud_element_render_pos
 /* 13F400 8024C0C0 24C60010 */   addiu    $a2, $a2, 0x10
 /* 13F404 8024C0C4 8E040004 */  lw        $a0, 4($s0)
-/* 13F408 8024C0C8 0C0511F8 */  jal       draw_icon_2
+/* 13F408 8024C0C8 0C0511F8 */  jal       draw_hud_element_3
 /* 13F40C 8024C0CC 00000000 */   nop
 /* 13F410 8024C0D0 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 13F414 8024C0D4 8FB00010 */  lw        $s0, 0x10($sp)

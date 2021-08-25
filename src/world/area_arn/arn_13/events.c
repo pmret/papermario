@@ -112,22 +112,22 @@ NpcSettings N(npcSettings_802404CC) = {
 };
 
 EvtSource N(idle_802404F8) = SCRIPT({
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SetNpcJumpscale(NPC_SELF, 3.0);
     GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) -= 30;
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 8);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_14));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14);
     sleep 1;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SI_VAR(0) -= 80;
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 12);
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_14));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14);
     sleep 1;
-    SetNpcAnimation(NPC_SELF, NPC_ANIM(tubbas_heart, Palette_00, Anim_13));
+    SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SI_VAR(0) -= 80;
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
@@ -171,22 +171,22 @@ StaticNpc N(npcGroup_802407EC) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
-        NPC_ANIM(tubbas_heart, Palette_00, Anim_1),
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
+        NPC_ANIM_tubbas_heart_Palette_00_Anim_1,
     },
 };
 
@@ -204,22 +204,22 @@ StaticNpc N(npcGroup_802409DC) = {
     .maxCoinBonus = 2,
     .movement = { 0, 0, 0, 20, 0, -32767, 0, 0, 0, 0, 150, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, walk),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, idle),
-        NPC_ANIM(goomba, hyper, pain),
-        NPC_ANIM(goomba, hyper, pain),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
-        NPC_ANIM(goomba, hyper, run),
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_walk,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_idle,
+        NPC_ANIM_goomba_hyper_pain,
+        NPC_ANIM_goomba_hyper_pain,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
+        NPC_ANIM_goomba_hyper_run,
     },
     .unk_1E0 = { 00, 00, 00, 01, 00, 00, 00, 00},
 };

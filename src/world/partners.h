@@ -17,7 +17,7 @@ typedef struct WorldPartner {
     /* 0x18 */ Bytecode* update;
     /* 0x1C */ Bytecode* useAbility;
     /* 0x20 */ Bytecode* putAway;
-    /* 0x24 */ NpcAnimID idle;
+    /* 0x24 */ s32 idle;
     /* 0x28 */ PartnerUnkFunc testFirstStrike;
     /* 0x2C */ PartnerBoolFunc canUseAbility;
     /* 0x30 */ PartnerBoolFunc canPlayerPause;

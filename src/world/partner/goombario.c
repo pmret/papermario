@@ -108,7 +108,7 @@ EvtSource world_goombario_use_ability = SCRIPT({
     }
 
     if (SI_VAR(1) == 0) {
-        SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_goombario, normal, talk), NPC_ANIM(world_goombario, normal, idle), 0,
+        SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_goombario_normal_talk, NPC_ANIM_world_goombario_normal_idle, 0,
                       SI_VAR(0));
     }
 

@@ -384,7 +384,7 @@ EvtSource N(802446AC) = SCRIPT({
 
 EvtSource N(80244888) = SCRIPT({
     spawn N(802446AC);
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_C));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_C);
     GetNpcPos(NPC_LAKILULU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
     SI_VAR(1) += -5;
     SI_VAR(2) += 30;
@@ -407,7 +407,7 @@ EvtSource N(80244888) = SCRIPT({
             break loop;
         }
     }
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_D));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_D);
     GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
     SI_VAR(1) += 5;
     SI_VAR(2) += 20;
@@ -435,7 +435,7 @@ EvtSource N(80244888) = SCRIPT({
         sleep 1;
     }
     SetPlayerAnimation(ANIM_STAND_STILL);
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_1);
 });
 
 EvtSource N(idle_80244BF8) = SCRIPT({
@@ -456,7 +456,7 @@ EvtSource N(idle_80244BF8) = SCRIPT({
     sleep 20;
     SetPlayerAnimation(ANIM_STAND_STILL);
     func_802CF56C(2);
-    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_7));
+    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_7);
     spawn {
         N(func_802434D4_CC6CE4)();
     }
@@ -470,7 +470,7 @@ EvtSource N(idle_80244BF8) = SCRIPT({
         goto 0;
     }
     kill SI_VAR(9);
-    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
     PlayerFaceNpc(0, 0);
     sleep 15;
     GetNpcPos(NPC_WORLD_LAKILESTER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -485,10 +485,10 @@ EvtSource N(idle_80244BF8) = SCRIPT({
         PlayerMoveTo(-75, 65, 10);
         PlayerFaceNpc(0, 0);
     }
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00A1));
-    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_7));
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00A1));
+    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_7);
     sleep 10;
-    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
+    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
     spawn {
         SetCamDistance(0, 1000);
         SetCamPitch(0, 17.0, -6.0);
@@ -513,7 +513,7 @@ EvtSource N(80245014) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     NpcFaceNpc(NPC_LAKILULU0, NPC_WORLD_LAKILESTER, 1);
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00B4));
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00B4));
     NpcFaceNpc(NPC_PARTNER, NPC_LAKILULU0, 1);
     SetCamDistance(0, 600);
     SetCamPitch(0, 10.0, -8.0);
@@ -550,7 +550,7 @@ EvtSource N(80245014) = SCRIPT({
     DisablePartnerAI(0);
     InterpNpcYaw(NPC_PARTNER, 270, 0);
     sleep 5;
-    SpeakToPlayer(NPC_PARTNER, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x00B5));
+    SpeakToPlayer(NPC_PARTNER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x00B5));
     EnablePartnerAI();
     PutPartnerAway();
     ResetCam(0, 90.0);
@@ -560,17 +560,17 @@ EvtSource N(80245014) = SCRIPT({
 EvtSource N(80245444) = SCRIPT({
     DisablePlayerInput(TRUE);
     sleep 30;
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_A), NPC_ANIM(world_lakilester, Palette_00, Anim_4), 0, MESSAGE_ID(0x11, 0x00A2));
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_A, NPC_ANIM_world_lakilester_Palette_00_Anim_4, 0, MESSAGE_ID(0x11, 0x00A2));
     SetNpcPos(NPC_LAKILULU0, -290, 120, 45);
     spawn {
         sleep 10;
-        SetNpcAnimation(NPC_SELF, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
+        SetNpcAnimation(NPC_SELF, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
         SetPlayerAnimation(0x1002A);
         sleep 20;
         InterpPlayerYaw(270, 1);
     }
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 5, MESSAGE_ID(0x11, 0x00A3));
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_7));
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 5, MESSAGE_ID(0x11, 0x00A3));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_7);
     UseSettingsFrom(0, 0, 0, 0);
     SetPanTarget(0, 0, 0, 0);
     SetCamDistance(0, 500);
@@ -601,7 +601,7 @@ EvtSource N(80245444) = SCRIPT({
         goto 0;
     }
     kill SI_VAR(9);
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_9));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_9);
     SetPlayerAnimation(ANIM_STAND_STILL);
     sleep 20;
     GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -613,7 +613,7 @@ EvtSource N(80245444) = SCRIPT({
     SetCamSpeed(0, 90.0);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00A4));
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00A4));
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 40;
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -621,7 +621,7 @@ EvtSource N(80245444) = SCRIPT({
     SetCamSpeed(0, 4.0);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_8), NPC_ANIM(lakilulu, Palette_00, Anim_8), 0, MESSAGE_ID(0x11, 0x00A5));
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_8, NPC_ANIM_lakilulu_Palette_00_Anim_8, 0, MESSAGE_ID(0x11, 0x00A5));
     GetNpcPos(NPC_LAKILULU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 20;
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -629,9 +629,9 @@ EvtSource N(80245444) = SCRIPT({
     SetCamSpeed(0, 4.0);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester, Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00A6));
-    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
-    EndSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0);
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00A6));
+    SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
+    EndSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0);
     GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
     SI_VAR(0) += 40;
     SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -640,16 +640,16 @@ EvtSource N(80245444) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
 10:
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_A), NPC_ANIM(lakilulu, Palette_00, Anim_9), 0, MESSAGE_ID(0x11, 0x00A7));
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 0, MESSAGE_ID(0x11, 0x00A7));
     ShowChoice(MESSAGE_ID(0x1E, 0x0020));
     if (SI_VAR(0) != 0) {
         await N(80244888);
         sleep 10;
         goto 10;
     } else {
-        ContinueSpeech(1, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+        ContinueSpeech(1, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                        0x00A9));
-        SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_1));
+        SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_1);
         SetPlayerAnimation(ANIM_NOD_YES);
         sleep 10;
         SetPlayerAnimation(ANIM_STAND_STILL);
@@ -661,10 +661,9 @@ EvtSource N(80245444) = SCRIPT({
         SetCamSpeed(0, 90.0);
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
-        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester,
-                      Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AA));
-        SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_1));
-        EndSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0);
+        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00AA));
+        SetNpcAnimation(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_1);
+        EndSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0);
         GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
         SI_VAR(0) += 40;
         SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -673,33 +672,32 @@ EvtSource N(80245444) = SCRIPT({
         PanToTarget(0, 0, 1);
         WaitForCam(0, 1.0);
         sleep 10;
-        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_B), NPC_ANIM(world_lakilester,
-                      Palette_00, Anim_3), 0, MESSAGE_ID(0x11, 0x00AB));
+        SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_B, NPC_ANIM_world_lakilester_Palette_00_Anim_3, 0, MESSAGE_ID(0x11, 0x00AB));
         sleep 10;
         ShowChoice(MESSAGE_ID(0x1E, 0x0021));
         match SI_VAR(0) {
             == -1 {}
             == 0 {
-                ContinueSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00AC));
+                ContinueSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00AC));
             }
             == 1 {
-                ContinueSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00AD));
+                ContinueSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00AD));
             }
             == 2 {
-                ContinueSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00AE));
+                ContinueSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00AE));
             }
             == 3 {
-                ContinueSpeech(0, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00AF));
+                ContinueSpeech(0, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00AF));
             }
         }
     }
     InterpNpcYaw(NPC_LAKILULU0, 90, 1);
-    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_9));
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_A), NPC_ANIM(lakilulu, Palette_00, Anim_9), 5, MESSAGE_ID(0x11, 0x00B0));
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00B1));
+    SetNpcAnimation(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_9);
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID(0x11, 0x00B0));
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00B1));
     sleep 15;
-    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_A), NPC_ANIM(lakilulu, Palette_00, Anim_9), 5, MESSAGE_ID(0x11, 0x00B2));
-    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM(world_lakilester, Palette_00, Anim_9), NPC_ANIM(world_lakilester, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00B3));
+    SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_A, NPC_ANIM_lakilulu_Palette_00_Anim_9, 5, MESSAGE_ID(0x11, 0x00B2));
+    SpeakToPlayer(NPC_WORLD_LAKILESTER, NPC_ANIM_world_lakilester_Palette_00_Anim_9, NPC_ANIM_world_lakilester_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00B3));
     sleep 10;
     spawn {
         ResetCam(0, 90.0);
@@ -726,7 +724,7 @@ EvtSource N(defeat_80246038) = SCRIPT({
     GetBattleOutcome(SI_VAR(0));
     match SI_VAR(0) {
         == 0 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(world_lakilester, Palette_00, Anim_4));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_world_lakilester_Palette_00_Anim_4);
             SetCamType(0, 6, 1);
             GetNpcPos(NPC_SELF, SI_VAR(3), SI_VAR(1), SI_VAR(2));
             GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
@@ -749,15 +747,15 @@ EvtSource N(defeat_80246038) = SCRIPT({
 
 EvtSource N(interact_802461C0) = SCRIPT({
     if (SI_STORY_PROGRESS <= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
-        SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+        SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                       MESSAGE_ID(0x11, 0x0032));
     } else {
         GetCurrentPartnerID(SI_VAR(0));
         if (SI_VAR(0) != 8) {
-            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                           MESSAGE_ID(0x11, 0x0034));
         } else {
-            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM(lakilulu, Palette_00, Anim_4), NPC_ANIM(lakilulu, Palette_00, Anim_1), 0,
+            SpeakToPlayer(NPC_LAKILULU0, NPC_ANIM_lakilulu_Palette_00_Anim_4, NPC_ANIM_lakilulu_Palette_00_Anim_1, 0,
                           MESSAGE_ID(0x11, 0x0032));
         }
     }
@@ -784,7 +782,7 @@ EvtSource N(init_802462D0) = SCRIPT({
 
 EvtSource N(init_80246370) = SCRIPT({
     SetNpcPos(NPC_LAKILULU1, 0, -1000, 0);
-    SetNpcAnimation(NPC_LAKILULU1, NPC_ANIM(lakilulu, Palette_00, Anim_B));
+    SetNpcAnimation(NPC_LAKILULU1, NPC_ANIM_lakilulu_Palette_00_Anim_B);
 });
 
 EvtSource N(init_802463B0) = SCRIPT({
@@ -811,22 +809,22 @@ StaticNpc N(npcGroup_80246434) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
-        NPC_ANIM(world_lakilester, Palette_00, Anim_1),
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
+        NPC_ANIM_world_lakilester_Palette_00_Anim_1,
     },
 };
 
@@ -841,22 +839,22 @@ StaticNpc N(npcGroup_80246624) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00E2),
 };
@@ -872,22 +870,22 @@ StaticNpc N(npcGroup_80246814) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
-        NPC_ANIM(lakilulu, Palette_00, Anim_1),
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
+        NPC_ANIM_lakilulu_Palette_00_Anim_1,
     },
 };
 
@@ -911,22 +909,22 @@ StaticNpc N(npcGroup_80246A04) = {
     .maxCoinBonus = 2,
     .movement = { 335, 90, 45, 30, 0, -32767, 0, 335, 90, 45, 250, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_2),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_4),
-        NPC_ANIM(lakitu, Palette_00, Anim_4),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_2,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_4,
+        NPC_ANIM_lakitu_Palette_00_Anim_4,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -951,22 +949,22 @@ StaticNpc N(npcGroup_80246BF4) = {
     .maxCoinBonus = 2,
     .movement = { -320, 90, 0, 30, 0, -32767, 0, -320, 90, 0, 200, 0, 0, 1 },
     .animations = {
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_2),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_4),
-        NPC_ANIM(lakitu, Palette_00, Anim_4),
-        NPC_ANIM(lakitu, Palette_00, Anim_3),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
-        NPC_ANIM(lakitu, Palette_00, Anim_1),
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_2,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_4,
+        NPC_ANIM_lakitu_Palette_00_Anim_4,
+        NPC_ANIM_lakitu_Palette_00_Anim_3,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
+        NPC_ANIM_lakitu_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -984,22 +982,22 @@ StaticNpc N(npcGroup_80246DE4) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -1017,22 +1015,22 @@ StaticNpc N(npcGroup_80246FD4) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -1050,22 +1048,22 @@ StaticNpc N(npcGroup_802471C4) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -1083,22 +1081,22 @@ StaticNpc N(npcGroup_802473B4) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -1116,22 +1114,22 @@ StaticNpc N(npcGroup_802475A4) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -1149,22 +1147,22 @@ StaticNpc N(npcGroup_80247794) = {
     .maxCoinBonus = 1,
     .movement = { 0, 0, 0, 0, 0, -32767 },
     .animations = {
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_3),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_4),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_9),
-        NPC_ANIM(spiny, Palette_00, Anim_6),
-        NPC_ANIM(spiny, Palette_00, Anim_8),
-        NPC_ANIM(spiny, Palette_00, Anim_7),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
-        NPC_ANIM(spiny, Palette_00, Anim_1),
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_3,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_4,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_9,
+        NPC_ANIM_spiny_Palette_00_Anim_6,
+        NPC_ANIM_spiny_Palette_00_Anim_8,
+        NPC_ANIM_spiny_Palette_00_Anim_7,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
+        NPC_ANIM_spiny_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };

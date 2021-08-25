@@ -319,9 +319,6 @@ extern u8 D_800779B0;
 extern u32 D_80078174;
 extern u8 D_800A0963;
 
-extern s32 D_8009A5D0;
-extern s32 D_8009A678;
-
 extern UNK_TYPE D_802EB3B0;
 extern UNK_TYPE D_00000094;
 extern UNK_TYPE D_00000094_2; // two symbols resolve to the same addr. Required for matching
@@ -372,14 +369,11 @@ extern u32* D_802EAE7C;
 extern s32 D_80291FA8[];
 extern s32 D_80291FD0[];
 extern s32 D_80291FF8[];
-extern s32 D_80291FF8[];
 extern s32 D_80292020[];
 extern s32 D_80292048[];
 extern s32 D_80292070[];
 extern s32 D_80292098[];
-extern s32 D_80292098[];
 extern s32 D_802920C0[];
-extern s32 D_802920E8[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];
 

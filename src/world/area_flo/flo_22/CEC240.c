@@ -97,7 +97,7 @@ EvtSource N(defeat_802405E4) = SCRIPT({
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(bzzap, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_bzzap_Palette_00_Anim_1);
             SetNpcPos(NPC_SELF, 30, 60, 0);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 0);
@@ -142,14 +142,14 @@ EvtSource N(defeat_80240810) = SCRIPT({
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 3 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(dayzee, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 2.0);
             NpcJump0(NPC_SELF, 30, 0, 0, 15);
             SetNpcPos(NPC_SELF, 0, -1000, 0);
         }
         == 2 {
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(dayzee, Palette_00, Anim_1));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_dayzee_Palette_00_Anim_1);
             sleep 10;
             SetNpcJumpscale(NPC_SELF, 2.0);
             NpcJump0(NPC_SELF, 30, 0, 0, 15);
@@ -174,22 +174,22 @@ StaticNpc N(npcGroup_80240A04) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_3),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_6),
-        NPC_ANIM(bzzap, Palette_00, Anim_4),
-        NPC_ANIM(bzzap, Palette_00, Anim_2),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
-        NPC_ANIM(bzzap, Palette_00, Anim_1),
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_3,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_6,
+        NPC_ANIM_bzzap_Palette_00_Anim_4,
+        NPC_ANIM_bzzap_Palette_00_Anim_2,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
+        NPC_ANIM_bzzap_Palette_00_Anim_1,
     },
 };
 
@@ -210,22 +210,22 @@ StaticNpc N(npcGroup_80240BF4) = {
     .flowerDrops = STANDARD_FLOWER_DROPS(4),
     .maxCoinBonus = 3,
     .animations = {
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_2),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_3),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_8),
-        NPC_ANIM(dayzee, Palette_00, Anim_6),
-        NPC_ANIM(dayzee, Palette_00, Anim_7),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
-        NPC_ANIM(dayzee, Palette_00, Anim_1),
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_2,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_3,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_8,
+        NPC_ANIM_dayzee_Palette_00_Anim_6,
+        NPC_ANIM_dayzee_Palette_00_Anim_7,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
+        NPC_ANIM_dayzee_Palette_00_Anim_1,
     },
     .unk_1E0 = { 00, 00, 00, 03, 00, 00, 00, 00},
 };
@@ -334,17 +334,17 @@ EvtSource N(80241028) = SCRIPT({
                 NpcFacePlayer(NPC_BZZAP, 0);
                 sleep 1;
                 SetNpcPos(NPC_BZZAP, 30, 0, 0);
-                SetNpcAnimation(NPC_BZZAP, NPC_ANIM(bzzap, Palette_00, Anim_1));
+                SetNpcAnimation(NPC_BZZAP, NPC_ANIM_bzzap_Palette_00_Anim_1);
                 NpcJump0(NPC_BZZAP, 30, 60, 0, 20);
                 sleep 10;
-                SetNpcAnimation(NPC_BZZAP, NPC_ANIM(bzzap, Palette_00, Anim_4));
+                SetNpcAnimation(NPC_BZZAP, NPC_ANIM_bzzap_Palette_00_Anim_4);
                 GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
                 SI_VAR(1) += 20;
                 NpcJump0(NPC_BZZAP, SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
                 SI_MAP_VAR(10) = 1;
             } else {
                 SetNpcPos(NPC_DAYZEE, 30, 0, 0);
-                SetNpcAnimation(NPC_DAYZEE, NPC_ANIM(dayzee, Palette_00, Anim_E));
+                SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_E);
                 GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
                 SI_VAR(1) += 20;
                 SetNpcJumpscale(NPC_DAYZEE, 2.0);

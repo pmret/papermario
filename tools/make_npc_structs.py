@@ -219,7 +219,7 @@ def get_vals(fd, offset, var):
                 data = unpack_from('>H', fd, offset)[0]
                 fmt = "d"
                 offset += 2
-            elif var["type"]  == "s32" or var["type"] in ("NpcID", "NpcAnimID", "MessageID", "BattleID"):
+            elif var["type"]  == "s32" or var["type"] in ("NpcID", "s32", "MessageID", "s32"):
                 poff = offset
                 offset += offset % 4
                 data = unpack_from('>i', fd, offset)[0]
@@ -545,7 +545,7 @@ def MacroReplaceStaticNPC(fd):
                 sprite =  CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
                 palette = CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
                 anim =    CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
-                new_line += "    " * (indent+1) + f"NPC_ANIM({sprite}, {palette}, {anim}),\n"
+                new_line += "    " * (indent+1) + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
             new_line += "    " * indent + "},"
             out.append(new_line)
             i = x

@@ -10,7 +10,6 @@ from glob import glob
 # Configuration:
 VERSIONS = ["us", "jp"]
 DO_SHA1_CHECK = True
-DO_FIRST_OK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
@@ -41,7 +40,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     else:
         raise Exception(f"unsupported platform {sys.platform}")
 
-    ccache = ""
+    ccache = "ccache "
 
     try:
         subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -49,14 +48,14 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
         ccache = ""
 
     cross = "mips-linux-gnu-"
-    cc = f"{ccache}{BUILD_TOOLS}/cc/gcc/gcc"
-    cxx = f"{ccache}{BUILD_TOOLS}/cc/gcc/g++"
+    cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
+    cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
     compile_script = f"$python {BUILD_TOOLS}/cc_dsl/compile_script.py"
 
     CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
                 "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -72,7 +71,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("sha1sum",
         description="check $in",
-        command="sha1sum -c $in && touch $out" + ("&& bash tools/build/first_ok.sh" if DO_FIRST_OK else "") if DO_SHA1_CHECK else "touch $out",
+        command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
     )
 
     ninja.rule("cpp",
@@ -82,7 +81,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cc",
         description="cc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cc} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cc} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -96,7 +95,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
 
     ninja.rule("cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {cxx} {cflags} $cflags $out.i -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {cppflags} -MD -MF $out.d $in -o - | {iconv} > $out.i && {ccache}{cxx} {cflags} $cflags $out.i -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -630,12 +629,13 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(VERSIONS))
     parser.add_argument("--cpp", help="GNU C preprocessor command")
-    parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
+    parser.add_argument("-c", "--clean", action="store_true", help="Delete assets and previously-built files")
     parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
     parser.add_argument("--split-code", action="store_true", help="Re-split code segments to asm files")
     parser.add_argument("--no-split-assets", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
+    parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -694,6 +694,9 @@ if __name__ == "__main__":
     elif args.debug:
         # g1 doesn't affect codegen
         cflags += " -g1"
+
+    if not args.no_warn:
+        cflags += "-Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
     # add splat to python import path
     sys.path.append(str((ROOT / args.splat).resolve()))

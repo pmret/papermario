@@ -73,7 +73,7 @@ glabel battle_item_strange_cake_func_802A123C_73153C
 /* 731648 802A1348 24C6FF98 */  addiu     $a2, $a2, -0x68
 /* 73164C 802A134C 0C051261 */  jal       set_hud_element_render_pos
 /* 731650 802A1350 02663023 */   subu     $a2, $s3, $a2
-/* 731654 802A1354 0C0511F8 */  jal       draw_icon_2
+/* 731654 802A1354 0C0511F8 */  jal       draw_hud_element_3
 /* 731658 802A1358 0200202D */   daddu    $a0, $s0, $zero
 /* 73165C 802A135C 2A220005 */  slti      $v0, $s1, 5
 /* 731660 802A1360 1440FFED */  bnez      $v0, .L802A1318
@@ -99,7 +99,7 @@ glabel battle_item_strange_cake_func_802A123C_73153C
 /* 7316B0 802A13B0 2442FF98 */  addiu     $v0, $v0, -0x68
 /* 7316B4 802A13B4 0C051261 */  jal       set_hud_element_render_pos
 /* 7316B8 802A13B8 00C23023 */   subu     $a2, $a2, $v0
-/* 7316BC 802A13BC 0C0511F8 */  jal       draw_icon_2
+/* 7316BC 802A13BC 0C0511F8 */  jal       draw_hud_element_3
 /* 7316C0 802A13C0 0200202D */   daddu    $a0, $s0, $zero
 .L802A13C4:
 /* 7316C4 802A13C4 8FBF0064 */  lw        $ra, 0x64($sp)

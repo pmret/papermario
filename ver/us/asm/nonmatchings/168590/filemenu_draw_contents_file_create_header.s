@@ -46,7 +46,7 @@ glabel filemenu_draw_contents_file_create_header
 /* 168AB8 80248258 16000006 */  bnez      $s0, .L80248274
 /* 168ABC 8024825C 00000000 */   nop
 /* 168AC0 80248260 8E440004 */  lw        $a0, 4($s2)
-/* 168AC4 80248264 0C0511F8 */  jal       draw_icon_2
+/* 168AC4 80248264 0C0511F8 */  jal       draw_hud_element_3
 /* 168AC8 80248268 2631000B */   addiu    $s1, $s1, 0xb
 /* 168ACC 8024826C 080920A1 */  j         .L80248284
 /* 168AD0 80248270 26100001 */   addiu    $s0, $s0, 1

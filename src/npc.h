@@ -20,11 +20,11 @@ void init_npc_list(void);
 /// Presumably did something once upon a time but got commented out.
 void npc_iter_no_op(void);
 
-s32 _create_npc(NpcBlueprint* blueprint, NpcAnimID** animList, s32 skipLoadingAnims);
+s32 _create_npc(NpcBlueprint* blueprint, s32** animList, s32 skipLoadingAnims);
 
 s32 _create_npc_basic(NpcBlueprint* blueprint);
 
-void _create_npc_standard(NpcBlueprint* blueprint, NpcAnimID** animList);
+s32 _create_npc_standard(NpcBlueprint* blueprint, s32** animList);
 
 void _create_npc_partner(NpcBlueprint* blueprint);
 

@@ -7,8 +7,6 @@
 #include "enums.h"
 
 f32 fabsf(f32 f);
-f32 sqrtf(f32 f);
-f64 sqrt(f64 d);
 f32 cosine(s16 arg0);
 
 s32 strcmp(const char* str1, const char* str2);
@@ -32,7 +30,7 @@ s32 get_area_flag(s32 index);
 
 Shadow* get_shadow_by_index(s32 index);
 s32 get_time_freeze_mode(void);
-void render_player_model();
+void render_player_model(void);
 s16 get_game_mode(void);
 s32 is_picking_up_item(void);
 
@@ -54,7 +52,6 @@ void player_input_to_move_vector(f32* angle, f32* magnitude);
 void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3);
 f32 func_800E5348(void);
 
-void transform_point(Matrix4f mtx, f32, f32, f32, f32, f32*, f32*, f32*, f32*);
 void draw_number(s32 value, s32 x, s32 y, s32 arg3, s32 palette, s32 opacity, s32 style);
 
 void set_entity_model_render_command_list(s32 idx, u32* commandList);
@@ -114,9 +111,6 @@ void entity_HugeBlueSwitch_init(Entity* entity);
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event);
 
-// todo remove once we have libultra's def
-extern void guOrtho(Mtx *m, float l, float r, float b, float t,
-		    float n, float f, float scale);
 // Text
 MessagePrintState* msg_get_printer_for_string(s32 stringID, s32* a1);
 
@@ -151,9 +145,9 @@ void get_dpad_input_radial(f32* angle, f32* magnitude);
 void transform_point(Matrix4f mtx, f32 inX, f32 inY, f32 inZ, f32 inS, f32* outX, f32* outY, f32* outZ, f32* outS);
 void try_player_footstep_sounds(s32 arg0);
 void phys_update_interact_collider(void);
-void phys_adjust_cam_on_landing();
-void phys_init_integrator_for_current_state();
-void phys_player_land();
+void phys_adjust_cam_on_landing(void);
+void phys_init_integrator_for_current_state(void);
+void phys_player_land(void);
 
 void create_popup_menu(void*);
 s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
@@ -190,7 +184,6 @@ s32 sign(s32 value);
 s32 func_80055448(s32);
 s32 func_80055464(s32, s32);
 void func_800561A4(s32);
-s32 osGetId();
 
 s32 battle_heap_create(void);
 void filemenu_init(s32);
@@ -292,8 +285,8 @@ void set_cam_viewport(s16 id, s16 x, s16 y, s16 width, s16 height);
 void disable_player_shadow(void);
 void move_player(s32 duration, f32 heading, f32 speed);
 s32 enable_player_input(void);
-s32 check_input_jump();
-s32 check_input_hammer();
+s32 check_input_jump(void);
+s32 check_input_hammer(void);
 
 Npc* get_npc_safe(NpcID npcId);
 Npc* get_npc_unsafe(NpcID npcId);
@@ -322,8 +315,6 @@ void enemy_create_target_list(Actor* actor);
 
 void set_actor_yaw(ActorID actorID, s32 yaw);
 void set_part_yaw(ActorID actorID, s32 partIndex, s32 value);
-
-ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 
 void add_part_decoration(ActorPart* part, s32 decorationIndex, DecorationID decorationType);
 void add_actor_decoration(Actor* actor, s32 decorationIndex, DecorationID decorationType);
@@ -372,7 +363,6 @@ void state_step_title_screen(void);
 void state_drawUI_title_screen(void);
 void state_init_enter_demo(void);
 void state_step_enter_world(void);
-void state_drawUI_enter_world(void);
 void state_init_change_map(void);
 void state_step_change_map(void);
 void state_drawUI_change_map(void);
@@ -380,7 +370,6 @@ void func_80036430(void);
 void func_8003646C(void);
 void func_80036640(void);
 void state_init_enter_world(void);
-void state_step_enter_world(void);
 void state_drawUI_enter_world(void);
 void state_init_world(void);
 void state_step_world(void);
@@ -417,11 +406,6 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 
 void func_802B2078(void);
-extern f32 gCurtainScale;
-extern f32 gCurtainScaleGoal;
-extern f32 gCurtainFade;
-extern f32 gCurtainFadeGoal;
-extern UNK_FUN_PTR(gCurtainDrawCallback);
 void spr_update_player_sprite(s32, s32, f32);
 
 void initialize_curtains(void);
@@ -463,9 +447,7 @@ void DeadUnkNpcAIFunc1(Evt* script, NpcAISettings* aiSettings, EnemyTerritoryThi
 s32* spr_get_npc_palettes(u16 arg0);
 void spr_draw_player_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 void spr_draw_npc_sprite(s32 arg0, s32 arg1, s32 arg2, s32 arg3, Matrix4f* arg4);
-void guRotateRPYF(float mf[4][4], f32 x, f32 y, f32 z);
 s32 spr_update_sprite(s32 arg0, s32 arg1, f32 arg2);
-s32 npc_raycast_down_ahead(s32, f32*, f32*, f32*, f32*, f32, f32);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 

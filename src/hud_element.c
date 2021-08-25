@@ -43,11 +43,21 @@ extern void* D_80157964;
 extern void* D_80158570;
 extern void* D_80151314;
 
-INCLUDE_ASM(s32, "hud_element", load_hud_element);
+INCLUDE_ASM(void, "hud_element", load_hud_element, HudElement* hudElement, const HudElementAnim* anim);
 
-INCLUDE_ASM(s32, "hud_element", draw_rect_hud_element);
+INCLUDE_ASM(void, "hud_element", draw_rect_hud_element,
+    HudElement* hudElement,
+    s32 texSizeX,
+    s32 texSizeY,
+    s32 drawSizeX,
+    s32 drawSizeY,
+    s32 offsetX,
+    s32 offsetY,
+    s32 clamp,
+    s32 dropShadow
+)
 
-INCLUDE_ASM(s32, "hud_element", clear_hud_element_cache);
+INCLUDE_ASM(void, "hud_element", clear_hud_element_cache, void);
 
 void init_hud_element_list(void) {
     if (!gGameStatusPtr->isBattle) {
@@ -132,17 +142,17 @@ s32 create_hud_element(const HudElementAnim* anim) {
 INCLUDE_ASM(s32, "hud_element", create_hud_element, const HudElementAnim* anim);
 #endif
 
-INCLUDE_ASM(s32, "hud_element", update_hud_elements);
+INCLUDE_ASM(void, "hud_element", update_hud_elements, void);
 
-INCLUDE_ASM(s32, "hud_element", hud_element_update);
+INCLUDE_ASM(s32, "hud_element", hud_element_update, HudElement* hudElement);
 
-INCLUDE_ASM(s32, "hud_element", render_hud_elements_backUI);
+INCLUDE_ASM(void, "hud_element", render_hud_elements_backUI, void);
 
-INCLUDE_ASM(s32, "hud_element", render_hud_elements_frontUI);
+INCLUDE_ASM(void, "hud_element", render_hud_elements_frontUI, void);
 
-INCLUDE_ASM(s32, "hud_element", render_hud_element);
+INCLUDE_ASM(void, "hud_element", render_hud_element, HudElement* hudElement);
 
-INCLUDE_ASM(s32, "hud_element", render_hud_elements_world);
+INCLUDE_ASM(void, "hud_element", render_hud_elements_world, void);
 
 INCLUDE_ASM(void, "hud_element", func_80143C48, s32 arg0, s32 arg1, s32 arg2);
 
@@ -162,7 +172,7 @@ void func_80144278(s32 arg0) {
     func_80143C48(arg0, 0, 1);
 }
 
-INCLUDE_ASM(s32, "hud_element", draw_hud_element);
+INCLUDE_ASM(void, "hud_element", draw_hud_element, s32 id, s32 clipMode);
 
 void draw_hud_element_clipped(s32 id) {
     draw_hud_element(id, 0);
@@ -172,7 +182,7 @@ void draw_hud_element_2(s32 id) {
     draw_hud_element(id, 1);
 }
 
-void draw_icon_2(s32 id) {
+void draw_hud_element_3(s32 id) {
     draw_hud_element(id, 2);
 }
 
@@ -233,7 +243,7 @@ void get_hud_element_render_pos(s32 id, s32* x, s32* y) {
     *y = hudElement->renderPosY;
 }
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_render_depth);
+INCLUDE_ASM(void, "hud_element", set_hud_element_render_depth, s32 id, s32 z);
 
 void set_hud_element_flags(s32 id, s32 flags) {
     hudElements[id & ~0x800]->flags |= flags;
@@ -243,7 +253,7 @@ void clear_hud_element_flags(s32 id, s32 flags) {
     hudElements[id & ~0x800]->flags &= ~flags;
 }
 
-INCLUDE_ASM(s32, "hud_element", ALT_clear_hud_element_cache);
+INCLUDE_ASM(void, "hud_element", ALT_clear_hud_element_cache, void);
 
 INCLUDE_ASM(void, "hud_element", set_hud_element_scale, s32 index, f32 scale);
 
@@ -287,11 +297,11 @@ void set_hud_element_tint(s32 id, s32 r, s32 g, s32 b) {
     hudElement->tint.b = b;
 }
 
-INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_A);
+INCLUDE_ASM(void, "hud_element", create_hud_element_transform_A, s32 id);
 
-INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_B);
+INCLUDE_ASM(void, "hud_element", create_hud_element_transform_B, s32 id);
 
-INCLUDE_ASM(s32, "hud_element", create_hud_element_transform_C);
+INCLUDE_ASM(void, "hud_element", create_hud_element_transform_C, s32 id);
 
 void free_hud_element_transform(s32 id) {
     HudElement* hudElement = hudElements[id & ~0x800];
@@ -306,14 +316,14 @@ void free_hud_element_transform(s32 id) {
     hudElement->flags &= ~0x40030000;
 }
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_pos);
+INCLUDE_ASM(void, "hud_element", set_hud_element_transform_pos, s32 id, f32 x, f32 y, f32 z);
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_scale);
+INCLUDE_ASM(void, "hud_element", set_hud_element_transform_scale, s32 id, f32 x, f32 y, f32 z);
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_rotation);
+INCLUDE_ASM(void, "hud_element", set_hud_element_transform_rotation, s32 id, f32 x, f32 y, f32 z);
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_transform_rotation_pivot);
+INCLUDE_ASM(void, "hud_element", set_hud_element_transform_rotation_pivot, s32 id, s32 dx, s32 dy);
 
-INCLUDE_ASM(s32, "hud_element", copy_world_hud_element_ref_to_battle);
+INCLUDE_ASM(void, "hud_element", copy_world_hud_element_ref_to_battle, s32 worldID, s32 battleID);
 
-INCLUDE_ASM(s32, "hud_element", set_hud_element_nonworld_cache);
+INCLUDE_ASM(void, "hud_element", set_hud_element_nonworld_cache, void* base, size_t size);

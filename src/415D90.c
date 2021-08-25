@@ -602,7 +602,7 @@ void func_802A5290(s32 arg0, s32 x, s32 y) {
 
                 set_hud_element_render_pos(iconIndex, xTemp, phi_s1_2);
                 set_hud_element_alpha(iconIndex, D_802AD624);
-                draw_icon_2(iconIndex);
+                draw_hud_element_3(iconIndex);
             }
 
             temp_s1_3 = (D_802AD605 - D_802AD608) * 13;

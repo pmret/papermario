@@ -30,7 +30,7 @@ glabel pause_textbox_draw_contents
 /* 136914 802435D4 0C051261 */  jal       set_hud_element_render_pos
 /* 136918 802435D8 26860004 */   addiu    $a2, $s4, 4
 /* 13691C 802435DC 8E040004 */  lw        $a0, 4($s0)
-/* 136920 802435E0 0C0511F8 */  jal       draw_icon_2
+/* 136920 802435E0 0C0511F8 */  jal       draw_hud_element_3
 /* 136924 802435E4 00000000 */   nop
 /* 136928 802435E8 8E220000 */  lw        $v0, ($s1)
 .L802435EC:
@@ -47,7 +47,7 @@ glabel pause_textbox_draw_contents
 /* 136954 80243614 0C051261 */  jal       set_hud_element_render_pos
 /* 136958 80243618 24C6FFFC */   addiu    $a2, $a2, -4
 /* 13695C 8024361C 8E040008 */  lw        $a0, 8($s0)
-/* 136960 80243620 0C0511F8 */  jal       draw_icon_2
+/* 136960 80243620 0C0511F8 */  jal       draw_hud_element_3
 /* 136964 80243624 00000000 */   nop
 .L80243628:
 /* 136968 80243628 0240202D */  daddu     $a0, $s2, $zero
@@ -153,7 +153,7 @@ glabel pause_textbox_draw_contents
 /* 136AF8 802437B8 8E04000C */  lw        $a0, 0xc($s0)
 /* 136AFC 802437BC 0C051308 */  jal       set_hud_element_scale
 /* 136B00 802437C0 3C053F80 */   lui      $a1, 0x3f80
-/* 136B04 802437C4 0C0511F8 */  jal       draw_icon_2
+/* 136B04 802437C4 0C0511F8 */  jal       draw_hud_element_3
 /* 136B08 802437C8 8E04000C */   lw       $a0, 0xc($s0)
 .L802437CC:
 /* 136B0C 802437CC 8FBF0034 */  lw        $ra, 0x34($sp)

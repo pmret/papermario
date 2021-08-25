@@ -238,7 +238,7 @@ EvtSource N(80241C14) = SCRIPT({
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     sleep 20;
-    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x00C5));
+    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x00C5));
     sleep 10;
     GotoMap("flo_10", 1);
     sleep 100;
@@ -255,7 +255,7 @@ EvtSource N(80241DBC) = SCRIPT({
     if (SI_AREA_FLAG(6) == 1) {
         return;
     }
-    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0068));
+    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0068));
     spawn {
         SetCamDistance(0, 300);
         SetCamPitch(0, 18.0, -7.5);
@@ -264,7 +264,7 @@ EvtSource N(80241DBC) = SCRIPT({
     }
     PlaySound(0x8000006B);
     SI_MAP_VAR(0) = spawn N(80241D6C);
-    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_6), NPC_ANIM(posie, Palette_00, Anim_6), 0, MESSAGE_ID(0x11, 0x0069));
+    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_6, NPC_ANIM_posie_Palette_00_Anim_6, 0, MESSAGE_ID(0x11, 0x0069));
     kill SI_MAP_VAR(0);
     SetCamDistance(0, 350);
     SetCamPitch(0, 18.0, -7.5);
@@ -284,7 +284,7 @@ EvtSource N(80241DBC) = SCRIPT({
     func_802D62E4(956);
     SI_AREA_FLAG(6) = 1;
     sleep 20;
-    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006A));
+    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006A));
     SI_STORY_PROGRESS = STORY_CH6_GOT_CRYSTAL_BERRY;
 });
 
@@ -294,26 +294,26 @@ EvtSource N(interact_80242044) = SCRIPT({
     match SI_STORY_PROGRESS {
         < STORY_CH6_GOT_MAGICAL_BEAN {
             if (SI_AREA_FLAG(5) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x0070));
                 SI_AREA_FLAG(5) = 1;
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x0071));
             }
         }
         < STORY_CH6_GOT_FERTILE_SOIL {
             AdjustCam(0, 4.0, 0, 350.0, 18.0, -7.5);
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0065));
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_5));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0065));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_5);
             sleep 20;
-            SetNpcAnimation(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_0));
+            SetNpcAnimation(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_0);
             SI_VAR(0) = 89;
             SI_VAR(1) = 1;
             await N(80241BB4);
             AddKeyItem(ITEM_FERTILE_SOIL);
             SI_STORY_PROGRESS = STORY_CH6_GOT_FERTILE_SOIL;
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0066));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0066));
             if (SI_SAVE_FLAG(1379) == 1) {
                 await N(80241DBC);
             }
@@ -326,34 +326,34 @@ EvtSource N(interact_80242044) = SCRIPT({
                     await N(80241DBC);
                     ResetCam(0, 4.0);
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                                   0x0072));
                 }
             } else {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x0072));
             }
         }
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             if (SI_SAVE_FLAG(1374) == 0) {
-                SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                               0x0072));
             } else {
                 if (SI_STORY_PROGRESS < STORY_CH6_GOT_WATER_STONE) {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                                   0x0073));
                 } else {
-                    SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                    SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                                   0x0074));
                 }
-                ContinueSpeech(-1, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+                ContinueSpeech(-1, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                                0x0075));
             }
         }
         < STORY_CH6_RETURNED_TO_TOAD_TOWN {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x0076));
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x0076));
         } else {
-            SpeakToPlayer(NPC_SELF, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_SELF, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                           0x0077));
         }
     }
@@ -379,13 +379,13 @@ EvtSource N(802424F4) = SCRIPT({
         DisablePlayerInput(TRUE);
         sleep 10;
         if (SI_AREA_VAR(3) < 5) {
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                           0x006E));
             GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
             PlayerMoveTo(410, SI_VAR(3), 10);
             SI_AREA_VAR(3) += 1;
         } else {
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_2), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_2, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                           0x006F));
             SI_AREA_VAR(3) = 0;
         }
@@ -400,7 +400,7 @@ EvtSource N(tree1_Callback) = SCRIPT({
     if (SI_STORY_PROGRESS < STORY_CH6_GOT_CRYSTAL_BERRY) {
         NpcFacePlayer(NPC_POSIE, 1);
         sleep 10;
-        SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+        SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                       0x0067));
         if (SI_STORY_PROGRESS == STORY_CH6_GOT_FERTILE_SOIL) {
             if (SI_SAVE_FLAG(1379) == 1) {
@@ -416,19 +416,19 @@ EvtSource N(tree1_Callback) = SCRIPT({
         if (SI_SAVE_FLAG(1374) == 0) {
             NpcFacePlayer(NPC_POSIE, 1);
             sleep 10;
-            SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_4), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11,
+            SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_4, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11,
                           0x0067));
         } else {
             SI_AREA_VAR(2) += 1;
             match SI_AREA_VAR(2) {
                 < 2 {
-                    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_3), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006B));
+                    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006B));
                 }
                 < 5 {
-                    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_3), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006C));
+                    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006C));
                 }
                 >= 5 {
-                    SpeakToPlayer(NPC_POSIE, NPC_ANIM(posie, Palette_00, Anim_3), NPC_ANIM(posie, Palette_00, Anim_1), 0, MESSAGE_ID(0x11, 0x006D));
+                    SpeakToPlayer(NPC_POSIE, NPC_ANIM_posie_Palette_00_Anim_3, NPC_ANIM_posie_Palette_00_Anim_1, 0, MESSAGE_ID(0x11, 0x006D));
                     SI_AREA_VAR(3) = 1;
                     GotoMap(N(flo_25_name_hack), 1);
                     sleep 100;
@@ -475,22 +475,22 @@ StaticNpc N(npcGroup_8024291C) = {
     .heartDrops = NO_DROPS,
     .flowerDrops = NO_DROPS,
     .animations = {
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
-        NPC_ANIM(posie, Palette_00, Anim_1),
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
+        NPC_ANIM_posie_Palette_00_Anim_1,
     },
     .tattle = MESSAGE_ID(0x1A, 0x00DE),
 };

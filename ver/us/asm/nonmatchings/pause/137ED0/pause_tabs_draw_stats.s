@@ -53,7 +53,7 @@ glabel pause_tabs_draw_stats
 /* 137F90 80244C50 0C051261 */  jal       set_hud_element_render_pos
 /* 137F94 80244C54 26660007 */   addiu    $a2, $s3, 7
 /* 137F98 80244C58 8E040000 */  lw        $a0, ($s0)
-/* 137F9C 80244C5C 0C0511F8 */  jal       draw_icon_2
+/* 137F9C 80244C5C 0C0511F8 */  jal       draw_hud_element_3
 /* 137FA0 80244C60 00000000 */   nop
 /* 137FA4 80244C64 3C028027 */  lui       $v0, %hi(gPauseMenuCurrentTab)
 /* 137FA8 80244C68 804200D4 */  lb        $v0, %lo(gPauseMenuCurrentTab)($v0)
