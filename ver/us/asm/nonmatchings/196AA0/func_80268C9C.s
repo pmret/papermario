@@ -99,7 +99,7 @@ glabel L80268DB4_197694
 /* 19769C 80268DBC 0809A390 */  j         .L80268E40
 /* 1976A0 80268DC0 3C05FFFF */   lui      $a1, 0xffff
 glabel L80268DC4_1976A4
-/* 1976A4 80268DC4 0C0AA695 */  jal       func_802A9A54_42D964
+/* 1976A4 80268DC4 0C0AA695 */  jal       action_command_power_shock_free_hud_elements
 /* 1976A8 80268DC8 00000000 */   nop
 /* 1976AC 80268DCC 0809A390 */  j         .L80268E40
 /* 1976B0 80268DD0 3C05FFFF */   lui      $a1, 0xffff
