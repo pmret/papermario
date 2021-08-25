@@ -23,7 +23,7 @@ void func_80269160(void);
 ApiStatus N(CreateHudElements)(Evt* script, s32 isInitialCall) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 temp_v1;
 
     battleStatus->unk_82 = 0x64;
@@ -110,7 +110,7 @@ ApiStatus func_802A9210_42D120(Evt* script, s32 isInitialCall) {
 void func_802A9310_42D220(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     BattleStatus* battleStatus = &gBattleStatus;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 temp_lo;
     s32 temp_v0_2;
     s16 phi_v0;
@@ -297,7 +297,7 @@ void N(draw_hud_elements)(void) {
     ActionCommandStatus* actionCommandStatus = &gActionCommandStatus;
     s32 y;
     s32 x;
-    HudElement* hudElement;
+    s32 hudElement;
     s32 temp_a1;
     s32 temp_v0;
 
