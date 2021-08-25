@@ -2,8 +2,6 @@
 
 #define UNK_ALPHA_FUNC_NPC 6
 
-extern s32 mac_00_dojoBattleIDs[];
-
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80240630_7EB340);
 /*
 ApiStatus N(func_80240630_7EB340)(Evt* script, s32 isInitialCall) {
@@ -377,10 +375,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-ApiStatus func_80242178_7ECE88(Evt* script, s32 isInitialCall) {
+ApiStatus N(SetDojoBattle)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
 
-    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = mac_00_dojoBattleIDs[get_variable(script, SI_SAVE_VAR(28))];
+    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = N(dojoBattleIDs)[get_variable(script, SI_SAVE_VAR(28))];
     return ApiStatus_DONE2;
 }
 
