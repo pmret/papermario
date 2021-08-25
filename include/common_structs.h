@@ -2121,13 +2121,23 @@ typedef struct struct802E4B10 {
     /* 0x00 */ u8 unk_00;
     /* 0x01 */ u8 unk_01;
     /* 0x02 */ s8 unk_02;
-    /* 0x03 */ char unk_03[6];
+    /* 0x03 */ s8 unk_03;
+    /* 0x04 */ f32 unk_04;
+    /* 0x08 */ char unk_08;
     /* 0x09 */ u8 unk_09;
     /* 0x0A */ u8 unk_0A;
     /* 0x0B */ char unk_0B; // padding?
     /* 0x0C */ s32 unk_0C;
     /* 0x10 */ s32 unk_10;
-    /* 0x14 */ char unk_14[0xBC];
+    /* 0x14 */ f32 unk_14;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ u16 unk_24;
+    /* 0x24 */ s16 unk_26;
+    /* 0x28 */ f32 unk_28[0xB];
+    /* 0x54 */ f32 unk_54;
+    /* 0x58 */ char unk_58[0x78];
     /* 0xD0 */ u16 unk_D0;
     /* 0xD4 */ f32 unk_D4[0];
 } struct802E4B10;

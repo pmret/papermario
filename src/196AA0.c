@@ -287,7 +287,7 @@ s32 check_block_input(s32 buttonMask) {
     return block;
 }
 
-INCLUDE_ASM(s32, "196AA0", func_80269118);
+INCLUDE_ASM(void, "196AA0", func_80269118);
 
 INCLUDE_ASM(s32, "196AA0", func_80269160);
 
