@@ -375,7 +375,17 @@ INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80241FF0_7ECD00);
 
 #include "world/common/UnkPositionFunc.inc.c"
 
-INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242178_7ECE88);
+// INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_80242178_7ECE88);
+
+extern s32 mac_00_dojoBattleIDs[];
+extern EncounterStatus gCurrentEncounter;
+
+ApiStatus func_80242178_7ECE88(Evt* script, s32 isInitialCall) {
+    Enemy* enemy = script->owner1.enemy;
+
+    gCurrentEncounter.encounterList[enemy->encounterIndex]->battle = mac_00_dojoBattleIDs[get_variable(script, SI_SAVE_VAR(28))];
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_mac/mac_00/7EB340", func_802421D0_7ECEE0);
 
