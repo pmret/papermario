@@ -3,6 +3,8 @@
 
 extern StaticEntityData D_802EA934;
 
+void entity_SuperBlock_HitEffect_setupGfx();
+
 f32 entity_SuperBlockContent_get_previous_yaw(struct802E4B10* arg0, s32 arg1) {
     s32 idx = arg0->unk_D0 - arg1;
 

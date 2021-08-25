@@ -11,6 +11,8 @@ typedef struct struct802E89B0 {
     /* 0x18 */ f32 unk_18;
 } struct802E89B0;
 
+void entity_BlueWarpPipe_setupGfx();
+
 void entity_BlueWarpPipe_check_if_active(Entity* entity) {
     struct802E89B0* temp_s0;
 

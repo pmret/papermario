@@ -214,6 +214,7 @@ INCLUDE_ASM(f32, "7bb60_len_41b0", player_check_collision_below, f32 arg0, s32* 
 
 INCLUDE_ASM(s32, "7bb60_len_41b0", collision_main_lateral);
 
+s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2);
 //something weird with hitID
 #ifdef NON_MATCHING
 s32 collision_check_player_intersecting_world(s32 arg0, s32 arg1, f32 arg2) {

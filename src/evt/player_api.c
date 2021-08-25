@@ -7,6 +7,9 @@ extern VirtualEntityList D_802DB5C0;
 extern VirtualEntityList D_802DB6C0;
 extern VirtualEntityList* D_802DB7C0;
 
+void virtual_entity_list_render_world(void);
+void virtual_entity_list_render_UI(void);
+
 ApiStatus HidePlayerShadow(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 hideShadow = get_variable(script, *args++);

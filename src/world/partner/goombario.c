@@ -2,6 +2,11 @@
 #include "sprite/npc/world_goombario.h"
 #include "goombario.h"
 
+ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall);
+ApiStatus func_802BD1D0_3170F0(Evt* script, s32 isInitialCall);
+ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall);
+ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall);
+
 s32 func_802BD100_317020(s32 arg0) {
     s32 i;
 
