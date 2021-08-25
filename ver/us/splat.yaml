@@ -3633,6 +3633,7 @@ segments:
     subsegments:
     - [0x42CF10, c, power_shock]
     - [0x42D9B0, data]
+    - [0x42D9D0]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
