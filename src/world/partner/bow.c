@@ -5,9 +5,9 @@ extern s32 D_802BE0C0;
 extern s32 D_802BE0C4;
 
 void func_802BD100_323A50(Npc* partner) {
-    partner->collisionHeight = 0x1A;
-    partner->collisionRadius = 0x18;
-    partner->renderMode = 0x11;
+    partner->collisionHeight = 26;
+    partner->collisionRadius = 24;
+    partner->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
     D_802BE0C4 = 0;
     D_802BE0C0 = 0;
 }

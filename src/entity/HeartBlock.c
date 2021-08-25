@@ -139,11 +139,10 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 data->unk_54 = -10.0f;
                 entity_set_render_script(entity, &D_802EA744);
                 entity->renderSetupFunc = &entity_HeartBlockContent_setupGfx;
-                break;
             }
             break;
         case 2:
-            entity->position.y += sin_rad((data->unk_20 * 6.28318f) / 360.0f) * 0.5f;
+            entity->position.y += sin_rad((data->unk_20 * TAU) / 360.0f) * 0.5f;
             data->unk_20 -= 30.0f;
             if (data->unk_20 < 0.0f) {
                 data->unk_20 += 360.0f;
@@ -175,8 +174,8 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             if (data->unk_18 >= 360.0f) {
                 data->unk_18 -= 360.0f;
             }
-            offsetX = data->unk_1C * sin_rad((data->unk_18 * 6.28318f) / 360.0f);
-            offsetZ = data->unk_1C * cos_rad((data->unk_18 * 6.28318f) / 360.0f);
+            offsetX = data->unk_1C * sin_rad((data->unk_18 * TAU) / 360.0f);
+            offsetZ = data->unk_1C * cos_rad((data->unk_18 * TAU) / 360.0f);
             offsetY = data->unk_04;
     
             data->unk_04 -= 0.7;
@@ -194,7 +193,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             }
             // fallthrough
         case 4:
-            entity->position.y += sin_rad((data->unk_20 * 6.28318f) / 360.0f) * 0.5f;
+            entity->position.y += sin_rad((data->unk_20 * TAU) / 360.0f) * 0.5f;
             data->unk_20 -= 30.0f;
             if (data->unk_20 < 0.0f) {
                 data->unk_20 += 360.0f;
