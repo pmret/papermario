@@ -2,8 +2,8 @@
 
 #define NAMESPACE action_command_squirt
 
-extern s32 D_80108AFC;
-extern s32 D_80108B28;
+extern s32 D_80108AFC[];
+extern s32 D_80108B28[];
 extern s32 D_80294380;
 
 ApiStatus func_802A9000_429D20(void) {
@@ -29,13 +29,13 @@ ApiStatus func_802A9000_429D20(void) {
     actionCommandStatus->unk_5C = 0;
     actionCommandStatus->hudElementY = 80;
 
-    hudElement = create_hud_element(&D_80108B28);
+    hudElement = create_hud_element(D_80108B28);
     actionCommandStatus->hudElements[0] = hudElement;
     set_hud_element_flags(hudElement, 0x82);
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY);
     set_hud_element_render_depth(hudElement, 0);
 
-    hudElement = create_hud_element(&D_80108AFC);    
+    hudElement = create_hud_element(D_80108AFC);    
     actionCommandStatus->hudElements[1] = hudElement;    
     set_hud_element_render_pos(hudElement, actionCommandStatus->hudElementX, actionCommandStatus->hudElementY + 28);    
     set_hud_element_render_depth(hudElement, 0);    

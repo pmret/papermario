@@ -474,4 +474,7 @@ s32 entity_start_script(Npc* npc);
 s32 remove_item_entity_by_index(s32 index); // might not actually return anything
 void set_entity_commandlist(Entity* entity, s32* entityScript);
 void func_800EF3E4(void);
+void func_80268858(void);
+void func_80269118(void);
+s32 func_80268224(s32);
 #endif
