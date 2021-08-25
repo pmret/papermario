@@ -1,6 +1,7 @@
 #include "arn_02.h"
 #include "sprite/npc/cleft.h"
 #include "sprite/npc/goomba.h"
+#include "effects.h"
 
 EvtSource N(exitWalk_802410F0) = EXIT_WALK_SCRIPT(60,  0, "arn_05",  1);
 

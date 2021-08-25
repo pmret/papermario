@@ -295,9 +295,6 @@ extern s32 D_8010C978;
 extern PartnerActionStatus gPartnerActionStatus; // something with partners
 extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 
-// Effects
-extern EffectTableEntry gEffectTable[135];
-
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
