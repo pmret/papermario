@@ -55,7 +55,7 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, cppflags: str, extra
     CPPFLAGS = "-w -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM -DVERSION=$version " \
                 "-ffreestanding -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
 
-    cflags = f"-c -G0 -O2 -fno-common -Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -fno-common -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     ninja.variable("python", sys.executable)
 
@@ -629,12 +629,13 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="Paper Mario build.ninja generator")
     parser.add_argument("version", nargs="*", default=[], help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: " + ','.join(VERSIONS))
     parser.add_argument("--cpp", help="GNU C preprocessor command")
-    parser.add_argument("--clean", action="store_true", help="Delete assets and previously-built files")
+    parser.add_argument("-c", "--clean", action="store_true", help="Delete assets and previously-built files")
     parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
     parser.add_argument("--split-code", action="store_true", help="Re-split code segments to asm files")
     parser.add_argument("--no-split-assets", action="store_true", help="Don't split assets from the baserom(s)")
     parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument("-n", "--non-matching", action="store_true", help="Compile nonmatching code. Combine with --debug for more detailed debug info")
+    parser.add_argument("-w", "--no-warn", action="store_true", help="Inhibit compiler warnings")
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -693,6 +694,9 @@ if __name__ == "__main__":
     elif args.debug:
         # g1 doesn't affect codegen
         cflags += " -g1"
+
+    if not args.no_warn:
+        cflags += "-Wuninitialized -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
     # add splat to python import path
     sys.path.append(str((ROOT / args.splat).resolve()))

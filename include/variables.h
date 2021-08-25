@@ -373,7 +373,6 @@ extern s32 D_80292020[];
 extern s32 D_80292048[];
 extern s32 D_80292070[];
 extern s32 D_80292098[];
-extern s32 D_80292098[];
 extern s32 D_802920C0[];
 extern s32 D_802920E8[];
 extern s32 D_80292110[];

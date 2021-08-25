@@ -184,7 +184,9 @@ class LinkerWriter():
             value = f"0x{value:X}"
 
         self._writeln(f"{symbol} = {value};")
-        self.symbols.append(symbol)
+
+        if symbol not in self.symbols:
+            self.symbols.append(symbol)
 
     def _begin_segment(self, segment: Segment, mid_segment=False):
         # force location if not shiftable/auto

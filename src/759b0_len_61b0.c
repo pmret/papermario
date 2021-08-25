@@ -4,7 +4,7 @@ PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 
 INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down);
 
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_ahead);
+INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_ahead, s32, f32*, f32*, f32*, f32*, f32, f32);
 
 INCLUDE_ASM(s32, "759b0_len_61b0", npc_raycast_down_sides, s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg4);
 
@@ -147,4 +147,4 @@ s32 npc_test_move_simple_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* 
 }
 
 
-INCLUDE_ASM(s32, "759b0_len_61b0", npc_test_move_complex_with_slipping);
+INCLUDE_ASM(s32, "759b0_len_61b0", npc_test_move_complex_with_slipping, s32, f32*, f32*, f32*, f32, f32, f32, f32);

@@ -102,7 +102,7 @@ void phys_init_integrator_for_current_state(void) {
     }
 }
 #else
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state);
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_init_integrator_for_current_state, void);
 #endif // NON_MATCHING
 
 // This function is wack. This weird stuff is needed to match
@@ -184,7 +184,7 @@ void func_800E315C(s32 colliderID) {
 INCLUDE_ASM(s32, "7bb60_len_41b0", func_800E315C);
 #endif
 
-INCLUDE_ASM(void, "7bb60_len_41b0", phys_player_land);
+INCLUDE_ASM(void, "7bb60_len_41b0", phys_player_land, void);
 
 f32 integrate_gravity(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
