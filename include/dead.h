@@ -18,6 +18,5 @@
 #define clamp_angle dead_clamp_angle
 #define rand_int dead_rand_int
 #define gItemTable dead_gItemTable
-#define LOOKUP_ITEM(itemID) DEAD_LOOKUP_ITEM(itemID)
 
 #endif
