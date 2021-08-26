@@ -43,6 +43,9 @@ def main():
             with open(args.currentwarnings) as current:
                 current = current.readlines()
                 for newLine in new:
+                    if "warning: previous declaration of" in newLine:
+                        continue
+
                     if newLine not in current:
                         if stderr:
                             print(newLine.strip(), file=sys.stderr)
