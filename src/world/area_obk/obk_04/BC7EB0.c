@@ -49,7 +49,11 @@ INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240C10_BC8A70);
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240CA0_BC8B00);
 
-INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240D00_BC8B60);
+// INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240D00_BC8B60);
+ApiStatus func_80240D00_BC8B60(Evt* script, s32 isInitialCall) {
+    gPlayerData.bootsLevel = 1;
+    return ApiStatus_DONE2;
+}
 
 INCLUDE_ASM(s32, "world/area_obk/obk_04/BC7EB0", func_80240D14_BC8B74);
 
