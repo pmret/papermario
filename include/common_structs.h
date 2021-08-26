@@ -2240,7 +2240,7 @@ typedef struct RenderTaskEntry {
 
 typedef struct ActionCommandStatus {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ struct HudElement* hudElements[15];
+    /* 0x04 */ s32 hudElements[15];
     /* 0x40 */ char unk_40[0x4];
     /* 0x44 */ s16 unk_44;
     /* 0x46 */ s16 unk_46;
