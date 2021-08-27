@@ -654,9 +654,9 @@ ShadowList* get_shadow_list(void) {
     return ret;
 }
 
-s32 entity_start_script(Npc* npc) {
-    if (npc->currentAnim.w != 0) {
-        npc->flags |= 0x1000000;
+s32 entity_start_script(Entity* entity) {
+    if (entity->boundScriptBytecode != NULL) {
+        entity->flags |= 0x1000000;
         return 1;
     }
     return 0;
@@ -850,7 +850,7 @@ INCLUDE_ASM(s32, "a5dd0_len_114e0", func_80111790);
 INCLUDE_ASM(void, "a5dd0_len_114e0", entity_free_static_data, StaticEntityData* data);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_entity, StaticEntityData* data, s32 x, s32 y, s32 z, s32 arg4,
-            s32 flags);
+            ...);
 
 INCLUDE_ASM(s32, "a5dd0_len_114e0", create_shadow_from_data);
 
