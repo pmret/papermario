@@ -27,7 +27,7 @@ void func_802BC2BC_E30C0C(Entity* entity) {
     f32 x,y,z,sp2C;
     s32 result = 0;
 
-    if (((currentFloor & 0x4000) != 0) && ((currentFloor & 0xFF) == entity->listIndex) && (actionState == 0x12)) {
+    if ((currentFloor & 0x4000) && ((currentFloor & 0xFF) == entity->listIndex) && (actionState == ACTION_STATE_HAMMER)) {
         x = playerStatus->position.x;
         y = playerStatus->position.y + 5.0f;
         z = playerStatus->position.z;
@@ -35,18 +35,18 @@ void func_802BC2BC_E30C0C(Entity* entity) {
 
         add_vec2D_polar(&x, &z, 10.0f, func_800E5348());
         if (npc_raycast_down_sides(0x10000, &x, &y, &z, &sp2C) != 0) {
-            if ((D_8010C978 & 0x4000) != 0) {
+            if (D_8010C978 & 0x4000) {
                 result = get_entity_type(D_8010C978) == 0x31;
             }
         }
-    } else if (((entity->collisionFlags & 1) != 0) && ((actionState == 0xE) || (actionState == 0x10))) {
+    } else if ((entity->collisionFlags & 1) && ((actionState == ACTION_STATE_GROUND_POUND) || (actionState == ACTION_STATE_ULTRA_POUND))) {
         result = 1;
-    } else if ((entity->collisionFlags & 0x40) != 0) {
+    } else if (entity->collisionFlags & 0x40) {
         result = -1;
     }
 
     if (result != 0) {
-        data->unk_02 &= 0xFE;
+        data->unk_02 &= ~1;
         playFX_18(3, entity->position.x, entity->position.y + 35.0f, entity->position.z, 0, -1.0f, 0, 3);
         if (result > 0) {
             data->unk_02 |= 1;
@@ -89,14 +89,14 @@ void func_802BC558_E30EA8(Entity* entity) {
 INCLUDE_ASM(s32, "entity/sbk_omo/E307C0", func_802BC570_E30EC0);
 
 void func_802BC99C_E312EC(Entity* entity) {
-    if ((entity->flags & 0x2000000) == 0) {
+    if (!(entity->flags & 0x2000000)) {
         exec_entity_commandlist(entity);
     }
 }
 
 void func_802BC9CC_E3131C(Entity* entity) {
     structE307C0* data = (structE307C0*)entity->dataBuf;
-    if ((data->unk_02 & 1) != 0) {
+    if (data->unk_02 & 1) {
         entity_start_script(entity);
     }
 }

@@ -40,11 +40,10 @@ void func_802BC00C_E2E93C(Entity* entity) {
 }
 
 void func_802BC050_E2E980(Entity* entity) {
-    Entity* other;
-
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if ((entity->collisionFlags & 1) != 0) {
+    if (entity->collisionFlags & 1) {
+        Entity* other;
         gPlayerStatus.animFlags |= 4;
         func_800EF300();
         other = get_entity_by_index(entity->dataBuf[0]);

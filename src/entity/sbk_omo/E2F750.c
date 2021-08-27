@@ -49,7 +49,6 @@ INCLUDE_ASM(s32, "entity/sbk_omo/E2F750", func_802BB7E0_E30130);
 
 void func_802BB8E4_E30234(Entity* entity) {
     structE2F750* data = (structE2F750*)entity->dataBuf;
-    f32 temp_f0;
     f32 temp_f20_2;
 
     f32 temp_f4 = (atan2(entity->position.x, entity->position.z, data->unk_A4, data->unk_A8) - data->unk_B8) * 0.03125f;
@@ -60,9 +59,8 @@ void func_802BB8E4_E30234(Entity* entity) {
         temp_f4 = -0.01f;
     }
 
-    temp_f0 = clamp_angle(data->unk_B8 + temp_f4);
-    data->unk_B8 = temp_f0;
-    temp_f20_2 = temp_f0 * 6.28318f / 360.0f;
+    data->unk_B8 = clamp_angle(data->unk_B8 + temp_f4);
+    temp_f20_2 = data->unk_B8 * TAU / 360.0f;
     entity->position.x += sin_rad(temp_f20_2);
     entity->position.z -= cos_rad(temp_f20_2);
 
@@ -74,8 +72,6 @@ void func_802BB8E4_E30234(Entity* entity) {
 INCLUDE_ASM(s32, "entity/sbk_omo/E2F750", func_802BBA60_E303B0);
 
 void func_802BBDB8_E30708(Entity* entity) {
-    f32 scaleX;
-
     entity->scale.x += 0.1;
     if (entity->scale.x >= 1.0) {
         entity->scale.x = 1.0f;

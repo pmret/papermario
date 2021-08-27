@@ -34,8 +34,7 @@ void func_802BB000_E2D930(Entity* entity) {
     if ((entity->collisionFlags & 1) && !is_picking_up_item()) {
         if (playerStatus->actionState == ACTION_STATE_RIDE) {
             playerStatus->animFlags |= 4;
-        }
-        else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
+        } else if (playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER) {
             D_802BCE34 = data->unk_28;
             D_802BCE30 = data->unk_2A;
             D_802BCE32 = data->unk_2C;
@@ -57,7 +56,6 @@ void func_802BB228_E2DB58(Entity* entity) {
     data->unk_08 = clamp_angle(data->unk_08 + data->unk_14);
 }
 
-//INCLUDE_ASM(s32, "entity/jan_iwa/E2D730", func_802BB298_E2DBC8);
 void func_802BB298_E2DBC8(Entity* entity) {
     s32 temp_a1;
     s32 temp_a2;
