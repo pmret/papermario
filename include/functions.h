@@ -206,6 +206,7 @@ f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
 void close_status_menu(void);
 void btl_state_update_switch_to_partner(void);
+void switch_to_partner(s32 arg0);
 
 Shadow* create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
@@ -259,6 +260,11 @@ void sort_items(void);
 s32 is_ability_active(s32 arg0);
 f32 update_lerp(Easing easing, f32 start, f32 end, s32 elapsed, s32 duration);
 void sin_cos_deg(f32 rad, f32* outSinTheta, f32* outCosTheta);
+
+void set_main_pan_u(s32 texPannerID, s32 value);
+void set_main_pan_v(s32 texPannerID, s32 value);
+void set_aux_pan_u(s32 texPannerID, s32 value);
+void set_aux_pan_v(s32 texPannerID, s32 value);
 
 void enable_world_fog(void);
 void set_world_fog_dist(s32 start, s32 end);
