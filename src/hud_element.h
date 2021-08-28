@@ -196,7 +196,7 @@ void set_hud_element_scale(s32 index, f32 scale);
 
 void set_hud_element_size(s32 id, s8 size);
 
-s32 func_80144E4C();
+s32 func_80144E4C(s32 arg0);
 
 void func_80144E74(s32 id, s32 arg1);
 

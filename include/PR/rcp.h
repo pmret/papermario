@@ -818,25 +818,25 @@ The Indy development board use cartridge domain 1:
 /*************************************************************************
  * Serial Interface (SI) Registers
  */
-#define EVT_BASE_REG		0x04800000
+#define SI_BASE_REG		0x04800000
 
 /* SI DRAM address (R/W): [23:0] starting RDRAM address */
-#define EVT_DRAM_ADDR_REG	(EVT_BASE_REG+0x00)	/* R0: DRAM address */
+#define SI_DRAM_ADDR_REG	(SI_BASE_REG+0x00)	/* R0: DRAM address */
 
 /* SI address read 64B (W): [] any write causes a 64B DMA write */
-#define EVT_PIF_ADDR_RD64B_REG	(EVT_BASE_REG+0x04)	/* R1: 64B PIF->DRAM */
+#define SI_PIF_ADDR_RD64B_REG	(SI_BASE_REG+0x04)	/* R1: 64B PIF->DRAM */
 
-/* Address EVT_BASE_REG + (0x08, 0x0c, 0x14) are reserved */
+/* Address SI_BASE_REG + (0x08, 0x0c, 0x14) are reserved */
 
 /* SI address write 64B (W): [] any write causes a 64B DMA read */
-#define EVT_PIF_ADDR_WR64B_REG	(EVT_BASE_REG+0x10)	/* R4: 64B DRAM->PIF */
+#define SI_PIF_ADDR_WR64B_REG	(SI_BASE_REG+0x10)	/* R4: 64B DRAM->PIF */
 
 /*
  * SI status (W): [] any write clears interrupt
  *           (R): [0] DMA busy, [1] IO read busy, [2] reserved
  *                [3] DMA error, [12] interrupt
  */
-#define EVT_STATUS_REG		(EVT_BASE_REG+0x18)	/* R6: Status */
+#define SI_STATUS_REG		(SI_BASE_REG+0x18)	/* R6: Status */
 
 /* SI status register has the following bits active:
  *	0:   DMA busy		- set when DMA is in progress
@@ -844,10 +844,10 @@ The Indy development board use cartridge domain 1:
  *	3:   DMA error		- set when there are overlapping DMA requests
  *     12:   Interrupt		- Interrupt set
  */
-#define	EVT_STATUS_DMA_BUSY	0x0001
-#define	EVT_STATUS_RD_BUSY	0x0002
-#define	EVT_STATUS_DMA_ERROR	0x0008
-#define	EVT_STATUS_INTERRUPT	0x1000
+#define	SI_STATUS_DMA_BUSY	0x0001
+#define	SI_STATUS_RD_BUSY	0x0002
+#define	SI_STATUS_DMA_ERROR	0x0008
+#define	SI_STATUS_INTERRUPT	0x1000
 
 /*************************************************************************
  * Development Board GIO Control Registers
