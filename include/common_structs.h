@@ -1483,7 +1483,7 @@ typedef struct FontRasterSet {
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
 
-typedef s32(*TriggerHandlerFunc)(struct Trigger*);
+typedef void(*TriggerHandlerFunc)(struct Trigger*);
 
 typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;

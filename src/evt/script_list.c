@@ -172,9 +172,9 @@ Evt* start_script(EvtSource* source, s32 priority, s32 initialState) {
     newScript->state = initialState | 1;
     newScript->currentOpcode = 0;
     newScript->priority = priority;
-    newScript->ptrNextLine = source;
-    newScript->ptrFirstLine = source;
-    newScript->ptrCurrentLine = source;
+    newScript->ptrNextLine = (Bytecode*)source;
+    newScript->ptrFirstLine = (Bytecode*)source;
+    newScript->ptrCurrentLine = (Bytecode*)source;
     newScript->userData = NULL;
     newScript->blockingParent = NULL;
     newScript->childScript = NULL;
@@ -245,9 +245,9 @@ Evt* start_script_in_group(EvtSource* source, u8 priority, u8 initialState, u8 g
         newScript->currentOpcode = 0;
         newScript->priority = priority;
         newScript->id = gStaticScriptCounter++;
-        newScript->ptrNextLine = source;
-        newScript->ptrFirstLine = source;
-        newScript->ptrCurrentLine = source;
+        newScript->ptrNextLine = (Bytecode*)source;
+        newScript->ptrFirstLine = (Bytecode*)source;
+        newScript->ptrCurrentLine = (Bytecode*)source;
         newScript->userData = 0;
         newScript->blockingParent = 0;
         newScript->childScript = 0;
@@ -311,7 +311,7 @@ Evt* start_child_script(Evt* parentScript, EvtSource* source, s32 initialState) 
     parentScript->childScript = child;
     parentScript->state |= 0x10;
     child->state = initialState | 1;
-    child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = source;
+    child->ptrCurrentLine = child->ptrFirstLine = child->ptrNextLine = (Bytecode*)source;
 
 
     child->currentOpcode = 0;
@@ -630,7 +630,7 @@ s32 does_script_exist_by_ref(Evt* script) {
     return FALSE;
 }
 
-void set_script_priority(Evt* script, s8 priority) {
+void set_script_priority(Evt* script, s32 priority) {
     script->priority = priority;
 }
 
@@ -646,7 +646,7 @@ f32 get_global_timespace(void) {
     return gGlobalTimeSpace;
 }
 
-void set_script_group(Evt* script, s8 groupFlags) {
+void set_script_group(Evt* script, s32 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
@@ -662,7 +662,7 @@ Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 tri
     def.inputArg3 = arg6;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = script;
+    trigger->scriptSource = (EvtSource*)script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
     trigger->scriptVars[0] = triggerVar0;
