@@ -616,7 +616,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     }
 
     if (effectRet != NULL) {
-        set_variable(script, SI_VAR(15), effectRet);
+        set_variable(script, EVT_VAR(15), effectRet);
     }
 
     return ApiStatus_DONE2;

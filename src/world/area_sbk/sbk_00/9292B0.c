@@ -116,7 +116,7 @@ static s32 N(pad_78C) = {
 
 EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, -230, 0, 155, 0, ITEM_FRIGHT_JAR, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(797));
+    AssignBlockFlag(EVT_SAVE_FLAG(797));
     MakeEntity(0x802EA564, 160, 0, 205, 0, ITEM_COIN, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(798));
+    AssignBlockFlag(EVT_SAVE_FLAG(798));
 });

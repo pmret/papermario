@@ -334,64 +334,64 @@ EvtSource N(idle_80239350) = SCRIPT({
 EvtSource N(handleEvent_80239360) = SCRIPT({
     UseIdleAnimation(ACTOR_PARTNER, FALSE);
     CloseActionCommandInfo();
-    GetLastEvent(ACTOR_PARTNER, SI_VAR(0));
-    match SI_VAR(0) {
+    GetLastEvent(ACTOR_PARTNER, EVT_VAR(0));
+    match EVT_VAR(0) {
         EVENT_HIT_COMBO, EVENT_HIT {
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
-            SI_VAR(2) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(2) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x802977BC;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80296014;
         }
         23, EVENT_IMMUNE {
             PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208C);
-            SI_VAR(0) = (const) 1;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(0) = (const) 1;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80297814;
         }
         == EVENT_SPIKE_CONTACT {
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
-            SI_VAR(2) = 12;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(2) = 12;
             await 0x80294FE4;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80296014;
         }
         == EVENT_BURN_CONTACT {
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_burn_pain;
-            SI_VAR(2) = 12;
-            SI_VAR(3) = (const) NPC_ANIM_battle_goombario_default_burn_dead;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_burn_pain;
+            EVT_VAR(2) = 12;
+            EVT_VAR(3) = (const) NPC_ANIM_battle_goombario_default_burn_dead;
             await 0x80294C68;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80296014;
         }
         == EVENT_BURN_HIT {
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_burn_pain;
-            SI_VAR(2) = (const) NPC_ANIM_battle_goombario_default_burn_dead;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_burn_pain;
+            EVT_VAR(2) = (const) NPC_ANIM_battle_goombario_default_burn_dead;
             await 0x8029621C;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80296014;
         }
         == EVENT_SHOCK_HIT {
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
-            SI_VAR(2) = 12;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(2) = 12;
             await 0x80295744;
         }
         == 51 {
             N(StopGlowing)();
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_pain;
             await 0x80296014;
         }
         == 52 {
-            SI_VAR(0) = (const) 1;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_idle;
-            SI_VAR(2) = (const) NPC_ANIM_battle_goombario_default_run;
-            SI_VAR(3) = 0;
+            EVT_VAR(0) = (const) 1;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_idle;
+            EVT_VAR(2) = (const) NPC_ANIM_battle_goombario_default_run;
+            EVT_VAR(3) = 0;
             await 0x80295EC4;
         }
         24, EVENT_BLOCK {
             PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208C);
-            SI_VAR(0) = (const) 1;
-            SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_block;
+            EVT_VAR(0) = (const) 1;
+            EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_block;
             await 0x80297814;
             sleep 10;
         }
@@ -402,8 +402,8 @@ EvtSource N(handleEvent_80239360) = SCRIPT({
 });
 
 EvtSource N(takeTurn_802396D8) = SCRIPT({
-    GetBattlePhase(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattlePhase(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 1 {
             await N(8023993C);
         }
@@ -423,18 +423,18 @@ EvtSource N(takeTurn_802396D8) = SCRIPT({
 });
 
 EvtSource N(80239784) = SCRIPT({
-    SI_VAR(0) = (const) 1;
-    SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_celebrate;
-    SI_VAR(2) = (const) NPC_ANIM_battle_goombario_default_celebrate_still;
-    SI_VAR(3) = (const) NPC_ANIM_battle_goombario_default_idle;
+    EVT_VAR(0) = (const) 1;
+    EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_celebrate;
+    EVT_VAR(2) = (const) NPC_ANIM_battle_goombario_default_celebrate_still;
+    EVT_VAR(3) = (const) NPC_ANIM_battle_goombario_default_idle;
     await 0x80294720;
 });
 
 EvtSource N(802397E0) = SCRIPT({
-    GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetMenuSelection(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     func_802694A4(1);
     SetBattleFlagBits(16384, 0);
-    match SI_VAR(0) {
+    match EVT_VAR(0) {
         == 8 {
             LoadStarPowerScript();
             await 0xFE363C80;
@@ -446,7 +446,7 @@ EvtSource N(802397E0) = SCRIPT({
             return;
         }
     }
-    match SI_VAR(2) {
+    match EVT_VAR(2) {
         == 131 {
             await N(8023A754);
         }
@@ -473,8 +473,8 @@ EvtSource N(8023993C) = SCRIPT({
 });
 
 EvtSource N(8023994C) = SCRIPT({
-    SI_VAR(0) = (const) 1;
-    SI_VAR(1) = (const) NPC_ANIM_battle_goombario_default_run;
+    EVT_VAR(0) = (const) 1;
+    EVT_VAR(1) = (const) NPC_ANIM_battle_goombario_default_run;
     await 0x80294AFC;
 });
 
@@ -490,10 +490,10 @@ EvtSource N(80239988) = SCRIPT({
 });
 
 EvtSource N(nextTurn_80239A3C) = SCRIPT({
-    GetBattlePhase(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattlePhase(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 10 {
-            if (SI_SAVE_FLAG(1817) == 0) {
+            if (EVT_SAVE_FLAG(1817) == 0) {
                 UseIdleAnimation(ACTOR_PARTNER, 0);
                 UseBattleCamPreset(14);
                 BattleCamTargetActor(ACTOR_SELF);
@@ -524,7 +524,7 @@ EvtSource N(nextTurn_80239A3C) = SCRIPT({
                 sleep 1;
                 SetActorYaw(ACTOR_PLAYER, 0);
                 sleep 5;
-                SI_SAVE_FLAG(1817) = 1;
+                EVT_SAVE_FLAG(1817) = 1;
                 UseIdleAnimation(ACTOR_PARTNER, 1);
             }
         }
@@ -538,22 +538,22 @@ EvtSource N(80239CA8) = SCRIPT({
     spawn {
         sleep 4;
         SetActorRotationOffset(-127, 0, 12, 0);
-        SI_VAR(0) = 180;
+        EVT_VAR(0) = 180;
         loop 3 {
-            SI_VAR(0) += 60;
-            SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+            EVT_VAR(0) += 60;
+            SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
             sleep 1;
         }
         SetActorRotation(ACTOR_SELF, 0, 0, 0);
         SetActorRotationOffset(-127, 0, 0, 0);
     }
-    GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) -= 30;
-    SI_VAR(1) = 0;
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) -= 30;
+    EVT_VAR(1) = 0;
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetActorJumpGravity(ACTOR_PARTNER, 1.2);
     N(func_80238000_6F10E0)();
-    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), FALSE, TRUE, FALSE);
+    JumpToGoal(ACTOR_PARTNER, EVT_VAR(0), FALSE, TRUE, FALSE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_charge);
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
@@ -585,37 +585,37 @@ EvtSource N(8023A06C) = SCRIPT({
     UseBattleCamPreset(3);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_idle);
     SetGoalToHome(ACTOR_PARTNER);
-    GetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 60;
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 60;
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetActorJumpGravity(ACTOR_PARTNER, 1.4);
     N(func_80238000_6F10E0)();
     spawn {
         sleep 4;
         SetActorRotationOffset(-127, 0, 12, 0);
-        SI_VAR(0) -= 4;
-        SI_VAR(1) = SI_VAR(0);
-        SI_VAR(1) /= 3;
-        if (SI_VAR(1) < 1) {
-            SI_VAR(1) = 1;
+        EVT_VAR(0) -= 4;
+        EVT_VAR(1) = EVT_VAR(0);
+        EVT_VAR(1) /= 3;
+        if (EVT_VAR(1) < 1) {
+            EVT_VAR(1) = 1;
         }
-        SI_VAR(2) = SI_VAR(1);
-        SI_VAR(2) %= 2;
-        if (SI_VAR(2) == 0) {
-            SI_VAR(1) -= 1;
+        EVT_VAR(2) = EVT_VAR(1);
+        EVT_VAR(2) %= 2;
+        if (EVT_VAR(2) == 0) {
+            EVT_VAR(1) -= 1;
         }
-        SI_VAR(0) = 180;
-        loop SI_VAR(1) {
+        EVT_VAR(0) = 180;
+        loop EVT_VAR(1) {
             loop 3 {
-                SI_VAR(0) += 60;
-                SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+                EVT_VAR(0) += 60;
+                SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
                 sleep 1;
             }
         }
         SetActorRotation(ACTOR_SELF, 0, 0, 0);
         SetActorRotationOffset(-127, 0, 0, 0);
     }
-    JumpToGoal(ACTOR_PARTNER, SI_VAR(0), FALSE, TRUE, FALSE);
+    JumpToGoal(ACTOR_PARTNER, EVT_VAR(0), FALSE, TRUE, FALSE);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_charge);
     SetActorDispOffset(ACTOR_PARTNER, 0, 18, 0);
     sleep 1;
@@ -646,16 +646,16 @@ EvtSource N(8023A06C) = SCRIPT({
 
 EvtSource N(8023A52C) = SCRIPT({
     SetGoalToFirstTarget(-127);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) -= 40;
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) -= 40;
     InitTargetIterator();
     SetGoalToTarget(ACTOR_PARTNER);
-    GetGoalPos(ACTOR_PARTNER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SI_VAR(3) -= (int) 70.0;
-    if (SI_VAR(0) < SI_VAR(3)) {
-        SI_VAR(3) = SI_VAR(0);
+    GetGoalPos(ACTOR_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    EVT_VAR(3) -= (int) 70.0;
+    if (EVT_VAR(0) < EVT_VAR(3)) {
+        EVT_VAR(3) = EVT_VAR(0);
     }
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     UseBattleCamPreset(47);
     SetActorSpeed(ACTOR_PARTNER, 5.0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_run);
@@ -665,18 +665,18 @@ EvtSource N(8023A52C) = SCRIPT({
 
 EvtSource N(8023A66C) = SCRIPT({
     SetGoalToTarget(ACTOR_PARTNER);
-    GetGoalPos(ACTOR_PARTNER, SI_VAR(11), SI_VAR(7), SI_VAR(13));
-    GetActorPos(ACTOR_PARTNER, SI_VAR(7), SI_VAR(13), SI_VAR(14));
-    if (SI_VAR(11) > SI_VAR(7)) {
-        SI_VAR(11) -= SI_VAR(7);
+    GetGoalPos(ACTOR_PARTNER, EVT_VAR(11), EVT_VAR(7), EVT_VAR(13));
+    GetActorPos(ACTOR_PARTNER, EVT_VAR(7), EVT_VAR(13), EVT_VAR(14));
+    if (EVT_VAR(11) > EVT_VAR(7)) {
+        EVT_VAR(11) -= EVT_VAR(7);
     } else {
-        SI_VAR(7) -= SI_VAR(11);
-        SI_VAR(11) = SI_VAR(7);
+        EVT_VAR(7) -= EVT_VAR(11);
+        EVT_VAR(11) = EVT_VAR(7);
     }
-    SI_VAR(11) -= 20;
-    SI_VAR(11) /= 10.5888671875;
-    SI_VAR(11) += (float) 15;
-    SI_VAR(10) = SI_VAR(11);
+    EVT_VAR(11) -= 20;
+    EVT_VAR(11) /= 10.5888671875;
+    EVT_VAR(11) += (float) 15;
+    EVT_VAR(10) = EVT_VAR(11);
 });
 
 EvtSource N(8023A754) = SCRIPT({
@@ -690,16 +690,16 @@ EvtSource N(8023A754) = SCRIPT({
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
     sleep 1;
     UseBattleCamPreset(52);
-    func_802A9120_421B10(SI_VAR(10), 3);
+    func_802A9120_421B10(EVT_VAR(10), 3);
     UseBattleCamPreset(52);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
     SetGoalToTarget(ACTOR_PARTNER);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
-    func_8023817C_6F125C(SI_VAR(10), 0);
-    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
-    if (SI_VAR(0) == 6) {
+    func_8023817C_6F125C(EVT_VAR(10), 0);
+    PartnerTestEnemy(EVT_VAR(0), 128, 20, 0, 1, 16);
+    if (EVT_VAR(0) == 6) {
         SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
         N(func_80238A20_6F1B00)();
         spawn {
@@ -718,21 +718,21 @@ EvtSource N(8023A754) = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     sleep 1;
-    GetActionCommandResult(SI_VAR(0));
-    match SI_VAR(0) {
+    GetActionCommandResult(EVT_VAR(0));
+    match EVT_VAR(0) {
         > 0 {
             N(IsGlowing)();
-            SI_VAR(0) += 1;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+            EVT_VAR(0) += 1;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 80);
         }
         else {
             N(StopGlowingAndGet)();
-            SI_VAR(0) += 1;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+            EVT_VAR(0) += 1;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 48);
         }
     }
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    match SI_VAR(0) {
+    match EVT_VAR(0) {
         0, 2 {
             await N(80239CA8);
             return;
@@ -745,26 +745,26 @@ EvtSource N(8023A754) = SCRIPT({
         SetGoalToTarget(ACTOR_PARTNER);
         UseBattleCamPreset(53);
     }
-    func_80269524(SI_VAR(15));
+    func_80269524(EVT_VAR(15));
     CloseActionCommandInfo();
     LoadActionCommand(1);
     func_802A9000_430020();
     func_802694A4(0);
     func_802A9120_421B10(24, 3);
-    SI_VAR(10) = 24;
+    EVT_VAR(10) = 24;
     spawn {
         sleep 4;
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 6 {
-            SI_VAR(0) += -30;
-            SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+            EVT_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
     SetGoalToTarget(ACTOR_PARTNER);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, 0x281);
-    func_8023817C_6F125C(SI_VAR(10), 3);
+    func_8023817C_6F125C(EVT_VAR(10), 3);
     parallel {
         SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
         sleep 1;
@@ -774,10 +774,10 @@ EvtSource N(8023A754) = SCRIPT({
     }
     sleep 1;
     N(StopGlowingAndGet)();
-    SI_VAR(0) += 1;
-    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    EVT_VAR(0) += 1;
+    PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 32);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    func_80269550(SI_VAR(15));
+    func_80269550(EVT_VAR(15));
     await N(8023A06C);
 });
 
@@ -792,16 +792,16 @@ EvtSource N(8023ADC4) = SCRIPT({
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
     sleep 1;
     UseBattleCamPreset(52);
-    func_802A9120_421B10(SI_VAR(10), 3);
+    func_802A9120_421B10(EVT_VAR(10), 3);
     UseBattleCamPreset(52);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
     SetGoalToTarget(ACTOR_PARTNER);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
-    func_8023817C_6F125C(SI_VAR(10), 0);
-    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
-    if (SI_VAR(0) == 6) {
+    func_8023817C_6F125C(EVT_VAR(10), 0);
+    PartnerTestEnemy(EVT_VAR(0), 128, 20, 0, 1, 16);
+    if (EVT_VAR(0) == 6) {
         SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
         N(func_80238A20_6F1B00)();
         spawn {
@@ -820,21 +820,21 @@ EvtSource N(8023ADC4) = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     sleep 1;
-    GetActionCommandResult(SI_VAR(0));
-    match SI_VAR(0) {
+    GetActionCommandResult(EVT_VAR(0));
+    match EVT_VAR(0) {
         > 0 {
             N(IsGlowing)();
-            SI_VAR(0) += 2;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+            EVT_VAR(0) += 2;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 80);
         }
         else {
             N(StopGlowingAndGet)();
-            SI_VAR(0) += 2;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+            EVT_VAR(0) += 2;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 48);
         }
     }
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    match SI_VAR(0) {
+    match EVT_VAR(0) {
         0, 2 {
             await N(80239CA8);
             return;
@@ -847,19 +847,19 @@ EvtSource N(8023ADC4) = SCRIPT({
         SetGoalToTarget(ACTOR_PARTNER);
         UseBattleCamPreset(53);
     }
-    func_80269524(SI_VAR(15));
+    func_80269524(EVT_VAR(15));
     CloseActionCommandInfo();
     LoadActionCommand(1);
     func_802A9000_430020();
     func_802694A4(0);
     func_802A9120_421B10(24, 3);
-    SI_VAR(10) = 24;
+    EVT_VAR(10) = 24;
     spawn {
         sleep 4;
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 6 {
-            SI_VAR(0) += -30;
-            SetActorRotation(ACTOR_SELF, 0, 0, SI_VAR(0));
+            EVT_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
@@ -867,7 +867,7 @@ EvtSource N(8023ADC4) = SCRIPT({
     EnableActorBlur(256, 1);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, 0x281);
-    func_8023817C_6F125C(SI_VAR(10), 3);
+    func_8023817C_6F125C(EVT_VAR(10), 3);
     EnableActorBlur(256, -1);
     parallel {
         SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
@@ -878,10 +878,10 @@ EvtSource N(8023ADC4) = SCRIPT({
     }
     sleep 1;
     N(StopGlowingAndGet)();
-    SI_VAR(0) += 2;
-    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    EVT_VAR(0) += 2;
+    PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 32);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    func_80269550(SI_VAR(15));
+    func_80269550(EVT_VAR(15));
     await N(8023A06C);
 });
 
@@ -896,16 +896,16 @@ EvtSource N(8023B45C) = SCRIPT({
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
     sleep 1;
     UseBattleCamPreset(52);
-    func_802A9120_421B10(SI_VAR(10), 3);
+    func_802A9120_421B10(EVT_VAR(10), 3);
     UseBattleCamPreset(52);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
     SetGoalToTarget(ACTOR_PARTNER);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
-    func_8023817C_6F125C(SI_VAR(10), 0);
-    PartnerTestEnemy(SI_VAR(0), 128, 20, 0, 1, 16);
-    if (SI_VAR(0) == 6) {
+    func_8023817C_6F125C(EVT_VAR(10), 0);
+    PartnerTestEnemy(EVT_VAR(0), 128, 20, 0, 1, 16);
+    if (EVT_VAR(0) == 6) {
         SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
         N(func_80238A20_6F1B00)();
         spawn {
@@ -924,21 +924,21 @@ EvtSource N(8023B45C) = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     sleep 1;
-    GetActionCommandResult(SI_VAR(0));
-    match SI_VAR(0) {
+    GetActionCommandResult(EVT_VAR(0));
+    match EVT_VAR(0) {
         > 0 {
             N(IsGlowing)();
-            SI_VAR(0) += 3;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 80);
+            EVT_VAR(0) += 3;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 80);
         }
         else {
             N(StopGlowingAndGet)();
-            SI_VAR(0) += 3;
-            PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 48);
+            EVT_VAR(0) += 3;
+            PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 48);
         }
     }
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    match SI_VAR(0) {
+    match EVT_VAR(0) {
         0, 2 {
             await N(80239CA8);
             return;
@@ -951,28 +951,28 @@ EvtSource N(8023B45C) = SCRIPT({
         SetGoalToTarget(ACTOR_PARTNER);
         UseBattleCamPreset(53);
     }
-    func_80269524(SI_VAR(15));
+    func_80269524(EVT_VAR(15));
     CloseActionCommandInfo();
     LoadActionCommand(1);
     func_802A9000_430020();
     func_802694A4(0);
     func_802A9120_421B10(24, 3);
-    SI_VAR(10) = 24;
+    EVT_VAR(10) = 24;
     spawn {
         sleep 4;
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 6 {
-            SI_VAR(0) += -30;
-            SetActorRotation(ACTOR_SELF, 0, -250000000, SI_VAR(0));
+            EVT_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, -250000000, EVT_VAR(0));
             sleep 1;
         }
         SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     }
     spawn {
-        SI_VAR(0) = 0;
-        loop SI_VAR(10) {
-            SI_VAR(0) += 133;
-            SetActorRotation(ACTOR_SELF, -250000000, SI_VAR(0), -250000000);
+        EVT_VAR(0) = 0;
+        loop EVT_VAR(10) {
+            EVT_VAR(0) += 133;
+            SetActorRotation(ACTOR_SELF, -250000000, EVT_VAR(0), -250000000);
             sleep 1;
         }
     }
@@ -980,7 +980,7 @@ EvtSource N(8023B45C) = SCRIPT({
     EnableActorBlur(256, 1);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, 0x281);
-    func_8023817C_6F125C(SI_VAR(10), 3);
+    func_8023817C_6F125C(EVT_VAR(10), 3);
     EnableActorBlur(256, -1);
     parallel {
         SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
@@ -991,10 +991,10 @@ EvtSource N(8023B45C) = SCRIPT({
     }
     sleep 1;
     N(StopGlowingAndGet)();
-    SI_VAR(0) += 3;
-    PartnerDamageEnemy(SI_VAR(0), 128, 0, 0, SI_VAR(0), 32);
+    EVT_VAR(0) += 3;
+    PartnerDamageEnemy(EVT_VAR(0), 128, 0, 0, EVT_VAR(0), 32);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    func_80269550(SI_VAR(15));
+    func_80269550(EVT_VAR(15));
     await N(8023A06C);
 });
 
@@ -1015,16 +1015,16 @@ EvtSource N(8023BB9C) = SCRIPT({
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
     sleep 1;
     UseBattleCamPreset(52);
-    func_802A9120_421B10(SI_VAR(10), 1);
+    func_802A9120_421B10(EVT_VAR(10), 1);
     UseBattleCamPreset(52);
     SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     SetActorDispOffset(ACTOR_PARTNER, 0, 9, 0);
     SetGoalToTarget(ACTOR_PARTNER);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_200D);
-    func_8023817C_6F125C(SI_VAR(10), 0);
-    PartnerTestEnemy(SI_VAR(0), 1048704, 20, 0, 1, 16);
-    if (SI_VAR(0) == 6) {
+    func_8023817C_6F125C(EVT_VAR(10), 0);
+    PartnerTestEnemy(EVT_VAR(0), 1048704, 20, 0, 1, 16);
+    if (EVT_VAR(0) == 6) {
         SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
         N(func_80238A20_6F1B00)();
         spawn {
@@ -1043,21 +1043,21 @@ EvtSource N(8023BB9C) = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     sleep 1;
-    GetActionCommandResult(SI_VAR(0));
-    match SI_VAR(0) {
+    GetActionCommandResult(EVT_VAR(0));
+    match EVT_VAR(0) {
         > 0 {
             N(IsGlowing)();
-            SI_VAR(0) += 3;
-            PartnerDamageEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 80);
+            EVT_VAR(0) += 3;
+            PartnerDamageEnemy(EVT_VAR(0), 1048704, 0, 0, EVT_VAR(0), 80);
         }
         else {
             N(StopGlowingAndGet)();
-            SI_VAR(0) += 3;
-            PartnerDamageEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), 48);
+            EVT_VAR(0) += 3;
+            PartnerDamageEnemy(EVT_VAR(0), 1048704, 0, 0, EVT_VAR(0), 48);
         }
     }
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    match SI_VAR(0) {
+    match EVT_VAR(0) {
         0, 2 {
             await N(80239CA8);
             return;
@@ -1070,10 +1070,10 @@ EvtSource N(8023BB9C) = SCRIPT({
         SetGoalToTarget(ACTOR_PARTNER);
         UseBattleCamPreset(53);
     }
-    func_80269524(SI_VAR(15));
-    SI_VAR(13) = 0;
-    SI_VAR(15) = 0;
-    SI_FLAG(0) = 0;
+    func_80269524(EVT_VAR(15));
+    EVT_VAR(13) = 0;
+    EVT_VAR(15) = 0;
+    EVT_FLAG(0) = 0;
 10:
     spawn {
         UseBattleCamPreset(50);
@@ -1085,39 +1085,39 @@ EvtSource N(8023BB9C) = SCRIPT({
     func_8026919C(N(D_8023BB78_6ECC58));
     LoadActionCommand(1);
     func_802A9000_430020();
-    SI_VAR(10) = 24;
-    match SI_VAR(15) {
+    EVT_VAR(10) = 24;
+    match EVT_VAR(15) {
         == 0 {
-            func_802A9120_421B10(SI_VAR(10), 1);
+            func_802A9120_421B10(EVT_VAR(10), 1);
         }
         == 1 {
-            func_802A9120_421B10(SI_VAR(10), 2);
+            func_802A9120_421B10(EVT_VAR(10), 2);
         }
         == 2 {
-            func_802A9120_421B10(SI_VAR(10), 3);
+            func_802A9120_421B10(EVT_VAR(10), 3);
         }
         == 3 {
-            func_802A9120_421B10(SI_VAR(10), 4);
+            func_802A9120_421B10(EVT_VAR(10), 4);
         }
         else {
-            func_802A9120_421B10(SI_VAR(10), 5);
+            func_802A9120_421B10(EVT_VAR(10), 5);
         }
     }
     spawn {
         sleep 4;
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 6 {
-            SI_VAR(0) += -30;
-            SetActorRotation(ACTOR_SELF, 0, -250000000, SI_VAR(0));
+            EVT_VAR(0) += -30;
+            SetActorRotation(ACTOR_SELF, 0, -250000000, EVT_VAR(0));
             sleep 1;
         }
         SetAnimation(ACTOR_SELF, 1, NPC_ANIM_battle_goombario_default_headbonk);
     }
     spawn {
-        SI_VAR(0) = 0;
-        loop SI_VAR(10) {
-            SI_VAR(0) += 133;
-            SetActorRotation(ACTOR_SELF, -250000000, SI_VAR(0), -250000000);
+        EVT_VAR(0) = 0;
+        loop EVT_VAR(10) {
+            EVT_VAR(0) += 133;
+            SetActorRotation(ACTOR_SELF, -250000000, EVT_VAR(0), -250000000);
             sleep 1;
         }
     }
@@ -1125,12 +1125,12 @@ EvtSource N(8023BB9C) = SCRIPT({
     EnableActorBlur(256, 1);
     SetJumpAnimations(ACTOR_PARTNER, 0, ANIM_90006, ANIM_90006, ANIM_90006);
     PlaySoundAtActor(ACTOR_PARTNER, 0x281);
-    func_8023817C_6F125C(SI_VAR(10), 3);
+    func_8023817C_6F125C(EVT_VAR(10), 3);
     EnableActorBlur(256, -1);
-    SI_VAR(13) -= 1;
+    EVT_VAR(13) -= 1;
     func_802380E4_6F11C4();
-    if (SI_VAR(15) >= SI_VAR(0)) {
-        SI_FLAG(0) = 1;
+    if (EVT_VAR(15) >= EVT_VAR(0)) {
+        EVT_FLAG(0) = 1;
     }
     parallel {
         SetActorScale(ACTOR_PARTNER, 1.1, 0.8, 1.0);
@@ -1140,50 +1140,50 @@ EvtSource N(8023BB9C) = SCRIPT({
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     sleep 1;
-    GetActionCommandResult(SI_VAR(0));
-    match SI_VAR(0) {
+    GetActionCommandResult(EVT_VAR(0));
+    match EVT_VAR(0) {
         > 0 {
-            if (SI_FLAG(0) == 0) {
+            if (EVT_FLAG(0) == 0) {
                 N(IsGlowing)();
-                SI_VAR(0) += 3;
-                PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 64);
+                EVT_VAR(0) += 3;
+                PartnerPowerBounceEnemy(EVT_VAR(0), 1048704, 0, 0, EVT_VAR(0), EVT_VAR(13), 64);
             } else {
                 N(StopGlowingAndGet)();
-                SI_VAR(0) += 3;
-                PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32);
+                EVT_VAR(0) += 3;
+                PartnerPowerBounceEnemy(EVT_VAR(0), 1048704, 0, 0, EVT_VAR(0), EVT_VAR(13), 32);
             }
         }
         else {
             N(StopGlowingAndGet)();
-            SI_VAR(0) += 3;
-            PartnerPowerBounceEnemy(SI_VAR(0), 1048704, 0, 0, SI_VAR(0), SI_VAR(13), 32);
-            SI_FLAG(0) = 0;
+            EVT_VAR(0) += 3;
+            PartnerPowerBounceEnemy(EVT_VAR(0), 1048704, 0, 0, EVT_VAR(0), EVT_VAR(13), 32);
+            EVT_FLAG(0) = 0;
         }
     }
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_0);
-    func_80269550(SI_VAR(14));
-    match SI_VAR(0) {
+    func_80269550(EVT_VAR(14));
+    match EVT_VAR(0) {
         0, 2 {
             await N(80239CA8);
             return;
         }
         1, 3 {
-            if (SI_FLAG(0) == 1) {
+            if (EVT_FLAG(0) == 1) {
                 await N(8023A06C);
                 return;
             }
         }
     }
-    SI_VAR(15) += 1;
+    EVT_VAR(15) += 1;
     goto 10;
 });
 
 EvtSource N(8023C5B8) = SCRIPT({
-    GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 30;
+    GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 30;
     SetActorSpeed(ACTOR_PARTNER, 6.0);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_run);
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     RunToGoal(ACTOR_PARTNER, 0, FALSE);
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_idle);
     InitTargetIterator();
@@ -1195,19 +1195,19 @@ EvtSource N(8023C5B8) = SCRIPT({
     SetCamFlag80(2, 0);
     SetCamPerspective(2, 6, 25, 16, 1024);
     SetCamViewport(2, 137, 95, 138, 99);
-    GetOwnerTarget(SI_VAR(10), SI_VAR(11));
-    GetActorPos(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetOwnerTarget(EVT_VAR(10), EVT_VAR(11));
+    GetActorPos(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     func_80238BCC_6F1CAC();
     sleep 1;
-    func_802CAE50(2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    func_802CABE8(2, 0, SI_VAR(3), 100, 4);
+    func_802CAE50(2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    func_802CABE8(2, 0, EVT_VAR(3), 100, 4);
     sleep 2;
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_282);
     SetCamFlag80(2, 1);
     sleep 10;
     func_80238B60_6F1C40();
-    ActorSpeak(SI_VAR(0), -127, 1, 589839, 589825);
+    ActorSpeak(EVT_VAR(0), -127, 1, 589839, 589825);
     func_80238E48_6F1F28();
     sleep 12;
     SetCamEnabled(2, 0);
@@ -1228,19 +1228,19 @@ EvtSource N(8023C90C) = SCRIPT({
     sleep 10;
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_charge);
     SetActorDispOffset(ACTOR_PARTNER, 0, 19, 0);
-    GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 15;
+    GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 15;
     PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208F);
-    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.2);
+    func_802390C8_6F21A8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.2);
     sleep 3;
-    func_802390C8_6F21A8(SI_VAR(0), SI_VAR(1), SI_VAR(2), 0.8);
+    func_802390C8_6F21A8(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 0.8);
     spawn {
         sleep 15;
-        GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(1) += 15;
-        SI_VAR(2) += -5;
+        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(1) += 15;
+        EVT_VAR(2) += -5;
         PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_2003);
-        PlayEffect(0x52, 9, SI_VAR(0), SI_VAR(1), SI_VAR(2), 2.0, 20, 0, 0, 0, 0, 0, 0, 0);
+        PlayEffect(0x52, 9, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 2.0, 20, 0, 0, 0, 0, 0, 0, 0);
     }
     sleep 30;
     SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_idle);
@@ -1248,28 +1248,28 @@ EvtSource N(8023C90C) = SCRIPT({
     UseBattleCamPreset(2);
     MoveBattleCamOver(10);
     func_80238E74_6F1F54();
-    if (SI_VAR(0) == 0) {
-        GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) += 10;
-        SI_VAR(1) += 25;
-        SI_VAR(2) += 5;
+    if (EVT_VAR(0) == 0) {
+        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) += 10;
+        EVT_VAR(1) += 25;
+        EVT_VAR(2) += 5;
         PlaySoundAtActor(ACTOR_PARTNER, SOUND_UNKNOWN_208E);
-        func_80238EDC_6F1FBC(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        func_80238EDC_6F1FBC(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         sleep 4;
         SetActorJumpGravity(ACTOR_PARTNER, 1.4);
-        GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         SetJumpAnimations(ACTOR_PARTNER, 589828, ANIM_1, ANIM_90004, ANIM_90004);
-        SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         JumpToGoal(ACTOR_PARTNER, 20, 1, 1, 0);
         SetAnimation(ACTOR_PARTNER, -1, NPC_ANIM_battle_goombario_default_idle);
-        GetMenuSelection(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        match SI_VAR(2) {
+        GetMenuSelection(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        match EVT_VAR(2) {
             == 134 {
                 ShowMessageBox(36, 60);
             }
             == 135 {
                 N(func_80239190_6F2270)();
-                ShowMessageBox(SI_VAR(0), 60);
+                ShowMessageBox(EVT_VAR(0), 60);
             }
             == 136 {
                 ShowMessageBox(36, 60);
@@ -1280,8 +1280,8 @@ EvtSource N(8023C90C) = SCRIPT({
     }
 0:
     sleep 1;
-    IsMessageBoxDisplayed(SI_VAR(0));
-    if (SI_VAR(0) == 1) {
+    IsMessageBoxDisplayed(EVT_VAR(0));
+    if (EVT_VAR(0) == 1) {
         goto 0;
     }
 });

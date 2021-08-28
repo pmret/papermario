@@ -2,7 +2,7 @@
 #define _SCRIPT_API_BATTLE_H_
 
 #include "common_structs.h"
-#include "si.h"
+#include "evt.h"
 
 #include "script_api/common.h"
 

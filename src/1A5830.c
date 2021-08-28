@@ -1659,10 +1659,10 @@ ApiStatus SetActorSize(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (y != SI_LIMIT) {
+    if (y != EVT_LIMIT) {
         actor->size.y = y;
     }
-    if (x != SI_LIMIT) {
+    if (x != EVT_LIMIT) {
         actor->size.x = x;
     }
     actor->shadowScale = actor->size.x / 24.0;
@@ -1701,11 +1701,11 @@ ApiStatus SetPartSize(Evt* script, s32 isInitialCall) {
 
     part = get_actor_part(get_actor(actorID), partIndex);
 
-    if (sizeY != SI_LIMIT) {
+    if (sizeY != EVT_LIMIT) {
         part->size.y = sizeY;
     }
 
-    if (sizeX != SI_LIMIT) {
+    if (sizeX != EVT_LIMIT) {
         part->size.x = sizeX;
     }
 

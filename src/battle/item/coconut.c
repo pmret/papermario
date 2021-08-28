@@ -46,7 +46,7 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_COCONUT;
+    EVT_VAR(10) = (const) ITEM_COCONUT;
 
     await N(UseItemWithEffect);
 
@@ -57,21 +57,21 @@ EvtSource N(main) = SCRIPT({
     PlaySound(SOUND_THROW);
     sleep 3;
 
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
 
     $x = 1.0;
     MultiplyByActorScale($x);
-    SetVirtualEntityScale(SI_VAR(10), $x, $x, $x);
+    SetVirtualEntityScale(EVT_VAR(10), $x, $x, $x);
 
     GetActorPos(ACTOR_PLAYER, $x, $y, $z);
-    SI_VAR(3) = 20;
-    SI_VAR(4) = 42;
-    SI_VAR(5) = 5;
-    MultiplyVec3ByActorScale(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    $x += SI_VAR(3);
-    $y += SI_VAR(4);
-    $z += SI_VAR(5);
-    SetVirtualEntityPosition(SI_VAR(10), $x, $y, $z);
+    EVT_VAR(3) = 20;
+    EVT_VAR(4) = 42;
+    EVT_VAR(5) = 5;
+    MultiplyVec3ByActorScale(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    $x += EVT_VAR(3);
+    $y += EVT_VAR(4);
+    $z += EVT_VAR(5);
+    SetVirtualEntityPosition(EVT_VAR(10), $x, $y, $z);
 
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
@@ -81,25 +81,25 @@ EvtSource N(main) = SCRIPT({
         $x = 0;
         loop 18 {
             $x += -60;
-            SetVirtualEntityRotation(SI_VAR(10), 0, 0, $x);
+            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, $x);
             sleep 1;
         }
     }
 
-    SetVirtualEntityJumpGravity(SI_VAR(10), 0.8);
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.8);
     $z += 5;
-    VirtualEntityJumpTo(SI_VAR(10), $x, $y, $z, 18);
+    VirtualEntityJumpTo(EVT_VAR(10), $x, $y, $z, 18);
 
-    GetItemPower(ITEM_COCONUT, $damage, SI_VAR(4));
+    GetItemPower(ITEM_COCONUT, $damage, EVT_VAR(4));
     ApplyShrinkFromOwner($damage);
-    ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, $damage, 32);
+    ItemDamageEnemy(EVT_VAR(9), 0x18000000, 0, $damage, 32);
 
     // Bounce off
     $x += 60;
     $y += 0;
-    VirtualEntityJumpTo(SI_VAR(10), $x, $y, $z, 16);
+    VirtualEntityJumpTo(EVT_VAR(10), $x, $y, $z, 16);
 
-    DeleteVirtualEntity(SI_VAR(10));
+    DeleteVirtualEntity(EVT_VAR(10));
 
     await N(PlayerGoHome);
 });

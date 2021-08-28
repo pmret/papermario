@@ -728,7 +728,7 @@ segments:
     vram: 0x802C3000
     subsegments:
     - [0xe79b0, c, script_list]
-    - [0xe92d0, c, si]
+    - [0xe92d0, c, evt]
     - [0xED510, c, map_api]
     - [0xef070, c, cam_api]
     - [0xf2470, c, npc_api]
@@ -743,9 +743,9 @@ segments:
     - [0xFE6D0, .data, player_api]
     - [0xFE6E0, .data, fa4c0_len_3bf0]
     - [0xFE700, .data, fx_api]
-    - [0xFE720, .data, si]
+    - [0xFE720, .data, evt]
     - [0xFE730, .rodata, script_list]
-    - [0xFE748, .rodata, si]
+    - [0xFE748, .rodata, evt]
     - [0xFEB80, .rodata, cam_api]
     - [0xFEB90, .rodata, npc_api]
     - [0xFEBA0, .rodata, msg_api]

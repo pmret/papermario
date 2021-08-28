@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240060) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -34,10 +34,10 @@ EvtSource N(exitDoubleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 14;
-    SI_VAR(2) = 24;
-    SI_VAR(3) = 22;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 14;
+    EVT_VAR(2) = 24;
+    EVT_VAR(3) = 22;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_03", 3);
@@ -48,10 +48,10 @@ EvtSource N(exitDoubleDoor_802401B4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 18;
-    SI_VAR(2) = 19;
-    SI_VAR(3) = 17;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 18;
+    EVT_VAR(2) = 19;
+    EVT_VAR(3) = 17;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_15", 0);
@@ -60,19 +60,19 @@ EvtSource N(exitDoubleDoor_802401B4) = SCRIPT({
 
 EvtSource N(enterDoubleDoor_80240268) = SCRIPT({
     UseDoorSounds(3);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 24;
-            SI_VAR(3) = 22;
+            EVT_VAR(2) = 24;
+            EVT_VAR(3) = 22;
             await EnterDoubleDoor;
         }
         == 1 {
             DisablePlayerInput(TRUE);
-            SI_VAR(2) = 19;
-            SI_VAR(3) = 17;
+            EVT_VAR(2) = 19;
+            EVT_VAR(3) = 17;
             await EnterDoubleDoor;
-            if (SI_AREA_FLAG(1) == 1) {
+            if (EVT_AREA_FLAG(1) == 1) {
                 sleep 5;
                 SetPlayerAnimation(ANIM_8001D);
                 sleep 20;
@@ -84,7 +84,7 @@ EvtSource N(enterDoubleDoor_80240268) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -103,5 +103,5 @@ static s32 N(pad_47C) = {
 
 EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EA564, 500, 60, 75, 0, ITEM_MAPLE_SYRUP, MAKE_ENTITY_END);
-    AssignBlockFlag(SI_SAVE_FLAG(1065));
+    AssignBlockFlag(EVT_SAVE_FLAG(1065));
 });

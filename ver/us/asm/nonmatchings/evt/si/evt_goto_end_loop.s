@@ -1,7 +1,7 @@
 .set noat      # allow manual use of $at
 .set noreorder # don't insert nops after branches
 
-glabel si_goto_end_loop
+glabel evt_goto_end_loop
 /* ED494 802C8AE4 0000282D */  daddu     $a1, $zero, $zero
 /* ED498 802C8AE8 8C830008 */  lw        $v1, 8($a0)
 /* ED49C 802C8AEC 24080005 */  addiu     $t0, $zero, 5

@@ -3,12 +3,12 @@
 
 EvtSource ShakeCam1 = SCRIPT({
     group 0;
-    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), 1.0);
+    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1.0);
 });
 
 EvtSource ShakeCamX = SCRIPT({
     group 0;
-    ShakeCam(SI_VAR(0), SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    ShakeCam(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
 });
 
 ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
@@ -207,10 +207,10 @@ void exec_ShakeCamX(s32 arg0, s32 arg1, s32 arg2, f32 arg3) {
     Evt* script;
 
     script = start_script_in_group(&ShakeCamX, 1, 0, 4);
-    set_variable(script, SI_VAR(0), arg0);
-    set_variable(script, SI_VAR(1), arg1);
-    set_variable(script, SI_VAR(2), arg2);
-    set_float_variable(script, SI_VAR(3), arg3);
+    set_variable(script, EVT_VAR(0), arg0);
+    set_variable(script, EVT_VAR(1), arg1);
+    set_variable(script, EVT_VAR(2), arg2);
+    set_float_variable(script, EVT_VAR(3), arg3);
 }
 
 ApiStatus SetCamLeadPlayer(Evt* script, s32 isInitialCall) {

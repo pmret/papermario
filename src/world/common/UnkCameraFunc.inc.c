@@ -9,8 +9,8 @@ ApiStatus N(UnkCameraFunc)(Evt* script, s32 isInitialCall) {
     Bytecode out1 = *args++;
     Bytecode out2 = *args++;
     s32 cameraYaw = gCameras[gCurrentCameraID].currentYaw;
-    s32 outVal1 = get_variable(script, SI_ARRAY(1)) - (var2 * cos_deg(cameraYaw));
-    s32 outVal2 = get_variable(script, SI_ARRAY(3)) - (var2 * sin_deg(cameraYaw));
+    s32 outVal1 = get_variable(script, EVT_ARRAY(1)) - (var2 * cos_deg(cameraYaw));
+    s32 outVal2 = get_variable(script, EVT_ARRAY(3)) - (var2 * sin_deg(cameraYaw));
 
     outVal1 -= var0;
     outVal2 -= var1;

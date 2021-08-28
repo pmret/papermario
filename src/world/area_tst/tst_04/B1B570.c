@@ -47,14 +47,14 @@ ApiStatus func_802400FC_B1B66C(Evt* script,  s32 isInitialCall) {
         f32 sin2;
         f32 cos2;
 
-        theta1 = (get_variable(script, SI_VAR(0)) - 1) * TAU / 360.0f;
+        theta1 = (get_variable(script, EVT_VAR(0)) - 1) * TAU / 360.0f;
         sinTemp = sin_rad(theta1);
         cosTemp = cos_rad(theta1);
 
         sin1 = -sinTemp * dist;
         cos1 = cosTemp * dist;
 
-        theta2 = (get_variable(script, SI_VAR(0)) * TAU) / 360.0f;
+        theta2 = (get_variable(script, EVT_VAR(0)) * TAU) / 360.0f;
         sin2 = sin_rad(theta2);
         cos2 = cos_rad(theta2);
 

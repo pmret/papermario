@@ -27,7 +27,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(802414B0) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -47,10 +47,10 @@ EvtSource N(exitDoubleDoor_80241550) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 5;
-    SI_VAR(2) = 11;
-    SI_VAR(3) = 13;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 5;
+    EVT_VAR(2) = 11;
+    EVT_VAR(3) = 13;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_03", 1);
@@ -61,10 +61,10 @@ EvtSource N(exitDoubleDoor_80241604) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 17;
-    SI_VAR(2) = 18;
-    SI_VAR(3) = 16;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 17;
+    EVT_VAR(2) = 18;
+    EVT_VAR(3) = 16;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_01", 1);
@@ -75,10 +75,10 @@ EvtSource N(exitSingleDoor_802416B8) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 2;
-    SI_VAR(1) = 9;
-    SI_VAR(2) = 21;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 2;
+    EVT_VAR(1) = 9;
+    EVT_VAR(2) = 21;
+    EVT_VAR(3) = 1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_07", 0);
@@ -89,10 +89,10 @@ EvtSource N(exitSingleDoor_8024176C) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 3;
-    SI_VAR(1) = 13;
-    SI_VAR(2) = 23;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 3;
+    EVT_VAR(1) = 13;
+    EVT_VAR(2) = 23;
+    EVT_VAR(3) = 1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_11", 0);
@@ -100,42 +100,42 @@ EvtSource N(exitSingleDoor_8024176C) = SCRIPT({
 });
 
 EvtSource N(enterSingleDoor_80241820) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             UseDoorSounds(3);
-            SI_VAR(2) = 11;
-            SI_VAR(3) = 13;
+            EVT_VAR(2) = 11;
+            EVT_VAR(3) = 13;
             await EnterDoubleDoor;
         }
         == 1 {
             UseDoorSounds(3);
-            SI_VAR(2) = 18;
-            SI_VAR(3) = 16;
+            EVT_VAR(2) = 18;
+            EVT_VAR(3) = 16;
             await EnterDoubleDoor;
         }
         == 2 {
             UseDoorSounds(0);
-            SI_VAR(2) = 21;
-            SI_VAR(3) = 1;
+            EVT_VAR(2) = 21;
+            EVT_VAR(3) = 1;
             await EnterSingleDoor;
         }
         == 3 {
             UseDoorSounds(0);
-            SI_VAR(2) = 23;
-            SI_VAR(3) = 1;
+            EVT_VAR(2) = 23;
+            EVT_VAR(3) = 1;
             await EnterSingleDoor;
         }
     }
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_802425C8));
     }
     bind N(exitDoubleDoor_80241550) TRIGGER_WALL_PRESS_A 5;
@@ -151,8 +151,8 @@ static s32 N(pad_1AA8)[] = {
 };
 
 EvtSource N(80241AB0) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             RemoveNpc(NPC_SELF);
         }

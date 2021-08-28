@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240250) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -37,10 +37,10 @@ EvtSource N(8024034C) = SCRIPT({
 });
 
 EvtSource N(enterWalk_80240378) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(0) = N(8024034C);
+            EVT_VAR(0) = N(8024034C);
             spawn EnterWalk;
             sleep 1;
         }
@@ -65,7 +65,7 @@ EvtSource N(enterWalk_80240378) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -89,156 +89,156 @@ static s32 N(pad_66C) = {
 };
 
 EvtSource N(80240670) = SCRIPT({
-    buf_use SI_VAR(0);
-    arr_new 6 SI_VAR(10);
-    buf_read SI_VAR(0);
-    SI_ARRAY(0) = SI_VAR(0);
-    buf_read SI_VAR(0);
-    SI_ARRAY(1) = SI_VAR(0);
-    buf_read SI_VAR(0);
-    SI_ARRAY(2) = SI_VAR(0);
-    buf_read SI_VAR(0);
-    SI_ARRAY(3) = SI_VAR(0);
-    buf_read SI_VAR(0);
-    SI_ARRAY(4) = SI_VAR(0);
-    buf_read SI_VAR(0);
-    SI_ARRAY(5) = SI_VAR(0);
-    SI_VAR(0) = SI_VAR(10);
+    buf_use EVT_VAR(0);
+    arr_new 6 EVT_VAR(10);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(0) = EVT_VAR(0);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(1) = EVT_VAR(0);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(2) = EVT_VAR(0);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(3) = EVT_VAR(0);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(4) = EVT_VAR(0);
+    buf_read EVT_VAR(0);
+    EVT_ARRAY(5) = EVT_VAR(0);
+    EVT_VAR(0) = EVT_VAR(10);
     bind N(80240770) TRIGGER_FLOOR_TOUCH 0xF4ACD480; // TODO: what is this id? see also below TODO
 });
 
 EvtSource N(80240770) = SCRIPT({
-    arr_use SI_VAR(0);
+    arr_use EVT_VAR(0);
     N(func_80240000_C4C390)();
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
         return;
     }
     loop 5 {
-        ModifyColliderFlags(1, SI_ARRAY(0), 0x7FFFFE00);
-        EnableModel(SI_ARRAY(1), 1);
+        ModifyColliderFlags(1, EVT_ARRAY(0), 0x7FFFFE00);
+        EnableModel(EVT_ARRAY(1), 1);
         sleep 1;
-        ModifyColliderFlags(0, SI_ARRAY(0), 0x7FFFFE00);
-        EnableModel(SI_ARRAY(1), 0);
+        ModifyColliderFlags(0, EVT_ARRAY(0), 0x7FFFFE00);
+        EnableModel(EVT_ARRAY(1), 0);
         sleep 1;
     }
-    if (SI_ARRAY(5) != 0) {
+    if (EVT_ARRAY(5) != 0) {
         await 0xF4ACD485; // TODO: what is this?
     }
 });
 
 EvtSource N(80240860) = SCRIPT({
-    buf_use SI_VAR(0);
-    arr_new 6 SI_VAR(9);
-    buf_read SI_VAR(1);
-    SI_ARRAY(0) = SI_VAR(1);
-    buf_read SI_VAR(1);
-    SI_ARRAY(1) = SI_VAR(1);
-    buf_read SI_VAR(1);
-    SI_ARRAY(2) = SI_VAR(1);
-    buf_read SI_VAR(1);
-    SI_ARRAY(3) = SI_VAR(1);
-    buf_read SI_VAR(1);
-    SI_ARRAY(4) = SI_VAR(1);
-    buf_read SI_VAR(1);
-    SI_ARRAY(5) = SI_VAR(1);
-    ParentColliderToModel(SI_ARRAY(1), SI_ARRAY(0));
+    buf_use EVT_VAR(0);
+    arr_new 6 EVT_VAR(9);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(0) = EVT_VAR(1);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(1) = EVT_VAR(1);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(2) = EVT_VAR(1);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(3) = EVT_VAR(1);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(4) = EVT_VAR(1);
+    buf_read EVT_VAR(1);
+    EVT_ARRAY(5) = EVT_VAR(1);
+    ParentColliderToModel(EVT_ARRAY(1), EVT_ARRAY(0));
 0:
 1:
-    GetPlayerActionState(SI_VAR(10));
-    if (SI_VAR(10) == 13) {
+    GetPlayerActionState(EVT_VAR(10));
+    if (EVT_VAR(10) == 13) {
         goto 2;
     }
-    if (SI_VAR(10) == 15) {
+    if (EVT_VAR(10) == 15) {
         goto 2;
     }
     sleep 1;
     goto 0;
 2:
-    GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
+    GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
     sleep 1;
-    if (SI_VAR(2) != SI_ARRAY(3)) {
+    if (EVT_VAR(2) != EVT_ARRAY(3)) {
         goto 2;
     }
     N(func_802400A0_C4C430)();
-    if (SI_VAR(0) == 1) {
+    if (EVT_VAR(0) == 1) {
         await N(80240AF4);
     }
-    if (SI_VAR(0) == 2) {
+    if (EVT_VAR(0) == 2) {
         await N(80240CB8);
     }
 3:
-    GetPlayerActionState(SI_VAR(0));
+    GetPlayerActionState(EVT_VAR(0));
     sleep 1;
-    if (SI_VAR(0) == 13) {
+    if (EVT_VAR(0) == 13) {
         goto 3;
     }
-    if (SI_VAR(0) == 15) {
+    if (EVT_VAR(0) == 15) {
         goto 3;
     }
     goto 0;
 });
 
 EvtSource N(80240AF4) = SCRIPT({
-    arr_use SI_VAR(9);
-    GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
+    arr_use EVT_VAR(9);
+    GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
     MakeLerp(0, 5, 3, 1);
 2:
     UpdateLerp();
-    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
-    SI_VAR(5) = SI_VAR(3);
-    SI_VAR(5) += SI_VAR(0);
-    SetPlayerPos(SI_VAR(2), SI_VAR(5), SI_VAR(4));
-    UpdateColliderTransform(SI_ARRAY(1));
+    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
+    EVT_VAR(5) = EVT_VAR(3);
+    EVT_VAR(5) += EVT_VAR(0);
+    SetPlayerPos(EVT_VAR(2), EVT_VAR(5), EVT_VAR(4));
+    UpdateColliderTransform(EVT_ARRAY(1));
     sleep 1;
-    if (SI_VAR(1) == 1) {
+    if (EVT_VAR(1) == 1) {
         goto 2;
     }
     MakeLerp(5, 0, 3, 1);
 3:
     UpdateLerp();
-    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
-    SI_VAR(5) = SI_VAR(3);
-    SI_VAR(5) += SI_VAR(0);
-    SetPlayerPos(SI_VAR(2), SI_VAR(5), SI_VAR(4));
-    UpdateColliderTransform(SI_ARRAY(1));
+    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
+    EVT_VAR(5) = EVT_VAR(3);
+    EVT_VAR(5) += EVT_VAR(0);
+    SetPlayerPos(EVT_VAR(2), EVT_VAR(5), EVT_VAR(4));
+    UpdateColliderTransform(EVT_ARRAY(1));
     sleep 1;
-    if (SI_VAR(1) == 1) {
+    if (EVT_VAR(1) == 1) {
         goto 3;
     }
 });
 
 EvtSource N(80240CB8) = SCRIPT({
-    arr_use SI_VAR(9);
-    MakeItemEntity(SI_ARRAY(5), SI_ARRAY(2), SI_ARRAY(3), SI_ARRAY(4), 3, 0);
-    SI_VAR(2) = 0;
+    arr_use EVT_VAR(9);
+    MakeItemEntity(EVT_ARRAY(5), EVT_ARRAY(2), EVT_ARRAY(3), EVT_ARRAY(4), 3, 0);
+    EVT_VAR(2) = 0;
     MakeLerp(0, 150, 19, 4);
 2:
     UpdateLerp();
-    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
-    SI_VAR(2) += 45;
-    RotateModel(SI_ARRAY(0), SI_VAR(2), 1, 0, 0);
+    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
+    EVT_VAR(2) += 45;
+    RotateModel(EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0);
     sleep 1;
-    if (SI_VAR(1) == 1) {
+    if (EVT_VAR(1) == 1) {
         goto 2;
     }
     MakeLerp(150, 0, 19, 4);
 3:
     UpdateLerp();
-    TranslateModel(SI_ARRAY(0), 0, SI_VAR(0), 0);
-    SI_VAR(2) += 45;
-    RotateModel(SI_ARRAY(0), SI_VAR(2), 1, 0, 0);
+    TranslateModel(EVT_ARRAY(0), 0, EVT_VAR(0), 0);
+    EVT_VAR(2) += 45;
+    RotateModel(EVT_ARRAY(0), EVT_VAR(2), 1, 0, 0);
     sleep 1;
-    if (SI_VAR(1) == 1) {
+    if (EVT_VAR(1) == 1) {
         goto 3;
     }
 });
 
 EvtSource N(80240E68) = SCRIPT({
     N(func_8024013C_C4C4CC)();
-    func_802CA988(0, SI_VAR(2), SI_VAR(3), SI_VAR(4), SI_VAR(5));
+    func_802CA988(0, EVT_VAR(2), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
     N(func_802401C0_C4C550)();
     func_802D2B6C();
-    GotoMap("dgb_11", SI_VAR(0));
+    GotoMap("dgb_11", EVT_VAR(0));
     sleep 100;
 });
 
@@ -247,27 +247,27 @@ static s32 N(pad_EDC) = {
 };
 
 EvtSource N(80240EE0) = SCRIPT({
-    SI_SAVE_FLAG(1052) = 1;
+    EVT_SAVE_FLAG(1052) = 1;
 });
 
 EvtSource N(80240F00) = SCRIPT({
-    SI_SAVE_FLAG(1053) = 1;
+    EVT_SAVE_FLAG(1053) = 1;
 });
 
 EvtSource N(80240F20) = SCRIPT({
-    SI_SAVE_FLAG(1054) = 1;
+    EVT_SAVE_FLAG(1054) = 1;
 });
 
 EvtSource N(makeEntities) = SCRIPT({
-    if (SI_SAVE_FLAG(1052) == 0) {
+    if (EVT_SAVE_FLAG(1052) == 0) {
         MakeEntity(0x802BCE84, 500, 0, -100, 0, MAKE_ENTITY_END);
         AssignScript(N(80240EE0));
     }
-    if (SI_SAVE_FLAG(1053) == 0) {
+    if (EVT_SAVE_FLAG(1053) == 0) {
         MakeEntity(0x802BCE84, 500, 0, -250, 0, MAKE_ENTITY_END);
         AssignScript(N(80240F00));
     }
-    if (SI_SAVE_FLAG(1054) == 0) {
+    if (EVT_SAVE_FLAG(1054) == 0) {
         MakeEntity(0x802BCE84, 375, 0, -250, 0, MAKE_ENTITY_END);
         AssignScript(N(80240F20));
     }

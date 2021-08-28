@@ -140,36 +140,36 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_EGG_MISSILE;
+    EVT_VAR(10) = (const) ITEM_EGG_MISSILE;
     await N(UseItemWithEffect);
     UseBattleCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) += 20;
-    SI_VAR(1) += 42;
-    SI_VAR(2) += 5;
-    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) += 20;
+    EVT_VAR(1) += 42;
+    EVT_VAR(2) += 5;
+    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 18 {
-            SI_VAR(0) += 60;
-            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
+            EVT_VAR(0) += 60;
+            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
-    SetVirtualEntityJumpGravity(SI_VAR(10), 1.0);
-    SI_VAR(2) += 5;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    DeleteVirtualEntity(SI_VAR(10));
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 1.0);
+    EVT_VAR(2) += 5;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18);
+    DeleteVirtualEntity(EVT_VAR(10));
     PlaySound(SOUND_UNKNOWN_2010);
-    N(func_802A123C_71CF1C)(SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    N(func_802A123C_71CF1C)(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
         StartRumble(5);
         ShakeCam(1, 0, 2, 0.75);
@@ -177,7 +177,7 @@ EvtSource N(main) = SCRIPT({
         ShakeCam(1, 0, 4, 1.2001953125);
         ShakeCam(1, 0, 2, 0.4501953125);
     }
-    GetItemPower(ITEM_EGG_MISSILE, SI_VAR(0), SI_VAR(1));
-    ItemDamageEnemy(SI_VAR(0), 0x18000202, 0, SI_VAR(0), 32);
+    GetItemPower(ITEM_EGG_MISSILE, EVT_VAR(0), EVT_VAR(1));
+    ItemDamageEnemy(EVT_VAR(0), 0x18000202, 0, EVT_VAR(0), 32);
     await N(PlayerGoHome);
 });

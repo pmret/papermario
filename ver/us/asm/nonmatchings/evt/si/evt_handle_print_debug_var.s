@@ -74,7 +74,7 @@ glabel D_802D9F10
 
 .section .text
 
-glabel si_handle_print_debug_var
+glabel evt_handle_print_debug_var
 /* EB7CC 802C6E1C 27BDFFD8 */  addiu     $sp, $sp, -0x28
 /* EB7D0 802C6E20 0080382D */  daddu     $a3, $a0, $zero
 /* EB7D4 802C6E24 AFBF0024 */  sw        $ra, 0x24($sp)

@@ -67,32 +67,32 @@ s32 N(D_80244600_CCF910) = {
 };
 
 EvtSource N(80244604) = SCRIPT({
-    SI_VAR(9) = SI_VAR(1);
+    EVT_VAR(9) = EVT_VAR(1);
     ShowConsumableChoicePopup();
-    SI_VAR(10) = SI_VAR(0);
-    match SI_VAR(0) {
+    EVT_VAR(10) = EVT_VAR(0);
+    match EVT_VAR(0) {
         == 0 {}
         == -1 {}
         else {
-            RemoveItemAt(SI_VAR(1));
-            GetPlayerPos(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            N(AddPlayerHandsOffset)(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-            MakeItemEntity(SI_VAR(0), SI_VAR(3), SI_VAR(4), SI_VAR(5), 1, 0);
+            RemoveItemAt(EVT_VAR(1));
+            GetPlayerPos(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+            N(AddPlayerHandsOffset)(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+            MakeItemEntity(EVT_VAR(0), EVT_VAR(3), EVT_VAR(4), EVT_VAR(5), 1, 0);
             SetPlayerAnimation(0x60005);
             sleep 30;
             SetPlayerAnimation(ANIM_10002);
-            RemoveItemEntity(SI_VAR(0));
+            RemoveItemEntity(EVT_VAR(0));
         }
     }
-    N(func_80242288_CCD598)(SI_VAR(10));
+    N(func_80242288_CCD598)(EVT_VAR(10));
     CloseChoicePopup();
     unbind;
 });
 
 EvtSource N(80244738) = SCRIPT({
-    N(func_802422C0_CCD5D0)(SI_VAR(0));
+    N(func_802422C0_CCD5D0)(EVT_VAR(0));
     bind_padlock N(80244604) 0x10 0 N(D_802453B0_EF79C0);
-    N(func_80242234_CCD544)(SI_VAR(0));
+    N(func_80242234_CCD544)(EVT_VAR(0));
 });
 
 
@@ -101,28 +101,28 @@ s32 N(D_80244788_CCFA98)[] = {
 };
 
 EvtSource N(interact_80244790) = SCRIPT({
-    if (SI_AREA_FLAG(37) == 1) {
-        SI_AREA_FLAG(35) = 1;
+    if (EVT_AREA_FLAG(37) == 1) {
+        EVT_AREA_FLAG(35) = 1;
         SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0063));
-        SI_AREA_FLAG(35) = 0;
+        EVT_AREA_FLAG(35) = 0;
         return;
     }
-    SI_AREA_FLAG(35) = 1;
-    if (SI_SAVE_FLAG(1412) == 0) {
+    EVT_AREA_FLAG(35) = 1;
+    if (EVT_SAVE_FLAG(1412) == 0) {
         SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x005F));
     } else {
         SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0060));
     }
-    FindItem(161, SI_VAR(0));
-    if (SI_VAR(0) != -1) {
-        SI_VAR(0) = N(D_80244788_CCFA98);
-        SI_VAR(1) = 0;
+    FindItem(161, EVT_VAR(0));
+    if (EVT_VAR(0) != -1) {
+        EVT_VAR(0) = N(D_80244788_CCFA98);
+        EVT_VAR(1) = 0;
         await N(80244738);
-        if (SI_VAR(0) == -1) {
+        if (EVT_VAR(0) == -1) {
             SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0064));
         } else {
             SpeakToPlayer(NPC_SELF, -1, -1, 0, MESSAGE_ID(0x11, 0x0061));
-            SI_AREA_FLAG(36) = 1;
+            EVT_AREA_FLAG(36) = 1;
             SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100)), TRUE);
             PlayerMoveTo(555, 110, 20);
             SetNpcFlagBits(NPC_SELF, ((NPC_FLAG_100)), FALSE);
@@ -137,22 +137,22 @@ EvtSource N(interact_80244790) = SCRIPT({
                 InterpPlayerYaw(315, 0);
             }
 10:
-            if (SI_AREA_FLAG(37) == 0) {
+            if (EVT_AREA_FLAG(37) == 0) {
                 sleep 1;
                 goto 10;
             }
             ResetCam(0, 4.0);
             SpeakToPlayer(NPC_SELF, -1, -1, 5, MESSAGE_ID(0x11, 0x0063));
-            SI_SAVE_FLAG(1412) = 1;
+            EVT_SAVE_FLAG(1412) = 1;
             bind N(8024352C) TRIGGER_FLOOR_PRESS_A 30;
         }
     }
-    SI_AREA_FLAG(35) = 0;
+    EVT_AREA_FLAG(35) = 0;
 });
 
 EvtSource N(init_80244ADC) = SCRIPT({
-    SI_AREA_FLAG(36) = 0;
-    SI_AREA_FLAG(37) = 0;
+    EVT_AREA_FLAG(36) = 0;
+    EVT_AREA_FLAG(37) = 0;
     BindNpcInteract(NPC_SELF, N(interact_80244790));
 });
 
@@ -236,7 +236,7 @@ static s32 N(pad_4F24)[] = {
 };
 
 EvtSource N(80244F30) = SCRIPT({
-    MakeItemEntity(ITEM_STAR_PIECE, 675, 60, -100, 17, SI_SAVE_FLAG(1387));
+    MakeItemEntity(ITEM_STAR_PIECE, 675, 60, -100, 17, EVT_SAVE_FLAG(1387));
 });
 
 static s32 N(pad_4F64)[] = {
@@ -245,66 +245,66 @@ static s32 N(pad_4F64)[] = {
 
 EvtSource N(80244F70) = SCRIPT({
     loop {
-        N(func_80242360_CCD670)(SI_VAR(0));
-        if (SI_VAR(0) == SI_VAR(4)) {
-            GetPlayerActionState(SI_VAR(0));
-            if (SI_VAR(0) != 23) {
-                if (SI_VAR(8) == 0) {
+        N(func_80242360_CCD670)(EVT_VAR(0));
+        if (EVT_VAR(0) == EVT_VAR(4)) {
+            GetPlayerActionState(EVT_VAR(0));
+            if (EVT_VAR(0) != 23) {
+                if (EVT_VAR(8) == 0) {
                     spawn {
-                        GetModelCenter(SI_VAR(5));
-                        PlaySoundAt(0x1DB, 4194304, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                        GetModelCenter(EVT_VAR(5));
+                        PlaySoundAt(0x1DB, 4194304, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
                     }
                 }
-                if (SI_VAR(7) < 90) {
-                    if (SI_VAR(7) == 0) {
+                if (EVT_VAR(7) < 90) {
+                    if (EVT_VAR(7) == 0) {
                         sleep 5;
-                        SI_VAR(8) = 6;
-                        ModifyColliderFlags(0, SI_VAR(9), 0x7FFFFE00);
+                        EVT_VAR(8) = 6;
+                        ModifyColliderFlags(0, EVT_VAR(9), 0x7FFFFE00);
                     }
-                    SI_VAR(8) += 1;
-                    SI_VAR(7) += SI_VAR(8);
+                    EVT_VAR(8) += 1;
+                    EVT_VAR(7) += EVT_VAR(8);
                 }
                 goto 50;
             }
         }
-        if (SI_VAR(7) != 0) {
-            SI_VAR(8) -= 1;
-            SI_VAR(7) += SI_VAR(8);
-            if (SI_VAR(7) <= 0) {
-                SI_VAR(8) = 0;
-                SI_VAR(7) = 0;
+        if (EVT_VAR(7) != 0) {
+            EVT_VAR(8) -= 1;
+            EVT_VAR(7) += EVT_VAR(8);
+            if (EVT_VAR(7) <= 0) {
+                EVT_VAR(8) = 0;
+                EVT_VAR(7) = 0;
                 spawn {
-                    GetModelCenter(SI_VAR(5));
-                    PlaySoundAt(0x1DC, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+                    GetModelCenter(EVT_VAR(5));
+                    PlaySoundAt(0x1DC, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
                 }
-                ModifyColliderFlags(1, SI_VAR(9), 0x7FFFFE00);
+                ModifyColliderFlags(1, EVT_VAR(9), 0x7FFFFE00);
             }
         }
 50:
-        if (SI_VAR(7) >= 90) {
-            SI_VAR(8) = -1;
-            SI_VAR(7) = 90;
+        if (EVT_VAR(7) >= 90) {
+            EVT_VAR(8) = -1;
+            EVT_VAR(7) = 90;
         }
-        RotateModel(SI_VAR(5), SI_VAR(7), -1, 0, 0);
-        RotateModel(SI_VAR(6), SI_VAR(7), -1, 0, 0);
+        RotateModel(EVT_VAR(5), EVT_VAR(7), -1, 0, 0);
+        RotateModel(EVT_VAR(6), EVT_VAR(7), -1, 0, 0);
         sleep 1;
     }
 });
 
 EvtSource N(80245224) = SCRIPT({
-    SI_VAR(4) = 21;
-    SI_VAR(5) = 21;
-    SI_VAR(6) = 20;
-    SI_VAR(7) = SI_MAP_VAR(10);
-    SI_VAR(8) = SI_MAP_VAR(11);
-    SI_VAR(9) = 22;
+    EVT_VAR(4) = 21;
+    EVT_VAR(5) = 21;
+    EVT_VAR(6) = 20;
+    EVT_VAR(7) = EVT_MAP_VAR(10);
+    EVT_VAR(8) = EVT_MAP_VAR(11);
+    EVT_VAR(9) = 22;
     spawn N(80244F70);
-    SI_VAR(4) = 17;
-    SI_VAR(5) = 26;
-    SI_VAR(6) = 25;
-    SI_VAR(7) = SI_MAP_VAR(12);
-    SI_VAR(8) = SI_MAP_VAR(13);
-    SI_VAR(9) = 18;
+    EVT_VAR(4) = 17;
+    EVT_VAR(5) = 26;
+    EVT_VAR(6) = 25;
+    EVT_VAR(7) = EVT_MAP_VAR(12);
+    EVT_VAR(8) = EVT_MAP_VAR(13);
+    EVT_VAR(9) = 18;
     spawn N(80244F70);
 });
 

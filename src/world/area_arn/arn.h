@@ -1,7 +1,7 @@
 #ifndef _WORLD_AREA_ARN_ARN_H_
 #define _WORLD_AREA_ARN_ARN_H_
 
-#include "si.h"
+#include "evt.h"
 
 extern MapConfig arn_02_config;
 extern MapConfig arn_03_config;

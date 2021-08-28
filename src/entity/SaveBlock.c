@@ -49,10 +49,10 @@ void entity_SaveBlock_save_data(void) {
 }
 
 void entity_SaveBlock_show_tutorial_message(Entity* entity) {
-    if (!get_global_flag(SI_SAVE_FLAG(95))) {
+    if (!get_global_flag(EVT_SAVE_FLAG(95))) {
         D_802EB390 = FALSE;
         msg_get_printer_for_string(0x1D0000, &D_802EB390);
-        set_global_flag(SI_SAVE_FLAG(95));
+        set_global_flag(EVT_SAVE_FLAG(95));
         return;
     }
 

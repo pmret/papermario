@@ -45,46 +45,46 @@ s32 N(modelCommandList)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) 0x86;
+    EVT_VAR(10) = (const) 0x86;
     await N(UseItemWithEffect);
     UseBattleCamPreset(3);
     MoveBattleCamOver(15);
     SetAnimation(ACTOR_PLAYER, 0, ANIM_THROW);
     PlaySound(SOUND_THROW);
     sleep 3;
-    CreateVirtualEntity(SI_VAR(10), N(modelCommandList));
-    SI_VAR(0) = 1.0;
-    MultiplyByActorScale(SI_VAR(0));
-    SetVirtualEntityScale(SI_VAR(10), SI_VAR(0), SI_VAR(0), SI_VAR(0));
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(3) = 20;
-    SI_VAR(4) = 42;
-    SI_VAR(5) = 5;
-    MultiplyVec3ByActorScale(SI_VAR(3), SI_VAR(4), SI_VAR(5));
-    SI_VAR(0) += SI_VAR(3);
-    SI_VAR(1) += SI_VAR(4);
-    SI_VAR(2) += SI_VAR(5);
-    SetVirtualEntityPosition(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    CreateVirtualEntity(EVT_VAR(10), N(modelCommandList));
+    EVT_VAR(0) = 1.0;
+    MultiplyByActorScale(EVT_VAR(0));
+    SetVirtualEntityScale(EVT_VAR(10), EVT_VAR(0), EVT_VAR(0), EVT_VAR(0));
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(3) = 20;
+    EVT_VAR(4) = 42;
+    EVT_VAR(5) = 5;
+    MultiplyVec3ByActorScale(EVT_VAR(3), EVT_VAR(4), EVT_VAR(5));
+    EVT_VAR(0) += EVT_VAR(3);
+    EVT_VAR(1) += EVT_VAR(4);
+    EVT_VAR(2) += EVT_VAR(5);
+    SetVirtualEntityPosition(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     InitTargetIterator();
     SetGoalToTarget(ACTOR_SELF);
-    GetGoalPos(ACTOR_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(ACTOR_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     spawn {
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
         loop 18 {
-            SI_VAR(0) += 0xFFFFFFC4;
-            SetVirtualEntityRotation(SI_VAR(10), 0, 0, SI_VAR(0));
+            EVT_VAR(0) += 0xFFFFFFC4;
+            SetVirtualEntityRotation(EVT_VAR(10), 0, 0, EVT_VAR(0));
             sleep 1;
         }
     }
-    SetVirtualEntityJumpGravity(SI_VAR(10), 0.80078125);
-    SI_VAR(2) += 5;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 18);
-    GetItemPower(ITEM_DUSTY_HAMMER, SI_VAR(3), SI_VAR(4));
-    ApplyShrinkFromOwner(SI_VAR(3));
-    ItemDamageEnemy(SI_VAR(9), 0x18000000, 0, SI_VAR(3), 32);
-    SI_VAR(0) += 40;
-    SI_VAR(1) += 10;
-    VirtualEntityJumpTo(SI_VAR(10), SI_VAR(0), SI_VAR(1), SI_VAR(2), 10);
-    DeleteVirtualEntity(SI_VAR(10));
+    SetVirtualEntityJumpGravity(EVT_VAR(10), 0.80078125);
+    EVT_VAR(2) += 5;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 18);
+    GetItemPower(ITEM_DUSTY_HAMMER, EVT_VAR(3), EVT_VAR(4));
+    ApplyShrinkFromOwner(EVT_VAR(3));
+    ItemDamageEnemy(EVT_VAR(9), 0x18000000, 0, EVT_VAR(3), 32);
+    EVT_VAR(0) += 40;
+    EVT_VAR(1) += 10;
+    VirtualEntityJumpTo(EVT_VAR(10), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 10);
+    DeleteVirtualEntity(EVT_VAR(10));
     await N(PlayerGoHome);
 });

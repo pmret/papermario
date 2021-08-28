@@ -132,7 +132,7 @@ void state_step_demo(void) {
             gGameStatusPtr->peachFlags = 0;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            set_variable(NULL, SI_STORY_PROGRESS, demoSceneData->unk_6);
+            set_variable(NULL, EVT_STORY_PROGRESS, demoSceneData->unk_6);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);
@@ -150,7 +150,7 @@ void state_step_demo(void) {
             gGameStatusPtr->peachFlags = 1;
             playerData->currentPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
-            set_variable(NULL, SI_STORY_PROGRESS, demoSceneData->unk_6);
+            set_variable(NULL, EVT_STORY_PROGRESS, demoSceneData->unk_6);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
                 set_map_transition_effect(3);

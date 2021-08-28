@@ -10,7 +10,7 @@ extern s32 D_800D95E8[];
 void fio_serialize_state(void);
 
 s32 get_spirits_rescued(void) {
-    s32 storyProgress = get_variable(NULL, SI_STORY_PROGRESS);
+    s32 storyProgress = get_variable(NULL, EVT_STORY_PROGRESS);
     s32 ret = 7;
 
     if (storyProgress < get_variable(NULL, STORY_CH1_STAR_SPIRIT_RESCUED)) {
