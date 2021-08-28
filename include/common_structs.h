@@ -271,13 +271,11 @@ typedef union {
     s32 flags;
 } TriggerFlags;
 
-typedef s32 (*TriggerHandlerFunc)(struct Trigger*);
-
 typedef struct Trigger {
     /* 0x00 */ TriggerFlags flags;
     /* 0x04 */ s32 params1;
     /* 0x08 */ s32 params2;
-    /* 0x0C */ TriggerHandlerFunc functionHandler;
+    /* 0x0C */ s32 (*functionHandler)(struct Trigger*);
     /* 0x10 */ EvtSource* scriptSource;
     /* 0x14 */ struct Evt* runningScript;
     /* 0x18 */ s32 priority;
@@ -1484,6 +1482,8 @@ typedef struct FontRasterSet {
     /* 0x01 */ u8 sizeY;
     /* 0x02 */ char unk_02[10];
 } FontRasterSet; // size = 0x0C
+
+typedef s32 (*TriggerHandlerFunc)(Trigger*);
 
 typedef struct TriggerDefinition {
     /* 0x00 */ s32 flags;
