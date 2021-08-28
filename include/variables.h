@@ -298,7 +298,7 @@ extern Temp8010F250 D_8010F250; // sfx_play_sound state struct?
 extern SaveData gCurrentSaveFile;
 
 extern u32* gMapFlags;
-extern u32* gMapVars;
+extern s32* gMapVars;
 
 extern f32 D_80286540;
 

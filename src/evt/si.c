@@ -1161,7 +1161,111 @@ ApiStatus func_802C6E14(Evt* script) {
 }
 
 ApiStatus si_handle_print_debug_var(Evt* script);
+// Almost, some ordering stuff and such
+
+#ifdef NON_MATCHING
+extern s8 evtDebugPrintBuffer[];
+
+s32 si_handle_print_debug_var(Evt* script) {
+    Bytecode* args = script->ptrReadPos;
+    s32 var = *args++;
+    s32 phi_t0;
+
+    if (var <= -270000000) {
+        sprintf(&evtDebugPrintBuffer, "ADDR     [%08X]", var);
+    } else if (var <= -220000000) {
+        sprintf(&evtDebugPrintBuffer, "FLOAT    [%4.2f]", fixed_var_to_float(var));
+    } else if (var <= -200000000) {
+        var += 210000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "UF(%3d)  [%d]", var, script->flagArray[var / 32] & (1 << phi_t0));
+    } else if (var <= -180000000) {
+        s32 arrayVal;
+
+        var += 190000000;
+        arrayVal = script->array[var];
+
+        if (script->array[var] <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%08X]", var, arrayVal);
+        } else if (arrayVal <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%4.2f]", var, fixed_var_to_float(arrayVal));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "UW(%3d)  [%d]", var, arrayVal);
+        }
+    } else if (var <= -160000000) {
+        s32 globalByte;
+
+        var += 170000000;
+        globalByte = get_global_byte(var);
+
+        if (globalByte <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%08X]", var, globalByte);
+        } else if (globalByte <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%4.2f]", var, fixed_var_to_float(globalByte));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "GSW(%3d) [%d]", var, globalByte);
+        }
+    } else if (var <= -140000000) {
+        s32 areaByte;
+
+        var += 150000000;
+        areaByte = get_area_byte(var);
+
+        if (areaByte <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%08X]", var, areaByte);
+        } else if (areaByte <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d)  [%4.2f]", var, fixed_var_to_float(areaByte));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "LSW(%3d) [%d]", var, areaByte);
+        }
+    } else if (var <= -120000000) {
+        var += 130000000;
+        sprintf(&evtDebugPrintBuffer, "GSWF(%3d)[%d]", var, get_global_flag(var));
+    } else if (var <= -100000000) {
+        var += 110000000;
+        sprintf(&evtDebugPrintBuffer, "LSWF(%3d)[%d]", var, get_area_flag(var));
+    } else if (var <= -80000000) {
+        var += 90000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "GF(%3d)  [%d]", var, gMapFlags[var / 32] & (1 << phi_t0));
+    } else if (var <= -60000000) {
+        var += 70000000;
+        phi_t0 = var % 32;
+        sprintf(&evtDebugPrintBuffer, "LF(%3d)  [%d]", var, script->varFlags[var / 32] & (1 << phi_t0));
+    } else if (var <= -40000000) {
+        s32 mapVar;
+
+        var += 50000000;
+        mapVar = gMapVars[var];
+
+        if (mapVar <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%08X]", var, mapVar);
+        } else if (mapVar <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%4.2f]", var, fixed_var_to_float(mapVar));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "GW(%3d)  [%d]", var, mapVar);
+        }
+    } else if (var <= -20000000) {
+        s32 tableVar;
+
+        var += 30000000;
+        tableVar = script->varTable[var];
+
+        if (tableVar <= -270000000) {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%08X]", var, tableVar);
+        } else if (tableVar <= -220000000) {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%4.2f]", var, fixed_var_to_float(tableVar));
+        } else {
+            sprintf(&evtDebugPrintBuffer, "LW(%3d)  [%d]", var, tableVar);
+        }
+    } else {
+        sprintf(&evtDebugPrintBuffer, "         [%d]", var);
+    }
+    return ApiStatus_DONE2;
+}
+#else
 INCLUDE_ASM(ApiStatus, "evt/si", si_handle_print_debug_var, Evt* script);
+#endif
 
 ApiStatus func_802C739C(Evt* script) {
     script->ptrSavedPosition = (Bytecode*)*script->ptrReadPos;
