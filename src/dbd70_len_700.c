@@ -46,27 +46,77 @@ void init_trigger_list(void) {
     gTriggerCount = 0;
 }
 
-INCLUDE_ASM(Trigger*, "dbd70_len_700", create_trigger, TriggerDefinition* def);
+Trigger* create_trigger(TriggerDefinition* def) {
+    Trigger* ret;
+    s32 i;
+
+    for (i = 0; i < MAX_TRIGGERS; i++) {
+        Trigger* listTrigger = (*gCurrentTriggerListPtr)[i];
+
+        if (listTrigger == NULL) {
+            break;
+        }
+    }
+
+    ASSERT(i < MAX_TRIGGERS);
+
+    (*gCurrentTriggerListPtr)[i] = ret = heap_malloc(sizeof(*ret));
+    gTriggerCount++;
+
+    ASSERT(ret != NULL);
+
+    ret->flags.flags = def->flags | 1;
+    ret->params1 = def->colliderIndex;
+    ret->params2 = def->flagIndex;
+    ret->unk_28 = def->unk_1C;
+    ret->unk_2C = def->unk_14;
+    ret->unk_30 = def->inputArg3;
+
+    ret->functionHandler = def->function;
+    if (ret->functionHandler == NULL) {
+        ret->functionHandler = default_trigger_delegate;
+    }
+
+    return ret;
+}
 
 INCLUDE_ASM(s32, "dbd70_len_700", update_triggers);
 
 void delete_trigger(Trigger* toDelete) {
     s32 i;
-    TriggerList** currentTriggerListPtr = &gCurrentTriggerListPtr;
 
     for (i = 0; i < MAX_TRIGGERS; i++) {
-        if ((**currentTriggerListPtr)[i] == toDelete) {
+        if ((*gCurrentTriggerListPtr)[i] == toDelete) {
             break;
         }
     }
 
     if (i < MAX_TRIGGERS) {
-        heap_free((**currentTriggerListPtr)[i]);
-        (**currentTriggerListPtr)[i] = NULL;
+        heap_free((*gCurrentTriggerListPtr)[i]);
+        (*gCurrentTriggerListPtr)[i] = NULL;
     }
 }
 
-INCLUDE_ASM(s32, "dbd70_len_700", is_trigger_bound, Trigger* trigger, Bytecode* script);
+s32 is_trigger_bound(Trigger* trigger, EvtSource* script) {
+    s32 i;
+
+    for (i = 0; i < MAX_TRIGGERS; i++) {
+        Trigger* listTrigger = (*gCurrentTriggerListPtr)[i];
+
+        if (listTrigger == NULL || listTrigger == trigger) {
+            continue;
+        }
+
+        if (listTrigger->flags.flags & 1) {
+            if (listTrigger->flags.flags & 2) {
+                if (listTrigger->scriptSource == script) {
+                    return TRUE;
+                }
+            }
+        }
+    }
+    return FALSE;
+}
 
 Trigger* get_trigger_by_id(s32 triggerID) {
     return (*gCurrentTriggerListPtr)[triggerID];
@@ -77,7 +127,7 @@ s32 should_collider_allow_interact(s32 colliderID) {
     s32 i;
 
     if (phys_can_player_interact() == 0) {
-        return 0;
+        return FALSE;
     }
 
     for (i = 0; i < MAX_TRIGGERS; i++) {
@@ -87,8 +137,8 @@ s32 should_collider_allow_interact(s32 colliderID) {
             (trigger->unk_30 != 0) &&
             (trigger->params2 == colliderID) &&
             (trigger->flags.flags & 0x100)) {
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
