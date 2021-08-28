@@ -21,7 +21,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(802402E0) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_FLOWER_FIELDS_CLOUDY, 0, 8);
         } else {
@@ -37,7 +37,7 @@ EvtSource N(802403AC) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -46,13 +46,13 @@ EvtSource N(main) = SCRIPT({
     MakeNpcs(0, N(npcGroupList_80240DE4));
     spawn N(80241F6C);
     spawn N(80241528);
-    GetEntryID(SI_VAR(0));
+    GetEntryID(EVT_VAR(0));
     ModifyColliderFlags(0, 1, 0x7FFFFE00);
-    SI_VAR(0) = N(802403AC);
+    EVT_VAR(0) = N(802403AC);
     spawn EnterWalk;
     spawn N(80240E24);
     await N(802402E0);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_80240000_CEC240)();
     }
 });
@@ -68,13 +68,13 @@ NpcSettings N(npcSettings_80240520) = {
 };
 
 EvtSource N(idle_8024054C) = SCRIPT({
-    SI_MAP_VAR(10) = 0;
+    EVT_MAP_VAR(10) = 0;
     loop {
-        match SI_MAP_VAR(10) {
+        match EVT_MAP_VAR(10) {
             == 0 {}
             == 1 {
                 SetPlayerAnimation(0x1002E);
-                SI_MAP_VAR(10) = 0;
+                EVT_MAP_VAR(10) = 0;
                 StartBattle();
             }
         }
@@ -83,8 +83,8 @@ EvtSource N(idle_8024054C) = SCRIPT({
 });
 
 EvtSource N(defeat_802405E4) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             spawn {
                 sleep 25;
@@ -113,13 +113,13 @@ EvtSource N(init_80240740) = SCRIPT({
 });
 
 EvtSource N(idle_80240778) = SCRIPT({
-    SI_MAP_VAR(11) = 0;
+    EVT_MAP_VAR(11) = 0;
     loop {
-        match SI_MAP_VAR(11) {
+        match EVT_MAP_VAR(11) {
             == 0 {}
             == 1 {
                 SetPlayerAnimation(0x1002E);
-                SI_MAP_VAR(11) = 0;
+                EVT_MAP_VAR(11) = 0;
                 StartBattle();
             }
         }
@@ -128,8 +128,8 @@ EvtSource N(idle_80240778) = SCRIPT({
 });
 
 EvtSource N(defeat_80240810) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             spawn {
                 sleep 25;
@@ -259,23 +259,23 @@ EvtSource N(80240E24) = SCRIPT({
 EvtSource N(80240E84) = SCRIPT({
     SetPlayerAnimation(0x6000E);
     spawn {
-        GetPlayerPos(SI_VAR(2), SI_VAR(3), SI_VAR(4));
-        SI_VAR(6) = 35;
-        SI_VAR(5) = 5;
-        MakeItemEntity(SI_VAR(8), SI_VAR(2), SI_VAR(6), 0, 1, 0);
-        SI_VAR(7) = SI_VAR(0);
-        MakeLerp(SI_VAR(2), 35, 20, 5);
+        GetPlayerPos(EVT_VAR(2), EVT_VAR(3), EVT_VAR(4));
+        EVT_VAR(6) = 35;
+        EVT_VAR(5) = 5;
+        MakeItemEntity(EVT_VAR(8), EVT_VAR(2), EVT_VAR(6), 0, 1, 0);
+        EVT_VAR(7) = EVT_VAR(0);
+        MakeLerp(EVT_VAR(2), 35, 20, 5);
         loop {
             UpdateLerp();
-            SetItemPos(SI_VAR(7), SI_VAR(0), SI_VAR(6), 0);
-            SI_VAR(6) += SI_VAR(5);
-            SI_VAR(5) += -1;
+            SetItemPos(EVT_VAR(7), EVT_VAR(0), EVT_VAR(6), 0);
+            EVT_VAR(6) += EVT_VAR(5);
+            EVT_VAR(5) += -1;
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
-        RemoveItemEntity(SI_VAR(7));
+        RemoveItemEntity(EVT_VAR(7));
     }
     sleep 10;
     PlaySoundAt(0x302, 0, 35, 0, 0);
@@ -290,20 +290,20 @@ EvtSource N(80241028) = SCRIPT({
     ShowConsumableChoicePopup();
     CloseChoicePopup();
     DisablePlayerInput(TRUE);
-    SI_VAR(8) = SI_VAR(0);
-    match SI_VAR(8) {
+    EVT_VAR(8) = EVT_VAR(0);
+    match EVT_VAR(8) {
         <= -1 {}
         <= 0 {
             ShowMessageAtScreenPos(MESSAGE_ID(0x1D, 0x015C), 160, 40);
         }
         == 158 {
             await N(80240E84);
-            RemoveItemAt(SI_VAR(1));
-            if (SI_SAVE_FLAG(1395) == 0) {
+            RemoveItemAt(EVT_VAR(1));
+            if (EVT_SAVE_FLAG(1395) == 0) {
                 ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DD), 35, 35, 0);
-                SI_SAVE_FLAG(1395) = 1;
-                MakeItemEntity(ITEM_FLOWER_SAVER_B, -35, 0, 0, 0, SI_SAVE_FLAG(1392));
-                SI_VAR(7) = SI_VAR(0);
+                EVT_SAVE_FLAG(1395) = 1;
+                MakeItemEntity(ITEM_FLOWER_SAVER_B, -35, 0, 0, 0, EVT_SAVE_FLAG(1392));
+                EVT_VAR(7) = EVT_VAR(0);
                 SetNpcFlagBits(NPC_BZZAP, ((0x00000002)), TRUE);
                 SetNpcFlagBits(NPC_BZZAP, ((NPC_FLAG_HAS_SHADOW)), FALSE);
                 SetNpcPos(NPC_BZZAP, 35, 0, 0);
@@ -314,8 +314,8 @@ EvtSource N(80241028) = SCRIPT({
                     NpcJump0(NPC_BZZAP, -83, 0, 0, 8);
                 }
                 loop 53 {
-                    GetNpcPos(NPC_BZZAP, SI_VAR(1), SI_VAR(2), SI_VAR(3));
-                    SetItemPos(SI_VAR(7), SI_VAR(1), SI_VAR(2), SI_VAR(3));
+                    GetNpcPos(NPC_BZZAP, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+                    SetItemPos(EVT_VAR(7), EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
                     sleep 1;
                 }
                 SetNpcPos(NPC_BZZAP, 0, -1000, 0);
@@ -326,10 +326,10 @@ EvtSource N(80241028) = SCRIPT({
             }
         } else {
             await N(80240E84);
-            RemoveItemAt(SI_VAR(1));
+            RemoveItemAt(EVT_VAR(1));
             ShowMessageAtWorldPos(MESSAGE_ID(0x11, 0x00DC), 35, 35, 0);
-            RandInt(1, SI_VAR(1));
-            if (SI_VAR(1) == 0) {
+            RandInt(1, EVT_VAR(1));
+            if (EVT_VAR(1) == 0) {
                 SetNpcJumpscale(NPC_BZZAP, 0.0);
                 NpcFacePlayer(NPC_BZZAP, 0);
                 sleep 1;
@@ -338,18 +338,18 @@ EvtSource N(80241028) = SCRIPT({
                 NpcJump0(NPC_BZZAP, 30, 60, 0, 20);
                 sleep 10;
                 SetNpcAnimation(NPC_BZZAP, NPC_ANIM_bzzap_Palette_00_Anim_4);
-                GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                SI_VAR(1) += 20;
-                NpcJump0(NPC_BZZAP, SI_VAR(0), SI_VAR(1), SI_VAR(2), 5);
-                SI_MAP_VAR(10) = 1;
+                GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                EVT_VAR(1) += 20;
+                NpcJump0(NPC_BZZAP, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5);
+                EVT_MAP_VAR(10) = 1;
             } else {
                 SetNpcPos(NPC_DAYZEE, 30, 0, 0);
                 SetNpcAnimation(NPC_DAYZEE, NPC_ANIM_dayzee_Palette_00_Anim_E);
-                GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                SI_VAR(1) += 20;
+                GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                EVT_VAR(1) += 20;
                 SetNpcJumpscale(NPC_DAYZEE, 2.0);
-                NpcJump0(NPC_DAYZEE, SI_VAR(0), SI_VAR(1), SI_VAR(2), 20);
-                SI_MAP_VAR(11) = 1;
+                NpcJump0(NPC_DAYZEE, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 20);
+                EVT_MAP_VAR(11) = 1;
             }
         }
     }
@@ -358,8 +358,8 @@ EvtSource N(80241028) = SCRIPT({
 
 EvtSource N(80241528) = SCRIPT({
     bind_padlock N(80241028) TRIGGER_WALL_PRESS_A 9 N(itemList_80240E10);
-    if (SI_SAVE_FLAG(1395) == 1) {
-        MakeItemEntity(ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, SI_SAVE_FLAG(1392));
+    if (EVT_SAVE_FLAG(1395) == 1) {
+        MakeItemEntity(ITEM_FLOWER_SAVER_B, -83, 0, 0, 0, EVT_SAVE_FLAG(1392));
     }
 });
 

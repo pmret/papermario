@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240060) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -34,10 +34,10 @@ EvtSource N(exitDoubleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 7;
-    SI_VAR(2) = 14;
-    SI_VAR(3) = 16;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 7;
+    EVT_VAR(2) = 14;
+    EVT_VAR(3) = 16;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_15", 1);
@@ -48,10 +48,10 @@ EvtSource N(exitDoubleDoor_802401B4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(3);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 11;
-    SI_VAR(2) = 21;
-    SI_VAR(3) = 19;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 11;
+    EVT_VAR(2) = 21;
+    EVT_VAR(3) = 19;
     spawn ExitDoubleDoor;
     sleep 17;
     GotoMap("dgb_01", 5);
@@ -64,23 +64,23 @@ EvtSource N(80240268) = SCRIPT({
 });
 
 EvtSource N(enterDoubleDoor_802402B0) = SCRIPT({
-    GetLoadType(SI_VAR(1));
-    if (SI_VAR(1) == 1) {
+    GetLoadType(EVT_VAR(1));
+    if (EVT_VAR(1) == 1) {
         spawn EnterSavePoint;
         spawn N(80240268);
         return;
     }
     UseDoorSounds(3);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 14;
-            SI_VAR(3) = 16;
+            EVT_VAR(2) = 14;
+            EVT_VAR(3) = 16;
             await EnterDoubleDoor;
         }
         == 1 {
-            SI_VAR(2) = 21;
-            SI_VAR(3) = 19;
+            EVT_VAR(2) = 21;
+            EVT_VAR(3) = 19;
             await EnterDoubleDoor;
         }
     }
@@ -88,7 +88,7 @@ EvtSource N(enterDoubleDoor_802402B0) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);

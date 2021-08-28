@@ -14,7 +14,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240310) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -34,10 +34,10 @@ EvtSource N(exitSingleDoor_802403B0) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 8;
-    SI_VAR(2) = 14;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 8;
+    EVT_VAR(2) = 14;
+    EVT_VAR(3) = -1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_09", 2);
@@ -46,18 +46,18 @@ EvtSource N(exitSingleDoor_802403B0) = SCRIPT({
 
 EvtSource N(enterSingleDoor_80240464) = SCRIPT({
     UseDoorSounds(0);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 14;
-            SI_VAR(3) = -1;
+            EVT_VAR(2) = 14;
+            EVT_VAR(3) = -1;
             await EnterSingleDoor;
         }
     }
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -93,10 +93,10 @@ EvtSource N(802405E0) = SCRIPT({
         MakeLerp(0, -35, 15, 0);
         loop {
             UpdateLerp();
-            TranslateModel(19, 0, SI_VAR(0), 0);
+            TranslateModel(19, 0, EVT_VAR(0), 0);
             UpdateColliderTransform(12);
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
@@ -108,10 +108,10 @@ EvtSource N(802405E0) = SCRIPT({
         MakeLerp(-35, 0, 4, 0);
         loop {
             UpdateLerp();
-            TranslateModel(19, 0, SI_VAR(0), 0);
+            TranslateModel(19, 0, EVT_VAR(0), 0);
             UpdateColliderTransform(12);
             sleep 1;
-            if (SI_VAR(1) == 0) {
+            if (EVT_VAR(1) == 0) {
                 break loop;
             }
         }
@@ -129,26 +129,26 @@ EvtSource N(80240874) = SCRIPT({
     group 0;
     SetTimeFreezeMode(TIME_FREEZE_FULL);
     sleep 40;
-    ShowGotItem(SI_VAR(0), 0, 0);
+    ShowGotItem(EVT_VAR(0), 0, 0);
     SetTimeFreezeMode(TIME_FREEZE_NORMAL);
     return;
 });
 
 EvtSource N(802408DC) = SCRIPT({
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = SI_VAR(10);
-    if (SI_VAR(10) != 0) {
+    EVT_VAR(0) = EVT_VAR(10);
+    if (EVT_VAR(10) != 0) {
         await N(80240874);
     }
-    match SI_VAR(11) {
+    match EVT_VAR(11) {
         == 0 {
-            AddItem(SI_VAR(10), SI_VAR(0));
+            AddItem(EVT_VAR(10), EVT_VAR(0));
         }
         == 1 {
-            AddKeyItem(SI_VAR(10));
+            AddKeyItem(EVT_VAR(10));
         }
         == 2 {
-            AddBadge(SI_VAR(10), SI_VAR(0));
+            AddBadge(EVT_VAR(10), EVT_VAR(0));
         }
     }
     sleep 15;
@@ -156,15 +156,15 @@ EvtSource N(802408DC) = SCRIPT({
 });
 
 EvtSource N(802409BC) = SCRIPT({
-    SI_VAR(10) = 19;
-    SI_VAR(11) = 1;
-    SI_SAVE_FLAG(1057) = 1;
+    EVT_VAR(10) = 19;
+    EVT_VAR(11) = 1;
+    EVT_SAVE_FLAG(1057) = 1;
     await N(802408DC);
 });
 
 EvtSource N(makeEntities) = SCRIPT({
     MakeEntity(0x802EAE30, -225, 0, -245, 0, ITEM_NONE, MAKE_ENTITY_END);
-    AssignFlag(SI_SAVE_FLAG(1057));
+    AssignFlag(EVT_SAVE_FLAG(1057));
     AssignScript(N(802409BC));
 });
 

@@ -27,7 +27,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80240830) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE {
             SetMusicTrack(0, SONG_PUFF_PUFF_MACHINE, 0, 8);
             PlaySoundAtCollider(20, 0x80000025, 0);
@@ -43,10 +43,10 @@ static s32 N(pad_8B8)[] = {
 
 EvtSource N(updateTexturePan_802408C0) = SCRIPT({
     group 0;
-    if (SI_VAR(5) == 1) {
-        if (SI_VAR(6) == 1) {
-            if (SI_VAR(7) == 1) {
-                if (SI_VAR(8) == 1) {
+    if (EVT_VAR(5) == 1) {
+        if (EVT_VAR(6) == 1) {
+            if (EVT_VAR(7) == 1) {
+                if (EVT_VAR(8) == 1) {
                     N(UnkTexturePanFunc)();
                     return;
                 }
@@ -68,7 +68,7 @@ s32 N(lavaResetList_802409E4)[] = {
 };
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
+    EVT_WORLD_LOCATION = LOCATION_FLOWER_FIELDS;
     SetSpriteShading(-1);
     SetCamLeadPlayer(0, 0);
     SetCamPerspective(0, 3, 25, 16, 4096);
@@ -94,48 +94,48 @@ EvtSource N(main) = SCRIPT({
     EnableTexPanning(16, 1);
     EnableTexPanning(17, 1);
     spawn {
-        SI_VAR(0) = 1;
-        SI_VAR(1) = -140;
-        SI_VAR(2) = 0;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 1;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 1;
+        EVT_VAR(1) = -140;
+        EVT_VAR(2) = 0;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 1;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_802408C0);
     }
     spawn {
-        SI_VAR(0) = 2;
-        SI_VAR(1) = -200;
-        SI_VAR(2) = 0;
-        SI_VAR(3) = 0;
-        SI_VAR(4) = 0;
-        SI_VAR(5) = 1;
-        SI_VAR(6) = 0;
-        SI_VAR(7) = 0;
-        SI_VAR(8) = 0;
-        SI_VAR(9) = 0;
-        SI_VAR(10) = 0;
-        SI_VAR(11) = 0;
-        SI_VAR(12) = 0;
+        EVT_VAR(0) = 2;
+        EVT_VAR(1) = -200;
+        EVT_VAR(2) = 0;
+        EVT_VAR(3) = 0;
+        EVT_VAR(4) = 0;
+        EVT_VAR(5) = 1;
+        EVT_VAR(6) = 0;
+        EVT_VAR(7) = 0;
+        EVT_VAR(8) = 0;
+        EVT_VAR(9) = 0;
+        EVT_VAR(10) = 0;
+        EVT_VAR(11) = 0;
+        EVT_VAR(12) = 0;
         spawn N(updateTexturePan_802408C0);
     }
-    GetEntryID(SI_VAR(0));
-    if (SI_VAR(0) == 0) {
+    GetEntryID(EVT_VAR(0));
+    if (EVT_VAR(0) == 0) {
         ModifyColliderFlags(0, 1, 0x7FFFFE00);
-        SI_VAR(0) = N(802409B8);
+        EVT_VAR(0) = N(802409B8);
         spawn EnterWalk;
     } else {
         spawn N(80244058);
         spawn N(802409B8);
     }
     await N(80240830);
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         N(func_8024030C_CDC9AC)();
     }
 });
@@ -153,243 +153,243 @@ EvtSource N(80240E90) = SCRIPT({
         PlayEffect(0x5E, 0, 80.900390625, 102.0, -4.099609375, -16.0, 102.0, -4.099609375, 0.5, 6, 0, 0, 0, 0);
         N(func_80240340_CDC9E0)();
         sleep 4;
-        if (SI_SAVE_VAR(253) >= 3) {
+        if (EVT_SAVE_VAR(253) >= 3) {
             break loop;
         }
     }
-    SI_VAR(0) = 6;
+    EVT_VAR(0) = 6;
     loop 5 {
         PlayEffect(0x5E, 0, -16.0, 102.0, -4.099609375, 80.900390625, 102.0, -4.099609375, 0.5, 6, 0, 0, 0, 0);
         N(func_80240340_CDC9E0)();
-        sleep SI_VAR(0);
-        SI_VAR(0) += 2;
+        sleep EVT_VAR(0);
+        EVT_VAR(0) += 2;
         PlayEffect(0x5E, 0, 80.900390625, 102.0, -4.099609375, -16.0, 102.0, -4.099609375, 0.5, 6, 0, 0, 0, 0);
         N(func_80240340_CDC9E0)();
-        sleep SI_VAR(0);
-        SI_VAR(0) += 2;
+        sleep EVT_VAR(0);
+        EVT_VAR(0) += 2;
     }
 });
 
 EvtSource N(80241094) = SCRIPT({
-    EnableModel(SI_VAR(15), 1);
-    SI_VAR(14) = 159;
-    loop SI_VAR(14) {
-        SI_VAR(3) += (float) 0;
-        SI_VAR(4) += 0.0;
-        SI_VAR(5) = 0.0107421875;
-        SI_VAR(0) += (float) SI_VAR(3);
-        SI_VAR(1) += (float) SI_VAR(4);
-        SI_VAR(2) += (float) SI_VAR(5);
-        SI_VAR(6) *= 1.0107421875;
-        SI_VAR(7) += 0.0107421875;
-        SI_VAR(8) = (float) SI_VAR(6);
-        N(UnkFloatFunc)(SI_VAR(14), SI_VAR(10), 0.0, 0.203125, 15, 0, 0);
-        SI_VAR(8) += (float) SI_VAR(10);
-        SI_VAR(9) = (float) SI_VAR(7);
-        N(UnkFloatFunc)(SI_VAR(14), SI_VAR(10), 0.0, 0.203125, 20, 0, 90);
-        SI_VAR(9) += (float) SI_VAR(10);
-        SI_VAR(10) = (float) SI_VAR(0);
-        SI_VAR(10) *= 10.0;
-        TranslateModel(SI_VAR(15), SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(SI_VAR(15), SI_VAR(8), SI_VAR(9), 1);
-        RotateModel(SI_VAR(15), SI_VAR(10), 0, 0, 1);
+    EnableModel(EVT_VAR(15), 1);
+    EVT_VAR(14) = 159;
+    loop EVT_VAR(14) {
+        EVT_VAR(3) += (float) 0;
+        EVT_VAR(4) += 0.0;
+        EVT_VAR(5) = 0.0107421875;
+        EVT_VAR(0) += (float) EVT_VAR(3);
+        EVT_VAR(1) += (float) EVT_VAR(4);
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        EVT_VAR(6) *= 1.0107421875;
+        EVT_VAR(7) += 0.0107421875;
+        EVT_VAR(8) = (float) EVT_VAR(6);
+        N(UnkFloatFunc)(EVT_VAR(14), EVT_VAR(10), 0.0, 0.203125, 15, 0, 0);
+        EVT_VAR(8) += (float) EVT_VAR(10);
+        EVT_VAR(9) = (float) EVT_VAR(7);
+        N(UnkFloatFunc)(EVT_VAR(14), EVT_VAR(10), 0.0, 0.203125, 20, 0, 90);
+        EVT_VAR(9) += (float) EVT_VAR(10);
+        EVT_VAR(10) = (float) EVT_VAR(0);
+        EVT_VAR(10) *= 10.0;
+        TranslateModel(EVT_VAR(15), EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(EVT_VAR(15), EVT_VAR(8), EVT_VAR(9), 1);
+        RotateModel(EVT_VAR(15), EVT_VAR(10), 0, 0, 1);
         sleep 1;
     }
-    EnableModel(SI_VAR(15), 0);
+    EnableModel(EVT_VAR(15), 0);
 });
 
 EvtSource N(80241284) = SCRIPT({
-    SI_VAR(14) = 0;
+    EVT_VAR(14) = 0;
 0:
-    if (SI_SAVE_VAR(253) >= 3) {
+    if (EVT_SAVE_VAR(253) >= 3) {
         return;
     }
-    SI_VAR(0) = 132.0;
-    SI_VAR(1) = 90.0;
-    SI_VAR(2) = -30.0;
-    RandInt(100, SI_VAR(3));
-    SI_VAR(3) += (float) -50;
-    SI_VAR(3) /= (float) 200.0;
-    SI_VAR(4) = 1.0;
-    SI_VAR(5) = (float) 0;
-    SI_VAR(6) = 0.296875;
-    SI_VAR(7) = 0.296875;
-    SI_VAR(15) = SI_VAR(14);
-    SI_VAR(15) += 10000;
+    EVT_VAR(0) = 132.0;
+    EVT_VAR(1) = 90.0;
+    EVT_VAR(2) = -30.0;
+    RandInt(100, EVT_VAR(3));
+    EVT_VAR(3) += (float) -50;
+    EVT_VAR(3) /= (float) 200.0;
+    EVT_VAR(4) = 1.0;
+    EVT_VAR(5) = (float) 0;
+    EVT_VAR(6) = 0.296875;
+    EVT_VAR(7) = 0.296875;
+    EVT_VAR(15) = EVT_VAR(14);
+    EVT_VAR(15) += 10000;
     spawn N(80241094);
-    SI_VAR(14) += 1;
-    if (SI_VAR(14) >= 16) {
-        SI_VAR(14) = 0;
+    EVT_VAR(14) += 1;
+    if (EVT_VAR(14) >= 16) {
+        EVT_VAR(14) = 0;
     }
     sleep 10;
     goto 0;
 });
 
 EvtSource N(802413F0) = SCRIPT({
-    if (SI_MAP_FLAG(2) == 1) {
+    if (EVT_MAP_FLAG(2) == 1) {
         return;
     }
-    SI_MAP_FLAG(2) = 1;
-    SI_VAR(15) = 0;
+    EVT_MAP_FLAG(2) = 1;
+    EVT_VAR(15) = 0;
     loop 12 {
-        RandInt(80, SI_VAR(0));
-        SI_VAR(0) -= 40;
-        RandInt(50, SI_VAR(1));
-        RandInt(50, SI_VAR(2));
-        SI_VAR(2) -= 25;
-        PlayEffect(0x0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 5, 10, 1, 1, 0, 0, 0, 0, 0, 0);
-        SI_VAR(15) += 1;
-        N(UnkFloatFunc)(SI_VAR(15), SI_VAR(14), 1.0, 1.09375, 2, 0, 0);
-        N(UnkFloatFunc)(SI_VAR(15), SI_VAR(13), 1.09375, 1.0, 2, 0, 0);
-        SI_VAR(0) = (float) SI_VAR(14);
-        SI_VAR(1) = (float) SI_VAR(13);
-        SI_VAR(2) = (float) SI_VAR(14);
-        if (SI_SAVE_VAR(252) == 0) {
-            ScaleModel(31, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(32, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        RandInt(80, EVT_VAR(0));
+        EVT_VAR(0) -= 40;
+        RandInt(50, EVT_VAR(1));
+        RandInt(50, EVT_VAR(2));
+        EVT_VAR(2) -= 25;
+        PlayEffect(0x0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 5, 10, 1, 1, 0, 0, 0, 0, 0, 0);
+        EVT_VAR(15) += 1;
+        N(UnkFloatFunc)(EVT_VAR(15), EVT_VAR(14), 1.0, 1.09375, 2, 0, 0);
+        N(UnkFloatFunc)(EVT_VAR(15), EVT_VAR(13), 1.09375, 1.0, 2, 0, 0);
+        EVT_VAR(0) = (float) EVT_VAR(14);
+        EVT_VAR(1) = (float) EVT_VAR(13);
+        EVT_VAR(2) = (float) EVT_VAR(14);
+        if (EVT_SAVE_VAR(252) == 0) {
+            ScaleModel(31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         }
-        if (SI_SAVE_VAR(253) == 0) {
-            ScaleModel(19, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(20, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        if (EVT_SAVE_VAR(253) == 0) {
+            ScaleModel(19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         }
-        if (SI_SAVE_VAR(252) <= 1) {
-            ScaleModel(21, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        if (EVT_SAVE_VAR(252) <= 1) {
+            ScaleModel(21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         }
-        if (SI_SAVE_VAR(252) <= 2) {
-            if (SI_SAVE_VAR(253) <= 1) {
-                ScaleModel(22, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(23, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(24, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(25, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(26, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        if (EVT_SAVE_VAR(252) <= 2) {
+            if (EVT_SAVE_VAR(253) <= 1) {
+                ScaleModel(22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(25, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(26, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             }
         }
-        ScaleModel(27, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        if (SI_SAVE_VAR(252) <= 2) {
-            if (SI_SAVE_VAR(253) <= 2) {
-                ScaleModel(29, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(41, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                ScaleModel(33, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+        ScaleModel(27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        if (EVT_SAVE_VAR(252) <= 2) {
+            if (EVT_SAVE_VAR(253) <= 2) {
+                ScaleModel(29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                ScaleModel(33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
             }
         }
-        ScaleModel(36, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(37, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(38, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(39, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(40, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(34, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        SI_VAR(0) -= 1.046875;
-        SI_VAR(0) *= 100.0;
-        if (SI_SAVE_VAR(252) == 0) {
-            RotateModel(31, SI_VAR(0), 0, 0, 1);
-            RotateModel(32, SI_VAR(0), 0, 0, 1);
+        ScaleModel(36, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(37, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(38, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(39, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(40, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(34, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        EVT_VAR(0) -= 1.046875;
+        EVT_VAR(0) *= 100.0;
+        if (EVT_SAVE_VAR(252) == 0) {
+            RotateModel(31, EVT_VAR(0), 0, 0, 1);
+            RotateModel(32, EVT_VAR(0), 0, 0, 1);
         }
-        if (SI_SAVE_VAR(253) == 0) {
-            RotateModel(19, SI_VAR(0), 0, 0, 1);
-            RotateModel(20, SI_VAR(0), 0, 0, 1);
+        if (EVT_SAVE_VAR(253) == 0) {
+            RotateModel(19, EVT_VAR(0), 0, 0, 1);
+            RotateModel(20, EVT_VAR(0), 0, 0, 1);
         }
-        if (SI_SAVE_VAR(252) <= 1) {
-            RotateModel(21, SI_VAR(0), 0, 0, 1);
+        if (EVT_SAVE_VAR(252) <= 1) {
+            RotateModel(21, EVT_VAR(0), 0, 0, 1);
         }
-        if (SI_SAVE_VAR(252) <= 2) {
-            if (SI_SAVE_VAR(253) <= 1) {
-                RotateModel(22, SI_VAR(0), 0, 0, 1);
-                RotateModel(23, SI_VAR(0), 0, 0, 1);
-                RotateModel(24, SI_VAR(0), 0, 0, 1);
-                RotateModel(25, SI_VAR(0), 0, 0, 1);
-                RotateModel(26, SI_VAR(0), 0, 0, 1);
+        if (EVT_SAVE_VAR(252) <= 2) {
+            if (EVT_SAVE_VAR(253) <= 1) {
+                RotateModel(22, EVT_VAR(0), 0, 0, 1);
+                RotateModel(23, EVT_VAR(0), 0, 0, 1);
+                RotateModel(24, EVT_VAR(0), 0, 0, 1);
+                RotateModel(25, EVT_VAR(0), 0, 0, 1);
+                RotateModel(26, EVT_VAR(0), 0, 0, 1);
             }
         }
-        RotateModel(27, SI_VAR(0), 0, 0, 1);
-        if (SI_SAVE_VAR(252) <= 2) {
-            if (SI_SAVE_VAR(253) <= 2) {
-                RotateModel(29, SI_VAR(0), 0, 0, 1);
-                RotateModel(41, SI_VAR(0), 0, 0, 1);
-                RotateModel(33, SI_VAR(0), 0, 0, 1);
+        RotateModel(27, EVT_VAR(0), 0, 0, 1);
+        if (EVT_SAVE_VAR(252) <= 2) {
+            if (EVT_SAVE_VAR(253) <= 2) {
+                RotateModel(29, EVT_VAR(0), 0, 0, 1);
+                RotateModel(41, EVT_VAR(0), 0, 0, 1);
+                RotateModel(33, EVT_VAR(0), 0, 0, 1);
             }
         }
-        RotateModel(36, SI_VAR(0), 0, 0, 1);
-        RotateModel(37, SI_VAR(0), 0, 0, 1);
-        RotateModel(38, SI_VAR(0), 0, 0, 1);
-        RotateModel(39, SI_VAR(0), 0, 0, 1);
-        RotateModel(40, SI_VAR(0), 0, 0, 1);
-        RotateModel(34, SI_VAR(0), 0, 0, 1);
+        RotateModel(36, EVT_VAR(0), 0, 0, 1);
+        RotateModel(37, EVT_VAR(0), 0, 0, 1);
+        RotateModel(38, EVT_VAR(0), 0, 0, 1);
+        RotateModel(39, EVT_VAR(0), 0, 0, 1);
+        RotateModel(40, EVT_VAR(0), 0, 0, 1);
+        RotateModel(34, EVT_VAR(0), 0, 0, 1);
         sleep 1;
     }
-    SI_VAR(0) = (float) 1;
-    SI_VAR(1) = (float) 1;
-    SI_VAR(2) = (float) 1;
-    if (SI_SAVE_VAR(252) == 0) {
-        ScaleModel(31, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(32, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    EVT_VAR(0) = (float) 1;
+    EVT_VAR(1) = (float) 1;
+    EVT_VAR(2) = (float) 1;
+    if (EVT_SAVE_VAR(252) == 0) {
+        ScaleModel(31, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(32, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     }
-    if (SI_SAVE_VAR(253) == 0) {
-        ScaleModel(19, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-        ScaleModel(20, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_SAVE_VAR(253) == 0) {
+        ScaleModel(19, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+        ScaleModel(20, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     }
-    if (SI_SAVE_VAR(252) <= 1) {
-        ScaleModel(21, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_SAVE_VAR(252) <= 1) {
+        ScaleModel(21, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     }
-    if (SI_SAVE_VAR(252) <= 2) {
-        if (SI_SAVE_VAR(253) <= 1) {
-            ScaleModel(22, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(23, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(24, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(25, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(26, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_SAVE_VAR(252) <= 2) {
+        if (EVT_SAVE_VAR(253) <= 1) {
+            ScaleModel(22, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(23, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(24, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(25, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(26, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         }
     }
-    ScaleModel(27, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_SAVE_VAR(252) <= 2) {
-        if (SI_SAVE_VAR(253) <= 2) {
-            ScaleModel(29, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(41, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-            ScaleModel(33, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    ScaleModel(27, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_SAVE_VAR(252) <= 2) {
+        if (EVT_SAVE_VAR(253) <= 2) {
+            ScaleModel(29, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(41, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+            ScaleModel(33, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         }
     }
-    ScaleModel(36, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ScaleModel(37, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ScaleModel(38, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ScaleModel(39, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ScaleModel(40, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ScaleModel(34, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    ScaleModel(36, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ScaleModel(37, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ScaleModel(38, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ScaleModel(39, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ScaleModel(40, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ScaleModel(34, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     sleep 1;
-    SI_MAP_FLAG(2) = 0;
+    EVT_MAP_FLAG(2) = 0;
 });
 
 #ifdef NON_MATCHING
 EvtSource N(80241ED4) = SCRIPT({
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 0;
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -1.0;
-    SI_VAR(4) = 0.0;
-    SI_VAR(5) = 3.0;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 0;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -1.0;
+    EVT_VAR(4) = 0.0;
+    EVT_VAR(5) = 3.0;
     spawn {
         sleep 10;
         PlaySoundAtCollider(19, 486, 0);
     }
     loop 300 {
-        SI_VAR(4) += -0.5;
-        SI_VAR(5) += 0.09375;
-        SI_VAR(0) += (float) SI_VAR(3);
-        SI_VAR(1) += (float) SI_VAR(4);
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(1) < -10) {
-            SI_VAR(1) = -10.0;
-            SI_VAR(3) = 0.0;
-            SI_VAR(4) = 0.0;
-            if (SI_VAR(2) >= 80) {
+        EVT_VAR(4) += -0.5;
+        EVT_VAR(5) += 0.09375;
+        EVT_VAR(0) += (float) EVT_VAR(3);
+        EVT_VAR(1) += (float) EVT_VAR(4);
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(1) < -10) {
+            EVT_VAR(1) = -10.0;
+            EVT_VAR(3) = 0.0;
+            EVT_VAR(4) = 0.0;
+            if (EVT_VAR(2) >= 80) {
                 goto 0;
             }
         }
     }
     TranslateModel(31, -78, 19, 2);
     TranslateModel(32, -78, 19, 2);
-    TranslateModel(31, SI_VAR(0), SI_VAR(1), 0);
-    TranslateModel(32, SI_VAR(0), SI_VAR(1), 0);
-    RotateModel(31, SI_VAR(2), 0, 0, 1);
-    RotateModel(32, SI_VAR(2), 0, 0, 1);
+    TranslateModel(31, EVT_VAR(0), EVT_VAR(1), 0);
+    TranslateModel(32, EVT_VAR(0), EVT_VAR(1), 0);
+    RotateModel(31, EVT_VAR(2), 0, 0, 1);
+    RotateModel(32, EVT_VAR(2), 0, 0, 1);
     TranslateModel(31, 78, -19, -2);
     TranslateModel(32, 78, -19, -2);
     sleep 1;
@@ -400,87 +400,87 @@ EvtSource N(80241ED4) = SCRIPT({
 });
 #else
 EvtSource N(80241ED4) = {
-    SI_CMD(EVT_OP_SET_F, SI_VAR(0), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(1), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(2), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(5), SI_FIXED(3.0)),
-    SI_CMD(EVT_OP_SPAWN_THREAD),
-        SI_CMD(EVT_OP_SLEEP_FRAMES, 10),
-        SI_CMD(EVT_OP_CALL, PlaySoundAtCollider, 19, 486, 0),
-    SI_CMD(EVT_OP_END_SPAWN_THREAD),
-    SI_CMD(EVT_OP_LOOP, 300),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(0), SI_VAR(3)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(1), SI_VAR(4)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(2), SI_VAR(5)),
-        SI_CMD(EVT_OP_IF_LT, SI_VAR(1), -10),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(1), SI_FIXED(-10.0)),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(0.0)),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-            SI_CMD(EVT_OP_IF_GE, SI_VAR(2), 80),
-                SI_CMD(EVT_OP_GOTO, 0),
-            SI_CMD(EVT_OP_END_IF),
-        SI_CMD(EVT_OP_END_IF),
-    SI_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
-    SI_CMD(EVT_OP_CALL, TranslateModel, 31, -78, 19, 2),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 32, -78, 19, 2),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 31, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 32, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(EVT_OP_CALL, RotateModel, 31, SI_VAR(2), 0, 0, 1),
-    SI_CMD(EVT_OP_CALL, RotateModel, 32, SI_VAR(2), 0, 0, 1),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 31, 78, -19, -2),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 32, 78, -19, -2),
-    SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
-SI_CMD(EVT_OP_END_LOOP),
-SI_CMD(EVT_OP_LABEL, 0),
-SI_CMD(EVT_OP_SLEEP_FRAMES, 30),
-SI_CMD(EVT_OP_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
-SI_CMD(EVT_OP_RETURN),
-SI_CMD(EVT_OP_END)
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(0), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(2), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(3), EVT_FIXED(-1.0)),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(4), EVT_FIXED(0.0)),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(5), EVT_FIXED(3.0)),
+    EVT_CMD(EVT_OP_SPAWN_THREAD),
+        EVT_CMD(EVT_OP_SLEEP_FRAMES, 10),
+        EVT_CMD(EVT_OP_CALL, PlaySoundAtCollider, 19, 486, 0),
+    EVT_CMD(EVT_OP_END_SPAWN_THREAD),
+    EVT_CMD(EVT_OP_LOOP, 300),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(4), EVT_FIXED(-0.5)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(5), EVT_FIXED(0.09375)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(0), EVT_VAR(3)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(1), EVT_VAR(4)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(2), EVT_VAR(5)),
+        EVT_CMD(EVT_OP_IF_LT, EVT_VAR(1), -10),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(1), EVT_FIXED(-10.0)),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(3), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(4), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_IF_GE, EVT_VAR(2), 80),
+                EVT_CMD(EVT_OP_GOTO, 0),
+            EVT_CMD(EVT_OP_END_IF),
+        EVT_CMD(EVT_OP_END_IF),
+    EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, -78, 19, 2),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, -78, 19, 2),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, RotateModel, 31, EVT_VAR(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, RotateModel, 32, EVT_VAR(2), 0, 0, 1),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 31, 78, -19, -2),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 32, 78, -19, -2),
+    EVT_CMD(EVT_OP_SLEEP_FRAMES, 1),
+EVT_CMD(EVT_OP_END_LOOP),
+EVT_CMD(EVT_OP_LABEL, 0),
+EVT_CMD(EVT_OP_SLEEP_FRAMES, 30),
+EVT_CMD(EVT_OP_CALL, ModifyColliderFlags, 0, 19, 0x7FFFFE00),
+EVT_CMD(EVT_OP_RETURN),
+EVT_CMD(EVT_OP_END)
 };
 #endif
 
 EvtSource N(80242174) = SCRIPT({
-    SI_VAR(0) = (float) 0;
-    SI_VAR(1) = (float) 0;
-    SI_VAR(2) = (float) 0;
-    SI_VAR(3) = 0.0;
-    SI_VAR(4) = 0.0;
-    SI_VAR(5) = -5.0;
+    EVT_VAR(0) = (float) 0;
+    EVT_VAR(1) = (float) 0;
+    EVT_VAR(2) = (float) 0;
+    EVT_VAR(3) = 0.0;
+    EVT_VAR(4) = 0.0;
+    EVT_VAR(5) = -5.0;
     spawn {
         sleep 12;
         PlaySoundAtCollider(21, 487, 0);
     }
     loop 300 {
-        SI_VAR(4) += -0.5;
-        SI_VAR(0) += (float) SI_VAR(3);
-        SI_VAR(1) += (float) SI_VAR(4);
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(2) < -45) {
-            SI_VAR(5) = 5;
+        EVT_VAR(4) += -0.5;
+        EVT_VAR(0) += (float) EVT_VAR(3);
+        EVT_VAR(1) += (float) EVT_VAR(4);
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(2) < -45) {
+            EVT_VAR(5) = 5;
         }
-        if (SI_VAR(2) > 0) {
-            SI_VAR(2) = 0;
-            SI_VAR(3) = 5;
+        if (EVT_VAR(2) > 0) {
+            EVT_VAR(2) = 0;
+            EVT_VAR(3) = 5;
         }
-        if (SI_VAR(1) < -25) {
-            SI_VAR(4) = 0;
-            SI_VAR(1) = -25;
+        if (EVT_VAR(1) < -25) {
+            EVT_VAR(4) = 0;
+            EVT_VAR(1) = -25;
         }
-        if (SI_VAR(0) > 90) {
+        if (EVT_VAR(0) > 90) {
             goto 0;
         }
         TranslateModel(19, 50, 28, 27);
         TranslateModel(20, 50, 28, 27);
-        TranslateModel(19, 0, SI_VAR(1), 1);
-        TranslateModel(20, 0, SI_VAR(1), 1);
-        RotateModel(19, SI_VAR(0), 1, 0, 0);
-        RotateModel(20, SI_VAR(0), 1, 0, 0);
-        RotateModel(19, SI_VAR(2), 0, 0, 1);
-        RotateModel(20, SI_VAR(2), 0, 0, 1);
+        TranslateModel(19, 0, EVT_VAR(1), 1);
+        TranslateModel(20, 0, EVT_VAR(1), 1);
+        RotateModel(19, EVT_VAR(0), 1, 0, 0);
+        RotateModel(20, EVT_VAR(0), 1, 0, 0);
+        RotateModel(19, EVT_VAR(2), 0, 0, 1);
+        RotateModel(20, EVT_VAR(2), 0, 0, 1);
         TranslateModel(19, -50, -28, -27);
         TranslateModel(20, -50, -28, -27);
         sleep 1;
@@ -490,27 +490,27 @@ EvtSource N(80242174) = SCRIPT({
 });
 
 EvtSource N(80242474) = SCRIPT({
-    SI_VAR(2) = (float) 0;
-    SI_VAR(1) = (float) 0;
-    SI_VAR(0) = (float) 0;
-    SI_VAR(5) = 0.0;
+    EVT_VAR(2) = (float) 0;
+    EVT_VAR(1) = (float) 0;
+    EVT_VAR(0) = (float) 0;
+    EVT_VAR(5) = 0.0;
     spawn {
         sleep 15;
         PlaySoundAtCollider(23, 487, 0);
     }
     loop 300 {
-        SI_VAR(5) += 0.5;
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(2) >= 80) {
-            SI_VAR(2) = (float) 80;
-            SI_VAR(5) *= -0.5;
-            if (SI_VAR(5) == 0) {
+        EVT_VAR(5) += 0.5;
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(2) >= 80) {
+            EVT_VAR(2) = (float) 80;
+            EVT_VAR(5) *= -0.5;
+            if (EVT_VAR(5) == 0) {
                 goto 0;
             }
         }
         TranslateModel(21, -55, 5, 16);
-        TranslateModel(21, SI_VAR(0), SI_VAR(1), 0);
-        RotateModel(21, SI_VAR(2), 0, 0, 1);
+        TranslateModel(21, EVT_VAR(0), EVT_VAR(1), 0);
+        RotateModel(21, EVT_VAR(2), 0, 0, 1);
         TranslateModel(21, 55, -5, -16);
         sleep 1;
     }
@@ -519,37 +519,37 @@ EvtSource N(80242474) = SCRIPT({
 });
 
 EvtSource N(80242620) = SCRIPT({
-    SI_VAR(2) = (float) 0;
-    SI_VAR(1) = (float) 0;
-    SI_VAR(0) = (float) 0;
-    SI_VAR(5) = 0.0;
+    EVT_VAR(2) = (float) 0;
+    EVT_VAR(1) = (float) 0;
+    EVT_VAR(0) = (float) 0;
+    EVT_VAR(5) = 0.0;
     spawn {
         sleep 15;
         PlaySoundAtCollider(22, 487, 0);
     }
     loop 300 {
-        SI_VAR(5) += 0.5;
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(2) >= 80) {
-            SI_VAR(2) = (float) 80;
-            SI_VAR(5) *= -0.5;
-            if (SI_VAR(5) == 0) {
+        EVT_VAR(5) += 0.5;
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(2) >= 80) {
+            EVT_VAR(2) = (float) 80;
+            EVT_VAR(5) *= -0.5;
+            if (EVT_VAR(5) == 0) {
                 goto 0;
             }
         }
         TranslateModel(24, 60, 0, 16);
-        RotateModel(24, SI_VAR(2), 0, 0, -1);
+        RotateModel(24, EVT_VAR(2), 0, 0, -1);
         TranslateModel(24, -60, 0, -16);
         TranslateModel(22, 0, 0, 27);
         TranslateModel(23, 0, 0, 27);
-        RotateModel(22, SI_VAR(2), 1, 0, 0);
-        RotateModel(23, SI_VAR(2), 1, 0, 0);
+        RotateModel(22, EVT_VAR(2), 1, 0, 0);
+        RotateModel(23, EVT_VAR(2), 1, 0, 0);
         TranslateModel(22, 0, 0, -27);
         TranslateModel(23, 0, 0, -27);
         TranslateModel(25, 0, 0, -41);
         TranslateModel(26, 0, 0, -41);
-        RotateModel(25, SI_VAR(2), -1, 0, 0);
-        RotateModel(26, SI_VAR(2), -1, 0, 0);
+        RotateModel(25, EVT_VAR(2), -1, 0, 0);
+        RotateModel(26, EVT_VAR(2), -1, 0, 0);
         TranslateModel(25, 0, 0, 41);
         TranslateModel(26, 0, 0, 41);
         sleep 1;
@@ -560,34 +560,34 @@ EvtSource N(80242620) = SCRIPT({
 
 #ifdef NON_MATCHING
 EvtSource N(80242910) = SCRIPT({
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 0;
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -1.0;
-    SI_VAR(4) = 0.0;
-    SI_VAR(5) = 3.0;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 0;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -1.0;
+    EVT_VAR(4) = 0.0;
+    EVT_VAR(5) = 3.0;
     spawn {
         sleep 15;
         PlaySoundAtCollider(18, 486, 0);
     }
     loop 300 {
-        SI_VAR(4) += -0.5;
-        SI_VAR(5) += 0.09375;
-        SI_VAR(0) += (float) SI_VAR(3);
-        SI_VAR(1) += (float) SI_VAR(4);
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(1) < -25) {
-            SI_VAR(1) = -25.0;
-            SI_VAR(3) = 0.0;
-            SI_VAR(4) = 0.0;
-            if (SI_VAR(2) >= 80) {
+        EVT_VAR(4) += -0.5;
+        EVT_VAR(5) += 0.09375;
+        EVT_VAR(0) += (float) EVT_VAR(3);
+        EVT_VAR(1) += (float) EVT_VAR(4);
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(1) < -25) {
+            EVT_VAR(1) = -25.0;
+            EVT_VAR(3) = 0.0;
+            EVT_VAR(4) = 0.0;
+            if (EVT_VAR(2) >= 80) {
                 goto 0;
             }
         }
     }
     TranslateModel(29, 124, 17, 3);
-    TranslateModel(29, SI_VAR(0), SI_VAR(1), 0);
-    RotateModel(29, SI_VAR(2), 0, 0, -1);
+    TranslateModel(29, EVT_VAR(0), EVT_VAR(1), 0);
+    RotateModel(29, EVT_VAR(2), 0, 0, -1);
     TranslateModel(29, -124, -17, -3);
     sleep 1;
 }
@@ -597,77 +597,77 @@ EvtSource N(80242910) = SCRIPT({
 });
 #else
 EvtSource N(80242910) = {
-    SI_CMD(EVT_OP_SET_F, SI_VAR(0), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(1), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(2), 0),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(-1.0)),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-    SI_CMD(EVT_OP_SET_F, SI_VAR(5), SI_FIXED(3.0)),
-    SI_CMD(EVT_OP_SPAWN_THREAD),
-        SI_CMD(EVT_OP_SLEEP_FRAMES, 15),
-        SI_CMD(EVT_OP_CALL, PlaySoundAtCollider, 18, 486, 0),
-    SI_CMD(EVT_OP_END_SPAWN_THREAD),
-    SI_CMD(EVT_OP_LOOP, 300),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(4), SI_FIXED(-0.5)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(5), SI_FIXED(0.09375)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(0), SI_VAR(3)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(1), SI_VAR(4)),
-        SI_CMD(EVT_OP_ADD_F, SI_VAR(2), SI_VAR(5)),
-        SI_CMD(EVT_OP_IF_LT, SI_VAR(1), -25),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(1), SI_FIXED(-25.0)),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(3), SI_FIXED(0.0)),
-            SI_CMD(EVT_OP_SET_F, SI_VAR(4), SI_FIXED(0.0)),
-            SI_CMD(EVT_OP_IF_GE, SI_VAR(2), 80),
-                SI_CMD(EVT_OP_GOTO, 0),
-            SI_CMD(EVT_OP_END_IF),
-        SI_CMD(EVT_OP_END_IF),
-    SI_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
-    SI_CMD(EVT_OP_CALL, TranslateModel, 29, 124, 17, 3),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 29, SI_VAR(0), SI_VAR(1), 0),
-    SI_CMD(EVT_OP_CALL, RotateModel, 29, SI_VAR(2), 0, 0, -1),
-    SI_CMD(EVT_OP_CALL, TranslateModel, 29, -124, -17, -3),
-    SI_CMD(EVT_OP_SLEEP_FRAMES, 1),
-SI_CMD(EVT_OP_END_LOOP),
-SI_CMD(EVT_OP_LABEL, 0),
-SI_CMD(EVT_OP_RETURN),
-SI_CMD(EVT_OP_END)
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(0), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(2), 0),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(3), EVT_FIXED(-1.0)),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(4), EVT_FIXED(0.0)),
+    EVT_CMD(EVT_OP_SET_F, EVT_VAR(5), EVT_FIXED(3.0)),
+    EVT_CMD(EVT_OP_SPAWN_THREAD),
+        EVT_CMD(EVT_OP_SLEEP_FRAMES, 15),
+        EVT_CMD(EVT_OP_CALL, PlaySoundAtCollider, 18, 486, 0),
+    EVT_CMD(EVT_OP_END_SPAWN_THREAD),
+    EVT_CMD(EVT_OP_LOOP, 300),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(4), EVT_FIXED(-0.5)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(5), EVT_FIXED(0.09375)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(0), EVT_VAR(3)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(1), EVT_VAR(4)),
+        EVT_CMD(EVT_OP_ADD_F, EVT_VAR(2), EVT_VAR(5)),
+        EVT_CMD(EVT_OP_IF_LT, EVT_VAR(1), -25),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(1), EVT_FIXED(-25.0)),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(3), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_SET_F, EVT_VAR(4), EVT_FIXED(0.0)),
+            EVT_CMD(EVT_OP_IF_GE, EVT_VAR(2), 80),
+                EVT_CMD(EVT_OP_GOTO, 0),
+            EVT_CMD(EVT_OP_END_IF),
+        EVT_CMD(EVT_OP_END_IF),
+    EVT_CMD(EVT_OP_END_IF), // BUG: extraneous END_IF
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, 124, 17, 3),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, EVT_VAR(0), EVT_VAR(1), 0),
+    EVT_CMD(EVT_OP_CALL, RotateModel, 29, EVT_VAR(2), 0, 0, -1),
+    EVT_CMD(EVT_OP_CALL, TranslateModel, 29, -124, -17, -3),
+    EVT_CMD(EVT_OP_SLEEP_FRAMES, 1),
+EVT_CMD(EVT_OP_END_LOOP),
+EVT_CMD(EVT_OP_LABEL, 0),
+EVT_CMD(EVT_OP_RETURN),
+EVT_CMD(EVT_OP_END)
 };
 #endif
 
 EvtSource N(80242B18) = SCRIPT({
     ModifyColliderFlags(0, 18, 0x7FFFFE00);
-    SI_VAR(0) = (float) 0;
-    SI_VAR(1) = (float) 0;
-    SI_VAR(2) = (float) 0;
-    SI_VAR(3) = 3.0;
-    SI_VAR(4) = 1.0;
-    SI_VAR(5) = 5.0;
+    EVT_VAR(0) = (float) 0;
+    EVT_VAR(1) = (float) 0;
+    EVT_VAR(2) = (float) 0;
+    EVT_VAR(3) = 3.0;
+    EVT_VAR(4) = 1.0;
+    EVT_VAR(5) = 5.0;
     spawn {
         sleep 15;
         PlaySoundAtCollider(20, 486, 0);
     }
     loop 300 {
-        SI_VAR(4) += -0.5;
-        SI_VAR(0) += (float) SI_VAR(3);
-        SI_VAR(1) += (float) SI_VAR(4);
-        SI_VAR(2) += (float) SI_VAR(5);
-        if (SI_VAR(1) <= -40) {
-            SI_VAR(1) = (float) -40;
-            SI_VAR(4) *= -0.5;
-            if (SI_VAR(4) <= 1) {
+        EVT_VAR(4) += -0.5;
+        EVT_VAR(0) += (float) EVT_VAR(3);
+        EVT_VAR(1) += (float) EVT_VAR(4);
+        EVT_VAR(2) += (float) EVT_VAR(5);
+        if (EVT_VAR(1) <= -40) {
+            EVT_VAR(1) = (float) -40;
+            EVT_VAR(4) *= -0.5;
+            if (EVT_VAR(4) <= 1) {
                 goto 1;
             }
         }
-        if (SI_VAR(2) >= 60) {
-            SI_VAR(2) = (float) 60;
-            SI_VAR(5) = (float) 0;
+        if (EVT_VAR(2) >= 60) {
+            EVT_VAR(2) = (float) 60;
+            EVT_VAR(5) = (float) 0;
         }
         TranslateModel(41, -34, 50, 10);
         TranslateModel(33, -34, 50, 10);
-        TranslateModel(41, 0, SI_VAR(1), SI_VAR(0));
-        RotateModel(41, SI_VAR(2), 0, 0, 1);
-        TranslateModel(33, 0, SI_VAR(1), SI_VAR(0));
-        RotateModel(33, SI_VAR(2), 0, 0, 1);
+        TranslateModel(41, 0, EVT_VAR(1), EVT_VAR(0));
+        RotateModel(41, EVT_VAR(2), 0, 0, 1);
+        TranslateModel(33, 0, EVT_VAR(1), EVT_VAR(0));
+        RotateModel(33, EVT_VAR(2), 0, 0, 1);
         TranslateModel(41, 34, -50, -10);
         TranslateModel(33, 34, -50, -10);
         sleep 1;
@@ -683,98 +683,98 @@ s32 N(intTable_80242DC8)[] = {
 };
 
 EvtSource N(80242E28) = SCRIPT({
-    SI_VAR(10) = SI_VAR(0);
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(0) < -210) {
+    EVT_VAR(10) = EVT_VAR(0);
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(0) < -210) {
         return;
     }
     PlaySound(0x1E5);
     await N(802413F0);
-    SI_VAR(0) = SI_VAR(10);
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
-        SI_MAP_FLAG(1) = 1;
+    EVT_VAR(0) = EVT_VAR(10);
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+        EVT_MAP_FLAG(1) = 1;
         return;
     }
-    if (SI_MAP_FLAG(3) == 1) {
+    if (EVT_MAP_FLAG(3) == 1) {
         return;
     }
-    SI_MAP_FLAG(3) = 1;
-    if (SI_VAR(0) > 2) {
+    EVT_MAP_FLAG(3) = 1;
+    if (EVT_VAR(0) > 2) {
         goto 0;
     }
-    if (SI_VAR(0) == 2) {
+    if (EVT_VAR(0) == 2) {
         goto 11;
     }
-    if (SI_VAR(0) == 0) {
+    if (EVT_VAR(0) == 0) {
     11:
-        if (SI_SAVE_VAR(252) == 0) {
-            SI_SAVE_VAR(252) = 1;
+        if (EVT_SAVE_VAR(252) == 0) {
+            EVT_SAVE_VAR(252) = 1;
             spawn N(80241ED4);
             goto 0;
         }
     }
-    if (SI_VAR(0) == 1) {
-        if (SI_SAVE_VAR(253) == 0) {
-            SI_SAVE_VAR(253) = 1;
+    if (EVT_VAR(0) == 1) {
+        if (EVT_SAVE_VAR(253) == 0) {
+            EVT_SAVE_VAR(253) = 1;
             spawn N(80242174);
             goto 0;
         }
     }
-    if (SI_VAR(0) == 0) {
-        if (SI_SAVE_VAR(252) == 1) {
-            SI_SAVE_VAR(252) = 2;
+    if (EVT_VAR(0) == 0) {
+        if (EVT_SAVE_VAR(252) == 1) {
+            EVT_SAVE_VAR(252) = 2;
             spawn N(80242474);
             goto 0;
         }
     }
-    if (SI_SAVE_VAR(252) == 2) {
-        if (SI_SAVE_VAR(253) == 1) {
-            SI_SAVE_VAR(253) = 2;
+    if (EVT_SAVE_VAR(252) == 2) {
+        if (EVT_SAVE_VAR(253) == 1) {
+            EVT_SAVE_VAR(253) = 2;
             spawn N(80242620);
             goto 0;
         }
     }
-    if (SI_SAVE_VAR(252) == 2) {
-        if (SI_SAVE_VAR(253) == 2) {
+    if (EVT_SAVE_VAR(252) == 2) {
+        if (EVT_SAVE_VAR(253) == 2) {
             DisablePlayerInput(TRUE);
             UseSettingsFrom(0, 40, 0, 0);
             SetPanTarget(0, 40, 0, 0);
             SetCamSpeed(0, 1.5);
             PanToTarget(0, 0, 1);
-            SI_SAVE_VAR(253) = 3;
+            EVT_SAVE_VAR(253) = 3;
             await N(802413F0);
             await N(802413F0);
             await N(802413F0);
             sleep 30;
             GetModelCenter(27);
-            PlayEffect(0x1D, 0, SI_VAR(0), 50, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
-            PlayEffect(0x1D, 0, SI_VAR(0), 30, SI_VAR(2), 120, 20, 0, 30, 0, 0, 0, 0, 0);
-            PlayEffect(0x1D, 0, SI_VAR(0), 10, SI_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
+            PlayEffect(0x1D, 0, EVT_VAR(0), 50, EVT_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
+            PlayEffect(0x1D, 0, EVT_VAR(0), 30, EVT_VAR(2), 120, 20, 0, 30, 0, 0, 0, 0, 0);
+            PlayEffect(0x1D, 0, EVT_VAR(0), 10, EVT_VAR(2), 100, 20, 0, 30, 0, 0, 0, 0, 0);
             sleep 15;
             spawn {
-                SI_VAR(3) = 6;
+                EVT_VAR(3) = 6;
                 buf_use N(intTable_80242DC8);
                 loop 8 {
-                    buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
-                    PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                    PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 6, 0, 0, 0, 0, 0, 0, 0);
+                    buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
+                    PlaySoundAt(0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                    PlayEffect(0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 6, 0, 0, 0, 0, 0, 0, 0);
                     sleep 2;
-                    SI_VAR(1) += 5;
-                    PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                    PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 2, 15, 0, 0, 0, 0, 0, 0, 0);
-                    sleep SI_VAR(3);
-                    SI_VAR(3) += 1;
+                    EVT_VAR(1) += 5;
+                    PlaySoundAt(0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                    PlayEffect(0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 2, 15, 0, 0, 0, 0, 0, 0, 0);
+                    sleep EVT_VAR(3);
+                    EVT_VAR(3) += 1;
                 }
-                SI_VAR(4) = 2.0;
+                EVT_VAR(4) = 2.0;
                 loop 2 {
                     buf_use N(intTable_80242DC8);
                     loop 8 {
-                        buf_read SI_VAR(0) SI_VAR(1) SI_VAR(2);
-                        PlaySoundAt(0x190, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-                        PlayEffect(0x27, 0, SI_VAR(0), SI_VAR(1), SI_VAR(2), 1, 25, 0, 0, 0, 0, 0, 0, 0);
-                        sleep SI_VAR(3);
-                        SI_VAR(3) += SI_VAR(4);
-                        SI_VAR(4) += 0.5;
+                        buf_read EVT_VAR(0) EVT_VAR(1) EVT_VAR(2);
+                        PlaySoundAt(0x190, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+                        PlayEffect(0x27, 0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2), 1, 25, 0, 0, 0, 0, 0, 0, 0);
+                        sleep EVT_VAR(3);
+                        EVT_VAR(3) += EVT_VAR(4);
+                        EVT_VAR(4) += 0.5;
                     }
                 }
             }
@@ -790,14 +790,14 @@ EvtSource N(80242E28) = SCRIPT({
             DisablePlayerPhysics(TRUE);
             sleep 30;
             await N(80242B18);
-            SI_STORY_PROGRESS = STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE;
+            EVT_STORY_PROGRESS = STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE;
             GotoMap("flo_15", 1);
             sleep 70;
             return;
         }
     }
 0:
-    SI_MAP_FLAG(3) = 0;
+    EVT_MAP_FLAG(3) = 0;
 });
 
 Vec4f N(triggerCoord_8024367C) = { 5.0f, 0.0f, -10.0, 0.0f };
@@ -809,7 +809,7 @@ Vec4f N(triggerCoord_8024369C) = { 50.0f, 0.0f, -10.0, 0.0f };
 Vec4f N(triggerCoord_802436AC) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 EvtSource N(802436BC) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DESTROYED_PUFF_PUFF_MACHINE) {
         EnableModel(49, 0);
         ModifyColliderFlags(0, 19, 0x7FFFFE00);
         EnableModel(31, 0);
@@ -830,51 +830,51 @@ EvtSource N(802436BC) = SCRIPT({
     }
     spawn N(80240E90);
     EnableModel(49, 0);
-    if (SI_SAVE_VAR(252) >= 1) {
+    if (EVT_SAVE_VAR(252) >= 1) {
         ModifyColliderFlags(0, 19, 0x7FFFFE00);
         EnableModel(31, 0);
         EnableModel(32, 0);
     }
-    if (SI_SAVE_VAR(253) >= 1) {
+    if (EVT_SAVE_VAR(253) >= 1) {
         EnableModel(19, 0);
         EnableModel(20, 0);
     }
-    if (SI_SAVE_VAR(252) >= 2) {
+    if (EVT_SAVE_VAR(252) >= 2) {
         EnableModel(21, 0);
     }
-    if (SI_SAVE_VAR(253) >= 2) {
+    if (EVT_SAVE_VAR(253) >= 2) {
         EnableModel(22, 0);
         EnableModel(23, 0);
         EnableModel(24, 0);
         EnableModel(25, 0);
         EnableModel(26, 0);
     }
-    if (SI_SAVE_VAR(253) >= 3) {
+    if (EVT_SAVE_VAR(253) >= 3) {
         EnableModel(29, 0);
         EnableModel(41, 0);
         EnableModel(33, 0);
         ModifyColliderFlags(0, 18, 0x7FFFFE00);
         return;
     }
-    SI_VAR(0) = 0;
+    EVT_VAR(0) = 0;
     bind N(80242E28) TRIGGER_WALL_HAMMER 23;
     bind N(80242E28) TRIGGER_POINT_BOMB N(triggerCoord_8024367C);
     bind N(80242E28) TRIGGER_POINT_BOMB N(triggerCoord_8024368C);
-    SI_VAR(0) = 1;
+    EVT_VAR(0) = 1;
     bind N(80242E28) TRIGGER_WALL_HAMMER 22;
     bind N(80242E28) TRIGGER_POINT_BOMB N(triggerCoord_8024369C);
     bind N(80242E28) TRIGGER_POINT_BOMB N(triggerCoord_802436AC);
-    SI_VAR(0) = 3;
+    EVT_VAR(0) = 3;
     bind N(80242E28) TRIGGER_WALL_HAMMER 19;
-    SI_VAR(0) = 4;
+    EVT_VAR(0) = 4;
     bind N(80242E28) TRIGGER_WALL_HAMMER 18;
-    SI_VAR(0) = 0;
+    EVT_VAR(0) = 0;
     loop 16 {
-        SI_VAR(1) = SI_VAR(0);
-        SI_VAR(1) += 10000;
-        SI_VAR(0) += 1;
-        CloneModel(49, SI_VAR(1));
-        EnableModel(SI_VAR(1), 0);
+        EVT_VAR(1) = EVT_VAR(0);
+        EVT_VAR(1) += 10000;
+        EVT_VAR(0) += 1;
+        CloneModel(49, EVT_VAR(1));
+        EnableModel(EVT_VAR(1), 0);
     }
     spawn N(80241284);
     EnableTexPanning(36, 1);
@@ -884,46 +884,46 @@ EvtSource N(802436BC) = SCRIPT({
     EnableTexPanning(40, 1);
     EnableTexPanning(41, 1);
     spawn {
-        SI_VAR(14) = 1.0;
+        EVT_VAR(14) = 1.0;
 0:
-        if (SI_SAVE_VAR(253) >= 3) {
-            SI_VAR(14) *= 0.953125;
+        if (EVT_SAVE_VAR(253) >= 3) {
+            EVT_VAR(14) *= 0.953125;
         }
-        SI_VAR(15) += (float) SI_VAR(14);
-        if (SI_VAR(15) == 1080) {
-            SI_VAR(15) = (float) 0;
+        EVT_VAR(15) += (float) EVT_VAR(14);
+        if (EVT_VAR(15) == 1080) {
+            EVT_VAR(15) = (float) 0;
         }
-        SI_VAR(0) = SI_VAR(15);
-        SI_VAR(0) /= 9;
-        SI_VAR(0) %= 4;
-        SI_VAR(0) *= 16384;
-        SI_VAR(1) = SI_VAR(15);
-        SI_VAR(1) /= 4;
-        SI_VAR(1) %= 2;
-        SI_VAR(1) *= 16384;
-        SI_VAR(2) = SI_VAR(15);
-        SI_VAR(2) /= 5;
-        SI_VAR(2) %= 2;
-        SI_VAR(2) *= 16384;
-        SI_VAR(3) = SI_VAR(15);
-        SI_VAR(3) /= 6;
-        SI_VAR(3) %= 2;
-        SI_VAR(3) *= 16384;
-        SI_VAR(4) = SI_VAR(15);
-        SI_VAR(4) /= 2;
-        SI_VAR(4) %= 2;
-        SI_VAR(4) *= 32768;
-        SI_VAR(5) = SI_VAR(15);
-        SI_VAR(5) /= 8;
-        SI_VAR(5) %= 2;
-        SI_VAR(5) *= 16384;
-        SetTexPanOffset(12, 0, SI_VAR(0), 0);
-        SetTexPanOffset(13, 0, SI_VAR(1), 0);
-        SetTexPanOffset(14, 0, SI_VAR(2), 0);
-        SetTexPanOffset(15, 0, SI_VAR(3), 0);
-        SetTexPanOffset(11, 0, SI_VAR(4), 0);
-        SetTexPanOffset(10, 0, SI_VAR(5), 0);
-        SetTexPanOffset(9, 0, SI_VAR(5), 0);
+        EVT_VAR(0) = EVT_VAR(15);
+        EVT_VAR(0) /= 9;
+        EVT_VAR(0) %= 4;
+        EVT_VAR(0) *= 16384;
+        EVT_VAR(1) = EVT_VAR(15);
+        EVT_VAR(1) /= 4;
+        EVT_VAR(1) %= 2;
+        EVT_VAR(1) *= 16384;
+        EVT_VAR(2) = EVT_VAR(15);
+        EVT_VAR(2) /= 5;
+        EVT_VAR(2) %= 2;
+        EVT_VAR(2) *= 16384;
+        EVT_VAR(3) = EVT_VAR(15);
+        EVT_VAR(3) /= 6;
+        EVT_VAR(3) %= 2;
+        EVT_VAR(3) *= 16384;
+        EVT_VAR(4) = EVT_VAR(15);
+        EVT_VAR(4) /= 2;
+        EVT_VAR(4) %= 2;
+        EVT_VAR(4) *= 32768;
+        EVT_VAR(5) = EVT_VAR(15);
+        EVT_VAR(5) /= 8;
+        EVT_VAR(5) %= 2;
+        EVT_VAR(5) *= 16384;
+        SetTexPanOffset(12, 0, EVT_VAR(0), 0);
+        SetTexPanOffset(13, 0, EVT_VAR(1), 0);
+        SetTexPanOffset(14, 0, EVT_VAR(2), 0);
+        SetTexPanOffset(15, 0, EVT_VAR(3), 0);
+        SetTexPanOffset(11, 0, EVT_VAR(4), 0);
+        SetTexPanOffset(10, 0, EVT_VAR(5), 0);
+        SetTexPanOffset(9, 0, EVT_VAR(5), 0);
         sleep 1;
         goto 0;
     }
@@ -977,15 +977,15 @@ EvtSource N(80244058) = SCRIPT({
     SetNpcPos(NPC_PARTNER, 65, 0, 50);
     sleep 30;
     AdjustCam(0, 8.0, 0, 300, 19.0, -8.5);
-    GetCurrentPartnerID(SI_VAR(0));
+    GetCurrentPartnerID(EVT_VAR(0));
     BringPartnerOut(8);
-    if (SI_VAR(0) != 8) {
+    if (EVT_VAR(0) != 8) {
         SetNpcJumpscale(NPC_PARTNER, 0.0);
-        GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
-        SI_VAR(1) += 20;
-        SI_VAR(2) += 20;
-        SI_VAR(3) += 20;
-        NpcJump0(NPC_PARTNER, SI_VAR(1), SI_VAR(2), SI_VAR(3), 30);
+        GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+        EVT_VAR(1) += 20;
+        EVT_VAR(2) += 20;
+        EVT_VAR(3) += 20;
+        NpcJump0(NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30);
     }
     PlayerFaceNpc(-4, 0);
     NpcFacePlayer(NPC_PARTNER, 0);
@@ -1008,9 +1008,9 @@ EvtSource N(80244270) = SCRIPT({
         LoadPath(60, N(vectorList_80243F68), 5, 0);
         loop {
             GetNextPathPos();
-            SetNpcPos(NPC_FLYING_MAGIKOOPA, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+            SetNpcPos(NPC_FLYING_MAGIKOOPA, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
             sleep 1;
-            if (SI_VAR(0) != 1) {
+            if (EVT_VAR(0) != 1) {
                 break loop;
             }
         }
@@ -1023,9 +1023,9 @@ EvtSource N(80244270) = SCRIPT({
         LoadPath(60, N(vectorList_80243FA4), 5, 0);
         loop {
             GetNextPathPos();
-            SetNpcPos(NPC_LAKITU0, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+            SetNpcPos(NPC_LAKITU0, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
             sleep 1;
-            if (SI_VAR(0) != 1) {
+            if (EVT_VAR(0) != 1) {
                 break loop;
             }
         }
@@ -1036,9 +1036,9 @@ EvtSource N(80244270) = SCRIPT({
         LoadPath(70, N(vectorList_80243FE0), 5, 0);
         loop {
             GetNextPathPos();
-            SetNpcPos(NPC_LAKITU1, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+            SetNpcPos(NPC_LAKITU1, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
             sleep 1;
-            if (SI_VAR(0) != 1) {
+            if (EVT_VAR(0) != 1) {
                 break loop;
             }
         }
@@ -1049,9 +1049,9 @@ EvtSource N(80244270) = SCRIPT({
     LoadPath(80, N(vectorList_8024401C), 5, 0);
     loop {
         GetNextPathPos();
-        SetNpcPos(NPC_LAKITU2, SI_VAR(1), SI_VAR(2), SI_VAR(3));
+        SetNpcPos(NPC_LAKITU2, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
         sleep 1;
-        if (SI_VAR(0) != 1) {
+        if (EVT_VAR(0) != 1) {
             break loop;
         }
     }
@@ -1059,37 +1059,37 @@ EvtSource N(80244270) = SCRIPT({
 
 EvtSource N(802445D4) = SCRIPT({
     sleep 5;
-    IsPlayerWithin(40, 0, 200, SI_VAR(0));
-    if (SI_VAR(0) == 0) {
-        SI_VAR(3) = 45;
+    IsPlayerWithin(40, 0, 200, EVT_VAR(0));
+    if (EVT_VAR(0) == 0) {
+        EVT_VAR(3) = 45;
     } else {
-        SI_VAR(3) = 25;
+        EVT_VAR(3) = 25;
     }
-    SI_VAR(4) = SI_VAR(3);
-    SI_VAR(4) += -5;
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    if (SI_VAR(2) > -61) {
+    EVT_VAR(4) = EVT_VAR(3);
+    EVT_VAR(4) += -5;
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    if (EVT_VAR(2) > -61) {
         parallel {
             SetNpcFlagBits(NPC_LAKITU0, ((NPC_FLAG_100)), TRUE);
-            NpcMoveTo(NPC_LAKITU0, SI_VAR(0), 55, SI_VAR(3));
+            NpcMoveTo(NPC_LAKITU0, EVT_VAR(0), 55, EVT_VAR(3));
         }
         parallel {
             SetNpcFlagBits(NPC_LAKITU1, ((NPC_FLAG_100)), TRUE);
-            NpcMoveTo(NPC_LAKITU1, SI_VAR(0), 55, SI_VAR(3));
+            NpcMoveTo(NPC_LAKITU1, EVT_VAR(0), 55, EVT_VAR(3));
         }
         parallel {
             SetNpcFlagBits(NPC_LAKITU2, ((NPC_FLAG_100)), TRUE);
-            NpcMoveTo(NPC_LAKITU2, SI_VAR(0), 55, SI_VAR(3));
+            NpcMoveTo(NPC_LAKITU2, EVT_VAR(0), 55, EVT_VAR(3));
         }
-        sleep SI_VAR(4);
+        sleep EVT_VAR(4);
     }
 });
 
 EvtSource N(80244774) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePartnerAI(0);
-    GetNpcPos(NPC_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetNpcPos(NPC_PARTNER, 65, SI_VAR(1), 80);
+    GetNpcPos(NPC_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetNpcPos(NPC_PARTNER, 65, EVT_VAR(1), 80);
     SetNpcYaw(NPC_PARTNER, 270);
     AdjustCam(0, 8.0, 0, 450, 17.0, -6.0);
     SpeakToPlayer(NPC_FLYING_MAGIKOOPA, NPC_ANIM_flying_magikoopa_Palette_02_Anim_9, NPC_ANIM_flying_magikoopa_Palette_02_Anim_1, 0, MESSAGE_ID(0x11, 0x00BB));
@@ -1097,15 +1097,15 @@ EvtSource N(80244774) = SCRIPT({
     spawn N(80244270);
     sleep 80;
     AdjustCam(0, 8.0, 0, 300, 19.0, -8.5);
-    GetCurrentPartnerID(SI_VAR(0));
+    GetCurrentPartnerID(EVT_VAR(0));
     BringPartnerOut(8);
-    if (SI_VAR(0) != 8) {
+    if (EVT_VAR(0) != 8) {
         SetNpcJumpscale(NPC_PARTNER, 0.0);
-        GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
-        SI_VAR(1) += 20;
-        SI_VAR(2) += 20;
-        SI_VAR(3) += 20;
-        NpcJump0(NPC_PARTNER, SI_VAR(1), SI_VAR(2), SI_VAR(3), 30);
+        GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+        EVT_VAR(1) += 20;
+        EVT_VAR(2) += 20;
+        EVT_VAR(3) += 20;
+        NpcJump0(NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30);
     }
     NpcFacePlayer(NPC_PARTNER, 0);
     DisablePartnerAI(0);
@@ -1114,19 +1114,19 @@ EvtSource N(80244774) = SCRIPT({
     sleep 20;
     PutPartnerAway();
     ResetCam(0, 4.0);
-    SI_STORY_PROGRESS = STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS;
+    EVT_STORY_PROGRESS = STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS;
     DisablePlayerInput(FALSE);
     AwaitPlayerApproach(-250, 0, 50);
     DisablePlayerInput(TRUE);
-    GetCurrentPartnerID(SI_VAR(0));
+    GetCurrentPartnerID(EVT_VAR(0));
     BringPartnerOut(8);
-    if (SI_VAR(0) != 8) {
+    if (EVT_VAR(0) != 8) {
         SetNpcJumpscale(NPC_PARTNER, 0.0);
-        GetPlayerPos(SI_VAR(1), SI_VAR(2), SI_VAR(3));
-        SI_VAR(1) += 20;
-        SI_VAR(2) += 20;
-        SI_VAR(3) += 20;
-        NpcJump0(NPC_PARTNER, SI_VAR(1), SI_VAR(2), SI_VAR(3), 30);
+        GetPlayerPos(EVT_VAR(1), EVT_VAR(2), EVT_VAR(3));
+        EVT_VAR(1) += 20;
+        EVT_VAR(2) += 20;
+        EVT_VAR(3) += 20;
+        NpcJump0(NPC_PARTNER, EVT_VAR(1), EVT_VAR(2), EVT_VAR(3), 30);
     }
     PlayerFaceNpc(-4, 0);
     NpcFacePlayer(NPC_PARTNER, 0);
@@ -1140,17 +1140,17 @@ EvtSource N(80244774) = SCRIPT({
 
 EvtSource N(idle_80244B3C) = SCRIPT({
     loop {
-        GetSelfVar(0, SI_VAR(0));
-        if (SI_VAR(0) != 0) {
+        GetSelfVar(0, EVT_VAR(0));
+        if (EVT_VAR(0) != 0) {
             break loop;
         }
         sleep 1;
     }
     DisablePlayerInput(TRUE);
     sleep 10;
-    GetPlayerPos(SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetPlayerPos(EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamDistance(0, 1000);
     SetCamPitch(0, 17.0, -6.0);
     SetCamSpeed(0, 4.0);
@@ -1160,14 +1160,14 @@ EvtSource N(idle_80244B3C) = SCRIPT({
 });
 
 EvtSource N(defeat_80244C84) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            GetSelfNpcID(SI_VAR(0));
-            if (SI_VAR(0) == 3) {
+            GetSelfNpcID(EVT_VAR(0));
+            if (EVT_VAR(0) == 3) {
                 SetNpcPos(NPC_MAGIKOOPA, 0, -1000, 0);
                 SetNpcPos(NPC_FLYING_MAGIKOOPA, -55, 15, 35);
-                GetNpcYaw(3, SI_VAR(0));
+                GetNpcYaw(3, EVT_VAR(0));
                 SetNpcYaw(NPC_FLYING_MAGIKOOPA, 90);
                 InterpPlayerYaw(180, 0);
                 SetPlayerPos(30, 0, 80);
@@ -1187,7 +1187,7 @@ EvtSource N(defeat_80244C84) = SCRIPT({
 });
 
 EvtSource N(80244E2C) = SCRIPT({
-    match SI_MAP_VAR(10) {
+    match EVT_MAP_VAR(10) {
         == 0 {
             NpcFacePlayer(NPC_MAGIKOOPA, 1);
         }
@@ -1204,7 +1204,7 @@ EvtSource N(80244E2C) = SCRIPT({
 });
 
 EvtSource N(80244ED0) = SCRIPT({
-    match SI_MAP_VAR(10) {
+    match EVT_MAP_VAR(10) {
         == 0 {
             SpeakToPlayer(NPC_MAGIKOOPA, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00B9));
             InterpNpcYaw(NPC_MAGIKOOPA, 90, 0);
@@ -1225,7 +1225,7 @@ EvtSource N(80244ED0) = SCRIPT({
 });
 
 EvtSource N(80245004) = SCRIPT({
-    match SI_MAP_VAR(10) {
+    match EVT_MAP_VAR(10) {
         == 0 {
             SpeakToPlayer(NPC_MAGIKOOPA, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 16, MESSAGE_ID(0x11, 0x00BA));
         }
@@ -1245,7 +1245,7 @@ EvtSource N(80245004) = SCRIPT({
 });
 
 EvtSource N(80245108) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
     DisablePlayerInput(TRUE);
@@ -1253,10 +1253,10 @@ EvtSource N(80245108) = SCRIPT({
     SetNpcFlagBits(NPC_PARTNER, ((NPC_FLAG_100)), TRUE);
     AdjustCam(0, 8.0, 0, 300, 17.0, -6.0);
     await N(80244E2C);
-    match SI_AREA_VAR(7) {
+    match EVT_AREA_VAR(7) {
         == 0 {
             await N(80244ED0);
-            SI_AREA_VAR(7) += 1;
+            EVT_AREA_VAR(7) += 1;
             ResetCam(0, 4.0);
         }
         == 1 {
@@ -1268,53 +1268,53 @@ EvtSource N(80245108) = SCRIPT({
 });
 
 EvtSource N(80245228) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 0;
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 0;
         await N(80245108);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(8024527C) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 1;
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 1;
         await N(80245108);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(802452D0) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 2;
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 2;
         await N(80245108);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(80245324) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 3;
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 3;
         await N(80245108);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(80245378) = SCRIPT({
-    if (SI_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS >= STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         return;
     }
     DisablePlayerInput(TRUE);
-    UseSettingsFrom(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SetPanTarget(0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    UseSettingsFrom(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    SetPanTarget(0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetCamSpeed(0, 8.0);
     SetCamPitch(0, 17.0, -6.0);
     SetCamDistance(0, 300);
     PanToTarget(0, 0, 1);
     WaitForCam(0, 1.0);
     await N(80244E2C);
-    if (SI_AREA_VAR(7) == 0) {
+    if (EVT_AREA_VAR(7) == 0) {
         await N(80244ED0);
-        SI_AREA_VAR(7) += 1;
+        EVT_AREA_VAR(7) += 1;
         ResetCam(0, 4.0);
     } else {
         await N(80245004);
@@ -1323,38 +1323,38 @@ EvtSource N(80245378) = SCRIPT({
 });
 
 EvtSource N(802454D4) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 0;
-        GetNpcPos(NPC_MAGIKOOPA, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 0;
+        GetNpcPos(NPC_MAGIKOOPA, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         await N(80245378);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(80245544) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 1;
-        GetNpcPos(NPC_LAKITU0, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 1;
+        GetNpcPos(NPC_LAKITU0, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         await N(80245378);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(802455B4) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 2;
-        GetNpcPos(NPC_LAKITU1, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 2;
+        GetNpcPos(NPC_LAKITU1, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         await N(80245378);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
 EvtSource N(80245624) = SCRIPT({
-    if (SI_MAP_VAR(10) == -1) {
-        SI_MAP_VAR(10) = 3;
-        GetNpcPos(NPC_LAKITU2, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    if (EVT_MAP_VAR(10) == -1) {
+        EVT_MAP_VAR(10) = 3;
+        GetNpcPos(NPC_LAKITU2, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
         await N(80245378);
-        SI_MAP_VAR(10) = -1;
+        EVT_MAP_VAR(10) = -1;
     }
 });
 
@@ -1367,7 +1367,7 @@ Vec4f N(triggerCoord_802456B4) = { 50.0f, 0.0f, -10.0, 0.0f };
 Vec4f N(triggerCoord_802456C4) = { 105.0f, 0.0f, -10.0, 0.0f };
 
 EvtSource N(802456D4) = SCRIPT({
-    SI_MAP_VAR(10) = -1;
+    EVT_MAP_VAR(10) = -1;
     bind N(80245228) TRIGGER_WALL_HAMMER 23;
     bind N(80245228) TRIGGER_WALL_HAMMER 19;
     bind N(802454D4) TRIGGER_POINT_BOMB N(triggerCoord_802456A4);
@@ -1379,33 +1379,33 @@ EvtSource N(802456D4) = SCRIPT({
 });
 
 EvtSource N(interact_802457D4) = SCRIPT({
-    match SI_AREA_VAR(6) {
+    match EVT_AREA_VAR(6) {
         == 0 {
-            GetSelfNpcID(SI_VAR(0));
-            if (SI_VAR(0) == 3) {
+            GetSelfNpcID(EVT_VAR(0));
+            if (EVT_VAR(0) == 3) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5,
                               MESSAGE_ID(0x11, 0x00B6));
             } else {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID(0x11,
                               0x00BC));
             }
-            SI_AREA_VAR(6) += 1;
+            EVT_AREA_VAR(6) += 1;
         }
         == 1 {
-            GetSelfNpcID(SI_VAR(0));
-            if (SI_VAR(0) == 3) {
+            GetSelfNpcID(EVT_VAR(0));
+            if (EVT_VAR(0) == 3) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5,
                               MESSAGE_ID(0x11, 0x00B7));
             } else {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_lakitu_Palette_00_Anim_16, NPC_ANIM_lakitu_Palette_00_Anim_1, 5, MESSAGE_ID(0x11,
                               0x00BD));
             }
-            SI_AREA_VAR(6) += 1;
+            EVT_AREA_VAR(6) += 1;
         }
         == 2 {
             AdjustCam(0, 8.0, 0, 300, 19.0, -9.0);
-            GetSelfNpcID(SI_VAR(0));
-            if (SI_VAR(0) == 3) {
+            GetSelfNpcID(EVT_VAR(0));
+            if (EVT_VAR(0) == 3) {
                 SpeakToPlayer(NPC_SELF, NPC_ANIM_magikoopa_Palette_02_Anim_2, NPC_ANIM_magikoopa_Palette_02_Anim_1, 5,
                               MESSAGE_ID(0x11, 0x00B8));
                 NpcFacePlayer(NPC_SELF, 0);
@@ -1430,7 +1430,7 @@ EvtSource N(interact_802457D4) = SCRIPT({
 });
 
 EvtSource N(init_80245AA8) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcIdle(NPC_SELF, N(idle_80244B3C));
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
@@ -1440,7 +1440,7 @@ EvtSource N(init_80245AA8) = SCRIPT({
 });
 
 EvtSource N(init_80245B30) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
@@ -1448,7 +1448,7 @@ EvtSource N(init_80245B30) = SCRIPT({
 });
 
 EvtSource N(init_80245B90) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
@@ -1457,7 +1457,7 @@ EvtSource N(init_80245B90) = SCRIPT({
 });
 
 EvtSource N(init_80245C04) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {
@@ -1466,7 +1466,7 @@ EvtSource N(init_80245C04) = SCRIPT({
 });
 
 EvtSource N(init_80245C78) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
+    if (EVT_STORY_PROGRESS < STORY_CH6_DEFEATED_PUFF_PUFF_GUARDS) {
         BindNpcInteract(NPC_SELF, N(interact_802457D4));
         BindNpcDefeat(NPC_SELF, N(defeat_80244C84));
     } else {

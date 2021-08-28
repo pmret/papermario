@@ -1,8 +1,8 @@
 #include "common.h"
 
-/// Provide arg `TRUE` on `SI_VAR(1)` to disable refunding.
+/// Provide arg `TRUE` on `EVT_VAR(1)` to disable refunding.
 EvtSource N(UseItemWithEffect) = SCRIPT({
-    if (SI_VAR(1) == 0) {
+    if (EVT_VAR(1) == 0) {
         UseBattleCamPreset(69); // Nice
         sleep 10;
 
@@ -19,8 +19,8 @@ EvtSource N(UseItemWithEffect) = SCRIPT({
         $effectY += 10;
         $effectY += 2;
         PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
-        SI_VAR(10) = $x;
+        MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
+        EVT_VAR(10) = $x;
 
         N(GiveRefund)();
         sleep $x;
@@ -28,7 +28,7 @@ EvtSource N(UseItemWithEffect) = SCRIPT({
         sleep 15;
 
         N(GiveRefundCleanup)();
-        RemoveItemEntity(SI_VAR(10));
+        RemoveItemEntity(EVT_VAR(10));
     } else {
         // No refund.
 
@@ -42,11 +42,11 @@ EvtSource N(UseItemWithEffect) = SCRIPT({
         $effectY += 10;
         $effectY += 2;
         PlayEffect(0x33, 1, $x, $effectY, $z, 1.0, 30, 0, 0, 0, 0, 0, 0, 0);
-        MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
-        SI_VAR(10) = $x;
+        MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
+        EVT_VAR(10) = $x;
 
         sleep 15;
-        RemoveItemEntity(SI_VAR(10));
+        RemoveItemEntity(EVT_VAR(10));
     }
 });
 
@@ -61,8 +61,8 @@ EvtSource N(UseItem) = SCRIPT({
     SetAnimation(ACTOR_PLAYER, 0, ANIM_GOT_ITEM);
     GetActorPos(ACTOR_PLAYER, $x, $y, $z);
     $y += 45;
-    MakeItemEntity(SI_VAR(10), $x, $y, $z, 1, 0);
-    SI_VAR(14) = $x;
+    MakeItemEntity(EVT_VAR(10), $x, $y, $z, 1, 0);
+    EVT_VAR(14) = $x;
 
     N(GiveRefund)();
     sleep $x;
@@ -70,7 +70,7 @@ EvtSource N(UseItem) = SCRIPT({
     sleep 15;
 
     N(GiveRefundCleanup)();
-    RemoveItemEntity(SI_VAR(14));
+    RemoveItemEntity(EVT_VAR(14));
 });
 
 EvtSource N(PlayerGoHome) = SCRIPT({

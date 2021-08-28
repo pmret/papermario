@@ -5,10 +5,10 @@
 EvtSource N(exitSingleDoor_80240100) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 2;
-    SI_VAR(2) = 0;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 2;
+    EVT_VAR(2) = 0;
+    EVT_VAR(3) = -1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("arn_12", 1);
@@ -18,10 +18,10 @@ EvtSource N(exitSingleDoor_80240100) = SCRIPT({
 EvtSource N(exitSingleDoor_802401A4) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = 1;
-    SI_VAR(1) = 7;
-    SI_VAR(2) = 2;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 1;
+    EVT_VAR(1) = 7;
+    EVT_VAR(2) = 2;
+    EVT_VAR(3) = 1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("arn_11", 0);
@@ -34,17 +34,17 @@ EvtSource N(80240248) = SCRIPT({
 });
 
 EvtSource N(enterSingleDoor_80240290) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 0;
-            SI_VAR(3) = -1;
+            EVT_VAR(2) = 0;
+            EVT_VAR(3) = -1;
             await EnterSingleDoor;
             spawn N(80240248);
         }
         == 1 {
-            SI_VAR(2) = 2;
-            SI_VAR(3) = 1;
+            EVT_VAR(2) = 2;
+            EVT_VAR(3) = 1;
             await EnterSingleDoor;
             spawn N(80240248);
         }
@@ -52,7 +52,7 @@ EvtSource N(enterSingleDoor_80240290) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
+    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524292);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -114,44 +114,44 @@ NpcSettings N(npcSettings_802404CC) = {
 EvtSource N(idle_802404F8) = SCRIPT({
     SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
     SetNpcJumpscale(NPC_SELF, 3.0);
-    GetNpcPos(NPC_SELF, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(0) -= 30;
+    GetNpcPos(NPC_SELF, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(0) -= 30;
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-    NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 8);
+    NpcJump0(NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 8);
     SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14);
     sleep 1;
     SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
-    SI_VAR(0) -= 80;
+    EVT_VAR(0) -= 80;
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-    NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 12);
+    NpcJump0(NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 12);
     SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_14);
     sleep 1;
     SetNpcAnimation(NPC_SELF, NPC_ANIM_tubbas_heart_Palette_00_Anim_13);
-    SI_VAR(0) -= 80;
+    EVT_VAR(0) -= 80;
     SetNpcJumpscale(NPC_SELF, 2.5);
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
-    NpcJump0(NPC_SELF, SI_VAR(0), 0, SI_VAR(2), 12);
+    NpcJump0(NPC_SELF, EVT_VAR(0), 0, EVT_VAR(2), 12);
     EnableNpcShadow(NPC_SELF, FALSE);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    SI_STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
+    EVT_STORY_PROGRESS = STORY_CH3_HEART_FLED_SECOND_TUNNEL;
 });
 
 EvtSource N(defeat_802406F4) = SCRIPT({
-    SI_SAVE_FLAG(1018) = 1;
+    EVT_SAVE_FLAG(1018) = 1;
     DoNpcDefeat();
 });
 
 EvtSource N(init_80240720) = SCRIPT({
     BindNpcIdle(NPC_SELF, N(idle_802404F8));
-    if (SI_STORY_PROGRESS != STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
+    if (EVT_STORY_PROGRESS != STORY_CH3_HEART_FLED_FIRST_TUNNEL) {
         RemoveNpc(NPC_SELF);
     }
 });
 
 EvtSource N(init_8024076C) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
-        if (SI_SAVE_FLAG(1018) == 1) {
+    if (EVT_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
+        if (EVT_SAVE_FLAG(1018) == 1) {
             RemoveNpc(NPC_SELF);
             return;
         }

@@ -6,11 +6,11 @@ extern s32 D_000001E4;
 EvtSource N(80240140) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 5;
-    SI_VAR(2) = 0;
-    SI_VAR(4) = 1;
-    SI_VAR(3) = 1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 5;
+    EVT_VAR(2) = 0;
+    EVT_VAR(4) = 1;
+    EVT_VAR(3) = 1;
     spawn 0x80285DFC;
     sleep 17;
     GotoMap("arn_10", 0);
@@ -22,12 +22,12 @@ EvtSource N(802401F4) = SCRIPT({
 });
 
 EvtSource N(80240220) = SCRIPT({
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(2) = 0;
-            SI_VAR(4) = 1;
-            SI_VAR(3) = 1;
+            EVT_VAR(2) = 0;
+            EVT_VAR(4) = 1;
+            EVT_VAR(3) = 1;
             await 0x80285E24;
             spawn N(802401F4);
         }
@@ -38,7 +38,7 @@ EvtSource N(80240220) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
+    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(524288);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
@@ -56,10 +56,10 @@ static s32 N(pad_398)[] = {
 };
 
 EvtSource N(802403A0) = SCRIPT({
-    if (SI_AREA_FLAG(1) == 1) {
+    if (EVT_AREA_FLAG(1) == 1) {
         return;
     }
-    SI_AREA_FLAG(1) = 1;
+    EVT_AREA_FLAG(1) = 1;
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     SetPlayerActionState(6);
@@ -82,10 +82,10 @@ static s32 N(pad_4CC)[] = {
 };
 
 EvtSource N(802404D0) = SCRIPT({
-    if (SI_AREA_FLAG(1) == 0) {
+    if (EVT_AREA_FLAG(1) == 0) {
         return;
     }
-    SI_AREA_FLAG(1) = 1;
+    EVT_AREA_FLAG(1) = 1;
     DisablePlayerInput(TRUE);
     SetPlayerActionState(8);
     func_802D2484();
@@ -93,7 +93,7 @@ EvtSource N(802404D0) = SCRIPT({
     SetPlayerJumpscale(1.5);
     PlayerJump(50, 0, 0, 16);
     SetPlayerAnimation(ANIM_10002);
-    SI_AREA_FLAG(1) = 0;
+    EVT_AREA_FLAG(1) = 0;
     DisablePlayerInput(FALSE);
 });
 
@@ -130,11 +130,11 @@ EvtSource N(idle_802405FC) = SCRIPT({
     PlaySoundAtNpc(NPC_SELF, 0x20C8, 0);
     NpcJump0(NPC_SELF, 0, 200, 0, 15);
     SetNpcPos(NPC_SELF, 0, -1000, 0);
-    SI_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WELL;
+    EVT_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WELL;
 });
 
 EvtSource N(init_80240730) = SCRIPT({
-    if (SI_STORY_PROGRESS != STORY_CH3_HEART_FLED_SECOND_TUNNEL) {
+    if (EVT_STORY_PROGRESS != STORY_CH3_HEART_FLED_SECOND_TUNNEL) {
         RemoveNpc(NPC_SELF);
     } else {
         BindNpcIdle(NPC_SELF, N(idle_802405FC));

@@ -25,43 +25,43 @@ extern f32 D_8029EFB8;
 EvtSource BtlPutPartnerAway = SCRIPT({
     DispatchEvent(ACTOR_PARTNER, 62);
     parallel {
-        SI_VAR(0) = 1.0;
+        EVT_VAR(0) = 1.0;
         loop 10 {
-            SetActorScale(ACTOR_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
-            SI_VAR(0) -= 0.1005859375;
+            SetActorScale(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(0), 1.0);
+            EVT_VAR(0) -= 0.1005859375;
             sleep 1;
         }
     }
     EnablePartnerBlur();
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_E);
-    GetActorPos(ACTOR_PLAYER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    SI_VAR(1) += 25;
+    GetActorPos(ACTOR_PLAYER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    EVT_VAR(1) += 25;
     SetActorJumpGravity(ACTOR_PARTNER, 1.0);
-    SetGoalPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    SetGoalPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     JumpToGoal(ACTOR_PARTNER, 10, 0, 0, 1);
     DisablePartnerBlur();
 });
 
 EvtSource BtlBringPartnerOut = SCRIPT({
     parallel {
-        SI_VAR(0) = 0.1005859375;
+        EVT_VAR(0) = 0.1005859375;
         loop 20 {
-            SetActorScale(ACTOR_PARTNER, SI_VAR(0), SI_VAR(0), 1.0);
-            SI_VAR(0) += 0.05078125;
+            SetActorScale(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(0), 1.0);
+            EVT_VAR(0) += 0.05078125;
             sleep 1;
         }
         SetActorScale(ACTOR_PARTNER, 1.0, 1.0, 1.0);
     }
     PlaySoundAtActor(ACTOR_PLAYER, SOUND_UNKNOWN_D);
-    GetGoalPos(256, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetGoalPos(256, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
     SetActorJumpGravity(ACTOR_PARTNER, 1.0);
-    if (SI_VAR(1) == 0) {
+    if (EVT_VAR(1) == 0) {
         JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
     } else {
         JumpToGoal(ACTOR_PARTNER, 20, 0, 0, 1);
     }
-    GetActorPos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
-    ForceHomePos(ACTOR_PARTNER, SI_VAR(0), SI_VAR(1), SI_VAR(2));
+    GetActorPos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
+    ForceHomePos(ACTOR_PARTNER, EVT_VAR(0), EVT_VAR(1), EVT_VAR(2));
 });
 
 s8 D_80280CE0[] = { 0, 0, 0, 0 };

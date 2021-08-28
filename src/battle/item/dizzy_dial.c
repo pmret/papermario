@@ -46,7 +46,7 @@ ApiStatus N(func_802A1270_727B80)(Evt* script, s32 isInitialCall) {
 #include "UseItem.inc.c"
 
 EvtSource N(main) = SCRIPT({
-    SI_VAR(10) = (const) ITEM_DIZZY_DIAL;
+    EVT_VAR(10) = (const) ITEM_DIZZY_DIAL;
     await N(UseItemWithEffect);
     UseBattleCamPreset(2);
     MoveBattleCamOver(20);
@@ -78,17 +78,17 @@ EvtSource N(main) = SCRIPT({
     InitTargetIterator();
 0:
     SetGoalToTarget(ACTOR_SELF);
-    ItemCheckHit(SI_VAR(0), 0x10000000, 0, SI_VAR(0), 0);
-    if (SI_VAR(0) == 6) {
+    ItemCheckHit(EVT_VAR(0), 0x10000000, 0, EVT_VAR(0), 0);
+    if (EVT_VAR(0) == 6) {
         goto 1;
     }
-    GetItemPower(ITEM_DIZZY_DIAL, SI_VAR(0), SI_VAR(1));
-    MakeStatusField(SI_VAR(0), 0x40000, 100, SI_VAR(0));
-    func_80252B3C(SI_VAR(0), 0x50000000, SI_VAR(0), 0, 32);
+    GetItemPower(ITEM_DIZZY_DIAL, EVT_VAR(0), EVT_VAR(1));
+    MakeStatusField(EVT_VAR(0), 0x40000, 100, EVT_VAR(0));
+    func_80252B3C(EVT_VAR(0), 0x50000000, EVT_VAR(0), 0, 32);
 1:
     sleep 5;
-    ChooseNextTarget(0, SI_VAR(0));
-    if (SI_VAR(0) != -1) {
+    ChooseNextTarget(0, EVT_VAR(0));
+    if (EVT_VAR(0) != -1) {
         goto 0;
     }
     sleep 30;

@@ -32,7 +32,7 @@ MapConfig N(config) = {
 };
 
 EvtSource N(80241480) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH3_TUBBA_WOKE_UP {
             SetMusicTrack(0, SONG_TUBBAS_MANOR, 0, 8);
         }
@@ -52,10 +52,10 @@ EvtSource N(exitSingleDoor_80241520) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     UseDoorSounds(0);
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 6;
-    SI_VAR(2) = 16;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 6;
+    EVT_VAR(2) = 16;
+    EVT_VAR(3) = -1;
     spawn ExitSingleDoor;
     sleep 17;
     GotoMap("dgb_15", 2);
@@ -66,27 +66,27 @@ const char N(pad_XXX)[] = { 0, 0 };
 
 EvtSource N(enterSingleDoor_802415D4) = SCRIPT({
     UseDoorSounds(0);
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            if (SI_SAVE_FLAG(1068) == 0) {
-                SI_SAVE_FLAG(1068) = 1;
-                SI_SAVE_VAR(203) = 18;
+            if (EVT_SAVE_FLAG(1068) == 0) {
+                EVT_SAVE_FLAG(1068) = 1;
+                EVT_SAVE_VAR(203) = 18;
             }
-            SI_VAR(2) = 16;
-            SI_VAR(3) = -1;
+            EVT_VAR(2) = 16;
+            EVT_VAR(3) = -1;
             await EnterSingleDoor;
         }
     }
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
+    EVT_WORLD_LOCATION = LOCATION_TUBBAS_MANOR;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamEnabled(0, 1);
-    if (SI_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_STAR_SPIRIT_RESCUED) {
         MakeNpcs(1, N(npcGroupList_8024318C));
     }
     await N(80241780);
@@ -100,7 +100,7 @@ static s32 N(pad_1774)[] = {
 };
 
 EvtSource N(80241780) = SCRIPT({
-    MakeItemEntity(ITEM_CASTLE_KEY1, -235, 25, -165, 17, SI_SAVE_FLAG(1069));
+    MakeItemEntity(ITEM_CASTLE_KEY1, -235, 25, -165, 17, EVT_SAVE_FLAG(1069));
 });
 
 static s32 N(pad_17B4)[] = {
@@ -108,8 +108,8 @@ static s32 N(pad_17B4)[] = {
 };
 
 EvtSource N(802417C0) = SCRIPT({
-    GetBattleOutcome(SI_VAR(0));
-    match SI_VAR(0) {
+    GetBattleOutcome(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
             RemoveNpc(NPC_SELF);
         }

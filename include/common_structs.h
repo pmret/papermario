@@ -4,7 +4,7 @@
 #include "macros.h"
 #include "ultra64.h"
 #include "types.h"
-#include "si.h"
+#include "evt.h"
 #include "enums.h"
 
 struct Evt;

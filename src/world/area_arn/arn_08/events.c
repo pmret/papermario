@@ -15,11 +15,11 @@ EvtSource N(802403B0) = SCRIPT({
     group 27;
     DisablePlayerInput(TRUE);
     ClearDefeatedEnemies();
-    SI_VAR(0) = 0;
-    SI_VAR(1) = 6;
-    SI_VAR(2) = 0;
-    SI_VAR(4) = 1;
-    SI_VAR(3) = -1;
+    EVT_VAR(0) = 0;
+    EVT_VAR(1) = 6;
+    EVT_VAR(2) = 0;
+    EVT_VAR(4) = 1;
+    EVT_VAR(3) = -1;
     spawn 0x80285DFC;
     sleep 17;
     GotoMap("arn_07", 0);
@@ -31,26 +31,26 @@ EvtSource N(80240470) = SCRIPT({
 });
 
 EvtSource N(8024049C) = SCRIPT({
-    GetLoadType(SI_VAR(1));
-    if (SI_VAR(1) == 1) {
+    GetLoadType(EVT_VAR(1));
+    if (EVT_VAR(1) == 1) {
         spawn EnterSavePoint;
         spawn N(80240470);
         return;
     }
-    GetEntryID(SI_VAR(0));
-    match SI_VAR(0) {
+    GetEntryID(EVT_VAR(0));
+    match EVT_VAR(0) {
         == 0 {
-            SI_VAR(4) = 1;
-            SI_VAR(2) = 0;
-            SI_VAR(3) = -1;
+            EVT_VAR(4) = 1;
+            EVT_VAR(2) = 0;
+            EVT_VAR(3) = -1;
             await 0x80285E24;
-            SI_AREA_FLAG(1) = 0;
+            EVT_AREA_FLAG(1) = 0;
             spawn N(80240470);
         }
         == 1 {
             DisablePlayerInput(TRUE);
             DisablePlayerPhysics(TRUE);
-            if (SI_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WELL) {
+            if (EVT_STORY_PROGRESS == STORY_CH3_HEART_ESCAPED_WELL) {
                 SetPlayerPos(1000, 1000, 0);
                 SetNpcPos(NPC_PARTNER, 1000, 1000, 0);
                 RotateModel(0, 80, 0, -1, 0);
@@ -74,10 +74,10 @@ EvtSource N(8024049C) = SCRIPT({
                 MakeLerp(80, 0, 10, 0);
                 loop {
                     UpdateLerp();
-                    RotateModel(0, SI_VAR(0), 0, -1, 0);
-                    RotateModel(1, SI_VAR(0), 0, -1, 0);
+                    RotateModel(0, EVT_VAR(0), 0, -1, 0);
+                    RotateModel(1, EVT_VAR(0), 0, -1, 0);
                     sleep 1;
-                    if (SI_VAR(1) == 0) {
+                    if (EVT_VAR(1) == 0) {
                         break loop;
                     }
                 }
@@ -85,7 +85,7 @@ EvtSource N(8024049C) = SCRIPT({
                 sleep 20;
                 SetPlayerPos(0, 0, 0);
                 SetNpcPos(NPC_PARTNER, 0, 0, 0);
-                SI_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WINDY_MILL;
+                EVT_STORY_PROGRESS = STORY_CH3_HEART_ESCAPED_WINDY_MILL;
             }
             DisablePlayerPhysics(FALSE);
             SetPlayerJumpscale(2.0);
@@ -97,23 +97,23 @@ EvtSource N(8024049C) = SCRIPT({
 });
 
 EvtSource N(main) = SCRIPT({
-    SI_WORLD_LOCATION = LOCATION_WINDY_MILL;
+    EVT_WORLD_LOCATION = LOCATION_WINDY_MILL;
     SetSpriteShading(-1);
     SetCamPerspective(0, 3, 25, 16, 4096);
     SetCamBGColor(0, 0, 0, 0);
     SetCamLeadPlayer(0, 0);
     SetCamEnabled(0, 1);
-    SI_SAVE_FLAG(1979) = 1;
-    if (SI_STORY_PROGRESS >= STORY_CH4_FRYING_PAN_STOLEN) {
-        SI_SAVE_FLAG(1016) = 0;
-        SI_SAVE_FLAG(1017) = 0;
-        SI_SAVE_FLAG(1018) = 0;
+    EVT_SAVE_FLAG(1979) = 1;
+    if (EVT_STORY_PROGRESS >= STORY_CH4_FRYING_PAN_STOLEN) {
+        EVT_SAVE_FLAG(1016) = 0;
+        EVT_SAVE_FLAG(1017) = 0;
+        EVT_SAVE_FLAG(1018) = 0;
     }
     MakeNpcs(0, N(npcGroupList_80241828));
     await N(makeEntities);
     spawn N(80240BA0);
-    GetDemoState(SI_VAR(0));
-    if (SI_VAR(0) != 0) {
+    GetDemoState(EVT_VAR(0));
+    if (EVT_VAR(0) != 0) {
         await N(8024118C);
         return;
     }
@@ -128,7 +128,7 @@ static s32 N(pad_A6C) = {
 
 EvtSource N(80240A70) = SCRIPT({
     loop {
-        if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+        if (EVT_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
             break loop;
         }
         sleep 1;
@@ -137,9 +137,9 @@ EvtSource N(80240A70) = SCRIPT({
     DisablePlayerInput(TRUE);
     DisablePlayerPhysics(TRUE);
     N(func_80240000_BF47A0)();
-    SI_AREA_FLAG(1) = 1;
-    if (SI_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
-        SI_STORY_PROGRESS = STORY_CH3_WENT_DOWN_THE_WELL;
+    EVT_AREA_FLAG(1) = 1;
+    if (EVT_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+        EVT_STORY_PROGRESS = STORY_CH3_WENT_DOWN_THE_WELL;
     }
     GotoMap("arn_09", 1);
     sleep 100;
@@ -157,14 +157,14 @@ static s32 N(pad_B98)[] = {
 EvtSource N(80240BA0) = SCRIPT({
     PlaySound(0x8000004B);
     spawn {
-        SI_VAR(0) = 0;
+        EVT_VAR(0) = 0;
 10:
-        RotateModel(9, SI_VAR(0), 0, 0, 1);
-        RotateModel(15, SI_VAR(0), 0, 0, 1);
-        RotateModel(11, SI_VAR(0), 0, 0, 1);
-        RotateModel(13, SI_VAR(0), 0, 0, -1);
-        RotateModel(17, SI_VAR(0), 0, 0, -1);
-        SI_VAR(0) += 1;
+        RotateModel(9, EVT_VAR(0), 0, 0, 1);
+        RotateModel(15, EVT_VAR(0), 0, 0, 1);
+        RotateModel(11, EVT_VAR(0), 0, 0, 1);
+        RotateModel(13, EVT_VAR(0), 0, 0, -1);
+        RotateModel(17, EVT_VAR(0), 0, 0, -1);
+        EVT_VAR(0) += 1;
         sleep 1;
         goto 10;
     }
@@ -233,10 +233,10 @@ EvtSource N(80240CC0) = SCRIPT({
     sleep 12;
     DemoSetButtons(0);
     sleep 20;
-    if (SI_SAVE_FLAG(9) == 1) {
+    if (EVT_SAVE_FLAG(9) == 1) {
         return;
     }
-    SI_SAVE_FLAG(9) = 1;
+    EVT_SAVE_FLAG(9) = 1;
     GotoMapSpecial("arn_08", 2, 2);
     sleep 100;
 });
@@ -244,16 +244,16 @@ EvtSource N(80240CC0) = SCRIPT({
 EvtSource N(802410AC) = SCRIPT({
     sleep 10;
     loop {
-        GetDemoState(SI_VAR(0));
-        if (SI_VAR(0) == 2) {
+        GetDemoState(EVT_VAR(0));
+        if (EVT_VAR(0) == 2) {
             break loop;
         }
         sleep 1;
     }
-    if (SI_SAVE_FLAG(9) == 1) {
+    if (EVT_SAVE_FLAG(9) == 1) {
         return;
     }
-    SI_SAVE_FLAG(9) = 1;
+    EVT_SAVE_FLAG(9) = 1;
     GotoMapSpecial("arn_08", 2, 3);
     sleep 35;
 });
@@ -269,7 +269,7 @@ s32 N(D_80241188_BF5928) = {
 EvtSource N(8024118C) = SCRIPT({
     SetCamProperties(0, 90.0, 0, 0, 0, 470.0, 17.0, -7.0);
     N(func_8024019C_BF493C)();
-    SI_SAVE_FLAG(9) = 0;
+    EVT_SAVE_FLAG(9) = 0;
     spawn N(802410AC);
     spawn N(80240CC0);
 });
@@ -305,7 +305,7 @@ EvtSource N(idle_80241278) = SCRIPT({
 });
 
 EvtSource N(init_80241288) = SCRIPT({
-    if (SI_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
+    if (EVT_STORY_PROGRESS != STORY_CH3_HEART_ESCAPED_WELL) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     } else {
         BindNpcIdle(NPC_SELF, N(idle_80241278));
@@ -313,7 +313,7 @@ EvtSource N(init_80241288) = SCRIPT({
 });
 
 EvtSource N(interact_802412E8) = SCRIPT({
-    match SI_STORY_PROGRESS {
+    match EVT_STORY_PROGRESS {
         < STORY_CH5_WHALE_MOUTH_OPEN {
             SpeakToPlayer(NPC_SELF, NPC_ANIM_yakkey_Palette_00_Anim_2, NPC_ANIM_yakkey_Palette_00_Anim_1, 0, MESSAGE_ID(0x0E, 0x00BA));
         }
@@ -333,7 +333,7 @@ EvtSource N(interact_802412E8) = SCRIPT({
 });
 
 EvtSource N(init_802413E8) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
+    if (EVT_STORY_PROGRESS < STORY_CH4_FRYING_PAN_STOLEN) {
         SetNpcPos(NPC_SELF, 0, -1000, 0);
     } else {
         BindNpcInteract(NPC_SELF, N(interact_802412E8));
@@ -412,7 +412,7 @@ static s32 N(pad_184C) = {
 };
 
 EvtSource N(makeEntities) = SCRIPT({
-    if (SI_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
+    if (EVT_STORY_PROGRESS < STORY_CH3_WENT_DOWN_THE_WELL) {
         MakeEntity(0x802BCE84, 0, 30, 0, 0, MAKE_ENTITY_END);
     }
 });
