@@ -164,6 +164,8 @@ Actor* get_actor(ActorID actorID);
 ActorPart* get_actor_part(Actor* actor, s32 partIndex);
 s32 add_coins(s32 amt);
 
+s32 phys_can_player_interact(void);
+
 void ai_enemy_play_sound(Npc* npc, s32 arg1, s32 arg2);
 
 s32 player_test_move_without_slipping(PlayerStatus*, f32*, f32*, f32*, s32, f32, s32*);
