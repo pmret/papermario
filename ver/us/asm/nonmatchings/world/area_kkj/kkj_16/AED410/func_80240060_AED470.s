@@ -136,7 +136,7 @@ glabel func_80240060_AED470
 /* AED640 80240230 0260202D */  daddu     $a0, $s3, $zero
 .L80240234:
 /* AED644 80240234 0280282D */  daddu     $a1, $s4, $zero
-/* AED648 80240238 0C0B2026 */  jal       set_variable
+/* AED648 80240238 0C0B2026 */  jal       evt_set_variable
 /* AED64C 8024023C 0220302D */   daddu    $a2, $s1, $zero
 /* AED650 80240240 8FBF0044 */  lw        $ra, 0x44($sp)
 /* AED654 80240244 8FB40040 */  lw        $s4, 0x40($sp)

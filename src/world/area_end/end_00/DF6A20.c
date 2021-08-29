@@ -46,15 +46,15 @@ INCLUDE_ASM(s32, "world/area_end/end_00/DF6A20", func_80242680_DF9080);
 
 ApiStatus func_80242744_DF9144(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     s32 a1 = *args++;
 
-    set_variable(script, a1, _heap_malloc(&gSpriteHeapPtr, var1));
+    evt_set_variable(script, a1, _heap_malloc(&gSpriteHeapPtr, var1));
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802427A4_DF91A4(Evt* script, s32 isInitialCall) {
-    _heap_free(&gSpriteHeapPtr, get_variable(script, *script->ptrReadPos));
+    _heap_free(&gSpriteHeapPtr, evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -71,8 +71,8 @@ ApiStatus N(SetNpcShadowScale)(Evt* script, s32 isInitialCall) {
     f32 newShadowScale;
 
     Bytecode* args = script->ptrReadPos;
-    npcID = get_variable(script, *args++);
-    newShadowScale = get_float_variable(script, *args++);
+    npcID = evt_get_variable(script, *args++);
+    newShadowScale = evt_get_float_variable(script, *args++);
 
     resolve_npc(script, npcID)->shadowScale = newShadowScale;
     return ApiStatus_DONE2;
@@ -83,7 +83,7 @@ ApiStatus func_80242898_DF9298(Evt* script, s32 isInitialCall) {
     Npc** npc = &script->functionTemp[1];
 
     if (isInitialCall) {
-        *npc = get_npc_unsafe(get_variable(script, *args++));
+        *npc = get_npc_unsafe(evt_get_variable(script, *args++));
     }
 
     (*npc)->pos.x += 0.6666667f;

@@ -32,7 +32,7 @@ ApiStatus N(func_802414C4_824784)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     f32 posX, posY, posZ, posW;
 
     territory.unk_00 = 0;
@@ -140,10 +140,10 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802418FC_824BBC);
 /*
 ApiStatus N(func_802418FC_824BBC)(Evt *script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
-    u16 phi_s0 = get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 phi_s7 = get_variable(script, EVT_SAVE_FLAG(1769));
-    u16 temp_s6 = get_variable(script, EVT_SAVE_VAR(350));
-    u16 phi_s5 = get_variable(script, EVT_SAVE_VAR(351));
+    u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
+    u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
+    u16 temp_s6 = evt_get_variable(script, EVT_SAVE_VAR(350));
+    u16 phi_s5 = evt_get_variable(script, EVT_SAVE_VAR(351));
     s32 var;
     s32 i;
 
@@ -164,16 +164,16 @@ ApiStatus N(func_802418FC_824BBC)(Evt *script, s32 isInitialCall) {
         if (rand_int(100) < 30) {
             phi_s5 = rand_int(temp_s2 - 1);
             temp_s6 = temp_s3;
-            set_variable(script, EVT_SAVE_VAR(350), temp_s6);
-            set_variable(script, EVT_SAVE_VAR(351), phi_s5);
+            evt_set_variable(script, EVT_SAVE_VAR(350), temp_s6);
+            evt_set_variable(script, EVT_SAVE_VAR(351), phi_s5);
             phi_s0 = 1;
         }
     }
 
-    set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
-    set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
-    temp_s0_2 = get_variable(NULL, EVT_SAVE_VAR(352));
-    temp_v0 = get_variable(NULL, EVT_STORY_PROGRESS);
+    evt_set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
+    evt_set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
+    temp_s0_2 = evt_get_variable(NULL, EVT_SAVE_VAR(352));
+    temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
         if (temp_v0 < (*(N(quizRequirements) + i)).unk_00) {
@@ -208,7 +208,7 @@ ApiStatus N(func_80241EAC_82516C)(Evt *script, s32 isInitialCall) {
         playerData->quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, EVT_SAVE_VAR(352))]) {
+    if (script->varTable[0] == N(quizAnswers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
         script->varTable[0] = 1;
         playerData->quizzesCorrect++;
     } else {
@@ -227,9 +227,9 @@ ApiStatus N(func_80241F30_8251F0)(Evt *script, s32 isInitialCall) {
     if (isInitialCall) {
         Effect** effect = &D_8024DFE0;
 
-        *effect = playFX_4E(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)));
-        D_8024DFE4 = playFX_54(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)));
-        D_8024DFE8 = playFX_80(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)), get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
+        *effect = playFX_4E(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)));
+        D_8024DFE4 = playFX_54(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)));
+        D_8024DFE8 = playFX_80(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)), evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
         effectPtr = (*effect)->unk_0C;
         effectPtr->unk_18 = 0;
@@ -286,7 +286,7 @@ ApiStatus N(func_80242148_825408)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802421FC_8254BC);
 /*
 ApiStatus N(func_802421FC_8254BC)(Evt *script, s32 isInitialCall) {
-    D_8024DFE0->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
+    D_8024DFE0->unk_0C->unk_34 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 */
@@ -294,7 +294,7 @@ ApiStatus N(func_802421FC_8254BC)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242230_8254F0);
 /*
 ApiStatus N(func_80242230_8254F0)(Evt *script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = D_8024DFE0->unk_0C;
 
     switch (var) {
@@ -355,7 +355,7 @@ ApiStatus N(func_802422E4_8255A4)(Evt *script, s32 isInitialCall) {
 INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_802427B8_825A78);
 /*
 void N(func_802427B8_825A78)(void) {
-    s32 var = get_variable(NULL, D_8024DFD8);
+    s32 var = evt_get_variable(NULL, D_8024DFD8);
 
     if (var == 1) {
         playFX_50(0, 0, 0, 0);
@@ -388,7 +388,7 @@ ApiStatus N(func_80242A80_825D40)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80248778_82BA38)) {
         N(D_80248778_82BA38) = FALSE;
-        set_variable(script, *args, N(D_8024877C_82BA3C));
+        evt_set_variable(script, *args, N(D_8024877C_82BA3C));
         return ApiStatus_DONE2;
     }
 
@@ -401,7 +401,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242AD4_825D94);
 ApiStatus N(func_80242AD4_825D94)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_8024877C_82BA3C) = get_variable(script, *args);
+    N(D_8024877C_82BA3C) = evt_get_variable(script, *args);
     N(D_80248778_82BA38) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -411,7 +411,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242B0C_825DCC);
 /*
 ApiStatus N(func_80242B0C_825DCC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
@@ -433,7 +433,7 @@ INCLUDE_ASM(s32, "world/area_mac/mac_02/823BF0", func_80242BA8_825E68);
 /*
 ApiStatus N(func_80242BA8_825E68)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

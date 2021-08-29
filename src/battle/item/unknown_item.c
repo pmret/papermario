@@ -5,10 +5,10 @@
 
 ApiStatus N(func_802A123C_72447C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(0, a, b, c, d);
     return ApiStatus_DONE2;

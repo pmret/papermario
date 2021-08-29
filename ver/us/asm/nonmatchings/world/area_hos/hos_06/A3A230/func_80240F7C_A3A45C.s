@@ -19,7 +19,7 @@ glabel func_80240F7C_A3A45C
 .L80240FB0:
 /* A3A490 80240FB0 8CC50000 */  lw        $a1, ($a2)
 /* A3A494 80240FB4 3C068024 */  lui       $a2, %hi(D_802445D4_A3DAB4)
-/* A3A498 80240FB8 0C0B2026 */  jal       set_variable
+/* A3A498 80240FB8 0C0B2026 */  jal       evt_set_variable
 /* A3A49C 80240FBC 8CC645D4 */   lw       $a2, %lo(D_802445D4_A3DAB4)($a2)
 /* A3A4A0 80240FC0 24020002 */  addiu     $v0, $zero, 2
 .L80240FC4:

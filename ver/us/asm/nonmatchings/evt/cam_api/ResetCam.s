@@ -28,7 +28,7 @@ glabel ResetCam
 /* F12D4 802CC924 00621821 */  addu      $v1, $v1, $v0
 /* F12D8 802CC928 000318C0 */  sll       $v1, $v1, 3
 /* F12DC 802CC92C 8E050000 */  lw        $a1, ($s0)
-/* F12E0 802CC930 0C0B210B */  jal       get_float_variable
+/* F12E0 802CC930 0C0B210B */  jal       evt_get_float_variable
 /* F12E4 802CC934 00668021 */   addu     $s0, $v1, $a2
 /* F12E8 802CC938 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* F12EC 802CC93C 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)

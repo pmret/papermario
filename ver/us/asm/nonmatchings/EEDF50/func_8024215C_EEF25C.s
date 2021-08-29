@@ -25,7 +25,7 @@ glabel func_8024215C_EEF25C
 /* EEF290 80242190 00A0882D */   daddu    $s1, $a1, $zero
 /* EEF294 80242194 02A0202D */  daddu     $a0, $s5, $zero
 /* EEF298 80242198 8E050000 */  lw        $a1, ($s0)
-/* EEF29C 8024219C 0C0B53A3 */  jal       dead_get_variable
+/* EEF29C 8024219C 0C0B53A3 */  jal       dead_evt_get_variable
 /* EEF2A0 802421A0 0040A02D */   daddu    $s4, $v0, $zero
 /* EEF2A4 802421A4 AFA00010 */  sw        $zero, 0x10($sp)
 /* EEF2A8 802421A8 8E4300D0 */  lw        $v1, 0xd0($s2)

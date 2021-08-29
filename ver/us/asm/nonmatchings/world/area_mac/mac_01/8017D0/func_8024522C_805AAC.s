@@ -125,7 +125,7 @@ glabel func_8024522C_805AAC
 /* 805C68 802453E8 00220821 */  addu      $at, $at, $v0
 /* 805C6C 802453EC 8C226AEC */  lw        $v0, %lo(D_80256AEC_81736C)($at)
 /* 805C70 802453F0 00A32821 */  addu      $a1, $a1, $v1
-/* 805C74 802453F4 0C0B2026 */  jal       set_variable
+/* 805C74 802453F4 0C0B2026 */  jal       evt_set_variable
 /* 805C78 802453F8 AEA20084 */   sw       $v0, 0x84($s5)
 /* 805C7C 802453FC 08091504 */  j         .L80245410
 /* 805C80 80245400 24020002 */   addiu    $v0, $zero, 2

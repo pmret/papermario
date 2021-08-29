@@ -153,7 +153,7 @@ glabel PartnerAfflictEnemy
 /* 1AEAFC 8028021C 0440000B */  bltz      $v0, .L8028024C
 /* 1AEB00 80280220 0240202D */   daddu    $a0, $s2, $zero
 /* 1AEB04 80280224 0280282D */  daddu     $a1, $s4, $zero
-/* 1AEB08 80280228 0C0B2026 */  jal       set_variable
+/* 1AEB08 80280228 0C0B2026 */  jal       evt_set_variable
 /* 1AEB0C 8028022C 0040302D */   daddu    $a2, $v0, $zero
 /* 1AEB10 80280230 0C0B1069 */  jal       does_script_exist_by_ref
 /* 1AEB14 80280234 0240202D */   daddu    $a0, $s2, $zero

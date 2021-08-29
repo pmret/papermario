@@ -20,7 +20,7 @@ glabel func_80242EA8_DC0158
 /* DC0194 80242EE4 0240202D */   daddu    $a0, $s2, $zero
 /* DC0198 80242EE8 0240202D */  daddu     $a0, $s2, $zero
 /* DC019C 80242EEC 0220282D */  daddu     $a1, $s1, $zero
-/* DC01A0 80242EF0 0C0B2026 */  jal       set_variable
+/* DC01A0 80242EF0 0C0B2026 */  jal       evt_set_variable
 /* DC01A4 80242EF4 0040302D */   daddu    $a2, $v0, $zero
 /* DC01A8 80242EF8 8FBF001C */  lw        $ra, 0x1c($sp)
 /* DC01AC 80242EFC 8FB20018 */  lw        $s2, 0x18($sp)

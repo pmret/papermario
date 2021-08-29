@@ -5,9 +5,9 @@
 
 ApiStatus N(func_802A123C_715A8C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
     ItemEntity* item = get_item_entity(script->varTable[14]);
 
     item->position.x = a;
@@ -26,7 +26,7 @@ ApiStatus N(func_802A12EC_715B3C)(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    partner->koDuration -= get_variable(script, *args++);
+    partner->koDuration -= evt_get_variable(script, *args++);
     if (partner->koDuration < 0) {
         partner->koDuration = 0;
     }
@@ -43,10 +43,10 @@ ApiStatus N(func_802A12EC_715B3C)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A1378_715BC8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(0, a, b, c, d);
 
@@ -55,10 +55,10 @@ ApiStatus N(func_802A1378_715BC8)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A1438_715C88)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(1, a, b, c, d);
 
@@ -72,7 +72,7 @@ ApiStatus N(func_802A1438_715C88)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_802A15A0_715DF0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     StaticItem* itemTable = gItemTable;
-    StaticItem* item = &itemTable[get_variable(script, *args++)];
+    StaticItem* item = &itemTable[evt_get_variable(script, *args++)];
 
     script->varTable[11] = item->potencyA;
     script->varTable[12] = item->potencyB;

@@ -206,7 +206,7 @@ glabel CancelablePlayerRunToGoal
 /* 1A2AD0 802741F0 8C850074 */  lw        $a1, 0x74($a0)
 /* 1A2AD4 802741F4 0000302D */  daddu     $a2, $zero, $zero
 .L802741F8:
-/* 1A2AD8 802741F8 0C0B2026 */  jal       set_variable
+/* 1A2AD8 802741F8 0C0B2026 */  jal       evt_set_variable
 /* 1A2ADC 802741FC 00000000 */   nop
 /* 1A2AE0 80274200 24020002 */  addiu     $v0, $zero, 2
 .L80274204:

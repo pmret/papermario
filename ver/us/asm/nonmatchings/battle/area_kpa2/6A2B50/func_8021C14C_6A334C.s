@@ -47,11 +47,11 @@ glabel func_8021C14C_6A334C
 /* 6A33F4 8021C1F4 4482C000 */  mtc1      $v0, $f24
 /* 6A33F8 8021C1F8 00000000 */  nop
 /* 6A33FC 8021C1FC 4680C620 */  cvt.s.w   $f24, $f24
-/* 6A3400 8021C200 0C0B210B */  jal       get_float_variable
+/* 6A3400 8021C200 0C0B210B */  jal       evt_get_float_variable
 /* 6A3404 8021C204 0220202D */   daddu    $a0, $s1, $zero
 /* 6A3408 8021C208 0220202D */  daddu     $a0, $s1, $zero
 /* 6A340C 8021C20C 8E050000 */  lw        $a1, ($s0)
-/* 6A3410 8021C210 0C0B210B */  jal       get_float_variable
+/* 6A3410 8021C210 0C0B210B */  jal       evt_get_float_variable
 /* 6A3414 8021C214 46000506 */   mov.s    $f20, $f0
 /* 6A3418 8021C218 240400B4 */  addiu     $a0, $zero, 0xb4
 /* 6A341C 8021C21C 0C00AB39 */  jal       heap_malloc

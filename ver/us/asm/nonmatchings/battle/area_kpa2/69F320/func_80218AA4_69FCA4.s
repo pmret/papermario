@@ -45,7 +45,7 @@ glabel func_80218AA4_69FCA4
 /* 69FD44 80218B44 4482B000 */  mtc1      $v0, $f22
 /* 69FD48 80218B48 00000000 */  nop
 /* 69FD4C 80218B4C 4680B5A0 */  cvt.s.w   $f22, $f22
-/* 69FD50 80218B50 0C0B210B */  jal       get_float_variable
+/* 69FD50 80218B50 0C0B210B */  jal       evt_get_float_variable
 /* 69FD54 80218B54 0220202D */   daddu    $a0, $s1, $zero
 /* 69FD58 80218B58 82830210 */  lb        $v1, 0x210($s4)
 /* 69FD5C 80218B5C 2402000A */  addiu     $v0, $zero, 0xa

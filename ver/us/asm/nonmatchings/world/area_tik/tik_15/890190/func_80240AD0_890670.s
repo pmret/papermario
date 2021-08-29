@@ -9,7 +9,7 @@ glabel func_80240AD0_890670
 /* 890680 80240AE0 8C82000C */  lw        $v0, 0xc($a0)
 /* 890684 80240AE4 28C60040 */  slti      $a2, $a2, 0x40
 /* 890688 80240AE8 8C450000 */  lw        $a1, ($v0)
-/* 89068C 80240AEC 0C0B2026 */  jal       set_variable
+/* 89068C 80240AEC 0C0B2026 */  jal       evt_set_variable
 /* 890690 80240AF0 38C60001 */   xori     $a2, $a2, 1
 /* 890694 80240AF4 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 890698 80240AF8 24020002 */  addiu     $v0, $zero, 2

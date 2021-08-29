@@ -18,7 +18,7 @@ glabel func_80241C90_844860
 /* 844894 80241CC4 0200202D */  daddu     $a0, $s0, $zero
 /* 844898 80241CC8 3C05FD05 */  lui       $a1, 0xfd05
 /* 84489C 80241CCC 34A50F8B */  ori       $a1, $a1, 0xf8b
-/* 8448A0 80241CD0 0C0B2026 */  jal       set_variable
+/* 8448A0 80241CD0 0C0B2026 */  jal       evt_set_variable
 /* 8448A4 80241CD4 0040302D */   daddu    $a2, $v0, $zero
 /* 8448A8 80241CD8 8FBF0014 */  lw        $ra, 0x14($sp)
 /* 8448AC 80241CDC 8FB00010 */  lw        $s0, 0x10($sp)

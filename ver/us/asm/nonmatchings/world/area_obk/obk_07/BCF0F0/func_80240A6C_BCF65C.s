@@ -131,7 +131,7 @@ glabel func_80240A6C_BCF65C
 /* BCF828 80240C38 00D03023 */  subu      $a2, $a2, $s0
 /* BCF82C 80240C3C 00063080 */  sll       $a2, $a2, 2
 /* BCF830 80240C40 00D03021 */  addu      $a2, $a2, $s0
-/* BCF834 80240C44 0C0B2026 */  jal       set_variable
+/* BCF834 80240C44 0C0B2026 */  jal       evt_set_variable
 /* BCF838 80240C48 000630C0 */   sll      $a2, $a2, 3
 /* BCF83C 80240C4C 3C032E8B */  lui       $v1, 0x2e8b
 /* BCF840 80240C50 3463A2E9 */  ori       $v1, $v1, 0xa2e9

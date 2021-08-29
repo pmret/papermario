@@ -22,7 +22,7 @@ glabel func_80240050_AB9300
 /* AB9344 80240094 8E250000 */  lw        $a1, ($s1)
 /* AB9348 80240098 4600010D */  trunc.w.s $f4, $f0
 /* AB934C 8024009C 44062000 */  mfc1      $a2, $f4
-/* AB9350 802400A0 0C0B2026 */  jal       set_variable
+/* AB9350 802400A0 0C0B2026 */  jal       evt_set_variable
 /* AB9354 802400A4 0200202D */   daddu    $a0, $s0, $zero
 /* AB9358 802400A8 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AB935C 802400AC 8FB10014 */  lw        $s1, 0x14($sp)

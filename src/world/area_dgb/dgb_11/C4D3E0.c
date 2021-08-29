@@ -205,7 +205,7 @@ EvtSource N(makeEntities) = SCRIPT({
 });
 
 ApiStatus N(func_80240000_C4D3E0)(Evt* script, s32 isInitialCall) {
-    Entity* entity = get_entity_by_index(get_variable(NULL, 0xFD050F80));
+    Entity* entity = get_entity_by_index(evt_get_variable(NULL, 0xFD050F80));
 
     if (entity == NULL) {
         return ApiStatus_BLOCK;

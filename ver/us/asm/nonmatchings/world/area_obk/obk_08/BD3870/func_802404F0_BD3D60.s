@@ -21,7 +21,7 @@ glabel func_802404F0_BD3D60
 /* BD3DA0 80240530 0220202D */  daddu     $a0, $s1, $zero
 /* BD3DA4 80240534 3C05FD05 */  lui       $a1, 0xfd05
 /* BD3DA8 80240538 34A50F8A */  ori       $a1, $a1, 0xf8a
-/* BD3DAC 8024053C 0C0B2026 */  jal       set_variable
+/* BD3DAC 8024053C 0C0B2026 */  jal       evt_set_variable
 /* BD3DB0 80240540 0000302D */   daddu    $a2, $zero, $zero
 /* BD3DB4 80240544 8FBF0018 */  lw        $ra, 0x18($sp)
 /* BD3DB8 80240548 8FB10014 */  lw        $s1, 0x14($sp)

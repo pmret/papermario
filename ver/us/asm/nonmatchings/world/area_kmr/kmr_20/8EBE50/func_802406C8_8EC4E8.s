@@ -212,7 +212,7 @@ glabel func_802406C8_8EC4E8
 /* 8EC7DC 802409BC 0000202D */   daddu    $a0, $zero, $zero
 /* 8EC7E0 802409C0 3C05F840 */  lui       $a1, 0xf840
 /* 8EC7E4 802409C4 34A55BE7 */  ori       $a1, $a1, 0x5be7
-/* 8EC7E8 802409C8 0C0B2026 */  jal       set_variable
+/* 8EC7E8 802409C8 0C0B2026 */  jal       evt_set_variable
 /* 8EC7EC 802409CC 24060001 */   addiu    $a2, $zero, 1
 .L802409D0:
 /* 8EC7F0 802409D0 3C148025 */  lui       $s4, %hi(D_80253390)

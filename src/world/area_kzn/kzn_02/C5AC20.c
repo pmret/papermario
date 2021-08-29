@@ -39,7 +39,7 @@ ApiStatus N(func_802417EC_C5BF2C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -154,7 +154,7 @@ ApiStatus N(func_80241DE4_C5C524)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -249,7 +249,7 @@ ApiStatus N(func_80242310_C5CA50)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80244A74_C5F1B4)) {
         N(D_80244A74_C5F1B4) = FALSE;
-        set_variable(script, *args, N(D_80244A78_C5F1B8));
+        evt_set_variable(script, *args, N(D_80244A78_C5F1B8));
         return ApiStatus_DONE2;
     }
 
@@ -262,7 +262,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_80242364_C5CAA4);
 ApiStatus N(func_80242364_C5CAA4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80244A78_C5F1B8) = get_variable(script, *args);
+    N(D_80244A78_C5F1B8) = evt_get_variable(script, *args);
     N(D_80244A74_C5F1B4) = TRUE;
     return ApiStatus_DONE2;
 }
@@ -272,7 +272,7 @@ INCLUDE_ASM(s32, "world/area_kzn/kzn_02/C5AC20", func_8024239C_C5CADC);
 /*
 ApiStatus N(func_8024239C_C5CADC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

@@ -17,12 +17,12 @@ glabel get_variable
 /* EC49C 802C7AEC 00C5102A */  slt       $v0, $a2, $a1
 /* EC4A0 802C7AF0 14400007 */  bnez      $v0, .L802C7B10
 /* EC4A4 802C7AF4 3C02F414 */   lui      $v0, 0xf414
-/* EC4A8 802C7AF8 0C0B1248 */  jal       fixed_var_to_float
+/* EC4A8 802C7AF8 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EC4AC 802C7AFC 00A0202D */   daddu    $a0, $a1, $zero
 /* EC4B0 802C7B00 4600008D */  trunc.w.s $f2, $f0
 /* EC4B4 802C7B04 44021000 */  mfc1      $v0, $f2
 /* EC4B8 802C7B08 080B1F67 */  j         .L802C7D9C
-/* EC4BC 802C7B0C 00000000 */   nop      
+/* EC4BC 802C7B0C 00000000 */   nop
 .L802C7B10:
 /* EC4C0 802C7B10 34423E00 */  ori       $v0, $v0, 0x3e00
 /* EC4C4 802C7B14 0045102A */  slt       $v0, $v0, $a1
@@ -61,7 +61,7 @@ glabel get_variable
 /* EC540 802C7B90 10400081 */  beqz      $v0, .L802C7D98
 /* EC544 802C7B94 00C5102A */   slt      $v0, $a2, $a1
 /* EC548 802C7B98 080B1F5F */  j         .L802C7D7C
-/* EC54C 802C7B9C 00000000 */   nop      
+/* EC54C 802C7B9C 00000000 */   nop
 .L802C7BA0:
 /* EC550 802C7BA0 34429800 */  ori       $v0, $v0, 0x9800
 /* EC554 802C7BA4 0045102A */  slt       $v0, $v0, $a1
@@ -72,7 +72,7 @@ glabel get_variable
 /* EC568 802C7BB8 0C05154E */  jal       get_global_byte
 /* EC56C 802C7BBC 00A42021 */   addu     $a0, $a1, $a0
 /* EC570 802C7BC0 080B1F67 */  j         .L802C7D9C
-/* EC574 802C7BC4 00000000 */   nop      
+/* EC574 802C7BC4 00000000 */   nop
 .L802C7BC8:
 /* EC578 802C7BC8 3442C500 */  ori       $v0, $v0, 0xc500
 /* EC57C 802C7BCC 0045102A */  slt       $v0, $v0, $a1
@@ -83,7 +83,7 @@ glabel get_variable
 /* EC590 802C7BE0 0C051594 */  jal       get_area_byte
 /* EC594 802C7BE4 00A42021 */   addu     $a0, $a1, $a0
 /* EC598 802C7BE8 080B1F67 */  j         .L802C7D9C
-/* EC59C 802C7BEC 00000000 */   nop      
+/* EC59C 802C7BEC 00000000 */   nop
 .L802C7BF0:
 /* EC5A0 802C7BF0 3442F200 */  ori       $v0, $v0, 0xf200
 /* EC5A4 802C7BF4 0045102A */  slt       $v0, $v0, $a1
@@ -94,7 +94,7 @@ glabel get_variable
 /* EC5B8 802C7C08 0C05152F */  jal       get_global_flag
 /* EC5BC 802C7C0C 00A42021 */   addu     $a0, $a1, $a0
 /* EC5C0 802C7C10 080B1F67 */  j         .L802C7D9C
-/* EC5C4 802C7C14 00000000 */   nop      
+/* EC5C4 802C7C14 00000000 */   nop
 .L802C7C18:
 /* EC5C8 802C7C18 34421F00 */  ori       $v0, $v0, 0x1f00
 /* EC5CC 802C7C1C 0045102A */  slt       $v0, $v0, $a1
@@ -105,7 +105,7 @@ glabel get_variable
 /* EC5E0 802C7C30 0C05157C */  jal       get_area_flag
 /* EC5E4 802C7C34 00A42021 */   addu     $a0, $a1, $a0
 /* EC5E8 802C7C38 080B1F67 */  j         .L802C7D9C
-/* EC5EC 802C7C3C 00000000 */   nop      
+/* EC5EC 802C7C3C 00000000 */   nop
 .L802C7C40:
 /* EC5F0 802C7C40 34424C00 */  ori       $v0, $v0, 0x4c00
 /* EC5F4 802C7C44 0045102A */  slt       $v0, $v0, $a1
@@ -196,11 +196,11 @@ glabel get_variable
 .L802C7D7C:
 /* EC72C 802C7D7C 14400007 */  bnez      $v0, .L802C7D9C
 /* EC730 802C7D80 00A0102D */   daddu    $v0, $a1, $zero
-/* EC734 802C7D84 0C0B1248 */  jal       fixed_var_to_float
+/* EC734 802C7D84 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EC738 802C7D88 00A0202D */   daddu    $a0, $a1, $zero
 /* EC73C 802C7D8C 4600008D */  trunc.w.s $f2, $f0
 /* EC740 802C7D90 44051000 */  mfc1      $a1, $f2
-/* EC744 802C7D94 00000000 */  nop       
+/* EC744 802C7D94 00000000 */  nop
 .L802C7D98:
 /* EC748 802C7D98 00A0102D */  daddu     $v0, $a1, $zero
 .L802C7D9C:

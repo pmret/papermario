@@ -67,17 +67,17 @@ glabel func_802406D8_AEDAE8
 /* AEDBDC 802407CC 02A0282D */  daddu     $a1, $s5, $zero
 /* AEDBE0 802407D0 C6540030 */  lwc1      $f20, 0x30($s2)
 /* AEDBE4 802407D4 0280302D */  daddu     $a2, $s4, $zero
-/* AEDBE8 802407D8 0C0B2026 */  jal       set_variable
+/* AEDBE8 802407D8 0C0B2026 */  jal       evt_set_variable
 /* AEDBEC 802407DC 4600A501 */   sub.s    $f20, $f20, $f0
 /* AEDBF0 802407E0 0260202D */  daddu     $a0, $s3, $zero
 /* AEDBF4 802407E4 4600B08D */  trunc.w.s $f2, $f22
 /* AEDBF8 802407E8 44061000 */  mfc1      $a2, $f2
-/* AEDBFC 802407EC 0C0B2026 */  jal       set_variable
+/* AEDBFC 802407EC 0C0B2026 */  jal       evt_set_variable
 /* AEDC00 802407F0 02C0282D */   daddu    $a1, $s6, $zero
 /* AEDC04 802407F4 0260202D */  daddu     $a0, $s3, $zero
 /* AEDC08 802407F8 4600A08D */  trunc.w.s $f2, $f20
 /* AEDC0C 802407FC 44061000 */  mfc1      $a2, $f2
-/* AEDC10 80240800 0C0B2026 */  jal       set_variable
+/* AEDC10 80240800 0C0B2026 */  jal       evt_set_variable
 /* AEDC14 80240804 02E0282D */   daddu    $a1, $s7, $zero
 .L80240808:
 /* AEDC18 80240808 24020002 */  addiu     $v0, $zero, 2

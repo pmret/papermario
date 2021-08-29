@@ -27,7 +27,7 @@ glabel func_80242AF0_EE14B0
 /* EE14EC 80242B2C 8EA3000C */  lw        $v1, 0xc($s5)
 /* EE14F0 80242B30 02A0202D */  daddu     $a0, $s5, $zero
 /* EE14F4 80242B34 8C650000 */  lw        $a1, ($v1)
-/* EE14F8 80242B38 0C0B53A3 */  jal       dead_get_variable
+/* EE14F8 80242B38 0C0B53A3 */  jal       dead_evt_get_variable
 /* EE14FC 80242B3C 0040882D */   daddu    $s1, $v0, $zero
 /* EE1500 80242B40 AFA00028 */  sw        $zero, 0x28($sp)
 /* EE1504 80242B44 8E4300D0 */  lw        $v1, 0xd0($s2)

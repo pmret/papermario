@@ -17,7 +17,7 @@ glabel func_80242BD8_EA34D8
 /* EA3508 80242C08 8E30000C */  lw        $s0, 0xc($s1)
 /* EA350C 80242C0C 8E160000 */  lw        $s6, ($s0)
 /* EA3510 80242C10 26100004 */  addiu     $s0, $s0, 4
-/* EA3514 80242C14 0C0B53A3 */  jal       dead_get_variable
+/* EA3514 80242C14 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA3518 80242C18 02C0282D */   daddu    $a1, $s6, $zero
 /* EA351C 80242C1C 44820000 */  mtc1      $v0, $f0
 /* EA3520 80242C20 00000000 */  nop
@@ -26,14 +26,14 @@ glabel func_80242BD8_EA34D8
 /* EA352C 80242C2C 8E140000 */  lw        $s4, ($s0)
 /* EA3530 80242C30 26100004 */  addiu     $s0, $s0, 4
 /* EA3534 80242C34 0220202D */  daddu     $a0, $s1, $zero
-/* EA3538 80242C38 0C0B53A3 */  jal       dead_get_variable
+/* EA3538 80242C38 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA353C 80242C3C 0280282D */   daddu    $a1, $s4, $zero
 /* EA3540 80242C40 0220202D */  daddu     $a0, $s1, $zero
 /* EA3544 80242C44 8E150000 */  lw        $s5, ($s0)
 /* EA3548 80242C48 4482B000 */  mtc1      $v0, $f22
 /* EA354C 80242C4C 00000000 */  nop
 /* EA3550 80242C50 4680B5A0 */  cvt.s.w   $f22, $f22
-/* EA3554 80242C54 0C0B53A3 */  jal       dead_get_variable
+/* EA3554 80242C54 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA3558 80242C58 02A0282D */   daddu    $a1, $s5, $zero
 /* EA355C 80242C5C 2404FFFC */  addiu     $a0, $zero, -4
 /* EA3560 80242C60 44820000 */  mtc1      $v0, $f0
@@ -75,18 +75,18 @@ glabel func_80242BD8_EA34D8
 /* EA35F0 80242CF0 C7A00010 */  lwc1      $f0, 0x10($sp)
 /* EA35F4 80242CF4 4600008D */  trunc.w.s $f2, $f0
 /* EA35F8 80242CF8 44061000 */  mfc1      $a2, $f2
-/* EA35FC 80242CFC 0C0B551A */  jal       dead_set_variable
+/* EA35FC 80242CFC 0C0B551A */  jal       dead_evt_set_variable
 /* EA3600 80242D00 02C0282D */   daddu    $a1, $s6, $zero
 /* EA3604 80242D04 0220202D */  daddu     $a0, $s1, $zero
 /* EA3608 80242D08 4600B08D */  trunc.w.s $f2, $f22
 /* EA360C 80242D0C 44061000 */  mfc1      $a2, $f2
-/* EA3610 80242D10 0C0B551A */  jal       dead_set_variable
+/* EA3610 80242D10 0C0B551A */  jal       dead_evt_set_variable
 /* EA3614 80242D14 0280282D */   daddu    $a1, $s4, $zero
 /* EA3618 80242D18 0220202D */  daddu     $a0, $s1, $zero
 /* EA361C 80242D1C C7A00014 */  lwc1      $f0, 0x14($sp)
 /* EA3620 80242D20 4600008D */  trunc.w.s $f2, $f0
 /* EA3624 80242D24 44061000 */  mfc1      $a2, $f2
-/* EA3628 80242D28 0C0B551A */  jal       dead_set_variable
+/* EA3628 80242D28 0C0B551A */  jal       dead_evt_set_variable
 /* EA362C 80242D2C 02A0282D */   daddu    $a1, $s5, $zero
 /* EA3630 80242D30 8FBF0034 */  lw        $ra, 0x34($sp)
 /* EA3634 80242D34 8FB60030 */  lw        $s6, 0x30($sp)

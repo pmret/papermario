@@ -554,7 +554,7 @@ void func_800E96C8(void) {
 }
 
 ApiStatus ShowCoinCounter(Evt* script, s32 isInitialCall) {
-    if (get_variable(script, *script->ptrReadPos)) {
+    if (evt_get_variable(script, *script->ptrReadPos)) {
         show_coin_counter();
     } else {
         hide_coin_counter();

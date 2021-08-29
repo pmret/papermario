@@ -28,7 +28,7 @@ glabel func_80241130_B6D4C0
 /* B6D51C 8024118C 0220202D */  daddu     $a0, $s1, $zero
 /* B6D520 80241190 8E25007C */  lw        $a1, 0x7c($s1)
 /* B6D524 80241194 0000302D */  daddu     $a2, $zero, $zero
-/* B6D528 80241198 0C0B2026 */  jal       set_variable
+/* B6D528 80241198 0C0B2026 */  jal       evt_set_variable
 /* B6D52C 8024119C AE220078 */   sw       $v0, 0x78($s1)
 .L802411A0:
 /* B6D530 802411A0 8E25007C */  lw        $a1, 0x7c($s1)

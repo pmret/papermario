@@ -14,7 +14,7 @@ glabel func_80241E50_A4A410
 /* A4A434 80241E74 0040802D */   daddu    $s0, $v0, $zero
 /* A4A438 80241E78 3C05FD05 */  lui       $a1, 0xfd05
 /* A4A43C 80241E7C 34A50F80 */  ori       $a1, $a1, 0xf80
-/* A4A440 80241E80 0C0B2026 */  jal       set_variable
+/* A4A440 80241E80 0C0B2026 */  jal       evt_set_variable
 /* A4A444 80241E84 0000302D */   daddu    $a2, $zero, $zero
 .L80241E88:
 /* A4A448 80241E88 86020018 */  lh        $v0, 0x18($s0)
@@ -23,7 +23,7 @@ glabel func_80241E50_A4A410
 /* A4A454 80241E94 0220202D */   daddu    $a0, $s1, $zero
 /* A4A458 80241E98 3C05FD05 */  lui       $a1, 0xfd05
 /* A4A45C 80241E9C 34A50F80 */  ori       $a1, $a1, 0xf80
-/* A4A460 80241EA0 0C0B2026 */  jal       set_variable
+/* A4A460 80241EA0 0C0B2026 */  jal       evt_set_variable
 /* A4A464 80241EA4 24060001 */   addiu    $a2, $zero, 1
 .L80241EA8:
 /* A4A468 80241EA8 8FBF0018 */  lw        $ra, 0x18($sp)

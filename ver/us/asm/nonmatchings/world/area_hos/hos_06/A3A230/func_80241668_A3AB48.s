@@ -81,7 +81,7 @@ glabel func_80241668_A3AB48
 /* A3AC68 80241788 0220282D */  daddu     $a1, $s1, $zero
 /* A3AC6C 8024178C 8E620000 */  lw        $v0, ($s3)
 /* A3AC70 80241790 24060001 */  addiu     $a2, $zero, 1
-/* A3AC74 80241794 0C0B2026 */  jal       set_variable
+/* A3AC74 80241794 0C0B2026 */  jal       evt_set_variable
 /* A3AC78 80241798 AFC20088 */   sw       $v0, 0x88($fp)
 /* A3AC7C 8024179C 080905EE */  j         .L802417B8
 /* A3AC80 802417A0 00000000 */   nop

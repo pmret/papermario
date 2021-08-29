@@ -31,7 +31,7 @@ glabel func_80242F1C_B37AEC
 /* B37B44 80242F74 2922000A */  slti      $v0, $t1, 0xa
 /* B37B48 80242F78 1440FFF0 */  bnez      $v0, .L80242F3C
 /* B37B4C 80242F7C 25080002 */   addiu    $t0, $t0, 2
-/* B37B50 80242F80 0C0B2026 */  jal       set_variable
+/* B37B50 80242F80 0C0B2026 */  jal       evt_set_variable
 /* B37B54 80242F84 00000000 */   nop
 /* B37B58 80242F88 8FBF0010 */  lw        $ra, 0x10($sp)
 /* B37B5C 80242F8C 24020002 */  addiu     $v0, $zero, 2

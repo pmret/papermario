@@ -249,7 +249,7 @@ ApiStatus UseBattleCamPreset(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    preset = get_variable(script, *args++);
+    preset = evt_get_variable(script, *args++);
     D_8029F2A4 = 0;
     btl_cam_use_preset(preset);
 
@@ -264,7 +264,7 @@ ApiStatus func_8024E664(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    preset = get_variable(script, *args++);
+    preset = evt_get_variable(script, *args++);
     D_8029F2A4 = 1;
     btl_cam_use_preset(preset);
 
@@ -284,7 +284,7 @@ ApiStatus func_8024E6B4(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            func_8024E40C(get_variable(script, *args++));
+            func_8024E40C(evt_get_variable(script, *args++));
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -306,8 +306,8 @@ ApiStatus func_8024E748(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    mode = get_variable(script, *args++);
-    val = get_variable(script, *args++);
+    mode = evt_get_variable(script, *args++);
+    val = evt_get_variable(script, *args++);
 
     switch (mode) {
         case 1:
@@ -346,14 +346,14 @@ ApiStatus func_8024E820(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    camera->unk_1C = get_variable(script, *args++);
-    camera->unk_1E = get_variable(script, *args++);
-    camera->unk_20 = get_variable(script, *args++);
-    camera->unk_22 = get_variable(script, *args++);
-    camera->unk_24 = get_variable(script, *args++);
-    camera->unk_26 = get_variable(script, *args++) * 256;
-    camera->unk_28 = get_variable(script, *args++);
-    camera->zoomPercent = get_variable(script, *args++);
+    camera->unk_1C = evt_get_variable(script, *args++);
+    camera->unk_1E = evt_get_variable(script, *args++);
+    camera->unk_20 = evt_get_variable(script, *args++);
+    camera->unk_22 = evt_get_variable(script, *args++);
+    camera->unk_24 = evt_get_variable(script, *args++);
+    camera->unk_26 = evt_get_variable(script, *args++) * 256;
+    camera->unk_28 = evt_get_variable(script, *args++);
+    camera->zoomPercent = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -365,9 +365,9 @@ ApiStatus SetBattleCamTarget(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F270 = get_variable(script, *args++);
-    D_8029F274 = get_variable(script, *args++);
-    D_8029F278 = get_variable(script, *args++);
+    D_8029F270 = evt_get_variable(script, *args++);
+    D_8029F274 = evt_get_variable(script, *args++);
+    D_8029F278 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -379,9 +379,9 @@ ApiStatus func_8024E9B0(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    camera->unk_54 = get_variable(script, *args++);
-    camera->unk_58 = get_variable(script, *args++);
-    camera->unk_5C = get_variable(script, *args++);
+    camera->unk_54 = evt_get_variable(script, *args++);
+    camera->unk_58 = evt_get_variable(script, *args++);
+    camera->unk_5C = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -393,7 +393,7 @@ ApiStatus SetBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F286 = get_variable(script, *args++);
+    D_8029F286 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -404,7 +404,7 @@ ApiStatus AddBattleCamOffsetZ(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F286 += get_variable(script, *args++);
+    D_8029F286 += evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -415,7 +415,7 @@ ApiStatus SetBattleCamYaw(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F282 = get_variable(script, *args++);
+    D_8029F282 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -427,7 +427,7 @@ ApiStatus BattleCamTargetActor(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    actorID = get_variable(script, *args++);
+    actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
@@ -446,13 +446,13 @@ ApiStatus func_8024EB84(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    actorID = get_variable(script, *args++);
+    actorID = evt_get_variable(script, *args++);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_8024E45C(actorID, get_variable(script, *args++));
+    func_8024E45C(actorID, evt_get_variable(script, *args++));
 
     return ApiStatus_DONE2;
 }
@@ -465,7 +465,7 @@ ApiStatus MoveBattleCamOver(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F29E = get_variable(script, *args++);
+    D_8029F29E = evt_get_variable(script, *args++);
     D_80280CE4 = 0;
 
     if (battleStatus->camMovementScript != NULL) {
@@ -482,7 +482,7 @@ ApiStatus SetBattleCamZoom(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F280 = get_variable(script, *args++);
+    D_8029F280 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -493,7 +493,7 @@ ApiStatus AddBattleCamZoom(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F280 += get_variable(script, *args++);
+    D_8029F280 += evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
@@ -504,14 +504,14 @@ ApiStatus func_8024ECF8(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    D_8029F2A2 = get_variable(script, *args++);
-    D_8029F2A3 = get_variable(script, *args++);
-    D_8029F2A5 = get_variable(script, *args++);
+    D_8029F2A2 = evt_get_variable(script, *args++);
+    D_8029F2A3 = evt_get_variable(script, *args++);
+    D_8029F2A5 = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 
 ApiStatus FreezeBattleCam(Evt* script, s32 isInitialCall) {
-    D_80280CE0 = get_variable(script, *script->ptrReadPos);
+    D_80280CE0 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 

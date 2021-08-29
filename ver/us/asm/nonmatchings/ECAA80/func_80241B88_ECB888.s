@@ -7,7 +7,7 @@ glabel func_80241B88_ECB888
 /* ECB890 80241B90 0080802D */  daddu     $s0, $a0, $zero
 /* ECB894 80241B94 AFBF0014 */  sw        $ra, 0x14($sp)
 /* ECB898 80241B98 8E02000C */  lw        $v0, 0xc($s0)
-/* ECB89C 80241B9C 0C0B53A3 */  jal       dead_get_variable
+/* ECB89C 80241B9C 0C0B53A3 */  jal       dead_evt_get_variable
 /* ECB8A0 80241BA0 8C450000 */   lw       $a1, ($v0)
 /* ECB8A4 80241BA4 3C048009 */  lui       $a0, %hi(dead_gItemTable)
 /* ECB8A8 80241BA8 2484D2C0 */  addiu     $a0, $a0, %lo(dead_gItemTable)

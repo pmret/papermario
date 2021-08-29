@@ -13,7 +13,7 @@ glabel func_80218DF0_59F4D0
 /* 59F4F0 80218E10 26100004 */   addiu    $s0, $s0, 4
 /* 59F4F4 80218E14 8E050000 */  lw        $a1, ($s0)
 /* 59F4F8 80218E18 8C50000C */  lw        $s0, 0xc($v0)
-/* 59F4FC 80218E1C 0C0B210B */  jal       get_float_variable
+/* 59F4FC 80218E1C 0C0B210B */  jal       evt_get_float_variable
 /* 59F500 80218E20 0220202D */   daddu    $a0, $s1, $zero
 /* 59F504 80218E24 E600002C */  swc1      $f0, 0x2c($s0)
 /* 59F508 80218E28 E6000030 */  swc1      $f0, 0x30($s0)

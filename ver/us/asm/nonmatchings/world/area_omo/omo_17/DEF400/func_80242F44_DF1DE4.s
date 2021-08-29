@@ -280,7 +280,7 @@ glabel func_80242F44_DF1DE4
 /* DF21CC 8024332C AE220000 */  sw        $v0, ($s1)
 /* DF21D0 80243330 AC800070 */  sw        $zero, 0x70($a0)
 .L80243334:
-/* DF21D4 80243334 0C0B2026 */  jal       set_variable
+/* DF21D4 80243334 0C0B2026 */  jal       evt_set_variable
 /* DF21D8 80243338 00000000 */   nop
 /* DF21DC 8024333C 08090CDD */  j         .L80243374
 /* DF21E0 80243340 24020002 */   addiu    $v0, $zero, 2

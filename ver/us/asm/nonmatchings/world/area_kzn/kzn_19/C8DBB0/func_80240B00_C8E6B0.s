@@ -31,17 +31,17 @@ glabel func_80240B00_C8E6B0
 /* C8E714 80240B64 24050001 */   addiu    $a1, $zero, 1
 /* C8E718 80240B68 0220202D */  daddu     $a0, $s1, $zero
 /* C8E71C 80240B6C 3C05FE36 */  lui       $a1, 0xfe36
-/* C8E720 80240B70 0C0B210B */  jal       get_float_variable
+/* C8E720 80240B70 0C0B210B */  jal       evt_get_float_variable
 /* C8E724 80240B74 34A53C81 */   ori      $a1, $a1, 0x3c81
 /* C8E728 80240B78 0220202D */  daddu     $a0, $s1, $zero
 /* C8E72C 80240B7C 3C05FE36 */  lui       $a1, 0xfe36
 /* C8E730 80240B80 34A53C82 */  ori       $a1, $a1, 0x3c82
-/* C8E734 80240B84 0C0B210B */  jal       get_float_variable
+/* C8E734 80240B84 0C0B210B */  jal       evt_get_float_variable
 /* C8E738 80240B88 E6000098 */   swc1     $f0, 0x98($s0)
 /* C8E73C 80240B8C 0220202D */  daddu     $a0, $s1, $zero
 /* C8E740 80240B90 3C05FE36 */  lui       $a1, 0xfe36
 /* C8E744 80240B94 34A53C83 */  ori       $a1, $a1, 0x3c83
-/* C8E748 80240B98 0C0B210B */  jal       get_float_variable
+/* C8E748 80240B98 0C0B210B */  jal       evt_get_float_variable
 /* C8E74C 80240B9C E600009C */   swc1     $f0, 0x9c($s0)
 /* C8E750 80240BA0 E60000A0 */  swc1      $f0, 0xa0($s0)
 /* C8E754 80240BA4 2610000C */  addiu     $s0, $s0, 0xc

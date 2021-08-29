@@ -48,7 +48,7 @@ glabel func_802188D8_58CBC8
 /* 58CC64 80218974 8E050000 */  lw        $a1, ($s0)
 /* 58CC68 80218978 0000302D */  daddu     $a2, $zero, $zero
 .L8021897C:
-/* 58CC6C 8021897C 0C0B2026 */  jal       set_variable
+/* 58CC6C 8021897C 0C0B2026 */  jal       evt_set_variable
 /* 58CC70 80218980 00000000 */   nop
 /* 58CC74 80218984 8FBF0018 */  lw        $ra, 0x18($sp)
 /* 58CC78 80218988 8FB10014 */  lw        $s1, 0x14($sp)

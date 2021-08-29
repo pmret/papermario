@@ -5,7 +5,7 @@ glabel func_80240624_EED724
 /* EED724 80240624 27BDFFE0 */  addiu     $sp, $sp, -0x20
 /* EED728 80240628 AFBF0018 */  sw        $ra, 0x18($sp)
 /* EED72C 8024062C 8C82000C */  lw        $v0, 0xc($a0)
-/* EED730 80240630 0C0B53A3 */  jal       dead_get_variable
+/* EED730 80240630 0C0B53A3 */  jal       dead_evt_get_variable
 /* EED734 80240634 8C450000 */   lw       $a1, ($v0)
 /* EED738 80240638 0C0462EC */  jal       func_80118BB0
 /* EED73C 8024063C 0040202D */   daddu    $a0, $v0, $zero

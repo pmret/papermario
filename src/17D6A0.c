@@ -60,7 +60,7 @@ ApiStatus IsMessageBoxDisplayed(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    set_variable(script, outVar, btl_is_popup_displayed());
+    evt_set_variable(script, outVar, btl_is_popup_displayed());
     return ApiStatus_DONE2;
 }
 

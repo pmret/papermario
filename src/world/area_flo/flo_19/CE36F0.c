@@ -673,21 +673,21 @@ ApiStatus N(func_8024030C_CE39FC)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80240340_CE3A30)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 a1 = *args++;
-    s32 var0 = get_variable(script, a1);
+    s32 var0 = evt_get_variable(script, a1);
     s32 a2 = *args++;
-    f32 var1 = get_float_variable(script, *args++);
-    f32 var2 = get_float_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
-    f32 temp = (get_float_variable(script, *args++) / 180.0f) * PI;
+    f32 var1 = evt_get_float_variable(script, *args++);
+    f32 var2 = evt_get_float_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
+    f32 temp = (evt_get_float_variable(script, *args++) / 180.0f) * PI;
     f32 diff = fabsf(var2 - var1) / 2;
 
     if (var4 != 0 && var3 < var0) {
         var0 = var3;
-        set_variable(script, a1, var3);
+        evt_set_variable(script, a1, var3);
     }
 
-    set_float_variable(script, a2, (var1 + diff) - (diff * cos_rad(((var0 * PI) / var3) + temp)));
+    evt_set_float_variable(script, a2, (var1 + diff) - (diff * cos_rad(((var0 * PI) / var3) + temp)));
 
     return ApiStatus_DONE2;
 }
@@ -697,20 +697,20 @@ ApiStatus N(func_802404D0_CE3BC0)(Evt* script, s32 isInitialCall) {
     s32 var1 = *args++;
     s32 var2 = *args++;
 
-    set_variable(script, var1, gPlayerStatus.spriteFacingAngle);
-    set_variable(script, var2, gPlayerStatus.targetYaw);
+    evt_set_variable(script, var1, gPlayerStatus.spriteFacingAngle);
+    evt_set_variable(script, var2, gPlayerStatus.targetYaw);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80240540_CE3C30)(Evt* script, s32 isInitialCall) {
-    f32 temp_f20 = get_variable(NULL, script->varTable[2]);
+    f32 temp_f20 = evt_get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[9], script->varTable[11]);
     f32 temp_f22 = clamp_angle(atan2(0.0f, 0.0f, script->varTable[9], script->varTable[11]) - temp_f20);
 
     temp_f20 = sin_deg(temp_f22);
     gPlayerStatus.position.x = (dist * temp_f20) + 0.0f;
-    gPlayerStatus.position.y = get_variable(NULL, script->varTable[10]) + get_variable(NULL, script->varTable[3]);
+    gPlayerStatus.position.y = evt_get_variable(NULL, script->varTable[10]) + evt_get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(temp_f22);
     gPlayerStatus.position.z = 0.0f - (dist * temp_f20);
 
@@ -719,13 +719,13 @@ ApiStatus N(func_80240540_CE3C30)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_80240660_CE3D50)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_by_index(0);
-    f32 temp_f20 = get_variable(NULL, script->varTable[2]);
+    f32 temp_f20 = evt_get_variable(NULL, script->varTable[2]);
     f32 dist = dist2D(0.0f, 0.0f, script->varTable[12], script->varTable[14]);
     f32 clamped = clamp_angle(atan2(0.0f, 0.0f, script->varTable[12], script->varTable[14]) - temp_f20);
 
     temp_f20 = sin_deg(clamped);
     npc->pos.x = (dist * temp_f20) + 0.0f;
-    npc->pos.y = get_variable(NULL, script->varTable[13]) + get_variable(NULL, script->varTable[3]);
+    npc->pos.y = evt_get_variable(NULL, script->varTable[13]) + evt_get_variable(NULL, script->varTable[3]);
     temp_f20 = cos_deg(clamped);
     npc->pos.z = 0.0f - (dist * temp_f20);
 

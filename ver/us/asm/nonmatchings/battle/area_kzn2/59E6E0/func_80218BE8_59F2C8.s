@@ -67,11 +67,11 @@ glabel func_80218BE8_59F2C8
 /* 59F3C0 80218CE0 0240202D */  daddu     $a0, $s2, $zero
 /* 59F3C4 80218CE4 4600110D */  trunc.w.s $f4, $f2
 /* 59F3C8 80218CE8 44142000 */  mfc1      $s4, $f4
-/* 59F3CC 80218CEC 0C0B2026 */  jal       set_variable
+/* 59F3CC 80218CEC 0C0B2026 */  jal       evt_set_variable
 /* 59F3D0 80218CF0 02A0302D */   daddu    $a2, $s5, $zero
 /* 59F3D4 80218CF4 0240202D */  daddu     $a0, $s2, $zero
 /* 59F3D8 80218CF8 8E050000 */  lw        $a1, ($s0)
-/* 59F3DC 80218CFC 0C0B2026 */  jal       set_variable
+/* 59F3DC 80218CFC 0C0B2026 */  jal       evt_set_variable
 /* 59F3E0 80218D00 0280302D */   daddu    $a2, $s4, $zero
 /* 59F3E4 80218D04 8FBF0028 */  lw        $ra, 0x28($sp)
 /* 59F3E8 80218D08 8FB50024 */  lw        $s5, 0x24($sp)

@@ -5,7 +5,7 @@ glabel func_80240090_D4BAB0
 /* D4BAB0 80240090 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* D4BAB4 80240094 AFBF0010 */  sw        $ra, 0x10($sp)
 /* D4BAB8 80240098 8C82000C */  lw        $v0, 0xc($a0)
-/* D4BABC 8024009C 0C0B210B */  jal       get_float_variable
+/* D4BABC 8024009C 0C0B210B */  jal       evt_get_float_variable
 /* D4BAC0 802400A0 8C450000 */   lw       $a1, ($v0)
 /* D4BAC4 802400A4 44050000 */  mfc1      $a1, $f0
 /* D4BAC8 802400A8 0C04DF62 */  jal       set_screen_overlay_params_front

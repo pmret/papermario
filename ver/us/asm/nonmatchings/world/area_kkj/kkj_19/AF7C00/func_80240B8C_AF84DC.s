@@ -16,7 +16,7 @@ glabel func_80240B8C_AF84DC
 /* AF8508 80240BB8 3C068008 */  lui       $a2, %hi(gItemTable)
 /* AF850C 80240BBC 00C23021 */  addu      $a2, $a2, $v0
 /* AF8510 80240BC0 8CC678E0 */  lw        $a2, %lo(gItemTable)($a2)
-/* AF8514 80240BC4 0C0B2026 */  jal       set_variable
+/* AF8514 80240BC4 0C0B2026 */  jal       evt_set_variable
 /* AF8518 80240BC8 0220282D */   daddu    $a1, $s1, $zero
 /* AF851C 80240BCC 8FBF0018 */  lw        $ra, 0x18($sp)
 /* AF8520 80240BD0 8FB10014 */  lw        $s1, 0x14($sp)

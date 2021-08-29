@@ -19,7 +19,7 @@ glabel func_80218A90_624630
 /* 624668 80218AC8 E7A00010 */   swc1     $f0, 0x10($sp)
 /* 62466C 80218ACC 0200202D */  daddu     $a0, $s0, $zero
 /* 624670 80218AD0 8E250000 */  lw        $a1, ($s1)
-/* 624674 80218AD4 0C0B2026 */  jal       set_variable
+/* 624674 80218AD4 0C0B2026 */  jal       evt_set_variable
 /* 624678 80218AD8 0040302D */   daddu    $a2, $v0, $zero
 /* 62467C 80218ADC 8FBF0020 */  lw        $ra, 0x20($sp)
 /* 624680 80218AE0 8FB1001C */  lw        $s1, 0x1c($sp)

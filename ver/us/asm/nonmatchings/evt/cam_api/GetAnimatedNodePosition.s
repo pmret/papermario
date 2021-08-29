@@ -50,19 +50,19 @@ glabel GetAnimatedNodePosition
 /* F2024 802CD674 C7A00020 */  lwc1      $f0, 0x20($sp)
 /* F2028 802CD678 4600008D */  trunc.w.s $f2, $f0
 /* F202C 802CD67C 44061000 */  mfc1      $a2, $f2
-/* F2030 802CD680 0C0B2026 */  jal       set_variable
+/* F2030 802CD680 0C0B2026 */  jal       evt_set_variable
 /* F2034 802CD684 0280282D */   daddu    $a1, $s4, $zero
 /* F2038 802CD688 0240202D */  daddu     $a0, $s2, $zero
 /* F203C 802CD68C C7A00024 */  lwc1      $f0, 0x24($sp)
 /* F2040 802CD690 4600008D */  trunc.w.s $f2, $f0
 /* F2044 802CD694 44061000 */  mfc1      $a2, $f2
-/* F2048 802CD698 0C0B2026 */  jal       set_variable
+/* F2048 802CD698 0C0B2026 */  jal       evt_set_variable
 /* F204C 802CD69C 02A0282D */   daddu    $a1, $s5, $zero
 /* F2050 802CD6A0 0240202D */  daddu     $a0, $s2, $zero
 /* F2054 802CD6A4 C7A00028 */  lwc1      $f0, 0x28($sp)
 /* F2058 802CD6A8 4600008D */  trunc.w.s $f2, $f0
 /* F205C 802CD6AC 44061000 */  mfc1      $a2, $f2
-/* F2060 802CD6B0 0C0B2026 */  jal       set_variable
+/* F2060 802CD6B0 0C0B2026 */  jal       evt_set_variable
 /* F2064 802CD6B4 0200282D */   daddu    $a1, $s0, $zero
 /* F2068 802CD6B8 8FBF0048 */  lw        $ra, 0x48($sp)
 /* F206C 802CD6BC 8FB50044 */  lw        $s5, 0x44($sp)

@@ -114,7 +114,7 @@ enum {
 #define EVT_SAVE_VAR(v)      ((v - 170000000))
 #define EVT_ARRAY(v)         ((v - 190000000))
 #define EVT_ARRAY_FLAG(v)    ((v - 210000000))
-#define EVT_FIXED(v) (((v * 1024.0f) + -230000000)) // See float_to_fixed_var
+#define EVT_FIXED(v) (((v * 1024.0f) + -230000000)) // See evt_float_to_fixed_var
 #define EVT_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 

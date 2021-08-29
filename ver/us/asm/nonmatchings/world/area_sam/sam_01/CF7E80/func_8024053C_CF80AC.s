@@ -19,7 +19,7 @@ glabel func_8024053C_CF80AC
 .L80240570:
 /* CF80E0 80240570 8CC50000 */  lw        $a1, ($a2)
 /* CF80E4 80240574 3C068024 */  lui       $a2, %hi(D_802432D4_CFAE44)
-/* CF80E8 80240578 0C0B2026 */  jal       set_variable
+/* CF80E8 80240578 0C0B2026 */  jal       evt_set_variable
 /* CF80EC 8024057C 8CC632D4 */   lw       $a2, %lo(D_802432D4_CFAE44)($a2)
 /* CF80F0 80240580 24020002 */  addiu     $v0, $zero, 2
 .L80240584:

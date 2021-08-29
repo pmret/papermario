@@ -490,7 +490,7 @@ ApiStatus N(func_80241E1C_CCD12C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -557,7 +557,7 @@ ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
 
     if (N(D_802445FC_CCF90C)) {
         N(D_802445FC_CCF90C) = FALSE;
-        set_variable(script, *args, N(D_80244600_CCF910));
+        evt_set_variable(script, *args, N(D_80244600_CCF910));
         return ApiStatus_DONE2;
     }
 
@@ -567,14 +567,14 @@ ApiStatus N(func_80242234_CCD544)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80242288_CCD598)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80244600_CCF910) = get_variable(script, *args);
+    N(D_80244600_CCF910) = evt_get_variable(script, *args);
     N(D_802445FC_CCF90C) = TRUE;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_802422C0_CCD5D0)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

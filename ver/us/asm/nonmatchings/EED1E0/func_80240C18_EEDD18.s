@@ -12,11 +12,11 @@ glabel func_80240C18_EEDD18
 /* EEDD34 80240C34 10A00010 */  beqz      $a1, .L80240C78
 /* EEDD38 80240C38 0000902D */   daddu    $s2, $zero, $zero
 /* EEDD3C 80240C3C 8E050000 */  lw        $a1, ($s0)
-/* EEDD40 80240C40 0C0B53A3 */  jal       dead_get_variable
+/* EEDD40 80240C40 0C0B53A3 */  jal       dead_evt_get_variable
 /* EEDD44 80240C44 26100004 */   addiu    $s0, $s0, 4
 /* EEDD48 80240C48 AE220084 */  sw        $v0, 0x84($s1)
 /* EEDD4C 80240C4C 8E050000 */  lw        $a1, ($s0)
-/* EEDD50 80240C50 0C0B53A3 */  jal       dead_get_variable
+/* EEDD50 80240C50 0C0B53A3 */  jal       dead_evt_get_variable
 /* EEDD54 80240C54 0220202D */   daddu    $a0, $s1, $zero
 /* EEDD58 80240C58 0240202D */  daddu     $a0, $s2, $zero
 /* EEDD5C 80240C5C 240500D0 */  addiu     $a1, $zero, 0xd0

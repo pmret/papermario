@@ -58,8 +58,8 @@ ApiStatus func_802A9120_421B10(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     } else {
         func_80268858();
-        actionCommandStatus->unk_4E = get_variable(script, *args++);
-        actionCommandStatus->unk_50 = get_variable(script, *args++);
+        actionCommandStatus->unk_4E = evt_get_variable(script, *args++);
+        actionCommandStatus->unk_50 = evt_get_variable(script, *args++);
         actionCommandStatus->unk_50 = func_80268224(actionCommandStatus->unk_50);
         actionCommandStatus->unk_60 = 0;
         battleStatus->actionSuccess = 0;

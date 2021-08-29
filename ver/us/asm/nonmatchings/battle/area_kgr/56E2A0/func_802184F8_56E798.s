@@ -23,7 +23,7 @@ glabel func_802184F8_56E798
 .L8021853C:
 /* 56E7DC 8021853C 8CA50000 */  lw        $a1, ($a1)
 .L80218540:
-/* 56E7E0 80218540 0C0B2026 */  jal       set_variable
+/* 56E7E0 80218540 0C0B2026 */  jal       evt_set_variable
 /* 56E7E4 80218544 00000000 */   nop
 /* 56E7E8 80218548 8FBF0010 */  lw        $ra, 0x10($sp)
 /* 56E7EC 8021854C 24020002 */  addiu     $v0, $zero, 2

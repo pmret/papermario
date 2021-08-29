@@ -28,7 +28,7 @@ glabel func_80240350_B4ADC0
 /* B4AE1C 802403AC 0220202D */  daddu     $a0, $s1, $zero
 /* B4AE20 802403B0 8E25007C */  lw        $a1, 0x7c($s1)
 /* B4AE24 802403B4 0000302D */  daddu     $a2, $zero, $zero
-/* B4AE28 802403B8 0C0B2026 */  jal       set_variable
+/* B4AE28 802403B8 0C0B2026 */  jal       evt_set_variable
 /* B4AE2C 802403BC AE220078 */   sw       $v0, 0x78($s1)
 .L802403C0:
 /* B4AE30 802403C0 8E25007C */  lw        $a1, 0x7c($s1)

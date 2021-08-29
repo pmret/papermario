@@ -11,7 +11,7 @@ glabel func_80240A94_A39F74
 /* A39F8C 80240AAC 34A5626B */  ori       $a1, $a1, 0x626b
 /* A39F90 80240AB0 0000202D */  daddu     $a0, $zero, $zero
 /* A39F94 80240AB4 00452821 */  addu      $a1, $v0, $a1
-/* A39F98 80240AB8 0C0B2026 */  jal       set_variable
+/* A39F98 80240AB8 0C0B2026 */  jal       evt_set_variable
 /* A39F9C 80240ABC 24060001 */   addiu    $a2, $zero, 1
 /* A39FA0 80240AC0 8FBF0010 */  lw        $ra, 0x10($sp)
 /* A39FA4 80240AC4 24020002 */  addiu     $v0, $zero, 2

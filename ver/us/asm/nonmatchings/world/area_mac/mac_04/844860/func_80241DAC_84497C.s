@@ -18,7 +18,7 @@ glabel func_80241DAC_84497C
 /* 844994 80241DC4 AFB00098 */  sw        $s0, 0x98($sp)
 /* 844998 80241DC8 F7B600B0 */  sdc1      $f22, 0xb0($sp)
 /* 84499C 80241DCC F7B400A8 */  sdc1      $f20, 0xa8($sp)
-/* 8449A0 80241DD0 0C0B210B */  jal       get_float_variable
+/* 8449A0 80241DD0 0C0B210B */  jal       evt_get_float_variable
 /* 8449A4 80241DD4 34A50F8A */   ori      $a1, $a1, 0xf8a
 /* 8449A8 80241DD8 44801000 */  mtc1      $zero, $f2
 /* 8449AC 80241DDC 3C013F80 */  lui       $at, 0x3f80

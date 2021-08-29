@@ -10,7 +10,7 @@ glabel func_80240494_907EC4
 /* 907ED8 802404A8 F7B40028 */  sdc1      $f20, 0x28($sp)
 /* 907EDC 802404AC 8E30000C */  lw        $s0, 0xc($s1)
 /* 907EE0 802404B0 8E050000 */  lw        $a1, ($s0)
-/* 907EE4 802404B4 0C0B210B */  jal       get_float_variable
+/* 907EE4 802404B4 0C0B210B */  jal       evt_get_float_variable
 /* 907EE8 802404B8 26100004 */   addiu    $s0, $s0, 4
 /* 907EEC 802404BC 0220202D */  daddu     $a0, $s1, $zero
 /* 907EF0 802404C0 8E050000 */  lw        $a1, ($s0)

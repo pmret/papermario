@@ -6,8 +6,8 @@ s32 N(UnkFunc23)(Evt* script, s32 isInitialCall) {
     s32 ret = 0;
 
     if (isInitialCall) {
-        script->varTable[0] = get_variable(script, *args++);
-        script->varTable[1] = get_variable(script, *args++);
+        script->varTable[0] = evt_get_variable(script, *args++);
+        script->varTable[1] = evt_get_variable(script, *args++);
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
         set_screen_overlay_color(0, 0xD0, 0xD0, 0xD0);

@@ -7,22 +7,22 @@ INCLUDE_ASM(void, "evt/fx_api", func_802D74C0, f32 x, f32 y, f32 z, s32 arg3);
 
 ApiStatus func_802D7520(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
 
-    func_802D7460(x, y, z, get_variable(script, *args++));
+    func_802D7460(x, y, z, evt_get_variable(script, *args++));
     sfx_play_sound_at_position(0x2055, 0, x, y, z);
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D75D8(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    f32 x = get_float_variable(script, *args++);
-    f32 y = get_float_variable(script, *args++);
-    f32 z = get_float_variable(script, *args++);
+    f32 x = evt_get_float_variable(script, *args++);
+    f32 y = evt_get_float_variable(script, *args++);
+    f32 z = evt_get_float_variable(script, *args++);
 
-    func_802D74C0(x, y, z, get_variable(script, *args++));
+    func_802D74C0(x, y, z, evt_get_variable(script, *args++));
     sfx_play_sound_at_position(0x378, 0, x, y, z);
     return ApiStatus_DONE2;
 }
@@ -34,13 +34,13 @@ INCLUDE_ASM(s32, "evt/fx_api", ShowEmote, Evt* script, s32 isInitialCall);
 ApiStatus RemoveEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    remove_effect(get_variable(script, *args++));
+    remove_effect(evt_get_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptrValue = (s32*) get_variable(script, *args++);
+    s32* ptrValue = (s32*) evt_get_variable(script, *args++);
 
     *ptrValue |= 0x10;
     return ApiStatus_DONE2;
@@ -48,7 +48,7 @@ ApiStatus func_802D7B10(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32** ptrValue = (s32**) get_variable(script, *args++);
+    s32** ptrValue = (s32**) evt_get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
 
     ptrTemp[5] = 10;
@@ -57,7 +57,7 @@ ApiStatus func_802D7B44(Evt* script, s32 isInitialCall) {
 
 ApiStatus func_802D7B74(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32** ptrValue = (s32**) get_variable(script, *args++);
+    s32** ptrValue = (s32**) evt_get_variable(script, *args++);
     s32* ptrTemp = ptrValue[3];
 
     ptrTemp[12] = 5;
@@ -101,13 +101,13 @@ EvtSource D_802D9D50 = SCRIPT({
 
 ApiStatus Spawn802D9D50(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 var0 = get_variable(script, *args++);
-    s32 var1 = get_variable(script, *args++);
-    s32 var2 = get_variable(script, *args++);
-    s32 var3 = get_variable(script, *args++);
-    s32 var4 = get_variable(script, *args++);
-    s32 var5 = get_variable(script, *args++);
-    s32 var6 = get_variable(script, *args++);
+    s32 var0 = evt_get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
+    s32 var2 = evt_get_variable(script, *args++);
+    s32 var3 = evt_get_variable(script, *args++);
+    s32 var4 = evt_get_variable(script, *args++);
+    s32 var5 = evt_get_variable(script, *args++);
+    s32 var6 = evt_get_variable(script, *args++);
 
     Evt* newScript = start_script(D_802D9D50, 1, 0);
     newScript->varTable[0] = var0;
@@ -174,38 +174,38 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     intArgs = script->ptrReadPos;
     floatArgs = script->ptrReadPos;
 
-    effectID = get_variable(script, *args++); // todo maybe increment later on
+    effectID = evt_get_variable(script, *args++); // todo maybe increment later on
 
-    get_variable(script, *intArgs++);
-    get_variable(script, *floatArgs++);
+    evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *floatArgs++);
 
-    new_var = get_variable(script, *intArgs++);
-    iVar2 = get_variable(script, *intArgs++);
-    iVar3 = get_variable(script, *intArgs++);
-    iVar4 = get_variable(script, *intArgs++);
-    iVar5 = get_variable(script, *intArgs++);
-    iVar6 = get_variable(script, *intArgs++);
-    iVar7 = get_variable(script, *intArgs++);
-    iVar8 = get_variable(script, *intArgs++);
-    iVar9 = get_variable(script, *intArgs++);
-    iVar10 = get_variable(script, *intArgs++);
-    get_variable(script, *intArgs++);
-    get_variable(script, *intArgs++);
-    get_variable(script, *intArgs++);
+    new_var = evt_get_variable(script, *intArgs++);
+    iVar2 = evt_get_variable(script, *intArgs++);
+    iVar3 = evt_get_variable(script, *intArgs++);
+    iVar4 = evt_get_variable(script, *intArgs++);
+    iVar5 = evt_get_variable(script, *intArgs++);
+    iVar6 = evt_get_variable(script, *intArgs++);
+    iVar7 = evt_get_variable(script, *intArgs++);
+    iVar8 = evt_get_variable(script, *intArgs++);
+    iVar9 = evt_get_variable(script, *intArgs++);
+    iVar10 = evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
+    evt_get_variable(script, *intArgs++);
 
-    fVar1 = get_float_variable(script, *floatArgs++);
-    fVar2 = get_float_variable(script, *floatArgs++);
-    fVar3 = get_float_variable(script, *floatArgs++);
-    fVar4 = get_float_variable(script, *floatArgs++);
-    fVar5 = get_float_variable(script, *floatArgs++);
-    fVar6 = get_float_variable(script, *floatArgs++);
-    fVar7 = get_float_variable(script, *floatArgs++);
-    fVar8 = get_float_variable(script, *floatArgs++);
-    fVar9 = get_float_variable(script, *floatArgs++);
-    fVar10 = get_float_variable(script, *floatArgs++);
-    fVar11 = get_float_variable(script, *floatArgs++);
-    get_float_variable(script, *floatArgs++);
-    get_float_variable(script, *floatArgs++);
+    fVar1 = evt_get_float_variable(script, *floatArgs++);
+    fVar2 = evt_get_float_variable(script, *floatArgs++);
+    fVar3 = evt_get_float_variable(script, *floatArgs++);
+    fVar4 = evt_get_float_variable(script, *floatArgs++);
+    fVar5 = evt_get_float_variable(script, *floatArgs++);
+    fVar6 = evt_get_float_variable(script, *floatArgs++);
+    fVar7 = evt_get_float_variable(script, *floatArgs++);
+    fVar8 = evt_get_float_variable(script, *floatArgs++);
+    fVar9 = evt_get_float_variable(script, *floatArgs++);
+    fVar10 = evt_get_float_variable(script, *floatArgs++);
+    fVar11 = evt_get_float_variable(script, *floatArgs++);
+    evt_get_float_variable(script, *floatArgs++);
+    evt_get_float_variable(script, *floatArgs++);
 
     args++; // 1
     a2 = *args++;
@@ -260,7 +260,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 16:
             fx_emote(iVar1, (Npc* ) a2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp30);
-            set_variable(script, a8, sp30);
+            evt_set_variable(script, a8, sp30);
             break;
         case 17:
             playFX_11(iVar1, fVar2, fVar3, fVar4, fVar5);
@@ -294,7 +294,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 27:
             playFX_1B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 28:
             playFX_1C(iVar1, fVar2, fVar3, fVar4, iVar5);
@@ -304,7 +304,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 30:
             playFX_1E(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, iVar7, &sp30);
-            set_variable(script, a8, sp30);
+            evt_set_variable(script, a8, sp30);
             break;
         case 31:
             playFX_1F(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, fVar8);
@@ -335,14 +335,14 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 41:
             fx_sleep_bubble(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, &sp38);
-            set_variable(script, a7, sp38);
+            evt_set_variable(script, a7, sp38);
             break;
         case 43:
             playFX_2B(iVar1, fVar2, fVar3, fVar4);
             break;
         case 32:
             playFX_20(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 44:
             playFX_2C(iVar1, fVar2, fVar3, fVar4);
@@ -355,7 +355,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 47:
             playFX_2F(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6, &sp38);
-            set_variable(script, a7, sp38);
+            evt_set_variable(script, a7, sp38);
             break;
         case 48:
             playFX_30(iVar1, fVar2, fVar3, fVar4);
@@ -371,11 +371,11 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 52:
             playFX_34(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 53:
             playFX_35(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 54:
             effectRet = playFX_36(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6);
@@ -394,15 +394,15 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
             break;
         case 59:
             playFX_3B(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 60:
             playFX_3C(iVar1, fVar2, fVar3, fVar4, fVar5, &sp38);
-            set_variable(script, a6, sp38);
+            evt_set_variable(script, a6, sp38);
             break;
         case 61:
             playFX_3D(iVar1, fVar2, fVar3, fVar4, fVar5, fVar6, fVar7, iVar8, &sp3C);
-            set_variable(script, a9, sp3C);
+            evt_set_variable(script, a9, sp3C);
             break;
         case 62:
             playFX_3E(iVar1, fVar2, fVar3, fVar4, fVar5, iVar6);
@@ -616,7 +616,7 @@ ApiStatus PlayEffect(Evt* script, s32 isInitialCall) {
     }
 
     if (effectRet != NULL) {
-        set_variable(script, EVT_VAR(15), effectRet);
+        evt_set_variable(script, EVT_VAR(15), effectRet);
     }
 
     return ApiStatus_DONE2;

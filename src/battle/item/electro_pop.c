@@ -14,10 +14,10 @@ ApiStatus N(func_802A123C_7307DC)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A127C_73081C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(0, a, b, c, d);
 
@@ -26,10 +26,10 @@ ApiStatus N(func_802A127C_73081C)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802A133C_7308DC)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
-    s32 d = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
+    s32 d = evt_get_variable(script, *args++);
 
     playFX_40(1, a, b, c, d);
 
@@ -54,7 +54,7 @@ ApiStatus N(func_802A1450_7309F0)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(AddFP)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
-    s32 amt = get_variable(script, *script->ptrReadPos);
+    s32 amt = evt_get_variable(script, *script->ptrReadPos);
 
     // @bug Should be playerData->curFP
     s32 newFP = playerData->curHP + amt;

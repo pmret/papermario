@@ -30,7 +30,7 @@ glabel func_802402BC_918E6C
 /* 918EC8 80240318 04C00004 */  bltz      $a2, .L8024032C
 /* 918ECC 8024031C 00000000 */   nop
 /* 918ED0 80240320 3C05FD05 */  lui       $a1, 0xfd05
-/* 918ED4 80240324 0C0B2026 */  jal       set_variable
+/* 918ED4 80240324 0C0B2026 */  jal       evt_set_variable
 /* 918ED8 80240328 34A50F89 */   ori      $a1, $a1, 0xf89
 .L8024032C:
 /* 918EDC 8024032C 8FBF0010 */  lw        $ra, 0x10($sp)

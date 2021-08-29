@@ -7,7 +7,7 @@ glabel func_802403A0_ADB240
 /* ADB248 802403A8 8C82000C */  lw        $v0, 0xc($a0)
 /* ADB24C 802403AC 3C068011 */  lui       $a2, %hi(gPlayerStatus+0xC)
 /* ADB250 802403B0 80C6EFD4 */  lb        $a2, %lo(gPlayerStatus+0xC)($a2)
-/* ADB254 802403B4 0C0B2026 */  jal       set_variable
+/* ADB254 802403B4 0C0B2026 */  jal       evt_set_variable
 /* ADB258 802403B8 8C450000 */   lw       $a1, ($v0)
 /* ADB25C 802403BC 8FBF0010 */  lw        $ra, 0x10($sp)
 /* ADB260 802403C0 24020002 */  addiu     $v0, $zero, 2

@@ -67,17 +67,17 @@ glabel func_80240F60_ACBA80
 /* ACBB74 80241054 02A0282D */  daddu     $a1, $s5, $zero
 /* ACBB78 80241058 C6540030 */  lwc1      $f20, 0x30($s2)
 /* ACBB7C 8024105C 0280302D */  daddu     $a2, $s4, $zero
-/* ACBB80 80241060 0C0B2026 */  jal       set_variable
+/* ACBB80 80241060 0C0B2026 */  jal       evt_set_variable
 /* ACBB84 80241064 4600A501 */   sub.s    $f20, $f20, $f0
 /* ACBB88 80241068 0260202D */  daddu     $a0, $s3, $zero
 /* ACBB8C 8024106C 4600B08D */  trunc.w.s $f2, $f22
 /* ACBB90 80241070 44061000 */  mfc1      $a2, $f2
-/* ACBB94 80241074 0C0B2026 */  jal       set_variable
+/* ACBB94 80241074 0C0B2026 */  jal       evt_set_variable
 /* ACBB98 80241078 02C0282D */   daddu    $a1, $s6, $zero
 /* ACBB9C 8024107C 0260202D */  daddu     $a0, $s3, $zero
 /* ACBBA0 80241080 4600A08D */  trunc.w.s $f2, $f20
 /* ACBBA4 80241084 44061000 */  mfc1      $a2, $f2
-/* ACBBA8 80241088 0C0B2026 */  jal       set_variable
+/* ACBBA8 80241088 0C0B2026 */  jal       evt_set_variable
 /* ACBBAC 8024108C 02E0282D */   daddu    $a1, $s7, $zero
 .L80241090:
 /* ACBBB0 80241090 24020002 */  addiu     $v0, $zero, 2

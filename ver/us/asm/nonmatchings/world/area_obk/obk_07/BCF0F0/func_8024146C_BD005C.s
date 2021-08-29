@@ -11,7 +11,7 @@ glabel func_8024146C_BD005C
 /* BD0074 80241484 3C05FE36 */  lui       $a1, 0xfe36
 /* BD0078 80241488 34A53C82 */  ori       $a1, $a1, 0x3c82
 /* BD007C 8024148C 0040802D */  daddu     $s0, $v0, $zero
-/* BD0080 80241490 0C0B210B */  jal       get_float_variable
+/* BD0080 80241490 0C0B210B */  jal       evt_get_float_variable
 /* BD0084 80241494 0220202D */   daddu    $a0, $s1, $zero
 /* BD0088 80241498 E60001D0 */  swc1      $f0, 0x1d0($s0)
 /* BD008C 8024149C 8FBF0018 */  lw        $ra, 0x18($sp)

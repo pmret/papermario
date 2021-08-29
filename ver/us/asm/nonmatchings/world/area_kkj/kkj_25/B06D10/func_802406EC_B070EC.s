@@ -61,7 +61,7 @@ glabel func_802406EC_B070EC
 /* B071CC 802407CC 3C05FD05 */  lui       $a1, 0xfd05
 /* B071D0 802407D0 34A50F8A */  ori       $a1, $a1, 0xf8a
 /* B071D4 802407D4 0200302D */  daddu     $a2, $s0, $zero
-/* B071D8 802407D8 0C0B2026 */  jal       set_variable
+/* B071D8 802407D8 0C0B2026 */  jal       evt_set_variable
 /* B071DC 802407DC AE020004 */   sw       $v0, 4($s0)
 /* B071E0 802407E0 8FBF0020 */  lw        $ra, 0x20($sp)
 /* B071E4 802407E4 8FB3001C */  lw        $s3, 0x1c($sp)

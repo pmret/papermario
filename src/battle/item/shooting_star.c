@@ -51,9 +51,9 @@ INCLUDE_ASM(ApiStatus, "battle/item/shooting_star", battle_item_shooting_star_fu
 
 ApiStatus N(func_802A1388_71DAF8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32 a = get_variable(script, *args++);
-    s32 b = get_variable(script, *args++);
-    s32 c = get_variable(script, *args++);
+    s32 a = evt_get_variable(script, *args++);
+    s32 b = evt_get_variable(script, *args++);
+    s32 c = evt_get_variable(script, *args++);
 
     playFX_18(2, a, b, c, 0, -1.0f, 0, 5);
 

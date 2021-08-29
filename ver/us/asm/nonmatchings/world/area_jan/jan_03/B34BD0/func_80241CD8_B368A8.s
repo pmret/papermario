@@ -60,24 +60,24 @@ glabel func_80241CD8_B368A8
 /* B36980 80241DB0 0220202D */  daddu     $a0, $s1, $zero
 /* B36984 80241DB4 3C05F5DE */  lui       $a1, 0xf5de
 /* B36988 80241DB8 34A502DE */  ori       $a1, $a1, 0x2de
-/* B3698C 80241DBC 0C0B2026 */  jal       set_variable
+/* B3698C 80241DBC 0C0B2026 */  jal       evt_set_variable
 /* B36990 80241DC0 0280302D */   daddu    $a2, $s4, $zero
 /* B36994 80241DC4 0220202D */  daddu     $a0, $s1, $zero
 /* B36998 80241DC8 3C05F5DE */  lui       $a1, 0xf5de
 /* B3699C 80241DCC 34A502DF */  ori       $a1, $a1, 0x2df
-/* B369A0 80241DD0 0C0B2026 */  jal       set_variable
+/* B369A0 80241DD0 0C0B2026 */  jal       evt_set_variable
 /* B369A4 80241DD4 32A6FFFF */   andi     $a2, $s5, 0xffff
 /* B369A8 80241DD8 24100001 */  addiu     $s0, $zero, 1
 /* B369AC 80241DDC 0220202D */  daddu     $a0, $s1, $zero
 .L80241DE0:
 /* B369B0 80241DE0 3C05F840 */  lui       $a1, 0xf840
 /* B369B4 80241DE4 34A56268 */  ori       $a1, $a1, 0x6268
-/* B369B8 80241DE8 0C0B2026 */  jal       set_variable
+/* B369B8 80241DE8 0C0B2026 */  jal       evt_set_variable
 /* B369BC 80241DEC 3206FFFF */   andi     $a2, $s0, 0xffff
 /* B369C0 80241DF0 0220202D */  daddu     $a0, $s1, $zero
 /* B369C4 80241DF4 3C05F840 */  lui       $a1, 0xf840
 /* B369C8 80241DF8 34A56269 */  ori       $a1, $a1, 0x6269
-/* B369CC 80241DFC 0C0B2026 */  jal       set_variable
+/* B369CC 80241DFC 0C0B2026 */  jal       evt_set_variable
 /* B369D0 80241E00 32E6FFFF */   andi     $a2, $s7, 0xffff
 /* B369D4 80241E04 0000202D */  daddu     $a0, $zero, $zero
 /* B369D8 80241E08 3C05F5DE */  lui       $a1, 0xf5de

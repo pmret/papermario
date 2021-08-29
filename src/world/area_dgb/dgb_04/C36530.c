@@ -572,7 +572,7 @@ ApiStatus N(func_8024130C_C3783C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -860,7 +860,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -935,7 +935,7 @@ ApiStatus N(func_80242154_C38684)(Evt* script, s32 isInitialCall) {
 #include "world/common/UnkFunc17.inc.c"
 
 ApiStatus N(func_8024240C_C3893C)(Evt* script, s32 isInitialCall) {
-    entity_upgrade_block_hide_content(get_variable(script, *script->ptrReadPos));
+    entity_upgrade_block_hide_content(evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -1083,7 +1083,7 @@ ApiStatus N(func_802429D0_C38F00)(Evt* script, s32 isInitialCall) {
         script->userData = (N(UserData)*)general_heap_malloc(0x68);
         scriptPtr = (N(UserData)*)script->userData;
 
-        scriptPtr->unk_5C = get_entity_by_index(get_variable(script, *args));
+        scriptPtr->unk_5C = get_entity_by_index(evt_get_variable(script, *args));
 
         for (i = 0, userDataPtr = scriptPtr; i < 3; i++) {
             userDataPtr->unk_08[i] = playFX_51(0, scriptPtr->unk_5C->position.x, scriptPtr->unk_5C->position.y + 12.5f,
@@ -1200,8 +1200,8 @@ s32 N(func_80242F08_C39438)(Evt* script, s32 isInitialCall) {
     s32 ret = 0;
 
     if (isInitialCall) {
-        script->varTable[0] = get_variable(script, *args++);
-        script->varTable[1] = get_variable(script, *args++);
+        script->varTable[0] = evt_get_variable(script, *args++);
+        script->varTable[1] = evt_get_variable(script, *args++);
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
         set_screen_overlay_color(0, 0xD0, 0xD0, 0xD0);

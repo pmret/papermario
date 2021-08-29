@@ -5,7 +5,7 @@ glabel func_80240038_BBD1D8
 /* BBD1D8 80240038 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* BBD1DC 8024003C AFBF0010 */  sw        $ra, 0x10($sp)
 /* BBD1E0 80240040 8C82000C */  lw        $v0, 0xc($a0)
-/* BBD1E4 80240044 0C0B210B */  jal       get_float_variable
+/* BBD1E4 80240044 0C0B210B */  jal       evt_get_float_variable
 /* BBD1E8 80240048 8C450000 */   lw       $a1, ($v0)
 /* BBD1EC 8024004C 4600008D */  trunc.w.s $f2, $f0
 /* BBD1F0 80240050 44021000 */  mfc1      $v0, $f2

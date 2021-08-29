@@ -32,26 +32,26 @@ glabel AdjustCam
 /* F107C 802CC6CC 000310C0 */  sll       $v0, $v1, 3
 /* F1080 802CC6D0 00621821 */  addu      $v1, $v1, $v0
 /* F1084 802CC6D4 000318C0 */  sll       $v1, $v1, 3
-/* F1088 802CC6D8 0C0B210B */  jal       get_float_variable
+/* F1088 802CC6D8 0C0B210B */  jal       evt_get_float_variable
 /* F108C 802CC6DC 00669821 */   addu     $s3, $v1, $a2
 /* F1090 802CC6E0 8E050000 */  lw        $a1, ($s0)
 /* F1094 802CC6E4 26100004 */  addiu     $s0, $s0, 4
 /* F1098 802CC6E8 0220202D */  daddu     $a0, $s1, $zero
-/* F109C 802CC6EC 0C0B210B */  jal       get_float_variable
+/* F109C 802CC6EC 0C0B210B */  jal       evt_get_float_variable
 /* F10A0 802CC6F0 E7A00054 */   swc1     $f0, 0x54($sp)
 /* F10A4 802CC6F4 8E050000 */  lw        $a1, ($s0)
 /* F10A8 802CC6F8 26100004 */  addiu     $s0, $s0, 4
 /* F10AC 802CC6FC 0220202D */  daddu     $a0, $s1, $zero
-/* F10B0 802CC700 0C0B210B */  jal       get_float_variable
+/* F10B0 802CC700 0C0B210B */  jal       evt_get_float_variable
 /* F10B4 802CC704 E7A00058 */   swc1     $f0, 0x58($sp)
 /* F10B8 802CC708 8E050000 */  lw        $a1, ($s0)
 /* F10BC 802CC70C 26100004 */  addiu     $s0, $s0, 4
 /* F10C0 802CC710 0220202D */  daddu     $a0, $s1, $zero
-/* F10C4 802CC714 0C0B210B */  jal       get_float_variable
+/* F10C4 802CC714 0C0B210B */  jal       evt_get_float_variable
 /* F10C8 802CC718 46000786 */   mov.s    $f30, $f0
 /* F10CC 802CC71C 0220202D */  daddu     $a0, $s1, $zero
 /* F10D0 802CC720 8E050000 */  lw        $a1, ($s0)
-/* F10D4 802CC724 0C0B210B */  jal       get_float_variable
+/* F10D4 802CC724 0C0B210B */  jal       evt_get_float_variable
 /* F10D8 802CC728 46000706 */   mov.s    $f28, $f0
 /* F10DC 802CC72C 3C038011 */  lui       $v1, %hi(gPlayerStatus)
 /* F10E0 802CC730 2463EFC8 */  addiu     $v1, $v1, %lo(gPlayerStatus)

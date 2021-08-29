@@ -41,7 +41,7 @@ glabel JumpWithBounce
 /* 1A8090 802797B0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A8094 802797B4 A6020070 */  sh        $v0, 0x70($s0)
 /* 1A8098 802797B8 8E250000 */  lw        $a1, ($s1)
-/* 1A809C 802797BC 0C0B210B */  jal       get_float_variable
+/* 1A809C 802797BC 0C0B210B */  jal       evt_get_float_variable
 /* 1A80A0 802797C0 0240202D */   daddu    $a0, $s2, $zero
 /* 1A80A4 802797C4 C6020148 */  lwc1      $f2, 0x148($s0)
 /* 1A80A8 802797C8 C61A0018 */  lwc1      $f26, 0x18($s0)

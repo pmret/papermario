@@ -29,7 +29,7 @@ glabel func_8021851C_58C80C
 /* 58C86C 8021857C 0040982D */   daddu    $s3, $v0, $zero
 /* 58C870 80218580 0220202D */  daddu     $a0, $s1, $zero
 /* 58C874 80218584 8E050000 */  lw        $a1, ($s0)
-/* 58C878 80218588 0C0B210B */  jal       get_float_variable
+/* 58C878 80218588 0C0B210B */  jal       evt_get_float_variable
 /* 58C87C 8021858C 0040802D */   daddu    $s0, $v0, $zero
 /* 58C880 80218590 3C0140C9 */  lui       $at, 0x40c9
 /* 58C884 80218594 34210FD8 */  ori       $at, $at, 0xfd8
@@ -58,7 +58,7 @@ glabel func_8021851C_58C80C
 /* 58C8E0 802185F0 0220202D */  daddu     $a0, $s1, $zero
 /* 58C8E4 802185F4 4600A28D */  trunc.w.s $f10, $f20
 /* 58C8E8 802185F8 44065000 */  mfc1      $a2, $f10
-/* 58C8EC 802185FC 0C0B2026 */  jal       set_variable
+/* 58C8EC 802185FC 0C0B2026 */  jal       evt_set_variable
 /* 58C8F0 80218600 0280282D */   daddu    $a1, $s4, $zero
 /* 58C8F4 80218604 8FBF0024 */  lw        $ra, 0x24($sp)
 /* 58C8F8 80218608 8FB40020 */  lw        $s4, 0x20($sp)

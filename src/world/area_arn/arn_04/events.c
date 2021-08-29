@@ -350,7 +350,7 @@ ApiStatus N(func_80240B94_BE4344)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
     f32 posX, posY, posZ, posW;
 
     territory.unk_00 = 0;
@@ -594,7 +594,7 @@ ApiStatus N(func_8024219C_BE594C)(Evt* script, s32 isInitialCall) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
-    NpcAISettings* aiSettings = get_variable(script, *args);
+    NpcAISettings* aiSettings = evt_get_variable(script, *args);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;
@@ -764,12 +764,12 @@ ApiStatus N(func_80243018_BE67C8)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* aiSettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* aiSettings = (NpcAISettings*)evt_get_variable(script, *args++);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
     u32 var;
 
-    enemy->varTable[10] = get_variable(script, *args++);
+    enemy->varTable[10] = evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

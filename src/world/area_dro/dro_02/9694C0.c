@@ -3112,10 +3112,10 @@ ApiStatus N(func_80240300_9694C0)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_8024043C_9695FC)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemyID;
-    u16 phi_s0 = get_variable(script, EVT_SAVE_FLAG(1768));
-    u16 phi_s7 = get_variable(script, EVT_SAVE_FLAG(1769));
-    u16 temp_s6 = get_variable(script, EVT_SAVE_VAR(350));
-    u16 phi_s5 = get_variable(script, EVT_SAVE_VAR(351));
+    u16 phi_s0 = evt_get_variable(script, EVT_SAVE_FLAG(1768));
+    u16 phi_s7 = evt_get_variable(script, EVT_SAVE_FLAG(1769));
+    u16 temp_s6 = evt_get_variable(script, EVT_SAVE_VAR(350));
+    u16 phi_s5 = evt_get_variable(script, EVT_SAVE_VAR(351));
     s32 var;
     s32 i;
 
@@ -3136,16 +3136,16 @@ ApiStatus N(func_8024043C_9695FC)(Evt* script, s32 isInitialCall) {
         if (rand_int(100) < 30) {
             phi_s5 = rand_int(temp_s2 - 1);
             temp_s6 = temp_s3;
-            set_variable(script, EVT_SAVE_VAR(350), temp_s6);
-            set_variable(script, EVT_SAVE_VAR(351), phi_s5);
+            evt_set_variable(script, EVT_SAVE_VAR(350), temp_s6);
+            evt_set_variable(script, EVT_SAVE_VAR(351), phi_s5);
             phi_s0 = 1;
         }
     }
 
-    set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
-    set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
-    temp_s0_2 = get_variable(NULL, EVT_SAVE_VAR(352));
-    temp_v0 = get_variable(NULL, EVT_STORY_PROGRESS);
+    evt_set_variable(script, EVT_SAVE_FLAG(1768), phi_s0);
+    evt_set_variable(script, EVT_SAVE_FLAG(1769), phi_s7);
+    temp_s0_2 = evt_get_variable(NULL, EVT_SAVE_VAR(352));
+    temp_v0 = evt_get_variable(NULL, EVT_STORY_PROGRESS);
 
     for (i = 0; i < 8; i++) {
         if (temp_v0 < (*(N(quizRequirements) + i)).unk_00) {
@@ -3176,7 +3176,7 @@ ApiStatus N(func_802409EC_969BAC)(Evt* script, s32 isInitialCall) {
         gPlayerData.quizzesAnswered++;
     }
 
-    if (script->varTable[0] == N(quizAnswers)[get_variable(NULL, EVT_SAVE_VAR(352))]) {
+    if (script->varTable[0] == N(quizAnswers)[evt_get_variable(NULL, EVT_SAVE_VAR(352))]) {
         script->varTable[0] = 1;
         gPlayerData.quizzesCorrect++;
     } else {
@@ -3190,12 +3190,12 @@ ApiStatus N(func_80240A70_969C30)(Evt* script, s32 isInitialCall) {
     EffectInstanceDataThing* effectPtr;
 
     if (isInitialCall) {
-        N(D_8024EFC0) = playFX_4E(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)),
-                                      get_variable(script, EVT_ARRAY(3)));
-        N(D_8024EFC4) = playFX_54(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)),
-                                      get_variable(script, EVT_ARRAY(3)));
-        N(D_8024EFC8) = playFX_80(0, get_variable(script, EVT_ARRAY(1)), get_variable(script, EVT_ARRAY(2)),
-                                      get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
+        N(D_8024EFC0) = playFX_4E(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+                                      evt_get_variable(script, EVT_ARRAY(3)));
+        N(D_8024EFC4) = playFX_54(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+                                      evt_get_variable(script, EVT_ARRAY(3)));
+        N(D_8024EFC8) = playFX_80(0, evt_get_variable(script, EVT_ARRAY(1)), evt_get_variable(script, EVT_ARRAY(2)),
+                                      evt_get_variable(script, EVT_ARRAY(3)), 1.0f, 0);
 
         effectPtr = N(D_8024EFC0)->freeDelay; // TODO this is wrong
         effectPtr->unk_18 = 0;
@@ -3246,12 +3246,12 @@ ApiStatus N(func_80240C88_969E48)(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus N(func_80240D3C_969EFC)(Evt* script, s32 isInitialCall) {
-    ((N(temp)*)N(D_8024EFC0))->unk_0C->unk_34 = get_variable(script, *script->ptrReadPos);
+    ((N(temp)*)N(D_8024EFC0))->unk_0C->unk_34 = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80240D70_969F30)(Evt* script, s32 isInitialCall) {
-    s32 var = get_variable(script, *script->ptrReadPos);
+    s32 var = evt_get_variable(script, *script->ptrReadPos);
     EffectInstanceDataThing* effectPtr = N(D_8024EFC0)->freeDelay;
 
     switch (var) {
@@ -3300,7 +3300,7 @@ ApiStatus N(func_80240E24_969FE4)(Evt* script, s32 isInitialCall) {
 #include "world/common/UnkPartnerFuncs.inc.c"
 
 void N(func_802412F8_96A4B8)(void) {
-    s32 var = get_variable(NULL, N(D_8024EFB8));
+    s32 var = evt_get_variable(NULL, N(D_8024EFB8));
 
     if (var == 1) {
         playFX_50(0, 0, 0, 0);
@@ -3317,13 +3317,13 @@ ApiStatus N(func_80241364_96A524)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80241394_96A554)(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     Bytecode* args = script->ptrReadPos;
-    s32 var1 = get_variable(script, *args++);
+    s32 var1 = evt_get_variable(script, *args++);
     s32 var2 = *args;
     u8 coins1 = N(D_802475E0_9707A0)[var1];
     u8 coins2 = N(D_802475DC_97079C)[var1];
 
     if (playerData->coins < coins1) {
-        set_variable(script, var2, 1);
+        evt_set_variable(script, var2, 1);
     } else {
         playerData->coins = playerData->coins - coins1;
         if (playerData->merleeCastsLeft < coins2) {
@@ -3344,7 +3344,7 @@ ApiStatus N(func_80241394_96A554)(Evt* script, s32 isInitialCall) {
                 playerData->merleeSpellType = 4;
                 break;
         }
-        set_variable(script, var2, 0);
+        evt_set_variable(script, var2, 0);
     }
 
     return ApiStatus_DONE2;
@@ -3414,27 +3414,27 @@ ApiStatus N(func_802416FC_96A8BC)(Evt* script, s32 isInitialCall) {
 
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0xF, 1, 1, 0, 0x800);
-    set_variable(script, EVT_ARRAY(0), ret);
+    evt_set_variable(script, EVT_ARRAY(0), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x10, 1, 1, 0, 0x800);
-    set_variable(script, EVT_ARRAY(1), ret);
+    evt_set_variable(script, EVT_ARRAY(1), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x11, 1, 1, 0, 0x800);
-    set_variable(script, EVT_ARRAY(2), ret);
+    evt_set_variable(script, EVT_ARRAY(2), ret);
     ret = func_8013A704(1);
     func_8013AA9C(ret, 5, 0x12, 1, 1, 0, 0x800);
-    set_variable(script, EVT_ARRAY(3), ret);
+    evt_set_variable(script, EVT_ARRAY(3), ret);
 
-    set_variable(script, EVT_ARRAY(7), create_generic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
+    evt_set_variable(script, EVT_ARRAY(7), create_generic_entity_world(N(func_8024240C_96B5CC), N(func_80242EAC_96C06C)));
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_80241874_96AA34)(Evt* script, s32 isInitialCall) {
-    func_8013A854(get_variable(script, EVT_ARRAY(0)));
-    func_8013A854(get_variable(script, EVT_ARRAY(1)));
-    func_8013A854(get_variable(script, EVT_ARRAY(2)));
-    func_8013A854(get_variable(script, EVT_ARRAY(3)));
-    free_generic_entity(get_variable(script, EVT_ARRAY(7)));
+    func_8013A854(evt_get_variable(script, EVT_ARRAY(0)));
+    func_8013A854(evt_get_variable(script, EVT_ARRAY(1)));
+    func_8013A854(evt_get_variable(script, EVT_ARRAY(2)));
+    func_8013A854(evt_get_variable(script, EVT_ARRAY(3)));
+    free_generic_entity(evt_get_variable(script, EVT_ARRAY(7)));
     return ApiStatus_DONE2;
 }
 
@@ -3515,7 +3515,7 @@ s32 dro_02_func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-        func_8013AF70(get_variable(N(D_8024EFCC), EVT_ARRAY(0)), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(evt_get_variable(N(D_8024EFCC), EVT_ARRAY(0)), &subroutine_arg26, 0x30, &subroutine_arg6);
 
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
@@ -3531,8 +3531,8 @@ s32 dro_02_func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
 
         gSPMatrix(gMasterGfxPos++, 0xFFFFFFFF, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-        func_8013AF70(get_variable(N(D_8024EFCC), EVT_ARRAY(1)), &subroutine_arg26, 0x30, &subroutine_arg6);
-        func_8013AF70(get_variable(N(D_8024EFCC), EVT_ARRAY(2)), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(evt_get_variable(N(D_8024EFCC), EVT_ARRAY(1)), &subroutine_arg26, 0x30, &subroutine_arg6);
+        func_8013AF70(evt_get_variable(N(D_8024EFCC), EVT_ARRAY(2)), &subroutine_arg26, 0x30, &subroutine_arg6);
 
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
 
@@ -3544,7 +3544,7 @@ s32 dro_02_func_8024190C_96AACC(D_8024F010_Struct* ptr, Matrix4f matrix) {
         gMatrixListPos++;
 
         spr_get_player_raster_info(&subroutine_arg2C, ptr->unk_18, ptr->unk_1C);
-        func_8013AF70(get_variable(N(D_8024EFCC), EVT_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E,
+        func_8013AF70(evt_get_variable(N(D_8024EFCC), EVT_ARRAY(3)), subroutine_arg2C, subroutine_arg2D, subroutine_arg2E,
                       subroutine_arg2F, -(subroutine_arg2E / 2), subroutine_arg2F / 2, 0xFF, &subroutine_arg26, 0x10, &subroutine_arg6);
 
         gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
@@ -3563,8 +3563,8 @@ void N(func_80242214_96B3D4)(s32 arg0, f32* arg1, f32* arg2, f32* arg3, f32* arg
     Matrix4f spA0;
 
     guPositionF(&spA0, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
-                get_variable(*CC_ptr, EVT_ARRAY(4)), get_variable(*CC_ptr, EVT_ARRAY(5)),
-                get_variable(*CC_ptr, EVT_ARRAY(6)));
+                evt_get_variable(*CC_ptr, EVT_ARRAY(4)), evt_get_variable(*CC_ptr, EVT_ARRAY(5)),
+                evt_get_variable(*CC_ptr, EVT_ARRAY(6)));
 
     F010_ptr = ({ D_8024F010_Struct* a = &N(D_8024F010); &a[arg0]; });
     guTranslateF(&sp60, F010_ptr->unk_04, F010_ptr->unk_08, F010_ptr->unk_0C);
@@ -3586,7 +3586,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
     N(temp)** effect2;
     N(temp)** effect3;
     EffectInstanceDataThing* effectPtr;
-    s32 var = get_variable(N(D_8024EFCC), EVT_ARRAY(9));
+    s32 var = evt_get_variable(N(D_8024EFCC), EVT_ARRAY(9));
     s32 i, j, x;
     f32 subroutine_arg6;
     f32 subroutine_arg7;
@@ -3637,7 +3637,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
     switch (var) {
         case 0:
             N(D_8024EF88) = 0;
-            set_variable(N(D_8024EFCC), EVT_ARRAY(9), 1);
+            evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 1);
 
             N(D_8024F010)[0].unk_00 = 1;
             N(D_8024F010)[0].unk_04 = -200.0f;
@@ -3679,7 +3679,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
                 gPlayerStatus.position.y = -1000.0f;
             }
             if (N(D_8024EF88) == 0x14) {
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 2);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 2);
                 N(D_8024EF88) = 0;
             }
             break;
@@ -3702,7 +3702,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 4);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 4);
             }
             break;
 
@@ -3719,7 +3719,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 0x14) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 5);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 5);
                 sfx_play_sound_with_params(0x203, 0, 0x18, 0);
             }
             break;
@@ -3735,7 +3735,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 6);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 6);
                 sfx_play_sound_with_params(0x203, 0, 0x40, 0);
             }
             break;
@@ -3751,7 +3751,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 7);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 7);
                 sfx_play_sound_with_params(0x203, 0, 0x68, 0);
             }
             break;
@@ -3767,7 +3767,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             }
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 8);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 8);
             }
             break;
 
@@ -3778,7 +3778,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 9);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 9);
             }
             break;
 
@@ -3795,7 +3795,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             N(D_8024EF88)++;
             if (N(D_8024EF88) == 0xA) {
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 10);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 10);
             }
             break;
 
@@ -3822,7 +3822,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             N(D_8024F010)[0].unk_10 = 180.0f;
             N(D_8024F010)[1].unk_08 = 68.0f;
             N(D_8024F010)[1].unk_10 = 180.0f;
-            set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xC);
+            evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xC);
             gPauseMenuTabs[0].unk_00 = 0;
             N(D_8024EF84) = 1.0f;
             N(func_80242214_96B3D4)(1, &subroutine_arg12, &subroutine_arg13, &subroutine_arg14, &subroutine_arg15);
@@ -3873,7 +3873,7 @@ void func_8024240C_96B5CC(Evt* script, s32 isInitialCall) {
             if (N(D_8024F010)[1].unk_08 < -5.0f) {
                 N(D_8024F010)[1].unk_08 = -5.0f;
                 N(D_8024EF88) = 0;
-                set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xD);
+                evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xD);
                 N(D_8024F010)[0].unk_00 = 0;
                 N(D_8024F010)[1].unk_00 = 0;
                 N(func_80242214_96B3D4)(1, &subroutine_arg1A, &subroutine_arg1B, &subroutine_arg1C, &subroutine_arg1D);
@@ -3900,17 +3900,17 @@ void N(func_80242EAC_96C06C)(Evt* script, s32 isInitialCall) {
     u32 temp_s1;
 
     guPositionF(&sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, SPRITE_WORLD_SCALE,
-                get_variable(N(D_8024EFCC), EVT_ARRAY(4)), get_variable(N(D_8024EFCC), EVT_ARRAY(5)),
-                get_variable(N(D_8024EFCC), EVT_ARRAY(6)));
+                evt_get_variable(N(D_8024EFCC), EVT_ARRAY(4)), evt_get_variable(N(D_8024EFCC), EVT_ARRAY(5)),
+                evt_get_variable(N(D_8024EFCC), EVT_ARRAY(6)));
 
     temp_s1 = N(func_8024190C_96AACC)(&N(D_8024F010)[0], &sp20);
     N(func_8024190C_96AACC)(&N(D_8024F010)[1], &sp20);
     N(func_8024190C_96AACC)(&N(D_8024F010)[2], &sp20);
     if ((N(D_8024F010)[0].unk_00 == 2) && ((temp_s1 - 1) < 2)) {
-        set_variable(N(D_8024EFCC), EVT_ARRAY(9), 3);
+        evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 3);
     }
     if ((N(D_8024F010)[0].unk_00 == 3) && ((temp_s1 - 1) < 2)) {
-        set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xB);
+        evt_set_variable(N(D_8024EFCC), EVT_ARRAY(9), 0xB);
     }
 }
 
@@ -3937,7 +3937,7 @@ ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall) {
 
     if (N(D_80248780_971940) != NULL) {
         N(D_80248780_971940) = 0;
-        set_variable(script, *args, N(D_80248784_971944));
+        evt_set_variable(script, *args, N(D_80248784_971944));
         return ApiStatus_DONE2;
     }
 
@@ -3947,14 +3947,14 @@ ApiStatus N(func_802432C0_96C480)(Evt* script, s32 isInitialCall) {
 ApiStatus N(func_80243314_96C4D4)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
 
-    N(D_80248784_971944) = get_variable(script, *args);
+    N(D_80248784_971944) = evt_get_variable(script, *args);
     N(D_80248780_971940) = 1;
     return ApiStatus_DONE2;
 }
 
 ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {
@@ -3973,7 +3973,7 @@ ApiStatus N(func_8024334C_96C50C)(Evt* script, s32 isInitialCall) {
 
 ApiStatus N(func_802433E8_96C5A8)(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    s32* ptr = get_variable(script, *args);
+    s32* ptr = evt_get_variable(script, *args);
     s32 i;
 
     if (ptr != NULL) {

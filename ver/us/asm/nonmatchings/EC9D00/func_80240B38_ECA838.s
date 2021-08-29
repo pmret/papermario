@@ -12,11 +12,11 @@ glabel func_80240B38_ECA838
 /* ECA854 80240B54 10A00010 */  beqz      $a1, .L80240B98
 /* ECA858 80240B58 0000902D */   daddu    $s2, $zero, $zero
 /* ECA85C 80240B5C 8E050000 */  lw        $a1, ($s0)
-/* ECA860 80240B60 0C0B53A3 */  jal       dead_get_variable
+/* ECA860 80240B60 0C0B53A3 */  jal       dead_evt_get_variable
 /* ECA864 80240B64 26100004 */   addiu    $s0, $s0, 4
 /* ECA868 80240B68 AE220084 */  sw        $v0, 0x84($s1)
 /* ECA86C 80240B6C 8E050000 */  lw        $a1, ($s0)
-/* ECA870 80240B70 0C0B53A3 */  jal       dead_get_variable
+/* ECA870 80240B70 0C0B53A3 */  jal       dead_evt_get_variable
 /* ECA874 80240B74 0220202D */   daddu    $a0, $s1, $zero
 /* ECA878 80240B78 0240202D */  daddu     $a0, $s2, $zero
 /* ECA87C 80240B7C 240500D0 */  addiu     $a1, $zero, 0xd0

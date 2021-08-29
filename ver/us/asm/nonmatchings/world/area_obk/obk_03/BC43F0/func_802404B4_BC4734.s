@@ -19,7 +19,7 @@ glabel func_802404B4_BC4734
 .L802404E8:
 /* BC4768 802404E8 8CC50000 */  lw        $a1, ($a2)
 /* BC476C 802404EC 3C068024 */  lui       $a2, %hi(D_80242F34_BC71B4)
-/* BC4770 802404F0 0C0B2026 */  jal       set_variable
+/* BC4770 802404F0 0C0B2026 */  jal       evt_set_variable
 /* BC4774 802404F4 8CC62F34 */   lw       $a2, %lo(D_80242F34_BC71B4)($a2)
 /* BC4778 802404F8 24020002 */  addiu     $v0, $zero, 2
 .L802404FC:

@@ -29,7 +29,7 @@ glabel func_8005DB00
 .L8005DB5C:
 /* 38F5C 8005DB5C 0240202D */  daddu     $a0, $s2, $zero
 /* 38F60 8005DB60 3C05FE36 */  lui       $a1, 0xfe36
-/* 38F64 8005DB64 0C0B210B */  jal       get_float_variable
+/* 38F64 8005DB64 0C0B210B */  jal       evt_get_float_variable
 /* 38F68 8005DB68 34A53C80 */   ori      $a1, $a1, 0x3c80
 /* 38F6C 8005DB6C 0240202D */  daddu     $a0, $s2, $zero
 /* 38F70 8005DB70 3C05FE36 */  lui       $a1, 0xfe36

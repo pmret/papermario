@@ -48,7 +48,7 @@ glabel func_802405F4_AEDA04
 /* AEDAB0 802406A0 0220202D */  daddu     $a0, $s1, $zero
 /* AEDAB4 802406A4 4600008D */  trunc.w.s $f2, $f0
 /* AEDAB8 802406A8 44061000 */  mfc1      $a2, $f2
-/* AEDABC 802406AC 0C0B2026 */  jal       set_variable
+/* AEDABC 802406AC 0C0B2026 */  jal       evt_set_variable
 /* AEDAC0 802406B0 0280282D */   daddu    $a1, $s4, $zero
 /* AEDAC4 802406B4 8FBF0024 */  lw        $ra, 0x24($sp)
 /* AEDAC8 802406B8 8FB40020 */  lw        $s4, 0x20($sp)

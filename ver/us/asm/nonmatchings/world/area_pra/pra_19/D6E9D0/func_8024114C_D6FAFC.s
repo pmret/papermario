@@ -19,7 +19,7 @@ glabel func_8024114C_D6FAFC
 .L80241180:
 /* D6FB30 80241180 8CC50000 */  lw        $a1, ($a2)
 /* D6FB34 80241184 3C068024 */  lui       $a2, %hi(D_802421A0_D70B50)
-/* D6FB38 80241188 0C0B2026 */  jal       set_variable
+/* D6FB38 80241188 0C0B2026 */  jal       evt_set_variable
 /* D6FB3C 8024118C 8CC621A0 */   lw       $a2, %lo(D_802421A0_D70B50)($a2)
 /* D6FB40 80241190 24020002 */  addiu     $v0, $zero, 2
 .L80241194:

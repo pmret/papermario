@@ -99,7 +99,7 @@ glabel evt_handle_print_debug_var
 /* EB81C 802C6E6C 0250102A */  slt       $v0, $s2, $s0
 /* EB820 802C6E70 1440000D */  bnez      $v0, .L802C6EA8
 /* EB824 802C6E74 3C02F414 */   lui      $v0, 0xf414
-/* EB828 802C6E78 0C0B1248 */  jal       fixed_var_to_float
+/* EB828 802C6E78 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EB82C 802C6E7C 0200202D */   daddu    $a0, $s0, $zero
 /* EB830 802C6E80 3C04802E */  lui       $a0, %hi(evtDebugPrintBuffer)
 /* EB834 802C6E84 2484ACA0 */  addiu     $a0, $a0, %lo(evtDebugPrintBuffer)
@@ -162,7 +162,7 @@ glabel evt_handle_print_debug_var
 .L802C6F5C:
 /* EB90C 802C6F5C 1440000A */  bnez      $v0, .L802C6F88
 /* EB910 802C6F60 00000000 */   nop
-/* EB914 802C6F64 0C0B1248 */  jal       fixed_var_to_float
+/* EB914 802C6F64 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EB918 802C6F68 00E0202D */   daddu    $a0, $a3, $zero
 /* EB91C 802C6F6C 46000021 */  cvt.d.s   $f0, $f0
 /* EB920 802C6F70 F7A00010 */  sdc1      $f0, 0x10($sp)
@@ -200,7 +200,7 @@ glabel evt_handle_print_debug_var
 .L802C6FE8:
 /* EB998 802C6FE8 1440000A */  bnez      $v0, .L802C7014
 /* EB99C 802C6FEC 00000000 */   nop
-/* EB9A0 802C6FF0 0C0B1248 */  jal       fixed_var_to_float
+/* EB9A0 802C6FF0 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EB9A4 802C6FF4 00E0202D */   daddu    $a0, $a3, $zero
 /* EB9A8 802C6FF8 46000021 */  cvt.d.s   $f0, $f0
 /* EB9AC 802C6FFC F7A00010 */  sdc1      $f0, 0x10($sp)
@@ -238,7 +238,7 @@ glabel evt_handle_print_debug_var
 .L802C7074:
 /* EBA24 802C7074 1440000A */  bnez      $v0, .L802C70A0
 /* EBA28 802C7078 00000000 */   nop
-/* EBA2C 802C707C 0C0B1248 */  jal       fixed_var_to_float
+/* EBA2C 802C707C 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EBA30 802C7080 00E0202D */   daddu    $a0, $a3, $zero
 /* EBA34 802C7084 46000021 */  cvt.d.s   $f0, $f0
 /* EBA38 802C7088 F7A00010 */  sdc1      $f0, 0x10($sp)
@@ -377,7 +377,7 @@ glabel evt_handle_print_debug_var
 /* EBC20 802C7270 0047102A */  slt       $v0, $v0, $a3
 /* EBC24 802C7274 1440000A */  bnez      $v0, .L802C72A0
 /* EBC28 802C7278 00000000 */   nop
-/* EBC2C 802C727C 0C0B1248 */  jal       fixed_var_to_float
+/* EBC2C 802C727C 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EBC30 802C7280 00E0202D */   daddu    $a0, $a3, $zero
 /* EBC34 802C7284 46000021 */  cvt.d.s   $f0, $f0
 /* EBC38 802C7288 F7A00010 */  sdc1      $f0, 0x10($sp)
@@ -419,7 +419,7 @@ glabel evt_handle_print_debug_var
 /* EBCBC 802C730C 0047102A */  slt       $v0, $v0, $a3
 /* EBCC0 802C7310 1440000D */  bnez      $v0, .L802C7348
 /* EBCC4 802C7314 00000000 */   nop
-/* EBCC8 802C7318 0C0B1248 */  jal       fixed_var_to_float
+/* EBCC8 802C7318 0C0B1248 */  jal       evt_fixed_var_to_float
 /* EBCCC 802C731C 00E0202D */   daddu    $a0, $a3, $zero
 /* EBCD0 802C7320 46000021 */  cvt.d.s   $f0, $f0
 /* EBCD4 802C7324 F7A00010 */  sdc1      $f0, 0x10($sp)

@@ -5,7 +5,7 @@ glabel func_80242A4C_EA334C
 /* EA334C 80242A4C 27BDFFE8 */  addiu     $sp, $sp, -0x18
 /* EA3350 80242A50 AFBF0010 */  sw        $ra, 0x10($sp)
 /* EA3354 80242A54 8C82000C */  lw        $v0, 0xc($a0)
-/* EA3358 80242A58 0C0B53A3 */  jal       dead_get_variable
+/* EA3358 80242A58 0C0B53A3 */  jal       dead_evt_get_variable
 /* EA335C 80242A5C 8C450000 */   lw       $a1, ($v0)
 /* EA3360 80242A60 0040182D */  daddu     $v1, $v0, $zero
 /* EA3364 80242A64 10600012 */  beqz      $v1, .L80242AB0

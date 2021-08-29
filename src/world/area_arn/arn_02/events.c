@@ -317,11 +317,11 @@ s32 N(func_80240C90_BDDE40)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;
-    NpcAISettings* npcAISettings = (NpcAISettings*)get_variable(script, *args++);
+    NpcAISettings* npcAISettings = (NpcAISettings*)evt_get_variable(script, *args++);
     EnemyTerritoryThing territory;
     EnemyTerritoryThing* territoryPtr = &territory;
 
-    enemy->varTable[10] = get_variable(script, *args++);
+    enemy->varTable[10] = evt_get_variable(script, *args++);
 
     territory.unk_00 = 0;
     territory.shape = enemy->territory->wander.detectShape;

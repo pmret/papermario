@@ -40,17 +40,17 @@ glabel func_80241868_B21DA8
 /* B21E34 802418F4 3C014248 */  lui       $at, 0x4248
 /* B21E38 802418F8 44810000 */  mtc1      $at, $f0
 /* B21E3C 802418FC 4406B000 */  mfc1      $a2, $f22
-/* B21E40 80241900 0C0B2190 */  jal       set_float_variable
+/* B21E40 80241900 0C0B2190 */  jal       evt_set_float_variable
 /* B21E44 80241904 4600A500 */   add.s    $f20, $f20, $f0
 /* B21E48 80241908 0220202D */  daddu     $a0, $s1, $zero
 /* B21E4C 8024190C 3C05FE36 */  lui       $a1, 0xfe36
 /* B21E50 80241910 4406A000 */  mfc1      $a2, $f20
-/* B21E54 80241914 0C0B2190 */  jal       set_float_variable
+/* B21E54 80241914 0C0B2190 */  jal       evt_set_float_variable
 /* B21E58 80241918 34A53C81 */   ori      $a1, $a1, 0x3c81
 /* B21E5C 8024191C 0220202D */  daddu     $a0, $s1, $zero
 /* B21E60 80241920 3C05FE36 */  lui       $a1, 0xfe36
 /* B21E64 80241924 4406C000 */  mfc1      $a2, $f24
-/* B21E68 80241928 0C0B2190 */  jal       set_float_variable
+/* B21E68 80241928 0C0B2190 */  jal       evt_set_float_variable
 /* B21E6C 8024192C 34A53C82 */   ori      $a1, $a1, 0x3c82
 /* B21E70 80241930 8FBF0018 */  lw        $ra, 0x18($sp)
 /* B21E74 80241934 8FB10014 */  lw        $s1, 0x14($sp)

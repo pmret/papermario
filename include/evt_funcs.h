@@ -149,7 +149,7 @@ s32 evt_bound_script_trigger_handler(Trigger* trigger);
 
 ApiStatus evt_handle_bind(Evt* script);
 
-ApiStatus DeleteTrigger(Evt* script, s32 isInitialCall);
+ApiStatus DeleteTrigger(Evt* script, s32 ievt_nitialCall);
 
 ApiStatus evt_handle_unbind(Evt* script);
 
