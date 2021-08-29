@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'ninja'
+                sh 'ninja 2>&1 | tee build_output.txt'
             }
         }
         stage("Comment") {

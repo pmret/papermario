@@ -6,6 +6,6 @@ set -e
 curl -L https://papermar.io/reports/warnings.txt > tools/warnings_count/warnings.txt
 
 rm -rf ver/*/build/src
-ninja | grep warning | sort | uniq > tools/warnings_count/warnings_new.txt
+ninja | grep warning | sort > tools/warnings_count/warnings_new.txt
 
 python3 tools/warnings_count/compare_warnings.py tools/warnings_count/warnings.txt tools/warnings_count/warnings_new.txt $@
