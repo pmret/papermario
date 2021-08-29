@@ -118,15 +118,12 @@ enum {
 #define EVT_LIMIT        -250000000 // TODO better name
 #define MAKE_ENTITY_END 0x80000000
 
-<<<<<<< HEAD:include/si.h
-#define SI_STORY_PROGRESS SI_SAVE_VAR(0)
-#define SI_SAVE_FLAG_PLACES_VISITED SI_SAVE_FLAG(0x7AA)
-#define SI_SAVE_FLAG_PLACES_VISITED_TOTAL 0x22
-#define SI_WORLD_LOCATION SI_SAVE_VAR(425)
-=======
+
 #define EVT_STORY_PROGRESS EVT_SAVE_VAR(0)
+#define EVT_SAVE_FLAG_PLACES_VISITED EVT_SAVE_FLAG(0x7AA)
+#define EVT_SAVE_FLAG_PLACES_VISITED_TOTAL 0x22
 #define EVT_WORLD_LOCATION EVT_SAVE_VAR(425)
->>>>>>> b198250cde30a26dd0c979af4e2d4434de66ec03:include/evt.h
+
 
 /* Return type of evt_execute_next_command */
 #define EVT_CONTINUE 0   /* Continue to next command */
