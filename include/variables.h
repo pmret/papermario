@@ -138,8 +138,8 @@ extern AnimatedModelList* gCurrentMeshAnimationListPtr;
 
 // Triggers
 extern s16 gTriggerCount;
-extern TriggerList gTriggerList1;
-extern TriggerList gTriggerList2;
+extern TriggerList wTriggerList;
+extern TriggerList bTriggerList;
 extern TriggerList* gCurrentTriggerListPtr;
 
 // Map transition data. Should probably be a struct

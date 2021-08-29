@@ -1512,7 +1512,7 @@ typedef struct CollisionStatus {
     /* 0x16 */ s16 touchingWallTrigger; /* 0/1 */
     /* 0x18 */ s16 bombetteExploded; /* 0 = yes, FFFF = no */
     /* 0x1A */ char unk_1A[2];
-    /* 0x1C */ Vec3f bombetteExplositionPos;
+    /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
 typedef struct DecorationTable {

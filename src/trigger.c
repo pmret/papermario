@@ -1,7 +1,7 @@
 #include "common.h"
 
-void default_trigger_delegate(s32* arg0) {
-    arg0[0] |= 2;
+void default_trigger_delegate(Trigger* self) {
+    self->flags.flags |= 2;
 }
 
 void clear_trigger_data(void) {
@@ -9,9 +9,9 @@ void clear_trigger_data(void) {
     s32 i;
 
     if (!gGameStatusPtr->isBattle) {
-        gCurrentTriggerListPtr = &gTriggerList1;
+        gCurrentTriggerListPtr = &wTriggerList;
     } else {
-        gCurrentTriggerListPtr = &gTriggerList2;
+        gCurrentTriggerListPtr = &bTriggerList;
     }
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
@@ -31,16 +31,16 @@ void clear_trigger_data(void) {
     collisionStatus->lastWallHammered = -1;
     collisionStatus->touchingWallTrigger = 0;
     collisionStatus->bombetteExploded = -1;
-    collisionStatus->bombetteExplositionPos.x = 0.0f;
-    collisionStatus->bombetteExplositionPos.y = 0.0f;
-    collisionStatus->bombetteExplositionPos.z = 0.0f;
+    collisionStatus->bombetteExplosionPos.x = 0.0f;
+    collisionStatus->bombetteExplosionPos.y = 0.0f;
+    collisionStatus->bombetteExplosionPos.z = 0.0f;
 }
 
 void init_trigger_list(void) {
     if (!gGameStatusPtr->isBattle) {
-        gCurrentTriggerListPtr = &gTriggerList1;
+        gCurrentTriggerListPtr = &wTriggerList;
     } else {
-        gCurrentTriggerListPtr = &gTriggerList2;
+        gCurrentTriggerListPtr = &bTriggerList;
     }
 
     gTriggerCount = 0;
@@ -50,7 +50,7 @@ Trigger* create_trigger(TriggerDefinition* def) {
     Trigger* ret;
     s32 i;
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         Trigger* listTrigger = (*gCurrentTriggerListPtr)[i];
 
         if (listTrigger == NULL) {
@@ -58,7 +58,7 @@ Trigger* create_trigger(TriggerDefinition* def) {
         }
     }
 
-    ASSERT(i < MAX_TRIGGERS);
+    ASSERT(i < ARRAY_COUNT(*gCurrentTriggerListPtr));
 
     (*gCurrentTriggerListPtr)[i] = ret = heap_malloc(sizeof(*ret));
     gTriggerCount++;
@@ -87,7 +87,7 @@ void update_triggers(void) {
 
     collisionStatus->touchingWallTrigger = 0;
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         listTrigger = (*gCurrentTriggerListPtr)[i];
 
         if (listTrigger == NULL) {
@@ -192,10 +192,10 @@ void update_triggers(void) {
                 continue;
             }
 
-            floats = listTrigger->params2;
+            floats = (f32*)listTrigger->params2;
             dist = dist3D(floats[0], floats[1], floats[2],
-                                collisionStatus->bombetteExplositionPos.x, collisionStatus->bombetteExplositionPos.y,
-                                collisionStatus->bombetteExplositionPos.z);
+                                collisionStatus->bombetteExplosionPos.x, collisionStatus->bombetteExplosionPos.y,
+                                collisionStatus->bombetteExplosionPos.z);
 
             if ((floats[3] * 0.5f) + 50.0f < dist) {
                 continue;
@@ -213,7 +213,7 @@ void update_triggers(void) {
         listTrigger->flags.flags |= 2;
     }
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         listTrigger = (*gCurrentTriggerListPtr)[i];
 
         if (listTrigger == NULL) {
@@ -233,13 +233,13 @@ void update_triggers(void) {
 void delete_trigger(Trigger* toDelete) {
     s32 i;
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         if ((*gCurrentTriggerListPtr)[i] == toDelete) {
             break;
         }
     }
 
-    if (i < MAX_TRIGGERS) {
+    if (i < ARRAY_COUNT(*gCurrentTriggerListPtr)) {
         heap_free((*gCurrentTriggerListPtr)[i]);
         (*gCurrentTriggerListPtr)[i] = NULL;
     }
@@ -248,7 +248,7 @@ void delete_trigger(Trigger* toDelete) {
 s32 is_trigger_bound(Trigger* trigger, EvtSource* script) {
     s32 i;
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         Trigger* listTrigger = (*gCurrentTriggerListPtr)[i];
 
         if (listTrigger == NULL || listTrigger == trigger) {
@@ -263,6 +263,7 @@ s32 is_trigger_bound(Trigger* trigger, EvtSource* script) {
             }
         }
     }
+
     return FALSE;
 }
 
@@ -274,17 +275,17 @@ Trigger* get_trigger_by_id(s32 triggerID) {
 s32 should_collider_allow_interact(s32 colliderID) {
     s32 i;
 
-    if (phys_can_player_interact() == 0) {
+    if (!phys_can_player_interact()) {
         return FALSE;
     }
 
-    for (i = 0; i < MAX_TRIGGERS; i++) {
+    for (i = 0; i < ARRAY_COUNT(*gCurrentTriggerListPtr); i++) {
         Trigger* trigger = (*gCurrentTriggerListPtr)[i];
 
-        if ((trigger != NULL) &&
-            (trigger->unk_30 != 0) &&
-            (trigger->params2 == colliderID) &&
-            (trigger->flags.flags & 0x100)) {
+        if (trigger != NULL &&
+            trigger->unk_30 != 0 &&
+            trigger->params2 == colliderID &&
+            trigger->flags.flags & 0x100) {
             return TRUE;
         }
     }

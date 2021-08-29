@@ -12,6 +12,8 @@ u8 D_802D9D70 = 0xFE;
 u8 D_802D9D71 = 0xFE;
 u8 D_802D9D72 = 0x00;
 u8 D_802D9D73 = 0xFF;
+
+// BSS
 extern s8 evtDebugPrintBuffer[];
 
 f32 fixed_var_to_float(Bytecode scriptVar) {
@@ -976,11 +978,11 @@ ApiStatus si_handle_jump(Evt* script) {
 }
 
 s32 _bound_script_trigger_handler(Trigger* trigger) {
-    Bytecode* scriptStart;
+    EvtSource* scriptStart;
     Evt* script;
 
     if (trigger->runningScript == NULL) {
-        scriptStart = (Bytecode*)trigger->scriptSource;
+        scriptStart = trigger->scriptSource;
         if (is_trigger_bound(trigger, scriptStart)) {
             return 0;
         }
@@ -1173,7 +1175,6 @@ ApiStatus func_802C6E14(Evt* script) {
 ApiStatus si_handle_print_debug_var(Evt* script);
 // Almost, some ordering stuff and such
 #ifdef NON_MATCHING
-
 s32 si_handle_print_debug_var(Evt* script) {
     Bytecode* args = script->ptrReadPos;
     s32 var = *args++;

@@ -650,7 +650,7 @@ void set_script_group(Evt* script, s32 groupFlags) {
     script->groupFlags = groupFlags;
 }
 
-Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+Trigger* bind_trigger(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
                       s32 priority, s32 arg6) {
     Trigger* trigger;
     TriggerDefinition def;
@@ -662,7 +662,7 @@ Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 tri
     def.inputArg3 = arg6;
 
     trigger = create_trigger(&def);
-    trigger->scriptSource = (EvtSource*)script;
+    trigger->scriptSource = script;
     trigger->runningScript = NULL;
     trigger->priority = priority;
     trigger->scriptVars[0] = triggerVar0;
@@ -670,7 +670,7 @@ Trigger* bind_trigger(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 tri
     return trigger;
 }
 
-Trigger* bind_trigger_1(Bytecode* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
+Trigger* bind_trigger_1(EvtSource* script, s32 flags, s32 triggerFlagIndex, s32 triggerVar0, s32 triggerVar1,
                         s32 priority) {
     return bind_trigger(script, flags, triggerFlagIndex, triggerVar0, triggerVar1, priority, 1);
 }

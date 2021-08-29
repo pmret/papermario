@@ -137,8 +137,7 @@ void func_802B6000_E26710(void) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
                     playerStatus->flags |= 0x800;
                     return;
-                }
-                if (colliderType == 2) {
+                } else if (colliderType == 2) {
                     set_action_state(ACTION_STATE_HIT_LAVA);
                     playerStatus->flags &= ~0x00020008;
                     return;
