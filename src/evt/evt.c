@@ -229,7 +229,7 @@ ApiStatus evt_handle_switch(Evt* script) {
 
 ApiStatus evt_handle_switch_const(Evt* script) {
     Bytecode* args = script->ptrReadPos;
-    a0 = *args++;
+    s32 a0 = *args++;
     s32 switchDepth = ++script->switchDepth;
 
     ASSERT(switchDepth < 8);
@@ -1165,6 +1165,7 @@ ApiStatus func_802C6E14(Evt* script) {
 }
 
 ApiStatus evt_handle_print_debug_var(Evt* script);
+
 // Almost, some ordering stuff and such
 #ifdef NON_MATCHING
 s32 evt_handle_print_debug_var(Evt* script) {
