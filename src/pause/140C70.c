@@ -104,7 +104,7 @@ void pause_map_init(s8* arg0) {
     mapCursorCurrentOptionCopy = -1;
 
     for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
-        if (map_spaces->tabIndex != get_variable(0, 0xF5DE0329)) {
+        if (map_spaces->tabIndex != evt_get_variable(0, 0xF5DE0329)) {
             map_spaces++;
             phi_s0_4 = 1;
         } else {
@@ -236,7 +236,7 @@ void pause_map_handle_input(void) {
     }
 
     gPauseMenuCurrentDescString = (mapCursorCurrentOption * 3) + 0x1D00F3;
-    if (get_variable(0, EVT_STORY_PROGRESS) >= (s32)*(D_802502B8 + (mapCursorCurrentOption * ARRAY_COUNT(D_802502B8) + 3))) {
+    if (evt_get_variable(0, EVT_STORY_PROGRESS) >= (s32)*(D_802502B8 + (mapCursorCurrentOption * ARRAY_COUNT(D_802502B8) + 3))) {
         gPauseMenuCurrentDescString++;
     }
 }
@@ -257,7 +257,7 @@ void pause_map_update(void) {
     phi_f22 = -1.0f;
     
     for (i = 0; i < EVT_SAVE_FLAG_PLACES_VISITED_TOTAL; i++) {
-        if (get_variable(0, i + EVT_SAVE_FLAG_PLACES_VISITED) != 0) {
+        if (evt_get_variable(0, i + EVT_SAVE_FLAG_PLACES_VISITED) != 0) {
             temp_f4 = mapCursorXPos - phi_s1->xPos;
             temp_f0 = mapCursorYPos - phi_s1->yPos;
             temp_f4_2 = SQ(temp_f4) + SQ(temp_f0);
