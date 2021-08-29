@@ -9,9 +9,7 @@ typedef struct structE307C0 {
     /* 0x03 */ s8 unk_03;
     /* 0x04 */ s8 unk_04;
     /* 0x05 */ s8 unk_05;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
+    /* 0x08 */ Vec3f position;
 } structE307C0;
 
 extern u8 D_802BCAA0_E313F0[];
@@ -76,14 +74,14 @@ void func_802BC4B8_E30E08(Entity* entity) {
 
 void func_802BC514_E30E64(Entity* entity) {
     structE307C0* data = (structE307C0*)entity->dataBuf;
-    entity->position.x = data->unk_08 + (data->unk_01 & 1 ? 1.0f : -1.0f);
+    entity->position.x = data->position.x + (data->unk_01 & 1 ? 1.0f : -1.0f);
     data->unk_01 -= 1;
 }
 
 void func_802BC558_E30EA8(Entity* entity) {
     structE307C0* data = (structE307C0*)entity->dataBuf;
-    entity->position.x = data->unk_08;
-    entity->position.z = data->unk_0C;
+    entity->position.x = data->position.x;
+    entity->position.z = data->position.y;
 }
 
 INCLUDE_ASM(s32, "entity/sbk_omo/E307C0", func_802BC570_E30EC0);
@@ -104,7 +102,7 @@ void func_802BC9CC_E3131C(Entity* entity) {
 void func_802BC9FC_E3134C(Entity* entity) {
     structE307C0* data = (structE307C0*)entity->dataBuf;
     entity->renderSetupFunc = &func_802BBE70_E307C0;
-    data->unk_08 = entity->position.x;
-    data->unk_10 = entity->position.y;
-    data->unk_0C = entity->position.z;
+    data->position.x = entity->position.x;
+    data->position.z = entity->position.y;
+    data->position.y = entity->position.z;
 }
