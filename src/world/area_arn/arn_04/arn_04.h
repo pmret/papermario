@@ -13,5 +13,3 @@ extern EvtSource N(main);
 extern EvtSource N(802433D0);
 extern NpcGroupList N(npcGroupList_80244000);
 extern EvtSource N(makeEntities);
-
-extern s16 gCurrentCamID;
